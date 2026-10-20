@@ -353,7 +353,7 @@ export const investigation2: CasePart = {
         ),
       ],
       choices: [
-        option('ARAG_DOGRU', '“Size yardım edemem. Savcılığa gidin; mahkemede doğruyu söyleyin.”', {
+        option('ARAG_DOGRU', '“Yardım edemem. Savcılığa gidin; doğruyu orada anlatın.”', {
           score: { USUL_BILGISI: 80 },
           effects: [raise('onur_vicdan')],
           good: 'Doğru: müdafi karşı tarafın tanığından ifade alamaz, onu yönlendiremez (TCK 277; TBB Meslek Kuralları). İfadesini düzeltmek isteyen tanığın yeri savcılık ya da mahkemedir; yalan tanıklıkta etkin pişmanlık (TCK 274) onun haklarıdır, benim pazarlık konum değil.',
@@ -550,7 +550,7 @@ export const investigation2: CasePart = {
         }),
         option(
           'ARAE_BILGI',
-          '“Sana yanlış söyledim: mahkeme çağırırsa gelmek zorundasın. Ama orada sadece gördüğünü sorarlar.”',
+          '“Yanlış söyledim: çağrılırsan gelmek zorundasın. Orada yalnızca gördüğün sorulur.”',
           {
             visibleWhen: flag('ece_cekildi'),
             score: { HUKUKI_BILGI: 60 },
@@ -608,7 +608,7 @@ export const investigation2: CasePart = {
           ),
           next: HUB,
         }),
-        option('ARAE_BABA', '“İstersen babanla ben konuşayım; belki benden duyması kolaylaştırır.”', {
+        option('ARAE_BABA', '“İstersen babanla ben konuşayım; benden duyması kolaylaştırır.”', {
           neutral:
             'İyi niyetli ama yerinde değil: tanığın ailesiyle avukatın konuşması, tanık üzerinde ayrı bir baskı gibi algılanabilir.',
           responses: says(
@@ -768,7 +768,7 @@ export const investigation2: CasePart = {
         ),
       ),
       choices: [
-        option('ARAD_INDIR', '“Hesabınızdan ben kendim indirebilir miyim?”', {
+        option('ARAD_INDIR', '“Hesabınızdan videoyu ben indirip mahkemeye götürebilir miyim?”', {
           neutral:
             'Arşivlenmiş bir hikâye yalnızca hesap sahibinde durur; delil sahibinden, onun rızasıyla ve mahkeme kanalıyla gelmelidir.',
           responses: says(
@@ -779,7 +779,7 @@ export const investigation2: CasePart = {
         }),
         option(
           'ARAD_DOGRU',
-          '“Videoyu bir dilekçeyle mahkemeye gönderebilirsiniz. Adınız geçecek; bilirkişi inceleyecek. Gizleyemem.”',
+          '“Videoyu dilekçeyle mahkemeye siz gönderin. Adınız geçer; bunu gizleyemem.”',
           {
             score: { USUL_BILGISI: 80 },
             effects: [raise('defne_video')],

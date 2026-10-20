@@ -174,7 +174,7 @@ export const meta: CasePart = {
     {
       id: 'kadeh_curudu',
       label: 'Kadehin sanık tarafından kullanıldığı anlatımı çürütüldü',
-      when: any(flag('contra_k3'), flag('contra_k4'), flag('contra_o3'), { ref: 'saldiri_kanit' }),
+      when: any(flag('contra_k3'), flag('contra_k4'), flag('contra_o3'), flag('krim_avuc'), { ref: 'saldiri_kanit' }),
     },
     {
       id: 'findings',
@@ -196,7 +196,12 @@ export const meta: CasePart = {
     {
       id: 'tahrik_kanit',
       label: 'Müştekinin haksız davranışı gösterildi',
-      when: any(flag('ece_tanikti'), { ref: 'saldiri_kanit' }, all(flag('contra_k5'), flag('contra_o5'))),
+      when: any(
+        flag('ece_tanikti'),
+        flag('krim_avuc'),
+        { ref: 'saldiri_kanit' },
+        all(flag('contra_k5'), flag('contra_o5')),
+      ),
     },
   ],
   variables: [

@@ -301,7 +301,6 @@
         "all": [
           { "not": { "flag": "cokus" } },
           { "not": { "ref": "mm_tam" } },
-          { "flag": "supheden" },
           { "ref": "tanik_guvenilmez" },
           { "ref": "ara_gelisme" },
           { "cmp": [{ "score": "final" }, ">=", 9500] }
@@ -365,7 +364,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
         }
       },
-      "howToReach": "İki celsede en az dört çelişkiyi delille aç, görgü tanığının anlatımını ikinci celsede çökert (üç çelişki ya da kırılma), ara dönemden en az bir gelişmeyi kürsüye taşı ve esas savunmada şüpheden yararlanmayı iste. Meşru savunmanın bütün şartları gösterilmişse mahkeme 223/2-d’ye gider.",
+      "howToReach": "Görgü tanığının anlatımını ikinci celsede çökert (üç çelişki ya da kırılma), ara dönemden en az bir gelişmeyi kürsüye taşı ve beraat eşiğini geç. Meşru savunmanın bütün şartları (bilekteki bası dahil) gösterilmişse mahkeme 223/2-d’ye gider; esas savunmadaki talep sınıfı değil, yalnızca skoru değiştirir.",
       "epilogue": [
         {
           "lines": [
@@ -573,13 +572,8 @@
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
-          {
-            "any": [
-              { "flag": "sinir_kabul" },
-              { "all": [{ "ref": "saldiri_kanit" }, { "not": { "flag": "terditli" } }] }
-            ]
-          },
-          { "cmp": [{ "score": "final" }, ">=", 7500] }
+          { "ref": "saldiri_kanit" },
+          { "any": [{ "cmp": [{ "score": "final" }, ">=", 7500] }, { "ref": "mm_tam" }] }
         ]
       },
       "stamp": "CEZA VERİLMESİNE YER YOK",
@@ -593,7 +587,15 @@
         },
         {
           "when": { "not": { "ref": "tekme_yok" } },
-          "text": "Katılan yere düştükten sonra sanığın hareketinin gerekli olup olmadığı tam olarak aydınlatılamamıştır."
+          "text": "Görgü tanığının, katılan yere düştükten sonraki harekete ilişkin anlatımı duruşmada çürütülmemiştir; mahkeme bu hareketle gerekli savunmanın sınırının aşıldığını kabul etmiştir."
+        },
+        {
+          "when": { "all": [{ "ref": "tekme_yok" }, { "not": { "ref": "mm_tam" } }] },
+          "text": "Gövdede tekme izi bulunmasa da sanığın tezgâhtan çıkıp yerdeki katılana yönelmesi, saldırının etkisizleştiği ana denk gelen ve sınırı aşan bir hareket olarak değerlendirilmiştir."
+        },
+        {
+          "when": { "ref": "mm_tam" },
+          "text": "Yerdeki hareketin elinde cam bulunan bileğe bası olduğu ileri sürülmüş; mahkeme bu hareketi savunma gereğinin sınırında, heyecan ve korkuyla yapılmış bir hareket olarak kabul etmiştir."
         },
         {
           "text": "Sanığın sınırı aşan hareketi, kolu kesilmiş ve tezgâhın arkasında sıkışmış bir kişinin mazur görülebilecek heyecan ve korkusundan kaynaklanmıştır."
@@ -615,7 +617,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 90] }, 1000] }
         }
       },
-      "howToReach": "Saldırının katılandan geldiğini delille göster ama meşru savunmanın bütün şartlarını kuramadan esas savunmaya geç; “yerdeki hareket” aydınlanmadığında sınırın korku ve heyecanla aşıldığını (TCK 27/2) iste.",
+      "howToReach": "Saldırının katılandan geldiğini delille göster (sap + avuç ve önkol + kan, ya da video), ama görgü tanığının “yerdeki hareket” anlatımını çökertmeden ya da ara dönemden yeni bir gelişme getirmeden karara git. Mahkeme talebe değil delile bakar: sınırın korku ve heyecanla aşıldığını kabul eder (TCK 27/2).",
       "epilogue": [
         {
           "lines": [
@@ -718,7 +720,7 @@
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
-          { "flag": "terditli" },
+          { "not": { "ref": "saldiri_kanit" } },
           { "ref": "tahrik_kanit" },
           { "ref": "kadeh_curudu" },
           { "cmp": [{ "score": "final" }, ">=", 7500] }
@@ -732,6 +734,10 @@
       "reasoning": [
         {
           "text": "Kırık kadehin sanık tarafından kullanıldığına dair delil bulunmadığından silahla işleme artırımı uygulanmamıştır."
+        },
+        {
+          "when": { "flag": "krim_avuc" },
+          "text": "Kriminal rapora göre kırık sapı kavrayan el katılanındır; ancak katılanın bu camla sanığa saldırdığı ve sanığın kendini korumak için vurduğu duruşmada delille kurulmamıştır. Katılanın elinde kırık camla tezgâha yönelmesi haksız hareket olarak değerlendirilmiştir."
         },
         {
           "text": "Olay, katılanın garsona sarkıntılığı ve sanığa yönelik davranışıyla başlamıştır; haksız tahrik hükümleri uygulanmıştır."
@@ -762,7 +768,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "Katılanın haksız hareketini soruşturmayla göster (Ece’nin tanıklığı, saldırı kanıtı ya da iki celsede sarkıntılık çelişkisi), kadehin sanıkça kullanıldığı anlatımını çürüt ve esas savunmada terditli olarak tahrik ve silah artırımının düşmesini iste.",
+      "howToReach": "Katılanın haksız hareketini soruşturmayla göster (Ece’nin tanıklığı, Kriminal raporun avuç bulgusu ya da iki celsede sarkıntılık çelişkisi) ve kadehin sanıkça kullanıldığı anlatımını çürüt; ama saldırının katılandan geldiğini kâğıtla kurma. Mahkeme tahriki re’sen uygular; terditli talep yalnızca skoru artırır.",
       "epilogue": [
         {
           "lines": [

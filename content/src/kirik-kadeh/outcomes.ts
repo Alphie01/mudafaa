@@ -105,8 +105,8 @@ export const outcomes: CasePart = {
       priority: 1,
       // Delil kararı belirler: meşru savunmanın bütün şartları kürsüde gösterildiyse mahkeme, müdafinin esas hakkındaki
       // talebiyle bağlı olmadan 223/2-d uyarınca beraat verir (CMK 217/1, 225/2). Kötü bir kapanış yalnızca skor ve ikna yer;
-      // skor beraat eşiğinin altında kalırsa sonuç (saldırı gösterildiği için) CVYO ya da terditliyse İNDİRİM olur, asla
-      // silah artırımlı mahkûmiyet olmaz.
+      // skor beraat eşiğinin altında kalırsa sonuç CVYO olur (ceza yok); mm_tam varken çöküş tetikleyicisi çalışmaz ve
+      // silah artırımlı mahkûmiyet ya da indirim hiçbir zaman verilmez.
       when: all(not(flag('cokus')), ref('mm_tam'), finalAtLeast(T_BERAAT)),
       stamp: 'BERAAT',
       stampTone: 'green',
@@ -260,10 +260,10 @@ export const outcomes: CasePart = {
       priority: 2,
       // Eksik delil kapısı: tanığın anlatımı ikinci celsede çöktü, ara dönemden en az bir gelişme kürsüye taşındı, ama meşru
       // savunmanın bütün şartları gösterilmedi (mm_tam yok). Böylece 2-d mütalaası ile 2-e hükmü aynı oyunda buluşamaz.
+      // Esas savunmanın düğmesi sınıfı belirlemez (CMK 217/1, 225/2); yalnızca skoru etkiler.
       when: all(
         not(flag('cokus')),
         not(ref('mm_tam')),
-        flag('supheden'),
         ref('tanik_guvenilmez'),
         ref('ara_gelisme'),
         finalAtLeast(T_BERAAT),
@@ -316,7 +316,7 @@ export const outcomes: CasePart = {
       legalBasis: 'CMK 223/2-e; Anayasa 38/4; AİHS 6/2; CMK 141/1, 142, 231/3, 273/1',
       xp: xp(1, { ethicsVar: 'ethics' }),
       howToReach:
-        'İki celsede en az dört çelişkiyi delille aç, görgü tanığının anlatımını ikinci celsede çökert (üç çelişki ya da kırılma), ara dönemden en az bir gelişmeyi kürsüye taşı ve esas savunmada şüpheden yararlanmayı iste. Meşru savunmanın bütün şartları gösterilmişse mahkeme 223/2-d’ye gider.',
+        'Görgü tanığının anlatımını ikinci celsede çökert (üç çelişki ya da kırılma), ara dönemden en az bir gelişmeyi kürsüye taşı ve beraat eşiğini geç. Meşru savunmanın bütün şartları (bilekteki bası dahil) gösterilmişse mahkeme 223/2-d’ye gider; esas savunmadaki talep sınıfı değil, yalnızca skoru değiştirir.',
       epilogue: [
         block([
           S('hakim', 'Türk Milleti adına…'),
@@ -449,13 +449,9 @@ export const outcomes: CasePart = {
     outcome('CVYO', {
       class: 'OTHER',
       priority: 3,
-      // Saldırının katılandan geldiği gösterildi ama bütün şartlar değil: savunma sınırın aşıldığını istediyse ya da başka bir
-      // talepte bulunduysa (terditli dışında) mahkeme kadehle saldırı karşısında silah artırımıyla mahkûmiyete gidemez.
-      when: all(
-        not(flag('cokus')),
-        any(flag('sinir_kabul'), all(ref('saldiri_kanit'), not(flag('terditli')))),
-        finalAtLeast(T_INDIRIM),
-      ),
+      // Delil belirler: saldırının katılandan geldiği gösterildi ama tanığın “yerdeki hareket” anlatımı çökmedi ya da ara
+      // dönemden yeni bir gelişme gelmedi. Savunmanın talebi (sınır aşımı, terditli, şüphe) sınıfı değiştirmez.
+      when: all(not(flag('cokus')), ref('saldiri_kanit'), any(finalAtLeast(T_INDIRIM), ref('mm_tam'))),
       stamp: 'CEZA VERİLMESİNE YER YOK',
       stampTone: 'amber',
       header: 'TÜRK MİLLETİ ADINA',
@@ -467,8 +463,16 @@ export const outcomes: CasePart = {
           'Kırık kadehin sapının katılanın elinde olduğu ve sanığın kolunu siper ederken yaralandığı anlaşılmıştır; saldırı katılandan gelmiştir.',
         ),
         because(
-          'Katılan yere düştükten sonra sanığın hareketinin gerekli olup olmadığı tam olarak aydınlatılamamıştır.',
+          'Görgü tanığının, katılan yere düştükten sonraki harekete ilişkin anlatımı duruşmada çürütülmemiştir; mahkeme bu hareketle gerekli savunmanın sınırının aşıldığını kabul etmiştir.',
           not(ref('tekme_yok')),
+        ),
+        because(
+          'Gövdede tekme izi bulunmasa da sanığın tezgâhtan çıkıp yerdeki katılana yönelmesi, saldırının etkisizleştiği ana denk gelen ve sınırı aşan bir hareket olarak değerlendirilmiştir.',
+          all(ref('tekme_yok'), not(ref('mm_tam'))),
+        ),
+        because(
+          'Yerdeki hareketin elinde cam bulunan bileğe bası olduğu ileri sürülmüş; mahkeme bu hareketi savunma gereğinin sınırında, heyecan ve korkuyla yapılmış bir hareket olarak kabul etmiştir.',
+          ref('mm_tam'),
         ),
         because(
           'Sanığın sınırı aşan hareketi, kolu kesilmiş ve tezgâhın arkasında sıkışmış bir kişinin mazur görülebilecek heyecan ve korkusundan kaynaklanmıştır.',
@@ -485,7 +489,7 @@ export const outcomes: CasePart = {
       legalBasis: 'TCK 25/1, 27/2; CMK 223/3-c, 273/1',
       xp: xp(0.9, { ethicsVar: 'ethics' }),
       howToReach:
-        'Saldırının katılandan geldiğini delille göster ama meşru savunmanın bütün şartlarını kuramadan esas savunmaya geç; “yerdeki hareket” aydınlanmadığında sınırın korku ve heyecanla aşıldığını (TCK 27/2) iste.',
+        'Saldırının katılandan geldiğini delille göster (sap + avuç ve önkol + kan, ya da video), ama görgü tanığının “yerdeki hareket” anlatımını çökertmeden ya da ara dönemden yeni bir gelişme getirmeden karara git. Mahkeme talebe değil delile bakar: sınırın korku ve heyecanla aşıldığını kabul eder (TCK 27/2).',
       epilogue: [
         block([
           S('hakim', 'Türk Milleti adına…'),
@@ -551,10 +555,11 @@ export const outcomes: CasePart = {
     outcome('INDIRIM', {
       class: 'REDUCED',
       priority: 4,
-      // Terditli savunma + soruşturmayla kurulan tahrik + kadehin sanıkça kullanıldığı anlatımının çürümesi (silah artırımı düşer).
+      // Delil belirler: saldırı gösterilmedi, ama kadehin sanıkça kullanıldığı anlatımı çürüdü ve haksız tahrik soruşturmayla
+      // kuruldu. Mahkeme TCK 29’u talep olmasa da re’sen uygular; terditli talep yalnızca skoru etkiler.
       when: all(
         not(flag('cokus')),
-        flag('terditli'),
+        not(ref('saldiri_kanit')),
         ref('tahrik_kanit'),
         ref('kadeh_curudu'),
         finalAtLeast(T_INDIRIM),
@@ -568,6 +573,10 @@ export const outcomes: CasePart = {
       reasoning: [
         because(
           'Kırık kadehin sanık tarafından kullanıldığına dair delil bulunmadığından silahla işleme artırımı uygulanmamıştır.',
+        ),
+        because(
+          'Kriminal rapora göre kırık sapı kavrayan el katılanındır; ancak katılanın bu camla sanığa saldırdığı ve sanığın kendini korumak için vurduğu duruşmada delille kurulmamıştır. Katılanın elinde kırık camla tezgâha yönelmesi haksız hareket olarak değerlendirilmiştir.',
+          flag('krim_avuc'),
         ),
         because(
           'Olay, katılanın garsona sarkıntılığı ve sanığa yönelik davranışıyla başlamıştır; haksız tahrik hükümleri uygulanmıştır.',
@@ -593,7 +602,7 @@ export const outcomes: CasePart = {
       legalBasis: 'TCK 86/1, 87/3, 29, 62/1; CMK 231/5, 231/6, 231/8, 231/9, 231/12, 273/1',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        'Katılanın haksız hareketini soruşturmayla göster (Ece’nin tanıklığı, saldırı kanıtı ya da iki celsede sarkıntılık çelişkisi), kadehin sanıkça kullanıldığı anlatımını çürüt ve esas savunmada terditli olarak tahrik ve silah artırımının düşmesini iste.',
+        'Katılanın haksız hareketini soruşturmayla göster (Ece’nin tanıklığı, Kriminal raporun avuç bulgusu ya da iki celsede sarkıntılık çelişkisi) ve kadehin sanıkça kullanıldığı anlatımını çürüt; ama saldırının katılandan geldiğini kâğıtla kurma. Mahkeme tahriki re’sen uygular; terditli talep yalnızca skoru artırır.',
       epilogue: [
         block([
           S('hakim', 'Türk Milleti adına…'),

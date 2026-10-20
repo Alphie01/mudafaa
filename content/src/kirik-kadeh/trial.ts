@@ -1950,7 +1950,7 @@ export const trial: CasePart = {
       id: 'tg_cokus',
       priority: 0,
       once: true,
-      when: all(flag('in_court'), cmp(v('cred'), '<=', 0)),
+      when: all(flag('in_court'), cmp(v('cred'), '<=', 0), not(ref('mm_tam'))),
       effects: [raise('cokus')],
       goto: 'T_COKUS',
     },

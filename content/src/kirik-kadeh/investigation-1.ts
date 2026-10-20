@@ -415,7 +415,7 @@ export const investigation1: CasePart = {
           ),
           next: 'INV_SABAH2',
         }),
-        option('AKSAM1_KABUL', '“Müvekkilime ileteceğim; anlaşmaya açığız.”', {
+        option('AKSAM1_KABUL', '“Müvekkilime ileteceğim. Rakamı yazılı gönderin; uzlaşmaya kapımız açık.”', {
           score: { HUKUKI_BILGI: -40 },
           effects: [raise('teklif_kabul'), inc('trust', -6)],
           bad: 'Şikâyetten vazgeçme silahla yaralamada davayı düşürmez (TCK 86/3: şikâyet aranmaksızın). Ödeme, karşı tarafa “sanık suçunu kabul ediyor” argümanı verirdi.',
@@ -428,7 +428,7 @@ export const investigation1: CasePart = {
           ),
           next: 'INV_SABAH2',
         }),
-        option('AKSAM1_DUSUN', '“Düşünüp döneceğim.”', {
+        option('AKSAM1_DUSUN', '“Teklifi not ettim; düşünüp size döneceğim.”', {
           neutral: 'Karar ertelendi. Teklifin hukuki değeri yok; silahla yaralamada şikâyet aranmaz.',
           responses: says(
             ph('tolga', 'Tabii. Düşünün. Ama çok düşünmeyin.'),
@@ -466,7 +466,7 @@ export const investigation1: CasePart = {
         ),
       ],
       choices: [
-        option('AKSAM2_BILDIR', '“Kapını kilitle. Sabah karakola birlikte gidip tutanak tutturalım.”', {
+        option('AKSAM2_BILDIR', '“Kapını kilitle. Sabah karakolda tutanak tutturalım.”', {
           score: { USUL_BILGISI: 40 },
           effects: [raise('tehdit_bildirildi'), inc('trust', 4)],
           good: 'Doğru: kolluğa bildirim kayıt yaratır. Müvekkilin tanık olabilecek biriyle yüzleşmesi tanığı etkileme (TCK 277) şüphesi doğururdu.',
@@ -479,7 +479,7 @@ export const investigation1: CasePart = {
           ),
           next: 'INV_SABAH3',
         }),
-        option('AKSAM2_GIT', '“Çık, konuş. Ne istediğini öğren.”', {
+        option('AKSAM2_GIT', '“Çık, konuş; ne istediğini öğren, sonra bana anlat.”', {
           score: { USUL_BILGISI: -60 },
           effects: [raise('bora_yuzlesti'), inc('ethics')],
           bad: 'Sanığın tanıkla gece yüzleşmesini önermek, tanığı etkilemeye teşebbüs (TCK 277) riskini doğurur; avukat buna aracılık edemez.',
@@ -493,7 +493,7 @@ export const investigation1: CasePart = {
           ),
           next: 'INV_SABAH3',
         }),
-        option('AKSAM2_UYU', '“Bir şey yapma. Sabah konuşuruz.”', {
+        option('AKSAM2_UYU', '“Kapıyı açma, bir şey yapma. Sabah konuşuruz.”', {
           neutral: 'Bir şey yapılmadı; kayıt da yok.',
           responses: says(ph('bora', 'Tamam.'), T('Tamam dedi. Uyumadı. Ben de uyumadım.')),
           next: 'INV_SABAH3',
@@ -1769,7 +1769,7 @@ export const investigation1: CasePart = {
         ),
         T('Her cümlesini ayrı bir karta yazacağım. Yalan, tek cümlede değil, cümlelerin arasındaki boşlukta durur.'),
         Nx(
-          'İmza düzgün, harfler eğimsiz. Bir sigortacının imzası: binlerce poliçenin altına atılmış, hiç titremeyen bir el.',
+          'İmza düzgün, harfler eğimsiz. Bir satış uzmanının imzası: binlerce sözleşmenin altına atılmış, hiç titremeyen bir el.',
         ),
       ),
       header: { left: 'KOLLUK · TANIK İFADE TUTANAĞI', right: '3 KASIM · 03.30' },

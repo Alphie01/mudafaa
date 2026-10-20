@@ -6,8 +6,8 @@
     "title": "Gece Bekçisinin Sırrı",
     "crimeLabel": "Nitelikli hırsızlık",
     "lawRef": "TCK 142/2-h, 143",
-    "demandText": "İddianame: 142/2-h, 143 (7 yıl 6 ay–15 yıl)",
-    "possibleSentence": "7,5–15 yıl",
+    "demandText": "İddianame: TCK 142/2-h, 143",
+    "possibleSentence": "5–15 yıl (TCK 143 ile)",
     "difficulty": 3,
     "category": "CEZA",
     "estimatedMinutes": 105,
@@ -205,6 +205,23 @@
             "not": {
               "flag": "false_confession"
             }
+          }
+        ]
+      }
+    },
+    {
+      "id": "murat_iz",
+      "label": "Murat bağlantısı ortaya kondu",
+      "when": {
+        "any": [
+          {
+            "ref": "dayanak_murat"
+          },
+          {
+            "flag": "contra_s4_hts"
+          },
+          {
+            "flag": "selin_cozuldu"
           }
         ]
       }

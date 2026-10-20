@@ -133,6 +133,26 @@
               "speaker": "narrator",
               "text": "Murat Koç başını kaldırdı ve pencereye baktı. Beni gördü mü, bilmiyorum. Gülümsedi mi, bilmiyorum. Sanırım gülümsedi."
             }
+          ],
+          "when": {
+            "ref": "murat_iz"
+          }
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Selin koridordan hızla çıktı; merdivenleri ikişer ikişer indi. Pencereden baktım: yağmurun altında, şemsiyesiz, tek başına yürüyüp gitti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Köşede bir an durdu, sanki biri onu çağırmış gibi başını çevirdi. Kimse yoktu. Yürümeye devam etti; bir kez bile arkasına bakmadı."
+            },
+            {
+              "speaker": "player",
+              "text": "Kürsüde ayakta kalmıştı. Ama merdivenleri inen biri, ayakta kalan biri gibi yürümüyordu.",
+              "style": "thought"
+            }
           ]
         }
       ],
@@ -188,6 +208,48 @@
               "text": "Değişir. Ama kendiliğinden değil. Biri değiştirirse.",
               "style": "thought"
             }
+          ],
+          "when": {
+            "ref": "murat_iz"
+          }
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Merdivenlerin başında Rıza Bey, mübaşir, bir sonraki dosyayı çağırıyordu. Başka bir aile, başka bir bank, başka bir bekleyiş. Adliye hiç durmaz."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir hafta. Bir haftada bir lamba onarılır, bir tanık fikrini değiştirir, bir kayıt gün yüzüne çıkar. Ben hangisine yetişeceğim?",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla merdivenin başında bekliyordu. Duruşmayı arka sıradan izlemişti. Hiç söylemeden."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir hafta Deniz. Mahkeme sana bir hafta verdi. Tanıklar, deliller, korkular; hepsi bu hafta yer değiştirecek."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir kural daha hatırlatayım: tanığı yönlendirmezsin, kimseyi kovalamazsın. Biri sana bir şey söylemek isterse dinlersin. Gerisini savcıya bırakırsın."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir hafta. Kayıtların ne diyeceğini, Selin’in ne kadar söyleyeceğini, Hüseyin’in gelip gelmeyeceğini bilmiyorum.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Adliyenin önünde simitçi tezgâhını topluyordu. Yağmur inceldi ama dinmedi. Bir hafta. Bir haftada bir dosya değişebilir mi?"
+            },
+            {
+              "speaker": "player",
+              "text": "Değişir. Ama kendiliğinden değil. Biri değiştirirse.",
+              "style": "thought"
+            }
           ]
         }
       ],
@@ -232,6 +294,40 @@
       "lines": [
         {
           "when": {
+            "all": [
+              {
+                "cmp": [
+                  {
+                    "var": "ara_day"
+                  },
+                  "==",
+                  1
+                ]
+              },
+              {
+                "ref": "murat_iz"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ARA · GÜN 1/3 · ÜÇÜNCÜ CELSEYE 7 GÜN",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: Murat nerede? Selin ne kadar söyleyecek? Hüseyin gelecek mi? Üç günün, günde üç adımın var."
+            },
+            {
+              "speaker": "player",
+              "text": "Panoya yeni bir kâğıt iğneledim: “Bir hafta.” Altına üç soru: Murat nerede? Selin ne kadar söyleyecek? Hüseyin gelecek mi?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
             "cmp": [
               {
                 "var": "ara_day"
@@ -248,11 +344,11 @@
             },
             {
               "speaker": "narrator",
-              "text": "Hedef: Murat nerede? Selin ne kadar söyleyecek? Hüseyin gelecek mi? Üç günün, günde üç adımın var."
+              "text": "Hedef: kart kayıtları ne diyor? Selin ne kadar söyleyecek? Hüseyin gelecek mi? Üç günün, günde üç adımın var."
             },
             {
               "speaker": "player",
-              "text": "Panoya yeni bir kâğıt iğneledim: “Bir hafta.” Altına üç soru: Murat nerede? Selin ne kadar söyleyecek? Hüseyin gelecek mi?",
+              "text": "Panoya yeni bir kâğıt iğneledim: “Bir hafta.” Altına üç soru: Kayıtlar ne diyor? Selin ne kadar söyleyecek? Hüseyin gelecek mi?",
               "style": "thought"
             }
           ]
@@ -606,7 +702,7 @@
         {
           "id": "ASEL_A",
           "kind": "OPTION",
-          "label": "“Avukatın olmadan bana bir şey anlatmamalısın.”",
+          "label": "“Bunu bana değil, avukatına anlat.”",
           "visibleWhen": {
             "flag": "selin_cozuldu"
           },
@@ -672,7 +768,7 @@
         {
           "id": "ASEL_B",
           "kind": "OPTION",
-          "label": "“Ne biliyorsan anlat, kayda geçireyim.”",
+          "label": "“Bana anlat; ne dersen yazıp imzalatayım.”",
           "visibleWhen": {
             "flag": "selin_cozuldu"
           },
@@ -731,7 +827,7 @@
         {
           "id": "ASEL_C",
           "kind": "OPTION",
-          "label": "“Seni de içeri atarlar.”",
+          "label": "“Konuşmazsan içeri girersin.”",
           "visibleWhen": {
             "flag": "selin_cozuldu"
           },
@@ -873,7 +969,7 @@
         {
           "id": "AYUS_BULGU",
           "kind": "OPTION",
-          "label": "Elindeki bulguyu anlat",
+          "label": "Elindeki bulguyu masaya koy",
           "visibleWhen": {
             "all": [
               {
@@ -1198,7 +1294,7 @@
         {
           "id": "AYUS_DNA",
           "kind": "OPTION",
-          "label": "Mahkemeye ek talep: izmaritin DNA incelemesi",
+          "label": "İzmarit için ek talep yapacağını söyle",
           "visibleWhen": {
             "all": [
               {
@@ -2149,7 +2245,7 @@
         {
           "id": "ALIM_SAVCI",
           "kind": "OPTION",
-          "label": "Nöbetçi savcılığı ara; limana girme",
+          "label": "Savcılığı ara, uzakta bekle",
           "effects": [
             {
               "type": "VAR",
@@ -2214,7 +2310,7 @@
         {
           "id": "ALIM_KENDIN",
           "kind": "OPTION",
-          "label": "Kendin gir, konteynerlerin arasına",
+          "label": "Konteynerlerin arasına kendin gir",
           "effects": [
             {
               "type": "SCORE",
@@ -3754,7 +3850,7 @@
         {
           "id": "AEKIP_ARAC",
           "kind": "OPTION",
-          "label": "“O gün sokakta bir araç var mıydı?”",
+          "label": "“O gün sokakta araç var mıydı?”",
           "effects": [
             {
               "type": "SCORE",
@@ -3790,7 +3886,7 @@
         {
           "id": "AEKIP_KIM",
           "kind": "OPTION",
-          "label": "“Sizi kim geri çevirdi? Tarif eder misiniz?”",
+          "label": "“Sizi kim geri çevirdi?”",
           "effects": [
             {
               "type": "DISCOVER",
@@ -3839,7 +3935,7 @@
         {
           "id": "AEKIP_SUCLA",
           "kind": "OPTION",
-          "label": "“Murat Koç’tu, değil mi?”",
+          "label": "“Murat’tı, değil mi?”",
           "effects": [
             {
               "type": "SCORE",

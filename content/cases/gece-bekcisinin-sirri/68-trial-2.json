@@ -520,7 +520,7 @@
         {
           "id": "C07_B",
           "kind": "OPTION",
-          "label": "İyi çocuk mudur?",
+          "label": "“Kerem nasıl bir çocuktur?”",
           "effects": [
             {
               "type": "VAR",
@@ -677,7 +677,7 @@
         {
           "id": "C07X_A",
           "kind": "OPTION",
-          "label": "İtiraz: soru tanığı itham ediyor; rulo numaraları kesintisiz",
+          "label": "İtiraz: yakınlık tanığı yalancı yapmaz",
           "effects": [
             {
               "type": "IF",
@@ -767,7 +767,7 @@
         {
           "id": "C07X_B",
           "kind": "OPTION",
-          "label": "Tanık kendisi cevaplasın",
+          "label": "Tanık soruyu kendisi cevaplasın",
           "quality": {
             "q": "NEUTRAL",
             "feedback": "Tanığı yalnız bıraktın; cevabı samimiydi ama belgeye dayanmadı."
@@ -791,7 +791,7 @@
         {
           "id": "C07X_C",
           "kind": "OPTION",
-          "label": "“Savcı tanığı korkutuyor!”",
+          "label": "İtiraz: soru tanığı korkutuyor (CMK 48)",
           "effects": [
             {
               "type": "SCORE",
@@ -1685,7 +1685,7 @@
         {
           "id": "C08_A",
           "kind": "OPTION",
-          "label": "Hukuka aykırı arama: görev süresi dışında (5188 md. 9/1), yetki aşımı (md. 7/a yalnızca cihazla giriş kontrolü), karar/emir yok (CMK 119/1), rıza yok → Anayasa 38/6, CMK 206/2-a, 217/2, 230/1-b",
+          "label": "Arama hukuka aykırı; anahtar dışlansın",
           "effects": [
             {
               "type": "SCORE",
@@ -1765,7 +1765,7 @@
         {
           "id": "C08_B",
           "kind": "OPTION",
-          "label": "İspat gücü yok: aynı anahtar bütün vardiyada var",
+          "label": "Anahtar kırk kişide var",
           "effects": [
             {
               "type": "SCORE",
@@ -1803,7 +1803,7 @@
         {
           "id": "C08_C",
           "kind": "OPTION",
-          "label": "Gece araması yasağı (CMK 118)",
+          "label": "Arama gece yapıldı; yasak (CMK 118)",
           "effects": [
             {
               "type": "SCORE",
@@ -1934,7 +1934,7 @@
         {
           "id": "C09_A",
           "kind": "OPTION",
-          "label": "Bilirkişiye sor: izin bırakıldığı zaman belirlenebilir mi?",
+          "label": "Bilirkişiye izin zamanını sor",
           "effects": [
             {
               "type": "MEET",
@@ -2021,7 +2021,7 @@
         {
           "id": "C09_B",
           "kind": "OPTION",
-          "label": "Sanık orada çalışıyor; izin zamanı belirsiz, 19.30’da top taşıdı",
+          "label": "İzin zamanı belirsiz; 19.30’u anlat",
           "effects": [
             {
               "type": "SCORE",
@@ -2089,7 +2089,7 @@
         {
           "id": "C09_C",
           "kind": "OPTION",
-          "label": "İz hukuka aykırı alındı",
+          "label": "İz hukuka aykırı alındı (CMK 81)",
           "effects": [
             {
               "type": "SCORE",
@@ -2247,7 +2247,7 @@
         {
           "id": "C10_A",
           "kind": "OPTION",
-          "label": "CMK 148/4: müdafisiz kolluk ifadesi hükme esas alınamaz; üstelik 23.00’ü değil 19.30’u anlatıyor",
+          "label": "Müdafisiz ifade hükme esas alınamaz",
           "effects": [
             {
               "type": "SCORE",
@@ -2273,7 +2273,7 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan, bu ifade müdafi hazır bulunmadan alınmıştır. Sanık duruşmada doğrulamadığı sürece hükme esas alınamaz."
+                  "text": "Sayın Başkan, bu ifade müdafi hazır bulunmadan alınmıştır. Sanık duruşmada doğrulamadığı sürece CMK 148/4 uyarınca hükme esas alınamaz."
                 },
                 {
                   "speaker": "player",
@@ -2290,7 +2290,7 @@
         {
           "id": "C10_B",
           "kind": "OPTION",
-          "label": "Kerem 19.30’daki taşımayı açıklasın",
+          "label": "Kerem 19.30’daki taşımayı anlatsın",
           "effects": [
             {
               "type": "SCORE",
@@ -2378,7 +2378,7 @@
         {
           "id": "C10_C",
           "kind": "OPTION",
-          "label": "İfade işkenceyle alındı",
+          "label": "İfade baskıyla alındı (CMK 148/1)",
           "effects": [
             {
               "type": "SCORE",
@@ -2675,7 +2675,7 @@
         {
           "id": "C11_A",
           "kind": "OPTION",
-          "label": "Hukuka aykırı delil hükme esas alınamaz (CMK 217/2, 230/1-b)",
+          "label": "Hukuka aykırı delil hükme esas olmaz",
           "effects": [
             {
               "type": "SCORE",
@@ -2724,7 +2724,7 @@
         {
           "id": "C11_A2",
           "kind": "OPTION",
-          "label": "Katılıyoruz; beraatin dayanağı CMK 223/2-b olmalı",
+          "label": "Katılıyoruz; ama dayanak 223/2-b olsun",
           "effects": [
             {
               "type": "SCORE",
@@ -2766,7 +2766,7 @@
         {
           "id": "C11_B",
           "kind": "OPTION",
-          "label": "Cevap yok",
+          "label": "Cevap hakkımızı kullanmıyoruz",
           "next": "C_12P",
           "responses": [
             {
@@ -2782,7 +2782,7 @@
         {
           "id": "C11_C",
           "kind": "OPTION",
-          "label": "Mütalaa tutanaktan çıkarılsın",
+          "label": "Mütalaa tutanaktan çıkarılsın (CMK 216)",
           "effects": [
             {
               "type": "SCORE",
@@ -3361,7 +3361,7 @@
         {
           "id": "C12_A",
           "kind": "OPTION",
-          "label": "Gerçek fail başkası: CMK 223/2-b ve suç duyurusu",
+          "label": "Gerçek fail başkası; suçu işlemedi (223/2-b)",
           "effects": [
             {
               "type": "IF",
@@ -3529,7 +3529,7 @@
         {
           "id": "C12_B",
           "kind": "OPTION",
-          "label": "Şüpheden sanık yararlanır: CMK 223/2-e",
+          "label": "Suç ispatlanamadı; şüphe sanığındır (223/2-e)",
           "effects": [
             {
               "type": "IF",
@@ -3683,7 +3683,7 @@
         {
           "id": "C12_C",
           "kind": "OPTION",
-          "label": "Öncelikle beraat; aksi hâlde 142/2-d düşsün, alt sınır ve TCK 62 (terditli)",
+          "label": "Önce beraat; olmazsa alt sınır (terditli)",
           "effects": [
             {
               "type": "SCORE",
@@ -3753,7 +3753,7 @@
         {
           "id": "C12_D",
           "kind": "OPTION",
-          "label": "Etkin pişmanlık ve HAGB",
+          "label": "Etkin pişmanlık ve HAGB (TCK 168)",
           "effects": [
             {
               "type": "SCORE",
@@ -3796,7 +3796,7 @@
         {
           "id": "C12_E",
           "kind": "OPTION",
-          "label": "Duygusal saldırı",
+          "label": "Heyetin vicdanına seslen",
           "effects": [
             {
               "type": "SCORE",
@@ -3883,7 +3883,7 @@
         {
           "id": "C13_A",
           "kind": "OPTION",
-          "label": "“Ben yapmadım. Adaletinize güveniyorum.”",
+          "label": "“Yapmadım. Adaletinize güveniyorum.”",
           "effects": [
             {
               "type": "SCORE",
@@ -3954,7 +3954,7 @@
         {
           "id": "C13_B",
           "kind": "OPTION",
-          "label": "Ağlayarak merhamet dilesin",
+          "label": "“Affedin, annem yalnız.”",
           "effects": [
             {
               "type": "MARK",
@@ -3992,7 +3992,7 @@
         {
           "id": "C13_C",
           "kind": "OPTION",
-          "label": "Selin’e öfkesini kussun",
+          "label": "“Selin abla yalan söyledi, o biliyor!”",
           "effects": [
             {
               "type": "SCORE",

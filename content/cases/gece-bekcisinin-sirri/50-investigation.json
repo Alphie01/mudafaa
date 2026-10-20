@@ -2495,7 +2495,7 @@
         {
           "id": "G_IZ",
           "kind": "OPTION",
-          "label": "İPUCU GÖSTER: “Çamurda 42 numara bot izi”",
+          "label": "Fotoğraf göster: çamurdaki iz",
           "prompt": "Olay yerinde bir bot izi bulduk. Senin numaran kaç?",
           "visibleWhen": {
             "hasEvidence": "clue_iz42"
@@ -2625,6 +2625,134 @@
                 {
                   "speaker": "player",
                   "text": "Kapı kapandı. Benim açtığım değil; onun içindeki kapı. Güvenmeyen bir müvekkil, bildiğini en son kendine söyler.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "G_IZMARIT",
+          "kind": "OPTION",
+          "label": "Fotoğraf göster: çöpteki izmarit",
+          "prompt": "Çöp kutusunda bir izmarit bulundu. Bir şey hatırlatıyor mu?",
+          "visibleWhen": {
+            "all": [
+              {
+                "hasEvidence": "clue_izmarit"
+              },
+              {
+                "not": {
+                  "flag": "fact_murat_reveal"
+                }
+              }
+            ]
+          },
+          "maxUses": 1,
+          "cost": [
+            {
+              "var": "min",
+              "amount": 3
+            }
+          ],
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "SORGULAMA",
+              "amount": -20
+            },
+            {
+              "type": "VAR",
+              "var": "trust",
+              "op": "dec",
+              "value": 3
+            },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Bu fotoğraf Kerem’in saklayabileceği bir şeye dokunmuyor; dakikalar gitti, güven biraz düştü.",
+              "category": "SORGULAMA"
+            }
+          ],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "kerem",
+                  "text": "İçmem ki abla. Annem astımlı. Kim içiyorsa onundur.",
+                  "expression": "saskin"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kerem fotoğrafa bir saniye baktı, sonra bana. Sorunun neden sorulduğunu anlamamıştı. Ben de anlatamadım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Doğru fotoğraf, yanlış insan. İzmariti ona değil, bir laboratuvara sormalıyım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "G_KABLO",
+          "kind": "OPTION",
+          "label": "Fotoğraf göster: kesik kamera kablosu",
+          "prompt": "Depo 3’ün kamera kablosu kesilmiş. Bundan haberin var mıydı?",
+          "visibleWhen": {
+            "all": [
+              {
+                "hasEvidence": "clue_kablo"
+              },
+              {
+                "not": {
+                  "flag": "fact_murat_reveal"
+                }
+              }
+            ]
+          },
+          "maxUses": 1,
+          "cost": [
+            {
+              "var": "min",
+              "amount": 3
+            }
+          ],
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "SORGULAMA",
+              "amount": -20
+            },
+            {
+              "type": "VAR",
+              "var": "trust",
+              "op": "dec",
+              "value": 3
+            },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Bu fotoğraf Kerem’in saklayabileceği bir şeye dokunmuyor; dakikalar gitti, güven biraz düştü.",
+              "category": "SORGULAMA"
+            }
+          ],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "kerem",
+                  "text": "Kamera mı? Ben Depo 1’deyim abla. Depo 3’ün kamerasını hiç görmedim bile.",
+                  "expression": "saskin"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Ali Çetin camdan baktı. Saat ilerliyordu. Kerem’in elleri masanın üstünde, boş."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kerem’in bilmediği bir şeyi ona sormak, ona değil bana bir şey öğretti: zamanım az.",
                   "style": "thought"
                 }
               ]
@@ -3500,7 +3628,7 @@
         {
           "id": "BEL_A",
           "kind": "OPTION",
-          "label": "Avukat sıfatıyla belediyeye başvur (Av.K. 2/3)",
+          "label": "Avukat sıfatıyla iste (Av.K. 2/3)",
           "effects": [
             {
               "type": "SCORE",
@@ -3548,7 +3676,7 @@
         {
           "id": "BEL_B",
           "kind": "OPTION",
-          "label": "Mahkemeden müzekkere iste (CMK 177)",
+          "label": "Müzekkere iste (CMK 177)",
           "effects": [
             {
               "type": "SCORE",
@@ -3587,7 +3715,7 @@
         {
           "id": "BEL_C",
           "kind": "OPTION",
-          "label": "Bilgi edinme başvurusu yap (4982)",
+          "label": "Bilgi edinme başvurusu yap (4982 s.K.)",
           "quality": {
             "q": "NEUTRAL",
             "feedback": "15 iş günü; yetişmez."
@@ -3651,13 +3779,13 @@
       "chapter": "Bölüm 2 · Soruşturma",
       "prompt": {
         "speaker": "narrator",
-        "text": "Selin’in teşhisi Murat’ın sözüne dayanıyor. Telefon kayıtları bir bağlantıyı gösterebilir; ama hangi yoldan?"
+        "text": "Telefon kayıtlarını hangi yoldan isteyebilirsin?"
       },
       "choices": [
         {
           "id": "HTS_OP",
           "kind": "OPTION",
-          "label": "Operatördeki tanıdıktan Selin’in kaydını al",
+          "label": "Operatördeki eski arkadaşından kaydı iste",
           "effects": [
             {
               "type": "SCORE",
@@ -3706,7 +3834,7 @@
         {
           "id": "HTS_TANIK",
           "kind": "OPTION",
-          "label": "Mahkemeden tanığın HTS’sini iste",
+          "label": "Mahkemeden tanığın kayıtlarını iste (CMK 135)",
           "quality": {
             "q": "NEUTRAL",
             "feedback": "CMK 135/6 yalnızca şüpheli ve sanığın iletişimini kapsar."
@@ -3735,7 +3863,7 @@
         {
           "id": "HTS_SUC",
           "kind": "OPTION",
-          "label": "Murat hakkında suç duyurusu + iletişim tespiti talebi (CMK 158, 135/6)",
+          "label": "Suç duyurusu yap; tespiti savcılık istesin",
           "visibleWhen": {
             "ref": "dayanak_murat"
           },
@@ -3781,7 +3909,7 @@
         {
           "id": "HTS_SUC0",
           "kind": "OPTION",
-          "label": "Murat hakkında suç duyurusu + iletişim tespiti talebi (CMK 158, 135/6)",
+          "label": "Suç duyurusu yap; tespiti savcılık istesin",
           "visibleWhen": {
             "not": {
               "ref": "dayanak_murat"
@@ -3809,7 +3937,7 @@
                 },
                 {
                   "speaker": "leyla",
-                  "text": "Neye dayanarak? Bir sezgiye mi? Somut bir şüphe olmadan bir adamı suçlarsan, iftira dilekçesi yazmış olursun. Yırt bunu."
+                  "text": "Kimin hakkında? Neye dayanarak? Bir sezgiyle bir adamı suçlarsan, iftira dilekçesi yazmış olursun. Önce elinde somut bir şey olsun. Yırt bunu."
                 }
               ]
             }
@@ -3818,7 +3946,7 @@
         {
           "id": "HTS_KEREM",
           "kind": "OPTION",
-          "label": "Kerem’in kendi HTS’sini iste",
+          "label": "Kerem’in kendi kayıtlarını mahkemeden iste",
           "quality": {
             "q": "NEUTRAL",
             "feedback": "Aynı baz istasyonu; ayırt edici değil."
@@ -3858,7 +3986,7 @@
             },
             {
               "speaker": "player",
-              "text": "Selin’in teşhisi bir cümleye dayanıyor: “Murat Kerem’di dedi.” Bir cümle, bir telefon kadar kısa olabilir.",
+              "text": "Telefon kayıtları bir dosyanın sinir ağıdır: kim, kimi, ne zaman aradı. Ama kimin kaydına, hangi dayanakla bakacağımı bilmeden bu kapı açılmaz.",
               "style": "thought"
             },
             {
@@ -3887,7 +4015,7 @@
         {
           "id": "HTSS_EKLE",
           "kind": "OPTION",
-          "label": "Selin’i de ekle (TCK 272/267, çizelge)",
+          "label": "Selin’i de ekle; dayanak çizelgedeki silinti",
           "visibleWhen": {
             "hasEvidence": "clue_uv_silinti"
           },
@@ -3906,7 +4034,7 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Değiştirilmiş çizelge somut dayanak: Selin Kaya hakkında da soruşturma istendi.",
+            "feedback": "Değiştirilmiş çizelge somut dayanak: Selin Kaya hakkında da soruşturma istendi (TCK 272 yalan tanıklık; çizelgede değişiklik TCK 207 özel belgede sahtecilik yönünden).",
             "category": "HUKUKI_BILGI"
           },
           "next": "$return",
@@ -3929,7 +4057,7 @@
         {
           "id": "HTSS_DEVAM",
           "kind": "CONTINUE",
-          "label": "Yalnızca Murat",
+          "label": "Selin’i şimdilik dışarıda bırak",
           "next": "$return",
           "responses": [
             {
@@ -4614,7 +4742,7 @@
         {
           "id": "THUS_BILDIR",
           "kind": "OPTION",
-          "label": "Duruşmaya gel; seni tanık olarak bildireceğim (CMK 179)",
+          "label": "“Sizi tanık olarak bildireceğim.”",
           "effects": [
             {
               "type": "SCORE",
@@ -4672,7 +4800,7 @@
         {
           "id": "THUS_YAZILI",
           "kind": "OPTION",
-          "label": "Yazılı beyan yeter",
+          "label": "“Yazılı bir beyan imzalasanız yeter.”",
           "quality": {
             "q": "NEUTRAL",
             "feedback": "CMK 210/1: duruşmada dinlenmeli."
@@ -4844,7 +4972,7 @@
         {
           "id": "TSEL_GORUS",
           "kind": "OPTION",
-          "label": "Görüşme iste",
+          "label": "“Bir gün konuşalım mı?”",
           "quality": {
             "q": "NEUTRAL",
             "feedback": "Tanık mahkeme dışında görüşmeye zorlanamaz."
@@ -4891,7 +5019,7 @@
         {
           "id": "TSEL_BASKI",
           "kind": "OPTION",
-          "label": "Baskı yap",
+          "label": "“Yalan tanıklığın cezası ağırdır.”",
           "effects": [
             {
               "type": "SCORE",
@@ -4982,7 +5110,7 @@
         {
           "type": "MARK",
           "quality": "BAD",
-          "feedback": "Olası faili, delil güvenceye alınmadan uyardın.",
+          "feedback": "Elinde delil yokken, dosyanın kilit tanıklarından birine neyi aradığını gösterdin.",
           "category": "SAVUNMA_STRATEJISI"
         }
       ],
@@ -5044,12 +5172,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Gülümsedi. Sigarasını çiğnenmiş bir çakmakla yeniden yaktı. Kor ucu parladı."
-            },
-            {
-              "speaker": "player",
-              "text": "O turuncu noktayı bir yerden hatırlıyorum. Ama nereden, bilmiyorum.",
-              "style": "thought"
+              "text": "Gülümsedi. Sigarasını çiğnenmiş bir çakmakla yeniden yaktı."
             },
             {
               "speaker": "narrator",
@@ -5183,7 +5306,7 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Arabaya bindiğimde ellerim titriyordu. Az önce, elimde tek bir delil yokken, belki de aradığım adama ne bildiğimi gösterdim.",
+                  "text": "Arabaya bindiğimde ellerim titriyordu. Az önce, elimde tek bir delil yokken, ne aradığımı birine göstermiştim. Kime gösterdiğimi tam bilmeden.",
                   "style": "thought"
                 },
                 {

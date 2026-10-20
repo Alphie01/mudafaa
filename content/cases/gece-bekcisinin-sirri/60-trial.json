@@ -656,7 +656,7 @@
         {
           "id": "C01_A",
           "kind": "OPTION",
-          "label": "Ek savunma için süre iste (CMK 226/3)",
+          "label": "Hazırlanmak için süre iste",
           "effects": [
             {
               "type": "SCORE",
@@ -707,7 +707,7 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan, nitelendirme değişikliğine karşı savunmamızı hazırlamak için süre talep ediyoruz."
+                  "text": "Sayın Başkan, nitelendirme değişikliğine karşı savunmamızı hazırlamak için CMK 226/3 uyarınca süre talep ediyoruz."
                 },
                 {
                   "speaker": "nevzat",
@@ -732,7 +732,7 @@
         {
           "id": "C01_B",
           "kind": "OPTION",
-          "label": "Devam",
+          "label": "Ek savunmaya hemen geç",
           "next": "C_02",
           "quality": {
             "q": "NEUTRAL",
@@ -757,7 +757,7 @@
         {
           "id": "C01_C",
           "kind": "OPTION",
-          "label": "İtiraz: iddianameye bağlısınız",
+          "label": "İtiraz: iddianamede bu bent yok (CMK 225)",
           "effects": [
             {
               "type": "SCORE",
@@ -843,7 +843,7 @@
         {
           "id": "C02_A",
           "kind": "OPTION",
-          "label": "Reddet; 22.30–23.15 çay ocağı; 19.30 yardım; anahtar herkeste",
+          "label": "Bildiğini, saat saat anlatsın",
           "effects": [
             {
               "type": "IF",
@@ -976,7 +976,7 @@
         {
           "id": "C02_B",
           "kind": "OPTION",
-          "label": "Susma hakkını kullansın (CMK 147/1-e)",
+          "label": "Susma hakkını kullansın (CMK 147)",
           "next": "C_03",
           "quality": {
             "q": "NEUTRAL",
@@ -1005,7 +1005,7 @@
         {
           "id": "C02_C",
           "kind": "OPTION",
-          "label": "Murat’ı suçlasın",
+          "label": "Murat’ı işaret etsin",
           "effects": [
             {
               "type": "IF",
@@ -1097,7 +1097,7 @@
         {
           "id": "C02_D",
           "kind": "OPTION",
-          "label": "Suçu kabul etsin; TCK 168 ve 62 isteyelim",
+          "label": "Kabul etsin, indirim isteyelim (TCK 62)",
           "next": "C_02D",
           "responses": [
             {
@@ -1550,7 +1550,7 @@
         {
           "id": "C03_A",
           "kind": "OPTION",
-          "label": "142/2-d oluşmadı: işverence verilen anahtar ‘haksız yere elde bulundurulan’ değil; kullanıldığına delil yok",
+          "label": "Anahtar işverenden; haksız değil",
           "effects": [
             {
               "type": "SCORE",
@@ -1650,7 +1650,7 @@
         {
           "id": "C03_B",
           "kind": "OPTION",
-          "label": "142/1-e uygulansın",
+          "label": "Daha hafif bent uygulansın (142/1-e)",
           "effects": [
             {
               "type": "SCORE",
@@ -1693,7 +1693,7 @@
         {
           "id": "C03_C",
           "kind": "OPTION",
-          "label": "TCK 145 uygulansın",
+          "label": "Değer azlığı indirimi (TCK 145)",
           "effects": [
             {
               "type": "SCORE",
@@ -1735,7 +1735,7 @@
         {
           "id": "C03_D",
           "kind": "OPTION",
-          "label": "Diyecek yok",
+          "label": "Diyeceğimiz yok",
           "next": "C_04",
           "responses": [
             {
@@ -1969,7 +1969,7 @@
         {
           "id": "C05_A",
           "kind": "OPTION",
-          "label": "İtiraz: telkin edici soru (CMK 201/1)",
+          "label": "İtiraz: soru cevabı içinde taşıyor",
           "effects": [
             {
               "type": "SCORE",
@@ -1994,7 +1994,7 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "İtiraz ediyorum Sayın Başkan. Soru, cevabı içinde taşıyor."
+                  "text": "İtiraz ediyorum Sayın Başkan. Soru, cevabı içinde taşıyor; telkin edici soru sorulamaz."
                 },
                 {
                   "speaker": "nevzat",
@@ -2015,7 +2015,7 @@
         {
           "id": "C05_B",
           "kind": "OPTION",
-          "label": "Sessiz kal",
+          "label": "Sessiz kal; çapraz sorguyu bekle",
           "effects": [
             {
               "type": "VAR",
@@ -2048,7 +2048,7 @@
         {
           "id": "C05_C",
           "kind": "OPTION",
-          "label": "Tanık yalan söylüyor!",
+          "label": "İtiraz: tanık yalan söylüyor (TCK 272)",
           "effects": [
             {
               "type": "SCORE",
@@ -3647,7 +3647,7 @@
         {
           "id": "C06H_A",
           "kind": "OPTION",
-          "label": "TCK 274’ün hatırlatılmasını talep et",
+          "label": "Pişmanlık hakkı hatırlatılsın",
           "effects": [
             {
               "type": "SCORE",
@@ -3672,7 +3672,7 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan, tanığa, gerçeği söylerse yalan tanıklıktan doğacak sorumluluğunun ortadan kalkabileceğinin de hatırlatılmasını talep ediyoruz."
+                  "text": "Sayın Başkan, tanığa, hüküm verilmeden gerçeği söylerse TCK 274 uyarınca yalan tanıklıktan cezalandırılmayabileceğinin hatırlatılmasını talep ediyoruz."
                 },
                 {
                   "speaker": "nevzat",
@@ -3727,7 +3727,7 @@
         {
           "id": "C06H_B",
           "kind": "OPTION",
-          "label": "Tehdit et",
+          "label": "Yalanın bedelini tanığa kendin söyle",
           "effects": [
             {
               "type": "SCORE",
@@ -3769,7 +3769,7 @@
         {
           "id": "C06H_C",
           "kind": "OPTION",
-          "label": "Geri çek",
+          "label": "Soruyu geri çek",
           "next": "C_06",
           "responses": [
             {
@@ -3904,7 +3904,7 @@
         {
           "id": "CARA_TAHLIYE",
           "kind": "OPTION",
-          "label": "Adli kontrol şartıyla tahliye talep et",
+          "label": "Adli kontrolle tahliye iste",
           "effects": [
             {
               "type": "IF",
@@ -4026,7 +4026,7 @@
         {
           "id": "CARA_BERAAT",
           "kind": "OPTION",
-          "label": "Sanığın hemen beraatine karar verilsin",
+          "label": "Hemen beraat kararı verilsin",
           "effects": [
             {
               "type": "SCORE",

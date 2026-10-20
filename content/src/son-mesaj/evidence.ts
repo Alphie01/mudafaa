@@ -249,9 +249,9 @@ export const evidencePart: CasePart = {
     clue('clue_uslup_ozan', {
       type: 'BELGE',
       title: 'Bir e-postanın imzası',
-      shortText: '“Sn. Aksoy, … gereğini bilgilerinize sunarım... Saygılar.” Çıktısı alınmış eski bir ofis e-postası.',
-      description: '“Yazışmalar” klasöründe, gönderen: o.tekin.',
-      sourceLabel: 'Aksoy Mimarlık ofisi',
+      shortText: '“Sn. Sarı, 07 için tutanağa gerek görmüyorum... Saygılar.” Mali müşavirin sakladığı e-posta çıktısı.',
+      description: 'Protokolün arkasına zımbalanmış; gönderen: o.tekin.',
+      sourceLabel: 'Sarı Mali Müşavirlik',
       icon: 'document',
       tags: K,
     }),

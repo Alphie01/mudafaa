@@ -7,7 +7,6 @@ import {
   flag,
   option,
   raise,
-  recipe,
   row,
   story,
   tool,
@@ -65,7 +64,7 @@ export function hesapDoc(id: string, prefix: string, costVar: string, chapterSpr
         'clue_bagli_cihaz',
         150,
         'YENİ İPUCU',
-        'Büyüteci cihaz 3 satırına tuttum. “OFIS-LAPTOP-07 · PUSULA Masaüstü (Windows).” 14 Şubat’ta hesaba bağlanmış ve o günden beri hiç kapatılmamış bir masaüstü oturumu. Son etkin olduğu an: 12 Kasım 02.21; yani son tehdit mesajından tam iki dakika sonra. Bir telefon değil bu; ofiste bir yerde duran, hesabın sahibinin bile unuttuğu bir bilgisayar.',
+        'Cihaz 3: “OFIS-LAPTOP-07 · PUSULA Masaüstü (Windows).” 14 Şubat’tan beri hiç kapatılmamış bir oturum. Son etkinlik 12 Kasım 02.21, son tehditten iki dakika sonra. Telefon değil; bir bilgisayar.',
       ),
       hit(
         `${prefix}EX_C2`,
@@ -83,7 +82,7 @@ export function hesapDoc(id: string, prefix: string, costVar: string, chapterSpr
         'clue_ip_ayni',
         150,
         'YENİ İPUCU',
-        'Karşılaştır aletini üç oturum satırına sırayla tuttum. 6 Kasım, 9 Kasım, 12 Kasım; üçünde de cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Oysa Tarık’ın kendi telefonu, cihaz 0, ev hattından bağlanıyor: 176.88.12.4. Üç tehdit gecesinin adresi, Tarık’ın evi değil. Başka bir yer; sabit, tekrar eden, bir iş adresi gibi.',
+        'Üç gecenin üçünde de cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.',
       ),
       hit(`${prefix}EX_IP2`, 'cmp', `${prefix}h5`, 'clue_ip_ayni', 0, 'AYNI ADRES', '9 Kasım: 85.105.44.17. Yine.'),
       hit(`${prefix}EX_IP3`, 'cmp', `${prefix}h6`, 'clue_ip_ayni', 0, 'AYNI ADRES', '12 Kasım: 85.105.44.17. Üçüncü kez.'),
@@ -94,7 +93,7 @@ export function hesapDoc(id: string, prefix: string, costVar: string, chapterSpr
         'clue_arsiv',
         100,
         'YENİ İPUCU',
-        '6 Kasım 02.13. İlk tehdit mesajından tam iki dakika sonra, Melis’le olan sohbet arşivlenmiş. Hem de cihaz 3’ten. Arşivlemek, bir sohbeti ana listeden gizlemektir. Tarık’ın telefonunda bu yüzden hiçbir şey görünmedi; birisi mesajı gönderip hemen gizlemiş. Hesabın sahibi kendi yazdığı mesajı neden gizlesin? Gizleyen, hesabı kullanan biri; sahibi fark etmesin diye.',
+        '6 Kasım 02.13: ilk tehditten iki dakika sonra sohbet arşivlenmiş, cihaz 3’ten. Arşiv, sohbeti listeden gizler. Sahibi kendi mesajını neden gizlesin? Gizleyen, hesabı kullanan biri.',
       ),
       hit(
         `${prefix}EX_EV`,
@@ -255,7 +254,7 @@ export const invArsiv: CasePart = {
           'clue_imza_yok',
           100,
           'YENİ İPUCU',
-          'Büyüteci son satıra tuttum. Şüphelinin imza hanesi noktalı ve boş; bir imza, bir paraf, hiçbir şey yok. “İmzadan imtina etti” şerhi de yok. Oysa ilk satırda kocaman “şüphelinin rızasıyla” yazıyor. Peki bu rıza kimin ağzından kâğıda geçti? Yazan da, imzalayan da aynı kişi: polis. Rıza, verenin değil, isteyenin kalemiyle yazılmış.',
+          'Şüphelinin imza hanesi boş; ne imza ne paraf, “imzadan imtina etti” şerhi de yok. Oysa ilk satırda “şüphelinin rızasıyla” yazıyor. Rıza, verenin değil, isteyenin kalemiyle yazılmış.',
         ),
         hit(
           'EX_T_MUHUR',
@@ -273,7 +272,7 @@ export const invArsiv: CasePart = {
           'clue_ss_karar',
           150,
           'YENİ İPUCU',
-          'Karşılaştır aletini iki satıra birden tuttum. Ekran görüntüleri: 12 Kasım 15.44. Hâkimlik kararı: 13 Kasım, ertesi sabah 10.20. Yani görüntüler, karardan tam on sekiz saat önce alınmış. Bir telefonun içinde arama ve kopyalama hâkim kararı ister; bu kez karar, iş bittikten sonra gelmiş. Sıralama tersine dönmüş; ve hukukta sıralama her şeydir.',
+          'Ekran görüntüleri 12 Kasım 15.44; hâkimlik kararı 13 Kasım 10.20. Görüntüler karardan on sekiz saat önce alınmış. Karar, iş bittikten sonra gelmiş; hukukta sıralama her şeydir.',
           'USUL_BILGISI',
         ),
         hit(
@@ -367,7 +366,7 @@ export const invArsiv: CasePart = {
           'clue_son_erisim',
           100,
           'YENİ İPUCU',
-          'Büyüteci Ek-2’deki son kayda tuttum. “Son kilit açılışı: 12 Kasım 15.52.” O saat, telefonun Şube’de açıldığı an; yani cihazın son dokunulduğu el, bir polisin eli. İmaj ise 14 Kasım’da alınmış. Arada iki koca gün var. Telefon o iki gün nerede durdu, hangi çekmecede, kimin gözetiminde, kim açtı kapadı? Rapor bu iki günü hiç anlatmıyor.',
+          '“Son kilit açılışı: 12 Kasım 15.52.” Şube’de, bir polisin eli. İmaj ise 14 Kasım’da. Arada iki gün: telefon hangi çekmecede, kimin gözetiminde durdu? Rapor bu iki günü anlatmıyor.',
         ),
         hit(
           'EX_I_KILIT',
@@ -376,7 +375,7 @@ export const invArsiv: CasePart = {
           'clue_kilit',
           150,
           'YENİ İPUCU',
-          'Büyüteci Ek-2’deki kilit kayıtlarına tuttum. 9 Kasım gecesi: telefon 01.40’ta kilitlenmiş, 06.10’a kadar bir kez bile açılmamış. Dört buçuk saat, kesintisiz kilitli. Oysa Ek-3’e göre tam o gece, 02.14’te, bu hesaptan Hayri Sezer’e bir ses kaydı iletilmiş. Kilitli bir telefondan, sahibinin parmağı değmeden bir ileti nasıl çıkar? Çıkmaz. Başka bir cihazdan çıkar.',
+          '9 Kasım: telefon 01.40’ta kilitlenmiş, 06.10’a kadar hiç açılmamış. Oysa 02.14’te bu hesaptan Hayri Sezer’e ses kaydı gitmiş. Kilitli telefondan ileti çıkmaz; başka bir cihazdan çıkar.',
         ),
         hit(
           'EX_I_C6',
@@ -385,7 +384,7 @@ export const invArsiv: CasePart = {
           'clue_cihaz3',
           150,
           'YENİ İPUCU',
-          'Karşılaştır aletini tuttum; “bkz.” yazan hücre açıldı, ham veri döküldü: sender_device = 3. Oysa bir önceki satırda, Tarık’ın 25 Ekim’deki kendi mesajında bu değer 0’dı. Aynı hesap, farklı cihaz. Bütün dava bu tek rakamda saklıymış.',
+          '“bkz.” yazan hücre açıldı, ham veri döküldü: sender_device = 3. Tarık’ın 25 Ekim’deki kendi mesajında bu değer 0. Aynı hesap, farklı cihaz. Bütün dava bu tek rakamda saklıymış.',
         ),
         hit('EX_I_C7', 'cmp', 'i7', 'clue_cihaz3', 0, 'CİHAZ 3', 'İletilen ses kaydı da cihaz 3’ten çıkmış. Tarık’ın telefonu değil; başka bir cihaz, aynı hesaba bağlı.'),
         hit('EX_I_C8', 'cmp', 'i8', 'clue_cihaz3', 0, 'CİHAZ 3', '“Son mesajım.” Yine cihaz 3. Üç tehdidin üçü de aynı yerden: bir masaüstü oturumundan, bir telefondan değil.'),
@@ -442,7 +441,7 @@ export const invArsiv: CasePart = {
       `),
       prompt: 'Savunmanın kendi dijital delilini nasıl koruyacaksın?',
       choices: [
-        option('HI_NOTER', 'Dosya gelince noterde indirilsin; hash değeriyle tespit ettirelim.', {
+        option('HI_NOTER', 'Noterde indirilsin, hash değeriyle tespit edilsin.', {
           discovers: 'ev_hesap',
           score: { USUL_BILGISI: 30, ARASTIRMA: 20 },
           effects: [raise('hesap_istendi')],
@@ -454,7 +453,7 @@ export const invArsiv: CasePart = {
           `),
           next: '$return',
         }),
-        option('HI_SS', 'Ekran görüntüsü yeter; zaman kazanalım.', {
+        option('HI_SS', 'Ekran görüntülerini alıp çıktısını dosyaya sunalım; daha hızlı, bize de yeter.', {
           score: { USUL_BILGISI: -30 },
           bad: 'Savunmanın sunduğu ekran görüntüsü de aynı itiraza açıktır: kim, ne zaman, neyle aldı? Dijital delil kaynağından, bütünlüğü korunarak alınmalıdır.',
           responses: B(`
@@ -509,7 +508,7 @@ export const invArsiv: CasePart = {
           'clue_onam',
           100,
           'YENİ İPUCU',
-          'Büyüteci onam satırına tuttum. “02.10 · Girişim onam formu · imza: Tarık Aksoy · saati yazan: Hmş. G. Tunç.” Saati bir hemşire yazmış, altına imza atmış; hastane her saati böyle mühürler. 02.10’da Tarık, babasının ameliyat onamını imzalıyor. Dört dakika sonra, 02.14’te, onun hesabından Hayri Bey’e bir ses kaydı gidiyor. Bir insan aynı dört dakikada hem bir hastane masasında hem de bir klavyenin başında olamaz.',
+          '“02.10 · Girişim onam formu · imza: Tarık Aksoy · saati yazan: Hmş. G. Tunç.” Dört dakika sonra, 02.14’te, onun hesabından ses kaydı gidiyor. İnsan aynı anda hem orada hem klavye başında olamaz.',
         ),
         hit(
           'EX_K_ONAM2',
@@ -608,14 +607,6 @@ export const invArsiv: CasePart = {
       pool: POOL,
       recipes: [
         ...baseRecipes(''),
-        recipe('CB_USLUP_OZAN_ERKEN', 'clue_uslup_ozan', 'clue_uslup_tehdit', {
-          feedback: {
-            title: 'Bir benzerlik',
-            text: 'Aynı “Sn.”, aynı üç nokta. Ama bir e-posta ile üç mesaj bir insanı göstermez. Bir benzerlik, bir delil değildir. Daha fazlası lazım.',
-            label: 'HENÜZ YETMİYOR',
-            tone: 'info',
-          },
-        }),
       ],
       miss: boardMiss('FB_CIKARIM'),
       finish: { id: 'CIKARIM_BITIR' },

@@ -157,7 +157,7 @@ export const invInsanlar: CasePart = {
                 tarik: Açtım. Ne bakacaklarını bilmiyordum, saklayacak bir şeyim de yoktu. Parmağımı ekrana koydum, o aldı. Sonra menülerde dolaştı, bir şeyler buldu.
                 tarik: Bir kâğıt imzalamadım. “İmzayı sonra alırız” dedi. O sonra hiç gelmedi. Ben de aklımdan çıkardım; suçsuz insan imza düşünmez.
                 tarik: Telefonu kahverengi bir zarfa koydu, ağzını bantladı. Mum yoktu, mühür yoktu, bir bant. Çekmecesine attı, çekmeceyi kilitledi. Ben çıktım, dışarıda yağmur başlamıştı.
-                tarik: İki gün sonra geri aldım. Aynı zarf, aynı bant. Kim açtı, kim kapadı, bilmiyorum. Bir mimar olsam, o zarfa bakıp “bu kapı iki kez açılmış” derdim.
+                tarik: O günden beri emanette. İki gün sonra o zarfı bir daha gördüm, imaj için götürürlerken: aynı bant, bir köşesi kalkmış. Bir mimar olarak o zarfa bakıp “bu kapı iki kez açılmış” derdim.
               `),
             },
             hard: {
@@ -364,7 +364,7 @@ export const invInsanlar: CasePart = {
         > Han’ın taş merdiveni yüz elli yıldır aynı yerden aşınıyor; basamakların ortası çukurlaşmış.
         > Kapıda pirinç bir tabela: “AKSOY TEKİN MİMARLIK”. “TEKİN” kelimesinin üstü siyah bantla kapatılmış, ama bant kenarından kıvrılmış; altındaki harfler hâlâ okunuyor.
         tarik: Buyurun. Polis bir şeye dokunmadı, telefonumu aldılar yalnızca. Buraya hiç çıkmadılar bile.
-        tarik: Ozan’ın masası altı aydır öyle duruyor; silmeye kıyamadım, belki de temizlemek istemedim.
+        tarik: Ozan’ın masası on bir aydır öyle duruyor; silmeye kıyamadım, belki de temizlemek istemedim.
         > Kemerlerin altında iki çizim masası. Birinin üstünde kâğıt yığınları, maketler, bir kahve fincanı.
         > Öbürü boş, tozlu, bir mezar taşı kadar sessiz. Pencereden Tophane’nin çatıları ve yağmurun ince sesi.
         ~ Polis buraya bakmamış. Polis bir telefona bakmış, bir isim görmüş, defteri kapamış. Oysa bir hikâye hep iki masa arasında saklanır.
@@ -445,7 +445,8 @@ export const invInsanlar: CasePart = {
           neutral: 'Tanığa ne söyleyeceğini değil, ne gördüğünü sormak doğru yoldur; çağrılırsa tanık kendi bildiğini anlatır.',
           responses: B(`
             gulay: Çağırırlarsa gelirim. Nöbetim yoksa. Gördüğümü söylerim, gördüğümden fazlasını değil.
-            ~ İyi. Gördüğünden fazlasını söyleyen tanık, gördüğünü de yaktırır.
+            gulay: Ama bakın: o bandı da, o saati de ben yazdım, imzam altında. Mahkeme kayıtları isterse, benim sözüm zaten o kâğıtta.
+            ~ İyi. Gördüğünden fazlasını söyleyen tanık, gördüğünü de yaktırır. Ve imzalı bir kâğıt, tanık kürsüsüne çıkmadan da konuşur.
           `),
         }),
         option('GUL_YONLENDIR', '“Saat tam 02.00’de oradaydı” derseniz çok yardımcı olursunuz.', {
@@ -552,12 +553,12 @@ export const invInsanlar: CasePart = {
             kubra: Masasında bir dizüstü vardı; bizim ofistekilere benziyordu. Etiketine bakmadım, emin değilim. Ozan Bey “eski dostlar ömür boyu yeter” demişti, gülerek.
           `),
         }),
-        option('KUB_YONLENDIR', '“Ozan o dizüstüyü kullanıyordu” dersen çok iyi olur.', {
+        option('KUB_YONLENDIR', 'Mahkemede “Tarık Bey o şifreyi kimseye vermezdi” dersen işimize yarar.', {
           score: { USUL_BILGISI: -40 },
           effects: [inc('ethics')],
           bad: 'Tanığa ne söyleyeceğini telkin etmek meslek kurallarına aykırıdır; gördüğünü sorabilirsin, söyleyeceğini değil.',
           responses: B(`
-            kubra: Ben gördüğümü söylerim abla. Emin olmadığım şeyi söyleyemem. Bana ağız yapmayın lütfen.
+            kubra: Ama verirdi abla, ofiste herkes biliyordu. Ben gördüğümü söylerim. Bana ağız yapmayın lütfen.
             > Fincanını bıraktı, sandalyesini geri itti.
           `),
         }),
@@ -577,7 +578,7 @@ export const invInsanlar: CasePart = {
         sinan: Müvekkilem çok yıprandı. Bilmeni isterim. Bu bir ticari kavga değil. Bir kadının en kötü dört yılı, gece yarısı, bir yabancının telefonuna gitti.
       `),
       choices: [
-        option('SIN_KAPI', 'Müvekkilinizle, sizin aracılığınızla ve huzurunuzda görüşmek isterim.', {
+        option('SIN_KAPI', 'Melis Hanım’la sizin huzurunuzda görüşebilir miyim?', {
           score: { USUL_BILGISI: 40 },
           effects: [raise('fact_sinan_kapi')],
           good: 'Karşı tarafın avukatı varken onunla doğrudan değil, avukatı aracılığıyla temas kurulur (TBB Meslek Kuralları). Doğru kapıyı çaldın.',
@@ -587,7 +588,7 @@ export const invInsanlar: CasePart = {
             ~ Nokta. Bir avukat bana bir noktayı hediye etti.
           `),
         }),
-        option('SIN_DOGRUDAN', 'Melis Hanım’ı doğrudan arayıp konuşacağım.', {
+        option('SIN_DOGRUDAN', 'Melis Hanım’ı ben ararım; iki meslek insanı arasında, avukatsız konuşmak daha kolay olur.', {
           score: { USUL_BILGISI: -50 },
           effects: [inc('ethics'), raise('melis_dogrudan')],
           bad: 'Avukatı bulunan karşı tarafla avukatı atlanarak doğrudan görüşmek meslek kurallarına aykırıdır; katılanı etkileme girişimi gibi de algılanır.',
@@ -631,7 +632,8 @@ export const invInsanlar: CasePart = {
             ozan: Melis’in avukatı aradı, ben de bildiğimi söyledim. Ne yapayım, yalan mı söyleyeyim?
           `),
         }),
-        option('OZ_CIHAZ', 'Ofisten ayrılırken cihazları teslim ettiniz mi? Bir dizüstü sorulabilir.', {
+        option('OZ_CIHAZ', 'Ofisten ayrılırken cihazları teslim ettiniz mi?', {
+          visibleWhen: any(has('clue_dock'), has('clue_bagli_cihaz')),
           score: { SAVUNMA_STRATEJISI: -50 },
           effects: [raise('ozan_uyarildi')],
           bad: 'Savunmanın teknik teorisini, delil güvenceye alınmadan dosyanın bir tanığına açtın. Bir delil, güvenceye alınmadan önce kimseye haber verilmez.',
@@ -649,7 +651,7 @@ export const invInsanlar: CasePart = {
           `),
         }),
         back('OZ_BITIR', 'Duruşmada görüşmek üzere', {
-          responses: B(`ozan/mutlu: Ne zaman isterseniz üstat. Kapım açık. Hadi, saygılar.`),
+          responses: B(`ozan/mutlu: Ne zaman isterseniz üstat. Kapım açık, simidim taze. Hadi, kolay gelsin.`),
         }),
       ],
     }),

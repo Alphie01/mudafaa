@@ -28,7 +28,7 @@ export const scenes: CasePart = {
   scenes: [
     sceneDef('sc_ofis', {
       title: 'Aksoy Mimarlık · Eski Pirinç Han',
-      description: 'Tophane, hanın üst katı. Kemerlerin altında iki çizim masası; biri altı aydır boş.',
+      description: 'Tophane, hanın üst katı. Kemerlerin altında iki çizim masası; biri on bir aydır boş.',
       width: 344,
       height: 300,
       image: 'img_ofis',
@@ -36,20 +36,19 @@ export const scenes: CasePart = {
         sceneObject('ob_dock', 'Boş masa', OB_DOCK, {
           discovers: 'clue_dock',
           score: { ARASTIRMA: 60 },
-          text: 'Eski ortağın masası. Üstünde bir dizüstü dok istasyonu; kablosu hâlâ prizde, usulca bekliyor. Yuvanın kenarında metal bir demirbaş etiketi: “07”. Ama yuva boş. Tozun içinde dikdörtgen, temiz bir iz; bir şeyin aylarca durduğu, sonra alınıp götürüldüğü yer. Dok burada kaldı; üstündeki makine değil.',
+          text: 'Eski ortağın masasında bir dok istasyonu; kablosu hâlâ prizde. Kenarında demirbaş etiketi: “07”. Yuva boş. Tozda dikdörtgen, temiz bir iz: bir şeyin aylarca durup alındığı yer.',
           short: 'Boş dok “07”',
         }),
         sceneObject('ob_not', 'Klavye', OB_NOT, {
           discovers: 'ev_not',
           score: { ARASTIRMA: 60 },
-          text: 'Klavyeyi kaldırdım. Altında, kenarları sararmış bir yapışkan not: “WIFI: Ece2016!...” Büyük harflerle yazılmış, sonuna üç nokta konmuş. Tarık’ın kızının adı ve doğum yılı. Tarık böyle yazmaz; o küçük harfle, noktasız yazar. Bu notu başka bir el yazmış, “herkes kullansın” diye. Ve o not, aylarca burada, herkesin gözü önünde durmuş.',
+          text: 'Klavyenin altında sararmış bir not: “WIFI: Ece2016!...” Kızının adı ve doğum yılı. Büyük harf, üç nokta; Tarık böyle yazmaz. Başka bir el, “herkes kullansın” diye yazmış.',
           short: 'Yapışkan not',
         }),
         sceneObject('ob_klasor', 'Yazışmalar klasörü', OB_KLASOR, {
-          discovers: 'clue_uslup_ozan',
-          score: { ARASTIRMA: 40 },
-          text: 'Raftaki “Yazışmalar” klasörü. Sayfaları karıştırdım; çoğu sıradan ihale yazışması. Ama bir tanesi dikkatimi çekti: çıktısı alınmış bir e-posta, gönderen o.tekin. “Sn. Aksoy, ekteki keşif özetini gereğini bilgilerinize sunarım... Saygılar.” Büyük harf, üç nokta, “Saygılar.” Bir yerde, çok yakın bir yerde, bu imzayı daha yeni görmüştüm.',
-          short: 'Eski bir e-posta',
+          score: { ARASTIRMA: 20 },
+          text: 'Raftaki “Yazışmalar” klasörü. Çoğu sıradan ihale yazışması. En arkada ayrılık protokolünün kapak yazısı: “Ek: demirbaş listesi.” Ek yok. Kenarda kurşun kalemle bir not: “Asıl liste N. Sarı’da.”',
+          short: 'Protokol kapağı',
         }),
         sceneObject('ob_foto', 'Çerçeveli fotoğraf', OB_FOTO, {
           ...miss,
@@ -79,7 +78,7 @@ export const scenes: CasePart = {
         sceneObject('ob_sarj', 'Hemşire masası', OB_SARJ, {
           discovers: 'clue_sarj',
           score: { ARASTIRMA: 60 },
-          text: 'Hemşire masasının köşesinde çoklu bir şarj istasyonu, altı ağızlı. Her kablonun üstünde bir bant, bantlarda tükenmez kalemle isim ve saat yazılı. Duvarda çerçeveli bir kural: “Emanet alınan telefona isim ve saat yazılır.” Bu acil serviste her şeyin bir saati var; insanlar unutur, bantlar unutmaz. O gece de bir banda bir isim ve bir saat yazılmış olmalı.',
+          text: 'Hemşire masasında altı ağızlı bir şarj istasyonu; her kabloda isim ve saat yazılı bir bant. Duvarda kural: “Emanet telefona isim ve saat yazılır.” İnsanlar unutur, bantlar unutmaz.',
           short: 'Şarj istasyonu',
         }),
         sceneObject('ob_kamera', 'Koridor kamerası', OB_KAMERA, {
@@ -115,7 +114,7 @@ export const scenes: CasePart = {
         sceneObject('ob_koli', 'Koli', OB_KOLI, {
           discovers: 'clue_koli',
           score: { ARASTIRMA: 60 },
-          text: 'Mart’ta eski ortağın kargoyla gönderdiği koli, kapağı açık. İçinde ofis anahtarları, iki çelik cetvel, bir lazer metre, bir de dizüstü şarj aleti. Her şey tek tek sarılmış, özenle. Ama dizüstünün kendisi yok; yalnızca şarj aleti var. İnsan atacağı bir makinenin şarj aletini saklar da makineyi atar mı? Kapakta el yazısı: “Gerisi sende... Saygılar.” Yine o nokta. Yine o “Saygılar.”',
+          text: 'Mart kolisi: anahtarlar, iki cetvel, lazer metre, bir dizüstü şarj aleti. Dizüstünün kendisi yok. Şarj aleti saklanır da makine atılır mı? Kapakta: “Gerisi sende... Saygılar.”',
           short: 'Mart kolisi',
         }),
         sceneObject('ob_evmodem', 'Ev modemi', OB_EVMODEM, {

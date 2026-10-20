@@ -281,7 +281,7 @@
                     },
                     {
                       "speaker": "tarik",
-                      "text": "İki gün sonra geri aldım. Aynı zarf, aynı bant. Kim açtı, kim kapadı, bilmiyorum. Bir mimar olsam, o zarfa bakıp “bu kapı iki kez açılmış” derdim."
+                      "text": "O günden beri emanette. İki gün sonra o zarfı bir daha gördüm, imaj için götürürlerken: aynı bant, bir köşesi kalkmış. Bir mimar olarak o zarfa bakıp “bu kapı iki kez açılmış” derdim."
                     }
                   ]
                 }
@@ -864,7 +864,7 @@
             },
             {
               "speaker": "tarik",
-              "text": "Ozan’ın masası altı aydır öyle duruyor; silmeye kıyamadım, belki de temizlemek istemedim."
+              "text": "Ozan’ın masası on bir aydır öyle duruyor; silmeye kıyamadım, belki de temizlemek istemedim."
             },
             {
               "speaker": "narrator",
@@ -1066,8 +1066,12 @@
                   "text": "Çağırırlarsa gelirim. Nöbetim yoksa. Gördüğümü söylerim, gördüğümden fazlasını değil."
                 },
                 {
+                  "speaker": "gulay",
+                  "text": "Ama bakın: o bandı da, o saati de ben yazdım, imzam altında. Mahkeme kayıtları isterse, benim sözüm zaten o kâğıtta."
+                },
+                {
                   "speaker": "player",
-                  "text": "İyi. Gördüğünden fazlasını söyleyen tanık, gördüğünü de yaktırır.",
+                  "text": "İyi. Gördüğünden fazlasını söyleyen tanık, gördüğünü de yaktırır. Ve imzalı bir kâğıt, tanık kürsüsüne çıkmadan da konuşur.",
                   "style": "thought"
                 }
               ]
@@ -1350,13 +1354,13 @@
         {
           "id": "KUB_YONLENDIR",
           "kind": "OPTION",
-          "label": "“Ozan o dizüstüyü kullanıyordu” dersen çok iyi olur.",
+          "label": "Mahkemede “Tarık Bey o şifreyi kimseye vermezdi” dersen işimize yarar.",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "kubra",
-                  "text": "Ben gördüğümü söylerim abla. Emin olmadığım şeyi söyleyemem. Bana ağız yapmayın lütfen."
+                  "text": "Ama verirdi abla, ofiste herkes biliyordu. Ben gördüğümü söylerim. Bana ağız yapmayın lütfen."
                 },
                 { "speaker": "narrator", "text": "Fincanını bıraktı, sandalyesini geri itti." }
               ]
@@ -1411,7 +1415,7 @@
         {
           "id": "SIN_KAPI",
           "kind": "OPTION",
-          "label": "Müvekkilinizle, sizin aracılığınızla ve huzurunuzda görüşmek isterim.",
+          "label": "Melis Hanım’la sizin huzurunuzda görüşebilir miyim?",
           "responses": [
             {
               "lines": [
@@ -1437,7 +1441,7 @@
         {
           "id": "SIN_DOGRUDAN",
           "kind": "OPTION",
-          "label": "Melis Hanım’ı doğrudan arayıp konuşacağım.",
+          "label": "Melis Hanım’ı ben ararım; iki meslek insanı arasında, avukatsız konuşmak daha kolay olur.",
           "responses": [
             {
               "lines": [
@@ -1564,7 +1568,8 @@
         {
           "id": "OZ_CIHAZ",
           "kind": "OPTION",
-          "label": "Ofisten ayrılırken cihazları teslim ettiniz mi? Bir dizüstü sorulabilir.",
+          "label": "Ofisten ayrılırken cihazları teslim ettiniz mi?",
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_dock" }, { "hasEvidence": "clue_bagli_cihaz" }] },
           "responses": [
             {
               "lines": [
@@ -1617,7 +1622,7 @@
               "lines": [
                 {
                   "speaker": "ozan",
-                  "text": "Ne zaman isterseniz üstat. Kapım açık. Hadi, saygılar.",
+                  "text": "Ne zaman isterseniz üstat. Kapım açık, simidim taze. Hadi, kolay gelsin.",
                   "expression": "mutlu"
                 }
               ]

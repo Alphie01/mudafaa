@@ -133,7 +133,7 @@ const celse1 = [
     'H105_DEVAM',
   ),
   gokhanTam,
-  C('RQ_ATM', 'RQ_YASAK', 'RQ_BITTI', 'H107_DEVAM', 'H108_DEVAM'),
+  C('RQ_YASAK', 'RQ_BITTI', 'H107_DEVAM', 'H108_DEVAM', 'H109_A'),
 ];
 
 // --- Ara ---
@@ -156,6 +156,7 @@ const tahta2 = (necdet: boolean) => [
   C('A2_CIKARIM'),
   combine('clue_cv', 'clue_kartvizit'),
   combine('clue_iphone_imei', 'ev_hts'),
+  combine('ev_banka_log', 'clue_iphone_imei'),
   combine('clue_parlama', 'clue_lamba'),
   combine('clue_arda_otopark', 'clue_yonetim_park'),
   combine('clue_vekil_arda', 'ev_sozlesme'),
@@ -166,13 +167,13 @@ const otopark = [C('A2_OTOPARK'), tapCenter(OB_YONETIM), tapCenter(OB_KAMERA), C
 const ara2 = (third: Action[], necdet: boolean) => [
   C('A2_LEYLA', 'ARALEYLA_GERI'),
   otopark,
-  C('A2_ECE', 'EC_HATIRLA', 'EC_HAZIR', 'EC_GERI'),
+  C('A2_ECE', 'EC_HATIRLA', 'EC_SALON', 'EC_HAZIR', 'EC_GERI'),
   third,
   C('A2_BURAK', 'ABUR_A'),
   tahta2(necdet),
-  C('GO_T', 'ARASON_DEVAM'),
+  C('GO_T', 'ARASON_DEVAM', 'KOR_A', 'KOR2_DEVAM'),
 ];
-const gokhan2 = C('A2_GOKHAN', 'GK2_ZINCIR', 'GK2_IMEI', 'GK2_ATM', 'GK2_GERI');
+const gokhan2 = C('A2_GOKHAN', 'GK2_ZINCIR', 'GK2_KAYIT', 'GK2_IMEI', 'GK2_GERI');
 const nurettin2 = C('A2_NURETTIN', 'NU_ES', 'NU_FOTO', 'NU_GERI');
 
 // --- 2. celse ---
@@ -196,7 +197,7 @@ const necdetE = [
   press('N3'),
   press('N4'),
   present('ded_otopark', 'N4'),
-  C('T03T_BITIR', 'T035_A'),
+  C('T03T_BITIR', 'T035_A', 'MOLA_A'),
 ];
 const necdetB = [
   press('N1'),
@@ -205,7 +206,7 @@ const necdetB = [
   present('ded_bina', 'N2'),
   press('N3'),
   present('ded_necdet', 'N3'),
-  C('T03X_DEVAM', 'T035_A'),
+  C('T03X_DEVAM', 'T035_A', 'MOLA_B'),
 ];
 
 // --- İNDİRİM: kayıtlar istenmez, hattın ve cihazın elden çıktığı gösterilemez; terditli savunma. ---
@@ -240,19 +241,19 @@ const indirim = [
   press('G1'),
   press('G3'),
   present('ded_aldatma', 'G5'),
-  C('H105_BITIR', 'RQ_BITTI', 'H107_DEVAM', 'H108_DEVAM'),
+  C('H105_BITIR', 'RQ_BITTI', 'H107_DEVAM', 'H108_DEVAM', 'H109_C'),
   C('ARA_GIRIS_DEVAM', 'A2_ARDA', 'AR_A', 'A2_SUC', 'SUC_A', 'SUC_VER', 'A2_GOKHAN', 'GK2_ZINCIR', 'GK2_GERI'),
   C('A2_NURETTIN', 'NU_ES', 'NU_GERI', 'ARAK_B'),
   C('A2_ECE', 'EC_HAZIR', 'EC_GERI', 'A2_OTOPARK'),
   tapCenter(OB_YONETIM),
-  C('OTOPARK_BITIR', 'A2_BURAK', 'ABUR_A', 'GO_T', 'ARASON_DEVAM'),
+  C('OTOPARK_BITIR', 'A2_BURAK', 'ABUR_A', 'GO_T', 'ARASON_DEVAM', 'KOR_C', 'KOR2_DEVAM'),
   C('T00_DEVAM', 'T02_DEVAM', 'T02P_A'),
   press('O1'),
   press('O2'),
   C('T02T_BITIR', 'T03_DEVAM'),
   press('N1'),
   press('N2'),
-  C('T03T_BITIR', 'T035_C', 'T04_B', 'T045_DEVAM', 'T05_B', 'T07_C', 'T08_C'),
+  C('T03T_BITIR', 'T035_C', 'MOLA_B', 'T04_B', 'T045_DEVAM', 'T05_B', 'T07_C', 'T08_C'),
 ];
 
 // --- MAHKÛMİYET: sert tonlar, eksik araştırma, dayanaksız itirazlar, duygusal savunma. ---
@@ -285,20 +286,20 @@ const mahkumiyet = [
   press('G1'),
   press('G2'),
   press('G4'),
-  C('H105_BITIR', 'RQ_BERAAT', 'RQ_BITTI', 'H107_DEVAM', 'H108_DEVAM'),
+  C('H105_BITIR', 'RQ_BERAAT', 'RQ_BITTI', 'H107_DEVAM', 'H108_DEVAM', 'H109_B'),
   C('ARA_GIRIS_DEVAM', 'A2_SUC', 'SUC_B', 'SUC_VER', 'A2_GOKHAN', 'GK2_ZINCIR', 'GK2_IMEI', 'GK2_GERI'),
   C('A2_NURETTIN', 'NU_ES', 'NU_GERI', 'A2_ECE', 'EC_HATIRLA', 'EC_HAZIR', 'EC_GERI', 'ARAK2_DEVAM'),
   C('A2_BURAK', 'ARABURAK_GERI', 'A2_ARDA', 'AR_B', 'A2_OTOPARK'),
   tapCenter(OB_KAMERA),
   tap(5, 290),
-  C('OTOPARK_BITIR', 'GO_T', 'ARASON_DEVAM'),
+  C('OTOPARK_BITIR', 'GO_T', 'ARASON_DEVAM', 'KOR_B', 'KOR2_DEVAM'),
   C('T00_DEVAM', 'T02_DEVAM', 'T02P_C'),
   press('O1'),
   press('O3'),
   C('T02T_BITIR', 'T03_DEVAM'),
   press('N1'),
   press('N3'),
-  C('T03T_BITIR', 'T035_B', 'T04_D', 'T045_DEVAM', 'T05_C', 'T07_D', 'T08_B'),
+  C('T03T_BITIR', 'T035_B', 'MOLA_A', 'T04_D', 'T045_DEVAM', 'T05_C', 'T07_D', 'T08_B'),
 ];
 
 // --- ETİK: Burak'ın yetkisiz bayi kaydı alınır ve duruşmada sunulur. ---
@@ -335,10 +336,12 @@ const celse1etik = [
   ),
   press('G1'),
   present('ev_banka_log', 'G1'),
+  press('G2'),
+  present('ded_dongu', 'G2'),
   press('G3'),
   present('ev_bayi_ekran', 'G3'),
   present('ev_sim_dokum', 'G3'),
-  C('H105_BITIR', 'RQ_ATM', 'RQ_BITTI', 'H107_DEVAM', 'H108_DEVAM'),
+  C('H105_BITIR', 'RQ_BITTI', 'H107_DEVAM', 'H108_DEVAM', 'H109_A'),
 ];
 
 // --- ÇÖKÜŞ (W): Ece kodu hiç anlatmaz; müdafi onu kürsüde kendi deliliyle yalanlar, ikinci celsede yanlış
@@ -364,7 +367,7 @@ const celse1w = [
   press('G3'),
   present('ev_sim_dokum', 'G3'),
   present('ded_aldatma', 'G5'),
-  C('H105_BITIR', 'RQ_ATM', 'RQ_BITTI', 'H107_DEVAM', 'H108_DEVAM'),
+  C('H105_BITIR', 'RQ_BITTI', 'H107_DEVAM', 'H108_DEVAM', 'H109_A'),
 ];
 const cokus = [
   C('T00_DEVAM', 'T01_DEVAM', 'T01Q_A', 'T01Q_BITTI', 'T02_DEVAM', 'T02P_C'),
@@ -399,7 +402,7 @@ const ara2OmYok = [
   combine('clue_iphone_imei', 'ev_hts'),
   combine('clue_parlama', 'clue_lamba'),
   combine('clue_arda_otopark', 'clue_yonetim_park'),
-  C('ARA_CIKARIM_BITIR', 'GO_T', 'ARASON_DEVAM'),
+  C('ARA_CIKARIM_BITIR', 'GO_T', 'ARASON_DEVAM', 'KOR_A', 'KOR2_DEVAM'),
 ];
 const necdetE2 = [
   press('N1'),
@@ -410,7 +413,7 @@ const necdetE2 = [
   present('ev_imei_rapor', 'N3'),
   press('N4'),
   present('ded_otopark', 'N4'),
-  C('T03T_BITIR', 'T035_A'),
+  C('T03T_BITIR', 'T035_A', 'MOLA_A'),
 ];
 
 export const tests: CasePart = {
@@ -462,10 +465,25 @@ export const tests: CasePart = {
         C('T04_A', 'T045_DEVAM', 'T05_B', 'T07_B', 'T08_A'),
       ),
       goldenPath('G_I', { outcome: 'INDIRIM', finalMin: 3985, finalMax: 4405 }, indirim),
-      goldenPath('G_M', { outcome: 'MAHKUMIYET', finalMin: 432, finalMax: 478 }, mahkumiyet),
+      goldenPath('G_M', { outcome: 'MAHKUMIYET', finalMin: 366, finalMax: 404 }, mahkumiyet),
+      goldenPath(
+        'G_ETIK2',
+        { outcome: 'ETIK', finalMin: 220, finalMax: 250 },
+        (mahkumiyet.flat(3) as Action[]).flatMap((x) =>
+          x.kind !== 'CHOOSE'
+            ? [x]
+            : x.choiceId === 'BUR_GERI'
+              ? C('BUR_TEKLIF', 'BURT_KABUL')
+              : x.choiceId === 'T07_D'
+                ? C('COKUS_SON')
+                : x.choiceId === 'T08_B'
+                  ? []
+                  : [x],
+        ),
+      ),
       goldenPath(
         'G_ETIK',
-        { outcome: 'ETIK', finalMin: 8298, finalMax: 9172 },
+        { outcome: 'ETIK_BERAAT', finalMin: 9339, finalMax: 10322 },
         intro('STR_MASUMIYET'),
         gun1,
         gun2,
@@ -475,13 +493,12 @@ export const tests: CasePart = {
         ara2(gokhan2, false),
         arda,
         onurTam,
-        present('ev_bayi_ekran', 'N1'),
         necdetE,
         C('T04_A', 'T045_DEVAM', 'T05_A', 'T07_B', 'T08_A'),
       ),
       goldenPath(
         'W',
-        { outcome: 'MAHKUMIYET', finalMin: 5462, finalMax: 6038 },
+        { outcome: 'MAHKUMIYET', finalMin: 5814, finalMax: 6426 },
         intro('STR_USUL'),
         gun1w,
         gun2,

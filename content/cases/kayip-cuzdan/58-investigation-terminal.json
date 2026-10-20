@@ -51,6 +51,7 @@
           "next": "$stay",
           "responses": [
             {
+              "when": { "hasEvidence": "clue_sari_not" },
               "lines": [
                 {
                   "speaker": "narrator",
@@ -65,6 +66,25 @@
                 {
                   "speaker": "player",
                   "text": "Dokuz. “Yarın 9 — karakol.” Arda o saati bir yerden duymuştu. Ya da öyle bir saat, bir öğretmen adayına doğru gelmişti.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "name": "BÜRO MEMURU",
+                  "text": "Dokuzda. Cumartesi de dokuzda, öğlene kadar. Kapıda yazıyor ama kimse okumaz."
+                },
+                {
+                  "speaker": "narrator",
+                  "name": "BÜRO MEMURU",
+                  "text": "Cuma akşamı bulan cumartesi dokuzda gelir, öyle bir alışkanlık var. Polise götüren de olur, buraya getiren de. İkisi de olur."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Dokuz. Cumartesi sabahı, kapının açıldığı saat. Bir cüzdan bulan bir öğretmen adayı için de doğru bir saat olabilirdi. Not defterime yazdım.",
                   "style": "thought"
                 }
               ]

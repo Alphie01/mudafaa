@@ -37,26 +37,24 @@ Camlar buğulanmıştı. Biri parmağıyla bir pencere açmış, dışarıda aka
 Validatör her binişte bip diye öttü. Bip. Bip. Bir şehir eve dönüyordu.
 Altıparmak’tan sonra kalabalık seyreldi. Orta kapının önündeki yığın dağıldı; tutunma direkleri yeniden göründü.
 Açık gri bir sweatshirt giymiş bir genç, arka kapının önünde boşalan koltuğa oturdu. Kapüşonu sırtındaydı. Kulağında beyaz bir kulaklık.
-Bacaklarını uzattı. Ayakkabısının ucu koltuğun altında bir şeye takıldı.
-Eğildi. Elini karanlığa soktu ve kahverengi, eskimiş, kenarları yumuşamış deri bir cüzdan çıkardı.
+Buğulu camın yansımasında yalnızca bir siluet kalıyordu: bir omuz, bir kapüşon, öne eğilen bir baş.
+Siluet eğildi. Bir süre öyle kaldı. Doğrulduğunda elinde bir şey vardı; avucunun içine sığan, koyu renk bir şey.
 Bir an öyle tuttu onu. Sanki elinde canlı bir şey varmış gibi.
-Açtı. Bir kimlik kartı. Bir sağlık kartı. Katlanmış bir eczane fişi. Siyah beyaz, kenarı sararmış bir fotoğraf: üniformalı bir adam, gülümsüyor.
-Para gözü yoktu. Kart yuvaları boştu.
 Genç başını kaldırdı. Önüne, arkasına baktı. Yanındaki koltukta biri telefonuna eğilmişti. Ön taraf ıslak paltolardan bir duvardı.
 Tavanda, arka kapının üstünde küçük siyah bir kubbe vardı. Kubbenin içinde kırmızı bir nokta yanıyordu. [flash]
 Kimse bakmıyordu. Kamera bakıyordu.
-Genç cüzdanı kapattı. Sırt çantasının fermuarını açtı.
+Bir fermuar sesi. Bir sırt çantası kapandı. Otobüs bir sonraki durağa doğru ağır ağır kıpırdadı.
 # sokak_yagmur | 18.49 — ALTIPARMAK
 Durağın kırk adım ötesinde bir tekel büfesi. Tentenin kenarından su şakır şakır akıyordu. Radyoda maç anlatıcısı bağırıyordu.
-@TEZGÂHTAKİ SES: Sigara, iki şarj kablosu, bir de çakmak. Toplam yedi yüz kırk, abla.
+@TEZGÂHTAKİ SES: Sigara, iki şarj kablosu, bir de çakmak. Toplam yedi yüz kırk.
 @BİR SES: Üçe böl.
 @TEZGÂHTAKİ SES: Hı?
 @BİR SES: Ayrı ayrı çek. Üç kere.
-Islak bir eldiven tezgâha bir kart koydu. Bir berenin ucundan kartın üstüne bir damla su düştü.
-@TEZGÂHTAKİ SES: Zengin misin abla, üç ayrı çekiyorsun? Şifreyle tek seferde geçsin işte.
+Islak bir eldiven tezgâha bir kart koydu. Eldivenin parmak uçlarından cama damlalar düştü.
+@TEZGÂHTAKİ SES: Zengin misin, üç ayrı çekiyorsun? Şifreyle tek seferde geçsin işte.
 @BİR SES: Şifremi unuttum.
 Bip. Bip. Bip. Cihaz her seferinde onay verdi. Kimse kartın üstündeki ada bakmadı.
-Eldiven poşeti aldı, yağmura çıktı. Tezgâhtaki adam fişlerden birini çevirdi, arkasına kurşun kalemle bir şey karaladı ve kutuya attı.
+Eldiven poşeti aldı, yağmura çıktı. Radyoda bir gol oldu; tezgâhtaki ses sevinmedi bile.
 # sokak_sabah | 7 MART · CUMARTESİ 08.15 — GÖRÜKLE, BİR ÖĞRENCİ EVİ
 Kapı üç kez, sertçe vuruldu. [shake]
 Uykulu bir ev arkadaşı kapıyı araladı. Karşısında iki polis memuru vardı. Yağmurluklarından damlayan su paspasa iz yapıyordu.
@@ -200,16 +198,16 @@ leyla: Bu cümleyi unutma. Savcılığın kendi dosyasında, kartları kullanan�
 
     story('BR_01B', {
       ...BRIEF,
-      title: 'Eksik dakika',
+      title: 'İki buçuk dakika',
       background: 'buro_gece',
       lines: B(`
 Leyla çayını yarısına kadar içti, gerisini bıraktı. Otuz yıldır hiçbir çayı bitirmediğini söylerler.
-leyla: Savcılığın elinde ne var, biliyor musun? İki buçuk dakikalık bir CD. Bir çocuğun yerden cüzdan alıp çantasına koyduğu iki buçuk dakika.
+leyla: Savcılığın elinde ne var, biliyor musun? İki buçuk dakikalık bir CD. Bir çocuğun bir cüzdanı alıp çantasına koyduğu iki buçuk dakika.
 leyla: Bir de bir tanık. Bir de çantada bulunan bir cüzdan. Hepsi bu. Ama bir hâkim için bazen bu kadarı yeter.
 P: CD neyi göstermiyor?
 leyla.mutlu: İşte doğru soru.
 leyla: Bir kayıt, gösterdiği şey kadar göstermediği şeyle de konuşur. Kim çekmiş, ne kadarını vermiş, öncesi nerede, sonrası nerede?
-leyla: Kural şu, Deniz: kayıt eksikse hüküm de eksiktir. Eksik dakikayı bul.
+leyla: Kaydın öncesine, sonrasına ve köşedeki rakamlara bak. Ne gösterdiğini değil, neyi göstermediğini say. Bir dosya bazen bir dipnotta saklanır.
 leyla: Bir de kartlar var. Biri o akşam bir yaşlı kadının kartlarıyla alışveriş yapmış. Dosya “faili belirlenemedi” diyor. Belirlenemeyen bir fail, belirlenmiş bir sanıktan daha hafif değildir.
 Ayağa kalktı. Kapıda durdu, dönmeden konuştu.
 leyla: Bir de… çocuğa “neden polise gitmedin” diye sorduğunda cevabı hemen gelmezse, bekle. Bazı cevaplar utançla gelir.
@@ -243,7 +241,7 @@ leyla: Bir de… çocuğa “neden polise gitmedin” diye sorduğunda cevabı h
         {
           type: 'paragraph',
           title: 'OLAY ÖZETİ',
-          text: '6 Mart 18.31–18.46 arasında Hat 38’de Gülten Sarı’nın (67) cüzdanı çalındı; kartlarıyla 18.49–19.06 arasında 2.940 TL harcandı. CD kaydında sanık 18.42’de yerden bir cüzdan alıp çantasına koyuyor. Cüzdan ertesi sabah sanığın evinde bulundu. Sanık: “Buldum, teslim edecektim.”',
+          text: '6 Mart 18.31–18.46 arasında Hat 38’de Gülten Sarı’nın (67) cüzdanı çalındı; kartlarıyla 18.49–19.06 arasında 2.940 TL harcandı. CD kaydında sanık 18.42’de bir cüzdanı alıp çantasına koyuyor. Cüzdan ertesi sabah sanığın evinde bulundu. Sanık: “Buldum, teslim edecektim.”',
         },
         {
           type: 'strengthList',

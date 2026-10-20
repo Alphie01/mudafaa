@@ -119,8 +119,9 @@ export const meta: CasePart = {
     },
     {
       id: 'ayrilis',
-      label: 'Sanığın 10.35’te odasından ayrıldığı duruşmada gösterildi (takvim, santral ya da kamera)',
-      when: any(flag('q_takvim'), flag('contra_s2'), flag('kamera_b3')),
+      label:
+        'Sanığın 10.35’te makamdan geldiği izlenimi veren sahte bir çağrıyla odasından ayrıldığı duruşmada gösterildi (takvim ya da santral)',
+      when: any(flag('q_takvim'), flag('contra_s2')),
     },
     {
       id: 'zarf_suphe',
@@ -133,8 +134,15 @@ export const meta: CasePart = {
       when: all(flag('contra_b1'), flag('contra_b2')),
     },
     {
+      id: 'kolluk_coktu',
+      label:
+        'Komiserin “kendiliğinden geldi, parayı kendisi getirdi” ve “şüpheli başındayken” anlatıları belgeyle çürütüldü',
+      when: all(flag('contra_k2'), any(flag('contra_k3'), flag('k3_kismi'))),
+    },
+    {
       id: 'beraat_kosul',
-      label: 'Kayıtlar ayıklandı, zarfın sanık yokken girdiği gösterildi ve muhbirin anlaşma anlatısı çöktü',
+      label:
+        'İddianın üç ayağı da düştü: kayıtlar ayıklandı, kolluğun ve muhbirin anlatıları çöktü, zarfın sanık yokken girdiği gösterildi',
       when: all(ref('kayit_disi'), ref('zarf_suphe'), ref('muhbir_coktu')),
     },
   ],

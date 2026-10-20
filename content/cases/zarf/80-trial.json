@@ -672,9 +672,31 @@
           ]
         },
         {
+          "id": "PS_B1_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "B1", "evidence": ["ded_yetkisiz"] },
+          "enabledWhen": { "not": { "flag": "press_b1" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_B1",
           "kind": "PRESENT",
           "match": { "statement": "B1", "evidence": ["ded_yetkisiz"] },
+          "enabledWhen": { "flag": "press_b1" },
           "responses": [
             {
               "lines": [
@@ -737,9 +759,31 @@
           ]
         },
         {
+          "id": "PS_B2_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "B2", "evidence": ["ded_iki_hikaye"] },
+          "enabledWhen": { "not": { "flag": "press_b2" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_B2",
           "kind": "PRESENT",
           "match": { "statement": "B2", "evidence": ["ded_iki_hikaye"] },
+          "enabledWhen": { "flag": "press_b2" },
           "responses": [
             {
               "lines": [
@@ -820,9 +864,31 @@
           ]
         },
         {
+          "id": "PS_B3_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "B3", "evidence": ["ded_bos_oda", "ev_kamera"] },
+          "enabledWhen": { "not": { "flag": "press_b3" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_B3",
           "kind": "PRESENT",
           "match": { "statement": "B3", "evidence": ["ded_bos_oda", "ev_kamera"] },
+          "enabledWhen": { "flag": "press_b3" },
           "responses": [
             {
               "when": { "hasEvidence": "clue_kare_saat" },
@@ -902,11 +968,32 @@
           ]
         },
         {
+          "id": "PS_B4_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "B4", "evidence": ["ev_cihaz"] },
+          "enabledWhen": { "not": { "flag": "press_b4" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_B4",
           "kind": "PRESENT",
           "match": { "statement": "B4", "evidence": ["ev_cihaz"] },
           "visibleWhen": { "hasEvidence": "clue_manuel" },
-          "enabledWhen": { "hasEvidence": "clue_manuel" },
+          "enabledWhen": { "all": [{ "hasEvidence": "clue_manuel" }, { "flag": "press_b4" }] },
           "responses": [
             {
               "when": { "hasEvidence": "clue_fisilti" },
@@ -1010,9 +1097,31 @@
           ]
         },
         {
+          "id": "PS_B5_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "B5", "evidence": ["ded_tek_kisi", "ded_zarf_kaynagi", "ded_kameradaki"] },
+          "enabledWhen": { "not": { "flag": "press_b5" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_B5",
           "kind": "PRESENT",
           "match": { "statement": "B5", "evidence": ["ded_tek_kisi", "ded_zarf_kaynagi", "ded_kameradaki"] },
+          "enabledWhen": { "flag": "press_b5" },
           "responses": [
             {
               "lines": [
@@ -1091,8 +1200,59 @@
             { "type": "MARK", "quality": "BAD", "feedback": "Dayanaksız itiraz.", "category": "SORGULAMA" }
           ]
         },
-        { "id": "T01T_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "T_02R" }
+        { "id": "T01T_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "T_01K" }
       ]
+    },
+    {
+      "id": "T_01K",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "contra_b4" }, { "flag": "kamera_b3" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Bayram kürsüden inerken salonun arka sırasında bir sandalye gıcırdadı. Komiser Levent Arı ayağa kalkmıştı; sonra kalktığını fark edip yeniden oturdu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Kenan Yavuz başını çevirdi, ona baktı. Uzun değil; bir tutanağın bir satırını okuyacak kadar. Komiser gözlerini kaçırmadı, ama elleri dizlerinin üstünde birbirini buldu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bir kamera karesi, bir cihaz raporu, bir tutanak. Üçü de aynı on dakikayı anlatıyordu; yalnızca kolluğun anlatısı başka bir on dakikadan söz ediyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir operasyonu ders kitabı gibi anlatmıştı. Ders kitapları da yanlış basılır. Düzeltmeyi kimin yazacağı ise ayrı bir sorudur.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Halil önündeki kâğıtların kenarını hizaladı; bu sefer elleri titremedi. Zehra arka sırada, bir hemşirenin nabız sayarken yaptığı gibi, dudaklarını kıpırdatmadan saniyeleri sayıyordu."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "contra_b4" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Bayram kürsüden inerken Komiser Levent Arı arka sırada kollarını kavuşturdu. Cihazı muhbirin yakasına kendisi takmıştı; “teknik arıza” diye kendisi yazmıştı."
+            },
+            { "speaker": "narrator", "text": "Savcı ona bakmadı. Bakmaması, bakmasından daha çok şey söylüyordu." },
+            {
+              "speaker": "player",
+              "text": "Bir cihaz, onu taşıyandan daha dürüst bir tanıktır demiştim. Bugün cihaz konuştu; taşıyan sustu.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_02R" }],
+      "choices": []
     },
     {
       "id": "T_02R",
@@ -1348,9 +1508,31 @@
           ]
         },
         {
+          "id": "PS_S1_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "S1", "evidence": ["ded_alibi", "ded_kameradaki"] },
+          "enabledWhen": { "not": { "flag": "press_s1" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_S1",
           "kind": "PRESENT",
           "match": { "statement": "S1", "evidence": ["ded_alibi", "ded_kameradaki"] },
+          "enabledWhen": { "flag": "press_s1" },
           "responses": [
             {
               "lines": [
@@ -1401,10 +1583,36 @@
           ]
         },
         {
+          "id": "PS_S2_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "S2", "evidence": ["ev_santral", "ded_tek_kisi", "ded_sahte_cagri"] },
+          "enabledWhen": { "not": { "flag": "press_s2" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_S2",
           "kind": "PRESENT",
           "match": { "statement": "S2", "evidence": ["ev_santral", "ded_tek_kisi", "ded_sahte_cagri"] },
-          "enabledWhen": { "any": [{ "hasEvidence": "clue_214_cagri" }, { "hasEvidence": "ded_tek_kisi" }] },
+          "enabledWhen": {
+            "all": [
+              { "any": [{ "hasEvidence": "clue_214_cagri" }, { "hasEvidence": "ded_tek_kisi" }] },
+              { "flag": "press_s2" }
+            ]
+          },
           "responses": [
             {
               "lines": [
@@ -1465,9 +1673,31 @@
           ]
         },
         {
+          "id": "PS_S3_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "S3", "evidence": ["ded_zarf_kaynagi"] },
+          "enabledWhen": { "not": { "flag": "press_s3" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_S3",
           "kind": "PRESENT",
           "match": { "statement": "S3", "evidence": ["ded_zarf_kaynagi"] },
+          "enabledWhen": { "flag": "press_s3" },
           "responses": [
             {
               "lines": [
@@ -1542,9 +1772,31 @@
           ]
         },
         {
+          "id": "PS_S4_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "S4", "evidence": ["ev_kirmizi_defter", "ded_hedef"] },
+          "enabledWhen": { "not": { "flag": "press_s4" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_S4",
           "kind": "PRESENT",
           "match": { "statement": "S4", "evidence": ["ev_kirmizi_defter", "ded_hedef"] },
+          "enabledWhen": { "flag": "press_s4" },
           "responses": [
             {
               "lines": [
@@ -2127,7 +2379,7 @@
         {
           "id": "T04_A",
           "kind": "OPTION",
-          "label": "İrtikap icbar ister; dosya sanığın masasında değildi, muhbir de iki ayrı hikâye anlattı.",
+          "label": "İrtikap icbar ister; dosya sanığın masasında değildi, muhbir iki hikâye anlattı.",
           "responses": [
             {
               "when": { "all": [{ "hasEvidence": "ded_yetkisiz" }, { "hasEvidence": "ded_iki_hikaye" }] },
@@ -2378,13 +2630,20 @@
       "lines": [
         {
           "when": {
-            "any": [
-              { "flag": "sinan_ifsa" },
+            "all": [
+              { "ref": "kayit_disi" },
+              { "ref": "oda_bos" },
               {
-                "all": [
-                  { "flag": "bayram_ifsa" },
-                  { "not": { "flag": "etki_bayram" } },
-                  { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                "any": [
+                  { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                  {
+                    "all": [
+                      { "flag": "bayram_ifsa" },
+                      { "not": { "flag": "etki_bayram" } },
+                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                      { "ref": "muhbir_coktu" }
+                    ]
+                  }
                 ]
               }
             ]
@@ -2461,7 +2720,7 @@
         {
           "id": "T05_A",
           "kind": "OPTION",
-          "label": "Zarf çekmeceye sanık odasında değilken girdi; bu bir varsayım değil, tutanağın kendi saatleri.",
+          "label": "Zarf çekmeceye sanık yokken girdi; bunu tutanağın kendi saatleri söylüyor.",
           "responses": [
             {
               "lines": [
@@ -2572,13 +2831,20 @@
           "visibleWhen": {
             "any": [
               {
-                "any": [
-                  { "flag": "sinan_ifsa" },
+                "all": [
+                  { "ref": "kayit_disi" },
+                  { "ref": "oda_bos" },
                   {
-                    "all": [
-                      { "flag": "bayram_ifsa" },
-                      { "not": { "flag": "etki_bayram" } },
-                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                    "any": [
+                      { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                      {
+                        "all": [
+                          { "flag": "bayram_ifsa" },
+                          { "not": { "flag": "etki_bayram" } },
+                          { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                          { "ref": "muhbir_coktu" }
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -2612,13 +2878,20 @@
               "when": {
                 "all": [
                   {
-                    "any": [
-                      { "flag": "sinan_ifsa" },
+                    "all": [
+                      { "ref": "kayit_disi" },
+                      { "ref": "oda_bos" },
                       {
-                        "all": [
-                          { "flag": "bayram_ifsa" },
-                          { "not": { "flag": "etki_bayram" } },
-                          { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                        "any": [
+                          { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                          {
+                            "all": [
+                              { "flag": "bayram_ifsa" },
+                              { "not": { "flag": "etki_bayram" } },
+                              { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                              { "ref": "muhbir_coktu" }
+                            ]
+                          }
                         ]
                       }
                     ]
@@ -2639,13 +2912,20 @@
             },
             {
               "when": {
-                "any": [
-                  { "flag": "sinan_ifsa" },
+                "all": [
+                  { "ref": "kayit_disi" },
+                  { "ref": "oda_bos" },
                   {
-                    "all": [
-                      { "flag": "bayram_ifsa" },
-                      { "not": { "flag": "etki_bayram" } },
-                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                    "any": [
+                      { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                      {
+                        "all": [
+                          { "flag": "bayram_ifsa" },
+                          { "not": { "flag": "etki_bayram" } },
+                          { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                          { "ref": "muhbir_coktu" }
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -2677,13 +2957,20 @@
               "when": {
                 "all": [
                   {
-                    "any": [
-                      { "flag": "sinan_ifsa" },
+                    "all": [
+                      { "ref": "kayit_disi" },
+                      { "ref": "oda_bos" },
                       {
-                        "all": [
-                          { "flag": "bayram_ifsa" },
-                          { "not": { "flag": "etki_bayram" } },
-                          { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                        "any": [
+                          { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                          {
+                            "all": [
+                              { "flag": "bayram_ifsa" },
+                              { "not": { "flag": "etki_bayram" } },
+                              { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                              { "ref": "muhbir_coktu" }
+                            ]
+                          }
                         ]
                       }
                     ]
@@ -2917,13 +3204,20 @@
             "all": [
               { "chosen": "T07_A" },
               {
-                "any": [
-                  { "flag": "sinan_ifsa" },
+                "all": [
+                  { "ref": "kayit_disi" },
+                  { "ref": "oda_bos" },
                   {
-                    "all": [
-                      { "flag": "bayram_ifsa" },
-                      { "not": { "flag": "etki_bayram" } },
-                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                    "any": [
+                      { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                      {
+                        "all": [
+                          { "flag": "bayram_ifsa" },
+                          { "not": { "flag": "etki_bayram" } },
+                          { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                          { "ref": "muhbir_coktu" }
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -2971,13 +3265,20 @@
             "all": [
               { "chosen": "T07_A" },
               {
-                "any": [
-                  { "flag": "sinan_ifsa" },
+                "all": [
+                  { "ref": "kayit_disi" },
+                  { "ref": "oda_bos" },
                   {
-                    "all": [
-                      { "flag": "bayram_ifsa" },
-                      { "not": { "flag": "etki_bayram" } },
-                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                    "any": [
+                      { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                      {
+                        "all": [
+                          { "flag": "bayram_ifsa" },
+                          { "not": { "flag": "etki_bayram" } },
+                          { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                          { "ref": "muhbir_coktu" }
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -3068,13 +3369,20 @@
             "all": [
               { "chosen": "T07_A" },
               {
-                "any": [
-                  { "flag": "sinan_ifsa" },
+                "all": [
+                  { "ref": "kayit_disi" },
+                  { "ref": "oda_bos" },
                   {
-                    "all": [
-                      { "flag": "bayram_ifsa" },
-                      { "not": { "flag": "etki_bayram" } },
-                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                    "any": [
+                      { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                      {
+                        "all": [
+                          { "flag": "bayram_ifsa" },
+                          { "not": { "flag": "etki_bayram" } },
+                          { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                          { "ref": "muhbir_coktu" }
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -3237,7 +3545,7 @@
         {
           "id": "T08_A",
           "kind": "OPTION",
-          "label": "“Bir kez eğildim; bir iyilik için. O zarf benim değil. Kayda geçsin.”",
+          "label": "“Bir kez eğildim, bir iyilik için. O zarf benim değil.”",
           "responses": [
             {
               "lines": [
@@ -3263,7 +3571,7 @@
             "feedback": "Kısa, dürüst ve kendi eğilişini de gören bir son söz.",
             "category": "SAVUNMA_STRATEJISI"
           },
-          "next": "T_09"
+          "next": "T_08K"
         },
         {
           "id": "T08_B",
@@ -3284,7 +3592,7 @@
             "q": "NEUTRAL",
             "feedback": "Son söz sanığın hakkıdır (CMK 216/3); içeriği hükmü kendiliğinden değiştirmez."
           },
-          "next": "T_09"
+          "next": "T_08K"
         },
         {
           "id": "T08_C",
@@ -3311,9 +3619,80 @@
             "q": "NEUTRAL",
             "feedback": "Son sözde cezaya razı olmak, suçu kabul gibi okunabilir; heyet bunu dikkate alabilir."
           },
-          "next": "T_09"
+          "next": "T_08K"
         }
       ]
+    },
+    {
+      "id": "T_08K",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "bayram_ifsa" }, { "not": { "flag": "etki_bayram" } }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Müzakere için ara verildiğinde koridorun öbür ucunda Bayram Öz’ü gördüm. Adli yardımdan genç meslektaşı yanındaydı; bir şeyler anlatıyor, Bayram başını sallıyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tespihi elindeydi ama çekmiyordu. Bir kez bana baktı; sonra gözlerini yere indirdi. Bugün ilk kez doğruyu söylemişti; doğrunun bir bedeli olacaktı ve bunu ondan iyi bilen yoktu."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir tanığı yıkmak, bir sanığı kurtarmak değildir. Leyla haklıydı. Yıkıntının altından bir takipçi çıktı; borçlu, korkmuş, yalnız.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "contra_b4" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Müzakere için ara verildiğinde koridor boşaldı. Muhbir merdivenlere yürüdü; tek başına, tespihini cebinde sıkarak. Kimse onu durdurmadı, kimse ona eşlik etmedi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Komiser Levent Arı pencerenin önündeydi. Bilirkişi raporunun fotokopisi elindeydi; katlamış, yeniden açmıştı. Tutanağın altındaki imza onundu. Raporun altındaki imza bir cihazın."
+            },
+            {
+              "speaker": "player",
+              "text": "“Tutanak senin vicdanındır” demişti oğluna. Bugün vicdanının bir satırı eksik çıktı. Bunu ona ben söylemedim; bir tuş söyledi.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Halil sandalyesinden kalktı, pencereye, komiserin iki adım yanına yürüdü. Bir an yan yana durdular; biri yirmi yedi yıllık bir memur, öbürü yirmi yıllık bir polis."
+            },
+            {
+              "speaker": "halil",
+              "text": "Komiser bey. Tutanağınız düzgündü. Saatleri doğru yazmışsınız. Okumayan siz değildiniz; okumak istemeyen herkesti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Komiser cevap vermedi. Ama fotokopiyi katladı ve cebine koydu; bir kez daha açmadı."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Müzakere için ara verildiğinde koridor boşaldı. Muhbir merdivenlere yürüdü; tek başına. Komiser telefonuyla konuşuyordu, sırtı bize dönük."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir dosyanın sonunda herkes bir yere bakar. Kimse aynı yere bakmaz.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_09" }],
+      "choices": []
     },
     {
       "id": "T_09",

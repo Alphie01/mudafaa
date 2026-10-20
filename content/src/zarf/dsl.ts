@@ -123,3 +123,18 @@ export const typography = (parts: CaseParts): CaseParts => deep(parts) as CasePa
 
 /** Düz ASCII '-' yerine eksi işareti (U+2212) ile skor etiketi. */
 export const minus = (n: number): string => `−${n}`;
+
+/** Boş ziyaret yok: çıkış seçeneği, ziyarette en az bir şey yapılana dek kilitli kalır. */
+export const askedOne = (...topicIds: string[]): Cond => ({ any: topicIds.map((id) => ({ chosen: id })) });
+export const ASKED_REASON = 'Buraya bir eylem puanı harcadın; çıkmadan en az bir şey sor.';
+export const LOOKED_REASON = 'Çıkmadan en az bir ayrıntıya bak.';
+
+/** Bir node'un `id` kimlikli seçeneğine kilit koşulu ekler (kit'in `finish` alanı koşul almadığı için). */
+export function gateChoice<T extends { choices: readonly { id: string }[] }>(
+  node: T,
+  id: string,
+  enabledWhen: Cond,
+  lockedReason: string,
+): T {
+  return { ...node, choices: node.choices.map((ch) => (ch.id === id ? { ...ch, enabledWhen, lockedReason } : ch)) };
+}

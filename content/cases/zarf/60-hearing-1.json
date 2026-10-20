@@ -1283,11 +1283,32 @@
           ]
         },
         {
+          "id": "PS_K3_P_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "K3", "evidence": ["ev_tutanak"] },
+          "enabledWhen": { "not": { "flag": "press_k3" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_K3_P",
           "kind": "PRESENT",
           "match": { "statement": "K3", "evidence": ["ev_tutanak"] },
           "visibleWhen": { "hasEvidence": "clue_saat_tutanak" },
-          "enabledWhen": { "hasEvidence": "clue_saat_tutanak" },
+          "enabledWhen": { "all": [{ "hasEvidence": "clue_saat_tutanak" }, { "flag": "press_k3" }] },
           "responses": [
             {
               "lines": [
@@ -1371,9 +1392,31 @@
           ]
         },
         {
+          "id": "PS_K1_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "K1", "evidence": ["ded_sure_disi"] },
+          "enabledWhen": { "not": { "flag": "press_k1" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_K1",
           "kind": "PRESENT",
           "match": { "statement": "K1", "evidence": ["ded_sure_disi"] },
+          "enabledWhen": { "flag": "press_k1" },
           "responses": [
             {
               "lines": [
@@ -1434,9 +1477,31 @@
           ]
         },
         {
+          "id": "PS_K2_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "K2", "evidence": ["ev_para"] },
+          "enabledWhen": { "not": { "flag": "press_k2" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_K2",
           "kind": "PRESENT",
           "match": { "statement": "K2", "evidence": ["ev_para"] },
+          "enabledWhen": { "flag": "press_k2" },
           "responses": [
             {
               "lines": [
@@ -1495,9 +1560,31 @@
           ]
         },
         {
+          "id": "PS_K3_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "K3", "evidence": ["ded_bos_oda"] },
+          "enabledWhen": { "not": { "flag": "press_k3" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_K3",
           "kind": "PRESENT",
           "match": { "statement": "K3", "evidence": ["ded_bos_oda"] },
+          "enabledWhen": { "flag": "press_k3" },
           "responses": [
             {
               "lines": [
@@ -1603,9 +1690,31 @@
           ]
         },
         {
+          "id": "PS_K5_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "K5", "evidence": ["ded_hat_disi"] },
+          "enabledWhen": { "not": { "flag": "press_k5" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_K5",
           "kind": "PRESENT",
           "match": { "statement": "K5", "evidence": ["ded_hat_disi"] },
+          "enabledWhen": { "flag": "press_k5" },
           "responses": [
             {
               "lines": [

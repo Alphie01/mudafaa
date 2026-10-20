@@ -1114,7 +1114,15 @@
             { "type": "VAR", "var": "fact_ev_ziyaret", "op": "set", "value": true }
           ]
         },
-        { "id": "ZEH_GERI", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "$return" }
+        {
+          "id": "ZEH_GERI",
+          "kind": "CONTINUE",
+          "label": "Teşekkür et, çık",
+          "role": "BACK",
+          "enabledWhen": { "any": [{ "chosen": "ZEH_NOT" }, { "chosen": "ZEH_TAKVIM" }, { "chosen": "ZEH_EV" }] },
+          "lockedReason": "Buraya bir eylem puanı harcadın; çıkmadan en az bir şey sor.",
+          "next": "$return"
+        }
       ]
     },
     {
@@ -1277,7 +1285,22 @@
           "next": "$stay",
           "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
         },
-        { "id": "MUD_GERI", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "$return" }
+        {
+          "id": "MUD_GERI",
+          "kind": "CONTINUE",
+          "label": "Teşekkür et, çık",
+          "role": "BACK",
+          "enabledWhen": {
+            "any": [
+              { "chosen": "MUD_SABAH" },
+              { "chosen": "MUD_DOSYA" },
+              { "chosen": "MUD_ODA" },
+              { "chosen": "MUD_HALIL" }
+            ]
+          },
+          "lockedReason": "Buraya bir eylem puanı harcadın; çıkmadan en az bir şey sor.",
+          "next": "$return"
+        }
       ]
     },
     {
@@ -1415,6 +1438,8 @@
           "kind": "CONTINUE",
           "label": "Teşekkür et, çık",
           "role": "BACK",
+          "enabledWhen": { "any": [{ "chosen": "SIN_SABAH" }, { "chosen": "SIN_BAYRAM" }, { "chosen": "SIN_HALIL" }] },
+          "lockedReason": "Buraya bir eylem puanı harcadın; çıkmadan en az bir şey sor.",
           "responses": [
             {
               "lines": [
@@ -1626,7 +1651,23 @@
             { "type": "VAR", "var": "fact_komiser_ogul", "op": "set", "value": true }
           ]
         },
-        { "id": "KOM_GERI", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "$return" }
+        {
+          "id": "KOM_GERI",
+          "kind": "CONTINUE",
+          "label": "Teşekkür et, çık",
+          "role": "BACK",
+          "enabledWhen": {
+            "any": [
+              { "chosen": "KOM_BASLA" },
+              { "chosen": "KOM_PARA" },
+              { "chosen": "KOM_CIHAZ" },
+              { "chosen": "KOM_ODA" },
+              { "chosen": "KOM_OGUL" }
+            ]
+          },
+          "lockedReason": "Buraya bir eylem puanı harcadın; çıkmadan en az bir şey sor.",
+          "next": "$return"
+        }
       ]
     }
   ],

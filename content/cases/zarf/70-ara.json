@@ -236,7 +236,7 @@
           "id": "t2_kayit",
           "label": "KAYITLAR",
           "kind": "ARCHIVE",
-          "choices": ["A2_SANTRAL", "A2_CIHAZ", "A2_SUC", "A2_CIKARIM", "A2_LEYLA"]
+          "choices": ["A2_SANTRAL", "A2_CIHAZ", "A2_SUC", "A2_DOSYA", "A2_CIKARIM", "A2_LEYLA"]
         },
         { "id": "t2_kisi", "label": "KİŞİLER", "kind": "PEOPLE", "choices": ["A2_HALIL", "A2_MUZAFFER", "A2_BAYRAM"] },
         { "id": "t2_yer", "label": "YERLER", "kind": "SCENE", "choices": ["A2_KAMERA", "A2_ARSIV"] }
@@ -270,6 +270,15 @@
           "next": "ARA_SUC",
           "maxUses": 1,
           "description": "Kime, neyle, ne isteyerek?"
+        },
+        {
+          "id": "A2_DOSYA",
+          "kind": "NAVIGATE",
+          "label": "Duruşma hazırlığı",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_DOSYA",
+          "maxUses": 3,
+          "description": "Soru listesi · 1 EP"
         },
         {
           "id": "A2_CIKARIM",
@@ -342,8 +351,14 @@
           "label": "DURUŞMAYA GİT · 2. CELSE",
           "role": "PRIMARY",
           "next": "ARA_SAVCI",
-          "enabledWhen": { "cmp": [{ "var": "ara_day" }, ">=", 2] },
-          "lockedReason": "İkinci celseye daha iki hafta var; bugünü dosyaya harca.",
+          "enabledWhen": {
+            "all": [
+              { "cmp": [{ "var": "ara_day" }, ">=", 2] },
+              { "cmp": [{ "var": "ara_ap" }, "<=", 0] },
+              { "visited": "ARA_LEYLA" }
+            ]
+          },
+          "lockedReason": "İkinci celseye daha günler var; bugünü sonuna kadar dosyaya harca ve Leyla’ya danış.",
           "confirm": "Duruşmaya gidersen ara evresi biter. Emin misin?"
         }
       ]
@@ -833,6 +848,76 @@
       ]
     },
     {
+      "id": "ARA_DOSYA",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #12 · ARA",
+      "title": "Soru listesi",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "when": { "all": [{ "hasEvidence": "clue_manuel" }, { "flag": "contra_k3" }] },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Muhbir için soru listesini yazdım: dört satır, dört belge. Her sorunun yanına cevabını değil, hangi kâğıdın cevap vereceğini yazdım."
+            },
+            {
+              "speaker": "player",
+              "text": "Komiser kürsüde odanın boş olduğunu kabul etti. Cihaz raporu tuşa basıldığını söylüyor. Muhbir bunların ikisini birden taşıyamaz. Taşıyamadığı yerde sorumu bitireceğim; fazlası tanığa ders vermek olur.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "clue_manuel" },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Bilirkişi raporunu soru listemin başına iliştirdim. 10.39.12, STOP, fiziksel tuş. Muhbir “kendiliğinden kapandı” diyecek; rapor başka bir şey diyor."
+            },
+            {
+              "speaker": "player",
+              "text": "Soruyu bir kez soracağım. Cevabı beğenmezsem raporu sunacağım. Tanıkla tartışmak yok; kâğıt tartışsın.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "red_kabul" },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Kayıtlar düştü; artık savcının elinde bir muhbir ve bir zarf var. Soru listemi muhbire göre yeniden yazdım. “Zorladı” ile “anlaştık” arasında iki gün var; o iki günü soracağım."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir tanığın iki hikâyesi varsa, üçüncüsünü ben yazmam. Yalnızca ikisini yan yana koyarım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Soru listesini yazdım, sildim, yeniden yazdım. Her soru bir belgeye dayanmalı; dayanmayan soru tanığa yeni bir hikâye anlatma fırsatı verir."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın kuralı: cevabını bilmediğin soruyu kürsüde sorma. Cevabını bildiğim soruların sayısı, bu gece, beklediğimden az.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "ARADOSYA_BITIR", "kind": "CONTINUE", "label": "Listeyi dosyaya koy", "next": "ARA_HUB" }]
+    },
+    {
       "id": "ARA_LEYLA",
       "type": "STORY",
       "chapter": "Bölüm 4 · Ara",
@@ -995,7 +1080,22 @@
           "maxUses": 1,
           "next": "ARA_GULAY"
         },
-        { "id": "SANTRAL_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
+        {
+          "id": "SANTRAL_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": {
+            "any": [
+              { "hasEvidence": "clue_214_cagri" },
+              { "hasEvidence": "clue_izin_gulay" },
+              { "flag": "santral_cay" },
+              { "cmp": [{ "var": "exam_s" }, "<", 5] }
+            ]
+          },
+          "lockedReason": "Çıkmadan en az bir ayrıntıya bak."
+        }
       ]
     },
     {
@@ -1096,7 +1196,22 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "CIHAZ_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
+        {
+          "id": "CIHAZ_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": {
+            "any": [
+              { "hasEvidence": "clue_fisilti" },
+              { "hasEvidence": "clue_manuel" },
+              { "flag": "pil_dolu" },
+              { "cmp": [{ "var": "exam_c" }, "<", 5] }
+            ]
+          },
+          "lockedReason": "Çıkmadan en az bir ayrıntıya bak."
+        }
       ]
     },
     {
@@ -1142,7 +1257,22 @@
           "feedback": { "text": "Burada bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
           "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
         },
-        { "id": "KAMERA_BITIR", "kind": "CONTINUE", "label": "Kareyi kapat", "role": "BACK", "next": "ARA_HUB" }
+        {
+          "id": "KAMERA_BITIR",
+          "kind": "CONTINUE",
+          "label": "Kareyi kapat",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": {
+            "any": [
+              { "hasEvidence": "clue_kare_saat" },
+              { "hasEvidence": "clue_kol_saat" },
+              { "hasEvidence": "clue_kare_zarf" },
+              { "cmp": [{ "var": "taps_c" }, "<", 4] }
+            ]
+          },
+          "lockedReason": "Çıkmadan en az bir ayrıntıya bak."
+        }
       ]
     },
     {
@@ -1193,7 +1323,21 @@
           "maxUses": 1,
           "next": "ARA_FERDA"
         },
-        { "id": "ARSIV_BITIR", "kind": "CONTINUE", "label": "Arşivden çık", "role": "BACK", "next": "ARA_HUB" }
+        {
+          "id": "ARSIV_BITIR",
+          "kind": "CONTINUE",
+          "label": "Arşivden çık",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": {
+            "any": [
+              { "hasEvidence": "clue_zimmet" },
+              { "hasEvidence": "ev_kirmizi_defter" },
+              { "cmp": [{ "var": "taps_a" }, "<", 4] }
+            ]
+          },
+          "lockedReason": "Çıkmadan en az bir ayrıntıya bak."
+        }
       ]
     },
     {
@@ -1764,7 +1908,24 @@
             "category": "SAVUNMA_STRATEJISI"
           }
         },
-        { "id": "AH_GERI", "kind": "CONTINUE", "label": "Kalk", "role": "BACK", "next": "ARA_HUB" }
+        {
+          "id": "AH_GERI",
+          "kind": "CONTINUE",
+          "label": "Kalk",
+          "role": "BACK",
+          "enabledWhen": {
+            "any": [
+              { "chosen": "AH_DEFTER" },
+              { "chosen": "AH_SINAN" },
+              { "chosen": "AH_DOSYALAR" },
+              { "chosen": "AH_GECE" },
+              { "chosen": "AH_HAZIR" },
+              { "chosen": "AH_EZBER" }
+            ]
+          },
+          "lockedReason": "Buraya bir eylem puanı harcadın; çıkmadan en az bir şey sor.",
+          "next": "ARA_HUB"
+        }
       ]
     },
     {
@@ -1875,7 +2036,7 @@
         {
           "id": "MUZ_TANIK",
           "kind": "OPTION",
-          "label": "Mahkemeden sizi tanık olarak dinlemesini isteyeceğim; yalnızca gördüğünüzü anlatırsınız.",
+          "label": "Sizi mahkemeye tanık olarak bildireceğim; gördüğünüzü anlatırsınız.",
           "visibleWhen": { "any": [{ "hasEvidence": "clue_cay_defteri" }, { "flag": "muzaffer_gordu" }] },
           "responses": [
             {
@@ -1942,7 +2103,22 @@
             "category": "USUL_BILGISI"
           }
         },
-        { "id": "MUZ_GERI", "kind": "CONTINUE", "label": "Çayını bitir, çık", "role": "BACK", "next": "ARA_HUB" }
+        {
+          "id": "MUZ_GERI",
+          "kind": "CONTINUE",
+          "label": "Çayını bitir, çık",
+          "role": "BACK",
+          "enabledWhen": {
+            "any": [
+              { "chosen": "MUZ_DEFTER" },
+              { "chosen": "MUZ_GORDU" },
+              { "chosen": "MUZ_TANIK" },
+              { "chosen": "MUZ_BASKI" }
+            ]
+          },
+          "lockedReason": "Buraya bir eylem puanı harcadın; çıkmadan en az bir şey sor.",
+          "next": "ARA_HUB"
+        }
       ]
     },
     {
@@ -2455,6 +2631,14 @@
             {
               "speaker": "narrator",
               "text": "İkinci celseden önceki gece. Panoda artık bir isim var; ama ismin yanında kâğıtlar var. Bir deste, bir dahili, bir izin çizelgesi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "İsmi panoya yazmadım; bir kartın arkasına, kurşun kalemle. Yarın o isim salonda söylenecekse, onu ben değil, kâğıtlar söyleyecek. Kartı ters çevirdim, raptiyeyi bastırdım."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Işığı kapattım. Karanlıkta pano, yağmurlu bir pencereye benziyordu; arkasında ne olduğu belli, ama bir türlü net değil."
             }
           ]
         },

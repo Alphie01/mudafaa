@@ -208,6 +208,10 @@ export const inv1Hub: CasePart = {
               once: true,
               description: 'İki ifade, iki tarih · 5 deneme',
             }),
+            p1.activity('A_DOSYA', 'Dosyayı baştan oku', 'INV1_DOSYA', {
+              description: 'Büro · gece · 1 EP',
+              maxUses: 3,
+            }),
             p1.activity('A_DIL', 'Delil dilekçesi (CMK 177)', 'INV1_DIL', {
               description: '3 talep hakkı',
               visibleWhen: not(flag('dil_verildi')),
@@ -229,6 +233,8 @@ export const inv1Hub: CasePart = {
       choices: [
         nav('GO_H1', 'DURUŞMAYA GİT · 1. CELSE', 'INV1_GECE_1', {
           role: 'PRIMARY',
+          enabledWhen: all(cmp(v('day'), '>=', 3), cmp(v('ap'), '<=', 0), visited('INV1_LEYLA')),
+          lockedReason: 'Celseden önce günün işini bitir ve stratejini Leyla’yla konuş.',
           confirm: 'Duruşmaya gidersen bu evre biter; açık kalan işler kapanır. Emin misin?',
         }),
       ],
@@ -257,7 +263,7 @@ export const inv1Hub: CasePart = {
         ~ Bir defter. "Ne varsa" diyen biri, ne aradığını tam olarak biliyordu. Ve kurum, bir memurun evine adını söylemeyen birini evrak toplamaya göndermez.
       `),
       choices: [
-        option('AK1_A', 'Kimseye bir şey vermeyin. Saati ve tarifi yazın; yarın savcılığa bildiririz.', {
+        option('AK1_A', 'Bir şey vermeyin; saati ve tarifi yazın, savcılığa bildiririz.', {
           good: 'Şüpheli bir kişinin evrak toplamaya çalışması belgelenir ve soruşturma makamına bildirilir (CMK 158). Avukat kişinin peşine düşmez.',
           category: 'USUL_BILGISI',
           score: { USUL_BILGISI: 20 },
@@ -353,6 +359,43 @@ export const inv1Hub: CasePart = {
           next: 'INV1_HUB',
         }),
       ],
+    }),
+    story('INV1_DOSYA', {
+      ...INV1,
+      title: 'Dosya, gece',
+      background: 'buro_gece',
+      lines: [
+        W(
+          all(has('ded_sure_disi'), has('ded_bos_oda')),
+          S`
+            = ARSLAN HUKUK · GECE @buro_gece
+            - Dosyayı baştan okudum; bu kez savcının gözüyle. Bir kayıt, bir muhbir, bir zarf. Her biri tek başına bir şey söylemiyor; üçü yan yana durunca bir hikâye anlatıyor.
+            ~ Kaydın tarihi kararın dışında. Odanın saatleri muhbirin cümlesinin dışında. Savcının hikâyesi, kendi kâğıtlarının dışında duruyor. Bunu mahkemede yüksek sesle söylemem gerek; tek tek, kâğıdıyla.
+          `,
+        ),
+        W(
+          has('ded_sure_disi'),
+          S`
+            = ARSLAN HUKUK · GECE @buro_gece
+            - Kararın fotokopisini masaya yaydım, yanına kayıt çözümlerini. İki aylık bir karar, mart ortasında bir kayıt. Kâtip bunu görmemiş; savcı görmek istememiş.
+            ~ Bir kayıt nasıl elde edildiğiyle birlikte delildir. Ama zarf hâlâ çekmecede. Kayıt düşse bile, zarfın oraya nasıl girdiğini kimse anlatmadıkça heyet zarfa bakar.
+          `,
+        ),
+        W(
+          has('ded_bos_oda'),
+          S`
+            = ARSLAN HUKUK · GECE @buro_gece
+            - Tutanağı dördüncü kez okudum. 10.39 kayıt kesiliyor, 10.44 oda boş, 10.46 Halil geliyor. Savcılık bunu kendi eliyle yazmış ve altını imzalamış.
+            ~ Boş bir odaya elden zarf verilmez. Ama boş bir oda, zarfı kimin bıraktığını da söylemez. Kayıtlara da bakmam gerek; iddianame onlara yaslanıyor.
+          `,
+        ),
+        O(S`
+          = ARSLAN HUKUK · GECE @buro_gece
+          - Dosyayı baştan okudum. İddianame üç sayfa, ekleri iki yüz. Savcı üç sayfada bir adamı mahkûm etmiş; iki yüz sayfayı okumamış olabilir. Ben okumak zorundayım.
+          ~ Kararın tarihine, tutanağın saatlerine, ifadelerin tarihine bakmadım daha. Gözüm hep zarfta kalıyor. Zarf bir sonuç; bana sebep lazım.
+        `),
+      ],
+      choices: [cont('DOSYA_BITIR', 'Dosyayı kapat', '$return')],
     }),
     story('INV1_LEYLA', {
       ...INV1,

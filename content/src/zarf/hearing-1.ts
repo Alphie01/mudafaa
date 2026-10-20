@@ -44,6 +44,16 @@ const savcilikDelili = (id: string, statementId: string | undefined, evidenceIds
     `),
   });
 
+/** “Önce bastır, sonra sun”: ifadeye basılmadan sunulan doğru belge cezasız geri çevrilir. */
+const erken = (id: string, statementId: string, evidence: string[], pressFlag: string) =>
+  presentRule(id, statementId, evidence, {
+    enabledWhen: not(flag(pressFlag)),
+    responses: B(S`
+      baskan: Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun.
+      ~ Leyla'nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.
+    `),
+  });
+
 export const hearing1: CasePart = {
   court: {
     sessions: [
@@ -361,73 +371,70 @@ export const hearing1: CasePart = {
       `,
       next: 'H1_03R',
       options: [
-        option(
-          'H103_A',
-          'Kayıtlar kararın kapsamı dışında alındı; hukuka aykırı delil olarak reddini istiyoruz.',
-          {
-            effects: [
-              ifThen(
-                all(has('ded_sure_disi'), has('ded_hat_disi')),
-                [
-                  raise('red_14'),
-                  raise('red_9'),
-                  raise('red_kabul'),
-                  inc('pers', 2),
-                  inc('legal_hits'),
-                  score('USUL_BILGISI', 150),
-                  mark(
-                    'GOOD',
-                    'Kanuna aykırı elde edilen delil reddedilir (CMK 206/2-a) ve hükme esas alınamaz (CMK 217/2; Anayasa 38/6): kararın süresi iki aydı (CMK 135/4), hat kararda gösterilmemişti (CMK 135/1, 135/4).',
-                    'USUL_BILGISI',
-                  ),
-                ],
-                [
-                  ifThen(
-                    has('ded_sure_disi'),
-                    [
-                      raise('red_14'),
-                      inc('pers'),
-                      inc('legal_hits'),
-                      score('USUL_BILGISI', 80),
-                      mark(
-                        'GOOD',
-                        'Süre dışı kayıt reddedildi (CMK 135/4, 206/2-a). Kayıt 9 için hattın kararda olmadığını gösteremedin.',
-                        'USUL_BILGISI',
-                      ),
-                    ],
-                    [
-                      ifThen(
-                        has('ded_hat_disi'),
-                        [
-                          raise('red_9'),
-                          inc('pers'),
-                          inc('legal_hits'),
-                          score('USUL_BILGISI', 80),
-                          mark(
-                            'GOOD',
-                            'Kararsız alınan kayıt reddedildi (CMK 135/1, 206/2-a). Kayıt 14’ün süre dışı olduğunu gösteremedin.',
-                            'USUL_BILGISI',
-                          ),
-                        ],
-                        [
-                          dec('cred'),
-                          score('USUL_BILGISI', -40),
-                          mark(
-                            'BAD',
-                            'İtirazın gerekçesi doğruydu ama dayanağını gösteremedin: kararın süresini ve hattını belgeyle eşleştirmemiştin.',
-                            'USUL_BILGISI',
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-            responses: [
-              W(
-                all(has('ded_sure_disi'), has('ded_hat_disi')),
-                S`
+        option('H103_A', 'Kayıtlar kararın kapsamı dışında alındı; hukuka aykırı delil olarak reddini istiyoruz.', {
+          effects: [
+            ifThen(
+              all(has('ded_sure_disi'), has('ded_hat_disi')),
+              [
+                raise('red_14'),
+                raise('red_9'),
+                raise('red_kabul'),
+                inc('pers', 2),
+                inc('legal_hits'),
+                score('USUL_BILGISI', 150),
+                mark(
+                  'GOOD',
+                  'Kanuna aykırı elde edilen delil reddedilir (CMK 206/2-a) ve hükme esas alınamaz (CMK 217/2; Anayasa 38/6): kararın süresi iki aydı (CMK 135/4), hat kararda gösterilmemişti (CMK 135/1, 135/4).',
+                  'USUL_BILGISI',
+                ),
+              ],
+              [
+                ifThen(
+                  has('ded_sure_disi'),
+                  [
+                    raise('red_14'),
+                    inc('pers'),
+                    inc('legal_hits'),
+                    score('USUL_BILGISI', 80),
+                    mark(
+                      'GOOD',
+                      'Süre dışı kayıt reddedildi (CMK 135/4, 206/2-a). Kayıt 9 için hattın kararda olmadığını gösteremedin.',
+                      'USUL_BILGISI',
+                    ),
+                  ],
+                  [
+                    ifThen(
+                      has('ded_hat_disi'),
+                      [
+                        raise('red_9'),
+                        inc('pers'),
+                        inc('legal_hits'),
+                        score('USUL_BILGISI', 80),
+                        mark(
+                          'GOOD',
+                          'Kararsız alınan kayıt reddedildi (CMK 135/1, 206/2-a). Kayıt 14’ün süre dışı olduğunu gösteremedin.',
+                          'USUL_BILGISI',
+                        ),
+                      ],
+                      [
+                        dec('cred'),
+                        score('USUL_BILGISI', -40),
+                        mark(
+                          'BAD',
+                          'İtirazın gerekçesi doğruydu ama dayanağını gösteremedin: kararın süresini ve hattını belgeyle eşleştirmemiştin.',
+                          'USUL_BILGISI',
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+          responses: [
+            W(
+              all(has('ded_sure_disi'), has('ded_hat_disi')),
+              S`
                 > Sayın Başkan, karar dört Ocak tarihli ve iki aylık. Dört Mart'ta sona eriyor; dosyada uzatma kararı yok. On dört numaralı kayıt on bir Mart tarihli: süresi bitmiş bir kararla alınmış.
                 > Dokuz numaralı kayıt ise sanığın kendi hattından. Karar yalnızca bir müteahhidin hattını gösteriyor. Sanığın hattı için hiçbir hâkim karar vermemiş.
                 > Kanuna aykırı elde edilen delil, ne söylerse söylesin, ortaya konulamaz. İkisinin de reddini talep ediyoruz.
@@ -437,23 +444,22 @@ export const hearing1: CasePart = {
                 baskan: Doğru, savcı bey. Ama kararın süresi ve hattı içinde. Altı numaralı kayıt süre içinde; isterseniz okunur.
                 - Savcı altı numarayı okutmadı. Okutsaydı salon "kontrolcü yine imzalamadı" cümlesini duyacaktı. Bunu biliyordu.
               `,
-              ),
-              W(
-                any(has('ded_sure_disi'), has('ded_hat_disi')),
-                S`
+            ),
+            W(
+              any(has('ded_sure_disi'), has('ded_hat_disi')),
+              S`
                 > Sayın Başkan, kayıtlardan biri kararın kapsamı dışında alınmıştır; belgesi dosyada. Reddini talep ediyoruz.
                 baskan: Belgeyle gösterilen kayıt yönünden talep kabul edildi. Diğeri için dayanak gösterilmedi; okunsun.
                 ~ Bir kapıyı kapattım. Öbürü hâlâ açık; ve oradan bir cümle salona giriyor.
               `,
-              ),
-              O(S`
+            ),
+            O(S`
               > Sayın Başkan, kayıtların kararın kapsamı dışında alındığını düşünüyoruz.
               baskan: Düşünmek yetmez, müdafi. Kararın neresinde, hangi tarihte, hangi hatta? Gösterin.
               ~ Gösteremedim. Kararın her satırını okumamıştım. Leyla haklıydı: okumadan önce kalkmak yetmez; neden kalktığını da bileceksin.
             `),
-            ],
-          },
-        ),
+          ],
+        }),
         option('H103_B', 'Rüşvet, dinleme yapılabilecek katalog suçlardan değil; bütün kayıtların reddini istiyoruz.', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
@@ -463,15 +469,19 @@ export const hearing1: CasePart = {
             - Kâtip okudu: "Kontrolcüyü hallettik. Zarf yarın masada." Salon bu cümleyi duydu. Bir kez duyulan cümle, tutanaktan silinse de kulaklardan silinmez.
           `),
         }),
-        option('H103_C', 'Kayıtlar başka soruşturmada tesadüfen elde edildi; bu davada kullanılamaz, reddini istiyoruz.', {
-          score: { USUL_BILGISI: -50 },
-          effects: [dec('cred')],
-          bad: 'Tesadüfen elde edilen delil, katalog suçlardan birine ilişkinse kullanılabilir (CMK 138/2); rüşvet katalogdadır. Sorun tesadüf değil, kararın süresi ve hattıdır.',
-          responses: B(S`
+        option(
+          'H103_C',
+          'Kayıtlar başka soruşturmada tesadüfen elde edildi; bu davada kullanılamaz, reddini istiyoruz.',
+          {
+            score: { USUL_BILGISI: -50 },
+            effects: [dec('cred')],
+            bad: 'Tesadüfen elde edilen delil, katalog suçlardan birine ilişkinse kullanılabilir (CMK 138/2); rüşvet katalogdadır. Sorun tesadüf değil, kararın süresi ve hattıdır.',
+            responses: B(S`
             baskan: Müdafi, rüşvet katalog suçu; tesadüfi delil kuralı kullanılmasını engellemez. Reddedildi. Okunsun.
             - Kâtip okudu: "Kontrolcüyü hallettik. Zarf yarın masada." Salon bu cümleyi duydu.
           `),
-        }),
+          },
+        ),
         option('H103_D', 'Okunsun; kayıtların değerlendirmesini esas hakkındaki savunmada yaparız.', {
           effects: [dec('pers')],
           neutral:
@@ -590,9 +600,10 @@ export const hearing1: CasePart = {
             ~ Doğru belge, yanlış yerde, düşmandır. Halil bana baktı; yirmi yedi yıllık bir bakış.
           `),
         }),
+        erken('PS_K3_P_ERKEN', 'K3', ['ev_tutanak'], 'press_k3'),
         presentRule('PS_K3_P', 'K3', ['ev_tutanak'], {
           visibleWhen: has('clue_saat_tutanak'),
-          enabledWhen: has('clue_saat_tutanak'),
+          enabledWhen: all(has('clue_saat_tutanak'), flag('press_k3')),
           score: { SORGULAMA: 100 },
           effects: [
             inc('pers'),
@@ -620,7 +631,9 @@ export const hearing1: CasePart = {
             komiser: Kayıtlar bize geliyordu. Gelmeye devam ediyordu. Kararın takibi savcılığın işidir.
           `),
         }),
+        erken('PS_K1_ERKEN', 'K1', ['ded_sure_disi'], 'press_k1'),
         presentRule('PS_K1', 'K1', ['ded_sure_disi'], {
+          enabledWhen: flag('press_k1'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -649,7 +662,9 @@ export const hearing1: CasePart = {
             > Kimin parası kayda alındı?
           `),
         }),
+        erken('PS_K2_ERKEN', 'K2', ['ev_para'], 'press_k2'),
         presentRule('PS_K2', 'K2', ['ev_para'], {
+          enabledWhen: flag('press_k2'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -678,7 +693,9 @@ export const hearing1: CasePart = {
             komiser: Muhbir öyle söyledi.
           `),
         }),
+        erken('PS_K3_ERKEN', 'K3', ['ded_bos_oda'], 'press_k3'),
         presentRule('PS_K3', 'K3', ['ded_bos_oda'], {
+          enabledWhen: flag('press_k3'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -730,7 +747,9 @@ export const hearing1: CasePart = {
             komiser: ...Yazılı talimat vardı, Sayın Başkan.
           `),
         }),
+        erken('PS_K5_ERKEN', 'K5', ['ded_hat_disi'], 'press_k5'),
         presentRule('PS_K5', 'K5', ['ded_hat_disi'], {
+          enabledWhen: flag('press_k5'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),

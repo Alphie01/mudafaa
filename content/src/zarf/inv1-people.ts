@@ -21,7 +21,7 @@ import {
   v,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
-import { B, S } from './dsl.js';
+import { ASKED_REASON, askedOne, B, S } from './dsl.js';
 import { INV1 } from './shared.js';
 
 // 51-inv1-people: Halil ile görüşme (konu × ton; defter ve randevu başka yerde bulunanlarla açılır), yüzleşme ve tavsiye
@@ -458,7 +458,10 @@ export const inv1People: CasePart = {
           `),
           next: '$stay',
         }),
-        back('ZEH_GERI', 'Teşekkür et, çık'),
+        back('ZEH_GERI', 'Teşekkür et, çık', {
+          enabledWhen: askedOne('ZEH_NOT', 'ZEH_TAKVIM', 'ZEH_EV'),
+          lockedReason: ASKED_REASON,
+        }),
       ],
     }),
     conversation('INV1_MUDUR', {
@@ -517,7 +520,10 @@ export const inv1People: CasePart = {
           `),
           next: '$stay',
         }),
-        back('MUD_GERI', 'Teşekkür et, çık'),
+        back('MUD_GERI', 'Teşekkür et, çık', {
+          enabledWhen: askedOne('MUD_SABAH', 'MUD_DOSYA', 'MUD_ODA', 'MUD_HALIL'),
+          lockedReason: ASKED_REASON,
+        }),
       ],
     }),
     conversation('INV1_SINAN', {
@@ -566,6 +572,8 @@ export const inv1People: CasePart = {
           next: '$stay',
         }),
         back('SIN_GERI', 'Teşekkür et, çık', {
+          enabledWhen: askedOne('SIN_SABAH', 'SIN_BAYRAM', 'SIN_HALIL'),
+          lockedReason: ASKED_REASON,
           responses: B(S`
             - Kapıdan çıkarken Sinan arkamdan seslendi; sesi hâlâ sıcaktı.
             sinan: Avukat hanım! Halil abiye selamımı söyleyin. Kolay gelsin.
@@ -642,7 +650,10 @@ export const inv1People: CasePart = {
           `),
           next: '$stay',
         }),
-        back('KOM_GERI', 'Teşekkür et, çık'),
+        back('KOM_GERI', 'Teşekkür et, çık', {
+          enabledWhen: askedOne('KOM_BASLA', 'KOM_PARA', 'KOM_CIHAZ', 'KOM_ODA', 'KOM_OGUL'),
+          lockedReason: ASKED_REASON,
+        }),
       ],
     }),
   ],

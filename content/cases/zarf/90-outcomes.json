@@ -12,13 +12,20 @@
             "any": [
               { "ref": "beraat_kosul" },
               {
-                "any": [
-                  { "flag": "sinan_ifsa" },
+                "all": [
+                  { "ref": "kayit_disi" },
+                  { "ref": "oda_bos" },
                   {
-                    "all": [
-                      { "flag": "bayram_ifsa" },
-                      { "not": { "flag": "etki_bayram" } },
-                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                    "any": [
+                      { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                      {
+                        "all": [
+                          { "flag": "bayram_ifsa" },
+                          { "not": { "flag": "etki_bayram" } },
+                          { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                          { "ref": "muhbir_coktu" }
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -123,13 +130,20 @@
           { "not": { "flag": "cokus" } },
           { "not": { "flag": "tanik_etkileme" } },
           {
-            "any": [
-              { "flag": "sinan_ifsa" },
+            "all": [
+              { "ref": "kayit_disi" },
+              { "ref": "oda_bos" },
               {
-                "all": [
-                  { "flag": "bayram_ifsa" },
-                  { "not": { "flag": "etki_bayram" } },
-                  { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                "any": [
+                  { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                  {
+                    "all": [
+                      { "flag": "bayram_ifsa" },
+                      { "not": { "flag": "etki_bayram" } },
+                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                      { "ref": "muhbir_coktu" }
+                    ]
+                  }
                 ]
               }
             ]
@@ -317,13 +331,20 @@
             "any": [
               { "ref": "beraat_kosul" },
               {
-                "any": [
-                  { "flag": "sinan_ifsa" },
+                "all": [
+                  { "ref": "kayit_disi" },
+                  { "ref": "oda_bos" },
                   {
-                    "all": [
-                      { "flag": "bayram_ifsa" },
-                      { "not": { "flag": "etki_bayram" } },
-                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                    "any": [
+                      { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                      {
+                        "all": [
+                          { "flag": "bayram_ifsa" },
+                          { "not": { "flag": "etki_bayram" } },
+                          { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                          { "ref": "muhbir_coktu" }
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -356,7 +377,7 @@
         },
         {
           "when": { "ref": "ayrilis" },
-          "text": "Sanığın 10.35’te makamdan geldiği izlenimi veren bir çağrıyla odasından ayrıldığı duruşmada gösterilmiştir."
+          "text": "Sanığın 10.35’te makamdan geldiği izlenimi veren, ancak makamdan yapılmamış bir çağrıyla odasından uzaklaştırıldığı duruşmada gösterilmiştir."
         },
         {
           "when": { "flag": "contra_b4" },
@@ -428,13 +449,20 @@
               { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_kameradaki" }] },
               {
                 "not": {
-                  "any": [
-                    { "flag": "sinan_ifsa" },
+                  "all": [
+                    { "ref": "kayit_disi" },
+                    { "ref": "oda_bos" },
                     {
-                      "all": [
-                        { "flag": "bayram_ifsa" },
-                        { "not": { "flag": "etki_bayram" } },
-                        { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                      "any": [
+                        { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                        {
+                          "all": [
+                            { "flag": "bayram_ifsa" },
+                            { "not": { "flag": "etki_bayram" } },
+                            { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                            { "ref": "muhbir_coktu" }
+                          ]
+                        }
                       ]
                     }
                   ]
@@ -461,13 +489,20 @@
               { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_kameradaki" }] },
               {
                 "not": {
-                  "any": [
-                    { "flag": "sinan_ifsa" },
+                  "all": [
+                    { "ref": "kayit_disi" },
+                    { "ref": "oda_bos" },
                     {
-                      "all": [
-                        { "flag": "bayram_ifsa" },
-                        { "not": { "flag": "etki_bayram" } },
-                        { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                      "any": [
+                        { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                        {
+                          "all": [
+                            { "flag": "bayram_ifsa" },
+                            { "not": { "flag": "etki_bayram" } },
+                            { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                            { "ref": "muhbir_coktu" }
+                          ]
+                        }
                       ]
                     }
                   ]
@@ -490,13 +525,20 @@
         },
         {
           "when": {
-            "any": [
-              { "flag": "sinan_ifsa" },
+            "all": [
+              { "ref": "kayit_disi" },
+              { "ref": "oda_bos" },
               {
-                "all": [
-                  { "flag": "bayram_ifsa" },
-                  { "not": { "flag": "etki_bayram" } },
-                  { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                "any": [
+                  { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                  {
+                    "all": [
+                      { "flag": "bayram_ifsa" },
+                      { "not": { "flag": "etki_bayram" } },
+                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                      { "ref": "muhbir_coktu" }
+                    ]
+                  }
                 ]
               }
             ]
@@ -547,13 +589,72 @@
         },
         {
           "when": {
-            "any": [
-              { "flag": "sinan_ifsa" },
+            "all": [
+              { "flag": "suc_duyurusu" },
               {
-                "all": [
-                  { "flag": "bayram_ifsa" },
-                  { "not": { "flag": "etki_bayram" } },
-                  { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                "not": {
+                  "all": [
+                    { "ref": "kayit_disi" },
+                    { "ref": "oda_bos" },
+                    {
+                      "any": [
+                        { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                        {
+                          "all": [
+                            { "flag": "bayram_ifsa" },
+                            { "not": { "flag": "etki_bayram" } },
+                            { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                            { "ref": "muhbir_coktu" }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "lines": [
+            { "speaker": "narrator", "text": "İKİ HAFTA SONRA · ARSLAN HUKUK", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Savcılıktan bir yazı geldi; ince, tek sayfa. Suç duyurum bir soruşturma numarası almıştı. Altında üç satır: zimmet defterinin aslı, santral dökümü ve koridor kamerasının kaydı getirtilmişti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dördüncü satır bana dairdi: “İhbarda bulunanın bilgisine başvurulmak üzere çağrılmasına.” Bir avukat bazen dinlenen taraf olur; gördüğünü anlatır, gördüğünü sandığını değil."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yazıyı Leyla’ya gösterdim. Okudu, gözlüğünü çıkardı, camlarını sildi; Halil’den bulaşmış bir alışkanlık. Sonra yazıyı katladı ve bana geri verdi."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Sen bir harita çizdin, Deniz. Yolu yürümek savcının işi. Bir gün o koridordan biri geçecek ve kameraya bakmayacak; o gün haritan işe yarayacak."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir isim yazmıştım; ama isimden önce bir deste, bir dahili, bir saat. İsim o kâğıtlarla ayakta kalacak ya da düşecek. İkisini de bir savcı söyleyecek, ben değil.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "ref": "kayit_disi" },
+              { "ref": "oda_bos" },
+              {
+                "any": [
+                  { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                  {
+                    "all": [
+                      { "flag": "bayram_ifsa" },
+                      { "not": { "flag": "etki_bayram" } },
+                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                      { "ref": "muhbir_coktu" }
+                    ]
+                  }
                 ]
               }
             ]
@@ -570,13 +671,20 @@
         {
           "when": {
             "not": {
-              "any": [
-                { "flag": "sinan_ifsa" },
+              "all": [
+                { "ref": "kayit_disi" },
+                { "ref": "oda_bos" },
                 {
-                  "all": [
-                    { "flag": "bayram_ifsa" },
-                    { "not": { "flag": "etki_bayram" } },
-                    { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                  "any": [
+                    { "all": [{ "flag": "sinan_ifsa" }, { "flag": "contra_b2" }] },
+                    {
+                      "all": [
+                        { "flag": "bayram_ifsa" },
+                        { "not": { "flag": "etki_bayram" } },
+                        { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] },
+                        { "ref": "muhbir_coktu" }
+                      ]
+                    }
                   ]
                 }
               ]
@@ -886,7 +994,7 @@
         },
         {
           "when": { "all": [{ "ref": "oda_bos" }, { "not": { "ref": "ayrilis" } }] },
-          "text": "Polis odaya girdiğinde sanığın odada bulunmadığı tutanakla sabittir; ancak sanığın odasından ne zaman ayrıldığı duruşmada gösterilmediğinden zarfın sanığa daha önce verilmiş olabileceği ihtimali dışlanamamıştır."
+          "text": "Polis odaya girdiğinde sanığın odada bulunmadığı tutanakla sabittir; ancak sanığın odasından neden ayrıldığı, yani kendisini çağıran bir çağrının gerçekten makamdan gelip gelmediği duruşmada gösterilmediğinden, sanığın zarfın bırakılacağını bilerek odadan çıkmış olabileceği ihtimali dışlanamamıştır."
         },
         {
           "when": { "all": [{ "flag": "contra_b4" }, { "not": { "ref": "zarf_suphe" } }] },

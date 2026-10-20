@@ -53,6 +53,16 @@ const savcilik = (id: string, statementId: string | undefined) =>
     `),
   });
 
+/** “Önce bastır, sonra sun”: ifadeye basılmadan sunulan doğru belge cezasız geri çevrilir. */
+const erken = (id: string, statementId: string, evidence: string[], pressFlag: string) =>
+  presentRule(id, statementId, evidence, {
+    enabledWhen: not(flag(pressFlag)),
+    responses: B(S`
+      baskan: Müdafi, belgeyi göstermeden önce tanığa sorunuzu sorun. Neyi çürüttüğünüzü heyet önce tanığın ağzından duysun.
+      ~ Leyla'nın kuralı: önce bastır, sonra vur. Belge elimdeydi; ama tanık henüz o cümleye yaslanmamıştı.
+    `),
+  });
+
 export const trial: CasePart = {
   court: {
     sessions: [
@@ -194,14 +204,11 @@ export const trial: CasePart = {
       title: 'Koridorda bekleyenler',
       background: 'durusma_salonu',
       lines: [
-        W(
-          all(flag('sinan_cagrildi'), flag('muzaffer_cagrildi')),
-          [
-            ...S`- Salonun dışında bekleyen tanıklar sıraya girmişti: tespihini kucağında tutan bir takipçi, ütülü açık renk ceketiyle bir memur ve önlüğünün cebinde bir defterle yaşlı bir çaycı.`,
-            ...bekleyenler,
-            ...S`~ Üç tanık, bir zarf, on dakika. Bugün o on dakika bir kez daha yaşanacak; bu sefer yüksek sesle.`,
-          ],
-        ),
+        W(all(flag('sinan_cagrildi'), flag('muzaffer_cagrildi')), [
+          ...S`- Salonun dışında bekleyen tanıklar sıraya girmişti: tespihini kucağında tutan bir takipçi, ütülü açık renk ceketiyle bir memur ve önlüğünün cebinde bir defterle yaşlı bir çaycı.`,
+          ...bekleyenler,
+          ...S`~ Üç tanık, bir zarf, on dakika. Bugün o on dakika bir kez daha yaşanacak; bu sefer yüksek sesle.`,
+        ]),
         W(flag('sinan_cagrildi'), [
           ...S`- Salonun dışında bekleyen tanıklar sıraya girmişti: tespihini kucağında tutan bir takipçi ve ütülü açık renk ceketiyle bir memur.`,
           ...bekleyenler,
@@ -331,7 +338,9 @@ export const trial: CasePart = {
             bayram: Bilmem ki. Ben takipçiyim; dosya nerede, onu Sinan Bey... yani memurlar bilir.
           `),
         }),
+        erken('PS_B1_ERKEN', 'B1', ['ded_yetkisiz'], 'press_b1'),
         presentRule('PS_B1', 'B1', ['ded_yetkisiz'], {
+          enabledWhen: flag('press_b1'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -360,7 +369,9 @@ export const trial: CasePart = {
             > On bir Mart gecesi Emniyet'te "zorla istedi" demişsiniz. İki gün sonra savcılıkta "anlaştık".
           `),
         }),
+        erken('PS_B2_ERKEN', 'B2', ['ded_iki_hikaye'], 'press_b2'),
         presentRule('PS_B2', 'B2', ['ded_iki_hikaye'], {
+          enabledWhen: flag('press_b2'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -406,7 +417,9 @@ export const trial: CasePart = {
             bayram: On kırk gibi. Tam bilmem. Saatim yok; telefona bakmadım.
           `),
         }),
+        erken('PS_B3_ERKEN', 'B3', ['ded_bos_oda', 'ev_kamera'], 'press_b3'),
         presentRule('PS_B3', 'B3', ['ded_bos_oda', 'ev_kamera'], {
+          enabledWhen: flag('press_b3'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -443,9 +456,10 @@ export const trial: CasePart = {
             bayram: Vardı. Komiser bey gösterdi: "Buna basma" dedi. Ben basmadım. Kendiliğinden sustu.
           `),
         }),
+        erken('PS_B4_ERKEN', 'B4', ['ev_cihaz'], 'press_b4'),
         presentRule('PS_B4', 'B4', ['ev_cihaz'], {
           visibleWhen: has('clue_manuel'),
-          enabledWhen: has('clue_manuel'),
+          enabledWhen: all(has('clue_manuel'), flag('press_b4')),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -496,7 +510,9 @@ export const trial: CasePart = {
             - Bayram avukatına baktı. Sonra bana. Sonra yere.
           `),
         }),
+        erken('PS_B5_ERKEN', 'B5', ['ded_tek_kisi', 'ded_zarf_kaynagi', 'ded_kameradaki'], 'press_b5'),
         presentRule('PS_B5', 'B5', ['ded_tek_kisi', 'ded_zarf_kaynagi', 'ded_kameradaki'], {
+          enabledWhen: flag('press_b5'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -529,7 +545,31 @@ export const trial: CasePart = {
         effects: [dec('cred'), score('SORGULAMA', -50, 'hatali'), mark('BAD', 'Dayanaksız itiraz.', 'SORGULAMA')],
         responses: B(S`baskan: İtiraz reddedildi. Devam edin.`),
       }),
-      finish: { id: 'T01T_BITIR', label: 'Çapraz sorguyu bitir', next: 'T_02R' },
+      finish: { id: 'T01T_BITIR', label: 'Çapraz sorguyu bitir', next: 'T_01K' },
+    }),
+    // Muhbirin çapraz sorgusundan sonra salonun arkası: kolluk, kendi tutanağıyla yüzleşir.
+    decisionNode('T_01K', [{ to: 'T_02R' }], {
+      ...TRIAL,
+      lines: [
+        W(
+          all(flag('contra_b4'), flag('kamera_b3')),
+          S`
+            - Bayram kürsüden inerken salonun arka sırasında bir sandalye gıcırdadı. Komiser Levent Arı ayağa kalkmıştı; sonra kalktığını fark edip yeniden oturdu.
+            - Savcı Kenan Yavuz başını çevirdi, ona baktı. Uzun değil; bir tutanağın bir satırını okuyacak kadar. Komiser gözlerini kaçırmadı, ama elleri dizlerinin üstünde birbirini buldu.
+            - Bir kamera karesi, bir cihaz raporu, bir tutanak. Üçü de aynı on dakikayı anlatıyordu; yalnızca kolluğun anlatısı başka bir on dakikadan söz ediyordu.
+            ~ Bir operasyonu ders kitabı gibi anlatmıştı. Ders kitapları da yanlış basılır. Düzeltmeyi kimin yazacağı ise ayrı bir sorudur.
+            - Halil önündeki kâğıtların kenarını hizaladı; bu sefer elleri titremedi. Zehra arka sırada, bir hemşirenin nabız sayarken yaptığı gibi, dudaklarını kıpırdatmadan saniyeleri sayıyordu.
+          `,
+        ),
+        W(
+          flag('contra_b4'),
+          S`
+            - Bayram kürsüden inerken Komiser Levent Arı arka sırada kollarını kavuşturdu. Cihazı muhbirin yakasına kendisi takmıştı; "teknik arıza" diye kendisi yazmıştı.
+            - Savcı ona bakmadı. Bakmaması, bakmasından daha çok şey söylüyordu.
+            ~ Bir cihaz, onu taşıyandan daha dürüst bir tanıktır demiştim. Bugün cihaz konuştu; taşıyan sustu.
+          `,
+        ),
+      ],
     }),
     decisionNode(
       'T_02R',
@@ -626,7 +666,9 @@ export const trial: CasePart = {
             sinan: ...Ismarlamış olabilirim. Her gün ısmarlarım. Hatırlamıyorum.
           `),
         }),
+        erken('PS_S1_ERKEN', 'S1', ['ded_alibi', 'ded_kameradaki'], 'press_s1'),
         presentRule('PS_S1', 'S1', ['ded_alibi', 'ded_kameradaki'], {
+          enabledWhen: flag('press_s1'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -652,8 +694,9 @@ export const trial: CasePart = {
             sinan: ...İzindeydi.
           `),
         }),
+        erken('PS_S2_ERKEN', 'S2', ['ev_santral', 'ded_tek_kisi', 'ded_sahte_cagri'], 'press_s2'),
         presentRule('PS_S2', 'S2', ['ev_santral', 'ded_tek_kisi', 'ded_sahte_cagri'], {
-          enabledWhen: any(has('clue_214_cagri'), has('ded_tek_kisi')),
+          enabledWhen: all(any(has('clue_214_cagri'), has('ded_tek_kisi')), flag('press_s2')),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -680,7 +723,9 @@ export const trial: CasePart = {
             sinan: Veriliyor ama... herkes herkesten alır. Bir zarf için kimse zimmet sormaz.
           `),
         }),
+        erken('PS_S3_ERKEN', 'S3', ['ded_zarf_kaynagi'], 'press_s3'),
         presentRule('PS_S3', 'S3', ['ded_zarf_kaynagi'], {
+          enabledWhen: flag('press_s3'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -719,7 +764,9 @@ export const trial: CasePart = {
             sinan: Birkaç tane. Herkesinkini çevirir. Ben müdür yardımcısı olacağım; birkaç dosya beni ilgilendirmez.
           `),
         }),
+        erken('PS_S4_ERKEN', 'S4', ['ev_kirmizi_defter', 'ded_hedef'], 'press_s4'),
         presentRule('PS_S4', 'S4', ['ev_kirmizi_defter', 'ded_hedef'], {
+          enabledWhen: flag('press_s4'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -962,62 +1009,58 @@ export const trial: CasePart = {
       `,
       next: 'T_045',
       options: [
-        option(
-          'T04_A',
-          'İrtikap icbar ister; dosya sanığın masasında değildi, muhbir de iki ayrı hikâye anlattı.',
-          {
-            effects: [
-              ifThen(
-                all(has('ded_yetkisiz'), has('ded_iki_hikaye')),
-                [
-                  score('HUKUKI_BILGI', 150),
-                  inc('legal_hits'),
-                  inc('pers'),
-                  raise('ek_savunma_tam'),
-                  mark(
-                    'GOOD',
-                    'İrtikap, görevin sağladığı nüfuzu kötüye kullanarak icbarı gerektirir (TCK 250/1); dosya Devir-2’deydi ve muhbir iki gün sonra “anlaştık” dedi. Ek savunma belgeye dayandı (CMK 226/1).',
-                    'HUKUKI_BILGI',
-                  ),
-                ],
-                [
-                  ifThen(
-                    any(has('ded_yetkisiz'), has('ded_iki_hikaye')),
-                    [
-                      score('HUKUKI_BILGI', 60),
-                      raise('ek_savunma_kismi'),
-                      mark(
-                        'NEUTRAL',
-                        'Ek savunma doğru ama yarımdı; nüfuzun yokluğunu ve muhbirin çelişkisini birlikte göstermek gerekirdi.',
-                        'HUKUKI_BILGI',
-                      ),
-                    ],
-                    [
-                      score('HUKUKI_BILGI', -30),
-                      mark('BAD', 'Hukuki cevap doğru, ama dosyada dayanağını göstermedin.', 'HUKUKI_BILGI'),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-            responses: [
-              W(
-                all(has('ded_yetkisiz'), has('ded_iki_hikaye')),
-                S`
+        option('T04_A', 'İrtikap icbar ister; dosya sanığın masasında değildi, muhbir iki hikâye anlattı.', {
+          effects: [
+            ifThen(
+              all(has('ded_yetkisiz'), has('ded_iki_hikaye')),
+              [
+                score('HUKUKI_BILGI', 150),
+                inc('legal_hits'),
+                inc('pers'),
+                raise('ek_savunma_tam'),
+                mark(
+                  'GOOD',
+                  'İrtikap, görevin sağladığı nüfuzu kötüye kullanarak icbarı gerektirir (TCK 250/1); dosya Devir-2’deydi ve muhbir iki gün sonra “anlaştık” dedi. Ek savunma belgeye dayandı (CMK 226/1).',
+                  'HUKUKI_BILGI',
+                ),
+              ],
+              [
+                ifThen(
+                  any(has('ded_yetkisiz'), has('ded_iki_hikaye')),
+                  [
+                    score('HUKUKI_BILGI', 60),
+                    raise('ek_savunma_kismi'),
+                    mark(
+                      'NEUTRAL',
+                      'Ek savunma doğru ama yarımdı; nüfuzun yokluğunu ve muhbirin çelişkisini birlikte göstermek gerekirdi.',
+                      'HUKUKI_BILGI',
+                    ),
+                  ],
+                  [
+                    score('HUKUKI_BILGI', -30),
+                    mark('BAD', 'Hukuki cevap doğru, ama dosyada dayanağını göstermedin.', 'HUKUKI_BILGI'),
+                  ],
+                ),
+              ],
+            ),
+          ],
+          responses: [
+            W(
+              all(has('ded_yetkisiz'), has('ded_iki_hikaye')),
+              S`
                 > Sayın Başkan, irtikap bir zorlamadır: memur görevinin nüfuzuyla birini mecbur bırakır. Burada sanığın nüfuzu yoktu; başvuru Devir-2'deydi, kontrole hiç gelmemişti.
                 > Muhbirin kendisi de iki gün sonra "zorladı" demekten vazgeçip "anlaştık" demiştir. Zorlanan biri iki gün sonra ortak olmaz.
                 > Görevi kötüye kullanmaya gelince: öncelikli randevu kimseye bir menfaat sağlamadı; şerh kalkmadığı için imza çıkmadı. Bu bir iyilik denemesiydi, bir kazanç değil.
                 baskan: Not edildi.
               `,
-              ),
-              O(S`
+            ),
+            O(S`
               > Sayın Başkan, irtikap bir zorlamadır; sanığın zorlayabileceği bir şey yoktu.
               savci: Muhbir zorlandığını söylüyor, müdafi.
               ~ Haklı. Bir hukuk cümlesi, altında bir kâğıt yoksa havada kalır.
             `),
-            ],
-          },
-        ),
+          ],
+        }),
         option('T04_B', 'Vasıf değişikliği yeni bir savunma gerektirir; ek savunma için süre istiyoruz.', {
           score: { USUL_BILGISI: 30 },
           effects: [raise('ek_sure')],
@@ -1033,7 +1076,9 @@ export const trial: CasePart = {
           score: { HUKUKI_BILGI: -50 },
           effects: [dec('cred')],
           bad: 'Ek iddianame gerekmez: mahkeme eylemin nitelendirilmesinde iddianameyle bağlı değildir (CMK 225/2); vasıf değişecekse sanığa önceden haber verilir ve ek savunması alınır (CMK 226/1).',
-          responses: B(S`baskan: Ek iddianame gerekmez, müdafi; bağlı değiliz, bu yüzden size soruyoruz. Ek savunmanız?`),
+          responses: B(
+            S`baskan: Ek iddianame gerekmez, müdafi; bağlı değiliz, bu yüzden size soruyoruz. Ek savunmanız?`,
+          ),
         }),
         option('T04_D', 'İrtikap da görevi kötüye kullanma da rüşvetten hafiftir; değişikliğe karşı çıkmıyoruz.', {
           effects: [dec('pers')],
@@ -1126,39 +1171,35 @@ export const trial: CasePart = {
       ],
       next: 'T_07',
       options: [
-        option(
-          'T05_A',
-          'Zarf çekmeceye sanık odasında değilken girdi; bu bir varsayım değil, tutanağın kendi saatleri.',
-          {
-            effects: [
-              ifThen(
-                ref('zarf_suphe'),
-                [
-                  score('USUL_BILGISI', 100),
-                  inc('legal_hits'),
-                  mark(
-                    'GOOD',
-                    'Cevap hakkı yerinde kullanıldı (CMK 216/2) ve dosyadaki belgelere dayandı.',
-                    'USUL_BILGISI',
-                  ),
-                ],
-                [
-                  score('USUL_BILGISI', -40),
-                  dec('pers'),
-                  mark(
-                    'BAD',
-                    '“Belgelerle sabit” dedin; ama zarfın sanık yokken girdiğini duruşmada tartıştırmamıştın.',
-                    'USUL_BILGISI',
-                  ),
-                ],
-              ),
-            ],
-            responses: B(S`
+        option('T05_A', 'Zarf çekmeceye sanık yokken girdi; bunu tutanağın kendi saatleri söylüyor.', {
+          effects: [
+            ifThen(
+              ref('zarf_suphe'),
+              [
+                score('USUL_BILGISI', 100),
+                inc('legal_hits'),
+                mark(
+                  'GOOD',
+                  'Cevap hakkı yerinde kullanıldı (CMK 216/2) ve dosyadaki belgelere dayandı.',
+                  'USUL_BILGISI',
+                ),
+              ],
+              [
+                score('USUL_BILGISI', -40),
+                dec('pers'),
+                mark(
+                  'BAD',
+                  '“Belgelerle sabit” dedin; ama zarfın sanık yokken girdiğini duruşmada tartıştırmamıştın.',
+                  'USUL_BILGISI',
+                ),
+              ],
+            ),
+          ],
+          responses: B(S`
             > Sayın Başkan, bu dosyada bir zarf var, ama bir el yok. 10.39'da kayıt susturuluyor; 10.44'te polis boş bir odaya giriyor; 10.46'da sanık dönüyor.
             > Zarf o çekmeceye girdiğinde, çekmecenin sahibi bir alt katta, kimsenin çağırmadığı bir randevuyu usulüne uygun bekliyordu.
           `),
-          },
-        ),
+        }),
         option('T05_B', 'Hukuka aykırı kayıtlar ayıklandığında geriye yalnızca muhbirin çelişen beyanı kalır.', {
           effects: [
             ifThen(
@@ -1339,7 +1380,10 @@ export const trial: CasePart = {
           all({ chosen: 'T07_B' }, ref('oda_bos')),
           S`> Geriye bir zarf kalıyor. Polis 10.44'te odaya girdiğinde oda boştu; sanık iki dakika sonra geldi. Bunu savunma değil, savcılığın kendi tutanağı yazıyor.`,
         ),
-        W({ chosen: 'T07_B' }, S`> Geriye bir zarf kalıyor. Bir zarfın bir çekmecede bulunması, onu oraya kimin koyduğunu söylemez.`),
+        W(
+          { chosen: 'T07_B' },
+          S`> Geriye bir zarf kalıyor. Bir zarfın bir çekmecede bulunması, onu oraya kimin koyduğunu söylemez.`,
+        ),
         W(
           all({ chosen: 'T07_A' }, gercekProven, has('ded_zarf_kaynagi')),
           S`> Zarf, kontrol servisinin değil, Devir Servisi-2'nin destesinden. Zimmet defterinde teslim alanın parafı duruyor.`,
@@ -1374,7 +1418,10 @@ export const trial: CasePart = {
           all({ chosen: 'T07_B' }, any(flag('contra_b1'), flag('contra_b2'))),
           S`> Ve bir muhbir kalıyor: iki gün arayla önce "zorladı", sonra "anlaştık" diyen. İki ayrı hikâye; ikisi aynı anda doğru olamaz.`,
         ),
-        W({ chosen: 'T07_B' }, S`> Ve bir muhbir kalıyor. Onun sözünden başka, zarfı sanığın eline koyan hiçbir kâğıt yok.`),
+        W(
+          { chosen: 'T07_B' },
+          S`> Ve bir muhbir kalıyor. Onun sözünden başka, zarfı sanığın eline koyan hiçbir kâğıt yok.`,
+        ),
       ],
     }),
     decisionNode('T_07P4', [{ to: 'T_07S1' }], {
@@ -1453,9 +1500,9 @@ export const trial: CasePart = {
       ...court2.base,
       title: 'Son söz',
       prompt: { speaker: 'baskan', text: 'Sanık, ayağa kalkın. Son sözünüz?' },
-      next: 'T_09',
+      next: 'T_08K',
       choices: [
-        option('T08_A', '“Bir kez eğildim; bir iyilik için. O zarf benim değil. Kayda geçsin.”', {
+        option('T08_A', '“Bir kez eğildim, bir iyilik için. O zarf benim değil.”', {
           score: { SAVUNMA_STRATEJISI: 25 },
           good: 'Kısa, dürüst ve kendi eğilişini de gören bir son söz.',
           responses: B(S`
@@ -1467,7 +1514,9 @@ export const trial: CasePart = {
         }),
         option('T08_B', '“Ben suçsuzum. Yirmi yedi yıl hizmet ettim; bırakın beni artık.”', {
           neutral: 'Son söz sanığın hakkıdır (CMK 216/3); içeriği hükmü kendiliğinden değiştirmez.',
-          responses: B(S`halil/uzgun: Ben suçsuzum, Sayın Başkan. Yirmi yedi yıl hizmet ettim... Bırakın beni artık. Lütfen.`),
+          responses: B(
+            S`halil/uzgun: Ben suçsuzum, Sayın Başkan. Yirmi yedi yıl hizmet ettim... Bırakın beni artık. Lütfen.`,
+          ),
         }),
         option('T08_C', '“Ne ceza verirseniz razıyım; yeter ki bu dosya bir an önce bitsin.”', {
           effects: [dec('pers')],
@@ -1477,6 +1526,35 @@ export const trial: CasePart = {
             ~ "Yeter ki bitsin." Yirmi yedi yılın sonunda, kurallı bir adamın söylediği ilk kuralsız cümle.
           `),
         }),
+      ],
+    }),
+    // Hükümden önce koridor: o gün kürsüde kimin çözüldüğüne göre tek bir kare.
+    decisionNode('T_08K', [{ to: 'T_09' }], {
+      ...TRIAL,
+      lines: [
+        W(
+          all(flag('bayram_ifsa'), not(flag('etki_bayram'))),
+          S`
+            - Müzakere için ara verildiğinde koridorun öbür ucunda Bayram Öz'ü gördüm. Adli yardımdan genç meslektaşı yanındaydı; bir şeyler anlatıyor, Bayram başını sallıyordu.
+            - Tespihi elindeydi ama çekmiyordu. Bir kez bana baktı; sonra gözlerini yere indirdi. Bugün ilk kez doğruyu söylemişti; doğrunun bir bedeli olacaktı ve bunu ondan iyi bilen yoktu.
+            ~ Bir tanığı yıkmak, bir sanığı kurtarmak değildir. Leyla haklıydı. Yıkıntının altından bir takipçi çıktı; borçlu, korkmuş, yalnız.
+          `,
+        ),
+        W(
+          flag('contra_b4'),
+          S`
+            - Müzakere için ara verildiğinde koridor boşaldı. Muhbir merdivenlere yürüdü; tek başına, tespihini cebinde sıkarak. Kimse onu durdurmadı, kimse ona eşlik etmedi.
+            - Komiser Levent Arı pencerenin önündeydi. Bilirkişi raporunun fotokopisi elindeydi; katlamış, yeniden açmıştı. Tutanağın altındaki imza onundu. Raporun altındaki imza bir cihazın.
+            ~ "Tutanak senin vicdanındır" demişti oğluna. Bugün vicdanının bir satırı eksik çıktı. Bunu ona ben söylemedim; bir tuş söyledi.
+            - Halil sandalyesinden kalktı, pencereye, komiserin iki adım yanına yürüdü. Bir an yan yana durdular; biri yirmi yedi yıllık bir memur, öbürü yirmi yıllık bir polis.
+            halil: Komiser bey. Tutanağınız düzgündü. Saatleri doğru yazmışsınız. Okumayan siz değildiniz; okumak istemeyen herkesti.
+            - Komiser cevap vermedi. Ama fotokopiyi katladı ve cebine koydu; bir kez daha açmadı.
+          `,
+        ),
+        O(S`
+          - Müzakere için ara verildiğinde koridor boşaldı. Muhbir merdivenlere yürüdü; tek başına. Komiser telefonuyla konuşuyordu, sırtı bize dönük.
+          ~ Bir dosyanın sonunda herkes bir yere bakar. Kimse aynı yere bakmaz.
+        `),
       ],
     }),
     decisionNode('T_09', [{ to: 'R_KARAR' }], {

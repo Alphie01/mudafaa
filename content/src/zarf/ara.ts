@@ -33,7 +33,7 @@ import {
   visited,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, ChoiceDef, NodeDef } from '../../../tools/content/src/kit/index.js';
-import { B, O, S, W, minus } from './dsl.js';
+import { ASKED_REASON, LOOKED_REASON, askedOne, gateChoice, B, O, S, W, minus } from './dsl.js';
 import { INV1_RECIPES, POOL_INV1 } from './inv1-hub.js';
 import { ARA, p2 } from './shared.js';
 
@@ -240,6 +240,7 @@ export const ara: CasePart = {
               visibleWhen: has('ev_cihaz'),
             }),
             act('A2_SUC', 'Savcılığa suç duyurusu (CMK 158)', 'ARA_SUC', { description: 'Kime, neyle, ne isteyerek?' }),
+            act('A2_DOSYA', 'Duruşma hazırlığı', 'ARA_DOSYA', { description: 'Soru listesi · 1 EP', maxUses: 3 }),
             free('A2_CIKARIM', 'Çıkarım tahtası', 'ARA_CIKARIM', {
               description: '0 EP · iki kartı birleştir',
               enabledWhen: ref('kart2'),
@@ -282,8 +283,8 @@ export const ara: CasePart = {
         rawChoice('NAVIGATE', 'GO_T', 'DURUŞMAYA GİT · 2. CELSE', {
           role: 'PRIMARY',
           next: 'ARA_SAVCI',
-          enabledWhen: cmp(v('ara_day'), '>=', 2),
-          lockedReason: 'İkinci celseye daha iki hafta var; bugünü dosyaya harca.',
+          enabledWhen: all(cmp(v('ara_day'), '>=', 2), cmp(v('ara_ap'), '<=', 0), visited('ARA_LEYLA')),
+          lockedReason: 'İkinci celseye daha günler var; bugünü sonuna kadar dosyaya harca ve Leyla’ya danış.',
           confirm: 'Duruşmaya gidersen ara evresi biter. Emin misin?',
         }),
       ],
@@ -408,6 +409,43 @@ export const ara: CasePart = {
       `),
       choices: [cont('ARAK2_DEVAM', 'Yarın', 'ARA_SABAH2', { role: 'PRIMARY' })],
     }),
+    story('ARA_DOSYA', {
+      ...ARA,
+      title: 'Soru listesi',
+      background: 'buro_gece',
+      lines: [
+        W(
+          all(has('clue_manuel'), flag('contra_k3')),
+          S`
+            = ARSLAN HUKUK · GECE @buro_gece
+            - Muhbir için soru listesini yazdım: dört satır, dört belge. Her sorunun yanına cevabını değil, hangi kâğıdın cevap vereceğini yazdım.
+            ~ Komiser kürsüde odanın boş olduğunu kabul etti. Cihaz raporu tuşa basıldığını söylüyor. Muhbir bunların ikisini birden taşıyamaz. Taşıyamadığı yerde sorumu bitireceğim; fazlası tanığa ders vermek olur.
+          `,
+        ),
+        W(
+          has('clue_manuel'),
+          S`
+            = ARSLAN HUKUK · GECE @buro_gece
+            - Bilirkişi raporunu soru listemin başına iliştirdim. 10.39.12, STOP, fiziksel tuş. Muhbir "kendiliğinden kapandı" diyecek; rapor başka bir şey diyor.
+            ~ Soruyu bir kez soracağım. Cevabı beğenmezsem raporu sunacağım. Tanıkla tartışmak yok; kâğıt tartışsın.
+          `,
+        ),
+        W(
+          flag('red_kabul'),
+          S`
+            = ARSLAN HUKUK · GECE @buro_gece
+            - Kayıtlar düştü; artık savcının elinde bir muhbir ve bir zarf var. Soru listemi muhbire göre yeniden yazdım. "Zorladı" ile "anlaştık" arasında iki gün var; o iki günü soracağım.
+            ~ Bir tanığın iki hikâyesi varsa, üçüncüsünü ben yazmam. Yalnızca ikisini yan yana koyarım.
+          `,
+        ),
+        O(S`
+          = ARSLAN HUKUK · GECE @buro_gece
+          - Soru listesini yazdım, sildim, yeniden yazdım. Her soru bir belgeye dayanmalı; dayanmayan soru tanığa yeni bir hikâye anlatma fırsatı verir.
+          ~ Leyla'nın kuralı: cevabını bilmediğin soruyu kürsüde sorma. Cevabını bildiğim soruların sayısı, bu gece, beklediğimden az.
+        `),
+      ],
+      choices: [cont('ARADOSYA_BITIR', 'Listeyi dosyaya koy', HUB)],
+    }),
     story('ARA_LEYLA', {
       ...ARA,
       title: 'Leyla',
@@ -432,185 +470,205 @@ export const ara: CasePart = {
       ],
       choices: [cont('ARALEYLA_GERI', 'Masana dön', HUB, { role: 'BACK' })],
     }),
-    direct(
-      documentExam('ARA_SANTRAL', {
-        ...ARA,
-        title: 'Santral dökümü',
-        background: 'buro',
-        hud: ['exam_s'],
-        lines: B(S`
+    gateChoice(
+      direct(
+        documentExam('ARA_SANTRAL', {
+          ...ARA,
+          title: 'Santral dökümü',
+          background: 'buro',
+          hud: ['exam_s'],
+          lines: B(S`
           - Santral dökümü sade bir tablo: saat, arayan, aranan, süre. Bir binanın bir sabahki bütün fısıltıları, rakamlara dökülmüş.
           - Altında personel izin çizelgesi; mart ayı, bir tabloda kırk iki isim.
           ~ Rakamlar yalan söylemez. Ama sorulmadan da bir şey söylemez.
         `),
-        header: { left: 'NİLÜFER TAPU MÜDÜRLÜĞÜ · SANTRAL', right: '12.03.2027 10.00–11.00' },
-        columns: [
-          { label: 'SAAT', flex: 1 },
-          { label: 'ARAYAN → ARANAN', flex: 1.8 },
-          { label: 'SÜRE', flex: 0.8 },
-        ],
-        rows: [
-          row('s1', ['10.12.03', '231 → 214', '1 dk 10 sn']),
-          row('s2', ['10.35.08', '214 → 231', '41 sn']),
-          row('s3', ['10.00–11.00', '201 · harici (telekonferans)', 'meşgul']),
-          row('s4', ['10.40.15', '214 → 102 (çay ocağı)', '9 sn']),
-          row('s5', ['İzin çizelgesi', 'Devir Servisi-2 · mart', '—']),
-        ],
-        tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('cmp', 'Karşılaştır', 'compare')],
-        costVar: 'exam_s',
-        rules: [
-          examine('EX_S2', 'cmp', 's2', {
-            discovers: 'clue_214_cagri',
-            score: { DELIL_ANALIZI: 150 },
-            feedback: {
-              title: 'YENİ İPUCU',
-              text: '10.35.08: 214’ten 231’e, 41 saniye. Makamın hattı 201 o saat boyunca telekonferansta meşgul. Halil’i indiren çağrı Devir-2’nin masasından.',
-              label: '+150 SKOR · Not defterine eklendi',
-              tone: 'special',
-            },
-          }),
-          examine('EX_S5', 'mag', 's5', {
-            discovers: 'clue_izin_gulay',
-            score: { DELIL_ANALIZI: 100 },
-            feedback: {
-              title: 'YENİ İPUCU',
-              text: '“Gülay Erdem — Devir Servisi-2 — yıllık izin — 08.03–19.03.” 12 Mart’ta 214’te tek bir masa doluydu.',
-              label: '+100 SKOR · Not defterine eklendi',
-              tone: 'special',
-            },
-          }),
-          examine('EX_S4', 'mag', 's4', {
-            score: { DELIL_ANALIZI: 50 },
-            effects: [raise('santral_cay')],
-            feedback: {
-              title: 'NOT',
-              text: '10.40.15: 214’ten çay ocağına, dokuz saniye. Biri çay istemiş. On dakikanın tam ortasında.',
-              label: '+50 SKOR',
-              tone: 'info',
-            },
-          }),
-        ],
-        miss: examMiss('FB_SANTRAL'),
-        choices: [
-          rawChoice('NAVIGATE', 'SANTRAL_GULAY', 'İzin çizelgesindeki Gülay Erdem’i ara', {
-            visibleWhen: has('clue_izin_gulay'),
-            maxUses: 1,
-            next: 'ARA_GULAY',
-          }),
-        ],
-        finish: { id: 'SANTRAL_BITIR' },
-      }),
+          header: { left: 'NİLÜFER TAPU MÜDÜRLÜĞÜ · SANTRAL', right: '12.03.2027 10.00–11.00' },
+          columns: [
+            { label: 'SAAT', flex: 1 },
+            { label: 'ARAYAN → ARANAN', flex: 1.8 },
+            { label: 'SÜRE', flex: 0.8 },
+          ],
+          rows: [
+            row('s1', ['10.12.03', '231 → 214', '1 dk 10 sn']),
+            row('s2', ['10.35.08', '214 → 231', '41 sn']),
+            row('s3', ['10.00–11.00', '201 · harici (telekonferans)', 'meşgul']),
+            row('s4', ['10.40.15', '214 → 102 (çay ocağı)', '9 sn']),
+            row('s5', ['İzin çizelgesi', 'Devir Servisi-2 · mart', '—']),
+          ],
+          tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('cmp', 'Karşılaştır', 'compare')],
+          costVar: 'exam_s',
+          rules: [
+            examine('EX_S2', 'cmp', 's2', {
+              discovers: 'clue_214_cagri',
+              score: { DELIL_ANALIZI: 150 },
+              feedback: {
+                title: 'YENİ İPUCU',
+                text: '10.35.08: 214’ten 231’e, 41 saniye. Makamın hattı 201 o saat boyunca telekonferansta meşgul. Halil’i indiren çağrı Devir-2’nin masasından.',
+                label: '+150 SKOR · Not defterine eklendi',
+                tone: 'special',
+              },
+            }),
+            examine('EX_S5', 'mag', 's5', {
+              discovers: 'clue_izin_gulay',
+              score: { DELIL_ANALIZI: 100 },
+              feedback: {
+                title: 'YENİ İPUCU',
+                text: '“Gülay Erdem — Devir Servisi-2 — yıllık izin — 08.03–19.03.” 12 Mart’ta 214’te tek bir masa doluydu.',
+                label: '+100 SKOR · Not defterine eklendi',
+                tone: 'special',
+              },
+            }),
+            examine('EX_S4', 'mag', 's4', {
+              score: { DELIL_ANALIZI: 50 },
+              effects: [raise('santral_cay')],
+              feedback: {
+                title: 'NOT',
+                text: '10.40.15: 214’ten çay ocağına, dokuz saniye. Biri çay istemiş. On dakikanın tam ortasında.',
+                label: '+50 SKOR',
+                tone: 'info',
+              },
+            }),
+          ],
+          miss: examMiss('FB_SANTRAL'),
+          choices: [
+            rawChoice('NAVIGATE', 'SANTRAL_GULAY', 'İzin çizelgesindeki Gülay Erdem’i ara', {
+              visibleWhen: has('clue_izin_gulay'),
+              maxUses: 1,
+              next: 'ARA_GULAY',
+            }),
+          ],
+          finish: { id: 'SANTRAL_BITIR' },
+        }),
+      ),
+      'SANTRAL_BITIR',
+      any(has('clue_214_cagri'), has('clue_izin_gulay'), flag('santral_cay'), cmp(v('exam_s'), '<', 5)),
+      LOOKED_REASON,
     ),
-    direct(
-      documentExam('ARA_CIHAZ', {
-        ...ARA,
-        title: 'Cihaz raporu',
-        background: 'buro',
-        hud: ['exam_c'],
-        lines: B(S`
+    gateChoice(
+      direct(
+        documentExam('ARA_CIHAZ', {
+          ...ARA,
+          title: 'Cihaz raporu',
+          background: 'buro',
+          hud: ['exam_c'],
+          lines: B(S`
           - Bilirkişi raporu dört sayfa. İlk üçü cihazı anlatıyor: marka, model, bellek. Dördüncüsü bir günlük: saniye saniye, cihazın kendi hafızası.
           - Leyla omzumun üstünden baktı. "Cihazlar unutmaz" dedi. "Unutturulurlar."
           ~ Bir arıza, bir günlükte iz bırakır. Bir parmak da.
         `),
-        header: { left: 'BİLİRKİŞİ RAPORU · SES KAYIT CİHAZI', right: 'İÇ GÜNLÜK · 12.03.2027' },
-        columns: [
-          { label: 'SAAT', flex: 1 },
-          { label: 'KAYIT', flex: 2.4 },
-        ],
-        rows: [
-          row('c1', ['10.29.51', 'REC — kayıt başladı']),
-          row('c2', ['10.38.40–10.39.10', 'Ses: “anlaşılmayan konuşmalar” (kolluk çözümü)']),
-          row('c3', ['10.39.12', 'STOP']),
-          row('c4', ['—', 'Pil durumu · donanım hata kaydı']),
-        ],
-        tools: [
-          tool('mag', 'Büyüteç', 'magnifier'),
-          tool('cmp', 'Karşılaştır', 'compare'),
-          tool('chk', 'Doğrula', 'check'),
-        ],
-        costVar: 'exam_c',
-        rules: [
-          examine('EX_C2', 'mag', 'c2', {
-            discovers: 'clue_fisilti',
-            score: { DELIL_ANALIZI: 150 },
-            feedback: {
-              title: 'YENİ İPUCU',
-              text: 'Bilirkişi “anlaşılmayan” otuz saniyeyi filtreyle açmış. Muhbirin yanında ikinci bir ses, fısıltıyla: “Burada değil. Bana ver. Ben bırakırım. Üçüncü çekmece…”',
-              label: '+150 SKOR · Not defterine eklendi',
-              tone: 'special',
-            },
-          }),
-          examine('EX_C3', 'chk', 'c3', {
-            discovers: 'clue_manuel',
-            score: { DELIL_ANALIZI: 150 },
-            feedback: {
-              title: 'YENİ İPUCU',
-              text: '“10.39.12 — STOP — fiziksel tuş.” Cihaz kendiliğinden durmamış; biri tuşa basmış. Teknik arıza değil, bir parmak.',
-              label: '+150 SKOR · Not defterine eklendi',
-              tone: 'special',
-            },
-          }),
-          examine('EX_C4', 'mag', 'c4', {
-            score: { DELIL_ANALIZI: 50 },
-            effects: [raise('pil_dolu')],
-            feedback: {
-              title: 'NOT',
-              text: 'Pil %68. Donanım hata kaydı: yok. Cihaz yorgun değildi; susturulmuştu.',
-              label: '+50 SKOR',
-              tone: 'info',
-            },
-          }),
-        ],
-        miss: examMiss('FB_CIHAZ'),
-        finish: { id: 'CIHAZ_BITIR' },
-      }),
+          header: { left: 'BİLİRKİŞİ RAPORU · SES KAYIT CİHAZI', right: 'İÇ GÜNLÜK · 12.03.2027' },
+          columns: [
+            { label: 'SAAT', flex: 1 },
+            { label: 'KAYIT', flex: 2.4 },
+          ],
+          rows: [
+            row('c1', ['10.29.51', 'REC — kayıt başladı']),
+            row('c2', ['10.38.40–10.39.10', 'Ses: “anlaşılmayan konuşmalar” (kolluk çözümü)']),
+            row('c3', ['10.39.12', 'STOP']),
+            row('c4', ['—', 'Pil durumu · donanım hata kaydı']),
+          ],
+          tools: [
+            tool('mag', 'Büyüteç', 'magnifier'),
+            tool('cmp', 'Karşılaştır', 'compare'),
+            tool('chk', 'Doğrula', 'check'),
+          ],
+          costVar: 'exam_c',
+          rules: [
+            examine('EX_C2', 'mag', 'c2', {
+              discovers: 'clue_fisilti',
+              score: { DELIL_ANALIZI: 150 },
+              feedback: {
+                title: 'YENİ İPUCU',
+                text: 'Bilirkişi “anlaşılmayan” otuz saniyeyi filtreyle açmış. Muhbirin yanında ikinci bir ses, fısıltıyla: “Burada değil. Bana ver. Ben bırakırım. Üçüncü çekmece…”',
+                label: '+150 SKOR · Not defterine eklendi',
+                tone: 'special',
+              },
+            }),
+            examine('EX_C3', 'chk', 'c3', {
+              discovers: 'clue_manuel',
+              score: { DELIL_ANALIZI: 150 },
+              feedback: {
+                title: 'YENİ İPUCU',
+                text: '“10.39.12 — STOP — fiziksel tuş.” Cihaz kendiliğinden durmamış; biri tuşa basmış. Teknik arıza değil, bir parmak.',
+                label: '+150 SKOR · Not defterine eklendi',
+                tone: 'special',
+              },
+            }),
+            examine('EX_C4', 'mag', 'c4', {
+              score: { DELIL_ANALIZI: 50 },
+              effects: [raise('pil_dolu')],
+              feedback: {
+                title: 'NOT',
+                text: 'Pil %68. Donanım hata kaydı: yok. Cihaz yorgun değildi; susturulmuştu.',
+                label: '+50 SKOR',
+                tone: 'info',
+              },
+            }),
+          ],
+          miss: examMiss('FB_CIHAZ'),
+          finish: { id: 'CIHAZ_BITIR' },
+        }),
+      ),
+      'CIHAZ_BITIR',
+      any(has('clue_fisilti'), has('clue_manuel'), flag('pil_dolu'), cmp(v('exam_c'), '<', 5)),
+      LOOKED_REASON,
     ),
-    direct(
-      sceneSearch('ARA_KAMERA', {
-        ...ARA,
-        title: 'Kamera karesi',
-        background: 'buro_gece',
-        hud: ['taps_c'],
-        exposeCounts: true,
-        scene: 'sc_kamera',
-        lines: B(S`
+    gateChoice(
+      direct(
+        sceneSearch('ARA_KAMERA', {
+          ...ARA,
+          title: 'Kamera karesi',
+          background: 'buro_gece',
+          hud: ['taps_c'],
+          exposeCounts: true,
+          scene: 'sc_kamera',
+          lines: B(S`
           - Flaş bellekte yirmi dakikalık bir kayıt. Merdivene dönük bir açı: takipçiler iniyor, çıkıyor; bir çaycı tepsiyle geçiyor. 10.36'da Halil merdivenden iniyor, gözlüğü başının üstünde.
           - 10.38'de muhbir merdivenden çıkıyor; elinde kahverengi bir zarf, kolunun altında. 10.39'da kadrajın dışına, arşive inen merdivenin koridoruna dönüyor. Bir dakika sonra elleri boş geri geliyor.
           - 10.41.07'de kadrajın kenarında bir kapı açılıyor. Kareyi dondurdum. Grenli, mavi, sessiz.
           ~ Bir kare, bin kelimeye bedel derler. Bu karenin bin kelimesinden hangisi doğru, bulmam gerek.
         `),
-        instruction: 'Karedeki ayrıntılara dokun. Boş yere dokunmak bir büyüteç hakkı yer.',
-        costVar: 'taps_c',
-        miss: tapMiss('FB_KAMERA'),
-        finish: { id: 'KAMERA_BITIR', label: 'Kareyi kapat' },
-      }),
+          instruction: 'Karedeki ayrıntılara dokun. Boş yere dokunmak bir büyüteç hakkı yer.',
+          costVar: 'taps_c',
+          miss: tapMiss('FB_KAMERA'),
+          finish: { id: 'KAMERA_BITIR', label: 'Kareyi kapat' },
+        }),
+      ),
+      'KAMERA_BITIR',
+      any(has('clue_kare_saat'), has('clue_kol_saat'), has('clue_kare_zarf'), cmp(v('taps_c'), '<', 4)),
+      LOOKED_REASON,
     ),
-    direct(
-      sceneSearch('ARA_ARSIV', {
-        ...ARA,
-        title: 'Arşiv',
-        background: 'depo',
-        hud: ['taps_a'],
-        exposeCounts: true,
-        scene: 'sc_arsiv',
-        lines: B(S`
+    gateChoice(
+      direct(
+        sceneSearch('ARA_ARSIV', {
+          ...ARA,
+          title: 'Arşiv',
+          background: 'depo',
+          hud: ['taps_a'],
+          exposeCounts: true,
+          scene: 'sc_arsiv',
+          lines: B(S`
           = NİLÜFER TAPU MÜDÜRLÜĞÜ · ARŞİV @depo
           - Ferda Yalçın kapıyı kendi açtı. "Mahkeme zimmet defterini istedi; ben de buradayım. Prosedür." Bir sandalyeye oturdu, okuma gözlüğünü taktı, beni izledi.
           - Arşiv bodrum kokuyordu: nemli karton, eski mürekkep, toz. Raflar tavana kadar; sırtlarında yıllar. 1987'nin cildi en alt raftaydı.
           ~ Yirmi yıldır kimsenin bakmadığı bir raf. Umarım hâlâ öyledir.
         `),
-        instruction: 'Raflara ve masaya dokun. Boş yere dokunmak bir büyüteç hakkı yer.',
-        costVar: 'taps_a',
-        miss: tapMiss('FB_ARSIV'),
-        choices: [
-          rawChoice('NAVIGATE', 'ARSIV_FERDA', 'Ferda Yalçın’la konuş', {
-            visibleWhen: has('clue_zimmet'),
-            maxUses: 1,
-            next: 'ARA_FERDA',
-          }),
-        ],
-        finish: { id: 'ARSIV_BITIR', label: 'Arşivden çık' },
-      }),
+          instruction: 'Raflara ve masaya dokun. Boş yere dokunmak bir büyüteç hakkı yer.',
+          costVar: 'taps_a',
+          miss: tapMiss('FB_ARSIV'),
+          choices: [
+            rawChoice('NAVIGATE', 'ARSIV_FERDA', 'Ferda Yalçın’la konuş', {
+              visibleWhen: has('clue_zimmet'),
+              maxUses: 1,
+              next: 'ARA_FERDA',
+            }),
+          ],
+          finish: { id: 'ARSIV_BITIR', label: 'Arşivden çık' },
+        }),
+      ),
+      'ARSIV_BITIR',
+      any(has('clue_zimmet'), has('ev_kirmizi_defter'), cmp(v('taps_a'), '<', 4)),
+      LOOKED_REASON,
     ),
     direct(
       conversation('ARA_FERDA', {
@@ -677,72 +735,68 @@ export const ara: CasePart = {
       background: 'buro',
       prompt: 'Bursa Cumhuriyet Başsavcılığına. Kimin hakkında, hangi somut dayanakla, ne isteyerek?',
       choices: [
-        option(
-          'SUC_A',
-          'Devir-2 memuru hakkında: zarfın zimmet kaydı ve 214’ten yapılan çağrıyla',
-          {
-            effects: [
-              ifThen(
-                all(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
-                [
-                  raise('suc_duyurusu'),
-                  score('USUL_BILGISI', 80),
-                  mark(
-                    'GOOD',
-                    'Somut dayanaklı suç duyurusu (CMK 158): zarfın zimmet kaydı, santral ve izin çizelgesi. Şüpheli için iletişimin tespiti hâkim kararıyla istenebilir (CMK 135/6); iftira ve kişiyi hürriyetinden yoksun kılma da değerlendirilir (TCK 267).',
-                    'USUL_BILGISI',
-                  ),
-                ],
-                [
-                  ifThen(
-                    any(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
-                    [
-                      raise('suc_duyurusu'),
-                      score('USUL_BILGISI', 30),
-                      mark(
-                        'NEUTRAL',
-                        'Suç duyurusu kayda girdi; ama dayanaklarından biri eksikti. Zarfın kaynağını ve çağrının tek bir masadan geldiğini birlikte göstermek gerekirdi.',
-                        'USUL_BILGISI',
-                      ),
-                    ],
-                    [
-                      mark(
-                        'BAD',
-                        'Somut dayanak olmadan bir memurun adını suç duyurusuna yazmak iftira riskidir (TCK 267). Önce zarfı ve çağrıyı belgele.',
-                        'USUL_BILGISI',
-                      ),
-                      score('USUL_BILGISI', -30),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-            responses: [
-              W(
-                all(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
-                S`
+        option('SUC_A', 'Devir-2 memuru hakkında: zarfın zimmet kaydı ve 214’ten yapılan çağrıyla', {
+          effects: [
+            ifThen(
+              all(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
+              [
+                raise('suc_duyurusu'),
+                score('USUL_BILGISI', 80),
+                mark(
+                  'GOOD',
+                  'Somut dayanaklı suç duyurusu (CMK 158): zarfın zimmet kaydı, santral ve izin çizelgesi. Şüpheli için iletişimin tespiti hâkim kararıyla istenebilir (CMK 135/6); iftira ve kişiyi hürriyetinden yoksun kılma da değerlendirilir (TCK 267).',
+                  'USUL_BILGISI',
+                ),
+              ],
+              [
+                ifThen(
+                  any(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
+                  [
+                    raise('suc_duyurusu'),
+                    score('USUL_BILGISI', 30),
+                    mark(
+                      'NEUTRAL',
+                      'Suç duyurusu kayda girdi; ama dayanaklarından biri eksikti. Zarfın kaynağını ve çağrının tek bir masadan geldiğini birlikte göstermek gerekirdi.',
+                      'USUL_BILGISI',
+                    ),
+                  ],
+                  [
+                    mark(
+                      'BAD',
+                      'Somut dayanak olmadan bir memurun adını suç duyurusuna yazmak iftira riskidir (TCK 267). Önce zarfı ve çağrıyı belgele.',
+                      'USUL_BILGISI',
+                    ),
+                    score('USUL_BILGISI', -30),
+                  ],
+                ),
+              ],
+            ),
+          ],
+          responses: [
+            W(
+              all(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
+              S`
                 - Leyla dilekçeyi okudu; bir kelimeyi değiştirdi. "Kesin" yazdığım yere "muhtemel" yazdı. "Savcıya kesin deme" dedi; "kesin olanı o söylesin."
                 - Üç sayfa. Birinci sayfada bir zarf ve bir deste: 0417, 0401–0450, Devir-2. İkinci sayfada bir dahili ve bir izin çizelgesi: 214, tek masa. Üçüncü sayfada bir talep.
                 - Savcılık kalemindeki memur dilekçeyi okudu, kaşlarını kaldırdı. "Bu bir harita, avukat hanım" dedi. Numara verdi.
                 - Dilekçenin son satırında bir talep vardı, bir hüküm değil: "Gerekli araştırmanın yapılmasını arz ederim." Leyla o satırın altını çizdi. "Gerisi onların işi" dedi.
                 ~ Bir isim yazdım. Ama isimden önce iki kâğıt yazdım. Leyla'nın dediği gibi: parmak değil, kâğıt.
               `,
-              ),
-              W(
-                any(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
-                S`
+            ),
+            W(
+              any(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
+              S`
                 - Dilekçeyi yazdım. Elimde bir kâğıt vardı, iki değil. Savcılık numara verdi; ama memurun yüzünde "bir tane daha" ifadesi vardı.
                 ~ Yarım bir harita, yolu gösterir ama kapıyı göstermez.
               `,
-              ),
-              O(S`
+            ),
+            O(S`
               - Dilekçeyi yazdım, okudum, yeniden okudum. Bir isim vardı, bir şüphe vardı; bir kâğıt yoktu.
               ~ Göndermedim. Leyla'nın sesi: "Tahmin dilekçeye yazılmaz." Bir isim, bir kâğıt değildir.
             `),
-            ],
-            next: '$stay',
-          },
-        ),
+          ],
+          next: '$stay',
+        }),
         option('SUC_B', 'Müteahhit Ateşoğlu hakkında: on bir dosyanın ve zarfın arkasındaki çıkar', {
           score: { USUL_BILGISI: -40 },
           effects: [raise('suc_cengiz')],
@@ -833,22 +887,18 @@ export const ara: CasePart = {
             `),
             next: '$stay',
           }),
-          option(
-            'AH_HAZIR',
-            'Size yeniden söz verilecek. Ne söyleyeceğinizi ben söylemem; doğruyu kısa söyleyin.',
-            {
-              score: { SAVUNMA_STRATEJISI: 40 },
-              effects: [raise('halil_hazir'), inc('trust', 3)],
-              good: 'Avukat müvekkili ek savunmaya ve son söze hazırlar, ama onun yerine metin yazmaz; doğrunun kısa ve sade söylenmesi en güçlü savunmadır.',
-              responses: B(S`
+          option('AH_HAZIR', 'Size yeniden söz verilecek. Ne söyleyeceğinizi ben söylemem; doğruyu kısa söyleyin.', {
+            score: { SAVUNMA_STRATEJISI: 40 },
+            effects: [raise('halil_hazir'), inc('trust', 3)],
+            good: 'Avukat müvekkili ek savunmaya ve son söze hazırlar, ama onun yerine metin yazmaz; doğrunun kısa ve sade söylenmesi en güçlü savunmadır.',
+            responses: B(S`
               halil: Kısa. Ben kısa konuşamam ki. Yirmi yedi yıl gerekçe yazdım; her ret kararı iki sayfa.
               > O zaman iki sayfanın ilk cümlesini söyleyin. Gerisini heyet okur.
               - Halil güldü. İlk kez. Kısa, kuru, utangaç bir gülüş.
               halil: İlk cümle. Peki. "Yirmi yedi yılda bir kez kuralı esnettim; o bir iyilikti, bir pazarlık değil." İlk cümle bu.
             `),
-              next: '$stay',
-            },
-          ),
+            next: '$stay',
+          }),
           option('AH_EZBER', 'Size bir metin hazırladım; kürsüde onu ezbere söyleyin, başka bir şey eklemeyin.', {
             score: { SAVUNMA_STRATEJISI: -40 },
             effects: [raise('halil_ezber')],
@@ -860,7 +910,11 @@ export const ara: CasePart = {
             `),
             next: '$stay',
           }),
-          cont('AH_GERI', 'Kalk', HUB, { role: 'BACK' }),
+          cont('AH_GERI', 'Kalk', HUB, {
+            role: 'BACK',
+            enabledWhen: askedOne('AH_DEFTER', 'AH_SINAN', 'AH_DOSYALAR', 'AH_GECE', 'AH_HAZIR', 'AH_EZBER'),
+            lockedReason: ASKED_REASON,
+          }),
         ],
       }),
     ),
@@ -903,23 +957,19 @@ export const ara: CasePart = {
             `),
             next: '$stay',
           }),
-          option(
-            'MUZ_TANIK',
-            'Mahkemeden sizi tanık olarak dinlemesini isteyeceğim; yalnızca gördüğünüzü anlatırsınız.',
-            {
-              visibleWhen: any(has('clue_cay_defteri'), flag('muzaffer_gordu')),
-              score: { USUL_BILGISI: 40 },
-              effects: [raise('muzaffer_cagrildi')],
-              good: 'Tanığın dinlenmesi mahkemeden istenir (CMK 177, 178); avukat tanığa ne söyleyeceğini söylemez. Tanığın korkusu dinlenir ama yönlendirilmez.',
-              responses: B(S`
+          option('MUZ_TANIK', 'Sizi mahkemeye tanık olarak bildireceğim; gördüğünüzü anlatırsınız.', {
+            visibleWhen: any(has('clue_cay_defteri'), flag('muzaffer_gordu')),
+            score: { USUL_BILGISI: 40 },
+            effects: [raise('muzaffer_cagrildi')],
+            good: 'Tanığın dinlenmesi mahkemeden istenir (CMK 177, 178); avukat tanığa ne söyleyeceğini söylemez. Tanığın korkusu dinlenir ama yönlendirilmez.',
+            responses: B(S`
               muzaffer: Mahkeme mi? Ben... ben bir kere trafik için gittim, o kadar. Kürsüde ne denir, bilmem.
               > Gördüğünüz denir. Fazlası değil. Defterinizi de getirin.
               - Muzaffer defteri ipe geri astı. Sonra indirdi, önlüğünün cebine koydu.
               muzaffer: Halil Bey bana yirmi yıl "günaydın usta" dedi. Bir kez bile atlamadı. Ben de bir kez atlamayayım.
             `),
-              next: '$stay',
-            },
-          ),
+            next: '$stay',
+          }),
           option('MUZ_BASKI', 'Mahkemede yüzünü de gördüğünüzü söyleyin; kim olduğunu ikimiz de biliyoruz.', {
             visibleWhen: flag('muzaffer_gordu'),
             score: { USUL_BILGISI: -150 },
@@ -933,7 +983,11 @@ export const ara: CasePart = {
             `),
             next: '$stay',
           }),
-          cont('MUZ_GERI', 'Çayını bitir, çık', HUB, { role: 'BACK' }),
+          cont('MUZ_GERI', 'Çayını bitir, çık', HUB, {
+            role: 'BACK',
+            enabledWhen: askedOne('MUZ_DEFTER', 'MUZ_GORDU', 'MUZ_TANIK', 'MUZ_BASKI'),
+            lockedReason: ASKED_REASON,
+          }),
         ],
       }),
     ),
@@ -1104,6 +1158,8 @@ export const ara: CasePart = {
           S`
             = 30 MAYIS 2027 · 23.30 — ARSLAN HUKUK @buro_gece
             - İkinci celseden önceki gece. Panoda artık bir isim var; ama ismin yanında kâğıtlar var. Bir deste, bir dahili, bir izin çizelgesi.
+            - İsmi panoya yazmadım; bir kartın arkasına, kurşun kalemle. Yarın o isim salonda söylenecekse, onu ben değil, kâğıtlar söyleyecek. Kartı ters çevirdim, raptiyeyi bastırdım.
+            - Işığı kapattım. Karanlıkta pano, yağmurlu bir pencereye benziyordu; arkasında ne olduğu belli, ama bir türlü net değil.
           `,
         ),
         O(S`

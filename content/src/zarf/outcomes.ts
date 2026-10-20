@@ -122,7 +122,8 @@ export const outcomes: CasePart = {
           'Sanığın suçu işlediğine dair kesin ve inandırıcı delil elde edilememiştir; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2). Müdafiin davranışı sanığın aleyhine değerlendirilemez.',
         ),
       ],
-      legalBasis: 'CMK 223/2-e, 217/1, 135, 137/3, 141/1-e, 142, 231/3; Anayasa 38/4, 38/6; TCK 277; Av.K. 34; CMK 273/1',
+      legalBasis:
+        'CMK 223/2-e, 217/1, 135, 137/3, 141/1-e, 142, 231/3; Anayasa 38/4, 38/6; TCK 277; Av.K. 34; CMK 273/1',
       xp: 0,
       howToReach:
         'Bir tanığa mahkemede ne söyleyeceğini dikte etmek. Sanık nesnel delillerle beraat eder; müdafi savcılığa ve baroya bildirilir. Bu sona ulaşmamak gerekir.',
@@ -150,14 +151,7 @@ export const outcomes: CasePart = {
     outcome('BERAAT_B', {
       class: 'ACQUITTAL',
       priority: 2,
-      when: all(
-        notCollapsed,
-        temiz,
-        gercekProven,
-        flag('gercek_fail'),
-        ref('kayit_disi'),
-        finalAtLeast(T_BERAAT_B),
-      ),
+      when: all(notCollapsed, temiz, gercekProven, flag('gercek_fail'), ref('kayit_disi'), finalAtLeast(T_BERAAT_B)),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -245,7 +239,7 @@ export const outcomes: CasePart = {
           ref('oda_bos'),
         ),
         because(
-          'Sanığın 10.35’te makamdan geldiği izlenimi veren bir çağrıyla odasından ayrıldığı duruşmada gösterilmiştir.',
+          'Sanığın 10.35’te makamdan geldiği izlenimi veren, ancak makamdan yapılmamış bir çağrıyla odasından uzaklaştırıldığı duruşmada gösterilmiştir.',
           ref('ayrilis'),
         ),
         because(
@@ -328,6 +322,17 @@ export const outcomes: CasePart = {
           leyla: Beraat beraattir, Deniz. "Sabit olmadığından" ile "işlemediği sabit olduğundan" arasındaki farkı Halil bilir; heyet de bilir. Sen de bileceksin. Ama bu gece değil.
           - Masamdaki dosyayı kapattı, sırtını dosya dolabının sırasına göre hizaladı. Sonra güldü; Halil'den bulaşmış bir alışkanlık.
         `),
+        W(
+          all(flag('suc_duyurusu'), not(gercekProven)),
+          S`
+            = İKİ HAFTA SONRA · ARSLAN HUKUK @buro
+            - Savcılıktan bir yazı geldi; ince, tek sayfa. Suç duyurum bir soruşturma numarası almıştı. Altında üç satır: zimmet defterinin aslı, santral dökümü ve koridor kamerasının kaydı getirtilmişti.
+            - Dördüncü satır bana dairdi: "İhbarda bulunanın bilgisine başvurulmak üzere çağrılmasına." Bir avukat bazen dinlenen taraf olur; gördüğünü anlatır, gördüğünü sandığını değil.
+            - Yazıyı Leyla'ya gösterdim. Okudu, gözlüğünü çıkardı, camlarını sildi; Halil'den bulaşmış bir alışkanlık. Sonra yazıyı katladı ve bana geri verdi.
+            leyla: Sen bir harita çizdin, Deniz. Yolu yürümek savcının işi. Bir gün o koridordan biri geçecek ve kameraya bakmayacak; o gün haritan işe yarayacak.
+            ~ Bir isim yazmıştım; ama isimden önce bir deste, bir dahili, bir saat. İsim o kâğıtlarla ayakta kalacak ya da düşecek. İkisini de bir savcı söyleyecek, ben değil.
+          `,
+        ),
         W(
           gercekProven,
           S`~ Bazen adalet bir kapıyı açar ve kimin kapattığını da gösterir; ama adını hükme yazmaz. O adı artık bir savcı yazacak. !fade`,
@@ -426,7 +431,7 @@ export const outcomes: CasePart = {
           not(ref('oda_bos')),
         ),
         because(
-          'Polis odaya girdiğinde sanığın odada bulunmadığı tutanakla sabittir; ancak sanığın odasından ne zaman ayrıldığı duruşmada gösterilmediğinden zarfın sanığa daha önce verilmiş olabileceği ihtimali dışlanamamıştır.',
+          'Polis odaya girdiğinde sanığın odada bulunmadığı tutanakla sabittir; ancak sanığın odasından neden ayrıldığı, yani kendisini çağıran bir çağrının gerçekten makamdan gelip gelmediği duruşmada gösterilmediğinden, sanığın zarfın bırakılacağını bilerek odadan çıkmış olabileceği ihtimali dışlanamamıştır.',
           all(ref('oda_bos'), not(ref('ayrilis'))),
         ),
         because(

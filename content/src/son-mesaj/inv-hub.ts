@@ -71,6 +71,17 @@ export const invHub: CasePart = {
       ...C2,
       title: 'Soruşturma',
       background: 'buro',
+      // Etkinliklerin kaynak sayaçları hub'a her dönüşte tazelenir: etkinlikler tek seferlik olduğundan oyunu
+      // değiştirmez, ama doğrulayıcının durum uzayında artık değerleri bir daha ayırt edilmez.
+      onEnter: [
+        set('taps', 7),
+        set('taps2', 6),
+        set('ex1', 5),
+        set('ex2', 8),
+        set('ex3', 6),
+        set('ex4', 4),
+        set('min', 15),
+      ],
       lines: hubLines,
       scenePreview: { scene: 'sc_ofis' },
       tabs: [
@@ -181,6 +192,11 @@ export const invHub: CasePart = {
         nav('GO_H1', 'DURUŞMADAN ÖNCEKİ GECE', 'INV_GECE_1', {
           role: 'PRIMARY',
           confirm: 'Soruşturma evresi biter. Emin misin?',
+          enabledWhen: any(
+            cmp(v('day'), '==', 3),
+            all(visited('INV_GORUSME'), visited('INV_TUTANAK'), visited('INV_IMAJ'), visited('INV_ARAMA_OFIS')),
+          ),
+          lockedReason: 'Dilekçe süresi 3. gün doluyor. Erken gitmek için önce müvekkili dinle, tutanağı ve raporu oku, ofisi ara.',
         }),
       ],
     }),
@@ -262,9 +278,8 @@ export const invHub: CasePart = {
           flag('ozan_ziyaret'),
           `
           # AKŞAM 22.30 — ARSLAN HUKUK |bg=buro_gece
-          > Telefon masada titredi. Bilinmeyen bir numara değil; kaydetmiştim. |fx=flash
-          ?PUSULA: Ozan Tekin · “Sn. Arslan, bugünkü ziyaretiniz için teşekkür ederim. Yardımcı olabileceğim her konuda... Saygılar.”
-          ~ Kibar bir adam. Ekranı kapattım. Ekran bir süre daha karanlıkta parladı.
+          > Masamda Ozan Tekin’in kartviziti: kabartma harfler, cam bir plaza, bir bonsai logosu. Kartı çekmeceye koydum.
+          ~ Dosyada bir paragraflık bir tanık; karşımda bir kemer hikâyesi ve bir simit ikramı. İddianame onun tek cümlesine yaslanıyor: “pişman edeceğim.”
         `,
         ),
         O(`

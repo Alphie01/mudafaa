@@ -138,7 +138,13 @@
                   "else": 0
                 }
               },
-              { "if": { "when": { "any": [{ "flag": "contra_s2" }, { "flag": "contra_s4" }] }, "then": 1, "else": 0 } },
+              {
+                "if": {
+                  "when": { "any": [{ "flag": "contra_s2" }, { "flag": "contra_s4" }, { "flag": "bilirkisi_zincir" }] },
+                  "then": 1,
+                  "else": 0
+                }
+              },
               {
                 "if": {
                   "when": {
@@ -164,18 +170,43 @@
     },
     {
       "id": "ozan_dayanak",
-      "label": "Eski ortak hakkında somut dayanak var",
+      "label": "Eski ortak hakkında somut dayanak var: cihaz, zimmet ve hat",
       "when": {
         "all": [
           { "hasEvidence": "ded_bagli" },
+          { "any": [{ "hasEvidence": "ded_laptop_ozan" }, { "hasEvidence": "clue_envanter" }] },
+          { "any": [{ "hasEvidence": "ev_isp" }, { "hasEvidence": "ded_ip_tekin" }] }
+        ]
+      }
+    },
+    {
+      "id": "bilirkisi_teyit",
+      "label": "Bilirkişi, raporunu okuyan savunmanın sorusuyla bulguyu teyit etti",
+      "when": { "any": [{ "flag": "bilirkisi_cihaz" }, { "flag": "bilirkisi_kilit" }] }
+    },
+    {
+      "id": "ara_ilerleme",
+      "label": "Arada en az üç iş tamamlandı",
+      "when": {
+        "cmp": [
           {
-            "any": [
-              { "hasEvidence": "ded_laptop_ozan" },
-              { "hasEvidence": "ded_ip_tekin" },
-              { "hasEvidence": "clue_envanter" },
-              { "hasEvidence": "clue_dock" }
+            "add": [
+              { "if": { "when": { "visited": "ARA_DEMIRBAS" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "visited": "ARA_ARAMA_EV" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "visited": "ARA_VAKIF" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "visited": "ARA_MELIS" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "visited": "ARA_RAPOR" }, "then": 1, "else": 0 } },
+              {
+                "if": {
+                  "when": { "any": [{ "flag": "suc_duyurusu" }, { "flag": "suc_mechul" }] },
+                  "then": 1,
+                  "else": 0
+                }
+              }
             ]
-          }
+          },
+          ">=",
+          3
         ]
       }
     }
@@ -465,6 +496,8 @@
     { "id": "bilirkisi_cihaz", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "bilirkisi_kilit", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "bilirkisi_ss", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "bilirkisi_zincir", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "bilirkisi_el", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "hayri_saat", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "hayri_dinlendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "press_o1", "type": "bool", "initial": false, "visibility": "HIDDEN" },

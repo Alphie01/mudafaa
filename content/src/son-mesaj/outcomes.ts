@@ -33,9 +33,19 @@ export const outcomes: CasePart = {
       ethicsCard:
         'Bir müvekkil, hakkındaki adaletsizliğe aynı yolla karşılık vermeni isteyebilir. Avukatın işi, o yola girmemektir. Delil karartmak, başkasının hesabına girmek: müvekkili de, seni de yakar.',
       epilogue: B(`
+        # ADLİYE KORİDORU — 16.40 |bg=adliye
         > Hâkim hükmü okuduktan sonra bana ayrıca bir şey söyledi; tutanağa geçmeyen bir şey.
         feride: Siz hukuku biliyorsunuz müdafi. Bugün bildiğinizi unuttunuz.
+        > Koridorda Tarık bir sıraya çökmüştü. Bana bakmadı. Kurşun kalemi elinde, ama tıkırdatmıyordu.
+        tarik/uzgun: Ben size iki kapı gösterdim avukat hanım. Durdurun diye gösterdim. Siz içeri girdiniz.
+        tarik: Şimdi Ece’ye ne diyeceğim? “Baban yapmadı, ama avukatıyla birlikte başka bir şey yaptı” mı?
+        > Cevap veremedim. Sinan yanımızdan geçerken durmadı; yalnızca dosyasını göğsüne biraz daha bastırdı.
+        # ARSLAN HUKUK — AKŞAM |bg=buro_gece
+        > İki gün sonra baroya çağrıldım. Disiplin kurulunun yazısı kısaydı: “Hakkınızda soruşturma açılmıştır. Savunmanızı on beş gün içinde veriniz.”
         > Büroya döndüğümde Leyla masamda bir kitapçık bırakmıştı: meslek kuralları. Üstünde bir not yok. Nota gerek yok.
+        leyla: Dosyayı Sinan Bey’in önerdiği bir meslektaşa devrediyoruz. Tarık Bey’in yeni bir avukata ihtiyacı var; seni değil, bu dosyayı korumak zorundayım.
+        leyla: Yirmi yıldır bu kapıdan bir tek şeyi içeri sokmadım Deniz: “bir kerelik” diye başlayan cümleleri.
+        > Kapıyı kapattı. Yavaşça; bir dersin sonu gibi.
         > Tarık’ın kurşun kalemi masada unutulmuştu. Tıkırdamıyordu. Bir daha da tıkırdamadı.
         ~ Biri Tarık’a tek bir anahtar vermişti ve bütün kapıları açmıştı. Ben de bir anahtar aldım elime. Fark etmeliydim.
       `),
@@ -43,13 +53,21 @@ export const outcomes: CasePart = {
     outcome('BERAAT_B', {
       class: 'ACQUITTAL',
       priority: 2,
-      when: all(not(flag('cokus')), flag('gercek_fail'), flag('contra_o3'), cmp(v('pers'), '>=', 7), finalAtLeast(T_BERAAT_B)),
+      when: all(
+        not(flag('cokus')),
+        flag('gercek_fail'),
+        flag('contra_o3'),
+        any(has('ded_hastane'), flag('bilirkisi_kilit')),
+        any(has('ded_laptop_ozan'), has('ev_laptop')),
+        cmp(v('pers'), '>=', 7),
+        finalAtLeast(T_BERAAT_B),
+      ),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
-      sentence: 'Ceza yok · Adli kontrol kaldırıldı',
+      sentence: 'Ceza yok · Gerçek fail yönünden suç duyurusu',
       verdictText:
-        'Sanık Tarık Aksoy’a atılı şantaj ve özel hayatın gizliliğini ihlal suçlarını sanığın işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; adli kontrolün kaldırılmasına; dosyadan gerçek fail yönünden suç duyurusunda bulunulmasına; telefona el koyma tedbiri nedeniyle CMK 141 vd. uyarınca tazminat isteminde bulunabileceğinin sanığa hatırlatılmasına; istinaf yolu açık olmak üzere.',
+        'Sanık Tarık Aksoy’a atılı şantaj ve özel hayatın gizliliğini ihlal suçlarını sanığın işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; dosyadan gerçek fail yönünden suç duyurusunda bulunulmasına; telefona el koyma tedbiri nedeniyle CMK 141 vd. uyarınca tazminat isteminde bulunabileceğinin sanığa hatırlatılmasına; istinaf yolu açık olmak üzere.',
       reasoning: [
         because('Tehdit mesajları ve iletilen ses kaydı, sanığın telefonundan değil, hesabına bağlı OFIS-LAPTOP-07 masaüstü oturumundan gönderilmiştir.'),
         because('Bu dizüstü eski ortağın zimmetindedir; oturum adresleri onun firmasının iş hattıdır; mesajların dili sanığın değil, tanığınkidir.', flag('contra_o3')),
@@ -61,11 +79,11 @@ export const outcomes: CasePart = {
       legalBasis: 'CMK 223/2-b; CMK 141–142; TCK 107/2, 134/2 (beraat)',
       xp: xp(1.2, { ethicsVar: 'ethics' }),
       howToReach:
-        'Cihazı, hattı ve dizüstüyü delillerle göster; somut dayanaklı suç duyurusu ver; esas savunmada gerçek faili ortaya koy.',
+        'Cihazı, hattı, 9 Kasım mazeretini ve dizüstüyü delillerle göster; somut dayanaklı suç duyurusu ver; esas savunmada gerçek faili ortaya koy.',
       epilogue: [
         {
           lines: [
-            { speaker: 'narrator', text: '# TÜRK MİLLETİ ADINA |bg=durusma_salonu', style: 'card' },
+            { speaker: 'narrator', text: 'TÜRK MİLLETİ ADINA', style: 'card', bg: 'durusma_salonu' },
             { speaker: 'narrator', text: 'Hâkim hükmü okudu. “Beraatine.” Tarık uzun uzun nefes verdi; kurşun kalemini çıkarmadı bile.' },
             { speaker: 'narrator', text: 'Melis koridorda durdu. Tarık’a yaklaşamadı; yaklaşmadı.' },
             { speaker: 'melis', text: 'Neyse. Teşekkür ederim avukat hanım.', expression: 'uzgun' },
@@ -88,7 +106,14 @@ export const outcomes: CasePart = {
     outcome('BERAAT_E', {
       class: 'ACQUITTAL',
       priority: 3,
-      when: all(not(flag('cokus')), ref('kaynak_suphesi'), ref('ek_supheler'), finalAtLeast(T_BERAAT)),
+      when: all(
+        not(flag('cokus')),
+        ref('kaynak_suphesi'),
+        ref('ek_supheler'),
+        ref('bilirkisi_teyit'),
+        has('ded_hastane'),
+        finalAtLeast(T_BERAAT),
+      ),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -103,11 +128,12 @@ export const outcomes: CasePart = {
       ],
       legalBasis: 'CMK 223/2-e; Anayasa 38/4; AİHS 6/2',
       xp: xp(1, { ethicsVar: 'ethics' }),
-      howToReach: 'Mesajların telefondan çıkmadığını göster ve en az iki destekleyici şüphe (hukuka aykırı delil, kilit kaydı, üslup) ortaya koy.',
+      howToReach:
+        'Mesajların telefondan çıkmadığını göster, bilirkişi raporunu okuyup bulguyu bilirkişiye teyit ettir, 9 Kasım mazeretini (kilit + hastane) kur ve en az iki destekleyici şüphe ortaya koy.',
       epilogue: [
         {
           lines: [
-            { speaker: 'narrator', text: '# TÜRK MİLLETİ ADINA |bg=durusma_salonu', style: 'card' },
+            { speaker: 'narrator', text: 'TÜRK MİLLETİ ADINA', style: 'card', bg: 'durusma_salonu' },
             { speaker: 'narrator', text: 'Hâkim “şüpheden sanık yararlanır” dedi. Beraat. Tokmak indi. Ama bu beraatin tadı eksikti; bir kemeri tamamlayan son taşı yerine koyamamış gibiydim.' },
             { speaker: 'narrator', text: 'Koridorda bir fısıltı dolaştı, belki bir savcı yardımcısından, belki bir izleyiciden: “Kanıtlayamadılar işte.” Kelime, ıslak taş duvarlarda yankılandı.' },
             { speaker: 'tarik', text: 'Kazandık mı?', expression: 'saskin' },
@@ -140,24 +166,31 @@ export const outcomes: CasePart = {
     outcome('KISMI', {
       class: 'REDUCED',
       priority: 4,
-      when: all(not(flag('cokus')), any(flag('terditli'), flag('supheden'), flag('ss_excluded')), finalAtLeast(T_INDIRIM)),
+      when: all(
+        not(flag('cokus')),
+        any(flag('terditli'), flag('supheden'), flag('ss_excluded')),
+        any(has('ded_hastane'), flag('bilirkisi_kilit')),
+        finalAtLeast(T_INDIRIM),
+      ),
       stamp: 'KISMEN',
       stampTone: 'amber',
       header: 'TÜRK MİLLETİ ADINA',
       sentence: '134’ten beraat · 107/2’den HAGB',
       verdictText:
-        'Özel hayatın gizliliğini ihlal (TCK 134/2) suçunun sanık tarafından işlendiği sabit olmadığından bu suçtan BERAATİNE; şantaj suçundan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, takdiri indirimle (TCK 62) 1 yıl 15 güne indirilmesine, hükmün açıklanmasının geri bırakılmasına (CMK 231); istinaf yolu açık olmak üzere.',
+        'Özel hayatın gizliliğini ihlal (TCK 134/2) suçunun sanık tarafından işlendiği sabit olmadığından bu suçtan BERAATİNE; 6 ve 12 Kasım tarihli mesajlar yönünden şantaj suçundan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, takdiri indirimle (TCK 62) 1 yıl 15 güne indirilmesine, hükmün açıklanmasının geri bırakılmasına (CMK 231); istinaf yolu açık olmak üzere.',
       reasoning: [
-        because('Ses kaydının bizzat sanık tarafından iletildiği ispatlanamamış; ifşa suçundan beraat gerekmiştir.'),
-        because('Şantaj yönünden lehe değerlendirme ve takdiri indirim uygulanmış; ceza iki yılın altında kaldığından hükmün açıklanması geri bırakılmıştır.'),
+        because('9 Kasım gecesi sanığın telefonu kilitli ve sanık acil servisteydi; o geceye ait iki işlem, “Hatırlatma” mesajı ve ses kaydının iletilmesi, sanığa yüklenememiş ve hükümden çıkarılmıştır.'),
+        because('Ses kaydının ifşası yalnızca 9 Kasım gecesine ait olduğundan, özel hayatın gizliliğini ihlal suçundan beraat gerekmiştir.'),
+        because('Şantaj suçu 6 ve 12 Kasım mesajlarına dayanır; aynı kararla iki kez işlendiğinden zincirleme hüküm (TCK 43/1) uygulanmış, takdiri indirimle ceza iki yılın altında kaldığından hükmün açıklanması geri bırakılmıştır.'),
+        because('Bu iki gece için mesajların başka bir cihazdan çıktığı ileri sürülmüş, ancak o cihazı sanık dışında birinin kullandığı somut olarak gösterilememiştir.'),
       ],
       legalBasis: 'TCK 107/2, 43/1, 62; TCK 134/2 (beraat); CMK 231',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
-      howToReach: 'Ekran görüntülerini düşür ya da kaynağa dair kuşku yarat; tam beraat için delil zincirini tamamla.',
+      howToReach: '9 Kasım mazeretini kur (kilit kaydı ve hastane) ve ekran görüntülerini düşür ya da terditli savun; tam beraat için delil zincirini tamamla.',
       epilogue: [
         {
           lines: [
-            { speaker: 'narrator', text: '# TÜRK MİLLETİ ADINA |bg=durusma_salonu', style: 'card' },
+            { speaker: 'narrator', text: 'TÜRK MİLLETİ ADINA', style: 'card', bg: 'durusma_salonu' },
             { speaker: 'narrator', text: 'Hâkim bir suçtan beraat, bir suçtan hükmün açıklanmasının geri bırakılmasına karar verdi. Tarık bir an ne hissedeceğini bilemedi; sevinçle hüzün arasında bir yerde kaldı.' },
             { speaker: 'tarik', text: 'Yani sabıkam olmayacak. Ama bir yıl, denetim altında, başımın üstünde duracak. Bir hata yaparsam açılacak.', expression: 'uzgun' },
             { speaker: 'tarik', text: 'Yarım masumiyet. Mimarlıkta yarım kemer olmaz avukat hanım. Bir kemer ya bütün yükü taşır, ya çöker. Ortası yoktur.' },

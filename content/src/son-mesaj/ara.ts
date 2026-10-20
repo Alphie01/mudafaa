@@ -121,6 +121,7 @@ export const ara: CasePart = {
       ...C4,
       title: 'Ara',
       background: 'buro',
+      onEnter: [set('taps3', 6), set('ex3b', 6), set('ex5', 5), set('ex6', 5), set('ex7', 4)],
       lines: [
         W(
           cmp(v('ara_day'), '==', 1),
@@ -208,9 +209,20 @@ export const ara: CasePart = {
         },
       ],
       choices: [
+        {
+          id: 'A_BEKLE',
+          kind: 'NAVIGATE',
+          label: 'Haftayı kapat',
+          description: 'Kalan eylem puanlarını bırak',
+          visibleWhen: all(cmp(v('ara_ap'), '>', 0), visited('ARA_NURTEN'), visited('ARA_ARAMA_EV')),
+          effects: [set('ara_ap', 0)],
+          next: '$stay',
+        },
         nav('GO_T', 'DURUŞMADAN ÖNCEKİ AKŞAM', 'ARA_TEKLIF', {
           role: 'PRIMARY',
           confirm: 'Ara evresi biter. Emin misin?',
+          enabledWhen: all(cmp(v('ara_day'), '==', 2), any(ref('ara_ilerleme'), cmp(v('ara_ap'), '<=', 0))),
+          lockedReason: 'Duruşmaya iki gün var. Önce arayı kullan: en az üç iş ya da bütün eylem puanları.',
         }),
       ],
     }),
@@ -252,7 +264,7 @@ export const ara: CasePart = {
             P: Teşekkür ederim Ozan Bey. Siz dosyanın tanığısınız. Bilirkişiyi de, dosyayı da duruşmada konuşalım.
             ozan: Tabii, tabii. Haklısınız üstat. Usul. Ben de öyle derim hep.
             > Kalktı. Kapıda durdu, döndü, gülümsedi.
-            ozan: Saygılar.
+            ozan: Kestaneyi soğutmayın ama. Hayırlı akşamlar.
           `),
           next: HUB,
         }),
@@ -276,7 +288,7 @@ export const ara: CasePart = {
             ozan: 07 mi? Ofisin eski laptopu mu? Bozuldu üstat, söyledim ya herkese. Ekranı gitmişti. Attım.
             ozan: Neden sordunuz?
             P: Merak ettim.
-            ozan/mutlu: Merak iyidir. Saygılar.
+            ozan/mutlu: Merak iyidir üstat. Hayırlı akşamlar.
           `),
           next: HUB,
         }),
@@ -315,7 +327,7 @@ export const ara: CasePart = {
           score: { SORGULAMA: 40 },
           responses: B(`
             melis: Ofiste, eski ortağın masasındaki dizüstüde PUSULA hep açık dururdu. Tarık’ın hesabı. Müşteriler oradan yazılırdı, herkes bakardı.
-            melis: Eylülde ben de oradan bir iki kere yazmıştım. Sonra o dizüstü yoktu. Ortak gidince gitti sandım.
+            melis: Ortaklığa başlamadan önce, geçen kış ofise gittiğimde ben de oradan bir iki kere yazmıştım. Mart’tan sonra o dizüstü yoktu. Ortak gidince gitti sandım.
             ~ Hep açık duran bir hesap. Bir masadan kalkıp giden bir dizüstü.
           `),
         }),
@@ -352,7 +364,7 @@ export const ara: CasePart = {
         # ALTIPARMAK · SARI MALİ MÜŞAVİRLİK — 10.30 |bg=buro
         > Altıparmak’ta eski bir iş hanı. Dosya dolapları tavana kadar, hesap makinesinin kâğıt şeridi yere sarkıyor.
         > Duvarda geçen yıldan kalma bir takvim. Nurten Hanım gözlüğünün üstünden, bir öğretmen edasıyla baktı.
-        nurten: Aksoy Tekin. Üç yıl defterlerini ben tuttum. Demirbaş numaralarını ezbere bilirim kızım: plotter 01, ofis tableti 03, Tarık Bey’in dizüstüsü 05, Ozan Bey’inki 07. Çift sayılar Ozan’ın, tek sayılar ortak.
+        nurten: Aksoy Tekin. Üç yıl defterlerini ben tuttum. Demirbaş numaralarını ezbere bilirim kızım: plotter 01, ofis tableti 03, Tarık Bey’in dizüstüsü 05, Ozan Bey’inki 07. Yedi ve sonrası Ozan Bey’in zimmetindeydi.
         nurten: Ayrılık kolay olmadı. İki inatçı adam, bir avukat, bir de ben. Bir protokol yaptık, ekinde demirbaş listesi; kim neyi aldı, kim neyi iade etti, hepsi yazılı.
         nurten: Benim mesleğimde bir kural var: “gerek yok” denen yere not düşersin. Çünkü “gerek yok” denen şeyler, bir gün mahkemede gerek olur. Ne istiyorsunuz kızım?
       `),
@@ -364,9 +376,12 @@ export const ara: CasePart = {
         }),
         option('NUR_LAPTOP', '07 numaralı dizüstü için Ozan Bey ne dedi?', {
           score: { ARASTIRMA: 30 },
+          effects: [{ type: 'DISCOVER', evidence: 'clue_uslup_ozan' }],
           responses: B(`
-            nurten: “Bozuldu, attım” dedi. Ben “Tutanak tutalım, demirbaştan düşelim” dedim. “Gerek yok Nurten Hanım” dedi.
-            nurten: Kırk yıllık muhasebeciyim. “Gerek yok” denen yere not düşerim. Düştüm.
+            nurten: “Bozuldu, attım” dedi. Ben “Tutanak tutalım, demirbaştan düşelim” dedim. “Gerek yok Nurten Hanım” diye bir e-posta yazdı.
+            nurten: Kırk yıllık muhasebeciyim. “Gerek yok” denen yere not düşerim. Düştüm; e-postayı da bastım, protokolün arkasına zımbaladım.
+            > Çıktıyı önüme koydu. Gönderen: o.tekin. “Sn. Sarı, 07 için tutanağa gerek görmüyorum... Saygılar.”
+            ~ Büyük harf, üç nokta, noktalı bir “Saygılar.” Bir e-posta. Panoya iğnelenecek bir kâğıt daha; neyle yan yana duracağına tahta karar verecek.
           `),
         }),
         { id: 'NUR_BITIR', kind: 'CONTINUE', label: 'Teşekkür et', role: 'BACK', next: HUB },
@@ -721,7 +736,7 @@ export const ara: CasePart = {
         ~ İki kapı. İkisi de açık. İkisi de bir uçuruma açılıyor.
       `),
       choices: [
-        option('TK_RED', 'Hayır. İkisini de yapmayacağız. Ne biliyorsak, kâğıda ve savcılığa.', {
+        option('TK_RED', 'Hayır. İkisini de yapmayacağız.', {
           score: { SAVUNMA_STRATEJISI: 50 },
           effects: [raise('tarik_red')],
           good: 'Başkasının hesabına izinsiz girmek suçtur (TCK 243); dosyaya sunulacak veriyi ayıklamak delil karartmadır (TCK 281) ve avukatı da sorumlu kılar (Av.K. 34). Doğru cevap.',
@@ -733,7 +748,7 @@ export const ara: CasePart = {
           `),
           next: 'ARA_SON_1',
         }),
-        option('TK_SIL', '25 Ekim mesajlarını yedekten silelim. Kimse fark etmez.', {
+        option('TK_SIL', '25 Ekim mesajlarını yedekten çıkaralım; saik ortadan kalkar, kimse fark etmez.', {
           score: { SAVUNMA_STRATEJISI: -200 },
           effects: [inc('ethics'), raise('karartma')],
           bad: 'Mahkemeye sunulacak dijital veriyi ayıklamak delil karartmadır (TCK 281); avukatın buna katılması meslekten çıkarmayı gerektirebilecek bir ihlaldir (Av.K. 34). Üstelik hash değeri değişir; fark edilir.',
@@ -743,7 +758,7 @@ export const ara: CasePart = {
           `),
           next: 'ARA_SON_1',
         }),
-        option('TK_GIRIS', 'Eski ortağın e-postasına girip bir bakalım. Bir dakika.', {
+        option('TK_GIRIS', 'E-postasına bir bakalım; bir şey bulursak doğrudan savcılığa iletiriz.', {
           score: { SAVUNMA_STRATEJISI: -200 },
           effects: [inc('ethics'), raise('karartma')],
           bad: 'Başkasının hesabına izinsiz girmek bilişim sistemine girme suçudur (TCK 243); bu yolla elde edilen hiçbir şey delil olamaz (CMK 206/2-a) ve avukat suça iştirak etmiş olur (Av.K. 34).',
@@ -778,8 +793,8 @@ export const ara: CasePart = {
           ?NÖBETÇİ KÂTİP: Avukat hanım, suç duyurunuz üzerine bugün Tekin Yapı Danışmanlık’ta arama yapıldı. Arşiv dolabında bir dizüstü bulundu. Arkasında bir etiket var: “Aksoy Tekin Demirbaş 07.”
           ?NÖBETÇİ KÂTİP: Açıkmış. Ekranda bir mesajlaşma uygulaması açık duruyormuş; bir hesap oturumu. El konuldu, mühürlendi. Yarın duruşmada Savcı Bey bilgi verecek.
           P: Teşekkür ederim. Gerçekten teşekkür ederim.
-          > Telefonu kapattım. Bir süre karanlıkta oturdum. Kalbim, o kadının altı ay önceki kalbi gibi çarpıyordu.
-          ~ Açıkmış. Altı aydır açık bir ekran. Kimse kapatmamış; belki kapatmaya gerek görmemiş, belki unutmuş. O açık ekran, üç gece bir kadının hayatını yaktı. Ve yarın, o ekran konuşacak.
+          > Telefonu kapattım. Bir süre karanlıkta oturdum. Kalbim, o kadının kasımdaki kalbi gibi çarpıyordu.
+          ~ Açıkmış. Aylardır açık bir ekran. Kimse kapatmamış; belki kapatmaya gerek görmemiş, belki unutmuş. O açık ekran, üç gece bir kadının hayatını yaktı. Ve yarın, o ekran konuşacak.
         `,
         ),
         W(
@@ -865,9 +880,9 @@ function choiceNodeSuc() {
     `),
     prompt: { speaker: 'narrator' as const, text: 'Dilekçeye ne yazacaksın?' },
     choices: [
-      option('SUC_OZAN', 'Ozan Tekin hakkında: hesabın 07’den kullanılması; dizüstünün aranması ve el konulması talebiyle', {
+      option('SUC_OZAN', 'Ozan Tekin hakkında; 07’nin aranması ve el konulması talebiyle', {
         enabledWhen: ref('ozan_dayanak'),
-        lockedReason: 'Somut dayanak gerekli: cihaz 3’ün ne olduğu ve 07’nin kimde kaldığı.',
+        lockedReason: 'Somut dayanak gerekli: cihaz 3’ün ne olduğu, 07’nin kimde kaldığı ve tehdit hattının kime ait olduğu.',
         score: { USUL_BILGISI: 80 },
         effects: [raise('suc_duyurusu')],
         good: 'Somut dayanaklı suç duyurusu (CMK 158): cihaz 3 = OFIS-LAPTOP-07, 07’nin zimmeti ve iadesizliği. Arama ve el koyma savcılığın ve hâkimin işidir (CMK 116 vd., 127); avukat kendisi kovalamaz.',
@@ -880,7 +895,7 @@ function choiceNodeSuc() {
         `),
         next: HUB,
       }),
-      option('SUC_MECHUL', 'Kimliği belirsiz kişi(ler) hakkında: hesabın başka bir cihazdan kullanılması', {
+      option('SUC_MECHUL', 'Kimliği belirsiz kişiler hakkında; hesabın başka cihazdan kullanılması', {
         enabledWhen: has('ded_bagli'),
         lockedReason: 'Önce mesajların başka bir cihazdan çıktığını göstermelisin.',
         score: { USUL_BILGISI: 40 },
@@ -889,9 +904,9 @@ function choiceNodeSuc() {
         responses: B(`> Dilekçe iki sayfa. Kimseyi göstermiyor. Yalnızca bir kapının açık kaldığını.`),
         next: HUB,
       }),
-      option('SUC_MELIS', 'Katılan hakkında: suç uydurma', {
+      option('SUC_MELIS', 'Katılan hakkında; mesajları kendisinin kurguladığı iddiasıyla suç uydurma', {
         score: { USUL_BILGISI: -80 },
-        bad: 'Hiçbir dayanağı olmayan bir suç duyurusu iftira (TCK 267) riski taşır ve duruşmada savunmanın güvenilirliğini düşürür.',
+        bad: 'Suç uydurma (TCK 271) iddiasının hiçbir dayanağı yok; dayanaksız bir suç duyurusu iftira (TCK 267) riski taşır ve savunmanın güvenilirliğini düşürür.',
         responses: B(`
           leyla: Dur. Elinde ne var? Bir müvekkilin öfkesi mi? Bunu gönderirsen ben imzalamam.
           ~ Göndermedim. Ama yazdığım için bile utandım.

@@ -141,6 +141,13 @@
       "eyebrow": "DAVA #06 · ARA",
       "title": "Ara",
       "background": "buro",
+      "onEnter": [
+        { "type": "VAR", "var": "taps3", "op": "set", "value": 6 },
+        { "type": "VAR", "var": "ex3b", "op": "set", "value": 6 },
+        { "type": "VAR", "var": "ex5", "op": "set", "value": 5 },
+        { "type": "VAR", "var": "ex6", "op": "set", "value": 5 },
+        { "type": "VAR", "var": "ex7", "op": "set", "value": 4 }
+      ],
       "lines": [
         {
           "when": { "cmp": [{ "var": "ara_day" }, "==", 1] },

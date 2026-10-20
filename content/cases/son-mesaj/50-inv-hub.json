@@ -8,6 +8,15 @@
       "eyebrow": "DAVA #06 · SORUŞTURMA",
       "title": "Soruşturma",
       "background": "buro",
+      "onEnter": [
+        { "type": "VAR", "var": "taps", "op": "set", "value": 7 },
+        { "type": "VAR", "var": "taps2", "op": "set", "value": 6 },
+        { "type": "VAR", "var": "ex1", "op": "set", "value": 5 },
+        { "type": "VAR", "var": "ex2", "op": "set", "value": 8 },
+        { "type": "VAR", "var": "ex3", "op": "set", "value": 6 },
+        { "type": "VAR", "var": "ex4", "op": "set", "value": 4 },
+        { "type": "VAR", "var": "min", "op": "set", "value": 15 }
+      ],
       "lines": [
         {
           "when": { "cmp": [{ "var": "day" }, "==", 1] },
@@ -272,6 +281,20 @@
           "label": "DURUŞMADAN ÖNCEKİ GECE",
           "role": "PRIMARY",
           "confirm": "Soruşturma evresi biter. Emin misin?",
+          "enabledWhen": {
+            "any": [
+              { "cmp": [{ "var": "day" }, "==", 3] },
+              {
+                "all": [
+                  { "visited": "INV_GORUSME" },
+                  { "visited": "INV_TUTANAK" },
+                  { "visited": "INV_IMAJ" },
+                  { "visited": "INV_ARAMA_OFIS" }
+                ]
+              }
+            ]
+          },
+          "lockedReason": "Dilekçe süresi 3. gün doluyor. Erken gitmek için önce müvekkili dinle, tutanağı ve raporu oku, ofisi ara.",
           "next": "INV_GECE_1"
         }
       ]
@@ -429,17 +452,11 @@
             { "speaker": "narrator", "text": "AKŞAM 22.30 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
             {
               "speaker": "narrator",
-              "text": "Telefon masada titredi. Bilinmeyen bir numara değil; kaydetmiştim.",
-              "fx": "flash"
-            },
-            {
-              "speaker": "narrator",
-              "name": "PUSULA",
-              "text": "Ozan Tekin · “Sn. Arslan, bugünkü ziyaretiniz için teşekkür ederim. Yardımcı olabileceğim her konuda... Saygılar.”"
+              "text": "Masamda Ozan Tekin’in kartviziti: kabartma harfler, cam bir plaza, bir bonsai logosu. Kartı çekmeceye koydum."
             },
             {
               "speaker": "player",
-              "text": "Kibar bir adam. Ekranı kapattım. Ekran bir süre daha karanlıkta parladı.",
+              "text": "Dosyada bir paragraflık bir tanık; karşımda bir kemer hikâyesi ve bir simit ikramı. İddianame onun tek cümlesine yaslanıyor: “pişman edeceğim.”",
               "style": "thought"
             }
           ]

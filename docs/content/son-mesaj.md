@@ -44,7 +44,10 @@ Ozan'ın adı şüpheyle ilk kez, 07'nin ofise dönmediği kurulduktan sonra an�
 
 **Evre kapıları.** `GO_H1` yalnızca 3. günde ya da müvekkil görüşmesi, tutanak, imaj raporu ve ofis araması yapıldıysa
 açılır. `GO_T` yalnızca ARA'nın 2. haftasında ve en az üç ara işi (demirbaş, ev, vakıf, Melis, bilirkişi raporu, suç
-duyurusu) tamamlandıysa ya da eylem puanları bittiyse açılır.
+duyurusu) tamamlandıysa ya da eylem puanları bittiyse açılır. Hub'da "Günü kapat" (`I_BEKLE`, 1–2. gün) ve arada
+"Haftayı kapat" (`A_BEKLE`) kalan eylem puanlarını yakar: oyuncu soruşturmayı kısaltabilir ama kaçırdığı deliller
+sonuç koşullarında (BERAAT için `ded_hastane`, `bilirkisi_teyit`, `ozan_dayanak` vb.) eksik kalır. Bu iki seçenek
+doğrulayıcının kaçış aramasına da kısa bir yol verir (`case:validate` 1155 sn → 106–198 sn).
 
 ## 3. Delil zinciri
 
@@ -108,7 +111,7 @@ Melis, Nurten/demirbaş, Tarık'ın evi, bilirkişi raporu, vakıf dosyası, su�
 | 1 | ETIK | OTHER | `karartma` (TK_SIL / TK_GIRIS) | Baroya ve başsavcılığa bildirim | 0 |
 | 2 | BERAAT_B | ACQUITTAL 223/2-b | ¬cokus ∧ gercek_fail ∧ contra_o3 ∧ (ded_hastane ∨ bilirkisi_kilit) ∧ (ded_laptop_ozan ∨ ev_laptop) ∧ pers ≥ 7 ∧ final ≥ 8000 | Beraat, gerçek fail yönünden suç duyurusu, CMK 141 hatırlatması | ×1,2 |
 | 3 | BERAAT_E | ACQUITTAL 223/2-e | ¬cokus ∧ kaynak_suphesi ∧ ek_supheler(≥2) ∧ bilirkisi_teyit (B1 ya da B2 delille) ∧ ded_hastane ∧ final ≥ 7000 | Şüpheden beraat | ×1,0 |
-| 4 | KISMI | REDUCED | ¬cokus ∧ (terditli ∨ supheden ∨ ss_excluded) ∧ (kilit_mahkemede ∨ bilirkisi_kilit) ∧ (contra_s1 ∨ contra_s2 ∨ contra_s4 ∨ ss_excluded ∨ bilirkisi_zincir) ∧ final ≥ 3000 | 9 Kasım işlemleri hükümden çıkar: 134'ten beraat; 6 ve 12 Kasım için 107/2+43/1: 1y3a → TCK 62: 1y15g, HAGB | ×0,85 |
+| 4 | KISMI | REDUCED | ¬cokus ∧ (terditli ∨ supheden ∨ ss_excluded) ∧ (kilit_mahkemede ∨ bilirkisi_kilit) ∧ (contra_s1 ∨ contra_s2 ∨ contra_s4 ∨ ss_excluded ∨ bilirkisi_zincir) ∧ (contra_o2..o5 ∨ bilirkisi_kilit ∨ bilirkisi_zincir) ∧ final ≥ 3000 | 9 Kasım işlemleri hükümden çıkar: 134'ten beraat; 6 ve 12 Kasım için 107/2+43/1: 1y3a → TCK 62: 1y15g, HAGB | ×0,85 |
 | 5 | MAHKUMIYET | CONVICTION | varsayılan (çöküş varyantı epilogla) | 134/2: 2y6a + 107/2,43/1: 1y3a | ×0,6 |
 
 Epiloglar `OutcomeDef.epilogue` ile; BERAAT_E epilogu suç duyurusu verilip dizüstü bulunduysa farklı bir kapanış gösterir;
@@ -121,7 +124,7 @@ sonuçlarda ek satır.
 - Eşik çubuğu: Mahkûmiyet 0 · Kısmi 3000 · Beraat 7000 (BERAAT_B için 8000), `thresholds.ts`.
 - Bedeller: yanlış delil (♥ ve −150), belge/sahne ıskası (−10/−20, deneme hakkı), tahta ıskası (−50), sert görüşme tonu
   (güven), etik dışı seçenekler (Melis'i doğrudan arama, tanığa yön verme, Ozan'a teori anlatma → dizüstü kaybolur).
-- `case:validate` final skor aralığı: −7030…11625 (PASSED, kapsam 93/93 node, 204/204 seçenek, 102/102 kural, 43/43 delil; 606 sn, makine yükü altında).
+- `case:validate` final skor aralığı: −7030…11625 (PASSED, 0 hata, kapsam 93/93 node, 205/205 seçenek, 102/102 kural, 43/43 delil, softlock/sızıntı yok; 106,5 sn, yük ≈ 6; önceki ölçüm yük altında 198 sn).
 
 ## 8. Golden path'ler
 | Ad | Sonuç | Final | Özet |
@@ -133,25 +136,29 @@ sonuçlarda ek satır.
 | G_ETIK | ETIK | 10645 | Güçlü dava, ama Tarık'ın "sil" teklifi kabul |
 | W | MAHKUMIYET | 7590 | Çöküş: yanlış delillerle güvenilirlik sıfırlanır |
 
-**Erken çözüm denetimi (2026-10-21):** golden path'ler üzerinde motorla (`act`, reddedilen aksiyonlar atlanarak) 64→1
-parça delta-küçültme; bulunan en kısa yollar:
+**Erken çözüm denetimi (2026-10-21, gün/hafta kapatma eklendikten sonra yeniden):** golden path'ler üzerinde motorla
+(`act`, reddedilen aksiyonlar atlanarak) 32→1 parça delta-küçültme, ardından her konumda `enumerateActions`
+alternatifleriyle takas + kısa silme (tek süreç, iş başına ≤ 170 sn); bulunan en kısa yollar:
 
 | Hedef | Başlangıç | En kısa | Oran | Süre | Final |
 |---|---|---|---|---|---|
-| BERAAT_E/B | TIPIK (205) | 135 aksiyon | %66 | 70,1 dk | 7005 |
-| BERAAT_B | G_B (198) | 152 aksiyon | %77 | 80,1 dk | 8005 |
-| KISMI | G_KISMI (139) | 97 aksiyon | — | 55,1 dk | 3000 |
+| BERAAT_E/B | TIPIK (205) | 134 aksiyon | %65 | 69,9 dk | 7005 |
+| BERAAT_B | G_B (198) | 151 aksiyon | %74 (TIPIK'e göre) | 79,8 dk | 8005 |
+| KISMI | G_KISMI (139) | 79 aksiyon | — | 49,0 dk | 3005 |
 
 En kısa BERAAT_E yolu da müvekkil görüşmesini (TP_GECELER, TP_CIHAZ), Ek-3 sütununu ve hesap verisini (ded_bagli),
 hastane zincirini (onam + kilit → ded_hastane), birinci celsede Demirci'nin çürütülmesini, ARA'da en az üç işi
 (demirbaş, ev, Melis) ve ikinci celsede bilirkişiye delille teyit ettirmeyi içerir. Önceki sürümde 104 aksiyonluk ve
-ARA'yı atlayan yol artık yok (`GO_T` ve `bilirkisi_teyit` kapıları). KISMI'nin en kısa yolu 55 dk'dır; golden path 70 dk.
+ARA'yı atlayan yol artık yok (`GO_T` ve `bilirkisi_teyit` kapıları). KISMI'nin en kısa yolu 49 dk'dır (golden path 70 dk);
+bu yol da tutanak, imaj, ofis, müvekkil görüşmesi, hastane kayıtları, tahta, birinci celsede kilit kaydının sunulması,
+ARA'da Nurten/ev/Melis ve ikinci celsede tanığa delil sunmayı içerir. Kısmi sonuç tek bir gecenin mazeretine dayandığı
+için tam beraatten kısa olması tasarım gereğidir; 60 dk tabanı golden path'lerde sağlanır.
 
 ## 9. Süre ve sözcük ölçümü
 `npm run case:duration -- son-mesaj` (2026-10-21):
 
 ```
-TIPIK          97.4 dk   13833 sözcük   205 aksiyon  BERAAT_E (11535)
+TIPIK          97.4 dk   13845 sözcük   205 aksiyon  BERAAT_E (11535)
 G_B            96.0 dk   13712 sözcük   198 aksiyon  BERAAT_B (11625)
 G_KISMI        70.0 dk   10091 sözcük   139 aksiyon  KISMI (5895)
 G_M            66.8 dk    9429 sözcük   144 aksiyon  MAHKUMIYET (5260)

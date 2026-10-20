@@ -1,0 +1,228 @@
+{
+  "scenes": [
+    {
+      "id": "sc_bar",
+      "title": "Gölge · bir hafta sonra",
+      "description": "Kepenk yarıya kadar inik. İçeride anason, çamaşır suyu ve eski ahşap kokusu.",
+      "width": 344,
+      "height": 300,
+      "image": "img_bar",
+      "objects": [
+        {
+          "id": "ob_priz",
+          "name": "Tezgâh altındaki priz",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 146, "y": 232, "w": 30, "h": 22 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_priz" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Kayıt cihazının fişi mekanik bir zaman ayarlı prizde. Pimler 01.00’de kesik, 09.00’da açık. Tozlu; aylardır kimse dokunmamış.",
+            "short": "Zaman ayarlı priz"
+          }
+        },
+        {
+          "id": "ob_onluk",
+          "name": "Askıdaki önlük",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 296, "y": 64, "w": 34, "h": 70 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_onluk" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Mutfak kapısının yanında siyah bir garson önlüğü. İğneli kartta el yazısıyla “ECE”. Dosyada hiçbir Ece yok.",
+            "short": "İsim kartlı önlük"
+          }
+        },
+        {
+          "id": "ob_kolon",
+          "name": "Masa 4 ve kolon",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 64, "y": 36, "w": 36, "h": 200 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kolon" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Masa 4’e oturdun. Tezgâhın üstü görünüyor. Önündeki zemin, kalın taş kolonun gölgesinde kayboluyor.",
+            "short": "Kolon görüşü kesiyor"
+          }
+        },
+        {
+          "id": "ob_adisyon",
+          "name": "Adisyon çivisi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 258, "y": 146, "w": 26, "h": 34 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_adisyon" },
+            { "type": "DISCOVER", "evidence": "clue_masa7" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Çiviye takılı o gecenin adisyonları. Masa 4: iki kişi, tek hesap, kartla ödenmiş. Masa 7: kavgadan iki dakika sonra kapanmış.",
+            "short": "O gecenin adisyonları"
+          }
+        },
+        {
+          "id": "ob_boks",
+          "name": "Boks fotoğrafı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 196, "y": 36, "w": 46, "h": 44 } }],
+          "effects": [{ "type": "DISCOVER", "evidence": "clue_boks" }],
+          "feedback": {
+            "text": "1996, genç milli takım kampı. Eldivenli bir Bora, kameraya değil kenara bakıyor. Savcılığın seveceği bir fotoğraf.",
+            "short": "Eski bir fotoğraf"
+          }
+        },
+        {
+          "id": "ob_ayna",
+          "name": "Çatlak ayna",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 116, "y": 48, "w": 62, "h": 30 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Aynadaki çatlak eski; kenarında toz birikmiş. O geceyle ilgisi yok.",
+            "short": "Eski çatlak"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_foto",
+      "title": "Kolluk fotoğrafları · 3 Kasım 02.10",
+      "description": "On iki fotoğraf, flaşın düzleştirdiği bir gece.",
+      "width": 344,
+      "height": 300,
+      "image": "img_foto",
+      "objects": [
+        {
+          "id": "ob_sap",
+          "name": "Fotoğraf 7",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 26, "y": 168, "w": 76, "h": 62 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_sap" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Kırık sap yerde, tezgâhtan bir metre uzakta. Kadrajın kenarında yerde yatan birinin sağ eli; kan izi elden sapa uzanıyor.",
+            "short": "Sap, elin yanında"
+          }
+        },
+        {
+          "id": "ob_kan",
+          "name": "Fotoğraf 3",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 128, "y": 56, "w": 64, "h": 54 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kan" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Kan damlaları tezgâhın iç kenarında, bar tarafında; lavaboya doğru iniyor. Müşteri tarafında tek damla yok.",
+            "short": "Kan tezgâhın içinde"
+          }
+        },
+        {
+          "id": "ob_kirilma",
+          "name": "Fotoğraf 5",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 218, "y": 168, "w": 66, "h": 54 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kirilma" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Cam kırıkları tezgâhın dış kenarında yoğun. Ahşapta taze bir çentik: kadeh buraya vurulmuş. Dış kenar, müşterinin durduğu taraf.",
+            "short": "Kırılma noktası"
+          }
+        },
+        {
+          "id": "ob_masa4",
+          "name": "Fotoğraf 9",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 238, "y": 48, "w": 74, "h": 62 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_masa4" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }
+          ],
+          "feedback": {
+            "text": "Masa 4: iki boş kadeh, iki tabak, iki sandalyede iki ceket. Biri ceketini almadan kalkmış.",
+            "short": "Masa 4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_sokak",
+      "title": "Gökdere Sokağı · gece",
+      "description": "Dere taşkın, köprünün altında sarı bir lamba.",
+      "width": 344,
+      "height": 300,
+      "image": "img_sokak",
+      "objects": [
+        {
+          "id": "ob_eczane",
+          "name": "Eczane tabelası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 18, "y": 36, "w": 76, "h": 66 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_eczane_kam" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Nöbetçi eczanenin tabelasının altında küçük bir kamera; açısı tam Gölge’nin kapısında. Camda etiket: “Kayıtlar 15 gün saklanır.”",
+            "short": "Kapıya bakan kamera"
+          }
+        },
+        {
+          "id": "ob_arka",
+          "name": "Arka sokak",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 248, "y": 116, "w": 56, "h": 96 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_arka_sokak" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Mutfağın arka kapısı dar bir sokağa çıkıyor. Eşikte yağmura yapışmış ucuz, yeni bir saç tokası.",
+            "short": "Arka kapı"
+          }
+        },
+        {
+          "id": "ob_taksi",
+          "name": "Taksi durağı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 138, "y": 204, "w": 66, "h": 40 } }],
+          "effects": [{ "type": "DISCOVER", "evidence": "clue_taksi" }],
+          "feedback": {
+            "text": "Durak defteri: gece ikiden sonra iki çağrı, ikisi de Osmangazi yönüne. İsim yok.",
+            "short": "Durak defteri"
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "id": "img_bar", "kind": "IMAGE", "path": "assets/scenes/golge-ic@4x.png" },
+    { "id": "img_foto", "kind": "IMAGE", "path": "assets/scenes/kolluk-foto@4x.png" },
+    { "id": "img_sokak", "kind": "IMAGE", "path": "assets/scenes/gokdere-sokak@4x.png" }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_priz", "source": { "type": "OBJECT", "id": "ob_priz" } },
+    { "evidence": "clue_onluk", "source": { "type": "OBJECT", "id": "ob_onluk" } },
+    { "evidence": "clue_kolon", "source": { "type": "OBJECT", "id": "ob_kolon" } },
+    { "evidence": "clue_adisyon", "source": { "type": "OBJECT", "id": "ob_adisyon" } },
+    { "evidence": "clue_masa7", "source": { "type": "OBJECT", "id": "ob_adisyon" } },
+    { "evidence": "clue_boks", "source": { "type": "OBJECT", "id": "ob_boks" } },
+    { "evidence": "clue_sap", "source": { "type": "OBJECT", "id": "ob_sap" } },
+    { "evidence": "clue_kan", "source": { "type": "OBJECT", "id": "ob_kan" } },
+    { "evidence": "clue_kirilma", "source": { "type": "OBJECT", "id": "ob_kirilma" } },
+    { "evidence": "clue_masa4", "source": { "type": "OBJECT", "id": "ob_masa4" } },
+    { "evidence": "clue_eczane_kam", "source": { "type": "OBJECT", "id": "ob_eczane" } },
+    { "evidence": "clue_arka_sokak", "source": { "type": "OBJECT", "id": "ob_arka" } },
+    { "evidence": "clue_taksi", "source": { "type": "OBJECT", "id": "ob_taksi" } }
+  ]
+}

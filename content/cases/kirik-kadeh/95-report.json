@@ -1,0 +1,156 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_adisyon",
+        "when": { "not": { "hasEvidence": "clue_adisyon" } },
+        "text": "Gölge’deki adisyon çivisine bakmadın: masa 4’ün hesabı tanığın kartıyla ödenmişti.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_sap",
+        "when": { "not": { "hasEvidence": "clue_sap" } },
+        "text": "Kolluk fotoğrafı 7’yi incelemedin: kırık sap katılanın elinin yanındaydı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_kan",
+        "when": { "not": { "hasEvidence": "clue_kan" } },
+        "text": "Fotoğraf 3’teki kan tezgâhın içinde başlıyordu: ilk kesilen sanıktı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_kolon",
+        "when": { "not": { "hasEvidence": "clue_kolon" } },
+        "text": "Masa 4’e oturup bakmadın: kolon tezgâhın önünü kapatıyordu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_anamnez",
+        "when": { "not": { "hasEvidence": "clue_anamnez" } },
+        "text": "Acil kaydının anamnezini büyüteçle okumadın: katılan “yumrukla vuruldum” demişti.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_avuc",
+        "when": { "not": { "hasEvidence": "clue_avuc" } },
+        "text": "Katılanın kesisi avucun içindeydi, enine: kırık camı kavrayan el.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_onkol",
+        "when": { "not": { "hasEvidence": "clue_onkol" } },
+        "text": "Bora’nın darp raporundaki kesi ulnar yüzdeydi: bir savunma yarası.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_tanidik",
+        "when": { "not": { "hasEvidence": "ded_tanidik" } },
+        "text": "Adisyon ile “müştekiyi tanımam” cümlesini tahtada birleştirmedin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kadeh",
+        "when": { "not": { "hasEvidence": "ded_kadeh_serkan" } },
+        "text": "Fotoğraf 7 ile avuçtaki kesiyi birleştirmedin: sap katılanın elindeydi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_savunma",
+        "when": { "not": { "hasEvidence": "ded_savunma" } },
+        "text": "Önkoldaki kesi ile tezgâhın içindeki kanı birleştirmedin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_yumruk",
+        "when": { "not": { "hasEvidence": "ded_yumruk" } },
+        "text": "Anamnez ile tanığın “kadehle yüzüne vurdu” cümlesini birleştirmedin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_bilek",
+        "when": { "not": { "hasEvidence": "ded_bilek" } },
+        "text": "Adli Tıp’taki bilek bası izi ile “tekme” cümlesini ara dönemde tahtada birleştirmedin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kriminal",
+        "when": { "not": { "hasEvidence": "ev_kriminal" } },
+        "text": "Kırık kadeh hiç incelenmedi: Kriminal inceleme dilekçeyle ya da duruşmada istenebilirdi (CMK 177, 206/1).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_eczane",
+        "when": { "not": { "hasEvidence": "ev_eczane" } },
+        "text": "Eczanenin kapıya bakan kamerası tanığı katılanla kol kola gösteriyordu; kayıt mahkemeden istenmeliydi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_video",
+        "when": { "not": { "hasEvidence": "ev_video" } },
+        "text": "Masa 7’deki müşteri o gece hikâye çekmişti; adisyon ve Ece’nin sözü bunu gösteriyordu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_ece",
+        "when": { "all": [{ "not": { "flag": "ece_tanikti" } }, { "not": { "flag": "ece_coktu" } }] },
+        "text": "Askıdaki önlüğün sahibi Ece olayı gören tek tarafsız tanıktı; onu bulup tanık olarak dinlenmesini istemek gerekiyordu (CMK 177/1).",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_onluk",
+        "when": { "not": { "hasEvidence": "clue_onluk" } },
+        "text": "Gölge’de mutfak kapısının yanındaki önlüğe bakmadın: dosyada adı olmayan bir garson vardı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_ozel",
+        "when": { "flag": "ozel_kabul" },
+        "text": "Katılanın özel klinik raporu uzman görüşüdür (CMK 67/6); resmî Adli Tıp raporu karşısında itiraz edilmeliydi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_kamera",
+        "when": { "flag": "kamera_ortaya" },
+        "text": "Müvekkile “kamera bozuktu” dedirtmek gerçeğe aykırı beyandı (Av.K. md. 34); zaman ayarlı priz bir kabahatti, yalan ise savunmayı yaktı.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_onur_etik",
+        "when": { "any": [{ "flag": "onur_tehdit" }, { "flag": "onur_kayit" }, { "flag": "onur_vaat" }] },
+        "text": "Karşı tarafın tanığını tehdit etmek, ondan gizli beyan almak ya da ona sonuç vaat etmek tanığı etkilemektir (TCK 277). Doğru yol: savcılığa ve mahkemeye yönlendirmek.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_temas",
+        "when": { "flag": "serkan_temas" },
+        "text": "Avukatla temsil edilen karşı tarafla avukatı dışında görüşülmez (TBB Meslek Kuralları).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_teklif",
+        "when": { "flag": "teklif_kabul" },
+        "text": "Silahla yaralama şikâyete bağlı değildir (TCK 86/3); şikâyetten vazgeçme karşılığı para teklifi davayı düşürmezdi.",
+        "category": "HUKUKI_BILGI"
+      },
+      {
+        "id": "h_tahta",
+        "when": { "cmp": [{ "var": "wrong_pair" }, ">=", 3] },
+        "text": "Tahtada çok sayıda yanlış eşleşme denedin: iki kartı birleştirmeden önce “bu ikisi aynı gerçeği mi söylüyor?” diye sor.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_supheden",
+        "when": {
+          "all": [
+            { "not": { "flag": "supheden" } },
+            { "not": { "flag": "mm_kabul" } },
+            { "any": [{ "flag": "contra_o1" }, { "flag": "contra_o4" }] }
+          ]
+        },
+        "text": "Çelişkileri açtın ama esas savunmayı onlara bağlamadın: şüphe ya da meşru savunma talebi delille kurulmalıydı.",
+        "category": "SAVUNMA_STRATEJISI"
+      }
+    ]
+  }
+}

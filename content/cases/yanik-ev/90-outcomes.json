@@ -75,7 +75,7 @@
           { "flag": "taksir_cevap" },
           { "flag": "gercek" },
           { "cmp": [{ "var": "pers" }, ">=", 8] },
-          { "cmp": [{ "score": "final" }, ">=", 9000] }
+          { "cmp": [{ "score": "final" }, ">=", 13500] }
         ]
       },
       "stamp": "BERAAT",
@@ -206,7 +206,7 @@
           { "ref": "motif_coktu" },
           { "flag": "taksir_cevap" },
           { "flag": "beraat_savunma" },
-          { "cmp": [{ "score": "final" }, ">=", 7000] }
+          { "cmp": [{ "score": "final" }, ">=", 12500] }
         ]
       },
       "stamp": "BERAAT",
@@ -306,6 +306,24 @@
           ]
         },
         {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — O GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla dosyayı kapatıp rafa kaldırdı; 1996 tarihli sararmış dosyanın yanına. İkisi yan yana durdu: biri dört yıl, biri dört ay."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Şüpheden yararlandı diyorlar. Doğru. Ama o şüpheyi sen kurdun, Deniz. Şüphe de bir delildir; onu toplamak da bir iştir."
+            },
+            {
+              "speaker": "player",
+              "text": "Gemlik’teki ev. Sigortanın “kusur” dediği kış. Bu gece ilk kez o evin yandığı geceyi düşünmeden uyuyabilirim. Belki.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "when": { "flag": "suc_duyurusu" },
           "lines": [
             {
@@ -326,7 +344,7 @@
         "all": [
           { "not": { "flag": "cokus" } },
           { "ref": "hizlandirici_coktu" },
-          { "cmp": [{ "score": "final" }, ">=", 3000] }
+          { "cmp": [{ "score": "final" }, ">=", 7000] }
         ]
       },
       "stamp": "TAKSİR",

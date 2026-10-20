@@ -740,6 +740,22 @@ emir: Baba. Ben yapmadım. Sen de yapmamıştın. Biliyorum artık.
 `,
         ),
         W(
+          flag('closing_masumiyet'),
+          `
+> Heyet müzakereye çekildi. Elli dakika. Emir bana döndü; bir şey sormadı. “Öldürmedi” demiştim; bir otobüs, bir saat, bir kapı. Şimdi o cümle üç hâkimin önünde, bir masanın üstündeydi.
+> Kemal koridorda değil, salondaydı; yerinden kalkmadı. Yirmi iki yıl önce bu kelimeyi kimse onun için söylememişti.
+recep: Taraflar salona! Hükmü ayakta dinleyin. Hım-hım.
+`,
+        ),
+        W(
+          flag('closing_suphe'),
+          `
+> Heyet müzakereye çekildi. Elli dakika. “Şüpheden sanık yararlanır.” Kanunun en kısa cümlelerinden biri; bir çocuğun önündeki en uzun elli dakika.
+> Gülay Toker katılan sırasında bir mendili katlayıp açtı. Leyla dinleyici sırasında kıpırdamadı.
+recep: Taraflar salona! Hükmü ayakta dinleyin. Hım-hım.
+`,
+        ),
+        W(
           flag('closing_terdit'),
           `
 > Heyet müzakereye çekildi. Elli dakika. Emir bana döndü: “Abla, tahrik ne demek?” Cevap vermedim. Terditli bir savunma müvekkile iki cevap birden verir; ikisi de doğru, ikisi de ağır.

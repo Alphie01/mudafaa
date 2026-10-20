@@ -138,29 +138,44 @@ T3_04G). Tekrarlayan ceza kuralları `maxUses`; iki tahtadaki tarifler `IF ¬has
 
 ## 10. Erken çözüm denetimi
 
-Açgözlü en küçükleme (TIPIK'ten 16/8/4/2/1'lik aksiyon parçaları silinip hâlâ bir beraate ulaşan yol, motorla yeniden oynatılarak): en kısa beraat **180 aksiyon** (TIPIK 226; oran **0,80**; hedef ≥ 0,60). Beraat; tanığın çöküşünü (iki celsede en az üç çelişki ya da Süleyman + son celse), tasarlamanın iki
-ayağını ya da iki lehe bulguyu, beraat savunmasını, ikna ≥ 6'yı ve 11.000 finali birlikte ister. Tipik yolun metni tarandı:
-Tarık Sezer'in fail olduğu, ikinci celsedeki çelişkilerden ve ara evredeki kayıtlardan önce söylenmez; erken ayrıntılar
-(şeridin dışındaki beyaz gömlek, erken gönderilen garson, "kamera arızalıydı", bileği taşını bilmesi) yalnızca tohumdur.
-Sesli mesajın "kapıda biri var" cümlesi bir ad vermez; yalnızca Kemal yolunu kat eden oyuncuya, bir kayıtla, gelir.
+Açgözlü en küçükleme (her beraat golden path'inden 32/16/8/4/2/1'lik aksiyon parçaları silinip hâlâ bir beraate ulaşan
+yol, motorla yeniden oynatılarak): TIPIK → 204, TIPIK_DUYGU → 200, G1 → **182 aksiyon** (en kısa beraat; TIPIK 226;
+oran **0,81**; hedef ≥ 0,60). Beraat; tanığın çöküşünü (ikinci celsede üç çelişki ya da iki celseye yayılan üç çelişki),
+tasarlamanın iki ayağını ya da iki lehe bulguyu, ikna ≥ 6'yı ve 11.000 finali birlikte ister; kapanış etiketi koşul
+değildir. Skor eşiksiz tek yol `fail_belli`dir (sesli mesaj + Kentkart + arşiv + bildirim + son celsede R2/R3 ve R1/R4);
+bu zincir en küçüklemede daha kısa bir yol vermedi.
+
+Tipik yolun bütün görünür metni (1.230 satır) yeniden döküldü ve tarandı. Soğuk açılış saat vermez (kart "GECE"), DVR'ın
+ışığı yalnızca bir eşya olarak görünür (sönmesi gösterilmez), 112 araması nitelenmez; Leyla'nın 2. gün satırı tanığı
+nitelemeden yöntemi anlatır; kare 44 ve ifade metni yansızdır; Tarık'ı sahneye getiren seçenek ve ara evredeki gece ziyareti
+sesli mesajın sözlerini tekrarlamaz. Tarık Sezer'in fail olduğu, ikinci celsedeki çelişkilerden ve ara evredeki kayıtlardan
+önce söylenmez; erken ayrıntılar (şeridin dışındaki beyaz gömlek, erken gönderilen garson, "kamera arızalıydı", bileği
+taşını bilmesi, Süleyman'a "gördüğünü söyle") yalnızca tohumdur. Sesli mesajın "kapıda biri var" cümlesi bir ad vermez;
+yalnızca Kemal yolunu kat eden oyuncuya, bir kayıtla, gelir; Deniz o kaydı olmayan oyuncu için mahkemede alıntılamaz.
+
+Puanlı seçenek setleri (21) uzunluk ve üslup bakımından dengelendi: doğru seçenek yalnızca 3 sette en uzun etikettir
+(%14; hedef ≤ %40); tahliye, tanıklık ve esas savunma setlerinde yanlış seçenekler de teknik ve makul.
 
 ## 11. Süre ve sözcük ölçümü
 
-`npm run case:duration -- son-durusma` (2026-10-20):
+`npm run case:duration -- son-durusma` (2026-10-20, düzeltmelerden sonra):
 
 ```
-  G1             99.3 dk   13835 sözcük   224 aksiyon  BERAAT_B (13430)
-  G3             83.6 dk   11658 sözcük   188 aksiyon  INDIRIM (7860)
-  G4             69.7 dk    9848 sözcük   150 aksiyon  MAHKUMIYET (510)
-  G5             97.3 dk   13424 sözcük   227 aksiyon  IKRAR (12380)
-  W              76.0 dk   10353 sözcük   185 aksiyon  MAHKUMIYET (7450)
-  TIPIK          97.2 dk   13433 sözcük   226 aksiyon  BERAAT_E (12680)
-  ==> TİPİK YOL (TIPIK): 97.2 dk  ✓ süre hedefte
+  G1             99.4 dk   13869 sözcük   224 aksiyon  BERAAT_B (13430)
+  G1_TERDIT      99.3 dk   13850 sözcük   224 aksiyon  BERAAT_B (13280)
+  G3             83.5 dk   11641 sözcük   188 aksiyon  INDIRIM (7860)
+  G6             83.4 dk   11626 sözcük   188 aksiyon  NITELIK (7760)
+  G4             70.0 dk    9899 sözcük   150 aksiyon  MAHKUMIYET (510)
+  G5             97.9 dk   13538 sözcük   227 aksiyon  IKRAR (12380)
+  W              77.7 dk   10606 sözcük   188 aksiyon  MAHKUMIYET (7450)
+  TIPIK_TERDIT   97.2 dk   13431 sözcük   226 aksiyon  BERAAT_E (12590)
+  TIPIK_DUYGU    97.1 dk   13418 sözcük   226 aksiyon  BERAAT_E (12390)
+  TIPIK          97.3 dk   13442 sözcük   226 aksiyon  BERAAT_E (12680)
+  ==> TİPİK YOL (TIPIK): 97.3 dk  ✓ süre hedefte
   ==> KAPI: ✓ GEÇTİ
 ```
 
-Paket toplamı (satır, etiket, geri bildirim, hüküm ve epilog metinleri): ~26.600 sözcük; en uzun satır ≤ 220 karakter
-(yalnızca BR_02'deki olay özeti paragrafı daha uzun). Doğrulama: `npm run case:validate -- son-durusma --max-states 3000
---walks 200 --max-ms 1500000` → PASSED, 0 hata; kapsam node 123/123, seçenek 237/237, kural 93/93, delil 56/56; 6/6 golden
-path; tek uyarı SIMULATION_INCOMPLETE (uzun davada beklenir). Varsayılan bütçeyle (20.000 durum) BFS 600 sn sınırına takılır;
-bu dava için yukarıdaki bütçe kullanılmalıdır (~7 dk).
+Doğrulama: varsayılan komut `npm run case:validate -- son-durusma` (20.000 durum, 400 yürüyüş, 600 sn sınırı) →
+**PASSED**, 0 hata; kapsam node 125/125, seçenek 241/241, kural 93/93, delil 56/56; 6/6 sonuç; 10/10 golden path; tek uyarı
+SIMULATION_INCOMPLETE (uzun davada beklenir). Süre 115 sn (≈110 sn CPU). Aşama ölçümü: BFS ≈ %73, yürüyüşler ≈ %25,
+kaçış araması ≈ %2. Yoğun yüklü makinede (CPU payı %25–40) duvar saati tahminen 300–450 sn'ye çıkar; sınırın altında kalır.

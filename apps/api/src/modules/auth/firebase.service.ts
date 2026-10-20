@@ -1,9 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { type App, getApps, initializeApp } from 'firebase-admin/app';
+import { type App, cert, getApps, initializeApp } from 'firebase-admin/app';
 import { type DecodedIdToken, getAuth } from 'firebase-admin/auth';
-import { ENV, type Env } from '../../config/env.js';
+import { ENV, type Env, parseServiceAccount } from '../../config/env.js';
 
-/** firebase-admin sarmalayıcısı; FIREBASE_AUTH_EMULATOR_HOST tanımlıysa emulator token'larını doğrular. */
+/**
+ * firebase-admin sarmalayıcısı; FIREBASE_AUTH_EMULATOR_HOST tanımlıysa emulator token'larını doğrular,
+ * FIREBASE_SERVICE_ACCOUNT tanımlıysa yönetim çağrıları o anahtarla yapılır.
+ */
 @Injectable()
 export class FirebaseService {
   private readonly app: App;
@@ -12,7 +15,10 @@ export class FirebaseService {
     if (env.FIREBASE_AUTH_EMULATOR_HOST !== undefined) {
       process.env.FIREBASE_AUTH_EMULATOR_HOST = env.FIREBASE_AUTH_EMULATOR_HOST;
     }
-    this.app = getApps()[0] ?? initializeApp({ projectId: env.FIREBASE_PROJECT_ID });
+    const sa = env.FIREBASE_SERVICE_ACCOUNT === undefined ? null : parseServiceAccount(env.FIREBASE_SERVICE_ACCOUNT);
+    this.app =
+      getApps()[0] ??
+      initializeApp({ projectId: env.FIREBASE_PROJECT_ID, ...(sa === null ? {} : { credential: cert(sa) }) });
   }
 
   verify(token: string, checkRevoked: boolean): Promise<DecodedIdToken> {

@@ -9,6 +9,9 @@ abstract final class AppConfig {
   /// Android emülatöründe makinenin localhost'u 10.0.2.2'dir.
   static String get _host => !kIsWeb && defaultTargetPlatform == TargetPlatform.android ? '10.0.2.2' : 'localhost';
 
-  static String get apiUrl => _apiUrl.isNotEmpty ? _apiUrl : 'http://$_host:3000';
+  /// Gerçek Firebase projesiyle (emülatörsüz) derlemeler varsayılan olarak tünellenmiş sunucuya bağlanır.
+  static const productionApiUrl = 'https://mudafaa.sehirkilavuzu.com';
+
+  static String get apiUrl => _apiUrl.isNotEmpty ? _apiUrl : (useEmulator ? 'http://$_host:3000' : productionApiUrl);
   static String get emulatorHost => _emulatorHost.isNotEmpty ? _emulatorHost : _host;
 }

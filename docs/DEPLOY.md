@@ -2,6 +2,30 @@
 
 Bu rehber uygulamayı bir Linux sunucuda **test ortamı** olarak ayağa kaldırır: PostgreSQL + Redis (docker), NestJS API, Firebase Auth Emulator ve Flutter web. Gerçek Firebase projesi henüz kurulmadığı için giriş emülatör üzerinden yapılır (`NODE_ENV=development`). Üretim kurulumu (gerçek Firebase, HTTPS, imzalı mobil derlemeler) M4'tedir.
 
+## 0. Üretim: Docker + Cloudflare tüneli (mudafaa.sehirkilavuzu.com)
+
+API konteynerde çalışır, dışarıya yalnızca Cloudflare tüneliyle açılır (sunucuda port açmak gerekmez). Firebase projesi: `mudafaa-app`.
+
+1. **Tünel:** Cloudflare Zero Trust → Networks → Tunnels → *Create tunnel* (Cloudflared). Public hostname: `mudafaa.sehirkilavuzu.com` → Service `http://api:3000`. Verilen token'ı kökteki `.env`'e yaz:
+   ```
+   CLOUDFLARE_TUNNEL_TOKEN=eyJ...
+   POSTGRES_PASSWORD=<güçlü-bir-parola>   # ilk kurulumdan önce; sonradan değiştirmek volume'ü sıfırlamayı gerektirir
+   POSTGRES_PORT=5433                     # sunucuda 5432 doluysa
+   ```
+2. **API ortamı:** `cp apps/api/production.env.example apps/api/.env.production` ve `FIREBASE_SERVICE_ACCOUNT`'a servis hesabı anahtarını yapıştır (Firebase konsolu → Proje ayarları → Hizmet hesapları → *Yeni özel anahtar*; tek satır JSON ya da `base64 -w0 key.json`). Bu dosyalar git dışındadır.
+3. **Başlat:**
+   ```bash
+   docker compose --profile prod up -d --build      # postgres + redis + api (migration'lar açılışta) + tunnel
+   docker compose --profile prod run --rm api node dist/cli/seed.js   # davaları yükle/yayınla
+   curl https://mudafaa.sehirkilavuzu.com/v1/health
+   ```
+4. **Güncelleme:** `git pull && docker compose --profile prod up -d --build && docker compose --profile prod run --rm api node dist/cli/seed.js`
+5. **Firebase Authentication:** Settings → Authorized domains'e `mudafaa.sehirkilavuzu.com` ekli olmalı.
+
+Mobil/web derlemeleri `--dart-define=USE_AUTH_EMULATOR=false` ile gerçek projeye ve varsayılan olarak `https://mudafaa.sehirkilavuzu.com` API'sine bağlanır.
+
+Aşağıdaki bölümler emülatörlü **test ortamı** içindir.
+
 ## 1. Gereksinimler
 
 | Araç | Sürüm | Not |

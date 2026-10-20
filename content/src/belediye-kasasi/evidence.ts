@@ -40,9 +40,9 @@ export const evidencePart: CasePart = {
     evidence('ev_tutanak', {
       type: 'BELGE',
       title: 'Kasa teslim tutanakları (dosyadaki asıllar)',
-      shortText: 'İptal günlerine ait 23 tutanak; teslim eden: O. Kılıç; teslim alan: E. Tunalı.',
+      shortText: 'İptal günlerine ait 23 tutanak; teslim eden: O. Kılıç; teslim alan hanesinde okunaksız bir paraf.',
       description:
-        'Her iptal günü için gün sonu raporu ve teslim tutanağı. Tutarlar gün sonu raporuyla birebir uyuşuyor. Teslim eden imzası Orhan Kılıç’a ait görünüyor.',
+        'Her iptal günü için gün sonu raporu ve teslim tutanağı. Tutarlar gün sonu raporuyla birebir uyuşuyor. Teslim eden imzası Orhan Kılıç’a ait görünüyor; teslim alan hanesinde adı yazılmamış, okunaksız bir paraf var.',
       sourceLabel: 'Soruşturma dosyası',
       icon: 'receipt',
       side: 'PROSECUTION',
@@ -92,10 +92,10 @@ export const evidencePart: CasePart = {
     }),
     evidence('ev_talimat', {
       type: 'BELGE',
-      title: 'El yazısı not · “Şifreler zarfta” — E.T.',
-      shortText: '“Şifreler zarfta, müdürlükte kalacak. Devamlılık için. — E.T.”',
+      title: 'El yazısı not · “Şifreler zarfta”',
+      shortText: '“Şifreler zarfta, müdürlükte kalacak. Devamlılık için. — Müdürlük”',
       description:
-        'Orhan’ın klasörlerinden birinin arasına sıkışmış, kareli deftere yazılmış not. Eylül 2025 tarihli. Veznedarlardan şifrelerini mühürlü zarfta müdürlüğe bırakmaları isteniyor.',
+        'Orhan’ın klasörlerinden birinin arasına sıkışmış, kareli deftere yazılmış not. Eylül 2025 tarihli; imza yok, yalnızca “Müdürlük”. Veznedarlardan şifrelerini mühürlü zarfta müdürlüğe bırakmaları isteniyor.',
       sourceLabel: 'Kılıçların evi · çalışma masası',
       icon: 'document',
       side: 'DEFENSE',
@@ -215,9 +215,10 @@ export const evidencePart: CasePart = {
     evidence('ev_zarflar', {
       type: 'FIZIKSEL',
       title: 'Müdürlük çekmecesinden alınan şifre zarfları',
-      shortText: 'Üç mühürlü zarf: okilic, myavuz, sdemir. Savcılık aramasında emanete alındı.',
+      shortText:
+        'Üç mühürlü zarf: okilic, myavuz, sdemir. Savcılık aramasında emanete alındı; kriminal incelemesi yapıldı.',
       description:
-        'Suç duyurusu üzerine savcılığın yaptığı aramada müdür yardımcılığı odasındaki kilitli çekmeceden çıkan zarflar. Emanet tutanağıyla dosyaya geldi.',
+        'Suç duyurusu üzerine savcılığın yaptığı aramada müdür yardımcılığı odasındaki kilitli çekmeceden çıkan zarflar. Emanet tutanağı ve kriminal polis laboratuvarının inceleme raporuyla dosyaya geldi.',
       sourceLabel: 'Savcılık · arama ve el koyma tutanağı',
       icon: 'key',
       side: 'DEFENSE',
@@ -384,8 +385,29 @@ export const evidencePart: CasePart = {
       title: 'okilic zarfı: iki yapıştırıcı izi',
       shortText: 'UV ışıkta zarf kapağında üst üste iki ayrı yapıştırıcı çizgisi; mühür kaymış.',
       description: 'Zarf en az bir kez açılıp yeniden kapatılmış.',
-      sourceLabel: 'Şifre zarfları',
+      sourceLabel: 'Kriminal inceleme raporu',
       icon: 'uv',
+      tags: kart,
+    }),
+    clue('clue_cuma', {
+      type: 'FOTOGRAF',
+      title: 'Ön oda takvimi: halkalı cumalar',
+      shortText:
+        'Kasım’dan Şubat’a bazı cumalar kurşun kalemle yuvarlak içine alınmış; her halkadan önceki iki iş günü içinde iptal var.',
+      description: 'Halkaların yanında rakam yok, isim yok. Ama iptal günleri halkalı cumalara doğru yığılıyor.',
+      sourceLabel: 'Keşif tutanağı',
+      icon: 'bulb',
+      tags: kart,
+    }),
+    clue('clue_bahis', {
+      type: 'TANIK_IFADESI',
+      title: 'Burak: cuma öğleden sonraları engellenen siteler',
+      shortText:
+        'Güvenlik duvarı raporuna göre müdür yardımcılığı odasındaki bilgisayardan her cuma öğleden sonra yasa dışı bahis sitelerine giriş denenmiş.',
+      description:
+        'Engelleme kaydı bir dahili numara ve bir oturum adı tutar. Burak raporun kurumda saklandığını söyledi.',
+      sourceLabel: 'Burak Şen ile görüşme',
+      icon: 'phone',
       tags: kart,
     }),
     // Çeldiriciler
@@ -518,6 +540,19 @@ export const evidencePart: CasePart = {
       icon: 'bulb',
       side: 'DEFENSE',
       strength: 'STRONG',
+      tags: ['key'],
+    }),
+    insight('ded_borc', {
+      type: 'DIJITAL',
+      title: 'Cumaları ödenen bir borç',
+      shortText:
+        'Halkalı cumalar, iptallerin yığıldığı günler ve bahis sitelerine takılan girişler aynı takvimi izliyor.',
+      description:
+        'İptaller, ön oda takvimindeki halkalı cumalardan hemen önce yoğunlaşıyor; aynı cumalarda müdür yardımcılığı bilgisayarından yasa dışı bahis sitelerine girilmeye çalışılmış. Paranın bir vadesi vardı: cuma.',
+      sourceLabel: 'Çıkarım: takvim + güvenlik duvarı',
+      icon: 'bulb',
+      side: 'DEFENSE',
+      strength: 'MEDIUM',
       tags: ['key'],
     }),
   ],

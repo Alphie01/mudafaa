@@ -74,6 +74,54 @@
         "category": "SAVUNMA_STRATEJISI"
       },
       {
+        "id": "h_tutanak",
+        "when": { "not": { "hasEvidence": "ded_sahte_tutanak" } },
+        "text": "Dosyadaki tutanakların basım saatine ve imzanın eğik ışıktaki görüntüsüne bakmadın: rapor 17.56’da yeniden basılmış, imza toner. Belgenin sonradan düzenlendiğini göstermek, savcılığın “hileli davranış” dediği şeyin kime ait olduğunu sorar (TCK 247/2).",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_izin",
+        "when": { "not": { "hasEvidence": "ded_izin" } },
+        "text": "9 Ocak izin satırını iptal saatleriyle birleştirmedin: sanık hiç işe gelmediği gün bile kullanıcısı çalışmıştı. Tek bir gün, “kullanıcı = kişi” varsayımını tek başına çürütür.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kredi",
+        "when": { "not": { "hasEvidence": "ded_kredi" } },
+        "text": "Kredinin kaynağını tapu senediyle eşleştirmedin: savcılığın “saik” dediği ödeme miras tarlanın parasıydı. Saik delili çürütülmezse heyetin aklında bir soru olarak kalır (CMK 217).",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_borc",
+        "when": { "not": { "hasEvidence": "ded_borc" } },
+        "text": "Ön oda takvimindeki halkalı cumaları bilgi işlemin güvenlik duvarı kaydıyla birleştirmedin; iptallerin bir vadesi vardı ve borç sanığın değildi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_zarflar_uv",
+        "when": { "all": [{ "hasEvidence": "ev_zarflar" }, { "not": { "hasEvidence": "clue_zarf_uv" } }] },
+        "text": "Emanetteki zarfların kriminal raporundaki UV fotoğraflarına bakmadın: okilic zarfı açılıp yeniden kapatılmıştı. Mühürlü zarfın açıldığını göstermek, şifreye kimin eriştiği sorusunu kapatır.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_yedek",
+        "when": { "all": [{ "flag": "fact_yedek" }, { "not": { "flag": "log_muhafaza" } }] },
+        "text": "Burak’ın aylık log yedeklerinin muhafazasını mahkemeden istemedin; sunucu kaydı doksan günde dönüyordu. Dijital delil bulunduğu yerde, usulüne uygun korunmalıdır (CMK 134).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_hayri",
+        "when": { "all": [{ "flag": "fact_isik" }, { "not": { "flag": "hayri_tanik" } }] },
+        "text": "Hayri Bey’in 12 Şubat akşamı ön odada gördüğü ışığı tanık olarak bildirmedin. Saat ve yer söyleyen bağımsız bir tanık, kayıtları insan sesiyle doğrular (CMK 177–178).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_kesif",
+        "when": { "not": { "flag": "fact_pc03" } },
+        "text": "İptallerin yapıldığı ön odada bilirkişi eşliğinde keşif istemedin ya da yapmadın; yazıcı günlüğü, aşınmış tuşlar ve takvim o odadaydı (CMK 83).",
+        "category": "USUL_BILGISI"
+      },
+      {
         "id": "h_teklif",
         "when": { "all": [{ "flag": "teklif_iletildi" }] },
         "text": "Tanığın “ifademi düzeltirim” teklifini müvekkiline taşıdın; bildirilmesi gereken yer savcılıktı (CMK 158).",

@@ -117,8 +117,8 @@ export const scenes: CasePart = {
           discovers: 'ev_talimat',
           score: { ARASTIRMA: 60 },
           effects: [raise('fact_talimat')],
-          text: '“Maaş bordroları 2025” klasörünün arasından katlanmış bir kareli kâğıt kaydı. El yazısı, eğik ve düzgün: “Şifreler zarfta, müdürlükte kalacak. Devamlılık için. — E.T.” Tarih: Eylül 2025.',
-          short: 'El yazısı not: E.T.',
+          text: '“Maaş bordroları 2025” klasörünün arasından katlanmış bir kareli kâğıt kaydı. El yazısı, eğik ve düzgün: “Şifreler zarfta, müdürlükte kalacak. Devamlılık için. — Müdürlük.” İmza yok. Tarih: Eylül 2025.',
+          short: 'El yazısı not: Müdürlük',
         }),
         sceneObject('ob_tapu', 'Tapu dosyası', OB_TAPU, {
           discovers: 'ev_tapu',
@@ -161,9 +161,10 @@ export const scenes: CasePart = {
           short: 'Aşınmış 0 ve 2',
         }),
         sceneObject('ob_takvim', 'Duvar takvimi', OB_TAKVIM, {
+          discovers: 'clue_cuma',
           score: { ARASTIRMA: 40 },
           effects: [raise('fact_cuma')],
-          text: 'Bir bankanın promosyon takvimi. Kasım’dan Şubat’a bazı cumalar kurşun kalemle yuvarlak içine alınmış. Yanlarında rakam yok, isim yok. Yalnızca halkalar.',
+          text: 'Bir bankanın promosyon takvimi. Kasım’dan Şubat’a bazı cumalar kurşun kalemle yuvarlak içine alınmış; 13 Şubat da. Yanlarında rakam yok, isim yok. Bilirkişi iptal listesini yanına tuttu: her halkadan önceki iki iş gününde iptal var.',
           short: 'İşaretli cumalar',
         }),
         sceneObject('ob_yazici', 'Yazıcı', OB_YAZICI, {

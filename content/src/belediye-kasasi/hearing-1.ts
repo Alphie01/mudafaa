@@ -58,6 +58,7 @@ export const hearing1: CasePart = {
     'h1_kasa',
     'h1_pdks',
     'h1_ticket',
+    'kesif_istendi',
   ),
   config: {
     objectionGrounds: [
@@ -178,9 +179,10 @@ baskan: Sanığa hakları hatırlatıldı: susma hakkı, müdafi yardımı, lehe
           category: 'SAVUNMA_STRATEJISI',
         }),
         option('H101_B', '“Yalnızca iptalleri inkâr edin; şifreye girmeyin.”', {
-          effects: [raise('orhan_zarf_sakla')],
-          neutral:
-            'Sanığın susma hakkı vardır; ama bildiğin bir gerçeği sakladırırsan, onu başka bir tanık söylediğinde sanığın güvenilirliği zedelenir.',
+          score: { SAVUNMA_STRATEJISI: -40 },
+          effects: [raise('orhan_zarf_sakla'), dec('pers')],
+          bad: 'Sanığın susma hakkı vardır; ama bildiğin bir gerçeği müvekkiline sakladırmak savunmayı bir gizlemeye çevirir. O gerçeği başka bir tanık söylediğinde sanığın sözü değer kaybeder; heyet kaçamağı şimdiden sezer.',
+          category: 'SAVUNMA_STRATEJISI',
         }),
         option('H101_C', '“Susma hakkınızı kullanın.”', {
           effects: [raise('orhan_sustu')],
@@ -283,7 +285,7 @@ baskan: Tutanağa geçsin. Sanık 9 Ocak’ta yıllık izinde olduğunu beyan et
           responses: B(`
 orhan: Sonra efendim. Torbaları alır, “siz gidin, servisi kaçırmayın, ben sonra imzalarım” derdi. Ben de giderdim.
 - Kim?
-orhan: Müdür yardımcımız. Müdürümüz raporluyken. İyilik yapıyordu.
+orhan: Kim müsaitse efendim. Müdürümüz, müdür yardımcımız, bazen vezne sorumlusu. İyilik yapıyorlardı.
 > Üye hâkim kalemini bir an havada tuttu. Sonra yazdı.
 `),
           next: '$stay',
@@ -330,11 +332,11 @@ orhan/saskin: Emin… Şifre kişiye özeldir efendim. Ben… eminim.
 savci: Sayın Başkan, teftiş raporunun sonuç bölümünü okuyorum: “Açık, veznedar O. Kılıç’ın kullanıcı adıyla yapılan 47 iptalden doğmuştur. Sorumluluk kullanıcı hesabının sahibine aittir.”
 savci: Bu, kurumun uzman müfettişinin tespitidir. Başka bir incelemeye gerek görmüyoruz. Rapor hükme esas alınmalıdır.
 baskan: Müdafi, rapora diyeceğiniz?
-~ Uzman müfettiş. Bir idari raporu bilirkişi raporu gibi okuttu. Bu bir hata değil, bir alışkanlık; ama alışkanlıklar dosya kaybettirir.
+~ Kırk sayfa, tek bir sonuç cümlesi. Heyetin üç kalemi aynı anda durdu; benden bir cümle bekliyorlar.
 `),
       next: 'H1_03',
       options: [
-        option('H102_A', '“İdari inceleme bilirkişi raporu değildir; bilişim bilirkişisi atansın.”', {
+        option('H102_A', '“Rapor teknik sütunları incelememiş; bilişim bilirkişisi atansın.”', {
           score: { USUL_BILGISI: 100 },
           effects: [raise('bilirkisi_istendi'), inc('legal_hits'), inc('pers')],
           good: 'Teftiş raporu idari incelemedir; log, terminal ve kimlik doğrulama özel ve teknik bilgi gerektirir. Bilişim bilirkişisi atanması istenir (CMK 63, 67/3; değerlendirme CMK 217).',
@@ -357,17 +359,17 @@ baskan: Talep ara kararda değerlendirilecek. Rapor belge olarak okundu; değeri
 `),
           ],
         }),
-        option('H102_B', '“Rapor hukuka aykırı delildir; okunmasın.”', {
+        option('H102_B', '“Rapor sanık dinlenmeden yazıldı; hukuka aykırı delil olarak dışlansın.”', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred'), dec('pers'), inc('wrong')],
-          bad: 'Teftiş raporu hukuka aykırı yolla elde edilmiş bir delil değildir; belge olarak okunur (CMK 209). Sorun raporun yasaklığı değil, yetersizliğidir.',
+          bad: 'Sanığın idari incelemede dinlenmemesi raporu hukuka aykırı delil yapmaz; rapor belge olarak okunur (CMK 209), değeri CMK 217 ile takdir edilir. Sorun raporun yasaklığı değil, yetersizliğidir.',
           category: 'USUL_BILGISI',
           responses: B(`
-baskan: Hangi hukuka aykırılık müdafi? Kurumun kendi müfettişinin raporu. Talep reddedildi; rapor okundu.
+baskan: İdari incelemede dinlenmemek raporu yasak delil yapmaz müdafi. Talep reddedildi; rapor okundu.
 ~ Doğru kapıyı yanlış anahtarla zorladım. Ses salonda yankılandı.
 `),
         }),
-        option('H102_C', '“Diyeceğimiz yok; değerlendirmesi mahkemenin.”', {
+        option('H102_C', '“Raporun değeri mahkemenin takdirindedir; şimdilik diyeceğimiz yok.”', {
           neutral:
             'Raporun değerini mahkeme takdir eder; ama teknik bir inceleme istemezsen rapor dosyada tek başına kalır.',
           responses: B(`
@@ -375,7 +377,7 @@ baskan: Tutanağa geçsin.
 ~ Doğru bir cümle. Ama doğru cümleler bazen boş kalan bir sandalyeyi doldurmaz.
 `),
         }),
-        option('H102_D', '“Raporu yazan müfettiş tanık olarak dinlensin.”', {
+        option('H102_D', '“Raporu düzenleyen müfettiş duruşmada tanık sıfatıyla dinlensin.”', {
           score: { USUL_BILGISI: 10 },
           neutral:
             'Müfettiş raporunu anlatabilir; ama raporda incelenmemiş teknik sütunları anlatamaz. Asıl ihtiyaç bilişim bilirkişisidir.',
@@ -397,11 +399,11 @@ mubasir: Tanık Ercan Tunalı!
 baskan: Tanık, sanıkla akrabalığınız ya da husumetiniz var mı?
 ercan: Yok efendim. On dokuz yıllık mesai arkadaşımdır. Amiriyim.
 savci: Tanık, sanık şifresini kimseyle paylaşmazdı, değil mi? Her veznedar gibi?
-~ Sorunun cevabı sorunun içinde. Ve bu cevap, bu dosyanın bütün kapılarını kapatabilir.
+~ Ercan ağzını açtı. Cevabı tutanağa geçmeden önce bir saniyem var.
 `),
       next: 'H1_04',
       options: [
-        option('H103_A', 'İtiraz: soru cevabı içeriyor, telkin edici', {
+        option('H103_A', 'İtiraz: soru tanığı belirli bir cevaba yönlendiriyor', {
           score: { USUL_BILGISI: 80 },
           effects: [inc('legal_hits'), raise('h1_telkin'), inc('pers')],
           good: 'Cevabı içinde taşıyan, “değil mi” diye biten soru telkin edicidir; tanığın kendi bilgisini değil, sorulanın kanaatini aktarır (CMK 201; değerlendirme CMK 217).',
@@ -414,14 +416,14 @@ ercan: Şifreler kişiye özeldir efendim. Her veznedarın kendi şifresi. Mevzu
 ~ Aynı cevap; ama bu kez kendi ağzından, kendi cümlesiyle. Ve tutanakta.
 `),
         }),
-        option('H103_B', 'Diyeceğimiz yok', {
+        option('H103_B', 'Şimdilik itiraz yok; cevabı dinleyip sonra sorarız', {
           neutral: 'Telkin edici soruya itiraz etmedin; tanık savcının cümlesini onayladı.',
           responses: B(`
 ercan: Elbette efendim. Paylaşmazdı. Kimse paylaşmaz; mevzuat ortada.
 ~ “Elbette.” Savcının cümlesi tanığın cümlesi oldu.
 `),
         }),
-        option('H103_C', 'İtiraz: tanık sanığın amiri, taraflıdır', {
+        option('H103_C', 'İtiraz: tanık sanığın amiri, beyanı tarafsız olamaz', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred'), inc('wrong')],
           bad: 'Amir olmak tanıklığa engel değildir; tanığın tarafsızlığı beyanının değerlendirilmesinde gözetilir (CMK 217). Bu bir itiraz dayanağı değil.',
@@ -431,7 +433,7 @@ baskan: Amir olması tanıklığına engel değil müdafi. İtiraz reddedildi. T
 ercan: Paylaşmazdı efendim.
 `),
         }),
-        option('H103_D', 'İtiraz: bu soru iddianamede yok', {
+        option('H103_D', 'İtiraz: savcı iddianamede olmayan bir konuyu soruyor', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred'), inc('wrong')],
           bad: 'Savcı tanığa doğrudan soru yöneltebilir (CMK 201); “iddianamede yok” bir itiraz dayanağı değildir.',
@@ -495,10 +497,10 @@ baskan: Müdafi, tanığa sorularınız.
           effects: [raise('press_e1')],
           responses: B(`
 - Kasayı “kapatmak” ne demek? Tam olarak ne yapardı?
-ercan: Sayar efendim, gün sonu raporunu basar, torbaları mühürler. Tutanağı doldurur. Sonra torbaları bana teslim eder; ben kasa odasına koyarım.
-- Yani kasayı o kapatır, siz alırsınız.
-ercan: Müdürümüz raporluyken öyle efendim. Usul böyle.
-~ Usul böyle. Torbaların son durağı kasa odası değil; önce bir insanın elleri.
+ercan: Sayar efendim, gün sonu raporunu basar, torbaları mühürler. Tutanağı doldurur. Sonra torbaları müdürlükten kim varsa ona teslim eder; o kasa odasına koyar.
+- Siz de teslim alır mıydınız?
+ercan: Müsait olduğumda efendim. Selim Bey de alırdı, müdürümüz de. Usul böyle.
+~ Usul böyle. Torbaların son durağı kasa odası değil; önce bir insanın elleri. Hangi akşam kimin?
 `),
         }),
         pressRule('PR_E2', 'E2', {
@@ -515,11 +517,21 @@ ercan: Borç efendim. Herkes biliyordu.
         pressRule('PR_E3', 'E3', {
           score: { SORGULAMA: 25 },
           effects: [raise('press_e3')],
-          responses: B(`
+          responses: [
+            W(
+              has('ev_talimat'),
+              `
 - Hiçbir veznedar şifresini müdürlüğe bırakmadı mı? Devamlılık için bile?
 ercan: Bırakmadı efendim. Yönerge ortada. Ben de bırakılmasına izin vermezdim; biz denetim birimiyiz.
 ~ “İzin vermezdim.” Bir kural, kendisini koruyan adamın ağzında. Kâğıt cebimde.
+`,
+            ),
+            O(`
+- Hiçbir veznedar şifresini müdürlüğe bırakmadı mı? Devamlılık için bile?
+ercan: Bırakmadı efendim. Yönerge ortada. Ben de bırakılmasına izin vermezdim; biz denetim birimiyiz.
+~ “İzin vermezdim.” Kendinden emin bir ret. Elimde onu sınayacak bir kâğıt yok.
 `),
+          ],
         }),
         pressRule('PR_E4', 'E4', {
           score: { SORGULAMA: 25 },
@@ -554,12 +566,12 @@ ercan: Ben mi efendim? Mesai bitince. Değişirdi.
           good: 'El yazısı not: veznedarlardan şifrelerini mühürlü zarfta müdürlüğe bırakmaları istenmiş. “Öyle bir uygulama yok” beyanı belgeyle çelişiyor; kullanıcı adı tek kişiyi göstermiyor.',
           category: 'SORGULAMA',
           responses: B(`
-- Sayın Başkan, sanığın evrakı arasından çıkan el yazısı bir not. Eylül 2025. “Şifreler zarfta, müdürlükte kalacak. Devamlılık için. — E.T.”
+- Sayın Başkan, sanığın evrakı arasından çıkan el yazısı bir not. Eylül 2025. “Şifreler zarfta, müdürlükte kalacak. Devamlılık için. — Müdürlük.” İmza yok.
 - Tanık, zarf uygulaması yok dediniz.
 > Ercan notu iki parmağıyla tuttu; tıpkı Orhan’ın Hayri Bey’in makbuzunu tuttuğu gibi. Okudu. Yüzünde hiçbir şey kıpırdamadı.
 ercan: Bu not… Bu benim yazım değil efendim. Müdürlükte bir arkadaş yazmış olabilir. İyi niyetle; devamlılık için.
-uye: Tanık, “E.T.” kimin baş harfleri?
-ercan: Benim efendim. Ama müdürlükte E.T. bir ben değilim; evrak kayıtta Emine Tekin Hanım var. Ben böyle bir talimat vermedim. Verilmişse yönergeye aykırıdır.
+uye: Tanık, müdürlükte veznedarlara böyle bir talimatı kim verebilir?
+ercan: Müdür ya da müdür yardımcısı efendim. Müdürümüz eylülde görevdeydi. Ben böyle bir talimat vermedim. Verilmişse yönergeye aykırıdır.
 > Savcı not aldı. Bu kez sarı kalemle değil.
 ~ Kapıyı kapatmadı. Kapıyı başkasına gösterdi. Kibarca.
 `),
@@ -591,10 +603,10 @@ ercan: Bilmiyorum efendim. Ben teknik adam değilim. Bilgi işlem öyle söylemi
 - Tanık, kasayı sanık kapatır, size teslim ederdi dediniz. Teslim ettiği tutar hangisi?
 ercan: Tutanakta ne yazıyorsa o efendim. Dosyadaki asıl. Karbon kopyalar bazen silik çıkar; yanlış okunur.
 uye: Kırk bir bin, otuz iki bin olarak mı yanlış okunur tanık?
-ercan: Bilemem efendim. Ben imzaladığımı bilirim.
-- Ne zaman imzaladınız?
-ercan: Teslimde efendim. Usul böyle.
-~ Karbon nüshada teslim alan kutusu boş. Usul böyleyse, o kutu neden boş?
+ercan: Bilemem efendim. O akşam torbaları kim aldıysa paraf onundur.
+- 12 Şubat akşamı torbaları kim aldı?
+ercan: Hatırlamıyorum efendim. Ben ya da Selim Bey. Kayıtlara bakmak lazım; kâğıt neyse odur.
+~ Karbon nüshada teslim alan kutusu boş; asılda adsız bir paraf. İki isim, bir akşam. Bunu bir insanın hafızası değil, bir kapının kaydı ayıracak.
 `),
         }),
         presentRule('PS_E5', 'E5', ['ded_kredi', 'ev_tapu'], {
@@ -796,6 +808,18 @@ baskan: Not edildi.
 `),
           next: '$stay',
         }),
+        option('H105_KESIF', 'Ön odada bilirkişi eşliğinde keşif yapılsın', {
+          visibleWhen: all(flag('bilirkisi_istendi'), not(flag('kesif_istendi'))),
+          score: { USUL_BILGISI: 40 },
+          effects: [raise('kesif_istendi')],
+          good: 'İptallerin yapıldığı bilgisayarın yeri, erişimi ve kasa odasıyla ilişkisi ancak yerinde görülebilir; mahkemeden bilirkişi eşliğinde keşif istenir (CMK 83, 63).',
+          category: 'USUL_BILGISI',
+          responses: B(`
+- Sayın Başkan, iptallerin yapıldığı bilgisayarın bulunduğu ön odada, iptal saatinde ve bilirkişi eşliğinde keşif yapılmasını talep ediyoruz. Odanın düzeni ve kasa odasıyla bağlantısı ancak yerinde görülebilir.
+baskan: Not edildi.
+`),
+          next: '$stay',
+        }),
         option('H105_TUTUKLA', 'Tanık hakkında işlem yapılsın', {
           visibleWhen: flag('contra_e3'),
           score: { USUL_BILGISI: -40 },
@@ -817,6 +841,16 @@ baskan: Tanık beyanının değerlendirmesi hükümde yapılır müdafi. Talebin
       courtStage: 'TANIK_DINLEME',
       background: 'durusma_salonu',
       lines: [
+        W(
+          all(flag('bilirkisi_istendi'), flag('kesif_istendi')),
+          `
+> Heyet kısa bir müzakere için kalktı. Sekiz dakika. Kalorifer peteği tıkırdadı, kâtip parmaklarını ovuşturdu.
+baskan: Ara karar: Vezne programının işlem günlüğü, kullanıcı yetkileri, terminal kısıtlamaları ve kimlik doğrulama yönünden incelenmesi için bilişim bilirkişisi Dr. Seda Karaca’nın atanmasına;
+baskan: Mali Hizmetler Müdürlüğü ön odasında, iptal saatinde, bilirkişi eşliğinde keşif yapılmasına; kabul edilen delil talepleri yönünden müzekkere yazılmasına;
+baskan: Adli kontrolün devamına; duruşmanın bir ay sonraya ertelenmesine.
+~ Bir ay. Bir bilirkişi, bir keşif ve birkaç müzekkere. Kâğıtlar yola çıktı; bir gün de ben o odaya gireceğim.
+`,
+        ),
         W(
           flag('bilirkisi_istendi'),
           `

@@ -17,7 +17,7 @@ import { O, W } from './dsl.js';
 
 // 90-outcomes: sonuçlar (öncelik sırasıyla) ve sonuca bağlı epiloglar. Eşikler meta’daki eşik çubuğuyla aynı.
 
-export const T_NITEL = 3000;
+export const T_NITEL = 5000;
 export const T_BERAAT = 9000;
 export const T_BERAAT_B = 10000;
 
@@ -35,7 +35,10 @@ export const outcomes: CasePart = {
       reasoning: [
         because('Sanık, ikinci celsede atılı suçu kabul etmiş ve kamu zararını hükümden önce tamamen gidermiştir.'),
         because(
-          'Sanığın ikrarı, iptallerin hangi bilgisayardan ve nasıl yapıldığına ilişkin soruları cevapsız bırakmıştır; heyet bu çelişkiyi tutanağa geçirmiştir.',
+          'Sanığın ikrarı, kamu zararının varlığı ve miktarı yönünden dosyadaki kayıtlarla örtüşmektedir; zarar da hükümden önce sanık tarafından giderilmiştir.',
+        ),
+        because(
+          'Sanığın ikrarı, iptallerin hangi bilgisayardan ve hangi saatte yapıldığına ilişkin kayıtlarla çelişmektedir; sanık bu konudaki soruları cevapsız bırakmıştır. Heyet çelişkiyi tutanağa geçirmiş, ikrarı zarar ve iade olgusuyla birlikte değerlendirmiştir (CMK 217).',
         ),
         because('Etkin pişmanlık (TCK 248/3) ve takdiri indirim (TCK 62/1) uygulanmıştır.'),
       ],
@@ -98,9 +101,17 @@ nazan: Orhan size versin istedi. Son sayfayı okuyun dedi.
         because(
           'Tanık Ercan Tunalı kendisini suçlayabilecek sorulara cevap vermekten çekinmiştir (CMK 48); bu çekinme tek başına delil sayılmamış, diğer delillerle birlikte değerlendirilmiştir.',
         ),
+        because(
+          'Ek savunma da gözetildiğinde, şifrenin amirin yazılı talimatıyla teslimi ile doğan zarar arasındaki illiyet bağı üçüncü kişinin kasıtlı fiiliyle kesildiğinden TCK 257/2’deki ihmal suretiyle görevi kötüye kullanma suçunun unsurları da oluşmamıştır.',
+          flag('nitel_uyari'),
+        ),
+        because(
+          'İlk celsede sanığa yüklenen borç saiki dayanaksız kalmış; iptallerin yoğunlaştığı günler başka bir kişinin cuma günleri ödenen borçlarına işaret etmiştir.',
+          flag('contra_r5'),
+        ),
         because('Deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir.'),
       ],
-      legalBasis: 'CMK 223/2-b; TCK 247; CMK 48, 50/1-d, 63, 67/3, 158, 217, 273/1',
+      legalBasis: 'CMK 223/2-b, 226; TCK 247, 257/2; CMK 48, 50/1-d, 63, 67/3, 158, 217, 273/1',
       xp: xp(1.2, { ethicsVar: 'ethics' }),
       howToReach:
         'Kullanıcı adının arkasındaki eli göster (terminal + turnike), parayı teslimden sonra kimin tuttuğunu kanıtla (kasa kodu + müdürlük turnikesi, sıfırlama talebi + zarf) ve bilgiyi suç duyurusuyla savcılığa taşı.',
@@ -133,7 +144,8 @@ leyla: Bugün bir adam şifresini verdiğini söyledi ve kurtuldu. Bunu unutma. 
 > Odasına döndü. Masasının köşesindeki açılmamış sigara paketine bir an baktı; elini uzattı, sonra çekti.
 leyla: Bir gün sana o eski dosyadan bahsedeceğim Deniz. Tamamını. Bugün değil.
 # SON
-> Ercan Tunalı hakkında zimmet ve resmî belgede sahtecilik suçlarından dava açıldı. Görevden uzaklaştırıldı. Soruşturma dosyasında yasa dışı bahis borçlarına ilişkin kayıtlar da yer aldı.
+> Ercan Tunalı hakkında zimmet ve resmî belgede sahtecilik suçlarından dava açıldı. Görevden uzaklaştırıldı. Soruşturma dosyasında yasa dışı bahis borçlarına ilişkin kayıtlar da yer aldı: her cuma, bir tahsilatçıya, nakit.
+> Tahsilatçının telefon kaydı da dosyaya girdi. Cuma akşamları maç olan bir kahvehanenin hattı. Gizli numaradan aranan bir avukatın arama kaydıyla aynı hat.
 > Orhan Kılıç göreve iade edildi. Vezne 2’nin camındaki “KAPALI” yazısı söküldü. İlk akşam kasayı iki kez saydı; tutanağı, teslim alanın önünde, teslim alana imzalattı.
 `),
       ],
@@ -141,7 +153,15 @@ leyla: Bir gün sana o eski dosyadan bahsedeceğim Deniz. Tamamını. Bugün de�
     outcome('BERAAT_E', {
       class: 'ACQUITTAL',
       priority: 3,
-      when: all(not(flag('cokus')), ref('baskasi'), ref('lehe2'), cmp(v('pers'), '>=', 6), finalAtLeast(T_BERAAT)),
+      when: all(
+        not(flag('cokus')),
+        ref('baskasi'),
+        ref('lehe2'),
+        any(has('ded_teslim'), has('ded_sahte_tutanak')),
+        any(flag('fact_aksam'), flag('fact_zarf'), flag('fact_9ocak_orhan'), flag('fact_kredi')),
+        cmp(v('pers'), '>=', 6),
+        finalAtLeast(T_BERAAT),
+      ),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -185,19 +205,23 @@ leyla: Bir gün sana o eski dosyadan bahsedeceğim Deniz. Tamamını. Bugün de�
           any(flag('arg_kredi'), has('ded_kredi')),
         ),
         because(
+          'Ek savunma da gözetildiğinde, şifrenin amirin yazılı talimatıyla teslimi ile doğan zarar arasındaki illiyet bağı üçüncü kişinin kasıtlı fiiliyle kesildiğinden TCK 257/2’deki ihmal suretiyle görevi kötüye kullanma suçunun unsurları da oluşmamıştır.',
+          flag('nitel_uyari'),
+        ),
+        because(
           'Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2).',
         ),
       ],
-      legalBasis: 'CMK 223/2-e; TCK 247; CMK 63, 67/3, 217, 273/1; Anayasa 38/4; AİHS 6/2',
+      legalBasis: 'CMK 223/2-e, 226; TCK 247, 257/2; CMK 63, 67/3, 217, 273/1; Anayasa 38/4; AİHS 6/2',
       xp: xp(1, { ethicsVar: 'ethics' }),
       howToReach:
-        'İptallerin sanık binadan çıktıktan sonra başka bir bilgisayardan yapıldığını göster; buna en az iki bağımsız lehe bulgu ekle (izin günü, teslim tutanakları, kasa kodu, zarflar).',
+        'Müvekkilini dinle; iptallerin sanık binadan çıktıktan sonra başka bir bilgisayardan yapıldığını göster; teslim tutanaklarını karbonla karşılaştır ve en az iki bağımsız lehe bulgu ekle (izin günü, teslim tutanakları, kasa kodu, zarflar).',
       epilogue: [
         O(`
 baskan: Türk Milleti adına…
 > “Sabit olmadığından… beraatine.” Orhan kelimeleri tek tek duydu; bir yabancı dilden çeviriyormuş gibi. Sonra anladı ve oturdu. Ayakta dinlemesi gerekiyordu; kimse bir şey demedi.
 > Nazan iki elini yüzüne kapadı. Sesi çıkmadı; omuzları sarsıldı, o kadar.
-# HİSARÖNÜ BELEDİYESİ · BİR HAFTA SONRA [bg:buro]
+# HİSARÖNÜ BELEDİYESİ · BİR HAFTA SONRA [bg:sokak_sabah]
 > Orhan göreve iade dilekçesini yazdı. Kuruşu kuruşuna: maaş farkları, kesintiler, faiz. Dilekçeyi iki kez okudu, imzaladı, imzasının altına tarih ve saat yazdı.
 > Belediye koridorunda iki memur fısıldaştı. Duydum: “Şüpheden yararlandı.” Orhan da duydu. Durmadı.
 `),
@@ -211,6 +235,19 @@ baskan: Türk Milleti adına…
           not(flag('suc_duyurusu')),
           `
 > Mahkemenin suç duyurusu Başsavcılığa gitti; “kişi ya da kişiler” hakkında. Bir isim yoktu. İsimsiz bir dosya, bir rafta, bir sıra numarasıyla.
+`,
+        ),
+        W(
+          has('ded_borc'),
+          `
+> Savcı Gökhan Ersoy güvenlik duvarı kayıtlarını istemiş. Bir hafta sonra kısa bir telefon: cuma akşamları bir kahvehaneden yürütülen bir bahis tahsilatı, müdürlükten bir isim, bir de maç olan akşamlar aranan bir hat.
+> Gizli numaralar da bir kayıttır. Onları da biri okuyor artık.
+`,
+        ),
+        W(
+          not(has('ded_borc')),
+          `
+> Halkalı cumalar, maç sesli telefonlar, bir “her zamanki gibi.” Kimse onları bir dosyada yan yana koymadı. Belki bir gün biri koyar; ben koymadım.
 `,
         ),
         O(`
@@ -232,14 +269,15 @@ leyla: Başsavcılık o dosyayı ya açar ya rafta bırakır. Senin elindeki her
       when: all(
         not(flag('cokus')),
         flag('nitel_uyari'),
-        any(flag('closing_terdit'), flag('ihmal_kabul'), ref('baskasi')),
+        ref('baskasi'),
+        any(has('ded_teslim'), has('ded_sahte_tutanak'), has('ded_izin')),
         finalAtLeast(T_NITEL),
       ),
       stamp: 'NİTELENDİRME',
       stampTone: 'amber',
       sentence: '5 ay hapis · ertelendi',
       verdictText:
-        'Sanık Orhan Kılıç’ın üzerine atılı zimmet suçunun unsurları oluşmadığından, CMK 226 uyarınca yapılan ek savunma hakkı hatırlatması doğrultusunda eyleminin ihmal suretiyle görevi kötüye kullanma suçunu oluşturduğu kabul edilerek TCK 257/2 uyarınca takdiren 6 AY; TCK 62/1 ile 5 AY HAPİS cezası ile cezalandırılmasına; sanığın geçmişi ve suç işleme eğilimi gözetilerek cezanın TCK 51/1 uyarınca ERTELENMESİNE, denetim süresinin 1 yıl olarak belirlenmesine (TCK 51/3); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1) karar verildi.',
+        'Sanık Orhan Kılıç’ın üzerine atılı zimmet suçunun unsurları oluşmadığından, CMK 226 uyarınca yapılan ek savunma hakkı hatırlatması doğrultusunda eyleminin ihmal suretiyle görevi kötüye kullanma suçunu oluşturduğu kabul edilerek TCK 257/2 uyarınca takdiren 6 AY; TCK 62/1 ile 5 AY HAPİS cezası ile cezalandırılmasına; sanığın geçmişi ve suç işleme eğilimi gözetilerek cezanın TCK 51/1 uyarınca ERTELENMESİNE, denetim süresinin 1 yıl olarak belirlenmesine (TCK 51/3); kamu zararı giderilmediğinden CMK 231/6-c koşulu bulunmadığından hükmün açıklanmasının geri bırakılmasına yer olmadığına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1) karar verildi.',
       reasoning: [
         because(
           'İptallerin sanık tarafından yapıldığı ve paranın sanık tarafından zimmete geçirildiği sabit olmamıştır; zimmet suçunun unsurları oluşmamıştır.',
@@ -248,12 +286,14 @@ leyla: Başsavcılık o dosyayı ya açar ya rafta bırakır. Senin elindeki her
           'Sanık, kurum yönergesine aykırı olarak şifresini zarf içinde müdürlüğe teslim etmiş ve kamu zararının doğmasına imkân vermiştir.',
         ),
         because('Eylem TCK 257/2 kapsamında değerlendirilmiş; sanığa CMK 226 uyarınca ek savunma hakkı tanınmıştır.'),
-        because('Sanığın sabıkasız geçmişi gözetilerek takdiri indirim ve erteleme uygulanmıştır.'),
+        because(
+          'Kamu zararı giderilmediğinden hükmün açıklanmasının geri bırakılması koşulları oluşmamıştır (CMK 231/6-c); sanığın sabıkasız geçmişi gözetilerek takdiri indirim ve erteleme uygulanmıştır.',
+        ),
       ],
-      legalBasis: 'TCK 257/2, 61, 62/1, 51/1, 51/3; CMK 226, 273/1',
+      legalBasis: 'TCK 257/2, 61, 62/1, 51/1, 51/3; CMK 225, 226, 231/6-c, 273/1',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        'Zarf gerçeğini ortaya çıkar (nitelendirme uyarısı gelir); iptallerin sanıkça yapılmadığını göster ya da terditli savunmayla ihmal nitelendirmesini iste.',
+        'Zarf gerçeğini ortaya çıkar (nitelendirme uyarısı gelir); iptallerin sanık binadan çıktıktan sonra başka bir bilgisayardan yapıldığını göster ve en az bir kayıt bulgusu ekle (teslim tutanakları ya da izin günü).',
       epilogue: [
         O(`
 baskan: Sanığın cezalandırılmasına…

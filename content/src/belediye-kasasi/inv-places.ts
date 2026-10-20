@@ -20,11 +20,11 @@ const vezne = sceneSearch('INV_VEZNE', {
   hud: ['taps_v'],
   exposeCounts: true,
   scene: 'sc_vezne',
-  background: 'buro',
+  background: 'siyah',
   instruction: 'Salonda dikkatini çeken yere dokun. Her dokunuş bir büyüteç hakkı yer.',
   costVar: 'taps_v',
   lines: B(`
-# CUMA 10.40 — HİSARÖNÜ BELEDİYESİ, VEZNE SALONU [bg:buro]
+# 10.40 — HİSARÖNÜ BELEDİYESİ, VEZNE SALONU [bg:siyah]
 > Vezne salonu gündüz başka bir yerdi: sıra fişi makinesi öttükçe biri kalkıyor, biri oturuyordu. Kalorifer peteklerinin üstünde ıslak eldivenler kuruyordu.
 > Vezne 1’de Melek, kulağında telefon, bir eliyle para sayıyordu. Vezne 2’nin camında bir kâğıt: “KAPALI — Lütfen Vezne 1’e başvurunuz.”
 > Güvenlik görevlisi kartıma baktı, avukat kimliğime baktı, sonra bana. “Mükellef gibi gezin abla, kimseye bir şey sormayın, ben bir şey görmedim.”
@@ -42,10 +42,10 @@ const evGiris = decisionNode('INV_EV_G', [{ to: 'INV_EV' }], {
   title: 'Kılıçların evi',
   onFirstEnter: [meet('nazan')],
   lines: B(`
-# CUMARTESİ 16.00 — YILDIRIM, DÖRDÜNCÜ KAT [bg:ev]
+# 16.00 — YILDIRIM, DÖRDÜNCÜ KAT [bg:ev]
 > Asansörsüz bir apartman. Her katta başka bir yemek kokusu: birinci katta kızartma, ikincide pekmez, üçüncüde çamaşır suyu. Dördüncüde dikiş makinesinin tıkırtısı.
 > Nazan kapıyı ağzında iğnelerle açtı. Arkasında, salonun ortasında bir manken; üstünde iğnelenmiş bir gelinlik.
-nazan: Gel avukat hanım. Kusura bakma, provası yarın. Orhan servisle gelecek, yarım saate. Elif içeride, ders çalışıyor; yani telefon.
+nazan: Gel avukat hanım. Kusura bakma, provası yarın. Orhan karakoldan, adli kontrol imzasından gelecek; yarım saate. Elif içeride, ders çalışıyor; yani telefon.
 > Duvarlarda raptiyeyle tutturulmuş çizimler: kalpler, bir kuş, bir hastane yatağı, bir de kalemle çizilmiş gözlüklü bir adam. Altında: “BABAM — HESAP UZMANI.”
 nazan: Elif çizdi. Hastanedeyken. Her gün bir tane. O gözlüklüyü en çok sever.
 nazan: Orhan’ın masası şurada. Kimse dokunmaz; ben toz bile almam. Bir kâğıdın yerini değiştirsem üç gün arar, bulunca “burada değildi” der.
@@ -80,7 +80,7 @@ const evSon1 = decisionNode('INV_EV_SON_1', [{ to: 'INV_EV_SON' }], {
     W(
       has('ev_talimat'),
       `
-> Kapı açıldı. Orhan servisten inmiş, merdivenleri çıkmış, nefes nefese. Masasının başında beni, elimde kareli bir kâğıtla görünce olduğu yerde durdu.
+> Kapı açıldı. Orhan karakoldaki imzadan dönmüş, merdivenleri çıkmış, nefes nefese. Masasının başında beni, elimde kareli bir kâğıtla görünce olduğu yerde durdu.
 orhan/uzgun: O kâğıt… O kâğıdı nereden… Ben onu bordroların arasına…
 nazan: Ne kâğıdı Orhan? Ne var o kâğıtta?
 > Orhan cevap vermedi. Paltosunu çıkarmadan sandalyesine oturdu. Gözlüğünü çıkardı, sildi, yeniden taktı. Sonra bir daha çıkardı.
@@ -90,7 +90,7 @@ nazan: Neyi verdin Orhan? Neyi?
 `,
     ),
     O(`
-> Kapı açıldı. Orhan servisten inmiş, merdivenleri çıkmış. Masasının başında beni görünce bir an durdu, sonra gülümsemeye çalıştı.
+> Kapı açıldı. Orhan imzadan dönmüş, merdivenleri çıkmış. Masasının başında beni görünce bir an durdu, sonra gülümsemeye çalıştı.
 orhan: Bir şey buldunuz mu efendim? Her şey yerindedir. Ben her şeyi yerinde tutarım.
 nazan: Avukat hanım yorulmuştur Orhan, bir çay koy.
 > Çay geldi. Kalkarken raflardaki mavi klasörlere bir kez daha baktım. Bordrolar, makbuz koçanları, yıllar. Hepsine bakmadım.

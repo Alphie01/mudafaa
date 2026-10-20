@@ -92,6 +92,9 @@ export const trial: CasePart = {
     'closing_usul',
     'closing_terdit',
     'son_hesap',
+    'm2_ceza',
+    'press_r5',
+    'contra_r5',
   ),
   predicates: [
     {
@@ -390,7 +393,7 @@ bilirkisi: Bilmiyorum avukat hanım. Log bir kullanıcı adı söyler: okilic. K
 mubasir: Tanık Hayri Özdemir!
 > Hayri Bey ayakkabı kutusunu dinleyici sırasına bıraktı; kürsüye eli boş yürüdü. Yemin metnini başkandan önce bitirdi; başkan bir an durdu, sonra devam etti.
 hayri: 12 Şubat’ta saat 16.40’ta ödeme yaptım; veznedar parayı iki kez saydı. Saat altıya doğru hırkam için geri döndüm. Bekçi içeri almadı.
-hayri: Veznelerin arkasındaki odada ışık yanıyordu. Buzlu camdan mavi bir ışık, bir monitör ışığı. Bir gölge gördüm; kim olduğunu bilmiyorum. Arka kapıda bir şemsiye açıldı.
+hayri: Veznelerin arkasındaki odada ışık yanıyordu. Buzlu camdan mavi bir ışık, bir monitör ışığı. Bir gölge gördüm; kim olduğunu bilmiyorum. Sonra ışık söndü, arka kapı açılıp kapandı.
 savci: Tanık, gölgenin kim olduğunu tahmin edebilir misiniz?
 hayri: Hayır Sayın Savcı. Tahmin tarihin düşmanıdır. Saat altıya on vardı; bu kadarını biliyorum.
 > Üye hâkim saati yazdı ve bilirkişi raporunun ekindeki bir satırın yanına bir işaret koydu.
@@ -458,9 +461,26 @@ melek: Bir kere. Bir mükellef ona bahşiş bıraktı, adamın peşinden durağa
               raise('contra_m2'),
               inc('pers', 2),
               score('SORGULAMA', 250),
+              ifThen(all(any(flag('orhan_zarf_sakla'), flag('orhan_yalan')), not(flag('m2_ceza'))), [
+                dec('cred'),
+                dec('pers'),
+                raise('m2_ceza'),
+              ]),
             ]),
           ],
           responses: [
+            W(
+              all(flag('melek_hazir'), any(flag('orhan_zarf_sakla'), flag('orhan_yalan'))),
+              `
+- Müdürlükte şifrelerle ilgili bir uygulama oldu mu Melek Hanım?
+> Melek çantasını bıraktı. Kürsünün kenarını tuttu. Bir an dinleyici sıralarına baktı; arka sıraya.
+melek: Oldu. Yalan söylemeyeceğim. Eylülde masalarımıza bir not bırakıldı; şifrelerimizi zarfa koyup müdürlüğe verdik. Hepimiz. Orhan abi de.
+melek: Zarfları Ercan Bey topladı. Kendi eliyle aldı, “devamlılık için” dedi.
+uye: Sanık ilk celsede şifresini kimseyle paylaşmadığını söylemişti. Şimdi tanık başka bir şey söylüyor.
+> Orhan başını eğdi. Heyet bir şey yazdı; ikisi aynı anda.
+~ Gerçek geldi; ama müvekkilimin ağzından değil. Ona sakladırdığım cümle, bu salonda onun sözünü ucuzlattı.
+`,
+            ),
             W(
               flag('melek_hazir'),
               `
@@ -500,7 +520,11 @@ melek: Müdürlükte konuşuluyordu canım. Yani, Sayın Başkan.
               [raise('contra_m2'), inc('pers', 2)],
               [inc('pers')],
             ),
-            ifThen(any(flag('orhan_zarf_sakla'), flag('orhan_yalan')), [dec('cred'), dec('pers')]),
+            ifThen(all(any(flag('orhan_zarf_sakla'), flag('orhan_yalan')), not(flag('m2_ceza'))), [
+              dec('cred'),
+              dec('pers'),
+              raise('m2_ceza'),
+            ]),
           ],
           good: 'Şifrelerin zarfta toplandığını gösteren belge tanığa gösterildi; “hatırlamıyorum” beyanı belgeyle karşılandı.',
           category: 'SORGULAMA',
@@ -669,6 +693,16 @@ ercan: Efendim, bir ay önce bildiklerimi söyledim. Bugün de aynısını söyl
           '.',
         ]),
         statement(
+          'R5',
+          5,
+          [
+            'Borç, kredi, sıkıntı; ',
+            hl('bunlar Orhan Bey’in derdiydi, benim değil', any(flag('press_r5'), has('ded_borc'))),
+            '.',
+          ],
+          has('ded_borc'),
+        ),
+        statement(
           'R4',
           4,
           ['Ben yalnızca ', hl('usulü uyguladım', has('ded_sahte_tutanak')), ' efendim.'],
@@ -781,6 +815,31 @@ ercan: Hayır efendim.
 ~ Bir zarfı inkâr eden adam, şimdi kendi şifresinin başkasında olabileceğini söylüyor. Kendi cümleleri birbirine çarptı; kimse itmedi.
 `),
           ],
+        }),
+        pressRule('PR_R5', 'R5', {
+          score: { SORGULAMA: 25 },
+          effects: [raise('press_r5')],
+          responses: B(`
+- Sizin hiç borcunuz olmadı mı tanık?
+ercan: Herkesin bir kredisi vardır efendim. Ben maaşımla yaşarım. Cumaları da ailemle.
+`),
+        }),
+        presentRule('PS_R5', 'R5', ['ded_borc'], {
+          score: { SORGULAMA: 200 },
+          effects: [raise('contra_r5'), inc('pers')],
+          good: 'Keşif tutanağındaki takvim ve bilgi işlemin güvenlik duvarı kaydı: iptaller halkalı cumalardan önce yoğunlaşıyor; aynı cumalarda müdür yardımcılığı bilgisayarından yasa dışı bahis sitelerine giriş denenmiş. İlk celsede sanığa yüklenen “borç” saiki başka bir masaya işaret ediyor.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Sayın Başkan, keşif tutanağındaki ön oda takvimi: kasımdan şubata halkalı cumalar. Her halkadan önceki iki iş gününde iptal var. 12 Şubat perşembe; ertesi gün de halkalı.
+- Bilgi işlem teknikerinin anlattığı güvenlik duvarı kaydı kurumda duruyor: aynı cumalarda müdür yardımcılığı odasındaki bilgisayardan yasa dışı bahis sitelerine giriş denemeleri.
+- Tanık, ilk celsede sanığın borcundan söz etmiştiniz. Cumaları kimin borcu ödeniyordu?
+> Ercan kalemi çevirdi. Durdu. Kapağı açmadı.
+ercan: Özel hayatım hakkında konuşmak istemiyorum efendim.
+uye: Tanık, özel hayatınızı sormuyoruz. Kurum bilgisayarını soruyoruz.
+ercan: …
+savci: Sayın Başkan, güvenlik duvarı kayıtlarının Başsavcılığa iletilmesini talep ediyorum.
+~ Bir ay önce “borç” kelimesini Orhan’ın üstüne bıraktı. Bugün o kelime kendi masasına döndü.
+`),
         }),
         presentRule('PS_R4', 'R4', ['ded_sahte_tutanak'], {
           score: { SORGULAMA: 200 },

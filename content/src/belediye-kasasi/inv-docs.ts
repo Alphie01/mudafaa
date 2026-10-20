@@ -256,7 +256,7 @@ const tutanak = documentExam('INV_TUTANAK', {
     row('t_eden', ['Teslim eden', 'O. Kılıç (imza)', 'O. Kılıç (imza)'], {
       uv: { cells: ['Teslim eden', 'toner · kabartı yok', 'mürekkep · kalem izi var'], tone: 'special' },
     }),
-    row('t_alan', ['Teslim alan', 'E. Tunalı (imza)', '— boş —']),
+    row('t_alan', ['Teslim alan', 'okunaksız paraf', '— boş —']),
     row('t_torba', ['Torba sayısı', '3 mühürlü', '3 mühürlü']),
   ],
   tools: [
@@ -301,7 +301,7 @@ const tutanak = documentExam('INV_TUTANAK', {
       effects: [raise('fact_imza_bos')],
       feedback: {
         title: 'TESLİM ALAN',
-        text: 'Asılda teslim alan imzası var; Orhan’ın nüshasında yok. Teslim anında imzalanmamış. Ne zaman imzalandı?',
+        text: 'Asılda teslim alan hanesinde adsız, okunaksız bir paraf var; Orhan’ın nüshasında hane boş. Teslim anında imzalanmamış. Ne zaman, kim paraf attı?',
         label: '+40 SKOR',
         tone: 'neutral',
       },

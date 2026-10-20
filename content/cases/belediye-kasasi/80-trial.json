@@ -30,7 +30,10 @@
     { "id": "closing_masumiyet", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "closing_usul", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "closing_terdit", "type": "bool", "initial": false, "visibility": "HIDDEN" },
-    { "id": "son_hesap", "type": "bool", "initial": false, "visibility": "HIDDEN" }
+    { "id": "son_hesap", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "m2_ceza", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_r5", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_r5", "type": "bool", "initial": false, "visibility": "HIDDEN" }
   ],
   "predicates": [
     {
@@ -666,7 +669,7 @@
             },
             {
               "speaker": "hayri",
-              "text": "Veznelerin arkasındaki odada ışık yanıyordu. Buzlu camdan mavi bir ışık, bir monitör ışığı. Bir gölge gördüm; kim olduğunu bilmiyorum. Arka kapıda bir şemsiye açıldı."
+              "text": "Veznelerin arkasındaki odada ışık yanıyordu. Buzlu camdan mavi bir ışık, bir monitör ışığı. Bir gölge gördüm; kim olduğunu bilmiyorum. Sonra ışık söndü, arka kapı açılıp kapandı."
             },
             { "speaker": "savci", "text": "Tanık, gölgenin kim olduğunu tahmin edebilir misiniz?" },
             {
@@ -820,6 +823,39 @@
           "match": { "statement": "M2" },
           "responses": [
             {
+              "when": {
+                "all": [
+                  { "flag": "melek_hazir" },
+                  { "any": [{ "flag": "orhan_zarf_sakla" }, { "flag": "orhan_yalan" }] }
+                ]
+              },
+              "lines": [
+                { "speaker": "player", "text": "Müdürlükte şifrelerle ilgili bir uygulama oldu mu Melek Hanım?" },
+                {
+                  "speaker": "narrator",
+                  "text": "Melek çantasını bıraktı. Kürsünün kenarını tuttu. Bir an dinleyici sıralarına baktı; arka sıraya."
+                },
+                {
+                  "speaker": "melek",
+                  "text": "Oldu. Yalan söylemeyeceğim. Eylülde masalarımıza bir not bırakıldı; şifrelerimizi zarfa koyup müdürlüğe verdik. Hepimiz. Orhan abi de."
+                },
+                {
+                  "speaker": "melek",
+                  "text": "Zarfları Ercan Bey topladı. Kendi eliyle aldı, “devamlılık için” dedi."
+                },
+                {
+                  "speaker": "uye",
+                  "text": "Sanık ilk celsede şifresini kimseyle paylaşmadığını söylemişti. Şimdi tanık başka bir şey söylüyor."
+                },
+                { "speaker": "narrator", "text": "Orhan başını eğdi. Heyet bir şey yazdı; ikisi aynı anda." },
+                {
+                  "speaker": "player",
+                  "text": "Gerçek geldi; ama müvekkilimin ağzından değil. Ona sakladırdığım cümle, bu salonda onun sözünü ucuzlattı.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
               "when": { "flag": "melek_hazir" },
               "lines": [
                 { "speaker": "player", "text": "Müdürlükte şifrelerle ilgili bir uygulama oldu mu Melek Hanım?" },
@@ -870,7 +906,21 @@
               "then": [
                 { "type": "VAR", "var": "contra_m2", "op": "set", "value": true },
                 { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
-                { "type": "SCORE", "category": "SORGULAMA", "amount": 250 }
+                { "type": "SCORE", "category": "SORGULAMA", "amount": 250 },
+                {
+                  "type": "IF",
+                  "when": {
+                    "all": [
+                      { "any": [{ "flag": "orhan_zarf_sakla" }, { "flag": "orhan_yalan" }] },
+                      { "not": { "flag": "m2_ceza" } }
+                    ]
+                  },
+                  "then": [
+                    { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+                    { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+                    { "type": "VAR", "var": "m2_ceza", "op": "set", "value": true }
+                  ]
+                }
               ]
             }
           ]
@@ -979,10 +1029,16 @@
             },
             {
               "type": "IF",
-              "when": { "any": [{ "flag": "orhan_zarf_sakla" }, { "flag": "orhan_yalan" }] },
+              "when": {
+                "all": [
+                  { "any": [{ "flag": "orhan_zarf_sakla" }, { "flag": "orhan_yalan" }] },
+                  { "not": { "flag": "m2_ceza" } }
+                ]
+              },
               "then": [
                 { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
-                { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+                { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+                { "type": "VAR", "var": "m2_ceza", "op": "set", "value": true }
               ]
             }
           ],
@@ -1305,6 +1361,19 @@
           ]
         },
         {
+          "id": "R5",
+          "order": 5,
+          "visibleWhen": { "hasEvidence": "ded_borc" },
+          "segments": [
+            { "text": "Borç, kredi, sıkıntı; " },
+            {
+              "text": "bunlar Orhan Bey’in derdiydi, benim değil",
+              "highlightWhen": { "any": [{ "flag": "press_r5" }, { "hasEvidence": "ded_borc" }] }
+            },
+            { "text": "." }
+          ]
+        },
+        {
           "id": "R4",
           "order": 4,
           "visibleWhen": { "any": [{ "flag": "contra_r1" }, { "flag": "contra_r2" }, { "flag": "contra_r3" }] },
@@ -1542,6 +1611,72 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Destek talebi kaydı: 14 Ocak 17.20’de sanığın şifresinin sıfırlanmasını isteyen kullanıcı müdür yardımcısı; geçici şifre 17.31’de verilmiş, 17.44’te iptal yapılmış. Zarf da açılıp kapatılmış.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PR_R5",
+          "kind": "PRESS",
+          "match": { "statement": "R5" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Sizin hiç borcunuz olmadı mı tanık?" },
+                {
+                  "speaker": "ercan",
+                  "text": "Herkesin bir kredisi vardır efendim. Ben maaşımla yaşarım. Cumaları da ailemle."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_r5", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PS_R5",
+          "kind": "PRESENT",
+          "match": { "statement": "R5", "evidence": ["ded_borc"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, keşif tutanağındaki ön oda takvimi: kasımdan şubata halkalı cumalar. Her halkadan önceki iki iş gününde iptal var. 12 Şubat perşembe; ertesi gün de halkalı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bilgi işlem teknikerinin anlattığı güvenlik duvarı kaydı kurumda duruyor: aynı cumalarda müdür yardımcılığı odasındaki bilgisayardan yasa dışı bahis sitelerine giriş denemeleri."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Tanık, ilk celsede sanığın borcundan söz etmiştiniz. Cumaları kimin borcu ödeniyordu?"
+                },
+                { "speaker": "narrator", "text": "Ercan kalemi çevirdi. Durdu. Kapağı açmadı." },
+                { "speaker": "ercan", "text": "Özel hayatım hakkında konuşmak istemiyorum efendim." },
+                { "speaker": "uye", "text": "Tanık, özel hayatınızı sormuyoruz. Kurum bilgisayarını soruyoruz." },
+                { "speaker": "ercan", "text": "…" },
+                {
+                  "speaker": "savci",
+                  "text": "Sayın Başkan, güvenlik duvarı kayıtlarının Başsavcılığa iletilmesini talep ediyorum."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir ay önce “borç” kelimesini Orhan’ın üstüne bıraktı. Bugün o kelime kendi masasına döndü.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 200 },
+            { "type": "VAR", "var": "contra_r5", "op": "set", "value": true },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Keşif tutanağındaki takvim ve bilgi işlemin güvenlik duvarı kaydı: iptaller halkalı cumalardan önce yoğunlaşıyor; aynı cumalarda müdür yardımcılığı bilgisayarından yasa dışı bahis sitelerine giriş denenmiş. İlk celsede sanığa yüklenen “borç” saiki başka bir masaya işaret ediyor.",
             "category": "SORGULAMA"
           }
         },

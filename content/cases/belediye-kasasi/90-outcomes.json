@@ -12,7 +12,10 @@
       "reasoning": [
         { "text": "Sanık, ikinci celsede atılı suçu kabul etmiş ve kamu zararını hükümden önce tamamen gidermiştir." },
         {
-          "text": "Sanığın ikrarı, iptallerin hangi bilgisayardan ve nasıl yapıldığına ilişkin soruları cevapsız bırakmıştır; heyet bu çelişkiyi tutanağa geçirmiştir."
+          "text": "Sanığın ikrarı, kamu zararının varlığı ve miktarı yönünden dosyadaki kayıtlarla örtüşmektedir; zarar da hükümden önce sanık tarafından giderilmiştir."
+        },
+        {
+          "text": "Sanığın ikrarı, iptallerin hangi bilgisayardan ve hangi saatte yapıldığına ilişkin kayıtlarla çelişmektedir; sanık bu konudaki soruları cevapsız bırakmıştır. Heyet çelişkiyi tutanağa geçirmiş, ikrarı zarar ve iade olgusuyla birlikte değerlendirmiştir (CMK 217)."
         },
         { "text": "Etkin pişmanlık (TCK 248/3) ve takdiri indirim (TCK 62/1) uygulanmıştır." }
       ],
@@ -98,9 +101,17 @@
         {
           "text": "Tanık Ercan Tunalı kendisini suçlayabilecek sorulara cevap vermekten çekinmiştir (CMK 48); bu çekinme tek başına delil sayılmamış, diğer delillerle birlikte değerlendirilmiştir."
         },
+        {
+          "when": { "flag": "nitel_uyari" },
+          "text": "Ek savunma da gözetildiğinde, şifrenin amirin yazılı talimatıyla teslimi ile doğan zarar arasındaki illiyet bağı üçüncü kişinin kasıtlı fiiliyle kesildiğinden TCK 257/2’deki ihmal suretiyle görevi kötüye kullanma suçunun unsurları da oluşmamıştır."
+        },
+        {
+          "when": { "flag": "contra_r5" },
+          "text": "İlk celsede sanığa yüklenen borç saiki dayanaksız kalmış; iptallerin yoğunlaştığı günler başka bir kişinin cuma günleri ödenen borçlarına işaret etmiştir."
+        },
         { "text": "Deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir." }
       ],
-      "legalBasis": "CMK 223/2-b; TCK 247; CMK 48, 50/1-d, 63, 67/3, 158, 217, 273/1",
+      "legalBasis": "CMK 223/2-b, 226; TCK 247, 257/2; CMK 48, 50/1-d, 63, 67/3, 158, 217, 273/1",
       "xp": {
         "if": {
           "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
@@ -173,7 +184,11 @@
             { "speaker": "narrator", "text": "SON", "style": "card" },
             {
               "speaker": "narrator",
-              "text": "Ercan Tunalı hakkında zimmet ve resmî belgede sahtecilik suçlarından dava açıldı. Görevden uzaklaştırıldı. Soruşturma dosyasında yasa dışı bahis borçlarına ilişkin kayıtlar da yer aldı."
+              "text": "Ercan Tunalı hakkında zimmet ve resmî belgede sahtecilik suçlarından dava açıldı. Görevden uzaklaştırıldı. Soruşturma dosyasında yasa dışı bahis borçlarına ilişkin kayıtlar da yer aldı: her cuma, bir tahsilatçıya, nakit."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tahsilatçının telefon kaydı da dosyaya girdi. Cuma akşamları maç olan bir kahvehanenin hattı. Gizli numaradan aranan bir avukatın arama kaydıyla aynı hat."
             },
             {
               "speaker": "narrator",
@@ -192,6 +207,15 @@
           { "not": { "flag": "cokus" } },
           { "ref": "baskasi" },
           { "ref": "lehe2" },
+          { "any": [{ "hasEvidence": "ded_teslim" }, { "hasEvidence": "ded_sahte_tutanak" }] },
+          {
+            "any": [
+              { "flag": "fact_aksam" },
+              { "flag": "fact_zarf" },
+              { "flag": "fact_9ocak_orhan" },
+              { "flag": "fact_kredi" }
+            ]
+          },
           { "cmp": [{ "var": "pers" }, ">=", 6] },
           { "cmp": [{ "score": "final" }, ">=", 9000] }
         ]
@@ -238,10 +262,14 @@
           "text": "Kredinin kaynağı miras tarlanın satış bedeli olup savcılığın ileri sürdüğü saik dayanaktan yoksundur."
         },
         {
+          "when": { "flag": "nitel_uyari" },
+          "text": "Ek savunma da gözetildiğinde, şifrenin amirin yazılı talimatıyla teslimi ile doğan zarar arasındaki illiyet bağı üçüncü kişinin kasıtlı fiiliyle kesildiğinden TCK 257/2’deki ihmal suretiyle görevi kötüye kullanma suçunun unsurları da oluşmamıştır."
+        },
+        {
           "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2)."
         }
       ],
-      "legalBasis": "CMK 223/2-e; TCK 247; CMK 63, 67/3, 217, 273/1; Anayasa 38/4; AİHS 6/2",
+      "legalBasis": "CMK 223/2-e, 226; TCK 247, 257/2; CMK 63, 67/3, 217, 273/1; Anayasa 38/4; AİHS 6/2",
       "xp": {
         "if": {
           "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
@@ -249,7 +277,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
         }
       },
-      "howToReach": "İptallerin sanık binadan çıktıktan sonra başka bir bilgisayardan yapıldığını göster; buna en az iki bağımsız lehe bulgu ekle (izin günü, teslim tutanakları, kasa kodu, zarflar).",
+      "howToReach": "Müvekkilini dinle; iptallerin sanık binadan çıktıktan sonra başka bir bilgisayardan yapıldığını göster; teslim tutanaklarını karbonla karşılaştır ve en az iki bağımsız lehe bulgu ekle (izin günü, teslim tutanakları, kasa kodu, zarflar).",
       "epilogue": [
         {
           "lines": [
@@ -262,7 +290,12 @@
               "speaker": "narrator",
               "text": "Nazan iki elini yüzüne kapadı. Sesi çıkmadı; omuzları sarsıldı, o kadar."
             },
-            { "speaker": "narrator", "text": "HİSARÖNÜ BELEDİYESİ · BİR HAFTA SONRA", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "HİSARÖNÜ BELEDİYESİ · BİR HAFTA SONRA",
+              "style": "card",
+              "bg": "sokak_sabah"
+            },
             {
               "speaker": "narrator",
               "text": "Orhan göreve iade dilekçesini yazdı. Kuruşu kuruşuna: maaş farkları, kesintiler, faiz. Dilekçeyi iki kez okudu, imzaladı, imzasının altına tarih ve saat yazdı."
@@ -288,6 +321,25 @@
             {
               "speaker": "narrator",
               "text": "Mahkemenin suç duyurusu Başsavcılığa gitti; “kişi ya da kişiler” hakkında. Bir isim yoktu. İsimsiz bir dosya, bir rafta, bir sıra numarasıyla."
+            }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "ded_borc" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Savcı Gökhan Ersoy güvenlik duvarı kayıtlarını istemiş. Bir hafta sonra kısa bir telefon: cuma akşamları bir kahvehaneden yürütülen bir bahis tahsilatı, müdürlükten bir isim, bir de maç olan akşamlar aranan bir hat."
+            },
+            { "speaker": "narrator", "text": "Gizli numaralar da bir kayıttır. Onları da biri okuyor artık." }
+          ]
+        },
+        {
+          "when": { "not": { "hasEvidence": "ded_borc" } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Halkalı cumalar, maç sesli telefonlar, bir “her zamanki gibi.” Kimse onları bir dosyada yan yana koymadı. Belki bir gün biri koyar; ben koymadım."
             }
           ]
         },
@@ -330,14 +382,21 @@
         "all": [
           { "not": { "flag": "cokus" } },
           { "flag": "nitel_uyari" },
-          { "any": [{ "flag": "closing_terdit" }, { "flag": "ihmal_kabul" }, { "ref": "baskasi" }] },
-          { "cmp": [{ "score": "final" }, ">=", 3000] }
+          { "ref": "baskasi" },
+          {
+            "any": [
+              { "hasEvidence": "ded_teslim" },
+              { "hasEvidence": "ded_sahte_tutanak" },
+              { "hasEvidence": "ded_izin" }
+            ]
+          },
+          { "cmp": [{ "score": "final" }, ">=", 5000] }
         ]
       },
       "stamp": "NİTELENDİRME",
       "stampTone": "amber",
       "sentence": "5 ay hapis · ertelendi",
-      "verdictText": "Sanık Orhan Kılıç’ın üzerine atılı zimmet suçunun unsurları oluşmadığından, CMK 226 uyarınca yapılan ek savunma hakkı hatırlatması doğrultusunda eyleminin ihmal suretiyle görevi kötüye kullanma suçunu oluşturduğu kabul edilerek TCK 257/2 uyarınca takdiren 6 AY; TCK 62/1 ile 5 AY HAPİS cezası ile cezalandırılmasına; sanığın geçmişi ve suç işleme eğilimi gözetilerek cezanın TCK 51/1 uyarınca ERTELENMESİNE, denetim süresinin 1 yıl olarak belirlenmesine (TCK 51/3); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1) karar verildi.",
+      "verdictText": "Sanık Orhan Kılıç’ın üzerine atılı zimmet suçunun unsurları oluşmadığından, CMK 226 uyarınca yapılan ek savunma hakkı hatırlatması doğrultusunda eyleminin ihmal suretiyle görevi kötüye kullanma suçunu oluşturduğu kabul edilerek TCK 257/2 uyarınca takdiren 6 AY; TCK 62/1 ile 5 AY HAPİS cezası ile cezalandırılmasına; sanığın geçmişi ve suç işleme eğilimi gözetilerek cezanın TCK 51/1 uyarınca ERTELENMESİNE, denetim süresinin 1 yıl olarak belirlenmesine (TCK 51/3); kamu zararı giderilmediğinden CMK 231/6-c koşulu bulunmadığından hükmün açıklanmasının geri bırakılmasına yer olmadığına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1) karar verildi.",
       "reasoning": [
         {
           "text": "İptallerin sanık tarafından yapıldığı ve paranın sanık tarafından zimmete geçirildiği sabit olmamıştır; zimmet suçunun unsurları oluşmamıştır."
@@ -348,9 +407,11 @@
         {
           "text": "Eylem TCK 257/2 kapsamında değerlendirilmiş; sanığa CMK 226 uyarınca ek savunma hakkı tanınmıştır."
         },
-        { "text": "Sanığın sabıkasız geçmişi gözetilerek takdiri indirim ve erteleme uygulanmıştır." }
+        {
+          "text": "Kamu zararı giderilmediğinden hükmün açıklanmasının geri bırakılması koşulları oluşmamıştır (CMK 231/6-c); sanığın sabıkasız geçmişi gözetilerek takdiri indirim ve erteleme uygulanmıştır."
+        }
       ],
-      "legalBasis": "TCK 257/2, 61, 62/1, 51/1, 51/3; CMK 226, 273/1",
+      "legalBasis": "TCK 257/2, 61, 62/1, 51/1, 51/3; CMK 225, 226, 231/6-c, 273/1",
       "xp": {
         "if": {
           "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
@@ -358,7 +419,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "Zarf gerçeğini ortaya çıkar (nitelendirme uyarısı gelir); iptallerin sanıkça yapılmadığını göster ya da terditli savunmayla ihmal nitelendirmesini iste.",
+      "howToReach": "Zarf gerçeğini ortaya çıkar (nitelendirme uyarısı gelir); iptallerin sanık binadan çıktıktan sonra başka bir bilgisayardan yapıldığını göster ve en az bir kayıt bulgusu ekle (teslim tutanakları ya da izin günü).",
       "epilogue": [
         {
           "lines": [

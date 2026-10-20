@@ -168,7 +168,7 @@ c DIL_VER
 `);
 
 /** Tam soruşturma (3 gün × 4 EP). */
-const sorusturma = (o: { baskasi?: boolean; dil?: boolean; tahta?: boolean } = {}) => [
+const sorusturma = (o: { baskasi?: boolean; dil?: boolean; tahta?: boolean; para?: boolean } = {}) => [
   LOG,
   VEZNE,
   EV,
@@ -186,7 +186,9 @@ c LEYLA_DON
   A(`
 ${o.tahta === false ? '' : 'c H_CIKARIM'}
 ${o.baskasi === false || o.tahta === false ? '' : 'm clue_terminal clue_cikis'}
-${o.tahta === false ? '' : 'm clue_saat clue_izin\nm clue_defter clue_tutar_fark\nm clue_imza_kopya clue_basim\nc CIKARIM_BITIR'}
+${o.tahta === false ? '' : 'm clue_saat clue_izin'}
+${o.tahta === false || o.para === false ? '' : 'm clue_defter clue_tutar_fark\nm clue_imza_kopya clue_basim'}
+${o.tahta === false ? '' : 'c CIKARIM_BITIR'}
 c H_LEYLA
 c LEYLA_DON
 `),
@@ -237,6 +239,7 @@ s ded_kredi E5
 o g_kanaat E5
 c H104_BITIR
 c H104K_DEVAM
+c H105_KESIF
 c H105_BITIR
 c H1ARA_DEVAM
 c H106_DEVAM
@@ -271,6 +274,7 @@ c OT_A
 const BURAK = A(`
 c A_BURAK
 c BK_KIM
+c BK_BAHIS
 c BK_YEDEK
 c BK_A
 `);
@@ -291,6 +295,9 @@ t OB_TAKVIM
 t OB_YAZICI
 t OB_CEKMECE
 c KESIF_BITIR
+c A_CIKARIM
+m clue_cuma clue_bahis
+c ARA_CIKARIM_BITIR
 `);
 
 const ARA_GUN2 = [
@@ -339,7 +346,7 @@ c L_HESAP
 
 const TIPIK = goldenPath(
   TYPICAL_PATH,
-  { outcome: 'BERAAT_E', finalMin: 10460, finalMax: 11560 },
+  { outcome: 'BERAAT_E', finalMin: 10906, finalMax: 12054 },
   PROLOG('BR00_A', 'STR_MASUMIYET'),
   sorusturma(),
   CELSE1,
@@ -354,6 +361,7 @@ p R1
 p R2
 p R3
 s ev_pdks_mud R1
+s ded_borc R5
 s ev_kasa R2
 s ev_ticket R3
 s ded_sahte_tutanak R4
@@ -391,7 +399,7 @@ c OT_A
 
 const G_B = goldenPath(
   'G_B',
-  { outcome: 'BERAAT_B', finalMin: 10792, finalMax: 11928 },
+  { outcome: 'BERAAT_B', finalMin: 11239, finalMax: 12422 },
   PROLOG('BR00_A', 'STR_MASUMIYET'),
   sorusturma(),
   CELSE1,
@@ -422,6 +430,7 @@ p R1
 p R2
 p R3
 s ev_pdks_mud R1
+s ded_borc R5
 s ev_kasa R2
 s ev_ticket R3
 c T03S_DEVAM
@@ -429,12 +438,12 @@ c T03S_DEVAM
   KAPANIS_E,
 );
 
-/** Zarf ortaya çıkar, ama iptallerin başkasınca yapıldığı kurulmaz; terditli savunma → TCK 257/2. */
+/** Zarf ortaya çıkar; iptallerin başkasınca yapıldığı ve izin günü kurulur, ama teslim tutanakları çözülmez; terditli savunma → TCK 257/2. */
 const G_N = goldenPath(
   'G_N',
-  { outcome: 'NITELENDIRME', finalMin: 7866, finalMax: 8694 },
+  { outcome: 'NITELENDIRME', finalMin: 7838, finalMax: 8663 },
   PROLOG('BR00_B', 'STR_INDIRIM'),
-  sorusturma({ baskasi: false }),
+  sorusturma({ para: false }),
   A(`
 c H1K_B
 c H100_DEVAM
@@ -452,6 +461,7 @@ s ev_talimat E3
 s ded_kredi E5
 c H104_BITIR
 c H104K_DEVAM
+c H105_KESIF
 c H105_BITIR
 c H1ARA_DEVAM
 c H106_DEVAM
@@ -578,7 +588,7 @@ c COKUS_DEVAM
 
 const G_I = goldenPath(
   'G_I',
-  { outcome: 'IKRAR', finalMin: 7458, finalMax: 8242 },
+  { outcome: 'IKRAR', finalMin: 7714, finalMax: 8526 },
   PROLOG('BR00_A', 'STR_MASUMIYET'),
   sorusturma(),
   CELSE1,

@@ -159,7 +159,7 @@
         },
         {
           "lines": [
-            { "speaker": "narrator", "text": "ARA · GÜN 2/2 · İKİNCİ CELSEYE 3 GÜN", "style": "card" },
+            { "speaker": "narrator", "text": "ARA · GÜN 2/2 · İKİNCİ CELSEYE 2 GÜN", "style": "card" },
             {
               "speaker": "narrator",
               "text": "Hedef: son gün. Tanıklar, talepler, kararlar. İkinci celsede neyi, kimi, hangi sırayla?"
@@ -297,7 +297,7 @@
           "next": "ARA_KESIF_G",
           "maxUses": 1,
           "description": "Mali Hizmetler · MHM-PC03",
-          "visibleWhen": { "hasEvidence": "ev_bilirkisi" }
+          "visibleWhen": { "all": [{ "hasEvidence": "ev_bilirkisi" }, { "flag": "kesif_istendi" }] }
         },
         {
           "id": "A_SUC",
@@ -335,7 +335,7 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "SALI 21.40 — SETBAŞI, BİR KÖŞE KAFE", "style": "card", "bg": "kafe" },
+            { "speaker": "narrator", "text": "AKŞAM — SETBAŞI, BİR KÖŞE KAFE", "style": "card", "bg": "kafe" },
             {
               "speaker": "narrator",
               "text": "Melek en köşedeki masayı seçmişti; sırtı duvara, yüzü kapıya. Önünde soğumuş bir salep. İlk kez sakız çiğnemiyordu."
@@ -381,7 +381,7 @@
         {
           "id": "MK_A",
           "kind": "OPTION",
-          "label": "“Bunu mahkemede söylemelisiniz. İsterseniz bir avukatla da konuşun.”",
+          "label": "“Sorulursa mahkemede doğruyu anlatın; kendi avukatınız da olabilir.”",
           "responses": [
             {
               "lines": [
@@ -424,7 +424,7 @@
         {
           "id": "MK_B",
           "kind": "OPTION",
-          "label": "“Anlattıklarınızı yazayım; siz de imzalayın.”",
+          "label": "“Anlattıklarınızı yazayım; altını imzalayın, mahkemeye sunarım.”",
           "responses": [
             {
               "lines": [
@@ -454,7 +454,7 @@
         {
           "id": "MK_C",
           "kind": "OPTION",
-          "label": "“Söylemezseniz ikimiz de yanarız.”",
+          "label": "“Söylemezseniz siz de yanarsınız; o zarfı siz de verdiniz.”",
           "responses": [
             {
               "lines": [
@@ -508,12 +508,7 @@
       "lines": [
         {
           "lines": [
-            {
-              "speaker": "narrator",
-              "text": "ÇARŞAMBA 12.30 — ADLİYE KARŞISI, BİR KAFE",
-              "style": "card",
-              "bg": "kafe"
-            },
+            { "speaker": "narrator", "text": "ÖĞLE — ADLİYE KARŞISI, BİR KAFE", "style": "card", "bg": "kafe" },
             {
               "speaker": "narrator",
               "text": "Burak Şen yirmi dokuz yaşındaydı ve yirmi dokuz yaşından küçük görünüyordu. Kapüşonlu, boynunda belediye kartının ipi, elinde bir enerji içeceği; kutuyu masaya koymadan konuştu."
@@ -619,6 +614,43 @@
           ]
         },
         {
+          "id": "BK_BAHIS",
+          "kind": "OPTION",
+          "label": "“Bilgi işlemde başka tuhaf bir kayıt gördün mü?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "burak",
+                  "text": "Tuhaf… Teknik olarak benim işim değil. Ama güvenlik duvarı her hafta bir engelleme raporu basar; kimse okumaz, ben okurum."
+                },
+                {
+                  "speaker": "burak",
+                  "text": "Mali Hizmetler’den bir bilgisayar her cuma öğleden sonra bahis sitelerine takılıyor. Yasa dışı olanlarına; engelli liste. Üç dört deneme, sonra vazgeçiyor. Hep cuma."
+                },
+                {
+                  "speaker": "burak",
+                  "text": "Hangi bilgisayar? Müdür yardımcılığının odasındaki. Dahili 214’ün yanındaki priz. Rapor kurumda duruyor abla; ben bir şey kopyalamadım."
+                },
+                { "speaker": "narrator", "text": "Kutuyu masada çevirdi. Bir kez. İki kez." },
+                {
+                  "speaker": "burak",
+                  "text": "Bir de… cuma akşamları otoparkta bir araba beklerdi. Plakasını bilmem. Maç olan akşamlar."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Cuma. Bir bilgisayar, bir priz, bir gün. Bir alışkanlığın kaydı; adı yok, ama adresi var.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_bahis" },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 }
+          ]
+        },
+        {
           "id": "BK_A",
           "kind": "OPTION",
           "label": "“Yedeklerin korunması için mahkemeye başvuracağım. Sen dokunma.”",
@@ -719,7 +751,7 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "PERŞEMBE 19.30 — YILDIRIM, DÖRDÜNCÜ KAT", "style": "card", "bg": "ev" },
+            { "speaker": "narrator", "text": "AKŞAM — YILDIRIM, DÖRDÜNCÜ KAT", "style": "card", "bg": "ev" },
             {
               "speaker": "narrator",
               "text": "Mankenin üstündeki gelinlik gitmişti; yerine bir damatlık asılmıştı. Masada bir emlakçı broşürü, köşesi kıvrılmış. Üstünde fiyat: dört kat yukarıdan bakan bir rakam."
@@ -779,7 +811,7 @@
         {
           "id": "EV_A",
           "kind": "OPTION",
-          "label": "“Yolu açıkça anlatayım; karar sizin. Ama ödemenin ne anlama gelebileceğini de bilin.”",
+          "label": "“Yolu ve sonuçlarını anlatayım; kararı siz verin.”",
           "responses": [
             {
               "lines": [
@@ -838,7 +870,7 @@
         {
           "id": "EV_B",
           "kind": "OPTION",
-          "label": "“Ödeyin ve kabul edin; risk almayalım.”",
+          "label": "“Ödeyin ve kabul edin; en az riskli yol bu.”",
           "responses": [
             {
               "lines": [
@@ -881,7 +913,7 @@
         {
           "id": "EV_C",
           "kind": "OPTION",
-          "label": "“Bu konuyu hiç konuşmayalım.”",
+          "label": "“Bu yolu hiç konuşmayalım; beraate odaklanalım.”",
           "responses": [
             {
               "lines": [
@@ -923,12 +955,7 @@
       "lines": [
         {
           "lines": [
-            {
-              "speaker": "narrator",
-              "text": "PERŞEMBE 11.00 — SETBAŞI, HAYRİ ÖZDEMİR’İN EVİ",
-              "style": "card",
-              "bg": "ev"
-            },
+            { "speaker": "narrator", "text": "SETBAŞI — HAYRİ ÖZDEMİR’İN EVİ", "style": "card", "bg": "ev" },
             {
               "speaker": "narrator",
               "text": "Hayri Bey bu kez kravatsızdı; hırkasının cebinde bir kurşun kalem. Masada açık bir defter: 12 Şubat’ın, kendi el yazısıyla yeniden kurulmuş saatleri."
@@ -947,11 +974,11 @@
             },
             {
               "speaker": "hayri",
-              "text": "Kimseyi görmedim. Bir gölge, belki. Bir şemsiye açıldığını duydum, arka kapıda. Ben yürüdüm; yağmur başlamıştı."
+              "text": "Kimseyi görmedim. Bir gölge, belki. Sonra ışık söndü; arka kapı açılıp kapandı. Ben yürüdüm; yağmur başlamıştı."
             },
             {
               "speaker": "player",
-              "text": "Saat altıya doğru, ön odada bir monitörün ışığı. Bir gölge, bir şemsiye. Bir isim değil; bir saat.",
+              "text": "Saat altıya doğru, ön odada bir monitörün ışığı. Bir gölge, bir kapı. Bir isim değil; bir saat.",
               "style": "thought"
             }
           ]
@@ -968,7 +995,7 @@
               "lines": [
                 {
                   "speaker": "hayri",
-                  "text": "Anlatırım. Gördüğümü; görmediğimi değil. Bir ışık, bir saat, bir şemsiye sesi. İsim sorarlarsa “bilmiyorum” derim. Tarihçi bilmediğini söyler; şarlatan her şeyi bilir."
+                  "text": "Anlatırım. Gördüğümü; görmediğimi değil. Bir ışık, bir saat, bir kapı sesi. İsim sorarlarsa “bilmiyorum” derim. Tarihçi bilmediğini söyler; şarlatan her şeyi bilir."
                 },
                 { "speaker": "player", "text": "Leyla bu adamı sevecek.", "style": "thought" }
               ]
@@ -1474,19 +1501,20 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "BAŞSAVCILIK — EMANET BÜROSU", "style": "card", "bg": "adliye" },
+            { "speaker": "narrator", "text": "BAŞSAVCILIK — SORUŞTURMA BÜROSU", "style": "card", "bg": "adliye" },
             {
               "speaker": "narrator",
-              "text": "Suç duyurusundan üç gün sonra savcılık müdürlükte arama yapmış. Emanet memuru üç zarfı naylon poşetlerinde masaya dizdi. Eldiven verdi; ben eldivenle bile dokunmadım, yalnızca baktım."
+              "text": "Suç duyurusundan üç gün sonra savcılık müdürlükte arama yapmış, zarfları kriminal polis laboratuvarına göndermiş. Rapor dosyaya girmişti; müdafi olarak örneğini aldım."
             },
+            { "speaker": "narrator", "text": "Zarflara dokunmadım; poşetlerinin içinden bir kez gördüm, o kadar." },
             {
               "speaker": "narrator",
-              "text": "Üç zarf. Üçünün de kapağında bir mühür, bir imza, bir kullanıcı adı. Emanet tutanağı yanlarında: “Müdür yardımcılığı odası, masanın sağ alt çekmecesi, kilitli.”"
+              "text": "Raporun ekinde üç zarfın normal ve UV ışık altındaki fotoğrafları. Emanet tutanağı yanında: “Müdür yardımcılığı odası, masanın sağ alt çekmecesi, kilitli.”"
             }
           ]
         }
       ],
-      "header": { "left": "EMANET · ŞİFRE ZARFLARI (3)", "right": "ARAMA VE EL KOYMA TUTANAĞI EKİ" },
+      "header": { "left": "KRİMİNAL RAPOR · ŞİFRE ZARFLARI (3)", "right": "FOTOĞRAF EKİ · ARAMA TUTANAĞI" },
       "columns": [
         { "label": "ZARF", "flex": 0.8 },
         { "label": "MÜHÜR / İMZA", "flex": 1.2 },
@@ -1514,7 +1542,7 @@
       ],
       "tools": [
         { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
-        { "id": "uv", "label": "UV lamba", "icon": "uv", "visualMode": "UV" }
+        { "id": "uv", "label": "UV fotoğraflarına bak", "icon": "uv", "visualMode": "UV" }
       ],
       "actionCosts": { "EXAMINE": [{ "var": "ex_zarf", "amount": 1 }] },
       "choices": [
@@ -1524,7 +1552,7 @@
           "match": { "tool": "uv", "target": "z_okilic" },
           "feedback": {
             "title": "YENİ İPUCU · İKİ ÇİZGİ",
-            "text": "UV ışıkta okilic zarfının kapağında iki ayrı yapıştırıcı çizgisi; biri ötekinin üstünde. Mühür kaymış. Zarf en az bir kez açılıp yeniden kapatılmış.",
+            "text": "Kriminal raporun UV fotoğrafı: okilic zarfının kapağında iki ayrı yapıştırıcı çizgisi; biri ötekinin üstünde. Mühür kaymış. Rapor: “zarf en az bir kez açılıp yeniden kapatılmıştır.”",
             "label": "+150 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -1585,10 +1613,10 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "ÇARŞAMBA 17.40 — MALİ HİZMETLER, ÖN ODA", "style": "card", "bg": "buro" },
+            { "speaker": "narrator", "text": "17.40 — MALİ HİZMETLER, ÖN ODA", "style": "card", "bg": "siyah" },
             {
               "speaker": "narrator",
-              "text": "Mahkemenin keşif kararıyla; başkan, kâtip, savcı, bilirkişi ve ben. Saat bilerek 17.40 seçilmişti: iptallerin saati."
+              "text": "Ara kararla yapılan keşif: başkan, üye hâkim, kâtip, savcı, bilirkişi ve ben. Saat bilerek 17.40 seçilmişti: iptallerin saati."
             },
             {
               "speaker": "narrator",
@@ -1622,7 +1650,7 @@
       "hud": ["taps_o"],
       "exposeCounts": true,
       "scene": "sc_onoda",
-      "background": "buro",
+      "background": "siyah",
       "instruction": "Odada dikkatini çeken yere dokun; bilirkişi tutanağa geçirir. Her dokunuş bir büyüteç hakkı yer.",
       "actionCosts": { "TAP": [{ "var": "taps_o", "amount": 1 }] },
       "choices": [
@@ -1799,7 +1827,9 @@
         "clue_melek_cikis",
         "clue_ticket",
         "clue_burak",
-        "clue_zarf_uv"
+        "clue_zarf_uv",
+        "clue_cuma",
+        "clue_bahis"
       ],
       "choices": [
         {
@@ -2107,6 +2137,50 @@
           ]
         },
         {
+          "id": "AB_BORC",
+          "kind": "COMBINE",
+          "match": { "a": "clue_cuma", "b": "clue_bahis" },
+          "feedback": {
+            "title": "Cumaları ödenen bir borç",
+            "text": "Ön oda takvimindeki halkalı cumalar, iptallerin yığıldığı günler ve müdür yardımcılığı bilgisayarından bahis sitelerine takılan girişler aynı takvimi izliyor.",
+            "label": "YENİ DELİL · +200 SKOR",
+            "tone": "success"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Para hafta içinde kasadan çıkıyor; cuma bir yere gidiyor. Kırk yedi makbuzun bir vadesi vardı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_borc" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "ded_borc" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 200 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "AB_X_CUMA",
+          "kind": "COMBINE",
+          "match": { "a": "clue_cuma", "b": "clue_melek_cikis" },
+          "feedback": {
+            "title": "Yanlış iz",
+            "text": "Melek her akşam iptallerden önce çıkmış; ön odadaki takvim onun değil. Bu iki kart birbirini açıklamıyor.",
+            "label": "BAĞLANTI YOK · −50 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+        },
+        {
           "id": "AB_X_KOD01",
           "kind": "COMBINE",
           "match": { "a": "clue_kod01", "b": "clue_ercan_cikis" },
@@ -2268,10 +2342,15 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "GECE 19.50 — ADLİYE OTOPARKI", "style": "card", "bg": "sokak_karanlik" },
             {
               "speaker": "narrator",
-              "text": "Adliyeden çıktığımda yağmur yeniden başlamıştı; şemsiyemi büroda unutmuştum. Otoparkın girişinde bir adam bekliyordu, siyah bir şemsiyenin altında."
+              "text": "GECE 22.40 — ARSLAN HUKUK, APARTMAN GİRİŞİ",
+              "style": "card",
+              "bg": "sokak_karanlik"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Günün son işinden dönmüş, dosyaları masaya bırakıp büroyu kilitlemiştim. Yağmur yeniden başlamıştı; şemsiyem yukarıda kalmıştı. Apartmanın girişinde bir adam bekliyordu, siyah bir şemsiyenin altında."
             },
             { "speaker": "ercan", "text": "Avukat hanım. Islanmayın efendim. Buyurun." },
             {
@@ -2568,11 +2647,21 @@
       "type": "DECISION",
       "lines": [
         {
+          "when": { "hasEvidence": "ded_borc" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Halkalı cumalar ve engellenen bahis siteleri. Kırk yedi makbuzun bir vadesi vardı: cuma. Borç Orhan’ın değildi.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "when": { "all": [{ "flag": "fact_tus02" }, { "flag": "fact_cuma" }] },
           "lines": [
             {
               "speaker": "player",
-              "text": "Aşınmış iki tuş: 0 ve 2. Takvimde yuvarlak içine alınmış cumalar. Bir odanın alışkanlıkları, sahibinden çok şey anlatır.",
+              "text": "Aşınmış iki tuş: 0 ve 2. Takvimde yuvarlak içine alınmış cumalar; her halkadan önce iptaller. Bir odanın alışkanlıkları, sahibinden çok şey anlatır.",
               "style": "thought"
             }
           ]
@@ -2602,7 +2691,7 @@
           "lines": [
             {
               "speaker": "player",
-              "text": "Hayri Bey’in hırkası. Saat altıya on kala, buzlu camın ardında mavi bir ışık. Bir tarihçinin “bilmiyorum”u, bir tanığın en dürüst cümlesi.",
+              "text": "Hayri Bey’in hırkası. Saat altıya doğru, buzlu camın ardında mavi bir ışık. Bir tarihçinin “bilmiyorum”u, bir tanığın en dürüst cümlesi.",
               "style": "thought"
             }
           ]
@@ -2783,6 +2872,7 @@
       "hint": "Somut delillerle savcılığa suç duyurusunda bulun (CMK 158)."
     },
     { "evidence": "clue_burak", "source": { "type": "CHOICE", "id": "BK_KIM" } },
+    { "evidence": "clue_bahis", "source": { "type": "CHOICE", "id": "BK_BAHIS" } },
     { "evidence": "clue_kod02", "source": { "type": "RULE", "id": "EX_KASA_02" } },
     { "evidence": "clue_kod02", "source": { "type": "RULE", "id": "EX_KASA_02B" } },
     { "evidence": "clue_kod01", "source": { "type": "RULE", "id": "EX_KASA_01" } },
@@ -2797,6 +2887,7 @@
     { "evidence": "ded_sahte_tutanak", "source": { "type": "RULE", "id": "AB_TUTANAK" } },
     { "evidence": "ded_kredi", "source": { "type": "RULE", "id": "AB_KREDI" } },
     { "evidence": "ded_kasa", "source": { "type": "RULE", "id": "AB_KASA" } },
-    { "evidence": "ded_sifre", "source": { "type": "RULE", "id": "AB_SIFRE" } }
+    { "evidence": "ded_sifre", "source": { "type": "RULE", "id": "AB_SIFRE" } },
+    { "evidence": "ded_borc", "source": { "type": "RULE", "id": "AB_BORC" } }
   ]
 }

@@ -294,7 +294,7 @@ const gece = [
     ...INV,
     title: 'Duruşmadan önceki gece',
     lines: B(`
-# PAZARTESİ 23.20 — ARSLAN HUKUK [bg:buro_gece]
+# SALI 23.20 — ARSLAN HUKUK [bg:buro_gece]
 > Panoyu son kez toparladım. Raptiyeler, ipler, bir yığın fotokopi. Kırk yedi satırlık bir dökümün kenarına yazdığım kırk yedi soru işareti.
 `),
   }),
@@ -395,7 +395,7 @@ const gece7 = [
       ),
       W(
         flag('fact_ercan_teslim'),
-        `~ “Ocak başından beri ben alırdım efendim.” Torbaların son durağı. Kendisi söyledi; kibarca, bir bilgi verir gibi.`,
+        `~ “Kim müsaitse efendim.” Torbaların son durağı bir isim değil, bir nöbet listesi gibi anlatıldı. Nöbet listeleri de bir yerde yazılıdır.`,
       ),
       O(`~ İki oda, bir kasa, bir turnike. Bina bir şey biliyor; ben henüz bilmiyorum.`),
     ],

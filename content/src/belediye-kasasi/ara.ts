@@ -199,7 +199,7 @@ const hubTabs = [
       act('A_KESIF', 'Ön odada bilirkişiyle keşif', 'ARA_KESIF_G', {
         once: true,
         description: 'Mali Hizmetler · MHM-PC03',
-        visibleWhen: has('ev_bilirkisi'),
+        visibleWhen: all(has('ev_bilirkisi'), flag('kesif_istendi')),
       }),
     ],
   },
@@ -236,7 +236,7 @@ const hub = {
 `,
     ),
     O(`
-# ARA · GÜN 2/2 · İKİNCİ CELSEYE 3 GÜN
+# ARA · GÜN 2/2 · İKİNCİ CELSEYE 2 GÜN
 > Hedef: son gün. Tanıklar, talepler, kararlar. İkinci celsede neyi, kimi, hangi sırayla?
 `),
   ],
@@ -259,7 +259,7 @@ const melek = conversation('ARA_MELEK', {
   background: 'kafe',
   room: { label: 'SETBAŞI · KÖŞE KAFE', character: 'melek' },
   lines: B(`
-# SALI 21.40 — SETBAŞI, BİR KÖŞE KAFE [bg:kafe]
+# AKŞAM — SETBAŞI, BİR KÖŞE KAFE [bg:kafe]
 > Melek en köşedeki masayı seçmişti; sırtı duvara, yüzü kapıya. Önünde soğumuş bir salep. İlk kez sakız çiğnemiyordu.
 melek: Geç kaldın canım. Yok, ben erken geldim. Kimse görmesin diye. Bu saatte belediyeden kimse buraya gelmez; herkes maç izler.
 > Salebi kaşıkla karıştırdı. Karıştırdı. Bıraktı.
@@ -272,7 +272,7 @@ melek: Bu da araba. Herkes konuşuyor ya. Al, oku. Annemin evini ipotek ettim. H
 `),
   onFirstEnter: [raise('fact_araba_kredi'), raise('fact_melek_korku')],
   choices: [
-    option('MK_A', '“Bunu mahkemede söylemelisiniz. İsterseniz bir avukatla da konuşun.”', {
+    option('MK_A', '“Sorulursa mahkemede doğruyu anlatın; kendi avukatınız da olabilir.”', {
       score: { SAVUNMA_STRATEJISI: 80 },
       effects: [raise('melek_hazir')],
       good: 'Tanığa ne söyleyeceğini söylemedin; gerçeği mahkemede anlatmasının önemini ve kendi haklarını (kendi avukatı, CMK 48 çekinme hakkı) hatırlattın (Av.K. 34).',
@@ -287,7 +287,7 @@ melek: Söylerim. Sorarlarsa söylerim. Kendim kalkıp söyleyemem ama sorarlars
 `),
       next: HUB,
     }),
-    option('MK_B', '“Anlattıklarınızı yazayım; siz de imzalayın.”', {
+    option('MK_B', '“Anlattıklarınızı yazayım; altını imzalayın, mahkemeye sunarım.”', {
       score: { SAVUNMA_STRATEJISI: -30 },
       bad: 'Tanıktan beyan yazdırıp imzalatmak avukatın işi değildir; tanık beyanı duruşmada doğrudan alınır (CMK 210/1). Böyle bir kâğıt tanığı korkutur ve değeri tartışmalıdır.',
       category: 'SAVUNMA_STRATEJISI',
@@ -300,7 +300,7 @@ melek: Mahkemede sorarlarsa söylerim belki. Kâğıda yazmam.
 `),
       next: HUB,
     }),
-    option('MK_C', '“Söylemezseniz ikimiz de yanarız.”', {
+    option('MK_C', '“Söylemezseniz siz de yanarsınız; o zarfı siz de verdiniz.”', {
       effects: [inc('ethics'), raise('melek_kacti'), score('SAVUNMA_STRATEJISI', -60)],
       bad: 'Tanığa baskı yaptın: tanığı etkileme girişimi (TCK 277) ve meslek kurallarına aykırılık (Av.K. 34). Korkutulan tanık mahkemede susar.',
       category: 'SAVUNMA_STRATEJISI',
@@ -323,7 +323,7 @@ const burak = conversation('ARA_BURAK', {
   room: { label: 'ADLİYE KARŞISI · KAFE', character: 'burak' },
   onFirstEnter: [meet('burak')],
   lines: B(`
-# ÇARŞAMBA 12.30 — ADLİYE KARŞISI, BİR KAFE [bg:kafe]
+# ÖĞLE — ADLİYE KARŞISI, BİR KAFE [bg:kafe]
 > Burak Şen yirmi dokuz yaşındaydı ve yirmi dokuz yaşından küçük görünüyordu. Kapüşonlu, boynunda belediye kartının ipi, elinde bir enerji içeceği; kutuyu masaya koymadan konuştu.
 burak: Abla, yani, Avukat Hanım, şey. Benim adım geçmesin. Teknik olarak ben bir şey yapmadım. Yani yaptım ama… teknik olarak.
 burak: Duruşma tutanağını okudum. Müdür yardımcısı “yalnızca vezne terminalinden girilir” demiş. Öyle değil. Hiç öyle olmadı.
@@ -360,6 +360,18 @@ burak: Ama talebi sisteme kim açtıysa kayıtta yazar. Kullanıcı adıyla, dah
 burak: Sunucudaki kayıt doksan günde bir döner, yani eskisinin üstüne yazar. Teknik olarak. Ama ben her ay bir yedek alırım, ayrı diske. Kurumun diski; yani bende değil, kurumda, şeyde, kasada.
 burak: Kimse bilmiyor o yedekleri. Bir ben biliyorum, bir de… artık siz.
 ~ Bir delilin varlığını bilen iki kişi. Birinin ağzından çıkan bir cümle, ötekinin elindeki bir yükümlülük.
+`),
+    }),
+    option('BK_BAHIS', '“Bilgi işlemde başka tuhaf bir kayıt gördün mü?”', {
+      score: { SORGULAMA: 30 },
+      discovers: 'clue_bahis',
+      responses: B(`
+burak: Tuhaf… Teknik olarak benim işim değil. Ama güvenlik duvarı her hafta bir engelleme raporu basar; kimse okumaz, ben okurum.
+burak: Mali Hizmetler’den bir bilgisayar her cuma öğleden sonra bahis sitelerine takılıyor. Yasa dışı olanlarına; engelli liste. Üç dört deneme, sonra vazgeçiyor. Hep cuma.
+burak: Hangi bilgisayar? Müdür yardımcılığının odasındaki. Dahili 214’ün yanındaki priz. Rapor kurumda duruyor abla; ben bir şey kopyalamadım.
+> Kutuyu masada çevirdi. Bir kez. İki kez.
+burak: Bir de… cuma akşamları otoparkta bir araba beklerdi. Plakasını bilmem. Maç olan akşamlar.
+~ Cuma. Bir bilgisayar, bir priz, bir gün. Bir alışkanlığın kaydı; adı yok, ama adresi var.
 `),
     }),
     option('BK_A', '“Yedeklerin korunması için mahkemeye başvuracağım. Sen dokunma.”', {
@@ -405,7 +417,7 @@ const evGiris = decisionNode('ARA_EV_G', [{ to: 'ARA_EV' }], {
   ...ARA,
   title: 'Kılıçların evi',
   lines: B(`
-# PERŞEMBE 19.30 — YILDIRIM, DÖRDÜNCÜ KAT [bg:ev]
+# AKŞAM — YILDIRIM, DÖRDÜNCÜ KAT [bg:ev]
 > Mankenin üstündeki gelinlik gitmişti; yerine bir damatlık asılmıştı. Masada bir emlakçı broşürü, köşesi kıvrılmış. Üstünde fiyat: dört kat yukarıdan bakan bir rakam.
 nazan: Emlakçı geldi avukat hanım. Bir haftada satarım dedi. Açığı kapatır. Üstüne biraz kalır, kirayla otururuz.
 nazan: Ercan Bey’in sözü belediyede dolaşıyor: “Öderse cezası hafifler.” Hafifler mi avukat hanım? Bana doğruyu söyleyin. Hafifler mi?
@@ -425,7 +437,7 @@ const ev = story('ARA_EV', {
 ~ Ve karar benim değil. Onların.
 `),
   choices: [
-    option('EV_A', '“Yolu açıkça anlatayım; karar sizin. Ama ödemenin ne anlama gelebileceğini de bilin.”', {
+    option('EV_A', '“Yolu ve sonuçlarını anlatayım; kararı siz verin.”', {
       score: { SAVUNMA_STRATEJISI: 100 },
       effects: [raise('bilgilendirdi')],
       good: 'Müvekkili bütün seçenekler ve sonuçları hakkında dürüstçe bilgilendirdin; kararı ona bıraktın. TCK 248/3: kovuşturma başladıktan sonra gönüllü iade, cezayı üçte bir indirir; beraat değildir ve ikrar şartı aranmaz.',
@@ -447,7 +459,7 @@ orhan: Olursa da satılık değil.
 `),
       next: HUB,
     }),
-    option('EV_B', '“Ödeyin ve kabul edin; risk almayalım.”', {
+    option('EV_B', '“Ödeyin ve kabul edin; en az riskli yol bu.”', {
       effects: [inc('ethics'), raise('ikrar_yolu'), score('SAVUNMA_STRATEJISI', -200)],
       bad: 'Masum olduğunu söyleyen müvekkile, işlemediği bir suçu kabul etmesini önerdin. Avukat müvekkilin aleyhine gerçeğe aykırı bir ikrar yolunu kuramaz (Av.K. 34; Avukatlık Meslek Kuralları md. 3–4). Etkin pişmanlık ikrar istemez; sen istedin.',
       category: 'SAVUNMA_STRATEJISI',
@@ -462,7 +474,7 @@ orhan/uzgun: Siz avukatsınız. Siz bilirsiniz. Nazan, emlakçıyı ara.
 `),
       next: HUB,
     }),
-    option('EV_C', '“Bu konuyu hiç konuşmayalım.”', {
+    option('EV_C', '“Bu yolu hiç konuşmayalım; beraate odaklanalım.”', {
       score: { SAVUNMA_STRATEJISI: -40 },
       bad: 'Müvekkilin hukuki seçenekleri hakkında bilgilendirilme hakkı vardır; kanuni bir yolu konuşmayı reddetmek onu karanlıkta bırakır. Karar onundur; bilgiyi vermek senin yükümlülüğün.',
       category: 'SAVUNMA_STRATEJISI',
@@ -484,13 +496,13 @@ const hayri = conversation('ARA_HAYRI', {
   background: 'ev',
   room: { label: 'SETBAŞI · HAYRİ BEY’İN SALONU', character: 'hayri' },
   lines: B(`
-# PERŞEMBE 11.00 — SETBAŞI, HAYRİ ÖZDEMİR’İN EVİ [bg:ev]
+# SETBAŞI — HAYRİ ÖZDEMİR’İN EVİ [bg:ev]
 > Hayri Bey bu kez kravatsızdı; hırkasının cebinde bir kurşun kalem. Masada açık bir defter: 12 Şubat’ın, kendi el yazısıyla yeniden kurulmuş saatleri.
 hayri: Duruşmadan sonra eve geldim, oturdum, o günü yeniden yazdım. Tarihçi alışkanlığı. Unuttuğumu sandığım bir şey çıktı; size söylemem gerekiyor.
 hayri: O akşam hırkamı unutmuştum. Bu hırkayı. Vezneye ödeme yaparken sandalyenin arkasına asmışım. Eve varınca fark ettim; geri döndüm. Saat altıya doğru.
 hayri: Personel kapısından seslendim. Bekçi bırakmadı; “mesai bitti amca, yarın gel” dedi. Ama içeride bir ışık yanıyordu. Veznelerin arkasındaki odada. Buzlu camın ardında, mavi bir ışık.
-hayri: Kimseyi görmedim. Bir gölge, belki. Bir şemsiye açıldığını duydum, arka kapıda. Ben yürüdüm; yağmur başlamıştı.
-~ Saat altıya doğru, ön odada bir monitörün ışığı. Bir gölge, bir şemsiye. Bir isim değil; bir saat.
+hayri: Kimseyi görmedim. Bir gölge, belki. Sonra ışık söndü; arka kapı açılıp kapandı. Ben yürüdüm; yağmur başlamıştı.
+~ Saat altıya doğru, ön odada bir monitörün ışığı. Bir gölge, bir kapı. Bir isim değil; bir saat.
 `),
   onFirstEnter: [raise('fact_isik')],
   choices: [
@@ -500,7 +512,7 @@ hayri: Kimseyi görmedim. Bir gölge, belki. Bir şemsiye açıldığını duydu
       good: 'Saat ve yer bildiren bağımsız bir tanığı, beyanı duruşmada doğrudan alınmak üzere bildirdin (CMK 177–178).',
       category: 'USUL_BILGISI',
       responses: B(`
-hayri: Anlatırım. Gördüğümü; görmediğimi değil. Bir ışık, bir saat, bir şemsiye sesi. İsim sorarlarsa “bilmiyorum” derim. Tarihçi bilmediğini söyler; şarlatan her şeyi bilir.
+hayri: Anlatırım. Gördüğümü; görmediğimi değil. Bir ışık, bir saat, bir kapı sesi. İsim sorarlarsa “bilmiyorum” derim. Tarihçi bilmediğini söyler; şarlatan her şeyi bilir.
 ~ Leyla bu adamı sevecek.
 `),
       next: HUB,
@@ -799,11 +811,12 @@ const zarf = retarget(
     hud: ['ex_zarf'],
     background: 'buro',
     lines: B(`
-# BAŞSAVCILIK — EMANET BÜROSU [bg:adliye]
-> Suç duyurusundan üç gün sonra savcılık müdürlükte arama yapmış. Emanet memuru üç zarfı naylon poşetlerinde masaya dizdi. Eldiven verdi; ben eldivenle bile dokunmadım, yalnızca baktım.
-> Üç zarf. Üçünün de kapağında bir mühür, bir imza, bir kullanıcı adı. Emanet tutanağı yanlarında: “Müdür yardımcılığı odası, masanın sağ alt çekmecesi, kilitli.”
+# BAŞSAVCILIK — SORUŞTURMA BÜROSU [bg:adliye]
+> Suç duyurusundan üç gün sonra savcılık müdürlükte arama yapmış, zarfları kriminal polis laboratuvarına göndermiş. Rapor dosyaya girmişti; müdafi olarak örneğini aldım.
+> Zarflara dokunmadım; poşetlerinin içinden bir kez gördüm, o kadar.
+> Raporun ekinde üç zarfın normal ve UV ışık altındaki fotoğrafları. Emanet tutanağı yanında: “Müdür yardımcılığı odası, masanın sağ alt çekmecesi, kilitli.”
 `),
-    header: { left: 'EMANET · ŞİFRE ZARFLARI (3)', right: 'ARAMA VE EL KOYMA TUTANAĞI EKİ' },
+    header: { left: 'KRİMİNAL RAPOR · ŞİFRE ZARFLARI (3)', right: 'FOTOĞRAF EKİ · ARAMA TUTANAĞI' },
     columns: [
       { label: 'ZARF', flex: 0.8 },
       { label: 'MÜHÜR / İMZA', flex: 1.2 },
@@ -821,7 +834,7 @@ const zarf = retarget(
       }),
       row('z_yer', ['TUTANAK', 'Müdür Yrd. odası', 'masanın sağ alt çekmecesi, kilitli']),
     ],
-    tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('uv', 'UV lamba', 'uv', 'UV')],
+    tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('uv', 'UV fotoğraflarına bak', 'uv', 'UV')],
     costVar: 'ex_zarf',
     rules: [
       examine('EX_ZARF_UV', 'uv', 'z_okilic', {
@@ -829,7 +842,7 @@ const zarf = retarget(
         score: { DELIL_ANALIZI: 150 },
         feedback: {
           title: 'YENİ İPUCU · İKİ ÇİZGİ',
-          text: 'UV ışıkta okilic zarfının kapağında iki ayrı yapıştırıcı çizgisi; biri ötekinin üstünde. Mühür kaymış. Zarf en az bir kez açılıp yeniden kapatılmış.',
+          text: 'Kriminal raporun UV fotoğrafı: okilic zarfının kapağında iki ayrı yapıştırıcı çizgisi; biri ötekinin üstünde. Mühür kaymış. Rapor: “zarf en az bir kez açılıp yeniden kapatılmıştır.”',
           label: '+150 SKOR · Not defterine eklendi',
           tone: 'special',
         },
@@ -867,8 +880,8 @@ const kesifGiris = decisionNode('ARA_KESIF_G', [{ to: 'ARA_KESIF' }], {
   title: 'Keşif',
   onFirstEnter: [meet('bilirkisi')],
   lines: B(`
-# ÇARŞAMBA 17.40 — MALİ HİZMETLER, ÖN ODA [bg:buro]
-> Mahkemenin keşif kararıyla; başkan, kâtip, savcı, bilirkişi ve ben. Saat bilerek 17.40 seçilmişti: iptallerin saati.
+# 17.40 — MALİ HİZMETLER, ÖN ODA [bg:siyah]
+> Ara kararla yapılan keşif: başkan, üye hâkim, kâtip, savcı, bilirkişi ve ben. Saat bilerek 17.40 seçilmişti: iptallerin saati.
 > Dr. Seda Karaca kırklarının başında, kısa saçlı, sırt çantalı. Elini sıkmadı; başıyla selam verdi.
 bilirkisi: Log yalan söylemez avukat hanım. Yalnızca eksik söyler. Eksiği odada ararız.
 > Ön oda küçüktü. Bir masa, bir bilgisayar, bir yazıcı, bir takvim; iki kapı. Biri kasa odasına, biri müdür yardımcılığına açılıyordu. Müdür yardımcılığının kapısı kapalıydı; Ercan Tunalı izindeydi.
@@ -883,7 +896,7 @@ const kesif = retarget(
     hud: ['taps_o'],
     exposeCounts: true,
     scene: 'sc_onoda',
-    background: 'buro',
+    background: 'siyah',
     instruction: 'Odada dikkatini çeken yere dokun; bilirkişi tutanağa geçirir. Her dokunuş bir büyüteç hakkı yer.',
     costVar: 'taps_o',
     miss: fallback('FB_KESIF', 'TAP', {
@@ -975,6 +988,8 @@ const ARA_POOL = [
   'clue_ticket',
   'clue_burak',
   'clue_zarf_uv',
+  'clue_cuma',
+  'clue_bahis',
 ];
 
 const wrongPair = (title: string, text: string) => ({
@@ -1013,6 +1028,26 @@ const cikarim = retarget(
 ~ Bir şifre zarfta durur. Zarf bir çekmecede durur. Çekmece bir odada durur. Ve o odanın sahibi, bir akşam, şifrenin sıfırlanmasını ister.
 `),
       }),
+      recipe('AB_BORC', 'clue_cuma', 'clue_bahis', {
+        effects: firstTime('ded_borc', 200),
+        feedback: feedbackNew(
+          'Cumaları ödenen bir borç',
+          'Ön oda takvimindeki halkalı cumalar, iptallerin yığıldığı günler ve müdür yardımcılığı bilgisayarından bahis sitelerine takılan girişler aynı takvimi izliyor.',
+          'YENİ DELİL · +200 SKOR',
+        ),
+        responses: B(`
+~ Para hafta içinde kasadan çıkıyor; cuma bir yere gidiyor. Kırk yedi makbuzun bir vadesi vardı.
+`),
+      }),
+      recipe(
+        'AB_X_CUMA',
+        'clue_cuma',
+        'clue_melek_cikis',
+        wrongPair(
+          'Yanlış iz',
+          'Melek her akşam iptallerden önce çıkmış; ön odadaki takvim onun değil. Bu iki kart birbirini açıklamıyor.',
+        ),
+      ),
       recipe(
         'AB_X_KOD01',
         'clue_kod01',
@@ -1096,8 +1131,8 @@ const otopark = story('ARA_OTOPARK', {
   title: 'Otopark',
   background: 'sokak_karanlik',
   lines: B(`
-# GECE 19.50 — ADLİYE OTOPARKI [bg:sokak_karanlik]
-> Adliyeden çıktığımda yağmur yeniden başlamıştı; şemsiyemi büroda unutmuştum. Otoparkın girişinde bir adam bekliyordu, siyah bir şemsiyenin altında.
+# GECE 22.40 — ARSLAN HUKUK, APARTMAN GİRİŞİ [bg:sokak_karanlik]
+> Günün son işinden dönmüş, dosyaları masaya bırakıp büroyu kilitlemiştim. Yağmur yeniden başlamıştı; şemsiyem yukarıda kalmıştı. Apartmanın girişinde bir adam bekliyordu, siyah bir şemsiyenin altında.
 ercan: Avukat hanım. Islanmayın efendim. Buyurun.
 > Şemsiyeyi uzattı. Almadım; o da geri çekmedi. İkimizin arasında, havada, bir şemsiye duruyordu.
 ercan: Kısa keseceğim. Bu iş uzarsa Orhan Bey yıpranır. Kızı, eşi. Ben de yıpranıyorum; kasa benim müdürlüğümde açık verdi, ben de hesap veriyorum.
@@ -1203,8 +1238,12 @@ nazan: Elif konuşmuyor. Babasıyla da, benimle de. [phone]
   decisionNode('ARA_SON_4', [{ to: 'ARA_SON_5' }], {
     lines: [
       W(
+        has('ded_borc'),
+        `~ Halkalı cumalar ve engellenen bahis siteleri. Kırk yedi makbuzun bir vadesi vardı: cuma. Borç Orhan’ın değildi.`,
+      ),
+      W(
         all(flag('fact_tus02'), flag('fact_cuma')),
-        `~ Aşınmış iki tuş: 0 ve 2. Takvimde yuvarlak içine alınmış cumalar. Bir odanın alışkanlıkları, sahibinden çok şey anlatır.`,
+        `~ Aşınmış iki tuş: 0 ve 2. Takvimde yuvarlak içine alınmış cumalar; her halkadan önce iptaller. Bir odanın alışkanlıkları, sahibinden çok şey anlatır.`,
       ),
       W(
         flag('fact_1744'),
@@ -1216,7 +1255,7 @@ nazan: Elif konuşmuyor. Babasıyla da, benimle de. [phone]
       ),
       W(
         flag('fact_isik'),
-        `~ Hayri Bey’in hırkası. Saat altıya on kala, buzlu camın ardında mavi bir ışık. Bir tarihçinin “bilmiyorum”u, bir tanığın en dürüst cümlesi.`,
+        `~ Hayri Bey’in hırkası. Saat altıya doğru, buzlu camın ardında mavi bir ışık. Bir tarihçinin “bilmiyorum”u, bir tanığın en dürüst cümlesi.`,
       ),
       O(
         `~ Kayıtlar bir saat söylüyor, bir kapı söylüyor. Yarın kürsüde biri bu saatlerin içinde nerede olduğunu anlatacak.`,

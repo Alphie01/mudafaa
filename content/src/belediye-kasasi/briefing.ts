@@ -11,11 +11,11 @@ const PR00 = T(`
 > Lodos, belediye binasının arka cephesindeki bayrak direğini bir kemanın teli gibi inletiyordu. Otoparkta üç araba kalmıştı; üçünün de camı buğuluydu.
 > Zemin katta vezne salonunun ışıkları yarı yarıya söndürülmüştü. Sıra makinesinin ekranı karanlıkta tek başına yanıyordu: SON NUMARA 214.
 > Koridorun sonunda temizlik arabası duruyordu; kovanın içinde bir paspas, sapına asılı bir radyo. Radyo maç anlatıyordu, kimse dinlemiyordu.
-# MALİ HİZMETLER — ÖN ODA [bg:buro]
+# MALİ HİZMETLER — ÖN ODA [bg:siyah]
 > Veznelerin arkasındaki küçük odada tek bir monitör açıktı. Mavi ışığı, masanın başındaki bir siluetin omuzlarını boyuyordu. Yüz yoktu; yalnızca bir yaka, bir el, bir klavye.
 > Klavye tıkırdadı. Ekranda gri bir pencere açıldı: “MAKBUZ İPTAL EDİLSİN Mİ?” İmleç “Evet”in üstünde bir an bekledi. Sonra tık.
 > Bir pencere daha. Bir tık daha. Ekranın köşesinde saat değişti: 17.52.
-> Yazıcı uyandı, homurdandı ve sıcak bir kâğıt kustu. El kâğıdı aldı, katladı, bir dosyanın arasına koydu. Acele etmeden. Her akşam yapılan bir iş gibi.
+> Yazıcı uyandı, homurdandı ve sıcak bir kâğıt kustu. El kâğıdı aldı, katladı, bir dosyanın arasına koydu. Her akşam yapılan bir iş gibi.
 > Odanın öbür ucundaki çelik kapının panelinde dört kısa bip. Bir kilit dili geri çekildi. Kapı aralandı; içeriden soğuk, kâğıt kokulu bir hava çıktı.
 > Kâğıt para hışırtısı. Birinin parmakları saydı: bir, iki, üç… Saymayı yarıda bıraktı. Tomarın bir kısmı bir zarfa, zarf bir iç cebe girdi.
 @BİR SES: Cuma’ya kadar demiştik. [phone]
@@ -25,16 +25,16 @@ const PR00 = T(`
 @İKİNCİ SES: Bu kez değil. [whisper]
 > Telefon kapandı. Ekran koruyucu açıldı: belediyenin logosu, yavaşça dönen bir kubbe. Kasa kapısı kapandı; panel iki kez öttü.
 # HİSARÖNÜ BELEDİYESİ — ARKA KAPI [bg:sokak_karanlik]
-> Personel kapısında gece bekçisi termosundan çay dolduruyordu. Bir adım sesi geldi; ölçülü, aceleci olmayan.
+> Personel kapısında gece bekçisi termosundan çay dolduruyordu. Koridorda bir ışık söndü; sonra bir adım sesi.
 @BEKÇİ: İyi akşamlar.
-@SİLUET: İyi akşamlar efendim.
-> Islak bir şemsiye açıldı. Lodos onu bir an ters çevirmeye çalıştı; el şemsiyeyi düzeltti ve otoparkın karanlığına yürüdü.
+@SİLUET: İyi akşamlar.
+> Bir yaka kaldırıldı, bir kapı itildi. Lodos içeri bir avuç yağmur attı; siluet başını eğdi ve otoparkın karanlığına karıştı.
 > Bekçi çayını üfledi. Saatine baktı. Saatini kimse sormayacaktı.
 > Ertesi sabah vezne yine açıldı. Para yine sayıldı. Kimse saymadığı parayı aramadı. {fade}
 `);
 
 const PR01 = T(`
-# 4 MART · 09.10 — HİSARÖNÜ BELEDİYESİ, VEZNE SALONU [bg:buro]
+# 4 MART · 09.10 — HİSARÖNÜ BELEDİYESİ, VEZNE SALONU [bg:siyah]
 > Vezne salonu sabahın ilk saatinde bir otogar bekleme salonu gibiydi: ıslak şemsiyeler, sıra fişleri, kalorifer peteklerinin tıkırtısı.
 > Kuyruğun ortasında, ütülü pardösülü, yaşlı bir adam elinde bir ayakkabı kutusu tutuyordu. Kutunun kapağına keçeli kalemle “MAKBUZLAR 2024–” yazılmıştı.
 melek: Amca sıra numaran? Numarasız alamam.
@@ -47,12 +47,12 @@ orhan: Bu makbuz benim kestiğim makbuz efendim. 12 Şubat, saat 16.40. Altı bi
 orhan/saskin: İptal. İptal edilmiş… saat 17.47’de.
 hayri: Ben 17.47’de evde çorbamı içiyordum evladım.
 orhan: Ben de efendim. Ben de evdeydim.
-> Arkadan bir ses geldi; yumuşak, ölçülü, telaşsız. Lacivert takım elbiseli, gümüş saçlı bir adam, elinde ince belli bir çay bardağıyla yaklaştı.
-ercan: Hemen bakalım efendim. Bir yanlışlık vardır; sistem bazen kendi kendine iş yapar. Hayri Bey, size bir çay söyleyeyim, buyurun odama.
+> Salonun arkasındaki kapı açıldı. Lacivert takım elbiseli, gümüş saçlı bir adam, elinde ince belli bir çay bardağıyla kuyruğun başına geldi.
+ercan: Hayri Bey, değil mi? Buyurun odama, orada bakalım; burada herkes bekliyor. Size bir çay söyleyeyim.
 hayri: Çayınızı içerim ama makbuzumu bırakmam, müdür bey.
 ercan: Müdür yardımcısı efendim. Makbuzunuz sizde kalsın, biz fotokopisini alırız.
 > Melek sakızını patlatmayı bıraktı. Orhan ekrandaki satıra bakmaya devam etti, sanki bakarsa satır değişecekmiş gibi.
-# ÜÇ HAFTA SONRA [bg:buro]
+# ÜÇ HAFTA SONRA [bg:siyah]
 > Müfettiş iki gün boyunca vezne salonunu koliler içinde taşıdı. Klasörler, dökümler, makbuz koçanları. Orhan’ın masasındaki kalemlik bile bir poşete girdi.
 > Görevden uzaklaştırma yazısını Ercan Tunalı uzattı, iki eliyle, bir taziye kartı verir gibi.
 ercan: Usul böyle Orhan Bey. Ben de üzgünüm. İnşallah bir yanlışlık çıkar.
@@ -61,7 +61,7 @@ ercan: Biliyorum efendim. Biliyorum.
 > Teftiş raporu bir hafta sonra yazıldı. Tek cümlesi bütün dosyayı taşıyordu: “Sorumluluk kullanıcı hesabının sahibine aittir.”
 > Kırk yedi makbuz. Üç yüz seksen altı bin dört yüz lira. Hepsi Orhan Kılıç’ın kullanıcı adıyla.
 # SEKİZ AY SONRA [bg:sokak_yagmur]
-> İddianame temmuzda geldi. Adli kontrol, yurt dışı yasağı, maaşın üçte biri. Kasımda, ilk celseden üç hafta önce, bir kadın bir avukatın kapısını çaldı.
+> İddianame temmuzda geldi. Adli kontrol, yurt dışı yasağı, maaşın üçte biri. Kasımda, ilk celseden iki hafta önce, bir kadın bir avukatın kapısını çaldı.
 `);
 
 const BR00 = T(`
@@ -99,8 +99,8 @@ leyla: Ödemekle bitmez Deniz. Ödemek bir şeyi kabul etmektir. Sen o kapıyı 
 
 const BR01 = T(`
 > Leyla iddianameyi masama bıraktı. Lambanın ışığında kapağındaki mühür bir yara izi gibi duruyordu.
-leyla: Zimmet. Hileli. Zincirleme. Görevi gereği kendisine teslim edilmiş parayı almak; bunu gizlemek için kayıtla oynamak; aynı işi defalarca yapmak.
-leyla: Müvekkilinin annesine değil, karısına söyleyeceksin: neyle karşı karşıyayız?
+leyla: Sevk maddelerini sen oku. Savcıya göre: kasadaki parayı almış, gün sonu raporlarıyla oynayıp üstünü örtmüş, bunu yirmi üç ayrı günde yapmış.
+leyla: Yarın Nazan Hanım sana bir rakam soracak. Doğru rakamı. Neyle karşı karşıyayız?
 ~ Rakam. Hukuk fakültesine sayısalcılar gelmez. Bu dosya bana bunu hatırlatmak için gelmiş.
 `);
 
@@ -217,7 +217,7 @@ leyla: Karısına yanlış rakam söylersen, o rakam o evde yıllarca konuşulur
 `),
           next: 'BR_01B',
         }),
-        option('BR01_C', '247/3: geçici kullanım, yarıya kadar indirim', {
+        option('BR01_C', '247/1 ve 247/3: 5–12 yıl, geçici kullanımda yarıya iner', {
           bad: 'TCK 247/3, malı geri vermek amacıyla geçici kullanım içindir; iddianame bunu değil, hileli ve zincirleme zimmeti (247/1-2, 43) suçluyor.',
           category: 'HUKUKI_BILGI',
           responses: B(`
@@ -227,7 +227,7 @@ leyla: İddianame 247/1-2 ve 43. Yedi buçuk ile on sekiz, artı zincirleme.
 `),
           next: 'BR_01B',
         }),
-        option('BR01_D', '155/2: hizmet nedeniyle güveni kötüye kullanma', {
+        option('BR01_D', '155/2 ve 43: 1–7 yıl, üstüne ¼–¾', {
           bad: 'Kamu görevlisinin görevi nedeniyle zilyetliğindeki kamu malını alması zimmettir (TCK 247); güveni kötüye kullanma (155/2) özel hukuk ilişkileri içindir.',
           category: 'HUKUKI_BILGI',
           responses: B(`

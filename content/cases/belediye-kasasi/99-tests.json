@@ -133,6 +133,7 @@
           { "kind": "OBJECT", "groundId": "g_kanaat", "statementId": "E5" },
           { "kind": "CHOOSE", "choiceId": "H104_BITIR" },
           { "kind": "CHOOSE", "choiceId": "H104K_DEVAM" },
+          { "kind": "CHOOSE", "choiceId": "H105_KESIF" },
           { "kind": "CHOOSE", "choiceId": "H105_BITIR" },
           { "kind": "CHOOSE", "choiceId": "H1ARA_DEVAM" },
           { "kind": "CHOOSE", "choiceId": "H106_DEVAM" },
@@ -161,6 +162,7 @@
           { "kind": "CHOOSE", "choiceId": "OT_A" },
           { "kind": "CHOOSE", "choiceId": "A_BURAK" },
           { "kind": "CHOOSE", "choiceId": "BK_KIM" },
+          { "kind": "CHOOSE", "choiceId": "BK_BAHIS" },
           { "kind": "CHOOSE", "choiceId": "BK_YEDEK" },
           { "kind": "CHOOSE", "choiceId": "BK_A" },
           { "kind": "CHOOSE", "choiceId": "A_TICKET" },
@@ -175,6 +177,9 @@
           { "kind": "TAP", "x": 60, "y": 240 },
           { "kind": "TAP", "x": 275, "y": 255 },
           { "kind": "CHOOSE", "choiceId": "KESIF_BITIR" },
+          { "kind": "CHOOSE", "choiceId": "A_CIKARIM" },
+          { "kind": "COMBINE", "a": "clue_cuma", "b": "clue_bahis" },
+          { "kind": "CHOOSE", "choiceId": "ARA_CIKARIM_BITIR" },
           { "kind": "CHOOSE", "choiceId": "A_LEYLA" },
           { "kind": "CHOOSE", "choiceId": "ARA_LEYLA_DON" },
           { "kind": "CHOOSE", "choiceId": "A_HAYRI" },
@@ -200,6 +205,7 @@
           { "kind": "PRESS", "statementId": "R2" },
           { "kind": "PRESS", "statementId": "R3" },
           { "kind": "PRESENT", "evidenceId": "ev_pdks_mud", "statementId": "R1" },
+          { "kind": "PRESENT", "evidenceId": "ded_borc", "statementId": "R5" },
           { "kind": "PRESENT", "evidenceId": "ev_kasa", "statementId": "R2" },
           { "kind": "PRESENT", "evidenceId": "ev_ticket", "statementId": "R3" },
           { "kind": "PRESENT", "evidenceId": "ded_sahte_tutanak", "statementId": "R4" },
@@ -214,7 +220,7 @@
           { "kind": "CHOOSE", "choiceId": "S_MASUMIYET" },
           { "kind": "CHOOSE", "choiceId": "L_HESAP" }
         ],
-        "expect": { "outcome": "BERAAT_E", "finalMin": 10460, "finalMax": 11560 }
+        "expect": { "outcome": "BERAAT_E", "finalMin": 10906, "finalMax": 12054 }
       },
       {
         "name": "G_B",
@@ -348,6 +354,7 @@
           { "kind": "OBJECT", "groundId": "g_kanaat", "statementId": "E5" },
           { "kind": "CHOOSE", "choiceId": "H104_BITIR" },
           { "kind": "CHOOSE", "choiceId": "H104K_DEVAM" },
+          { "kind": "CHOOSE", "choiceId": "H105_KESIF" },
           { "kind": "CHOOSE", "choiceId": "H105_BITIR" },
           { "kind": "CHOOSE", "choiceId": "H1ARA_DEVAM" },
           { "kind": "CHOOSE", "choiceId": "H106_DEVAM" },
@@ -378,6 +385,7 @@
           { "kind": "CHOOSE", "choiceId": "OT_A" },
           { "kind": "CHOOSE", "choiceId": "A_BURAK" },
           { "kind": "CHOOSE", "choiceId": "BK_KIM" },
+          { "kind": "CHOOSE", "choiceId": "BK_BAHIS" },
           { "kind": "CHOOSE", "choiceId": "BK_YEDEK" },
           { "kind": "CHOOSE", "choiceId": "BK_A" },
           { "kind": "CHOOSE", "choiceId": "A_TICKET" },
@@ -399,6 +407,9 @@
           { "kind": "TAP", "x": 60, "y": 240 },
           { "kind": "TAP", "x": 275, "y": 255 },
           { "kind": "CHOOSE", "choiceId": "KESIF_BITIR" },
+          { "kind": "CHOOSE", "choiceId": "A_CIKARIM" },
+          { "kind": "COMBINE", "a": "clue_cuma", "b": "clue_bahis" },
+          { "kind": "CHOOSE", "choiceId": "ARA_CIKARIM_BITIR" },
           { "kind": "CHOOSE", "choiceId": "A_LEYLA" },
           { "kind": "CHOOSE", "choiceId": "ARA_LEYLA_DON" },
           { "kind": "CHOOSE", "choiceId": "A_DURUSMA" },
@@ -421,6 +432,7 @@
           { "kind": "PRESS", "statementId": "R2" },
           { "kind": "PRESS", "statementId": "R3" },
           { "kind": "PRESENT", "evidenceId": "ev_pdks_mud", "statementId": "R1" },
+          { "kind": "PRESENT", "evidenceId": "ded_borc", "statementId": "R5" },
           { "kind": "PRESENT", "evidenceId": "ev_kasa", "statementId": "R2" },
           { "kind": "PRESENT", "evidenceId": "ev_ticket", "statementId": "R3" },
           { "kind": "CHOOSE", "choiceId": "T03S_DEVAM" },
@@ -433,7 +445,7 @@
           { "kind": "CHOOSE", "choiceId": "S_MASUMIYET" },
           { "kind": "CHOOSE", "choiceId": "L_HESAP" }
         ],
-        "expect": { "outcome": "BERAAT_B", "finalMin": 10792, "finalMax": 11928 }
+        "expect": { "outcome": "BERAAT_B", "finalMin": 11239, "finalMax": 12422 }
       },
       {
         "name": "G_N",
@@ -498,9 +510,8 @@
           { "kind": "EXAMINE", "tool": "mag", "target": "t_alan" },
           { "kind": "CHOOSE", "choiceId": "TUT_BITIR" },
           { "kind": "CHOOSE", "choiceId": "H_CIKARIM" },
+          { "kind": "COMBINE", "a": "clue_terminal", "b": "clue_cikis" },
           { "kind": "COMBINE", "a": "clue_saat", "b": "clue_izin" },
-          { "kind": "COMBINE", "a": "clue_defter", "b": "clue_tutar_fark" },
-          { "kind": "COMBINE", "a": "clue_imza_kopya", "b": "clue_basim" },
           { "kind": "CHOOSE", "choiceId": "CIKARIM_BITIR" },
           { "kind": "CHOOSE", "choiceId": "H_LEYLA" },
           { "kind": "CHOOSE", "choiceId": "LEYLA_DON" },
@@ -558,6 +569,7 @@
           { "kind": "PRESENT", "evidenceId": "ded_kredi", "statementId": "E5" },
           { "kind": "CHOOSE", "choiceId": "H104_BITIR" },
           { "kind": "CHOOSE", "choiceId": "H104K_DEVAM" },
+          { "kind": "CHOOSE", "choiceId": "H105_KESIF" },
           { "kind": "CHOOSE", "choiceId": "H105_BITIR" },
           { "kind": "CHOOSE", "choiceId": "H1ARA_DEVAM" },
           { "kind": "CHOOSE", "choiceId": "H106_DEVAM" },
@@ -586,6 +598,7 @@
           { "kind": "CHOOSE", "choiceId": "OT_A" },
           { "kind": "CHOOSE", "choiceId": "A_BURAK" },
           { "kind": "CHOOSE", "choiceId": "BK_KIM" },
+          { "kind": "CHOOSE", "choiceId": "BK_BAHIS" },
           { "kind": "CHOOSE", "choiceId": "BK_YEDEK" },
           { "kind": "CHOOSE", "choiceId": "BK_A" },
           { "kind": "CHOOSE", "choiceId": "A_TICKET" },
@@ -600,6 +613,9 @@
           { "kind": "TAP", "x": 60, "y": 240 },
           { "kind": "TAP", "x": 275, "y": 255 },
           { "kind": "CHOOSE", "choiceId": "KESIF_BITIR" },
+          { "kind": "CHOOSE", "choiceId": "A_CIKARIM" },
+          { "kind": "COMBINE", "a": "clue_cuma", "b": "clue_bahis" },
+          { "kind": "CHOOSE", "choiceId": "ARA_CIKARIM_BITIR" },
           { "kind": "CHOOSE", "choiceId": "A_LEYLA" },
           { "kind": "CHOOSE", "choiceId": "ARA_LEYLA_DON" },
           { "kind": "CHOOSE", "choiceId": "A_HAYRI" },
@@ -631,7 +647,7 @@
           { "kind": "CHOOSE", "choiceId": "S_TERDIT" },
           { "kind": "CHOOSE", "choiceId": "L_HESAP" }
         ],
-        "expect": { "outcome": "NITELENDIRME", "finalMin": 7866, "finalMax": 8694 }
+        "expect": { "outcome": "NITELENDIRME", "finalMin": 7838, "finalMax": 8663 }
       },
       {
         "name": "G_M",
@@ -1070,6 +1086,7 @@
           { "kind": "OBJECT", "groundId": "g_kanaat", "statementId": "E5" },
           { "kind": "CHOOSE", "choiceId": "H104_BITIR" },
           { "kind": "CHOOSE", "choiceId": "H104K_DEVAM" },
+          { "kind": "CHOOSE", "choiceId": "H105_KESIF" },
           { "kind": "CHOOSE", "choiceId": "H105_BITIR" },
           { "kind": "CHOOSE", "choiceId": "H1ARA_DEVAM" },
           { "kind": "CHOOSE", "choiceId": "H106_DEVAM" },
@@ -1095,6 +1112,7 @@
           { "kind": "CHOOSE", "choiceId": "OT_A" },
           { "kind": "CHOOSE", "choiceId": "A_BURAK" },
           { "kind": "CHOOSE", "choiceId": "BK_KIM" },
+          { "kind": "CHOOSE", "choiceId": "BK_BAHIS" },
           { "kind": "CHOOSE", "choiceId": "BK_YEDEK" },
           { "kind": "CHOOSE", "choiceId": "BK_A" },
           { "kind": "CHOOSE", "choiceId": "A_TICKET" },
@@ -1109,6 +1127,9 @@
           { "kind": "TAP", "x": 60, "y": 240 },
           { "kind": "TAP", "x": 275, "y": 255 },
           { "kind": "CHOOSE", "choiceId": "KESIF_BITIR" },
+          { "kind": "CHOOSE", "choiceId": "A_CIKARIM" },
+          { "kind": "COMBINE", "a": "clue_cuma", "b": "clue_bahis" },
+          { "kind": "CHOOSE", "choiceId": "ARA_CIKARIM_BITIR" },
           { "kind": "CHOOSE", "choiceId": "A_HAYRI" },
           { "kind": "CHOOSE", "choiceId": "HY_TANIK" },
           { "kind": "CHOOSE", "choiceId": "A_DURUSMA" },
@@ -1118,7 +1139,7 @@
           { "kind": "CHOOSE", "choiceId": "IK_A" },
           { "kind": "CHOOSE", "choiceId": "TIKRAR_S_DEVAM" }
         ],
-        "expect": { "outcome": "IKRAR", "finalMin": 7458, "finalMax": 8242 }
+        "expect": { "outcome": "IKRAR", "finalMin": 7714, "finalMax": 8526 }
       }
     ]
   }

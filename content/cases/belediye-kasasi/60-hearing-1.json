@@ -20,7 +20,8 @@
     { "id": "contra_e5", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "h1_kasa", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "h1_pdks", "type": "bool", "initial": false, "visibility": "HIDDEN" },
-    { "id": "h1_ticket", "type": "bool", "initial": false, "visibility": "HIDDEN" }
+    { "id": "h1_ticket", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "kesif_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" }
   ],
   "config": {
     "objectionGrounds": [
@@ -324,10 +325,15 @@
           "id": "H101_B",
           "kind": "OPTION",
           "label": "“Yalnızca iptalleri inkâr edin; şifreye girmeyin.”",
-          "effects": [{ "type": "VAR", "var": "orhan_zarf_sakla", "op": "set", "value": true }],
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
+            { "type": "VAR", "var": "orhan_zarf_sakla", "op": "set", "value": true },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
           "quality": {
-            "q": "NEUTRAL",
-            "feedback": "Sanığın susma hakkı vardır; ama bildiğin bir gerçeği sakladırırsan, onu başka bir tanık söylediğinde sanığın güvenilirliği zedelenir."
+            "q": "BAD",
+            "feedback": "Sanığın susma hakkı vardır; ama bildiğin bir gerçeği müvekkiline sakladırmak savunmayı bir gizlemeye çevirir. O gerçeği başka bir tanık söylediğinde sanığın sözü değer kaybeder; heyet kaçamağı şimdiden sezer.",
+            "category": "SAVUNMA_STRATEJISI"
           },
           "next": "H1_01S"
         },
@@ -557,7 +563,10 @@
                   "text": "Sonra efendim. Torbaları alır, “siz gidin, servisi kaçırmayın, ben sonra imzalarım” derdi. Ben de giderdim."
                 },
                 { "speaker": "player", "text": "Kim?" },
-                { "speaker": "orhan", "text": "Müdür yardımcımız. Müdürümüz raporluyken. İyilik yapıyordu." },
+                {
+                  "speaker": "orhan",
+                  "text": "Kim müsaitse efendim. Müdürümüz, müdür yardımcımız, bazen vezne sorumlusu. İyilik yapıyorlardı."
+                },
                 { "speaker": "narrator", "text": "Üye hâkim kalemini bir an havada tuttu. Sonra yazdı." }
               ]
             }
@@ -672,7 +681,7 @@
             { "speaker": "baskan", "text": "Müdafi, rapora diyeceğiniz?" },
             {
               "speaker": "player",
-              "text": "Uzman müfettiş. Bir idari raporu bilirkişi raporu gibi okuttu. Bu bir hata değil, bir alışkanlık; ama alışkanlıklar dosya kaybettirir.",
+              "text": "Kırk sayfa, tek bir sonuç cümlesi. Heyetin üç kalemi aynı anda durdu; benden bir cümle bekliyorlar.",
               "style": "thought"
             }
           ]
@@ -691,7 +700,7 @@
         {
           "id": "H102_A",
           "kind": "OPTION",
-          "label": "“İdari inceleme bilirkişi raporu değildir; bilişim bilirkişisi atansın.”",
+          "label": "“Rapor teknik sütunları incelememiş; bilişim bilirkişisi atansın.”",
           "responses": [
             {
               "when": { "flag": "dil_verildi" },
@@ -751,13 +760,13 @@
         {
           "id": "H102_B",
           "kind": "OPTION",
-          "label": "“Rapor hukuka aykırı delildir; okunmasın.”",
+          "label": "“Rapor sanık dinlenmeden yazıldı; hukuka aykırı delil olarak dışlansın.”",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "baskan",
-                  "text": "Hangi hukuka aykırılık müdafi? Kurumun kendi müfettişinin raporu. Talep reddedildi; rapor okundu."
+                  "text": "İdari incelemede dinlenmemek raporu yasak delil yapmaz müdafi. Talep reddedildi; rapor okundu."
                 },
                 {
                   "speaker": "player",
@@ -775,7 +784,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Teftiş raporu hukuka aykırı yolla elde edilmiş bir delil değildir; belge olarak okunur (CMK 209). Sorun raporun yasaklığı değil, yetersizliğidir.",
+            "feedback": "Sanığın idari incelemede dinlenmemesi raporu hukuka aykırı delil yapmaz; rapor belge olarak okunur (CMK 209), değeri CMK 217 ile takdir edilir. Sorun raporun yasaklığı değil, yetersizliğidir.",
             "category": "USUL_BILGISI"
           },
           "next": "H1_03"
@@ -783,7 +792,7 @@
         {
           "id": "H102_C",
           "kind": "OPTION",
-          "label": "“Diyeceğimiz yok; değerlendirmesi mahkemenin.”",
+          "label": "“Raporun değeri mahkemenin takdirindedir; şimdilik diyeceğimiz yok.”",
           "responses": [
             {
               "lines": [
@@ -805,7 +814,7 @@
         {
           "id": "H102_D",
           "kind": "OPTION",
-          "label": "“Raporu yazan müfettiş tanık olarak dinlensin.”",
+          "label": "“Raporu düzenleyen müfettiş duruşmada tanık sıfatıyla dinlensin.”",
           "responses": [
             {
               "lines": [
@@ -850,7 +859,7 @@
             { "speaker": "savci", "text": "Tanık, sanık şifresini kimseyle paylaşmazdı, değil mi? Her veznedar gibi?" },
             {
               "speaker": "player",
-              "text": "Sorunun cevabı sorunun içinde. Ve bu cevap, bu dosyanın bütün kapılarını kapatabilir.",
+              "text": "Ercan ağzını açtı. Cevabı tutanağa geçmeden önce bir saniyem var.",
               "style": "thought"
             }
           ]
@@ -870,7 +879,7 @@
         {
           "id": "H103_A",
           "kind": "OPTION",
-          "label": "İtiraz: soru cevabı içeriyor, telkin edici",
+          "label": "İtiraz: soru tanığı belirli bir cevaba yönlendiriyor",
           "responses": [
             {
               "lines": [
@@ -908,7 +917,7 @@
         {
           "id": "H103_B",
           "kind": "OPTION",
-          "label": "Diyeceğimiz yok",
+          "label": "Şimdilik itiraz yok; cevabı dinleyip sonra sorarız",
           "responses": [
             {
               "lines": [
@@ -926,7 +935,7 @@
         {
           "id": "H103_C",
           "kind": "OPTION",
-          "label": "İtiraz: tanık sanığın amiri, taraflıdır",
+          "label": "İtiraz: tanık sanığın amiri, beyanı tarafsız olamaz",
           "responses": [
             {
               "lines": [
@@ -953,7 +962,7 @@
         {
           "id": "H103_D",
           "kind": "OPTION",
-          "label": "İtiraz: bu soru iddianamede yok",
+          "label": "İtiraz: savcı iddianamede olmayan bir konuyu soruyor",
           "responses": [
             {
               "lines": [
@@ -1098,13 +1107,16 @@
                 { "speaker": "player", "text": "Kasayı “kapatmak” ne demek? Tam olarak ne yapardı?" },
                 {
                   "speaker": "ercan",
-                  "text": "Sayar efendim, gün sonu raporunu basar, torbaları mühürler. Tutanağı doldurur. Sonra torbaları bana teslim eder; ben kasa odasına koyarım."
+                  "text": "Sayar efendim, gün sonu raporunu basar, torbaları mühürler. Tutanağı doldurur. Sonra torbaları müdürlükten kim varsa ona teslim eder; o kasa odasına koyar."
                 },
-                { "speaker": "player", "text": "Yani kasayı o kapatır, siz alırsınız." },
-                { "speaker": "ercan", "text": "Müdürümüz raporluyken öyle efendim. Usul böyle." },
+                { "speaker": "player", "text": "Siz de teslim alır mıydınız?" },
+                {
+                  "speaker": "ercan",
+                  "text": "Müsait olduğumda efendim. Selim Bey de alırdı, müdürümüz de. Usul böyle."
+                },
                 {
                   "speaker": "player",
-                  "text": "Usul böyle. Torbaların son durağı kasa odası değil; önce bir insanın elleri.",
+                  "text": "Usul böyle. Torbaların son durağı kasa odası değil; önce bir insanın elleri. Hangi akşam kimin?",
                   "style": "thought"
                 }
               ]
@@ -1148,6 +1160,7 @@
           "match": { "statement": "E3" },
           "responses": [
             {
+              "when": { "hasEvidence": "ev_talimat" },
               "lines": [
                 {
                   "speaker": "player",
@@ -1160,6 +1173,23 @@
                 {
                   "speaker": "player",
                   "text": "“İzin vermezdim.” Bir kural, kendisini koruyan adamın ağzında. Kâğıt cebimde.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Hiçbir veznedar şifresini müdürlüğe bırakmadı mı? Devamlılık için bile?"
+                },
+                {
+                  "speaker": "ercan",
+                  "text": "Bırakmadı efendim. Yönerge ortada. Ben de bırakılmasına izin vermezdim; biz denetim birimiyiz."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“İzin vermezdim.” Kendinden emin bir ret. Elimde onu sınayacak bir kâğıt yok.",
                   "style": "thought"
                 }
               ]
@@ -1247,7 +1277,7 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan, sanığın evrakı arasından çıkan el yazısı bir not. Eylül 2025. “Şifreler zarfta, müdürlükte kalacak. Devamlılık için. — E.T.”"
+                  "text": "Sayın Başkan, sanığın evrakı arasından çıkan el yazısı bir not. Eylül 2025. “Şifreler zarfta, müdürlükte kalacak. Devamlılık için. — Müdürlük.” İmza yok."
                 },
                 { "speaker": "player", "text": "Tanık, zarf uygulaması yok dediniz." },
                 {
@@ -1258,10 +1288,10 @@
                   "speaker": "ercan",
                   "text": "Bu not… Bu benim yazım değil efendim. Müdürlükte bir arkadaş yazmış olabilir. İyi niyetle; devamlılık için."
                 },
-                { "speaker": "uye", "text": "Tanık, “E.T.” kimin baş harfleri?" },
+                { "speaker": "uye", "text": "Tanık, müdürlükte veznedarlara böyle bir talimatı kim verebilir?" },
                 {
                   "speaker": "ercan",
-                  "text": "Benim efendim. Ama müdürlükte E.T. bir ben değilim; evrak kayıtta Emine Tekin Hanım var. Ben böyle bir talimat vermedim. Verilmişse yönergeye aykırıdır."
+                  "text": "Müdür ya da müdür yardımcısı efendim. Müdürümüz eylülde görevdeydi. Ben böyle bir talimat vermedim. Verilmişse yönergeye aykırıdır."
                 },
                 { "speaker": "narrator", "text": "Savcı not aldı. Bu kez sarı kalemle değil." },
                 {
@@ -1346,12 +1376,15 @@
                   "text": "Tutanakta ne yazıyorsa o efendim. Dosyadaki asıl. Karbon kopyalar bazen silik çıkar; yanlış okunur."
                 },
                 { "speaker": "uye", "text": "Kırk bir bin, otuz iki bin olarak mı yanlış okunur tanık?" },
-                { "speaker": "ercan", "text": "Bilemem efendim. Ben imzaladığımı bilirim." },
-                { "speaker": "player", "text": "Ne zaman imzaladınız?" },
-                { "speaker": "ercan", "text": "Teslimde efendim. Usul böyle." },
+                { "speaker": "ercan", "text": "Bilemem efendim. O akşam torbaları kim aldıysa paraf onundur." },
+                { "speaker": "player", "text": "12 Şubat akşamı torbaları kim aldı?" },
+                {
+                  "speaker": "ercan",
+                  "text": "Hatırlamıyorum efendim. Ben ya da Selim Bey. Kayıtlara bakmak lazım; kâğıt neyse odur."
+                },
                 {
                   "speaker": "player",
-                  "text": "Karbon nüshada teslim alan kutusu boş. Usul böyleyse, o kutu neden boş?",
+                  "text": "Karbon nüshada teslim alan kutusu boş; asılda adsız bir paraf. İki isim, bir akşam. Bunu bir insanın hafızası değil, bir kapının kaydı ayıracak.",
                   "style": "thought"
                 }
               ]
@@ -1858,6 +1891,33 @@
           }
         },
         {
+          "id": "H105_KESIF",
+          "kind": "OPTION",
+          "label": "Ön odada bilirkişi eşliğinde keşif yapılsın",
+          "visibleWhen": { "all": [{ "flag": "bilirkisi_istendi" }, { "not": { "flag": "kesif_istendi" } }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, iptallerin yapıldığı bilgisayarın bulunduğu ön odada, iptal saatinde ve bilirkişi eşliğinde keşif yapılmasını talep ediyoruz. Odanın düzeni ve kasa odasıyla bağlantısı ancak yerinde görülebilir."
+                },
+                { "speaker": "baskan", "text": "Not edildi." }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "VAR", "var": "kesif_istendi", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "İptallerin yapıldığı bilgisayarın yeri, erişimi ve kasa odasıyla ilişkisi ancak yerinde görülebilir; mahkemeden bilirkişi eşliğinde keşif istenir (CMK 83, 63).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
           "id": "H105_TUTUKLA",
           "kind": "OPTION",
           "label": "Tanık hakkında işlem yapılsın",
@@ -1912,6 +1972,29 @@
       "courtStage": "TANIK_DINLEME",
       "background": "durusma_salonu",
       "lines": [
+        {
+          "when": { "all": [{ "flag": "bilirkisi_istendi" }, { "flag": "kesif_istendi" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Heyet kısa bir müzakere için kalktı. Sekiz dakika. Kalorifer peteği tıkırdadı, kâtip parmaklarını ovuşturdu."
+            },
+            {
+              "speaker": "baskan",
+              "text": "Ara karar: Vezne programının işlem günlüğü, kullanıcı yetkileri, terminal kısıtlamaları ve kimlik doğrulama yönünden incelenmesi için bilişim bilirkişisi Dr. Seda Karaca’nın atanmasına;"
+            },
+            {
+              "speaker": "baskan",
+              "text": "Mali Hizmetler Müdürlüğü ön odasında, iptal saatinde, bilirkişi eşliğinde keşif yapılmasına; kabul edilen delil talepleri yönünden müzekkere yazılmasına;"
+            },
+            { "speaker": "baskan", "text": "Adli kontrolün devamına; duruşmanın bir ay sonraya ertelenmesine." },
+            {
+              "speaker": "player",
+              "text": "Bir ay. Bir bilirkişi, bir keşif ve birkaç müzekkere. Kâğıtlar yola çıktı; bir gün de ben o odaya gireceğim.",
+              "style": "thought"
+            }
+          ]
+        },
         {
           "when": { "flag": "bilirkisi_istendi" },
           "lines": [

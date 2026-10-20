@@ -1,4 +1,5 @@
 import {
+  all,
   any,
   back,
   cmp,
@@ -15,6 +16,7 @@ import {
   interview,
   meet,
   mood,
+  not,
   option,
   raise,
   score,
@@ -112,7 +114,7 @@ orhan: Saat beşte kapı kapanır efendim. Son mükellefi çıkarırım, kasayı
 orhan: Rapordaki rakamla saydığım rakam tutarsa tutanağı doldururum. Torbaları mühürlerim. Bir nüshası bende kalır; karbonlu kâğıt, sarı.
 orhan: Sonra deftere yazarım. Kendi defterime. On dokuz yıldır. Nazan güler, “devlet sana yetmiyor mu” der. Yetmiyor efendim. Devletin kâğıdı kaybolur.
 - Torbaları kime teslim ederdiniz?
-orhan: Müdür Bey’e. Rıfat Bey ocakta rahatsızlandı, raporlu. O zamandan beri müdür yardımcımız alırdı. Kasaya o koyardı.
+orhan: Müdürlükten kim kaldıysa ona efendim. Bazen Rıfat Bey, bazen müdür yardımcımız, bazen vezne sorumlusu Selim Bey. Rıfat Bey ocakta rahatsızlandı, raporlu.
 orhan: Beşi on geçe turnikeden çıkarım. Servis beş on beşte kalkar. Kaçırırsam bir saat beklerim; Elif’in ilacı var, beklemem.
 ~ Bir adamın akşamı, dakikası dakikasına. Bu kadar düzenli bir hayatın içinde kırk yedi delik var.
 `),
@@ -138,7 +140,7 @@ orhan: Her akşam aynı efendim. Bir akşam bile değişmedi. Belki de suçum bu
         soft: {
           prompt: 'Savcı krediyi “sebep” sayıyor. Kredinin hikâyesini anlatır mısınız?',
           says: T(`
-orhan/uzgun: Elif’in kalbi efendim. Doğuştan bir delik. On yedi yaşına kadar ilaçla idare ettik, geçen bahar ameliyat dediler. Özel hastane; devletin sırası altı ay.
+orhan/uzgun: Elif’in kalbi efendim. Doğuştan bir delik. On altı yaşına kadar ilaçla idare ettik, geçen yıl baharda ameliyat dediler. Özel hastane; devletin sırası altı ay.
 orhan: İki yüz on iki bin lira çektim. Altmış ay vade. Her ay faizini hesapladım; çıkmıyordu, ama çıkacaktı.
 orhan: Aralıkta babamdan kalan tarlayı sattım. İnegöl’de, Tahtaköprü’de. Dört dönüm. Kardeşlerim payını bana bıraktı, “Elif için” dediler.
 orhan: Parası ertesi gün hesaba geçti, krediyi kapattım. Faiz yemek günahtır efendim; vermek de.
@@ -205,32 +207,20 @@ orhan/kizgin: Onun kullanıcısıyla iptal yok efendim. Kırk yedisi benimkiyle.
     }),
     topic('TP_SIFRE', 'Şifre', {
       cost: costOf('min', 2),
-      visibleWhen: any(has('ev_talimat'), has('clue_yonerge')),
+      visibleWhen: has('ev_talimat'),
       score: { SORGULAMA: 40 },
       effects: [raise('fact_zarf'), score('ARASTIRMA', 60)],
       tones: {
         soft: {
           prompt: 'İlk gece “şifre kişiye özeldir” dediniz. Bana yönetmeliği değil, ne olduğunu anlatın.',
-          responses: [
-            W(
-              has('ev_talimat'),
-              `
+          says: T(`
 > Kareli kâğıdı masaya koydum. Orhan ona uzun uzun baktı. Sonra gözlüğünü çıkardı ve bu kez silmedi; masanın üstüne, kâğıdın yanına bıraktı.
 orhan/uzgun: Bunu nerede buldunuz efendim? Ben… ben bunu bordroların arasına koymuştum. Unutmuşum. Unutmak istemişim.
 orhan: Eylülde bir sabah geldi bu not. Masamızın üstüne, her birimize bir tane. “Devamlılık için.” Biri hastalanırsa, izne çıkarsa kasa kilitli kalmasın diye.
 orhan: Herkes verdi efendim. Ben de verdim. Şifremi bir kâğıda yazdım, zarfa koydum, mühürledim, imzaladım. Müdürlüğe bıraktım.
 orhan: Yönergeyi biliyordum. Panoda asılı; her sabah önünden geçiyordum. Bile bile verdim. Amirim istedi, verdim. On dokuz yılda bir amirime hayır demedim.
 ~ “Utanıyorum” dediği şey buydu. Kırk yedi iptal değil. Bir zarf.
-`,
-            ),
-            O(`
-> Yönergenin fotoğrafını telefonumdan gösterdim. Madde 7. “Zarfa konmaz.” Orhan ekrana baktı, sonra pencereye.
-orhan/uzgun: Bu yönergeyi biliyorum efendim. Panoda asılı. Her sabah önünden geçerdim.
-orhan: Eylülde bir not geldi. Hepimizden şifremizi istediler. Zarfa koyduk, mühürledik. Müdürlüğe verdik. Devamlılık için dediler.
-orhan: Bile bile verdim. Amirim istedi. On dokuz yılda bir amirime hayır demedim. Söyleyemedim size. Utandım.
-~ Bir zarf. Kırk yedi iptalin anahtarı bir zarfta olabilir. Ama o zarf kimin elindeydi?
 `),
-          ],
         },
         hard: {
           prompt: 'Şifrenizi kime verdiniz? Bu sefer yönetmelik okumayın.',
@@ -239,6 +229,30 @@ orhan/kizgin: Verdim! Herkes verdi! Zarfa koyduk, müdürlüğe bıraktık! Not 
 orhan: Yönergeyi biliyordum, evet. Bile bile verdim. Şimdi bunu da mı mahkemede söyleyeceğim? Bir de bu mu yazılacak hakkımda?
 > Sesi kırıldı. Elleri masanın altına indi.
 ~ Bilgiyi aldım. Bedelini de ödedim: bu adam bundan sonra bana bir şey anlatırken önce sesimi tartacak.
+`),
+        },
+      },
+    }),
+    topic('TP_YONERGE', 'Panodaki yönerge', {
+      cost: costOf('min', 2),
+      visibleWhen: all(has('clue_yonerge'), not(has('ev_talimat'))),
+      score: { SORGULAMA: 10 },
+      tones: {
+        soft: {
+          prompt: 'Panodaki yönergede bir kelimenin altı çizili. Kim çizmiş olabilir?',
+          says: T(`
+> Yönergenin fotoğrafını telefonumdan gösterdim. Orhan ekrana baktı; sonra pencereye.
+orhan: Bilmem efendim. Panoya herkes bakar, kimse okumaz. Belki bir müfettiş, belki bir stajyer.
+orhan: Yönergeyi biliriz efendim. Şifre kişiye özeldir. Her sabah önünden geçerdim.
+> Gözlüğünü çıkardı. Silmedi; yalnızca elinde tuttu, ilk geceki gibi.
+~ Aynı cümle, aynı gözlük. Altı çizili kelimeyi söylemedi; ben de söylemedim. Bu evde ya da o belediyede bir kâğıt olmalı.
+`),
+        },
+        hard: {
+          prompt: 'Yönergeyi çiğneyen biri var mıydı müdürlükte?',
+          says: T(`
+orhan/kizgin: Ben kimseyi şikâyet etmem efendim. Yönerge panoda; herkes okur.
+~ Kimseyi şikâyet etmem. Bir soruya cevap değil; bir kapının kapanma sesi.
 `),
         },
       },
@@ -280,16 +294,17 @@ orhan: Ben o gün belediyeye girmedim bile. Kartım bende, turnikeye bakın. Bak
 orhan: Teslim alan sonra imzalardı efendim. Torbaları alır, “siz gidin Orhan Bey, servisi kaçırmayın, ben sonra imzalarım” derdi.
 orhan: Ben de giderdim. Sarı nüshayı alır, çantama koyardım. Ertesi sabah asıl tutanak dosyada imzalı dururdu.
 - Torbaları alan kimdi?
-orhan: Müdür raporluyken Ercan Bey. Ocaktan beri. Kasım ve aralıkta da müdür bey çoğu akşam erken çıkıyordu; yine Ercan Bey alırdı.
-orhan: İyilik yapıyordu efendim. Servisi kaçırmayayım diye. Elif’in ilacı var, biliyordu.
-~ Torbalar teslim edilirken imza atılmıyor. İmza sonra, kimse yokken atılıyor. O aradaki zaman kime aitti?
+orhan: Kim müsaitse efendim. Kasımda, aralıkta bazı akşamlar Rıfat Bey alırdı, müdürümüz; bazı akşamlar Ercan Bey. Bir iki kez de Selim Bey, vezne sorumlusu; kasanın sabah kodu ondadır.
+orhan: Ocakta Rıfat Bey raporlu olunca ya Selim Bey ya Ercan Bey. Hangi akşam kim aldı, deftere yazmadım. Tutarı yazdım; ismi yazmadım. Ayıp bende.
+orhan: “Sonra imzalarım” derlerdi. İyilik yapıyorlardı; servisi kaçırmayayım diye. Elif’in ilacı var, biliyorlardı.
+~ Üç isim, bir kasa, imzasız bir dakika. Hangi akşam kimin elinde olduğunu bir insanın hafızası değil, bir kayıt söyleyecek.
 `),
         },
         hard: {
           prompt: 'İmzasız bir teslim, teslim değildir. Neden kimseye imzalatmadınız?',
           says: T(`
 orhan/kizgin: Amirime “imzala” mı diyecektim efendim? Torbayı elinden çekip “önce imza” mı diyecektim?
-orhan: “Sonra imzalarım” dedi. Ben de gittim. Her akşam. Servisi kaçırmamak için. Şimdi bu da mı benim suçum?
+orhan: “Sonra imzalarım” derlerdi. Ben de gittim. Her akşam. Servisi kaçırmamak için. Şimdi bu da mı benim suçum?
 ~ Belki değil. Ama heyet bunu soracak. Cevabı şimdiden bilmem gerek.
 `),
         },
@@ -355,9 +370,9 @@ const tHayri = conversation('INV_T_HAYRI', {
   background: 'ev',
   room: { label: 'SETBAŞI · HAYRİ BEY’İN SALONU', character: 'hayri' },
   lines: B(`
-# CUMA 15.30 — SETBAŞI, HAYRİ ÖZDEMİR’İN EVİ [bg:ev]
+# 15.30 — SETBAŞI, HAYRİ ÖZDEMİR’İN EVİ [bg:ev]
 > Salonun duvarları kitapla örülmüştü; kitaplar duvar değil, duvar kitap gibiydi. Pencerenin önünde bir Osmanlı haritası, köşede üst üste on iki ayakkabı kutusu.
-> Hayri Bey kapıyı kravatla açtı. Evinde. Cuma öğleden sonrası.
+> Hayri Bey kapıyı kravatla açtı. Evinde. Sıradan bir öğleden sonra.
 hayri: Avukat hanım. Buyurun. Ayakkabılarınızı çıkarmayın, halı Türk malı değil, İran. Dayanıklıdır.
 hayri: Önce bir şey söyleyeyim, sonra sorun. Ben bu adamı suçlamak için gelmedim. Hesabımı sormaya geldim. Bu ikisi aynı şey değildir; Türkçede de değildir, hukukta da.
 hayri: Kırk yıl tarih öğrettim. Tarih nedir? Makbuzu saklayanların yazdığı şeydir. Ben makbuzumu sakladım; tarih benim lehime.
@@ -414,7 +429,7 @@ const tMelek = conversation('INV_T_MELEK', {
   room: { label: 'BELEDİYE · ÇAY OCAĞI', character: 'melek' },
   onFirstEnter: [meet('melek')],
   lines: B(`
-# CUMARTESİ 12.15 — HİSARÖNÜ BELEDİYESİ, ÇAY OCAĞI [bg:cay_ocagi]
+# ÖĞLE ARASI 12.15 — HİSARÖNÜ BELEDİYESİ, ÇAY OCAĞI [bg:cay_ocagi]
 > Çay ocağı merdiven altına sıkıştırılmış bir oda: iki tüp, bir semaver, duvarda bir takvim, bir de tuzluk gibi duran küçük bir televizyon.
 > Melek Yavuz sakız çiğneyerek telefonuna bakıyordu. Beni görünce telefonu kapatmadı; ekranı aşağı çevirdi.
 melek: Avukat mısın canım? Orhan abinin? Ben savcılığa her şeyi söyledim. Yani hiçbir şeyi; çünkü bir şey bilmiyorum.
@@ -432,7 +447,7 @@ melek: Şimdi herkes “ne kadar da sessizdi, belli değil miydi” diyor. Sessi
 `),
     }),
     option('MQ_ZARF', '“Müdürlükte şifreler zarfta mı duruyordu?”', {
-      visibleWhen: any(has('ev_talimat'), has('clue_yonerge'), flag('fact_zarf')),
+      visibleWhen: any(has('ev_talimat'), flag('fact_zarf')),
       score: { SORGULAMA: 20 },
       effects: [raise('melek_zarf_inkar')],
       responses: B(`
@@ -485,11 +500,11 @@ const tErcan = conversation('INV_T_ERCAN', {
   ...INV,
   title: 'Ercan Tunalı',
   eyebrow: 'TANIKLAR',
-  background: 'buro',
+  background: 'siyah',
   room: { label: 'MALİ HİZMETLER · MÜDÜR YARDIMCILIĞI', character: 'ercan' },
   onFirstEnter: [meet('ercan'), raise('ercan_ziyaret')],
   lines: B(`
-# PAZARTESİ 10.00 — MALİ HİZMETLER MÜDÜR YARDIMCILIĞI [bg:buro]
+# 10.00 — MALİ HİZMETLER MÜDÜR YARDIMCILIĞI [bg:siyah]
 > Oda dar ama düzenliydi: dosyalar renk sırasıyla, masada bir dolma kalem, bir ince belli bardak, bir de çerçeve. Çerçevede siyah-beyaz, kravatlı, ciddi bir adam.
 > Ercan Tunalı ayağa kalktı, elimi iki eliyle sıktı. Avucu kuru ve sıcaktı.
 ercan: Avukat hanım, hoş geldiniz efendim. Buyurun. Çay? Bizim ocağın çayı iyidir; Rize’den bir arkadaş gönderiyor.
@@ -513,16 +528,16 @@ ercan: Bilgi işlem böyle söyledi bize, mevzuat da böyle. Başka türlüsü g
       score: { SORGULAMA: 30 },
       effects: [raise('fact_ercan_teslim')],
       responses: B(`
-ercan: Müdürümüz Rıfat Bey raporluyken ben efendim. Ocak başından beri. Veznedar sayar, torbaları mühürler, bana verir; ben kasa odasına koyarım.
-ercan: Tutanaklar dosyada efendim, hepsi imzalı. Kâğıt neyse odur. Bir eksik olsa ben fark ederdim; mühürlü torba açılmaz.
-- Tutanakları teslim anında mı imzalıyordunuz?
+ercan: Kim müsaitse efendim. Müdürümüz Rıfat Bey, vezne sorumlumuz Selim Bey, bazen ben. Müdürümüz ocakta raporlu olunca Selim Bey’le ben paylaştık.
+ercan: Veznedar sayar, torbaları mühürler, teslim eder; teslim alan kasa odasına koyar. Tutanaklar dosyada efendim, hepsi imzalı. Kâğıt neyse odur. Bir eksik olsa ben fark ederdim; mühürlü torba açılmaz.
+- Teslim alan, tutanağı teslim anında mı imzalıyordu?
 ercan: Elbette efendim. Usul böyle.
 > Kalem bir kez tıkladı. Sonra durdu.
 ~ “Elbette.” Bir kelimenin içine ne kadar kesinlik sığarsa, o kadar dikkat ister.
 `),
     }),
     option('EQ_ZARF', '“Şifrelerin zarflarda toplandığını duydum.”', {
-      visibleWhen: any(has('ev_talimat'), flag('fact_zarf'), has('clue_yonerge')),
+      visibleWhen: any(has('ev_talimat'), flag('fact_zarf')),
       score: { SORGULAMA: 20 },
       effects: [raise('ercan_zarf_inkar')],
       responses: B(`

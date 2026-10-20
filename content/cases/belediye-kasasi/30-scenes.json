@@ -189,8 +189,8 @@
             { "type": "VAR", "var": "fact_talimat", "op": "set", "value": true }
           ],
           "feedback": {
-            "text": "“Maaş bordroları 2025” klasörünün arasından katlanmış bir kareli kâğıt kaydı. El yazısı, eğik ve düzgün: “Şifreler zarfta, müdürlükte kalacak. Devamlılık için. — E.T.” Tarih: Eylül 2025.",
-            "short": "El yazısı not: E.T."
+            "text": "“Maaş bordroları 2025” klasörünün arasından katlanmış bir kareli kâğıt kaydı. El yazısı, eğik ve düzgün: “Şifreler zarfta, müdürlükte kalacak. Devamlılık için. — Müdürlük.” İmza yok. Tarih: Eylül 2025.",
+            "short": "El yazısı not: Müdürlük"
           }
         },
         {
@@ -279,11 +279,12 @@
           "marker": "HIDDEN",
           "shapes": [{ "rect": { "x": 20, "y": 40, "w": 70, "h": 80 } }],
           "effects": [
+            { "type": "DISCOVER", "evidence": "clue_cuma" },
             { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
             { "type": "VAR", "var": "fact_cuma", "op": "set", "value": true }
           ],
           "feedback": {
-            "text": "Bir bankanın promosyon takvimi. Kasım’dan Şubat’a bazı cumalar kurşun kalemle yuvarlak içine alınmış. Yanlarında rakam yok, isim yok. Yalnızca halkalar.",
+            "text": "Bir bankanın promosyon takvimi. Kasım’dan Şubat’a bazı cumalar kurşun kalemle yuvarlak içine alınmış; 13 Şubat da. Yanlarında rakam yok, isim yok. Bilirkişi iptal listesini yanına tuttu: her halkadan önceki iki iş gününde iptal var.",
             "short": "İşaretli cumalar"
           }
         },
@@ -357,6 +358,7 @@
     { "evidence": "ev_pdks", "source": { "type": "OBJECT", "id": "ob_pdks" } },
     { "evidence": "ev_talimat", "source": { "type": "OBJECT", "id": "ob_klasor" } },
     { "evidence": "ev_tapu", "source": { "type": "OBJECT", "id": "ob_tapu" } },
-    { "evidence": "clue_satranc", "source": { "type": "OBJECT", "id": "ob_satranc" } }
+    { "evidence": "clue_satranc", "source": { "type": "OBJECT", "id": "ob_satranc" } },
+    { "evidence": "clue_cuma", "source": { "type": "OBJECT", "id": "ob_takvim" } }
   ]
 }

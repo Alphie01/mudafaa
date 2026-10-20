@@ -1,6 +1,6 @@
 # Dava #03 "Kırmızı Işık" — Hukuki İnceleme Notları
 
-> Durum: **Onaylandı — Claude (iç inceleme), 2026-10-20.** `meta.legalReview = { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-20' }`.
+> Durum: **Onaylandı — Claude (iç inceleme), 2026-10-20; ikinci inceleme turu düzeltmeleri 2026-10-21.** `meta.legalReview = { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-20' }`.
 > Dava #07'deki gibi: içerik yazımında hukuki öz-inceleme yapıldı; aşağıdaki yorum noktaları ileride bir avukatın
 > incelemesine açıktır. Düzeltmeler yalnızca `content/src/kirmizi-isik/` ve golden path pencerelerini değiştirir.
 
@@ -18,7 +18,8 @@ sürücüyü asli kusurlu sayar; kırmızıda geçmek bunların başında") kull
 | TCK 22/2, 22/3 | BR_01, T_07 ARG_EDR, mütalaa, hükümler | 1.5.5237.pdf | taksir tanımı; bilinçli taksirde ceza üçte birden yarısına kadar artırılır |
 | TCK 22/4, 22/5 | BR_01C | 1.5.5237.pdf | ceza failin kusuruna göre; birden fazla failde herkes kendi kusurundan |
 | TCK 50/1-a, 50/4 | BR_01, M_BASIT, T09_T, INDIRIM hükmü | 1.5.5237.pdf | taksirli suçta uzun süreli hapis de adli para cezasına çevrilebilir; bilinçli taksirde uygulanmaz |
-| TCK 51/1 | MAHKUMIYET/ETIK hükmü (uygulanmaz) | 1.5.5237.pdf | 2 yıl veya daha az hapis ertelenebilir |
+| CMK 225, 230/1 | BASIT_HAPIS, MAHKUMIYET, ETIK gerekçeleri | 1.5.5271.pdf | hükmün konusu fiil ve faildir, nitelendirme mahkemeye aittir; mahkûmiyet gerekçesinin içeriği |
+| TCK 51/1 | MAHKUMIYET/ETIK/BASIT_HAPIS hükmü (uygulanmaz) | 1.5.5237.pdf | 2 yıl veya daha az hapis ertelenebilir |
 | TCK 52/2 | INDIRIM hükmü | 1.5.5237.pdf | bir gün karşılığı 100–500 TL |
 | TCK 53/1, 53/6 | hükümler | 1.5.5237.pdf | 53/1 yalnızca kasten işlenen suçta; 53/6 trafik düzeninin özen yükümlülüğüne aykırı taksirli suçta 3 ay–3 yıl sürücü belgesinin geri alınması |
 | TCK 62/1 | INDIRIM, MAHKUMIYET | 1.5.5237.pdf | takdiri indirim, altıda bir |
@@ -65,10 +66,21 @@ katılan vekili kürsüde değil, taraf sırasındadır (stage düzeninde kürs�
   kapısı açıktır. Sınıf: `RECHARACTERIZED`.
 - **ETIK (müdafiin etik ihlali + hukuka uygun delillerle mahkûmiyet):** Garaj fotoğrafları hükme esas alınmaz (Anayasa 38/6,
   CMK 206/2-a, 217/2); mahkeme dosyadaki **hukuka uygun** delilleri ayrıca tartar. ETIK yalnızca `etik_garaj` ∧ ¬`kusur_yok`
-  hâlinde, yani kırmızı ışık iddiası hukuka uygun delillerle kürsüde çürütülmediğinde verilir; ceza MAHKUMIYET ile aynıdır.
+  ∧ ¬`arg_edr` ∧ ¬contra_c2 hâlinde verilir: dosyada kırmızı ışık tespitiyle çelişen hukuka uygun delil yoktur (`kusur_yok`
+  artık mahkemenin atadığı heyetin raporunu ve sinyal kaydı + sesli mesaj birlikteliğini de sayar) ve hız iddiası
+  yıkılmamıştır. Ceza MAHKUMIYET ile aynıdır. Heyet raporu ya da EDR dosyadaysa garaj ihlali hükmü ağırlaştıramaz; G_ETIK_I
+  yolunda hüküm İNDİRİM'e iner ve disiplin epilogu yine oynar.
   Müdafiin ihlali sanık aleyhine delil sayılmaz; tutanak örneği savcılığa ve baroya gönderilir. Garaja girilip dava hukuka
   uygun delillerle kazanılırsa (BERAAT_E) ya da indirim alınırsa hüküm değişmez; gerekçeye "fotoğraflar hükme esas
   alınmamıştır" eklenir ve epilogda disiplin soruşturması oynar.
+- **BASIT_HAPIS (basit taksirle mahkûmiyet, çevirme yok):** Kırmızı ışık iddiası çöktüğünde ya da EDR ile hız iddiası
+  yıkıldığında bilinçli taksirin öngörü unsuru kurulamaz; İNDİRİM koşulları (saha çıkarımları, arada bir raporun okunması,
+  basit taksir talebi, 6.000 final) tutmazsa bu sonuç gelir. TCK 85/1 ve 22/4 ile temel **2 yıl 6 ay** (alt sınırdan
+  kusur oranında uzaklaşma) → TCK 62/1 (1/6) **2 yıl 1 ay**. TCK 50/4'teki çevirme takdire bağlıdır ("çevrilebilir");
+  mahkeme ölüm neticesi ve özen yükümlülüğüne aykırılığın niteliğiyle çevirmez. 2 yılı aştığı için TCK 51/1 erteleme ve
+  CMK 231/5 HAGB yoktur. TCK 53/6 ile sürücü belgesi **1 yıl** (3 ay–3 yıl aralığı). Yorum: çevirmeme takdiri tartışmaya
+  açıktır ve istinafta sık sorgulanır; oyunda bu, savunmanın basit taksir ve TCK 50/4 talebini delille kurmamasının bedelidir.
+  Gerekçe ispat yükünü savunmaya yüklemez; çevirmeme bir takdir gerekçesine bağlanır.
 - **MAHKUMIYET / ETIK:** TCK 85/1 temel **3 yıl** (asli kusur kabulüyle alt sınırdan uzaklaşma) → TCK 22/3 ile yarı oranında
   artırım **4 yıl 6 ay** → TCK 62/1 **3 yıl 9 ay**. Bilinçli taksir nedeniyle TCK 50/4 uygulanmaz; 2 yılı aştığı için
   TCK 51/1 erteleme ve CMK 231/5 HAGB yoktur. TCK 53/1 hak yoksunlukları kasten işlenen suçlara özgü olduğundan
@@ -143,14 +155,21 @@ katılan vekili kürsüde değil, taraf sırasındadır (stage düzeninde kürs�
 15. **İNDİRİM gerekçesi ve illiyet:** Mahkûmiyet için illiyetin şüpheden uzak ispatı gerekir (Anayasa 38/4; CMK 223/2-e
     karşıtı). INDIRIM gerekçesi bu nedenle pozitif tespittir ("özen yükümlülüğüne aykırı davrandığı ve bu davranışla ölüm
     arasında illiyet bağının bulunduğu kanaatine varılmıştır"); "illiyetin bulunmadığı ispatlanamadı" biçimindeki ispat
-    yükünü tersine çeviren ifade kaldırıldı. Savunma Adli Tıp raporuyla illiyeti tartışmışsa (`arg_atk`) INDIRIM
-    verilmez; o durumda kusur iddiası da çökmüşse BERAAT_E olur. Çökmemişse (MAHKUMIYET ya da ETIK) gerekçe yine pozitif
+    yükünü tersine çeviren ifade kaldırıldı. İkinci turda: savunmanın Adli Tıp raporuyla illiyeti tartışması (`arg_atk`)
+    artık İNDİRİM'i kapatmaz (önceki sürüm doğru argümanı yapan müvekkili para cezasından hapse taşıyordu). BERAAT_E
+    koşulları tutmazsa İNDİRİM gerekçesi ATK raporunu açıkça tartar: rapor ölümcül travmanın birincil çarpmayla oluştuğunu
+    söyler ama çarpan aracı belirlemez; mahkeme raporu bilirkişi raporu, tutanak ve tanık beyanıyla birlikte tartıp (CMK 217/1)
+    birincil çarpmanın da sanığın aracıyla gerçekleştiği kanaatine varır; kürsüde ikinci bir araca işaret eden izler
+    açıldıysa bunların çarpma anına ait olduğunun kesinleşmediği yazılır. Aynı tartışma ATK raporu dosyada olup tartışılmadığında
+    da yapılır. Hız iddiası EDR ile yıkılmadıysa "araç verisi" cümlesi yerine yalnızca öngörünün ispatlanamadığı yazılır.
+    Kusur iddiası çökmemişse (MAHKUMIYET ya da ETIK) gerekçe yine pozitif
     bir tespittir: ATK raporu yalnızca bir çarpma biçimini "uyumlu" bulmuş, aracı belirlememiştir; mahkeme raporu diğer
     delillerle birlikte vicdani kanaatle tartıp (CMK 217/1) ölümcül çarpmanın sanığın aracıyla gerçekleştiğini ve illiyet
     bağını kabul eder. "Başka aracın varlığı ispatlanamadığından" biçimindeki, ispat yükünü savunmaya yükleyen ifade
     kaldırıldı. Yorum: böyle bir hüküm istinafta ATK raporu karşısında gerekçe yetersizliği yönünden ciddi biçimde
-    tartışılır; oyun bu sonucu yalnızca kırmızı ışık iddiası kürsüde çürütülemediğinde verir. INDIRIM ayrıca kürsüde hız iddiasının çürütülmesini
-    (EDR ya da fren izi) ve soruşturmada en az iki saha çıkarımını ister; bilinçli taksirin düşmesi bir dayanağa bağlanır.
+    tartışılır; oyun bu sonucu yalnızca kırmızı ışık iddiası çürütülemediğinde verir. INDIRIM ayrıca kürsüde hız iddiasının çürütülmesini
+    (EDR ya da fren izi), soruşturmada en az iki saha çıkarımını ve arada gelen raporlardan birinin okunmasını ister;
+    ARG_EDR yalnızca EDR dökümü okunduysa yapılabilir (dosyaya giren ama okunmayan bir veriyle argüman kurulmaz).
 16. **Sanayi sitesi ve kovalamama:** Avukat yedek parçacıda bir model aralığının tampon ölçüsünü öğrenir (bilirkişiye
     soracağı soru için genel bilgi); dönüşte kaldırımdan, kamuya açık yerden gördüklerini not alır. Kaportacıyı
     sorgulamak (SA_SOR) etik hata sayılır: soruşturmayı savcılık yürütür (CMK 160) ve soru delilin yok edilmesine yol
@@ -158,6 +177,20 @@ katılan vekili kürsüde değil, taraf sırasındadır (stage düzeninde kürs�
     araştırılmasını savcılıktan ister.
 17. **Saatler:** Gün doğumu/batımı hesabı gerektiren bir nitelik (TCK 6/1-e gece vakti) bu suç tipinde ceza artırımı
     doğurmaz; saatler yalnızca olay örgüsü içindir.
+18. **Bilinçli taksir hiçbir "çökmüş" dosyada uygulanmaz (ikinci tur):** Bilinçli taksir, failin neticeyi öngördüğü hâlde
+    davranmasıdır (TCK 22/3). Bu dosyada öngörünün dayanağı kırmızı ışıkta yaya geçidine girmektir; hız (68 km/s) ikinci
+    dayanaktır. Kırmızı ışık iddiası çöktüyse (`kusur_yok`: kürsüde ya da dosyadaki heyet raporu / sinyal kaydı + sesli
+    mesajla) ya da hız iddiası EDR ile yıkıldıysa (`arg_edr`, contra_c2) mahkeme 22/3 uygulamaz: sonuç İNDİRİM ya da
+    BASIT_HAPIS'tir. Mahkeme savcının mütalaasıyla bağlı değildir (CMK 225 yalnızca fiil ve fail bakımından bağlar), ama
+    savcının basit taksir mütalaası ve EDR karşısında 22/3 uygulamak gerekçesiz kalırdı. MAHKUMIYET ve ETIK gerekçeleri
+    öngörüyü kırmızı ışıkta yaya geçidine girmeye dayanan olumlu bir tespitle kurar; "savunma … dayanak ortaya
+    koymamıştır", "savunmanın inandırıcılığı çöktü" ve "… kürsüye taşımamıştır" biçimindeki, ispat yükünü savunmaya
+    yükleyen ya da müdafiin performansını delil sayan ifadeler kaldırıldı (Anayasa 38/4; CMK 230/1 gerekçe yükümlülüğü).
+19. **Dosyadaki hukuka uygun delil ve CMK 217:** Mahkeme yalnızca duruşmaya getirilmiş ve tartışılmış delillere dayanır
+    (CMK 217/1); bilirkişi heyeti raporu mahkemenin kendi ara kararıyla alındığından (CMK 67/5 itirazı üzerine) dosyadadır ve
+    hâkim T_00'da sonucunu okur. Sinyal kaydı dilekçe üzerine belediyeden, sesli mesaj katılanın savcılığa teslimiyle
+    dosyaya girer. Bu nedenle heyet raporu tek başına, sinyal kaydı ve sesli mesaj birlikte `kusur_yok` sayılır; ikisinden
+    biri tek başına varsa ETIK gerekçesi neden yetmediğini (kaza anında sanık yönündeki ışığın rengini göstermediğini) yazar.
 
 ## 6. Hassas konu denetimi
 

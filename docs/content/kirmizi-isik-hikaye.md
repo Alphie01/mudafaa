@@ -279,15 +279,20 @@ ile kısa bir sahne.
   hakkında taksirle öldürme ve yardım etmeme suçlarından kamu davası açıldı."
 - **BERAAT_E (223/2-e):** Beraat, ama koridorda katılan vekilinin fısıltısı: "Şüpheden." Volkan: "Ben hâlâ hissediyorum
   avukat hanım." Deniz: "Hissettiğin, olan değil." Panelvanın kim olduğu dosyada bir soru işareti olarak kalır (suç duyurusu
-  yapılmışsa soruşturma sürmektedir). thought: "Bazen adalet bir kapıyı açar ama ışığı yakmaz. Bu sefer en azından kırmızı
+  yapılmışsa soruşturma sürmektedir); savcılık yazısı dosyaya girdiyse bir ad vardır ve o ad "başka bir dosyanın kapağında"dır. thought: "Bazen adalet bir kapıyı açar ama ışığı yakmaz. Bu sefer en azından kırmızı
   değildi."
 - **INDIRIM (basit taksir, 50/4):** Hapis yok; para cezası ve ehliyet. Volkan rahatlamaz: "Demek ki biraz öldürdüm."
   Deniz'in cevabı yok. Gül klasörü kapatır. thought: "Kazanmak buysa, neden bu kadar ağır?"
+- **BASIT_HAPIS (basit taksir, çevirme yok):** "Basit taksir" denince salonda bir şey gevşer, "çevrilmesine yer olmadığına"
+  denince yeniden gerilir. İki yıl bir ay. Volkan: "Yeşildi dedim. Kabul ettiler. Yine de içerideyim." Gül istinafı sorar.
+  Leyla: "Hâkime bir çerçeve verdin, içini doldurmadın." thought: "Hâkim ışığı yeşil saydı, hızı düşük saydı. Sonra sordu:
+  başka ne var?"
 - **MAHKUMIYET:** Volkan'ın elleri; bebek arabası koridorda. Serkan da rahatlamaz. thought: "Bir kadın öldü, bir adam ceza
   aldı. Teraziyi dengeli sanan herkes yanılıyordu; ben de." Çöküşte savcının cümlesi: "İyi bir avukat olacaksınız. Bugün
   değil."
-- **ETIK (garaj + kürsüde çürütülemeyen kırmızı ışık):** Garaj fotoğrafı hukuka aykırı delil sayılır ve dışlanır; mahkeme
-  hukuka uygun delilleri ayrıca tartar ve kırmızı ışık iddiası kürsüde çökmediği için mahkûm eder. Rüstem'in şikâyeti,
+- **ETIK (garaj + çürütülemeyen kırmızı ışık):** Garaj fotoğrafı hukuka aykırı delil sayılır ve dışlanır; mahkeme
+  hukuka uygun delilleri ayrıca tartar ve dosyada kırmızı ışık tespitiyle çelişen hukuka uygun delil (heyet raporu, sinyal
+  kaydı + sesli mesaj) olmadığı, hız iddiası da yıkılmadığı için mahkûm eder. Rüstem'in şikâyeti,
   baroya bildirim. Leyla meslek kuralları kitapçığını masaya bırakır ve hiçbir şey söylemez. Panelvan o hafta hurdaya
   çıkarılmıştır.
 - **Disiplin epilogu (garaj + başka sonuç):** Garaja girilip dava hukuka uygun delillerle kazanılır ya da indirim alınırsa

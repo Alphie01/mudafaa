@@ -1,0 +1,21 @@
+{
+  "name": "@mudafaa/content-tools",
+  "version": "0.0.0",
+  "private": true,
+  "description": "İçerik araçları: tasarımdan sprite çıkarımı, sahne PNG render'ı ve Dava #07 içerik testleri",
+  "type": "module",
+  "scripts": {
+    "extract-sprites": "tsx src/extract-sprites.ts",
+    "render-scenes": "tsx src/render-scenes.ts"
+  },
+  "dependencies": {
+    "@mudafaa/case-schema": "*",
+    "acorn": "^8.19.0"
+  },
+  "devDependencies": {
+    "@types/pngjs": "^6.0.5",
+    "playwright": "^1.64.1",
+    "pngjs": "^7.0.0",
+    "tsx": "^4.23.15"
+  }
+}

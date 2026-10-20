@@ -1,0 +1,183 @@
+{
+  "nodes": [
+    {
+      "id": "BR_01",
+      "type": "STORY",
+      "title": "Dosya devri",
+      "eyebrow": "DAVA #07 · BRİFİNG",
+      "chapter": "Brifing",
+      "onFirstEnter": [
+        { "type": "MEET", "character": "leyla" },
+        { "type": "MEET", "character": "deniz" }
+      ],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Deniz, Kerem Aydın dosyası artık senin. UYAP’tan dosyanın tamamını indirdim; emanetteki asıllara da CMK 153/4 ile bakabilirsin."
+            },
+            {
+              "speaker": "leyla",
+              "text": "12 Mart gecesi Nilüfer’deki bir tekstil deposundan 40 top kumaş çalındı. İddianame Ağır Ceza’da; 2. celseye 14 gün var."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Dosyayı açmadan önce bir soru: iddianamedeki suçun olası ceza aralığı nedir?"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "BR01_A",
+          "kind": "OPTION",
+          "label": "142/2-h + 143: 7 yıl 6 ay–15 yıl",
+          "effects": [{ "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 50 }],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Doğru: bina içinde muhafaza edilen eşya (TCK 142/2-h) ve gece vakti (TCK 143) ile 7 yıl 6 ay–15 yıl.",
+            "category": "HUKUKI_BILGI"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "expression": "mutlu",
+                  "text": "Doğru. 142/2-h’nin 5–10 yılı, gece vakti nedeniyle yarısına kadar artar (TCK 143)."
+                }
+              ]
+            }
+          ],
+          "next": "BR_02"
+        },
+        {
+          "id": "BR01_B",
+          "kind": "OPTION",
+          "label": "142/1: 3–7 yıl",
+          "quality": { "q": "BAD", "feedback": "142/1 bentleri depo içi eşyaya uymaz.", "category": "HUKUKI_BILGI" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Hayır. 142/1 bentleri depo içi eşyaya uymaz; doğrusu 142/2-h ve 143: 7 yıl 6 ay–15 yıl."
+                }
+              ]
+            }
+          ],
+          "next": "BR_02"
+        },
+        {
+          "id": "BR01_C",
+          "kind": "OPTION",
+          "label": "141: 1–3 yıl",
+          "quality": { "q": "BAD", "feedback": "Bina içinde muhafaza nitelikli haldir.", "category": "HUKUKI_BILGI" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Hayır. Bina içinde muhafaza edilen eşyayı çalmak nitelikli hâldir; doğrusu 142/2-h ve 143: 7 yıl 6 ay–15 yıl."
+                }
+              ]
+            }
+          ],
+          "next": "BR_02"
+        }
+      ]
+    },
+    {
+      "id": "BR_02",
+      "type": "STORY",
+      "phase": "BRIEFING",
+      "title": "Gece Bekçisinin Sırrı",
+      "eyebrow": "DAVA #07 · BRİFİNG",
+      "chapter": "Brifing",
+      "onFirstEnter": [{ "type": "MEET", "character": "kerem" }],
+      "blocks": [
+        {
+          "type": "profileCard",
+          "character": "kerem",
+          "label": "MÜVEKKİL",
+          "lines": ["Kerem Aydın, 24", "Depo işçisi · Sabıkası yok"],
+          "charge": "Nitelikli hırsızlık (TCK 142/2-h, 143)",
+          "demand": "İddianame: 142/2-h, 143 (7 yıl 6 ay–15 yıl)"
+        },
+        {
+          "type": "sentenceRange",
+          "segments": ["green", "gold", "gold", "red", "red", "red", "darkred", "darkred"],
+          "markerPct": 62,
+          "labels": ["Beraat", "TCK 62: 6y3a", "7,5 yıl", "15 yıl"],
+          "demandLabel": "İSTEM: 142/2-h + 143"
+        },
+        {
+          "type": "paragraph",
+          "title": "OLAY ÖZETİ",
+          "text": "12 Mart gecesi Nilüfer'deki bir tekstil deposundan 40 top kumaş çalındı. Güvenlik görevlisi, saat 23.00'te depodan çıkan kişinin Kerem olduğunu söylüyor. Kerem o saatte çay ocağında olduğunu iddia ediyor."
+        },
+        {
+          "type": "strengthList",
+          "title": "SAVCILIĞIN ELİNDEKİLER",
+          "items": [
+            { "label": "Görgü tanığı teşhisi", "strength": "STRONG" },
+            { "label": "Kapıdaki parmak izi", "strength": "MEDIUM" },
+            { "label": "Çantada depo anahtarı", "strength": "MEDIUM" }
+          ]
+        },
+        {
+          "type": "choiceGroup",
+          "title": "SAVUNMA STRATEJİSİ SEÇ",
+          "group": "g_strateji",
+          "hints": {
+            "STR_MASUMIYET": "Masumiyet: beraat hedeflenir. Tüm delilleri çürütmen gerekir — yüksek risk; stratejine uyan esas savunma ×1,5 puan.",
+            "STR_USUL": "Usul hatası: hukuka aykırı elde edilen delilleri dışlatırsın. Orta risk; stratejine uyan esas savunma ×1,2 puan.",
+            "STR_INDIRIM": "Ceza indirimi: terditli savunma — önce beraat, aksi hâlde 142/2-d’nin düşmesi, alt sınır ve TCK 62. Güvenli; stratejine uyan esas savunma ×0,8 puan."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "STR_MASUMIYET",
+          "kind": "OPTION",
+          "label": "Masumiyet",
+          "group": "g_strateji",
+          "effects": [
+            { "type": "VAR", "var": "strategy", "op": "set", "value": "MASUMIYET" },
+            { "type": "VAR", "var": "strategy_pct", "op": "set", "value": 150 },
+            { "type": "VAR", "var": "day", "op": "set", "value": 1 },
+            { "type": "VAR", "var": "ap", "op": "set", "value": 3 }
+          ],
+          "next": "INV_HUB"
+        },
+        {
+          "id": "STR_USUL",
+          "kind": "OPTION",
+          "label": "Usul hatası",
+          "group": "g_strateji",
+          "effects": [
+            { "type": "VAR", "var": "strategy", "op": "set", "value": "USUL" },
+            { "type": "VAR", "var": "strategy_pct", "op": "set", "value": 120 },
+            { "type": "VAR", "var": "day", "op": "set", "value": 1 },
+            { "type": "VAR", "var": "ap", "op": "set", "value": 3 }
+          ],
+          "next": "INV_HUB"
+        },
+        {
+          "id": "STR_INDIRIM",
+          "kind": "OPTION",
+          "label": "Ceza indirimi",
+          "group": "g_strateji",
+          "effects": [
+            { "type": "VAR", "var": "strategy", "op": "set", "value": "INDIRIM" },
+            { "type": "VAR", "var": "strategy_pct", "op": "set", "value": 80 },
+            { "type": "VAR", "var": "day", "op": "set", "value": 1 },
+            { "type": "VAR", "var": "ap", "op": "set", "value": 3 }
+          ],
+          "next": "INV_HUB"
+        }
+      ]
+    }
+  ]
+}

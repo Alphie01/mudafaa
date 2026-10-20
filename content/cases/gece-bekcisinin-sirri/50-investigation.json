@@ -1,0 +1,1308 @@
+{
+  "nodes": [
+    {
+      "id": "INV_HUB",
+      "type": "INVESTIGATION",
+      "title": "Olay Yeri: Depo",
+      "eyebrow": "DAVA #07 · SORUŞTURMA",
+      "chapter": "Soruşturma",
+      "hud": ["day", "ap"],
+      "lines": [
+        {
+          "when": { "cmp": [{ "var": "day" }, "==", 1] },
+          "lines": [{ "speaker": "narrator", "text": "GÜN 1/3 · 2. celseye 14 gün var." }]
+        },
+        {
+          "when": { "cmp": [{ "var": "day" }, "==", 2] },
+          "lines": [{ "speaker": "narrator", "text": "GÜN 2/3 · 2. celseye 10 gün var." }]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "GÜN 3/3 · 2. celseye 6 gün var. Delil dilekçesi için son gün (CMK 177)."
+            }
+          ]
+        }
+      ],
+      "tabs": [
+        { "id": "t_olay", "label": "OLAY YERİ", "kind": "SCENE", "choices": ["H_ARAMA"] },
+        { "id": "t_cezaevi", "label": "CEZAEVİ", "kind": "PEOPLE", "choices": ["H_GORUS", "H_GORUS2"] },
+        { "id": "t_tanik", "label": "TANIKLAR", "kind": "PEOPLE", "choices": ["H_T_HUS", "H_T_SEL", "H_T_MUR"] },
+        {
+          "id": "t_arsiv",
+          "label": "ARŞİV",
+          "kind": "ARCHIVE",
+          "choices": ["H_INCELEME", "H_BEL", "H_HTS", "H_DIL", "H_CIKARIM"]
+        }
+      ],
+      "scenePreview": { "scene": "sc_olay_yeri_depo" },
+      "quickTalk": {
+        "character": "kerem",
+        "line": "“O gece depoda değildim avukat bey. Çay ocağındaydım, Hüseyin abi de oradaydı!”",
+        "choices": ["H_GORUS", "H_GORUS2"]
+      },
+      "choices": [
+        {
+          "id": "H_ARAMA",
+          "kind": "NAVIGATE",
+          "label": "Olay yeri fotoğraflarını ara",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_ARAMA" },
+          "description": "13 Mart olay yeri fotoğrafları · büyüteç 6",
+          "maxUses": 1
+        },
+        {
+          "id": "H_GORUS",
+          "kind": "NAVIGATE",
+          "label": "Kerem’le görüş",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_GORUSME" },
+          "description": "Görüş salonunun kapanışına 14 dk",
+          "visibleWhen": { "not": { "visited": "INV_GORUSME" } }
+        },
+        {
+          "id": "H_GORUS2",
+          "kind": "NAVIGATE",
+          "label": "Tekrar görüş",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_GORUSME" },
+          "description": "Görüş salonunun kapanışına 8 dk",
+          "visibleWhen": { "visited": "INV_GORUSME" }
+        },
+        {
+          "id": "H_T_HUS",
+          "kind": "NAVIGATE",
+          "label": "Hüseyin Tan",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_T_HUS" },
+          "description": "Çaycı · mazeret tanığı",
+          "maxUses": 1
+        },
+        {
+          "id": "H_T_SEL",
+          "kind": "NAVIGATE",
+          "label": "Selin Kaya",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_T_SEL" },
+          "description": "Özel güvenlik görevlisi · görgü tanığı",
+          "maxUses": 1
+        },
+        {
+          "id": "H_T_MUR",
+          "kind": "NAVIGATE",
+          "label": "Murat Koç",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_T_MUR" },
+          "description": "Depo 3 işçisi",
+          "maxUses": 1
+        },
+        {
+          "id": "H_INCELEME",
+          "kind": "NAVIGATE",
+          "label": "Vardiya çizelgesini incele",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_INCELEME" },
+          "description": "Emanette, zabıt kâtibinin önünde (CMK 153/4)"
+        },
+        {
+          "id": "H_BEL",
+          "kind": "NAVIGATE",
+          "label": "Belediye arıza kaydı",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_BEL" },
+          "description": "14 no’lu sokak lambası",
+          "visibleWhen": { "not": { "any": [{ "chosen": "BEL_A" }, { "chosen": "BEL_B" }] } }
+        },
+        {
+          "id": "H_HTS",
+          "kind": "NAVIGATE",
+          "label": "Telefon kayıtları",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_HTS" },
+          "description": "Kim, kimi, ne zaman aradı?"
+        },
+        {
+          "id": "H_DIL",
+          "kind": "NAVIGATE",
+          "label": "Delil dilekçesi (CMK 177)",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_DIL" },
+          "description": "3 talep hakkı",
+          "visibleWhen": { "not": { "chosen": "DIL_VER" } }
+        },
+        {
+          "id": "H_CIKARIM",
+          "kind": "NAVIGATE",
+          "label": "Çıkarım tahtası",
+          "description": "0 EP · ipuçlarını birleştir",
+          "enabledWhen": { "ref": "kart2" },
+          "lockedReason": "En az 2 ipucu gerekli.",
+          "next": { "push": "INV_CIKARIM" }
+        },
+        {
+          "id": "H_DURUSMA",
+          "kind": "NAVIGATE",
+          "label": "DURUŞMAYA GİT · 2. CELSE",
+          "role": "PRIMARY",
+          "confirm": "Duruşmaya gidersen soruşturma biter. Emin misin?",
+          "next": "C_00"
+        }
+      ]
+    },
+    {
+      "id": "INV_DAY_END",
+      "type": "STORY",
+      "title": "Gün sonu",
+      "eyebrow": "DAVA #07 · SORUŞTURMA",
+      "chapter": "Soruşturma",
+      "onEnter": [
+        { "type": "DISCOVER", "evidence": "ev_ariza_kaydi" },
+        { "type": "VAR", "var": "day", "op": "inc", "value": 1 },
+        { "type": "VAR", "var": "ap", "op": "set", "value": 3 }
+      ],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "Gün bitti. Gelen evrak dosyaya eklendi; yarın sabah yeni bir gün." }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "DAY_NEXT", "kind": "CONTINUE", "label": "Yeni güne başla", "role": "PRIMARY", "next": "INV_HUB" }
+      ]
+    },
+    {
+      "id": "INV_GORUSME",
+      "type": "DIALOGUE",
+      "mode": "INTERVIEW",
+      "title": "Müvekkil Görüşmesi",
+      "eyebrow": "CEZAEVİ · GÖRÜŞ ODASI",
+      "chapter": "Soruşturma",
+      "hud": ["min", "trust"],
+      "room": { "label": "CEZAEVİ · GÖRÜŞ ODASI", "character": "kerem" },
+      "onFirstEnter": [
+        { "type": "MEET", "character": "saniye" },
+        { "type": "MEET", "character": "ali" },
+        { "type": "VAR", "var": "fact_sigara_yok", "op": "set", "value": true },
+        { "type": "VAR", "var": "fact_kerem_39", "op": "set", "value": true }
+      ],
+      "onEnter": [
+        {
+          "type": "IF",
+          "when": { "cmp": [{ "visits": "INV_GORUSME" }, ">", 1] },
+          "then": [{ "type": "VAR", "var": "min", "op": "set", "value": 8 }]
+        }
+      ],
+      "lines": [
+        {
+          "when": { "cmp": [{ "visits": "INV_GORUSME" }, "==", 1] },
+          "lines": [
+            {
+              "speaker": "saniye",
+              "expression": "uzgun",
+              "text": "Avukat bey, oğlum sigara bile içmez. Ayakkabısını hep ben alırım: 39 numara."
+            },
+            { "speaker": "narrator", "text": "Görüş salonu 17.00’de kapanıyor; Ali Çetin konuşmaları duyamaz." }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Görüş salonunun kapanışına 8 dakika var; Ali Çetin konuşmaları duyamaz."
+            }
+          ]
+        }
+      ],
+      "tones": [
+        { "id": "soft", "label": "Yumuşak", "hint": "+4 güven" },
+        { "id": "hard", "label": "Sert", "hint": "−8 güven · daha fazla bilgi" }
+      ],
+      "moodRules": [
+        { "when": { "flag": "fact_murat_reveal" }, "label": "Çözülüyor", "tone": "success", "expression": "saskin" },
+        {
+          "when": { "cmp": [{ "var": "trust" }, "<", 40] },
+          "label": "Savunmada",
+          "tone": "error",
+          "expression": "kizgin"
+        },
+        {
+          "when": { "cmp": [{ "var": "tone" }, "==", "hard"] },
+          "label": "Gergin",
+          "tone": "neutral",
+          "expression": "kizgin"
+        },
+        { "label": "Temkinli", "tone": "neutral", "expression": "normal" }
+      ],
+      "objectives": [
+        {
+          "id": "obj_gece",
+          "when": { "flag": "fact_gece" },
+          "known": "Kerem 22.30’dan sonra çay ocağındaydı.",
+          "unknown": "Kerem olay saatinde neredeydi?"
+        },
+        {
+          "id": "obj_anahtar",
+          "when": { "flag": "fact_anahtar_ortak" },
+          "known": "Anahtar tüm vardiyada var; tek başına delil değil.",
+          "unknown": "Anahtar neden onun çantasında?"
+        },
+        {
+          "id": "obj_mazeret",
+          "when": { "flag": "fact_mazeret" },
+          "known": "Hüseyin ve fiş mazereti destekliyor.",
+          "unknown": "Mazeretini kim doğrulayabilir?"
+        },
+        {
+          "id": "obj_murat",
+          "when": { "flag": "fact_murat_reveal" },
+          "known": "Kerem, Murat Koç’u koruyordu. Yeni şüpheli!",
+          "unknown": "Kerem bir şey saklıyor mu?"
+        }
+      ],
+      "choices": [
+        {
+          "id": "TP_GECE",
+          "kind": "TOPIC",
+          "label": "O gece",
+          "cost": [{ "var": "min", "amount": 3 }],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_gece", "op": "set", "value": true },
+            { "type": "VAR", "var": "fact_19_30", "op": "set", "value": true }
+          ],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "O gece neler oldu, baştan anlatır mısın?",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kerem",
+                      "text": "19.30’da Murat abi Depo 3’e top taşımaya çağırdı, yardım ettim. Vardiyam 24.00’te bitecekti. 22.30 gibi çay ocağına geçtim, Hüseyin abiyle oturduk."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Saat saat anlat. 23.00’te neredeydin?",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" },
+                { "type": "VAR", "var": "fact_murat_cagirdi", "op": "set", "value": true }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kerem",
+                      "expression": "kizgin",
+                      "text": "Saat saat mi? 19.30’da Murat abi özellikle beni çağırdı; Depo 3’ün kapısını ben tutayım dedi, topları taşıdık. 22.30 gibi çay ocağına geçtim, Hüseyin abiyle oturduk. Vardiyam 24.00’te bitecekti."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "TP_ANAHTAR",
+          "kind": "TOPIC",
+          "label": "Anahtar",
+          "cost": [{ "var": "min", "amount": 3 }],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_anahtar_ortak", "op": "set", "value": true },
+            { "type": "VAR", "var": "fact_rizasiz_arama", "op": "set", "value": true }
+          ],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Depo anahtarı neden senin çantandaydı?",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kerem",
+                      "text": "Bütün vardiyaya aynı anahtarı veriyorlar. Benimki hep çantamda durur. Sabah Selin abla çantamı elimden alıp açtı; bana sormadı bile."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Anahtar çantanda çıktı. Bunu nasıl açıklayacaksın?",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" },
+                { "type": "VAR", "var": "hint_selin_offduty", "op": "set", "value": true }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kerem",
+                      "expression": "kizgin",
+                      "text": "Herkeste var o anahtardan! Bana mı yıkacaksınız? Selin abla çantamı elimden alıp açtı. Vardiyası gece bitmişti, sabah orada ne işi vardı?"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "TP_HUSEYIN",
+          "kind": "TOPIC",
+          "label": "Hüseyin abi",
+          "cost": [{ "var": "min", "amount": 3 }],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_mazeret", "op": "set", "value": true },
+            { "type": "DISCOVER", "evidence": "ev_fis" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 50 }
+          ],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Hüseyin abi seni orada gördüğünü söyler mi?",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kerem",
+                      "text": "Söyler tabii. 23.15’e kadar beraberdik. Tost da ısmarlamıştım, fişi cüzdanımda; cüzdan da annemde."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Hüseyin yalan söylemez değil mi? İfade verir mi?",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kerem",
+                      "expression": "kizgin",
+                      "text": "Söyler tabii! 23.15’e kadar beraberdik. Tost da ısmarlamıştım, fişi cüzdanımda; cüzdan annemde. Gidin sorun!"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "TP_KENDISI",
+          "kind": "TOPIC",
+          "label": "Kendisi",
+          "cost": [{ "var": "min", "amount": 3 }],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Biraz kendinden bahset. Borcun, sıkıntın var mı?",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" },
+                { "type": "VAR", "var": "fact_sigara_yok", "op": "set", "value": true }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kerem",
+                      "text": "Annemle yaşıyorum. Bu işe yeni girdim, kimseyle sorunum yoktu. Sigara bile içmem."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Paraya ihtiyacın var mıydı? Dürüst ol.",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" },
+                { "type": "VAR", "var": "fact_borc", "op": "set", "value": true }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kerem",
+                      "expression": "uzgun",
+                      "text": "…Annemin ilaç borcu var. Ama ben hırsız değilim!"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "G_IZ",
+          "kind": "OPTION",
+          "label": "İPUCU GÖSTER: “Çamurda 42 numara bot izi”",
+          "prompt": "Olay yerinde 42 numara bot izi bulduk. Senin numaran kaç?",
+          "visibleWhen": { "hasEvidence": "clue_iz42" },
+          "cost": [{ "var": "min", "amount": 5 }],
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "cmp": [{ "var": "trust" }, ">=", 40] },
+              "then": [
+                { "type": "SCORE", "category": "ARASTIRMA", "amount": 200 },
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 6 },
+                { "type": "VAR", "var": "fact_murat_reveal", "op": "set", "value": true },
+                { "type": "VAR", "var": "suspect_murat", "op": "set", "value": true },
+                {
+                  "type": "MARK",
+                  "quality": "GOOD",
+                  "feedback": "Saklanan bilgi açığa çıktı: Murat Koç o gece Depo 3’teydi.",
+                  "category": "ARASTIRMA"
+                }
+              ],
+              "else": [
+                {
+                  "type": "MARK",
+                  "quality": "BAD",
+                  "feedback": "Güveni düşük müvekkil sakladığını açmaz.",
+                  "category": "SORGULAMA"
+                }
+              ]
+            }
+          ],
+          "responses": [
+            {
+              "when": { "flag": "fact_murat_reveal" },
+              "lines": [
+                {
+                  "speaker": "kerem",
+                  "expression": "saskin",
+                  "text": "39’um ben… Bekle. Murat abi o gece Depo 3’teydi. Botları hep çamurlu olur. Söylemedim, işimi kaybederim diye korktum."
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "kerem",
+                  "expression": "kizgin",
+                  "text": "Ne bileyim ben bot izini! Bana neden soruyorsunuz?"
+                }
+              ]
+            }
+          ]
+        },
+        { "id": "G_BITIR", "kind": "CONTINUE", "label": "Görüşmeyi bitir", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_ARAMA",
+      "type": "SCENE",
+      "title": "Depo Sokağı · 13 Mart olay yeri fotoğrafları",
+      "eyebrow": "ADIM 1 · ARA",
+      "chapter": "Soruşturma",
+      "hud": ["taps"],
+      "exposeCounts": true,
+      "scene": "sc_depo_sokagi",
+      "instruction": "Sahnede şüpheli gördüğün yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "actionCosts": { "TAP": [{ "var": "taps", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_ARAMA",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)",
+            "label": "−10 SKOR",
+            "tone": "error"
+          }
+        },
+        { "id": "ARAMA_BITIR", "kind": "CONTINUE", "label": "Aramayı bitir", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_INCELEME",
+      "type": "DOCUMENT",
+      "title": "Vardiya Çizelgesi",
+      "eyebrow": "ADIM 2 · İNCELE",
+      "chapter": "Soruşturma",
+      "hud": ["exam_left"],
+      "onFirstEnter": [{ "type": "MEET", "character": "zeynep" }],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "zeynep",
+              "text": "Asıl belge emanette. İnceleyebilirsiniz avukat bey, ama müdahale edemezsiniz (CMK 153/4)."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bir alet seç, sonra belgede şüpheli satıra dokun. Doğru alet + doğru yer = yeni ipucu."
+            }
+          ]
+        }
+      ],
+      "header": { "left": "ÖZTEKS DEPOCULUK · VARDİYA", "right": "12 MART" },
+      "columns": [
+        { "label": "PERSONEL", "flex": 1.4 },
+        { "label": "YER", "flex": 1 },
+        { "label": "SAAT", "flex": 1.2 }
+      ],
+      "rows": [
+        { "id": "ahmet", "cells": ["Ahmet Yıldız", "Depo 2", "08.00–16.00"] },
+        { "id": "kerem", "cells": ["Kerem Aydın", "Depo 1", "18.00–24.00"] },
+        {
+          "id": "selin",
+          "cells": ["Selin Kaya", "Güvenlik", "22.00–06.00"],
+          "lens": { "uv": { "cells": ["Selin Kaya", "Güvenlik", "18.00–24.00 → 22.00–06.00"], "tone": "special" } }
+        },
+        { "id": "huseyin", "cells": ["Hüseyin Tan", "Çay ocağı", "16.00–24.00"] },
+        { "id": "murat", "cells": ["Murat Koç", "Depo 3", "16.00–24.00"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "uv", "label": "UV ışık", "icon": "uv", "visualMode": "UV" },
+        { "id": "dust", "label": "İz tozu", "icon": "dust" },
+        { "id": "compare", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "exam_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_UV_SELIN",
+          "kind": "EXAMINE",
+          "match": { "tool": "uv", "target": "selin" },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_uv_silinti" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ],
+          "feedback": {
+            "title": "YENİ İPUCU · SİLİNTİ",
+            "text": "UV ışıkta düzeltme izi çıktı! Selin’in vardiyası 18.00–24.00 iken sonradan 22.00–06.00 yapılmış. O gece 23.00’te görevde miydi?",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          }
+        },
+        {
+          "id": "EX_MAG_KEREM",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "kerem" },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kerem_depo1" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ],
+          "feedback": {
+            "title": "YENİ İPUCU · GÖREV YERİ",
+            "text": "Kerem Depo 1’e atanmış. Depo 3’te olması için bir sebebi yok.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "success"
+          }
+        },
+        {
+          "id": "EX_CMP_MURAT",
+          "kind": "EXAMINE",
+          "match": { "tool": "compare", "target": "murat" },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_murat_42" },
+            { "type": "DISCOVER", "evidence": "ev_isg_zimmet" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ],
+          "feedback": {
+            "title": "YENİ İPUCU · ŞÜPHELİ",
+            "text": "Depo 3’te çalışan tek kişi Murat Koç. Ayakkabı numarası personel kartında: 42. İSG zimmet listesine göre Kerem’inki 39.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "success"
+          }
+        },
+        {
+          "id": "EX_DUST_AHMET",
+          "kind": "EXAMINE",
+          "match": { "tool": "dust", "target": "ahmet" },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Emanetteki delile toz uygulanmaz; bilirkişi, CMK 63.",
+              "category": "DELIL_ANALIZI"
+            }
+          ],
+          "feedback": {
+            "title": "MÜDAHALE YOK",
+            "text": "Emanetteki delile toz uygulanmaz; bu bilirkişinin işidir (CMK 63).",
+            "label": "−20 SKOR",
+            "tone": "error"
+          }
+        },
+        {
+          "id": "EX_DUST_KEREM",
+          "kind": "EXAMINE",
+          "match": { "tool": "dust", "target": "kerem" },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Emanetteki delile toz uygulanmaz; bilirkişi, CMK 63.",
+              "category": "DELIL_ANALIZI"
+            }
+          ],
+          "feedback": {
+            "title": "MÜDAHALE YOK",
+            "text": "Emanetteki delile toz uygulanmaz; bu bilirkişinin işidir (CMK 63).",
+            "label": "−20 SKOR",
+            "tone": "error"
+          }
+        },
+        {
+          "id": "EX_DUST_SELIN",
+          "kind": "EXAMINE",
+          "match": { "tool": "dust", "target": "selin" },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Emanetteki delile toz uygulanmaz; bilirkişi, CMK 63.",
+              "category": "DELIL_ANALIZI"
+            }
+          ],
+          "feedback": {
+            "title": "MÜDAHALE YOK",
+            "text": "Emanetteki delile toz uygulanmaz; bu bilirkişinin işidir (CMK 63).",
+            "label": "−20 SKOR",
+            "tone": "error"
+          }
+        },
+        {
+          "id": "EX_DUST_HUSEYIN",
+          "kind": "EXAMINE",
+          "match": { "tool": "dust", "target": "huseyin" },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Emanetteki delile toz uygulanmaz; bilirkişi, CMK 63.",
+              "category": "DELIL_ANALIZI"
+            }
+          ],
+          "feedback": {
+            "title": "MÜDAHALE YOK",
+            "text": "Emanetteki delile toz uygulanmaz; bu bilirkişinin işidir (CMK 63).",
+            "label": "−20 SKOR",
+            "tone": "error"
+          }
+        },
+        {
+          "id": "EX_DUST_MURAT",
+          "kind": "EXAMINE",
+          "match": { "tool": "dust", "target": "murat" },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Emanetteki delile toz uygulanmaz; bilirkişi, CMK 63.",
+              "category": "DELIL_ANALIZI"
+            }
+          ],
+          "feedback": {
+            "title": "MÜDAHALE YOK",
+            "text": "Emanetteki delile toz uygulanmaz; bu bilirkişinin işidir (CMK 63).",
+            "label": "−20 SKOR",
+            "tone": "error"
+          }
+        },
+        {
+          "id": "FB_INCELEME",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }],
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle burada dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          }
+        },
+        { "id": "INCELEME_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_CIKARIM",
+      "type": "DEDUCTION",
+      "title": "Çıkarım Tahtası",
+      "eyebrow": "ADIM 3 · BİRLEŞTİR",
+      "chapter": "Soruşturma",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "İki ipucunu seç. Birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar."
+            }
+          ]
+        }
+      ],
+      "pool": [
+        "clue_ampul",
+        "ev_ariza_kaydi",
+        "clue_iz42",
+        "clue_murat_42",
+        "ev_fis",
+        "clue_huseyin",
+        "clue_kablo",
+        "clue_izmarit",
+        "clue_uv_silinti",
+        "clue_kerem_depo1"
+      ],
+      "choices": [
+        {
+          "id": "CB_LAMBA",
+          "kind": "COMBINE",
+          "match": { "a": "clue_ampul", "b": "ev_ariza_kaydi" },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_lamba" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ],
+          "feedback": {
+            "title": "Lamba o gece yanmıyordu",
+            "text": "Sokak karanlıktı. Tanığın “yüzünü net seçtim” sözü çürür.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          }
+        },
+        {
+          "id": "CB_IZ",
+          "kind": "COMBINE",
+          "match": { "a": "clue_iz42", "b": "clue_murat_42" },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_iz_murat" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ],
+          "feedback": {
+            "title": "İz Murat Koç’a ait olabilir",
+            "text": "Depo 3’ün çalışanı 42 numara giyiyor; Kerem 39. Yeni şüpheli!",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          }
+        },
+        {
+          "id": "CB_MAZERET",
+          "kind": "COMBINE",
+          "match": { "a": "ev_fis", "b": "clue_huseyin" },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_mazeret" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ],
+          "feedback": {
+            "title": "Kerem’in mazereti doğrulandı",
+            "text": "Fiş 22.57, Hüseyin 23.15’e kadar birlikteydiklerini söylüyor.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          }
+        },
+        {
+          "id": "FB_CIKARIM",
+          "kind": "FALLBACK",
+          "fallbackFor": "COMBINE",
+          "repeat": "ONCE_PER_PARAMS",
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }],
+          "feedback": {
+            "title": "Bu ikisi birbirini açıklamıyor",
+            "text": "Başka bir ipucu dene.",
+            "label": "BAĞLANTI YOK · −50 SKOR",
+            "tone": "error"
+          }
+        },
+        { "id": "CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_BEL",
+      "type": "CHOICE",
+      "title": "Belediye arıza kaydı",
+      "eyebrow": "ARŞİV",
+      "chapter": "Soruşturma",
+      "prompt": { "speaker": "narrator", "text": "14 no’lu sokak lambasının arıza kaydını nasıl isteyeceksin?" },
+      "choices": [
+        {
+          "id": "BEL_A",
+          "kind": "OPTION",
+          "label": "Avukat sıfatıyla belediyeye başvur (Av.K. 2/3)",
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 },
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            { "type": "VAR", "var": "ariza_avukat", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Avukat kamu kurumlarından bilgi ve belge isteyebilir (Av.K. 2/3). Kayıt gün sonunda gelir.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "$return"
+        },
+        {
+          "id": "BEL_B",
+          "kind": "OPTION",
+          "label": "Mahkemeden müzekkere iste (CMK 177)",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            { "type": "VAR", "var": "ariza_muzekkere", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Müzekkere yazılır; kayıt duruşmada okunur ama çıkarım tahtasına yetişmez.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "$return"
+        },
+        {
+          "id": "BEL_C",
+          "kind": "OPTION",
+          "label": "Bilgi edinme başvurusu yap (4982)",
+          "quality": { "q": "NEUTRAL", "feedback": "15 iş günü; yetişmez." },
+          "next": "$return"
+        },
+        { "id": "BEL_GERI", "kind": "CONTINUE", "label": "Geri dön", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_HTS",
+      "type": "CHOICE",
+      "title": "Telefon kayıtları",
+      "eyebrow": "ARŞİV",
+      "chapter": "Soruşturma",
+      "prompt": {
+        "speaker": "narrator",
+        "text": "Selin’in teşhisi Murat’ın sözüne dayanıyor. Telefon kayıtları bir bağlantıyı gösterebilir; ama hangi yoldan?"
+      },
+      "choices": [
+        {
+          "id": "HTS_OP",
+          "kind": "OPTION",
+          "label": "Operatördeki tanıdıktan Selin’in kaydını al",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -100 },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "illegal_hts", "op": "set", "value": true },
+            { "type": "DISCOVER", "evidence": "ev_hts_illegal" }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "TCK 136; delil olamaz (Anayasa 38/6, CMK 206/2-a, 217/2); disiplin.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "$return"
+        },
+        {
+          "id": "HTS_TANIK",
+          "kind": "OPTION",
+          "label": "Mahkemeden tanığın HTS’sini iste",
+          "quality": { "q": "NEUTRAL", "feedback": "CMK 135/6 yalnızca şüpheli ve sanığın iletişimini kapsar." },
+          "next": "$return"
+        },
+        {
+          "id": "HTS_SUC",
+          "kind": "OPTION",
+          "label": "Murat hakkında suç duyurusu + iletişim tespiti talebi (CMK 158, 135/6)",
+          "visibleWhen": { "ref": "dayanak_murat" },
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 },
+            { "type": "VAR", "var": "sucduyurusu_murat", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Somut şüpheye dayalı suç duyurusu: savcılık CMK 135/6 kapsamında tespit ister. Kayıt duruşmada gelir.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "INV_HTS_SELIN"
+        },
+        {
+          "id": "HTS_SUC0",
+          "kind": "OPTION",
+          "label": "Murat hakkında suç duyurusu + iletişim tespiti talebi (CMK 158, 135/6)",
+          "visibleWhen": { "not": { "ref": "dayanak_murat" } },
+          "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": -40 }],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Somut dayanaksız; iftira riski (TCK 267).",
+            "category": "USUL_BILGISI"
+          },
+          "next": "$return"
+        },
+        {
+          "id": "HTS_KEREM",
+          "kind": "OPTION",
+          "label": "Kerem’in kendi HTS’sini iste",
+          "quality": { "q": "NEUTRAL", "feedback": "Aynı baz istasyonu; ayırt edici değil." },
+          "next": "$return"
+        },
+        { "id": "HTS_GERI", "kind": "CONTINUE", "label": "Geri dön", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_HTS_SELIN",
+      "type": "CHOICE",
+      "title": "Suç duyurusu",
+      "eyebrow": "ARŞİV",
+      "chapter": "Soruşturma",
+      "prompt": { "speaker": "narrator", "text": "Suç duyurusuna Selin Kaya’yı da ekleyecek misin?" },
+      "choices": [
+        {
+          "id": "HTSS_EKLE",
+          "kind": "OPTION",
+          "label": "Selin’i de ekle (TCK 272/267, çizelge)",
+          "visibleWhen": { "hasEvidence": "clue_uv_silinti" },
+          "effects": [
+            { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 20 },
+            { "type": "VAR", "var": "sucduyurusu_selin", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Değiştirilmiş çizelge somut dayanak: Selin Kaya hakkında da soruşturma istendi.",
+            "category": "HUKUKI_BILGI"
+          },
+          "next": "$return"
+        },
+        { "id": "HTSS_DEVAM", "kind": "CONTINUE", "label": "Yalnızca Murat", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_DIL",
+      "type": "CHOICE",
+      "title": "Delil dilekçesi (CMK 177)",
+      "eyebrow": "ARŞİV",
+      "chapter": "Soruşturma",
+      "hud": ["slots"],
+      "prompt": {
+        "speaker": "narrator",
+        "text": "Mahkemeye delil dilekçesi: üç talep hakkın var. Seçimler geri alınamaz."
+      },
+      "choices": [
+        {
+          "id": "DIL_HUSEYIN",
+          "kind": "OPTION",
+          "label": "Hüseyin Tan’ın tanık olarak çağrılması",
+          "visibleWhen": { "cmp": [{ "var": "slots" }, ">", 0] },
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            { "type": "VAR", "var": "huseyin_summoned", "op": "set", "value": true }
+          ],
+          "quality": { "q": "GOOD", "feedback": "Mazeret tanığı duruşmaya çağrılacak.", "category": "USUL_BILGISI" }
+        },
+        {
+          "id": "DIL_DNA",
+          "kind": "OPTION",
+          "label": "İzmarit DNA incelemesi (CMK 78–79)",
+          "visibleWhen": { "all": [{ "cmp": [{ "var": "slots" }, ">", 0] }, { "hasEvidence": "clue_izmarit" }] },
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            { "type": "VAR", "var": "dna_requested", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Emanet No. 3’teki izmarit Adli Tıp’a gönderilecek; rapor duruşmada okunur.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_BILIRKISI",
+          "kind": "OPTION",
+          "label": "Bilirkişinin duruşmada dinlenmesi (CMK 68/1)",
+          "visibleWhen": { "cmp": [{ "var": "slots" }, ">", 0] },
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            { "type": "VAR", "var": "bilirkisi_present", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Parmak izi bilirkişisi duruşmaya çağrılacak.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_KAMERA",
+          "kind": "OPTION",
+          "label": "Kamera ve kablo için bilirkişi incelemesi",
+          "visibleWhen": { "all": [{ "cmp": [{ "var": "slots" }, ">", 0] }, { "hasEvidence": "clue_kablo" }] },
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            { "type": "VAR", "var": "kamera_requested", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "DVR ve kablo bilirkişiye gönderilecek; rapor duruşmada okunur.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_BEL",
+          "kind": "OPTION",
+          "label": "Belediyeye müzekkere: arıza kaydı",
+          "visibleWhen": {
+            "all": [
+              { "cmp": [{ "var": "slots" }, ">", 0] },
+              { "not": { "hasEvidence": "ev_ariza_kaydi" } },
+              { "not": { "flag": "ariza_avukat" } },
+              { "not": { "flag": "ariza_muzekkere" } }
+            ]
+          },
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            { "type": "VAR", "var": "ariza_muzekkere", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Arıza kaydı müzekkereyle istenecek; duruşmada okunur.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_SELIN_HTS",
+          "kind": "OPTION",
+          "label": "Tanık Selin Kaya’nın HTS kaydı",
+          "visibleWhen": { "cmp": [{ "var": "slots" }, ">", 0] },
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Reddedilecek: CMK 135/6 yalnızca şüpheli ve sanığın iletişimini kapsar."
+          }
+        },
+        {
+          "id": "DIL_KESIF",
+          "kind": "OPTION",
+          "label": "Olay yerinde keşif",
+          "visibleWhen": { "cmp": [{ "var": "slots" }, ">", 0] },
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Reddedilecek: lamba onarıldı, sokak değişti; keşif bugün bir şey göstermez."
+          }
+        },
+        {
+          "id": "DIL_VER",
+          "kind": "CONTINUE",
+          "label": "Dilekçeyi ver",
+          "role": "PRIMARY",
+          "visibleWhen": { "cmp": [{ "var": "slots" }, "<", 3] },
+          "next": "$return"
+        },
+        {
+          "id": "DIL_GERI",
+          "kind": "CONTINUE",
+          "label": "Vazgeç",
+          "role": "BACK",
+          "visibleWhen": { "cmp": [{ "var": "slots" }, ">=", 3] },
+          "next": "$return"
+        }
+      ]
+    },
+    {
+      "id": "INV_T_HUS",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "title": "Hüseyin Tan",
+      "eyebrow": "TANIKLAR",
+      "chapter": "Soruşturma",
+      "room": { "label": "ÇAY OCAĞI", "character": "huseyin" },
+      "onFirstEnter": [
+        { "type": "MEET", "character": "huseyin" },
+        { "type": "DISCOVER", "evidence": "clue_huseyin" },
+        { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+      ],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "huseyin",
+              "text": "22.30–23.15 yanımdaydı. İki çay, bir tost; fişin rulo kopyası kasada duruyor."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "THUS_BILDIR",
+          "kind": "OPTION",
+          "label": "Duruşmaya gel; seni tanık olarak bildireceğim (CMK 179)",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            { "type": "VAR", "var": "huseyin_will_attend", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Tanık bildirildi; duruşmada dinlenecek (CMK 179).",
+            "category": "USUL_BILGISI"
+          },
+          "responses": [
+            { "lines": [{ "speaker": "huseyin", "text": "Gelirim avukat bey. Ne gördüysem onu anlatırım." }] }
+          ],
+          "next": "$return"
+        },
+        {
+          "id": "THUS_YAZILI",
+          "kind": "OPTION",
+          "label": "Yazılı beyan yeter",
+          "quality": { "q": "NEUTRAL", "feedback": "CMK 210/1: duruşmada dinlenmeli." },
+          "responses": [{ "lines": [{ "speaker": "huseyin", "text": "Yazayım, imzalayayım; olur mu?" }] }],
+          "next": "$return"
+        }
+      ]
+    },
+    {
+      "id": "INV_T_SEL",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "title": "Selin Kaya",
+      "eyebrow": "TANIKLAR",
+      "chapter": "Soruşturma",
+      "room": { "label": "ANA KAPI · GÜVENLİK KULÜBESİ", "character": "selin" },
+      "onFirstEnter": [{ "type": "MEET", "character": "selin" }],
+      "lines": [
+        {
+          "lines": [{ "speaker": "selin", "text": "İfademi polise verdim avukat bey. Söyleyecek başka bir şeyim yok." }]
+        }
+      ],
+      "choices": [
+        {
+          "id": "TSEL_GORUS",
+          "kind": "OPTION",
+          "label": "Görüşme iste",
+          "quality": { "q": "NEUTRAL", "feedback": "Tanık mahkeme dışında görüşmeye zorlanamaz." },
+          "responses": [{ "lines": [{ "speaker": "selin", "text": "Ne söyleyeceksem mahkemede söylerim." }] }],
+          "next": "$return"
+        },
+        {
+          "id": "TSEL_BASKI",
+          "kind": "OPTION",
+          "label": "Baskı yap",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -100 },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "selin_pressured", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "TCK 277. Duruşmaya bir kalp eksik başlarsın.",
+            "category": "USUL_BILGISI"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "selin",
+                  "expression": "kizgin",
+                  "text": "Beni tehdit mi ediyorsunuz? Bunu mahkemeye anlatacağım!"
+                }
+              ]
+            }
+          ],
+          "next": "$return"
+        }
+      ]
+    },
+    {
+      "id": "INV_T_MUR",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "title": "Murat Koç",
+      "eyebrow": "TANIKLAR",
+      "chapter": "Soruşturma",
+      "room": { "label": "DEPO 3", "character": "murat" },
+      "onFirstEnter": [
+        { "type": "MEET", "character": "murat" },
+        { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 },
+        {
+          "type": "MARK",
+          "quality": "BAD",
+          "feedback": "Olası faili, delil güvenceye alınmadan uyardın.",
+          "category": "SAVUNMA_STRATEJISI"
+        }
+      ],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "murat",
+              "text": "22.30’da kilitledim, çıktım. Gece Kerem’i depoların orada dolaşırken gördüm; başka bir şey bilmem."
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "TMUR_AYRIL", "kind": "CONTINUE", "label": "Ayrıl", "role": "BACK", "next": "$return" }]
+    }
+  ],
+  "triggers": [
+    {
+      "id": "tg_day_end",
+      "scope": "INV_HUB",
+      "priority": 1,
+      "when": { "all": [{ "cmp": [{ "var": "ap" }, "<=", 0] }, { "cmp": [{ "var": "day" }, "<", 3] }] },
+      "goto": "INV_DAY_END"
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "ev_fis", "source": { "type": "CHOICE", "id": "TP_HUSEYIN" } },
+    {
+      "evidence": "ev_ariza_kaydi",
+      "source": { "type": "NODE", "id": "INV_DAY_END" },
+      "requires": { "flag": "ariza_avukat" },
+      "hint": "Avukat sıfatıyla belediyeye başvur (Av.K. 2/3)."
+    },
+    { "evidence": "ev_hts_illegal", "source": { "type": "CHOICE", "id": "HTS_OP" } },
+    { "evidence": "ev_isg_zimmet", "source": { "type": "RULE", "id": "EX_CMP_MURAT" } },
+    { "evidence": "clue_ampul", "source": { "type": "OBJECT", "id": "ob_lamba" } },
+    { "evidence": "clue_kablo", "source": { "type": "OBJECT", "id": "ob_kamera" } },
+    { "evidence": "clue_iz42", "source": { "type": "OBJECT", "id": "ob_iz" } },
+    { "evidence": "clue_izmarit", "source": { "type": "OBJECT", "id": "ob_cop" } },
+    { "evidence": "clue_uv_silinti", "source": { "type": "RULE", "id": "EX_UV_SELIN" } },
+    { "evidence": "clue_kerem_depo1", "source": { "type": "RULE", "id": "EX_MAG_KEREM" } },
+    { "evidence": "clue_murat_42", "source": { "type": "RULE", "id": "EX_CMP_MURAT" } },
+    { "evidence": "clue_huseyin", "source": { "type": "NODE", "id": "INV_T_HUS" } },
+    { "evidence": "ded_lamba", "source": { "type": "RULE", "id": "CB_LAMBA" } },
+    { "evidence": "ded_iz_murat", "source": { "type": "RULE", "id": "CB_IZ" } },
+    { "evidence": "ded_mazeret", "source": { "type": "RULE", "id": "CB_MAZERET" } }
+  ]
+}

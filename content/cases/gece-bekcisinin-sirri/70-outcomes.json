@@ -1,0 +1,209 @@
+{
+  "outcomes": [
+    {
+      "id": "IKRAR",
+      "class": "CONVICTION",
+      "priority": 1,
+      "when": { "flag": "false_confession" },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "sentence": "6 yıl 3 ay hapis",
+      "verdictText": "Sanık Kerem Aydın’ın ikrarı da dikkate alınarak cezalandırılmasına: TCK 142/2-h uyarınca alt sınırdan 5 YIL; TCK 143 ile 7 YIL 6 AY; TCK 62/1 ile 6 YIL 3 AY HAPİS; zarar giderilmediğinden TCK 168/2 uygulanmasına yer olmadığına; TCK 53; TCK 63 mahsup; tutukluluğun devamına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf (CMK 273/1).",
+      "reasoning": [
+        {
+          "text": "Sanık ek savunmasında üzerine atılı suçu ikrar etmiştir; ikrar, dosyadaki mazeret delilleriyle çelişse de hükme esas alınmıştır."
+        },
+        { "text": "Zarar giderilmediğinden etkin pişmanlık (TCK 168) uygulanmamıştır." }
+      ],
+      "legalBasis": "TCK 142/2-h, 143, 62/1, 168/2, 53, 63; CMK 273/1",
+      "xp": 0,
+      "howToReach": "Terditli savunma (önce beraat, aksi halde lehe hükümler) meşru yoldur; sahte ikrar asla.",
+      "ethicsCard": "Masum olduğunu söyleyen müvekkili suçu üstlenmeye yönlendirdin (Av.K. md. 34; TBB Meslek Kuralları). Gerçeğe aykırı ikrar TCK 270 kapsamında ayrı suç olabilir."
+    },
+    {
+      "id": "BERAAT_B",
+      "class": "ACQUITTAL",
+      "priority": 2,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "flag": "contra_s4_hts" },
+          { "hasEvidence": "ded_iz_murat" },
+          { "flag": "murat_theory" },
+          { "ref": "alibi" },
+          { "flag": "contra_s2" },
+          { "not": { "flag": "illegal_presented" } },
+          { "cmp": [{ "var": "pers" }, ">=", 8] },
+          { "cmp": [{ "score": "final" }, ">=", 3600] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok · Tahliye",
+      "verdictText": "Sanık Kerem Aydın’ın üzerine atılı suçu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; başka suçtan tutuklu değilse derhal TAHLİYESİNE; CMK 141/1-e uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142/2 ile 6384 sayılı Kanuna göre yapılabileceğinin bildirilmesine (CMK 231/3); karar ve dosya örneklerinin Murat Koç ve Selin Kaya hakkındaki soruşturmaya eklenmek üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; istinaf yolu açık olmak üzere.",
+      "reasoning": [
+        { "text": "Sanığın mazereti 22.57 tarihli fiş ve yeminli tanık Hüseyin Tan’ın beyanıyla ispatlanmıştır." },
+        {
+          "text": "Tanığın teşhisi; belediye arıza kaydı, sonradan değiştirilmiş vardiya çizelgesi ve CMK 135/6 uyarınca elde edilen iletişim kayıtları karşısında çökmüştür."
+        },
+        { "text": "Olay yerindeki bot izi, Murat Koç’a zimmetli 42 numara iş botuyla örtüşmektedir." },
+        {
+          "when": { "flag": "key_excluded" },
+          "text": "Depo anahtarı hukuka aykırı aramayla elde edildiğinden hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2, 230/1-b)."
+        },
+        {
+          "when": { "flag": "fp_neutralized" },
+          "text": "Kapı kolundaki parmak izi, sanığın 19.30’da yaptığı taşıma işiyle açıklanmıştır."
+        },
+        { "text": "Bu deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir." }
+      ],
+      "legalBasis": "CMK 223/2-b; CMK 141/1-e, 142/2, 231/3; Anayasa 38/6; CMK 206/2-a, 217/2, 230/1-b",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 12] }, 200] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 12] }, 100] }
+        }
+      },
+      "howToReach": "Mazeret + çöken teşhis + yasal HTS ile Selin–Murat bağlantısını birleştir; esas savunmada gerçek faili göster."
+    },
+    {
+      "id": "BERAAT_E",
+      "class": "ACQUITTAL",
+      "priority": 3,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "cmp": [{ "var": "pers" }, ">=", 6] },
+          { "any": [{ "flag": "contra_s2" }, { "ref": "alibi" }] },
+          { "ref": "findings2" },
+          {
+            "any": [
+              { "cmp": [{ "score": "final" }, ">=", 3200] },
+              { "all": [{ "ref": "alibi" }, { "flag": "contra_s2" }, { "cmp": [{ "score": "final" }, ">=", 2600] }] }
+            ]
+          }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok · Tahliye",
+      "verdictText": "Sanık Kerem Aydın’ın üzerine atılı suçu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; başka suçtan tutuklu değilse derhal TAHLİYESİNE; CMK 141/1-e uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142/2 ile 6384 sayılı Kanuna göre yapılabileceğinin bildirilmesine (CMK 231/3); istinaf yolu açık olmak üzere karar verildi.",
+      "reasoning": [
+        {
+          "when": { "all": [{ "flag": "contra_s2" }, { "hasEvidence": "ev_ariza_kaydi" }] },
+          "text": "Tanığın teşhisi, olay gecesi sokak lambasının arızalı olduğunu gösteren belediye kaydı karşısında güvenilirliğini yitirmiştir."
+        },
+        {
+          "when": { "all": [{ "flag": "contra_s2" }, { "not": { "hasEvidence": "ev_ariza_kaydi" } }] },
+          "text": "Tanığın teşhisi, kollukta yüzünü seçemediğini söylediği önceki beyanı karşısında güvenilirliğini yitirmiştir."
+        },
+        {
+          "when": { "ref": "alibi" },
+          "text": "Sanığın mazereti, 22.57 tarihli fiş ve tanık Hüseyin Tan’ın beyanıyla desteklenmiştir."
+        },
+        {
+          "when": { "not": { "flag": "key_excluded" } },
+          "text": "Depo anahtarı tüm vardiyaya verilmiş olup tek başına sanıkla irtibat kurmamaktadır."
+        },
+        {
+          "when": { "flag": "key_excluded" },
+          "text": "Depo anahtarı tüm vardiyaya verilmiş olup tek başına sanıkla irtibat kurmamaktadır; ayrıca hukuka aykırı aramayla elde edilmiştir (Anayasa 38/6, CMK 206/2-a, 217/2)."
+        },
+        { "text": "Kapı kolundaki parmak izi tek başına sanıkla olay arasında irtibat kurmamaktadır." },
+        {
+          "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2)."
+        }
+      ],
+      "legalBasis": "CMK 223/2-e; Anayasa 38/4; AİHS 6/2; CMK 141/1-e, 142/2, 231/3",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 1] }, 20] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 1] }, 10] }
+        }
+      },
+      "howToReach": "S2’yi çürüt ya da mazereti duruşmada ispatla; anahtarın hukuka aykırı aramayla elde edildiğini ileri sür."
+    },
+    {
+      "id": "INDIRIM",
+      "class": "REDUCED",
+      "priority": 4,
+      "when": {
+        "all": [{ "not": { "flag": "cokus" } }, { "flag": "arg_142_2d" }, { "cmp": [{ "score": "final" }, ">=", 2000] }]
+      },
+      "stamp": "İNDİRİM",
+      "stampTone": "amber",
+      "sentence": "6 yıl 3 ay hapis",
+      "verdictText": "Sanık Kerem Aydın’ın cezalandırılmasına: TCK 142/2-h uyarınca takdiren alt sınırdan 5 YIL; gece vakti nedeniyle TCK 143 ile 7 YIL 6 AY; sanığın duruşmadaki tutum ve davranışları lehine takdiri indirim nedeni sayılarak TCK 62/1 ile 6 YIL 3 AY HAPİS; işverence teslim edilen anahtar ‘haksız yere elde bulundurulan’ nitelikte olmadığından TCK 142/2-d’nin uygulanmasına yer olmadığına; TCK 53; TCK 63; cezanın süresi nedeniyle HAGB (CMK 231/5) ve erteleme (TCK 51/1) koşulları bulunmadığına; tutukluluğun devamına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "reasoning": [
+        {
+          "text": "Eylem bina içinde muhafaza edilen eşyaya yönelik (TCK 142/2-h) ve gece vakti (TCK 143) işlenmiştir."
+        },
+        {
+          "text": "İşverence teslim edilen anahtar ‘haksız yere elde bulundurulan’ nitelikte olmadığından TCK 142/2-d’nin unsurları oluşmamıştır."
+        },
+        {
+          "when": { "flag": "closing_lehe" },
+          "text": "Savunmanın terditli talebi doğrultusunda temel ceza alt sınırdan belirlenmiş ve TCK 62/1 uygulanmıştır."
+        }
+      ],
+      "legalBasis": "TCK 142/2-h, 143, 62/1, 53, 63; CMK 231/5; TCK 51/1; CMK 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 85] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
+        }
+      },
+      "howToReach": "Ek savunmada 142/2-d’nin unsurlarının oluşmadığını savun."
+    },
+    {
+      "id": "MAHKUMIYET",
+      "class": "CONVICTION",
+      "priority": 5,
+      "when": { "all": [] },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "sentence": "7 yıl 6 ay hapis",
+      "verdictText": "Sanık Kerem Aydın’ın üzerine atılı nitelikli hırsızlık suçundan 7 YIL 6 AY HAPİS cezası ile cezalandırılmasına; TCK 53; TCK 63; tutukluluğun devamına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).",
+      "reasoning": [
+        {
+          "when": { "not": { "flag": "arg_142_2d" } },
+          "text": "142/2-d ve h birlikte, zararın ağırlığı gözetilerek alt sınırdan uzaklaşılarak 6 YIL; TCK 143 ile 9 YIL; TCK 62/1 ile 7 YIL 6 AY HAPİS; TCK 53; TCK 63; tutukluluğun devamına; istinaf."
+        },
+        {
+          "when": { "flag": "arg_142_2d" },
+          "text": "Yalnızca TCK 142/2-h uyarınca, zararın ağırlığı gözetilerek alt sınırdan uzaklaşılarak 6 YIL; TCK 143 ile 9 YIL; TCK 62/1 ile 7 YIL 6 AY HAPİS; işverence teslim edilen anahtar nedeniyle TCK 142/2-d’nin uygulanmasına yer olmadığına; TCK 53; TCK 63; tutukluluğun devamına; istinaf."
+        },
+        {
+          "when": { "flag": "cokus" },
+          "text": "Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı."
+        }
+      ],
+      "legalBasis": "TCK 142/2-d, h, 143, 62/1, 53, 63; CMK 273/1",
+      "xp": {
+        "if": {
+          "when": { "flag": "cokus" },
+          "then": {
+            "if": {
+              "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+              "then": { "div": [{ "mul": [{ "score": "final" }, 3] }, 200] },
+              "else": { "div": [{ "mul": [{ "score": "final" }, 3] }, 100] }
+            }
+          },
+          "else": {
+            "if": {
+              "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+              "then": { "div": [{ "mul": [{ "score": "final" }, 6] }, 200] },
+              "else": { "div": [{ "mul": [{ "score": "final" }, 6] }, 100] }
+            }
+          }
+        }
+      },
+      "howToReach": "Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir. Dayanaksız itiraz ve yanlış delil güvenilirliği eritir; hukuka aykırı delil iki kalp götürür."
+    }
+  ]
+}

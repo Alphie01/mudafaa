@@ -57,3 +57,16 @@ Ana menüdeki "Müvekkilim masum, Sayın Hâkim!" balonu davadan bağımsız bir
 
 ## Plan A sırasında eklenenler (incelemeye dahil)
 - Duruşmadaki İTİRAZ! butonu için tanık ifadesine yönelik itiraz gerekçeleri: `g_duyum` (tanığın kendi gözlemi yerine başkasının söylediğini aktarması), `g_kanaat` (kişisel kanaat), `g_telkin` (telkin edici soru, CMK 201/1). S4 × g_duyum doğru kabul edilir; dayanaksız itiraz ♥−1. (Plan A Task 20)
+  - İnceleme sorusu: Türk ceza muhakemesinde "duyuma dayalı tanıklık" ve "kişisel kanaat" için ayrı bir itiraz kurumu yoktur; delilin değerlendirilmesi (CMK 217) ve doğrudan doğruyalık (CMK 210) çerçevesinde bu gerekçelerin oyunda "itiraz" olarak sunulması uygun mu, yoksa "beyana karşı diyecek" (CMK 215) olarak mı adlandırılmalı?
+  - Kural: S4 × `g_duyum` → Sorgulama +50, heyet iknası +1 (İtiraz isabeti x/7 sayacına girmez); diğer her gerekçe/ifade eşleşmesi → ♥−1, −50 (Hatalı delil satırı), "Dayanaksız itiraz.".
+
+### İçerik yazımında metni değişen ya da eklenen yerler (Plan A Task 19–20)
+Kaynak taslakta (docs/content/dava-07.md) metni verilmeyen ya da `…` ile kısaltılmış yerler aşağıdaki gibi dolduruldu; hepsi incelemeye dahildir:
+
+1. **Görüşme yanıtları:** Tasarımdaki cevaplar A.2'deki bilgilerle birleştirildi: "O gece" cevabına 19.30'daki top taşıma eklendi; "Anahtar" cevabına "Sabah Selin abla çantamı elimden alıp açtı" (sert tonda ayrıca "Vardiyası gece bitmişti, sabah orada ne işi vardı?"); "Hüseyin abi" cevabına "cüzdan annemde". Kapıdaki Saniye Aydın: "oğlum sigara bile içmez… 39 numara".
+2. **Strateji ipuçları (Dosya ekranı):** çarpanlar (×1,5 / ×1,2 / ×0,8) yalnızca stratejiyle uyumlu esas savunma puanına uygulanır (A.9 #17); "Ceza indirimi" ipucu terditli savunma olarak yazıldı (A.9 #4).
+3. **Hüküm metinlerindeki boşluklar:** İKRAR "Sanık … ikrarı da dikkate alınarak cezalandırılmasına: TCK 142/2-h … "; İNDİRİM'deki "…" yerine "sanığın duruşmadaki tutum ve davranışları lehine takdiri indirim nedeni sayılarak TCK 62/1 ile"; MAHKÛMİYET genel hüküm cümlesi + A/B varyant metinleri ve çöküş notu gerekçe parçası olarak; BERAAT_E'nin koşullu gerekçe parçaları (arıza kaydı / önceki beyan, mazeret, anahtar, parmak izi, Anayasa 38/4 ve AİHS 6/2).
+4. **Duruşma metinleri:** açılış (CMK 191: sanık bağsız, tanıklar dışarıda, ara karar cevapları), tanığın kimlik tespiti ve yalan tanıklık uyarısı (CMK 58), başkanın CMK 48 hatırlatması (C_06H), savcının iki mütalaa metni (beraat + suç duyurusu / 142/2-d, h, 143, 53, tutukluluğun devamı), cevap hakkı (CMK 216/2), son söz (CMK 216/3), hükmün ayakta dinlenmesi (CMK 231/4).
+5. **Tanık ifadesi S4'e eklenen satır:** BASTIR B'den sonra görünen "Murat Koç'u… pek tanımam." satırı; CMK 135/6 kaydı (ev_hts) bu satıra sunulduğunda doğru kabul edilir.
+6. **Delil dilekçesi ret gerekçeleri:** "Tanık Selin Kaya'nın HTS kaydı" → CMK 135/6 yalnızca şüpheli ve sanığın iletişimini kapsar; "Olay yerinde keşif" → lamba onarıldı, sokak değişti.
+7. **Tanık ziyaretleri:** Selin'e "baskı yap" seçeneğinin geri bildirimi TCK 277; Hüseyin'e "yazılı beyan yeter" → CMK 210/1.

@@ -1,0 +1,106 @@
+{
+  "scenes": [
+    {
+      "id": "sc_depo_sokagi",
+      "title": "Depo Sokağı · 13 Mart olay yeri fotoğrafları",
+      "description": "13 Mart 08.40’ta çekilen olay yeri fotoğrafları.",
+      "width": 344,
+      "height": 380,
+      "image": "img_depo_sokagi",
+      "objects": [
+        {
+          "id": "ob_lamba",
+          "name": "Sokak lambası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 244, "y": 44, "w": 64, "h": 52 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ampul" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Lamba ampulü kararmış, camı tozlu. Uzun süredir yanmıyor gibi.",
+            "short": "Lamba ampulü kararmış"
+          }
+        },
+        {
+          "id": "ob_kamera",
+          "name": "Güvenlik kamerası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 144, "y": 76, "w": 56, "h": 90 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kablo" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Kamera kablosu temiz bir kesikle kesilmiş, üstü bantlanmış. Bu bir kopma değil.",
+            "short": "Kamera kablosu kesilmiş"
+          }
+        },
+        {
+          "id": "ob_iz",
+          "name": "Yerdeki izler",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 180, "y": 302, "w": 60, "h": 66 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_iz42" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Çamurda 42 numara bot izi var, depodan sokağa doğru gidiyor. Ölçekli fotoğrafta iz 28,5 cm.",
+            "short": "Çamurda 42 numara bot izi"
+          },
+          "badge": "42"
+        },
+        {
+          "id": "ob_cop",
+          "name": "Çöp kutusu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 292, "y": 236, "w": 52, "h": 62 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_izmarit" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Çöp kutusunda taze bir izmarit. Kerem sigara içmiyor. İzmarit Emanet No. 3 olarak alınmış ama incelemeye gönderilmemiş.",
+            "short": "Çöpte taze izmarit"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_olay_yeri_depo",
+      "title": "Olay Yeri: Depo",
+      "description": "Soruşturma ekranındaki olay yeri önizlemesi.",
+      "width": 344,
+      "height": 214,
+      "image": "img_olay_yeri_depo",
+      "objects": [
+        {
+          "id": "pv_lamba",
+          "name": "Sokak lambası",
+          "marker": "VISIBLE",
+          "shapes": [{ "rect": { "x": 270, "y": 46, "w": 44, "h": 44 } }],
+          "feedback": { "text": "İncelenmemiş nokta: sokak lambası.", "short": "Sokak lambası" }
+        },
+        {
+          "id": "pv_kamera",
+          "name": "Kamera",
+          "marker": "VISIBLE",
+          "shapes": [{ "rect": { "x": 300, "y": 160, "w": 44, "h": 44 } }],
+          "feedback": { "text": "İncelenmemiş nokta: kamera.", "short": "Kamera" }
+        },
+        {
+          "id": "pv_kapi",
+          "name": "Depo kapısı",
+          "marker": "VISIBLE",
+          "shapes": [{ "rect": { "x": 78, "y": 100, "w": 44, "h": 44 } }],
+          "feedback": { "text": "Depo 3’ün kapısı.", "short": "Depo kapısı" }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "id": "img_depo_sokagi", "kind": "IMAGE", "path": "assets/scenes/depo-sokagi@4x.png" },
+    { "id": "img_olay_yeri_depo", "kind": "IMAGE", "path": "assets/scenes/olay-yeri-depo@4x.png" }
+  ]
+}

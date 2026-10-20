@@ -1,0 +1,362 @@
+{
+  "assets": [
+    { "id": "img_ofis", "kind": "IMAGE", "path": "assets/scenes/ofis@4x.png" },
+    { "id": "img_mutfak", "kind": "IMAGE", "path": "assets/scenes/mutfak@4x.png" },
+    { "id": "img_ev", "kind": "IMAGE", "path": "assets/scenes/emir-oda@4x.png" },
+    { "id": "img_durak", "kind": "IMAGE", "path": "assets/scenes/iskele-durak@4x.png" }
+  ],
+  "scenes": [
+    {
+      "id": "sc_ofis",
+      "title": "Toker Balık · ofis · olay yeri fotoğrafları",
+      "description": "Cinayet Büro’nun 00.40’ta başlayan çekimi; 46 kare.",
+      "width": 344,
+      "height": 380,
+      "image": "img_ofis",
+      "objects": [
+        {
+          "id": "ob_bicak",
+          "name": "Halıdaki bıçak",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 270, "w": 70, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_bicak_ofiste" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Kare 17. Fileto bıçağı halının üstünde, masanın ayağının dibinde; sapı kapıya dönük. Ofisten koşarak çıkan birinin elinde olsaydı burada olmazdı.",
+            "short": "Bıçak ofiste"
+          }
+        },
+        {
+          "id": "ob_onluk",
+          "name": "Koridordaki askı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 14, "y": 90, "w": 50, "h": 120 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_onluk" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Kare 31. Mutfak koridorunda bir askı sırası; birinin üstünde tükenmez kalemle “EMİR”. Beyaz önlük asılı, katlanmamış, lekesiz. Laboratuvar da kan bulmamış.",
+            "short": "Önlük askıda, temiz"
+          }
+        },
+        {
+          "id": "ob_blok",
+          "name": "Masadaki not bloğu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 170, "y": 150, "w": 56, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_not_bloku" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Kare 22. Spiralli bir not bloğu; üst sayfa koparılmış, spiralde kâğıt kırpıntıları kalmış. Masada başka kâğıt yok. Kalemin kapağı açık.",
+            "short": "Koparılmış sayfa"
+          }
+        },
+        {
+          "id": "ob_beyaz",
+          "name": "Şeridin dışı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 272, "y": 60, "w": 60, "h": 130 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_beyaz" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }
+          ],
+          "feedback": {
+            "text": "Kare 44, saat 00.52. Şeridin dışında işletme ortağı; bir polis memuruyla konuşuyor. Beyaz gömleği ütülü, yakası düzgün. Arka planda bir kare, kimsenin bakmadığı türden.",
+            "short": "Beyaz gömlekli ortak"
+          }
+        },
+        {
+          "id": "ob_raki",
+          "name": "Rakı kadehi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 240, "y": 150, "w": 26, "h": 40 } }],
+          "effects": [{ "type": "DISCOVER", "evidence": "clue_raki" }],
+          "feedback": {
+            "text": "Kare 9. Masada dolu bir rakı kadehi, buzu erimiş. Otopsi: maktulün kanında alkol yok. Üç yıldır içmiyormuş; kadehi kim, kimin için koydu?",
+            "short": "Dolu kadeh"
+          }
+        },
+        {
+          "id": "ob_dvr",
+          "name": "Kayıt cihazı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 90, "y": 24, "w": 60, "h": 34 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_dvr", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Kare 6. Rafta kamera kayıt cihazı; ışıkları sönük. Tutanakta tek satır: “Cihaz çalışmıyor, kayıt bulunamadı.” Cihaz açılmamış, incelenmemiş, yalnızca kapalı bulunmuş.",
+            "short": "Kapalı DVR"
+          }
+        },
+        {
+          "id": "ob_akvaryum",
+          "name": "Akvaryum",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 80, "y": 300, "w": 60, "h": 50 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 },
+            {
+              "type": "MARK",
+              "quality": "NEUTRAL",
+              "feedback": "Akvaryum olayla ilgili bir şey söylemiyor; bir büyüteç hakkı gitti."
+            }
+          ],
+          "feedback": {
+            "text": "Kare 12. Köşede bir akvaryum; içinde iki çipura, oyuncak bir batık gemi. Balıklar bir şey görmüştür belki. İfade vermiyorlar.",
+            "short": "Akvaryum"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_mutfak",
+      "title": "Toker Balık · mutfak",
+      "description": "Servis öncesi; kızgın yağ, buz, bağıran bir şef.",
+      "width": 344,
+      "height": 380,
+      "image": "img_mutfak",
+      "objects": [
+        {
+          "id": "ob_tahta",
+          "name": "Beyaz tahta",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 30, "w": 120, "h": 80 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_nisan" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Silinmeye yüz tutmuş bir yazı, çarşamba tarihli: “CUMA 120 KİŞİ NİŞAN — HERKES BIÇAĞINI BİLEYLESİN!” Altında yedi ad, yedi tik. Altıncı ad: Emir.",
+            "short": "Bileme talimatı"
+          }
+        },
+        {
+          "id": "ob_istasyon",
+          "name": "Emir’in istasyonu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 160, "y": 170, "w": 90, "h": 50 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_istasyon", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Paslanmaz bir tezgâh, bir kesme tahtası, duvarda mıknatıslı bir şerit. Şef: “Çantası burada kalmıştı o gece. Bıçağı tahtanın üstünde. Kim alırsa alır.”",
+            "short": "Bıçak tezgâhta kaldı"
+          }
+        },
+        {
+          "id": "ob_kapi",
+          "name": "Arka kapı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 270, "y": 60, "w": 60, "h": 150 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_arka_kapi", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Arka kapı çöp kovalarına açılıyor; yanında bulaşıkhanenin buğulu penceresi. Koridor ofisin önünden geçiyor. Buradan çıkan, bulaşıkçının iki metre önünden geçer.",
+            "short": "Bulaşıkhanenin önü"
+          }
+        },
+        {
+          "id": "ob_kasa",
+          "name": "Kasa",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 250, "w": 80, "h": 60 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_z", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Yazar kasa, yanında rulo kâğıt. Şef: “Her gece kapanışta Z raporu basılır; makine saatini kendi yazar. Kasayı Tarık Bey kapatır, başka kimse dokunmaz.”",
+            "short": "Z raporu"
+          }
+        },
+        {
+          "id": "ob_dolap",
+          "name": "Personel dolapları",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 30, "w": 100, "h": 90 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 10 },
+            { "type": "VAR", "var": "fact_dolap", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Altı metal dolap, kapılarında adlar. Şef: “Mutfakta leke çıkmaz; herkesin dolabında yedek bir üst olur. Benimkinde üç tane.”",
+            "short": "Yedek giysiler"
+          }
+        },
+        {
+          "id": "ob_buz",
+          "name": "Buz makinesi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 300, "w": 100, "h": 60 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Buz makinesi homurdanıyor. Şef: “Ona dokunma, bozuk, yarın servis gelecek.” Bu mutfakta bozuk olan her şeye yarın servis gelir.",
+            "short": "Buz"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_ev",
+      "title": "Yalçınların evi · Emir’in odası",
+      "description": "Hamitler’de üçüncü kat; bir terzi annenin evi.",
+      "width": 344,
+      "height": 380,
+      "image": "img_ev",
+      "objects": [
+        {
+          "id": "ob_tas",
+          "name": "Masadaki bileği taşı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 240, "w": 70, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_tas" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Yeni bir bileği taşı, kutusunda. Kutunun içine katlanmış bir ekran çıktısı: şefin çarşamba sabahki grup mesajı. “Cuma nişan, 120 kişi. Herkes taşını alsın, bıçaklar bileylensin.”",
+            "short": "Taş ve şefin mesajı"
+          }
+        },
+        {
+          "id": "ob_saat",
+          "name": "Duvardaki sefer saatleri",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 200, "y": 40, "w": 70, "h": 90 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_otobus", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Duvara iğnelenmiş bir 1/M sefer çizelgesi: Mudanya İskele – Emek. Son seferin altı kalemle çizilmiş: 23.52. Meral: “Hep o otobüse koşardı. Kartını da hep o okuturdu.”",
+            "short": "Son sefer 23.52"
+          }
+        },
+        {
+          "id": "ob_set",
+          "name": "Bıçak seti kutusu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 140, "y": 230, "w": 80, "h": 40 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_set", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Ahşap bir kutu, beş yuva; biri boş. Kapağın içinde pirinç bir levha: “E.Y. — Babandan, okul bitti.” Meral: “Kemal üç ay fazla mesai yaptı bunun için.”",
+            "short": "Babasının hediyesi"
+          }
+        },
+        {
+          "id": "ob_boks",
+          "name": "Kapı arkası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 290, "y": 150, "w": 40, "h": 70 } }],
+          "effects": [{ "type": "DISCOVER", "evidence": "clue_boks" }],
+          "feedback": {
+            "text": "Kapının arkasında bir çift boks eldiveni, derisi çatlamış. Meral: “Lisede iki ay gitti, sonra burnu kanadı, bıraktı. Kan görünce bayılır o.”",
+            "short": "Eski eldivenler"
+          }
+        },
+        {
+          "id": "ob_diploma",
+          "name": "Çerçeveli diploma",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 50, "w": 80, "h": 60 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 10 },
+            { "type": "VAR", "var": "fact_solak", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Aşçılık meslek lisesi diploması; altında bir fotoğraf: önlüklü bir çocuk, sol elinde bir kepçe. Meral: “Solaktır. Bıçakları bile sol ele göre alırdık.”",
+            "short": "Solak"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_durak",
+      "title": "Mudanya İskele durağı · gece",
+      "description": "Yağmurda bir otobüs durağı; deniz on adım ötede.",
+      "width": 344,
+      "height": 380,
+      "image": "img_durak",
+      "objects": [
+        {
+          "id": "ob_tabela",
+          "name": "Yönlendirme tabelası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 80, "w": 70, "h": 110 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_mesafe" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Belediyenin kahverengi tabelası: “Balıkçı barınağı – Toker Balık 700 m.” Meyhanenin arka kapısından buraya yürüdüm; telefonumun kronometresi dokuz dakika on saniye dedi.",
+            "short": "Dokuz dakika"
+          }
+        },
+        {
+          "id": "ob_cizelge",
+          "name": "Sefer çizelgesi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 140, "y": 100, "w": 80, "h": 90 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_sefer", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Camın arkasında sefer çizelgesi: 1/M’nin son kalkışı 23.52. Altında bir not: “Son seferden sonra İskele’den Bursa’ya toplu taşıma yoktur.”",
+            "short": "Son 1/M 23.52"
+          }
+        },
+        {
+          "id": "ob_kamera",
+          "name": "Durak kamerası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 260, "y": 20, "w": 50, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_durak_kamera" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }
+          ],
+          "feedback": {
+            "text": "Direkte belediyenin kamerası. Bilgi levhası: “Kayıtlar 7 gün saklanır.” Üç ay geçti. Kimse yedi gün içinde istememiş.",
+            "short": "Kayıt yok"
+          }
+        },
+        {
+          "id": "ob_bank",
+          "name": "Bank",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 110, "y": 260, "w": 140, "h": 40 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Islak bir bank; üstüne çakıyla kazınmış adlar, kalpler, bir takım arması. Bir gece yarısı burada oturan biri ne düşünür? Otobüsü.",
+            "short": "Bank"
+          }
+        }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_bicak_ofiste", "source": { "type": "OBJECT", "id": "ob_bicak" } },
+    { "evidence": "clue_onluk", "source": { "type": "OBJECT", "id": "ob_onluk" } },
+    { "evidence": "clue_not_bloku", "source": { "type": "OBJECT", "id": "ob_blok" } },
+    { "evidence": "clue_beyaz", "source": { "type": "OBJECT", "id": "ob_beyaz" } },
+    { "evidence": "clue_raki", "source": { "type": "OBJECT", "id": "ob_raki" } },
+    { "evidence": "clue_nisan", "source": { "type": "OBJECT", "id": "ob_tahta" } },
+    { "evidence": "clue_tas", "source": { "type": "OBJECT", "id": "ob_tas" } },
+    { "evidence": "clue_boks", "source": { "type": "OBJECT", "id": "ob_boks" } },
+    { "evidence": "clue_mesafe", "source": { "type": "OBJECT", "id": "ob_tabela" } },
+    { "evidence": "clue_durak_kamera", "source": { "type": "OBJECT", "id": "ob_kamera" } }
+  ]
+}

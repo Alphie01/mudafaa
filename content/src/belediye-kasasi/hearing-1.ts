@@ -289,6 +289,7 @@ orhan: Müdür yardımcımız. Müdürümüz raporluyken. İyilik yapıyordu.
           next: '$stay',
         }),
         option('Q_KREDI', '“Krediyi neyle kapattınız?”', {
+          effects: [inc('pers')],
           visibleWhen: any(flag('fact_kredi'), has('ev_tapu')),
           score: { SORGULAMA: 20 },
           responses: B(`
@@ -630,6 +631,40 @@ ercan: Haklısınız efendim. Kusura bakmayın; ağzımdan çıktı.
 baskan: Not edildi. Tanığın bu beyanının duyuma dayandığı tutanağa geçsin. Teknik husus gerekirse uzmanından sorulacak.
 `),
         }),
+        presentRule('PS_E2_IZIN', 'E2', ['ded_izin'], {
+          score: { SORGULAMA: 150 },
+          effects: [inc('pers')],
+          good: 'İzin günü: sanık 9 Ocak’ta hiç işe gelmemiş; o akşam da kullanıcısıyla iptal var. “Altıya kadar çıkmazdı” beyanı bir günde bile tutmuyor.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Tanık, 9 Ocak’ta sanık yıllık izindeydi; turnikede giriş bile yok. Aynı akşam 17.46’da onun kullanıcısıyla iki iptal yapılmış. O akşam da altıya kadar mı kaldı?
+ercan: İzinde olduğunu bilmiyordum efendim. İzinleri müdürlük onaylar; ben onaylamış olabilirim. Hatırlamıyorum.
+`),
+        }),
+        presentRule('PS_E1_DEFTER', 'E1', ['ev_defter'], {
+          score: { SORGULAMA: 100 },
+          neutral:
+            'Kısmi isabet: defter sanığın saydığı tutarı gösterir; ama tutanakla karşılaştırılmadıkça teslimden sonraki eksilmeyi tek başına kanıtlamaz.',
+          responses: B(`
+- Sanığın kendi kasa defteri. Her akşamın toplamı, kurşun kalemle.
+ercan: Kişisel bir defter efendim. Resmî kayıt tutanaktır. Kâğıt neyse odur.
+~ Bir defter bir tutanağın karşısında tek başına zayıf durur. İkinci bir nüsha lazımdı.
+`),
+        }),
+        presentRule('PS_E3_YONERGE', 'E3', ['ev_yonerge'], {
+          neutral:
+            'Yönerge kuralı söyler; kuralın çiğnenip çiğnenmediğini söylemez. Tanığın beyanıyla çelişmiyor, aksine onu destekliyor.',
+          responses: B(`
+ercan: Evet efendim. Yönerge bu. Ben de bunu söylüyorum. Teşekkür ederim.
+~ Tanığa kendi kalkanını uzattım.
+`),
+        }),
+        presentRule('PS_E_MAKBUZ', undefined, ['ev_makbuz'], {
+          neutral: 'Makbuz iptalin varlığını gösterir; kimin yaptığını göstermez.',
+          responses: B(`
+ercan: Hayri Bey’in makbuzu efendim. Ben kendisine çay da ikram etmiştim. Üzücü bir olay.
+`),
+        }),
         presentRule('PS_SAVCILIK', undefined, ['ev_teftis', 'ev_tutanak', 'ev_banka', 'ev_ercan_ifade'], {
           maxUses: 10,
           effects: [...wrongMove, score('SORGULAMA', -150, 'hatali')],
@@ -822,6 +857,71 @@ nazan: Akşam beraber yeriz dediniz. Bir ay sonra mı yiyeceğiz?
       ],
       choices: [cont('H106_DEVAM', 'Asansöre yürü', 'H1_07', { role: 'PRIMARY' })],
     }),
+    decisionNode('H1_08G', [{ to: 'H1_08' }], {
+      ...H1,
+      title: 'Akşam',
+      lines: [
+        W(
+          atLeast(2, flag('contra_e2'), flag('contra_e3'), flag('contra_e4')),
+          `
+# AKŞAM 20.10 — ARSLAN HUKUK [bg:buro_gece]
+> Leyla tutanağın fotokopisini okuyordu; kırmızı kalemle değil, kurşun kalemle. Kurşun kalem Leyla’da bir övgüdür: silinebilir, demek ki düzeltilecek bir şey yok.
+leyla: Üç kâğıt, üç cümle. Adam üçünde de “yanlış hatırlamışım” dedi. Bir insan bir günde üç kez yanlış hatırlarsa, ya çok yorgundur ya çok dikkatlidir.
+leyla: Hangisi olduğunu sen söyleme. Kâğıtlar söylesin.
+`,
+        ),
+        W(
+          flag('h1_telkin'),
+          `
+# AKŞAM 20.10 — ARSLAN HUKUK [bg:buro_gece]
+> Leyla tutanağı okudu, bir yerde durdu: savcının “değil mi” diye biten sorusu.
+leyla: O itiraz iyiydi. Küçük görünür; ama bir tanığın kendi cümlesini kurmasını sağladın. Kendi cümlesini kuran tanık, o cümlenin altında kalır.
+`,
+        ),
+        O(`
+# AKŞAM 20.10 — ARSLAN HUKUK [bg:buro_gece]
+> Leyla tutanağı okudu, bir şey demeden bıraktı. Pencereden aşağı baktı; yağmur, otobüs, bir simitçinin naylonu.
+leyla: Bir celse kaybedilmez Deniz. Bir celse yalnızca bir şey öğretir. Bugün ne öğrendin?
+`),
+      ],
+    }),
+    story('H1_08', {
+      ...H1,
+      title: 'Akşam',
+      background: 'buro_gece',
+      lines: [
+        W(
+          any(flag('h1_kasa'), flag('h1_pdks'), flag('h1_ticket')),
+          `
+leyla: Taleplerin bir kısmını kürsüde, son anda istedin. Mahkeme kabul etti; bu sefer. Her sefer etmez. Dilekçe, kürsüde nefes nefese kalmamak içindir.
+leyla: Şimdi bir ay var. Cevaplar gelecek, bilirkişi çalışacak, insanlar seni arayacak. Herkes bir şey söyleyecek; bazıları seni bir yere götürmek için.
+~ Leyla’nın her cümlesi bir uyarı. Hangisinin kime dair olduğunu söylemiyor.
+`,
+        ),
+        O(`
+leyla: Şimdi bir ay var. Cevaplar gelecek, bilirkişi çalışacak, insanlar seni arayacak. Herkes bir şey söyleyecek; bazıları seni bir yere götürmek için.
+leyla: Müvekkilinin karısı evi satmak istiyor. Bir tanığın asansörde sana söylediği bir cümle var. Bir de kasa. Kasanın kendisi. Unutma: para orada bir gece kaldı. O gece kasa kimdeydi?
+~ Leyla’nın her cümlesi bir uyarı. Hangisinin kime dair olduğunu söylemiyor.
+`),
+      ],
+      choices: [
+        option('H108_A', '“Bugün kayıtların ne söylediğini değil, kimin okumadığını öğrendim.”', {
+          responses: B(`
+leyla: Güzel. Okumayan çoktur. Savcı okumadı, müfettiş okumadı, sen de ilk gece okumadın. Okumak bir karar meselesidir; korkuyla değil.
+> Sigara paketini avucunda çevirdi. Bir kez. Sonra masaya bıraktı; ters çevirmeden.
+`),
+          next: 'ARA_GIRIS_1',
+        }),
+        option('H108_B', '“Kibar bir tanığın nasıl sustuğunu öğrendim.”', {
+          effects: [inc('trust', 2)],
+          responses: B(`
+leyla: Henüz susmadı Deniz. Kibar insanlar kolay susmaz; çünkü konuşmayı bir iş gibi yaparlar. Bir iş gibi de bırakırlar: sırası gelince, düzgünce.
+leyla: Sen ona sırayı getirmeye çalışma. Kâğıtları getir. Sıra kendiliğinden gelir.
+`),
+          next: 'ARA_GIRIS_1',
+        }),
+      ],
+    }),
     story('H1_07', {
       ...H1,
       title: 'Asansör',
@@ -834,7 +934,7 @@ ercan: İyi günler avukat hanım. Bir ay çabuk geçer.
 ~ Bir ay çabuk geçer. Bir tehdit değil. Bir hatırlatma bile değil. Bir müdür yardımcısının takvim bilgisi.
 ~ Yine de bütün gün kulağımda kaldı.
 `),
-      choices: [cont('H107_DEVAM', 'Bir ay', 'ARA_GIRIS_1', { role: 'PRIMARY' })],
+      choices: [cont('H107_DEVAM', 'Büroya dön', 'H1_08G', { role: 'PRIMARY' })],
     }),
   ],
   triggers: [

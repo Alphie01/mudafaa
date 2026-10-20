@@ -591,7 +591,8 @@
               ]
             }
           ],
-          "next": "INV_HUB"
+          "next": "INV_HUB",
+          "effects": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 4 }]
         },
         {
           "id": "AK2N_B",
@@ -828,6 +829,177 @@
             {
               "speaker": "player",
               "text": "Dilekçe vermedim. Yarın her şeyi kürsüde, son anda isteyeceğim. Son an, mahkemelerin en az sevdiği andır.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_7" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_7",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "ercan_zarf_inkar" }, { "hasEvidence": "ev_talimat" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Öyle bir uygulama bizde olmaz.” Müdür yardımcısının odasında, cebimde katlı bir kâğıtla dinledim bunu. Yarın kâğıt kürsüde açılacak.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "flag": "melek_zarf_inkar" }, { "hasEvidence": "ev_talimat" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Ne zarfı canım?” Melek çok hızlı söyledi. Hızlı “hayır”lar uzun bir “evet”in üstüne örtülmüş çarşaflardır.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "ercan_sistem" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Yalnızca vezne terminalinden girilir efendim.” Kendinden emin bir cümle. Bir makinenin cümlesi değil, bir müdür yardımcısının.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "ercan_ziyaret" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "İnce belli bir bardak, bir dolma kalem, bir babanın fotoğrafı. Kibar bir oda. Kalem bir tek kez sabırsızdı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Tanıkları kürsüde ilk kez göreceğim. Ne söyleyeceklerini bilmeden. Bu iyi değil; ama dürüst.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_8" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_8",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "fact_vz02" }, { "flag": "fact_onoda" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Vezne camının arkasında VZ-02. Buzlu camın arkasında bir monitörün mavi ışığı. İki bilgisayar, iki oda, bir kullanıcı adı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_talimat" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Bordroların arasına sıkıştırılmış bir kareli kâğıt. Orhan onu saklamamıştı; unutmak istemişti. Unutmak, saklamanın yorgun biçimidir.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_ercan_teslim" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Ocak başından beri ben alırdım efendim.” Torbaların son durağı. Kendisi söyledi; kibarca, bir bilgi verir gibi.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "İki oda, bir kasa, bir turnike. Bina bir şey biliyor; ben henüz bilmiyorum.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_9" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_9",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "any": [{ "flag": "fact_9ocak_log" }, { "flag": "fact_12subat" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "9 Ocak bir cuma. 12 Şubat bir perşembe. Bir hastane koridoru ve bir çorba kâsesi. İki akşam, iki iptal, aynı oda.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_hayri_dosya" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Dosyamı kendisi aldı, fotokopimi kendisi çekti.” Hayri Bey bunu bir nezaket örneği olarak anlattı. Ben de öyle not aldım. Şimdilik.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_borc_soylenti" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Kimseye söylemedim; ama herkes biliyordu.” Orhan’ın kredisini birisi koridorlara taşımış. Bir söylenti de bir kayıttır; yalnızca imzası yoktur.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "orhan_kirgin" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Korkmak başka, utanmak başka.” İlk gece Orhan’a ezberlenmiş bir cümle söyledim. O bana dosyanın ilk gerçek cümlesini söyledi.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "orhan_soz" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Anlatırım efendim. Söz.” Sözünü tuttu; zarfı anlattı. Yarın kürsüde de tutacak mı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Orhan’ın gözlüğünü silişi. Her seferinde, söyleyemediği bir cümleden önce.",
               "style": "thought"
             }
           ]

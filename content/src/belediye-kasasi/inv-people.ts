@@ -181,6 +181,7 @@ orhan/kizgin: Amirim hakkında konuşmam efendim. On dokuz yılda bir amirim hak
       },
     }),
     topic('TP_MELEK', 'Yan vezne', {
+      effects: [raise('fact_melek_orhan')],
       cost: costOf('min', 2),
       score: { SORGULAMA: 10 },
       tones: {
@@ -561,6 +562,7 @@ export const invPeople: CasePart = {
     'ercan_sistem',
     'fact_ercan_teslim',
     'ercan_zarf_inkar',
+    'fact_melek_orhan',
   ),
   nodes: [gorusmeGiris, gorusme, tHayri, tMelek, tErcan],
 };

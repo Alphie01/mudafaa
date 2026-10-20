@@ -168,7 +168,7 @@ c DIL_VER
 `);
 
 /** Tam soruşturma (3 gün × 4 EP). */
-const SORUSTURMA = [
+const sorusturma = (o: { baskasi?: boolean; dil?: boolean; tahta?: boolean } = {}) => [
   LOG,
   VEZNE,
   EV,
@@ -184,12 +184,9 @@ c LEYLA_DON
   PDKS,
   TUTANAK,
   A(`
-c H_CIKARIM
-m clue_terminal clue_cikis
-m clue_saat clue_izin
-m clue_defter clue_tutar_fark
-m clue_imza_kopya clue_basim
-c CIKARIM_BITIR
+${o.tahta === false ? '' : 'c H_CIKARIM'}
+${o.baskasi === false || o.tahta === false ? '' : 'm clue_terminal clue_cikis'}
+${o.tahta === false ? '' : 'm clue_saat clue_izin\nm clue_defter clue_tutar_fark\nm clue_imza_kopya clue_basim\nc CIKARIM_BITIR'}
 c H_LEYLA
 c LEYLA_DON
 `),
@@ -208,7 +205,7 @@ c H_LEYLA
 c LEYLA_DON
 `),
   GORUS2,
-  DIL3,
+  o.dil === false ? A('c H_LEYLA_YOK').slice(0, 0) : DIL3,
   A(`
 c H_DURUSMA
 c GECE_DEVAM
@@ -244,6 +241,7 @@ c H105_BITIR
 c H1ARA_DEVAM
 c H106_DEVAM
 c H107_DEVAM
+c H108_A
 `);
 
 const ARA_GUN1 = A(`
@@ -325,6 +323,7 @@ p M3
 s ev_pdks M3
 s ev_pdks_mud M4
 c T02_BITIR
+c T02K_DEVAM
 `);
 
 const KAPANIS_E = A(`
@@ -340,9 +339,9 @@ c L_HESAP
 
 const TIPIK = goldenPath(
   TYPICAL_PATH,
-  { outcome: 'BERAAT_E' },
+  { outcome: 'BERAAT_E', finalMin: 10460, finalMax: 11560 },
   PROLOG('BR00_A', 'STR_MASUMIYET'),
-  SORUSTURMA,
+  sorusturma(),
   CELSE1,
   ARA_GUN1,
   ARA_GUN2,
@@ -359,12 +358,267 @@ s ev_kasa R2
 s ev_ticket R3
 s ded_sahte_tutanak R4
 c T03T_BITIR
+c T03K_DEVAM
 `),
   KAPANIS_E,
 );
 
+const ARA_GUN1_B = A(`
+c ARA_GIRIS_DEVAM
+c A_KASA
+e log k_1202
+e mag k_01
+e mag k_sabah
+c KASA_BITIR
+c A_PDKS2
+e log d_ercan
+e log d_melek
+e log d_selim
+c PDKS2_BITIR
+c A_CIKARIM
+m clue_kod02 clue_ercan_cikis
+c ARA_CIKARIM_BITIR
+c A_LEYLA
+c ARA_LEYLA_DON
+c A_SUC
+c SUC_A
+c A_MELEK
+c MK_A
+c A_EV
+c EV_A
+c OT_A
+`);
+
+const G_B = goldenPath(
+  'G_B',
+  { outcome: 'BERAAT_B', finalMin: 10792, finalMax: 11928 },
+  PROLOG('BR00_A', 'STR_MASUMIYET'),
+  sorusturma(),
+  CELSE1,
+  ARA_GUN1_B,
+  BURAK,
+  TICKET,
+  A(`
+c A_ZARF
+e uv z_okilic
+e mag z_yer
+c ZARF_BITIR
+c A_CIKARIM
+m clue_ticket clue_zarf_uv
+c ARA_CIKARIM_BITIR
+`),
+  KESIF,
+  A(`
+c A_LEYLA
+c ARA_LEYLA_DON
+c A_DURUSMA
+c ARA_SON_DEVAM
+`),
+  BILIRKISI,
+  MELEK_H2,
+  A(`
+c T03_DEVAM
+p R1
+p R2
+p R3
+s ev_pdks_mud R1
+s ev_kasa R2
+s ev_ticket R3
+c T03S_DEVAM
+`),
+  KAPANIS_E,
+);
+
+/** Zarf ortaya çıkar, ama iptallerin başkasınca yapıldığı kurulmaz; terditli savunma → TCK 257/2. */
+const G_N = goldenPath(
+  'G_N',
+  { outcome: 'NITELENDIRME', finalMin: 7866, finalMax: 8694 },
+  PROLOG('BR00_B', 'STR_INDIRIM'),
+  sorusturma({ baskasi: false }),
+  A(`
+c H1K_B
+c H100_DEVAM
+c H101_A
+c H101S_DEVAM
+c Q_DEFTER
+c Q_KREDI
+c Q_BITIR
+c H102_A
+c H103_B
+p E1
+p E2
+p E3
+s ev_talimat E3
+s ded_kredi E5
+c H104_BITIR
+c H104K_DEVAM
+c H105_BITIR
+c H1ARA_DEVAM
+c H106_DEVAM
+c H107_DEVAM
+c H108_B
+`),
+  ARA_GUN1,
+  ARA_GUN2,
+  BILIRKISI,
+  A('c T01H_DEVAM'),
+  A(`
+p M1
+p M2
+c T02_BITIR
+c T02K_DEVAM
+c T03_DEVAM
+p R2
+s ev_kasa R2
+c T03T_BITIR
+c T03K_DEVAM
+c T04_B
+c T05_DEVAM
+c P_ZARF
+c P_KREDI
+c P_TUTANAK
+c P_BITIR
+c S_TERDIT
+c L_HESAP
+`),
+);
+
+/** Zayıf savunma: dilekçe yok, tahta yok, yanlış usul hamleleri → mahkûmiyet. */
+const ZAYIF_CELSE1 = A(`
+c H1K_B
+c H100_DEVAM
+c H101_D
+c H101S_DEVAM
+c Q_CIKIS
+c Q_EMIN
+c Q_BITIR
+c H102_B
+c H103_C
+p E1
+p E2
+p E3
+p E4
+c H104_BITIR
+c H104K_DEVAM
+c H105_BITIR
+c H1ARA_DEVAM
+c H106_DEVAM
+c H107_DEVAM
+c H108_B
+`);
+
+const ZAYIF_ARA = A(`
+c ARA_GIRIS_DEVAM
+c A_LEYLA
+c ARA_LEYLA_DON
+c A_MELEK
+c MK_B
+c A_EV
+c EV_C
+c A_HAYRI
+c HY_ISIM
+c A_BURAK
+c BK_KIM
+c BK_YEDEK
+c BK_C
+c OT_C
+c A_DIL
+c AD_MELEK
+c AD_VER
+c A_LEYLA
+c ARA_LEYLA_DON
+c A_DURUSMA
+c ARA_SON_DEVAM
+`);
+
+const G_M = goldenPath(
+  'G_M',
+  { outcome: 'MAHKUMIYET', finalMin: 2983, finalMax: 3297 },
+  PROLOG('BR00_C', 'STR_MASUMIYET', 'BR01_B'),
+  sorusturma({ dil: false, tahta: false }),
+  ZAYIF_CELSE1,
+  ZAYIF_ARA,
+  A(`
+c T00_DEVAM
+c T01X_DEVAM
+p M1
+p M3
+c T02_BITIR
+c T02K_DEVAM
+c T03_DEVAM
+p R1
+p R3
+c T03T_BITIR
+c T03K_DEVAM
+c T05_DEVAM
+c P_BASKASI
+c P_ZARF
+c P_KASA
+c P_BITIR
+c S_DUYGU
+c L_KIZIM
+`),
+);
+
+const G_C = goldenPath(
+  'G_C',
+  { outcome: 'MAHKUMIYET', finalMin: 2489, finalMax: 2751 },
+  PROLOG('BR00_C', 'STR_MASUMIYET', 'BR01_B'),
+  sorusturma({ dil: false, tahta: false }),
+  ZAYIF_CELSE1,
+  ZAYIF_ARA,
+  A(`
+c T00_DEVAM
+c T01X_DEVAM
+s ev_teftis M2
+s ev_banka M3
+c COKUS_DEVAM
+`),
+);
+
+const G_I = goldenPath(
+  'G_I',
+  { outcome: 'IKRAR', finalMin: 7458, finalMax: 8242 },
+  PROLOG('BR00_A', 'STR_MASUMIYET'),
+  sorusturma(),
+  CELSE1,
+  A(`
+c ARA_GIRIS_DEVAM
+c A_KASA
+e log k_1202
+e mag k_01
+e mag k_sabah
+c KASA_BITIR
+c A_PDKS2
+e log d_ercan
+e log d_melek
+e log d_selim
+c PDKS2_BITIR
+c A_LEYLA
+c ARA_LEYLA_DON
+c A_MELEK
+c MK_A
+c A_EV
+c EV_B
+c OT_A
+`),
+  BURAK,
+  TICKET,
+  KESIF,
+  A(`
+c A_HAYRI
+c HY_TANIK
+c A_DURUSMA
+c ARA_SON_DEVAM
+c T00_DEVAM
+c TIKRAR_DEVAM
+c IK_A
+c TIKRAR_S_DEVAM
+`),
+);
+
 export const tests: CasePart = {
   tests: {
-    goldenPaths: [TIPIK],
+    goldenPaths: [TIPIK, G_B, G_N, G_M, G_C, G_I],
   },
 };

@@ -2220,7 +2220,20 @@
             {
               "speaker": "leyla",
               "text": "Ve esas savunmada fazla konuşma. Üç şey yeter: kim, ne zaman, kimin elinde. Gerisi gürültü."
-            }
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bir süre sustu. Pencereye döndü; aşağıda belediye otobüsü, camında buhar, içinde uyuyan yolcular."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de müvekkilin. Kürsüye bir zarfın utancıyla çıktı; ikinci celseden o utancın hesabını vererek çıkmalı. Bunu ona sen veremezsin. Ama elinden de almamalısın."
+            },
+            {
+              "speaker": "leyla",
+              "text": "“Hatanı söyleme, kimse bilmesin” demek, bir avukatın en kolay cümlesidir. En pahalısı da odur. Faturası hep müvekkile kesilir."
+            },
+            { "speaker": "player", "text": "Leyla bir tavsiye vermedi. Bir fatura gösterdi.", "style": "thought" }
           ]
         }
       ],
@@ -2543,6 +2556,107 @@
               "speaker": "player",
               "text": "Leyla’nın cümlesi: kim, ne zaman, kimin elinde. Üç soru. Yarın üç cevabım olmalı.",
               "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_SON_4" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_SON_4",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "fact_tus02" }, { "flag": "fact_cuma" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Aşınmış iki tuş: 0 ve 2. Takvimde yuvarlak içine alınmış cumalar. Bir odanın alışkanlıkları, sahibinden çok şey anlatır.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_1744" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "17.31’de telefonda bir geçici şifre. 17.44’te bir iptal. On üç dakika. Bir çay demlenmez o sürede.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_cekmece" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Zarflar “müdürlüğün kutusunda” değilmiş. Bir odada, kilitli bir çekmecede. Anahtarı kimdeydi? Tutanak söylüyor.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_isik" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Hayri Bey’in hırkası. Saat altıya on kala, buzlu camın ardında mavi bir ışık. Bir tarihçinin “bilmiyorum”u, bir tanığın en dürüst cümlesi.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Kayıtlar bir saat söylüyor, bir kapı söylüyor. Yarın kürsüde biri bu saatlerin içinde nerede olduğunu anlatacak.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_SON_5" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_SON_5",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "not": { "flag": "ikrar_yolu" } },
+          "lines": [
+            { "speaker": "narrator", "text": "Gece yarısına doğru telefon çaldı. Orhan. Bu saatte hiç aramazdı." },
+            {
+              "speaker": "orhan",
+              "text": "Kusura bakmayın efendim. Elif bir şey sordu. Akşam yemekte. “Baba, sen hırsız mısın?” dedi. Okulda biri söylemiş.",
+              "style": "phone"
+            },
+            {
+              "speaker": "orhan",
+              "text": "Ne diyeyim efendim? “Değilim” dedim. Ama bir şey daha dedim. “Bir hata yaptım” dedim. “Şifremi verdim. Vermemeliydim.”",
+              "style": "phone"
+            },
+            {
+              "speaker": "orhan",
+              "text": "Elif bir süre sustu. Sonra “o zaman yarın onu söyle” dedi. “Hatayı söyle, hırsızlığı değil.” On yedi yaşında.",
+              "style": "phone"
+            },
+            { "speaker": "player", "text": "Elif haklı Orhan Bey." },
+            { "speaker": "orhan", "text": "Biliyorum efendim. Annesine çekmiş.", "style": "phone" },
+            {
+              "speaker": "player",
+              "text": "Bir kız babasına bir avukatın söyleyemediği şeyi söylemiş. Bu dosyanın en iyi savunma cümlesi bir mutfak masasında kurulmuş.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Gece yarısına doğru telefon çaldı. Açmadım. Ekranda “Kılıç” yazıyordu. Çalmayı bıraktı; bir mesaj gelmedi."
             }
           ]
         }

@@ -1074,6 +1074,10 @@ leyla: Susarsa, susmasını zorlama. Sessizlik bir delil değildir; ama bir salo
 leyla: İkincisi: müvekkilin zarfı verdiğini söyledi. Mahkeme eylemin başka bir suç olabileceğini düşünürse sana söylemek zorundadır; nitelendirme değişikliği uyarısı. Ek savunma hakkın doğar.
 leyla: O an panik yapma. “Zarf verdi, para almadı” ile “zarf verdi, zarar doğdu” aynı cümle değildir. Arasındaki farkı sen kuracaksın.
 leyla: Ve esas savunmada fazla konuşma. Üç şey yeter: kim, ne zaman, kimin elinde. Gerisi gürültü.
+> Bir süre sustu. Pencereye döndü; aşağıda belediye otobüsü, camında buhar, içinde uyuyan yolcular.
+leyla: Bir de müvekkilin. Kürsüye bir zarfın utancıyla çıktı; ikinci celseden o utancın hesabını vererek çıkmalı. Bunu ona sen veremezsin. Ama elinden de almamalısın.
+leyla: “Hatanı söyleme, kimse bilmesin” demek, bir avukatın en kolay cümlesidir. En pahalısı da odur. Faturası hep müvekkile kesilir.
+~ Leyla bir tavsiye vermedi. Bir fatura gösterdi.
 `),
   ],
   choices: [toHub('ARA_LEYLA_DON', 'Teşekkür et')],
@@ -1176,7 +1180,7 @@ nazan: Elif konuşmuyor. Babasıyla da, benimle de. [phone]
       ),
     ],
   }),
-  decisionNode('ARA_SON_3', [{ to: 'ARA_SON' }], {
+  decisionNode('ARA_SON_3', [{ to: 'ARA_SON_4' }], {
     lines: [
       W(flag('melek_kacti'), `~ Melek’in devrilen sandalyesi. “Hatırlamıyorum diyeceğim.” Yarın diyecek.`),
       W(flag('melek_hazir'), `~ “Sorarlarsa yalan söylemem.” Yarın soracağım. Yalnızca soracağım.`),
@@ -1194,6 +1198,48 @@ nazan: Elif konuşmuyor. Babasıyla da, benimle de. [phone]
         `~ “Ev satılık değil.” Nazan broşürü çöpe değil, çekmeceye koydu. Yarın o çekmece açılmasın.`,
       ),
       O(`~ Leyla’nın cümlesi: kim, ne zaman, kimin elinde. Üç soru. Yarın üç cevabım olmalı.`),
+    ],
+  }),
+  decisionNode('ARA_SON_4', [{ to: 'ARA_SON_5' }], {
+    lines: [
+      W(
+        all(flag('fact_tus02'), flag('fact_cuma')),
+        `~ Aşınmış iki tuş: 0 ve 2. Takvimde yuvarlak içine alınmış cumalar. Bir odanın alışkanlıkları, sahibinden çok şey anlatır.`,
+      ),
+      W(
+        flag('fact_1744'),
+        `~ 17.31’de telefonda bir geçici şifre. 17.44’te bir iptal. On üç dakika. Bir çay demlenmez o sürede.`,
+      ),
+      W(
+        flag('fact_cekmece'),
+        `~ Zarflar “müdürlüğün kutusunda” değilmiş. Bir odada, kilitli bir çekmecede. Anahtarı kimdeydi? Tutanak söylüyor.`,
+      ),
+      W(
+        flag('fact_isik'),
+        `~ Hayri Bey’in hırkası. Saat altıya on kala, buzlu camın ardında mavi bir ışık. Bir tarihçinin “bilmiyorum”u, bir tanığın en dürüst cümlesi.`,
+      ),
+      O(
+        `~ Kayıtlar bir saat söylüyor, bir kapı söylüyor. Yarın kürsüde biri bu saatlerin içinde nerede olduğunu anlatacak.`,
+      ),
+    ],
+  }),
+  decisionNode('ARA_SON_5', [{ to: 'ARA_SON' }], {
+    lines: [
+      W(
+        not(flag('ikrar_yolu')),
+        `
+> Gece yarısına doğru telefon çaldı. Orhan. Bu saatte hiç aramazdı.
+orhan: Kusura bakmayın efendim. Elif bir şey sordu. Akşam yemekte. “Baba, sen hırsız mısın?” dedi. Okulda biri söylemiş. [phone]
+orhan: Ne diyeyim efendim? “Değilim” dedim. Ama bir şey daha dedim. “Bir hata yaptım” dedim. “Şifremi verdim. Vermemeliydim.” [phone]
+orhan: Elif bir süre sustu. Sonra “o zaman yarın onu söyle” dedi. “Hatayı söyle, hırsızlığı değil.” On yedi yaşında. [phone]
+- Elif haklı Orhan Bey.
+orhan: Biliyorum efendim. Annesine çekmiş. [phone]
+~ Bir kız babasına bir avukatın söyleyemediği şeyi söylemiş. Bu dosyanın en iyi savunma cümlesi bir mutfak masasında kurulmuş.
+`,
+      ),
+      O(`
+> Gece yarısına doğru telefon çaldı. Açmadım. Ekranda “Kılıç” yazıyordu. Çalmayı bıraktı; bir mesaj gelmedi.
+`),
     ],
   }),
   story('ARA_SON', {

@@ -271,6 +271,7 @@ nazan: On dokuz yıl her akşam yazdı o deftere. Şimdi sadece bakıyor. Ne yaz
 `),
   choices: [
     option('AK2N_A', '“Defteri bana getirmesini söyleyin.”', {
+      effects: [inc('trust', 4)],
       responses: B(`
 nazan: Getirir. Getirir de… Avukat hanım, o defter onun… Neyse. Getirir.
 ~ Bir defteri istedim. Belki bir hayatı istedim. Ama o defter mahkemede konuşabilir; Orhan’ın konuşamadığını.
@@ -345,7 +346,7 @@ const gece = [
       O(`~ Leyla’nın sorusu aklımda: kayıtlar bana ne söyledi? Bir isim. Ve o ismin nerede olmadığını.`),
     ],
   }),
-  decisionNode('INV_GECE_6', [{ to: 'INV_GECE' }], {
+  decisionNode('INV_GECE_6', [{ to: 'INV_GECE_7' }], {
     lines: [
       W(
         all(flag('dil_verildi'), flag('bilirkisi_istendi')),
@@ -356,6 +357,69 @@ const gece = [
         `~ Dilekçe verildi. Bilirkişiyi istemedim; duruşmada istemeliyim. Teftiş raporu tek başına kalmamalı.`,
       ),
       O(`~ Dilekçe vermedim. Yarın her şeyi kürsüde, son anda isteyeceğim. Son an, mahkemelerin en az sevdiği andır.`),
+    ],
+  }),
+];
+
+const gece7 = [
+  decisionNode('INV_GECE_7', [{ to: 'INV_GECE_8' }], {
+    lines: [
+      W(
+        all(flag('ercan_zarf_inkar'), has('ev_talimat')),
+        `~ “Öyle bir uygulama bizde olmaz.” Müdür yardımcısının odasında, cebimde katlı bir kâğıtla dinledim bunu. Yarın kâğıt kürsüde açılacak.`,
+      ),
+      W(
+        all(flag('melek_zarf_inkar'), has('ev_talimat')),
+        `~ “Ne zarfı canım?” Melek çok hızlı söyledi. Hızlı “hayır”lar uzun bir “evet”in üstüne örtülmüş çarşaflardır.`,
+      ),
+      W(
+        flag('ercan_sistem'),
+        `~ “Yalnızca vezne terminalinden girilir efendim.” Kendinden emin bir cümle. Bir makinenin cümlesi değil, bir müdür yardımcısının.`,
+      ),
+      W(
+        flag('ercan_ziyaret'),
+        `~ İnce belli bir bardak, bir dolma kalem, bir babanın fotoğrafı. Kibar bir oda. Kalem bir tek kez sabırsızdı.`,
+      ),
+      O(`~ Tanıkları kürsüde ilk kez göreceğim. Ne söyleyeceklerini bilmeden. Bu iyi değil; ama dürüst.`),
+    ],
+  }),
+  decisionNode('INV_GECE_8', [{ to: 'INV_GECE_9' }], {
+    lines: [
+      W(
+        all(flag('fact_vz02'), flag('fact_onoda')),
+        `~ Vezne camının arkasında VZ-02. Buzlu camın arkasında bir monitörün mavi ışığı. İki bilgisayar, iki oda, bir kullanıcı adı.`,
+      ),
+      W(
+        flag('fact_talimat'),
+        `~ Bordroların arasına sıkıştırılmış bir kareli kâğıt. Orhan onu saklamamıştı; unutmak istemişti. Unutmak, saklamanın yorgun biçimidir.`,
+      ),
+      W(
+        flag('fact_ercan_teslim'),
+        `~ “Ocak başından beri ben alırdım efendim.” Torbaların son durağı. Kendisi söyledi; kibarca, bir bilgi verir gibi.`,
+      ),
+      O(`~ İki oda, bir kasa, bir turnike. Bina bir şey biliyor; ben henüz bilmiyorum.`),
+    ],
+  }),
+  decisionNode('INV_GECE_9', [{ to: 'INV_GECE' }], {
+    lines: [
+      W(
+        any(flag('fact_9ocak_log'), flag('fact_12subat')),
+        `~ 9 Ocak bir cuma. 12 Şubat bir perşembe. Bir hastane koridoru ve bir çorba kâsesi. İki akşam, iki iptal, aynı oda.`,
+      ),
+      W(
+        flag('fact_hayri_dosya'),
+        `~ “Dosyamı kendisi aldı, fotokopimi kendisi çekti.” Hayri Bey bunu bir nezaket örneği olarak anlattı. Ben de öyle not aldım. Şimdilik.`,
+      ),
+      W(
+        flag('fact_borc_soylenti'),
+        `~ “Kimseye söylemedim; ama herkes biliyordu.” Orhan’ın kredisini birisi koridorlara taşımış. Bir söylenti de bir kayıttır; yalnızca imzası yoktur.`,
+      ),
+      W(
+        flag('orhan_kirgin'),
+        `~ “Korkmak başka, utanmak başka.” İlk gece Orhan’a ezberlenmiş bir cümle söyledim. O bana dosyanın ilk gerçek cümlesini söyledi.`,
+      ),
+      W(flag('orhan_soz'), `~ “Anlatırım efendim. Söz.” Sözünü tuttu; zarfı anlattı. Yarın kürsüde de tutacak mı?`),
+      O(`~ Orhan’ın gözlüğünü silişi. Her seferinde, söyleyemediği bir cümleden önce.`),
     ],
   }),
 ];
@@ -411,6 +475,7 @@ export const investigation: CasePart = {
     aksam2Tel,
     aksam2Nazan,
     ...gece,
+    ...gece7,
     geceSon,
   ],
   triggers: [

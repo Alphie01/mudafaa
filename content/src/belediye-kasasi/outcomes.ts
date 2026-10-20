@@ -18,8 +18,8 @@ import { O, W } from './dsl.js';
 // 90-outcomes: sonuçlar (öncelik sırasıyla) ve sonuca bağlı epiloglar. Eşikler meta’daki eşik çubuğuyla aynı.
 
 export const T_NITEL = 3000;
-export const T_BERAAT = 8000;
-export const T_BERAAT_B = 9500;
+export const T_BERAAT = 9000;
+export const T_BERAAT_B = 10000;
 
 export const outcomes: CasePart = {
   outcomes: [
@@ -173,6 +173,18 @@ leyla: Bir gün sana o eski dosyadan bahsedeceğim Deniz. Tamamını. Bugün de�
           any(has('ded_kasa'), flag('contra_r2')),
         ),
         because(
+          'Bilirkişi, on bin liranın altındaki iptallerin onay gerektirmediğini ve bu sınırın veznedar ekranında görünmediğini açıklamıştır.',
+          flag('bq_onay'),
+        ),
+        because(
+          'İptallerin yapıldığı bilgisayarın vezne camının arkasından görülemeyen ortak bir odada bulunduğu keşifle tespit edilmiştir.',
+          any(flag('bq_pc03'), flag('bq_terminal')),
+        ),
+        because(
+          'Kredinin kaynağı miras tarlanın satış bedeli olup savcılığın ileri sürdüğü saik dayanaktan yoksundur.',
+          any(flag('arg_kredi'), has('ded_kredi')),
+        ),
+        because(
           'Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2).',
         ),
       ],
@@ -204,7 +216,12 @@ baskan: Türk Milleti adına…
         O(`
 # ARSLAN HUKUK · GECE [bg:buro_gece]
 > Panodaki kırmızı ipi çözdüm. Ortadaki boşluk hâlâ boştu.
+> Telefon titredi. Hayri Bey’den bir mesaj; noktalama işaretleri eksiksiz: “Avukat hanım, bugün yeni bir kutu açtım. Etiketi: 2026. İlk makbuz sizin dosyanızın tutanağı. Saygılarımla.”
+> Bir mesaj daha. Melek: “Orhan abi çay ocağına geldi bugün. Rıza abi semaveri yaktı. Kimse bir şey demedi. İyi ki kimse bir şey demedi canım.”
 ~ Kayıtlar bir adı sildi. Eli hâlâ göstermediler.
+> Leyla kapıdan uğradı. Paltosu kolunda.
+leyla: Şüpheden yararlanmak bir eksiklik değildir Deniz. Kanun onu, eksik bırakılan kâğıtlar için yazdı. Eksik bırakan sen değilsin; ama tamamlayan da sen olmadın.
+leyla: Başsavcılık o dosyayı ya açar ya rafta bırakır. Senin elindeki her kâğıt, o dosyanın kapağını biraz daha kaldırır. Kâğıtlarını sakla.
 ~ Orhan’ın yarın sabah kartını turnikeye okutacağını düşündüm. Kapı açılacak. Ve ön odada, buzlu camın ardında, bir monitörün mavi ışığı yine yanacak.
 `),
       ],

@@ -73,7 +73,7 @@
           { "hasEvidence": "ded_sifre" },
           { "ref": "baskasi" },
           { "cmp": [{ "var": "pers" }, ">=", 8] },
-          { "cmp": [{ "score": "final" }, ">=", 9500] }
+          { "cmp": [{ "score": "final" }, ">=", 10000] }
         ]
       },
       "stamp": "BERAAT",
@@ -193,7 +193,7 @@
           { "ref": "baskasi" },
           { "ref": "lehe2" },
           { "cmp": [{ "var": "pers" }, ">=", 6] },
-          { "cmp": [{ "score": "final" }, ">=", 8000] }
+          { "cmp": [{ "score": "final" }, ">=", 9000] }
         ]
       },
       "stamp": "BERAAT",
@@ -224,6 +224,18 @@
         {
           "when": { "any": [{ "hasEvidence": "ded_kasa" }, { "flag": "contra_r2" }] },
           "text": "İptal akşamlarında kasa odasının sanığa ait olmayan bir kodla açıldığı görülmüştür."
+        },
+        {
+          "when": { "flag": "bq_onay" },
+          "text": "Bilirkişi, on bin liranın altındaki iptallerin onay gerektirmediğini ve bu sınırın veznedar ekranında görünmediğini açıklamıştır."
+        },
+        {
+          "when": { "any": [{ "flag": "bq_pc03" }, { "flag": "bq_terminal" }] },
+          "text": "İptallerin yapıldığı bilgisayarın vezne camının arkasından görülemeyen ortak bir odada bulunduğu keşifle tespit edilmiştir."
+        },
+        {
+          "when": { "any": [{ "flag": "arg_kredi" }, { "hasEvidence": "ded_kredi" }] },
+          "text": "Kredinin kaynağı miras tarlanın satış bedeli olup savcılığın ileri sürdüğü saik dayanaktan yoksundur."
         },
         {
           "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2)."
@@ -283,7 +295,24 @@
           "lines": [
             { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
             { "speaker": "narrator", "text": "Panodaki kırmızı ipi çözdüm. Ortadaki boşluk hâlâ boştu." },
+            {
+              "speaker": "narrator",
+              "text": "Telefon titredi. Hayri Bey’den bir mesaj; noktalama işaretleri eksiksiz: “Avukat hanım, bugün yeni bir kutu açtım. Etiketi: 2026. İlk makbuz sizin dosyanızın tutanağı. Saygılarımla.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bir mesaj daha. Melek: “Orhan abi çay ocağına geldi bugün. Rıza abi semaveri yaktı. Kimse bir şey demedi. İyi ki kimse bir şey demedi canım.”"
+            },
             { "speaker": "player", "text": "Kayıtlar bir adı sildi. Eli hâlâ göstermediler.", "style": "thought" },
+            { "speaker": "narrator", "text": "Leyla kapıdan uğradı. Paltosu kolunda." },
+            {
+              "speaker": "leyla",
+              "text": "Şüpheden yararlanmak bir eksiklik değildir Deniz. Kanun onu, eksik bırakılan kâğıtlar için yazdı. Eksik bırakan sen değilsin; ama tamamlayan da sen olmadın."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Başsavcılık o dosyayı ya açar ya rafta bırakır. Senin elindeki her kâğıt, o dosyanın kapağını biraz daha kaldırır. Kâğıtlarını sakla."
+            },
             {
               "speaker": "player",
               "text": "Orhan’ın yarın sabah kartını turnikeye okutacağını düşündüm. Kapı açılacak. Ve ön odada, buzlu camın ardında, bir monitörün mavi ışığı yine yanacak.",

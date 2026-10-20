@@ -593,7 +593,10 @@
             }
           ],
           "next": "$stay",
-          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ]
         },
         {
           "id": "Q_EMIN",
@@ -1459,6 +1462,90 @@
           }
         },
         {
+          "id": "PS_E2_IZIN",
+          "kind": "PRESENT",
+          "match": { "statement": "E2", "evidence": ["ded_izin"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Tanık, 9 Ocak’ta sanık yıllık izindeydi; turnikede giriş bile yok. Aynı akşam 17.46’da onun kullanıcısıyla iki iptal yapılmış. O akşam da altıya kadar mı kaldı?"
+                },
+                {
+                  "speaker": "ercan",
+                  "text": "İzinde olduğunu bilmiyordum efendim. İzinleri müdürlük onaylar; ben onaylamış olabilirim. Hatırlamıyorum."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "İzin günü: sanık 9 Ocak’ta hiç işe gelmemiş; o akşam da kullanıcısıyla iptal var. “Altıya kadar çıkmazdı” beyanı bir günde bile tutmuyor.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_E1_DEFTER",
+          "kind": "PRESENT",
+          "match": { "statement": "E1", "evidence": ["ev_defter"] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Sanığın kendi kasa defteri. Her akşamın toplamı, kurşun kalemle." },
+                { "speaker": "ercan", "text": "Kişisel bir defter efendim. Resmî kayıt tutanaktır. Kâğıt neyse odur." },
+                {
+                  "speaker": "player",
+                  "text": "Bir defter bir tutanağın karşısında tek başına zayıf durur. İkinci bir nüsha lazımdı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 100 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kısmi isabet: defter sanığın saydığı tutarı gösterir; ama tutanakla karşılaştırılmadıkça teslimden sonraki eksilmeyi tek başına kanıtlamaz."
+          }
+        },
+        {
+          "id": "PS_E3_YONERGE",
+          "kind": "PRESENT",
+          "match": { "statement": "E3", "evidence": ["ev_yonerge"] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "ercan", "text": "Evet efendim. Yönerge bu. Ben de bunu söylüyorum. Teşekkür ederim." },
+                { "speaker": "player", "text": "Tanığa kendi kalkanını uzattım.", "style": "thought" }
+              ]
+            }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Yönerge kuralı söyler; kuralın çiğnenip çiğnenmediğini söylemez. Tanığın beyanıyla çelişmiyor, aksine onu destekliyor."
+          }
+        },
+        {
+          "id": "PS_E_MAKBUZ",
+          "kind": "PRESENT",
+          "match": { "evidence": ["ev_makbuz"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "ercan",
+                  "text": "Hayri Bey’in makbuzu efendim. Ben kendisine çay da ikram etmiştim. Üzücü bir olay."
+                }
+              ]
+            }
+          ],
+          "quality": { "q": "NEUTRAL", "feedback": "Makbuz iptalin varlığını gösterir; kimin yaptığını göstermez." }
+        },
+        {
           "id": "PS_SAVCILIK",
           "kind": "PRESENT",
           "match": { "evidence": ["ev_teftis", "ev_tutanak", "ev_banka", "ev_ercan_ifade"] },
@@ -1919,6 +2006,159 @@
       ]
     },
     {
+      "id": "H1_08G",
+      "type": "DECISION",
+      "chapter": "Bölüm 3 · Birinci Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "title": "Akşam",
+      "lines": [
+        {
+          "when": {
+            "cmp": [
+              {
+                "add": [
+                  { "if": { "when": { "flag": "contra_e2" }, "then": 1, "else": 0 } },
+                  { "if": { "when": { "flag": "contra_e3" }, "then": 1, "else": 0 } },
+                  { "if": { "when": { "flag": "contra_e4" }, "then": 1, "else": 0 } }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lines": [
+            { "speaker": "narrator", "text": "AKŞAM 20.10 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla tutanağın fotokopisini okuyordu; kırmızı kalemle değil, kurşun kalemle. Kurşun kalem Leyla’da bir övgüdür: silinebilir, demek ki düzeltilecek bir şey yok."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Üç kâğıt, üç cümle. Adam üçünde de “yanlış hatırlamışım” dedi. Bir insan bir günde üç kez yanlış hatırlarsa, ya çok yorgundur ya çok dikkatlidir."
+            },
+            { "speaker": "leyla", "text": "Hangisi olduğunu sen söyleme. Kâğıtlar söylesin." }
+          ]
+        },
+        {
+          "when": { "flag": "h1_telkin" },
+          "lines": [
+            { "speaker": "narrator", "text": "AKŞAM 20.10 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla tutanağı okudu, bir yerde durdu: savcının “değil mi” diye biten sorusu."
+            },
+            {
+              "speaker": "leyla",
+              "text": "O itiraz iyiydi. Küçük görünür; ama bir tanığın kendi cümlesini kurmasını sağladın. Kendi cümlesini kuran tanık, o cümlenin altında kalır."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "AKŞAM 20.10 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla tutanağı okudu, bir şey demeden bıraktı. Pencereden aşağı baktı; yağmur, otobüs, bir simitçinin naylonu."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir celse kaybedilmez Deniz. Bir celse yalnızca bir şey öğretir. Bugün ne öğrendin?"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H1_08" }],
+      "choices": []
+    },
+    {
+      "id": "H1_08",
+      "type": "STORY",
+      "chapter": "Bölüm 3 · Birinci Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "title": "Akşam",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "when": { "any": [{ "flag": "h1_kasa" }, { "flag": "h1_pdks" }, { "flag": "h1_ticket" }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Taleplerin bir kısmını kürsüde, son anda istedin. Mahkeme kabul etti; bu sefer. Her sefer etmez. Dilekçe, kürsüde nefes nefese kalmamak içindir."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Şimdi bir ay var. Cevaplar gelecek, bilirkişi çalışacak, insanlar seni arayacak. Herkes bir şey söyleyecek; bazıları seni bir yere götürmek için."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın her cümlesi bir uyarı. Hangisinin kime dair olduğunu söylemiyor.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Şimdi bir ay var. Cevaplar gelecek, bilirkişi çalışacak, insanlar seni arayacak. Herkes bir şey söyleyecek; bazıları seni bir yere götürmek için."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Müvekkilinin karısı evi satmak istiyor. Bir tanığın asansörde sana söylediği bir cümle var. Bir de kasa. Kasanın kendisi. Unutma: para orada bir gece kaldı. O gece kasa kimdeydi?"
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın her cümlesi bir uyarı. Hangisinin kime dair olduğunu söylemiyor.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "H108_A",
+          "kind": "OPTION",
+          "label": "“Bugün kayıtların ne söylediğini değil, kimin okumadığını öğrendim.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Güzel. Okumayan çoktur. Savcı okumadı, müfettiş okumadı, sen de ilk gece okumadın. Okumak bir karar meselesidir; korkuyla değil."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Sigara paketini avucunda çevirdi. Bir kez. Sonra masaya bıraktı; ters çevirmeden."
+                }
+              ]
+            }
+          ],
+          "next": "ARA_GIRIS_1"
+        },
+        {
+          "id": "H108_B",
+          "kind": "OPTION",
+          "label": "“Kibar bir tanığın nasıl sustuğunu öğrendim.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Henüz susmadı Deniz. Kibar insanlar kolay susmaz; çünkü konuşmayı bir iş gibi yaparlar. Bir iş gibi de bırakırlar: sırası gelince, düzgünce."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Sen ona sırayı getirmeye çalışma. Kâğıtları getir. Sıra kendiliğinden gelir."
+                }
+              ]
+            }
+          ],
+          "next": "ARA_GIRIS_1",
+          "effects": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 2 }]
+        }
+      ]
+    },
+    {
       "id": "H1_07",
       "type": "STORY",
       "chapter": "Bölüm 3 · Birinci Celse",
@@ -1951,7 +2191,7 @@
         }
       ],
       "choices": [
-        { "id": "H107_DEVAM", "kind": "CONTINUE", "label": "Bir ay", "role": "PRIMARY", "next": "ARA_GIRIS_1" }
+        { "id": "H107_DEVAM", "kind": "CONTINUE", "label": "Büroya dön", "role": "PRIMARY", "next": "H1_08G" }
       ]
     }
   ],

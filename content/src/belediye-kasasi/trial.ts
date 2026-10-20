@@ -166,7 +166,7 @@ export const trial: CasePart = {
 > Orhan bu kez gömleğini kendisi ütülemişti; Nazan yine de yakasını düzeltti. Elif okuldaydı; bir mesaj atmış: “Baba, iki kere say.”
 `),
     }),
-    decisionNode('T_00G_2', [{ to: 'T_00' }], {
+    decisionNode('T_00G_2', [{ to: 'T_00G_3' }], {
       lines: [
         W(
           flag('suc_duyurusu'),
@@ -183,6 +183,51 @@ export const trial: CasePart = {
         ),
         O(`
 > Ercan Tunalı koridorun ucunda, telefonunda bir şey okuyordu. Orhan’ın elini yine iki eliyle sıktı. “Geçmiş olsun Orhan Bey.” Bir ay önceki cümle, bir ay önceki ses.
+`),
+      ],
+    }),
+    decisionNode('T_00G_3', [{ to: 'T_00G_4' }], {
+      lines: [
+        W(
+          flag('bilgilendirdi'),
+          `
+> Orhan pencerenin önünde bana döndü. Elinde bir kâğıt: Elif’in sabah mesajının ekran görüntüsü, Nazan bastırmış. “Baba, iki kere say.”
+orhan: Ev satılık değil efendim. Nazan emlakçıya “vazgeçtik” dedi. Emlakçı “pişman olursunuz” demiş. Nazan da “pişmanlık bizim işimiz değil” demiş.
+orhan: Ne olursa olsun, bugün ne derlerse desinler. Ben kasanın hesabını vermeyeceğim. Zarfın hesabını vereceğim.
+~ Bir adam kendi sınırını çizdi. Benim çizmem gereken sınırı, benden önce.
+`,
+        ),
+        W(
+          flag('ikrar_yolu'),
+          `
+> Orhan pencerenin önündeydi. Bana dönmedi. Nazan, elinde bir banka dekontu, dinleyici sırasının ucunda oturuyordu; dekontu katlamıştı, açmıştı, yeniden katlamıştı.
+nazan: Ödendi avukat hanım. Hepsi. Ev gitti. Siz dediniz ya, risk almayalım diye.
+~ Söyledim. Şimdi o cümle bir dekontun üstünde, bir kadının ellerinde duruyor.
+`,
+        ),
+        O(`
+> Orhan pencerenin önündeydi. Nazan emlakçının broşürünü çantasında taşıyordu; kenarı görünüyordu. Kimse ondan söz etmedi.
+`),
+      ],
+    }),
+    decisionNode('T_00G_4', [{ to: 'T_00' }], {
+      lines: [
+        W(
+          flag('koridor_durust'),
+          `
+nazan: Bir ay önce “bugün başlıyor” demiştiniz. Bugün bitiyor mu avukat hanım?
+- Bugün karar çıkabilir. Ne çıkacağını bilmiyorum. Ama ne çıkarsa çıksın, akşam size ben anlatacağım.
+nazan: Bir ay önce de öyle dediniz. Anlattınız. Bu yüzden soruyorum.
+`,
+        ),
+        W(
+          flag('fact_araba_kredi'),
+          `
+> Melek dinleyici sıralarının önünde, elinde bir dosya, bir avukatla konuşuyordu; kendine bir avukat bulmuştu. Beni görünce başını salladı. Ne bir gülümseme ne bir kaçış.
+`,
+        ),
+        O(`
+> Hayri Bey yine ayakkabı kutusuyla gelmişti. Kutunun kapağına bu kez yeni bir etiket yapıştırmıştı: “DAVA — 2. CELSE.”
 `),
       ],
     }),
@@ -390,10 +435,20 @@ baskan: Müdafi, sorularınız.
       rules: [
         pressRule('PR_M1', 'M1', {
           score: { SORGULAMA: 15 },
-          responses: B(`
+          responses: [
+            W(
+              flag('fact_melek_orhan'),
+              `
+- Hiç mi sorun olmadı? On bir buçuk yılda?
+melek: Orhan abi beni korur hep. Bir keresinde bir mükellef bana bağırdı; Orhan abi camını kapattı, kalktı, adamı kibarca kapıya kadar götürdü. Bir kelime etmeden.
+melek: Şimdi ben onu koruyamıyorum. Bunu bilin.
+`,
+            ),
+            O(`
 - Hiç mi sorun olmadı? On bir buçuk yılda?
 melek: Bir kere. Bir mükellef ona bahşiş bıraktı, adamın peşinden durağa kadar koştu. Ben “abi delirdin mi” dedim. Sorun buydu.
 `),
+          ],
         }),
         pressRule('PR_M2', 'M2', {
           score: { SORGULAMA: 25 },
@@ -528,7 +583,39 @@ baskan: Bu delilin beyanla ilgisini göremedim müdafi.
 baskan: İtiraz reddedildi. Dayanağı yok.
 `),
       }),
-      finish: { id: 'T02_BITIR', next: 'T_03' },
+      finish: { id: 'T02_BITIR', next: 'T_02K' },
+    }),
+    court2.stage('T_02K', {
+      title: 'Tanık kürsüden iner',
+      courtStage: 'TANIK_DINLEME',
+      background: 'durusma_salonu',
+      witness: 'melek',
+      lines: [
+        W(
+          flag('contra_m2'),
+          `
+baskan: Tanığın dinlenmesi tamamlandı. Yerinize geçebilirsiniz.
+> Melek kürsüden indi. Çantasını unuttu; mübaşir arkasından getirdi. Dinleyici sırasına oturmadı; kapının yanında, ayakta kaldı.
+> Arka sıradaki gri takımlı adam ona bakmadı. Melek de ona bakmadı. Aradaki boşluk, salonun bütün sandalyelerinden daha çok yer kaplıyordu.
+savci: Sayın Başkan, tanığın beyanı karşısında müdür yardımcısının yeniden dinlenmesini talep ediyorum.
+baskan: Zaten çağrılı. Tanık Ercan Tunalı dinlenecek.
+~ Melek bir zarfın hikâyesini anlattı. Şimdi o zarfı toplayan adam kürsüye gelecek.
+`,
+        ),
+        W(
+          any(flag('contra_m3'), flag('m4_teyit')),
+          `
+baskan: Tanığın dinlenmesi tamamlandı. Yerinize geçebilirsiniz.
+> Melek kürsüden indi, çantasını iki eliyle göğsüne bastırarak oturdu. Kayıtlar onun söylediklerinin bir kısmını düzeltti, bir kısmını doğruladı. Zarf konusunda hâlâ susuyordu.
+~ Bir tanığın yarısı. Öbür yarısı korkunun içinde kaldı.
+`,
+        ),
+        O(`
+baskan: Tanığın dinlenmesi tamamlandı. Yerinize geçebilirsiniz.
+> Melek kürsüden indi. Kimseye bakmadan oturdu. Sakızını çantasından çıkardı, ağzına attı, çiğnemedi.
+`),
+      ],
+      choices: [cont('T02K_DEVAM', 'Devam', 'T_03', { role: 'PRIMARY' })],
     }),
     court2.stage('T_03', {
       title: 'Tanık Ercan Tunalı',
@@ -679,7 +766,8 @@ ercan: Hatırlamıyorum efendim.
             W(
               flag('suc_duyurusu'),
               `
-- Sayın Başkan, bilgi işlemin destek kaydı. 14 Ocak 17.20: “okilic kilitlendi, acil sıfırlayın.” Talep eden kullanıcı: E. TUNALI, dahili 214. Geçici şifre 17.31’de telefonla verilmiş. 17.44’te okilic kullanıcısıyla bir iptal.
+- Sayın Başkan, bilgi işlemin destek kaydı. 14 Ocak 17.20: “okilic kilitlendi, acil sıfırlayın.” Talep eden kullanıcı: E. TUNALI, dahili 214. Geçici şifre 17.31’de telefonla verilmiş.
+- 17.44’te okilic kullanıcısıyla bir iptal.
 - Ertesi sabah sanık kendi şifresinin çalışmadığını bildirmiş.
 > Ercan dolma kalemini cebinden çıkardı. Kapağını açtı. Kapattı. Tık.
 ercan: Bu konuda… cevap vermekten çekiniyorum.
@@ -703,6 +791,14 @@ ercan: Hayır efendim.
 - Usul. Sayın Başkan, dosyadaki asıl tutanaklara ekli gün sonu raporları 17.56’da basılmış; sanığın nüshasındakiler 16.58’de. Asıllardaki sanık imzası mürekkep değil, toner.
 - Tanık, bu tutanakları teslim anında imzaladığınızı söylemiştiniz. Sanık 17.09’da binadan çıkmıştı. Siz kime imzalattınız?
 > Ercan cevap vermedi. Kalemi masanın üstüne koydu; yavaşça, sesini çıkarmadan.
+`),
+        }),
+        presentRule('PS_R_BILIRKISI', undefined, ['ev_bilirkisi'], {
+          score: { SORGULAMA: 50 },
+          neutral:
+            'Bilirkişi raporu sistemin açığını anlatır; tanığın hangi cümlesini çürüttüğünü göstermedikçe çelişki doğurmaz.',
+          responses: B(`
+ercan: Teknik konular efendim. Ben maliyeciyim. Bilirkişi hanım ne diyorsa.
 `),
         }),
         presentRule('PS_R_SAVCILIK', undefined, ['ev_teftis', 'ev_tutanak', 'ev_banka', 'ev_ercan_ifade', 'ev_dokum'], {
@@ -730,7 +826,32 @@ baskan: Bu delilin beyanla ilgisini göremedim müdafi.
 baskan: İtiraz reddedildi. Dayanağı yok.
 `),
       }),
-      finish: { id: 'T03T_BITIR', next: 'T_04G' },
+      finish: { id: 'T03T_BITIR', next: 'T_03K' },
+    }),
+    court2.stage('T_03K', {
+      title: 'Tanık kürsüden iner',
+      courtStage: 'TANIK_DINLEME',
+      background: 'durusma_salonu',
+      witness: 'ercan',
+      lines: [
+        W(
+          atLeast(2, flag('contra_r1'), flag('contra_r2'), flag('contra_r3'), flag('contra_r4')),
+          `
+baskan: Tanığın dinlenmesi tamamlandı.
+> Ercan kürsüden indi. Ceketinin düğmesini çözmedi. Dinleyici sırasına yürürken Orhan’ın önünden geçti; bu kez başıyla selam vermedi. Orhan da vermedi.
+uye: Sayın Başkan, tanığın beyanlarıyla kasa, turnike ve destek kayıtları arasındaki çelişkilerin tutanağa ayrıntılı geçirilmesini istiyorum.
+baskan: Geçirildi.
+savci: Sayın Başkan, tutanağın bir örneğinin değerlendirilmek üzere Başsavcılığa gönderilmesini talep ediyorum.
+~ Bir yeminli tanık dört kez “hatırlamıyorum” dedi. Her biri bir kâğıdın karşısında. Bu dosyada hafızanın da bir saati var.
+`,
+        ),
+        O(`
+baskan: Tanığın dinlenmesi tamamlandı.
+> Ercan kürsüden indi, Orhan’a başıyla selam verdi, yerine oturdu. Dolma kalemini cebine koydu. Yüzü sakindi; bir ay önceki gibi.
+~ Kibar bir tanık, eksik kâğıtlar. Bir kapıyı aralayabildim; açamadım.
+`),
+      ],
+      choices: [cont('T03K_DEVAM', 'Devam', 'T_04G', { role: 'PRIMARY' })],
     }),
     court2.stage('T_03S', {
       title: 'Sessizlik',
@@ -758,7 +879,8 @@ savci: Sayın Başkan, tanık hakkındaki soruşturma dosyasıyla bağlantının
       background: 'durusma_salonu',
       onEnter: [raise('nitel_uyari')],
       say: T(`
-baskan: Sanığa ve müdafiine hatırlatılır: sanığın şifresini, kurum yönergesine aykırı olarak zarf içinde müdürlüğe teslim ettiğinin anlaşılması karşısında, eylemin ihmal suretiyle görevi kötüye kullanma suçunu oluşturma ihtimali bulunmaktadır.
+baskan: Sanığa ve müdafiine hatırlatılır: sanığın şifresini, kurum yönergesine aykırı olarak zarf içinde müdürlüğe teslim ettiği anlaşılmıştır.
+baskan: Bu durumda eylemin ihmal suretiyle görevi kötüye kullanma suçunu oluşturma ihtimali bulunmaktadır.
 baskan: Bu yönden ek savunma hakkınız vardır. Müdafi, diyeceğiniz?
 ~ Leyla’nın sesi: “Zarf verdi, para almadı” ile “zarf verdi, zarar doğdu” aynı cümle değildir.
 `),
@@ -822,7 +944,8 @@ baskan: Uyarı, sanığın savunma hakkını güvenceye almak içindir müdafi. 
           ref('mutalaa_b'),
           `
 baskan: Delillerin tartışılması tamamlandı. Esas hakkındaki mütalaa.
-savci: Sayın Başkan, kasa alarm kayıtları, turnike kayıtları, destek talebi kaydı, tutanakların sonradan düzenlendiğine ilişkin bulgular ve tanığın çekinmesi birlikte değerlendirildiğinde, iptallerin ve zimmetin sanık tarafından gerçekleştirilmediği sabittir.
+savci: Sayın Başkan, kasa alarm kayıtları, turnike kayıtları, destek talebi kaydı ve tutanakların sonradan düzenlendiğine ilişkin bulgular dosyadadır.
+savci: Bunlar tanığın çekinmesiyle birlikte değerlendirildiğinde, iptallerin ve zimmetin sanık tarafından gerçekleştirilmediği sabittir.
 savci: Sanığın CMK 223/2-b uyarınca beraatine; tanık Ercan Tunalı hakkında zimmet ve resmî belgede sahtecilik suçlarından yürütülen soruşturmaya duruşma tutanaklarının eklenmesine karar verilmesini talep ederim.
 > Savcı oturdu. Bana bakmadı. Sonra baktı; bir saniyeliğine, başını hafifçe eğerek.
 ~ Rakamlarla konuşan bir savcı. Bugün rakamlar ona doğruyu söyledi; o da söyledi.
@@ -832,7 +955,8 @@ savci: Sanığın CMK 223/2-b uyarınca beraatine; tanık Ercan Tunalı hakkınd
           ref('mutalaa_e'),
           `
 baskan: Delillerin tartışılması tamamlandı. Esas hakkındaki mütalaa.
-savci: Sayın Başkan, iptallerin sanığın binadan çıkmasından sonra ve sanığın vezne terminalinden değil, ortak kullanıma açık bir bilgisayardan yapıldığı anlaşılmıştır. Sanığın kullanıcı adı başkalarınca kullanılabilir durumdadır.
+savci: Sayın Başkan, iptallerin sanığın binadan çıkmasından sonra ve vezne terminalinden değil, ortak kullanıma açık bir bilgisayardan yapıldığı anlaşılmıştır.
+savci: Sanığın kullanıcı adı başkalarınca kullanılabilir durumdadır.
 savci: Bu kuşku giderilememiştir. Sanığın CMK 223/2-e uyarınca beraatine; iptalleri yapan kişi ya da kişiler yönünden suç duyurusunda bulunulmasına karar verilmesini talep ederim.
 ~ Bir savcının beraat istemesi bir zafer değildir. Bir savcının işini yapmasıdır.
 `,
@@ -881,7 +1005,8 @@ baskan: Müdafi, esas hakkındaki savunmanız.
           any(has('ded_teslim'), flag('contra_e1')),
           'arg_zilyet',
           `
-- İkincisi: kimin elinde. Sanık her akşam kasayı eksiksiz saydı ve teslim etti; defteri ve karbon nüshası bunu gösteriyor. Teslimden sonra para, teslim alanın koruma ve gözetimindeydi. Zimmetin konusu, sanığın zilyetliğinde değildi.
+- İkincisi: kimin elinde. Sanık her akşam kasayı eksiksiz saydı ve teslim etti; defteri ve karbon nüshası bunu gösteriyor.
+- Teslimden sonra para, teslim alanın koruma ve gözetimindeydi. Zimmetin konusu, sanığın zilyetliğinde değildi.
 `,
         ),
         dayanak(
@@ -994,7 +1119,8 @@ baskan: Müdafi, esas hakkındaki savunmanız.
           category: 'SAVUNMA_STRATEJISI',
           responses: B(`
 - Sayın Başkan, öncelikle müvekkilimin beraatini talep ediyoruz.
-- Mahkeme aksi kanaatteyse: sanık parayı almamıştır; şifresini amirinin talimatıyla vermiştir. Bu en fazla ihmal suretiyle görevi kötüye kullanmadır. Alt sınırdan ceza, takdiri indirim ve hükmün açıklanmasının geri bırakılmasını talep ediyoruz.
+- Mahkeme aksi kanaatteyse: sanık parayı almamıştır; şifresini amirinin talimatıyla vermiştir. Bu en fazla ihmal suretiyle görevi kötüye kullanmadır.
+- Alt sınırdan ceza, takdiri indirim ve hükmün açıklanmasının geri bırakılmasını talep ediyoruz.
 ~ Bir yandan “yapmadı” diyorum, öbür yandan “yaptıysa da ihmal.” Hukuk bunu ister. Orhan’ın gözlüğünün arkasındaki gözler istemiyor.
 `),
         }),
@@ -1059,6 +1185,23 @@ orhan: Kızım bu sabah bana “baba, iki kere say” diye yazdı Sayın Başkan
           flag('cokus'),
           `
 > Heyet müzakereye çekildi. Bir saat. Salondan çıkan kimse geri dönmedi; ben yerimden kalkmadım.
+mubasir: Taraflar salona! Hükmü ayakta dinleyin!
+`,
+        ),
+        W(
+          all(flag('son_hesap'), any(flag('closing_masumiyet'), flag('closing_usul'))),
+          `
+> Heyet müzakereye çekildi. Kırk dakika. Orhan’ın son sözü salonda kalmıştı: “Şifremi verdim. Onun hesabını veririm.”
+> Koridorda Nazan iğnelerini yakasından tek tek çıkarıp bir kutuya koydu. Hayri Bey ayakkabı kutusunun kapağını açtı, bir makbuzun yerini düzeltti, kapattı.
+> Melek kapının yanında duruyordu. Orhan ona bir çay uzattı; makineden, plastik bardakta. Melek aldı, içmedi, elinde tuttu.
+mubasir: Taraflar salona! Hükmü ayakta dinleyin!
+~ Hüküm ayakta dinlenir. Orhan zaten ayaktaydı; son sözünden beri oturmamıştı.
+`,
+        ),
+        W(
+          all(flag('closing_terdit'), flag('ek_sure')),
+          `
+> Heyet müzakereye çekildi. Bir saat. Terditli bir savunma heyete iki kapı gösterir; hangisinden geçeceğine heyet karar verir.
 mubasir: Taraflar salona! Hükmü ayakta dinleyin!
 `,
         ),

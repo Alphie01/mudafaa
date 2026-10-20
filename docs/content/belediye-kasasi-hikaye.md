@@ -383,3 +383,15 @@ Seçim: savcılığa bildir / sakla (ara evresinde tutanakta okunur).
 ## 8. Kelime bütçesi (tipik yol, `case:duration`)
 Soğuk açılış ~1.200 · Bölüm 1 ~1.900 · Soruşturma ~5.000 · 1. celse ~2.300 · Ara ~2.800 · 2. celse ~2.200 · karar ve epilog
 ~600 → ~15.000 sözcük, ~210 aksiyon ≈ 104 dk.
+
+## 9. Uygulama notları (kaynakla farklar)
+
+- **Ara evresi** 2 gün × 4 EP olarak uygulandı (yığınsız); suç duyurusu 0 EP’lik bir “karar”dır, zarflar gün sonunda emanete girer.
+  Ercan’ın teklifi (ARA_OTOPARK) tek gün sonunda gelir; Orhan’ın “Elif sordu” telefonu duruşmadan önceki gecenin zincirindedir (ARA_SON_5).
+- **1. celsede sanığa tavsiye** seçeneklerinden “Ercan Bey’i suçlasın” çıkarıldı; yerine dayanaksız bir “Melek’in arabası” seçeneği kondu.
+  Böylece gerçek failin adı, oyuncu kanıtla kazanmadan bir seçenek etiketinde geçmez.
+- **Burak** 14 Ocak akşamı arayanın adını söylemez (“kibar biriydi, efendim dedi”); adı ancak destek talebi kaydı elde edildiyse kayıttan okur.
+- **Melek** zarfı toplayanın adını kafede söylemez; adı yalnızca ikinci celsede, sorulunca (ya da belgeyle karşılaşınca) söyler.
+- **Ercan, 1. celse E3:** el yazısı not gösterilince yazının kendisine ait olmadığını ve müdürlükte başka bir “E.T.” bulunduğunu söyler; gizem açık kalır.
+- **Sonuç sınıfı “Nitelendirme”** (TCK 257/2; CMK 226 uyarısıyla) hikâye kitabındaki NITELENDIRME epilogunu kullanır; IKRAR etik sonudur.
+- Ölçümler ve golden path’ler: `docs/content/belediye-kasasi.md` §8–9.

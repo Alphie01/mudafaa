@@ -1,9 +1,8 @@
 import { character, sharedSprite } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
+import { SPRITES } from './sprites.js';
 
-// 10-cast: büro kadrosu ortak sprite'larla; davanın yeni karakterleri content/shared/sprites/sahte-imza-*.json.
-
-const own = (name: string) => sharedSprite(`sahte-imza-${name}`, `si_${name}`);
+// 10-cast: büro kadrosu ortak sprite'larla; davanın yeni karakterlerinin sprite'ları sprites.ts'te (satır içi).
 
 export const cast: CasePart = {
   sprites: [
@@ -15,15 +14,8 @@ export const cast: CasePart = {
     sharedSprite('mubasir'),
     sharedSprite('anne'),
     sharedSprite('asistan'),
-    own('vedat'),
-    own('tarik'),
-    own('sevgi'),
-    own('hayriye'),
-    own('nermin'),
-    own('erol'),
-    own('gulten'),
-    own('emre'),
-    own('sinan'),
+    sharedSprite('polis'),
+    ...SPRITES,
   ],
   characters: [
     character('deniz', {
@@ -147,6 +139,15 @@ export const cast: CasePart = {
       occupation: 'Başkâtip · Bursa 14. Noterliği',
       accent: '#2f5a96',
       spriteId: 'asistan',
+    }),
+    character('recep', {
+      name: 'Recep Şahin',
+      shortLabel: 'Recep',
+      role: 'OTHER',
+      age: 52,
+      occupation: 'Müdür yardımcısı · Osmangazi Tapu Müdürlüğü',
+      accent: '#3b4a6b',
+      spriteId: 'polis',
     }),
     character('fikriye', {
       name: 'Fikriye Hanım',

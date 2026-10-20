@@ -1,29 +1,157 @@
 {
   "outcomes": [
     {
+      "id": "ETIK",
+      "class": "OTHER",
+      "priority": 1,
+      "when": { "flag": "etik_kirlik" },
+      "stamp": "AZİL",
+      "stampTone": "red",
+      "sentence": "Vekâlet sona erdi · dava sürüyor",
+      "verdictText": "Mahkemece, tanık Emre Kaya’nın sanık müdafiinin telkiniyle gerçeğe aykırı beyanda bulunduğunu açıklaması üzerine tutanak örneğinin Bursa Cumhuriyet Başsavcılığına ve Bursa Barosu Başkanlığına gönderilmesine; tanığın beyanının değerlendirme dışı bırakılmasına; sanığın müdafiini azletmesi nedeniyle duruşmanın yeni müdafiin katılımıyla devamına karar verildi.",
+      "reasoning": [
+        {
+          "text": "Müdafi, olay sabahı okulda bulunan bir tanıktan, görmediği bir olayı mahkemede anlatmasını istemiştir."
+        },
+        {
+          "text": "Bu davranış yalan tanıklığa azmettirme şüphesi oluşturur (TCK 272, 38) ve avukatlık meslek kurallarına aykırıdır (Av.K. 34)."
+        },
+        {
+          "text": "Sanık vekâlet ilişkisini sona erdirmiştir (TBK 512/1). Dava başka bir müdafiin katılımıyla sürecektir."
+        }
+      ],
+      "legalBasis": "TCK 272, 38; Av.K. 34; TBK 512/1",
+      "xp": 0,
+      "howToReach": "Hiçbir tanığa görmediği bir şeyi söyletme; mazereti kayıtlarla kur.",
+      "ethicsCard": "Bir çocuğa, görmediği bir şeyi yeminle anlatmasını söyledin. Bu, yalan tanıklığa azmettirmedir ve bir avukatın meslekten çıkarılmasına yol açabilir. Gerçek bir mazeret zaten bir kurye terminalinde duruyordu.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN ÖNCE", "bg": "adliye", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Emre merdivenlerin başında, annesinin yanında oturuyordu. Annesi bana bakmadı; Emre baktı. On dokuz yaşında bir yüz, yirmi yıl yaşlanmış."
+            },
+            { "speaker": "emre", "text": "Abla… Ben özür diledim. Siz de diler misiniz? Kimden, bilmiyorum." },
+            { "speaker": "narrator", "text": "Cevap vermedim. Vermeye hakkım yoktu." },
+            {
+              "speaker": "narrator",
+              "text": "Vedat koridorun öbür ucunda, yeni bir avukatla konuşuyordu. Avukat bir şey yazıyor, Vedat başını sallıyordu. Bir kez bana döndü. Sağ elini kaldırdı; ne bir selam, ne bir veda."
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · AKŞAM", "bg": "buro_gece", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda ince bir kitapçık: Avukatlık Kanunu. Leyla bırakmıştı. Not yoktu. Not gerekmiyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kurşun harfler kitapçığın yanında duruyordu: Ş, E, T, A. Kâğıda basılınca ATEŞ."
+            },
+            {
+              "speaker": "player",
+              "text": "Bu dosyanın bütün hikâyesi, birinin bir başkasının adına bir çizgi çekmesiydi. Ben o çizgiyi silmeye gelmiştim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Sonunda bir çocuğun ağzına, onun olmayan bir cümle koydum. Daha iyi bir niyetle. Niyet bir cümleyi temizlemez; bir avukatı da.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "COKUS",
+      "class": "CONVICTION",
+      "priority": 2,
+      "when": { "flag": "cokus" },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "2 yıl 6 ay hapis",
+      "verdictText": "Sanık Vedat Ateş’in sahte resmî belge düzenleme ve kullanma suçundan TCK 204/1 uyarınca, zararın ağırlığı gözetilerek temel cezanın 3 yıl hapis olarak belirlenmesine; duruşmadaki hâli lehine takdiri indirim nedeni sayılarak TCK 62/1 uyarınca 2 yıl 6 ay hapis cezası ile CEZALANDIRILMASINA; cezanın süresi gözetilerek erteleme ve hükmün açıklanmasının geri bırakılması hükümlerinin uygulanmasına yer olmadığına; hükmün tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1) karar verildi.",
+      "reasoning": [
+        {
+          "text": "Savunma, sunduğu delillerin beyanlarla ilgisini ortaya koyamamış; itirazları dayanaksız kalmıştır."
+        },
+        {
+          "text": "Dosyadaki bilirkişi raporu ve tanık beyanları karşısında aksini gösteren somut bir delil tartışılamamıştır."
+        }
+      ],
+      "legalBasis": "TCK 204/1, 61, 62/1; CMK 231/5; TCK 51/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 30] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 30] }, 1000] }
+        }
+      },
+      "howToReach": "Kürsüde yalnızca beyanla çelişen delili sun; dayanaksız itiraz güvenilirliği eritir.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE ÖNÜ · ÖĞLEDEN SONRA", "bg": "adliye", "style": "card" },
+            { "speaker": "narrator", "text": "Savcı merdivenlerde durdu. Bana döndü; ilk kez." },
+            { "speaker": "savci", "text": "Kâğıtlarınız iyiydi avukat hanım. Elleriniz titredi." },
+            {
+              "speaker": "narrator",
+              "text": "Gitti. Ben kâğıtlarımı çantama koydum; düzgün, sıralı, kimsenin okumadığı."
+            },
+            { "speaker": "narrator", "text": "ATEŞ MATBAASI · AKŞAM", "bg": "depo", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Vedat kurşun dizgi makinesinin başındaydı. Bir kasadan harfler aldı, tek tek dizdi: kendi adı. Ters. Sonra harfleri kasaya geri döktü."
+            },
+            { "speaker": "vedat", "text": "İstinafa gideriz, değil mi avukat hanım? Bir kâğıt daha. Bir imza daha." },
+            {
+              "speaker": "player",
+              "text": "Bir imza daha. Bu kez benim imzam; bir istinaf dilekçesinin altında. Elim titremesin diye sabah makineye bakacağım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "BERAAT_B",
       "class": "ACQUITTAL",
-      "priority": 1,
+      "priority": 3,
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
-          { "flag": "gercek_fail" },
-          { "flag": "contra_s2" },
-          { "cmp": [{ "var": "pers" }, ">=", 7] },
-          { "cmp": [{ "score": "final" }, ">=", 1800] }
+          { "not": { "flag": "closing_indirim" } },
+          { "hasEvidence": "ev_rapor2" },
+          { "hasEvidence": "ev_rapor2_ek" },
+          { "flag": "tarik_sustu" },
+          { "any": [{ "hasEvidence": "ded_mazeret" }, { "flag": "contra_e4" }, { "flag": "mazeret_tanik" }] },
+          { "cmp": [{ "var": "pers" }, ">=", 8] },
+          { "cmp": [{ "score": "final" }, ">=", 6400] }
         ]
       },
       "stamp": "BERAAT",
       "stampTone": "green",
       "header": "TÜRK MİLLETİ ADINA",
-      "sentence": "Ceza yok · Tahliye",
-      "verdictText": "Sanık TODO’nun üzerine atılı suçu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; TODO tahliye, tazminat hakkı bildirimi (CMK 141/1-e, 142/2, 231/3), suç duyurusu; istinaf yolu açık olmak üzere.",
+      "sentence": "Ceza yok · adli kontrol kaldırıldı",
+      "verdictText": "Sanık Vedat Ateş’in üzerine atılı sahte resmî belge düzenleme ve kullanma suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; hakkındaki adli kontrol tedbirinin kaldırılmasına; CMK 141 ve 142 uyarınca tazminat isteminde bulunabileceğinin bildirilmesine (CMK 231/3); duruşma tutanakları, Adli Tıp raporları ve tanık Erol Kılınç’ın beyanının bir örneğinin Tarık Ateş hakkında yürütülen soruşturmaya eklenmek üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; hükmün tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1) karar verildi.",
       "reasoning": [
-        { "text": "TODO gerçek failin gösterildiği deliller." },
-        { "when": { "flag": "key_excluded" }, "text": "TODO hukuka aykırı delil hükme esas alınmadı." },
-        { "text": "Bu deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir." }
+        {
+          "text": "Adli Tıp Kurumu raporuna göre senet ve kapora makbuzundaki imzalar sanığın resmî mukayese imzalarıyla uyumsuzdur; sanığın el ürünü değildir."
+        },
+        {
+          "text": "Soruşturmadaki grafoloji raporu, kaynağı ve imza sahibi belirsiz özel belgelerle yapıldığından hükme esas alınamamıştır."
+        },
+        {
+          "when": { "flag": "contra_g3" },
+          "text": "Tapu memuru, işlemi yapan kişinin imzayı sol eliyle attığını beyan etmiştir; sanık sağ elini kullanmaktadır."
+        },
+        { "text": "Kargo kaydı ve kurye beyanı, sanığın işlem saatinde işyerinde olduğunu göstermektedir." },
+        {
+          "text": "Randevu kaydı, teslim tutanağı, satış bedelinin bir borca mahsup edildiğine ilişkin beyan ve ek Adli Tıp raporu, işlemin başka bir kişi tarafından yapıldığını ortaya koymaktadır."
+        },
+        { "text": "Deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir." }
       ],
-      "legalBasis": "CMK 223/2-b; CMK 141/1-e, 142/2, 231/3",
+      "legalBasis": "CMK 223/2-b; CMK 141, 142, 231/3; CMK 63, 67/5, 217",
       "xp": {
         "if": {
           "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
@@ -31,32 +159,136 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 120] }, 1000] }
         }
       },
-      "howToReach": "TODO: gerçek faili gösteren delilleri birleştir; esas savunmada gerçek faili göster."
+      "howToReach": "İmzanın sanığa ait olmadığını resmî mukayeseyle kanıtla, mazereti kayda bağla, randevu numarasının sahibini bul ve somut bir suç duyurusuyla savcılığa bildir; kimseyle yüzleşme.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“İşlemediği sabit olduğundan… beraatine.” Vedat kelimeleri duydu. Bir an anlamadı. Sonra iki elini birden masanın üstüne koydu ve gözlerini kapadı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sevgi arka sıradan kalktı, öne yürüdü, kocasının sağ elini avucuna aldı. Kâtip, tutanağın son satırını yazarken bir an durdu ve gülümsedi."
+            },
+            { "speaker": "narrator", "text": "ADLİYE ÖNÜ · ÖĞLEDEN SONRA", "bg": "sokak_sabah", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Yağmur dinmişti. Adliyenin merdivenleri ıslak parlıyordu; Uludağ’ın üstünde bulutlar yırtılmış, arasından soluk bir güneş."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Nermin Kurt merdivenin başında bekliyordu. Elinde bir ilaç poşeti. Vedat’ı görünce bir adım attı; sonra bir adım daha."
+            },
+            {
+              "speaker": "nermin",
+              "expression": "uzgun",
+              "text": "Kardeşim… Ben sana… Ben şikâyet ettim. Ben senin adına bir şikâyet yazdım."
+            },
+            { "speaker": "vedat", "text": "Biliyorum abla. Kâğıt yalan söylemiyordu; kâğıdı tutan el söylüyordu." },
+            {
+              "speaker": "nermin",
+              "text": "Halit ölünce onu ben de büyüttüm. Okul harçlarını ben ödedim. Elini öğretmen bağlardı, annem çözerdi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "İkisi de bir süre konuşmadı. Sonra Nermin poşetten bir kutu ilaç çıkardı ve Vedat’a uzattı."
+            },
+            { "speaker": "nermin", "text": "Annemin. Pazar sen götürürsün. Perdesini de soruyor; sana söylesin." }
+          ]
+        },
+        {
+          "when": { "flag": "sevgi_anlatti" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Sevgi merdivenin dibinde, bir süre telefonuna baktı; sonra cebine koydu."
+            },
+            { "speaker": "sevgi", "text": "Söyleseydim, belki hiçbiri olmazdı. Ocakta. O masada." },
+            { "speaker": "player", "text": "Belki. Belki de yine olurdu, ve siz bunu hiç bilmezdiniz." },
+            { "speaker": "sevgi", "text": "Öğretmenler hep “sonra anlatırım” der. Sonra diye bir şey yokmuş." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ATEŞ MATBAASI · AKŞAM", "bg": "depo", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Vedat kepengi kaldırdı. Dijital odanın ışığı kapalıydı. Kesim masasındaki makasın kolu hâlâ sola takılıydı. Vedat onu bir süre seyretti; dokunmadı."
+            },
+            {
+              "speaker": "vedat",
+              "text": "On dört yıl avukat hanım. Ağabeyimin oğlu. Ona bir makas bile yasaklamadım."
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "bg": "buro_gece", "style": "card" },
+            { "speaker": "narrator", "text": "Leyla kapımda durdu. Elinde iki bardak çay. Birini masama bıraktı." },
+            {
+              "speaker": "leyla",
+              "text": "Bazı davaları kazanırsın. Bazılarını kazandığın için kaybedersin. Bugün bir aile bir kişi eksildi Deniz. Senin yüzünden değil; ama senin önünde."
+            },
+            { "speaker": "leyla", "text": "Kimseyi kovalamadın. Bunu hatırla. Bir gün kovalamak isteyeceksin." },
+            {
+              "speaker": "narrator",
+              "text": "Odasına döndü. Masasının köşesindeki ters çerçeveye bir an baktı; elini uzattı, sonra çekti."
+            },
+            { "speaker": "narrator", "text": "SON", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Tarık Ateş hakkında resmî belgede sahtecilik ve nitelikli dolandırıcılık suçlarından soruşturma sürüyor. Hayriye Ateş’in vasisi, tapu iptal ve tescil davası açtı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Hayriye Hanım her pazar Halit’e çorba koymaya devam ediyor. Evinin yerinde durduğunu biliyor. Bu kez doğru biliyor."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "BERAAT_E",
       "class": "ACQUITTAL",
-      "priority": 2,
+      "priority": 4,
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
-          { "any": [{ "flag": "contra_s1" }, { "flag": "contra_s2" }] },
-          { "cmp": [{ "score": "final" }, ">=", 1800] }
+          { "not": { "flag": "closing_indirim" } },
+          {
+            "any": [
+              { "hasEvidence": "ev_rapor2" },
+              { "all": [{ "flag": "contra_g3" }, { "hasEvidence": "ded_mukayese" }] }
+            ]
+          },
+          { "cmp": [{ "var": "pers" }, ">=", 6] },
+          { "cmp": [{ "score": "final" }, ">=", 5200] }
         ]
       },
       "stamp": "BERAAT",
       "stampTone": "green",
       "header": "TÜRK MİLLETİ ADINA",
-      "sentence": "Ceza yok · Tahliye",
-      "verdictText": "Sanık TODO’nun üzerine atılı suçu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; TODO tahliye ve tazminat hakkı bildirimi; istinaf yolu açık olmak üzere.",
+      "sentence": "Ceza yok · adli kontrol kaldırıldı",
+      "verdictText": "Sanık Vedat Ateş’in üzerine atılı sahte resmî belge düzenleme ve kullanma suçunu işlediğine dair mahkûmiyetine yeter, her türlü şüpheden uzak, kesin ve inandırıcı delil bulunmadığından CMK 223/2-e uyarınca BERAATİNE; hakkındaki adli kontrol tedbirinin kaldırılmasına; CMK 141 ve 142 uyarınca tazminat isteminde bulunabileceğinin bildirilmesine (CMK 231/3); sahte suretin kim tarafından düzenlendiğinin araştırılması için dosya örneğinin Bursa Cumhuriyet Başsavcılığına gönderilmesine; hükmün tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1) karar verildi.",
       "reasoning": [
-        { "when": { "flag": "contra_s2" }, "text": "TODO teşhis güvenilirliğini yitirdi." },
-        { "when": { "flag": "contra_s1" }, "text": "TODO tanığın beyanı çelişkili." },
         {
-          "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil yoktur; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2)."
+          "when": { "hasEvidence": "ev_rapor2" },
+          "text": "Senet ve makbuzdaki imzaların sanığa ait olmadığı Adli Tıp Kurumu raporuyla anlaşılmıştır."
+        },
+        {
+          "text": "Soruşturmadaki grafoloji raporu, kaynağı ve imza sahibi belirsiz özel belgelerle yapıldığından hükme esas alınamamıştır."
+        },
+        {
+          "when": { "flag": "contra_g3" },
+          "text": "Tapu memuru, işlemi yapan kişinin imzayı sol eliyle attığını beyan etmiştir; sanık sağ elini kullanmaktadır."
+        },
+        {
+          "when": { "any": [{ "hasEvidence": "ded_mazeret" }, { "flag": "contra_e4" }] },
+          "text": "Sanığın işlem saatinde işyerinde olduğuna ilişkin kayıt dosyaya girmiştir."
+        },
+        {
+          "text": "Sahte sureti kimin düzenlediği ve tapuda kimin bulunduğu kesin olarak belirlenememiştir; şüpheden sanık yararlanır."
         }
       ],
-      "legalBasis": "CMK 223/2-e; Anayasa 38/4; AİHS 6/2",
+      "legalBasis": "CMK 223/2-e; CMK 141, 142, 231/3; CMK 217",
       "xp": {
         "if": {
           "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
@@ -64,21 +296,116 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
         }
       },
-      "howToReach": "TODO: tanığın çelişkisini delille çürüt."
+      "howToReach": "İmzayı sanıktan ayır: sıvanmış mürekkebi sağ elle karşılaştır, tapu memurunun hafızasını aç, mukayese malzemesinin kirli olduğunu göster ve resmî imzalarla yeni rapor iste.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“Mahkûmiyetine yeter… delil bulunmadığından… beraatine.” Vedat kelimeleri duydu. Başını salladı; bir müşterinin siparişini onaylar gibi. Sonra oturdu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sevgi arkasından eğilip omzuna dokundu. Vedat elini, sağ elini, onun elinin üstüne koydu."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN SONRA", "bg": "adliye", "style": "card" },
+            { "speaker": "narrator", "text": "Koridorda iki adliye görevlisi konuşuyordu; beni görmediler." },
+            {
+              "speaker": "narrator",
+              "text": "Sahtekâr ama kurtuldu. Avukatı iyiymiş.",
+              "name": "BİR SES",
+              "style": "whisper"
+            },
+            { "speaker": "narrator", "text": "Vedat da duydu. Durdu. Döndü. Sonra yürümeye devam etti." },
+            {
+              "speaker": "vedat",
+              "text": "Beraat dedi avukat hanım. Ama “yapmadı” demedi. “Kanıt yok” dedi. Bunu herkes duydu."
+            },
+            {
+              "speaker": "player",
+              "text": "Kanıt yok demek, sizin aleyhinize hiçbir şey yok demek Vedat Bey. Kâğıtta adınız temiz."
+            },
+            { "speaker": "vedat", "text": "Kâğıtta. Evet. Ben kâğıda inanırım. Bir ömür inandım." }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "ded_randevu" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Merdivenlerin başında Tarık bekliyordu. Sevgi’nin koluna girdi, onu arabaya doğru götürdü. Vedat arkalarından baktı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir numara biliyorum. Bir randevu kaydı. Onları bir savcının masasına koymadım. Belki bir gün biri koyar. Belki hiç kimse.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tarık arabanın kapısını Sevgi için açtı. Vedat’a el salladı; Vedat el salladı. Araba yokuştan aşağı kaydı, yağmurun içinde kayboldu."
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "bg": "buro_gece", "style": "card" },
+            { "speaker": "narrator", "text": "Leyla odamın kapısında durdu. Elinde paltosu." },
+            {
+              "speaker": "leyla",
+              "text": "Bir imzayı sahibinden ayırdın. İyi iş. Ama kimin eline ait olduğunu bulamadın."
+            },
+            { "speaker": "player", "text": "Bulmam gerekmiyordu." },
+            {
+              "speaker": "leyla",
+              "text": "Gerekmiyordu. Haklısın. Ceza davasında şüphe sanığındır. Ama bir ailede şüphe herkesindir Deniz. Bu ailede artık herkes herkesin elinden şüphelenecek."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gitti. Kurşun harfler masamda duruyordu: Ş, E, T, A. Kâğıda basılınca ATEŞ."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir imzayı sahibinden ayırdım. Kimin eline ait olduğunu bulamadım. Bu dosyada bir el hâlâ havada duruyor; bir kalem tutar gibi.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "SON", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Vedat Ateş beraat etti. Hisar’daki evin tapusu hâlâ Erol Kılınç adına kayıtlı. Hayriye Hanım’ın vasisi tapu iptal davası açmayı düşünüyor."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "INDIRIM",
       "class": "REDUCED",
-      "priority": 3,
+      "priority": 5,
       "when": {
-        "all": [{ "not": { "flag": "cokus" } }, { "flag": "terditli" }, { "cmp": [{ "score": "final" }, ">=", 1000] }]
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "cmp": [{ "var": "pers" }, ">=", 3] },
+          { "cmp": [{ "score": "final" }, ">=", 2600] }
+        ]
       },
       "stamp": "İNDİRİM",
       "stampTone": "amber",
-      "sentence": "TODO yıl TODO ay hapis",
-      "verdictText": "TODO temel ceza → artırım → TCK 62/1 indirimi adım adım; TCK 53; TCK 63; istinaf (CMK 273/1).",
-      "reasoning": [{ "text": "TODO lehe hükümlerin gerekçesi." }],
-      "legalBasis": "TODO TCK md., 62/1, 53, 63; CMK 273/1",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "1 yıl 8 ay hapis · ertelendi",
+      "verdictText": "Sanık Vedat Ateş’in sahte resmî belge düzenleme ve kullanma suçundan TCK 204/1 uyarınca alt sınırdan 2 yıl hapis cezası ile cezalandırılmasına; sabıkasızlığı ve duruşmadaki hâli lehine takdiri indirim nedeni sayılarak TCK 62/1 uyarınca 1 yıl 8 ay hapis cezası ile CEZALANDIRILMASINA; zarar giderilmediğinden hükmün açıklanmasının geri bırakılmasına yer olmadığına (CMK 231/6-c); cezanın TCK 51/1 uyarınca ERTELENMESİNE, 1 yıl denetim süresi belirlenmesine; hükmün tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1) karar verildi.",
+      "reasoning": [
+        {
+          "text": "Grafoloji raporu ve tanık beyanları sanığın işlemi yaptığını göstermektedir; savunmanın itirazları raporun ispat gücünü tümüyle ortadan kaldıramamıştır."
+        },
+        {
+          "when": { "any": [{ "flag": "contra_g3" }, { "hasEvidence": "ev_kargo" }] },
+          "text": "Tapu memurunun sol el beyanı ve mazerete ilişkin kayıtlar şüphe doğurmuş, ancak mahkemece yeterli görülmemiştir."
+        },
+        { "text": "Sanığın sabıkasızlığı ve duruşmadaki tutumu takdiri indirimde gözetilmiştir." },
+        { "text": "Hayriye Ateş’in zararı giderilmediğinden hükmün açıklanması geri bırakılamamıştır." }
+      ],
+      "legalBasis": "TCK 204/1, 62/1, 51/1; CMK 231/6-c",
       "xp": {
         "if": {
           "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
@@ -86,25 +413,76 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "TODO: terditli savunma ile lehe hükümleri iste."
+      "howToReach": "Beraat için imzanın sanığa ait olmadığını kanıtlayan bir rapor ya da tanığın sol el beyanı ile kirli mukayeseyi birlikte göstermelisin.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“Bir yıl sekiz ay… ertelenmesine.” Vedat kelimeleri duydu. Sevgi “ertelendi” kelimesini iki kez tekrarladı, kendine. İçeri girmeyecekti. Ama bir sicili olacaktı."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN SONRA", "bg": "adliye", "style": "card" },
+            {
+              "speaker": "vedat",
+              "text": "Ertelendi. İçeri girmeyeceğim. Ama sicilime “sahtekâr” yazdılar avukat hanım. Bir matbaacının siciline."
+            },
+            {
+              "speaker": "vedat",
+              "text": "Babam bu dükkânı açtığında bir kâğıt bastı, çerçeveletip duvara astı: “Ateş Matbaası’nda her harf doğrudur.” O kâğıdı indireceğim."
+            },
+            { "speaker": "player", "text": "İstinafa gideriz Vedat Bey. Kâğıtlar hâlâ konuşuyor." },
+            { "speaker": "vedat", "text": "Gidelim. Gidelim de… Annemin evini kim geri getirecek? O da istinafta mı?" },
+            {
+              "speaker": "narrator",
+              "text": "Koridorun ucunda Tarık bir sandalyeye oturmuş, başını elleri arasına almıştı. Sevgi yanına gitti, bir şey söyledi. Tarık başını kaldırmadı."
+            },
+            { "speaker": "narrator", "text": "ATEŞ MATBAASI · AKŞAM", "bg": "depo", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Vedat kepengi yarıya kadar indirdi. Duvardaki çerçeveyi aldı, tozunu sildi, bir çekmeceye koydu."
+            },
+            {
+              "speaker": "vedat",
+              "text": "Bir kâğıt doğru basılmaz bazen. Mürekkep kaçar. O zaman kâğıdı atarsın, yeniden basarsın. Hayatı yeniden basamazsın."
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "bg": "buro_gece", "style": "card" },
+            {
+              "speaker": "leyla",
+              "text": "Bir yıl sekiz ay, ertelendi. Bazıları buna kazanmak der. Müvekkiline sor; o ne diyor?"
+            },
+            { "speaker": "player", "text": "Sicili." },
+            {
+              "speaker": "leyla",
+              "text": "Sicili. İstinaf dilekçesini yarın sabah yaz. Bugün değil. Bugün kendine şunu sor: hangi kâğıdı istemedin? Hangi soruyu sormadın?"
+            },
+            { "speaker": "narrator", "text": "SON", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "İstinaf dilekçesi on dört gün içinde verildi. Hisar’daki ev hâlâ Erol Kılınç adına kayıtlı."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "MAHKUMIYET",
       "class": "CONVICTION",
-      "priority": 4,
+      "priority": 6,
       "when": { "all": [] },
       "stamp": "MAHKÛMİYET",
       "stampTone": "red",
-      "sentence": "TODO yıl hapis",
-      "verdictText": "TODO hüküm metni; TCK 53; TCK 63; istinaf yolu açık olmak üzere (CMK 273/1).",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "2 yıl 6 ay hapis",
+      "verdictText": "Sanık Vedat Ateş’in sahte resmî belge düzenleme ve kullanma suçundan TCK 204/1 uyarınca, zararın ağırlığı gözetilerek temel cezanın 3 yıl hapis olarak belirlenmesine; sabıkasızlığı lehine takdiri indirim nedeni sayılarak TCK 62/1 uyarınca 2 yıl 6 ay hapis cezası ile CEZALANDIRILMASINA; cezanın süresi gözetilerek erteleme ve hükmün açıklanmasının geri bırakılması hükümlerinin uygulanmasına yer olmadığına; hükmün tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1) karar verildi.",
       "reasoning": [
-        { "text": "TODO ceza hesabı." },
         {
-          "when": { "flag": "cokus" },
-          "text": "Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı."
-        }
+          "text": "Grafoloji raporuna göre senetteki imza sanığa aittir; rapora karşı ileri sürülen itirazlar somut bir delille desteklenmemiştir."
+        },
+        { "text": "Tapu memuru, sanığı işlemi yapan kişi olarak tanımıştır." },
+        { "text": "Sanığın 2024 yılında taşınmazı satmak istediği sabittir." }
       ],
-      "legalBasis": "TODO TCK md., 53, 63; CMK 273/1",
+      "legalBasis": "TCK 204/1, 61, 62/1; CMK 231/5; TCK 51/1",
       "xp": {
         "if": {
           "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
@@ -112,7 +490,59 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 60] }, 1000] }
         }
       },
-      "howToReach": "Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir."
+      "howToReach": "Senedi büyüteçle incele, raporun eklerine bak, sanığın elini izle; tapu memuruna “hangi elle” diye sor ve resmî imzalarla yeni bilirkişi iste.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“İki yıl altı ay… erteleme… yer olmadığına.” Vedat ayağa kalkmıştı; hükmü ayakta dinlerken sağ eli masanın kenarındaydı. Kelimeler bitince elini çekti, cebine soktu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sevgi arka sırada oturdu kaldı. Ağlamadı. Bir öğretmen sınıfında ağlamaz; mahkeme salonu da bir sınıftı, kimse ona öyle söylememiş olsa da."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN SONRA", "bg": "adliye", "style": "card" },
+            {
+              "speaker": "vedat",
+              "text": "İstinaf. Biliyorum. Bir kâğıt daha. Bir imza daha. Sizin imzanız bu sefer."
+            },
+            {
+              "speaker": "vedat",
+              "text": "Avukat hanım, bir şey soracağım. O imza kimin? Bunu bilmeden içeri girersem, her gece düşüneceğim."
+            },
+            {
+              "speaker": "player",
+              "text": "Cevap veremedim. Bilmiyordum. Bilmediğimi bilmek, bu dosyada öğrendiğim tek şeydi.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridorun ucunda Tarık, Sevgi’ye su getirdi. Sevgi bardağı aldı, içmedi. Tarık amcasının omzuna dokundu; Vedat dokunuşu fark etmedi."
+            },
+            { "speaker": "narrator", "text": "ATEŞ MATBAASI · GECE", "bg": "depo", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Vedat son kez dizgi makinesini çalıştırdı. Bir kasadan harfler aldı, tek tek dizdi: kendi adı. Ters."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kâğıda bastı. VEDAT ATEŞ. Kâğıda baktı. Sonra kâğıdı katladı, ceketinin iç cebine koydu; kimliğinin durduğu yere."
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "bg": "buro_gece", "style": "card" },
+            {
+              "speaker": "leyla",
+              "text": "Kazanamadığın dava, en uzun ders verendir. Bu dersi oku Deniz. Sonra istinaf dilekçesini yaz. Ve bu kez her eki oku."
+            },
+            { "speaker": "narrator", "text": "SON", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "İstinaf dilekçesi süresinde verildi. Karar kesinleşmedi. Vedat o pazar da huzurevine gitti; annesi evini sordu. “Yerinde” dedi."
+            }
+          ]
+        }
+      ]
     }
   ]
 }

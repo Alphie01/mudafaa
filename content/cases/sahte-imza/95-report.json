@@ -2,28 +2,70 @@
   "report": {
     "hints": [
       {
-        "id": "h_a",
-        "when": { "not": { "hasEvidence": "clue_a" } },
-        "text": "TODO: olay yerindeki A bulgusunu kaçırdın.",
+        "id": "h_sivanma",
+        "when": { "not": { "hasEvidence": "clue_sivanma" } },
+        "text": "Tapu senedindeki imzaya büyüteçle bakmadın: mürekkep sağa sıvanmıştı; imzayı sol eliyle yazan biri atmıştı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_sag_el",
+        "when": { "not": { "hasEvidence": "clue_sag_el" } },
+        "text": "Müvekkiline hangi elle yazdığını sormadın. Sıvanmış mürekkep ancak sağlak bir sanıkla yan yana konunca konuşur.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_mukayese",
+        "when": { "not": { "hasEvidence": "clue_mukayese_ozel" } },
+        "text": "Raporun ekini okumadın: mukayese belgelerinin hepsi özel belgeydi; resmî makam önünde atılmış bir imza yoktu (CMK 67/5; TCK 204–207 ayrımı).",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_iki_el",
+        "when": { "not": { "hasEvidence": "clue_iki_el" } },
+        "text": "Matbaadaki irsaliye karbonlarını karşılaştırmadın: “V. Ateş” imzaları iki ayrı elden çıkmıştı.",
         "category": "ARASTIRMA"
       },
       {
-        "id": "h_c",
-        "when": { "not": { "hasEvidence": "clue_c" } },
-        "text": "TODO: belgeye UV tutmadın.",
-        "category": "DELIL_ANALIZI"
+        "id": "h_g3",
+        "when": { "not": { "flag": "contra_g3" } },
+        "text": "Tapu memuruna kalemi hangi eliyle tuttuğunu sormadın; bastırsaydın zincirin gerildiğini hatırlayacaktı.",
+        "category": "SORGULAMA"
       },
       {
-        "id": "h_ded",
-        "when": { "not": { "hasEvidence": "ded_ab" } },
-        "text": "TODO: A ile B’yi tahtada birleştirmedin.",
-        "category": "DELIL_ANALIZI"
+        "id": "h_rapor2",
+        "when": { "not": { "hasEvidence": "ev_rapor2" } },
+        "text": "Resmî mukayese imzalarıyla Adli Tıp’tan yeni rapor istemedin (CMK 63, 67/5). Davanın tek ağır delili tartışmasız kaldı.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_kargo",
+        "when": { "not": { "hasEvidence": "ev_kargo" } },
+        "text": "Takvimdeki “kargo 11.30” notunu kayda bağlamadın; kurye terminali müvekkilini 11.19–11.37 arasında matbaada gösteriyordu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_randevu",
+        "when": { "not": { "hasEvidence": "ev_randevu" } },
+        "text": "Tapu randevusunu kimin aldığını sormadın; arayan numara kayıtlıydı ve mahkeme yazısıyla bir günde gelirdi.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_tutanak",
+        "when": { "not": { "hasEvidence": "ev_tutanak" } },
+        "text": "Mukayese belgelerinin asıl teslim tutanağını istemedin; teslim edenin adı faks kopyasında okunmuyordu.",
+        "category": "USUL_BILGISI"
       },
       {
         "id": "h_suc",
         "when": { "not": { "flag": "suc_duyurusu" } },
-        "text": "TODO: gerçek faile giden yol suç duyurusuydu (CMK 158).",
+        "text": "Bulduğun halkaları somut bir suç duyurusuyla savcılığa bildirmedin (CMK 158); savcılık üçüncü kişinin örneklerini Adli Tıp’a gönderebilirdi.",
         "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_etik",
+        "when": { "flag": "tarik_sir" },
+        "text": "Dosyanın ayrıntılarını müvekkilinin izni olmadan bir aile üyesine anlattın (Av.K. 36).",
+        "category": "SAVUNMA_STRATEJISI"
       }
     ]
   }

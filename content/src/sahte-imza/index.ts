@@ -1,10 +1,10 @@
 import { defineCase, withDiscoveryPaths } from '../../../tools/content/src/kit/index.js';
+import { ara } from './ara.js';
 import { briefing } from './briefing.js';
 import { cast } from './cast.js';
 import { evidencePart } from './evidence.js';
 import { hearing1 } from './hearing-1.js';
-import { investigation1 } from './investigation-1.js';
-import { investigation2 } from './investigation-2.js';
+import { investigation1 } from './inv-hub.js';
 import { meta } from './meta.js';
 import { outcomes } from './outcomes.js';
 import { report } from './report.js';
@@ -12,9 +12,8 @@ import { scenes } from './scenes.js';
 import { tests } from './tests.js';
 import { trial } from './trial.js';
 
-// Dava #09 kaynağı. `npm run case:build -- sahte-imza` bu fonksiyonu çalıştırır ve her anahtarı
-// `content/cases/sahte-imza/<anahtar>.json` olarak yazar. Anahtarlar iki basamaklı önekle sıralanır; parçalar bu sırayla
-// birleştirilir (diziler uç uca eklenir). `withDiscoveryPaths`, koşulsuz DISCOVER'ların bulunma yollarını ekler.
+// Dava #09 kaynağı. `npm run case:build -- sahte-imza` her anahtarı `content/cases/sahte-imza/<anahtar>.json` olarak
+// yazar; parçalar ad sırasıyla birleşir. `withDiscoveryPaths` koşulsuz DISCOVER'ların bulunma yollarını ekler.
 
 export default defineCase(() =>
   withDiscoveryPaths({
@@ -25,7 +24,7 @@ export default defineCase(() =>
     '40-briefing': briefing,
     '50-investigation-1': investigation1,
     '60-hearing-1': hearing1,
-    '70-investigation-2': investigation2,
+    '70-ara': ara,
     '80-trial': trial,
     '90-outcomes': outcomes,
     '95-report': report,

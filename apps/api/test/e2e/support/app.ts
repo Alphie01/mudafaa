@@ -44,6 +44,9 @@ export function client(app: INestApplication, token: string) {
     post: (path: string, body: unknown = {}) => call('post', path).send(body as object),
     put: (path: string, body: unknown = {}) => call('put', path).send(body as object),
     patch: (path: string, body: unknown = {}) => call('patch', path).send(body as object),
+    /** Ham gövdeli POST (varlık yükleme). */
+    raw: (path: string, bytes: Buffer) =>
+      call('post', path).set('Content-Type', 'application/octet-stream').send(bytes),
   };
 }
 export type Client = ReturnType<typeof client>;

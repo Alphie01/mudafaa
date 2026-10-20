@@ -105,7 +105,7 @@ export class ContentService {
   // ── Sürüm ──
 
   /** Paket derlenir (şema, kimlik, referans); hata → 400 `validation_error`, `errors` = derleme sorunları. */
-  private compileOrThrow(input: unknown): CasePackage {
+  compilePackage(input: unknown): CasePackage {
     const r = compile(input);
     if (!r.ok) {
       throw new ApiError(400, 'validation_error', 'Dava paketi derlenemedi.', {
@@ -215,14 +215,14 @@ export class ContentService {
     ctx: ActorCtx = {},
     files?: FileReader,
   ): Promise<{ versionId: string; versionNo: number }> {
-    const pkg = this.compileOrThrow(input);
+    const pkg = this.compilePackage(input);
     const info = await this.resolveAssets(pkg, files);
     return this.createDraft(caseId, pkg, info, source, ctx);
   }
 
   /** DRAFT sürümün içeriğini bütünüyle değiştirir (varlıklar depoda olmalı). */
   async replaceDraft(versionId: string, input: unknown, ctx: ActorCtx = {}): Promise<void> {
-    const pkg = this.compileOrThrow(input);
+    const pkg = this.compilePackage(input);
     const info = await this.resolveAssets(pkg);
     await this.prisma.$transaction(
       async (tx) => {
@@ -351,7 +351,7 @@ export class ContentService {
 
   /** Herhangi bir sürümden (taslak dahil) TEST_SNAPSHOT: yönetici test oturumları buna sabitlenir. */
   async testSnapshot(versionId: string, ctx: ActorCtx = {}): Promise<{ snapshotId: string; caseId: string }> {
-    const pkg = this.compileOrThrow(await this.exportVersion(versionId));
+    const pkg = this.compilePackage(await this.exportVersion(versionId));
     return this.prisma.$transaction(async (tx) => {
       const v = await tx.caseVersion.findUniqueOrThrow({ where: { id: versionId } });
       const snap = await tx.contentVersion.create({
@@ -387,7 +387,7 @@ export class ContentService {
     opts: { publish?: boolean; legalApproved?: boolean; reviewer?: string } = {},
   ): Promise<ImportResult> {
     const raw = await loadCase(path);
-    const pkg = this.compileOrThrow(raw);
+    const pkg = this.compilePackage(raw);
     const dir = (await stat(path)).isDirectory() ? path : dirname(path);
     const files: FileReader = (p) => readFile(join(dir, p)).catch(() => null);
     const { caseId } = await this.findOrCreateCase(pkg);

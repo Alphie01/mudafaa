@@ -1,6 +1,7 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { validatePackage, type ValidationReport } from '@mudafaa/validator';
 import { notFound } from '../../common/api-error.js';
+import { isUuid } from '../../common/uuid.js';
 import { ENV, type Env } from '../../config/env.js';
 import { PrismaService } from '../../database/prisma.service.js';
 import type { Prisma } from '../../generated/prisma/client.js';
@@ -41,10 +42,11 @@ export class ValidationService {
   ) {}
 
   /** QUEUED doğrulama satırı açar (kuyruk ve `runNow` ortak). */
-  async createRow(versionId: string, actor?: AuthUser | null): Promise<string> {
-    const version = await this.prisma.caseVersion.findUnique({ where: { id: versionId } });
+  async createRow(versionId: string, actor?: AuthUser | null, tx?: Prisma.TransactionClient): Promise<string> {
+    const db = tx ?? this.prisma;
+    const version = isUuid(versionId) ? await db.caseVersion.findUnique({ where: { id: versionId } }) : null;
     if (version === null) throw notFound('Sürüm bulunamadı.');
-    const row = await this.prisma.contentValidationResult.create({
+    const row = await db.contentValidationResult.create({
       data: {
         caseVersionId: versionId,
         status: 'QUEUED',

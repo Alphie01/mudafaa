@@ -12,6 +12,9 @@ export type CasePart = DeepPartial<CasePackage>;
 export type CaseParts = Record<string, CasePart>;
 export type CaseSource = () => CaseParts | Promise<CaseParts>;
 
+/** İçerik formatı kimliği (`CASE_FORMAT` ile aynı; tip denetimi farkı yakalar, kit çalışma anında pakete bağlanmaz). */
+export const CASE_FORMAT_ID: CasePackage['format'] = 'mudafaa.case/v1';
+
 /** Kaynağın varsayılan dışa aktarımı. */
 export const defineCase = (source: CaseSource): CaseSource => source;
 

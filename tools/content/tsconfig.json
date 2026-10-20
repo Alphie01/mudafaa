@@ -7,7 +7,12 @@
     "sourceMap": false,
     "noEmit": true,
     "lib": ["ES2023", "DOM"],
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@mudafaa/case-schema": ["../../packages/case-schema/src/index.ts"],
+      "@mudafaa/engine": ["../../packages/engine/src/index.ts"],
+      "@mudafaa/validator": ["../../packages/validator/src/index.ts"]
+    }
   },
   "include": ["src", "test"]
 }

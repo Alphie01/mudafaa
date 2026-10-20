@@ -2,11 +2,17 @@
   "name": "@mudafaa/content-tools",
   "version": "0.0.0",
   "private": true,
-  "description": "İçerik araçları: tasarımdan sprite çıkarımı, sahne PNG render'ı ve Dava #07 içerik testleri",
+  "description": "İçerik araçları: yazım kiti ve case:* komutları, sprite çıkarımı, sahne render'ı ve Dava #07 içerik testleri",
   "type": "module",
   "scripts": {
     "extract-sprites": "tsx src/extract-sprites.ts",
-    "render-scenes": "tsx src/render-scenes.ts"
+    "render-scenes": "tsx src/render-scenes.ts",
+    "case:new": "tsx src/cli.ts new",
+    "case:build": "tsx src/cli.ts build",
+    "case:validate": "tsx src/cli.ts validate",
+    "case:duration": "tsx src/cli.ts duration",
+    "case:scenes": "tsx src/cli.ts scenes",
+    "case:sprite-preview": "tsx src/cli.ts sprite-preview"
   },
   "dependencies": {
     "@mudafaa/case-schema": "*",

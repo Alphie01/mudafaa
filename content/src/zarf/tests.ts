@@ -115,10 +115,13 @@ const komiserTam = [
   present('ded_hat_disi', 'K5'),
   C('H104_BITIR'),
 ];
-const celse1 = (rq: string[]) => [
+const komiserKismi = komiserTam.map((a) =>
+  a.kind === 'PRESENT' && a.evidenceId === 'ded_bos_oda' ? present('ev_tutanak', 'K3') : a,
+);
+const celse1 = (rq: string[], komiser: Action[] = komiserTam) => [
   celse1Acilis,
   C('H101D_DEVAM', 'H101Q_A', 'H101Q_B', 'H101Q_C', 'H101Q_D', 'H101Q_BITTI', 'H102_A', 'H103_A', 'H104_DEVAM'),
-  komiserTam,
+  komiser,
   C(...rq, 'RQ_KARAR', 'RQ_TAHLIYE', 'RQ_BITTI', 'H106_DEVAM', 'H106B_DEVAM', 'H107_DEVAM'),
 ];
 
@@ -135,7 +138,13 @@ const tahta2 = [
   combine('clue_cay_defteri', 'clue_sinan_arsiv'),
   C('ARA_CIKARIM_BITIR'),
 ];
-const ara1 = [C('ARA_GIRIS_DEVAM', 'A2_LEYLA', 'ARALEYLA_GERI'), cihaz, santral, kamera, C('A2_BAYRAM', 'BAY_A', 'ARAK_A', 'ARA_GECE1_DEVAM', 'SAB2_A')];
+const ara1 = [
+  C('ARA_GIRIS_DEVAM', 'A2_LEYLA', 'ARALEYLA_GERI'),
+  cihaz,
+  santral,
+  kamera,
+  C('A2_BAYRAM', 'BAY_A', 'ARAK_A', 'ARA_GECE1_DEVAM', 'SAB2_A'),
+];
 const ara2 = [
   C('A2_LEYLA', 'ARALEYLA_GERI', 'A2_HALIL', 'AH_HAZIR', 'AH_GERI'),
   C('A2_MUZAFFER', 'MUZ_DEFTER', 'MUZ_GORDU', 'MUZ_TANIK', 'MUZ_GERI'),
@@ -214,7 +223,19 @@ const gorev = [
   C('H104_BITIR', 'RQ_SINAN', 'RQ_BITTI', 'H106_DEVAM', 'H106B_DEVAM', 'H107_DEVAM'),
   C('ARA_GIRIS_DEVAM', 'A2_LEYLA', 'ARALEYLA_GERI'),
   santral,
-  C('A2_BAYRAM', 'BAY_A', 'A2_HALIL', 'AH_HAZIR', 'AH_GERI', 'A2_MUZAFFER', 'MUZ_GORDU', 'MUZ_GERI', 'ARAK_A', 'ARA_GECE1_DEVAM', 'SAB2_A'),
+  C(
+    'A2_BAYRAM',
+    'BAY_A',
+    'A2_HALIL',
+    'AH_HAZIR',
+    'AH_GERI',
+    'A2_MUZAFFER',
+    'MUZ_GORDU',
+    'MUZ_GERI',
+    'ARAK_A',
+    'ARA_GECE1_DEVAM',
+    'SAB2_A',
+  ),
   C('A2_LEYLA', 'ARALEYLA_GERI'),
   arsiv,
   C('A2_SUC', 'SUC_B', 'SUC_VER', 'GO_T', 'SON_B', 'TK_B'),
@@ -251,7 +272,18 @@ const mahkumiyet = [
   tapCenter(OB_SEBIL),
   tapCenter(OB_DOLAP),
   C('KORIDOR_BITIR', 'AK1_B'),
-  C('A_KOMISER', 'KOM_BASLA', 'KOM_ODA', 'KOM_PARA', 'KOM_OGUL', 'KOM_GERI', 'A_SINAN', 'SIN_BAYRAM', 'SIN_HALIL', 'SIN_GERI'),
+  C(
+    'A_KOMISER',
+    'KOM_BASLA',
+    'KOM_ODA',
+    'KOM_PARA',
+    'KOM_OGUL',
+    'KOM_GERI',
+    'A_SINAN',
+    'SIN_BAYRAM',
+    'SIN_HALIL',
+    'SIN_GERI',
+  ),
   C('A_IFADE'),
   examine('mag', 'i1'),
   examine('mag', 'i2'),
@@ -337,6 +369,21 @@ export const tests: CasePart = {
         sinanTam,
         muzaffer,
         C('T035_A', 'T04_A', 'T045_DEVAM', 'T05_D', 'T07_A', 'T08_A'),
+      ),
+      goldenPath(
+        'G_E2',
+        { outcome: 'BERAAT_E', finalMin: 10454, finalMax: 11556 },
+        intro('STR_USUL', 'BR00_A'),
+        gun1,
+        gun2,
+        gun3,
+        celse1([], komiserKismi),
+        ara1,
+        ara2,
+        bayramTam(true),
+        C('T02B_DEVAM'),
+        muzaffer,
+        C('T035_B', 'T04_B', 'T045_DEVAM', 'T05_B', 'T07_B', 'T08_A'),
       ),
       goldenPath('G_GOREV', { outcome: 'GOREV', finalMin: 4317, finalMax: 4773 }, gorev),
       goldenPath('G_M', { outcome: 'MAHKUMIYET', finalMin: 536, finalMax: 594 }, mahkumiyet),

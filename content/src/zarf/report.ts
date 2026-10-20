@@ -116,7 +116,11 @@ export const report: CasePart = {
       ),
       hint(
         'h_tehdit',
-        all(any({ visited: 'INV1_AKSAM2' }, { visited: 'ARA_AKSAM' }), not(flag('tehdit_bildirildi')), not(flag('sinan_bildirildi'))),
+        all(
+          any({ visited: 'INV1_AKSAM2' }, { visited: 'ARA_AKSAM' }),
+          not(flag('tehdit_bildirildi')),
+          not(flag('sinan_bildirildi')),
+        ),
         'Sana yönelik örtülü tehditler ve tanığın kendiliğinden yaklaşması belgelenip savcılığa bildirilmeliydi (TCK 106; CMK 158).',
         'USUL_BILGISI',
       ),

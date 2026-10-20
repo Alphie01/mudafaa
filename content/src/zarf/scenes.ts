@@ -116,10 +116,16 @@ export const scenes: CasePart = {
           short: 'Çay ocağı',
         }),
         sceneObject('ob_yangin', 'Yangın dolabı', OB_YANGIN, {
-          ...decoy('Kırmızı bir yangın dolabı; camında “Acil durumda kırınız.” Bu dosyada acil olan başka şeyler var.', 'Yangın dolabı'),
+          ...decoy(
+            'Kırmızı bir yangın dolabı; camında “Acil durumda kırınız.” Bu dosyada acil olan başka şeyler var.',
+            'Yangın dolabı',
+          ),
         }),
         sceneObject('ob_sebil', 'Su sebili', OB_SEBIL, {
-          ...decoy('Bir su sebili, boş damacana, plastik bardaklar. Herkes buradan geçer; kimse bir şey bırakmaz.', 'Sebil'),
+          ...decoy(
+            'Bir su sebili, boş damacana, plastik bardaklar. Herkes buradan geçer; kimse bir şey bırakmaz.',
+            'Sebil',
+          ),
         }),
       ],
     }),
@@ -155,7 +161,10 @@ export const scenes: CasePart = {
           ),
         }),
         sceneObject('ob_pencere', 'Koridor penceresi', OB_PENCERE, {
-          ...decoy('Pencerede yağmur, gren, bir ışık patlaması. Dışarıdaki bir şey değil; kameranın kendi gürültüsü.', 'Pencere'),
+          ...decoy(
+            'Pencerede yağmur, gren, bir ışık patlaması. Dışarıdaki bir şey değil; kameranın kendi gürültüsü.',
+            'Pencere',
+          ),
         }),
       ],
     }),
@@ -186,13 +195,19 @@ export const scenes: CasePart = {
           short: 'Zimmet',
         }),
         sceneObject('ob_masa', 'Arşiv masası', OB_MASA, {
-          ...decoy('Çizik bir masa, bir büyüteç, bir kutu ataç. Arşivciler gibi sabırlı bir masa. Söyleyecek bir şeyi yok.', 'Masa'),
+          ...decoy(
+            'Çizik bir masa, bir büyüteç, bir kutu ataç. Arşivciler gibi sabırlı bir masa. Söyleyecek bir şeyi yok.',
+            'Masa',
+          ),
         }),
         sceneObject('ob_pencere_a', 'Tek pencere', OB_PENCERE_A, {
           ...decoy('Avluya bakan tek pencere; parmaklıklı. Yağmur damlaları demirde birikip düşüyor.', 'Pencere'),
         }),
         sceneObject('ob_kutu', 'İmha kutusu', OB_KUTU, {
-          ...decoy('“İMHA — 2019” yazılı bir koli. İçinde sararmış dilekçeler. Zamanında bekletilmiş başka işler.', 'Koli'),
+          ...decoy(
+            '“İMHA — 2019” yazılı bir koli. İçinde sararmış dilekçeler. Zamanında bekletilmiş başka işler.',
+            'Koli',
+          ),
         }),
       ],
     }),

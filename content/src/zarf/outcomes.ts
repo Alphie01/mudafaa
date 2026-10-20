@@ -279,12 +279,17 @@ export const outcomes: CasePart = {
       verdictText:
         'Sanık Halil Ekinci’nin TCK 252/2 uyarınca alt sınırdan 4 yıl hapis cezası ile cezalandırılmasına; TCK 62/1 uyarınca 3 yıl 4 ay hapis cezasına; TCK 53/1 ve 53/5’teki hak yoksunluklarına; tutuklulukta geçen sürenin cezadan mahsubuna (TCK 63); el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; cezanın süresi nedeniyle erteleme ve hükmün açıklanmasının geri bırakılması koşulları bulunmadığına; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
-        because('İşaretli paralar sanığın çekmecesinde ele geçirilmiş; muhbirin beyanı el koyma tutanağıyla desteklenmiştir.'),
+        because(
+          'İşaretli paralar sanığın çekmecesinde ele geçirilmiş; muhbirin beyanı el koyma tutanağıyla desteklenmiştir.',
+        ),
         because(
           'Sanığın öncelikli randevu konusundaki inkârı müdürlük kaydıyla çelişmiştir.',
           all(flag('halil_inkar'), has('ev_sira_disi')),
         ),
-        because('Savunmanın inandırıcılığı duruşmada çökmüş; heyet iddianamedeki anlatımı esas almıştır.', flag('cokus')),
+        because(
+          'Savunmanın inandırıcılığı duruşmada çökmüş; heyet iddianamedeki anlatımı esas almıştır.',
+          flag('cokus'),
+        ),
         because(
           'Temel ceza alt sınırdan belirlenmiş; sanığın sabıkasızlığı takdiri indirim nedeni sayılmıştır (TCK 62/1). Ceza iki yılı aştığından erteleme ve HAGB uygulanamamıştır (TCK 51/1; CMK 231/5).',
         ),

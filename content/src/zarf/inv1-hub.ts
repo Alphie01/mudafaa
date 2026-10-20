@@ -406,7 +406,8 @@ export const inv1Hub: CasePart = {
     choiceNode('INV1_DIL', {
       ...INV1,
       title: 'Delil dilekçesi (CMK 177)',
-      prompt: 'Ağır ceza mahkemesine delil dilekçesi. Üç talep hakkın var; her birini dikkatle seç. Seçtiğin talep geri alınmaz.',
+      prompt:
+        'Ağır ceza mahkemesine delil dilekçesi. Üç talep hakkın var; her birini dikkatle seç. Seçtiğin talep geri alınmaz.',
       hud: ['dil_hak'],
       choices: [
         option('DIL_KAMERA', '2. kat koridor kamerası, 12 Mart 10.30–10.50 görüntüleri', {
@@ -568,7 +569,10 @@ export const inv1Hub: CasePart = {
           flag('ilk_insan'),
           S`- İlk gün "hafıza beklemez" demiştim. Herkesin hafızası bir yere kadar konuştu; geri kalanını yarın kâğıtlar söyleyecek.`,
         ),
-        W(flag('br01_dogru'), S`- Leyla ilk gece bir kez "doğru" demişti. Dört ile on iki. Yarın o dört yılın altına bir çizgi çekmeye çalışacağım.`),
+        W(
+          flag('br01_dogru'),
+          S`- Leyla ilk gece bir kez "doğru" demişti. Dört ile on iki. Yarın o dört yılın altına bir çizgi çekmeye çalışacağım.`,
+        ),
       ],
     }),
     decisionNode('INV1_GECE_6', [{ to: 'INV1_GECE' }], {

@@ -83,10 +83,30 @@ export const inv1People: CasePart = {
         mood('Resmî', 'neutral', 'normal'),
       ],
       objectives: [
-        objective('obj_sabah', flag('fact_cagri'), '10.35’te bir dahili çağrı: “Müdür Hanım bekliyor.”', 'O sabah Halil neden odasından çıktı?'),
-        objective('obj_bayram', flag('fact_bayram_red'), 'Halil, Bayram’a “şerh kalkmadan imza yok” demiş.', 'Halil Bayram’la ne konuştu?'),
-        objective('obj_kontrol', flag('fact_onbir_dosya'), 'On bir dosya durdurulmuş; biri içeriden dosya hızlandırıyor.', 'Halil’i kim durdurmak isterdi?'),
-        objective('obj_sira', flag('fact_sira_itiraf'), 'Halil bir kez kuralı esnetti: sıra dışı randevu.', 'Halil bir şey saklıyor mu?'),
+        objective(
+          'obj_sabah',
+          flag('fact_cagri'),
+          '10.35’te bir dahili çağrı: “Müdür Hanım bekliyor.”',
+          'O sabah Halil neden odasından çıktı?',
+        ),
+        objective(
+          'obj_bayram',
+          flag('fact_bayram_red'),
+          'Halil, Bayram’a “şerh kalkmadan imza yok” demiş.',
+          'Halil Bayram’la ne konuştu?',
+        ),
+        objective(
+          'obj_kontrol',
+          flag('fact_onbir_dosya'),
+          'On bir dosya durdurulmuş; biri içeriden dosya hızlandırıyor.',
+          'Halil’i kim durdurmak isterdi?',
+        ),
+        objective(
+          'obj_sira',
+          flag('fact_sira_itiraf'),
+          'Halil bir kez kuralı esnetti: sıra dışı randevu.',
+          'Halil bir şey saklıyor mu?',
+        ),
       ],
       topics: [
         topic('TP_SABAH', 'O sabah', {
@@ -307,14 +327,19 @@ export const inv1People: CasePart = {
       ],
       choices: [
         option('G_YUZLES', 'Sıra dışı randevu kaydını masaya koy', {
-          prompt: 'Halil Bey. 3 Mart’ta Bayram Öz’e öncelikli randevu onayı vermişsiniz. İmzanız var. Bana anlatmak istediğiniz bir şey var mı?',
+          prompt:
+            'Halil Bey. 3 Mart’ta Bayram Öz’e öncelikli randevu onayı vermişsiniz. İmzanız var. Bana anlatmak istediğiniz bir şey var mı?',
           visibleWhen: all(has('ev_sira_disi'), flag('fact_bayram_red'), trustOk),
           cost: costOf('min', 3),
           score: { SORGULAMA: 150 },
           effects: [
             raise('fact_sira_itiraf'),
             inc('trust', 6),
-            mark('GOOD', 'Saklanan bilgi açığa çıktı: Halil yirmi yedi yılda bir kez kuralı esnetmiş; karşılığında bir şey almamış.', 'SORGULAMA'),
+            mark(
+              'GOOD',
+              'Saklanan bilgi açığa çıktı: Halil yirmi yedi yılda bir kez kuralı esnetmiş; karşılığında bir şey almamış.',
+              'SORGULAMA',
+            ),
           ],
           responses: B(S`
             - Halil kâğıda baktı. Gözlüğünü çıkarmadı. Uzun süre baktı; kendi imzasını tanır gibi değil, bir yabancının imzası gibi.
@@ -327,7 +352,8 @@ export const inv1People: CasePart = {
           next: 'INV1_HALIL_TAVSIYE',
         }),
         option('G_YUZLES_X', 'Sıra dışı randevu kaydını masaya koy', {
-          prompt: 'Halil Bey. 3 Mart’ta Bayram Öz’e öncelikli randevu onayı vermişsiniz. İmzanız var. Bana anlatmak istediğiniz bir şey var mı?',
+          prompt:
+            'Halil Bey. 3 Mart’ta Bayram Öz’e öncelikli randevu onayı vermişsiniz. İmzanız var. Bana anlatmak istediğiniz bir şey var mı?',
           visibleWhen: all(has('ev_sira_disi'), flag('fact_bayram_red'), not(trustOk)),
           cost: costOf('min', 3),
           effects: [

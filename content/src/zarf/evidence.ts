@@ -105,8 +105,7 @@ const inv1: EvidenceDef[] = [
     type: 'FIZIKSEL',
     title: 'Çekmece kilidinin paslı dili',
     shortText: 'Üçüncü çekmecenin kilidi hiç kullanılmamış; anahtarı yok.',
-    description:
-      'Kilit dili pastan kımıldamıyor. Bu çekmece yıllardır kilitlenmemiş; kim isterse açabilirdi.',
+    description: 'Kilit dili pastan kımıldamıyor. Bu çekmece yıllardır kilitlenmemiş; kim isterse açabilirdi.',
     sourceLabel: 'Kontrol odası',
     icon: 'magnifier',
     ...card,
@@ -332,8 +331,7 @@ const deliveries: EvidenceDef[] = [
     type: 'ADLI_RAPOR',
     title: 'Ses kayıt cihazı bilirkişi raporu',
     shortText: 'İhbarcıya takılan cihazın iç günlüğü ve pil durumu.',
-    description:
-      'Emniyet emanetindeki ses kayıt cihazının bilirkişi incelemesi: iç günlük, pil durumu, tuş kayıtları.',
+    description: 'Emniyet emanetindeki ses kayıt cihazının bilirkişi incelemesi: iç günlük, pil durumu, tuş kayıtları.',
     sourceLabel: 'Bilirkişi',
     icon: 'document',
     side: 'DEFENSE',
@@ -413,8 +411,7 @@ const ara: EvidenceDef[] = [
     type: 'FOTOGRAF',
     title: 'Karedeki bilekte yeşil bir ışık',
     shortText: 'Kapıyı açan elin bileğinde küçük, yeşil bir ekran parlıyor.',
-    description:
-      'Kapı koluna uzanan sol elin bileğinde küçük, dikdörtgen, yeşil bir ışık. Bir saat ekranı; dijital.',
+    description: 'Kapı koluna uzanan sol elin bileğinde küçük, dikdörtgen, yeşil bir ışık. Bir saat ekranı; dijital.',
     sourceLabel: 'Kamera karesi',
     icon: 'camera',
     ...cardKey,
@@ -423,8 +420,7 @@ const ara: EvidenceDef[] = [
     type: 'FOTOGRAF',
     title: 'Karede koltuk altında kahverengi bir köşe',
     shortText: 'Girerken koltuğunun altında kahverengi bir zarf köşesi; çıkarken yok.',
-    description:
-      '10.41.07’de açık renk ceketin koltuğunun altında kahverengi bir köşe. 10.41.27 karesinde yok.',
+    description: '10.41.07’de açık renk ceketin koltuğunun altında kahverengi bir köşe. 10.41.27 karesinde yok.',
     sourceLabel: 'Kamera karesi',
     icon: 'camera',
     ...card,

@@ -147,7 +147,9 @@ export const ara: CasePart = {
           has('ev_santral'),
           S`- Ara karar cevapları dosyaya düştü. Müdürlükten santralin dökümü, bir izin çizelgesiyle birlikte. Kamera görüntüsünü istememiştim; o kutu boştu.`,
         ),
-        O(S`- Ara karar cevapları dosyaya düşmeye başladı. Müdürlükten ne kamera görüntüsü istemiştim ne santral kaydı; o kutular boştu.`),
+        O(
+          S`- Ara karar cevapları dosyaya düşmeye başladı. Müdürlükten ne kamera görüntüsü istemiştim ne santral kaydı; o kutular boştu.`,
+        ),
       ],
     }),
     decisionNode('ARA_GIRIS_3', [{ to: 'ARA_GIRIS' }], {
@@ -360,7 +362,8 @@ export const ara: CasePart = {
         }),
         option('SAB2_B', '“Plakayı bana ver; kimin olduğuna bakarım.”', {
           effects: [raise('sab2_plaka')],
-          neutral: 'Avukatın plaka sorgulama yetkisi yoktur; bildirilen kayıt savcılığın işidir. Bu, yalnızca zaman yer.',
+          neutral:
+            'Avukatın plaka sorgulama yetkisi yoktur; bildirilen kayıt savcılığın işidir. Bu, yalnızca zaman yer.',
           responses: B(S`
             zehra: Siz mi bakacaksınız? Avukat hanım, sizin işiniz babam. Plaka savcılığın işi. Bunu siz bana öğrettiniz.
             ~ Haklı. Bir hemşire bana mesleğimi hatırlattı. Leyla duysa gülümserdi.
@@ -575,67 +578,71 @@ export const ara: CasePart = {
       background: 'buro',
       prompt: 'Bursa Cumhuriyet Başsavcılığına. Kimin hakkında, hangi somut dayanakla, ne isteyerek?',
       choices: [
-        option('SUC_A', 'Zarfın kaynağı ve 214’ten yapılan çağrı: Devir-2 memuru hakkında soruşturma ve iletişim tespiti', {
-          effects: [
-            ifThen(
-              all(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
-              [
-                raise('suc_duyurusu'),
-                score('USUL_BILGISI', 80),
-                mark(
-                  'GOOD',
-                  'Somut dayanaklı suç duyurusu (CMK 158): zarfın zimmet kaydı, santral ve izin çizelgesi. Şüpheli için iletişimin tespiti hâkim kararıyla istenebilir (CMK 135/6); iftira ve kişiyi hürriyetinden yoksun kılma da değerlendirilir (TCK 267).',
-                  'USUL_BILGISI',
-                ),
-              ],
-              [
-                ifThen(
-                  any(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
-                  [
-                    raise('suc_duyurusu'),
-                    score('USUL_BILGISI', 30),
-                    mark(
-                      'NEUTRAL',
-                      'Suç duyurusu kayda girdi; ama dayanaklarından biri eksikti. Zarfın kaynağını ve çağrının tek bir masadan geldiğini birlikte göstermek gerekirdi.',
-                      'USUL_BILGISI',
-                    ),
-                  ],
-                  [
-                    mark(
-                      'BAD',
-                      'Somut dayanak olmadan bir memurun adını suç duyurusuna yazmak iftira riskidir (TCK 267). Önce zarfı ve çağrıyı belgele.',
-                      'USUL_BILGISI',
-                    ),
-                    score('USUL_BILGISI', -30),
-                  ],
-                ),
-              ],
-            ),
-          ],
-          responses: [
-            W(
-              all(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
-              S`
+        option(
+          'SUC_A',
+          'Zarfın kaynağı ve 214’ten yapılan çağrı: Devir-2 memuru hakkında soruşturma ve iletişim tespiti',
+          {
+            effects: [
+              ifThen(
+                all(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
+                [
+                  raise('suc_duyurusu'),
+                  score('USUL_BILGISI', 80),
+                  mark(
+                    'GOOD',
+                    'Somut dayanaklı suç duyurusu (CMK 158): zarfın zimmet kaydı, santral ve izin çizelgesi. Şüpheli için iletişimin tespiti hâkim kararıyla istenebilir (CMK 135/6); iftira ve kişiyi hürriyetinden yoksun kılma da değerlendirilir (TCK 267).',
+                    'USUL_BILGISI',
+                  ),
+                ],
+                [
+                  ifThen(
+                    any(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
+                    [
+                      raise('suc_duyurusu'),
+                      score('USUL_BILGISI', 30),
+                      mark(
+                        'NEUTRAL',
+                        'Suç duyurusu kayda girdi; ama dayanaklarından biri eksikti. Zarfın kaynağını ve çağrının tek bir masadan geldiğini birlikte göstermek gerekirdi.',
+                        'USUL_BILGISI',
+                      ),
+                    ],
+                    [
+                      mark(
+                        'BAD',
+                        'Somut dayanak olmadan bir memurun adını suç duyurusuna yazmak iftira riskidir (TCK 267). Önce zarfı ve çağrıyı belgele.',
+                        'USUL_BILGISI',
+                      ),
+                      score('USUL_BILGISI', -30),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+            responses: [
+              W(
+                all(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
+                S`
                 - Leyla dilekçeyi okudu; bir kelimeyi değiştirdi. "Kesin" yazdığım yere "muhtemel" yazdı. "Savcıya kesin deme" dedi; "kesin olanı o söylesin."
                 - Üç sayfa. Birinci sayfada bir zarf ve bir deste: 0417, 0401–0450, Devir-2. İkinci sayfada bir dahili ve bir izin çizelgesi: 214, tek masa. Üçüncü sayfada bir talep.
                 - Savcılık kalemindeki memur dilekçeyi okudu, kaşlarını kaldırdı. "Bu bir harita, avukat hanım" dedi. Numara verdi.
                 ~ Bir isim yazdım. Ama isimden önce iki kâğıt yazdım. Leyla'nın dediği gibi: parmak değil, kâğıt.
               `,
-            ),
-            W(
-              any(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
-              S`
+              ),
+              W(
+                any(has('ded_zarf_kaynagi'), has('ded_tek_kisi')),
+                S`
                 - Dilekçeyi yazdım. Elimde bir kâğıt vardı, iki değil. Savcılık numara verdi; ama memurun yüzünde "bir tane daha" ifadesi vardı.
                 ~ Yarım bir harita, yolu gösterir ama kapıyı göstermez.
               `,
-            ),
-            O(S`
+              ),
+              O(S`
               - Dilekçeyi yazdım, okudum, yeniden okudum. Bir isim vardı, bir şüphe vardı; bir kâğıt yoktu.
               ~ Göndermedim. Leyla'nın sesi: "Tahmin dilekçeye yazılmaz." Bir isim, bir kâğıt değildir.
             `),
-          ],
-          next: '$stay',
-        }),
+            ],
+            next: '$stay',
+          },
+        ),
         option('SUC_B', 'Müteahhit Ateşoğlu hakkında: bütün bu işin arkasında o var', {
           score: { USUL_BILGISI: -40 },
           effects: [raise('suc_cengiz')],
@@ -705,18 +712,22 @@ export const ara: CasePart = {
             `),
             next: '$stay',
           }),
-          option('AH_HAZIR', 'İkinci celsede size yeniden söz verilecek. Ne söyleyeceğinizi size ben söylemeyeceğim; doğruyu, kısa söyleyin.', {
-            score: { SAVUNMA_STRATEJISI: 40 },
-            effects: [raise('halil_hazir'), inc('trust', 3)],
-            good: 'Avukat müvekkili ek savunmaya ve son söze hazırlar, ama onun yerine metin yazmaz; doğrunun kısa ve sade söylenmesi en güçlü savunmadır.',
-            responses: B(S`
+          option(
+            'AH_HAZIR',
+            'İkinci celsede size yeniden söz verilecek. Ne söyleyeceğinizi size ben söylemeyeceğim; doğruyu, kısa söyleyin.',
+            {
+              score: { SAVUNMA_STRATEJISI: 40 },
+              effects: [raise('halil_hazir'), inc('trust', 3)],
+              good: 'Avukat müvekkili ek savunmaya ve son söze hazırlar, ama onun yerine metin yazmaz; doğrunun kısa ve sade söylenmesi en güçlü savunmadır.',
+              responses: B(S`
               halil: Kısa. Ben kısa konuşamam ki. Yirmi yedi yıl gerekçe yazdım; her ret kararı iki sayfa.
               > O zaman iki sayfanın ilk cümlesini söyleyin. Gerisini heyet okur.
               - Halil güldü. İlk kez. Kısa, kuru, utangaç bir gülüş.
               halil: İlk cümle. Peki. "Yirmi yedi yılda bir kez kuralı esnettim; o bir iyilikti, bir pazarlık değil." İlk cümle bu.
             `),
-            next: '$stay',
-          }),
+              next: '$stay',
+            },
+          ),
           option('AH_EZBER', 'Size bir metin hazırladım; kürsüde bunu ezbere söyleyin, başka bir şey söylemeyin.', {
             score: { SAVUNMA_STRATEJISI: -40 },
             effects: [raise('halil_ezber')],
@@ -770,20 +781,24 @@ export const ara: CasePart = {
             `),
             next: '$stay',
           }),
-          option('MUZ_TANIK', 'Mahkemenin sizi tanık olarak dinlemesini isteyeceğim. Ne söyleyeceğinizi ben belirlemem; gördüğünüzü anlatırsınız.', {
-            visibleWhen: any(has('clue_cay_defteri'), flag('muzaffer_gordu')),
-            score: { USUL_BILGISI: 40 },
-            effects: [raise('muzaffer_cagrildi')],
-            good: 'Tanığın dinlenmesi mahkemeden istenir (CMK 177, 178); avukat tanığa ne söyleyeceğini söylemez. Tanığın korkusu dinlenir ama yönlendirilmez.',
-            responses: B(S`
+          option(
+            'MUZ_TANIK',
+            'Mahkemenin sizi tanık olarak dinlemesini isteyeceğim. Ne söyleyeceğinizi ben belirlemem; gördüğünüzü anlatırsınız.',
+            {
+              visibleWhen: any(has('clue_cay_defteri'), flag('muzaffer_gordu')),
+              score: { USUL_BILGISI: 40 },
+              effects: [raise('muzaffer_cagrildi')],
+              good: 'Tanığın dinlenmesi mahkemeden istenir (CMK 177, 178); avukat tanığa ne söyleyeceğini söylemez. Tanığın korkusu dinlenir ama yönlendirilmez.',
+              responses: B(S`
               muzaffer: Mahkeme mi? Ben... ben bir kere trafik için gittim, o kadar. Kürsüde ne denir, bilmem.
               > Gördüğünüz denir. Fazlası değil. Defterinizi de getirin.
               - Muzaffer defteri ipe geri astı. Sonra indirdi, önlüğünün cebine koydu.
               muzaffer: Halil Bey bana yirmi yıl "günaydın usta" dedi. Bir kez bile atlamadı. Ben de bir kez atlamayayım.
             `),
-            next: '$stay',
-          }),
-          option('MUZ_BASKI', 'Mahkemede yüzünü gördüğünüzü söyleyin; açık renk ceket Sinan Bey’di deyin.', {
+              next: '$stay',
+            },
+          ),
+          option('MUZ_BASKI', 'Mahkemede yüzünü de gördüğünüzü söyleyin; kim olduğunu ikimiz de biliyoruz.', {
             visibleWhen: flag('muzaffer_gordu'),
             score: { USUL_BILGISI: -150 },
             effects: [inc('ethics', 2), raise('tanik_etkileme')],
@@ -817,19 +832,23 @@ export const ara: CasePart = {
           ~ Bu adam benim müvekkilim değil. Bir gün şüpheli olabilir. Bugün ne söylersem, ikimizin dosyasına da yazılır.
         `),
         choices: [
-          option('BAY_A', 'Size avukat olamam ve sizi dinleyemem. Baronun adli yardım bürosuna gidin; söyleyeceğinizi avukatınızla savcılığa ya da mahkemeye söyleyin.', {
-            score: { USUL_BILGISI: 60 },
-            effects: [raise('bayram_avukat')],
-            next: HUB,
-            good: 'Çıkarı müvekkilinle çatışan kişiye hukuki yardım verilmez, ifadesi alınmaz (Av.K. 38/1-b; TBB Meslek Kuralları). Onu kendi avukatına ve yetkili makama yönlendirmek doğrudur.',
-            responses: B(S`
+          option(
+            'BAY_A',
+            'Size avukat olamam ve sizi dinleyemem. Baronun adli yardım bürosuna gidin; söyleyeceğinizi avukatınızla savcılığa ya da mahkemeye söyleyin.',
+            {
+              score: { USUL_BILGISI: 60 },
+              effects: [raise('bayram_avukat')],
+              next: HUB,
+              good: 'Çıkarı müvekkilinle çatışan kişiye hukuki yardım verilmez, ifadesi alınmaz (Av.K. 38/1-b; TBB Meslek Kuralları). Onu kendi avukatına ve yetkili makama yönlendirmek doğrudur.',
+              responses: B(S`
               - Kartvizitimin arkasına baronun adli yardım bürosunun adresini yazdım. Bayram kartı iki eliyle aldı; bir tapu senedi gibi.
               bayram: Avukatım mı olacak? Benim? Tamam. Tamam abla.
               - Kapıdan çıkarken durdu. Ona hiçbir şey sormamıştım; o yine de söyledi, bir yük gibi.
               bayram: Ben o zarfı... Halil Bey'in eline vermedim abla. Odasına bile girmedim. Mahkemede söyleyeceğim. Avukatımla. Söz.
               ~ Bir cümle. Sormadan gelen bir cümle. Tutanağa geçmeyecek; ama kürsüde yeniden kurulabilir. Yeter ki ben onun yerine kurmayayım.
             `),
-          }),
+            },
+          ),
           option('BAY_B', 'Oturun. Anlatın; ben yazayım, siz imzalayın. Mahkemeye ben sunarım.', {
             score: { USUL_BILGISI: -30 },
             effects: [raise('bayram_yazdirildi')],
@@ -841,96 +860,100 @@ export const ara: CasePart = {
               ~ Elimde imzalı bir kâğıt var. Savcı bu kâğıdı "avukatın yazdırdığı beyan" diye okuyacak. Haklı da olacak.
             `),
           }),
-          option('BAY_C', 'Mahkemede şunu söyleyin: zarfı koridorda Sinan Kaplan’a verdiniz. Başka bir şey söylemeyin.', {
-            score: { USUL_BILGISI: -150 },
-            effects: [inc('ethics', 2), raise('tanik_etkileme')],
-            next: HUB,
-            bad: 'Tanığa ne söyleyeceğini dikte etmek, bir isim vererek hele, tanığı etkilemedir (TCK 277) ve ağır meslek ihlalidir (Av.K. 34).',
-            responses: B(S`
-              bayram: Sinan Bey mi? Ben... tamam abla. Sinan Bey. Siz bilirsiniz.
+          option(
+            'BAY_C',
+            'Mahkemede şunu söyleyin: zarfı Halil Bey’e vermediniz, odaya girmediniz. Başka hiçbir şey söylemeyin.',
+            {
+              score: { USUL_BILGISI: -150 },
+              effects: [inc('ethics', 2), raise('tanik_etkileme')],
+              next: HUB,
+              bad: 'Tanığa mahkemede ne söyleyeceğini ve neyi söylemeyeceğini dikte etmek tanığı etkilemedir (TCK 277) ve ağır meslek ihlalidir (Av.K. 34).',
+              responses: B(S`
+              bayram: Başka hiçbir şey mi? Ben... tamam abla. Siz bilirsiniz. Siz avukatsınız.
               - Gitti. Kapı kapandı. Yerde, tespihinin bir boncuğu kalmıştı.
-              ~ Ona bir isim verdim. Doğru isim olabilir; ama artık onun değil, benim ağzımdan çıkmış bir isim.
+              ~ Ona bir cümle verdim. Doğru cümle olabilir; ama artık onun değil, benim ağzımdan çıkmış bir cümle.
             `),
-          }),
+            },
+          ),
         ],
       }),
     ),
     direct(
-    deductionBoard('ARA_CIKARIM', {
-      ...ARA,
-      title: 'Çıkarım Tahtası',
-      background: 'buro_gece',
-      lines: B(S`
+      deductionBoard('ARA_CIKARIM', {
+        ...ARA,
+        title: 'Çıkarım Tahtası',
+        background: 'buro_gece',
+        lines: B(S`
         - Panoya yeni kartlar ekledim: bir santral satırı, bir izin çizelgesi, bir kamera karesi, bir çay defteri. Kırmızı ipler artık bir örümcek ağı gibi.
         ~ Bir zarfın yolu, bir zincirdir. Her halka bir öncekine bağlanırsa, sonunda bir el çıkar ortaya.
       `),
-      pool: [
-        ...POOL_INV1,
-        'clue_214_cagri',
-        'clue_izin_gulay',
-        'clue_manuel',
-        'clue_fisilti',
-        'clue_kare_saat',
-        'clue_kol_saat',
-        'clue_kare_zarf',
-        'clue_zimmet',
-        'clue_cay_defteri',
-      ],
-      recipes: [
-        ...INV1_RECIPES.map(again),
-        fresh(
-          'CB_ZARF',
-          'clue_barkod',
-          'clue_zimmet',
-          'ded_zarf_kaynagi',
-          'Devir-2’nin destesi',
-          'Çekmecedeki zarfın barkodu 0417. Zimmet defteri: 0401–0450, 1 Mart’ta Devir Servisi-2’ye teslim edilmiş. Zarf kontrol servisinin değil.',
-        ),
-        fresh(
-          'CB_TEK',
+        pool: [
+          ...POOL_INV1,
           'clue_214_cagri',
           'clue_izin_gulay',
-          'ded_tek_kisi',
-          '214’teki tek masa',
-          'Halil’i indiren çağrı 214’ten. O hafta Gülay Erdem izindeydi. 214’te tek bir kişi vardı: Sinan Kaplan.',
-        ),
-        fresh(
-          'CB_TEK2',
-          'clue_takvim_214',
-          'clue_izin_gulay',
-          'ded_tek_kisi',
-          '214’teki tek masa',
-          'Halil takvimine arayan dahiliyi yazmıştı: 214. O hafta Gülay Erdem izindeydi. 214’te tek bir kişi vardı: Sinan Kaplan.',
-        ),
-        fresh(
-          'CB_KAMERA',
+          'clue_manuel',
+          'clue_fisilti',
+          'clue_kare_saat',
           'clue_kol_saat',
-          'clue_sinan_saat',
-          'ded_kameradaki',
-          'Yeşil ekran',
-          'Kontrol odasının kapısını açan elin bileğinde yeşil bir ekran. Sinan Kaplan adımlarını sayarken aynı yeşil ışığa bakıyordu.',
-        ),
-        fresh(
-          'CB_ALIBI',
+          'clue_kare_zarf',
+          'clue_zimmet',
           'clue_cay_defteri',
-          'clue_sinan_arsiv',
-          'ded_alibi',
-          'Soğuyan çay',
-          '“10.30’dan 10.50’ye arşivdeydim.” Ama 10.40’ta arşive ısmarladığı çay 10.42’de boş bir odaya bırakıldı. Arşivde değildi.',
-        ),
-      ],
-      miss: fallback('FB_ARA_CIKARIM', 'COMBINE', {
-        repeat: 'ONCE_PER_PARAMS',
-        score: { DELIL_ANALIZI: -50 },
-        feedback: {
-          title: 'Bu ikisi birbirini açıklamıyor',
-          text: 'İp gerildi, ama bir şey bağlanmadı.',
-          label: `BAĞLANTI YOK · ${minus(50)} SKOR`,
-          tone: 'error',
-        },
+        ],
+        recipes: [
+          ...INV1_RECIPES.map(again),
+          fresh(
+            'CB_ZARF',
+            'clue_barkod',
+            'clue_zimmet',
+            'ded_zarf_kaynagi',
+            'Devir-2’nin destesi',
+            'Çekmecedeki zarfın barkodu 0417. Zimmet defteri: 0401–0450, 1 Mart’ta Devir Servisi-2’ye teslim edilmiş. Zarf kontrol servisinin değil.',
+          ),
+          fresh(
+            'CB_TEK',
+            'clue_214_cagri',
+            'clue_izin_gulay',
+            'ded_tek_kisi',
+            '214’teki tek masa',
+            'Halil’i indiren çağrı 214’ten. O hafta Gülay Erdem izindeydi. 214’te tek bir kişi vardı: Sinan Kaplan.',
+          ),
+          fresh(
+            'CB_TEK2',
+            'clue_takvim_214',
+            'clue_izin_gulay',
+            'ded_tek_kisi',
+            '214’teki tek masa',
+            'Halil takvimine arayan dahiliyi yazmıştı: 214. O hafta Gülay Erdem izindeydi. 214’te tek bir kişi vardı: Sinan Kaplan.',
+          ),
+          fresh(
+            'CB_KAMERA',
+            'clue_kol_saat',
+            'clue_sinan_saat',
+            'ded_kameradaki',
+            'Yeşil ekran',
+            'Kontrol odasının kapısını açan elin bileğinde yeşil bir ekran. Sinan Kaplan adımlarını sayarken aynı yeşil ışığa bakıyordu.',
+          ),
+          fresh(
+            'CB_ALIBI',
+            'clue_cay_defteri',
+            'clue_sinan_arsiv',
+            'ded_alibi',
+            'Soğuyan çay',
+            '“10.30’dan 10.50’ye arşivdeydim.” Ama 10.40’ta arşive ısmarladığı çay 10.42’de boş bir odaya bırakıldı. Arşivde değildi.',
+          ),
+        ],
+        miss: fallback('FB_ARA_CIKARIM', 'COMBINE', {
+          repeat: 'ONCE_PER_PARAMS',
+          score: { DELIL_ANALIZI: -50 },
+          feedback: {
+            title: 'Bu ikisi birbirini açıklamıyor',
+            text: 'İp gerildi, ama bir şey bağlanmadı.',
+            label: `BAĞLANTI YOK · ${minus(50)} SKOR`,
+            tone: 'error',
+          },
+        }),
+        finish: { id: 'ARA_CIKARIM_BITIR' },
       }),
-      finish: { id: 'ARA_CIKARIM_BITIR' },
-    }),
     ),
     decisionNode('ARA_SON_1', [{ to: 'ARA_SON_2' }], {
       ...ARA,

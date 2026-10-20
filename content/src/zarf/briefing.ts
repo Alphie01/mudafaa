@@ -314,7 +314,7 @@ export const briefing: CasePart = {
         }),
       ],
     }),
-      story('INV1_ILK', {
+    story('INV1_ILK', {
       ...INV1,
       title: 'Pano',
       background: 'buro',

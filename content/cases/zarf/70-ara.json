@@ -1498,7 +1498,7 @@
         {
           "id": "MUZ_BASKI",
           "kind": "OPTION",
-          "label": "Mahkemede yüzünü gördüğünüzü söyleyin; açık renk ceket Sinan Bey’di deyin.",
+          "label": "Mahkemede yüzünü de gördüğünüzü söyleyin; kim olduğunu ikimiz de biliyoruz.",
           "visibleWhen": { "flag": "muzaffer_gordu" },
           "responses": [
             {
@@ -1645,16 +1645,19 @@
         {
           "id": "BAY_C",
           "kind": "OPTION",
-          "label": "Mahkemede şunu söyleyin: zarfı koridorda Sinan Kaplan’a verdiniz. Başka bir şey söylemeyin.",
+          "label": "Mahkemede şunu söyleyin: zarfı Halil Bey’e vermediniz, odaya girmediniz. Başka hiçbir şey söylemeyin.",
           "next": "ARA_HUB",
           "responses": [
             {
               "lines": [
-                { "speaker": "bayram", "text": "Sinan Bey mi? Ben... tamam abla. Sinan Bey. Siz bilirsiniz." },
+                {
+                  "speaker": "bayram",
+                  "text": "Başka hiçbir şey mi? Ben... tamam abla. Siz bilirsiniz. Siz avukatsınız."
+                },
                 { "speaker": "narrator", "text": "Gitti. Kapı kapandı. Yerde, tespihinin bir boncuğu kalmıştı." },
                 {
                   "speaker": "player",
-                  "text": "Ona bir isim verdim. Doğru isim olabilir; ama artık onun değil, benim ağzımdan çıkmış bir isim.",
+                  "text": "Ona bir cümle verdim. Doğru cümle olabilir; ama artık onun değil, benim ağzımdan çıkmış bir cümle.",
                   "style": "thought"
                 }
               ]
@@ -1667,7 +1670,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Tanığa ne söyleyeceğini dikte etmek, bir isim vererek hele, tanığı etkilemedir (TCK 277) ve ağır meslek ihlalidir (Av.K. 34).",
+            "feedback": "Tanığa mahkemede ne söyleyeceğini ve neyi söylemeyeceğini dikte etmek tanığı etkilemedir (TCK 277) ve ağır meslek ihlalidir (Av.K. 34).",
             "category": "USUL_BILGISI"
           }
         }

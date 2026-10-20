@@ -221,7 +221,8 @@ export const trial: CasePart = {
         baskan: Tanık, olayı anlatın. Sonra müdafi sorularını soracak.
         - Bayram anlattı. İki ifadesini birden; aralarındaki duvarı görmeden. Her cümlenin sonunda tespihin bir boncuğunu çekti.
       `,
-      rulesText: 'Önce bastır, sonra doğru delille vur. Muhbirin iki hikâyesi var; hangisinin hangi kâğıtla çöktüğünü bul.',
+      rulesText:
+        'Önce bastır, sonra doğru delille vur. Muhbirin iki hikâyesi var; hangisinin hangi kâğıtla çöktüğünü bul.',
       objectionGrounds: ['g_kanaat', 'g_duyum'],
       statements: [
         statement('B1', 1, [
@@ -261,7 +262,11 @@ export const trial: CasePart = {
           effects: [
             ...wrongEvidence,
             raise('sira_savcida'),
-            mark('BAD', 'Randevu kaydını muhbire karşı sunmak, onun “iş karşılığı” anlatısını güçlendirdi.', 'SAVUNMA_STRATEJISI'),
+            mark(
+              'BAD',
+              'Randevu kaydını muhbire karşı sunmak, onun “iş karşılığı” anlatısını güçlendirdi.',
+              'SAVUNMA_STRATEJISI',
+            ),
           ],
           responses: B(S`
             bayram: Evet! İşte! Halil Bey bana iyilik yaptı, sırayı öne aldı! Ben de... ben de karşılığını...
@@ -334,7 +339,11 @@ export const trial: CasePart = {
             inc('pers'),
             inc('legal_hits'),
             raise('obj_b2'),
-            mark('GOOD', 'İtiraz yerinde: “herkesten aldığı bilinir” bir söylentidir; tanık bilmediği bir şeyi aktarıyor.', 'SORGULAMA'),
+            mark(
+              'GOOD',
+              'İtiraz yerinde: “herkesten aldığı bilinir” bir söylentidir; tanık bilmediği bir şeyi aktarıyor.',
+              'SORGULAMA',
+            ),
           ],
           responses: B(S`
             > İtiraz, Sayın Başkan. "Bilinir" bir tanıklık değil, bir söylenti. Tanık kimden, ne zaman duyduğunu söylemiyor.
@@ -356,7 +365,11 @@ export const trial: CasePart = {
           effects: [
             inc('pers', 2),
             raise('contra_b3'),
-            mark('GOOD', 'Muhbirin “kendi elimle verdim”i tutanağın saatleriyle ve kamerayla çöktü: sanık o dakikalarda odasında değildi.', 'SORGULAMA'),
+            mark(
+              'GOOD',
+              'Muhbirin “kendi elimle verdim”i tutanağın saatleriyle ve kamerayla çöktü: sanık o dakikalarda odasında değildi.',
+              'SORGULAMA',
+            ),
           ],
           responses: [
             W(
@@ -390,7 +403,11 @@ export const trial: CasePart = {
           effects: [
             inc('pers', 2),
             raise('contra_b4'),
-            mark('GOOD', 'Bilirkişi raporu: kayıt 10.39.12’de fiziksel tuşla durdurulmuş, pil %68, arıza yok. “Teknik arıza” çöktü.', 'SORGULAMA'),
+            mark(
+              'GOOD',
+              'Bilirkişi raporu: kayıt 10.39.12’de fiziksel tuşla durdurulmuş, pil %68, arıza yok. “Teknik arıza” çöktü.',
+              'SORGULAMA',
+            ),
           ],
           responses: [
             W(
@@ -412,7 +429,14 @@ export const trial: CasePart = {
         }),
         objectRule('OB_B4', 'B4', 'g_kanaat', {
           score: { SORGULAMA: -20 },
-          effects: [dec('cred'), mark('BAD', 'Tanık kendi gözlemini anlatıyor; kanaat itirazı yerinde değil. Belgeyle çürütmek gerekiyordu.', 'SORGULAMA')],
+          effects: [
+            dec('cred'),
+            mark(
+              'BAD',
+              'Tanık kendi gözlemini anlatıyor; kanaat itirazı yerinde değil. Belgeyle çürütmek gerekiyordu.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(S`baskan: Tanık gördüğünü anlatıyor, müdafi. Reddedildi. Belgeniz varsa gösterin.`),
         }),
         pressRule('PR_B5', 'B5', {
@@ -431,7 +455,11 @@ export const trial: CasePart = {
             inc('pers', 2),
             raise('contra_b5'),
             raise('bayram_ifsa'),
-            mark('GOOD', 'Zarfın kaynağı ve sahte çağrının tek masası muhbirin karşısına kondu; muhbir zarfı kime verdiğini söyledi.', 'SORGULAMA'),
+            mark(
+              'GOOD',
+              'Zarfın kaynağı ve sahte çağrının tek masası muhbirin karşısına kondu; muhbir zarfı kime verdiğini söyledi.',
+              'SORGULAMA',
+            ),
           ],
           responses: B(S`
             > Sayın Başkan, sanığı odasından indiren çağrı Devir Servisi-2'nin dahilisinden yapıldı. O sabah o odada tek bir memur vardı. Zarf da o servisin destesinden.
@@ -582,7 +610,11 @@ export const trial: CasePart = {
           effects: [
             inc('pers', 2),
             raise('contra_s2'),
-            mark('GOOD', 'Santral: 10.35.08’de 214’ten sanığın hattına 41 saniyelik arama; o hafta 214’te tek memur tanıktı.', 'SORGULAMA'),
+            mark(
+              'GOOD',
+              'Santral: 10.35.08’de 214’ten sanığın hattına 41 saniyelik arama; o hafta 214’te tek memur tanıktı.',
+              'SORGULAMA',
+            ),
           ],
           responses: B(S`
             > Santral dökümü, Sayın Başkan. 10.35.08: iki yüz on dörtten iki yüz otuz bire, kırk bir saniye. Makamın hattı o saatte telekonferansta. İzin çizelgesi: Gülay Erdem izinde.
@@ -605,7 +637,11 @@ export const trial: CasePart = {
           effects: [
             inc('pers', 2),
             raise('contra_s3'),
-            mark('GOOD', 'Zarfın barkodu, tanığın servisine zimmetlenen destedendi; zimmet defterinde tanığın parafı var.', 'SORGULAMA'),
+            mark(
+              'GOOD',
+              'Zarfın barkodu, tanığın servisine zimmetlenen destedendi; zimmet defterinde tanığın parafı var.',
+              'SORGULAMA',
+            ),
           ],
           responses: B(S`
             > Çekmecedeki zarfın barkodu 0417. Zimmet defteri: 0401'den 0450'ye kadar olan deste, 1 Mart'ta Devir Servisi-2'ye teslim edilmiş. Teslim alanın parafı: S.K.
@@ -640,7 +676,11 @@ export const trial: CasePart = {
           effects: [
             inc('pers', 2),
             raise('contra_s4'),
-            mark('GOOD', 'Kırmızı defter: on bir durdurulmuş dosya, her birinde tanığın parafı; son satır “Müdüre yazılacak.” Tanığın çıkarı ortadaydı.', 'SORGULAMA'),
+            mark(
+              'GOOD',
+              'Kırmızı defter: on bir durdurulmuş dosya, her birinde tanığın parafı; son satır “Müdüre yazılacak.” Tanığın çıkarı ortadaydı.',
+              'SORGULAMA',
+            ),
           ],
           responses: B(S`
             > Sanığın kırmızı defteri, Sayın Başkan. Ekimden şubata, Ateşoğlu İnşaat'ın on bir dosyası. Her biri şerhli ya da eksik. Her birinin hazırlık parafı: S.K.
@@ -822,54 +862,62 @@ export const trial: CasePart = {
       `,
       next: 'T_045',
       options: [
-        option('T04_A', 'İrtikap icbar ve nüfuz ister; dosya sanığın masasında değildi ve muhbirin iki anlatısı birbirini dışlıyor.', {
-          effects: [
-            ifThen(
-              all(has('ded_yetkisiz'), has('ded_iki_hikaye')),
-              [
-                score('HUKUKI_BILGI', 150),
-                inc('legal_hits'),
-                inc('pers'),
-                raise('ek_savunma_tam'),
-                mark(
-                  'GOOD',
-                  'İrtikap, görevin sağladığı nüfuzu kötüye kullanarak icbarı gerektirir (TCK 250/1); dosya Devir-2’deydi ve muhbir iki gün sonra “anlaştık” dedi. Ek savunma belgeye dayandı (CMK 226/1).',
-                  'HUKUKI_BILGI',
-                ),
-              ],
-              [
-                ifThen(
-                  any(has('ded_yetkisiz'), has('ded_iki_hikaye')),
-                  [
-                    score('HUKUKI_BILGI', 60),
-                    raise('ek_savunma_kismi'),
-                    mark('NEUTRAL', 'Ek savunma doğru ama yarımdı; nüfuzun yokluğunu ve muhbirin çelişkisini birlikte göstermek gerekirdi.', 'HUKUKI_BILGI'),
-                  ],
-                  [
-                    score('HUKUKI_BILGI', -30),
-                    mark('BAD', 'Hukuki cevap doğru, ama dosyada dayanağını göstermedin.', 'HUKUKI_BILGI'),
-                  ],
-                ),
-              ],
-            ),
-          ],
-          responses: [
-            W(
-              all(has('ded_yetkisiz'), has('ded_iki_hikaye')),
-              S`
+        option(
+          'T04_A',
+          'İrtikap icbar ve nüfuz ister; dosya sanığın masasında değildi ve muhbirin iki anlatısı birbirini dışlıyor.',
+          {
+            effects: [
+              ifThen(
+                all(has('ded_yetkisiz'), has('ded_iki_hikaye')),
+                [
+                  score('HUKUKI_BILGI', 150),
+                  inc('legal_hits'),
+                  inc('pers'),
+                  raise('ek_savunma_tam'),
+                  mark(
+                    'GOOD',
+                    'İrtikap, görevin sağladığı nüfuzu kötüye kullanarak icbarı gerektirir (TCK 250/1); dosya Devir-2’deydi ve muhbir iki gün sonra “anlaştık” dedi. Ek savunma belgeye dayandı (CMK 226/1).',
+                    'HUKUKI_BILGI',
+                  ),
+                ],
+                [
+                  ifThen(
+                    any(has('ded_yetkisiz'), has('ded_iki_hikaye')),
+                    [
+                      score('HUKUKI_BILGI', 60),
+                      raise('ek_savunma_kismi'),
+                      mark(
+                        'NEUTRAL',
+                        'Ek savunma doğru ama yarımdı; nüfuzun yokluğunu ve muhbirin çelişkisini birlikte göstermek gerekirdi.',
+                        'HUKUKI_BILGI',
+                      ),
+                    ],
+                    [
+                      score('HUKUKI_BILGI', -30),
+                      mark('BAD', 'Hukuki cevap doğru, ama dosyada dayanağını göstermedin.', 'HUKUKI_BILGI'),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+            responses: [
+              W(
+                all(has('ded_yetkisiz'), has('ded_iki_hikaye')),
+                S`
                 > Sayın Başkan, irtikap bir zorlamadır: memur görevinin nüfuzuyla birini mecbur bırakır. Burada sanığın nüfuzu yoktu; başvuru Devir-2'deydi, kontrole hiç gelmemişti.
                 > Muhbirin kendisi de iki gün sonra "zorladı" demekten vazgeçip "anlaştık" demiştir. Zorlanan biri iki gün sonra ortak olmaz.
                 > Görevi kötüye kullanmaya gelince: öncelikli randevu kimseye bir menfaat sağlamadı; şerh kalkmadığı için imza çıkmadı. Bu bir iyilik denemesiydi, bir kazanç değil.
                 baskan: Not edildi.
               `,
-            ),
-            O(S`
+              ),
+              O(S`
               > Sayın Başkan, irtikap bir zorlamadır; sanığın zorlayabileceği bir şey yoktu.
               savci: Muhbir zorlandığını söylüyor, müdafi.
               ~ Haklı. Bir hukuk cümlesi, altında bir kâğıt yoksa havada kalır.
             `),
-          ],
-        }),
+            ],
+          },
+        ),
         option('T04_B', 'Ek savunmamızı hazırlamak için süre istiyoruz.', {
           score: { USUL_BILGISI: 30 },
           effects: [raise('ek_sure')],
@@ -961,27 +1009,39 @@ export const trial: CasePart = {
       ],
       next: 'T_07',
       options: [
-        option('T05_A', 'Zarf çekmeceye sanık odasında değilken girdi; bu bir varsayım değil, tutanağın kendi saatleri.', {
-          effects: [
-            ifThen(
-              ref('zarf_suphe'),
-              [
-                score('USUL_BILGISI', 100),
-                inc('legal_hits'),
-                mark('GOOD', 'Cevap hakkı yerinde kullanıldı (CMK 216/2) ve dosyadaki belgelere dayandı.', 'USUL_BILGISI'),
-              ],
-              [
-                score('USUL_BILGISI', -40),
-                dec('pers'),
-                mark('BAD', '“Belgelerle sabit” dedin; ama zarfın sanık yokken girdiğini duruşmada tartıştırmamıştın.', 'USUL_BILGISI'),
-              ],
-            ),
-          ],
-          responses: B(S`
+        option(
+          'T05_A',
+          'Zarf çekmeceye sanık odasında değilken girdi; bu bir varsayım değil, tutanağın kendi saatleri.',
+          {
+            effects: [
+              ifThen(
+                ref('zarf_suphe'),
+                [
+                  score('USUL_BILGISI', 100),
+                  inc('legal_hits'),
+                  mark(
+                    'GOOD',
+                    'Cevap hakkı yerinde kullanıldı (CMK 216/2) ve dosyadaki belgelere dayandı.',
+                    'USUL_BILGISI',
+                  ),
+                ],
+                [
+                  score('USUL_BILGISI', -40),
+                  dec('pers'),
+                  mark(
+                    'BAD',
+                    '“Belgelerle sabit” dedin; ama zarfın sanık yokken girdiğini duruşmada tartıştırmamıştın.',
+                    'USUL_BILGISI',
+                  ),
+                ],
+              ),
+            ],
+            responses: B(S`
             > Sayın Başkan, bu dosyada bir zarf var, ama bir el yok. 10.39'da kayıt susturuluyor; 10.44'te polis boş bir odaya giriyor; 10.46'da sanık dönüyor.
             > Zarf o çekmeceye girdiğinde, çekmecenin sahibi bir alt katta, kimsenin çağırmadığı bir randevuyu usulüne uygun bekliyordu.
           `),
-        }),
+          },
+        ),
         option('T05_B', 'Hukuka aykırı kayıtlar ayıklandığında geriye yalnızca muhbirin çelişen beyanı kalır.', {
           effects: [
             ifThen(
@@ -989,7 +1049,11 @@ export const trial: CasePart = {
               [
                 score('USUL_BILGISI', 80),
                 inc('legal_hits'),
-                mark('GOOD', 'Hukuka aykırı delil hükme esas alınamaz (CMK 217/2; Anayasa 38/6); kalan tek dayanak çelişkili muhbir beyanıdır.', 'USUL_BILGISI'),
+                mark(
+                  'GOOD',
+                  'Hukuka aykırı delil hükme esas alınamaz (CMK 217/2; Anayasa 38/6); kalan tek dayanak çelişkili muhbir beyanıdır.',
+                  'USUL_BILGISI',
+                ),
               ],
               [
                 score('USUL_BILGISI', -40),
@@ -1010,7 +1074,8 @@ export const trial: CasePart = {
         }),
         option('T05_D', 'Mütalaaya katılıyoruz; ayrıca söyleyeceğimiz yok.', {
           visibleWhen: any(gercekProven, all(ref('kayit_disi'), ref('zarf_suphe'))),
-          neutral: 'Beraat mütalaasına katılmak meşrudur; ama esas savunmada hangi beraat nedeninin uygulanacağını ayrıca göstermelisin.',
+          neutral:
+            'Beraat mütalaasına katılmak meşrudur; ama esas savunmada hangi beraat nedeninin uygulanacağını ayrıca göstermelisin.',
         }),
       ],
     }),
@@ -1028,12 +1093,20 @@ export const trial: CasePart = {
                 score('SAVUNMA_STRATEJISI', strategyAmount(200, 'MASUMIYET')),
                 inc('pers'),
                 raise('gercek_fail'),
-                mark('GOOD', 'CMK 223/2-b: suçun sanık tarafından işlenmediği sabit; zarfı bırakan el belgelerle gösterildi.', 'SAVUNMA_STRATEJISI'),
+                mark(
+                  'GOOD',
+                  'CMK 223/2-b: suçun sanık tarafından işlenmediği sabit; zarfı bırakan el belgelerle gösterildi.',
+                  'SAVUNMA_STRATEJISI',
+                ),
               ],
               [
                 score('SAVUNMA_STRATEJISI', -100),
                 dec('pers'),
-                mark('BAD', 'Gerçek fail iddiası belgeyle desteklenmedi; heyet bir isim değil, bir kanıt bekler.', 'SAVUNMA_STRATEJISI'),
+                mark(
+                  'BAD',
+                  'Gerçek fail iddiası belgeyle desteklenmedi; heyet bir isim değil, bir kanıt bekler.',
+                  'SAVUNMA_STRATEJISI',
+                ),
               ],
             ),
           ],
@@ -1052,40 +1125,56 @@ export const trial: CasePart = {
             `),
           ],
         }),
-        option('T07_B', 'Sanığın suçu işlediği sabit değildir; hukuka aykırı delil ayıklanınca kalan şüphe sanık lehinedir.', {
-          effects: [
-            ifThen(
-              all(ref('kayit_disi'), ref('zarf_suphe')),
-              [
-                score('SAVUNMA_STRATEJISI', strategyAmount(200, 'USUL')),
-                inc('pers'),
-                mark('GOOD', 'CMK 223/2-e: kayıtlar hükme esas alınamaz, zarfın sanık yokken girdiği gösterildi; şüphe sanık lehine.', 'SAVUNMA_STRATEJISI'),
-              ],
-              [
-                score('SAVUNMA_STRATEJISI', -100),
-                mark('BAD', 'Şüphe savunması için kayıtları ayıklatmak ve zarfın nasıl girdiğini tartıştırmak gerekiyordu.', 'SAVUNMA_STRATEJISI'),
-              ],
-            ),
-          ],
-          responses: B(S`
+        option(
+          'T07_B',
+          'Sanığın suçu işlediği sabit değildir; hukuka aykırı delil ayıklanınca kalan şüphe sanık lehinedir.',
+          {
+            effects: [
+              ifThen(
+                all(ref('kayit_disi'), ref('zarf_suphe')),
+                [
+                  score('SAVUNMA_STRATEJISI', strategyAmount(200, 'USUL')),
+                  inc('pers'),
+                  mark(
+                    'GOOD',
+                    'CMK 223/2-e: kayıtlar hükme esas alınamaz, zarfın sanık yokken girdiği gösterildi; şüphe sanık lehine.',
+                    'SAVUNMA_STRATEJISI',
+                  ),
+                ],
+                [
+                  score('SAVUNMA_STRATEJISI', -100),
+                  mark(
+                    'BAD',
+                    'Şüphe savunması için kayıtları ayıklatmak ve zarfın nasıl girdiğini tartıştırmak gerekiyordu.',
+                    'SAVUNMA_STRATEJISI',
+                  ),
+                ],
+              ),
+            ],
+            responses: B(S`
             > Sayın Başkan. Bu dosya bir anahtar deliğinden başladı. Kapısı kapanmış bir deliğinden. Süresi dolmuş bir karar, kararda olmayan bir hat.
             > O delikten duyulan cümleler bu salonda okunamaz. Kanun böyle der; Anayasa böyle der. Delil, nasıl elde edildiğiyle birlikte delildir.
             > Geriye bir zarf kalıyor. Zarf çekmeceye 10.39 ile 10.43 arasında girdi. O dakikalarda sanık odasında değildi; muhbirin cihazı ise bir parmakla susturulmuştu.
             > Ve bir muhbir kalıyor: önce "zorladı", sonra "anlaştık", sonra "elden verdim", sonra "odaya girmedim" diyen. Bu dört cümleden hangisine bir insanın özgürlüğünü bağlayacağız?
             > Yirmi yedi yıllık bir memur, bir kez kuralı esnetti. Karşılığında hiçbir şey almadı. Bir iyilik, bir pazarlık değildir. Mahkûmiyet şüphenin üstüne kurulamaz. Beraatini talep ederiz.
           `),
-        }),
-        option('T07_C', 'Öncelikle beraat; aksi hâlde eylem rüşvet değil, en fazla görevi kötüye kullanmadır; lehe hükümler uygulansın.', {
-          visibleWhen: has('ev_sira_disi'),
-          score: { SAVUNMA_STRATEJISI: strategyAmount(150, 'INDIRIM') },
-          effects: [raise('terditli')],
-          good: 'Terditli savunma meşrudur: önce beraat; olmazsa rüşvetin iş–menfaat bağı kurulamadığından eylem en fazla görevi kötüye kullanmadır (TCK 257/1); TCK 62 ve CMK 231.',
-          responses: B(S`
+          },
+        ),
+        option(
+          'T07_C',
+          'Öncelikle beraat; aksi hâlde eylem rüşvet değil, en fazla görevi kötüye kullanmadır; lehe hükümler uygulansın.',
+          {
+            visibleWhen: has('ev_sira_disi'),
+            score: { SAVUNMA_STRATEJISI: strategyAmount(150, 'INDIRIM') },
+            effects: [raise('terditli')],
+            good: 'Terditli savunma meşrudur: önce beraat; olmazsa rüşvetin iş–menfaat bağı kurulamadığından eylem en fazla görevi kötüye kullanmadır (TCK 257/1); TCK 62 ve CMK 231.',
+            responses: B(S`
             > Sayın Başkan, öncelikle beraat. Heyetiniz aksi kanaatteyse: sanık bir kez yetkisini aştı ve bir vatandaşa öncelikli randevu verdi. Karşılığında hiçbir menfaat yok.
             > Bu, rüşvet değil; en fazla görevi kötüye kullanmadır. Sanığın yirmi yedi yıllık sicili temiz. Lehe bütün hükümlerin uygulanmasını talep ederiz.
             ~ Kapıyı açtım. Leyla "erken açma" demişti. Halil bana baktı; kızgın değil, yorgun.
           `),
-        }),
+          },
+        ),
         option('T07_D', 'Yirmi yedi yıllık bir memura bakın. Bir rüşvetçi bu kadar düzgün kravat bağlar mı?', {
           score: { SAVUNMA_STRATEJISI: -50 },
           effects: [dec('pers')],
@@ -1220,4 +1309,3 @@ export const trial: CasePart = {
     },
   ],
 };
-

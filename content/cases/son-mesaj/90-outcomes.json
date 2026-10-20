@@ -336,6 +336,16 @@
               { "flag": "bilirkisi_zincir" }
             ]
           },
+          {
+            "any": [
+              { "flag": "contra_o2" },
+              { "flag": "contra_o3" },
+              { "flag": "contra_o4" },
+              { "flag": "contra_o5" },
+              { "flag": "bilirkisi_kilit" },
+              { "flag": "bilirkisi_zincir" }
+            ]
+          },
           { "cmp": [{ "score": "final" }, ">=", 3000] }
         ]
       },
@@ -366,7 +376,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "9 Kasım mazeretini duruşmada kur (kilit kaydı ve hastane), kolluğun anlatımında bir çatlak aç ve ekran görüntülerini düşür ya da terditli savun; tam beraat için delil zincirini tamamla.",
+      "howToReach": "9 Kasım mazeretini duruşmada kur (kilit kaydı ve hastane), kolluğun anlatımında bir çatlak aç, ikinci celsede tanığın ya da bilirkişinin anlatımını delille sars ve ekran görüntülerini düşür ya da terditli savun; tam beraat için delil zincirini tamamla.",
       "epilogue": [
         {
           "lines": [

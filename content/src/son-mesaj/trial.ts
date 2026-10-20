@@ -738,7 +738,7 @@ export const trial: CasePart = {
         option('T04K_VAZGEC', 'Bu beyanın şikâyetten vazgeçme olarak değerlendirilmesini talep ediyorum.', {
           score: { USUL_BILGISI: -60 },
           effects: [dec('cred')],
-          bad: 'Katılan vazgeçmediğini açıkça söyledi; beyanı çarpıtmak güvenilirliği düşürür. Üstelik şantaj (TCK 107) şikâyete bağlı değildir; vazgeçme yalnızca şikâyete bağlı suçta (TCK 134, 139) sonuç doğurur ve açık olmalıdır (TCK 73).',
+          bad: 'Katılan vazgeçmediğini açıkça söyledi; beyanı çarpıtmak güven kaybettirir. Şantaj (TCK 107) şikâyete bağlı değildir; vazgeçme yalnızca şikâyete bağlı suçta (TCK 134, 139) sonuç doğurur ve açık olmalıdır (TCK 73).',
           responses: B(`
             feride: Katılan “vazgeçmiyorum” dedi müdafi. Onun söylemediği bir şeyi tutanağa yazamam.
             > Sinan kaşlarını kaldırdı. Melis bir an bana baktı; o bakışta yeniden bir duvar örülüyordu.
@@ -1066,7 +1066,7 @@ export const trial: CasePart = {
         }),
         option('T08_D', 'Müvekkilim pişman; cezada indirim ve hükmün açıklanmasının geri bırakılmasını istiyoruz', {
           effects: [score('SAVUNMA_STRATEJISI', -120, 'savunma'), dec('pers'), dec('trust', 10)],
-          bad: '“Yapmadım” diyen bir müvekkil için pişmanlık savunması tezi çökertir; HAGB için de kasıtlı suçtan hükmolunan cezanın iki yıl veya altı olması gerekir (CMK 231/5), ifşa suçu bunu aşabilir ve esasen masumiyet iddiasıyla çelişir.',
+          bad: '“Yapmadım” diyen bir müvekkil için pişmanlık savunması tezi çökertir; HAGB için de kasıtlı suçtan hükmolunan cezanın iki yıl veya altı olması gerekir (CMK 231/5), ifşa suçu bunu aşabilir.',
           category: 'SAVUNMA_STRATEJISI',
           responses: B(`
             tarik/kizgin: Sayın Hâkim, ben pişman değilim, çünkü bir şey yapmadım! Avukatım…

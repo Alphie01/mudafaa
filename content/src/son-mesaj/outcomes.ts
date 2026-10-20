@@ -241,6 +241,15 @@ export const outcomes: CasePart = {
         any(flag('terditli'), flag('supheden'), flag('ss_excluded')),
         any(flag('kilit_mahkemede'), flag('bilirkisi_kilit')),
         any(flag('contra_s1'), flag('contra_s2'), flag('contra_s4'), flag('ss_excluded'), flag('bilirkisi_zincir')),
+        // İkinci celsede de bir şey kanıtlanmış olmalı: tanığın anlatımında delille açılan bir çatlak ya da bilirkişi teyidi.
+        any(
+          flag('contra_o2'),
+          flag('contra_o3'),
+          flag('contra_o4'),
+          flag('contra_o5'),
+          flag('bilirkisi_kilit'),
+          flag('bilirkisi_zincir'),
+        ),
         finalAtLeast(T_INDIRIM),
       ),
       stamp: 'KISMEN',
@@ -266,7 +275,7 @@ export const outcomes: CasePart = {
       legalBasis: 'TCK 107/2, 43/1, 62; TCK 134/2 (beraat); CMK 231',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        '9 Kasım mazeretini duruşmada kur (kilit kaydı ve hastane), kolluğun anlatımında bir çatlak aç ve ekran görüntülerini düşür ya da terditli savun; tam beraat için delil zincirini tamamla.',
+        '9 Kasım mazeretini duruşmada kur (kilit kaydı ve hastane), kolluğun anlatımında bir çatlak aç, ikinci celsede tanığın ya da bilirkişinin anlatımını delille sars ve ekran görüntülerini düşür ya da terditli savun; tam beraat için delil zincirini tamamla.',
       epilogue: [
         {
           lines: [

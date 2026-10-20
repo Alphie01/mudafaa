@@ -569,7 +569,7 @@ export const invArsiv: CasePart = {
           cost: [{ var: 'slots', amount: 1 }],
           score: { USUL_BILGISI: 30 },
           effects: [raise('bilirkisi_istendi')],
-          good: 'Yerinde: kolluk raporunun ekleri yorumlanmamış; mahkeme özel veya teknik bilgiyi gerektiren konularda bilirkişi atar (CMK 63/1), taraflar da bilirkişi incelemesi isteyebilir. Yedekten bir kopya şüpheliye veya vekiline verilir (CMK 134/5).',
+          good: 'Yerinde: kolluk raporunun ekleri yorumlanmamış; teknik konularda mahkeme bilirkişi atar (CMK 63/1), taraflar da inceleme isteyebilir. Yedekten bir kopya şüpheliye veya vekiline verilir (CMK 134/5).',
           responses: B(`~ Bir bilirkişi. Kimsenin avukatı olmayan biri. İyi. Doğru soruyu soran kazanır.`),
           next: '$stay',
         }),

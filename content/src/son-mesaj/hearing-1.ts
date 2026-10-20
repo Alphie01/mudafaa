@@ -334,7 +334,7 @@ export const hearing1: CasePart = {
                 raise('ss_excluded'),
                 mark(
                   'GOOD',
-                  'Bilgisayar ve kütüklerde arama ve kopyalama için hâkim kararı gerekir (CMK 134/1). Karar 13 Kasım’da; görüntüler 12 Kasım’da, imzasız bir “rıza” ile alındı. Hukuka aykırı elde edilen delil hükme esas alınamaz (Anayasa 20/2, 38/6; CMK 206/2-a, 217/2).',
+                  'Bilgisayar ve kütüklerde arama ve kopyalama için hâkim kararı gerekir (CMK 134/1). Karar 13 Kasım’da; görüntüler 12 Kasım’da, imzasız “rızayla” alındı. Hukuka aykırı elde edilen delil hükme esas alınamaz (Anayasa 20/2, 38/6; CMK 206/2-a, 217/2).',
                   'USUL_BILGISI',
                 ),
               ],

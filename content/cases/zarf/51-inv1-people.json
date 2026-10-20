@@ -1,0 +1,1559 @@
+{
+  "nodes": [
+    {
+      "id": "INV1_HALIL",
+      "type": "DIALOGUE",
+      "mode": "INTERVIEW",
+      "tones": [
+        { "id": "soft", "label": "Yumuşak", "hint": "+4 güven" },
+        { "id": "hard", "label": "Sert", "hint": "−8 güven · daha fazla ayrıntı" }
+      ],
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #12 · SORUŞTURMA",
+      "title": "Halil ile görüşme",
+      "background": "gorus_odasi",
+      "hud": ["min", "trust"],
+      "room": { "label": "BURSA H TİPİ CEZAEVİ · AVUKAT GÖRÜŞ ODASI", "character": "halil" },
+      "onFirstEnter": [{ "type": "MEET", "character": "gardiyan" }],
+      "lines": [
+        {
+          "when": { "all": [{ "cmp": [{ "visits": "INV1_HALIL" }, "==", 1] }, { "flag": "gozluk" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "BURSA H TİPİ CEZAEVİ · GÖRÜŞ ODASI · 10.10",
+              "style": "card",
+              "bg": "gorus_odasi"
+            },
+            {
+              "speaker": "gardiyan",
+              "text": "Yarım saat, avukat hanım. Konuşmanızı duymam. Halil Bey’e iyi bakın; buranın kütüphanesini o düzenledi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Halil kapıdan girdiğinde önce masaya baktı, sonra bana. Masadaki kâğıtların kenarını bir parmakla hizaladı; ancak ondan sonra oturdu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gözlük kılıfını uzattım. Bir süre ona dokunmadı. Sonra açtı, gözlüğü taktı, Zehra’nın notunu okudu. Bir kez. Katladı, gömlek cebine koydu."
+            },
+            {
+              "speaker": "halil",
+              "text": "Sardunya kurumuş. Bekliyordum. Yedi haftadır kimse sulamadı. Kızım yenisini almış. Kızım her şeyin yenisini alır; ben eskisini onarırım."
+            },
+            {
+              "speaker": "halil",
+              "text": "Teşekkür ederim. Altı haftadır okuyamıyordum; kütüphanede büyük puntolu üç kitap var, üçünü de bitirdim. Kayda geçsin, avukat hanım: gözlüğüm için teşekkür ederim."
+            }
+          ]
+        },
+        {
+          "when": { "cmp": [{ "visits": "INV1_HALIL" }, "==", 1] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "BURSA H TİPİ CEZAEVİ · GÖRÜŞ ODASI · 10.10",
+              "style": "card",
+              "bg": "gorus_odasi"
+            },
+            {
+              "speaker": "gardiyan",
+              "text": "Yarım saat, avukat hanım. Konuşmanızı duymam. Halil Bey’e iyi bakın; buranın kütüphanesini o düzenledi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Halil kapıdan girdiğinde önce masaya baktı, sonra bana. Masadaki kâğıtların kenarını bir parmakla hizaladı; ancak ondan sonra oturdu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gözlüğü yoktu. Kâğıtlara kollarını uzatarak, kaşlarını çatarak baktı. Okuyamadığını belli etmemeye çalışıyordu."
+            },
+            {
+              "speaker": "halil",
+              "text": "Kızım bir avukat bulduğunu söyledi. Hoş geldiniz. Size ne anlatmamı istiyorsanız usulüne uygun anlatırım. Ama önce bir şey söyleyeyim: o zarf benim değil."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Halil aynı sandalyede, aynı dik oturuşla bekliyordu. Kâğıtları bu sefer önceden hizalamıştı."
+            },
+            {
+              "speaker": "halil",
+              "text": "Yine geldiniz. İyi. On dakikamız var. Sorun; cevabım hazır olmayanı sonraya bırakırım."
+            }
+          ]
+        }
+      ],
+      "moodRules": [
+        { "when": { "flag": "fact_sira_itiraf" }, "label": "Çözülüyor", "tone": "success", "expression": "uzgun" },
+        {
+          "when": { "cmp": [{ "var": "trust" }, "<", 40] },
+          "label": "Kapanmış",
+          "tone": "error",
+          "expression": "kizgin"
+        },
+        {
+          "when": { "cmp": [{ "var": "tone" }, "==", "hard"] },
+          "label": "Gergin",
+          "tone": "neutral",
+          "expression": "kizgin"
+        },
+        { "label": "Resmî", "tone": "neutral", "expression": "normal" }
+      ],
+      "objectives": [
+        {
+          "id": "obj_sabah",
+          "when": { "flag": "fact_cagri" },
+          "known": "10.35’te bir dahili çağrı: “Müdür Hanım bekliyor.”",
+          "unknown": "O sabah Halil neden odasından çıktı?"
+        },
+        {
+          "id": "obj_bayram",
+          "when": { "flag": "fact_bayram_red" },
+          "known": "Halil, Bayram’a “şerh kalkmadan imza yok” demiş.",
+          "unknown": "Halil Bayram’la ne konuştu?"
+        },
+        {
+          "id": "obj_kontrol",
+          "when": { "flag": "fact_onbir_dosya" },
+          "known": "On bir dosya durdurulmuş; biri içeriden dosya hızlandırıyor.",
+          "unknown": "Halil’i kim durdurmak isterdi?"
+        },
+        {
+          "id": "obj_sira",
+          "when": { "flag": "fact_sira_itiraf" },
+          "known": "Halil bir kez kuralı esnetti: sıra dışı randevu.",
+          "unknown": "Halil bir şey saklıyor mu?"
+        }
+      ],
+      "choices": [
+        {
+          "id": "TP_SABAH",
+          "kind": "TOPIC",
+          "label": "O sabah",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "12 Mart sabahını baştan anlatır mısınız? Saat saat.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Sekiz yirmi beşte geldim, her zamanki gibi. Sardunyayı suladım. Dokuzdan on bire kadar kontrol saatidir; kapımı kapatırım, kimse rahatsız etmez."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Dokuz kırkta Ateşoğlu İnşaat’ın bir dosyası daha geldi. Şerhli. Geri çevirdim; on ikinci. Gerekçemi yazdım."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "On otuz beşte dahili çaldı. Ekranda bir numara vardı; ben her arayanın numarasını takvime yazarım, alışkanlık. “Halil Bey, Müdür Hanım aşağıda bekliyor, acil.”"
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Ses boğuktu. Sekreterlik sandım; ahize kötüdür orada. Ceketimi almadan indim. Müdürlüğün kapısı kapalıydı; sekreter “Müdür Hanım telekonferansta, kimseyi çağırmadı” dedi."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Beş dakika bekledim. Belki çıkar, belki yanlış anlaşılma, dedim. Usulen beklenir. On kırk altıda döndüm. Odamda üç polis."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Takvime yazar. Her arayanın numarasını. Bir adamın alışkanlığı, bazen bir dosyanın en sağlam tanığıdır.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Muhbir zarfı size verdiğini söylüyor. Neden odanızda olmadığınıza inanayım?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Çünkü odamda değildim, avukat hanım! İnanmanız gerekmiyor; kontrol edebilirsiniz. Ben her şeyin kontrol edilmesinden yanayım.",
+                      "expression": "kizgin"
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "On otuz beşte dahili çaldı, “Müdür Hanım bekliyor” dediler. İndim. Sekreter kimseyi çağırmadığını söyledi. On kırk altıda döndüm."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Arayanın numarasını takvime yazdım. Hep yazarım. Takvim masada duruyorsa, oradadır. Kimse kaldırmadıysa."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "“Kimse kaldırmadıysa.” Yedi hafta geçmiş. O masaya kim dokunmuş, bilmiyorum.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_cagri", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_CEKMECE",
+          "kind": "TOPIC",
+          "label": "Çekmece",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Çekmecenizi neden kilitlemezdiniz?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Kilit, güvensizliğin itirafıdır, avukat hanım. Yirmi yedi yıldır o çekmecede ne olduğunu herkes bilir: mühür yastığı, ataş, yedek kalem, bir de bir paket bisküvi."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Bir memurun çekmecesinde saklanacak bir şey olmamalı. Benim yoktu. Herkes açabilirdi; biri açmış."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Şimdi düşünüyorum da... kural adamı olmak, kapıyı açık bırakmakmış. Ben bunu erdem sanıyordum.",
+                      "expression": "uzgun"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Rüşvet alan biri de çekmecesini kilitlemez; şüphe çekmemek için. Öyle değil mi?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Bu sizin mantığınız mı, savcının mı? Kilitlersem suçlu, kilitlemezsem kurnaz. O hâlde masumiyetin bir yolu yok.",
+                      "expression": "kizgin"
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Yirmi yedi yıldır kilitlemedim. Bunu odaya giren herkes bilir. Çaycı bilir, temizlikçi bilir, karşı odadakiler bilir. Kim bildiyse, o kullandı."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "“Kim bildiyse.” Herkes biliyordu. Bu bir kapıyı daraltmıyor; ama kapının neden açık durduğunu söylüyor.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_kilitsiz", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_BAYRAM",
+          "kind": "TOPIC",
+          "label": "Bayram Öz",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Bayram Öz’ü nereden tanıyorsunuz?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Takipçidir. On yıldır koridorda görürüm. Herkesin dosyasını takip eder, kendi dosyasını hiç takip etmez; borçludur, herkes bilir."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Mart başında bir başvurusu vardı. Babasından kendisine, Görükle’de bir tarla. İhtiyati tedbir şerhi var; şerh kalkmadan devir olmaz."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Bana geldi, ağladı. “Babam yoğun bakımda, ölmeden devir olsun” dedi. Ben de söyledim: “Bayram, şerh kalkmadan imza yok. Kalkarsa ilk sen girersin.”"
+                    },
+                    { "speaker": "halil", "text": "Para teklif etmedi. Etse kovardım. O bunu bilir." },
+                    {
+                      "speaker": "player",
+                      "text": "“Kalkarsa ilk sen girersin.” Bir cümlenin ikinci yarısı. İlk yarısını duyan birinin işine yarayacak türden.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Bayram size neden kırk bin lira getirsin? Aranızda ne vardı?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Hiçbir şey yoktu! Bir takipçiyle bir kontrol memuru arasında ne olabilir? Dosya. Sadece dosya.",
+                      "expression": "kizgin"
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Babası ölüyordu, ağladı. Ben de “şerh kalkmadan olmaz” dedim. O kadar. Kırk bin liranın lafı bile geçmedi."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Belki biri ona “Halil’e götür” dedi. Ben kimseyi suçlamam; kanıtım olmadan isim söylemem.",
+                      "expression": "uzgun"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kanıt olmadan isim söylemez. Ama “biri ona dedi” diyor. Kafasında bir isim var.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_bayram_red", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_TELEFON",
+          "kind": "TOPIC",
+          "label": "8 Mart’taki telefon",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "İddianamede kendi telefonunuzdan bir cümle var: “Dosyana bakarım Bayram.” Hatırlıyor musunuz?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Hatırlıyorum. Akşam yemeğindeydim; Bayram aradı, yine babasını anlattı. Ben “Dosyana bakarım Bayram, ama şerh kalkmadan imza yok” dedim."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "İddianamede yalnızca ilk yarısı var. İkinci yarısını kim sildi, bilmem. Ama ben cümlemi yarım kurmam, avukat hanım. Hiçbir zaman."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Bir de... benim telefonumu neden dinliyorlardı? Hakkımda bir soruşturma olduğunu bilmiyordum. Hâlâ bilmiyorum. Kâğıtlarda bir karar gördünüz mü?"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "İyi soru. Kâğıtlarda Halil adına bir karar var mı? Kararı açıp okumam lazım; satır satır.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "“Dosyana bakarım.” Bu, para karşılığı iş görmek demek değil mi?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Bakmak, görmek değildir! Bakarım, şerhe bakarım, kalkmış mı bakarım. Ve cümlemin geri kalanı: “ama şerh kalkmadan imza yok.”",
+                      "expression": "kizgin"
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Kim yarısını yazdıysa, öbür yarısını bilerek atmıştır. Yarım cümle, tam yalandan daha tehlikelidir."
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_tam_cumle", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_KONTROL",
+          "kind": "TOPIC",
+          "label": "Kontrol masası",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Son aylarda masanıza gelen işlerde tuhaf bir şey var mıydı?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Ekimden beri bir şirketin dosyaları. Ateşoğlu İnşaat. Hepsi şerhli ya da eksik evraklı; hepsi bir şekilde hızlıca hazırlanmış, hepsi bana “acil” diye gelmiş."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "On bir dosya durdurdum. Her birinin gerekçesini yazdım. Bir de... bir defter tuttum. Kendime. Kim hazırlamış, hangi gün, hangi eksik."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Biri içeriden dosyaları hızlandırıyordu. Kim olduğunu biliyorum sanıyorum. Ama kanıtım olmadan isim söylemem; kayda geçsin."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir defter. Ve bir memur, kanıtsız isim vermeyecek kadar dürüst. Ya da korkmuş. Belki ikisi.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Düşmanınız var mıydı? Biri sizi bu kadar mı istemezdi?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Düşman değil, avukat hanım. Engel. Ben bir engeldim. On bir dosyanın önünde bir engel."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Şubatta biri cebime bir not koydu; “her dosyayı durduran bir gün kendisi durur” diye. Ben bunu bir tehdit saymadım. Saymalıymışım.",
+                      "expression": "kizgin"
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Bir defterim var; her şeyi yazdım. Ama nerede olduğunu burada söylemem. Bu odanın duvarlarına güvenirim, kapısına güvenmem."
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_onbir_dosya", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_DEFTER",
+          "kind": "TOPIC",
+          "label": "Defter",
+          "visibleWhen": { "all": [{ "hasEvidence": "clue_toz_izi" }, { "cmp": [{ "var": "trust" }, ">=", 55] }] },
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Odanızdaki rafta bir defter boyutunda temiz bir iz var. Defter nerede?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "narrator",
+                      "text": "Halil uzun süre bir şey söylemedi. Gözlüğünü çıkardı, camlarını gömleğinin ucuyla sildi, yeniden taktı."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Raftan kaldırdım. Şubattaki nottan sonra. Odama giren herkes görürdü; kırmızı kaplıdır."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Arşivde. 1987 ciltlerinin arkasında, duvarla rafın arasında. O ciltlere yirmi yıldır kimse bakmaz; Görükle’nin eski parselleri."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Mahkemeye siz götürün. Usulüne uygun. Ben kimseyi suçlamadım; defter suçlasın."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir defter, bir ciltlerin arkası. Yirmi yıldır kimsenin bakmadığı bir raf. Umarım hâlâ öyledir.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Bir defteriniz olduğunu biliyorum. Saklamak sizi daha çok batırır. Nerede?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Batırır mı? Beni batıran o defterin içindekiler değil, dışındakiler.",
+                      "expression": "kizgin"
+                    },
+                    { "speaker": "narrator", "text": "Bir süre sustu. Sonra sesini alçalttı." },
+                    {
+                      "speaker": "halil",
+                      "text": "Arşivde. 1987 ciltlerinin arkasında. Siz götürün; usulüne uygun. Ben bu odadan bir şey götüremem."
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_defter_yeri", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_DEFTER_X",
+          "kind": "TOPIC",
+          "label": "Defter",
+          "visibleWhen": {
+            "all": [{ "hasEvidence": "clue_toz_izi" }, { "not": { "cmp": [{ "var": "trust" }, ">=", 55] } }]
+          },
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Odanızdaki rafta bir defter boyutunda temiz bir iz var. Defter nerede?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Bir defter. Evet. Bir yerde. Size henüz söyleyemem, avukat hanım; sizi tanımıyorum. Kızım tanıyor, ben tanımıyorum."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Henüz. Güven kazanılmadan sorulan soru, cevabı daha derine gömer.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "O defter nerede? Benden saklarsanız size yardım edemem.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Yardım etmek için önce güvenmeyi öğreneceksiniz. Ben de. İkimiz de bugün öğrenmedik.",
+                      "expression": "kizgin"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "TP_ZEHRA",
+          "kind": "TOPIC",
+          "label": "Zehra",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Zehra çok uğraşıyor. Onunla konuşmamı istediğiniz bir şey var mı?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Annesi öleli üç yıl oldu. O günden beri her şeyi o taşıyor. Nöbetler, faturalar, şimdi de ben.",
+                      "expression": "uzgun"
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Ona söyleyin: ek nöbet almasın. Avukat ücretini ben öderim. Yirmi yedi yıllık memurum; bir ikramiyem var. Kimse onu benden alamaz. Belki alırlar. Bilmiyorum artık."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir babanın tek korkusu kızının yorgunluğu. Kendi kelepçesi listede ikinci sırada.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Zehra bu davada ne kadar şey biliyor?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Bilmesi gerekenden fazlasını. Şubattaki notu o buldu, bana söylemedi; ben de ona söylemedim. Ekinci ailesi böyledir: herkes herkesi korur, kimse kimseye anlatmaz."
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 10 },
+            { "type": "VAR", "var": "fact_zehra", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "G_YUZLES",
+          "kind": "OPTION",
+          "label": "Sıra dışı randevu kaydını masaya koy",
+          "prompt": "Halil Bey. 3 Mart’ta Bayram Öz’e öncelikli randevu onayı vermişsiniz. İmzanız var. Bana anlatmak istediğiniz bir şey var mı?",
+          "visibleWhen": {
+            "all": [
+              { "hasEvidence": "ev_sira_disi" },
+              { "flag": "fact_bayram_red" },
+              { "cmp": [{ "var": "trust" }, ">=", 40] }
+            ]
+          },
+          "cost": [{ "var": "min", "amount": 3 }],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Halil kâğıda baktı. Gözlüğünü çıkarmadı. Uzun süre baktı; kendi imzasını tanır gibi değil, bir yabancının imzası gibi."
+                },
+                {
+                  "speaker": "halil",
+                  "text": "Yirmi yedi yılda bir kez. Bir kez, avukat hanım. Babası yoğun bakımdaydı. Ölmeden tarlayı oğluna devretmek istiyormuş. Ben de... sırayı öne aldım.",
+                  "expression": "uzgun"
+                },
+                {
+                  "speaker": "halil",
+                  "text": "Yetkim yoktu. Öncelikli randevuyu müdür onaylar. Ben onayladım, çünkü Müdür Hanım izindeydi ve adam ağlıyordu. Ve ben bir kez, kuralın değil, adamın yüzüne baktım.",
+                  "expression": "uzgun"
+                },
+                {
+                  "speaker": "halil",
+                  "text": "Para almadım. Bir çay bile içmedim. Sıra öne alındı; şerh kalkmadığı için imza yine çıkmadı. Kimse bir şey kazanmadı."
+                },
+                {
+                  "speaker": "halil",
+                  "text": "Polise söylemedim. Söyleseydim, “işte iş, işte zarf” derlerdi. Yirmi yedi yılın tek eğilişini, bir zarfın yanına koyarlardı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir yalan değil; bir utanç. Ama mahkeme için ikisinin farkı, ne zaman ve kimin ağzından söylendiğindedir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "INV1_HALIL_TAVSIYE",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "fact_sira_itiraf", "op": "set", "value": true },
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 6 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Saklanan bilgi açığa çıktı: Halil yirmi yedi yılda bir kez kuralı esnetmiş; karşılığında bir şey almamış.",
+              "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "G_YUZLES_X",
+          "kind": "OPTION",
+          "label": "Sıra dışı randevu kaydını masaya koy",
+          "prompt": "Halil Bey. 3 Mart’ta Bayram Öz’e öncelikli randevu onayı vermişsiniz. İmzanız var. Bana anlatmak istediğiniz bir şey var mı?",
+          "visibleWhen": {
+            "all": [
+              { "hasEvidence": "ev_sira_disi" },
+              { "flag": "fact_bayram_red" },
+              { "not": { "cmp": [{ "var": "trust" }, ">=", 40] } }
+            ]
+          },
+          "cost": [{ "var": "min", "amount": 3 }],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "halil",
+                  "text": "Siz benim avukatım mısınız, savcım mı? Bu kâğıdı nereden buldunuz? Müdürlükten mi? Demek oraya gittiniz ve benim imzalarımı topladınız.",
+                  "expression": "kizgin"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kalktı, kapıya döndü, gardiyana işaret etti. Sonra durdu; ama yeniden oturmadı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kapıyı çok sert çaldım. Bazı kapılar ancak içeriden açılır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "trust", "op": "dec", "value": 4 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Güveni düşük müvekkil sakladığını açmaz; önce güven kur, sonra yüzleştir.",
+              "category": "SORGULAMA"
+            }
+          ]
+        },
+        { "id": "G_BITIR", "kind": "CONTINUE", "label": "Görüşmeyi bitir", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_HALIL_TAVSIYE",
+      "type": "CHOICE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #12 · SORUŞTURMA",
+      "title": "Ne yapacağız?",
+      "background": "gorus_odasi",
+      "prompt": {
+        "speaker": "halil",
+        "expression": "uzgun",
+        "text": "Mahkemede bunu söylersem savcı “işte” diyecek. Söylemezsem bulacaklar. Siz ne derseniz onu yapacağım; ama doğrusunu söyleyin."
+      },
+      "choices": [
+        {
+          "id": "TAV_A",
+          "kind": "OPTION",
+          "label": "Doğruyu kendiniz anlatmanızı öneririm: randevuyu, gerekçesini, karşılık almadığınızı.",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "halil", "text": "Herkesin önünde mi? Kızımın önünde?" },
+                {
+                  "speaker": "player",
+                  "text": "Herkesin önünde. Ama yalnız değil. Randevu kaydı, şerh ve imzanın çıkmadığı belgeyle aynı anda konuşacak. Kararı siz veriyorsunuz; ben bedelini ve faydasını anlattım."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Halil başını salladı. Bir kez. Sonra kâğıdı aldı, kenarını masanın kenarıyla hizaladı ve bana geri verdi."
+                },
+                {
+                  "speaker": "halil",
+                  "text": "Yirmi yedi yıl önce ilk günümde müdürüm bir şey söylemişti: “Halil, bu masada bir kez eğilirsen, bir daha hep eğik oturursun.” Ben eğildim. Şimdi doğrulacağım."
+                }
+              ]
+            }
+          ],
+          "next": "INV1_HALIL",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 100 },
+            { "type": "VAR", "var": "halil_durust", "op": "set", "value": true },
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 4 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Avukat müvekkile gerçeğe aykırı beyan önermez. Sıra dışı randevu en fazla yetki aşımıdır; karşılık olmadan rüşvetin “iş–menfaat” bağı kurulmaz. Doğrunun sanığın ağzından ve belgeyle anlatılması, savcının bulmasından iyidir.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        {
+          "id": "TAV_B",
+          "kind": "OPTION",
+          "label": "Kimse bilmiyor. Sorulursa randevuyu müdürün onayladığını söyleyin.",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "halil", "text": "Müdür Hanım’ı mı? O izindeydi. Ama... siz avukatsınız." },
+                {
+                  "speaker": "narrator",
+                  "text": "Halil’in yüzünde bir şey kırıldı. Yirmi yedi yıl boyunca yalan söylememiş bir adam, ilk yalanını bir avukattan öğreniyordu."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Siz avukatsınız.” Evet. Bu yüzden söylememem gerekirdi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "INV1_HALIL",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -100 },
+            { "type": "VAR", "var": "halil_inkar", "op": "set", "value": true },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Avukat müvekkiline gerçeğe aykırı beyanda bulunmasını, hele bir başkasını işaret ederek, öğütleyemez (Av.K. 34; TBB Meslek Kuralları). Kayıt ortaya çıkınca inkâr, savunmanın en büyük yükü olur.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        {
+          "id": "TAV_C",
+          "kind": "OPTION",
+          "label": "Bu konuda susma hakkınız var. Sorulursa cevap vermeyebilirsiniz.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "halil",
+                  "text": "Susmak. Ben yirmi yedi yıl kâğıtları konuşturdum, kendim susarak. Bir gün daha susarım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Haklı. Ve bu yüzden susması, kimseye bir şey anlatmayacak.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "INV1_HALIL",
+          "effects": [{ "type": "VAR", "var": "halil_sus", "op": "set", "value": true }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Susma hakkı meşrudur (CMK 147/1-e); ama sessizlik, savcının anlatısına boşluk bırakır."
+          }
+        }
+      ]
+    },
+    {
+      "id": "INV1_ZEHRA",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #12 · SORUŞTURMA",
+      "title": "Acil servis",
+      "background": "hastane",
+      "room": { "label": "ŞEHİR HASTANESİ · ACİL SERVİS", "character": "zehra" },
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ŞEHİR HASTANESİ · ACİL SERVİS · 03.10",
+              "style": "card",
+              "bg": "hastane"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Acil servis gece üçte bir liman gibiydi: herkes bir yerden gelmiş, kimse bir yere gitmiyordu. Florasan, dezenfektan, bir bebeğin bitmeyen ağlaması."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Zehra hemşire odasının kapısında, elinde bir karton bardak kahveyle bekliyordu. Formasının cebinde üç kalem, bir makas, bir de babasınınkine benzeyen bir gözlük."
+            },
+            {
+              "speaker": "zehra",
+              "text": "On dakikam var. Triyajda bir kalp krizi, iki kırık, bir de kendini kalp krizi sanan bir panik atak. Sorun."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "ZEH_NOT",
+          "kind": "OPTION",
+          "label": "Şubatta bulduğunuz notu tekrar görebilir miyim?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Zehra çantasından naylon poşeti çıkardı. Notu ışığa tuttu; gözleri, bir röntgene bakar gibi kısıldı."
+                },
+                {
+                  "speaker": "zehra",
+                  "text": "Ceketinin iç cebindeydi. On dört şubat. Sevgililer günü; bu yüzden hatırlıyorum. Babam o gün eve geç geldi, yemek yemedi."
+                },
+                {
+                  "speaker": "zehra",
+                  "text": "Ona sormadım. O da bana söylemedi. Biz böyle bir aileyiz; herkes herkesi korur, kimse kimseye anlatmaz."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Her dosyayı durduran, bir gün kendisi durur.” Bir tehdit. Ama kimin, hangi dosya için? Notu dosyaya koyuyorum; tek başına bir şey söylemiyor.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_uyari_notu" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ]
+        },
+        {
+          "id": "ZEH_TAKVIM",
+          "kind": "OPTION",
+          "label": "Babanızın iş alışkanlıklarını anlatın. Küçük şeyleri.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "zehra",
+                  "text": "Küçük şeyler mi? Babamda büyük şey yoktur, hepsi küçüktür. Kâğıtları hizalar. Gözlüğünü başının üstünde unutur, sonra evi yıkar."
+                },
+                {
+                  "speaker": "zehra",
+                  "text": "Telefon çalınca arayanın numarasını yazar. Evde de. Buzdolabının üstündeki takvimde annemin hastane numarası hâlâ yazılı. Üç yıldır silmedi."
+                },
+                {
+                  "speaker": "zehra",
+                  "text": "Bir keresinde ona “Baba, neden yazıyorsun?” dedim. “Unutmamak için değil kızım” dedi, “inkâr etmemek için.”",
+                  "expression": "uzgun"
+                },
+                {
+                  "speaker": "player",
+                  "text": "İnkâr etmemek için. Bir adam, kendisine karşı bile tanıklık edecek kadar düzenli.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_takvim_aliskanlik", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "ZEH_EV",
+          "kind": "OPTION",
+          "label": "Evinize gelen “müdürlükten biri” hakkında başka bir şey hatırlıyor musunuz?",
+          "visibleWhen": { "flag": "evrak_bildirildi" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "zehra",
+                  "text": "Komşu bir şey daha söyledi. Adam giderken telefonla konuşmuş, merdivende. “Evde yok abi. Belki arşivde, belki odasında.” Abi diye konuşuyormuş biriyle."
+                },
+                {
+                  "speaker": "zehra",
+                  "text": "Ben savcılığa yazdım, sizin dediğiniz gibi. Saat, tarif, şemsiye. Bir de nane şekeri, biliyorum, saçma ama yazdım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Belki arşivde.” Arayan neyin peşindeyse, nerede olabileceğini tahmin ediyor. Benden önce davranırsa, kaybederim.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_ev_ziyaret", "op": "set", "value": true }
+          ]
+        },
+        { "id": "ZEH_GERI", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_MUDUR",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #12 · SORUŞTURMA",
+      "title": "Müdürlük makamı",
+      "background": "buro",
+      "room": { "label": "NİLÜFER TAPU MÜDÜRLÜĞÜ · MAKAM", "character": "ferda" },
+      "onFirstEnter": [{ "type": "MEET", "character": "ferda" }],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "NİLÜFER TAPU MÜDÜRLÜĞÜ · MAKAM · 11.20", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Makam odası, binanın geri kalanından daha sessizdi; halı sesleri yutuyordu. Duvarda bir Atatürk portresi, bir harita, bir de çerçeveli “Hizmet Kalite Belgesi”."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ferda Yalçın masasının arkasından kalkmadı. Kırlaşmış kısa saç, bordo bir ceket, boynunda okuma gözlüğü. Önünde bir dosya; kapağını kapattı."
+            },
+            {
+              "speaker": "ferda",
+              "text": "Avukat Hanım. Hoş geldiniz. Size ne kadar yardımcı olabileceğimi bilmiyorum; kurumumuz bir soruşturmanın tarafı. Ama prosedür gereği ne verebilirsem veririm."
+            },
+            {
+              "speaker": "ferda",
+              "text": "Halil Bey’le yirmi yıl çalıştım. Bu binanın vicdanıdır. Vicdan da yorar, biliyor musunuz. Herkesi."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "MUD_SABAH",
+          "kind": "OPTION",
+          "label": "12 Mart sabahı Halil Bey’i çağırdınız mı?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "ferda",
+                  "text": "Hayır. On ile on bir arası il müdürlüğüyle telekonferanstaydım; hat bağlıydı, kimseyi aramadım. Sekreterim de aramadı; ona sordum."
+                },
+                {
+                  "speaker": "ferda",
+                  "text": "Halil Bey aşağı inmiş, kapıda beklemiş. Sekreterim “kimse çağırmadı” demiş. Beş dakika beklemiş yine de. Halil Bey’dir; bir yanlış anlaşılmayı da usulüne uygun bekler."
+                },
+                {
+                  "speaker": "ferda",
+                  "text": "Polise de söyledim bunu. Tutanağa geçti mi, bilmiyorum. Kimse bir daha sormadı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Müdür çağırmadı. Ama biri, müdür adına çağırdı. Bir binada müdür adına konuşabilecek kaç kişi var?",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_mudur_cagirmadi", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "MUD_DOSYA",
+          "kind": "OPTION",
+          "label": "Bayram Öz’ün başvurusunun iş dağıtım kaydını görebilir miyim?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Ferda bir an tereddüt etti. Sonra bilgisayarına döndü, birkaç tuşa bastı. Yazıcı homurdandı."
+                },
+                {
+                  "speaker": "ferda",
+                  "text": "Başvuru 2027/3318. Görükle, 112 ada 7 parsel. Atanan servis: Devir-2. Durum: beklemede, ihtiyati tedbir şerhi. Kontrole hiç gelmemiş; gelemezdi, şerh var."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kâğıdın altında ikinci bir satır vardı. Ferda onu da okudu; sesi bir ton düştü."
+                },
+                {
+                  "speaker": "ferda",
+                  "text": "Bir de... öncelikli randevu onayı. 3 Mart. Onaylayan: H. Ekinci. Ben o hafta izindeydim. Bu yetki benimdir, avukat hanım. Halil Bey’in değil."
+                },
+                {
+                  "speaker": "ferda",
+                  "text": "Bunu polis sormadı. Ben de söylemedim. Sorulmayan soruya cevap vermek, kurumun işi değil. Ama size soruldu; size veriyorum.",
+                  "expression": "uzgun"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir kâğıt, iki satır. Biri müvekkilimi kurtarabilir, öbürü batırabilir. İkisi aynı yazıcıdan çıktı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_dosya_devir2" },
+            { "type": "DISCOVER", "evidence": "ev_sira_disi" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ]
+        },
+        {
+          "id": "MUD_ODA",
+          "kind": "OPTION",
+          "label": "Halil Bey’in odasına bakmama izin verir misiniz?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "ferda",
+                  "text": "Oda mühürlü değil; polis aramasını yaptı, teslim etti. Eşyaları koliye koyduk ama masası yerinde. Kimse oturmadı; oturamadı."
+                },
+                {
+                  "speaker": "ferda",
+                  "text": "Yanınızda bir memur olacak; prosedür. Bir şey alırsanız tutanakla. Dokunmayın demeyeceğim, ama bozmayın."
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 },
+            { "type": "VAR", "var": "oda_izin", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "MUD_HALIL",
+          "kind": "OPTION",
+          "label": "Halil Bey nasıl bir memurdu?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "ferda",
+                  "text": "Kurallı. Yorucu derecede kurallı. Bir keresinde benim imzaladığım bir dosyayı geri çevirdi; eksik evrak. Haklıydı. Bir hafta konuşmadım onunla."
+                },
+                {
+                  "speaker": "ferda",
+                  "text": "Son aylarda bir şirketin dosyalarını durduruyordu. Bana bir rapor yazacağını söyledi. Yazmadı; ya da yazdı da bana gelmedi. Sonra bu oldu."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir rapor. Bir defter. Halil’in yazmaya niyetlendiği şey, ondan önce davrananları korkutmuş olabilir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
+        },
+        { "id": "MUD_GERI", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_SINAN",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #12 · SORUŞTURMA",
+      "title": "Devir Servisi-2",
+      "background": "buro",
+      "room": { "label": "NİLÜFER TAPU MÜDÜRLÜĞÜ · DEVİR SERVİSİ-2", "character": "sinan" },
+      "onFirstEnter": [
+        { "type": "MEET", "character": "sinan" },
+        { "type": "VAR", "var": "sinan_goruldu", "op": "set", "value": true }
+      ],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "DEVİR SERVİSİ-2 · 214 · 14.30", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "İki masalı bir oda. Masalardan biri boş ve tozlu, üstünde bir saksı kaktüs. Öbüründe dosyalar, bir bilgisayar, bir kase nane şekeri."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masadaki memur ayağa kalktı; otuzlarının sonunda, geriye taranmış saç, açık renk bir ceket. Elini uzatmadan önce bileğindeki saate baktı."
+            },
+            {
+              "speaker": "sinan",
+              "text": "Avukat hanım! Halil abinin avukatı, değil mi? Buyurun, buyurun. Şeker alır mısınız? Nane. Bu binada herkes benden alır; kahve kokusunu bastırıyor."
+            },
+            {
+              "speaker": "sinan",
+              "text": "Halil abi bizim büyüğümüzdür. Biraz katıdır, ama büyüğümüzdür. Ne lazımsa. Çay söyleyeyim mi? Muzaffer Usta’nın çayı bu binada tek dürüst şeydir, derler."
+            },
+            { "speaker": "narrator", "text": "Saatine yine baktı. Ekranı yeşil yandı, söndü." },
+            {
+              "speaker": "sinan",
+              "text": "Kusura bakmayın; doktor günde on bin adım dedi. Adım sayıyorum. Bu binada oturmaktan herkes hasta."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "SIN_SABAH",
+          "kind": "OPTION",
+          "label": "O sabah neredeydiniz?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "sinan",
+                  "text": "Ben mi? Arşivdeydim abla. On buçuktan on bire kadar. 1987 ciltleriyle boğuşuyordum; bir parsel geçmişi lazımdı, Görükle’den."
+                },
+                {
+                  "speaker": "sinan",
+                  "text": "Gürültüyü duyunca çıktım. Halil abiyi polisler arasında gördüm. İnanamadım. Hâlâ inanamıyorum."
+                },
+                {
+                  "speaker": "sinan",
+                  "text": "Gülay Hanım da yoktu o hafta, izindeydi. Oda bana kalmıştı. Telefonlara ben bakıyordum, dosyalara ben. Bir de arşiv. Kendimi bölemiyorum ki."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Arşiv. 1987 ciltleri. Bir parsel geçmişi için yarım saat. Arşivciler bu kadar sabırlı olmaz.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_sinan_arsiv" },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 }
+          ]
+        },
+        {
+          "id": "SIN_SAAT",
+          "kind": "OPTION",
+          "label": "Saatiniz güzelmiş. Hep takar mısınız?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "sinan",
+                  "text": "Bu mu? Hep takarım. Yatarken bile. Uykumu ölçüyor. Kötü uyuyorum abla, son aylarda. Bina yoruyor."
+                },
+                { "speaker": "narrator", "text": "Bileğini çevirdi; ekran yeşil yandı. Küçük, dikdörtgen bir ışık." },
+                {
+                  "speaker": "player",
+                  "text": "Kötü uyuyor. Son aylarda. Bir binanın yorduğu herkes kötü uyumaz.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_sinan_saat" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }
+          ]
+        },
+        {
+          "id": "SIN_BAYRAM",
+          "kind": "OPTION",
+          "label": "Bayram Öz’ün dosyası sizin servisinizde, değil mi?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "sinan",
+                  "text": "Evet, bizde. Şerhli bir dosya. Bayram’ı tanırım; takipçi, her gün buradadır. Babası rahmetli oldu, duydunuz mu? Yirmisinde. Allah rahmet eylesin."
+                },
+                {
+                  "speaker": "sinan",
+                  "text": "Halil abiye gitmiş galiba. Neden gittiyse... Dosya bizde. Halil abi kontrol; dosya ona gelmeden bir şey yapamaz zaten. Ama Bayram bilmez bunları, takipçidir."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Dosya ona gelmeden bir şey yapamaz.” Bunu bana bir Devir memuru söylüyor. Muhbirin ifadesinde başka bir şey yazıyor.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+        },
+        {
+          "id": "SIN_HALIL",
+          "kind": "OPTION",
+          "label": "Halil Bey’le aranız nasıldı?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "sinan",
+                  "text": "Abiyle mi? İyi. Yani... bazı dosyalarımı geri çevirdi, kızdım tabii. Herkes kızar. Ama haklıdır, eksik varsa eksiktir."
+                },
+                {
+                  "speaker": "sinan",
+                  "text": "Ben müdür yardımcılığı sınavını kazandım, atama bekliyorum. Halil abi tebrik etti. “Masaya otururken kuralı da yanına al” dedi. Unutmam."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Bir nane şekerinin kâğıdını açtı, şekeri ağzına attı, kâğıdı dikkatle dörde katlayıp cebine koydu."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kâğıdı yere atmayan biri. Ya da kâğıdını bir yerde bırakmak istemeyen biri. İkisi aynı alışkanlığın iki yüzü olabilir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
+        },
+        {
+          "id": "SIN_GERI",
+          "kind": "CONTINUE",
+          "label": "Teşekkür et, çık",
+          "role": "BACK",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "narrator", "text": "Kapıdan çıkarken Sinan arkamdan seslendi; sesi hâlâ sıcaktı." },
+                {
+                  "speaker": "sinan",
+                  "text": "Avukat hanım! Bu işler uzadıkça insanlar konuşur. Konuşan insanlar da bazen yanlış şeyler söyler. Siz doğru olana bakın. Halil abi için."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir öğüt. Ya da bir şey daha. Ses tonundan anlamak mümkün değil; bu binada herkes aynı tonda konuşuyor.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$return"
+        }
+      ]
+    },
+    {
+      "id": "INV1_KOMISER",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #12 · SORUŞTURMA",
+      "title": "Mali Şube",
+      "background": "karakol",
+      "room": { "label": "EMNİYET · MALİ SUÇLARLA MÜCADELE ŞUBE", "character": "komiser" },
+      "onFirstEnter": [{ "type": "MEET", "character": "komiser" }],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "EMNİYET · MALİ SUÇLARLA MÜCADELE · 16.00",
+              "style": "card",
+              "bg": "karakol"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Şube, bir muhasebe bürosuna benziyordu: dosya dolapları, hesap makineleri, duvarda bir organizasyon şeması. Kimse silah taşımıyormuş gibi; herkes taşıyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Komiser Levent Arı masasından kalktı, elimi sıktı. Kırklarının ortasında, ütülü bir gömlek, kravatsız. Masasında bir çerçeve: üniformalı bir genç, mezuniyet töreni."
+            },
+            {
+              "speaker": "komiser",
+              "text": "Avukat hanım. Dosyayı biliyorum, tanık olarak çağrılacağım da. Konuşmamda bir sakınca yok; ama dosyanın gizli kısımlarını söylemem, onu da bilin."
+            },
+            {
+              "speaker": "komiser",
+              "text": "Bu bir kontrollü teslimattı. Ders kitabı gibi. Muhbir geldi, biz planladık, para işaretlendi, zarf çekmecede bulundu. Gerisi mahkemenin işi."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "KOM_BASLA",
+          "kind": "OPTION",
+          "label": "Soruşturma nasıl başladı? Halil Bey’in adı ilk ne zaman geçti?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "komiser",
+                  "text": "Bir müteahhit hakkında yürüyen bir dinleme vardı. Başka bir dosya. O dinlemede “kontrolcü” diye birinden söz edildi, birkaç kez."
+                },
+                {
+                  "speaker": "komiser",
+                  "text": "Sonra 11 Mart gecesi muhbir geldi, “kontrol memuru para istiyor” dedi. Aynı gece kayıtta “zarf yarın masada” cümlesi vardı. İkisi üst üste oturdu."
+                },
+                { "speaker": "player", "text": "Dinleme kararı o tarihte hâlâ geçerli miydi?" },
+                {
+                  "speaker": "komiser",
+                  "text": "O teknik bir konu. Kayıtları biz çözeriz; kararın süresini savcılık takip eder. Bana gelen kayıttı, ben de kaydı tutanağa koydum."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Bana gelen kayıttı.” Bir kayıt nereden gelir? Bir kararın süresi biterse, sistem durur mu, yoksa biri durdurmak zorunda mı?",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_komiser_dinleme", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "KOM_PARA",
+          "kind": "OPTION",
+          "label": "Zarftaki para kimin parasıydı?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "komiser",
+                  "text": "Bizim. Emniyetin. Kontrollü teslimatlarda böyle yapılır; seri numaraları kaydedilir, muhbire verilir, teslimden sonra el konulur. Usul bu."
+                },
+                {
+                  "speaker": "komiser",
+                  "text": "Muhbirin kırk bin lirası yoktu zaten. Takipçi; borçlu biri. Bizim paramız olmasa teslimat da olmazdı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Bizim paramız olmasa teslimat da olmazdı.” Bir cümle. Komiser bunu bir gurur gibi söyledi; ben bir itiraf gibi duydum.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_para_emniyet", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "KOM_CIHAZ",
+          "kind": "OPTION",
+          "label": "Muhbirin kayıt cihazı neden kayıt almadı?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "komiser",
+                  "text": "Teknik arıza. Olur. 10.39’da kesildi; muhbir sonra “cızırdadı, sustu” dedi. Cihazı emanete koyduk. İncelenmesine gerek görülmedi; zarf zaten çekmecedeydi."
+                },
+                { "speaker": "player", "text": "Cihazı kim taktı, kim çıkardı?" },
+                {
+                  "speaker": "komiser",
+                  "text": "Ben taktım. Muhbir kendisi çıkardı, bize teslim etti. Bir sorun mu var?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kendisi çıkardı. Kendisi teslim etti. Ve kimse bakmadı. Bazen bir cihaz, onu taşıyandan daha dürüst bir tanıktır; yeter ki biri sorsun.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_kayit_ariza", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "KOM_ODA",
+          "kind": "OPTION",
+          "label": "Odaya girdiğinizde Halil Bey neredeydi?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "komiser",
+                  "text": "Biz girdiğimizde oda boştu, iki dakika sonra geldi. Ama arama onun huzurunda yapıldı; usule uygun. Zarf çekmecesindeydi."
+                },
+                {
+                  "speaker": "komiser",
+                  "text": "Muhbir zarfı ona verdiğini söyledi. Biz de verdikten sonra çekmeceye koyup çıktığını değerlendirdik. Mantıklı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Değerlendirdik.” Bir tutanakta görülen ile değerlendirilen arasındaki mesafe, bazen bir insanın özgürlüğüdür.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_komiser_oda", "op": "set", "value": true }
+          ]
+        },
+        { "id": "KOM_GERI", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_uyari_notu", "source": { "type": "CHOICE", "id": "ZEH_NOT" } },
+    { "evidence": "clue_dosya_devir2", "source": { "type": "CHOICE", "id": "MUD_DOSYA" } },
+    { "evidence": "ev_sira_disi", "source": { "type": "CHOICE", "id": "MUD_DOSYA" } },
+    { "evidence": "clue_sinan_arsiv", "source": { "type": "CHOICE", "id": "SIN_SABAH" } },
+    { "evidence": "clue_sinan_saat", "source": { "type": "CHOICE", "id": "SIN_SAAT" } }
+  ]
+}

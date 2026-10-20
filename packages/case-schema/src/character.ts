@@ -1,12 +1,13 @@
 import { z } from 'zod';
 import { Hex, Id } from './primitives.js';
 
-/** Karakterin hikâyedeki rolü. */
+/** Karakterin hikâyedeki rolü. `COUNSEL` oyuncunun avukat avatarıdır (COURTROOM `stage.counsel` bu karakteri gösterir). */
 export const CharacterRole = z.enum([
   'CLIENT',
   'DEFENDANT',
   'VICTIM',
   'WITNESS',
+  'COUNSEL',
   'PROSECUTOR',
   'JUDGE',
   'POLICE',

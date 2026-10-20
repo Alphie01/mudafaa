@@ -6,6 +6,28 @@ import { IconKey, Strength } from './evidence.js';
 import { Cond } from './expr.js';
 import { Expression, Id, Tone } from './primitives.js';
 
+// Aşağıdaki enum'lar görünüm sözleşmesinde (view.ts) yeniden kullanılır; içerik ve görünüm aynı değerleri paylaşır.
+
+/** STORY node'unun evresi. */
+export const StoryPhase = z.enum(['BRIEFING']);
+export type StoryPhase = z.infer<typeof StoryPhase>;
+
+/** Soruşturma hub'ındaki sekmenin türü. */
+export const InvestigationTabKind = z.enum(['SCENE', 'PEOPLE', 'ARCHIVE']);
+export type InvestigationTabKind = z.infer<typeof InvestigationTabKind>;
+
+/** DIALOGUE node'unun kipi: serbest konuşma ya da konu × ton görüşmesi. */
+export const DialogueMode = z.enum(['CONVERSATION', 'INTERVIEW']);
+export type DialogueMode = z.infer<typeof DialogueMode>;
+
+/** DOCUMENT aletinin görsel kipi (UV ışıkta belge koyu zeminde çizilir). */
+export const ToolVisualMode = z.enum(['UV']);
+export type ToolVisualMode = z.infer<typeof ToolVisualMode>;
+
+/** COURTROOM node'unun kipi: aşama ekranı, tanık ifadesi ya da itiraz. */
+export const CourtroomMode = z.enum(['STAGE', 'TESTIMONY', 'OBJECTION']);
+export type CourtroomMode = z.infer<typeof CourtroomMode>;
+
 /** STORY node'unun (brifing ve dosya ekranı) içerik bloğu; `type` ile ayrışır. */
 export const Block = z.discriminatedUnion('type', [
   z.strictObject({
@@ -67,7 +89,7 @@ export const NodeDef = z.discriminatedUnion('type', [
   z.strictObject({
     type: z.literal('STORY'),
     ...nodeBase,
-    phase: z.literal('BRIEFING').optional(),
+    phase: StoryPhase.optional(),
     blocks: z.array(Block).optional(),
   }),
   z.strictObject({ type: z.literal('CHOICE'), ...nodeBase, prompt: Line.optional() }),
@@ -79,7 +101,7 @@ export const NodeDef = z.discriminatedUnion('type', [
       z.strictObject({
         id: Id,
         label: z.string(),
-        kind: z.enum(['SCENE', 'PEOPLE', 'ARCHIVE']),
+        kind: InvestigationTabKind,
         choices: z.array(Id),
       }),
     ),
@@ -89,7 +111,7 @@ export const NodeDef = z.discriminatedUnion('type', [
   z.strictObject({
     type: z.literal('DIALOGUE'),
     ...nodeBase,
-    mode: z.enum(['CONVERSATION', 'INTERVIEW']),
+    mode: DialogueMode,
     room: z.strictObject({ label: z.string(), character: Id, expression: Expression.optional() }),
     moodRules: z
       .array(z.strictObject({ when: Cond.optional(), label: z.string(), tone: Tone, expression: Expression }))
@@ -118,16 +140,14 @@ export const NodeDef = z.discriminatedUnion('type', [
         lens: z.record(Id, z.strictObject({ cells: z.array(z.string()), tone: Tone })).optional(),
       }),
     ),
-    tools: z.array(
-      z.strictObject({ id: Id, label: z.string(), icon: IconKey, visualMode: z.literal('UV').optional() }),
-    ),
+    tools: z.array(z.strictObject({ id: Id, label: z.string(), icon: IconKey, visualMode: ToolVisualMode.optional() })),
     actionCosts: z.strictObject({ EXAMINE: z.array(Cost).optional() }).optional(),
   }),
   z.strictObject({ type: z.literal('DEDUCTION'), ...nodeBase, pool: z.array(Id) }),
   z.strictObject({
     type: z.literal('COURTROOM'),
     ...nodeBase,
-    mode: z.enum(['STAGE', 'TESTIMONY', 'OBJECTION']),
+    mode: CourtroomMode,
     stage: z.strictObject({
       banner: z.string(),
       bench: z.array(

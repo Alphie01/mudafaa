@@ -1,0 +1,976 @@
+{
+  "format": "mudafaa.case/v1",
+  "meta": {
+    "slug": "mini-case",
+    "number": 0,
+    "title": "Mini Dava",
+    "crimeLabel": "Hırsızlık",
+    "lawRef": "TCK 141",
+    "demandText": "İddianame: TCK 141",
+    "possibleSentence": "1–3 yıl",
+    "difficulty": 1,
+    "category": "CEZA",
+    "estimatedMinutes": 5,
+    "summary": "Motor ve doğrulayıcı testleri için küçük dava: depo hırsızlığı, tek tanık, tek celse.",
+    "coverCharacter": "k",
+    "legalReview": { "status": "APPROVED", "by": "test", "at": "2026-10-20" }
+  },
+  "config": {
+    "startNode": "n_brief",
+    "scoring": {
+      "categories": [
+        {
+          "id": "HUKUKI_BILGI",
+          "label": "Hukuki bilgi",
+          "advice": {
+            "weak": "Kanun maddelerini yeniden gözden geçir.",
+            "medium": "Temel maddeleri biliyorsun; ayrıntılara in.",
+            "strong": "Hukuki dayanakların sağlam."
+          }
+        },
+        {
+          "id": "DELIL_ANALIZI",
+          "label": "Delil analizi",
+          "advice": {
+            "weak": "Belgeleri farklı aletlerle incele.",
+            "medium": "İpuçlarını birleştirmeyi dene.",
+            "strong": "Delilleri ustaca bağladın."
+          }
+        },
+        {
+          "id": "ARASTIRMA",
+          "label": "Araştırma",
+          "advice": {
+            "weak": "Olay yerini daha dikkatli ara.",
+            "medium": "Gözden kaçan noktalar kaldı.",
+            "strong": "Araştırman eksiksizdi."
+          }
+        },
+        {
+          "id": "SORGULAMA",
+          "label": "Sorgulama",
+          "advice": {
+            "weak": "Tanık ifadelerindeki çelişkileri ara.",
+            "medium": "Doğru delili doğru ifadeye sun.",
+            "strong": "Çapraz sorgun etkiliydi."
+          }
+        },
+        {
+          "id": "SAVUNMA_STRATEJISI",
+          "label": "Savunma stratejisi",
+          "advice": {
+            "weak": "Stratejini delillere göre seç.",
+            "medium": "Stratejin tutarlıydı; daha cesur ol.",
+            "strong": "Stratejin davayı kazandırdı."
+          }
+        },
+        {
+          "id": "USUL_BILGISI",
+          "label": "Usul bilgisi",
+          "advice": {
+            "weak": "Usul kurallarını tekrar et.",
+            "medium": "İtirazlarını zamanında yap.",
+            "strong": "Usul itirazların yerindeydi."
+          }
+        }
+      ],
+      "lines": [
+        { "id": "delil", "label": "Delil toplama", "categories": ["ARASTIRMA", "DELIL_ANALIZI"] },
+        { "id": "capraz", "label": "Çapraz sorgu", "categories": ["SORGULAMA"] },
+        { "id": "itiraz", "label": "İtiraz isabeti", "categories": ["USUL_BILGISI", "HUKUKI_BILGI"] },
+        { "id": "savunma", "label": "Savunma", "categories": ["SAVUNMA_STRATEJISI"] },
+        { "id": "hatali", "label": "Hatalı delil" }
+      ],
+      "bonuses": [{ "id": "b_cred", "label": "Güvenilirlik bonusu", "value": { "mul": [{ "var": "cred" }, 100] } }],
+      "scaleMax": 1000,
+      "thresholdBar": [
+        { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
+        { "label": "İndirim", "from": 100, "tone": "amber" },
+        { "label": "Beraat", "from": 300, "tone": "green" }
+      ]
+    },
+    "objectionGrounds": [],
+    "display": { "showRunningScore": true }
+  },
+  "predicates": [{ "id": "p_strong", "label": "Heyet ikna oldu", "when": { "cmp": [{ "var": "pers" }, ">=", 5] } }],
+  "variables": [
+    {
+      "id": "day",
+      "type": "int",
+      "initial": 1,
+      "min": 1,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "display": { "label": "Gün", "widget": "pips" }
+    },
+    {
+      "id": "ap",
+      "type": "int",
+      "initial": 3,
+      "min": 0,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "display": { "label": "Eylem puanı", "widget": "pips" }
+    },
+    {
+      "id": "trust",
+      "type": "int",
+      "initial": 50,
+      "min": 0,
+      "max": 100,
+      "visibility": "VISIBLE",
+      "display": { "label": "Güven", "widget": "percentBar" }
+    },
+    {
+      "id": "minutes",
+      "type": "int",
+      "initial": 6,
+      "min": 0,
+      "max": 6,
+      "visibility": "VISIBLE",
+      "display": { "label": "Süre", "widget": "minutes" }
+    },
+    {
+      "id": "taps",
+      "type": "int",
+      "initial": 3,
+      "min": 0,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Büyüteç", "widget": "counter" }
+    },
+    {
+      "id": "exam",
+      "type": "int",
+      "initial": 2,
+      "min": 0,
+      "max": 2,
+      "visibility": "VISIBLE",
+      "display": { "label": "İnceleme hakkı", "widget": "counter" }
+    },
+    {
+      "id": "cred",
+      "type": "int",
+      "initial": 3,
+      "min": 0,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "display": { "label": "Güvenilirlik", "widget": "hearts" }
+    },
+    {
+      "id": "pers",
+      "type": "int",
+      "initial": 2,
+      "min": 0,
+      "max": 10,
+      "visibility": "VISIBLE",
+      "display": { "label": "Heyet iknası", "widget": "meter10" }
+    },
+    { "id": "strategy_pct", "type": "int", "initial": 100, "min": 0, "max": 200, "visibility": "HIDDEN" },
+    { "id": "wrong", "type": "int", "initial": 0, "visibility": "HIDDEN", "analysis": "counter" }
+  ],
+  "sprites": [
+    {
+      "id": "s_k",
+      "rows": [
+        "....k.kkkk.k....",
+        "...kHHkHHHkHk...",
+        "...kHHHHHHHHk...",
+        "...kHsssssHHk...",
+        "...kssssssssk...",
+        "...ksessssesk...",
+        "...kssssssssk...",
+        "...kssskksssk...",
+        "....kssssssk....",
+        ".....kkSSkk.....",
+        "...kkoowwookk...",
+        "..kooooOOooook..",
+        "..koOoooooooOk..",
+        "..koOoooooooOk..",
+        "..koOoooooooOk..",
+        "..kSooooooooSk..",
+        "...kddddddddk...",
+        "...kdddkkdddk...",
+        "...kdddkkdddk...",
+        "..kkkkk..kkkkk.."
+      ]
+    },
+    {
+      "id": "s_w",
+      "rows": [
+        "....kkkkkkkk....",
+        "...kqqqqqqqqk...",
+        "..kqqqqqqqqqqk..",
+        "..kqqssssssqqk..",
+        "..kqssssssssqk..",
+        "..kqsessssesqk..",
+        "..kqssssssssqk..",
+        "..kqsssrrsssqk..",
+        "..kqqssssssqqk..",
+        "..kqqkkSSkkqqk..",
+        "...kkccwwcckk...",
+        "..kccccwwcgcck..",
+        "..kcccccccccck..",
+        "..kcAccccccAck..",
+        "..kSccccccccSk..",
+        "..kAAAAAAAAAAk..",
+        "...kAAAkkAAAk...",
+        "...kAAAkkAAAk...",
+        "...kAAAkkAAAk...",
+        "..kkkkk..kkkkk.."
+      ]
+    },
+    {
+      "id": "s_j",
+      "rows": [
+        "....kkkkkkkk....",
+        "...kyyyyyyyyk...",
+        "..kyyyyyyyyyyk..",
+        "..kyyssssssyyk..",
+        "...kssssssssk...",
+        "...kkeksskekk...",
+        "...kssssssssk...",
+        "...kSskkkksSk...",
+        "....kssssssk....",
+        ".....kkSSkk.....",
+        "...kkgRwwRgkk...",
+        "..knngRwwRgnnk..",
+        "..knnnRRRRnnnk..",
+        "..knNnnRRnnNnk..",
+        "..knNnnRRnnNnk..",
+        "..kSnnnRRnnnSk..",
+        "..knnnnRRnnnnk..",
+        "..knnnnRRnnnnk..",
+        "..knnnnnnnnnnk..",
+        "...kkkkkkkkkk..."
+      ],
+      "noEyes": true
+    },
+    {
+      "id": "s_av",
+      "rows": [
+        "....kkkkkkkk....",
+        "...khhhhhhhhk...",
+        "...khhhhhhhhk...",
+        "...khsssssshk...",
+        "...kssssssssk...",
+        "...ksessssesk...",
+        "...kssssssssk...",
+        "...ksssSSsssk...",
+        "....kssssssk....",
+        ".....kkSSkk.....",
+        "...kkmwrrwmkk...",
+        "..knnmwrrwmnnk..",
+        "..knnnmrrmnnnk..",
+        "..knNnnmmnnNnk..",
+        "..knNnnmmnnNnk..",
+        "..kSnnnmmnnnSk..",
+        "..knnnnmmnnnnk..",
+        "..knnnnmmnnnnk..",
+        "..knnnnnnnnnnk..",
+        "...kkkk..kkkk..."
+      ]
+    }
+  ],
+  "characters": [
+    {
+      "id": "k",
+      "name": "Kâmil Demir",
+      "shortLabel": "Kâmil",
+      "role": "CLIENT",
+      "accent": "#e2802f",
+      "spriteId": "s_k"
+    },
+    {
+      "id": "w",
+      "name": "Vedat Kaya",
+      "shortLabel": "Vedat",
+      "role": "WITNESS",
+      "accent": "#c96f2a",
+      "spriteId": "s_w"
+    },
+    { "id": "j", "name": "Selma Er", "shortLabel": "Başkan", "role": "JUDGE", "accent": "#c4413a", "spriteId": "s_j" },
+    {
+      "id": "av",
+      "name": "Av. Deniz Ak",
+      "shortLabel": "Deniz",
+      "role": "COUNSEL",
+      "accent": "#7b4fb0",
+      "spriteId": "s_av"
+    }
+  ],
+  "relationships": [],
+  "evidence": [
+    {
+      "id": "e_key",
+      "kind": "EVIDENCE",
+      "type": "FIZIKSEL",
+      "title": "Depo anahtarı",
+      "shortText": "Sanığın çantasından çıktı.",
+      "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+      "sourceLabel": "Olay yeri tutanağı",
+      "icon": "key",
+      "legalValidity": "VALID",
+      "presentable": true,
+      "combinable": false,
+      "countsInBag": true,
+      "initiallyKnown": true
+    },
+    {
+      "id": "e_doc",
+      "kind": "EVIDENCE",
+      "type": "BELGE",
+      "title": "Görev yeri kaydı",
+      "shortText": "Sanık o gece başka bir depoya atanmış.",
+      "description": "Büyüteçle okunan satır, sanığın o gece 1 numaralı depoda görevli olduğunu gösteriyor.",
+      "sourceLabel": "Vardiya çizelgesi",
+      "icon": "document",
+      "legalValidity": "VALID",
+      "presentable": true,
+      "combinable": false,
+      "countsInBag": false,
+      "initiallyKnown": false
+    },
+    {
+      "id": "c_a",
+      "kind": "CLUE",
+      "type": "FIZIKSEL",
+      "title": "Kararmış ampul",
+      "shortText": "Lambanın ampulü kararmış.",
+      "description": "Sokak lambasının ampulü içten kararmış; uzun zamandır yanmıyor olmalı.",
+      "sourceLabel": "OLAY YERİ",
+      "icon": "bulb",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false
+    },
+    {
+      "id": "c_b",
+      "kind": "CLUE",
+      "type": "KAMERA_KAYDI",
+      "title": "Kesik kamera kablosu",
+      "shortText": "Kamera o gece kayıt yapmamış.",
+      "description": "Sokaktaki kameranın kablosu kesik; o geceye ait hiçbir kayıt yok.",
+      "sourceLabel": "OLAY YERİ",
+      "icon": "camera",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false
+    },
+    {
+      "id": "c_uv",
+      "kind": "CLUE",
+      "type": "BELGE",
+      "title": "Silinmiş saat kaydı",
+      "shortText": "UV ışıkta düzeltme izi çıktı.",
+      "description": "Tanığın vardiya saati sonradan değiştirilmiş; UV ışıkta eski saat okunuyor.",
+      "sourceLabel": "İNCELEME",
+      "icon": "uv",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false
+    },
+    {
+      "id": "i_ab",
+      "kind": "INSIGHT",
+      "type": "FIZIKSEL",
+      "title": "Lamba o gece yanmıyordu",
+      "shortText": "Sokak karanlıktı; tanık yüzü seçemezdi.",
+      "description": "Kararmış ampul ve kayıt yapmayan kamera birlikte sokağın o gece karanlık olduğunu gösteriyor.",
+      "sourceLabel": "ÇIKARIM",
+      "icon": "check",
+      "legalValidity": "VALID",
+      "presentable": true,
+      "combinable": false,
+      "countsInBag": false,
+      "initiallyKnown": false
+    }
+  ],
+  "evidenceRelations": [],
+  "discoveryPaths": [
+    { "evidence": "c_a", "source": { "type": "OBJECT", "id": "o_lamp" } },
+    { "evidence": "c_b", "source": { "type": "OBJECT", "id": "o_cam" } },
+    { "evidence": "c_b", "source": { "type": "CHOICE", "id": "tp_night" } },
+    { "evidence": "c_uv", "source": { "type": "RULE", "id": "ex_uv_r2" } },
+    { "evidence": "e_doc", "source": { "type": "RULE", "id": "ex_mag_r1" } },
+    { "evidence": "i_ab", "source": { "type": "RULE", "id": "cb_ab" } },
+    { "evidence": "e_key", "source": { "type": "INITIAL" } }
+  ],
+  "scenes": [
+    {
+      "id": "sc1",
+      "title": "Depo sokağı",
+      "width": 100,
+      "height": 100,
+      "image": "img_sc1",
+      "objects": [
+        {
+          "id": "o_lamp",
+          "name": "Sokak lambası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 10, "y": 10, "w": 20, "h": 20 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "c_a" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": { "text": "Lambanın ampulü kararmış; ışık vermiyor.", "short": "Lamba" }
+        },
+        {
+          "id": "o_cam",
+          "name": "Güvenlik kamerası",
+          "marker": "HIDDEN",
+          "shapes": [{ "circle": { "cx": 70, "cy": 70, "r": 10 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "c_b" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": { "text": "Kameranın kablosu kesilmiş.", "short": "Kamera" }
+        },
+        {
+          "id": "o_cover",
+          "name": "Rögar kapağı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 20, "w": 10, "h": 10 } }],
+          "z": 2,
+          "feedback": { "text": "Sıradan bir rögar kapağı.", "short": "Kapak" }
+        }
+      ]
+    }
+  ],
+  "court": {
+    "sessions": [
+      {
+        "id": "cs2",
+        "title": "2. Celse",
+        "stages": [
+          { "id": "stg_tanik", "type": "TANIK_DINLEME", "entryNode": "n_court1" },
+          { "id": "stg_delil", "type": "DELIL_TARTISMA", "entryNode": "n_obj" }
+        ]
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "n_brief",
+      "type": "STORY",
+      "title": "Brifing",
+      "phase": "BRIEFING",
+      "onFirstEnter": [{ "type": "MEET", "character": "k" }],
+      "blocks": [
+        {
+          "type": "profileCard",
+          "character": "k",
+          "label": "Sanık",
+          "lines": ["45 yaşında", "Gece bekçisi"],
+          "charge": "TCK 141 · Hırsızlık",
+          "demand": "1–3 yıl hapis"
+        },
+        {
+          "type": "sentenceRange",
+          "segments": ["green", "green", "gold", "gold", "red", "red", "darkred", "darkred"],
+          "markerPct": 50,
+          "labels": ["Beraat", "1 yıl", "2 yıl", "3 yıl"],
+          "demandLabel": "İSTEM"
+        },
+        {
+          "type": "paragraph",
+          "title": "Olay",
+          "text": "Gece yarısı depodan malzeme çalındı. Tek tanık, müvekkilini sokak lambasının altında gördüğünü söylüyor."
+        },
+        {
+          "type": "strengthList",
+          "title": "Savcılık delilleri",
+          "items": [
+            { "label": "Depo anahtarı", "strength": "MEDIUM" },
+            { "label": "Tanık teşhisi", "strength": "STRONG" }
+          ]
+        },
+        { "type": "choiceGroup", "title": "Savunma stratejisi", "group": "strategy" }
+      ],
+      "choices": [
+        {
+          "id": "ch_str_a",
+          "kind": "OPTION",
+          "label": "Masumiyet",
+          "group": "strategy",
+          "effects": [{ "type": "VAR", "var": "strategy_pct", "op": "set", "value": 150 }],
+          "next": "n_hub"
+        },
+        {
+          "id": "ch_str_b",
+          "kind": "OPTION",
+          "label": "İndirim",
+          "group": "strategy",
+          "effects": [{ "type": "VAR", "var": "strategy_pct", "op": "set", "value": 80 }],
+          "next": "n_hub"
+        }
+      ]
+    },
+    {
+      "id": "n_hub",
+      "type": "INVESTIGATION",
+      "title": "Soruşturma",
+      "hud": ["day", "ap"],
+      "tabs": [
+        { "id": "t_scene", "label": "OLAY YERİ", "kind": "SCENE", "choices": ["ch_go_scene"] },
+        { "id": "t_people", "label": "TANIKLAR", "kind": "PEOPLE", "choices": ["ch_go_talk"] },
+        { "id": "t_archive", "label": "ARŞİV", "kind": "ARCHIVE", "choices": ["ch_go_doc", "ch_go_board"] }
+      ],
+      "choices": [
+        {
+          "id": "ch_go_scene",
+          "kind": "NAVIGATE",
+          "label": "Olay yerini ara",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "n_scene" }
+        },
+        {
+          "id": "ch_go_talk",
+          "kind": "NAVIGATE",
+          "label": "Müvekkille görüş",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "n_talk" }
+        },
+        {
+          "id": "ch_go_doc",
+          "kind": "NAVIGATE",
+          "label": "Vardiya çizelgesini incele",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "n_doc" }
+        },
+        { "id": "ch_go_board", "kind": "NAVIGATE", "label": "Çıkarım tahtası", "next": { "push": "n_board" } },
+        { "id": "ch_go_court", "kind": "NAVIGATE", "label": "DURUŞMAYA GİT", "next": "n_court1" }
+      ]
+    },
+    {
+      "id": "n_talk",
+      "type": "DIALOGUE",
+      "title": "Görüşme",
+      "hud": ["minutes", "trust"],
+      "mode": "INTERVIEW",
+      "room": { "label": "Görüşme odası", "character": "k" },
+      "tones": [
+        { "id": "soft", "label": "Yumuşak" },
+        { "id": "hard", "label": "Sert" }
+      ],
+      "choices": [
+        {
+          "id": "tp_night",
+          "kind": "TOPIC",
+          "label": "O gece",
+          "cost": [{ "var": "minutes", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "effects": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 4 }],
+              "responses": [
+                { "lines": [{ "speaker": "k", "text": "Nöbetteydim avukat bey. Sokak zifiri karanlıktı." }] }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "DISCOVER", "evidence": "c_b" }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "k",
+                      "expression": "kizgin",
+                      "text": "Bana mı yükleniyorsunuz? Sokaktaki kameraya bakın, kablosu kesik!"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ch_show_a",
+          "kind": "OPTION",
+          "label": "Ampulü göster",
+          "visibleWhen": { "hasEvidence": "c_a" },
+          "cost": [{ "var": "minutes", "amount": 2 }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 200 },
+            { "type": "MARK", "quality": "GOOD", "feedback": "Ampulü göstermek müvekkilin hafızasını tazeledi." }
+          ],
+          "responses": [
+            { "lines": [{ "speaker": "k", "expression": "saskin", "text": "Bu ampul... o gece hiç ışık yoktu!" }] }
+          ]
+        },
+        { "id": "ch_talk_end", "kind": "CONTINUE", "label": "Görüşmeyi bitir", "next": "$return" }
+      ]
+    },
+    {
+      "id": "n_scene",
+      "type": "SCENE",
+      "title": "Olay yeri",
+      "hud": ["taps"],
+      "exposeCounts": true,
+      "scene": "sc1",
+      "instruction": "Sokağın fotoğrafında gizli ipuçlarını ara.",
+      "actionCosts": { "TAP": [{ "var": "taps", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "fb_tap",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "ch_scene_end", "kind": "CONTINUE", "label": "Aramayı bitir", "next": "$return" }
+      ]
+    },
+    {
+      "id": "n_doc",
+      "type": "DOCUMENT",
+      "title": "Vardiya çizelgesi",
+      "hud": ["exam"],
+      "header": { "left": "DEPO · VARDİYA", "right": "12 MART" },
+      "columns": [
+        { "label": "PERSONEL", "flex": 1 },
+        { "label": "SAAT", "flex": 1 }
+      ],
+      "rows": [
+        { "id": "r1", "cells": ["A", "B"] },
+        { "id": "r2", "cells": ["C", "D"], "lens": { "uv": { "cells": ["C", "D*"], "tone": "special" } } }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "uv", "label": "UV ışık", "icon": "uv", "visualMode": "UV" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "exam", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "ex_uv_r2",
+          "kind": "EXAMINE",
+          "match": { "tool": "uv", "target": "r2" },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "c_uv" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "ex_mag_r1",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "r1" },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "e_doc" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "fb_ex",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "ch_doc_end", "kind": "CONTINUE", "label": "Belgeyi kapat", "next": "$return" }
+      ]
+    },
+    {
+      "id": "n_board",
+      "type": "DEDUCTION",
+      "title": "Çıkarım tahtası",
+      "pool": ["c_a", "c_b", "c_uv"],
+      "choices": [
+        {
+          "id": "cb_ab",
+          "kind": "COMBINE",
+          "match": { "a": "c_a", "b": "c_b" },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "i_ab" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ]
+        },
+        {
+          "id": "fb_cb",
+          "kind": "FALLBACK",
+          "fallbackFor": "COMBINE",
+          "repeat": "ONCE_PER_PARAMS",
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+        },
+        { "id": "ch_board_end", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "next": "$return" }
+      ]
+    },
+    {
+      "id": "n_court1",
+      "type": "COURTROOM",
+      "title": "Çapraz sorgu",
+      "hud": ["cred", "pers"],
+      "mode": "TESTIMONY",
+      "stage": {
+        "banner": "2. CELSE · TANIK",
+        "bench": [{ "character": "j", "label": "Başkan", "xFrac": 0.5 }],
+        "witness": "w",
+        "counsel": "av"
+      },
+      "statements": [
+        {
+          "id": "st1",
+          "order": 1,
+          "segments": [
+            { "text": "Lamba " },
+            { "text": "yanıyordu", "highlightWhen": { "any": [{ "hasEvidence": "i_ab" }, { "chosen": "pr_st1" }] } }
+          ]
+        },
+        { "id": "st2", "order": 2, "segments": [{ "text": "Sanığı açıkça gördüm." }] }
+      ],
+      "choices": [
+        {
+          "id": "pr_st1",
+          "kind": "PRESS",
+          "match": { "statement": "st1" },
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 25 }]
+        },
+        {
+          "id": "ps_st1",
+          "kind": "PRESENT",
+          "match": { "statement": "st1", "evidence": ["i_ab", "e_doc"] },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "MARK", "quality": "GOOD", "feedback": "Tanığın lamba hakkındaki sözünü çürüttün." }
+          ]
+        },
+        {
+          "id": "fb_ps",
+          "kind": "FALLBACK",
+          "fallbackFor": "PRESENT",
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -150, "line": "hatali" }
+          ]
+        },
+        { "id": "ch_court_next", "kind": "CONTINUE", "label": "Devam", "next": "n_obj" }
+      ]
+    },
+    {
+      "id": "n_obj",
+      "type": "COURTROOM",
+      "title": "İtiraz",
+      "hud": ["cred", "pers"],
+      "mode": "OBJECTION",
+      "stage": {
+        "banner": "2. CELSE · DELİL",
+        "bench": [{ "character": "j", "label": "Başkan", "xFrac": 0.5 }],
+        "counsel": "av"
+      },
+      "prosecutionEvidence": "e_key",
+      "choices": [
+        {
+          "id": "ob_a",
+          "kind": "OPTION",
+          "label": "Anahtar bütün bekçilerde var",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 150 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "next": "n_choice"
+        },
+        {
+          "id": "ob_b",
+          "kind": "OPTION",
+          "label": "Anahtar sahte",
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 }
+          ],
+          "next": "n_choice"
+        }
+      ]
+    },
+    {
+      "id": "n_choice",
+      "type": "CHOICE",
+      "title": "Esas savunma",
+      "choices": [
+        {
+          "id": "cl_a",
+          "kind": "OPTION",
+          "label": "Masumiyet savunması",
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "SAVUNMA_STRATEJISI",
+              "amount": { "div": [{ "mul": [200, { "var": "strategy_pct" }] }, 100] }
+            }
+          ],
+          "next": "n_ev"
+        },
+        { "id": "cl_b", "kind": "OPTION", "label": "Savunmadan vazgeç", "next": "n_ev" }
+      ]
+    },
+    {
+      "id": "n_ev",
+      "type": "EVIDENCE",
+      "title": "Savcılık delili",
+      "evidence": "e_key",
+      "choices": [{ "id": "ev_ok", "kind": "OPTION", "label": "Anladım", "next": "n_dec" }]
+    },
+    {
+      "id": "n_dec",
+      "type": "DECISION",
+      "routes": [{ "when": { "ref": "p_strong" }, "to": "n_story_good" }, { "to": "n_result" }],
+      "choices": []
+    },
+    {
+      "id": "n_story_good",
+      "type": "STORY",
+      "title": "Kapanış",
+      "lines": [{ "lines": [{ "speaker": "narrator", "text": "Heyet, tanığın çelişkisini not etti." }] }],
+      "choices": [{ "id": "ch_good_next", "kind": "CONTINUE", "label": "Kararı dinle", "next": "n_result" }]
+    },
+    {
+      "id": "n_collapse",
+      "type": "STORY",
+      "title": "Çöküş",
+      "lines": [
+        { "lines": [{ "speaker": "narrator", "text": "Hatalı deliller güvenilirliğini tüketti; savunma çöktü." }] }
+      ],
+      "choices": [{ "id": "ch_collapse_next", "kind": "CONTINUE", "label": "Kararı dinle", "next": "n_result" }]
+    },
+    { "id": "n_result", "type": "RESULT", "title": "Karar", "choices": [] }
+  ],
+  "triggers": [
+    {
+      "id": "tg_day",
+      "scope": "n_hub",
+      "priority": 1,
+      "when": { "all": [{ "cmp": [{ "var": "ap" }, "<=", 0] }, { "cmp": [{ "var": "day" }, "<", 3] }] },
+      "effects": [
+        { "type": "VAR", "var": "day", "op": "inc", "value": 1 },
+        { "type": "VAR", "var": "ap", "op": "set", "value": 3 }
+      ]
+    },
+    {
+      "id": "tg_collapse",
+      "priority": 0,
+      "once": true,
+      "when": { "cmp": [{ "var": "cred" }, "<=", 0] },
+      "goto": "n_collapse"
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "o_win",
+      "class": "ACQUITTAL",
+      "priority": 1,
+      "when": { "all": [{ "cmp": [{ "var": "pers" }, ">=", 5] }, { "cmp": [{ "score": "final" }, ">=", 300] }] },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "sentence": "Ceza yok",
+      "verdictText": "Sanığın beraatine karar verildi.",
+      "reasoning": [{ "text": "Tanığın sokağı aydınlık gördüğü sözü çürütüldü." }],
+      "legalBasis": "CMK 223/2-e",
+      "xp": { "div": [{ "mul": [{ "score": "final" }, 12] }, 100] },
+      "howToReach": "Lamba çelişkisini delille ispatla ve heyeti ikna et."
+    },
+    {
+      "id": "o_mid",
+      "class": "REDUCED",
+      "priority": 2,
+      "when": { "cmp": [{ "score": "final" }, ">=", 100] },
+      "stamp": "İNDİRİM",
+      "stampTone": "amber",
+      "sentence": "1 yıl hapis",
+      "verdictText": "Sanığın indirimli cezalandırılmasına karar verildi.",
+      "reasoning": [{ "text": "Anahtar delili tek başına yeterli görülmedi." }],
+      "legalBasis": "TCK 141, TCK 62",
+      "xp": { "div": [{ "score": "final" }, 10] },
+      "howToReach": "Usul itirazıyla anahtar delilini zayıflat."
+    },
+    {
+      "id": "o_lose",
+      "class": "CONVICTION",
+      "priority": 3,
+      "when": { "all": [] },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "sentence": "3 yıl hapis",
+      "verdictText": "Sanığın cezalandırılmasına karar verildi.",
+      "reasoning": [{ "text": "Savunma tanığın anlatımını çürütemedi." }],
+      "legalBasis": "TCK 141",
+      "xp": 0,
+      "howToReach": "Varsayılan sonuç: diğer sonuçların koşulları tutmazsa verilir."
+    }
+  ],
+  "report": {
+    "hints": [
+      {
+        "id": "h_cam",
+        "when": { "not": { "hasEvidence": "c_b" } },
+        "text": "Sokaktaki kamerayı incelemedin.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_uv",
+        "when": { "not": { "hasEvidence": "c_uv" } },
+        "text": "Vardiya çizelgesine UV ışıkla bakmadın.",
+        "category": "DELIL_ANALIZI"
+      }
+    ]
+  },
+  "assets": [{ "id": "img_sc1", "kind": "IMAGE", "path": "assets/sc1.png" }],
+  "tests": {
+    "goldenPaths": [
+      {
+        "name": "gp_win",
+        "actions": [
+          { "kind": "CHOOSE", "choiceId": "ch_str_a" },
+          { "kind": "CHOOSE", "choiceId": "ch_go_scene" },
+          { "kind": "TAP", "x": 15, "y": 15 },
+          { "kind": "TAP", "x": 70, "y": 70 },
+          { "kind": "CHOOSE", "choiceId": "ch_scene_end" },
+          { "kind": "CHOOSE", "choiceId": "ch_go_board" },
+          { "kind": "COMBINE", "a": "c_a", "b": "c_b" },
+          { "kind": "CHOOSE", "choiceId": "ch_board_end" },
+          { "kind": "CHOOSE", "choiceId": "ch_go_court" },
+          { "kind": "PRESENT", "evidenceId": "i_ab", "statementId": "st1" },
+          { "kind": "CHOOSE", "choiceId": "ch_court_next" },
+          { "kind": "CHOOSE", "choiceId": "ob_a" },
+          { "kind": "CHOOSE", "choiceId": "cl_a" },
+          { "kind": "CHOOSE", "choiceId": "ev_ok" },
+          { "kind": "CHOOSE", "choiceId": "ch_good_next" }
+        ],
+        "expect": { "outcome": "o_win", "finalMin": 1430, "finalMax": 1430 }
+      },
+      {
+        "name": "gp_mid",
+        "actions": [
+          { "kind": "CHOOSE", "choiceId": "ch_str_b" },
+          { "kind": "CHOOSE", "choiceId": "ch_go_court" },
+          { "kind": "CHOOSE", "choiceId": "ch_court_next" },
+          { "kind": "CHOOSE", "choiceId": "ob_a" },
+          { "kind": "CHOOSE", "choiceId": "cl_b" },
+          { "kind": "CHOOSE", "choiceId": "ev_ok" }
+        ],
+        "expect": { "outcome": "o_mid", "finalMin": 450, "finalMax": 450 }
+      },
+      {
+        "name": "gp_lose",
+        "actions": [
+          { "kind": "CHOOSE", "choiceId": "ch_str_b" },
+          { "kind": "CHOOSE", "choiceId": "ch_go_court" },
+          { "kind": "PRESENT", "evidenceId": "e_key", "statementId": "st1" },
+          { "kind": "PRESENT", "evidenceId": "e_key", "statementId": "st1" },
+          { "kind": "PRESENT", "evidenceId": "e_key", "statementId": "st1" },
+          { "kind": "CHOOSE", "choiceId": "ch_collapse_next" }
+        ],
+        "expect": { "outcome": "o_lose", "finalMin": -450, "finalMax": -450 }
+      }
+    ]
+  }
+}

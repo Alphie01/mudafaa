@@ -157,6 +157,7 @@ describe('CharacterDef', () => {
     'DEFENDANT',
     'VICTIM',
     'WITNESS',
+    'COUNSEL',
     'PROSECUTOR',
     'JUDGE',
     'POLICE',
@@ -181,7 +182,7 @@ describe('CharacterDef', () => {
 
   rejectsInvalidIdAt(CharacterDef, character, ['id', 'spriteId']);
 
-  it('CharacterRole is exactly the sixteen roles', () => {
+  it('CharacterRole is exactly the seventeen roles', () => {
     expect(CharacterRole.options).toEqual(roles);
   });
 

@@ -1,9 +1,22 @@
 import { z } from 'zod';
 import { Id } from './primitives.js';
 
+/** Değişkenin HUD göstergesi: `VariableDef.display.widget` ile görünümdeki `HudItem.widget` bu şemayı paylaşır. */
+export const VariableWidget = z.enum([
+  'meter10',
+  'hearts',
+  'percentBar',
+  'minutes',
+  'pips',
+  'counter',
+  'score',
+  'label',
+]);
+export type VariableWidget = z.infer<typeof VariableWidget>;
+
 const VariableDisplay = z.strictObject({
   label: z.string(),
-  widget: z.enum(['meter10', 'hearts', 'percentBar', 'minutes', 'pips', 'counter', 'score', 'label']),
+  widget: VariableWidget,
   max: z.int().positive().optional(),
   lowAt: z.int().optional(),
   format: z.string().optional(),

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { VariableDef } from '@mudafaa/case-schema';
+import { VariableDef, VariableWidget } from '@mudafaa/case-schema';
 
 const issuesOf = (value: unknown) => {
   const result = VariableDef.safeParse(value);
@@ -150,6 +150,21 @@ describe('VariableDef', () => {
 
   describe('display', () => {
     const def = { id: 'cred', type: 'int', initial: 3, min: 0, max: 5, visibility: 'VISIBLE' };
+
+    it('VariableWidget is exactly the eight widgets and display.widget reuses it', () => {
+      expect(VariableWidget.options).toEqual([
+        'meter10',
+        'hearts',
+        'percentBar',
+        'minutes',
+        'pips',
+        'counter',
+        'score',
+        'label',
+      ]);
+      expect(VariableWidget.safeParse('gauge').success).toBe(false);
+      expect(VariableDef.shape.display.unwrap().shape.widget).toBe(VariableWidget);
+    });
 
     it.each(['meter10', 'hearts', 'percentBar', 'minutes', 'pips', 'counter', 'score', 'label'])(
       'accepts the %s widget',

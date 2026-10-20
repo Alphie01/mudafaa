@@ -255,7 +255,10 @@ yemek getirir; Ece'ye gece gelen tek satırlık mesaj: "Avukatına çok konuşma
   gönderir (ihlal salonda görüldüyse; görülmediyse Leyla Deniz'e kendini bildirmesini söyler). Sevim: "Kızımı kurtardınız.
   Kendinizi kurtaramadınız galiba." Üç hafta sonra disiplin kurulu koridoru; Leyla Deniz'in avukatıdır: "Seni savunurum,
   ama seni aklamam."
-- **ETİK (mahkûmiyet):** Yalnızca ihlal varken hukuka uygun delil de yetmediğinde. Hâkim hukuka aykırı kaydı dışlar; Leyla
+- **ETİK_İNDİRİM (158/4 + etik):** Hukuka uygun deliller 158/4'e yeter; hüküm İNDİRİM ile aynı (HAGB, taksit). İhlal salonda
+  görüldüyse hâkim karar örneğini baroya gönderir; görülmediyse salonda yalnız Deniz ve Leyla bilir. Ece: "Benim beş yılım
+  var. Sizin?" Leyla Avukatlık Kanunu'nu 34. maddede açık bırakır: "Yarın sabah baroya kendin yazacaksın."
+- **ETİK (mahkûmiyet):** Yalnızca ihlal varken hukuka uygun delil ne beraate ne 158/4'e yettiğinde. Hâkim hukuka aykırı kaydı dışlar; Leyla
   masaya Avukatlık Kanunu'nu bırakır, bir şey demez.
 - **Hafif ihlalli beraat:** BERAAT_E/B'ye Leyla'nın ertesi sabahki ihtarı eklenir (inkâr tavsiyesi, bayide tehdit, katılana
   "vazgeç" telkini; her biri ayrı bir cümle).

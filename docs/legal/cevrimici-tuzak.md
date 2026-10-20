@@ -16,7 +16,7 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
 | Madde | Kullanıldığı yer | Kontrol edilen metin (kısa) |
 |---|---|---|
 | TCK 158/1-f ve son cümle | künye, BR_01 (A–D), hükümler | Bilişim sistemleri, banka veya kredi kurumlarının araç olarak kullanılması; 3–10 yıl hapis ve 5.000 güne kadar adli para; (e),(f),(j),(k),(l) hâllerinde hapsin alt sınırı **4 yıl**, adli para **menfaatin iki katından az olamaz** (6763/14). |
-| TCK 158/4 (Ek: 16/7/2026-7589/13) | BR_01K, T_04 (B), T_07 (C), INDIRIM | İştirak, hesabın kullanılmasını sağlayan zorunlu bilgi/araçları haksız menfaat amacıyla başkasına vermekle sınırlıysa ceza **yarı oranında indirilir**. Yürürlük 31/7/2026. |
+| TCK 158/4 (Ek: 16/7/2026-7589/13) | BR_01K, T_04 (B), T_07 (C), INDIRIM, ETIK_INDIRIM | İştirak, hesabın kullanılmasını sağlayan zorunlu bilgi/araçları haksız menfaat amacıyla başkasına vermekle sınırlıysa ceza **yarı oranında indirilir**. Yürürlük 31/7/2026. |
 | TCK 158/3 | (kullanılmadı; not) | Üç veya daha fazla kişiyle birlikte işlenme → yarı oranında artırım. İddianame bu bendi içermediği için görevli mahkeme asliye cezadır (§3). |
 | TCK 7/2 | BR_01K, INDIRIM | Suç tarihi ile sonraki kanun farklıysa failin lehine olan uygulanır. |
 | TCK 21/1, 37/1, 39, 40/1 | Leyla (gün 1), T_04 (A), hükümler | Kast: bilerek ve isteyerek; birlikte gerçekleştiren fail; yardım edene cezanın yarısı indirilir (39/1), araç sağlama (39/2-b); iştirak için kasten ve hukuka aykırı işlenmiş bir fiil (40/1). |
@@ -25,7 +25,7 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
 | TCK 51/1 | MAHKUMIYET | Erteleme ≤ 2 yıl hapis. |
 | TCK 106, 136, 243, 267, 277 | etik seçenekler, rapor | Tehdit; kişisel verileri hukuka aykırı ele geçirme; bilişim sistemine girme; iftira; "görülmekte olan bir davada" tanığı etkilemeye teşebbüs. |
 | TCK 38 | BURT_KABUL, ETIK/ETIK_BERAAT kartı | Azmettirme: başkasını suç işlemeye azmettiren, işlenen suçun cezasıyla cezalandırılır. Müdafiin Burak'a operatör sistemine girip kayıt çektirmesi TCK 243 ve 136'ya azmettirmedir. |
-| CMK 206/2-a, 217/2; Anayasa 38/6 | PS_G_ILLEGAL, PS_O/N_ILLEGAL, ETIK, ETIK_BERAAT | Kanuna aykırı elde edilmiş delil reddolunur; hukuka aykırı elde edilmiş delil hükme esas alınamaz. |
+| CMK 206/2-a, 217/2; Anayasa 38/6 | PS_G_ILLEGAL, PS_O/N_ILLEGAL, ETIK, ETIK_BERAAT, ETIK_INDIRIM | Kanuna aykırı elde edilmiş delil reddolunur; hukuka aykırı elde edilmiş delil hükme esas alınamaz. |
 | Av.K. 58 | ETIK/ETIK_BERAAT gerekçesi | Avukatın görevinden doğan suçlarında soruşturma Adalet Bakanlığı izniyle Cumhuriyet savcısınca yapılır; mahkeme karar örneğini "gereği için" Başsavcılığa, disiplin yönünden baroya gönderir. |
 | CMK 48 | T_01, T_02, PR_O4 | Tanık kendini suçlayabilecek sorulara cevap vermekten çekinebilir; önceden bildirilir. |
 | CMK 109/3-a, 110 | RQ_YASAK, hükümler | Yurt dışına çıkamamak adli kontrol yükümlülüğü; kaldırılması. |
@@ -51,13 +51,15 @@ Menfaat (kapora): 75.000 TL → adli para cezası tabanı 150.000 TL (158/1 son 
 - **MAHKUMIYET / ETIK** (158/1-f, 37/1): temel ceza alt sınırdan **4 yıl hapis** ve 1.500 gün (×100 TL = 150.000 TL ≥ taban)
   → TCK 62/1 (1/6): **3 yıl 4 ay hapis**, 1.250 gün → günlüğü 100 TL'den **125.000 TL**. TCK 53. Ceza 2 yılı aştığından
   erteleme (TCK 51/1) ve HAGB (CMK 231/5) yok. Sanık tutuksuz olduğundan mahsup yok.
-- **INDIRIM** (158/1-f, 37/1 + 158/4, TCK 7/2): 4 yıl + 1.500 gün → 158/4 (1/2): **2 yıl**, 750 gün → TCK 62/1: **1 yıl 8 ay**,
+- **INDIRIM / ETIK_INDIRIM** (158/1-f, 37/1 + 158/4, TCK 7/2): 4 yıl + 1.500 gün → 158/4 (1/2): **2 yıl**, 750 gün → TCK 62/1: **1 yıl 8 ay**,
   625 gün × 100 TL = **62.500 TL** → CMK 231/5 HAGB (231/6-a, b; c koşulu 231/9 uyarınca denetim süresinde aylık taksitle),
   beş yıl denetim (231/8). HAGB kararında hapis ertelenemez (231/7). Kanun yolu: istinaf (231/12, 7499 ile itirazdan istinafa çevrildi).
 - **BERAAT_B / BERAAT_E / ETIK_BERAAT**: ceza yok; adli kontrol (yurt dışı yasağı) 1. celsede kaldırılmadıysa (yasak_kalkti
   yoksa) hükümde kaldırılır, kaldırıldıysa gerekçede yalnızca anılır; 223/2-b'de Necdet Sarı ve diğerleri hakkında dosya
   örneği Başsavcılığa; 223/2-e'de kimliği belirsiz failler için soruşturmaya devam. ETIK_BERAAT'ta hukuka aykırı kayıt ve
   yönlendirilen tanığın beyanı dışlanır; ihlal salonda görüldüyse karar örneği baroya ve Başsavcılığa gönderilir.
+  ETIK_INDIRIM'de hüküm INDIRIM ile aynıdır; yalnızca dışlama gerekçesi ve (ihlal salonda görüldüyse) baro/Başsavcılık
+  bildirimi eklenir.
 
 ## 3. Usul akışı
 - **Görevli mahkeme:** 158/1-f'nin üst sınırı 10 yıl olduğundan asliye ceza (5235 md. 12: ağır ceza "on yıldan fazla"
@@ -114,6 +116,11 @@ Menfaat (kapora): 75.000 TL → adli para cezası tabanı 150.000 TL (158/1 son 
     gelir; gerekçesi o durumu söyler. Tanığı yönlendirmede (AR_C) kuryenin beyanı ve ona dayanan çıkarımlar dışlanıp kalan
     delil yeniden tartılır (`savunma_arda_disi`); bayi çalışanına para bırakmada (BAY_PARA) tanığın beyanı yalnızca
     belgelerle doğrulandığı ölçüde değerlendirilir. BURT_KABUL tek başına ağır ihlal (ethics +2; TCK 243, 136, 38).
+    *İkinci inceleme düzeltmesi:* aynı ilke vasıf değişikliğine de uygulandı. Hukuka uygun delille TCK 158/4 indirimi
+    kurulabiliyorsa (`indirimLawful`) ihlal hükmü ağırlaştırmaz: sonuç **ETIK_INDIRIM** (1 yıl 8 ay + 62.500 TL + HAGB,
+    XP 0, etik kartı; ihlal salonda görüldüyse baro ve Başsavcılık bildirimi). **ETIK** mahkûmiyeti artık yalnızca hukuka
+    uygun delille de MAHKUMIYET çıkacak durumlarda gelir (`ethicsBreach ∧ ¬indirimLawful`). Önceki sürümde G_I'ye
+    BURT_KABUL eklemek, mahkemenin hiç görmediği bir ihlal yüzünden hükmü 3 yıl 4 ay HAGB'siz mahkûmiyete çeviriyordu.
 14. **Delil tamken skorun hükme etkisi yok.** Hat (sahte vekâlet, başka kişi), cihaz, kast ve kira iddiası hukuka uygun
     delillerle çürütüldüğünde (`delil_beraat`) hüküm skor ne olursa olsun beraattir; mahkeme ispatlanmış olguya karşı
     mahkûmiyet kurmaz. Savcının beraat mütalaası ayrıca ikna ≥ 8 ve güvenilirlik ≥ 2 ister; hâkim mütalaayla bağlı
@@ -127,6 +134,16 @@ Menfaat (kapora): 75.000 TL → adli para cezası tabanı 150.000 TL (158/1 son 
 16. **Kayıt dışı tanık görüşmesi (H1_09, T_KORIDOR).** Dinlenmiş ve yeniden çağrılabilecek kolluk tanığıyla kayıt dışı
     görüşmek ve duruşma kapısında tanığa güvence vermek yasak bir eylem olarak değil, TCK 277 şüphesi doğuran ve TBB
     Meslek Kurallarına aykırı bir tutum olarak puanlandı (etik sayaç değil, yalnızca skor/ikna).
+17. **TCK 158/4 indiriminin dayanağı.** İndirim yalnız skorla değil olguyla kurulur: terditli istem (terditli ∨
+    terditli_erken) ∧ katkının kodu vermekle sınırlı olduğunu gösteren olgu (aldatma çıkarımı `ded_aldatma` ya da sanığın
+    kodu dürüstçe anlatması `ece_durust`) ∧ final ≥ 3.000 (savunmanın genel ikna gücü). Terditli istenip bu koşullar
+    oluşmazsa MAHKUMIYET ve ETIK gerekçesi, istenen indirimin neden uygulanmadığını ayrıca yazar (CMK 230/1-a: gerekçe, savunmanın
+    ileri sürdüğü görüşleri karşılar).
+18. **Tanık hakkında savcının talebi (T_03X).** Cumhuriyet savcısı "suç duyurusunda bulunmaz"; suç şüphesini öğrenince
+    resen soruşturur (CMK 160/1). Duruşmada savcı, soruşturma yapılmak üzere tutanağın ve dosyanın bir örneğinin
+    Başsavcılığa gönderilmesini talep eder; hâkim talebi kabul eder ve dinlenmesi bitmemiş tanığa salondan ayrılmamasını
+    söyler (duruşmanın yönetimi ve düzeni, CMK 192, 203). Molada koridorda görülen kolluk görevlileri, Başsavcılığın ayrıca verdiği talimatın
+    sonucudur; duruşma hâkimi tanığı gözaltına aldırmaz.
 
 ## 5. Hassas konu denetimi
 Lineup sınırı: cinsel suçlar, çocuklara yönelik suçlar ve terör yok. Bu davada: yok. Yaşlı mağdur ve hasta eş unsuru dram
@@ -138,6 +155,7 @@ için kullanıldı; TCK 158/1-c (algılama yeteneğinin zayıflığı) iddia edi
 - [x] Görevli mahkeme asliye ceza; tek hâkim; hitap "Sayın Hâkim"; savcı duruşmada.
 - [x] Hükümlerde ve HAGB kararında istinaf (CMK 231/12, 273/1); adli kontrolün kaldırılması; suç duyurusu.
 - [x] Etik ihlal seçenekleri doğru maddeye bağlı (Av.K. 34, 38; TCK 38, 136, 243, 267, 277).
-- [x] Etik ihlalde hukuka uygun delil beraate yetiyorsa beraat (ETIK_BERAAT); müdafiin kusuru sanığa yüklenmez.
+- [x] Etik ihlalde hukuka uygun delil beraate yetiyorsa beraat (ETIK_BERAAT), 158/4'e yetiyorsa indirim (ETIK_INDIRIM); müdafiin kusuru sanığa yüklenmez.
+- [x] Terditli 158/4 talebi reddedildiğinde mahkûmiyet gerekçesi reddi ayrıca yazar.
 - [x] Mahkûmiyet gerekçeleri duruşma kaydıyla çelişmez (kısmi/hiç gösterilmeme ayrımı); beraat mütalaası verilen yolda hüküm beraattir.
 - [x] Delil yasakları: yetkisiz erişimle alınan kayıt (Anayasa 38/6; CMK 206/2-a, 217/2).

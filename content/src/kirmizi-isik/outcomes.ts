@@ -183,6 +183,9 @@ export const outcomes: CasePart = {
             text: 'O zaman da bunu bir delil söyler. Bir his değil. Bugün hiçbir delil bunu söylemedi.',
           },
           N(
+            'Volkan bir şey söyleyecekti, vazgeçti. Merdivenin trabzanına dayandı. Islak demir, avucunun altında soğuktu; bir süre öyle durdu, sanki ilk kez bir şeye dokunuyormuş gibi.',
+          ),
+          N(
             'Volkan başını salladı. Gül’ün elinden bebek taşıyıcısını aldı. İlk kez, sanki ağırlığını ölçer gibi, iki eliyle havaya kaldırdı.',
           ),
           L('volkan', 'Bir gün soracak. “Baba, o gece ne oldu?” diye. Ne diyeceğim?'),

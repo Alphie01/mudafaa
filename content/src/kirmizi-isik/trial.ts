@@ -327,6 +327,9 @@ export const trial: CasePart = {
           responses: says(
             L('volkan', 'Evet… rapor… kırmızı yokmuş. Avukat hanım öyle dedi.', 'saskin'),
             L('savci', 'Avukat hanım öyle demiş. Tutanağa geçsin.'),
+            N(
+              'Volkan bana döndü; gözlerinde bir soru. Ben başımı eğdim. Hâkim kalemini bıraktı, bir şey not etmedi; bu daha kötüydü.',
+            ),
           ),
           next: 'T_01',
         }),
@@ -972,6 +975,9 @@ export const trial: CasePart = {
               'nalan',
               'Yaralanma mekanizması Adli Tıp’ın alanı. Biz yalnızca şunu söyleyebiliriz: sanığın aracındaki hasarın yüksekliği ve konumu, ayaktaki bir yetişkine önden çarpmayla uyumlu değil.',
             ),
+            N(
+              'Savcı kalemini bıraktı ve heyet başkanına baktı. Uzun bir bakış. Sonra önündeki Adli Tıp raporunun sayfasını çevirdi; ilk kez okuyormuş gibi.',
+            ),
           ),
         }),
         option('NQ_TAKDIR', '“Sizce sanık bu ölümden sorumlu mu?”', {
@@ -1010,6 +1016,12 @@ export const trial: CasePart = {
               ),
               L('hakim', 'Neden sakladınız?'),
               L('ayten', 'Biri sorar diye efendim. Sordular.'),
+              N(
+                'Hâkim bir süre Ayten’e baktı. Sonra kâtibe döndü: “Tanığın beyanını aynen yazın; ‘biri sorar diye’ kısmı dahil.” Kâtip yazdı.',
+              ),
+              T(
+                'Bir polisin üç ay dolapta sakladığı vicdanı, bir tutanağın içine aynen girdi. Bazen adalet, bir kâtibin klavyesinde başlar.',
+              ),
             ),
             when(
               flag('ayten_kayip'),
@@ -1038,6 +1050,9 @@ export const trial: CasePart = {
           responses: says(
             L('ayten', 'Amirim hakkında bir şey söylemem doğru olmaz. Tutanağım ortada.'),
             L('hakim', 'Müdafi, tanığa olay hakkında soru sorun.'),
+            N(
+              'Ayten kürsünün kenarını tuttu. Az önce bana bakan gözler şimdi kâtibin ekranına kilitlenmişti. Kapıyı kendi elimle kapatmıştım.',
+            ),
           ),
         }),
         cont('T06_BITIR', 'Sorularım bu kadar', 'T_07'),
@@ -1510,6 +1525,12 @@ export const trial: CasePart = {
             'Ben ceza istiyorum. Ama kime verildiğini bilmek istiyorum. Yanlış adama verilen ceza annemi bir kere daha öldürür.',
           ),
           N('Oturdu. Vekili ona döndü, bir şey fısıldadı; Serkan başını iki yana salladı.'),
+          N(
+            'Volkan başını kaldırdı. İlk kez Serkan’la göz göze geldiler. Kimse bir şey söylemedi. Salonun saati tik tak ediyordu; zabıt kâtibi bile yazmayı bıraktı.',
+          ),
+          T(
+            'Bir oğul ile bir sanık arasında bir bakış. Hiçbir tutanak bunu yazmaz. Ama ikisi de bu bakışla yaşayacak.',
+          ),
         ),
         otherwise(
           L('hakim', 'Sayın Savcı, savunmaya cevabınız?'),
@@ -1522,6 +1543,10 @@ export const trial: CasePart = {
           L('hakim', 'Katılan, sizin bir diyeceğiniz var mı?'),
           L('serkan', 'Annem yeşilde geçti. Başka bir şey demeyeceğim.'),
           N('Oturdu. Çerçeveyi dizlerine koydu, annesinin yüzünü salona çevirdi.'),
+          N(
+            'Çerçevedeki kadın gülümsüyordu; bir doğum günü pastasının mumlarına üflemeden hemen önce. Salonda herkes ona baktı, ben de.',
+          ),
+          T('Bir fotoğraf, bir dosyadan daha yüksek sesle konuşur. Elimdeki dayanaklar o sesi bastırmaya yetecek mi?'),
         ),
       ],
       choices: [cont('T09R_DEVAM', 'Son söze geç', 'T_10')],
@@ -1576,6 +1601,8 @@ export const trial: CasePart = {
           responses: says(
             L('volkan', 'Ben öldürdüm. Hissettim. Ne ceza verirseniz razıyım.', 'uzgun'),
             N('Gül taşıyıcıyı göğsüne bastırdı. Bebek ağlamaya başladı. Mübaşir kapıyı açtı; Gül çıktı.'),
+            N('Serkan’ın vekili not aldı. Serkan almadı. Volkan’a baktı; uzun uzun. Kazanan birinin bakışı değildi.'),
+            T('“Hissettim.” Üç aydır bu kelimeyle boğuşuyorduk. Son sözde kelime kazandı.'),
           ),
         }),
         option('SS_SUS', '“Söyleyecek bir şeyim yok.”', {

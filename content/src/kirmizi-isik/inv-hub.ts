@@ -349,6 +349,13 @@ export const invHub: CasePart = {
           'leyla',
           'Bütünü gören tanık olmaz Deniz. Bütünü sen kurarsın, hâkim de senin kurduğunu sınar. Bir parça eksikse o parçayı şüphe doldurur.',
         ),
+        N(
+          'Leyla gözlüğünü masaya bıraktı. Pencerenin camında yağmur, camın arkasında Uludağ’ın karanlık sırtı. Masasındaki ters çerçeveye dokundu; çevirmedi.',
+        ),
+        L(
+          'leyla',
+          'Bir parçayı fazla parlatma. Taksicinin yanlışını bulunca sevinirsin; hâkim ise kendine sorar: bu avukat bütünü mü kuruyor, yoksa yalnızca bir tanığı mı yıkıyor?',
+        ),
         L(
           'leyla',
           'Şüphe sanık lehinedir. Ama şüpheyi “olabilir” diye değil, “olmadığı gösterilemedi” diye kurarsın. İkisi aynı cümle değil.',
@@ -384,6 +391,12 @@ export const invHub: CasePart = {
           ),
           T(
             'Fotoğraf yalan söylememiş. Buradan Gökdere’nin rengi görülmüyor. Görülen tek renk, insanın kendi önündeki renk.',
+          ),
+          N(
+            'Bir taksi yanaştı, şoför camı indirdi: “Bir yere mi abla?” Hayır dedim. Baktı, anlamadı, gitti. Gece yarısı bir kavşakta duran bir kadın; herkes bir hikâye uydurur.',
+          ),
+          T(
+            'Necati de o gece burada durdu. Kendi lambasının kırmızısına baktı. Sonra bir gümbürtü duydu ve kırmızıyı karşı yöne taşıdı. Kötü niyetle değil; insan beyni boşlukları sever.',
           ),
           N(
             'Gökdere’den arada bir araç geçiyordu. Islak asfaltta lastik sesi, sonra uzun bir sessizlik. Kimse kimseye bakmadı.',
@@ -451,6 +464,17 @@ export const invHub: CasePart = {
             'leyla',
             'Raporun her cümlesinin altında bir varsayım var. Varsayımları say: ışık, iz, çarpma. Hangisini ölçmüş, hangisini sanmış?',
           ),
+          L(
+            'leyla',
+            'Ben ilk yıllarımda raporları sondan başa okurdum. Önce sonucu, sonra gerekçeyi. Yanlış. Bilirkişi de öyle yazar; sonucu bilir, gerekçeyi sonradan döşer.',
+          ),
+          L(
+            'leyla',
+            'Sen baştan oku. Her cümlenin yanına bir soru işareti koy. Cevabı raporun içinde olmayan soru işaretleri, itirazının iskeletidir.',
+          ),
+          T(
+            'Soru işaretleri. Leyla’nın masasında kırmızı kalemle çizilmiş soru işaretleriyle dolu bir dosya gördüm bir kez; kazanılmış bir dosyaydı.',
+          ),
         ),
         when(
           all(cmp(v('ilk_adim'), '==', 'MUVEKKIL'), not(visited('INV_GORUSME'))),
@@ -510,6 +534,13 @@ export const invHub: CasePart = {
           L(
             'leyla',
             'Tanığın nerede durduğunu biliyorsun. Şimdi oradan ne görüldüğünü düşün. Dürüst tanık, gördüğünü sandığını da anlatır.',
+          ),
+          L(
+            'leyla',
+            'Tanığı yalancı ilan etmek kolaydır, hâkim de sevmez. Tanığın neyi görebileceğini göster; gerisini hâkim kendisi düşünür. Kimseyi küçük düşürmeden.',
+          ),
+          T(
+            'Necati yalan söylemiyor. Kırk yıllık bir şoför, kendi önündeki kırmızıya bakıyor. Bunu ona ben değil, durduğu yer söyleyecek.',
           ),
         ),
         when(
@@ -625,6 +656,18 @@ export const invHub: CasePart = {
           flag('fact_tek_lamba'),
           T(
             'Volkan’ın uzakta gördüğü tek kırmızı lamba. Bir hayal mi, bir hatıra mı? Hatıralar delil değildir; ama bazen delile giden yolu gösterir.',
+          ),
+          N(
+            'Telefonuma Gül’den bir fotoğraf düştü: masada iki çay bardağı, birinin yanında Volkan’ın eli. Altında yazı yok. Gerek de yoktu.',
+          ),
+          T(
+            'Yarın sabah bir adam bir salona girecek ve oradan ya hafiflemiş ya ağırlaşmış çıkacak. Bu gece ikisinin arasındaki fark bu panodaki kâğıtlar.',
+          ),
+          N(
+            'Saat bire geliyordu. Yağmur camlara vurdu, sonra durdu. Panonun önünde, ayakta, kâğıtları bir kez daha sıraladım: rapor, tutanak, otopsi, kayıtlar.',
+          ),
+          T(
+            'Yarın bir hâkime bir hikâye anlatmayacağım. Bir raporun dayanaklarını tek tek göstereceğim. Hikâyeyi hâkim kendisi kurar; ben yalnızca tuğlaları getiririm.',
           ),
         ),
         when(flag('serkan_saygi'), T('Serkan’a verdiğim söz aklımda. Hatice. Adını düzgün söyleyeceğim.')),

@@ -162,6 +162,14 @@ export const ara: CasePart = {
         ),
         T('İki gün. Dörder işlik iki gün. Bir yenidoğanın uyku düzeni kadar kısa.'),
         N(
+          'Leyla gitmeden önce kapının pervazına yaslandı. Fincan hâlâ elindeydi; kahve soğumuş, üstünde ince bir zar.',
+        ),
+        L(
+          'leyla',
+          'İlk ağır dosyamda bir tanığın kapısını çaldım. Gece yarısı. Haklıydım da. Ertesi gün tanık ifadesini değiştirdi; “avukat evime geldi” dedi. Haklı olmak yetmedi.',
+        ),
+        T('Leyla geçmişini anlatmaz. Anlattığında bir şey öğretmek içindir; ya da bir şeyi unutmamak için.'),
+        N(
           'Masamda üç rapor için üç boş dosya açtım: EDR, heyet, Adli Tıp. Sırtlarına el yazısıyla etiket yazdım; Gül’den öğrendiğim bir alışkanlık.',
         ),
       ),
@@ -283,6 +291,9 @@ export const ara: CasePart = {
           N(
             'Raporun ekinde kavşağın bir planı: yaya geçidi, iki sinyal başlığı, okla gösterilmiş bir “çatışma bölgesi.” Kırmızı kalemle taranmış bir dikdörtgen; Hatice Hanım’ın son adımları o dikdörtgenin içinde.',
           ),
+          N(
+            'Sonuç paragrafını yüksek sesle okudum; boş büroda sesim yankılandı. Sonra bir daha okudum, bu sefer içimden. İkisinde de aynı şeyi söylüyordu.',
+          ),
           T(
             '“Sanığa kırmızı ışık ihlali atfedilemez.” Bir cümle. Üç aydır bir adamın üstünde duran bir kaya, bir cümleyle kalktı. Ama otuz bir sayfa var.',
           ),
@@ -334,6 +345,9 @@ export const ara: CasePart = {
           ),
           T(
             'Volkan “kırk kadar” demişti. Rapor “altmış sekiz” diyor. Arada yirmi sekiz kilometre ve bir adamın üç yılı var.',
+          ),
+          N(
+            'Tablonun altında bilirkişinin notu: “Veri, aracın hava yastığı kontrol ünitesinden, üreticinin okuma yazılımıyla, mühür altında alınmıştır.” Mühür altında. Sevdim bunu.',
           ),
         ),
         header: { left: 'OLAY VERİ KAYDEDİCİSİ · 16 AVE 712', right: 'BİLİRKİŞİ DÖKÜMÜ' },
@@ -401,6 +415,12 @@ export const ara: CasePart = {
           ),
           N(
             'Dördüncü sayfanın kenarına biri kurşun kalemle küçük bir işaret koymuş. Kim koyduysa, benim de bakmamı istemiş gibi.',
+          ),
+          N(
+            'İlk üç sayfa bir ders kitabı gibiydi: kavşağın krokisi, sinyal fazlarının tablosu, ıslak asfaltta sürtünme katsayısı. Her rakamın yanında bir kaynak.',
+          ),
+          T(
+            'Cengiz Ateş’in raporu dört sayfaydı ve hiç kaynak göstermiyordu. Bu rapor otuz bir sayfa ve her cümlesinin bir annesi var. Ama bir cümle öksüz.',
           ),
         ),
         header: { left: 'BİLİRKİŞİ HEYETİ RAPORU', right: 'DOÇ. DR. N. GÜNEŞ VE İKİ ÜYE' },
@@ -477,6 +497,17 @@ export const ara: CasePart = {
         ),
         L('ayten', 'Neden aldığımı bilmiyorum. Belki bir gün biri sorar diye. Kimse sormadı. Siz sordunuz.'),
         T('Bir delil, yanlış dolapta üç ay. Şimdi doğru yere gitmesi gerek. Ve o doğru yer ben değilim.'),
+        N(
+          'Çayını karıştırdı. Kaşık bardağa iki kez çarptı, sonra durdu. Kantinci sandalyeleri masalara ters çeviriyordu; ayakları havada, ölü böcekler gibi.',
+        ),
+        L(
+          'ayten',
+          'Polis okulunda bize ilk gün şunu öğrettiler: olay yerinde gördüğünü yaz, düşündüğünü değil. Ben o gece gördüğümü yazdım. Amirim düşündüğünü yazdırdı.',
+        ),
+        L('ayten', 'Tutanakta “eski kaza” yazıyor. Benim el yazımla. Altında benim imzam. Bunu her gece hatırlıyorum.'),
+        T(
+          'Bir imza, bir el yazısı, bir amir. Bir polisin vicdanı bazen bir tutanağın kenarına sığmaz; bir mendile sarılıp dolaba girer.',
+        ),
       ),
       choices: [
         option('AY_SAVCI', '“Parçayı tutanakla savcılığa teslim edin; nerede bulduğunuzu da yazın.”', {
@@ -492,6 +523,12 @@ export const ara: CasePart = {
             L('ayten', 'Tamam. Yarın sabah savcılığa. Tutanakla.'),
             N('Çayını bitirmeden kalktı. Kapıda döndü.'),
             L('ayten', 'Teşekkür ederim. Bana “ver bana” demediğiniz için.'),
+            N(
+              'Kantinin camından onu izledim. Yağmurun altında bir süre durdu, şemsiyesini açmadı. Sonra telefonunu çıkardı, birini aradı; kısa bir konuşma.',
+            ),
+            T(
+              'Belki amirini aradı, belki annesini. Belki yalnızca saatin kaç olduğunu soran bir kayıt. Yarın sabah bir dosya kalınlaşacak; benim elim değmeden.',
+            ),
           ),
           next: HUB,
         }),
@@ -566,8 +603,18 @@ export const ara: CasePart = {
           category: 'USUL_BILGISI',
           responses: says(
             L('serkan', 'Annemin sesi bir dosyada. Hm.'),
+            N(
+              'Bir süre telefonun ekranına baktı. Ekran karardı. Parmağıyla dokundu, yeniden aydınlandı. Bir daha karardı.',
+            ),
+            L(
+              'serkan',
+              'Üç aydır bu mesajı dinlemedim. Biliyor musunuz neden? Dinlersem biter sandım. Son kelimesi bu olacak. “Hadi.” Bir simit, bir “hadi”.',
+            ),
             L('serkan', 'Götürürüm. Yarın. Ama bilin: ben yine ceza istiyorum. Kime verilecekse ona.'),
             T('“Kime verilecekse.” Üç hafta önce bu cümlede bir isim vardı.'),
+            T(
+              'Bir oğul annesinin son sözünü bir savcıya götürecek. Ben onu götürmesini istemedim; götürebileceğini söyledim. Bu ikisi arasındaki fark bir meslek kadar geniş.',
+            ),
             N(
               'Serkan telefonu cebine koydu, selvinin dibinde bir süre durdu. Sonra, bana bakmadan: “Annem sizi severdi. Kimseyi suçlamadan konuşan insanları severdi.”',
             ),
@@ -617,8 +664,16 @@ export const ara: CasePart = {
           responses: says(
             L('hamdi', 'Ne gördüysem. Hm. Yemin edeceğim değil mi? Yemin ederim. Babam yemin etmeyi bilen adamdı.'),
             L('hamdi', 'Müdür bey kızar. Emekliliğe iki yıl. … Kızsın.'),
+            L(
+              'hamdi',
+              'Otuz yıl o lambaları yaktım söndürdüm abla. Bir gece bile kırmızıyla yeşili karıştırmadım. O kart karıştırdı. Kartı ben değiştirdim, ertesi gün. Geç kaldım.',
+            ),
+            T('“Geç kaldım.” Bir teknisyenin itirafı, bir raporun dipnotundan daha ağır.'),
             N(
               'Hamdi sökülmüş eski lambanın camını tırnağıyla tıklattı. Kırmızı, sarı, yeşil. Sonra kapıyı açtı, içeri girdi, döndü.',
+            ),
+            T(
+              'Hamdi bir lamba sakladı, Ayten bir cam parçası, Sevim bir kayıt. Bu dosyada herkes bir şey saklamış; kimse bir şey gizlememiş. Fark küçük ama hukuk bu farkın üstünde durur.',
             ),
             L(
               'hamdi',
@@ -676,6 +731,13 @@ export const ara: CasePart = {
           responses: says(
             L('volkan', 'Bilmediğime bilmiyorum. Bildiğime… biliyorum. Tamam.'),
             L('gul', 'Bunu her sabah tekrar ettireceğim ona. Bebek bezi değiştirirken.'),
+            L(
+              'volkan',
+              'Hatice Hanım’ın oğlunu duruşmada gördüm. Bana hiç bakmadı. Bakmasını istiyorum. Bakarsa bir şey söyleyebilirim belki. Bakmazsa ne söylesem duvara.',
+            ),
+            P(
+              'Ona ne söyleyeceğinizi ben bilemem. Ama ne söylerseniz doğru olsun. O zaman duvara da söyleseniz bir şey olur.',
+            ),
             N(
               'Volkan camın öbür yanındaki bebeğe döndü. Elini cama koydu; bebek uyuyordu. Bir hemşire gülümsedi, perdeyi biraz araladı.',
             ),
@@ -737,6 +799,13 @@ export const ara: CasePart = {
                 'Başka bir şey hatırlarsanız, mahkemeye kendiniz söylersiniz. Bana değil. Ben karşı tarafın avukatı sayılırım.',
               ),
               L('necati', 'Karşı taraf. Hm. Ben hep sizin karşınızda mıydım?'),
+              N(
+                'Termosunun kapağını açtı, kapattı. Kahve kokusu odaya yayıldı; kakule ve yanık şeker. Bekleme salonunun saatine baktı.',
+              ),
+              L(
+                'necati',
+                'Kırk yıldır gece çalışırım. Gece şoförleri bilir: gece her şey kırmızıdır. Stop lambaları, tabelalar, sigaraların ucu. Ben de kırmızı görmüşüm. Herkes gibi.',
+              ),
               L(
                 'necati',
                 'Bir şey daha: o gümbürtüden önce bir fren duydum. Uzun bir fren. Lastik bağırıyordu. Sonra gümbürtü. Sonra bir fren daha, kısa. Tıkır tıkır.',
@@ -799,6 +868,12 @@ export const ara: CasePart = {
               style: 'phone',
             },
             T('Bir sınav. Heyet başkanı, avukatın kahve içip içmeyeceğini merak etmiş. İçmedim.'),
+            N(
+              'Telefonu kapattım. Masamdaki heyet raporunun dördüncü sayfası açıktı; kurşun kalemle konmuş o küçük işaret hâlâ oradaydı.',
+            ),
+            T(
+              'Belki o işareti heyet başkanı koymuştu, belki bir kâtip. Soru aynı kalıyor ve onu duruşmada, herkesin önünde soracağım.',
+            ),
             L(
               'leyla',
               'Kahveyi reddettin mi? İyi. Bilirkişilerle kahve içilmez, Deniz. Bir kere içersen, raporu okuyan herkes o kahveyi de okur.',
@@ -1002,6 +1077,10 @@ export const ara: CasePart = {
             'leyla',
             'İlliyet bağı kurulmadıysa, müvekkilin oradaydı ama ölüme yol açmadı demektir. Bu “şüphe” değil, başka bir şeydir. Ne olduğunu sen söyle.',
           ),
+          L(
+            'leyla',
+            'Bunu karıştırma: şüphe, hâkimin içinde kalan bir boşluktur. Bu ise dosyanın kendisinde yazan bir cümle olabilir. Raporu kartlarınla yan yana koy.',
+          ),
         ),
         when(
           all(has('ev_boya'), not(has('ded_arac'))),
@@ -1056,6 +1135,12 @@ export const ara: CasePart = {
         otherwise(
           card('PAZAR 23.50 — ARSLAN HUKUK', 'buro_gece'),
           N('Pano yine dolmuştu. Bu sefer raptiyeler yetmedi; kâğıtları bantla yapıştırdım.'),
+          N(
+            'Masamda üç rapor yan yana: EDR’nin sayıları, heyetin otuz bir sayfası, Adli Tıp’ın mühürlü iki sayfası. Üçü de aynı geceyi başka bir dille anlatıyordu.',
+          ),
+          T(
+            'Sayılar hız diyor. Heyet ışık diyor. Adli Tıp beden diyor. Yarın bu üç dili tek bir cümleye çevirmem gerekecek; hâkimin anlayacağı bir cümleye.',
+          ),
         ),
       ],
     }),

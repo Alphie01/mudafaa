@@ -129,6 +129,12 @@ export const hearing1: CasePart = {
           responses: says(
             L('volkan', 'Tamam. Teşekkür ederim. Bunu duymaya ihtiyacım vardı.'),
             N('Gül bana baktı. Bir şey demedi. O bakış sonra uzun süre aklımdan çıkmadı.'),
+            N(
+              'Volkan’ın omuzları indi. Rahatlamış bir adamın değil, bir yükü yere bırakıp yeniden kaldırmayı bekleyen bir hamalın omuzları.',
+            ),
+            T(
+              '“İndirimi konuşuruz.” Bir dosyayı bir pazarlığa çevirdim. Daha deliller okunmadan, daha taksici kürsüye çıkmadan.',
+            ),
           ),
           next: 'H1_00',
         }),
@@ -330,6 +336,10 @@ export const hearing1: CasePart = {
           responses: says(
             L('volkan', 'Her gece. Her sabah. Bir kadın öldü ve ben oradaydım.', 'uzgun'),
             L('vekil', 'Sayın Başkan, sanık kendi ağzıyla söylüyor. Tutanağa geçmesini talep ederim.'),
+            N(
+              'Kâtip yazdı. Klavyenin sesi salonda bir yağmur gibi. Volkan’ın cümlesi tutanağa, benim sorumla birlikte, kelimesi kelimesine geçti.',
+            ),
+            T('Bir soru, bir cümle, bir tutanak. Kendi müvekkilimin aleyhine en iyi delili ben ürettim.'),
           ),
         }),
         option('Q_ALKOL', '“O gece alkol aldınız mı?”', {

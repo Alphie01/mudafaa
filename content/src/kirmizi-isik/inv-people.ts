@@ -505,6 +505,9 @@ export const invPeople: CasePart = {
         ),
         T('Yalancı değil. Önemli olmayı seviyor. İnsanlar önemli olduklarında, gördüklerinden fazlasını hatırlar.'),
         N(
+          'Sobanın üstünde bir çaydanlık, kenarında kurumaya bırakılmış bir çift eldiven. Tavlanın pulları dağınık; yarım kalmış bir oyun. Rakibi kalkıp gitmiş, Necati beklemiş.',
+        ),
+        N(
           'Duvarda, takım bayrağının yanında, çerçeveli bir gazete kupürü: “Taksici yolda bulduğu çantayı sahibine teslim etti.” Fotoğrafta genç bir Necati, aynı kasket.',
         ),
         L(
@@ -580,6 +583,12 @@ export const invPeople: CasePart = {
             ),
             P('Kafasının aşağıda olduğunu, araba hareket hâlindeyken mi gördünüz?'),
             L('necati', 'Yok… durunca. Arabadan inerken. Ama belliydi işte. Telefoncuydu.', 'saskin'),
+            N(
+              'Necati termosun kapağını sıktı. Sobanın üstündeki çaydanlık fokurdadı. Durağın telsizinden bir ses: “Çınarlı’ya bir araç, Çınarlı’ya.” Kimse kalkmadı.',
+            ),
+            T(
+              'Kafası aşağıdaydı, çünkü yerdeki bir kadına bakıyordu. Bunu Necati’ye söylemeyeceğim. Kürsüde kendisi fark edecek; ya da etmeyecek.',
+            ),
           ),
         }),
         option(
@@ -685,6 +694,12 @@ export const invPeople: CasePart = {
             ),
             T('Bir mesaj. Bir ölünün sesi. Bunu ondan isteyemem. Ama bir gün kendisi dinlerse…'),
             L('serkan', 'Siz gidin artık. Ama… geldiğiniz için. Bilmiyorum. Gidin.'),
+            N(
+              'Kapı kapandı. Zincirin sesi, sonra kilidin iki tur dönüşü. Merdiven boşluğunda otomatik ışık söndü; karanlıkta bir süre durdum, düğmeyi aramadım.',
+            ),
+            T(
+              'Bir oğul, bir zincir, bir kapı aralığı. Kapıyı açtırmadım. Aralığı büyüttüm, o kadar. Bazen bir avukatın yapabileceği en fazla şey bu.',
+            ),
           ),
         }),
         option('SQ_SIKAYET', '“Şikâyetinizden vazgeçerseniz dava düşer. Bunu bir düşünür müsünüz?”', {
@@ -820,6 +835,12 @@ export const invPeople: CasePart = {
               'hamdi',
               'Çağırırlarsa gelirim. Yalan söylemem. Ama gönüllü de gelmem. Müdürüm bilsin, beni mahkeme çağırdı.',
             ),
+            N(
+              'Tornavidayı yeniden eline aldı. Masadaki sökülmüş kartı çevirdi, bir lehim noktasına baktı, bir daha baktı. Benimle konuşma bitmişti; kartla konuşma sürüyordu.',
+            ),
+            T(
+              'Tanığı ben çağırmayacağım; mahkeme çağıracak. Ben yalnızca adını ve neyi bildiğini dilekçeye yazacağım. Gerisi onun vicdanı.',
+            ),
           ),
         }),
         back('HQ_BITIR', 'Teşekkür et ve çık'),
@@ -848,6 +869,14 @@ export const invPeople: CasePart = {
           'sevim',
           'Sabahları ilk o geçerdi, akşamları son o. Bu kavşakta otuz yıl. Benden eski. Ben yirmi yıldır buradayım.',
         ),
+        N(
+          'Semaverin musluğundan bir bardağa çay doldurdu, tezgâha koydu. Ben istemeden. Bardağın altına bir peçete sıkıştırdı; peçetede bir kuş resmi.',
+        ),
+        L(
+          'sevim',
+          'Hatice’nin bardağı buydu. Kuşlu peçete. Kimse sormadı, ben koydum. Şimdi sen içiyorsun. Ayıp olmaz, iç.',
+        ),
+        T('Bir ölünün bardağından çay içtim. Bu kavşakta herkesin bir yası var; benimki henüz yok, ama bardak sıcak.'),
       ),
       choices: [
         option('VQ_KAYIT', '“Tentenin altındaki kamera kayıt yapıyor mu?”', {
@@ -860,6 +889,9 @@ export const invPeople: CasePart = {
             ),
             L('sevim', 'Ama o geceyi ben ayırdım. Oğluma dedim, “bunu sakla, biri sorar”. Kimse sormadı. Polis bile.'),
             L('sevim', 'Saati ileridir haa. Hep ileri. Ayarlamayı bilmiyorum. Yaz saati kış saati, kafam karışıyor.'),
+            T(
+              'Saat ileri. Kaç dakika ileri, kimse bilmiyor. Bir kayıt, saati bilinmezse bir resim albümüdür; saati bilinirse bir tanık.',
+            ),
           ),
         }),
         option(
@@ -895,6 +927,7 @@ export const invPeople: CasePart = {
               'sevim',
               'Kafamı kaldırdığımda beyaz araba duruyordu. Adam iniyordu. Sonra taksici bağırdı. Ben 112’yi aradım ama zaten aranmış.',
             ),
+            L('sevim', 'Gece buradan çok araba geçer kuzum, hiçbirine bakmam. Bakmaya başlarsam örgüyü bitiremem.'),
             T('Bir fren, bir gümbürtü, bir fren daha. Ya da yankı. Kavşaklar yankı yapar; tanıklar da.'),
           ),
         }),
@@ -929,6 +962,16 @@ export const invPeople: CasePart = {
 
         T('Ölülerin kim olduğunu dosyalar söylemez. Temizlik odaları söyler.'),
         L('fadime', 'Çay koyayım. Hatice çaysız konuşmazdı. Biz de onun usulüyle devam ediyoruz.'),
+        N(
+          'Çaydanlığın altını yaktı. Mavi alev titredi. Duvardaki vardiya çizelgesinde bir isim kırmızı kalemle çizilmemişti; yanına yalnızca küçük bir yıldız konmuştu.',
+        ),
+        L(
+          'fadime',
+          'Çizemedim. Müdür “listeyi güncelle” dedi. Güncelledim; adını silmedim. Yıldız koydum. Kimse bir şey demedi.',
+        ),
+        T(
+          'Bir vardiya çizelgesinde bir yıldız. Bürokrasinin içinde bir mezar taşı kadar küçük, bir mezar taşı kadar inatçı.',
+        ),
       ),
       choices: [
         option('FQ_GECE', '“O gece Hatice Hanım kaçta çıktı?”', {
@@ -947,6 +990,11 @@ export const invPeople: CasePart = {
               'fadime',
               'Hep Gökdere’den yürürdü. Kırk dakika. Otobüs parasını biriktirirdi; torun için diyordu, daha torun yok.',
             ),
+            L(
+              'fadime',
+              'Yağmurda da yürürdü. Şemsiyesi yoktu, bir poşeti başına geçirirdi. Güleriz diye. Biz gülerdik, o da gülerdi.',
+            ),
+            T('Bir poşet, bir simit, kırk dakikalık bir yol. Otopsi raporunda bunların hiçbiri yazmaz.'),
           ),
         }),
         option('FQ_ISIK', '“O kavşaktan hiç şikâyet ettiğini duydunuz mu?”', {

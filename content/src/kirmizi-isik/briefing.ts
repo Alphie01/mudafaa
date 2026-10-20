@@ -549,6 +549,12 @@ export const briefing: CasePart = {
           'Okul çantalı bir çocuk yaya butonuna bastı. Araçlar durdu. Yaya ışığı yeşile döndü. Çocuk koşarak karşıya geçti; annesi arkasından bağırdı.',
         ),
         T('Bir şehrin en acımasız yanı: hiçbir şey olmamış gibi devam etmesi. Işık yanar, söner, yanar.'),
+        N(
+          'Direğin tepesindeki sinyal başlığına baktım. Kırmızı, sarı, yeşil; sırayla, sakin, kusursuz. Sanki üç ay önce bir şey olmamış gibi. Belki de o gece de böyle görünüyordu.',
+        ),
+        N(
+          'Yaya geçidinin çizgilerine yeni boya atılmıştı. Beyaz, parlak. Eski çizgilerin hayaleti hâlâ altlarında; asfaltın kendi hafızası.',
+        ),
         T('On dört gün sonra ikinci celse. Dört günüm var; gerisi dilekçeye, hazırlığa ve uykusuzluğa.'),
         N('Telefonumda Gül’den bir mesaj: “Volkan evde. Çay demlendi. O konuşmaz ama siz sorun.”'),
         N(

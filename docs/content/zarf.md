@@ -112,8 +112,8 @@ gelmez (`kayit_disi` ∧ `zarf_suphe` ∧ pers ≥ 5 ∧ final ≥ 10.000).
 Seçenek etiketlerinden isim çıkarıldı (BAY_C, MUZ_BASKI).
 
 ## 9. Doğrulayıcı
-`npm run case:validate -- zarf --max-ms 3500000`: **PASSED — 0 hata**, 65.176 durum, 400 yürüyüş, bütün sonuçlara ulaşıldı;
-golden path 6/6 (G_E2 sonradan eklendi). Kalan uyarılar: SIMULATION_INCOMPLETE (uzun davada beklenen) ve G_E2 ile kapsanan
-T_02B / PS_K3_P. Not: bu ölçüm, makinede başka iş akışı ajanları çalışırken (yük ortalaması ~25, 8 çekirdek) yapıldı;
+`npm run case:validate -- zarf --max-ms 3500000`: **PASSED — 0 hata, 1 uyarı**, 67.193 durum, 400 yürüyüş, bütün sonuçlara
+ulaşıldı; kapsam node 112/112, seçenek 210/210, kural 74/74, delil 51/51; golden path 7/7. Tek uyarı SIMULATION_INCOMPLETE
+(uzun davada beklenen). PS_K3_P kuralı K3 sunumlarının önüne alınarak kapsandı. Not: bu ölçüm, makinede başka iş akışı ajanları çalışırken (yük ortalaması ~25, 8 çekirdek) yapıldı;
 varsayılan 600 sn bütçesi bu yükte aşıldığı için süre bütçesi artırıldı. Durum başına maliyet Dava #02 ile aynı düzeydedir
 (golden path boyunca ölçüm: 204 durum 3,9 sn; #02 200 durum 5,9 sn).

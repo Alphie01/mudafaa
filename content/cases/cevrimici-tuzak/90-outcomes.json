@@ -184,11 +184,194 @@
       ]
     },
     {
-      "id": "ETIK",
-      "class": "CONVICTION",
+      "id": "ETIK_INDIRIM",
+      "class": "RECHARACTERIZED",
       "priority": 2,
       "when": {
-        "any": [{ "flag": "illegal_used" }, { "flag": "tanik_etkileme" }, { "cmp": [{ "var": "ethics" }, ">=", 2] }]
+        "all": [
+          {
+            "any": [{ "flag": "illegal_used" }, { "flag": "tanik_etkileme" }, { "cmp": [{ "var": "ethics" }, ">=", 2] }]
+          },
+          {
+            "all": [
+              { "not": { "flag": "cokus" } },
+              {
+                "all": [
+                  { "any": [{ "flag": "terditli" }, { "flag": "terditli_erken" }] },
+                  { "any": [{ "hasEvidence": "ded_aldatma" }, { "flag": "ece_durust" }] },
+                  { "cmp": [{ "score": "final" }, ">=", 3000] }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "stamp": "158/4 · BARO",
+      "stampTone": "amber",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "1 yıl 8 ay hapis · 62.500 TL adli para · HAGB · Müdafi hakkında disiplin yolu açık",
+      "verdictText": "Sanığın katkısının hesabın kullanılmasını sağlayan bilgiyi vermekle sınırlı olduğu kabul edilerek TCK 158/1-f ve 37/1 uyarınca 4 yıl hapis ve 1.500 gün adli para cezası belirlenmesine; 16.7.2026 tarihli 7589 sayılı Kanunla eklenen ve lehe olan TCK 158/4 uyarınca (TCK 7/2) yarı oranında indirilerek 2 yıl hapis ve 750 gün adli para cezasına; TCK 62/1 uyarınca 1 yıl 8 ay hapis ve 625 gün adli para cezasına, günlüğü 100 TL’den 62.500 TL’ye; zararın denetim süresi içinde aylık taksitlerle giderilmesi koşuluyla CMK 231/5, 231/9 uyarınca HÜKMÜN AÇIKLANMASININ GERİ BIRAKILMASINA ve beş yıl denetim süresine; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 231/12, 273/1).",
+      "reasoning": [
+        {
+          "when": { "flag": "illegal_used" },
+          "text": "Savunmanın sunduğu bayi sistemi ekran görüntüsü yetkisiz erişimle elde edildiğinden hükme esas alınmamıştır (Anayasa 38/6; CMK 206/2-a, 217/2)."
+        },
+        {
+          "when": { "all": [{ "flag": "arda_etkileme" }, { "flag": "arda_cagrildi" }] },
+          "text": "Müdafiin tanığa ne söyleyeceğini yönlendirdiği anlaşıldığından tanık Arda Kılıç’ın beyanı ve buna dayanan çıkarımlar değerlendirme dışı bırakılmıştır (CMK 217/1)."
+        },
+        {
+          "text": "Sanığın, hesaba erişimi sağlayan kodu 4.500 TL karşılığında verdiği kabul edilmiştir; işlemleri bizzat yaptığına ya da kaporadan pay aldığına dair delil yoktur. Katkı, hesaba erişimi sağlayan bilgiyi vermekle sınırlıdır (TCK 158/4)."
+        },
+        {
+          "when": { "any": [{ "flag": "g2_kismi" }, { "flag": "g2_kaan" }] },
+          "text": "Avans açıklamasının “eğitim avansı” olduğu ve işverenle satıcının aynı hattı kullandığı dosyaya yansımış; ancak ödemenin bir kiralama bedeli olmadığı tam olarak gösterilememiştir."
+        },
+        {
+          "when": {
+            "any": [{ "flag": "o1_kismi" }, { "flag": "n3_imei" }, { "flag": "n3_kismi" }, { "flag": "n2_kismi" }]
+          },
+          "text": "Hattın vekil aracılığıyla değiştirildiği ve kopya SIM’in başka bir cihazda olduğu dosyaya girmiş; ancak sanığın bilgisi dışında olduğu kesin olarak ispatlanamamıştır."
+        },
+        {
+          "text": "7589 sayılı Kanunla eklenen TCK 158/4 sanık lehine olduğundan suç tarihinden sonra yürürlüğe girmiş olmasına rağmen uygulanmıştır (TCK 7/2). Aynı katkı için ayrıca TCK 39 indirimi yapılmamıştır."
+        },
+        { "text": "Sanığın sabıkasızlığı ve duruşmadaki tutumu takdiri indirim nedeni sayılmıştır (TCK 62/1)." },
+        {
+          "text": "Hükmolunan ceza iki yılı aşmadığından ve zararın taksitle giderilmesi kabul edildiğinden hükmün açıklanması geri bırakılmıştır (CMK 231/5, 231/6, 231/9)."
+        },
+        {
+          "when": {
+            "any": [
+              { "flag": "illegal_used" },
+              { "all": [{ "flag": "arda_etkileme" }, { "flag": "arda_cagrildi" }] },
+              { "all": [{ "any": [{ "flag": "onur_para" }, { "flag": "onur_baski" }] }, { "flag": "onur_cagrildi" }] }
+            ]
+          },
+          "text": "Müdafiin delil elde etme ve tanıkla ilişki biçimi sanığın aleyhine yorumlanamaz; hükme yalnızca hukuka uygun deliller esas alınmıştır."
+        },
+        {
+          "when": {
+            "any": [
+              { "flag": "illegal_used" },
+              { "all": [{ "flag": "arda_etkileme" }, { "flag": "arda_cagrildi" }] },
+              { "all": [{ "any": [{ "flag": "onur_para" }, { "flag": "onur_baski" }] }, { "flag": "onur_cagrildi" }] }
+            ]
+          },
+          "text": "Müdafiin tutumu nedeniyle karar örneğinin Bursa Barosuna ve gereği için Bursa Cumhuriyet Başsavcılığına gönderilmesine karar verilmiştir (Av.K. 34, 58; CMK 158)."
+        }
+      ],
+      "legalBasis": "TCK 158/1-f, 158/4, 7/2, 37/1, 52, 62/1; CMK 206/2-a, 217/2, 231/5, 231/6, 231/9; Anayasa 38/6; Av.K. 34, 58",
+      "xp": 0,
+      "howToReach": "Terditli savunmayla TCK 158/4 indirimini hukuka uygun delillerle kazanırken bir yandan yetkisiz kayıt almak, bir tanığı yönlendirmek ya da birden fazla meslek kuralını çiğnemek. Hüküm müvekkilin; ihlal avukatın.",
+      "ethicsCard": "Mahkeme, müdafiin ihlalini sanığın aleyhine yorumlamaz; hüküm hukuka uygun delillerle kurulur. Ama avukat delili yasal yoldan ister: yetkisiz erişimle kayıt aldırmak suçtur (TCK 243, 136, 38) ve hükme esas alınamaz (CMK 206/2-a, 217/2). Tanığa cümle vermek tanığı etkilemedir (TCK 277). Disiplin yaptırımı meslekten çıkarmaya kadar gidebilir (Av.K. 34, 135 vd.).",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "…hükmün açıklanmasının geri bırakılmasına." },
+            {
+              "speaker": "narrator",
+              "text": "Ece “geri bırakılmasına” kelimesini anlamadı. Anlamadığı için yüzü bir an aydınlandı. Sonra bana baktı."
+            }
+          ]
+        },
+        {
+          "when": {
+            "any": [
+              { "flag": "illegal_used" },
+              { "all": [{ "flag": "arda_etkileme" }, { "flag": "arda_cagrildi" }] },
+              { "all": [{ "any": [{ "flag": "onur_para" }, { "flag": "onur_baski" }] }, { "flag": "onur_cagrildi" }] }
+            ]
+          },
+          "lines": [
+            { "speaker": "hakim", "text": "…karar örneğinin Bursa Barosuna ve Başsavcılığa gönderilmesine." },
+            {
+              "speaker": "narrator",
+              "text": "Hâkim bu cümleyi okurken bana bakmadı. Bakmasına gerek yoktu; salondaki herkes baktı."
+            },
+            { "speaker": "ece", "text": "Avukat bey… o ne demek?" },
+            {
+              "speaker": "player",
+              "text": "Müvekkilimin hükmünün sonuna benim adım eklendi. Bir dipnot gibi. Ama dipnotlar da okunur.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "not": {
+              "any": [
+                { "flag": "illegal_used" },
+                { "all": [{ "flag": "arda_etkileme" }, { "flag": "arda_cagrildi" }] },
+                { "all": [{ "any": [{ "flag": "onur_para" }, { "flag": "onur_baski" }] }, { "flag": "onur_cagrildi" }] }
+              ]
+            }
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Salonda kimse bilmiyordu. Hâkim bilmiyordu, savcı bilmiyordu, Ece bilmiyordu. Ben biliyordum; bir de Leyla."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla arka sırada oturuyordu. Hüküm okunurken gözlerini kapattı; açtığında bana değil, kapıya baktı."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLE", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Kalemde taksit planını imzalattılar. Yetmiş beş bin lira, beş yıl, aylık. Alacaklı: Nurettin Aksoy."
+            },
+            { "speaker": "ece", "text": "Yani ben onun parasını ödeyeceğim. Beni dolandıranın aldığı parayı." },
+            { "speaker": "player", "text": "Beş yıl içinde başka bir şey olmazsa bu hüküm hiç kurulmamış sayılacak." },
+            { "speaker": "ece", "text": "Benim beş yılım var. Sizin?" },
+            { "speaker": "narrator", "text": "Ne sorduğunu bilmiyordu. Ya da biliyordu." },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · O GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla odamın kapısında durdu. Elinde Avukatlık Kanunu vardı; eski, kenarları kıvrılmış nüshası. Masama bıraktı, otuz dördüncü maddeyi açık bırakarak."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Müvekkiline indirim aldın. Kendine bir şey alamadın. Yarın sabah baroya kendin yazacaksın; ben okumayacağım."
+            },
+            {
+              "speaker": "player",
+              "text": "Ece’nin hükmü beş yıl sonra silinecek. Benim yaptığımı silecek bir denetim süresi yok.",
+              "style": "thought",
+              "fx": "fade"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ETIK",
+      "class": "CONVICTION",
+      "priority": 3,
+      "when": {
+        "all": [
+          {
+            "any": [{ "flag": "illegal_used" }, { "flag": "tanik_etkileme" }, { "cmp": [{ "var": "ethics" }, ">=", 2] }]
+          },
+          {
+            "not": {
+              "all": [
+                { "not": { "flag": "cokus" } },
+                {
+                  "all": [
+                    { "any": [{ "flag": "terditli" }, { "flag": "terditli_erken" }] },
+                    { "any": [{ "hasEvidence": "ded_aldatma" }, { "flag": "ece_durust" }] },
+                    { "cmp": [{ "score": "final" }, ">=", 3000] }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
       },
       "stamp": "MAHKÛMİYET",
       "stampTone": "red",
@@ -213,6 +396,12 @@
           "text": "Hattın başka bir bayide değiştirildiği ve işlemlerin başka bir cihazdan yapıldığı ileri sürülmüşse de, değişikliğin sanığın bilgisi dışında yapıldığı, sanığın aldatıldığı ve 4.500 TL’nin kira bedeli olmadığı her yönüyle gösterilememiş; sanığın hesabını ve doğrulama kodunu bilerek sağladığı kabul edilmiştir (TCK 37/1)."
         },
         { "when": { "flag": "cokus" }, "text": "Savunmanın inandırıcılığı duruşmada çökmüştür." },
+        {
+          "when": {
+            "all": [{ "any": [{ "flag": "terditli" }, { "flag": "terditli_erken" }] }, { "not": { "flag": "cokus" } }]
+          },
+          "text": "Terditli olarak istenen TCK 158/4 indirimi, sanığın katkısının hesaba erişim bilgisini vermekle sınırlı kaldığı gösterilemediğinden uygulanmamıştır."
+        },
         { "text": "Sanığın sabıkasız oluşu ve duruşmadaki tutumu takdiri indirim nedeni sayılmıştır (TCK 62/1)." },
         {
           "when": {
@@ -279,7 +468,7 @@
     {
       "id": "BERAAT_B",
       "class": "ACQUITTAL",
-      "priority": 3,
+      "priority": 4,
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
@@ -462,7 +651,7 @@
     {
       "id": "BERAAT_E",
       "class": "ACQUITTAL",
-      "priority": 4,
+      "priority": 5,
       "when": { "all": [{ "not": { "flag": "cokus" } }, { "ref": "delil_beraat" }] },
       "stamp": "BERAAT",
       "stampTone": "green",
@@ -592,7 +781,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Resmî olarak Kaan’ın kim olduğunu kimse bilmiyordu. Bir ses, bir numara, bir asansör. Savcılık dosyayı “failleri belirsiz” diye yeniden açtı."
+              "text": "Resmî olarak Kaan’ın kim olduğunu kimse bilmiyordu. Bir ses, bir numara, bir asansör. Dosya Başsavcılığa döndü; kapağına yeni bir numara yazıldı."
             },
             { "speaker": "player", "text": "Bazı kapılar açılır, ama ışığı kimse yakmaz.", "style": "thought" }
           ]
@@ -682,12 +871,17 @@
     {
       "id": "INDIRIM",
       "class": "RECHARACTERIZED",
-      "priority": 5,
+      "priority": 6,
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
-          { "any": [{ "flag": "terditli" }, { "flag": "terditli_erken" }] },
-          { "cmp": [{ "score": "final" }, ">=", 3000] }
+          {
+            "all": [
+              { "any": [{ "flag": "terditli" }, { "flag": "terditli_erken" }] },
+              { "any": [{ "hasEvidence": "ded_aldatma" }, { "flag": "ece_durust" }] },
+              { "cmp": [{ "score": "final" }, ">=", 3000] }
+            ]
+          }
         ]
       },
       "stamp": "158/4 · HAGB",
@@ -775,7 +969,7 @@
     {
       "id": "MAHKUMIYET",
       "class": "CONVICTION",
-      "priority": 6,
+      "priority": 7,
       "when": { "all": [] },
       "stamp": "MAHKÛMİYET",
       "stampTone": "red",
@@ -794,6 +988,12 @@
         {
           "when": { "flag": "ece_inkar" },
           "text": "Sanığın kod paylaşmadığı yönündeki beyanı banka kaydıyla çelişmiştir."
+        },
+        {
+          "when": {
+            "all": [{ "any": [{ "flag": "terditli" }, { "flag": "terditli_erken" }] }, { "not": { "flag": "cokus" } }]
+          },
+          "text": "Terditli olarak istenen TCK 158/4 indirimi, sanığın katkısının hesaba erişim bilgisini vermekle sınırlı kaldığı gösterilemediğinden uygulanmamıştır."
         },
         {
           "when": { "flag": "cokus" },

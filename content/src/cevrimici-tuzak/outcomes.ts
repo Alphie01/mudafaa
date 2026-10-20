@@ -46,6 +46,43 @@ const baroLine = because(
  */
 const acquitE = ref('delil_beraat');
 
+/**
+ * TCK 158/4 (terditli) indiriminin dayanağı: savunma terditli istemde bulundu, katkının kodu vermekle sınırlı olduğunu
+ * gösteren bir olgu dosyada (aldatma çıkarımı sunuldu ya da sanık kodu dürüstçe anlattı) ve savunma yeterince güçlü.
+ * Etik ihlal bu hükmü ağırlaştırmaz: mahkemenin bilmediği ya da dışladığı bir ihlal sanığın aleyhine yorumlanamaz.
+ */
+const terditIstendi = any(flag('terditli'), flag('terditli_erken'));
+const indirimBasis = all(terditIstendi, any(has('ded_aldatma'), flag('ece_durust')), finalAtLeast(T_INDIRIM));
+const indirimLawful = all(notCollapsed, indirimBasis);
+const terditRed = because(
+  'Terditli olarak istenen TCK 158/4 indirimi, sanığın katkısının hesaba erişim bilgisini vermekle sınırlı kaldığı gösterilemediğinden uygulanmamıştır.',
+  all(terditIstendi, notCollapsed),
+);
+
+const indirimVerdict =
+  'Sanığın katkısının hesabın kullanılmasını sağlayan bilgiyi vermekle sınırlı olduğu kabul edilerek TCK 158/1-f ve 37/1 uyarınca 4 yıl hapis ve 1.500 gün adli para cezası belirlenmesine; 16.7.2026 tarihli 7589 sayılı Kanunla eklenen ve lehe olan TCK 158/4 uyarınca (TCK 7/2) yarı oranında indirilerek 2 yıl hapis ve 750 gün adli para cezasına; TCK 62/1 uyarınca 1 yıl 8 ay hapis ve 625 gün adli para cezasına, günlüğü 100 TL’den 62.500 TL’ye; zararın denetim süresi içinde aylık taksitlerle giderilmesi koşuluyla CMK 231/5, 231/9 uyarınca HÜKMÜN AÇIKLANMASININ GERİ BIRAKILMASINA ve beş yıl denetim süresine; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 231/12, 273/1).';
+
+const indirimReasoning = [
+  because(
+    'Sanığın, hesaba erişimi sağlayan kodu 4.500 TL karşılığında verdiği kabul edilmiştir; işlemleri bizzat yaptığına ya da kaporadan pay aldığına dair delil yoktur. Katkı, hesaba erişimi sağlayan bilgiyi vermekle sınırlıdır (TCK 158/4).',
+  ),
+  because(
+    'Avans açıklamasının “eğitim avansı” olduğu ve işverenle satıcının aynı hattı kullandığı dosyaya yansımış; ancak ödemenin bir kiralama bedeli olmadığı tam olarak gösterilememiştir.',
+    any(flag('g2_kismi'), flag('g2_kaan')),
+  ),
+  because(
+    'Hattın vekil aracılığıyla değiştirildiği ve kopya SIM’in başka bir cihazda olduğu dosyaya girmiş; ancak sanığın bilgisi dışında olduğu kesin olarak ispatlanamamıştır.',
+    any(flag('o1_kismi'), flag('n3_imei'), flag('n3_kismi'), flag('n2_kismi')),
+  ),
+  because(
+    '7589 sayılı Kanunla eklenen TCK 158/4 sanık lehine olduğundan suç tarihinden sonra yürürlüğe girmiş olmasına rağmen uygulanmıştır (TCK 7/2). Aynı katkı için ayrıca TCK 39 indirimi yapılmamıştır.',
+  ),
+  because('Sanığın sabıkasızlığı ve duruşmadaki tutumu takdiri indirim nedeni sayılmıştır (TCK 62/1).'),
+  because(
+    'Hükmolunan ceza iki yılı aşmadığından ve zararın taksitle giderilmesi kabul edildiğinden hükmün açıklanması geri bırakılmıştır (CMK 231/5, 231/6, 231/9).',
+  ),
+];
+
 /** Adli kontrol: 1. celsede kaldırıldıysa hükümde yeniden kaldırılmaz. */
 const adliKontrol = [
   because('Sanık hakkındaki yurt dışına çıkış yasağı 4.11.2026 tarihli celsede kaldırılmıştır.', flag('yasak_kalkti')),
@@ -180,10 +217,76 @@ export const outcomes: CasePart = {
         `),
       ],
     }),
+    outcome('ETIK_INDIRIM', {
+      class: 'RECHARACTERIZED',
+      priority: 2,
+      when: all(ethicsBreach, indirimLawful),
+      stamp: '158/4 · BARO',
+      stampTone: 'amber',
+      header: 'TÜRK MİLLETİ ADINA',
+      sentence: '1 yıl 8 ay hapis · 62.500 TL adli para · HAGB · Müdafi hakkında disiplin yolu açık',
+      verdictText: indirimVerdict,
+      reasoning: [
+        because(
+          'Savunmanın sunduğu bayi sistemi ekran görüntüsü yetkisiz erişimle elde edildiğinden hükme esas alınmamıştır (Anayasa 38/6; CMK 206/2-a, 217/2).',
+          flag('illegal_used'),
+        ),
+        because(
+          'Müdafiin tanığa ne söyleyeceğini yönlendirdiği anlaşıldığından tanık Arda Kılıç’ın beyanı ve buna dayanan çıkarımlar değerlendirme dışı bırakılmıştır (CMK 217/1).',
+          ardaVisible,
+        ),
+        ...indirimReasoning,
+        because(
+          'Müdafiin delil elde etme ve tanıkla ilişki biçimi sanığın aleyhine yorumlanamaz; hükme yalnızca hukuka uygun deliller esas alınmıştır.',
+          breachVisible,
+        ),
+        baroLine,
+      ],
+      legalBasis: 'TCK 158/1-f, 158/4, 7/2, 37/1, 52, 62/1; CMK 206/2-a, 217/2, 231/5, 231/6, 231/9; Anayasa 38/6; Av.K. 34, 58',
+      xp: 0,
+      howToReach:
+        'Terditli savunmayla TCK 158/4 indirimini hukuka uygun delillerle kazanırken bir yandan yetkisiz kayıt almak, bir tanığı yönlendirmek ya da birden fazla meslek kuralını çiğnemek. Hüküm müvekkilin; ihlal avukatın.',
+      ethicsCard:
+        'Mahkeme, müdafiin ihlalini sanığın aleyhine yorumlamaz; hüküm hukuka uygun delillerle kurulur. Ama avukat delili yasal yoldan ister: yetkisiz erişimle kayıt aldırmak suçtur (TCK 243, 136, 38) ve hükme esas alınamaz (CMK 206/2-a, 217/2). Tanığa cümle vermek tanığı etkilemedir (TCK 277). Disiplin yaptırımı meslekten çıkarmaya kadar gidebilir (Av.K. 34, 135 vd.).',
+      epilogue: [
+        O(S`
+          hakim: …hükmün açıklanmasının geri bırakılmasına.
+          - Ece "geri bırakılmasına" kelimesini anlamadı. Anlamadığı için yüzü bir an aydınlandı. Sonra bana baktı.
+        `),
+        W(
+          breachVisible,
+          S`
+            hakim: …karar örneğinin Bursa Barosuna ve Başsavcılığa gönderilmesine.
+            - Hâkim bu cümleyi okurken bana bakmadı. Bakmasına gerek yoktu; salondaki herkes baktı.
+            ece: Avukat bey… o ne demek?
+            ~ Müvekkilimin hükmünün sonuna benim adım eklendi. Bir dipnot gibi. Ama dipnotlar da okunur.
+          `,
+        ),
+        W(
+          not(breachVisible),
+          S`
+            - Salonda kimse bilmiyordu. Hâkim bilmiyordu, savcı bilmiyordu, Ece bilmiyordu. Ben biliyordum; bir de Leyla.
+            - Leyla arka sırada oturuyordu. Hüküm okunurken gözlerini kapattı; açtığında bana değil, kapıya baktı.
+          `,
+        ),
+        O(S`
+          = ADLİYE KORİDORU · ÖĞLE @adliye
+          - Kalemde taksit planını imzalattılar. Yetmiş beş bin lira, beş yıl, aylık. Alacaklı: Nurettin Aksoy.
+          ece: Yani ben onun parasını ödeyeceğim. Beni dolandıranın aldığı parayı.
+          > Beş yıl içinde başka bir şey olmazsa bu hüküm hiç kurulmamış sayılacak.
+          ece: Benim beş yılım var. Sizin?
+          - Ne sorduğunu bilmiyordu. Ya da biliyordu.
+          = ARSLAN HUKUK · O GECE @buro_gece
+          - Leyla odamın kapısında durdu. Elinde Avukatlık Kanunu vardı; eski, kenarları kıvrılmış nüshası. Masama bıraktı, otuz dördüncü maddeyi açık bırakarak.
+          leyla: Müvekkiline indirim aldın. Kendine bir şey alamadın. Yarın sabah baroya kendin yazacaksın; ben okumayacağım.
+          ~ Ece'nin hükmü beş yıl sonra silinecek. Benim yaptığımı silecek bir denetim süresi yok. !fade
+        `),
+      ],
+    }),
     outcome('ETIK', {
       class: 'CONVICTION',
-      priority: 2,
-      when: ethicsBreach,
+      priority: 3,
+      when: all(ethicsBreach, not(indirimLawful)),
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
       header: 'TÜRK MİLLETİ ADINA',
@@ -208,6 +311,7 @@ export const outcomes: CasePart = {
           all(ref('sim_kismen'), ref('cihaz_kismen'), not(flag('cokus'))),
         ),
         because('Savunmanın inandırıcılığı duruşmada çökmüştür.', flag('cokus')),
+        terditRed,
         because('Sanığın sabıkasız oluşu ve duruşmadaki tutumu takdiri indirim nedeni sayılmıştır (TCK 62/1).'),
         baroLine,
       ],
@@ -243,7 +347,7 @@ export const outcomes: CasePart = {
     }),
     outcome('BERAAT_B', {
       class: 'ACQUITTAL',
-      priority: 3,
+      priority: 4,
       when: all(
         notCollapsed,
         ref('delil_beraat'),
@@ -319,7 +423,7 @@ export const outcomes: CasePart = {
     }),
     outcome('BERAAT_E', {
       class: 'ACQUITTAL',
-      priority: 4,
+      priority: 5,
       when: all(notCollapsed, acquitE),
       stamp: 'BERAAT',
       stampTone: 'green',
@@ -397,7 +501,7 @@ export const outcomes: CasePart = {
         ),
         O(S`
           - Gökhan Ateş adliyenin önünde beni bekliyordu. "Dosyayı yeniden açtılar" dedi. "Bu sefer cihazdan başlayacağım. Dört yüz dosyanın hepsine bir daha bakacağım. Belki."
-          - Resmî olarak Kaan'ın kim olduğunu kimse bilmiyordu. Bir ses, bir numara, bir asansör. Savcılık dosyayı "failleri belirsiz" diye yeniden açtı.
+          - Resmî olarak Kaan'ın kim olduğunu kimse bilmiyordu. Bir ses, bir numara, bir asansör. Dosya Başsavcılığa döndü; kapağına yeni bir numara yazıldı.
           ~ Bazı kapılar açılır, ama ışığı kimse yakmaz.
         `),
         O(S`
@@ -413,33 +517,13 @@ export const outcomes: CasePart = {
     }),
     outcome('INDIRIM', {
       class: 'RECHARACTERIZED',
-      priority: 5,
-      when: all(notCollapsed, any(flag('terditli'), flag('terditli_erken')), finalAtLeast(T_INDIRIM)),
+      priority: 6,
+      when: indirimLawful,
       stamp: '158/4 · HAGB',
       stampTone: 'amber',
       sentence: '1 yıl 8 ay hapis · 62.500 TL adli para · HAGB',
-      verdictText:
-        'Sanığın katkısının hesabın kullanılmasını sağlayan bilgiyi vermekle sınırlı olduğu kabul edilerek TCK 158/1-f ve 37/1 uyarınca 4 yıl hapis ve 1.500 gün adli para cezası belirlenmesine; 16.7.2026 tarihli 7589 sayılı Kanunla eklenen ve lehe olan TCK 158/4 uyarınca (TCK 7/2) yarı oranında indirilerek 2 yıl hapis ve 750 gün adli para cezasına; TCK 62/1 uyarınca 1 yıl 8 ay hapis ve 625 gün adli para cezasına, günlüğü 100 TL’den 62.500 TL’ye; zararın denetim süresi içinde aylık taksitlerle giderilmesi koşuluyla CMK 231/5, 231/9 uyarınca HÜKMÜN AÇIKLANMASININ GERİ BIRAKILMASINA ve beş yıl denetim süresine; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 231/12, 273/1).',
-      reasoning: [
-        because(
-          'Sanığın, hesaba erişimi sağlayan kodu 4.500 TL karşılığında verdiği kabul edilmiştir; işlemleri bizzat yaptığına ya da kaporadan pay aldığına dair delil yoktur. Katkı, hesaba erişimi sağlayan bilgiyi vermekle sınırlıdır (TCK 158/4).',
-        ),
-        because(
-          'Avans açıklamasının “eğitim avansı” olduğu ve işverenle satıcının aynı hattı kullandığı dosyaya yansımış; ancak ödemenin bir kiralama bedeli olmadığı tam olarak gösterilememiştir.',
-          any(flag('g2_kismi'), flag('g2_kaan')),
-        ),
-        because(
-          'Hattın vekil aracılığıyla değiştirildiği ve kopya SIM’in başka bir cihazda olduğu dosyaya girmiş; ancak sanığın bilgisi dışında olduğu kesin olarak ispatlanamamıştır.',
-          any(flag('o1_kismi'), flag('n3_imei'), flag('n3_kismi'), flag('n2_kismi')),
-        ),
-        because(
-          '7589 sayılı Kanunla eklenen TCK 158/4 sanık lehine olduğundan suç tarihinden sonra yürürlüğe girmiş olmasına rağmen uygulanmıştır (TCK 7/2). Aynı katkı için ayrıca TCK 39 indirimi yapılmamıştır.',
-        ),
-        because('Sanığın sabıkasızlığı ve duruşmadaki tutumu takdiri indirim nedeni sayılmıştır (TCK 62/1).'),
-        because(
-          'Hükmolunan ceza iki yılı aşmadığından ve zararın taksitle giderilmesi kabul edildiğinden hükmün açıklanması geri bırakılmıştır (CMK 231/5, 231/6, 231/9).',
-        ),
-      ],
+      verdictText: indirimVerdict,
+      reasoning: indirimReasoning,
       legalBasis: 'TCK 158/1-f, 158/4, 7/2, 37/1, 52, 62/1; CMK 231/5, 231/6, 231/9',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
@@ -468,7 +552,7 @@ export const outcomes: CasePart = {
     }),
     outcome('MAHKUMIYET', {
       class: 'CONVICTION',
-      priority: 6,
+      priority: 7,
       when: always,
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
@@ -486,6 +570,7 @@ export const outcomes: CasePart = {
           all(ref('sim_kismen'), ref('cihaz_kismen'), not(flag('cokus'))),
         ),
         because('Sanığın kod paylaşmadığı yönündeki beyanı banka kaydıyla çelişmiştir.', flag('ece_inkar')),
+        terditRed,
         because(
           'Savunmanın inandırıcılığı duruşmada çökmüş; mahkeme iddianamedeki anlatımı esas almıştır.',
           flag('cokus'),

@@ -153,7 +153,7 @@
     {
       "id": "cihaz_proven",
       "label": "İşlemlerin ve banka SMS’lerinin sanığın telefonu olmayan bir cihazda olduğu belgelendi",
-      "when": { "all": [{ "flag": "contra_g1" }, { "hasEvidence": "ded_imei" }] }
+      "when": { "all": [{ "flag": "contra_g1" }, { "hasEvidence": "ded_imei" }, { "hasEvidence": "ded_cihaz" }] }
     },
     {
       "id": "kast_yok",
@@ -171,8 +171,13 @@
     },
     {
       "id": "nova_sahte",
-      "label": "Nova Dijital’in kâğıt üstünde bir işveren olduğu iş merkezi müdürünün çapraz sorgusunda gösterildi",
-      "when": { "any": [{ "all": [{ "flag": "contra_n1" }, { "flag": "contra_n2" }] }, { "flag": "necdet_ifsa" }] }
+      "label": "Nova Dijital’in kâğıt üstünde bir işveren olduğu ve işin iş merkezinin içinden yürütüldüğü (sözleşme, kat, otopark) iş merkezi müdürünün çapraz sorgusunda gösterildi",
+      "when": {
+        "any": [
+          { "all": [{ "flag": "contra_n1" }, { "flag": "contra_n2" }, { "flag": "contra_n4" }] },
+          { "flag": "necdet_ifsa" }
+        ]
+      }
     },
     {
       "id": "kira_yok",
@@ -226,7 +231,7 @@
               { "flag": "necdet_ifsa" },
               { "ref": "sim_proven" },
               { "ref": "cihaz_proven" },
-              { "hasEvidence": "ded_aldatma" },
+              { "ref": "kast_yok" },
               { "ref": "kira_yok" }
             ]
           }

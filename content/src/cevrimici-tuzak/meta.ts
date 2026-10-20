@@ -137,7 +137,7 @@ export const meta: CasePart = {
     {
       id: 'cihaz_proven',
       label: 'İşlemlerin ve banka SMS’lerinin sanığın telefonu olmayan bir cihazda olduğu belgelendi',
-      when: all(flag('contra_g1'), has('ded_imei')),
+      when: all(flag('contra_g1'), has('ded_imei'), has('ded_cihaz')),
     },
     {
       id: 'kast_yok',
@@ -153,8 +153,8 @@ export const meta: CasePart = {
     },
     {
       id: 'nova_sahte',
-      label: 'Nova Dijital’in kâğıt üstünde bir işveren olduğu iş merkezi müdürünün çapraz sorgusunda gösterildi',
-      when: any(all(flag('contra_n1'), flag('contra_n2')), flag('necdet_ifsa')),
+      label: 'Nova Dijital’in kâğıt üstünde bir işveren olduğu ve işin iş merkezinin içinden yürütüldüğü (sözleşme, kat, otopark) iş merkezi müdürünün çapraz sorgusunda gösterildi',
+      when: any(all(flag('contra_n1'), flag('contra_n2'), flag('contra_n4')), flag('necdet_ifsa')),
     },
     {
       id: 'kira_yok',
@@ -187,7 +187,7 @@ export const meta: CasePart = {
       when: any(
         all(not(all(flag('arda_etkileme'), flag('arda_cagrildi'))), ref('savunma_tam')),
         all(flag('arda_etkileme'), flag('arda_cagrildi'), ref('savunma_arda_disi')),
-        all(flag('necdet_ifsa'), ref('sim_proven'), ref('cihaz_proven'), has('ded_aldatma'), ref('kira_yok')),
+        all(flag('necdet_ifsa'), ref('sim_proven'), ref('cihaz_proven'), ref('kast_yok'), ref('kira_yok')),
       ),
     },
   ],

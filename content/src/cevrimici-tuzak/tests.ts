@@ -400,6 +400,7 @@ const ara2OmYok = [
   C('A2_BURAK', 'ABUR_A'),
   C('A2_CIKARIM'),
   combine('clue_iphone_imei', 'ev_hts'),
+  combine('ev_banka_log', 'clue_iphone_imei'),
   combine('clue_parlama', 'clue_lamba'),
   combine('clue_arda_otopark', 'clue_yonetim_park'),
   C('ARA_CIKARIM_BITIR', 'GO_T', 'ARASON_DEVAM', 'KOR_A', 'KOR2_DEVAM'),
@@ -465,6 +466,13 @@ export const tests: CasePart = {
         C('T04_A', 'T045_DEVAM', 'T05_B', 'T07_B', 'T08_A'),
       ),
       goldenPath('G_I', { outcome: 'INDIRIM', finalMin: 3985, finalMax: 4405 }, indirim),
+      goldenPath(
+        'G_ETIK_I',
+        { outcome: 'ETIK_INDIRIM', finalMin: 3795, finalMax: 4195 },
+        (indirim.flat(3) as Action[]).flatMap((x) =>
+          x.kind === 'CHOOSE' && x.choiceId === 'BUR_GERI' ? C('BUR_TEKLIF', 'BURT_KABUL') : [x],
+        ),
+      ),
       goldenPath('G_M', { outcome: 'MAHKUMIYET', finalMin: 366, finalMax: 404 }, mahkumiyet),
       goldenPath(
         'G_ETIK2',

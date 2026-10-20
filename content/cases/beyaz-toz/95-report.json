@@ -1,0 +1,120 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_kilit",
+        "when": { "not": { "hasEvidence": "clue_kilit" } },
+        "text": "Arka odanın fotoğrafında eşiğin dibinde kesik bir asma kilit vardı: kilitli oda, başkasının odasıdır.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_on_oda",
+        "when": { "not": { "hasEvidence": "clue_on_oda" } },
+        "text": "Ön odanın fotoğrafı Kaan’ın orada yaşadığını gösteriyordu: kitap, gözlük, öğrenci kartı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_kroki",
+        "when": { "not": { "hasEvidence": "clue_kroki" } },
+        "text": "Tutanak Kaan’ı ön odada buluyor, kroki o odaya “misafir odası” diyordu: tutanak ile krokiyi karşılaştırabilirdin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kapsam",
+        "when": { "not": { "hasEvidence": "clue_kapsam" } },
+        "text": "Arama kararı yalnızca şüphelinin kullanımındaki oda ve ortak alanları kapsıyordu (CMK 119/2-b).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_oda",
+        "when": { "not": { "hasEvidence": "ded_oda" } },
+        "text": "Ön oda ile krokiyi tahtada birleştirip polise “varsaydım” dedirtebilirdin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kapsam_ded",
+        "when": { "not": { "hasEvidence": "ded_kapsam" } },
+        "text": "Kesik kilit ile kararın kapsamı birlikte, kapsam dışı aramayı gösterirdi (Anayasa 38/6, CMK 206/2-a, 217/2).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_seker",
+        "when": { "not": { "hasEvidence": "ded_sekerlik" } },
+        "text": "Şekerlikteki paketler arka odanın stoğundandı ve şekerlik arka oda kapısının dibindeydi: savcının “ortak alan” tezi buradan düşerdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kask",
+        "when": { "not": { "hasEvidence": "clue_tolga_kask" } },
+        "text": "Muhbirin ifadesinde kapıyı açanın elinde kask vardı; Kaan’ın ehliyeti bile yok.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kira",
+        "when": { "not": { "hasEvidence": "clue_kira_defteri" } },
+        "text": "Ev sahibi Nesrin Uysal’ın kira defteri arka odanın kiracısını tarihiyle kaydetmişti.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_alibi",
+        "when": { "not": { "hasEvidence": "ded_alibi" } },
+        "text": "Kafenin Z raporu Kaan’ı satış saatinde kasa başında gösteriyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_tolga",
+        "when": { "not": { "hasEvidence": "ded_tolga_baris" } },
+        "text": "Kurye durağında Tolga’nın Barış’ı sorduğu öğrenilebilirdi: muhbir satıcıyı tanıyordu.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_kurye",
+        "when": { "not": { "hasEvidence": "ev_kurye" } },
+        "text": "Kurye şirketinin kayıtlarını delil dilekçesiyle (CMK 177) ya da duruşmada (CMK 206/1) isteyebilirdin.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_riza",
+        "when": { "not": { "flag": "kaan_riza" } },
+        "text": "Kaan’ın kullanıcı olduğunu mahkemede kendisinin söylemesi, odanın onun olmadığını anlatmayı kolaylaştırırdı; ama bunun için rızası gerekiyordu.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_telkin",
+        "when": { "flag": "nesrin_telkin" },
+        "text": "Nesrin Hanım’a cevabı sen verdin (“gördünüz, değil mi?”); savcı bunu kürsüde sordu. Tanığa açık uçlu sor.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_inkar",
+        "when": { "flag": "kaan_inkar" },
+        "text": "Kaan’a rızası olmadan kullanımını sordun; inkâr etti ve saç analizi karşısında güvenilirliği sarsıldı.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_canta",
+        "when": { "flag": "canta_deniz" },
+        "text": "Bodrumdaki çantayı kendin aldın: delil zinciri koptu. Doğrusu savcılığa bildirip el konulmasını sağlamaktı (CMK 123, 127).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_suc",
+        "when": { "not": { "flag": "suc_duyurusu" } },
+        "text": "Barış Demirel hakkında kimlik bilgisiyle suç duyurusu (CMK 158) onun yakalanmasının yolunu açardı.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_tel",
+        "when": { "all": [{ "flag": "suc_duyurusu" }, { "not": { "flag": "tehdit_bildirildi" } }] },
+        "text": "Gece gelen telefonu savcılığa bildirseydin, kayıt Barış’ın yerini gösterebilirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_izesles",
+        "when": { "all": [{ "flag": "tolga_kirildi" }, { "not": { "hasEvidence": "ev_iz_eslesme" } }] },
+        "text": "Muhbir çözüldü; ama terazideki izi Barış’la eşleştiren rapor olmadan “işlenmediği sabit” denemezdi.",
+        "category": "SAVUNMA_STRATEJISI"
+      }
+    ]
+  }
+}

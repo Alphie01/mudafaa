@@ -64,7 +64,8 @@ export const meta: CasePart = {
         },
         SAVUNMA_STRATEJISI: {
           weak: 'Delille desteklenen bir esas savunma kur; ispatlamadığın dayanağı ileri sürme.',
-          medium: 'Stratejin tutarlı; beraatin dayanağını (223/2-b mi, 2-e mi) delile göre seç ve taksire karşı hazırlıklı ol.',
+          medium:
+            'Stratejin tutarlı; beraatin dayanağını (223/2-b mi, 2-e mi) delile göre seç ve taksire karşı hazırlıklı ol.',
           strong: 'Stratejin davayı kazandırdı.',
         },
         USUL_BILGISI: {
@@ -81,11 +82,11 @@ export const meta: CasePart = {
         { id: 'hatali', label: 'Hatalı delil ({{var.wrong}})' },
       ],
       bonuses: [{ id: 'guven', label: 'Güvenilirlik bonusu', value: { mul: [{ var: 'cred' }, 100] } }],
-      scaleMax: 12000,
+      scaleMax: 14800,
       thresholdBar: thresholdBar([
         ['Mahkûmiyet', 0, 'red'],
-        ['Taksir', 3000, 'amber'],
-        ['Beraat', 7000, 'green'],
+        ['Taksir', 7000, 'amber'],
+        ['Beraat', 12500, 'green'],
       ]),
       displayClampMin: 0,
     },
@@ -103,7 +104,11 @@ export const meta: CasePart = {
   },
   predicates: [
     { id: 'kart2', label: 'Tahtada en az 2 kart var', when: { cmp: [{ count: 'evidence', tag: 'kart' }, '>=', 2] } },
-    { id: 'kart_ara', label: 'Ara tahtasında en az 2 kart var', when: { cmp: [{ count: 'evidence', tag: 'ara' }, '>=', 2] } },
+    {
+      id: 'kart_ara',
+      label: 'Ara tahtasında en az 2 kart var',
+      when: { cmp: [{ count: 'evidence', tag: 'ara' }, '>=', 2] },
+    },
     {
       id: 'hizlandirici_coktu',
       label: 'Numune zinciri koptu ve zemin izi çürüdü',

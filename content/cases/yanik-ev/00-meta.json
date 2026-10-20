@@ -87,11 +87,11 @@
         { "id": "hatali", "label": "Hatalı delil ({{var.wrong}})" }
       ],
       "bonuses": [{ "id": "guven", "label": "Güvenilirlik bonusu", "value": { "mul": [{ "var": "cred" }, 100] } }],
-      "scaleMax": 12000,
+      "scaleMax": 14800,
       "thresholdBar": [
         { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
-        { "label": "Taksir", "from": 3000, "tone": "amber" },
-        { "label": "Beraat", "from": 7000, "tone": "green" }
+        { "label": "Taksir", "from": 7000, "tone": "amber" },
+        { "label": "Beraat", "from": 12500, "tone": "green" }
       ],
       "displayClampMin": 0
     },

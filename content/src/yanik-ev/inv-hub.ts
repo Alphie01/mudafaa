@@ -95,7 +95,12 @@ const hubChoices = {
       description: '0 EP · üç talep hakkı',
       visibleWhen: not(any({ chosen: 'DIL_VER' }, { chosen: 'DIL_VAZGEC' })),
     }),
-    p1.free('A_CIKARIM', 'Çıkarım tahtası', 'INV_CIKARIM', {
+    p1.free('A_CIKARIM', 'Yangın tahtası: nerede, neyle', 'INV_CIKARIM', {
+      description: '0 EP · ipuçlarını birleştir',
+      enabledWhen: ref('kart2'),
+      lockedReason: 'En az 2 ipucu gerekli.',
+    }),
+    p1.free('A_IPLIK', 'İplik tahtası: dolaylı deliller', 'INV_IPLIK', {
       description: '0 EP · ipuçlarını birleştir',
       enabledWhen: ref('kart2'),
       lockedReason: 'En az 2 ipucu gerekli.',
@@ -183,8 +188,14 @@ export const invHub: CasePart = {
         {
           lines: [
             card('CUMA 23.40 — ARSLAN HUKUK', 'buro_gece'),
-            n('Telefon titredi. Zehra. Arkasında bir hastane koridorunun sesleri: tekerlekli bir sedye, bir anons, bir monitörün bip’i.'),
-            s('zehra', 'Nöbetteyim, beş dakikam var. Bugün cezaevine gittim. Babam bana baktı, ben ona. İkimiz de bir şey soramadık.', 'uzgun'),
+            n(
+              'Telefon titredi. Zehra. Arkasında bir hastane koridorunun sesleri: tekerlekli bir sedye, bir anons, bir monitörün bip’i.',
+            ),
+            s(
+              'zehra',
+              'Nöbetteyim, beş dakikam var. Bugün cezaevine gittim. Babam bana baktı, ben ona. İkimiz de bir şey soramadık.',
+              'uzgun',
+            ),
             s(
               'zehra',
               'Size bir şey soracağım ve dürüst cevap vermenizi istiyorum. Hastaya da hep dürüst söylerim; yalan söylenen hasta iyileşmez.',
@@ -202,7 +213,10 @@ export const invHub: CasePart = {
           responses: [
             {
               lines: [
-                s('zehra', 'Bilmiyorum. Doğru cevap. Acilde de öyle deriz: “Henüz bilmiyoruz, bakıyoruz.” İnsan buna inanır.'),
+                s(
+                  'zehra',
+                  'Bilmiyorum. Doğru cevap. Acilde de öyle deriz: “Henüz bilmiyoruz, bakıyoruz.” İnsan buna inanır.',
+                ),
                 s('zehra', 'Bakmaya devam edin. Ben de… ben de babama bakmaya devam edeceğim. Gözünün içine.'),
                 th('Henüz bilmiyorum. Bir avukatın söyleyebileceği en dürüst cümle, en az satan cümledir.'),
               ],
@@ -258,7 +272,9 @@ export const invHub: CasePart = {
               'Zehra’ya verin onları. Ben çıkamazsam… yani, uzun sürerse. Annesinin el yazısını görsün. Benim ağzımdan duymadığı şeyleri ondan duysun.',
               'uzgun',
             ),
-            th('Bir döşemeci, bir sandık, bir yığın mektup. İnsan bir evi yakmaya karar verirse, önce mektupları mı kurtarır? Yoksa mektupları kurtaran, evi yakmaz mı?'),
+            th(
+              'Bir döşemeci, bir sandık, bir yığın mektup. İnsan bir evi yakmaya karar verirse, önce mektupları mı kurtarır? Yoksa mektupları kurtaran, evi yakmaz mı?',
+            ),
             th('İkisi de olabilir. Bu yüzden bu bir delil değil. Bu bir insan.'),
           ],
         },
@@ -281,7 +297,9 @@ export const invHub: CasePart = {
             {
               lines: [
                 s('halil', 'Haklısınız. Duruşma. Peki.'),
-                n('Kayıt anonsu araya girdi: “Görüşmenizin bitmesine bir dakika.” Halil bir şey daha söyleyecekti; söylemedi.'),
+                n(
+                  'Kayıt anonsu araya girdi: “Görüşmenizin bitmesine bir dakika.” Halil bir şey daha söyleyecekti; söylemedi.',
+                ),
               ],
             },
           ],
@@ -289,7 +307,8 @@ export const invHub: CasePart = {
         }),
         option('AK2_C', 'Halil Bey, bu hattan dava konuşmayalım; görüşe geldiğimde anlatın.', {
           effects: [inc('trust', 1)],
-          neutral: 'Cezaevi telefon görüşmeleri kayda alınabilir; dava stratejisi yüz yüze, avukat görüşünde konuşulur.',
+          neutral:
+            'Cezaevi telefon görüşmeleri kayda alınabilir; dava stratejisi yüz yüze, avukat görüşünde konuşulur.',
           responses: [
             {
               lines: [
@@ -310,15 +329,30 @@ export const invHub: CasePart = {
         {
           lines: [
             card('CUMARTESİ 08.30 — MURADİYE, ÇINARALTI KAHVESİ', 'kafe'),
-            n('Kahvehane, Kalem Sokak’ın yokuşunun dibinde, bir çınarın altındaydı. İçeride sobanın üstünde bir çaydanlık, duvarda eski bir Bursaspor takvimi, köşede tavla şakırtısı.'),
-            n('Çaycı beni görünce bir bardak koydu; sormadan. Muradiye’de bir yabancıya önce çay verilir, sonra kim olduğu sorulur.'),
-            named('ÇAYCI', 'Halil Abi’nin avukatısınız. Belli. Bu mahallede takım giyen ya cenazeye gider ya adliyeye.'),
-            named('YAŞLI BİR ADAM', 'Halil yakmaz o evi. Kırk yıldır tanırım. Nermin Hanım ölünce her akşam o evin önünde bir sigara içerdi; içmezdi aslında, yakardı, tutardı.'),
+            n(
+              'Kahvehane, Kalem Sokak’ın yokuşunun dibinde, bir çınarın altındaydı. İçeride sobanın üstünde bir çaydanlık, duvarda eski bir Bursaspor takvimi, köşede tavla şakırtısı.',
+            ),
+            n(
+              'Çaycı beni görünce bir bardak koydu; sormadan. Muradiye’de bir yabancıya önce çay verilir, sonra kim olduğu sorulur.',
+            ),
+            named(
+              'ÇAYCI',
+              'Halil Abi’nin avukatısınız. Belli. Bu mahallede takım giyen ya cenazeye gider ya adliyeye.',
+            ),
+            named(
+              'YAŞLI BİR ADAM',
+              'Halil yakmaz o evi. Kırk yıldır tanırım. Nermin Hanım ölünce her akşam o evin önünde bir sigara içerdi; içmezdi aslında, yakardı, tutardı.',
+            ),
             named('BAŞKA BİR ADAM', 'Borcu varmış ama. Borç insana neler yaptırır. Benim bacanak da…'),
             named('YAŞLI BİR ADAM', 'Senin bacanak dükkânını yakmadı, kumarda kaybetti. Karıştırma.'),
             n('Tavla zarları masaya düştü. Biri “şeş beş” dedi; kimse sevinmedi.'),
-            named('ÇAYCI', 'O sabah bir de sigortacı geldi, abla. Kara takımlı. Buradan geçti, bir şey sormadı, eve girdi. Çay da içmedi.'),
-            th('Bir mahalle bir mahkemeden önce karar verir. Burada iki karar var: Halil yakmaz, borç yaktırır. İkisi de kanıt değil. İkisi de hâkimin kulağına bir yoldan ulaşır.'),
+            named(
+              'ÇAYCI',
+              'O sabah bir de sigortacı geldi, abla. Kara takımlı. Buradan geçti, bir şey sormadı, eve girdi. Çay da içmedi.',
+            ),
+            th(
+              'Bir mahalle bir mahkemeden önce karar verir. Burada iki karar var: Halil yakmaz, borç yaktırır. İkisi de kanıt değil. İkisi de hâkimin kulağına bir yoldan ulaşır.',
+            ),
             th('Çay içmeyen bir sigortacı. Muradiye’de bu bile bir iz.'),
           ],
         },
@@ -333,13 +367,27 @@ export const invHub: CasePart = {
         {
           lines: [
             card('PAZAR 08.00 — ARSLAN HUKUK', 'buro'),
-            n('Pazar sabahı büroda Leyla’dan başka kimse yoktu. Masasında eski, sararmış bir dosya; kapağında el yazısıyla bir yıl: 1996.'),
+            n(
+              'Pazar sabahı büroda Leyla’dan başka kimse yoktu. Masasında eski, sararmış bir dosya; kapağında el yazısıyla bir yıl: 1996.',
+            ),
             s('leyla', 'Otur. Sana bir yangın anlatacağım. Benim ilk yangınım. Gemlik’te bir tekstil deposu.'),
-            s('leyla', 'Sahibi borçluydu, depo sigortalıydı, bir gece yandı. Bilirkişi “hızlandırıcı” dedi. Herkes inandı. Ben de inandım; müvekkilime “ikrar et, indirim alırsın” dedim.', 'uzgun'),
-            s('leyla', 'Etmedi. Dört yıl yattı. Sonra bir elektrik mühendisi depoya gitti, kabloları söktü, bir ark buldu. Dört yıl, Deniz. Bir bilirkişinin bakmadığı bir kablo yüzünden.'),
+            s(
+              'leyla',
+              'Sahibi borçluydu, depo sigortalıydı, bir gece yandı. Bilirkişi “hızlandırıcı” dedi. Herkes inandı. Ben de inandım; müvekkilime “ikrar et, indirim alırsın” dedim.',
+              'uzgun',
+            ),
+            s(
+              'leyla',
+              'Etmedi. Dört yıl yattı. Sonra bir elektrik mühendisi depoya gitti, kabloları söktü, bir ark buldu. Dört yıl, Deniz. Bir bilirkişinin bakmadığı bir kablo yüzünden.',
+            ),
             n('Dosyayı kapattı. Sigara paketini çevirdi; bir kere, iki kere.'),
-            s('leyla', 'O gün bir şey öğrendim: bilirkişiye inanmak avukatın işi değil. Onu sınamak avukatın işi. Bakmadığı yere bak. Sormadığı soruyu sor.'),
-            th('Gemlik. Büyükbabamın evi. Sigortanın “kusur” dediği o kış. Leyla bunu biliyor mu? Sormadım. Bazı tesadüfler, sorulunca tesadüf olmaktan çıkar.'),
+            s(
+              'leyla',
+              'O gün bir şey öğrendim: bilirkişiye inanmak avukatın işi değil. Onu sınamak avukatın işi. Bakmadığı yere bak. Sormadığı soruyu sor.',
+            ),
+            th(
+              'Gemlik. Büyükbabamın evi. Sigortanın “kusur” dediği o kış. Leyla bunu biliyor mu? Sormadım. Bazı tesadüfler, sorulunca tesadüf olmaktan çıkar.',
+            ),
             s('leyla', 'Bugün son gün. Dilekçeni yaz. Ve kimsenin bakmadığı şeyi iste.'),
           ],
         },
@@ -370,14 +418,20 @@ export const invHub: CasePart = {
               'leyla',
               'Numuneleri kim getirmiş? Bunu yazmışlar ama kimse üstünde durmamış. Bir numune, onu kimin, ne zaman, nasıl aldığı kadar konuşur.',
             ),
-            s('leyla', 'Olay yeri o sabah kimin gözetimindeydi? Gözetimi tutan biri, kapıdan kimin girdiğini de bilir.'),
+            s(
+              'leyla',
+              'Olay yeri o sabah kimin gözetimindeydi? Gözetimi tutan biri, kapıdan kimin girdiğini de bilir.',
+            ),
           ],
         },
         {
           when: all(any(has('clue_foto_tavan'), has('clue_eksper_foto')), not(has('ded_temizlenmis'))),
           lines: [
             n('Leyla fotoğraf albümünü açtı, bir kareye uzun uzun baktı, sonra raporun ekini yanına koydu.'),
-            s('leyla', 'Aynı odanın iki fotoğrafı. Biri 04.30, biri 09.40. Arada beş saat var. Beş saatte bir zemin kendi kendine temizlenmez.'),
+            s(
+              'leyla',
+              'Aynı odanın iki fotoğrafı. Biri 04.30, biri 09.40. Arada beş saat var. Beş saatte bir zemin kendi kendine temizlenmez.',
+            ),
           ],
         },
         {
@@ -398,7 +452,10 @@ export const invHub: CasePart = {
           when: all(has('clue_bidon'), not(has('ded_bidon'))),
           lines: [
             n('Leyla fişin fotokopisini kalemiyle iki kez tıklattı.'),
-            s('leyla', 'Fiş bir şey alındığını gösterir. Nereye gittiğini göstermez. Benzini kimse aramamış; sen bulmuşsun. Ona bir isim ver.'),
+            s(
+              'leyla',
+              'Fiş bir şey alındığını gösterir. Nereye gittiğini göstermez. Benzini kimse aramamış; sen bulmuşsun. Ona bir isim ver.',
+            ),
           ],
         },
         {
@@ -448,14 +505,18 @@ export const invHub: CasePart = {
           good: 'Yerinde: emanetteki materyalin incelenmesi, bilirkişinin hiç bakmadığı alternatif sebebi araştırır (CMK 63, 177/1). Rapor ara evresinde gelir.',
           next: '$stay',
         }),
-        option('DIL_ARIZA', 'Elektrik dağıtım şirketinden 15 Ocak gecesine ait sokak hattı arıza kayıtlarının istenmesi', {
-          visibleWhen: flag('fact_tv'),
-          cost: [{ var: 'dil_hak', amount: 1 }],
-          score: { USUL_BILGISI: 60 },
-          effects: [raise('ariza_istendi')],
-          good: 'Kabul: özel şirket kayıtları mahkemenin müzekkeresiyle istenir (CMK 177/1, 206/1). Kayıtlar ara evresinde gelir.',
-          next: '$stay',
-        }),
+        option(
+          'DIL_ARIZA',
+          'Elektrik dağıtım şirketinden 15 Ocak gecesine ait sokak hattı arıza kayıtlarının istenmesi',
+          {
+            visibleWhen: flag('fact_tv'),
+            cost: [{ var: 'dil_hak', amount: 1 }],
+            score: { USUL_BILGISI: 60 },
+            effects: [raise('ariza_istendi')],
+            good: 'Kabul: özel şirket kayıtları mahkemenin müzekkeresiyle istenir (CMK 177/1, 206/1). Kayıtlar ara evresinde gelir.',
+            next: '$stay',
+          },
+        ),
         option('DIL_LAB', 'Laboratuvarın ham verilerinin ve numune kabul tutanağının istenmesi', {
           visibleWhen: has('clue_taze'),
           cost: [{ var: 'dil_hak', amount: 1 }],
@@ -506,7 +567,8 @@ export const invHub: CasePart = {
           next: '$return',
         }),
         option('DIL_VAZGEC', 'Dilekçe vermekten vazgeç', {
-          neutral: 'Delil dilekçesi verilmedi; taleplerini duruşmada (CMK 206/1) dile getirebilirsin ama zaman kaybedersin.',
+          neutral:
+            'Delil dilekçesi verilmedi; taleplerini duruşmada (CMK 206/1) dile getirebilirsin ama zaman kaybedersin.',
           next: '$return',
         }),
         back('DIL_GERI', 'Sonra dönerim'),
@@ -514,44 +576,32 @@ export const invHub: CasePart = {
     }),
     deductionBoard('INV_CIKARIM', {
       ...INV1,
-      title: 'Çıkarım Tahtası',
+      title: 'Çıkarım Tahtası · Nerede, neyle',
       background: 'buro_gece',
       lines: [
         {
           lines: [
-            n('İki ipucunu seç. Birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar. Yanlış çift zaman ve puan götürür.'),
+            n(
+              'Yangın tahtası: nerede başladı, neyle başladı? İki ipucunu seç; birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar. Yanlış çift puan götürür.',
+            ),
           ],
         },
       ],
       pool: [
-        'clue_buat',
-        'clue_v_izi',
-        'clue_moloz',
-        'clue_pano',
         'clue_foto_tavan',
-        'clue_foto_koridor',
-        'clue_su',
-        'clue_bidon',
-        'clue_esyalar',
-        'clue_restorasyon',
-        'clue_numune',
-        'clue_gec',
-        'clue_pano_yok',
-        'clue_taze',
         'clue_eksper_foto',
-        'clue_koku_yok',
-        'clue_baslangic',
-        'clue_yan_ev',
-        'clue_dain',
-        'clue_banka',
-        'clue_kampanya',
-        'clue_necati',
-        'clue_cagri',
+        'clue_numune',
         'clue_eksper_giris',
-        'clue_devriye',
-        'clue_saadet_fener',
-        'clue_jenerator',
-        'clue_borc',
+        'clue_pano',
+        'clue_pano_yok',
+        'clue_v_izi',
+        'clue_baslangic',
+        'clue_buat',
+        'clue_necati',
+        'clue_taze',
+        'clue_su',
+        'clue_moloz',
+        'clue_gec',
       ],
       recipes: [
         deduce(
@@ -595,6 +645,56 @@ export const invHub: CasePart = {
           'Necati Usta bir ay önce koridor buatının ısındığını yazmış. Yangından sonra aynı buatta bakır erimiş, boncuklanmış.',
         ),
         deduce(
+          'CB_TAZE',
+          'clue_taze',
+          'clue_su',
+          'ded_taze',
+          'Söndürmeden sağ çıkan benzin',
+          'Saatlerce ateş, seksen dakika su. Böyle bir zeminden neredeyse taze bir benzin çıkması beklenmez. Benzin yangından sonra gelmiş olabilir.',
+        ),
+      ],
+      miss: fallback('FB_CIKARIM', 'COMBINE', {
+        repeat: 'ONCE_PER_PARAMS',
+        score: { DELIL_ANALIZI: -50 },
+        feedback: {
+          title: 'Bu ikisi birbirini açıklamıyor',
+          text: 'Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Başka bir çift dene.',
+          label: 'BAĞLANTI YOK · −50 SKOR',
+          tone: 'error',
+        },
+      }),
+      finish: { id: 'CIKARIM_BITIR' },
+    }),
+    deductionBoard('INV_IPLIK', {
+      ...INV1,
+      title: 'Çıkarım Tahtası · Halatın iplikleri',
+      background: 'buro_gece',
+      lines: [
+        {
+          lines: [
+            n(
+              'İplik tahtası: savcının halatını oluşturan dolaylı deliller. Her ipliğin masum ve belgeli bir açıklaması var mı? Yanlış çift puan götürür.',
+            ),
+          ],
+        },
+      ],
+      pool: [
+        'clue_esyalar',
+        'clue_restorasyon',
+        'clue_bidon',
+        'clue_jenerator',
+        'clue_banka',
+        'clue_dain',
+        'clue_kampanya',
+        'clue_cagri',
+        'clue_saadet_fener',
+        'clue_devriye',
+        'clue_necati',
+        'clue_borc',
+        'clue_yan_ev',
+      ],
+      recipes: [
+        deduce(
           'CB_TASIMA',
           'clue_esyalar',
           'clue_restorasyon',
@@ -627,14 +727,6 @@ export const invHub: CasePart = {
           'Kampanya kodu ve giden arama: teminatı artıran telefonu Halil açmamış; acente açmış.',
         ),
         deduce(
-          'CB_TAZE',
-          'clue_taze',
-          'clue_su',
-          'ded_taze',
-          'Söndürmeden sağ çıkan benzin',
-          'Saatlerce ateş, seksen dakika su. Böyle bir zeminden neredeyse taze bir benzin çıkması beklenmez. Benzin yangından sonra gelmiş olabilir.',
-        ),
-        deduce(
           'CB_ONLEM',
           'clue_restorasyon',
           'clue_necati',
@@ -651,7 +743,7 @@ export const invHub: CasePart = {
           'Saadet Hanım’ın gece bir sularında gördüğü el fenerli adam, çizelgesine 01.30 kapı kontrolü yazan bekçi.',
         ),
       ],
-      miss: fallback('FB_CIKARIM', 'COMBINE', {
+      miss: fallback('FB_IPLIK', 'COMBINE', {
         repeat: 'ONCE_PER_PARAMS',
         score: { DELIL_ANALIZI: -50 },
         feedback: {
@@ -661,7 +753,7 @@ export const invHub: CasePart = {
           tone: 'error',
         },
       }),
-      finish: { id: 'CIKARIM_BITIR' },
+      finish: { id: 'IPLIK_BITIR' },
     }),
     // --- Duruşmadan önceki gece: koşullu hafıza zinciri ---
     decisionNode('INV_GECE_1', [{ to: 'INV_GECE_2' }], {
@@ -691,11 +783,19 @@ export const invHub: CasePart = {
         },
         {
           when: has('ded_zincir'),
-          lines: [th('Numuneleri kolluk almamış. Eksper getirmiş. Bunu raporun içinde, kimsenin okumadığı bir satırda buldum.')],
+          lines: [
+            th(
+              'Numuneleri kolluk almamış. Eksper getirmiş. Bunu raporun içinde, kimsenin okumadığı bir satırda buldum.',
+            ),
+          ],
         },
         {
           when: has('clue_numune'),
-          lines: [th('Numuneler eksperden gelmiş. Ama olay yerine ne zaman, kimin gözetiminde girdi? Bilmiyorum. Yarın bilmediğim bir şeyi soracağım.')],
+          lines: [
+            th(
+              'Numuneler eksperden gelmiş. Ama olay yerine ne zaman, kimin gözetiminde girdi? Bilmiyorum. Yarın bilmediğim bir şeyi soracağım.',
+            ),
+          ],
         },
         {
           lines: [
@@ -716,7 +816,11 @@ export const invHub: CasePart = {
           ],
         },
         {
-          lines: [th('Poliçe, eşyalar, benzin. Üç iplik. Henüz hiçbirini koparamadım. Yarın savcı onları bir halat gibi sallayacak.')],
+          lines: [
+            th(
+              'Poliçe, eşyalar, benzin. Üç iplik. Henüz hiçbirini koparamadım. Yarın savcı onları bir halat gibi sallayacak.',
+            ),
+          ],
         },
       ],
     }),
@@ -725,17 +829,21 @@ export const invHub: CasePart = {
       lines: [
         {
           when: flag('zehra_sor'),
-          lines: [
-            th('Zehra babasına sordu mu? Bilmiyorum. Yarın koridorda ikisinin yüzüne bakınca anlayacağım.'),
-          ],
+          lines: [th('Zehra babasına sordu mu? Bilmiyorum. Yarın koridorda ikisinin yüzüne bakınca anlayacağım.')],
         },
         {
           when: flag('zehra_guven'),
-          lines: [th('“Henüz bilmiyoruz, bakıyoruz.” Zehra bu cümleye tutundu. Yarın ona tutunacak bir şey daha vermeliyim.')],
+          lines: [
+            th('“Henüz bilmiyoruz, bakıyoruz.” Zehra bu cümleye tutundu. Yarın ona tutunacak bir şey daha vermeliyim.'),
+          ],
         },
         {
           when: all(flag('fact_ev'), not(flag('mektup'))),
-          lines: [th('Yüz yirmi yıllık bir ev. Tavanlarda göbek, kapılarda ceviz. Halil “ahşabı Nermin bilirdi” dedi. Yarın o evin ahşabını bir bilirkişi okuyacak.')],
+          lines: [
+            th(
+              'Yüz yirmi yıllık bir ev. Tavanlarda göbek, kapılarda ceviz. Halil “ahşabı Nermin bilirdi” dedi. Yarın o evin ahşabını bir bilirkişi okuyacak.',
+            ),
+          ],
         },
         {
           when: flag('mektup'),
@@ -746,7 +854,11 @@ export const invHub: CasePart = {
           ],
         },
         {
-          lines: [th('Yarın Halil’i ilk kez takım elbiseyle göreceğim. Zehra bir ceket almış; omuzları dar. Babasının bedenini iki ayda unutmuş.')],
+          lines: [
+            th(
+              'Yarın Halil’i ilk kez takım elbiseyle göreceğim. Zehra bir ceket almış; omuzları dar. Babasının bedenini iki ayda unutmuş.',
+            ),
+          ],
         },
       ],
     }),
@@ -758,12 +870,18 @@ export const invHub: CasePart = {
         {
           lines: [
             n('Kapı çaldı. Leyla, elinde iki bardak çayla. Saat gece yarısına yaklaşıyordu.'),
-            s('leyla', 'Yarın bilirkişi kürsüde olacak. Raporunu ezbere bilecek. Sen ondan daha iyi bil: hangi sayfada neyi yazmadığını.'),
+            s(
+              'leyla',
+              'Yarın bilirkişi kürsüde olacak. Raporunu ezbere bilecek. Sen ondan daha iyi bil: hangi sayfada neyi yazmadığını.',
+            ),
             s(
               'leyla',
               'Onu küçük düşürme. Bir bilirkişi yanıldığını kabul edebilir; aşağılandığını asla. Sayfalarını say. Eksik sayfayı ona sen gösterme; kendisi bulsun.',
             ),
-            s('leyla', 'Ve komşu. Yaşlı bir kadın, keskin bir burun, bir polis sorusu. Onu yalancı çıkarma. Hatırladığı şeyi kimin ona hatırlattığını göster.'),
+            s(
+              'leyla',
+              'Ve komşu. Yaşlı bir kadın, keskin bir burun, bir polis sorusu. Onu yalancı çıkarma. Hatırladığı şeyi kimin ona hatırlattığını göster.',
+            ),
             n('Pencerenin dışında şimşek çaktı; bir an bütün fotoğraflar beyaza kesti.', { fx: 'flash' }),
             th('Bir ev, iki fotoğraf, beş saat. Yarın sabah dokuz buçukta.'),
           ],
@@ -775,7 +893,9 @@ export const invHub: CasePart = {
           responses: [
             {
               lines: [
-                th('Dört soru yazdım; birini sildim. Bir bilirkişiye sorulmaması gereken soru, ona ders verir gibi duran sorudur.'),
+                th(
+                  'Dört soru yazdım; birini sildim. Bir bilirkişiye sorulmaması gereken soru, ona ders verir gibi duran sorudur.',
+                ),
               ],
             },
           ],
@@ -785,7 +905,11 @@ export const invHub: CasePart = {
           score: { DELIL_ANALIZI: 20 },
           responses: [
             {
-              lines: [th('Raporu bir kez daha okudum. Kelimeler aynıydı. Ama bu sefer ekleri okuyordum. Ekler, raporun itiraf ettiği yerlerdir.')],
+              lines: [
+                th(
+                  'Raporu bir kez daha okudum. Kelimeler aynıydı. Ama bu sefer ekleri okuyordum. Ekler, raporun itiraf ettiği yerlerdir.',
+                ),
+              ],
             },
           ],
           next: 'H1_00K',
@@ -793,7 +917,9 @@ export const invHub: CasePart = {
         option('GECE_C', 'Işığı kapat ve uyumaya çalış', {
           responses: [
             {
-              lines: [th('Uyumadım. Ama ışığı kapattım. Karanlıkta bir evin yanışını düşündüm; turuncu bir koridor camı.')],
+              lines: [
+                th('Uyumadım. Ama ışığı kapattım. Karanlıkta bir evin yanışını düşündüm; turuncu bir koridor camı.'),
+              ],
             },
           ],
           next: 'H1_00K',
@@ -811,4 +937,3 @@ export const invHub: CasePart = {
     },
   ],
 };
-

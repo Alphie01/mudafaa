@@ -133,7 +133,56 @@
           "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
           "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
         },
-        { "id": "FOTO_BITIR", "kind": "CONTINUE", "label": "Albümü kapat", "role": "BACK", "next": "$return" }
+        { "id": "FOTO_BITIR", "kind": "CONTINUE", "label": "Albümü kapat", "role": "BACK", "next": "INV_FOTO_SON" }
+      ]
+    },
+    {
+      "id": "INV_FOTO_SON",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #14 · SORUŞTURMA",
+      "title": "Albüm",
+      "background": "adliye",
+      "lines": [
+        {
+          "when": { "hasEvidence": "clue_foto_tavan" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Kalemdeki memur albümü geri alırken bir an durdu. “Bu albümü kimse istemedi” dedi. “Bilirkişi bile. Siz ilksiniz.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Kare 21. Çökmüş bir tavan, örtülü bir zemin. Bilirkişi raporundaki “döküntü izi” bu zeminde mi? Bu fotoğrafta zemin bile yok.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir fotoğraf ne gösterdiği kadar ne göstermediğiyle de konuşur. 04.30’da bir leke yoktu. Sonra biri bir leke buldu. Ne zaman?",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Fotokopisini aldım. Kâğıt makineden sıcak çıktı; bir yangından çıkmış gibi."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Kalemdeki memur albümü geri aldı. “Bu albümü kimse istemedi” dedi. “Bilirkişi bile.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Otuz sekiz kare. Hepsine baktım; hiçbirini görmedim. Bazen bir fotoğrafa ikinci kez bakmak gerekir; ilk bakış hep tanıdığı şeyi arar.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "FOTOSON_BITIR", "kind": "CONTINUE", "label": "Büroya dön", "role": "BACK", "next": "$return" }
       ]
     },
     {

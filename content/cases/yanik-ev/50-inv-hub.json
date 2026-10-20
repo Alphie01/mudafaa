@@ -97,7 +97,7 @@
           "id": "t_arsiv",
           "label": "ARŞİV",
           "kind": "ARCHIVE",
-          "choices": ["A_BILIRKISI", "A_ITFAIYE", "A_POLICE", "A_DIL", "A_CIKARIM", "A_LEYLA"]
+          "choices": ["A_BILIRKISI", "A_ITFAIYE", "A_POLICE", "A_DIL", "A_CIKARIM", "A_IPLIK", "A_LEYLA"]
         }
       ],
       "choices": [
@@ -232,8 +232,17 @@
         {
           "id": "A_CIKARIM",
           "kind": "NAVIGATE",
-          "label": "Çıkarım tahtası",
+          "label": "Yangın tahtası: nerede, neyle",
           "next": { "push": "INV_CIKARIM" },
+          "description": "0 EP · ipuçlarını birleştir",
+          "enabledWhen": { "ref": "kart2" },
+          "lockedReason": "En az 2 ipucu gerekli."
+        },
+        {
+          "id": "A_IPLIK",
+          "kind": "NAVIGATE",
+          "label": "İplik tahtası: dolaylı deliller",
+          "next": { "push": "INV_IPLIK" },
           "description": "0 EP · ipuçlarını birleştir",
           "enabledWhen": { "ref": "kart2" },
           "lockedReason": "En az 2 ipucu gerekli."
@@ -897,47 +906,33 @@
       "type": "DEDUCTION",
       "chapter": "Bölüm 2 · Soruşturma",
       "eyebrow": "DAVA #14 · SORUŞTURMA",
-      "title": "Çıkarım Tahtası",
+      "title": "Çıkarım Tahtası · Nerede, neyle",
       "background": "buro_gece",
       "lines": [
         {
           "lines": [
             {
               "speaker": "narrator",
-              "text": "İki ipucunu seç. Birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar. Yanlış çift zaman ve puan götürür."
+              "text": "Yangın tahtası: nerede başladı, neyle başladı? İki ipucunu seç; birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar. Yanlış çift puan götürür."
             }
           ]
         }
       ],
       "pool": [
-        "clue_buat",
-        "clue_v_izi",
-        "clue_moloz",
-        "clue_pano",
         "clue_foto_tavan",
-        "clue_foto_koridor",
-        "clue_su",
-        "clue_bidon",
-        "clue_esyalar",
-        "clue_restorasyon",
-        "clue_numune",
-        "clue_gec",
-        "clue_pano_yok",
-        "clue_taze",
         "clue_eksper_foto",
-        "clue_koku_yok",
-        "clue_baslangic",
-        "clue_yan_ev",
-        "clue_dain",
-        "clue_banka",
-        "clue_kampanya",
-        "clue_necati",
-        "clue_cagri",
+        "clue_numune",
         "clue_eksper_giris",
-        "clue_devriye",
-        "clue_saadet_fener",
-        "clue_jenerator",
-        "clue_borc"
+        "clue_pano",
+        "clue_pano_yok",
+        "clue_v_izi",
+        "clue_baslangic",
+        "clue_buat",
+        "clue_necati",
+        "clue_taze",
+        "clue_su",
+        "clue_moloz",
+        "clue_gec"
       ],
       "choices": [
         {
@@ -1016,6 +1011,70 @@
           ]
         },
         {
+          "id": "CB_TAZE",
+          "kind": "COMBINE",
+          "match": { "a": "clue_taze", "b": "clue_su" },
+          "feedback": {
+            "title": "Söndürmeden sağ çıkan benzin",
+            "text": "Saatlerce ateş, seksen dakika su. Böyle bir zeminden neredeyse taze bir benzin çıkması beklenmez. Benzin yangından sonra gelmiş olabilir.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_taze" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ]
+        },
+        {
+          "id": "FB_CIKARIM",
+          "kind": "FALLBACK",
+          "fallbackFor": "COMBINE",
+          "repeat": "ONCE_PER_PARAMS",
+          "feedback": {
+            "title": "Bu ikisi birbirini açıklamıyor",
+            "text": "Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Başka bir çift dene.",
+            "label": "BAĞLANTI YOK · −50 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+        },
+        { "id": "CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_IPLIK",
+      "type": "DEDUCTION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #14 · SORUŞTURMA",
+      "title": "Çıkarım Tahtası · Halatın iplikleri",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "İplik tahtası: savcının halatını oluşturan dolaylı deliller. Her ipliğin masum ve belgeli bir açıklaması var mı? Yanlış çift puan götürür."
+            }
+          ]
+        }
+      ],
+      "pool": [
+        "clue_esyalar",
+        "clue_restorasyon",
+        "clue_bidon",
+        "clue_jenerator",
+        "clue_banka",
+        "clue_dain",
+        "clue_kampanya",
+        "clue_cagri",
+        "clue_saadet_fener",
+        "clue_devriye",
+        "clue_necati",
+        "clue_borc",
+        "clue_yan_ev"
+      ],
+      "choices": [
+        {
           "id": "CB_TASIMA",
           "kind": "COMBINE",
           "match": { "a": "clue_esyalar", "b": "clue_restorasyon" },
@@ -1076,21 +1135,6 @@
           ]
         },
         {
-          "id": "CB_TAZE",
-          "kind": "COMBINE",
-          "match": { "a": "clue_taze", "b": "clue_su" },
-          "feedback": {
-            "title": "Söndürmeden sağ çıkan benzin",
-            "text": "Saatlerce ateş, seksen dakika su. Böyle bir zeminden neredeyse taze bir benzin çıkması beklenmez. Benzin yangından sonra gelmiş olabilir.",
-            "label": "YENİ DELİL · +300 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            { "type": "DISCOVER", "evidence": "ded_taze" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
-        },
-        {
           "id": "CB_ONLEM",
           "kind": "COMBINE",
           "match": { "a": "clue_restorasyon", "b": "clue_necati" },
@@ -1121,7 +1165,7 @@
           ]
         },
         {
-          "id": "FB_CIKARIM",
+          "id": "FB_IPLIK",
           "kind": "FALLBACK",
           "fallbackFor": "COMBINE",
           "repeat": "ONCE_PER_PARAMS",
@@ -1133,7 +1177,7 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
         },
-        { "id": "CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "$return" }
+        { "id": "IPLIK_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "$return" }
       ]
     },
     {
@@ -1409,11 +1453,11 @@
     { "evidence": "ded_pano", "source": { "type": "RULE", "id": "CB_PANO" } },
     { "evidence": "ded_koken", "source": { "type": "RULE", "id": "CB_KOKEN" } },
     { "evidence": "ded_buat", "source": { "type": "RULE", "id": "CB_BUAT" } },
+    { "evidence": "ded_taze", "source": { "type": "RULE", "id": "CB_TAZE" } },
     { "evidence": "ded_tasima", "source": { "type": "RULE", "id": "CB_TASIMA" } },
     { "evidence": "ded_bidon", "source": { "type": "RULE", "id": "CB_BIDON" } },
     { "evidence": "ded_banka", "source": { "type": "RULE", "id": "CB_BANKA" } },
     { "evidence": "ded_artis", "source": { "type": "RULE", "id": "CB_ARTIS" } },
-    { "evidence": "ded_taze", "source": { "type": "RULE", "id": "CB_TAZE" } },
     { "evidence": "ded_onlem", "source": { "type": "RULE", "id": "CB_ONLEM" } },
     { "evidence": "ded_fener", "source": { "type": "RULE", "id": "CB_FENER" } }
   ]

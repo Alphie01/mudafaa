@@ -664,6 +664,68 @@
           ]
         },
         {
+          "id": "TP_SANDIK",
+          "kind": "TOPIC",
+          "label": "Çeyiz sandığı",
+          "visibleWhen": { "hasEvidence": "clue_esyalar" },
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Atölyede Nermin Hanım’ın sandığını gördüm. Zehra da gördü.",
+              "responses": [
+                {
+                  "lines": [
+                    { "speaker": "halil", "expression": "saskin", "text": "Gördü mü? Açtı mı?" },
+                    { "speaker": "player", "text": "Açmadı. Elini kapağına koydu, bekledi." },
+                    {
+                      "speaker": "halil",
+                      "expression": "uzgun",
+                      "text": "Nermin de öyle yapardı. Açmadan önce bir dakika eli kapakta dururdu. “Sandık sabır ister” derdi."
+                    },
+                    {
+                      "speaker": "halil",
+                      "expression": "uzgun",
+                      "text": "Evi boşalttım, ev de gitti. Bazen düşünüyorum: ben taşımasaydım o sandık da yanardı. Yansaydı… belki kimse bana “değerli eşyalarını çıkarmış” demezdi."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir adam, kurtardığı tek şey yüzünden suçlanıyor. Savcının dilinde “değerli”; onun dilinde “sevdiği.”",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Savcı o sandığı “değerli eşya” diye yazdı. Değerli mi?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "expression": "kizgin",
+                      "text": "Değerli. Hiçbir sigortanın ödemeyeceği kadar değerli. Yazsınlar."
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+        },
+        {
           "id": "TP_ZEHRA",
           "kind": "TOPIC",
           "label": "Zehra",

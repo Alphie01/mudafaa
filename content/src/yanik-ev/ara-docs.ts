@@ -19,7 +19,9 @@ export const araDocs: CasePart = {
           {
             lines: [
               card('ADLİYE · MÜZEKKERE CEVABI — KRİMİNAL LABORATUVAR', 'adliye'),
-              n('Yirmi iki sayfa. Çoğu dağlar ve vadiler gibi görünen çizgiler: kromatogram. Her tepe bir molekül; her vadi bir sessizlik.'),
+              n(
+                'Yirmi iki sayfa. Çoğu dağlar ve vadiler gibi görünen çizgiler: kromatogram. Her tepe bir molekül; her vadi bir sessizlik.',
+              ),
               th('Rapor bir sonuç söyler. Ham veri, sonucun nereden geldiğini. Ve bazen nereden gelmediğini.'),
             ],
           },
@@ -33,11 +35,17 @@ export const araDocs: CasePart = {
           row('l_profil', ['Profil', 'Kurşunsuz benzin; hafif bileşenler korunmuş, ağırlaşma yok.']),
           row('l_piroliz', ['Matris', 'Numune matrisi: ahşap talaşı ve kül. Piroliz ürünleri: —'], {
             lupe: {
-              cells: ['Matris', 'Numune matrisi: ahşap talaşı ve kül. Piroliz ürünleri (stiren, toluen türevleri, fenoller): TESPİT EDİLMEDİ'],
+              cells: [
+                'Matris',
+                'Numune matrisi: ahşap talaşı ve kül. Piroliz ürünleri (stiren, toluen türevleri, fenoller): TESPİT EDİLMEDİ',
+              ],
               tone: 'special',
             },
           }),
-          row('l_kabul', ['Kabul', 'Teslim eden: katılan şirket eksperi T.S. · Kap: 1 L metal teneke · Mühür: teslim edenin şahsi mührü']),
+          row('l_kabul', [
+            'Kabul',
+            'Teslim eden: katılan şirket eksperi T.S. · Kap: 1 L metal teneke · Mühür: teslim edenin şahsi mührü',
+          ]),
           row('l_not', ['Not', 'Numune alma tutanağı ibraz edilmemiştir.']),
         ],
         tools: [lupe, kars],
@@ -84,7 +92,9 @@ export const araDocs: CasePart = {
         lines: [
           {
             lines: [
-              n('Gülsüm Hanım’ın naylon dosyası: hakem heyeti kararı, ekinde iki yıl önceki ekspertiz raporu ve bir bölge müdürlüğü yazısı.'),
+              n(
+                'Gülsüm Hanım’ın naylon dosyası: hakem heyeti kararı, ekinde iki yıl önceki ekspertiz raporu ve bir bölge müdürlüğü yazısı.',
+              ),
               th('İki rapor, iki ev, bir imza. Yan yana koyacağım. Kelime kelime.'),
             ],
           },
@@ -95,11 +105,20 @@ export const araDocs: CasePart = {
           { label: 'İÇERİK', flex: 3 },
         ],
         rows: [
-          row('t_karar', ['Karar', 'Eksper raporundaki hızlandırıcı tespiti bilimsel dayanaktan yoksundur; tazminatın ödenmesine.']),
-          row('t_ek', ['Ek-1', 'Ekspertiz raporu: “düzensiz kenarlı, zemine nüfuz etmiş, tipik döküntü izi tespit edilmiştir…”']),
+          row('t_karar', [
+            'Karar',
+            'Eksper raporundaki hızlandırıcı tespiti bilimsel dayanaktan yoksundur; tazminatın ödenmesine.',
+          ]),
+          row('t_ek', [
+            'Ek-1',
+            'Ekspertiz raporu: “düzensiz kenarlı, zemine nüfuz etmiş, tipik döküntü izi tespit edilmiştir…”',
+          ]),
           row('t_yazi', ['Ek-2', 'Bölge müdürlüğü yazısı: hasar dosyalarında eksper ücretlendirmesi hk.'], {
             lupe: {
-              cells: ['Ek-2', 'Bölge müdürlüğü yazısı: “Suiistimal tespitiyle reddedilen hasar dosyalarında eksper ücretine ek prim uygulanacaktır.”'],
+              cells: [
+                'Ek-2',
+                'Bölge müdürlüğü yazısı: “Suiistimal tespitiyle reddedilen hasar dosyalarında eksper ücretine ek prim uygulanacaktır.”',
+              ],
               tone: 'special',
             },
           }),
@@ -147,7 +166,9 @@ export const araDocs: CasePart = {
         lines: [
           {
             lines: [
-              n('İki sayfalık bir döküm: saatler, kodlar, ekip numaraları. Bir sokağın elektriğinin bir gecelik günlüğü.'),
+              n(
+                'İki sayfalık bir döküm: saatler, kodlar, ekip numaraları. Bir sokağın elektriğinin bir gecelik günlüğü.',
+              ),
               th('Saadet Hanım’ın televizyonu “pat” dedi. Bir şirket bu “pat”ı bir kod olarak yazmış olabilir mi?'),
             ],
           },
@@ -160,7 +181,10 @@ export const araDocs: CasePart = {
         rows: [
           row('a_0208', ['02.08', 'AG şebekesinde nötr iletken kopması (kod N-03). Faz-nötr gerilim yükselmesi.']),
           row('a_abone', ['02.15', 'Abone şikâyetleri: Kalem Sk. No 5 ve No 7 — cihaz arızası, aşırı gerilim.']),
-          row('a_mudahale', ['03.40', 'Ekip müdahalesi; nötr bağlantısı yenilendi. No 9: yangın nedeniyle enerji kesik.']),
+          row('a_mudahale', [
+            '03.40',
+            'Ekip müdahalesi; nötr bağlantısı yenilendi. No 9: yangın nedeniyle enerji kesik.',
+          ]),
         ],
         tools: [lupe, kars],
         costVar: 'ex_ariza',
@@ -196,7 +220,9 @@ export const araDocs: CasePart = {
         lines: [
           {
             lines: [
-              n('Elektrik mühendisi Dr. Aslı Yurt’un raporu: on sayfa, mikroskop fotoğrafları, bakır tellerin ucundaki küçük, parlak boncuklar.'),
+              n(
+                'Elektrik mühendisi Dr. Aslı Yurt’un raporu: on sayfa, mikroskop fotoğrafları, bakır tellerin ucundaki küçük, parlak boncuklar.',
+              ),
               th('Bir bakır boncuk. Yangının önce mi sonra mı oluştuğunu söyleyebilen bir damla metal.'),
             ],
           },
@@ -207,9 +233,15 @@ export const araDocs: CasePart = {
           { label: 'BULGU', flex: 3 },
         ],
         rows: [
-          row('k_linye', ['Linye', 'Koridor buatına giden linyede ark boncuğu; boncuk yüzeyinde oksidasyon ve gözenek yapısı birincil arkla uyumlu.']),
+          row('k_linye', [
+            'Linye',
+            'Koridor buatına giden linyede ark boncuğu; boncuk yüzeyinde oksidasyon ve gözenek yapısı birincil arkla uyumlu.',
+          ]),
           row('k_pano', ['Pano', 'Porselen sigortalar; koridor hattı sigortası atmamış. Aşırı gerilim izi.']),
-          row('k_sonuc', ['Sonuç', 'Yangının koridor hattında elektrik kaynaklı başlamasıyla uyumlu bulgular mevcuttur.']),
+          row('k_sonuc', [
+            'Sonuç',
+            'Yangının koridor hattında elektrik kaynaklı başlamasıyla uyumlu bulgular mevcuttur.',
+          ]),
         ],
         tools: [lupe, kars],
         costVar: 'ex_ark',

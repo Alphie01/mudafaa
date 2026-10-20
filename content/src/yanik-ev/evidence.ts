@@ -242,7 +242,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Boş pano yuvası',
       shortText: 'Girişteki sigorta panosunun yeri boş; kablolar kesilmiş.',
-      description: 'Giriş duvarındaki sigorta panosunun yuvası boş. Kablolar düzgünce kesilmiş: pano sökülüp götürülmüş.',
+      description:
+        'Giriş duvarındaki sigorta panosunun yuvası boş. Kablolar düzgünce kesilmiş: pano sökülüp götürülmüş.',
       sourceLabel: 'Yanık ev (giriş)',
       icon: 'lock',
       tags: kart,
@@ -362,7 +363,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: '“Akaryakıt kokusu alınmamıştır”',
       shortText: 'İtfaiye amiri: yangın yerinde akaryakıt kokusu alınmadı.',
-      description: 'İtfaiye ekip amirinin gözlemi: “Müdahale sırasında akaryakıt kokusu alınmamıştır. Yoğun plastik ve kablo yanığı kokusu.”',
+      description:
+        'İtfaiye ekip amirinin gözlemi: “Müdahale sırasında akaryakıt kokusu alınmamıştır. Yoğun plastik ve kablo yanığı kokusu.”',
       sourceLabel: 'İtfaiye yangın raporu',
       icon: 'document',
       tags: kart,
@@ -539,7 +541,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: '02.08 nötr kopması',
       shortText: 'Arıza kaydı: 02.08’de hatta nötr koptu; üç abonede aşırı gerilim.',
-      description: 'Dağıtım kaydı: 02.08 nötr iletken kopması, gerilim 380 V’a yaklaşmış; Kalem Sokak 5, 7 ve 9 etkilenmiş.',
+      description:
+        'Dağıtım kaydı: 02.08 nötr iletken kopması, gerilim 380 V’a yaklaşmış; Kalem Sokak 5, 7 ve 9 etkilenmiş.',
       sourceLabel: 'Dağıtım arıza kaydı',
       icon: 'bulb',
       tags: ara,
@@ -577,7 +580,8 @@ export const evidencePart: CasePart = {
       icon: 'lock',
       side: 'DEFENSE',
       strength: 'STRONG',
-      legalNote: 'Delilin güvenilirliği elde ediliş zincirine bağlıdır; vicdani kanaat bu zincir üzerinden kurulur (CMK 217).',
+      legalNote:
+        'Delilin güvenilirliği elde ediliş zincirine bağlıdır; vicdani kanaat bu zincir üzerinden kurulur (CMK 217).',
     }),
     insight('ded_pano', {
       type: 'BELGE',
@@ -650,7 +654,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Artışı acente teklif etti',
       shortText: 'Kampanya kodu ve çağrı kaydı: teminat artışını Halil istemedi.',
-      description: 'Zeyilnamedeki kampanya kodu ile acentenin giden araması birlikte: teminat artışı acentenin teklifidir.',
+      description:
+        'Zeyilnamedeki kampanya kodu ile acentenin giden araması birlikte: teminat artışı acentenin teklifidir.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'phone',
       side: 'DEFENSE',

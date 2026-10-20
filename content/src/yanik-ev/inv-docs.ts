@@ -40,8 +40,12 @@ export const invDocs: CasePart = {
             n(
               'On dört sayfa, üç ek. Kapakta bir üniversite logosu, bir unvan, bir imza. Sonuç sayfası kalın harflerle: “hızlandırıcı kullanılarak çıkarılmıştır.”',
             ),
-            th('Bir rapor bir sonuçla biter. Ama sonuca giden yol ortadaki sayfalardadır. Ortadaki sayfaları kimse okumaz; ben okuyacağım.'),
-            th('Bir alet seç, sonra şüpheli satıra dokun. Büyüteç yazıya, karşılaştırma satırlar arasındaki çelişkiye bakar.'),
+            th(
+              'Bir rapor bir sonuçla biter. Ama sonuca giden yol ortadaki sayfalardadır. Ortadaki sayfaları kimse okumaz; ben okuyacağım.',
+            ),
+            th(
+              'Bir alet seç, sonra şüpheli satıra dokun. Büyüteç yazıya, karşılaştırma satırlar arasındaki çelişkiye bakar.',
+            ),
           ],
         },
       ],
@@ -51,14 +55,20 @@ export const invDocs: CasePart = {
         { label: 'İÇERİK', flex: 3 },
       ],
       rows: [
-        row('b_kesif', ['Keşif', 'Olay yeri 21 Ocak tarihinde incelenmiştir. Yağışlar nedeniyle olay yeri kısmen bozulmuştur.']),
+        row('b_kesif', [
+          'Keşif',
+          'Olay yeri 21 Ocak tarihinde incelenmiştir. Yağışlar nedeniyle olay yeri kısmen bozulmuştur.',
+        ]),
         row('b_materyal', [
           'Materyal',
           'İncelenen materyal: olay yerinden alınmış iki adet metal teneke numune (laboratuvara gönderilmiştir).',
         ]),
         row('b_lab', ['Laboratuvar', 'Her iki numunede kurşunsuz benzin tespit edilmiştir.'], {
           lupe: {
-            cells: ['Laboratuvar', 'Her iki numunede kurşunsuz benzin tespit edilmiştir. [dipnot 4: düşük buharlaşma derecesinde]'],
+            cells: [
+              'Laboratuvar',
+              'Her iki numunede kurşunsuz benzin tespit edilmiştir. [dipnot 4: düşük buharlaşma derecesinde]',
+            ],
             tone: 'special',
           },
         }),
@@ -132,7 +142,9 @@ export const invDocs: CasePart = {
             n(
               'İki sayfa, matbu bir form; kutucuklar tükenmezle doldurulmuş. Ekip amirinin el yazısı yer yer bir doktor reçetesi kadar okunaksız.',
             ),
-            th('İtfaiyeciler yangını en sıcak anında görür. Yazdıklarını kimse okumaz, çünkü form sıkıcıdır. Sıkıcı formlar dürüst olur.'),
+            th(
+              'İtfaiyeciler yangını en sıcak anında görür. Yazdıklarını kimse okumaz, çünkü form sıkıcıdır. Sıkıcı formlar dürüst olur.',
+            ),
           ],
         },
       ],
@@ -147,7 +159,10 @@ export const invDocs: CasePart = {
           'Başlangıç',
           'Yangının mutfak ile koridor arasındaki bölgede başladığı, elektrik kaynaklı olabileceği değerlendirilmiştir.',
         ]),
-        row('i_gozlem', ['Gözlem', 'Müdahale sırasında akaryakıt kokusu alınmamıştır. Yoğun plastik ve kablo yanığı kokusu.']),
+        row('i_gozlem', [
+          'Gözlem',
+          'Müdahale sırasında akaryakıt kokusu alınmamıştır. Yoğun plastik ve kablo yanığı kokusu.',
+        ]),
         row('i_sirama', ['Sıçrama', 'Yan bina (No: 11) saçağı tutuşmuş, iki aile tahliye edilmiştir.']),
         row('i_teslim', ['Teslim', 'Sigorta panosu sökülerek kolluğa teslim edilmiştir.']),
       ],
@@ -192,7 +207,9 @@ export const invDocs: CasePart = {
       lines: [
         {
           lines: [
-            n('Poliçe dört sayfa, zeyilname bir sayfa. Genel şartlar ince bir kitapçık; özel şartlar iki paragraf, en küçük puntoyla.'),
+            n(
+              'Poliçe dört sayfa, zeyilname bir sayfa. Genel şartlar ince bir kitapçık; özel şartlar iki paragraf, en küçük puntoyla.',
+            ),
             th('Sigortacılar en önemli cümleyi en küçük puntoyla yazar. Gözlüğümü taktım.'),
           ],
         },
@@ -204,11 +221,20 @@ export const invDocs: CasePart = {
       ],
       rows: [
         row('p_teminat', ['Teminat', 'Bina 1.200.000 TL · eşya 150.000 TL · yangın, yıldırım, infilak']),
-        row('p_ozel', ['Özel şart', 'Hasar tazminatı, kredi bakiyesi tutarında öncelikle dain-i mürtehin sıfatıyla bankaya ödenir.']),
-        row('p_ek', ['Ek', 'Banka yazısı: Kredi kullandırımı için taşınmazın konut sigortası ile sigortalanması şarttır.']),
+        row('p_ozel', [
+          'Özel şart',
+          'Hasar tazminatı, kredi bakiyesi tutarında öncelikle dain-i mürtehin sıfatıyla bankaya ödenir.',
+        ]),
+        row('p_ek', [
+          'Ek',
+          'Banka yazısı: Kredi kullandırımı için taşınmazın konut sigortası ile sigortalanması şarttır.',
+        ]),
         row('p_zeyil', ['Zeyilname', '03.01 · Bina teminatı 1.800.000 TL'], {
           lupe: {
-            cells: ['Zeyilname', '03.01 · Bina teminatı 1.800.000 TL · [açıklama, en küçük puntoyla: KMP-RST · acente teklifi]'],
+            cells: [
+              'Zeyilname',
+              '03.01 · Bina teminatı 1.800.000 TL · [açıklama, en küçük puntoyla: KMP-RST · acente teklifi]',
+            ],
             tone: 'special',
           },
         }),

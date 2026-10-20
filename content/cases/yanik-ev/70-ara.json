@@ -637,6 +637,16 @@
                   "speaker": "player",
                   "text": "Bir karar. Bir ek. Bir yazı. Gülsüm Hanım iki yıldır bu dosyayı taşıyor; bir gün birine lazım olacak diye.",
                   "style": "thought"
+                },
+                {
+                  "speaker": "narrator",
+                  "name": "GÜLSÜM YAŞAR",
+                  "text": "Ben o evi kocamla kırk yılda yaptım kızım. Tuğlasını kendimiz taşıdık. O adam on dakika baktı. On dakika. Kırk yılı on dakikada benzine çevirdi."
+                },
+                {
+                  "speaker": "narrator",
+                  "name": "GÜLSÜM YAŞAR",
+                  "text": "Kazandım ama bir yıl bir akrabanın evinde kaldım. Kazanmak da bir yangın gibiymiş; geride bir şey bırakmıyor."
                 }
               ]
             }
@@ -976,6 +986,37 @@
             "feedback": "Doğru hazırlık: müvekkile hakkını ve sürecin olası yönünü (CMK 226 ek savunma) anlatmak, ne söyleyeceğini ezberletmeden doğruyu söylemesini istemek.",
             "category": "SAVUNMA_STRATEJISI"
           }
+        },
+        {
+          "id": "HL_EV",
+          "kind": "OPTION",
+          "label": "Dava bitince Kalem Sokak’a ne olacak?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "halil",
+                  "text": "Ne olacak? Yeniden yapacağım. Kredi duruyor, usta duruyor. Bu sefer önce elektrik. Necati Usta’yla her kabloyu tek tek."
+                },
+                {
+                  "speaker": "halil",
+                  "text": "Ahşap yine ahşap olacak. Belediye de öyle istiyor, tescilli sokak. Nermin’in tavan göbeğini fotoğraftan çizdireceğim."
+                },
+                {
+                  "speaker": "halil",
+                  "expression": "uzgun",
+                  "text": "Ama içeride uyuyamam herhalde. Bir süre. Atölyede kanepe var."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir adam yanmış evini yeniden yapmayı planlıyor; aynı yerde, aynı ahşapla. Bir kundakçı küllerine geri dönmez. Ya da döner; ama sandığını yanına alarak değil.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 10 }]
         },
         {
           "id": "HL_ZEHRA",

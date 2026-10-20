@@ -66,42 +66,83 @@ export const invPlaces: CasePart = {
               'Çıkarken salonun köşesindeki yığına bir kez daha baktım. Düzgün, sıkıştırılmış, kürek izli. Yangın bir şeyi böyle istiflemez. Bir el istifler.',
             ),
             th('Kimin eli? İtfaiyeci mi, polis mi, bilirkişi mi, bir başkası mı? Fotoğraflar söyler. En eskisi önce.'),
-            n('Kaldırımda, karşı evin penceresinde perde yine aralanmıştı. Bu sefer içeriden bir el bana gel işareti yaptı, sonra vazgeçti.'),
+            n(
+              'Kaldırımda, karşı evin penceresinde perde yine aralanmıştı. Bu sefer içeriden bir el bana gel işareti yaptı, sonra vazgeçti.',
+            ),
           ],
         },
         {
           lines: [
             n('Kaldırıma çıktığımda ellerim kül olmuştu. Mendille sildim; kül mendile geçti, gitmedi.'),
-            th('Bir yangın yerinde her şey aynı renktir. Önemli olanı önemsizden ayırmak için önce kendi gözünü temizlemen gerekir.'),
+            th(
+              'Bir yangın yerinde her şey aynı renktir. Önemli olanı önemsizden ayırmak için önce kendi gözünü temizlemen gerekir.',
+            ),
             n('Karşı evin penceresinde perde aralandı ve kapandı.'),
           ],
         },
       ],
       choices: [out('EVSON_BITIR', 'Büroya dön')],
     }),
-    sceneSearch('INV_FOTO', {
+    finishTo(
+      sceneSearch('INV_FOTO', {
+        ...INV1,
+        title: 'Olay yeri albümü · 04.30',
+        hud: ['taps_foto'],
+        exposeCounts: true,
+        background: 'adliye',
+        lines: [
+          {
+            lines: [
+              card('ADLİYE · SAVCILIK DOSYASI — OLAY YERİ ALBÜMÜ', 'adliye'),
+              n(
+                'Otuz sekiz kare. Saat damgası 04.30–04.52. Flaşın beyaz yaraları, itfaiyecilerin sarı şeritli sırtları, buhar, su, kömür.',
+              ),
+              th(
+                'En eski fotoğraf, en az dokunulmuş olandır. Bu kareler, evin henüz kimsenin hikâyesi olmadığı anı gösteriyor.',
+              ),
+              n('Dört kare masanın üstünde yan yana. Salon, koridor, su, sokak.'),
+            ],
+          },
+        ],
+        scene: 'sc_foto',
+        instruction: 'Fotoğraflarda şüpheli gördüğün yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.',
+        costVar: 'taps_foto',
+        miss: miss('FB_FOTO'),
+        finish: { id: 'FOTO_BITIR', label: 'Albümü kapat' },
+      }),
+      'FOTO_BITIR',
+      'INV_FOTO_SON',
+    ),
+    story('INV_FOTO_SON', {
       ...INV1,
-      title: 'Olay yeri albümü · 04.30',
-      hud: ['taps_foto'],
-      exposeCounts: true,
+      title: 'Albüm',
       background: 'adliye',
       lines: [
         {
+          when: has('clue_foto_tavan'),
           lines: [
-            card('ADLİYE · SAVCILIK DOSYASI — OLAY YERİ ALBÜMÜ', 'adliye'),
             n(
-              'Otuz sekiz kare. Saat damgası 04.30–04.52. Flaşın beyaz yaraları, itfaiyecilerin sarı şeritli sırtları, buhar, su, kömür.',
+              'Kalemdeki memur albümü geri alırken bir an durdu. “Bu albümü kimse istemedi” dedi. “Bilirkişi bile. Siz ilksiniz.”',
             ),
-            th('En eski fotoğraf, en az dokunulmuş olandır. Bu kareler, evin henüz kimsenin hikâyesi olmadığı anı gösteriyor.'),
-            n('Dört kare masanın üstünde yan yana. Salon, koridor, su, sokak.'),
+            th(
+              'Kare 21. Çökmüş bir tavan, örtülü bir zemin. Bilirkişi raporundaki “döküntü izi” bu zeminde mi? Bu fotoğrafta zemin bile yok.',
+            ),
+            th(
+              'Bir fotoğraf ne gösterdiği kadar ne göstermediğiyle de konuşur. 04.30’da bir leke yoktu. Sonra biri bir leke buldu. Ne zaman?',
+            ),
+            n('Fotokopisini aldım. Kâğıt makineden sıcak çıktı; bir yangından çıkmış gibi.'),
+          ],
+        },
+        {
+          lines: [
+            n('Kalemdeki memur albümü geri aldı. “Bu albümü kimse istemedi” dedi. “Bilirkişi bile.”'),
+            th(
+              'Otuz sekiz kare. Hepsine baktım; hiçbirini görmedim. Bazen bir fotoğrafa ikinci kez bakmak gerekir; ilk bakış hep tanıdığı şeyi arar.',
+            ),
           ],
         },
       ],
-      scene: 'sc_foto',
-      instruction: 'Fotoğraflarda şüpheli gördüğün yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.',
-      costVar: 'taps_foto',
-      miss: miss('FB_FOTO'),
-      finish: { id: 'FOTO_BITIR', label: 'Albümü kapat' },
+      choices: [out('FOTOSON_BITIR', 'Büroya dön')],
     }),
     story('INV_ATOLYE_G', {
       ...INV1,
@@ -115,7 +156,9 @@ export const invPlaces: CasePart = {
             n(
               'Eski sanayi bir labirentti: kaportacılar, torna atölyeleri, bir kebapçı, bir kahve. Kepenkler yarı inikti; çamurlu sokakta bir köpek bir lastiği kemiriyordu.',
             ),
-            n('Zehra kapının önünde bekliyordu, elinde bir anahtarlık. Nöbetten çıkmış, formasının üstüne babasının eski montunu giymişti.'),
+            n(
+              'Zehra kapının önünde bekliyordu, elinde bir anahtarlık. Nöbetten çıkmış, formasının üstüne babasının eski montunu giymişti.',
+            ),
             s('zehra', 'İki aydır buraya girmedim. Polis girmedi bile. Kimse “atölyeye bakalım” demedi.'),
             named(
               'ATÖLYE BEKÇİSİ',
@@ -142,7 +185,9 @@ export const invPlaces: CasePart = {
               n(
                 'Yarım kalmış otel sandalyeleri bir koro gibi dizilmişti; hepsinin oturağı açık, yayları görünür. Duvarda makaslar, ölçü cetvelleri, bir çerçevesiz fotoğraf.',
               ),
-              th('Savcıya göre Halil o gece evini yakıyordu. Bu odaya göre bir otelin kırk sandalyesini kaplıyordu. Hangisi daha çok iz bırakmış?'),
+              th(
+                'Savcıya göre Halil o gece evini yakıyordu. Bu odaya göre bir otelin kırk sandalyesini kaplıyordu. Hangisi daha çok iz bırakmış?',
+              ),
             ],
           },
         ],
@@ -167,10 +212,15 @@ export const invPlaces: CasePart = {
               'Zehra çeyiz sandığının örtüsünü kaldırdı. Ceviz, el oyması bir lale motifi, pirinç bir kilit. Parmaklarını kapağın üstünde gezdirdi; açmadı.',
             ),
             s('zehra', 'Annemin sandığı. Babam bunu kurtarmış.', 'uzgun'),
-            s('zehra', 'Savcı “değerli eşyalarını önceden çıkarmış” diyor. Bu sandık bir kuruş etmez. Kimse almaz bunu. Sadece biz…'),
+            s(
+              'zehra',
+              'Savcı “değerli eşyalarını önceden çıkarmış” diyor. Bu sandık bir kuruş etmez. Kimse almaz bunu. Sadece biz…',
+            ),
             me('Etiketi okudun mu? “Restorasyon bitince geri.”'),
             s('zehra', 'Geri. Geri götürecekmiş. Neyin içine?', 'uzgun'),
-            th('Bir kundakçı neyi kurtarır? Parayı. Bir dul neyi kurtarır? Sandığı. Bu ayrım mahkemede bir delil değil. Ama benim için bir pusula.'),
+            th(
+              'Bir kundakçı neyi kurtarır? Parayı. Bir dul neyi kurtarır? Sandığı. Bu ayrım mahkemede bir delil değil. Ama benim için bir pusula.',
+            ),
           ],
         },
         {

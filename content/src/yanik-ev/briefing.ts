@@ -40,7 +40,10 @@ export const briefing: CasePart = {
               'Işık büyüdü. Lambri tutuştu, cila kabardı, yüz yıllık ceviz bir iç çeker gibi çatırdadı. Camlar önce terledi, sonra çatladı.',
               { fx: 'flash' },
             ),
-            voice('BİR SES', 'İtfaiye! Kalem Sokak, dokuz numara! Ahşap ev, yanıyor! Çabuk, yanındaki ev de tutuşacak!'),
+            voice(
+              'BİR SES',
+              'İtfaiye! Kalem Sokak, dokuz numara! Ahşap ev, yanıyor! Çabuk, yanındaki ev de tutuşacak!',
+            ),
             n(
               'Sirenler yokuşu tırmandı. Hortumlar açıldı, su ateşe çarpıp buhar oldu. Yan evin saçağı alev aldı; bir anne çocuğunu battaniyeye sarıp merdivenden indirdi.',
               { fx: 'shake' },
@@ -74,7 +77,10 @@ export const briefing: CasePart = {
             ),
             s('halil', 'Nermin’in evi… Bu… bu Nermin’in evi.', 'uzgun'),
             named('POLİS', 'Halil Bozkurt siz misiniz? Ev sahibi? Kimliğinizi alayım. Gece neredeydiniz?'),
-            s('halil', 'Atölyede. Sanayide. Bir sipariş vardı… Kızım aradı, ben… Biri var mıydı içeride? Söyleyin, biri var mıydı?'),
+            s(
+              'halil',
+              'Atölyede. Sanayide. Bir sipariş vardı… Kızım aradı, ben… Biri var mıydı içeride? Söyleyin, biri var mıydı?',
+            ),
             named('POLİS', 'Kimse yoktu. Yan evdekiler de kurtuldu. Cüzdanınızı açın, kimliğinizi verin.'),
             n(
               'Halil’in elleri titredi. Cüzdan açıldı, bir fiş ıslak taşın üstüne düştü. Polis eğildi, aldı, ışığa tuttu.',
@@ -90,7 +96,11 @@ export const briefing: CasePart = {
             n(
               'Öğleden sonra bir hasar ihbarı yapıldı. Üç gün sonra bir rapor yazıldı. Bir ay sonra bir bilirkişi, bir laboratuvar, bir kelime: hızlandırıcı.',
             ),
-            card('YİRMİ GÜN SONRA TUTUKLANDI. İDDİANAME MARTTA GELDİ. BİRİNCİ CELSEYE ON BİR GÜN VAR.', 'siyah', 'fade'),
+            card(
+              'YİRMİ GÜN SONRA TUTUKLANDI. İDDİANAME MARTTA GELDİ. BİRİNCİ CELSEYE ON BİR GÜN VAR.',
+              'siyah',
+              'fade',
+            ),
           ],
         },
       ],
@@ -112,7 +122,10 @@ export const briefing: CasePart = {
             n(
               'Gelen kadın yirmilerinin sonundaydı. Montunun altında açık mavi bir hastane forması, ellerinde dezenfektan kokusu, gözlerinin altında iki nöbetin morluğu.',
             ),
-            s('zehra', 'Av. Deniz Arslan? Zehra Bozkurt. Acilden çıktım, kusura bakmayın. Bu saatte açık başka büro bulamadım.'),
+            s(
+              'zehra',
+              'Av. Deniz Arslan? Zehra Bozkurt. Acilden çıktım, kusura bakmayın. Bu saatte açık başka büro bulamadım.',
+            ),
             me('Oturun lütfen. Babanız için gelmiştiniz.'),
             s('zehra', 'Halil Bozkurt. Döşemeci. Elli dört yaşında. İki aydır cezaevinde. Evini yakmakla suçlanıyor.'),
             n(
@@ -148,7 +161,10 @@ export const briefing: CasePart = {
             th(
               'Bir kızın babasından kuşku duyması bir iddianameden daha ağırdır. İddianame bir kâğıttır. Kuşku, insanın içinde bir oda tutar.',
             ),
-            s('zehra', 'Bileziklerimi bozdurmama gerek yok, maaşım var. Ama bir daha “dosya kötü” diyecek birini istemiyorum.'),
+            s(
+              'zehra',
+              'Bileziklerimi bozdurmama gerek yok, maaşım var. Ama bir daha “dosya kötü” diyecek birini istemiyorum.',
+            ),
           ],
         },
       ],
@@ -166,7 +182,9 @@ export const briefing: CasePart = {
                   'zehra',
                   'O gece atölyedeymiş. Bir otelin kırk sandalyesi. Son haftalarda evde uyumuyordu zaten; ev yarı boştu, soğuktu. Restorasyon diye eşyaları taşımıştı.',
                 ),
-                th('Eşyaları taşımış. İddianamede bu cümle başka bir sıfatla geçiyor: “değerli eşyalarını önceden çıkarmış.”'),
+                th(
+                  'Eşyaları taşımış. İddianamede bu cümle başka bir sıfatla geçiyor: “değerli eşyalarını önceden çıkarmış.”',
+                ),
                 s('zehra', 'Teşekkür ederim. Herkes önce raporu açtı. Siz babamı sordunuz.'),
               ],
             },
@@ -214,12 +232,17 @@ export const briefing: CasePart = {
               'leyla',
               'Bir kızın gözüne bakarak söz verme, Deniz. Dosyaya bakarak ver. Ortak oldun diye sözlerin bedava olmadı; daha pahalı oldu.',
             ),
-            s('leyla', 'O kız babasından şüphe ediyor. Senin işin onu ikna etmek değil. Kanıtlamak. Ya da kanıtlayamadığını kabul etmek.'),
+            s(
+              'leyla',
+              'O kız babasından şüphe ediyor. Senin işin onu ikna etmek değil. Kanıtlamak. Ya da kanıtlayamadığını kabul etmek.',
+            ),
           ],
         },
         {
           lines: [
-            n('Zehra gidince Leyla Erdem kendi odasının kapısında belirdi. Elinde bir fincan ıhlamur, bakışında bir soru.'),
+            n(
+              'Zehra gidince Leyla Erdem kendi odasının kapısında belirdi. Elinde bir fincan ıhlamur, bakışında bir soru.',
+            ),
             s(
               'leyla',
               'Borcu ilk o söyledi, değil mi? İyi. Utanılan şeyi ilk söyleyen, gerisinde yalan söylemez. Ama babası söylememiş. Onu da not et.',
@@ -262,7 +285,11 @@ export const briefing: CasePart = {
             responses: [
               {
                 lines: [
-                  s('leyla', 'Doğru. Ve tazminat ödenmedi; sigorta parası hiç ele geçmedi. Teşebbüs. Bunu unutma.', 'mutlu'),
+                  s(
+                    'leyla',
+                    'Doğru. Ve tazminat ödenmedi; sigorta parası hiç ele geçmedi. Teşebbüs. Bunu unutma.',
+                    'mutlu',
+                  ),
                   n('Leyla sigara paketini çevirdi. Bir şey anlatmak istediğinde hep bunu yapardı.'),
                   s(
                     'leyla',
@@ -280,8 +307,14 @@ export const briefing: CasePart = {
           responses: [
             {
               lines: [
-                s('leyla', 'Eski kitaptan okuyorsun. Kanun geçen aralıkta değişti; yangında alt sınır bir yıl, üst sınır beş.'),
-                s('leyla', 'Sigortada da (k) bendi ağır: dört yıldan başlar. Ama para alınmadı; teşebbüs. Mevzuatı her dosyada yeniden aç, Deniz.'),
+                s(
+                  'leyla',
+                  'Eski kitaptan okuyorsun. Kanun geçen aralıkta değişti; yangında alt sınır bir yıl, üst sınır beş.',
+                ),
+                s(
+                  'leyla',
+                  'Sigortada da (k) bendi ağır: dört yıldan başlar. Ama para alınmadı; teşebbüs. Mevzuatı her dosyada yeniden aç, Deniz.',
+                ),
               ],
             },
           ],
@@ -294,7 +327,10 @@ export const briefing: CasePart = {
             {
               lines: [
                 s('leyla', 'Öyle olsaydı karşında üç hâkim olurdu. Bir tane var. Neden?'),
-                s('leyla', 'Çünkü iki suçun da üst sınırı on yılı geçmiyor. Asliye ceza. Hâkim tek; ikna edeceğin vicdan da tek.'),
+                s(
+                  'leyla',
+                  'Çünkü iki suçun da üst sınırı on yılı geçmiyor. Asliye ceza. Hâkim tek; ikna edeceğin vicdan da tek.',
+                ),
               ],
             },
           ],
@@ -330,7 +366,10 @@ export const briefing: CasePart = {
               'leyla',
               'Bir yangın dosyası bu üç soruya bakar. Nerede başladı, neyle başladı, kim başlattı. Savcının cevapları hazır: salonda, benzinle, Halil.',
             ),
-            s('leyla', 'Senin işin cevaplara itiraz etmek değil. Soruları yeniden sormak. Her soruyu, kimin cevapladığına bakarak.'),
+            s(
+              'leyla',
+              'Senin işin cevaplara itiraz etmek değil. Soruları yeniden sormak. Her soruyu, kimin cevapladığına bakarak.',
+            ),
             n('Kâğıtları yan yana dizdi, sonra bir ipi alıp üçünün üstünden geçirdi.'),
             s(
               'leyla',
@@ -361,7 +400,8 @@ export const briefing: CasePart = {
           character: 'halil',
           label: 'MÜVEKKİL',
           lines: ['Halil Bozkurt, 54', 'Döşemeci · sabıkasız · tutuklu'],
-          charge: 'Genel güvenliği kasten tehlikeye sokma (TCK 170/1-a); nitelikli dolandırıcılığa teşebbüs (TCK 158/1-k, 35)',
+          charge:
+            'Genel güvenliği kasten tehlikeye sokma (TCK 170/1-a); nitelikli dolandırıcılığa teşebbüs (TCK 158/1-k, 35)',
           demand: 'İddianame: 170/1-a ve 158/1-k, 35 uyarınca cezalandırılması',
         },
         {
@@ -413,7 +453,12 @@ export const briefing: CasePart = {
           effects: [set('strategy', 'USUL'), set('strategy_pct', 120), ...p1.start()],
           responses: [
             {
-              lines: [s('leyla', 'Bir delil, elde edildiği yol kadar güçlüdür. Yolları yürü. Ama kâğıt tek başına kimseyi tahliye etmez.')],
+              lines: [
+                s(
+                  'leyla',
+                  'Bir delil, elde edildiği yol kadar güçlüdür. Yolları yürü. Ama kâğıt tek başına kimseyi tahliye etmez.',
+                ),
+              ],
             },
           ],
           next: 'INV_SABAH',
@@ -457,4 +502,3 @@ export const briefing: CasePart = {
     }),
   ],
 };
-

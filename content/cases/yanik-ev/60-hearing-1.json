@@ -1348,8 +1348,59 @@
             { "type": "MARK", "quality": "BAD", "feedback": "Dayanaksız itiraz.", "category": "SORGULAMA" }
           ]
         },
-        { "id": "H104_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "H1_05" }
+        { "id": "H104_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "H1_04S" }
       ]
+    },
+    {
+      "id": "H1_04S",
+      "type": "STORY",
+      "chapter": "Bölüm 3 · Birinci celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Tanık çekiliyor",
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "when": { "any": [{ "flag": "contra_s1" }, { "flag": "contra_s2" }] },
+          "lines": [
+            { "speaker": "hakim", "text": "Tanık, teşekkür ederiz. Çekilebilirsiniz." },
+            {
+              "speaker": "narrator",
+              "text": "Saadet Hanım bastonuna yaslanıp kürsüden indi. Sanık sırasının önünden geçerken durdu. Halil başını kaldırdı."
+            },
+            {
+              "speaker": "saadet",
+              "expression": "uzgun",
+              "text": "Yanlış burunla konuştum, Halil. Kusura bakma. Polis sordu, ben… neyse."
+            },
+            { "speaker": "hakim", "text": "Tanık, sanıkla konuşmayın lütfen." },
+            {
+              "speaker": "narrator",
+              "text": "Saadet Hanım dinleyici sırasına oturdu; Zehra’nın yanına. Bir süre sonra Zehra’nın elini tuttu. Zehra çekmedi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir tanık yalan söylemedi. Yalnızca birinin ona verdiği kelimeyi taşıdı. Kelimeyi geri aldı; ağırlığı Halil’in omzundan bir parça azaldı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Tanık, teşekkür ederiz. Çekilebilirsiniz." },
+            {
+              "speaker": "narrator",
+              "text": "Saadet Hanım bastonuna yaslanıp kürsüden indi. Halil’e bakmadı. Dinleyici sırasının en arkasına oturdu."
+            },
+            {
+              "speaker": "player",
+              "text": "“Benzin kokusu.” Bir kelime tutanakta duruyor. Ben onu yerinden oynatamadım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "H104S_DEVAM", "kind": "CONTINUE", "label": "Devam", "next": "H1_05" }]
     },
     {
       "id": "H1_05",

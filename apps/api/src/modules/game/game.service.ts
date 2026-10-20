@@ -618,7 +618,9 @@ export class GameService {
             where: { sessionId },
             data: { state: after as unknown as Prisma.InputJsonValue, stateVersion: version },
           });
-          await tx.sessionChoice.create({
+          // Yanıt, veritabanının sakladığı biçimle döner (jsonb anahtar sırası): ilk yanıt ile tekrarlar bayt bayt aynı.
+          const stored = await tx.sessionChoice.create({
+            select: { response: true },
             data: {
               sessionId,
               seq: after.seq,
@@ -671,7 +673,7 @@ export class GameService {
           if (scores.length > 0) await tx.sessionScore.createMany({ data: scores });
           if (done && s.mode === 'NORMAL' && outcome !== undefined)
             await this.onCompleted(tx, updated, after, outcome.class);
-          return { body, replay: false };
+          return { body: stored.response as unknown as ChooseResponse, replay: false };
         },
         { isolationLevel: 'ReadCommitted', timeout: 10_000 },
       );

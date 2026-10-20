@@ -517,7 +517,8 @@ kemal: Tutanağa geçsin: tanık, raporda yer alan iki özet değerin farklı ol
         W(
           flag('bulent_coktu'),
           `
-ozan: Sayın Hâkim, tanığın teknik bir yanlışlığı olabilir. Ancak sanığın kişiliği ortadadır. Sanığa 2019’da verilmiş bir disiplin ihtarını ve sosyal medyada paylaştığı “Sistem çökünce beni ararsınız” cümlesini dosyaya sunuyoruz; okunmasını talep ediyoruz.
+ozan: Sayın Hâkim, tanığın teknik bir yanlışlığı olabilir. Ancak sanığın kişiliği ortadadır.
+ozan: Sanığa 2019’da verilmiş bir disiplin ihtarını ve “Sistem çökünce beni ararsınız” paylaşımını dosyaya sunuyoruz; okunmasını talep ediyoruz.
 ~ Rapor çatladı. Şimdi adamı çatlatmak istiyorlar.
 `,
         ),

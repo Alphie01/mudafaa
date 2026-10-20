@@ -109,7 +109,14 @@ leyla: “Belki” iyi. Bir yüzü “belki” ile taşı. Kesinlik, kâğıt ma
 leyla: Ve şunu unutma: o yüz kimi gösterirse göstersin, sen onun peşinden koşmayacaksın. Yazacaksın. Savcıya yazacaksın. Biz avukatız; kolluk değil, kahraman hiç değil.
 > Kapıdan çıkarken durdu.
 leyla: Bir de müvekkilin. Kayıtlar onu akladıkça rahatlayacak. Rahatlayan insan konuşur. Konuştukça da bir şey daha anlatabilir. Dinle.
-> Leyla gitti. Odada dört kurumun kâğıdı ve ben kaldım. Dışarıda yağmur, her zamanki gibi, herkesin üstüne aynı anda.
+> Kapının eşiğinde bir an daha durdu. Masamdaki sigara paketine değil; pencereye baktı.
+leyla: Dört yıl önce bir dosyam vardı. Bir kaydın “bu adam” dediği bir dosya. Ben de inandım o kayda. İnsan bir makineye inanınca rahatlar; sorumluluk makinede sanır.
+leyla: Sonra o adamın masum olduğu çıktı. Çıktığında ben başka bir şehirdeydim, başka bir dosyadaydım. Ona bunu kimse söylemedi bile.
+- Ne yaptınız?
+leyla: Hiçbir şey. Yapamadım. O yüzden sana söylüyorum: kayda değil, kaydın kenarındaki boşluğa bak. Boşluklar konuşur; makineler sadece tekrar eder.
+> Leyla gitti. Masanın köşesindeki ters çerçeveye baktım; yıllardır orada. Belki o dosyaydı, belki değil. Sormadım.
+> Odada dört kurumun kâğıdı ve ben kaldım. Dışarıda yağmur, her zamanki gibi, herkesin üstüne aynı anda; suçlunun da, suçsuzun da, henüz hangisi olduğu belli olmayanın da.
+~ Dört kâğıt. Bir yüz. Ve bir mentorun dört yıl taşıdığı bir pişmanlık. Bu dosyayı yalnızca ben kazanmayacağım; o da benimle kazanmak istiyor.
 `),
     choices: [cont('ARA_GIRIS_DEVAM', 'Kayıtları aç', HUB, { role: 'PRIMARY' })],
   }),
@@ -524,7 +531,8 @@ const zeyil = retarget(
   HUB,
 );
 
-const eksper = sceneSearch('ARA_EKSPER', {
+const eksper = retarget(
+  sceneSearch('ARA_EKSPER', {
   ...ARA,
   title: 'Eksper raporu fotoğrafları',
   hud: ['taps4'],
@@ -543,7 +551,9 @@ const eksper = sceneSearch('ARA_EKSPER', {
     feedback: { text: 'Burada dikkat çeken bir şey yok. (−1 büyüteç)', label: '−10 SKOR', tone: 'error' },
   }),
   finish: { id: 'ARA_EKS_BITIR', label: 'Dosyayı kapat' },
-});
+  }),
+  HUB,
+);
 
 // --- İnsanlar ---
 

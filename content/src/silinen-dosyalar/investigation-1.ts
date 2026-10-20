@@ -914,7 +914,7 @@ leyla: Ve hâkim. Tek hâkim, tek vicdan. Heyeti ikna etmek bir tartışmadır; 
 const dayEnd = decisionNode('INV_DAY_END', [{ when: cmp(v('day'), '==', 2), to: 'INV_AKSAM1' }, { to: 'INV_AKSAM2' }], {
   ...INV,
   title: 'Gün sonu',
-  onEnter: [...dayEndDeliveries.effects, inc('day', 1), set('ap', 5)],
+  onEnter: [...dayEndDeliveries.effects, inc('day', 1), set('ap', 6)],
 });
 
 const aksam1 = story('INV_AKSAM1', {
@@ -1067,9 +1067,16 @@ const geceSon = story('INV_GECE', {
 @İMZASIZ NOT: Bazı dosyalar silinince herkes için daha iyi olur.
 > Zarfı çevirdim. Arkası boş. Kâğıt pahalı; kalın, krem rengi. Bir büronun ya da bir genel müdürlüğün kâğıdı gibi. Ya da bir kırtasiyenin. {flash}
 ~ Bir tehdit mi, bir tavsiye mi? İkisi de olabilir. İkisi de beni yarın sabah dokuzda o salona sokmaz; ama sokacak.
+> Masaya oturdum. Önümde bir yığın kâğıt: bir özet döküm, bir uzman raporu, bir devir tutanağı, bir e-posta çıktısı. Hepsinin ortak bir yeri vardı: “S.AKTAS.” Bir kullanıcı adı. Beş harf, bir nokta.
+~ Dokuz yıl bir adam bu beş harfi her sabah yazdı. Sonra işten çıktı. Beş harf masada kaldı; bir zarfın içinde, bir genel müdürün çekmecesinde.
+~ Yarın bir uzman kürsüye çıkacak ve “kayıt yalan söylemez” diyecek. Doğru; kayıt yalan söylemez.
+~ Ama kaydı tutan, özetleyen, mahkemeye getiren üç ayrı el var. Benim işim o elleri göstermek; kaydı değil, elleri.
+> Defne’nin resmini çantamdan çıkardım; Gül vermişti, Selim’e iletecektim, unutmuştum. Bir masa, bir ekran, bir adam ve odanın içinde çizilmiş bir güneş.
+~ Bir çocuk babasını bir ekranın başında çizmiş. Yarın o ekranın başına bir başkasını oturtmam gerekiyor; kanıtla, sesle, sırayla.
 > Telefon titredi. Leyla’dan tek bir mesaj, gece yarısına beş kala.
 leyla: Yarın uzman kürsüde “teknik olarak” derse, sen “insan olarak” diye sor. Ve zarfı bana getir; sabah. Savcılığa birlikte bildiririz. [phone]
 > Zarfı çantama koydum. Yağmur organize sanayinin bacalarına, Nilüfer’in balkonlarına, adliyenin taş merdivenlerine aynı anda yağıyordu.
+~ Bir dosya silinince gitmez; sadece kimin elinden çıktığını unutursun. Yarın hatırlatacağım. Birine.
 `),
   choices: [cont('GECE_DEVAM', 'Adliyeye git', 'H1_00G_1', { role: 'PRIMARY' })],
 });

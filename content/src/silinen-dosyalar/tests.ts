@@ -42,16 +42,462 @@ function A(src: string): Action[] {
     });
 }
 
-export const MEASURED = { G1: 13000, TIPIK: 13000, G3: 9000, G4: 9000, ETIK: 9000, W: 9000 };
+export const MEASURED = { G1: 12565, TIPIK: 12325, G3: 4035, G4: 380, ETIK: 8745, W: -720 };
 
 const win = (outcome: string, final: number) =>
   final < 0 ? { outcome, finalMax: 0 } : { outcome, finalMin: Math.floor(final * 0.9), finalMax: Math.ceil(final * 1.1) };
 
-// Golden path adımları self-check sonrası doldurulacak.
-const STUB = A(`c PR00_DEVAM`);
+const PROLOG = (ucret: string, strateji: string) =>
+  A(`
+c PR00_DEVAM
+c PR01_DEVAM
+c ${ucret}
+c BR01_A
+c BR01B_DEVAM
+c ${strateji}
+c SABAH_DEVAM
+`);
+
+// INV gün 1: belgeler + ev + görüşme + tahta
+const INV_G1 = A(`
+c H_LOG
+e mag l1
+e mag l2
+e law l4
+e compare l3
+e mag l5
+c LOG_BITIR
+c H_IMAJ
+e mag k1
+e compare k3
+e mag k4
+e law k5
+c IMAJ_BITIR
+c H_EMN
+e compare e4
+e mag e2
+e law e1
+e mag e5
+c EMN_BITIR
+c H_EV
+t OB_CEKMECE
+t OB_MASA
+t OB_MODEM
+t OB_RESIM
+c ARAMA2_BITIR
+c H_DEVIR
+e mag d4
+e law d6
+e compare d3
+e compare d5
+c DEVIR_BITIR
+c H_CIKARIM
+m ev_eposta clue_2130
+m clue_imaj_tarih clue_kurtarma
+m clue_emn_yok clue_gsm
+c CIKARIM_BITIR
+c H_LEYLA
+c LEYLA_DON
+c H_GORUS
+c G_RESIM
+c TP_GECE soft
+c TP_DEVIR soft
+c TP_2130 soft
+c TP_IZIN soft
+c G_BITIR
+c AK1_INSAN
+`);
+
+// INV gün 2: sahneler + tanıklar + ikinci görüşme + dilekçe
+const INV_G2 = A(`
+c H_ARAMA
+t OB_YEDEK
+t OB_YUVA
+t OB_OKUYUCU
+t OB_KLIMA
+c ARAMA_BITIR
+c H_KAPI
+t OB_DEFTER
+t OB_TURNIKE
+t OB_PARK
+c ARAMA3_BITIR
+c H_CIKARIM
+m clue_son_yedek clue_bos_yuva
+c CIKARIM_BITIR
+c H_T_YASAR
+c YQ_GECE
+c YQ_SELIM
+c YQ_KORKU
+c YASAR_KARAR
+c YD_BILDIR
+c H_T_HAKAN
+c HQ_IMAJ
+c HQ_DIZUSTU
+c HAKAN_BITIR
+c H_GORUS2
+c TP_CIKIS soft
+c TP_YEDEK soft
+c TP_KIM soft
+c G_BITIR
+c H_DIL
+c DIL_TAM
+c DIL_BILIRKISI
+c DIL_KART
+c DIL_VER
+c NA_KANAL
+`);
+
+// INV gün 3: ham kayıt + Bülent + duruşmaya
+const INV_G3 = A(`
+c H_TAM
+e compare t2
+e mag t4
+e mag t1
+c INV_TAM_BITIR
+c H_T_BULENT
+c BQ_IMAJ
+c BQ_KURTARMA
+c BQ_TARIK
+c BULENT_BITIR
+c H_CIKARIM
+m clue_cihaz_adi clue_emn_cihaz
+c CIKARIM_BITIR
+c H_LEYLA
+c LEYLA_DON
+c H_DURUSMA
+c GECE_DEVAM
+`);
+
+// 1. celse (USUL yolu)
+const CELSE1 = A(`
+c H100K_A
+c H100_DEVAM
+c Q_2130
+c Q_IZIN
+c Q_DEVIR
+c Q_BITIR
+c H102_A
+p B1
+p B2
+p B3
+p B4
+p B5
+s ev_imaj_rapor B1
+s ev_imaj_rapor B2
+s ev_devir B4
+s ev_emniyet B5
+o g_kanaat B6
+s ev_imaj_rapor B3
+c H103K_DEVAM
+c H104_A
+c R_KART
+c R_OPR
+c R_ZEYIL
+c R_BITIR
+c H105B_DEVAM
+c H106_DEVAM
+`);
+
+// Ara evresi (BERAAT_B: savcılığa bildir). Ara: 3 gün × 4 EP; frees 4. paid act'ten önce.
+const ARA1 = A(`
+c ARA_GIRIS_DEVAM
+c A_SEMA
+e compare s2
+e mag s4
+e mag s5
+e compare s1
+c ARA_SEMA_BITIR
+c A_TURNIKE
+e mag p2
+e compare p4
+e compare p5
+c ARA_TURN_BITIR
+c A_CIKARIM
+m clue_turnike_gm clue_bos_yuva
+m clue_sema_cihaz clue_zimmet
+c ARA_CIKARIM_BITIR
+c A_LEYLA
+c ARA_LEYLA_DON
+c A_OPR
+e mag o3
+e mag o4
+e mag o2
+c ARA_OPR_BITIR
+c A_ZEYIL
+e mag z2
+e law z3
+e mag z4
+c ARA_ZEY_BITIR
+c ARA_AKSAM1_DEVAM
+`);
+
+const ARA2 = A(`
+c A_EKSPER
+t OB_DAMGA
+t OB_ZDEFTER
+t OB_RAF
+c ARA_EKS_BITIR
+c A_CIKARIM
+m clue_hat_gm clue_gsm
+m clue_limit clue_teminat
+m clue_eksper clue_ziyaretci
+c ARA_CIKARIM_BITIR
+c A_NALAN
+c NQ_POLICE
+c NQ_GM
+c NQ_KANAL
+c NALAN_BITIR
+c A_HAKAN
+c HA_DISK
+c HAKAN2_BITIR
+c A_DIL
+c AD_TANIK
+c AD_VER
+c ARA_AKSAM2_DEVAM
+`);
+
+const ARA3 = (karar: string) =>
+  A(`
+c A_SELIM
+c SQ_CIHAZ
+c SQ_YEDEK
+c SQ_SON
+c SELIM_BITIR
+c ST_RED
+c A_KARAR
+c ${karar}
+c A_YASAR
+c YA_DOGRU
+c A_DURUSMA
+c ARA_SON_DEVAM
+`);
+
+// 2. celse: dayanaklar + savunma + son söz, kapanışı parametrik.
+const CELSE2_HEAD = A(`
+c T00_DEVAM
+c T01_SEMA
+c T01_BITIR
+p T1
+p T4
+p T2
+p T3
+s ev_turnike T1
+s ev_zeyil T4
+s ev_eposta T2
+s ev_turnike T5
+c T02K_DEVAM
+p Y1
+p Y2
+s ev_turnike Y1
+c T03_BITIR
+c X_ITIRAZ
+p NL1
+p NL2
+s ev_zeyil NL1
+c T04_BITIR
+c T05_DEVAM
+c P_RIZA
+c P_CIHAZ
+c P_MOTIF
+c P_BITIR
+`);
+
+const CELSE2_FULL = (savunma: string, sonSoz: string) => [...CELSE2_HEAD, ...A(`c ${savunma}\nc ${sonSoz}`)];
+
+// BERAAT_B: tam yol, savcılığa bildir, güçlü masumiyet savunması
+const G1_STEPS = [
+  PROLOG('BR00_A', 'STR_MASUMIYET'),
+  INV_G1,
+  INV_G2,
+  INV_G3,
+  CELSE1,
+  ARA1,
+  ARA2,
+  ARA3('K_BILDIR'),
+  CELSE2_FULL('S_MASUMIYET', 'L_HAFIZA'),
+];
+
+// TIPIK = BERAAT_E: aynı soruşturma, ama savcılığa bildirmez (bekler); usul savunması
+const TIPIK_STEPS = [
+  PROLOG('BR00_A', 'STR_USUL'),
+  INV_G1,
+  INV_G2,
+  INV_G3,
+  CELSE1,
+  ARA1,
+  ARA2,
+  ARA3('K_BEKLE'),
+  CELSE2_FULL('S_USUL', 'L_HAFIZA'),
+];
+
+// NITELENDIRME: rıza kurulur, imaj çürütülür; ama cihaz/hat kimliği kurulmaz → 244 düşer, 243 kalır
+const G3_STEPS = [
+  PROLOG('BR00_C', 'STR_INDIRIM'),
+  A(`
+c H_LOG
+e mag l1
+c LOG_BITIR
+c H_IMAJ
+e mag k1
+e mag k4
+e compare k3
+c IMAJ_BITIR
+c H_EV
+t OB_CEKMECE
+t OB_MASA
+c ARAMA2_BITIR
+c H_GORUS
+c TP_2130 soft
+c TP_IZIN soft
+c TP_DEVIR soft
+c G_BITIR
+c H_CIKARIM
+m ev_eposta clue_2130
+m clue_imaj_tarih clue_kurtarma
+c CIKARIM_BITIR
+c H_LEYLA
+c LEYLA_DON
+c H_DURUSMA
+c GECE_DEVAM
+`),
+  A(`
+c H100K_A
+c H100_DEVAM
+c Q_IZIN
+c Q_DEVIR
+c Q_BITIR
+c H102_A
+p B1
+p B2
+p B3
+s ev_imaj_rapor B1
+s ev_imaj_rapor B2
+s ev_imaj_rapor B3
+c H103K_DEVAM
+c H104_A
+c R_BITIR
+c H105B_DEVAM
+c H106_DEVAM
+`),
+  A(`
+c ARA_GIRIS_DEVAM
+c A_SEMA
+e compare s2
+e mag s4
+e mag s5
+c ARA_SEMA_BITIR
+c A_LEYLA
+c ARA_LEYLA_DON
+c A_DURUSMA
+c ARA_SON_DEVAM
+`),
+  A(`
+c T00_DEVAM
+c T01_SEMA
+c T01_BITIR
+p T2
+s ev_eposta T2
+c T02_BITIR
+c T05_DEVAM
+c P_RIZA
+c P_IMAJ
+c P_BITIR
+c S_TERDIT
+c L_HAFIZA
+`),
+];
+
+// MAHKUMIYET: soruşturma yapılmadan duruşmaya; zayıf savunma
+const G4_STEPS = [
+  PROLOG('BR00_B', 'STR_INDIRIM'),
+  A(`
+c H_DURUSMA
+c GECE_DEVAM
+`),
+  A(`
+c H100K_B
+c H100_DEVAM
+c Q_BITIR
+c H102_C
+c H103_BITIR
+c H104_B
+c R_BITIR
+c H105B_DEVAM
+c H106_DEVAM
+`),
+  A(`
+c ARA_GIRIS_DEVAM
+c A_DURUSMA
+c ARA_SON_DEVAM
+`),
+  A(`
+c T00_DEVAM
+c T01_KABUL
+c T01_BITIR
+c T02_BITIR
+c T05_DEVAM
+c P_RIZA
+c P_IMAJ
+c P_CIHAZ
+c P_BITIR
+c S_DUYGU
+c L_SESSIZ
+`),
+];
+
+// ETIK: ara evresinde müvekkile izinsiz giriş yaptır
+const ETIK_STEPS = [
+  PROLOG('BR00_A', 'STR_MASUMIYET'),
+  INV_G1,
+  INV_G2,
+  INV_G3,
+  CELSE1,
+  ARA1,
+  A(`
+c A_SELIM
+c SQ_CIHAZ
+c SQ_SON
+c SELIM_BITIR
+c ST_KABUL
+c A_DURUSMA
+c ARA_SON_DEVAM
+`),
+  A(`
+c T00_ETIK
+c TETIK_DEVAM
+`),
+];
+
+// W (çöküş): 1. celsede savcılık tanığına art arda yanlış delil; ♥0
+const W_STEPS = [
+  PROLOG('BR00_B', 'STR_USUL'),
+  A(`
+c H_DURUSMA
+c GECE_DEVAM
+`),
+  A(`
+c H100K_B
+c H100_DEVAM
+c Q_BITIR
+c H102_B
+s ev_sikayet B1
+s ev_sikayet B1
+s ev_sikayet B1
+s ev_sikayet B1
+s ev_sikayet B1
+c COKUS_DEVAM
+`),
+];
 
 export const tests: CasePart = {
   tests: {
-    goldenPaths: [goldenPath(TYPICAL_PATH, win('BERAAT_E', MEASURED.TIPIK), STUB)],
+    goldenPaths: [
+      goldenPath('G1', win('BERAAT_B', MEASURED.G1), ...G1_STEPS),
+      goldenPath(TYPICAL_PATH, win('BERAAT_E', MEASURED.TIPIK), ...TIPIK_STEPS),
+      goldenPath('G3', win('NITELENDIRME', MEASURED.G3), ...G3_STEPS),
+      goldenPath('G4', win('MAHKUMIYET', MEASURED.G4), ...G4_STEPS),
+      goldenPath('ETIK', win('ETIK', MEASURED.ETIK), ...ETIK_STEPS),
+      goldenPath('W', win('MAHKUMIYET', MEASURED.W), ...W_STEPS),
+    ],
   },
 };

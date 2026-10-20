@@ -152,7 +152,8 @@ ozan: Sayın Hâkim, müdafiin sunduğu kayıtlar, sanığın bu hafta şirketin
 cevdet: Selim Aktaş dosyası! Hı-hım.
 # BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE [bg:durusma_salonu]
 kemal: Duruşmaya devam olundu. Celse arasında bir gelişme oldu; Cumhuriyet savcısı söz istedi.
-ferda: Sayın Hâkim, müdafiin suç duyurusu üzerine Başsavcılığımızca bir soruşturma başlatıldı. Bilirkişi raporu, kart geçiş kayıtları ve operatör cevabı birlikte değerlendirildiğinde, silme oturumunun sanığa ait olmayan bir cihaz ve hattan açıldığı görülmektedir.
+ferda: Sayın Hâkim, müdafiin suç duyurusu üzerine Başsavcılığımızca bir soruşturma başlatıldı.
+ferda: Bilirkişi raporu, kart kayıtları ve operatör cevabı birlikte değerlendirildiğinde, silme oturumunun sanığa ait olmayan bir cihaz ve hattan açıldığı görülmektedir.
 ferda: Bu soruşturma bu dosyayla da ilgilidir. Beyanlarımı mütalaada sunacağım.
 > Salonun arkasında Tarık Sezer dik oturdu; ama eli, ceketinin iç cebine gitti ve orada kaldı.
 ~ İlk kez savcı benden önce konuştu ve benim söyleyeceğimi söyledi. Bu, üç haftalık bir dilekçenin sesi.
@@ -207,7 +208,8 @@ selim: Üzgünüm avukat hanım. Gül haklı. Başka bir avukat bulacağız.
         W(
           any(has('ev_sema'), flag('bilirkisi_atandi')),
           `
-kemal: Bilirkişi raporu okundu. Orijinal disklerden alınan imaj, DataKale raporundaki bazı bulguların kurtarma yazılımlarının izi olduğunu; silme oturumunun cihaz adının sanığın cihazı olmadığını tespit etmiş. Müdafi, diyeceğiniz?
+kemal: Bilirkişi raporu okundu. Orijinal diskten alınan imaj, DataKale raporundaki bazı bulguların kurtarma yazılımının izi olduğunu tespit etmiş.
+kemal: Rapora göre silme oturumunun cihaz adı da sanığın cihazı değil. Müdafi, diyeceğiniz?
 ~ Tarafsız bir rapor. Elimdeki en sağlam kâğıt. Şimdi onu doğru kullanmam lazım.
 `,
         ),
@@ -641,7 +643,8 @@ kemal: Tutanağa geçsin.
           { ref: 'mutalaa_beraat_b' },
           `
 kemal: Delillerin tartışılması tamamlandı. Esas hakkındaki mütalaa.
-ferda: Sayın Hâkim, yapılan yargılama ve Başsavcılığımızın soruşturması birlikte değerlendirildiğinde: silme oturumu sanığa ait olmayan bir cihaz ve hattan açılmıştır; sanığın 21.30’daki erişimi ise işveren iznine dayanmaktadır.
+ferda: Sayın Hâkim, yargılama ve Başsavcılığımızın soruşturması birlikte değerlendirildiğinde: silme oturumu sanığa ait olmayan bir cihaz ve hattan açılmıştır.
+ferda: Sanığın 21.30’daki erişimi ise işveren iznine dayanmaktadır.
 ferda: Sanığın üzerine atılı suçları işlemediği sabittir. CMK 223/2-b uyarınca beraatine; fiilin gerçek failine ilişkin soruşturmanın derinleştirilmesine karar verilmesini talep ederim.
 > Savcı oturdu. Dinleyici sırasında Tarık Sezer’in yeri boştu; ara verildiğinde çıkmış, dönmemişti.
 ~ Bir savcının “işlemediği sabittir” demesi bir zafer değil. İşini sonuna kadar yapmasıdır. Bu dosyada ilk kez biri öyle yaptı; ben de ona bir dilekçeyle yardım ettim.
@@ -699,7 +702,8 @@ kemal: Müdafi, esas hakkındaki savunmanız.
           { ref: 'baskasi_kanit' },
           'arg_cihaz',
           `
-- Üçüncüsü: cihaz. Silme oturumu, kullanıcı adı müvekkilime ait olsa da, onun bilgisayarından değil; başka bir cihazdan, başka bir hattan açıldı. Kullanıcı adı bir kişi değildir; bir anahtardır ve o anahtarın kopyası başkasının elindeydi.
+- Üçüncüsü: cihaz. Silme oturumu, kullanıcı adı müvekkilime ait olsa da onun bilgisayarından değil; başka bir cihazdan, başka bir hattan açıldı.
+- Kullanıcı adı bir kişi değildir; bir anahtardır. O anahtarın kopyası başkasının elindeydi.
 `,
         ),
         dayanak(
@@ -779,7 +783,8 @@ kemal: Müdafi, esas hakkındaki savunmanız.
           category: 'SAVUNMA_STRATEJISI',
           responses: B(`
 - Sayın Hâkim, öncelikle müvekkilimin beraatini talep ediyorum.
-- Mahkeme aksi kanaatteyse: verileri yok etme eylemi (TCK 244/2) güvenilir hiçbir delille sanığa bağlanamamıştır. Geriye yalnızca 21.30’daki erişim kalır; o da işveren iznine dayandığından sisteme hukuka aykırı girme (TCK 243/1) da oluşmaz.
+- Mahkeme aksi kanaatteyse: verileri yok etme eylemi (TCK 244/2) güvenilir hiçbir delille sanığa bağlanamamıştır.
+- Geriye yalnızca 21.30’daki erişim kalır; o da işveren iznine dayandığından sisteme hukuka aykırı girme (TCK 243/1) de oluşmaz.
 ~ Bir yandan “yapmadı,” öbür yandan “yaptıysa bile izinliydi.” Hukuk bunu ister. Selim’in gözleri istemiyor.
 `),
         }),

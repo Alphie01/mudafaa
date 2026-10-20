@@ -257,7 +257,7 @@
       "onEnter": [
         { "type": "DISCOVER", "evidence": "ev_tam_log" },
         { "type": "VAR", "var": "day", "op": "inc", "value": 1 },
-        { "type": "VAR", "var": "ap", "op": "set", "value": 5 }
+        { "type": "VAR", "var": "ap", "op": "set", "value": 6 }
       ],
       "routes": [{ "when": { "cmp": [{ "var": "day" }, "==", 2] }, "to": "INV_AKSAM1" }, { "to": "INV_AKSAM2" }],
       "choices": []
@@ -2232,6 +2232,34 @@
               "text": "Bir tehdit mi, bir tavsiye mi? İkisi de olabilir. İkisi de beni yarın sabah dokuzda o salona sokmaz; ama sokacak.",
               "style": "thought"
             },
+            {
+              "speaker": "narrator",
+              "text": "Masaya oturdum. Önümde bir yığın kâğıt: bir özet döküm, bir uzman raporu, bir devir tutanağı, bir e-posta çıktısı. Hepsinin ortak bir yeri vardı: “S.AKTAS.” Bir kullanıcı adı. Beş harf, bir nokta."
+            },
+            {
+              "speaker": "player",
+              "text": "Dokuz yıl bir adam bu beş harfi her sabah yazdı. Sonra işten çıktı. Beş harf masada kaldı; bir zarfın içinde, bir genel müdürün çekmecesinde.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Yarın bir uzman kürsüye çıkacak ve “kayıt yalan söylemez” diyecek. Doğru; kayıt yalan söylemez.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Ama kaydı tutan, özetleyen, mahkemeye getiren üç ayrı el var. Benim işim o elleri göstermek; kaydı değil, elleri.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Defne’nin resmini çantamdan çıkardım; Gül vermişti, Selim’e iletecektim, unutmuştum. Bir masa, bir ekran, bir adam ve odanın içinde çizilmiş bir güneş."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir çocuk babasını bir ekranın başında çizmiş. Yarın o ekranın başına bir başkasını oturtmam gerekiyor; kanıtla, sesle, sırayla.",
+              "style": "thought"
+            },
             { "speaker": "narrator", "text": "Telefon titredi. Leyla’dan tek bir mesaj, gece yarısına beş kala." },
             {
               "speaker": "leyla",
@@ -2241,6 +2269,11 @@
             {
               "speaker": "narrator",
               "text": "Zarfı çantama koydum. Yağmur organize sanayinin bacalarına, Nilüfer’in balkonlarına, adliyenin taş merdivenlerine aynı anda yağıyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir dosya silinince gitmez; sadece kimin elinden çıktığını unutursun. Yarın hatırlatacağım. Birine.",
+              "style": "thought"
             }
           ]
         }

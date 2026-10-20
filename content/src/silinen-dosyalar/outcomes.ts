@@ -173,7 +173,16 @@ ozan: İyi iş çıkardınız meslektaşım. İstinafta görüşürüz; müvekki
 # ARSLAN HUKUK · GECE [bg:buro_gece]
 > Panodaki kırmızı ipi çözdüm. Cihaz adı, hat, poliçe; hepsi bir kutuya girdi. Ortadaki boşluk, bir ismin boşluğu, hâlâ boştu.
 ~ Bir kullanıcı adını bir kişi olmaktan çıkardık. Yerine bir soru koyduk. Bazen adalet bir kapıyı açar; ama ışığı yakmaz.
-~ Selim eve gitti. Bir şirketin hafızası hâlâ bir yerde, bir yedeğin olmadığı bir boşlukta. Bunu bilmek, bu gece bana kalan.
+> Kapı aralandı. Leyla, paltosu kolunda, ışığı söndürmeden içeri baktı.
+leyla: Beraat aldın. Ama yüzün bir beraat kazanmış gibi değil.
+- “Sabit değildir” dedi hâkim. “İşlemedi” demedi. Arada bir fark var.
+leyla: Var. O fark, hukukun en dürüst cümlesidir: “bilmiyorum, o yüzden cezalandırmıyorum.” Bir gün o farkı sevmeyi öğrenirsin. Bugün değil.
+leyla: Savcılığa yazmadın. Bir isim buldun, kürsüde eğip büktün, ama bir dilekçeye dökmedin. O yüzden gerçek fail hâlâ dışarıda.
+- Biliyorum. Bir daha olmayacak.
+leyla: Olmayacak. Ortak avukat bunu bir kere öğrenir.
+> Gitti. Masamda Defne’nin resmi duruyordu; Selim’e vermeyi yine unutmuştum. Bir masa, bir ekran, bir adam ve odanın içinde bir güneş.
+~ Selim eve gitti. Bir şirketin hafızası hâlâ bir yerde, bir yedeğin olmadığı bir boşlukta. Ve bir ismin soruşturması, benim yazmadığım bir dilekçenin boşluğunda bekliyor.
+~ Kazandım. Ama kazanmakla doğruyu bulmak arasındaki farkı, bu gece bir kez daha öğrendim. Bunu bilmek, bana kalan.
 `),
       ],
     }),

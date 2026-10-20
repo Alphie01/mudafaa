@@ -10,7 +10,7 @@ export const H1 = chapter('Bölüm 3 · Birinci Celse', 'DURUŞMA · 1. CELSE');
 export const ARA = chapter('Bölüm 4 · Ara', 'DAVA #13 · ARA');
 export const H2 = chapter('Bölüm 5 · İkinci Celse', 'DURUŞMA · 2. CELSE');
 
-/** Soruşturma: 3 gün × 5 eylem puanı (push / $return). */
+/** Soruşturma: 3 gün × 6 eylem puanı (push / $return). */
 export const p1 = phase({
   hub: 'INV_HUB',
   dayEnd: 'INV_DAY_END',
@@ -18,12 +18,12 @@ export const p1 = phase({
   dayVar: 'day',
   apVar: 'ap',
   days: 3,
-  ap: 5,
+  ap: 6,
 });
 
-/** Ara evresi: 3 gün × 3 eylem puanı; yığınsız (etkinlikler doğrudan ARA_HUB'a döner). */
+/** Ara evresi: 3 gün × 4 eylem puanı; yığınsız (etkinlikler doğrudan ARA_HUB'a döner). */
 export const ARA_DAYS = 3;
-export const ARA_AP = 3;
+export const ARA_AP = 4;
 
 /** Bursa 9. Asliye Ceza: tek hâkim; solda katılan vekili, sağda Cumhuriyet savcısı. */
 const bench = [

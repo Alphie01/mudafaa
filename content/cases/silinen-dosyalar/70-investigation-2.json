@@ -9,7 +9,7 @@
       "onEnter": [
         { "type": "VAR", "var": "in_court", "op": "set", "value": false },
         { "type": "VAR", "var": "ara_day", "op": "set", "value": 1 },
-        { "type": "VAR", "var": "ara_ap", "op": "set", "value": 3 },
+        { "type": "VAR", "var": "ara_ap", "op": "set", "value": 4 },
         { "type": "DISCOVER", "evidence": "ev_sema" },
         { "type": "DISCOVER", "evidence": "ev_tam_log" },
         { "type": "DISCOVER", "evidence": "ev_turnike" },
@@ -110,7 +110,33 @@
             },
             {
               "speaker": "narrator",
-              "text": "Leyla gitti. Odada dört kurumun kâğıdı ve ben kaldım. Dışarıda yağmur, her zamanki gibi, herkesin üstüne aynı anda."
+              "text": "Kapının eşiğinde bir an daha durdu. Masamdaki sigara paketine değil; pencereye baktı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Dört yıl önce bir dosyam vardı. Bir kaydın “bu adam” dediği bir dosya. Ben de inandım o kayda. İnsan bir makineye inanınca rahatlar; sorumluluk makinede sanır."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Sonra o adamın masum olduğu çıktı. Çıktığında ben başka bir şehirdeydim, başka bir dosyadaydım. Ona bunu kimse söylemedi bile."
+            },
+            { "speaker": "player", "text": "Ne yaptınız?" },
+            {
+              "speaker": "leyla",
+              "text": "Hiçbir şey. Yapamadım. O yüzden sana söylüyorum: kayda değil, kaydın kenarındaki boşluğa bak. Boşluklar konuşur; makineler sadece tekrar eder."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla gitti. Masanın köşesindeki ters çerçeveye baktım; yıllardır orada. Belki o dosyaydı, belki değil. Sormadım."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Odada dört kurumun kâğıdı ve ben kaldım. Dışarıda yağmur, her zamanki gibi, herkesin üstüne aynı anda; suçlunun da, suçsuzun da, henüz hangisi olduğu belli olmayanın da."
+            },
+            {
+              "speaker": "player",
+              "text": "Dört kâğıt. Bir yüz. Ve bir mentorun dört yıl taşıdığı bir pişmanlık. Bu dosyayı yalnızca ben kazanmayacağım; o da benimle kazanmak istiyor.",
+              "style": "thought"
             }
           ]
         }
@@ -858,7 +884,7 @@
           "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
           "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
         },
-        { "id": "ARA_EKS_BITIR", "kind": "CONTINUE", "label": "Dosyayı kapat", "role": "BACK", "next": "$return" }
+        { "id": "ARA_EKS_BITIR", "kind": "CONTINUE", "label": "Dosyayı kapat", "role": "BACK", "next": "ARA_HUB" }
       ]
     },
     {
@@ -2476,7 +2502,7 @@
       "title": "Gün sonu",
       "onEnter": [
         { "type": "VAR", "var": "ara_day", "op": "inc", "value": 1 },
-        { "type": "VAR", "var": "ara_ap", "op": "set", "value": 3 }
+        { "type": "VAR", "var": "ara_ap", "op": "set", "value": 4 }
       ],
       "routes": [{ "when": { "cmp": [{ "var": "ara_day" }, "==", 2] }, "to": "ARA_AKSAM1" }, { "to": "ARA_AKSAM2" }],
       "choices": []

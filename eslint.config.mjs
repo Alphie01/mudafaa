@@ -10,6 +10,8 @@ export default tseslint.config(
       '**/coverage/**',
       'apps/mobile/**',
       'design/**',
+      // Claude Code iş akışı betikleri: agent/args/pipeline global'leri ve üst düzey return ile çalışır.
+      'tools/content/workflows/**',
       '.superpowers/**',
       '.claude/**',
     ],

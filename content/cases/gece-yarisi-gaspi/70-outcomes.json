@@ -8,10 +8,13 @@
       "stamp": "AZİL",
       "stampTone": "red",
       "sentence": "Vekâlet sona erdi · dava sürüyor",
-      "verdictText": "Mahkemece, sanık müdafiinin duruşma dışında mağdura fotoğraf göstererek teşhis yaptırmaya çalıştığının anlaşılması üzerine durumun Bursa Barosu Başkanlığına ve Bursa Cumhuriyet Başsavcılığına bildirilmesine; mağdurun bundan sonraki teşhise ilişkin beyanlarının değerlendirmede dikkate alınmamasına; sanığın müdafiini azletmesi nedeniyle duruşmanın yeni müdafiin katılımıyla devamına karar verildi.",
+      "verdictText": "Mahkemece, sanık müdafiinin duruşma dışında mağdura fotoğraf göstererek teşhis yaptırmaya çalıştığının anlaşılması üzerine durumun tutanağa geçirilmesine ve Bursa Barosu Başkanlığı ile Bursa Cumhuriyet Başsavcılığına bildirilmesine; sanığın müdafiini azletmesi nedeniyle duruşmanın yeni müdafiin katılımıyla devamına karar verildi.",
       "reasoning": [
         { "text": "Müdafi, kolluğun teşhisi kirleten tek fotoğraf gösterimini savunma eliyle tekrarlamıştır." },
         { "text": "Sanık, vekâlet ilişkisini tek taraflı olarak sona erdirmiştir (TBK 512/1)." },
+        {
+          "text": "Mağdurun beyanlarının ne ölçüde değerlendirileceği hükümde, delillerin bütünü içinde takdir edilecektir (CMK 217)."
+        },
         { "text": "Dava, başka bir müdafiin katılımıyla devam edecektir; senin dosyan burada kapandı." }
       ],
       "legalBasis": "Av.K. 34; TCK 277; TBK 512/1; PVSK ek md. 6; CMK 217",
@@ -69,17 +72,7 @@
       "id": "BERAAT_B",
       "class": "ACQUITTAL",
       "priority": 2,
-      "when": {
-        "all": [
-          { "not": { "flag": "cokus" } },
-          { "flag": "tolga_teslim" },
-          { "ref": "teshis_coktu" },
-          { "any": [{ "hasEvidence": "ded_baskasi" }, { "hasEvidence": "ded_hesap" }] },
-          { "any": [{ "hasEvidence": "ded_mazeret" }, { "hasEvidence": "ded_evde" }] },
-          { "cmp": [{ "var": "pers" }, ">=", 8] },
-          { "cmp": [{ "score": "final" }, ">=", 10000] }
-        ]
-      },
+      "when": { "flag": "tolga_teslim" },
       "stamp": "BERAAT",
       "stampTone": "green",
       "header": "TÜRK MİLLETİ ADINA",
@@ -87,15 +80,27 @@
       "verdictText": "Sanık Barış Kılınç’ın üzerine atılı nitelikli yağma suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; başka suçtan tutuklu değilse derhâl TAHLİYESİNE, hakkındaki adli kontrol tedbirinin kaldırılmasına; CMK 141/1-e uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142 ile 6384 sayılı Kanuna göre yapılabileceğinin bildirilmesine (CMK 231/3); mağdura ait köstekli saatin mağdura iadesine; karar ve dosya örneklerinin Tolga Kılınç hakkındaki soruşturmaya ve teşhis işlemine ilişkin suç duyurusuna eklenmek üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; istinaf yolu açık olmak üzere karar verildi.",
       "reasoning": [
         {
+          "text": "Tolga Kılınç, Başsavcılıkta müdafii huzurunda olayı ikrar etmiş; mağdura ait köstekli saat onun odasında ele geçirilmiştir."
+        },
+        {
+          "text": "Tolga Kılınç, sanık adına açılmış kurye hesabını olay gecesi kendi telefonundan kendisinin kullandığını beyan etmiştir; konum kaydı bu kullanımı gösterir."
+        },
+        {
+          "when": { "ref": "hesap_curudu" },
+          "text": "Hesabın o gece başka bir cihazdan açıldığı ve doğrulama özçekimindeki kişinin sol kulağında halka bulunduğu, ikrardan bağımsız olarak dosyaya girmiştir."
+        },
+        {
+          "when": { "ref": "teshis_coktu" },
           "text": "Mağdurun teşhisi, kolluk görevlisinin teşhisten önce acil serviste tek fotoğraf göstermesi nedeniyle kanuni güvencelerden yoksundur ve hükme esas alınamaz (PVSK ek md. 6; CMK 217)."
         },
         {
-          "text": "Sanık, olay saatinde Yıldırım’daki evindedir; bu husus bağımsız tanık beyanı, kesinti kaydı ve telefon kaydıyla doğrulanmıştır."
+          "when": { "ref": "mazeret_var" },
+          "text": "Sanığın olay saatinde Yıldırım’daki evinde olduğu bağımsız kayıtlarla da doğrulanmıştır."
         },
         {
-          "text": "Sanık adına açılmış kurye hesabı olay gecesi başka bir cihazdan, sol kulağında halka bulunan bir kişi tarafından kullanılmıştır; bu tarif mağdurun ilk beyanıyla örtüşmektedir."
+          "when": { "flag": "cokus" },
+          "text": "Müdafiin duruşmadaki dağınık sunumları, Başsavcılıkça toplanan delillerin açıklığını değiştirmemiştir."
         },
-        { "text": "Tolga Kılınç olayı ikrar etmiş; mağdura ait köstekli saat onun odasında ele geçirilmiştir." },
         { "text": "Deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir." }
       ],
       "legalBasis": "CMK 223/2-b; CMK 141/1-e, 142, 231/3; PVSK ek md. 6; CMK 217",
@@ -106,7 +111,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 120] }, 1000] }
         }
       },
-      "howToReach": "Teşhisin kirlendiğini kanıtla, mazereti kayda bağla, hesabı kimin taşıdığını göster ve bilgiyi savcılığa yaz; aileye ne yapacağını değil, ne yapabileceğini söyle.",
+      "howToReach": "Hesabı kimin taşıdığını kayıtlarla göster ve bunu savcılığa yaz (CMK 158); aileye ne yapacağını değil, ne yapabileceğini söyle. Kovalamak avukatın işi değildir.",
       "epilogue": [
         {
           "lines": [
@@ -166,7 +171,33 @@
             },
             { "speaker": "leyla", "text": "Bugün kimseyi yenmedin." },
             { "speaker": "player", "text": "Yenmedim." },
-            { "speaker": "leyla", "text": "İyi." },
+            { "speaker": "leyla", "text": "İyi." }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "kadir_kocluk" }, { "flag": "ali_kocluk" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Kapıdan çıkarken Leyla döndü. Sesi alçaktı; koridorda kimse duymasın diye değil, ben unutmayayım diye."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir şey daha. Bir tanığa söyleyeceği cümleyi verdin. Bugün beraat geldi; o cümle gelmedi diye değil, gelmesine rağmen."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Savcı Başsavcılığa bir yazı yazacak. Cevabını sen yazacaksın; ben okumayacağım. Okumam gerekmesin diye."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir beraat, bir avukatın yaptığı her şeyi temize çıkarmaz. Heyet Barış’ı aklar; beni aklayacak bir heyet yok.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
             {
               "speaker": "narrator",
               "text": "Odasına döndü. Masasının köşesindeki ters çerçeveye bir an baktı; elini uzattı, sonra çekti."
@@ -192,10 +223,12 @@
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
-          { "cmp": [{ "var": "pers" }, ">=", 6] },
-          { "ref": "teshis_coktu" },
-          { "ref": "lehe2" },
-          { "cmp": [{ "score": "final" }, ">=", 9000] }
+          {
+            "any": [
+              { "flag": "mutalaa_b" },
+              { "all": [{ "ref": "beraat_delil" }, { "cmp": [{ "var": "pers" }, ">=", 6] }, { "ref": "derin" }] }
+            ]
+          }
         ]
       },
       "stamp": "BERAAT",
@@ -209,11 +242,19 @@
           "text": "Mağdurun teşhisi, teşhisten önce acil serviste tek fotoğraf gösterilmesi ve tutanağın kanuni güvencelerden yoksun olması nedeniyle hükme esas alınamamıştır (PVSK ek md. 6; CMK 217)."
         },
         {
-          "when": { "any": [{ "hasEvidence": "ded_halka" }, { "flag": "contra_n5" }] },
+          "when": { "all": [{ "not": { "flag": "contra_n3" } }, { "not": { "flag": "contra_f2" } }] },
+          "text": "Teşhis tutanağı, tarifin teşhisten sonra alındığını ve sanığın fotoğrafının diğerlerinden farklı olduğunu göstermektedir; teşhis kanuni güvencelerden yoksundur (PVSK ek md. 6)."
+        },
+        {
+          "when": { "ref": "hesap_curudu" },
+          "text": "Sanık adına açılmış kurye hesabı olay gecesi sanığa ait olmayan bir cihazdan açılmıştır; konum kaydı hesabın yerini gösterir, sanığın yerini göstermez."
+        },
+        {
+          "when": { "ref": "halka_var" },
           "text": "Mağdurun kirlenmeden önceki ilk tarifinde failin sol kulağında halka bulunduğu belirtilmiş; sanığın kulaklarında delik ya da iz bulunmamaktadır."
         },
         {
-          "when": { "hasEvidence": "ded_mazeret" },
+          "when": { "all": [{ "hasEvidence": "ded_mazeret" }, { "not": { "flag": "kadir_kocluk" } }] },
           "text": "Sanığın olay saatinde evinde olduğu tanık beyanı ve kesinti kaydıyla desteklenmiştir."
         },
         {
@@ -221,8 +262,16 @@
           "text": "Sanığın telefonu olay saatinden iki dakika önce evinin bulunduğu bölgeden elektrik arıza hattını aramıştır."
         },
         {
-          "when": { "any": [{ "hasEvidence": "ded_hesap" }, { "hasEvidence": "ded_baskasi" }] },
-          "text": "Sanık adına açılmış kurye hesabı olay gecesi sanığa ait olmayan bir cihazdan açılmıştır; konum kaydı hesabın yerini gösterir, sanığın yerini göstermez."
+          "when": { "flag": "contra_f6" },
+          "text": "Kolluk görevlisi, sanığın mazeretine ilişkin hiçbir araştırma yapılmadığını duruşmada kabul etmiştir."
+        },
+        {
+          "when": { "flag": "kadir_ifsa" },
+          "text": "Yakın komşu tanığın saate ilişkin beyanı, müdafiin tanığa saat söylediğinin anlaşılması nedeniyle hükme esas alınmamıştır."
+        },
+        {
+          "when": { "flag": "ali_ifsa" },
+          "text": "Olay yeri tanığı bakkalın müdafi tarafından yönlendirildiğine ilişkin beyanı tutanağa geçmiş ve Başsavcılığa bildirilmiştir; bu tanığın bıçağa ilişkin anlatımı değerlendirmeye alınmamıştır."
         },
         {
           "when": { "any": [{ "hasEvidence": "ded_bicak" }, { "flag": "contra_n2" }] },
@@ -231,6 +280,14 @@
         {
           "when": { "flag": "gamze_dinlendi" },
           "text": "Acil servis hemşiresi, teşhisten önce mağdura telefondan tek fotoğraf gösterildiğini duruşmada doğrulamıştır."
+        },
+        {
+          "when": { "flag": "mutalaa_b" },
+          "text": "Cumhuriyet savcısı da esas hakkındaki mütalaasında sanığın beraatini talep etmiştir."
+        },
+        {
+          "when": { "flag": "contra_f7" },
+          "text": "Kolluk tanığı, “onaylı” denen kimlik doğrulama özçekimine ve oturumun açıldığı cihaza hiç bakmadığını duruşmada kabul etmiştir."
         },
         {
           "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2)."
@@ -244,7 +301,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
         }
       },
-      "howToReach": "Teşhisin kirlendiğini göster; mazeret ya da hesabın başkasınca kullanıldığı gibi en az iki bağımsız lehe bulgu kur.",
+      "howToReach": "Delil zincirini tamamla: teşhisin kirlendiğini göster, savcının konum kaydını kayıtlarla cevapla (hesap o gece başka bir telefonda ya da başka bir yüzdeydi) ve mazereti bağımsız bir kayda bağla. Duruşmada heyeti ikna et (en az 6).",
       "epilogue": [
         {
           "lines": [
@@ -265,7 +322,7 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "Barış iki haftadır dışarıdaydı ama bugün başka türlü çıktı. İmza defteri yok, karakol yok. Kapıdan geçerken omuzlarını düzeltti."
+              "text": "Barış üç haftadır dışarıdaydı ama bugün başka türlü çıktı. İmza defteri yok, karakol yok. Kapıdan geçerken omuzlarını düzeltti."
             }
           ]
         },
@@ -288,8 +345,44 @@
               "speaker": "narrator",
               "text": "Nermin Hanım kızıyla çıkışa yürüdü. Yanımdan geçerken durdu. Bana bakmadı; konuştu."
             },
-            { "speaker": "nermin", "text": "Saatimi kim aldı o zaman evladım?" },
-            { "speaker": "narrator", "text": "Cevabını biliyordum. Kanıtlayamamıştım. Bu ikisi aynı şey değil." },
+            { "speaker": "nermin", "text": "Saatimi kim aldı o zaman evladım?" }
+          ]
+        },
+        {
+          "when": { "flag": "bildirdi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Cevabını biliyordum; savcının masasında, ekleriyle, bir dilekçede yazıyordu. Ama bir dilekçe bir kadına saatini geri vermez."
+            },
+            { "speaker": "player", "text": "Savcılık araştırıyor Nermin Hanım. Bu sefer usulüyle." },
+            {
+              "speaker": "narrator",
+              "text": "Başını salladı. İnanmak istiyordu; inanmaya artık o kadar hevesli değildi."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "flag": "fact_tolga" }, { "not": { "flag": "bildirdi" } }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Cevabını biliyordum. Kanıtlayamamıştım. Kimseye de yazmamıştım. Bu üçü aynı şey değil."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "fact_tolga" } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Cevabını bilmiyordum. Hesabın o gece başka bir telefonda olduğunu biliyordum; o telefonun kimin cebinde olduğunu değil."
+            },
+            { "speaker": "player", "text": "Bilmiyorum Nermin Hanım. Savcılık hesabı kullananı arayacak." }
+          ]
+        },
+        {
+          "lines": [
             {
               "speaker": "narrator",
               "text": "Kızı annesini kolundan çekti. Nermin Hanım yürüdü; merdivenin başında durdu, aşağı baktı. Adliyenin merdivenleri de taştı, ıslaktı. Basamakları saymadı. Biliyordum; çünkü ben saydım: yirmi iki."
@@ -320,6 +413,28 @@
           ]
         },
         {
+          "when": { "any": [{ "flag": "kadir_kocluk" }, { "flag": "ali_kocluk" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Kapıdan çıkarken Leyla döndü. Sesi alçaktı; koridorda kimse duymasın diye değil, ben unutmayayım diye."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir şey daha. Bir tanığa söyleyeceği cümleyi verdin. Bugün beraat geldi; o cümle gelmedi diye değil, gelmesine rağmen."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Savcı Başsavcılığa bir yazı yazacak. Cevabını sen yazacaksın; ben okumayacağım. Okumam gerekmesin diye."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir beraat, bir avukatın yaptığı her şeyi temize çıkarmaz. Heyet Barış’ı aklar; beni aklayacak bir heyet yok.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "lines": [
             { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
             {
@@ -341,12 +456,189 @@
       ]
     },
     {
-      "id": "INDIRIM",
-      "class": "REDUCED",
+      "id": "ERTELEME",
+      "class": "OTHER",
       "priority": 4,
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
+          { "not": { "flag": "tolga_teslim" } },
+          {
+            "not": {
+              "all": [
+                { "not": { "flag": "cokus" } },
+                {
+                  "any": [
+                    { "flag": "mutalaa_b" },
+                    { "all": [{ "ref": "beraat_delil" }, { "cmp": [{ "var": "pers" }, ">=", 6] }, { "ref": "derin" }] }
+                  ]
+                }
+              ]
+            }
+          },
+          { "ref": "beraat_delil" },
+          { "cmp": [{ "var": "pers" }, ">=", 6] }
+        ]
+      },
+      "stamp": "ERTELEME",
+      "stampTone": "amber",
+      "sentence": "Hüküm yok · Bilirkişi incelemesi",
+      "verdictText": "Mahkemece; HızlıPaket hesap ve konum kayıtları, telefon inceleme raporu ve UEDAŞ kesinti kaydı üzerinde, kayıtların hangi cihaz ve kişiyle ilişkili olduğu ile olay saatine göre birbirleriyle uyumu konusunda bilirkişi incelemesi yaptırılmasına (CMK 63, 67); delil durumu ve tutuklulukta geçen süre gözetilerek sanığın imza yükümlülüğü şeklinde adli kontrol tedbiri uygulanarak tahliyesine (CMK 109); esas hakkındaki mütalaa için dosyanın Cumhuriyet savcılığına tevdiine ve duruşmanın ertelenmesine karar verildi.",
+      "reasoning": [
+        {
+          "text": "Mağdurun teşhisi, kanuni güvencelerden yoksun yapıldığı duruşmada ortaya konduğundan hükme esas alınamayacak durumdadır (PVSK ek md. 6; CMK 217)."
+        },
+        {
+          "text": "Savunma, sanık adına açılmış hesabın olay gecesi başka bir cihazdan ya da başka bir kişi tarafından kullanıldığını ve sanığın olay saatinde evinde olduğunu gösteren kayıtlar sunmuştur."
+        },
+        {
+          "text": "Ancak bu teknik kayıtların birbiriyle ve olay saatiyle ilişkisi duruşmada yeterince tartışılmamış; heyet hükümden önce bilirkişi görüşü alınmasını gerekli görmüştür (CMK 216, 63)."
+        },
+        { "text": "Dava sürmektedir. Beraat yakın; ama bugün gelmedi." }
+      ],
+      "legalBasis": "CMK 63, 67, 109, 216, 217; PVSK ek md. 6",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 50] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 50] }, 1000] }
+        }
+      },
+      "howToReach": "Delil zincirini kurarsın ama kayıtları duruşmada derinlemesine tartışmazsın: belgeleri incele, tanıkları bastır, doğru delili doğru beyana göster. Kâğıt dosyada durmakla konuşmaz.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "rahmi", "text": "Duruşma ertelenmiştir." },
+            {
+              "speaker": "narrator",
+              "text": "Tokmak bir kez vurdu. Kimse ayağa kalkmadı; ayağa kalkacak bir hüküm yoktu."
+            },
+            { "speaker": "narrator", "text": "Barış bana döndü. “Abla, bitti mi?” diye sormadı. Gözleri sordu." },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN SONRA", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Derya bankta oturuyordu; elinde bir sigara, yakmadan. Sevim Hanım tespihini çekiyordu, ama sayısını tutmadan."
+            },
+            { "speaker": "derya", "text": "Bilirkişi ne demek canım? Bir ay mı, üç ay mı?" },
+            { "speaker": "player", "text": "Bir kişi kayıtları okuyacak. Bizim okuduğumuzu, bir kez daha, mühürle." },
+            { "speaker": "derya", "text": "Sen okumadın mı?" },
+            { "speaker": "player", "text": "Okudum. Mahkemede yeterince okutamadım." }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "released" } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Barış akşam yedide cezaevinin kapısından çıktı; adli kontrolle. Bir imza defteri, bir karakol, bir bekleyiş. Ama dışarıda."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "released" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Barış eve gitti; imza defteri cebinde. Üç haftadır her sabah karakola gidiyordu. Bir süre daha gidecek."
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "kadir_kocluk" }, { "flag": "ali_kocluk" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Kapıdan çıkarken Leyla döndü. Sesi alçaktı; koridorda kimse duymasın diye değil, ben unutmayayım diye."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir şey daha. Bir tanığa söyleyeceği cümleyi verdin. Bugün beraat geldi; o cümle gelmedi diye değil, gelmesine rağmen."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Savcı Başsavcılığa bir yazı yazacak. Cevabını sen yazacaksın; ben okumayacağım. Okumam gerekmesin diye."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir beraat, bir avukatın yaptığı her şeyi temize çıkarmaz. Heyet Barış’ı aklar; beni aklayacak bir heyet yok.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla dosyayı masama bıraktı. Kenarına kurşun kalemle tek bir kelime yazmıştı: “Tartış.”"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Kâğıtları topladın Deniz. Hepsini. Sonra masaya koydun ve heyetin kendi kendine okumasını bekledin."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Mahkeme okur; ama ona neyi, hangi sırayla, neden okuması gerektiğini sen söylersin. Duruşma bunun için var."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir dosya kazanılmadan kaybedilmez. Ama kazanılmadan da beklenebilir; aylarca. Barış bekleyecek. Ben de.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "INDIRIM",
+      "class": "REDUCED",
+      "priority": 5,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "not": { "flag": "tolga_teslim" } },
+          {
+            "not": {
+              "all": [
+                { "not": { "flag": "cokus" } },
+                {
+                  "any": [
+                    { "flag": "mutalaa_b" },
+                    { "all": [{ "ref": "beraat_delil" }, { "cmp": [{ "var": "pers" }, ">=", 6] }, { "ref": "derin" }] }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "not": {
+              "all": [
+                { "not": { "flag": "cokus" } },
+                { "not": { "flag": "tolga_teslim" } },
+                {
+                  "not": {
+                    "all": [
+                      { "not": { "flag": "cokus" } },
+                      {
+                        "any": [
+                          { "flag": "mutalaa_b" },
+                          {
+                            "all": [
+                              { "ref": "beraat_delil" },
+                              { "cmp": [{ "var": "pers" }, ">=", 6] },
+                              { "ref": "derin" }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                { "ref": "beraat_delil" },
+                { "cmp": [{ "var": "pers" }, ">=", 6] }
+              ]
+            }
+          },
           { "flag": "closing_terdit" },
           { "flag": "arg_silah" },
           { "cmp": [{ "score": "final" }, ">=", 3000] }
@@ -365,7 +657,12 @@
           "text": "Savunmanın terditli talebi doğrultusunda temel ceza alt sınırdan belirlenmiş ve TCK 62/1 uygulanmıştır."
         },
         {
+          "when": { "not": { "ref": "teshis_coktu" } },
           "text": "Mağdurun teşhisi ve sanık adına açılmış hesabın konum kaydı birlikte değerlendirilmiştir; savunmanın teşhise yönelik itirazları heyeti beraate götürecek ölçüde güçlü bulunmamıştır."
+        },
+        {
+          "when": { "ref": "teshis_coktu" },
+          "text": "Teşhis hükme esas alınmamıştır; ancak sanık adına açılmış hesabın olay anında olay yerinde bulunduğuna ilişkin konum kaydı cevapsız kalmıştır."
         }
       ],
       "legalBasis": "TCK 149/1-h, 61, 62/1, 53, 63; CMK 231/5; TCK 51/1; CMK 273/1",
@@ -413,11 +710,20 @@
           ]
         },
         {
-          "when": { "flag": "fact_tolga" },
+          "when": { "all": [{ "flag": "fact_tolga" }, { "not": { "flag": "bildirdi" } }] },
           "lines": [
             {
               "speaker": "narrator",
               "text": "Derya, Tolga’dan söz etmedi. Ben de etmedim. İkimiz de bir ismin, bir arabanın camına çarpıp geri döndüğünü biliyorduk."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "bildirdi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Derya, Tolga’dan söz etmedi. Savcıya yazdığım dilekçe bir dosya numarası almıştı; bir ifade tarihi almamıştı. İstinafa bir ek daha."
             }
           ]
         },
@@ -439,28 +745,112 @@
       ]
     },
     {
-      "id": "MAHKUMIYET",
+      "id": "MAHKUMIYET_H",
       "class": "CONVICTION",
-      "priority": 5,
-      "when": { "all": [] },
+      "priority": 6,
+      "when": {
+        "all": [
+          { "not": { "flag": "tolga_teslim" } },
+          {
+            "not": {
+              "all": [
+                { "not": { "flag": "cokus" } },
+                {
+                  "any": [
+                    { "flag": "mutalaa_b" },
+                    { "all": [{ "ref": "beraat_delil" }, { "cmp": [{ "var": "pers" }, ">=", 6] }, { "ref": "derin" }] }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "not": {
+              "all": [
+                { "not": { "flag": "cokus" } },
+                { "not": { "flag": "tolga_teslim" } },
+                {
+                  "not": {
+                    "all": [
+                      { "not": { "flag": "cokus" } },
+                      {
+                        "any": [
+                          { "flag": "mutalaa_b" },
+                          {
+                            "all": [
+                              { "ref": "beraat_delil" },
+                              { "cmp": [{ "var": "pers" }, ">=", 6] },
+                              { "ref": "derin" }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                { "ref": "beraat_delil" },
+                { "cmp": [{ "var": "pers" }, ">=", 6] }
+              ]
+            }
+          },
+          { "any": [{ "flag": "contra_n2" }, { "flag": "contra_f4" }, { "flag": "arg_silah" }] }
+        ]
+      },
       "stamp": "MAHKÛMİYET",
       "stampTone": "red",
-      "sentence": "10 yıl hapis",
-      "verdictText": "Sanık Barış Kılınç’ın üzerine atılı nitelikli yağma suçundan, eylemin silahla ve gece vaktinde işlendiği kabul edilerek TCK 149/1-a, h uyarınca iki nitelikli hâlin birlikte gerçekleşmesi gözetilerek alt sınırdan uzaklaşılarak 12 YIL; TCK 62/1 ile 10 YIL HAPİS cezası ile cezalandırılmasına; TCK 53; TCK 63 mahsup; tutukluluk hâlinin devamına (ikinci celseden önce adli kontrolle tahliye edilmişse, hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).",
+      "sentence": "9 yıl 2 ay hapis",
+      "verdictText": "Sanık Barış Kılınç’ın cezalandırılmasına: duruşmada silah unsuru ispatlanamadığından TCK 149/1-a’nın uygulanmasına yer olmadığına; eylemin gece vaktinde işlenmesi nedeniyle TCK 149/1-h uyarınca, mağdurun yaşı ve uğradığı yaralanma gözetilerek (TCK 61/1) alt sınırdan uzaklaşılarak 11 YIL; TCK 62/1 ile 9 YIL 2 AY HAPİS cezası ile cezalandırılmasına; TCK 53; TCK 63 mahsup; tutukluluk hâlinin devamına (ikinci celseden önce adli kontrolle tahliye edilmişse, hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).",
       "reasoning": [
         {
+          "when": { "not": { "ref": "teshis_coktu" } },
           "text": "Mağdurun teşhisi, sanık adına açılmış hesabın konum kaydı ve sanığın bölgede kurye olarak çalışması birlikte değerlendirilmiştir."
         },
         {
-          "when": { "not": { "flag": "cokus" } },
-          "text": "Savunmanın teşhise ve kayıtlara yönelik itirazları somut delillerle desteklenmemiştir."
+          "when": { "all": [{ "ref": "teshis_coktu" }, { "not": { "ref": "hesap_kayitta" } }] },
+          "text": "Teşhis işlemindeki usulsüzlük nedeniyle mağdurun teşhisi hükme esas alınmamıştır; ancak sanık adına açılmış kurye hesabının olay anında olay yerinde bulunduğuna ilişkin konum kaydı duruşmada cevapsız kalmıştır."
+        },
+        {
+          "when": {
+            "all": [{ "ref": "teshis_coktu" }, { "ref": "hesap_kayitta" }, { "not": { "ref": "mazeret_kayitta" } }]
+          },
+          "text": "Teşhis hükme esas alınmamış, hesabın o gece başka bir cihazdan açıldığı duruşmada ortaya konmuştur; ancak sanığın olay saatinde başka bir yerde bulunduğu kayıtla gösterilmemiş, sanığın hesabını kullandıran kişiyle birlikte hareket ettiği ihtimali giderilememiştir."
+        },
+        {
+          "when": { "all": [{ "not": { "flag": "cokus" } }, { "not": { "ref": "hesap_kayitta" } }] },
+          "text": "Savunma, hesabın olay gecesi başka bir kişi ya da cihaz tarafından kullanıldığını duruşmada delille ortaya koymamıştır."
+        },
+        {
+          "when": { "all": [{ "not": { "flag": "cokus" } }, { "not": { "ref": "mazeret_kayitta" } }] },
+          "text": "Sanığın olay saatinde evinde olduğuna ilişkin savunması, duruşmada aile beyanı dışında bağımsız bir kayıtla desteklenmemiştir."
+        },
+        {
+          "when": {
+            "all": [
+              { "not": { "flag": "cokus" } },
+              { "ref": "teshis_coktu" },
+              { "ref": "hesap_kayitta" },
+              { "ref": "mazeret_kayitta" }
+            ]
+          },
+          "text": "Savunmanın duruşmada ortaya koyduğu bulgular, iddianamedeki anlatımı bütünüyle sarsacak kapsamda değildir; dosyadaki diğer çelişkiler tartışılmamıştır."
+        },
+        {
+          "when": { "flag": "kadir_ifsa" },
+          "text": "Yakın komşu tanığın saate ilişkin beyanı, müdafiin tanığa saat söylediğinin anlaşılması nedeniyle hükme esas alınmamıştır."
+        },
+        {
+          "when": { "flag": "ali_ifsa" },
+          "text": "Olay yeri tanığı bakkalın müdafi tarafından yönlendirildiğine ilişkin beyanı tutanağa geçmiş ve Başsavcılığa bildirilmiştir."
         },
         {
           "when": { "flag": "cokus" },
           "text": "Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı."
+        },
+        {
+          "text": "Mağdurun ilk beyanında bıçak bulunmadığı ve bıçağın ele geçirilmediği duruşmada ortaya konduğundan silah unsuru uygulanmamıştır; mahkeme suçun hukuki nitelendirmesini resen yapar (CMK 225/2)."
         }
       ],
-      "legalBasis": "TCK 149/1-a, h, 61, 62/1, 53, 63; CMK 273/1",
+      "legalBasis": "TCK 149/1-h, 61/1, 62/1, 53, 63; CMK 225/2, 273/1",
       "xp": {
         "if": {
           "when": { "flag": "cokus" },
@@ -480,7 +870,7 @@
           }
         }
       },
-      "howToReach": "Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir. Yanlış delil ve dayanaksız itiraz güvenilirliği eritir; teşhisi çürütmeden ve mazereti kayda bağlamadan beraat gelmez.",
+      "howToReach": "Silah unsurunu duruşmada çürütürsün ama teşhisi ve konum kaydını cevapsız bırakırsın; terditli talepte de bulunmazsan heyet temel cezayı alt sınırdan belirlemez.",
       "epilogue": [
         {
           "when": { "flag": "cokus" },
@@ -510,7 +900,7 @@
             { "speaker": "narrator", "text": "ADLİYE KORİDORU · HÜKÜMDEN SONRA", "style": "card", "bg": "adliye" },
             {
               "speaker": "narrator",
-              "text": "“On yıl.” Kelime koridora benden önce çıktı. Sevim Hanım’ın tespihi koptu; taneler mermer zeminde yuvarlandı, banklarının altına, kapıların eşiğine."
+              "text": "“Dokuz yıl iki ay.” Kelime koridora benden önce çıktı. Sevim Hanım’ın tespihi koptu; taneler mermer zeminde yuvarlandı, bankların altına, kapıların eşiğine."
             },
             { "speaker": "narrator", "text": "Eğildim. Topladım. Bir, iki, otuz üç. Birini bulamadım." },
             {
@@ -525,11 +915,29 @@
           ]
         },
         {
-          "when": { "flag": "fact_tolga" },
+          "when": { "all": [{ "flag": "fact_tolga" }, { "not": { "flag": "bildirdi" } }] },
           "lines": [
             {
               "speaker": "narrator",
               "text": "Tolga hakkında bir dilekçe yazacağım. Savcılığa. Bunu ikinci celseden önce yapmalıydım. Şimdi bir istinaf dilekçesine bir ek olacak."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "flag": "bildirdi" }, { "not": { "flag": "tolga_kacti" } }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tolga hakkındaki bildirimim savcının masasında; bir dosya numarası aldı, bir ifade tarihi almadı. Kâğıt yolunu yürüyor. Barış o yolun sonunu cezaevinden bekleyecek."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "tolga_kacti" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tolga’nın odası hâlâ boş. Benim çaldığım kapıdan çıkan adam, artık bir yakalama kararının adı."
             }
           ]
         },
@@ -547,7 +955,176 @@
             },
             {
               "speaker": "player",
-              "text": "İstinaf var. Her zaman bir sonraki kapı vardır. Ama bu gece kapıların hepsi kapalı.",
+              "text": "İstinaf var. Her zaman bir sonraki kapı vardır. Ama bu gece kapıların hepsi kapalı. Dokuz yıl iki ay; bir takvimin bütün sayfaları.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MAHKUMIYET",
+      "class": "CONVICTION",
+      "priority": 7,
+      "when": { "all": [] },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "sentence": "10 yıl hapis",
+      "verdictText": "Sanık Barış Kılınç’ın üzerine atılı nitelikli yağma suçundan, eylemin silahla ve gece vaktinde işlendiği kabul edilerek TCK 149/1-a, h uyarınca iki nitelikli hâlin birlikte gerçekleşmesi gözetilerek alt sınırdan uzaklaşılarak 12 YIL; TCK 62/1 ile 10 YIL HAPİS cezası ile cezalandırılmasına; TCK 53; TCK 63 mahsup; tutukluluk hâlinin devamına (ikinci celseden önce adli kontrolle tahliye edilmişse, hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).",
+      "reasoning": [
+        {
+          "when": { "not": { "ref": "teshis_coktu" } },
+          "text": "Mağdurun teşhisi, sanık adına açılmış hesabın konum kaydı ve sanığın bölgede kurye olarak çalışması birlikte değerlendirilmiştir."
+        },
+        {
+          "when": { "all": [{ "ref": "teshis_coktu" }, { "not": { "ref": "hesap_kayitta" } }] },
+          "text": "Teşhis işlemindeki usulsüzlük nedeniyle mağdurun teşhisi hükme esas alınmamıştır; ancak sanık adına açılmış kurye hesabının olay anında olay yerinde bulunduğuna ilişkin konum kaydı duruşmada cevapsız kalmıştır."
+        },
+        {
+          "when": {
+            "all": [{ "ref": "teshis_coktu" }, { "ref": "hesap_kayitta" }, { "not": { "ref": "mazeret_kayitta" } }]
+          },
+          "text": "Teşhis hükme esas alınmamış, hesabın o gece başka bir cihazdan açıldığı duruşmada ortaya konmuştur; ancak sanığın olay saatinde başka bir yerde bulunduğu kayıtla gösterilmemiş, sanığın hesabını kullandıran kişiyle birlikte hareket ettiği ihtimali giderilememiştir."
+        },
+        {
+          "when": { "all": [{ "not": { "flag": "cokus" } }, { "not": { "ref": "hesap_kayitta" } }] },
+          "text": "Savunma, hesabın olay gecesi başka bir kişi ya da cihaz tarafından kullanıldığını duruşmada delille ortaya koymamıştır."
+        },
+        {
+          "when": { "all": [{ "not": { "flag": "cokus" } }, { "not": { "ref": "mazeret_kayitta" } }] },
+          "text": "Sanığın olay saatinde evinde olduğuna ilişkin savunması, duruşmada aile beyanı dışında bağımsız bir kayıtla desteklenmemiştir."
+        },
+        {
+          "when": {
+            "all": [
+              { "not": { "flag": "cokus" } },
+              { "ref": "teshis_coktu" },
+              { "ref": "hesap_kayitta" },
+              { "ref": "mazeret_kayitta" }
+            ]
+          },
+          "text": "Savunmanın duruşmada ortaya koyduğu bulgular, iddianamedeki anlatımı bütünüyle sarsacak kapsamda değildir; dosyadaki diğer çelişkiler tartışılmamıştır."
+        },
+        {
+          "when": { "flag": "kadir_ifsa" },
+          "text": "Yakın komşu tanığın saate ilişkin beyanı, müdafiin tanığa saat söylediğinin anlaşılması nedeniyle hükme esas alınmamıştır."
+        },
+        {
+          "when": { "flag": "ali_ifsa" },
+          "text": "Olay yeri tanığı bakkalın müdafi tarafından yönlendirildiğine ilişkin beyanı tutanağa geçmiş ve Başsavcılığa bildirilmiştir."
+        },
+        {
+          "when": { "flag": "cokus" },
+          "text": "Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı."
+        },
+        { "text": "Mağdurun kolluk ifadesindeki bıçak beyanı duruşmada çürütülmemiştir." }
+      ],
+      "legalBasis": "TCK 149/1-a, h, 61, 62/1, 53, 63; CMK 273/1",
+      "xp": {
+        "if": {
+          "when": { "flag": "cokus" },
+          "then": {
+            "if": {
+              "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+              "then": { "div": [{ "mul": [{ "score": "final" }, 30] }, 2000] },
+              "else": { "div": [{ "mul": [{ "score": "final" }, 30] }, 1000] }
+            }
+          },
+          "else": {
+            "if": {
+              "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+              "then": { "div": [{ "mul": [{ "score": "final" }, 60] }, 2000] },
+              "else": { "div": [{ "mul": [{ "score": "final" }, 60] }, 1000] }
+            }
+          }
+        }
+      },
+      "howToReach": "Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir. Yanlış delil ve dayanaksız itiraz güvenilirliği eritir; teşhisi çürütmeden ve konum kaydını cevaplamadan beraat gelmez.",
+      "epilogue": [
+        {
+          "when": { "flag": "cokus" },
+          "lines": [
+            { "speaker": "narrator", "text": "SALON · HÜKÜMDEN SONRA", "style": "card", "bg": "durusma_salonu" },
+            {
+              "speaker": "narrator",
+              "text": "Salon boşaldı. Jandarma Barış’ı götürdü. Sevim Hanım’ı biri koluna girip dışarı çıkardı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masamda oturuyordum. Notlarım önümde. Hiçbirine bakmamıştım; hiçbiri işe yaramamıştı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Orhan Bayar dosyasını topladı. Kapıya giderken durdu, bana döndü."
+            },
+            {
+              "speaker": "orhan",
+              "text": "Hafızayla değil, kâğıtla gelmeliydiniz avukat hanım. Bu dosyada kâğıtlar vardı."
+            },
+            { "speaker": "narrator", "text": "Kapı arkasından kapandı. Radyatör tıkırdadı. Başka ses yoktu." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · HÜKÜMDEN SONRA", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "“On yıl.” Kelime koridora benden önce çıktı. Sevim Hanım’ın tespihi koptu; taneler mermer zeminde yuvarlandı, bankların altına, kapıların eşiğine."
+            },
+            { "speaker": "narrator", "text": "Eğildim. Topladım. Bir, iki, otuz üç. Birini bulamadım." },
+            {
+              "speaker": "narrator",
+              "text": "Derya annesinin koluna girmişti. Bana bakmadı. Merdivenin başında durdu; geri döndü."
+            },
+            { "speaker": "derya", "text": "Salonun kirası. İki koltuk. Bir de kardeşim. Hepsi gitti canım." },
+            {
+              "speaker": "narrator",
+              "text": "Nermin Hanım öbür uçta, kızının yanında oturuyordu. Kalkmadı. Sevinmiyordu. Saatini kimse geri getirmemişti."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "flag": "fact_tolga" }, { "not": { "flag": "bildirdi" } }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tolga hakkında bir dilekçe yazacağım. Savcılığa. Bunu ikinci celseden önce yapmalıydım. Şimdi bir istinaf dilekçesine bir ek olacak."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "flag": "bildirdi" }, { "not": { "flag": "tolga_kacti" } }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tolga hakkındaki bildirimim savcının masasında; bir dosya numarası aldı, bir ifade tarihi almadı. Kâğıt yolunu yürüyor. Barış o yolun sonunu cezaevinden bekleyecek."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "tolga_kacti" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tolga’nın odası hâlâ boş. Benim çaldığım kapıdan çıkan adam, artık bir yakalama kararının adı."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Avucumda bir tespih tanesi. Otuz üçüncüsü yoktu; bu otuz dördüncüydü belki, ya da birinciydi. Masama koydum."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir fotoğraf bir hafızayı kirletti. Ben o kiri temizleyemedim. Kimse “yalan” demedi; herkes “eminim” dedi.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "İstinaf var. Her zaman bir sonraki kapı vardır. Ama bu gece kapıların hepsi kapalı. On yıl; bir takvimin bütün sayfaları.",
               "style": "thought"
             }
           ]

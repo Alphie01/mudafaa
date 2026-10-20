@@ -266,7 +266,18 @@ const win = (outcome: string, final: number) =>
   final < 0
     ? { outcome, finalMax: 0 }
     : { outcome, finalMin: Math.floor(final * 0.95), finalMax: Math.ceil(final * 1.05) };
-export const MEASURED = { G1: 11450, G2: 11290, G3: 3870, G4: -345, G5: 8130, W: 7180 };
+export const MEASURED = {
+  G1: 11450,
+  G2: 11290,
+  G3: 3870,
+  G4: -395,
+  G5: 8130,
+  W: 7180,
+  TESLIM_D: 7620,
+  E_DUSUK: 8000,
+  ERTELEME: 7995,
+  ETIK: 10390,
+};
 
 const TIPIK_STEPS = [
   PROLOG('BR00_A', 'STR_USUL'),
@@ -520,7 +531,7 @@ c DIL_VER
 c H_T_ALI
 c AQ_TARIF
 c AQ_ISRAR
-c ALI_EVET
+c ALI_DOGRU
 c ZARF_AL
 c H_112
 e mag c1
@@ -550,7 +561,6 @@ c H102_C
 p N1
 p N2
 p N3
-s ev_darp N2
 c H103_BITIR
 c H104_D
 c H104B_DEVAM
@@ -673,6 +683,487 @@ c COKUS_DEVAM
 `),
 ];
 
+
+// Uç durumlar (gözden geçirme sonrası): hüküm delile bağlı, skor yalnızca sınırda.
+// TESLIM_D: kayıtlara bağlı bildirim + Derya'nın kendi kararı → Tolga teslim olur; skor düşük olsa da 223/2-b.
+// (Gölge yol: ölçülen en kısa 223/2-b yolu; aksiyonların çoğu hub/çıkış adımları.)
+const TESLIM_D_STEPS = [
+  A(`
+c PR00_DEVAM
+c PR01_DEVAM
+c BR00_C
+c BR01_A
+c BR01B_DEVAM
+c STR_MASUMIYET
+c SABAH_DEVAM
+c H_112
+e dinle c5
+e compare c2
+e mag c4
+e dinle c1
+c IHBAR_BITIR
+c H_TESHIS
+e compare f3
+e mag tarif
+e law tekrar
+e mag f1
+c TESHIS_BITIR
+c H_CIKARIM
+m clue_tarif_sonra clue_tek_tekrar
+c CIKARIM_BITIR
+c H_ARAMA
+t OB_CAM
+t OB_ASKI
+t OB_MOTOR
+c ARAMA_BITIR
+c H_CIKARIM
+m clue_bicak_yok clue_cam
+c CIKARIM_BITIR
+c H_GORUS
+c TP_GECE soft
+c TP_ESKI soft
+c TP_KULAK soft
+c G_BITIR
+c AK1_KAGIT
+c H_EV
+t OB_ILAC
+t OB_BALKON
+t OB_AILE
+t OB_VESIKALIK
+c ARAMA2_BITIR
+c H_CIKARIM
+m clue_halka clue_kulak
+m clue_eski_foto clue_vesikalik
+c CIKARIM_BITIR
+c H_T_KADIR
+c KQ_SAAT
+c KQ_SES
+c KQ_GOZ
+c KADIR_KARAR
+c KD_BILDIR
+c H_ACIL
+t OB_TRIYAJ
+t OB_CIZELGE
+c ARAMA3_BITIR
+c H_DIL
+c DIL_UEDAS
+c DIL_GOZLEM
+c DIL_VER
+c ZARF_AL
+c H_UEDAS
+e compare u2
+e mag u4
+c INV_UEDAS_BITIR
+c H_CIKARIM
+m clue_kadir clue_kesinti
+c CIKARIM_BITIR
+c H_T_GAMZE
+c GQ_POLIS
+c GQ_KORKU
+c GAMZE_KARAR
+c G_TANIK
+c H_T_FERHAT
+c FQ_LISTE
+c FQ_ACIL
+c FQ_BICAK
+c FERHAT_BITIR
+c H_DURUSMA
+c GECE_DEVAM
+c H100K_A
+c H100_DEVAM
+c Q_BITIR
+c H102_A
+p N1
+o g_kanaat N4
+s ded_eski_foto N1
+s ev_ihbar N5
+c H103K_DEVAM
+c H104_A
+c H104B_DEVAM
+c H105_A
+c H106_DEVAM
+c ARA_GIRIS_DEVAM
+c A_GPS
+e compare g_cihaz
+e mag g_durak
+e mag g_oturum
+e mag g_teslim
+c GPS_BITIR
+c A_TEL
+e mag t1
+e compare t3
+e mag t2
+e mag t4
+c TEL_BITIR
+c A_CIKARIM
+m clue_cihaz clue_mesaj
+m clue_186 clue_kesinti
+c CIKARIM2_BITIR
+c A_BARIS
+c BQ_GPS
+c BQ_HALKA
+c BQ_NEDEN
+c B_DOGRU
+c ARA_AKSAM1_DEVAM
+c A_SELFIE
+e zoom s3
+e compare s2
+e compare s4
+c SELFIE_BITIR
+c A_CIKARIM
+m clue_selfie clue_halka
+c CIKARIM2_BITIR
+c A_KEBAP
+t OB_FIS
+t OB_TEZGAH
+t OB_PANO
+c KEBAP_BITIR
+c A_DERYA
+c D_SAVCI
+c ARA_AKSAM2_DEVAM
+c A_KARAR
+c K_BILDIR
+c BILDIR_DON
+c A_DIL
+c AD_CEMAL
+c AD_VER
+c A_DURUSMA
+c ARA_SON_DEVAM
+c T00_DEVAM
+c T01_BITIR
+s ev_gozlem F2
+c T02K_DEVAM
+c T02R_DEVAM
+c KS_BITIR
+c X_215
+c T04_DEVAM
+c T04C_DEVAM
+c T05_DEVAM
+c P_HESAP
+c P_BITIR
+c S_MASUMIYET
+c L_SAAT
+`),
+];
+
+// E_DUSUK: tam delil zinciri tutanakta, savcı beraat istiyor; skor eski 9000 eşiğinin altında → yine 223/2-e.
+const E_DUSUK_STEPS = [
+  A(`
+c PR00_DEVAM
+c PR01_DEVAM
+c BR00_A
+c BR01_A
+c BR01B_DEVAM
+c STR_USUL
+c SABAH_DEVAM
+c H_112
+e dinle c5
+e compare c2
+c IHBAR_BITIR
+c H_TESHIS
+e compare f3
+e mag tarif
+e law tekrar
+c TESHIS_BITIR
+c H_ARAMA
+t OB_CAM
+t OB_ASKI
+t OB_MOTOR
+c ARAMA_BITIR
+c H_CIKARIM
+m clue_bicak_yok clue_cam
+c CIKARIM_BITIR
+c H_GORUS
+c TP_ESKI soft
+c TP_KULAK soft
+c TP_AILE soft
+c TP_ATES soft
+c G_BITIR
+c AK1_NERMIN
+c H_EV
+t OB_ILAC
+t OB_BALKON
+t OB_AILE
+t OB_VESIKALIK
+c ARAMA2_BITIR
+c H_CIKARIM
+m clue_halka clue_kulak
+m clue_eski_foto clue_vesikalik
+c CIKARIM_BITIR
+c H_T_KADIR
+c KADIR_KARAR
+c KD_BILDIR
+c H_ACIL
+t OB_TRIYAJ
+t OB_CIZELGE
+c ARAMA3_BITIR
+c H_DIL
+c DIL_UEDAS
+c DIL_GOZLEM
+c DIL_VER
+c ZARF_RED
+c H_UEDAS
+e compare u2
+e mag u4
+e mag u1
+c INV_UEDAS_BITIR
+c H_CIKARIM
+m clue_kadir clue_kesinti
+c CIKARIM_BITIR
+c H_T_GAMZE
+c GQ_POLIS
+c GQ_KORKU
+c GAMZE_KARAR
+c G_TANIK
+c H_DURUSMA
+c GECE_DEVAM
+c H100K_A
+c H100_DEVAM
+c Q_BITIR
+c H102_A
+p N1
+o g_kanaat N4
+s ded_eski_foto N1
+s ev_ihbar N5
+c H103K_DEVAM
+c H104_A
+c H104B_DEVAM
+c H105_A
+c H106_DEVAM
+c ARA_GIRIS_DEVAM
+c A_GPS
+e compare g_cihaz
+c GPS_BITIR
+c A_TEL
+e mag t1
+e compare t3
+e mag t2
+e mag t4
+c TEL_BITIR
+c A_CIKARIM
+m clue_cihaz clue_mesaj
+m clue_186 clue_kesinti
+c CIKARIM2_BITIR
+c A_BARIS
+c BQ_GPS
+c BQ_HALKA
+c BQ_NEDEN
+c B_DOGRU
+c ARA_AKSAM1_DEVAM
+c A_SELFIE
+e zoom s3
+e compare s2
+e compare s4
+c SELFIE_BITIR
+c A_CIKARIM
+m clue_selfie clue_halka
+c CIKARIM2_BITIR
+c A_KEBAP
+t OB_FIS
+t OB_TEZGAH
+t OB_PANO
+c KEBAP_BITIR
+c A_KADIR
+c KA_DOGRU
+c ARA_AKSAM2_DEVAM
+c A_KARAR
+c K_BILDIR
+c BILDIR_DON
+c A_DIL
+c AD_CEMAL
+c AD_VER
+c A_DURUSMA
+c ARA_SON_DEVAM
+c T00_DEVAM
+c T01_CIHAZ
+c T01_SELFIE
+c T01_186
+c T01_BARIS
+c T01_BITIR
+s ev_gozlem F2
+c T02K_DEVAM
+c T02R_DEVAM
+c KS_BITIR
+c X_215
+c T04_DEVAM
+c T04C_DEVAM
+c T05_DEVAM
+c P_KIRLENME
+c P_MAZERET
+c P_HESAP
+c P_BITIR
+c S_USUL
+c L_SAAT
+`),
+];
+
+// ERTELEME: delil zinciri tam ama kayıtlar duruşmada derinlemesine tartışılmadı → bilirkişi ve erteleme (mahkûmiyet değil).
+const ERTELEME_STEPS = [
+  A(`
+c PR00_DEVAM
+c PR01_DEVAM
+c BR00_A
+c BR01_A
+c BR01B_DEVAM
+c STR_USUL
+c SABAH_DEVAM
+c H_112
+e dinle c5
+e compare c2
+c IHBAR_BITIR
+c H_TESHIS
+e compare f3
+e mag tarif
+e law tekrar
+c TESHIS_BITIR
+c H_CIKARIM
+m clue_tarif_sonra clue_tek_tekrar
+c CIKARIM_BITIR
+c H_LEYLA
+c LEYLA_DON
+c H_ARAMA
+t OB_CAM
+c ARAMA_BITIR
+c H_CIKARIM
+m clue_bicak_yok clue_cam
+c CIKARIM_BITIR
+c H_GORUS
+c G_NOT
+c TP_ESKI soft
+c TP_KULAK soft
+c G_BITIR
+c AK1_NERMIN
+c H_EV
+t OB_BALKON
+t OB_VESIKALIK
+c ARAMA2_BITIR
+c H_CIKARIM
+m clue_halka clue_kulak
+m clue_eski_foto clue_vesikalik
+c CIKARIM_BITIR
+c H_T_KADIR
+c KADIR_KARAR
+c KD_BILDIR
+c H_LEYLA
+c LEYLA_DON
+c H_ACIL
+t OB_CIZELGE
+c ARAMA3_BITIR
+c H_DIL
+c DIL_UEDAS
+c DIL_GOZLEM
+c DIL_VER
+c ZARF_RED
+c H_UEDAS
+e compare u2
+c INV_UEDAS_BITIR
+c H_CIKARIM
+m clue_kadir clue_kesinti
+c CIKARIM_BITIR
+c H_T_GAMZE
+c GQ_POLIS
+c GAMZE_KARAR
+c G_TANIK
+c H_CIKARIM
+m clue_gamze_beyan clue_foto_farkli
+c CIKARIM_BITIR
+c H_T_ALI
+c AQ_TARIF
+c AQ_ISRAR
+c ALI_DOGRU
+c H_LEYLA
+c LEYLA_DON
+c H_T_FERHAT
+c FERHAT_BITIR
+c H_DURUSMA
+c GECE_DEVAM
+c H100K_A
+c H100_DEVAM
+c Q_BITIR
+c H102_A
+p N1
+s ev_ihbar N2
+s ev_gozlem N3
+s ev_teshis N4
+o g_kanaat N4
+s ded_eski_foto N1
+s ev_ihbar N5
+c H103K_DEVAM
+c H104_A
+c H104B_DEVAM
+c H105_A
+c H106_DEVAM
+c ARA_GIRIS_DEVAM
+c A_GPS
+e compare g_cihaz
+c GPS_BITIR
+c A_TEL
+e mag t1
+e compare t3
+c TEL_BITIR
+c A_CIKARIM
+m clue_cihaz clue_mesaj
+m clue_186 clue_kesinti
+c CIKARIM2_BITIR
+c A_LEYLA
+c LEYLA2_DON
+c A_BARIS
+c B_DOGRU
+c ARA_AKSAM1_DEVAM
+c A_SELFIE
+e zoom s3
+c SELFIE_BITIR
+c A_CIKARIM
+c CIKARIM2_BITIR
+c A_LEYLA
+c LEYLA2_DON
+c A_KEBAP
+t OB_TEZGAH
+c KEBAP_BITIR
+c A_KADIR
+c KA_DOGRU
+c ARA_AKSAM2_DEVAM
+c A_KARAR
+c K_BILDIR
+c BILDIR_DON
+c A_DIL
+c AD_CEMAL
+c AD_VER
+c A_LEYLA
+c LEYLA2_DON
+c A_DURUSMA
+c ARA_SON_DEVAM
+c T00_DEVAM
+c T01_CIHAZ
+c T01_BITIR
+s ev_gozlem F2
+c T02K_DEVAM
+c T02R_DEVAM
+c KS_BITIR
+c X_215
+c T04_DEVAM
+c T04C_DEVAM
+c T05_DEVAM
+c P_KIRLENME
+c P_BITIR
+c S_USUL
+c L_SAAT
+`),
+];
+
+// ETIK: tipik yol, ama bakkala ve Kadir Usta'ya söylenecek cümle verildi. Savcı ikisini de tutanağa geçirir;
+// Kadir'in saati değerlendirme dışı kalır, beraat 186 kaydıyla gelir; etik epilogu ve yarım XP.
+const ETIK_STEPS = TIPIK_STEPS.map((blk) =>
+  blk.flatMap((a): Action[] => {
+    if (a.kind !== 'CHOOSE') return [a];
+    if (a.choiceId === 'ALI_DOGRU') return [step.choose('ALI_EVET')];
+    if (a.choiceId === 'KD_BILDIR') return [step.choose('KD_SAAT')];
+    if (a.choiceId === 'X_215') return [step.choose('X_CEVAP')];
+    if (a.choiceId === 'T00_DEVAM') return [a, step.choose('TALI_DEVAM')];
+    return [a];
+  }),
+);
+
 export const tests: CasePart = {
   tests: {
     goldenPaths: [
@@ -681,7 +1172,11 @@ export const tests: CasePart = {
       goldenPath('G3', win('INDIRIM', MEASURED.G3), ...G3_STEPS),
       goldenPath('G4', win('MAHKUMIYET', MEASURED.G4), ...G4_STEPS),
       goldenPath('G5', win('AZIL', MEASURED.G5), ...G5_STEPS),
-      goldenPath('W', win('MAHKUMIYET', MEASURED.W), ...W_STEPS),
+      goldenPath('W', win('MAHKUMIYET_H', MEASURED.W), ...W_STEPS),
+      goldenPath('TESLIM_D', win('BERAAT_B', MEASURED.TESLIM_D), ...TESLIM_D_STEPS),
+      goldenPath('E_DUSUK', win('BERAAT_E', MEASURED.E_DUSUK), ...E_DUSUK_STEPS),
+      goldenPath('ERTELEME', win('ERTELEME', MEASURED.ERTELEME), ...ERTELEME_STEPS),
+      goldenPath('ETIK', win('BERAAT_E', MEASURED.ETIK), ...ETIK_STEPS),
       goldenPath(TYPICAL_PATH, win('BERAAT_E', MEASURED.G2), ...TIPIK_STEPS),
     ],
   },

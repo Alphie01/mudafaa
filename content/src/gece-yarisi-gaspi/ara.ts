@@ -4,6 +4,7 @@ import {
   cmp,
   conversation,
   cont,
+  dec,
   decisionNode,
   deductionBoard,
   deliver,
@@ -35,7 +36,7 @@ import {
 import type { CasePart, ChoiceDef, Effect } from '../../../tools/content/src/kit/index.js';
 import { B, O, W, retarget } from './dsl.js';
 import { invRecipes, uedasDoc } from './investigation.js';
-import { ARA, ARA_AP, ARA_DAYS } from './shared.js';
+import { ARA, ARA_AP, ARA_DAYS, T_TESLIM } from './shared.js';
 
 // 65-ara: 1. ve 2. celse arası (3 gün × 3 EP; yığınsız). HızlıPaket kayıtları gelir: müvekkilin hesabı olay
 // yerinde. Telefon raporu, özçekim, Barış’la yüzleşme, Derya’nın sırrı, kebapçı, tanık hazırlığı ve ne yapılacağı kararı.
@@ -196,6 +197,7 @@ const hubTabs = [
       act('A_KEBAP', 'Tophane Kebap Salonu', 'ARA_KEBAP_G', {
         once: true,
         description: '23.31 siparişi · arka kapı',
+        visibleWhen: visited('ARA_GPS'),
       }),
     ],
   },
@@ -388,7 +390,7 @@ const tel = retarget(
           tone: 'special',
         },
         responses: B(`
-~ Tolga. Kapımda bereli, ıslak duran genç. “Benden daha iyi bir çocuktur o.”
+~ Tolga. Bir gece kapımda sırılsıklam duran, zarf uzatan genç. Haftalığını bir avukata bırakan kuzen.
 ~ Bir mesaj kimin suçlu olduğunu söylemez. Kimin orada olduğunu söyler. Bu dosyada bu ikisini ilk kez karıştırmayacak olan kişi ben olmalıyım.
 `),
       }),
@@ -679,15 +681,18 @@ derya: Tolga’yla ben konuşurum. Ben. Senden önce, polisten önce. Ona bunu b
       next: HUB,
     }),
     option('D_TOLGA', '“Tolga’yı ikna edin; teslim olsun.”', {
-      score: { SAVUNMA_STRATEJISI: 10 },
-      effects: [raise('derya_konustu')],
-      neutral:
-        'Amacın meşru; ama müvekkilin avukatı olarak üçüncü kişinin ailesine ne yapması gerektiğini söylemek, sınırda bir yönlendirmedir.',
+      score: { SAVUNMA_STRATEJISI: -40 },
+      effects: [raise('derya_konustu'), dec('trust', 10)],
+      bad: 'Amacın meşru; ama müvekkilin avukatı olarak üçüncü kişinin ailesine ne yapması gerektiğini söylemek bir yönlendirmedir. Bilgiyi savcılığa sen bildirirsin (CMK 158); aile kendi kararını verir.',
+      category: 'SAVUNMA_STRATEJISI',
       responses: B(`
 - Tolga’yı ikna edin Derya Hanım. Teslim olsun. Hem Barış için hem kendisi için.
 derya/kizgin: Kolay mı canım? Annesiz büyümüş bir çocuğa “git hapse gir” mi diyeyim?
 > Sustu. Makası yeniden eline aldı. Tık.
 derya: Konuşurum. Ama ne diyeceğime ben karar veririm.
+> Salondan çıkarken telefonum titredi. Leyla. Derya’nın sesinden anlamış; Derya önce onu aramış.
+leyla: Bir aileye kimi teslim edeceğini söyleyemezsin Deniz. Sen bildiğini savcıya yazarsın; kim ne yapacak, kendisi karar verir. [phone]
+leyla: Yoksa yarın o çocuk “avukat beni ailemle sıkıştırdı” der ve haklı olur. [phone]
 `),
       next: HUB,
     }),
@@ -828,28 +833,34 @@ const karar = story('ARA_KARAR', {
 `),
   ],
   choices: [
-    option('K_BILDIR', 'Savcılığa yazılı bildir: kayıtlar ve usulüne uygun teşhis talebi', {
+    option('K_BILDIR', 'Bildiklerini savcıya yaz', {
       score: { USUL_BILGISI: 100, SAVUNMA_STRATEJISI: 50 },
-      effects: [raise('bildirdi'), raise('karar_verildi'), inc('legal_hits')],
+      effects: [
+        raise('bildirdi'),
+        raise('karar_verildi'),
+        inc('legal_hits'),
+        // Savcının harekete geçmesi için bildirim kayıtlara bağlı olmalı: cihaz+mesaj, özçekim+halka ve bütün bir dosya.
+        ifThen(all(has('ded_baskasi'), has('ded_hesap'), ref('dosya_butun')), [raise('bildirim_guclu')]),
+      ],
       good: 'Başka bir kişinin faili olabileceğine dair bilgiyi Cumhuriyet savcılığına bildirdin (CMK 158, 160) ve kayıtların, usulüne uygun teşhisin istenmesini talep ettin. Şüpheliyi aramak kolluğun işidir.',
       category: 'USUL_BILGISI',
       next: 'ARA_BILDIR',
     }),
-    option('K_YUZLES', 'Tolga’yı bul ve yüzleş', {
+    option('K_YUZLES', 'Tolga’yı bul, onunla konuş', {
       score: { SAVUNMA_STRATEJISI: -80 },
       effects: [raise('tolga_kacti'), raise('karar_verildi')],
       bad: 'Avukat şüpheliyi kovalamaz ve sorgulamaz; bilgiyi savcılığa bildirir (CMK 158–160). Yüzleşme şüpheliyi uyardı.',
       category: 'SAVUNMA_STRATEJISI',
       next: 'ARA_YUZLES',
     }),
-    option('K_NERMIN', 'Nermin Hanım’a özçekimi göster; o tanısın', {
+    option('K_NERMIN', 'Özçekimi Nermin Hanım’a göster', {
       visibleWhen: has('ev_selfie'),
       effects: [inc('ethics', 2), raise('etik_kirlik'), raise('karar_verildi'), score('SAVUNMA_STRATEJISI', -150)],
       bad: 'Tanıklık eden mağdura tek bir fotoğraf göstermek, kolluğun hatasını savunma eliyle tekrarlamaktır: meslek kurallarına aykırıdır (Av.K. 34), tanığı etkileme olarak değerlendirilebilir (TCK 277); yeni “teşhis” değersizdir (PVSK ek md. 6).',
       category: 'SAVUNMA_STRATEJISI',
       next: 'ARA_NERMIN',
     }),
-    toHub('K_BEKLE', 'Şimdilik bekle'),
+    toHub('K_BEKLE', 'Şimdilik bekle, kayıt topla'),
   ],
 });
 
@@ -860,11 +871,11 @@ const bildir = story('ARA_BILDIR', {
   onFirstEnter: [meet('orhan')],
   lines: [
     W(
-      any(has('ded_baskasi'), has('ded_hesap'), has('clue_selfie')),
+      flag('bildirim_guclu'),
       `
 # PAZARTESİ 09.30 — BURSA CUMHURİYET BAŞSAVCILIĞI [bg:adliye]
 > Savcı Orhan Bayar’ın odası küçüktü; dosya yığınları, bir saksı, sararmış bir takvim. Dilekçemi okudu. İki kez. Ekleri tek tek çevirdi.
-orhan: Giriş cihazı farklı. Özçekimde bir halka. Telefonunda bir mesaj. Hesabı başkası kullanıyormuş.
+orhan: Kayıtlar, saatler, ekler. Oturum başka bir telefondan açılmış. Hesabı o gece başkası kullanıyormuş.
 orhan: Bunu bana getirdiniz. Mahkemede sürpriz yapmak yerine.
 - Bu bir sürpriz değil Sayın Savcım. Bir suç duyurusu. Şüpheliyi bulmak benim işim değil.
 > Savcı gözlüğünü çıkardı. İlk kez gülümsediğini gördüm; yorgun, kısa.
@@ -901,7 +912,8 @@ const yuzles = story('ARA_YUZLES', {
 leyla: Neredesin? Derya aradı, Demirtaş’a gittiğini söyledi. [phone]
 - Tolga kaçtı.
 leyla: Tabii kaçtı. Bir avukat gece yarısı kapısını çalarsa sen de kaçardın. [phone]
-leyla: Biz kolluk değiliz Deniz. Bildiğini savcıya yazarsın; arayan o olur, bulan o olur. Şimdi bulunacak bir adam yok. [phone]
+leyla: Kovalamak avukatın işi değildir Deniz. Biz kolluk değiliz. Bildiğini savcıya yazarsın; arayan o olur, bulan o olur. [phone]
+leyla: Şimdi bulunacak bir adam yok. Bir de “avukat beni uyardı” diyecek bir adam var. Yarın sabah dilekçeni yine yazacaksın; bu sefer geç. [phone]
 ~ Merdivenin ortasında durdum. Bir adamı yakalamak istemedim; sadece onun ağzından duymak istedim. Şimdi kimse onun ağzından hiçbir şey duymayacak.
 `),
   choices: [cont('YUZLES_DON', 'Büroya dön', HUB, { role: 'PRIMARY' })],
@@ -966,9 +978,11 @@ const dil = story('ARA_DIL', {
   ...ARA,
   title: 'Ek delil talebi',
   background: 'buro',
-  lines: B(`
-> Duruşmaya iki haftadan fazla var. Dilekçe en geç beş gün önce mahkemede olmalı.
-`),
+  lines: [
+    W(cmp(v('ara_day'), '==', 1), `> Duruşmaya on dokuz gün var. Mahkemenin cevapları istemesi için zaman yeter; dilekçe erken giderse.`),
+    W(cmp(v('ara_day'), '==', 2), `> Duruşmaya on iki gün var. Müzekkere bugün çıkarsa cevap yetişir; yarın çıkarsa belki.`),
+    O(`> Duruşmaya beş gün var. Müzekkere bugün çıkarsa cevap duruşma sabahı gelir; ancak yetişir.`),
+  ],
   choices: [
     option('AD_SELFIE', 'HızlıPaket’ten giriş cihazı ve doğrulama özçekimi', {
       visibleWhen: all(not(flag('selfie_istendi')), not(has('ev_selfie'))),
@@ -1278,7 +1292,15 @@ const sonNodes = [
     title: 'Duruşmadan önceki gece',
     onEnter: [
       ...son.effects,
-      ifThen(all(flag('bildirdi'), flag('derya_konustu'), not(flag('tolga_kacti'))), [raise('tolga_teslim')]),
+      ifThen(
+        all(
+          flag('bildirim_guclu'),
+          flag('derya_konustu'),
+          not(flag('tolga_kacti')),
+          cmp({ score: 'raw' }, '>=', T_TESLIM),
+        ),
+        [raise('tolga_teslim')],
+      ),
     ],
     lines: B(`
 # PAZARTESİ 22.40 — ARSLAN HUKUK [bg:buro_gece]

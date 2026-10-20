@@ -13,46 +13,91 @@
       }
     },
     {
-      "id": "lehe2",
-      "label": "En az iki bağımsız lehe bulgu",
+      "id": "hesap_curudu",
+      "label": "Konum kaydı cevaplandı: hesabı o gece başka bir telefon ya da başka bir yüz taşıyordu (kayıtlarla bağlanmış)",
+      "when": { "any": [{ "hasEvidence": "ded_hesap" }, { "hasEvidence": "ded_baskasi" }] }
+    },
+    {
+      "id": "mazeret_var",
+      "label": "Olay saatinde evde olduğu bağımsız kayıtla destekleniyor (yönlendirilmiş tanık sayılmaz)",
       "when": {
-        "cmp": [
-          {
-            "add": [
-              { "if": { "when": { "hasEvidence": "ded_mazeret" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "hasEvidence": "ded_evde" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "hasEvidence": "ded_baskasi" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "hasEvidence": "ded_hesap" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "hasEvidence": "ded_halka" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "flag": "contra_n5" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "flag": "contra_f5" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "flag": "contra_f6" }, "then": 1, "else": 0 } }
-            ]
-          },
-          ">=",
-          2
+        "any": [
+          { "all": [{ "hasEvidence": "ded_mazeret" }, { "not": { "flag": "kadir_kocluk" } }] },
+          { "hasEvidence": "ded_evde" }
         ]
       }
     },
     {
-      "id": "mutalaa_beraat",
-      "label": "Savcı beraat isteyecek kadar güçlü dosya",
+      "id": "halka_var",
+      "label": "İlk tarifteki halka sanığa uymuyor (aynı 112 beyanı bir kez sayılır)",
+      "when": { "any": [{ "hasEvidence": "ded_halka" }, { "flag": "contra_n5" }, { "flag": "contra_f5" }] }
+    },
+    {
+      "id": "dosya_butun",
+      "label": "Savunma dosyası bütün: dokuz çıkarımdan en az yedisi kurulmuş",
+      "when": {
+        "cmp": [
+          {
+            "add": [
+              { "if": { "when": { "hasEvidence": "ded_kirlenme" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_usulsuz" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_halka" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_bicak" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_mazeret" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_eski_foto" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_baskasi" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_hesap" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_evde" }, "then": 1, "else": 0 } }
+            ]
+          },
+          ">=",
+          7
+        ]
+      }
+    },
+    {
+      "id": "hesap_kayitta",
+      "label": "Hesap cevabı duruşma tutanağında: cihaz/mesaj, özçekim/halka ya da kolluk tanığının kabulü",
+      "when": {
+        "any": [
+          { "all": [{ "flag": "contra_gps" }, { "hasEvidence": "ded_hesap" }] },
+          { "all": [{ "flag": "contra_selfie" }, { "hasEvidence": "ded_baskasi" }] },
+          { "flag": "contra_f7" }
+        ]
+      }
+    },
+    {
+      "id": "mazeret_kayitta",
+      "label": "Mazeret duruşma tutanağında: 186 araması + kesinti, kolluğun araştırmadığını kabulü ya da tanığın kayıtla doğrulanması",
+      "when": {
+        "any": [
+          { "all": [{ "flag": "contra_186" }, { "hasEvidence": "ded_evde" }] },
+          { "all": [{ "flag": "contra_f6" }, { "ref": "mazeret_var" }] },
+          { "flag": "kadir_215" }
+        ]
+      }
+    },
+    {
+      "id": "beraat_delil",
+      "label": "Delil zinciri tam ve tutanakta: teşhis çöktü, konum kaydı cevaplandı, mazeret kayıtla doğrulandı; dosya bütün",
       "when": {
         "all": [
           { "ref": "teshis_coktu" },
-          {
-            "any": [
-              { "hasEvidence": "ded_mazeret" },
-              { "hasEvidence": "ded_evde" },
-              { "hasEvidence": "ded_hesap" },
-              { "hasEvidence": "ded_baskasi" },
-              { "flag": "contra_gps" },
-              { "flag": "contra_selfie" },
-              { "flag": "contra_186" }
-            ]
-          }
+          { "ref": "hesap_kayitta" },
+          { "ref": "mazeret_kayitta" },
+          { "ref": "dosya_butun" }
         ]
       }
+    },
+    {
+      "id": "derin",
+      "label": "Kayıtlar duruşmada derinlemesine tartışıldı (ham skor en az 7500)",
+      "when": { "cmp": [{ "score": "raw" }, ">=", 7500] }
+    },
+    {
+      "id": "mutalaa_beraat",
+      "label": "Savcı beraat isteyecek kadar güçlü dosya (delil zinciri + heyetin ikna düzeyi en az 6 + derin tartışma)",
+      "when": { "all": [{ "ref": "beraat_delil" }, { "cmp": [{ "var": "pers" }, ">=", 6] }, { "ref": "derin" }] }
     }
   ],
   "court": {
@@ -285,7 +330,7 @@
           "label": "Kayıtların tartışılması",
           "role": "PRIMARY",
           "visibleWhen": { "not": { "flag": "etik_kirlik" } },
-          "next": "T_01"
+          "next": "T_01_G"
         }
       ],
       "stage": {
@@ -340,6 +385,69 @@
         }
       ],
       "choices": [{ "id": "TETIK_DEVAM", "kind": "CONTINUE", "label": "Kapı", "role": "PRIMARY", "next": "R_KARAR" }]
+    },
+    {
+      "id": "T_01_G",
+      "type": "DECISION",
+      "routes": [{ "when": { "flag": "ali_kocluk" }, "to": "T_ALI" }, { "to": "T_01" }],
+      "choices": []
+    },
+    {
+      "id": "T_ALI",
+      "type": "STORY",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "title": "Bakkalın ifadesi",
+      "background": "durusma_salonu",
+      "hud": ["cred", "pers"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "orhan",
+              "text": "Sayın Başkan, kayıtlara geçmeden önce bir hususu tutanağa geçirmek isterim."
+            },
+            {
+              "speaker": "orhan",
+              "text": "Olay yeri tanığı bakkal Ali Rıza Tunç, sanık müdafiinin kendisine “bıçak olmadığını da söylerseniz iyi olur” dediğini kahvehanede anlatmış. Kolluk duymuş; tanığın ifadesi dün Başsavcılığımızca alındı."
+            },
+            {
+              "speaker": "orhan",
+              "text": "Tanık, “Avukat hanım öyle dedi, ben de söyleyecektim” diyor. Bıçağı görmediğini de söylüyor; görmediğini bilmediğini de."
+            },
+            { "speaker": "rahmi", "text": "Tutanağa geçsin. Müdafi, diyeceğiniz?" },
+            { "speaker": "player", "text": "Sayın Başkan… Tanığa yalnızca duyduğunu söylemesini…" },
+            {
+              "speaker": "rahmi",
+              "text": "Tanık başka bir şey söylüyor müdafi. Bu konuda Başsavcılığın ayrıca değerlendirme yapacağı anlaşılmıştır. Devam ediyoruz."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Elif Karaca dosyanın kenarına bir not düştü. Kısa. Okumama gerek yoktu."
+            },
+            {
+              "speaker": "player",
+              "text": "“Tamamdır, ben hallederim.” Halletmiş. Bir bakkal, bir kahvehane ve bir cümle. Bir tanığa söylediğin her söz, sonunda bir tutanağa yazılır.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "TALI_DEVAM",
+          "kind": "CONTINUE",
+          "label": "Kayıtların tartışılması",
+          "role": "PRIMARY",
+          "next": "T_01",
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "ali_ifsa", "op": "set", "value": true },
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -150 }
+          ]
+        }
+      ]
     },
     {
       "id": "T_01",
@@ -780,6 +888,20 @@
             },
             { "text": "; kimse başka bir şey söylemedi." }
           ]
+        },
+        {
+          "id": "F7",
+          "order": 7,
+          "segments": [
+            { "text": "Konum kaydı açık: hesap sanığın, " },
+            {
+              "text": "girişte yüzü de makine onayladı",
+              "highlightWhen": {
+                "any": [{ "flag": "press_f7" }, { "hasEvidence": "clue_cihaz" }, { "hasEvidence": "clue_selfie" }]
+              }
+            },
+            { "text": ". Başka birinin olması mümkün değil." }
+          ]
         }
       ],
       "stage": {
@@ -1180,6 +1302,112 @@
           }
         },
         {
+          "id": "PR_F7",
+          "kind": "PRESS",
+          "match": { "statement": "F7" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Makine onayladı diyorsunuz. Onaylanan yüze siz baktınız mı? Oturumun hangi telefondan açıldığına?"
+                },
+                {
+                  "speaker": "ferhat",
+                  "text": "Şirket “onaylı” yazmış avukat hanım. Yüzde doksan bir. Biz şirketin yazdığına bakarız."
+                },
+                { "speaker": "player", "text": "Yani hayır." },
+                { "speaker": "ferhat", "text": "Gerek yoktu. Hesap onun, motor onun, bölge onun." },
+                { "speaker": "player", "text": "Gerek yoktu. Bu dosyanın ikinci adı.", "style": "thought" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_f7", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PS_F7",
+          "kind": "PRESENT",
+          "match": { "statement": "F7", "evidence": ["ded_hesap", "ded_baskasi"] },
+          "responses": [
+            {
+              "when": { "hasEvidence": "ded_baskasi" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Aynı kaydın bir üst satırı: oturum 22.58’de Redmi …7741’den açıldı. Sanığın el konulan telefonu Samsung …2210."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Makinenin “onayladığı” özçekimde sol kulakta bir halka var. Mağdurun 112’deki tarifi: “Sol kulağında halka vardı.” Sanığın kulakları delinmemiş."
+                },
+                { "speaker": "ferhat", "text": "Yüzde doksan bir… Makine…" },
+                { "speaker": "elif", "text": "Makine yüzde dokuz yanılıyor tanık. Bu dosyada o yüzde dokuz bir insan." }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Aynı kaydın bir üst satırı: oturum 22.58’de Redmi …7741’den açıldı. Sanığın el konulan telefonu Samsung …2210."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Telefon raporunda 22.31: “Hesabı ben açıyorum bu gece, sen yat.” Hesap o gece sanığın değil, başkasının elindeydi."
+                },
+                { "speaker": "ferhat", "text": "Bunu… şirket yazmamıştı." },
+                { "speaker": "rahmi", "text": "Şirket yazmış tanık. Bir satır yukarıda." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "contra_f7", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Konum kaydı hesabın yerini gösterir, kişinin değil: oturum başka bir telefondan açılmış, onaylanan yüz tarife uyan başka biri.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_F7_KAYIT",
+          "kind": "PRESENT",
+          "match": { "statement": "F7", "evidence": ["ev_gps", "ev_tel", "ev_selfie"] },
+          "enabledWhen": {
+            "any": [{ "hasEvidence": "clue_cihaz" }, { "hasEvidence": "clue_mesaj" }, { "hasEvidence": "clue_selfie" }]
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Kayıt sizin dediğinizi söylemiyor Sayın Tanık. Oturum sanığın telefonundan açılmamış; o gece hesap başka bir elde."
+                },
+                { "speaker": "ferhat", "text": "Biz… o satıra bakmadık." },
+                {
+                  "speaker": "player",
+                  "text": "Bakmadılar. Kâğıdın yarısını okumak, bu dosyada bir gelenek.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "press_f7", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Kayıtların kendisi, hesabı o gece başka bir telefonun ya da başka bir yüzün taşıdığını gösteriyor.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
           "id": "OB_F5",
           "kind": "OBJECT",
           "match": { "statement": "F5", "ground": "g_kanaat" },
@@ -1207,7 +1435,18 @@
         {
           "id": "PS_SAVCILIK2",
           "kind": "PRESENT",
-          "match": { "evidence": ["ev_teshis", "ev_nermin_kolluk", "ev_darp", "ev_gps", "ev_ihbar", "ev_sabika"] },
+          "match": {
+            "evidence": [
+              "ev_teshis",
+              "ev_nermin_kolluk",
+              "ev_darp",
+              "ev_gps",
+              "ev_ihbar",
+              "ev_sabika",
+              "ev_tel",
+              "ev_selfie"
+            ]
+          },
           "maxUses": 10,
           "responses": [
             {
@@ -1508,7 +1747,25 @@
           "next": "$stay",
           "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": -10 }]
         },
-        { "id": "KS_BITIR", "kind": "CONTINUE", "label": "Sorularım bu kadar", "role": "PRIMARY", "next": "T_03X" }
+        {
+          "id": "KS_BITIR",
+          "kind": "CONTINUE",
+          "label": "Sorularım bu kadar",
+          "role": "PRIMARY",
+          "next": "T_03X",
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "flag": "kadir_kocluk" },
+              "then": [
+                { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+                { "type": "VAR", "var": "pers", "op": "dec", "value": 2 },
+                { "type": "VAR", "var": "kadir_ifsa", "op": "set", "value": true },
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -200 }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -1525,16 +1782,25 @@
         {
           "when": { "flag": "kadir_kocluk" },
           "lines": [
+            { "speaker": "orhan", "text": "Tanık, olay gecesi elektrik saat kaçta gitti?" },
+            { "speaker": "kadir", "text": "23.40." },
+            { "speaker": "orhan", "text": "Kollukta saate bakmadığınızı söylemişsiniz. 23.40’ı nereden biliyorsunuz?" },
+            {
+              "speaker": "kadir",
+              "text": "Ben… avukat hanım söyledi. “Kayıt öyle” dedi. Ben de ezberledim. Ben sayıları iyi ezberlerim."
+            },
+            { "speaker": "narrator", "text": "Salonda bir uğultu. Başkan tokmağa vurdu.", "fx": "shake" },
+            {
+              "speaker": "rahmi",
+              "text": "Tanığın bu beyanı tutanağa geçsin. Tanığın saate ilişkin anlatımının hangi ölçüde değerlendirileceği hükümde takdir edilecektir."
+            },
             {
               "speaker": "orhan",
-              "text": "Tanık, saatin 23.40 olduğunu nereden biliyorsunuz? Az önce saate bakmadığınızı söylediniz; kollukta da öyle demişsiniz."
+              "text": "Müdafiin tanıkla görüşmesine ilişkin Başsavcılığa ayrıca bilgi vereceğim Sayın Başkan."
             },
-            { "speaker": "kadir", "text": "Ben… avukat hanım söyledi. “Kayıt öyle” dedi. Ben de ezberledim." },
-            { "speaker": "narrator", "text": "Salonda bir uğultu. Başkan tokmağa vurdu.", "fx": "shake" },
-            { "speaker": "rahmi", "text": "Tanığın bu beyanı tutanağa geçsin. Müdafi, diyeceğiniz?" },
             {
               "speaker": "player",
-              "text": "Bir terziye bir sayı ezberlettim. O da dürüst bir adam olduğu için, ezberlettiğimi de söyledi.",
+              "text": "Bir terziye bir sayı ezberlettim. O da dürüst bir adam olduğu için, ezberlettiğimi de söyledi. Sormasam da sorulacaktı; savcılar saati hep sorar.",
               "style": "thought"
             }
           ]
@@ -1573,7 +1839,7 @@
         {
           "id": "X_ITIRAZ",
           "kind": "OPTION",
-          "label": "İtiraz: soru tanığı küçük düşürüyor",
+          "label": "İtiraz: soru tanığın sağlığını hedef alıyor, yersiz",
           "responses": [
             {
               "lines": [
@@ -1657,7 +1923,7 @@
         {
           "id": "X_215",
           "kind": "OPTION",
-          "label": "Diyecek: tanığın anlatısı kesinti kaydıyla doğrulanıyor",
+          "label": "Diyecek: saati tanık değil, kayıt söylüyor",
           "visibleWhen": { "not": { "flag": "kadir_kocluk" } },
           "responses": [
             {
@@ -1704,7 +1970,8 @@
               "then": [
                 { "type": "SCORE", "category": "USUL_BILGISI", "amount": 150 },
                 { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
-                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+                { "type": "VAR", "var": "kadir_215", "op": "set", "value": true }
               ],
               "else": [
                 { "type": "SCORE", "category": "USUL_BILGISI", "amount": -40 },
@@ -1901,6 +2168,13 @@
       "title": "Mütalaa",
       "courtStage": "MUTALAA",
       "background": "durusma_salonu",
+      "onFirstEnter": [
+        {
+          "type": "IF",
+          "when": { "all": [{ "not": { "flag": "tolga_teslim" } }, { "ref": "mutalaa_beraat" }] },
+          "then": [{ "type": "VAR", "var": "mutalaa_b", "op": "set", "value": true }]
+        }
+      ],
       "lines": [
         {
           "when": { "flag": "tolga_teslim" },
@@ -2080,7 +2354,7 @@
           "maxUses": 1,
           "responses": [
             {
-              "when": { "hasEvidence": "ded_halka" },
+              "when": { "ref": "halka_var" },
               "lines": [
                 {
                   "speaker": "player",
@@ -2103,7 +2377,7 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "hasEvidence": "ded_halka" },
+              "when": { "ref": "halka_var" },
               "then": [
                 { "type": "VAR", "var": "arg_halka", "op": "set", "value": true },
                 { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 },
@@ -2124,7 +2398,7 @@
           "maxUses": 1,
           "responses": [
             {
-              "when": { "any": [{ "hasEvidence": "ded_mazeret" }, { "hasEvidence": "ded_evde" }] },
+              "when": { "ref": "mazeret_var" },
               "lines": [
                 {
                   "speaker": "player",
@@ -2147,7 +2421,7 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "any": [{ "hasEvidence": "ded_mazeret" }, { "hasEvidence": "ded_evde" }] },
+              "when": { "ref": "mazeret_var" },
               "then": [
                 { "type": "VAR", "var": "arg_mazeret", "op": "set", "value": true },
                 { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 },
@@ -2168,7 +2442,7 @@
           "maxUses": 1,
           "responses": [
             {
-              "when": { "any": [{ "hasEvidence": "ded_hesap" }, { "hasEvidence": "ded_baskasi" }] },
+              "when": { "ref": "hesap_curudu" },
               "lines": [
                 {
                   "speaker": "player",
@@ -2191,7 +2465,7 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "any": [{ "hasEvidence": "ded_hesap" }, { "hasEvidence": "ded_baskasi" }] },
+              "when": { "ref": "hesap_curudu" },
               "then": [
                 { "type": "VAR", "var": "arg_hesap", "op": "set", "value": true },
                 { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 },

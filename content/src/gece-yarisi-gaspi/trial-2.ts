@@ -30,7 +30,7 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, Cond } from '../../../tools/content/src/kit/index.js';
 import { B, O, T, W } from './dsl.js';
-import { H2, court2, wrongMove } from './shared.js';
+import { H2, T_DERIN, court2, wrongMove } from './shared.js';
 
 // 68-trial-2: 2. celse. Koridor, açılış (yeni gelişme ya da etik ihlali), HızlıPaket kayıtlarının tartışılması,
 // Ferhat Oral’ın tanıklığı (F1–F5), Kadir Usta ve savcının karşı sorusu, Gamze, mütalaa, dayanaklar, esas savunma,
@@ -70,35 +70,68 @@ export const trial2: CasePart = {
       ),
     },
     {
-      id: 'lehe2',
-      label: 'En az iki bağımsız lehe bulgu',
+      id: 'hesap_curudu',
+      label: 'Konum kaydı cevaplandı: hesabı o gece başka bir telefon ya da başka bir yüz taşıyordu (kayıtlarla bağlanmış)',
+      when: any(has('ded_hesap'), has('ded_baskasi')),
+    },
+    {
+      id: 'mazeret_var',
+      label: 'Olay saatinde evde olduğu bağımsız kayıtla destekleniyor (yönlendirilmiş tanık sayılmaz)',
+      when: any(all(has('ded_mazeret'), not(flag('kadir_kocluk'))), has('ded_evde')),
+    },
+    {
+      id: 'halka_var',
+      label: 'İlk tarifteki halka sanığa uymuyor (aynı 112 beyanı bir kez sayılır)',
+      when: any(has('ded_halka'), flag('contra_n5'), flag('contra_f5')),
+    },
+    {
+      id: 'dosya_butun',
+      label: 'Savunma dosyası bütün: dokuz çıkarımdan en az yedisi kurulmuş',
       when: atLeast(
-        2,
+        7,
+        has('ded_kirlenme'),
+        has('ded_usulsuz'),
+        has('ded_halka'),
+        has('ded_bicak'),
         has('ded_mazeret'),
-        has('ded_evde'),
+        has('ded_eski_foto'),
         has('ded_baskasi'),
         has('ded_hesap'),
-        has('ded_halka'),
-        flag('contra_n5'),
-        flag('contra_f5'),
-        flag('contra_f6'),
+        has('ded_evde'),
       ),
     },
     {
-      id: 'mutalaa_beraat',
-      label: 'Savcı beraat isteyecek kadar güçlü dosya',
-      when: all(
-        ref('teshis_coktu'),
-        any(
-          has('ded_mazeret'),
-          has('ded_evde'),
-          has('ded_hesap'),
-          has('ded_baskasi'),
-          flag('contra_gps'),
-          flag('contra_selfie'),
-          flag('contra_186'),
-        ),
+      id: 'hesap_kayitta',
+      label: 'Hesap cevabı duruşma tutanağında: cihaz/mesaj, özçekim/halka ya da kolluk tanığının kabulü',
+      when: any(
+        all(flag('contra_gps'), has('ded_hesap')),
+        all(flag('contra_selfie'), has('ded_baskasi')),
+        flag('contra_f7'),
       ),
+    },
+    {
+      id: 'mazeret_kayitta',
+      label: 'Mazeret duruşma tutanağında: 186 araması + kesinti, kolluğun araştırmadığını kabulü ya da tanığın kayıtla doğrulanması',
+      when: any(
+        all(flag('contra_186'), has('ded_evde')),
+        all(flag('contra_f6'), ref('mazeret_var')),
+        flag('kadir_215'),
+      ),
+    },
+    {
+      id: 'beraat_delil',
+      label: 'Delil zinciri tam ve tutanakta: teşhis çöktü, konum kaydı cevaplandı, mazeret kayıtla doğrulandı; dosya bütün',
+      when: all(ref('teshis_coktu'), ref('hesap_kayitta'), ref('mazeret_kayitta'), ref('dosya_butun')),
+    },
+    {
+      id: 'derin',
+      label: `Kayıtlar duruşmada derinlemesine tartışıldı (ham skor en az ${T_DERIN})`,
+      when: cmp({ score: 'raw' }, '>=', T_DERIN),
+    },
+    {
+      id: 'mutalaa_beraat',
+      label: 'Savcı beraat isteyecek kadar güçlü dosya (delil zinciri + heyetin ikna düzeyi en az 6 + derin tartışma)',
+      when: all(ref('beraat_delil'), cmp(v('pers'), '>=', 6), ref('derin')),
     },
   ],
   court: {
@@ -203,7 +236,7 @@ rahmi: Duruşmaya devam olundu. Ara karar gereği HızlıPaket firmasının ceva
       ],
       choices: [
         cont('T00_ETIK', 'Devam', 'T_ETIK', { role: 'PRIMARY', visibleWhen: flag('etik_kirlik') }),
-        cont('T00_DEVAM', 'Kayıtların tartışılması', 'T_01', {
+        cont('T00_DEVAM', 'Kayıtların tartışılması', 'T_01_G', {
           role: 'PRIMARY',
           visibleWhen: not(flag('etik_kirlik')),
         }),
@@ -225,6 +258,29 @@ derya/kizgin: O kadına bir fotoğraf daha gösterdin. Kardeşimi bir fotoğraf 
 > Barış bana bakmadı. Merdivenin başında durdu, bir saniyeliğine, sonra indi.
 `),
       choices: [cont('TETIK_DEVAM', 'Kapı', 'R_KARAR', { role: 'PRIMARY' })],
+    }),
+    decisionNode('T_01_G', [{ when: flag('ali_kocluk'), to: 'T_ALI' }, { to: 'T_01' }]),
+    story('T_ALI', {
+      ...H2,
+      title: 'Bakkalın ifadesi',
+      background: 'durusma_salonu',
+      hud: ['cred', 'pers'],
+      lines: B(`
+orhan: Sayın Başkan, kayıtlara geçmeden önce bir hususu tutanağa geçirmek isterim.
+orhan: Olay yeri tanığı bakkal Ali Rıza Tunç, sanık müdafiinin kendisine “bıçak olmadığını da söylerseniz iyi olur” dediğini kahvehanede anlatmış. Kolluk duymuş; tanığın ifadesi dün Başsavcılığımızca alındı.
+orhan: Tanık, “Avukat hanım öyle dedi, ben de söyleyecektim” diyor. Bıçağı görmediğini de söylüyor; görmediğini bilmediğini de.
+rahmi: Tutanağa geçsin. Müdafi, diyeceğiniz?
+- Sayın Başkan… Tanığa yalnızca duyduğunu söylemesini…
+rahmi: Tanık başka bir şey söylüyor müdafi. Bu konuda Başsavcılığın ayrıca değerlendirme yapacağı anlaşılmıştır. Devam ediyoruz.
+> Elif Karaca dosyanın kenarına bir not düştü. Kısa. Okumama gerek yoktu.
+~ “Tamamdır, ben hallederim.” Halletmiş. Bir bakkal, bir kahvehane ve bir cümle. Bir tanığa söylediğin her söz, sonunda bir tutanağa yazılır.
+`),
+      choices: [
+        cont('TALI_DEVAM', 'Kayıtların tartışılması', 'T_01', {
+          role: 'PRIMARY',
+          effects: [dec('cred'), dec('pers'), raise('ali_ifsa'), score('SAVUNMA_STRATEJISI', -150)],
+        }),
+      ],
     }),
     choiceNode('T_01', {
       ...H2,
@@ -429,6 +485,11 @@ rahmi: Müdafi, sorularınız.
           ],
           flag('press_f5'),
         ),
+        statement('F7', 7, [
+          'Konum kaydı açık: hesap sanığın, ',
+          hl('girişte yüzü de makine onayladı', any(flag('press_f7'), has('clue_cihaz'), has('clue_selfie'))),
+          '. Başka birinin olması mümkün değil.',
+        ]),
       ],
       rules: [
         pressRule('PR_F1', 'F1', {
@@ -600,6 +661,52 @@ ferhat: Halka… Dökümde bu var mıydı?
 rahmi: Vardı tanık. Dosyada.
 `),
         }),
+        pressRule('PR_F7', 'F7', {
+          score: { SORGULAMA: 25 },
+          effects: [raise('press_f7')],
+          responses: B(`
+- Makine onayladı diyorsunuz. Onaylanan yüze siz baktınız mı? Oturumun hangi telefondan açıldığına?
+ferhat: Şirket “onaylı” yazmış avukat hanım. Yüzde doksan bir. Biz şirketin yazdığına bakarız.
+- Yani hayır.
+ferhat: Gerek yoktu. Hesap onun, motor onun, bölge onun.
+~ Gerek yoktu. Bu dosyanın ikinci adı.
+`),
+        }),
+        presentRule('PS_F7', 'F7', ['ded_hesap', 'ded_baskasi'], {
+          score: { SORGULAMA: 300 },
+          effects: [inc('pers', 2), raise('contra_f7')],
+          good: 'Konum kaydı hesabın yerini gösterir, kişinin değil: oturum başka bir telefondan açılmış, onaylanan yüz tarife uyan başka biri.',
+          category: 'SORGULAMA',
+          responses: [
+            W(
+              has('ded_baskasi'),
+              `
+- Aynı kaydın bir üst satırı: oturum 22.58’de Redmi …7741’den açıldı. Sanığın el konulan telefonu Samsung …2210.
+- Makinenin “onayladığı” özçekimde sol kulakta bir halka var. Mağdurun 112’deki tarifi: “Sol kulağında halka vardı.” Sanığın kulakları delinmemiş.
+ferhat: Yüzde doksan bir… Makine…
+elif: Makine yüzde dokuz yanılıyor tanık. Bu dosyada o yüzde dokuz bir insan.
+`,
+            ),
+            O(`
+- Aynı kaydın bir üst satırı: oturum 22.58’de Redmi …7741’den açıldı. Sanığın el konulan telefonu Samsung …2210.
+- Telefon raporunda 22.31: “Hesabı ben açıyorum bu gece, sen yat.” Hesap o gece sanığın değil, başkasının elindeydi.
+ferhat: Bunu… şirket yazmamıştı.
+rahmi: Şirket yazmış tanık. Bir satır yukarıda.
+`),
+          ],
+        }),
+        presentRule('PS_F7_KAYIT', 'F7', ['ev_gps', 'ev_tel', 'ev_selfie'], {
+          enabledWhen: any(has('clue_cihaz'), has('clue_mesaj'), has('clue_selfie')),
+          score: { SORGULAMA: 150 },
+          effects: [inc('pers'), raise('press_f7')],
+          good: 'Kayıtların kendisi, hesabı o gece başka bir telefonun ya da başka bir yüzün taşıdığını gösteriyor.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Kayıt sizin dediğinizi söylemiyor Sayın Tanık. Oturum sanığın telefonundan açılmamış; o gece hesap başka bir elde.
+ferhat: Biz… o satıra bakmadık.
+~ Bakmadılar. Kâğıdın yarısını okumak, bu dosyada bir gelenek.
+`),
+        }),
         objectRule('OB_F5', 'F5', 'g_kanaat', {
           score: { SORGULAMA: 50 },
           effects: [inc('pers')],
@@ -613,7 +720,7 @@ rahmi: Yerinde. Tanık, olgulara dönün.
         presentRule(
           'PS_SAVCILIK2',
           undefined,
-          ['ev_teshis', 'ev_nermin_kolluk', 'ev_darp', 'ev_gps', 'ev_ihbar', 'ev_sabika'],
+          ['ev_teshis', 'ev_nermin_kolluk', 'ev_darp', 'ev_gps', 'ev_ihbar', 'ev_sabika', 'ev_tel', 'ev_selfie'],
           {
             maxUses: 10,
             effects: [...wrongMove, score('SORGULAMA', -150, 'hatali')],
@@ -744,7 +851,18 @@ kadir: Bilmiyorum. Saate bakmadım. Elektrik gidince çıktım, gelmeden girdi. 
           ],
           next: '$stay',
         }),
-        cont('KS_BITIR', 'Sorularım bu kadar', 'T_03X', { role: 'PRIMARY' }),
+        cont('KS_BITIR', 'Sorularım bu kadar', 'T_03X', {
+          role: 'PRIMARY',
+          // Yönlendirilmiş tanık: savcının karşı sorusu saati her durumda sınar ve yönlendirmeyi açığa çıkarır.
+          effects: [
+            ifThen(flag('kadir_kocluk'), [
+              dec('cred'),
+              dec('pers', 2),
+              raise('kadir_ifsa'),
+              score('SAVUNMA_STRATEJISI', -200),
+            ]),
+          ],
+        }),
       ],
     }),
     court2.objection('T_03X', {
@@ -756,11 +874,14 @@ kadir: Bilmiyorum. Saate bakmadım. Elektrik gidince çıktım, gelmeden girdi. 
         W(
           flag('kadir_kocluk'),
           `
-orhan: Tanık, saatin 23.40 olduğunu nereden biliyorsunuz? Az önce saate bakmadığınızı söylediniz; kollukta da öyle demişsiniz.
-kadir: Ben… avukat hanım söyledi. “Kayıt öyle” dedi. Ben de ezberledim.
+orhan: Tanık, olay gecesi elektrik saat kaçta gitti?
+kadir: 23.40.
+orhan: Kollukta saate bakmadığınızı söylemişsiniz. 23.40’ı nereden biliyorsunuz?
+kadir: Ben… avukat hanım söyledi. “Kayıt öyle” dedi. Ben de ezberledim. Ben sayıları iyi ezberlerim.
 > Salonda bir uğultu. Başkan tokmağa vurdu. {shake}
-rahmi: Tanığın bu beyanı tutanağa geçsin. Müdafi, diyeceğiniz?
-~ Bir terziye bir sayı ezberlettim. O da dürüst bir adam olduğu için, ezberlettiğimi de söyledi.
+rahmi: Tanığın bu beyanı tutanağa geçsin. Tanığın saate ilişkin anlatımının hangi ölçüde değerlendirileceği hükümde takdir edilecektir.
+orhan: Müdafiin tanıkla görüşmesine ilişkin Başsavcılığa ayrıca bilgi vereceğim Sayın Başkan.
+~ Bir terziye bir sayı ezberlettim. O da dürüst bir adam olduğu için, ezberlettiğimi de söyledi. Sormasam da sorulacaktı; savcılar saati hep sorar.
 `,
         ),
         W(
@@ -777,7 +898,7 @@ orhan: Tanık, karanlıkta, kataraktla, balkondan aşağıdaki kişiyi gördün�
       ],
       next: 'T_04_G',
       options: [
-        option('X_ITIRAZ', 'İtiraz: soru tanığı küçük düşürüyor', {
+        option('X_ITIRAZ', 'İtiraz: soru tanığın sağlığını hedef alıyor, yersiz', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred'), dec('pers')],
           bad: 'Tanığın algı koşullarını sorgulayan soru meşrudur (CMK 201/1); itirazın dayanağı yok.',
@@ -817,12 +938,12 @@ kadir: Duydum. Gördüm demedim. Ses… ses benzer mi bilmem Sayın Savcı. Ben 
 `),
           ],
         }),
-        option('X_215', 'Diyecek: tanığın anlatısı kesinti kaydıyla doğrulanıyor', {
+        option('X_215', 'Diyecek: saati tanık değil, kayıt söylüyor', {
           visibleWhen: not(flag('kadir_kocluk')),
           effects: [
             ifThen(
               any(has('ded_mazeret'), has('ded_evde')),
-              [score('USUL_BILGISI', 150), inc('legal_hits'), inc('pers')],
+              [score('USUL_BILGISI', 150), inc('legal_hits'), inc('pers'), raise('kadir_215')],
               [score('USUL_BILGISI', -40), dec('pers')],
             ),
           ],
@@ -922,6 +1043,7 @@ gamze: Kazınmış saçlı bir genç. Bir duvar, bir numara. Gözaltı fotoğraf
       title: 'Mütalaa',
       courtStage: 'MUTALAA',
       background: 'durusma_salonu',
+      onFirstEnter: [ifThen(all(not(flag('tolga_teslim')), ref('mutalaa_beraat')), [raise('mutalaa_b')])],
       lines: [
         W(
           flag('tolga_teslim'),
@@ -977,7 +1099,7 @@ rahmi: Müdafi, esas hakkındaki savunmanız.
         dayanak(
           'P_HALKA',
           'İlk tarif sanığa uymuyor',
-          has('ded_halka'),
+          ref('halka_var'),
           'arg_halka',
           `
 - Mağdurun kirlenmeden önceki tek tarifi 112 çağrısında: “Sol kulağında halka vardı.” Sanığın kulakları hiç delinmemiş.
@@ -986,7 +1108,7 @@ rahmi: Müdafi, esas hakkındaki savunmanız.
         dayanak(
           'P_MAZERET',
           'Sanık olay saatinde evindeydi',
-          any(has('ded_mazeret'), has('ded_evde')),
+          ref('mazeret_var'),
           'arg_mazeret',
           `
 - Sanık 23.36–23.51 arasında Yıldırım’daki evindeydi: bağımsız bir tanık balkonda onunla konuştu, telefonu 23.40’ta evinden arıza hattını aradı. Olay yeri dört kilometre ötede.
@@ -995,7 +1117,7 @@ rahmi: Müdafi, esas hakkındaki savunmanız.
         dayanak(
           'P_HESAP',
           'Hesabı o gece başkası kullandı',
-          any(has('ded_hesap'), has('ded_baskasi')),
+          ref('hesap_curudu'),
           'arg_hesap',
           `
 - Savcılığın konum kaydı hesabın yerini gösterir, kişinin değil. Oturum başka bir telefondan açıldı; doğrulama özçekimindeki kişinin sol kulağında halka var.

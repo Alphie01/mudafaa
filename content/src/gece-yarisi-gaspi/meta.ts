@@ -10,7 +10,7 @@ import {
   thresholdBar,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
-import { T_BERAAT, T_INDIRIM } from './outcomes.js';
+import { T_INDIRIM } from './outcomes.js';
 import { ARA_AP, ARA_DAYS, p1 } from './shared.js';
 
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler.
@@ -80,7 +80,6 @@ export const meta: CasePart = {
       thresholdBar: thresholdBar([
         ['Mahkûmiyet', 0, 'red'],
         ['İndirim', T_INDIRIM, 'amber'],
-        ['Beraat', T_BERAAT, 'green'],
       ]),
       displayClampMin: 0,
     },
@@ -210,6 +209,7 @@ export const meta: CasePart = {
       'derya_sus',
       'karar_verildi',
       'bildirdi',
+      'bildirim_guclu',
       'tolga_kacti',
       'tolga_teslim',
       'etik_kirlik',
@@ -228,6 +228,12 @@ export const meta: CasePart = {
       'contra_f4',
       'contra_f5',
       'contra_f6',
+      'press_f7',
+      'contra_f7',
+      'mutalaa_b',
+      'kadir_215',
+      'ali_ifsa',
+      'kadir_ifsa',
       'arg_kirlenme',
       'arg_halka',
       'arg_mazeret',

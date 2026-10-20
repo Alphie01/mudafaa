@@ -33,15 +33,15 @@ import {
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { B, O, S, W } from './dsl.js';
 import { wrongEvidence } from './hearing-1.js';
-import { TRIAL, VERDICT, court2 } from './shared.js';
+import { TRIAL, VERDICT, court2, gercekProven } from './shared.js';
 
 // 80-trial: 2. celse. Açılış (gelen raporlar), Bayram'ın tanıklığı (B1–B5), Sinan (S1–S4) ya da boş kürsü, Muzaffer,
 // ek savunma bildirimi (CMK 226), mütalaa ve cevap, esas savunma, son söz, hüküm.
 
-const gercekProven = any(
-  flag('sinan_ifsa'),
-  all(flag('bayram_ifsa'), any(has('ded_tek_kisi'), has('ded_zarf_kaynagi'))),
-);
+const bekleyenler = S`
+  - Pencereden soluk bir güneş giriyordu; yağmur gece dinmiş, Uludağ'ın üstünde bir bulut kalmıştı. Tozun içinde ışıktan bir sütun.
+  - Savcı Kenan Yavuz salona girerken dosyasını iki eliyle taşıyordu; geçen celse tek eliyle taşımıştı. Komiser izleyici sıralarında, en arkada oturdu. Ferda Yalçın da gelmişti; bordo ceketiyle, kurumun yüzü.
+`;
 
 const savcilik = (id: string, statementId: string | undefined) =>
   presentRule(id, statementId, ['ev_tutanak', 'ev_dinleme', 'ev_ihbar', 'ev_halil_ifade', 'ev_para'], {
@@ -80,6 +80,7 @@ export const trial: CasePart = {
             - Halil koridorun başında, pencerenin önünde duruyordu. Annesinin aldığı kravat. Elinde bir dosya; kendi dosyası değil, bir boş dosya. "Elim boş durmasın diye" dedi. "Yirmi yedi yıl hiç boş durmadı."
             - Zehra yanında, gece nöbetinden çıkmış; elinde iki karton bardak çay. Birini babasına uzattı. Halil çayı aldı, kapağının yazısını düzeltti, içmedi.
             halil: Avukat hanım. Bugün o adam da gelecek, değil mi? Muhbir. Bir de... diğerleri. Bakmayacağım. Kural gereği değil; bakarsam bir şey söylerim diye.
+            - Merdivenden Muzaffer Usta çıktı; elinde bir tepsi, tepside tek bir ince belli bardak. Halil'in önünde durdu. "Dokuz yirmi" dedi. "Geç kaldım, kusura bakma Halil Bey." Halil bardağı aldı; bu sefer içti.
           `,
         ),
         O(S`
@@ -134,7 +135,7 @@ export const trial: CasePart = {
       onFirstEnter: [raise('in_court2')],
       choices: [cont('T00_DEVAM', 'Raporlar', 'T_00R')],
     }),
-    decisionNode('T_00R', [{ to: 'T_00Q' }], {
+    decisionNode('T_00R', [{ to: 'T_00E' }], {
       ...TRIAL,
       lines: [
         W(
@@ -148,6 +149,19 @@ export const trial: CasePart = {
           baskan: Ara karar cevapları dosyaya girdi. Tanıkların dinlenmesine geçiyoruz.
           - Savcı dosyasını açmadı. Bazı savcılar dosyayı ezberler; bazıları dosyanın onları ezberlediğine inanır.
         `),
+      ],
+    }),
+    decisionNode('T_00E', [{ to: 'T_00Q' }], {
+      ...TRIAL,
+      lines: [
+        W(
+          flag('etki_muzaffer'),
+          S`
+            - Savcı dosyaya yeni bir sayfa ekletti: Muzaffer Kılınç'ın Başsavcılığa verdiği dilekçe. "Avukat hanım bana adamın yüzünü de gördüğümü söylememi istedi. Ben görmedim. Yazılsın."
+            - Savcı o sayfayı okurken bana bakmadı. Bakmasına gerek yoktu.
+            ~ Bir çaycı yirmi yıllık "günaydın"ını korudu. Benim yerime.
+          `,
+        ),
       ],
     }),
     decisionNode('T_00Q', [{ to: 'T_00S' }], {
@@ -179,12 +193,31 @@ export const trial: CasePart = {
       ...court2.base,
       title: 'Koridorda bekleyenler',
       background: 'durusma_salonu',
-      lines: B(S`
-        - Salonun dışında bekleyen tanıklar sıraya girmişti: tespihini kucağında tutan bir takipçi, ütülü açık renk ceketiyle bir memur ve önlüğünün cebinde bir defterle yaşlı bir çaycı.
-        - Pencereden soluk bir güneş giriyordu; yağmur gece dinmiş, Uludağ'ın üstünde bir bulut kalmıştı. Tozun içinde ışıktan bir sütun.
-        - Savcı Kenan Yavuz salona girerken dosyasını iki eliyle taşıyordu; geçen celse tek eliyle taşımıştı. Komiser izleyici sıralarında, en arkada oturdu. Ferda Yalçın da gelmişti; bordo ceketiyle, kurumun yüzü.
-        ~ Üç tanık, bir zarf, on dakika. Bugün o on dakika bir kez daha yaşanacak; bu sefer yüksek sesle.
-      `),
+      lines: [
+        W(
+          all(flag('sinan_cagrildi'), flag('muzaffer_cagrildi')),
+          [
+            ...S`- Salonun dışında bekleyen tanıklar sıraya girmişti: tespihini kucağında tutan bir takipçi, ütülü açık renk ceketiyle bir memur ve önlüğünün cebinde bir defterle yaşlı bir çaycı.`,
+            ...bekleyenler,
+            ...S`~ Üç tanık, bir zarf, on dakika. Bugün o on dakika bir kez daha yaşanacak; bu sefer yüksek sesle.`,
+          ],
+        ),
+        W(flag('sinan_cagrildi'), [
+          ...S`- Salonun dışında bekleyen tanıklar sıraya girmişti: tespihini kucağında tutan bir takipçi ve ütülü açık renk ceketiyle bir memur.`,
+          ...bekleyenler,
+          ...S`~ İki tanık, bir zarf, on dakika. Bugün o on dakika bir kez daha yaşanacak; bu sefer yüksek sesle.`,
+        ]),
+        W(flag('muzaffer_cagrildi'), [
+          ...S`- Salonun dışında bekleyen tanıklar sıraya girmişti: tespihini kucağında tutan bir takipçi ve önlüğünün cebinde bir defterle yaşlı bir çaycı.`,
+          ...bekleyenler,
+          ...S`~ İki tanık, bir zarf, on dakika. Bugün o on dakika bir kez daha yaşanacak; bu sefer yüksek sesle.`,
+        ]),
+        O([
+          ...S`- Salonun dışındaki bankta tek bir tanık bekliyordu: tespihini kucağında tutan bir takipçi. Yanındaki yer boştu.`,
+          ...bekleyenler,
+          ...S`~ Bir tanık, bir zarf, on dakika. Bugün o on dakika bir kez daha yaşanacak; bu sefer yüksek sesle.`,
+        ]),
+      ],
       choices: [cont('T00S_DEVAM', 'Tanık: Bayram Öz', 'T_01')],
     }),
     court2.stage('T_01', {
@@ -194,6 +227,19 @@ export const trial: CasePart = {
       witnessLabel: 'TANIK · BAYRAM ÖZ',
       onFirstEnter: [meet('bayram')],
       lines: [
+        W(
+          flag('etki_bayram'),
+          S`
+            mubasir: Tanık Bayram Öz!
+            - Bayram yalnız girdi. Tespihini cebine koydu, sonra çıkardı. Kürsüye geçmeden önce bana baktı; bir talimat bekler gibi.
+            baskan: Tanık, yemin edeceksiniz. Ancak sizi veya yakınlarınızı ceza kovuşturmasına uğratabilecek sorulara cevap vermekten çekinebilirsiniz. Anladınız mı?
+            bayram: Anladım, efendim. Ben... avukat abla ne diyeceğimi söyledi. "Odaya girmedim de, başka bir şey deme" dedi. Ben de onu diyeceğim.
+            - Salon bir an dondu. Savcı Kenan Yavuz yavaşça ayağa kalktı.
+            savci: Sayın Başkan, tanığın bu sözlerinin tutanağa aynen geçirilmesini talep ediyorum.
+            baskan: Geçirilsin. Müdafi, bunu ayrıca konuşacağız.
+            ~ Bir cümle verdim. Sahibine geri döndü; salonun ortasında, herkesin önünde.
+          `,
+        ),
         W(
           flag('bayram_avukat'),
           S`
@@ -365,6 +411,7 @@ export const trial: CasePart = {
           effects: [
             inc('pers', 2),
             raise('contra_b3'),
+            ifThen(has('clue_kare_saat'), [raise('kamera_b3')]),
             mark(
               'GOOD',
               'Muhbirin “kendi elimle verdim”i tutanağın saatleriyle ve kamerayla çöktü: sanık o dakikalarda odasında değildi.',
@@ -515,7 +562,8 @@ export const trial: CasePart = {
       lines: B(S`
         baskan: Başka tanık çağrılmamıştır. Tanık Bayram Öz'ün beyanı tutanağa geçti.
         - Tanık kürsüsü boşaldı. Bekleme kapısının camında bir gölge, bir süre durdu, sonra uzaklaştı. Kimin olduğunu kimse sormadı.
-        ~ Bir kapıyı aralık bıraktım. İçeri girecek kişiyi salona çağırmadım.
+        - Savcı dosyasında bir sayfa çevirdi; iki yüz on dört numarası geçen sayfayı. Bir şey yazmadı. Başkan da sormadı; mahkeme, kimsenin istemediği tanığı kendiliğinden çağırmaz her zaman.
+        ~ Bir kapıyı aralık bıraktım. İçeri girecek kişiyi salona çağırmadım. Bugün o kapıdan girmesi gereken soru, bir suç duyurusunun numarasında bekleyecek.
       `),
       choices: [cont('T02N_DEVAM', 'Devam', 'T_03R')],
     }),
@@ -549,7 +597,7 @@ export const trial: CasePart = {
         statement('S1', 1, [
           'O sabah ',
           hl('10.30’dan 10.50’ye kadar arşivdeydim', any(flag('press_s1'), has('ded_alibi'))),
-          '; 1987 ciltleriyle uğraşıyordum.',
+          '; kadastro paftalarıyla uğraşıyordum.',
         ]),
         statement('S2', 2, [
           hl('Halil abiyi o sabah hiç aramadım', any(flag('press_s2'), has('clue_214_cagri'))),
@@ -755,12 +803,24 @@ export const trial: CasePart = {
       title: 'Tanık: çaycı',
       background: 'durusma_salonu',
       onFirstEnter: [meet('muzaffer')],
-      lines: B(S`
+      lines: [
+        W(
+          flag('etki_muzaffer'),
+          S`
+            mubasir: Tanık Muzaffer Kılınç!
+            - Muzaffer Usta önlüğünü çıkarmamıştı. Kürsüye geçerken bana bakmadı; defterini iki eliyle tuttu.
+            baskan: Usta, yemininizi ettiniz. Gördüğünüzü anlatın; görmediğinizi anlatmayın.
+            muzaffer: Anlatacağım, efendim. Ama önce bir şey: avukat hanım bana yüzünü de gördüğümü söylememi istedi. Görmedim. Dilekçemi verdim. Çaycı gördüğünü anlatır.
+            baskan: Tutanağa geçti, usta. Devam edin.
+          `,
+        ),
+        O(S`
         mubasir: Tanık Muzaffer Kılınç!
         - Muzaffer Usta önlüğünü çıkarmamıştı. Kürsüye geçerken defterini iki eliyle tuttu; bir kutsal kitap gibi değil, bir hesap defteri gibi: önemli, ama kendine göre.
         baskan: Usta, yemininizi ettiniz. Gördüğünüzü anlatın; görmediğinizi anlatmayın.
         muzaffer: Anlarım, efendim. Çaycı gördüğünü anlatır; görmediğini demler.
       `),
+      ],
       choices: [cont('T03_DEVAM', 'Tanığa soru sor', 'T_03Q')],
     }),
     choiceNode('T_03Q', {
@@ -801,14 +861,54 @@ export const trial: CasePart = {
           `),
           next: '$stay',
         }),
-        cont('T03Q_BITTI', 'Başka sorum yok', 'T_035', { role: 'PRIMARY' }),
+        option('T03Q_D', 'Halil Bey o sabah on birdeki çayını içti mi?', {
+          score: { SORGULAMA: 20 },
+          good: 'Tanığın gündelik alışkanlığı, sanığın o sabahki düzenini kendi ağzından ve telkinsiz tutanağa geçirdi.',
+          responses: B(S`
+            muzaffer: İçemedi, efendim. Dokuzdakini içti; açık demli, şekersiz. On birdekini demledim, tepsiye koydum. Kapısına vardığımda polis vardı.
+            muzaffer: Bardağı geri götürdüm. Yirmi yılda ilk kez Halil Bey'in çayı ocakta soğudu. Kimse içmedi; dökemedim de. Akşama kadar orada durdu.
+            - Halil başını eğdi. Bir an. Sonra gözlüğünü düzeltti.
+          `),
+          next: '$stay',
+        }),
+        cont('T03Q_BITTI', 'Başka sorum yok', 'T_03S', { role: 'PRIMARY' }),
       ],
+    }),
+    story('T_03S', {
+      ...court2.base,
+      title: 'Savcının sorusu',
+      background: 'durusma_salonu',
+      lines: B(S`
+        savci: Usta, bir şey soracağım. Halil Bey'e hiç zarf getirdiniz mi? Çayın yanında, tepsinin altında?
+        muzaffer: Zarf mı? Ben çay getiririm, efendim. Zarf getiren olsa tepsiye koymaz; tepsi herkesin önünden geçer.
+        savci: O sabah kontrol odasının kapısından çıkan kişinin yüzünü görmediniz. Doğru mu?
+        muzaffer: Doğru. Sırtını gördüm. Görmediğimi demlemem, demiştim. Yine demlemem.
+        - Savcı başını salladı ve oturdu. Bir tanığı yıkmaya çalışmadı; sınadı. Defne Sezer bir şey yazdı; kısa, tek satır.
+        ~ Muzaffer Usta bildiği kadarını söyledi, fazlasını değil. Bu salonda en sağlam tanıklık, bir çaycının sınırlarını bilmesiydi.
+      `),
+      choices: [cont('T03S_DEVAM', 'Kısa ara', 'T_035')],
     }),
     story('T_035', {
       ...court2.base,
       title: 'Kısa ara',
       background: 'adliye',
       lines: [
+        W(
+          all(any(flag('contra_k1'), flag('contra_k2'), flag('contra_k3')), has('ev_kamera')),
+          S`
+            baskan: Duruşmaya on beş dakika ara verildi.
+            = ADLİYE KORİDORU · 11.40 @adliye
+            - Koridorun ucunda, yangın merdiveninin kapısında Komiser Levent Arı duruyordu. İzleyici olarak gelmişti; tanıklığı bitmişti, ama gitmemişti.
+            - Beni görünce bir adım attı, sonra durdu. Bir polisin bir avukata yaklaşması, bir tanığın bir avukata yaklaşmasından farklıdır; ama koridor ikisini de aynı tonda kaydeder.
+            komiser: Avukat hanım. Tanıklığım bitti; size bir şey sormayacağım. Bir şey söyleyeceğim, o kadar.
+            komiser: O sonlandırma yazısını ben yazmalıydım. Dört Mart'ta. Yazmadım; sistem kaydetmeye devam etti, ben de gelen her şeyi dosyaya koydum. Oğluma "ne gördüysen yaz" diyorum. Ben gördüğümü yazmışım; görmem gerekeni değil.
+            komiser: Muhbiri de sorgulamadım. Zarf çekmecedeydi, seri numaraları tutuyordu. Ders kitabı gibi dedim. Ders kitapları da bazen yanlış basılır.
+            komiser: Kamera kaydını da izledim; dosyaya geldiğinde. 10.41'de o kapıdan biri girip çıkıyor. Biz o sırada aşağıda, araçtaydık; muhbirin "tamam"ını bekliyorduk.
+            komiser: Tutanağa "10.44" yazdım. Ondan önceki dakikalarda ne olduğunu yazmadım; çünkü görmedim. Görmediğimi de yazmalıydım.
+            - Cevap vermedim. Bir tanığın vicdanı tutanağa geçmez; ama bir koridorda duyulur ve unutulmaz.
+            ~ Bu adam kötü bir polis değil. Acele eden bir polis. Bu dosyada herkes biraz acele etti; bir tek Halil, aşağıda, usulüne uygun beş dakika bekledi.
+          `,
+        ),
         W(
           any(flag('contra_k1'), flag('contra_k2'), flag('contra_k3')),
           S`
@@ -864,7 +964,7 @@ export const trial: CasePart = {
       options: [
         option(
           'T04_A',
-          'İrtikap icbar ve nüfuz ister; dosya sanığın masasında değildi ve muhbirin iki anlatısı birbirini dışlıyor.',
+          'İrtikap icbar ister; dosya sanığın masasında değildi, muhbir de iki ayrı hikâye anlattı.',
           {
             effects: [
               ifThen(
@@ -918,7 +1018,7 @@ export const trial: CasePart = {
             ],
           },
         ),
-        option('T04_B', 'Ek savunmamızı hazırlamak için süre istiyoruz.', {
+        option('T04_B', 'Vasıf değişikliği yeni bir savunma gerektirir; ek savunma için süre istiyoruz.', {
           score: { USUL_BILGISI: 30 },
           effects: [raise('ek_sure')],
           good: 'Ek savunma gereken hâllerde istem üzerine süre verilir (CMK 226/3). Mahkeme kısa bir ara verdi.',
@@ -929,16 +1029,20 @@ export const trial: CasePart = {
             - Ara sonrası kısa bir ek savunma yaptım. Yarım saat, bir hafta değildi.
           `),
         }),
-        option('T04_C', 'İtiraz: mahkeme iddianamedeki suç vasfıyla bağlıdır.', {
+        option('T04_C', 'İtiraz: vasıf ancak savcının ek iddianamesiyle değişir; mahkeme iddianameyle bağlıdır.', {
           score: { HUKUKI_BILGI: -50 },
           effects: [dec('cred')],
-          bad: 'Mahkeme eylemin nitelendirilmesinde iddianameyle bağlı değildir (CMK 225/2); vasıf değişecekse sanığa önceden haber verilir ve ek savunması alınır (CMK 226/1).',
-          responses: B(S`baskan: Bağlı değiliz, müdafi; bu yüzden size soruyoruz. Ek savunmanız?`),
+          bad: 'Ek iddianame gerekmez: mahkeme eylemin nitelendirilmesinde iddianameyle bağlı değildir (CMK 225/2); vasıf değişecekse sanığa önceden haber verilir ve ek savunması alınır (CMK 226/1).',
+          responses: B(S`baskan: Ek iddianame gerekmez, müdafi; bağlı değiliz, bu yüzden size soruyoruz. Ek savunmanız?`),
         }),
-        option('T04_D', 'Diyeceğimiz yok.', {
+        option('T04_D', 'İrtikap da görevi kötüye kullanma da rüşvetten hafiftir; değişikliğe karşı çıkmıyoruz.', {
           effects: [dec('pers')],
-          bad: 'Ek savunma hakkı kullanılmadı; vasıf tartışması savunmanın güçlü bir alanıydı.',
+          bad: 'Daha hafif bir vasfa savunmasız razı olmak, sanığın bir suç işlediğini dolaylı kabul etmektir; ek savunma hakkı kullanılmadı.',
           category: 'HUKUKI_BILGI',
+          responses: B(S`
+            savci: Not edelim, Sayın Başkan: müdafi daha hafif vasıflara karşı çıkmıyor.
+            ~ Bir kapıyı kapatmak isterken bir başkasını ardına kadar açtım.
+          `),
         }),
       ],
     }),
@@ -953,6 +1057,7 @@ export const trial: CasePart = {
             baskan: Sanık, ek savunmanız?
             halil: Yirmi yedi yılda bir kez kuralı esnettim; o bir iyilikti, bir pazarlık değil. Kimseyi zorlamadım. Zorlayacak bir şeyim yoktu; dosya benim masamda değildi.
             halil: O zarf benim değil. İlk cümle bu, Sayın Başkan. Gerisi, kâğıtlarda.
+            halil: Bir de şunu eklerim: o randevu yüzünden sırası geriye kayan kim varsa, onlardan özür dilerim. Kayda geçsin.
             - Defne Sezer kalemini bıraktı ve Halil'e uzun uzun baktı. Bir hâkimin bakışı; bir şey tartıyordu.
           `,
         ),
@@ -969,7 +1074,19 @@ export const trial: CasePart = {
           halil: Ben kimseyi zorlamadım, Sayın Başkan. Para almadım. O zarf benim değil. Başka söyleyeceğim yok.
         `),
       ],
-      choices: [cont('T045_DEVAM', 'Mütalaa', 'T_05', { role: 'PRIMARY' })],
+      choices: [cont('T045_DEVAM', 'Mütalaa', 'T_05E', { role: 'PRIMARY' })],
+    }),
+    decisionNode('T_05E', [{ to: 'T_05' }], {
+      ...TRIAL,
+      lines: [
+        W(
+          flag('tanik_etkileme'),
+          S`
+            savci: Sayın Başkan, mütalaamdan önce bir hususu kayda geçirmek isterim: müdafiin bir tanığın beyanını duruşmadan önce yönlendirmeye çalıştığı anlaşılmıştır. Bu konuda TCK 277 yönünden ayrıca suç duyurusunda bulunacağız.
+            baskan: Not edildi. Heyet, yönlendirilen beyanı hükümde ayrıca değerlendirecek.
+          `,
+        ),
+      ],
     }),
     court2.objection('T_05', {
       title: 'Mütalaa',
@@ -985,7 +1102,7 @@ export const trial: CasePart = {
           `,
         ),
         W(
-          all(ref('kayit_disi'), ref('zarf_suphe')),
+          ref('beraat_kosul'),
           S`
             - Savcı ayağa kalktı; dosyayı açtı, bir sayfayı uzun uzun okudu, kapattı.
             savci: Sayın Başkan, iddianamenin dayandığı kayıtların hukuka aykırı elde edildiği anlaşılmıştır. Zarfın çekmeceye sanık odadayken konduğu da kanıtlanamamıştır.
@@ -1066,14 +1183,14 @@ export const trial: CasePart = {
             > Onları çıkardığınızda geriye ne kalıyor? İki ayrı hikâye anlatan, cihazını kendi eliyle susturan bir muhbir.
           `),
         }),
-        option('T05_C', 'Mütalaanın tutanaktan çıkarılmasını talep ediyoruz.', {
+        option('T05_C', 'Mütalaa delile değil kanaate dayanıyor; tutanaktan çıkarılmasını talep ediyoruz.', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Mütalaa tutanaktan çıkarılmaz; müdafi ona cevap verir (CMK 216/2).',
           responses: B(S`baskan: Reddedildi. Cevap verecekseniz verin.`),
         }),
-        option('T05_D', 'Mütalaaya katılıyoruz; ayrıca söyleyeceğimiz yok.', {
-          visibleWhen: any(gercekProven, all(ref('kayit_disi'), ref('zarf_suphe'))),
+        option('T05_D', 'Mütalaaya katılıyoruz; beraatin gerekçesini heyetin takdirine bırakıyoruz.', {
+          visibleWhen: any(gercekProven, ref('beraat_kosul')),
           neutral:
             'Beraat mütalaasına katılmak meşrudur; ama esas savunmada hangi beraat nedeninin uygulanacağını ayrıca göstermelisin.',
         }),
@@ -1083,7 +1200,7 @@ export const trial: CasePart = {
       ...court2.base,
       title: 'Esas hakkında savunma',
       prompt: { speaker: 'baskan', text: 'Müdafi, esas hakkındaki savunmanızı yapın.' },
-      next: 'T_07S1',
+      next: 'T_07P1',
       choices: [
         option('T07_A', 'Suç sanık tarafından işlenmemiştir; zarfı çekmeceye koyan el dosyadadır.', {
           effects: [
@@ -1112,11 +1229,17 @@ export const trial: CasePart = {
           ],
           responses: [
             W(
+              all(gercekProven, flag('sinan_ifsa')),
+              S`
+                > Sayın Başkan. Mart'ta bir dahili çaldı: "Müdür Hanım çağırıyor." Çağırmamıştı. Memur indi. Zarf, sahibi yokken çekmeceye girdi.
+                > Onu oraya bırakabilecek tek kişi bu kürsüde oturdu ve kendisini suçlayacak soruya cevap vermemeyi seçti. Bu onun hakkı; ama o sessizliğin etrafındaki kâğıtlar konuşuyor.
+              `,
+            ),
+            W(
               gercekProven,
               S`
-                > Sayın Başkan. Bir kontrol memuru on bir dosya durdurdu. Bir deftere yazdı. Şubatta biri "masasından kaldırırız" dedi; biri cebine bir not koydu.
-                > Mart'ta bir dahili çaldı: "Müdür Hanım çağırıyor." Çağırmamıştı. Memur indi. Bir muhbirin kaydı susturuldu. Bir zarf, bir servisin destesinden, bir koltuk altında, yirmi saniyeliğine bir odaya girdi.
-                > Halil Ekinci bu dosyada fail değil; bu dosyanın hedefi. Suçun sanık tarafından işlenmediği sabittir. Beraatini talep ederiz.
+                > Sayın Başkan. Mart'ta bir dahili çaldı: "Müdür Hanım çağırıyor." Çağırmamıştı. Memur indi. Zarf, sahibi yokken çekmeceye girdi.
+                > Muhbir, zarfı kime verdiğini bu kürsüde söyledi. Söylediği isim bir masanın, bir destenin, bir dahilinin sahibiyle aynı.
               `,
             ),
             O(S`
@@ -1131,7 +1254,7 @@ export const trial: CasePart = {
           {
             effects: [
               ifThen(
-                all(ref('kayit_disi'), ref('zarf_suphe')),
+                ref('beraat_kosul'),
                 [
                   score('SAVUNMA_STRATEJISI', strategyAmount(200, 'USUL')),
                   inc('pers'),
@@ -1151,13 +1274,30 @@ export const trial: CasePart = {
                 ],
               ),
             ],
-            responses: B(S`
-            > Sayın Başkan. Bu dosya bir anahtar deliğinden başladı. Kapısı kapanmış bir deliğinden. Süresi dolmuş bir karar, kararda olmayan bir hat.
-            > O delikten duyulan cümleler bu salonda okunamaz. Kanun böyle der; Anayasa böyle der. Delil, nasıl elde edildiğiyle birlikte delildir.
-            > Geriye bir zarf kalıyor. Zarf çekmeceye 10.39 ile 10.43 arasında girdi. O dakikalarda sanık odasında değildi; muhbirin cihazı ise bir parmakla susturulmuştu.
-            > Ve bir muhbir kalıyor: önce "zorladı", sonra "anlaştık", sonra "elden verdim", sonra "odaya girmedim" diyen. Bu dört cümleden hangisine bir insanın özgürlüğünü bağlayacağız?
-            > Yirmi yedi yıllık bir memur, bir kez kuralı esnetti. Karşılığında hiçbir şey almadı. Bir iyilik, bir pazarlık değildir. Mahkûmiyet şüphenin üstüne kurulamaz. Beraatini talep ederiz.
-          `),
+            responses: [
+              W(
+                ref('kayit_disi'),
+                S`
+                  > Sayın Başkan. Bu dosya bir anahtar deliğinden başladı. Kapısı kapanmış bir deliğinden: süresi dolmuş bir karar, kararda olmayan bir hat.
+                  > O delikten duyulan cümleler bu salonda okunamaz. Kanun böyle der; Anayasa böyle der. Delil, nasıl elde edildiğiyle birlikte delildir.
+                `,
+              ),
+              W(
+                any(flag('red_14'), flag('contra_k1')),
+                S`
+                  > Sayın Başkan. "Zarf yarın masada" cümlesi, süresi dolmuş bir kararla kaydedildi. O cümle bu salonda okunamaz; geriye kalan kaydı da aynı dikkatle tartmanızı isterim.
+                `,
+              ),
+              W(
+                any(flag('red_9'), flag('contra_k5'), flag('obj_k5')),
+                S`
+                  > Sayın Başkan. Sanığın kendi telefonundan alınan cümle, hiçbir hâkimin izin vermediği bir hattan geliyor. O cümle bu salonda okunamaz; geriye kalan kaydı da aynı dikkatle tartmanızı isterim.
+                `,
+              ),
+              O(S`
+                > Sayın Başkan. Bu dosyada savcılığın elinde üç şey var: bir kayıt, bir muhbir, bir zarf. Üçünü de sırayla tartmanızı istiyorum; hiçbirini ötekinin gölgesinde değil.
+              `),
+            ],
           },
         ),
         option(
@@ -1185,6 +1325,73 @@ export const trial: CasePart = {
             baskan: Ben de, savcı bey.
           `),
         }),
+      ],
+    }),
+    // Esas savunmanın parçaları: her biri o oyunda duruşmada gerçekten kurulan olguya bağlı (node başına ilk eşleşen blok).
+    decisionNode('T_07P1', [{ to: 'T_07P2' }], {
+      ...TRIAL,
+      lines: [
+        W(
+          all({ chosen: 'T07_B' }, ref('zarf_suphe')),
+          S`> Geriye bir zarf kalıyor. Zarf çekmeceye 10.39 ile 10.43 arasında girdi. O dakikalarda sanık odasında değildi; makamdan geldiği izlenimi veren bir çağrıyla bir alt kata indirilmişti.`,
+        ),
+        W(
+          all({ chosen: 'T07_B' }, ref('oda_bos')),
+          S`> Geriye bir zarf kalıyor. Polis 10.44'te odaya girdiğinde oda boştu; sanık iki dakika sonra geldi. Bunu savunma değil, savcılığın kendi tutanağı yazıyor.`,
+        ),
+        W({ chosen: 'T07_B' }, S`> Geriye bir zarf kalıyor. Bir zarfın bir çekmecede bulunması, onu oraya kimin koyduğunu söylemez.`),
+        W(
+          all({ chosen: 'T07_A' }, gercekProven, has('ded_zarf_kaynagi')),
+          S`> Zarf, kontrol servisinin değil, Devir Servisi-2'nin destesinden. Zimmet defterinde teslim alanın parafı duruyor.`,
+        ),
+      ],
+    }),
+    decisionNode('T_07P2', [{ to: 'T_07P3' }], {
+      ...TRIAL,
+      lines: [
+        W(
+          all({ chosen: 'T07_B' }, flag('contra_b4')),
+          S`> Muhbirin cihazı ise arızalanmadı. Bilirkişi raporuna göre 10.39.12'de fiziksel tuşla susturuldu; muhbir de bunu bu kürsüde kabul etti.`,
+        ),
+        W(
+          all({ chosen: 'T07_B' }, flag('press_b4')),
+          S`> Muhbirin cihazı 10.39'da sustu. Neden sustuğunu kolluk incelemedi; "kendiliğinden" denildi ve öyle yazıldı.`,
+        ),
+        W(
+          all({ chosen: 'T07_A' }, gercekProven, flag('contra_s4')),
+          S`> Bir kontrol memuru on bir dosya durdurdu ve bir deftere yazdı: "Hepsi aynı elden. Müdüre yazılacak." Defter müdüre gitmedi; çünkü yazanı çekmecesiyle birlikte masadan kaldırdılar.`,
+        ),
+      ],
+    }),
+    decisionNode('T_07P3', [{ to: 'T_07P4' }], {
+      ...TRIAL,
+      lines: [
+        W(
+          all({ chosen: 'T07_B' }, flag('contra_b3'), any(flag('contra_b4'), has('clue_fisilti'))),
+          S`> Ve bir muhbir kalıyor: önce "zorladı", sonra "anlaştık", sonra "elden verdim", sonra "odaya girmedim" diyen. Bu dört cümleden hangisine bir insanın özgürlüğünü bağlayacağız?`,
+        ),
+        W(
+          all({ chosen: 'T07_B' }, any(flag('contra_b1'), flag('contra_b2'))),
+          S`> Ve bir muhbir kalıyor: iki gün arayla önce "zorladı", sonra "anlaştık" diyen. İki ayrı hikâye; ikisi aynı anda doğru olamaz.`,
+        ),
+        W({ chosen: 'T07_B' }, S`> Ve bir muhbir kalıyor. Onun sözünden başka, zarfı sanığın eline koyan hiçbir kâğıt yok.`),
+      ],
+    }),
+    decisionNode('T_07P4', [{ to: 'T_07S1' }], {
+      ...TRIAL,
+      lines: [
+        W(
+          all({ chosen: 'T07_B' }, flag('halil_durust')),
+          S`> Yirmi yedi yıllık bir memur bir kez kuralı esnetti ve bunu bu salonda kendisi söyledi. Bir iyilik, bir pazarlık değildir. Mahkûmiyet şüphenin üstüne kurulamaz. Beraatini talep ederiz.`,
+        ),
+        W(
+          { chosen: 'T07_B' },
+          S`> Yirmi yedi yıllık bir memur bu salonda "o zarf benim değil" dedi. Mahkûmiyet şüphenin üstüne kurulamaz. Beraatini talep ederiz.`,
+        ),
+        W(
+          all({ chosen: 'T07_A' }, gercekProven),
+          S`> Halil Ekinci bu dosyada fail değil; bu dosyanın hedefi. Suçun sanık tarafından işlenmediği sabittir. Beraatini talep ederiz.`,
+        ),
       ],
     }),
     decisionNode('T_07S1', [{ to: 'T_07S2' }], {
@@ -1258,15 +1465,15 @@ export const trial: CasePart = {
             - Zehra arka sırada gözlerini sildi. Hemşireler ağlarken bile yüzlerini düz tutmayı bilir; bu sefer tutmadı.
           `),
         }),
-        option('T08_B', '“Ben suçsuzum. Bırakın beni artık.”', {
+        option('T08_B', '“Ben suçsuzum. Yirmi yedi yıl hizmet ettim; bırakın beni artık.”', {
           neutral: 'Son söz sanığın hakkıdır (CMK 216/3); içeriği hükmü kendiliğinden değiştirmez.',
-          responses: B(S`halil/uzgun: Ben suçsuzum, Sayın Başkan. Yirmi yedi yıl... Bırakın beni artık. Lütfen.`),
+          responses: B(S`halil/uzgun: Ben suçsuzum, Sayın Başkan. Yirmi yedi yıl hizmet ettim... Bırakın beni artık. Lütfen.`),
         }),
-        option('T08_C', '“Ne ceza verirseniz razıyım. Yeter ki bitsin.”', {
+        option('T08_C', '“Ne ceza verirseniz razıyım; yeter ki bu dosya bir an önce bitsin.”', {
           effects: [dec('pers')],
           neutral: 'Son sözde cezaya razı olmak, suçu kabul gibi okunabilir; heyet bunu dikkate alabilir.',
           responses: B(S`
-            halil/uzgun: Ne ceza verirseniz razıyım. Yeter ki bitsin.
+            halil/uzgun: Ne ceza verirseniz razıyım. Yeter ki bu dosya bir an önce bitsin.
             ~ "Yeter ki bitsin." Yirmi yedi yılın sonunda, kurallı bir adamın söylediği ilk kuralsız cümle.
           `),
         }),

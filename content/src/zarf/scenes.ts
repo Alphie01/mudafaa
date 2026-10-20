@@ -1,4 +1,14 @@
-import { flag, not, rect, sceneAsset, sceneDef, sceneObject } from '../../../tools/content/src/kit/index.js';
+import {
+  discover,
+  flag,
+  ifThen,
+  not,
+  rect,
+  sceneAsset,
+  sceneDef,
+  sceneObject,
+  visited,
+} from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 
 // 30-scenes: dört aranabilir sahne. Görseller `scenes/<ad>.html`'den `npm run case:scenes -- zarf` ile üretilir.
@@ -145,6 +155,7 @@ export const scenes: CasePart = {
         sceneObject('ob_bilek', 'Kapı koluna uzanan el', OB_BILEK, {
           discovers: 'clue_kol_saat',
           score: { ARASTIRMA: 60 },
+          effects: [ifThen(visited('ARA_AKSAM'), [discover('clue_sinan_saat')])],
           text: 'Kapı koluna uzanan sol el. Bileğinde küçük, dikdörtgen, yeşil bir ışık: dijital bir saat ekranı. Gren bile o yeşili yutamamış.',
           short: 'Bilek',
         }),

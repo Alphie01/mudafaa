@@ -79,6 +79,26 @@ const giris = deliver('ARA_GIRIS_1', [
   },
 ]);
 
+const aksamBas = S`
+  = ARA 1. GÜNÜN AKŞAMI · 21.30 — BÜRONUN OTOPARKI @sokak_yagmur
+  - Yağmur otoparkın beton tavanından damlıyordu. Arabamın kapısını açarken arkamda bir şemsiye açıldı.
+  sinan: Avukat hanım! Islanmayın, buyurun. Ben de bu tarafa geliyordum; bir arkadaşın bürosu var yukarıda.
+  - Şemsiyeyi başımın üstüne tuttu. Açık renk ceketi yağmurda koyulaşmıştı. Bileğinde saat yeşil yandı, söndü.
+`;
+const aksamCagri = S`
+  sinan: Mahkeme beni de çağırmış diye duydum. Ne lazımsa abim için. Gerçekten. Yalnız... bazı şeyleri karıştırmayın. Binada herkes herkesin numarasını arar. Bir dahili, bir şey kanıtlamaz.
+`;
+const aksamDuyum = S`
+  sinan: Mahkemede adım geçecekmiş diye duydum. Ne lazımsa abim için. Gerçekten. Yalnız... bazı şeyleri karıştırmayın. Binada herkes herkesin numarasını arar. Bir dahili, bir şey kanıtlamaz.
+`;
+const aksamSaat = S`
+  ~ Yeşil, küçük, dikdörtgen bir ışık. Bugün bir kamera karesinde, bir kapı koluna uzanan bilekte görmüştüm. Not defterime yazdım; yanına bir şey yazmadım.
+`;
+const aksamSon = S`
+  sinan: Halil abi çok iyi bir insan. Ama yorgundu. Yorgun insanlar bazen hata yapar. Siz bunu da düşünün. Şeker alır mısınız? Nane.
+  ~ Bana hiçbir şey sormadı. Ama neyi bildiğimi tahmin ettiğini söyledi. Ve bir şemsiyenin altında durmak, bir tanıkla konuşmak sayılır mı?
+`;
+
 const dayEnd = p2.dayEnd({ ...ARA, title: 'Gün sonu', continueId: 'ARA_DAY_NEXT', deliveries: [] });
 
 /** Ara tahtasında 1. evre tarifleri: yeniden kurulabilir, puanı yalnızca ilk kurulumda. */
@@ -176,6 +196,8 @@ export const ara: CasePart = {
         leyla: İki günün var, Deniz. Gerisi beklemek. Duruşma salonunun dışındaki her konuşma, salonun içinde yeniden yapılır; bunu unutma.
         leyla: Tanıklara dokunma. Şüphelileri kovalama. Gördüğünü bildir, bildirdiğini belgele.
         leyla: Muhbir bu dosyada hem tanık hem bir gün sanık olabilir. Ona ne söylersen, iki dosyaya birden yazılır.
+        > Ya bulduğum şey bir isimse? Ya kâğıtlar beni bir insanın kapısına götürürse?
+        leyla: Götürecek. Kapıyı çalma; adresi savcıya yaz. Avukat bir ismi bulur, savcı o ismi sınar, mahkeme hükmeder. Sırayı karıştıran, üçünü birden kaybeder.
         ~ Bir zarf, bir çekmece, on dakika. Üç haftada o on dakikayı geri saracağım. Ve hiçbir kareyi yanlış kişiye göstermeyeceğim.
       `),
       choices: [
@@ -236,10 +258,7 @@ export const ara: CasePart = {
           kind: 'PEOPLE',
           choices: [
             act('A2_HALIL', 'Halil', 'ARA_HALIL', { description: 'İkinci celseye hazırlık' }),
-            act('A2_MUZAFFER', 'Muzaffer Usta', 'ARA_MUZAFFER', {
-              description: '2. kat çay ocağı',
-              visibleWhen: any(visited('INV1_KORIDOR'), flag('santral_cay')),
-            }),
+            act('A2_MUZAFFER', 'Muzaffer Usta', 'ARA_MUZAFFER', { description: '2. kat çay ocağı' }),
             act('A2_BAYRAM', 'Kapıdaki muhbir', 'ARA_BAYRAM', { description: 'Büroya kendiliğinden gelen biri' }),
           ],
         },
@@ -262,7 +281,9 @@ export const ara: CasePart = {
       choices: [
         rawChoice('NAVIGATE', 'GO_T', 'DURUŞMAYA GİT · 2. CELSE', {
           role: 'PRIMARY',
-          next: 'ARA_SON_1',
+          next: 'ARA_SAVCI',
+          enabledWhen: cmp(v('ara_day'), '>=', 2),
+          lockedReason: 'İkinci celseye daha iki hafta var; bugünü dosyaya harca.',
           confirm: 'Duruşmaya gidersen ara evresi biter. Emin misin?',
         }),
       ],
@@ -275,17 +296,15 @@ export const ara: CasePart = {
       ...ARA,
       title: 'Otopark',
       background: 'sokak_yagmur',
-      lines: B(S`
-        = ARA 1. GÜNÜN AKŞAMI · 21.30 — BÜRONUN OTOPARKI @sokak_yagmur
-        - Yağmur otoparkın beton tavanından damlıyordu. Arabamın kapısını açarken arkamda bir şemsiye açıldı.
-        sinan: Avukat hanım! Islanmayın, buyurun. Ben de bu tarafa geliyordum; bir arkadaşın bürosu var yukarıda.
-        - Şemsiyeyi başımın üstüne tuttu. Açık renk ceketi yağmurda koyulaşmıştı. Bileğinde saat yeşil yandı, söndü.
-        sinan: Mahkeme beni de çağırmış diye duydum. Ne lazımsa abim için. Gerçekten. Yalnız... bazı şeyleri karıştırmayın. Binada herkes herkesin numarasını arar. Bir dahili, bir şey kanıtlamaz.
-        sinan: Halil abi çok iyi bir insan. Ama yorgundu. Yorgun insanlar bazen hata yapar. Siz bunu da düşünün. Şeker alır mısınız? Nane.
-        ~ Bana hiçbir şey sormadı. Ama neyi bildiğimi tahmin ettiğini söyledi. Ve bir şemsiyenin altında durmak, bir tanıkla konuşmak sayılır mı?
-      `),
+      onEnter: [ifThen(has('clue_kol_saat'), [discover('clue_sinan_saat')])],
+      lines: [
+        W(all(flag('sinan_cagrildi'), has('clue_kol_saat')), [...aksamBas, ...aksamCagri, ...aksamSaat, ...aksamSon]),
+        W(flag('sinan_cagrildi'), [...aksamBas, ...aksamCagri, ...aksamSon]),
+        W(has('clue_kol_saat'), [...aksamBas, ...aksamDuyum, ...aksamSaat, ...aksamSon]),
+        O([...aksamBas, ...aksamDuyum, ...aksamSon]),
+      ],
       choices: [
-        option('ARAK_A', 'Teşekkür et, şemsiyenin altından çık; karşılaşmayı tutanağa geçir, savcılığa bildir.', {
+        option('ARAK_A', 'Şemsiyenin altından çık; karşılaşmayı not et ve savcılığa bildir.', {
           score: { USUL_BILGISI: 30 },
           effects: [raise('sinan_bildirildi')],
           good: 'Tanık olarak çağrılmış biriyle dava hakkında konuşulmaz; kendiliğinden gelen yaklaşım belgelenir ve bildirilir. Avukat tanığı ne yönlendirir ne sorgular.',
@@ -308,9 +327,9 @@ export const ara: CasePart = {
           `),
           next: 'ARA_GECE1',
         }),
-        option('ARAK_C', 'Konuşma; arabaya bin ve onu takip et, kimle buluşuyor gör.', {
+        option('ARAK_C', 'Konuşma; arabaya bin, onu izle ve kimlerle buluştuğunu kendin gör.', {
           score: { USUL_BILGISI: -40 },
-          effects: [inc('ethics')],
+          effects: [inc('ethics'), raise('sinan_izlendi')],
           bad: 'Avukat tanıkları ya da şüphelileri izlemez; bu hem etik bir ihlaldir hem de kişisel güvenliği tehlikeye atar. Gördüğünü belgele, savcılığa bildir.',
           responses: B(S`
             - Yirmi dakika boyunca bir otoparkın çıkışını izledim. Sinan çıkmadı. Belki başka bir kapıdan çıktı; belki hiç inmemişti.
@@ -333,6 +352,9 @@ export const ara: CasePart = {
         - Leyla masasındaki ters çerçeveye baktı. Bir an elini uzattı; sonra geri çekti.
         leyla: Yıllar önce bir dosyada bir tanık benim de kapımda bekledi. Ona cevap verdim. O cevap, mahkemede benim ağzımdan değil, onun ağzından okundu. Çarpıtılmış olarak.
         leyla: Tanığa cevap verme, Deniz. Hiçbir zaman. Cevabını kürsüde, kâğıtla ver.
+        > O dosya ne oldu?
+        leyla: Kazandım. Ama müvekkilim kazandığımı hiç bilmedi; ben de ona hiç anlatmadım. Bazı zaferler, bir kapının arkasında, bir çerçevenin tersinde durur.
+        - Çayını bir yudumda bitirdi; soğumuştu. Leyla soğuk çayı her zaman bir yudumda içer, sıcağı beklemez.
         ~ Leyla geçmişinden bir cümle verdi; bir dosya değil, bir cümle. Bu bile, onun için çok.
       `),
       choices: [cont('ARA_GECE1_DEVAM', 'Yarın', 'ARA_SABAH2', { role: 'PRIMARY' })],
@@ -350,9 +372,11 @@ export const ara: CasePart = {
         zehra: Bir de şu: dün akşam evin önünde bir araba bekledi. Yarım saat. Sonra gitti. Plakasını yazdım; hemşireyiz, not alırız.
         ~ Bir araba, yarım saat. Kim olduğunu tahmin etmek kolay; kanıtlamak zor. Ve kanıtlamak benim işim değil; bildirmek benim işim.
         zehra: Savcılığa yazdım. Sizin dediğiniz gibi. Saat, plaka, renk. Artık bunu refleksle yapıyorum. Babamın kızıyım; tutanak tutmayı kandan öğrendim.
+        - Bir ambulans siren çalmadan girdi; ışıkları sessizce döndü. Zehra başını çevirdi, bir an ölçtü, sonra bana döndü. Acil serviste her ışığın bir anlamı vardır.
+        zehra: Sizinki de böyle bir iş, değil mi? Herkes bağırırken, sessiz gelen şeye bakmak.
       `),
       choices: [
-        option('SAB2_A', '“İyi yapmışsın. Kapını kimseye açma; bir şey olursa önce polisi, sonra beni ara.”', {
+        option('SAB2_A', '“İyi yapmışsın. Bir şey olursa önce polisi, sonra beni ara.”', {
           effects: [raise('sab2_guvenlik'), inc('trust', 2)],
           responses: B(S`
             zehra: Önce polis, sonra siz. Tamam. Acilde de öyle: önce hayati bulgu, sonra hikâye.
@@ -360,7 +384,7 @@ export const ara: CasePart = {
           `),
           next: HUB,
         }),
-        option('SAB2_B', '“Plakayı bana ver; kimin olduğuna bakarım.”', {
+        option('SAB2_B', '“Plakayı bana ver; kimin aracı olduğunu yarın ben öğrenirim.”', {
           effects: [raise('sab2_plaka')],
           neutral:
             'Avukatın plaka sorgulama yetkisi yoktur; bildirilen kayıt savcılığın işidir. Bu, yalnızca zaman yer.',
@@ -403,6 +427,7 @@ export const ara: CasePart = {
           leyla: Savcı ikinci celsede bir şey deneyecek. Rüşveti tutturamazsa, irtikaba ya da görevi kötüye kullanmaya kayacak. Mahkeme vasfı değiştirecekse, önce sanığa haber vermek zorunda.
           leyla: O an geldiğinde iki yolun var: süre istersin ya da hazırsan hemen cevap verirsin. Hazır olmak, irtikabın neden olmadığını bilmektir: zorlama yok, dosya onun masasında değil.
           leyla: Ve esas savunmanda kanıtlayamadığın bir şeyi iddia etme. Bir eli gösterecekseniz, parmağınızı değil, kâğıdı gösterin.
+          leyla: Bir de şu: rüşvet anlaşmayla tamamlanır, Deniz. Zarfın Halil yokken girdiğini göstermek yetmez; muhbirin "bekletti" ve "anlaştık" cümlelerini de çökert. Yoksa savcı "parayı konuştukları gibi bıraktı" der.
         `),
       ],
       choices: [cont('ARALEYLA_GERI', 'Masana dön', HUB, { role: 'BACK' })],
@@ -466,6 +491,13 @@ export const ara: CasePart = {
           }),
         ],
         miss: examMiss('FB_SANTRAL'),
+        choices: [
+          rawChoice('NAVIGATE', 'SANTRAL_GULAY', 'İzin çizelgesindeki Gülay Erdem’i ara', {
+            visibleWhen: has('clue_izin_gulay'),
+            maxUses: 1,
+            next: 'ARA_GULAY',
+          }),
+        ],
         finish: { id: 'SANTRAL_BITIR' },
       }),
     ),
@@ -543,6 +575,7 @@ export const ara: CasePart = {
         scene: 'sc_kamera',
         lines: B(S`
           - Flaş bellekte yirmi dakikalık bir kayıt. Merdivene dönük bir açı: takipçiler iniyor, çıkıyor; bir çaycı tepsiyle geçiyor. 10.36'da Halil merdivenden iniyor, gözlüğü başının üstünde.
+          - 10.38'de muhbir merdivenden çıkıyor; elinde kahverengi bir zarf, kolunun altında. 10.39'da kadrajın dışına, arşive inen merdivenin koridoruna dönüyor. Bir dakika sonra elleri boş geri geliyor.
           - 10.41.07'de kadrajın kenarında bir kapı açılıyor. Kareyi dondurdum. Grenli, mavi, sessiz.
           ~ Bir kare, bin kelimeye bedel derler. Bu karenin bin kelimesinden hangisi doğru, bulmam gerek.
         `),
@@ -569,9 +602,75 @@ export const ara: CasePart = {
         instruction: 'Raflara ve masaya dokun. Boş yere dokunmak bir büyüteç hakkı yer.',
         costVar: 'taps_a',
         miss: tapMiss('FB_ARSIV'),
+        choices: [
+          rawChoice('NAVIGATE', 'ARSIV_FERDA', 'Ferda Yalçın’la konuş', {
+            visibleWhen: has('clue_zimmet'),
+            maxUses: 1,
+            next: 'ARA_FERDA',
+          }),
+        ],
         finish: { id: 'ARSIV_BITIR', label: 'Arşivden çık' },
       }),
     ),
+    direct(
+      conversation('ARA_FERDA', {
+        ...ARA,
+        title: 'Arşivde müdür',
+        background: 'depo',
+        room: { label: 'NİLÜFER TAPU MÜDÜRLÜĞÜ · ARŞİV', character: 'ferda' },
+        lines: B(S`
+          = ARŞİV · MASANIN BAŞI @depo
+          - Ferda Yalçın okuma gözlüğünü çıkardı, zimmet defterini kendi önüne çekti. Sayfayı çevirmedi; açık bıraktı. Bir müdürün tanıklığı, bazen bir sayfayı kapatmamaktır.
+          ferda: Prosedür gereği bu deftere dokunmamanız gerekirdi, avukat hanım. Dokunmadınız. Ben de görmediğimi söylemeyeceğim.
+        `),
+        choices: [
+          option('FER_ZIMMET', 'Zarf desteleri servislere nasıl dağıtılıyor?', {
+            score: { ARASTIRMA: 20 },
+            responses: B(S`
+              ferda: Elli zarflık desteler hâlinde. Her deste bir servise, imzayla, ayın başında. Kimse kimseden zarf istemez; istese de vermezler, hesap sorarım.
+              ferda: Kontrol servisi kendi destesini ocakta almış: 0351'den 0400'e. Halil Bey her zarfı sayar; ayın sonunda bana eksik zarf listesi getirir. Her ay. Bir kez bile eksiği çıkmadı.
+              ~ Zarf sayan bir memurun binasında bir zarf yanlış çekmeceye girmiş. Ve o zarfın hangi desteden geldiği deftere yazılı.
+            `),
+            next: '$stay',
+          }),
+          option('FER_RAPOR', 'Halil Bey size bir rapor yazacağını söylemişti. Ne zaman?', {
+            score: { SORGULAMA: 20 },
+            responses: B(S`
+              ferda/uzgun: Şubatın sonunda. Kapımı çaldı: "Müdür Hanım, bir şirketin dosyaları hakkında size yazacağım" dedi. Ben "Mart'ta, telekonferanslar bitince" dedim.
+              ferda: Telekonferanslar bitti. Halil Bey'in raporu gelmedi; Halil Bey gitti. Yirmi yıl bu binada kimseyi bekletmedim, avukat hanım. Bir kez beklettim.
+              - Okuma gözlüğünü yeniden taktı; okuyacak bir şey yoktu.
+              ~ Bu dosyada herkesin bir "bir kez"i var. Halil'in, Ferda'nın. Benimki henüz yazılmadı.
+            `),
+            next: '$stay',
+          }),
+          option('FER_GULAY', 'Gülay Erdem’in izni ne zaman planlanmıştı?', {
+            visibleWhen: has('clue_izin_gulay'),
+            score: { DELIL_ANALIZI: 20 },
+            responses: B(S`
+              ferda: Ocakta. Annesi Antalya'da ameliyat olacaktı; on iki günlük yıllık izin. Ben imzaladım. Çizelge panoya asılır; katta herkes kimin ne zaman olmayacağını bilir.
+              ~ Katta herkes biliyordu: 12 Mart'ta 214'te tek bir masa dolu olacaktı. Haftalar önceden.
+            `),
+            next: '$stay',
+          }),
+          cont('FER_GERI', 'Teşekkür et, arşivden çık', HUB, { role: 'BACK' }),
+        ],
+      }),
+    ),
+    story('ARA_GULAY', {
+      ...ARA,
+      title: 'İzindeki memur',
+      background: 'buro',
+      lines: B(S`
+        - Çizelgenin altında bir cep numarası vardı; izindeki personel acil durum için yazar. Aradım. Üçüncü çalışta açıldı; arkada deniz ve bir hastane anonsu.
+        ?GÜLAY ERDEM{phone}: Efendim? Avukat mı? Halil Bey'in... Allah'ım. Haberlerde gördüm. İnanmadım. Halil Bey bir çikolatayı bile tutanakla iade eder.
+        > Gülay Hanım, size yalnızca bir şey soracağım; cevabınızı istediğiniz gibi verin. 12 Mart'ta neredeydiniz?
+        ?GÜLAY ERDEM{phone}: Antalya'da, annemin yanında. Sekizinden on dokuzuna kadar izinliydim. Masam boştu; bilgisayarımı bile kapatıp gitmiştim.
+        ?GÜLAY ERDEM{phone}: Mahkeme beni çağırırsa gelirim. Ama ben bir şey görmedim, avukat hanım. Orada değildim.
+        > Bunu söylemeniz yeterli. Çağrılırsanız, gördüğünüzü ve görmediğinizi aynen anlatın. Başka bir şey değil.
+        ~ Bir tanığa yalnızca nerede olduğunu sordum; neyi söyleyeceğini söylemedim. Leyla'nın kuralı. Boş bir masanın da bir tanıklığı var.
+      `),
+      choices: [cont('GULAY_GERI', 'Telefonu kapat', HUB, { role: 'PRIMARY' })],
+    }),
     choiceNode('ARA_SUC', {
       ...ARA,
       title: 'Suç duyurusu',
@@ -580,7 +679,7 @@ export const ara: CasePart = {
       choices: [
         option(
           'SUC_A',
-          'Zarfın kaynağı ve 214’ten yapılan çağrı: Devir-2 memuru hakkında soruşturma ve iletişim tespiti',
+          'Devir-2 memuru hakkında: zarfın zimmet kaydı ve 214’ten yapılan çağrıyla',
           {
             effects: [
               ifThen(
@@ -625,6 +724,7 @@ export const ara: CasePart = {
                 - Leyla dilekçeyi okudu; bir kelimeyi değiştirdi. "Kesin" yazdığım yere "muhtemel" yazdı. "Savcıya kesin deme" dedi; "kesin olanı o söylesin."
                 - Üç sayfa. Birinci sayfada bir zarf ve bir deste: 0417, 0401–0450, Devir-2. İkinci sayfada bir dahili ve bir izin çizelgesi: 214, tek masa. Üçüncü sayfada bir talep.
                 - Savcılık kalemindeki memur dilekçeyi okudu, kaşlarını kaldırdı. "Bu bir harita, avukat hanım" dedi. Numara verdi.
+                - Dilekçenin son satırında bir talep vardı, bir hüküm değil: "Gerekli araştırmanın yapılmasını arz ederim." Leyla o satırın altını çizdi. "Gerisi onların işi" dedi.
                 ~ Bir isim yazdım. Ama isimden önce iki kâğıt yazdım. Leyla'nın dediği gibi: parmak değil, kâğıt.
               `,
               ),
@@ -643,7 +743,7 @@ export const ara: CasePart = {
             next: '$stay',
           },
         ),
-        option('SUC_B', 'Müteahhit Ateşoğlu hakkında: bütün bu işin arkasında o var', {
+        option('SUC_B', 'Müteahhit Ateşoğlu hakkında: on bir dosyanın ve zarfın arkasındaki çıkar', {
           score: { USUL_BILGISI: -40 },
           effects: [raise('suc_cengiz')],
           bad: 'Ateşoğlu hakkında zaten bir soruşturma var; yeni bir somut olgu göstermeden “arkasında o var” demek bir şey eklemez ve iftira riski taşır (TCK 267).',
@@ -653,7 +753,7 @@ export const ara: CasePart = {
           `),
           next: '$stay',
         }),
-        option('SUC_C', 'Muhbir Bayram Öz hakkında iftira suç duyurusu', {
+        option('SUC_C', 'Muhbir Bayram Öz hakkında: iki çelişkili ifadesine dayanarak iftiradan', {
           visibleWhen: has('ded_iki_hikaye'),
           neutral:
             'Tanık kürsüye çıkmadan onun hakkında iftiradan suç duyurusu yapmak, tanığa gözdağı gibi okunabilir. Çelişkisini duruşmada göster; iftira değerlendirmesini savcılık hükümden sonra yapar.',
@@ -712,9 +812,30 @@ export const ara: CasePart = {
             `),
             next: '$stay',
           }),
+          option('AH_DOSYALAR', 'On bir dosyayı anlatın. Hepsinde aynı şey mi eksikti?', {
+            score: { SORGULAMA: 20 },
+            responses: B(S`
+              halil: Aynı şey değil; aynı el. Birinde vekâlet eksik, birinde şerh, birinde harç. Ama hepsinin hazırlık sayfası aynı kalemle doldurulmuş; aynı eğimle.
+              halil: Ekimde ilkini geri çevirdim, kasımda üçünü. Aralıkta biri koridorda "Ateşoğlu'nun işleri acildir" dedi. Ben de "acil olan şerhtir" dedim. Gülmedi.
+              halil: Şubatta onuncuyu çevirdim. O hafta cebimdeki not geldi. On birinciyi de çevirdim. Kural, korkunca değişirse kural değildir, avukat hanım.
+              halil/uzgun: Müdür Hanım'a bir rapor yazacaktım. Defterden. İki Mart'ta son sayfayı yazdım; on ikisinde çekmecemden bir zarf çıktı.
+              ~ Bir defter, bir rapor, on gün. Birinin takvimi Halil'inkinden hızlı işlemiş.
+            `),
+            next: '$stay',
+          }),
+          option('AH_GECE', 'Geceleri ne düşünüyorsunuz?', {
+            score: { SORGULAMA: 10 },
+            responses: B(S`
+              halil: Geceleri mi? Saatleri düşünüyorum. On otuz beş, on kırk altı. Arada on bir dakika. Yirmi yedi yılın on bir dakikaya sığdığını düşünüyorum.
+              halil: Bir de kızımı. Annesi öldüğünde "Baba, her şeyi sen yapma" demişti. Ben yine her şeyi kendim yaptım; çekmecemi bile kendim açık bıraktım.
+              halil: Sonra sabah oluyor. Sabah olunca düşünmüyorum; bir şey yapıyorum. Kitap, sardunya, ne varsa. Düşünmek gece işidir.
+              ~ Halil'in sesinde ilk kez bir yorgunluk vardı: kurallı bir adamın, kuralların yetmediği yeri gördüğü yorgunluk.
+            `),
+            next: '$stay',
+          }),
           option(
             'AH_HAZIR',
-            'İkinci celsede size yeniden söz verilecek. Ne söyleyeceğinizi size ben söylemeyeceğim; doğruyu, kısa söyleyin.',
+            'Size yeniden söz verilecek. Ne söyleyeceğinizi ben söylemem; doğruyu kısa söyleyin.',
             {
               score: { SAVUNMA_STRATEJISI: 40 },
               effects: [raise('halil_hazir'), inc('trust', 3)],
@@ -728,7 +849,7 @@ export const ara: CasePart = {
               next: '$stay',
             },
           ),
-          option('AH_EZBER', 'Size bir metin hazırladım; kürsüde bunu ezbere söyleyin, başka bir şey söylemeyin.', {
+          option('AH_EZBER', 'Size bir metin hazırladım; kürsüde onu ezbere söyleyin, başka bir şey eklemeyin.', {
             score: { SAVUNMA_STRATEJISI: -40 },
             effects: [raise('halil_ezber')],
             bad: 'Sanığın beyanı onun kendi beyanı olmalıdır; avukatın yazdığı metni ezberletmek beyanın inandırıcılığını yok eder ve heyetin gözünden kaçmaz.',
@@ -754,6 +875,7 @@ export const ara: CasePart = {
           = 2. KAT ÇAY OCAĞI · 15.10 @cay_ocagi
           - Bir buçuk metrekarelik bir oda: iki ocak, üç demlik, bir tepsi dolusu ince belli bardak. Duvarda bir takvim, takvimin yanında ipe asılı bir defter.
           - Muzaffer Usta beni görünce demliği ocaktan aldı, bir bardak doldurdu, tepsinin üstünde bana doğru itti. Soru sormadı.
+          - Duvardaki takvimde 12 Mart'ın üstüne kurşun kalemle küçük bir çarpı atılmıştı. Başka hiçbir günde çarpı yoktu.
           muzaffer: Çay demini bekler, avukat hanım; insan da sırasını. Siz Halil Bey'in avukatısınız. Biliyorum. Bu binada herkes herkesi bilir; çaycı herkesten önce bilir.
           muzaffer: Ama ben çaycıyım. Şahit değil. Halil Bey'i severim; açık demli içer, şekersiz, sabah dokuzda bir, on birde bir. Yirmi yıldır. Başka bir şey bilmem.
         `),
@@ -783,7 +905,7 @@ export const ara: CasePart = {
           }),
           option(
             'MUZ_TANIK',
-            'Mahkemenin sizi tanık olarak dinlemesini isteyeceğim. Ne söyleyeceğinizi ben belirlemem; gördüğünüzü anlatırsınız.',
+            'Mahkemeden sizi tanık olarak dinlemesini isteyeceğim; yalnızca gördüğünüzü anlatırsınız.',
             {
               visibleWhen: any(has('clue_cay_defteri'), flag('muzaffer_gordu')),
               score: { USUL_BILGISI: 40 },
@@ -801,7 +923,7 @@ export const ara: CasePart = {
           option('MUZ_BASKI', 'Mahkemede yüzünü de gördüğünüzü söyleyin; kim olduğunu ikimiz de biliyoruz.', {
             visibleWhen: flag('muzaffer_gordu'),
             score: { USUL_BILGISI: -150 },
-            effects: [inc('ethics', 2), raise('tanik_etkileme')],
+            effects: [inc('ethics', 2), raise('tanik_etkileme'), raise('etki_muzaffer')],
             bad: 'Tanığa görmediği bir şeyi söylemesini telkin etmek tanığı etkilemedir (TCK 277) ve ağır meslek ihlalidir (Av.K. 34). Tanık yalan beyana sürüklenir (TCK 272).',
             responses: B(S`
               muzaffer: Ama ben görmedim, avukat hanım. Sırtını gördüm. Yüzünü...
@@ -828,13 +950,14 @@ export const ara: CasePart = {
           bayram: Abla... avukat abla siz misiniz? Halil Bey'in? Ben Bayram. Bayram Öz. Çocuklarımın üstüne yemin ederim, ben kötü biri değilim.
           bayram: Mahkeme beni çağırmış. Komiser bey "rahat ol, sen ihbarcısın" dedi. Ama ben rahat değilim abla. Gece uyuyamıyorum. Babamı yirmisinde gömdüm. Tarla hâlâ devrolmadı.
           bayram: Ben bir şey söylemek istiyorum ama... kime söyleyeceğimi bilmiyorum. Avukatım yok. Param yok. Herkes bana bir şey söyletti; ben kendi şeyimi söyleyemedim.
-          - Tespih elinden kaydı, yere düştü. Eğilip almadı.
+          - Tespih elinden kaydı, yere düştü. Eğilip almadı. Bekleme salonundaki sandalyeye oturmadı da; sanki oturursa kalkamayacakmış gibi.
+          bayram: Komiser bey dedi ki "rahat ol". Sonra bir başkası dedi ki "polise git". Herkes bana bir yol gösterdi abla. Hiçbiri benim yolum değildi.
           ~ Bu adam benim müvekkilim değil. Bir gün şüpheli olabilir. Bugün ne söylersem, ikimizin dosyasına da yazılır.
         `),
         choices: [
           option(
             'BAY_A',
-            'Size avukat olamam ve sizi dinleyemem. Baronun adli yardım bürosuna gidin; söyleyeceğinizi avukatınızla savcılığa ya da mahkemeye söyleyin.',
+            'Sizi dinleyemem. Adli yardım bürosuna gidin; ne söyleyecekseniz avukatınızla mahkemeye söyleyin.',
             {
               score: { USUL_BILGISI: 60 },
               effects: [raise('bayram_avukat')],
@@ -845,11 +968,12 @@ export const ara: CasePart = {
               bayram: Avukatım mı olacak? Benim? Tamam. Tamam abla.
               - Kapıdan çıkarken durdu. Ona hiçbir şey sormamıştım; o yine de söyledi, bir yük gibi.
               bayram: Ben o zarfı... Halil Bey'in eline vermedim abla. Odasına bile girmedim. Mahkemede söyleyeceğim. Avukatımla. Söz.
+              - Merdivenden inerken bir kez daha döndü; bir şey daha söyleyecek gibi oldu. Elimi kaldırdım: "Avukatınıza." Başını salladı ve indi.
               ~ Bir cümle. Sormadan gelen bir cümle. Tutanağa geçmeyecek; ama kürsüde yeniden kurulabilir. Yeter ki ben onun yerine kurmayayım.
             `),
             },
           ),
-          option('BAY_B', 'Oturun. Anlatın; ben yazayım, siz imzalayın. Mahkemeye ben sunarım.', {
+          option('BAY_B', 'Oturun; anlatın, ben yazayım. İmzalı beyanınızı mahkemeye delil olarak ben sunarım.', {
             score: { USUL_BILGISI: -30 },
             effects: [raise('bayram_yazdirildi')],
             next: HUB,
@@ -865,7 +989,7 @@ export const ara: CasePart = {
             'Mahkemede şunu söyleyin: zarfı Halil Bey’e vermediniz, odaya girmediniz. Başka hiçbir şey söylemeyin.',
             {
               score: { USUL_BILGISI: -150 },
-              effects: [inc('ethics', 2), raise('tanik_etkileme')],
+              effects: [inc('ethics', 2), raise('tanik_etkileme'), raise('etki_bayram')],
               next: HUB,
               bad: 'Tanığa mahkemede ne söyleyeceğini ve neyi söylemeyeceğini dikte etmek tanığı etkilemedir (TCK 277) ve ağır meslek ihlalidir (Av.K. 34).',
               responses: B(S`
@@ -885,6 +1009,7 @@ export const ara: CasePart = {
         background: 'buro_gece',
         lines: B(S`
         - Panoya yeni kartlar ekledim: bir santral satırı, bir izin çizelgesi, bir kamera karesi, bir çay defteri. Kırmızı ipler artık bir örümcek ağı gibi.
+        - Leyla kapıda durdu, panoya baktı. "Örümcek ağında en tehlikeli şey ip değil" dedi. "İpe yakışan bir sinek bulup onu suçlu sanmaktır." Gitti.
         ~ Bir zarfın yolu, bir zincirdir. Her halka bir öncekine bağlanırsa, sonunda bir el çıkar ortaya.
       `),
         pool: [
@@ -898,6 +1023,7 @@ export const ara: CasePart = {
           'clue_kare_zarf',
           'clue_zimmet',
           'clue_cay_defteri',
+          'clue_sinan_saat',
         ],
         recipes: [
           ...INV1_RECIPES.map(again),
@@ -955,6 +1081,21 @@ export const ara: CasePart = {
         finish: { id: 'ARA_CIKARIM_BITIR' },
       }),
     ),
+    decisionNode('ARA_SAVCI', [{ to: 'ARA_SON_1' }], {
+      ...ARA,
+      lines: [
+        W(
+          has('clue_manuel'),
+          S`
+            = 30 MAYIS 2027 · 17.10 — ARSLAN HUKUK @buro
+            - Telefon çaldı. Savcılık. Kenan Yavuz'un sesi, mahkemedekinden daha yorgundu; bir dosyanın sonuna yaklaşan herkesinki gibi.
+            savci{phone}: Avukat hanım. Bilirkişi raporu bana da tebliğ edildi. Tuşa basılmış. Bunu kolluk bana yazmadı; bir cihaz yazdı.
+            savci{phone}: Size bir şey vaat etmiyorum. Yarın dosyaya bakacağım; ezberden değil, sayfa sayfa. Bunu söylemek için aradım, o kadar. İyi akşamlar.
+            ~ "Dosyaya bakacağım." Bu davada aynı cümleyi bir kez daha duydum; ilkinde yarısı silinmişti. Bu sefer cümle tamdı.
+          `,
+        ),
+      ],
+    }),
     decisionNode('ARA_SON_1', [{ to: 'ARA_SON_2' }], {
       ...ARA,
       lines: [
@@ -1033,6 +1174,9 @@ export const ara: CasePart = {
         - Leyla ceketini giyerken kapıda durdu. Elinde tuttuğu şemsiyeyi açmadı.
         leyla: Yarın kürsüye çıkan herkes bir şey anlatacak. Muhbir korkusunu, memur alibisini, savcı düzeni. Sen yalnızca kâğıdı anlat.
         leyla: Ve hatırla: bir tanığı yıkmak, bir sanığı kurtarmak değildir. Yıkıntının altından ne çıkacağını bilmeden hiçbir duvarı itme.
+        > Muhbir yarın kürsüde çözülürse ne olacak? Onun da bir suç dosyası açılacak.
+        leyla: Açılacak. Bu senin işin değil; ama bunu bilerek soracaksın. Bayram'ın ağlaması seni yumuşatmasın, korkusu da sertleştirmesin. Belgeyi koy, bekle.
+        leyla: Kürsüde kendini suçlayacak bir soruyla karşılaşırsa Başkan ona hakkını hatırlatacak. O an sus. Bir avukatın en zor işi, karşısındaki susarken susmaktır.
         - Gitti. Büroda tek başıma kaldım. Panoya son kez baktım: dört soru. Kayıt hangi kapının deliğinden alındı? Halil neredeydi? Muhbir neyi kime verdi? Zarf kimin işine yarar?
         - Üç sorunun altında artık kâğıtlar vardı. Dördüncüsünün altında bir boşluk ve bir soru işareti; Halil'in takviminde olduğu gibi.
         ~ Leyla dördüncüyü en sona sakla demişti. Yarın son gün.

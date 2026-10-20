@@ -34,21 +34,6 @@ import { HEAR1, court1 } from './shared.js';
 
 export const wrongEvidence: Effect[] = [dec('cred'), dec('pers'), inc('wrong'), score('SORGULAMA', -150, 'hatali')];
 
-/** Hukuka aykırı kaydı sunmak: güvenilirlik −2, etik ve ETİK sonucunun bayrağı. */
-export const illegalPresented = (by: string): Effect[] => [
-  dec('cred', 2),
-  inc('wrong'),
-  inc('ethics'),
-  raise('illegal_used'),
-  score('SORGULAMA', -150, 'hatali'),
-  score('USUL_BILGISI', -150),
-  mark(
-    'BAD',
-    `Gizli soruşturma kaydı (${by}) yetkisiz yoldan alındı; hukuka aykırı delil hükme esas alınamaz (Anayasa 38/6; CMK 206/2-a, 217/2) ve gizliliğin ihlali suç oluşturabilir (TCK 285).`,
-    'USUL_BILGISI',
-  ),
-];
-
 const savcilikDelili = (id: string, statementId: string | undefined, evidenceIds: string[]) =>
   presentRule(id, statementId, evidenceIds, {
     maxUses: 3,
@@ -264,7 +249,7 @@ export const hearing1: CasePart = {
           next: '$stay',
         }),
         option('H101Q_B', 'Telefonunuz çaldığında takviminize ne yazdınız?', {
-          visibleWhen: has('clue_takvim_214'),
+          visibleWhen: has('ded_sahte_cagri'),
           score: { SORGULAMA: 40 },
           effects: [inc('pers'), raise('q_takvim')],
           good: 'Sahnede bulduğun ayrıntıyı sanığın kendi ağzından bağlamına oturttun; telkinsiz.',
@@ -320,7 +305,7 @@ export const hearing1: CasePart = {
       `,
       next: 'H1_02R',
       options: [
-        option('H102_A', 'İtiraz: soru cevabını içinde taşıyor ve kanıtlanmamış bir olguyu doğru kabul ediyor.', {
+        option('H102_A', 'İtiraz: soru, tartışmalı bir olguyu verili kabul ediyor.', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), inc('pers')],
           good: 'Savcı sanığa doğrudan soru sorabilir (CMK 201/1); ama cevabı içinde taşıyan, tartışmalı bir olguyu verili kabul eden yönlendirici soru reddedilir.',
@@ -330,23 +315,23 @@ export const hearing1: CasePart = {
             halil: Bilmiyorum, efendim. Bilseydim, bu salonda değil, savcılıkta olurdum; ihbarcı olarak.
           `),
         }),
-        option('H102_B', 'İtiraz: savcı sanığa soru soramaz.', {
+        option('H102_B', 'İtiraz: sanığa soruyu ancak başkan aracılığıyla sorabilir.', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
-          bad: 'Savcı ve müdafi sanığa doğrudan soru yöneltebilir (CMK 201/1). İtiraz, sorunun biçimine yapılmalıydı.',
+          bad: 'Savcı ve müdafi sanığa doğrudan soru yöneltebilir (CMK 201/1); başkan aracılığı gerekmez. İtiraz, sorunun biçimine yapılmalıydı.',
           responses: B(S`
-            baskan: Sorabilir, müdafi. Reddedildi. Sanık, cevap verin.
+            baskan: Doğrudan sorabilir, müdafi. Reddedildi. Sanık, cevap verin.
             halil/saskin: Hayır. Hayır, efendim. Ben o parayı görmedim bile.
           `),
         }),
-        option('H102_C', 'Müvekkilim bu soruya cevap vermeyecek.', {
+        option('H102_C', 'Müvekkilim para konusunda susma hakkını kullanacak.', {
           neutral: 'Susma hakkı meşrudur; ama burada sorunun biçimine itiraz edilebilirdi ve cevap Halil’in lehineydi.',
           responses: B(S`
             savci: Not edelim. Sanık para konusunda susuyor.
             ~ Susmaması gereken yerde susturdum. Bir cevabın lehte olduğu yerde, sessizlik aleyhe okunur.
           `),
         }),
-        option('H102_D', 'Bir şey söyleme; cevabı Halil versin.', {
+        option('H102_D', 'Sus; Halil’in kendi “hayır”ı bir itirazdan güçlüdür.', {
           effects: [dec('pers')],
           neutral: 'Yönlendirici soru itirazsız geçti; Halil’in “hayır”ı savcının cümlesinin içinde kayboldu.',
           responses: B(S`
@@ -378,7 +363,7 @@ export const hearing1: CasePart = {
       options: [
         option(
           'H103_A',
-          'Kayıt 14 kararın süresi dolduktan sonra, kayıt 9 kararda olmayan bir hattan alınmıştır; hukuka aykırı delil olarak reddini talep ediyoruz.',
+          'Kayıtlar kararın kapsamı dışında alındı; hukuka aykırı delil olarak reddini istiyoruz.',
           {
             effects: [
               ifThen(
@@ -469,7 +454,7 @@ export const hearing1: CasePart = {
             ],
           },
         ),
-        option('H103_B', 'Rüşvet dinlemeye elverişli suçlardan değildir; bütün kayıtların reddini talep ediyoruz.', {
+        option('H103_B', 'Rüşvet, dinleme yapılabilecek katalog suçlardan değil; bütün kayıtların reddini istiyoruz.', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Rüşvet, CMK 135/8-a-13 uyarınca dinleme tedbirinin uygulanabileceği katalog suçlardandır. Hukuka aykırılık suç türünde değil, kararın süresi ve hattındadır.',
@@ -478,15 +463,16 @@ export const hearing1: CasePart = {
             - Kâtip okudu: "Kontrolcüyü hallettik. Zarf yarın masada." Salon bu cümleyi duydu. Bir kez duyulan cümle, tutanaktan silinse de kulaklardan silinmez.
           `),
         }),
-        option('H103_C', 'Kayıtlar sanığın yakınlarıyla yapılan görüşmeleri içerdiğinden okunamaz.', {
+        option('H103_C', 'Kayıtlar başka soruşturmada tesadüfen elde edildi; bu davada kullanılamaz, reddini istiyoruz.', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
-          bad: 'Tanıklıktan çekinebilecek kişilerle görüşmeler kayda alınamaz (CMK 135/3); ama Bayram Öz ve Ateşoğlu sanığın yakını değildir.',
+          bad: 'Tesadüfen elde edilen delil, katalog suçlardan birine ilişkinse kullanılabilir (CMK 138/2); rüşvet katalogdadır. Sorun tesadüf değil, kararın süresi ve hattıdır.',
           responses: B(S`
-            baskan: Hangi yakın, müdafi? Bayram Öz sanığın yakını mı? Reddedildi. Okunsun.
+            baskan: Müdafi, rüşvet katalog suçu; tesadüfi delil kuralı kullanılmasını engellemez. Reddedildi. Okunsun.
+            - Kâtip okudu: "Kontrolcüyü hallettik. Zarf yarın masada." Salon bu cümleyi duydu.
           `),
         }),
-        option('H103_D', 'Okunsun; değerlendirmesini esas hakkındaki savunmada yaparız.', {
+        option('H103_D', 'Okunsun; kayıtların değerlendirmesini esas hakkındaki savunmada yaparız.', {
           effects: [dec('pers')],
           neutral:
             'Kanuna aykırı delile ortaya konulurken itiraz edilmeliydi (CMK 206/2-a). Okunan kayıt heyetin zihnine girdi.',
@@ -763,6 +749,8 @@ export const hearing1: CasePart = {
           `),
         }),
         objectRule('OB_K5', 'K5', 'g_aykiri', {
+          visibleWhen: any(flag('press_k5'), has('clue_hedef_hat')),
+          enabledWhen: any(flag('press_k5'), has('clue_hedef_hat')),
           score: { SORGULAMA: 50 },
           effects: [
             inc('pers'),
@@ -969,6 +957,7 @@ export const hearing1: CasePart = {
             - Zehra ona sarılmadı; önce gözlüğünü düzeltti, sonra sarıldı. Halil kollarını nereye koyacağını bilemedi, sonra kızının sırtına koydu. Dik, kurallı bir sarılma.
             halil: Sardunyayı sulayacağım. Önce sardunya. Sonra bir de... odama gidemem, değil mi? Gidemem. Kural.
             leyla: Bugün bir kapı açıldı, Deniz. Üç hafta var. Zarfın hangi elden geldiğini bul; mahkeme o eli görmek isteyecek.
+            - Halil Leyla'ya döndü, elini uzattı; sonra vazgeçip başıyla selam verdi. Leyla gülümsemedi; ama başını aynı resmiyetle eğdi. İki kural adamı, merdivende.
             - Merdivenin dibinde, kahverengi deri montlu adam bir taksiye biniyordu. Telefonla konuşuyordu; sesi duyulmuyordu. Taksi yağmurun içinde kayboldu.
           `,
         ),

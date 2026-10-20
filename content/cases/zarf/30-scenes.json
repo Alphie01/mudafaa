@@ -199,7 +199,12 @@
           "shapes": [{ "rect": { "x": 150, "y": 150, "w": 26, "h": 18 } }],
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_kol_saat" },
-            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 },
+            {
+              "type": "IF",
+              "when": { "visited": "ARA_AKSAM" },
+              "then": [{ "type": "DISCOVER", "evidence": "clue_sinan_saat" }]
+            }
           ],
           "feedback": {
             "text": "Kapı koluna uzanan sol el. Bileğinde küçük, dikdörtgen, yeşil bir ışık: dijital bir saat ekranı. Gren bile o yeşili yutamamış.",
@@ -344,6 +349,7 @@
     { "evidence": "clue_zarf_stok", "source": { "type": "OBJECT", "id": "ob_dolap" } },
     { "evidence": "clue_kare_saat", "source": { "type": "OBJECT", "id": "ob_damga" } },
     { "evidence": "clue_kol_saat", "source": { "type": "OBJECT", "id": "ob_bilek" } },
+    { "evidence": "clue_sinan_saat", "source": { "type": "OBJECT", "id": "ob_bilek" } },
     { "evidence": "clue_kare_zarf", "source": { "type": "OBJECT", "id": "ob_koltuk" } },
     { "evidence": "ev_kirmizi_defter", "source": { "type": "OBJECT", "id": "ob_ciltler_defter" } },
     { "evidence": "clue_zimmet", "source": { "type": "OBJECT", "id": "ob_zimmet" } }

@@ -1,4 +1,4 @@
-import { chapter, court, phase } from '../../../tools/content/src/kit/index.js';
+import { all, any, chapter, court, flag, has, not, phase } from '../../../tools/content/src/kit/index.js';
 
 // Dava genelinde paylaşılan tanımlar: bölüm etiketleri, soruşturma evreleri ve duruşma salonu.
 
@@ -42,3 +42,12 @@ const bench = [
 
 export const court1 = court({ bench, counsel: 'deniz', hud: ['cred', 'pers'], ...HEAR1 });
 export const court2 = court({ bench, counsel: 'deniz', hud: ['cred', 'pers'], ...TRIAL });
+
+/**
+ * Gerçek fail kanıtlandı: Sinan kürsüde çözüldü ya da muhbir zarfı kime verdiğini söyledi ve bu, zarfın kaynağı ya da
+ * çağrının tek masasıyla desteklendi. Müdafiin yönlendirdiği muhbirin beyanı (BAY_C) bu hesaba katılmaz.
+ */
+export const gercekProven = any(
+  flag('sinan_ifsa'),
+  all(flag('bayram_ifsa'), not(flag('etki_bayram')), any(has('ded_tek_kisi'), has('ded_zarf_kaynagi'))),
+);

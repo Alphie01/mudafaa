@@ -45,6 +45,10 @@
             {
               "speaker": "halil",
               "text": "Avukat hanım. Bugün o adam da gelecek, değil mi? Muhbir. Bir de... diğerleri. Bakmayacağım. Kural gereği değil; bakarsam bir şey söylerim diye."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Merdivenden Muzaffer Usta çıktı; elinde bir tepsi, tepside tek bir ince belli bardak. Halil’in önünde durdu. “Dokuz yirmi” dedi. “Geç kaldım, kusura bakma Halil Bey.” Halil bardağı aldı; bu sefer içti."
             }
           ]
         },
@@ -217,6 +221,31 @@
           ]
         }
       ],
+      "routes": [{ "to": "T_00E" }],
+      "choices": []
+    },
+    {
+      "id": "T_00E",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": { "flag": "etki_muzaffer" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Savcı dosyaya yeni bir sayfa ekletti: Muzaffer Kılınç’ın Başsavcılığa verdiği dilekçe. “Avukat hanım bana adamın yüzünü de gördüğümü söylememi istedi. Ben görmedim. Yazılsın.”"
+            },
+            { "speaker": "narrator", "text": "Savcı o sayfayı okurken bana bakmadı. Bakmasına gerek yoktu." },
+            {
+              "speaker": "player",
+              "text": "Bir çaycı yirmi yıllık “günaydın”ını korudu. Benim yerime.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
       "routes": [{ "to": "T_00Q" }],
       "choices": []
     },
@@ -285,6 +314,7 @@
       "background": "durusma_salonu",
       "lines": [
         {
+          "when": { "all": [{ "flag": "sinan_cagrildi" }, { "flag": "muzaffer_cagrildi" }] },
           "lines": [
             {
               "speaker": "narrator",
@@ -304,6 +334,71 @@
               "style": "thought"
             }
           ]
+        },
+        {
+          "when": { "flag": "sinan_cagrildi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Salonun dışında bekleyen tanıklar sıraya girmişti: tespihini kucağında tutan bir takipçi ve ütülü açık renk ceketiyle bir memur."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Pencereden soluk bir güneş giriyordu; yağmur gece dinmiş, Uludağ’ın üstünde bir bulut kalmıştı. Tozun içinde ışıktan bir sütun."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Kenan Yavuz salona girerken dosyasını iki eliyle taşıyordu; geçen celse tek eliyle taşımıştı. Komiser izleyici sıralarında, en arkada oturdu. Ferda Yalçın da gelmişti; bordo ceketiyle, kurumun yüzü."
+            },
+            {
+              "speaker": "player",
+              "text": "İki tanık, bir zarf, on dakika. Bugün o on dakika bir kez daha yaşanacak; bu sefer yüksek sesle.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "muzaffer_cagrildi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Salonun dışında bekleyen tanıklar sıraya girmişti: tespihini kucağında tutan bir takipçi ve önlüğünün cebinde bir defterle yaşlı bir çaycı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Pencereden soluk bir güneş giriyordu; yağmur gece dinmiş, Uludağ’ın üstünde bir bulut kalmıştı. Tozun içinde ışıktan bir sütun."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Kenan Yavuz salona girerken dosyasını iki eliyle taşıyordu; geçen celse tek eliyle taşımıştı. Komiser izleyici sıralarında, en arkada oturdu. Ferda Yalçın da gelmişti; bordo ceketiyle, kurumun yüzü."
+            },
+            {
+              "speaker": "player",
+              "text": "İki tanık, bir zarf, on dakika. Bugün o on dakika bir kez daha yaşanacak; bu sefer yüksek sesle.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Salonun dışındaki bankta tek bir tanık bekliyordu: tespihini kucağında tutan bir takipçi. Yanındaki yer boştu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Pencereden soluk bir güneş giriyordu; yağmur gece dinmiş, Uludağ’ın üstünde bir bulut kalmıştı. Tozun içinde ışıktan bir sütun."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Kenan Yavuz salona girerken dosyasını iki eliyle taşıyordu; geçen celse tek eliyle taşımıştı. Komiser izleyici sıralarında, en arkada oturdu. Ferda Yalçın da gelmişti; bordo ceketiyle, kurumun yüzü."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir tanık, bir zarf, on dakika. Bugün o on dakika bir kez daha yaşanacak; bu sefer yüksek sesle.",
+              "style": "thought"
+            }
+          ]
         }
       ],
       "choices": [{ "id": "T00S_DEVAM", "kind": "CONTINUE", "label": "Tanık: Bayram Öz", "next": "T_01" }]
@@ -320,6 +415,35 @@
       "witnessLabel": "TANIK · BAYRAM ÖZ",
       "onFirstEnter": [{ "type": "MEET", "character": "bayram" }],
       "lines": [
+        {
+          "when": { "flag": "etki_bayram" },
+          "lines": [
+            { "speaker": "mubasir", "text": "Tanık Bayram Öz!" },
+            {
+              "speaker": "narrator",
+              "text": "Bayram yalnız girdi. Tespihini cebine koydu, sonra çıkardı. Kürsüye geçmeden önce bana baktı; bir talimat bekler gibi."
+            },
+            {
+              "speaker": "baskan",
+              "text": "Tanık, yemin edeceksiniz. Ancak sizi veya yakınlarınızı ceza kovuşturmasına uğratabilecek sorulara cevap vermekten çekinebilirsiniz. Anladınız mı?"
+            },
+            {
+              "speaker": "bayram",
+              "text": "Anladım, efendim. Ben... avukat abla ne diyeceğimi söyledi. “Odaya girmedim de, başka bir şey deme” dedi. Ben de onu diyeceğim."
+            },
+            { "speaker": "narrator", "text": "Salon bir an dondu. Savcı Kenan Yavuz yavaşça ayağa kalktı." },
+            {
+              "speaker": "savci",
+              "text": "Sayın Başkan, tanığın bu sözlerinin tutanağa aynen geçirilmesini talep ediyorum."
+            },
+            { "speaker": "baskan", "text": "Geçirilsin. Müdafi, bunu ayrıca konuşacağız." },
+            {
+              "speaker": "player",
+              "text": "Bir cümle verdim. Sahibine geri döndü; salonun ortasında, herkesin önünde.",
+              "style": "thought"
+            }
+          ]
+        },
         {
           "when": { "flag": "bayram_avukat" },
           "lines": [
@@ -745,6 +869,11 @@
             { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
             { "type": "VAR", "var": "contra_b3", "op": "set", "value": true },
             {
+              "type": "IF",
+              "when": { "hasEvidence": "clue_kare_saat" },
+              "then": [{ "type": "VAR", "var": "kamera_b3", "op": "set", "value": true }]
+            },
+            {
               "type": "MARK",
               "quality": "GOOD",
               "feedback": "Muhbirin “kendi elimle verdim”i tutanağın saatleriyle ve kamerayla çöktü: sanık o dakikalarda odasında değildi.",
@@ -1034,8 +1163,12 @@
               "text": "Tanık kürsüsü boşaldı. Bekleme kapısının camında bir gölge, bir süre durdu, sonra uzaklaştı. Kimin olduğunu kimse sormadı."
             },
             {
+              "speaker": "narrator",
+              "text": "Savcı dosyasında bir sayfa çevirdi; iki yüz on dört numarası geçen sayfayı. Bir şey yazmadı. Başkan da sormadı; mahkeme, kimsenin istemediği tanığı kendiliğinden çağırmaz her zaman."
+            },
+            {
               "speaker": "player",
-              "text": "Bir kapıyı aralık bıraktım. İçeri girecek kişiyi salona çağırmadım.",
+              "text": "Bir kapıyı aralık bıraktım. İçeri girecek kişiyi salona çağırmadım. Bugün o kapıdan girmesi gereken soru, bir suç duyurusunun numarasında bekleyecek.",
               "style": "thought"
             }
           ]
@@ -1119,7 +1252,7 @@
               "text": "10.30’dan 10.50’ye kadar arşivdeydim",
               "highlightWhen": { "any": [{ "flag": "press_s1" }, { "hasEvidence": "ded_alibi" }] }
             },
-            { "text": "; 1987 ciltleriyle uğraşıyordum." }
+            { "text": "; kadastro paftalarıyla uğraşıyordum." }
           ]
         },
         {
@@ -1604,6 +1737,22 @@
       "onFirstEnter": [{ "type": "MEET", "character": "muzaffer" }],
       "lines": [
         {
+          "when": { "flag": "etki_muzaffer" },
+          "lines": [
+            { "speaker": "mubasir", "text": "Tanık Muzaffer Kılınç!" },
+            {
+              "speaker": "narrator",
+              "text": "Muzaffer Usta önlüğünü çıkarmamıştı. Kürsüye geçerken bana bakmadı; defterini iki eliyle tuttu."
+            },
+            { "speaker": "baskan", "text": "Usta, yemininizi ettiniz. Gördüğünüzü anlatın; görmediğinizi anlatmayın." },
+            {
+              "speaker": "muzaffer",
+              "text": "Anlatacağım, efendim. Ama önce bir şey: avukat hanım bana yüzünü de gördüğümü söylememi istedi. Görmedim. Dilekçemi verdim. Çaycı gördüğünü anlatır."
+            },
+            { "speaker": "baskan", "text": "Tutanağa geçti, usta. Devam edin." }
+          ]
+        },
+        {
           "lines": [
             { "speaker": "mubasir", "text": "Tanık Muzaffer Kılınç!" },
             {
@@ -1710,8 +1859,73 @@
             "category": "SORGULAMA"
           }
         },
-        { "id": "T03Q_BITTI", "kind": "CONTINUE", "label": "Başka sorum yok", "role": "PRIMARY", "next": "T_035" }
+        {
+          "id": "T03Q_D",
+          "kind": "OPTION",
+          "label": "Halil Bey o sabah on birdeki çayını içti mi?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "muzaffer",
+                  "text": "İçemedi, efendim. Dokuzdakini içti; açık demli, şekersiz. On birdekini demledim, tepsiye koydum. Kapısına vardığımda polis vardı."
+                },
+                {
+                  "speaker": "muzaffer",
+                  "text": "Bardağı geri götürdüm. Yirmi yılda ilk kez Halil Bey’in çayı ocakta soğudu. Kimse içmedi; dökemedim de. Akşama kadar orada durdu."
+                },
+                { "speaker": "narrator", "text": "Halil başını eğdi. Bir an. Sonra gözlüğünü düzeltti." }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Tanığın gündelik alışkanlığı, sanığın o sabahki düzenini kendi ağzından ve telkinsiz tutanağa geçirdi.",
+            "category": "SORGULAMA"
+          }
+        },
+        { "id": "T03Q_BITTI", "kind": "CONTINUE", "label": "Başka sorum yok", "role": "PRIMARY", "next": "T_03S" }
       ]
+    },
+    {
+      "id": "T_03S",
+      "type": "STORY",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Savcının sorusu",
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Usta, bir şey soracağım. Halil Bey’e hiç zarf getirdiniz mi? Çayın yanında, tepsinin altında?"
+            },
+            {
+              "speaker": "muzaffer",
+              "text": "Zarf mı? Ben çay getiririm, efendim. Zarf getiren olsa tepsiye koymaz; tepsi herkesin önünden geçer."
+            },
+            {
+              "speaker": "savci",
+              "text": "O sabah kontrol odasının kapısından çıkan kişinin yüzünü görmediniz. Doğru mu?"
+            },
+            { "speaker": "muzaffer", "text": "Doğru. Sırtını gördüm. Görmediğimi demlemem, demiştim. Yine demlemem." },
+            {
+              "speaker": "narrator",
+              "text": "Savcı başını salladı ve oturdu. Bir tanığı yıkmaya çalışmadı; sınadı. Defne Sezer bir şey yazdı; kısa, tek satır."
+            },
+            {
+              "speaker": "player",
+              "text": "Muzaffer Usta bildiği kadarını söyledi, fazlasını değil. Bu salonda en sağlam tanıklık, bir çaycının sınırlarını bilmesiydi.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "T03S_DEVAM", "kind": "CONTINUE", "label": "Kısa ara", "next": "T_035" }]
     },
     {
       "id": "T_035",
@@ -1722,6 +1936,55 @@
       "title": "Kısa ara",
       "background": "adliye",
       "lines": [
+        {
+          "when": {
+            "all": [
+              { "any": [{ "flag": "contra_k1" }, { "flag": "contra_k2" }, { "flag": "contra_k3" }] },
+              { "hasEvidence": "ev_kamera" }
+            ]
+          },
+          "lines": [
+            { "speaker": "baskan", "text": "Duruşmaya on beş dakika ara verildi." },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · 11.40", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Koridorun ucunda, yangın merdiveninin kapısında Komiser Levent Arı duruyordu. İzleyici olarak gelmişti; tanıklığı bitmişti, ama gitmemişti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Beni görünce bir adım attı, sonra durdu. Bir polisin bir avukata yaklaşması, bir tanığın bir avukata yaklaşmasından farklıdır; ama koridor ikisini de aynı tonda kaydeder."
+            },
+            {
+              "speaker": "komiser",
+              "text": "Avukat hanım. Tanıklığım bitti; size bir şey sormayacağım. Bir şey söyleyeceğim, o kadar."
+            },
+            {
+              "speaker": "komiser",
+              "text": "O sonlandırma yazısını ben yazmalıydım. Dört Mart’ta. Yazmadım; sistem kaydetmeye devam etti, ben de gelen her şeyi dosyaya koydum. Oğluma “ne gördüysen yaz” diyorum. Ben gördüğümü yazmışım; görmem gerekeni değil."
+            },
+            {
+              "speaker": "komiser",
+              "text": "Muhbiri de sorgulamadım. Zarf çekmecedeydi, seri numaraları tutuyordu. Ders kitabı gibi dedim. Ders kitapları da bazen yanlış basılır."
+            },
+            {
+              "speaker": "komiser",
+              "text": "Kamera kaydını da izledim; dosyaya geldiğinde. 10.41’de o kapıdan biri girip çıkıyor. Biz o sırada aşağıda, araçtaydık; muhbirin “tamam”ını bekliyorduk."
+            },
+            {
+              "speaker": "komiser",
+              "text": "Tutanağa “10.44” yazdım. Ondan önceki dakikalarda ne olduğunu yazmadım; çünkü görmedim. Görmediğimi de yazmalıydım."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Cevap vermedim. Bir tanığın vicdanı tutanağa geçmez; ama bir koridorda duyulur ve unutulmaz."
+            },
+            {
+              "speaker": "player",
+              "text": "Bu adam kötü bir polis değil. Acele eden bir polis. Bu dosyada herkes biraz acele etti; bir tek Halil, aşağıda, usulüne uygun beş dakika bekledi.",
+              "style": "thought"
+            }
+          ]
+        },
         {
           "when": { "any": [{ "flag": "contra_k1" }, { "flag": "contra_k2" }, { "flag": "contra_k3" }] },
           "lines": [
@@ -1864,7 +2127,7 @@
         {
           "id": "T04_A",
           "kind": "OPTION",
-          "label": "İrtikap icbar ve nüfuz ister; dosya sanığın masasında değildi ve muhbirin iki anlatısı birbirini dışlıyor.",
+          "label": "İrtikap icbar ister; dosya sanığın masasında değildi, muhbir de iki ayrı hikâye anlattı.",
           "responses": [
             {
               "when": { "all": [{ "hasEvidence": "ded_yetkisiz" }, { "hasEvidence": "ded_iki_hikaye" }] },
@@ -1947,7 +2210,7 @@
         {
           "id": "T04_B",
           "kind": "OPTION",
-          "label": "Ek savunmamızı hazırlamak için süre istiyoruz.",
+          "label": "Vasıf değişikliği yeni bir savunma gerektirir; ek savunma için süre istiyoruz.",
           "responses": [
             {
               "lines": [
@@ -1981,11 +2244,14 @@
         {
           "id": "T04_C",
           "kind": "OPTION",
-          "label": "İtiraz: mahkeme iddianamedeki suç vasfıyla bağlıdır.",
+          "label": "İtiraz: vasıf ancak savcının ek iddianamesiyle değişir; mahkeme iddianameyle bağlıdır.",
           "responses": [
             {
               "lines": [
-                { "speaker": "baskan", "text": "Bağlı değiliz, müdafi; bu yüzden size soruyoruz. Ek savunmanız?" }
+                {
+                  "speaker": "baskan",
+                  "text": "Ek iddianame gerekmez, müdafi; bağlı değiliz, bu yüzden size soruyoruz. Ek savunmanız?"
+                }
               ]
             }
           ],
@@ -1995,7 +2261,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Mahkeme eylemin nitelendirilmesinde iddianameyle bağlı değildir (CMK 225/2); vasıf değişecekse sanığa önceden haber verilir ve ek savunması alınır (CMK 226/1).",
+            "feedback": "Ek iddianame gerekmez: mahkeme eylemin nitelendirilmesinde iddianameyle bağlı değildir (CMK 225/2); vasıf değişecekse sanığa önceden haber verilir ve ek savunması alınır (CMK 226/1).",
             "category": "HUKUKI_BILGI"
           },
           "next": "T_045"
@@ -2003,11 +2269,23 @@
         {
           "id": "T04_D",
           "kind": "OPTION",
-          "label": "Diyeceğimiz yok.",
+          "label": "İrtikap da görevi kötüye kullanma da rüşvetten hafiftir; değişikliğe karşı çıkmıyoruz.",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "savci", "text": "Not edelim, Sayın Başkan: müdafi daha hafif vasıflara karşı çıkmıyor." },
+                {
+                  "speaker": "player",
+                  "text": "Bir kapıyı kapatmak isterken bir başkasını ardına kadar açtım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
           "effects": [{ "type": "VAR", "var": "pers", "op": "dec", "value": 1 }],
           "quality": {
             "q": "BAD",
-            "feedback": "Ek savunma hakkı kullanılmadı; vasıf tartışması savunmanın güçlü bir alanıydı.",
+            "feedback": "Daha hafif bir vasfa savunmasız razı olmak, sanığın bir suç işlediğini dolaylı kabul etmektir; ek savunma hakkı kullanılmadı.",
             "category": "HUKUKI_BILGI"
           },
           "next": "T_045"
@@ -2032,6 +2310,10 @@
               "text": "Yirmi yedi yılda bir kez kuralı esnettim; o bir iyilikti, bir pazarlık değil. Kimseyi zorlamadım. Zorlayacak bir şeyim yoktu; dosya benim masamda değildi."
             },
             { "speaker": "halil", "text": "O zarf benim değil. İlk cümle bu, Sayın Başkan. Gerisi, kâğıtlarda." },
+            {
+              "speaker": "halil",
+              "text": "Bir de şunu eklerim: o randevu yüzünden sırası geriye kayan kim varsa, onlardan özür dilerim. Kayda geçsin."
+            },
             {
               "speaker": "narrator",
               "text": "Defne Sezer kalemini bıraktı ve Halil’e uzun uzun baktı. Bir hâkimin bakışı; bir şey tartıyordu."
@@ -2062,7 +2344,27 @@
           ]
         }
       ],
-      "choices": [{ "id": "T045_DEVAM", "kind": "CONTINUE", "label": "Mütalaa", "role": "PRIMARY", "next": "T_05" }]
+      "choices": [{ "id": "T045_DEVAM", "kind": "CONTINUE", "label": "Mütalaa", "role": "PRIMARY", "next": "T_05E" }]
+    },
+    {
+      "id": "T_05E",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": { "flag": "tanik_etkileme" },
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Sayın Başkan, mütalaamdan önce bir hususu kayda geçirmek isterim: müdafiin bir tanığın beyanını duruşmadan önce yönlendirmeye çalıştığı anlaşılmıştır. Bu konuda TCK 277 yönünden ayrıca suç duyurusunda bulunacağız."
+            },
+            { "speaker": "baskan", "text": "Not edildi. Heyet, yönlendirilen beyanı hükümde ayrıca değerlendirecek." }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_05" }],
+      "choices": []
     },
     {
       "id": "T_05",
@@ -2081,6 +2383,7 @@
               {
                 "all": [
                   { "flag": "bayram_ifsa" },
+                  { "not": { "flag": "etki_bayram" } },
                   { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
                 ]
               }
@@ -2103,7 +2406,7 @@
           ]
         },
         {
-          "when": { "all": [{ "ref": "kayit_disi" }, { "ref": "zarf_suphe" }] },
+          "when": { "ref": "beraat_kosul" },
           "lines": [
             {
               "speaker": "narrator",
@@ -2249,7 +2552,7 @@
         {
           "id": "T05_C",
           "kind": "OPTION",
-          "label": "Mütalaanın tutanaktan çıkarılmasını talep ediyoruz.",
+          "label": "Mütalaa delile değil kanaate dayanıyor; tutanaktan çıkarılmasını talep ediyoruz.",
           "responses": [{ "lines": [{ "speaker": "baskan", "text": "Reddedildi. Cevap verecekseniz verin." }] }],
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
@@ -2265,7 +2568,7 @@
         {
           "id": "T05_D",
           "kind": "OPTION",
-          "label": "Mütalaaya katılıyoruz; ayrıca söyleyeceğimiz yok.",
+          "label": "Mütalaaya katılıyoruz; beraatin gerekçesini heyetin takdirine bırakıyoruz.",
           "visibleWhen": {
             "any": [
               {
@@ -2274,12 +2577,13 @@
                   {
                     "all": [
                       { "flag": "bayram_ifsa" },
+                      { "not": { "flag": "etki_bayram" } },
                       { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
                     ]
                   }
                 ]
               },
-              { "all": [{ "ref": "kayit_disi" }, { "ref": "zarf_suphe" }] }
+              { "ref": "beraat_kosul" }
             ]
           },
           "quality": {
@@ -2306,11 +2610,41 @@
           "responses": [
             {
               "when": {
+                "all": [
+                  {
+                    "any": [
+                      { "flag": "sinan_ifsa" },
+                      {
+                        "all": [
+                          { "flag": "bayram_ifsa" },
+                          { "not": { "flag": "etki_bayram" } },
+                          { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                        ]
+                      }
+                    ]
+                  },
+                  { "flag": "sinan_ifsa" }
+                ]
+              },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan. Mart’ta bir dahili çaldı: “Müdür Hanım çağırıyor.” Çağırmamıştı. Memur indi. Zarf, sahibi yokken çekmeceye girdi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Onu oraya bırakabilecek tek kişi bu kürsüde oturdu ve kendisini suçlayacak soruya cevap vermemeyi seçti. Bu onun hakkı; ama o sessizliğin etrafındaki kâğıtlar konuşuyor."
+                }
+              ]
+            },
+            {
+              "when": {
                 "any": [
                   { "flag": "sinan_ifsa" },
                   {
                     "all": [
                       { "flag": "bayram_ifsa" },
+                      { "not": { "flag": "etki_bayram" } },
                       { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
                     ]
                   }
@@ -2319,15 +2653,11 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan. Bir kontrol memuru on bir dosya durdurdu. Bir deftere yazdı. Şubatta biri “masasından kaldırırız” dedi; biri cebine bir not koydu."
+                  "text": "Sayın Başkan. Mart’ta bir dahili çaldı: “Müdür Hanım çağırıyor.” Çağırmamıştı. Memur indi. Zarf, sahibi yokken çekmeceye girdi."
                 },
                 {
                   "speaker": "player",
-                  "text": "Mart’ta bir dahili çaldı: “Müdür Hanım çağırıyor.” Çağırmamıştı. Memur indi. Bir muhbirin kaydı susturuldu. Bir zarf, bir servisin destesinden, bir koltuk altında, yirmi saniyeliğine bir odaya girdi."
-                },
-                {
-                  "speaker": "player",
-                  "text": "Halil Ekinci bu dosyada fail değil; bu dosyanın hedefi. Suçun sanık tarafından işlenmediği sabittir. Beraatini talep ederiz."
+                  "text": "Muhbir, zarfı kime verdiğini bu kürsüde söyledi. Söylediği isim bir masanın, bir destenin, bir dahilinin sahibiyle aynı."
                 }
               ]
             },
@@ -2352,6 +2682,7 @@
                       {
                         "all": [
                           { "flag": "bayram_ifsa" },
+                          { "not": { "flag": "etki_bayram" } },
                           { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
                         ]
                       }
@@ -2393,7 +2724,7 @@
               ]
             }
           ],
-          "next": "T_07S1"
+          "next": "T_07P1"
         },
         {
           "id": "T07_B",
@@ -2401,26 +2732,41 @@
           "label": "Sanığın suçu işlediği sabit değildir; hukuka aykırı delil ayıklanınca kalan şüphe sanık lehinedir.",
           "responses": [
             {
+              "when": { "ref": "kayit_disi" },
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan. Bu dosya bir anahtar deliğinden başladı. Kapısı kapanmış bir deliğinden. Süresi dolmuş bir karar, kararda olmayan bir hat."
+                  "text": "Sayın Başkan. Bu dosya bir anahtar deliğinden başladı. Kapısı kapanmış bir deliğinden: süresi dolmuş bir karar, kararda olmayan bir hat."
                 },
                 {
                   "speaker": "player",
                   "text": "O delikten duyulan cümleler bu salonda okunamaz. Kanun böyle der; Anayasa böyle der. Delil, nasıl elde edildiğiyle birlikte delildir."
-                },
+                }
+              ]
+            },
+            {
+              "when": { "any": [{ "flag": "red_14" }, { "flag": "contra_k1" }] },
+              "lines": [
                 {
                   "speaker": "player",
-                  "text": "Geriye bir zarf kalıyor. Zarf çekmeceye 10.39 ile 10.43 arasında girdi. O dakikalarda sanık odasında değildi; muhbirin cihazı ise bir parmakla susturulmuştu."
-                },
+                  "text": "Sayın Başkan. “Zarf yarın masada” cümlesi, süresi dolmuş bir kararla kaydedildi. O cümle bu salonda okunamaz; geriye kalan kaydı da aynı dikkatle tartmanızı isterim."
+                }
+              ]
+            },
+            {
+              "when": { "any": [{ "flag": "red_9" }, { "flag": "contra_k5" }, { "flag": "obj_k5" }] },
+              "lines": [
                 {
                   "speaker": "player",
-                  "text": "Ve bir muhbir kalıyor: önce “zorladı”, sonra “anlaştık”, sonra “elden verdim”, sonra “odaya girmedim” diyen. Bu dört cümleden hangisine bir insanın özgürlüğünü bağlayacağız?"
-                },
+                  "text": "Sayın Başkan. Sanığın kendi telefonundan alınan cümle, hiçbir hâkimin izin vermediği bir hattan geliyor. O cümle bu salonda okunamaz; geriye kalan kaydı da aynı dikkatle tartmanızı isterim."
+                }
+              ]
+            },
+            {
+              "lines": [
                 {
                   "speaker": "player",
-                  "text": "Yirmi yedi yıllık bir memur, bir kez kuralı esnetti. Karşılığında hiçbir şey almadı. Bir iyilik, bir pazarlık değildir. Mahkûmiyet şüphenin üstüne kurulamaz. Beraatini talep ederiz."
+                  "text": "Sayın Başkan. Bu dosyada savcılığın elinde üç şey var: bir kayıt, bir muhbir, bir zarf. Üçünü de sırayla tartmanızı istiyorum; hiçbirini ötekinin gölgesinde değil."
                 }
               ]
             }
@@ -2428,7 +2774,7 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "all": [{ "ref": "kayit_disi" }, { "ref": "zarf_suphe" }] },
+              "when": { "ref": "beraat_kosul" },
               "then": [
                 {
                   "type": "SCORE",
@@ -2460,7 +2806,7 @@
               ]
             }
           ],
-          "next": "T_07S1"
+          "next": "T_07P1"
         },
         {
           "id": "T07_C",
@@ -2505,7 +2851,7 @@
             "feedback": "Terditli savunma meşrudur: önce beraat; olmazsa rüşvetin iş–menfaat bağı kurulamadığından eylem en fazla görevi kötüye kullanmadır (TCK 257/1); TCK 62 ve CMK 231.",
             "category": "SAVUNMA_STRATEJISI"
           },
-          "next": "T_07S1"
+          "next": "T_07P1"
         },
         {
           "id": "T07_D",
@@ -2529,9 +2875,222 @@
             "feedback": "Duygusal söylem delilin yerini tutmaz; heyet kravata değil, dosyaya bakar.",
             "category": "SAVUNMA_STRATEJISI"
           },
-          "next": "T_07S1"
+          "next": "T_07P1"
         }
       ]
+    },
+    {
+      "id": "T_07P1",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": { "all": [{ "chosen": "T07_B" }, { "ref": "zarf_suphe" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Geriye bir zarf kalıyor. Zarf çekmeceye 10.39 ile 10.43 arasında girdi. O dakikalarda sanık odasında değildi; makamdan geldiği izlenimi veren bir çağrıyla bir alt kata indirilmişti."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "chosen": "T07_B" }, { "ref": "oda_bos" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Geriye bir zarf kalıyor. Polis 10.44’te odaya girdiğinde oda boştu; sanık iki dakika sonra geldi. Bunu savunma değil, savcılığın kendi tutanağı yazıyor."
+            }
+          ]
+        },
+        {
+          "when": { "chosen": "T07_B" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Geriye bir zarf kalıyor. Bir zarfın bir çekmecede bulunması, onu oraya kimin koyduğunu söylemez."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "chosen": "T07_A" },
+              {
+                "any": [
+                  { "flag": "sinan_ifsa" },
+                  {
+                    "all": [
+                      { "flag": "bayram_ifsa" },
+                      { "not": { "flag": "etki_bayram" } },
+                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                    ]
+                  }
+                ]
+              },
+              { "hasEvidence": "ded_zarf_kaynagi" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Zarf, kontrol servisinin değil, Devir Servisi-2’nin destesinden. Zimmet defterinde teslim alanın parafı duruyor."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_07P2" }],
+      "choices": []
+    },
+    {
+      "id": "T_07P2",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": { "all": [{ "chosen": "T07_B" }, { "flag": "contra_b4" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Muhbirin cihazı ise arızalanmadı. Bilirkişi raporuna göre 10.39.12’de fiziksel tuşla susturuldu; muhbir de bunu bu kürsüde kabul etti."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "chosen": "T07_B" }, { "flag": "press_b4" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Muhbirin cihazı 10.39’da sustu. Neden sustuğunu kolluk incelemedi; “kendiliğinden” denildi ve öyle yazıldı."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "chosen": "T07_A" },
+              {
+                "any": [
+                  { "flag": "sinan_ifsa" },
+                  {
+                    "all": [
+                      { "flag": "bayram_ifsa" },
+                      { "not": { "flag": "etki_bayram" } },
+                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                    ]
+                  }
+                ]
+              },
+              { "flag": "contra_s4" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Bir kontrol memuru on bir dosya durdurdu ve bir deftere yazdı: “Hepsi aynı elden. Müdüre yazılacak.” Defter müdüre gitmedi; çünkü yazanı çekmecesiyle birlikte masadan kaldırdılar."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_07P3" }],
+      "choices": []
+    },
+    {
+      "id": "T_07P3",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": {
+            "all": [
+              { "chosen": "T07_B" },
+              { "flag": "contra_b3" },
+              { "any": [{ "flag": "contra_b4" }, { "hasEvidence": "clue_fisilti" }] }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ve bir muhbir kalıyor: önce “zorladı”, sonra “anlaştık”, sonra “elden verdim”, sonra “odaya girmedim” diyen. Bu dört cümleden hangisine bir insanın özgürlüğünü bağlayacağız?"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "chosen": "T07_B" }, { "any": [{ "flag": "contra_b1" }, { "flag": "contra_b2" }] }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ve bir muhbir kalıyor: iki gün arayla önce “zorladı”, sonra “anlaştık” diyen. İki ayrı hikâye; ikisi aynı anda doğru olamaz."
+            }
+          ]
+        },
+        {
+          "when": { "chosen": "T07_B" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ve bir muhbir kalıyor. Onun sözünden başka, zarfı sanığın eline koyan hiçbir kâğıt yok."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_07P4" }],
+      "choices": []
+    },
+    {
+      "id": "T_07P4",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": { "all": [{ "chosen": "T07_B" }, { "flag": "halil_durust" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Yirmi yedi yıllık bir memur bir kez kuralı esnetti ve bunu bu salonda kendisi söyledi. Bir iyilik, bir pazarlık değildir. Mahkûmiyet şüphenin üstüne kurulamaz. Beraatini talep ederiz."
+            }
+          ]
+        },
+        {
+          "when": { "chosen": "T07_B" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Yirmi yedi yıllık bir memur bu salonda “o zarf benim değil” dedi. Mahkûmiyet şüphenin üstüne kurulamaz. Beraatini talep ederiz."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "chosen": "T07_A" },
+              {
+                "any": [
+                  { "flag": "sinan_ifsa" },
+                  {
+                    "all": [
+                      { "flag": "bayram_ifsa" },
+                      { "not": { "flag": "etki_bayram" } },
+                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Halil Ekinci bu dosyada fail değil; bu dosyanın hedefi. Suçun sanık tarafından işlenmediği sabittir. Beraatini talep ederiz."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_07S1" }],
+      "choices": []
     },
     {
       "id": "T_07S1",
@@ -2709,13 +3268,13 @@
         {
           "id": "T08_B",
           "kind": "OPTION",
-          "label": "“Ben suçsuzum. Bırakın beni artık.”",
+          "label": "“Ben suçsuzum. Yirmi yedi yıl hizmet ettim; bırakın beni artık.”",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "halil",
-                  "text": "Ben suçsuzum, Sayın Başkan. Yirmi yedi yıl... Bırakın beni artık. Lütfen.",
+                  "text": "Ben suçsuzum, Sayın Başkan. Yirmi yedi yıl hizmet ettim... Bırakın beni artık. Lütfen.",
                   "expression": "uzgun"
                 }
               ]
@@ -2730,11 +3289,15 @@
         {
           "id": "T08_C",
           "kind": "OPTION",
-          "label": "“Ne ceza verirseniz razıyım. Yeter ki bitsin.”",
+          "label": "“Ne ceza verirseniz razıyım; yeter ki bu dosya bir an önce bitsin.”",
           "responses": [
             {
               "lines": [
-                { "speaker": "halil", "text": "Ne ceza verirseniz razıyım. Yeter ki bitsin.", "expression": "uzgun" },
+                {
+                  "speaker": "halil",
+                  "text": "Ne ceza verirseniz razıyım. Yeter ki bu dosya bir an önce bitsin.",
+                  "expression": "uzgun"
+                },
                 {
                   "speaker": "player",
                   "text": "“Yeter ki bitsin.” Yirmi yedi yılın sonunda, kurallı bir adamın söylediği ilk kuralsız cümle.",

@@ -73,7 +73,7 @@ const koridor = [
 ];
 const komiser = C('A_KOMISER', 'KOM_BASLA', 'KOM_PARA', 'KOM_CIHAZ', 'KOM_ODA', 'KOM_OGUL', 'KOM_GERI');
 const zehra = C('A_ZEHRA', 'ZEH_NOT', 'ZEH_TAKVIM', 'ZEH_EV', 'ZEH_GERI');
-const sinan = C('A_SINAN', 'SIN_SABAH', 'SIN_SAAT', 'SIN_BAYRAM', 'SIN_HALIL', 'SIN_GERI');
+const sinan = C('A_SINAN', 'SIN_SABAH', 'SIN_BAYRAM', 'SIN_HALIL', 'SIN_GERI');
 const tahta1 = [
   C('A_CIKARIM'),
   combine('clue_kilit', 'clue_zarf_stok'),
@@ -127,9 +127,20 @@ const celse1 = (rq: string[], komiser: Action[] = komiserTam) => [
 
 // --- Ara ---
 const cihaz = [C('A2_CIHAZ'), examine('mag', 'c2'), examine('chk', 'c3'), examine('mag', 'c4'), C('CIHAZ_BITIR')];
-const santral = [C('A2_SANTRAL'), examine('cmp', 's2'), examine('mag', 's5'), examine('mag', 's4'), C('SANTRAL_BITIR')];
+const santral = [
+  C('A2_SANTRAL'),
+  examine('cmp', 's2'),
+  examine('mag', 's5'),
+  examine('mag', 's4'),
+  C('SANTRAL_GULAY', 'GULAY_GERI'),
+];
 const kamera = [C('A2_KAMERA'), tapCenter(OB_DAMGA), tapCenter(OB_BILEK), tapCenter(OB_KOLTUK), C('KAMERA_BITIR')];
-const arsiv = [C('A2_ARSIV'), tapCenter(OB_CILTLER), tapCenter(OB_ZIMMET), C('ARSIV_BITIR')];
+const arsiv = [
+  C('A2_ARSIV'),
+  tapCenter(OB_CILTLER),
+  tapCenter(OB_ZIMMET),
+  C('ARSIV_FERDA', 'FER_ZIMMET', 'FER_RAPOR', 'FER_GULAY', 'FER_GERI'),
+];
 const tahta2 = [
   C('A2_CIKARIM'),
   combine('clue_barkod', 'clue_zimmet'),
@@ -146,10 +157,11 @@ const ara1 = [
   C('A2_BAYRAM', 'BAY_A', 'ARAK_A', 'ARA_GECE1_DEVAM', 'SAB2_A'),
 ];
 const ara2 = [
-  C('A2_LEYLA', 'ARALEYLA_GERI', 'A2_HALIL', 'AH_HAZIR', 'AH_GERI'),
+  C('A2_LEYLA', 'ARALEYLA_GERI'),
   C('A2_MUZAFFER', 'MUZ_DEFTER', 'MUZ_GORDU', 'MUZ_TANIK', 'MUZ_GERI'),
   arsiv,
   tahta2,
+  C('A2_HALIL', 'AH_SINAN', 'AH_DOSYALAR', 'AH_GECE', 'AH_HAZIR', 'AH_GERI'),
   C('A2_SUC', 'SUC_A', 'SUC_VER', 'GO_T', 'SON_A', 'TK_A'),
 ];
 
@@ -182,7 +194,7 @@ const sinanTam = [
   present('ev_kirmizi_defter', 'S4'),
   C('T02T_BITIR', 'T02Y_DEVAM'),
 ];
-const muzaffer = C('T03_DEVAM', 'T03Q_A', 'T03Q_B', 'T03Q_BITTI');
+const muzaffer = C('T03_DEVAM', 'T03Q_A', 'T03Q_B', 'T03Q_D', 'T03Q_BITTI', 'T03S_DEVAM');
 
 // --- GÖREVİ KÖTÜYE KULLANMA: kayıtlar ayıklanmaz, zarf açıklanamaz; terditli savunma. ---
 const gorev = [
@@ -212,13 +224,20 @@ const gorev = [
   C('A_LEYLA', 'LEYLA_GERI', 'A_DIL', 'DIL_CENGIZ', 'DIL_KESIF', 'DIL_SANTRAL', 'DIL_VER'),
   C('A_HALIL2'),
   soft('TP_CEKMECE'),
-  C('G_BITIR', 'GO_H1', 'GECE_B'),
+  C('G_BITIR'),
+  C('A_TUTANAK'),
+  examine('mag', 't2'),
+  examine('cmp', 't4'),
+  C('TUTANAK_BITIR', 'A_CIKARIM'),
+  combine('clue_saat_tutanak', 'clue_kayit_durdu'),
+  C('CIKARIM_BITIR', 'GO_H1', 'GECE_B'),
   celse1Acilis,
   C('H101D_DEVAM', 'H101Q_A', 'H101Q_D', 'H101Q_E', 'H101Q_BITTI', 'H102_C', 'H103_D', 'H104_DEVAM'),
   press('K1'),
   press('K2'),
   present('ev_para', 'K2'),
   press('K3'),
+  present('ded_bos_oda', 'K3'),
   press('K4'),
   C('H104_BITIR', 'RQ_SINAN', 'RQ_BITTI', 'H106_DEVAM', 'H106B_DEVAM', 'H107_DEVAM'),
   C('ARA_GIRIS_DEVAM', 'A2_LEYLA', 'ARALEYLA_GERI'),

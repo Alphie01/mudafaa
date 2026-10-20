@@ -281,9 +281,9 @@ const inv1: EvidenceDef[] = [
   clue('clue_sinan_saat', {
     type: 'FIZIKSEL',
     title: 'Yeşil ışıklı akıllı saat',
-    shortText: 'Devir-2 memurunun bileğinde; konuşurken adımlarını kontrol ediyor.',
+    shortText: 'Devir-2 memurunun bileğinde; otoparkta, şemsiyenin altında da yeşil yandı.',
     description:
-      'Sinan Kaplan’ın sol bileğinde siyah kordonlu bir akıllı saat. Ekranı her bakışında yeşil yanıyor. “Doktor günde on bin adım dedi abla.”',
+      'Sinan Kaplan’ın sol bileğinde siyah kordonlu bir akıllı saat. Ekranı her bakışında yeşil yanıyor. Devir-2’de de, otoparkta da aynı küçük, dikdörtgen ışık.',
     sourceLabel: 'Sinan Kaplan',
     icon: 'magnifier',
     ...card,
@@ -291,9 +291,9 @@ const inv1: EvidenceDef[] = [
   clue('clue_sinan_arsiv', {
     type: 'TANIK_IFADESI',
     title: '“10.30’dan 10.50’ye arşivdeydim”',
-    shortText: 'Sinan: o sabah 1987 ciltleriyle boğuşuyormuş.',
+    shortText: 'Sinan: o sabah arşivde, kadastro paftalarının arasındaymış.',
     description:
-      '“O sabah arşivdeydim abla, 10.30’dan 10.50’ye kadar. 1987 ciltleriyle boğuşuyordum, bir parsel geçmişi lazımdı. Gürültüyü duyunca çıktım.”',
+      '“O sabah arşivdeydim abla, 10.30’dan 10.50’ye kadar. Kadastro paftalarının arasındaydım; bir ifraz dosyası için eski bir pafta lazımdı. Gürültüyü duyunca çıktım.”',
     sourceLabel: 'Sinan Kaplan',
     icon: 'document',
     ...card,

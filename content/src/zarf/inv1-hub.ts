@@ -117,7 +117,6 @@ export const POOL_INV1 = [
   'clue_kamera_var',
   'clue_zarf_stok',
   'clue_barkod',
-  'clue_sinan_saat',
   'clue_sinan_arsiv',
 ];
 
@@ -264,7 +263,7 @@ export const inv1Hub: CasePart = {
           score: { USUL_BILGISI: 20 },
           effects: [raise('evrak_bildirildi'), inc('trust', 3)],
           responses: B(S`
-            zehra{phone}: Tamam. Komşuya da söylerim; kapıyı açmasın. Yazarım: on beş otuz, takım elbise, şemsiye, nane şekeri. Hemşireyiz, not almayı biliriz.
+            zehra{phone}: Tamam. Komşuya da söylerim; kapıyı açmasın. Yazarım: on beş otuz, takım elbise, şemsiye. Hemşireyiz, not almayı biliriz.
             - Telefonu kapattıktan sonra büro bir süre sessiz kaldı. Leyla'nın odasından radyonun cızırtısı geliyordu; gece haberleri. Bir belediyede bir ihale soruşturması daha.
             ~ Her gece bir yerde bir zarf bulunuyor. Kimse zarfın hangi elden geldiğini haber yapmıyor.
           `),
@@ -588,7 +587,7 @@ export const inv1Hub: CasePart = {
         ),
         W(
           all(flag('fact_kilitsiz'), flag('fact_ev_ziyaret')),
-          S`- Yirmi yedi yıl kilitlenmemiş bir çekmece. Ve Halil'in evine "belki arşivde" diye telefonla konuşarak gelen biri. Biri neyi, nerede arayacağını biliyor.`,
+          S`- Yirmi yedi yıl kilitlenmemiş bir çekmece. Ve Halil'in evine evrak toplamaya gelen, adını söylemeyen biri. Biri bir şey arıyor; ve henüz bulamadı.`,
         ),
         W(
           flag('fact_kilitsiz'),

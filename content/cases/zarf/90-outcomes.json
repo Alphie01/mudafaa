@@ -2,47 +2,103 @@
   "outcomes": [
     {
       "id": "ETIK",
-      "class": "CONVICTION",
+      "class": "OTHER",
       "priority": 1,
       "when": {
-        "any": [{ "flag": "illegal_used" }, { "flag": "tanik_etkileme" }, { "cmp": [{ "var": "ethics" }, ">=", 2] }]
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "flag": "tanik_etkileme" },
+          {
+            "any": [
+              { "ref": "beraat_kosul" },
+              {
+                "any": [
+                  { "flag": "sinan_ifsa" },
+                  {
+                    "all": [
+                      { "flag": "bayram_ifsa" },
+                      { "not": { "flag": "etki_bayram" } },
+                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       },
-      "stamp": "MAHKÛMİYET",
-      "stampTone": "red",
+      "stamp": "BERAAT · BARO",
+      "stampTone": "amber",
       "header": "TÜRK MİLLETİ ADINA",
-      "sentence": "3 yıl 4 ay hapis · hak yoksunlukları",
-      "verdictText": "Sanık Halil Ekinci’nin TCK 252/2 uyarınca alt sınırdan 4 yıl hapis cezası ile cezalandırılmasına; TCK 62/1 uyarınca 3 yıl 4 ay hapis cezasına; TCK 53/1 ve 53/5’teki hak yoksunluklarına; tutuklulukta geçen sürenin cezadan mahsubuna (TCK 63); el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; tanık beyanlarının müdafi tarafından yönlendirildiğinin anlaşılması nedeniyle karar örneğinin Bursa Barosuna ve Cumhuriyet Başsavcılığına gönderilmesine; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "sentence": "Sanık beraat etti · müdafi hakkında suç duyurusu",
+      "verdictText": "Sanık Halil Ekinci’nin üzerine atılı rüşvet suçunu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; hakkındaki tutuklama ve adli kontrol tedbirlerinin kaldırılmasına; el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; sanığa tutuklu kaldığı süre için tazminat isteyebileceğinin bildirilmesine (CMK 141/1-e, 142, 231/3); bir tanığın beyanının duruşmadan önce müdafi tarafından yönlendirildiği anlaşıldığından müdafi hakkında TCK 277 yönünden Bursa Cumhuriyet Başsavcılığına suç duyurusunda bulunulmasına ve karar örneğinin Bursa Barosuna gönderilmesine (Av.K. 34); hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
       "reasoning": [
         {
-          "when": { "flag": "tanik_etkileme" },
-          "text": "Tanığın beyanının duruşmadan önce müdafi tarafından yönlendirildiği anlaşıldığından beyana itibar edilmemiştir (CMK 217/1)."
+          "when": { "flag": "etki_bayram" },
+          "text": "Tanık Bayram Öz’ün duruşmadaki beyanının müdafi tarafından yönlendirildiği tanığın kendi ağzından anlaşıldığından bu beyana itibar edilmemiştir (CMK 217/1)."
         },
         {
-          "when": { "flag": "illegal_used" },
-          "text": "Savunmanın sunduğu kayıt yetkisiz yoldan elde edildiğinden hükme esas alınmamıştır (Anayasa 38/6; CMK 206/2-a, 217/2)."
+          "when": { "flag": "etki_muzaffer" },
+          "text": "Tanık Muzaffer Kılınç, müdafiin kendisine görmediği bir şeyi söylemesini telkin ettiğini beyan etmiştir; tanığın beyanı yalnızca kendi gördüğü kadarıyla değerlendirilmiştir."
         },
         {
-          "text": "Muhbirin çelişkili beyanı ve el koyma tutanağı birlikte değerlendirilmiş; savunmanın iddiaları güvenilir delille desteklenememiştir."
+          "when": { "ref": "kayit_disi" },
+          "text": "Kararın kapsamı dışında alınan 9 ve 14 numaralı kayıtlar hükme esas alınmamış (CMK 135, 206/2-a, 217/2; Anayasa 38/6); hâkim denetiminde yok edilecektir (CMK 137/3)."
         },
-        { "text": "Sanığın sabıkasızlığı ve uzun meslek hayatı takdiri indirim nedeni sayılmıştır (TCK 62/1)." }
+        {
+          "when": { "ref": "zarf_suphe" },
+          "text": "Yönlendirilen beyandan bağımsız olarak, el koyma tutanağının saatleri ve bilirkişi raporu zarfın sanık odada yokken çekmeceye konduğunu ve kayıt cihazının fiziksel tuşla durdurulduğunu göstermektedir."
+        },
+        {
+          "when": { "ref": "muhbir_coktu" },
+          "text": "Muhbirin önce icbar, sonra anlaşma anlatan beyanları belgelerle çelişmektedir; dosya sanığın görev alanında değildir."
+        },
+        {
+          "when": { "flag": "sinan_ifsa" },
+          "text": "Tanık Sinan Kaplan’ın beyanları çay ocağı kaydı, santral dökümü ve zimmet defteriyle çelişmiş; tanık kendisini suçlayabilecek sorulara cevap vermekten çekinmiştir (CMK 48)."
+        },
+        {
+          "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil elde edilememiştir; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2). Müdafiin davranışı sanığın aleyhine değerlendirilemez."
+        }
       ],
-      "legalBasis": "TCK 252/2, 53, 62/1, 63; Anayasa 38/6; CMK 206/2-a, 217, 273/1; TCK 277; Av.K. 34",
+      "legalBasis": "CMK 223/2-e, 217/1, 135, 137/3, 141/1-e, 142, 231/3; Anayasa 38/4, 38/6; TCK 277; Av.K. 34; CMK 273/1",
       "xp": 0,
-      "howToReach": "Bir tanığa mahkemede ne söyleyeceğini dikte etmek ya da müvekkile yalan tavsiye edip başka etik sınırları aşmak. Bu sona ulaşmamak gerekir.",
-      "ethicsCard": "Tanığa ne söyleyeceğini, hele bir isim vererek, dikte etmek tanığı etkilemedir (TCK 277); tanık yalan tanıklığa sürüklenir (TCK 272). Müvekkile gerçeğe aykırı beyan tavsiye etmek ve şüphelileri izlemek de meslek kurallarına aykırıdır (Av.K. 34). Bu davada doğru yol, tanıkları kendi avukatlarına ve mahkemeye yönlendirmek, delili CMK 177 dilekçesiyle istemekti.",
+      "howToReach": "Bir tanığa mahkemede ne söyleyeceğini dikte etmek. Sanık nesnel delillerle beraat eder; müdafi savcılığa ve baroya bildirilir. Bu sona ulaşmamak gerekir.",
+      "ethicsCard": "Tanığa ne söyleyeceğini, hele bir isim vererek, dikte etmek tanığı etkilemedir (TCK 277); tanık yalan tanıklığa sürüklenir (TCK 272) ve beyanı hükme esas alınamaz hâle gelir. Müvekkil, avukatının ihlali yüzünden cezalandırılmaz; ama avukat kendi dosyasıyla yüzleşir (Av.K. 34). Doğru yol, tanıkları kendi avukatlarına ve mahkemeye yönlendirmek, delili CMK 177 dilekçesiyle istemekti.",
       "epilogue": [
         {
           "lines": [
             { "speaker": "baskan", "text": "…karar örneğinin Bursa Barosuna gönderilmesine." },
             {
               "speaker": "narrator",
-              "text": "Başkan hükmü okurken bir an durdu, bana baktı; sonra okumaya devam etti. Halil ayakta duruyordu. Gözlüğü burnundaydı; çıkarmadı."
+              "text": "“Beraatine” kelimesinden sonra Başkan bir an durdu, bana baktı; sonra okumaya devam etti. Halil ayakta duruyordu. Beraat kelimesinde değil, baro kelimesinde gözlüğünü çıkardı."
             },
             {
               "speaker": "narrator",
-              "text": "Zehra arka sırada bembeyazdı. Babasına değil, bana bakıyordu. Bir hemşirenin, yanlış ilacı veren doktora bakışı."
+              "text": "Zehra arka sırada bembeyazdı. Babasına değil, bana bakıyordu. Bir hemşirenin, doğru teşhisi koyup yanlış ilacı veren doktora bakışı."
             },
+            { "speaker": "narrator", "text": "ADLİYE MERDİVENLERİ · ÖĞLE", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Halil merdivenin başında durdu. Kendi ayaklarıyla, kelepçesiz. Bana elini uzatmadı."
+            },
+            {
+              "speaker": "halil",
+              "text": "Avukat hanım. Beni kâğıtlar kurtardı; tutanak, rapor, saatler. Kayda geçsin: sizin o tanığa söylediğiniz cümle beni kurtarmadı. Az kalsın batırıyordu."
+            },
+            {
+              "speaker": "halil",
+              "text": "Yirmi yedi yıl bir kez eğildim. Siz bir ayda eğildiniz. Bir daha doğrulmak, eğilmekten zordur. Bunu ben de yeni öğrendim."
+            }
+          ]
+        },
+        {
+          "lines": [
             { "speaker": "narrator", "text": "ARSLAN HUKUK · O GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda Başsavcılıktan bir yazı vardı: “Tanığı etkileme iddiasıyla hakkınızda soruşturma başlatılmıştır.” Altında baronun disiplin yazısı."
+            },
             {
               "speaker": "narrator",
               "text": "Masamda bir kitap duruyordu. Avukatlık Kanunu. Leyla’nın eski, sayfa kenarları kıvrılmış nüshası. Otuz dördüncü madde, kurşun kalemle çizilmiş."
@@ -50,12 +106,7 @@
             { "speaker": "narrator", "text": "Leyla odasındaydı. Kapısı kapalıydı. Bir kez bile dışarı çıkmadı." },
             {
               "speaker": "player",
-              "text": "Bir zarfın hangi elden geldiğini bulmaya çalışırken, bir tanığın ağzına kendi elimle bir cümle koydum. Halil’in çekmecesine konan zarf gibi.",
-              "style": "thought"
-            },
-            {
-              "speaker": "player",
-              "text": "Yirmi yedi yıllık bir adamı kurallar ayakta tutuyordu. Ben bir kuralı bilerek çiğnedim. Bedelini o ödeyecek.",
+              "text": "Halil beraat etti. Benim sayemde değil; benim rağmıma. Kâğıtlar doğruydu. Yanlış olan, kâğıtların yanına benim koyduğum cümleydi.",
               "style": "thought",
               "fx": "fade"
             }
@@ -70,12 +121,14 @@
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
+          { "not": { "flag": "tanik_etkileme" } },
           {
             "any": [
               { "flag": "sinan_ifsa" },
               {
                 "all": [
                   { "flag": "bayram_ifsa" },
+                  { "not": { "flag": "etki_bayram" } },
                   { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
                 ]
               }
@@ -83,7 +136,6 @@
           },
           { "flag": "gercek_fail" },
           { "ref": "kayit_disi" },
-          { "cmp": [{ "var": "pers" }, ">=", 7] },
           { "cmp": [{ "score": "final" }, ">=", 12000] }
         ]
       },
@@ -91,18 +143,20 @@
       "stampTone": "green",
       "header": "TÜRK MİLLETİ ADINA",
       "sentence": "Ceza yok · tedbirler kalktı",
-      "verdictText": "Sanık Halil Ekinci’nin üzerine atılı rüşvet suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; hakkındaki tutuklama ve adli kontrol tedbirlerinin kaldırılmasına; el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; hukuka aykırı elde edilen dinleme kayıtlarının hâkim denetiminde yok edilmesine (CMK 137/3); Sinan Kaplan ve Bayram Öz hakkında iftira ve diğer suçlar yönünden işlem yapılmak üzere dosya örneğinin Bursa Cumhuriyet Başsavcılığına gönderilmesine; sanığa tutuklu kaldığı süre için tazminat isteyebileceğinin bildirilmesine (CMK 141/1-a, 231/3); hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "verdictText": "Sanık Halil Ekinci’nin üzerine atılı rüşvet suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; hakkındaki tutuklama ve adli kontrol tedbirlerinin kaldırılmasına; el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; hukuka aykırı elde edilen dinleme kayıtlarının hâkim denetiminde yok edilmesine (CMK 137/3); Sinan Kaplan ve Bayram Öz hakkında iftira ve diğer suçlar yönünden işlem yapılmak üzere dosya örneğinin Bursa Cumhuriyet Başsavcılığına gönderilmesine; sanığa tutuklu kaldığı süre için tazminat isteyebileceğinin bildirilmesine (CMK 141/1-e, 142, 231/3); hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
       "reasoning": [
         {
           "text": "İddianamenin dayandığı 9 ve 14 numaralı kayıtlar, kararda gösterilmeyen bir hattan ve kararın süresi dolduktan sonra alındığından hükme esas alınmamıştır (CMK 135/1, 135/4, 206/2-a, 217/2; Anayasa 38/6)."
         },
         {
-          "text": "Sanık, dahili 214’ten yapılan ve makamdan geldiği izlenimi verilen bir çağrıyla odasından uzaklaştırılmış; zarf çekmeceye sanık odada yokken konulmuştur."
+          "when": { "any": [{ "flag": "contra_s2" }, { "flag": "q_takvim" }, { "flag": "bayram_ifsa" }] },
+          "text": "Sanık, dahili 214’ten yapılan ve makamdan geldiği izlenimi verilen bir çağrıyla odasından uzaklaştırılmıştır."
         },
+        { "when": { "ref": "oda_bos" }, "text": "Zarf, çekmeceye sanık odada yokken konulmuştur." },
         { "when": { "hasEvidence": "ded_zarf_kaynagi" }, "text": "Zarf, Devir Servisi-2’ye zimmetlenen destedendir." },
         {
           "when": { "flag": "bayram_ifsa" },
-          "text": "Tanık Bayram Öz zarfı sanığa değil, koridorda Sinan Kaplan’a verdiğini ve kayıt cihazını kendisinin durdurduğunu beyan etmiştir."
+          "text": "Tanık Bayram Öz zarfı sanığa değil, koridorda Sinan Kaplan’a verdiğini ve kayıt cihazını onun isteğiyle durdurduğunu beyan etmiştir."
         },
         {
           "when": { "flag": "sinan_ifsa" },
@@ -114,7 +168,7 @@
         },
         { "text": "Bu deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir." }
       ],
-      "legalBasis": "CMK 223/2-b; CMK 135, 137/3, 206/2-a, 217/2; Anayasa 38/6; AİHS 6; CMK 273/1",
+      "legalBasis": "CMK 223/2-b; CMK 135, 137/3, 141/1-e, 142, 206/2-a, 217/2; Anayasa 38/6; AİHS 6; CMK 273/1",
       "xp": {
         "if": {
           "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
@@ -185,6 +239,69 @@
               "style": "card"
             }
           ]
+        },
+        {
+          "when": { "all": [{ "cmp": [{ "var": "ethics" }, ">=", 2] }, { "not": { "flag": "tanik_etkileme" } }] },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · BİR HAFTA SONRA", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla beni odasına çağırdı ve kapıyı kapattı. Masasında Avukatlık Kanunu duruyordu; otuz dördüncü madde kurşun kalemle çizilmişti."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Hüküm ne olursa olsun, Deniz, dosyada senin de bir satırın var. Kimse yazmadı diye yazılmamış sayılmaz."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "cmp": [{ "var": "ethics" }, ">=", 2] },
+              { "not": { "flag": "tanik_etkileme" } },
+              { "flag": "halil_inkar" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bir müvekkile yalan söylemesini öğütledin. Halil yirmi yedi yıl yalan söylememişti; ilk yalanını senden öğrendi."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "cmp": [{ "var": "ethics" }, ">=", 2] },
+              { "not": { "flag": "tanik_etkileme" } },
+              { "flag": "sinan_izlendi" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bir tanığın peşine düştün. Otoparkta, gece, yirmi dakika. Bu meslekte izlenen kişiye değil, izleyene bakılır."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "cmp": [{ "var": "ethics" }, ">=", 2] }, { "not": { "flag": "tanik_etkileme" } }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bunu disiplin kuruluna ben bildirmeyeceğim. Sen bildireceksin. Yarın sabah, kendi elinle."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ertesi sabah Bursa Barosuna iki sayfalık bir dilekçe verdim. İlk cümlesi kısaydı: “Hata yaptım.” Halil’den öğrenmiştim; ilk cümle kısa olur."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir dosya kapandı. Benim adıma bir dosya açıldı. İkisi de aynı haftada, aynı binada.",
+              "style": "thought",
+              "fx": "fade"
+            }
+          ]
         }
       ]
     },
@@ -195,17 +312,31 @@
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
-          { "ref": "kayit_disi" },
-          { "ref": "zarf_suphe" },
-          { "cmp": [{ "var": "pers" }, ">=", 5] },
-          { "cmp": [{ "score": "final" }, ">=", 10000] }
+          { "not": { "flag": "tanik_etkileme" } },
+          {
+            "any": [
+              { "ref": "beraat_kosul" },
+              {
+                "any": [
+                  { "flag": "sinan_ifsa" },
+                  {
+                    "all": [
+                      { "flag": "bayram_ifsa" },
+                      { "not": { "flag": "etki_bayram" } },
+                      { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
         ]
       },
       "stamp": "BERAAT",
       "stampTone": "green",
       "header": "TÜRK MİLLETİ ADINA",
       "sentence": "Ceza yok · tedbirler kalktı",
-      "verdictText": "Sanık Halil Ekinci’nin üzerine atılı rüşvet suçunu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; hakkındaki tutuklama ve adli kontrol tedbirlerinin kaldırılmasına; el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; hukuka aykırı elde edilen dinleme kayıtlarının hâkim denetiminde yok edilmesine (CMK 137/3); dosyanın bir örneğinin zarfı çekmeceye bırakanın belirlenmesi için Bursa Cumhuriyet Başsavcılığına gönderilmesine; sanığa tutuklu kaldığı süre için tazminat isteyebileceğinin bildirilmesine (CMK 141/1-a, 231/3); hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "verdictText": "Sanık Halil Ekinci’nin üzerine atılı rüşvet suçunu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; hakkındaki tutuklama ve adli kontrol tedbirlerinin kaldırılmasına; el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; dosyanın bir örneğinin zarfı çekmeceye bırakanın belirlenmesi için Bursa Cumhuriyet Başsavcılığına gönderilmesine; sanığa tutuklu kaldığı süre için tazminat isteyebileceğinin bildirilmesine (CMK 141/1-e, 142, 231/3); hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
       "reasoning": [
         {
           "when": { "any": [{ "flag": "red_14" }, { "flag": "contra_k1" }] },
@@ -216,16 +347,32 @@
           "text": "Sanığın hattı için verilmiş bir dinleme kararı bulunmadığından 9 numaralı kayıt hükme esas alınmamıştır (CMK 135/1, 135/9)."
         },
         {
-          "when": { "any": [{ "flag": "contra_k3" }, { "flag": "contra_b3" }] },
-          "text": "El koyma tutanağının saatlerine göre zarf çekmeceye konulduğunda sanık odasında bulunmamaktadır."
+          "when": { "ref": "kayit_disi" },
+          "text": "Hukuka aykırı elde edilen kayıtlar hâkim denetiminde yok edilecektir (CMK 137/3)."
+        },
+        {
+          "when": { "ref": "oda_bos" },
+          "text": "El koyma tutanağının saatlerine göre polis odaya girdiğinde sanık odasında bulunmamaktadır."
+        },
+        {
+          "when": { "ref": "ayrilis" },
+          "text": "Sanığın 10.35’te makamdan geldiği izlenimi veren bir çağrıyla odasından ayrıldığı duruşmada gösterilmiştir."
         },
         {
           "when": { "flag": "contra_b4" },
           "text": "Muhbire takılan kayıt cihazının teknik arıza nedeniyle değil, fiziksel tuşla durdurulduğu bilirkişi raporuyla anlaşılmıştır."
         },
         {
-          "when": { "any": [{ "flag": "contra_b1" }, { "flag": "contra_b2" }] },
+          "when": { "ref": "muhbir_coktu" },
           "text": "Muhbirin önce icbar, sonra anlaşma anlatan beyanları birbiriyle çelişmektedir; dosya sanığın görev alanında değildir."
+        },
+        {
+          "when": { "flag": "bayram_ifsa" },
+          "text": "Tanık Bayram Öz, zarfı sanığa değil koridorda başka birine verdiğini beyan etmiştir."
+        },
+        {
+          "when": { "flag": "sinan_ifsa" },
+          "text": "Tanık Sinan Kaplan, kendisini suçlayabilecek sorulara cevap vermekten çekinmiştir (CMK 48)."
         },
         {
           "when": { "flag": "contra_k2" },
@@ -243,7 +390,7 @@
           "text": "Sanığın suçu işlediğine dair her türlü şüpheden uzak, kesin ve inandırıcı delil elde edilememiştir; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2)."
         }
       ],
-      "legalBasis": "CMK 223/2-e; CMK 135, 137/3, 206/2-a, 217/2; Anayasa 38/4, 38/6; AİHS 6/2; CMK 273/1",
+      "legalBasis": "CMK 223/2-e; CMK 135, 137/3, 141/1-e, 142, 206/2-a, 217/2; Anayasa 38/4, 38/6; AİHS 6/2; CMK 273/1",
       "xp": {
         "if": {
           "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
@@ -251,7 +398,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
         }
       },
-      "howToReach": "Kayıtların süre ve hat dışında alındığını göster ve okunmalarına itiraz et; zarfın sanık yokken çekmeceye girdiğini ve kaydın elle durdurulduğunu tartıştır; esas savunmada şüphenin sanık lehine olduğunu savun.",
+      "howToReach": "Kayıtların süre ve hat dışında alındığını göster ve okunmalarına itiraz et; odanın boş olduğunu, Halil’in sahte bir çağrıyla indiğini ve kaydın elle durdurulduğunu tartıştır; muhbirin “bekletti / anlaştık” anlatısını belgeyle çürüt.",
       "epilogue": [
         {
           "lines": [
@@ -276,7 +423,26 @@
           ]
         },
         {
-          "when": { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_kameradaki" }] },
+          "when": {
+            "all": [
+              { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_kameradaki" }] },
+              {
+                "not": {
+                  "any": [
+                    { "flag": "sinan_ifsa" },
+                    {
+                      "all": [
+                        { "flag": "bayram_ifsa" },
+                        { "not": { "flag": "etki_bayram" } },
+                        { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                      ]
+                    }
+                  ]
+                }
+              },
+              { "flag": "suc_duyurusu" }
+            ]
+          },
           "lines": [
             {
               "speaker": "narrator",
@@ -284,8 +450,61 @@
             },
             {
               "speaker": "player",
-              "text": "Bir dahili, bir saat, bir koku. Hepsi elimde. Ama hiçbiri kürsüde onun karşısına konmadı. Savcılık “faili belirsiz” diye yazdı. Belirsiz değil. Sınanmamış.",
+              "text": "Bir dahili, bir saat, bir koku. Suç duyurum bir numara aldı; bir dosyanın altında bekliyor. Belirsiz değil. Sınanmamış.",
               "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_kameradaki" }] },
+              {
+                "not": {
+                  "any": [
+                    { "flag": "sinan_ifsa" },
+                    {
+                      "all": [
+                        { "flag": "bayram_ifsa" },
+                        { "not": { "flag": "etki_bayram" } },
+                        { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                      ]
+                    }
+                  ]
+                }
+              },
+              { "not": { "flag": "suc_duyurusu" } }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Merdivenlerde, aşağıda, açık renk ceketli bir adam bir nane şekeri açıyordu. Bana dönüp başıyla selam verdi; sıcak, acelesiz."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir dahili, bir saat, bir koku. Hepsi elimde. Ama hiçbiri kürsüde onun karşısına konmadı; savcılığa da yazmadım. Belirsiz değil. Sınanmamış.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "any": [
+              { "flag": "sinan_ifsa" },
+              {
+                "all": [
+                  { "flag": "bayram_ifsa" },
+                  { "not": { "flag": "etki_bayram" } },
+                  { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                ]
+              }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Merdivenlerde Bayram Öz’ü gördüm; yanında adli yardımdan genç meslektaşı. Tespihini cebine koydu ve bana başıyla selam verdi. Konuşmadık; konuşmamamız gerekiyordu."
             }
           ]
         },
@@ -301,8 +520,135 @@
               "text": "Görevime iade için bir yazı yazmam gerekiyor. İki sayfa olur. Ama ilk cümlesi kısa: “Beraat ettim.”"
             },
             {
+              "speaker": "narrator",
+              "text": "Zehra içeriden iki bardak çay getirdi; birini babasına, birini bana. Halil bardağını tabağa koymadan önce tabağı tepsinin kenarıyla hizaladı. Sonra vazgeçti; öylece bıraktı."
+            },
+            { "speaker": "zehra", "text": "Baba, artık her şeyi sen yapmıyorsun. Kural." },
+            { "speaker": "halil", "text": "Kural. Peki, Hâkim Bey." },
+            { "speaker": "narrator", "text": "Zehra güldü. Üç aydır ilk kez, yorgunluktan değil." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · O GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla odamın kapısında durdu. Elinde ceketi, ceketinin cebinde bir tren bileti; hafta sonu İzmir’e gidecekti. Yıllardır gitmediği bir yere."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Beraat beraattir, Deniz. “Sabit olmadığından” ile “işlemediği sabit olduğundan” arasındaki farkı Halil bilir; heyet de bilir. Sen de bileceksin. Ama bu gece değil."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masamdaki dosyayı kapattı, sırtını dosya dolabının sırasına göre hizaladı. Sonra güldü; Halil’den bulaşmış bir alışkanlık."
+            }
+          ]
+        },
+        {
+          "when": {
+            "any": [
+              { "flag": "sinan_ifsa" },
+              {
+                "all": [
+                  { "flag": "bayram_ifsa" },
+                  { "not": { "flag": "etki_bayram" } },
+                  { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                ]
+              }
+            ]
+          },
+          "lines": [
+            {
               "speaker": "player",
-              "text": "Bazen adalet bir kapıyı açar, ama kimin kapattığını söylemez. Halil kapıdan geçti. Kapıyı kapatan el hâlâ o binada, nane şekeri dağıtıyor.",
+              "text": "Bazen adalet bir kapıyı açar ve kimin kapattığını da gösterir; ama adını hükme yazmaz. O adı artık bir savcı yazacak.",
+              "style": "thought",
+              "fx": "fade"
+            }
+          ]
+        },
+        {
+          "when": {
+            "not": {
+              "any": [
+                { "flag": "sinan_ifsa" },
+                {
+                  "all": [
+                    { "flag": "bayram_ifsa" },
+                    { "not": { "flag": "etki_bayram" } },
+                    { "any": [{ "hasEvidence": "ded_tek_kisi" }, { "hasEvidence": "ded_zarf_kaynagi" }] }
+                  ]
+                }
+              ]
+            }
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Bazen adalet bir kapıyı açar, ama kimin kapattığını söylemez. Halil kapıdan geçti. Kapıyı kapatan el hâlâ o binada.",
+              "style": "thought",
+              "fx": "fade"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "cmp": [{ "var": "ethics" }, ">=", 2] }, { "not": { "flag": "tanik_etkileme" } }] },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · BİR HAFTA SONRA", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla beni odasına çağırdı ve kapıyı kapattı. Masasında Avukatlık Kanunu duruyordu; otuz dördüncü madde kurşun kalemle çizilmişti."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Hüküm ne olursa olsun, Deniz, dosyada senin de bir satırın var. Kimse yazmadı diye yazılmamış sayılmaz."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "cmp": [{ "var": "ethics" }, ">=", 2] },
+              { "not": { "flag": "tanik_etkileme" } },
+              { "flag": "halil_inkar" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bir müvekkile yalan söylemesini öğütledin. Halil yirmi yedi yıl yalan söylememişti; ilk yalanını senden öğrendi."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "cmp": [{ "var": "ethics" }, ">=", 2] },
+              { "not": { "flag": "tanik_etkileme" } },
+              { "flag": "sinan_izlendi" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bir tanığın peşine düştün. Otoparkta, gece, yirmi dakika. Bu meslekte izlenen kişiye değil, izleyene bakılır."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "cmp": [{ "var": "ethics" }, ">=", 2] }, { "not": { "flag": "tanik_etkileme" } }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bunu disiplin kuruluna ben bildirmeyeceğim. Sen bildireceksin. Yarın sabah, kendi elinle."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ertesi sabah Bursa Barosuna iki sayfalık bir dilekçe verdim. İlk cümlesi kısaydı: “Hata yaptım.” Halil’den öğrenmiştim; ilk cümle kısa olur."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir dosya kapandı. Benim adıma bir dosya açıldı. İkisi de aynı haftada, aynı binada.",
               "style": "thought",
               "fx": "fade"
             }
@@ -315,7 +661,13 @@
       "class": "RECHARACTERIZED",
       "priority": 4,
       "when": {
-        "all": [{ "not": { "flag": "cokus" } }, { "flag": "terditli" }, { "cmp": [{ "score": "final" }, ">=", 3000] }]
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "flag": "terditli" },
+          { "any": [{ "flag": "contra_b1" }, { "flag": "contra_b2" }] },
+          { "any": [{ "flag": "red_14" }, { "flag": "contra_k1" }, { "flag": "contra_b3" }, { "flag": "contra_k3" }] },
+          { "cmp": [{ "score": "final" }, ">=", 4000] }
+        ]
       },
       "stamp": "TCK 257/1 · HAGB",
       "stampTone": "amber",
@@ -326,15 +678,31 @@
           "text": "Sanığın, yetkisi bulunmadığı hâlde muhbirin başvurusuna öncelikli randevu onayı verdiği sabittir; bu davranış görevin gereklerine aykırıdır ve sıradaki başvuru sahiplerini mağdur etmiştir (TCK 257/1)."
         },
         {
-          "text": "Sanığa bu onay karşılığında bir menfaat sağlandığı ya da anlaşmaya varıldığı her türlü şüpheden uzak biçimde ispat edilememiştir; rüşvet vasfı kurulamamıştır."
+          "text": "Muhbirin, dosyasının sanık tarafından bekletildiği ya da sanıkla anlaştığı yönündeki anlatısı belgelerle sarsılmıştır; onay karşılığında bir menfaat sağlandığı ya da anlaşmaya varıldığı her türlü şüpheden uzak biçimde ispat edilememiş, rüşvet vasfı kurulamamıştır."
         },
         {
-          "when": { "ref": "kayit_disi" },
-          "text": "Kararın kapsamı dışında alınan dinleme kayıtları hükme esas alınmamıştır (CMK 206/2-a, 217/2)."
+          "when": {
+            "any": [
+              { "flag": "red_14" },
+              { "flag": "contra_k1" },
+              { "flag": "red_9" },
+              { "flag": "contra_k5" },
+              { "flag": "obj_k5" }
+            ]
+          },
+          "text": "Kararın kapsamı dışında alındığı gösterilen dinleme kayıtları hükme esas alınmamıştır (CMK 206/2-a, 217/2)."
+        },
+        {
+          "when": { "any": [{ "flag": "contra_b3" }, { "flag": "contra_k3" }] },
+          "text": "Muhbirin zarfı sanığa elden verdiği yönündeki beyanı el koyma tutanağının saatleriyle çelişmiştir."
         },
         {
           "when": { "any": [{ "flag": "ek_savunma_tam" }, { "flag": "ek_savunma_kismi" }, { "flag": "ek_sure" }] },
           "text": "Sanığın ek savunması alınmış (CMK 226/1); icbar ve nüfuz unsurları bulunmadığından irtikap vasfı da kabul edilmemiştir."
+        },
+        {
+          "when": { "all": [{ "flag": "tanik_etkileme" }, { "all": [] }] },
+          "text": "Tanık beyanının duruşmadan önce müdafi tarafından yönlendirildiği anlaşıldığından bu beyana itibar edilmemiş; durum Başsavcılığa ve Bursa Barosuna bildirilmiştir (CMK 217/1; TCK 277; Av.K. 34)."
         },
         { "text": "Sanığın sabıkasızlığı ve uzun meslek hayatı takdiri indirim nedeni sayılmıştır (TCK 62/1)." },
         {
@@ -349,7 +717,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "Beraat için gereken delil zincirini kuramadığında, esas savunmada terditli olarak eylemin en fazla görevi kötüye kullanma olduğunu savun.",
+      "howToReach": "Beraat için gereken delil zincirini kuramadığında; ama muhbirin “bekletti / anlaştık” anlatısını belgeyle çürütüp kayıtlardan birini ya da tutanağın saatlerini tartıştırdıysan, esas savunmada terditli olarak eylemin en fazla görevi kötüye kullanma olduğunu savun.",
       "epilogue": [
         {
           "lines": [
@@ -391,6 +759,86 @@
               "fx": "fade"
             }
           ]
+        },
+        {
+          "when": { "flag": "tanik_etkileme" },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · O GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda Başsavcılıktan bir yazı vardı: “Tanığı etkileme (TCK 277) iddiasıyla hakkınızda soruşturma başlatılmıştır.” Altında baronun disiplin yazısı."
+            },
+            { "speaker": "narrator", "text": "Leyla odasındaydı. Kapısı kapalıydı. Bir kez bile dışarı çıkmadı." },
+            {
+              "speaker": "player",
+              "text": "Bir zarfın hangi elden geldiğini bulmaya çalışırken, bir tanığın ağzına kendi elimle bir cümle koydum. Halil’in çekmecesine konan zarf gibi.",
+              "style": "thought",
+              "fx": "fade"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "cmp": [{ "var": "ethics" }, ">=", 2] }, { "not": { "flag": "tanik_etkileme" } }] },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · BİR HAFTA SONRA", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla beni odasına çağırdı ve kapıyı kapattı. Masasında Avukatlık Kanunu duruyordu; otuz dördüncü madde kurşun kalemle çizilmişti."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Hüküm ne olursa olsun, Deniz, dosyada senin de bir satırın var. Kimse yazmadı diye yazılmamış sayılmaz."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "cmp": [{ "var": "ethics" }, ">=", 2] },
+              { "not": { "flag": "tanik_etkileme" } },
+              { "flag": "halil_inkar" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bir müvekkile yalan söylemesini öğütledin. Halil yirmi yedi yıl yalan söylememişti; ilk yalanını senden öğrendi."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "cmp": [{ "var": "ethics" }, ">=", 2] },
+              { "not": { "flag": "tanik_etkileme" } },
+              { "flag": "sinan_izlendi" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bir tanığın peşine düştün. Otoparkta, gece, yirmi dakika. Bu meslekte izlenen kişiye değil, izleyene bakılır."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "cmp": [{ "var": "ethics" }, ">=", 2] }, { "not": { "flag": "tanik_etkileme" } }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bunu disiplin kuruluna ben bildirmeyeceğim. Sen bildireceksin. Yarın sabah, kendi elinle."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ertesi sabah Bursa Barosuna iki sayfalık bir dilekçe verdim. İlk cümlesi kısaydı: “Hata yaptım.” Halil’den öğrenmiştim; ilk cümle kısa olur."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir dosya kapandı. Benim adıma bir dosya açıldı. İkisi de aynı haftada, aynı binada.",
+              "style": "thought",
+              "fx": "fade"
+            }
+          ]
         }
       ]
     },
@@ -405,22 +853,74 @@
       "sentence": "3 yıl 4 ay hapis · hak yoksunlukları",
       "verdictText": "Sanık Halil Ekinci’nin TCK 252/2 uyarınca alt sınırdan 4 yıl hapis cezası ile cezalandırılmasına; TCK 62/1 uyarınca 3 yıl 4 ay hapis cezasına; TCK 53/1 ve 53/5’teki hak yoksunluklarına; tutuklulukta geçen sürenin cezadan mahsubuna (TCK 63); el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; cezanın süresi nedeniyle erteleme ve hükmün açıklanmasının geri bırakılması koşulları bulunmadığına; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
       "reasoning": [
+        { "text": "Kontrollü teslimatta kullanılan işaretli paralar sanığın çekmecesinde ele geçirilmiştir." },
         {
-          "text": "İşaretli paralar sanığın çekmecesinde ele geçirilmiş; muhbirin beyanı el koyma tutanağıyla desteklenmiştir."
+          "when": {
+            "not": {
+              "any": [
+                { "flag": "red_14" },
+                { "flag": "contra_k1" },
+                { "flag": "red_9" },
+                { "flag": "contra_k5" },
+                { "flag": "obj_k5" }
+              ]
+            }
+          },
+          "text": "Dinleme kayıtlarının kararın kapsamı dışında alındığı duruşmada belgeyle gösterilmediğinden kayıtlar hükme esas alınmıştır; kayıtlar sanığın muhbirle görüştüğünü ve teslimattan önceki akşam bir üçüncü kişinin “zarf yarın masada” dediğini göstermektedir."
         },
         {
-          "when": { "all": [{ "flag": "halil_inkar" }, { "hasEvidence": "ev_sira_disi" }] },
-          "text": "Sanığın öncelikli randevu konusundaki inkârı müdürlük kaydıyla çelişmiştir."
+          "when": {
+            "any": [
+              { "flag": "red_14" },
+              { "flag": "contra_k1" },
+              { "flag": "red_9" },
+              { "flag": "contra_k5" },
+              { "flag": "obj_k5" }
+            ]
+          },
+          "text": "Kapsam dışı olduğu gösterilen kayıtlar hükme esas alınmamış; kalan deliller birlikte değerlendirilmiştir (CMK 217/2)."
+        },
+        {
+          "when": { "not": { "ref": "oda_bos" } },
+          "text": "Muhbirin zarfı sanığa elden verdiği yönündeki beyanı el koyma tutanağıyla çelişmemektedir."
+        },
+        {
+          "when": { "all": [{ "ref": "oda_bos" }, { "not": { "ref": "ayrilis" } }] },
+          "text": "Polis odaya girdiğinde sanığın odada bulunmadığı tutanakla sabittir; ancak sanığın odasından ne zaman ayrıldığı duruşmada gösterilmediğinden zarfın sanığa daha önce verilmiş olabileceği ihtimali dışlanamamıştır."
+        },
+        {
+          "when": { "all": [{ "flag": "contra_b4" }, { "not": { "ref": "zarf_suphe" } }] },
+          "text": "Muhbirin kayıt cihazını kendisinin durdurduğunun anlaşılması beyanının güvenilirliğini zayıflatmış, ancak teslimin gerçekleşmediğini tek başına göstermemiştir."
+        },
+        {
+          "when": { "all": [{ "ref": "zarf_suphe" }, { "not": { "flag": "contra_b2" } }] },
+          "text": "Zarfın sanık odada yokken çekmeceye bırakıldığı anlaşılmışsa da muhbirin sanıkla önceden anlaştığı yönündeki beyanı çürütülmemiştir; rüşvet anlaşmayla tamamlanır ve paranın sanık yokken bırakılması bu sonucu değiştirmez (TCK 252/1)."
+        },
+        {
+          "when": { "all": [{ "ref": "zarf_suphe" }, { "flag": "contra_b2" }, { "not": { "flag": "contra_b1" } }] },
+          "text": "Muhbirin anlatıları birbiriyle çelişse de başvurunun sanığın görev alanı dışında olduğu gösterilmemiştir; sanığın muhbire öncelikli randevu onayı verdiği gözetildiğinde iş–menfaat bağı ortadan kalkmamıştır (TCK 252/1)."
+        },
+        {
+          "when": { "all": [{ "ref": "muhbir_coktu" }, { "not": { "ref": "kayit_disi" } }] },
+          "text": "Muhbirin beyanları çelişkili olsa da hükme esas alınan kayıtlar teslimatın önceden kararlaştırıldığını göstermektedir."
+        },
+        {
+          "when": { "all": [{ "flag": "halil_inkar" }, { "flag": "sira_savcida" }] },
+          "text": "Sanığın öncelikli randevu konusundaki inkârı, duruşmaya sunulan müdürlük kaydıyla çelişmiştir."
+        },
+        {
+          "when": { "all": [{ "flag": "tanik_etkileme" }, { "all": [] }] },
+          "text": "Tanık beyanının duruşmadan önce müdafi tarafından yönlendirildiği anlaşıldığından bu beyana itibar edilmemiş; durum Başsavcılığa ve Bursa Barosuna bildirilmiştir (CMK 217/1; TCK 277; Av.K. 34)."
         },
         {
           "when": { "flag": "cokus" },
-          "text": "Savunmanın inandırıcılığı duruşmada çökmüş; heyet iddianamedeki anlatımı esas almıştır."
+          "text": "Savunmanın sunduğu deliller ilgisiz ya da dayanaksız kaldı; heyet iddianamedeki anlatımı esas almıştır."
         },
         {
           "text": "Temel ceza alt sınırdan belirlenmiş; sanığın sabıkasızlığı takdiri indirim nedeni sayılmıştır (TCK 62/1). Ceza iki yılı aştığından erteleme ve HAGB uygulanamamıştır (TCK 51/1; CMK 231/5)."
         }
       ],
-      "legalBasis": "TCK 252/2, 53, 62/1, 63; TCK 51/1; CMK 231/5, 273/1",
+      "legalBasis": "TCK 252/1, 252/2, 53, 62/1, 63; TCK 51/1; CMK 217, 231/5, 273/1",
       "xp": {
         "if": {
           "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
@@ -460,6 +960,86 @@
             {
               "speaker": "player",
               "text": "Kayıt bir anahtar deliğiydi. Ben kapıyı hiç açamadım. Ve bir binanın ikinci katında, bir masanın üçüncü çekmecesi şimdi kilitli.",
+              "style": "thought",
+              "fx": "fade"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "tanik_etkileme" },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · O GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda Başsavcılıktan bir yazı vardı: “Tanığı etkileme (TCK 277) iddiasıyla hakkınızda soruşturma başlatılmıştır.” Altında baronun disiplin yazısı."
+            },
+            { "speaker": "narrator", "text": "Leyla odasındaydı. Kapısı kapalıydı. Bir kez bile dışarı çıkmadı." },
+            {
+              "speaker": "player",
+              "text": "Bir zarfın hangi elden geldiğini bulmaya çalışırken, bir tanığın ağzına kendi elimle bir cümle koydum. Halil’in çekmecesine konan zarf gibi.",
+              "style": "thought",
+              "fx": "fade"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "cmp": [{ "var": "ethics" }, ">=", 2] }, { "not": { "flag": "tanik_etkileme" } }] },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · BİR HAFTA SONRA", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla beni odasına çağırdı ve kapıyı kapattı. Masasında Avukatlık Kanunu duruyordu; otuz dördüncü madde kurşun kalemle çizilmişti."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Hüküm ne olursa olsun, Deniz, dosyada senin de bir satırın var. Kimse yazmadı diye yazılmamış sayılmaz."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "cmp": [{ "var": "ethics" }, ">=", 2] },
+              { "not": { "flag": "tanik_etkileme" } },
+              { "flag": "halil_inkar" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bir müvekkile yalan söylemesini öğütledin. Halil yirmi yedi yıl yalan söylememişti; ilk yalanını senden öğrendi."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "cmp": [{ "var": "ethics" }, ">=", 2] },
+              { "not": { "flag": "tanik_etkileme" } },
+              { "flag": "sinan_izlendi" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bir tanığın peşine düştün. Otoparkta, gece, yirmi dakika. Bu meslekte izlenen kişiye değil, izleyene bakılır."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "cmp": [{ "var": "ethics" }, ">=", 2] }, { "not": { "flag": "tanik_etkileme" } }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bunu disiplin kuruluna ben bildirmeyeceğim. Sen bildireceksin. Yarın sabah, kendi elinle."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ertesi sabah Bursa Barosuna iki sayfalık bir dilekçe verdim. İlk cümlesi kısaydı: “Hata yaptım.” Halil’den öğrenmiştim; ilk cümle kısa olur."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir dosya kapandı. Benim adıma bir dosya açıldı. İkisi de aynı haftada, aynı binada.",
               "style": "thought",
               "fx": "fade"
             }

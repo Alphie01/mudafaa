@@ -379,7 +379,7 @@ export const inv1People: CasePart = {
         text: 'Mahkemede bunu söylersem savcı “işte” diyecek. Söylemezsem bulacaklar. Siz ne derseniz onu yapacağım; ama doğrusunu söyleyin.',
       },
       choices: [
-        option('TAV_A', 'Doğruyu kendiniz anlatmanızı öneririm: randevuyu, gerekçesini, karşılık almadığınızı.', {
+        option('TAV_A', 'Randevuyu mahkemede kendiniz, gerekçesiyle anlatmanızı öneririm.', {
           score: { SAVUNMA_STRATEJISI: 100 },
           effects: [raise('halil_durust'), inc('trust', 4)],
           good: 'Avukat müvekkile gerçeğe aykırı beyan önermez. Sıra dışı randevu en fazla yetki aşımıdır; karşılık olmadan rüşvetin “iş–menfaat” bağı kurulmaz. Doğrunun sanığın ağzından ve belgeyle anlatılması, savcının bulmasından iyidir.',
@@ -391,7 +391,7 @@ export const inv1People: CasePart = {
           `),
           next: 'INV1_HALIL',
         }),
-        option('TAV_B', 'Kimse bilmiyor. Sorulursa randevuyu müdürün onayladığını söyleyin.', {
+        option('TAV_B', 'Kimse bilmiyor; sorulursa randevuyu Müdür Hanım’ın onayladığını söyleyin.', {
           score: { SAVUNMA_STRATEJISI: -100 },
           effects: [raise('halil_inkar'), inc('ethics')],
           bad: 'Avukat müvekkiline gerçeğe aykırı beyanda bulunmasını, hele bir başkasını işaret ederek, öğütleyemez (Av.K. 34; TBB Meslek Kuralları). Kayıt ortaya çıkınca inkâr, savunmanın en büyük yükü olur.',
@@ -402,7 +402,7 @@ export const inv1People: CasePart = {
           `),
           next: 'INV1_HALIL',
         }),
-        option('TAV_C', 'Bu konuda susma hakkınız var. Sorulursa cevap vermeyebilirsiniz.', {
+        option('TAV_C', 'Bu konuda susma hakkınız var; sorulursa cevap vermeyebilirsiniz.', {
           neutral: 'Susma hakkı meşrudur (CMK 147/1-e); ama sessizlik, savcının anlatısına boşluk bırakır.',
           effects: [raise('halil_sus')],
           responses: B(S`
@@ -452,9 +452,9 @@ export const inv1People: CasePart = {
           score: { SORGULAMA: 20 },
           effects: [raise('fact_ev_ziyaret')],
           responses: B(S`
-            zehra: Komşu bir şey daha söyledi. Adam giderken telefonla konuşmuş, merdivende. "Evde yok abi. Belki arşivde, belki odasında." Abi diye konuşuyormuş biriyle.
-            zehra: Ben savcılığa yazdım, sizin dediğiniz gibi. Saat, tarif, şemsiye. Bir de nane şekeri, biliyorum, saçma ama yazdım.
-            ~ "Belki arşivde." Arayan neyin peşindeyse, nerede olabileceğini tahmin ediyor. Benden önce davranırsa, kaybederim.
+            zehra: Komşu bir şey daha söyledi. Adam giderken merdivende telefonla konuşmuş: "Evde yok. Başka yerde olmalı." Kiminle konuştuğunu duymamış.
+            zehra: Ben savcılığa yazdım, sizin dediğiniz gibi. Saat, tarif, şemsiye. Hemşireyiz; ne gördüysek onu yazarız.
+            ~ "Başka yerde olmalı." Biri bir şey arıyor ve bulamadı. Benden önce bulursa, kaybederim.
           `),
           next: '$stay',
         }),
@@ -528,32 +528,21 @@ export const inv1People: CasePart = {
       onFirstEnter: [{ type: 'MEET', character: 'sinan' }, raise('sinan_goruldu')],
       lines: B(S`
         = DEVİR SERVİSİ-2 · 214 · 14.30 @buro
-        - İki masalı bir oda. Masalardan biri boş ve tozlu, üstünde bir saksı kaktüs. Öbüründe dosyalar, bir bilgisayar, bir kase nane şekeri.
-        - Masadaki memur ayağa kalktı; otuzlarının sonunda, geriye taranmış saç, açık renk bir ceket. Elini uzatmadan önce bileğindeki saate baktı.
-        sinan: Avukat hanım! Halil abinin avukatı, değil mi? Buyurun, buyurun. Şeker alır mısınız? Nane. Bu binada herkes benden alır; kahve kokusunu bastırıyor.
-        sinan: Halil abi bizim büyüğümüzdür. Biraz katıdır, ama büyüğümüzdür. Ne lazımsa. Çay söyleyeyim mi? Muzaffer Usta'nın çayı bu binada tek dürüst şeydir, derler.
-        - Saatine yine baktı. Ekranı yeşil yandı, söndü.
-        sinan: Kusura bakmayın; doktor günde on bin adım dedi. Adım sayıyorum. Bu binada oturmaktan herkes hasta.
+        - İki masalı bir oda. Masalardan biri boş ve tozlu, üstünde bir saksı kaktüs. Öbüründe dosyalar, bir bilgisayar, yarım bir bardak çay.
+        - Masadaki memur ayağa kalktı; otuzlarının sonunda, geriye taranmış saç, açık renk bir ceket. Elimi sıktı; sıcak, kuru bir el.
+        sinan: Avukat hanım! Halil abinin avukatı, değil mi? Buyurun, buyurun. Çay söyleyeyim mi? Muzaffer Usta'nın çayı bu binada tek dürüst şeydir, derler.
+        sinan: Halil abi bizim büyüğümüzdür. Biraz katıdır, ama büyüğümüzdür. Ne lazımsa.
+        - Konuşurken bileğindeki saate bir kez baktı; ekranı yeşil yandı, söndü. "Doktor günde on bin adım dedi" diye güldü. "Bu binada oturmaktan herkes hasta."
       `),
       choices: [
         option('SIN_SABAH', 'O sabah neredeydiniz?', {
           discovers: 'clue_sinan_arsiv',
           score: { SORGULAMA: 30 },
           responses: B(S`
-            sinan: Ben mi? Arşivdeydim abla. On buçuktan on bire kadar. 1987 ciltleriyle boğuşuyordum; bir parsel geçmişi lazımdı, Görükle'den.
+            sinan: Ben mi? Arşivdeydim abla. On buçuktan on bire kadar. Kadastro paftalarının arasındaydım; bir ifraz dosyası için eski bir pafta lazımdı.
             sinan: Gürültüyü duyunca çıktım. Halil abiyi polisler arasında gördüm. İnanamadım. Hâlâ inanamıyorum.
             sinan: Bizim oda sabahları ana baba günüdür abla. Telefon susmaz, takipçi eksik olmaz. Arşive kaçmak bazen nefes almaktır.
-            ~ Arşiv. 1987 ciltleri. Bir parsel geçmişi için yarım saat. Arşivciler bu kadar sabırlı olmaz.
-          `),
-          next: '$stay',
-        }),
-        option('SIN_SAAT', 'Saatiniz güzelmiş. Hep takar mısınız?', {
-          discovers: 'clue_sinan_saat',
-          score: { ARASTIRMA: 20 },
-          responses: B(S`
-            sinan: Bu mu? Hep takarım. Yatarken bile. Uykumu ölçüyor. Kötü uyuyorum abla, son aylarda. Bina yoruyor.
-            - Bileğini çevirdi; ekran yeşil yandı. Küçük, dikdörtgen bir ışık.
-            ~ Kötü uyuyor. Son aylarda. Bir binanın yorduğu herkes kötü uyumaz.
+            ~ Arşiv, on buçuktan on bire. Not defterime yazdım; o sabahı bana anlatan herkesin saatini yazdığım gibi.
           `),
           next: '$stay',
         }),
@@ -571,16 +560,16 @@ export const inv1People: CasePart = {
           responses: B(S`
             sinan: Abiyle mi? İyi. Yani... bazı dosyalarımı geri çevirdi, kızdım tabii. Herkes kızar. Ama haklıdır, eksik varsa eksiktir.
             sinan: Ben müdür yardımcılığı sınavını kazandım, atama bekliyorum. Halil abi tebrik etti. "Masaya otururken kuralı da yanına al" dedi. Unutmam.
-            - Bir nane şekerinin kâğıdını açtı, şekeri ağzına attı, kâğıdı dikkatle dörde katlayıp cebine koydu.
-            ~ Kâğıdı yere atmayan biri. Ya da kâğıdını bir yerde bırakmak istemeyen biri. İkisi aynı alışkanlığın iki yüzü olabilir.
+            - Ekrandaki bir dosyayı kapattı, masadaki kâğıtları bir kenara itti. Kenarlarını hizalamadı; Halil'in odasından sonra bunu fark etmek tuhaftı.
+            ~ Bir sınav, bir atama, bir tebrik. Bu binada herkesin beklediği bir sıra var.
           `),
           next: '$stay',
         }),
         back('SIN_GERI', 'Teşekkür et, çık', {
           responses: B(S`
             - Kapıdan çıkarken Sinan arkamdan seslendi; sesi hâlâ sıcaktı.
-            sinan: Avukat hanım! Bu işler uzadıkça insanlar konuşur. Konuşan insanlar da bazen yanlış şeyler söyler. Siz doğru olana bakın. Halil abi için.
-            ~ Bir öğüt. Ya da bir şey daha. Ses tonundan anlamak mümkün değil; bu binada herkes aynı tonda konuşuyor.
+            sinan: Avukat hanım! Halil abiye selamımı söyleyin. Kolay gelsin.
+            ~ Bu binada herkes Halil'e selam yolluyor. Selamları toplasam bir dilekçe olur; ama hiçbiri delil değil.
           `),
         }),
       ],

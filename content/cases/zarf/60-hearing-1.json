@@ -540,7 +540,7 @@
           "id": "H101Q_B",
           "kind": "OPTION",
           "label": "Telefonunuz çaldığında takviminize ne yazdınız?",
-          "visibleWhen": { "hasEvidence": "clue_takvim_214" },
+          "visibleWhen": { "hasEvidence": "ded_sahte_cagri" },
           "responses": [
             {
               "lines": [
@@ -681,7 +681,7 @@
         {
           "id": "H102_A",
           "kind": "OPTION",
-          "label": "İtiraz: soru cevabını içinde taşıyor ve kanıtlanmamış bir olguyu doğru kabul ediyor.",
+          "label": "İtiraz: soru, tartışmalı bir olguyu verili kabul ediyor.",
           "responses": [
             {
               "lines": [
@@ -709,11 +709,11 @@
         {
           "id": "H102_B",
           "kind": "OPTION",
-          "label": "İtiraz: savcı sanığa soru soramaz.",
+          "label": "İtiraz: sanığa soruyu ancak başkan aracılığıyla sorabilir.",
           "responses": [
             {
               "lines": [
-                { "speaker": "baskan", "text": "Sorabilir, müdafi. Reddedildi. Sanık, cevap verin." },
+                { "speaker": "baskan", "text": "Doğrudan sorabilir, müdafi. Reddedildi. Sanık, cevap verin." },
                 {
                   "speaker": "halil",
                   "text": "Hayır. Hayır, efendim. Ben o parayı görmedim bile.",
@@ -728,7 +728,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Savcı ve müdafi sanığa doğrudan soru yöneltebilir (CMK 201/1). İtiraz, sorunun biçimine yapılmalıydı.",
+            "feedback": "Savcı ve müdafi sanığa doğrudan soru yöneltebilir (CMK 201/1); başkan aracılığı gerekmez. İtiraz, sorunun biçimine yapılmalıydı.",
             "category": "USUL_BILGISI"
           },
           "next": "H1_02R"
@@ -736,7 +736,7 @@
         {
           "id": "H102_C",
           "kind": "OPTION",
-          "label": "Müvekkilim bu soruya cevap vermeyecek.",
+          "label": "Müvekkilim para konusunda susma hakkını kullanacak.",
           "responses": [
             {
               "lines": [
@@ -758,7 +758,7 @@
         {
           "id": "H102_D",
           "kind": "OPTION",
-          "label": "Bir şey söyleme; cevabı Halil versin.",
+          "label": "Sus; Halil’in kendi “hayır”ı bir itirazdan güçlüdür.",
           "responses": [
             {
               "lines": [
@@ -837,7 +837,7 @@
         {
           "id": "H103_A",
           "kind": "OPTION",
-          "label": "Kayıt 14 kararın süresi dolduktan sonra, kayıt 9 kararda olmayan bir hattan alınmıştır; hukuka aykırı delil olarak reddini talep ediyoruz.",
+          "label": "Kayıtlar kararın kapsamı dışında alındı; hukuka aykırı delil olarak reddini istiyoruz.",
           "responses": [
             {
               "when": { "all": [{ "hasEvidence": "ded_sure_disi" }, { "hasEvidence": "ded_hat_disi" }] },
@@ -984,7 +984,7 @@
         {
           "id": "H103_B",
           "kind": "OPTION",
-          "label": "Rüşvet dinlemeye elverişli suçlardan değildir; bütün kayıtların reddini talep ediyoruz.",
+          "label": "Rüşvet, dinleme yapılabilecek katalog suçlardan değil; bütün kayıtların reddini istiyoruz.",
           "responses": [
             {
               "lines": [
@@ -1010,13 +1010,17 @@
         {
           "id": "H103_C",
           "kind": "OPTION",
-          "label": "Kayıtlar sanığın yakınlarıyla yapılan görüşmeleri içerdiğinden okunamaz.",
+          "label": "Kayıtlar başka soruşturmada tesadüfen elde edildi; bu davada kullanılamaz, reddini istiyoruz.",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "baskan",
-                  "text": "Hangi yakın, müdafi? Bayram Öz sanığın yakını mı? Reddedildi. Okunsun."
+                  "text": "Müdafi, rüşvet katalog suçu; tesadüfi delil kuralı kullanılmasını engellemez. Reddedildi. Okunsun."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kâtip okudu: “Kontrolcüyü hallettik. Zarf yarın masada.” Salon bu cümleyi duydu."
                 }
               ]
             }
@@ -1027,7 +1031,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Tanıklıktan çekinebilecek kişilerle görüşmeler kayda alınamaz (CMK 135/3); ama Bayram Öz ve Ateşoğlu sanığın yakını değildir.",
+            "feedback": "Tesadüfen elde edilen delil, katalog suçlardan birine ilişkinse kullanılabilir (CMK 138/2); rüşvet katalogdadır. Sorun tesadüf değil, kararın süresi ve hattıdır.",
             "category": "USUL_BILGISI"
           },
           "next": "H1_03R"
@@ -1035,7 +1039,7 @@
         {
           "id": "H103_D",
           "kind": "OPTION",
-          "label": "Okunsun; değerlendirmesini esas hakkındaki savunmada yaparız.",
+          "label": "Okunsun; kayıtların değerlendirmesini esas hakkındaki savunmada yaparız.",
           "responses": [
             {
               "lines": [
@@ -1641,6 +1645,8 @@
           "id": "OB_K5",
           "kind": "OBJECT",
           "match": { "statement": "K5", "ground": "g_aykiri" },
+          "visibleWhen": { "any": [{ "flag": "press_k5" }, { "hasEvidence": "clue_hedef_hat" }] },
+          "enabledWhen": { "any": [{ "flag": "press_k5" }, { "hasEvidence": "clue_hedef_hat" }] },
           "responses": [
             {
               "lines": [
@@ -2112,6 +2118,10 @@
             {
               "speaker": "leyla",
               "text": "Bugün bir kapı açıldı, Deniz. Üç hafta var. Zarfın hangi elden geldiğini bul; mahkeme o eli görmek isteyecek."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Halil Leyla’ya döndü, elini uzattı; sonra vazgeçip başıyla selam verdi. Leyla gülümsemedi; ama başını aynı resmiyetle eğdi. İki kural adamı, merdivende."
             },
             {
               "speaker": "narrator",

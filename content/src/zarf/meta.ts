@@ -1,9 +1,9 @@
 import {
   all,
   any,
-  atLeast,
   categories,
   CASE_FORMAT_ID,
+  ref,
   counter,
   flag,
   flags,
@@ -14,7 +14,7 @@ import {
   thresholdBar,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
-import { T_BERAAT, T_GOREV } from './outcomes.js';
+import { T_BERAAT_B, T_GOREV } from './outcomes.js';
 import { p1, p2 } from './shared.js';
 
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler.
@@ -85,7 +85,7 @@ export const meta: CasePart = {
       thresholdBar: thresholdBar([
         ['Mahkûmiyet', 0, 'red'],
         ['257 · HAGB', T_GOREV, 'amber'],
-        ['Beraat', T_BERAAT, 'green'],
+        ['Tam beraat · 2-b', T_BERAAT_B, 'green'],
       ]),
       displayClampMin: 0,
     },
@@ -113,9 +113,29 @@ export const meta: CasePart = {
       when: all(any(flag('red_14'), flag('contra_k1')), any(flag('red_9'), flag('contra_k5'), flag('obj_k5'))),
     },
     {
+      id: 'oda_bos',
+      label: 'Zarfın konduğu dakikalarda odanın boş olduğu tutanakla gösterildi',
+      when: any(flag('contra_k3'), flag('contra_b3'), flag('k3_kismi')),
+    },
+    {
+      id: 'ayrilis',
+      label: 'Sanığın 10.35’te odasından ayrıldığı duruşmada gösterildi (takvim, santral ya da kamera)',
+      when: any(flag('q_takvim'), flag('contra_s2'), flag('kamera_b3')),
+    },
+    {
       id: 'zarf_suphe',
       label: 'Zarfın çekmeceye sanık yokken girdiği duruşmada gösterildi',
-      when: atLeast(2, flag('contra_k3'), flag('contra_b3'), flag('contra_b4'), flag('contra_b5')),
+      when: all(ref('oda_bos'), ref('ayrilis'), flag('contra_b4')),
+    },
+    {
+      id: 'muhbir_coktu',
+      label: 'Muhbirin “bekletti” ve “anlaştık” anlatılarının ikisi de belgeyle çürütüldü',
+      when: all(flag('contra_b1'), flag('contra_b2')),
+    },
+    {
+      id: 'beraat_kosul',
+      label: 'Kayıtlar ayıklandı, zarfın sanık yokken girdiği gösterildi ve muhbirin anlaşma anlatısı çöktü',
+      when: all(ref('kayit_disi'), ref('zarf_suphe'), ref('muhbir_coktu')),
     },
   ],
   variables: [
@@ -176,6 +196,8 @@ export const meta: CasePart = {
       'ek_savunma_kismi',
       'ek_savunma_tam',
       'ek_sure',
+      'etki_bayram',
+      'etki_muzaffer',
       'evrak_bildirildi',
       'fact_bayram_red',
       'fact_cagri',
@@ -207,12 +229,12 @@ export const meta: CasePart = {
       'halil_tahliye',
       'ilk_insan',
       'ilk_kagit',
-      'illegal_used',
       'in_court',
       'in_court2',
       'k2_mesafe',
       'k2_temas',
       'k3_kismi',
+      'kamera_b3',
       'muzaffer_cagrildi',
       'muzaffer_defter',
       'muzaffer_gordu',
@@ -254,6 +276,7 @@ export const meta: CasePart = {
       'sinan_bildirildi',
       'sinan_cagrildi',
       'sinan_goruldu',
+      'sinan_izlendi',
       'sinan_ifsa',
       'sinan_uyarildi',
       'sira_savcida',

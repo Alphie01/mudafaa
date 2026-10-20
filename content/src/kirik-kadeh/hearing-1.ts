@@ -821,7 +821,7 @@ export const hearing1: CasePart = {
             'Arka sırada Onur Kılıç dizlerine bakıyordu. Bir kez başını kaldırdı, Serkan’ın ensesine baktı; sonra yine dizlerine.',
           ),
           T(
-            'Bir patronun ensesine bakan bir çalışan. O bakışta korku mu vardı, yorgunluk mu? İkisi de bir tanığı konuşturabilir. Ya da susturabilir.',
+            'Tanık, katılanın ensesine bakıyor. O bakışta korku mu vardı, yorgunluk mu? İkisi de bir tanığı konuşturabilir. Ya da susturabilir.',
           ),
         ),
         otherwise(
@@ -854,7 +854,7 @@ export const hearing1: CasePart = {
           Nx(
             'Koridorun öbür ucunda Tolga Şen Serkan’la konuşuyordu; alçak sesle, ama elleriyle. Serkan bir kez Onur’a döndü, bir şey söyledi. Onur başını salladı, çok hızlı.',
           ),
-          T('Bir patron bir şey söyledi, bir çalışan başını salladı. Bunu kürsüye taşıyamam. Ama aklıma not ettim.'),
+          T('Biri bir şey söyledi, öbürü başını salladı; fazla hızlı. Bunu kürsüye taşıyamam. Ama aklıma not ettim.'),
           S('bora', 'Avukat hanım. O gözlüklü. Bir şey diyecek gibi bakıyor bana.'),
           D('Ona bakma, Bora. Ne o sana, ne sen ona. Konuşacaksa salonda konuşur.'),
           Nx('Mübaşir kapıyı açtı. “Bora Yalçııın!” On dakika dokuz dakika sürmüştü.'),

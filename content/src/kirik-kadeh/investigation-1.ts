@@ -1463,7 +1463,7 @@ export const investigation1: CasePart = {
               says: [
                 S(
                   'ece',
-                  'Masa dörtte o ve gözlüklü arkadaşı. Hep beraber gelirler, iş arkadaşı galiba. Gözlüklü hesabı öder hep.',
+                  'Masa dörtte o ve gözlüklü arkadaşı. Hep beraber gelirler. Gözlüklü hesabı öder hep.',
                 ),
                 S(
                   'ece',

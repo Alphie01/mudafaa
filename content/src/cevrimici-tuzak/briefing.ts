@@ -149,7 +149,7 @@ export const briefing: CasePart = {
       choices: [
         option(
           'BR01_A',
-          'Nitelikli dolandırıcılık: 4–10 yıl hapis; adli para cezası menfaatin iki katından az olamaz',
+          'Nitelikli dolandırıcılık: 4–10 yıl hapis; adli para en az menfaatin iki katı',
           {
             score: { HUKUKI_BILGI: 60 },
             good: 'TCK 158/1-f: üç yıldan on yıla hapis ve beş bin güne kadar adli para; (f) bendinde hapsin alt sınırı dört yıl, adli para cezası menfaatin iki katından az olamaz (158/1 son cümle).',

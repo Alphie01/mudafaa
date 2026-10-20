@@ -21,6 +21,10 @@
             {
               "speaker": "narrator",
               "text": "Bir hafta sonra ara karar cevapları birer birer dosyaya düştü. İlki operatörden: Ece’nin hattının 3–5 Kasım kayıtları. 4 Kasım 10.12’de bir satır: “IMEI değişikliği.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Satırın yanında on beş haneli bir numara: kopya SIM’in takıldığı cihazın kimliği. 35 491207 ile başlıyor. Bir telefonun parmak izi, bir yıl sonra bir kâğıtta."
             }
           ]
         },
@@ -129,6 +133,14 @@
             {
               "speaker": "leyla",
               "text": "Ve hatırla: bu dosyada bir kurban daha var. Katılan. Onu düşman yapma. Düşman yaparsan, salonda bir ses kaybedersin; kazanabileceğin bir sesi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masamın köşesinde Ece’nin sarı notunun fotokopisi duruyordu; aslı dosyadaydı artık, mahkemenin. Fotokopide gülen yüz biraz silikti, ama oradaydı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonuma Ece’den bir mesaj düşmüştü: “Annem bugün ilk kez atölyeye geç gitti. Benimle kahvaltı etti. Bir yıl sonra ilk kez.” Altında hiçbir şey yoktu; ne teşekkür, ne soru."
             },
             {
               "speaker": "player",
@@ -322,23 +334,32 @@
             },
             {
               "speaker": "narrator",
-              "text": "Savcılıktan bir yazı gelmişti; hâkim kararı çıkmış, İMEİ sorgusunun cevabı dönmüştü. Üç hat, tek bir cihaz. Bir satırda bir şirket adı. Tanıdık bir ad."
+              "text": "Savcılıktan bir yazı gelmişti; hâkim kararı çıkmış, İMEİ sorgusunun cevabı dönmüştü. Üç hat, tek bir cihaz. Üçüncü satırda kurumsal bir hat; abonesi ayrıca sorulmuş, cevap yok."
             },
             { "speaker": "narrator", "text": "Saat dokuz buçukta büronun sabit telefonu çaldı. Numara gizliydi." },
             {
               "speaker": "narrator",
               "name": "BİR SES",
-              "text": "Avukat hanım, iyi akşamlar efendim. Bazı dosyalar uzarsa, insanın işi de uzar. Size iyi geceler dilerim.",
+              "text": "Avukat hanım. Bazı dosyalar uzarsa, insanın işi de uzar. İyi geceler.",
               "style": "phone"
             },
             {
               "speaker": "narrator",
-              "text": "Hat kapandı. Kibar, acelesiz bir ses. Kızgın değildi; kızgın olmasından daha kötüydü.",
+              "text": "Hat kapandı. Bir fısıltı; kadın mı erkek mi, genç mi yaşlı mı, söyleyemezdim. Kızgın değildi; kızgın olmasından daha kötüydü.",
               "fx": "shake"
             },
             {
               "speaker": "player",
               "text": "Biri, savcılığa ne yazdığımı biliyor. Ya da tahmin ediyor. İkisi de iyi değil.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Büronun ışıklarını söndürmedim. Pencereden sokağa baktım: ıslak asfalt, bir taksi, bir kedi. Kimse yoktu. Kimse olmadığını bilmek, birinin olduğunu bilmekten daha az rahatlatıcıydı."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla “ona bakma, dosyaya bak” demişti. Dosyaya baktım. Üç hat, bir cihaz. Telefon bir daha çalmadı.",
               "style": "thought"
             }
           ]
@@ -355,12 +376,12 @@
             {
               "speaker": "narrator",
               "name": "BİR SES",
-              "text": "Avukat hanım, iyi akşamlar efendim. Bazı dosyalar uzarsa, insanın işi de uzar. Size iyi geceler dilerim.",
+              "text": "Avukat hanım. Bazı dosyalar uzarsa, insanın işi de uzar. İyi geceler.",
               "style": "phone"
             },
             {
               "speaker": "narrator",
-              "text": "Hat kapandı. Kibar, acelesiz bir ses. Kızgın değildi; kızgın olmasından daha kötüydü.",
+              "text": "Hat kapandı. Bir fısıltı; kadın mı erkek mi, genç mi yaşlı mı, söyleyemezdim. Kızgın değildi; kızgın olmasından daha kötüydü.",
               "fx": "shake"
             },
             {
@@ -405,13 +426,13 @@
         {
           "id": "ARAK_B",
           "kind": "OPTION",
-          "label": "Numarayı geri aramayı dene.",
+          "label": "Gizli numarayı operatörden öğrenip geri ara.",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "narrator",
-                  "text": "Gizli numara. Geri arayacak bir şey yoktu. Ahizeyi yerine koydum, sonra kaldırıp sinyalini dinledim. Hiçbir şey."
+                  "text": "Operatörün çağrı merkezi beni on iki dakika beklettikten sonra kibarca reddetti: “Gizli numara bilgisi yalnızca resmî yazıyla verilir.” Ahizeyi yerine koydum. Hiçbir şey."
                 }
               ]
             }
@@ -419,7 +440,7 @@
           "next": "ARA_HUB",
           "quality": {
             "q": "NEUTRAL",
-            "feedback": "Gizli numara geri aranamaz; fail ararken iz bırakmaz, avukat ararken iz kaybeder."
+            "feedback": "Operatör gizli numarayı avukata vermez; arayanın kimliği ancak savcılığın talebi ve hâkim kararıyla öğrenilir (CMK 135/6). Faili avukat aramaz."
           }
         }
       ]
@@ -497,6 +518,23 @@
             {
               "speaker": "leyla",
               "text": "Ve esas savunmanda, kanıtlayamadığın bir şeyi iddia etme. Gerçek faili göstereceksen, parmağını değil, kâğıdı göster."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bir süre ikimiz de sustuk. Koridordan stajyerlerin sesi geldi; biri bir dilekçenin son sayfasını arıyordu, öbürü fotokopi makinesine sövüyordu."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir şey daha. Yarından sonra bu dosya bitecek. Ne olursa olsun, Ece’nin hayatı yeniden başlayacak; seninki bir sonraki dosyayla devam edecek."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Sakın bu davayı kendi hikâyen yapma. Onun hikâyesi. Sen yalnızca sayfaları doğru sıraya koyan kişisin."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla bunu söylerken ters çerçeveye bakmadı. Bakmamak için uğraştığını gördüm.",
+              "style": "thought"
             }
           ]
         }
@@ -528,6 +566,10 @@
               "speaker": "player",
               "text": "Bir sahte belge, ilk bakışta değil, ikinci ışıkta ele verir kendini.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sayfaların kenarında bayinin damgası, damganın üstünde bir kahve halkası. Biri bu dosyayı aceleyle taramış; ya da aceleyle taranmasını istemiş."
             }
           ]
         }
@@ -626,7 +668,7 @@
         {
           "id": "SUC_A",
           "kind": "OPTION",
-          "label": "Failleri belirsiz: “Nova İK” hattı ve hattın kullanıldığı cihaz için soruşturma",
+          "label": "Failleri belirsiz: Nova İK hattı ve cihazı için soruşturma",
           "responses": [
             {
               "when": { "all": [{ "hasEvidence": "ded_kaan" }, { "hasEvidence": "ev_hts" }] },
@@ -727,7 +769,7 @@
         {
           "id": "SUC_B",
           "kind": "OPTION",
-          "label": "Burak Toprak hakkında: şifreyi biliyordu, tehdit mesajı attı",
+          "label": "Burak Toprak hakkında: şifreyi biliyordu, ayrılıktan sonra tehdit mesajı attı (TCK 106)",
           "responses": [
             {
               "lines": [
@@ -866,6 +908,10 @@
                 {
                   "speaker": "arda",
                   "text": "Bir de… bir kere parayı geç getirdim, yağmur vardı. Telefonda çok kızdı. Ama kibar kızdı. “Arda kardeşim, zaman paradır” dedi. Kibar kızan insandan korkarım ben."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kaskını takmadan merdivenleri indi. Pencereden baktım: motoruna binmedi, bir süre yanında durdu, sonra iterek yürüdü. Bir kurye, ilk kez acelesi yokmuş gibi."
                 }
               ]
             }
@@ -936,7 +982,9 @@
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": -150 },
             { "type": "VAR", "var": "ethics", "op": "inc", "value": 2 },
-            { "type": "VAR", "var": "tanik_etkileme", "op": "set", "value": true }
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "tanik_etkileme", "op": "set", "value": true },
+            { "type": "VAR", "var": "arda_etkileme", "op": "set", "value": true }
           ],
           "quality": {
             "q": "BAD",
@@ -981,6 +1029,11 @@
             {
               "speaker": "narrator",
               "text": "Bir arabanın alarmı çaldı, sonra sustu. Duvarlarda boya kokusu, köşelerde örümcek ağları. Kapalı otoparklar bir şehrin bilinçaltıdır; herkes kullanır, kimse bakmaz."
+            },
+            {
+              "speaker": "player",
+              "text": "Burada kimseyi beklemiyorum, kimseyi takip etmiyorum. Yalnızca bir kuryenin anlattığı yere bakıyorum. Gördüğümü yazacağım; gerisini mahkeme soracak.",
+              "style": "thought"
             }
           ]
         }
@@ -1016,6 +1069,10 @@
             {
               "speaker": "gokhan",
               "text": "Avukat hanım. Duruşmadan sonra bankanın cihaz kaydını kendim istedim. Samsung. Haklıydınız. Dört yüz dosya, bir tanesi yanlış. Belki daha fazlası."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masasındaki ölü sukulentin yerinde yeni bir saksı vardı; küçük, yeşil, kendinden emin. “Kızım getirdi” dedi, sormadan. “Bunu da öldürürsem bir daha getirmeyecekmiş.”"
             }
           ]
         },
@@ -1098,6 +1155,46 @@
             { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 30 },
             { "type": "VAR", "var": "fact_imei_yol", "op": "set", "value": true }
           ]
+        },
+        {
+          "id": "GK2_KAYIT",
+          "kind": "OPTION",
+          "label": "Bankanın cihaz kaydına bakınca ne gördünüz?",
+          "visibleWhen": { "any": [{ "flag": "contra_g1" }, { "hasEvidence": "ev_banka_log" }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Gökhan ekranını bana çevirdi. Bir tablo: tarih, saat, cihaz modeli. Kırmızıyla işaretlenmiş tek bir satır."
+                },
+                {
+                  "speaker": "gokhan",
+                  "text": "Samsung, orta segment. Bu tür işlerde hep aynı model çıkıyor; ucuz, kutusu atılır, kimseye sorulmaz. Bir haftalığına alınır."
+                },
+                {
+                  "speaker": "gokhan",
+                  "text": "Cihazı tanımladıkları an 14.29. Kod 14.26’da gelmiş. Üç dakika. Sanığın kodu okumasıyla cihazın tanımlanması arasında üç dakika var, avukat hanım."
+                },
+                {
+                  "speaker": "gokhan",
+                  "text": "Ben o üç dakikayı bir yıl önce görseydim, sanığa “kimle konuştun” diye sorardım. “Kod verdin mi” diye değil."
+                },
+                { "speaker": "narrator", "text": "Sesi alçaldı. Bardağı aldı; bu sefer içinde kahve vardı." },
+                {
+                  "speaker": "gokhan",
+                  "text": "Dört yüz dosya dedim size. Bu hafta otuzunu açtım. Üçünde aynı model, aynı saat aralığı. Bir şey var. Ne olduğunu bilmiyorum."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Yorgun bir polis, uyanınca tehlikeli olur. Dolandırıcılar için.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 30 }]
         },
         {
           "id": "GK2_ATM",
@@ -1214,6 +1311,14 @@
             {
               "speaker": "nurettin",
               "text": "Biliyorum. Kırk yıl öğretmenlik yaptım; kimin hangi sırada oturduğunu bilirim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Simidinin susamlarını parmağıyla masanın kenarına topluyordu; bir sınıfın tebeşir tozunu toplar gibi. Kantinin televizyonunda hava durumu: Bursa, yağmurlu, haftanın geri kalanı da."
+            },
+            {
+              "speaker": "nurettin",
+              "text": "Duruşmadan sonra eve gidip eşime anlattım. “Avukatı bana kapıyı açtı” dedim. “Katılmama itiraz etmedi.” Eşim “o kız masumsa?” dedi. Ben cevap veremedim."
             }
           ]
         }
@@ -1222,7 +1327,7 @@
         {
           "id": "NU_FOTO",
           "kind": "OPTION",
-          "label": "İlanın fotoğrafları sizde duruyor mu? Mahkemeye sunmanız işe yarayabilir.",
+          "label": "İlanın fotoğrafları sizde duruyor mu?",
           "responses": [
             {
               "lines": [
@@ -1256,7 +1361,7 @@
         {
           "id": "NU_ES",
           "kind": "OPTION",
-          "label": "Eşiniz nasıl?",
+          "label": "Eşiniz nasıl? Diyaliz günleri hâlâ aynı mı?",
           "responses": [
             {
               "lines": [
@@ -1304,6 +1409,7 @@
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": -60 },
             { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
             { "type": "VAR", "var": "nurettin_baski", "op": "set", "value": true }
           ],
           "quality": {
@@ -1337,6 +1443,10 @@
               "speaker": "ece",
               "text": "Bir bankadan iş teklifi gelmişti, biliyor musunuz? Geçen ay. Adli sicil kaydı sordular. “Dava sürüyor” dedim. “Sonra görüşelim” dediler.",
               "expression": "uzgun"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Pasaportun kapağını açtı, kapattı. Fotoğrafta saçları kısaydı; bir yıl önce, her şeyden önce çekilmiş. “Bu kızı tanımıyorum artık” dedi. “Ama ona borçluyum. Onu geri getireceğim.”"
             }
           ]
         },
@@ -1366,7 +1476,7 @@
                 { "speaker": "narrator", "text": "Ece gözlerini kapadı. Bir süre öyle kaldı." },
                 {
                   "speaker": "ece",
-                  "text": "Bir kere. İki saniye. “Ay pardon” dedi, hemen kapattı. Yüzünü görmedim; bir masa, bir el. Parmağında… eski bir yüzük. Yassı, mühür gibi."
+                  "text": "Bir kere. İki saniye. “Ay pardon” dedi, hemen kapattı. Yüzünü görmedim; bir masa, bir el. Parmağında bir yüzük vardı galiba; ışıkta bir an parladı. O kadar."
                 },
                 {
                   "speaker": "narrator",
@@ -1396,9 +1506,48 @@
           ]
         },
         {
+          "id": "EC_SALON",
+          "kind": "OPTION",
+          "label": "Nurettin Bey de salonda olacak. Onu görünce ne hissediyorsun?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Ece bir süre cevap vermedi. Sehpanın üstündeki çay bardağını çevirdi; bir tur, bir tur daha."
+                },
+                {
+                  "speaker": "ece",
+                  "text": "Utanıyorum. Benim hesabıma girdi o para. Benim adım onun cüzdanında bir yıl durdu. Ben görmedim bile o parayı, ama adım gördü."
+                },
+                {
+                  "speaker": "ece",
+                  "text": "İlk celsede bana hiç bakmadı. Bakmasın diye uğraştı; ben de gördüm uğraştığını. İnsan birine bakmamak için de yorulurmuş.",
+                  "expression": "uzgun"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Ona bir şey söylemek zorunda değilsin. Salonda kimse kimseden özür dilemek zorunda değil."
+                },
+                { "speaker": "ece", "text": "Biliyorum. Ama dilemek istersem? Son sözde?" },
+                {
+                  "speaker": "player",
+                  "text": "Son söz senin. Ne söyleyeceğini ben yazmam. Sadece şunu bil: orada söylediğin her şey tutanağa geçer."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Ece başını salladı. Mutfaktan Sevim’in sesi geldi: “Çaylar soğudu.” Kimse kalkmadı."
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 20 }]
+        },
+        {
           "id": "EC_HAZIR",
           "kind": "OPTION",
-          "label": "İkinci celsede sana yeniden soru sorabilirler. Ezber yapma; hatırladığını söyle.",
+          "label": "Ezber yapma; sorarlarsa hatırladığını söyle.",
           "responses": [
             {
               "when": { "flag": "ece_inkar" },
@@ -1561,6 +1710,15 @@
             {
               "speaker": "narrator",
               "text": "Pano kalabalıklaşmıştı. Kırmızı ipler birbirinin üstünden geçiyor, bir yerde düğümleniyordu. Leyla geçerken durdu, hiçbir şey söylemeden bir iğneyi düzeltti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yeni kartlar eskilerin arasına sıkışmıştı: bir rapor, bir fotokopi, bir otopark köşesi. Bir yıl önce bu panoda tek bir kart olurdu: “Hesap sanığın.” Şimdi o kart bir köşede, iğnesi gevşemiş."
+            },
+            {
+              "speaker": "player",
+              "text": "Her yeni kâğıt bir soruyu kapatıyor, bir başkasını açıyor. Doğru iki kartı yan yana koyabilirsem, yarın salonda bir kapı daha kapanır; ya da açılır.",
+              "style": "thought"
             }
           ]
         }
@@ -1578,6 +1736,7 @@
         "clue_ding_nurettin",
         "clue_simyok",
         "clue_iphone_imei",
+        "ev_banka_log",
         "ev_hts",
         "clue_parlama",
         "clue_lamba",
@@ -1607,6 +1766,21 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_imei" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ]
+        },
+        {
+          "id": "CB_CIHAZ",
+          "kind": "COMBINE",
+          "match": { "a": "ev_banka_log", "b": "clue_iphone_imei" },
+          "feedback": {
+            "title": "Samsung, iPhone değil",
+            "text": "Bankaya 3 Kasım 14.29’da tanımlanan cihaz bir Samsung; Ece’nin kutusundaki telefon bir iPhone 8. Hesaba o gün giren el, Ece’nin eli değildi.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_cihaz" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
           ]
         },
@@ -1832,7 +2006,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Duruşmadan önceki gece. İMEİ raporu masamda. Üç hat. Üçüncüsü bir şirket hattı; şirketin adı tanıdık. Numarayı bir yerde gördüm. Nerede?"
+              "text": "Duruşmadan önceki gece. İMEİ raporu masamda. Üç hat. Üçüncüsü kurumsal bir hat, abonesi yazmıyor. On haneli bir numara; sanki bir yerde görmüşüm. Nerede?"
             }
           ]
         },
@@ -1933,12 +2107,26 @@
             },
             {
               "speaker": "narrator",
-              "text": "Gitti. Panoya son bir kez baktım. Kırmızı ipler, iğneler, kartlar. Ortada bir boşluk ya da bir isim; hangisi olduğuna yarın salon karar verecek."
+              "text": "Kapıyı kapatmadan durdu, bir şey unutmuş gibi. Geri dönüp masamdaki kalemi aldı, kapağını taktı, bıraktı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Yarın kalemin ucunu açık bırakma. Kurur. Ben otuz yıldır her duruşmada bir kalem kaybederim; ucu açık olanları."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gitti. Merdivenlerde ayak sesleri, sonra sokak kapısı, sonra yalnızca yağmurun dinmiş olmasının sesi: bir oluktan son damlalar."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Panoya son bir kez baktım. Kırmızı ipler, iğneler, kartlar. Ortada bir boşluk ya da bir isim; hangisi olduğuna yarın salon karar verecek."
             }
           ]
         }
       ],
-      "choices": [{ "id": "ARASON_DEVAM", "kind": "CONTINUE", "label": "Sabah", "role": "PRIMARY", "next": "T_00" }]
+      "choices": [
+        { "id": "ARASON_DEVAM", "kind": "CONTINUE", "label": "Sabah", "role": "PRIMARY", "next": "T_KORIDOR" }
+      ]
     }
   ],
   "triggers": [
@@ -1989,6 +2177,7 @@
     { "evidence": "ev_ilan_foto", "source": { "type": "CHOICE", "id": "NU_FOTO" } },
     { "evidence": "clue_yuzuk_ece", "source": { "type": "CHOICE", "id": "EC_HATIRLA" } },
     { "evidence": "ded_imei", "source": { "type": "RULE", "id": "CB_IMEI" } },
+    { "evidence": "ded_cihaz", "source": { "type": "RULE", "id": "CB_CIHAZ" } },
     { "evidence": "ded_kopya", "source": { "type": "RULE", "id": "CB_KOPYA" } },
     { "evidence": "ded_otopark", "source": { "type": "RULE", "id": "CB_OTOPARK" } },
     { "evidence": "ded_necdet", "source": { "type": "RULE", "id": "CB_NECDET" } },

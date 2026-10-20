@@ -92,7 +92,7 @@ export const scenes: CasePart = {
         sceneObject('ob_kapi', '407 numaralı kapı', OB_KAPI, {
           discovers: 'clue_levha',
           score: { ARASTIRMA: 60 },
-          text: 'Yapıştırma bir “NOVA DİJİTAL” etiketi. Köşesi kalkmış; altındaki pirinç levhada iki kelime okunuyor: “YÖNETİM ARŞİVİ”.',
+          text: 'Yapıştırma bir “NOVA DİJİTAL” etiketi. Köşesi kalkmış; altında harfleri sökülmüş bir pirinç levha. Vida izlerinin arasında tek kelime seçiliyor: “ARŞİV”.',
           short: '407 kapısı',
         }),
         sceneObject('ob_asansor', 'Asansör', OB_ASANSOR, {

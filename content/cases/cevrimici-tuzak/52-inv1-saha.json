@@ -13,24 +13,30 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "OSMANGAZİ · OM İŞ MERKEZİ · 11.10", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "OSMANGAZİ · OM İŞ MERKEZİ · 11.10",
+              "style": "card",
+              "bg": "sokak_yagmur"
+            },
             {
               "speaker": "narrator",
               "text": "Cam cepheli, on katlı, yağmurdan çok temizlik ilacı kokan bir bina. Lobide bir güvenlik masası, bir kiracı panosu, bir kauçuk ağacı."
             },
             {
               "speaker": "narrator",
-              "text": "Güvenlik görevlisi “Nova mı? Müdür bey bilir” dedi ve asansörü gösterdi. Kapılar kapanırken bir sinyal geldi, ardından kayıtlı bir kadın sesi: “Dördüncü kat.”",
+              "text": "Güvenlik görevlisi “Nova mı? Müdür bey bilir” dedi ve asansörü gösterdi. Kapılar kapanırken bir sinyal geldi, ardından kayıtlı bir kadın sesi: “İkinci kat.”",
               "fx": "flash"
             },
             {
               "speaker": "player",
-              "text": "Dördüncü kat. Ece’nin mülakatında Kaan’ın arkasından gelen ses. Nova’nın adresi burası; demek ki bu adres yalnızca kâğıt üstünde değildi.",
+              "text": "Kayıtlı, sıkılmış bir kadın sesi. Bir yerden tanıdık geliyor; nereden, çıkaramadım. Asansörler birbirine benzer.",
               "style": "thought"
             },
             {
               "speaker": "narrator",
-              "text": "İşletme müdürlüğünün kapısı açıktı. İçeride, kırklarının sonunda, ütülü bir takım elbise; masada bir şişe limon kolonyası, iki ince belli bardak."
+              "text": "İşletme müdürlüğünün kapısı açıktı. İçeride ütülü bir takım elbise; masada bir şişe limon kolonyası, iki ince belli bardak.",
+              "bg": "buro"
             },
             {
               "speaker": "necdet",
@@ -38,7 +44,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Çayını karıştırırken parmağındaki eski, yassı bir yüzük bardağa çarptı; tın, tın. Kolonya şişesini uzattı."
+              "text": "Çay geldi. Çayını karıştırırken kaşığı bardağın kenarına iki kez vurdu; tın, tın. Kolonya şişesini uzattı."
             },
             {
               "speaker": "necdet",
@@ -161,7 +167,7 @@
                   "speaker": "necdet",
                   "text": "Keşke efendim. On beş gün tutuyor. Yasal süre, biz de yasaya uyarız. Bir yıl önceyi Allah bilir, bir de kiracılar."
                 },
-                { "speaker": "narrator", "text": "Güldü. Yüzük yine bardağa çarptı." }
+                { "speaker": "narrator", "text": "Güldü. Kaşık yine bardağa çarptı." }
               ]
             }
           ],
@@ -246,6 +252,10 @@
               "speaker": "player",
               "text": "“Nova Dijital” burada bir yıl önce iki ay yaşamış. Bir kâğıt üstünde. Kâğıtlar duvara bir iz bırakır mı?",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Pencereden aşağıda, iş merkezinin otoparkına inen rampa görünüyordu. Bariyer kalkıp iniyordu; kalkıp iniyordu. Bir binanın nabzı."
             }
           ]
         }
@@ -270,7 +280,7 @@
       "chapter": "Bölüm 2 · Soruşturma",
       "eyebrow": "DAVA #02 · SORUŞTURMA",
       "title": "Mavi İletişim",
-      "background": "sokak_gece",
+      "background": "sokak_yagmur",
       "room": { "label": "MAVİ İLETİŞİM · KENT MEYDANI", "character": "onur" },
       "onFirstEnter": [{ "type": "MEET", "character": "onur" }],
       "lines": [
@@ -280,7 +290,7 @@
               "speaker": "narrator",
               "text": "KENT MEYDANI · MAVİ İLETİŞİM · 15.20",
               "style": "card",
-              "bg": "sokak_gece"
+              "bg": "sokak_yagmur"
             },
             {
               "speaker": "narrator",
@@ -310,7 +320,7 @@
         {
           "id": "BAY_SOR",
           "kind": "OPTION",
-          "label": "Sana belge göster demiyorum. SIM değişikliği normalde nasıl yapılır?",
+          "label": "Belge istemiyorum. Hat değişikliği nasıl yapılır?",
           "responses": [
             {
               "lines": [
@@ -376,7 +386,7 @@
         {
           "id": "BAY_BASKI",
           "kind": "OPTION",
-          "label": "Dosyayı göstermezsen mahkemede seni de suçlarım.",
+          "label": "Dosyayı göstermezsen mahkemede seni de sorumlu tutarım, bilesin.",
           "responses": [
             {
               "lines": [
@@ -402,6 +412,7 @@
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": -100 },
             { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
             { "type": "VAR", "var": "onur_baski", "op": "set", "value": true }
           ],
           "quality": {
@@ -438,7 +449,9 @@
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": -150 },
             { "type": "VAR", "var": "ethics", "op": "inc", "value": 2 },
-            { "type": "VAR", "var": "tanik_etkileme", "op": "set", "value": true }
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "tanik_etkileme", "op": "set", "value": true },
+            { "type": "VAR", "var": "onur_para", "op": "set", "value": true }
           ],
           "quality": {
             "q": "BAD",
@@ -599,7 +612,7 @@
         {
           "id": "BURT_RED",
           "kind": "OPTION",
-          "label": "Hayır. O kayıt mahkemeden gelir. Sen de o şifreyi kapat.",
+          "label": "Hayır. Mahkemeden isteriz; şifreyi kapat.",
           "responses": [
             {
               "lines": [
@@ -626,7 +639,7 @@
         {
           "id": "BURT_KABUL",
           "kind": "OPTION",
-          "label": "Çek. Kimse bilmeyecek.",
+          "label": "Çek. Ece için; kimse bilmeyecek, ben de kimseye göstermem.",
           "responses": [
             {
               "lines": [
@@ -647,12 +660,13 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ev_bayi_ekran" },
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": -100 },
-            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
             { "type": "VAR", "var": "illegal_alindi", "op": "set", "value": true }
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Yetkisiz erişimle kişisel veri elde etmeye iştirak (TCK 243, 136). Bu kayıt mahkemede delil olamaz; sunulursa savunmanın güvenilirliği çöker.",
+            "feedback": "Yetkisiz erişime ve kişisel veriyi hukuka aykırı ele geçirmeye azmettirme (TCK 243, 136, 38); ağır meslek ihlali (Av.K. 34). Bu kayıt mahkemede delil olamaz; sunulursa savunmanın güvenilirliği çöker.",
             "category": "USUL_BILGISI"
           }
         }
@@ -688,6 +702,10 @@
             {
               "speaker": "gokhan",
               "text": "Şuna bakın. Hepsi aynı hikâye. Bir ilan, bir hesap, bir kurban. Kimin kurban kimin fail olduğunu ayırmaya vaktim yok. Hesap kimdeyse, dosya onda."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonu titredi; baktı, açmadı. Ekranda “ANNEM” yazıyordu. Ters çevirdi. Dört yüz dosyanın arasında bir annenin araması da beklemek zorundaydı."
             }
           ]
         }
@@ -696,7 +714,7 @@
         {
           "id": "GOK_LOG",
           "kind": "OPTION",
-          "label": "Bankadan cihaz ve oturum kayıtlarını istediniz mi?",
+          "label": "Bankadan cihaz kaydı istediniz mi?",
           "responses": [
             {
               "lines": [
@@ -829,6 +847,10 @@
               "speaker": "player",
               "text": "Bir alet seç, sonra satıra dokun. Rakamlar yalan söylemez; ama sorulmadan da bir şey söylemez.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Banka yazısının altında bir imza, bir kaşe ve bir cümle: “Bilgilerinize arz olunur.” Bir yıl boyunca kimse bu bilgiyi arz edilenin ötesinde okumamış."
             }
           ]
         }
@@ -935,6 +957,10 @@
               "speaker": "player",
               "text": "Öğretmenler hiçbir şeyi atlamaz. Atladıkları şeyi de dipnota yazarlar.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dilekçenin son sayfasında, imzanın altında küçük bir not daha: “Paramın tamamını değil, eşimin bir yıllık yol parasını istiyorum.” Sonra üstü çizilmiş; ama okunuyor."
             }
           ]
         }

@@ -266,7 +266,7 @@ const inv1: EvidenceDef[] = [
     title: 'OM asansörünün kayıtlı sesi',
     shortText: 'Bir sinyal, ardından kayıtlı bir kadın sesi: “Dördüncü kat.”',
     description:
-      'OM İş Merkezi asansörü her katta bir sinyal verip katı kayıtlı bir kadın sesiyle söylüyor. Necdet’in odası dördüncü katta.',
+      'OM İş Merkezi asansörü her katta bir sinyal verip katı kayıtlı bir kadın sesiyle söylüyor. Kayıt her binada aynı firmanın; ses sıkılmış ve tekdüze.',
     sourceLabel: 'OM İş Merkezi',
     icon: 'bulb',
     ...card,
@@ -274,9 +274,9 @@ const inv1: EvidenceDef[] = [
   clue('clue_levha', {
     type: 'FOTOGRAF',
     title: 'Etiketin altındaki eski levha',
-    shortText: '“NOVA DİJİTAL” etiketinin altından “YÖNETİM ARŞİVİ” yazısı görünüyor.',
+    shortText: '“NOVA DİJİTAL” etiketinin altında sökülmüş eski bir levhanın izi.',
     description:
-      'Kat 4, 407 numaralı kapı. Yapıştırma bir “NOVA DİJİTAL” etiketi kenarından kalkmış; altındaki pirinç levhada: “YÖNETİM ARŞİVİ”.',
+      'Kat 4, 407 numaralı kapı. Yapıştırma bir “NOVA DİJİTAL” etiketi kenarından kalkmış; altında harfleri sökülmüş bir pirinç levha. Vida deliklerinin arasında tek okunur kelime: “ARŞİV”.',
     sourceLabel: 'OM İş Merkezi · 4. kat',
     icon: 'magnifier',
     ...card,
@@ -383,9 +383,9 @@ const deliveries: EvidenceDef[] = [
   evidence('ev_imei_rapor', {
     type: 'TELEFON_KAYDI',
     title: 'İMEİ sorgu raporu (35 491207 …)',
-    shortText: 'Aynı Samsung’da üç hat: Nova İK hattı, Ece’nin kopya SIM’i ve bir şirket hattı.',
+    shortText: 'Aynı Samsung’da üç hat: Nova İK hattı, Ece’nin kopya SIM’i ve kurumsal bir hat.',
     description:
-      'Savcılık soruşturmasında hâkim kararıyla (CMK 135/6): IMEI 35 491207 63 8812 2 ile kullanılan hatlar — 0532 614 41 07 (abone: Arda Kılıç; 1–4 Kasım), 0555 … (Ece Yalın, kopya SIM; 4 Kasım), 0533 287 19 90 (abone: OM İş Merkezi Yönetim Ltd. Şti.; 2 Kasım 23.48, 6 dk).',
+      'Savcılık soruşturmasında hâkim kararıyla (CMK 135/6): IMEI 35 491207 63 8812 2 ile kullanılan hatlar — 0532 614 41 07 (abone: Arda Kılıç; 1–4 Kasım), 0555 … (Ece Yalın, kopya SIM; 4 Kasım), 0533 287 19 90 (kurumsal hat; abone bilgisi ayrıca istendi; 2 Kasım 23.48, 6 dk).',
     sourceLabel: 'Bursa C. Başsavcılığı',
     icon: 'phone',
     side: 'DEFENSE',
@@ -463,9 +463,9 @@ const ara: EvidenceDef[] = [
   clue('clue_yuzuk_ece', {
     type: 'TANIK_IFADESI',
     title: 'Kameranın açıldığı iki saniye',
-    shortText: 'Ece: “Kamerası bir an açıldı; yüzünü değil, elini gördüm. Eski bir yüzük.”',
+    shortText: 'Ece: “Kamerası bir an açıldı; yüzünü değil, elini gördüm. Bir yüzük parladı.”',
     description:
-      'Ece, mülakatta Kaan Bey’in kamerasının iki saniyeliğine açıldığını hatırladı: masada bir el, parmağında eski, yassı bir mühür yüzük.',
+      'Ece, mülakatta Kaan Bey’in kamerasının iki saniyeliğine açıldığını hatırladı: masada bir el, parmakta ışıkta parlayan bir yüzük.',
     sourceLabel: 'Ece ile ara görüşme',
     icon: 'bulb',
     combinable: false,
@@ -564,6 +564,17 @@ const insights: EvidenceDef[] = [
     side: 'DEFENSE',
     strength: 'STRONG',
   }),
+  insight('ded_cihaz', {
+    type: 'DIJITAL',
+    title: 'Tanımlanan cihaz sanığın telefonu değil',
+    shortText: 'Bankaya tanımlanan Samsung SM-A546E; Ece’nin telefonu bir iPhone 8.',
+    description:
+      'Banka kaydındaki yeni cihaz (Samsung SM-A546E, 3 Kasım 14.29) ile Ece’nin kutusundaki telefon (Apple iPhone 8) farklı: 4 Kasım işlemleri Ece’nin telefonundan yapılmadı.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+  }),
   insight('ded_kopya', {
     type: 'FOTOGRAF',
     title: 'Fotokopi, gönderilen fotoğraftan basıldı',
@@ -627,6 +638,8 @@ export const evidencePart: CasePart = {
     { from: 'ded_sim', to: 'ev_sim_dokum', type: 'DERIVED_FROM' },
     { from: 'ded_imei', to: 'clue_iphone_imei', type: 'DERIVED_FROM' },
     { from: 'ded_imei', to: 'ev_hts', type: 'DERIVED_FROM' },
+    { from: 'ded_cihaz', to: 'ev_banka_log', type: 'DERIVED_FROM' },
+    { from: 'ded_cihaz', to: 'clue_iphone_imei', type: 'DERIVED_FROM' },
     { from: 'ded_kopya', to: 'clue_parlama', type: 'DERIVED_FROM' },
     { from: 'ded_kopya', to: 'clue_lamba', type: 'DERIVED_FROM' },
     { from: 'ded_otopark', to: 'clue_arda_otopark', type: 'DERIVED_FROM' },

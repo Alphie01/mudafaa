@@ -1,5 +1,6 @@
 import {
   back,
+  dec,
   chosen,
   choiceNode,
   conversation,
@@ -31,13 +32,13 @@ export const inv1Saha: CasePart = {
       room: { label: 'OM İŞ MERKEZİ · İŞLETME MÜDÜRLÜĞÜ', character: 'necdet' },
       onFirstEnter: [{ type: 'MEET', character: 'necdet' }],
       lines: B(S`
-        = OSMANGAZİ · OM İŞ MERKEZİ · 11.10 @buro
+        = OSMANGAZİ · OM İŞ MERKEZİ · 11.10 @sokak_yagmur
         - Cam cepheli, on katlı, yağmurdan çok temizlik ilacı kokan bir bina. Lobide bir güvenlik masası, bir kiracı panosu, bir kauçuk ağacı.
-        - Güvenlik görevlisi "Nova mı? Müdür bey bilir" dedi ve asansörü gösterdi. Kapılar kapanırken bir sinyal geldi, ardından kayıtlı bir kadın sesi: "Dördüncü kat." !flash
-        ~ Dördüncü kat. Ece'nin mülakatında Kaan'ın arkasından gelen ses. Nova'nın adresi burası; demek ki bu adres yalnızca kâğıt üstünde değildi.
-        - İşletme müdürlüğünün kapısı açıktı. İçeride, kırklarının sonunda, ütülü bir takım elbise; masada bir şişe limon kolonyası, iki ince belli bardak.
+        - Güvenlik görevlisi "Nova mı? Müdür bey bilir" dedi ve asansörü gösterdi. Kapılar kapanırken bir sinyal geldi, ardından kayıtlı bir kadın sesi: "İkinci kat." !flash
+        ~ Kayıtlı, sıkılmış bir kadın sesi. Bir yerden tanıdık geliyor; nereden, çıkaramadım. Asansörler birbirine benzer.
+        - İşletme müdürlüğünün kapısı açıktı. İçeride ütülü bir takım elbise; masada bir şişe limon kolonyası, iki ince belli bardak. @buro
         necdet: Buyurun efendim, buyurun! Avukat hanım, değil mi? Güvenlik aradı. Necdet Sarı, işletme müdürü. Oturun, bir çay söyleyeyim.
-        - Çayını karıştırırken parmağındaki eski, yassı bir yüzük bardağa çarptı; tın, tın. Kolonya şişesini uzattı.
+        - Çay geldi. Çayını karıştırırken kaşığı bardağın kenarına iki kez vurdu; tın, tın. Kolonya şişesini uzattı.
         necdet: Kolonya alır mısınız? Yağmurda iyi gelir. Biz burada güven satıyoruz efendim; misafire kolonya, kiracıya güler yüz.
         - Duvarda çerçeveli bir belge: "Yılın Yöneticisi — Osmangazi Ticaret Odası, 2019". Yanında bir takvim, bir de saksıda iyi bakılmış bir orkide.
         ~ Her şey yerli yerinde. Bu odada kimse bir şey kaybetmez; kaybetse de bulur.
@@ -79,7 +80,7 @@ necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazıl
           score: { ARASTIRMA: 10 },
           responses: B(S`
             necdet: Keşke efendim. On beş gün tutuyor. Yasal süre, biz de yasaya uyarız. Bir yıl önceyi Allah bilir, bir de kiracılar.
-            - Güldü. Yüzük yine bardağa çarptı.
+            - Güldü. Kaşık yine bardağa çarptı.
           `),
           next: '$stay',
         }),
@@ -119,6 +120,7 @@ necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazıl
         - Koridor halı ve toz kokuyordu. Kapıların çoğu kapalıydı; birinin ardından klavye sesi, bir başkasından bir radyo.
         - Asansörün yanında bir pano, panonun yanında bir yangın tüpü, ilerde bir saksı. Koridorun sonunda tek bir kapı, numarası 407, kapısının önünde paspas bile yok.
         ~ "Nova Dijital" burada bir yıl önce iki ay yaşamış. Bir kâğıt üstünde. Kâğıtlar duvara bir iz bırakır mı?
+        - Pencereden aşağıda, iş merkezinin otoparkına inen rampa görünüyordu. Bariyer kalkıp iniyordu; kalkıp iniyordu. Bir binanın nabzı.
       `),
       instruction: 'Koridorda dikkat çeken yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.',
       costVar: 'taps_k',
@@ -131,11 +133,11 @@ necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazıl
     conversation('INV1_BAYI', {
       ...INV1,
       title: 'Mavi İletişim',
-      background: 'sokak_gece',
+      background: 'sokak_yagmur',
       room: { label: 'MAVİ İLETİŞİM · KENT MEYDANI', character: 'onur' },
       onFirstEnter: [{ type: 'MEET', character: 'onur' }],
       lines: B(S`
-        = KENT MEYDANI · MAVİ İLETİŞİM · 15.20 @sokak_gece
+        = KENT MEYDANI · MAVİ İLETİŞİM · 15.20 @sokak_yagmur
         - Dar bir dükkân. Duvarda kılıflar, camda "SIM KART · FATURA · YEDEK PARÇA". Tezgâhta mavi tişörtlü bir genç telefonla oyun oynuyordu.
         onur: Abla hoş geldin, kılıf mı, hat mı? Kampanya var, internetli.
         > Avukatım. Geçen yıl 4 Kasım'da burada bir SIM değişikliği yapılmış. Kimin yaptığını öğrenmek istiyorum.
@@ -144,7 +146,7 @@ necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazıl
         - Arka odadan bir radyo sesi geliyordu; bir futbol yorumcusu hakemi suçluyordu. Onur radyonun sesini kısmadı; arkasına saklanmak ister gibi.
       `),
       choices: [
-        option('BAY_SOR', 'Sana belge göster demiyorum. SIM değişikliği normalde nasıl yapılır?', {
+        option('BAY_SOR', 'Belge istemiyorum. Hat değişikliği nasıl yapılır?', {
           discovers: 'clue_onur_vekil',
           score: { SORGULAMA: 40 },
           responses: B(S`
@@ -166,9 +168,9 @@ necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazıl
           `),
           next: '$stay',
         }),
-        option('BAY_BASKI', 'Dosyayı göstermezsen mahkemede seni de suçlarım.', {
+        option('BAY_BASKI', 'Dosyayı göstermezsen mahkemede seni de sorumlu tutarım, bilesin.', {
           score: { USUL_BILGISI: -100 },
-          effects: [inc('ethics'), raise('onur_baski')],
+          effects: [inc('ethics'), dec('cred'), raise('onur_baski')],
           bad: 'Muhtemel bir tanığı korkutmak, tanığı etkilemeye teşebbüs sayılabilir (TCK 277) ve meslek kurallarına aykırıdır.',
           responses: B(S`
             onur/kizgin: Beni mi tehdit ediyorsun abla? Patron! Patron, avukat tehdit ediyor!
@@ -180,7 +182,7 @@ necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazıl
         }),
         option('BAY_PARA', 'Bir kahve parası bırakayım; dosyaya bir göz atayım.', {
           score: { USUL_BILGISI: -150 },
-          effects: [inc('ethics', 2), raise('tanik_etkileme')],
+          effects: [inc('ethics', 2), dec('cred'), raise('tanik_etkileme'), raise('onur_para')],
           bad: 'Tanığa ya da kayıt tutana menfaat teklif etmek tanığı etkilemedir (TCK 277) ve kişisel verileri hukuka aykırı elde etmeye azmettirme oluşturabilir (TCK 136, 38). Ağır meslek ihlali (Av.K. 34).',
           responses: B(S`
             - Onur'un gözleri banknotta bir an durdu. Sonra kameraya, tavandaki küçük siyah göze.
@@ -251,7 +253,7 @@ necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazıl
       background: 'sokak_gece',
       prompt: { speaker: 'burak', text: 'Ne diyorsun? Kimse bilmez. Ece için.' },
       choices: [
-        option('BURT_RED', 'Hayır. O kayıt mahkemeden gelir. Sen de o şifreyi kapat.', {
+        option('BURT_RED', 'Hayır. Mahkemeden isteriz; şifreyi kapat.', {
           score: { USUL_BILGISI: 60 },
           effects: [raise('burak_red')],
           good: 'Yetkisiz erişimle alınan kayıt suçtur (TCK 243, 136) ve delil olarak kullanılamaz (Anayasa 38/6; CMK 206/2-a, 217/2). Doğru yol mahkeme yazısıdır (CMK 177).',
@@ -262,11 +264,11 @@ necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazıl
           `),
           next: '$return',
         }),
-        option('BURT_KABUL', 'Çek. Kimse bilmeyecek.', {
+        option('BURT_KABUL', 'Çek. Ece için; kimse bilmeyecek, ben de kimseye göstermem.', {
           discovers: 'ev_bayi_ekran',
           score: { USUL_BILGISI: -100 },
-          effects: [inc('ethics'), raise('illegal_alindi')],
-          bad: 'Yetkisiz erişimle kişisel veri elde etmeye iştirak (TCK 243, 136). Bu kayıt mahkemede delil olamaz; sunulursa savunmanın güvenilirliği çöker.',
+          effects: [inc('ethics', 2), dec('cred'), raise('illegal_alindi')],
+          bad: 'Yetkisiz erişime ve kişisel veriyi hukuka aykırı ele geçirmeye azmettirme (TCK 243, 136, 38); ağır meslek ihlali (Av.K. 34). Bu kayıt mahkemede delil olamaz; sunulursa savunmanın güvenilirliği çöker.',
           responses: B(S`
             - Burak beş dakika bile sürmedi. Ekranda Ece'nin hattı, 4 Kasım, 10.12: "SIM değişikliği — Mavi İletişim." Telefonuyla bir fotoğraf çekti, bana gönderdi.
             burak: Al. Kimse bilmez.
@@ -289,9 +291,10 @@ necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazıl
         gokhan: Ece Yalın. Hatırlıyorum. Ağladı. Hepsi ağlar. Buyurun, ne soracaksınız?
         - Duvarda bir pano, panoda onlarca dekont fotokopisi, her birinin üstünde bir isim. İsimlerin çoğu genç. Bazılarının yanında soru işareti.
         gokhan: Şuna bakın. Hepsi aynı hikâye. Bir ilan, bir hesap, bir kurban. Kimin kurban kimin fail olduğunu ayırmaya vaktim yok. Hesap kimdeyse, dosya onda.
+        - Telefonu titredi; baktı, açmadı. Ekranda "ANNEM" yazıyordu. Ters çevirdi. Dört yüz dosyanın arasında bir annenin araması da beklemek zorundaydı.
       `),
       choices: [
-        option('GOK_LOG', 'Bankadan cihaz ve oturum kayıtlarını istediniz mi?', {
+        option('GOK_LOG', 'Bankadan cihaz kaydı istediniz mi?', {
           score: { SORGULAMA: 30 },
           effects: [raise('fact_polis_eksik')],
           responses: B(S`
@@ -343,6 +346,7 @@ necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazıl
         - Banka yazısı tek sayfa: beş satır, beş saat, beş tutar. Para bir nehir gibi girmiş, deltaya varmış gibi dağılmış.
         - Yetmiş beş bin lira, yirmi beş dakikada üçe bölünmüş. Bir kısmı bir kripto platformuna, bir kısmı bir isme, bir kısmı bir ATM'ye. Para hızlı; iz yavaş.
         ~ Bir alet seç, sonra satıra dokun. Rakamlar yalan söylemez; ama sorulmadan da bir şey söylemez.
+        - Banka yazısının altında bir imza, bir kaşe ve bir cümle: "Bilgilerinize arz olunur." Bir yıl boyunca kimse bu bilgiyi arz edilenin ötesinde okumamış.
       `),
       header: { left: 'VADESİZ HESAP · ECE YALIN', right: '01.11–04.11.2025' },
       columns: [
@@ -411,6 +415,7 @@ necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazıl
         - Nurettin Aksoy'un dilekçesi temiz bir el yazısıyla, sonra bilgisayarda yeniden yazılmış. Paragraflar numaralı. Bir yerde, parantez içinde, bir dipnot.
         - İlk sayfanın köşesinde bir not: "Eşimin diyaliz günleri: Salı, Perşembe, Cumartesi. Duruşmaların bu günlere denk getirilmemesini saygılarımla arz ederim."
         ~ Öğretmenler hiçbir şeyi atlamaz. Atladıkları şeyi de dipnota yazarlar.
+        - Dilekçenin son sayfasında, imzanın altında küçük bir not daha: "Paramın tamamını değil, eşimin bir yıllık yol parasını istiyorum." Sonra üstü çizilmiş; ama okunuyor.
       `),
       header: { left: 'ŞİKÂYET DİLEKÇESİ · N. AKSOY', right: '04.11.2025' },
       columns: [

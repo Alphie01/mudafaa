@@ -1,0 +1,503 @@
+{
+  "outcomes": [
+    {
+      "id": "ETIK",
+      "class": "CONVICTION",
+      "priority": 0,
+      "when": { "flag": "etik_garaj" },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "3 yıl 9 ay hapis",
+      "verdictText": "Sanık Volkan Eren’in TCK 85/1 uyarınca kusur durumu gözetilerek 3 YIL hapis cezası ile cezalandırılmasına; eylem bilinçli taksirle işlendiğinden TCK 22/3 uyarınca cezanın yarısı oranında artırılarak 4 YIL 6 AY; sanığın duruşmadaki tutumu gözetilerek TCK 62/1 uyarınca 3 YIL 9 AY HAPİS cezası ile cezalandırılmasına; bilinçli taksir nedeniyle TCK 50/4’ün, cezanın süresi nedeniyle TCK 51/1’in uygulanmasına yer olmadığına; TCK 53/6 uyarınca sürücü belgesinin 2 YIL süreyle geri alınmasına; hukuka aykırı yoldan elde edilen fotoğrafların hükme esas alınmamasına; müdafi hakkındaki suç duyurusunun ve dosya örneğinin baroya gönderilmesine; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "reasoning": [
+        {
+          "text": "Savunmanın sunduğu fotoğraflar, rızaya aykırı girilen bir işyerinde çekildiğinden hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2)."
+        },
+        {
+          "text": "Hukuka aykırı delille kurulan savunma, hukuka uygun delillerin de ikna gücünü zayıflatmış; şikâyet üzerine aracın hurdaya çıkarıldığı anlaşılmıştır."
+        },
+        {
+          "when": { "ref": "kusur_yok" },
+          "text": "Sanığın kırmızı ışık ihlali iddiası duruşmada sarsılmış olsa da mahkeme iddianamedeki nitelendirmeyi esas almıştır."
+        }
+      ],
+      "legalBasis": "TCK 85/1, 22/3, 62/1, 53/6; Anayasa 38/6; CMK 206/2-a, 217/2, 273/1; TCK 116/2; Av.K. md. 34",
+      "xp": 0,
+      "howToReach": "Kestel’de kapalı garaja izinsiz girip fotoğraf çekmek. (Bu bir uyarı sonudur: delili savcılığa bildir, kendin toplama.)",
+      "ethicsCard": "Avukat, şüpheli olabilecek birinin işyerine rızası olmadan girerek delil toplayamaz: bu hem suçtur (TCK 116/2) hem de elde edilen delil hukuka aykırıdır (Anayasa 38/6, CMK 206/2-a, 217/2). Doğru yol, kamuya açık yerden gördüğünü not almak ve somut bilgiyi savcılığa bildirmektir (CMK 158). Avukatlık mesleğinin gerektirdiği saygı ve güven (Av.K. md. 34) ile TBB Meslek Kuralları bu çizgiyi açıkça çizer.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "Hüküm okunurken kimse bana bakmadı. Savcı bile. Bu, bakmaktan daha ağırdı."
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — AYNI AKŞAM", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda bir zarf: Rüstem Usta’nın avukatından şikâyet dilekçesinin örneği. Altında baro disiplin kurulunun bildirimi. Kâğıtlar düzgün, köşeleri hizalı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla odama girdi. Elinde ince, kırmızı kapaklı bir kitapçık: meslek kuralları. Masaya bıraktı. Hiçbir şey söylemedi."
+            },
+            { "speaker": "narrator", "text": "Kapıda durdu. Ters çerçeveyi düşündüm; onun masasındaki. Sormadım." },
+            {
+              "speaker": "player",
+              "text": "Bir garajın kapısı aralıktı. İçeride bir panelvan vardı. Ben de içeri girdim. Panelvan o hafta hurdaya çıkarıldı; Volkan üç yıl dokuz ay aldı.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Doğruyu bulmak ile doğru yoldan bulmak arasındaki fark. Bunu bir dosyada değil, bir müvekkilin hayatında öğrendim.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "bebek_ela" },
+          "lines": [
+            { "speaker": "narrator", "text": "Gül koridorda bebeği göğsüne bastırmış, bana bakmadan yanımdan geçti." }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Av. Deniz Arslan hakkında disiplin soruşturması başlatıldı.",
+              "style": "card",
+              "fx": "fade"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BERAAT_B",
+      "class": "ACQUITTAL",
+      "priority": 1,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "flag": "gercek_neden" },
+          { "ref": "kusur_yok" },
+          { "cmp": [{ "var": "pers" }, ">=", 8] },
+          { "cmp": [{ "score": "final" }, ">=", 8500] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok",
+      "verdictText": "Sanık Volkan Eren’in üzerine atılı taksirle öldürme suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; hakkındaki adli kontrol tedbirlerinin kaldırılmasına; CMK 141/1 ve 142 kapsamındaki tazminat haklarının bildirilmesine (CMK 231/3); karar ve dosya örneklerinin, Tarık Sezer hakkında yürütülen soruşturmaya eklenmek üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; istinaf yolu açık olmak üzere karar verildi.",
+      "reasoning": [
+        {
+          "text": "Denetleyici kayıtları ve tanık beyanlarına göre kavşakta o gece taşıt ve yaya yeşili birlikte yanmış; sanığa kırmızı ışık ihlali atfedilememiştir."
+        },
+        {
+          "text": "Adli Tıp raporuna göre ölüme yol açan kafa travması ve 56 cm’deki kırık, ayakta duran yayaya yüksek tamponlu bir aracın birincil çarpmasıyla oluşmuştur."
+        },
+        {
+          "text": "Savcılık yazısıyla tespit edilen panelvanın sağ ön köşesi kazanın ertesi günü onarılmış, boya maktulün montundaki parçayla eşleşmiştir."
+        },
+        {
+          "text": "Sanığın aracının yerde yatan maktule teması ikincil olup ölümle illiyet bağı kurulamamıştır; atılı suç sanık tarafından işlenmemiştir."
+        },
+        {
+          "when": { "flag": "mutalaa_beraat" },
+          "text": "Cumhuriyet savcısı da esas hakkındaki mütalaasında sanığın beraatini talep etmiştir."
+        }
+      ],
+      "legalBasis": "CMK 223/2-b; TCK 22/2, 85/1 (illiyet); CMK 141/1, 142, 231/3",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 120] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 120] }, 1000] }
+        }
+      },
+      "howToReach": "Ölümcül darbenin başka bir araçtan geldiğini zincirle kur: ATK + sırt sıyrıkları (tahta), ikinci aracın izi (fren/cam/yükseklik/saat), boya + kamera ile aracın tarifi, somut suç duyurusu; kürsüde kırmızı ışık iddiasını çürüt ve esas savunmada 223/2-b’yi iste.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“Beraatine” kelimesi salona düştüğünde Volkan’ın dizleri boşaldı. Kürsünün kenarına tutundu. Gözlerini kapadı. Açtığında ilk baktığı yer Serkan’dı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Serkan oturuyordu. Çerçeve dizlerinde. Yüzü taş gibiydi. Sonra, çok yavaş, Volkan’a doğru başını eğdi. Bir kere. Selam mı, kabul mü, yorgunluk mu; kimse bilmeyecekti."
+            },
+            { "speaker": "narrator", "text": "ADLİYE ÖNÜ — ÖĞLEDEN SONRA", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Yağmur durmuştu. Uludağ’ın üstünde bulutlar yırtılmış, soluk bir güneş merdivenlere düşüyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gül bebek taşıyıcısını Volkan’ın kollarına verdi. Volkan bebeği tutmayı bilmiyormuş gibi tuttu; sonra bildi."
+            },
+            { "speaker": "gul", "text": "Tut. Ellerin temiz." },
+            { "speaker": "volkan", "text": "Hissettim avukat hanım. Hâlâ hissediyorum. Bu geçecek mi?" },
+            { "speaker": "narrator", "text": "Bir an düşündüm. Yalan söylemek kolaydı." },
+            {
+              "speaker": "player",
+              "text": "Hayır. Ama artık neyi hissettiğinizi biliyorsunuz. Bir kadının son anına tanık oldunuz. Ona siz yol açmadınız. İkisi aynı yük değil."
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "serkan_saygi" }, { "flag": "serkan_teslim" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Merdivenlerin dibinde Serkan durdu. Vekili bir şey söyledi; dinlemedi. Bana döndü."
+            },
+            { "speaker": "serkan", "text": "Annemin adını düzgün söylediniz. Hatice. Hepsinde." },
+            { "speaker": "serkan", "text": "Ceza istiyordum. Hâlâ istiyorum. Doğru adama." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — O GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla odasındaydı. Masasında açılmamış sigara paketi. Paketi aldı, çekmecesine koydu, çekmeceyi kapattı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bilirkişiyi kendi rakamlarıyla yendin. Bu her avukatın yapabileceği bir şey değil. Ama asıl yaptığın başkaydı: kimseyi kovalamadın."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir kadın kırmızıda geçmedi. Bir adam kırmızıda geçmedi. Kırmızıda geçen bir panelvan vardı ve şimdi bir adı var.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tarık Sezer hakkında taksirle öldürme ve yardım ya da bildirim yükümlülüğünün yerine getirilmemesi suçlarından kamu davası açıldı.",
+              "style": "card",
+              "fx": "fade"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BERAAT_E",
+      "class": "ACQUITTAL",
+      "priority": 2,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "any": [{ "flag": "supheden" }, { "flag": "gercek_neden" }] },
+          { "ref": "kusur_yok" },
+          { "ref": "findings" },
+          { "cmp": [{ "var": "pers" }, ">=", 6] },
+          { "cmp": [{ "score": "final" }, ">=", 7000] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok",
+      "verdictText": "Sanık Volkan Eren’in üzerine atılı taksirle öldürme suçunu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; hakkındaki adli kontrol tedbirlerinin kaldırılmasına; CMK 141/1 ve 142 kapsamındaki tazminat haklarının bildirilmesine (CMK 231/3); istinaf yolu açık olmak üzere karar verildi.",
+      "reasoning": [
+        {
+          "when": { "flag": "contra_n2" },
+          "text": "Görgü tanığı, Gökdere yönündeki ışığı durduğu yerden göremediğini ve çarpma anını değil sonrasını gördüğünü beyan etmiştir."
+        },
+        {
+          "when": { "flag": "contra_h" },
+          "text": "Belediye kayıtları ve teknisyenin beyanına göre kavşak denetleyicisi o gece arızalıdır; çatışan yeşil uyarısı bastırılmıştır."
+        },
+        {
+          "when": { "any": [{ "flag": "contra_c1" }, { "flag": "contra_c2" }] },
+          "text": "Soruşturma evresindeki bilirkişi raporunun hız hesabı sanığın aracına ait olmayan bir ize, ışık tespiti ise kayda değil plana dayanmaktadır."
+        },
+        {
+          "when": { "flag": "contra_heyet" },
+          "text": "Heyet raporundaki tali kusur değerlendirmesi araç verisiyle desteklenmemiştir."
+        },
+        {
+          "text": "Ölümcül çarpmanın sanığın aracından kaynaklandığı şüpheye yer bırakmayacak biçimde ispatlanamamıştır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2)."
+        }
+      ],
+      "legalBasis": "CMK 223/2-e; Anayasa 38/4; AİHS 6/2; CMK 141/1, 142, 231/3",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 100] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
+        }
+      },
+      "howToReach": "Kırmızı ışık iddiasını kürsüde çürüt (taksici ya da teknisyen ya da bilirkişi), en az beş çelişki aç, mütalaaya cevap ver ve esas savunmada şüpheden beraati iste.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“Sabit olmadığından… beraatine.” Volkan kürsünün kenarını bıraktı. Gül bebeği göğsüne bastırdı ve ilk kez, salonun ortasında, sesli ağladı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Katılan vekili dosyasını kapattı. Koridora çıkarken yanındaki stajyere fısıldadı, ama duyulacak kadar yüksek:"
+            },
+            { "speaker": "vekil", "text": "Şüpheden. Bunu da yazın bir kenara." },
+            { "speaker": "narrator", "text": "ADLİYE ÖNÜ — ÖĞLEDEN SONRA", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Yağmur incelmişti, dinmemişti. Volkan merdivenin başında durdu, gökyüzüne baktı, sonra bana."
+            },
+            { "speaker": "volkan", "text": "Beraat. Ama ben hâlâ hissediyorum avukat hanım." },
+            { "speaker": "player", "text": "Hissettiğiniz, olan değil. Mahkeme olanı tarttı." },
+            { "speaker": "volkan", "text": "Ya olan buysa? Ya ben…" },
+            {
+              "speaker": "player",
+              "text": "O zaman da bunu bir delil söyler. Bir his değil. Bugün hiçbir delil bunu söylemedi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Volkan başını salladı. Gül’ün elinden bebek taşıyıcısını aldı. İlk kez, sanki ağırlığını ölçer gibi, iki eliyle havaya kaldırdı."
+            },
+            { "speaker": "volkan", "text": "Bir gün soracak. “Baba, o gece ne oldu?” diye. Ne diyeceğim?" },
+            {
+              "speaker": "player",
+              "text": "Doğruyu. Yeşil gördüğünüzü. Yerde koyu bir şey gördüğünüzü. Durduğunuzu. Montunuzu örttüğünüzü. Mahkemenin sizi suçlu bulmadığını."
+            },
+            { "speaker": "volkan", "text": "Ve hissettiğimi." },
+            { "speaker": "player", "text": "Onu da. Ama onu en son söyleyin." }
+          ]
+        },
+        {
+          "when": { "flag": "suc_dayanakli" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Suç duyurum hâlâ bir savcının masasında. Koyu yeşil bir panelvan, bir sanayi sitesi, bir isim olmayan bir dosya. Belki bir gün bir isim olur.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "suc_dayanakli" } },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "O gece Gökdere’de kim vardı, bilmiyorum. Bir iz, birkaç cam parçası, bir şüphe. Hiçbiri bir isim değil.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "serkan_saygi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Serkan merdivenlerin dibinde durdu. Bana değil, Volkan’a baktı. Uzun uzun. Sonra yürüdü gitti."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir oğul cezasını almadı. Bir adam suçsuzluğunu tam olarak alamadı. Bir şüphe, iki adamın arasında, bir kavşak kadar geniş.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — O GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Gül’den bir mesaj: bir fotoğraf. Ela, babasının parmağını tutuyor. Altında tek kelime: “Teşekkürler.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla odasından çıktı, paltosunu giydi. Kapıda durdu, telefonumdaki fotoğrafa baktı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Şüpheden beraat. Bazıları bunu yarım zafer sayar. Ben otuz yıldır şunu biliyorum: şüphe, bir insanı yanlış bir kesinlikten korur. Bu az şey değil."
+            },
+            { "speaker": "leyla", "text": "Ama o koyu araç hâlâ orada bir yerde. Bunu da unutma." },
+            {
+              "speaker": "player",
+              "text": "Bazen adalet bir kapıyı açar ama ışığı yakmaz. Bu sefer en azından kırmızı değildi.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "INDIRIM",
+      "class": "RECHARACTERIZED",
+      "priority": 3,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "any": [{ "flag": "arg_basit" }, { "flag": "mutalaa_basit" }] },
+          { "cmp": [{ "score": "final" }, ">=", 3000] }
+        ]
+      },
+      "stamp": "İNDİRİM",
+      "stampTone": "amber",
+      "sentence": "1 yıl 8 ay hapis → 600 gün adli para cezası",
+      "verdictText": "Sanık Volkan Eren’in eyleminin bilinçli taksir değil basit taksir kapsamında kaldığı kabul edilerek TCK 85/1 uyarınca kusurunun hafifliği gözetilerek alt sınırdan 2 YIL hapis cezası ile cezalandırılmasına; sanığın olay sonrası yardım ve bildirim davranışı ile duruşmadaki tutumu gözetilerek TCK 62/1 uyarınca 1 YIL 8 AY HAPİS cezasına; TCK 50/1-a ve 50/4 uyarınca bu cezanın 600 GÜN adli para cezasına çevrilmesine, TCK 52/2 uyarınca günlüğü 100 TL’den 60.000 TL ADLİ PARA CEZASINA; TCK 53/6 uyarınca sürücü belgesinin 6 AY süreyle geri alınmasına; adli kontrol tedbirlerinin kaldırılmasına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "reasoning": [
+        {
+          "text": "Kırmızı ışık ve hız iddiaları duruşmada desteklenmemiş; sanığın neticeyi öngördüğü hâlde davrandığı (TCK 22/3) ispatlanamamıştır."
+        },
+        {
+          "text": "Ancak mahkeme, sanığın yağışlı havada yaya geçidine yaklaşırken özen yükümlülüğünü tam yerine getirmediği ve ölüm neticesiyle illiyetin bulunmadığının ispatlanamadığı kanaatine varmıştır."
+        },
+        {
+          "text": "Taksirli suçlarda hükmolunan hapis cezası, bilinçli taksir hâli dışında adli para cezasına çevrilebilir (TCK 50/4)."
+        },
+        { "when": { "flag": "kabul" }, "text": "Sanık duruşmada kusurunu kabul etmiştir." }
+      ],
+      "legalBasis": "TCK 85/1, 22/2, 22/4, 62/1, 50/1-a, 50/4, 52/2, 53/6; CMK 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 85] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
+        }
+      },
+      "howToReach": "Bilinçli taksirin düşmesini ve basit taksiri iste (mütalaaya cevapta ya da terditli esas savunmada).",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "Hapis yok. Para cezası, ehliyet. Gül derin bir nefes verdi; uzun zamandır tuttuğu bir nefes. Volkan kıpırdamadı."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU — ÖĞLEN", "style": "card", "bg": "adliye" },
+            { "speaker": "volkan", "text": "Demek ki biraz öldürdüm. Altmış bin liralık." },
+            {
+              "speaker": "narrator",
+              "text": "Cevap veremedim. Gül klasörü kapattı; kırmızı klasörü. Çantasına koydu."
+            },
+            { "speaker": "gul", "text": "Eve gidiyoruz. Ela acıkmıştır." }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "serkan_teslim" } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Serkan koridorun sonunda, vekiliyle konuşuyordu. “İstinaf” kelimesini duydum. Sonra “para” kelimesini; tükürür gibi."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "serkan_teslim" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Serkan bana doğru yürüdü, durdu, bir şey söyleyecekti. Söylemedi. Annesinin mesajı dosyadaydı; hâkim onu duymuştu. Yetmemişti."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — AKŞAM", "style": "card", "bg": "buro_gece" },
+            { "speaker": "leyla", "text": "Kazandın mı?" },
+            { "speaker": "player", "text": "Bilmiyorum." },
+            { "speaker": "leyla", "text": "O zaman doğru bir cevap verdin." },
+            {
+              "speaker": "player",
+              "text": "Yedi buçuk yıl değil, hapis değil. Kazanmak buysa neden bu kadar ağır? Çünkü o gece kavşakta kim vardı, hâlâ kimse bilmiyor.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MAHKUMIYET",
+      "class": "CONVICTION",
+      "priority": 4,
+      "when": { "all": [] },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "3 yıl 9 ay hapis",
+      "verdictText": "Sanık Volkan Eren’in TCK 85/1 uyarınca kusur durumu gözetilerek 3 YIL hapis cezası ile cezalandırılmasına; eylem bilinçli taksirle işlendiğinden TCK 22/3 uyarınca cezanın yarısı oranında artırılarak 4 YIL 6 AY; sanığın olay sonrası yardım ve bildirim davranışı gözetilerek TCK 62/1 uyarınca 3 YIL 9 AY HAPİS cezası ile cezalandırılmasına; bilinçli taksir nedeniyle TCK 50/4’ün, cezanın süresi nedeniyle TCK 51/1’in uygulanmasına yer olmadığına; TCK 53/6 uyarınca sürücü belgesinin 2 YIL süreyle geri alınmasına; hükmün kesinleşmesine kadar adli kontrol tedbirlerinin devamına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "reasoning": [
+        {
+          "text": "Bilirkişi raporu, tanık beyanı ve sanığın kendi anlatımı birlikte değerlendirilerek sanığın kırmızı ışıkta, dikkatsizce kavşağa girdiği kabul edilmiştir."
+        },
+        {
+          "when": { "not": { "ref": "kusur_yok" } },
+          "text": "Savunmanın itirazları somut delillerle desteklenmemiştir."
+        },
+        { "when": { "flag": "kabul" }, "text": "Sanık duruşmada kusurunu kabul etmiştir." },
+        {
+          "when": { "flag": "cokus" },
+          "text": "Savunmanın inandırıcılığı duruşmada çöktü; mahkeme iddianamedeki anlatımı esas aldı."
+        }
+      ],
+      "legalBasis": "TCK 85/1, 22/3, 62/1, 53/6; CMK 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 60] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 60] }, 1000] }
+        }
+      },
+      "howToReach": "Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "Üç yıl dokuz ay. Volkan başını salladı; bunu bekliyormuş gibi. Belki de bekliyordu. Belki de istiyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gül kalkmadı. Bebek taşıyıcısının sapını o kadar sıkı tutuyordu ki parmak boğumları beyazlamıştı."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU — ÖĞLEN", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Serkan koridorun sonunda duruyordu. Kazanmış birinin yüzü değildi. Kimse kazanmamıştı."
+            },
+            { "speaker": "volkan", "text": "Avukat hanım. Siz elinizden geleni yaptınız. Ben hak ettim." },
+            {
+              "speaker": "player",
+              "text": "Hak etmediğini kanıtlayamadım. Bu, hak ettiği anlamına gelmiyor. Ama bundan sonra bunu ona kim anlatacak?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "cokus" },
+          "lines": [
+            { "speaker": "savci", "text": "İyi bir avukat olacaksınız. Bugün değil." },
+            { "speaker": "narrator", "text": "Savcı dosyasını kolunun altına aldı ve gitti." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda Gül’ün klasörlerinden biri kalmıştı. Sarı olanı. İçinde bir ultrason fotoğrafı ve bir not: “Bebek arabası.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir kadın öldü, bir adam ceza aldı. Teraziyi dengeli sanan herkes yanılıyordu; ben de. İstinaf dilekçesini yazmaya oturdum.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

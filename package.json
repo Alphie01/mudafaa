@@ -23,7 +23,9 @@
     "db:down": "docker compose --profile test down",
     "db:test:up": "docker compose --profile test up -d --wait postgres-test redis-test",
     "mobile:test": "cd apps/mobile && fvm flutter test",
-    "mobile:analyze": "cd apps/mobile && fvm flutter pub get && fvm dart analyze"
+    "mobile:analyze": "cd apps/mobile && fvm flutter pub get && fvm dart analyze",
+    "db:migrate": "npm run migrate -w @mudafaa/api",
+    "db:migrate:test": "npm run migrate:test -w @mudafaa/api"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

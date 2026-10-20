@@ -9,7 +9,9 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:prod": "node dist/main.js",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "migrate": "prisma migrate deploy",
+    "migrate:test": "node scripts/migrate-test.mjs"
   },
   "dependencies": {
     "@mudafaa/case-schema": "^0.0.0",

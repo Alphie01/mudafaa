@@ -1,5 +1,7 @@
 // Müdafaa veri modeli (docs/plan.md §7): tablo adları @@map ile, kolonlar snake_case.
 // Bağlantı adresi prisma.config.ts'ten gelir (Prisma 7); istemci PrismaPg adaptörüyle çalışır.
+// İçerik tabloları sürüme (`case_version_id`, cascade) bağlıdır; içerik alan enum'ları TEXT tutulur (Zod doğrular),
+// sistem enum'ları Prisma enum'udur. Kısmi unique indeks ve referans verisi migration SQL'indedir.
 
 generator client {
   provider            = "prisma-client"
@@ -11,6 +13,8 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+// ─── Sistem enum'ları ────────────────────────────────────────────────────────
 
 enum Role {
   PLAYER
@@ -28,6 +32,110 @@ enum UserStatus {
   @@map("user_status")
 }
 
+enum VersionStatus {
+  DRAFT
+  PUBLISHED
+  SUPERSEDED
+  ARCHIVED
+
+  @@map("version_status")
+}
+
+enum VersionSource {
+  IMPORT
+  CLONE
+  AI
+  EDITOR
+
+  @@map("version_source")
+}
+
+enum SnapshotKind {
+  IMPORT
+  AI_DRAFT
+  PUBLISH_SNAPSHOT
+  TEST_SNAPSHOT
+
+  @@map("snapshot_kind")
+}
+
+enum LegalReview {
+  PENDING
+  APPROVED
+
+  @@map("legal_review")
+}
+
+enum SessionMode {
+  NORMAL
+  TEST
+
+  @@map("session_mode")
+}
+
+enum SessionStatus {
+  ACTIVE
+  COMPLETED
+  ABANDONED
+
+  @@map("session_status")
+}
+
+enum ValidationStatus {
+  QUEUED
+  RUNNING
+  PASSED
+  FAILED
+  ERROR
+
+  @@map("validation_status")
+}
+
+enum JobStatus {
+  QUEUED
+  RUNNING
+  SUCCEEDED
+  FAILED
+
+  @@map("job_status")
+}
+
+enum EffectOwner {
+  NODE_ENTER
+  NODE_FIRST_ENTER
+  CHOICE
+  OBJECT
+  TRIGGER
+
+  @@map("effect_owner")
+}
+
+enum DialogueOwner {
+  NODE
+  CHOICE
+
+  @@map("dialogue_owner")
+}
+
+enum TransitionKind {
+  NEXT
+  ROUTE
+  TRIGGER
+
+  @@map("transition_kind")
+}
+
+enum TransitionTarget {
+  NODE
+  STAY
+  RETURN
+  PUSH
+
+  @@map("transition_target")
+}
+
+// ─── Kimlik ──────────────────────────────────────────────────────────────────
+
 model User {
   id          String     @id @default(uuid(7)) @db.Uuid
   firebaseUid String     @unique @map("firebase_uid")
@@ -41,5 +149,799 @@ model User {
   updatedAt   DateTime   @updatedAt @map("updated_at") @db.Timestamptz(3)
   lastSeenAt  DateTime?  @map("last_seen_at") @db.Timestamptz(3)
 
+  profile           UserProfile?
+  statistics        UserStatistics?
+  progress          UserProgress[]
+  sessions          GameSession[]
+  auditLogs         AdminAuditLog[]
+  publishedVersions CaseVersion[]   @relation("PublishedBy")
+
   @@map("users")
+}
+
+model UserProfile {
+  userId     String   @id @map("user_id") @db.Uuid
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lawyerName String?  @map("lawyer_name")
+  office     String?
+  city       String?
+  settings   Json     @default("{}")
+  updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@map("user_profiles")
+}
+
+model UserStatistics {
+  userId          String   @id @map("user_id") @db.Uuid
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  xp              Int      @default(0)
+  rankKey         String   @default("STAJYER") @map("rank_key")
+  rank            Rank     @relation(fields: [rankKey], references: [key])
+  closedCases     Int      @default(0) @map("closed_cases")
+  acquittals      Int      @default(0)
+  reduced         Int      @default(0)
+  convictions     Int      @default(0)
+  recharacterized Int      @default(0)
+  other           Int      @default(0)
+  updatedAt       DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@map("user_statistics")
+}
+
+model UserProgress {
+  id               String    @id @default(uuid(7)) @db.Uuid
+  userId           String    @map("user_id") @db.Uuid
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  caseId           String    @map("case_id") @db.Uuid
+  case             Case      @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  activeSessionId  String?   @map("active_session_id") @db.Uuid
+  bestSessionId    String?   @map("best_session_id") @db.Uuid
+  bestOutcomeKey   String?   @map("best_outcome_key")
+  bestOutcomeClass String?   @map("best_outcome_class")
+  bestFinal        Int?      @map("best_final")
+  xpCredited       Int       @default(0) @map("xp_credited")
+  completedCount   Int       @default(0) @map("completed_count")
+  lastPlayedAt     DateTime? @map("last_played_at") @db.Timestamptz(3)
+  createdAt        DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@unique([userId, caseId])
+  @@map("user_progress")
+}
+
+model Rank {
+  key        String           @id
+  label      String
+  shortLabel String           @map("short_label")
+  minXp      Int              @map("min_xp")
+  sortOrder  Int              @unique @map("sort_order")
+  statistics UserStatistics[]
+  cases      Case[]
+
+  @@map("ranks")
+}
+
+// ─── Katalog ─────────────────────────────────────────────────────────────────
+
+model CaseCategory {
+  key       String @id
+  label     String
+  sortOrder Int    @map("sort_order")
+  cases     Case[]
+
+  @@map("case_categories")
+}
+
+model CaseDifficulty {
+  level Int    @id
+  label String
+  cases Case[]
+
+  @@map("case_difficulties")
+}
+
+model Case {
+  id               String         @id @default(uuid(7)) @db.Uuid
+  slug             String         @unique
+  number           Int            @unique
+  categoryKey      String         @default("CEZA") @map("category_key")
+  category         CaseCategory   @relation(fields: [categoryKey], references: [key])
+  difficultyLevel  Int            @default(1) @map("difficulty_level")
+  difficulty       CaseDifficulty @relation(fields: [difficultyLevel], references: [level])
+  requiredRankKey  String?        @map("required_rank_key")
+  requiredRank     Rank?          @relation(fields: [requiredRankKey], references: [key])
+  currentVersionId String?        @unique @map("current_version_id") @db.Uuid
+  currentVersion   CaseVersion?   @relation("CurrentVersion", fields: [currentVersionId], references: [id])
+  archivedAt       DateTime?      @map("archived_at") @db.Timestamptz(3)
+  createdAt        DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime       @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  versions CaseVersion[]  @relation("CaseVersions")
+  progress UserProgress[]
+  sessions GameSession[]
+
+  @@map("cases")
+}
+
+model CaseVersion {
+  id                String        @id @default(uuid(7)) @db.Uuid
+  caseId            String        @map("case_id") @db.Uuid
+  case              Case          @relation("CaseVersions", fields: [caseId], references: [id], onDelete: Cascade)
+  currentOf         Case?         @relation("CurrentVersion")
+  versionNo         Int           @map("version_no")
+  status            VersionStatus @default(DRAFT)
+  source            VersionSource
+  title             String
+  crimeLabel        String        @map("crime_label")
+  lawRef            String        @map("law_ref")
+  demandText        String        @map("demand_text")
+  possibleSentence  String        @map("possible_sentence")
+  difficulty        Int
+  categoryKey       String        @map("category_key")
+  estimatedMinutes  Int           @map("estimated_minutes")
+  requiredRankKey   String?       @map("required_rank_key")
+  summary           String
+  coverCharacterKey String        @map("cover_character_key")
+  config            Json
+  packageHash       String?       @map("package_hash")
+  analysis          Json?
+  legalReviewStatus LegalReview   @default(PENDING) @map("legal_review_status")
+  legalReviewBy     String?       @map("legal_review_by")
+  legalReviewAt     String?       @map("legal_review_at")
+  publishedAt       DateTime?     @map("published_at") @db.Timestamptz(3)
+  publishedById     String?       @map("published_by_id") @db.Uuid
+  publishedBy       User?         @relation("PublishedBy", fields: [publishedById], references: [id], onDelete: SetNull)
+  createdAt         DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt         DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  snapshots             ContentVersion[]
+  assets                Asset[]
+  validations           ContentValidationResult[]
+  sessions              GameSession[]
+  variables             StoryVariable[]
+  conditions            StoryCondition[]
+  nodes                 StoryNode[]
+  choices               StoryChoice[]
+  transitions           StoryTransition[]
+  effects               StoryEffect[]
+  dialogues             CharacterDialogue[]
+  statements            TestimonyStatement[]
+  courtChoices          CourtChoice[]
+  characters            Character[]
+  sprites               CharacterSprite[]
+  relationships         CharacterRelationship[]
+  scenes                Scene[]
+  sceneAssets           SceneAsset[]
+  sceneObjects          SceneObject[]
+  sceneHotspots         SceneHotspot[]
+  evidence              Evidence[]
+  evidenceRelationships EvidenceRelationship[]
+  evidenceDiscoveries   EvidenceDiscoveryCondition[]
+  courtSessions         CourtSession[]
+  courtStages           CourtStage[]
+  courtOutcomes         CourtOutcome[]
+
+  @@unique([caseId, versionNo])
+  @@map("case_versions")
+}
+
+/// Değişmez CasePackage snapshot'ı; yayınlanan ve test edilen oturumlar buna sabitlenir.
+model ContentVersion {
+  id            String        @id @default(uuid(7)) @db.Uuid
+  caseVersionId String        @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion   @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  kind          SnapshotKind
+  package       Json
+  packageHash   String        @map("package_hash")
+  engineVersion Int           @map("engine_version")
+  createdById   String?       @map("created_by_id") @db.Uuid
+  createdAt     DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  sessions      GameSession[]
+
+  @@map("content_versions")
+}
+
+model Asset {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  key           String
+  kind          String
+  path          String
+  sha256        String
+  mime          String
+  size          Int
+  sortOrder     Int         @map("sort_order")
+
+  @@unique([caseVersionId, key])
+  @@index([sha256])
+  @@map("assets")
+}
+
+// ─── Hikâye ──────────────────────────────────────────────────────────────────
+
+model StoryVariable {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  key           String
+  sortOrder     Int         @map("sort_order")
+  type          String
+  initial       Json
+  min           Int?
+  max           Int?
+  enumValues    Json?       @map("enum_values")
+  visibility    String
+  analysis      String?
+  display       Json?
+
+  @@unique([caseVersionId, key])
+  @@map("story_variables")
+}
+
+/// Adlandırılmış yüklemler (CasePackage `predicates`).
+model StoryCondition {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  key           String
+  sortOrder     Int         @map("sort_order")
+  label         String
+  condition     Json
+
+  @@unique([caseVersionId, key])
+  @@map("story_conditions")
+}
+
+model StoryNode {
+  id               String               @id @default(uuid(7)) @db.Uuid
+  caseVersionId    String               @map("case_version_id") @db.Uuid
+  caseVersion      CaseVersion          @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  key              String
+  sortOrder        Int                  @map("sort_order")
+  type             String
+  mode             String?
+  title            String?
+  eyebrow          String?
+  chapter          String?
+  background       String?
+  hud              Json?
+  exposeCounts     Boolean?             @map("expose_counts")
+  sceneKey         String?              @map("scene_key")
+  courtStage       String?              @map("court_stage")
+  config           Json
+  editorX          Float?               @map("editor_x")
+  editorY          Float?               @map("editor_y")
+  emptyCollections String[]             @default([]) @map("empty_collections")
+  choices          StoryChoice[]
+  statements       TestimonyStatement[]
+  transitions      StoryTransition[]    @relation("FromNode")
+
+  @@unique([caseVersionId, key])
+  @@map("story_nodes")
+}
+
+/// Seçenekler, kurallar, fallback'ler ve (parentId ile) TOPIC varyantları.
+model StoryChoice {
+  id               String            @id @default(uuid(7)) @db.Uuid
+  caseVersionId    String            @map("case_version_id") @db.Uuid
+  caseVersion      CaseVersion       @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  nodeId           String            @map("node_id") @db.Uuid
+  node             StoryNode         @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  parentId         String?           @map("parent_id") @db.Uuid
+  parent           StoryChoice?      @relation("Variants", fields: [parentId], references: [id], onDelete: Cascade)
+  variants         StoryChoice[]     @relation("Variants")
+  key              String
+  sortOrder        Int               @map("sort_order")
+  kind             String
+  label            String?
+  description      String?
+  prompt           String?
+  groupKey         String?           @map("group_key")
+  tags             Json?
+  visibleWhen      Json?             @map("visible_when")
+  enabledWhen      Json?             @map("enabled_when")
+  lockedReason     String?           @map("locked_reason")
+  cost             Json?
+  maxUses          Int?              @map("max_uses")
+  repeat           String?
+  quality          Json?
+  feedback         Json?
+  match            Json?
+  fallbackFor      String?           @map("fallback_for")
+  confirm          String?
+  role             String?
+  emptyCollections String[]          @default([]) @map("empty_collections")
+  courtChoice      CourtChoice?
+  transitions      StoryTransition[] @relation("FromChoice")
+
+  @@unique([caseVersionId, key])
+  @@map("story_choices")
+}
+
+/// Bütün kenarlar: seçeneğin `next`'i (NEXT), koşullu rotalar (ROUTE) ve tetikleyiciler (TRIGGER; from null = genel).
+model StoryTransition {
+  id               String            @id @default(uuid(7)) @db.Uuid
+  caseVersionId    String            @map("case_version_id") @db.Uuid
+  caseVersion      CaseVersion       @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  sortOrder        Int               @map("sort_order")
+  kind             TransitionKind
+  fromNodeId       String?           @map("from_node_id") @db.Uuid
+  fromNode         StoryNode?        @relation("FromNode", fields: [fromNodeId], references: [id], onDelete: Cascade)
+  fromChoiceId     String?           @map("from_choice_id") @db.Uuid
+  fromChoice       StoryChoice?      @relation("FromChoice", fields: [fromChoiceId], references: [id], onDelete: Cascade)
+  target           TransitionTarget?
+  toNodeKey        String?           @map("to_node_key")
+  condition        Json?
+  key              String?
+  priority         Int?
+  once             Boolean?
+  emptyCollections String[]          @default([]) @map("empty_collections")
+
+  @@index([fromNodeId])
+  @@index([fromChoiceId])
+  @@map("story_transitions")
+}
+
+model StoryEffect {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  ownerType     EffectOwner @map("owner_type")
+  ownerId       String      @map("owner_id") @db.Uuid
+  sortOrder     Int         @map("sort_order")
+  type          String
+  payload       Json
+
+  @@index([ownerType, ownerId, sortOrder])
+  @@map("story_effects")
+}
+
+// ─── Karakter ────────────────────────────────────────────────────────────────
+
+model Character {
+  id             String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId  String      @map("case_version_id") @db.Uuid
+  caseVersion    CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  key            String
+  sortOrder      Int         @map("sort_order")
+  name           String
+  shortLabel     String      @map("short_label")
+  role           String
+  age            Int?
+  occupation     String?
+  bio            String?
+  accent         String
+  spriteKey      String      @map("sprite_key")
+  notes          String?
+  initiallyKnown Boolean?    @map("initially_known")
+
+  @@unique([caseVersionId, key])
+  @@map("characters")
+}
+
+model CharacterSprite {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  key           String
+  sortOrder     Int         @map("sort_order")
+  rows          Json
+  skin          String?
+  noEyes        Boolean?    @map("no_eyes")
+  noMouth       Boolean?    @map("no_mouth")
+
+  @@unique([caseVersionId, key])
+  @@map("character_sprites")
+}
+
+/// Yanıt blokları: node anlatı satırları (NODE) ve seçenek / varyant yanıtları (CHOICE).
+model CharacterDialogue {
+  id            String        @id @default(uuid(7)) @db.Uuid
+  caseVersionId String        @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion   @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  ownerType     DialogueOwner @map("owner_type")
+  ownerId       String        @map("owner_id") @db.Uuid
+  sortOrder     Int           @map("sort_order")
+  condition     Json?
+  lines         Json
+
+  @@index([ownerType, ownerId, sortOrder])
+  @@map("character_dialogues")
+}
+
+model CharacterRelationship {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  sortOrder     Int         @map("sort_order")
+  fromKey       String      @map("from_key")
+  toKey         String      @map("to_key")
+  type          String
+  description   String
+  hidden        Boolean?
+  revealWhen    Json?       @map("reveal_when")
+
+  @@map("character_relationships")
+}
+
+// ─── Sahne ───────────────────────────────────────────────────────────────────
+
+model Scene {
+  id            String        @id @default(uuid(7)) @db.Uuid
+  caseVersionId String        @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion   @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  key           String
+  sortOrder     Int           @map("sort_order")
+  title         String
+  description   String?
+  width         Int
+  height        Int
+  touchPadding  Int?          @map("touch_padding")
+  unlockWhen    Json?         @map("unlock_when")
+  assets        SceneAsset[]
+  objects       SceneObject[]
+
+  @@unique([caseVersionId, key])
+  @@map("scenes")
+}
+
+model SceneAsset {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  sceneId       String      @map("scene_id") @db.Uuid
+  scene         Scene       @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  sortOrder     Int         @map("sort_order")
+  assetKey      String      @map("asset_key")
+  role          String
+
+  @@map("scene_assets")
+}
+
+model SceneObject {
+  id               String         @id @default(uuid(7)) @db.Uuid
+  caseVersionId    String         @map("case_version_id") @db.Uuid
+  caseVersion      CaseVersion    @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  sceneId          String         @map("scene_id") @db.Uuid
+  scene            Scene          @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+  key              String
+  sortOrder        Int            @map("sort_order")
+  name             String
+  marker           String
+  z                Int?
+  activeWhen       Json?          @map("active_when")
+  feedback         Json
+  badge            String?
+  inspectNodeKey   String?        @map("inspect_node_key")
+  maxUses          Int?           @map("max_uses")
+  emptyCollections String[]       @default([]) @map("empty_collections")
+  hotspots         SceneHotspot[]
+
+  @@unique([caseVersionId, key])
+  @@map("scene_objects")
+}
+
+model SceneHotspot {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  objectId      String      @map("object_id") @db.Uuid
+  object        SceneObject @relation(fields: [objectId], references: [id], onDelete: Cascade)
+  sortOrder     Int         @map("sort_order")
+  shape         String
+  geometry      Json
+
+  @@map("scene_hotspots")
+}
+
+// ─── Delil ───────────────────────────────────────────────────────────────────
+
+model Evidence {
+  id                String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId     String      @map("case_version_id") @db.Uuid
+  caseVersion       CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  key               String
+  sortOrder         Int         @map("sort_order")
+  kind              String
+  type              String
+  title             String
+  shortText         String      @map("short_text")
+  description       String
+  sourceLabel       String      @map("source_label")
+  tagLabel          String?     @map("tag_label")
+  icon              String
+  side              String?
+  strength          String?
+  legalValidity     String      @map("legal_validity")
+  legalNote         String?     @map("legal_note")
+  presentable       Boolean
+  combinable        Boolean
+  countsInBag       Boolean     @map("counts_in_bag")
+  initiallyKnown    Boolean     @map("initially_known")
+  relatedCharacters Json?       @map("related_characters")
+  relatedEvents     Json?       @map("related_events")
+  tags              Json?
+  missedHint        String?     @map("missed_hint")
+
+  @@unique([caseVersionId, key])
+  @@map("evidence")
+}
+
+model EvidenceRelationship {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  sortOrder     Int         @map("sort_order")
+  fromKey       String      @map("from_key")
+  toKey         String      @map("to_key")
+  type          String
+
+  @@map("evidence_relationships")
+}
+
+/// Delilin bulunma yolları (CasePackage `discoveryPaths`); her DISCOVER etkisinin bir yolu vardır.
+model EvidenceDiscoveryCondition {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  sortOrder     Int         @map("sort_order")
+  evidenceKey   String      @map("evidence_key")
+  sourceType    String      @map("source_type")
+  sourceKey     String?     @map("source_key")
+  requires      Json?
+  hint          String?
+
+  @@map("evidence_discovery_conditions")
+}
+
+// ─── Mahkeme ─────────────────────────────────────────────────────────────────
+
+model CourtSession {
+  id            String       @id @default(uuid(7)) @db.Uuid
+  caseVersionId String       @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion  @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  key           String
+  sortOrder     Int          @map("sort_order")
+  title         String
+  stages        CourtStage[]
+
+  @@unique([caseVersionId, key])
+  @@map("court_sessions")
+}
+
+model CourtStage {
+  id            String       @id @default(uuid(7)) @db.Uuid
+  caseVersionId String       @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion  @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  sessionId     String       @map("session_id") @db.Uuid
+  session       CourtSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  key           String
+  sortOrder     Int          @map("sort_order")
+  type          String
+  entryNodeKey  String       @map("entry_node_key")
+
+  @@map("court_stages")
+}
+
+/// Mahkemeye özgü kural verisi: story_choices'ın 1:1 uzantısı (ifade, kabul edilen deliller, itiraz gerekçesi).
+model CourtChoice {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  choiceId      String      @unique @map("choice_id") @db.Uuid
+  choice        StoryChoice @relation(fields: [choiceId], references: [id], onDelete: Cascade)
+  statementKey  String?     @map("statement_key")
+  evidenceKeys  Json?       @map("evidence_keys")
+  groundKey     String?     @map("ground_key")
+
+  @@map("court_choices")
+}
+
+model CourtOutcome {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  key           String
+  sortOrder     Int         @map("sort_order")
+  class         String
+  priority      Int
+  when          Json
+  stamp         String
+  stampTone     String      @map("stamp_tone")
+  header        String?
+  sentence      String
+  verdictText   String      @map("verdict_text")
+  reasoning     Json
+  legalBasis    String      @map("legal_basis")
+  xp            Json
+  howToReach    String      @map("how_to_reach")
+  ethicsCard    String?     @map("ethics_card")
+
+  @@unique([caseVersionId, key])
+  @@map("court_outcomes")
+}
+
+model TestimonyStatement {
+  id            String      @id @default(uuid(7)) @db.Uuid
+  caseVersionId String      @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  nodeId        String      @map("node_id") @db.Uuid
+  node          StoryNode   @relation(fields: [nodeId], references: [id], onDelete: Cascade)
+  key           String
+  sortOrder     Int         @map("sort_order")
+  order         Int
+  visibleWhen   Json?       @map("visible_when")
+  segments      Json
+
+  @@unique([caseVersionId, key])
+  @@map("testimony_statements")
+}
+
+// ─── Oyun oturumları ─────────────────────────────────────────────────────────
+
+model GameSession {
+  id             String         @id @default(uuid(7)) @db.Uuid
+  userId         String         @map("user_id") @db.Uuid
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  caseId         String         @map("case_id") @db.Uuid
+  case           Case           @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  caseVersionId  String         @map("case_version_id") @db.Uuid
+  caseVersion    CaseVersion    @relation(fields: [caseVersionId], references: [id], onDelete: Restrict)
+  snapshotId     String         @map("snapshot_id") @db.Uuid
+  snapshot       ContentVersion @relation(fields: [snapshotId], references: [id], onDelete: Restrict)
+  mode           SessionMode
+  status         SessionStatus  @default(ACTIVE)
+  stateVersion   Int            @default(0) @map("state_version")
+  engineVersion  Int            @map("engine_version")
+  currentNodeKey String         @map("current_node_key")
+  progressLabel  String?        @map("progress_label")
+  outcomeKey     String?        @map("outcome_key")
+  outcomeClass   String?        @map("outcome_class")
+  finalScore     Int?           @map("final_score")
+  xpEarned       Int?           @map("xp_earned")
+  startedAt      DateTime       @default(now()) @map("started_at") @db.Timestamptz(3)
+  completedAt    DateTime?      @map("completed_at") @db.Timestamptz(3)
+  updatedAt      DateTime       @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  state      SessionState?
+  choices    SessionChoice[]
+  variables  SessionVariable[]
+  discovered DiscoveredEvidence[]
+  scores     SessionScore[]
+  events     SessionEvent[]
+
+  @@index([userId, caseId])
+  @@map("game_sessions")
+}
+
+/// Oturumun motor durumu (doğruluk kaynağı).
+model SessionState {
+  sessionId    String      @id @map("session_id") @db.Uuid
+  session      GameSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  state        Json
+  stateVersion Int         @map("state_version")
+  updatedAt    DateTime    @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@map("session_states")
+}
+
+/// Aksiyon günlüğü ve idempotency deposu: aynı `client_action_id` saklı yanıtı döndürür.
+model SessionChoice {
+  id             String      @id @default(uuid(7)) @db.Uuid
+  sessionId      String      @map("session_id") @db.Uuid
+  session        GameSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  seq            Int
+  clientActionId String      @map("client_action_id") @db.Uuid
+  requestHash    String      @map("request_hash")
+  action         Json
+  response       Json
+  createdAt      DateTime    @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@unique([sessionId, clientActionId])
+  @@unique([sessionId, seq])
+  @@map("session_choices")
+}
+
+model SessionVariable {
+  sessionId String      @map("session_id") @db.Uuid
+  session   GameSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  key       String
+  value     Json
+  updatedAt DateTime    @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@id([sessionId, key])
+  @@map("session_variables")
+}
+
+model DiscoveredEvidence {
+  sessionId    String      @map("session_id") @db.Uuid
+  session      GameSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  evidenceKey  String      @map("evidence_key")
+  seq          Int
+  via          String
+  discoveredAt DateTime    @default(now()) @map("discovered_at") @db.Timestamptz(3)
+
+  @@id([sessionId, evidenceKey])
+  @@map("discovered_evidence")
+}
+
+/// Puan defteri: her SCORE olayı bir satır.
+model SessionScore {
+  id        String      @id @default(uuid(7)) @db.Uuid
+  sessionId String      @map("session_id") @db.Uuid
+  session   GameSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  seq       Int
+  category  String
+  amount    Int
+  lineKey   String?     @map("line_key")
+  sourceKey String      @map("source_key")
+  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@index([sessionId])
+  @@map("session_scores")
+}
+
+model SessionEvent {
+  id        String      @id @default(uuid(7)) @db.Uuid
+  sessionId String      @map("session_id") @db.Uuid
+  session   GameSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  seq       Int
+  idx       Int
+  type      String
+  payload   Json
+  createdAt DateTime    @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@unique([sessionId, seq, idx])
+  @@map("session_events")
+}
+
+// ─── İçerik yönetimi ─────────────────────────────────────────────────────────
+
+model ContentGenerationJob {
+  id              String    @id @default(uuid(7)) @db.Uuid
+  status          JobStatus @default(QUEUED)
+  params          Json
+  caseId          String?   @map("case_id") @db.Uuid
+  resultVersionId String?   @map("result_version_id") @db.Uuid
+  usage           Json?
+  costCents       Int?      @map("cost_cents")
+  error           String?
+  createdById     String?   @map("created_by_id") @db.Uuid
+  createdAt       DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt       DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  @@map("content_generation_jobs")
+}
+
+model ContentValidationResult {
+  id            String           @id @default(uuid(7)) @db.Uuid
+  caseVersionId String           @map("case_version_id") @db.Uuid
+  caseVersion   CaseVersion      @relation(fields: [caseVersionId], references: [id], onDelete: Cascade)
+  status        ValidationStatus @default(QUEUED)
+  strict        Boolean          @default(false)
+  packageHash   String?          @map("package_hash")
+  report        Json?
+  requestedById String?          @map("requested_by_id") @db.Uuid
+  createdAt     DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+  startedAt     DateTime?        @map("started_at") @db.Timestamptz(3)
+  finishedAt    DateTime?        @map("finished_at") @db.Timestamptz(3)
+
+  @@index([caseVersionId, createdAt])
+  @@map("content_validation_results")
+}
+
+model AdminAuditLog {
+  id         String   @id @default(uuid(7)) @db.Uuid
+  actorId    String?  @map("actor_id") @db.Uuid
+  actor      User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  action     String
+  targetType String   @map("target_type")
+  targetId   String?  @map("target_id")
+  payload    Json?
+  requestId  String?  @map("request_id")
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@index([createdAt])
+  @@map("admin_audit_logs")
 }

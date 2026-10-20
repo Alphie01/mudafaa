@@ -1,0 +1,15 @@
+{
+  // Editör ve tip denetimi (src + test + prisma.config.ts). Derleme ayarları: tsconfig.build.json.
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "declaration": false,
+    "declarationMap": false,
+    "noEmit": true,
+    // NestJS DI, kurucu parametre tiplerini decorator metadata'sından okur.
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["src", "test", "prisma.config.ts"],
+  "references": [{ "path": "../../packages/case-schema" }]
+}

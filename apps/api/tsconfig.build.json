@@ -1,0 +1,15 @@
+{
+  // `nest build` / `nest start` ve kökteki `tsc -b tsconfig.build.json` bu dosyayı kullanır.
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "noEmit": false,
+    "rootDir": "src",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/tsconfig.build.tsbuildinfo"
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.spec.ts"],
+  "references": [{ "path": "../../packages/case-schema" }]
+}

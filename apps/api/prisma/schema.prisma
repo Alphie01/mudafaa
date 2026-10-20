@@ -1,0 +1,45 @@
+// Müdafaa veri modeli (docs/plan.md §7): tablo adları @@map ile, kolonlar snake_case.
+// Bağlantı adresi prisma.config.ts'ten gelir (Prisma 7); istemci PrismaPg adaptörüyle çalışır.
+
+generator client {
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  moduleFormat        = "esm"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  PLAYER
+  EDITOR
+  ADMIN
+
+  @@map("user_role")
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  DELETED
+
+  @@map("user_status")
+}
+
+model User {
+  id          String     @id @default(uuid(7)) @db.Uuid
+  firebaseUid String     @unique @map("firebase_uid")
+  email       String?
+  displayName String     @map("display_name")
+  isAnonymous Boolean    @default(false) @map("is_anonymous")
+  provider    String
+  role        Role       @default(PLAYER)
+  status      UserStatus @default(ACTIVE)
+  createdAt   DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt   DateTime   @updatedAt @map("updated_at") @db.Timestamptz(3)
+  lastSeenAt  DateTime?  @map("last_seen_at") @db.Timestamptz(3)
+
+  @@map("users")
+}

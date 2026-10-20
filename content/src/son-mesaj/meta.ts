@@ -134,7 +134,7 @@ export const meta: CasePart = {
                 },
               },
               { if: { when: { flag: 'pay_cevap' }, then: 1, else: 0 } },
-              { if: { when: { flag: 'contra_s1' }, then: 1, else: 0 } },
+              { if: { when: { any: [{ flag: 'contra_s1' }, { flag: 'bilirkisi_el' }] }, then: 1, else: 0 } },
             ],
           },
           '>=',

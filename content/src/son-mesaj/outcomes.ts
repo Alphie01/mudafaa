@@ -175,6 +175,10 @@ export const outcomes: CasePart = {
           any(flag('bilirkisi_kilit'), flag('kilit_mahkemede')),
         ),
         because(
+          'Bilirkişi, cihaz 3’ün o gecelerde sanığın hattından bağlanmadığını kabul etmiştir.',
+          flag('bilirkisi_el'),
+        ),
+        because(
           'Sanığın fail olduğuna dair kesin kanaate ulaşılamamıştır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2).',
         ),
         because(

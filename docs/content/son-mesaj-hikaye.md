@@ -185,8 +185,9 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
     atmak için." (yanlış iz)
   - "Şifre": "Ece2016. Ünlemle. Her yerde. Biliyorum. Mimarım, kasa çilingiri değil."
 - **INV_ARAMA_OFIS** (sahne): Ozan'ın boş masası; üstünde "07" etiketli boş bir dok istasyonu; klavyenin altında
-  yapışkan not "wifi: Ece2016!"; rafta "Yazışmalar" klasörü, içinde Ozan'ın çıktısı alınmış bir e-postası ("Sn. Aksoy…
-  Saygılar."); ortaklık fotoğrafı (dikkat dağıtıcı); Pirinç Han planı (dikkat dağıtıcı).
+  yapışkan not "wifi: Ece2016!"; rafta "Yazışmalar" klasörü: ayrılık protokolünün kapak yazısı, eki eksik, kenarda
+  "Asıl liste N. Sarı'da" (Nurten'e giden iplik; imza eşleşmesi burada değil, ARA'da); ortaklık fotoğrafı (dikkat
+  dağıtıcı); Pirinç Han planı (dikkat dağıtıcı). Masa on bir aydır boş (Mart'tan beri).
 - **INV_ARAMA_HASTANE** (sahne; Tarık "hastane" dediyse açılır): hemşire masasındaki şarj istasyonu, bantta "AKSOY 01.40";
   koridor kamerası; onam formu panosu; otomat. Hemşire Gülay'la kısa konuşma (INV_T_GULAY).
 - **INV_TUTANAK** (belge): imza hanesi boş; mühür hanesi "—"; ekran görüntülerinin saati (12 Kasım 15.44) ile hâkimlik
@@ -202,14 +203,14 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
 - **INV_T_HAYRI** (vakıf ofisi): bildirim saati 02.14; "Başkasının sesini dinlemem evladım."
 - **INV_T_OZAN** (Tekin Yapı; çay, simit, han hikâyeleri). Ozan yardımseverdir: "Tarık'ı severim üstat, ama o gece kafede
   söyledikleri…" Tuzak: Deniz bağlı cihazlardan ya da 07'den söz ederse Ozan uyarılmış olur (`ozan_uyarildi`): ara
-  evresinde dizüstü bulunamaz, bir puan kaybedilir. Ayrılırken: "Hadi, saygılar üstat."
+  evresinde dizüstü bulunamaz, bir puan kaybedilir. Cihaz sorusu ancak boş dok ya da bağlı cihaz kaydı bulunduktan sonra
+  sorulabilir. Ayrılırken imzasız bir veda ("Hadi, kolay gelsin."): birinci evrede Ozan'ın ağzından "Saygılar" çıkmaz.
 - **INV_DIL** (talepler, 3 hak): bağımsız adli bilişim bilirkişisi ve imajın kopyası (CMK 134/5, 63, 67); IP abone sorgusu
   (cihaz 3 ve IP bulunmuşsa); hastane kayıtları ve kamera; Hayri Sezer'in tanık olarak dinlenmesi; reddedilecek olanlar
   (katılanın telefonunun incelenmesi; platformdan yurt dışı yazışma; keşif).
 - **INV_CIKARIM** (tahta, 0 EP): altı tarif + yanlış iz kartları (pay kavgası, "Melis yazdı" teorisi).
 - **INV_AKSAM1/2** (~300): Leyla ile kısa sahne; ikinci akşam Tarık'ın kızı Ece telefonda ("Babam yalan söylemez");
-  Ozan ziyaret edildiyse kibar bir mesaj gelir: "Sn. Arslan, yardımcı olabileceğim her konuda... Saygılar." (iç ses
-  yorum yapmaz; oyuncu görür).
+  Ozan ziyaret edildiyse masada yalnızca kartviziti kalır; Deniz onu çekmeceye koyar (imzalı mesaj yok; gizem korunur).
 - **INV_GECE** (~450): pano, koşullu sayım; Leyla: "Yarın tanık kürsüde ne derse desin, tutanağı oku."
 
 ### Bölüm 3 · BİRİNCİ CELSE (~2.600) · bg: durusma_salonu
@@ -230,6 +231,8 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
 - **ARA_MELIS** (~700): Melis: "Tarık bana bir kere bile 'Sn.' demedi. Bir tek ihale yazışmalarında görürdüm bunu."
   Ses kaydını yalnızca Tarık'a gönderdiğini söyler. Şikâyetten vazgeçmesi önerilirse Sinan toplantıyı bitirir.
 - **ARA_NURTEN** (belge): ayrılık protokolü ve demirbaş listesi; 07 numaralı dizüstü "iade: —", not: "O.T. 'bozuldu' dedi."
+  Nurten, Ozan'ın "Sn. Sarı, 07 için tutanağa gerek görmüyorum... Saygılar." e-postasını protokolün arkasına zımbalamıştır;
+  imzanın tehditlerle eşleşmesi ilk kez burada, tahtada mümkün olur.
 - **ARA_EV** (sahne): Tarık'ın çalışma odası: Ozan'ın Mart'ta geri yolladığı koli (içinde her şey, dizüstü hariç;
   üstünde "Gerisi sende... Saygılar." notu); modem; eski tablet; Ece'nin çizimi.
 - **ARA_OZAN** (olay; ilk ara akşamı): Ozan büroya gelir, "yardım etmek" ister; sorular sorar ("Bilirkişi ne dedi

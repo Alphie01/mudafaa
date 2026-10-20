@@ -29,13 +29,22 @@ Ayrıntılı kronoloji hikâye kitabının §1'indedir. Oyuncunun öğrenme yolu
 | Üç gece tek IP | 85.105.44.17 (cihaz 3), ev hattı 176.88.12.4 (cihaz 0) | INV_HESAP h4 |
 | 07 ofise dönmedi | Boş dok "07"; demirbaş listesinde iade hanesi boş; kolide dizüstü yok | Ofis sahnesi, ARA_DEMIRBAS d4, ev sahnesi |
 | Hat Tekin Yapı'nın | Sağlayıcı yanıtı | 1. celsede T1_ISP talebi → ARA gün sonu teslimi |
-| Üslup | Tarık küçük harf/noktasız; tehditler "Sn.", üç nokta, "Saygılar." = Ozan'ın e-postaları | INV_IMAJ i5/i6, ofisteki e-posta çıktısı, Melis (ARA), vakıf yazısı |
+| Üslup | Tarık küçük harf/noktasız; tehditler "Sn.", üç nokta, "Saygılar." = Ozan'ın e-postaları | INV_IMAJ i5/i6 (yalnızca iki ayrı el); eşleşme ARA'da: Nurten'in sakladığı "gerek görmüyorum" e-postası (NUR_LAPTOP), vakıf yazısı, Melis |
 | Ozan kaydı herkesten önce biliyordu | 10.11 09.12 vakfa e-posta | ARA_VAKIF v5 |
 | Dizüstü Tekin Yapı'da | Arşiv dolabında, açık oturumla | ARA_SUC (somut dayanaklı suç duyurusu) + Ozan uyarılmamışsa |
 
 **Gizem kuralları.** Soğuk açılış yalnızca alıcının gözünden (isimsiz "BİR KADIN"). Ozan birinci evrede sıcak, yardımsever
 bir savcılık tanığıdır; Kübra'nın Ozan'a dair konuları yalnızca ilgili bulgular bulunduktan sonra açılır (`KUB_CIHAZLAR` ←
-`clue_cihaz3`, `KUB_OZAN` ← `clue_dock`). Ozan'ın adı şüpheyle ilk kez, 07'nin ofise dönmediği kurulduktan sonra anılır.
+`clue_cihaz3`, `KUB_OZAN` ← `clue_dock`); Ozan'a cihaz sorusu (`OZ_CIHAZ`) da `clue_dock`/`clue_bagli_cihaz` olmadan
+görünmez ve dizüstü kelimesini anmaz. Tanığa telkin seçenekleri (Gülay, Hayri, Kübra) kimseyi işaret etmez. Birinci
+evrede Ozan'ın ağzından ya da kaleminden tek bir "Saygılar." çıkmaz: veda satırları imzasızdır, akşam mesajı yoktur, ofis
+klasörü yalnızca protokol kapağını ve "asıl liste N. Sarı'da" notunu verir. İmzanın Ozan'a bağlanması ancak ARA'da,
+Nurten'in sakladığı e-posta ya da vakıf yazısı tahtada tehditlerle birleştirildiğinde olur (`CB_A_USLUP`/`CB_A_VAKIF`).
+Ozan'ın adı şüpheyle ilk kez, 07'nin ofise dönmediği kurulduktan sonra anılır.
+
+**Evre kapıları.** `GO_H1` yalnızca 3. günde ya da müvekkil görüşmesi, tutanak, imaj raporu ve ofis araması yapıldıysa
+açılır. `GO_T` yalnızca ARA'nın 2. haftasında ve en az üç ara işi (demirbaş, ev, vakıf, Melis, bilirkişi raporu, suç
+duyurusu) tamamlandıysa ya da eylem puanları bittiyse açılır.
 
 ## 3. Delil zinciri
 
@@ -57,10 +66,10 @@ bir savcılık tanığıdır; Kübra'nın Ozan'a dair konuları yalnızca ilgili
 | ded_hastane | 02.14'te Tarık acil serviste | INSIGHT | clue_kilit + clue_onam | S3, B2 | ✓ |
 | ded_laptop_ozan | 07 ofise dönmedi | INSIGHT | clue_envanter + clue_dock / clue_koli | O2 | ✓ |
 | ded_ip_tekin | Tehdit hattının adresi | INSIGHT | ev_isp + clue_ip_ayni | O3 | ✓ |
-| ded_uslup_ozan | Aynı imza | INSIGHT | clue_uslup_ozan / clue_vakif_yazi + clue_uslup_tehdit | O5 | ✓ |
+| ded_uslup_ozan | Aynı imza | INSIGHT | clue_uslup_ozan (Nurten, ARA) / clue_vakif_yazi + clue_uslup_tehdit | O5 | ✓ |
 | ded_uslup, ded_tablet, ded_arsiv | Ara çıkarımlar | INSIGHT | tahta | Skor, esas savunma dayanakları | — |
 
-**Tahta:** INV_CIKARIM 9 tarif (8 çıkarım; 02.14 çıkarımının iki yolu), ARA_CIKARIM aynı 8 tarif + 5 yeni (07, IP, üslup, vakıf yazısı); toplam 10 farklı çıkarım. Çeldirici kartlar:
+**Tahta:** INV_CIKARIM 8 tarif (7 çıkarım; 02.14 çıkarımının iki yolu), ARA_CIKARIM aynı 8 tarif + 5 yeni (07 ×2, IP, üslup ×2); toplam 10 farklı çıkarım. Çeldirici kartlar:
 `clue_pay`, `clue_melis_teori`, `clue_kamera_h`, `clue_sarj` (yanlış eşleşme −50, parametre başına bir kez).
 
 **Gecikmeli teslimler:** hesap verisi (talep: INV_HESAP_IND, teslim: gün sonu, noter seçeneği hash'li delil verir),
@@ -77,7 +86,10 @@ sağlayıcı yanıtı (T1_ISP → ARA 1. hafta sonu), dizüstü (SUC_OZAN ∧ ¬
 | S4 bütünlük tam | hash 14.11 | ev_imaj, ded_zincir | contra_s4 |
 | S5 kanaat | — | itiraz g_kanaat | legal_hits |
 
-**2. celse · Bilirkişi (T_01T):** B1 cihaz 3 (ded_bagli), B2 kilit (ded_hastane), B3 ekran görüntüsü (ev_ss).
+**2. celse · Bilirkişi (T_01T):** B1 cihaz 3 (ded_bagli), B2 kilit (ded_hastane), B3 ekran görüntüsü (ev_ss), B4 "teknik
+olarak sanığın kendisi de olabilir" (ev_isp / ded_ip_tekin → bilirkisi_el; ded_hastane kısmi), B5 "hash bütünlüğü tam"
+(ded_zincir → bilirkisi_zincir: hash 14.11 sonrasını korur, 12–14.11 arasını değil). B4 ve B5 savunmanın aleyhine
+başlar; bilirkişiyi daraltmak oyuncunun işidir.
 **Ozan Tekin (T_03T):** O1 "pişman edeceğim" (itiraz g_kanaat), O2 her şeyi teslim (ded_laptop_ozan / ev_laptop /
 clue_koli), O3 PUSULA'yı yalnızca telefonda (ev_isp / ded_ip_tekin), O4 şifreyi bilemem (ev_not), O5 Tarık'ın tarzı
 (ded_uslup_ozan). İki ve üzeri çelişki → savcı CMK 48 hatırlatması ister, Ozan cevap vermez (T_04).
@@ -94,9 +106,9 @@ Melis, Nurten/demirbaş, Tarık'ın evi, bilirkişi raporu, vakıf dosyası, su�
 | Öncelik | Kimlik | Sınıf | Koşul | Hüküm | XP |
 |---|---|---|---|---|---|
 | 1 | ETIK | OTHER | `karartma` (TK_SIL / TK_GIRIS) | Baroya ve başsavcılığa bildirim | 0 |
-| 2 | BERAAT_B | ACQUITTAL 223/2-b | ¬cokus ∧ gercek_fail ∧ contra_o3 ∧ pers ≥ 7 ∧ final ≥ 8000 | Beraat, adli kontrol kalkar, suç duyurusu | ×1,2 |
-| 3 | BERAAT_E | ACQUITTAL 223/2-e | ¬cokus ∧ kaynak_suphesi ∧ ek_supheler(≥2) ∧ final ≥ 7000 | Şüpheden beraat | ×1,0 |
-| 4 | KISMI | REDUCED | ¬cokus ∧ (terditli ∨ supheden ∨ ss_excluded) ∧ final ≥ 3000 | 134'ten beraat; 107/2+43/1: 1y3a → TCK 62: 1y15g, HAGB | ×0,85 |
+| 2 | BERAAT_B | ACQUITTAL 223/2-b | ¬cokus ∧ gercek_fail ∧ contra_o3 ∧ (ded_hastane ∨ bilirkisi_kilit) ∧ (ded_laptop_ozan ∨ ev_laptop) ∧ pers ≥ 7 ∧ final ≥ 8000 | Beraat, gerçek fail yönünden suç duyurusu, CMK 141 hatırlatması | ×1,2 |
+| 3 | BERAAT_E | ACQUITTAL 223/2-e | ¬cokus ∧ kaynak_suphesi ∧ ek_supheler(≥2) ∧ bilirkisi_teyit (B1 ya da B2 delille) ∧ ded_hastane ∧ final ≥ 7000 | Şüpheden beraat | ×1,0 |
+| 4 | KISMI | REDUCED | ¬cokus ∧ (terditli ∨ supheden ∨ ss_excluded) ∧ (kilit_mahkemede ∨ bilirkisi_kilit) ∧ (contra_s1 ∨ contra_s2 ∨ contra_s4 ∨ ss_excluded ∨ bilirkisi_zincir) ∧ final ≥ 3000 | 9 Kasım işlemleri hükümden çıkar: 134'ten beraat; 6 ve 12 Kasım için 107/2+43/1: 1y3a → TCK 62: 1y15g, HAGB | ×0,85 |
 | 5 | MAHKUMIYET | CONVICTION | varsayılan (çöküş varyantı epilogla) | 134/2: 2y6a + 107/2,43/1: 1y3a | ×0,6 |
 
 Epiloglar `OutcomeDef.epilogue` ile; BERAAT_E epilogu suç duyurusu verilip dizüstü bulunduysa farklı bir kapanış gösterir;
@@ -109,34 +121,43 @@ sonuçlarda ek satır.
 - Eşik çubuğu: Mahkûmiyet 0 · Kısmi 3000 · Beraat 7000 (BERAAT_B için 8000), `thresholds.ts`.
 - Bedeller: yanlış delil (♥ ve −150), belge/sahne ıskası (−10/−20, deneme hakkı), tahta ıskası (−50), sert görüşme tonu
   (güven), etik dışı seçenekler (Melis'i doğrudan arama, tanığa yön verme, Ozan'a teori anlatma → dizüstü kaybolur).
-- `case:validate` final skor aralığı: −5720…11265.
+- `case:validate` final skor aralığı: −7030…11625 (PASSED, kapsam 93/93 node, 204/204 seçenek, 102/102 kural, 43/43 delil; 606 sn, makine yükü altında).
 
 ## 8. Golden path'ler
 | Ad | Sonuç | Final | Özet |
 |---|---|---|---|
-| TIPIK | BERAAT_E | 11175 | Usul stratejisi, tam soruşturma, Ozan'a karşı delil, esas savunma "şüpheden" |
-| G_B | BERAAT_B | 11265 | Masumiyet stratejisi; IP + demirbaş + üslup; esas savunmada gerçek fail |
-| G_KISMI | KISMI | 4485 | Eksik delil zinciri; terditli savunma |
-| G_M | MAHKUMIYET | 5250 | Sütunu sunmadan; "Melis yazdı" iftira savunması |
-| G_ETIK | ETIK | 10285 | Güçlü dava, ama Tarık'ın "sil" teklifi kabul |
-| W | MAHKUMIYET | 7580 | Çöküş: yanlış delillerle güvenilirlik sıfırlanır |
+| TIPIK | BERAAT_E | 11535 | Usul stratejisi, tam soruşturma, Ozan'a karşı delil, bilirkişi daraltılır (B4/B5), esas savunma "şüpheden" |
+| G_B | BERAAT_B | 11625 | Masumiyet stratejisi; IP + demirbaş + üslup; esas savunmada gerçek fail |
+| G_KISMI | KISMI | 5895 | Cihaz sütunu kurulmaz; hastane mazereti ve mühürsüz iki gün duruşmada; terditli savunma |
+| G_M | MAHKUMIYET | 5260 | Sütunu sunmadan; "Melis yazdı" iftira savunması |
+| G_ETIK | ETIK | 10645 | Güçlü dava, ama Tarık'ın "sil" teklifi kabul |
+| W | MAHKUMIYET | 7590 | Çöküş: yanlış delillerle güvenilirlik sıfırlanır |
 
-**Erken çözüm denetimi (2026-10-20):** golden path'ler üzerinde aksiyon silme (delta) aramasıyla yerel en kısa yollar:
-BERAAT_E 122 aksiyon (tipik yolun %61'i), BERAAT_B 132 aksiyon (%66). Her ikisi de ded_bagli (Ek-3 sütunu + noter tespitli
-hesap verisi), ded_hastane ve 1. celsede Demirci'nin çürütülmesini zorunlu tutar; BERAAT_B ayrıca IP yanıtı, demirbaş ve
-Ozan'ın çapraz sorgusunu ister.
+**Erken çözüm denetimi (2026-10-21):** golden path'ler üzerinde motorla (`act`, reddedilen aksiyonlar atlanarak) 64→1
+parça delta-küçültme; bulunan en kısa yollar:
+
+| Hedef | Başlangıç | En kısa | Oran | Süre | Final |
+|---|---|---|---|---|---|
+| BERAAT_E/B | TIPIK (205) | 135 aksiyon | %66 | 70,1 dk | 7005 |
+| BERAAT_B | G_B (198) | 152 aksiyon | %77 | 80,1 dk | 8005 |
+| KISMI | G_KISMI (139) | 97 aksiyon | — | 55,1 dk | 3000 |
+
+En kısa BERAAT_E yolu da müvekkil görüşmesini (TP_GECELER, TP_CIHAZ), Ek-3 sütununu ve hesap verisini (ded_bagli),
+hastane zincirini (onam + kilit → ded_hastane), birinci celsede Demirci'nin çürütülmesini, ARA'da en az üç işi
+(demirbaş, ev, Melis) ve ikinci celsede bilirkişiye delille teyit ettirmeyi içerir. Önceki sürümde 104 aksiyonluk ve
+ARA'yı atlayan yol artık yok (`GO_T` ve `bilirkisi_teyit` kapıları). KISMI'nin en kısa yolu 55 dk'dır; golden path 70 dk.
 
 ## 9. Süre ve sözcük ölçümü
-`npm run case:duration -- son-mesaj` (2026-10-20):
+`npm run case:duration -- son-mesaj` (2026-10-21):
 
 ```
-TIPIK          96.9 dk   13839 sözcük   200 aksiyon  BERAAT_E (11175)
-G_B            95.5 dk   13709 sözcük   193 aksiyon  BERAAT_B (11265)
-G_KISMI        65.2 dk    9510 sözcük   124 aksiyon  KISMI (4485)
-G_M            67.8 dk    9629 sözcük   143 aksiyon  MAHKUMIYET (5250)
-G_ETIK         90.0 dk   12745 sözcük   192 aksiyon  ETIK (10285)
-W              79.7 dk   11243 sözcük   172 aksiyon  MAHKUMIYET (7580)
-==> TİPİK YOL (TIPIK): 96.9 dk  ✓ süre hedefte · KAPI: ✓ GEÇTİ
+TIPIK          97.4 dk   13833 sözcük   205 aksiyon  BERAAT_E (11535)
+G_B            96.0 dk   13712 sözcük   198 aksiyon  BERAAT_B (11625)
+G_KISMI        70.0 dk   10091 sözcük   139 aksiyon  KISMI (5895)
+G_M            66.8 dk    9429 sözcük   144 aksiyon  MAHKUMIYET (5260)
+G_ETIK         91.2 dk   12865 sözcük   197 aksiyon  ETIK (10645)
+W              78.3 dk   10987 sözcük   173 aksiyon  MAHKUMIYET (7590)
+==> TİPİK YOL (TIPIK): 97.4 dk  ✓ süre hedefte · KAPI: ✓ GEÇTİ
 ```
 
 Paket toplamı (testler hariç bütün metin): ~24 100 sözcük. Satır sınırı 220 karakter (DSL derleme hatası).

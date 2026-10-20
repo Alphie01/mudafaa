@@ -42,9 +42,14 @@ Metinler aşağıdaki güncel mevzuat metinleri esas alınarak yazılmış ve de
 | Anayasa 20/2, 38/4, 38/6; AİHS 6/2 | Mentor açıklamaları, BERAAT_E gerekçesi | Özel hayat ve arama; masumiyet karinesi; hukuka aykırı delil yasağı. |
 
 ## 2. Ceza hesabı
-- **BERAAT_B / BERAAT_E:** ceza yok; adli kontrol (yurt dışı çıkış yasağı) kaldırılır; BERAAT_B'de gerçek fail yönünden
-  suç duyurusu ve el koyma tedbiri nedeniyle CMK 141 vd. tazminat hatırlatması.
-- **KISMI:** TCK 134/2'den beraat (ifşanın sanıkça yapıldığı ispatlanamadı). TCK 107/2: temel ceza alt sınır 1 yıl →
+- **BERAAT_B / BERAAT_E:** ceza yok; adli kontrol (yurt dışı çıkış yasağı) birinci celsede kaldırılmadıysa hükümle
+  kaldırılır (gerekçede koşullu satır; hüküm fıkrası bunu tekrar etmez, çünkü tipik yolda tedbir T1_ADLI ile zaten
+  kalkmıştır); BERAAT_B'de gerçek fail yönünden suç duyurusu ve el koyma tedbiri nedeniyle CMK 141 vd. tazminat hatırlatması.
+- **KISMI:** 9 Kasım gecesine ait iki işlem ("Hatırlatma" mesajı ve ses kaydının Hayri Sezer'e iletilmesi) sanığa
+  yüklenemez: telefon kilitli, sanık acil serviste (kilit kaydı + onam formu duruşmada kuruldu; KISMI bunu
+  `kilit_mahkemede ∨ bilirkisi_kilit` ile şart koşar). İfşa yalnızca o geceye ait olduğundan TCK 134/2'den beraat.
+  Şantaj, kalan iki mesaja (6 ve 12 Kasım) dayanır; ikisi aynı suç işleme kararıyla işlendiğinden zincirleme (TCK 43/1).
+  Böylece 134 beraati ile 107 mahkûmiyeti aynı olgu üzerinde çelişmez. TCK 107/2: temel ceza alt sınır 1 yıl →
   TCK 43/1 ile 1/4 artırım = 1 yıl 3 ay → TCK 62 ile 1/6 indirim = **1 yıl 15 gün** hapis ve adli para cezası;
   2 yılı aşmadığı ve sanık sabıkasız olduğu için HAGB (CMK 231/5–6). Somut maddi zarar bulunmadığından 231/6-c engel değil.
 - **MAHKÛMİYET:** TCK 134/2: 2 yıl 6 ay (alt sınırdan TCK 61 ile kısmen uzaklaşma: özel hayatın en hassas alanı).
@@ -92,6 +97,15 @@ mütalaa ve cevap (CMK 216/1–2), esas hakkında savunma, son söz (CMK 216/3),
    noterde hash ile tespiti delilin bütünlüğünü korumak için önerildi (ekran görüntüsü seçeneği zayıf delil sayılır).
 10. **Vakıf dosyası.** Avukatın vakıf yöneticisinin izniyle evrakı yerinde görmesi serbest kabul edildi; resmî kullanım
     için mahkemeden celbi gerekir (Hayri'nin "mahkeme isterse gönderirim" cümlesi).
+
+11. **KISMI'nin olgusal ayrımı.** Önceki sürüm 134'ten "iletenin sanık olduğu ispatlanamadı" diye beraat verip aynı
+    dakikadaki 9 Kasım tehdidini zincirleme şantajın içinde tutuyordu. Karar: 9 Kasım'ın iki işlemi birlikte hükümden
+    çıkarıldı; şantaj 6 ve 12 Kasım mesajlarına, iki fiilli zincirlemeye dayandırıldı. Bu iki gece için başka cihaz
+    ileri sürülmüş ama o cihazı sanık dışında birinin kullandığı somut olarak gösterilememiştir (vicdani kanaat, CMK 217/1).
+12. **Bilirkişinin sınırı.** 2. celsede bilirkişi önce "cihaz 3'ü sanığın kendisi de kullanmış olabilir" ve "hash
+    bütünlüğü tamdır" der; savunma bunları sağlayıcı yanıtı/hat bilgisi ve mühürsüz iki günle daraltır. Bilirkişi
+    hukuki değerlendirme yapamaz (CMK 67/1); burada yalnızca teknik kanaatini delile göre düzeltir. Hash'in yalnızca
+    alındığı andan sonrasını koruması teknik bir bilgidir; kanunda CMK 134/4'teki yedekleme yükümlülüğüne bağlanır.
 
 ## 5. Hassas konu denetimi
 Lineup sınırı: cinsel suçlar, çocuklara yönelik suçlar ve terör davaları yok. Bu davada özel hayat içeriği cinsel

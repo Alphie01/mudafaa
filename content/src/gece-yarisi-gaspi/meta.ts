@@ -227,6 +227,7 @@ export const meta: CasePart = {
       'contra_f3',
       'contra_f4',
       'contra_f5',
+      'contra_f6',
       'arg_kirlenme',
       'arg_halka',
       'arg_mazeret',

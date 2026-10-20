@@ -61,7 +61,12 @@ export const trial2: CasePart = {
     {
       id: 'teshis_coktu',
       label: 'Teşhisin kirlendiği ya da ilk tarifin sanığa uymadığı gösterildi',
-      when: any(flag('contra_n3'), flag('contra_f2'), all(flag('contra_n4'), flag('contra_n5'))),
+      when: any(
+        flag('contra_n3'),
+        flag('contra_f2'),
+        all(flag('contra_n4'), flag('contra_n5')),
+        all(flag('contra_f1'), flag('contra_f3')),
+      ),
     },
     {
       id: 'lehe2',
@@ -74,12 +79,25 @@ export const trial2: CasePart = {
         has('ded_hesap'),
         has('ded_halka'),
         flag('contra_n5'),
+        flag('contra_f5'),
+        flag('contra_f6'),
       ),
     },
     {
       id: 'mutalaa_beraat',
       label: 'Savcı beraat isteyecek kadar güçlü dosya',
-      when: all(ref('teshis_coktu'), any(has('ded_mazeret'), has('ded_evde'), has('ded_hesap'), has('ded_baskasi'))),
+      when: all(
+        ref('teshis_coktu'),
+        any(
+          has('ded_mazeret'),
+          has('ded_evde'),
+          has('ded_hesap'),
+          has('ded_baskasi'),
+          flag('contra_gps'),
+          flag('contra_selfie'),
+          flag('contra_186'),
+        ),
+      ),
     },
   ],
   court: {
@@ -103,6 +121,10 @@ export const trial2: CasePart = {
       lines: B(`
 # ÜÇ HAFTA SONRA · 5 MAYIS 09.15 — BURSA ADLİYESİ [bg:adliye]
 > Koridor aynıydı; insanlar değişmişti. Aynı banklar, aynı sigara kokusu, bir başka ağlayan çocuk.
+> Pencerenin önünde Ferhat Oral sigara içiyordu; adliyede yasak olduğu hâlde. Beni görünce izmariti pencereden attı. Üniforması ütülüydü, gözleri değildi.
+ferhat: Avukat hanım. Bugün ne soracaksınız biliyorum. Ben de ne diyeceğimi biliyorum.
+- O zaman ikimiz de hazırız.
+> Bir şey söyleyecekti. Sonra mübaşirin sesi koridoru doldurdu ve o, salonun kapısına yürüdü.
 `),
     }),
     decisionNode('T_00G_2', [{ to: 'T_00' }], {
@@ -125,6 +147,13 @@ derya: Tolga dün tutuklandı canım. İkrar etti. Barış bir şey söylemiyor;
           `
 > Derya bankta tek başına oturuyordu. Gözleri şişti. Beni görünce kalktı.
 derya: Tolga dün tutuklandı. İkrar etti. Barış’ı jandarma getirecek; ona daha kimse söylemedi mi bilmiyorum.
+`,
+        ),
+        W(
+          flag('derya_sus'),
+          `
+> Derya ve Sevim Hanım aynı bankta. Derya bana başıyla selam verdi; gözlerini kaçırarak. “Sus” dediğim kadın susmaya devam ediyordu.
+derya: Tolga’nın telefonu kapalı canım. Bir şey sormadım. Sen öyle dedin.
 `,
         ),
         O(`
@@ -204,6 +233,15 @@ orhan: HızlıPaket kaydına göre sanık adına açılmış hesap 23.41’de ol
 rahmi: Müdafi, kayıtlara ve rapora diyeceğiniz? CMK 215.
 `,
         ),
+        W(
+          flag('baris_sakla'),
+          `
+orhan: Sayın Başkan, HızlıPaket kaydı açıktır. Sanığın hesabı 23.41’de Sırmakeş merdivenlerinin dibinde, dört dakika hareketsiz.
+orhan: Sanık ilk celsede motorunun ve hesabının kendisinde olduğunu söyledi. Kimseye vermediğini. Kâğıt yalan söylemez.
+rahmi: Müdafi, kayıtlara ve rapora diyeceğiniz? CMK 215.
+~ Barış’a “şimdilik söz etme” dedim. Şimdi savcı, onun susmasını bir itiraf gibi okuyor.
+`,
+        ),
         O(`
 orhan: Sayın Başkan, HızlıPaket kaydı açıktır. Sanığın hesabı 23.41’de Sırmakeş merdivenlerinin dibinde, dört dakika hareketsiz. Olay saati 23.42.
 orhan: Sanık “evdeydim” diyor. Kayıt “oradaydı” diyor. Kâğıt yalan söylemez.
@@ -249,6 +287,15 @@ orhan: Başka bir telefon. Kimin telefonu?
           category: 'SORGULAMA',
           responses: [
             W(
+              all(has('ded_baskasi'), flag('selfie_sakal')),
+              `
+- HızlıPaket’in her oturumda zorunlu tuttuğu özçekim. 22.58. Yakınlaştırınca sol kulak memesinde bir halka. Yüz tıraşlı; sanık o gece sakallıydı, gözaltı tutanağında da öyle.
+- Mağdur 112’de, olaydan bir dakika sonra: “Sol kulağında halka vardı.” Sanığın kulakları, ilk celsede tutanağa geçtiği gibi, delinmemiş.
+> Elif Karaca özçekimin çıktısını istedi. Büyüttü. Başkana uzattı. Başkan gözlüğünü çıkarıp yeniden taktı.
+elif: Makine bu yüzü sanıkla eşleştirmiş. Biz eşleştiremiyoruz.
+`,
+            ),
+            W(
               has('ded_baskasi'),
               `
 - HızlıPaket’in her oturumda zorunlu tuttuğu özçekim. 22.58. Yakınlaştırınca sol kulak memesinde bir halka.
@@ -292,7 +339,7 @@ orhan: Telefon evde kalmış olabilir. Bir arama, kişinin yerini göstermez; av
           next: '$stay',
         }),
         option('T01_BARIS', 'Müvekkil hesabı paylaştığını kendisi anlatsın', {
-          visibleWhen: all(flag('fact_tolga'), flag('baris_hazir')),
+          visibleWhen: all(flag('fact_tolga'), flag('baris_itiraf'), flag('baris_hazir')),
           score: { SAVUNMA_STRATEJISI: 60 },
           effects: [inc('pers'), raise('baris_anlatti')],
           good: 'Sanığın kendi ağzından, kayıtlarla desteklenen açıklaması (CMK 215).',
@@ -336,6 +383,8 @@ ferhat: Bölgede iki ayda dört gasp yaşandı Sayın Başkan. Bu olayda mağdur
 ferhat: Ertesi sabah savcılık talimatıyla fotoğrafla teşhis yaptırdık. Mağdur sanığı tereddütsüz teşhis etti. Usulüne uygun bir işlemdi.
 rahmi: Müdafi, sorularınız.
 ~ Yemin etti. Bir polisin yemini, bir kadının yemininden ağır basar mı? Bu salonda belki. Kâğıtların karşısında değil.
+> Dinleyici sırasında Nermin Hanım vardı bu kez; tanıklığı bitmişti, kalmak istemişti. Kızının koluna girmiş, Ferhat’ı izliyordu. Ona güvenen bir yüzle.
+~ O kadın bu adama güvendi. Bu adam da o kadına bir fotoğraf gösterdi. İkisi de iyi bir şey yaptığını düşündü.
 `),
       statements: [
         statement('F1', 1, ['Teşhisi ', hl('kurallara uygun', any(flag('press_f1'), has('ded_usulsuz'))), ' yaptırdım.']),
@@ -350,6 +399,16 @@ rahmi: Müdafi, sorularınız.
           hl('tarife uyan tek kişi', any(flag('press_f5'), has('ded_halka'), has('ded_baskasi'))),
           ' sanıktı. Kaydı olan, bir daha yapar.',
         ]),
+        statement(
+          'F6',
+          6,
+          [
+            'Sanığın o gece evde olduğuna dair ',
+            hl('annesinin sözünden başka bir şey yoktu', any(has('ded_mazeret'), has('ded_evde'))),
+            '; kimse başka bir şey söylemedi.',
+          ],
+          flag('press_f5'),
+        ),
       ],
       rules: [
         pressRule('PR_F1', 'F1', {
@@ -403,13 +462,26 @@ ferhat: Bakmadım. Yaralama yazıyordu.
         pressRule('PR_F5', 'F5', {
           score: { SORGULAMA: 25 },
           effects: [raise('press_f5')],
-          responses: B(`
+          responses: [
+            W(
+              flag('fact_liste'),
+              `
+- Karakolun önünde bana “iğne kutusunda ararsın” dediniz. Kutudaki tek iğne, kaydı olan tek kurye. Tarifin geri kalanına baktınız mı?
+ferhat: Genç, ince, kurye. Sarı kutu. Uyuyordu.
+- Annesi “evdeydi” dediğinde?
+ferhat: Anneler hep evdeydi der avukat hanım. Başka kimse bir şey söylemedi.
+~ Başka kimseye sormadı. Bir sonraki cümlesini bekliyorum; söyleyecek.
+`,
+            ),
+            O(`
 - Tarif neydi? Tam olarak?
 ferhat: Genç, ince, kurye. Sarı kutu.
 - Başka?
 ferhat: Başka… o kadar.
 ~ O kadar değil. 112 dökümünde bir halka var. Okumamış, ya da okuyup durmamış.
+ferhat: Bir de annesi “evdeydi” dedi. Anneler hep evdeydi der.
 `),
+          ],
         }),
         presentRule('PS_F2', 'F2', ['ev_gozlem', 'ded_kirlenme'], {
           score: { SORGULAMA: 300 },
@@ -460,7 +532,43 @@ ferhat: Ben… yanlış hatırlamış olabilirim.
 ~ Yanlış hatırlamak. Bu dosyada herkesin ortak hastalığı.
 `),
         }),
-        presentRule('PS_F5', 'F5', ['ded_halka', 'ded_baskasi'], {
+        presentRule('PS_F6', 'F6', ['ded_mazeret', 'ded_evde'], {
+          score: { SORGULAMA: 250 },
+          effects: [inc('pers'), raise('contra_f6')],
+          good: 'Kolluk, sanığın mazeretini hiç araştırmamış; bağımsız tanık ve kayıtlar sanığın evde olduğunu gösteriyor.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Annesinden başka bir şey yoktu, diyorsunuz. Üst kat komşusu kesinti sırasında sanıkla balkonda konuştu; UEDAŞ kaydı kesintiyi 23.36–23.51 olarak gösteriyor.
+- Siz komşuya sordunuz mu Sayın Tanık? Kapısını çaldınız mı?
+ferhat: …Hayır.
+rahmi: Tutanağa geçsin: tanık, sanığın mazeretine ilişkin araştırma yapılmadığını beyan etti.
+`),
+        }),
+        presentRule('PS_F6_KAYIT', 'F6', ['ev_uedas', 'ev_tel'], {
+          enabledWhen: any(has('clue_kesinti'), has('clue_186')),
+          visibleWhen: any(has('clue_kesinti'), has('clue_186')),
+          score: { SORGULAMA: 150 },
+          effects: [inc('pers'), raise('contra_f6')],
+          good: 'Kayıtlar, kolluğun hiç bakmadığı mazereti destekliyor.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Kayıtlar başka bir şey söylüyor Sayın Tanık. Sanığın mahallesinde elektrik kesikti; sanığın telefonu o dakikalarda evinden arıza hattını aradı. Bunlara baktınız mı?
+ferhat: Bakmadık. Gerek görmedik.
+`),
+        }),
+        presentRule('PS_F5_SELFIE', 'F5', ['ev_selfie'], {
+          enabledWhen: has('clue_selfie'),
+          visibleWhen: has('clue_selfie'),
+          score: { SORGULAMA: 200 },
+          effects: [inc('pers'), raise('contra_f5')],
+          good: 'Hesabı o gece kullanan kişinin özçekimi tarife (sol kulakta halka) uyuyor; sanığa değil.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Tarife uyan tek kişi diyorsunuz. Hesabın o gece oturum açılışındaki özçekim: sol kulakta halka. Tarife uyan biri vardı Sayın Tanık; ama o kişi sanık değildi.
+ferhat: Bu fotoğrafı… ilk kez görüyorum.
+`),
+        }),
+        presentRule('PS_F5', 'F5', ['ded_halka', 'ded_baskasi', 'ded_hesap'], {
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_f5')],
           good: 'İlk tarif (sol kulakta halka) sanığa uymuyor; kolluk tarifin bu kısmını hiç kullanmamış.',
@@ -525,7 +633,29 @@ orhan: Bunu neden tutanağa yazmadın Ferhat?
 ferhat: Yazsaydım teşhis olmazdı Sayın Savcım.
 ~ Bir cümle. Bütün dosya bu cümlenin içinde. Yazsaydım teşhis olmazdı.
 `),
-      choices: [cont('T02K_DEVAM', 'Devam', 'T_03_G', { role: 'PRIMARY' })],
+      choices: [cont('T02K_DEVAM', 'Devam', 'T_02R', { role: 'PRIMARY' })],
+    }),
+    story('T_02R', {
+      ...H2,
+      title: 'Kısa ara',
+      background: 'adliye',
+      hud: ['cred', 'pers'],
+      lines: B(`
+rahmi: On dakika ara.
+# ADLİYE KORİDORU · KISA ARA [bg:adliye]
+> Ferhat Oral koridorun ortasında durdu. Nermin Hanım ile kızı tam karşısındaydı. Bir an kimse kıpırdamadı.
+ferhat: Teyze… Nermin Hanım. Ben…
+nermin: Sen bana o fotoğrafı gösterdin evladım. Ben sana inandım. Sen polissin diye.
+ferhat: Ben sizin için yaptım. Dört kadın için. Bir beşinci olmasın diye.
+nermin/uzgun: Ben beşinci olmak istemezdim. Ama bir çocuğu da yerime koymak istemezdim.
+> Ferhat başını eğdi. Bir şey söylemeden yürüdü; pencerenin önünde durdu, sigarasını çıkardı, yakmadı.
+> Yanına gittim. Neden gittiğimi bilmiyorum.
+ferhat: Bana kızıyorsunuz, biliyorum.
+- Kızmıyorum. Usulü atlamanızın bir bedeli var, o kadar. Bu bedeli bir çocuk üç ay ödedi.
+ferhat: O dört kadının da bir bedeli var avukat hanım. Onu kim ödüyor?
+~ Doğru bir soru. Bu salonda cevabı yok. Bu salonun işi, o soruyu başka birinin yerine cevaplamamak.
+`),
+      choices: [cont('T02R_DEVAM', 'Salona dön', 'T_03_G', { role: 'PRIMARY' })],
     }),
     decisionNode('T_03_G', [
       { when: all(flag('kadir_tanik'), not(flag('kadir_gelmez'))), to: 'T_03' },
@@ -541,6 +671,8 @@ sukru: Tanık Kadir Bayram! Hı-hım.
 > Kadir Usta bayramlık ceketini giymişti; kendi diktiği, omuzları tam oturan. Kürsüye yürürken bir kez durdu, gözlüğünü düzeltti.
 rahmi: Tanık, sanıkla akrabalığınız yok. Yemininizi edin ve bildiklerinizi anlatın.
 kadir: Elli yıl terzilik yaptım Sayın Başkan. Ölçmeden biçmem. O gece elektrik gitti; balkona çıktım. Aşağıda Barış öksürüyordu. Konuştuk. Bu kadar.
+> Barış dinleyici sırasından değil, sanık sandalyesinden ona baktı. Kadir Usta bir an ona döndü, başıyla küçük bir selam verdi; terzinin müşterisine verdiği selam gibi.
+~ Üç ay önce bir perde çekmişti. Bugün o perdeyi açıyor.
 `),
       choices: [
         option('KS_ELEKTRIK', '“Elektrik gelince ne oldu?”', {
@@ -630,6 +762,7 @@ kadir: Bilmiyorum Sayın Başkan. Ben ses dedim.
               [score('SORGULAMA', 100), inc('pers')],
               [ifThen(not(flag('kadir_kocluk')), [score('SORGULAMA', 30)])],
             ),
+            ifThen(all(flag('kadir_goz_once'), not(flag('kadir_kocluk'))), [score('SORGULAMA', 30)]),
           ],
           neutral: 'Tanığa güvendin; dürüst bir tanık meşru soruya kendi cevabını verir.',
           responses: [
@@ -701,7 +834,28 @@ rahmi: Tanığın raporu dosyaya alındı. Müdafi, tanıktan vazgeçiyor musunu
       ],
       choices: [cont('T03Y_DEVAM', 'Devam', 'T_04_G', { role: 'PRIMARY' })],
     }),
-    decisionNode('T_04_G', [{ when: flag('gamze_tanik'), to: 'T_04' }, { to: 'T_05' }]),
+    decisionNode('T_04_G', [
+      { when: flag('gamze_tanik'), to: 'T_04' },
+      { when: flag('cemal_tanik'), to: 'T_04C' },
+      { to: 'T_05' },
+    ]),
+    decisionNode('T_04C_G', [{ when: flag('cemal_tanik'), to: 'T_04C' }, { to: 'T_05' }]),
+    court2.stage('T_04C', {
+      title: 'Kebapçı',
+      courtStage: 'TANIK_DINLEME',
+      background: 'durusma_salonu',
+      witness: 'cemal',
+      onFirstEnter: [inc('pers')],
+      lines: B(`
+sukru: Tanık Cemal Usta! Hı-hım.
+> Cemal Usta önlüksüz gelmişti; ellerini nereye koyacağını bilemedi, sonunda kürsünün kenarına koydu. Parmaklarında ızgaranın eski yanıkları.
+cemal: O gece 23.31’de sipariş aldı bir kurye Sayın Başkan. Bereliydi. Kulağında halka vardı; ızgaranın ışığında parladı. Adını bilmem.
+elif: Salonda o kişi var mı?
+cemal: Yok. Bu çocuk değil. Bu çocuğun saçı uzun, sakalı var. O tıraşlıydı. Kuryeyi yüzünden değil, halkasından hatırlıyorum hâkim hanım.
+~ Bir tanık, salonda birini göstermeyi reddetti. Bu dosyada ilk kez.
+`),
+      choices: [cont('T04C_DEVAM', 'Devam', 'T_05', { role: 'PRIMARY' })],
+    }),
     court2.stage('T_04', {
       title: 'Hemşire',
       courtStage: 'TANIK_DINLEME',
@@ -724,10 +878,11 @@ sukru: Tanık Gamze Ateş! Hı-hım.
 gamze: Perdenin aralığından gördüm. Telefon, tek fotoğraf, “bu mu, kaydı var, bıçakla yakalanmıştı.” Hasta iki kez “bilmiyorum” dedi, üçüncüde “galiba.” Sonra ağladı. Yazdım; saatiyle.
 > Ferhat Oral dinleyici sırasında başını eğdi.
 elif: Tanık, gösterilen fotoğrafı gördünüz mü?
+
 gamze: Kazınmış saçlı bir genç. Bir duvar, bir numara. Gözaltı fotoğrafı gibiydi.
 `),
       ],
-      choices: [cont('T04_DEVAM', 'Devam', 'T_05', { role: 'PRIMARY' })],
+      choices: [cont('T04_DEVAM', 'Devam', 'T_04C_G', { role: 'PRIMARY' })],
     }),
     court2.stage('T_05', {
       title: 'Mütalaa',
@@ -750,6 +905,8 @@ rahmi: Delillerin tartışılması tamamlandı. Esas hakkındaki mütalaa.
 orhan: Sayın Başkan, mağdurun teşhisi, kolluk görevlisinin teşhisten önce tek fotoğraf göstermesi nedeniyle hükme esas alınabilecek nitelikte değildir.
 orhan: Dosyada sanığın suçu işlediğine dair başka kesin delil bulunmamaktadır. Sanığın CMK 223/2-e uyarınca beraatine; hesabı kullanan kişi yönünden suç duyurusunda bulunulmasına karar verilmesini talep ederim.
 ~ Bir savcının beraat istemesi bir zafer değildir. Bir savcının işini yapmasıdır. Bu dosyada ilk kez biri işini sonuna kadar yaptı.
+> Nermin Hanım’ın kızı annesinin elini tuttu. Nermin Hanım elini çekmedi; ama ellerine de bakmadı. Savcıya bakıyordu; sanki bir şey daha söylemesini bekliyormuş gibi. Saatini.
+~ Saatini kimse söylemedi. Bu dosyada bir beraat var; bir saat yok.
 `,
         ),
         O(`
@@ -773,8 +930,8 @@ rahmi: Müdafi, esas hakkındaki savunmanız.
       choices: [
         dayanak(
           'P_KIRLENME',
-          'Teşhis acilde tek fotoğrafla kirlendi',
-          any(has('ded_kirlenme'), flag('contra_n3'), flag('contra_f2')),
+          'Teşhis, acilde gösterilen tek kareyle bozuldu',
+          any(has('ded_kirlenme'), flag('contra_n3'), flag('contra_f2'), flag('gamze_dinlendi')),
           'arg_kirlenme',
           `
 - Birincisi: teşhis. Mağdura, karakoldaki işlemden dokuz saat önce, acil serviste, bir polis telefonundan tek bir fotoğraf gösterildi. Karakoldaki “seçim” bir teşhis değil, bir tanımadır.
@@ -810,7 +967,7 @@ rahmi: Müdafi, esas hakkındaki savunmanız.
         dayanak(
           'P_BICAK',
           'Silah unsuru ispatlanmadı',
-          any(has('ded_bicak'), flag('contra_n2')),
+          any(has('ded_bicak'), flag('contra_n2'), flag('contra_f4')),
           'arg_silah',
           `
 - 112 çağrısında bıçak yok: “İtti, düştüm, elim kesildi.” Basamakta kanlı bir şişe kırığı var. Bıçak, ertesi sabah, kolluğun sözünden sonra ifadeye girdi.
@@ -818,8 +975,8 @@ rahmi: Müdafi, esas hakkındaki savunmanız.
         ),
         dayanak(
           'P_ESKI',
-          'Gösterilen fotoğraf üç yıllıktı',
-          has('ded_eski_foto'),
+          'Polisin karesi bugünkü sanığa benzemiyor',
+          any(has('ded_eski_foto'), flag('contra_n1')),
           'arg_eski',
           `
 - Mağdura gösterilen fotoğraf üç yıl önceki bir gözaltından. Bugünkü sanık o fotoğrafa benzemiyor. Mağdur bir fotoğrafı tanıdı; sanığı değil.
@@ -863,7 +1020,7 @@ rahmi: Müdafi, esas hakkındaki savunmanız.
           effects: [
             raise('closing_usul'),
             ifThen(
-              any(flag('arg_kirlenme'), flag('contra_f1')),
+              any(flag('arg_kirlenme'), flag('contra_f1'), flag('arg_eski')),
               [score('SAVUNMA_STRATEJISI', strategyAmount(200, 'USUL')), inc('pers')],
               [score('SAVUNMA_STRATEJISI', 40)],
             ),
@@ -874,6 +1031,8 @@ rahmi: Müdafi, esas hakkındaki savunmanız.
 - Sayın Başkan, kanun teşhisin nasıl yapılacağını madde madde yazmış: önce tarif, benzer kişiler, iki tekrar, uyarı; tek fotoğraf asla.
 - Bu dosyada bunların hiçbiri yok. Usulsüz teşhis, yapılmamış teşhistir. Teşhis düşünce, sanığı olaya bağlayan bir delil kalmıyor.
 - Müvekkilimin CMK 223/2-e uyarınca beraatini talep ediyoruz.
+- Bu salonda bir kadın üç ay boyunca bir yüz taşıdı. O yüzü ona biz vermedik; ama ondan almak bize düştü. Usul, işte bu yüzden vardır: kimse bir başkasının hafızasına yazmasın diye.
+> Elif Karaca kalemini bıraktı. Başkan başını hafifçe eğdi; onay mı, yorgunluk mu, bilmiyorum.
 `),
         }),
         option('S_TERDIT', 'Önce beraat; olmazsa silah unsuru düşsün, alt sınır ve takdiri indirim', {
@@ -910,6 +1069,8 @@ rahmi: Müdafi, esas hakkında.
       lines: B(`
 rahmi: Sanık, ayağa kalkın. Hükümden önce son sözünüz nedir?
 > Barış ayağa kalktı. Bana baktı. Ne söyleyeceğini bilmiyordum; bilmemem gerekiyordu.
+> Salonda bir sessizlik. Sevim Hanım tespihini durdurdu. Derya bacak bacak üstüne atmıştı; ayağını sallamayı kesti.
+~ Son söz. Kanun onu sanığa verir; avukata değil. Burada benim işim bitiyor. Bundan sonrası bir çocuğun sesi.
 `),
       next: 'T_08',
       choices: [
@@ -924,6 +1085,13 @@ rahmi: Sanık, ayağa kalkın. Hükümden önce son sözünüz nedir?
               `
 baris: Ben o kadının saatini almadım. Ama saati alan benim kardeşim gibi biriydi. Ben ondan özür dilerim. Onun yerine. Nermin teyzeden.
 > Nermin Hanım dinleyici sırasında ayağa kalktı. Bir şey söylemedi. Sonra yeniden oturdu.
+`,
+            ),
+            W(
+              flag('baris_anlatti'),
+              `
+baris: Ben o kadının saatini almadım Sayın Başkan. Hesabımı verdim; onu söyledim. Kim aldıysa… o da bir gün söylesin. Kadının saatini versin.
+> Salonun arkasında Nermin Hanım başını eğdi. Derya’nın elleri dizlerinin üstünde kenetlendi.
 `,
             ),
             O(`
@@ -956,6 +1124,22 @@ baris: Annem hasta Sayın Başkan. Şekeri var. Ben bakıyorum. Beni bırakın.
           flag('cokus'),
           `
 > Heyet müzakereye çekildi. Bir saat. Salondan çıkan kimse geri dönmedi; ben yerimden kalkmadım.
+`,
+        ),
+        W(
+          flag('closing_terdit'),
+          `
+> Heyet müzakereye çekildi. Kırk dakika. Barış bana döndü: “Abla, sekiz yıl ne demek?” Cevap vermedim. Terditli bir savunma, müvekkile iki cevap birden verir; ikisi de doğru, ikisi de ağır.
+sukru: Taraflar salona! Hükmü ayakta dinleyin. Hı-hım.
+`,
+        ),
+        W(
+          any(flag('closing_masumiyet'), flag('closing_usul')),
+          `
+> Heyet müzakereye çekildi. Kırk dakika. Koridorda Sevim Hanım’ın tespihi, Derya’nın çakmağı, Nermin Hanım’ın kızının termos kapağı.
+> Barış ayağa kalkıp pencereye gitti. Aşağıda adliye otoparkı, bir sıra motor, sarı bir kutu. Uzun uzun baktı.
+sukru: Taraflar salona! Hükmü ayakta dinleyin. Hı-hım.
+~ Hüküm ayakta dinlenir. Kanun böyle der. Ayakta durmak, düşmeye hazır olmaktır belki.
 `,
         ),
         O(`

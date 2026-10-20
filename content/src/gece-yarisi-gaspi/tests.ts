@@ -176,6 +176,7 @@ s ded_eski_foto N1
 s ev_ihbar N5
 c H103K_DEVAM
 c H104_A
+c H104B_DEVAM
 c H105_A
 c H106_DEVAM
 `);
@@ -248,6 +249,7 @@ o g_kanaat F5
 p F2
 s ev_gozlem F2
 c T02K_DEVAM
+c T02R_DEVAM
 `);
 
 const KADIR_H2 = A(`
@@ -286,6 +288,7 @@ c ARA_SON_DEVAM
   KADIR_H2,
   A(`
 c T04_DEVAM
+c T04C_DEVAM
 c T05_DEVAM
 c P_KIRLENME
 c P_MAZERET

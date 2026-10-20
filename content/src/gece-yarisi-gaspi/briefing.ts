@@ -118,6 +118,8 @@ leyla: İhbar formu ve çağrı dökümü. Dosyada var. Savcı okumamış, polis
 - Siz okudunuz mu?
 leyla: Ben dosyaları senin için okumam. Okuyup okumadığını görmek için okurum.
 ~ Kimsenin okumadığı kâğıt, okunmayı bekleyen kâğıttır.
+leyla: Bir de önceki avukat. Zorunlu müdafi; karakolda ifadesinde hazır bulunmuş, sonra bir daha görünmemiş. Kötü biri değil. Gece üçte çağrılmış, sabah dokuzda başka bir dosyası varmış.
+leyla: Bu meslekte herkesin bir sabah dokuzu var Deniz. Bu dosya, birinin sabah dokuzunda okunmadan geçilmiş bir gece.
 > Leyla ayağa kalktı. Masasına döndü. Masanın köşesinde ters çevrilmiş bir çerçeve duruyordu; yıllardır öyle.
 ~ Hiç sormadım. Sormamam gerektiğini biliyordum.
 leyla: Bir şey daha. Teşhis tutanağında sonuca değil, usule bak. Sonuç tek kelimedir; usul bir hikâyedir.

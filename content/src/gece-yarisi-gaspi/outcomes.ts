@@ -148,6 +148,7 @@ leyla: Bir gün sana bir dosyadan bahsedeceğim Deniz. Bugün değil.
           any(has('ded_hesap'), has('ded_baskasi')),
         ),
         because('İddia edilen bıçak bulunamamış, mağdurun ilk beyanında yer almamıştır.', any(has('ded_bicak'), flag('contra_n2'))),
+        because('Acil servis hemşiresi, teşhisten önce mağdura telefondan tek fotoğraf gösterildiğini duruşmada doğrulamıştır.', flag('gamze_dinlendi')),
         because('Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2).'),
       ],
       legalBasis: 'CMK 223/2-e; CMK 141/1-e, 142, 231/3; PVSK ek md. 6; CMK 217; Anayasa 38/4; AİHS 6/2',

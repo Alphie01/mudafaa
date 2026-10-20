@@ -239,6 +239,9 @@ baris: Gece bir ara uyandım, terlemiştim. Sonra yine uyudum. Sabah kapı çald
 baris: Aşağıda. Hep aşağıda durur. Kimse almadı.
 > Bunu söylerken gözlerini bir an masanın vidasına indirdi. Sonra yine bana baktı.
 ~ Ateşten mi, yoksa başka bir şeyden mi? Not aldım ve sormadım. Henüz.
+baris: Abla, bir şey soracağım. O kadın… o kadın beni nasıl tanıdı? Ben onu hiç görmedim. Hayatımda bir kere bile Sırmakeş’ten inmedim, kurye olarak bile.
+- Bunu bulmak için buradayım.
+baris/uzgun: Karakolda bir fotoğraf gösterdiler bana da. “Bu sen misin” dediler. Bendim. Üç yıl önceki ben.
 `),
           ],
         },
@@ -266,6 +269,7 @@ baris: Abla, ateşim kırktı. Bana o geceyi saat saat sorma. Ben o geceyi hatı
 baris: Üç gündür kötüydüm. O akşam aile hekimine gittim, beşi kırk gibi. Reçete yazdı; evde bir yerdedir, annem saklar her kâğıdı.
 baris: Gece hiç yemek yemedim. Annem çorba yaptı, içemedim. Bir insan bu hâlde merdiven mi koşar abla, kadın mı iter?
 ~ Bir mazeret değil. Ama bir hikâyenin ilk cümlesi.
+baris: Bir de hekim hanım “iki gün evden çıkma” dedi. Çıkmadım. Annem bir yere bırakmadı zaten; kapının önünde nöbet tuttu sanki.
 `),
         },
         hard: {
@@ -291,6 +295,7 @@ baris: Karakola götürdüler, fotoğraf çektiler, parmak izi aldılar. Mahkeme
 - O fotoğrafta nasıldın?
 baris: Askerden yeni gelmiştim. Saçım sıfırdı, bir de ince bıyık bırakmıştım; herkes güldü bana. Şimdi beni o fotoğraftan kimse tanımaz.
 ~ Kimse tanımaz. Ama biri tanıdı. Hangi yüzü?
+baris: O düğünden sonra Derya ablam bir hafta konuşmadı benimle. Sonra bir gün salona çağırdı, saçımı kendi kesti. “Bir daha yumruk yok” dedi. Yok abla. O günden beri yok.
 `),
         },
         hard: {
@@ -305,7 +310,7 @@ baris: O fotoğraf… askerden yeni gelmiştim, saçım sıfırdı. Şimdi aynay
     }),
     topic('TP_AILE', 'Ailen', {
       cost: costOf('min', 2),
-      score: { SORGULAMA: 10 },
+      score: { SORGULAMA: 15 },
       tones: {
         soft: {
           prompt: 'Annen, ablan nasıl? Kimler geliyor görüşe?',
@@ -314,6 +319,8 @@ baris/uzgun: Annem her hafta geliyor. Camın arkasından bakıyor, konuşamıyor
 baris: Derya ablam… o bizim babamız gibi. Salonu açtığından beri evi o çeviriyor. Avukata da o koştu, biliyorum.
 baris: Amcamın oğlu Tolga da var; kardeş gibi büyüdük. O gelemiyor görüşe; inşaatta çalışıyor, gündüz izin vermiyorlar.
 ~ Bir aile. Herkesin bir yeri, herkesin bir yükü.
+baris: Ben kurye oldum, Tolga inşaata gitti. Ben gece, o gündüz. Bayramlarda bile zor görüşüyoruz artık. Eskiden aynı motora binerdik, şimdi aynı sofraya oturamıyoruz.
+~ Bir kuzen. Gündüzleri inşaatta. Not defterime yazdım; bir aile ağacının dalı olarak, başka bir şey olarak değil.
 `),
         },
         hard: {
@@ -340,6 +347,10 @@ baris/saskin: Kulağıma mı? Niye?
 baris: Hiç deldirmedim abla. Annem “erkek kulak deldirmez” der, babam ölünce de hiç tartışmadım. Niye sordun?
 - Belki bir gün söylerim.
 ~ Kadın o gece bir halka gördü. Bu kulaklarda hiç halka olmadı.
+baris: Bu iyi bir şey mi abla, kötü mü?
+- Şimdilik bir şey. İyi ya da kötü olduğunu kâğıtlar söyleyecek.
+baris: Kâğıtlar… Bu dosyada herkes kâğıt diyor. Bir tek bana kimse bir şey sormuyor.
+~ Haklı. Bu dosyada ona ilk soruyu soran ben oldum; üç ay sonra.
 `),
         },
         hard: {
@@ -415,7 +426,7 @@ baris: Sağ ol abla. Ne sorarsan sor.
 const gorusmeGiris = decisionNode('INV_GORUSME_G_1', [{ to: 'INV_GORUSME' }], {
   ...INV,
   title: 'Müvekkil görüşmesi',
-  onFirstEnter: [meet('sevim'), meet('hasan')],
+  onFirstEnter: [meet('sevim'), meet('hasan'), ifThen(flag('deniz_durust'), [inc('trust', 4)])],
   lines: [
     W(
       cmp({ visits: 'INV_GORUSME' }, '==', 0),
@@ -474,6 +485,12 @@ derya: Gel canım. Salonu kalfaya bıraktım, bir saat. Annem içeride; kusura b
 > İki oda bir salon. Duvarda halı, vitrinde bayramlık bardaklar. Sevim Hanım divanda tespih çekiyordu; beni görünce kalkmaya davrandı, Derya omzuna dokunup oturttu.
 sevim/uzgun: Hoş geldin kızım. Barış’ın odası şurası. Ben her gün yatağını yapıyorum. Bir şey bozmadım.
 derya: Bak canım, ne istersen. Polis bir kere bile içeri girmedi; kapıdan aldılar, gittiler.
+sevim: O sabah ateşten titriyordu kızım. Bir hırka bile giydiremedim. Eşofmanla götürdüler, ayağında terlik. Ayakkabısını ben arkasından karakola götürdüm.
+sevim: Gece ben başındaydım. Bir ara uyumuşum, divanda. Uyandığımda karanlıktı, elektrik gitmişti. Barış balkondaydı, öksürüyordu. “Gir içeri oğlum” dedim.
+- Saat kaçtı, hatırlıyor musunuz?
+sevim/uzgun: Bilmem ki. Saate bakan mı olur? Karanlıkta tespihimi aradım, onu bulamadım, saati mi bulacaktım?
+derya: Annemin sözü sayılmıyormuş canım, biliyorum. Polis de öyle dedi: “Anneler hep evdeydi der.”
+~ Bir annenin sözü yalan değildir; ama mahkemede bir kanıt da değildir. Annenin anlattığı balkon, başka birinin hafızasında da olmalı.
 ~ Kimsenin bakmadığı bir ev, kimsenin okumadığı bir kâğıt gibidir. Baktım.
 `),
 });
@@ -531,6 +548,9 @@ ali: Gel bakalım avukat. Çay. Şeker kaç? Söyleme, ben bilirim; avukatlar ş
 ali: Nermin abla otuz yıldır bu merdivenden iner. Her gece selam verir, “Ali Rıza, ekmek kaldı mı” der. O gece ekmek sormadı.
 ali: Bir gürültü duydum, çıktım. Basamakta oturuyordu, eli kan. Motor aşağıdan geçti; plakasına bakamadım, yağmur gözüme girdi.
 ali: Telefonu ben verdim. Onun telefonu çantadaydı. Konuşurken yanında durdum; omzuna montumu koydum.
+ali: Bu merdivenlerde kırk yıldır dükkân tutuyorum avukat. Her gece aynı insanlar iner: hemşireler, garsonlar, fırıncının çırağı. Bir de kuryeler, motorla aşağıdan geçen.
+ali: O gece de bir motor aşağıda bekliyordu. Farı kapalı. Ben “sipariş bekliyor” dedim, dikkat etmedim. Kırk yıldır dikkat ederim de o gece etmedim.
+~ Herkesin bir “o gece etmedim”i var. Bu dosya o gecelerden yapılmış.
 `),
   choices: [
     option('AQ_TARIF', '“Polise ne tarif etti, siz duydunuz mu?”', {
@@ -582,6 +602,7 @@ const tAliKarar = conversation('INV_T_ALI_K', {
 - Ali Bey, siz yalnızca duyduğunuzu söyleyeceksiniz. Görmediğiniz bir şeyi değil. Fazlası, ablaya da Barış’a da zarar verir.
 ali: Hı. Peki. Haklısın. Ben de karışırım bazen, laf lafı açar.
 ali: Duyduğum: kurye, sarı kutu, halka. Gördüğüm: kan, şişe, motor. Bu kadar.
+ali: Bir de Nermin ablanın yüzünü. Onu da gördüm. Kimse ona sormadı ama ben söyleyeyim: o gece o kadının yüzünde korku yoktu avukat. Şaşkınlık vardı. Korku ertesi gün geldi.
 ~ Bu kadar, yeterince fazla.
 `),
       next: '$return',
@@ -621,7 +642,7 @@ kadir: “Gir içeri oğlum, hasta hasta” dedim. “Yanıyorum usta” dedi. B
 `),
   choices: [
     option('KQ_SAAT', '“Saat kaçtı, hatırlıyor musunuz?”', {
-      score: { SORGULAMA: 20 },
+      score: { SORGULAMA: 25 },
       responses: B(`
 kadir: Saate bakmadım. Karanlıktı. Duvar saatim pilli, o da durmamış, bakmadım işte.
 kadir: Ama elektrik gidince çıktım, elektrik gelmeden girdi. Bunu biliyorum. Elektrik gelince televizyon kendi kendine açıldı, sesinden sıçradım.
@@ -657,6 +678,9 @@ const tKadirKarar = conversation('INV_T_KADIR_K', {
   room: { label: 'ÜST KAT · TERZİ', character: 'kadir' },
   lines: B(`
 kadir: Mahkemeye mi çağıracaksın beni? Ben mahkemeleri sevmem avukat. Oğlumun bir davası vardı; dört yıl sürdü, adam oldu, bitmedi.
+kadir: Ama o sabah… polis Barış’ı götürürken balkondaydım. Bir şey diyecektim. Demedim. Perdeyi çektim.
+kadir: Üç aydır o perdeyi her sabah açıyorum, her sabah aynı yere bakıyorum. Ölçtüm ama söylemedim. Bu da bir tür biçmektir.
+~ Bir perde. Bir adamın üç aylık pişmanlığı.
 `),
   choices: [
     option('KD_BILDIR', 'Tanık olarak bildireceğim', {
@@ -668,6 +692,8 @@ kadir: Mahkemeye mi çağıracaksın beni? Ben mahkemeleri sevmem avukat. Oğlum
 - Sizi tanık olarak bildireceğim Kadir Usta. Mahkeme sizi çağıracak; ne gördüyseniz, ne duyduysanız onu anlatacaksınız. Bu kadar.
 kadir: Bu kadar mı? Peki. Ölçtüğümü söylerim. Biçmem.
 > Kapıda elimi sıktı. Eli kuru, sıcak; bir makasın kabzası gibi sertleşmiş.
+kadir: Bir de o çocuğa söyle; benim perdeyi çektiğimi. O sabah. Bilsin. Ben söylerim aslında; yüzüne bakamam.
+~ Bir tanık, bir özür. İkisini aynı cümleye sığdırmış.
 `),
       next: '$return',
     }),
@@ -712,6 +738,8 @@ gamze: Avukat mısınız? Beş dakikam var. Sonra eve gidip on iki saat ölü gi
 - 19 Ocak. Nermin Aksoy. El kesisi, adli vaka.
 > Kahve bardağını bıraktı. Yüzündeki yorgunluk bir anda başka bir şeye döndü; dikkate.
 gamze: Hatırlıyorum. Sol avuç, iki dikiş. Kadın şoktaydı ama dimdikti; hasta bakıcıymış, kendi bandajına talimat verdi bana.
+gamze: Otuz yıl hasta taşımış bir kadın. Ellerinden belli; parmak boğumları kalın, tırnakları kısa. “Sıkı sarma kızım, kan durur ama el uyuşur” dedi. Haklıydı.
+gamze: O gece acilde on dört adli vaka vardı. Bıçaklanan iki genç, bir trafik kazası, bir de o. En sakini oydu. Sonra… sonra sakin değildi.
 `),
   choices: [
     option('GQ_POLIS', '“O gece polis geldi mi?”', {
@@ -758,6 +786,9 @@ gamze: Ne yapacaksınız şimdi? Beni mahkemeye mi çağıracaksınız?
       category: 'USUL_BILGISI',
       responses: B(`
 - Sizi tanık olarak bildireceğim Gamze Hanım. Gördüğünüzü mahkemede anlatırsınız; formu da isteyeceğim.
+gamze: Polis bana bir şey der mi? Bizim acilde polis her gece var. Kavga, kaza, sarhoş.
+- Siz yalnızca gördüğünüzü anlatacaksınız. Kimseyi suçlamayacaksınız; bir saati ve bir telefonu anlatacaksınız.
+gamze: Saat 00.40. Telefon siyahtı, kılıfı yoktu. Fotoğraf bir duvar önünde, bir numara tabelasıyla. Bunları söylerim. Gerisini siz söylersiniz.
 gamze: Peki. Nöbetim olmayan bir güne denk getirin; yoksa bir adli vakayı daha ben yazarım, sizinkinin yerine.
 `),
       next: '$return',
@@ -787,6 +818,8 @@ const tFerhat = conversation('INV_T_FERHAT', {
 ferhat: Avukat hanım. Kılınç dosyası. Hayırdır, ifade mi alacaksınız benden? Mahkemede görüşürüz.
 ferhat: Size bir rakam vereyim, ondan sonra konuşalım: iki ayda dört gasp. Tophane, Setbaşı, Kayhan. Hepsi gece, hepsi kadın, hepsi motor.
 ferhat: Müdür her sabah tepemde. Mahalle muhtarı her akşam telefonda. Siz o çocuğun avukatısınız; ben de o kadınların.
+ferhat: Biliyor musunuz, ikinci kadının bileği kırıldı. Üçüncüsü bir aydır evden çıkamıyor. Dördüncüsü Nermin Hanım. Bir beşinci olmasın diye uyumuyorum.
+~ Yorgun bir adam. Kötü değil. Yorgunluk, bir usulü atlamak için en eski gerekçedir.
 `),
   choices: [
     option('FQ_LISTE', '“Barış’a nasıl ulaştınız?”', {
@@ -1357,6 +1390,9 @@ leyla: Teşhis tutanağını okudun mu? Okumadan bana gelme.
 leyla: Kısaca söyleyeyim, sonra kendin bul: Polis Vazife ve Salahiyet Kanunu ek 6. Önce tarif tutanağa geçer, sonra teşhis.
 leyla: Benzer kişiler; birden fazla, aynı büyüklükte fotoğraf; en az iki tekrar; “aralarında olmayabilir” uyarısı. Tek fotoğrafla teşhis yasak.
 leyla: Kural bir sınavdır Deniz. Tutanak o sınavın kâğıdı. Kâğıda bak; hangi soru boş bırakılmış?
+leyla: Bir de 112. Bir tanığın ilk sözü, en az kirlenmiş sözüdür. Olaydan bir dakika sonra kimse ona bir şey göstermemiştir; kimse ona bir şey söylememiştir.
+leyla: Sonraki her ifade bir öncekinin üstüne yazılır. Bir palimpsest gibi. Eski yazıyı görmek istiyorsan, en alttaki kâğıda in.
+~ Palimpsest. Leyla bu kelimeyi otuz yıldır kullanıyor; her stajyere bir kere. Sıra bana gelmiş.
 `,
     ),
     W(
@@ -1365,6 +1401,8 @@ leyla: Kural bir sınavdır Deniz. Tutanak o sınavın kâğıdı. Kâğıda bak
 # BÜRO — LEYLA’NIN ODASI [bg:buro]
 leyla: Bir çatlak buldun, yüzünden belli. Sevinme. Usule aykırı teşhis yok hükmünde değildir; hâkim onu takdir eder, CMK 217.
 leyla: Mahkemeye “usul bozuk” dersen, “peki kim yaptı” der. Usulün yanına bir de insan koy. Kim gördü, kim bir şey biliyor?
+leyla: Bir de şunu unutma: kolluk teşhisi savcının talimatıyla yapar. Tutanağı polis yazar, ama altında savcının imzası yoktur. Savcı tutanağı okumadan iddianameye geçirmiş olabilir.
+leyla: Bu iyi haber değil. Kimse okumadıysa, kimse de “ben yanıldım” demek istemez. Onlara kendi kâğıtlarını okutman gerekecek.
 `,
     ),
     W(
@@ -1373,6 +1411,8 @@ leyla: Mahkemeye “usul bozuk” dersen, “peki kim yaptı” der. Usulün yan
 # BÜRO — LEYLA’NIN ODASI [bg:buro]
 leyla: Mazeret. Annesi “evdeydi” diyor. Aile tanığını hâkim dinler ama tartarken elini kefeye koyar.
 leyla: Bağımsız biri lazım. Bir komşu, bir kayıt, bir saat. Evine gittin mi? Kimsenin bakmadığı yere bak.
+leyla: Mazeret bir hikâyedir Deniz. Hâkim o hikâyeyi dinler ve kendine sorar: bunu anlatanın bir çıkarı var mı? Anne: var. Abla: var. Komşu: belki yok.
+leyla: Ve hikâyenin bir saati olmalı. Saati olmayan mazeret, “bir ara evdeydi” demektir. Bir ara her yerde olunabilir.
 `,
     ),
     W(
@@ -1381,6 +1421,8 @@ leyla: Bağımsız biri lazım. Bir komşu, bir kayıt, bir saat. Evine gittin m
 # BÜRO — LEYLA’NIN ODASI [bg:buro]
 leyla: Komşu iyi. Saate bakmamış; daha iyi. Saat söyleyen tanık şüphelidir, saati kaydın söylemesi gerekir.
 leyla: Bir de şunu unutma: tanığına ne diyeceğini söylersen o artık senin tanığın olur. Senin tanığın da kimsenin tanığı değildir.
+leyla: Bir de kayıt. Elektrik kesintisini bir kurum kaydetmiştir; trafo arızasını, kaç kişinin aradığını. Bu şehirde her şey bir yerde yazılı Deniz. İnsanlar unutur, sunucular unutmaz.
+leyla: Dilekçeyi gününde ver. Kanun duruşmadan en az beş gün önce ister. Geç kalan dilekçe, hiç yazılmamış dilekçedir.
 `,
     ),
     O(`
@@ -1388,6 +1430,10 @@ leyla: Bir de şunu unutma: tanığına ne diyeceğini söylersen o artık senin
 leyla: Yarın değil, birkaç gün sonra o kadın kürsüde olacak. Onu yenmeye çalışma.
 leyla: Yalancı olmayan bir tanığı çürütmek kolaydır; kimse ona inanmaz olur, sen de kazanırsın, o da bir daha kimseye bir şey anlatmaz.
 leyla: Zor olan, onun hafızasının nasıl değiştirildiğini, ona dokunmadan göstermek. Kâğıtlarla göster. Saatlerle. Onun kendi ilk sözleriyle.
+leyla: Bir de salon. Savcı ona “salonda gördüğünüz kişi bu mu” diye soracak; sanık sandalyesinde oturan tek genci göstererek. Bu bir teşhis değildir. Bu bir sahnedir.
+leyla: O soruyu duyunca ayağa kalk. Usulle kalk; öfkeyle değil.
+> Sigara paketini avucunda çevirdi. Açmadı. Dört yıldır açmadığı gibi.
+leyla: Bir şey daha: o kadının kapısını çalma. Çaldıysan bir daha çalma. Tanığın kapısı, avukatın sınırıdır.
 `),
   ],
   choices: [back('LEYLA_DON', 'Teşekkür et')],
@@ -1429,6 +1475,7 @@ leyla: Bugün çok şey okudun. Bir şey sorayım: bugün kime inandın?
       effects: [set('aksam1', 'KAGIT')],
       responses: B(`
 leyla: Kâğıtlar yalan söylemez. Ama kâğıtları insanlar yazar, insanlar boş bırakır. Boş kutulara da inan.
+leyla: Bir de şunu bil: kâğıtlara inanan avukat insanları unutur. İnsanlara inanan avukat kâğıtları. İkisini birden tutmaya çalış; zor, ama meslek bu.
 ~ Boş kutular. Teşhis tutanağında üç tane vardı.
 `),
       next: 'INV_HUB',
@@ -1438,6 +1485,7 @@ leyla: Kâğıtlar yalan söylemez. Ama kâğıtları insanlar yazar, insanlar b
       responses: B(`
 leyla: Güzel. Bunu unutma. O kadına inanmaya devam edersen, kürsüde onu kırmazsın.
 leyla: Ama inanmak, haklı olduğunu düşünmek değildir. İnsanlar dürüstçe yanılır.
+leyla: Otuz yıldır bu işi yapıyorum. Yalancı tanık az gördüm. Yanılan tanık çok. Yalancı tanığı çürütürsün; yanılan tanığı anlarsın. Farkı kürsüde görünür.
 ~ Dürüstçe yanılmak. Bu dosyanın adı bu olmalıydı.
 `),
       next: 'INV_HUB',
@@ -1548,6 +1596,7 @@ const gece = [
       W(flag('kadir_kocluk'), `~ Kadir Usta’ya bir saat ezberlettim. Gözlüğünün arkasından bana bakışını unutamıyorum.`),
       W(flag('nermin_baski'), `~ Nermin Hanım’ın kapısı. Zincir. İki kilit. Yarın o kadın bana nasıl bakacak?`),
       W(flag('zarf_aldi'), `~ Masamda bir zarf var; ıslak lekesi kurudu ama izi kaldı. Tolga’nın haftalığı. Neden bu kadar ağır?`),
+      W(flag('tolga_derya'), `~ “Derya Hanım’la birlikte konuşalım” dediğimde merdivenleri ikişer ikişer inen bir genç. Bir kuzenin utancı mı, başka bir şey mi?`),
       W(cmp(v('aksam1'), '==', 'NERMIN'), `~ Nermin Hanım yalan söylemiyor. Bunu bir kez daha kendime söyledim. Yarın da söyleyeceğim.`),
       O(`~ Leyla’nın sorusu aklımda: kime inanıyorum? Kâğıtlara. Ve kâğıtların arasındaki boşluklara.`),
     ],
@@ -1555,6 +1604,10 @@ const gece = [
   decisionNode('INV_GECE_6', [{ to: 'INV_GECE' }], {
     lines: [
       W(flag('gamze_tanik'), `~ Bir hemşire, perdenin aralığından baktı ve yazdı. Mahkemede de bakacak.`),
+      W(
+        all(flag('kadir_tanik'), flag('kadir_goz')),
+        `~ Bir terzi, gözleri bulanık bir terzi, ölçtüğünü söyleyecek. Savcı gözlerini soracak. Terzi “ses” diyecek. Bu yetmeli.`,
+      ),
       W(flag('kadir_tanik'), `~ Bir terzi, mahkemeleri sevmeyen bir terzi, yarın değil ama yakında, ölçtüğünü söyleyecek.`),
       O(`~ Tanık listem kısa. Kısa listeler bazen dürüst listelerdir; bazen de eksik.`),
     ],

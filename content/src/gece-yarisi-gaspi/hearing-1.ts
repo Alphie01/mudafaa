@@ -78,12 +78,14 @@ export const hearing1: CasePart = {
 `),
     }),
     decisionNode('H1_00G_2', [{ to: 'H1_00G_3' }], {
+      onEnter: [ifThen(flag('nermin_baski'), [dec('cred'), dec('pers')])],
       lines: [
         W(
           flag('nermin_baski'),
           `
 > Koridorun öbür ucunda Nermin Hanım, kızının koluna girmiş, bir bankta oturuyordu. Beni görünce yüzünü çevirdi. Kızı ayağa kalktı, bana doğru iki adım attı, sonra vazgeçti.
 ~ Kapısını çaldığım kadın. Zinciri hâlâ aramızda.
+> Mübaşir yanıma geldi. “Başkan sizi bekliyor avukat hanım; duruşmadan önce.” Odada Başkan tek bir cümle kurdu: “Mağdurun kapısına bir daha gitmeyin.” Dilekçe dosyadaydı.
 `,
         ),
         O(`
@@ -113,6 +115,9 @@ derya: Tolga da gelecekti, “işim var” dedi. Bu ailede herkesin bir işi var
       lines: B(`
 > Sevim Hanım koluma dokundu. Tespihin taneleri parmaklarının arasında durmuştu.
 sevim/uzgun: Kızım… Bugün bırakırlar mı? Ben yatağını yaptım. Yine.
+derya: Anne, bırak avukatı. Daha içeri girmedik.
+sevim: Sormak da mı yasak kızım? Üç aydır kimse bir şey söylemiyor bana. Polis söylemedi, savcı söylemedi. Bari bu kız söylesin.
+> Koridorun ucunda jandarma bir kapıyı açtı. Kelepçeli bir genç, iki asker arasında, bir başka salona götürüldü. Barış değildi. Sevim Hanım yine de ayağa kalktı.
 `),
       choices: [
         option('H100K_A', '“Bugün bitmeyecek. Ama bugün başlıyor.”', {
@@ -152,6 +157,8 @@ orhan: Sanık 18 Ocak gece 23.42 sıralarında Tophane Sırmakeş merdivenlerind
 orhan: Mağdur, olaydan saatler sonra usulüne uygun yapılan fotoğrafla teşhiste sanığı tereddütsüz teşhis etmiştir. Eylem TCK 149/1-a ve h kapsamındadır.
 rahmi: Sanığa hakları hatırlatıldı. Sanık, savunmanızı yapın.
 ~ “Usulüne uygun.” Savcı bu iki kelimeyi o kadar rahat söyledi ki, bir an ben de inanacaktım.
+> Dinleyici sırasında Derya ile Sevim Hanım, öbür uçta Nermin Hanım’ın kızı. Nermin Hanım salonda değildi; tanıklar dışarıda bekletilir. Kızı bir kere bana baktı; bir avukata değil, bir düşmana bakar gibi.
+~ Bu salonda kimse kötü değil. Bunu bilmek işimi kolaylaştırmıyor; zorlaştırıyor.
 `),
       choices: [cont('H100_DEVAM', 'Sanığın savunması', 'H1_01', { role: 'PRIMARY' })],
     }),
@@ -313,6 +320,8 @@ nermin: Ertesi gün karakolda fotoğraflara baktım. Onu tanıdım. Bu çocuk.
 > Barış’a bakmadı. “Bu çocuk” derken parmağı kürsünün üstünde kaldı.
 rahmi: Müdafi, sorularınız.
 ~ Beş cümle. Hiçbirinde yalan yok. Hepsinde birinin parmak izi var.
+> Savcı sorusunu sordu: “Teşhiste tereddüt ettiniz mi?” Nermin Hanım başını iki yana salladı. Savcı oturdu; işini bitirmişti.
+~ Leyla’nın mesajı: “Onun ilk sözlerini göster; gerisini o kendisi görecek.” Önce dinleyeceğim. Sonra bastıracağım. Kâğıtları en son açacağım.
 `),
       statements: [
         statement('N1', 1, [
@@ -553,7 +562,7 @@ orhan: Sayın Başkan, bir sorum var. Mağdur hanım, salonda bulunan sanığa b
 ~ Salonda yirmi iki yaşında tek bir genç var; jandarmanın yanında, sanık sandalyesinde. Bu bir soru değil, bir cevap.
 `),
       ],
-      next: 'H1_05',
+      next: 'H1_04B',
       options: [
         option('H104_A', 'İtiraz: sanık sandalyesindeki tek kişiyi göstermek telkindir', {
           score: { USUL_BILGISI: 100 },
@@ -593,6 +602,40 @@ nermin: Galiba… Bu.
 `),
         }),
       ],
+    }),
+    story('H1_04B', {
+      ...H1,
+      title: 'Kısa ara',
+      background: 'adliye',
+      hud: ['cred', 'pers'],
+      lines: [
+        W(
+          any(flag('contra_n3'), flag('contra_n5')),
+          `
+rahmi: Ara karar için on beş dakika ara.
+# ADLİYE KORİDORU · KISA ARA [bg:adliye]
+> Koridorda Nermin Hanım’ın kızı önümü kesti. Otuzlarında, annesinin gözleri, annesinin dik duruşu. Elinde annesinin hırkası.
+@NERMİN HANIM’IN KIZI: Annemi yalancı çıkardınız. Altmış yaşında bir kadını. Kürsüde.
+- Anneniz yalan söylemedi. Bunu salonda da söyledim, burada da söylüyorum.
+@NERMİN HANIM’IN KIZI: O zaman ne oldu? Annem gördüğünü söyledi. Siz de “görmedin” dediniz.
+- Hayır. Annenize bir fotoğraf gösterdiler. O fotoğraf annenizin gördüğü yüzün üstüne yapıştı. Ben o fotoğrafı kaldırmaya çalışıyorum; annenizi değil.
+> Kız bir şey söyleyecekti. Sustu. Annesinin hırkasını iki eliyle göğsüne bastırdı.
+@NERMİN HANIM’IN KIZI: Annem üç aydır uyumuyor. Her gece merdiveni anlatıyor. Şimdi bir de bu. Hangi yüzü gördüğünü bilmiyormuş.
+~ Bir hafızayı kurtarmak için o hafızayı yaraladım. Hukuk buna “çapraz sorgu” der. Bir kızın gözünde başka bir adı var.
+> Koridorun ucunda Nermin Hanım bir bankta oturuyordu; tek başına, ellerini dizlerinin üstünde birleştirmiş. Bana bakmadı. Duvardaki bir şeye bakıyordu; duvarda hiçbir şey yoktu.
+`,
+        ),
+        O(`
+rahmi: Ara karar için on beş dakika ara.
+# ADLİYE KORİDORU · KISA ARA [bg:adliye]
+> Koridorda Nermin Hanım kızının koluna girmiş, çıkışa yürüyordu. Yanımdan geçerken durmadı. Kızı bana bir an baktı; zafer değildi, yorgunluktu.
+> Derya pencerenin önünde bir sigara yaktı, görevli uyarınca söndürdü, bir tane daha yaktı.
+derya: Bu kadar mı canım? Bir kadın “bu çocuk” dedi, bitti mi?
+- Bitmedi. Ama bugün bir şey başlatamadım.
+~ Leyla’nın sesi: “Kâğıtlarla göster.” Kâğıtlarım eksikti. Ya da onları doğru yerde açmadım.
+`),
+      ],
+      choices: [cont('H104B_DEVAM', 'Salona dön', 'H1_05', { role: 'PRIMARY' })],
     }),
     court1.objection('H1_05', {
       title: 'Ara karar',
@@ -676,6 +719,9 @@ baris: Abla… O kadın… Halka mı dedi? Kulağında halka mı vardı?
 - Öyle dedi. O gece.
 > Barış bir şey söylemedi. Gözleri bir an boşluğa kaydı; ateşli bir gecenin içinde bir şey arıyormuş gibi. Sonra annesine döndü.
 ~ Bir şey düşündü. Ne düşündüğünü sormadım. Sormam gerekirdi.
+> Sevim Hanım oğlunun bağcıksız ayakkabılarına baktı. Çantasından iki bağcık çıkardı; evden getirmişti, “belki” diye. Diz çöktü, koridorun ortasında, bağladı.
+sevim: Ben biliyordum kızım. Bağcık getirdim. Biliyordum.
+~ Bir anne bir bağcık getirmişti. Bir umut değil; bir hazırlık. Annelerin hukuku böyledir.
 `,
         ),
         W(

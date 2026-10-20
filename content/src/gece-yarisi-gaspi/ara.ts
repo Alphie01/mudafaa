@@ -94,6 +94,12 @@ const girisNodes = [
   decisionNode('ARA_GIRIS_2', [{ to: 'ARA_GIRIS' }], {
     lines: [
       W(
+        all(not(flag('released')), flag('koridor_durust')),
+        `
+> Barış hâlâ içerideydi. Sevim Hanım her gün arıyordu. “Sen söylemiştin kızım, bugün bitmez diye. Söylemiştin.” Bir kızgınlık değildi bu; bir tutunma.
+`,
+      ),
+      W(
         flag('released'),
         `
 > Barış iki gündür evdeydi. Her sabah karakola imzaya gidiyor, öğlen yatıyor, akşam balkonda oturuyormuş. Derya söyledi: “Konuşmuyor canım. Bir şey düşünüyor.”
@@ -121,6 +127,10 @@ leyla: Savcı bu sayfayı okudu Deniz. İkinci celsede bunu kürsüye koyacak. S
 leyla: Güzel. “Bilmiyorum” iyi bir başlangıç. Kayıt hesabın yerini gösterir. Kişinin yerini göstermez. Bu iki şey arasındaki boşluğu doldur.
 > Kapıdan çıkarken durdu.
 leyla: Bir de şunu bil: bir şey bulursan ve o şey birini işaret ederse, peşinden koşma. Yaz. Savcıya yaz. Biz avukatız, kolluk değil.
+> Leyla gitti. Odada CD’nin plastik kutusu, bir telefon raporu ve ben kaldık.
+~ Hesap. Bir uygulamanın içindeki bir isim, bir şifre, bir yüz. Barış “motor aşağıdaydı” dedi. Hesaptan hiç söz etmedi; ben de hiç sormadım.
+~ Sormadığım soru, şimdi bir savcının elindeki en güçlü cevap. Bu dosyada sormamak bir hastalık gibi; polisten bana da bulaştı.
+> Pencereden aşağı baktım. Sokakta sarı kutulu bir motor geçti, kırmızı ışıkta durdu, yeşilde gitti. Sürücünün yüzü kaskın içindeydi. Kimdi? Kimse bilmez.
 `),
     choices: [cont('ARA_GIRIS_DEVAM', 'Kayıtları aç', HUB, { role: 'PRIMARY' })],
   }),
@@ -387,6 +397,7 @@ const tel = retarget(
       examine('EX_TEL_186', 'compare', 't3', {
         discovers: 'clue_186',
         score: { DELIL_ANALIZI: 150 },
+        effects: [ifThen(flag('fact_186'), [score('DELIL_ANALIZI', 30)])],
         feedback: {
           title: 'YENİ İPUCU · 186',
           text: '23.40’ta elektrik arıza hattı aranmış; 1 dakika 40 saniye. Baz istasyonu Yıldırım. Kesintide arayan kırk bir kişiden biri, Barış’ın telefonu.',
@@ -511,12 +522,19 @@ const barisGiris = decisionNode('ARA_BARIS_G', [{ to: 'ARA_BARIS' }], {
 # ÇARŞAMBA 17.20 — YILDIRIM, BALKON [bg:ev]
 > Barış balkonda oturuyordu; aynı balkonda. Üst katta Kadir Usta’nın perdesi kıpırdadı.
 > Dökümün kırmızı çizgili sayfasını masaya koydum. Barış sayfaya baktı. Uzun uzun. Sonra çay bardağını bıraktı.
+sevim: Kızım çay getireyim mi? Barış üç gündür ağzına bir şey koymuyor; sen gelince belki…
+- Sağ olun Sevim Hanım. Biraz yalnız konuşabilir miyiz?
+> Sevim Hanım balkon kapısını arkasından çekti. Camın ardında bir gölge olarak kaldı; gitmedi, biliyorum.
+~ Bu balkonda bir gece bir mum yanmıştı, bir öksürük duyulmuştu. Şimdi aynı balkonda bir kâğıt duruyor ve o kâğıt başka bir şey söylüyor.
 `,
     ),
     O(`
 # ÇARŞAMBA 14.10 — CEZAEVİ, AVUKAT GÖRÜŞ ODASI [bg:gorus_odasi]
 > Hasan kapıyı açtı, bir şey söylemedi. Barış daha da zayıflamıştı.
 > Dökümün kırmızı çizgili sayfasını vidalı masanın üstüne koydum. Barış sayfaya baktı. Uzun uzun.
+hasan: Avukat hanım, bugün yirmi dakika. Sayım var.
+> Barış sayfaya eğildi, saçları yüzüne düştü. Parmakları kırmızı çizginin üstünde durdu ve orada kaldı.
+~ İnsan kendi adını bir suç tutanağında görünce ilk önce adını okur. Sonra saati. Sonra bir daha adını.
 `),
   ],
 });
@@ -597,6 +615,10 @@ baris: Bir de… aklıma bile gelmedi abla. Tolga’yla bir kadının çantası 
 baris/uzgun: Tolga’yı mı satacağım yani?
 - Hayır. Doğruyu söyleyeceksin. Gerisi Tolga’nın kendi hikâyesi.
 > Uzun bir sessizlik. Sonra başını salladı. Bir kez.
+baris: Abla… Tolga’ya bir şey olacak mı?
+- Bilmiyorum Barış. Bu benim kararım değil. Senin de değil.
+baris/uzgun: O benim yerime çalışıyordu. Benim hesabımla, benim motorumla. Bana para getiriyordu, ilaç parası. Annemin ilacını o aldı geçen ay.
+~ Bir aile bir hesabı paylaşıyor; bir motoru, bir ilacı, bir sofrayı. Şimdi bir suçu da paylaşmak zorunda kalıyorlar; ama suç paylaşılmaz.
 `),
       next: HUB,
     }),
@@ -697,6 +719,11 @@ const kebapGiris = decisionNode('ARA_KEBAP_G', [{ to: 'ARA_KEBAP' }], {
 > Saat 23.25. O geceyle aynı saat. Arka kapıda üç kurye bekliyor; sarı kutular yağmurda parlıyor. Biri sigarasını avucunun içinde saklıyor.
 > Izgaranın dumanı kapıdan dışarı taşıyor. Cemal Usta şişleri çeviriyor; bana bakmadan “Avukat mısın, sipariş mi?” diyor.
 ~ Bir kurye nerede sipariş alırsa, orada biri onu görmüştür. Kayıtlar bir hesabı gösterir; insanlar bir yüzü.
+- Avukatım. Ocak’ta bir gece, 23.31’de buradan sipariş alan kuryeyi soruyorum.
+cemal: Ocak mı? Ocakta her gece yağmur, her gece kurye. Hangisini hatırlayayım abla?
+- 18 Ocak. Kayhan’a bir sipariş. Kurye bir saat sonra soğuk teslim etmiş.
+cemal: Kayhan… Dur. Müşteri ertesi gün aradı, bağırdı. “Kebap buz gibiydi” dedi. Ben de kuryeye kızdım, bulamadım. Kim olduğunu bilmiyordum ki.
+~ Bir şikâyet. Bir soğuk kebap. Bir aşçının öfkesi. Hafızalar böyle şeylere tutunur; tarihlere değil.
 `),
 });
 
@@ -731,6 +758,9 @@ const kadir = conversation('ARA_KADIR', {
 > Kadir Usta bir ceketin kolunu söküyordu. Makas, iğne, tebeşir. Beni görünce gözlüğünü çıkardı.
 kadir: Mahkeme kâğıdı geldi. Salı günü. Üç gündür uyumuyorum avukat; zaten uyumuyordum, şimdi hiç uyumuyorum.
 kadir: Savcı bana ne soracak? Gözlerimi soracak, biliyorum. Karanlığı soracak. Ben ne diyeceğim?
+kadir: Bir de bir şey var avukat. Dün akşam merdivende seni gördüm sandım; “Avukat hanım” dedim. Derya’ymış. Güldü. Ben gülemedim.
+kadir: Gördüm mü görmedim mi bilmediğim şeyi mahkemede söylemem. Onu sana söylüyorum ki bil: bu gözler her şeyi görmez.
+~ Dürüst bir tanığın en büyük gücü, neyi görmediğini bilmesidir.
 `),
   choices: [
     option('KA_DOGRU', '“Ne hatırlıyorsanız onu. Bilmediğinizi bilmiyorum deyin.”', {
@@ -743,6 +773,9 @@ kadir: Savcı bana ne soracak? Gözlerimi soracak, biliyorum. Karanlığı sorac
 kadir: Bilmiyorum demek ayıp değil mi mahkemede?
 - Mahkemede en ayıp şey, bilmediğini bilir gibi yapmaktır.
 kadir: Hı. Terzilikte de öyle. Ölçüyü bilmeyen “olur olur” der; ceket olmaz.
+kadir: Gözlerimi sorarlarsa ne diyeyim? Katarakt mı diyeyim, bulanık mı?
+- Ne ise onu. Katarakt. Ameliyat bekliyorsunuz. Uzağı bulanık, yakını net. Ve siz yüz demediniz; ses dediniz.
+kadir: Ses dedim. Ses yalan söylemez avukat. Yüzler değişir; öksürük değişmez.
 `),
       next: HUB,
     }),
@@ -837,6 +870,10 @@ orhan: Bunu bana getirdiniz. Mahkemede sürpriz yapmak yerine.
 > Savcı gözlüğünü çıkardı. İlk kez gülümsediğini gördüm; yorgun, kısa.
 orhan: Değil. Benim işim. Kayıtları ben isterim, kişiyi ben çağırırım. Teşhis gerekirse usulüyle yapılır; bu sefer usulüyle.
 orhan: Siz müvekkilinizi savunun avukat hanım. Ben de gerçeği. Bazen aynı yere çıkar bu iki yol.
+> Kapıya kadar yürüdüm. Savcı arkamdan seslendi.
+orhan: Avukat hanım. Teşhis tutanağını ben de okudum. Dün gece. İlk kez dikkatle.
+orhan: İddianameyi yazarken okumamıştım. Bir polis “usulüne uygun” dedi, ben de yazdım. Bunu size söylememem gerekir; söylüyorum.
+~ Okunmamış bir kâğıt. Bu dosyada herkes bir sayfayı atlamış. Polis, savcı, önceki avukat, belki ben de. Önemli olan, şimdi okumak.
 `,
     ),
     O(`
@@ -935,6 +972,10 @@ const dil = story('ARA_DIL', {
   choices: [
     option('AD_SELFIE', 'HızlıPaket’ten giriş cihazı ve doğrulama özçekimi', {
       visibleWhen: all(not(flag('selfie_istendi')), not(has('ev_selfie'))),
+      responses: [
+        W(flag('fact_dogrulama'), `~ Dökümde “kimlik doğrulama: onaylı” yazıyordu. Onaylanan yüzü görmek istiyorum.`),
+        O(`~ Bir hesap nasıl açılır? Biri telefonuna bakar, bir yüz gösterir. O yüzü görmek istiyorum.`),
+      ],
       maxUses: 1,
       score: { USUL_BILGISI: 60 },
       effects: [raise('ara_selfie_istendi'), raise('ara_dil_any')],
@@ -1100,6 +1141,9 @@ const leyla = story('ARA_LEYLA', {
 # BÜRO — LEYLA’NIN ODASI [bg:buro]
 leyla: Kırmızı çizgiye bakıp duruyorsun. Çizgiye değil, çizginin üstündeki satırlara bak. Bir hesap nasıl açılır? Kim açar? Neyle açar?
 leyla: Kayıtlar her zaman bir şey söyler. Ama kayıtların ne söylediği ile savcının ne okuduğu aynı şey değildir.
+leyla: Bir de şunu düşün: bir şirket bir kurye hesabını neden kişiye özel tutar? Çünkü başkası kullanmasın diye. Peki başkası kullanmasın diye ne yapar?
+leyla: Bir yüz ister. Bir telefon ister. Bu şirket o gece hangi yüzü, hangi telefonu görmüş? Savcı bunu sormadı. Sen sor.
+~ Leyla bir soruyla cevap verir. Cevabı vermez; cevabın nerede olduğunu gösterir.
 `,
     ),
     W(
@@ -1109,6 +1153,9 @@ leyla: Kayıtlar her zaman bir şey söyler. Ama kayıtların ne söylediği ile
 leyla: Bir isim duydun. Şimdi iki yol var. Birincisi: o ismi savcıya kayıtlarla yazarsın, CMK 158. Gerisini o yapar.
 leyla: İkincisi: kendin bir dedektif olursun, kapı çalarsın, fotoğraf gösterirsin. İkinci yol hep daha hızlı görünür. Hiçbir zaman değildir.
 leyla: Bir de aile var. Onlara ne yapacaklarını söyleme. Ne yapabileceklerini söyle. Fark küçük görünür; meslek o farktır.
+leyla: Yıllar önce bir dosyam vardı. Bir müvekkil, bir kardeş, bir sır. Ben o kardeşin kapısını çaldım; çünkü daha hızlıydı. Kardeş kaçtı. Müvekkil… neyse.
+> Masasının köşesindeki ters çerçeveye bir an baktı. Sonra bakmadı.
+leyla: Hızlı yol, avukatı kahraman yapar. Doğru yol, müvekkili kurtarır. Bazen ikisi aynı yoldur. Çoğu zaman değil.
 `,
     ),
     W(
@@ -1123,6 +1170,8 @@ leyla: Hâlâ müvekkilini gösteren bir kayıt var elinde. Ondan kaçma. Onu m�
 leyla: İkinci celse. Savcı kaydı okuyacak, polisi dinletecek. Sen ne yapacaksın?
 leyla: Polise kızma. Acele etmiş, baskı altında, bir kadının acısını bir yüzle doldurmuş. Onu yalancı çıkarma; usulü göster. Usul kendini anlatır.
 leyla: Esas savunmanda üç şey yeter: teşhis neden değersiz, müvekkil o saatte nerede, hesabı kim taşıyordu. Fazlası gürültüdür.
+leyla: Bir de Barış. Son söz onun. Ona ne söyleyeceğini söyleme. Sadece şunu söyle: doğru, en kısa cümledir.
+leyla: Hükmü ayakta dinleyecek. Sen de ayakta dinleyeceksin. Ne gelirse gelsin, oturma; o otururken sen ayakta kal.
 `),
   ],
   choices: [toHub('LEYLA2_DON', 'Teşekkür et')],
@@ -1154,6 +1203,9 @@ leyla: Bugün müvekkilinden şüphelendin mi?
 - Bir an.
 leyla: Güzel. Hiç şüphelenmeyen avukat, müvekkilinin hikâyesini değil kendi hikâyesini savunur.
 leyla: Şimdi bir başkasından şüpheleniyorsun. Aynı kuralı ona da uygula. Bir an şüphelen; sonra kâğıda bak.
+leyla: Bir de… o çocuğun bir ailesi var. Senin müvekkilinin ailesi aynı zamanda. Bir kuzen, bir abla, bir anne. Hepsi aynı sofrada büyümüş.
+leyla: Sen o sofraya oturmayacaksın. Kapıda duracaksın. Avukatlık, bazen bir eşikte durmayı bilmektir.
+> Şemsiyesini açtı, kapıda bir an bekledi, sonra merdivenlere yürüdü. Topuk sesleri, sonra sokak kapısı, sonra yağmur.
 `,
     ),
     O(`
@@ -1186,6 +1238,8 @@ const aksam2 = story('ARA_AKSAM2', {
 # GECE 01.10 — SETBAŞI KÖPRÜSÜ [bg:sokak_yagmur]
 > Eve yürüyerek döndüm. Dilekçem savcının masasındaydı; bir isim, ekleriyle. Ne olacağını bilmiyordum.
 ~ İyi bir dilekçe bir kapıyı açmaz. Kapıyı açacak kişiye anahtarın nerede olduğunu söyler.
+~ Barış’ı düşündüm. Balkonda, kırmızı çizgili bir kâğıdın karşısında. “O benim kardeşim.” Dilekçemde o kardeşin adı yazıyor.
+~ Bir avukat müvekkilinin ailesini korumaz; müvekkilini korur. Bunu bir ders kitabında okumuştum. Ders kitapları balkonlarda yazılmaz.
 `,
     ),
     O(`
@@ -1247,6 +1301,11 @@ derya: Barış’a söyledim. Hiçbir şey demedi. Balkona çıktı. Hâlâ orad
       W(flag('etik_kirlik'), `~ Nermin Hanım’ın sesi kulağımda: “Neden herkes bana bir fotoğraf gösteriyor?” Yarın bunu mahkemede de soracak. Bana.`),
       W(flag('kadir_kocluk'), `~ Kadir Usta’nın iğneyi ceketin koluna saplayışı. Bir saat ezberlettim; o da ezberledi. Yarın savcı ona saati soracak.`),
       W(flag('zarf_tuttu'), `~ Çekmece kilitli. Anahtarı cebimde. Ağırlığı bir zarfın ağırlığı değil.`),
+      W(flag('fact_anahtar'), `~ “Anahtarı paspasın altına koydum.” 00.38. Bir motorun anahtarı, bir gecenin sonu, okunmamış bir mesaj.`),
+      W(
+        flag('fact_tolga_halka'),
+        `~ “Sol kulağında. Askerden sonra taktı.” Barış bunu söylerken sesi bir kuzenin değil, bir kardeşin sesiydi.`,
+      ),
       W(has('ded_baskasi'), `~ Bir halka. Sol kulakta. Bir makinenin hafızasında, bir kebapçının hafızasında, bir kadının ilk sözünde. Üçü aynı yeri gösteriyor.`),
       W(has('ded_evde'), `~ 23.40, Yıldırım, 186. Bir telefon, bir kesinti, bir balkon. Barış evdeydi; bunu artık bir makine de söylüyor.`),
       O(`~ Yarın ikinci celse. Elimde olanlar yeterli mi? Bunu yarın bir başkası söyleyecek.`),
@@ -1259,6 +1318,9 @@ derya: Barış’a söyledim. Hiçbir şey demedi. Balkona çıktı. Hâlâ orad
     lines: B(`
 > Pencereyi açtım. Yağmur dinmek üzereydi; ilk kez. Uludağ’ın üstünde bulutlar yırtılmış, arasından bir yıldız görünüyordu. Bursa’da nadir bir şey.
 leyla: Uyu. Yarın uyanık olman gerek. Bir de: o kadına bakarken, ona üç ay önce kimsenin bakmadığı gibi bak. [phone]
+> Masamın üstünde dosya, dosyanın üstünde kırmızı kalem. Leyla’nın ilk gün bıraktığı kalem. Kapağını kapattım.
+~ Yarın bir polis yemin edecek. Bir terzi ölçtüğünü söyleyecek. Bir savcı bir kâğıt okuyacak. Ve ben, o kâğıdın okunmayan satırlarını okuyacağım.
+~ Bir yüz değil, bir kayıt. Bir eminlik değil, bir saat. Bunu söylemek için üç ay ve altmış dört basamak gerekti.
 `),
     choices: [cont('ARA_SON_DEVAM', 'Adliyeye git', 'T_00G_1', { role: 'PRIMARY' })],
   }),

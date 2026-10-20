@@ -1,11 +1,24 @@
-import { L, meet, option, set, says, story } from '__KIT__';
+import { L, N, cont, meet, option, set, says, story } from '__KIT__';
 import type { CasePart } from '__KIT__';
 import { BRIEF, p1 } from './shared.js';
 
-// 40-briefing: mentorun dosyayı devretmesi, ceza aralığı sorusu, dosya ekranı ve strateji seçimi (~5–8 dk).
+// 40-briefing: soğuk açılış (prolog), mentorun dosyayı devretmesi, ceza aralığı sorusu, dosya ekranı ve strateji
+// seçimi (~8–12 dk, ~1 500–2 500 sözcük). Hikâye kitabındaki (docs/content/__SLUG__.md §2–3) sahneler buraya dökülür.
 
 export const briefing: CasePart = {
   nodes: [
+    story('PROLOG', {
+      ...BRIEF,
+      title: 'TODO Soğuk açılış',
+      // Prolog: olay gecesinden bir an; karakterlerin kendi sesleri, madde atfı yok. 300–800 sözcük, birkaç blok.
+      lines: says(
+        N('TODO Olay gecesi. Mekânın ve havanın kısa tasviri.'),
+        L('tanik', 'TODO tanığın kendi ağzından ilk replik.'),
+        L('muvekkil', 'TODO müvekkilin o anki sözü; sonradan anlam kazanacak bir ayrıntı.', 'saskin'),
+        N('TODO Sahneyi bir soruyla kapat: o gece gerçekte ne oldu?'),
+      ),
+      choices: [cont('PROLOG_DEVAM', 'Devam', 'BR_01', { role: 'PRIMARY' })],
+    }),
     story('BR_01', {
       ...BRIEF,
       title: 'Dosya devri',

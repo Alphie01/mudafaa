@@ -45,7 +45,7 @@ export const tests: CasePart = {
       goldenPath(
         TYPICAL_PATH,
         { outcome: 'BERAAT_E' },
-        chooseAll('BR01_A', 'STR_USUL'),
+        chooseAll('PROLOG_DEVAM', 'BR01_A', 'STR_USUL'),
         gun1,
         gun2,
         celse1,
@@ -56,7 +56,7 @@ export const tests: CasePart = {
       goldenPath(
         'G_B',
         { outcome: 'BERAAT_B' },
-        chooseAll('BR01_A', 'STR_MASUMIYET'),
+        chooseAll('PROLOG_DEVAM', 'BR01_A', 'STR_MASUMIYET'),
         gun1,
         gun2,
         celse1,
@@ -67,7 +67,7 @@ export const tests: CasePart = {
       goldenPath(
         'G_I',
         { outcome: 'INDIRIM' },
-        chooseAll('BR01_A', 'STR_INDIRIM', 'A_ARAMA'),
+        chooseAll('PROLOG_DEVAM', 'BR01_A', 'STR_INDIRIM', 'A_ARAMA'),
         tapCenter(OB_A),
         tapCenter(OB_B),
         chooseAll('ARAMA_BITIR', 'A_GORUS'),
@@ -83,13 +83,13 @@ export const tests: CasePart = {
       goldenPath(
         'G_M',
         { outcome: 'MAHKUMIYET' },
-        chooseAll('BR01_B', 'STR_MASUMIYET', 'GO_H1', 'H100_DEVAM', 'H101_D', 'H102_DEVAM', 'GO_T'),
+        chooseAll('PROLOG_DEVAM', 'BR01_B', 'STR_MASUMIYET', 'GO_H1', 'H100_DEVAM', 'H101_D', 'H102_DEVAM', 'GO_T'),
         chooseAll('T00_DEVAM', 'T01_DEVAM', 'T02_B', 'T03_BITIR', 'T04_D', 'T05_B', 'T06_D', 'T07_B'),
       ),
       goldenPath(
         'W',
         { outcome: 'MAHKUMIYET' },
-        chooseAll('BR01_A', 'STR_USUL', 'GO_H1', 'H100_DEVAM', 'H101_C', 'H102_DEVAM', 'GO_T'),
+        chooseAll('PROLOG_DEVAM', 'BR01_A', 'STR_USUL', 'GO_H1', 'H100_DEVAM', 'H101_C', 'H102_DEVAM', 'GO_T'),
         chooseAll('T00_DEVAM', 'T01_DEVAM', 'T02_C'),
         present('ev_iddia', 'S1'),
         present('ev_tanik_kolluk', 'S2'),

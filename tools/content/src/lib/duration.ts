@@ -7,15 +7,21 @@ import { TYPICAL_PATH } from '../kit/golden.js';
 // içinde aynı metin bir kez sayılır) ve aksiyon başına sabit bir düşünme/dokunma süresi eklenir.
 
 /**
- * Kalibrasyon sabitleri. Okuma hızı (dakikada sözcük) ve aksiyon başına saniye; tahmin
+ * Kalibrasyon sabitleri. Türkçe okuma hızı (dakikada sözcük) ve aksiyon başına karar/dokunma süresi (saniye); tahmin
  * `dakika = sözcük / READING_WPM + aksiyon × SECONDS_PER_ACTION / 60`. Gerçek oyun testleriyle ölçülüp yalnızca
  * burada ayarlanır (bütün davalar aynı sabitlerle ölçülür).
  */
-export const READING_WPM = 160;
+export const READING_WPM = 180;
 export const SECONDS_PER_ACTION = 6;
 
 /** Hedef aralık: tipik yol 90–120 dakika (docs/content/lineup.md). */
 export const TARGET_MINUTES = { min: 90, max: 120 } as const;
+
+/**
+ * Sözcük bütçesi (kullanıcı kararı, 2026-10-20): tipik yolda yaklaşık 15–25 bin sözcük diyalog/anlatı; 10 binin altı
+ * "hikâye yok" sayılır ve kapıdan geçmez. Kısa metinli bir dava aksiyon sayısını şişirerek süre hedefini tutturamaz.
+ */
+export const WORD_BUDGET = { floor: 10_000, min: 15_000, max: 25_000 } as const;
 
 /** Harf ya da rakam içeren boşlukla ayrılmış parçalar. */
 export const countWords = (text: string): number => text.split(/\s+/u).filter((t) => /[\p{L}\p{N}]/u.test(t)).length;
@@ -144,19 +150,28 @@ export const estimateGoldenPaths = (c: CompiledCase): PathEstimate[] =>
 export interface DurationReport {
   paths: PathEstimate[];
   typical?: PathEstimate;
-  /** Tipik yol var, oynatılabiliyor ve 90–120 dakika içinde. */
+  /** Tipik yolun sözcük durumu: taban altı (kapı düşer), hedef altı, hedefte, hedef üstü (uyarı). */
+  words?: 'FLOOR' | 'LOW' | 'OK' | 'HIGH';
+  /** Kapı: tipik yol var, oynatılabiliyor, 90–120 dakika içinde ve en az WORD_BUDGET.floor sözcük. */
   inRange: boolean;
+}
+
+const wordStatus = (n: number): NonNullable<DurationReport['words']> =>
+  n < WORD_BUDGET.floor ? 'FLOOR' : n < WORD_BUDGET.min ? 'LOW' : n > WORD_BUDGET.max ? 'HIGH' : 'OK';
+
+/** Tipik yolun kapı kararı: oynatılabilir, 90–120 dk ve sözcük tabanının üstünde. */
+export function judgeTypical(t: PathEstimate): { words: NonNullable<DurationReport['words']>; inRange: boolean } {
+  const words = wordStatus(t.words);
+  const inRange =
+    t.error === undefined && words !== 'FLOOR' && t.minutes >= TARGET_MINUTES.min && t.minutes <= TARGET_MINUTES.max;
+  return { words, inRange };
 }
 
 export function durationReport(c: CompiledCase): DurationReport {
   const paths = estimateGoldenPaths(c);
   const typical = paths.find((p) => p.name === TYPICAL_PATH);
-  const inRange =
-    typical !== undefined &&
-    typical.error === undefined &&
-    typical.minutes >= TARGET_MINUTES.min &&
-    typical.minutes <= TARGET_MINUTES.max;
-  return { paths, ...(typical === undefined ? {} : { typical }), inRange };
+  if (typical === undefined) return { paths, inRange: false };
+  return { paths, typical, ...judgeTypical(typical) };
 }
 
 /** İnsan okunur süre raporu. */
@@ -174,8 +189,19 @@ export function formatDuration(r: DurationReport): string {
       `  ✗ TİPİK YOL YOK: "${TYPICAL_PATH}" adlı golden path ekleyin (hedef ${TARGET_MINUTES.min}–${TARGET_MINUTES.max} dk).`,
     );
   } else {
-    const verdict = r.inRange ? '✓ hedefte' : `✗ HEDEF DIŞI (${TARGET_MINUTES.min}–${TARGET_MINUTES.max} dk)`;
-    lines.push(`  ==> TİPİK YOL (${TYPICAL_PATH}): ${r.typical.minutes.toFixed(1)} dk  ${verdict}`);
+    const t = r.typical;
+    const timeOk = t.minutes >= TARGET_MINUTES.min && t.minutes <= TARGET_MINUTES.max;
+    const verdict = timeOk ? '✓ süre hedefte' : `✗ SÜRE HEDEF DIŞI (${TARGET_MINUTES.min}–${TARGET_MINUTES.max} dk)`;
+    lines.push(`  ==> TİPİK YOL (${TYPICAL_PATH}): ${t.minutes.toFixed(1)} dk  ${verdict}`);
+    const budget = `${WORD_BUDGET.min / 1000}–${WORD_BUDGET.max / 1000} bin`;
+    const wordsLine: Record<NonNullable<DurationReport['words']>, string> = {
+      FLOOR: `✗ HİKÂYE YOK: ${t.words} sözcük < ${WORD_BUDGET.floor} taban (hedef ${budget})`,
+      LOW: `! ${t.words} sözcük: hedefin (${budget}) altında`,
+      OK: `✓ ${t.words} sözcük: hedefte (${budget})`,
+      HIGH: `! ${t.words} sözcük: hedefin (${budget}) üstünde; süreyi aşma riski`,
+    };
+    if (r.words !== undefined) lines.push(`  ==> SÖZCÜK BÜTÇESİ: ${wordsLine[r.words]}`);
+    lines.push(`  ==> KAPI: ${r.inRange ? '✓ GEÇTİ' : '✗ KALDI'}`);
   }
   return `${lines.join('\n')}\n`;
 }

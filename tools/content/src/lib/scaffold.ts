@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, sep } from 'node:path';
-import { format, resolveConfig } from 'prettier';
+import { formatWithRepoConfig } from './build.js';
 import { UsageError, assertSlug, caseSrcDir, repoRoot } from './paths.js';
 
 // case:new: tools/content/templates/case/** → content/src/<slug>/, belge şablonları → docs/content ve docs/legal.
@@ -51,7 +51,7 @@ export async function scaffoldCase(slugArg: string | undefined, numberArg: strin
     const to = join(srcDir, relative(caseTemplates, file));
     mkdirSync(dirname(to), { recursive: true });
     let text = fill(readFileSync(file, 'utf8'));
-    if (/\.(ts|html)$/.test(to)) text = await format(text, { ...((await resolveConfig(to)) ?? {}), filepath: to });
+    if (/\.(ts|html)$/.test(to)) text = await formatWithRepoConfig(text, to);
     writeFileSync(to, text);
     written.push(to);
   }

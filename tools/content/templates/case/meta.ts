@@ -33,7 +33,7 @@ export const meta: CasePart = {
     legalReview: { status: 'PENDING' },
   },
   config: {
-    startNode: 'BR_01',
+    startNode: 'PROLOG',
     scoring: {
       categories: categories({
         HUKUKI_BILGI: {

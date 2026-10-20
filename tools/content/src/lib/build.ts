@@ -7,16 +7,23 @@ import type { Issue } from '@mudafaa/engine';
 import { format, resolveConfig } from 'prettier';
 import { assertUniqueIds, checkPartNames } from '../kit/case.js';
 import type { CaseParts } from '../kit/case.js';
-import { caseOutDir, caseSrcDir } from './paths.js';
+import { caseOutDir, caseSrcDir, repoRoot } from './paths.js';
 
 // case:build'in çekirdeği: kaynağı çalıştırır (tsx altında dinamik import), parça adlarını ve kimlik tekilliğini
 // denetler, parçaları Prettier biçiminde `content/cases/<slug>/NN-ad.json` olarak yazar, birleştirip motorla derler.
 
-/** JSON'u depodaki Prettier ayarlarıyla, Prettier'ın yazacağı biçimde metne çevirir. */
-export async function formatJson(value: unknown, filepath: string): Promise<string> {
-  const config = (await resolveConfig(filepath)) ?? {};
-  return format(JSON.stringify(value), { ...config, filepath });
+/**
+ * Depodaki Prettier ayarlarıyla biçimler (`.prettierrc.json` depo kökünden okunur; hedef depo dışında olsa da aynı
+ * biçim). `filepath` ayrıştırıcıyı seçer.
+ */
+export async function formatWithRepoConfig(text: string, filepath: string): Promise<string> {
+  const config = (await resolveConfig(join(repoRoot, 'package.json'))) ?? {};
+  return format(text, { ...config, filepath });
 }
+
+/** JSON'u Prettier'ın yazacağı biçimde metne çevirir (`npx prettier --check` temiz kalır). */
+export const formatJson = (value: unknown, filepath: string): Promise<string> =>
+  formatWithRepoConfig(JSON.stringify(value), filepath);
 
 /** `content/src/<slug>/index.ts`'in varsayılan dışa aktarımını çalıştırıp parçaları döndürür. */
 export async function loadSource(slug: string, root?: string): Promise<CaseParts> {

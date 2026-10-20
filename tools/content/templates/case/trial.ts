@@ -75,7 +75,8 @@ export const trial: CasePart = {
       witnessLabel: 'TANIK · TODO',
       lines: says(
         L('mubasir', 'Tanık TODO!'),
-        L('baskan', 'Kimliğiniz tespit edildi (CMK 58). Gerçeği söylemekle yükümlüsünüz.'),
+        // Satırlar konuşma dilinde; madde atfı (CMK 58) kalite geri bildiriminde, raporda ve mentor açıklamasındadır.
+        L('baskan', 'Kimliğiniz tespit edildi. Gerçeği söylemekle yükümlüsünüz.'),
       ),
       choices: [cont('T01_DEVAM', 'Tanık yemin ederek dinlensin', 'T_02')],
     }),
@@ -105,7 +106,7 @@ export const trial: CasePart = {
       courtStage: 'TANIK_DINLEME',
       witness: 'tanik',
       witnessLabel: 'TANIK · TODO',
-      say: [L('baskan', 'Tanık ifadesini kesintisiz verdi (CMK 59/1). Müdafi, sorularınız?')],
+      say: [L('baskan', 'Tanık ifadesini kesintisiz verdi. Müdafi, sorularınız?')],
       rulesText: 'İpucu: Çelişkiyi bul ve doğru delille vur. Yanlış delil güvenilirliği ve skoru düşürür.',
       objectionGrounds: ['g_kanaat', 'g_telkin'],
       statements: [
@@ -161,7 +162,7 @@ export const trial: CasePart = {
       title: 'Savcılık delilinin tartışılması',
       courtStage: 'DELIL_TARTISMA',
       prosecutionEvidence: 'ev_iddia',
-      say: [L('baskan', 'Müdafi, delile karşı diyeceğiniz? (CMK 215)')],
+      say: [L('baskan', 'Müdafi, delile karşı diyeceğiniz?')],
       next: 'T_05',
       options: [
         option('T04_A', 'TODO hukuka aykırı delil: Anayasa 38/6, CMK 206/2-a, 217/2', {
@@ -186,7 +187,7 @@ export const trial: CasePart = {
       courtStage: 'MUTALAA',
       say: [
         L('savci', 'TODO mütalaa: sanığın TCK md. uyarınca cezalandırılmasına karar verilmesini talep ederim.'),
-        L('baskan', 'Müdafi, mütalaaya karşı diyeceğiniz? (CMK 216/2)'),
+        L('baskan', 'Müdafi, mütalaaya karşı diyeceğiniz?'),
       ],
       next: 'T_06',
       options: [
@@ -258,7 +259,7 @@ export const trial: CasePart = {
     choiceNode('T_07', {
       ...court2.base,
       title: 'Son söz',
-      prompt: L('baskan', 'Sanık, son sözünüz? (CMK 216/3)'),
+      prompt: L('baskan', 'Sanık, son sözünüz?'),
       next: 'T_08',
       choices: [
         option('T07_A', '“TODO kısa ve onurlu son söz.”', {
@@ -272,7 +273,7 @@ export const trial: CasePart = {
     }),
     decisionNode('T_08', [{ to: 'R_KARAR' }], {
       ...TRIAL,
-      lines: says(L('baskan', 'Hüküm fıkrası ayakta dinlenir (CMK 231/4).')),
+      lines: says(L('baskan', 'Hüküm fıkrası ayakta dinlenir.')),
     }),
     story('T_COKUS', {
       ...court2.base,

@@ -21,7 +21,7 @@ export const hearing1: CasePart = {
       onFirstEnter: [raise('in_court'), meet('baskan'), meet('uye'), meet('savci'), meet('mubasir')],
       lines: says(
         L('mubasir', 'TODO dosyası! Taraflar salona.'),
-        L('baskan', 'Sanığın kimliği tespit edildi (CMK 191/2). İddianame okundu; sanığa hakları hatırlatıldı.'),
+        L('baskan', 'Sanığın kimliği tespit edildi. İddianame okundu; sanığa hakları hatırlatıldı.'),
       ),
       choices: [cont('H100_DEVAM', 'Devam', 'H1_01')],
     }),
@@ -29,7 +29,7 @@ export const hearing1: CasePart = {
       title: 'Savcılık delili',
       courtStage: 'DELIL_TARTISMA',
       prosecutionEvidence: 'ev_iddia',
-      say: [L('savci', 'TODO savcılık delili okundu.'), L('baskan', 'Müdafi, diyeceğiniz? (CMK 215)')],
+      say: [L('savci', 'TODO savcılık delili okundu.'), L('baskan', 'Müdafi, diyeceğiniz?')],
       next: 'H1_02',
       options: [
         option('H101_A', 'TODO doğru itiraz (madde)', {

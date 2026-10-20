@@ -99,3 +99,16 @@ Sunucuda Claude Code ile repo kökünde çalıştırılır; argüman `{"items":[
 - **`api-key-not-valid` girişte**: web derlemesi emülatöre bağlanamıyor; `AUTH_EMULATOR_HOST` ve 9099 portunu kontrol et.
 - **CORS hatası**: `CORS_ORIGINS` web adresini (şema + port dahil) içermeli.
 - **Seed'de doğrulama hatası**: `npm run case:validate -- <slug>` ile ayrıntıyı gör.
+
+## Dava durumu (20 Ekim 2026)
+
+| Durum | Davalar | Nerede |
+|---|---|---|
+| Yayına hazır, doğrulayıcı PASSED | #01 kayip-cuzdan, #02 cevrimici-tuzak, #03 kirmizi-isik, #04 beyaz-toz, #05 gece-yarisi-gaspi, #07 gece-bekcisinin-sirri | `plan-b` → `npm run db:seed` ile oyuna girer |
+| Yarım (yazım sürüyordu) | #06 son-mesaj (en ileri), #08 kirik-kadeh, #09 sahte-imza, #10 liman-gecesi, #11 belediye-kasasi, #12 zarf | `wip/<slug>` dalları |
+| Yeni başlamıştı (iskelet) | #13 silinen-dosyalar, #14 yanik-ev | `wip/<slug>` dalları |
+| Başlanmadı | #15 son-durusma | — |
+
+`#01–#05` yazarın kendi kontrollerinden geçti, ama **şeytanın avukatı incelemesi henüz yapılmadı** (erken çözüm / spoiler / eksik içerik taraması). Yarım davaları sürdürmek için §8'deki iş akışını `mode: "resume"` ile, `worktreePath` olarak ilgili `wip/<slug>` dalının checkout edildiği bir worktree vererek çalıştır; incelemeyi `mode: "done"` ile başlat.
+
+`wip/*` dallarını `plan-b`'ye tamamlanmadan birleştirme: `db:seed` yarım davaları doğrulayamaz.

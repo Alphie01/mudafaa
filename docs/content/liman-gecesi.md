@@ -79,8 +79,9 @@ muvekkil (Tarık), bora (Şükrü), huseyin (Nail), anne (Sevim), bilirkisi (Dr.
 | ded_motif | 23.41'deki konuşmanın sebebi | INSIGHT | defter_satir/manifesto + arama2341 | K6 | ✓ |
 | ded_eksik | Kitten eksik eski tip kilit | INSIGHT | envanter + tarik_koni | K7 | ✓ |
 
-Tahta: soruşturmada 9 tarif (7 çıkarım, 2 alternatif), arada 4 yeni + 1 alternatif (toplam 14 tarif, 12 çıkarım).
-Çeldirici kartlar: matara, kafes, pamuk, cevapsız arama, mont, servis aracı (tek başına), kardeş; yanlış çift −50.
+Tahta: soruşturma tahtası (20 kart) 9 tarif (8 çıkarım, 1 alternatif); ara tahtası (12 kart) 5 tarif (4 çıkarım, 1 alternatif)
+— toplam 14 tarif, 12 çıkarım. Çeldirici kartlar: matara, kafes, pamuk, kan yolu (tek başına), mont, servis aracı (tek
+başına); yanlış çift −50. Havuzlar simülasyon dallanmasını sınırlamak için yalnızca tarife giren kartlar ve birkaç çeldiriciyle tutuldu.
 
 ## 5. Çelişkiler
 
@@ -149,6 +150,36 @@ tekrar eden ceza kuralları `maxUses: 3`; tahta tarifleri `IF ¬hasEvidence` ile
 Bkz. §13. Tipik yolun metni tarandı: Kenan'ın fail olduğu hiçbir satırda söylenmez; ilk celsedeki çatlaklar “yanıldı”
 düzeyindedir; abone kaydı yalnızca 23.41 aramasını bulup talep eden oyuncuya ara evresinde gelir.
 
-## 11–13. Ölçümler
+## 11. Erken çözüm ölçümü
 
-Aşağıdaki bölüm `npm run case:duration` ve doğrulayıcı çıktısıyla doldurulmuştur.
+`shortest.mjs` (yerel en küçükleme; TIPIK'ten aksiyon blokları açgözlü silinerek hâlâ beraate ulaşan yol): **214 → 148
+aksiyon (oran 0,69; hedef ≥ 0,60)**, sonuç BERAAT_E (9.005). En kısa beraat yine dönüşün olmadığını (turnike + büfe +
+Nail), darbe şeklini, ölüm saatini ve kilit ölçüsünü birlikte ister; tek bir “anahtar delil” yolu yoktur.
+
+## 12. Doğrulayıcı
+
+Son koşu (`npm run case:validate -- liman-gecesi --max-ms 2400000`, 2026-10-20): **PASSED — 0 hata, 2 uyarı**
+(SIMULATION_INCOMPLETE, uzun davada beklenen; UNREACHED_CHOICE: EK_GPS ve yüzleşme sonrası akşam devamı — ikisi de
+yalnızca belirli hata dallarında görünür). Simülasyon 47.110 durum, 357.023 geçiş, 400 yürüyüş; bütün sonuçlara
+ulaşıldı (ETIK, BERAAT_B, BERAAT_E, NITELIK, MAHKUMIYET); kapsam node 99/99, seçenek 190/192, kural 63/63, delil
+56/56; golden path 6/6; softlock / çıkmaz / sızıntı yok. Final skor aralığı −4.930…12.400; `scaleMax` 11.800.
+Süre 974 sn: aynı makinede paralel çalışan diğer dava iş akışlarının yükü (load ≈ 20) altında; varsayılan 600 sn
+sınırıyla yapılan koşu bu yük altında SIMULATION_ABORTED verdi. Yük düşükken önceki sürüm 124 sn'de PASSED oldu.
+
+## 13. Süre ve sözcük ölçümü
+
+`npm run case:duration -- liman-gecesi` (2026-10-20):
+
+```
+  G1             94.6 dk   13149 sözcük   215 aksiyon  BERAAT_B (12400)
+  TIPIK          93.8 dk   13040 sözcük   214 aksiyon  BERAAT_E (12115)
+  G3             67.9 dk    9805 sözcük   134 aksiyon  NITELIK (4005)
+  G4             61.2 dk    8676 sözcük   130 aksiyon  MAHKUMIYET (220)
+  G5             69.7 dk   10041 sözcük   139 aksiyon  ETIK (8160)
+  W              62.3 dk    8960 sözcük   125 aksiyon  MAHKUMIYET (2105)
+  ==> TİPİK YOL (TIPIK): 93.8 dk  ✓ süre hedefte
+  ==> KAPI: ✓ GEÇTİ
+```
+
+Paket (`node tools/content/word-count.mjs content/cases/liman-gecesi`): 1.277 satır, 15.682 satır sözcüğü; ekran
+metinleriyle toplam **19.916** sözcük; en uzun satır 212 karakter.

@@ -28,7 +28,8 @@
     "db:migrate:test": "npm run migrate:test -w @mudafaa/api",
     "db:seed": "npm run seed -w @mudafaa/api",
     "emulators": "firebase emulators:start --only auth --project demo-mudafaa",
-    "dev:api": "npm run start:dev -w @mudafaa/api"
+    "dev:api": "npm run start:dev -w @mudafaa/api",
+    "dev:web": "cd apps/mobile && fvm flutter run -d web-server --web-port 8090"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -15,10 +15,12 @@ describe('scene PNGs', () => {
   it('scene PNGs have expected sizes', () => {
     expect(size('olay-yeri-depo@4x.png')).toEqual({ width: 1376, height: 856 });
     expect(size('depo-sokagi@4x.png')).toEqual({ width: 1376, height: 1520 });
+    for (const name of ['depo3-ic', 'cay-ocagi', 'kulube'])
+      expect(size(`${name}@4x.png`), name).toEqual({ width: 1376, height: 1520 });
   });
 
   it('scene HTML keeps only decorative layers', () => {
-    for (const name of ['olay-yeri-depo', 'depo-sokagi']) {
+    for (const name of ['olay-yeri-depo', 'depo-sokagi', 'depo3-ic', 'cay-ocagi', 'kulube']) {
       const html = readFileSync(join(repoRoot, `tools/content/scenes/${name}.html`), 'utf8').replace(
         /<!--[\s\S]*?-->/g,
         '',

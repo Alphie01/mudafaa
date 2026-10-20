@@ -1,0 +1,468 @@
+{
+  "outcomes": [
+    {
+      "id": "ETIK",
+      "class": "OTHER",
+      "priority": 1,
+      "when": { "flag": "etik_gulay" },
+      "stamp": "AZİL",
+      "stampTone": "red",
+      "sentence": "Vekâlet sona erdi · dava sürüyor",
+      "verdictText": "Mahkemece, sanığın eşi Gülay Demirel’in duruşmadaki beyanının banka kaydıyla çeliştiği ve tanığın bu beyanı müdafiin telkiniyle verdiğini açıkladığı anlaşıldığından tutanak örneğinin yalan tanıklık ve azmettirme iddiaları yönünden Bursa Cumhuriyet Başsavcılığına, müdafie ilişkin kısmının Bursa Barosu Başkanlığına gönderilmesine; sanığın müdafiini azletmesi nedeniyle duruşmanın yeni müdafiin katılımıyla devamına karar verildi.",
+      "reasoning": [
+        {
+          "text": "Müdafi, sanığın eşine eve dönüş saatini yanlış söylemesini öğütlemiştir; tanık bunu duruşmada açıklamıştır."
+        },
+        { "text": "Sanık, vekâlet ilişkisini tek taraflı olarak sona erdirmiştir (TBK 512/1)." },
+        { "text": "Dava başka bir müdafiin katılımıyla devam edecektir; senin dosyan burada kapandı." }
+      ],
+      "legalBasis": "TCK 272, 38; Av.K. 34; TBK 512/1; CMK 217",
+      "xp": 0,
+      "howToReach": "Bir tanığa asla ne söyleyeceğini öğütleme; geç saatin açıklamasını kayıtla (hesap dökümü, büfe) yap.",
+      "ethicsCard": "Sanığın eşine yalan bir saat söylemesini öğütledin. Bu, yalan tanıklığa azmettirmedir (TCK 272, 38) ve avukatın doğruluk yükümlülüğüne aykırıdır (Av.K. 34). Üstelik o bir saati açıklayan kayıt zaten elindeydi: 23.37, iskele büfesi.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN SONRA", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Azilnameyi katladım, cüzdanıma koydum. Neden bilmiyorum; bir makbuz gibi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridorun öbür ucunda Gülay ağlıyordu. Yanında bir zabıt kâtibi, elinde bir kâğıt. Elif’in resim defteri yere düşmüştü; kimse almıyordu."
+            },
+            { "speaker": "narrator", "text": "Ben aldım. Uzattım. Gülay defteri aldı, bana bakmadı." },
+            { "speaker": "gulay", "expression": "uzgun", "text": "“Ne derseniz” demiştim size. Siz de dediniz." },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda ince bir kitapçık: “Avukatlık Kanunu.” Leyla bırakmıştı. Not yoktu. Not gerekmiyordu."
+            },
+            { "speaker": "narrator", "text": "Leyla’nın odasının kapısı kapalıydı, ışığı yanıyordu. Kapıyı çalmadım." },
+            {
+              "speaker": "player",
+              "text": "Bir saati sildim. Bir kadının ağzından. O saat iki ay sonra bir mahkeme salonunda geri geldi ve beni de yanında götürdü.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Oysa saat bir suç değildi. Saat bir büfede, bir taburede, ağlayan bir adamdı. Doğruyu söyleseydi, o bir saat Tarık’ın en iyi tanığı olacaktı.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BERAAT_B",
+      "class": "ACQUITTAL",
+      "priority": 2,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "flag": "gercek_fail" },
+          { "cmp": [{ "var": "pers" }, ">=", 8] },
+          { "cmp": [{ "score": "final" }, ">=", 8000] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok · Tahliye",
+      "verdictText": "Sanık Tarık Demirel’in üzerine atılı kasten öldürme suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; kavga sırasındaki yumruk eyleminin basit tıbbi müdahaleyle giderilebilecek kasten yaralama (TCK 86/2) niteliğinde kaldığı, kovuşturulması şikâyete bağlı olup şikâyet bulunmadığından bu eylem yönünden davanın CMK 223/8 uyarınca DÜŞMESİNE; tutuklu ise derhâl TAHLİYESİNE, adli kontrol altındaysa tedbirin kaldırılmasına; CMK 141/1-e uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142 ile 6384 sayılı Kanuna göre yapılabileceğinin bildirilmesine (CMK 231/3); karar ve duruşma tutanaklarının Kenan Aksoy hakkındaki soruşturma dosyasına eklenmek üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; tebliğden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1) karar verildi.",
+      "reasoning": [
+        {
+          "text": "Ölüme yol açan darbe, maktulün 23.34’te yemek yemesinden ve 23.41’de telefonla görüşmesinden sonra vurulmuştur; sanık 23.18’de limandan çıkmış ve dönmemiştir."
+        },
+        {
+          "when": { "hasEvidence": "ded_silah" },
+          "text": "Kırık, düşmeyle değil sınırlı yüzeyli bir cisimle oluşmuştur; emanetteki kilit yaranın ölçüsüne uymamaktadır."
+        },
+        {
+          "text": "Ölüm saatinde olay yerinde bulunan tek araç başka bir kişinin zimmetindedir; bu kişi kendisini suçlayabilecek sorulara cevap vermemiş, hakkında soruşturma başlatılmıştır."
+        },
+        {
+          "text": "Yumruk eylemi basit yaralama niteliğinde kalmış, şikâyet bulunmadığından bu yönden düşme kararı verilmiştir."
+        },
+        { "text": "Deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir." }
+      ],
+      "legalBasis": "CMK 223/2-b, 223/8; TCK 86/2, 73; CMK 141/1-e, 142, 231/3",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 120] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 120] }, 1000] }
+        }
+      },
+      "howToReach": "Dönüşün olmadığını ve ölümün sonradan geldiğini kanıtla; abone, araç ve zimmet kayıtlarını savcılığa yazılı bildir; ikinci celsede vardiya şefinin beyanlarını kayıtla çürüt ve esas savunmada gerçek faili göster.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“İşlemediği sabit olduğundan… beraatine.” Tarık kelimeleri duydu. Bir an anlamadı. Sonra elini, sağ elini, boğumlarında hâlâ solgun bir iz taşıyan elini, kürsünün kenarına koydu ve gözlerini kapadı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gülay ayağa kalktı. Elif’in resim defteri kucağından kaydı; açılan sayfada mavi bir gemi."
+            },
+            { "speaker": "narrator", "text": "ADLİYE ÖNÜ · ÖĞLE", "style": "card", "bg": "sokak_sabah" },
+            {
+              "speaker": "narrator",
+              "text": "Yağmur dinmişti. İlk kez. Uludağ’ın üstünde bulutlar yırtılmış, güneş adliyenin ıslak merdivenlerinde parlıyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Merdivenin dibinde Sevim Yavuz bekliyordu. Bana doğru bir adım attı, durdu."
+            },
+            { "speaker": "sevim", "text": "Defteri doğru ellere vermişim. Ercan yanlış sayılmak istemezdi." },
+            { "speaker": "narrator", "text": "Sonra Tarık’a döndü. Uzun bir an. Tarık başını eğdi." },
+            { "speaker": "tarik", "text": "Özür dilerim yenge. O gece… vurdum. Vurmamalıydım." },
+            {
+              "speaker": "sevim",
+              "expression": "uzgun",
+              "text": "Vurdun. Ama öldürmedin. Ben üç ay seni öldürdü sandım. Kim haklı, kim haksız, bilmiyorum artık."
+            },
+            { "speaker": "narrator", "text": "Sevim gitti. Tarık arkasından baktı, sonra kızını kucağına aldı." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · AKŞAM", "style": "card", "bg": "buro" },
+            { "speaker": "narrator", "text": "Leyla masasında, kapalı sigara paketi elinde. Paketi bana uzattı." },
+            { "speaker": "leyla", "text": "Al. Saklamana gerek yok artık; ben de bırakıyorum. Bunu." },
+            { "speaker": "player", "text": "Neyi?" },
+            {
+              "speaker": "leyla",
+              "text": "Paketi. On yıldır elimde çeviriyorum. Bugün bir yumruk ile bir ölümü birbirinden ayırdın. Ben de bir alışkanlığı bırakabilirim."
+            },
+            { "speaker": "narrator", "text": "Masasındaki ters çerçeveye bir an baktı. Düzeltmedi." },
+            {
+              "speaker": "narrator",
+              "text": "BİR HAFTA SONRA · MUDANYA, EMRE DEMİREL’İN MEZARI",
+              "style": "card",
+              "bg": "sokak_sabah"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tarık mezarın başında, elinde bir kâğıt: Elif’in gemi resmi. Taşa yasladı, üstüne küçük bir taş koydu ki rüzgâr almasın."
+            },
+            {
+              "speaker": "tarik",
+              "text": "Ağabey… ayağına bakmazdın derler. Ben baktım. Bir kere yine de tökezledim."
+            },
+            { "speaker": "narrator", "text": "KARTLAR", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Kenan Aksoy hakkında kasten öldürme soruşturması başlatıldı; servis kamyonetinin kitindeki eksik kilit, B sahasındaki bir rögarın içinde bulundu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Manifestoya girmeyen konteynerler için liman işletmesinde ayrı bir soruşturma açıldı."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "released" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "İlk celsede tahliye olmuştu; bugün yalnızca adli kontrol kalktı. Bir kâğıt. Ama Tarık o kâğıdı katlayıp gömleğinin cebine koydu, kalbinin üstüne.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BERAAT_E",
+      "class": "ACQUITTAL",
+      "priority": 3,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "any": [{ "flag": "supheli" }, { "flag": "gercek_fail" }] },
+          { "cmp": [{ "var": "pers" }, ">=", 6] },
+          { "cmp": [{ "score": "final" }, ">=", 7000] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok · Tahliye",
+      "verdictText": "Sanık Tarık Demirel’in üzerine atılı kasten öldürme suçunu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; kavga sırasındaki yumruk eyleminin basit tıbbi müdahaleyle giderilebilecek kasten yaralama (TCK 86/2) niteliğinde kaldığı, kovuşturulması şikâyete bağlı olup şikâyet bulunmadığından bu eylem yönünden davanın CMK 223/8 uyarınca DÜŞMESİNE; tutuklu ise derhâl TAHLİYESİNE, adli kontrol altındaysa tedbirin kaldırılmasına; CMK 141/1-e uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142 ile 6384 sayılı Kanuna göre yapılabileceğinin bildirilmesine (CMK 231/3); tebliğden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1) karar verildi.",
+      "reasoning": [
+        {
+          "when": { "flag": "contra_k1" },
+          "text": "Sanığı olay yerine dönerken gördüğünü söyleyen tanığın teşhisi, sanığın 23.18’de limandan çıktığını gösteren kayıtlar ve aydınlatmanın kapalı olduğu karşısında güvenilirliğini yitirmiştir."
+        },
+        {
+          "when": { "flag": "contra_b1" },
+          "text": "Ölüme yol açan kırık, düşmeyle değil sınırlı yüzeyli bir cisimle oluşmuştur."
+        },
+        {
+          "when": { "flag": "contra_b2" },
+          "text": "Maktulün 23.34’ten sonra yaşadığı mide içeriği ve kayıtlarla anlaşılmıştır."
+        },
+        { "when": { "flag": "contra_b3" }, "text": "Emanetteki kilit yaranın ölçüsüne uymamaktadır." },
+        {
+          "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil yoktur; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2)."
+        }
+      ],
+      "legalBasis": "CMK 223/2-e, 223/8; TCK 86/2; Anayasa 38/4; AİHS 6/2; CMK 141/1-e, 142, 231/3",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 100] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
+        }
+      },
+      "howToReach": "Vardiya şefinin teşhisini kayıtlarla çürüt; bilirkişiye darbe şeklini, ölüm saatini ve aletin ölçüsünü göster; esas savunmada şüpheyi bu iki ayağa dayandır.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“İşlediği sabit olmadığından… beraatine.” Tarık oturdu; ayakta dinlemesi gerektiğini unutmuştu. Mübaşir omzuna dokundu, kalktı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gülay galeride iki elini ağzına kapadı. Sevim Yavuz ise kımıldamadan oturuyordu; gözleri boş kürsüdeydi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "MUDANYA LİMANI · PERSONEL KAPISI · BİR HAFTA SONRA",
+              "style": "card",
+              "bg": "liman_gece"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tarık işe dönmek için kapıya geldi. Kartını okuttu; turnike döndü. Bir makinenin hafızası onu yeniden içeri aldı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kantinin önünde üç işçi sigara içiyordu. Biri başını çevirdi. Bir diğeri fısıldadı; poyraz sözün yarısını getirdi."
+            },
+            { "speaker": "narrator", "name": "BİR İŞÇİ", "text": "…şüpheden çıkmış. Şüpheden." },
+            { "speaker": "narrator", "text": "Tarık durmadı. Rıhtım 4’e yürüdü, eldivenlerini taktı, ilk kilidi aldı." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Panodaki son kâğıdı söktüm: “23.41.” Altında üç soru vardı: Kim? Neden? Sonra ne oldu?"
+            },
+            {
+              "speaker": "player",
+              "text": "Birincisine bir isim yazabilirdim. Ama o ismi bir savcıya hiç yazmadım. Bir mahkeme beraat dedi; bir liman hâlâ fısıldıyor.",
+              "style": "thought"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Beraat beraattir Deniz. “Şüpheden” diye bir damga yok kararda.",
+              "style": "phone"
+            },
+            { "speaker": "player", "text": "Kararda yok. Kantinde var." },
+            {
+              "speaker": "leyla",
+              "text": "Kantinleri biz düzeltemeyiz. Ama bir dahaki sefere bir kâğıdı kime götüreceğini bilirsin.",
+              "style": "phone"
+            },
+            { "speaker": "player", "text": "Kapı açıldı. Işık hâlâ kapalı.", "style": "thought" }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "suc_duyurusu" } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Kenan Aksoy o hafta vardiya şefliğinden emekliye ayrıldı. Bir veda yemeği verildi; Tarık gitmedi."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "NITELIK",
+      "class": "RECHARACTERIZED",
+      "priority": 4,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "ref": "donus_yok" },
+          { "any": [{ "flag": "terditli" }, { "flag": "supheli" }, { "flag": "kabul87" }] },
+          { "any": [{ "flag": "durust_savunma" }, { "flag": "fact_kardes" }] },
+          { "cmp": [{ "score": "final" }, ">=", 3000] }
+        ]
+      },
+      "stamp": "87/4 · TAHRİK",
+      "stampTone": "amber",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "6 yıl 3 ay hapis",
+      "verdictText": "Sanığın eyleminin kasten yaralama sonucu ölüme neden olma (TCK 87/4) suçunu oluşturduğu kabul edilerek: yaralamanın 86/1 kapsamında kaldığı gözetilerek temel cezanın alt sınırdan 10 yıl hapis olarak belirlenmesine; maktulün sanığın ölen ağabeyine yönelik hakareti, tükürmesi ve itmesi nedeniyle haksız tahrik altında hareket ettiği anlaşıldığından TCK 29 uyarınca dörtte bir oranında indirimle 7 yıl 6 ay; sanığın yargılama sürecindeki tutumu nedeniyle TCK 62/1 uyarınca altıda bir oranında indirimle sonuç olarak 6 YIL 3 AY HAPİS cezasıyla cezalandırılmasına; TCK 53’teki hak yoksunluklarına; tutukluluk hâlinin devamına (ikinci celseden önce adli kontrolle tahliye edilmişse hükümle birlikte tutuklanmasına, CMK 100–101); tutuklulukta geçen sürenin cezadan mahsubuna (TCK 63); tebliğden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1) karar verildi.",
+      "reasoning": [
+        { "text": "Sanığın olay yerine geri döndüğü ispatlanamamış; öldürme kastı sabit görülmemiştir." },
+        {
+          "when": { "not": { "ref": "olum_sonra" } },
+          "text": "Heyet, ölümün sanığın yumruğuyla düşen maktulün başını çarpmasıyla oluştuğu kanaatine varmıştır; ölüm saatini ve darbe şeklini daraltan bir delil ortaya konmamıştır."
+        },
+        {
+          "text": "Maktulün sanığın ölen ağabeyiyle alay etmesi, yüzüne tükürmesi ve onu itmesi haksız fiildir (TCK 29)."
+        },
+        { "text": "Ceza 87/4’ün alt sınırından belirlenmiş; tahrik ve takdiri indirim uygulanmıştır." }
+      ],
+      "legalBasis": "TCK 87/4, 86/1, 29, 62/1, 53, 63; CMK 226, 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 85] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
+        }
+      },
+      "howToReach": "Dönüşün olmadığını kanıtla; tahrikin ve kastın yaralamaya yönelik olduğunu sanığın dürüst anlatımıyla kur; terditli savunma yap.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "Türk Milleti adına… altı yıl üç ay hapis cezasıyla…" },
+            {
+              "speaker": "narrator",
+              "text": "Tarık dimdik dinledi. “Altı yıl” kelimesinde bir şey kırıldı yüzünde; “öldürme kastı sabit görülmemiştir” cümlesinde bir şey yerine oturdu."
+            },
+            { "speaker": "narrator", "text": "ADLİYE ARKASI · RİNG ARACI", "style": "card", "bg": "adliye" },
+            { "speaker": "narrator", "text": "Ring aracının kapısı açıktı. Tarık basamakta durdu, bana döndü." },
+            { "speaker": "tarik", "text": "Bir yumruğun bedeli bu mu abla?" },
+            { "speaker": "player", "text": "Ödediğin bedel senin yumruğun değil." },
+            { "speaker": "tarik", "text": "Kimin o zaman?" },
+            {
+              "speaker": "narrator",
+              "text": "Cevap veremedim. Kapı kapandı. Buğulu camın ardında bir el; açılıp kapanan parmaklar."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "player",
+              "text": "Kırk dakika. Ercan’ın kantinden çıktığı saat ile gece yarısı arasında, kimsenin bakmadığı kırk dakika.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "O kırk dakikayı dolduramadım. Mahkeme onu bir yumrukla doldurdu; en kolay dolgu.",
+              "style": "thought"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Müebbetten altı yıla indin. Bu bir yenilgi değil. Ama bir zafer olduğunu da söyleme kendine. İstinafa hazırlan.",
+              "style": "phone"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gülay o akşam aradı. Bir şey söylemedi; yalnızca nefesini duydum. Arkada Elif’in sesi: “Babam hangi gemide?”"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MAHKUMIYET",
+      "class": "CONVICTION",
+      "priority": 5,
+      "when": { "all": [] },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "16 yıl 8 ay hapis",
+      "verdictText": "Sanığın maktulü olası kastla öldürdüğü kabul edilerek TCK 81/1 ve 21/2 uyarınca müebbet hapis yerine alt sınırdan 20 yıl hapis; TCK 62/1 uyarınca altıda bir oranında indirimle sonuç olarak 16 YIL 8 AY HAPİS cezasıyla cezalandırılmasına; TCK 53’teki hak yoksunluklarına; tutukluluk hâlinin devamına (ikinci celseden önce adli kontrolle tahliye edilmişse hükümle birlikte tutuklanmasına, CMK 100–101); tutuklulukta geçen sürenin cezadan mahsubuna (TCK 63); tebliğden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1) karar verildi.",
+      "reasoning": [
+        {
+          "when": { "not": { "flag": "contra_k1" } },
+          "text": "Tanık beyanları ve kavga sonrası teşhis, sanığın olay yerine döndüğü yönündeki iddiayı desteklemiştir."
+        },
+        {
+          "text": "Başın arkasına sert bir cisimle vurulan darbede ölüm neticesinin öngörüldüğü kabul edilmiştir (TCK 21/2)."
+        },
+        {
+          "when": { "flag": "cokus" },
+          "text": "Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı."
+        }
+      ],
+      "legalBasis": "TCK 81/1, 21/2, 62/1, 53, 63; CMK 273/1",
+      "xp": {
+        "if": {
+          "when": { "flag": "cokus" },
+          "then": {
+            "if": {
+              "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+              "then": { "div": [{ "mul": [{ "score": "final" }, 30] }, 2000] },
+              "else": { "div": [{ "mul": [{ "score": "final" }, 30] }, 1000] }
+            }
+          },
+          "else": {
+            "if": {
+              "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+              "then": { "div": [{ "mul": [{ "score": "final" }, 60] }, 2000] },
+              "else": { "div": [{ "mul": [{ "score": "final" }, 60] }, 1000] }
+            }
+          }
+        }
+      },
+      "howToReach": "Varsayılan sonuç: dönüşün olmadığını, ölümün sonradan geldiğini ya da en azından kastın yaralamaya yönelik olduğunu kanıtlayamazsan verilir.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "Türk Milleti adına… on altı yıl sekiz ay hapis cezasıyla…" },
+            {
+              "speaker": "narrator",
+              "text": "Tarık bir şey söylemedi. Galeriye baktı; Gülay’a. Gülay ayakta, kıpırdamadan."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Gülay yanıma geldi. Çantasından katlanmış bir kâğıt çıkardı; mavi bir gemi."
+            },
+            {
+              "speaker": "gulay",
+              "expression": "uzgun",
+              "text": "Bunu siz saklayın avukat hanım. Ben bakamıyorum. Elif yenisini çizer. Hep çizer."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kâğıdı aldım. Gülay gitti. Arkasından bakarken koridorun ucunda Kenan Aksoy’u gördüm; yanında kimse yoktu, elinde bir bez parçası."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir yumruk. Bir boşluk. Ve benim dolduramadığım kırk dakika.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "cokus" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Savcı dosyasını kapatırken bana bir kez daha baktı. “Bir yumruğu savunmak zordur” demişti. Haklıydı. Ben onu savunmadım bile; yalnızca kaybettim."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "cokus" } },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "İstinaf süresi iki hafta. Kırk dakikayı bul, Deniz. Bu sefer kâğıtla.",
+              "style": "phone"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

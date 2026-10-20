@@ -1,0 +1,119 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_hesap",
+        "when": { "not": { "hasEvidence": "ev_hesap" } },
+        "text": "Gülay’ın evinde hesap dökümünü istemedin: 23.37 iskele büfesi, dönüşün olmadığının ilk kaydıydı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_turnike",
+        "when": { "not": { "hasEvidence": "ev_turnike" } },
+        "text": "Turnike ve araç kapısı kayıtlarını dilekçeyle istemedin (CMK 177): 23.18 çıkış ve 16 LMN 07 oradaydı.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_projektor",
+        "when": { "not": { "hasEvidence": "clue_projektor" } },
+        "text": "Rıhtım fotoğraflarında projektör direğindeki bakım etiketini görmedin; “gündüz gibiydi” diyen teşhis ışığa dayanıyordu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_pil",
+        "when": { "not": { "hasEvidence": "clue_pil" } },
+        "text": "Şükrü Usta’ya bağıranın ağzını görüp görmediğini sormadın; işitme cihazının pili bitikti.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_darbe",
+        "when": { "not": { "hasEvidence": "ded_darbe" } },
+        "text": "Ön rapordaki dairesel çökme kırığını ve karşı darbe lezyonunun yokluğunu birleştirmedin: düşme değil, darbe.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_saat",
+        "when": { "not": { "hasEvidence": "ded_saat" } },
+        "text": "Mide içeriğini kantin kaydıyla birleştirmedin: ölüm 23.34’ten sonraydı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_arama",
+        "when": { "not": { "hasEvidence": "clue_arama2341" } },
+        "text": "Telefon tutanağındaki 23.41 aramasını görmedin; kimsenin okumadığı kâğıt Ercan’ın son iki dakikasını taşıyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_abone",
+        "when": { "not": { "hasEvidence": "ev_abone" } },
+        "text": "23.41’de aranan hattın abone bilgisini mahkemeden istemedin (CMK 135/6 çerçevesinde hâkim kararı).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_gps",
+        "when": { "not": { "hasEvidence": "ev_gps" } },
+        "text": "Servis kamyonetinin araç takip ve zimmet kaydını istemedin; ölüm saatinde B sahasında duran tek araçtı.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_silah",
+        "when": { "not": { "hasEvidence": "ded_silah" } },
+        "text": "Emanetteki kilidin konisini (2,6 cm) kırığın ölçüsüyle (3,2 cm) karşılaştırmadın.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_defter",
+        "when": { "not": { "hasEvidence": "ev_defter" } },
+        "text": "Maktulün eşine gitmedin; Ercan’ın defteri 23.41 aramasının nedenini taşıyordu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_yumruk",
+        "when": { "not": { "flag": "fact_yumruk" } },
+        "text": "Tarık’ın “ittim” dediği yumruğu ondan duymadın; haksız tahrik (TCK 29) ancak sanığın dürüst anlatımıyla kurulur.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_durust",
+        "when": { "all": [{ "flag": "fact_yumruk" }, { "not": { "flag": "durust_savunma" } }] },
+        "text": "Sanık yumruğu sana anlattı ama duruşmada anlatmadı; dürüst savunma görgü tanığı karşısında tek sağlam zemindi.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_suc",
+        "when": {
+          "all": [
+            { "any": [{ "hasEvidence": "ev_abone" }, { "hasEvidence": "ev_gps" }] },
+            { "not": { "flag": "suc_duyurusu" } }
+          ]
+        },
+        "text": "Gerçek faile giden kayıtlar elindeydi ama savcılığa yazılı suç duyurusunda bulunmadın (CMK 158). Avukat kovalamaz, yazar.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_uyari",
+        "when": { "flag": "kenan_uyarildi" },
+        "text": "Vardiya şefine 23.41 aramasını sordun; tanığı uyardın ve kit envanteri “düzeltildi”. Bilgi önce mahkemeye ve savcılığa gider.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_yuzles",
+        "when": { "flag": "kenan_yuzles" },
+        "text": "Şüpheliyle duruşma dışında yüzleştin; delili ona gösterdin. Tanığı etkileme riski (TCK 277) ve delil karartmaya davet.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_telkin",
+        "when": { "flag": "sukru_telkin" },
+        "text": "Şükrü Usta’ya ne söyleyeceğini öğütledin. Tanığa cümle verilmez (TCK 277; Av.K. 34).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_olum",
+        "when": { "all": [{ "ref": "donus_yok" }, { "not": { "ref": "olum_sonra" } }] },
+        "text": "Dönüşün olmadığını kanıtladın ama ölümün sonradan geldiğini kanıtlamadın; mahkeme ölümü yumruğa bağladı (TCK 87/4).",
+        "category": "DELIL_ANALIZI"
+      }
+    ]
+  }
+}

@@ -1,0 +1,314 @@
+{
+  "scenes": [
+    {
+      "id": "sc_rihtim",
+      "title": "4 no’lu rıhtım · olay yeri fotoğrafları",
+      "description": "15 Kasım 06.40, flaşla çekilmiş 41 fotoğraf.",
+      "width": 344,
+      "height": 300,
+      "image": "img_rihtim",
+      "objects": [
+        {
+          "id": "ob_baba",
+          "name": "Baba 7",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 160, "w": 54, "h": 70 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_baba_kan" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Kan, babanın gövdesinde, yerden kırk santim yukarıda; damla damla, aşağı doğru. Tepesinde ne kan ne saç. Oturan birinin burnundan akmış gibi.",
+            "short": "Kan oturma hizasında"
+          }
+        },
+        {
+          "id": "ob_proj",
+          "name": "Projektör direği",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 256, "y": 24, "w": 40, "h": 96 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_projektor" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Direğin dibinde sarı bir etiket, flaşta parlıyor: “14/11 · 23.00–02.00 · BAKIM · ENERJİ YOK.” O gece B sahasının ışıkları sönüktü.",
+            "short": "Bakım etiketi"
+          }
+        },
+        {
+          "id": "ob_kafes",
+          "name": "Laşing kafesi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 150, "w": 84, "h": 60 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kafes" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }
+          ],
+          "feedback": {
+            "text": "Tel kafeste yığılı yüzlerce kilit. Hepsi aynı: yarı otomatik, sarı boyalı SA-2. Emanetteki kilidin boş yeri kafesin önünde, tebeşirle çizilmiş.",
+            "short": "SA-2 kilitleri"
+          }
+        },
+        {
+          "id": "ob_matara",
+          "name": "Matara",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 98, "y": 214, "w": 26, "h": 26 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_matara" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }
+          ],
+          "feedback": {
+            "text": "Babanın dibinde yarısı boş bir matara. Kapağı açık. Fotoğrafçı yanına “anason kokusu” yazmış.",
+            "short": "Rakı matarası"
+          }
+        },
+        {
+          "id": "ob_marti",
+          "name": "Martı tüyü",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 196, "y": 56, "w": 34, "h": 24 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Islak bir martı tüyü. Limanda martı tüyü delil değildir; hava durumudur.",
+            "short": "Martı tüyü"
+          }
+        },
+        {
+          "id": "ob_kaynak",
+          "name": "Eski kaynak lekesi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 8, "y": 252, "w": 64, "h": 32 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Rıhtımın betonunda paslı kaynak lekeleri. Yıllar önceden kalma; o geceyle ilgisi yok.",
+            "short": "Kaynak lekesi"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_bsaha",
+      "title": "B sahası · cesedin bulunduğu yer",
+      "description": "15 Kasım 06.55, iki konteynerin arası.",
+      "width": 344,
+      "height": 300,
+      "image": "img_bsaha",
+      "objects": [
+        {
+          "id": "ob_suruk",
+          "name": "İki paralel iz",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 196, "w": 64, "h": 44 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_surukleme" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Islak tozda iki paralel çizgi, konteynerlerin arasına uzanıyor. Topuk izi. Biri bir bedeni koltuk altlarından tutup geri geri çekmiş.",
+            "short": "Sürüklenme izi"
+          }
+        },
+        {
+          "id": "ob_lastik",
+          "name": "Asfalttaki iz",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 30, "y": 236, "w": 96, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_lastik" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Taze, çift tekerli bir dönüş izi; çamurlu sırtları henüz yağmurla dağılmamış. Forkliftin tek lastiği var. Bu bir kamyonet.",
+            "short": "Çift lastik izi"
+          }
+        },
+        {
+          "id": "ob_pamuk",
+          "name": "Pamuk",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 226, "y": 212, "w": 28, "h": 24 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_pamuk" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }
+          ],
+          "feedback": {
+            "text": "Cesedin elinin yanında kanlı, buruşmuş bir pamuk tampon. Biri burnuna pamuk tıkamış; kavgadan sonra bir yerde oturup kendine bakmış.",
+            "short": "Burun tamponu"
+          }
+        },
+        {
+          "id": "ob_kanyol",
+          "name": "Rıhtıma giden yol",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 262, "y": 104, "w": 72, "h": 44 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kan_yolu" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }
+          ],
+          "feedback": {
+            "text": "Ekip rıhtımdan B sahasına kadar her metreyi fotoğraflamış: on dört kare, tek damla kan yok.",
+            "short": "Yolda kan yok"
+          }
+        },
+        {
+          "id": "ob_kedi",
+          "name": "Kedi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 300, "y": 248, "w": 32, "h": 30 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Konteynerin altından bakan bir liman kedisi. Fotoğrafçıya dönmüş; o gece onun da bir ifadesi alınmamış.",
+            "short": "Kedi"
+          }
+        },
+        {
+          "id": "ob_palet",
+          "name": "Kırık palet",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 14, "y": 120, "w": 64, "h": 40 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": { "text": "Kırık bir ahşap palet. Haftalardır orada; üstünde yosun.", "short": "Palet" }
+        }
+      ]
+    },
+    {
+      "id": "sc_bufe",
+      "title": "İskele büfesi",
+      "description": "Mudanya iskelesi, kırk yıllık büfe.",
+      "width": 344,
+      "height": 300,
+      "image": "img_bufe",
+      "objects": [
+        {
+          "id": "ob_zrapor",
+          "name": "Çekmece",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 204, "y": 150, "w": 56, "h": 32 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_pos" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Nail Usta çekmeceyi açtı: lastikle bağlanmış gün sonu fişleri. 14 Kasım: “23.37 · KART · 2 ÇAY · 30,00.” O saatte tek kartlı satış.",
+            "short": "Gün sonu fişi"
+          }
+        },
+        {
+          "id": "ob_akis",
+          "name": "Yayın akışı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 36, "y": 56, "w": 64, "h": 74 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_radyo" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Duvarda raptiyeyle tutturulmuş bir radyonun yayın akışı. “00.00 Gece Haberleri.” Nail Usta parmağıyla vurdu: “Haberler başladı, çocuk hâlâ oradaydı.”",
+            "short": "Gece haberleri"
+          }
+        },
+        {
+          "id": "ob_kamera",
+          "name": "Kamera",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 282, "y": 16, "w": 32, "h": 26 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "“Kamerayla izlenmektedir.” Kameranın kablosu yok. Nail Usta güldü: “Hırsız okuma bilir, kablo bilmez.”",
+            "short": "Sahte kamera"
+          }
+        },
+        {
+          "id": "ob_tabure",
+          "name": "Tabure",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 120, "y": 222, "w": 44, "h": 58 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": { "text": "İskeleye bakan alçak bir tabure. Kimse oturmuyor. Islak.", "short": "Tabure" }
+        }
+      ]
+    },
+    {
+      "id": "sc_emanet",
+      "title": "Emanet fotoğrafları",
+      "description": "Adliye emanet bürosu, kâtip huzurunda.",
+      "width": 344,
+      "height": 300,
+      "image": "img_emanet",
+      "objects": [
+        {
+          "id": "ob_koni",
+          "name": "Kilidin konisi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 56, "y": 116, "w": 96, "h": 72 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_koni" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Fotoğrafta kilidin yanında bir cetvel. Koninin tabanı 2,6 santim. Nihai rapordaki kırık 3,2.",
+            "short": "Koni 2,6 cm"
+          }
+        },
+        {
+          "id": "ob_mont",
+          "name": "Mont",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 196, "y": 76, "w": 104, "h": 124 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_mont" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Tarık’ın lacivert montu. Sağ kolda üç kurumuş damla. Sıçrama yok, sürtünme yok, yaka temiz.",
+            "short": "Üç damla"
+          }
+        },
+        {
+          "id": "ob_etiket",
+          "name": "Emanet etiketi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 16, "y": 240, "w": 84, "h": 30 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Emanet etiketi: tarih, numara, kâtibin parafı. Usule uygun; sorun yok.",
+            "short": "Etiket"
+          }
+        },
+        {
+          "id": "ob_eldiven",
+          "name": "İş eldiveni",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 228, "w": 64, "h": 42 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Tarık’ın iş eldiveni. Yağ ve pas. Laşing işçisinin eldiveni hep böyledir.",
+            "short": "Eldiven"
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "id": "img_rihtim", "kind": "IMAGE", "path": "assets/scenes/olay-yeri@4x.png" },
+    { "id": "img_bsaha", "kind": "IMAGE", "path": "assets/scenes/b-sahasi@4x.png" },
+    { "id": "img_bufe", "kind": "IMAGE", "path": "assets/scenes/bufe@4x.png" },
+    { "id": "img_emanet", "kind": "IMAGE", "path": "assets/scenes/emanet@4x.png" }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_baba_kan", "source": { "type": "OBJECT", "id": "ob_baba" } },
+    { "evidence": "clue_projektor", "source": { "type": "OBJECT", "id": "ob_proj" } },
+    { "evidence": "clue_kafes", "source": { "type": "OBJECT", "id": "ob_kafes" } },
+    { "evidence": "clue_matara", "source": { "type": "OBJECT", "id": "ob_matara" } },
+    { "evidence": "clue_surukleme", "source": { "type": "OBJECT", "id": "ob_suruk" } },
+    { "evidence": "clue_lastik", "source": { "type": "OBJECT", "id": "ob_lastik" } },
+    { "evidence": "clue_pamuk", "source": { "type": "OBJECT", "id": "ob_pamuk" } },
+    { "evidence": "clue_kan_yolu", "source": { "type": "OBJECT", "id": "ob_kanyol" } },
+    { "evidence": "clue_pos", "source": { "type": "OBJECT", "id": "ob_zrapor" } },
+    { "evidence": "clue_radyo", "source": { "type": "OBJECT", "id": "ob_akis" } },
+    { "evidence": "clue_koni", "source": { "type": "OBJECT", "id": "ob_koni" } },
+    { "evidence": "clue_mont", "source": { "type": "OBJECT", "id": "ob_mont" } }
+  ]
+}

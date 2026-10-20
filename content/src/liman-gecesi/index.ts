@@ -3,8 +3,8 @@ import { briefing } from './briefing.js';
 import { cast } from './cast.js';
 import { evidencePart } from './evidence.js';
 import { hearing1 } from './hearing-1.js';
-import { investigation1 } from './investigation-1.js';
-import { investigation2 } from './investigation-2.js';
+import { investigation } from './investigation-1.js';
+import { ara } from './investigation-2.js';
 import { meta } from './meta.js';
 import { outcomes } from './outcomes.js';
 import { report } from './report.js';
@@ -12,9 +12,8 @@ import { scenes } from './scenes.js';
 import { tests } from './tests.js';
 import { trial } from './trial.js';
 
-// Dava #10 kaynağı. `npm run case:build -- liman-gecesi` bu fonksiyonu çalıştırır ve her anahtarı
-// `content/cases/liman-gecesi/<anahtar>.json` olarak yazar. Anahtarlar iki basamaklı önekle sıralanır; parçalar bu sırayla
-// birleştirilir (diziler uç uca eklenir). `withDiscoveryPaths`, koşulsuz DISCOVER'ların bulunma yollarını ekler.
+// Dava #10 kaynağı. `npm run case:build -- liman-gecesi` her anahtarı `content/cases/liman-gecesi/<anahtar>.json`
+// olarak yazar; parçalar ad sırasıyla birleşir. `withDiscoveryPaths` koşulsuz DISCOVER'ların bulunma yollarını ekler.
 
 export default defineCase(() =>
   withDiscoveryPaths({
@@ -23,12 +22,12 @@ export default defineCase(() =>
     '20-evidence': evidencePart,
     '30-scenes': scenes,
     '40-briefing': briefing,
-    '50-investigation-1': investigation1,
-    '60-hearing-1': hearing1,
-    '70-investigation-2': investigation2,
-    '80-trial': trial,
-    '90-outcomes': outcomes,
-    '95-report': report,
-    '99-tests': tests,
+    '50-investigation': investigation,
+    '60-trial': hearing1,
+    '65-ara': ara,
+    '68-trial-2': trial,
+    '70-outcomes': outcomes,
+    '80-report': report,
+    '90-tests': tests,
   }),
 );

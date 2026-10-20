@@ -1087,10 +1087,10 @@ const geceSon = story('INV_GECE', {
   lines: B(`
 > Çıkarken kapının altında bir zarf buldum. Pul yok, adres yok. İçinde tek bir A4; ortasında yazıcıdan çıkmış tek cümle:
 @İMZASIZ NOT: Bazı dosyalar silinince herkes için daha iyi olur.
-> Zarfı çevirdim. Arkası boş. Kâğıt pahalı; kalın, krem rengi. Bir büronun ya da bir genel müdürlüğün kâğıdı gibi. Ya da bir kırtasiyenin. {flash}
+> Zarfı çevirdim. Arkası boş. Kâğıt pahalı; kalın, krem rengi. Bir büronun, bir bankanın ya da sıradan bir kırtasiyenin kâğıdı olabilir. {flash}
 ~ Bir tehdit mi, bir tavsiye mi? İkisi de olabilir. İkisi de beni yarın sabah dokuzda o salona sokmaz; ama sokacak.
 > Masaya oturdum. Önümde bir yığın kâğıt: bir özet döküm, bir uzman raporu, bir devir tutanağı, bir e-posta çıktısı. Hepsinin ortak bir yeri vardı: “S.AKTAS.” Bir kullanıcı adı. Beş harf, bir nokta.
-~ Dokuz yıl bir adam bu beş harfi her sabah yazdı. Sonra işten çıktı. Beş harf masada kaldı; bir zarfın içinde, bir genel müdürün çekmecesinde.
+~ Dokuz yıl bir adam bu beş harfi her sabah yazdı. Sonra işten çıktı. Beş harf masada kaldı; bir zarfın içinde, bir tutanağın dördüncü maddesinde.
 ~ Yarın bir uzman kürsüye çıkacak ve “kayıt yalan söylemez” diyecek. Doğru; kayıt yalan söylemez.
 ~ Ama kaydı tutan, özetleyen, mahkemeye getiren üç ayrı el var. Benim işim o elleri göstermek; kaydı değil, elleri.
 > Defne’nin resmini çantamdan çıkardım; Gül vermişti, Selim’e iletecektim, unutmuştum. Bir masa, bir ekran, bir adam ve odanın içinde çizilmiş bir güneş.

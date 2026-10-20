@@ -10,7 +10,7 @@ import {
   thresholdBar,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
-import { T_BERAAT, T_BERAAT_B, T_INDIRIM } from './outcomes.js';
+import { T_BERAAT, T_INDIRIM } from './outcomes.js';
 import { ARA_AP, ARA_DAYS, p1 } from './shared.js';
 
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler.

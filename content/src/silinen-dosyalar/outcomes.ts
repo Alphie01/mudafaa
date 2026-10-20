@@ -274,7 +274,7 @@ gul: İki hafta. Defne’nin doğum günü on gün sonra. Pasta mı alayım, dil
 - İkisini de. Pastayı siz alın. Dilekçeyi ben yazarım.
 > Gül güldü; ağlamaya benzeyen bir gülüş. Selim’in elini tuttu, bıraktı, yeniden tuttu.
 > Koridorun ucunda Ozan Tekin cübbesini katlıyordu. Bize bakmadı. Kazananlar koridorlarda kimseye bakmaz; kaybedenler herkese bakar.
-~ Bir yol daha. Ama elimde kalan kâğıtları bir celse önce doğru yerde açamadım. İstinaf, geç kalmış bir cümlenin ikinci şansıdır.
+~ İstinaf. Ama elimde kalan kâğıtları bir celse önce doğru yerde açamadım. İstinaf, geç kalmış bir cümlenin ikinci şansıdır.
 `),
         W(
           any(has('ded_gm_cihaz'), has('ded_gm_hat'), flag('fact_gm')),

@@ -266,6 +266,7 @@ c SELIM_BITIR
 c ST_RED
 c A_KARAR
 c ${karar}
+${karar === 'K_BILDIR' ? 'c ARA_KB_DON' : ''}
 c A_YASAR
 c YA_DOGRU
 c A_DURUSMA

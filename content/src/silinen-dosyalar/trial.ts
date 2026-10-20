@@ -23,7 +23,6 @@ import {
   raise,
   resultNode,
   score,
-  set,
   statement,
   story,
   strategyAmount,
@@ -272,7 +271,7 @@ cevdet: Tanık Tarık Sezeeer! Hı-hım.
 > Tarık Sezer kürsüye geldi. Takım elbisesi kusursuzdu; sesi de. Yemin ederken eli hiç titremedi.
 tarik: Sayın Hâkim, ben otuz yıldır bu şirketi yönetiyorum. Üç yüz işçinin ekmeği bana emanet. Selim’i de ben işe aldım; oğlum gibiydi. Bu yüzden bu olay beni en çok üzen şey oldu.
 kemal: Müdafi, sorularınız.
-~ Sıcak, ölçülü, hazırlıklı. Her cümlesini bir iyilikle bitiriyor. Önce konuşsun; sonra kâğıtları açarım. İsmini ben söylemeyeceğim; kayıtlar söyleyecek.
+~ Sıcak, ölçülü, hazırlıklı. Her cümlesini bir iyilikle bitiriyor. Önce konuşsun. Bir tanık hakkında hüküm kurmak benim işim değil; söylediğini kâğıtlarla yan yana koymak benim işim.
 > Dinleyici sırasında Selim öne eğilmiş, elleri kenetli. Gül onun koluna dokundu; bırak, der gibi.
 `),
       statements: [

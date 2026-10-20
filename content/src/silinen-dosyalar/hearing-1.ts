@@ -435,7 +435,7 @@ bulent: Yani… bazıları geçici dosya yazar. Ama önemsiz.
 - Sayın Hâkim, 30 Eylül tarihli devir-teslim tutanağı, dördüncü madde: “Sunucu, güvenlik duvarı ve VPN yönetici şifreleri kapalı zarf içinde teslim edilmiştir.” Teslim alan: Genel Müdür T. Sezer.
 - Bay Arıkan, o zarfın içinde ne olduğunu biliyor muydunuz?
 bulent: Hayır… Yani, zarfı bilmiyordum. Tarık Bey bize şifre vermedi. Biz… biz yeni şifre koymadık; vakit olmadı.
-> Dinleyici sırasında bir gazete yere düştü. Tarık Sezer eğilip aldı; acele etmeden.
+> Kâtip yazmayı bıraktı; hâkimin başını kaldırmasını bekledi. Salonda bir sandalye gıcırdadı.
 kemal: Tutanağa geçsin: tanık, şifrelerin sanığın ayrılışından sonra değiştirilmediğini ve genel müdüre teslim edildiğini bilmediğini beyan etti.
 `),
         }),
@@ -679,7 +679,7 @@ kemal: Ara karar: Savunmanın talepleri yönünden ilgili kurumlara müzekkere y
           flag('bulent_coktu'),
           `
 # ADLİYE KORİDORU · ÖĞLEDEN ÖNCE [bg:adliye]
-> Koridorda Bülent Arıkan, Ozan Tekin’in yanından geçip merdivenlere yürüdü; kimseyle konuşmadan. Tarık Sezer onu bir an kolundan tuttu, kulağına bir şey söyledi. Bülent başını salladı ve gitti.
+> Koridorda Bülent Arıkan, Ozan Tekin’in yanından geçip merdivenlere yürüdü; kimseyle konuşmadan. Ozan Tekin arkasından baktı, sonra telefonunu çıkarıp bir numara aradı; açılmadı.
 > Gül, Selim’in koluna girmişti. Selim bana döndü.
 selim: İki özet değer. İki. Ben bunu raporu okuduğum ilk gün görmeliydim. Okuyamadım; elim titriyordu.
 gul: Bugün bitti mi avukat hanım?

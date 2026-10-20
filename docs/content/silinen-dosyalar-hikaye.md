@@ -212,3 +212,12 @@ vermeyeceğim." Salon donar. Yaşar'ın kısa tanıklığı; Ozan'ın yönlendir
 - Tam kayıt (`ev_tam_log`), bilirkişi raporu (`ev_sema`), zeyilname (`ev_zeyil`), turnike (`ev_turnike`), operatör
   (`ev_operator`) koşullu teslimler; her biri `deliver()` ile yollu.
 - Etik bayrakları (`yasar_kocluk`, `nalan_belge`, `tarik_yuzles`, `selim_giris`) bir yerde okunur.
+
+## 8. Uygulama notları (yazım sonrası)
+- Tipik yolda belgelerin açılışları, iki akşam sahnesi, ara evresinin belgeleri ve akşamları, mütalaa ve esas savunma
+  birer duyusal ayrıntı ve iç ses vuruşuyla genişletildi (Leyla'nın "menteşe" hikâyesi, Selim'in tutanağın arkasındaki
+  kupa notu, Deniz'in cübbesi). Tipik yol ~13,5 bin sözcük.
+- Gizem denetimi: genel müdürü adıyla hedef alan seçenekler (ek dilekçede gözaltı talebi, Nalan'a "o gece nerede?",
+  son sözde suçlama) ancak genel müdüre bağlayan bir bulgudan sonra görünür. Birinci celse koridorunda plaka vurgusu yok.
+- MAHKÛMİYET epilogu hükümle uyumlu: "ne erteleme ne geri bırakma"; istinaf için iki hafta; Gül'ün pasta/dilekçe cümlesi.
+- W (çöküş) artık ikinci celsede: oyuncu bütün kâğıtları bulur ama genel müdürün kürsüsünde ilgisiz belgeyle ısrar eder.

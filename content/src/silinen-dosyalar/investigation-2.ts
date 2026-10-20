@@ -13,7 +13,6 @@ import {
   fallback,
   flag,
   has,
-  ifThen,
   inc,
   meet,
   nav,
@@ -860,7 +859,7 @@ leyla: Bir de şunu kazanırsın: ikinci celsede savcı senin yanında durabilir
 > Dilekçeyi o gece yazdım. Ekler: dört kurumun kaydı. İmza: ortak avukat sıfatıyla. İlk kez.
 ~ Bir ismi bir zarfa koydum, savcılığa. Haykırmadım. Yazdım. Fark buydu işte; dört yılda öğrendiğim fark.
 `),
-      next: HUB,
+      next: 'ARA_KARAR_BILDIRILDI',
     }),
     option('K_YUZLES', 'Genel müdürle yüzleş; itiraf ettirmeye çalış', {
       effects: [inc('ethics'), raise('tarik_yuzles'), score('SAVUNMA_STRATEJISI', -40), dec('pers')],
@@ -897,7 +896,9 @@ const kararBildirildi = story('ARA_KARAR_BILDIRILDI', {
   title: 'Karar verildi',
   background: 'buro_gece',
   lines: B(`
-> Suç duyurusu dilekçesi savcılığa gitti. Ekler tamam. Artık savcının işi.
+# ERTESİ SABAH 09.10 — ADLİYE, BAŞSAVCILIK BÜROSU [bg:adliye]
+> Suç duyurusu dilekçesi savcılığa gitti. Ekler tamam. Kalem memuru evrak numarasını dilekçenin köşesine yazdı, damgaladı, başını kaldırmadan “sıradaki” dedi.
+> Koridorda Savcı Ferda Yalın’ın kapısı aralıktı. Beni gördü; başıyla selam verdi. Bir şey söylemedi. Söylemesi de gerekmiyordu.
 ~ Bir ismi yazdım, imzaladım, gönderdim. Gerisi benim elimde değil. İyi bir avukat, elinde olmayanı bırakmayı da bilir.
 `),
   choices: [cont('ARA_KB_DON', 'Büroya dön', HUB, { role: 'BACK' })],

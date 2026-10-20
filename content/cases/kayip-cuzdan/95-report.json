@@ -1,0 +1,114 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_kaynak",
+        "when": { "not": { "hasEvidence": "clue_kaynak_dosya" } },
+        "text": "Aktarım formundaki kaynak dosya satırına büyüteçle bakmadın: CD bir saatlik, dört kanallı kaydın 2,5 dakikasıydı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kamera",
+        "when": { "not": { "hasEvidence": "clue_dort_kamera" } },
+        "text": "Hat 38’e aynı saatte binip tavandaki dört kamerayı saymadın.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_son_kare",
+        "when": { "not": { "hasEvidence": "clue_son_kare" } },
+        "text": "CD’nin son karesindeki durak ekranı (“Beşevler”) kartları Arda’nın kullanamayacağını gösteriyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_harcama",
+        "when": { "not": { "hasEvidence": "clue_harcama_saat" } },
+        "text": "Banka dökümündeki ilk harcamanın saatine ve yerine bakmadın (18.49, Altıparmak).",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kart",
+        "when": { "not": { "hasEvidence": "ded_kart_baskasi" } },
+        "text": "Son kare ile 18.49 harcamasını tahtada birleştirmedin: kartları kullanan Arda olamazdı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_not",
+        "when": { "not": { "hasEvidence": "clue_sari_not" } },
+        "text": "Emanetteki sarı notu okumadın: “Yarın 9 — karakol. G. Sarı cüzdan.”",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_153",
+        "when": { "not": { "hasEvidence": "clue_153_arama" } },
+        "text": "Arda’nın telefonundaki 153 aramasını bulmadın; çağrı merkezi her şeyi kaydeder.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_teslim",
+        "when": { "not": { "hasEvidence": "ded_teslim" } },
+        "text": "Sarı not ile 153 aramasını birleştirmedin: teslim niyetinin en güçlü izi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_gozluk",
+        "when": { "not": { "hasEvidence": "ded_hayri_gormedi" } },
+        "text": "Hayri Bey’in gözlüksüz gazete okuduğunu ve 9 numaranın açısını birleştirmedin.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_buldu",
+        "when": { "not": { "hasEvidence": "ded_buldu" } },
+        "text": "Koltuk altındaki boşluk ile CD’nin ilk karelerini birleştirmedin: kayıt bir alma değil, bir bulmaydı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_tam_kayit",
+        "when": { "not": { "any": [{ "flag": "kayit_istendi" }, { "flag": "kayit_istendi_h1" }] } },
+        "text": "Tam sefer kaydını ne dilekçede (CMK 177) ne duruşmada (CMK 206/1) istedin. Eksik dakikalar arşivde kaldı.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_cagri",
+        "when": { "not": { "any": [{ "flag": "cagri_istendi" }, { "flag": "cagri_istendi_h1" }] } },
+        "text": "153 çağrı kaydını istemedin; teslim niyetinin tarafsız kanıtı belediyenin arşivinde kaldı.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_recep",
+        "when": { "not": { "flag": "recep_cagrildi" } },
+        "text": "Şoför Recep Ateş’i tanık olarak dinletmedin; teslim girişiminin muhatabı oydu (CMK 210).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_sofor_red",
+        "when": { "all": [{ "flag": "recep_cagrildi" }, { "not": { "flag": "contra_r" } }] },
+        "text": "Şoförün “kimse getirmedi” beyanı ön kameranın 19.05 karesiyle çürütülebilirdi.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_birakan",
+        "when": { "not": { "flag": "sebeke_yakalandi" } },
+        "text": "Gerçek failler için: tam kayıtta cüzdanı bırakanı ve inenleri bağla, büfedeki fişi Cemil Usta’yla oku, onu savcılığa yönlendir ve somut delillerle suç duyurusunda bulun (CMK 158).",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_gulten",
+        "when": { "not": { "flag": "gulten_tanik" } },
+        "text": "Arda’nın Facebook mesajını duruşmada anlatması müştekiyi harekete geçirirdi; müştekiyi yönlendirmeden dinlemek onu mahkemeye kendi sözüyle getirdi.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_ek",
+        "when": { "not": { "flag": "ek_sure" } },
+        "text": "Nitelendirme uyarısında ek savunma için süre istenebilirdi (CMK 226/3).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_etik",
+        "when": { "flag": "recep_baski" },
+        "text": "Tanığı korkutmaya çalıştın; tanığa yalan tanıklığın sonuçlarını hatırlatmak hâkimin işidir (CMK 53), tanığı etkileme girişimi suç olabilir (TCK 277).",
+        "category": "USUL_BILGISI"
+      }
+    ]
+  }
+}

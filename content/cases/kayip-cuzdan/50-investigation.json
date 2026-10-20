@@ -1,0 +1,916 @@
+{
+  "nodes": [
+    {
+      "id": "INV_HUB",
+      "type": "INVESTIGATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Soruşturma",
+      "background": "buro",
+      "hud": ["day", "ap"],
+      "lines": [
+        {
+          "when": { "cmp": [{ "var": "day" }, "==", 1] },
+          "lines": [
+            { "speaker": "narrator", "text": "GÜN 1/3 · İLK CELSEYE 13 GÜN", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: Arda o akşam ne yaptı? Savcılığın kaydı neyi gösteriyor, neyi göstermiyor?"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "cmp": [{ "var": "day" }, "==", 2] },
+              { "any": [{ "hasEvidence": "clue_kaynak_dosya" }, { "hasEvidence": "clue_dort_kamera" }] }
+            ]
+          },
+          "lines": [
+            { "speaker": "narrator", "text": "GÜN 2/3 · İLK CELSEYE 12 GÜN", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: kayıt eksik görünüyor. Peki kartlar? Kim, nerede, ne zaman? Ve o gece Arda gerçekten kime ulaşmaya çalıştı?"
+            }
+          ]
+        },
+        {
+          "when": { "cmp": [{ "var": "day" }, "==", 2] },
+          "lines": [
+            { "speaker": "narrator", "text": "GÜN 2/3 · İLK CELSEYE 12 GÜN", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: kartlar kimin elindeydi? Tanık neyi gördü? CD’nin arkasında başka ne var?"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "GÜN 3/3 · İLK CELSEYE 11 GÜN", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: dilekçe için son gün. Tahtayı topla. Duruşmada neyi istiyor, kimi dinletiyorsun?"
+            }
+          ]
+        }
+      ],
+      "tabs": [
+        { "id": "t_yer", "label": "YERLER", "kind": "SCENE", "choices": ["H_OTOBUS", "H_ODA", "H_TERMINAL", "H_BUFE"] },
+        {
+          "id": "t_kisi",
+          "label": "KİŞİLER",
+          "kind": "PEOPLE",
+          "choices": ["H_ARDA", "H_ARDA2", "H_HAYRI", "H_RECEP", "H_ZEHRA"]
+        },
+        {
+          "id": "t_arsiv",
+          "label": "ARŞİV",
+          "kind": "ARCHIVE",
+          "choices": ["H_EMANET", "H_KLIP", "H_BANKA", "H_DIL", "H_CIKARIM", "H_LEYLA"]
+        }
+      ],
+      "scenePreview": { "scene": "sc_otobus" },
+      "quickTalk": {
+        "character": "arda",
+        "line": "“Çalmadım hocam. Buldum. Bunu kaç kere söylesem eksik kalıyor.”",
+        "choices": ["H_ARDA", "H_ARDA2"]
+      },
+      "choices": [
+        {
+          "id": "H_OTOBUS",
+          "kind": "NAVIGATE",
+          "label": "Hat 38’e aynı saatte bin",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_OTOBUS" },
+          "maxUses": 1,
+          "description": "Aynı model araç · büyüteç 6"
+        },
+        {
+          "id": "H_ODA",
+          "kind": "NAVIGATE",
+          "label": "Arda’nın odasına bak",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_ODA" },
+          "maxUses": 1,
+          "description": "Görükle · Arda ve Ozan eşliğinde · büyüteç 6",
+          "visibleWhen": { "visited": "INV_ARDA" }
+        },
+        {
+          "id": "H_TERMINAL",
+          "kind": "NAVIGATE",
+          "label": "Kent Ulaşım terminaline git",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_TERMINAL" },
+          "maxUses": 1,
+          "description": "Kayıp eşya bürosu · hareket memurluğu"
+        },
+        {
+          "id": "H_BUFE",
+          "kind": "NAVIGATE",
+          "label": "Altıparmak’taki büfeye git",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_BUFE" },
+          "maxUses": 1,
+          "description": "18.49 harcamasının yapıldığı yer · büyüteç 5",
+          "visibleWhen": { "hasEvidence": "clue_harcama_saat" }
+        },
+        {
+          "id": "H_ARDA",
+          "kind": "NAVIGATE",
+          "label": "Arda’yla sahafta konuş",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_ARDA" },
+          "description": "Sahafın kapanışına 14 dk",
+          "visibleWhen": { "not": { "visited": "INV_ARDA" } },
+          "effects": [{ "type": "VAR", "var": "min", "op": "set", "value": 14 }]
+        },
+        {
+          "id": "H_ARDA2",
+          "kind": "NAVIGATE",
+          "label": "Arda’yla tekrar konuş",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_ARDA" },
+          "maxUses": 1,
+          "description": "Öğle arası · 8 dk",
+          "visibleWhen": { "visited": "INV_ARDA" },
+          "effects": [{ "type": "VAR", "var": "min", "op": "set", "value": 8 }]
+        },
+        {
+          "id": "H_HAYRI",
+          "kind": "NAVIGATE",
+          "label": "Tanık Hayri Doğan’ı bul",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_HAYRI" },
+          "maxUses": 1,
+          "description": "Emekli PTT dağıtıcısı · Beşevler"
+        },
+        {
+          "id": "H_RECEP",
+          "kind": "NAVIGATE",
+          "label": "Şoför Recep Ateş’le konuş",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_RECEP" },
+          "maxUses": 1,
+          "description": "Kent Ulaşım garajı · vardiya arası"
+        },
+        {
+          "id": "H_ZEHRA",
+          "kind": "NAVIGATE",
+          "label": "Zehra’yı nöbetinde ziyaret et",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_ZEHRA" },
+          "maxUses": 1,
+          "description": "Devlet hastanesi · gece"
+        },
+        {
+          "id": "H_EMANET",
+          "kind": "NAVIGATE",
+          "label": "Emanetteki eşyalara bak",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_EMANET" },
+          "maxUses": 1,
+          "description": "Adliye emaneti · kâtibin önünde · 6 deneme"
+        },
+        {
+          "id": "H_KLIP",
+          "kind": "NAVIGATE",
+          "label": "CD’yi ve aktarım formunu incele",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_KLIP" },
+          "maxUses": 1,
+          "description": "Savcılık delili · 6 deneme"
+        },
+        {
+          "id": "H_BANKA",
+          "kind": "NAVIGATE",
+          "label": "Banka dökümünü oku",
+          "next": { "push": "INV_BANKA" },
+          "description": "0 EP · dosyada · 4 deneme",
+          "maxUses": 1
+        },
+        {
+          "id": "H_DIL",
+          "kind": "NAVIGATE",
+          "label": "Delil dilekçesi (CMK 177)",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_DIL" },
+          "description": "3 talep hakkı · duruşmadan en az 5 gün önce",
+          "visibleWhen": { "not": { "flag": "dil_verildi" } }
+        },
+        {
+          "id": "H_CIKARIM",
+          "kind": "NAVIGATE",
+          "label": "Çıkarım tahtası",
+          "next": { "push": "INV_CIKARIM" },
+          "description": "0 EP · ipuçlarını birleştir",
+          "enabledWhen": { "ref": "kart2" },
+          "lockedReason": "En az 2 ipucu gerekli."
+        },
+        {
+          "id": "H_LEYLA",
+          "kind": "NAVIGATE",
+          "label": "Leyla’ya danış",
+          "next": { "push": "INV_LEYLA" },
+          "description": "0 EP · günde bir kez",
+          "visibleWhen": { "cmp": [{ "var": "leyla_gun" }, "<", { "var": "day" }] },
+          "effects": [{ "type": "VAR", "var": "leyla_gun", "op": "set", "value": { "var": "day" } }]
+        },
+        {
+          "id": "H_DURUSMA",
+          "kind": "NAVIGATE",
+          "label": "DURUŞMAYA GİT · 1. CELSE",
+          "role": "PRIMARY",
+          "confirm": "Duruşmaya gidersen soruşturma biter. Emin misin?",
+          "next": "INV_GECE_1"
+        }
+      ]
+    },
+    {
+      "id": "INV_DAY_END",
+      "type": "DECISION",
+      "onEnter": [
+        { "type": "VAR", "var": "day", "op": "inc", "value": 1 },
+        { "type": "VAR", "var": "ap", "op": "set", "value": 4 }
+      ],
+      "routes": [{ "when": { "cmp": [{ "var": "day" }, "==", 2] }, "to": "INV_AKSAM1" }, { "to": "INV_AKSAM2" }],
+      "choices": []
+    },
+    {
+      "id": "INV_AKSAM1",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Akşam",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "when": {
+            "any": [
+              { "hasEvidence": "clue_kaynak_dosya" },
+              { "hasEvidence": "clue_dort_kamera" },
+              { "hasEvidence": "clue_son_kare" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "14 EKİM · SALI 20.30 — ARSLAN HUKUK",
+              "bg": "buro_gece",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Büroda yalnızca Leyla’nın lambası yanıyordu. Kapısı aralıktı. İçeri girdim, sormadan karşısına oturdum. Sormamı beklemiyordu zaten."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masasında iki bardak çay vardı. Biri benim içindi. Öbürü yarısına kadar içilmiş, soğumuştu."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Yüzünden belli. Bir şey buldun ama ne olduğunu bilmiyorsun. En tehlikeli an budur. İnsan bulduğuna âşık olur."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bugün öğrendiğin en önemli şey neydi? Delil sorma. Ne düşündüğünü sor kendine."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "14 EKİM · SALI 20.30 — ARSLAN HUKUK",
+              "bg": "buro_gece",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Büroda yalnızca Leyla’nın lambası yanıyordu. Kapısı aralıktı. İçeri girdim, sormadan karşısına oturdum. Sormamı beklemiyordu zaten."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masasında iki bardak çay vardı. Biri benim içindi. Öbürü yarısına kadar içilmiş, soğumuştu."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Yorgunsun. İlk gün hep böyle olur. İnsan her şeye bakmak ister, hiçbir şeyi görmez."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bugün öğrendiğin en önemli şey neydi? Delil sorma. Ne düşündüğünü sor kendine."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "AK1_KAYIT",
+          "kind": "OPTION",
+          "label": "“Kaydın eksik olabileceğini.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Kaydın eksik olabileceğini. İki buçuk dakika, tek açı. Ama bir otobüs bir saatte kırk durak geçer."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Eksik olabileceğini düşünmek kolay. Eksik olduğunu göstermek iş. Kimin elinde, hangi kâğıtta, nasıl isteyeceksin?"
+                }
+              ]
+            }
+          ],
+          "next": "INV_HUB",
+          "effects": [{ "type": "VAR", "var": "aksam_tema", "op": "set", "value": "KAYIT" }]
+        },
+        {
+          "id": "AK1_ARDA",
+          "kind": "OPTION",
+          "label": "“Arda’nın susması. Bir şeyden utanıyor.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Arda’nın susması. Her soruya cevap veriyor ama bir yerde duruyor. Bir şeyden utanıyor."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Utanç ile suçluluk dışarıdan aynı görünür. İçeriden bakınca biri “yaptım” der, öbürü “yapamadım”. Hangisi olduğunu bul."
+                }
+              ]
+            }
+          ],
+          "next": "INV_HUB",
+          "effects": [{ "type": "VAR", "var": "aksam_tema", "op": "set", "value": "ARDA" }]
+        },
+        {
+          "id": "AK1_KART",
+          "kind": "OPTION",
+          "label": "“Kartlar. Kim kullandı, neden üçe böldü?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Kartlar. Biri kartları kullandı ve kim olduğu dosyada yok. Savcı bu boşluğu Arda’yla dolduruyor."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Savcının boşluğunu doldurma. Göster yeter. Boşluk hâkimin önünde kaldıkça şüphe büyür. Şüphe kimin lehine, biliyorsun."
+                }
+              ]
+            }
+          ],
+          "next": "INV_HUB",
+          "effects": [{ "type": "VAR", "var": "aksam_tema", "op": "set", "value": "KART" }]
+        }
+      ]
+    },
+    {
+      "id": "INV_AKSAM2",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Gece",
+      "background": "sokak_yagmur",
+      "lines": [
+        {
+          "when": { "flag": "zehra_yakin" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "15 EKİM · ÇARŞAMBA 22.40 — EVE DÖNÜŞ",
+              "bg": "sokak_yagmur",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Otobüs durağında beklerken kendimi validatörün sesini sayarken buldum. Bip. Bip. Bir şehir eve dönüyordu, yine."
+            },
+            {
+              "speaker": "player",
+              "text": "Hat 38 geçti. Binmedim. Bir sonraki otobüsü bekledim; nedenini bilmeden.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "Telefon titredi. Zehra. Arka planda bir monitörün bipleri." },
+            {
+              "speaker": "zehra",
+              "text": "Rahatsız etmiyorum değil mi? Nöbetteyim. Arda aradı, sizinle konuşmuş. İlk defa sesi biraz düzgün geliyordu.",
+              "style": "phone"
+            },
+            {
+              "speaker": "zehra",
+              "text": "Annem bugün aradı. “Arda neden telefonlara az çıkıyor?” dedi. Sınavları var dedim. Yalan söylemeyi beceremiyorum avukat hanım.",
+              "style": "phone"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "15 EKİM · ÇARŞAMBA 22.40 — EVE DÖNÜŞ",
+              "bg": "sokak_yagmur",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Otobüs durağında beklerken kendimi validatörün sesini sayarken buldum. Bip. Bip. Bir şehir eve dönüyordu, yine."
+            },
+            {
+              "speaker": "player",
+              "text": "Hat 38 geçti. Binmedim. Bir sonraki otobüsü bekledim; nedenini bilmeden.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "Telefon titredi. Bilmediğim bir numaradan, uzun bir mesaj. Arda." },
+            {
+              "speaker": "arda",
+              "text": "Hocam iyi akşamlar. Ablam numaranızı verdi. Rahatsız ediyorsam affedin. Yarın bir şey lazım olursa sahaftayım.",
+              "style": "phone"
+            },
+            {
+              "speaker": "arda",
+              "text": "Bir de… teşekkür ederim. İlk defa biri “anlat” dedi, “açıkla” demedi.",
+              "style": "phone"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "AK2_DURUST",
+          "kind": "OPTION",
+          "label": "“Dosyada iyi şeyler de var, kötü şeyler de. İkisini de bileceksiniz.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Dosyada iyi şeyler de var, kötü şeyler de. İkisini de benden duyacaksınız. Başkasından değil."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Yağmur sesine karışan bir nefes. Sonra kısa bir “tamam”. Bazı insanlar iyi haberden önce dürüst haber ister.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "INV_HUB",
+          "effects": [
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+            { "type": "VAR", "var": "aksam2_durust", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "AK2_RAHAT",
+          "kind": "OPTION",
+          "label": "“Merak etmeyin, her şey yolunda.”",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Merak etmeyin. Her şey yolunda gidiyor." },
+                {
+                  "speaker": "player",
+                  "text": "Telefonu kapattıktan sonra camdaki yansımama baktım. “Her şey yolunda” avukatların en ucuz cümlesidir. Ve en pahalı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "INV_HUB",
+          "effects": [{ "type": "VAR", "var": "aksam2_rahat", "op": "set", "value": true }]
+        }
+      ]
+    },
+    {
+      "id": "INV_LEYLA",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Leyla’nın odası",
+      "background": "buro",
+      "lines": [
+        {
+          "when": {
+            "all": [
+              { "any": [{ "hasEvidence": "clue_kaynak_dosya" }, { "hasEvidence": "clue_dort_kamera" }] },
+              { "not": { "flag": "dil_verildi" } }
+            ]
+          },
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla gözlüğünü çıkarıp masaya bıraktı. Dinlerken gözlüğünü çıkarır; konuşurken takar."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Kayıt eksikse onu sen tamamlayamazsın. Mahkeme tamamlatır. Delil dilekçesi; duruşmadan en az beş gün önce, olayı göstererek."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Ceza muhakemesinde bunun adı yüz yetmiş yedidir. Hangi olayı, hangi delille ispat edeceğini yaz. “Her şeyi getirin” diyen dilekçe çöpe gider."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Üç hakkın var. Birini boşa harcarsan, en çok ihtiyacın olanı istemeye yerin kalmaz. Unutma: duruşmada da istenebilir; ama geç istenen delil geç gelir."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "clue_harcama_saat" }, { "not": { "hasEvidence": "ded_kart_baskasi" } }] },
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla gözlüğünü çıkarıp masaya bıraktı. Dinlerken gözlüğünü çıkarır; konuşurken takar."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir saatin yanına başka bir saat koy. Kartlar 18.49’da Altıparmak’ta. Peki Arda 18.49’da neredeydi? Elinde onu gösteren bir kare var mı?"
+            },
+            { "speaker": "leyla", "text": "Tahtada iki kartı yan yana koyunca bazen üçüncüsü kendiliğinden belirir." }
+          ]
+        },
+        {
+          "when": { "all": [{ "visited": "INV_HAYRI" }, { "not": { "hasEvidence": "ded_hayri_gormedi" } }] },
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla gözlüğünü çıkarıp masaya bıraktı. Dinlerken gözlüğünü çıkarır; konuşurken takar."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Dürüst tanık en zor tanıktır. Yalancıyı yakalarsın; dürüst olanı ancak gördüğünün sınırına götürürsün. Nereden, neyle, ne kadar gördü?"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Mahkemede ona “yalan söylüyorsunuz” deme. “Neredeydiniz, ne yapıyordunuz” de. Gerisini o söyler."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de karakolda nasıl tanıdığını öğren. Bir kişiye tek bir görüntü gösterilip “bu mu” dendiyse, o tanıma bir sorudan doğmuştur. Sorudan doğan tanıma zayıftır."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "visited": "INV_ARDA" } },
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla gözlüğünü çıkarıp masaya bıraktı. Dinlerken gözlüğünü çıkarır; konuşurken takar."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Önce müvekkil. Dosyayı ondan önce okursan onun yerine konuşmaya başlarsın. Dosyayı ondan sonra okursan, onunla birlikte okursun."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Görüşmede sorunu sor, sonra sus. Susmayı beceremeyen avukat, müvekkilin en önemli cümlesini kendi cümlesiyle örter."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla gözlüğünü çıkarıp masaya bıraktı. Dinlerken gözlüğünü çıkarır; konuşurken takar."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Elindekileri say. Her biri neyi gösteriyor, neyi göstermiyor? İkinci sütun birinciden önemli."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de şunu unutma: duruşmada sunduğun her şey, senin dürüstlüğünü de sunar. Yanlış kâğıdı kaldırırsan, doğru kâğıdın da ağırlığı azalır."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Kayıp eşya suçu, yüz altmış, “malik gibi tasarruf” ister. Saklamak, harcamak, kullanmak. Arda’nın o gece ne yaptığını say. Malik gibi mi, sahibini arayan biri gibi mi?"
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "LEYLA_DON", "kind": "CONTINUE", "label": "Teşekkür et", "role": "BACK", "next": "$return" }]
+    },
+    {
+      "id": "INV_GECE_1",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "lines": [
+        {
+          "when": { "hasEvidence": "ded_eksik_kayit" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "26 EKİM · PAZAR 23.10 — ARSLAN HUKUK",
+              "bg": "buro_gece",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Panoya son kartları iğneledim. Yağmur, cama birinin parmak uçlarıyla vuruyor gibi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir: CD bir saatin iki buçuk dakikası. Dört kamera var, tek kanal verilmiş. Tam kayıt bir yerde duruyor.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "26 EKİM · PAZAR 23.10 — ARSLAN HUKUK",
+              "bg": "buro_gece",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Panoya son kartları iğneledim. Yağmur, cama birinin parmak uçlarıyla vuruyor gibi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir: savcılığın kaydı. İki buçuk dakika. Hâlâ gösterdiğinden çok göstermediği şeyi düşünüyorum.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_2" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_2",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "hasEvidence": "ded_kart_baskasi" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "İki: kartlar. 18.44.30’da Arda Beşevler’e giden otobüsteydi; 18.49’da kartlar Altıparmak’ta. Kartları o kullanmadı. Savcı “ortağı” diyecek.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "clue_harcama_saat" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "İki: kartlar 18.49’da Altıparmak’ta kullanıldı. Arda o saatte neredeydi? Cevap elimin altında olmalı ama tutamıyorum.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "İki: kartlar. Dosyada bir satır: “faili belirlenemedi.” Bu satır hâlâ bir boşluk; bir silah değil.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_3" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_3",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "hasEvidence": "ded_teslim" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Üç: bir not ve bir telefon. “Yarın 9 — karakol.” 19.18’de 153. Saklamak isteyen biri kendine hatırlatma yazmaz.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "any": [
+              { "hasEvidence": "clue_sari_not" },
+              { "hasEvidence": "clue_153_arama" },
+              { "hasEvidence": "clue_fb_mesaj" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Üç: Arda o gece birilerine ulaşmaya çalışmış. İzler var ama bir araya gelmiyor. Bir iz tek başına bir tesadüftür.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Üç: teslim niyeti. Elimde Arda’nın cümlesinden başka bir şey yok. Bir cümle, bir hâkimin önünde ne kadar ağırdır?",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_4" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_4",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "hasEvidence": "ded_hayri_gormedi" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Dört: Hayri Bey. Dürüst bir adam. Gözlüksüz gazete okuyan miyop bir adam. Kürsüde ona saldırmayacağım; yalnızca nereye baktığını soracağım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "cmp": [{ "var": "aksam_tema" }, "==", "ARDA"] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Dört: Arda’nın utancı. Leyla “bekle” demişti. Bekledim mi? Yarın kürsüde o susarsa, susmasını kim anlatacak?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "cmp": [{ "var": "aksam_tema" }, "==", "KART"] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Dört: savcının boşluğu. Leyla “doldurma, göster” dedi. Yarın göstereceğim. Doldurmayacağım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Dört: tanık. Kürsüde biri “ben gördüm” diyecek. Gördüğünü sandığı şeyle gördüğü şey arasındaki mesafeyi ölçmek benim işim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_5" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_5",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "fact_recep_tutanak" }, { "flag": "fact_recep_korku" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Beş: şoför. İki tutanağı var; üçüncüsünde kapı dışarı. Korkan bir adamın “kimse getirmedi” cümlesi, yalan mı, unutkanlık mı, yoksa ikisinin arası mı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_ilk_avukat" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Beş: ifade tutanağı. Gece ikide, yorgun bir avukat, yorgun bir memur, okunmadan atılan bir imza. 153 yazılmamış, şoför yazılmamış. Yazılmayan cümleleri yarın ben söyleyeceğim.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "hayri_hayat" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Beş: Hayri Bey’in cümlesi. “Bakınca bir şey görüyorum sanıyorum.” Bir tanığın en dürüst cümlesi, bazen savunmanın en güçlü cümlesidir.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Duruşmadan önceki gece",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "when": { "flag": "aksam2_rahat" },
+          "lines": [
+            { "speaker": "narrator", "text": "Saat yarımı geçti. Telefon titredi. Arda." },
+            {
+              "speaker": "arda",
+              "text": "Hocam yarın kravat takayım mı? Ozan’ınki var. Biraz kısa ama.",
+              "style": "phone"
+            },
+            {
+              "speaker": "player",
+              "text": "Kravat. Yedi aydır bir dosyanın içinde yaşayan bir çocuk, yarın ne giyeceğini soruyor. Sanki kıyafet doğru olursa hâkim de doğru görür.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Tak. Ama Ozan’ınki değil, kendi gömleğinle git. Ne yaşadıysan onu anlat. Fazlasını değil."
+            },
+            {
+              "speaker": "player",
+              "text": "Zehra’ya “her şey yolunda” demiştim. O cümle şimdi masada, dosyanın yanında oturuyor. Yarın onu ya haklı çıkaracağım ya da gömeceğim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kapıda Leyla belirdi. Bu saatte burada ne aradığını sormadım; ben de buradaydım."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Yarın kimseyi ikna etmeye çalışma. Eksik dakikayı göster. İkna, hâkimin işi."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de… tanık kürsüdeyken onun gözünden bak. O ne gördüyse, önce onu gör. Sonra neyi göremediğini."
+            },
+            {
+              "speaker": "player",
+              "text": "Işıkları kapattım. Panoda kartlar karanlıkta kaldı. Yarın her biri ya bir kanıt olacak ya bir kâğıt parçası.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "Saat yarımı geçti. Telefon titredi. Arda." },
+            {
+              "speaker": "arda",
+              "text": "Hocam yarın kravat takayım mı? Ozan’ınki var. Biraz kısa ama.",
+              "style": "phone"
+            },
+            {
+              "speaker": "player",
+              "text": "Kravat. Yedi aydır bir dosyanın içinde yaşayan bir çocuk, yarın ne giyeceğini soruyor. Sanki kıyafet doğru olursa hâkim de doğru görür.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Tak. Ama Ozan’ınki değil, kendi gömleğinle git. Ne yaşadıysan onu anlat. Fazlasını değil."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kapıda Leyla belirdi. Bu saatte burada ne aradığını sormadım; ben de buradaydım."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Yarın kimseyi ikna etmeye çalışma. Eksik dakikayı göster. İkna, hâkimin işi."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de… tanık kürsüdeyken onun gözünden bak. O ne gördüyse, önce onu gör. Sonra neyi göremediğini."
+            },
+            {
+              "speaker": "player",
+              "text": "Işıkları kapattım. Panoda kartlar karanlıkta kaldı. Yarın her biri ya bir kanıt olacak ya bir kâğıt parçası.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "GECE_DEVAM", "kind": "CONTINUE", "label": "Sabah oldu", "role": "PRIMARY", "next": "H1_00" }]
+    }
+  ],
+  "triggers": [
+    {
+      "id": "tg_day_end",
+      "scope": "INV_HUB",
+      "priority": 1,
+      "when": { "all": [{ "cmp": [{ "var": "ap" }, "<=", 0] }, { "cmp": [{ "var": "day" }, "<", 3] }] },
+      "goto": "INV_DAY_END"
+    }
+  ]
+}

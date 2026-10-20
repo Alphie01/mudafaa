@@ -126,7 +126,15 @@
           "lines": [
             {
               "speaker": "narrator",
+              "text": "Pencerelerin camı buğuluydu. Biri parmağıyla bir kalp çizmiş, biri de altına bir tarih yazmıştı; ikisi de akmaya başlamıştı."
+            },
+            {
+              "speaker": "narrator",
               "text": "Vedat merdivenlerden çıktı. Takım elbise, kravat; tırnaklarının dibi hâlâ mavi. Bana elini uzattı, sonra geri çekti."
+            },
+            {
+              "speaker": "vedat",
+              "text": "Elim mürekkepli avukat hanım. Sabun çıkarmıyor. Otuz yıldır çıkarmıyor; bugün ilk kez utandım."
             },
             {
               "speaker": "vedat",
@@ -208,6 +216,15 @@
             {
               "speaker": "narrator",
               "text": "Salon küçüktü. Yüksek bir kürsü, iki sıra sandalye, duvarda “Adalet mülkün temelidir”. Pencereden gri bir ışık."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kaloriferler henüz yakılmamıştı. Herkes paltosuyla oturuyordu; kâtip bile. Klavyenin tuşları soğuktan sertleşmiş gibi tıkırdıyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir salon, bir sabah, yirmi dakikalık bir celse. Beş aylık bir dosya bu yirmi dakikaya sığacak. Sığmayan her şey, tutanağa geçmeyecek.",
+              "style": "thought"
             },
             {
               "speaker": "hakim",
@@ -318,10 +335,18 @@
               "speaker": "vedat",
               "text": "Bir imzam var, otuz yıllık. O imza o kâğıtta değil. Ben bilirim; kendi imzamı bilirim."
             },
+            {
+              "speaker": "narrator",
+              "text": "Vedat oturmadı. Hâkim ona eliyle işaret edince oturdu; sandalyenin ucuna, kalkmaya hazır bir müşteri gibi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı kalemini dosyasının üstüne bıraktı. Kâtip Melek bir sonraki satırın başında bekliyordu; imleç yanıp sönüyordu."
+            },
             { "speaker": "hakim", "text": "Müdafi, sanığa sorularınız?" },
             {
               "speaker": "player",
-              "text": "Kısa ve doğru. Şimdi doğruyu kâğıda bağlayacak soruları sormalıyım.",
+              "text": "Kısa ve doğru. Şimdi doğruyu kâğıda bağlayacak soruları sormalıyım. Her soru bir satır; her satır bir tutanak, her tutanak bir gün bir hükmün gerekçesi.",
               "style": "thought"
             },
             {
@@ -357,7 +382,7 @@
         {
           "id": "Q_EL",
           "kind": "OPTION",
-          "label": "“Bir kâğıda imzanızı atar mısınız? Önce sağ, sonra sol elinizle.”",
+          "label": "“Burada, iki elinizle de birer imza atar mısınız?”",
           "visibleWhen": { "hasEvidence": "clue_sag_el" },
           "responses": [
             {
@@ -407,7 +432,7 @@
         {
           "id": "Q_ANNE",
           "kind": "OPTION",
-          "label": "“Annenizi en son ne zaman gördünüz?”",
+          "label": "“Annenizi en son ne zaman gördünüz; evini soruyor mu?”",
           "responses": [
             {
               "lines": [
@@ -535,7 +560,7 @@
         {
           "id": "C103_C",
           "kind": "OPTION",
-          "label": "“İtiraz: soru suçlamayla ilgisiz.”",
+          "label": "“İtiraz ediyoruz; 2024’teki bir aile tartışması suçlamayla ilgisiz.”",
           "responses": [
             {
               "lines": [
@@ -561,7 +586,7 @@
         {
           "id": "C103_D",
           "kind": "OPTION",
-          "label": "“Müvekkil bu soruya cevap vermeyecek.”",
+          "label": "“Müvekkil bu soruya cevap vermeyecek; susma hakkını kullanıyor.”",
           "responses": [
             {
               "lines": [
@@ -634,13 +659,13 @@
         {
           "id": "C103N_A",
           "kind": "OPTION",
-          "label": "“2023’teki vekâletnamede satış yetkisi var mıydı? Siz oradaydınız.”",
+          "label": "“Vekâletname noterde okunurken siz de yanında mıydınız?”",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "nermin",
-                  "text": "Yoktu. Ben oradaydım; noter okudu. Banka, maaş, kira. Annem “ev kalsın” dedi. Noter güldü."
+                  "text": "Oradaydım. Noter okudu: banka, maaş, kira. Satış yoktu. Annem “ev kalsın” dedi; noter güldü."
                 },
                 { "speaker": "player", "text": "Yani kardeşiniz, annenizin evini satma yetkisine hiç sahip olmadı." },
                 { "speaker": "nermin", "text": "…Olmadı. Ama birisi o kâğıda satış yazdı." },
@@ -663,7 +688,7 @@
         {
           "id": "C103N_B",
           "kind": "OPTION",
-          "label": "“Kardeşinizin borçlu olduğunu biliyor muydunuz?”",
+          "label": "“Kardeşinizin o kış dükkân için borçlandığını biliyor muydunuz?”",
           "responses": [
             {
               "lines": [
@@ -689,7 +714,7 @@
         {
           "id": "C103N_C",
           "kind": "OPTION",
-          "label": "“Sorum yok.”",
+          "label": "“Şikâyetçiye sorumuz yok; zamanı tanığa ayıralım.”",
           "responses": [
             {
               "lines": [
@@ -730,6 +755,10 @@
             {
               "speaker": "narrator",
               "text": "Kırklı yaşlarında, gri bir hırka, kucağında bir dosya. Kürsüye çıktı, dosyayı kürsüye bıraktı, bir an ona dokundu; bir tılsım gibi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sanık sırasına bakmadı. Savcıya da bakmadı. Gözlerini hâkimin önündeki kalemliğe dikti; zincirsiz, sıradan bir kalemlik."
             },
             {
               "speaker": "hakim",
@@ -1375,6 +1404,10 @@
               "text": "Vedat sağ elini masanın üstüne koydu. Uzun uzun ona baktı; kendi elini ilk kez görüyormuş gibi."
             },
             {
+              "speaker": "narrator",
+              "text": "Arka sırada Sevgi’nin nefesi duyuldu; uzun, titrek. Nermin Kurt başını kaldırdı ve ilk kez kardeşine baktı."
+            },
+            {
               "speaker": "hakim",
               "text": "Tutanağa geçsin: tanık, işlemi yapan kişinin imzayı sol eliyle attığını, kalemlik zincirinin gerildiğini hatırladığını beyan etti."
             },
@@ -1442,7 +1475,7 @@
         {
           "id": "C105_A",
           "kind": "OPTION",
-          "label": "“Mukayese belgeleri özel belge ve iki ayrı elden; resmî imzalarla Adli Tıp’tan yeni rapor istiyoruz.”",
+          "label": "“Mukayese imzaları iki ayrı elden; resmî imzalarla Adli Tıp incelemesi istiyoruz.”",
           "visibleWhen": { "hasEvidence": "ded_mukayese" },
           "responses": [
             {
@@ -1467,13 +1500,17 @@
                   "speaker": "savci",
                   "text": "Sayın Hâkim… Talebe karşı bir diyeceğimiz yok. Belgelerin niteliği tartışmaya açık."
                 },
-                { "speaker": "hakim", "text": "Kabul edildi." }
+                {
+                  "speaker": "hakim",
+                  "text": "Kabul edildi. Üç kaynak da celbedilsin; karbonlar ve bugünkü tutanak Adli Tıp’a gönderilsin. Müzekkereye “ivedi” yazılsın."
+                }
               ]
             }
           ],
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 150 },
             { "type": "VAR", "var": "h1_bilirkisi", "op": "set", "value": true },
+            { "type": "VAR", "var": "bk_gerekce", "op": "set", "value": true },
             { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
             { "type": "VAR", "var": "pers", "op": "inc", "value": 2 }
           ],
@@ -1487,8 +1524,10 @@
         {
           "id": "C105_A2",
           "kind": "OPTION",
-          "label": "“Mukayese belgeleri tartışmalı; resmî imzalarla Adli Tıp’tan yeni rapor istiyoruz.”",
-          "visibleWhen": { "not": { "hasEvidence": "ded_mukayese" } },
+          "label": "“Mukayese belgeleri özel belge; resmî imzalarla Adli Tıp incelemesi istiyoruz.”",
+          "visibleWhen": {
+            "all": [{ "hasEvidence": "clue_mukayese_ozel" }, { "not": { "hasEvidence": "ded_mukayese" } }]
+          },
           "responses": [
             {
               "lines": [
@@ -1498,12 +1537,17 @@
                 },
                 {
                   "speaker": "hakim",
-                  "text": "Belgelerin neden güvenilmez olduğuna ilişkin somut bir şey var mı müdafi?"
+                  "text": "Hangi resmî imzalar müdafi? Belgelerin neden güvenilmez olduğuna ilişkin somut bir şey var mı?"
                 },
                 { "speaker": "player", "text": "Kaynağı belirsiz, Sayın Hâkim." },
                 {
                   "speaker": "hakim",
-                  "text": "Talep, imzanın tek delil olduğu gözetilerek kabul edildi. Ama somut olun; mahkeme her rapora yeni rapor yazdırmaz."
+                  "text": "Talep, imzanın tek delil olduğu gözetilerek kabul edildi. Nüfus kaydındaki imza celbedilsin. Ama somut olun; mahkeme her rapora yeni rapor yazdırmaz."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Nüfus kaydı. Tek bir imza. Ne istediğimi bilseydim, daha fazlasını isterdim.",
+                  "style": "thought"
                 }
               ]
             }
@@ -1515,7 +1559,7 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Yeni bilirkişi talebi yerinde (CMK 63, 67/5); ama mukayese malzemesinin neden güvenilmez olduğunu somut gösteremedin.",
+            "feedback": "Yeni bilirkişi talebi yerinde (CMK 63, 67/5); ama mukayese malzemesinin neden güvenilmez olduğunu ve hangi resmî imzaların istendiğini somut gösteremedin.",
             "category": "USUL_BILGISI"
           },
           "next": "C1_06"
@@ -1523,13 +1567,13 @@
         {
           "id": "C105_B",
           "kind": "OPTION",
-          "label": "“Rapor hukuka aykırı delildir; dosyadan çıkarılsın.”",
+          "label": "“Rapor CMK 67/3’e aykırı hukuki değerlendirme içeriyor; hükme esas alınmasın.”",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "hakim",
-                  "text": "Rapor hukuka aykırı bir yöntemle elde edilmemiş müdafi. İçeriğini tartışabilirsiniz; varlığını değil. Talep reddedildi."
+                  "text": "Raporda hukuki bir değerlendirme göremiyorum müdafi. Bilirkişi iki imzayı karşılaştırmış; işi bu. İçeriğini tartışabilirsiniz. Talep reddedildi."
                 }
               ]
             }
@@ -1542,7 +1586,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Rapor hukuka aykırı yöntemle elde edilmiş değildir; güvenilirliği tartışılır, yasak delil sayılmaz (CMK 206/2-a, 217/2 ayrımı).",
+            "feedback": "Rapor teknik bir tespit yapıyor (“aynı elin ürünü”); suçun nitelendirmesi gibi hukuki bir değerlendirme içermiyor. CMK 67/3 itirazı dayanaksızdı; sorun raporun yöntemi değil, mukayese malzemesiydi.",
             "category": "USUL_BILGISI"
           },
           "next": "C1_06"
@@ -1550,7 +1594,7 @@
         {
           "id": "C105_C",
           "kind": "OPTION",
-          "label": "“Bilirkişinin duruşmada dinlenmesini istiyoruz.”",
+          "label": "“Bilirkişinin duruşmada dinlenmesini ve mukayese belgelerinin asıllarının celbini istiyoruz.”",
           "responses": [
             {
               "lines": [
@@ -1575,7 +1619,7 @@
         {
           "id": "C105_D",
           "kind": "OPTION",
-          "label": "“Rapora bir diyeceğimiz yok.”",
+          "label": "“Rapora diyeceğimiz yok; takdiri mahkemeye bırakıyoruz.”",
           "responses": [
             {
               "lines": [
@@ -1590,7 +1634,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Davanın tek ağır delili olan rapora hiçbir itiraz etmedin; mahkeme raporu tartışmasız sayar.",
+            "feedback": "Davanın tek ağır delili olan rapora hiçbir itiraz etmedin; “takdir” kibar bir kabuldür ve mahkeme raporu tartışmasız sayar.",
             "category": "USUL_BILGISI"
           },
           "next": "C1_06"
@@ -1636,25 +1680,55 @@
         {
           "id": "T_BILIRKISI",
           "kind": "OPTION",
-          "label": "Resmî imzalarla Adli Tıp’tan yeni rapor",
-          "visibleWhen": { "not": { "any": [{ "flag": "dil_bilirkisi" }, { "flag": "h1_bilirkisi" }] } },
+          "label": "Resmî imzalarla Adli Tıp’tan yeni imza incelemesi",
+          "visibleWhen": {
+            "all": [
+              { "hasEvidence": "clue_mukayese_ozel" },
+              { "not": { "any": [{ "flag": "dil_bilirkisi" }, { "flag": "h1_bilirkisi" }] } }
+            ]
+          },
           "responses": [
-            { "lines": [{ "speaker": "hakim", "text": "Kabul. İmza bu dosyanın tek ağır delili; sağlam olsun." }] }
+            {
+              "when": { "hasEvidence": "ded_mukayese" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Noter imza beyannamesi, banka imza kartonu, nüfus kaydı. İrsaliye karbonlarında iki ayrı el var; karbonları da sunuyoruz."
+                },
+                {
+                  "speaker": "hakim",
+                  "text": "Kabul. İmza bu dosyanın tek ağır delili; sağlam olsun. Üç kaynak da celbedilsin."
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "hakim",
+                  "text": "Kabul. Nüfus kaydındaki imza celbedilsin. İmza bu dosyanın tek ağır delili; sağlam olsun."
+                }
+              ]
+            }
           ],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 30 },
-            { "type": "VAR", "var": "h1_bilirkisi", "op": "set", "value": true }
+            { "type": "VAR", "var": "h1_bilirkisi", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": { "hasEvidence": "ded_mukayese" },
+              "then": [{ "type": "VAR", "var": "bk_gerekce", "op": "set", "value": true }]
+            }
           ],
           "quality": {
             "q": "NEUTRAL",
-            "feedback": "Yeni bilirkişi talebi yerinde (CMK 63, 67/5); ama gerekçesiz. Mahkeme yine de kabul etti."
+            "feedback": "Yeni bilirkişi talebi yerinde (CMK 63, 67/5); ama bilirkişi raporuna itiraz anında değil, sonradan ve kısa geldi."
           }
         },
         {
           "id": "T_KARGO",
           "kind": "OPTION",
-          "label": "Kargo şirketinden 18 Şubat teslim kaydı",
+          "label": "Kargo şirketinden 18 Şubat teslim ve konum kaydı",
           "visibleWhen": { "all": [{ "hasEvidence": "clue_takvim" }, { "not": { "flag": "dil_kargo" } }] },
           "responses": [
             {
@@ -1680,7 +1754,7 @@
         {
           "id": "T_RANDEVU",
           "kind": "OPTION",
-          "label": "Tapu randevu kaydı ve teyit araması",
+          "label": "Tapu randevu kaydı ve işlem günü teyit araması",
           "visibleWhen": {
             "all": [
               { "not": { "flag": "dil_randevu" } },
@@ -1690,6 +1764,11 @@
           "responses": [
             {
               "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, tapu randevusunun hangi numaradan alındığı ve işlem günü yapılan teyit araması, işlemi kimin yaptırdığını gösterebilir."
+                },
+                { "speaker": "savci", "text": "İtirazımız yok. Tapu müdürlüğü bir günde gönderir." },
                 { "speaker": "hakim", "text": "Kabul. Tapu müdürlüğünden randevu kaydı ve arayan numara istensin." }
               ]
             }
@@ -1725,7 +1804,7 @@
         {
           "id": "T_TUTUK",
           "kind": "OPTION",
-          "label": "Şikâyetçinin yeniden dinlenmesi",
+          "label": "Şikâyetçinin vasilik dosyasıyla birlikte yeniden dinlenmesi",
           "responses": [
             {
               "lines": [{ "speaker": "hakim", "text": "Şikâyetçi tapuda değildi müdafi. Neyi anlatacak? Reddedildi." }]
@@ -1776,6 +1855,15 @@
               "speaker": "player",
               "text": "Üç hafta. Mahkeme ilk kez sorular soracak; kurumlara, şirketlere, bir laboratuvara. Cevaplar kâğıtla gelecek. Ben de kâğıtla bekleyeceğim.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Salondan çıkarken mübaşir bir sonraki dosyayı çağırıyordu: “Yılmaz dosyası! Yılmaz!” Kapıda bekleyen yaşlı bir kadın ayağa kalktı, çantasını göğsüne bastırdı."
+            },
+            {
+              "speaker": "player",
+              "text": "Her dosya birinin hayatı. Bu koridorda hayatlar sırayla çağrılıyor; numaratörden bir fark yok.",
+              "style": "thought"
             }
           ]
         }
@@ -1801,6 +1889,28 @@
             {
               "speaker": "narrator",
               "text": "Leyla iki çay aldı, birini bana uzattı. Duruşmayı arka sıradan izlemişti; söylememişti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ocakçı Rıfat Efendi bardakları tepsiye dizerken her avukata aynı soruyu soruyordu: “Ertelendi mi?” Herkes başını salladı. Bu bodrumda her dava ertelenirdi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bilirkişi mi? Bilirkişiye kaldıysa altı ay var demektir. Benimki bir yıldır Ankara’da bekliyor.",
+              "name": "BİR AVUKAT"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Konuşan genç bir avukattı; cübbesi kolunun üstünde, dosyası koltuğunun altında. Kimseye sormadan konuşuyordu; bu bodrumda herkes öyle konuşurdu."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Ankara’ya giden dosya geri gelir. Gelmeyen, kimsenin sormadığı dosyadır. Sormaya devam et Deniz; müzekkerelerin peşini bırakma."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir bodrum, bir çay, bir kuyruk dolusu ertelenmiş hayat. Vedat’ınki de şimdi bu kuyrukta.",
+              "style": "thought"
             },
             {
               "speaker": "leyla",

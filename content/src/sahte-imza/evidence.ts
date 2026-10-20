@@ -81,9 +81,9 @@ export const evidencePart: CasePart = {
     k('clue_yazici', {
       type: 'DIJITAL',
       title: 'Lazer yazıcı iş günlüğü (06.02 02.14)',
-      shortText: '6 Şubat 02.14: 90 gr kâğıda 2 sayfa renkli baskı; kullanıcı DIJITAL-PC.',
+      shortText: '6 Şubat 02.14: 90 gr kâğıda 2 sayfa renkli baskı; kullanıcı MATBAA-PC.',
       description:
-        'Renkli lazer yazıcının ekranındaki son altı ayın iş günlüğü. Gece yarısından sonra tek iş var: 06.02.2026 02.14, 2 sayfa, 90 gr, renkli. Gönderen bilgisayar: DIJITAL-PC; dükkânın ortak bilgisayarı, şifresi yok.',
+        'Renkli lazer yazıcının ekranındaki son altı ayın iş günlüğü. Gece yarısından sonra tek iş var: 06.02.2026 02.14, 2 sayfa, 90 gr, renkli. Gönderen bilgisayar: MATBAA-PC; dükkânın ortak bilgisayarı, şifresi yok.',
       sourceLabel: 'Matbaa araması',
       icon: 'document',
     }),
@@ -383,7 +383,7 @@ export const evidencePart: CasePart = {
     insight('ded_baski', {
       type: 'BELGE',
       title: 'Gece basılan suret',
-      shortText: 'Suret 6 Şubat 02.14’te matbaanın lazer yazıcısında, DIJITAL-PC’den basıldı.',
+      shortText: 'Suret 6 Şubat 02.14’te matbaanın lazer yazıcısında, MATBAA-PC’den basıldı.',
       description:
         'Toner mühür, matbaanın renkli lazerinden çıkmış. Günlükteki tek gece işi 2 sayfa, 90 gr. Gece matbaada biri vardı.',
       sourceLabel: 'Çıkarım tahtası',
@@ -486,6 +486,20 @@ export const evidencePart: CasePart = {
       strength: 'STRONG',
       missedHint:
         'Raporun mukayese belgeleri özel belgelerdi; resmî belgelerdeki imzalarla yeni bilirkişi incelemesi istemek gerekiyordu (CMK 63, 67/5).',
+    }),
+    evidence('ev_rapor2_belirsiz', {
+      type: 'ADLI_RAPOR',
+      title: 'Adli Tıp imza raporu (yetersiz mukayese)',
+      shortText:
+        'Tek resmî mukayese imzası (nüfus, 2019) sayıca yetersiz; imzanın sanığa ait olup olmadığı yönünde kesin kanaat bildirilemedi.',
+      description:
+        'Adli Tıp Kurumu raporu. Mahkemece gönderilen tek tartışmasız mukayese imzası nüfus başvuru formundaki 2019 tarihli imza. Sonuç: senetteki imzada sanığın bu imzasından farklı hareket özellikleri gözlenmekle birlikte, sayıca yeterli ve çağdaş mukayese imzası bulunmadığından kesin kanaate varılamamıştır; ek mukayese örneği gerekir.',
+      sourceLabel: 'Adli Tıp Kurumu',
+      icon: 'compare',
+      side: 'NEUTRAL',
+      strength: 'WEAK',
+      missedHint:
+        'Yeni bilirkişi talebini gerekçelendirmek gerekiyordu: irsaliyelerdeki iki ayrı eli göstermek ve noter, banka, nüfus imzalarını tek tek istemek.',
     }),
     evidence('ev_rapor2_ek', {
       type: 'ADLI_RAPOR',

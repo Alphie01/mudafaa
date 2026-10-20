@@ -28,7 +28,7 @@ N: İkinci ses pürüzsüzdü; cilalı ayakkabı gibi. Adamın yanında durdu am
 ?KEPLİ_ADAM: Göz ameliyatı. Işık vuruyor.
 N!flash: Flaş patladı. Kadın ekrana baktı, omuz silkti. Sistem fotoğrafı kabul etmişti; sistem her şeyi kabul ediyordu.
 N: Senet yazıcıdan çıktı, hâlâ sıcaktı. Kalemlik gişenin sağ köşesindeydi, zincirli.
-N: Adam kalemi aldı. Bir an durdu, sanki kalemin ağırlığını tartıyordu. Sonra kalemi öbür eline geçirdi.
+N: Adam kalemi aldı. Bir an durdu, sanki kalemin ağırlığını tartıyordu. Zincir gerildi.
 N: İmza. Kısa, hızlı, alışık. Islak mürekkep floresanın altında parladı.
 ?ALICI: Hayırlı olsun.
 N!fade: Dışarıda yağmur hızlanmıştı. Tapunun saçağı altında iki adam yan yana durdu; biri sigara yaktı, öbürü atkısını burnuna kadar çekti.
@@ -76,7 +76,7 @@ sevgi.uzgun: Kocam ömrü boyunca kâğıt bastı avukat hanım. Şimdi bir kâ�
 N: Sokaktan bir korna sesi geldi. Sevgi pencereye baktı. Aşağıda bir arabanın farları yanıp söndü.
 sevgi: Yeğenimiz. Halit ağabeyin oğlu. Getirdi beni; şimdi bekliyor, sağ olsun. O olmasa dükkân dönmezdi bu aylarda.
 sevgi: Vedat gelemedi. Gelemiyor, aslında. Adliyenin önünden geçerken bile yolunu değiştiriyor.
-T: Bir imza. Bir ev. Seksen iki yaşında, evini kaybettiğini bilmeyen bir kadın. Ve beni aşağıda bekleyen bir çift far.
+T: Bir imza. Bir ev. Seksen iki yaşında, evini kaybettiğini bilmeyen bir kadın. Ve bir öğretmenin numaralı korkuları.
 P: Vedat Bey bu imzayı gördü mü? Kendi gözüyle?
 sevgi: Gördü. Savcılıkta gösterdiler. Bir süre baktı, sonra “bu benim adım ama benim elim değil” dedi. Savcı yazdı mı, bilmiyorum.
 sevgi: Eve geldi, bir kâğıda yüz kere imza attı. Sabaha kadar. Sonra kâğıtları sobaya attı. “Kendi imzamı unutacağım” dedi.
@@ -93,6 +93,8 @@ leyla: İlk celse on dört ekimde. Üç hafta. Bir imza için az, bir ömür iç
 leyla: Bir şey rica edeceğim Sevgi Hanım: kimseyle dosyayı konuşmayın. Aileyle bile. Avukatınız Deniz; dosya onunla sizin aranızda.
 sevgi: Aileyle bile mi? Biz bir aileyiz Leyla Hanım. Matbaada herkes birbirinin her şeyini bilir.
 leyla: O zaman bu dosya o matbaadaki tek sır olsun.
+N: Sevgi bir süre Leyla’ya baktı; bir öğretmenin, sınıfın en sert öğretmenine bakışı. Sonra başını salladı.
+sevgi: Peki. Vedat’a da söylerim. O zaten konuşmuyor; sustukça küçülüyor.
 N: Sevgi klasörü bıraktı, kartviziti üstüne koydu ve gitti. Merdivenlerden inen topuk sesleri, sonra bir araba kapısı, sonra yalnızca yağmur.
 `);
 
@@ -168,7 +170,7 @@ T: Haklıydı. Bu dosyada her şey bir imzayla başlayacaktı.
       background: 'buro_gece',
       lines: [{ lines: LEYLA_DEVIR }],
       choices: [
-        option('BR01_A', 'Resmî belgede sahtecilik; iki yıldan beş yıla kadar', {
+        option('BR01_A', 'Resmî belgede sahtecilik; iki yıldan beş yıla', {
           score: { HUKUKI_BILGI: 50 },
           good: 'Doğru: sahte resmî belge düzenleme ve kullanma, TCK 204/1: iki yıldan beş yıla kadar hapis.',
           responses: B(`
@@ -230,7 +232,7 @@ T: Kimin attığı belli olan imza. Bunu bir kenara yazdım. Altını iki kez ç
 `),
           next: 'BR_02',
         }),
-        option('BR01B_B', 'Dördü de resmî; hepsi bir işlemin parçası', {
+        option('BR01B_B', 'Dördü de resmî; hepsi tek bir tapu işleminin parçası', {
           bad: 'Bir işlemin parçası olmak belgeyi resmî yapmaz; makbuz ve irsaliye özel kişilerce düzenlenir (TCK 207).',
           category: 'HUKUKI_BILGI',
           responses: B(`
@@ -343,6 +345,10 @@ tarik: Avukat hanım, şekerli mi alırsınız? Tarık. Yeğeniyim. Ne lazımsa 
 N: Kapının yanında on dokuz yaşlarında bir çocuk koli bantlıyordu; bir kulağında kulaklık, öbürü boşta. Başını kaldırıp kaldırmamak arasında kaldı.
 vedat: Emre. Çırak. Öğleden sonraları gelir normalde; bugün okul tatil. Emre, avukat hanıma selam ver oğlum.
 emre: Selam abla. Yani hanım. Abla.
+N: Kapıdan yaşlı bir kadın girdi; elinde bir zarf. Torununun sünnet davetiyesi için yüz tane istiyordu. Vedat kâğıt örneklerini tek tek gösterdi, her birini parmaklarının arasında ovuşturarak.
+vedat: Bu kuşe, bu bristol, bu da ivori. İvori alın teyze; el yazısı gibi durur. Harfleri ben dizerim, perşembeye hazır.
+N: Kadın gittikten sonra Vedat zarfı tezgâhın altındaki bir kutuya koydu. Kutunun üstünde kalın kalemle: “BEKLEYEN İŞLER”. Kutu doluydu; çoğu eylülden önceki tarihli.
+vedat: Dava başladığından beri müşteri azaldı. Gelenler de acıdıklarından geliyor. Acıyla kâğıt basılmaz avukat hanım; ama basıyorum.
 T: Bir matbaa. Üç adam. Bir kurşun makinesi, bir lazer yazıcı. Kâğıt yalan söylemez, derler. Kâğıdı basan söyleyebilir.
 N: Duvarlarda eski afişler: bir 1980 seçim bildirisi, bir düğün davetiyesi örneği, bir sirk afişi. Hepsi bu makinelerden çıkmış. Hepsi biraz sararmış.
 vedat: Bakın, şu afiş. Babam bastı; ben on yaşındaydım, harfleri ben dizdim. Bir harfi ters koymuşum, kimse fark etmedi. Kırk yıldır duvarda; hâlâ ters.

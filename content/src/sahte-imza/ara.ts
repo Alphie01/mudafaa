@@ -83,7 +83,7 @@ const girisNodes: NodeDef[] = [
     lines: B(`
 C#buro_gece: 20 EKİM · 18.40 — ARSLAN HUKUK
 N: Müzekkerelere cevaplar beklediğimden çabuk geldi. Şirketler mahkemeye geç kalmayı sevmez; avukatlara geç kalmayı sever.
-N: Üç gün sonra. Bursa’da yağmur bir an bile dinmemişti. Büronun penceresinde aynı çizgiler; masamda yeni bir yığın.
+N: Altı gün sonra. Bursa’da yağmur bir an bile dinmemişti. Büronun penceresinde aynı çizgiler; masamda yeni bir yığın.
 `),
   }),
   decisionNode('ARA_GIRIS_2', [{ to: 'ARA_GIRIS' }], {
@@ -92,6 +92,8 @@ N: Üç gün sonra. Bursa’da yağmur bir an bile dinmemişti. Büronun pencere
         all(has('ev_kargo'), has('ev_randevu'), has('ev_tutanak')),
         `
 N: Masamda üç zarf: kargo şirketinin cevabı, tapu müdürlüğünün randevu dökümü, kolluğun asıl teslim tutanağı. Üçü de mühürlü, üçü de ince.
+N: Zarfları yan yana dizdim; açmadan önce bir süre baktım. Her biri bir kurumun sesi: biri bir şirket, biri bir müdürlük, biri bir karakol.
+T: İnce zarflar kalın gerçekler taşır. Kalın zarflar ise genellikle bir şeyi saklamaya çalışan birinin işidir.
 `,
       ),
       W(
@@ -112,6 +114,10 @@ T: Soru sorulmayan kurum cevap vermez. Bu dosyanın ilk dersi buydu; ikinci kez 
     background: 'buro_gece',
     lines: B(`
 N: Leyla odama girdi. Elinde iki bardak çay. Birini masama bıraktı, öbürünü kendi avuçlarının arasında tuttu.
+N: Pencereden aşağıda Altıparmak Caddesi parlıyordu. Bir dolmuş su birikintisinden geçti; kaldırımdaki bir adam şemsiyesini kaldırıp küfretti, sonra yürüdü.
+leyla: Bu hafta adliyede senin dosyanı konuşuyorlar. Bir tapu memurunun beş ay sonra hatırladığı bir zincir. Kâtipler bile anlatıyor.
+leyla: Bu iyi bir şey değil Deniz. Bir dosya konuşulmaya başlayınca, dosyadaki herkes bir şey yapmaya başlar. Kimisi bir şey hatırlar, kimisi bir şey unutur.
+T: Leyla’nın “iyi bir şey değil” dediği şeyler, genellikle iyi şeylerin gölgesidir. Gölgenin nereye düştüğüne bakmak gerek.
 leyla: Birinci celse iyi geçti mi, kötü mü? Sorma; ben söyleyeyim. Bir şey değişti. Neyin değiştiğini bulmak için üç günün var.
 leyla: Zarfları aç. Ama önce bir şey: bir şey bulursan ve o şey birini işaret ederse, peşinden koşma. Yaz. Savcıya yaz. Mahkemeye yaz.
 leyla: Biz avukatız, kolluk değil. Kimseyle yüzleşmeyiz, kimseyi takip etmeyiz. Kâğıtlarımız yüzleşir.
@@ -241,6 +247,7 @@ C#buro_gece: ARSLAN HUKUK — KARGO ŞİRKETİNİN CEVABI
 N: Dört sayfa. Terminal kaydı, GPS dökümü, teslim imzasının ekran görüntüsü. Bir şirketin bir sabahı nasıl hatırladığı.
 N: Ön yazı kısa: “Sayın Mahkemenizin müzekkeresi üzerine ilgili gönderiye ait kayıtlar ekte sunulmuştur. Saygılarımızla.” Altında bir imza; okunaksız, sağa yatık.
 T: İnsan hafızası unutur, süsler, korkar. Bir el terminali yalnızca kaydeder. Bazen bu bir eksiklik; bugün bir lütuf.
+N: Zarfın arkasına kâtibin el yazısıyla bir not iliştirilmişti: “Örnek müdafie verildi. 20.10.” Kâtip Melek, her zarfa aynı notu, aynı kalemle yazıyordu.
 `),
     header: { left: 'HIZLI KARGO · EL TERMİNALİ KAYDI', right: '18.02.2026' },
     columns: [
@@ -305,6 +312,8 @@ const randevu = retarget(
 C#buro_gece: ARSLAN HUKUK — TAPU MÜDÜRLÜĞÜNÜN CEVABI
 N: Tek sayfa. Bir tablo; beş satır. Bir randevunun doğumu ve teyidi.
 T: Birileri bir ev satmaya karar verdi ve bir numarayı çevirdi. O an kimse onu görmedi. Ama santral duydu.
+N: Sayfanın altında bir kaşe: “Osmangazi Tapu Müdürlüğü · aslı gibidir.” Bu kez mühür ıslaktı; parmağımı sürdüm, mürekkep hafifçe bulaştı.
+T: Islak bir mühür. Bu dosyada ilk kez bir kâğıt, aslının ne olduğunu kendi kendine söylüyor.
 `),
     header: { left: 'ALO 181 · RANDEVU KAYDI', right: '412 ADA 9 PARSEL' },
     columns: [
@@ -393,6 +402,9 @@ C#depo: NİLÜFER — HIZLI KARGO DEPOSU
 N: Bant sistemleri, koliler, sarı yelekler. Sinan Öztürk bir bankta sandviç yiyordu; beni görünce sandviçi kâğıdına sardı.
 sinan: Avukat mısınız? Şirket aradı, “bir avukat gelecek” dedi. Ne oldu, biri mi şikâyet etti? Ben kimsenin kolisini kırmadım abla, yemin ederim.
 sinan: Ben insanı koliden tanırım. Kim kırılgan yollar, kim kitap yollar, kim annesine yün çorap yollar. Çok şey bilirim.
+N: Deponun tavanından su damlıyordu; altına bir kova konmuş, kovanın yanına “DİKKAT ISLAK” yazılı bir karton. Bant sistemi her on saniyede bir duruyor, sonra yeniden kalkıyordu.
+sinan: Günde yüz on teslimat abla. Yüz on kapı, yüz on imza. Çoğunun yüzünü hatırlamam; ama kapılarını hatırlarım. Kapı insanın yüzünden çok şey söyler.
+T: Yüz on kapı. Bu adamın hafızası bir terminal değil; ama terminalin unuttuğu şeyleri saklıyor olabilir.
 `),
   choices: [
     option('SQ_SABAH', '“18 Şubat’ta Kayhan’daki matbaaya gittiniz. Hatırlıyor musunuz?”', {
@@ -460,6 +472,7 @@ sevgi: Gelin. Vedat uyuyor. Siz bekleyeceğinizi söylemiştiniz; ben de konuşa
 C#ev: YILDIRIM — ATEŞLERİN EVİ
 N: Küçük bir mutfak. Masada ödev defterleri; kırmızı kalemle düzeltilmiş. Vedat içeride uyuyordu; Sevgi kapıyı aralık bıraktı.
 sevgi: Uyuyabildi sonunda. Duruşmadan sonra ilk kez. “Sol el” deyip duruyor. “Sol el, Sevgi.”
+N: Buzdolabının kapağında bir öğrencinin resmi: bir ev, bir ağaç, bir güneş. Altında kırmızı kalemle “Aferin” yazılmış; Sevgi’nin el yazısı.
 sevgi: Çay koyayım. Sizi bekliyordum aslında. Telefonda yarım bıraktığım şeyi.
 `),
   ],
@@ -485,7 +498,7 @@ T: Bir şey bulursam. Sevgi bir kapının arkasında duruyor ve kapıyı ben aç
 `),
       ],
     }),
-    option('VQ_VEDAT', '“Vedat Bey nasıl?”', {
+    option('VQ_VEDAT', '“Vedat Bey nasıl? Uyuyabiliyor mu?”', {
       score: { SORGULAMA: 10 },
       responses: B(`
 sevgi: Geceleri mutfakta imza atıyor. Sağ elle, sol elle. Sonra kâğıtları yakıyor; ocakta. Ben sabah küllerini topluyorum.
@@ -538,7 +551,7 @@ emre: Abla, duruşmayı duydum. Vedat abi sol el diye bağırıyormuş koridorda
 emre: …Tamam abla. Ben de korktum. Davetiyeler yüzünden. Vedat abi bilmiyor.
 `),
     }),
-    option('MQ_SOLAK', '“Dükkânda solak biri var mı?”', {
+    option('MQ_SOLAK', '“Dükkânda solak biri var mı? Kalemi sol eliyle tutan?”', {
       visibleWhen: has('ded_solak'),
       score: { SORGULAMA: 60 },
       effects: [ifThen(emreHazir, [raise('fact_solak_tarik')])],
@@ -605,6 +618,7 @@ C#kafe: MUDANYA — KURT ECZANESİ
 N: Eczane kapanmak üzereydi. Nermin kepengi yarıya indirmiş, içeride kasayı sayıyordu. Beni görünce saymayı bıraktı.
 nermin: Duruşmayı duydum. Sol el. Kardeşim sağ elini masaya koymuş, öyle mi? Avukatım anlattı.
 nermin: Ben otuz yıl eczacılık yaptım. Bir reçetedeki imza sahte mi değil mi, anlarım. Ama kardeşimin imzasına hiç bakmadım. Bakmak aklıma gelmedi.
+N: Rafların arasında bir kedi dolaşıyordu; eczanenin kedisi. Nermin onu kucağına aldı, sonra bıraktı. Elleri bir şeyle meşgul olmak istiyordu.
 `),
   ],
   choices: [
@@ -626,7 +640,7 @@ T: Erol evi istiyordu; Nermin satmadı. Sonra biri sattı. Erol kime gitti?
       effects: [raise('fact_tarik_tapu')],
       responses: B(`
 nermin: Tarık mı? Halit’in oğlu? …Ocakta aradı. Annemin tapu fotokopisini istedi, “banka için, babaannemin hesabı” dedi. Ben de verdim; vasiyim, bankayla ben uğraşırım, garip geldi ama verdim.
-nermin.uzgun: Halit ölünce onu ben de büyüttüm avukat hanım. Okul harçlarını ben ödedim. Siz şimdi bana ne diyorsunuz?
+nermin.uzgun: O çocuğu küçükken ben de büyüttüm avukat hanım. Okul harçlarını ben ödedim. Siz şimdi bana ne diyorsunuz?
 P: Hiçbir şey demiyorum. Yalnızca soruyorum.
 T: Soru sormak bir suçlama değildir. Ama bu kadının yüzünde, sorunun cevabını kendi kendine verdiğini gördüm.
 `),
@@ -655,11 +669,13 @@ N: Bakıcı kapıda durdurdu beni. “Vasisi talimat verdi; avukatlar yalnızca 
 C#hastane: ÇEKİRGE — GÜNEŞ HUZUREVİ
 N: Pencerenin önü. Düğme kutusu kapalı. Hayriye Hanım beni görünce kutuyu bana doğru çevirdi; düğme ayırdığımızı hatırlıyordu.
 hayriye: Sen geldin mi kızım? Sedefleri ayırmıştık seninle. Gel otur.
+N: Koridorda bir radyo eski bir şarkı çalıyordu; bir bakıcı ezbere eşlik ediyordu. Hayriye Hanım şarkının bir dizesini mırıldandı, sonra unuttu, sonra güldü.
 `,
     ),
     O(`
 C#hastane: ÇEKİRGE — GÜNEŞ HUZUREVİ
 N: Pencerenin önü. Düğme kutusu. Bu kez kutu kapalı; Hayriye Hanım ellerini kutunun üstünde birleştirmiş, bahçeye bakıyordu.
+N: Koridorda bir radyo eski bir şarkı çalıyordu; bir bakıcı ezbere eşlik ediyordu. Odada naftalin değil, lavanta kokusu vardı. Biri bu odayı seviyordu.
 hayriye: Sen kimsin kızım? Nermin’in arkadaşı mısın? Otur.
 `),
   ],
@@ -791,7 +807,7 @@ leyla: Bir tanığı ne söyleyeceği için çağırma. Ne gördüğü için ça
 leyla: Tanığı kendin götürmek istersen o da mümkün: doğrudan davet. Ama mahkemeye önceden söyle; hâkimler sürprizi sevmez.
 `),
   choices: [
-    option('TN_SINAN', 'Kurye Sinan Öztürk', {
+    option('TN_SINAN', 'Kurye Sinan Öztürk; 18 Şubat sabahı matbaadaydı', {
       visibleWhen: flag('sinan_razi'),
       score: { USUL_BILGISI: 60 },
       effects: [raise('sinan_tanik')],
@@ -814,13 +830,13 @@ T: Hâkim ona haklarını hatırlatacak. Susabilir. Bunu biliyorum; yine de yaz�
       category: 'USUL_BILGISI',
       next: '$stay',
     }),
-    option('TN_EMRE', 'Çırak Emre Kaya', {
+    option('TN_EMRE', 'Her gün dükkânda olan çırak Emre Kaya', {
       score: { USUL_BILGISI: -20 },
       effects: [raise('emre_tanik')],
       neutral: 'Emre olay sabahı okuldaydı; tanıklığı mazereti ispat etmez.',
       next: '$stay',
     }),
-    option('TN_HAYRIYE', 'Hayriye Ateş', {
+    option('TN_HAYRIYE', 'Hayriye Ateş; vasisi aracılığıyla kısa bir beyan', {
       score: { USUL_BILGISI: -40 },
       bad: 'Vasi altındaki, orta evre Alzheimer’lı mağduru kürsüye çağırmak ispata bir şey katmaz; onu yalnızca yorar.',
       category: 'USUL_BILGISI',
@@ -841,7 +857,7 @@ leyla: Kimin hakkında yazdığına dikkat et. Somut olmayan bir suçlama, iftir
 leyla: Delillerini say. Tarih, saat, numara, belge. Kanaatini değil.
 `),
   choices: [
-    option('SUC_SOMUT', 'Tarık Ateş hakkında: randevu numarası, teslim tutanağı ve diğer somut halkalarla', {
+    option('SUC_SOMUT', 'Tarık Ateş hakkında; elimdeki kayıtlarla', {
       visibleWhen: all(
         has('ded_randevu'),
         any(has('ded_borc'), flag('fact_solak_tarik'), flag('fact_tarik_tapu'), has('ev_tutanak')),
@@ -866,7 +882,7 @@ N: Kısa bir dilekçe. “Senetteki imzayı sol elini kullanan, kimliği belirsi
 `),
       next: HUB,
     }),
-    option('SUC_NERMIN', 'Nermin Kurt hakkında: evi isteyen oydu', {
+    option('SUC_NERMIN', 'Nermin Kurt hakkında: evi isteyen oydu, şikâyeti de o yazdı', {
       score: { USUL_BILGISI: -100 },
       effects: [inc('ethics'), dec('cred'), raise('suc_nermin')],
       bad: 'Dayanaksız bir suç duyurusu iftira riskidir (TCK 267) ve meslek kurallarına aykırıdır. Nermin’i işaret eden tek bir delil yoktu.',
@@ -1013,6 +1029,7 @@ const leyla = story('ARA_LEYLA', {
 C#buro: ARSLAN HUKUK — LEYLA’NIN ODASI
 leyla: Mazeret bir hikâyedir Deniz. Hâkim onu dinler ve sorar: bunu anlatanın bir çıkarı var mı? Bir terminalin çıkarı yoktur. Bir kuryenin de pek yoktur.
 leyla: Ama kayıt tek başına konuşmaz; onu bir saate, bir imzaya bağla. Tahtaya git.
+leyla: Ve kuryeyi unutma. Bir terminal hâkime saat söyler; bir insan hâkime sabahı anlatır. İkisi birlikte, bir mazeret olur. Ama ona ne söyleyeceğini söyleme. Asla.
 leyla: Bir de: kayıtlarda bir numara gördüysen, o numaranın sahibini bir yerde zaten görmüşsündür. Dükkânın duvarlarına geri dön; aklında.
 `,
     ),
@@ -1037,6 +1054,7 @@ leyla: Ama hâkim bir boşluğu sevmez. “Kimin eli” sorusuna cevap veremiyor
 C#buro: ARSLAN HUKUK — LEYLA’NIN ODASI
 leyla: İkinci celse. Erol kürsüde olacak. Kaygan bir adam; her sorudan bir atasözüyle kaçar. Atasözlerine cevap verme; kâğıtlarını göster.
 leyla: Mütalaadan sonra esas savunman. Üç dayanak seç; en güçlü üçünü. Bir savunma, söylediği her şey kadar söylemediği şeylerle de ölçülür.
+leyla: Bir de tanık listesi. Kimi çağırdığın, neyi bildiğini gösterir. Görmediği bir sabahı anlatacak birini çağırma; ne kadar istekli olursa olsun.
 `),
   ],
   choices: [toHub('LEYLA2_DON', 'Teşekkür et')],
@@ -1063,6 +1081,8 @@ C#buro_gece: GECE 21.50 — ARSLAN HUKUK
 N: Kapı çaldı. Vedat. Elinde küçük bir kutu; kutunun içinde dört kurşun harf, bir tahtaya dizilmiş, iple bağlanmış: Ş, E, T, A.
 vedat: Ters dizilir. Kâğıda basınca doğru okunur. ATEŞ. Babam bana ilk bunu öğretmişti. Size getirdim; bir hatıra.
 vedat: Avukat hanım, dürüst söyleyin. Kurtulur muyum?
+N: Kutuyu masaya bıraktı ama oturmadı. Paltosunun yakası ıslaktı; ayakkabılarının burnunda kuru mürekkep lekeleri. Dükkândan doğrudan gelmişti.
+vedat: Bugün bir müşteri geldi. Kartvizit bastıracaktı. Adımı duyunca “sonra gelirim” dedi. Sonra diye bir şey yok avukat hanım; ben bunu bilirim, esnafım.
 T: Kurşun harfler elimde soğuk ve ağır. Bir soru, ondan da ağır.
 `),
   choices: [
@@ -1070,8 +1090,7 @@ T: Kurşun harfler elimde soğuk ve ağır. Bir soru, ondan da ağır.
       effects: [inc('trust', 10), raise('vedat_durust')],
       responses: B(`
 vedat: Bilmiyorum. İyi. Herkes “olur olur” diyor; kimse bilmiyor. Siz bilmediğinizi biliyorsunuz. Bu iyi.
-N: Kapıdan çıkarken döndü.
-vedat: Tarık iki gündür gelmiyor. Hasta, dedi. Hiç hastalanmazdı. Neyse.
+N: Kapıdan çıkarken döndü. Bir şey diyecekti; şapkasını düzeltti, demedi. Merdivenlerde ağır adımları, sonra sokak kapısının sesi.
 `),
       next: HUB,
     }),
@@ -1122,6 +1141,8 @@ C#buro_gece: GECE 22.30 — ARSLAN HUKUK
 N: Büroda yalnızdım. Leyla gitmiş, ışığını açık bırakmıştı. Masasında ters duran çerçeve. Hiç sormadım; bu gece de sormadım.
 T: Yarın son gün. Sonra bir kürsü, bir savcı, bir hâkim ve bir soru: kimin eli?
 N: Telefonuma Sevgi’den bir mesaj düştü: “Vedat bu gece mutfakta imza atmıyor. Uyudu.” Altında bir kalp; öğretmenler kalp koymaz, diye düşündüm.
+N: Çay ocağından getirdiğim simidin yarısı masamda duruyordu. Yarısını yedim. Öbür yarısını sabaha bıraktım; sabah da yemeyeceğimi bilerek.
+T: Bir avukatın geceleri, müvekkilinin uykusunu ödünç alır. Vedat uyuyorsa, ben bu gece biraz daha uyanık kalabilirim.
 `),
   ],
   choices: [cont('AA2_DEVAM', 'Yeni güne başla', HUB, { role: 'PRIMARY' })],
@@ -1216,6 +1237,13 @@ leyla: Otuz yıl önce ben de bir gece böyle oturdum. Bir dosya, bir isim, bir 
 N: Masasındaki ters çerçeveye bakmadı. Bakmamaya çalıştı.
 leyla: Ve kimseyi kürsüde kırmaya çalışma. Kâğıtlarını göster; gerisini o kendisi yapar. Ya da yapmaz.
 N!flash: Dışarıda şimşek. Bir an bütün şehir bir fotokopi gibi beyazladı; sonra yeniden yağmur.
+C#sokak_karanlik: GECE 23.55 — ALTIPARMAK
+N: Büroyu kilitledim. Merdivenlerde ışık otomatiği yine bozuktu; üç kat aşağı karanlıkta, tırabzanı sayarak indim.
+N: Cadde boştu. Bir simitçi tezgâhını naylonla örtmüş, kapalı bir kepengin önünde sigara içiyordu. Bana bakıp başını salladı; tanımadan, tanır gibi.
+T: Yarın bir salona gireceğim ve elimde kâğıtlar olacak. Kâğıtların bir kısmını ben istedim; bir kısmı istemeden geldi. Hepsinin bir sahibi var.
+T: Bir avukatın en zor gecesi duruşmadan önceki gece değildir derler. Duruşmadan sonraki gecedir. Ben henüz hangisinin zor olduğunu bilmiyorum.
+N: Telefonumda Sevgi’den bir mesaj: “Vedat takım elbisesini ütüledi. Kendi. Otuz yıldır ilk kez.” Altına bir şey yazmamıştı; yazmasına gerek yoktu.
+N: Yağmurun altında arabaya yürüdüm. Silecekler bir kez gıcırdadı, sonra alıştı. Şehir arka camda küçüldü; ışıkları ıslak bir kâğıda dökülmüş mürekkep gibi.
 `),
     choices: [cont('ARA_SON_DEVAM', 'Adliyeye git', 'C2_00G', { role: 'PRIMARY' })],
   }),

@@ -219,11 +219,20 @@ N: Dilekçe uzuyor. İmleç hâlâ yanıp sönüyor.
       cost: slotCost,
       maxUses: 1,
       score: { USUL_BILGISI: 80 },
-      effects: [raise('dil_bilirkisi'), raise('dil_any')],
-      responses: B(`
+      effects: [raise('dil_bilirkisi'), raise('dil_any'), ifThen(has('ded_mukayese'), [raise('bk_gerekce')])],
+      responses: [
+        W(
+          has('ded_mukayese'),
+          `
 T: Birinci talep: Adli Tıp Kurumu, resmî mukayese imzaları. Noterdeki imza beyannamesi, bankadaki imza kartonu, nüfustaki başvuru formu. Kimin attığı belli olan imzalar.
-T: “Mukayese belgeleri sanığın kabul ettiği ya da resmî makam önünde attığı imzalar değildir.” Bu cümleyi üç kez yazdım, ikisini sildim.
+T: Gerekçe: “Bilirkişiye verilen irsaliyelerde iki ayrı el vardır; karbonlar ektedir.” Bu cümleyi üç kez yazdım, ikisini sildim.
+`,
+        ),
+        O(`
+T: Birinci talep: Adli Tıp Kurumu, resmî makam önünde atılmış imzalarla yeni inceleme. Hangi makam, hangi imza? Bunu henüz bilmiyorum.
+T: “Mukayese belgeleri özel belgedir.” Doğru bir cümle. Ama bir hâkime neden yetmediğini anlatmıyor.
 `),
+      ],
       good: 'Mukayese imzası tartışmasız olmalıdır: resmî makam önünde atılmış ya da sanıkça kabul edilmiş imzalarla yeni inceleme istenir (CMK 63, 67/5, 177).',
       category: 'USUL_BILGISI',
       next: '$stay',
@@ -589,7 +598,7 @@ N!shake: Hat kapandı. Yağmur şemsiyemin kenarından boynuma aktı.
 T: “Herkesin kendi soğuğu var.” Bu cümleyi bugün birinden duymuştum. Cilalı ayakkabılı birinden.
 `),
   choices: [
-    option('AK2_BILDIR', 'Ertesi sabah savcılığa tutanakla bildir', {
+    option('AK2_BILDIR', 'Sabah savcılığa git; tutanakla bildir', {
       score: { SAVUNMA_STRATEJISI: 50 },
       effects: [raise('tehdit_bildirildi')],
       good: 'Tehdidi kayda geçirmek doğru: kendi başına araştırmak yerine savcılığa bildirdin (TCK 106; CMK 158).',
@@ -600,7 +609,7 @@ T: Bir avukat korkusunu kâğıda yazar. Kâğıt korkmaz.
 `),
       next: 'INV_HUB',
     }),
-    option('AK2_EROL', 'Erol’u ara, hesap sor', {
+    option('AK2_EROL', 'Erol’u hemen ara; tehdidin hesabını sor', {
       score: { SAVUNMA_STRATEJISI: -30 },
       effects: [dec('trust', 5)],
       bad: 'Şüphelendiğin kişiyi arayıp hesap sormak hem riskli hem verimsiz; tehdidi savcılığa bildirmek gerekirdi.',
@@ -611,7 +620,7 @@ N: Gülerek kapattı. Sesi bir şey kanıtlamadı; benim sesim ise ona çok şey
 `),
       next: 'INV_HUB',
     }),
-    option('AK2_UNUT', 'Unut; yorgunsun', {
+    option('AK2_UNUT', 'Bir şaka say ve unut; yarın uzun gün', {
       responses: B(`
 T: Bir telefon. Bir ses. Bir atkı. Belki bir şaka. Belki değil. Uyumadım.
 `),
@@ -659,23 +668,23 @@ C#buro_gece: GECE 21.30 — ARSLAN HUKUK
 N: Zil çaldı. Kapıda Tarık; elinde bir tepsi börek, üstü alüminyum folyo. Saçları ıslak.
 tarik: Avukat hanım, rahatsız etmiyorum. Yengem gönderdi. Kayhan Böreği; sıcak. Amcam “avukat hanım aç kalmasın” dedi.
 N: Tepsiyi masaya bıraktı. Gitmedi. Masadaki dosyalara baktı; bakmamaya çalışarak.
-tarik: Nasıl gidiyor? Bir şey bulunduysa amcam söylemiyor; kendini kötü hissediyor. Ben de bilmek istiyorum; dükkân benim de evim sayılır.
+tarik: Nasıl gidiyor? Duruşma ne zaman, tam? Amcam uyuyamıyor; yengem de. Dükkân benim de evim sayılır; ben de bilmek istiyorum.
 T: Sıcak bir börek, ıslak saçlar ve bir soru. Bu dosyanın sırrı benim değil; müvekkilimin.
-tarik: Bir de… mukayese mukayese diyorlar. Bilirkişi neye bakmış? Amcam anlamıyor, ben de anlamıyorum. Bir şey lazımsa ben getiririm; dükkânda her kâğıt var.
+tarik: Bir şey lazımsa söyleyin. Yengem “avukat hanıma ne lazımsa götür” dedi. Ben getiririm.
 `),
   choices: [
-    option('AK3_SAKLA', '“Teşekkürler Tarık. Dosyayı Vedat Bey’le konuşuyorum; başkasıyla değil.”', {
+    option('AK3_SAKLA', '“Sağ ol Tarık. Dosyayı yalnızca Vedat Bey’le konuşurum.”', {
       score: { SAVUNMA_STRATEJISI: 50 },
       good: 'Avukat, müvekkilinin sırlarını üçüncü kişilere —aileden de olsa— açamaz (Av.K. 36). Doğru tutum.',
       category: 'SAVUNMA_STRATEJISI',
       responses: B(`
-tarik: Haklısınız. Tabii. Ben sadece… Neyse. Afiyet olsun.
-N: Kapıya yürüdü. Eşikte bir an durdu, döndü, bir şey söyleyecek gibi oldu. Söylemedi.
-T: Bir yeğen, bir börek, söylenmemiş bir cümle. Bu dosyada herkesin bir söylenmemiş cümlesi var.
+tarik: Haklısınız. Tabii. Yengem de öyle der; “avukatın işine karışılmaz.” Afiyet olsun.
+N: Kapıyı arkasından çekti. Merdivenlerde adımları; sonra sokakta bir motorun öksürüğü.
+T: Bir börek, bir aile, bir kapı. Bu ailede herkes yardım etmek istiyor. Yardımın da bir ağırlığı var; bazen bir dosyadan ağır.
 `),
       next: 'INV_HUB',
     }),
-    option('AK3_ANLAT', '“Otur. Anlatayım; belki sen de bir şey hatırlarsın.”', {
+    option('AK3_ANLAT', '“Otur Tarık. Anlatayım; belki dükkânda bir şey hatırlarsın.”', {
       score: { SAVUNMA_STRATEJISI: -80 },
       effects: [inc('ethics'), raise('tarik_sir')],
       bad: 'Dosyanın ayrıntılarını müvekkilin izni olmadan üçüncü bir kişiye anlattın: sır saklama yükümlülüğünün ihlali (Av.K. 36). Üstelik o kişinin dosyadaki yerini bilmiyordun.',
@@ -700,6 +709,9 @@ const gece = [
     lines: B(`
 C#buro_gece: 13 EKİM · 23.10 — ARSLAN HUKUK
 N: Panoyu son kez toparladım. Raptiyeler, ipler, bir yığın fotokopi. Bir davanın iskeleti.
+N: Cübbem kapının arkasında asılıydı; kuru temizlemeden yeni gelmiş, naylonu üstünde. Naylonu çıkarmadım. Sabah çıkarırım; o zamana kadar dava bir kâğıt kalsın.
+N: Aşağıda bir çöp kamyonu caddeyi tarıyordu. Şoför camı indirmiş, radyoda gece yarısı haberleri: yağış yarın da sürecek; Uludağ’a ilk kar.
+T: İlk celse. Bir tanık, bir rapor, bir savcı. Ve benim sorularım; bir memurun beş aydır kimseye anlatmadığı bir ânı açabilecek kadar doğru olmaları gerekiyor.
 `),
   }),
   decisionNode('INV_GECE_2', [{ to: 'INV_GECE_3' }], {

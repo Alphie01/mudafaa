@@ -31,7 +31,7 @@ export const meta: CasePart = {
     summary:
       'Bir matbaacının demanslı annesinin evi, satış yetkisi eklenmiş sahte bir noter sureti ve onun adına atılmış bir imzayla satıldı. Bilirkişi “aynı elin ürünü” diyor. Matbaacı o sabah dükkânında olduğunu, kimliğini bile bulamadığını söylüyor. Bir imza kime aittir: adı yazana mı, kalemi tutana mı?',
     coverCharacter: 'vedat',
-    legalReview: { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-20' },
+    legalReview: { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-21' },
   },
   config: {
     startNode: 'PR_00',
@@ -163,6 +163,7 @@ export const meta: CasePart = {
       'arg_rapor',
       'arg_solak',
       'arg_suret',
+      'bk_gerekce',
       'closing_indirim',
       'closing_masumiyet',
       'closing_terdit',

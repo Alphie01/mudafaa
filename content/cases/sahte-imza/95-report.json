@@ -62,6 +62,42 @@
         "category": "USUL_BILGISI"
       },
       {
+        "id": "h_rapor_belirsiz",
+        "when": { "hasEvidence": "ev_rapor2_belirsiz" },
+        "text": "Bilirkişi talebin gerekçesizdi: irsaliyelerdeki iki ayrı eli göstermeden ve noter, banka, nüfus imzalarını tek tek saymadan istedin. Adli Tıp tek bir mukayese imzasıyla kesin kanaate varamadı (CMK 63, 67/5).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_randevu_no",
+        "when": { "all": [{ "hasEvidence": "ev_randevu" }, { "not": { "hasEvidence": "ded_randevu" } }] },
+        "text": "Randevu kaydındaki numarayı matbaanın duvarındaki numara çizelgesiyle yan yana koymadın; numaranın sahibi tahtada belli olurdu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_suret",
+        "when": { "not": { "hasEvidence": "ded_suret_sahte" } },
+        "text": "Suretteki toner mührü noterin arşiv nüshasıyla karşılaştırmadın: asılda satış yetkisi yoktu; suret asıldan kopyalanıp değiştirilmişti.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kimlik",
+        "when": { "not": { "hasEvidence": "ded_kimlik" } },
+        "text": "Ceketin iç cebini ve 09.52’deki “kimliğimi bulamıyorum” mesajını birleştirmedin: kimlik o sabah sahibinde değildi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_borc",
+        "when": { "not": { "hasEvidence": "ded_borc" } },
+        "text": "Emlak bürosundaki masa takvimine ve bahis borcu mesajlarına bakmadın: bedelin büyük kısmı nakit ödenmemiş, bir borca mahsup edilmişti.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_kurye",
+        "when": { "all": [{ "hasEvidence": "ev_kargo" }, { "not": { "flag": "mazeret_tanik" } }] },
+        "text": "Kuryeyi tanık olarak dinletmedin ya da ona açık uçlu sormadın; terminal kaydının yanında bir insanın hatırladığı sabah, mazereti tamamlardı.",
+        "category": "SORGULAMA"
+      },
+      {
         "id": "h_hak",
         "when": { "all": [{ "visited": "C2_03C" }, { "not": { "flag": "hak_hatirlatildi" } }] },
         "text": "Akraba tanığın çekinme hakkının ve kendini suçlayan sorulara cevap vermeme hakkının hatırlatılmasını istemedin (CMK 45, 46, 48).",

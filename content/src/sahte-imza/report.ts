@@ -67,6 +67,42 @@ export const report: CasePart = {
         'USUL_BILGISI',
       ),
       hint(
+        'h_rapor_belirsiz',
+        has('ev_rapor2_belirsiz'),
+        'Bilirkişi talebin gerekçesizdi: irsaliyelerdeki iki ayrı eli göstermeden ve noter, banka, nüfus imzalarını tek tek saymadan istedin. Adli Tıp tek bir mukayese imzasıyla kesin kanaate varamadı (CMK 63, 67/5).',
+        'USUL_BILGISI',
+      ),
+      hint(
+        'h_randevu_no',
+        all(has('ev_randevu'), not(has('ded_randevu'))),
+        'Randevu kaydındaki numarayı matbaanın duvarındaki numara çizelgesiyle yan yana koymadın; numaranın sahibi tahtada belli olurdu.',
+        'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_suret',
+        not(has('ded_suret_sahte')),
+        'Suretteki toner mührü noterin arşiv nüshasıyla karşılaştırmadın: asılda satış yetkisi yoktu; suret asıldan kopyalanıp değiştirilmişti.',
+        'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_kimlik',
+        not(has('ded_kimlik')),
+        'Ceketin iç cebini ve 09.52’deki “kimliğimi bulamıyorum” mesajını birleştirmedin: kimlik o sabah sahibinde değildi.',
+        'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_borc',
+        not(has('ded_borc')),
+        'Emlak bürosundaki masa takvimine ve bahis borcu mesajlarına bakmadın: bedelin büyük kısmı nakit ödenmemiş, bir borca mahsup edilmişti.',
+        'ARASTIRMA',
+      ),
+      hint(
+        'h_kurye',
+        all(has('ev_kargo'), not(flag('mazeret_tanik'))),
+        'Kuryeyi tanık olarak dinletmedin ya da ona açık uçlu sormadın; terminal kaydının yanında bir insanın hatırladığı sabah, mazereti tamamlardı.',
+        'SORGULAMA',
+      ),
+      hint(
         'h_hak',
         all(visited('C2_03C'), not(flag('hak_hatirlatildi'))),
         'Akraba tanığın çekinme hakkının ve kendini suçlayan sorulara cevap vermeme hakkının hatırlatılmasını istemedin (CMK 45, 46, 48).',

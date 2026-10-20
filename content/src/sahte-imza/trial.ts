@@ -35,15 +35,22 @@ import { HEAR2, court2, wrongMove } from './shared.js';
 // 80-trial: ikinci celse. Müzekkere cevapları ve Adli Tıp raporu, (etik tuzakta Emre'nin çöküşü), kurye, Erol'un ve
 // Tarık'ın çapraz sorgusu, yeni rapor, mütalaa, dayanaklar, esas savunma, son söz ve hüküm. Çöküş kesintisi.
 
+const istendi: Cond = any(flag('dil_bilirkisi'), flag('h1_bilirkisi'));
+
 const raporlar = deliver('C2_00', [
   {
     evidence: 'ev_rapor2',
-    requires: any(flag('dil_bilirkisi'), flag('h1_bilirkisi')),
-    hint: 'Mukayese belgeleri özel belgelerdi; resmî imzalarla Adli Tıp’tan yeni rapor istemek gerekiyordu (CMK 63, 67/5).',
+    requires: all(istendi, flag('bk_gerekce')),
+    hint: 'Mukayese belgeleri özel belgelerdi ve iki ayrı elden çıkmıştı; bunu göstererek noter, banka ve nüfus imzalarıyla Adli Tıp’tan yeni rapor istemek gerekiyordu (CMK 63, 67/5).',
+  },
+  {
+    evidence: 'ev_rapor2_belirsiz',
+    requires: all(istendi, not(flag('bk_gerekce'))),
+    hint: 'Gerekçesiz bilirkişi talebi, Adli Tıp’a yetersiz mukayese malzemesi gönderilmesine yol açtı.',
   },
   {
     evidence: 'ev_rapor2_ek',
-    requires: all(any(flag('dil_bilirkisi'), flag('h1_bilirkisi')), flag('suc_duyurusu')),
+    requires: all(istendi, flag('bk_gerekce'), flag('suc_duyurusu')),
     hint: 'Somut dayanaklı bir suç duyurusu, savcılığın üçüncü kişinin örneklerini Adli Tıp’a göndermesini sağlardı (CMK 158).',
   },
 ]);
@@ -96,6 +103,9 @@ export const trial: CasePart = {
       lines: B(`
 C#adliye: 4 KASIM · 09.40 — BURSA ADLİYESİ, 4. KAT
 N: Aynı koridor, aynı sigara kokusu. Bu kez yağmur dinmişti; pencerelerden soluk bir kasım güneşi giriyordu.
+N: Kapının önünde iki kurye, bir aile, bir avukat; herkes aynı tahta sıraya sığmaya çalışıyordu. Mübaşir listeyi duvara bantladı. Ateş dosyası üçüncü sıradaydı.
+N: Leyla merdivenlerin başında durdu, bana bir dosya uzattı: Yargıtay kararlarının fotokopileri, kenarlarında kurşun kalemle notlar. Sonra hiçbir şey demeden aşağı indi.
+T: Leyla duruşmalarıma girmez; ama bir dosya bırakır. Dosyanın en üstünde tek bir cümlenin altı çizilmişti: “Raporlar arasındaki çelişki giderilmeden hüküm kurulamaz.”
 `),
     }),
     decisionNode('C2_00G2', [{ to: 'C2_00' }], {
@@ -124,6 +134,7 @@ hakim: Duruşmaya devam edildi. Sanık ve müdafii hazır, şikâyetçi hazır, 
 hakim: Ara kararlara cevaplar geldi; dosyaya konuldu, okundu. Taraflara örnekleri verildi.
 N: Hâkim dosyanın kalınlaştığını gösterir gibi elini üstüne koydu. Üç hafta önce ince bir dosyaydı; şimdi bir matbaanın kâğıt topu gibi.
 N: Nermin Kurt ön sırada oturuyordu; bu kez kardeşinin arkasında. Sevgi ikinci sırada. Tanık sırasında bir kurye yeleği, bir altın zincir.
+N: Kâtip Melek bana başıyla selam verdi; üç hafta önce vermemişti. Mahkeme salonlarında küçük şeyler değişir. Bir selam, bir bakış, bir dosyanın kalınlığı.
 `),
       choices: [cont('C200_DEVAM', 'Gelen cevaplar', 'C2_00A', { role: 'PRIMARY' })],
     }),
@@ -132,6 +143,7 @@ N: Nermin Kurt ön sırada oturuyordu; bu kez kardeşinin arkasında. Sevgi ikin
         W(
           all(has('ev_rapor2'), has('ev_rapor2_ek')),
           `
+hakim: Ara kararımızdaki ivedilik şerhi üzerine Adli Tıp raporunu süresinden önce gönderdi. Savcılık da ayrı soruşturmadaki örnekleri aynı incelemeye eklemiş.
 hakim: Adli Tıp Kurumu Fizik İhtisas Dairesi raporu geldi. Senet ve kapora makbuzundaki imzalar sanığın resmî mukayese imzalarıyla uyumsuz; sanığın el ürünü değil.
 hakim: Rapora göre bu imzalar, irsaliyelerin on birindeki imzalarla aynı elin ürünü ve sol el kullanımıyla uyumlu. Savcılığın ayrıca gönderdiği örneklere ilişkin ek rapor da dosyada.
 N: Savcı ek raporu iki kez okudu. Sonra salonun arkasına, tanık sırasına baktı.
@@ -140,9 +152,19 @@ N: Savcı ek raporu iki kez okudu. Sonra salonun arkasına, tanık sırasına ba
         W(
           has('ev_rapor2'),
           `
+hakim: Ara kararımızdaki ivedilik şerhi üzerine Adli Tıp raporunu süresinden önce gönderdi.
 hakim: Adli Tıp Kurumu Fizik İhtisas Dairesi raporu geldi. Senet ve kapora makbuzundaki imzalar sanığın resmî mukayese imzalarıyla uyumsuz; sanığın el ürünü değil.
 hakim: Rapora göre bu imzalar irsaliyelerin on birindeki imzalarla aynı elin ürünü ve sol el kullanımıyla uyumlu.
 N: Vedat bana döndü. Gözleri doluydu. Elini, sağ elini, masanın üstüne koydu ve bıraktı.
+`,
+        ),
+        W(
+          has('ev_rapor2_belirsiz'),
+          `
+hakim: Adli Tıp Kurumu raporu geldi. Mahkemece gönderilen tek resmî mukayese imzası nüfus kaydındaki 2019 tarihli imza.
+hakim: Rapora göre senetteki imzada bu imzadan farklı özellikler var; ancak mukayese imzası sayıca yetersiz olduğundan kesin kanaate varılamamış. Ek örnek istenmiş.
+N: Savcı raporu yarıya kadar okudu ve bıraktı. Vedat bana baktı; “kesin değil” kelimelerini dudaklarıyla tekrarladı.
+T: Rapor, istediğim şeyi okumuş; istemediğim şeyi değil. Neyi istemem gerektiğini tam söylememiştim.
 `,
         ),
         W(
@@ -168,6 +190,8 @@ T: Raporun karşısına bir rapor koyamadım. Kürsüdeki insanlarla yetineceği
             `
 hakim: Kargo şirketinin cevabı: 18 Şubat günü kurye 11.19’da Ateş Matbaası önüne varmış, gönderi 11.37’de sanık tarafından teslim edilmiş. Konum kaydı ekli.
 savci: Sayın Hâkim, kayıt sanığın orada olduğunu değil, terminale birinin imza attığını gösterir.
+hakim: Not edildi Sayın Savcı. Kaydı tanıkla birlikte değerlendireceğim.
+T: Savcı haklıydı; bir kayıt bir insanı göstermez. Ama bir kayıt, bir insanın anlattığı sabahı doğrulayabilir. O insanı kürsüye getirmek benim işimdi.
 `,
           ),
           W(
@@ -213,7 +237,7 @@ T: İlk soru en önemlisidir. Ağzına bir saat koyarsam, o saat bütün tanıkl
 `),
       next: 'C2_01B',
       options: [
-        option('C201_A', '“18 Şubat sabahı Ateş Matbaası’nda ne gördüğünüzü anlatır mısınız?”', {
+        option('C201_A', '“18 Şubat sabahı Ateş Matbaası’nda neler gördünüz, anlatır mısınız?”', {
           score: { SORGULAMA: 100 },
           effects: [raise('mazeret_tanik'), inc('pers')],
           good: 'Açık uçlu soru: tanık kendi algısını anlattı; ifade terminal kaydıyla örtüştü (CMK 52, 201).',
@@ -253,7 +277,12 @@ T: Terminal doğruyu söylüyordu. Ben bir doğrunun üstüne bir saat yapışt�
 `,
         ),
         O(`
+hakim: Tanık, o sabah dükkânda başka birini gördünüz mü? Camlı odada, arka tarafta?
+sinan: Görmedim Sayın Hâkim. Camlı odanın ışığı kapalıydı. Usta “bugün tek başımayım, herkes bir yerde” dedi; çayı da o yüzden kendisi koydu.
+hakim: Teslim imzasını kim attı?
+sinan: Usta. Parmağıyla, ekrana. Sol elinde bant vardı; bandı bırakmadı, sağ elinin parmağıyla attı. Güldü, “kalem olsa daha güzel atardım” dedi.
 savci: Sorum yok Sayın Hâkim. Kayıt kendi kendini anlatıyor.
+N: Sinan kürsüden inerken yeleğini koltuğunun altından aldı, katladı, yeniden katladı. Vedat’ın önünden geçerken başıyla selam verdi; Vedat da.
 `),
       ],
     }),
@@ -268,6 +297,8 @@ savci: Sorum yok Sayın Hâkim. Kayıt kendi kendini anlatıyor.
       say: S(`
 mubasir: Tanık Erol Kılınç! Erol Kılınç!
 N: Erol kürsüye bir düğüne girer gibi girdi. Takım elbise, altın zincir yakanın altına saklanmış, tespih cebinde.
+N: Geçerken savcıya başıyla selam verdi, hâkime eğildi, bana gülümsedi. Herkese ayrı bir yüz; bir emlakçının vitrini gibi.
+T: Bu adam bir evi on dakikada satar. Bugün kendini satmaya geldi. Fiyatını kâğıtlar belirleyecek.
 hakim: Yemininizi edin. Olayı anlatın.
 erol: Sayın Hâkim, ben emlakçıyım. Ev aldım, parasını verdim, tapusunu aldım. Şimdi mahkemelik oldum. Mağdurum; malum.
 erol: Vedat Bey’le konuştuk, anlaştık. Kaporayı verdim, makbuzu imzaladı. Tapuya beraber gittik. Hayırlı olsun dedim. Bu kadar.
@@ -500,7 +531,7 @@ T: Bir tanık, bir amca, bir yeğen. Bu kürsüde ona söylenmesi gereken bir ş
       options: [
         option(
           'C203C_A',
-          '“Tanığa tanıklıktan çekinme ve kendini suçlayan sorulara cevap vermeme hakları hatırlatılsın.”',
+          '“Dinlemeden önce tanığın çekinme hakkı hatırlatılsın.”',
           {
             score: { USUL_BILGISI: 100 },
             effects: [inc('legal_hits'), raise('hak_hatirlatildi')],
@@ -513,16 +544,16 @@ T: “Saklayacak bir şeyim yok.” Vedat da aynı cümleyi kurmuştu, ilk sabah
 `),
           },
         ),
-        option('C203C_B', '“Tanığa yemin ettirilsin; akraba da olsa doğruyu söylesin.”', {
+        option('C203C_B', '“Tanık sanığın yakını; yeminsiz dinlenmesini ve beyanının takdirde gözetilmesini istiyoruz.”', {
           score: { USUL_BILGISI: -30 },
           neutral:
-            'Yemin önemlidir; ama önce çekinme hakkının hatırlatılması gerekir (CMK 45/2). Hâkim bunu kendisi yaptı.',
+            'Yeminden çekinmek tanığın hakkıdır (CMK 51), müdafiin talebi değil; önce çekinme hakkının hatırlatılması gerekir (CMK 45/2). Hâkim bunu kendisi yaptı.',
           responses: B(`
 hakim: Önce hakları müdafi. Tanık, yeğen olarak tanıklıktan çekinme hakkınız ve kendinizi suçlayan sorulara cevap vermeme hakkınız var.
 tarik: Amcam için konuşurum.
 `),
         }),
-        option('C203C_C', '“Tanık olarak değil, şüpheli olarak dinlenmesini istiyoruz.”', {
+        option('C203C_C', '“Tanık değil, şüpheli olarak dinlensin.”', {
           score: { USUL_BILGISI: -60 },
           effects: [dec('pers')],
           bad: 'Bir kişiyi şüpheli sıfatıyla sorgulamak mahkemenin değil, soruşturmayı yürüten savcılığın işidir (CMK 158 vd.); kürsüde bir suçlama yapmış oldun.',
@@ -544,6 +575,7 @@ savci: Sayın Hâkim, müdafiin talebi bir suçlamadır; tutanağa geçsin.
       objectionGrounds: ['g_telkin', 'g_kanaat', 'g_salon'],
       say: S(`
 hakim: Anlatın.
+N: Kürsüde bir bardak su vardı. Tarık bardağa dokunmadı; elleri önünde, parmakları birbirine geçmiş.
 tarik: Ben on dört yıldır amcamın yanındayım. Dükkân benim evim. Amcam dürüst adamdır; bir kâğıda bile yanlış tarih atmaz.
 tarik: Polis belge istediğinde dükkânda ne varsa verildi. Ben o gün… dükkândaydım, sonra hastaneye gittim. Amcam hastanedeydi, babaannem düşmüştü.
 tarik: Benim bu işle bir ilgim yok. Amcam da yapmaz. Kim yaptıysa… bilmiyorum.
@@ -733,6 +765,7 @@ N: Tarık kürsüden inmeden önce amcasına döndü. Sesi her zamanki gibi alç
 tarik: Sen hep kâğıda inandın amca. Kâğıt kimin elindeyse onun olur.
 N: Kürsüden indi. Salonun arka kapısına yürüdü; kimse onu durdurmadı. Kapı arkasından sessizce kapandı.
 N: Vedat sağ elini masanın üstüne koydu. Sonra sol elini. İkisine birden baktı.
+N: Sevgi gözlerini kapamıştı. Nermin, yeğeninin çıktığı kapıya bakıyordu; dudakları bir isim söyler gibi kıpırdadı, ses çıkmadı.
 T: Bir sessizlik bir delil değildir. Ama sorulmuş sorular tutanakta kalır. Ve cevapsız kalan her soru, kendi cevabını bir yere yazar.
 `),
       choices: [cont('C203H_DEVAM', 'Devam', 'C2_TENEFFUS', { role: 'PRIMARY' })],
@@ -749,6 +782,11 @@ N: Nermin Kurt koridorun öbür ucundan geldi. Kardeşinin yanında durdu. Bir s
 nermin: Annem dün seni sordu. “Vedat’ım nerede” dedi. “İşte” dedim. Yalan söyledim.
 vedat: Ben de ona her pazar “evin yerinde” diyorum abla. İkimiz de yalan söylüyoruz.
 nermin: Bizim ailede herkes birini korumak için yalan söylüyor. Bir tek kâğıtlar söylemiyor.
+vedat: Babam da öyle derdi. “Kâğıt yalan söylemez, Vedat; kâğıdı basan söyler.” Ben de otuz yıl kimseye yalan basmadım abla.
+nermin: Biliyorum. Ben şikâyeti yazarken de biliyordum. Ama bir isim vardı tapuda; senin ismin. Ben o ismi okudum. Seni okumadım.
+N: Vedat cevap vermedi. Cebinden bir mendil çıkardı, gözlüğünü sildi; gözlüğü yoktu. Mendili geri koydu.
+nermin: Annem perdeyi soruyor. Mavi perde. Ben de “yıkattım” diyorum. Her hafta yıkattığım bir perde. Ne zaman bitecek bu?
+vedat: Bitince biter abla. Kâğıtlar bitirir. Biz değil.
 N: Sevgi elinde üç bardak suyla geldi. Birini Vedat’a, birini Nermin’e verdi. Üçüncüyü kendisi tutmadı; bana uzattı.
 sevgi: İçin Deniz Hanım. Sesiniz kısılmış.
 T: Bir aile, bir koridorda, bir pencerenin önünde. Kimse kimseyi suçlamıyor. Herkes bir şeyi bekliyor. Ben de.
@@ -771,7 +809,7 @@ hakim: Müdafi, rapora ve iki rapor arasındaki çelişkiye diyeceğiniz?
       options: [
         option(
           'C204A_A',
-          '“Adli Tıp resmî imzalarla baktı: imzalar sanığın değil. İlk rapor kirli mukayeseye dayanıyor; hükme esas alınamaz.”',
+          '“Adli Tıp resmî imzalarla baktı; ilk rapor kirli mukayeseye dayanıyor.”',
           {
             score: { USUL_BILGISI: 150 },
             effects: [inc('pers', 2), inc('legal_hits')],
@@ -781,12 +819,13 @@ hakim: Müdafi, rapora ve iki rapor arasındaki çelişkiye diyeceğiniz?
 P: Sayın Hâkim, ilk rapor kaynağı belirsiz, iki ayrı elden çıkmış özel belgelerle yapıldı. Adli Tıp ise sanığın noterde, bankada, nüfusta attığı imzalarla.
 P: Sonuç: senetteki imza sanığın değil. İlk rapor da aslında yanlış değil; senedi atan elin irsaliyeleri de attığını söylüyor. O el, sanığın eli değil.
 P: Suretin matbaada basılmış olması, onu kimin bastığını söylemez. Dükkânın ortak bilgisayarı ve pervazdaki anahtar, herkesin bildiği şeyler.
+P: İki rapor çelişmiyor Sayın Hâkim; aynı şeyi iki ayrı yerden söylüyor. Biri “bu el, o kâğıtları atan el” diyor. Öbürü “o el sanığın eli değil” diyor.
 P: Savcılığın ihtimali bir ihtimaldir Sayın Hâkim. Adli Tıp’ınki bir sonuç.
 savci: …Not ediyorum Sayın Hâkim.
 `),
           },
         ),
-        option('C204A_B', '“Rapor ortada. Başka bir diyeceğimiz yok.”', {
+        option('C204A_B', '“Adli Tıp raporu açık; değerlendirmeyi yüce mahkemenin takdirine bırakıyoruz.”', {
           score: { USUL_BILGISI: 20 },
           neutral:
             'Rapor lehine; ama iki rapor arasındaki çelişkiyi açıklamadın, savcının matbaa ihtimaline cevap vermedin.',
@@ -812,12 +851,12 @@ T: Bir cümle. Savcının tutanağına benim sesimle.
       background: 'durusma_salonu',
       prosecutionEvidence: 'ev_rapor1',
       say: S(`
-hakim: Dosyada tek imza incelemesi var: soruşturmadaki grafoloji raporu. Müdafi, diyeceğiniz?
-T: Rapora rapor koyamadım. Elimde ne varsa onunla.
+hakim: Soruşturmadaki grafoloji raporu tartışmaya açıldı. Müdafi, diyeceğiniz?
+T: Rapora kesin bir rapor koyamadım. Elimde ne varsa onunla.
 `),
       next: 'C2_05',
       options: [
-        option('C204B_A', '“Mukayese belgeleri özel ve iki ayrı elden; rapor hükme esas alınamaz.”', {
+        option('C204B_A', '“Mukayese belgeleri iki ayrı elden; rapor hükme esas alınamaz.”', {
           visibleWhen: has('ded_mukayese'),
           score: { USUL_BILGISI: 100 },
           effects: [inc('pers')],
@@ -828,11 +867,23 @@ P: Sayın Hâkim, rapor “aynı el” diyor. Hangi elin? Kaynağı belirsiz, ik
 hakim: Not edildi.
 `),
         }),
-        option('C204B_B', '“Rapor güvenilir değil.”', {
-          score: { USUL_BILGISI: 10 },
-          neutral: 'Somut bir dayanak göstermedin.',
+        option('C204B_D', '“Adli Tıp kesin kanaate varamadı; bu şüphe sanık lehine yorumlanmalı.”', {
+          visibleWhen: all(has('ev_rapor2_belirsiz'), not(has('ded_mukayese'))),
+          score: { USUL_BILGISI: 50 },
+          effects: [inc('pers')],
+          neutral:
+            'Doğru bir ilke (CMK 223/2-e); ama “kesin değil” bir rapor, ilk raporu çürütmez. İlk raporun neden güvenilmez olduğunu göstermen gerekiyordu.',
           responses: B(`
-hakim: Neden güvenilir değil müdafi? …Peki. Not edildi.
+P: Sayın Hâkim, Adli Tıp imzanın sanığa ait olduğunu söyleyemedi. Dosyadaki tek “aynı el” tespiti, kaynağı belirsiz özel belgelere dayanıyor.
+hakim: Not edildi. Ama “kesin değil” ile “sanığın değil” aynı şey değil müdafi.
+`),
+        }),
+        option('C204B_B', '“Rapor CMK 67/3’e aykırı hukuki değerlendirme içeriyor; hükme esas alınmasın.”', {
+          score: { USUL_BILGISI: 10 },
+          neutral:
+            'Rapor teknik bir tespit yapıyor; hukuki nitelendirme içermiyor. Somut bir dayanak göstermedin; sorun mukayese malzemesindeydi.',
+          responses: B(`
+hakim: Raporda hukuki bir değerlendirme göremiyorum müdafi. …Peki. Not edildi.
 `),
         }),
         option('C204B_C', '“Raporu kabul ediyoruz; ama sanık iyi niyetliydi.”', {
@@ -847,10 +898,14 @@ N: Vedat bana döndü. “Ben imza atmadım” dedi; yalnızca dudaklarıyla.
         }),
       ],
     }),
-    decisionNode('C2_05', [{ when: guclu, to: 'C2_05A' }, { when: orta, to: 'C2_05B' }, { to: 'C2_05C' }], {
+    decisionNode(
+      'C2_05',
+      [{ when: guclu, to: 'C2_05A' }, { when: any(orta, has('ev_rapor2')), to: 'C2_05B' }, { to: 'C2_05C' }],
+      {
       ...court2.base,
-      title: 'Mütalaa',
-    }),
+        title: 'Mütalaa',
+      },
+    ),
     court2.stage('C2_05A', {
       title: 'Mütalaa',
       courtStage: 'MUTALAA',
@@ -862,6 +917,7 @@ N: Orhan Bilgiç ayağa kalktı. Dosyasına baktı. Kapadı.
 savci: Sayın Hâkim. İddianamede sanığın imzasına dayandık. Bugün dosyada, bu imzanın sanığa ait olmadığına ilişkin güçlü deliller var.
 savci: Tanık beyanları, kayıtlar ve rapor birlikte değerlendirildiğinde, sanığın üzerine atılı suçu işlediği sabit değildir. Sanığın beraatine karar verilmesini talep ediyorum.
 N: Salonda bir kıpırtı. Nermin Kurt mendilini gözlerine bastırdı. Vedat kıpırdamadı; anlamamış gibi.
+N: Sevgi arkadan uzanıp kocasının omzuna dokundu. Vedat ancak o zaman başını çevirdi; bir bana, bir savcıya baktı. “Ne dedi?” dedi, sesi duyulmadan.
 T: Bir savcı “yanıldık” dedi. Bunu her gün duymazsın. Bunu duymak için kâğıtların ona okuması gerekir; senin değil.
 `),
       choices: [cont('C205A_DEVAM', 'Dayanaklarını hazırla', 'C2_06P', { role: 'PRIMARY' })],
@@ -873,7 +929,7 @@ T: Bir savcı “yanıldık” dedi. Bunu her gün duymazsın. Bunu duymak için
       onEnter: [set('mutalaa', 'TAKDIR')],
       lines: B(`
 hakim: Sayın Savcı, esas hakkındaki mütalaanız?
-savci: Sayın Hâkim. Dosyada sanığın imzasına ilişkin çelişkili deliller var. Tapu memurunun beyanı, sonradan gelen kayıtlar…
+savci: Sayın Hâkim. Dosyada sanığın imzasına ilişkin çelişkili deliller var. Raporlar ve beyanlar aynı yönü göstermiyor.
 savci: Ancak sahte suret sanığın matbaasıyla ilişkili ve sanığın taşınmazı satmak için bir sebebi olduğu sabit. Takdiri yüce mahkemeye bırakıyorum.
 T: Takdir. Bir savcının “emin değilim” demesinin resmî biçimi. Şimdi o boşluğu ben dolduracağım.
 `),
@@ -884,13 +940,26 @@ T: Takdir. Bir savcının “emin değilim” demesinin resmî biçimi. Şimdi o
       courtStage: 'MUTALAA',
       background: 'durusma_salonu',
       onEnter: [set('mutalaa', 'MAHKUMIYET')],
-      lines: B(`
+      lines: [
+        W(
+          has('ev_rapor2_belirsiz'),
+          `
+hakim: Sayın Savcı, esas hakkındaki mütalaanız?
+savci: Sayın Hâkim. Adli Tıp kesin bir kanaat bildirmemiştir; aksini de söylememiştir. Soruşturmadaki rapor ise senetteki imzanın sanığa ait olduğunu tespit etmiştir.
+savci: Sahte suret sanığın işyerinde basılabilecek niteliktedir. Sanığın 2024’te taşınmazı satmak istediği sabittir.
+savci: Sanığın TCK 204/1 uyarınca cezalandırılmasını talep ediyorum.
+N: Vedat başını önüne eğdi. Sevgi’nin eli, arkadaki sıradan uzanıp onun omzuna dokundu.
+T: “Kesin değil” bir rapor, savcının elinde “aksini söylemiyor” bir rapora dönüştü. Kâğıt, kimin okuduğuna göre konuşur.
+`,
+        ),
+        O(`
 hakim: Sayın Savcı, esas hakkındaki mütalaanız?
 savci: Sayın Hâkim. Senetteki imza, bilirkişi raporuyla sanığa aittir. Sahte suret sanığın işyerinde basılabilecek niteliktedir. Sanığın 2024’te taşınmazı satmak istediği sabittir.
 savci: Sanığın TCK 204/1 uyarınca cezalandırılmasını talep ediyorum.
 N: Vedat başını önüne eğdi. Sevgi’nin eli, arkadaki sıradan uzanıp onun omzuna dokundu.
 T: Savcının elinde aynı kâğıtlar duruyordu. Ona başka bir şey okutamadım.
 `),
+      ],
       choices: [cont('C205C_DEVAM', 'Dayanaklarını hazırla', 'C2_06P', { role: 'PRIMARY' })],
     }),
     story('C2_06P', {
@@ -1013,6 +1082,7 @@ P: Üç: 11.19 ile 11.37 arasında sanık matbaasının önünde, bir kuryeyle k
       background: 'durusma_salonu',
       say: S(`
 N: Ayağa kalktım. Cübbemin kolları her zamankinden ağırdı. Salonda bir tek kâtibin klavyesi.
+N: Arka sırada Sevgi ellerini dizlerinin üstünde birleştirmişti; bir öğrencisinin sözlüsünü dinleyen öğretmen gibi. Nermin önüne bakıyordu.
 T: Ne istiyorum? Bunu yüksek sesle söylemeden önce kendime söylemeliyim.
 `),
       next: 'C2_06R',
@@ -1027,6 +1097,8 @@ P: Sayın Hâkim. Bu dosyada bir ad var, bir de bir el. Ad doğru: Vedat Ateş. 
 P: Senedi imzalayan el, kalemi sol eline geçirdi ve zinciri gerdi. Vedat Ateş o saatte dört kilometre ötede, bir kuryeyle koli bantlıyordu.
 P: Müvekkilim ömrü boyunca kâğıt bastı. Bugün bir kâğıt onu basmak istiyor. Kâğıdı tutan eli gördük. O el onun değil.
 P: Savcılık bir sebep gösterdi: bir bayram sofrasında söylenmiş bir cümle. Bir cümle, bir kâğıdı basmaz. Bir kimliği bir ceketten almaz. Bir zinciri germez.
+P: Bu dosyada herkes bir kâğıda inandı. Tapu memuru sisteme, bilirkişi önüne konan irsaliyelere, savcılık rapora. Kimse kâğıdı tutan ele bakmadı.
+P: Bugün baktık Sayın Hâkim. Bir tapu memurunun hafızası, bir kuryenin sabahı, bir kurumun raporu; üçü de aynı şeyi söylüyor.
 P: Sanığın üzerine atılı suçu işlemediği sabit olduğundan beraatini; mahkeme aksi kanaatteyse, mahkûmiyete yeter delil bulunmadığından beraatini talep ediyoruz.
 `),
         }),
@@ -1074,6 +1146,7 @@ hakim: Sanık, sırası gelince söz vereceğim.
           all(flag('arg_rapor'), flag('arg_solak')),
           `
 N: Hâkim not almayı bıraktı. Bir rapor ve bir zincir; ikisini birbirine bağlayan bir sağ el. Kalemi masaya koydu.
+N: Savcı dosyasının bir sayfasını çevirdi, sonra geri çevirdi. Kâtip son cümlemi yazarken bir an durdu ve okudu; kâtipler okumaz, yazar.
 `,
         ),
         W(
@@ -1106,7 +1179,9 @@ N: Hâkim dinledi. Savunmamın sonunda yalnızca “teşekkürler müdafi” ded
       witness: 'vedat',
       say: S(`
 hakim: Sanık, son sözünüz?
-N: Vedat ayağa kalktı. Bana baktı; bir şey söylememi bekler gibi.
+N: Salon sessizleşti. Kâtip ellerini klavyeden çekti; son sözü yazmak için bekledi. Pencerenin önünden bir güvercin geçti, gölgesi kürsünün üstünden kaydı.
+N: Vedat ayağa kalktı. Ceketinin önünü ilikledi; bir düğmeyi atladı, fark etmedi. Bana baktı; bir şey söylememi bekler gibi.
+T: Son söz sanığındır. Benim değil. Benim işim bitti; şimdi sıra, beş aydır kimsenin dinlemediği bir sesin.
 `),
       next: 'C2_08',
       options: [
@@ -1156,6 +1231,8 @@ mubasir: Taraflar salona! Hükmü ayakta dinleyin! Taraflar salona!
           flag('sonsoz_kendi'),
           `
 N: Hâkim kararı açıklamak için yarım saat ara verdi. Koridorda Sevgi Vedat’ın elini tutuyordu. “Annem perdesini soruyor.” Bu cümle salonda kalmıştı.
+N: Nermin pencerenin önünde, sırtı bize dönük duruyordu. Bir ara döndü, kardeşine baktı, bir şey söyleyecekmiş gibi oldu; sonra çantasından annesinin ilaç kutusunu çıkarıp evirdi çevirdi.
+T: Yarım saat. Bir dosyanın beş ayı, bir ailenin otuz yılı, bir hâkimin yarım saati. Kâğıtlar şimdi onun masasında; benim değil.
 mubasir: Taraflar salona! Hükmü ayakta dinleyin! Taraflar salona!
 `,
         ),

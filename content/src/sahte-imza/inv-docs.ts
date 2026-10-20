@@ -38,6 +38,8 @@ const suret = documentExam('INV_SURET', {
 C#buro_gece: ARSLAN HUKUK — GECE
 N: Tapuya verilen suretin dosyadaki renkli fotokopisi değil; adliye emanetinden mahkeme izniyle getirilen aslı. Şeffaf bir poşetin içinde, iki sayfa.
 T: Bir kâğıdın sahte olduğunu anlamak için ona inanmayı bırakmak gerekir. Sonra yavaşça, satır satır, yeniden inanmaya çalışmak.
+N: Masa lambasının altında poşet hafifçe parladı. Dışarıda yağmur; içeride yalnızca kâğıt hışırtısı ve kaloriferin tıkırtısı.
+T: Gerçek bir noter sureti bir kurumun sesiyle konuşur: mühür, kâğıt, satır aralığı. Sahtesi bir insanın sesiyle konuşur. Hangi sesi duyacağım?
 N: Bir alet seç, sonra şüpheli satıra dokun. Her deneme bir hak yer.
 `),
   header: { left: 'BURSA 14. NOTERLİĞİ · VEKÂLETNAME SURETİ', right: 'YEV. 08817' },
@@ -113,6 +115,8 @@ const senet = documentExam('INV_SENET', {
 C#buro: ARSLAN HUKUK — SABAH
 N: Senedin onaylı örneği. Fotoğraf, kimlik bilgileri, bedel, imzalar. Altında sistemin bastığı küçük zaman damgaları.
 T: Resmî senet, devletin bir anı dondurmasıdır. 18 Şubat, 11.24. O anda o masada kim vardı? Senet biliyor; sormayı bilene söyler.
+N: Büronun penceresinden sabah servisi geçti; çocuk sesleri, bir korna, sonra yeniden yağmur. Kahvem soğumuştu; içmedim.
+T: Bir fotoğraf, bir imza, bir saat. Üçü de aynı ana ait. Biri yalan söylüyorsa, öbür ikisi onu ele verir.
 `),
   header: { left: 'OSMANGAZİ TAPU MÜDÜRLÜĞÜ · RESMÎ SENET', right: '412/9 · 18.02.2026' },
   columns: [
@@ -248,6 +252,8 @@ const irsaliye = documentExam('INV_IRSALIYE', {
 C#depo: ATEŞ MATBAASI — ARKA ODA
 N: Matbaadaki irsaliye klasörünün kalan nüshaları. Polisin aldıklarının karbon kopyaları da arada. Her birinin altında “V. Ateş”.
 T: Aynı ad, yüzlerce kez. Bir ad bir imza değildir. İmza bir elin alışkanlığıdır; ad, bir kimliğin.
+N: Klasörün sırtında Vedat’ın babasının el yazısıyla bir etiket: “İRSALİYE · 1998–”. Tarihin ikinci yarısı hiç yazılmamış; dükkân hiç kapanmamış.
+N: Makinenin sesi duvardan geçiyordu; düzenli, sabırlı, bir kalp gibi. Her vuruşta bir kâğıt, her kâğıtta bir ad.
 `),
   header: { left: 'ATEŞ MATBAASI · SEVK İRSALİYELERİ (KARBON)', right: 'OCAK–MART 2026' },
   columns: [

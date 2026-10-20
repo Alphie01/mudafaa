@@ -55,7 +55,7 @@ export const scenes: CasePart = {
         sceneObject('ob_yazici', 'Lazer yazıcı', OB_YAZICI, {
           discovers: 'clue_yazici',
           score: { ARASTIRMA: 60 },
-          text: 'Renkli lazer yazıcının ekranında iş günlüğü. Altı ayda gece yarısından sonra tek bir iş: 6 Şubat, 02.14, iki sayfa, 90 gram, renkli. Gönderen: DIJITAL-PC.',
+          text: 'Renkli lazer yazıcının ekranında iş günlüğü. Altı ayda gece yarısından sonra tek bir iş: 6 Şubat, 02.14, iki sayfa, 90 gram, renkli. Gönderen: MATBAA-PC.',
           short: 'Gece 02.14 baskısı',
         }),
         sceneObject('ob_takvim', 'Duvar takvimi', OB_TAKVIM, {

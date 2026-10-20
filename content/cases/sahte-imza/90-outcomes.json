@@ -65,7 +65,7 @@
       "id": "COKUS",
       "class": "CONVICTION",
       "priority": 2,
-      "when": { "flag": "cokus" },
+      "when": { "all": [{ "flag": "cokus" }, { "not": { "hasEvidence": "ev_rapor2" } }] },
       "stamp": "MAHKÛMİYET",
       "stampTone": "red",
       "header": "TÜRK MİLLETİ ADINA",
@@ -76,7 +76,20 @@
           "text": "Savunma, sunduğu delillerin beyanlarla ilgisini ortaya koyamamış; itirazları dayanaksız kalmıştır."
         },
         {
+          "when": {
+            "not": {
+              "any": [{ "hasEvidence": "ev_kargo" }, { "flag": "contra_g3" }, { "hasEvidence": "ev_rapor2_belirsiz" }]
+            }
+          },
           "text": "Dosyadaki bilirkişi raporu ve tanık beyanları karşısında aksini gösteren somut bir delil tartışılamamıştır."
+        },
+        {
+          "when": { "any": [{ "hasEvidence": "ev_kargo" }, { "flag": "contra_g3" }] },
+          "text": "Dosyaya giren kayıtlar ve beyanlar duruşmada savunmaca birbirine bağlanamamış; soruşturmadaki raporun ispat gücünü sarsacak ağırlıkta görülmemiştir."
+        },
+        {
+          "when": { "hasEvidence": "ev_rapor2_belirsiz" },
+          "text": "Adli Tıp Kurumu, mukayese imzası yetersiz olduğundan kesin kanaat bildirmemiştir; bu rapor ilk raporla çelişmemektedir."
         }
       ],
       "legalBasis": "TCK 204/1, 61, 62/1; CMK 231/5; TCK 51/1",
@@ -189,7 +202,7 @@
             { "speaker": "vedat", "text": "Biliyorum abla. Kâğıt yalan söylemiyordu; kâğıdı tutan el söylüyordu." },
             {
               "speaker": "nermin",
-              "text": "Halit ölünce onu ben de büyüttüm. Okul harçlarını ben ödedim. Elini öğretmen bağlardı, annem çözerdi."
+              "text": "O çocuğu küçükken ben de büyüttüm. Okul harçlarını ben ödedim. Elini öğretmen bağlardı, annem çözerdi."
             },
             {
               "speaker": "narrator",
@@ -253,10 +266,14 @@
         "all": [
           { "not": { "flag": "cokus" } },
           { "not": { "flag": "closing_indirim" } },
+          { "hasEvidence": "ded_mukayese" },
+          { "any": [{ "hasEvidence": "ev_rapor2" }, { "flag": "contra_g3" }] },
           {
             "any": [
-              { "hasEvidence": "ev_rapor2" },
-              { "all": [{ "flag": "contra_g3" }, { "hasEvidence": "ded_mukayese" }] }
+              { "flag": "contra_g3" },
+              { "hasEvidence": "ded_mazeret" },
+              { "flag": "contra_e4" },
+              { "flag": "mazeret_tanik" }
             ]
           },
           { "cmp": [{ "var": "pers" }, ">=", 6] },
@@ -338,6 +355,14 @@
             {
               "speaker": "vedat",
               "text": "Bir ismi basmak kolaydır avukat hanım. Bir ismin altına imza atmak, onu taşımaktır. Ben kendi adımı yeniden taşımayı öğreneceğim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Adliyenin önünde bir simitçi tezgâhını açıyordu. Vedat iki simit aldı; birini bana uzattı, birini Sevgi’ye. Kendine almadı."
+            },
+            {
+              "speaker": "vedat",
+              "text": "Beş aydır boğazımdan bir şey geçmiyor. Yarın geçer belki. Yarın dükkânda, makinenin başında."
             }
           ]
         },
@@ -386,6 +411,14 @@
               "text": "Gitti. Kurşun harfler masamda duruyordu: Ş, E, T, A. Kâğıda basılınca ATEŞ."
             },
             {
+              "speaker": "narrator",
+              "text": "Pencereyi açtım. Yağmur dinmiş, sokak lambaları ıslak asfalta uzun sarı çizgiler bırakmıştı. Bir yerde bir köpek havladı, sonra sustu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dosyayı kapadım ve dolaba kaldırdım. Etiketine kendi el yazımla “Ateş · Beraat” yazdım. Harflerim sağa yatıktı; elim titremiyordu."
+            },
+            {
               "speaker": "player",
               "text": "Bir imzayı sahibinden ayırdım. Kimin eline ait olduğunu bulamadım. Bu dosyada bir el hâlâ havada duruyor; bir kalem tutar gibi.",
               "style": "thought"
@@ -410,12 +443,151 @@
       ]
     },
     {
+      "id": "UST_KURUL",
+      "class": "OTHER",
+      "priority": 5,
+      "when": { "hasEvidence": "ev_rapor2" },
+      "stamp": "KARAR YOK",
+      "stampTone": "amber",
+      "header": "ARA KARAR",
+      "sentence": "Dosya Adli Tıp kurulunda · duruşma ertelendi",
+      "verdictText": "Mahkemece, soruşturmada alınan grafoloji raporu ile Adli Tıp Kurumu raporu arasındaki çelişkinin giderilmesi için dosyanın Adli Tıp Kurumu Fizik İhtisas Kurulu’na gönderilmesine; Adli Tıp raporu gözetilerek sanık hakkındaki adli kontrol tedbirinin kaldırılmasına; duruşmanın kurul raporunun gelmesine kadar ertelenmesine karar verildi.",
+      "reasoning": [
+        {
+          "text": "Adli Tıp Kurumu raporuna göre senet ve makbuzdaki imzalar sanığın resmî mukayese imzalarıyla uyumsuzdur; soruşturmadaki rapor ise aynı elin ürünü olduğunu söylemektedir."
+        },
+        {
+          "text": "İki bilirkişi raporu arasındaki çelişki giderilmeden hüküm kurulamaz; çelişki üst düzey bir kuruldan rapor alınarak giderilmelidir (CMK 63, 67, 217)."
+        },
+        {
+          "when": {
+            "not": {
+              "any": [
+                { "flag": "contra_g3" },
+                { "hasEvidence": "ded_mazeret" },
+                { "flag": "contra_e4" },
+                { "flag": "mazeret_tanik" }
+              ]
+            }
+          },
+          "text": "Raporlar arasındaki çelişkiyi açıklayacak ve imzayı sanıktan ayıracak başka bir delil duruşmada tartışılmamıştır."
+        },
+        {
+          "when": {
+            "any": [
+              { "flag": "contra_g3" },
+              { "hasEvidence": "ded_mazeret" },
+              { "flag": "contra_e4" },
+              { "flag": "mazeret_tanik" }
+            ]
+          },
+          "text": "Savunma, dosyadaki delilleri duruşmada beyanlarla ilişkilendirememiştir; mahkeme çelişkiyi kendiliğinden çözme yoluna gitmemiştir."
+        }
+      ],
+      "legalBasis": "CMK 63, 67, 68, 217",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 70] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 70] }, 1000] }
+        }
+      },
+      "howToReach": "Adli Tıp raporunu aldın; tek başına bırakma. Kürsüde sol el beyanını, mazereti ve kirli mukayeseyi rapora bağla; dayanaklarını ve esas savunmanı bunların üstüne kur.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Ara karar…" },
+            {
+              "speaker": "narrator",
+              "text": "“Fizik İhtisas Kurulu’na gönderilmesine… adli kontrol tedbirinin kaldırılmasına… ertelenmesine.” Vedat kelimeleri duydu; hangisinin iyi, hangisinin kötü olduğunu bilemedi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kâtip ara kararı yazdırdı. Hâkim dosyayı kapadı, bir sonrakini açtı. Bir aile salonun ortasında, ne kazanmış ne kaybetmiş, ayakta kaldı."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN SONRA", "bg": "adliye", "style": "card" },
+            { "speaker": "vedat", "text": "Kurul. Bir kurul daha. Bir kâğıt daha avukat hanım. Kaç ay?" },
+            {
+              "speaker": "player",
+              "text": "Birkaç ay. Belki daha fazla. Ama imzayı tutmanız gerekmiyor artık; karakola da gitmeyeceksiniz."
+            },
+            {
+              "speaker": "vedat",
+              "text": "Karakol değil mesele. Mahalle. Dükkâna gelen müşteri. “Sahtekâr Vedat” daha birkaç ay. Kurul ne der, mahalle onu duymaz."
+            }
+          ]
+        },
+        {
+          "when": { "cmp": [{ "var": "mutalaa" }, "==", "BERAAT"] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Savcı beraat istemişti. Hâkim mütalaayla bağlı değildi; iki raporla da. Bir üçüncüsünü istedi."
+            },
+            {
+              "speaker": "player",
+              "text": "Savcıyı ikna eden kâğıtlar, hâkimi yalnız bıraktı. Kâğıtları ben konuşturmalıydım; konuşturmadım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "cokus" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Savcı merdivenlerde yanımdan geçti; durmadı. Hâkimin sesi hâlâ kulağımdaydı: “Savunmanızı yazılı olarak verin.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir rapor bu dosyayı kurtardı; ben neredeyse batırıyordum. Kâğıtlar benden iyi avukattı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Sevgi kocasının koluna girdi. Koridorun ucunda Tarık bekliyordu; Doblo’nun anahtarı elinde. Sevgi bir an durdu, sonra yürüdü."
+            },
+            { "speaker": "narrator", "text": "ATEŞ MATBAASI · AKŞAM", "bg": "depo", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Vedat kepengi kaldırdı. Makineyi çalıştırmadı. Kurşun harf kasasının başında durdu; bir harf aldı, avucunda tarttı, geri koydu."
+            },
+            {
+              "speaker": "vedat",
+              "text": "Babam derdi ki: baskıya girmeden önce son bir prova alınır. Prova temizse basarsın. Benim provam bir kurulda."
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "bg": "buro_gece", "style": "card" },
+            {
+              "speaker": "leyla",
+              "text": "Bir rapor kazandın. Davayı kazanmak için onu konuşturman gerekiyordu. Bir hâkim iki raporun arasında yalnız kalırsa, üçüncü bir rapor ister."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Raporun yanına bir tanık koy, bir kayıt koy, bir zincir koy. Sonra hâkim yalnız kalmaz."
+            },
+            { "speaker": "player", "text": "Kurul raporu gelince yeniden kürsüye çıkacağız." },
+            { "speaker": "leyla", "text": "Çıkacaksınız. O gün kâğıtlarını sırala; bugünkü gibi değil." },
+            { "speaker": "narrator", "text": "SON", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Dosya Adli Tıp Kurumu Fizik İhtisas Kurulu’nda. Vedat Ateş hakkında adli kontrol kaldırıldı. Hisar’daki ev hâlâ Erol Kılınç adına kayıtlı."
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "INDIRIM",
       "class": "REDUCED",
-      "priority": 5,
+      "priority": 6,
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
+          { "not": { "hasEvidence": "ev_rapor2" } },
           { "cmp": [{ "var": "pers" }, ">=", 3] },
           { "cmp": [{ "score": "final" }, ">=", 3000] }
         ]
@@ -427,7 +599,11 @@
       "verdictText": "Sanık Vedat Ateş’in sahte resmî belge düzenleme ve kullanma suçundan TCK 204/1 uyarınca alt sınırdan 2 yıl hapis cezası ile cezalandırılmasına; sabıkasızlığı ve duruşmadaki hâli lehine takdiri indirim nedeni sayılarak TCK 62/1 uyarınca 1 yıl 8 ay hapis cezası ile CEZALANDIRILMASINA; zarar giderilmediğinden hükmün açıklanmasının geri bırakılmasına yer olmadığına (CMK 231/6-c); cezanın TCK 51/1 uyarınca ERTELENMESİNE, 1 yıl denetim süresi belirlenmesine; hükmün tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1) karar verildi.",
       "reasoning": [
         {
-          "text": "Grafoloji raporu ve tanık beyanları sanığın işlemi yaptığını göstermektedir; savunmanın itirazları raporun ispat gücünü tümüyle ortadan kaldıramamıştır."
+          "text": "Soruşturmadaki grafoloji raporu imzanın sanığa ait olduğunu tespit etmiştir; savunmanın itirazları raporun ispat gücünü tümüyle ortadan kaldıramamıştır."
+        },
+        {
+          "when": { "hasEvidence": "ev_rapor2_belirsiz" },
+          "text": "Adli Tıp Kurumu, mukayese imzası yetersiz olduğundan kesin kanaat bildirmemiştir; bu rapor ilk raporu çürütmemektedir."
         },
         {
           "when": { "any": [{ "flag": "contra_g3" }, { "hasEvidence": "ev_kargo" }] },
@@ -499,7 +675,7 @@
     {
       "id": "MAHKUMIYET",
       "class": "CONVICTION",
-      "priority": 6,
+      "priority": 7,
       "when": { "all": [] },
       "stamp": "MAHKÛMİYET",
       "stampTone": "red",
@@ -507,10 +683,29 @@
       "sentence": "2 yıl 6 ay hapis",
       "verdictText": "Sanık Vedat Ateş’in sahte resmî belge düzenleme ve kullanma suçundan TCK 204/1 uyarınca, zararın ağırlığı gözetilerek temel cezanın 3 yıl hapis olarak belirlenmesine; sabıkasızlığı lehine takdiri indirim nedeni sayılarak TCK 62/1 uyarınca 2 yıl 6 ay hapis cezası ile CEZALANDIRILMASINA; cezanın süresi gözetilerek erteleme ve hükmün açıklanmasının geri bırakılması hükümlerinin uygulanmasına yer olmadığına; hükmün tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1) karar verildi.",
       "reasoning": [
+        { "text": "Grafoloji raporuna göre senetteki imza sanığa aittir." },
         {
-          "text": "Grafoloji raporuna göre senetteki imza sanığa aittir; rapora karşı ileri sürülen itirazlar somut bir delille desteklenmemiştir."
+          "when": {
+            "not": {
+              "any": [{ "hasEvidence": "ev_kargo" }, { "flag": "contra_g3" }, { "hasEvidence": "ded_mukayese" }]
+            }
+          },
+          "text": "Rapora karşı ileri sürülen itirazlar somut bir delille desteklenmemiştir."
         },
-        { "text": "Tapu memuru, sanığı işlemi yapan kişi olarak tanımıştır." },
+        {
+          "when": {
+            "any": [{ "hasEvidence": "ev_kargo" }, { "flag": "contra_g3" }, { "hasEvidence": "ded_mukayese" }]
+          },
+          "text": "Savunmanın ileri sürdüğü sol el beyanı, kayıtlar ve mukayese malzemesine ilişkin itirazlar, duruşmada raporun ispat gücünü ortadan kaldıracak biçimde ortaya konulamamıştır."
+        },
+        {
+          "when": { "hasEvidence": "ev_rapor2_belirsiz" },
+          "text": "Adli Tıp Kurumu, mukayese imzası yetersiz olduğundan kesin kanaat bildirmemiştir."
+        },
+        {
+          "when": { "not": { "any": [{ "flag": "contra_g4" }, { "flag": "ob_g4" }] } },
+          "text": "Tapu memuru, sanığı işlemi yapan kişi olarak tanımıştır."
+        },
         { "text": "Sanığın 2024 yılında taşınmazı satmak istediği sabittir." }
       ],
       "legalBasis": "TCK 204/1, 61, 62/1; CMK 231/5; TCK 51/1",

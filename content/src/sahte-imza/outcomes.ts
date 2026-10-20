@@ -67,7 +67,7 @@ T: Sonunda bir çocuğun ağzına, onun olmayan bir cümle koydum. Daha iyi bir 
     outcome('COKUS', {
       class: 'CONVICTION',
       priority: 2,
-      when: flag('cokus'),
+      when: all(flag('cokus'), not(has('ev_rapor2'))),
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
       header: 'TÜRK MİLLETİ ADINA',
@@ -77,6 +77,15 @@ T: Sonunda bir çocuğun ağzına, onun olmayan bir cümle koydum. Daha iyi bir 
         because('Savunma, sunduğu delillerin beyanlarla ilgisini ortaya koyamamış; itirazları dayanaksız kalmıştır.'),
         because(
           'Dosyadaki bilirkişi raporu ve tanık beyanları karşısında aksini gösteren somut bir delil tartışılamamıştır.',
+          not(any(has('ev_kargo'), flag('contra_g3'), has('ev_rapor2_belirsiz'))),
+        ),
+        because(
+          'Dosyaya giren kayıtlar ve beyanlar duruşmada savunmaca birbirine bağlanamamış; soruşturmadaki raporun ispat gücünü sarsacak ağırlıkta görülmemiştir.',
+          any(has('ev_kargo'), flag('contra_g3')),
+        ),
+        because(
+          'Adli Tıp Kurumu, mukayese imzası yetersiz olduğundan kesin kanaat bildirmemiştir; bu rapor ilk raporla çelişmemektedir.',
+          has('ev_rapor2_belirsiz'),
         ),
       ],
       legalBasis: 'TCK 204/1, 61, 62/1; CMK 231/5; TCK 51/1',
@@ -144,7 +153,7 @@ N: Yağmur dinmişti. Adliyenin merdivenleri ıslak parlıyordu; Uludağ’ın �
 N: Nermin Kurt merdivenin başında bekliyordu. Elinde bir ilaç poşeti. Vedat’ı görünce bir adım attı; sonra bir adım daha.
 nermin.uzgun: Kardeşim… Ben sana… Ben şikâyet ettim. Ben senin adına bir şikâyet yazdım.
 vedat: Biliyorum abla. Kâğıt yalan söylemiyordu; kâğıdı tutan el söylüyordu.
-nermin: Halit ölünce onu ben de büyüttüm. Okul harçlarını ben ödedim. Elini öğretmen bağlardı, annem çözerdi.
+nermin: O çocuğu küçükken ben de büyüttüm. Okul harçlarını ben ödedim. Elini öğretmen bağlardı, annem çözerdi.
 N: İkisi de bir süre konuşmadı. Sonra Nermin poşetten bir kutu ilaç çıkardı ve Vedat’a uzattı.
 nermin: Annemin. Pazar sen götürürsün. Perdesini de soruyor; sana söylesin.
 `),
@@ -178,7 +187,9 @@ N: Hayriye Hanım her pazar Halit’e çorba koymaya devam ediyor. Evinin yerind
       when: all(
         not(flag('cokus')),
         not(flag('closing_indirim')),
-        any(has('ev_rapor2'), all(flag('contra_g3'), has('ded_mukayese'))),
+        has('ded_mukayese'),
+        any(has('ev_rapor2'), flag('contra_g3')),
+        any(flag('contra_g3'), has('ded_mazeret'), flag('contra_e4'), flag('mazeret_tanik')),
         cmp(v('pers'), '>=', 6),
         finalAtLeast(T_BERAAT),
       ),
@@ -226,6 +237,8 @@ vedat: Kâğıtta. Evet. Ben kâğıda inanırım. Bir ömür inandım.
 N: Merdivenlerden inerken bir an durdu. Elini, sağ elini, tırabzana koydu; mürekkebin izleri hâlâ tırnaklarının dibindeydi.
 vedat: Yarın dükkânı açacağım. Bir düğün davetiyesi var; bir çift evleniyor. Kâğıdı ben seçeceğim, harfleri ben dizeceğim. İsimlerini ben basacağım.
 vedat: Bir ismi basmak kolaydır avukat hanım. Bir ismin altına imza atmak, onu taşımaktır. Ben kendi adımı yeniden taşımayı öğreneceğim.
+N: Adliyenin önünde bir simitçi tezgâhını açıyordu. Vedat iki simit aldı; birini bana uzattı, birini Sevgi’ye. Kendine almadı.
+vedat: Beş aydır boğazımdan bir şey geçmiyor. Yarın geçer belki. Yarın dükkânda, makinenin başında.
 `),
         W(
           has('ded_randevu'),
@@ -245,6 +258,8 @@ leyla: Kâğıtlarda bir numara gördün mü? Bir randevu kaydı? Bir tutanak? G
 P: Ben bir müvekkili savundum Leyla Hanım. Bir faili aramadım.
 leyla: Doğru. Bunu da kendine söylemeyi öğreneceksin. Her gece biraz daha kolay olur. Hiçbir gece tamamen kolay olmaz.
 N: Gitti. Kurşun harfler masamda duruyordu: Ş, E, T, A. Kâğıda basılınca ATEŞ.
+N: Pencereyi açtım. Yağmur dinmiş, sokak lambaları ıslak asfalta uzun sarı çizgiler bırakmıştı. Bir yerde bir köpek havladı, sonra sustu.
+N: Dosyayı kapadım ve dolaba kaldırdım. Etiketine kendi el yazımla “Ateş · Beraat” yazdım. Harflerim sağa yatıktı; elim titremiyordu.
 T: Bir imzayı sahibinden ayırdım. Kimin eline ait olduğunu bulamadım. Bu dosyada bir el hâlâ havada duruyor; bir kalem tutar gibi.
 N: Telefon titredi. Sevgi’den bir mesaj: “Vedat dükkânı açtı. Makineyi çalıştırdı. Bir düğün davetiyesi basıyor; isimleri kendisi diziyor.”
 N: Bir dakika sonra ikinci mesaj: “Tarık bugün gelmedi. Telefonu kapalı.”
@@ -254,10 +269,79 @@ N: Vedat Ateş beraat etti. Hisar’daki evin tapusu hâlâ Erol Kılınç adın
 `),
       ],
     }),
+    outcome('UST_KURUL', {
+      class: 'OTHER',
+      priority: 5,
+      when: has('ev_rapor2'),
+      stamp: 'KARAR YOK',
+      stampTone: 'amber',
+      header: 'ARA KARAR',
+      sentence: 'Dosya Adli Tıp kurulunda · duruşma ertelendi',
+      verdictText:
+        'Mahkemece, soruşturmada alınan grafoloji raporu ile Adli Tıp Kurumu raporu arasındaki çelişkinin giderilmesi için dosyanın Adli Tıp Kurumu Fizik İhtisas Kurulu’na gönderilmesine; Adli Tıp raporu gözetilerek sanık hakkındaki adli kontrol tedbirinin kaldırılmasına; duruşmanın kurul raporunun gelmesine kadar ertelenmesine karar verildi.',
+      reasoning: [
+        because(
+          'Adli Tıp Kurumu raporuna göre senet ve makbuzdaki imzalar sanığın resmî mukayese imzalarıyla uyumsuzdur; soruşturmadaki rapor ise aynı elin ürünü olduğunu söylemektedir.',
+        ),
+        because(
+          'İki bilirkişi raporu arasındaki çelişki giderilmeden hüküm kurulamaz; çelişki üst düzey bir kuruldan rapor alınarak giderilmelidir (CMK 63, 67, 217).',
+        ),
+        because(
+          'Raporlar arasındaki çelişkiyi açıklayacak ve imzayı sanıktan ayıracak başka bir delil duruşmada tartışılmamıştır.',
+          not(any(flag('contra_g3'), has('ded_mazeret'), flag('contra_e4'), flag('mazeret_tanik'))),
+        ),
+        because(
+          'Savunma, dosyadaki delilleri duruşmada beyanlarla ilişkilendirememiştir; mahkeme çelişkiyi kendiliğinden çözme yoluna gitmemiştir.',
+          any(flag('contra_g3'), has('ded_mazeret'), flag('contra_e4'), flag('mazeret_tanik')),
+        ),
+      ],
+      legalBasis: 'CMK 63, 67, 68, 217',
+      xp: xp(0.7, { ethicsVar: 'ethics' }),
+      howToReach:
+        'Adli Tıp raporunu aldın; tek başına bırakma. Kürsüde sol el beyanını, mazereti ve kirli mukayeseyi rapora bağla; dayanaklarını ve esas savunmanı bunların üstüne kur.',
+      epilogue: [
+        O(`
+hakim: Ara karar…
+N: “Fizik İhtisas Kurulu’na gönderilmesine… adli kontrol tedbirinin kaldırılmasına… ertelenmesine.” Vedat kelimeleri duydu; hangisinin iyi, hangisinin kötü olduğunu bilemedi.
+N: Kâtip ara kararı yazdırdı. Hâkim dosyayı kapadı, bir sonrakini açtı. Bir aile salonun ortasında, ne kazanmış ne kaybetmiş, ayakta kaldı.
+C#adliye: ADLİYE KORİDORU · ÖĞLEDEN SONRA
+vedat: Kurul. Bir kurul daha. Bir kâğıt daha avukat hanım. Kaç ay?
+P: Birkaç ay. Belki daha fazla. Ama imzayı tutmanız gerekmiyor artık; karakola da gitmeyeceksiniz.
+vedat: Karakol değil mesele. Mahalle. Dükkâna gelen müşteri. “Sahtekâr Vedat” daha birkaç ay. Kurul ne der, mahalle onu duymaz.
+`),
+        W(
+          cmp(v('mutalaa'), '==', 'BERAAT'),
+          `
+N: Savcı beraat istemişti. Hâkim mütalaayla bağlı değildi; iki raporla da. Bir üçüncüsünü istedi.
+T: Savcıyı ikna eden kâğıtlar, hâkimi yalnız bıraktı. Kâğıtları ben konuşturmalıydım; konuşturmadım.
+`,
+        ),
+        W(
+          flag('cokus'),
+          `
+N: Savcı merdivenlerde yanımdan geçti; durmadı. Hâkimin sesi hâlâ kulağımdaydı: “Savunmanızı yazılı olarak verin.”
+T: Bir rapor bu dosyayı kurtardı; ben neredeyse batırıyordum. Kâğıtlar benden iyi avukattı.
+`,
+        ),
+        O(`
+N: Sevgi kocasının koluna girdi. Koridorun ucunda Tarık bekliyordu; Doblo’nun anahtarı elinde. Sevgi bir an durdu, sonra yürüdü.
+C#depo: ATEŞ MATBAASI · AKŞAM
+N: Vedat kepengi kaldırdı. Makineyi çalıştırmadı. Kurşun harf kasasının başında durdu; bir harf aldı, avucunda tarttı, geri koydu.
+vedat: Babam derdi ki: baskıya girmeden önce son bir prova alınır. Prova temizse basarsın. Benim provam bir kurulda.
+C#buro_gece: ARSLAN HUKUK · GECE
+leyla: Bir rapor kazandın. Davayı kazanmak için onu konuşturman gerekiyordu. Bir hâkim iki raporun arasında yalnız kalırsa, üçüncü bir rapor ister.
+leyla: Raporun yanına bir tanık koy, bir kayıt koy, bir zincir koy. Sonra hâkim yalnız kalmaz.
+P: Kurul raporu gelince yeniden kürsüye çıkacağız.
+leyla: Çıkacaksınız. O gün kâğıtlarını sırala; bugünkü gibi değil.
+C: SON
+N: Dosya Adli Tıp Kurumu Fizik İhtisas Kurulu’nda. Vedat Ateş hakkında adli kontrol kaldırıldı. Hisar’daki ev hâlâ Erol Kılınç adına kayıtlı.
+`),
+      ],
+    }),
     outcome('INDIRIM', {
       class: 'REDUCED',
-      priority: 5,
-      when: all(not(flag('cokus')), cmp(v('pers'), '>=', 3), finalAtLeast(T_INDIRIM)),
+      priority: 6,
+      when: all(not(flag('cokus')), not(has('ev_rapor2')), cmp(v('pers'), '>=', 3), finalAtLeast(T_INDIRIM)),
       stamp: 'İNDİRİM',
       stampTone: 'amber',
       header: 'TÜRK MİLLETİ ADINA',
@@ -265,7 +349,11 @@ N: Vedat Ateş beraat etti. Hisar’daki evin tapusu hâlâ Erol Kılınç adın
       verdictText: `Sanık Vedat Ateş’in sahte resmî belge düzenleme ve kullanma suçundan TCK 204/1 uyarınca alt sınırdan 2 yıl hapis cezası ile cezalandırılmasına; sabıkasızlığı ve duruşmadaki hâli lehine takdiri indirim nedeni sayılarak TCK 62/1 uyarınca 1 yıl 8 ay hapis cezası ile CEZALANDIRILMASINA; zarar giderilmediğinden hükmün açıklanmasının geri bırakılmasına yer olmadığına (CMK 231/6-c); cezanın TCK 51/1 uyarınca ERTELENMESİNE, 1 yıl denetim süresi belirlenmesine; ${istinaf} karar verildi.`,
       reasoning: [
         because(
-          'Grafoloji raporu ve tanık beyanları sanığın işlemi yaptığını göstermektedir; savunmanın itirazları raporun ispat gücünü tümüyle ortadan kaldıramamıştır.',
+          'Soruşturmadaki grafoloji raporu imzanın sanığa ait olduğunu tespit etmiştir; savunmanın itirazları raporun ispat gücünü tümüyle ortadan kaldıramamıştır.',
+        ),
+        because(
+          'Adli Tıp Kurumu, mukayese imzası yetersiz olduğundan kesin kanaat bildirmemiştir; bu rapor ilk raporu çürütmemektedir.',
+          has('ev_rapor2_belirsiz'),
         ),
         because(
           'Tapu memurunun sol el beyanı ve mazerete ilişkin kayıtlar şüphe doğurmuş, ancak mahkemece yeterli görülmemiştir.',
@@ -302,7 +390,7 @@ N: İstinaf dilekçesi on dört gün içinde verildi. Hisar’daki ev hâlâ Ero
     }),
     outcome('MAHKUMIYET', {
       class: 'CONVICTION',
-      priority: 6,
+      priority: 7,
       when: { all: [] },
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
@@ -310,10 +398,20 @@ N: İstinaf dilekçesi on dört gün içinde verildi. Hisar’daki ev hâlâ Ero
       sentence: '2 yıl 6 ay hapis',
       verdictText: `Sanık Vedat Ateş’in sahte resmî belge düzenleme ve kullanma suçundan TCK 204/1 uyarınca, zararın ağırlığı gözetilerek temel cezanın 3 yıl hapis olarak belirlenmesine; sabıkasızlığı lehine takdiri indirim nedeni sayılarak TCK 62/1 uyarınca 2 yıl 6 ay hapis cezası ile CEZALANDIRILMASINA; cezanın süresi gözetilerek erteleme ve hükmün açıklanmasının geri bırakılması hükümlerinin uygulanmasına yer olmadığına; ${istinaf} karar verildi.`,
       reasoning: [
+        because('Grafoloji raporuna göre senetteki imza sanığa aittir.'),
         because(
-          'Grafoloji raporuna göre senetteki imza sanığa aittir; rapora karşı ileri sürülen itirazlar somut bir delille desteklenmemiştir.',
+          'Rapora karşı ileri sürülen itirazlar somut bir delille desteklenmemiştir.',
+          not(any(has('ev_kargo'), flag('contra_g3'), has('ded_mukayese'))),
         ),
-        because('Tapu memuru, sanığı işlemi yapan kişi olarak tanımıştır.'),
+        because(
+          'Savunmanın ileri sürdüğü sol el beyanı, kayıtlar ve mukayese malzemesine ilişkin itirazlar, duruşmada raporun ispat gücünü ortadan kaldıracak biçimde ortaya konulamamıştır.',
+          any(has('ev_kargo'), flag('contra_g3'), has('ded_mukayese')),
+        ),
+        because(
+          'Adli Tıp Kurumu, mukayese imzası yetersiz olduğundan kesin kanaat bildirmemiştir.',
+          has('ev_rapor2_belirsiz'),
+        ),
+        because('Tapu memuru, sanığı işlemi yapan kişi olarak tanımıştır.', not(any(flag('contra_g4'), flag('ob_g4')))),
         because('Sanığın 2024 yılında taşınmazı satmak istediği sabittir.'),
       ],
       legalBasis: 'TCK 204/1, 61, 62/1; CMK 231/5; TCK 51/1',

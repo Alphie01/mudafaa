@@ -188,6 +188,60 @@ c T_BITIR
 c CAY_KAYIT
 `);
 
+// Çöküş yolu: bilirkişi talebi yok (dilekçede ve kürsüde); Adli Tıp raporu dosyaya girmez.
+const GUN4_NB = A(`
+c H_DIL
+c DIL_KARGO
+c DIL_TUTANAK
+c DIL_VER
+c H_HISAR
+c FQ_ARAC
+c FQ_HAYRIYE
+c FQ_EV
+t OB_DOSYA
+t OB_AILE
+t OB_RUHSAT
+t OB_DEFTER
+c ARAMA_H_BITIR
+c H_LEYLA
+c LEYLA_DON
+c H_HUZUR
+c HQ_ESLIK
+c HAYRIYE_BITIR
+c H_DURUSMA
+c GECE_DEVAM
+`);
+
+const CELSE1_NB = A(`
+c C100K_A
+c C100_DEVAM
+c C101_DEVAM
+c Q_KIMLIK
+c Q_EL
+c Q_KURYE
+c Q_ANNE
+c Q_BITIR
+c C103_A
+c C103N_A
+p G1
+s ded_kimlik G1
+p G2
+s ded_suret_sahte G2
+p G3
+s ded_solak G3B
+c C104K_DEVAM
+p G4
+s ev_senet G4
+o g_salon G4
+p G5
+o g_kanaat G5
+c C104_BITIR
+c C105_C
+c T_RANDEVU
+c T_BITIR
+c CAY_KAYIT
+`);
+
 const ARA1 = A(`
 c ARA_GIRIS_DEVAM
 c A_KARGO
@@ -271,6 +325,55 @@ c ARG_MAZERET
 c ARG_TAMAM
 c C206_M
 c C207_A
+`);
+
+const CELSE1_UK = A(`
+c C100K_A
+c C100_DEVAM
+c C101_DEVAM
+c Q_KIMLIK
+c Q_EL
+c Q_KURYE
+c Q_ANNE
+c Q_BITIR
+c C103_A
+c C103N_A
+p G1
+s ded_kimlik G1
+p G2
+s ded_suret_sahte G2
+p G4
+s ev_senet G4
+c C104_BITIR
+c C105_A
+c T_RANDEVU
+c T_BITIR
+c CAY_KAYIT
+`);
+
+// Üst kurul: Adli Tıp raporu dosyada; ama ikinci celsede hiçbir çelişki kürsüye taşınmıyor, savunma dağınık.
+const CELSE2_UK = A(`
+c C200_DEVAM
+c C201_B
+p E1
+p E2
+p E3
+p E4
+c C202_BITIR
+c C203C_B
+p T1
+p T4
+p T5
+c C203_BITIR
+c TENEFFUS_DEVAM
+c C204A_B
+c C205B_DEVAM
+c ARG_KIMLIK
+c ARG_SURET
+c ARG_IYI
+c ARG_TAMAM
+c C206_T
+c C207_B
 `);
 
 const ARA2_B = A(`
@@ -765,16 +868,29 @@ c SABAH_DEVAM
       ),
       goldenPath(
         'COKUS',
-        { outcome: 'COKUS', finalMin: 6626, finalMax: 7323 },
+        { outcome: 'COKUS', finalMin: 6427, finalMax: 7103 },
+        PROLOG('BR00_DINLE', 'STR_MASUMIYET'),
+        GUN1,
+        GUN2,
+        GUN3,
+        GUN4_NB,
+        CELSE1_NB,
+        ARA1,
+        ARA2_E,
+        CELSE2_COKUS,
+      ),
+      goldenPath(
+        'UST_KURUL',
+        { outcome: 'UST_KURUL', finalMin: 7538, finalMax: 8332 },
         PROLOG('BR00_DINLE', 'STR_MASUMIYET'),
         GUN1,
         GUN2,
         GUN3,
         GUN4,
-        CELSE1,
+        CELSE1_UK,
         ARA1,
         ARA2_E,
-        CELSE2_COKUS,
+        CELSE2_UK,
       ),
     ],
   },

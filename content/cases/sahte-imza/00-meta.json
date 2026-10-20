@@ -13,7 +13,7 @@
     "estimatedMinutes": 105,
     "summary": "Bir matbaacının demanslı annesinin evi, satış yetkisi eklenmiş sahte bir noter sureti ve onun adına atılmış bir imzayla satıldı. Bilirkişi “aynı elin ürünü” diyor. Matbaacı o sabah dükkânında olduğunu, kimliğini bile bulamadığını söylüyor. Bir imza kime aittir: adı yazana mı, kalemi tutana mı?",
     "coverCharacter": "vedat",
-    "legalReview": { "status": "APPROVED", "by": "Claude (iç inceleme)", "at": "2026-10-20" }
+    "legalReview": { "status": "APPROVED", "by": "Claude (iç inceleme)", "at": "2026-10-21" }
   },
   "config": {
     "startNode": "PR_00",
@@ -345,6 +345,7 @@
     { "id": "arg_rapor", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "arg_solak", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "arg_suret", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "bk_gerekce", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "closing_indirim", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "closing_masumiyet", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "closing_terdit", "type": "bool", "initial": false, "visibility": "HIDDEN" },

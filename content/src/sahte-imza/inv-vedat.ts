@@ -34,6 +34,8 @@ C#depo: ATEŞ MATBAASI — ARKA ODA
 N: Arka oda bir depo, bir mutfak ve bir ofisin karışımıydı. Tavana kadar kâğıt topları, bir semaver, bir masa, masanın üstünde bir hesap makinesi.
 N: Vedat önlüğünü çıkarmadan oturdu. Ellerini masanın altına sakladı; sonra fark edip masanın üstüne koydu. Tırnaklarının dibi maviydi.
 vedat: Yarım saatim var avukat hanım. Sonra bir düğün davetiyesi baskısı. Kusura bakmayın; iş durmuyor, dava da durmuyor.
+N: Duvarda sararmış bir takvim, 1987 yılından; üstünde bir kâğıt fabrikasının reklamı. Yanında yeni bir takvim; ikisi de aynı çiviye asılmış.
+T: Bir dükkân zamanını atmıyor. Üst üste asıyor. Bu adam da öyle; hiçbir şeyi atmıyor, hiçbir şeyi unutmuyor. Bir imza dışında.
 T: Yarım saat. Bir adamın beş ayını yarım saate sığdırmam gerekiyor. Ne soracağımı seçmeliyim; her şeyi soramam.
 `,
     ),
@@ -147,7 +149,7 @@ T: Öfkesi bir cevap verdi. Kimlik bir gece kayboldu ve bir gece geri döndü. A
           prompt: 'Anneniz nasıl biri? Ev onun için ne demek?',
           says: S(`
 vedat.uzgun: Terziydi. Kırk yıl. O evin cumbasında oturur, Hisar’ın yokuşuna bakarak dikerdi. Gelinlikler, takım elbiseler. Babamın cenaze takımını o dikti.
-vedat: Şimdi beni bazen babam sanıyor. Bazen Halit ağabeyim. Halit on iki yıl önce öldü; kalp. Annem her pazar ona da çorba koyuyor masaya.
+vedat: Şimdi beni bazen babam sanıyor. Bazen Halit ağabeyim. Halit on dört yıl önce öldü; kalp. Annem her pazar ona da çorba koyuyor masaya.
 vedat: Ev onun her şeyi. Satıldığını bilmiyor. Bilmesin. Bilirse bir daha ayağa kalkmaz.
 T: Bir evi satan oğul, annesinin evi satıldığını bilmemesini isteyen oğuldur. İkisi aynı adam olabilir mi? Olabilir. Ama yorgun bir ihtimal.
 `),

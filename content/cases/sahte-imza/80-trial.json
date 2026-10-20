@@ -36,6 +36,19 @@
             {
               "speaker": "narrator",
               "text": "Aynı koridor, aynı sigara kokusu. Bu kez yağmur dinmişti; pencerelerden soluk bir kasım güneşi giriyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kapının önünde iki kurye, bir aile, bir avukat; herkes aynı tahta sıraya sığmaya çalışıyordu. Mübaşir listeyi duvara bantladı. Ateş dosyası üçüncü sıradaydı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla merdivenlerin başında durdu, bana bir dosya uzattı: Yargıtay kararlarının fotokopileri, kenarlarında kurşun kalemle notlar. Sonra hiçbir şey demeden aşağı indi."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla duruşmalarıma girmez; ama bir dosya bırakır. Dosyanın en üstünde tek bir cümlenin altı çizilmişti: “Raporlar arasındaki çelişki giderilmeden hüküm kurulamaz.”",
+              "style": "thought"
             }
           ]
         }
@@ -86,6 +99,7 @@
       "background": "durusma_salonu",
       "onEnter": [
         { "type": "DISCOVER", "evidence": "ev_rapor2" },
+        { "type": "DISCOVER", "evidence": "ev_rapor2_belirsiz" },
         { "type": "DISCOVER", "evidence": "ev_rapor2_ek" }
       ],
       "lines": [
@@ -107,6 +121,10 @@
             {
               "speaker": "narrator",
               "text": "Nermin Kurt ön sırada oturuyordu; bu kez kardeşinin arkasında. Sevgi ikinci sırada. Tanık sırasında bir kurye yeleği, bir altın zincir."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kâtip Melek bana başıyla selam verdi; üç hafta önce vermemişti. Mahkeme salonlarında küçük şeyler değişir. Bir selam, bir bakış, bir dosyanın kalınlığı."
             }
           ]
         }
@@ -133,6 +151,10 @@
           "lines": [
             {
               "speaker": "hakim",
+              "text": "Ara kararımızdaki ivedilik şerhi üzerine Adli Tıp raporunu süresinden önce gönderdi. Savcılık da ayrı soruşturmadaki örnekleri aynı incelemeye eklemiş."
+            },
+            {
+              "speaker": "hakim",
               "text": "Adli Tıp Kurumu Fizik İhtisas Dairesi raporu geldi. Senet ve kapora makbuzundaki imzalar sanığın resmî mukayese imzalarıyla uyumsuz; sanığın el ürünü değil."
             },
             {
@@ -150,6 +172,10 @@
           "lines": [
             {
               "speaker": "hakim",
+              "text": "Ara kararımızdaki ivedilik şerhi üzerine Adli Tıp raporunu süresinden önce gönderdi."
+            },
+            {
+              "speaker": "hakim",
               "text": "Adli Tıp Kurumu Fizik İhtisas Dairesi raporu geldi. Senet ve kapora makbuzundaki imzalar sanığın resmî mukayese imzalarıyla uyumsuz; sanığın el ürünü değil."
             },
             {
@@ -159,6 +185,28 @@
             {
               "speaker": "narrator",
               "text": "Vedat bana döndü. Gözleri doluydu. Elini, sağ elini, masanın üstüne koydu ve bıraktı."
+            }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "ev_rapor2_belirsiz" },
+          "lines": [
+            {
+              "speaker": "hakim",
+              "text": "Adli Tıp Kurumu raporu geldi. Mahkemece gönderilen tek resmî mukayese imzası nüfus kaydındaki 2019 tarihli imza."
+            },
+            {
+              "speaker": "hakim",
+              "text": "Rapora göre senetteki imzada bu imzadan farklı özellikler var; ancak mukayese imzası sayıca yetersiz olduğundan kesin kanaate varılamamış. Ek örnek istenmiş."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı raporu yarıya kadar okudu ve bıraktı. Vedat bana baktı; “kesin değil” kelimelerini dudaklarıyla tekrarladı."
+            },
+            {
+              "speaker": "player",
+              "text": "Rapor, istediğim şeyi okumuş; istemediğim şeyi değil. Neyi istemem gerektiğini tam söylememiştim.",
+              "style": "thought"
             }
           ]
         },
@@ -207,6 +255,12 @@
             {
               "speaker": "savci",
               "text": "Sayın Hâkim, kayıt sanığın orada olduğunu değil, terminale birinin imza attığını gösterir."
+            },
+            { "speaker": "hakim", "text": "Not edildi Sayın Savcı. Kaydı tanıkla birlikte değerlendireceğim." },
+            {
+              "speaker": "player",
+              "text": "Savcı haklıydı; bir kayıt bir insanı göstermez. Ama bir kayıt, bir insanın anlattığı sabahı doğrulayabilir. O insanı kürsüye getirmek benim işimdi.",
+              "style": "thought"
             }
           ]
         },
@@ -317,7 +371,7 @@
         {
           "id": "C201_A",
           "kind": "OPTION",
-          "label": "“18 Şubat sabahı Ateş Matbaası’nda ne gördüğünüzü anlatır mısınız?”",
+          "label": "“18 Şubat sabahı Ateş Matbaası’nda neler gördünüz, anlatır mısınız?”",
           "responses": [
             {
               "lines": [
@@ -411,7 +465,28 @@
             }
           ]
         },
-        { "lines": [{ "speaker": "savci", "text": "Sorum yok Sayın Hâkim. Kayıt kendi kendini anlatıyor." }] }
+        {
+          "lines": [
+            {
+              "speaker": "hakim",
+              "text": "Tanık, o sabah dükkânda başka birini gördünüz mü? Camlı odada, arka tarafta?"
+            },
+            {
+              "speaker": "sinan",
+              "text": "Görmedim Sayın Hâkim. Camlı odanın ışığı kapalıydı. Usta “bugün tek başımayım, herkes bir yerde” dedi; çayı da o yüzden kendisi koydu."
+            },
+            { "speaker": "hakim", "text": "Teslim imzasını kim attı?" },
+            {
+              "speaker": "sinan",
+              "text": "Usta. Parmağıyla, ekrana. Sol elinde bant vardı; bandı bırakmadı, sağ elinin parmağıyla attı. Güldü, “kalem olsa daha güzel atardım” dedi."
+            },
+            { "speaker": "savci", "text": "Sorum yok Sayın Hâkim. Kayıt kendi kendini anlatıyor." },
+            {
+              "speaker": "narrator",
+              "text": "Sinan kürsüden inerken yeleğini koltuğunun altından aldı, katladı, yeniden katladı. Vedat’ın önünden geçerken başıyla selam verdi; Vedat da."
+            }
+          ]
+        }
       ],
       "routes": [{ "to": "C2_02" }],
       "choices": []
@@ -436,6 +511,15 @@
             {
               "speaker": "narrator",
               "text": "Erol kürsüye bir düğüne girer gibi girdi. Takım elbise, altın zincir yakanın altına saklanmış, tespih cebinde."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Geçerken savcıya başıyla selam verdi, hâkime eğildi, bana gülümsedi. Herkese ayrı bir yüz; bir emlakçının vitrini gibi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bu adam bir evi on dakikada satar. Bugün kendini satmaya geldi. Fiyatını kâğıtlar belirleyecek.",
+              "style": "thought"
             },
             { "speaker": "hakim", "text": "Yemininizi edin. Olayı anlatın." },
             {
@@ -1096,7 +1180,7 @@
         {
           "id": "C203C_A",
           "kind": "OPTION",
-          "label": "“Tanığa tanıklıktan çekinme ve kendini suçlayan sorulara cevap vermeme hakları hatırlatılsın.”",
+          "label": "“Dinlemeden önce tanığın çekinme hakkı hatırlatılsın.”",
           "responses": [
             {
               "lines": [
@@ -1128,7 +1212,7 @@
         {
           "id": "C203C_B",
           "kind": "OPTION",
-          "label": "“Tanığa yemin ettirilsin; akraba da olsa doğruyu söylesin.”",
+          "label": "“Tanık sanığın yakını; yeminsiz dinlenmesini ve beyanının takdirde gözetilmesini istiyoruz.”",
           "responses": [
             {
               "lines": [
@@ -1143,14 +1227,14 @@
           "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": -30 }],
           "quality": {
             "q": "NEUTRAL",
-            "feedback": "Yemin önemlidir; ama önce çekinme hakkının hatırlatılması gerekir (CMK 45/2). Hâkim bunu kendisi yaptı."
+            "feedback": "Yeminden çekinmek tanığın hakkıdır (CMK 51), müdafiin talebi değil; önce çekinme hakkının hatırlatılması gerekir (CMK 45/2). Hâkim bunu kendisi yaptı."
           },
           "next": "C2_03"
         },
         {
           "id": "C203C_C",
           "kind": "OPTION",
-          "label": "“Tanık olarak değil, şüpheli olarak dinlenmesini istiyoruz.”",
+          "label": "“Tanık değil, şüpheli olarak dinlensin.”",
           "responses": [
             {
               "lines": [
@@ -1192,6 +1276,10 @@
         {
           "lines": [
             { "speaker": "hakim", "text": "Anlatın." },
+            {
+              "speaker": "narrator",
+              "text": "Kürsüde bir bardak su vardı. Tarık bardağa dokunmadı; elleri önünde, parmakları birbirine geçmiş."
+            },
             {
               "speaker": "tarik",
               "text": "Ben on dört yıldır amcamın yanındayım. Dükkân benim evim. Amcam dürüst adamdır; bir kâğıda bile yanlış tarih atmaz."
@@ -1724,6 +1812,10 @@
               "text": "Vedat sağ elini masanın üstüne koydu. Sonra sol elini. İkisine birden baktı."
             },
             {
+              "speaker": "narrator",
+              "text": "Sevgi gözlerini kapamıştı. Nermin, yeğeninin çıktığı kapıya bakıyordu; dudakları bir isim söyler gibi kıpırdadı, ses çıkmadı."
+            },
+            {
               "speaker": "player",
               "text": "Bir sessizlik bir delil değildir. Ama sorulmuş sorular tutanakta kalır. Ve cevapsız kalan her soru, kendi cevabını bir yere yazar.",
               "style": "thought"
@@ -1781,6 +1873,23 @@
               "speaker": "nermin",
               "text": "Bizim ailede herkes birini korumak için yalan söylüyor. Bir tek kâğıtlar söylemiyor."
             },
+            {
+              "speaker": "vedat",
+              "text": "Babam da öyle derdi. “Kâğıt yalan söylemez, Vedat; kâğıdı basan söyler.” Ben de otuz yıl kimseye yalan basmadım abla."
+            },
+            {
+              "speaker": "nermin",
+              "text": "Biliyorum. Ben şikâyeti yazarken de biliyordum. Ama bir isim vardı tapuda; senin ismin. Ben o ismi okudum. Seni okumadım."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Vedat cevap vermedi. Cebinden bir mendil çıkardı, gözlüğünü sildi; gözlüğü yoktu. Mendili geri koydu."
+            },
+            {
+              "speaker": "nermin",
+              "text": "Annem perdeyi soruyor. Mavi perde. Ben de “yıkattım” diyorum. Her hafta yıkattığım bir perde. Ne zaman bitecek bu?"
+            },
+            { "speaker": "vedat", "text": "Bitince biter abla. Kâğıtlar bitirir. Biz değil." },
             {
               "speaker": "narrator",
               "text": "Sevgi elinde üç bardak suyla geldi. Birini Vedat’a, birini Nermin’e verdi. Üçüncüyü kendisi tutmadı; bana uzattı."
@@ -1844,7 +1953,7 @@
         {
           "id": "C204A_A",
           "kind": "OPTION",
-          "label": "“Adli Tıp resmî imzalarla baktı: imzalar sanığın değil. İlk rapor kirli mukayeseye dayanıyor; hükme esas alınamaz.”",
+          "label": "“Adli Tıp resmî imzalarla baktı; ilk rapor kirli mukayeseye dayanıyor.”",
           "responses": [
             {
               "lines": [
@@ -1859,6 +1968,10 @@
                 {
                   "speaker": "player",
                   "text": "Suretin matbaada basılmış olması, onu kimin bastığını söylemez. Dükkânın ortak bilgisayarı ve pervazdaki anahtar, herkesin bildiği şeyler."
+                },
+                {
+                  "speaker": "player",
+                  "text": "İki rapor çelişmiyor Sayın Hâkim; aynı şeyi iki ayrı yerden söylüyor. Biri “bu el, o kâğıtları atan el” diyor. Öbürü “o el sanığın eli değil” diyor."
                 },
                 {
                   "speaker": "player",
@@ -1883,7 +1996,7 @@
         {
           "id": "C204A_B",
           "kind": "OPTION",
-          "label": "“Rapor ortada. Başka bir diyeceğimiz yok.”",
+          "label": "“Adli Tıp raporu açık; değerlendirmeyi yüce mahkemenin takdirine bırakıyoruz.”",
           "responses": [
             { "lines": [{ "speaker": "hakim", "text": "Peki. İki rapor arasındaki çelişkiyi mahkeme takdir edecek." }] }
           ],
@@ -1936,11 +2049,12 @@
       "lines": [
         {
           "lines": [
+            { "speaker": "hakim", "text": "Soruşturmadaki grafoloji raporu tartışmaya açıldı. Müdafi, diyeceğiniz?" },
             {
-              "speaker": "hakim",
-              "text": "Dosyada tek imza incelemesi var: soruşturmadaki grafoloji raporu. Müdafi, diyeceğiniz?"
-            },
-            { "speaker": "player", "text": "Rapora rapor koyamadım. Elimde ne varsa onunla.", "style": "thought" }
+              "speaker": "player",
+              "text": "Rapora kesin bir rapor koyamadım. Elimde ne varsa onunla.",
+              "style": "thought"
+            }
           ]
         }
       ],
@@ -1957,7 +2071,7 @@
         {
           "id": "C204B_A",
           "kind": "OPTION",
-          "label": "“Mukayese belgeleri özel ve iki ayrı elden; rapor hükme esas alınamaz.”",
+          "label": "“Mukayese belgeleri iki ayrı elden; rapor hükme esas alınamaz.”",
           "visibleWhen": { "hasEvidence": "ded_mukayese" },
           "responses": [
             {
@@ -1982,14 +2096,55 @@
           "next": "C2_05"
         },
         {
+          "id": "C204B_D",
+          "kind": "OPTION",
+          "label": "“Adli Tıp kesin kanaate varamadı; bu şüphe sanık lehine yorumlanmalı.”",
+          "visibleWhen": {
+            "all": [{ "hasEvidence": "ev_rapor2_belirsiz" }, { "not": { "hasEvidence": "ded_mukayese" } }]
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, Adli Tıp imzanın sanığa ait olduğunu söyleyemedi. Dosyadaki tek “aynı el” tespiti, kaynağı belirsiz özel belgelere dayanıyor."
+                },
+                {
+                  "speaker": "hakim",
+                  "text": "Not edildi. Ama “kesin değil” ile “sanığın değil” aynı şey değil müdafi."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 50 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Doğru bir ilke (CMK 223/2-e); ama “kesin değil” bir rapor, ilk raporu çürütmez. İlk raporun neden güvenilmez olduğunu göstermen gerekiyordu."
+          },
+          "next": "C2_05"
+        },
+        {
           "id": "C204B_B",
           "kind": "OPTION",
-          "label": "“Rapor güvenilir değil.”",
+          "label": "“Rapor CMK 67/3’e aykırı hukuki değerlendirme içeriyor; hükme esas alınmasın.”",
           "responses": [
-            { "lines": [{ "speaker": "hakim", "text": "Neden güvenilir değil müdafi? …Peki. Not edildi." }] }
+            {
+              "lines": [
+                {
+                  "speaker": "hakim",
+                  "text": "Raporda hukuki bir değerlendirme göremiyorum müdafi. …Peki. Not edildi."
+                }
+              ]
+            }
           ],
           "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": 10 }],
-          "quality": { "q": "NEUTRAL", "feedback": "Somut bir dayanak göstermedin." },
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Rapor teknik bir tespit yapıyor; hukuki nitelendirme içermiyor. Somut bir dayanak göstermedin; sorun mukayese malzemesindeydi."
+          },
           "next": "C2_05"
         },
         {
@@ -2053,18 +2208,23 @@
         },
         {
           "when": {
-            "cmp": [
+            "any": [
               {
-                "add": [
-                  { "if": { "when": { "flag": "contra_g3" }, "then": 1, "else": 0 } },
-                  { "if": { "when": { "hasEvidence": "ev_rapor2" }, "then": 1, "else": 0 } },
-                  { "if": { "when": { "hasEvidence": "ded_mukayese" }, "then": 1, "else": 0 } },
-                  { "if": { "when": { "flag": "contra_e4" }, "then": 1, "else": 0 } },
-                  { "if": { "when": { "flag": "contra_e1" }, "then": 1, "else": 0 } }
+                "cmp": [
+                  {
+                    "add": [
+                      { "if": { "when": { "flag": "contra_g3" }, "then": 1, "else": 0 } },
+                      { "if": { "when": { "hasEvidence": "ev_rapor2" }, "then": 1, "else": 0 } },
+                      { "if": { "when": { "hasEvidence": "ded_mukayese" }, "then": 1, "else": 0 } },
+                      { "if": { "when": { "flag": "contra_e4" }, "then": 1, "else": 0 } },
+                      { "if": { "when": { "flag": "contra_e1" }, "then": 1, "else": 0 } }
+                    ]
+                  },
+                  ">=",
+                  2
                 ]
               },
-              ">=",
-              2
+              { "hasEvidence": "ev_rapor2" }
             ]
           },
           "to": "C2_05B"
@@ -2100,6 +2260,10 @@
             {
               "speaker": "narrator",
               "text": "Salonda bir kıpırtı. Nermin Kurt mendilini gözlerine bastırdı. Vedat kıpırdamadı; anlamamış gibi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sevgi arkadan uzanıp kocasının omzuna dokundu. Vedat ancak o zaman başını çevirdi; bir bana, bir savcıya baktı. “Ne dedi?” dedi, sesi duyulmadan."
             },
             {
               "speaker": "player",
@@ -2145,7 +2309,7 @@
             { "speaker": "hakim", "text": "Sayın Savcı, esas hakkındaki mütalaanız?" },
             {
               "speaker": "savci",
-              "text": "Sayın Hâkim. Dosyada sanığın imzasına ilişkin çelişkili deliller var. Tapu memurunun beyanı, sonradan gelen kayıtlar…"
+              "text": "Sayın Hâkim. Dosyada sanığın imzasına ilişkin çelişkili deliller var. Raporlar ve beyanlar aynı yönü göstermiyor."
             },
             {
               "speaker": "savci",
@@ -2190,6 +2354,30 @@
       "background": "durusma_salonu",
       "onEnter": [{ "type": "VAR", "var": "mutalaa", "op": "set", "value": "MAHKUMIYET" }],
       "lines": [
+        {
+          "when": { "hasEvidence": "ev_rapor2_belirsiz" },
+          "lines": [
+            { "speaker": "hakim", "text": "Sayın Savcı, esas hakkındaki mütalaanız?" },
+            {
+              "speaker": "savci",
+              "text": "Sayın Hâkim. Adli Tıp kesin bir kanaat bildirmemiştir; aksini de söylememiştir. Soruşturmadaki rapor ise senetteki imzanın sanığa ait olduğunu tespit etmiştir."
+            },
+            {
+              "speaker": "savci",
+              "text": "Sahte suret sanığın işyerinde basılabilecek niteliktedir. Sanığın 2024’te taşınmazı satmak istediği sabittir."
+            },
+            { "speaker": "savci", "text": "Sanığın TCK 204/1 uyarınca cezalandırılmasını talep ediyorum." },
+            {
+              "speaker": "narrator",
+              "text": "Vedat başını önüne eğdi. Sevgi’nin eli, arkadaki sıradan uzanıp onun omzuna dokundu."
+            },
+            {
+              "speaker": "player",
+              "text": "“Kesin değil” bir rapor, savcının elinde “aksini söylemiyor” bir rapora dönüştü. Kâğıt, kimin okuduğuna göre konuşur.",
+              "style": "thought"
+            }
+          ]
+        },
         {
           "lines": [
             { "speaker": "hakim", "text": "Sayın Savcı, esas hakkındaki mütalaanız?" },
@@ -2480,6 +2668,10 @@
               "text": "Ayağa kalktım. Cübbemin kolları her zamankinden ağırdı. Salonda bir tek kâtibin klavyesi."
             },
             {
+              "speaker": "narrator",
+              "text": "Arka sırada Sevgi ellerini dizlerinin üstünde birleştirmişti; bir öğrencisinin sözlüsünü dinleyen öğretmen gibi. Nermin önüne bakıyordu."
+            },
+            {
               "speaker": "player",
               "text": "Ne istiyorum? Bunu yüksek sesle söylemeden önce kendime söylemeliyim.",
               "style": "thought"
@@ -2519,6 +2711,14 @@
                 {
                   "speaker": "player",
                   "text": "Savcılık bir sebep gösterdi: bir bayram sofrasında söylenmiş bir cümle. Bir cümle, bir kâğıdı basmaz. Bir kimliği bir ceketten almaz. Bir zinciri germez."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bu dosyada herkes bir kâğıda inandı. Tapu memuru sisteme, bilirkişi önüne konan irsaliyelere, savcılık rapora. Kimse kâğıdı tutan ele bakmadı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bugün baktık Sayın Hâkim. Bir tapu memurunun hafızası, bir kuryenin sabahı, bir kurumun raporu; üçü de aynı şeyi söylüyor."
                 },
                 {
                   "speaker": "player",
@@ -2672,6 +2872,10 @@
             {
               "speaker": "narrator",
               "text": "Hâkim not almayı bıraktı. Bir rapor ve bir zincir; ikisini birbirine bağlayan bir sağ el. Kalemi masaya koydu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı dosyasının bir sayfasını çevirdi, sonra geri çevirdi. Kâtip son cümlemi yazarken bir an durdu ve okudu; kâtipler okumaz, yazar."
             }
           ]
         },
@@ -2720,7 +2924,19 @@
         {
           "lines": [
             { "speaker": "hakim", "text": "Sanık, son sözünüz?" },
-            { "speaker": "narrator", "text": "Vedat ayağa kalktı. Bana baktı; bir şey söylememi bekler gibi." }
+            {
+              "speaker": "narrator",
+              "text": "Salon sessizleşti. Kâtip ellerini klavyeden çekti; son sözü yazmak için bekledi. Pencerenin önünden bir güvercin geçti, gölgesi kürsünün üstünden kaydı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Vedat ayağa kalktı. Ceketinin önünü ilikledi; bir düğmeyi atladı, fark etmedi. Bana baktı; bir şey söylememi bekler gibi."
+            },
+            {
+              "speaker": "player",
+              "text": "Son söz sanığındır. Benim değil. Benim işim bitti; şimdi sıra, beş aydır kimsenin dinlemediği bir sesin.",
+              "style": "thought"
+            }
           ]
         }
       ],
@@ -2831,6 +3047,15 @@
               "speaker": "narrator",
               "text": "Hâkim kararı açıklamak için yarım saat ara verdi. Koridorda Sevgi Vedat’ın elini tutuyordu. “Annem perdesini soruyor.” Bu cümle salonda kalmıştı."
             },
+            {
+              "speaker": "narrator",
+              "text": "Nermin pencerenin önünde, sırtı bize dönük duruyordu. Bir ara döndü, kardeşine baktı, bir şey söyleyecekmiş gibi oldu; sonra çantasından annesinin ilaç kutusunu çıkarıp evirdi çevirdi."
+            },
+            {
+              "speaker": "player",
+              "text": "Yarım saat. Bir dosyanın beş ayı, bir ailenin otuz yılı, bir hâkimin yarım saati. Kâğıtlar şimdi onun masasında; benim değil.",
+              "style": "thought"
+            },
             { "speaker": "mubasir", "text": "Taraflar salona! Hükmü ayakta dinleyin! Taraflar salona!" }
           ]
         },
@@ -2914,14 +3139,31 @@
     {
       "evidence": "ev_rapor2",
       "source": { "type": "NODE", "id": "C2_00" },
-      "requires": { "any": [{ "flag": "dil_bilirkisi" }, { "flag": "h1_bilirkisi" }] },
-      "hint": "Mukayese belgeleri özel belgelerdi; resmî imzalarla Adli Tıp’tan yeni rapor istemek gerekiyordu (CMK 63, 67/5)."
+      "requires": {
+        "all": [{ "any": [{ "flag": "dil_bilirkisi" }, { "flag": "h1_bilirkisi" }] }, { "flag": "bk_gerekce" }]
+      },
+      "hint": "Mukayese belgeleri özel belgelerdi ve iki ayrı elden çıkmıştı; bunu göstererek noter, banka ve nüfus imzalarıyla Adli Tıp’tan yeni rapor istemek gerekiyordu (CMK 63, 67/5)."
+    },
+    {
+      "evidence": "ev_rapor2_belirsiz",
+      "source": { "type": "NODE", "id": "C2_00" },
+      "requires": {
+        "all": [
+          { "any": [{ "flag": "dil_bilirkisi" }, { "flag": "h1_bilirkisi" }] },
+          { "not": { "flag": "bk_gerekce" } }
+        ]
+      },
+      "hint": "Gerekçesiz bilirkişi talebi, Adli Tıp’a yetersiz mukayese malzemesi gönderilmesine yol açtı."
     },
     {
       "evidence": "ev_rapor2_ek",
       "source": { "type": "NODE", "id": "C2_00" },
       "requires": {
-        "all": [{ "any": [{ "flag": "dil_bilirkisi" }, { "flag": "h1_bilirkisi" }] }, { "flag": "suc_duyurusu" }]
+        "all": [
+          { "any": [{ "flag": "dil_bilirkisi" }, { "flag": "h1_bilirkisi" }] },
+          { "flag": "bk_gerekce" },
+          { "flag": "suc_duyurusu" }
+        ]
       },
       "hint": "Somut dayanaklı bir suç duyurusu, savcılığın üçüncü kişinin örneklerini Adli Tıp’a göndermesini sağlardı (CMK 158)."
     }

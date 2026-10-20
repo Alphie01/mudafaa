@@ -19,7 +19,7 @@ tarik: Gelin avukat hanım, oturun. Burası benim mağaram derler; aslında herk
 tarik: Amcam size her şeyi anlattı mı? Anlatmaz o. Utanır. Bir ömür “Ateş Matbaası” dedi, şimdi adı bir dosyada.
 N: Konuşurken sesini hiç yükseltmedi. Bir kalemi parmaklarının arasında çeviriyordu; durmadan, ses çıkarmadan.
 tarik: Ne lazımsa. Fatura, irsaliye, müşteri listesi. Ben bulurum.
-T: “Ne lazımsa.” İkinci kez söylüyor. Yardımsever insanlar bu dosyanın en yorgun insanları gibi.
+T: Şifresiz bir bilgisayar, kapısı camdan bir oda. Bu dükkânda her şey herkesin. Bir sır saklamak için kötü bir yer; ya da çok iyi bir yer.
 `),
   choices: [
     option('TQ_GUN', '“18 Şubat sabahı neredeydin?”', {
@@ -42,7 +42,7 @@ T: İki kişi aynı çırağı işaret etti. Birbirlerinden habersiz mi, bilmiyo
     option('TQ_HALA', '“Nermin Hanım’la aranız nasıl?”', {
       score: { SORGULAMA: 10 },
       responses: B(`
-tarik: Halam iyi kadındır. Babam ölünce beni o da büyüttü sayılır. Ama ev konusunda… Evi hep istedi. “Annemin evi bana kalır” derdi.
+tarik: Halam iyi kadındır. Küçükken beni o da büyüttü sayılır; babam hep yoldaydı. Ama ev konusunda… Evi hep istedi. “Annemin evi bana kalır” derdi.
 tarik: Bir emlakçı da dolanıyordu geçen kış. Halamla konuşmuş diye duydum. Ben karışmam o işlere.
 T: Bir yeğen, halasını hem severek hem şüpheyle anlatıyor. Aileler böyledir; her cümlenin iki yüzü vardır.
 `),
@@ -59,7 +59,7 @@ T: “Hepsini.” Vedat “çoğunu” demişti. Küçük bir fark. Küçük far
     option('TQ_AMCA', '“Amcan nasıl biri?”', {
       score: { SORGULAMA: 15 },
       responses: B(`
-tarik: Amcam mı? Babam öldüğünde on dokuz yaşındaydım. Ertesi hafta amcam beni bu dükkâna getirdi, “burada kâğıt kokusu var, ağlarsan kimse anlamaz” dedi.
+tarik: Amcam mı? Babam öldüğünde yirmi yedi yaşındaydım; işsizdim. Ertesi hafta amcam beni bu dükkâna getirdi, “burada kâğıt kokusu var, ağlarsan kimse anlamaz” dedi.
 tarik: On dört yıl. Bana makineyi öğretti, dijitali ben ona öğrettim. Maaşımı bazen geç verir, ama hiç eksik vermez. Herkese öyledir.
 N: Kalemi çevirmeyi bıraktı. Masadaki kahve lekelerinden birine baktı.
 tarik: O imzayı atmaz avukat hanım. Bunu bilin. Ne olursa olsun.
@@ -81,6 +81,7 @@ C#depo: ATEŞ MATBAASI — KOLİ MASASI
 N: Emre bir koliyi bantlıyordu; bant makinesinin cızırtısı konuşmanın üstüne çıkıyordu. Beni görünce kulaklığını çıkardı ama elindeki bandı bırakmadı.
 emre: Abla ben bir şey bilmiyorum valla. Ben öğleden sonra gelirim, okul var. Meslek lisesi, matbaa bölümü. Son sınıf.
 emre: Vedat abi iyi adamdır. Yani şey, iyi patron. Maaşı geç verir ama verir. Kimseye bağırmaz. Makinesine bağırır sadece.
+emre: Bir şey lazımsa söyleyin abla. Fotokopi, kargo, çay; ben koşarım. Ne lazımsa.
 T: Hızlı konuşuyor. Sorulmadan cevap veriyor. On dokuz yaşında olmak böyle bir şey; ya da bir şeyden korkmak.
 `),
   choices: [
@@ -91,7 +92,7 @@ emre: Yok abla, okuldaydım. Salı. Salı sabahları atölye dersi var, devamsı
 emre: Vedat abi o gün tuhaftı ama. Kimliğini arıyordu, bütün dükkânı birbirine kattı. Bana bile sordu, “gördün mü” diye.
 `),
     }),
-    option('EQ_GECE_SOFT', '“Gece dükkâna gelen olur mu? Sana bir şey olmaz; yalnızca ne gördüğünü soruyorum.”', {
+    option('EQ_GECE_SOFT', '“Gece dükkâna gelen olur mu? Yalnızca ne gördüğünü soruyorum.”', {
       visibleWhen: has('clue_yazici'),
       score: { SORGULAMA: 40 },
       effects: [raise('fact_emre_davetiye')],
@@ -102,7 +103,7 @@ emre: Bir de… ben 90 gram basmam. Davetiye 90 grama basılmaz, ayıp olur.
 T: Bir çırağın gizli işi. Saatleri tutmuyor, kâğıdı tutmuyor. Gece yarısından sonraki iş onun değil gibi. Ama “gibi” bir delil değil.
 `),
     }),
-    option('EQ_GECE_HARD', '“Yazıcıda gece basılmış bir iş var. Sen miydin?”', {
+    option('EQ_GECE_HARD', '“Yazıcıda gece basılmış bir iş var. Gece kim gelir buraya, sen mi?”', {
       visibleWhen: has('clue_yazici'),
       effects: [raise('emre_kapandi')],
       responses: B(`
@@ -251,7 +252,7 @@ N: Dezenfektan ve ıhlamur kokusu. Pencerenin önünde, tekerlekli sandalyede uf
 N: Bakıcı kulağıma eğildi: “Bugün iyi günü. Ama uzun tutmayın. Kimi gün herkesi tanır, kimi gün kimseyi.”
 hayriye: Gel kızım, gel. Sen Nermin’in arkadaşı mısın? Otur şuraya. Bak, düğme ayırıyorum. Sedefleri bir yana, kemikleri bir yana.
 hayriye: Halit bugün gelecek. Her pazar gelir. Çorbasını koydum.
-T: Halit on iki yıl önce ölmüş. Kadın onun çorbasını hâlâ koyuyor. Bu odada zaman bir düğme kutusu gibi; her şey karışık, her şey yerinde.
+T: Halit on dört yıl önce ölmüş. Kadın onun çorbasını hâlâ koyuyor. Bu odada zaman bir düğme kutusu gibi; her şey karışık, her şey yerinde.
 `),
   choices: [
     option('HQ_ESLIK', 'Soru sorma; düğmeleri birlikte ayır', {
@@ -305,12 +306,13 @@ const noter = conversation('INV_NOTER', {
 C#buro: HEYKEL — BURSA 14. NOTERLİĞİ
 N: Mermer merdivenler, numaratör, bekleyen bir kalabalık. Arka tarafta, dosya dolaplarının arasında, kravatı kusursuz bağlanmış altmışlık bir adam.
 bulent: Bülent Sarı, başkâtip. Otuz bir yıldır bu dairedeyim avukat hanım. Usul, usul, usul. Usulsüz bir şey sorarsanız usulle reddederim.
+N: Masasında üç kalem, cetvelle dizilmiş. Bir mühür kutusu, kilitli. Arkasındaki duvarda 1994 tarihli bir “yılın personeli” belgesi; çerçevesi tozsuz.
 bulent: Vedat Ateş’in vekili olarak geldiğinizi söylediniz. Vekâletname işleminde vekil ilgilidir; ilgilinin avukatı da ilgilidir. Buyurun.
 N: Masasında kusursuz dizilmiş üç kalem, bir mühür, bir mürekkep ıstampası. Mürekkep ıstampasının kapağı kapalıydı; her zaman kapalı olduğu belliydi.
 bulent: Otuz bir yılda iki sahte suret gördüm avukat hanım. İkisinde de mühür basılmıştı. Islak mühür taklit edilemez; mürekkep kâğıda işler, kâğıt onu emer. Toner emilmez; üstünde durur.
 `),
   choices: [
-    option('BQ_ARSIV', '“08817 yevmiyeli vekâletnamenin arşiv nüshasını görebilir miyiz?”', {
+    option('BQ_ARSIV', '“08817 yevmiyeli işlemin arşiv nüshasını görebilir miyiz?”', {
       discovers: 'clue_noter_arsiv',
       score: { ARASTIRMA: 60 },
       responses: B(`
@@ -328,7 +330,7 @@ bulent: Fotokopiye “aslı gibidir” yazıp bir mühür bastınız mı, bir ş
 T: Islak mühür, güvenlikli kâğıt. Bir suretin sahte olup olmadığını anlamak için noterin gözlüğüne değil, bir büyütece ihtiyacım var.
 `),
     }),
-    option('BQ_SURET', '“Şubat’ta bu vekâletnameden suret verildi mi?”', {
+    option('BQ_SURET', '“Şubat’ta bu vekâletnameden kimseye onaylı suret verildi mi?”', {
       score: { ARASTIRMA: 25 },
       responses: B(`
 bulent: Sisteme bakayım… 2023’ten beri tek suret talebi yok. Şubat’ta hiçbir şey. Biz suret verirsek kayda geçer; kayıt yoksa suret yoktur.
@@ -370,7 +372,7 @@ recep: Kim aldı, söyleyemem. Ama kayıt vardır. Mahkeme yazı yazarsa bir gü
 T: Bir numara. Bir teyit araması. Randevuyu alan kişi, tapuya gelen kişiyle aynı mı? Bunu yalnızca bir mahkeme yazısı söyler.
 `),
     }),
-    option('PQ_GULTEN', '“İşlemi yapan memurla konuşabilir miyim?”', {
+    option('PQ_GULTEN', '“İşlemi yapan memurla iki dakika konuşabilir miyim?”', {
       score: { SAVUNMA_STRATEJISI: 10 },
       neutral:
         'Savcılık tanığıyla duruşma öncesi görüşmek yasak değildir; ama tanığı etkileme izlenimi doğurur. Sorularını duruşmaya saklamak daha güvenli.',

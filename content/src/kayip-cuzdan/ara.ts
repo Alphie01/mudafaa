@@ -29,7 +29,7 @@ import {
   visited,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, ChoiceDef, Cost, NodeDef } from '../../../tools/content/src/kit/index.js';
-import { B, O, S, W } from './dsl.js';
+import { B, O, W } from './dsl.js';
 import { POOL1, RECIPES1 } from './inv-archive.js';
 import { ARA, ARA_AP, ARA_DAYS } from './shared.js';
 

@@ -1,8 +1,9 @@
 import { character, sharedSprite } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
+import { caseSprites } from './sprites.js';
 
-// 10-cast: sprite'lar, karakterler ve ilişkiler. Yeni karakterler content/shared/sprites/kayip-cuzdan-<ad>.json;
-// büro kadrosu ve adliye ortak sprite'lardır. Yankesici çift kadroda yoktur (yalnızca betimleme; gizem).
+// 10-cast: sprite'lar, karakterler ve ilişkiler. Yeni karakterlerin sprite'ları sprites.ts'te; büro kadrosu ve adliye
+// ortak sprite'lardır. Yankesici çift kadroda yoktur (yalnızca betimleme; gizem).
 
 export const cast: CasePart = {
   sprites: [
@@ -14,13 +15,7 @@ export const cast: CasePart = {
     sharedSprite('mubasir'),
     sharedSprite('polis'),
     sharedSprite('tanik'),
-    sharedSprite('kayip-cuzdan-arda', 'sp_arda'),
-    sharedSprite('kayip-cuzdan-zehra', 'sp_zehra'),
-    sharedSprite('kayip-cuzdan-gulten', 'sp_gulten'),
-    sharedSprite('kayip-cuzdan-hayri', 'sp_hayri'),
-    sharedSprite('kayip-cuzdan-recep', 'sp_recep'),
-    sharedSprite('kayip-cuzdan-cemil', 'sp_cemil'),
-    sharedSprite('kayip-cuzdan-ozan', 'sp_ozan'),
+    ...caseSprites,
   ],
   characters: [
     character('deniz', {

@@ -6,7 +6,6 @@ import {
   conversation,
   costOf,
   dec,
-  fallback,
   flag,
   has,
   ifThen,

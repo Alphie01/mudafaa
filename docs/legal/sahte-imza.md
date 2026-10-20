@@ -1,6 +1,6 @@
 # Dava #09 — Sahte İmza · Hukuki İnceleme Notları
 
-> Durum: **Onaylandı** — `meta.legalReview = { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-20' }`
+> Durum: **Onaylandı** — `meta.legalReview = { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-21' }`
 > (Dava #07 ile aynı iç inceleme biçimi). Kaynak: `content/src/sahte-imza/`, tasarım: `docs/content/sahte-imza.md`.
 
 ## 1. Kullanılan maddeler ve doğrulama
@@ -22,12 +22,14 @@ alındı, fıkra numaraları bu metne göredir).
 | TCK 272, 38 | MQ_YALAN, ETIK | Yalan tanıklık ve azmettirme. |
 | TCK 106 | AK2_BILDIR | Tehdit (bildirim). |
 | CMK 45/1-c, 46, 48 | C2_03C | Üçüncü derece dahil kan hısımı tanıklıktan çekinebilir; hatırlatma zorunlu; kendini veya yakınını suçlayan sorulara cevap vermeme. |
+| CMK 51 | C203C_B (yanlış seçenek) | Tanıklıktan çekinebilecek olanlar yeminden de çekinebilir; bu hak tanığındır, müdafiin talebi değildir. |
 | CMK 52, 201 | İtiraz gerekçeleri, C2_01 | Tanık bildiklerini anlatır; taraflar doğrudan soru sorar, tereddütte mahkeme karar verir. |
-| CMK 63, 67/5, 68 | DIL_BILIRKISI, C1_05, C2_04 | Bilirkişi ataması; rapora karşı görüş ve yeni bilirkişi istemi; bilirkişinin dinlenmesi. |
+| CMK 63, 67/5, 68 | DIL_BILIRKISI, C1_05, T_BILIRKISI, C2_04, UST_KURUL | Bilirkişi ataması; rapora karşı görüş ve yeni bilirkişi istemi; bilirkişinin dinlenmesi. |
+| CMK 67/3 | C105_B, C204B_B (yanlış seçenekler) | Bilirkişi uzmanlık dışı açıklama, hukuki nitelendirme ve değerlendirme yapamaz (6754 s. Kanunla değişik). Soruşturmadaki rapor yalnızca teknik bir tespit ("aynı elin ürünü") içerdiği için bu itiraz dayanaksızdır. |
 | CMK 147/1-e | C103_D | Susma hakkı. |
 | CMK 158 | ARA_SUC, TG_GIT | Suç duyurusu Cumhuriyet Başsavcılığına yapılır. |
 | CMK 177, 178, 332 | Dilekçe, tanık listesi | Duruşma hazırlığında delil ve tanık istemi; doğrudan davet; kurumlardan bilgi istenmesi. |
-| CMK 206/2-a, 217 | C105_B, C1_04 itirazı, gerekçeler | Hukuka aykırı delil (rapor bu kapsamda değil); vicdani kanaat ve delillerin takdiri. |
+| CMK 206/2-a, 217 | C1_04 itirazı, gerekçeler, UST_KURUL | Hukuka aykırı delil (rapor bu kapsamda değil); vicdani kanaat ve delillerin takdiri. |
 | CMK 223/2-b, 223/2-e | BERAAT_B, BERAAT_E | Suçun sanık tarafından işlenmediğinin sabit olması; mahkûmiyete yeter delil bulunmaması. |
 | CMK 231/3, 141, 142 | Beraat hükümleri | Tazminat hakkının bildirilmesi. |
 | CMK 231/5, 231/6-c | INDIRIM, C206_I | HAGB için zararın giderilmesi şartı. |
@@ -43,6 +45,8 @@ alındı, fıkra numaraları bu metne göredir).
 - **INDIRIM:** TCK 204/1 alt sınır 2 yıl → TCK 62/1 (1/6 indirim) → **1 yıl 8 ay**. Ceza 2 yılı aşmadığından TCK 51/1
   ertelemesi mümkün; denetim süresi 1 yıl (TCK 51/3: 1–3 yıl). HAGB: mağdurun zararı giderilmediği için CMK 231/6-c
   şartı yok → uygulanmaz.
+- **UST_KURUL:** hüküm yok (ara karar). Dosya, iki bilirkişi raporu arasındaki çelişkinin giderilmesi için Adli Tıp
+  Kurumu Fizik İhtisas Kurulu'na gönderilir; Adli Tıp raporu gözetilerek adli kontrol kaldırılır; duruşma ertelenir.
 - **MAHKUMIYET / COKUS:** Temel ceza zararın ağırlığı gözetilerek 3 yıl (TCK 61/1) → TCK 62/1 → **2 yıl 6 ay**. 2 yılı
   aştığından erteleme (TCK 51/1) ve HAGB (CMK 231/5) yok. Hüküm kesinleşmediğinden tutuklama yok; sanık serbest.
 
@@ -81,6 +85,27 @@ alındı, fıkra numaraları bu metne göredir).
 7. **Mahkemenin "Tarık'ı şüpheli olarak dinleme" talebi.** Mahkeme soruşturma yürütmez; bu talep yanlış seçenektir
    (C203C_C).
 
+8. **Adli Tıp raporunun kesinliği (oyun soyutlaması).** İmza incelemesinde sonucun kesinliği, gönderilen tartışmasız
+   mukayese imzalarının sayısına ve çağdaşlığına bağlıdır. Müdafi talebini gerekçelendirip (irsaliyelerdeki iki ayrı el)
+   kaynakları tek tek sayarsa (noter imza beyannamesi, banka imza kartonu, nüfus kaydı) mahkeme üçünü de celbeder ve
+   rapor kesin olur (`bk_gerekce` → ev_rapor2). Gerekçesiz talepte yalnızca nüfus kaydındaki tek imza gider; Adli Tıp
+   "kesin kanaate varılamadı, ek örnek gerekir" der (ev_rapor2_belirsiz). Bu, gerçek uygulamadaki "yetersiz mukayese
+   malzemesi" sonucunun sadeleştirilmiş biçimidir. Rapor eki okunmadan (clue_mukayese_ozel) yeni bilirkişi seçeneği
+   görünmez; savunma, neyin neden yetersiz olduğunu bilmeden bu talebi kuramaz.
+9. **Kesin Adli Tıp raporu dosyadayken hüküm (UST_KURUL).** Dosyada sanığın el ürünü olmadığını söyleyen kesin bir Adli Tıp
+   raporu varken mahkûmiyet, indirim ya da çöküş hükmü kurulmaz. Beraat için ayrıca bağımsız bir destek (sol el beyanı
+   ya da mazeret) ve savunmanın raporu kürsüde öteki delillere bağlaması gerekir. Bunlar yoksa mahkeme, iki rapor
+   arasındaki çelişkiyi kendisi çözmez; Yargıtay'ın yerleşik uygulaması doğrultusunda (bilirkişi raporları arasındaki
+   çelişki giderilmeden hüküm kurulamaz; çelişki üst düzey bir kuruldan rapor alınarak giderilir) dosyayı Adli Tıp
+   Kurumu'nun ilgili ihtisas kuruluna gönderir. Kurulun adı ("Fizik İhtisas Kurulu") Kurumun iç yapısına göre seçildi;
+   madde numarası verilmedi. Mütalaa beraat yönünde olsa bile mahkeme mütalaayla bağlı değildir (CMK 217).
+10. **Süreler (dramatik sıkıştırma).** Birinci celse 14 Ekim, ara evre 20 Ekim'de ("altı gün sonra") açılır, ikinci celse
+   4 Kasım'dadır. Adli Tıp raporunun üç haftada gelmesi gerçek uygulamaya göre hızlıdır; metinde ara kararın "ivedi"
+   şerhiyle açıklanır. Ek raporun (suç duyurusundan ~12 gün sonra, savcılığın ayrı soruşturmadaki örnekleri aynı
+   incelemeye eklemesi) hızı da bilinçli bir sıkıştırmadır.
+11. **Süreklilik.** Halit Ateş 14 yıl önce (2012) öldü; Tarık o sırada 27 yaşındaydı (2026'da 41). 1992 fotoğrafındaki
+   yedi yaşındaki çocuk Tarık'tır.
+
 ## 5. Hassas konu denetimi
 
 Cinsel suç, çocuklara yönelik suç ya da terör yok. Demans konusu (Hayriye Hanım) onurlu biçimde işlenir; ona imza/ifade
@@ -89,6 +114,7 @@ aldırmak etik ihlal olarak cezalandırılır. Bahis borcu yalnızca bir arka pl
 ## 6. Öz-inceleme kontrol listesi
 
 - [x] Bütün madde atıfları güncel metinle karşılaştırıldı (tablo dolu).
+- [x] Kesin Adli Tıp raporu dosyadayken hiçbir sonuç raporla çelişmez; mahkûmiyet/indirim gerekçeleri koşullu (dosyadaki delile göre).
 - [x] Ceza hesapları alt/üst sınırlar içinde ve aritmetik doğru (2y → 1y8a; 3y → 2y6a).
 - [x] Mahkemeye hitap "Sayın Hâkim"; asliye ceza, tek hâkim.
 - [x] Hükümlerde istinaf (CMK 272, 273/1) ve tazminat bildirimi (CMK 231/3) var.

@@ -40,6 +40,7 @@ ARA_SON_1..5 → ARA_SON → C2_00G → C2_00 (Adli Tıp raporları) → C2_00A/
   → C2_03 Tarık (T1–T5, T3X) → C2_03F → C2_03H susuş → C2_TENEFFUS → C2_04A/B rapor → C2_05 mütalaa (A/B/C)
   → C2_06P dayanaklar (3 hak) → C2_06 esas savunma → C2_06R → C2_07 son söz → C2_08 → R_KARAR (+ epilog)
 tg_cokus (duruşmada güvenilirlik 0) → C2_COKUS → C2_08
+C2_05 mütalaa: güçlü → C2_05A (beraat) · orta ya da kesin Adli Tıp raporu → C2_05B (takdir) · aksi → C2_05C (mahkûmiyet; belirsiz rapor varsa ayrı metin)
 ```
 
 ## 4. Delil zinciri
@@ -58,8 +59,11 @@ tg_cokus (duruşmada güvenilirlik 0) → C2_COKUS → C2_08
 | ev_kargo, ev_randevu, ev_tutanak | gecikmeli | ARA_GIRIS_1 (dilekçe/C1_06 talebiyle) | mazeret, arayan hat, teslim eden Tarık |
 | clue_kargo_saat, clue_kargo_imza, clue_randevu_no, clue_teyit | ipucu | ARA_KARGO, ARA_RANDEVU | 11.19–11.37; terminal imzası; numara |
 | clue_mahsup / clue_bahis | ipucu | emlak bürosu / Sevgi (halka şartıyla) | borca mahsup |
-| ev_rapor2 | gecikmeli | C2_00 (yeni bilirkişi istendiyse) | imza sanığın değil, sol el |
-| ev_rapor2_ek | gecikmeli | C2_00 (bilirkişi + somut suç duyurusu) | Tarık'ın örnekleriyle uyum |
+| ev_rapor2 | gecikmeli | C2_00 (yeni bilirkişi **gerekçeli** istendiyse: `bk_gerekce` = C105_A, ya da ded_mukayese varken DIL_BILIRKISI / T_BILIRKISI) | imza sanığın değil, sol el |
+| ev_rapor2_belirsiz | gecikmeli | C2_00 (bilirkişi istendi ama gerekçesiz: C105_A2 ya da çıkarımsız dilekçe) | tek mukayese imzası; kesin kanaat yok |
+| ev_rapor2_ek | gecikmeli | C2_00 (gerekçeli bilirkişi + somut suç duyurusu) | Tarık'ın örnekleriyle uyum |
+
+Yeni bilirkişi seçenekleri (C105_A2, T_BILIRKISI, DIL_BILIRKISI) ancak raporun eki okunduğunda (clue_mukayese_ozel) görünür.
 
 **Tahta (1. evre, 6 çıkarım + 2 alternatif tarif, 4 çeldirici):** ded_solak (sıvanma+sağ el), ded_suret_sahte (toner|satır
 +arşiv), ded_mukayese (özel+iki el), ded_kimlik (ceket+mesaj), ded_kurye (takvim+saat), ded_baski (yazıcı+toner|kâğıt).
@@ -80,11 +84,15 @@ suret, mukayese; çeldiriciler. `ded_baski` kürsüye götürülürse cezalıdı
 | Öncelik | Kimlik | Sınıf | Koşul | Hüküm | XP |
 |---|---|---|---|---|---|
 | 1 | ETIK | OTHER | Emre'ye yalan söyletmek (etik_kirlik) | Azil, suç duyurusu | 0 |
-| 2 | COKUS | CONVICTION | duruşmada güvenilirlik 0 | 2 yıl 6 ay | 0,3 |
+| 2 | COKUS | CONVICTION | duruşmada güvenilirlik 0 ve dosyada kesin Adli Tıp raporu yok | 2 yıl 6 ay | 0,3 |
 | 3 | BERAAT_B | ACQUITTAL 223/2-b | rapor2 + ek rapor + Tarık sustu + mazeret + ikna ≥ 8 + final ≥ 11 000 | beraat | 1,2 |
-| 4 | BERAAT_E | ACQUITTAL 223/2-e | (rapor2 ya da sol el çelişkisi + kirli mukayese) + ikna ≥ 6 + final ≥ 9 500 | beraat | 1,0 |
-| 5 | INDIRIM | REDUCED | ikna ≥ 3 + final ≥ 3 000 | 1 yıl 8 ay, ertelendi | 0,85 |
-| 6 | MAHKUMIYET | CONVICTION | varsayılan | 2 yıl 6 ay | 0,6 |
+| 4 | BERAAT_E | ACQUITTAL 223/2-e | kirli mukayese + (rapor2 ya da sol el çelişkisi) + bağımsız destek (sol el çelişkisi ya da mazeret) + ikna ≥ 6 + final ≥ 9 500 | beraat | 1,0 |
+| 5 | UST_KURUL | OTHER | dosyada kesin Adli Tıp raporu (rapor2) var, beraat koşulları tutmuyor | ara karar: çelişki için Fizik İhtisas Kurulu, adli kontrol kalkar | 0,7 |
+| 6 | INDIRIM | REDUCED | rapor2 yok + ikna ≥ 3 + final ≥ 3 000 | 1 yıl 8 ay, ertelendi | 0,85 |
+| 7 | MAHKUMIYET | CONVICTION | varsayılan (rapor2 burada olamaz: 5. sıra yakalar) | 2 yıl 6 ay | 0,6 |
+
+Kesin Adli Tıp raporu dosyadayken hiçbir sonuç mahkûmiyet ya da indirim kurmaz. Mahkûmiyet, indirim ve çöküş gerekçe
+satırları dosyadaki delile göre koşulludur (sol el beyanı, kargo kaydı, belirsiz rapor, salon teşhisine itiraz).
 
 Eşik çubuğu: Mahkûmiyet 0 · İndirim 3 000 · Beraat 9 500 (`outcomes.ts` sabitleri). `scaleMax` 11 500 (gözlenen tavan
 12 060'ın ~%95'i). Yalnızca lehe hüküm isteyen esas savunma (`closing_indirim`) beraati kapatır. Her sonucun epilogu
@@ -107,37 +115,47 @@ yanlış −150 ve −1 güvenilirlik; itiraz +50/+100, dayanaksız −50; esas 
 | INDIRIM | INDIRIM | 4 490 | Rapor ve irsaliye okunmuyor, bilirkişi istenmiyor; gece matbaada yüzleşme; terditli savunma |
 | MAHKUMIYET | MAHKUMIYET | −100 | Kâğıtlara bakmayan soruşturma, etik hatalar, yalnızca lehe hüküm |
 | ETIK | ETIK | 7 695 | Ara evrede Emre'ye yalan söyletme → 2. celsede çöküş ve azil |
-| COKUS | COKUS | 6 975 | Erol'a beş kez ilgisiz delil → güvenilirlik 0 |
+| COKUS | COKUS | 6 765 | Bilirkişi istenmiyor (dilekçede ve kürsüde); Erol'a beş kez ilgisiz delil → güvenilirlik 0 |
+| UST_KURUL | UST_KURUL | 7 935 | Tipik soruşturma ve gerekçeli rapor; ama 1. celsede sol el açılmıyor, 2. celsede hiçbir çelişki sunulmuyor, terditli savunma |
 
 ## 9. Erken çözüm denetimi
 
-Kısa yol araması `enumerateActions` ile tam yapılamadı (durum uzayı ~70 bin durumda kesiliyor); bunun yerine en verimli
-kısa yol elle kuruldu ve motorla oynatıldı: en yüksek değerli eylemlerle (senet, matbaa, Vedat, rapor, irsaliye, suret,
-noter, dilekçe, ilk celsenin bütün isabetleri, kargo/randevu, ikinci celsenin isabetleri) **116 aksiyonda final 8 950**
-(INDIRIM). 9 500 eşiğini aşmak için en az ~126 aksiyon gerekir: tipik yolun (205) **%61'i**. Beraat, sol el çelişkisi +
-kirli mukayese ya da Adli Tıp raporu olmadan hiçbir skorla verilmez; BERAAT_B ayrıca suç duyurusu ve Tarık'ın üç çelişkisini
-ister. Tipik yolun satırları tarandı: Tarık'ın adı 1. evrede yalnızca numara çizelgesinde (altı numaradan biri) ve sıradan
-bir yeğen olarak geçer; solaklığı, borcu ve teslim tutanağı ancak ilgili halka bulunduktan sonra açılır (Emre: ded_solak;
-Sevgi/Nermin/Hayriye: `halka`; emlak bürosu: randevu çıkarımı ya da tutanak). Makas kesim masasına, gece baskısı ortak
-bilgisayara taşındı ve Emre'nin gece davetiyeleri çeldirici olarak eklendi.
+**İnceleme sonrası (2026-10-21).** Kısa yol araması golden path'lerden açgözlü eksiltmeyle yapıldı (`enumerateActions`
+uzayı tam taranamıyor): her adımda 32/16/8/4/2/1 aksiyonluk bloklar çıkarılıp sonuç beraat kaldıkça kabul edildi.
+Sonuçlar: TIPIK tohumundan **168** aksiyon (BERAAT_E, 9 505), BERAAT_B tohumundan **154** aksiyon (BERAAT_E, 9 500).
+Tipik yol 205 aksiyon: en kısa beraat **%75**. Eski kısa yollar kapandı:
+
+- İlk gün duruşmaya gidip "yeni rapor" istemek (eski 51 aksiyonluk yol, dosyada kesin Adli Tıp raporuyla mahkûmiyet)
+  artık mümkün değil: C105_A2/T_BILIRKISI rapor eki okunmadan görünmez; gerekçesiz talep yalnızca belirsiz rapor getirir.
+  Kirli mukayese çıkarımıyla kısa bir yoldan kesin rapor alınsa bile skor düşükse sonuç UST_KURUL'dur (beraat değil,
+  mahkûmiyet de değil).
+- BERAAT_E, rapora ek olarak bağımsız bir destek (sol el çelişkisi ya da mazeret) ve 9 500 eşiği ister.
+
+Seçenek etiketleri: puanı farklı 29 seçenek setinde en iyi seçenek 5 sette en uzun, 5 sette en kısa (önceki 20/31 en uzun).
+Tipik yolun 1. evre satırları tarandı: Tarık'ın adı yalnızca sıradan bir yeğen olarak (Sevgi'yi getiren, çay ikram eden,
+börek getiren) ve numara çizelgesinde geçer; anlatı onu şüpheli diye işaretlemez; "ne lazımsa" yardımseverliği Emre'de de
+var. Soğuk açılış el değişimini göstermez ("Zincir gerildi."); yazıcı günlüğündeki bilgisayar MATBAA-PC.
+
+**Leyla'nın ters çerçevesi** (BR_01, ARA_AKSAM2, ARA_SON, BERAAT_B epilogu) bilinçli olarak bu davada çözülmez: seri
+düzeyinde bir arktır (Leyla'nın otuz yıl önceki davası), sonraki davalara bırakılmıştır.
 
 ## 10. Süre ve sözcük ölçümü
 
-`npm run case:duration -- sahte-imza` (2026-10-20):
+`npm run case:duration -- sahte-imza` (2026-10-21, inceleme düzeltmelerinden sonra):
 
 ```
-  TIPIK          93.9 dk   13219 sözcük   205 aksiyon  BERAAT_E (11020)
-  BERAAT_B       94.9 dk   13295 sözcük   210 aksiyon  BERAAT_B (12060)
-  INDIRIM        73.6 dk   10376 sözcük   160 aksiyon  INDIRIM (4490)
-  MAHKUMIYET     61.9 dk    8468 sözcük   149 aksiyon  MAHKUMIYET (-100)
-  ETIK           78.1 dk   10854 sözcük   178 aksiyon  ETIK (7695)
-  COKUS          81.6 dk   11308 sözcük   188 aksiyon  COKUS (6975)
-  ==> TİPİK YOL (TIPIK): 93.9 dk  ✓ süre hedefte
+  TIPIK         103.9 dk   15013 sözcük   205 aksiyon  BERAAT_E (11020)
+  BERAAT_B      104.2 dk   14988 sözcük   210 aksiyon  BERAAT_B (12060)
+  INDIRIM        81.5 dk   11794 sözcük   160 aksiyon  INDIRIM (4490)
+  MAHKUMIYET     67.7 dk    9509 sözcük   149 aksiyon  MAHKUMIYET (-100)
+  ETIK           85.3 dk   12151 sözcük   178 aksiyon  ETIK (7695)
+  COKUS          88.5 dk   12569 sözcük   187 aksiyon  COKUS (6765)
+  UST_KURUL      94.1 dk   13453 sözcük   194 aksiyon  UST_KURUL (7935)
+  ==> TİPİK YOL (TIPIK): 103.9 dk  ✓ süre hedefte
+  ==> SÖZCÜK BÜTÇESİ: ✓ 15013 sözcük: hedefte (15–25 bin)
 ```
-
-Paketin toplam ekran metni (bütün satırlar, yanıtlar, geri bildirimler, epiloglar): bkz. §11.
 
 ## 11. Toplam metin
 
-Toplam sözcük sayısı `content/cases/sahte-imza/*.json` içindeki bütün `text`, `label`, `feedback`, `verdictText`,
-`reasoning` ve epilog satırları sayılarak ölçüldü (delil kartları ve golden path hariç): **21 227** sözcük; delil kartları dahil 24 436.
+`content/cases/sahte-imza/*.json` içindeki bütün `text`, `label`, `feedback`, `good/bad/neutral`, `title`, `verdictText`,
+`sentence`, `howToReach` ve epilog satırları (golden path hariç): **26 149** sözcük; delil kartları dahil **27 810**.

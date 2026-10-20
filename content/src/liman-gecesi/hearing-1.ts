@@ -530,8 +530,8 @@ gulay: İyi adam. Tarık’a iş o buldu. Şimdi onun sözüyle… Ne biçim dü
 leyla: Forkliftçi nasıl gitti? [phone]
 - Dürüst bir adam. Yanıldığını kendisi söyledi.
 leyla: Güzel. Şimdi sıra kesin olanda. Ona “yanıldınız” deme; kâğıdı göster, bırak kendisi söylesin. Söylemezse heyet söyler. [phone]
-> Tanık odasının kapısı aralıktı. İçeride Kenan, bir sandalyede, dirsekleri dizlerinde. Bez parçasını iki elinin arasında katlıyor, açıyor, yeniden katlıyordu.
-~ Her tanığın kürsüden önce bir alışkanlığı var. Şükrü Usta’nınki cihazına dokunmaktı. Bunun ki bir bez parçası.
+> Tanık odasının kapısı aralıktı. İçeride Kenan, bir sandalyede, gözleri kapalı; dudakları kıpırdıyordu. Dua mı, saat mi sayıyordu, bilemedim.
+~ Her tanığın kürsüden önce bir alışkanlığı var. Şükrü Usta’nınki cihazına dokunmaktı. Bununki gözlerini kapamak.
 `),
       choices: [cont('H104B_DEVAM', 'Tanık Kenan Aksoy', 'H1_05')],
     }),

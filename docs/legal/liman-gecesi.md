@@ -1,6 +1,6 @@
 # Dava #10 "Liman Gecesi" — Hukuki İnceleme Notları
 
-> Durum: **Onaylandı — Claude (iç inceleme), 2026-10-20.** `meta.legalReview = { status: 'APPROVED', by: 'Claude (iç
+> Durum: **Onaylandı — Claude (iç inceleme), 2026-10-20; inceleme düzeltmeleri 2026-10-21.** `meta.legalReview = { status: 'APPROVED', by: 'Claude (iç
 > inceleme)', at: '2026-10-20' }`. Lineup kararı gereği hukuki inceleme yazımda yapılır; aşağıdaki yorum kararları
 > bir avukatın ikinci okumasında öncelikle bakılacak noktalardır.
 
@@ -75,10 +75,14 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
    bulunamamıştır. Doktrin ve uygulamada şikâyet hakkının kural olarak mağdura özgü olduğu ve ölümle mirasçılara
    geçmediği kabul edildiğinden kovuşturma şartı gerçekleşmemiş sayılmış, **CMK 223/8 düşme** kararı yazılmıştır.
    CMK 223/9 (“derhâl beraat verilebilecek hâllerde düşme verilemez”) burada uygulanmaz; yumruk sabittir.
-2. **87/4'ün 86/2 düzeyindeki yaralamaya uygulanması.** Güncel 87/4 yalnızca 86/1 ve 86/3 hâllerini düzenler. NITELIK
-   sonucunda heyet, ölümün yumrukla düşmeden doğduğu kanaatine vardığı için yaralamanın 86/1 kapsamında kaldığını kabul
-   eder ve 10–14 yıllık aralığı uygular. Bu, savcılığın yedek tezinin mahkemece benimsenmesidir; oyun bunu “kötü sonuç
-   ama öldürme değil” olarak sunar.
+2. **87/4'ün 86/2 düzeyindeki yaralamaya uygulanması.** Güncel 87/4 yalnızca 86/1 ve 86/3 hâllerini düzenler. Davanın
+   kendi sınıflandırması yumruğu basit tıbbi müdahaleyle giderilebilir (86/2) sayar. NITELIK hükmü bu yüzden
+   “yaralamanın basit tıbbi müdahaleyle giderilebilir nitelikte olması TCK 87/4 birinci cümlesinin uygulanmasına engel
+   görülmeyerek” der: ölüm neticesi doğduğunda yaralamanın kendi başına basit kalması ağır neticeden sorumluluğu
+   (TCK 23) ortadan kaldırmaz ve 86/1'e bağlanan ilk aralık (10–14 yıl) uygulanır. Bu yorum tartışmalıdır (86/2
+   hâlinin 87/4'te açıkça sayılmaması lehe yorumla daha hafif bir sonuca götürülebilir); oyun savcılığın yedek tezinin
+   mahkemece benimsenmesini “kötü sonuç ama öldürme değil” olarak sunar. İnceleme (2026-10-21) üzerine eski “86/1
+   kapsamında kaldığı” ifadesi kaldırıldı.
 3. **Haksız tahrik.** Ölmüş ağabeyle alay, yüze tükürme ve itme birlikte haksız fiil sayılmış, dörtte bir oranında (alt
    oran) indirim uygulanmıştır; yumruğun tek ve orantılı olması daha yüksek oran tartışmasını açabilir.
 4. **Abone bilgisi.** Bir numaranın abonesinin öğrenilmesi uygulamada BTK'dan mahkeme kararıyla istenir; oyun bunu
@@ -96,6 +100,22 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
    Yüzleşme (ARA_KENAN) TCK 277 riski ve delil karartmaya davet olarak cezalandırılır.
 10. **Ölüm saati ve mide içeriği.** Mide boşalma süresi kesin saat vermez; oyunda bilirkişi yalnızca sıralama (“son
     öğünden sonra, yarım ila bir buçuk saat”) söyler. Bu tıbbi olarak muhafazakâr bir anlatımdır.
+11. **Hüküm olgulara bağlıdır, esas savunmanın adına değil (inceleme blokeri, 2026-10-21).** Mahkeme müdafiin talebinin
+    adıyla bağlı değildir (CMK 225: hüküm iddianamedeki fiil hakkında; vasıf mahkemece belirlenir) ve hükmünü yalnızca
+    duruşmaya getirilip tartışılan delile dayandırır (CMK 217/1). Bu yüzden: (a) “dönüş yok” olgusu yalnızca kürsüde
+    kayıtla kurulduğunda sayılır (K1: turnike + banka kaydı karşısında teşhis; ya da N1 + N2: büfecinin saatleri kayıtla
+    sabitlenir) — soruşturmada kurulup sunulmayan çıkarım kayda geçmez; (b) “ölüm sonra” olgusu darbe şeklinin düşmeyi
+    dışlaması (B1) ile ölümün sanığın ayrılışından sonra gelmesinin (B2) birlikte bilirkişiye kabul ettirilmesidir.
+    Yalnızca B2 kurulursa düşmeye bağlı kafa travmasında bilinç açıklığı döneminden sonra gelen gecikmiş ölüm
+    ihtimali (yumruk → düşme → ölüm) kapanmaz; yalnızca B1 kurulursa darbenin kavga sırasında oluştuğu ihtimali
+    kapanmaz. İkisi birlikte kurulduğunda ve dönüş yok olgusu kayıttayken esas savunmada “olası kast kabul edilse bile”
+    (T06_D) ya da yalnızca merhamet (T06_X) istenmiş olsa da hüküm CMK 223/2-e beraattir (Anayasa 38/4). 87/4 yalnızca
+    dönüş yok kayıttayken ölüm sonra kurulamadığında; 81/1 + 21/2 yalnızca dönüş yok kurulamadığında verilir.
+    223/2-b (“işlemediği sabit”) ayrıca gerçek fail olgusunu (suç duyurusu, araç/abone/kit kaydı) ister ve bilirkişi
+    olguları (B1 + B2) olmadan verilmez.
+12. **Eşin tanıklığı.** İkinci celsede başkan, sanığın eşi Gülay Demirel'e tanıklıktan çekinebileceğini (CMK 45/1-b,
+    45/3) ve yeminsiz dinlenmeyi isteyebileceğini (CMK 50–51 çerçevesinde mahkemenin takdiri) hatırlatır; ana yolda bu
+    hatırlatma artık atlanmaz.
 
 ## 5. Hassas konu denetimi
 

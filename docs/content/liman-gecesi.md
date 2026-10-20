@@ -104,18 +104,27 @@ T_06 esas savunma (5 seçenek), T_07 son söz.
 
 ## 6. Sonuçlar
 
+Karar duruşma kaydındaki olgulara bağlıdır (CMK 217/1: hüküm yalnızca duruşmaya getirilip tartışılan delile dayanır;
+heyet esas savunmanın adıyla bağlı değildir, CMK 225). Esas savunmanın seçimi (T06_B/E/T/D/X) puanı, iknayı, kapanış
+metnini ve epilog tonunu değiştirir; beraati değil. Skor yalnızca XP'yi, notu ve 223/2-b eşiğini etkiler.
+
 | Öncelik | Kimlik | Sınıf | Koşul | Hüküm | XP |
 |---|---|---|---|---|---|
 | 1 | ETIK | OTHER | `etik_gulay` (Gülay'a yalan saat öğütlendi) | Azil; Başsavcılık ve Baro bildirimi | 0 |
-| 2 | BERAAT_B | ACQUITTAL 223/2-b | ¬çöküş ∧ `gercek_fail` ∧ ikna ≥ 8 ∧ final ≥ 10.000 | Beraat + yumruk için 223/8 düşme | 1,2 |
-| 3 | BERAAT_E | ACQUITTAL 223/2-e | ¬çöküş ∧ (`supheli` ∨ `gercek_fail`) ∧ ikna ≥ 6 ∧ final ≥ 9.000 | Beraat + 223/8 düşme | 1,0 |
-| 4 | NITELIK | RECHARACTERIZED | ¬çöküş ∧ donus_yok ∧ (terditli ∨ supheli ∨ kabul87) ∧ (dürüst savunma ∨ tahrik bilgisi) ∧ final ≥ 3.000 | 87/4 + 29 + 62/1: 6 yıl 3 ay | 0,85 |
-| 5 | MAHKUMIYET | CONVICTION | varsayılan | 81/1 + 21/2 + 62/1: 16 yıl 8 ay | 0,6 (çöküş 0,3) |
+| 2 | BERAAT_B | ACQUITTAL 223/2-b | ¬çöküş ∧ `gercek_fail` ∧ donus_yok ∧ olum_sonra ∧ ikna ≥ 8 ∧ final ≥ 10.000 | Beraat + yumruk için 223/8 düşme | 1,2 |
+| 3 | BERAAT_E | ACQUITTAL 223/2-e | donus_yok ∧ olum_sonra (skor eşiği yok) | Beraat + 223/8 düşme | 1,0 |
+| 4 | NITELIK | RECHARACTERIZED | donus_yok ∧ ¬olum_sonra | 87/4 + 29 + 62/1: 6 yıl 3 ay | 0,85 |
+| 5 | MAHKUMIYET | CONVICTION | varsayılan (= ¬donus_yok) | 81/1 + 21/2 + 62/1: 16 yıl 8 ay | 0,6 (çöküş 0,3) |
 
-- **donus_yok:** contra_k1 ∨ (ded_cikis ∧ ded_buf).
-- **olum_sonra:** contra_b1, contra_b2, contra_b3'ten en az ikisi.
-- **gercek_fail** (T06_B ile): suç duyurusu ∧ contra_k5 ∧ (contra_k6 ∨ contra_k7) ∧ donus_yok.
-- **supheli** (T06_E ile): donus_yok ∧ olum_sonra.
+- **donus_yok:** contra_k1 ∨ (contra_n1 ∧ contra_n2). Yalnızca kürsüde sunulan kayıt sayılır: soruşturmadaki
+  ded_cikis/ded_buf çıkarımları sunulmadıkça kayda geçmez.
+- **olum_sonra:** contra_b1 ∧ contra_b2. Darbe şekli düşme mekanizmasını (ve yumruk → düşme → bilinç açıklığı sonrası
+  gecikmiş ölüm ihtimalini) dışlar; saat ölümü sanığın ayrılışından sonraya koyar. contra_b3 (kilit ölçüsü) gerekçeye
+  ve puana girer, tek başına bunların yerini tutmaz.
+- **gercek_fail** (T06_B ile): suç duyurusu ∧ contra_k5 ∧ (contra_k6 ∨ contra_k7) ∧ donus_yok ∧ olum_sonra.
+- **supheli** (T06_E/T ile): donus_yok ∧ olum_sonra; yalnızca kapanış metnini seçer.
+- 87/4 gerekçesi kısmi bilirkişi bulgusuna göre üç ayrı satırla yazılır (B1 ve B2 yok; yalnızca B2 → bilinç açıklığı;
+  yalnızca B1 → saat dışlanamadı); kayıttaki bir olguyla çelişen gerekçe satırı yoktur.
 - Etik sayaç: SK_TELKIN, SUC_C, KY_SOR (+1), GL_YALAN (+2), T_03E (+1). XP etikte yarıya iner; ETIK'te 0.
 
 ## 7. Skor
@@ -123,7 +132,7 @@ T_06 esas savunma (5 seçenek), T_07 son söz.
 - Kategoriler ve döküm satırları: Delil toplama (ARAŞTIRMA + DELİL ANALİZİ) · Çapraz sorgu (SORGULAMA) · İtiraz isabeti
   (USUL + HUKUKİ, `legal_hits`) · Savunma · Hatalı delil (`wrong`). Güvenilirlik bonusu ♥ × 100.
 - Strateji çarpanı yalnızca uyumlu esas savunmada (MASUMIYET ×1,5 → T06_B; USUL ×1,2 → T06_E; INDIRIM ×0,8 → T06_T).
-- Eşik çubuğu: Mahkûmiyet 0 · 87/4 3.000 · Beraat 9.000 (sonuç eşikleriyle aynı). `scaleMax` §13'te.
+- Eşik çubuğu: Savunma puanı 0 · 223/2-b eşiği 10.000 (sonuçlar olgulara bağlı olduğundan beraat/87/4 eşiği yok).
 - Tutarlar: olay yeri +20…+60, çeldirici/ıska −10; belge +60…+150, yanlış alet −20; tarif +300, yanlış çift −50;
   BASTIR +25; doğru sunum +300, kısmi +100; yanlış sunum −150 ♥−1; usul +40…+150, dayanaksız −40…−80 ♥−1; esas savunma
   150–375 (çarpanlı), başarısız −100; etik ihlaller −60…−150.
@@ -142,46 +151,78 @@ tekrar eden ceza kuralları `maxUses: 3`; tahta tarifleri `IF ¬hasEvidence` ile
 |---|---|---|
 | G1 | BERAAT_B | Masumiyet; tam soruşturma; ara evresinde savcılığa suç duyurusu; esas savunma 223/2-b |
 | TIPIK | BERAAT_E | İspat stratejisi; tam soruşturma; suç duyurusu yok; esas savunma 223/2-e |
-| G3 | NITELIK | Terditli; ölüm saati ve darbe kanıtlanmaz; dönüş yok hesap dökümüyle; ek savunmada süre; terditli savunma |
+| G3 | NITELIK | Terditli; ölüm saati ve darbe kanıtlanmaz; dönüş yok K1 ile; ek savunmada süre; terditli savunma |
 | G4 | MAHKUMIYET | Dağınık soruşturma, telkin, inkâr, dayanaksız talepler, olası kastın kabulü |
 | G5 | ETIK | İyi bir soruşturma; Gülay'a “on bir buçuk deyin” |
-| W | MAHKUMIYET (çöküş) | G3 benzeri yol; ikinci celsede bilirkişiye art arda yanlış delil, ♥0 |
+| OLGU_D | BERAAT_E | TIPIK + esas savunmada olası kastın kabulü (T06_D): olgular kayıttaysa beraat değişmez |
+| OLGU_T | BERAAT_E | TIPIK + terditli esas savunma (T06_T) |
+| OLGU_X | BERAAT_E | TIPIK + yalnızca merhamet isteyen esas savunma (T06_X) |
+| OLGU_EK | BERAAT_E | Araç kaydı ilk celsede değil, ara evresinde ek talep dilekçesiyle (EK_GPS) |
+| OLGU_B | NITELIK | Yüzleşme tuzağı (KY_SOR), savcıya asılların sunulması (SAV_ASIL), bilirkişiye kâğıt gösterilmez: gerçek fail savunması 223/2-b'ye ulaşamaz |
+| W | NITELIK (çöküş) | G3 benzeri yol; ikinci celsede bilirkişiye art arda yanlış delil, ♥0; dönüş yok ilk celsede kayıtta |
 
 ## 10. Erken çözüm denetimi
 
-Bkz. §13. Tipik yolun metni tarandı: Kenan'ın fail olduğu hiçbir satırda söylenmez; ilk celsedeki çatlaklar “yanıldı”
-düzeyindedir; abone kaydı yalnızca 23.41 aramasını bulup talep eden oyuncuya ara evresinde gelir.
+Tipik yol yeniden döküldü (/tmp dökümü, 1.334 satır) ve ara evresine kadar olan bölüm tarandı. Kaldırılanlar: soğuk
+açılışta “Fener bir süre olduğu yerde kaldı”; gün 1'deki “Vardiya şefinin HTS kayıtları” seçeneği (yerine olay yeri
+tutanağını okumadan kamera kaydı isteme hatası); telefon tutanağındaki “Kptn kim?” kenar notu; vardiya ofisindeki
+römorkör fotoğrafı (ARA_KENAN'a taşındı); Tarık'ın kamyonet cümlesi (ARA_TARIK, TR_GECE'ye taşındı); “Ya biliyorsa?”;
+ilk celsede tanık odasındaki bez parçası telaşı; TL_YAKALA artık “teşhiste yanılan tanık hakkında suç duyurusu”
+(yanlış ve nötr). Kalan tohumlar yalnızca kayda dayanır: aydınlatma etiketi, araç kapısı dökümü (23.21 çıkış, 23.49
+giriş), rehber kısaltması “Kptn”. Kenan'ın fail olduğu hiçbir satırda söylenmez; abone kaydı yalnızca 23.41 aramasını
+bulup talep eden oyuncuya ara evresinde gelir. Mahkeme seçeneklerinde doğru cevabın konumu ve uzunluğu değişkendir
+(BR_01 3., H1_02 2., H1_02Q 1., H1_04 3., H1_07 2., ARA_SUC 3., ARA_SAVCI 1., T_04 2., T_05 1., T_06 2./5., T_07 2.).
 
 ## 11. Erken çözüm ölçümü
 
-`shortest.mjs` (yerel en küçükleme; TIPIK'ten aksiyon blokları açgözlü silinerek hâlâ beraate ulaşan yol): **214 → 148
-aksiyon (oran 0,69; hedef ≥ 0,60)**, sonuç BERAAT_E (9.005). En kısa beraat yine dönüşün olmadığını (turnike + büfe +
-Nail), darbe şeklini, ölüm saatini ve kilit ölçüsünü birlikte ister; tek bir “anahtar delil” yolu yoktur.
+`/tmp/lg9/probe.mts` (tek süreç, bütçeli: golden path'ten hoşgörülü blok silme + her konumda `enumerateActions`
+alternatifleriyle takas), 2026-10-21:
+
+- **BERAAT_B:** G1'den 223 → **154 aksiyon (0,69 / tipik 217)**. Ara evresi zorunludur (abone/defter/araç kaydı, suç
+  duyurusu), ayrıca bilirkişiye B1 + B2.
+- **BERAAT_E:** TIPIK'ten 217 → **94 aksiyon (0,43)**, final 4.205. En kısa yol yine bütün olgu zincirini ister:
+  ön otopsi (desen + karşı darbe yok → ded_darbe), Şükrü'den kantin saati + otopsiden mide (ded_saat), turnike
+  dilekçesi ve dökümü + Gülay'ın hesap dökümü (ded_cikis), Nail + radyo (ded_buf); ilk celsede K1'e kayıt, ikinci
+  celsede B1 ve B2'ye kâğıt. Atlanan her şey isteğe bağlı keşif, puan ve epilog dallarıdır.
+- Önceki ölçüm (148/214, 142/214) skor eşiğinin (9.000) dolgusuyla elde ediliyordu; inceleme bu eşiği hukuka aykırı
+  sonuçlar ürettiği için kaldırttı (tam olgularla mahkûmiyet / 87/4). Olgu kapıları sıkılaştırılarak denendi
+  (dönüş yok = K1 ∧ K2 ∧ N2, ölüm sonra = B1 ∧ B2 ∧ B3): en fazla 106/217 (0,49). Bu kapılar B1 ∧ B2 kayıttayken
+  87/4'e düşüren aynı hukuka aykırılığı yeniden doğurduğundan tutulmadı. **0,60 hedefi BERAAT_E için karşılanmıyor;**
+  bilinçli bir ödünleşimdir ve raporlandı.
+- Mahkemeye gün 1'de gitmek MAHKUMIYET verir (kayıtta dönüş yok olgusu yoktur); ara evresini atlamak 223/2-e'yi
+  engellemez (olgular soruşturmada bulunabilir) ama 223/2-b'yi engeller.
 
 ## 12. Doğrulayıcı
 
-Son koşu (`npm run case:validate -- liman-gecesi --max-ms 2400000`, 2026-10-20): **PASSED — 0 hata, 2 uyarı**
-(SIMULATION_INCOMPLETE, uzun davada beklenen; UNREACHED_CHOICE: EK_GPS ve yüzleşme sonrası akşam devamı — ikisi de
-yalnızca belirli hata dallarında görünür). Simülasyon 47.110 durum, 357.023 geçiş, 400 yürüyüş; bütün sonuçlara
-ulaşıldı (ETIK, BERAAT_B, BERAAT_E, NITELIK, MAHKUMIYET); kapsam node 99/99, seçenek 190/192, kural 63/63, delil
-56/56; golden path 6/6; softlock / çıkmaz / sızıntı yok. Final skor aralığı −4.930…12.400; `scaleMax` 11.800.
-Süre 974 sn: aynı makinede paralel çalışan diğer dava iş akışlarının yükü (load ≈ 20) altında; varsayılan 600 sn
-sınırıyla yapılan koşu bu yük altında SIMULATION_ABORTED verdi. Yük düşükken önceki sürüm 124 sn'de PASSED oldu.
+Son koşu (`npm run case:validate -- liman-gecesi`, varsayılan bütçe, 2026-10-21, load ≈ 3): **PASSED — 0 hata,
+1 uyarı** (SIMULATION_INCOMPLETE, uzun davada beklenen). Simülasyon ≈ 50.000 durum, ≈ 363.000 geçiş, 400 yürüyüş;
+bütün sonuçlara ulaşıldı (ETIK, BERAAT_B, BERAAT_E, NITELIK, MAHKUMIYET); kapsam node 108/108, seçenek 201/201,
+kural 72/72, delil 56/56; golden path 11/11; softlock / çıkmaz / sızıntı yok. Süre 42 sn. Önceki koşulardaki
+SIMULATION_ABORTED ve vitest zaman aşımları makine yüküne (load ≈ 20) bağlıydı; sakin makinede tekrarlanmadı.
+`npx vitest run --project content-tools --project case-schema --project engine --project validator --maxWorkers=2`:
+37 dosya, 1.885 test geçti. `npm run lint` ve `npm run build` temiz.
 
 ## 13. Süre ve sözcük ölçümü
 
-`npm run case:duration -- liman-gecesi` (2026-10-20):
+`npm run case:duration -- liman-gecesi` (2026-10-21):
 
 ```
-  G1             94.6 dk   13149 sözcük   215 aksiyon  BERAAT_B (12400)
-  TIPIK          93.8 dk   13040 sözcük   214 aksiyon  BERAAT_E (12115)
-  G3             67.9 dk    9805 sözcük   134 aksiyon  NITELIK (4005)
-  G4             61.2 dk    8676 sözcük   130 aksiyon  MAHKUMIYET (220)
-  G5             69.7 dk   10041 sözcük   139 aksiyon  ETIK (8160)
-  W              62.3 dk    8960 sözcük   125 aksiyon  MAHKUMIYET (2105)
-  ==> TİPİK YOL (TIPIK): 93.8 dk  ✓ süre hedefte
+  G1            103.3 dk   14577 sözcük   223 aksiyon  BERAAT_B (12945)
+  TIPIK         102.4 dk   14524 sözcük   217 aksiyon  BERAAT_E (11950)
+  G3             73.2 dk   10705 sözcük   137 aksiyon  NITELIK (4180)
+  G4             67.2 dk    9659 sözcük   135 aksiyon  MAHKUMIYET (205)
+  G5             72.9 dk   10623 sözcük   139 aksiyon  ETIK (8160)
+  OLGU_D        101.4 dk   14347 sözcük   217 aksiyon  BERAAT_E (11630)
+  OLGU_T        101.5 dk   14360 sözcük   217 aksiyon  BERAAT_E (11830)
+  OLGU_X        101.3 dk   14320 sözcük   217 aksiyon  BERAAT_E (11660)
+  OLGU_EK       101.3 dk   14345 sözcük   216 aksiyon  BERAAT_E (11890)
+  OLGU_B         97.4 dk   13740 sözcük   211 aksiyon  NITELIK (10175)
+  W              65.2 dk    9481 sözcük   125 aksiyon  NITELIK (2105)
+  ==> TİPİK YOL (TIPIK): 102.4 dk  ✓ süre hedefte
   ==> KAPI: ✓ GEÇTİ
 ```
 
-Paket (`node tools/content/word-count.mjs content/cases/liman-gecesi`): 1.277 satır, 15.682 satır sözcüğü; ekran
-metinleriyle toplam **19.916** sözcük; en uzun satır 212 karakter.
+Paket (`node tools/content/word-count.mjs content/cases/liman-gecesi`): 1.497 satır, 18.354 satır sözcüğü; ekran
+metinleriyle toplam **22.817** sözcük; en uzun satır 212 karakter. İkinci celse artık büfeci Nail'in press/present
+tanıklığını (N1–N4), Kenan'ın K5–K8 karşılıklarını, eşin CMK 45/51 hatırlatmasıyla dinlenmesini ve kayıtlı saatlerle
+genişleyen esas savunmayı içerir; ara evresine savcılık ziyareti (ARA_SAVCI) eklendi.

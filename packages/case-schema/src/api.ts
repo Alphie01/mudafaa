@@ -50,6 +50,57 @@ export const SessionSummary = z.strictObject({
 });
 export type SessionSummary = z.infer<typeof SessionSummary>;
 
+// ─── Satın alma (docs/iap.md) ───
+/** Mağaza ürün kimlikleri (Play Console ve App Store Connect'te aynı). */
+export const PRODUCT_CASE_UNLOCK = 'dava_kilidi';
+export const PRODUCT_PREMIUM = 'premium_aylik';
+export const ProductId = z.enum([PRODUCT_CASE_UNLOCK, PRODUCT_PREMIUM]);
+export type ProductId = z.infer<typeof ProductId>;
+export const StorePlatform = z.enum(['ANDROID', 'IOS']);
+export type StorePlatform = z.infer<typeof StorePlatform>;
+/** Davaya erişim: ücretsiz (#01–#02), sahip olunan (satın alma / premium seçimi) ya da ücretli ve kilitli. */
+export const CaseAccess = z.enum(['FREE', 'OWNED', 'PAID_LOCKED']);
+export type CaseAccess = z.infer<typeof CaseAccess>;
+
+/** Premium durumu: `picksLeft` bu fatura dönemindeki kalan dava seçme hakkıdır (abonelik yoksa 0). */
+export const PremiumStatus = z.strictObject({
+  active: z.boolean(),
+  expiresAt: isoDate.nullable(),
+  picksLeft: z.int().min(0),
+});
+export type PremiumStatus = z.infer<typeof PremiumStatus>;
+
+/** `POST /purchases`: Android'de `token` = purchaseToken, iOS'ta transactionId; `dava_kilidi` için `caseId` zorunlu. */
+export const PurchaseRequest = z
+  .strictObject({
+    platform: StorePlatform,
+    productId: ProductId,
+    token: z.string().min(1).max(4096),
+    caseId: z.uuid().optional(),
+  })
+  .refine((r) => r.productId !== PRODUCT_CASE_UNLOCK || r.caseId !== undefined, {
+    path: ['caseId'],
+    message: 'dava_kilidi için caseId gerekir',
+  });
+export type PurchaseRequest = z.infer<typeof PurchaseRequest>;
+
+export const PurchaseResponse = z.strictObject({
+  purchaseId: z.uuid(),
+  productId: ProductId,
+  status: z.enum(['VERIFIED', 'REVOKED']),
+  caseId: z.uuid().optional(),
+  access: CaseAccess.optional(),
+  premium: PremiumStatus,
+  adFree: z.boolean(),
+});
+export type PurchaseResponse = z.infer<typeof PurchaseResponse>;
+
+export const PremiumPickRequest = z.strictObject({ caseId: z.uuid() });
+export type PremiumPickRequest = z.infer<typeof PremiumPickRequest>;
+
+export const PremiumPickResponse = z.strictObject({ caseId: z.uuid(), access: CaseAccess, premium: PremiumStatus });
+export type PremiumPickResponse = z.infer<typeof PremiumPickResponse>;
+
 export const MeResponse = z.strictObject({
   user: z.strictObject({
     id: z.uuid(),
@@ -75,6 +126,8 @@ export const MeResponse = z.strictObject({
   }),
   activeSession: SessionSummary.optional(),
   newCases: z.int().min(0),
+  premium: PremiumStatus,
+  adFree: z.boolean(),
 });
 export type MeResponse = z.infer<typeof MeResponse>;
 
@@ -102,6 +155,8 @@ export const CaseCard = z.strictObject({
   summary: z.string(),
   cover: z.strictObject({ name: z.string(), accent: Hex, sprite: SpriteDef.omit({ id: true }) }),
   status: z.enum(['NEW', 'IN_PROGRESS', 'COMPLETED', 'LOCKED']),
+  // Ücret kilidi rütbe kilidinden (status LOCKED) bağımsızdır.
+  access: CaseAccess,
   lockReason: z.string().optional(),
   requiredRank: RankDto.optional(),
   activeSessionId: z.uuid().optional(),

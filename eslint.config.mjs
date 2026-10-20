@@ -11,6 +11,7 @@ export default tseslint.config(
       'apps/mobile/**',
       'design/**',
       '.superpowers/**',
+      '.claude/**',
     ],
   },
   js.configs.recommended,

@@ -40,6 +40,8 @@ class DevGalleryScreen extends StatelessWidget {
                   const MotionToggle(),
                   const SizedBox(height: 10),
                   const _SlowMo(),
+                  const SizedBox(height: 10),
+                  PxButton(label: 'Yazı tipi denetimi', tone: PxTone.secondary, height: 46, fontSize: 14, onTap: () => context.push('/_dev/glyphs')),
                   const SizedBox(height: 16),
                   Text('AKIŞLAR', style: PxText.eyebrow),
                   const SizedBox(height: 8),
@@ -107,6 +109,42 @@ class _SlowMoState extends State<_SlowMo> {
         fontSize: 14,
         onTap: () => setState(() => timeDilation = timeDilation > 1 ? 1 : 5),
       );
+}
+
+/// `/_dev/glyphs`: iki ailenin bütün büyük harfleri (A–Z + ÇĞİÖŞÜ) 9–36 px ve 400/600/700 ağırlıkta.
+class GlyphCheckScreen extends StatelessWidget {
+  const GlyphCheckScreen({super.key});
+  static const caps = 'ABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ';
+  static const sample = 'LEYLA · GECE 23.04 · BİR SES · Gece Bekçisinin Sırrı';
+  static const sizes = [9.0, 11.0, 13.0, 16.0, 20.0, 24.0, 30.0, 36.0];
+
+  @override
+  Widget build(BuildContext context) {
+    Widget block(String title, TextStyle Function(double) style) => Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Padding(padding: const EdgeInsets.only(top: 12, bottom: 4), child: Text(title, style: PxText.eyebrow)),
+          for (final s in sizes) ...[
+            Text('${s.toInt()}px  $caps', style: style(s)),
+            Text(sample, style: style(s)),
+          ],
+        ]);
+    return Scaffold(
+      body: SafeArea(
+        child: Column(children: [
+          PxHeader(eyebrow: 'Geliştirici', title: 'Yazı tipi denetimi', onBack: () => context.pop()),
+          Expanded(
+            child: ListView(padding: const EdgeInsets.fromLTRB(12, 8, 12, 30), children: [
+              block('PIXELIFY SANS 400', (s) => PxText.pixel(s, weight: FontWeight.w400)),
+              block('PIXELIFY SANS 600', (s) => PxText.pixel(s, weight: FontWeight.w600)),
+              block('PIXELIFY SANS 700 (+1 harf aralığı)', (s) => PxText.pixel(s, spacing: 1)),
+              block('VT323', (s) => PxText.body(s)),
+              Text('abcçdefgğhıijklmnoöprsştuüvyz 0123456789 .,:;!?“”’()—·', style: PxText.body(20)),
+              Text('abcçdefgğhıijklmnoöprsştuüvyz 0123456789 .,:;!?“”’()—·', style: PxText.pixel(16, weight: FontWeight.w400)),
+            ]),
+          ),
+        ]),
+      ),
+    );
+  }
 }
 
 class _BackdropPreview extends StatelessWidget {

@@ -49,6 +49,7 @@ final router = GoRouter(
     GoRoute(path: '/sessions/:id/report', builder: (_, s) => ResultScreen(sessionId: s.pathParameters['id']!)),
     if (kDebugMode) ...[
       GoRoute(path: '/_dev/play', builder: (_, _) => const DevGalleryScreen()),
+      GoRoute(path: '/_dev/glyphs', builder: (_, _) => const GlyphCheckScreen()),
       GoRoute(path: '/_dev/play/:fixture', builder: (_, s) => DevPlayScreen(fixture: s.pathParameters['fixture']!)),
     ],
   ],

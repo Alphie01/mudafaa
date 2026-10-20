@@ -146,35 +146,42 @@ T_03 → T_03S → T_04 → T_04R → (T_04B) → T_05 → T_05B/E/N/M → T_06P
   (2-b yolunda) parmak iziyle kurulur. Gece telefonundaki Barış satıcılığı inkâr eder ve Tolga'yı işaret eder (çeldirici).
   Tipik yolun satır dökümü taranarak 4. kattaki “perde” satırı soğuk açılıştan çıkarıldı (Kaan'ın evde olduğunu ima
   ediyordu).
-- **Etiketler:** 3+ seçenekli kararlarda doğru seçeneğin en uzun etiket olduğu oran 2026-10-21 taramasında 3/26'ya
-  indi (T_04, T_04B, T_05E, G_RIZA, DN_RED, K_C, SC_KIMLIK yeniden dengelendi; T_04'teki madde atıfları kaldırıldı).
-- **En kısa beraat (2026-10-21):** golden path'lerden açgözlü silme (64→1 eylemlik dilimlerle, sonucu bozmayan her
-  eylemi silen yöntem; `enumerateActions`/`act` üzerinde) en kısa beraati **G_E2'den 133 eylemde** (69,0 dk; tipik
-  yolun %64,6'sı) buldu; TIPIK'ten 142, G_B'den 138. Her üçünde de 7.500 puan eşiği bağlayıcıdır. Eşiksiz deneme 91
-  eyleme (56,8 dk) iniyor; eşiği 5.500'e indiren ya da `key_excluded ∧ muhbir sarsıldı` veya `tolga_kirildi` için
-  eşiksiz ikinci koşul ekleyen denemeler 90–115 eyleme indi. Bu yüzden 7.500 tek eşik olarak kaldı (hukuki notlar §4-12).
-- **Diğer sonuçlar:** NITELIK_191'e en kısa yol 115 eylem / 62,1 dk (ara evre etkinlikleri ve muhbir sorgusu
-  gerekir; GO_H1 yalnızca 3. gün, GO_T yalnızca ara evrenin 2. günü görünür). MAHKÛMİYET 71, TELKİN 76 eylem (kötü
-  sonuçlar; hız koşusu engellenmez).
+- **Etiketler:** 2026-10-21 yeniden taraması: TIPIK, G_B, G_N ve G_E2'de 3+ seçenekli kararlarda seçilen seçeneğin en
+  uzun etiket olduğu oran **16/71 (%22,5)**. İncelemede adı geçen setlerin (T_04, T_04B, T_05E, T_00K, T_01Q, T_07,
+  G_RIZA, DN_RED, BD_SAVCI, NS2_DEFTER, KA_RIZA, DIL_KURYE, TL_KURYE) hiçbirinde doğru seçenek en uzun değildir; T_04'teki
+  madde atıfları kaldırıldı, makul yanlış seçenekler (T04_C, T04B_C, T05E_C) gerekçeli usul argümanlarına uzatıldı.
+- **En kısa yol (2026-10-21, yeniden ölçüm):** golden path'lerden açgözlü silme (64→1 eylemlik dilimler; sonucu aynı
+  sınıfta tutan her silme kabul edilir; `act` ile tek süreçte, 9 dk bütçeyle) şu en kısa yolları buldu:
+  BERAAT_E **TIPIK'ten 142 eylem** (73,2 dk; tipik yolun %68,9'u), G_E2'den 144 (73,6 dk), BERAAT_B G_B'den 173
+  (81,1 dk; %84,0). Beraat 60% kuralını (124 eylem) karşılar; 7.500 eşiği ve zincir (contra_s2, jar_cleared, muhbir
+  çelişkisi ya da key_excluded) bağlayıcıdır. Eşiği düşüren ya da zincir için eşiksiz ikinci koşul ekleyen önceki
+  denemeler en kısa beraati 90–115 eyleme indirdiği için 7.500 tek eşik olarak kaldı (hukuki notlar §4-12).
+- **Diğer sonuçlar:** NITELIK_191'e en kısa yol **126 eylem / 67,9 dk** (G_N'den; ara evre etkinlikleri ve muhbir
+  sorgusu gerekir; GO_H1 yalnızca 3. gün, GO_T yalnızca ara evrenin 2. günü görünür). MAHKÛMİYET ve TELKİN kötü
+  sonuçlardır; hız koşusu engellenmez.
 - **Gizem (yeniden tarama):** Tipik yolun satır dökümü (1.214 satır) yeniden tarandı: “Demirel” soyadı ilk kez mesaj raporunda (eylem 51),
   tam ad ancak ara evrede Paketçi kayıtlarıyla (eylem 141) görünür; satıcının kim olduğu hiçbir yerde muhbirin
   çelişkisinden önce söylenmez. “Barış” yalnızca Kaan'ın savunma iddiası olarak (eylem 1) geçer.
 
 ## 13. Ölçümler
-`npm run case:duration -- beyaz-toz` (2026-10-20):
+`npm run case:duration -- beyaz-toz` (2026-10-21):
 
 ```
-TIPIK          93.3 dk   13093 sözcük   206 aksiyon  BERAAT_E (12145)
-G_B            91.3 dk   12748 sözcük   205 aksiyon  BERAAT_B (12530)
-G_N            76.4 dk   10941 sözcük   156 aksiyon  NITELIK_191 (6645)
-G_M            62.7 dk    8787 sözcük   139 aksiyon  MAHKUMIYET (855)
-G_ETIK         76.4 dk   10764 sözcük   166 aksiyon  TELKIN (9210)
-W              78.9 dk   11146 sözcük   170 aksiyon  MAHKUMIYET (8360)
-==> TİPİK YOL (TIPIK): 93.3 dk  ✓ süre hedefte
+TIPIK          95.4 dk   13472 sözcük   206 aksiyon  BERAAT_E (12145)
+G_E2           91.7 dk   12928 sözcük   199 aksiyon  BERAAT_E (10780)
+G_B            93.2 dk   13091 sözcük   205 aksiyon  BERAAT_B (12530)
+G_N            78.3 dk   11270 sözcük   157 aksiyon  NITELIK_191 (6745)
+G_M            64.3 dk    9072 sözcük   139 aksiyon  MAHKUMIYET (855)
+G_ETIK         78.5 dk   11135 sözcük   166 aksiyon  TELKIN (9210)
+W              80.8 dk   11490 sözcük   170 aksiyon  MAHKUMIYET (8360)
+==> TİPİK YOL (TIPIK): 95.4 dk  ✓ süre hedefte
 ```
 
 `node tools/content/word-count.mjs content/cases/beyaz-toz`: paket 1.191 satır, 15.697 satır sözcüğü; ekran metinleriyle
 toplam **20.655** sözcük; en uzun satır 218 karakter.
 
-`npm run case:validate -- beyaz-toz`: **PASSED — 0 hata**, 1 uyarı (SIMULATION_INCOMPLETE, uzun davada beklenen); kapsam
-node 93/93, seçenek 212/212, kural 67/67, delil 56/56; golden path 6/6; softlock, sızıntı yok.
+`npm run case:validate -- beyaz-toz` (2026-10-21): **PASSED — 0 hata**, 22 uyarı (1 SIMULATION_INCOMPLETE, 20
+SOFTLOCK_UNVERIFIED — kaçış araması durum bütçesinde bitmeyen derin durumlar, 1 UNREAD_VARIABLE `beraat_savunma`);
+kapsam node 93/93, seçenek 213/213, kural 67/67, delil 56/56; golden path 7/7; softlock, sızıntı yok. Önceki ölçümde
+ara evrenin 1. gününde koşullu etkinlikler görünmediğinde kalan EP ile gün bitmiyordu (SOFTLOCK); üç temel iş (Kaan,
+Defne, suç duyurusu) yapıldıktan sonra görünen `A2_GUN_SONU` (“Günü kapat”) ile giderildi.

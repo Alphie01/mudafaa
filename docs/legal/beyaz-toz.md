@@ -116,7 +116,8 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
    tasarım gereği bu sonuç önceliklidir. Delil yasağı ise takdire bağlı değildir: kolluk kilidin kesildiğini kabul
    ettiyse (`contra_s3`) arka oda materyali gerekçede açıkça dışlanır (Anayasa 38/6, CMK 206/2-a, 217/2) ve hüküm
    geriye kalanlara dayanır: şekerlik aklanmadıysa iki paket ve muhbir beyanı; aklandıysa muhbirin sorgulanmadan kalan
-   beyanı ve “2 tane” yazışması. Bu son durum zayıf bir mahkûmiyettir ve bilinçli olarak öyle bırakıldı: yalanın
+   beyanı ve “2 tane” yazışması; muhbir kask/saat çelişkisiyle sarsıldıysa gerekçe bunu kayda geçirir ve çekirdek
+   beyanın inandırıcı bulunmasını istinafta denetlenecek bir delil takdiri olarak açıkça adlandırır. Bu son durum zayıf bir mahkûmiyettir ve bilinçli olarak öyle bırakıldı: yalanın
    savunmanın gerçeklerini de götürdüğü etik sondur. TCK 62 sanığın kendi davranışına bağlı olmadığı için uygulanır.
    Avukat ve abla hakkında suç duyurusu (TCK 272, 38) ve baroya bildirim hükümde yer alır.
 7. **Tazminat bildirimi dayanağı:** Dava #07'deki ifade korunarak “CMK 141/1 ve 142” gösterildi; bildirimin hüküm

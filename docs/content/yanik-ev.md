@@ -49,7 +49,7 @@ pano incelemesi talebi → ARA_GIRIS), `ev_elkoyma` (savcılığın eksperin ara
 `clue_jenerator`, `clue_borc`), ara (`clue_piroliz`, `clue_ayni`, `clue_prim`, `clue_tv`, `clue_notr`, `clue_ark`,
 `clue_teneke`). Çeldiriciler: `clue_borc`, `clue_yan_ev`, `clue_gec`, `clue_foto_koridor`, `clue_moloz` (tek başına).
 
-Çıkarımlar (1. tahta): `ded_temizlenmis` (foto_tavan + eksper_foto), `ded_zincir` (numune + eksper_giris), `ded_pano`
+Çıkarımlar (1. evre, yangın tahtası ve iplik tahtası): `ded_temizlenmis` (foto_tavan + eksper_foto), `ded_zincir` (numune + eksper_giris), `ded_pano`
 (pano + pano_yok), `ded_koken` (v_izi + baslangic), `ded_buat` (buat + necati), `ded_tasima` (esyalar + restorasyon),
 `ded_bidon` (bidon + jenerator), `ded_banka` (banka + dain), `ded_artis` (kampanya + cagri), `ded_taze` (taze + su),
 `ded_onlem` (restorasyon + necati), `ded_fener` (saadet_fener + devriye). 2. tahta: `ded_ekilmis` (piroliz + teneke),
@@ -76,10 +76,15 @@ U6 elektrik olsaydı görürdüm → ev_ark / ded_elektrik / ded_notr. Üç çel
 | 1 | ETIK | CONVICTION | Para karşılığı karşı rapor kabul edildi | 170/1-a + 158/1-k, 35; etik kartı |
 | 2 | BERAAT_B | ACQUITTAL (223/2-b) | Hızlandırıcı çöktü + eksper kırıldı + elektrik kaynağı ispatlandı (ark ya da elektrik çıkarımı ve nötr) + taksire cevap + gerçek savunması + ikna ≥ 8 + final eşiği | Beraat, tahliye, eksper hakkında suç duyurusu |
 | 3 | BERAAT_E | ACQUITTAL (223/2-e) | Hızlandırıcı çöktü + motif ipliklerinden ≥ 2 + taksire cevap + beraat savunması + final eşiği | Beraat |
-| 4 | TAKSIR | RECHARACTERIZED | Hızlandırıcı çöktü + final eşiği | TCK 171/1-a: 6 ay → TCK 62 ile 5 ay; HAGB (CMK 231/5); 158/1-k'den beraat |
+| 4 | TAKSIR | RECHARACTERIZED | Hızlandırıcı çöktü + final eşiği | TCK 171/1-a: 6 ay → TCK 62 ile 5 ay; zarar giderilmediğinden HAGB yok, TCK 51 erteleme; 158/1-k’den beraat |
 | 5 | MAHKUMIYET | CONVICTION | Varsayılan (çöküş dahil) | 170/1-a 1 yıl 6 ay + 158/1-k, 35/2: 2 yıl ve 500 gün |
 
-Eşikler ve skor, ölçümle birlikte §8'de.
+Eşikler (eşik çubuğuyla aynı): Mahkûmiyet 0 · Taksir 7.000 · Beraat 12.500; 223/2-b ayrıca 13.500 ve hâkimin kanaati
+(`pers`) ≥ 8. `scaleMax` 14.800 (doğrulayıcının final skor aralığı −2.520…15.565). Çöküş (`cred` 0) hangi skorda olursa olsun
+MAHKUMIYET'e gider. XP: 223/2-b 1,2 · 223/2-e 1,0 · taksir 0,85 · mahkûmiyet 0,6 · etik 0 (etik ihlalinde yarı).
+
+Ek koşul yüklemleri (`meta.predicates`): `hizlandirici_coktu` = contra_b2 ∧ (contra_b1 ∨ contra_u2 ∨ contra_b4 ∨ contra_u3);
+`motif_coktu` = en az ikisi: contra_s3, contra_s6, motif_banka, motif_artis; `elektrik_ispat` = (ded_elektrik ∨ contra_u6) ∧ ded_notr.
 
 ## 6. Node grafiği
 
@@ -97,6 +102,30 @@ her etkinlik doğrudan döner (kaçış uzaklığı sınırı, Dava #07 raporu �
 | G_ETIK | ETIK | Karşı rapor teklifi kabul edilir |
 | W | MAHKUMIYET (çöküş) | Yanlış delil sunumlarıyla güvenilirlik 0 |
 
-## 8. Ölçümler
+## 8. Ölçümler (2026-10-20)
 
-Bkz. §8 sonu (yazım tamamlanınca `case:duration` çıktısı eklenir).
+`npm run case:duration -- yanik-ev`:
+
+```
+  TIPIK          98.1 dk   13.4 bin sözcük   238 aksiyon  BERAAT_E (14855)
+  G_B            99.5 dk   13.5 bin sözcük   244 aksiyon  BERAAT_B (15565)
+  G_T            88.6 dk   12.0 bin sözcük   217 aksiyon  TAKSIR (11990)
+  G_M            78.0 dk   10.7 bin sözcük   188 aksiyon  MAHKUMIYET (6405)
+  G_ETIK         95.9 dk   13.0 bin sözcük   235 aksiyon  ETIK (14215)
+  W              85.3 dk   11.5 bin sözcük   213 aksiyon  MAHKUMIYET/çöküş (10575)
+  ==> TİPİK YOL (TIPIK): ✓ süre hedefte
+```
+
+`node tools/content/word-count.mjs content/cases/yanik-ev`: paket 1.164+ satır, ~14,7 bin satır sözcüğü; ekran metinleriyle toplam
+~20 bin. En uzun satır 209 karakter.
+
+`npm run case:validate -- yanik-ev --max-ms 3000000`: **PASSED — 0 hata, 1 uyarı (SIMULATION_INCOMPLETE)**; 56.177 durum, 400
+yürüyüş; bütün sonuçlara ulaşıldı; kapsam node 104/104, seçenek 213/213, kural 79/79, delil 66/66; golden path 6/6; softlock,
+sızıntı yok. Not: makine yükü (yük ortalaması ~21, 8 çekirdek; paralel ajanlar) altında süre 1.218 sn ölçüldü; varsayılan 600 sn
+sert sınırı bu yük altında aşılıyor (SIMULATION_ABORTED), sayı bütçeleri aynı olduğundan sonuç deterministiktir.
+
+Erken çözüm denetimi (golden path'ten aksiyon silerek yerel en kısa yol, `shortest.mjs`): TIPIK 238 → 174 aksiyon (BERAAT_E,
+%73), G_B 244 → 179 (%75). Beraat; numune zinciri, temizlenmiş zemin, iki iplik ve taksire cevap olmadan kurulamıyor.
+
+Tahtalar: birinci evrede iki tahta (yangın: 14 kart, 6 tarif + 2 çeldirici; iplikler: 13 kart, 6 tarif + 2 çeldirici), arada
+bir tahta (13 kart, 4 tarif); tek havuzlu 28 kartlık tahta simülasyonu patlattığı için bölündü.

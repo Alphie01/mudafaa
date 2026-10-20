@@ -147,26 +147,29 @@ Sonucu esas savunma düğmesi değil, kayıttaki delil belirler (CMK 217/1, 225/
 - `bagimsiz_anlatim` — video_izlendi ∨ ece_tanikti ∨ onur_kirildi · `bilek_kanit` — ded_bilek (ara tahtası)
 - `mm_tam` — saldiri_kanit ∧ tekme_yok ∧ tanik_coktu ∧ bagimsiz_anlatim ∧ bilek_kanit
 - `ara_gelisme` — atk_govde ∨ krim_avuc ∨ ecz_birlikte ∨ ara_sinan ∨ ded_bilek ∨ onur_vicdan ∨ video_izlendi
-- `tanik_guvenilmez` — onur_kirildi ∨ en az üç contra_o* · `kadeh_curudu` — contra_k3 ∨ contra_k4 ∨ contra_o3 ∨ saldiri_kanit
-- `tahrik_kanit` — ece_tanikti ∨ saldiri_kanit ∨ (contra_k5 ∧ contra_o5) · `findings` — en az dört contra_k*/contra_o*
+- `tanik_guvenilmez` — onur_kirildi ∨ en az üç contra_o* · `kadeh_curudu` — contra_k3 ∨ contra_k4 ∨ contra_o3 ∨ krim_avuc ∨ saldiri_kanit
+- `tahrik_kanit` — ece_tanikti ∨ krim_avuc ∨ saldiri_kanit ∨ (contra_k5 ∧ contra_o5) · `findings` — en az dört contra_k*/contra_o*
 
 | Öncelik | Kimlik | Sınıf | Koşul | Ceza | XP |
 |---|---|---|---|---|---|
 | 0 | ETIK | CONVICTION | `ece_coktu` ∧ ¬saldiri_kanit ∧ ¬kadeh_curudu ∧ ¬tanik_guvenilmez ∧ ¬video ∧ ¬ev_kriminal (Ece tek bağımsız anlatımdı) | 2 yıl 11 ay + baro bildirimi | 0 |
-| 1 | BERAAT_D | ACQUITTAL (223/2-d) | ¬çöküş ∧ `mm_tam` ∧ final ≥ 9500 (esas savunma talebinden bağımsız) | yok | 1,2 |
-| 2 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ ¬mm_tam ∧ `supheden` ∧ tanik_guvenilmez ∧ ara_gelisme ∧ final ≥ 9500 | yok | 1,0 |
-| 3 | CVYO | OTHER (223/3-c; TCK 27/2) | ¬çöküş ∧ (`sinir_kabul` ∨ (saldiri_kanit ∧ ¬terditli)) ∧ final ≥ 7500 | ceza verilmesine yer yok | 0,9 |
-| 4 | INDIRIM | REDUCED | ¬çöküş ∧ `terditli` ∧ tahrik_kanit ∧ kadeh_curudu ∧ final ≥ 7500 | 11 ay 20 gün, HAGB | 0,85 |
-| 5 | MAHKUMIYET | CONVICTION (varsayılan) | — (çöküş dahil; saldırı gösterilmemişse) | 2 yıl 11 ay | 0,6 (çöküşte 0,3) |
+| 1 | BERAAT_D | ACQUITTAL (223/2-d) | ¬çöküş ∧ `mm_tam` ∧ final ≥ 9500 | yok | 1,2 |
+| 2 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ ¬mm_tam ∧ tanik_guvenilmez ∧ ara_gelisme ∧ final ≥ 9500 | yok | 1,0 |
+| 3 | CVYO | OTHER (223/3-c; TCK 27/2) | ¬çöküş ∧ saldiri_kanit ∧ (final ≥ 7500 ∨ mm_tam) | ceza verilmesine yer yok | 0,9 |
+| 4 | INDIRIM | REDUCED | ¬çöküş ∧ ¬saldiri_kanit ∧ tahrik_kanit ∧ kadeh_curudu ∧ final ≥ 7500 | 11 ay 20 gün, HAGB | 0,85 |
+| 5 | MAHKUMIYET | CONVICTION (varsayılan) | — (çöküş; ya da saldırı, tahrik veya kadeh çürümesi kurulmamışsa) | 2 yıl 11 ay | 0,6 (çöküşte 0,3) |
 
-Değişmezler: `mm_tam` ∧ ¬çöküş ∧ final ≥ 9500 → her talep için BERAAT_D; `saldiri_kanit` ∧ ¬çöküş ∧ final ≥ 7500 → asla
-silah artırımlı mahkûmiyet; savcının 2-d mütalaası (T_05A ⇔ mm_tam) ile BERAAT_E aynı oyunda olamaz. Ece yönlendirilip
+Değişmezler (2026-10-21 yoklaması: her golden path'te T_06'nın beş seçeneği tek tek denendi, sınıf hiçbirinde değişmedi):
+esas savunma düğmesi sınıfı değil yalnızca skoru belirler; `mm_tam` ∧ ¬çöküş → final ≥ 9500 ise BERAAT_D, altındaysa CVYO
+(ceza yok), asla mahkûmiyet ya da indirim — çöküş tetikleyicisi de mm_tam varken çalışmaz; `saldiri_kanit` ∧ ¬çöküş ∧
+final ≥ 7500 → asla mahkûmiyet; kadeh çürümesi + tahrik → silah artırımsız İNDİRİM (mahkeme TCK 29'u re'sen uygular);
+savcının 2-d mütalaası (T_05A ⇔ mm_tam) ile BERAAT_E aynı oyunda olamaz. Ece yönlendirilip
 çöktüğünde ETIK dışındaki sonuçlarda gerekçeye "beyan hükme esas alınmadı" satırı ve disiplin soruşturması epilogu eklenir.
 
 Esas savunma (T_06) yalnızca skor ve iknayı belirler: T06_MM ∧ mm_tam +250 (×1,5 MASUMIYET) ve `mm_kabul`; mm_tam yokken
 saldırı kanıtıyla `sinir_kabul` +60; T06_E ∧ findings +200 (×1,2 USUL) ve `supheden`, mm_tam varken yalnız +60 (NÖTR);
 T06_SINIR ∧ saldırı +120 `sinir_kabul`, mm_tam varken +20 (NÖTR); T06_T `terditli` +150 (×0,8 INDIRIM); T06_D (taksir,
-TCK 89) −50, ikna −1. Mütalaa üç varyant (T_05A/B/C) delil gücüne göre.
+TCK 89) −50, ikna −1. Bu bayraklar yalnızca gerekçe satırlarını, epilog parçalarını ve rapor ipuçlarını seçer. Mütalaa üç varyant (T_05A/B/C) delil gücüne göre.
 
 **Ceza hesabı** (ayrıntı `docs/legal/kirik-kadeh.md` §2): mahkûmiyet 2 yıl → ×1,5 = 3 yıl → +1/6 = 3 yıl 6 ay → −1/6 =
 2 yıl 11 ay; indirim 1 yıl 6 ay → +1/6 = 1 yıl 9 ay → −1/3 (tahrik) = 1 yıl 2 ay → −1/6 = 11 ay 20 gün, HAGB.
@@ -183,46 +186,51 @@ TCK 89) −50, ikna −1. Mütalaa üç varyant (T_05A/B/C) delil gücüne göre
 
 | Ad | Sonuç | Final | Özet |
 |---|---|---|---|
-| TIPIK | BERAAT_E | 11 995 | USUL stratejisi; bütün sahneler, belgeler, 8 tarif; Ece dürüstçe; K1–K5; ara dönemde ATK/Kriminal/eczane, Sinan, Ece, Bora, Defne + ek dilekçe; Onur O1–O5 ve kırılma; video, memur; esas savunmada 223/2-e |
-| G_D | BERAAT_D | 12 110 | MASUMIYET; aynı zincir + T04_C, D_KACIS; esas savunmada 223/2-d (savcı da beraat ister) |
-| G_CVYO | CVYO | 10 760 | Tekme çürütülmez (O4 sunulmaz, kırılma yok); T06_SINIR |
-| G_I | INDIRIM | 10 410 | INDIRIM stratejisi; yalnız O1/O5; tutanağa itiraz yok; terditli savunma |
-| G_M | MAHKUMIYET | 9 805 | Güçlü soruşturma, zayıf kürsü; D_KARAKTER/D_BOKS, duygusal savunma, inkâr |
-| W | MAHKUMIYET (çöküş) | 8 000 | Özel rapora yanlış itiraz + dört yanlış delil → T_COKUS |
-| G_DUZELT | BERAAT_E | 10 715 | Ece yönlendirilir, ara dönemde düzeltilir (T_03K); kamera yalanı düzeltilir (ARAB_KAMERA); Kriminal'de ıska |
-| G_BILGI | BERAAT_E | 11 445 | Ece'ye yanlış bilgi (zorunlu değil) → ARAE_BILGI ile düzeltme ve ek dilekçe; keşif talebi |
-| G_BASKI | BERAAT_E | 11 025 | Ece'ye baskı (T_03B) ve Tolga'ya aşırı tepki |
-| G_ETIK | ETIK | 11 320 | Ece yönlendirilir, düzeltilmez; kürsüde çöker |
+| TIPIK | BERAAT_E | 11 545 | USUL stratejisi; bütün sahneler, belgeler, 8 tarif; Ece dürüstçe; K1–K5; ara dönemde ATK/Kriminal/eczane, Sinan, Ece, Bora, Defne + ek dilekçe; bilek tahtada kurulmaz (O4'e ATK raporu); Onur O1–O5 ve kırılma; video, memur; esas savunmada 223/2-e. Yerdeki an aydınlanmadığı için mm_tam yok |
+| G_D | BERAAT_D | 12 140 | MASUMIYET; aynı zincir + ara tahtasında bilek, O4'e ded_bilek, T04_C, D_KACIS; savcı 2-d ister |
+| G_CVYO | CVYO | 10 790 | Saldırı kâğıtla kurulur ama tanık çökmez (yalnız O1/O3) |
+| G_I | INDIRIM | 9 495 | Tahtada önkol + kan kurulmaz, video yok → saldırı kanıtı yok; Ece tanıklık eder, Kriminal avuç bulgusu ve K3/K4 → kadeh çürür, tahrik kurulur; terditli savunma |
+| G_M | MAHKUMIYET | 7 775 | Saldırı kurulmaz, Kriminal istenmez, Ece çağrılmaz, K3/K4 yalnız bastırılır; D_KARAKTER/D_BOKS, taksir savunması, inkâr |
+| W | MAHKUMIYET (çöküş) | 8 030 | Özel rapora yanlış itiraz + dört yanlış delil → T_COKUS |
+| G_DUZELT | BERAAT_E | 10 235 | Ece yönlendirilir, ara dönemde düzeltilir (T_03K); kamera yalanı düzeltilir (ARAB_KAMERA); Kriminal'de ıska |
+| G_BILGI | BERAAT_E | 10 995 | Ece'ye yanlış bilgi (zorunlu değil) → ARAE_BILGI ile düzeltme ve ek dilekçe; keşif talebi |
+| G_BASKI | BERAAT_E | 10 575 | Ece'ye baskı (T_03B) ve Tolga'ya aşırı tepki |
+| G_ETIK | ETIK | 8 620 | Ece yönlendirilir, düzeltilmez; kürsüde çöker; saldırı, kadeh ve video kurulmaz |
 
 ## 10. Erken çözüm denetimi
 
-- Beraat iki kapıya bağlı: bayrak (en az dört kürsü çelişkisi ya da meşru savunmanın dört şartı) **ve** final ≥ 9500.
-- Elle kurulan en yalın beraat denemesi (soruşturmada yalnız üç sahne + üç belge + tahta, Bora/Ece/Onur/Tolga görüşmeleri yok,
-  ara dönemde yalnız ATK + Kriminal + eczane kaydı, iki celsede bütün bastır/sun/itirazlar): **136 aksiyon, final 9 325 →
-  MAHKUMIYET**. Beraat için en az birkaç görüşme/teslim daha gerekir; en kısa beraat ≥ ~140 aksiyon (tipik yolun 211
-  aksiyonunun ≥ %64'ü).
+- Beraat iki kapıya bağlı: delil (BERAAT_D için mm_tam — ara tahtasındaki bilek dahil; BERAAT_E için ikinci celsede çöken
+  tanık **ve** ara dönemden en az bir gelişme) **ve** final ≥ 9500. ATK, Kriminal ve eczane yalnızca zarf/CD olarak gelir;
+  delil kartı belge ara dönemde açılınca verilir, açılmadan kürsüde sunulamaz.
+- Ara dönem atlama yoklaması (ARAGIRIS_DEVAM'dan doğrudan GO_T): hiçbir yol beraate ulaşmıyor (TIPIK/G_D/G_DUZELT/G_BILGI/
+  G_BASKI ikinci celsede sunacak kâğıt bulamıyor); G_CVYO → CVYO 8 400, G_I → İNDİRİM 7 695, G_M → MAHKUMIYET.
+- Kısayol yoklaması (2026-10-21; her golden path'ten başlayıp reddedilen aksiyonları atlayarak 64→1 boyutlu parçaları
+  silen açgözlü küçültme, `enumerateActions` ile kabul edilen aksiyonlar sayıldı): BERAAT_E en kısa **142** (G_DUZELT'ten;
+  TIPIK'ten 151, G_BASKI'dan 145), BERAAT_D **167**, CVYO 161, İNDİRİM 143. En kısa beraat tipik yolun 209 aksiyonunun
+  **%68**'i; hepsi üç arama sahnesi, hastane/darp/ifade belgeleri, sekiz tahta tarifi, Ece görüşmesi ve ara dönemde ATK +
+  Kriminal + eczane + Sinan gerektiriyor.
 - Tipik yol satırları döküldü (`case:duration` görünüm metinleri): soğuk açılış ve karakol isimsiz; Onur'un Serkan'la ilişkisi
-  oyuncu adisyonu/eczaneyi bulmadan söylenmez (ilk taslaktaki "yarın erken toplantı" satırı ve Bora görüşmesindeki açık
-  bağlantı düşünceden çıkarıldı); kimin saldırdığı yalnızca müvekkilin kendi anlatımı olarak geçer, kâğıtla kanıtlanana dek
-  iç ses "kanıtlayabilirsem" kaydıyla konuşur.
+  oyuncu adisyonu/eczaneyi bulmadan söylenmez (Bora görüşmesindeki "patronu mu" ve ifade belgesindeki "sigortacının imzası"
+  çıkarıldı); kimin saldırdığı yalnızca müvekkilin kendi anlatımı olarak geçer, kâğıtla kanıtlanana dek iç ses
+  "kanıtlayabilirsem" kaydıyla konuşur.
 
 ## 11. Süre ve sözcük ölçümü
 
-`npm run case:duration -- kirik-kadeh` (2026-10-20):
+`npm run case:duration -- kirik-kadeh` (2026-10-21):
 
 ```
-  TIPIK          93.0 dk   12937 sözcük   211 aksiyon  BERAAT_E (11995)
-  G_D            92.6 dk   12861 sözcük   211 aksiyon  BERAAT_D (12110)
-  G_CVYO         86.7 dk   11984 sözcük   201 aksiyon  CVYO (10760)
-  G_I            86.0 dk   11879 sözcük   200 aksiyon  INDIRIM (10410)
-  G_M            85.2 dk   11752 sözcük   199 aksiyon  MAHKUMIYET (9805)
-  W              76.7 dk   10500 sözcük   184 aksiyon  MAHKUMIYET (8000)
-  G_DUZELT       85.9 dk   12012 sözcük   192 aksiyon  BERAAT_E (10715)
-  G_BILGI        88.0 dk   12215 sözcük   201 aksiyon  BERAAT_E (11445)
-  G_BASKI        87.9 dk   12250 sözcük   198 aksiyon  BERAAT_E (11025)
-  G_ETIK         87.6 dk   12098 sözcük   204 aksiyon  ETIK (11320)
-  ==> TİPİK YOL (TIPIK): 93.0 dk  ✓ süre hedefte
+  TIPIK          98.8 dk   14013 sözcük   209 aksiyon  BERAAT_E (11545)
+  G_D            98.1 dk   13836 sözcük   212 aksiyon  BERAAT_D (12140)
+  G_CVYO         92.5 dk   13012 sözcük   202 aksiyon  CVYO (10790)
+  G_I            88.4 dk   12436 sözcük   193 aksiyon  INDIRIM (9495)
+  G_M            81.1 dk   11395 sözcük   178 aksiyon  MAHKUMIYET (7775)
+  W              81.8 dk   11396 sözcük   185 aksiyon  MAHKUMIYET (8030)
+  G_DUZELT       89.7 dk   12746 sözcük   189 aksiyon  BERAAT_E (10235)
+  G_BILGI        92.6 dk   13081 sözcük   199 aksiyon  BERAAT_E (10995)
+  G_BASKI        91.9 dk   13019 sözcük   196 aksiyon  BERAAT_E (10575)
+  G_ETIK         85.5 dk   12037 sözcük   186 aksiyon  ETIK (8620)
+  ==> TİPİK YOL (TIPIK): 98.8 dk  ✓ süre hedefte
   ==> KAPI: ✓ GEÇTİ
 ```
 
-Davanın bütün metni (satırlar, yanıtlar, geri bildirimler, delil ve hüküm metinleri) ~24 500 sözcüktür.
+Davanın bütün metni (satırlar, yanıtlar, geri bildirimler, delil ve hüküm metinleri) ~26 900 sözcüktür.

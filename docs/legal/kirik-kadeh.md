@@ -98,11 +98,25 @@ hüküm ayakta dinlenir (231/4).
    gösterilirse (saldırı katılandan, tanık çöktü, bağımsız bir anlatım var, yerdeki hareket bileğe bası olarak kuruldu) 2-d;
    iddianın anlatımı çöker ama yerdeki an aydınlanmazsa 2-e. Sonuç, müdafinin esas hakkındaki talebine değil kayıttaki
    delile bağlıdır (CMK 217/1, 225/2): şartlar gösterilmişken müdafi şüpheden yararlanmayı, sınırın aşılmasını ya da
-   terditli indirimi istese bile mahkeme 2-d'ye gider; yanlış talep yalnızca skor ve ikna kaybettirir. Saldırının katılandan
-   geldiği gösterilmiş ama şartlar tam değilse silah artırımlı mahkûmiyet verilmez: savunma terditli indirim istemişse
-   İNDİRİM (86/3-e uygulanmaz, TCK 29), aksi hâlde mahkeme sınırın mazur görülebilir biçimde aşıldığını kabul eder (CVYO).
-   Bu, bir öğretim tercihi olarak `BERAAT_E` ve `CVYO` gerekçelerine açıkça yazıldı. Oyunun skor eşiği (ikna) bu kapının
-   üstünde ayrıca işler: 2-d için beraat eşiği (9 500), CVYO/İNDİRİM için 7 500.
+   terditli indirimi istese bile mahkeme 2-d'ye gider; yanlış talep yalnızca skor ve ikna kaybettirir. Aynı ilke bütün
+   sınıflarda geçerlidir; esas savunmadaki talep hiçbir durumda hükmün türünü değiştirmez:
+   - tanık çöktü ve ara dönemden yeni bir gelişme geldi, ama şartlar tam değil → 2-e (savunma 2-d ya da terditli istese de);
+   - saldırının katılandan geldiği kâğıtla gösterildi, ama tanığın "yerdeki hareket" anlatımı çökmedi → mahkeme sınırın
+     mazur görülebilir biçimde aşıldığını kabul eder (CVYO, 223/3-c); silah artırımlı mahkûmiyet verilmez;
+   - saldırı gösterilmedi, ama kadehin sanıkça kullanıldığı anlatımı çürüdü (K3/K4/O3 ya da Kriminal avuç bulgusu) ve
+     katılanın haksız hareketi kuruldu → 86/3-e uygulanmaz, TCK 29 **re'sen** uygulanır (İNDİRİM). Kriminal raporun sapı
+     katılanın kavradığını göstermesi tek başına saldırının yönünü ispat etmez (sanığın önkol kesisi ya da video gerekir),
+     ama katılanın elinde kırık camla tezgâha yönelmesini haksız hareket olarak kurar;
+   - bunların hiçbiri yoksa (ya da savunma kürsüde çökerse) iddianamedeki anlatım esas alınır (MAHKUMIYET).
+   Meşru savunmanın bütün şartları gösterilmişken ikna skoru beraat eşiğinin altında kalırsa sonuç CVYO'dur (ceza yok);
+   bu durumda çöküş de tetiklenmez. Bu bir oyun soyutlamasıdır (ikna = mahkemenin delili kavrama derecesi); gerçek bir
+   mahkeme şartları kabul ettiğinde 2-d'ye hükmeder. Oyunun skor eşiği bu kapıların üstünde ayrıca işler: beraat için
+   9 500, CVYO/İNDİRİM için 7 500.
+   Tipik yolda (TIPIK) saldırı kâğıtla, Ece ve video ile gösterilir, tanık kırılır, ama yerdeki hareketin bileğe bası olduğu
+   tahtada kurulmaz: Adli Tıp'ın "gövdede tekme izi yok" bulgusu tekme anlatımını çürütür, bilekteki iz ise açıklanmadan
+   kalır. Mahkeme "sanığın kabul ettiği tek darbe ile katılan düştükten sonraki hareketin, meşru savunma iddiasını
+   dışlayacak biçimde aydınlatılamadığı" gerekçesiyle 2-e verir. 2-d'yi seçen daireler de vardır; oyunda 2-d, şartların
+   **olumlu** gösterilmesine ayrıldı. Savcı bu yolda indirim mütalaası verir (T_05B); 2-d mütalaası yalnızca mm_tam ile.
 3. **Bileğe basmak.** Elinde cam olan ve yerde onu yeniden kaldıran saldırganın bileğine basıp silahı bıraktırmak, saldırı
    sürdüğü için savunmanın parçası sayıldı; bu an aydınlanmazsa sınırın aşılması (27/2) tartışması açılır (CVYO).
 4. **Kırığın derecesi ve 1/6.** TCK 87/3 "yarısına kadar" der; derece başına oran kanunda yoktur. Uygulamadaki yaygın

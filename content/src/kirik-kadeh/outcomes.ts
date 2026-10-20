@@ -586,6 +586,10 @@ export const outcomes: CasePart = {
           flag('mutalaa_indirim'),
         ),
         because(
+          'Müdafi esas savunmasında beraatin yanında, terditli olarak silahla işleme artırımının düşmesini ve haksız tahriki talep etmiştir; haksız tahrik hükümleri talepten bağımsız olarak re’sen değerlendirilmiştir.',
+          flag('terditli'),
+        ),
+        because(
           'Tanık Ece Tan, katılanın daha önce de kendisini rahatsız ettiğini beyan etmiştir.',
           all(flag('fact_taciz'), flag('ece_tanikti')),
         ),

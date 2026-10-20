@@ -53,4 +53,9 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    // Node betikleri (.mjs): Node genel değişkenleri.
+    files: ['**/*.mjs'],
+    languageOptions: { globals: { process: 'readonly', console: 'readonly', fetch: 'readonly', URL: 'readonly' } },
+  },
 );

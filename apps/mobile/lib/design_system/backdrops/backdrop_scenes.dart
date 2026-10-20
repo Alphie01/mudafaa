@@ -13,8 +13,8 @@ const _bld1 = Color(0xFF2B2350);
 const _amber = Color(0xFFE8B13C);
 const _amberHi = Color(0xFFFFD36B);
 const _amberDim = Color(0xFF7A5A22);
-const _glow = Color(0x33FFD36B);
-const _glow2 = Color(0x1FFFD36B);
+const _glow = Color(0x1FFFD36B);
+const _glow2 = Color(0x14FFD36B);
 const _asphalt = Color(0xFF15121F);
 const _wood = Color(0xFF6B4630);
 const _woodDk = Color(0xFF3B2419);
@@ -122,14 +122,14 @@ void blindStripes(PxCanvas p, num x, num y, num w, int n, Color c) {
 /// Sokak lambası ve ışık konisi; `flicker` ise ara sıra söner.
 void lampPost(PxCanvas p, num x, num ground, int f, {bool flicker = true, num height = 60}) {
   final top = ground - height;
-  p.r(x, top, 2, height, _ink);
-  p.r(x, top, 8, 2, _ink);
+  p.r(x, top, 2, height, _steel);
+  p.r(x, top, 8, 2, _steel);
+  p.r(x - 1, ground - 3, 4, 3, _steel);
   p.r(x + 6, top + 2, 4, 2, _steel);
   final off = flicker && ((f % 41) == 3 || (f % 41) == 5 || (f % 67) == 10);
   if (!off) {
     p.r(x + 6, top + 4, 4, 1, _amberHi);
-    p.cone(x + 8, top + 5, height - 5, 30, _glow);
-    p.cone(x + 8, top + 5, height - 5, 14, _glow2);
+    p.cone(x + 8, top + 5, height - 5, 34, _glow2, topW: 4);
     p.r(x - 7, ground, 30, 2, const Color(0x40FFD36B));
   }
 }
@@ -217,11 +217,11 @@ void _office(PxCanvas p, int f, {required bool night}) {
     blinds(p, wx, wy, ww, wh, const Color(0xFF3A3166), const Color(0xFF120D1C));
     // Sokaktan gelen ışık şeritleri karşı duvara ve yere düşer.
     blindStripes(p, p.w * 0.5, p.h * 0.18, p.w * 0.3, 6, const Color(0x1AE8B13C));
-    blindStripes(p, p.w * 0.2, p.h * 0.62, p.w * 0.45, 5, const Color(0x14E8B13C));
+    blindStripes(p, p.w * 0.2, p.h * 0.62, p.w * 0.45, 5, const Color(0x0FE8B13C));
     if (f % 120 < 60) p.r(wx + ww * 0.6, wy + 2, 3, 2, const Color(0xFFEF7A66)); // dışarıda neon
   } else {
     blinds(p, wx, wy, ww, wh, const Color(0xFF9CC3E6), const Color(0xFFD9C597));
-    blindStripes(p, p.w * 0.25, p.h * 0.62, p.w * 0.5, 5, const Color(0x24FFF2C0));
+    blindStripes(p, p.w * 0.25, p.h * 0.62, p.w * 0.5, 5, const Color(0x12FFF2C0));
   }
   shelf(p, p.w * 0.62, p.h * 0.12, p.w * 0.3, p.h * 0.36, seed: 3);
   clock(p, p.w * 0.53, p.h * 0.1, f, face: night ? _parchDk : _parch);

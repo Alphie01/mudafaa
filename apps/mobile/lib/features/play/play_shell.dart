@@ -89,6 +89,9 @@ class _PlayShellState extends State<PlayShell> with TickerProviderStateMixin {
   Map<String, dynamic>? _held;
   List<Map<String, dynamic>> _seq = const [];
   bool _epilogue = false;
+
+  /// Giriş yeni bir node için mi (öyleyse gövde perde/kartlar bitene kadar gizli; aynı node'da kartlar gövdenin üstünde).
+  bool _freshNode = false;
   String? _chapter;
   FxCard? _card;
   Completer<void>? _wait;
@@ -163,6 +166,7 @@ class _PlayShellState extends State<PlayShell> with TickerProviderStateMixin {
     }
     _seq = seq;
     _stage = _Stage.intro;
+    _freshNode = prev == null || nodeChanged;
     _held = curtain ? prev : null;
     final token = _token;
     WidgetsBinding.instance.addPostFrameCallback((_) => _direct(view, token, curtain: curtain, chapter: chapterChanged ? chapter : null, cards: cards));
@@ -375,7 +379,7 @@ class _PlayShellState extends State<PlayShell> with TickerProviderStateMixin {
                   ColoredBox(key: const ValueKey('scrim'), color: showBackdrop && _stage == _Stage.done ? const Color(0x8C120D1C) : const Color(0x00000000)),
                   Offstage(
                     key: const ValueKey('body'),
-                    offstage: _stage != _Stage.done && _held == null,
+                    offstage: _held == null && (_stage == _Stage.lines || (_stage == _Stage.intro && _freshNode)),
                     child: IgnorePointer(ignoring: !interactive, child: body),
                   ),
                   if (_stage == _Stage.lines)
@@ -387,9 +391,10 @@ class _PlayShellState extends State<PlayShell> with TickerProviderStateMixin {
                       onLine: _onLine,
                       onDone: _release,
                     ),
-                  if (_floats.isNotEmpty) Positioned(top: 36, left: 0, right: 0, child: Center(child: FloatingDeltas(key: ValueKey('floats-$_floatKey'), items: _floats))),
+                  if (_floats.isNotEmpty) Positioned.fill(key: const ValueKey('floats-layer'), child: Align(alignment: const Alignment(0, -0.35), child: FloatingDeltas(key: ValueKey('floats-$_floatKey'), items: _floats))),
                   if (_toast != null)
                     Positioned(
+                      key: const ValueKey('toast-layer'),
                       top: 8,
                       left: 12,
                       right: 12,
@@ -401,8 +406,8 @@ class _PlayShellState extends State<PlayShell> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                  if (_card != null) Positioned.fill(child: FxCardOverlay(key: ValueKey(_card), card: _card!, onDone: _release, screenFx: _fx)),
-                  if (busy) const Positioned(top: 0, left: 0, right: 0, child: LinearProgressIndicator(minHeight: 3, color: PxColors.gold, backgroundColor: Colors.transparent)),
+                  if (_card != null) Positioned.fill(key: const ValueKey('card-layer'), child: FxCardOverlay(key: ValueKey(_card), card: _card!, onDone: _release, screenFx: _fx)),
+                  if (busy) const Positioned(key: ValueKey('busy-layer'), top: 0, left: 0, right: 0, child: LinearProgressIndicator(minHeight: 3, color: PxColors.gold, backgroundColor: Colors.transparent)),
                 ]),
               ),
               if (primaryChoice != null && interactive && !_epilogue)
@@ -437,7 +442,7 @@ extension on Widget {
             builder: (context, _) => curtain.value == 0 || curtain.value == 1 ? const SizedBox.shrink() : CustomPaint(key: const ValueKey('curtain'), painter: CurtainPainter(curtain.value)),
           ),
         ),
-        ?chapter,
+        if (chapter != null) Material(type: MaterialType.transparency, child: chapter),
       ]);
 }
 

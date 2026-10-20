@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
@@ -37,6 +38,8 @@ class DevGalleryScreen extends StatelessWidget {
                 final items = ms(jsonDecode(snap.data!));
                 return ListView(padding: const EdgeInsets.fromLTRB(16, 14, 20, 30), children: [
                   const MotionToggle(),
+                  const SizedBox(height: 10),
+                  const _SlowMo(),
                   const SizedBox(height: 16),
                   Text('AKIŞLAR', style: PxText.eyebrow),
                   const SizedBox(height: 8),
@@ -86,6 +89,24 @@ class DevGalleryScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Yavaş çekim (timeDilation ×5): perde ve kart geçişlerini kare kare görmek için.
+class _SlowMo extends StatefulWidget {
+  const _SlowMo();
+  @override
+  State<_SlowMo> createState() => _SlowMoState();
+}
+
+class _SlowMoState extends State<_SlowMo> {
+  @override
+  Widget build(BuildContext context) => PxButton(
+        label: 'Yavaş çekim: ${timeDilation > 1 ? 'Açık' : 'Kapalı'}',
+        tone: PxTone.secondary,
+        height: 46,
+        fontSize: 14,
+        onTap: () => setState(() => timeDilation = timeDilation > 1 ? 1 : 5),
+      );
 }
 
 class _BackdropPreview extends StatelessWidget {

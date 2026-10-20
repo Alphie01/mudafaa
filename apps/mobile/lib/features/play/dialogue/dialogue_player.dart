@@ -315,10 +315,10 @@ class _SpeechStage extends StatelessWidget {
           right: 12,
           bottom: 12,
           child: Column(
-            crossAxisAlignment: right ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (plate != null) Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: plate),
+              if (plate != null) Align(alignment: right ? Alignment.centerRight : Alignment.centerLeft, child: Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: plate)),
               box,
             ],
           ),

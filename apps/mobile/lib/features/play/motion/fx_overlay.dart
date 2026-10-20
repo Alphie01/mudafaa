@@ -195,7 +195,7 @@ class _FxCardOverlayState extends State<FxCardOverlay> with SingleTickerProvider
           child: flip < 0.5 ? back : front,
         ),
         const SizedBox(height: 14),
-        Text('Çantaya eklendi', style: PxText.body(18, color: PxColors.muted)),
+        Text(e.containsKey('kindLabel') ? 'Çantaya eklendi' : 'Not defterine eklendi', style: PxText.body(18, color: PxColors.muted)),
       ]),
     );
   }

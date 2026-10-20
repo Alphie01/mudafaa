@@ -20,8 +20,8 @@ import { p1, p2 } from './shared.js';
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler.
 
 /** Sonuç eşikleri (eşik çubuğunun `from` değerleriyle aynı; THRESHOLD_MISMATCH). */
-export const T_INDIRIM = 3000;
-export const T_BERAAT = 6000;
+export const T_INDIRIM = 6000;
+export const T_BERAAT = 9500;
 
 export const meta: CasePart = {
   format: CASE_FORMAT_ID,
@@ -47,7 +47,8 @@ export const meta: CasePart = {
       categories: categories({
         HUKUKI_BILGI: {
           weak: 'Kasten yaralamanın basamaklarını (TCK 86/1, 86/3-e, 87/3) ve meşru müdafaanın şartlarını (TCK 25/1) tekrar et.',
-          medium: 'Ceza aralığını biliyorsun; meşru müdafaa, sınırın aşılması ve tahrik ayrımını savunmaya daha erken taşı.',
+          medium:
+            'Ceza aralığını biliyorsun; meşru müdafaa, sınırın aşılması ve tahrik ayrımını savunmaya daha erken taşı.',
           strong: 'Yaralama, meşru müdafaa ve tahrik kavramlarını isabetle kullandın.',
         },
         DELIL_ANALIZI: {
@@ -88,7 +89,7 @@ export const meta: CasePart = {
         { id: 'hatali', label: 'Hatalı delil ({{var.wrong}})' },
       ],
       bonuses: [{ id: 'guven', label: 'Güvenilirlik bonusu ({{var.cred}})', value: { mul: [{ var: 'cred' }, 100] } }],
-      scaleMax: 9000,
+      scaleMax: 11500,
       thresholdBar: thresholdBar([
         ['Mahkûmiyet', 0, 'red'],
         ['İndirim', T_INDIRIM, 'amber'],
@@ -113,7 +114,10 @@ export const meta: CasePart = {
     {
       id: 'saldiri_kanit',
       label: 'Saldırının müştekiden geldiği kâğıtla gösterildi',
-      when: all(any(has('ded_kadeh_serkan'), has('ev_kriminal'), has('ev_video')), any(has('ded_savunma'), has('ev_video'))),
+      when: all(
+        any(has('ded_kadeh_serkan'), has('ev_kriminal'), has('ev_video')),
+        any(has('ded_savunma'), has('ev_video')),
+      ),
     },
     {
       id: 'tekme_yok',
@@ -133,12 +137,7 @@ export const meta: CasePart = {
     {
       id: 'mm_tam',
       label: 'Meşru müdafaanın bütün şartları duruşmada gösterildi',
-      when: all(
-        { ref: 'saldiri_kanit' },
-        { ref: 'tekme_yok' },
-        { ref: 'tanik_coktu' },
-        { ref: 'bagimsiz_anlatim' },
-      ),
+      when: all({ ref: 'saldiri_kanit' }, { ref: 'tekme_yok' }, { ref: 'tanik_coktu' }, { ref: 'bagimsiz_anlatim' }),
     },
     {
       id: 'findings',

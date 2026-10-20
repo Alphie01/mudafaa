@@ -1,5 +1,4 @@
 import {
-  L,
   P,
   all,
   any,
@@ -65,10 +64,16 @@ export const hearing1: CasePart = {
       background: 'adliye',
       lines: says(
         card('ÇARŞAMBA 09.20 — BURSA ADLİYESİ, 3. KAT', 'adliye'),
-        Nx('Adliye koridorları sabah dokuzda bir tren garı gibidir: herkes bir yere geç kalmış, kimse nereye gittiğini söylemez.'),
-        Nx('Bora bankta oturuyordu. Kasket dizinde, sargısız kolu ceketinin içinde. Beni görünce kalktı. Kalkması uzun sürdü.'),
+        Nx(
+          'Adliye koridorları sabah dokuzda bir tren garı gibidir: herkes bir yere geç kalmış, kimse nereye gittiğini söylemez.',
+        ),
+        Nx(
+          'Bora bankta oturuyordu. Kasket dizinde, sargısız kolu ceketinin içinde. Beni görünce kalktı. Kalkması uzun sürdü.',
+        ),
         S('bora', 'Erken geldim. Ev dar geldi.'),
-        Nx('Koridorun öbür ucunda burnunda ten rengi bir bantla Serkan Aydemir. Yanında, iki adım arkasında, kol saatini düzelten biri.'),
+        Nx(
+          'Koridorun öbür ucunda burnunda ten rengi bir bantla Serkan Aydemir. Yanında, iki adım arkasında, kol saatini düzelten biri.',
+        ),
       ),
     }),
     decisionNode('H1_00G2', [{ to: 'H1_00K' }], {
@@ -93,7 +98,10 @@ export const hearing1: CasePart = {
         when(
           any(flag('onur_tehdit'), flag('serkan_temas'), flag('bora_yuzlesti')),
           Nx('Tolga Şen yanımıza geldi. Cübbesi ütülü, gülümsemesi daha da ütülü.'),
-          S('tolga', 'Meslektaşım, günaydın. Küçük bir not: dosyaya bir dilekçe verdim. Tanığımla, müvekkilimle yaşanan… temaslar hakkında.'),
+          S(
+            'tolga',
+            'Meslektaşım, günaydın. Küçük bir not: dosyaya bir dilekçe verdim. Tanığımla, müvekkilimle yaşanan… temaslar hakkında.',
+          ),
           S('tolga', 'Kişisel bir şey değil. Hâkim hanım bilsin istedim. Başarılar.'),
           T('Kişisel değil. Ama hâkim beni ilk kez bu dilekçeyle tanıyacak.'),
         ),
@@ -104,7 +112,9 @@ export const hearing1: CasePart = {
           T('Bora ona bakmadı bile. Bakmamak, bazı adamların bildiği tek kibar hakarettir.'),
           Nx('Tolga gidince Bora kasketini iki eliyle tuttu, çevirdi. Leyla’nın sigara paketini çevirişi gibi.'),
           S('bora', 'İçeride ne olacak? Bana ne soracaklar?'),
-          D('Ne olduğunu. Sen ne gördüysen. Ben sana ne diyeceğini söylemeyeceğim; ama neyin bedelini ödeyeceğini söyleyeceğim.'),
+          D(
+            'Ne olduğunu. Sen ne gördüysen. Ben sana ne diyeceğini söylemeyeceğim; ama neyin bedelini ödeyeceğini söyleyeceğim.',
+          ),
           S('bora', 'Bedel. Bedeli biliyorum. Bar kapalı.'),
         ),
       ],
@@ -126,12 +136,23 @@ export const hearing1: CasePart = {
       lines: says(
         card('BURSA 7. ASLİYE CEZA MAHKEMESİ — 1. CELSE', 'durusma_salonu'),
         S('mubasir', 'Bora Yalçııın dosyasııı! Taraflar salonaaa!'),
-        Nx('Rıza Bey dosya adını şarkı gibi uzattı; son heceyi koridorun sonuna kadar taşıdı. Otuz yıldır böyle çağırıyormuş.'),
-        Nx('Salon küçüktü. Bir hâkim, bir savcı, bir zabıt kâtibi, pencereden giren gri bir ışık. Bora kasketini çıkarıp dizine koydu.'),
-        Nx('Hâkim Selma Karaca dosyayı açtı, ilk sayfayı okudu, son sayfayı okudu, sonra ortadan bir sayfa açıp onu da okudu. Kimseye bakmadan.'),
-        T('Ortadan bir sayfa. Hangisi? Hastane evrakı mı, tutanak mı? Bir hâkimin hangi sayfayı açtığı bazen bir dosyanın kaderidir.'),
+        Nx(
+          'Rıza Bey dosya adını şarkı gibi uzattı; son heceyi koridorun sonuna kadar taşıdı. Otuz yıldır böyle çağırıyormuş.',
+        ),
+        Nx(
+          'Salon küçüktü. Bir hâkim, bir savcı, bir zabıt kâtibi, pencereden giren gri bir ışık. Bora kasketini çıkarıp dizine koydu.',
+        ),
+        Nx(
+          'Hâkim Selma Karaca dosyayı açtı, ilk sayfayı okudu, son sayfayı okudu, sonra ortadan bir sayfa açıp onu da okudu. Kimseye bakmadan.',
+        ),
+        T(
+          'Ortadan bir sayfa. Hangisi? Hastane evrakı mı, tutanak mı? Bir hâkimin hangi sayfayı açtığı bazen bir dosyanın kaderidir.',
+        ),
         S('hakim', 'Sanığın kimliği tespit edildi. Katılan ve vekili hazır. Müdafi hazır. Açık yargılamaya başlandı.'),
-        S('hakim', 'Sanık, size yöneltilen suçlamayı dinleyeceksiniz. Susma hakkınız var; söyledikleriniz aleyhinize de kullanılabilir. Anladınız mı?'),
+        S(
+          'hakim',
+          'Sanık, size yöneltilen suçlamayı dinleyeceksiniz. Susma hakkınız var; söyledikleriniz aleyhinize de kullanılabilir. Anladınız mı?',
+        ),
         S('bora', 'Anladım.'),
       ),
       choices: [cont('H100_DEVAM', 'Devam', 'H1_01')],
@@ -140,10 +161,21 @@ export const hearing1: CasePart = {
       title: 'İddianame',
       courtStage: 'IDDIANAME',
       lines: says(
-        S('savci', 'İddianame özetle şöyledir: 3 Kasım gecesi saat 01.40 sularında, sanık işlettiği barda müşteki Serkan Aydemir ile tartışmış…'),
-        S('savci', '…tezgâhta bulunan rakı kadehini kırarak müştekinin yüzüne vurmuş, yere düşen müştekiye tekme atmış; müştekide burun kemiği kırığı oluşmuştur.'),
-        S('savci', 'Sanığın eylemine uyan TCK 86/1, 86/3-e ve 87/3 maddeleri uyarınca cezalandırılması talep olunmuştur.'),
-        Nx('Savcı Orhan Baysal iddianameyi kendisi yazmamıştı ama kendisi yazmış gibi okudu. Yorgun bir adamdı; yorgun adamlar tutanağa güvenir.'),
+        S(
+          'savci',
+          'İddianame özetle şöyledir: 3 Kasım gecesi saat 01.40 sularında, sanık işlettiği barda müşteki Serkan Aydemir ile tartışmış…',
+        ),
+        S(
+          'savci',
+          '…tezgâhta bulunan rakı kadehini kırarak müştekinin yüzüne vurmuş, yere düşen müştekiye tekme atmış; müştekide burun kemiği kırığı oluşmuştur.',
+        ),
+        S(
+          'savci',
+          'Sanığın eylemine uyan TCK 86/1, 86/3-e ve 87/3 maddeleri uyarınca cezalandırılması talep olunmuştur.',
+        ),
+        Nx(
+          'Savcı Orhan Baysal iddianameyi kendisi yazmamıştı ama kendisi yazmış gibi okudu. Yorgun bir adamdı; yorgun adamlar tutanağa güvenir.',
+        ),
         T('Kadeh. Yüz. Tekme. Üç kelime. Bora on dakikada üç kelimeye sığdırılmıştı.'),
         S('hakim', 'Sanık, savunmanızı alacağım. Müdafinizle görüşmek ister misiniz?'),
         S('bora', 'Bir dakika.'),
@@ -156,7 +188,9 @@ export const hearing1: CasePart = {
     court1.objection('H1_02', {
       title: 'Sanığın savunması',
       courtStage: 'SANIK_SAVUNMASI',
-      say: [T('Ne diyeceğini ben söyleyemem. Ama neyin bedelini ödeyeceğini söyleyebilirim. Bir cümle. Hâkim bekliyor.')],
+      say: [
+        T('Ne diyeceğini ben söyleyemem. Ama neyin bedelini ödeyeceğini söyleyebilirim. Bir cümle. Hâkim bekliyor.'),
+      ],
       next: 'H1_02R',
       options: [
         option('H102_A', '“Olduğu gibi anlat. Kolunu da, o geceyi de; ne gördüysen.”', {
@@ -167,7 +201,8 @@ export const hearing1: CasePart = {
         option('H102_B', '“Kızdan söz etme. Onu korumak senin kararın; ama bedelini bil.”', {
           visibleWhen: flag('ece_itiraf'),
           effects: [raise('bora_ece_gizli'), raise('bora_durust')],
-          neutral: 'Müvekkilin bir tanığı anmama kararı onun hakkıdır; ama tanık sonradan ortaya çıkarsa karşı taraf bunu “saklanan tanık” diye kullanabilir.',
+          neutral:
+            'Müvekkilin bir tanığı anmama kararı onun hakkıdır; ama tanık sonradan ortaya çıkarsa karşı taraf bunu “saklanan tanık” diye kullanabilir.',
         }),
         option('H102_C', '“Vurmadığını söyle. Onun sözüne karşı senin sözün; kimse göremedi.”', {
           score: { SAVUNMA_STRATEJISI: -100 },
@@ -176,7 +211,8 @@ export const hearing1: CasePart = {
         }),
         option('H102_D', '“Susma hakkını kullan. Yazılı savunmayı ben veririm.”', {
           effects: [raise('bora_sustu'), dec('pers')],
-          neutral: 'Susma hakkı meşrudur (CMK 147/1-e) ve aleyhe yorumlanamaz; ama meşru müdafaa iddiasının olayı ilk anlatanı sanığın kendisidir. Hâkim olayı bir kez daha yalnızca tanıktan dinleyecek.',
+          neutral:
+            'Susma hakkı meşrudur (CMK 147/1-e) ve aleyhe yorumlanamaz; ama meşru müdafaa iddiasının olayı ilk anlatanı sanığın kendisidir. Hâkim olayı bir kez daha yalnızca tanıktan dinleyecek.',
         }),
       ],
     }),
@@ -188,7 +224,10 @@ export const hearing1: CasePart = {
         when(
           flag('bora_yalan'),
           S('bora', 'Ben… vurmadım. Adam kendisi düştü. Tabureye çarptı.', 'saskin'),
-          S('savci', 'Sayın Başkan, sanığın kendi darp raporunda sağ elinde yumruk darbesiyle uyumlu ödem var. Kollukta da “vurdum” demiş.'),
+          S(
+            'savci',
+            'Sayın Başkan, sanığın kendi darp raporunda sağ elinde yumruk darbesiyle uyumlu ödem var. Kollukta da “vurdum” demiş.',
+          ),
           S('hakim', 'Sanık, kollukta “vurdum, bir kere” demişsiniz. Bugün “vurmadım” diyorsunuz. Hangisi?'),
           Nx('Bora bana baktı. Ben kâğıtlarıma baktım. Hâkim ikimize de baktı.'),
           S('bora', '…Vurdum. Bir kere.', 'uzgun'),
@@ -202,15 +241,27 @@ export const hearing1: CasePart = {
         ),
         when(
           all(flag('bora_ece_gizli'), flag('kamera_yalan')),
-          S('bora', 'Adam tezgâha geldi. Bağırdı. Kadehi tezgâha vurdu, kırık tarafıyla bana savurdu. Kolumu kaldırdım. Kesildi.'),
-          S('bora', 'Bileğini tuttum. Bir kere vurdum. Düştü. Yerde camı yine kaldırdı. Ayağımla bileğine bastım, bıraktı.'),
+          S(
+            'bora',
+            'Adam tezgâha geldi. Bağırdı. Kadehi tezgâha vurdu, kırık tarafıyla bana savurdu. Kolumu kaldırdım. Kesildi.',
+          ),
+          S(
+            'bora',
+            'Bileğini tuttum. Bir kere vurdum. Düştü. Yerde camı yine kaldırdı. Ayağımla bileğine bastım, bıraktı.',
+          ),
           S('bora', 'Kamera bozuktu. O gece çekmiyordu.'),
           T('Kamera bozuktu. Dilimin altında bir taş gibi duruyordu bu cümle. Şimdi tutanakta.'),
         ),
         when(
           flag('bora_ece_gizli'),
-          S('bora', 'Adam tezgâha geldi. Bağırdı. Kadehi tezgâha vurdu, kırık tarafıyla bana savurdu. Kolumu kaldırdım. Kesildi.'),
-          S('bora', 'Bileğini tuttum. Bir kere vurdum. Düştü. Yerde camı yine kaldırdı. Ayağımla bileğine bastım, bıraktı. Tekme yok.'),
+          S(
+            'bora',
+            'Adam tezgâha geldi. Bağırdı. Kadehi tezgâha vurdu, kırık tarafıyla bana savurdu. Kolumu kaldırdım. Kesildi.',
+          ),
+          S(
+            'bora',
+            'Bileğini tuttum. Bir kere vurdum. Düştü. Yerde camı yine kaldırdı. Ayağımla bileğine bastım, bıraktı. Tekme yok.',
+          ),
           S('hakim', 'Barda sizden başka çalışan var mıydı?'),
           S('bora', '…Yalnızdım.'),
           T('Yalnızdım. Bir kızı korumak için söylenen küçük bir yalan. Küçük yalanlar mahkemede büyür.'),
@@ -218,7 +269,10 @@ export const hearing1: CasePart = {
         when(
           all(flag('ece_itiraf'), flag('kamera_yalan')),
           S('bora', 'Masa dörtteki adam tezgâha geldi. Garson kızın bileğini tuttu. “Bırak” dedim. Bırakmadı.'),
-          S('bora', 'Kadehi tezgâha vurdu, kırık tarafıyla bana savurdu. Kolumu kaldırdım. Bileğini tuttum, bir kere vurdum. Düştü.'),
+          S(
+            'bora',
+            'Kadehi tezgâha vurdu, kırık tarafıyla bana savurdu. Kolumu kaldırdım. Bileğini tuttum, bir kere vurdum. Düştü.',
+          ),
           S('bora', 'Kızı arka kapıdan gönderdim. Polis gelmeden. Sigortasızdı. Benim suçum.'),
           S('bora', 'Kamera bozuktu.'),
           T('Her şeyi doğru söyledi. Biri hariç. O biri, bana söz verdirdiği şeydi.'),
@@ -226,18 +280,39 @@ export const hearing1: CasePart = {
         when(
           flag('ece_itiraf'),
           S('bora', 'Masa dörtteki adam tezgâha geldi. Garson kızın bileğini tuttu. “Bırak” dedim. Bırakmadı.'),
-          S('bora', 'Kadehi tezgâha vurdu, kırık tarafıyla bana savurdu. Kolumu kaldırdım. Kesildi. Bileğini tuttum, bir kere vurdum. Düştü.'),
+          S(
+            'bora',
+            'Kadehi tezgâha vurdu, kırık tarafıyla bana savurdu. Kolumu kaldırdım. Kesildi. Bileğini tuttum, bir kere vurdum. Düştü.',
+          ),
           S('bora', 'Yerde camı yine kaldırdı. Ayağımla bileğine bastım. Bıraktı. Tekme dedikleri o.'),
-          S('bora', 'Kızı arka kapıdan gönderdim. Polis gelmeden. Sigortasızdı, babası bilmiyor. O benim suçum. Gerisi değil.'),
+          S(
+            'bora',
+            'Sonra geri çekildim. Gözlüklü arkadan tuttu beni, ittim. Sonra polisi aradım. Ambulansı da. Havlu sardım koluma. Kapıda bekledim.',
+          ),
+          S(
+            'bora',
+            'Kızı arka kapıdan gönderdim. Polis gelmeden. Sigortasızdı, babası bilmiyor. O benim suçum. Gerisi değil.',
+          ),
           Nx('Salonda bir kıpırtı. Tolga Şen kalemini bıraktı. Savcı ilk kez başını dosyadan kaldırdı.'),
           S('hakim', 'Kızın adı ne? Nerede şimdi?'),
           S('bora', 'Ece. Öğrenci. Adını avukatım bilir. Ben… onu bu işe karıştırmak istemedim. Karıştırdım galiba.'),
-          S('hakim', 'Tutanağa geçsin: olay sırasında barda bir garson bulunduğu, sanık tarafından olaydan önce gönderildiği.'),
-          T('Kendi aleyhine bir şeyi, kimse sormadan söyledi. Hâkimler bunu not eder. Ben de ettim. Tolga Şen de etti; ama başka bir sütuna.'),
+          S(
+            'hakim',
+            'Tutanağa geçsin: olay sırasında barda bir garson bulunduğu, sanık tarafından olaydan önce gönderildiği.',
+          ),
+          T(
+            'Kendi aleyhine bir şeyi, kimse sormadan söyledi. Hâkimler bunu not eder. Ben de ettim. Tolga Şen de etti; ama başka bir sütuna.',
+          ),
         ),
         otherwise(
-          S('bora', 'Adam tezgâha geldi. Bağırdı. Kadehi tezgâha vurdu, kırık tarafıyla bana savurdu. Kolumu kaldırdım. Kesildi.'),
-          S('bora', 'Bileğini tuttum. Bir kere vurdum. Düştü. Yerde camı yine kaldırdı. Ayağımla bileğine bastım, bıraktı. Tekme yok.'),
+          S(
+            'bora',
+            'Adam tezgâha geldi. Bağırdı. Kadehi tezgâha vurdu, kırık tarafıyla bana savurdu. Kolumu kaldırdım. Kesildi.',
+          ),
+          S(
+            'bora',
+            'Bileğini tuttum. Bir kere vurdum. Düştü. Yerde camı yine kaldırdı. Ayağımla bileğine bastım, bıraktı. Tekme yok.',
+          ),
           S('hakim', 'Barda sizden başka çalışan var mıydı?'),
           S('bora', '…', 'uzgun'),
           S('bora', 'O saatte… yalnızdım.'),
@@ -253,7 +328,10 @@ export const hearing1: CasePart = {
       courtStage: 'SANIK_SAVUNMASI',
       say: [
         S('hakim', 'Katılan vekili, sanığa sorunuz var mı?'),
-        S('tolga', 'Bir tane, Sayın Başkan. Sanık, 1996’da genç milli boks takımının kampındaydınız, değil mi? Yumruğunuzun bir insana ne yapacağını herkesten iyi bilirsiniz.'),
+        S(
+          'tolga',
+          'Bir tane, Sayın Başkan. Sanık, 1996’da genç milli boks takımının kampındaydınız, değil mi? Yumruğunuzun bir insana ne yapacağını herkesten iyi bilirsiniz.',
+        ),
         S('tolga', 'Yirmi beş yıl ringde öğrendiğiniz şeyi o gece bir müşterinin yüzünde denediniz mi?'),
         T('Fotoğrafı duvarda görmüştü ya da biri ona anlatmıştı. Soru olayla değil, Bora’nın gençliğiyle ilgili.'),
       ],
@@ -287,7 +365,9 @@ export const hearing1: CasePart = {
       lines: [
         when(
           flag('boks_itiraz'),
-          P('İtiraz ediyorum Sayın Başkan. Soru olayla değil, sanığın yirmi beş yıl önceki gençliğiyle ilgili. Sabıkası yok. Bu bir soru değil, bir etiket.'),
+          P(
+            'İtiraz ediyorum Sayın Başkan. Soru olayla değil, sanığın yirmi beş yıl önceki gençliğiyle ilgili. Sabıkası yok. Bu bir soru değil, bir etiket.',
+          ),
           S('hakim', 'İtiraz yerinde. Soru reddedildi. Katılan vekili, olayla ilgili sorunuz varsa sorun.'),
           S('tolga', 'Başka sorum yok Sayın Başkan. Meslektaşım uyanık; not ettim.', 'mutlu'),
           T('Tolga’nın gülümsemesi değişmedi. Ama kalemini bir kez masaya vurdu.'),
@@ -313,9 +393,14 @@ export const hearing1: CasePart = {
       courtStage: 'SANIK_SAVUNMASI',
       say: [
         S('hakim', 'Sayın Savcı?'),
-        S('savci', 'Sanık, bir şey merak ediyorum. Müşteki yere düştükten sonra neden tezgâhtan çıktınız? Olay bitmişti. Tezgâhın arkasında kalabilirdiniz.'),
+        S(
+          'savci',
+          'Sanık, bir şey merak ediyorum. Müşteki yere düştükten sonra neden tezgâhtan çıktınız? Olay bitmişti. Tezgâhın arkasında kalabilirdiniz.',
+        ),
         Nx('Yorgun bir sesle sordu; ama yorgun sesler en zor soruları sorar. Tanığın “tekme” dediği an tam bu andı.'),
-        T('Doğru soru. Savcı tutanağı okumuş; tutanağın sormadığını soruyor. Bora’nın cevabı ya bu dosyanın en ağır cümlesini taşıyacak ya da onu kıracak.'),
+        T(
+          'Doğru soru. Savcı tutanağı okumuş; tutanağın sormadığını soruyor. Bora’nın cevabı ya bu dosyanın en ağır cümlesini taşıyacak ya da onu kıracak.',
+        ),
       ],
       next: 'H1_04V',
       options: [
@@ -323,7 +408,15 @@ export const hearing1: CasePart = {
           effects: [
             ifThen(
               any(flag('fact_bilek_anlati'), all(flag('bora_durust'), not(flag('bora_sustu')))),
-              [score('SAVUNMA_STRATEJISI', 60), inc('pers'), mark('GOOD', 'Savcının sorusu yerindeydi (CMK 201/1); sanık yerdeki hareketi kendi sözleriyle açıkladı.', 'SAVUNMA_STRATEJISI')],
+              [
+                score('SAVUNMA_STRATEJISI', 60),
+                inc('pers'),
+                mark(
+                  'GOOD',
+                  'Savcının sorusu yerindeydi (CMK 201/1); sanık yerdeki hareketi kendi sözleriyle açıkladı.',
+                  'SAVUNMA_STRATEJISI',
+                ),
+              ],
               [score('SAVUNMA_STRATEJISI', 10)],
             ),
           ],
@@ -337,11 +430,16 @@ export const hearing1: CasePart = {
             when(
               any(flag('fact_bilek_anlati'), flag('bora_durust')),
               S('bora', 'Bitmemişti. Yerde camı yine kaldırdı. Sapı. Sağ elinde.'),
-              S('bora', 'Tezgâhtan çıktım. Ayağımla bileğine bastım. Bıraktı. Sapı ayağımla uzağa ittim. Sonra geri çekildim. Sonra polisi aradım.'),
+              S(
+                'bora',
+                'Tezgâhtan çıktım. Ayağımla bileğine bastım. Bıraktı. Sapı ayağımla uzağa ittim. Sonra geri çekildim. Sonra polisi aradım.',
+              ),
               S('savci', 'Tekme atmadınız mı?'),
               S('bora', 'Yerde yatana vurmam. Ringde bile vurmam.'),
               Nx('Savcı bir şey not etti. Kalemi uzun süre kâğıdın üstünde kaldı.'),
-              T('Bora’nın yerdeki hareketi artık tutanakta, kendi ağzından. Şimdi bunu kâğıtla göstermem gerek: bir bilek, bir iz.'),
+              T(
+                'Bora’nın yerdeki hareketi artık tutanakta, kendi ağzından. Şimdi bunu kâğıtla göstermem gerek: bir bilek, bir iz.',
+              ),
             ),
             otherwise(
               S('bora', 'Bitmemişti.'),
@@ -364,7 +462,8 @@ export const hearing1: CasePart = {
         }),
         option('H103S_C', '“Müvekkilim bu soruya cevap vermeyecek.”', {
           effects: [dec('pers')],
-          neutral: 'Sanık tek tek sorulara cevap vermeyebilir (CMK 147/1-e); ama meşru savunma iddiasının merkezindeki soruyu cevapsız bırakmak hâkimin aklında bir boşluk bırakır.',
+          neutral:
+            'Sanık tek tek sorulara cevap vermeyebilir (CMK 147/1-e); ama meşru savunma iddiasının merkezindeki soruyu cevapsız bırakmak hâkimin aklında bir boşluk bırakır.',
           responses: says(
             S('savci', 'Peki. Tutanağa geçsin.'),
             T('Bir soru cevapsız kaldı. Cevapsız sorular salonda cevaplanmış sorulardan daha uzun yaşar.'),
@@ -379,10 +478,18 @@ export const hearing1: CasePart = {
       background: 'durusma_salonu',
       onFirstEnter: [meet('serkan')],
       lines: says(
-        S('hakim', 'Katılan Serkan Aydemir. Yemin ettirilmeden dinleneceksiniz; ama gerçeği söylemeniz beklenir. Olayı anlatın.'),
-        Nx('Serkan kürsüye geldi. Takım elbise, açık renk gömlek, burnundaki bant. Elini kürsünün kenarına koydu, bir mağdurun nasıl durması gerektiğini çok düşünmüş gibi.'),
+        S(
+          'hakim',
+          'Katılan Serkan Aydemir. Yemin ettirilmeden dinleneceksiniz; ama gerçeği söylemeniz beklenir. Olayı anlatın.',
+        ),
+        Nx(
+          'Serkan kürsüye geldi. Takım elbise, açık renk gömlek, burnundaki bant. Elini kürsünün kenarına koydu, bir mağdurun nasıl durması gerektiğini çok düşünmüş gibi.',
+        ),
         S('serkan', 'Sayın hâkimim, ben… bakın şimdi. Ben medeni bir insanım. Sigortacıyım. Hayatımda kavga etmedim.'),
-        S('serkan', 'O gece bir kadeh içmeye gittim. Hesabımı sordum. Bu adam bağırdı, kadehi kırdı, yüzüme vurdu. Yere düştüm. Tekmeledi. Onur Bey olmasa… bilmiyorum.'),
+        S(
+          'serkan',
+          'O gece bir kadeh içmeye gittim. Hesabımı sordum. Bu adam bağırdı, kadehi kırdı, yüzüme vurdu. Yere düştüm. Tekmeledi. Onur Bey olmasa… bilmiyorum.',
+        ),
         Nx('Sesi “bilmiyorum”da titredi. Tam zamanında. Arka sırada biri, belki Serkan’ın annesi, mendilini çıkardı.'),
         T('“Bakın şimdi.” Bir hikâyeyi baştan sona ezberleyen insanlar ilk cümleye hep bir kapı koyar.'),
       ),
@@ -398,7 +505,11 @@ export const hearing1: CasePart = {
         'Önce bastır, sonra doğru delili doğru ifadeye sun. Katılanın acısı gerçek olabilir; çelişkisi de. Yanlış delil güvenilirliği düşürür.',
       objectionGrounds: ['g_kanaat', 'g_ilgisiz'],
       statements: [
-        statement('K1', 1, ['O gece ', hl('bir iki kadeh içmiştim, o kadar', any(flag('press_k1'), has('clue_alkol'))), '. Ayıktım.']),
+        statement('K1', 1, [
+          'O gece ',
+          hl('bir iki kadeh içmiştim, o kadar', any(flag('press_k1'), has('clue_alkol'))),
+          '. Ayıktım.',
+        ]),
         statement('K2', 2, [
           'Onur Bey’i ',
           hl('o gece orada tanıdım', has('ded_tanidik')),
@@ -429,7 +540,10 @@ export const hearing1: CasePart = {
             score('SORGULAMA', -150, 'hatali'),
             mark('BAD', 'İddianın kendi belgesini katılana karşı sunmak bir çelişki doğurmaz.', 'SORGULAMA'),
           ],
-          responses: says(S('savci', 'Sayın Başkan, müdafi bizim dosyamızı okuyor.'), S('hakim', 'Müdafi, bunun beyanla ilgisi ne?')),
+          responses: says(
+            S('savci', 'Sayın Başkan, müdafi bizim dosyamızı okuyor.'),
+            S('hakim', 'Müdafi, bunun beyanla ilgisi ne?'),
+          ),
         }),
         pressRule('PR_K1', 'K1', {
           score: { SORGULAMA: 25 },
@@ -438,19 +552,33 @@ export const hearing1: CasePart = {
             when(
               flag('fact_bora_ayik'),
               P('Bir iki kadeh. Masanızın hesabında altı duble rakı var. Kaç kişiydiniz?'),
-              S('serkan', 'Kaç kişi… Ben yalnızdım. Yani masada… bakın şimdi, ben kendi içtiğimi bilirim. İki kadeh.', 'saskin'),
-              T('Yalnızdı. Masada iki ceket, iki tabak vardı. Ve o gece salonda alkolü sıfır olan tek kişi tezgâhın arkasındaki adamdı; raporu öyle diyor.'),
+              S(
+                'serkan',
+                'Kaç kişi… Ben yalnızdım. Yani masada… bakın şimdi, ben kendi içtiğimi bilirim. İki kadeh.',
+                'saskin',
+              ),
+              T(
+                'Yalnızdı. Masada iki ceket, iki tabak vardı. Ve o gece salonda alkolü sıfır olan tek kişi tezgâhın arkasındaki adamdı; raporu öyle diyor.',
+              ),
             ),
             otherwise(
               P('Bir iki kadeh. Masanızın hesabında altı duble rakı var. Kaç kişiydiniz?'),
-              S('serkan', 'Kaç kişi… Ben yalnızdım. Yani masada… bakın şimdi, ben kendi içtiğimi bilirim. İki kadeh.', 'saskin'),
+              S(
+                'serkan',
+                'Kaç kişi… Ben yalnızdım. Yani masada… bakın şimdi, ben kendi içtiğimi bilirim. İki kadeh.',
+                'saskin',
+              ),
               T('Yalnızdı. Masada iki ceket, iki tabak vardı.'),
             ),
           ],
         }),
         presentRule('PS_K1', 'K1', ['ev_hastane', 'ded_saldirgan'], {
           score: { SORGULAMA: 250 },
-          effects: [inc('pers'), raise('contra_k1'), mark('GOOD', 'Acil kaydı: 02.25’te kan alkolü 1,9 promil. “Bir iki kadeh” değil.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('contra_k1'),
+            mark('GOOD', 'Acil kaydı: 02.25’te kan alkolü 1,9 promil. “Bir iki kadeh” değil.', 'SORGULAMA'),
+          ],
           responses: says(
             P('Sayın Başkan, katılanın acil servis kaydı: olaydan kırk beş dakika sonra kan alkolü 1,9 promil.'),
             P('Bir iki kadehle 1,9 promile çıkılmaz. Katılan o gece ayakta zor duran biriydi.'),
@@ -464,10 +592,16 @@ export const hearing1: CasePart = {
           effects: [
             inc('pers', 2),
             raise('contra_k2'),
-            mark('GOOD', 'Masa 4: iki kişi, tek hesap, ödeme Onur Kılıç’ın kartından. “O gece tanıdım” diyen katılan, tanıkla aynı masadaydı.', 'SORGULAMA'),
+            mark(
+              'GOOD',
+              'Masa 4: iki kişi, tek hesap, ödeme Onur Kılıç’ın kartından. “O gece tanıdım” diyen katılan, tanıkla aynı masadaydı.',
+              'SORGULAMA',
+            ),
           ],
           responses: says(
-            P('Gölge’nin adisyonu, masa 4: iki kişi, açılış 22.10, altı duble rakı. Hesap tek, ödeme O. KILIÇ adına kayıtlı bir karttan.'),
+            P(
+              'Gölge’nin adisyonu, masa 4: iki kişi, açılış 22.10, altı duble rakı. Hesap tek, ödeme O. KILIÇ adına kayıtlı bir karttan.',
+            ),
             P('Katılan, o gece tanıdığınızı söylediğiniz adam rakınızın parasını ödemiş. Nasıl oluyor?'),
             S('serkan', 'O… ben… ikram etti. Barda tanıştık, ikram etti.', 'saskin'),
             S('tolga', 'Sayın Başkan, bir hesap fişinden tanışıklık çıkarılamaz.'),
@@ -476,7 +610,9 @@ export const hearing1: CasePart = {
             S('serkan', '…Aynı şirkette. Ama bu, bakın şimdi, onun gördüğünü değiştirmez ki.', 'kizgin'),
             fx(Nx('Salonun arkasında Onur Kılıç kol saatini düzeltti. Bu sefer iki kez.'), 'shake'),
             S('hakim', 'Tutanağa geçsin: katılan, tanık Onur Kılıç ile aynı şirkette çalıştığını beyan etti.'),
-            T('Bir tanık, kürsüye çıkmadan yaralandı. Gelecek celse o yarayla gelecek; ya kapatmaya çalışacak ya da açacak.'),
+            T(
+              'Bir tanık, kürsüye çıkmadan yaralandı. Gelecek celse o yarayla gelecek; ya kapatmaya çalışacak ya da açacak.',
+            ),
           ),
         }),
         pressRule('PR_K3', 'K3', {
@@ -485,7 +621,9 @@ export const hearing1: CasePart = {
           responses: says(
             P('Avucunuzu nasıl kestiniz? Elinizin üstünü mü, içini mi?'),
             S('serkan', 'İçini. Düşünce elimi yere koydum, camlar vardı. Ne yapayım?'),
-            T('Düşen adam elini yere açık koyar. Avuç boyunca enine bir kesi, açık bir elden değil, sıkılmış bir yumruktan çıkar.'),
+            T(
+              'Düşen adam elini yere açık koyar. Avuç boyunca enine bir kesi, açık bir elden değil, sıkılmış bir yumruktan çıkar.',
+            ),
           ),
         }),
         presentRule('PS_K3', 'K3', ['ded_kadeh_serkan', 'ev_kriminal'], {
@@ -493,15 +631,26 @@ export const hearing1: CasePart = {
           effects: [
             inc('pers', 2),
             raise('contra_k3'),
-            mark('GOOD', 'Fotoğraf 7 ve acil kaydı: sap, katılanın sağ elinin yanında; avuçtaki enine kesi kavramayla uyumlu.', 'SORGULAMA'),
+            mark(
+              'GOOD',
+              'Fotoğraf 7 ve acil kaydı: sap, katılanın sağ elinin yanında; avuçtaki enine kesi kavramayla uyumlu.',
+              'SORGULAMA',
+            ),
           ],
           responses: says(
-            P('Kolluk fotoğrafı 7, katılan sedyeye alınmadan önce: kırık sap yerde, katılanın sağ elinin hemen yanında. Kan izi elden sapa uzanıyor.'),
-            P('Acil kaydı: sağ el ayasında enine dört santimlik kesi. Yere açık el konursa böyle kesilmez. Kırık bir camı sıkıca tutan el böyle kesilir.'),
+            P(
+              'Kolluk fotoğrafı 7, katılan sedyeye alınmadan önce: kırık sap yerde, katılanın sağ elinin hemen yanında. Kan izi elden sapa uzanıyor.',
+            ),
+            P(
+              'Acil kaydı: sağ el ayasında enine dört santimlik kesi. Yere açık el konursa böyle kesilmez. Kırık bir camı sıkıca tutan el böyle kesilir.',
+            ),
             S('serkan', 'Ben… yerde bir şey tuttum belki, kalkmak için. Ne bileyim!', 'kizgin'),
             S('savci', 'Sayın Başkan, fotoğrafın aslını görmek istiyorum.'),
             Nx('Savcı fotoğrafa uzun uzun baktı. Sonra tutanağa. Sonra yine fotoğrafa.'),
-            S('savci', 'Tutanakta “tezgâh önü” yazıyor. Fotoğrafta sap, yerdeki elin yanında. Bunu not ediyorum Sayın Başkan.'),
+            S(
+              'savci',
+              'Tutanakta “tezgâh önü” yazıyor. Fotoğrafta sap, yerdeki elin yanında. Bunu not ediyorum Sayın Başkan.',
+            ),
             T('Yorgun savcı ilk kez yorgunluğunu unuttu.'),
           ),
         }),
@@ -509,7 +658,13 @@ export const hearing1: CasePart = {
           enabledWhen: flag('press_k3'),
           maxUses: 1,
           score: { SORGULAMA: 100 },
-          effects: [mark('GOOD', 'Kısmi: kesinin yeri bir soru açar ama sapın kimin elinde olduğunu tek başına göstermez.', 'SORGULAMA')],
+          effects: [
+            mark(
+              'GOOD',
+              'Kısmi: kesinin yeri bir soru açar ama sapın kimin elinde olduğunu tek başına göstermez.',
+              'SORGULAMA',
+            ),
+          ],
           responses: says(
             P('Acil kaydı: kesi avucun içinde, enine. Yere düşen biri için tuhaf bir yer.'),
             S('serkan', 'Tuhafsa tuhaf. Düştüm, kestim.'),
@@ -533,21 +688,34 @@ export const hearing1: CasePart = {
             mark('GOOD', 'Katılan acilde kendi ağzıyla “yumrukla vuruldum” demiş; yüzünde kesi yok.', 'SORGULAMA'),
           ],
           responses: says(
-            P('Acil servisin triyaj notu, olaydan kırk beş dakika sonra, sizin ağzınızdan: “Kavgada yumrukla vuruldum.”'),
+            P(
+              'Acil servisin triyaj notu, olaydan kırk beş dakika sonra, sizin ağzınızdan: “Kavgada yumrukla vuruldum.”',
+            ),
             P('Kadehten söz yok. Ve yüzünüzde tek bir kesi yok. Kırık cam yüze vurulup iz bırakmaz mı?'),
             S('serkan', 'O an… şoktaydım. Ne dediğimi bilmiyordum.', 'uzgun'),
             S('hakim', 'Katılan, acildeki beyanınız mı doğru, bugünkü mü?'),
             S('serkan', 'Yumruk da attı! Yani… önce kadeh, sonra yumruk. Ya da… bakın şimdi…', 'saskin'),
-            S('tolga', 'Sayın Başkan, katılan travma altında. Darbenin hangi nesneyle geldiğini o an ayırt etmesi beklenemez.'),
+            S(
+              'tolga',
+              'Sayın Başkan, katılan travma altında. Darbenin hangi nesneyle geldiğini o an ayırt etmesi beklenemez.',
+            ),
             S('hakim', 'Acil serviste ayırt etmiş ama, avukat bey. Yumruk demiş.'),
-            T('“Ya da.” Kürsüde bir mağdurun ağzından çıkabilecek en pahalı iki kelime. Hâkim onları ücretsiz bırakmadı.'),
+            T(
+              '“Ya da.” Kürsüde bir mağdurun ağzından çıkabilecek en pahalı iki kelime. Hâkim onları ücretsiz bırakmadı.',
+            ),
           ),
         }),
         presentRule('PS_K4B', 'K4', ['ev_hastane'], {
           enabledWhen: flag('press_k4'),
           maxUses: 1,
           score: { SORGULAMA: 100 },
-          effects: [mark('GOOD', 'Kısmi: yüzde kesi olmaması anlatımı sarsar; katılanın ilk beyanı tahtada bağlanmadı.', 'SORGULAMA')],
+          effects: [
+            mark(
+              'GOOD',
+              'Kısmi: yüzde kesi olmaması anlatımı sarsar; katılanın ilk beyanı tahtada bağlanmadı.',
+              'SORGULAMA',
+            ),
+          ],
           responses: says(
             P('Acil kaydında yüzde kesi yok.'),
             S('serkan', 'Kadeh burnuma geldi, kırık tarafı değil. Ne bileyim hangi tarafı!'),
@@ -577,11 +745,19 @@ export const hearing1: CasePart = {
           effects: [
             inc('pers'),
             raise('contra_k5'),
-            mark('GOOD', 'Sanığın kesisi kolunu siper etmesiyle uyumlu, kan tezgâhın içinde başlıyor: ilk kesilen tezgâhın arkasındaki sanıktı.', 'SORGULAMA'),
+            mark(
+              'GOOD',
+              'Sanığın kesisi kolunu siper etmesiyle uyumlu, kan tezgâhın içinde başlıyor: ilk kesilen tezgâhın arkasındaki sanıktı.',
+              'SORGULAMA',
+            ),
           ],
           responses: says(
-            P('Sanığın darp raporu: sol önkolun dış kenarında altı santimlik kesi. Yüzüne gelen bir şeye kolunu kaldıran birinin yarası.'),
-            P('Ve kolluk fotoğrafı 3: kan tezgâhın iç tarafında başlıyor. İlk kanayan tezgâhın arkasındaki adamdı. Kimseye dokunmadıysanız onu kim kesti?'),
+            P(
+              'Sanığın darp raporu: sol önkolun dış kenarında altı santimlik kesi. Yüzüne gelen bir şeye kolunu kaldıran birinin yarası.',
+            ),
+            P(
+              'Ve kolluk fotoğrafı 3: kan tezgâhın iç tarafında başlıyor. İlk kanayan tezgâhın arkasındaki adamdı. Kimseye dokunmadıysanız onu kim kesti?',
+            ),
             S('serkan', 'Kendi kesmiştir! Kadehi kırarken kendi kesmiştir!', 'kizgin'),
             S('hakim', 'Sanık kadehi kırarken kendi önkolunun dış kenarını mı kesti, katılan?'),
             S('serkan', '…Bilmiyorum.', 'uzgun'),
@@ -590,20 +766,37 @@ export const hearing1: CasePart = {
         objectRule('OB_K5', 'K5', 'g_kanaat', {
           maxUses: 1,
           score: { USUL_BILGISI: 50 },
-          effects: [inc('pers'), inc('legal_hits'), mark('GOOD', 'İtiraz yerinde: “herkes bilir” bir gözlem değil, duyum ve kanaattir.', 'USUL_BILGISI')],
+          effects: [
+            inc('pers'),
+            inc('legal_hits'),
+            mark('GOOD', 'İtiraz yerinde: “herkes bilir” bir gözlem değil, duyum ve kanaattir.', 'USUL_BILGISI'),
+          ],
           responses: says(
-            P('İtiraz ediyorum Sayın Başkan. “Herkes bilir” bir gözlem değil. Katılan görmediği bir şeyi kanaat olarak aktarıyor.'),
+            P(
+              'İtiraz ediyorum Sayın Başkan. “Herkes bilir” bir gözlem değil. Katılan görmediği bir şeyi kanaat olarak aktarıyor.',
+            ),
             S('hakim', 'İtiraz yerinde. Katılan, yalnızca o gece gördüklerinizi ve yaşadıklarınızı anlatın.'),
             S('serkan', 'Peki. Peki efendim.'),
           ),
         }),
       ],
       presentMiss: fallback('FB_H104_PRESENT', 'PRESENT', {
-        effects: [...wrongEvidence, score('SORGULAMA', -150, 'hatali'), mark('BAD', 'Sunulan delil bu beyanla çelişmiyor.', 'SORGULAMA')],
-        responses: says(S('hakim', 'Müdafi, bunun beyanla ilgisini göremiyorum.'), S('serkan', 'Ne alakası var bunun?')),
+        effects: [
+          ...wrongEvidence,
+          score('SORGULAMA', -150, 'hatali'),
+          mark('BAD', 'Sunulan delil bu beyanla çelişmiyor.', 'SORGULAMA'),
+        ],
+        responses: says(
+          S('hakim', 'Müdafi, bunun beyanla ilgisini göremiyorum.'),
+          S('serkan', 'Ne alakası var bunun?'),
+        ),
       }),
       objectMiss: fallback('FB_H104_OBJECT', 'OBJECT', {
-        effects: [dec('cred'), score('SORGULAMA', -50, 'hatali'), mark('BAD', 'Dayanaksız itiraz: katılan burada kendi yaşadığını anlatıyor.', 'SORGULAMA')],
+        effects: [
+          dec('cred'),
+          score('SORGULAMA', -50, 'hatali'),
+          mark('BAD', 'Dayanaksız itiraz: katılan burada kendi yaşadığını anlatıyor.', 'SORGULAMA'),
+        ],
         responses: says(S('hakim', 'İtiraz reddedildi. Katılan kendi yaşadığını anlatıyor.')),
       }),
       finish: { id: 'H104_BITIR', label: 'Sorularım bu kadar', next: 'H1_04R' },
@@ -616,15 +809,28 @@ export const hearing1: CasePart = {
         when(
           any(flag('contra_k2'), flag('contra_k3'), flag('contra_k4')),
           Nx('Serkan kürsüden indi. Yerine oturduğunda burnundaki bandı kaşıdı; parmakları titriyordu.'),
-          S('tolga', 'Sayın Başkan, katılan travma yaşamış bir mağdurdur. Ayrıntılarda yanılması doğaldır. Asıl tanığı gelecek celse dinleyeceğiz.'),
-          T('Asıl tanık. Kol saatli, kibar, net. Bugün bir yara aldı; gelecek celse kürsüye ben ne götürürsem o kadar kanayacak.'),
-          Nx('Arka sırada Onur Kılıç dizlerine bakıyordu. Bir kez başını kaldırdı, Serkan’ın ensesine baktı; sonra yine dizlerine.'),
-          T('Bir patronun ensesine bakan bir çalışan. O bakışta korku mu vardı, yorgunluk mu? İkisi de bir tanığı konuşturabilir. Ya da susturabilir.'),
+          S(
+            'tolga',
+            'Sayın Başkan, katılan travma yaşamış bir mağdurdur. Ayrıntılarda yanılması doğaldır. Asıl tanığı gelecek celse dinleyeceğiz.',
+          ),
+          T(
+            'Asıl tanık. Kol saatli, kibar, net. Bugün bir yara aldı; gelecek celse kürsüye ben ne götürürsem o kadar kanayacak.',
+          ),
+          Nx(
+            'Arka sırada Onur Kılıç dizlerine bakıyordu. Bir kez başını kaldırdı, Serkan’ın ensesine baktı; sonra yine dizlerine.',
+          ),
+          T(
+            'Bir patronun ensesine bakan bir çalışan. O bakışta korku mu vardı, yorgunluk mu? İkisi de bir tanığı konuşturabilir. Ya da susturabilir.',
+          ),
         ),
         otherwise(
-          Nx('Serkan kürsüden indi. Vekiline başıyla teşekkür etti, sonra Bora’ya baktı. Bir zafer bakışıydı; erken ama yine de zafer.'),
+          Nx(
+            'Serkan kürsüden indi. Vekiline başıyla teşekkür etti, sonra Bora’ya baktı. Bir zafer bakışıydı; erken ama yine de zafer.',
+          ),
           S('tolga', 'Sayın Başkan, katılanın anlatımı tanık beyanıyla tam bir uyum içindedir.'),
-          T('Uyum. İki kişi aynı hikâyeyi anlatınca uyum, iki kişi aynı masada oturunca ezber denir. Bunu henüz ispatlayamadım.'),
+          T(
+            'Uyum. İki kişi aynı hikâyeyi anlatınca uyum, iki kişi aynı masada oturunca ezber denir. Bunu henüz ispatlayamadım.',
+          ),
         ),
       ],
       choices: [cont('H104R_DEVAM', 'On dakika ara', 'H1_MOLA')],
@@ -638,11 +844,15 @@ export const hearing1: CasePart = {
         when(
           any(flag('contra_k2'), flag('contra_k3'), flag('contra_k4')),
           card('KORİDOR — ON DAKİKALIK ARA', 'adliye'),
-          Nx('Hâkim on dakika ara verdi. Koridorda Bora pencereye gitti, alnını cama dayadı. Cam buğulandı, sildi, yine buğulandı.'),
+          Nx(
+            'Hâkim on dakika ara verdi. Koridorda Bora pencereye gitti, alnını cama dayadı. Cam buğulandı, sildi, yine buğulandı.',
+          ),
           S('bora', 'Adam bocaladı. Gördüm. Ama inanmadılar, değil mi? Kimse inanmadı.'),
           D('Hâkim not aldı. İnanmak ayrı, not almak ayrı. Not almak daha önemli.'),
           S('bora', 'Sen bilirsin.'),
-          Nx('Koridorun öbür ucunda Tolga Şen Serkan’la konuşuyordu; alçak sesle, ama elleriyle. Serkan bir kez Onur’a döndü, bir şey söyledi. Onur başını salladı, çok hızlı.'),
+          Nx(
+            'Koridorun öbür ucunda Tolga Şen Serkan’la konuşuyordu; alçak sesle, ama elleriyle. Serkan bir kez Onur’a döndü, bir şey söyledi. Onur başını salladı, çok hızlı.',
+          ),
           T('Bir patron bir şey söyledi, bir çalışan başını salladı. Bunu kürsüye taşıyamam. Ama aklıma not ettim.'),
           S('bora', 'Avukat hanım. O gözlüklü. Bir şey diyecek gibi bakıyor bana.'),
           D('Ona bakma, Bora. Ne o sana, ne sen ona. Konuşacaksa salonda konuşur.'),
@@ -650,11 +860,15 @@ export const hearing1: CasePart = {
         ),
         otherwise(
           card('KORİDOR — ON DAKİKALIK ARA', 'adliye'),
-          Nx('Hâkim on dakika ara verdi. Koridorda Bora pencereye gitti, alnını cama dayadı. Cam buğulandı, sildi, yine buğulandı.'),
+          Nx(
+            'Hâkim on dakika ara verdi. Koridorda Bora pencereye gitti, alnını cama dayadı. Cam buğulandı, sildi, yine buğulandı.',
+          ),
           S('bora', 'Yalan söyledi. Kürsüde, yüzüme baka baka. Ve kimse bir şey demedi.'),
           D('Ben bir şey diyecektim. Elimde söyletecek kâğıt yoktu.'),
           S('bora', 'Kâğıt. Hep kâğıt.'),
-          Nx('Koridorun öbür ucunda Tolga Şen Serkan’ın omzuna dokundu. Serkan güldü; ilk kez bütün gün. Onur gülmedi.'),
+          Nx(
+            'Koridorun öbür ucunda Tolga Şen Serkan’ın omzuna dokundu. Serkan güldü; ilk kez bütün gün. Onur gülmedi.',
+          ),
           T('Bir mağdurun kürsüden sonra gülmesi. Bunu kürsüye taşıyamam. Ama hatırlayacağım.'),
           Nx('Mübaşir kapıyı açtı. “Bora Yalçııın!”'),
         ),
@@ -671,12 +885,17 @@ export const hearing1: CasePart = {
       lines: [
         when(
           any(flag('req_kriminal'), flag('req_eczane'), flag('req_ece')),
-          S('hakim', 'Müdafinin yazılı delil dilekçesi dosyada; okundu. Adli Tıp’tan kesin rapor mahkememizce zaten istenecek. Ek talebiniz var mı?'),
+          S(
+            'hakim',
+            'Müdafinin yazılı delil dilekçesi dosyada; okundu. Adli Tıp’tan kesin rapor mahkememizce zaten istenecek. Ek talebiniz var mı?',
+          ),
           T('Dilekçe işini gördü. Burada iki hakkım daha var; boşa harcamamalıyım.'),
         ),
         otherwise(
           S('hakim', 'Müdafi, delil talepleriniz? Adli Tıp’tan kesin rapor mahkememizce zaten istenecek.'),
-          T('Dilekçe vermemiştim ya da yetmemişti. Şimdi, burada, ağızdan. Hâkim iki talebi dinler; üçüncüsünde saatine bakar.'),
+          T(
+            'Dilekçe vermemiştim ya da yetmemişti. Şimdi, burada, ağızdan. Hâkim iki talebi dinler; üçüncüsünde saatine bakar.',
+          ),
         ),
       ],
       prompt: 'Duruşmada ne talep edeceksin? (İki talep hakkı)',
@@ -701,7 +920,12 @@ export const hearing1: CasePart = {
         }),
         option('H105_ECE', 'Garson Ece Tan’ın tanık olarak dinlenmesi', {
           visibleWhen: all(
-            any(flag('ece_tanik_olur'), flag('ece_dusunecek'), flag('ece_cekildi'), all(flag('ece_itiraf'), not(flag('bora_ece_gizli')))),
+            any(
+              flag('ece_tanik_olur'),
+              flag('ece_dusunecek'),
+              flag('ece_cekildi'),
+              all(flag('ece_itiraf'), not(flag('bora_ece_gizli'))),
+            ),
             not(flag('req_ece')),
           ),
           cost: [{ var: 'h1_hak', amount: 1 }],
@@ -711,7 +935,10 @@ export const hearing1: CasePart = {
           responses: [
             when(
               flag('bora_ece_gizli'),
-              S('tolga', 'Sayın Başkan! Sanık az önce “yalnızdım” dedi. Şimdi bir garson mu çıktı? Bu tanık nereden geliyor?'),
+              S(
+                'tolga',
+                'Sayın Başkan! Sanık az önce “yalnızdım” dedi. Şimdi bir garson mu çıktı? Bu tanık nereden geliyor?',
+              ),
               S('hakim', 'Gelecek celse görürüz. Kabul. Tanığın çağrılmasına.'),
               T('Bora’nın küçük yalanı tutanakta. Ece gelirse onun da sırtında olacak.'),
             ),
@@ -722,7 +949,8 @@ export const hearing1: CasePart = {
         option('H105_KESIF', 'Olay yerinde keşif: masa 4’ten tezgâhın görüş açısı', {
           cost: [{ var: 'h1_hak', amount: 1 }],
           score: { USUL_BILGISI: 20 },
-          neutral: 'Keşif (CMK 83) mümkündür ama mahkeme fotoğrafların yeterli olduğunu düşünebilir; görüş açısını kendi tespitinle de gösterebilirdin.',
+          neutral:
+            'Keşif (CMK 83) mümkündür ama mahkeme fotoğrafların yeterli olduğunu düşünebilir; görüş açısını kendi tespitinle de gösterebilirdin.',
           responses: says(S('hakim', 'Fotoğraflar dosyada. Gerek görülürse sonra karar verilir. Şimdilik ret.')),
           next: '$stay',
         }),
@@ -743,7 +971,10 @@ export const hearing1: CasePart = {
       ...court1.base,
       title: 'Ara karar',
       lines: says(
-        S('hakim', 'Ara karar: Adli Tıp Kurumundan katılan hakkında kesin rapor alınmasına. Tanık Onur Kılıç’ın gelecek celse dinlenmesine.'),
+        S(
+          'hakim',
+          'Ara karar: Adli Tıp Kurumundan katılan hakkında kesin rapor alınmasına. Tanık Onur Kılıç’ın gelecek celse dinlenmesine.',
+        ),
       ),
     }),
     decisionNode('H1_ARA2', [{ to: 'H1_ARA3' }], {
@@ -761,7 +992,10 @@ export const hearing1: CasePart = {
     decisionNode('H1_ARA3', [{ to: 'H1_ARA' }], {
       ...court1.base,
       lines: [
-        when(any(flag('req_ece'), flag('h1_ece')), S('hakim', 'Tanık Ece Tan’ın çağrılmasına. Duruşmanın bir ay sonraya ertelenmesine.')),
+        when(
+          any(flag('req_ece'), flag('h1_ece')),
+          S('hakim', 'Tanık Ece Tan’ın çağrılmasına. Duruşmanın bir ay sonraya ertelenmesine.'),
+        ),
         otherwise(S('hakim', 'Duruşmanın bir ay sonraya ertelenmesine.')),
       ],
     }),
@@ -770,20 +1004,30 @@ export const hearing1: CasePart = {
       title: 'Erteleme',
       background: 'adliye',
       lines: says(
-        Nx('Tokmak bir kez indi. Salon boşaldı; boşalan salonlar her zaman olduğundan daha büyük görünür.', { fx: 'shake' }),
+        Nx('Tokmak bir kez indi. Salon boşaldı; boşalan salonlar her zaman olduğundan daha büyük görünür.', {
+          fx: 'shake',
+        }),
         card('ADLİYE KORİDORU — ÖĞLE', 'adliye'),
         S('tolga', 'Güzel başladınız meslektaşım. Gerçekten. Leyla Hanım gurur duyar.'),
         S('tolga', 'Ama bilirsiniz: başlangıçlar kolaydır. Bitiş başka.'),
-        Nx('Merdivenlere yürüdü. Onur Kılıç onu takip etti; bir ara durdu, dönüp bana baktı. Bir şey söyleyecekmiş gibi. Söylemedi.'),
+        Nx(
+          'Merdivenlere yürüdü. Onur Kılıç onu takip etti; bir ara durdu, dönüp bana baktı. Bir şey söyleyecekmiş gibi. Söylemedi.',
+        ),
         S('bora', 'Ne oldu şimdi? Bitti mi?'),
         D('Hayır. Bir ay. Bir ay daha.'),
         S('bora', 'Bir ay. Bar kapalı bir ay daha.'),
         Nx('Kasketini taktı. Yağmur başlamıştı; adliyenin camlarından aşağı ince ince akıyordu.'),
         T('Bir ay. Bir tanığın vicdanı için kısa, bir barın kirası için uzun bir süre.'),
-        Nx('Telefon titredi. Leyla; başka bir duruşmadan, koridordan arıyordu. Arkada bir mübaşir birinin adını uzatıyordu.'),
+        Nx(
+          'Telefon titredi. Leyla; başka bir duruşmadan, koridordan arıyordu. Arkada bir mübaşir birinin adını uzatıyordu.',
+        ),
         { speaker: 'leyla', style: 'phone', text: 'Nasıl geçti? Kısa anlat. Kısa anlatamıyorsan iyi geçmemiştir.' },
         D('Katılan bocaladı. Tolga gülümsedi. Hâkim dinledi.'),
-        { speaker: 'leyla', style: 'phone', text: 'Hâkim dinlediyse iyi. Gülümseyen avukattan değil, susan hâkimden kork. Bir ayın var. Raporları bekle, tanıkları bekleme; onlar seni beklemez.' },
+        {
+          speaker: 'leyla',
+          style: 'phone',
+          text: 'Hâkim dinlediyse iyi. Gülümseyen avukattan değil, susan hâkimden kork. Bir ayın var. Raporları bekle, tanıkları bekleme; onlar seni beklemez.',
+        },
       ),
       choices: [cont('H1ARA_DEVAM', 'Ara dönem', 'ARA_GIRIS_1', { role: 'PRIMARY' })],
     }),

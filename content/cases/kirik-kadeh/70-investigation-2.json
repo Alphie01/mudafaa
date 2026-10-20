@@ -944,7 +944,7 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Doğru sınır: tanığın kararı kendisinindir; müdafi ancak tanıklığın ne olduğunu ve doğruyu söyleme yükümlülüğünü anlatabilir (CMK 45 vd.; TCK 272 yalan tanıklık).",
+            "feedback": "Doğru sınır: tanığın kararı kendisinindir; müdafi ancak tanıklığın ne olduğunu ve doğruyu söyleme yükümlülüğünü anlatabilir (CMK 43 vd.; TCK 272 yalan tanıklık).",
             "category": "SAVUNMA_STRATEJISI"
           }
         },
@@ -1066,6 +1066,10 @@
                   "speaker": "player",
                   "text": "“Fotoğraf doğrusunu söylüyor.” Bir polis, kendi tutanağına karşı kendi fotoğrafını öne çıkarıyor.",
                   "style": "thought"
+                },
+                {
+                  "speaker": "sinan",
+                  "text": "Mahkeme çağırırsa gelirim. Ne gördüysem onu söylerim. Komiserim kızar. Kızsın."
                 }
               ]
             }
@@ -1127,6 +1131,10 @@
                   "speaker": "player",
                   "text": "“Onur, arabayı sen al.” Hiç tanımadığın birine arabanı bırakır mısın?",
                   "style": "thought"
+                },
+                {
+                  "speaker": "sinan",
+                  "text": "Bir de… tanık ifadesini verirken “ayırmaya çalıştım” dedi ya. Ben içeri girdiğimde sanığın kolundan tutuyordu. Müştekinin değil. Sanığın."
                 }
               ]
             }
@@ -1236,6 +1244,10 @@
                   "speaker": "player",
                   "text": "Burcu’nun yüzü bulanık olacak. Tezgâh net olsun yeter.",
                   "style": "thought"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Telefonu kapattıktan sonra bir süre ekrana baktım. Bir doğum günü videosu. On beş saniye. İki kadın gülüyor, bir mum sönüyor; arka planda bir adamın hayatı."
                 }
               ]
             }
@@ -1461,6 +1473,10 @@
               "speaker": "player",
               "text": "Geçici raporun bilmediğini kesin rapor bilir. Ya da bilmediğini kesin bir dille söyler.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "İlk sayfada Serkan’ın bir yakın çekim fotoğrafı: burnu, bandı, gözlerinin altında sararmış morluklar. Son sayfada bir bilek; üstünde, ayakkabı tabanı genişliğinde, soluk bir leke."
             }
           ]
         }
@@ -1616,6 +1632,10 @@
               "speaker": "player",
               "text": "Bir camın üstünde kalan şey, bir insanın sözünden daha az yalan söyler.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Raporun sonunda uzmanın el yazısıyla küçük bir not: “İnceleme talebi geç gelmiştir; delil emanette iyi korunmuştur.” Biri emanete iyi bakmış. Kimse sormamış ama iyi bakmış."
             }
           ]
         }
@@ -1650,6 +1670,7 @@
             "mag": { "cells": ["Kan", "Kırık uçta SANIĞA, sap gövdesinde KATILANA ait kan"], "tone": "special" }
           }
         },
+        { "id": "k_talep", "cells": ["Talep", "Mahkeme ara kararı · emanetten teslim"] },
         {
           "id": "k_kirilma",
           "cells": ["Kırılma", "Darbe ile kırılma"],

@@ -1,0 +1,436 @@
+{
+  "nodes": [
+    {
+      "id": "ARA_LAB",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #14 · ARA",
+      "title": "Laboratuvar ham verisi",
+      "hud": ["ex_lab"],
+      "background": "adliye",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ADLİYE · MÜZEKKERE CEVABI — KRİMİNAL LABORATUVAR",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yirmi iki sayfa. Çoğu dağlar ve vadiler gibi görünen çizgiler: kromatogram. Her tepe bir molekül; her vadi bir sessizlik."
+            },
+            {
+              "speaker": "player",
+              "text": "Rapor bir sonuç söyler. Ham veri, sonucun nereden geldiğini. Ve bazen nereden gelmediğini.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "KRİMİNAL LAB. · HAM VERİ", "right": "Numune 1–2 · 23.01" },
+      "columns": [
+        { "label": "BÖLÜM", "flex": 1 },
+        { "label": "KAYIT", "flex": 3 }
+      ],
+      "rows": [
+        { "id": "l_profil", "cells": ["Profil", "Kurşunsuz benzin; hafif bileşenler korunmuş, ağırlaşma yok."] },
+        {
+          "id": "l_piroliz",
+          "cells": ["Matris", "Numune matrisi: ahşap talaşı ve kül. Piroliz ürünleri: —"],
+          "lens": {
+            "lupe": {
+              "cells": [
+                "Matris",
+                "Numune matrisi: ahşap talaşı ve kül. Piroliz ürünleri (stiren, toluen türevleri, fenoller): TESPİT EDİLMEDİ"
+              ],
+              "tone": "special"
+            }
+          }
+        },
+        {
+          "id": "l_kabul",
+          "cells": [
+            "Kabul",
+            "Teslim eden: katılan şirket eksperi T.S. · Kap: 1 L metal teneke · Mühür: teslim edenin şahsi mührü"
+          ]
+        },
+        { "id": "l_not", "cells": ["Not", "Numune alma tutanağı ibraz edilmemiştir."] }
+      ],
+      "tools": [
+        { "id": "lupe", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "kars", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex_lab", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_LAB_PIROLIZ",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "l_piroliz" },
+          "feedback": {
+            "title": "BOŞ SATIR",
+            "text": "Yanmış ahşaptan, verniğinden, plastiğinden beklenen yanma ürünleri hiç yok. Bu talaş ve kül yangından geçmemiş gibi. Benzin ise taze.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_piroliz" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_LAB_KABUL",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "l_kabul" },
+          "feedback": {
+            "title": "ŞAHSİ MÜHÜR",
+            "text": "Tenekeleri kim mühürlemiş? Eksperin kendisi, kendi mührüyle. Bir delil, onu kuşkuyla bakılan kişinin mührüyle korunmuş.",
+            "label": "+60 SKOR",
+            "tone": "info"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 60 },
+            { "type": "VAR", "var": "fact_muhur", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_LAB_NOT",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "l_not" },
+          "feedback": {
+            "title": "TUTANAK YOK",
+            "text": "“Numune alma tutanağı ibraz edilmemiştir.” Bir numunenin doğum belgesi yok.",
+            "label": "+40 SKOR",
+            "tone": "info"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 40 }]
+        },
+        {
+          "id": "FB_LAB",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "LAB_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
+      "id": "ARA_TAHKIM",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #14 · ARA",
+      "title": "Sigorta Tahkim Komisyonu kararı",
+      "hud": ["ex_tah"],
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Gülsüm Hanım’ın naylon dosyası: hakem heyeti kararı, ekinde iki yıl önceki ekspertiz raporu ve bir bölge müdürlüğü yazısı."
+            },
+            {
+              "speaker": "player",
+              "text": "İki rapor, iki ev, bir imza. Yan yana koyacağım. Kelime kelime.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "SİGORTA TAHKİM KOMİSYONU · HAKEM HEYETİ", "right": "Yaşar / Kalkan Sigorta" },
+      "columns": [
+        { "label": "BÖLÜM", "flex": 1 },
+        { "label": "İÇERİK", "flex": 3 }
+      ],
+      "rows": [
+        {
+          "id": "t_karar",
+          "cells": [
+            "Karar",
+            "Eksper raporundaki hızlandırıcı tespiti bilimsel dayanaktan yoksundur; tazminatın ödenmesine."
+          ]
+        },
+        {
+          "id": "t_ek",
+          "cells": [
+            "Ek-1",
+            "Ekspertiz raporu: “düzensiz kenarlı, zemine nüfuz etmiş, tipik döküntü izi tespit edilmiştir…”"
+          ]
+        },
+        {
+          "id": "t_yazi",
+          "cells": ["Ek-2", "Bölge müdürlüğü yazısı: hasar dosyalarında eksper ücretlendirmesi hk."],
+          "lens": {
+            "lupe": {
+              "cells": [
+                "Ek-2",
+                "Bölge müdürlüğü yazısı: “Suiistimal tespitiyle reddedilen hasar dosyalarında eksper ücretine ek prim uygulanacaktır.”"
+              ],
+              "tone": "special"
+            }
+          }
+        },
+        { "id": "t_eksper", "cells": ["Eksper", "Tarık Sönmez · Sönmez Ekspertiz"] }
+      ],
+      "tools": [
+        { "id": "lupe", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "kars", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex_tah", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_TAH_EK",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "t_ek" },
+          "feedback": {
+            "title": "AYNI PARAGRAF",
+            "text": "Bozkurt dosyasındaki raporla yan yana: “düzensiz kenarlı, zemine nüfuz etmiş, tipik döküntü izi.” Virgülüne kadar aynı. İki ayrı yangın, tek bir cümle.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ayni" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_TAH_YAZI",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "t_yazi" },
+          "feedback": {
+            "title": "EK PRİM",
+            "text": "Suiistimal tespitiyle reddedilen her hasara eksper ücretine ek prim. Bir eksperin “benzin” demesinin bir fiyatı varmış.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_prim" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_TAH_KARAR",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "t_karar" },
+          "feedback": {
+            "title": "BİLİMSEL DAYANAKTAN YOKSUN",
+            "text": "Bir hakem heyeti bu eksperin aynı türden raporunu iki yıl önce reddetmiş. Bu bir hüküm değil bizim dosya için; ama bir emsal gibi ağır.",
+            "label": "+40 SKOR",
+            "tone": "info"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 40 }]
+        },
+        {
+          "id": "FB_TAHKIM",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "TAHKIM_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
+      "id": "ARA_ARIZA",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #14 · ARA",
+      "title": "Dağıtım şirketi arıza kaydı",
+      "hud": ["ex_ariza"],
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "İki sayfalık bir döküm: saatler, kodlar, ekip numaraları. Bir sokağın elektriğinin bir gecelik günlüğü."
+            },
+            {
+              "speaker": "player",
+              "text": "Saadet Hanım’ın televizyonu “pat” dedi. Bir şirket bu “pat”ı bir kod olarak yazmış olabilir mi?",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "DAĞITIM ŞİRKETİ · ARIZA KAYDI", "right": "15.01 · Kalem Sk. AG hattı" },
+      "columns": [
+        { "label": "SAAT", "flex": 1 },
+        { "label": "KAYIT", "flex": 3 }
+      ],
+      "rows": [
+        {
+          "id": "a_0208",
+          "cells": ["02.08", "AG şebekesinde nötr iletken kopması (kod N-03). Faz-nötr gerilim yükselmesi."]
+        },
+        {
+          "id": "a_abone",
+          "cells": ["02.15", "Abone şikâyetleri: Kalem Sk. No 5 ve No 7 — cihaz arızası, aşırı gerilim."]
+        },
+        {
+          "id": "a_mudahale",
+          "cells": ["03.40", "Ekip müdahalesi; nötr bağlantısı yenilendi. No 9: yangın nedeniyle enerji kesik."]
+        }
+      ],
+      "tools": [
+        { "id": "lupe", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "kars", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex_ariza", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_ARZ_0208",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "a_0208" },
+          "feedback": {
+            "title": "N-03",
+            "text": "02.08: nötr iletken kopması. Gerilim 220 volttan 380’e doğru tırmanır; eski bir tesisatta bu, bir buatın sonudur. Yangın 02.14 sularında başladı.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_notr" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_ARZ_ABONE",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "a_abone" },
+          "feedback": {
+            "title": "KOMŞULAR",
+            "text": "Beş ve yedi numarada cihaz arızası, aynı dakikalarda. Yedi numara Saadet Hanım. Televizyonu yalnız değilmiş.",
+            "label": "+60 SKOR",
+            "tone": "info"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 60 }]
+        },
+        {
+          "id": "FB_ARIZA",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "ARIZA_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
+      "id": "ARA_ARK",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #14 · ARA",
+      "title": "Elektrik bilirkişisi raporu",
+      "hud": ["ex_ark"],
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Elektrik mühendisi Dr. Aslı Yurt’un raporu: on sayfa, mikroskop fotoğrafları, bakır tellerin ucundaki küçük, parlak boncuklar."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir bakır boncuk. Yangının önce mi sonra mı oluştuğunu söyleyebilen bir damla metal.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "ELEKTRİK BİLİRKİŞİSİ · DR. A. YURT", "right": "Emanet: pano + koridor linyesi" },
+      "columns": [
+        { "label": "BÖLÜM", "flex": 1 },
+        { "label": "BULGU", "flex": 3 }
+      ],
+      "rows": [
+        {
+          "id": "k_linye",
+          "cells": [
+            "Linye",
+            "Koridor buatına giden linyede ark boncuğu; boncuk yüzeyinde oksidasyon ve gözenek yapısı birincil arkla uyumlu."
+          ]
+        },
+        {
+          "id": "k_pano",
+          "cells": ["Pano", "Porselen sigortalar; koridor hattı sigortası atmamış. Aşırı gerilim izi."]
+        },
+        {
+          "id": "k_sonuc",
+          "cells": ["Sonuç", "Yangının koridor hattında elektrik kaynaklı başlamasıyla uyumlu bulgular mevcuttur."]
+        }
+      ],
+      "tools": [
+        { "id": "lupe", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "kars", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex_ark", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_ARK_LINYE",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "k_linye" },
+          "feedback": {
+            "title": "BİRİNCİL ARK",
+            "text": "İletken yanmadan önce oluşmuş bir ark boncuğu. Yani ateş teli değil, tel ateşi yakmış. Koridor hattında, buatın hemen önünde.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ark" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_ARK_PANO",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "k_pano" },
+          "feedback": {
+            "title": "ATMAYAN SİGORTA",
+            "text": "Porselen sigorta aşırı gerilimde atmaz; aşırı akımda atar. Gerilim yükselince eski tesisat korumasız kalır. Necati Usta’nın “kaçak akım rölesi yok” notu burada bir anlam kazanıyor.",
+            "label": "+60 SKOR",
+            "tone": "info"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 60 }]
+        },
+        {
+          "id": "FB_ARK",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "ARK_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_piroliz", "source": { "type": "RULE", "id": "EX_LAB_PIROLIZ" } },
+    { "evidence": "clue_ayni", "source": { "type": "RULE", "id": "EX_TAH_EK" } },
+    { "evidence": "clue_prim", "source": { "type": "RULE", "id": "EX_TAH_YAZI" } },
+    { "evidence": "clue_notr", "source": { "type": "RULE", "id": "EX_ARZ_0208" } },
+    { "evidence": "clue_ark", "source": { "type": "RULE", "id": "EX_ARK_LINYE" } }
+  ]
+}

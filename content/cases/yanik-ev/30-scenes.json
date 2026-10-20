@@ -1,0 +1,325 @@
+{
+  "scenes": [
+    {
+      "id": "sc_ev",
+      "title": "Kalem Sokak 9 · yanık ev",
+      "description": "Yangından üç ay sonra evin içi: giriş, koridor, mutfak duvarı ve salon.",
+      "width": 344,
+      "height": 300,
+      "image": "img_ev",
+      "objects": [
+        {
+          "id": "ob_buat",
+          "name": "Koridor duvarı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 64, "w": 34, "h": 32 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_buat" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Koridor duvarında kömürleşmiş bir buat kutusu. Kapağı erimiş; içinde uçları boncuklanmış bakır teller. Duvarın en derin yanığı tam burada.",
+            "short": "Eriyik bakır"
+          }
+        },
+        {
+          "id": "ob_v",
+          "name": "Mutfak lambrisi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 226, "y": 56, "w": 64, "h": 112 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_v_izi" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Lambri duvarda yukarı doğru açılan bir V. Dibi koridor tarafında, eski bir priz hizasında. Ateş buradan tırmanmış.",
+            "short": "V izi"
+          }
+        },
+        {
+          "id": "ob_moloz",
+          "name": "Salon köşesi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 18, "y": 204, "w": 96, "h": 60 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_moloz" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Tavan tahtaları ve kül köşeye, düzgün bir yığın hâlinde itilmiş. Kenarında kürek izleri. Yangın bir şeyi böyle toplamaz; bir el toplar.",
+            "short": "İtilmiş moloz"
+          }
+        },
+        {
+          "id": "ob_pano",
+          "name": "Giriş duvarı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 116, "y": 140, "w": 28, "h": 38 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_pano" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Sigorta panosunun yuvası boş. Kablolar bir pense ile düzgünce kesilmiş. Pano yanmadı; biri söküp götürdü.",
+            "short": "Boş pano yuvası"
+          }
+        },
+        {
+          "id": "ob_dikis",
+          "name": "Dikiş masası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 196, "y": 214, "w": 76, "h": 42 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Kömürleşmiş bir dikiş masası; demir ayakları eğrilmiş. Bir zamanlar bir kadının akşamları. Dosyaya bir şey söylemiyor.",
+            "short": "Önemsiz"
+          }
+        },
+        {
+          "id": "ob_cumba",
+          "name": "Cumba camı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 16, "y": 36, "w": 84, "h": 92 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Cumbanın camları sıcaktan çatlamış, bir örümcek ağı gibi. Ateşin buraya geldiğini söylüyor; nereden geldiğini değil.",
+            "short": "Önemsiz"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_foto",
+      "title": "Olay yeri albümü · 15 Ocak 04.30",
+      "description": "Kolluğun itfaiye çalışması sürerken çektiği fotoğraflardan dört kare.",
+      "width": 344,
+      "height": 300,
+      "image": "img_foto",
+      "objects": [
+        {
+          "id": "ob_kare21",
+          "name": "Kare 21 · salon",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 28, "w": 148, "h": 116 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_foto_tavan" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Kare 21, saat 04.30: salonun tavanı çökmüş. Zemin baştan sona yanık tahtalar ve molozla örtülü. Çıplak zemin yok; bir leke de yok.",
+            "short": "Örtülü zemin"
+          }
+        },
+        {
+          "id": "ob_kare9",
+          "name": "Kare 9 · koridor",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 184, "y": 28, "w": 140, "h": 116 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_foto_koridor" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Kare 9: koridorun mutfak tarafı. Lambri tamamen yanmış, kerpiç dolgu açığa çıkmış. Evin en çok yanan yeri salon değil, bu duvar.",
+            "short": "Koridor duvarı"
+          }
+        },
+        {
+          "id": "ob_kare30",
+          "name": "Kare 30 · su",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 160, "w": 148, "h": 116 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_su" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Kare 30: salonda bilek boyu su ve köpük. Seksen dakikalık söndürmenin artığı. Su, bir zeminin hikâyesini de yıkar.",
+            "short": "Su birikintisi"
+          }
+        },
+        {
+          "id": "ob_kalabalik",
+          "name": "Kare 34 · sokak",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 184, "y": 160, "w": 140, "h": 116 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Kare 34: şeridin arkasında pijamalı komşular, bir çocuk, bir kedi. Herkes bakıyor; kimse bir şey görmüyor.",
+            "short": "Önemsiz"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_atolye",
+      "title": "Halil’in döşeme atölyesi · Yıldırım",
+      "description": "Eski sanayide, kumaş topları ve yarım kalmış otel koltukları arasında küçük bir atölye.",
+      "width": 344,
+      "height": 300,
+      "image": "img_atolye",
+      "objects": [
+        {
+          "id": "ob_bidon",
+          "name": "Jeneratörün yanı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 268, "y": 196, "w": 42, "h": 54 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_bidon" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Küçük bir jeneratörün yanında kırmızı bir bidon. Kaldırıyorum: ağır. İçinde dört litre kadar benzin çalkalanıyor. Kolluk buraya hiç gelmemiş.",
+            "short": "Dolu bidon"
+          }
+        },
+        {
+          "id": "ob_sandik",
+          "name": "Örtülü eşyalar",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 28, "y": 186, "w": 112, "h": 64 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_esyalar" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Battaniyelere sarılmış bir ceviz çeyiz sandığı, bir konsol, pedallı bir dikiş makinesi. Örtüye iliştirilmiş kâğıt: “EV — restorasyon bitince geri.”",
+            "short": "Etiketli eşyalar"
+          }
+        },
+        {
+          "id": "ob_sozlesme",
+          "name": "Duvardaki kâğıt",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 170, "y": 46, "w": 52, "h": 64 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_restorasyon" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Raptiyeyle tutturulmuş bir sözleşme. Başlangıç 19 Ocak; birinci hafta elektrik tesisatı. Altı çizili bir cümle: “Odalar 15 Ocak’a kadar boşaltılacaktır.”",
+            "short": "Restorasyon sözleşmesi"
+          }
+        },
+        {
+          "id": "ob_kumas",
+          "name": "Kumaş topları",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 28, "y": 38, "w": 92, "h": 104 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Kadife, keten, deri. Bir otelin kırk sandalyesi için kesilmiş parçalar. Halil o gece bunları dikiyormuş; dosya için bir şey değil.",
+            "short": "Önemsiz"
+          }
+        },
+        {
+          "id": "ob_takvim",
+          "name": "Takvim",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 244, "y": 40, "w": 50, "h": 58 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Bir hırdavatçının hediye takvimi; ocak sayfasında yağlı parmak izleri. Hiçbir güne not düşülmemiş.",
+            "short": "Önemsiz"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_saadet",
+      "title": "Kalem Sokak 7 · Saadet Hanım’ın oturma odası",
+      "description": "Dantel örtüler, bir soba, iki kedi ve yanık evin tam karşısına bakan bir pencere.",
+      "width": 344,
+      "height": 300,
+      "image": "img_saadet",
+      "objects": [
+        {
+          "id": "ob_tv",
+          "name": "Eski televizyon",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 196, "y": 104, "w": 96, "h": 74 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_tv" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Televizyonun arka kapağı gevşek. Güç kartında iki kondansatör patlamış, şişmiş. Saadet Hanım: “Yangından önce gitti bu, kızım. Pat dedi, karardı.”",
+            "short": "Yanmış güç kartı"
+          }
+        },
+        {
+          "id": "ob_modem",
+          "name": "Modem",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 124, "y": 146, "w": 34, "h": 22 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }],
+          "feedback": {
+            "text": "Modemin adaptörü erimiş, plastiği kabarmış. Torunu yenisini getirmiş; eskisi bir kutunun içinde saklanmış.",
+            "short": "Erimiş adaptör"
+          }
+        },
+        {
+          "id": "ob_kombi",
+          "name": "Kombi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 30, "y": 54, "w": 56, "h": 84 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }],
+          "feedback": {
+            "text": "Kombinin kapağında servis etiketi: “16 Ocak — kart değişimi.” Yangının ertesi günü.",
+            "short": "Kombi kartı"
+          }
+        },
+        {
+          "id": "ob_kedi",
+          "name": "Kedi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 236, "w": 50, "h": 30 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Tekir kedi bir göz açıp kapattı. Bu evde olan biteni her şeyden iyi biliyor; söylemiyor.",
+            "short": "Önemsiz"
+          }
+        },
+        {
+          "id": "ob_resim",
+          "name": "Duvardaki fotoğraf",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 214, "y": 30, "w": 64, "h": 50 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Genç bir Saadet, tütün balyalarının önünde, yanında bıyıklı bir adam. Eski bir hayat; bu dosyanın değil.",
+            "short": "Önemsiz"
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "id": "img_ev", "kind": "IMAGE", "path": "assets/scenes/yanik-ev@4x.png" },
+    { "id": "img_foto", "kind": "IMAGE", "path": "assets/scenes/olay-albumu@4x.png" },
+    { "id": "img_atolye", "kind": "IMAGE", "path": "assets/scenes/atolye@4x.png" },
+    { "id": "img_saadet", "kind": "IMAGE", "path": "assets/scenes/saadet-evi@4x.png" }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_buat", "source": { "type": "OBJECT", "id": "ob_buat" } },
+    { "evidence": "clue_v_izi", "source": { "type": "OBJECT", "id": "ob_v" } },
+    { "evidence": "clue_moloz", "source": { "type": "OBJECT", "id": "ob_moloz" } },
+    { "evidence": "clue_pano", "source": { "type": "OBJECT", "id": "ob_pano" } },
+    { "evidence": "clue_foto_tavan", "source": { "type": "OBJECT", "id": "ob_kare21" } },
+    { "evidence": "clue_foto_koridor", "source": { "type": "OBJECT", "id": "ob_kare9" } },
+    { "evidence": "clue_su", "source": { "type": "OBJECT", "id": "ob_kare30" } },
+    { "evidence": "clue_bidon", "source": { "type": "OBJECT", "id": "ob_bidon" } },
+    { "evidence": "clue_esyalar", "source": { "type": "OBJECT", "id": "ob_sandik" } },
+    { "evidence": "clue_restorasyon", "source": { "type": "OBJECT", "id": "ob_sozlesme" } },
+    { "evidence": "clue_tv", "source": { "type": "OBJECT", "id": "ob_tv" } }
+  ]
+}

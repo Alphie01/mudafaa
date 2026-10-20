@@ -1,0 +1,278 @@
+{
+  "nodes": [
+    {
+      "id": "INV_EV",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #14 · SORUŞTURMA",
+      "title": "Kalem Sokak 9 · yanık ev",
+      "hud": ["taps_ev"],
+      "exposeCounts": true,
+      "background": "sokak_sabah",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "KALEM SOKAK 9 — YANIK EV, 10.20", "style": "card", "bg": "sokak_sabah" },
+            {
+              "speaker": "narrator",
+              "text": "Kapı yoktu; menteşeleri vardı. Eşikten adım atınca ayakkabılarımın altında kül ve cam çıtırdadı. Üç ay geçmişti; koku geçmemişti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ev, yarısı gökyüzüne açık bir kutu gibiydi. Tavanın olduğu yerden gri bir ışık iniyor, kararmış duvarlarda yağmur izleri çiziyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Yangın bir hikâye yazar ve sonra kendi yazısının üstünü karalar. Benim işim karalamanın altındaki ilk cümleyi bulmak: nerede başladı?",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Bilirkişi “salon” diyor. Önce salona değil, en çok yanan yere bakacağım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "scene": "sc_ev",
+      "instruction": "Evde şüpheli gördüğün yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "actionCosts": { "TAP": [{ "var": "taps_ev", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_EV",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "EV_BITIR", "kind": "CONTINUE", "label": "Evden çık", "role": "BACK", "next": "INV_EV_SON" }
+      ]
+    },
+    {
+      "id": "INV_EV_SON",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #14 · SORUŞTURMA",
+      "title": "Kalem Sokak",
+      "background": "sokak_sabah",
+      "lines": [
+        {
+          "when": { "hasEvidence": "clue_moloz" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Çıkarken salonun köşesindeki yığına bir kez daha baktım. Düzgün, sıkıştırılmış, kürek izli. Yangın bir şeyi böyle istiflemez. Bir el istifler."
+            },
+            {
+              "speaker": "player",
+              "text": "Kimin eli? İtfaiyeci mi, polis mi, bilirkişi mi, bir başkası mı? Fotoğraflar söyler. En eskisi önce.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kaldırımda, karşı evin penceresinde perde yine aralanmıştı. Bu sefer içeriden bir el bana gel işareti yaptı, sonra vazgeçti."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Kaldırıma çıktığımda ellerim kül olmuştu. Mendille sildim; kül mendile geçti, gitmedi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir yangın yerinde her şey aynı renktir. Önemli olanı önemsizden ayırmak için önce kendi gözünü temizlemen gerekir.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "Karşı evin penceresinde perde aralandı ve kapandı." }
+          ]
+        }
+      ],
+      "choices": [{ "id": "EVSON_BITIR", "kind": "CONTINUE", "label": "Büroya dön", "role": "BACK", "next": "$return" }]
+    },
+    {
+      "id": "INV_FOTO",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #14 · SORUŞTURMA",
+      "title": "Olay yeri albümü · 04.30",
+      "hud": ["taps_foto"],
+      "exposeCounts": true,
+      "background": "adliye",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ADLİYE · SAVCILIK DOSYASI — OLAY YERİ ALBÜMÜ",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Otuz sekiz kare. Saat damgası 04.30–04.52. Flaşın beyaz yaraları, itfaiyecilerin sarı şeritli sırtları, buhar, su, kömür."
+            },
+            {
+              "speaker": "player",
+              "text": "En eski fotoğraf, en az dokunulmuş olandır. Bu kareler, evin henüz kimsenin hikâyesi olmadığı anı gösteriyor.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "Dört kare masanın üstünde yan yana. Salon, koridor, su, sokak." }
+          ]
+        }
+      ],
+      "scene": "sc_foto",
+      "instruction": "Fotoğraflarda şüpheli gördüğün yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "actionCosts": { "TAP": [{ "var": "taps_foto", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_FOTO",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "FOTO_BITIR", "kind": "CONTINUE", "label": "Albümü kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_ATOLYE_G",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #14 · SORUŞTURMA",
+      "title": "Atölye",
+      "background": "depo",
+      "onFirstEnter": [{ "type": "MEET", "character": "zehra" }],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "YILDIRIM, ESKİ SANAYİ — BOZKURT DÖŞEME, 16.40",
+              "style": "card",
+              "bg": "depo"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Eski sanayi bir labirentti: kaportacılar, torna atölyeleri, bir kebapçı, bir kahve. Kepenkler yarı inikti; çamurlu sokakta bir köpek bir lastiği kemiriyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Zehra kapının önünde bekliyordu, elinde bir anahtarlık. Nöbetten çıkmış, formasının üstüne babasının eski montunu giymişti."
+            },
+            {
+              "speaker": "zehra",
+              "text": "İki aydır buraya girmedim. Polis girmedi bile. Kimse “atölyeye bakalım” demedi."
+            },
+            {
+              "speaker": "narrator",
+              "name": "ATÖLYE BEKÇİSİ",
+              "text": "Halil Abi’nin avukatı mısınız? O gece buradaydı abla. Işığı sabaha kadar yandı. Sabah beşte ben çay götürdüm, makinenin başındaydı."
+            },
+            {
+              "speaker": "narrator",
+              "name": "ATÖLYE BEKÇİSİ",
+              "text": "Polis bana hiç sormadı. Ben de kimseye söylemedim; soran olmadı ki."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir tanık daha; ama mahkemenin göremeyeceği bir tanık değil. Sadece kimsenin sormadığı bir tanık.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kilit gıcırdadı. İçeriden kumaş, tutkal ve soğuk makine yağı kokusu taştı."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "ATOLYE_GIR", "kind": "CONTINUE", "label": "İçeri gir", "role": "PRIMARY", "next": "INV_ATOLYE" }
+      ]
+    },
+    {
+      "id": "INV_ATOLYE",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #14 · SORUŞTURMA",
+      "title": "Bozkurt Döşeme · atölye",
+      "hud": ["taps_atolye"],
+      "exposeCounts": true,
+      "background": "depo",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Yarım kalmış otel sandalyeleri bir koro gibi dizilmişti; hepsinin oturağı açık, yayları görünür. Duvarda makaslar, ölçü cetvelleri, bir çerçevesiz fotoğraf."
+            },
+            {
+              "speaker": "player",
+              "text": "Savcıya göre Halil o gece evini yakıyordu. Bu odaya göre bir otelin kırk sandalyesini kaplıyordu. Hangisi daha çok iz bırakmış?",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "scene": "sc_atolye",
+      "instruction": "Atölyede dikkatini çeken yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "actionCosts": { "TAP": [{ "var": "taps_atolye", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_ATOLYE",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "ATOLYE_BITIR", "kind": "CONTINUE", "label": "Atölyeden çık", "role": "BACK", "next": "INV_ATOLYE_SON" }
+      ]
+    },
+    {
+      "id": "INV_ATOLYE_SON",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #14 · SORUŞTURMA",
+      "title": "Atölye",
+      "background": "depo",
+      "lines": [
+        {
+          "when": { "hasEvidence": "clue_esyalar" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Zehra çeyiz sandığının örtüsünü kaldırdı. Ceviz, el oyması bir lale motifi, pirinç bir kilit. Parmaklarını kapağın üstünde gezdirdi; açmadı."
+            },
+            { "speaker": "zehra", "expression": "uzgun", "text": "Annemin sandığı. Babam bunu kurtarmış." },
+            {
+              "speaker": "zehra",
+              "text": "Savcı “değerli eşyalarını önceden çıkarmış” diyor. Bu sandık bir kuruş etmez. Kimse almaz bunu. Sadece biz…"
+            },
+            { "speaker": "player", "text": "Etiketi okudun mu? “Restorasyon bitince geri.”" },
+            { "speaker": "zehra", "expression": "uzgun", "text": "Geri. Geri götürecekmiş. Neyin içine?" },
+            {
+              "speaker": "player",
+              "text": "Bir kundakçı neyi kurtarır? Parayı. Bir dul neyi kurtarır? Sandığı. Bu ayrım mahkemede bir delil değil. Ama benim için bir pusula.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "Zehra kapıyı kilitlerken bir an durdu, anahtarı bana uzattı." },
+            { "speaker": "zehra", "text": "Siz tutun. Ben buraya bir daha tek başıma gelemem." },
+            {
+              "speaker": "player",
+              "text": "Bir anahtar daha. Bu dosyada herkes bana bir şey emanet ediyor. Kimse bir şey açıklamıyor.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "ATOLYESON_BITIR", "kind": "CONTINUE", "label": "Büroya dön", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ]
+}

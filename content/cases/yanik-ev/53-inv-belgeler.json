@@ -1,0 +1,428 @@
+{
+  "nodes": [
+    {
+      "id": "INV_BILIRKISI",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #14 · SORUŞTURMA",
+      "title": "Yangın bilirkişi raporu",
+      "hud": ["ex_bil"],
+      "background": "adliye",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ADLİYE · SAVCILIK DOSYASI — YANGIN BİLİRKİŞİ RAPORU",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "On dört sayfa, üç ek. Kapakta bir üniversite logosu, bir unvan, bir imza. Sonuç sayfası kalın harflerle: “hızlandırıcı kullanılarak çıkarılmıştır.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir rapor bir sonuçla biter. Ama sonuca giden yol ortadaki sayfalardadır. Ortadaki sayfaları kimse okumaz; ben okuyacağım.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir alet seç, sonra şüpheli satıra dokun. Büyüteç yazıya, karşılaştırma satırlar arasındaki çelişkiye bakar.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "YANGIN BİLİRKİŞİ RAPORU · DR. O. TEZEL", "right": "21.01 keşif · 02.02 rapor" },
+      "columns": [
+        { "label": "BÖLÜM", "flex": 1 },
+        { "label": "İÇERİK", "flex": 3 }
+      ],
+      "rows": [
+        {
+          "id": "b_kesif",
+          "cells": [
+            "Keşif",
+            "Olay yeri 21 Ocak tarihinde incelenmiştir. Yağışlar nedeniyle olay yeri kısmen bozulmuştur."
+          ]
+        },
+        {
+          "id": "b_materyal",
+          "cells": [
+            "Materyal",
+            "İncelenen materyal: olay yerinden alınmış iki adet metal teneke numune (laboratuvara gönderilmiştir)."
+          ]
+        },
+        {
+          "id": "b_lab",
+          "cells": ["Laboratuvar", "Her iki numunede kurşunsuz benzin tespit edilmiştir."],
+          "lens": {
+            "lupe": {
+              "cells": [
+                "Laboratuvar",
+                "Her iki numunede kurşunsuz benzin tespit edilmiştir. [dipnot 4: düşük buharlaşma derecesinde]"
+              ],
+              "tone": "special"
+            }
+          }
+        },
+        {
+          "id": "b_elektrik",
+          "cells": [
+            "Elektrik",
+            "Olay yerinde elektrik kaynaklı bir iz tespit edilmemiştir. Sigorta panosu kolluk emanetinde bulunduğundan incelenmemiştir."
+          ]
+        },
+        {
+          "id": "b_ek3",
+          "cells": ["Ek-3", "Salon zemini; döküntü izi (fotoğraf: katılan şirket eksperi, 15.01 09.40)."]
+        },
+        { "id": "b_sonuc", "cells": ["Sonuç", "Yangın salon zemininde, hızlandırıcı kullanılarak çıkarılmıştır."] }
+      ],
+      "tools": [
+        { "id": "lupe", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "kars", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex_bil", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_BIL_MATERYAL",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "b_materyal" },
+          "feedback": {
+            "title": "NUMUNELERİN KAYNAĞI",
+            "text": "“Olay yerinden alınmış” kim tarafından? Ekteki teslim tutanağıyla karşılaştırınca: numuneleri kolluk değil, katılan şirketin eksperi teslim etmiş. Kolluk hiç numune almamış.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_numune" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_BIL_LAB",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "b_lab" },
+          "feedback": {
+            "title": "DİPNOT 4",
+            "text": "Küçük puntoyla: “düşük buharlaşma derecesinde.” Saatlerce yanmış, seksen dakika sulanmış bir zeminde benzin neden bu kadar taze kalsın?",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_taze" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_BIL_ELEKTRIK",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "b_elektrik" },
+          "feedback": {
+            "title": "“İNCELENMEMİŞTİR”",
+            "text": "İki cümle yan yana: “elektrik kaynaklı iz tespit edilmemiştir” ve “pano incelenmemiştir.” Bakılmayan bir şeyin yokluğu tespit edilmiş.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_pano_yok" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_BIL_EK3",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "b_ek3" },
+          "feedback": {
+            "title": "EKSPERİN FOTOĞRAFI",
+            "text": "Bilirkişinin “döküntü izi” dediği fotoğrafı bilirkişi çekmemiş. Eksper çekmiş: 15 Ocak 09.40. Zemin tertemiz; ortada ıslak, düzensiz bir leke.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_eksper_foto" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_BIL_KESIF",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "b_kesif" },
+          "feedback": {
+            "title": "ALTI GÜN SONRA",
+            "text": "Bilirkişi evi yangından altı gün sonra, yağmurdan sonra görmüş. Gördüğü zemin, gecenin zemini değil.",
+            "label": "+30 SKOR · Not defterine eklendi",
+            "tone": "info"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_gec" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 30 }
+          ]
+        },
+        {
+          "id": "FB_BILIRKISI",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "BILIRKISI_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_ITFAIYE",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #14 · SORUŞTURMA",
+      "title": "İtfaiye yangın raporu",
+      "hud": ["ex_itf"],
+      "background": "adliye",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "İki sayfa, matbu bir form; kutucuklar tükenmezle doldurulmuş. Ekip amirinin el yazısı yer yer bir doktor reçetesi kadar okunaksız."
+            },
+            {
+              "speaker": "player",
+              "text": "İtfaiyeciler yangını en sıcak anında görür. Yazdıklarını kimse okumaz, çünkü form sıkıcıdır. Sıkıcı formlar dürüst olur.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "BURSA İTFAİYESİ · OLAY RAPORU", "right": "15.01 · 02.21–04.10" },
+      "columns": [
+        { "label": "KUTU", "flex": 1 },
+        { "label": "KAYIT", "flex": 3 }
+      ],
+      "rows": [
+        { "id": "i_zaman", "cells": ["Zaman", "İhbar 02.21 · Varış 02.29 · Kontrol 03.50 · Söndürme suyu: 80 dk"] },
+        {
+          "id": "i_baslangic",
+          "cells": [
+            "Başlangıç",
+            "Yangının mutfak ile koridor arasındaki bölgede başladığı, elektrik kaynaklı olabileceği değerlendirilmiştir."
+          ]
+        },
+        {
+          "id": "i_gozlem",
+          "cells": ["Gözlem", "Müdahale sırasında akaryakıt kokusu alınmamıştır. Yoğun plastik ve kablo yanığı kokusu."]
+        },
+        { "id": "i_sirama", "cells": ["Sıçrama", "Yan bina (No: 11) saçağı tutuşmuş, iki aile tahliye edilmiştir."] },
+        { "id": "i_teslim", "cells": ["Teslim", "Sigorta panosu sökülerek kolluğa teslim edilmiştir."] }
+      ],
+      "tools": [
+        { "id": "lupe", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "kars", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex_itf", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_ITF_GOZLEM",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "i_gozlem" },
+          "feedback": {
+            "title": "KOKU",
+            "text": "“Akaryakıt kokusu alınmamıştır.” Yangının içine giren, kokuyu en yakından alan insanlar benzin kokusu almamış. Plastik ve kablo yanığı.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_koku_yok" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_ITF_BASLANGIC",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "i_baslangic" },
+          "feedback": {
+            "title": "İKİ BAŞLANGIÇ",
+            "text": "Bilirkişi “salon zemini” diyor; itfaiye “mutfak ile koridor arası, elektrik kaynaklı olabilir.” Biri yangını söndürürken görmüş, biri altı gün sonra.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_baslangic" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_ITF_SICRAMA",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "i_sirama" },
+          "feedback": {
+            "title": "GENEL TEHLİKE",
+            "text": "Yangın yan binaya sıçramış. Bu, yangının genel güvenlik bakımından tehlikeli olduğunu gösterir; savcının işine yarar, bizim değil. Ama bilmek gerekir.",
+            "label": "+20 SKOR · doğru okuma",
+            "tone": "info"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_yan_ev" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 20 }
+          ]
+        },
+        {
+          "id": "FB_ITFAIYE",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "ITFAIYE_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_POLICE",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #14 · SORUŞTURMA",
+      "title": "Konut sigortası poliçesi ve zeyilname",
+      "hud": ["ex_pol"],
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Poliçe dört sayfa, zeyilname bir sayfa. Genel şartlar ince bir kitapçık; özel şartlar iki paragraf, en küçük puntoyla."
+            },
+            {
+              "speaker": "player",
+              "text": "Sigortacılar en önemli cümleyi en küçük puntoyla yazar. Gözlüğümü taktım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "KALKAN SİGORTA · KONUT POLİÇESİ", "right": "Başlangıç 30.11 · Zeyil 03.01" },
+      "columns": [
+        { "label": "ALAN", "flex": 1 },
+        { "label": "İÇERİK", "flex": 3 }
+      ],
+      "rows": [
+        { "id": "p_teminat", "cells": ["Teminat", "Bina 1.200.000 TL · eşya 150.000 TL · yangın, yıldırım, infilak"] },
+        {
+          "id": "p_ozel",
+          "cells": [
+            "Özel şart",
+            "Hasar tazminatı, kredi bakiyesi tutarında öncelikle dain-i mürtehin sıfatıyla bankaya ödenir."
+          ]
+        },
+        {
+          "id": "p_ek",
+          "cells": [
+            "Ek",
+            "Banka yazısı: Kredi kullandırımı için taşınmazın konut sigortası ile sigortalanması şarttır."
+          ]
+        },
+        {
+          "id": "p_zeyil",
+          "cells": ["Zeyilname", "03.01 · Bina teminatı 1.800.000 TL"],
+          "lens": {
+            "lupe": {
+              "cells": [
+                "Zeyilname",
+                "03.01 · Bina teminatı 1.800.000 TL · [açıklama, en küçük puntoyla: KMP-RST · acente teklifi]"
+              ],
+              "tone": "special"
+            }
+          }
+        },
+        { "id": "p_ihbar", "cells": ["Hasar ihbarı", "15.01 · 14.00 · acente aracılığıyla"] }
+      ],
+      "tools": [
+        { "id": "lupe", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "kars", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex_pol", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_POL_OZEL",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "p_ozel" },
+          "feedback": {
+            "title": "DAİN-İ MÜRTEHİN",
+            "text": "Tazminat önce bankaya. Kredi bakiyesi kadarını Halil hiç görmeyecek. Evi yakan birinin parası bankanın kasasına gidecekti.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_dain" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_POL_EK",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "p_ek" },
+          "feedback": {
+            "title": "BANKANIN ŞARTI",
+            "text": "Poliçeyi Halil aramamış; banka şart koşmuş. Kırk yedi gün, bir kredinin yaşı.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_banka" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_POL_ZEYIL",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "p_zeyil" },
+          "feedback": {
+            "title": "KÜÇÜK PUNTO",
+            "text": "Zeyilnamenin açıklama alanı, en küçük puntoyla: “KMP-RST · acente teklifi.” Artış bir kampanyanın parçası.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kampanya" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "FB_POLICE",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "POLICE_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_numune", "source": { "type": "RULE", "id": "EX_BIL_MATERYAL" } },
+    { "evidence": "clue_taze", "source": { "type": "RULE", "id": "EX_BIL_LAB" } },
+    { "evidence": "clue_pano_yok", "source": { "type": "RULE", "id": "EX_BIL_ELEKTRIK" } },
+    { "evidence": "clue_eksper_foto", "source": { "type": "RULE", "id": "EX_BIL_EK3" } },
+    { "evidence": "clue_gec", "source": { "type": "RULE", "id": "EX_BIL_KESIF" } },
+    { "evidence": "clue_koku_yok", "source": { "type": "RULE", "id": "EX_ITF_GOZLEM" } },
+    { "evidence": "clue_baslangic", "source": { "type": "RULE", "id": "EX_ITF_BASLANGIC" } },
+    { "evidence": "clue_yan_ev", "source": { "type": "RULE", "id": "EX_ITF_SICRAMA" } },
+    { "evidence": "clue_dain", "source": { "type": "RULE", "id": "EX_POL_OZEL" } },
+    { "evidence": "clue_banka", "source": { "type": "RULE", "id": "EX_POL_EK" } },
+    { "evidence": "clue_kampanya", "source": { "type": "RULE", "id": "EX_POL_ZEYIL" } }
+  ]
+}

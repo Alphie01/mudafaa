@@ -1,5 +1,9 @@
 import { z } from 'zod';
 
+/** Boş değer (env dosyasında `ANAHTAR=`) tanımsız sayılır. */
+const blankAsUndefined = (v: unknown): unknown => (v === '' ? undefined : v);
+const optionalText = z.preprocess(blankAsUndefined, z.string().min(1).optional());
+
 const EnvSchema = z
   .object({
     NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
@@ -24,6 +28,39 @@ const EnvSchema = z
     FIREBASE_SERVICE_ACCOUNT: z.string().min(1).optional(),
     // Ters vekil (tünel) atlama sayısı; tanımlıysa Express `trust proxy` ile istemci IP'si X-Forwarded-For'dan okunur.
     TRUST_PROXY: z.coerce.number().int().min(0).max(10).optional(),
+    // ── Uygulama içi satın alma (docs/iap.md) ──
+    // store: makbuz mağaza API'siyle doğrulanır · fake: yalnızca `test:` önekli token'lar (e2e ve yerel; production'da yasak).
+    PURCHASE_VERIFY_MODE: z.enum(['store', 'fake']).default('store'),
+    // Ücret kilidi; false yalnızca production dışında (eski e2e testleri ve içerik denemeleri her davayı açık görür).
+    PAYWALL_ENABLED: z
+      .enum(['true', 'false'])
+      .default('true')
+      .transform((v) => v === 'true'),
+    // Google Play: Android Publisher API yetkili servis hesabı anahtarı (düz JSON ya da base64).
+    GOOGLE_PLAY_SERVICE_ACCOUNT: optionalText,
+    GOOGLE_PLAY_PACKAGE: z.string().min(1).default('com.monolithyazilim.mudafaa'),
+    // App Store Server API: In-App Purchase anahtarı (issuer, key id, .p8 içeriği base64).
+    APPLE_ISSUER_ID: optionalText,
+    APPLE_KEY_ID: optionalText,
+    APPLE_PRIVATE_KEY: optionalText,
+    APPLE_BUNDLE_ID: z.string().min(1).default('com.monolithyazilim.mudafaa'),
+    // App Store'daki sayısal uygulama kimliği; production imzalı işlem doğrulaması için gerekir.
+    // Production'da sandbox (App Store) ve test (Google Play lisans test kullanıcısı) satın almaları reddedilir; App Review
+    // ve kapalı test için geçici olarak açılabilir. Bu hak `case_entitlements.sandbox` ile işaretlenir.
+    APPLE_ALLOW_SANDBOX: z
+      .enum(['true', 'false'])
+      .default('false')
+      .transform((v) => v === 'true'),
+    GOOGLE_ALLOW_TEST_PURCHASES: z
+      .enum(['true', 'false'])
+      .default('false')
+      .transform((v) => v === 'true'),
+    // Play gerçek zamanlı geliştirici bildirimleri (Pub/Sub push, OIDC kimlik doğrulamalı): push aboneliğinde verilen
+    // audience ve token'ı imzalayan servis hesabının e-postası. İkisi birlikte zorunludur; biri yoksa uç kapalıdır (503).
+    // Servis hesabı denetimi olmadan herkes kendi GCP projesinde doğru audience'lı geçerli bir token üretebilir.
+    GOOGLE_RTDN_AUDIENCE: optionalText,
+    GOOGLE_RTDN_SERVICE_ACCOUNT: optionalText,
+    APPLE_APP_ID: z.preprocess(blankAsUndefined, z.coerce.number().int().positive().optional()),
   })
   .superRefine((env, ctx) => {
     // docs/plan.md §8: production'da emulator değişkeni yasak (sahte token'larla giriş açılmasın).
@@ -32,6 +69,38 @@ const EnvSchema = z
         code: 'custom',
         path: ['FIREBASE_AUTH_EMULATOR_HOST'],
         message: 'production ortamında Firebase Auth Emulator kullanılamaz',
+      });
+    }
+    // Sahte doğrulayıcı ve kapalı ücret kilidi production'da satın almasız hak verir.
+    if (env.NODE_ENV === 'production' && env.PURCHASE_VERIFY_MODE === 'fake') {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['PURCHASE_VERIFY_MODE'],
+        message: 'production ortamında sahte satın alma doğrulayıcısı kullanılamaz',
+      });
+    }
+    if (env.NODE_ENV === 'production' && !env.PAYWALL_ENABLED) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['PAYWALL_ENABLED'],
+        message: 'production ortamında ücret kilidi kapatılamaz',
+      });
+    }
+    if (env.GOOGLE_RTDN_AUDIENCE !== undefined && env.GOOGLE_RTDN_SERVICE_ACCOUNT === undefined) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['GOOGLE_RTDN_SERVICE_ACCOUNT'],
+        message: 'GOOGLE_RTDN_AUDIENCE tanımlıyken push aboneliğinin servis hesabı e-postası zorunludur',
+      });
+    }
+    if (
+      env.GOOGLE_PLAY_SERVICE_ACCOUNT !== undefined &&
+      parseServiceAccount(env.GOOGLE_PLAY_SERVICE_ACCOUNT) === null
+    ) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['GOOGLE_PLAY_SERVICE_ACCOUNT'],
+        message: 'servis hesabı anahtarı JSON ya da base64 JSON olmalı (project_id, client_email, private_key)',
       });
     }
     if (env.FIREBASE_SERVICE_ACCOUNT !== undefined && parseServiceAccount(env.FIREBASE_SERVICE_ACCOUNT) === null) {

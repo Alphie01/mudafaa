@@ -47,4 +47,53 @@ describe('loadEnv', () => {
     expect(parseServiceAccount('{"project_id":1}')).toBeNull();
     expect(() => loadEnv({ ...base, FIREBASE_SERVICE_ACCOUNT: 'not-a-key' })).toThrow(/FIREBASE_SERVICE_ACCOUNT/);
   });
+
+  it('purchase settings default to store verification with the paywall on', () => {
+    const env = loadEnv(base);
+
+    expect(env).toMatchObject({
+      PURCHASE_VERIFY_MODE: 'store',
+      PAYWALL_ENABLED: true,
+      GOOGLE_PLAY_PACKAGE: 'com.monolithyazilim.mudafaa',
+      APPLE_BUNDLE_ID: 'com.monolithyazilim.mudafaa',
+    });
+    expect(env.APPLE_APP_ID).toBeUndefined();
+  });
+
+  it('allows the fake purchase verifier and a disabled paywall outside production', () => {
+    const env = loadEnv({ ...base, NODE_ENV: 'test', PURCHASE_VERIFY_MODE: 'fake', PAYWALL_ENABLED: 'false' });
+
+    expect(env.PURCHASE_VERIFY_MODE).toBe('fake');
+    expect(env.PAYWALL_ENABLED).toBe(false);
+  });
+
+  it('rejects the fake purchase verifier and a disabled paywall in production', () => {
+    expect(() => loadEnv({ ...base, NODE_ENV: 'production', PURCHASE_VERIFY_MODE: 'fake' })).toThrow(
+      /PURCHASE_VERIFY_MODE/,
+    );
+    expect(() => loadEnv({ ...base, NODE_ENV: 'production', PAYWALL_ENABLED: 'false' })).toThrow(/PAYWALL_ENABLED/);
+  });
+
+  it('validates the Google Play service account and Apple app id', () => {
+    expect(() => loadEnv({ ...base, GOOGLE_PLAY_SERVICE_ACCOUNT: 'x' })).toThrow(/GOOGLE_PLAY_SERVICE_ACCOUNT/);
+    expect(loadEnv({ ...base, APPLE_APP_ID: '6740000000' }).APPLE_APP_ID).toBe(6740000000);
+    // production.env.example'daki boş anahtarlar tanımsız sayılır.
+    const blank = loadEnv({ ...base, APPLE_APP_ID: '', APPLE_ISSUER_ID: '', GOOGLE_PLAY_SERVICE_ACCOUNT: '' });
+    expect([blank.APPLE_APP_ID, blank.APPLE_ISSUER_ID, blank.GOOGLE_PLAY_SERVICE_ACCOUNT]).toEqual([
+      undefined,
+      undefined,
+      undefined,
+    ]);
+  });
+
+  it('requires the RTDN push service account whenever the audience is set', () => {
+    const audience = 'https://mudafaa.sehirkilavuzu.com/v1/store-notifications/google';
+    expect(() => loadEnv({ ...base, GOOGLE_RTDN_AUDIENCE: audience })).toThrow(/GOOGLE_RTDN_SERVICE_ACCOUNT/);
+    const env = loadEnv({
+      ...base,
+      GOOGLE_RTDN_AUDIENCE: audience,
+      GOOGLE_RTDN_SERVICE_ACCOUNT: 'p@x.iam.gserviceaccount.com',
+    });
+    expect(env.GOOGLE_RTDN_SERVICE_ACCOUNT).toBe('p@x.iam.gserviceaccount.com');
+  });
 });

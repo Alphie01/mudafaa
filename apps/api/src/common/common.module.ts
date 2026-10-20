@@ -7,13 +7,14 @@ import { LoggerModule } from 'nestjs-pino';
 import { ENV, type Env } from '../config/env.js';
 import { REDIS } from '../redis/redis.module.js';
 import { ApiErrorFilter } from './error.filter.js';
+import { reqSerializer } from './log-serializers.js';
 import { RedisThrottlerStorage } from './throttler-redis.storage.js';
 
 const isChoose = (ctx: ExecutionContext): boolean => ctx.switchToHttp().getRequest<Request>().path.endsWith('/choose');
 
 /**
  * Ortak altyapı:
- * - pino logları (yetki başlıkları maskelenir; testte sessiz);
+ * - pino logları (yetki başlıkları maskelenir, URL'lerden sorgu dizesi atılır; testte sessiz);
  * - Redis depolu, kullanıcı başına hız sınırı: genel pencere ve yalnızca `choose` için kısa pencere;
  * - hata zarfı filtresi.
  * Kullanıcı başına guard (`UserThrottlerGuard`) AppModule'de kimlik guard'ından sonra kaydedilir.
@@ -28,6 +29,7 @@ const isChoose = (ctx: ExecutionContext): boolean => ctx.switchToHttp().getReque
           level: env.NODE_ENV === 'test' ? 'silent' : env.LOG_LEVEL,
           genReqId: (req) => String(req.headers['x-request-id'] ?? ''),
           redact: ['req.headers.authorization', 'req.headers.cookie'],
+          serializers: { req: reqSerializer },
         },
       }),
     }),

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../data/auth.dart';
 import '../../data/providers.dart';
+import '../../data/store.dart';
 import '../../design_system/motion/motion_toggle.dart';
 import '../../design_system/tokens/px_colors.dart';
 import '../../design_system/tokens/px_text.dart';
@@ -17,6 +18,8 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final me = ref.watch(meProvider);
+    // Mağaza dinleyicisi oturum açıkken başlar: tamamlanmamış satın almalar açılışta sunucuya yeniden gönderilir.
+    ref.watch(storeProvider.select((s) => s.available));
     return Scaffold(
       body: SafeArea(
         child: me.when(
@@ -63,6 +66,18 @@ class HomeScreen extends ConsumerWidget {
                     },
                   ),
                   const SizedBox(height: 14),
+                  PxButton(
+                    key: const ValueKey('home-premium'),
+                    label: (m['premium'] as Map?)?['active'] == true ? 'Premium · etkin' : 'Premium',
+                    tone: PxTone.secondary,
+                    height: 46,
+                    fontSize: 14,
+                    onTap: () async {
+                      await context.push('/premium');
+                      ref.invalidate(meProvider);
+                    },
+                  ),
+                  const SizedBox(height: 10),
                   Row(children: [
                     const Expanded(child: MotionToggle(fontSize: 12)),
                     const SizedBox(width: 10),

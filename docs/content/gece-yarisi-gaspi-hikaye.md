@@ -19,8 +19,9 @@
   bildiriminde, rapor ve hüküm metinlerinde ve duruşmanın resmî dilinde (başkan, savcı, Deniz'in talepleri) geçer.
 - **Gizem korunur.** Soğuk açılışta faile ve polise ad verilmez (`speaker: "narrator"` + `name`: "KAPÜŞONLU",
   "BİR POLİS"). Kuzen Tolga'nın fail olduğu, oyuncu ara evresinde HızlıPaket kayıtlarını eline alana kadar hiçbir
-  metinde söylenmez ya da güçlü biçimde ima edilmez. Tolga'nın ilk görünüşünde (2. gün akşamı) beresi kulaklarına
-  kadar iner; küpe deliği görünmez. Bu adil bir ipucudur, ama bir işaret parmağı değildir.
+  metinde söylenmez ya da güçlü biçimde ima edilmez. Tolga'nın ilk görünüşü (2. gün akşamı) yalnızca bir kuzen ve bir
+  zarftır: kulak, bere ya da Barış'la karşılaştırma yoktur. Acil servisteki tek fotoğraf gösterimi de soğuk açılışta
+  gösterilmez; oyuncu onu belgelerden ve hemşireden kendisi çıkarır.
 - **Etik çizgiler gerçektir.** Avukat tanığa saat ezberletmez, mağdurun kapısında ısrar etmez, mağdura fotoğraf
   göstermez, şüpheliyi kovalamaz; bildiğini savcılığa yazar. Bu çizgilerin her biri oyunda bir seçimdir ve bedeli vardır.
 - **Satır kuralları:** satır ≤ ~220 karakter; her yeni mekân `style: "card"` + `bg` ile açılır ("CUMA 21.15 — ARSLAN
@@ -125,9 +126,8 @@ mütalaa, savunma, son söz, karar).
 - `fx: fade`.
 
 ### PR_01 — "ACİL 00.40" + "SABAH 08.10" (~550) · bg: hastane → sokak_sabah
-- Acil servis koridoru; monitör bipi; dikiş. "BİR POLİS" ıslak montla gelir, telefon ekranını uzatır: "Bu mu teyze?
-  Kaydı var. Bıçakla yakalanmıştı." Kadın: "Bilmiyorum… galiba… evet, o."
-- Hemşire bir forma bir şey yazar (narrator: "Kimse ne yazdığını sormadı.").
+- Acil servis; monitör bipi; dikiş. Kadın hemşireye köstekli saati anlatır ("Eşimin saati… On iki yıldır cebimde").
+  Polis, telefon, "galiba" ya da form yoktur: gösterim gizem çekirdeğidir ve yalnızca soruşturmada açılır.
 - `card`: "19 OCAK · SABAH 08.10 — YILDIRIM". Ateşli bir genç kapıda gözaltına alınır; annesi "Evdeydi, ateşi var!"
   diye bağırır; kimse yazmaz. Telefonu bir poşete girer.
 - narrator: "İki gün sonra tutuklandı. İki ay sonra iddianame. Bir celse kala, ablası bir avukat aradı."
@@ -236,9 +236,8 @@ tekrar), halka (112 halka + Barış'ın kulağı), bıçak (112'de bıçak yok +
 fotoğraf (2023 karesi + yeni vesikalık). Çeldiriciler: ateş + kutu, aile fotoğrafı + askı, motor + kutu… (−50).
 
 **Gün sonları** — INV_AKSAM1: Leyla'yla kısa sahne; "Bugün kime inandın?" (iç sese yansır). INV_AKSAM2: Büronun kapısında
-bereli, ıslak bir genç: Tolga. "Barış'ın amcaoğluyum. Ablaya söylemeyin. Ücrete katkı." Zarf. Seçim: al / alma / "Derya
-Hanım'la birlikte konuşalım". (Beresi kulaklarına kadar iner; Deniz yalnızca "elleri titriyordu, soğuktan mı bilmem"
-der.) INV_AKSAM3: Derya arar; annesi Barış'ın yorganını yıkamış.
+ıslak, iş botları çamurlu bir genç: Tolga. "Barış'ın amcaoğluyum. Ablaya söylemeyin. Ücrete katkı." Zarf. Seçim: al /
+nazikçe geri çevir. (Kulak ya da bere ayrıntısı yok; Deniz yalnızca "soğuktan mı titriyordu, bilmiyorum" der.) INV_AKSAM3: Derya arar; annesi Barış'ın yorganını yıkamış.
 
 **INV_GECE — Duruşmadan önceki gece (~450)** — koşullu hafıza zinciri (bulunan her önemli ipucu bir satır); Leyla:
 "Yarın o kadın kürsüde ağlarsa, sakın onu yenmeye çalışma. Onun hafızasını, onu yaralamadan göster."
@@ -316,7 +315,7 @@ der.) INV_AKSAM3: Derya arar; annesi Barış'ın yorganını yıkamış.
 | "Bıçak" bir parıltıydı | Soğuk açılış: "Belki bir bıçak, belki bir küpe"; 112'de bıçak yok; basamaktaki kırık şişe camı; Ferhat'ın "bıçakla yakalanmıştı" yalanı (2023 dosyası yumruk) |
 | Fail halkalı biri | 112 "kulağında halka"; Ali Rıza'nın tanıklığı; Barış'ın delinmemiş kulağı |
 | Hesabı başkası kullandı | Barış'ın "motor hep aşağıda durur" eksik cevabı; HızlıPaket kaydında farklı cihaz |
-| Kuzen Tolga | Görüşmede "amcamın oğlu Tolga" (iş, aile); aile fotoğrafı; 2. gün akşamı beresi kulaklarına inmiş, ıslak genç ve zarfı; Derya'nın "bir şey daha… yok"; Barış'ın "motor hep aşağıda durur" eksik cevabı |
+| Kuzen Tolga | Görüşmede "amcamın oğlu Tolga" (iş, aile); aile fotoğrafı; 2. gün akşamı ıslak genç ve zarfı; Derya'nın "bir şey daha… yok"; Barış'ın "motor hep aşağıda durur" eksik cevabı |
 
 ## 6. Epiloglar (OutcomeDef.epilogue; her biri ~250–400 sözcük)
 

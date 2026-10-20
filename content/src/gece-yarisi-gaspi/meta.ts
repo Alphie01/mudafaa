@@ -31,7 +31,7 @@ export const meta: CasePart = {
     summary:
       'Tophane’nin merdivenli sokaklarında, gece yarısına on sekiz kala, bir hasta bakıcının çantası kapıldı. Ertesi sabah kadın, karakolda altı fotoğraf arasından genç bir motokuryeyi gösterdi. Kurye o gece ateşler içinde evde yattığını söylüyor. Ablası salonunun kira birikimini masana koyuyor: sen.',
     coverCharacter: 'baris',
-    legalReview: { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-20' },
+    legalReview: { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-21' },
   },
   config: {
     startNode: 'PR_00',

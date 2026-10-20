@@ -81,7 +81,13 @@ H1_03K). Savcılık delilleri yanlış sunumda ♥−1, −150.
 kırılma T_02K; bastırma clue_ferhat ile ek puan) · F3 "fotoğraflar benziyordu" (ev_teshis + clue_foto_farkli) · F4 "kaydında
 bıçaklı yaralama" (ev_sabika / ded_bicak) · F5 "tarife uyan tek kişi … kaydı olan bir daha yapar" (ded_halka / ded_baskasi /
 ded_hesap; ev_selfie + clue_selfie; itiraz g_kanaat) · F6 (F5 bastırılınca) "annesinden başka bir şey yoktu" (ded_mazeret /
-ded_evde; ev_uedas / ev_tel kayıt ipuçlarıyla).
+ded_evde; ev_uedas / ev_tel kayıt ipuçlarıyla) · F7 "hesap sanığın, konum oradaydı, özçekim onaylı" (ded_hesap / ded_baskasi →
+contra_f7, ikna +2; ev_gps / ev_tel / ev_selfie kayıt ipucuyla kısmi; savcılık delilleri yanlış sunumda ♥−1, −150).
+
+**Yönlendirilmiş tanıklar:** bakkala "bıçak olmadığını da söyleyin" (ALI_EVET → `ali_kocluk`) ikinci celsenin açılışında
+savcı tarafından tutanağa geçirilir (`ali_ifsa`: ♥−1, ikna −1, −150). Kadir Usta'ya saat verilmişse (KD_SAAT / KA_SAAT →
+`kadir_kocluk`) savcının karşı sorusu saati her durumda sınar ve yönlendirmeyi açığa çıkarır (`kadir_ifsa`: ♥−1, ikna −2,
+−200); Kadir'in mazereti `mazeret_var` / `mazeret_kayitta` içinde sayılmaz. Her ikisi gerekçeye ve etik epiloguna düşer.
 
 **Diğer kararlar:** H1_02 kayıt talebi (özçekim eklemek), H1_04 salonda teşhis itirazı, H1_05 tutukluluk, T_01 kayda karşı
 diyecekler (cihaz, özçekim, 186, Barış'ın açıklaması; kaydı "hatalı" demek cezalı), T_03X savcının karşı sorusu (itiraz
@@ -89,25 +95,39 @@ dayanaksız; diyecek ded_mazeret/ded_evde ile), T_06P üç dayanak (kanıtsız d
 
 ## 6. Sonuçlar
 
+Hüküm delile bağlıdır, skora değil. Skor yalnızca XP'yi, indirim sınırını, "derin tartışma" eşiğini (ham ≥ 7.500) ve
+savcının ikinci celseden önce harekete geçip geçmediğini (ham ≥ 6.500) belirler.
+
 | Öncelik | Kimlik | Sınıf | Koşul | Hüküm | XP |
 |---|---|---|---|---|---|
-| 1 | AZIL | OTHER (etik) | `etik_kirlik` (mağdura özçekim) | Vekâlet sona erdi; Baroya ve Başsavcılığa bildirim | 0 |
-| 2 | BERAAT_B | ACQUITTAL 223/2-b | ¬çöküş ∧ `tolga_teslim` ∧ teşhis çöktü ∧ (ded_baskasi ∨ ded_hesap) ∧ (ded_mazeret ∨ ded_evde) ∧ ikna ≥ 8 ∧ final ≥ 10.000 | Ceza yok, tahliye, saat iadesi | 1,2 |
-| 3 | BERAAT_E | ACQUITTAL 223/2-e | ¬çöküş ∧ ikna ≥ 6 ∧ teşhis çöktü ∧ en az iki bağımsız lehe bulgu ∧ final ≥ 9.000 | Ceza yok, tahliye | 1,0 |
-| 4 | INDIRIM | REDUCED | ¬çöküş ∧ terditli esas savunma ∧ silah dayanağı kanıtlı ∧ final ≥ 3.000 | 149/1-h, 10 yıl → 62/1 → 8 yıl 4 ay | 0,85 |
-| 5 | MAHKUMIYET | CONVICTION | varsayılan | 149/1-a, h, 12 yıl → 62/1 → 10 yıl (çöküşte gerekçe notu) | 0,6 (çöküş 0,3) |
+| 1 | AZIL | OTHER (etik) | `etik_kirlik` (mağdura özçekim) | Vekâlet sona erdi; durum tutanağa, Baroya ve Başsavcılığa bildirim | 0 |
+| 2 | BERAAT_B | ACQUITTAL 223/2-b | `tolga_teslim` | Ceza yok, tahliye, saat iadesi, karar örneği Tolga soruşturmasına | 1,2 |
+| 3 | BERAAT_E | ACQUITTAL 223/2-e | ¬çöküş ∧ (`mutalaa_b` ∨ (beraat_delil ∧ ikna ≥ 6 ∧ derin)) | Ceza yok, tahliye, suç duyurusu | 1,0 |
+| 4 | ERTELEME | OTHER | ¬çöküş ∧ ¬teslim ∧ beraat_delil ∧ ikna ≥ 6 (ama derin değil) | Bilirkişi (CMK 63, 67), adli kontrolle tahliye (CMK 109) | 0,5 |
+| 5 | INDIRIM | REDUCED | ¬çöküş ∧ ¬teslim ∧ ¬beraat ∧ ¬erteleme ∧ terditli esas savunma ∧ silah dayanağı ∧ final ≥ 3.000 | 149/1-h, 10 yıl → 62/1 → 8 yıl 4 ay | 0,85 |
+| 6 | MAHKUMIYET_H | CONVICTION | ¬teslim ∧ ¬beraat ∧ ¬erteleme ∧ silah unsuru duruşmada düştü (contra_n2 ∨ contra_f4 ∨ arg_silah) | Yalnız 149/1-h, 11 yıl → 62/1 → 9 yıl 2 ay | 0,6 (çöküş 0,3) |
+| 7 | MAHKUMIYET | CONVICTION | varsayılan | 149/1-a, h, 12 yıl → 62/1 → 10 yıl | 0,6 (çöküş 0,3) |
 
 - **teshis_coktu:** contra_n3 ∨ contra_f2 ∨ (contra_n4 ∧ contra_n5) ∨ (contra_f1 ∧ contra_f3).
-- **lehe2:** en az ikisi: ded_mazeret, ded_evde, ded_baskasi, ded_hesap, ded_halka, contra_n5, contra_f5, contra_f6.
-- **tolga_teslim** (ARA_SON_1): savcılığa yazılı bildirim (K_BILDIR) ∧ Derya'yla doğru konuşma (D_SAVCI / D_TOLGA) ∧ yüzleşme yok.
+- **hesap_kayitta** (hesap cevabı tutanakta): (contra_gps ∧ ded_hesap) ∨ (contra_selfie ∧ ded_baskasi) ∨ contra_f7.
+- **mazeret_kayitta:** (contra_186 ∧ ded_evde) ∨ (contra_f6 ∧ mazeret_var) ∨ kadir_215; `mazeret_var` yönlendirilmiş Kadir'i saymaz.
+- **halka_var:** ded_halka ∨ contra_n5 ∨ contra_f5 — aynı 112 beyanı tek bulgu olarak sayılır ve tek başına beraat getirmez.
+- **dosya_butun:** dokuz çıkarımdan en az yedisi. **beraat_delil** = teshis_coktu ∧ hesap_kayitta ∧ mazeret_kayitta ∧ dosya_butun.
+- **mutalaa_b** (T_05'te): ¬tolga_teslim ∧ beraat_delil ∧ ikna ≥ 6 ∧ derin → savcı beraat ister; o dosyada mahkûmiyet/indirim kurulmaz.
+- **tolga_teslim** (ARA_SON_1): `bildirim_guclu` (K_BILDIR ∧ ded_baskasi ∧ ded_hesap ∧ dosya_butun) ∧ `derya_konustu`
+  (D_SAVCI ya da D_TOLGA) ∧ ¬tolga_kacti (yüzleşme yok) ∧ ham ≥ 6.500. Skor düşük olsa da 223/2-b gelir (TESLIM_D).
 - Etik sayaç (`ethics`): N_ISRAR, ALI_EVET, KD_SAAT, KA_SAAT, Z_TUT (+1), K_NERMIN (+2). XP etikte yarıya iner; AZIL'de 0.
+  D_TOLGA (aileye "teslim olsun" demek: güven −10, −40, Leyla telefonu), FQ_TEHDIT (−80, Leyla telefonu), K_YUZLES (−80,
+  Tolga kaçar, Leyla "Kovalamak avukatın işi değildir") ayrıca geri bildirim verir.
+- Epiloglar `bildirdi`, `fact_tolga`, `tolga_kacti`, `released` ve yönlendirme bayraklarına göre ayrılır (doğrulayıcı epilog
+  koşullarını okumaz; tutarlılık elle denetlendi: bildirim yapılmışsa "dilekçe yazacağım" satırı çıkmaz, teslimde 2-e epilogu kurulmaz).
 
 ## 7. Skor
 
 - Kategoriler ve döküm satırları: Delil toplama (ARAŞTIRMA + DELİL ANALİZİ, `key` etiketli 12 delil) · Çapraz sorgu
   (SORGULAMA) · İtiraz isabeti (USUL + HUKUKİ, `legal_hits`/6) · Savunma (SAVUNMA STRATEJİSİ) · Hatalı delil (`wrong`).
 - Güvenilirlik bonusu: ♥ × 100. Strateji çarpanı yalnızca uyumlu esas savunmada (MASUMIYET ×1,5 · USUL ×1,2 · INDIRIM ×0,8).
-- Eşik çubuğu: Mahkûmiyet 0 · İndirim 3.000 · Beraat 9.000 (sonuç eşikleriyle aynı). `scaleMax` 12.000.
+- Eşik çubuğu: Mahkûmiyet 0 · İndirim 3.000 (beraat skor eşiğine bağlı olmadığı için çubukta beraat yok). `scaleMax` 12.000.
 - Tutarlar: olay yeri nesnesi +20…+60, ıska/çeldirici −10; belge isabeti +100/+150, yanlış alet −20; tarif +300, yanlış çift
   −50; BASTIR +25; doğru sunum +200/+300, kısmi +100; yanlış sunum −150 ♥−1; usul +50…+150, dayanaksız −50 ♥−1; dayanak +60 /
   −40; esas savunma 150–300 (çarpanlı); etik sınır ihlalleri −50…−150.
@@ -117,7 +137,7 @@ dayanaksız; diyecek ded_mazeret/ded_evde ile), T_06P üç dayanak (kanıtsız d
 Bkz. hikâye kitabı §3. Uygulamadaki ek node'lar: INV_EV_G (ev girişi), INV_T_ALI_K / INV_T_KADIR_K / INV_T_GAMZE_K (tanık
 kararları), INV_GECE_1…7 (koşullu hafıza zinciri), H1_00G_1…3 + H1_00K (koridor), H1_04B (kısa ara), ARA_BARIS_G, ARA_KEBAP_G,
 ARA_SON_1…3, T_00G_1…2, T_ETIK (azil), T_02R (kısa ara), T_03_G / T_03Y, T_04_G / T_04 / T_04C_G / T_04C. Soruşturma hub'ı
-push/`$return`; ara hub'ı yığınsız (her alt ekran doğrudan ARA_HUB'a döner; `retarget`). Toplam 104 node.
+push/`$return`; ara hub'ı yığınsız (her alt ekran doğrudan ARA_HUB'a döner; `retarget`). Toplam 106 node.
 
 Motor sınırlarına çözümler: koşullu parçalar DECISION zincirleriyle (INV_GECE_*, H1_00G_*, ARA_SON_*, T_00G_*); tekrar
 eden ceza kuralları `maxUses`; alternatif tarifler `IF ¬hasEvidence` ile yalnızca ilk kurulumda puanlı.
@@ -126,38 +146,57 @@ eden ceza kuralları `maxUses`; alternatif tarifler `IF ¬hasEvidence` ile yaln�
 
 | Ad | Sonuç | Final | Özet |
 |---|---|---|---|
-| G1 | BERAAT_B | 11.450 | Masumiyet; tam soruşturma; zarf alınır ve iade edilir; Derya'yla doğru konuşma + savcılığa bildirim → Tolga teslim olur |
-| G2 = TIPIK | BERAAT_E | 11.290 | Usul; tam soruşturma; savcılığa bildirim, Derya'ya gidilmez; Tolga teslim olmaz |
+| G1 | BERAAT_B | 11.450 | Masumiyet; tam soruşturma; zarf alınır ve iade edilir; Derya'yla doğru konuşma + kayıtlara bağlı bildirim → Tolga teslim olur |
+| G2 = TIPIK | BERAAT_E | 11.290 | Usul; tam soruşturma; savcılığa bildirim, Derya'ya gidilmez; Tolga teslim olmaz; savcı beraat ister |
 | G3 | INDIRIM | 3.870 | Terditli; acil gösterimi kanıtlanmaz; halka ve bıçak çelişkileri; yüzleşme hatası; silah dayanağı |
-| G4 | MAHKUMIYET | −345 | Dağınık soruşturma, etik sınır ihlalleri (kapı, bakkal, terzi, zarf), dayanaksız savunma |
+| G4 | MAHKUMIYET | −395 | Dağınık soruşturma, etik sınır ihlalleri (kapı, bakkal, terzi, zarf), dayanaksız savunma |
 | G5 | AZIL | 8.130 | İyi bir soruşturma; ara evresinde mağdura özçekim gösterilir |
-| W | MAHKUMIYET (çöküş) | 7.180 | İkinci celsede kolluk tanığına art arda savcılık delili; ♥0 |
+| W | MAHKUMIYET_H (çöküş) | 7.180 | İkinci celsede kolluk tanığına art arda savcılık delili; ♥0; bıçak çelişkisi kayıtta olduğundan yalnız 149/1-h |
+| TESLIM_D | BERAAT_B | 7.620 | Uç durum: kayıtlara bağlı bildirim + Derya'nın kendi kararı; düşük skorla da 223/2-b |
+| E_DUSUK | BERAAT_E | 8.000 | Uç durum: tam delil zinciri tutanakta, savcı beraat istiyor; eski 9.000 eşiğinin altında da 223/2-e |
+| ERTELEME | ERTELEME | 7.995 | Delil zinciri tam ama kayıtlar derin tartışılmadı → bilirkişi ve adli kontrolle tahliye |
+| ETIK | BERAAT_E | 10.390 | Tipik yol, ama bakkala ve Kadir Usta'ya cümle verilir; ikisi de duruşmada açığa çıkar; etik epilogu, yarım XP |
 
 ## 10. Erken çözüm denetimi
 
-`minimize.mjs` (yerel en küçükleme): TIPIK'ten aksiyon parçaları açgözlü silinerek hâlâ beraate ulaşan en kısa yol
-**169 aksiyon** (TIPIK 208; oran **0,81**; hedef ≥ 0,60). Beraat; acil gösterimini ya da ilk tarif çelişkisini, en az iki bağımsız
-lehe bulguyu, ikna ≥ 6'yı ve 9.000 finali birlikte ister; tek bir "anahtar delil" yolu yoktur. Tipik yolun metni tarandı:
-Tolga'nın fail olduğu ARA_TEL/ARA_BARIS'ten (HızlıPaket kayıtlarından) önce hiçbir metinde söylenmez ya da güçlü biçimde ima
-edilmez; erken ipuçları (aile fotoğrafı, beresi kulaklarına inmiş genç ve zarfı, Derya'nın "boş ver"i, Barış'ın motor cevabı)
-yalnızca ekilmiş ayrıntılardır.
+Tek süreçli, bütçeli küçültme yoklaması (`act`/`enumerateActions` üzerinde; golden path'ten parça silme + her konumda
+alternatif aksiyon takası; 2026-10-21):
+
+| Kaynak yol | Hedef | En kısa bulunan | Oran |
+|---|---|---|---|
+| TIPIK (208) | 223/2-e ya da 2-b | 129 aksiyon, BERAAT_E 8.000 | 0,62 |
+| G1 (211) | 223/2-b | 138 aksiyon, BERAAT_B 7.630 | 0,65 |
+| E_DUSUK (145) | 223/2-e | 138 aksiyon | — |
+| TESLIM_D (154) | 223/2-b | 150 aksiyon | — |
+
+Her kısa beraat yolu iki celseyi, ara evresini ve tam zinciri içerir (teşhis kirlenmesi, halka, bıçak, mazeret + 186, cihaz +
+mesaj, özçekim; dokuzdan en az yedi çıkarım). Erken mahkemeye gitmek beraat getirmez; skor tek başına beraat getirmez.
+Tipik yolun metni yeniden döküldü ve tarandı: Tolga'nın fail olduğu ARA_TEL/ARA_BARIS'ten (HızlıPaket kayıtlarından) önce
+hiçbir metinde söylenmez ya da güçlü biçimde ima edilmez. Soğuk açılış 112 çağrısı ve acil servisteki sargıyla biter (telefon,
+"galiba", form yok). Tolga'nın 2. gün akşamki ziyaretinde kulak/bere ayrıntısı ve karşılaştırma yoktur; aile düşünceleri
+nötrdür. Erken ekilen ayrıntılar (görüşmede "amcamın oğlu Tolga", aile fotoğrafı, zarf, Derya'nın "boş ver"i) tek başına
+bir yön göstermez.
 
 ## 11. Süre ve sözcük ölçümü
 
-`npm run case:duration -- gece-yarisi-gaspi` (2026-10-20):
+`npm run case:duration -- gece-yarisi-gaspi` (2026-10-21):
 
 ```
-  G1             95.6 dk   13418 sözcük   211 aksiyon  BERAAT_B (11450)
-  G2             94.3 dk   13221 sözcük   208 aksiyon  BERAAT_E (11290)
-  G3             67.3 dk    9701 sözcük   134 aksiyon  INDIRIM (3870)
-  G4             62.7 dk    9029 sözcük   125 aksiyon  MAHKUMIYET (-345)
-  G5             79.2 dk   11085 sözcük   176 aksiyon  AZIL (8130)
-  W              82.1 dk   11499 sözcük   182 aksiyon  MAHKUMIYET (7180)
-  TIPIK          94.3 dk   13221 sözcük   208 aksiyon  BERAAT_E (11290)
-  ==> TİPİK YOL (TIPIK): 94.3 dk  ✓ süre hedefte
+  G1             95.6 dk   13417 sözcük   211 aksiyon  BERAAT_B (11450)
+  G2             94.4 dk   13240 sözcük   208 aksiyon  BERAAT_E (11290)
+  G3             67.3 dk    9700 sözcük   134 aksiyon  INDIRIM (3870)
+  G4             63.5 dk    9196 sözcük   124 aksiyon  MAHKUMIYET (-395)
+  G5             79.0 dk   11058 sözcük   176 aksiyon  AZIL (8130)
+  W              82.3 dk   11535 sözcük   182 aksiyon  MAHKUMIYET_H (7180)
+  TESLIM_D       75.9 dk   10883 sözcük   154 aksiyon  BERAAT_B (7620)
+  E_DUSUK        74.0 dk   10711 sözcük   145 aksiyon  BERAAT_E (8000)
+  ERTELEME       75.4 dk   10900 sözcük   148 aksiyon  ERTELEME (7995)
+  ETIK           95.2 dk   13374 sözcük   209 aksiyon  BERAAT_E (10390)
+  TIPIK          94.4 dk   13240 sözcük   208 aksiyon  BERAAT_E (11290)
+  ==> TİPİK YOL (TIPIK): 94.4 dk  ✓ süre hedefte
   ==> KAPI: ✓ GEÇTİ
 ```
 
-Paket: 1.443 satır, 17.571 satır sözcüğü; ekran metinleriyle toplam 22.027 sözcük; en uzun satır 210 karakter
-(`node tools/content/word-count.mjs content/cases/gece-yarisi-gaspi`). Doğrulayıcı: PASSED — 0 hata, 1 uyarı
-(SIMULATION_INCOMPLETE); kapsam node 104/104, seçenek 203/203, kural 80/80, delil 49/49; golden path 7/7.
+Doğrulayıcı: PASSED — 0 hata, 1 uyarı (SIMULATION_INCOMPLETE); kapsam node 106/106, seçenek 204/204, kural 83/83, delil
+49/49; golden path 11/11. Tipik yol 13,2 bin sözcükle görev aralığında (13–16 bin); kitin 15–25 bin "hedef" uyarısı bilinçli
+olarak bırakıldı.

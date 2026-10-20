@@ -2,6 +2,8 @@
 node_modules/
 dist/
 *.tsbuildinfo
+coverage/
+**/generated/
 
 # ortam
 .env
@@ -11,4 +13,9 @@ dist/
 # araç çalışma alanları
 .superpowers/
 .worktrees/
+.fvm/
+playwright-report/
+test-results/
+storage/
+*.log
 .DS_Store

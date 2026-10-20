@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Müdafaa — Duruşma</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&amp;family=VT323&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#e8b13c}a:hover{color:#ffd36b}
+.pxbtn{box-shadow: inset -4px -4px 0 rgba(0,0,0,.28), inset 4px 4px 0 rgba(255,255,255,.22), 4px 4px 0 #120d1c}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #1d1733; font-family: 'VT323', monospace; color: #efe8ff; display: flex; flex-direction: column">
+  <header style="padding: 18px 20px 10px; display: flex; flex-direction: column; gap: 8px; background: #120d1c">
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 13px; letter-spacing: 2px; color: #b3a8d6">DURUŞMA · 2. CELSE</span>
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 16px; font-weight: 700; color: #e8b13c">SKOR {{score}}</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 11px; width: 72px; color: #efe8ff">HEYET İKNASI</span>
+      <div role="meter" aria-label="Heyet iknası" aria-valuemin="0" aria-valuemax="10" aria-valuenow="6" style="flex: 1; height: 18px; display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 2px; padding: 2px; background: #2b2350">
+        <div style="background: #4b8fe0"></div><div style="background: #4b8fe0"></div><div style="background: #4b8fe0"></div><div style="background: #4b8fe0"></div><div style="background: #4b8fe0"></div><div style="background: #4b8fe0"></div>
+        <div style="background: #8a3b30"></div><div style="background: #8a3b30"></div><div style="background: #8a3b30"></div><div style="background: #8a3b30"></div>
+      </div>
+      <span style="font-size: 18px; width: 34px; text-align: right">60%</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px">
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 11px; width: 72px">GÜVENİLİRLİK</span>
+      <div aria-label="Güvenilirlik 4 / 5" style="display: flex; gap: 6px">
+        <svg width="20" height="18" viewBox="0 0 7 6" shape-rendering="crispEdges" aria-hidden="true"><path fill="#e8503c" d="M1 0h2v1h1V0h2v1h1v2H6v1H5v1H4v1H3V5H2V4H1V3H0V1h1z"/></svg>
+        <svg width="20" height="18" viewBox="0 0 7 6" shape-rendering="crispEdges" aria-hidden="true"><path fill="#e8503c" d="M1 0h2v1h1V0h2v1h1v2H6v1H5v1H4v1H3V5H2V4H1V3H0V1h1z"/></svg>
+        <svg width="20" height="18" viewBox="0 0 7 6" shape-rendering="crispEdges" aria-hidden="true"><path fill="#e8503c" d="M1 0h2v1h1V0h2v1h1v2H6v1H5v1H4v1H3V5H2V4H1V3H0V1h1z"/></svg>
+        <svg width="20" height="18" viewBox="0 0 7 6" shape-rendering="crispEdges" aria-hidden="true"><path fill="#e8503c" d="M1 0h2v1h1V0h2v1h1v2H6v1H5v1H4v1H3V5H2V4H1V3H0V1h1z"/></svg>
+        <svg width="20" height="18" viewBox="0 0 7 6" shape-rendering="crispEdges" aria-hidden="true"><path fill="#3a2f66" d="M1 0h2v1h1V0h2v1h1v2H6v1H5v1H4v1H3V5H2V4H1V3H0V1h1z"/></svg>
+      </div>
+    </div>
+  </header>
+
+  <section aria-label="Duruşma salonu" style="position: relative; height: 330px; background: #4a2f24; overflow: hidden; border-top: 3px solid #120d1c; border-bottom: 3px solid #120d1c">
+    <div style="position: absolute; left: 0; right: 0; top: 0; height: 34px; background: #3b2419; display: flex; align-items: center; justify-content: center; font-family: 'Pixelify Sans', monospace; font-size: 13px; letter-spacing: 3px; color: #e8b13c">ADALET MÜLKÜN TEMELİDİR</div>
+    <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 34px; height: 130px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; padding: 10px 6px 0; box-sizing: border-box">
+      <div style="background: #573829"></div><div style="background: #573829"></div><div style="background: #573829"></div><div style="background: #573829"></div><div style="background: #573829"></div><div style="background: #573829"></div>
+    </div>
+
+    <div style="position: absolute; left: 50px; top: 70px"><dc-import name="Sprite" who="uye_hakim" px="3" hint-size="48px,60px"></dc-import></div>
+    <div style="position: absolute; left: 163px; top: 58px"><dc-import name="Sprite" who="hakim" px="4" hint-size="64px,80px"></dc-import></div>
+    <div style="position: absolute; left: 292px; top: 70px"><dc-import name="Sprite" who="savci" px="3" hint-size="48px,60px"></dc-import></div>
+
+    <div style="position: absolute; left: 0; right: 0; top: 122px; height: 60px; background: #6b4630; border-top: 6px solid #8a5c3e; border-bottom: 4px solid #120d1c; display: flex; justify-content: space-around; align-items: center; font-family: 'Pixelify Sans', monospace; font-size: 10px; color: #f4e7c5">
+      <span style="padding: 2px 6px; background: #3b2419">ÜYE HÂKİM</span>
+      <span style="padding: 2px 6px; background: #3b2419">BAŞKAN</span>
+      <span style="padding: 2px 6px; background: #3b2419">C. SAVCISI</span>
+    </div>
+    <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 192px; bottom: 0; background: #2b1d16"></div>
+
+    <div style="position: absolute; left: 155px; top: 196px"><dc-import name="Sprite" who="tanik" px="4" hint-size="64px,80px"></dc-import></div>
+    <div style="position: absolute; left: 135px; top: 256px; width: 120px; height: 74px; background: #6b4630; border: 4px solid #120d1c; border-top-width: 6px; box-sizing: border-box; display: flex; justify-content: center; padding-top: 8px; font-family: 'Pixelify Sans', monospace; font-size: 10px; color: #f4e7c5">TANIK KÜRSÜSÜ</div>
+
+    <div style="position: absolute; left: 14px; top: 228px"><dc-import name="Sprite" who="avukat_cubbe" px="4" hint-size="64px,80px"></dc-import></div>
+    <div aria-hidden="true" style="position: absolute; left: 0; top: 282px; width: 104px; height: 48px; background: #6b4630; border-top: 6px solid #8a5c3e; border-right: 4px solid #120d1c"></div>
+
+    <div style="position: absolute; right: 14px; top: 214px; padding: 4px 10px; background: #f4e7c5; color: #120d1c; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 22px; font-weight: 700; box-shadow: 3px 3px 0 #120d1c">!?</div>
+  </section>
+
+  <section aria-label="Tanık ifadesi" style="position: relative; margin: 18px 16px 0; padding: 18px 14px 12px; background: #f4e7c5; color: #120d1c; border: 3px solid #120d1c; box-shadow: 4px 4px 0 #120d1c; display: flex; flex-direction: column; gap: 8px">
+    <div style="position: absolute; left: 10px; top: -14px; padding: 2px 10px; background: #3f8a62; color: #ffffff; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 12px; font-weight: 700">TANIK · SELİN KAYA</div>
+    <p style="margin: 0; font-size: 22px; line-height: 1.05; min-height: 70px">“{{before}}<mark style="background: {{hlBg}}; color: #120d1c; padding: 0 2px">{{hl}}</mark>{{after}}”</p>
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <button type="button" aria-label="Önceki ifade" onClick="{{prev}}" style="width: 44px; height: 36px; background: #d9c597; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 18px; color: #120d1c; cursor: pointer">‹</button>
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 12px; color: #5b4a2a">İFADE {{pos}} / 4</span>
+      <button type="button" aria-label="Sonraki ifade" onClick="{{next}}" style="width: 44px; height: 36px; background: #d9c597; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 18px; color: #120d1c; cursor: pointer">›</button>
+    </div>
+  </section>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 16px 16px 0">
+    <button type="button" class="pxbtn" style="height: 62px; background: #2f6dbb; color: #ffffff; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 17px; font-weight: 700; cursor: pointer">BASTIR!</button>
+    <a href="CaprazSorgu.dc.html" class="pxbtn" style="height: 62px; display: flex; align-items: center; justify-content: center; background: #e8b13c; color: #120d1c; border: 3px solid #120d1c; text-decoration: none; font-family: 'Pixelify Sans', monospace; font-size: 17px; font-weight: 700">DELİL SUN</a>
+    <button type="button" class="pxbtn" style="height: 62px; background: #c23e2b; color: #ffffff; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 17px; font-weight: 700; cursor: pointer">İTİRAZ!</button>
+  </div>
+  <p style="margin: 10px 16px 0; font-size: 18px; color: #b3a8d6; line-height: 1.05">İpucu: Çelişkiyi bul ve doğru delille vur. Yanlış delil güvenilirliği ve skoru düşürür.</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { i: 1 };
+  }
+  renderVals() {
+    const S = [
+      { before: 'O gece 22.00–06.00 vardiyasındaydım. ', hl: '', after: 'Depo kapısını her saat kontrol ederim.' },
+      { before: 'Saat 23.00 gibi depodan çıkan birini gördüm. ', hl: 'Sokak lambası yanıyordu', after: ', yüzünü net seçtim.' },
+      { before: 'Turuncu bir mont giyiyordu, ', hl: '', after: 'elinde büyük bir çuval vardı.' },
+      { before: 'Ertesi sabah Kerem’i görünce ', hl: '', after: 'hemen tanıdım. Aynı adamdı.' }
+    ];
+    const i = this.state.i;
+    const s = S[i];
+    return {
+      before: s.before, hl: s.hl, after: s.after,
+      hlBg: s.hl ? '#ffd36b' : 'transparent',
+      pos: i + 1,
+      score: '1.840',
+      prev: () => this.setState({ i: (i + 3) % 4 }),
+      next: () => this.setState({ i: (i + 1) % 4 })
+    };
+  }
+}
+</script>
+</body>
+</html>

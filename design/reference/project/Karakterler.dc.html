@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Müdafaa — Karakterler</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&amp;family=VT323&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#e8b13c}a:hover{color:#ffd36b}
+</style>
+</helmet>
+<div style="width: 1440px; height: 1180px; box-sizing: border-box; padding: 40px; background: #1d1733; font-family: 'VT323', monospace; color: #efe8ff; display: flex; flex-direction: column; gap: 22px">
+  <div style="display: flex; justify-content: space-between; align-items: baseline">
+    <h1 style="margin: 0; font-family: 'Pixelify Sans', monospace; font-size: 34px; font-weight: 700; color: #e8b13c">KARAKTERLER · 21 SPRITE</h1>
+    <span style="font-size: 21px; color: #b3a8d6">16 × 20 piksel · ortak palet · 1 piksel kontur · 5 yüz ifadesi</span>
+  </div>
+
+  <section aria-label="Kadro" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 16px">
+    <sc-for list="{{cast}}" as="c" hint-placeholder-count="21">
+      <article style="display: flex; flex-direction: column; background: #2b2350; border: 3px solid #120d1c; box-shadow: 4px 4px 0 #120d1c">
+        <div style="position: relative; height: 140px; background: {{c.bg}}; display: flex; align-items: flex-end; justify-content: center; border-bottom: 3px solid #120d1c">
+          <dc-import name="Sprite" who="{{c.who}}" px="6" hint-size="96px,120px"></dc-import>
+          <span style="position: absolute; left: 6px; top: 6px; padding: 1px 6px; background: {{c.chip}}; color: #120d1c; border: 2px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 9px; font-weight: 700">{{c.group}}</span>
+        </div>
+        <div style="padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 2px">
+          <h2 style="margin: 0; font-family: 'Pixelify Sans', monospace; font-size: 14px; font-weight: 700">{{c.name}}</h2>
+          <span style="font-size: 17px; color: #e8b13c; line-height: 1">{{c.role}}</span>
+          <p style="margin: 2px 0 0; font-size: 17px; line-height: 1; color: #d6cff0">{{c.line}}</p>
+        </div>
+      </article>
+    </sc-for>
+  </section>
+
+  <section aria-label="Yüz ifadeleri" style="display: flex; flex-direction: column; gap: 10px">
+    <h2 style="margin: 0; font-family: 'Pixelify Sans', monospace; font-size: 16px; letter-spacing: 2px; color: #b3a8d6">YÜZ İFADELERİ · diyaloglarda anlık değişir</h2>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
+      <sc-for list="{{faces}}" as="g" hint-placeholder-count="3">
+        <div style="padding: 12px; background: #2b2350; border: 3px solid #120d1c; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-family: 'Pixelify Sans', monospace; font-size: 13px; font-weight: 700">{{g.title}}</span>
+          <div style="display: flex; justify-content: space-between">
+            <sc-for list="{{g.items}}" as="f" hint-placeholder-count="5">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 4px">
+                <div style="width: 72px; height: 84px; background: {{g.bg}}; border: 2px solid #120d1c; display: flex; align-items: flex-end; justify-content: center; overflow: hidden">
+                  <dc-import name="Sprite" who="{{g.who}}" ifade="{{f.id}}" px="4" hint-size="64px,80px"></dc-import>
+                </div>
+                <span style="font-size: 17px">{{f.label}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <p style="margin: 0; font-size: 19px; color: #b3a8d6">Kıyafet kodu: ceza hâkimi ve savcı cübbesinde kırmızı yaka ve ön kısım, yakada sarı sırma · savcıda sağ omuzdan sarkan sarı kordon · avukat cübbesinde mor yaka.</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const G = {
+      ana: ['ANA KADRO', '#e8b13c'],
+      mah: ['MAHKEME', '#ef7a66'],
+      d07: ['DAVA #07', '#f0a65a'],
+      dig: ['DİĞER DAVALAR', '#9cc3e6'],
+      yan: ['YAN KARAKTER', '#cfc9c1']
+    };
+    const L = [
+      ['avukat', 'Av. Deniz Arslan', 'Oyuncu · sivil', 'ana', 'Büro, görüşme ve olay yeri sahneleri.', '#2f6dbb'],
+      ['avukat_cubbe', 'Av. Deniz Arslan', 'Oyuncu · duruşma', 'ana', 'Siyah cübbe, mor yaka.', '#2f6dbb'],
+      ['mentor', 'Av. Leyla Erdem', 'Mentor · büro sahibi', 'ana', 'İpucu verir, rütbe sınavlarını yapar.', '#6a4a9c'],
+      ['asistan', 'Elif Tunç', 'Büro asistanı', 'ana', 'Dosyaları, takvimi ve randevuları yönetir.', '#3d5a80'],
+      ['hakim', 'Hâkim Nevzat Ural', 'Heyet başkanı', 'mah', 'Usule düşkün; boş itirazı sevmez.', '#4a4656'],
+      ['uye_hakim', 'Hâkim Ayşe Demir', 'Üye hâkim', 'mah', 'Tanıklara kendi sorularını sorar.', '#4a4656'],
+      ['savci', 'Savcı Cem Toprak', 'Cumhuriyet savcısı', 'mah', 'Her celsede bir karşı delil oynar.', '#7a2f45'],
+      ['savci_sivil', 'Savcı Cem Toprak', 'Sivil görünüm', 'mah', 'Adliye koridorunda pazarlık sahneleri.', '#7a2f45'],
+      ['katip', 'Zeynep Kılıç', 'Zabıt kâtibi', 'mah', 'Tutanağı tutar, eski kayıtları açar.', '#6a8a3e'],
+      ['mubasir', 'Rıza Bey', 'Mübaşir', 'mah', 'Tarafları ve tanıkları salona çağırır.', '#7d8590'],
+      ['muvekkil', 'Kerem Aydın', 'Müvekkil · sanık', 'd07', 'Turuncu montu tanık ifadesiyle eşleşiyor.', '#e2802f'],
+      ['tanik', 'Selin Kaya', 'Güvenlik görevlisi', 'd07', 'Vardiya saati sonradan değiştirilmiş.', '#3f8a62'],
+      ['murat', 'Murat Koç', 'Depo 3 işçisi', 'd07', '42 numara bot. Gizli şüpheli.', '#4f5560'],
+      ['huseyin', 'Hüseyin Tan', 'Çaycı · mazeret tanığı', 'd07', 'Kerem’le 23.15’e kadar beraberdi.', '#8a5c3e'],
+      ['anne', 'Saniye Aydın', 'Kerem’in annesi', 'd07', 'Görüşme günü cezaevine gelir.', '#b0496b'],
+      ['bora', 'Bora Yalçın', 'Sanık · #08 Kırık Kadeh', 'dig', 'Bar sahibi; meşru müdafaa iddiası.', '#5c4a40'],
+      ['rakip', 'Av. Tolga Şen', 'Müşteki vekili', 'dig', 'Rakip avukat; usul hatası avcısı.', '#7d8590'],
+      ['polis', 'Kom. Yusuf Er', 'Olay yeri polisi', 'yan', 'Tutanak ve el koyma kayıtları.', '#2c3e66'],
+      ['gardiyan', 'Ali Çetin', 'İnfaz koruma memuru', 'yan', 'Görüşme süresini o tutar.', '#5b84b1'],
+      ['bilirkisi', 'Dr. Kaan Öz', 'Bilirkişi', 'yan', 'Parmak izi ve görüntü raporları.', '#2a5e44'],
+      ['gazeteci', 'Burcu Ak', 'Adliye muhabiri', 'yan', 'Kamuoyu baskısı yaratır, ipucu satar.', '#c96f2a']
+    ];
+    const cast = L.map((c) => ({ who: c[0], name: c[1], role: c[2], group: G[c[3]][0], chip: G[c[3]][1], line: c[4], bg: c[5] }));
+    const F = [['normal', 'Normal'], ['mutlu', 'Mutlu'], ['kizgin', 'Kızgın'], ['saskin', 'Şaşkın'], ['uzgun', 'Üzgün']];
+    const items = F.map((f) => ({ id: f[0], label: f[1] }));
+    const faces = [
+      { title: 'Av. Deniz Arslan (cübbeli)', who: 'avukat_cubbe', bg: '#2f6dbb', items },
+      { title: 'Kerem Aydın', who: 'muvekkil', bg: '#e2802f', items },
+      { title: 'Selin Kaya', who: 'tanik', bg: '#3f8a62', items }
+    ];
+    return { cast, faces };
+  }
+}
+</script>
+</body>
+</html>

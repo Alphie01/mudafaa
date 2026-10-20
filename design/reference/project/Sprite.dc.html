@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Piksel Sprite</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div role="img" aria-label="{{label}}" style="width: {{w}}px; height: {{h}}px; display: grid; grid-template-columns: repeat(16, {{px}}px); grid-auto-rows: {{px}}px">
+<sc-for list="{{cells}}" as="c" hint-placeholder-count="320"><div style="background: {{c.bg}}"></div></sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"who":{"editor":"enum","options":["avukat","avukat_cubbe","hakim","uye_hakim","savci","savci_sivil","muvekkil","tanik","murat","huseyin","anne","katip","mubasir","polis","gardiyan","mentor","asistan","bilirkisi","gazeteci","rakip","bora"],"default":"avukat"},"ifade":{"editor":"enum","options":["normal","mutlu","kizgin","saskin","uzgun"],"default":"normal"},"px":{"editor":"int","min":1,"max":16,"default":8},"$preview":{"width":128,"height":160}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const P = {
+      k: '#120d1c', e: '#120d1c', s: '#f2b38a', S: '#c9805e', Q: '#a86d45', J: '#7c4c2c',
+      h: '#3a2a24', H: '#7a4a2a', y: '#cfc9c1', Y: '#e6c46a', q: '#c96f2a', w: '#f4efe6',
+      b: '#2f5a96', B: '#1d3a66', r: '#c4413a', R: '#c0392b', g: '#e8b13c', m: '#7b4fb0',
+      n: '#25222e', N: '#4a4656', p: '#7a2f45', P: '#4a1a2b', o: '#e2802f', O: '#a8521b',
+      c: '#2c3e66', A: '#1c2846', C: '#9cc3e6', v: '#5c5a66', x: '#b08463', z: '#7d8590',
+      Z: '#4f5560', u: '#6a4a9c', U: '#45306a', f: '#b0496b', F: '#7d2e48', j: '#3b2f2a',
+      d: '#3d5a80', D: '#2a3f5c', i: '#6a8a3e', I: '#4a6428', t: '#3f8a62', T: '#2a5e44'
+    };
+    const HEAD_AVUKAT = ['....kkkkkkkk....', '...khhhhhhhhk...', '...khhhhhhhhk...', '...khsssssshk...', '...kssssssssk...', '...ksessssesk...', '...kssssssssk...', '...ksssSSsssk...', '....kssssssk....', '.....kkSSkk.....'];
+    const HEAD_HAKIM = ['....kkkkkkkk....', '...kyyyyyyyyk...', '..kyyyyyyyyyyk..', '..kyyssssssyyk..', '...kssssssssk...', '...kkeksskekk...', '...kssssssssk...', '...kSskkkksSk...', '....kssssssk....', '.....kkSSkk.....'];
+    const HEAD_SAVCI = ['...kkkkkkkkk....', '..khhhhhhhhhk...', '..khhhhhhhhhhk..', '...khhssssssk...', '...kssssssssk...', '...kskesskesk...', '...kssssssssk...', '...ksssskkssk...', '....kssssssk....', '.....kkSSkk.....'];
+    const ROBE_RED = ['...kkgRwwRgkk...', '..knngRwwRgnnk..', '..knnnRRRRnnnk..', '..knNnnRRnnNnk..', '..knNnnRRnnNnk..', '..kSnnnRRnnnSk..', '..knnnnRRnnnnk..', '..knnnnRRnnnnk..', '..knnnnnnnnnnk..', '...kkkkkkkkkk...'];
+    const M = {
+      avukat: HEAD_AVUKAT.concat(['...kkbwrrwbkk...', '..kbbbwrrwbbbk..', '..kbbbbrrbbbbk..', '..kbBbbrrbbBbk..', '..kbBbbbrbbBbk..', '..kSbbbbbbbbSk..', '...kBBBBBBBBk...', '...kBBBkkBBBk...', '...kBBBkkBBBk...', '..kkkkk..kkkkk..']),
+      avukat_cubbe: HEAD_AVUKAT.concat(['...kkmwrrwmkk...', '..knnmwrrwmnnk..', '..knnnmrrmnnnk..', '..knNnnmmnnNnk..', '..knNnnmmnnNnk..', '..kSnnnmmnnnSk..', '..knnnnmmnnnnk..', '..knnnnmmnnnnk..', '..knnnnnnnnnnk..', '...kkkk..kkkk...']),
+      hakim: HEAD_HAKIM.concat(ROBE_RED),
+      uye_hakim: ['......kkkk......', '.....khhhhk.....', '...kkhhhhhhkk...', '..khhhhhhhhhhk..', '..khsssssssshk..', '..khsesssseshk..', '..khsssssssshk..', '..khsssrrssshk..', '...kkssssssk....', '.....kkSSkk.....'].concat(ROBE_RED),
+      savci: HEAD_SAVCI.concat(['...kkgRwwRgkk...', '..kgnnRwwRnnnk..', '..kngnnRRnnnnk..', '..knNgnRRnnNnk..', '..knNngRRnnNnk..', '..kSnnnRRnnnSk..', '..knnnnRRnnnnk..', '..knnnnRRnnnnk..', '..knnnnnnnnnnk..', '...kkkkkkkkkk...']),
+      savci_sivil: HEAD_SAVCI.concat(['...kkpwkkwpkk...', '..kpppwkkwpppk..', '..kppppkkppppk..', '..kpPppkkppPpk..', '..kpPpppkppPpk..', '..kSppppppppSk..', '...kPPPPPPPPk...', '...kPPPkkPPPk...', '...kPPPkkPPPk...', '..kkkkk..kkkkk..']),
+      muvekkil: ['....k.kkkk.k....', '...kHHkHHHkHk...', '...kHHHHHHHHk...', '...kHsssssHHk...', '...kssssssssk...', '...ksessssesk...', '...kssssssssk...', '...kssskksssk...', '....kssssssk....', '.....kkSSkk.....', '...kkoowwookk...', '..kooooOOooook..', '..koOoooooooOk..', '..koOoooooooOk..', '..koOoooooooOk..', '..kSooooooooSk..', '...kddddddddk...', '...kdddkkdddk...', '...kdddkkdddk...', '..kkkkk..kkkkk..'],
+      tanik: ['....kkkkkkkk....', '...kqqqqqqqqk...', '..kqqqqqqqqqqk..', '..kqqssssssqqk..', '..kqssssssssqk..', '..kqsessssesqk..', '..kqssssssssqk..', '..kqsssrrsssqk..', '..kqqssssssqqk..', '..kqqkkSSkkqqk..', '...kkccwwcckk...', '..kccccwwcgcck..', '..kcccccccccck..', '..kcAccccccAck..', '..kSccccccccSk..', '..kAAAAAAAAAAk..', '...kAAAkkAAAk...', '...kAAAkkAAAk...', '...kAAAkkAAAk...', '..kkkkk..kkkkk..'],
+      murat: ['...kkkkkkkkk....', '..kvvvvvvvvvk...', '.kvvvvvvvvvvvvk.', '...khsssssshk...', '...kssssssssk...', '...kskesskesk...', '...kxssssssxk...', '...kxxskksxxk...', '....kxxxxxxk....', '.....kkSSkk.....', '...kkdZwwZdkk...', '..kddZZwwZZddk..', '..kddZZZZZZddk..', '..kdDZZZZZZDdk..', '..kSdZZZZZZdSk..', '...kDDDDDDDDk...', '...kDDDkkDDDk...', '...kDDDkkDDDk...', '..kjjjjkkjjjjk..', '.kkkkkkk.kkkkkk.'],
+      huseyin: ['................', '.....kkkkkk.....', '....kssssssk....', '...kyssssssyk...', '...kssssssssk...', '...ksessssesk...', '...kssssssssk...', '...ksyyyyyysk...', '....ksskkssk....', '.....kkSSkk.....', '...kkbwwwwbkk...', '..kbbwwwwwwbbk..', '..kbbwwwwwwbbk..', '..kbBwwwwwwBbk..', '..kSbwwwwwwbSk..', '...kwwwwwwwwk...', '...kZZZkkZZZk...', '...kZZZkkZZZk...', '...kZZZkkZZZk...', '..kkkkk..kkkkk..'],
+      anne: ['....kkkkkkkk....', '...kffffffffk...', '..kffffffffffk..', '..kffssssssffk..', '..kfssssssssfk..', '..kfsessssesfk..', '..kfssssssssfk..', '..kfssskksssfk..', '..kffssssssffk..', '..kffffFFffffk..', '...kffiiiiffk...', '..kiiiiiiiiiik..', '..kiiiiiiiiiik..', '..kiIiiiiiiIik..', '..kSiiiiiiiiSk..', '..kZZZZZZZZZZk..', '..kZZZZZZZZZZk..', '..kZZZZZZZZZZk..', '...kZZZZZZZZk...', '...kkkk..kkkk...'],
+      katip: ['......kkkk......', '.....kHHHHk.....', '...kkHHHHHHkk...', '..kHHHHHHHHHHk..', '..kHssssssssHk..', '..kHkeksskekHk..', '..kHssssssssHk..', '..kHsssrrsssHk..', '...kkssssssk....', '.....kkSSkk.....', '...kkiwwwwikk...', '..kiiiwwwwiiik..', '..kiiiiwwiiiik..', '..kiIiiiiiiIik..', '..kSiiiiiiiiSk..', '...kZZZZZZZZk...', '...kZZZZZZZZk...', '....kSk..kSk....', '....kSk..kSk....', '...kkkk..kkkk...'],
+      mubasir: ['................', '.....kkkkkk.....', '....kssssssk....', '...khsssssshk...', '...kssssssssk...', '...ksessssesk...', '...kssssssssk...', '...ksssSSsssk...', '....kssssssk....', '.....kkSSkk.....', '...kkzwwwwzkk...', '..kzzzwwwwzzzk..', '..kzzzzwwzzzzk..', '..kzZzzzzzzZzk..', '..kSzzzzzzzzSk..', '...kZZZZZZZZk...', '...kZZZkkZZZk...', '...kZZZkkZZZk...', '...kZZZkkZZZk...', '..kkkkk..kkkkk..'],
+      polis: ['....kkkkkkkk....', '...kccccgccck...', '..kcccccccccck..', '..kkkkkkkkkkkk..', '...kQQQQQQQQk...', '...kQeQQQQeQk...', '...kQQQQQQQQk...', '...kQQQkkQQQk...', '....kQQQQQQk....', '.....kkJJkk.....', '...kkcCAACckk...', '..kcccCAACccck..', '..kcgccAAcccck..', '..kcAccccccAck..', '..kJccccccccJk..', '...kAAAAAAAAk...', '...kAAAkkAAAk...', '...kAAAkkAAAk...', '...kAAAkkAAAk...', '..kkkkk..kkkkk..'],
+      gardiyan: ['....kkkkkkkk....', '...khhhhhhhhk...', '...khhhhhhhhk...', '...khsssssshk...', '...kssssssssk...', '...ksessssesk...', '...kssssssssk...', '...kssskksssk...', '....kssssssk....', '.....kkSSkk.....', '...kkCCwwCCkk...', '..kCCCCwwCCCCk..', '..kCcCCCCCCcCk..', '..kCCCCCCCCCCk..', '..kSCCCCCCCCSk..', '...kAAAgAAAAk...', '...kAAAkkAgAk...', '...kAAAkkAAAk...', '...kAAAkkAAAk...', '..kkkkk..kkkkk..'],
+      mentor: ['....kkkkkkkk....', '...kyyyyyyyyk...', '..kyyyyyyyyyyk..', '..kyyssssssyyk..', '..kyssssssssyk..', '..kysessssesyk..', '..kyssssssssyk..', '..kysssrrsssyk..', '..kyyssssssyyk..', '..kyykkSSkkyyk..', '...kkuwwwwukk...', '..kuuuwkkwuuuk..', '..kuuuuwwuuuuk..', '..kuUuuuuuuUuk..', '..kSuuuuuuuuSk..', '...kUUUUUUUUk...', '...kUUUUUUUUk...', '....kSk..kSk....', '....kSk..kSk....', '...kkkk..kkkk...'],
+      asistan: ['....kkkkkkkk....', '...kHHHHHHHHkk..', '...kHHHHHHHHkHk.', '...kHssssssHkHk.', '...kssssssssk...', '...ksessssesk...', '...kssssssssk...', '...ksssrrsssk...', '....kssssssk....', '.....kkSSkk.....', '...kkbbwwbbkk...', '..kbbbbwwbbbbk..', '..kbbbbbbbbbbk..', '..kbBbbbbbbBbk..', '..kSbbbbbbbbSk..', '...kddddddddk...', '...kdddkkdddk...', '...kdddkkdddk...', '...kdddkkdddk...', '..kkkkk..kkkkk..'],
+      bilirkisi: ['....k.kkkk.k....', '...khkhhhhkhk...', '...khhhhhhhhk...', '...khQQQQQQhk...', '...kQQQQQQQQk...', '...kkekQQkekk...', '...kQQQQQQQQk...', '...kQQQkkQQQk...', '....kQQQQQQk....', '.....kkJJkk.....', '...kkwbbbbwkk...', '..kwwwbbbbwwwk..', '..kwwwwbbwwwwk..', '..kwgwwwwwwwwk..', '..kJwwwwwwwwJk..', '..kwwwwwwwwwwk..', '...kZZZkkZZZk...', '...kZZZkkZZZk...', '...kZZZkkZZZk...', '..kkkkk..kkkkk..'],
+      gazeteci: ['....kkkkkkk.....', '...kffffffffk...', '..kfffffffffk...', '...khsssssshk...', '...kssssssssk...', '...ksessssesk...', '...kssssssssk...', '...ksssskkssk...', '....kssssssk....', '.....kkSSkk.....', '...kkdwwwwdkk...', '..kddkwwwwdddk..', '..kdddkkkkdddk..', '..kdDdkwwkdDdk..', '..kSdddkkdddSk..', '...kDDDDDDDDk...', '...kDDDkkDDDk...', '...kDDDkkDDDk...', '...kDDDkkDDDk...', '..kkkkk..kkkkk..'],
+      rakip: ['....kkkkkkkk....', '...kYYYYYYYYk...', '..kYYYYYYYYYk...', '...kYssssssYk...', '...kssssssssk...', '...ksessssesk...', '...kssssssssk...', '...kssssskksk...', '....kssssssk....', '.....kkSSkk.....', '...kkzwkkwzkk...', '..kzzzwkkwzzzk..', '..kzzzzkkzzzzk..', '..kzZzzkkzzZzk..', '..kSzzzzzzzzSk..', '...kZZZZZZZZk...', '...kZZZkkZZZk...', '...kZZZkkZZZk...', '...kZZZkkZZZk...', '..kkkkk..kkkkk..'],
+      bora: ['....kkkkkkkk....', '...khhhhhhhhk...', '...khhhhhhhhk...', '...khsssssshk...', '...kssssssssk...', '...kskesskesk...', '...khsssssshk...', '...khhskkshhk...', '....khhhhhhk....', '.....khhhhk.....', '...kkjwwwwjkk...', '..kjjjwwwwjjjk..', '..kjjjwwwwjjjk..', '..kjNjwwwwjNjk..', '..kSjjjjjjjjSk..', '...kDDDDDDDDk...', '...kDDDkkDDDk...', '...kDDDkkDDDk...', '...kDDDkkDDDk...', '..kkkkk..kkkkk..']
+    };
+    const META = {
+      avukat: { name: 'Avukat' }, avukat_cubbe: { name: 'Avukat (cübbeli)' },
+      hakim: { name: 'Hâkim', noEyes: true }, uye_hakim: { name: 'Üye hâkim' },
+      savci: { name: 'Savcı (cübbeli)' }, savci_sivil: { name: 'Savcı' },
+      muvekkil: { name: 'Müvekkil' }, tanik: { name: 'Tanık' },
+      murat: { name: 'Murat Koç' }, huseyin: { name: 'Hüseyin Tan', noMouth: true },
+      anne: { name: 'Saniye Aydın' }, katip: { name: 'Zabıt kâtibi', noEyes: true },
+      mubasir: { name: 'Mübaşir' }, polis: { name: 'Polis', skin: 'Q' },
+      gardiyan: { name: 'Gardiyan' }, mentor: { name: 'Mentor avukat' },
+      asistan: { name: 'Büro asistanı' }, bilirkisi: { name: 'Bilirkişi', skin: 'Q', noEyes: true },
+      gazeteci: { name: 'Gazeteci' }, rakip: { name: 'Rakip avukat' }, bora: { name: 'Bora', noMouth: true }
+    };
+    const FACES = {
+      normal: [],
+      mutlu: [[5, 4, '*e****e*'], [7, 4, '*k****k*'], [8, 6, 'kkkk']],
+      kizgin: [[4, 4, '*kk**kk*'], [5, 4, '*e****e*'], [7, 4, '**kkkk**']],
+      saskin: [[4, 4, '*k****k*'], [5, 4, '*ee**ee*'], [7, 4, '***kk***'], [8, 7, 'kk']],
+      uzgun: [[4, 4, '**k**k**'], [5, 4, '*e****e*'], [7, 4, '**kkkk**'], [8, 5, 'k'], [8, 10, 'k']]
+    };
+    const who = M[this.props.who] ? this.props.who : 'avukat';
+    const meta = META[who];
+    const skin = meta.skin || 's';
+    const rows = M[who].map((r) => (r + '................').slice(0, 16).split(''));
+    (FACES[this.props.ifade] || []).forEach(([row, col, str]) => {
+      if (meta.noEyes && row === 5) return;
+      if (meta.noMouth && (row === 7 || row === 8)) return;
+      for (let i = 0; i < str.length; i++) rows[row][col + i] = str[i] === '*' ? skin : str[i];
+    });
+    const px = Math.max(1, Number(this.props.px ?? 8) || 8);
+    const cells = [];
+    rows.forEach((r) => r.forEach((ch) => cells.push({ bg: P[ch] || 'transparent' })));
+    return { cells, px, w: 16 * px, h: rows.length * px, label: meta.name + ' piksel karakteri' };
+  }
+}
+</script>
+</body>
+</html>

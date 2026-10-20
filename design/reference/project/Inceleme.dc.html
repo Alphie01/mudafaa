@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Müdafaa — Delil İnceleme</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&amp;family=VT323&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#e8b13c}a:hover{color:#ffd36b}
+.pxbtn{box-shadow: inset -4px -4px 0 rgba(0,0,0,.28), inset 4px 4px 0 rgba(255,255,255,.22), 4px 4px 0 #120d1c}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #1d1733; font-family: 'VT323', monospace; color: #efe8ff; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; gap: 12px; padding: 20px 20px 10px">
+    <a href="Arama.dc.html" aria-label="Aramaya dön" class="pxbtn" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: #3a2f66; border: 3px solid #120d1c; color: #efe8ff; box-sizing: border-box">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <div style="flex: 1; display: flex; flex-direction: column">
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 12px; color: #b3a8d6; letter-spacing: 2px">ADIM 2 · İNCELE</span>
+      <h1 style="margin: 0; font-family: 'Pixelify Sans', monospace; font-size: 22px; font-weight: 700; color: #e8b13c">Vardiya Çizelgesi</h1>
+    </div>
+  </header>
+
+  <p style="margin: 0 20px 10px; font-size: 19px; color: #b3a8d6; line-height: 1.05">Bir alet seç, sonra belgede şüpheli satıra dokun. Doğru alet + doğru yer = yeni ipucu.</p>
+
+  <div role="radiogroup" aria-label="İnceleme aleti" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 0 20px">
+    <sc-for list="{{tools}}" as="t" hint-placeholder-count="4">
+      <button type="button" role="radio" aria-checked="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">
+        <span style="font-size: 22px; line-height: 1">{{t.glyph}}</span>
+        <span>{{t.label}}</span>
+      </button>
+    </sc-for>
+  </div>
+
+  <section aria-label="Belge" style="margin: 14px 20px 0; padding: 12px; background: {{paper}}; color: {{paperText}}; border: 3px solid #120d1c; box-shadow: 4px 4px 0 #120d1c; display: flex; flex-direction: column; gap: 4px">
+    <div style="display: flex; justify-content: space-between; font-family: 'Pixelify Sans', monospace; font-size: 11px; color: {{paperInk}}">
+      <span>ÖZTEKS DEPOCULUK · VARDİYA</span><span>12 MART</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1.4fr 1fr 1.2fr; padding: 4px 6px; font-family: 'Pixelify Sans', monospace; font-size: 11px; border-bottom: 3px solid #120d1c; color: {{paperInk}}">
+      <span>PERSONEL</span><span>YER</span><span>SAAT</span>
+    </div>
+    <sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+      <button type="button" onClick="{{r.pick}}" style="{{r.style}}">
+        <span>{{r.name}}</span><span>{{r.place}}</span><span style="{{r.hourStyle}}">{{r.hours}}</span>
+      </button>
+    </sc-for>
+  </section>
+
+  <section role="status" aria-label="Bulgu" style="margin: 14px 20px 0; padding: 10px 12px; background: {{resBg}}; color: #120d1c; border: 3px solid #120d1c; display: flex; flex-direction: column; gap: 4px; min-height: 120px; box-sizing: border-box">
+    <span style="font-family: 'Pixelify Sans', monospace; font-size: 12px; font-weight: 700; letter-spacing: 1px">{{resTitle}}</span>
+    <p style="margin: 0; font-size: 20px; line-height: 1.05">{{resText}}</p>
+    <span style="margin-top: auto; font-family: 'Pixelify Sans', monospace; font-size: 12px">{{resScore}}</span>
+  </section>
+
+  <div style="margin-top: auto; padding: 12px 20px 26px">
+    <a href="Cikarim.dc.html" class="pxbtn" style="display: flex; justify-content: center; align-items: center; height: 58px; background: #e8b13c; color: #120d1c; text-decoration: none; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 18px; font-weight: 700">ÇIKARIM TAHTASINA GİT ›</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tool: 'uv', row: 'selin' };
+  }
+  renderVals() {
+    const st = this.state;
+    const uv = st.tool === 'uv';
+    const T = [
+      { id: 'buyutec', glyph: '⌕', label: 'Büyüteç' },
+      { id: 'uv', glyph: '◐', label: 'UV ışık' },
+      { id: 'toz', glyph: '✣', label: 'İz tozu' },
+      { id: 'karsi', glyph: '⇄', label: 'Karşılaştır' }
+    ];
+    const tbase = "display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; height: 62px; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 11px; cursor: pointer;";
+    const tools = T.map((t) => ({
+      ...t,
+      on: st.tool === t.id ? 'true' : 'false',
+      style: tbase + (st.tool === t.id ? ' background: #e8b13c; color: #120d1c;' : ' background: #2b2350; color: #efe8ff;'),
+      pick: () => this.setState({ tool: t.id, row: null })
+    }));
+    const R = [
+      { id: 'ahmet', name: 'Ahmet Yıldız', place: 'Depo 2', hours: '08.00–16.00' },
+      { id: 'kerem', name: 'Kerem Aydın', place: 'Depo 1', hours: '18.00–24.00' },
+      { id: 'selin', name: 'Selin Kaya', place: 'Güvenlik', hours: '22.00–06.00', uvHours: '18.00–24.00 → 22.00–06.00' },
+      { id: 'huseyin', name: 'Hüseyin Tan', place: 'Çay ocağı', hours: '16.00–24.00' },
+      { id: 'murat', name: 'Murat Koç', place: 'Depo 3', hours: '16.00–24.00' }
+    ];
+    const rbase = "display: grid; grid-template-columns: 1.4fr 1fr 1.2fr; align-items: center; min-height: 44px; padding: 0 6px; text-align: left; border: 0; border-bottom: 2px dashed #b9a575; font-family: 'VT323', monospace; font-size: 19px; color: inherit; cursor: pointer;";
+    const rows = R.map((r) => {
+      const sel = st.row === r.id;
+      const altered = uv && r.uvHours;
+      return {
+        name: r.name, place: r.place,
+        hours: altered ? r.uvHours : r.hours,
+        hourStyle: altered ? 'color: #d58cff; font-size: 16px; line-height: 1;' : '',
+        style: rbase + (sel ? ' background: rgba(232,177,60,.45); outline: 3px solid #120d1c;' : ' background: transparent;'),
+        pick: () => this.setState({ row: r.id })
+      };
+    });
+    const F = {
+      'uv:selin': { t: 'YENİ İPUCU · SİLİNTİ', x: 'UV ışıkta düzeltme izi çıktı! Selin’in vardiyası 18.00–24.00 iken sonradan 22.00–06.00 yapılmış. O gece 23.00’te görevde miydi?', s: '+150 SKOR · Not defterine eklendi', bg: '#d6c2ff' },
+      'buyutec:kerem': { t: 'YENİ İPUCU · GÖREV YERİ', x: 'Kerem Depo 1’e atanmış. Depo 3’te olması için bir sebebi yok.', s: '+100 SKOR · Not defterine eklendi', bg: '#bfe6c9' },
+      'karsi:murat': { t: 'YENİ İPUCU · ŞÜPHELİ', x: 'Depo 3’te çalışan tek kişi Murat Koç. Ayakkabı numarası personel kartında: 42.', s: '+150 SKOR · Not defterine eklendi', bg: '#bfe6c9' }
+    };
+    const key = st.tool + ':' + st.row;
+    let res = F[key];
+    if (!res) {
+      res = st.row
+        ? { t: 'SONUÇ YOK', x: 'Bu aletle burada dikkat çeken bir şey bulamadın.', s: '−20 SKOR', bg: '#ef9a8a' }
+        : { t: 'HAZIR', x: 'Belgede incelemek istediğin satıra dokun.', s: 'Gizli ipucu: 3', bg: '#d9c597' };
+    }
+    return {
+      tools, rows,
+      paper: uv ? '#2a1f4a' : '#f4e7c5',
+      paperInk: uv ? '#d6c2ff' : '#5b4a2a',
+      paperText: uv ? '#efe8ff' : '#120d1c',
+      resTitle: res.t, resText: res.x, resScore: res.s, resBg: res.bg
+    };
+  }
+}
+</script>
+</body>
+</html>

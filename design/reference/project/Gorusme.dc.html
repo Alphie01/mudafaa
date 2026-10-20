@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Müdafaa — Müvekkil Görüşmesi</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&amp;family=VT323&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#e8b13c}a:hover{color:#ffd36b}
+.pxbtn{box-shadow: inset -4px -4px 0 rgba(0,0,0,.28), inset 4px 4px 0 rgba(255,255,255,.22), 4px 4px 0 #120d1c}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #1d1733; font-family: 'VT323', monospace; color: #efe8ff; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; gap: 12px; padding: 20px 20px 8px">
+    <a href="Sorusturma.dc.html" aria-label="Soruşturmaya dön" class="pxbtn" style="width: 44px; height: 44px; flex: none; display: flex; align-items: center; justify-content: center; background: #3a2f66; border: 3px solid #120d1c; color: #efe8ff; box-sizing: border-box">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <div style="flex: 1; display: flex; flex-direction: column">
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 12px; color: #b3a8d6; letter-spacing: 2px">CEZAEVİ · GÖRÜŞ ODASI</span>
+      <h1 style="margin: 0; font-family: 'Pixelify Sans', monospace; font-size: 22px; font-weight: 700; color: #e8b13c">Müvekkil Görüşmesi</h1>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: flex-end">
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 11px; color: #b3a8d6">KALAN SÜRE</span>
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 18px; font-weight: 700; color: {{minColor}}">{{minutes}} dk</span>
+    </div>
+  </header>
+
+  <section aria-label="Görüş odası" style="position: relative; margin: 0 20px; height: 150px; background: #3a3550; border: 3px solid #120d1c; overflow: hidden">
+    <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; height: 104px; background: #4a4656"></div>
+    <div aria-hidden="true" style="position: absolute; left: 20px; top: 14px; width: 40px; height: 40px; background: #2b2350; border: 3px solid #120d1c; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; box-sizing: border-box">
+      <div style="background: #120d1c"></div><div style="background: #120d1c"></div><div style="background: #120d1c"></div>
+    </div>
+    <div style="position: absolute; left: 143px; top: 12px"><dc-import name="Sprite" who="muvekkil" px="4" hint-size="64px,80px"></dc-import></div>
+    <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 92px; height: 58px; background: #6e6394; border-top: 6px solid #8b80b0"></div>
+    <div aria-hidden="true" style="position: absolute; left: 70px; right: 70px; top: 8px; height: 90px; border: 4px solid #b3a8d6; background: rgba(179,168,214,.12)"></div>
+    <div style="position: absolute; left: 10px; bottom: 8px; padding: 2px 8px; background: #120d1c; font-size: 17px">Ruh hâli: <b style="color: {{moodColor}}">{{mood}}</b></div>
+    <div style="position: absolute; right: 10px; bottom: 8px; display: flex; align-items: center; gap: 6px; padding: 2px 8px; background: #120d1c; font-size: 17px">
+      Güven
+      <span aria-label="Güven yüzde {{trust}}" style="width: 70px; height: 10px; background: #3a2f66; display: flex"><span style="width: {{trust}}%; background: #6fd08d"></span></span>
+    </div>
+  </section>
+
+  <section aria-label="Konuşma" style="margin: 10px 20px 0; padding: 10px 12px; background: #f4e7c5; color: #120d1c; border: 3px solid #120d1c; box-shadow: 4px 4px 0 #120d1c; display: flex; flex-direction: column; gap: 6px; min-height: 150px; box-sizing: border-box">
+    <div style="display: flex; flex-direction: column; gap: 1px">
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 11px; color: #1d3a66">SEN</span>
+      <span style="font-size: 19px; line-height: 1.05">{{q}}</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 1px">
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 11px; color: #a8521b">KEREM</span>
+      <span style="font-size: 20px; line-height: 1.05">{{a}}</span>
+    </div>
+    <span style="margin-top: auto; font-family: 'Pixelify Sans', monospace; font-size: 11px; color: {{fxColor}}">{{fx}}</span>
+  </section>
+
+  <section aria-label="Sorular" style="margin: 12px 20px 0; display: flex; flex-direction: column; gap: 6px">
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 12px; letter-spacing: 1px; color: #b3a8d6">KONU SOR · 3 dk</span>
+      <div role="radiogroup" aria-label="Soru tonu" style="display: flex; gap: 4px">
+        <button type="button" role="radio" aria-checked="{{toneSoft}}" onClick="{{setSoft}}" style="{{softStyle}}">Yumuşak</button>
+        <button type="button" role="radio" aria-checked="{{toneHard}}" onClick="{{setHard}}" style="{{hardStyle}}">Sert</button>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+      <sc-for list="{{topics}}" as="t" hint-placeholder-count="4">
+        <button type="button" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+      </sc-for>
+    </div>
+    <button type="button" onClick="{{present}}" style="{{presentStyle}}">
+      <span>İPUCU GÖSTER: “Çamurda 42 numara bot izi”</span>
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 11px">5 dk</span>
+    </button>
+  </section>
+
+  <section aria-label="Olayı anlama" style="margin: 12px 20px 0; padding: 10px 12px; background: #2b2350; border: 3px solid #120d1c; display: flex; flex-direction: column; gap: 3px">
+    <div style="display: flex; justify-content: space-between; font-family: 'Pixelify Sans', monospace; font-size: 12px; letter-spacing: 1px">
+      <span style="color: #b3a8d6">OLAYI ANLA</span><span style="color: #e8b13c">{{known}} / 4</span>
+    </div>
+    <sc-for list="{{facts}}" as="f" hint-placeholder-count="4">
+      <div style="display: flex; gap: 8px; font-size: 18px; line-height: 1.05; color: {{f.color}}"><span style="flex: none">{{f.mark}}</span><span>{{f.text}}</span></div>
+    </sc-for>
+  </section>
+
+  <div style="margin-top: auto; padding: 10px 20px 22px">
+    <a href="Arama.dc.html" class="pxbtn" style="display: flex; justify-content: center; align-items: center; height: 54px; background: #e8b13c; color: #120d1c; text-decoration: none; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 17px; font-weight: 700">GÖRÜŞMEYİ BİTİR · OLAY YERİNE ›</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { topic: 'anahtar', tone: 'soft', asked: { gece: true, anahtar: true }, presented: false, minutes: 14, trust: 62 };
+  }
+  ask(id) {
+    const st = this.state;
+    if (st.minutes < 3) return;
+    const hard = st.tone === 'hard';
+    this.setState({
+      topic: id,
+      asked: { ...st.asked, [id]: true },
+      minutes: st.minutes - 3,
+      trust: Math.max(0, Math.min(100, st.trust + (hard ? -8 : 4)))
+    });
+  }
+  renderVals() {
+    const st = this.state;
+    const hard = st.tone === 'hard';
+    const T = {
+      gece: { label: 'O gece', soft: 'O gece neler oldu, baştan anlatır mısın?', hardQ: 'Saat saat anlat. 23.00’te neredeydin?', a: 'Vardiyam 24.00’te bitecekti. 22.30 gibi çay ocağına geçtim, Hüseyin abiyle oturduk.', fact: 'gece' },
+      anahtar: { label: 'Anahtar', soft: 'Depo anahtarı neden senin çantandaydı?', hardQ: 'Anahtar çantanda çıktı. Bunu nasıl açıklayacaksın?', a: hard ? 'Herkeste var o anahtardan! Bana mı yıkacaksınız?' : 'Bütün vardiyaya aynı anahtarı veriyorlar. Benimki hep çantamda durur.', fact: 'anahtar' },
+      huseyin: { label: 'Hüseyin abi', soft: 'Hüseyin abi seni orada gördüğünü söyler mi?', hardQ: 'Hüseyin yalan söylemez değil mi? İfade verir mi?', a: 'Söyler tabii. 23.15’e kadar beraberdik. Tost da ısmarlamıştım, fişi cüzdanımda.', fact: 'mazeret' },
+      kendisi: { label: 'Kendisi', soft: 'Biraz kendinden bahset. Borcun, sıkıntın var mı?', hardQ: 'Paraya ihtiyacın var mıydı? Dürüst ol.', a: hard ? '…Annemin ilaç borcu var. Ama ben hırsız değilim!' : 'Annemle yaşıyorum. Bu işe yeni girdim, kimseyle sorunum yoktu.', fact: null }
+    };
+    const cur = T[st.topic] || T.gece;
+    let q = hard ? cur.hardQ : cur.soft;
+    let a = cur.a;
+    let fx = hard ? 'SERT TON · −8 GÜVEN · daha fazla bilgi' : 'YUMUŞAK TON · +4 GÜVEN';
+    let fxColor = hard ? '#a4321f' : '#2e6a40';
+    if (st.presented) {
+      q = 'Olay yerinde 42 numara bot izi bulduk. Senin numaran kaç?';
+      a = '39’um ben… Bekle. Murat abi o gece Depo 3’teydi. Botları hep çamurlu olur. Söylemedim, işimi kaybederim diye korktum.';
+      fx = 'SAKLANAN BİLGİ AÇIĞA ÇIKTI · +200 SKOR';
+      fxColor = '#1d3a66';
+    }
+    const tb = "min-height: 44px; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 13px; cursor: pointer;";
+    const topics = Object.keys(T).map((id) => {
+      const on = st.topic === id && !st.presented;
+      const done = !!st.asked[id];
+      return {
+        label: (done ? '✓ ' : '') + T[id].label,
+        style: tb + (on ? ' background: #e8b13c; color: #120d1c;' : done ? ' background: #3a2f66; color: #b3a8d6;' : ' background: #2b2350; color: #efe8ff;'),
+        pick: () => { this.setState({ presented: false }); this.ask(id); }
+      };
+    });
+    const pill = "height: 28px; padding: 0 8px; border: 2px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 11px; cursor: pointer;";
+    const known = {
+      gece: !!st.asked.gece,
+      anahtar: !!st.asked.anahtar,
+      mazeret: !!st.asked.huseyin,
+      murat: st.presented
+    };
+    const F = [
+      { id: 'gece', yes: 'Kerem 22.30’dan sonra çay ocağındaydı.', no: 'Kerem olay saatinde neredeydi?' },
+      { id: 'anahtar', yes: 'Anahtar tüm vardiyada var; tek başına delil değil.', no: 'Anahtar neden onun çantasında?' },
+      { id: 'mazeret', yes: 'Hüseyin ve fiş mazereti destekliyor.', no: 'Mazeretini kim doğrulayabilir?' },
+      { id: 'murat', yes: 'Kerem, Murat Koç’u koruyordu. Yeni şüpheli!', no: 'Kerem bir şey saklıyor mu?' }
+    ];
+    const facts = F.map((f) => ({
+      text: known[f.id] ? f.yes : f.no,
+      mark: known[f.id] ? '■' : '?',
+      color: known[f.id] ? '#6fd08d' : '#8b80b0'
+    }));
+    const trust = st.trust;
+    return {
+      q, a, fx, fxColor, topics, facts,
+      known: facts.filter((f) => f.mark === '■').length,
+      minutes: st.minutes,
+      minColor: st.minutes <= 5 ? '#ef7a66' : '#e8b13c',
+      trust,
+      mood: st.presented ? 'Çözülüyor' : trust < 40 ? 'Savunmada' : hard ? 'Gergin' : 'Temkinli',
+      moodColor: st.presented ? '#6fd08d' : trust < 40 ? '#ef7a66' : '#e8b13c',
+      toneSoft: hard ? 'false' : 'true',
+      toneHard: hard ? 'true' : 'false',
+      softStyle: pill + (hard ? ' background: #2b2350; color: #efe8ff;' : ' background: #6fd08d; color: #120d1c;'),
+      hardStyle: pill + (hard ? ' background: #ef7a66; color: #120d1c;' : ' background: #2b2350; color: #efe8ff;'),
+      setSoft: () => this.setState({ tone: 'soft' }),
+      setHard: () => this.setState({ tone: 'hard' }),
+      presentStyle: "display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 44px; padding: 4px 10px; text-align: left; border: 3px solid #120d1c; font-family: 'VT323', monospace; font-size: 18px; cursor: pointer;" + (st.presented ? ' background: #e8b13c; color: #120d1c;' : ' background: #d6c2ff; color: #120d1c;'),
+      present: () => { if (!st.presented && st.minutes >= 5) this.setState({ presented: true, minutes: st.minutes - 5, trust: Math.min(100, st.trust + 6) }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

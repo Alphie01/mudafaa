@@ -1,0 +1,443 @@
+# Dava #07 "Gece Bekçisinin Sırrı" — İçerik Taslağı v1
+
+> Kaynak: onaylı plan (docs/plan.md) §11 ve Ek A. `content/cases/gece-bekcisinin-sirri/` bu taslaktan yazılır. Hukuki inceleme notları: docs/legal/dava-07.md.
+
+## 11. Dava #07 "Gece Bekçisinin Sırrı" — içerik tasarımı (özet; ayrıntı Ek A)
+Hukuk metinleri mevzuat.gov.tr'deki güncel PDF'lerle (TCK 5237, CMK 5271, 5188, Av.K. 1136, Yakalama Yönetmeliği) karşılaştırıldı.
+
+- **Gerçek:**
+  - Hırsızlığı Depo 3 işçisi **Murat Koç** yaptı: 42 numara zimmetli iş botu giyiyor, sigara içiyor, tefeciye borçlu.
+  - Özel güvenlik görevlisi **Selin Kaya** Murat'ın gizli nişanlısı. 23.05'te Murat'la 6 dk konuştu ve "Kerem'di de" talimatını aldı. Ana kapıdaki kulübeden arka sokağı göremeyeceğini fark edince vardiyasını 18–24'ten 22–06'ya silerek değiştirdi.
+  - 14 no'lu sokak lambası 9–14 Mart arasında arızalıydı. Kamera kablosu 22.40'ta kesildi, 23.30'da bantla eklendi.
+  - Kerem'in parmak izi, 19.30'da Murat'ın isteğiyle top taşımasından kaldı.
+  - Anahtar tüm vardiyada ortak. Ertesi sabah görev süresi dışındaki Selin, Kerem'in çantasını rızası olmadan arayıp anahtarı buldu; ne arama kararı ne arama tutanağı var.
+  - Kerem 22.30–23.15 arasında çay ocağında Hüseyin Tan'laydı (22.57 tarihli fiş).
+- **Yapı (tasarımdaki akışla aynı):**
+  - **Brifing:** mentorun dosyayı devretmesi + ceza aralığı sorusu → Dosya ekranı + strateji seçimi.
+  - **Soruşturma:** 3 gün × 3 eylem puanı.
+    - OLAY YERİ: 13 Mart fotoğraf albümünde arama.
+    - CEZAEVİ: Kerem görüşmesi (14 dk; ikinci ziyarette 8 dk).
+    - TANIKLAR: Hüseyin, Selin, Murat.
+    - ARŞİV: emanetteki vardiya çizelgesinin incelenmesi (CMK 153/4), belediye arıza kaydı, telefon kayıtları (öğretici yol ayrımı), CMK 177 delil dilekçesi (3 hak), çıkarım tahtası (0 EP).
+  - **2. Celse:** tek oturumda tüm aşamalar sırayla:
+    1. açılış (CMK 191);
+    2. ek savunma hakkı hatırlatması (CMK 226);
+    3. sanığın ve avukatın ek savunması (142/2-d);
+    4. Selin'in yemini ve ifadesi; telkin edici soruya itiraz (CMK 201);
+    5. çapraz sorgu: 4 ifade, BASTIR / DELİL SUN;
+    6. Hüseyin'in dinlenmesi;
+    7. anahtar ve teslim tutanağı: hukuka aykırı arama (5188 md. 7, 9; CMK 119; Anayasa 38/6; CMK 206/2-a, 217/2);
+    8. parmak izi raporu; kolluk ifadesi (CMK 148/4);
+    9. mütalaa + cevap hakkı (CMK 216/2);
+    10. esas savunma, son söz, hüküm.
+
+    Güvenilirlik 0'a düşerse "çöküş" kesintisi devreye girer.
+- **Sonuçlar (öncelik sırasıyla):**
+  1. **İKRAR:** müvekkili sahte ikrara yönlendirmek → mahkûmiyet 6 yıl 3 ay + etik kartı (Av.K. md. 34).
+  2. **BERAAT — CMK 223/2-b:** gerçek fail gösterildi → tahliye, tazminat hakkı bildirimi, dosyanın Başsavcılığa gönderilmesi. Koşul: TOPLAM ≥3.600, ikna ≥8, HTS çelişkisi + bot izi çıkarımı + mazeret + teşhisin çöküşü.
+  3. **BERAAT — CMK 223/2-e:** şüpheden sanık yararlanır. Koşul: ikna ≥6, en az 2 bulgu, TOPLAM ≥3.200 (iki temel dayanak birlikte varsa ≥2.600).
+  4. **İNDİRİM:** 142/2-d düşer; 142/2-h + 143 + TCK 62 = 6 yıl 3 ay. Koşul: TOPLAM ≥2.000.
+  5. **MAHKÛMİYET** (varsayılan): 7 yıl 6 ay; ayrıca çöküş varyantı.
+- **Skor:**
+  - Tasarımdaki ekran tutarları korunur (+300/−150, +300/−50, +100/+150/−20, +200).
+  - TOPLAM = olay puanları + kalp × 100. Teorik tavan ~5.500; çubuk 5.000'de kırpılır.
+  - Karar satırları: Delil toplama (x/6) = AR+DA · Çapraz sorgu = SO · İtiraz isabeti (x/7) = UB+HB · Savunma = SS · Güvenilirlik bonusu · Hatalı delil.
+  - XP = ⌊TOPLAM/10 × f⌋ (f: 1,2 / 1,0 / 0,85 / 0,6 / 0,3 / 0); etik ihlali varsa yarıya iner.
+- **Golden path'ler:** G1→BERAAT_B (5.130) · G2→BERAAT_E (3.645) · G3→İNDİRİM (2.010) · G4→MAHKÛMİYET (100) · G5→İKRAR · W→ÇÖKÜŞ. Hepsi `tests.goldenPaths`'e girer; sayılar yazım sırasında ince ayarlanır.
+- **Tasarımdaki hukuki rakamların düzeltilmesi (UI aynı, veri değişir; tam liste Ek A.9):**
+  - Kart: "TCK 142 · 3–7 yıl" → "TCK 142/2-h, 143 · 7,5–15 yıl".
+  - "Savcılık talebi 5 yıl" → "İddianame: 142/2-h, 143".
+  - Ceza aralığı etiketleri → "Beraat · TCK 62: 6y3a · 7,5 yıl · 15 yıl". HAGB etiketi kaldırıldı, çünkü HAGB ceza ≤2 yıl şartı ister.
+  - "Ceza indirimi" ipucunda "etkin pişmanlık" yerine terditli savunma.
+  - Karar metinleri 142/2-h + 143 + 62 hesabıyla ve istinaf süresiyle (CMK 273/1) yazılır.
+  - HTS kaynağı → "CMK 135/6 hâkim kararı".
+  - Kamera → "23.30'da bantla eklenmiş".
+  - Görüşme süresi → "görüş salonunun kapanışı" (avukat–müvekkil görüşmesi süresiz ve gizlidir).
+  - Arama ekranı → "13 Mart olay yeri fotoğrafları".
+  - "Gece bekçisi" başlık olarak kalır; hukuki metinlerde "özel güvenlik görevlisi (5188)" kullanılır.
+  - Mahkemeye hitap: "Sayın Başkan".
+- **Hub düzeni:** 4 sekme korunur; çıkarım tahtası ARŞİV'de ve İnceleme CTA'sında. Hızlı müvekkil kartı, son görüşmeden bir cümle ve görüşmeye kısa yol seçenekleri gösterir.
+
+
+## Ek A — Dava #07 içerik taslağı v1 (M1.4'te `case.json`'a dönüştürülecek)
+**Kısaltmalar**
+- Skor kategorileri: HB = Hukuki bilgi, DA = Delil analizi, AR = Araştırma, SO = Sorgulama, SS = Savunma stratejisi, UB = Usul bilgisi.
+- ♥ = güvenilirlik · İk = heyet iknası · G/B/N = iyi/kötü/nötr işaret · "isabet" = İtiraz isabeti sayacına girer.
+- Hub'da her eylem −1 EP harcar. `+x` = keşif.
+
+### A.1 Gerçek ve kronoloji
+Arka plan:
+- 22–06 gece devriye kadrosu Şubat'ta kaldırıldı; geceleri tur atan kimse yok.
+- Selin, 5188 sayılı Kanun kapsamında özel güvenlik görevlisi; vardiyası 18–24, görev yeri ana kapı kulübesi (CCTV monitörü burada).
+- Murat: Depo 3, vardiyası 16–24; İSG zimmetinde 42 numara bot; sigara içiyor; tefeciye borçlu.
+- Turuncu mont tüm çalışanların iş üniforması.
+
+| Zaman | Olay |
+|---|---|
+| 9 Mart | 14 no'lu direk arızalanır, belediye kaydı açılır. Murat bunu fark edip planı kurar. |
+| 12 Mart 19.30 | Murat, Kerem'den (Depo 1, 18–24) 40 top kumaşı Depo 3'e taşımaya yardım ister. Kerem'in izi dış kapı koluna geçer; bunu Murat kurgulamıştır. |
+| 22.30 | Kerem çay ocağına geçer, Hüseyin Tan'la oturur. |
+| 22.40 | Murat Depo 3 kamera kablosunu temiz keser; DVR "sinyal yok" gösterir. Selin monitörde görür ama kayda geçirmez. |
+| 22.45–23.00 | Murat'ın kuzeni karanlık arka sokağa minibüs çeker; toplar arka kapıdan yüklenir; 42 no bot izleri kapıdan sokağa uzanır. |
+| 22.57 | Hüseyin fiş keser: 2 çay + tost (fiş no 0412). |
+| 23.00 | Minibüs ayrılır; Murat çöp kutusunun yanında sigara içer (taze izmarit). |
+| 23.05 | Murat Selin'i arar (6 dk): "Bitti. Sorarlarsa turuncu montlu birini gördün; Kerem'di." |
+| 23.15 | Kerem Depo 1'e döner. |
+| 23.30 | Murat kesik kabloyu bantla ekler (arıza süsü verir; kayıt boşluğu 22.40–23.30). |
+| 24.00 | Murat Depo 3'ü kilitler; Selin'in vardiyası biter. |
+| 13 Mart 07.30 | Hırsızlık fark edilir; polis ve gece personeli çağrılır. |
+| 08.05 | Görevi bitmiş olan Selin, Kerem'in çantasını zorla alır ve anahtarı çıkarır (anahtar tüm vardiyada aynı). |
+| 08.20 | Kom. Yusuf Er teslim tutanağı düzenler; arama kararı, emri ya da tutanağı yok. Murat "Gece Depo 3'te Kerem dolaşıyordu" der; Selin Kerem'i "tanır". |
+| 08.40 | Olay yeri fotoğrafları çekilir. İzmarit Emanet No. 3 olarak alınır ama incelemeye gönderilmez; kamera "arızalı" diye kaydedilir. |
+| 09.10 | Selin'in kolluk ifadesi: "Uzaktan, karanlıktı, yüzünü tam seçemedim; turuncu iş montu. Sabah Murat 'Kerem'di' deyince…" |
+| 09.30 | Kerem'in müdafisiz kolluk ifadesi: "19.30'da Murat abinin isteğiyle Depo 3'e top taşıdım." |
+| 13 Mart (sonra) | Selin ana kapıdan arka sokağın görünmediğini fark eder; çizelgedeki "18.00–24.00"ı silip "22.00–06.00" yazar. Kolluk 14 Mart'ta değiştirilmiş asla el koyar. |
+| 14 / 15 Mart | Lamba onarılır / Kerem tutuklanır. |
+| Sonra | İddianame TCK 142/2-h, 143 ile Ağır Ceza'ya gider. 1. celsede Kerem sorgulandı, Selin gelmedi. Annesi Av. Deniz Arslan'ı tutar; 2. celseye 14 gün var. |
+
+### A.2 Node grafiği
+**Brifing**
+- **BR_01 · STORY + CHOICE.** Mentor Leyla Erdem dosyayı devreder (UYAP, CMK 153/4).
+  - Başlangıç delilleri: ev_anahtar, ev_teslim_tutanagi, ev_parmak_izi_raporu, ev_selin_kolluk, ev_kerem_kolluk, ev_vardiya.
+  - Soru: "Olası ceza aralığı?"
+    - "142/2-h + 143: 7 yıl 6 ay–15 yıl" → HB+50, G.
+    - "142/1: 3–7 yıl" → 0, B: "142/1 bentleri depo içi eşyaya uymaz."
+    - "141: 1–3 yıl" → 0, B: "Bina içinde muhafaza nitelikli haldir."
+  - Benim kararım: soru Dosya ekranından önce gelir, yoksa cevap ekranda görünürdü.
+- **BR_02 · STORY (phase BRIEFING).** Dosya ekranı (düzeltilmiş rakamlarla) + strateji grubu: Masumiyet / Usul hatası / Ceza indirimi. `strategy` ayarlanır, `day=1`, `ap=3` → "SORUŞTURMAYA BAŞLA" → INV_HUB.
+
+**Soruşturma**
+- **INV_HUB · INVESTIGATION.** Başlık "GÜN d/3 · 2. celseye 14/10/6 gün". Bu takvim, CMK 177'deki "duruşmadan en az 5 gün önce" şartına uyar.
+
+  | Sekme | Eylem | Not |
+  |---|---|---|
+  | OLAY YERİ | "Olay yeri fotoğraflarını ara" → INV_ARAMA | bir kez |
+  | CEZAEVİ | "Kerem'le görüş" → INV_GORUSME | min=14 |
+  | CEZAEVİ | "Tekrar görüş" | min=8 |
+  | TANIKLAR | Hüseyin → INV_T_HUS · Selin → INV_T_SEL · Murat → INV_T_MUR | her biri bir kez |
+  | ARŞİV | Vardiya çizelgesi → INV_INCELEME · Belediye arıza kaydı → INV_BEL · Telefon kayıtları → INV_HTS · Delil dilekçesi → INV_DIL | |
+  | ARŞİV | Çıkarım tahtası → INV_CIKARIM | 0 EP, en az 2 kart |
+
+  - "DURUŞMAYA GİT" (0 EP, onay ister) → C_00.
+  - Tetikleyici: ap=0 ∧ day<3 → INV_DAY_END (o günün teslimatları gelir, day+1, ap=3).
+  - ap=0 ∧ day=3 → yalnızca Çıkarım ve Duruşma kalır.
+- **INV_GORUSME · DIALOGUE.**
+  - İlk ziyarette kapıda Saniye Aydın: +fact_sigara_yok, +fact_kerem_39.
+  - Çerçeve metni: "Görüş salonu 17.00'de kapanıyor; Ali Çetin konuşmaları duyamaz."
+  - Ton: Yumuşak güven +4 / Sert güven −8 + ek bilgi.
+  - Her konu 3 dk, SO+20:
+    - **"O gece":** "19.30'da Murat abi Depo 3'e top taşımaya çağırdı; 22.30 gibi çay ocağına geçtim." → +fact_gece, +fact_19_30. Sert tonla ayrıca +fact_murat_cagirdi.
+    - **"Anahtar":** "Bütün vardiyaya aynı anahtar… Selin abla çantamı elimden alıp açtı." → +fact_anahtar_ortak, +fact_rizasiz_arama. Sert tonla ayrıca "Vardiyası gece bitmişti, sabah orada ne işi vardı?" → +hint_selin_offduty.
+    - **"Hüseyin abi":** "23.15'e kadar beraberdik; fiş cüzdanımda, cüzdan annemde." → +fact_mazeret, +ev_fis, AR+50.
+    - **"Kendisi":** Yumuşak "Sigara bile içmem." (+fact_sigara_yok) / Sert "Annemin ilaç borcu var…" (+fact_borc).
+  - PRESENT "Çamurda 42 numara bot izi" {clue_iz42, en az 5 dk}:
+    - güven ≥40 → AR+200, güven +6, +fact_murat_reveal, suspect_murat; tasarımdaki "39'um ben… Murat abi o gece Depo 3'teydi…" cevabı; G.
+    - güven <40 → 0, B: "Güveni düşük müvekkil sakladığını açmaz."
+  - "Görüşmeyi bitir" → INV_HUB.
+- **INV_ARAMA · SCENE** ("Depo Sokağı · 13 Mart olay yeri fotoğrafları", büyüteç 6):
+  - lamba → AR+40, +clue_ampul.
+  - kamera → AR+40, +clue_kablo ("temiz kesilmiş, üstü bantlanmış").
+  - iz → AR+60, +clue_iz42 ("ölçekli fotoğrafta 28,5 cm (~42 no)").
+  - çöp → AR+40, +clue_izmarit ("Emanet No. 3, incelenmemiş").
+  - Boş alan → büyüteç −1, AR−10.
+  - Hak bitince veya butonla → INV_HUB.
+- **INV_INCELEME · DOCUMENT** (zabıt kâtibi Zeynep Kılıç'ın önünde; 8 deneme hakkı):
+  - UV × Selin → DA+150, +clue_uv_silinti.
+  - Büyüteç × Kerem → DA+100, +clue_kerem_depo1.
+  - Karşılaştır × Murat → DA+150, +clue_murat_42, +ev_isg_zimmet.
+  - İz tozu × herhangi bir satır → DA−20, B: "Emanetteki delile toz uygulanmaz; bilirkişi, CMK 63."
+  - Diğer tüm eşleşmeler → DA−20.
+- **INV_CIKARIM · DEDUCTION** (0 EP): geçerli çiftler DA+300; diğer her çift DA−50 ("Bu ikisi birbirini açıklamıyor.").
+- **INV_BEL · CHOICE** (belediye arıza kaydı):
+  - "Avukat sıfatıyla belediyeye başvur (Av.K. 2/3)" → AR+20, UB+20; kayıt ertesi günün sonunda gelir (3. gün seçilirse duruşmada); G.
+  - "Mahkemeden müzekkere (CMK 177)" → UB+20; kayıt C_00'da gelir, çıkarım tahtasına yetişmez; G.
+  - "Bilgi edinme başvurusu (4982)" → 0, N: "15 iş günü; yetişmez."
+- **INV_HTS · CHOICE** (telefon kayıtları; öğretici yol ayrımı):
+  - "Operatördeki tanıdıktan Selin'in kaydını al" → UB−100, etik +1, +ev_hts_illegal; B: "TCK 136; delil olamaz (Anayasa 38/6, CMK 206/2-a, 217/2); disiplin."
+  - "Mahkemeden tanığın HTS'sini iste" → 0, N: "CMK 135/6 yalnızca şüpheli ve sanığın iletişimini kapsar."
+  - "Murat hakkında suç duyurusu + iletişim tespiti talebi (CMK 158, 135/6)":
+    - {suspect_murat ∨ clue_murat_42} → UB+40, AR+20, sucduyurusu_murat; ev_hts C_00'da gelir; G.
+    - Alt seçim "Selin'i de ekle (TCK 272/267, çizelge)" {clue_uv_silinti} → HB+20, sucduyurusu_selin.
+    - Dayanak yoksa → UB−40, B: "Somut dayanaksız; iftira riski (TCK 267)."
+  - "Kerem'in kendi HTS'si" → 0, N: "Aynı baz istasyonu; ayırt edici değil."
+- **INV_DIL · CHOICE** (CMK 177 delil dilekçesi; 3 hak; yararlı her seçim UB+20; seçimler geri alınamaz; "Dilekçeyi ver" en az 1 seçimle döner):
+  - Hüseyin'in tanık olarak çağrılması → huseyin_summoned.
+  - İzmarit DNA incelemesi (CMK 78–79) {clue_izmarit} → ev_dna C_00'da gelir.
+  - Bilirkişinin duruşmada dinlenmesi (CMK 68/1) → bilirkisi_present.
+  - Kamera/kablo bilirkişi incelemesi {clue_kablo} → ev_kamera C_00'da gelir.
+  - Belediyeye müzekkere {arıza kaydı henüz yoksa}.
+  - "Tanık Selin'in HTS'si" ve "Keşif" → 0, N (ikisi de reddedilir).
+- **Tanık ziyaretleri:**
+  - **INV_T_HUS:** "22.30–23.15 yanımdaydı; rulo kopyası kasada." → AR+40, +clue_huseyin.
+    - "Duruşmaya gel; tanık bildir (CMK 179)" → UB+20, huseyin_will_attend, G.
+    - "Yazılı beyan yeter" → 0, N: "CMK 210/1: duruşmada dinlenmeli."
+  - **INV_T_SEL:**
+    - "Görüşme iste" → 0, N: "Tanık mahkeme dışında görüşmeye zorlanamaz."
+    - "Baskı yap" → UB−100, etik +1, selin_pressured (duruşmaya ♥4 ile başlanır); B: "TCK 277."
+  - **INV_T_MUR:** Murat yalan söyler ("22.30'da kilitledim…") → SS−50, B: "Olası faili, delil güvenceye alınmadan uyardın."
+
+**2. Celse** (başlangıç ♥5, selin_pressured ise ♥4; İk 2)
+- **C_00 · STAGE — açılış (CMK 191/1–2):** "Sanık bağsız alındı; tanıklar salondan çıkarıldı; ara karar cevapları okundu: [gelenler / ret gerekçeleri]."
+- **C_01 · OBJECTION L1 (CMK 191/3-b, 226/1).** Başkan, eylemin 142/2-d kapsamında da değerlendirilebileceği için ek savunma hakkını hatırlatır.
+  - "Ek savunma için süre iste (226/3)" → UB+50, isabet; arada güven <50 ise güven +10; G.
+  - "Devam" → 0, N.
+  - "İtiraz: iddianameye bağlısınız" → UB−50, ♥−1, İk−1; B: "CMK 225/2."
+- **C_02 · DIALOGUE — sanığın ek savunması** (Kerem'e tavsiye):
+  - "Reddet; 22.30–23.15 çay ocağı; 19.30 yardım; anahtar herkeste" → SS+100, G. İstisna: güven <40 ve ara verilmediyse Kerem patlar → ♥−1, İk−1.
+  - "Susma hakkı (CMK 147/1-e)" → 0, N: "Mazereti kendi ağzından anlatma fırsatı kaçtı."
+  - "Murat'ı suçlasın" → {fact_murat_reveal} SS+25, N; değilse SS−50, ♥−1, B: "TCK 267 riski."
+  - "Suçu kabul etsin; 168 + 62 isteyelim" → C_02D. Kerem: "Ama ben yapmadım…"
+    - "Israr et" → false_confession, SS−300, İk−2, etik +1; B: "Av.K. 34; sahte ikrar TCK 270; 168 tam tazmin ister."
+    - "Geri adım at" → SS−50, güven −10; B.
+- **C_03 · OBJECTION L2 — avukatın ek savunması:**
+  - "142/2-d oluşmadı: işverence verilen anahtar 'haksız yere elde bulundurulan' değil; kullanıldığına delil yok" → HB+150, arg_142_2d, isabet; G.
+  - "142/1-e uygulansın" veya "TCK 145" → HB−50, İk−1; B.
+  - "Diyecek yok" → 0.
+- **C_04 · STAGE — Selin** (kimlik, uyarı, yemin; CMK 58, 53–55):
+  - {sucduyurusu_selin} "CMK 50/1-c: yeminsiz dinlensin" → UB+25, G.
+  - Ardından Selin dört ifadesini kesintisiz verir (CMK 59/1).
+- **C_05 · OBJECTION L3.** Savcı: "Gördüğünüz kişi sanıktı, değil mi?"
+  - "İtiraz: telkin edici soru (CMK 201/1)" → UB+100, isabet; G.
+  - "Sessiz kal" → İk−1, N.
+  - "Tanık yalan söylüyor!" → UB−50, ♥−1; B.
+- **C_06 · TESTIMONY** (ayrıntı A.5); "Çapraz sorguyu bitir" → C_07.
+  - **C_06H** (doğru HTS sunumundan sonra; başkan CMK 48'i hatırlatır):
+    - "TCK 274'ün hatırlatılmasını talep et" → HB+50, selin_cozuldu. Selin: "Murat… nişanlım. 'Kerem'di de' dedi. Çizelgeyi ben düzelttim." G.
+    - "Tehdit et" → UB−50, ♥−1; B.
+    - "Geri çek" → 0.
+- **C_07 · STAGE — Hüseyin** {huseyin_will_attend ∨ huseyin_summoned}:
+  - "Fişle sor: kasanızdan mı, saat?" → SO+100 (ded_mazeret varsa +50 daha), İk+1 (ded_mazeret varsa +2), huseyin_testified; G.
+  - "İyi çocuk mudur?" → huseyin_testified, N: "Karakter tanıklığı mazereti ispatlamaz."
+  - Koşul sağlanmazsa: "Mazeret tanığı dinlenmedi."
+- **C_08 · OBJECTION L4 — anahtar + teslim tutanağı** ("Diyeceğiniz?", CMK 215):
+  - "Hukuka aykırı arama: görev süresi dışında (5188 md. 9/1), yetki aşımı (md. 7/a yalnızca cihazla giriş kontrolü), karar/emir yok (CMK 119/1), rıza yok → Anayasa 38/6, CMK 206/2-a, 217/2, 230/1-b" → UB+150 (fact_rizasiz_arama yoksa 100), key_excluded, İk+1, isabet; G.
+  - "İspat gücü yok" → DA+75; G.
+  - "CMK 118 gece araması" → UB−50, ♥−1; B: "Arama 08.05'te."
+  - "Yok" → 0; B.
+- **C_09 · OBJECTION L5 — parmak izi raporu:**
+  - {bilirkisi_present} "Bilirkişiye: iz zamanı belirlenebilir mi?" → SO+50, DA+100, fp_neutralized, İk+1, isabet. Dr. Kaan Öz: "Hayır."
+  - {bilirkişi yoksa} "Çalışan; zaman belirsiz; 19.30 taşıma" → DA+100 (fact_19_30 varsa +50), fp_neutralized, İk+1, isabet.
+  - "Hukuka aykırı alındı" → UB−50, ♥−1; B: "CMK 81/1 savcı emriyle alındı."
+  - "Yeni bilirkişi" → 0, N.
+  - "Yok" → 0; B.
+- **C_10 · OBJECTION L6 — savcının karşı delili** (Kerem'in müdafisiz kolluk ifadesi):
+  - "CMK 148/4 + bağlam (19.30, 23.00 değil)" → UB+100, isabet; G.
+  - {fact_19_30} "Kerem 19.30'u açıklasın" → SS+75, isabet; G.
+  - "İşkence" → UB−50, ♥−1; B.
+  - "Yok" → 0.
+  - Ardından otomatik okuma: ev_dna ve ev_kamera her biri İk+1.
+- **C_11 · STAGE — mütalaa (CMK 216/1).** Mütalaa iki varyantlıdır: {selin_cozuldu ∧ ded_iz_murat} ise "beraat + suç duyurusu", değilse "142/2-d, h, 143, 53; tutukluluğun devamı". Ardından **OBJECTION L7 — cevap hakkı (216/2):**
+  - "Hukuka aykırı delil hükme esas alınamaz (217/2, 230/1-b)" → UB+100, isabet. Beraat varyantında bunun yerine "Katılıyoruz; dayanak 223/2-b olmalı" → HB+100.
+  - "Cevap yok" → 0.
+  - "Mütalaa tutanaktan çıkarılsın" → −50, ♥−1; B.
+- **C_12 · CHOICE — esas savunma.** Taban SS puanı; seçilen savunma stratejiyle uyumluysa çarpan uygulanır (Masumiyet→A, Usul→B, İndirim→C).
+  - A "Gerçek fail başkası: 223/2-b + suç duyurusu": {contra_s4_hts ∧ ded_iz_murat ∧ (mazeret ∨ contra_s2)} → +200, İk+1, murat_theory; değilse −100, İk−1.
+  - B "Şüpheden sanık yararlanır: 223/2-e": {en az 2 bulgu ∧ (contra_s2 ∨ alibi)} → +200, İk+1; değilse −100.
+  - C "Öncelikle beraat; aksi halde 142/2-d düşsün, alt sınır, TCK 62 (terditli)" → +150, closing_lehe.
+  - D "Etkin pişmanlık + HAGB" → HB−150, İk−2; B: "168 failin tazminini, HAGB ≤2 yıl ceza ve tam tazmini ister; masumiyetle çelişir."
+  - E "Duygusal saldırı" → SS−50, İk−1; B.
+- **C_13 · CHOICE — son söz (CMK 216/3):**
+  - "Ben yapmadım. Adaletinize güveniyorum." → SS+25; G.
+  - "Ağlayarak merhamet" → 0, N: "TCK 62/2: şeklî tutum indirim nedeni değildir."
+  - "Selin'e öfke" → SS−25, İk−1; B.
+  - {false_confession} ise son söz otomatik "Pişmanım." olur.
+- **C_14 · DECISION** ("Hüküm fıkrası ayakta dinlenir", CMK 231/4) → A.6.
+- **C_INT_COKUS · STORY** (♥ ≤ 0 olunca global kesinti): "Heyet nezdinde savunmanın inandırıcılığı kalmadı." → cokus → kısa son söz → C_14.
+
+### A.3 Değişkenler
+
+| Anahtar | Tip | Başlangıç | Aralık | Gösterim |
+|---|---|---|---|---|
+| strategy | enum MASUMIYET/USUL/INDIRIM | – | – | Karar başlığı |
+| day / ap | int | 1 / 3 | 1–3 / 0–3 | HUD sayaç + pips |
+| trust | int | 62 | 0–100 | percentBar |
+| min | int | 14 (ikinci ziyarette 8) | 0–14 | minutes |
+| tone | enum | soft | – | UI toggle |
+| taps / exam_left / slots | int | 6 / 8 / 3 | 0'a kadar | counter |
+| cred | int | 5 | 0–5 | hearts |
+| pers | int | 2 | 0–10 | meter10 |
+| wrong, legal_hits, ethics, visits | int | 0 | – | gizli |
+
+- **Bayraklar (bool):**
+  - Görüşme bilgileri: fact_gece, fact_19_30, fact_murat_cagirdi, fact_anahtar_ortak, fact_rizasiz_arama, hint_selin_offduty, fact_mazeret, fact_sigara_yok, fact_borc, fact_murat_reveal, fact_kerem_39, suspect_murat.
+  - Talepler ve tanıklar: huseyin_will_attend, huseyin_summoned, huseyin_testified, bilirkisi_present, sucduyurusu_murat, sucduyurusu_selin, illegal_hts, selin_pressured.
+  - Duruşma: arg_142_2d, contra_s1, contra_s2, contra_s4_kolluk, contra_s4_mazeret, contra_s4_hts, press_{s1,s2,s3a,s3b,s4a,s4b}, selin_cozuldu, key_excluded, fp_neutralized, illegal_presented, false_confession, murat_theory, closing_lehe, cokus.
+- **Türetilmiş değerler:**
+  - `alibi` = ded_mazeret ∧ huseyin_testified.
+  - `findings` = şu bulgulardan doğru olanların sayısı: contra_s1, contra_s2, herhangi bir S4 çelişkisi, alibi, key_excluded, fp_neutralized.
+
+### A.4 Delil ve ipucu kataloğu
+
+| id | Ad | Tür / tip | İkon | Keşif | Hukuki not | Sunulabilir |
+|---|---|---|---|---|---|---|
+| ev_anahtar | Depo anahtarı | EV / FİZİKSEL | key | başlangıç | rızasız, yetkisiz arama → dışlanabilir | evet (ifadede hep yanlış) |
+| ev_teslim_tutanagi | Teslim tutanağı 08.20 | EV / BELGE | document | başlangıç | arama kararı/tutanağı yok | hayır |
+| ev_parmak_izi_raporu | Parmak izi raporu | EV / ADLİ_RAPOR | fingerprint | başlangıç | CMK 81/1'e uygun; iz zamanlanamaz | evet |
+| ev_selin_kolluk | Selin'in kolluk ifadesi | EV / TANIK_İFADESİ | document | başlangıç | CMK 212/2 | S2 ✓, S4 kısmi |
+| ev_kerem_kolluk | Kerem'in kolluk ifadesi | EV / BELGE | document | başlangıç | CMK 148/4 | hayır |
+| ev_vardiya | Vardiya çizelgesi (aslı) | EV / BELGE | document | başlangıç; UV ile güçlenir | CMK 153/4 | S1 (UV ile) |
+| ev_fis | Çay ocağı fişi 22.57 | EV / BELGE | receipt | görüşme: "Hüseyin abi" | Hüseyin doğrular | çıkarım girdisi |
+| ev_ariza_kaydi | Belediye arıza kaydı (14 no, 9–14 Mart) | EV / BELGE | bulb | INV_BEL / dilekçe | Av.K. 2/3 | S2 ✓ |
+| ev_kamera | DVR + kablo raporu | EV / KAMERA_KAYDI | camera | dilekçe {clue_kablo} | bilirkişi (CMK 63) | duruşmada okunur |
+| ev_hts | Murat↔Selin 23.05, 6 dk | EV / TELEFON_KAYDI | phone | suç duyurusu → C_00 | CMK 135/6 hâkim kararı | S4 ✓ (S4b'den sonra) |
+| ev_hts_illegal | Gayriresmî döküm | EV / TELEFON_KAYDI | phone (kırmızı) | INV_HTS ilk seçenek | TCK 136; dışlanır | sunulursa ♥−2 |
+| ev_dna | İzmarit DNA ≠ Kerem | EV / ADLİ_RAPOR | cigarette | dilekçe {clue_izmarit} | CMK 78–79 | duruşmada okunur |
+| ev_isg_zimmet | İSG zimmet listesi (Murat 42, Kerem 39) | EV / BELGE | boot | Karşılaştır × Murat | – | – |
+| clue_ampul, clue_kablo, clue_iz42, clue_izmarit | Fotoğraf bulguları | CLUE / FOTOĞRAF | bulb, camera, boot, cigarette | INV_ARAMA | – | hayır |
+| clue_uv_silinti, clue_kerem_depo1, clue_murat_42 | Belge bulguları | CLUE / BELGE | document, boot | INV_INCELEME | – | hayır |
+| clue_huseyin | "23.15'e kadar yanımdaydı" | CLUE / TANIK_İFADESİ | receipt | INV_T_HUS | duruşmada dinlenmeli | hayır |
+
+Yeni ikonlar (tasarımın stroke stilinde): fingerprint, boot, cigarette, magnifier, uv, dust, compare.
+
+### A.5 Çıkarımlar ve tanık ifadeleri
+- **Çıkarımlar** (her biri DA+300; diğer her çift DA−50):
+  - ampul + arıza → **ded_lamba** "Lamba o gece yanmıyordu" (teşhisi çürütür).
+  - iz42 + murat42 → **ded_iz_murat** "İz Murat Koç'a ait olabilir".
+  - fiş + Hüseyin → **ded_mazeret** "Kerem'in mazereti doğrulandı".
+  - Çeldirici kartlar: kablo, izmarit, uv_silinti, kerem_depo1.
+- **Selin Kaya'nın ifadeleri:**
+  - BASTIR SO puanı verir.
+  - Doğru sunum: SO+300, İk+2.
+  - Yanlış sunum: −150 (HATALI_DELIL), ♥−1, İk−1.
+  - Kısmi sunum: SO+100; ifade açık kalır.
+  - **S1** "O gece 22.00–06.00 vardiyasındaydım. Depo kapısını her saat kontrol ederim."
+    - BASTIR (+25): "23.00'te neredeydiniz?" → "Depo 3'ün arka sokağında, devriyede."
+    - Vurgu, bastırıldıysa ya da UV ipucu bulunduysa açılır.
+    - ✓ ev_vardiya, yalnızca clue_uv_silinti varsa: "…18–24'teydim, ana kapıda." Ardından üye hâkim (CMK 201/2): "Ana kapıdan arka sokak görünür mü?" → "…Görünmez."
+    - UV ipucu olmadan ev_vardiya sunmak yanlış sayılır: "Çizelgede de 22–06 yazıyor."
+  - **S2** "Saat 23.00 gibi depodan çıkan birini gördüm. ‹Sokak lambası yanıyordu›, yüzünü net seçtim."
+    - Vurgu hep açık. BASTIR (+25): "Yirmi metre; 14 numaralı direk."
+    - ✓ ev_ariza_kaydi, ded_lamba ya da ev_selin_kolluk (CMK 212/2 ile okunur): "…Belki yanmıyordu. Ama montunu gördüm!"
+  - **S3** "Turuncu bir mont giyiyordu, elinde büyük bir çuval vardı."
+    - BASTIR A (+50, İk+1): "Firmanın iş montu; herkes giyer, Murat da Kerem de."
+    - BASTIR B (+25): "40 top bir çuvala sığar mı?" → "Belki bir araç vardı."
+    - Bu ifadede hiçbir sunum kabul edilmez ("Çelişki yok; bastırmak yeterliydi.").
+  - **S4** "Ertesi sabah Kerem'i görünce hemen tanıdım. Aynı adamdı."
+    - BASTIR A (+50, İk+1): "Murat Koç 'Kerem'di' dedi; baktım, oydu."
+    - BASTIR B (+25, A'dan sonra): "Murat'ı ne kadar tanırsınız?" → "‹Pek tanımam›." Bu yeni ve vurgulu bir satır ekler.
+    - Kısmi kabul: ev_selin_kolluk (BASTIR A'dan sonra) veya ded_mazeret.
+    - ✓ ev_hts, BASTIR B'den sonra → C_06H.
+    - ev_hts_illegal sunulursa: savcı itiraz eder, mahkeme dışlar (CMK 206/2-a) → −150, UB−150, ♥−2, illegal_presented.
+
+### A.6 Sonuçlar (öncelik sırasıyla; İKRAR ve varsayılan dışındakiler ayrıca ¬cokus ister)
+1. **İKRAR** {false_confession}
+   - Damga MAHKÛMİYET, ceza **6 yıl 3 ay**.
+   - Hüküm: "…TCK 142/2-h uyarınca alt sınırdan 5 YIL; TCK 143 ile 7 YIL 6 AY; TCK 62/1 ile 6 YIL 3 AY HAPİS; zarar giderilmediğinden TCK 168/2 uygulanmasına yer olmadığına; TCK 53; TCK 63 mahsup; tutukluluğun devamına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf (CMK 273/1)."
+   - Etik kartı: "Masum olduğunu söyleyen müvekkili suçu üstlenmeye yönlendirdin (Av.K. md. 34; TBB Meslek Kuralları). Gerçeğe aykırı ikrar TCK 270 kapsamında ayrı suç olabilir."
+2. **BERAAT_B — CMK 223/2-b**
+   - Koşul: contra_s4_hts ∧ ded_iz_murat ∧ murat_theory ∧ alibi ∧ contra_s2 ∧ ¬illegal_presented ∧ pers ≥8 ∧ TOPLAM ≥3.600.
+   - "Ceza yok · Tahliye"; başlık "TÜRK MİLLETİ ADINA" (CMK 232/1).
+   - Hüküm: "Sanık Kerem Aydın'ın üzerine atılı suçu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; başka suçtan tutuklu değilse derhal TAHLİYESİNE; CMK 141/1-e uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142/2 ile 6384 sayılı Kanuna göre yapılabileceğinin bildirilmesine (CMK 231/3); karar ve dosya örneklerinin Murat Koç ve Selin Kaya hakkındaki soruşturmaya eklenmek üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; istinaf yolu açık olmak üzere."
+   - Gerekçe: fiş + yeminli tanık ile mazeret; arıza kaydı, değiştirilmiş çizelge ve CMK 135/6 kayıtlarıyla teşhisin çöküşü; bot izinin Murat'ın zimmetli botuyla örtüşmesi; anahtarın hukuka aykırı aramayla elde edilmiş olması (Anayasa 38/6, CMK 206/2-a, 217/2, 230/1-b); parmak izinin 19.30'daki taşıma ile açıklanması → suçun sanık tarafından işlenmediği sabit.
+3. **BERAAT_E — CMK 223/2-e**
+   - Koşul: pers ≥6 ∧ (contra_s2 ∨ alibi) ∧ findings ≥2 ∧ (TOPLAM ≥3.200 ∨ (alibi ∧ contra_s2 ∧ TOPLAM ≥2.600)).
+   - Hüküm: tasarımdaki metin doğru ("…işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE…"), tahliye, tazminat bildirimi ve istinaf eklenir.
+   - Gerekçe koşullu parçalardan oluşur: teşhisin [arıza kaydı | önceki beyan] karşısında güvenilirliğini yitirmesi; [mazeretin desteklenmesi]; anahtarın tüm vardiyada bulunması [ve hukuka aykırı aramayla elde edilmesi]; parmak izinin tek başına irtibat kurmaması; kesin ve inandırıcı delil yokluğu; Anayasa 38/4, AİHS 6/2, "şüpheden sanık yararlanır".
+4. **İNDİRİM** {arg_142_2d ∧ TOPLAM ≥2.000}
+   - Ceza **6 yıl 3 ay**.
+   - Hüküm: "TCK 142/2-h uyarınca takdiren alt sınırdan 5 YIL; gece vakti nedeniyle TCK 143 ile 7 YIL 6 AY; … TCK 62/1 ile 6 YIL 3 AY HAPİS; işverence teslim edilen anahtar 'haksız yere elde bulundurulan' nitelikte olmadığından TCK 142/2-d'nin uygulanmasına yer olmadığına; TCK 53; TCK 63; cezanın süresi nedeniyle HAGB (CMK 231/5) ve erteleme (TCK 51/1) koşulları bulunmadığına; tutukluluğun devamına; istinaf."
+5. **MAHKÛMİYET** (varsayılan), ceza **7 yıl 6 ay**:
+   - Varyant A {¬arg_142_2d}: "142/2-d ve h birlikte, zararın ağırlığı gözetilerek alt sınırdan uzaklaşılarak 6 YIL; TCK 143 ile 9 YIL; TCK 62/1 ile 7 YIL 6 AY HAPİS; TCK 53; TCK 63; tutukluluğun devamına; istinaf."
+   - Varyant B {arg_142_2d ∧ TOPLAM <2.000}: yalnızca 142/2-h ile aynı hesap; 142/2-d açıkça düşer.
+   - ÇÖKÜŞ varyantı: A metni + çöküş notu.
+
+**XP** = ⌊TOPLAM/10 × f⌋. f: BERAAT_B 1,2 · BERAAT_E 1,0 · İNDİRİM 0,85 · MAHKÛMİYET 0,6 · ÇÖKÜŞ 0,3 · İKRAR 0. Etik > 0 ise XP yarıya iner.
+
+### A.7 Golden path'ler (otomatik testler; H = hub eylemi)
+- **G1 → BERAAT_B** (Masumiyet)
+  - Brifing: BR_01 A.
+  - Gün 1: Arama (4 nokta, ıska yok) · İnceleme: UV×Selin, Büyüteç×Kerem, Karşılaştır×Murat · Görüşme (yumuşak): Anahtar, Hüseyin, O gece, ardından bot izini göster.
+  - Gün 2: Belediye A · Hüseyin + tanık bildir · HTS: suç duyurusu + Selin.
+  - Gün 3: Çıkarım (3 tarif) · Dilekçe: DNA, bilirkişi, kamera → duruşma.
+  - Duruşma: L1 A · ek savunma A · L2 A · 50/1-c · L3 A · S1 bastır + vardiya · S2 bastır + ded_lamba · S3a, S3b · S4a, S4b + HTS · C_06H A · Hüseyin A · L4 A · L5 bilirkişi · L6 A · L7 A · esas savunma A · son söz A.
+  - Beklenen: **TOPLAM 5.130**, delil 6/6, isabet 7/7, ikna 10, **XP 615**.
+- **G2 → BERAAT_E** (Usul)
+  - Gün 1: Görüşme (yumuşak, 4 konu) · Arama: lamba, kamera, 1 ıska, çöp · İnceleme: UV×Selin, Büyüteç×Kerem, İz tozu×Selin.
+  - Gün 2: Belediye A · Hüseyin + bildir · Dilekçe: bilirkişi, DNA, kamera.
+  - Gün 3: Çıkarım: lamba + mazeret + 1 yanlış çift.
+  - Duruşma: L1–L3 A · S1 vardiya · S2 ded_lamba · S3'te anahtar (yanlış) · S4a + ded_mazeret (kısmi) · Hüseyin A · L4–L7 A · esas savunma B.
+  - Beklenen: **TOPLAM 3.645**, ♥4, **XP 364**.
+- **G3 → İNDİRİM** (İndirim)
+  - Akış: zayıf soruşturma, Murat ziyareti, yanlış sunumlar.
+  - Duruşma: L2 A (arg_142_2d) · L3 B · S2'de fiş (yanlış) · S4 kolluk (kısmi) · Hüseyin yok · L4 B · L5 bilirkişi · L6 "Kerem açıklasın" · L7 A · esas savunma C.
+  - Beklenen: **TOPLAM 2.010**, ikna 4, **XP 170**.
+- **G4 → MAHKÛMİYET A** (Masumiyet)
+  - Akış: sert görüşme (güven 38), zayıf arama/inceleme.
+  - Duruşma: L1 B · ek savunma B · L2 D · L3 B · iki yanlış sunum · L4 D · L5 D · L6 C · L7 B · desteksiz esas savunma A.
+  - Beklenen: **TOPLAM 100**, ♥3, **XP 6**.
+- **G5 → İKRAR** (İndirim)
+  - Akış: makul soruşturma; ek savunmada D → "ısrar et"; esas savunma C.
+  - Beklenen: TOPLAM 2.235 → **İKRAR**, XP 0, etik kartı gösterilir.
+- **W → ÇÖKÜŞ**
+  - Akış: Selin'e baskı (♥4 ile başlar) · operatördeki tanıdık · sert görüşmeler · çok ıska.
+  - Duruşma: L1 C · ek savunma C · L3 C · S4a, S4b + ev_hts_illegal (♥0) → C_INT_COKUS.
+  - Beklenen: TOPLAM −635 (0 gösterilir), XP 0.
+
+### A.8 Rapor metinleri
+- **Kaçırılanlar** (`report.hints`):
+  - clue_iz42: "Arka kapıdan sokağa uzanan çamurlu bot izini kaçırdın; ölçekli fotoğraf numarayı veriyordu."
+  - clue_uv_silinti: "Selin satırına UV tutmadın; saat sonradan değiştirilmişti."
+  - clue_murat_42: "Çizelgeyi İSG zimmetiyle karşılaştırmadın; Murat'ın botu 42'ydi."
+  - ev_ariza_kaydi: "14 no'lu direğin arıza kaydını avukat olarak doğrudan isteyebilirdin (Av.K. 2/3)."
+  - ev_fis / huseyin_testified: "Mazeret tanığını dilekçeyle bildirmedin ya da duruşmaya getirmedin (CMK 177–179); yazılı beyan yetmez (CMK 210/1)."
+  - ev_hts: "Gerçek faile giden yol: Murat hakkında suç duyurusu ve CMK 135/6 tespit talebi."
+  - ev_dna / ev_kamera: "Emanetteki izmarit (CMK 78–79) ve kesik kablo bilirkişiye gönderilmeliydi."
+  - fact_rizasiz_arama / fact_19_30: "Aramanın rızasız olduğunu ve parmak izinin masum açıklamasını Kerem anlatacaktı; sormadın."
+  - suspect_murat: "Bot izini Kerem'e göstermedin; sakladığı bilgi açığa çıkmadı."
+- **Alternatif yollar** (ulaşılamayan her sonuç için):
+  - 223/2-b: "Mazeret + çöken teşhis + yasal HTS ile Selin–Murat bağlantısını birleştir; esas savunmada gerçek faili göster."
+  - 223/2-e: "S2'yi çürüt ya da mazereti duruşmada ispatla; anahtarın hukuka aykırı aramayla elde edildiğini ileri sür."
+  - İNDİRİM: "Ek savunmada 142/2-d'nin unsurlarının oluşmadığını savun."
+  - İKRAR: "Terditli savunma (önce beraat, aksi halde lehe hükümler) meşru yoldur; sahte ikrar asla."
+  - ÇÖKÜŞ: "Dayanaksız itiraz ve yanlış delil güvenilirliği eritir; hukuka aykırı delil iki kalp götürür."
+- **Beceri tavsiyeleri** (kazanılan ÷ maksimum: <%40 zayıf, %40–75 orta, >%75 güçlü):
+  - HB: "142/2-d ve h, 143 ve 62 hesabını tekrar et." / güçlüyse: "Vasıf ve ceza hesabında isabetlisin."
+  - DA: "Her delilin neyi çürüttüğünü sor; ipuçlarını tahtada birleştir."
+  - AR: "Fotoğrafları ve resmî kayıtları sistematik tara."
+  - SO: "Önce bastır, sonra sun; S3 ve S4 baskıyla açılır."
+  - SS: "Stratejinle uyumlu, delille desteklenen bir esas savunma kur."
+  - UB: "Arama yetkisi (CMK 116–119; 5188 md. 7 ve 9), delil yasakları (Anayasa 38/6; CMK 206/2-a, 217/2) ve soru itirazı (CMK 201)."
+
+### A.9 Hukuki inceleme listesi ve tasarım düzeltmeleri
+**İnceleme gerektirenler** (önem sırasıyla):
+1. Görev süresi dışındaki özel güvenlik görevlisinin rızaya aykırı el aramasında delil yasağının uygulanması (5188 md. 7/a + 9/1).
+2. Tanık HTS'sinin CMK 135/6 dışında kalması; Murat'ın şüpheli olduğu ayrı soruşturmadaki HTS'nin bu davada kullanılabilmesi.
+3. İşverenin verdiği anahtarın 142/2-d dışında kalması (Yargıtay uygulaması); iki bentle temel cezanın alt sınırdan uzaklaşması.
+4. Görevli mahkeme (5235 md. 12; 143 dahil) ve heyetin 3 hâkimden oluşması (tasarımda 1 üye var).
+5. 2. celsede 142/2-d için ek savunma (CMK 226/1, 226/3).
+6. Sanığın kendi sahte ikrarında TCK 270; avukatın azmettirici olarak sorumluluğu (TCK 38); ikrarın mazeretle çeliştiği durumda mahkûmiyetin gerçekçiliği.
+7. Savunmanın talebiyle TCK 274/2 hatırlatması (CMK 48 ile birlikte).
+8. İlgili soruşturmada şüpheli hâline gelmiş tanığın CMK 50/1-c ile yeminsiz dinlenmesi.
+9. Teşhis usulü: mevzuatta düzenlenmemiş; telkinli yüzleştirme CMK 217 ve içtihat çerçevesinde değerlendirilir.
+10. Düşük riskli noktalar:
+    - CMK 153/4 ile emanete erişim ve kâtip önünde UV kullanımı;
+    - 5275 md. 59/2 (görüş saatleri);
+    - "telkin edici soru" itirazı (CMK 201/1);
+    - 4982 md. 11'deki 15 iş günü süresi;
+    - 2026 tarihli 7589 sayılı Kanun'un CMK 231 metnine etkisi (ceza 2 yılın üstünde olduğu için bu davayı etkilemez).
+
+**Tasarımdaki hukuki rakam/metin düzeltmeleri** (UI aynı kalır, yalnızca veri değişir):
+
+| # | Tasarımda | Sorun | Düzeltme |
+|---|---|---|---|
+| 1 | Davalar: "TCK 142 · 3–7 yıl" | 3–7 yıl ya bugünkü 142/1'in ya da 2014 öncesi 142/2'nin aralığı | "TCK 142/2-h, 143 · 7,5–15 yıl" |
+| 2 | Dosya: "Savcılık talebi 5 yıl" | 143'ten sonraki alt sınırın altında; iddianame süre değil madde belirtir | "İddianame: 142/2-h, 143 (7 yıl 6 ay–15 yıl)" |
+| 3 | Ceza aralığı: "TALEP: 5 YIL", "Beraat / İndirim / HAGB / 3 yıl / 7 yıl" | HAGB ve erteleme ≤2 yıl ceza (CMK 231/5, TCK 51/1) ve tam tazmin (231/6-c) ister | "İSTEM: 142/2-h + 143"; etiketler "Beraat · TCK 62: 6y3a · 7,5 yıl · 15 yıl" |
+| 4 | İpucu: "etkin pişmanlık ve takdiri indirim" | TCK 168 failin tam tazminini ister; masum müvekkil için bu sahte ikrar demek | "Terditli: önce beraat; aksi halde 142/2-d'nin düşmesi, alt sınır, TCK 62" |
+| 5 | Karar İNDİRİM: "142/1 + 62 = 2 yıl 6 ay" | 142/1 bu olaya uymuyor ve 143 unutulmuş | "142/2-h 5 yıl → 143: 7 yıl 6 ay → 62: 6 yıl 3 ay" |
+| 6 | Karar MAHKÛMİYET: "142/1, 5 yıl" | Yanlış madde ve aralık; istinaf süresi yok | "142/2-d,h 6 yıl → 9 yıl → 62: 7 yıl 6 ay"; istinaf: tebliğden itibaren iki hafta (CMK 273/1) |
+| 7 | Karar BERAAT: "223/2-e" | Şüphe sonucu için doğru | 223/2-b varyantı eklenir; tahliye, tazminat bildirimi (CMK 141/1-e, 142/2–6384, 231/3) ve "TÜRK MİLLETİ ADINA" |
+| 8 | "Talep: 5 yıl › …" | 2. maddeyle aynı sorun | "İstem: 7,5–15 yıl › …" |
+| 9 | HTS kaynağı: "Operatör kaydı" | Operatör kayıtları yalnızca hâkim kararıyla verir | "Başsavcılık soruşturması, CMK 135/6 hâkim kararı · Murat↔Selin 23.05, 6 dk" |
+| 10 | Kamera: "22.40–23.30 kayıt dışı, kablo kesik" | Kesik kabloyla kayıt yeniden başlayamaz | "23.30'da bantla eklenmiş" eklenir |
+| 11 | Görüşme: "14 dk", süreyi gardiyan tutuyor | Avukat–müvekkil görüşmesi süresiz ve gizli (CMK 149/3, 154/1) | "Görüş salonunun kapanışına 14 dk" (5275 md. 59/2); gardiyan görür ama duymaz |
+| 12 | "Depo Sokağı 23.00": aylar sonra taze izmarit ve çamur izi | Sonraki bir keşifte gerçekçi değil | 13 Mart fotoğraf albümü; izmarit emanetten |
+| 13 | İz tozu, el konulmuş delil üzerinde | Avukat inceleyebilir, delile müdahale edemez | Ceza + bilirkişi geri bildirimi |
+| 14 | "Gece bekçisi" | Bekçi kamu görevlisidir (7245), yetkileri farklı | Başlık kalır; hukuki metinlerde "özel güvenlik görevlisi (5188)" |
+| 15 | İTİRAZ! / "Sayın Hâkim" | Türk usulünde belirli dayanaklar var | İTİRAZ!, CMK 201/1, 192/2, 215, 216/2'ye bağlanır; heyete "Sayın Başkan" |
+| 16 | Turuncu mont "eşleşiyor" | Yanıltıcı | Şirketin iş üniforması olduğu açıklanır |
+| 17 | ×1,5 tüm skora | Beyan edilen strateji hükmü değiştirirdi | Yalnızca stratejiyle uyumlu esas savunmanın SS puanına |
+
+Ana menüdeki "Müvekkilim masum, Sayın Hâkim!" balonu davadan bağımsız bir tasarım öğesi olduğu için korunur.
+
+---

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Müdafaa — Soruşturma</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&amp;family=VT323&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#e8b13c}a:hover{color:#ffd36b}
+.pxbtn{box-shadow: inset -4px -4px 0 rgba(0,0,0,.28), inset 4px 4px 0 rgba(255,255,255,.22), 4px 4px 0 #120d1c}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #1d1733; font-family: 'VT323', monospace; color: #efe8ff; display: flex; flex-direction: column">
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 20px 20px 10px">
+    <div style="display: flex; flex-direction: column">
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 12px; color: #b3a8d6; letter-spacing: 2px">DAVA #07 · SORUŞTURMA</span>
+      <h1 style="margin: 0; font-family: 'Pixelify Sans', monospace; font-size: 22px; font-weight: 700; color: #e8b13c">Olay Yeri: Depo</h1>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px">
+      <span style="font-family: 'Pixelify Sans', monospace; font-size: 12px; color: #b3a8d6">GÜN 2 / 3</span>
+      <span aria-label="Eylem puanı 2 / 3" style="display: flex; gap: 4px">
+        <span style="width: 14px; height: 14px; background: #e8b13c; border: 2px solid #120d1c"></span>
+        <span style="width: 14px; height: 14px; background: #e8b13c; border: 2px solid #120d1c"></span>
+        <span style="width: 14px; height: 14px; background: #3a2f66; border: 2px solid #120d1c"></span>
+      </span>
+    </div>
+  </header>
+
+  <div role="tablist" aria-label="Mekânlar" style="display: flex; gap: 6px; padding: 0 20px 10px">
+    <button type="button" role="tab" aria-selected="true" style="flex: 1; height: 44px; background: #e8b13c; color: #120d1c; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 12px; font-weight: 700">OLAY YERİ</button>
+    <button type="button" role="tab" aria-selected="false" style="flex: 1; height: 44px; background: #2b2350; color: #efe8ff; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 12px">CEZAEVİ</button>
+    <button type="button" role="tab" aria-selected="false" style="flex: 1; height: 44px; background: #2b2350; color: #efe8ff; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 12px">TANIKLAR</button>
+    <button type="button" role="tab" aria-selected="false" style="flex: 1; height: 44px; background: #2b2350; color: #efe8ff; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 12px">ARŞİV</button>
+  </div>
+
+  <section aria-label="Olay yeri sahnesi" style="position: relative; margin: 0 20px; height: 214px; background: #141026; border: 3px solid #120d1c; overflow: hidden">
+    <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 30px; height: 130px; background: #2b2350"></div>
+    <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 30px; height: 12px; background: #3a2f66"></div>
+    <div aria-hidden="true" style="position: absolute; left: 40px; top: 70px; width: 120px; height: 90px; background: #4a3f7a; border: 4px solid #120d1c; display: grid; grid-template-rows: repeat(6, minmax(0, 1fr)); gap: 3px; padding: 4px; box-sizing: border-box">
+      <div style="background: #3a2f66"></div><div style="background: #3a2f66"></div><div style="background: #3a2f66"></div><div style="background: #3a2f66"></div><div style="background: #3a2f66"></div><div style="background: #3a2f66"></div>
+    </div>
+    <div aria-hidden="true" style="position: absolute; left: 30px; top: 54px; width: 140px; height: 14px; background: #f4e7c5; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 9px; color: #120d1c; display: flex; align-items: center; justify-content: center; box-sizing: border-box">DEPO 3</div>
+    <div aria-hidden="true" style="position: absolute; left: 248px; top: 26px; width: 8px; height: 134px; background: #6e6394"></div>
+    <div aria-hidden="true" style="position: absolute; left: 232px; top: 20px; width: 40px; height: 12px; background: #6e6394; border: 3px solid #120d1c"></div>
+    <div aria-hidden="true" style="position: absolute; left: 240px; top: 34px; width: 24px; height: 8px; background: #3a3550"></div>
+    <div aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 160px; bottom: 0; background: #3b3550; border-top: 4px solid #120d1c"></div>
+    <div aria-hidden="true" style="position: absolute; left: 196px; top: 176px; width: 26px; height: 8px; background: #6e6394"></div>
+
+    <button type="button" aria-label="İncelenmemiş nokta: sokak lambası" style="position: absolute; left: 270px; top: 46px; width: 44px; height: 44px; background: transparent; border: 3px dashed #e8b13c; color: #e8b13c; font-family: 'Pixelify Sans', monospace; font-size: 22px; font-weight: 700; cursor: pointer">?</button>
+    <button type="button" aria-label="İncelenmemiş nokta: kamera" style="position: absolute; left: 300px; top: 160px; width: 44px; height: 44px; background: transparent; border: 3px dashed #e8b13c; color: #e8b13c; font-family: 'Pixelify Sans', monospace; font-size: 22px; font-weight: 700; cursor: pointer">?</button>
+    <button type="button" aria-label="İncelendi: depo kapısı" style="position: absolute; left: 78px; top: 100px; width: 44px; height: 44px; background: #2e7a4c; border: 3px solid #120d1c; color: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>
+    </button>
+    <div style="position: absolute; left: 8px; bottom: 8px; padding: 2px 8px; background: #120d1c; color: #b3a8d6; font-size: 17px">2 nokta incelenmedi</div>
+  </section>
+
+  <section aria-label="Toplanan deliller" style="padding: 12px 20px 0; display: flex; flex-direction: column; gap: 6px">
+    <div style="display: flex; justify-content: space-between; font-family: 'Pixelify Sans', monospace; font-size: 12px; letter-spacing: 1px">
+      <span style="color: #b3a8d6">DELİL ÇANTASI</span>
+      <span style="color: #e8b13c">3 / 6</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px">
+      <div title="Depo anahtarı" style="aspect-ratio: 1; background: #f4e7c5; border: 3px solid #120d1c; display: flex; align-items: center; justify-content: center; color: #120d1c">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" role="img" aria-label="Depo anahtarı"><circle cx="8" cy="12" r="4"/><path d="M12 12h9M18 12v3M21 12v3"/></svg>
+      </div>
+      <div title="Vardiya çizelgesi" style="aspect-ratio: 1; background: #f4e7c5; border: 3px solid #120d1c; display: flex; align-items: center; justify-content: center; color: #120d1c">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" role="img" aria-label="Vardiya çizelgesi"><path d="M6 3h9l4 4v14H6z"/><path d="M9 11h7M9 15h7M9 7h4"/></svg>
+      </div>
+      <div title="Çay ocağı fişi" style="aspect-ratio: 1; background: #f4e7c5; border: 3px solid #120d1c; display: flex; align-items: center; justify-content: center; color: #120d1c">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" role="img" aria-label="Çay ocağı fişi"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      </div>
+      <div style="aspect-ratio: 1; background: #2b2350; border: 3px dashed #4a3f7a; display: flex; align-items: center; justify-content: center; color: #6e6394; font-family: 'Pixelify Sans', monospace; font-size: 18px">?</div>
+      <div style="aspect-ratio: 1; background: #2b2350; border: 3px dashed #4a3f7a; display: flex; align-items: center; justify-content: center; color: #6e6394; font-family: 'Pixelify Sans', monospace; font-size: 18px">?</div>
+      <div style="aspect-ratio: 1; background: #2b2350; border: 3px dashed #4a3f7a; display: flex; align-items: center; justify-content: center; color: #6e6394; font-family: 'Pixelify Sans', monospace; font-size: 18px">?</div>
+    </div>
+  </section>
+
+  <section aria-label="Müvekkil görüşmesi" style="margin: 14px 20px 0; padding: 12px; background: #f4e7c5; color: #120d1c; border: 3px solid #120d1c; box-shadow: 4px 4px 0 #120d1c; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; gap: 10px; align-items: flex-start">
+      <div style="width: 56px; height: 64px; flex: none; background: #e2802f; border: 3px solid #120d1c; display: flex; align-items: flex-end; justify-content: center; overflow: hidden">
+        <dc-import name="Sprite" who="muvekkil" px="3" hint-size="48px,60px"></dc-import>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+        <span style="font-family: 'Pixelify Sans', monospace; font-size: 12px; color: #5b4a2a">KEREM · GÜVEN 62%</span>
+        <p style="margin: 0; font-size: 20px; line-height: 1.05">“O gece depoda değildim avukat bey. Çay ocağındaydım, Hüseyin abi de oradaydı!”</p>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <sc-for list="{{choices}}" as="c" hint-placeholder-count="3">
+        <button type="button" onClick="{{c.pick}}" style="{{c.style}}">
+          <span>{{c.text}}</span>
+          <span style="font-family: 'Pixelify Sans', monospace; font-size: 11px; color: {{c.tagColor}}">{{c.tag}}</span>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <div style="margin-top: auto; padding: 12px 20px 26px">
+    <a href="Durusma.dc.html" class="pxbtn" style="display: flex; justify-content: center; align-items: center; height: 56px; background: #d9503c; color: #ffffff; text-decoration: none; border: 3px solid #120d1c; font-family: 'Pixelify Sans', monospace; font-size: 18px; font-weight: 700">DURUŞMAYA GİT · 2. CELSE ›</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { picked: 1 };
+  }
+  renderVals() {
+    const list = [
+      { text: 'Hüseyin abi saati hatırlar mı?', tag: '+TANIK', tagColor: '#1d5a8a' },
+      { text: 'Anahtar neden senin çantandaydı?', tag: '+BİLGİ', tagColor: '#2e6a40' },
+      { text: 'Bana doğruyu söylemiyorsun.', tag: '−GÜVEN', tagColor: '#a4321f' }
+    ];
+    const base = "display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 44px; padding: 4px 10px; text-align: left; border: 3px solid #120d1c; font-family: 'VT323', monospace; font-size: 19px; color: #120d1c; cursor: pointer;";
+    const choices = list.map((c, i) => ({
+      ...c,
+      style: base + (this.state.picked === i ? ' background: #e8b13c;' : ' background: #ead9ad;'),
+      pick: () => this.setState({ picked: i })
+    }));
+    return { choices };
+  }
+}
+</script>
+</body>
+</html>

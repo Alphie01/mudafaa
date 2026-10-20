@@ -1,0 +1,161 @@
+{
+  "session": {
+    "id": "ses_fixture",
+    "caseId": "case_mini",
+    "caseNumber": 0,
+    "caseTitle": "Mini Dava",
+    "stateVersion": 3,
+    "status": "ACTIVE",
+    "mode": "NORMAL"
+  },
+  "header": {
+    "title": "Görüşme"
+  },
+  "hud": [
+    {
+      "id": "minutes",
+      "label": "Süre",
+      "widget": "minutes",
+      "value": 4,
+      "max": 6
+    },
+    {
+      "id": "trust",
+      "label": "Güven",
+      "widget": "percentBar",
+      "value": 54,
+      "max": 100
+    }
+  ],
+  "cast": {
+    "k": {
+      "name": "Kâmil Demir",
+      "shortLabel": "Kâmil",
+      "role": "CLIENT",
+      "accent": "#e2802f",
+      "sprite": {
+        "rows": [
+          "....k.kkkk.k....",
+          "...kHHkHHHkHk...",
+          "...kHHHHHHHHk...",
+          "...kHsssssHHk...",
+          "...kssssssssk...",
+          "...ksessssesk...",
+          "...kssssssssk...",
+          "...kssskksssk...",
+          "....kssssssk....",
+          ".....kkSSkk.....",
+          "...kkoowwookk...",
+          "..kooooOOooook..",
+          "..koOoooooooOk..",
+          "..koOoooooooOk..",
+          "..koOoooooooOk..",
+          "..kSooooooooSk..",
+          "...kddddddddk...",
+          "...kdddkkdddk...",
+          "...kdddkkdddk...",
+          "..kkkkk..kkkkk.."
+        ]
+      },
+      "expression": "normal"
+    }
+  },
+  "lines": [],
+  "choices": [
+    {
+      "id": "tp_night",
+      "kind": "TOPIC",
+      "label": "O gece",
+      "variants": [
+        {
+          "id": "soft",
+          "label": "Yumuşak"
+        },
+        {
+          "id": "hard",
+          "label": "Sert"
+        }
+      ],
+      "cost": [
+        {
+          "var": "minutes",
+          "amount": 2,
+          "label": "2 Süre"
+        }
+      ],
+      "available": false,
+      "used": true
+    },
+    {
+      "id": "ch_talk_end",
+      "kind": "CONTINUE",
+      "label": "Görüşmeyi bitir",
+      "available": true,
+      "used": false
+    }
+  ],
+  "bag": {
+    "items": [
+      {
+        "id": "e_key",
+        "title": "Depo anahtarı",
+        "shortText": "Sanığın çantasından çıktı.",
+        "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+        "kindLabel": "Fiziksel delil",
+        "sourceLabel": "Olay yeri tutanağı",
+        "icon": "key"
+      }
+    ]
+  },
+  "notebook": {
+    "items": []
+  },
+  "last": {
+    "resolution": "CHOICE",
+    "lines": [
+      {
+        "speaker": "k",
+        "text": "Nöbetteydim avukat bey. Sokak zifiri karanlıktı."
+      }
+    ],
+    "fx": [
+      {
+        "kind": "VAR",
+        "label": "Süre",
+        "delta": -2,
+        "id": "minutes"
+      },
+      {
+        "kind": "VAR",
+        "label": "Güven",
+        "delta": 4,
+        "id": "trust"
+      }
+    ],
+    "discovered": [],
+    "nodeChanged": false,
+    "completed": false
+  },
+  "node": {
+    "type": "DIALOGUE",
+    "id": "n_talk",
+    "mode": "INTERVIEW",
+    "room": {
+      "label": "Görüşme odası",
+      "characterKey": "k",
+      "expression": "normal"
+    },
+    "objectives": [],
+    "tones": [
+      {
+        "id": "soft",
+        "label": "Yumuşak"
+      },
+      {
+        "id": "hard",
+        "label": "Sert"
+      }
+    ],
+    "allowPresent": false
+  }
+}

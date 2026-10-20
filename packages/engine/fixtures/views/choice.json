@@ -1,0 +1,87 @@
+{
+  "session": {
+    "id": "ses_fixture",
+    "caseId": "case_mini",
+    "caseNumber": 0,
+    "caseTitle": "Mini Dava",
+    "stateVersion": 12,
+    "status": "ACTIVE",
+    "mode": "NORMAL"
+  },
+  "header": {
+    "title": "Esas savunma"
+  },
+  "hud": [],
+  "cast": {},
+  "lines": [],
+  "choices": [
+    {
+      "id": "cl_a",
+      "kind": "OPTION",
+      "label": "Masumiyet savunması",
+      "available": true,
+      "used": false
+    },
+    {
+      "id": "cl_b",
+      "kind": "OPTION",
+      "label": "Savunmadan vazgeç",
+      "available": true,
+      "used": false
+    }
+  ],
+  "bag": {
+    "items": [
+      {
+        "id": "e_key",
+        "title": "Depo anahtarı",
+        "shortText": "Sanığın çantasından çıktı.",
+        "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+        "kindLabel": "Fiziksel delil",
+        "sourceLabel": "Olay yeri tutanağı",
+        "icon": "key"
+      }
+    ]
+  },
+  "notebook": {
+    "items": [
+      {
+        "id": "c_a",
+        "title": "Kararmış ampul",
+        "sourceLabel": "OLAY YERİ",
+        "icon": "bulb"
+      },
+      {
+        "id": "c_b",
+        "title": "Kesik kamera kablosu",
+        "sourceLabel": "OLAY YERİ",
+        "icon": "camera"
+      }
+    ]
+  },
+  "last": {
+    "resolution": "CHOICE",
+    "lines": [],
+    "fx": [
+      {
+        "kind": "SCORE",
+        "label": "+150 SKOR",
+        "delta": 150,
+        "id": "USUL_BILGISI"
+      },
+      {
+        "kind": "VAR",
+        "label": "Heyet iknası",
+        "delta": 1,
+        "id": "pers"
+      }
+    ],
+    "discovered": [],
+    "nodeChanged": true,
+    "completed": false
+  },
+  "node": {
+    "type": "CHOICE",
+    "id": "n_choice"
+  }
+}

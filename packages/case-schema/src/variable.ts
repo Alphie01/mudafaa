@@ -19,6 +19,7 @@ const VariableDisplay = z.strictObject({
   widget: VariableWidget,
   max: z.int().positive().optional(),
   lowAt: z.int().optional(),
+  /** Maliyet etiketi şablonu: `{n}` tutarla değişir (ör. "{n} EP"); yoksa "<tutar> <label>". */
   format: z.string().optional(),
 });
 

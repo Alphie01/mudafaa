@@ -1,5 +1,5 @@
 import { Category } from '@mudafaa/case-schema';
-import type { OutcomeDef } from '@mudafaa/case-schema';
+import type { OutcomeDef, Tone } from '@mudafaa/case-schema';
 import { EngineError } from './errors.js';
 import { evalCond, evalVal } from './expr/eval.js';
 import { getOwn } from './own.js';
@@ -60,6 +60,13 @@ export function computeScore(c: CompiledCase, s: SessionState): ScoreSummary {
     value: getOwn(s.score.line, l.id) ?? 0,
   }));
   return { raw, bonuses, final: base + bonusSum, lines };
+}
+
+const toneOf = (value: number): Tone => (value > 0 ? 'success' : value < 0 ? 'error' : 'neutral');
+
+/** Karar dökümü: önce skor satırları, sonra bonuslar; işarete göre renk. */
+export function breakdownRows(score: ScoreSummary): { label: string; value: number; tone: Tone }[] {
+  return [...score.lines, ...score.bonuses].map((r) => ({ label: r.label, value: r.value, tone: toneOf(r.value) }));
 }
 
 /** Önceliğe göre `when` koşulunu tutan ilk sonuç (son sonuç `{all:[]}` olduğundan her zaman bir sonuç vardır). */

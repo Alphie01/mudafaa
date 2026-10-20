@@ -1,0 +1,172 @@
+{
+  "session": {
+    "id": "ses_fixture",
+    "caseId": "case_mini",
+    "caseNumber": 0,
+    "caseTitle": "Mini Dava",
+    "stateVersion": 11,
+    "status": "ACTIVE",
+    "mode": "NORMAL"
+  },
+  "header": {
+    "title": "İtiraz"
+  },
+  "hud": [
+    {
+      "id": "cred",
+      "label": "Güvenilirlik",
+      "widget": "hearts",
+      "value": 3,
+      "max": 3
+    },
+    {
+      "id": "pers",
+      "label": "Heyet iknası",
+      "widget": "meter10",
+      "value": 4,
+      "max": 10
+    }
+  ],
+  "cast": {
+    "j": {
+      "name": "Selma Er",
+      "shortLabel": "Başkan",
+      "role": "JUDGE",
+      "accent": "#c4413a",
+      "sprite": {
+        "rows": [
+          "....kkkkkkkk....",
+          "...kyyyyyyyyk...",
+          "..kyyyyyyyyyyk..",
+          "..kyyssssssyyk..",
+          "...kssssssssk...",
+          "...kkeksskekk...",
+          "...kssssssssk...",
+          "...kSskkkksSk...",
+          "....kssssssk....",
+          ".....kkSSkk.....",
+          "...kkgRwwRgkk...",
+          "..knngRwwRgnnk..",
+          "..knnnRRRRnnnk..",
+          "..knNnnRRnnNnk..",
+          "..knNnnRRnnNnk..",
+          "..kSnnnRRnnnSk..",
+          "..knnnnRRnnnnk..",
+          "..knnnnRRnnnnk..",
+          "..knnnnnnnnnnk..",
+          "...kkkkkkkkkk..."
+        ],
+        "noEyes": true
+      }
+    },
+    "av": {
+      "name": "Av. Deniz Ak",
+      "shortLabel": "Deniz",
+      "role": "COUNSEL",
+      "accent": "#7b4fb0",
+      "sprite": {
+        "rows": [
+          "....kkkkkkkk....",
+          "...khhhhhhhhk...",
+          "...khhhhhhhhk...",
+          "...khsssssshk...",
+          "...kssssssssk...",
+          "...ksessssesk...",
+          "...kssssssssk...",
+          "...ksssSSsssk...",
+          "....kssssssk....",
+          ".....kkSSkk.....",
+          "...kkmwrrwmkk...",
+          "..knnmwrrwmnnk..",
+          "..knnnmrrmnnnk..",
+          "..knNnnmmnnNnk..",
+          "..knNnnmmnnNnk..",
+          "..kSnnnmmnnnSk..",
+          "..knnnnmmnnnnk..",
+          "..knnnnmmnnnnk..",
+          "..knnnnnnnnnnk..",
+          "...kkkk..kkkk..."
+        ]
+      }
+    }
+  },
+  "lines": [],
+  "choices": [
+    {
+      "id": "ob_a",
+      "kind": "OPTION",
+      "label": "Anahtar bütün bekçilerde var",
+      "available": true,
+      "used": false
+    },
+    {
+      "id": "ob_b",
+      "kind": "OPTION",
+      "label": "Anahtar sahte",
+      "available": true,
+      "used": false
+    }
+  ],
+  "bag": {
+    "items": [
+      {
+        "id": "e_key",
+        "title": "Depo anahtarı",
+        "shortText": "Sanığın çantasından çıktı.",
+        "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+        "kindLabel": "Fiziksel delil",
+        "sourceLabel": "Olay yeri tutanağı",
+        "icon": "key"
+      }
+    ]
+  },
+  "notebook": {
+    "items": [
+      {
+        "id": "c_a",
+        "title": "Kararmış ampul",
+        "sourceLabel": "OLAY YERİ",
+        "icon": "bulb"
+      },
+      {
+        "id": "c_b",
+        "title": "Kesik kamera kablosu",
+        "sourceLabel": "OLAY YERİ",
+        "icon": "camera"
+      }
+    ]
+  },
+  "last": {
+    "resolution": "CHOICE",
+    "lines": [],
+    "fx": [],
+    "discovered": [],
+    "nodeChanged": true,
+    "completed": false
+  },
+  "node": {
+    "type": "COURTROOM",
+    "id": "n_obj",
+    "mode": "OBJECTION",
+    "stage": {
+      "banner": "2. CELSE · DELİL",
+      "bench": [
+        {
+          "characterKey": "j",
+          "label": "Başkan",
+          "xFrac": 0.5
+        }
+      ],
+      "counsel": "av"
+    },
+    "prosecutionEvidence": {
+      "id": "e_key",
+      "title": "Depo anahtarı",
+      "shortText": "Sanığın çantasından çıktı.",
+      "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+      "kindLabel": "Fiziksel delil",
+      "sourceLabel": "Olay yeri tutanağı",
+      "icon": "key"
+    }
+  }
+}

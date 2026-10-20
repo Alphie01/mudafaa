@@ -1,9 +1,9 @@
 import { Category } from '@mudafaa/case-schema';
-import type { CaseReport, Effect, Tone } from '@mudafaa/case-schema';
+import type { CaseReport, Effect } from '@mudafaa/case-schema';
 import { EngineError } from './errors.js';
 import { evalCond } from './expr/eval.js';
 import { getOwn } from './own.js';
-import { computeScore } from './scoring.js';
+import { breakdownRows, computeScore } from './scoring.js';
 import type { CompiledCase, SessionState } from './types.js';
 
 /** Bir kategoriye ait pozitif literal SCORE tutarlarının toplamı (doğrulayıcının `categoryMax`'ı yoksa üst sınır). */
@@ -30,8 +30,6 @@ function staticCategoryMax(c: CompiledCase): Record<Category, number> {
   for (const t of c.pkg.triggers) walk(t.effects);
   return max;
 }
-
-const toneOf = (value: number): Tone => (value > 0 ? 'success' : value < 0 ? 'error' : 'neutral');
 
 /** Dava sonu raporu (tamamen kural tabanlı): işaretler, kaçırılanlar, alternatif yollar, beceri tavsiyeleri, döküm. */
 export function report(
@@ -93,10 +91,7 @@ export function report(
     },
     raw: s.outcome.raw,
     final: s.outcome.final,
-    breakdown: [
-      ...score.lines.map((l) => ({ label: l.label, value: l.value, tone: toneOf(l.value) })),
-      ...score.bonuses.map((b) => ({ label: b.label, value: b.value, tone: toneOf(b.value) })),
-    ],
+    breakdown: breakdownRows(score),
     good: s.marks.filter((m) => m.quality === 'GOOD').map(markOf),
     bad: s.marks.filter((m) => m.quality === 'BAD').map(markOf),
     missed,

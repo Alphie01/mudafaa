@@ -1,0 +1,122 @@
+{
+  "session": {
+    "id": "ses_fixture",
+    "caseId": "case_mini",
+    "caseNumber": 0,
+    "caseTitle": "Mini Dava",
+    "stateVersion": 3,
+    "status": "ACTIVE",
+    "mode": "NORMAL"
+  },
+  "header": {
+    "title": "Olay yeri"
+  },
+  "hud": [
+    {
+      "id": "taps",
+      "label": "Büyüteç",
+      "widget": "counter",
+      "value": 2,
+      "max": 3
+    }
+  ],
+  "cast": {},
+  "lines": [],
+  "choices": [
+    {
+      "id": "ch_scene_end",
+      "kind": "CONTINUE",
+      "label": "Aramayı bitir",
+      "available": true,
+      "used": false
+    }
+  ],
+  "bag": {
+    "items": [
+      {
+        "id": "e_key",
+        "title": "Depo anahtarı",
+        "shortText": "Sanığın çantasından çıktı.",
+        "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+        "kindLabel": "Fiziksel delil",
+        "sourceLabel": "Olay yeri tutanağı",
+        "icon": "key"
+      }
+    ],
+    "total": 1
+  },
+  "notebook": {
+    "items": [
+      {
+        "id": "c_a",
+        "title": "Kararmış ampul",
+        "sourceLabel": "OLAY YERİ",
+        "icon": "bulb"
+      }
+    ],
+    "total": 3
+  },
+  "last": {
+    "resolution": "HIT",
+    "feedback": {
+      "text": "Lambanın ampulü kararmış; ışık vermiyor.",
+      "tone": "success"
+    },
+    "lines": [],
+    "fx": [
+      {
+        "kind": "VAR",
+        "label": "Büyüteç",
+        "delta": -1,
+        "id": "taps"
+      },
+      {
+        "kind": "EVIDENCE",
+        "label": "Kararmış ampul",
+        "id": "c_a"
+      },
+      {
+        "kind": "SCORE",
+        "label": "+40 SKOR",
+        "delta": 40,
+        "id": "ARASTIRMA"
+      }
+    ],
+    "discovered": [
+      "c_a"
+    ],
+    "hit": {
+      "objectId": "o_lamp",
+      "rect": {
+        "x": 10,
+        "y": 10,
+        "w": 20,
+        "h": 20
+      },
+      "text": "Lambanın ampulü kararmış; ışık vermiyor."
+    },
+    "nodeChanged": false,
+    "completed": false
+  },
+  "node": {
+    "type": "SCENE",
+    "id": "n_scene",
+    "imageUrl": "assets/sc1.png",
+    "width": 100,
+    "height": 100,
+    "instruction": "Sokağın fotoğrafında gizli ipuçlarını ara.",
+    "found": [
+      {
+        "objectId": "o_lamp",
+        "rect": {
+          "x": 10,
+          "y": 10,
+          "w": 20,
+          "h": 20
+        },
+        "label": "Lamba"
+      }
+    ],
+    "hiddenTotal": 3
+  }
+}

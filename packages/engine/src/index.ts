@@ -25,3 +25,6 @@ export { act, acceptedKinds, affordable, maxUsesOf } from './act.js';
 export type { ActOk, ActReject } from './act.js';
 export { start } from './start.js';
 export { report } from './report.js';
+export { view } from './view/index.js';
+export type { ViewMeta } from './view/index.js';
+export { enumerateActions } from './enumerate.js';

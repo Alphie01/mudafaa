@@ -1,0 +1,136 @@
+{
+  "session": {
+    "id": "ses_fixture",
+    "caseId": "case_mini",
+    "caseNumber": 0,
+    "caseTitle": "Mini Dava",
+    "stateVersion": 15,
+    "status": "COMPLETED",
+    "mode": "NORMAL"
+  },
+  "header": {
+    "title": "Karar"
+  },
+  "hud": [],
+  "cast": {},
+  "lines": [],
+  "choices": [],
+  "bag": {
+    "items": [
+      {
+        "id": "e_key",
+        "title": "Depo anahtarı",
+        "shortText": "Sanığın çantasından çıktı.",
+        "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+        "kindLabel": "Fiziksel delil",
+        "sourceLabel": "Olay yeri tutanağı",
+        "icon": "key"
+      }
+    ]
+  },
+  "notebook": {
+    "items": [
+      {
+        "id": "c_a",
+        "title": "Kararmış ampul",
+        "sourceLabel": "OLAY YERİ",
+        "icon": "bulb"
+      },
+      {
+        "id": "c_b",
+        "title": "Kesik kamera kablosu",
+        "sourceLabel": "OLAY YERİ",
+        "icon": "camera"
+      }
+    ]
+  },
+  "last": {
+    "resolution": "CHOICE",
+    "lines": [],
+    "fx": [
+      {
+        "kind": "VERDICT",
+        "label": "BERAAT",
+        "id": "o_win"
+      }
+    ],
+    "discovered": [],
+    "nodeChanged": true,
+    "completed": true
+  },
+  "node": {
+    "type": "RESULT",
+    "id": "n_result",
+    "outcome": {
+      "id": "o_win",
+      "class": "ACQUITTAL",
+      "stamp": "BERAAT",
+      "tone": "green"
+    },
+    "strategyLabel": "Masumiyet",
+    "sentence": {
+      "demand": "İddianame: TCK 141",
+      "result": "Ceza yok"
+    },
+    "verdictText": "Sanığın beraatine karar verildi.",
+    "reasoning": [
+      "Tanığın sokağı aydınlık gördüğü sözü çürütüldü."
+    ],
+    "breakdown": [
+      {
+        "label": "Delil toplama",
+        "value": 380,
+        "tone": "success"
+      },
+      {
+        "label": "Çapraz sorgu",
+        "value": 300,
+        "tone": "success"
+      },
+      {
+        "label": "İtiraz isabeti",
+        "value": 150,
+        "tone": "success"
+      },
+      {
+        "label": "Savunma",
+        "value": 300,
+        "tone": "success"
+      },
+      {
+        "label": "Hatalı delil",
+        "value": 0,
+        "tone": "neutral"
+      },
+      {
+        "label": "Güvenilirlik bonusu",
+        "value": 300,
+        "tone": "success"
+      }
+    ],
+    "total": 1430,
+    "thresholds": {
+      "scaleMax": 1000,
+      "bands": [
+        {
+          "label": "Mahkûmiyet",
+          "from": 0,
+          "tone": "red"
+        },
+        {
+          "label": "İndirim",
+          "from": 100,
+          "tone": "amber"
+        },
+        {
+          "label": "Beraat",
+          "from": 300,
+          "tone": "green"
+        }
+      ]
+    },
+    "xp": {
+      "gained": 171
+    }
+  }
+}

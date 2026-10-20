@@ -104,7 +104,8 @@ const sceneImage = { imageUrl: z.string().min(1), width: z.int().positive(), hei
  * - SCENE `found`: yalnızca bulunan nesneler (geometri sınır dikdörtgenine indirgenir).
  * - DOCUMENT `solved`: uygulanmış inceleme kurallarının alet × satır çiftleri.
  * - DEDUCTION `cards`: bulunmuş havuz kartları; `solved`: çözülmüş tariflerin başlığı ve isabet etiketi.
- * - COURTROOM `statements`: yalnızca görünür ifadeler, vurgu sunucuda hesaplanır; `presentable` sunulabilecek kartlar.
+ * - COURTROOM `statements`: yalnızca görünür ifadeler, vurgu sunucuda hesaplanır; `presentable` sunulabilecek kartlar;
+ *   `witnessLabel` tanık kürsüsünün etiketi.
  * - RESULT `reasoning`: koşulu tutan gerekçe parçaları; `xp.rankLabel` / `progressPct` kariyer verisidir (API ekler).
  */
 export const NodeView = z.discriminatedUnion('type', [
@@ -196,6 +197,7 @@ export const NodeView = z.discriminatedUnion('type', [
     objectionGrounds: z.array(ObjectionGround).optional(),
     prosecutionEvidence: EvidenceCard.optional(),
     rulesText: z.string().optional(),
+    witnessLabel: z.string().optional(),
   }),
   z.strictObject({
     type: z.literal('RESULT'),

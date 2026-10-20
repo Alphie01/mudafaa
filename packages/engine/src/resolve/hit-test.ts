@@ -67,3 +67,9 @@ export function clampRect(r: Rect, scene: { width: number; height: number }): Re
   const y1 = Math.min(scene.height, r.y + r.h);
   return { x: x0, y: y0, w: Math.max(1, x1 - x0), h: Math.max(1, y1 - y0) };
 }
+
+/** Nesnenin görünümde ve isabet sonucunda gösterilen dikdörtgeni: ilk şeklin sahneye kırpılmış sınır kutusu. */
+export function objectRect(scene: SceneDef, obj: SceneObject): Rect {
+  const first = obj.shapes[0];
+  return clampRect(first === undefined ? { x: 0, y: 0, w: 1, h: 1 } : boundingRect(first), scene);
+}

@@ -1,0 +1,148 @@
+{
+  "session": {
+    "id": "ses_fixture",
+    "caseId": "case_mini",
+    "caseNumber": 0,
+    "caseTitle": "Mini Dava",
+    "stateVersion": 3,
+    "status": "ACTIVE",
+    "mode": "NORMAL"
+  },
+  "header": {
+    "title": "Vardiya çizelgesi"
+  },
+  "hud": [
+    {
+      "id": "exam",
+      "label": "İnceleme hakkı",
+      "widget": "counter",
+      "value": 1,
+      "max": 2
+    }
+  ],
+  "cast": {},
+  "lines": [],
+  "choices": [
+    {
+      "id": "ch_doc_end",
+      "kind": "CONTINUE",
+      "label": "Belgeyi kapat",
+      "available": true,
+      "used": false
+    }
+  ],
+  "bag": {
+    "items": [
+      {
+        "id": "e_key",
+        "title": "Depo anahtarı",
+        "shortText": "Sanığın çantasından çıktı.",
+        "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+        "kindLabel": "Fiziksel delil",
+        "sourceLabel": "Olay yeri tutanağı",
+        "icon": "key"
+      }
+    ]
+  },
+  "notebook": {
+    "items": [
+      {
+        "id": "c_uv",
+        "title": "Silinmiş saat kaydı",
+        "sourceLabel": "İNCELEME",
+        "icon": "uv"
+      }
+    ]
+  },
+  "last": {
+    "resolution": "RULE",
+    "lines": [],
+    "fx": [
+      {
+        "kind": "VAR",
+        "label": "İnceleme hakkı",
+        "delta": -1,
+        "id": "exam"
+      },
+      {
+        "kind": "EVIDENCE",
+        "label": "Silinmiş saat kaydı",
+        "id": "c_uv"
+      },
+      {
+        "kind": "SCORE",
+        "label": "+150 SKOR",
+        "delta": 150,
+        "id": "DELIL_ANALIZI"
+      }
+    ],
+    "discovered": [
+      "c_uv"
+    ],
+    "nodeChanged": false,
+    "completed": false
+  },
+  "node": {
+    "type": "DOCUMENT",
+    "id": "n_doc",
+    "title": "Vardiya çizelgesi",
+    "header": {
+      "left": "DEPO · VARDİYA",
+      "right": "12 MART"
+    },
+    "columns": [
+      {
+        "label": "PERSONEL",
+        "flex": 1
+      },
+      {
+        "label": "SAAT",
+        "flex": 1
+      }
+    ],
+    "rows": [
+      {
+        "id": "r1",
+        "cells": [
+          "A",
+          "B"
+        ]
+      },
+      {
+        "id": "r2",
+        "cells": [
+          "C",
+          "D"
+        ],
+        "lens": {
+          "uv": {
+            "cells": [
+              "C",
+              "D*"
+            ],
+            "tone": "special"
+          }
+        }
+      }
+    ],
+    "tools": [
+      {
+        "id": "mag",
+        "label": "Büyüteç",
+        "icon": "magnifier"
+      },
+      {
+        "id": "uv",
+        "label": "UV ışık",
+        "icon": "uv",
+        "visualMode": "UV"
+      }
+    ],
+    "solved": [
+      {
+        "tool": "uv",
+        "target": "r2"
+      }
+    ]
+  }
+}

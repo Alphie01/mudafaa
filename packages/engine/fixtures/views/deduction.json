@@ -1,0 +1,99 @@
+{
+  "session": {
+    "id": "ses_fixture",
+    "caseId": "case_mini",
+    "caseNumber": 0,
+    "caseTitle": "Mini Dava",
+    "stateVersion": 7,
+    "status": "ACTIVE",
+    "mode": "NORMAL"
+  },
+  "header": {
+    "title": "Çıkarım tahtası"
+  },
+  "hud": [],
+  "cast": {},
+  "lines": [],
+  "choices": [
+    {
+      "id": "ch_board_end",
+      "kind": "CONTINUE",
+      "label": "Tahtadan ayrıl",
+      "available": true,
+      "used": false
+    }
+  ],
+  "bag": {
+    "items": [
+      {
+        "id": "e_key",
+        "title": "Depo anahtarı",
+        "shortText": "Sanığın çantasından çıktı.",
+        "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+        "kindLabel": "Fiziksel delil",
+        "sourceLabel": "Olay yeri tutanağı",
+        "icon": "key"
+      }
+    ]
+  },
+  "notebook": {
+    "items": [
+      {
+        "id": "c_a",
+        "title": "Kararmış ampul",
+        "sourceLabel": "OLAY YERİ",
+        "icon": "bulb"
+      },
+      {
+        "id": "c_b",
+        "title": "Kesik kamera kablosu",
+        "sourceLabel": "OLAY YERİ",
+        "icon": "camera"
+      }
+    ]
+  },
+  "last": {
+    "resolution": "RULE",
+    "lines": [],
+    "fx": [
+      {
+        "kind": "EVIDENCE",
+        "label": "Lamba o gece yanmıyordu",
+        "id": "i_ab"
+      },
+      {
+        "kind": "SCORE",
+        "label": "+300 SKOR",
+        "delta": 300,
+        "id": "DELIL_ANALIZI"
+      }
+    ],
+    "discovered": [
+      "i_ab"
+    ],
+    "nodeChanged": false,
+    "completed": false
+  },
+  "node": {
+    "type": "DEDUCTION",
+    "id": "n_board",
+    "cards": [
+      {
+        "id": "c_a",
+        "source": "OLAY YERİ",
+        "text": "Lambanın ampulü kararmış."
+      },
+      {
+        "id": "c_b",
+        "source": "OLAY YERİ",
+        "text": "Kamera o gece kayıt yapmamış."
+      }
+    ],
+    "solved": [
+      {
+        "title": "Lamba o gece yanmıyordu",
+        "hits": "Kararmış ampul + Kesik kamera kablosu"
+      }
+    ]
+  }
+}

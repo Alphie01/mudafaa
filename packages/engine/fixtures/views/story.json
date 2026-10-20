@@ -1,0 +1,145 @@
+{
+  "session": {
+    "id": "ses_fixture",
+    "caseId": "case_mini",
+    "caseNumber": 0,
+    "caseTitle": "Mini Dava",
+    "stateVersion": 0,
+    "status": "ACTIVE",
+    "mode": "NORMAL"
+  },
+  "header": {
+    "title": "Brifing"
+  },
+  "hud": [],
+  "cast": {
+    "k": {
+      "name": "Kâmil Demir",
+      "shortLabel": "Kâmil",
+      "role": "CLIENT",
+      "accent": "#e2802f",
+      "sprite": {
+        "rows": [
+          "....k.kkkk.k....",
+          "...kHHkHHHkHk...",
+          "...kHHHHHHHHk...",
+          "...kHsssssHHk...",
+          "...kssssssssk...",
+          "...ksessssesk...",
+          "...kssssssssk...",
+          "...kssskksssk...",
+          "....kssssssk....",
+          ".....kkSSkk.....",
+          "...kkoowwookk...",
+          "..kooooOOooook..",
+          "..koOoooooooOk..",
+          "..koOoooooooOk..",
+          "..koOoooooooOk..",
+          "..kSooooooooSk..",
+          "...kddddddddk...",
+          "...kdddkkdddk...",
+          "...kdddkkdddk...",
+          "..kkkkk..kkkkk.."
+        ]
+      }
+    }
+  },
+  "lines": [],
+  "choices": [
+    {
+      "id": "ch_str_a",
+      "kind": "OPTION",
+      "group": "strategy",
+      "label": "Masumiyet",
+      "available": true,
+      "used": false
+    },
+    {
+      "id": "ch_str_b",
+      "kind": "OPTION",
+      "group": "strategy",
+      "label": "İndirim",
+      "available": true,
+      "used": false
+    }
+  ],
+  "bag": {
+    "items": [
+      {
+        "id": "e_key",
+        "title": "Depo anahtarı",
+        "shortText": "Sanığın çantasından çıktı.",
+        "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+        "kindLabel": "Fiziksel delil",
+        "sourceLabel": "Olay yeri tutanağı",
+        "icon": "key"
+      }
+    ]
+  },
+  "notebook": {
+    "items": []
+  },
+  "node": {
+    "type": "STORY",
+    "id": "n_brief",
+    "phase": "BRIEFING",
+    "blocks": [
+      {
+        "type": "profileCard",
+        "character": "k",
+        "label": "Sanık",
+        "lines": [
+          "45 yaşında",
+          "Gece bekçisi"
+        ],
+        "charge": "TCK 141 · Hırsızlık",
+        "demand": "1–3 yıl hapis"
+      },
+      {
+        "type": "sentenceRange",
+        "segments": [
+          "green",
+          "green",
+          "gold",
+          "gold",
+          "red",
+          "red",
+          "darkred",
+          "darkred"
+        ],
+        "markerPct": 50,
+        "labels": [
+          "Beraat",
+          "1 yıl",
+          "2 yıl",
+          "3 yıl"
+        ],
+        "demandLabel": "İSTEM"
+      },
+      {
+        "type": "paragraph",
+        "title": "Olay",
+        "text": "Gece yarısı depodan malzeme çalındı. Tek tanık, müvekkilini sokak lambasının altında gördüğünü söylüyor."
+      },
+      {
+        "type": "strengthList",
+        "title": "Savcılık delilleri",
+        "items": [
+          {
+            "label": "Depo anahtarı",
+            "strength": "MEDIUM"
+          },
+          {
+            "label": "Tanık teşhisi",
+            "strength": "STRONG"
+          }
+        ]
+      },
+      {
+        "type": "choiceGroup",
+        "title": "Savunma stratejisi",
+        "group": "strategy"
+      }
+    ]
+  }
+}

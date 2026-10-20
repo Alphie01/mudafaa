@@ -1,13 +1,23 @@
-import type { Action, ActionKind, ActionResult, ChoiceDef, Cost, Feedback, NodeDef, Rect } from '@mudafaa/case-schema';
+import type {
+  Action,
+  ActionKind,
+  ActionResult,
+  ChoiceDef,
+  Cost,
+  Feedback,
+  NodeDef,
+  Rect,
+  SceneObject,
+} from '@mudafaa/case-schema';
 import { ctxOf, newDraft } from './draft.js';
 import type { Draft, EngineEvent } from './draft.js';
 import { applyEffects, mark } from './effects.js';
 import { evalCond, variantKey } from './expr/eval.js';
 import { getOwn } from './own.js';
-import { boundingRect, clampRect, hitTest } from './resolve/hit-test.js';
+import { hitTest, objectRect } from './resolve/hit-test.js';
 import { Reject, pushResponses, resolveNext, settle } from './transitions.js';
 import type { RejectCode } from './transitions.js';
-import type { CNode, CompiledCase, SessionState } from './types.js';
+import type { CNode, CompiledCase, EvalCtx, SessionState } from './types.js';
 
 export interface ActOk {
   ok: true;
@@ -29,6 +39,107 @@ interface Outcome {
 
 const PLAYER_KINDS: ReadonlySet<string> = new Set(['OPTION', 'TOPIC', 'NAVIGATE', 'CONTINUE']);
 const UNAVAILABLE = 'Bu seçenek şu anda kullanılamıyor.';
+
+/** Parametre eşleşmeli aksiyonlar (kural ya da fallback ile çözülür). */
+export type ParamAction = Extract<Action, { kind: 'EXAMINE' | 'COMBINE' | 'PRESS' | 'PRESENT' | 'OBJECT' }>;
+
+/** Oyuncunun seçebildiği seçenek türü mü (OPTION/TOPIC/NAVIGATE/CONTINUE). */
+export const isPlayerChoice = (ch: ChoiceDef): boolean => PLAYER_KINDS.has(ch.kind);
+
+const condsOk = (ctx: EvalCtx, ch: ChoiceDef): boolean =>
+  (ch.visibleWhen === undefined || evalCond(ch.visibleWhen, ctx)) &&
+  (ch.enabledWhen === undefined || evalCond(ch.enabledWhen, ctx));
+
+/** Oyuncu seçeneğinin durumu; görünüm ve aksiyon numaralandırma `act` ile aynı kuralı kullanır. */
+export function choiceStatus(
+  c: CompiledCase,
+  s: SessionState,
+  ch: ChoiceDef,
+): { visible: boolean; enabled: boolean; affordable: boolean; exhausted: boolean } {
+  const ctx = { c, s };
+  return {
+    visible: ch.visibleWhen === undefined || evalCond(ch.visibleWhen, ctx),
+    enabled: ch.enabledWhen === undefined || evalCond(ch.enabledWhen, ctx),
+    affordable: affordable(s, ch.cost),
+    exhausted: (getOwn(s.uses, ch.id) ?? 0) >= maxUsesOf(ch),
+  };
+}
+
+const pairKey = (a: string, b: string): string => [a, b].sort().join('+');
+
+/** Parametrik aksiyonun eşleştiği kural: `match`'i ve koşulu tutan ilk kural (kullanım sınırına bakılmaz). */
+export function matchRule(ctx: EvalCtx, node: CNode, a: ParamAction): ChoiceDef | undefined {
+  switch (a.kind) {
+    case 'EXAMINE':
+      return node.rules.EXAMINE.find(
+        (r) =>
+          r.match !== undefined &&
+          'tool' in r.match &&
+          r.match.tool === a.tool &&
+          r.match.target === a.target &&
+          condsOk(ctx, r),
+      );
+    case 'COMBINE': {
+      const pair = pairKey(a.a, a.b);
+      return node.rules.COMBINE.find(
+        (r) => r.match !== undefined && 'a' in r.match && pairKey(r.match.a, r.match.b) === pair && condsOk(ctx, r),
+      );
+    }
+    case 'PRESS':
+      return node.rules.PRESS.find(
+        (r) =>
+          r.match !== undefined && 'statement' in r.match && r.match.statement === a.statementId && condsOk(ctx, r),
+      );
+    case 'PRESENT':
+      return node.rules.PRESENT.find(
+        (r) =>
+          r.match !== undefined &&
+          'evidence' in r.match &&
+          (r.match.statement === undefined || r.match.statement === a.statementId) &&
+          r.match.evidence.includes(a.evidenceId) &&
+          condsOk(ctx, r),
+      );
+    case 'OBJECT':
+      return node.rules.OBJECT.find(
+        (r) =>
+          r.match !== undefined &&
+          'ground' in r.match &&
+          r.match.ground === a.groundId &&
+          (r.match.statement === undefined || r.match.statement === a.statementId) &&
+          condsOk(ctx, r),
+      );
+  }
+}
+
+/** Fallback'in parametre anahtarı (`ONCE_PER_PARAMS` bu anahtarla bir kez uygulanır). */
+export function paramKey(a: Exclude<Action, { kind: 'CHOOSE' }>): string {
+  switch (a.kind) {
+    case 'TAP':
+      return `${a.x},${a.y}`;
+    case 'EXAMINE':
+      return `${a.tool}|${a.target}`;
+    case 'COMBINE':
+      return pairKey(a.a, a.b);
+    case 'PRESS':
+      return a.statementId;
+    case 'PRESENT':
+      return `${a.statementId ?? ''}|${a.evidenceId}`;
+    case 'OBJECT':
+      return `${a.statementId ?? ''}|${a.groundId}`;
+  }
+}
+
+/** Fallback bu parametreyle daha önce uygulandıysa (ONCE_PER_PARAMS) true. */
+export function fallbackSpent(s: SessionState, fb: ChoiceDef, key: string): boolean {
+  return fb.repeat === 'ONCE_PER_PARAMS' && (getOwn(s.paramUses, fb.id) ?? []).includes(key);
+}
+
+/** Sahne nesnesinin kullanım sayacı anahtarı. */
+export const objectKey = (id: string): string => `obj:${id}`;
+
+/** Nesne hâlâ isabet alabilir mi (kullanım sınırı varsayılan 1; dolunca TAP NOOP olur). */
+export const objectUsable = (s: SessionState, obj: SceneObject): boolean =>
+  (getOwn(s.uses, objectKey(obj.id)) ?? 0) < (obj.maxUses ?? 1);
 
 /** Node türüne/moduna göre kabul edilen aksiyon türleri. */
 export function acceptedKinds(def: NodeDef): readonly ActionKind[] {
@@ -61,9 +172,6 @@ const usesOf = (d: Draft, key: string): number => getOwn(d.s.uses, key) ?? 0;
 const bump = (d: Draft, key: string): void => {
   d.s.uses[key] = usesOf(d, key) + 1;
 };
-const condsOk = (d: Draft, ch: ChoiceDef): boolean =>
-  (ch.visibleWhen === undefined || evalCond(ch.visibleWhen, ctxOf(d))) &&
-  (ch.enabledWhen === undefined || evalCond(ch.enabledWhen, ctxOf(d)));
 
 /** Maliyet karşılanabilir mi (aynı değişkene birden çok maliyet toplanır). */
 export function affordable(s: SessionState, costs: readonly Cost[] | undefined): boolean {
@@ -98,11 +206,6 @@ function applyRule(d: Draft, rule: ChoiceDef): void {
   resolveNext(d, rule.next);
 }
 
-/** Fallback bu parametreyle daha önce uygulandıysa (ONCE_PER_PARAMS) true. */
-function fallbackSpent(d: Draft, fb: ChoiceDef, key: string): boolean {
-  return fb.repeat === 'ONCE_PER_PARAMS' && (getOwn(d.s.paramUses, fb.id) ?? []).includes(key);
-}
-
 function applyFallback(d: Draft, fb: ChoiceDef, key: string): void {
   if (fb.repeat === 'ONCE_PER_PARAMS') d.s.paramUses[fb.id] = [...(getOwn(d.s.paramUses, fb.id) ?? []), key];
   applyRule(d, fb);
@@ -112,11 +215,10 @@ function applyFallback(d: Draft, fb: ChoiceDef, key: string): void {
 function resolveRuleOrFallback(
   d: Draft,
   node: CNode,
-  kind: 'EXAMINE' | 'COMBINE' | 'PRESENT' | 'OBJECT',
-  rule: ChoiceDef | undefined,
-  key: string,
+  a: Extract<ParamAction, { kind: 'EXAMINE' | 'COMBINE' | 'PRESENT' | 'OBJECT' }>,
   costs: readonly Cost[] | undefined,
 ): Outcome {
+  const rule = matchRule(ctxOf(d), node, a);
   if (rule !== undefined) {
     if (usesOf(d, rule.id) >= maxUsesOf(rule)) {
       pushResponses(d, rule.responses);
@@ -126,9 +228,10 @@ function resolveRuleOrFallback(
     applyRule(d, rule);
     return { resolution: 'RULE', feedback: rule.feedback };
   }
-  const fb = node.fallbacks[kind];
+  const fb = node.fallbacks[a.kind];
   if (fb === undefined) throw new Reject('NO_MATCH', 'Bu girdi için tanımlı bir sonuç yok.');
-  if (fallbackSpent(d, fb, key)) {
+  const key = paramKey(a);
+  if (fallbackSpent(d.s, fb, key)) {
     pushResponses(d, fb.responses);
     return { resolution: 'NOOP', feedback: fb.feedback };
   }
@@ -139,7 +242,7 @@ function resolveRuleOrFallback(
 
 function doChoose(d: Draft, node: CNode, a: Extract<Action, { kind: 'CHOOSE' }>): Outcome {
   const ch = node.choices.get(a.choiceId);
-  if (ch === undefined || !PLAYER_KINDS.has(ch.kind) || !condsOk(d, ch)) {
+  if (ch === undefined || !isPlayerChoice(ch) || !condsOk(ctxOf(d), ch)) {
     throw new Reject('CHOICE_UNAVAILABLE', UNAVAILABLE);
   }
   const exhausted = usesOf(d, ch.id) >= maxUsesOf(ch);
@@ -179,25 +282,22 @@ function doTap(d: Draft, node: CNode, a: Extract<Action, { kind: 'TAP' }>): Outc
   const costs = node.def.actionCosts?.TAP;
   const obj = hitTest(scene, a.x, a.y, (o) => o.activeWhen === undefined || evalCond(o.activeWhen, ctxOf(d)));
   if (obj !== null) {
-    const first = obj.shapes[0];
-    const rect = clampRect(first === undefined ? { x: 0, y: 0, w: 1, h: 1 } : boundingRect(first), scene);
-    const hit = { objectId: obj.id, rect, text: obj.feedback.text };
-    const key = `obj:${obj.id}`;
-    if (usesOf(d, key) >= (obj.maxUses ?? 1)) {
+    const hit = { objectId: obj.id, rect: objectRect(scene, obj), text: obj.feedback.text };
+    if (!objectUsable(d.s, obj)) {
       return { resolution: 'NOOP', feedback: { text: obj.feedback.text, tone: 'info' }, hit };
     }
     pay(d, costs);
     d.source = obj.id;
     applyEffects(obj.effects, d);
     if (getOwn(d.s.found, obj.id) === undefined) d.s.found[obj.id] = d.s.seq;
-    bump(d, key);
+    bump(d, objectKey(obj.id));
     if (obj.inspectNode !== undefined) resolveNext(d, { push: obj.inspectNode });
     return { resolution: 'HIT', feedback: { text: obj.feedback.text, tone: 'success' }, hit };
   }
   const fb = node.fallbacks.TAP;
   if (fb === undefined) throw new Reject('NO_MATCH', 'Bu girdi için tanımlı bir sonuç yok.');
-  const key = `${a.x},${a.y}`;
-  if (fallbackSpent(d, fb, key)) {
+  const key = paramKey(a);
+  if (fallbackSpent(d.s, fb, key)) {
     pushResponses(d, fb.responses);
     return { resolution: 'NOOP', feedback: fb.feedback };
   }
@@ -211,15 +311,7 @@ function doExamine(d: Draft, node: CNode, a: Extract<Action, { kind: 'EXAMINE' }
   if (!node.def.tools.some((t) => t.id === a.tool) || !node.def.rows.some((r) => r.id === a.target)) {
     throw new Reject('INVALID_PARAMS', 'Bilinmeyen alet ya da satır.');
   }
-  const rule = node.rules.EXAMINE.find(
-    (r) =>
-      r.match !== undefined &&
-      'tool' in r.match &&
-      r.match.tool === a.tool &&
-      r.match.target === a.target &&
-      condsOk(d, r),
-  );
-  return resolveRuleOrFallback(d, node, 'EXAMINE', rule, `${a.tool}|${a.target}`, node.def.actionCosts?.EXAMINE);
+  return resolveRuleOrFallback(d, node, a, node.def.actionCosts?.EXAMINE);
 }
 
 function doCombine(d: Draft, node: CNode, a: Extract<Action, { kind: 'COMBINE' }>): Outcome {
@@ -228,11 +320,7 @@ function doCombine(d: Draft, node: CNode, a: Extract<Action, { kind: 'COMBINE' }
   const usable = (id: string): boolean =>
     pool.includes(id) && getOwn(d.s.evidence, id) !== undefined && d.c.evidence.get(id)?.combinable === true;
   if (a.a === a.b || !usable(a.a) || !usable(a.b)) throw new Reject('INVALID_PARAMS', 'Bu ipuçları birleştirilemez.');
-  const pair = [a.a, a.b].sort().join('+');
-  const rule = node.rules.COMBINE.find(
-    (r) => r.match !== undefined && 'a' in r.match && [r.match.a, r.match.b].sort().join('+') === pair && condsOk(d, r),
-  );
-  return resolveRuleOrFallback(d, node, 'COMBINE', rule, pair, undefined);
+  return resolveRuleOrFallback(d, node, a, undefined);
 }
 
 function visibleStatement(d: Draft, node: CNode, id: string | undefined): boolean {
@@ -243,9 +331,7 @@ function visibleStatement(d: Draft, node: CNode, id: string | undefined): boolea
 
 function doPress(d: Draft, node: CNode, a: Extract<Action, { kind: 'PRESS' }>): Outcome {
   if (!visibleStatement(d, node, a.statementId)) throw new Reject('INVALID_PARAMS', 'Bu ifade yok.');
-  const rule = node.rules.PRESS.find(
-    (r) => r.match !== undefined && 'statement' in r.match && r.match.statement === a.statementId && condsOk(d, r),
-  );
+  const rule = matchRule(ctxOf(d), node, a);
   if (rule === undefined) return { resolution: 'NOOP' };
   if (usesOf(d, rule.id) >= maxUsesOf(rule)) {
     pushResponses(d, rule.responses);
@@ -264,15 +350,7 @@ function doPresent(d: Draft, node: CNode, a: Extract<Action, { kind: 'PRESENT' }
     if (!ev.presentable) throw new Reject('INVALID_PARAMS', 'Bu delil mahkemede sunulamaz.');
     if (!visibleStatement(d, node, a.statementId)) throw new Reject('INVALID_PARAMS', 'Bir ifade seçilmeli.');
   }
-  const rule = node.rules.PRESENT.find(
-    (r) =>
-      r.match !== undefined &&
-      'evidence' in r.match &&
-      (r.match.statement === undefined || r.match.statement === a.statementId) &&
-      r.match.evidence.includes(a.evidenceId) &&
-      condsOk(d, r),
-  );
-  return resolveRuleOrFallback(d, node, 'PRESENT', rule, `${a.statementId ?? ''}|${a.evidenceId}`, undefined);
+  return resolveRuleOrFallback(d, node, a, undefined);
 }
 
 function doObject(d: Draft, node: CNode, a: Extract<Action, { kind: 'OBJECT' }>): Outcome {
@@ -282,15 +360,7 @@ function doObject(d: Draft, node: CNode, a: Extract<Action, { kind: 'OBJECT' }>)
   if (a.statementId !== undefined && !visibleStatement(d, node, a.statementId)) {
     throw new Reject('INVALID_PARAMS', 'Bu ifade yok.');
   }
-  const rule = node.rules.OBJECT.find(
-    (r) =>
-      r.match !== undefined &&
-      'ground' in r.match &&
-      r.match.ground === a.groundId &&
-      (r.match.statement === undefined || r.match.statement === a.statementId) &&
-      condsOk(d, r),
-  );
-  return resolveRuleOrFallback(d, node, 'OBJECT', rule, `${a.statementId ?? ''}|${a.groundId}`, undefined);
+  return resolveRuleOrFallback(d, node, a, undefined);
 }
 
 function perform(d: Draft, node: CNode, a: Action): Outcome {

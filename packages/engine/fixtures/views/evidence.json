@@ -1,0 +1,83 @@
+{
+  "session": {
+    "id": "ses_fixture",
+    "caseId": "case_mini",
+    "caseNumber": 0,
+    "caseTitle": "Mini Dava",
+    "stateVersion": 13,
+    "status": "ACTIVE",
+    "mode": "NORMAL"
+  },
+  "header": {
+    "title": "Savcılık delili"
+  },
+  "hud": [],
+  "cast": {},
+  "lines": [],
+  "choices": [
+    {
+      "id": "ev_ok",
+      "kind": "OPTION",
+      "label": "Anladım",
+      "available": true,
+      "used": false
+    }
+  ],
+  "bag": {
+    "items": [
+      {
+        "id": "e_key",
+        "title": "Depo anahtarı",
+        "shortText": "Sanığın çantasından çıktı.",
+        "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+        "kindLabel": "Fiziksel delil",
+        "sourceLabel": "Olay yeri tutanağı",
+        "icon": "key"
+      }
+    ]
+  },
+  "notebook": {
+    "items": [
+      {
+        "id": "c_a",
+        "title": "Kararmış ampul",
+        "sourceLabel": "OLAY YERİ",
+        "icon": "bulb"
+      },
+      {
+        "id": "c_b",
+        "title": "Kesik kamera kablosu",
+        "sourceLabel": "OLAY YERİ",
+        "icon": "camera"
+      }
+    ]
+  },
+  "last": {
+    "resolution": "CHOICE",
+    "lines": [],
+    "fx": [
+      {
+        "kind": "SCORE",
+        "label": "+300 SKOR",
+        "delta": 300,
+        "id": "SAVUNMA_STRATEJISI"
+      }
+    ],
+    "discovered": [],
+    "nodeChanged": true,
+    "completed": false
+  },
+  "node": {
+    "type": "EVIDENCE",
+    "id": "n_ev",
+    "evidence": {
+      "id": "e_key",
+      "title": "Depo anahtarı",
+      "shortText": "Sanığın çantasından çıktı.",
+      "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+      "kindLabel": "Fiziksel delil",
+      "sourceLabel": "Olay yeri tutanağı",
+      "icon": "key"
+    }
+  }
+}

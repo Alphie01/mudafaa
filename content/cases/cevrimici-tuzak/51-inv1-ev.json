@@ -1,0 +1,1173 @@
+{
+  "nodes": [
+    {
+      "id": "INV1_ECE",
+      "type": "DIALOGUE",
+      "mode": "INTERVIEW",
+      "tones": [
+        { "id": "soft", "label": "Yumuşak", "hint": "+4 güven" },
+        { "id": "hard", "label": "Sert", "hint": "−8 güven · daha fazla ayrıntı" }
+      ],
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "Ece ile görüşme",
+      "background": "ev",
+      "hud": ["min", "trust"],
+      "room": { "label": "YALINLARIN SALONU · YILDIRIM", "character": "ece" },
+      "lines": [
+        {
+          "when": { "cmp": [{ "visits": "INV1_ECE" }, "==", 1] },
+          "lines": [
+            { "speaker": "narrator", "text": "YALINLARIN SALONU · 09.20", "style": "card", "bg": "ev" },
+            {
+              "speaker": "narrator",
+              "text": "Dantel örtülü bir sehpa, üstünde iki çay bardağı. Duvarda Ece’nin mezuniyet fotoğrafı; kepini havaya atmış, gülerken gözleri kapalı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sevim Hanım’ın atölyeden öğle arasına dönmesine on altı dakika vardı. Ece annesinin yanında konuşmak istemiyordu; bunu söylemedi, ama saate bakışından belliydi."
+            },
+            {
+              "speaker": "ece",
+              "text": "Nereden başlayayım? Ben… baştan anlatırsam her şey çok aptalca görünecek. Ortadan anlatırsam da yalan söylüyormuşum gibi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Çayını iki eliyle tuttu. Tırnaklarına baktım: koyu bordo bir oje, sol başparmakta köşeden kırık. Bir yıldır yenilenmemiş gibi değil; her gün aynı yerden kırılıyormuş gibi."
+            },
+            { "speaker": "player", "text": "Baştan anlat. Aptalca görünmesi umurumda değil. Eksik görünmesi umurumda." }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Ece aynı koltukta, aynı yerde oturuyordu. Arada çayı tazelemiş, ama içmemişti."
+            },
+            { "speaker": "ece", "text": "Yine mi? Tamam. Annemin dönmesine sekiz dakika var. Sorun." }
+          ]
+        }
+      ],
+      "moodRules": [
+        { "when": { "flag": "fact_kod_itiraf" }, "label": "Çözülüyor", "tone": "success", "expression": "uzgun" },
+        {
+          "when": { "cmp": [{ "var": "trust" }, "<", 40] },
+          "label": "Kapanmış",
+          "tone": "error",
+          "expression": "kizgin"
+        },
+        {
+          "when": { "cmp": [{ "var": "tone" }, "==", "hard"] },
+          "label": "Gergin",
+          "tone": "neutral",
+          "expression": "kizgin"
+        },
+        { "label": "Utangaç", "tone": "neutral", "expression": "normal" }
+      ],
+      "objectives": [
+        {
+          "id": "obj_nova",
+          "when": { "flag": "fact_nova" },
+          "known": "İşveren: “Nova Dijital”, Kaan Bey. Adres bir iş merkezi.",
+          "unknown": "Ece kim için çalıştığını sanıyordu?"
+        },
+        {
+          "id": "obj_para",
+          "when": { "flag": "fact_avans" },
+          "known": "4.500 TL: “eğitim avansı”.",
+          "unknown": "4.500 lira neyin parasıydı?"
+        },
+        {
+          "id": "obj_tel",
+          "when": { "flag": "fact_simyok" },
+          "known": "Telefon 4 Kasım sabahı sustu; akşam operatöre gitti.",
+          "unknown": "4 Kasım’da telefonuna ne oldu?"
+        },
+        {
+          "id": "obj_kod",
+          "when": { "flag": "fact_kod_itiraf" },
+          "known": "Ece kodu “SGK kodu” sanıp okudu.",
+          "unknown": "Ece bir şey saklıyor mu?"
+        }
+      ],
+      "choices": [
+        {
+          "id": "TP_ILAN",
+          "kind": "TOPIC",
+          "label": "İş ilanı",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "O işi nasıl buldun? En başından anlat.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Bir iş sitesinde. “Uzaktan Müşteri Temsilcisi. Esnek saat. Deneyim aranmaz.” Yüz kırk üçüncü başvurumdu. Yarım saat sonra aradılar."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Kaan Bey. Nova Dijital’in İK’sı. Çok kibardı. “Ece Hanım” diyordu. Kimse bana sekiz aydır “hanım” dememişti.",
+                      "expression": "mutlu"
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Sesini hâlâ hatırlıyorum. Yumuşak, ağır. “Ece Hanım, sizin gibi gençlere bu ülkenin ihtiyacı var” dedi. Biliyorum, şimdi söyleyince klişe. O gün klişe değildi."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Görüntülü mülakat yaptık. Onun kamerası bozukmuş; ben görünüyordum, o görünmüyordu. “İş merkezindeyiz, kusura bakmayın, gürültülü” dedi."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Konuşurken arkadan bir sinyal geldi, sonra bir kadın sesi: “Dördüncü kat.” Asansör herhalde. Gülmüştü; “bizim binanın sesi” demişti."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Bir de uzaktan bir yazıcı sesi vardı, bir de telefon zili. Gerçek bir ofis gibiydi. O yüzden hiç şüphelenmedim. Gerçek bir ofis gibiydi."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kamerası bozuk bir işveren. Arkasında bir asansör. Tuhaf mı, yoksa sadece ucuz bir kamera mı? Henüz bilmiyorum.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Sana bir iş teklif ediyorlar, kimliğini istiyorlar, sen de veriyorsun. Neden?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Çünkü herkes istiyor! SGK girişi için kimlik lazım, maaş için IBAN lazım. Bunu her şirket ister. Ben aptal değilim!",
+                      "expression": "kizgin"
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Adı Kaan’dı. Nova Dijital. Kamerası bozuktu, ben görünüyordum. Arkadan “Dördüncü kat” diye bir anons geldi, iş merkezindeydi."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Kimliğimin önünü arkasını çektim, bir de elimde kimlikle özçekim. “Kimlik doğrulama” dedi. Lambanın altında çektim, parlıyordu, iki kere çektim.",
+                      "expression": "uzgun"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "İki kere. Lambanın altında. Bir fotoğrafın parlaması bazen parmak izinden iyi tanıktır.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_nova", "op": "set", "value": true },
+            { "type": "DISCOVER", "evidence": "clue_ding_ece" }
+          ]
+        },
+        {
+          "id": "TP_PARA",
+          "kind": "TOPIC",
+          "label": "4.500 lira",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "1 Kasım’da hesabına 4.500 lira gelmiş. Neydi o?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Eğitim avansı. Kaan Bey “ilk hafta eğitim var, bu da yol ve internet parası” dedi. Açıklamada da öyle yazıyordu, bakabilirsiniz."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Bin beşini anneme verdim. Faturalar. Geri kalanıyla bir kulaklık aldım; müşteri temsilcisi olacağım ya.",
+                      "expression": "uzgun"
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Kaan Bey “ilk maaş ayın on beşinde” dedi. On beşini bekledim. On beşi gelmeden banka hesabımı dondurdu. Maaş değil, bir yazı geldi: “Hesabınız tedbirli.”"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Savcı bunun adını “kira bedeli” koymuş. Bir kulaklık. Kira bedeli diye bir kulaklık.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Savcı o parayı hesabını kiralamanın bedeli sayıyor. Biri sana hesabın için para verdi mi?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Kimse bana hesabım için para vermedi! Avans dedi, avans! Bir yerden ilk kez para geldi, ben ona sevindim!",
+                      "expression": "kizgin"
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Gönderen birinin adı vardı, Mehmet bir şey. “Muhasebemiz” dedi Kaan Bey. Ben muhasebeyi tanımam ki."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Avansı kim gönderdi? Muhasebe değilse, kim? Bir ismin peşine düşmek yerine, o hesabın başka nereye uğradığına bakmalıyım.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_avans", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_TELEFON",
+          "kind": "TOPIC",
+          "label": "Telefonun sustuğu gün",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "4 Kasım sabahı telefonuna ne oldu?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Sabah onu on geçe “SIM yok” yazdı. Kapattım, açtım. Ekran görüntüsü aldım; her şeyin ekran görüntüsünü alırım, huyum."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Annemin telefonundan Kaan Bey’i aradım, on biri beş geçe. “Hattınızı kurumsal tarifeye taşıyoruz, akşama düzelir” dedi. Rahatladım. Rahatladım!"
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Telefonu açtı, hemen açtı. Sanki bekliyormuş gibi. Sesi yine yumuşaktı. “Merak etmeyin Ece Hanım, sistem göçü. Bu işte her şey bir göç.”"
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Akşam düzelmedi. Yedi gibi kendi operatörümün mağazasına gittim. “Hattınız bu sabah başka bir bayide yeni karta geçirilmiş” dediler.",
+                      "expression": "uzgun"
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Bir kâğıt imzaladım, “işlemi ben yapmadım” diye. Yeni kart verdiler. Sonra eve gelip ağladım. Polise gitmedim. Korktum."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Mağazadaki kız bana su verdi. “Sizden önce bugün biri daha geldi” dedi, “aynı şey.” Aynı şey. Ben o zaman bunun ne demek olduğunu anlamadım."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Aynı gün akşam, kendi ayağıyla operatöre gidip itiraz etmiş biri. Bir dolandırıcı bunu yapar mı? Belki. Ama kâğıdı mağazada duruyor olmalı.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Telefonun kapalıydı, hesabından para çıkıyordu. Tesadüf mü?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Kapalı değildi, SIM yoktu! Onu on üçte! Ekran görüntüsü var! Ben kapatmadım, kendisi gitti!",
+                      "expression": "kizgin"
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Annemin telefonundan Kaan Bey’i aradım. “Kurumsal hatta geçiyoruz” dedi. Bir gece önce de yazmıştı zaten, “yarın hattınız kesilebilir” diye."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Akşam operatöre gittim. Başka bir bayide yeni kart çıkarılmış. Ben çıkarmadım. Bir kâğıt imzaladım. O kâğıt nerede, bilmiyorum.",
+                      "expression": "uzgun"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "“Yarın hattınız kesilebilir.” Kesintiyi bir gün önceden bilen biri. Ya çok düzenli bir İK, ya da bambaşka bir şey.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_simyok", "op": "set", "value": true },
+            { "type": "VAR", "var": "fact_operator", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_KOD",
+          "kind": "TOPIC",
+          "label": "Kod",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Bankadan bir kod geldi mi hiç? Birine okudun mu?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Hayır. Yani… bankamın kodunu kimseye vermem. Bunu herkes bilir. Reklamlarda bile söylüyorlar."
+                    },
+                    { "speaker": "narrator", "text": "Ece çay bardağını iki eliyle tuttu. Bardak boştu." },
+                    {
+                      "speaker": "ece",
+                      "text": "Hem… neden bir şirkete banka kodu vereyim ki? SGK’ya bir şey verdim, o kadar. Yani… kimlik, IBAN. Kod değil."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Cevap hızlı geldi. Fazla hızlı. Ezberlenmiş bir cümle gibi; bir yıl önce bir ifade odasında ilk kez söylenmiş, o günden beri tekrarlanmış.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Banka yeni bir cihazın SMS koduyla tanımlandığını söyleyecek. O kod sana geldi. Kime okudun?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Kimseye! Kimseye okumadım! Siz de mi? Polis de böyle sordu, savcı da yazmış! Ben aptal değilim!",
+                      "expression": "kizgin"
+                    },
+                    { "speaker": "narrator", "text": "Sesi kırıldı. Kalktı, pencereye gitti, sırtını döndü." },
+                    {
+                      "speaker": "ece",
+                      "text": "Bankamın kodunu kimseye vermedim. Tamam mı? Vermedim.",
+                      "expression": "uzgun"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "“Bankamın kodunu.” Soru bu değildi. Bir kod verdiyse, onu bankanın kodu sanmıyordu belki. İnsan bazen doğruyu, yalanın içine saklar.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_kod_inkar", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_ANNE",
+          "kind": "TOPIC",
+          "label": "Annen",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Annen bütün bunları nasıl karşılıyor?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Gece vardiyasına kaldı. Benim yüzümden. Bana bir şey demiyor; o daha kötü. Makinenin başında saatlerce oturuyor, sesini duyuyorum.",
+                      "expression": "uzgun"
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Bir akşam dikerken parmağına iğne batırdı. Kanadı. “Bir şey yok” dedi. Ben odama gidip ağladım. Yirmi üç yaşındayım, annemin parmağına bakamıyorum."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bu dosyada iki kadın var, ikisi de birbirini korumaya çalışıyor. Biri susarak, öbürü dikerek.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Annen her şeyi biliyor mu? Ona her şeyi anlattın mı?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Anneme her şeyi anlatacak hâlim yok! O zaten benim yüzümden gece vardiyasında!",
+                      "expression": "kizgin"
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Her şeyi bilmiyor. Bilmesin de. Bazı şeyleri bilmesi onu daha çok yorar.",
+                      "expression": "uzgun"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "“Bazı şeyler.” Bu evde bir şey saklanıyor; anneden de, avukattan da.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 10 },
+            { "type": "VAR", "var": "fact_anne", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_EKRAN",
+          "kind": "TOPIC",
+          "label": "Ekran görüntüleri",
+          "visibleWhen": { "hasEvidence": "clue_tablo" },
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Tablonda bir sütun var: “Ekran görüntüsü klasörü”. Nova’nın klasörü duruyor mu?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "narrator",
+                      "text": "Ece bir an donakaldı. Sonra telefonunu açtı, uzun uzun kaydırdı."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Kaan Bey “KVKK gereği yazışmaları silin” demişti. Sildim. Ama silmeden önce… her şeyin görüntüsünü alırım. Huyum. Annem kızar."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Bakın. Profilde numarası var. Burada maaş günü, burada “kimlik doğrulama”. Burası da… 3 Kasım."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Burada da kimliğimin fotoğrafı. Lambanın altında çektim, iki kere; ilkinde parladı. Bakın, köşede başparmağım. Ojem kırık, utandım, yine de gönderdim."
+                    },
+                    {
+                      "speaker": "narrator",
+                      "text": "Ekranı bana çevirdi, sonra bir an geri çekti. Sonra yine çevirdi. 14.26: “SGK işe giriş için size bir kod gelecek, beni arayıp okur musunuz?”"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kod. “Kimseyle kod paylaşmadım” diyen bir kızın telefonunda, kod isteyen bir mesaj. Ve akşam 21.10’da: “Yarın hattınız kesilebilir.”",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Yazışmaları sildin, değil mi? Kanıtları ortadan kaldırdın.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Kaldırmadım! O sil dedi! KVKK dedi! Ama ben… ekran görüntüsü aldım. Hepsinin. Al, bak, ne istiyorsan bak!",
+                      "expression": "kizgin"
+                    },
+                    {
+                      "speaker": "narrator",
+                      "text": "Telefonu neredeyse fırlatır gibi uzattı. 14.26: “SGK işe giriş için size bir kod gelecek, beni arayıp okur musunuz?” 21.10: “Yarın hattınız kesilebilir.”"
+                    },
+                    { "speaker": "ece", "text": "Şimdi bana yalancı diyeceksiniz.", "expression": "uzgun" },
+                    {
+                      "speaker": "player",
+                      "text": "Demeyeceğim. Ama birinin bu ekran görüntülerini yan yana koyması lazım. Önce benim.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "DISCOVER", "evidence": "clue_sgk_mesaj" },
+            { "type": "DISCOVER", "evidence": "clue_kvkk_mesaj" },
+            { "type": "DISCOVER", "evidence": "clue_hr_no" },
+            { "type": "VAR", "var": "fact_ekran", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_BURAK",
+          "kind": "TOPIC",
+          "label": "Burak",
+          "visibleWhen": { "flag": "fact_burak" },
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Annen Burak’tan şüpheleniyor. Sen ne düşünüyorsun?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Annem herkesten şüphelenir; Burak’tan biraz daha fazla. Ayrıldık, evet. Kızgındı. “Pişman olacaksın” yazdı. Ben de ona daha kötülerini yazdım.",
+                      "expression": "uzgun"
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Şifremi biliyordu. Ama telefonum benim elimdeydi o gün. SIM gitti, telefon gitmedi. Burak telefoncu; bir şey yapsa telefona yapardı."
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Bir de… o gece mesaj attığında ben de ona bir şey yazdım. Çok kötü bir şey. Ben de pişman oldum. “Pişman olacaksın” diyen haklı çıktı; ama başka sebepten."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir tamircinin bildiğini sanmak kolay. Bir tamircinin bildiğini sormak daha yararlı.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Burak senin şifreni biliyordu ve sana kızgındı. Onu koruyor musun?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "ece",
+                      "text": "Korumuyorum! Ama suçlamıyorum da. Ben bir yıldır suçlanıyorum, ne demek olduğunu biliyorum.",
+                      "expression": "kizgin"
+                    },
+                    {
+                      "speaker": "ece",
+                      "text": "Burak öyle şeyler yapmaz. Kötü bir sevgiliydi, kötü bir insan değil. Gidip sorun. Alt sokakta dükkânı var."
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_burak_ece", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "G_YUZLES",
+          "kind": "OPTION",
+          "label": "Sarı notu ve 14.26 mesajını yan yana koy",
+          "prompt": "Ece. “4471 — SGK.” Ve 14.26’daki mesaj. Bana anlatmak istediğin bir şey var mı?",
+          "visibleWhen": {
+            "all": [
+              { "any": [{ "hasEvidence": "ev_not" }, { "hasEvidence": "clue_sgk_mesaj" }] },
+              { "flag": "fact_kod_inkar" },
+              { "cmp": [{ "var": "trust" }, ">=", 40] }
+            ]
+          },
+          "cost": [{ "var": "min", "amount": 3 }],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Ece uzun süre bir şey söylemedi. Saat duvarda tıkırdadı; dikiş makinesinin olmadığı bir sessizlikti bu."
+                },
+                {
+                  "speaker": "ece",
+                  "text": "Okudum. Telefonda. Dört, dört, yedi, bir. SGK dedi. Ben de SGK sandım. Mesajın gerisini okumadım; “kodunuz” yazıyordu, gerisi kaydı.",
+                  "expression": "uzgun"
+                },
+                {
+                  "speaker": "ece",
+                  "text": "Sonra “Ailemize hoş geldiniz” dedi. Sekiz aydır ilk kez biri bana hoş geldin dedi. Nota bir gülen yüz çizdim.",
+                  "expression": "uzgun"
+                },
+                {
+                  "speaker": "ece",
+                  "text": "Polise söyleyemedim. Söylesem, “kodu verdin, o hâlde sen de onlardansın” diyeceklerdi. Aptal görünmektense yalancı olmak daha kolay geldi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir yıldır taşıdığı şey bu. Bir yalan değil; bir utanç. Ama mahkeme için ikisinin farkı, ne zaman söylendiğindedir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "INV1_ECE_TAVSIYE",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "fact_kod_itiraf", "op": "set", "value": true },
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 6 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Saklanan bilgi açığa çıktı: Ece kodu “SGK kodu” sanarak telefonda okumuş.",
+              "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "G_YUZLES_X",
+          "kind": "OPTION",
+          "label": "Sarı notu ve 14.26 mesajını yan yana koy",
+          "prompt": "Ece. “4471 — SGK.” Ve 14.26’daki mesaj. Bana anlatmak istediğin bir şey var mı?",
+          "visibleWhen": {
+            "all": [
+              { "any": [{ "hasEvidence": "ev_not" }, { "hasEvidence": "clue_sgk_mesaj" }] },
+              { "flag": "fact_kod_inkar" },
+              { "not": { "cmp": [{ "var": "trust" }, ">=", 40] } }
+            ]
+          },
+          "cost": [{ "var": "min", "amount": 3 }],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "ece",
+                  "text": "Odamı mı karıştırdınız? Siz de mi bana inanmıyorsunuz? Herkes gibi?",
+                  "expression": "kizgin"
+                },
+                { "speaker": "narrator", "text": "Kalktı. Mutfağa gitti; musluğu açtı, kapamadı." },
+                {
+                  "speaker": "player",
+                  "text": "Kapıyı çok sert çaldım. Bazı kapılar ancak içeriden açılır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "trust", "op": "dec", "value": 4 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Güveni düşük müvekkil sakladığını açmaz; önce güven kur, sonra yüzleştir.",
+              "category": "SORGULAMA"
+            }
+          ]
+        },
+        { "id": "G_BITIR", "kind": "CONTINUE", "label": "Görüşmeyi bitir", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_ECE_TAVSIYE",
+      "type": "CHOICE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "Ne yapacağız?",
+      "background": "ev",
+      "prompt": {
+        "speaker": "ece",
+        "expression": "uzgun",
+        "text": "Şimdi ne olacak? Mahkemede bunu söylersem… Siz ne derseniz onu yapacağım."
+      },
+      "choices": [
+        {
+          "id": "TAV_A",
+          "kind": "OPTION",
+          "label": "Doğruyu anlatmanı öneririm. Notu ve mesajı biz sunarız; neyi okuduğunu bilmediğini sen anlatırsın.",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "ece", "text": "Herkesin önünde mi? Annemin önünde?", "expression": "uzgun" },
+                {
+                  "speaker": "player",
+                  "text": "Herkesin önünde. Ama yalnız değil. Not ve mesaj seninle aynı anda konuşacak. Kararı sen veriyorsun; ben yalnızca bedelini ve faydasını anlattım."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Ece başını salladı. Bir kez. Sonra notu cebimden alıp avucunda tuttu, bir süre öyle baktı."
+                },
+                {
+                  "speaker": "ece",
+                  "text": "Bir yıl önce bu notu yazarken mutluydum. Biliyor musunuz, ilk kez bir işe girdim sandım. Gülen yüzü o yüzden çizdim."
+                },
+                {
+                  "speaker": "ece",
+                  "text": "Şimdi bakınca o gülen yüz bana gülüyor gibi geliyor. Benimle dalga geçer gibi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Mahkemede o gülen yüz senin lehine konuşacak, Ece. Bir dolandırıcı kendi suçunun altına gülen yüz çizmez."
+                }
+              ]
+            }
+          ],
+          "next": "INV1_ECE",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 100 },
+            { "type": "VAR", "var": "ece_durust", "op": "set", "value": true },
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 4 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Avukat müvekkile yalan söyletmez; aldatılarak verilen kod kast göstermez (TCK 21/1). Doğrunun erken ve belgeyle anlatılması inkârın çökmesinden iyidir.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        {
+          "id": "TAV_B",
+          "kind": "OPTION",
+          "label": "Bunu kimse bilmiyor. İfadendeki gibi devam et: kod vermedin.",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "ece", "text": "Emin misiniz? Yani… peki. Siz avukatsınız." },
+                { "speaker": "narrator", "text": "Rahatladı. Rahatlaması, benim midemdeki taşı daha da ağırlaştırdı." },
+                {
+                  "speaker": "player",
+                  "text": "“Siz avukatsınız.” Evet. Bu yüzden söylememem gerekirdi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "INV1_ECE",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -100 },
+            { "type": "VAR", "var": "ece_inkar", "op": "set", "value": true },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Avukat müvekkiline gerçeğe aykırı beyanda bulunmasını öğütleyemez (Av.K. 34; TBB Meslek Kuralları). Banka kaydı ortaya çıkınca inkâr, savunmanın en büyük yükü olur.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        {
+          "id": "TAV_C",
+          "kind": "OPTION",
+          "label": "Bu konuda susma hakkın var. Sorulursa cevap vermeyebilirsin.",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "ece", "text": "Susmak. Bir yıldır susuyorum zaten. Bir gün daha susarım." },
+                {
+                  "speaker": "player",
+                  "text": "Haklı. Ve bu yüzden susması, kimseye bir şey anlatmayacak.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "INV1_ECE",
+          "effects": [{ "type": "VAR", "var": "ece_sus", "op": "set", "value": true }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Susma hakkı meşrudur (CMK 147/1-e); ama sessizlik, savcının anlatısına boşluk bırakır."
+          }
+        }
+      ]
+    },
+    {
+      "id": "INV1_ODA",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "Ece’nin odası",
+      "background": "ev",
+      "hud": ["taps"],
+      "exposeCounts": true,
+      "scene": "sc_oda",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Ece kapının eşiğinde durdu, içeri girmedi. “Dağınık” dedi yine. Dağınık değildi; bir işe hazırlanan birinin odasıydı: masa, lamba, şarjda eski bir telefon."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Duvarda bir pano: kesilmiş iş ilanları, renkli raptiyeler, bir köşede bir slogan: “Bir gün evet diyecekler.” Pencerenin dışında yağmur, iplere asılı çamaşırları ağırlaştırıyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Odalar yalan söylemez. Sadece sorulmayan soruları cevaplamaz.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "instruction": "Dikkat çeken yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "actionCosts": { "TAP": [{ "var": "taps", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_ODA",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": {
+            "text": "Burada bir şey yok. Bir duvar, bir halı. (−1 büyüteç)",
+            "label": "−10 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "ODA_BITIR", "kind": "CONTINUE", "label": "Odadan çık", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_SEVIM",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "Atölye",
+      "background": "depo",
+      "room": { "label": "KONFEKSİYON ATÖLYESİ · DEMİRTAŞ", "character": "sevim" },
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "DEMİRTAŞ · KONFEKSİYON ATÖLYESİ · 12.30", "style": "card", "bg": "depo" },
+            {
+              "speaker": "narrator",
+              "text": "Kırk dikiş makinesi aynı anda susmuştu; öğle arası. Havada kumaş tozu ve kızarmış ekmek kokusu. Sevim Hanım makinesinin başında, iplik bobinini değiştiriyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Duvarda bir pano: “GÜNLÜK HEDEF 1200 ADET.” Altında tebeşirle yazılmış bir rakam: 980. Kimse panoya bakmıyordu; herkes yine de biliyordu."
+            },
+            { "speaker": "sevim", "text": "Gelin. Oturacak yer yok ama ayakta konuşmayı bilirim. Ne lazım?" }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "SEV_BURAK",
+          "kind": "OPTION",
+          "label": "Burak’ı anlatın. Neden ondan şüpheleniyorsunuz?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Bobini yerine taktı, ipliği iğnenin deliğinden tek seferde geçirdi. Otuz yıllık bir el; titremez."
+                },
+                {
+                  "speaker": "sevim",
+                  "text": "Çünkü telefonu bilir. Tamirci. Ece’nin şifresini bilirdi; telefonunu her bozulduğunda o açardı. Ayrılınca da “pişman olacaksın” yazdı.",
+                  "expression": "kizgin"
+                },
+                {
+                  "speaker": "sevim",
+                  "text": "Ekimde ayrıldılar, kasımda bu iş oldu. Ben dikişçiyim; iki ucu yan yana gelen kumaşı tanırım."
+                },
+                {
+                  "speaker": "sevim",
+                  "text": "Bir de şu var: o çocuk tamirci. Telefonun içini bilir. Ben telefonun dışını bilirim, o kadar. Sizin gibi okumuşlar bilir; siz bakın."
+                },
+                {
+                  "speaker": "player",
+                  "text": "İki uç yan yana gelince her zaman aynı kumaş olmuyor. Ama bir tamirciyle konuşmak, bir tamirciden şüphelenmekten daha ucuz.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_burak", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "SEV_KUTU",
+          "kind": "OPTION",
+          "label": "Ece’nin telefonunun kutusu duruyor mu?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "sevim",
+                  "text": "Duruyor tabii. Ben kutu atmam. Ne garanti belgesi atarım ne fatura. Bir dolap dolusu kutu var evde."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Akşam eve uğradığımda kutuyu bir naylon poşette uzattı. Altında barkodlu bir etiket: telefonun kendi kimlik numarası, on beş hane."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir hattın adı vardır. Bir telefonun da. Bunu birine sormam lazım; ama önce saklamam lazım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_iphone_imei" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ]
+        },
+        {
+          "id": "SEV_ECE",
+          "kind": "OPTION",
+          "label": "Ece size ne anlattı o gün?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "sevim",
+                  "text": "O sabah telefonumu benden aldı. “Anne, şirketi arayacağım.” On bire doğru. Konuştu, güldü. “Hattımı kurumsala taşıyorlarmış” dedi."
+                },
+                {
+                  "speaker": "sevim",
+                  "text": "Kurumsal. Ben o kelimeyi ilk kez kızımın ağzından duydum. Gururlandım. Sonra polis geldi.",
+                  "expression": "uzgun"
+                },
+                {
+                  "speaker": "sevim",
+                  "text": "Akşam yemekte bir şey yemedi. “Anne, yarın her şey düzelir” dedi. Ben de düzelir dedim. Ertesi gün banka hesabını dondurdu. Düzelmedi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Annenin telefonu 11.05’te bir numarayı aramış. O numaranın kime ait olduğunu bulmak, bu davadaki her şeyden önemli olabilir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 10 },
+            { "type": "VAR", "var": "fact_sevim_arama", "op": "set", "value": true }
+          ]
+        },
+        { "id": "SEV_GERI", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_OPERATOR",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "Operatör mağazası",
+      "background": "sokak_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "YILDIRIM · OPERATÖR MAĞAZASI · 17.40",
+              "style": "card",
+              "bg": "sokak_gece"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Mağaza bir akvaryum gibiydi: mavi ışık, cam, sessizce yüzen insanlar. Ece bir yıl önce aynı kapıdan, aynı saatte, ağlayarak girmişti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Duvarda dev bir ekran, ekranda gülümseyen bir aile: “Hattınız, güvenliğiniz.” Ece reklama bakmadı. Bir yıl önce de bakmamıştı herhalde."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sıra numarası: 47. Ekranda 39 yazıyordu. Ece numarayı iki eliyle tutuyordu, sanki kaybolacakmış gibi."
+            },
+            { "speaker": "ece", "text": "Geçen sefer de bu kız vardı. Bana su vermişti." },
+            {
+              "speaker": "narrator",
+              "text": "Sıramız geldiğinde aynı kız masadaydı. Ece’yi tanıdı; tanıdığını belli etmedi. Sadece “Hoş geldiniz” dedi, bir yıl öncekinden daha yavaş."
+            },
+            {
+              "speaker": "player",
+              "text": "Avukat olarak isteyebileceğim bir şey yok burada; kayıt Ece’nin. Ama Ece’nin bunu nasıl isteyeceğini ben seçebilirim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "OP_A",
+          "kind": "OPTION",
+          "label": "Ece kendi kaydını istesin; ben yalnızca yanında dururum.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Ece masaya oturdu, kimliğini uzattı. Sesi titremedi. “Kendi hattımın 4 Kasım 2025 işlemlerini istiyorum. Yazılı.”"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Görevli bir şey yazdı, bir şeye tıkladı, yazıcı homurdandı. Tek sayfa."
+                },
+                {
+                  "speaker": "ece",
+                  "text": "10.12. Mavi İletişim. Kent Meydanı. “Vekil aracılığıyla.” Vekil? Ben kimseye vekâlet vermedim."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Sayfanın en altında, aynı günün akşamı: 19.20, “Abone itirazı: İşlemi ben yapmadım.” Altında Ece’nin bir yıllık imzası."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir yıl önceki Ece, bugünkü Ece’ye bir kâğıt bırakmış. Kimse okumamış.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Ece sayfayı iki eliyle tuttu, bir süre yalnızca imzasına baktı. Sonra kâğıdı bana uzattı; ellerinden çıkmasından korkar gibi yavaşça."
+                },
+                {
+                  "speaker": "ece",
+                  "text": "Polise bunu göstermeyi düşünmedim bile. Kimse sormadı. Ben de söylemedim. Herkes hesabı sordu; telefonu kimse sormadı."
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_sim_dokum" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 },
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Abone kendi kişisel verisini (işlem dökümü) kendisi talep edebilir (KVKK md. 11). Avukatın yetkisi olmayan bir kaydı zorlamak gerekmez.",
+            "category": "ARASTIRMA"
+          }
+        },
+        {
+          "id": "OP_B",
+          "kind": "OPTION",
+          "label": "Avukat kimliğimi göstereyim; müvekkilimin kaydını bana versinler.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Görevli kartıma baktı, kibarca geri itti. “Hanımefendi, abone kendisi isterse veririz. Size veremeyiz.”"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Ece bana baktı, sonra görevliye. “Ben istiyorum.” Yazıcı homurdandı. Tek sayfa: 10.12, Mavi İletişim, vekil aracılığıyla. 19.20, abone itirazı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Avukat kartı her kapıyı açmıyor. Bazen müvekkilin kendi kimliği daha ağır bir anahtar.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_sim_dokum" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 30 }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Operatör abone verisini avukata vermez; abone kendisi ister. Sonuç aynı, yol uzun."
+          }
+        }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_ding_ece", "source": { "type": "CHOICE", "id": "TP_ILAN" } },
+    { "evidence": "clue_sgk_mesaj", "source": { "type": "CHOICE", "id": "TP_EKRAN" } },
+    { "evidence": "clue_kvkk_mesaj", "source": { "type": "CHOICE", "id": "TP_EKRAN" } },
+    { "evidence": "clue_hr_no", "source": { "type": "CHOICE", "id": "TP_EKRAN" } },
+    { "evidence": "clue_iphone_imei", "source": { "type": "CHOICE", "id": "SEV_KUTU" } },
+    { "evidence": "ev_sim_dokum", "source": { "type": "CHOICE", "id": "OP_A" } },
+    { "evidence": "ev_sim_dokum", "source": { "type": "CHOICE", "id": "OP_B" } }
+  ]
+}

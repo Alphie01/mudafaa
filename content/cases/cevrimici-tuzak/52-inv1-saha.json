@@ -1,0 +1,1020 @@
+{
+  "nodes": [
+    {
+      "id": "INV1_OM",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "OM İş Merkezi",
+      "background": "buro",
+      "room": { "label": "OM İŞ MERKEZİ · İŞLETME MÜDÜRLÜĞÜ", "character": "necdet" },
+      "onFirstEnter": [{ "type": "MEET", "character": "necdet" }],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "OSMANGAZİ · OM İŞ MERKEZİ · 11.10", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Cam cepheli, on katlı, yağmurdan çok temizlik ilacı kokan bir bina. Lobide bir güvenlik masası, bir kiracı panosu, bir kauçuk ağacı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Güvenlik görevlisi “Nova mı? Müdür bey bilir” dedi ve asansörü gösterdi. Kapılar kapanırken bir sinyal geldi, ardından kayıtlı bir kadın sesi: “Dördüncü kat.”",
+              "fx": "flash"
+            },
+            {
+              "speaker": "player",
+              "text": "Dördüncü kat. Ece’nin mülakatında Kaan’ın arkasından gelen ses. Nova’nın adresi burası; demek ki bu adres yalnızca kâğıt üstünde değildi.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "İşletme müdürlüğünün kapısı açıktı. İçeride, kırklarının sonunda, ütülü bir takım elbise; masada bir şişe limon kolonyası, iki ince belli bardak."
+            },
+            {
+              "speaker": "necdet",
+              "text": "Buyurun efendim, buyurun! Avukat hanım, değil mi? Güvenlik aradı. Necdet Sarı, işletme müdürü. Oturun, bir çay söyleyeyim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Çayını karıştırırken parmağındaki eski, yassı bir yüzük bardağa çarptı; tın, tın. Kolonya şişesini uzattı."
+            },
+            {
+              "speaker": "necdet",
+              "text": "Kolonya alır mısınız? Yağmurda iyi gelir. Biz burada güven satıyoruz efendim; misafire kolonya, kiracıya güler yüz."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Duvarda çerçeveli bir belge: “Yılın Yöneticisi — Osmangazi Ticaret Odası, 2019”. Yanında bir takvim, bir de saksıda iyi bakılmış bir orkide."
+            },
+            {
+              "speaker": "player",
+              "text": "Her şey yerli yerinde. Bu odada kimse bir şey kaybetmez; kaybetse de bulur.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "OM_NOVA",
+          "kind": "OPTION",
+          "label": "Nova Dijital’i hatırlıyor musunuz?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "necdet",
+                  "text": "Nova… hatırlamaz olur muyum efendim. Polis de sordu geçen yıl, bir kere, telefonla. Sanal ofis kiraladılar. Adres hizmeti, posta kabulü."
+                },
+                {
+                  "speaker": "necdet",
+                  "text": "Genç bir çocuk geldi, kendisi imzaladı. Nakit ödedi, iki aylık. Sonra kayboldular. Kira bitti, ben de tabelalarını sökmeye üşendim, ayıp bende."
+                },
+                {
+                  "speaker": "necdet",
+                  "text": "Gençler iş arıyor efendim. İlanlara inanıyorlar. Yazık. Bizim zamanımızda insan, adamın gözüne bakıp işe girerdi.",
+                  "expression": "uzgun"
+                },
+                {
+                  "speaker": "necdet",
+                  "text": "Benim de bir oğlum var, Ankara’da okuyor. Her ay “baba, bir iş ilanı gördüm” diye arar. “Oğlum” derim, “gözünü açık tut.” Ne yapalım, devir böyle."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Gözüne bakıp. Ece kimsenin gözüne bakamamıştı; Kaan’ın kamerası bozuktu.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_necdet_hikaye", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "OM_SOZLESME",
+          "kind": "OPTION",
+          "label": "Sözleşmenin bir örneğini alabilir miyim?",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "necdet", "text": "Tabii efendim, tabii. Saklayacak bir şeyimiz yok. Bir dakika." },
+                {
+                  "speaker": "narrator",
+                  "text": "Arkasındaki dolaptan bir klasör çıkardı, bir sayfayı fotokopi makinesine koydu. Makine ısınırken bana döndü."
+                },
+                {
+                  "speaker": "necdet",
+                  "text": "Kiracı Arda Kılıç diye bir genç. Kimlik fotokopisi de ekte. Polise verirdim ama isteyen olmadı. Siz alın, belki işinize yarar."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Fotokopi makinesi sıcak bir kâğıt verdi. Necdet kâğıdı bana uzatmadan önce bir kez düzeltti, kenarlarını hizaladı. Titiz bir adam."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir yıl boyunca kimsenin istemediği bir kâğıt. Üstünde bir isim var: Arda Kılıç. Bir isim, bir yüz değildir; ama bir başlangıçtır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_sozlesme" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ]
+        },
+        {
+          "id": "OM_KIRACI",
+          "kind": "OPTION",
+          "label": "Kattaki kiracılar Nova’dan birini hiç gördü mü?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "necdet",
+                  "text": "Sanal ofis efendim; kimse gelmez ki görsün. Posta gelir, biz alırız, haber veririz. Nova’ya iki zarf geldi galiba, bir de kargo. Sonra o da kesildi."
+                },
+                {
+                  "speaker": "necdet",
+                  "text": "Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazılımcı, bir sigorta acentesi. Bir de bizim arşiv. Herkes kendi işinde."
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+        },
+        {
+          "id": "OM_KAMERA",
+          "kind": "OPTION",
+          "label": "Lobideki kamera geçen yılı hatırlar mı?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "necdet",
+                  "text": "Keşke efendim. On beş gün tutuyor. Yasal süre, biz de yasaya uyarız. Bir yıl önceyi Allah bilir, bir de kiracılar."
+                },
+                { "speaker": "narrator", "text": "Güldü. Yüzük yine bardağa çarptı." }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }]
+        },
+        {
+          "id": "OM_KORIDOR",
+          "kind": "OPTION",
+          "label": "Dördüncü kattaki ofise bakabilir miyim?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "necdet",
+                  "text": "Bakın efendim. 407. Kapısı açık değil ama koridor herkese açık. Ben bir telefonu bekliyorum, yoksa eşlik ederdim."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kartvizitini masanın üstünden kaydırdı. Kabartma harfler, hafif bir limon kokusu."
+                },
+                {
+                  "speaker": "necdet",
+                  "text": "Bir şey lazım olursa arayın. Cep numaram üstünde. Avukatlara her zaman açığız."
+                }
+              ]
+            }
+          ],
+          "next": "INV1_KORIDOR",
+          "effects": [{ "type": "DISCOVER", "evidence": "clue_kartvizit" }]
+        },
+        {
+          "id": "OM_GERI",
+          "kind": "CONTINUE",
+          "label": "Teşekkür et, çık",
+          "role": "BACK",
+          "visibleWhen": { "not": { "chosen": "OM_KORIDOR" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Kalkarken kartvizitini uzattı. Kabartma harfler, hafif bir limon kokusu."
+                },
+                { "speaker": "necdet", "text": "Bir şey lazım olursa arayın efendim. Cep numaram üstünde." }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "clue_kartvizit" } },
+              "then": [{ "type": "DISCOVER", "evidence": "clue_kartvizit" }]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "INV1_KORIDOR",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "Dördüncü kat",
+      "background": "buro",
+      "hud": ["taps_k"],
+      "exposeCounts": true,
+      "scene": "sc_koridor",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Koridor halı ve toz kokuyordu. Kapıların çoğu kapalıydı; birinin ardından klavye sesi, bir başkasından bir radyo."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Asansörün yanında bir pano, panonun yanında bir yangın tüpü, ilerde bir saksı. Koridorun sonunda tek bir kapı, numarası 407, kapısının önünde paspas bile yok."
+            },
+            {
+              "speaker": "player",
+              "text": "“Nova Dijital” burada bir yıl önce iki ay yaşamış. Bir kâğıt üstünde. Kâğıtlar duvara bir iz bırakır mı?",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "instruction": "Koridorda dikkat çeken yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "actionCosts": { "TAP": [{ "var": "taps_k", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_KORIDOR",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Boş bir duvar. Halıda bir leke. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "KORIDOR_BITIR", "kind": "CONTINUE", "label": "Binadan çık", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_BAYI",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "Mavi İletişim",
+      "background": "sokak_gece",
+      "room": { "label": "MAVİ İLETİŞİM · KENT MEYDANI", "character": "onur" },
+      "onFirstEnter": [{ "type": "MEET", "character": "onur" }],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "KENT MEYDANI · MAVİ İLETİŞİM · 15.20",
+              "style": "card",
+              "bg": "sokak_gece"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dar bir dükkân. Duvarda kılıflar, camda “SIM KART · FATURA · YEDEK PARÇA”. Tezgâhta mavi tişörtlü bir genç telefonla oyun oynuyordu."
+            },
+            { "speaker": "onur", "text": "Abla hoş geldin, kılıf mı, hat mı? Kampanya var, internetli." },
+            {
+              "speaker": "player",
+              "text": "Avukatım. Geçen yıl 4 Kasım’da burada bir SIM değişikliği yapılmış. Kimin yaptığını öğrenmek istiyorum."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonu ters çevirdi. Gülümsemesi yerinde kaldı ama gözleri kapıya kaydı."
+            },
+            {
+              "speaker": "onur",
+              "text": "Abla, geçen yıl… Günde kırk hat değişiyor burada. KVKK var abla, ben bir şey gösteremem. Sistem öyle."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arka odadan bir radyo sesi geliyordu; bir futbol yorumcusu hakemi suçluyordu. Onur radyonun sesini kısmadı; arkasına saklanmak ister gibi."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "BAY_SOR",
+          "kind": "OPTION",
+          "label": "Sana belge göster demiyorum. SIM değişikliği normalde nasıl yapılır?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "onur",
+                  "text": "Normalde? Hat sahibi gelir, kimliğinin aslını gösterir. Yüz yüze bakarız, çipli kimliği okuturuz, sisteme yükleriz. Prosedür abla."
+                },
+                {
+                  "speaker": "onur",
+                  "text": "Bazen vekâletle gelen olur, noterden. O zaman vekâletnameyi tararız… yani o gün de vekâletle gelen bir abiydi galiba. Yani! Çok müşteri var, hatırlamam."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kendi cümlesinin ortasında durdu, sonra hızla bitirdi. Telefonunu yeniden çevirdi, oyunu açtı. Oyun açılmadı."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Arkasındaki camda bir yazı: “Kimlik aslı olmadan işlem yapılmaz.” Yazı güneşten solmuştu; bir yerinde bir kalpli çıkartma vardı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Bir abi.” Hat sahibi bir kadın. Kendi ağzından kaçtı. Ama tezgâhta söylenen söz tutanağa girmez; mahkemede yeniden söylenmesi gerekir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_onur_vekil" },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 40 }
+          ]
+        },
+        {
+          "id": "BAY_DOSYA",
+          "kind": "OPTION",
+          "label": "İşlem dosyasını mahkeme isterse verir misiniz?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "onur",
+                  "text": "Mahkemeden yazı gelirse tabii abla, merkez verir. Biz yüklüyoruz zaten, her şey operatörde. Ben bir şey saklamıyorum ki."
+                },
+                {
+                  "speaker": "onur",
+                  "text": "Bizim burası bayi abla, biz sadece aracıyız. Operatör ne derse o. Ben de burada staj yapıyormuş gibi çalışıyorum zaten, maaş asgari."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Saklamıyorsa neden kapıya bakıyor? Belgeler operatörde. Yol mahkemeden geçiyor; dükkânın tezgâhından değil.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            { "type": "VAR", "var": "fact_bayi_yol", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "BAY_BASKI",
+          "kind": "OPTION",
+          "label": "Dosyayı göstermezsen mahkemede seni de suçlarım.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "onur",
+                  "text": "Beni mi tehdit ediyorsun abla? Patron! Patron, avukat tehdit ediyor!",
+                  "expression": "kizgin"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Arka odadan biri seslendi. Onur tezgâhın arkasına çekildi, kollarını kavuşturdu."
+                },
+                { "speaker": "onur", "text": "Mahkemede konuşurum. Seninle değil." },
+                {
+                  "speaker": "player",
+                  "text": "Bir tanığı kaybetmek için bir cümle yeter. Kazanmak için bir duruşma bile yetmeyebilir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -100 },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "onur_baski", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Muhtemel bir tanığı korkutmak, tanığı etkilemeye teşebbüs sayılabilir (TCK 277) ve meslek kurallarına aykırıdır.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "BAY_PARA",
+          "kind": "OPTION",
+          "label": "Bir kahve parası bırakayım; dosyaya bir göz atayım.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Onur’un gözleri banknotta bir an durdu. Sonra kameraya, tavandaki küçük siyah göze."
+                },
+                { "speaker": "onur", "text": "Abla… bunu kayda alıyor o. Al paranı. Allah aşkına, al." },
+                {
+                  "speaker": "narrator",
+                  "text": "Parayı geri aldım. Elim yanıyordu. Tavandaki kamera bir şeyi kaydetmişti: benim, bir tanığa para uzatışımı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir yıl önce biri bu tezgâha bin lira bırakmıştı. Bugün ben bıraktım. Aramızdaki tek fark, onun aldığı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -150 },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "tanik_etkileme", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Tanığa ya da kayıt tutana menfaat teklif etmek tanığı etkilemedir (TCK 277) ve kişisel verileri hukuka aykırı elde etmeye azmettirme oluşturabilir (TCK 136, 38). Ağır meslek ihlali (Av.K. 34).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        { "id": "BAY_GERI", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_BURAK",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "Tamirci",
+      "background": "sokak_gece",
+      "room": { "label": "TAMİR ATÖLYESİ · YILDIRIM", "character": "burak" },
+      "onFirstEnter": [{ "type": "MEET", "character": "burak" }],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "YILDIRIM · TELEFON TAMİRCİSİ · 18.05",
+              "style": "card",
+              "bg": "sokak_gece"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bir merdiven altı dükkân. Tezgâhta sökülmüş telefonlar, bir lehim makinesi, bir bardak soğumuş çay. Burak bir ekranı cımbızla kaldırıyordu."
+            },
+            {
+              "speaker": "burak",
+              "text": "Avukat ha. Sevim teyze yolladı, değil mi? “O yaptı” dedi. Her şeyi ben yaptım zaten; küresel ısınmayı da."
+            },
+            { "speaker": "burak", "text": "Sor bakalım. Ama çabuk; bu ekran soğumadan takılacak." },
+            {
+              "speaker": "narrator",
+              "text": "Tezgâhın köşesinde bir fotoğraf çerçevesi, ters çevrilmiş. Burak bakışımı fark etti, çerçeveyi bir çekmeceye kaldırdı."
+            },
+            { "speaker": "burak", "text": "Eski. Kırık zaten. Tamir edemediğim tek şey." }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "BUR_ALIBI",
+          "kind": "OPTION",
+          "label": "4 Kasım sabahı, onu on geçe neredeydin?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Cımbızı bıraktı, ekranı bir bezle sardı. Bir an bana baktı; bir yıllık bir kırgınlığın içinden bakar gibi."
+                },
+                { "speaker": "burak", "text": "Burada. Her sabah burada. Dokuzda açarım. Dur bakayım." },
+                {
+                  "speaker": "narrator",
+                  "text": "Kasanın yanındaki eski bilgisayarda bir şeyler aradı. POS dökümü. 4 Kasım 2025: 10.09, 10.20, 10.31. Üç ekran değişimi. Kendi kamerasının kaydı da duruyordu; o gün hiçbir şeyi silmemiş."
+                },
+                {
+                  "speaker": "burak",
+                  "text": "Ben kayıt silmem. Silen, saklayandır. Ece öğretti bana bunu, her şeyin ekran görüntüsünü alırdı."
+                },
+                {
+                  "speaker": "burak",
+                  "text": "Sevim teyzeye söyle; ben Ece’ye kızgındım, evet. Ama kızgın olmak, bir insanın hattını çalmak değil. Ben telefon tamir ederim, hayat bozmam."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir alibi. Ve bir ayrılığın arkasında hâlâ duran bir saygı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_burak_alibi" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_burak_temiz", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "BUR_IMEI",
+          "kind": "OPTION",
+          "label": "Bir SIM nasıl başkasının eline geçer?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "burak",
+                  "text": "SIM kart dediğin bir anahtar. Bayi de çilingir. Kimliğin aslı lazım, yüz yüze. Ama bir fotokopi, bir de sahte vekâletname getirirsen, tembel bir çilingir kapıyı açar."
+                },
+                {
+                  "speaker": "burak",
+                  "text": "Yeni kartı kim nereye takarsa, operatör onu görür. Her telefonun bir kimliği var, IMEI. On beş hane. Kutunun altında yazar."
+                },
+                {
+                  "speaker": "burak",
+                  "text": "Kart değişir, telefon değişmez. Ece’nin kartını başka bir telefona taktılarsa, kayıtlarda o telefonun numarası çıkar. Eski iPhone’un numarası değil."
+                },
+                {
+                  "speaker": "burak",
+                  "text": "Bir de şunu bil: bu işleri yapanlar çoğunlukla telefonu da tek kullanır. Ucuz bir Android alırlar, her şeyi ona takarlar. Tembeldirler. Tembellik iz bırakır."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın cümlesi: kart bir telefonun içinde yaşar, telefonun da kimliği vardır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 20 },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_imei", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "BUR_TEKLIF",
+          "kind": "OPTION",
+          "label": "Burak’ın söyleyeceği bir şey daha var gibi",
+          "visibleWhen": { "any": [{ "chosen": "BUR_ALIBI" }, { "chosen": "BUR_IMEI" }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Burak cımbızı bıraktı. Sesini alçalttı, dükkânda ikimizden başka kimse yokken."
+                },
+                {
+                  "speaker": "burak",
+                  "text": "Bak. Eski çalıştığım bayinin şifresi hâlâ duruyor bende. Kapatmayı unutmuşlar. Girerim, Ece’nin hattının o günkü kaydını çekerim. Beş dakika."
+                }
+              ]
+            }
+          ],
+          "next": "INV1_BURAK_T"
+        },
+        { "id": "BUR_GERI", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_BURAK_T",
+      "type": "CHOICE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "Beş dakika",
+      "background": "sokak_gece",
+      "prompt": { "speaker": "burak", "text": "Ne diyorsun? Kimse bilmez. Ece için." },
+      "choices": [
+        {
+          "id": "BURT_RED",
+          "kind": "OPTION",
+          "label": "Hayır. O kayıt mahkemeden gelir. Sen de o şifreyi kapat.",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "burak", "text": "Mahkemeden. Bir yıl sürer." },
+                { "speaker": "player", "text": "On üç günde gelecek. Ve geldiğinde kimse ondan şüphe etmeyecek." },
+                {
+                  "speaker": "narrator",
+                  "text": "Burak omuz silkti, sonra bilgisayarı açıp bir şeyleri sildi. “Kapattım” dedi. “Ece’ye söyleme. Benim böyle bir şey teklif ettiğimi.”"
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 60 },
+            { "type": "VAR", "var": "burak_red", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Yetkisiz erişimle alınan kayıt suçtur (TCK 243, 136) ve delil olarak kullanılamaz (Anayasa 38/6; CMK 206/2-a, 217/2). Doğru yol mahkeme yazısıdır (CMK 177).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "BURT_KABUL",
+          "kind": "OPTION",
+          "label": "Çek. Kimse bilmeyecek.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Burak beş dakika bile sürmedi. Ekranda Ece’nin hattı, 4 Kasım, 10.12: “SIM değişikliği — Mavi İletişim.” Telefonuyla bir fotoğraf çekti, bana gönderdi."
+                },
+                { "speaker": "burak", "text": "Al. Kimse bilmez." },
+                {
+                  "speaker": "player",
+                  "text": "Kimse bilmez. Ben bilirim. Bir delilin nereden geldiğini unutmak, onu kullananın işi değil; onu dinleyen hâkimin işidir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_bayi_ekran" },
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -100 },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "illegal_alindi", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Yetkisiz erişimle kişisel veri elde etmeye iştirak (TCK 243, 136). Bu kayıt mahkemede delil olamaz; sunulursa savunmanın güvenilirliği çöker.",
+            "category": "USUL_BILGISI"
+          }
+        }
+      ]
+    },
+    {
+      "id": "INV1_GOKHAN",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "Siber Şube",
+      "background": "karakol",
+      "room": { "label": "EMNİYET · SİBER SUÇLARLA MÜCADELE", "character": "gokhan" },
+      "onFirstEnter": [{ "type": "MEET", "character": "gokhan" }],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "EMNİYET · SİBER ŞUBE · 10.00", "style": "card", "bg": "karakol" },
+            {
+              "speaker": "narrator",
+              "text": "Üç monitör, iki boş kahve bardağı, bir saksıda ölmüş bir sukulent. Gökhan Ateş ekranlardan birini kapatmadan bana döndü."
+            },
+            {
+              "speaker": "gokhan",
+              "text": "Avukat hanım, bende dört yüz dosya var. Dört yüz. Hepsi aynı: biri ilan veriyor, biri para gönderiyor, para bir hesaptan geçiyor. Hesap kiminse, dosya onun."
+            },
+            { "speaker": "gokhan", "text": "Ece Yalın. Hatırlıyorum. Ağladı. Hepsi ağlar. Buyurun, ne soracaksınız?" },
+            {
+              "speaker": "narrator",
+              "text": "Duvarda bir pano, panoda onlarca dekont fotokopisi, her birinin üstünde bir isim. İsimlerin çoğu genç. Bazılarının yanında soru işareti."
+            },
+            {
+              "speaker": "gokhan",
+              "text": "Şuna bakın. Hepsi aynı hikâye. Bir ilan, bir hesap, bir kurban. Kimin kurban kimin fail olduğunu ayırmaya vaktim yok. Hesap kimdeyse, dosya onda."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "GOK_LOG",
+          "kind": "OPTION",
+          "label": "Bankadan cihaz ve oturum kayıtlarını istediniz mi?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Ekrana bir şey yazdı, sonra sildi. Kahve bardağını aldı, boş olduğunu fark etti, yine de dudağına götürdü."
+                },
+                {
+                  "speaker": "gokhan",
+                  "text": "Hesap özeti istedik. Banka özet gönderdi. “Mobil kanal” yazıyordu; mobil kanal, sanığın mobil şubesi demek."
+                },
+                { "speaker": "player", "text": "Hangi cihaz?" },
+                {
+                  "speaker": "gokhan",
+                  "text": "…Cihaz istemedik. Gerek görmedik. Hesap onun, şifre onun, uygulama onun. Dört yüz dosya, avukat hanım."
+                },
+                {
+                  "speaker": "gokhan",
+                  "text": "Bakın, isteseydik belki gelirdi. Ama bankadan cihaz kaydı istemek bir ay, operatörden bir ay daha. Dosya o arada savcıya gider, savcı iddianameyi yazar."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Mobil kanal.” Bir kanalın iki ucu vardır. Polis yalnızca birine bakmış.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_polis_eksik", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "GOK_SIM",
+          "kind": "OPTION",
+          "label": "Hattın 4 Kasım’da değiştirildiğine baktınız mı?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "gokhan",
+                  "text": "SIM mi? Hayır. İfadesinde “telefonum çekmiyordu” dedi; bunu herkes der. Hattın tespiti için mahkeme kararı lazım, dosya da zaten açıktı."
+                },
+                {
+                  "speaker": "gokhan",
+                  "text": "Siz isterseniz mahkeme isteyebilir. Sanığın kendi hattı, sorun olmaz. Başkasının hattına bakacaksanız o başka iş; şüpheli olması lazım."
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+        },
+        {
+          "id": "GOK_ECE",
+          "kind": "OPTION",
+          "label": "Ece’nin ifadesinde sizi ikna eden ne oldu?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "gokhan",
+                  "text": "“Kimseyle kod paylaşmadım” dedi. Peki. O zaman yeni cihazı kim tanımladı? Kod onun telefonuna geldiyse, ya o tanımladı ya birine verdi."
+                },
+                {
+                  "speaker": "gokhan",
+                  "text": "Vermediğini söylüyorsa, kendisi tanımlamıştır. Mantık bu. Ben mantıkla çalışırım."
+                },
+                {
+                  "speaker": "gokhan",
+                  "text": "Bakın avukat hanım, ben kötü bir polis değilim. Ben yorgun bir polisim. İkisi dışarıdan aynı görünür. İçeriden değil."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Mantık sağlam. Öncülü çürük. Ve öncülü çürütmenin tek yolu, Ece’nin kendi cümlesi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_gokhan_mantik", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "GOK_ATM",
+          "kind": "OPTION",
+          "label": "ATM görüntüsü dosyada yok. Neden?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "gokhan",
+                  "text": "İstedik. Gelmedi. Banka bir yazı yazdı, “kamera kayıtları talep hâlinde” diye. Sonra iddianame çıktı, kimse peşine düşmedi."
+                },
+                { "speaker": "gokhan", "text": "Siz isteyin. Gelirse bana da bir kopya. Merak ettim şimdi." }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
+        },
+        { "id": "GOK_GERI", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_HESAP",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "Hesap hareketleri",
+      "background": "buro",
+      "hud": ["exam_left"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Banka yazısı tek sayfa: beş satır, beş saat, beş tutar. Para bir nehir gibi girmiş, deltaya varmış gibi dağılmış."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yetmiş beş bin lira, yirmi beş dakikada üçe bölünmüş. Bir kısmı bir kripto platformuna, bir kısmı bir isme, bir kısmı bir ATM’ye. Para hızlı; iz yavaş."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir alet seç, sonra satıra dokun. Rakamlar yalan söylemez; ama sorulmadan da bir şey söylemez.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "VADESİZ HESAP · ECE YALIN", "right": "01.11–04.11.2025" },
+      "columns": [
+        { "label": "TARİH / SAAT", "flex": 1.2 },
+        { "label": "İŞLEM", "flex": 2 },
+        { "label": "TUTAR", "flex": 1 }
+      ],
+      "rows": [
+        { "id": "h1", "cells": ["01.11 09.14", "Gelen EFT · MEHMET DEMİR", "+4.500,00"] },
+        { "id": "h2", "cells": ["04.11 13.40", "Gelen EFT · NURETTİN AKSOY", "+75.000,00"] },
+        { "id": "h3", "cells": ["04.11 13.52", "Giden · KRİPTO PLATFORM A.Ş.", "−40.000,00"] },
+        { "id": "h4", "cells": ["04.11 13.58", "Giden EFT · M. DEMİR …0418", "−15.000,00"] },
+        { "id": "h5", "cells": ["04.11 14.05", "Kartsız çekim · ATM", "−20.000,00"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "exam_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_H1",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "h1" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Açıklama alanı: “NOVA DIJITAL EGITIM AVANSI”. Gönderen IBAN …0418. Savcı buna “kira bedeli” demiş; gönderen ona “eğitim avansı” demiş.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_avans" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_H4",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "h4" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "IBAN …0418. 1 Kasım’da 4.500 TL’yi gönderen hesapla aynı. Avansı gönderen, kaporadan payını geri almış.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_mdemir_cikis" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_H5",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "h5" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Kartsız çekim: ATM ekranındaki karekod, mobil şubeye tanımlı bir telefonla okutulur. Yer: Kent Meydanı, Osmangazi. Ece’nin telefonunda ise o sabahtan beri “SIM yok” yazıyordu.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_qr_atm" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "FB_HESAP",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda yeni bir şey görünmüyor.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "HESAP_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_SIKAYET",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #02 · SORUŞTURMA",
+      "title": "Şikâyet dilekçesi",
+      "background": "buro",
+      "hud": ["exam_sk"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Nurettin Aksoy’un dilekçesi temiz bir el yazısıyla, sonra bilgisayarda yeniden yazılmış. Paragraflar numaralı. Bir yerde, parantez içinde, bir dipnot."
+            },
+            {
+              "speaker": "narrator",
+              "text": "İlk sayfanın köşesinde bir not: “Eşimin diyaliz günleri: Salı, Perşembe, Cumartesi. Duruşmaların bu günlere denk getirilmemesini saygılarımla arz ederim.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Öğretmenler hiçbir şeyi atlamaz. Atladıkları şeyi de dipnota yazarlar.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "ŞİKÂYET DİLEKÇESİ · N. AKSOY", "right": "04.11.2025" },
+      "columns": [
+        { "label": "SAAT", "flex": 0.8 },
+        { "label": "OLAY", "flex": 2 },
+        { "label": "NOT", "flex": 1.4 }
+      ],
+      "rows": [
+        { "id": "s1", "cells": ["13.05", "İlanı gördüm, satıcıyı aradım", "İlan görüntüsü ekte"] },
+        { "id": "s2", "cells": ["13.31", "İkinci görüşme: “kardeşimin hesabı”", "(Dipnot 1)"] },
+        { "id": "s3", "cells": ["13.40", "EFT ile 75.000 TL gönderdim", "Dekont ekte"] },
+        { "id": "s4", "cells": ["14.40", "Satıcıya ulaşılamadı", "13 arama"] },
+        { "id": "s5", "cells": ["18.10", "İlandaki adres boş bir otopark", "—"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "exam_sk", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_S1",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "s1" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "İlan görüntüsü: “Sahibinden acil, Clio 2014. Arayın: 0532 614 41 07 — Kaan.”",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_satici_no" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_S2",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "s2" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Dipnot 1: “Görüşme sırasında arkadan bir asansör sinyali ve kayıtlı bir kadın sesiyle ‘Dördüncü kat’ anonsu duyulmuştur.” Kırk yıllık öğretmen.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ding_nurettin" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "FB_SIKAYET",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu satırda bu aletle yeni bir şey yok.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "SIKAYET_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "ev_sozlesme", "source": { "type": "CHOICE", "id": "OM_SOZLESME" } },
+    { "evidence": "clue_kartvizit", "source": { "type": "CHOICE", "id": "OM_KORIDOR" } },
+    { "evidence": "clue_kartvizit", "source": { "type": "CHOICE", "id": "OM_GERI" } },
+    { "evidence": "clue_onur_vekil", "source": { "type": "CHOICE", "id": "BAY_SOR" } },
+    { "evidence": "clue_burak_alibi", "source": { "type": "CHOICE", "id": "BUR_ALIBI" } },
+    { "evidence": "ev_bayi_ekran", "source": { "type": "CHOICE", "id": "BURT_KABUL" } },
+    { "evidence": "clue_avans", "source": { "type": "RULE", "id": "EX_H1" } },
+    { "evidence": "clue_mdemir_cikis", "source": { "type": "RULE", "id": "EX_H4" } },
+    { "evidence": "clue_qr_atm", "source": { "type": "RULE", "id": "EX_H5" } },
+    { "evidence": "clue_satici_no", "source": { "type": "RULE", "id": "EX_S1" } },
+    { "evidence": "clue_ding_nurettin", "source": { "type": "RULE", "id": "EX_S2" } }
+  ]
+}

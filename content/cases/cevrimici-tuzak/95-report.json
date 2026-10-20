@@ -1,0 +1,126 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_not",
+        "when": { "not": { "hasEvidence": "ev_not" } },
+        "text": "Ece’nin odasında, monitörün kenarındaki sarı notu bulmadın: “4471 — SGK.” Kodun aldatılarak okunduğunun en erken kanıtıydı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_simyok",
+        "when": { "not": { "hasEvidence": "clue_simyok" } },
+        "text": "Şarjdaki eski telefonda 4 Kasım 10.13 tarihli “SIM yok” ekran görüntüsü vardı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_ekran",
+        "when": { "not": { "hasEvidence": "clue_sgk_mesaj" } },
+        "text": "Ece her şeyin ekran görüntüsünü alıyordu. Başvuru tablosunu bulup ona ekran görüntülerini sorsaydın, Kaan’ın “SGK kodu” mesajı ve numarası eline geçerdi.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_dokum",
+        "when": { "not": { "hasEvidence": "ev_sim_dokum" } },
+        "text": "Ece’nin kendi operatöründen alabileceği işlem dökümü (KVKK md. 11), hattın 10.12’de başka bir bayide vekille değiştirildiğini gösterirdi.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_log",
+        "when": { "not": { "hasEvidence": "ev_banka_log" } },
+        "text": "Bankadan cihaz ve oturum kaydını istemedin (CMK 177). İşlemlerin bir Samsung’dan yapıldığını gösteren tek belgeydi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_hts",
+        "when": { "not": { "hasEvidence": "ev_hts" } },
+        "text": "Sanığın hattı için iletişimin tespitini istemedin (CMK 135/6). Kopya SIM’in takıldığı cihazın IMEI’si oradaydı.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_bayi",
+        "when": { "not": { "hasEvidence": "ev_bayi_belge" } },
+        "text": "SIM değişikliğinde kullanılan belgeleri istemedin: sahte vekâletname ve Ece’nin fotoğrafından basılmış fotokopi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_kaan",
+        "when": { "not": { "hasEvidence": "ded_kaan" } },
+        "text": "İşverenin numarası ile sahte satıcının numarası aynıydı. Bu ikisini tahtada birleştirmek, ilanın bir tuzak olduğunu gösterirdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_dongu",
+        "when": { "not": { "hasEvidence": "ded_dongu" } },
+        "text": "Avansı gönderen IBAN kaporadan 15.000 TL geri almıştı; “kira bedeli” iddiasını çürütecek döngüydü.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_imei",
+        "when": { "not": { "hasEvidence": "ev_imei_rapor" } },
+        "text": "Somut dayanaklı bir suç duyurusuyla IMEI sorgusu isteyebilirdin (CMK 158, 135/6). Rapor gerçek faile götürürdü.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_kartvizit",
+        "when": { "not": { "hasEvidence": "ded_necdet" } },
+        "text": "İMEİ raporundaki şirket hattı, OM İş Merkezi müdürünün sana verdiği kartvizitteki numaraydı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_inkar",
+        "when": { "flag": "ece_inkar" },
+        "text": "Müvekkile inkâr tavsiye etmek meslek kurallarına aykırıdır (Av.K. 34) ve banka kaydı karşısında savunmayı çökertir. Doğru yol, aldatmayı belgeleriyle anlatmaktı.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_burak",
+        "when": { "flag": "suc_burak" },
+        "text": "Burak hakkındaki suç duyurusu somut delile dayanmıyordu ve 4 Kasım sabahı dükkânında olduğu belgeliydi; iftira riski (TCK 267).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_illegal",
+        "when": { "any": [{ "flag": "illegal_alindi" }, { "flag": "illegal_used" }] },
+        "text": "Operatör sistemine yetkisiz girişle alınan kayıt suçtur (TCK 243, 136) ve delil olamaz (CMK 206/2-a, 217/2). Aynı bilgi mahkeme yazısıyla yasal yoldan gelebilirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_arda",
+        "when": { "all": [{ "not": { "flag": "arda_avukat" } }, { "flag": "arda_ifade" }] },
+        "text": "Çıkarı müvekkilinle çatışabilecek bir kişiden yazılı beyan alındı; onu kendi avukatına yönlendirip mahkemede dinletmek gerekirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_nurettin",
+        "when": { "any": [{ "flag": "nurettin_soz" }, { "flag": "nurettin_baski" }] },
+        "text": "Avukatı olmayan katılana söz vermek ya da şikâyetten vazgeçirmeye çalışmak meslek kurallarına aykırıdır; nitelikli dolandırıcılık şikâyete bağlı da değildir.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_tehdit",
+        "when": {
+          "all": [
+            { "any": [{ "visited": "INV1_AKSAM2" }, { "flag": "suc_duyurusu" }] },
+            { "not": { "flag": "tehdit_bildirildi" } },
+            { "not": { "flag": "arama_bildirildi" } }
+          ]
+        },
+        "text": "Müvekkile ve sana yönelik tehditler belgelenip savcılığa bildirilmeliydi (TCK 106; CMK 158).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_kanaat",
+        "when": { "not": { "any": [{ "flag": "obj_g4" }, { "flag": "obj_g5" }] } },
+        "text": "Gökhan Ateş görmediği görüntü ve kendi çıkarımı hakkında konuştu; kanaate itiraz edilebilirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_kopya",
+        "when": { "all": [{ "hasEvidence": "clue_parlama" }, { "not": { "hasEvidence": "ded_kopya" } }] },
+        "text": "Fotokopideki parlama ve kırık oje, Ece’nin masasındaki lambayla birleşince fotokopinin Nova’ya gönderilen fotoğraftan basıldığını gösterirdi.",
+        "category": "DELIL_ANALIZI"
+      }
+    ]
+  }
+}

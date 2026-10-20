@@ -2,9 +2,9 @@ import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
 import { Category, SessionView } from '@mudafaa/case-schema';
 import type { Action } from '@mudafaa/case-schema';
-import { EngineError, act, enumerateActions, migrateState, start, stateHash, view } from '../src/index.js';
+import { EngineError, act, compile, enumerateActions, migrateState, start, stateHash, view } from '../src/index.js';
 import type { EngineEvent, SessionState } from '../src/index.js';
-import { GP_WIN, compiled, play } from './helpers/run.js';
+import { GP_WIN, compiled, miniPkg, play } from './helpers/run.js';
 
 const c = compiled();
 const META = { sessionId: 'ses_p', caseId: 'case_p', stateVersion: 0, mode: 'NORMAL' as const };
@@ -21,11 +21,16 @@ function walk(picks: readonly number[]): { log: Action[]; hashes: string[]; stat
   const hashes: string[] = [stateHash(s)];
   for (const pick of picks) {
     const options = enumerateActions(c, s);
-    if (options.length === 0) break;
+    if (options.length === 0) {
+      // Seçeneksiz durum ancak dava bitince olabilir (aksi hâlde çıkmaz).
+      expect(s.status).toBe('COMPLETED');
+      break;
+    }
     const a = options[pick % options.length];
     if (a === undefined) break;
     const r = act(c, s, a);
     if (!r.ok) throw new Error(`${s.nodeId}: ${JSON.stringify(a)} → ${r.code}`);
+    expect(r.result.resolution).not.toBe('NOOP');
     s = r.state;
     scored += scoreSum(r.events);
     log.push(a);
@@ -61,10 +66,14 @@ describe('properties', () => {
     fc.assert(
       fc.property(picks, (p) => {
         const first = walk(p);
-        let s = start(c).state;
+        // Yeniden derlenmiş dava ile oynatılır: determinizm derlemeler arasında da geçerli.
+        const again = compile(miniPkg());
+        if (!again.ok) throw new Error('compile');
+        const c2 = again.c;
+        let s = start(c2).state;
         const hashes = [stateHash(s)];
         for (const a of first.log) {
-          const r = act(c, s, a);
+          const r = act(c2, s, a);
           if (!r.ok) throw new Error(r.code);
           s = r.state;
           hashes.push(stateHash(s));

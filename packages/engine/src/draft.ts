@@ -35,6 +35,8 @@ export interface Draft {
   source: string;
   goto?: string;
   end?: { outcome?: string };
+  /** Son girilen node'un anlatı satırlarının `lines` içindeki yeri (varılan node'unkiler görünümde zaten vardır). */
+  entry?: { node: string; start: number; count: number };
   hops: number;
   triggerFires: number;
   nodeChanged: boolean;

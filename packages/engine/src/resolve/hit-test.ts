@@ -47,7 +47,7 @@ export function hitTest(
 
 /** Şeklin sınır kutusu. */
 export function boundingRect(shape: Shape): Rect {
-  if ('rect' in shape) return shape.rect;
+  if ('rect' in shape) return { ...shape.rect };
   if ('circle' in shape) {
     const { cx, cy, r } = shape.circle;
     return { x: cx - r, y: cy - r, w: 2 * r, h: 2 * r };

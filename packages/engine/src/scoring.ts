@@ -10,6 +10,8 @@ export interface ScoreSummary {
   bonuses: { id: string; label: string; value: number }[];
   final: number;
   lines: { id: string; label: string; value: number }[];
+  /** Genel çarpanın skora kattığı fark (`base − raw`; çarpan yoksa 0). */
+  adjust: number;
 }
 
 const toInt = (v: number | string | boolean, what: string): number => {
@@ -59,14 +61,16 @@ export function computeScore(c: CompiledCase, s: SessionState): ScoreSummary {
     label: renderLabel(l.label, c, s),
     value: getOwn(s.score.line, l.id) ?? 0,
   }));
-  return { raw, bonuses, final: base + bonusSum, lines };
+  return { raw, bonuses, final: base + bonusSum, lines, adjust: base - raw };
 }
 
 const toneOf = (value: number): Tone => (value > 0 ? 'success' : value < 0 ? 'error' : 'neutral');
 
 /** Karar dökümü: önce skor satırları, sonra bonuslar; işarete göre renk. */
 export function breakdownRows(score: ScoreSummary): { label: string; value: number; tone: Tone }[] {
-  return [...score.lines, ...score.bonuses].map((r) => ({ label: r.label, value: r.value, tone: toneOf(r.value) }));
+  const rows = [...score.lines, ...score.bonuses];
+  if (score.adjust !== 0) rows.push({ id: 'multiplier', label: 'Çarpan', value: score.adjust });
+  return rows.map((r) => ({ label: r.label, value: r.value, tone: toneOf(r.value) }));
 }
 
 /** Önceliğe göre `when` koşulunu tutan ilk sonuç (son sonuç `{all:[]}` olduğundan her zaman bir sonuç vardır). */

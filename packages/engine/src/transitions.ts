@@ -52,11 +52,15 @@ export function enterNode(d: Draft, id: string): void {
   if (before === 0) applyEffects(node.def.onFirstEnter, d);
   applyEffects(node.def.onEnter, d);
   d.source = saved;
+  const start = d.lines.length;
   pushResponses(d, node.def.lines);
+  d.entry = { node: id, start, count: d.lines.length - start };
   if (d.goto !== undefined || d.end !== undefined) return;
   if (node.def.type === 'DECISION') {
     const route = node.def.routes.find((r) => r.when === undefined || evalCond(r.when, ctxOf(d)));
-    if (route !== undefined) enterNode(d, route.to);
+    // Eşleşen rota yoksa oturum görünümü olmayan bir node'da kalırdı: aksiyon hiçbir şey kaydedilmeden düşer.
+    if (route === undefined) throw new EngineError('TYPE', `DECISION ${id}: eşleşen rota yok`);
+    enterNode(d, route.to);
     return;
   }
   if (node.def.type === 'RESULT') finalize(d);

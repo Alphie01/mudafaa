@@ -43,8 +43,13 @@ describe('triggers', () => {
 
   it('global collapse', () => {
     const c = compiled();
-    const s = play(c, GP_LOSE.slice(0, 5));
-    expect(s.nodeId).toBe('n_collapse');
+    const s = play(c, GP_LOSE.slice(0, 4));
+    const r = act(c, s, present('e_key', 'st1'));
+    if (!r.ok) throw new Error(r.code);
+    expect(r.state.nodeId).toBe('n_collapse');
+    expect(r.events).toContainEqual({ type: 'TRIGGER', id: 'tg_collapse' });
+    expect(r.state.vars.wrong).toBe(3);
+    expect(r.state.score.line.hatali).toBe(-450);
   });
 
   it('loop limit rejects', () => {

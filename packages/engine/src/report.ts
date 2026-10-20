@@ -60,7 +60,7 @@ export function report(
   const skills = c.pkg.config.scoring.categories.map((cat) => {
     const earned = Math.max(0, s.score.cat[cat.id] ?? 0);
     const max = Math.max(0, opts.categoryMax?.[cat.id] ?? fallbackMax[cat.id]);
-    const ratio = max === 0 ? 1 : earned / max;
+    const ratio = max === 0 ? (earned > 0 ? 1 : 0) : earned / max;
     const level: 'weak' | 'medium' | 'strong' = ratio < 0.4 ? 'weak' : ratio <= 0.75 ? 'medium' : 'strong';
     const advice =
       level === 'weak'

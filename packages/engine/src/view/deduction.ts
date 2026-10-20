@@ -12,8 +12,10 @@ export function deductionView(vc: ViewCtx, def: Extract<NodeDef, { type: 'DEDUCT
   const titleOf = (id: string): string => vc.c.evidence.get(id)?.title ?? id;
   const solvedOf = (r: ChoiceDef): { title: string; hits: string }[] => {
     if (r.match === undefined || !('a' in r.match) || !usedOnce(vc, r.id)) return [];
+    // Çıkarımın başlığı yalnızca çıkarım gerçekten bulunduysa (bulunma koşulu engellemiş olabilir) gösterilir.
     const insight = firstDiscovery(r.effects);
-    const title = insight === undefined ? (r.label ?? r.feedback?.title ?? r.id) : titleOf(insight);
+    const title =
+      insight !== undefined && discovered(vc, insight) ? titleOf(insight) : (r.feedback?.title ?? r.label ?? 'Çıkarım');
     return [{ title, hits: `${titleOf(r.match.a)} + ${titleOf(r.match.b)}` }];
   };
   return {

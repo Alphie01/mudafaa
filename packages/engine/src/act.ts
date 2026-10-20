@@ -349,6 +349,8 @@ function doPresent(d: Draft, node: CNode, a: Extract<Action, { kind: 'PRESENT' }
   if (node.def.type === 'COURTROOM') {
     if (!ev.presentable) throw new Reject('INVALID_PARAMS', 'Bu delil mahkemede sunulamaz.');
     if (!visibleStatement(d, node, a.statementId)) throw new Reject('INVALID_PARAMS', 'Bir ifade seçilmeli.');
+  } else if (a.statementId !== undefined) {
+    throw new Reject('INVALID_PARAMS', 'Bu ekranda ifade seçilemez.');
   }
   return resolveRuleOrFallback(d, node, a, undefined);
 }
@@ -357,9 +359,7 @@ function doObject(d: Draft, node: CNode, a: Extract<Action, { kind: 'OBJECT' }>)
   if (node.def.type !== 'COURTROOM' || !(node.def.objectionGrounds ?? []).includes(a.groundId)) {
     throw new Reject('INVALID_PARAMS', 'Bu itiraz gerekçesi kullanılamaz.');
   }
-  if (a.statementId !== undefined && !visibleStatement(d, node, a.statementId)) {
-    throw new Reject('INVALID_PARAMS', 'Bu ifade yok.');
-  }
+  if (!visibleStatement(d, node, a.statementId)) throw new Reject('INVALID_PARAMS', 'Bir ifade seçilmeli.');
   return resolveRuleOrFallback(d, node, a, undefined);
 }
 
@@ -397,6 +397,8 @@ export function act(c: CompiledCase, s: SessionState, a: Action): ActOk | ActRej
   try {
     const out = perform(d, node, a);
     settle(d);
+    // Varılan node'un anlatısı görünümün `lines`'ında zaten var; sonuçta yalnızca yanıtlar ve geçilen node'lar kalır.
+    if (d.entry !== undefined && d.entry.node === d.s.nodeId) d.lines.splice(d.entry.start, d.entry.count);
     const result: ActionResult = {
       resolution: out.resolution,
       ...(out.feedback === undefined ? {} : { feedback: out.feedback }),
@@ -407,7 +409,7 @@ export function act(c: CompiledCase, s: SessionState, a: Action): ActOk | ActRej
       nodeChanged: d.nodeChanged,
       completed: d.s.status === 'COMPLETED',
     };
-    d.s.last = result;
+    d.s.last = JSON.parse(JSON.stringify(result)) as ActionResult;
     return { ok: true, state: d.s, events: d.events, result };
   } catch (e) {
     if (e instanceof Reject) return { ok: false, code: e.code, message: e.message };

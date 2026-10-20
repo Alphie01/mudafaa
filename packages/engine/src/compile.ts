@@ -73,6 +73,47 @@ function schemaIssues(issues: readonly ZodIssueLike[], prefix: readonly Property
 }
 
 /** Yüklem grafiğinde döngü arar; döngüdeki ilk yüklemin kimliğini döndürür. */
+const PLAYER_KINDS: ReadonlySet<string> = new Set(['OPTION', 'TOPIC', 'NAVIGATE', 'CONTINUE']);
+
+/** Şemanın kabul ettiği ama motorun bu seçenek türünde yok saydığı alanlar için uyarılar. */
+function ignoredFieldWarnings(pkg: CasePackage): Issue[] {
+  const out: Issue[] = [];
+  const warn = (path: string, message: string): void => {
+    out.push({ severity: 'WARNING', code: 'IGNORED_FIELD', message, path });
+  };
+  pkg.nodes.forEach((n, i) =>
+    n.choices.forEach((ch, j) => {
+      const p = `nodes[${i}].choices[${j}]`;
+      if (ch.kind === 'FALLBACK') {
+        if (ch.maxUses !== undefined)
+          warn(`${p}.maxUses`, `${ch.id}: FALLBACK maxUses yok sayılır (ONCE_PER_PARAMS kullanın)`);
+        if (ch.repeat !== undefined && ch.repeat !== 'APPLY' && ch.repeat !== 'ONCE_PER_PARAMS') {
+          warn(`${p}.repeat`, `${ch.id}: FALLBACK yalnızca APPLY ya da ONCE_PER_PARAMS tekrarını destekler`);
+        }
+      } else if (PLAYER_KINDS.has(ch.kind)) {
+        if (ch.repeat === 'APPLY' || ch.repeat === 'ONCE_PER_PARAMS') {
+          warn(`${p}.repeat`, `${ch.id}: oyuncu seçeneği yalnızca NOOP ya da REJECT tekrarını destekler`);
+        }
+      } else {
+        if (ch.repeat !== undefined && ch.repeat !== 'NOOP')
+          warn(`${p}.repeat`, `${ch.id}: kural tükenince her zaman NOOP olur`);
+        if (ch.cost !== undefined)
+          warn(`${p}.cost`, `${ch.id}: kural maliyeti yok sayılır; node actionCosts kullanılır`);
+      }
+    }),
+  );
+  return out;
+}
+
+/** Derlenmiş paketin kazara değiştirilmesini önler (önbellekteki dava bütün oturumlarca paylaşılır). */
+function deepFreeze<T>(value: T): T {
+  if (typeof value === 'object' && value !== null && !Object.isFrozen(value)) {
+    Object.freeze(value);
+    for (const v of Object.values(value)) deepFreeze(v);
+  }
+  return value;
+}
+
 function findPredicateCycles(preds: ReadonlyMap<string, Cond>): string[] {
   const state = new Map<string, 'visiting' | 'done'>();
   const cyclic = new Set<string>();
@@ -198,13 +239,18 @@ export function compile(input: unknown): CompileResult {
   const checkVal = (val: Val | undefined, path: string): void => {
     if (val !== undefined) checkRefSet(collectRefs(val), path);
   };
+  let firstEnd: string | undefined;
   const checkEffects = (effects: readonly Effect[] | undefined, path: string): void => {
     if (effects === undefined || effects.length === 0) return;
     checkRefSet(collectRefs(effects), path);
-    // SCORE'un açık `line`'ı var olan bir skor satırını göstermeli.
+    // SCORE'un açık `line`'ı var olan bir skor satırını, END'in `outcome`'u var olan bir sonucu göstermeli.
     const walk = (list: readonly Effect[]): void => {
       for (const e of list) {
         if (e.type === 'SCORE' && e.line !== undefined) ref(lineIds, 'skor satırı', e.line, path);
+        if (e.type === 'END') {
+          firstEnd ??= path;
+          if (e.outcome !== undefined) ref(outcomeIds, 'sonuç', e.outcome, path);
+        }
         if (e.type === 'IF') {
           walk(e.then);
           walk(e.else ?? []);
@@ -257,8 +303,10 @@ export function compile(input: unknown): CompileResult {
       ref(tools, 'alet', m.tool, `${path}.match.tool`);
       ref(rows, 'satır', m.target, `${path}.match.target`);
     } else if ('a' in m) {
-      ref(evidenceIds, 'delil', m.a, `${path}.match.a`);
-      ref(evidenceIds, 'delil', m.b, `${path}.match.b`);
+      // Birleştirme yalnızca node'un havuzundaki kartlarla yapılabilir.
+      const pool = new Set(node.type === 'DEDUCTION' ? node.pool : []);
+      ref(pool, 'havuz delili', m.a, `${path}.match.a`);
+      ref(pool, 'havuz delili', m.b, `${path}.match.b`);
     } else if ('evidence' in m) {
       if (m.statement !== undefined) ref(nodeStatements, 'ifade', m.statement, `${path}.match.statement`);
       m.evidence.forEach((e, i) => ref(evidenceIds, 'delil', e, `${path}.match.evidence[${i}]`));
@@ -286,8 +334,14 @@ export function compile(input: unknown): CompileResult {
         });
         break;
       case 'EVIDENCE':
-        ref(evidenceIds, 'delil', node.evidence, `${p}.evidence`);
+      case 'CHOICE': {
+        if (node.type === 'EVIDENCE') ref(evidenceIds, 'delil', node.evidence, `${p}.evidence`);
+        const speaker = node.prompt?.speaker;
+        if (speaker !== undefined && speaker !== 'player' && speaker !== 'narrator') {
+          ref(characterIds, 'karakter', speaker, `${p}.prompt.speaker`);
+        }
         break;
+      }
       case 'INVESTIGATION':
         node.tabs.forEach((t, j) =>
           t.choices.forEach((id, k) => ref(local, 'seçenek', id, `${p}.tabs[${j}].choices[${k}]`)),
@@ -411,6 +465,9 @@ export function compile(input: unknown): CompileResult {
   (pkg.tests?.goldenPaths ?? []).forEach((gp, i) =>
     ref(outcomeIds, 'sonuç', gp.expect.outcome, `tests.goldenPaths[${i}].expect.outcome`),
   );
+  if (firstEnd !== undefined && !pkg.nodes.some((n) => n.type === 'RESULT')) {
+    error('DANGLING_REF', 'END etkisi var ama RESULT node yok', firstEnd);
+  }
   const predicates = new Map(pkg.predicates.map((p) => [p.id, p.when] as const));
   for (const id of findPredicateCycles(predicates)) {
     const index = pkg.predicates.findIndex((p) => p.id === id);
@@ -454,6 +511,7 @@ export function compile(input: unknown): CompileResult {
     if (def.type === 'COURTROOM') for (const st of def.statements ?? []) statements.set(st.id, { node: def.id, st });
   }
 
+  deepFreeze(pkg);
   const c: CompiledCase = {
     key: pkg.meta.slug,
     hash: fnv1a64(canonicalJson(pkg)),
@@ -474,5 +532,5 @@ export function compile(input: unknown): CompileResult {
     grounds: new Map(pkg.config.objectionGrounds.map((g) => [g.id, g] as const)),
     lineByCategory,
   };
-  return { ok: true, c, warnings: [] };
+  return { ok: true, c, warnings: ignoredFieldWarnings(pkg) };
 }

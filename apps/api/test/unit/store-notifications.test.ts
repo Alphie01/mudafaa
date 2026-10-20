@@ -22,11 +22,16 @@ function service(notification?: Partial<AppleNotification>, env: Record<string, 
   const decoder = {
     decode: vi.fn(async () => ({ type: 'TEST', subtype: undefined, environment: 'SANDBOX', ...notification })),
   };
-  // Sahte OIDC: "ok:<e-posta>" geçerli token; audience ayrıca kaydedilir.
+  // Sahte OIDC: "ok:<e-posta>" doğrulanmış e-posta, "unverified:<e-posta>" doğrulanmamış e-posta,
+  // "iss=<yayıncı>:<e-posta>" başka yayıncı; diğer her şey geçersiz imza.
   const oidc = {
     verify: vi.fn(async (token: string) => {
-      if (!token.startsWith('ok:')) throw new Error('invalid signature');
-      return { email: token.slice(3), emailVerified: true };
+      const [kind, ...rest] = token.split(':');
+      const email = rest.join(':');
+      if (kind === 'ok') return { issuer: 'https://accounts.google.com', email, emailVerified: true };
+      if (kind === 'unverified') return { issuer: 'accounts.google.com', email, emailVerified: false };
+      if (kind?.startsWith('iss=')) return { issuer: kind.slice(4), email, emailVerified: true };
+      throw new Error('invalid signature');
     }),
   };
   const svc = new StoreNotificationsService(
@@ -128,31 +133,37 @@ describe('Google Play RTDN', () => {
 
   const AUD = 'https://mudafaa.sehirkilavuzu.com/v1/store-notifications/google';
 
-  it('push authentication: endpoint closed without GOOGLE_RTDN_AUDIENCE', async () => {
-    await expect(service().svc.authenticateGoogle('Bearer ok:x')).rejects.toMatchObject({
+  const SA = 'pubsub@p.iam.gserviceaccount.com';
+  const configured = { GOOGLE_RTDN_AUDIENCE: AUD, GOOGLE_RTDN_SERVICE_ACCOUNT: SA };
+
+  it('push authentication: endpoint closed (503) unless audience and service account are both configured', async () => {
+    await expect(service().svc.authenticateGoogle(`Bearer ok:${SA}`)).rejects.toMatchObject({
       status: 503,
       code: 'store_not_configured',
     });
+    // Servis hesabı tek başına da uç açmaz (env kuralı audience'lı tersini zaten reddeder).
+    const saOnly = service(undefined, { GOOGLE_RTDN_SERVICE_ACCOUNT: SA });
+    await expect(saOnly.svc.authenticateGoogle(`Bearer ok:${SA}`)).rejects.toMatchObject({ status: 503 });
+    expect(() => loadEnv({ ...base, GOOGLE_RTDN_AUDIENCE: AUD })).toThrow(/GOOGLE_RTDN_SERVICE_ACCOUNT/);
   });
 
   it('push authentication: verifies the OIDC Bearer token against the audience', async () => {
-    const { svc, oidc } = service(undefined, { GOOGLE_RTDN_AUDIENCE: AUD });
-    await expect(svc.authenticateGoogle('Bearer ok:pubsub@p.iam.gserviceaccount.com')).resolves.toBeUndefined();
-    expect(oidc.verify).toHaveBeenCalledWith('ok:pubsub@p.iam.gserviceaccount.com', AUD);
-    for (const bad of [undefined, '', 'ok:x', 'Basic ok:x', 'Bearer kotu']) {
+    const { svc, oidc } = service(undefined, configured);
+    await expect(svc.authenticateGoogle(`Bearer ok:${SA}`)).resolves.toBeUndefined();
+    expect(oidc.verify).toHaveBeenCalledWith(`ok:${SA}`, AUD);
+    for (const bad of [undefined, '', `ok:${SA}`, `Basic ok:${SA}`, 'Bearer kotu']) {
       await expect(svc.authenticateGoogle(bad)).rejects.toMatchObject({ status: 401, code: 'unauthorized' });
     }
   });
 
-  it('push authentication: optional service account e-mail check', async () => {
-    const { svc } = service(undefined, {
-      GOOGLE_RTDN_AUDIENCE: AUD,
-      GOOGLE_RTDN_SERVICE_ACCOUNT: 'pubsub@p.iam.gserviceaccount.com',
-    });
-    await expect(svc.authenticateGoogle('Bearer ok:pubsub@p.iam.gserviceaccount.com')).resolves.toBeUndefined();
-    await expect(svc.authenticateGoogle('Bearer ok:baska@p.iam.gserviceaccount.com')).rejects.toMatchObject({
-      status: 401,
-    });
+  it('push authentication: rejects a wrong e-mail, an unverified e-mail and a foreign issuer', async () => {
+    const { svc } = service(undefined, configured);
+    for (const token of ['ok:baska@p.iam.gserviceaccount.com', `unverified:${SA}`, `iss=https://evil.example:${SA}`]) {
+      await expect(svc.authenticateGoogle(`Bearer ${token}`)).rejects.toMatchObject({ status: 401 });
+    }
+    // İki yayıncı biçimi de kabul edilir.
+    const accounts = service(undefined, configured);
+    await expect(accounts.svc.authenticateGoogle(`Bearer iss=accounts.google.com:${SA}`)).resolves.toBeUndefined();
   });
 
   it('decodes the Pub/Sub message and rejects garbage', () => {

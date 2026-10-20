@@ -14,9 +14,18 @@ export type AppleNotifications = Pick<AppleNotificationDecoder, 'decode'>;
 
 /** Pub/Sub push OIDC token doğrulayıcısının enjeksiyon token'ı (e2e testleri sahte doğrulayıcı kullanır). */
 export const GOOGLE_OIDC = Symbol('GOOGLE_OIDC');
+/** Doğrulanmış OIDC token'ının kimlik alanları. */
+export interface GoogleIdentity {
+  issuer?: string;
+  email?: string;
+  emailVerified?: boolean;
+}
+/** Google OIDC yayıncıları. */
+const GOOGLE_ISSUERS = new Set(['https://accounts.google.com', 'accounts.google.com']);
+
 /** İmzası, süresi ve audience'ı doğrulanmış token'ın kimlik alanları; geçersiz token'da hata fırlatır. */
 export interface GoogleOidcVerifier {
-  verify(idToken: string, audience: string): Promise<{ email?: string; emailVerified?: boolean }>;
+  verify(idToken: string, audience: string): Promise<GoogleIdentity>;
 }
 
 /** Pub/Sub push gövdesi: `message.data` base64 JSON (DeveloperNotification). */
@@ -52,8 +61,8 @@ export type NotificationResult = { handled: boolean; action: string };
 /**
  * Mağaza sunucu bildirimleri: iade, geri alma, yenileme ve süre dolumu hesaba yansıtılır.
  * - App Store Server Notifications v2: imzalı yük Apple kök sertifikalarıyla doğrulanır.
- * - Google Play RTDN (Pub/Sub push): Google imzalı OIDC Bearer token'ı; audience GOOGLE_RTDN_AUDIENCE olmalı,
- *   GOOGLE_RTDN_SERVICE_ACCOUNT tanımlıysa token o servis hesabına ait olmalı.
+ * - Google Play RTDN (Pub/Sub push): Google imzalı OIDC Bearer token'ı; audience GOOGLE_RTDN_AUDIENCE, yayıncı
+ *   accounts.google.com ve doğrulanmış e-posta GOOGLE_RTDN_SERVICE_ACCOUNT olmalı (hepsi zorunlu).
  * Sandbox kapısı kapalıyken (production, APPLE_ALLOW_SANDBOX=false) sandbox bildirimleri hiçbir şey değiştirmez.
  */
 @Injectable()
@@ -110,23 +119,32 @@ export class StoreNotificationsService {
   }
 
   // ── Google Play ──
-  /** Pub/Sub push isteğinin `Authorization: Bearer <OIDC>` başlığı; audience tanımsızsa uç kapalıdır (503). */
+  /**
+   * Pub/Sub push isteğinin `Authorization: Bearer <OIDC>` başlığı. Audience ya da servis hesabı tanımsızsa uç
+   * kapalıdır (503); yayıncı, audience, e-posta ve e-posta doğrulaması birlikte zorunludur.
+   */
   async authenticateGoogle(authorization: string | undefined): Promise<void> {
     const audience = this.env.GOOGLE_RTDN_AUDIENCE;
-    if (audience === undefined) throw storeNotConfigured('Play bildirimleri yapılandırılmamış.');
+    const expected = this.env.GOOGLE_RTDN_SERVICE_ACCOUNT;
+    if (audience === undefined || expected === undefined) {
+      throw storeNotConfigured('Play bildirimleri yapılandırılmamış.');
+    }
     const m = /^Bearer\s+(\S+)$/i.exec(authorization ?? '');
     const unauthorized = () => new ApiError(401, 'unauthorized', 'Bildirim kimliği doğrulanamadı.');
     if (m === null) throw unauthorized();
-    let identity: { email?: string; emailVerified?: boolean };
+    let identity: GoogleIdentity;
     try {
       identity = await this.oidc.verify(m[1] as string, audience);
     } catch (e) {
       this.logger.warn(`Play bildirimi OIDC doğrulaması başarısız: ${(e as Error).message}`);
       throw unauthorized();
     }
-    const expected = this.env.GOOGLE_RTDN_SERVICE_ACCOUNT;
-    if (expected !== undefined && (identity.email !== expected || identity.emailVerified !== true)) {
-      this.logger.warn(`Play bildirimi beklenmeyen servis hesabından: ${identity.email ?? '?'}`);
+    const issuerOk = identity.issuer !== undefined && GOOGLE_ISSUERS.has(identity.issuer);
+    if (!issuerOk || identity.email !== expected || identity.emailVerified !== true) {
+      this.logger.warn(
+        `Play bildirimi reddedildi: yayıncı ${identity.issuer ?? '?'}, e-posta ${identity.email ?? '?'}` +
+          ` (doğrulanmış: ${identity.emailVerified === true ? 'evet' : 'hayır'})`,
+      );
       throw unauthorized();
     }
   }

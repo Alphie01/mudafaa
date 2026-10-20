@@ -85,4 +85,15 @@ describe('loadEnv', () => {
       undefined,
     ]);
   });
+
+  it('requires the RTDN push service account whenever the audience is set', () => {
+    const audience = 'https://mudafaa.sehirkilavuzu.com/v1/store-notifications/google';
+    expect(() => loadEnv({ ...base, GOOGLE_RTDN_AUDIENCE: audience })).toThrow(/GOOGLE_RTDN_SERVICE_ACCOUNT/);
+    const env = loadEnv({
+      ...base,
+      GOOGLE_RTDN_AUDIENCE: audience,
+      GOOGLE_RTDN_SERVICE_ACCOUNT: 'p@x.iam.gserviceaccount.com',
+    });
+    expect(env.GOOGLE_RTDN_SERVICE_ACCOUNT).toBe('p@x.iam.gserviceaccount.com');
+  });
 });

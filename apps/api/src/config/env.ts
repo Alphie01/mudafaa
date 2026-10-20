@@ -56,7 +56,8 @@ const EnvSchema = z
       .default('false')
       .transform((v) => v === 'true'),
     // Play gerçek zamanlı geliştirici bildirimleri (Pub/Sub push, OIDC kimlik doğrulamalı): push aboneliğinde verilen
-    // audience (tanımsızsa uç kapalı, 503) ve isteğe bağlı olarak token'ı imzalayan servis hesabının e-postası.
+    // audience ve token'ı imzalayan servis hesabının e-postası. İkisi birlikte zorunludur; biri yoksa uç kapalıdır (503).
+    // Servis hesabı denetimi olmadan herkes kendi GCP projesinde doğru audience'lı geçerli bir token üretebilir.
     GOOGLE_RTDN_AUDIENCE: optionalText,
     GOOGLE_RTDN_SERVICE_ACCOUNT: optionalText,
     APPLE_APP_ID: z.preprocess(blankAsUndefined, z.coerce.number().int().positive().optional()),
@@ -83,6 +84,13 @@ const EnvSchema = z
         code: 'custom',
         path: ['PAYWALL_ENABLED'],
         message: 'production ortamında ücret kilidi kapatılamaz',
+      });
+    }
+    if (env.GOOGLE_RTDN_AUDIENCE !== undefined && env.GOOGLE_RTDN_SERVICE_ACCOUNT === undefined) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['GOOGLE_RTDN_SERVICE_ACCOUNT'],
+        message: 'GOOGLE_RTDN_AUDIENCE tanımlıyken push aboneliğinin servis hesabı e-postası zorunludur',
       });
     }
     if (

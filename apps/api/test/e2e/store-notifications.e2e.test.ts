@@ -11,6 +11,7 @@ import {
 import { bootstrapApp, client, type Client, type TestApp } from './support/app.js';
 import { publishFixture, type Published } from './support/cases.js';
 import { emulatorUser } from './support/emulator.js';
+import { testEnv } from './support/env.js';
 import { miniCase } from './support/fixtures.js';
 
 // Mağaza bildirimleri: iade/geri alma hakkı kaldırır, yenileme bitiş tarihini ilerletir. Mağaza imzaları burada sahte
@@ -34,7 +35,7 @@ const fakeOidc: GoogleOidcVerifier = {
   verify: (token, audience) => {
     const m = /^oidc:(.+):([^:]+@[^:]+)$/.exec(token);
     if (m === null || m[1] !== audience) return Promise.reject(new Error('Wrong recipient / bad signature'));
-    return Promise.resolve({ email: m[2], emailVerified: true });
+    return Promise.resolve({ issuer: 'https://accounts.google.com', email: m[2], emailVerified: true });
   },
 };
 
@@ -239,7 +240,8 @@ describe('store notifications', () => {
     expect(bad.status).toBe(400);
   });
 
-  it('endpoint is closed (503) without GOOGLE_RTDN_AUDIENCE', async () => {
+  it('endpoint is closed (503) without the RTDN config; audience without service account is rejected at startup', async () => {
+    expect(() => testEnv({ GOOGLE_RTDN_AUDIENCE: AUDIENCE })).toThrow(/GOOGLE_RTDN_SERVICE_ACCOUNT/);
     const closed = await bootstrapApp({}, [{ token: GOOGLE_OIDC, value: fakeOidc }]);
     try {
       const res = await closed

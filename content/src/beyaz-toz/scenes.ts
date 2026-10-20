@@ -52,8 +52,22 @@ export const scenes: CasePart = {
           text: 'Flaşın yakaladığı bir parıltı: yatağın altında kalın bir motosiklet zincir kilidi. Duvarda boş bir kask askısı.',
           short: 'Zincir kilit, kask askısı',
         }),
-        sceneObject('ob_dolap', 'Dolap', OB_DOLAP, decoy('Dolabın kapakları açık, rafları boş. Ayakkabı kutusu çoktan emanete gitmiş. Fotoğraf sadece yokluğu gösteriyor.')),
-        sceneObject('ob_poster', 'Duvardaki poster', OB_POSTER, decoy('Bir futbol takımının eski sezon posteri. Köşesi bantla tutturulmuş. Bir zevki gösteriyor, bir kimliği değil.')),
+        sceneObject(
+          'ob_dolap',
+          'Dolap',
+          OB_DOLAP,
+          decoy(
+            'Dolabın kapakları açık, rafları boş. Ayakkabı kutusu çoktan emanete gitmiş. Fotoğraf sadece yokluğu gösteriyor.',
+          ),
+        ),
+        sceneObject(
+          'ob_poster',
+          'Duvardaki poster',
+          OB_POSTER,
+          decoy(
+            'Bir futbol takımının eski sezon posteri. Köşesi bantla tutturulmuş. Bir zevki gösteriyor, bir kimliği değil.',
+          ),
+        ),
       ],
     }),
     sceneDef('sc_on', {
@@ -87,8 +101,20 @@ export const scenes: CasePart = {
           text: 'Ayakkabılıkta iki dünya: temiz, 41 numara bir spor ayakkabı ve çamurlu, 45 numara, burnu çelik bir kurye botu.',
           short: '41 ve 45 numara',
         }),
-        sceneObject('ob_gitar', 'Duvardaki gitar', OB_GITAR, decoy('Teli kopmuş bir gitar. Bir zamanlar çalınmış, sonra unutulmuş. Kaan hakkında bir şey söylüyor, dosya hakkında değil.')),
-        sceneObject('ob_kultabla', 'Kül tablası', OB_KULTABLA, decoy('Masada boş bir kül tablası. Bazen bir kül tablası sadece bir kül tablasıdır.')),
+        sceneObject(
+          'ob_gitar',
+          'Duvardaki gitar',
+          OB_GITAR,
+          decoy(
+            'Teli kopmuş bir gitar. Bir zamanlar çalınmış, sonra unutulmuş. Kaan hakkında bir şey söylüyor, dosya hakkında değil.',
+          ),
+        ),
+        sceneObject(
+          'ob_kultabla',
+          'Kül tablası',
+          OB_KULTABLA,
+          decoy('Masada boş bir kül tablası. Bazen bir kül tablası sadece bir kül tablasıdır.'),
+        ),
       ],
     }),
     sceneDef('sc_bina', {
@@ -110,8 +136,20 @@ export const scenes: CasePart = {
           text: 'Köşede, yağmura direnen koyu bir yağ lekesi; demir korkulukta zincir sürtmesinden parlamış bir halka izi. Burada uzun süre bir motosiklet park edilmiş.',
           short: 'Motor park izi',
         }),
-        sceneObject('ob_salter', 'Merdiven otomatiği', OB_SALTER, decoy('Merdiven ışığının otomatiği. Basınca on beş saniye yanıyor. Bir bina hakkında çok şey söyler; bu dava hakkında değil.')),
-        sceneObject('ob_izmarit', 'İzmaritler', OB_IZMARIT, decoy('Kapının önünde ıslak izmaritler. Görükle’nin her kapısında var. İki ay sonra kimseye ait değiller.')),
+        sceneObject(
+          'ob_salter',
+          'Merdiven otomatiği',
+          OB_SALTER,
+          decoy(
+            'Merdiven ışığının otomatiği. Basınca on beş saniye yanıyor. Bir bina hakkında çok şey söyler; bu dava hakkında değil.',
+          ),
+        ),
+        sceneObject(
+          'ob_izmarit',
+          'İzmaritler',
+          OB_IZMARIT,
+          decoy('Kapının önünde ıslak izmaritler. Görükle’nin her kapısında var. İki ay sonra kimseye ait değiller.'),
+        ),
       ],
     }),
   ],

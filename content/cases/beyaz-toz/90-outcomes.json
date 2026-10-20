@@ -73,7 +73,7 @@
           { "hasEvidence": "ev_iz_eslesme" },
           { "flag": "gercek_fail" },
           { "cmp": [{ "var": "pers" }, ">=", 8] },
-          { "cmp": [{ "score": "final" }, ">=", 8000] }
+          { "cmp": [{ "score": "final" }, ">=", 11000] }
         ]
       },
       "stamp": "BERAAT",
@@ -183,7 +183,7 @@
           { "ref": "beraat_e" },
           { "any": [{ "flag": "beraat_savunma" }, { "flag": "terditli" }] },
           { "cmp": [{ "var": "pers" }, ">=", 6] },
-          { "cmp": [{ "score": "final" }, ">=", 7000] }
+          { "cmp": [{ "score": "final" }, ">=", 10500] }
         ]
       },
       "stamp": "BERAAT",
@@ -323,6 +323,24 @@
         {
           "lines": [
             { "speaker": "narrator", "text": "ARSLAN HUKUK — O GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla masamın kenarına oturdu. Bunu ilk kez yapıyordu. Sigara paketini avucunda çevirdi, bir kez, iki kez."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Muhbir adı söylemedi. Polis “varsaydım” dedi. Savcı bir isim istedi, sen bir şüphe verdin. Mahkeme şüpheyi kabul etti."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir gün o arka odanın sahibi bir yerde yakalanacak. O gün dosyayı yeniden açarlar ve senin bulduğun kilit, kroki, şekerlik orada olacak. Kâğıtlar insandan uzun yaşar."
+            },
+            { "speaker": "player", "text": "Nesrin Hanım da öyle diyor. “Kayıt insandan uzun yaşar.”" },
+            {
+              "speaker": "leyla",
+              "expression": "mutlu",
+              "text": "Akıllı kadın. Bir gün bize çaya çağır onu. Kedileriyle birlikte."
+            },
             {
               "speaker": "leyla",
               "text": "Beraat iki türlüdür, demiştim. Bugün “yapmadı” diyemedin; “yaptığı ispatlanamadı” dedin. Bu da bir beraattir. Bazen yeterlidir."

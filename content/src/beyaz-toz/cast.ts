@@ -52,7 +52,8 @@ export const cast: CasePart = {
       bio: 'Görükle’de bir kafede barista. Sabıkasız. Tutuklu.',
       accent: '#7d8590',
       spriteId: 'beyaz_toz_kaan',
-      notes: 'Kullanıcı; Ekim’den beri AMATEM’de tedavide. Eylülde Barış’tan iki kez kullanmak için aldı. Satıcı değil.',
+      notes:
+        'Kullanıcı; Ekim’den beri AMATEM’de tedavide. Eylülde Barış’tan iki kez kullanmak için aldı. Satıcı değil.',
     }),
     character('defne', {
       name: 'Defne Yıldız',

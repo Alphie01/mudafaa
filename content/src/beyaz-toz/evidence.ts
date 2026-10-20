@@ -83,7 +83,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Kira sözleşmesi',
       shortText: 'Daire 7 · kiracı Kaan Yıldız · Ağustos.',
-      description: 'Ihlamur Sok. 14/7 için Nesrin Uysal ile Kaan Yıldız arasında yapılmış bir yıllık kira sözleşmesi. Başka kiracı yok.',
+      description:
+        'Ihlamur Sok. 14/7 için Nesrin Uysal ile Kaan Yıldız arasında yapılmış bir yıllık kira sözleşmesi. Başka kiracı yok.',
       sourceLabel: 'Soruşturma dosyası',
       icon: 'key',
       side: 'PROSECUTION',
@@ -95,7 +96,8 @@ export const evidencePart: CasePart = {
       type: 'ADLI_RAPOR',
       title: 'Saç analizi raporu',
       shortText: 'Son üç ayda kokain kullanımıyla uyumlu.',
-      description: 'Adli Tıp Kurumu: Kaan Yıldız’ın saç örneğinde son yaklaşık üç ayı kapsayan dönemde kokain kullanımıyla uyumlu bulgu.',
+      description:
+        'Adli Tıp Kurumu: Kaan Yıldız’ın saç örneğinde son yaklaşık üç ayı kapsayan dönemde kokain kullanımıyla uyumlu bulgu.',
       sourceLabel: 'Adli Tıp Kurumu',
       icon: 'dust',
       side: 'PROSECUTION',
@@ -163,7 +165,8 @@ export const evidencePart: CasePart = {
       icon: 'fingerprint',
       side: 'DEFENSE',
       strength: 'STRONG',
-      missedHint: 'Barış hakkında kimlik bilgisiyle suç duyurusu ve gece gelen telefonun bildirimi onun yakalanmasını sağlayabilirdi.',
+      missedHint:
+        'Barış hakkında kimlik bilgisiyle suç duyurusu ve gece gelen telefonun bildirimi onun yakalanmasını sağlayabilirdi.',
     }),
 
     // --- İpuçları: olay yeri fotoğrafları ---
@@ -171,7 +174,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Yerdeki kesik asma kilit',
       shortText: 'Arka oda kapısının önünde, kesilmiş bir asma kilit.',
-      description: 'Arka odanın fotoğrafında, kapı eşiğinin dibinde, çelik halkası kesilmiş bir asma kilit. Kapının kasasında yeni takılmış bir kilit dili.',
+      description:
+        'Arka odanın fotoğrafında, kapı eşiğinin dibinde, çelik halkası kesilmiş bir asma kilit. Kapının kasasında yeni takılmış bir kilit dili.',
       sourceLabel: 'Olay yeri fotoğrafı (arka oda)',
       icon: 'lock',
       tags: kart,
@@ -198,7 +202,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Ön odadaki dağınık yatak',
       shortText: 'Kaan’ın uyandırıldığı yatak: gözlük, iktisat kitabı, kulaklık.',
-      description: 'Ön odanın fotoğrafı: yarı açık iktisat kitabı, gözlük kılıfı, kulaklık, Kaan’ın öğrenci kartı. Yatak dağınık; tutanağa göre Kaan burada uyurken bulundu.',
+      description:
+        'Ön odanın fotoğrafı: yarı açık iktisat kitabı, gözlük kılıfı, kulaklık, Kaan’ın öğrenci kartı. Yatak dağınık; tutanağa göre Kaan burada uyurken bulundu.',
       sourceLabel: 'Olay yeri fotoğrafı (ön oda)',
       icon: 'camera',
       tags: kart,
@@ -207,7 +212,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Randevu kartı (AMATEM)',
       shortText: 'AMATEM ayaktan tedavi randevu kartı.',
-      description: 'Ön odadaki çalışma masasında, bir bardak altlığının yanında AMATEM ayaktan tedavi randevu kartı: 14 Kasım, Perşembe 10.30.',
+      description:
+        'Ön odadaki çalışma masasında, bir bardak altlığının yanında AMATEM ayaktan tedavi randevu kartı: 14 Kasım, Perşembe 10.30.',
       sourceLabel: 'Olay yeri fotoğrafı (ön oda)',
       icon: 'receipt',
       tags: kart,
@@ -216,7 +222,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Arka oda kapısının dibindeki şekerlik',
       shortText: 'Şekerlik mutfakta değil, koridordaki rafta, arka oda kapısının yanında.',
-      description: 'Fotoğrafa göre şekerlik mutfak tezgâhında değil; koridordaki küçük rafta, arka oda kapısına iki adım mesafede duruyor.',
+      description:
+        'Fotoğrafa göre şekerlik mutfak tezgâhında değil; koridordaki küçük rafta, arka oda kapısına iki adım mesafede duruyor.',
       sourceLabel: 'Olay yeri fotoğrafı (koridor)',
       icon: 'camera',
       tags: kart,
@@ -225,7 +232,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Ayakkabılıktaki 45 numara',
       shortText: 'Ayakkabılıkta 41 ve 45 numara iki ayrı çift.',
-      description: 'Kapı girişindeki ayakkabılıkta iki ayrı numara: 41 numara bir spor ayakkabı ve çamurlu, 45 numara bir kurye botu.',
+      description:
+        'Kapı girişindeki ayakkabılıkta iki ayrı numara: 41 numara bir spor ayakkabı ve çamurlu, 45 numara bir kurye botu.',
       sourceLabel: 'Olay yeri fotoğrafı (giriş)',
       icon: 'boot',
       tags: kart,
@@ -234,7 +242,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Posta kutusundaki iki soyadı',
       shortText: 'Daire 7 posta kutusu: “YILDIZ / DEMİREL”.',
-      description: 'Bina girişindeki Daire 7 posta kutusunun etiketinde iki soyadı: matbu “YILDIZ”, altına keçeli kalemle eklenmiş “DEMİREL”.',
+      description:
+        'Bina girişindeki Daire 7 posta kutusunun etiketinde iki soyadı: matbu “YILDIZ”, altına keçeli kalemle eklenmiş “DEMİREL”.',
       sourceLabel: 'Bina girişi (bizzat)',
       icon: 'magnifier',
       tags: kart,
@@ -253,7 +262,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Krokideki oda etiketi çelişkisi',
       shortText: 'Kroki ön odayı “misafir odası”, arka odayı “şüphelinin yatak odası” diye gösteriyor.',
-      description: 'Tutanak Kaan’ın ön odada uyurken bulunduğunu yazıyor; kroki ise ön odayı “misafir odası”, arka odayı “şüphelinin yatak odası” olarak etiketliyor.',
+      description:
+        'Tutanak Kaan’ın ön odada uyurken bulunduğunu yazıyor; kroki ise ön odayı “misafir odası”, arka odayı “şüphelinin yatak odası” olarak etiketliyor.',
       sourceLabel: 'Arama tutanağı ve kroki',
       icon: 'compare',
       tags: kart,
@@ -262,7 +272,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Tanık imzasının saati',
       shortText: 'Arama 06.05’te başlamış; tanık imzasının yanında 06.40 yazıyor.',
-      description: 'Tutanağın başında “arama 06.05’te başladı” yazıyor; komşu tanığın imzasının yanında el yazısıyla “06.40”.',
+      description:
+        'Tutanağın başında “arama 06.05’te başladı” yazıyor; komşu tanığın imzasının yanında el yazısıyla “06.40”.',
       sourceLabel: 'Arama tutanağı',
       icon: 'magnifier',
       combinable: false,
@@ -271,7 +282,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Sıkıştırılmış parantez',
       shortText: '“(şüphelinin kullanımındaki)” ibaresi satır arasına sonradan sıkıştırılmış.',
-      description: 'Büyüteçle bakınca “arka odada” ile “dolapta” arasına küçük harflerle, farklı bir kalemle “(şüphelinin kullanımındaki)” ibaresi sıkıştırılmış.',
+      description:
+        'Büyüteçle bakınca “arka odada” ile “dolapta” arasına küçük harflerle, farklı bir kalemle “(şüphelinin kullanımındaki)” ibaresi sıkıştırılmış.',
       sourceLabel: 'Arama tutanağı',
       icon: 'magnifier',
       combinable: false,
@@ -280,7 +292,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Kararın kapsam satırı',
       shortText: 'Karar yalnızca şüphelinin kullanımındaki oda, ortak alanlar ve üzerini kapsıyor.',
-      description: 'Arama kararı evin tamamını değil, “şüphelinin kullanımındaki oda ve ortak kullanım alanları ile şüphelinin üzerini” kapsıyor; talep yazısında ev arkadaşı not edilmiş.',
+      description:
+        'Arama kararı evin tamamını değil, “şüphelinin kullanımındaki oda ve ortak kullanım alanları ile şüphelinin üzerini” kapsıyor; talep yazısında ev arkadaşı not edilmiş.',
       sourceLabel: 'Arama kararı',
       icon: 'document',
       tags: kart,
@@ -289,7 +302,8 @@ export const evidencePart: CasePart = {
       type: 'DIJITAL',
       title: '“Odaya girme sakın” mesajı',
       shortText: '10 Kasım 22.40 · B.: “bu gece geç gelirim, odaya girme sakın”.',
-      description: 'Baskından yedi buçuk saat önce “B.” kayıtlı numaradan Kaan’a gelen mesaj: “bu gece geç gelirim, odaya girme sakın”.',
+      description:
+        'Baskından yedi buçuk saat önce “B.” kayıtlı numaradan Kaan’a gelen mesaj: “bu gece geç gelirim, odaya girme sakın”.',
       sourceLabel: 'Mesaj dökümü',
       icon: 'phone',
       tags: kart,
@@ -298,7 +312,8 @@ export const evidencePart: CasePart = {
       type: 'DIJITAL',
       title: '“2 tane” mesajı',
       shortText: '24 Eylül · Kaan: “akşam 2 tane bırakır mısın”.',
-      description: '24 Eylül’de Kaan’ın “B.”ye yazdığı mesaj: “akşam 2 tane bırakır mısın”. Savcılık bunu sipariş trafiği olarak okuyor.',
+      description:
+        '24 Eylül’de Kaan’ın “B.”ye yazdığı mesaj: “akşam 2 tane bırakır mısın”. Savcılık bunu sipariş trafiği olarak okuyor.',
       sourceLabel: 'Mesaj dökümü',
       icon: 'phone',
       tags: kart,
@@ -307,7 +322,8 @@ export const evidencePart: CasePart = {
       type: 'DIJITAL',
       title: 'Hattın kayıtlı sahibi',
       shortText: '“B.” numarası İzmir’de Fatma Demirel adına kayıtlı.',
-      description: 'Operatör yazısı: “B.” kayıtlı numara İzmir Karşıyaka’da Fatma Demirel adına kayıtlı. Kolluk bu kişiye ulaşamamış.',
+      description:
+        'Operatör yazısı: “B.” kayıtlı numara İzmir Karşıyaka’da Fatma Demirel adına kayıtlı. Kolluk bu kişiye ulaşamamış.',
       sourceLabel: 'Mesaj dökümü (operatör yazısı)',
       icon: 'phone',
       tags: kart,
@@ -316,7 +332,8 @@ export const evidencePart: CasePart = {
       type: 'ADLI_RAPOR',
       title: 'Terazideki yabancı iz',
       shortText: 'Terazideki iz Kaan’la uyuşmuyor; sistemde kaydı yok.',
-      description: 'Terazinin kefesindeki karşılaştırmaya elverişli iz şüpheli Kaan Yıldız’a ait değil; parmak izi sisteminde kaydı bulunamadı.',
+      description:
+        'Terazinin kefesindeki karşılaştırmaya elverişli iz şüpheli Kaan Yıldız’a ait değil; parmak izi sisteminde kaydı bulunamadı.',
       sourceLabel: 'Kriminal rapor',
       icon: 'fingerprint',
       combinable: false,
@@ -325,7 +342,8 @@ export const evidencePart: CasePart = {
       type: 'ADLI_RAPOR',
       title: 'Aynı poşet, aynı gramaj',
       shortText: 'Şekerlikteki 2 paket ile arka odadaki 46 paket aynı poşet tipi ve gramajda.',
-      description: 'Şekerlikteki iki paket, arka odadaki paketlerle aynı marka kilitli poşette, aynı kesimle ve aynı ortalama gramajda (0,85 g): aynı stoktan.',
+      description:
+        'Şekerlikteki iki paket, arka odadaki paketlerle aynı marka kilitli poşette, aynı kesimle ve aynı ortalama gramajda (0,85 g): aynı stoktan.',
       sourceLabel: 'Kriminal rapor',
       icon: 'compare',
       tags: kart,
@@ -334,7 +352,8 @@ export const evidencePart: CasePart = {
       type: 'ADLI_RAPOR',
       title: 'Şekerlik kavanozundaki iz',
       shortText: 'Şekerlik kavanozunun dışında Kaan’ın izleri.',
-      description: 'Şekerlik kavanozunun dış yüzeyinde Kaan Yıldız’ın parmak izleri. Paketlerin üzerinde elverişli iz yok.',
+      description:
+        'Şekerlik kavanozunun dış yüzeyinde Kaan Yıldız’ın parmak izleri. Paketlerin üzerinde elverişli iz yok.',
       sourceLabel: 'Kriminal rapor',
       icon: 'fingerprint',
       tags: kart,
@@ -343,7 +362,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Kapıdaki adamın kaskı',
       shortText: 'Tolga: “Kapıyı açanın elinde kask vardı, aceleyle çıkacaktı.”',
-      description: 'Tolga’nın ifadesinin ikinci sayfasında gözden kaçan bir cümle: “Kapıyı açanın elinde kask vardı, aceleyle çıkacaktı.”',
+      description:
+        'Tolga’nın ifadesinin ikinci sayfasında gözden kaçan bir cümle: “Kapıyı açanın elinde kask vardı, aceleyle çıkacaktı.”',
       sourceLabel: 'Muhbirin kolluk ifadesi',
       icon: 'document',
       tags: kart,
@@ -352,7 +372,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Satışın saati',
       shortText: 'Tolga: “Saat 23.00 gibiydi.”',
-      description: 'Tolga’nın ifadesine göre paketi 9 Kasım gecesi saat 23.00 sularında binanın kapısında aldı; 23.09’da devriyeye takıldı.',
+      description:
+        'Tolga’nın ifadesine göre paketi 9 Kasım gecesi saat 23.00 sularında binanın kapısında aldı; 23.09’da devriyeye takıldı.',
       sourceLabel: 'Muhbirin kolluk ifadesi',
       icon: 'document',
       tags: kart,
@@ -362,7 +383,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Kaan’ın ölçüleri',
       shortText: '41 numara, M beden; ehliyeti yok, motosiklet kullanamaz.',
-      description: 'Kaan 41 numara ayakkabı ve M beden giyer. Ehliyeti yoktur; motosiklet kullanmayı hiç öğrenmemiştir.',
+      description:
+        'Kaan 41 numara ayakkabı ve M beden giyer. Ehliyeti yoktur; motosiklet kullanmayı hiç öğrenmemiştir.',
       sourceLabel: 'Defne / Kaan',
       icon: 'boot',
       tags: kart,
@@ -371,7 +393,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Tedavi süreci',
       shortText: 'Acil, AMATEM, negatif test: ekimden beri tedavide.',
-      description: 'Kaan 3 Ekim’de acile kaldırıldı, 10 Ekim’de AMATEM’de ayaktan tedaviye başladı, 31 Ekim testi negatif.',
+      description:
+        'Kaan 3 Ekim’de acile kaldırıldı, 10 Ekim’de AMATEM’de ayaktan tedaviye başladı, 31 Ekim testi negatif.',
       sourceLabel: 'Defne / tedavi kayıtları',
       icon: 'receipt',
       tags: kart,
@@ -380,7 +403,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Nesrin Hanım’ın kira defteri',
       shortText: '“20 Eylül · Barış (kurye) · arka oda · elden.” Tolga’nın çıkışı da yazılı.',
-      description: 'Nesrin’in el yazısıyla tuttuğu defter: “20 Eylül — Barış (kurye oğlan), arka oda, Kaan’la paylaşıyor; kira Kaan’dan.” Bir sayfa önce: “Eylül başı — Tolga çıkarıldı, depozito borca sayıldı.”',
+      description:
+        'Nesrin’in el yazısıyla tuttuğu defter: “20 Eylül — Barış (kurye oğlan), arka oda, Kaan’la paylaşıyor; kira Kaan’dan.” Bir sayfa önce: “Eylül başı — Tolga çıkarıldı, depozito borca sayıldı.”',
       sourceLabel: 'Nesrin Uysal',
       icon: 'document',
       tags: kart,
@@ -389,7 +413,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Sabah 06.20’deki motor',
       shortText: 'Nesrin: baskın sırasında kurye oğlan motoruyla köşeye geldi, döndü.',
-      description: 'Nesrin sabah namazına kalkmış, kedilere mama koyarken pencereden görmüş: 06.20 gibi “kurye oğlan” motoruyla köşeye geldi, polis araçlarını görünce döndü.',
+      description:
+        'Nesrin sabah namazına kalkmış, kedilere mama koyarken pencereden görmüş: 06.20 gibi “kurye oğlan” motoruyla köşeye geldi, polis araçlarını görünce döndü.',
       sourceLabel: 'Nesrin Uysal',
       icon: 'camera',
       tags: kart,
@@ -398,7 +423,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Üç anahtarlı anahtarlık',
       shortText: 'Kaan’ın anahtarlığı: daire, bina, posta kutusu. Asma kilit anahtarı yok.',
-      description: 'Emanet eşya tutanağına göre Kaan’ın üzerinden çıkan anahtarlıkta üç anahtar var: daire kapısı, bina dış kapısı, posta kutusu. Bir asma kilidi açacak anahtar yok.',
+      description:
+        'Emanet eşya tutanağına göre Kaan’ın üzerinden çıkan anahtarlıkta üç anahtar var: daire kapısı, bina dış kapısı, posta kutusu. Bir asma kilidi açacak anahtar yok.',
       sourceLabel: 'Emanet eşya tutanağı',
       icon: 'key',
       tags: kart,
@@ -408,7 +434,8 @@ export const evidencePart: CasePart = {
       type: 'DIJITAL',
       title: 'GPS dökümündeki 06.21',
       shortText: '11 Kasım 06.21 · Ihlamur Sok. · 40 sn duruş · “teslimat iptal”.',
-      description: 'Barış Demirel’in kurye cihazı 11 Kasım 06.21’de Ihlamur Sokak 14 önünde 40 saniye duruyor, ardından ters yöne gidiyor; sistemde “teslimat iptal” kaydı.',
+      description:
+        'Barış Demirel’in kurye cihazı 11 Kasım 06.21’de Ihlamur Sokak 14 önünde 40 saniye duruyor, ardından ters yöne gidiyor; sistemde “teslimat iptal” kaydı.',
       sourceLabel: 'Paketçi GPS kaydı',
       icon: 'phone',
       tags: ara,
@@ -417,7 +444,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Ertesi günkü ayrılış',
       shortText: '12 Kasım · iş akdi feshi “kendi isteğiyle”.',
-      description: 'Barış Demirel 12 Kasım sabahı mesajla işten ayrıldığını bildirmiş; çantasını ve montunu iade etmemiş.',
+      description:
+        'Barış Demirel 12 Kasım sabahı mesajla işten ayrıldığını bildirmiş; çantasını ve montunu iade etmemiş.',
       sourceLabel: 'Paketçi personel dosyası',
       icon: 'document',
       tags: ara,
@@ -426,7 +454,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Durağa uğrayan eski kiracı',
       shortText: 'Selim: “Tolga diye biri sık uğrardı, hep Barış’ı sorardı.”',
-      description: 'Selim Usta’ya göre Tolga adında, kırmızı bereli bir genç ekimden beri durağa sık sık gelir, Barış’ı sorar, onunla köşede konuşurdu.',
+      description:
+        'Selim Usta’ya göre Tolga adında, kırmızı bereli bir genç ekimden beri durağa sık sık gelir, Barış’ı sorar, onunla köşede konuşurdu.',
       sourceLabel: 'Selim Usta',
       icon: 'document',
       tags: ara,
@@ -444,7 +473,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Kasa kapanışı 23.41',
       shortText: '9 Kasım · Kahve Durağı kasası 23.41’de Kaan’ın koduyla kapandı.',
-      description: 'Z raporuna göre kafe kasası 9 Kasım 23.41’de Kaan’ın kullanıcı koduyla kapatıldı; son satış 23.18. Kafe Ihlamur Sokak’a yürüyerek on beş dakika.',
+      description:
+        'Z raporuna göre kafe kasası 9 Kasım 23.41’de Kaan’ın kullanıcı koduyla kapatıldı; son satış 23.18. Kafe Ihlamur Sokak’a yürüyerek on beş dakika.',
       sourceLabel: 'Kahve Durağı Z raporu',
       icon: 'receipt',
       tags: ara,
@@ -455,7 +485,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Kararın dışında kalan oda',
       shortText: 'Kilitli üçüncü kişi odası, kararın kapsamı dışında zorla açılarak arandı.',
-      description: 'Karar yalnızca şüphelinin kullanımındaki oda ve ortak alanları kapsıyordu. Arka oda asma kilitliydi; kilit keskiyle kesildi. Başka birinin kilitli odası kararın dışındadır.',
+      description:
+        'Karar yalnızca şüphelinin kullanımındaki oda ve ortak alanları kapsıyordu. Arka oda asma kilitliydi; kilit keskiyle kesildi. Başka birinin kilitli odası kararın dışındadır.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'lock',
       side: 'DEFENSE',
@@ -466,7 +497,8 @@ export const evidencePart: CasePart = {
       type: 'FIZIKSEL',
       title: 'Anahtarsız kiracı',
       shortText: 'Kilitli arka odanın anahtarı Kaan’da yoktu.',
-      description: 'Arka oda asma kilitliydi ve kilit keskiyle kesildi. Kaan’ın emanetteki anahtarlığında asma kilit anahtarı yok. Kilidin sahibi başkası.',
+      description:
+        'Arka oda asma kilitliydi ve kilit keskiyle kesildi. Kaan’ın emanetteki anahtarlığında asma kilit anahtarı yok. Kilidin sahibi başkası.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'key',
       side: 'DEFENSE',
@@ -476,7 +508,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Kaan ön odada yaşıyor',
       shortText: 'Kaan ön odada uyurken bulundu; kroki odaları ters etiketlemiş.',
-      description: 'Ön odadaki eşyalar Kaan’ın; tutanak bile onu orada uyurken bulduğunu yazıyor. Kroki ise ön odayı “misafir”, arka odayı “şüphelinin” diye göstermiş: varsayım, tespit değil.',
+      description:
+        'Ön odadaki eşyalar Kaan’ın; tutanak bile onu orada uyurken bulduğunu yazıyor. Kroki ise ön odayı “misafir”, arka odayı “şüphelinin” diye göstermiş: varsayım, tespit değil.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'compare',
       side: 'DEFENSE',
@@ -496,7 +529,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Arka odadaki kurye',
       shortText: 'Arka odada motosikletli bir kurye yaşıyor.',
-      description: 'XL kurye montu, zincir kilit, kask askısı: arka odanın sahibi motosiklet kullanan bir kurye. Kaan’ın ne motosikleti ne ehliyeti var.',
+      description:
+        'XL kurye montu, zincir kilit, kask askısı: arka odanın sahibi motosiklet kullanan bir kurye. Kaan’ın ne motosikleti ne ehliyeti var.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'camera',
       side: 'DEFENSE',
@@ -506,7 +540,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Barış gerçek',
       shortText: 'Barış diye biri var ve arka oda onun.',
-      description: 'Ev sahibinin defteri 20 Eylül’de arka odaya “Barış (kurye oğlan)” yazmış; baskından önceki gece “B.” Kaan’a “odaya girme sakın” demiş. Hayalet yok; bir kiracı var.',
+      description:
+        'Ev sahibinin defteri 20 Eylül’de arka odaya “Barış (kurye oğlan)” yazmış; baskından önceki gece “B.” Kaan’a “odaya girme sakın” demiş. Hayalet yok; bir kiracı var.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'document',
       side: 'DEFENSE',
@@ -516,7 +551,8 @@ export const evidencePart: CasePart = {
       type: 'DIJITAL',
       title: 'B. = Demirel',
       shortText: '“B.” hattı Demirel ailesine kayıtlı; posta kutusunda da Demirel yazıyor.',
-      description: 'Mesajlaşılan hat İzmir’de Fatma Demirel adına; Daire 7’nin posta kutusuna elle “DEMİREL” eklenmiş. Arka odanın kiracısının soyadı büyük olasılıkla Demirel.',
+      description:
+        'Mesajlaşılan hat İzmir’de Fatma Demirel adına; Daire 7’nin posta kutusuna elle “DEMİREL” eklenmiş. Arka odanın kiracısının soyadı büyük olasılıkla Demirel.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'phone',
       side: 'DEFENSE',
@@ -526,7 +562,8 @@ export const evidencePart: CasePart = {
       type: 'ADLI_RAPOR',
       title: 'Şekerlik arka odanın deposu',
       shortText: 'Şekerlikteki paketler arka odadaki stoktan; şekerlik arka oda kapısının dibinde.',
-      description: 'Aynı poşet, aynı kesim, aynı gramaj; şekerlik de mutfakta değil, arka oda kapısının yanındaki rafta. Kavanozdaki iz kavanozu kullananı gösterir, paketi koyanı değil.',
+      description:
+        'Aynı poşet, aynı kesim, aynı gramaj; şekerlik de mutfakta değil, arka oda kapısının yanındaki rafta. Kavanozdaki iz kavanozu kullananı gösterir, paketi koyanı değil.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'compare',
       side: 'DEFENSE',
@@ -536,7 +573,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Kasklı adam Kaan değil',
       shortText: 'Tolga’nın kapıda gördüğü adam kask taşıyordu; Kaan motosiklet kullanamaz.',
-      description: 'Tolga, paketi veren adamın elinde kask olduğunu ve “çıkacağını” söylemiş. Kaan’ın ehliyeti, motosikleti, kaskı yok.',
+      description:
+        'Tolga, paketi veren adamın elinde kask olduğunu ve “çıkacağını” söylemiş. Kaan’ın ehliyeti, motosikleti, kaskı yok.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'document',
       side: 'DEFENSE',
@@ -546,7 +584,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Kullanıcı, satıcı değil',
       shortText: 'Kaan tedavide bir kullanıcı; odasında madde yok.',
-      description: 'Kaan ekimden beri tedavide; masasında randevu kartı var, odasında madde, terazi ya da para yok. Bu tablo kullanıcıya uyar, satıcıya değil.',
+      description:
+        'Kaan ekimden beri tedavide; masasında randevu kartı var, odasında madde, terazi ya da para yok. Bu tablo kullanıcıya uyar, satıcıya değil.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'receipt',
       side: 'DEFENSE',
@@ -556,7 +595,8 @@ export const evidencePart: CasePart = {
       type: 'DIJITAL',
       title: 'Baskını gören kurye',
       shortText: 'Barış 06.21’de baskını görüp döndü, ertesi gün işi bıraktı.',
-      description: 'GPS 06.21’de Ihlamur Sokak’ta kırk saniyelik bir duruş ve dönüş gösteriyor; Nesrin aynı dakikada motorun döndüğünü gördü. Ertesi gün Barış işi bıraktı.',
+      description:
+        'GPS 06.21’de Ihlamur Sokak’ta kırk saniyelik bir duruş ve dönüş gösteriyor; Nesrin aynı dakikada motorun döndüğünü gördü. Ertesi gün Barış işi bıraktı.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'phone',
       side: 'DEFENSE',
@@ -566,7 +606,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Tolga’nın satıcısı',
       shortText: 'Tolga’nın tanıdığı ve korktuğu satıcı kasklı kurye Barış’tı.',
-      description: 'Tolga ekimden beri kurye durağına gelip Barış’ı soruyordu; ifadesinde kapıyı açanın elinde kask olduğunu söyledi. Satıcıyı tanıyordu; adını vermedi.',
+      description:
+        'Tolga ekimden beri kurye durağına gelip Barış’ı soruyordu; ifadesinde kapıyı açanın elinde kask olduğunu söyledi. Satıcıyı tanıyordu; adını vermedi.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'document',
       side: 'DEFENSE',
@@ -576,7 +617,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Satış anında kafede',
       shortText: '9 Kasım 23.00’te Kaan kafede kasa kapatıyordu.',
-      description: 'Tolga paketi 23.00’te aldığını söylüyor; Kaan 23.18’de son satışı yapmış, kasayı 23.41’de kapatmış. Kafe on beş dakika uzakta.',
+      description:
+        'Tolga paketi 23.00’te aldığını söylüyor; Kaan 23.18’de son satışı yapmış, kasayı 23.41’de kapatmış. Kafe on beş dakika uzakta.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'receipt',
       side: 'DEFENSE',

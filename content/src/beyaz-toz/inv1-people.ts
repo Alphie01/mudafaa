@@ -1,14 +1,4 @@
-import {
-  all,
-  any,
-  back,
-  conversation,
-  flag,
-  meet,
-  not,
-  option,
-  raise,
-} from '../../../tools/content/src/kit/index.js';
+import { all, any, back, conversation, flag, meet, not, option, raise } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { INV1, card, me, n, s, th } from './shared.js';
 
@@ -25,12 +15,21 @@ export const inv1People: CasePart = {
         {
           lines: [
             card('MUDANYA — YILDIZ ECZANESİ, 13.20', 'hastane'),
-            n('Eczane deniz kokuyordu, bir de alkollü pamuk. Raflarda vitaminler, bebek mamaları, bir köşede tansiyon aleti. Defne beyaz önlüğüyle tezgâhın arkasındaydı.'),
+            n(
+              'Eczane deniz kokuyordu, bir de alkollü pamuk. Raflarda vitaminler, bebek mamaları, bir köşede tansiyon aleti. Defne beyaz önlüğüyle tezgâhın arkasındaydı.',
+            ),
             s('defne', 'Bir dakika. Teyzenin ilacını vereyim. … Günde iki kez, tok karnına. Geçmiş olsun.'),
-            n('Kadın çıkınca Defne kapının camındaki “Hemen dönerim” levhasını çevirdi. Sesi eczacının sesinden ablanın sesine indi.'),
+            n(
+              'Kadın çıkınca Defne kapının camındaki “Hemen dönerim” levhasını çevirdi. Sesi eczacının sesinden ablanın sesine indi.',
+            ),
             s('defne', 'Buyurun. Ne lazımsa. Ama hızlı olsun; öğleden sonra reçeteler başlar.'),
-            n('Arkasındaki rafta kilitli bir dolap vardı; üstünde kırmızı bir etiket: “Kontrollü ilaçlar.” Defne gözümün nereye gittiğini fark etti.'),
-            s('defne', 'Her kutunun bir kaydı var. Her biri sayılır, imzalanır. Kardeşimin kanına giren şeyin ise kaydı yok. Bunu her sabah dolabı açarken düşünüyorum.'),
+            n(
+              'Arkasındaki rafta kilitli bir dolap vardı; üstünde kırmızı bir etiket: “Kontrollü ilaçlar.” Defne gözümün nereye gittiğini fark etti.',
+            ),
+            s(
+              'defne',
+              'Her kutunun bir kaydı var. Her biri sayılır, imzalanır. Kardeşimin kanına giren şeyin ise kaydı yok. Bunu her sabah dolabı açarken düşünüyorum.',
+            ),
           ],
         },
       ],
@@ -41,10 +40,21 @@ export const inv1People: CasePart = {
           responses: [
             {
               lines: [
-                s('defne', 'Hazırladım. Kaan cezaevinden imzalı bir onay yazısı gönderdi; sizin görmeniz için. Başka kimse için değil.'),
-                n('Bir dosya: acil servis epikrizi, 3 Ekim, 02.10. Taşikardi. Madde kullanımı. Altında AMATEM randevu çıktıları; bir de 31 Ekim tarihli bir test: negatif.'),
-                s('defne', 'O gece onu ben taşıdım. Arabanın arka koltuğunda titriyordu. “Annem bilmesin” dedi. Kalbi duracaktı, “annem bilmesin” dedi.', 'uzgun'),
-                th('Bir satıcı acile kaldırılmaz. Ya da kaldırılır; ama tedaviye kendi ayağıyla gitmez. Bu kâğıtlar Kaan’ın kim olduğunu söylüyor. Kim olmadığını değil.'),
+                s(
+                  'defne',
+                  'Hazırladım. Kaan cezaevinden imzalı bir onay yazısı gönderdi; sizin görmeniz için. Başka kimse için değil.',
+                ),
+                n(
+                  'Bir dosya: acil servis epikrizi, 3 Ekim, 02.10. Taşikardi. Madde kullanımı. Altında AMATEM randevu çıktıları; bir de 31 Ekim tarihli bir test: negatif.',
+                ),
+                s(
+                  'defne',
+                  'O gece onu ben taşıdım. Arabanın arka koltuğunda titriyordu. “Annem bilmesin” dedi. Kalbi duracaktı, “annem bilmesin” dedi.',
+                  'uzgun',
+                ),
+                th(
+                  'Bir satıcı acile kaldırılmaz. Ya da kaldırılır; ama tedaviye kendi ayağıyla gitmez. Bu kâğıtlar Kaan’ın kim olduğunu söylüyor. Kim olmadığını değil.',
+                ),
               ],
             },
           ],
@@ -56,10 +66,21 @@ export const inv1People: CasePart = {
           responses: [
             {
               lines: [
-                s('defne', 'Sıradan hâli mi? Öğlene kadar uyur. Kafeye gider. Kapanışta kasayı kapatır, eve yürür. Ehliyeti yok; bisiklet bile süremez, babam öğretemeden…'),
-                s('defne', 'Ayakkabısını ben alırım, 41. Montu M. Geçen kış bir motor sürücüsü montu almak istedi, “havalı” diye. Kollarından taştı. Güldük.'),
-                s('defne', 'Bir de şu var: kokuya hassastır. Motor egzozundan midesi bulanır. Kuryelerin durduğu köşeden geçmez, karşıya geçer. Saçma bir ayrıntı, biliyorum.'),
-                th('Ehliyet yok, motor yok, 41 numara. Küçük ayrıntılar. Bu dosyada küçük ayrıntılar büyük kapıları açacak.'),
+                s(
+                  'defne',
+                  'Sıradan hâli mi? Öğlene kadar uyur. Kafeye gider. Kapanışta kasayı kapatır, eve yürür. Ehliyeti yok; bisiklet bile süremez, babam öğretemeden…',
+                ),
+                s(
+                  'defne',
+                  'Ayakkabısını ben alırım, 41. Montu M. Geçen kış bir motor sürücüsü montu almak istedi, “havalı” diye. Kollarından taştı. Güldük.',
+                ),
+                s(
+                  'defne',
+                  'Bir de şu var: kokuya hassastır. Motor egzozundan midesi bulanır. Kuryelerin durduğu köşeden geçmez, karşıya geçer. Saçma bir ayrıntı, biliyorum.',
+                ),
+                th(
+                  'Ehliyet yok, motor yok, 41 numara. Küçük ayrıntılar. Bu dosyada küçük ayrıntılar büyük kapıları açacak.',
+                ),
               ],
             },
           ],
@@ -71,10 +92,22 @@ export const inv1People: CasePart = {
           responses: [
             {
               lines: [
-                s('defne', 'Birikim mi? Kredi kartının asgarisini ben ödüyorum. Geçen ay telefon faturası için benden beş yüz lira istedi.', 'kizgin'),
-                s('defne', 'Arka odada sekiz bin yedi yüz elli lira bulmuşlar. O para Kaan’da olsa kartını öderdi. Bana borç sormazdı.'),
-                s('defne', 'Bir satıcı tanıdım ben, eczanede. Reçetesiz ilaç almaya gelirdi. Saati altın, telefonu yeni, ayakkabısı pahalı. Kaan’ın ayakkabısını ben alıyorum.'),
-                th('Satıcıların parası olur. Kullanıcıların borcu. Basit bir muhasebe; ama mahkemeler muhasebeyi sever.'),
+                s(
+                  'defne',
+                  'Birikim mi? Kredi kartının asgarisini ben ödüyorum. Geçen ay telefon faturası için benden beş yüz lira istedi.',
+                  'kizgin',
+                ),
+                s(
+                  'defne',
+                  'Arka odada sekiz bin yedi yüz elli lira bulmuşlar. O para Kaan’da olsa kartını öderdi. Bana borç sormazdı.',
+                ),
+                s(
+                  'defne',
+                  'Bir satıcı tanıdım ben, eczanede. Reçetesiz ilaç almaya gelirdi. Saati altın, telefonu yeni, ayakkabısı pahalı. Kaan’ın ayakkabısını ben alıyorum.',
+                ),
+                th(
+                  'Satıcıların parası olur. Kullanıcıların borcu. Basit bir muhasebe; ama mahkemeler muhasebeyi sever.',
+                ),
               ],
             },
           ],
@@ -84,9 +117,18 @@ export const inv1People: CasePart = {
           responses: [
             {
               lines: [
-                s('defne', 'Hiç görmedim. Bir kere eve gittiğimde arka odanın kapısı kilitliydi; Kaan “Barış uyuyor, gece çalışıyor” dedi.'),
-                s('defne', 'Bir kere de Kaan’ın telefonu çaldı, hoparlördeydi. Kalın bir ses “kardeş, kombiyi hallettim” dedi. Bu kadar.'),
-                s('defne', 'Polis “yok” diyor. Ben de bilmiyorum. Bir sesten başka kanıtım yok. Ama bir ses, bir hayalet değildir, değil mi?'),
+                s(
+                  'defne',
+                  'Hiç görmedim. Bir kere eve gittiğimde arka odanın kapısı kilitliydi; Kaan “Barış uyuyor, gece çalışıyor” dedi.',
+                ),
+                s(
+                  'defne',
+                  'Bir kere de Kaan’ın telefonu çaldı, hoparlördeydi. Kalın bir ses “kardeş, kombiyi hallettim” dedi. Bu kadar.',
+                ),
+                s(
+                  'defne',
+                  'Polis “yok” diyor. Ben de bilmiyorum. Bir sesten başka kanıtım yok. Ama bir ses, bir hayalet değildir, değil mi?',
+                ),
                 th('Bir ses, bir hayalet değildir. Ama mahkemede bir ses, bir delil de değildir.'),
               ],
             },
@@ -94,12 +136,20 @@ export const inv1People: CasePart = {
           next: '$stay',
         }),
         option('DF_HAKIM', 'Sizce Kaan mahkemede kullandığını söylemeli mi?', {
-          neutral: 'Bu soru Defne’nin değil, Kaan’ın kararıdır; yine de ailenin kaygısını bilmek savunmayı hazırlarken işe yarar.',
+          neutral:
+            'Bu soru Defne’nin değil, Kaan’ın kararıdır; yine de ailenin kaygısını bilmek savunmayı hazırlarken işe yarar.',
           responses: [
             {
               lines: [
-                s('defne', 'Ben mi? Ben eczacıyım. Bir insanın kimya yüzünden hasta olabileceğini bilirim. Ama annem bilmez.', 'uzgun'),
-                s('defne', 'Kaan karar versin. Bu sefer ben onun yerine karar vermeyeceğim. Hep ben verdim; bakın nereye geldik.'),
+                s(
+                  'defne',
+                  'Ben mi? Ben eczacıyım. Bir insanın kimya yüzünden hasta olabileceğini bilirim. Ama annem bilmez.',
+                  'uzgun',
+                ),
+                s(
+                  'defne',
+                  'Kaan karar versin. Bu sefer ben onun yerine karar vermeyeceğim. Hep ben verdim; bakın nereye geldik.',
+                ),
               ],
             },
           ],
@@ -119,13 +169,29 @@ export const inv1People: CasePart = {
           lines: [
             card('IHLAMUR SOKAK 14 — DAİRE 1, NESRİN UYSAL', 'ev'),
             n('Kapıyı zincirini çıkarmadan açtı. Gözlüğünün üstünden baktı; aşağıdan iki kedi baktı.'),
-            s('nesrin', 'Avukat mısın evladım? Kaan’ın avukatı? … Gel. Ayakkabılarını çıkarma, yeni sildim ama, neyse, çıkarma.'),
-            n('Salonda bir dikiş makinesi, üstünde bir dantel. Duvarda bıyıklı bir adamın fotoğrafı. Çaydanlık zaten ocaktaydı.'),
-            s('nesrin', 'Rahmetli derdi ki: “Nesrin, apartman sahibi olmak kiracıların bütün dertlerini satın almaktır.” Haklıymış. Şekerli mi?'),
-            s('nesrin', 'Polise her şeyi söyledim ben. İmzamı da attım. Ama kimse bana bir şey sormadı ki. Sadece “imzala teyze” dediler.'),
+            s(
+              'nesrin',
+              'Avukat mısın evladım? Kaan’ın avukatı? … Gel. Ayakkabılarını çıkarma, yeni sildim ama, neyse, çıkarma.',
+            ),
+            n(
+              'Salonda bir dikiş makinesi, üstünde bir dantel. Duvarda bıyıklı bir adamın fotoğrafı. Çaydanlık zaten ocaktaydı.',
+            ),
+            s(
+              'nesrin',
+              'Rahmetli derdi ki: “Nesrin, apartman sahibi olmak kiracıların bütün dertlerini satın almaktır.” Haklıymış. Şekerli mi?',
+            ),
+            s(
+              'nesrin',
+              'Polise her şeyi söyledim ben. İmzamı da attım. Ama kimse bana bir şey sormadı ki. Sadece “imzala teyze” dediler.',
+            ),
             n('Kedilerden biri kucağıma atladı, beni kokladı, beğenmedi, indi. Nesrin Hanım güldü; ilk kez.'),
-            s('nesrin', 'Pamuk seçicidir. Polisleri hiç sevmedi. Kaan’ı severdi; Barış’ı da severdi. Tolga’yı hiç sevmedi. Kediler bilir evladım.'),
-            th('Kedilerin bildiğini mahkemeye anlatamam. Ama bir kadının kedileri kimin sevdiğini bilecek kadar dikkatli olduğunu anlatabilirim.'),
+            s(
+              'nesrin',
+              'Pamuk seçicidir. Polisleri hiç sevmedi. Kaan’ı severdi; Barış’ı da severdi. Tolga’yı hiç sevmedi. Kediler bilir evladım.',
+            ),
+            th(
+              'Kedilerin bildiğini mahkemeye anlatamam. Ama bir kadının kedileri kimin sevdiğini bilecek kadar dikkatli olduğunu anlatabilirim.',
+            ),
           ],
         },
       ],
@@ -139,13 +205,30 @@ export const inv1People: CasePart = {
           responses: [
             {
               lines: [
-                s('nesrin', 'Sabah namazına kalkmıştım. Altıyı geçiyordu. Kedilere mama koyarken pencereden baktım; sokakta üç araba, ışıkları sönük.'),
-                s('nesrin', 'Sonra yukarıda bir gürültü. Bir “çat”. Ben bir şey olmuş sandım, kalorifer borusu sandım.'),
-                s('nesrin', 'Sonra o kurye oğlan geldi motoruyla. Barış. Hep köşeye park eder, zinciri korkuluğa dolar. Bu sefer köşede durdu, arabalara baktı, motoru çevirdi, gitti.'),
+                s(
+                  'nesrin',
+                  'Sabah namazına kalkmıştım. Altıyı geçiyordu. Kedilere mama koyarken pencereden baktım; sokakta üç araba, ışıkları sönük.',
+                ),
+                s(
+                  'nesrin',
+                  'Sonra yukarıda bir gürültü. Bir “çat”. Ben bir şey olmuş sandım, kalorifer borusu sandım.',
+                ),
+                s(
+                  'nesrin',
+                  'Sonra o kurye oğlan geldi motoruyla. Barış. Hep köşeye park eder, zinciri korkuluğa dolar. Bu sefer köşede durdu, arabalara baktı, motoru çevirdi, gitti.',
+                ),
                 me('Saat kaçtı, hatırlıyor musunuz?'),
-                s('nesrin', 'Ezan okunmuş, ben namazı kılmıştım. Altı yirmi, yirmi beş. Ondan sonra polis kapımı çaldı, “teyze, tanık lazım, yukarı gel” dedi.'),
-                s('nesrin', 'Ben çıktığımda arka odanın kapısı açıktı zaten. Kilit yerdeydi, ikiye bölünmüş. Bana “imzala” dediler, imzaladım. Saati de ben yazdım: altı kırk. Hep saati yazarım.'),
-                th('Altı kırk. Arama altı beşte başlamış. Tanık geldiğinde kapı çoktan kırılmış. Ve altı yirmide bir kurye köşeden dönmüş.'),
+                s(
+                  'nesrin',
+                  'Ezan okunmuş, ben namazı kılmıştım. Altı yirmi, yirmi beş. Ondan sonra polis kapımı çaldı, “teyze, tanık lazım, yukarı gel” dedi.',
+                ),
+                s(
+                  'nesrin',
+                  'Ben çıktığımda arka odanın kapısı açıktı zaten. Kilit yerdeydi, ikiye bölünmüş. Bana “imzala” dediler, imzaladım. Saati de ben yazdım: altı kırk. Hep saati yazarım.',
+                ),
+                th(
+                  'Altı kırk. Arama altı beşte başlamış. Tanık geldiğinde kapı çoktan kırılmış. Ve altı yirmide bir kurye köşeden dönmüş.',
+                ),
               ],
             },
           ],
@@ -160,9 +243,15 @@ export const inv1People: CasePart = {
           responses: [
             {
               lines: [
-                s('nesrin', 'Barış mı? Kaçtı mı? … Galiba. Evet, galiba öyleydi evladım. Bir motor vardı. Kaçtı diyorsan kaçmıştır.', 'saskin'),
+                s(
+                  'nesrin',
+                  'Barış mı? Kaçtı mı? … Galiba. Evet, galiba öyleydi evladım. Bir motor vardı. Kaçtı diyorsan kaçmıştır.',
+                  'saskin',
+                ),
                 s('nesrin', 'Ben imzaladım ama. Saati yazdım. Altı kırk. Kapı açıktı ben çıktığımda.'),
-                th('“Galiba.” Bir tanığın en tehlikeli kelimesi. Cevabı ben verdim, o onayladı. Bir mahkeme salonunda bu fark, bir tanığı ikiye böler.'),
+                th(
+                  '“Galiba.” Bir tanığın en tehlikeli kelimesi. Cevabı ben verdim, o onayladı. Bir mahkeme salonunda bu fark, bir tanığı ikiye böler.',
+                ),
               ],
             },
           ],
@@ -174,11 +263,25 @@ export const inv1People: CasePart = {
           responses: [
             {
               lines: [
-                s('nesrin', 'Kirayı Kaan getirir, elden. Ben deftere yazarım. Vergiden korkuyorum evladım, ama defter tutarım. Rahmetli muhasebeciydi.'),
-                n('Dikiş makinesinin çekmecesinden kareli bir defter çıkardı. Sayfalar el yazısıyla doluydu: tarihler, tutarlar, küçük notlar.'),
-                s('nesrin', 'Bak: “Eylül başı, Tolga çıkarıldı, depozito borca sayıldı.” Bir sayfa sonra: “20 Eylül, Barış, kurye oğlan, arka oda, Kaan’la paylaşıyor; kira Kaan’dan.”'),
-                s('nesrin', 'Barış iyi çocuktu. Pazar filelerimi yukarı taşırdı. “Teyze, ben İzmirliyim, annem de senin gibi kedi besler” derdi.'),
-                s('nesrin', 'Barış elden verirdi kirayı, Kaan’a. Kaan bana getirirdi, yuvarlak hesap. Hep yirmisinde. Bir kere yirmi birinde getirdi; özür diledi. Böyle çocuklar.'),
+                s(
+                  'nesrin',
+                  'Kirayı Kaan getirir, elden. Ben deftere yazarım. Vergiden korkuyorum evladım, ama defter tutarım. Rahmetli muhasebeciydi.',
+                ),
+                n(
+                  'Dikiş makinesinin çekmecesinden kareli bir defter çıkardı. Sayfalar el yazısıyla doluydu: tarihler, tutarlar, küçük notlar.',
+                ),
+                s(
+                  'nesrin',
+                  'Bak: “Eylül başı, Tolga çıkarıldı, depozito borca sayıldı.” Bir sayfa sonra: “20 Eylül, Barış, kurye oğlan, arka oda, Kaan’la paylaşıyor; kira Kaan’dan.”',
+                ),
+                s(
+                  'nesrin',
+                  'Barış iyi çocuktu. Pazar filelerimi yukarı taşırdı. “Teyze, ben İzmirliyim, annem de senin gibi kedi besler” derdi.',
+                ),
+                s(
+                  'nesrin',
+                  'Barış elden verirdi kirayı, Kaan’a. Kaan bana getirirdi, yuvarlak hesap. Hep yirmisinde. Bir kere yirmi birinde getirdi; özür diledi. Böyle çocuklar.',
+                ),
                 th('Bir hayaletin kira kaydı. El yazısıyla, tarihli. Savcılık bu kapıyı hiç çalmamış.'),
               ],
             },
@@ -192,10 +295,22 @@ export const inv1People: CasePart = {
           responses: [
             {
               lines: [
-                s('nesrin', 'Ah, o. Kırmızı bereli. Kirayı geciktirirdi, gece yarısı müzik açardı. Kaan çıkardı onu; ben de rahatladım, Allah affetsin.'),
-                s('nesrin', 'Anahtarı vermedi. “Kaybettim” dedi. Kayıp anahtar olur mu, olur. Ama bu kaybolmadı bence.'),
-                s('nesrin', 'Ekimde, kasımda birkaç kere gördüm onu sokakta. Gece. Kapının önünde birini bekler gibiydi. Kimi beklediğini bilmem; ben perdeyi kapattım.'),
-                s('nesrin', 'Bir gece kapıyı çaldı bile. “Teyze, Barış yukarıda mı?” dedi. Gece yarısı. Ben “git oğlum, saat kaç” dedim. Gitti.'),
+                s(
+                  'nesrin',
+                  'Ah, o. Kırmızı bereli. Kirayı geciktirirdi, gece yarısı müzik açardı. Kaan çıkardı onu; ben de rahatladım, Allah affetsin.',
+                ),
+                s(
+                  'nesrin',
+                  'Anahtarı vermedi. “Kaybettim” dedi. Kayıp anahtar olur mu, olur. Ama bu kaybolmadı bence.',
+                ),
+                s(
+                  'nesrin',
+                  'Ekimde, kasımda birkaç kere gördüm onu sokakta. Gece. Kapının önünde birini bekler gibiydi. Kimi beklediğini bilmem; ben perdeyi kapattım.',
+                ),
+                s(
+                  'nesrin',
+                  'Bir gece kapıyı çaldı bile. “Teyze, Barış yukarıda mı?” dedi. Gece yarısı. Ben “git oğlum, saat kaç” dedim. Gitti.',
+                ),
                 th('Çıkarıldığı evin önünde, geceleri, birini bekleyen bir eski kiracı. Kimi bekliyordu?'),
               ],
             },
@@ -209,9 +324,19 @@ export const inv1People: CasePart = {
           responses: [
             {
               lines: [
-                s('nesrin', 'Mahkemede mi? Ben hayatımda bir kere mahkemeye gittim, rahmetlinin miras işi. Elim ayağım titredi.', 'saskin'),
-                s('nesrin', 'Ama Kaan iyi çocuktur. Çayını şekersiz içer, borcunu geciktirmez. Ben gördüğümü söylerim. Gördüğümü, fazlasını değil.'),
-                s('nesrin', 'Kediler ne olacak? Komşuya bırakırım. Defterimi de getiririm. Rahmetli “kayıt, insandan uzun yaşar” derdi.'),
+                s(
+                  'nesrin',
+                  'Mahkemede mi? Ben hayatımda bir kere mahkemeye gittim, rahmetlinin miras işi. Elim ayağım titredi.',
+                  'saskin',
+                ),
+                s(
+                  'nesrin',
+                  'Ama Kaan iyi çocuktur. Çayını şekersiz içer, borcunu geciktirmez. Ben gördüğümü söylerim. Gördüğümü, fazlasını değil.',
+                ),
+                s(
+                  'nesrin',
+                  'Kediler ne olacak? Komşuya bırakırım. Defterimi de getiririm. Rahmetli “kayıt, insandan uzun yaşar” derdi.',
+                ),
               ],
             },
           ],
@@ -226,8 +351,14 @@ export const inv1People: CasePart = {
             {
               lines: [
                 s('nesrin', 'Zorla mı? Ben yetmiş yaşında kadınım evladım. Beni zorla mı getirteceksin?', 'kizgin'),
-                s('nesrin', 'Polisler de öyle konuştu. “İmzala teyze.” Herkes bana bir şey yaptırıyor. Kalk git şimdi. Kediler acıktı.', 'kizgin'),
-                th('Kapı arkamdan zincirlendi. Bir tanığı kaybetmenin en kısa yolu, ona elinde ne olduğunu hatırlatmaktır.'),
+                s(
+                  'nesrin',
+                  'Polisler de öyle konuştu. “İmzala teyze.” Herkes bana bir şey yaptırıyor. Kalk git şimdi. Kediler acıktı.',
+                  'kizgin',
+                ),
+                th(
+                  'Kapı arkamdan zincirlendi. Bir tanığı kaybetmenin en kısa yolu, ona elinde ne olduğunu hatırlatmaktır.',
+                ),
               ],
             },
           ],
@@ -238,5 +369,3 @@ export const inv1People: CasePart = {
     }),
   ],
 };
-
-void flag;

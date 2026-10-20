@@ -63,6 +63,11 @@
             },
             {
               "speaker": "narrator",
+              "text": "Kaan’ı aşağıdan getirdiler. Koridora girince Tolga’yı gördü. Durdu. Tolga yere baktı. Kaan bir an yürümeyi unuttu; sonra jandarma koluna dokundu, yürüdü."
+            },
+            { "speaker": "kaan", "expression": "uzgun", "text": "Tolga. … Neyse." },
+            {
+              "speaker": "narrator",
               "text": "Nesrin Hanım çayını üfledi, bana döndü. Gözlüğünün üstünden, ilk gün kapıyı zincirini çıkarmadan açtığı bakışla."
             },
             { "speaker": "nesrin", "text": "Ne diyeyim içeride? Söyle bana, ezberleyeyim. Yaşlıyım, karıştırırım." }
@@ -189,6 +194,10 @@
         {
           "when": { "flag": "kaan_tahliye" },
           "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Dinleyici sırasında Defne, yanında beyaz saçlı bir kadın. Kadın bir tespih çeviriyordu; tespihin her tanesinde bir an duruyor, sonra bırakıyordu."
+            },
             {
               "speaker": "narrator",
               "text": "Kaan bu sefer jandarmasız girdi. Kendi ceketiyle; kolları yine kısa. Ablasının yanına oturmadı; sanık sırasına kendisi yürüdü."
@@ -391,7 +400,11 @@
             },
             {
               "speaker": "savci",
-              "text": "Sayın Başkan, savunmanın “ev arkadaşı” hikâyesi bugün para karşılığı bir tanıkla desteklenmek istendi. Mahkemenizin bu hikâyeye hangi ağırlığı vereceğini takdirinize bırakıyorum. Esas hakkındaki görüşümüz iddianamedeki gibidir."
+              "text": "Sayın Başkan, savunmanın “ev arkadaşı” hikâyesi bugün para karşılığı bir tanıkla desteklenmek istendi."
+            },
+            {
+              "speaker": "savci",
+              "text": "Bu hikâyeye hangi ağırlığı vereceğinizi takdirinize bırakıyorum. Esas hakkındaki görüşümüz iddianamedeki gibidir."
             }
           ]
         }
@@ -1348,8 +1361,69 @@
             { "type": "MARK", "quality": "BAD", "feedback": "Dayanaksız itiraz.", "category": "SORGULAMA" }
           ]
         },
-        { "id": "T03_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "T_04" }
+        { "id": "T03_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "T_03S" }
       ]
+    },
+    {
+      "id": "T_03S",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "lines": [
+        {
+          "when": { "flag": "tolga_kirildi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tolga kürsüden indirildi. Polislerden biri koluna girdi; bu sefer onu getirmek için değil, götürmek için. Savcı bir not yazıp altını iki kez çizdi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kapıya varmadan Tolga durdu, sanık sırasına döndü. Bir şey söyleyecekti. Söylemedi. Bereyi başına geçirdi ve çıktı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir muhbirin dönüşü bir zafer gibi görünür. Değildir. Bir adam korkusunu söyledi; korktuğu adam hâlâ bir yerde.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "contra_t3" }, { "flag": "contra_t4" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tolga kürsüden indi. Bereyi başına geçirdi, çıkardı, yine geçirdi. Kapıya yürürken sanık sırasının önünden geçti; Kaan başını kaldırmadı."
+            },
+            { "speaker": "narrator", "name": "TOLGA", "text": "Ben… yani… ben söyledim işte.", "style": "whisper" },
+            {
+              "speaker": "narrator",
+              "text": "Kimse ona cevap vermedi. Başkan tanığın serbest bırakılmasını tutanağa geçirdi; savcı kalemini bir süre havada tuttu."
+            },
+            {
+              "speaker": "player",
+              "text": "Satıcının adını söylemedi. Ama kendi hikâyesini taşıyamadı. Bazen bir yalan çökmez; sadece ağırlaşır ve sahibi onu kapıda bırakır.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tolga kürsüden indi; sanık sırasına bakmadan, bereyi elinde ezerek. Savcı onaylar gibi başını salladı."
+            },
+            {
+              "speaker": "player",
+              "text": "Hikâyesi ayakta kaldı. Elimde onu çatlatacak bir ayrıntı ya yoktu ya da doğru anda çıkaramadım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_04" }],
+      "choices": []
     },
     {
       "id": "T_04",

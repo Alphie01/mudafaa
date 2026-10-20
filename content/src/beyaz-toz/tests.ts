@@ -115,7 +115,19 @@ const tahta = [
 const leyla = chooseAll('A_LEYLA', 'LEYLA_BITIR');
 const dilekce = chooseAll('A_DIL', 'DIL_KURYE', 'DIL_NESRIN', 'DIL_IZ', 'DIL_VER');
 
-const celse1Acilis = chooseAll('GECE_B', 'K_C', 'H100_DEVAM', 'H101_DEVAM', 'H102_DEVAM', 'Q_ODA', 'Q_KILIT', 'Q_KULLANIM', 'Q_TEDAVI', 'Q_BITIR', 'H103_A');
+const celse1Acilis = chooseAll(
+  'GECE_B',
+  'K_C',
+  'H100_DEVAM',
+  'H101_DEVAM',
+  'H102_DEVAM',
+  'Q_ODA',
+  'Q_KILIT',
+  'Q_KULLANIM',
+  'Q_TEDAVI',
+  'Q_BITIR',
+  'H103_A',
+);
 const tuncay = [
   press('S1'),
   press('S2'),
@@ -182,26 +194,12 @@ const tolgaSorguTipik = [
   choose('T03_BITIR'),
 ];
 
-const tolgaSorgu = [
-  press('T1'),
-  press('T2'),
-  object('g_duyum', 'T2'),
-  press('T3'),
-  present('ded_kask', 'T3'),
-  press('T5'),
-  present('ev_tolga_ifade', 'T5'),
-  press('T4'),
-  present('ded_alibi', 'T4'),
-  present('ded_tolga_baris', 'T1'),
-  choose('T03_BITIR'),
-];
-
 export const tests: CasePart = {
   tests: {
     goldenPaths: [
       goldenPath(
         TYPICAL_PATH,
-        { outcome: 'BERAAT_E' },
+        { outcome: 'BERAAT_E', finalMin: 11538, finalMax: 12752 },
         brifing('STR_USUL'),
         arka,
         on,
@@ -229,10 +227,31 @@ export const tests: CasePart = {
         tuncayTipik,
         celse1Son,
         araGun1,
-        chooseAll('A2_LEYLA', 'ARA_LEYLA_BITIR', 'A2_KAAN', 'KA_TOLGA', 'KA_SONSOZ', 'KA_BITIR', 'ARAK_B', 'TEL_C', 'ARA_SABAH_DEVAM'),
+        chooseAll(
+          'A2_LEYLA',
+          'ARA_LEYLA_BITIR',
+          'A2_KAAN',
+          'KA_TOLGA',
+          'KA_SONSOZ',
+          'KA_BITIR',
+          'ARAK_B',
+          'TEL_C',
+          'ARA_SABAH_DEVAM',
+        ),
         chooseAll('A2_DEFNE', 'DN_RED', 'DN_BITIR', 'A2_LEYLA', 'ARA_LEYLA_BITIR'),
         araTahta,
-        chooseAll('A2_SUC', 'SC_KIMLIK', 'A2_BODRUM', 'BD_SAVCI', 'A2_NESRIN', 'NS2_DEFTER', 'NS2_BARIS', 'NS2_BITIR', 'GO_T', 'TK_A'),
+        chooseAll(
+          'A2_SUC',
+          'SC_KIMLIK',
+          'A2_BODRUM',
+          'BD_SAVCI',
+          'A2_NESRIN',
+          'NS2_DEFTER',
+          'NS2_BARIS',
+          'NS2_BITIR',
+          'GO_T',
+          'TK_A',
+        ),
         chooseAll('T01_DEVAM', 'T01_A', 'T02_A'),
         tolgaSorguTipik,
         chooseAll('T04_A', 'T04B_A', 'T05E_A', 'D_ODA', 'D_MUHBIR', 'D_SEKER', 'D_BITIR', 'T06_E', 'T07_A'),
@@ -240,7 +259,7 @@ export const tests: CasePart = {
       // 223/2-b: Barış’ın kimliğiyle suç duyurusu + gece telefonunun bildirimi → yakalanır, iz eşleşir; esas savunmada gerçek fail.
       goldenPath(
         'G_B',
-        { outcome: 'BERAAT_B' },
+        { outcome: 'BERAAT_B', finalMin: 11904, finalMax: 13156 },
         brifing('STR_MASUMIYET'),
         arka,
         on,
@@ -268,10 +287,31 @@ export const tests: CasePart = {
         tuncay,
         celse1Son,
         araGun1,
-        chooseAll('A2_LEYLA', 'ARA_LEYLA_BITIR', 'A2_KAAN', 'KA_TOLGA', 'KA_SONSOZ', 'KA_BITIR', 'ARAK_A', 'TEL_A', 'ARA_SABAH_DEVAM'),
+        chooseAll(
+          'A2_LEYLA',
+          'ARA_LEYLA_BITIR',
+          'A2_KAAN',
+          'KA_TOLGA',
+          'KA_SONSOZ',
+          'KA_BITIR',
+          'ARAK_A',
+          'TEL_A',
+          'ARA_SABAH_DEVAM',
+        ),
         chooseAll('A2_DEFNE', 'DN_RED', 'DN_BITIR', 'A2_LEYLA', 'ARA_LEYLA_BITIR'),
         araTahta,
-        chooseAll('A2_SUC', 'SC_KIMLIK', 'A2_BODRUM', 'BD_SAVCI', 'A2_NESRIN', 'NS2_DEFTER', 'NS2_KEDI', 'NS2_BITIR', 'GO_T', 'TK_A'),
+        chooseAll(
+          'A2_SUC',
+          'SC_KIMLIK',
+          'A2_BODRUM',
+          'BD_SAVCI',
+          'A2_NESRIN',
+          'NS2_DEFTER',
+          'NS2_KEDI',
+          'NS2_BITIR',
+          'GO_T',
+          'TK_A',
+        ),
         chooseAll('T01_DEVAM', 'T01_A', 'T02_A'),
         [
           press('T1'),
@@ -289,7 +329,7 @@ export const tests: CasePart = {
       // 191’e dönüşüm: oda varsayımı çöker ama şekerlik ve muhbir ayakta kalır; ek savunma ve terditli savunma.
       goldenPath(
         'G_N',
-        { outcome: 'NITELIK_191' },
+        { outcome: 'NITELIK_191', finalMin: 6313, finalMax: 6977 },
         brifing('STR_INDIRIM', 'BR00_B', 'BR01_B'),
         arka,
         [choose('A_ON'), tapCenter(OB_YATAK), tapCenter(OB_RANDEVU), tapCenter(OB_AYAKKABI), choose('ON_BITIR')],
@@ -316,7 +356,13 @@ export const tests: CasePart = {
         choose('AK2_B'),
         choose('SABAH3_DEVAM'),
         nesrin,
-        [choose('A_GORUS2'), choose('TP_MESAJ', 'soft'), choose('G_RIZA_A'), choose('TP_TOLGA', 'soft'), choose('G_BITIR')],
+        [
+          choose('A_GORUS2'),
+          choose('TP_MESAJ', 'soft'),
+          choose('G_RIZA_A'),
+          choose('TP_TOLGA', 'soft'),
+          choose('G_BITIR'),
+        ],
         [
           choose('A_CIKARIM'),
           combine('clue_kilit', 'clue_kapsam'),
@@ -340,7 +386,18 @@ export const tests: CasePart = {
         chooseAll('TL_TAHLIYE', 'TL_BITIR', 'H107_DEVAM', 'H108_A', 'ARA_GIRIS_DEVAM'),
         chooseAll('A2_SELIM', 'SL_BARIS', 'SL_CANTA', 'SL_BITIR', 'A2_KAAN', 'KA_SONSOZ', 'KA_BITIR'),
         chooseAll('A2_DEFNE', 'DN_DINLE', 'DN_BITIR', 'A2_SUC', 'SC_KIMLIK', 'ARAK_A', 'TEL_C', 'ARA_SABAH_DEVAM'),
-        chooseAll('A2_NESRIN', 'NS2_DEFTER', 'NS2_KEDI', 'NS2_BITIR', 'A2_BODRUM', 'BD_FOTO', 'A2_LEYLA', 'ARA_LEYLA_BITIR', 'GO_T', 'TK_A'),
+        chooseAll(
+          'A2_NESRIN',
+          'NS2_DEFTER',
+          'NS2_KEDI',
+          'NS2_BITIR',
+          'A2_BODRUM',
+          'BD_FOTO',
+          'A2_LEYLA',
+          'ARA_LEYLA_BITIR',
+          'GO_T',
+          'TK_A',
+        ),
         chooseAll('T01_DEVAM', 'T01_B', 'T02_A'),
         [press('T1'), press('T2'), object('g_duyum', 'T2'), press('T3'), choose('T03_BITIR')],
         chooseAll('T04_A', 'T04B_B', 'T05N_A', 'D_ODA', 'D_KILIT', 'D_BITIR', 'T06_T', 'T07_A'),
@@ -348,7 +405,7 @@ export const tests: CasePart = {
       // Mahkûmiyet: oda varsayımı ayakta, terditli savunma yok; yanlış deliller ve dayanaksız itirazlar.
       goldenPath(
         'G_M',
-        { outcome: 'MAHKUMIYET' },
+        { outcome: 'MAHKUMIYET', finalMin: 812, finalMax: 898 },
         brifing('STR_MASUMIYET', 'BR00_C', 'BR01_C'),
         [choose('A_ARKA'), tap(5, 5), tap(10, 290), tapCenter(OB_MONT), choose('ARKA_BITIR')],
         [
@@ -361,7 +418,13 @@ export const tests: CasePart = {
           choose('TP_TOLGA', 'hard'),
           choose('G_BITIR'),
         ],
-        [choose('A_MESAJ'), examine('kars', 'm_eylul1'), examine('lupe', 'm_eylul1'), examine('lupe', 'm_eylul2'), choose('MESAJ_BITIR')],
+        [
+          choose('A_MESAJ'),
+          examine('kars', 'm_eylul1'),
+          examine('lupe', 'm_eylul1'),
+          examine('lupe', 'm_eylul2'),
+          choose('MESAJ_BITIR'),
+        ],
         [choose('A_KRIMINAL'), examine('lupe', 'k_kavanoz'), examine('lupe', 'k_paket'), choose('KRIMINAL_BITIR')],
         [choose('A_TOLGA'), examine('kars', 't_nereden'), examine('lupe', 't_yakalama'), choose('TOLGA_BITIR')],
         choose('AK1_C'),
@@ -370,7 +433,12 @@ export const tests: CasePart = {
         choose('KARAR_BITIR'),
         bina,
         defne,
-        [choose('A_CIKARIM'), combine('clue_iki_tane', 'clue_kavanoz_iz'), combine('clue_mont', 'clue_posta'), choose('CIKARIM_BITIR')],
+        [
+          choose('A_CIKARIM'),
+          combine('clue_iki_tane', 'clue_kavanoz_iz'),
+          combine('clue_mont', 'clue_posta'),
+          choose('CIKARIM_BITIR'),
+        ],
         leyla,
         chooseAll('A_DIL', 'DIL_SAC', 'DIL_KESIF', 'DIL_VER'),
         tutanak,
@@ -382,7 +450,17 @@ export const tests: CasePart = {
         [choose('A_GORUS2'), choose('TP_MESAJ', 'hard'), choose('TP_SEKER', 'hard'), choose('G_BITIR')],
         leyla,
         choose('GO_H1'),
-        chooseAll('GECE_C', 'K_B', 'H100_DEVAM', 'H101_DEVAM', 'H102_DEVAM', 'Q_PAKET', 'Q_SATICI', 'Q_BITIR', 'H103_B'),
+        chooseAll(
+          'GECE_C',
+          'K_B',
+          'H100_DEVAM',
+          'H101_DEVAM',
+          'H102_DEVAM',
+          'Q_PAKET',
+          'Q_SATICI',
+          'Q_BITIR',
+          'H103_B',
+        ),
         [press('S1'), press('S2'), present('ev_kira', 'S2'), press('S3'), choose('H104_BITIR')],
         chooseAll('TL_BITIR', 'H107_DEVAM', 'H108_A', 'ARA_GIRIS_DEVAM'),
         chooseAll('A2_SELIM', 'SL_ADRES', 'SL_BARIS', 'SL_BITIR', 'A2_KAAN', 'KA_SONSOZ', 'KA_BITIR'),
@@ -395,7 +473,7 @@ export const tests: CasePart = {
       // Etik ihlali: para karşılığı tanık hazırlamak (TELKİN sonu).
       goldenPath(
         'G_ETIK',
-        { outcome: 'TELKIN' },
+        { outcome: 'TELKIN', finalMin: 8750, finalMax: 9670 },
         brifing('STR_MASUMIYET', 'BR00_C'),
         arka,
         on,
@@ -421,13 +499,23 @@ export const tests: CasePart = {
         celse1Son,
         araGun1,
         chooseAll('A2_KAAN', 'KA_SONSOZ', 'KA_BITIR', 'ARAK_B', 'TEL_C', 'ARA_SABAH_DEVAM'),
-        chooseAll('A2_DEFNE', 'DN_KABUL', 'DN_BITIR', 'A2_LEYLA', 'ARA_LEYLA_BITIR', 'A2_SUC', 'SC_KIMLIK', 'GO_T', 'TK_B'),
+        chooseAll(
+          'A2_DEFNE',
+          'DN_KABUL',
+          'DN_BITIR',
+          'A2_LEYLA',
+          'ARA_LEYLA_BITIR',
+          'A2_SUC',
+          'SC_KIMLIK',
+          'GO_T',
+          'TK_B',
+        ),
         chooseAll('OKAN_DEVAM'),
       ),
       // Çöküş: ikinci celsede muhbire art arda yanlış deliller → güvenilirlik 0 → mahkûmiyet.
       goldenPath(
         'W',
-        { outcome: 'MAHKUMIYET' },
+        { outcome: 'MAHKUMIYET', finalMin: 7942, finalMax: 8778 },
         brifing('STR_USUL'),
         arka,
         on,
@@ -455,15 +543,9 @@ export const tests: CasePart = {
         chooseAll('A2_KAAN', 'KA_TOLGA', 'KA_BITIR', 'ARAK_C', 'TEL_C', 'ARA_SABAH_DEVAM'),
         chooseAll('A2_DEFNE', 'DN_RED', 'DN_BITIR', 'A2_SUC', 'SC_KIMLIK', 'GO_T', 'TK_C'),
         chooseAll('T01_DEVAM', 'T01_C', 'T02_C'),
-        [
-          present('ev_kira', 'T1'),
-          present('ev_sac', 'T2'),
-          present('ev_mesaj', 'T3'),
-        ],
+        [present('ev_kira', 'T1'), present('ev_sac', 'T2'), present('ev_mesaj', 'T3')],
         choose('COKUS_SON'),
       ),
     ],
   },
 };
-
-void OB_GITAR;

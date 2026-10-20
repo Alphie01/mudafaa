@@ -82,7 +82,7 @@ export const meta: CasePart = {
       thresholdBar: thresholdBar([
         ['Mahkûmiyet', 0, 'red'],
         ['Nitelik', 3000, 'amber'],
-        ['Beraat', 7000, 'green'],
+        ['Beraat', 10500, 'green'],
       ]),
       displayClampMin: 0,
     },
@@ -101,7 +101,11 @@ export const meta: CasePart = {
     {
       id: 'beraat_e',
       label: 'Oda varsayımı çöktü, şekerlik aklandı, muhbir sarsıldı',
-      when: all(flag('contra_s2'), flag('jar_cleared'), any(flag('contra_t3'), flag('contra_t4'), flag('tolga_kirildi'))),
+      when: all(
+        flag('contra_s2'),
+        flag('jar_cleared'),
+        any(flag('contra_t3'), flag('contra_t4'), flag('tolga_kirildi')),
+      ),
     },
   ],
   variables: [

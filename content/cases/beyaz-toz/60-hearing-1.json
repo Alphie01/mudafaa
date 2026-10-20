@@ -684,13 +684,13 @@
         {
           "id": "H103_C",
           "kind": "OPTION",
-          "label": "İtiraz: tanık yalan söylüyor!",
+          "label": "İtiraz: tanık aramayı yapan kişidir, taraflıdır; beyanı dinlenemez (CMK 217)",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "baskan",
-                  "text": "Müdafi, tanık daha bir şey söylemedi. Usule dair bir itirazınız yoksa oturun."
+                  "text": "Müdafi, kolluk görevlisi tanık olarak dinlenir; beyanını heyet takdir eder. Usule dair bir itirazınız yoksa oturun."
                 },
                 { "speaker": "tuncay", "text": "Ev onun adınaydı; oda da onun kullanımındaydı." }
               ]
@@ -702,7 +702,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Dayanaksız suçlama: itiraz bir usul kuralına dayanır, tanığın güvenilirliği ise çapraz sorguda delille sarsılır.",
+            "feedback": "Kolluk görevlisi tanık olarak dinlenebilir; beyanının ağırlığı hükümde takdir edilir (CMK 217). Bu bir itiraz konusu değildir; güvenilirlik çapraz sorguda delille sarsılır.",
             "category": "USUL_BILGISI"
           },
           "next": "H1_04"
@@ -1435,6 +1435,21 @@
       "hud": ["cred", "pers"],
       "title": "Talepler",
       "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Çapraz sorgu bitmişti. Tuncay Sezer kürsüden inerken tutanağın fotokopisini katladı, cebine koydu, sonra yeniden çıkardı ve masaya bıraktı."
+            },
+            {
+              "speaker": "player",
+              "text": "Şimdi talepler. Bugün kazanılan her şey kâğıtta kalacak; ikinci celseye ne taşıyacağımı şimdi seçmeliyim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
       "prompt": { "speaker": "baskan", "text": "Taraflar, delillere ve tutukluluğa ilişkin talepleriniz?" },
       "choices": [
         {
@@ -1594,6 +1609,15 @@
               "speaker": "narrator",
               "text": "Kaan başkana baktı, sonra bana, sonra ablasına. Defne ayağa kalkmıştı ve kalktığını fark etmemişti.",
               "fx": "shake"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Jandarma kelepçenin anahtarını çıkardı. Kaan bileklerini ovuşturdu; sonra ne yapacağını bilmeden ellerini cebine soktu. Cebinde bir şey yoktu. Hiç olmamıştı."
+            },
+            {
+              "speaker": "player",
+              "text": "Tahliye. Beraat değil, ama bir kapı. Kapının ötesinde bir sofra, bir telefon, bir perşembe.",
+              "style": "thought"
             }
           ]
         },
@@ -1710,6 +1734,14 @@
             {
               "speaker": "defne",
               "text": "On yıl sonra hatırlayacağım bu akşamı. Bir çorba, bir balkon, bir telefon."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kaan balkondan döndüğünde gözleri kırmızıydı. Oturdu, çorbasını iki elle tuttu, içti. Bu sefer soğutmadı."
+            },
+            {
+              "speaker": "kaan",
+              "text": "Annem “eve gel” dedi. Önce kızdı, sonra ağladı, sonra “yemeğini ye” dedi. Annem işte."
             },
             {
               "speaker": "player",

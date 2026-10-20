@@ -359,7 +359,7 @@ yasar: Cuma gecesi mi? Kim girecek kızım? Gece vardiyası, servisler… Kimse 
       effects: [ifThen(has('clue_defter'), [discover('clue_yasar'), score('ARASTIRMA', 40)])],
     }),
     option('YQ_SELIM', '“Selim’i işten çıktıktan sonra gördünüz mü?”', {
-      score: { SORGULAMA: 10 },
+      score: { ARASTIRMA: 20 },
       responses: B(`
 yasar: Görmedim. Kartını bıraktı, bana bir paket simit bıraktı, “Usta hakkını helal et” dedi. Bir daha gelmedi.
 yasar: Gelemez de zaten. Kartı yok. Kartı olmayan bu turnikeden geçemez; ben açmazsam.
@@ -367,7 +367,7 @@ yasar: Gelemez de zaten. Kartı yok. Kartı olmayan bu turnikeden geçemez; ben 
 `),
     }),
     option('YQ_KORKU', '“Bunları anlatmaktan çekiniyor musunuz?”', {
-      score: { SORGULAMA: 10 },
+      score: { SORGULAMA: 15 },
       responses: B(`
 yasar: Çekinmez miyim kızım? İki yıl sonra emekliyim. Kapıdan atarlarsa nereye giderim? Kırk yaşında olsam neyse.
 yasar: Ama yalan da söylemem. Otuz yıldır bu deftere ne gördüysem onu yazdım. Defter benim namusum.

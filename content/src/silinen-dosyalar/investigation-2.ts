@@ -34,7 +34,7 @@ import {
 import type { CasePart, ChoiceDef } from '../../../tools/content/src/kit/index.js';
 import { B, O, W, retarget } from './dsl.js';
 import { firstTime, invRecipes, newDed, tamDoc } from './investigation-1.js';
-import { ARA, ARA_AP, ARA_DAYS } from './shared.js';
+import { ARA, ARA_AP, ARA_DAYS, boardMissEffects, boardMissResponses } from './shared.js';
 
 // 70-investigation-2: 1. ve 2. celse arası (3 gün × 3 EP; yığınsız). Bilirkişi ön inceleme, kart kaydı, operatör
 // cevabı, poliçe zeyilnamesi; Nalan, Yaşar hazırlığı, Hakan; Selim’in eski şifre teklifi; eksper fotoğrafları;
@@ -100,6 +100,9 @@ const girisNodes = [
     lines: B(`
 > Leyla odama girdi. Elinde bir dosya tomarı. Masaya bıraktı; üstüne avucunu koydu, bir an öyle durdu.
 leyla: Müzekkerelerin cevapları. Oku. Ama önce şunu düşün: bu dosyada bir isim arıyorsun. İsmi kayıt verecek, sen değil.
+leyla: Bir de o zarf. İmzasız not. Duruşma sabahı savcılığa tutanakla teslim ettik; “tehdit” diye ayrı bir dosya açıldı. Kâğıdı da incelemeye gönderdiler: kalın, krem rengi, filigranlı. Kırtasiyede satılan cinsten değilmiş.
+- Kimin kâğıdı?
+leyla: Onu savcı bulacak. Bizim işimiz notu ona vermekti; verdik. Kâğıdın sahibini aramaya kalkarsan, notu yazanın istediğini yapmış olursun: dosyadan başını kaldırırsın.
 > Oturdum. İlk sayfa. Sonra ikinci. Sonra geri döndüm, birincisine.
 ~ Bir kullanıcı adı, bir cihaz adı, bir hat, bir poliçe. Dört ayrı kurumdan dört ayrı kâğıt. Her biri tek başına bir şey söylemiyor. Yan yana koyunca bir yüz beliriyor; henüz bulanık.
 leyla: Bir yüz görmeye başladın, değil mi? Yüzünden belli.
@@ -176,9 +179,9 @@ const hubTabs = [
     kind: 'PEOPLE' as const,
     choices: [
       act('A_SELIM', 'Selim’le görüş', 'ARA_SELIM', { once: true, description: 'Kayıtlar onu aklıyor' }),
-      act('A_NALAN', 'Nalan Korkmaz’la buluş', 'ARA_NALAN', {
+      act('A_NALAN', 'Gizli numaralı kadınla buluş', 'ARA_NALAN', {
         once: true,
-        description: 'Gizli numara sahibi',
+        description: 'Mudanya · bir çay bahçesi',
         visibleWhen: flag('nalan_ipucu'),
       }),
       act('A_YASAR', 'Yaşar Usta’yı hazırla', 'ARA_YASAR', {
@@ -639,7 +642,7 @@ selim: Bir gece. Kimse bilmez. Ben iz bırakmam; dokuz yıl o sistemi ben kurdum
 ~ Bir müvekkil, suçlandığı şeyi yapmayı teklif ediyor; beni kurtarmak için. Hayatımın en tehlikeli iyi niyeti.
 `),
   choices: [
-    option('ST_RED', '“Asla. Bir daha o sisteme girmeyeceksin; ben de girdirmeyeceğim.”', {
+    option('ST_RED', '“Hayır. O kaydı mahkeme ister.”', {
       score: { SAVUNMA_STRATEJISI: 60 },
       effects: [raise('selim_red'), inc('trust', 6)],
       good: 'Müvekkilini suç işlemekten alıkoydun: izinsiz girişi yapmak da yaptırmak da suçtur (TCK 243; TCK 38). Delili mahkeme kanalıyla isteriz.',
@@ -654,12 +657,12 @@ selim: Söz.
 `),
       next: HUB,
     }),
-    option('ST_KABUL', '“Dikkatli ol. Kimse bilmesin.”', {
+    option('ST_KABUL', '“Yalnızca bak; hiçbir şeye dokunma, kayıtları indir yeter.”', {
       effects: [inc('ethics'), raise('selim_giris'), score('SAVUNMA_STRATEJISI', -60), dec('cred')],
       bad: 'Müvekkiline izinsiz sistem girişi yaptırmak; hem yeni bir suça azmettirmek (TCK 243, 244; TCK 38) hem de hukuka aykırı delil üretmektir (CMK 206/2-a, 217/2). Felakete giden yol.',
       category: 'SAVUNMA_STRATEJISI',
       responses: B(`
-- Dikkatli ol. Kimse bilmesin. İndirdiğin kayıtları bana getir.
+- Yalnızca bak. Hiçbir şeye dokunma, hiçbir şey silme. Kayıtları indir, bana getir; kimse bilmesin.
 selim: Tamam. Bu gece.
 > Çıkarken içim rahat değildi. Bir avukat, müvekkiline suçlandığı suçu yeniden işletiyordu. Bir kere daha, “iyi” bir sebeple.
 ~ İyi sebepler en tehlikeli sebeplerdir; çünkü insan onlara inanır.
@@ -677,6 +680,7 @@ const nalan = conversation('ARA_NALAN', {
   onFirstEnter: [meet('nalan')],
   lines: B(`
 # CUMA 17.30 — MUDANYA SAHİLİ, BİR ÇAY BAHÇESİ [bg:kafe]
+> Sabah aynı gizli numara bir kez çalmıştı. Bir yer, bir saat; başka bir şey değil. “Yalnız gelin.”
 > Beni şehrin dışında, sahilde bir çay bahçesine çağırdı. Masanın en uzak köşesi; denize, kapıya ve girişe aynı anda bakan yer. Bir muhasebeci masa seçer gibi masa seçmiş.
 nalan: Oturun. Çabuk konuşalım. Beni kimse görmesin istedim; onun için buradayız. Deniz kenarında kimse kimseyi tanımaz.
 nalan: Nalan Korkmaz. Mali işler. On bir yıldır o şirketteyim. Selim’i tanırım; dürüst çocuktur, fişsiz bir kuruş harcamaz.
@@ -702,11 +706,14 @@ nalan: Anlatırım. Korkuyorum; ama anlatırım. Bir imzanın altında kalmaktan
       responses: B(`
 nalan: Bilmem. Ama şunu bilirim: Tarık Bey teknik adam değilim der, oysa her sabah kendi dizüstüsüyle gelir, kimseye dokundurmaz. “Benim bilgisayarım benim kasam” der.
 nalan: Bir de golf. Bülent’le golf. İkisi de aynı kulüpte. Raporu yazan da o kulüpte.
-~ Bir kasa, bir golf sahası, bir rapor. Üçü de aynı adamın etrafında dönüyor.
+nalan: Geçen yıl kalp ameliyatı oldu. Doktoru stresi yasakladı; eşi her gece arar, “yatmadın mı” diye. Şirket batarsa, ev de gider, emeklilik de. Bunu herkes bilir; kimse söylemez.
+nalan: Bir de antetli kâğıdı. Genel müdürlüğün kâğıdı İtalya’dan gelir; kalın, krem rengi, filigranlı. Ben bile kullanamam; yalnız onun masasında durur.
+~ Bir kasa, bir golf sahası, bir rapor. Bir kalp, bir ev. Bir de krem rengi bir kâğıt; kapımın altından giren notun kâğıdı. Hepsi aynı adamın etrafında dönüyor.
+~ Ama bir benzerlik bir delil değildir. Kâğıdı savcı inceletiyor; ben değil.
 `),
       effects: [raise('fact_golf')],
     }),
-    option('NQ_KANAL', '“Bunu bana değil, savcılığa ve mahkemeye anlatmalısınız.”', {
+    option('NQ_KANAL', '“Mahkemede tanık olur musunuz?”', {
       score: { SAVUNMA_STRATEJISI: 50 },
       effects: [raise('nalan_kanal'), raise('nalan_tanik')],
       good: 'Çalışanı belge kaçırmaya değil, bildiğini resmî kanaldan tanık olarak anlatmaya yönlendirdin (CMK 158; Av.K. 34).',
@@ -718,12 +725,12 @@ nalan: Çağırın beni. Gelirim. Ama lütfen, poliçeyi mahkeme istesin; benim 
 ~ Doğru yol bazen daha yavaştır. Ama yalnızca doğru yoldan gelen delil, kürsüde ayakta kalır.
 `),
     }),
-    option('NQ_BELGE', '“Poliçe dosyasını fotokopiyle getirebilir misiniz?”', {
+    option('NQ_BELGE', '“Zeyilnamenin bir suretini bana verin; mahkemeye ben sunarım.”', {
       effects: [inc('ethics'), raise('nalan_belge'), score('SAVUNMA_STRATEJISI', -50)],
       bad: 'Çalışandan işvereninin belgesini gizlice getirmesini istemek; onu riske atar ve hukuka aykırı yolla elde edilmiş delil üretir (CMK 206/2-a, 217/2; Av.K. 34). Poliçe mahkeme kanalıyla istenir.',
       category: 'SAVUNMA_STRATEJISI',
       responses: B(`
-- Poliçe dosyasını fotokopiyle getirebilir misiniz? Bana lazım.
+- Zeyilnamenin bir suretini bana verin. Mahkemeye ben sunarım; sizin adınız geçmez.
 nalan: Getiririm. Risk alırım sizin için. Selim için.
 > Bir an durdu. Çayını karıştırdı; kaşık fincana değdi, bir kez.
 nalan: Ama yakalanırsam? Ben de mi suçlu olurum?
@@ -762,7 +769,7 @@ yasar: Ne diyeyim orada? Korkuyorum.
 `),
   ],
   choices: [
-    option('YA_DOGRU', '“Defterinizde ne yazıyorsa onu. Fazlası değil.”', {
+    option('YA_DOGRU', '“Defterde ne yazıyorsa o.”', {
       score: { SAVUNMA_STRATEJISI: 50 },
       effects: [raise('yasar_hazir')],
       good: 'Tanığı içerikçe yönlendirmeden yalnızca usul hakkında bilgilendirdin; defterin kendisi en sağlam dayanak.',
@@ -776,12 +783,12 @@ yasar: Defter benim namusum. Namusumu söylerim.
 `),
       next: HUB,
     }),
-    option('YA_EZBER', '“Mahkemede ‘silik adamı Selim değildi’ deyin.”', {
-      effects: [inc('ethics'), raise('yasar_kocluk'), raise('yasar_hazir'), score('SAVUNMA_STRATEJISI', -50)],
+    option('YA_EZBER', '“Gelenin Selim olmadığını açıkça söyleyin; tereddüt hâkimi şüpheye düşürür.”', {
+      effects: [inc('ethics'), raise('yasar_kocluk'), raise('yasar_ezber'), raise('yasar_hazir'), score('SAVUNMA_STRATEJISI', -50)],
       bad: 'Tanığa görmediği bir şeyi söyletmek; tanığı yönlendirmek (Av.K. 34) ve yalan tanıklığa azmettirmektir (TCK 272, 38).',
       category: 'SAVUNMA_STRATEJISI',
       responses: B(`
-- Mahkemede “o gece gelen Selim değildi, başkasıydı” deyin. İşimiz kolaylaşır.
+- Mahkemede açık konuşun Yaşar Usta: “O gece gelen Selim değildi.” Tereddüt ederseniz hâkim şüpheye düşer; açık söylerseniz işimiz kolaylaşır.
 yasar: Ama ben yüzünü görmedim ki kızım. Arabayı gördüm, sesi duydum. Yüzü karanlıktı.
 yasar: Görmediğimi nasıl derim? Defterde öyle yazmıyor.
 ~ Bir bekçiye namusunu çiğnetmeye çalıştım. Reddetti. Benden daha iyi bir hukukçu çıktı.
@@ -812,7 +819,9 @@ hakan: Orijinal diskler oradaydı, söylemiştim. Bilirkişi oradan alınca ger�
 hakan: Resmî olarak bir şey diyemem. Gayriresmî olarak: cihaz adı diyorlar. Silme oturumunun cihazı, sanığınki değilmiş.
 hakan: Ben olsam o cihazın kime zimmetli olduğuna bakardım. Şirket zimmet tutar; her demirbaş birine yazılıdır.
 - Zimmeti mahkemeden istedim.
-hakan: İyi. O zaman benim söyleyeceğim bir şey kalmadı. Kayıt sizin olsun; ben kendiminkini yaptım.
+hakan: İyi. Bir şey daha; geçen sefer sormayın demiştim. O “acele etmeyin” telefonu amirime şirketten gelmiş. Genel müdürlükten. “Firmamız inceliyor, sonucu biz bildiririz” demişler. Tutanakta yok; amirimin defterinde var.
+- Bunu savcılığa söyler misiniz?
+hakan: Savcı sorarsa söylerim. Sormazsa da amirim söyler; o da rahatsız. Kayıt sizin olsun; ben kendiminkini yaptım.
 `),
     }),
     cont('HAKAN2_BITIR', 'Teşekkür et', HUB, { role: 'BACK' }),
@@ -844,10 +853,10 @@ const kararSec = story('ARA_KARAR_SEC', {
 ~ Bir isim. Artık “belki” değil. Ama ben bir avukatım. Bir ismi bulmak başka, onunla ne yapacağını bilmek başka.
 leyla: (telefonda) Ne buldun?
 - Bir isim buldum Leyla Hanım. Kayıtlar söylüyor.
-leyla: Peki şimdi ne yapacaksın? Üç seçeneğin var; ikisi yanlış.
+leyla: Peki şimdi ne yapacaksın? Seçeneklerin var. Çoğu yanlış; bazıları doğru gibi görünür.
 `),
   choices: [
-    option('K_BILDIR', 'Savcılığa yazılı suç duyurusunda bulun; delilleri ekle', {
+    option('K_BILDIR', 'Dört kaydı bir dilekçeye ekle, savcılığa ver', {
       score: { USUL_BILGISI: 100, SAVUNMA_STRATEJISI: 60 },
       effects: [raise('bildirdi'), inc('legal_hits'), inc('pers')],
       good: 'Başka bir kişinin fail olabileceğini gösteren delilleri savcılığa yazılı olarak bildirmek doğru yoldur (CMK 158, 160); araştırmayı savcı yürütür, avukat kovalamaz.',
@@ -861,7 +870,7 @@ leyla: Bir de şunu kazanırsın: ikinci celsede savcı senin yanında durabilir
 `),
       next: 'ARA_KARAR_BILDIRILDI',
     }),
-    option('K_YUZLES', 'Genel müdürle yüzleş; itiraf ettirmeye çalış', {
+    option('K_YUZLES', 'Genel müdürle yüz yüze konuş; tepkisini gör', {
       effects: [inc('ethics'), raise('tarik_yuzles'), score('SAVUNMA_STRATEJISI', -40), dec('pers')],
       bad: 'Olası faille yüzleşmek bir avukatın işi değildir; delil kaybına, karşı suçlamalara yol açar ve araştırmayı savcıdan alır. Doğru yol savcılığa yazmaktır (CMK 158).',
       category: 'SAVUNMA_STRATEJISI',
@@ -875,7 +884,7 @@ leyla: Kanıtın varsa savcıya götür. Bir faili uyarırsan, kayıtları temiz
 `),
       next: HUB,
     }),
-    option('K_BEKLE', 'Hiçbir şey yapma; ikinci celsede sun', {
+    option('K_BEKLE', 'Hepsini ikinci celseye sakla', {
       score: { SAVUNMA_STRATEJISI: -20 },
       effects: [raise('tarik_bekle')],
       neutral:
@@ -885,6 +894,20 @@ leyla: Kanıtın varsa savcıya götür. Bir faili uyarırsan, kayıtları temiz
 leyla: Belki daha gösterişli olur. Ama fail üç hafta boyunca serbest. Bir hat kapatılır, bir cihaz “kaybolur.”
 leyla: Sen bir sahne mi istiyorsun, bir sonuç mu? Sahne senin; sonuç müvekkilinin.
 ~ Bir sahne mi, bir sonuç mu? Kendime bu soruyu sormalıydım; sormadım.
+`),
+      next: HUB,
+    }),
+    option('K_SOZLU', 'Savcıya koridorda sözlü bilgi ver; belgeleri ikinci celseye sakla', {
+      score: { SAVUNMA_STRATEJISI: -10 },
+      effects: [raise('tarik_bekle')],
+      neutral:
+        'Kayda geçmeyen bir koridor sohbeti ihbar değildir; savcının harekete geçmesi için yazılı ya da tutanağa geçirilmiş bir bildirim gerekir (CMK 158/1). Belgeleri saklayınca fail üç hafta serbest kalır.',
+      responses: B(`
+> Ertesi sabah adliye koridorunda Savcı Ferda Yalın’ı yakaladım. Bir ismi alçak sesle söyledim; bir cihaz adı, bir hat.
+ferda: Avukat hanım, bana koridorda bir isim söylüyorsunuz. Bir dilekçe verin; ekleriyle. Koridorda söylenen koridorda kalır.
+- Belgeleri celsede sunacağım.
+ferda: O zaman celsede görüşürüz.
+~ Hem söyledim hem söylemedim. Leyla buna “avukatın en pahalı yarım adımı” der.
 `),
       next: HUB,
     }),
@@ -1044,6 +1067,8 @@ const cikarim = retarget(
     miss: fallback('ARA_FB_CIKARIM', 'COMBINE', {
       repeat: 'ONCE_PER_PARAMS',
       score: { DELIL_ANALIZI: -50 },
+      effects: boardMissEffects,
+      responses: boardMissResponses,
       feedback: { title: 'Bu ikisi birbirini açıklamıyor', text: 'Başka bir ipucu dene.', label: 'BAĞLANTI YOK · −50 SKOR', tone: 'error' },
     }),
     finish: { id: 'ARA_CIKARIM_BITIR' },

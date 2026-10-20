@@ -32,7 +32,7 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, ChoiceDef, Effect } from '../../../tools/content/src/kit/index.js';
 import { B, O, W, retarget } from './dsl.js';
-import { INV, p1 } from './shared.js';
+import { INV, boardMissEffects, boardMissResponses, p1 } from './shared.js';
 
 // 50-investigation: 3 gün × 5 EP. Olay yeri (sunucu odası fotoğrafları, Aktaşların evi, fabrika kapısı), müvekkil,
 // tanıklar, arşiv (özet döküm, DataKale raporu, emniyet raporu, devir-teslim tutanağı, ham kayıt), dilekçe, tahta.
@@ -271,13 +271,21 @@ const log = documentExam('INV_LOG', {
       score: { DELIL_ANALIZI: 100 },
       feedback: {
         title: 'YENİ İPUCU · CUMA 21.30',
-        text: 'İlk oturum cuma 21.30’da, sabit bir ev hattından; yirmi iki dakika. İşlem: “Selim_kisisel” klasörünün kopyalanması. Selim bana bundan hiç söz etmedi.',
+        text: 'İlk oturum cuma 21.30’da, sabit bir ev hattından; yirmi iki dakika. İşlem: “Selim_kisisel” klasörünün kopyalanması. Dosyada bu oturumun neden açıldığına dair tek satır yok.',
         label: '+100 SKOR · Not defterine eklendi',
         tone: 'special',
       },
-      responses: B(`
+      responses: [
+        W(
+          visited('INV_GORUSME'),
+          `
 ~ Selim o gece bağlanmış. Bana “gece kapalıydı” demişti. Akşam ile gece arasında bir saat var; o saatte ne olduğunu ondan duymam gerek.
+`,
+        ),
+        O(`
+~ Selim o akşam bağlanmış; kendi adına bir klasöre. Selim’e bunu sormam gerek; dosyada hiçbir yerde açıklaması geçmiyor.
 `),
+      ],
     }),
     examine('EX_L_GSM', 'mag', 'l2', {
       discovers: 'clue_gsm',
@@ -862,6 +870,8 @@ const cikarim = deductionBoard('INV_CIKARIM', {
   miss: fallback('FB_CIKARIM', 'COMBINE', {
     repeat: 'ONCE_PER_PARAMS',
     score: { DELIL_ANALIZI: -50 },
+    effects: boardMissEffects,
+    responses: boardMissResponses,
     feedback: { title: 'Bu ikisi birbirini açıklamıyor', text: 'Başka bir ipucu dene.', label: 'BAĞLANTI YOK · −50 SKOR', tone: 'error' },
   }),
   finish: { id: 'CIKARIM_BITIR' },
@@ -938,7 +948,7 @@ const aksam1 = story('INV_AKSAM1', {
   lines: B(`
 # GECE 22.15 — ARSLAN HUKUK [bg:buro_gece]
 > Büroda Leyla’yla ikimiz kaldık. Yağmur camda; kalorifer tıkırdıyor. Leyla gözlüğünü çıkardı, burnunun kemerini ovuşturdu.
-> Masasının köşesinde açılmamış sigara paketi. Yirmi yıldır orada olduğunu söylerler; her zor dosyada eline alır, çevirir, geri koyar.
+> Masasının köşesinde açılmamış sigara paketi. Bıraktığı gün aldığı paket; dört yıldır orada. Her zor dosyada eline alır, çevirir, geri koyar.
 > Bu akşam paketi aldı. Çevirdi. Geri koymadı; avucunda tuttu.
 leyla: İlk dosyamı hatırlıyorum. Bir hırsızlık. Herkes müvekkilimin parmak izini konuşuyordu; ben pencerenin hangi yöne açıldığını sordum. Kimse sormamıştı.
 leyla: Pencere içe açılıyordu. Parmak izi dışarıdaydı. Davayı bir menteşe kazandı.
@@ -993,26 +1003,28 @@ const aksam2 = story('INV_AKSAM2', {
 @BİR KADIN: Sadece şunu söyleyeceğim: poliçeye bakın. Siber poliçeye. Ne zaman, ne kadar. [phone]
 `),
   choices: [
-    option('NA_ISIM', '“Adınızı söylemezseniz bir şey yapamam.”', {
+    option('NA_ISIM', '“Önce adınızı alayım; yoksa elim kolum bağlı.”', {
       responses: B(`
 @BİR KADIN: O zaman bir şey yapmayın. Ben yapacağımı yaptım. [phone]
 > Hat kapandı. Bir daha çalmadı.
 ~ Bir adı zorla almak, bir tanığı kaçırmaktır. Kaçırdım mı? Bilmiyorum. Bir “poliçe” kaldı elimde.
 `),
+      score: { SORGULAMA: -10 },
       effects: [raise('nalan_ipucu')],
       next: 'INV_HUB',
     }),
-    option('NA_DINLE', 'Sessizce dinle', {
+    option('NA_DINLE', 'Araya girme; dinle', {
       responses: B(`
 - Dinliyorum.
 @BİR KADIN: Ağustosta bir şey imzaladım. Ne olduğunu sormadım. Şimdi soruyorum. Kendime. Gece. [phone]
 @BİR KADIN: İyi geceler avukat hanım. Selim iyi bir çocuktur. [phone]
 > Hat kapandı. Sesi bir hesap makinesinin tuşları gibiydi: kısa, net, sonunda bir toplam.
 `),
+      score: { SORGULAMA: 15 },
       effects: [raise('nalan_ipucu')],
       next: 'INV_HUB',
     }),
-    option('NA_KANAL', '“Bunu savcılığa ya da mahkemeye tanık olarak söyleyebilirsiniz.”', {
+    option('NA_KANAL', '“Bunu bir mahkemede de söyler misiniz?”', {
       score: { SAVUNMA_STRATEJISI: 30 },
       good: 'Bilgi veren çalışana belge getirmesini değil, bildiğini resmî kanaldan söylemesini önerdin (CMK 158; Av.K. 34).',
       category: 'SAVUNMA_STRATEJISI',
@@ -1093,7 +1105,7 @@ const geceSon = story('INV_GECE', {
 ~ Dokuz yıl bir adam bu beş harfi her sabah yazdı. Sonra işten çıktı. Beş harf masada kaldı; bir zarfın içinde, bir tutanağın dördüncü maddesinde.
 ~ Yarın bir uzman kürsüye çıkacak ve “kayıt yalan söylemez” diyecek. Doğru; kayıt yalan söylemez.
 ~ Ama kaydı tutan, özetleyen, mahkemeye getiren üç ayrı el var. Benim işim o elleri göstermek; kaydı değil, elleri.
-> Defne’nin resmini çantamdan çıkardım; Gül vermişti, Selim’e iletecektim, unutmuştum. Bir masa, bir ekran, bir adam ve odanın içinde çizilmiş bir güneş.
+> Defne’nin resmini çantamdan çıkardım; “avukat teyzeye” diye çizmiş, Gül ilk akşam masama bırakmıştı. Bir masa, bir ekran, bir adam ve odanın içinde çizilmiş bir güneş.
 ~ Bir çocuk babasını bir ekranın başında çizmiş. Yarın o ekranın başına bir başkasını oturtmam gerekiyor; kanıtla, sesle, sırayla.
 > Telefon titredi. Leyla’dan tek bir mesaj, gece yarısına beş kala.
 leyla: Yarın uzman kürsüde “teknik olarak” derse, sen “insan olarak” diye sor. Ve zarfı bana getir; sabah. Savcılığa birlikte bildiririz. [phone]

@@ -240,7 +240,7 @@ kemal: Müdafi, diyeceğiniz?
 `),
       next: 'H1_03',
       options: [
-        option('H102_A', 'Bu bir uzman mütalaasıdır; mahkemece bilirkişi atansın, orijinal diskler muhafaza edilsin', {
+        option('H102_A', 'Bilirkişi atansın; orijinal diskler mühürlensin', {
           score: { USUL_BILGISI: 100 },
           effects: [raise('bilirkisi_atandi'), inc('legal_hits'), inc('pers')],
           good: 'Şikâyetçinin aldırdığı rapor uzman mütalaasıdır (CMK 67/6); bilirkişiyi mahkeme atar (CMK 63). Orijinal disklerden usulüne uygun imaj ve özet değer (CMK 134) istenmeli.',
@@ -253,7 +253,7 @@ kemal: Talep yerinde görüldü. Ara kararda değerlendirilecek.
 > Ozan Tekin oturdu. Bir şey yazdı; bu kez altını çizmedi.
 `),
         }),
-        option('H102_B', 'Rapor hukuka aykırı delildir; tamamen dışlansın', {
+        option('H102_B', 'Rapor hukuka aykırı delildir; dosyadan çıkarılsın', {
           score: { USUL_BILGISI: -20 },
           neutral: 'Özel uzman raporu kendiliğinden hukuka aykırı delil değildir (CMK 206/2-a, 217/2 için yasak bir yöntem gerekir); hâkim onu takdir eder. Bilirkişi istemedin.',
           responses: B(`
@@ -262,7 +262,7 @@ kemal: Hangi yasak yöntemle elde edildi müdafi? Bir şirketin kendi sistemine 
 ~ Doğru bir sezgiyi yanlış bir kelimeyle söyledim. Mahkeme kelimeyi reddetti; sezgiyi duymadı.
 `),
         }),
-        option('H102_C', 'Raporun içeriğine diyeceğimiz yok; tanığı dinleyelim', {
+        option('H102_C', 'Diyeceğimiz yok; tanığı dinleyelim', {
           effects: [dec('pers')],
           neutral: 'Raporun niteliğine itiraz etmedin; şikâyetçinin uzmanı dosyada bilirkişi gibi kalmaya devam ediyor.',
           responses: B(`
@@ -271,7 +271,7 @@ kemal: Rapor dosyada durur. Tanığı dinleyelim.
 ~ Rapor dosyada durur. Bir hâkimin masasında, mahkemenin değil bir şirketin mührüyle.
 `),
         }),
-        option('H102_D', 'Rapor yanıltıcıdır; Bülent Arıkan hakkında suç duyurusunda bulunuyoruz', {
+        option('H102_D', 'Raporu yazan hakkında suç duyurusunda bulunuyoruz', {
           score: { USUL_BILGISI: -40 },
           effects: [dec('cred'), dec('pers')],
           bad: 'Henüz ortaya konmamış bir kasıt iddiasıyla tanığı duruşmanın başında suçlamak, dayanaksız bir hamle olarak görülür ve tanığı kapatır.',
@@ -280,6 +280,18 @@ kemal: Rapor dosyada durur. Tanığı dinleyelim.
 - Rapor yanıltıcıdır Sayın Hâkim. Tanık hakkında suç duyurusunda bulunuyoruz.
 kemal: Henüz tanığı dinlemedik müdafi. Suç duyurusu yapma hakkınız saklı; ama bu salonda önce sorular sorulur.
 > Savcı ilk kez bana döndü; kaşları kalkık.
+`),
+        }),
+        option('H102_E', 'DataKale’ye raporu yeniden düzenlemesi için süre verilsin, eksikler giderilsin', {
+          score: { USUL_BILGISI: -20 },
+          effects: [dec('pers')],
+          bad: 'Raporu yine şikâyetçinin kendi firmasına yeniden yazdırmak bağımsızlık sorununu çözmez; uzman mütalaası bilirkişi raporu değildir, bilirkişiyi mahkeme atar (CMK 63, 67/6).',
+          category: 'USUL_BILGISI',
+          responses: B(`
+- Sayın Hâkim, raporda eksikler var. DataKale’ye raporu yeniden düzenlemesi için süre verilmesini talep ediyoruz.
+kemal: Aynı firmadan yeni bir rapor mu müdafi? Bağımsız bir inceleme mi istiyorsunuz, aynı incelemenin tekrarını mı?
+ozan: Müdafiin talebine katılıyoruz Sayın Hâkim. DataKale memnuniyetle ek rapor sunar.
+~ Karşı tarafın vekili talebime katıldı. Bu, yanlış bir şey istediğimin en açık işaretiydi.
 `),
         }),
       ],
@@ -439,11 +451,22 @@ bulent: Hayır… Yani, zarfı bilmiyordum. Tarık Bey bize şifre vermedi. Biz�
 kemal: Tutanağa geçsin: tanık, şifrelerin sanığın ayrılışından sonra değiştirilmediğini ve genel müdüre teslim edildiğini bilmediğini beyan etti.
 `),
         }),
+        presentRule('PS_B5_CIHAZ', 'B5', ['ev_tam_log', 'ded_cihaz'], {
+          effects: [ifThen(not(flag('contra_b5')), [score('SORGULAMA', 300), inc('pers', 2), raise('contra_b5')])],
+          good: 'Şirketin ham kaydı: 21.30 oturumu SELIM-PC’den, 02.14 oturumu NOS-GM-LT adlı başka bir cihazdan ve bir cep hattından. Bağlantı sanığın evinden gelmedi.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Sayın Hâkim, şirketin kendi ham VPN kaydı. DataKale’nin özetinde olmayan iki sütun: cihaz adı ve kaynak. 21.30: SELIM-PC, ev hattı. 02.14: NOS-GM-LT, bir cep hattı.
+- Bay Arıkan, silme sanığın evinden yapıldı dediniz. Kendi müşterinizin kaydı başka bir cihaz ve başka bir hat söylüyor.
+bulent: Bu sütunları… özete almadık. Gerekli görmedik.
+- Gerekli görmediniz. Kullanıcı adı yetti.
+kemal: Tutanağa geçsin: ham kayıtta 02.14 oturumunun cihaz adı NOS-GM-LT olarak görünmektedir.
+`),
+        }),
         presentRule('PS_B5', 'B5', ['ev_emniyet', 'ded_dizustu', 'ded_hat'], {
           enabledWhen: any(has('clue_emn_yok'), has('ded_dizustu'), has('ded_hat')),
           visibleWhen: any(has('clue_emn_yok'), has('ded_dizustu'), has('ded_hat')),
-          score: { SORGULAMA: 300 },
-          effects: [inc('pers', 2), raise('contra_b5')],
+          effects: [ifThen(not(flag('contra_b5')), [score('SORGULAMA', 300), inc('pers', 2), raise('contra_b5')])],
           good: 'Emniyetin usulüne uygun incelemesi: sanığın bilgisayarında 02.14 bağlantısı yok; oturum bir cep hattından açılmış.',
           category: 'SORGULAMA',
           responses: B(`

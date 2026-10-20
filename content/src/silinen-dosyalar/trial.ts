@@ -229,11 +229,9 @@ kemal: Ara kararda istenen bilgiler kısmen geldi. DataKale raporu dosyada; hük
           category: 'USUL_BILGISI',
           responses: B(`
 - Sayın Hâkim, bilirkişinin duruşmada dinlenmesini ve DataKale raporu yerine bilirkişi raporunun esas alınmasını talep ediyoruz.
-> Dr. Sema Uçar kürsüye geldi. Yemin etti; sakin, net.
-sema: İki tespitim var. Birincisi: DataKale imajı, olaydan iki gün sonra, üzerinde kurtarma yazılımı çalıştırılmış bir diskten alınmış. O imajdaki bazı “silme izleri” kurtarma yazılımının kendi kayıtları.
-sema: İkincisi: orijinal diskte silme oturumunun cihaz adı okunuyor. Bu ad, sanığın el konulan bilgisayarının adı değil.
-kemal: Tutanağa geçsin.
+kemal: Bilirkişi kürsüye gelsin.
 `),
+          next: 'T_01S',
         }),
         option('T01_IMAJ', 'DataKale imajının hükme esas alınamayacağını savun', {
           visibleWhen: any(has('ded_zincir'), has('ded_ozet'), flag('contra_b2'), flag('contra_b3')),
@@ -256,6 +254,160 @@ kemal: Peki. Tanığı dinleyelim.
 `),
         }),
         cont('T01_BITIR', 'Tanığa geç', 'T_02', { role: 'PRIMARY' }),
+      ],
+    }),
+    court2.testimony('T_01S', {
+      title: 'Bilirkişinin dinlenmesi',
+      courtStage: 'DELIL_TARTISMA',
+      background: 'durusma_salonu',
+      witness: 'sema',
+      witnessLabel: 'BİLİRKİŞİ · DR. SEMA UÇAR',
+      rulesText: 'İpucu: bilirkişi tarafsızdır; bastırmak onu açıklamaya davet eder. Raporunu doğrulayan kâğıdı doğru tespite göster.',
+      say: T(`
+> Dr. Sema Uçar kürsüye geldi. Yemin etti; sakin, net. Raporunu açmadı; neyin nerede yazdığını biliyordu.
+sema: Sayın Hâkim, orijinal diskleri şirketin sunucu odasında, tutanakla teslim aldım. İmajı özet değeriyle aldım; değer tutanakta. Dört tespitim var.
+kemal: Dinliyoruz.
+~ Tarafsız bir göz. Onu benim tanığım yapmaya çalışmayacağım; söylediğini netleştireceğim, o kadar. İyi bir bilirkişiyi zorlamak, ona ilk itirazı sen yaptırmaktır.
+> Ozan Tekin kalemini açtı. Tarık Sezer dinleyici sırasında bacak bacak üstüne attı; bu kez gazetesiz.
+`),
+      statements: [
+        statement('S1', 1, [
+          'DataKale imajı ',
+          hl('olaydan iki gün sonra', any(flag('press_s1'), has('clue_imaj_tarih'))),
+          ', üzerinde kurtarma yazılımı çalıştırılmış bir diskten alınmıştır.',
+        ]),
+        statement('S2', 2, [
+          'O imajdaki bazı “silme izleri”, ',
+          hl('kurtarma yazılımının kendi yazma kayıtlarıdır', any(flag('press_s2'), has('clue_sema_yazma'), has('clue_kurtarma'))),
+          '.',
+        ]),
+        statement('S3', 3, [
+          'Orijinal diskte silme oturumunun cihaz adı okunmaktadır; ',
+          hl('bu ad sanığın el konulan bilgisayarının adı değildir', any(flag('press_s3'), has('clue_sema_cihaz'), has('clue_cihaz_adi'))),
+          '.',
+        ]),
+        statement('S4', 4, [
+          'Cihazı o gece ',
+          hl('kimin kullandığı konusunda kanaat bildirmem', flag('press_s4')),
+          '; bu, raporumun konusu dışındadır.',
+        ]),
+      ],
+      rules: [
+        pressRule('PR_S1', 'S1', {
+          score: { SORGULAMA: 20 },
+          effects: [raise('press_s1')],
+          responses: B(`
+- İki gün. Bu süre neden önemli, hâkim bey için açar mısınız?
+sema: Canlı bir sistemde her işlem diske yazar. İki gün boyunca yazılan her şey, olay gecesinin izlerinin üstüne yazılmış olabilir. Bir olay yerini iki gün süpürüp sonra fotoğraflamak gibi.
+`),
+        }),
+        pressRule('PR_S2', 'S2', {
+          score: { SORGULAMA: 20 },
+          effects: [raise('press_s2')],
+          responses: B(`
+- Hangi izler kurtarma yazılımına ait?
+sema: DataKale raporunun on birinci sayfasındaki “silme” kayıtlarının bir bölümünün zaman damgası 19 Ekim. Olay gecesi 18 Ekim 02.14. Ertesi günün kayıtları, kurtarma programının kendi çalışma kayıtları.
+sema: Bu, 02.14’te bir silme olmadığı anlamına gelmez. Silme olmuş. Ama o imajdan hangi izin geceye, hangisinin ertesi güne ait olduğu ayırt edilemez.
+~ Dürüst bir cevap. Bize yarayanı da yaramayanı da aynı sesle söyledi. Bu yüzden ağır.
+`),
+        }),
+        pressRule('PR_S3', 'S3', {
+          score: { SORGULAMA: 20 },
+          effects: [raise('press_s3')],
+          responses: B(`
+- Cihaz adı nedir? Sanığın cihazının adıyla birlikte söyler misiniz?
+sema: Sanığın el konulan bilgisayarının adı SELIM-PC. 17 Ekim 21.30 oturumu o cihazdan. 18 Ekim 02.14 oturumunun cihaz adı ise NOS-GM-LT.
+> Dinleyici sırasında bir sandalye gıcırdadı. Bakmadım.
+`),
+        }),
+        pressRule('PR_S4', 'S4', {
+          score: { SORGULAMA: 20 },
+          effects: [raise('press_s4')],
+          responses: B(`
+- Kanaat bildirmiyorsunuz. Ama bir cihaz adının kime ait olduğu, teknik değil idari bir kayıtla belirlenebilir mi?
+sema: Belirlenebilir. Şirketler demirbaşlarını bir zimmet listesinde tutar. O listeyi okumak benim değil, mahkemenin işidir.
+`),
+        }),
+        presentRule('PS_S3', 'S3', ['ev_tam_log', 'ded_cihaz'], {
+          score: { SORGULAMA: 150 },
+          effects: [inc('pers'), raise('sema_teyit')],
+          good: 'Şirketin ham VPN kaydı ile bilirkişinin orijinal diskten okuduğu cihaz adı aynı: iki bağımsız kaynak birbirini doğruluyor.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Sayın Hâkim, şirketin mahkemeye gönderdiği ham VPN kaydı: 21.30 satırında SELIM-PC, 02.14 satırında NOS-GM-LT. Bilirkişi hanım, sizin diskte okuduğunuz adla aynı mı?
+sema: Aynı. Ben diskten okudum, şirketin güvenlik duvarı kendi kaydına yazmış. İki ayrı kaynak; aynı ad.
+kemal: Tutanağa geçsin.
+`),
+        }),
+        presentRule('PS_S4', 'S4', ['ev_turnike', 'ded_gm_cihaz'], {
+          score: { SORGULAMA: 150 },
+          effects: [inc('pers'), raise('sema_zimmet')],
+          good: 'Bilirkişi kanaat bildirmedi ama tespitini idari kayıtla karşılaştırdı: zimmet listesindeki ad, diskteki adla aynı. Değerlendirme mahkemenin.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Sayın Hâkim, şirketin demirbaş zimmet listesi. Bilirkişi hanım, size bir kanaat sormuyorum. Listedeki cihaz adını okur musunuz?
+sema: NOS-GM-LT. Listede bir isimle eşleşmiş; o eşleşmeyi değerlendirmek mahkemenindir. Ben yalnızca şunu söylerim: listedeki ad, diskte okuduğum adla harfi harfine aynıdır.
+> Ozan Tekin ayağa kalkmaya davrandı; Kemal Oran eliyle oturmasını işaret etti.
+`),
+        }),
+      ],
+      presentMiss: fallback('FB_S_PRESENT', 'PRESENT', {
+        effects: [...wrongMove, score('SORGULAMA', -150, 'hatali')],
+        quality: { q: 'BAD', feedback: 'Yanlış delil: −1 güvenilirlik, −150 skor.', category: 'SORGULAMA' },
+        responses: B(`
+kemal: Bilirkişiye bu belgeyle ne sormak istiyorsunuz müdafi? Raporuyla ilgisini göremedim.
+sema: Bu belge benim incelememin konusu değil Sayın Hâkim.
+`),
+      }),
+      finish: { id: 'T01S_BITIR', label: 'Bilirkişiye sorular bitti', next: 'T_01X' },
+    }),
+    court2.objection('T_01X', {
+      title: 'Katılan vekilinin sorusu',
+      courtStage: 'DELIL_TARTISMA',
+      background: 'durusma_salonu',
+      witness: 'sema',
+      say: T(`
+ozan: Bilirkişi hanım, sanık dokuz yıl bu sistemin yöneticisiydi. Bir cihazın adını değiştirmek onun için zor mu? Yani sanık kendi kullandığı bir cihaza başka bir ad vermiş olamaz mı?
+> Soru salonda bir an asılı kaldı. Selim yanımda kıpırdandı; ağzını açtı, kapattı.
+~ İçine bir varsayım gömülmüş bir soru. Ama teknik bir soru da. İtiraz mı edeceğim, yoksa cevabı mı bekleyeceğim?
+`),
+      next: 'T_02',
+      options: [
+        option('X_S_ITIRAZ', 'İtiraz: soru bir varsayıma dayanıyor', {
+          score: { USUL_BILGISI: -30 },
+          effects: [dec('pers')],
+          bad: 'Bilirkişiye uzmanlık alanındaki bir teknik olasılığı sormak yerindedir (CMK 63/1, 201/1). İtiraz reddedilir; cevap yine gelir, ama savunma cevaptan korkmuş görünür.',
+          category: 'USUL_BILGISI',
+          responses: B(`
+- İtiraz ediyorum Sayın Hâkim. Soru bir varsayıma dayanıyor.
+kemal: Reddedildi. Teknik bir olasılık soruluyor; bilirkişi cevaplayabilir.
+sema: Ad değiştirilebilir. Ama VPN bağlantısı yalnızca adı değil, cihazın sertifikasını da kaydeder. 02.14 oturumunun sertifikası sanığın el konulan bilgisayarında yok. Başka bir cihazın sertifikası.
+~ Cevap bizim lehimizeydi. İtirazım ise aleyhime. Hâkim ikisini de not etti.
+`),
+        }),
+        option('X_S_CEVAP', 'İtiraz etme; bilirkişi cevaplasın', {
+          score: { USUL_BILGISI: 60 },
+          effects: [inc('pers'), raise('sema_sertifika')],
+          good: 'Teknik olasılık sorusu bilirkişinin alanındadır (CMK 63/1); tarafsız bir uzmanın cevabı, itirazdan güçlü bir savunmadır.',
+          category: 'USUL_BILGISI',
+          responses: B(`
+sema: Ad değiştirilebilir; bu kolaydır. Ama VPN bağlantısı yalnızca adı değil, cihazın sertifikasını da kaydeder. Sertifikanın adı yoktur; parmak izi gibidir.
+sema: 02.14 oturumunun sertifikası, sanığın el konulan bilgisayarında bulunmuyor. O oturum başka bir cihazdan açılmış. Adı ne olursa olsun.
+> Ozan Tekin “teşekkür ederim” dedi ve oturdu. Kalemini açmıştı; kapattı.
+~ Bazen en iyi itiraz, susmaktır. Doğru soruyu karşı taraf sordu; cevabı tarafsız biri verdi.
+`),
+        }),
+        option('X_S_YETKI', 'İtiraz: katılan vekili bilirkişiye doğrudan soru yöneltemez', {
+          score: { USUL_BILGISI: -40 },
+          effects: [dec('cred'), dec('pers'), inc('wrong')],
+          bad: 'Katılan vekili de bilirkişiye doğrudan soru yöneltebilir (CMK 201/1). Dayanaksız itiraz.',
+          category: 'USUL_BILGISI',
+          responses: B(`
+- İtiraz ediyorum Sayın Hâkim. Katılan vekili bilirkişiye doğrudan soru soramaz.
+kemal: Sorabilir müdafi. Kanun vekile de doğrudan soru hakkı tanıyor. Bilirkişi, cevaplayın.
+sema: Ad değiştirilebilir. Ama 02.14 oturumunun cihaz sertifikası sanığın bilgisayarında yok.
+`),
+        }),
       ],
     }),
     court2.testimony('T_02', {
@@ -406,6 +558,39 @@ kemal: Tanık, yalnızca soruya cevap verin.
 tarik: Ben iyilik yaptım. İyiliğim başıma kaldı.
 `),
         }),
+        presentRule('PS_T5_CIHAZ', 'T5', ['ded_cihaz', 'ev_sema', 'ev_tam_log'], {
+          score: { SORGULAMA: 150 },
+          effects: [inc('pers'), raise('contra_t5')],
+          good: 'Ham kayıt ve bilirkişi: 02.14 oturumu sanığın cihazından değil, NOS-GM-LT adlı başka bir cihazdan açılmış. “Başka cihaz söz konusu değil” beyanı çürüdü; cihazın kime ait olduğu ayrı bir soru.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Sayın Hâkim, ham kayıt ve bilirkişi raporu: 21.30 oturumu SELIM-PC’den, 02.14 oturumu NOS-GM-LT’den. Bay Sezer, başka bir cihaz söz konusu.
+tarik: Bir ad. Ben bu adları bilmem. Bir bilgisayarcı ne isterse onu yazar.
+~ Cihaz başka. Kimin olduğunu bu kâğıt söylemiyor; onu başka bir kâğıt söyler.
+`),
+        }),
+        presentRule('PS_T_YEDEK', 'T3', ['ded_yedek'], {
+          score: { SORGULAMA: 200 },
+          effects: [inc('pers'), raise('contra_t_yedek')],
+          good: 'Yedek cuma 22.00’de başarılı yedek almış; gece kablosu elle çekilmiş. “Aylardır arızalıydı” beyanı çürüdü.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Sayın Hâkim, şikâyet ekindeki fotoğraflar: yedek cihazının ekranında son başarılı yedek cuma 22.00. Sabah yuvası boş, kablosu sökülmüş. Aylardır arızalı bir cihaz, cuma akşamı yedek almış.
+tarik: Ben teknik detay bilmem. Bülent bilir.
+- Bülent Bey’in raporunda da aynı ekran var. Kendi fotoğrafınız.
+`),
+        }),
+        presentRule('PS_T_ONCE', 'T4', ['ded_once_sigorta'], {
+          score: { SORGULAMA: 150 },
+          effects: [inc('pers'), raise('contra_t_motif')],
+          good: 'Sigorta eksperi 18 Ekim sabahı odadaydı; şikâyet ve imaj 20 Ekim’de. “Sigortanın olayla ilgisi yok” beyanı tutmuyor.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Bay Sezer, sigortanın bu olayla ilgisi yoksa, eksperiniz cumartesi sabahı 11.20’de neden sunucu odasındaydı? Polis iki gün sonra geldi.
+tarik: Hasar varsa sigorta çağrılır. Kural bu.
+kemal: Tutanağa geçsin: eksper incelemesi 18 Ekim, şikâyet 20 Ekim.
+`),
+        }),
         objectRule('OB_T5', 'T5', 'g_kanaat', {
           score: { SORGULAMA: 50 },
           effects: [inc('pers'), inc('legal_hits')],
@@ -451,11 +636,11 @@ kemal: İtiraz reddedildi. Dayanağı yok.
       witness: 'tarik',
       onEnter: [raise('tarik_coktu')],
       lines: B(`
-> Salon sustu. Tarık Sezer bir an bana baktı; gülümsemeye çalıştı, beceremedi. Eli yeniden ceketinin iç cebine gitti; orada bir şey vardı, bir kâğıt, hep oradaydı.
+> Salon sustu. Tarık Sezer bir an bana baktı; gülümsemeye çalıştı, beceremedi. Eli yeniden ceketinin iç cebine gitti ve orada kaldı; bir şeyi tutar gibi, ya da bir şeyin hâlâ orada olduğundan emin olmak ister gibi.
 tarik: Ben… Sayın Hâkim, ben bu teknik şeyleri bilmem. Bir yanlışlık var. Bir hesap, bir cihaz, bir hat…
 > Kemal Oran gözlüğünün üstünden baktı. Sakin, ama artık başka bir sakinlik.
 kemal: Tanık Sezer, size bir hatırlatma yapmam gerekiyor. Kendinizi ya da kanunda sayılan yakınlarınızı ceza kovuşturmasına maruz bırakabilecek sorulara cevap vermekten çekinebilirsiniz.
-> Tarık Sezer uzun süre konuştu, aslında hiçbir şey söylemedi. Sonra oturduğu yerde dikleşti; ceketinin iç cebindeki kâğıdı bırakmadan.
+> Tarık Sezer uzun süre konuştu, aslında hiçbir şey söylemedi. Sonra oturduğu yerde dikleşti; eli hâlâ ceketinin iç cebinde.
 tarik: O hâlde… avukatımla görüşmeden bu sorulara cevap vermeyeceğim.
 > Ozan Tekin ayağa kalktı, bir şey söyleyecekti, oturdu. Dinleyici sırasında Selim başını kaldırdı; ilk kez, doğrudan Tarık Sezer’e baktı. Tarık Sezer o bakışı karşılamadı.
 kemal: Tutanağa geçsin: tanık, bu aşamadan sonra cevap vermekten çekinmiştir.
@@ -476,13 +661,46 @@ kemal: Tutanağa geçsin: tanık, bu aşamadan sonra cevap vermekten çekinmişt
       witnessLabel: 'TANIK · YAŞAR KILIÇ',
       rulesText: 'İpucu: önce bastır, sonra doğru delille göster.',
       objectionGrounds: ['g_telkin', 'g_kanaat'],
-      say: T(`
+      onFirstEnter: [ifThen(flag('yasar_kocluk'), [dec('cred'), dec('pers'), dec('pers'), score('SAVUNMA_STRATEJISI', -100)])],
+      lines: [
+        W(
+          flag('yasar_ezber'),
+          `
+cevdet: Tanık Yaşar Kılıııç! Hı-hım.
+> Yaşar Usta kürsüye geldi; ceketini giymiş, kravat takmış, saçını ıslatıp taramıştı. Elinde kurşun kalemle yazılmış defteri. Yemin ederken sesi titredi; sözleri titremedi.
+yasar: Ben kapıdayım Sayın Hâkim. Otuz yıl. Ne gördüysem deftere yazdım. Defter benim namusum.
+kemal: Müdafi, sorularınız.
+~ Bir bekçi, bir defter, bir namus. Kürsüde bundan sağlam bir şey az bulunur.
+ozan: Sayın Hâkim, soruya geçmeden tanığa bir şey sormak istiyorum. Yaşar Bey, duruşmadan önce sanığın avukatıyla görüştünüz mü? Size ne söylemenizi istedi?
+> Yaşar Usta bir an bana baktı. Sonra hâkime.
+yasar: Görüştüm. Yemin ettim, yalan söylemem: “O gece gelen Selim değildi deyin” dedi. Ben “yüzünü görmedim, diyemem” dedim.
+> Salon dondu. Savcı kalemini bıraktı. Kemal Oran gözlüğünü çıkardı, bana baktı; uzun uzun.
+kemal: Tutanağa geçsin. Müdafi, tanığa ne söyleyeceğini telkin etmenin ne anlama geldiğini bildiğinizi varsayıyorum. Bu beyanı değerlendirirken bunu göz önünde tutacağım.
+~ Bir bekçiye namusunu çiğnetmeye çalıştım; reddetti. Şimdi o reddi bütün salona anlattı. Onun namusu temiz çıktı; benimki değil.
+`,
+        ),
+        W(
+          flag('yasar_kocluk'),
+          `
+cevdet: Tanık Yaşar Kılıııç! Hı-hım.
+> Yaşar Usta kürsüye geldi; ceketini giymiş, kravat takmış, saçını ıslatıp taramıştı. Elinde kurşun kalemle yazılmış defteri. Yemin ederken sesi titredi; sözleri titremedi.
+yasar: Ben kapıdayım Sayın Hâkim. Otuz yıl. Ne gördüysem deftere yazdım. Defter benim namusum.
+kemal: Müdafi, sorularınız.
+~ Bir bekçi, bir defter, bir namus. Kürsüde bundan sağlam bir şey az bulunur.
+ozan: Sayın Hâkim, tanığa bir sorum var. Yaşar Bey, saati bu kadar kesin söylüyorsunuz. Duruşmadan önce biri size bu saati söyledi mi?
+yasar: Avukat hanım “tam 23.05 deyin, şaşmayın” dedi. Ama defterde de öyle yazıyor; ben defterden okurum.
+kemal: Tutanağa geçsin. Tanığın beyanı bu açıklamayla birlikte değerlendirilecek.
+~ Defter doğruydu. Ama artık kimse deftere bakmıyor; benim cümleme bakıyorlar.
+`,
+        ),
+        O(`
 cevdet: Tanık Yaşar Kılıııç! Hı-hım.
 > Yaşar Usta kürsüye geldi; ceketini giymiş, kravat takmış, saçını ıslatıp taramıştı. Elinde kurşun kalemle yazılmış defteri. Yemin ederken sesi titredi; sözleri titremedi.
 yasar: Ben kapıdayım Sayın Hâkim. Otuz yıl. Ne gördüysem deftere yazdım. Defter benim namusum.
 kemal: Müdafi, sorularınız.
 ~ Bir bekçi, bir defter, bir namus. Kürsüde bundan sağlam bir şey az bulunur.
 `),
+      ],
       statements: [
         statement('Y1', 1, ['Cuma gecesi kapıya ', hl('genel müdürün arabası geldi', any(flag('press_y1'), has('clue_defter'))), '.']),
         statement('Y2', 2, ['“', hl('Evrak unuttum', any(flag('press_y2'), has('clue_yasar'))), '” dedi, içeri girdi.']),
@@ -510,7 +728,7 @@ yasar: Tanıdım. Genel müdür Tarık Bey. Yirmi yıldır her sabah “Günayd�
           enabledWhen: has('clue_turnike_gm'),
           visibleWhen: has('clue_turnike_gm'),
           score: { SORGULAMA: 200 },
-          effects: [inc('pers'), raise('contra_y1')],
+          effects: [ifThen(not(flag('yasar_kocluk')), [inc('pers')]), raise('contra_y1')],
           good: 'Bekçi defteri ile kart kaydı aynı saati gösteriyor: 23.05 kapı, 23.11 sunucu odası. İki bağımsız kayıt birbirini doğruluyor.',
           category: 'SORGULAMA',
           responses: B(`
@@ -544,7 +762,7 @@ ozan: Bir sorum var. Yaşar Bey, siz sanık Selim Aktaş’ın arkadaşısınız
 `),
       next: 'T_04C_G',
       options: [
-        option('X_ITIRAZ', 'İtiraz: soru yönlendirici ve tanığın beyanını baskılıyor', {
+        option('X_ITIRAZ', 'İtiraz: yönlendirici soru', {
           score: { USUL_BILGISI: 80 },
           effects: [inc('legal_hits'), inc('pers')],
           good: 'Cevabı içine yerleştiren, tanığı suçlayarak baskılayan soru yönlendiricidir (CMK 201/1).',
@@ -555,21 +773,33 @@ kemal: Kabul. Vekil bey, tanığa görüşünü değil, bildiğini sorun.
 yasar: İzninizle cevap vereyim Sayın Hâkim. Ben simidi herkese getiririm; müdüre de getirdim. Ben kimsenin arkadaşı değilim; kapının bekçisiyim. Defter ne diyorsa o.
 `),
         }),
-        option('X_CEVAP', 'İtiraz etme; tanık cevap versin', {
+        option('X_CEVAP', 'İtiraz etme; tanık kendini savunsun', {
           neutral: 'Yönlendirici soruya izin verdin; tanık güçlü çıktı ama soru da tutanakta kaldı.',
           responses: B(`
 yasar/kizgin: Arkadaşı değilim. Ben simidi müdüre de getirdim, size de getiririm. Namusum defterimdedir; arkadaşlık değil.
 > Yaşar Usta’nın sesi yükseldi. Ozan Tekin geri çekildi; bu kez o küçüldü.
 `),
         }),
-        option('X_KARSI', 'Karşı suçlama: vekil tanığı tehdit ediyor', {
+        option('X_KARSI', 'Vekilin tanığı tehdit ettiğini tutanağa geçirt', {
           score: { USUL_BILGISI: -40 },
           effects: [dec('cred'), dec('pers')],
           bad: 'Karşı tarafın sorusuna yerinde itiraz yerine onu “tehditle” suçlamak dayanaksız kalır; hâkim reddeder.',
           category: 'USUL_BILGISI',
           responses: B(`
-- Sayın Hâkim, vekil tanığı tehdit ediyor!
-kemal: Soru yerinde değil müdafi, ama tehdit de yok. İkiniz de sakin olun.
+- Sayın Hâkim, vekil tanığı tehdit ediyor! Tutanağa geçsin.
+kemal: Soru yerinde değil müdafi, ama tehdit de yok. Tutanağa geçecek bir şey yok. İkiniz de sakin olun.
+`),
+        }),
+        option('X_ILGISIZ', 'İtiraz: tanığın sanıkla ilişkisi dava konusu dışındadır, sorulamaz', {
+          score: { USUL_BILGISI: -30 },
+          effects: [dec('pers')],
+          bad: 'Tanığın sanıkla ilişkisi beyanın güvenilirliğine ilişkindir ve sorulabilir (CMK 58/1). İtiraz edilecek olan ilişkinin sorulması değil, sorunun cevabı dayatan yönlendirici biçimiydi (CMK 201/1).',
+          category: 'USUL_BILGISI',
+          responses: B(`
+- İtiraz ediyorum Sayın Hâkim. Tanığın sanıkla ilişkisi dava konusu dışında; sorulamaz.
+kemal: Reddedildi müdafi. Tanığın sanıkla ilişkisi her zaman sorulabilir; kanun bunu tanığa ilk iş sorulacaklar arasında sayar. Tanık, cevap verin.
+yasar: Arkadaşı değilim. Simidi herkese getiririm. Defter ne diyorsa o.
+~ Doğru yere vurmadım. Soru yönlendiriciydi; ilişki sorusu değil. Hâkim farkı benden önce gördü.
 `),
         }),
       ],
@@ -592,6 +822,12 @@ kemal: Müdafi, sorularınız.
       statements: [
         statement('NL1', 1, ['Ağustosta ', hl('bir zeyilname imzaladım', any(flag('press_nl1'), has('clue_limit'))), '; genel müdür istedi.']),
         statement('NL2', 2, ['Şirket ', hl('temmuzda nakit sıkıntısındaydı', any(flag('press_nl2'), has('clue_nalan'))), '; maaşlar gecikti.']),
+        statement('NL3', 3, ['Zeyilnamenin ', hl('gerekçesini bilmiyorum', any(flag('press_nl3'), has('clue_nalan'))), '; sormadım.']),
+        statement('NL4', 4, [
+          'Hasar ihbarını ',
+          hl('pazartesi, polisle aynı gün', any(flag('press_nl4'), has('clue_eksper'), has('ded_once_sigorta'))),
+          ' yaptık.',
+        ]),
       ],
       rules: [
         pressRule('PR_NL1', 'NL1', {
@@ -609,6 +845,46 @@ nalan: Limiti iki milyondan yirmi milyona çıkardı. Bir de bir cümle ekledi: 
 - Yirmi milyon şirket için ne ifade eder?
 nalan: Ayakta kalmak. O para gelmezse şirket bir yıl dayanmaz. Ama o para ancak biri suçlanırsa gelir. Poliçeyi öyle yazdık.
 ~ Bir muhasebeci, bir cümlede hem rakamı hem saiki söyledi. Hesap kapandı.
+`),
+        }),
+        pressRule('PR_NL3', 'NL3', {
+          score: { SORGULAMA: 25 },
+          effects: [raise('press_nl3')],
+          responses: B(`
+- Sormadınız mı, yoksa size bir gerekçe söylendi mi?
+nalan: Söylendi. Sormadan söylendi. “Bir çalışan sorun çıkarırsa diye” dedi genel müdür. O hafta Selim’le yedekleme tartışması olmuştu.
+> Ozan Tekin bir şey yazdı; altını iki kez çizdi.
+~ Bir gerekçe; sorulmadan verilmiş. Sorulmadan verilen gerekçe, hazırlanmış gerekçedir.
+`),
+        }),
+        pressRule('PR_NL4', 'NL4', {
+          score: { SORGULAMA: 25 },
+          effects: [raise('press_nl4')],
+          responses: B(`
+- İhbarı kim yaptı? Siz mi?
+nalan: Evrakı ben imzaladım. Tarihi… bana söylenen tarihi yazdım.
+`),
+        }),
+        presentRule('PS_NL_ONCE', 'NL4', ['ded_once_sigorta'], {
+          score: { SORGULAMA: 200 },
+          effects: [inc('pers'), raise('contra_nl_once')],
+          good: 'Eksper 18 Ekim sabahı odadaydı; ihbar evrakı sonradan “pazartesi” tarihlenmiş. Sigortaya polisten önce haber verildi.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Sayın Hâkim, eksper raporunun ilk fotoğrafı: 18 Ekim, 11.20, sunucu odası. Şikâyet 20 Ekim. Nalan Hanım, sigorta cumartesi sabahı oradaydı.
+> Nalan Korkmaz ajandasını kapattı. Bir an tavana baktı; hesap yapan biri gibi.
+nalan: Haklısınız. Cumartesi sabahı genel müdür eksperi kendisi aradı. Bana pazartesi “ihbar evrakını bugünün tarihiyle hazırla” dedi. Hazırladım.
+kemal: Tutanağa geçsin.
+`),
+        }),
+        presentRule('PS_NL_GEREKCE', 'NL3', ['ev_zeyil', 'ded_motif'], {
+          score: { SORGULAMA: 150 },
+          effects: [inc('pers'), raise('contra_nl')],
+          good: 'Gerekçesi “bilinmeyen” zeyilnamenin metni, gerekçeyi kendisi söylüyor: “eski ya da mevcut çalışanın kasıtlı eylemleri.”',
+          category: 'SORGULAMA',
+          responses: B(`
+- Gerekçeyi bilmiyorsunuz. Ama zeyilnamenin kendisi söylüyor: “eski ya da mevcut çalışanın kasıtlı eylemleri.” Bu cümleyi siz mi yazdınız?
+nalan: Hayır. Sigortacıya genel müdür yazdırdı. Ben altına imza attım.
 `),
         }),
         presentRule('PS_NL_ZEYIL', 'NL1', ['ev_zeyil', 'ded_motif'], {
@@ -719,7 +995,7 @@ kemal: Müdafi, esas hakkındaki savunmanız.
         dayanak(
           'P_YEDEK',
           'Yedek, silmeden önce odada elle devre dışı bırakıldı',
-          any(has('ded_yedek'), has('ded_gm_oda'), flag('contra_t_oda')),
+          any(has('ded_yedek'), has('ded_gm_oda'), flag('contra_t_oda'), flag('contra_t_yedek')),
           'arg_yedek',
           `
 - Yedek sistemi cuma akşamı çalışıyordu; o gece sunucu odasında elle devre dışı bırakıldı. Uzaktan silen biri, odadaki kabloyu çekemez. Bu, planlı ve içeriden bir eylemdir; müvekkilimin kartı ise aylar önce iade edilmişti.
@@ -728,7 +1004,7 @@ kemal: Müdafi, esas hakkındaki savunmanız.
         dayanak(
           'P_MOTIF',
           'Zararın dayanağı, olaydan önce büyütülen bir poliçe',
-          any(has('ded_motif'), flag('contra_t_motif'), flag('contra_nl')),
+          any(has('ded_motif'), flag('contra_t_motif'), flag('contra_nl'), flag('contra_nl_once')),
           'arg_motif',
           `
 - Beyan edilen yirmi milyonluk zarar, olaydan iki buçuk ay önce tam bu tutara çıkarılan, “çalışan kötü niyeti”ni kapsayan bir sigorta poliçesine dayanıyor. Bir çalışanın suçlanması, bu ödemenin ön şartıydı.
@@ -825,7 +1101,7 @@ kemal: Sanık, son sözünüz nedir?
 `),
       next: 'T_08',
       choices: [
-        option('L_HAFIZA', '“Ben o şirketin hafızasıydım. Kimse kendi hafızasını silmez.”', {
+        option('L_HAFIZA', 'Selim kendi işini anlatsın', {
           score: { SAVUNMA_STRATEJISI: 50 },
           effects: [inc('pers')],
           good: 'Sanığın kendi sesiyle, suçlamasız, delil tartışmasını özetleyen bir son söz.',
@@ -845,7 +1121,7 @@ selim: Ben o şirketin hafızasıydım Sayın Hâkim. Kimse kendi hafızasını 
 `),
           ],
         }),
-        option('L_SUCLA', '“Asıl silen genel müdürdür!”', {
+        option('L_SUCLA', 'Selim asıl sileni adıyla söylesin', {
           visibleWhen: any(flag('fact_gm'), flag('contra_t_cihaz'), flag('contra_t_hat'), has('clue_turnike_gm')),
           score: { SAVUNMA_STRATEJISI: -30 },
           effects: [dec('pers'), raise('selim_suclama')],
@@ -857,10 +1133,22 @@ kemal: Sanık, bir başkasını suçlamak son sözün konusu değildir. Kendiniz
 ~ Kayıtların sakin sesini, bir öfke bastırdı. Dayanakları ben kurmuştum; son sözde o dağıttı.
 `),
         }),
-        option('L_SESSIZ', '“Söyleyecek bir şeyim yok. Avukatım söyledi.”', {
+        option('L_SESSIZ', 'Söz hakkını kısa kullansın', {
           neutral: 'Susmak da bir haktır; ama son söz sanığa kalan son andır.',
           responses: B(`
 selim: Söyleyecek bir şeyim yok Sayın Hâkim. Avukatım her şeyi söyledi.
+`),
+        }),
+        option('L_OZUR', 'Şirketten özür dilesin; pişmanlık hâkimi yumuşatır', {
+          score: { SAVUNMA_STRATEJISI: -40 },
+          effects: [dec('pers')],
+          bad: 'Suçlamayı reddeden sanığın son sözde özür dilemesi kabul gibi okunur ve savunmayla çelişir; son söz sanığındır, müdafi ona bir pişmanlık rolü biçmez.',
+          category: 'SAVUNMA_STRATEJISI',
+          responses: B(`
+selim: Şirketten… özür dilerim Sayın Hâkim. Yaşananlar için. Dokuz yıl çalıştığım yer.
+kemal: Neyin özrünü diliyorsunuz sanık? Suçlamayı kabul mü ediyorsunuz?
+selim: Hayır… Ben… Yani, yaşananlar için.
+~ Bir özür, ne için olduğu söylenmeyince bir itiraf gibi duyulur. Ona bu cümleyi ben önerdim.
 `),
         }),
       ],
@@ -869,10 +1157,6 @@ selim: Söyleyecek bir şeyim yok Sayın Hâkim. Avukatım her şeyi söyledi.
       ...H2,
       title: 'Hüküm',
       lines: [
-        W(
-          flag('cokus'),
-          `> Hâkim müzakere için salonu boşalttı. Uzun sürmedi. Ben yerimden kalkmadım.`,
-        ),
         W(
           flag('closing_terdit'),
           `
@@ -900,10 +1184,15 @@ cevdet: Taraflar salona! Hüküm açıklanacak. Hı-hım.
       background: 'durusma_salonu',
       lines: B(`
 > Bir yanlış daha. Hâkim Kemal Oran kalemini bıraktı. Gözlüğünün üstünden baktı; kızgın değil, yorgun.
-kemal: Müdafi, sunduklarınızın dosyayla ilgisi kalmadı. Güvenilirliğinizi bu salonda tükettiniz. Mahkeme yeterince dinledi.
-~ Güvenimi tek tek harcadım. Her yanlış kâğıt bir kalp götürdü. Şimdi elimde yalnızca bir dosya var; kalbim yok.
+kemal: Müdafi, sunduklarınızın beyanlarla ilgisi kalmadı. Mahkeme bu sunumları dikkate almayacak.
+> Selim ayağa kalktı. Bana değil, hâkime baktı. Sesi titriyordu; sözleri titremiyordu.
+selim: Sayın Hâkim… Avukatıma güvenim kalmadı. Kendime başka bir avukat tutmak istiyorum. Bana süre verir misiniz?
+> Gül arkada başını önüne eğdi. Ozan Tekin kalemini masaya bıraktı; bu kez yuvarlanmadı.
+kemal: Sanığın müdafi seçme hakkı vardır. Müdafi, diyeceğiniz?
+- Yok Sayın Hâkim.
+~ Güvenimi tek tek harcadım. Her yanlış kâğıt bir kalp götürdü. Şimdi elimde bir dosya var; müvekkilim yok.
 `),
-      choices: [cont('COKUS_DEVAM', 'Hüküm', 'T_08', { role: 'PRIMARY' })],
+      choices: [cont('COKUS_DEVAM', 'Ara karar', 'R_KARAR', { role: 'PRIMARY' })],
     }),
     resultNode('R_KARAR', { ...H2, title: 'Karar', background: 'durusma_salonu' }),
   ],

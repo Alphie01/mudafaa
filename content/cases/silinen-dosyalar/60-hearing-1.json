@@ -528,7 +528,7 @@
         {
           "id": "H102_A",
           "kind": "OPTION",
-          "label": "Bu bir uzman mütalaasıdır; mahkemece bilirkişi atansın, orijinal diskler muhafaza edilsin",
+          "label": "Bilirkişi atansın; orijinal diskler mühürlensin",
           "responses": [
             {
               "lines": [
@@ -562,7 +562,7 @@
         {
           "id": "H102_B",
           "kind": "OPTION",
-          "label": "Rapor hukuka aykırı delildir; tamamen dışlansın",
+          "label": "Rapor hukuka aykırı delildir; dosyadan çıkarılsın",
           "responses": [
             {
               "lines": [
@@ -592,7 +592,7 @@
         {
           "id": "H102_C",
           "kind": "OPTION",
-          "label": "Raporun içeriğine diyeceğimiz yok; tanığı dinleyelim",
+          "label": "Diyeceğimiz yok; tanığı dinleyelim",
           "responses": [
             {
               "lines": [
@@ -619,7 +619,7 @@
         {
           "id": "H102_D",
           "kind": "OPTION",
-          "label": "Rapor yanıltıcıdır; Bülent Arıkan hakkında suç duyurusunda bulunuyoruz",
+          "label": "Raporu yazan hakkında suç duyurusunda bulunuyoruz",
           "responses": [
             {
               "lines": [
@@ -643,6 +643,44 @@
           "quality": {
             "q": "BAD",
             "feedback": "Henüz ortaya konmamış bir kasıt iddiasıyla tanığı duruşmanın başında suçlamak, dayanaksız bir hamle olarak görülür ve tanığı kapatır.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "H1_03"
+        },
+        {
+          "id": "H102_E",
+          "kind": "OPTION",
+          "label": "DataKale’ye raporu yeniden düzenlemesi için süre verilsin, eksikler giderilsin",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, raporda eksikler var. DataKale’ye raporu yeniden düzenlemesi için süre verilmesini talep ediyoruz."
+                },
+                {
+                  "speaker": "kemal",
+                  "text": "Aynı firmadan yeni bir rapor mu müdafi? Bağımsız bir inceleme mi istiyorsunuz, aynı incelemenin tekrarını mı?"
+                },
+                {
+                  "speaker": "ozan",
+                  "text": "Müdafiin talebine katılıyoruz Sayın Hâkim. DataKale memnuniyetle ek rapor sunar."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Karşı tarafın vekili talebime katıldı. Bu, yanlış bir şey istediğimin en açık işaretiydi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -20 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Raporu yine şikâyetçinin kendi firmasına yeniden yazdırmak bağımsızlık sorununu çözmez; uzman mütalaası bilirkişi raporu değildir, bilirkişiyi mahkeme atar (CMK 63, 67/6).",
             "category": "USUL_BILGISI"
           },
           "next": "H1_03"
@@ -1038,6 +1076,47 @@
           }
         },
         {
+          "id": "PS_B5_CIHAZ",
+          "kind": "PRESENT",
+          "match": { "statement": "B5", "evidence": ["ev_tam_log", "ded_cihaz"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, şirketin kendi ham VPN kaydı. DataKale’nin özetinde olmayan iki sütun: cihaz adı ve kaynak. 21.30: SELIM-PC, ev hattı. 02.14: NOS-GM-LT, bir cep hattı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bay Arıkan, silme sanığın evinden yapıldı dediniz. Kendi müşterinizin kaydı başka bir cihaz ve başka bir hat söylüyor."
+                },
+                { "speaker": "bulent", "text": "Bu sütunları… özete almadık. Gerekli görmedik." },
+                { "speaker": "player", "text": "Gerekli görmediniz. Kullanıcı adı yetti." },
+                {
+                  "speaker": "kemal",
+                  "text": "Tutanağa geçsin: ham kayıtta 02.14 oturumunun cihaz adı NOS-GM-LT olarak görünmektedir."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "flag": "contra_b5" } },
+              "then": [
+                { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+                { "type": "VAR", "var": "contra_b5", "op": "set", "value": true }
+              ]
+            }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Şirketin ham kaydı: 21.30 oturumu SELIM-PC’den, 02.14 oturumu NOS-GM-LT adlı başka bir cihazdan ve bir cep hattından. Bağlantı sanığın evinden gelmedi.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
           "id": "PS_B5",
           "kind": "PRESENT",
           "match": { "statement": "B5", "evidence": ["ev_emniyet", "ded_dizustu", "ded_hat"] },
@@ -1065,9 +1144,15 @@
             }
           ],
           "effects": [
-            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
-            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
-            { "type": "VAR", "var": "contra_b5", "op": "set", "value": true }
+            {
+              "type": "IF",
+              "when": { "not": { "flag": "contra_b5" } },
+              "then": [
+                { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+                { "type": "VAR", "var": "contra_b5", "op": "set", "value": true }
+              ]
+            }
           ],
           "quality": {
             "q": "GOOD",

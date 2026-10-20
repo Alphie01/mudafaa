@@ -13,7 +13,7 @@
     "estimatedMinutes": 105,
     "summary": "Nilüfer Örme Tekstil’in on iki yıllık arşivi bir gecede silindi. Kayıtlar, Eylül sonunda işten çıkarılan sistem yöneticisi Selim Aktaş’ın kullanıcı adını gösteriyor; şirket yirmi milyon lira zarar istiyor. Selim “ben hep yedek aldım, kendi kurduğum şeyi yakmam” diyor. Eşi bir öğretmen, biriktirdikleri ev parasını masana koyuyor: sen.",
     "coverCharacter": "selim",
-    "legalReview": { "status": "APPROVED", "by": "Claude (iç inceleme)", "at": "2026-10-20" }
+    "legalReview": { "status": "APPROVED", "by": "Claude (iç inceleme)", "at": "2026-10-21" }
   },
   "config": {
     "startNode": "PR_00",
@@ -124,7 +124,11 @@
         "time": "18.10 02.14",
         "text": "Selim’in kullanıcı adıyla, başka bir cihaz ve hattan veriler silinir."
       },
-      { "id": "k6", "time": "20.10", "text": "DataKale imaj alır; suç duyurusu ve sigorta hasar ihbarı." },
+      {
+        "id": "k6",
+        "time": "18–20.10",
+        "text": "Genel müdür 18.10 sabahı sigorta eksperini çağırır; DataKale canlı sistemde kurtarma dener; 20.10 imaj ve suç duyurusu."
+      },
       { "id": "k7", "time": "22.10", "text": "Selim’in evinde arama; dizüstüsü imajlanır." },
       { "id": "k8", "time": "9.01", "text": "Birinci celse." }
     ]
@@ -384,6 +388,7 @@
     { "id": "ethics", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
     { "id": "leyla_gun", "type": "int", "initial": 0, "min": 0, "max": 3, "visibility": "HIDDEN" },
     { "id": "leyla_ara", "type": "int", "initial": 0, "min": 0, "max": 3, "visibility": "HIDDEN" },
+    { "id": "yanlis_cift", "type": "int", "initial": 0, "min": 0, "max": 200, "visibility": "HIDDEN" },
     {
       "id": "aksam1",
       "type": "enum",
@@ -479,12 +484,24 @@
     { "id": "contra_t_oda", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "contra_t_motif", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "contra_t_izin", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_t5", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_t_yedek", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_s1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_s2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_s3", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_s4", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "sema_teyit", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "sema_zimmet", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "sema_sertifika", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "press_y1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "press_y2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "contra_y1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "press_nl1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "press_nl2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "contra_nl", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_nl3", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_nl4", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_nl_once", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "arg_riza", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "arg_imaj", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "arg_cihaz", "type": "bool", "initial": false, "visibility": "HIDDEN" },
@@ -495,6 +512,7 @@
     { "id": "closing_terdit", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "selim_suclama", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "yasar_tanik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
-    { "id": "yasar_kocluk", "type": "bool", "initial": false, "visibility": "HIDDEN" }
+    { "id": "yasar_kocluk", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "yasar_ezber", "type": "bool", "initial": false, "visibility": "HIDDEN" }
   ]
 }

@@ -279,7 +279,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Masasının köşesinde açılmamış sigara paketi. Yirmi yıldır orada olduğunu söylerler; her zor dosyada eline alır, çevirir, geri koyar."
+              "text": "Masasının köşesinde açılmamış sigara paketi. Bıraktığı gün aldığı paket; dört yıldır orada. Her zor dosyada eline alır, çevirir, geri koyar."
             },
             { "speaker": "narrator", "text": "Bu akşam paketi aldı. Çevirdi. Geri koymadı; avucunda tuttu." },
             {
@@ -427,7 +427,7 @@
         {
           "id": "NA_ISIM",
           "kind": "OPTION",
-          "label": "“Adınızı söylemezseniz bir şey yapamam.”",
+          "label": "“Önce adınızı alayım; yoksa elim kolum bağlı.”",
           "responses": [
             {
               "lines": [
@@ -447,12 +447,15 @@
             }
           ],
           "next": "INV_HUB",
-          "effects": [{ "type": "VAR", "var": "nalan_ipucu", "op": "set", "value": true }]
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -10 },
+            { "type": "VAR", "var": "nalan_ipucu", "op": "set", "value": true }
+          ]
         },
         {
           "id": "NA_DINLE",
           "kind": "OPTION",
-          "label": "Sessizce dinle",
+          "label": "Araya girme; dinle",
           "responses": [
             {
               "lines": [
@@ -477,12 +480,15 @@
             }
           ],
           "next": "INV_HUB",
-          "effects": [{ "type": "VAR", "var": "nalan_ipucu", "op": "set", "value": true }]
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 15 },
+            { "type": "VAR", "var": "nalan_ipucu", "op": "set", "value": true }
+          ]
         },
         {
           "id": "NA_KANAL",
           "kind": "OPTION",
-          "label": "“Bunu savcılığa ya da mahkemeye tanık olarak söyleyebilirsiniz.”",
+          "label": "“Bunu bir mahkemede de söyler misiniz?”",
           "responses": [
             {
               "lines": [
@@ -766,16 +772,26 @@
           "match": { "tool": "mag", "target": "l1" },
           "feedback": {
             "title": "YENİ İPUCU · CUMA 21.30",
-            "text": "İlk oturum cuma 21.30’da, sabit bir ev hattından; yirmi iki dakika. İşlem: “Selim_kisisel” klasörünün kopyalanması. Selim bana bundan hiç söz etmedi.",
+            "text": "İlk oturum cuma 21.30’da, sabit bir ev hattından; yirmi iki dakika. İşlem: “Selim_kisisel” klasörünün kopyalanması. Dosyada bu oturumun neden açıldığına dair tek satır yok.",
             "label": "+100 SKOR · Not defterine eklendi",
             "tone": "special"
           },
           "responses": [
             {
+              "when": { "visited": "INV_GORUSME" },
               "lines": [
                 {
                   "speaker": "player",
                   "text": "Selim o gece bağlanmış. Bana “gece kapalıydı” demişti. Akşam ile gece arasında bir saat var; o saatte ne olduğunu ondan duymam gerek.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Selim o akşam bağlanmış; kendi adına bir klasöre. Selim’e bunu sormam gerek; dosyada hiçbir yerde açıklaması geçmiyor.",
                   "style": "thought"
                 }
               ]
@@ -1954,13 +1970,47 @@
           "kind": "FALLBACK",
           "fallbackFor": "COMBINE",
           "repeat": "ONCE_PER_PARAMS",
+          "responses": [
+            {
+              "when": {
+                "any": [{ "cmp": [{ "var": "yanlis_cift" }, "==", 6] }, { "cmp": [{ "var": "yanlis_cift" }, "==", 12] }]
+              },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın sesi kafamda: “Rastgele gerilen ip, kürsüde rastgele konuşan avukat yapar.” Bir avuç ipucunu körlemesine eşleştiriyorum; bu alışkanlık salona da benimle gelir. (−1 güvenilirlik)",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "when": { "cmp": [{ "var": "yanlis_cift" }, ">", 6] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Yine olmadı. Durup düşünmem lazım; ipler değil, sorular eşleşir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
           "feedback": {
             "title": "Bu ikisi birbirini açıklamıyor",
             "text": "Başka bir ipucu dene.",
             "label": "BAĞLANTI YOK · −50 SKOR",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 },
+            { "type": "VAR", "var": "yanlis_cift", "op": "inc", "value": 1 },
+            {
+              "type": "IF",
+              "when": {
+                "any": [{ "cmp": [{ "var": "yanlis_cift" }, "==", 6] }, { "cmp": [{ "var": "yanlis_cift" }, "==", 12] }]
+              },
+              "then": [{ "type": "VAR", "var": "cred", "op": "dec", "value": 1 }]
+            }
+          ]
         },
         { "id": "CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "$return" }
       ]
@@ -2348,7 +2398,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Defne’nin resmini çantamdan çıkardım; Gül vermişti, Selim’e iletecektim, unutmuştum. Bir masa, bir ekran, bir adam ve odanın içinde çizilmiş bir güneş."
+              "text": "Defne’nin resmini çantamdan çıkardım; “avukat teyzeye” diye çizmiş, Gül ilk akşam masama bırakmıştı. Bir masa, bir ekran, bir adam ve odanın içinde çizilmiş bir güneş."
             },
             {
               "speaker": "player",

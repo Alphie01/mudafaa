@@ -1,5 +1,6 @@
-import { chapter, court, dec, inc, phase } from '../../../tools/content/src/kit/index.js';
-import type { Effect } from '../../../tools/content/src/kit/index.js';
+import { any, chapter, cmp, court, dec, ifThen, inc, phase, v } from '../../../tools/content/src/kit/index.js';
+import type { Effect, ResponseBlock } from '../../../tools/content/src/kit/index.js';
+import { W } from './dsl.js';
 
 // Dava genelinde paylaşılan tanımlar: bölüm etiketleri, soruşturma evresi ve duruşma salonları.
 
@@ -37,3 +38,16 @@ export const court2 = court({ bench, counsel: 'deniz', hud: ['cred', 'pers'], ..
 
 /** Yanlış sunum / dayanaksız itiraz ortak etkileri. */
 export const wrongMove: Effect[] = [dec('cred'), dec('pers'), inc('wrong')];
+
+/** Çıkarım tahtasında yanlış eşleşme: sayaç; 6. ve 12. yanlış eşleşmede −1 güvenilirlik ve Leyla’nın sesi. */
+export const boardMissEffects: Effect[] = [
+  inc('yanlis_cift'),
+  ifThen(any(cmp(v('yanlis_cift'), '==', 6), cmp(v('yanlis_cift'), '==', 12)), [dec('cred')]),
+];
+export const boardMissResponses: ResponseBlock[] = [
+  W(
+    any(cmp(v('yanlis_cift'), '==', 6), cmp(v('yanlis_cift'), '==', 12)),
+    `~ Leyla’nın sesi kafamda: “Rastgele gerilen ip, kürsüde rastgele konuşan avukat yapar.” Bir avuç ipucunu körlemesine eşleştiriyorum; bu alışkanlık salona da benimle gelir. (−1 güvenilirlik)`,
+  ),
+  W(cmp(v('yanlis_cift'), '>', 6), `~ Yine olmadı. Durup düşünmem lazım; ipler değil, sorular eşleşir.`),
+];

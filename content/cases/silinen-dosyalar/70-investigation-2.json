@@ -87,6 +87,15 @@
               "speaker": "leyla",
               "text": "Müzekkerelerin cevapları. Oku. Ama önce şunu düşün: bu dosyada bir isim arıyorsun. İsmi kayıt verecek, sen değil."
             },
+            {
+              "speaker": "leyla",
+              "text": "Bir de o zarf. İmzasız not. Duruşma sabahı savcılığa tutanakla teslim ettik; “tehdit” diye ayrı bir dosya açıldı. Kâğıdı da incelemeye gönderdiler: kalın, krem rengi, filigranlı. Kırtasiyede satılan cinsten değilmiş."
+            },
+            { "speaker": "player", "text": "Kimin kâğıdı?" },
+            {
+              "speaker": "leyla",
+              "text": "Onu savcı bulacak. Bizim işimiz notu ona vermekti; verdik. Kâğıdın sahibini aramaya kalkarsan, notu yazanın istediğini yapmış olursun: dosyadan başını kaldırırsın."
+            },
             { "speaker": "narrator", "text": "Oturdum. İlk sayfa. Sonra ikinci. Sonra geri döndüm, birincisine." },
             {
               "speaker": "player",
@@ -301,11 +310,11 @@
         {
           "id": "A_NALAN",
           "kind": "NAVIGATE",
-          "label": "Nalan Korkmaz’la buluş",
+          "label": "Gizli numaralı kadınla buluş",
           "cost": [{ "var": "ara_ap", "amount": 1 }],
           "next": "ARA_NALAN",
           "maxUses": 1,
-          "description": "Gizli numara sahibi",
+          "description": "Mudanya · bir çay bahçesi",
           "visibleWhen": { "flag": "nalan_ipucu" }
         },
         {
@@ -1119,7 +1128,7 @@
         {
           "id": "ST_RED",
           "kind": "OPTION",
-          "label": "“Asla. Bir daha o sisteme girmeyeceksin; ben de girdirmeyeceğim.”",
+          "label": "“Hayır. O kaydı mahkeme ister.”",
           "responses": [
             {
               "lines": [
@@ -1157,11 +1166,14 @@
         {
           "id": "ST_KABUL",
           "kind": "OPTION",
-          "label": "“Dikkatli ol. Kimse bilmesin.”",
+          "label": "“Yalnızca bak; hiçbir şeye dokunma, kayıtları indir yeter.”",
           "responses": [
             {
               "lines": [
-                { "speaker": "player", "text": "Dikkatli ol. Kimse bilmesin. İndirdiğin kayıtları bana getir." },
+                {
+                  "speaker": "player",
+                  "text": "Yalnızca bak. Hiçbir şeye dokunma, hiçbir şey silme. Kayıtları indir, bana getir; kimse bilmesin."
+                },
                 { "speaker": "selim", "text": "Tamam. Bu gece." },
                 {
                   "speaker": "narrator",
@@ -1208,6 +1220,10 @@
               "text": "CUMA 17.30 — MUDANYA SAHİLİ, BİR ÇAY BAHÇESİ",
               "style": "card",
               "bg": "kafe"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sabah aynı gizli numara bir kez çalmıştı. Bir yer, bir saat; başka bir şey değil. “Yalnız gelin.”"
             },
             {
               "speaker": "narrator",
@@ -1284,8 +1300,21 @@
                   "text": "Bir de golf. Bülent’le golf. İkisi de aynı kulüpte. Raporu yazan da o kulüpte."
                 },
                 {
+                  "speaker": "nalan",
+                  "text": "Geçen yıl kalp ameliyatı oldu. Doktoru stresi yasakladı; eşi her gece arar, “yatmadın mı” diye. Şirket batarsa, ev de gider, emeklilik de. Bunu herkes bilir; kimse söylemez."
+                },
+                {
+                  "speaker": "nalan",
+                  "text": "Bir de antetli kâğıdı. Genel müdürlüğün kâğıdı İtalya’dan gelir; kalın, krem rengi, filigranlı. Ben bile kullanamam; yalnız onun masasında durur."
+                },
+                {
                   "speaker": "player",
-                  "text": "Bir kasa, bir golf sahası, bir rapor. Üçü de aynı adamın etrafında dönüyor.",
+                  "text": "Bir kasa, bir golf sahası, bir rapor. Bir kalp, bir ev. Bir de krem rengi bir kâğıt; kapımın altından giren notun kâğıdı. Hepsi aynı adamın etrafında dönüyor.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Ama bir benzerlik bir delil değildir. Kâğıdı savcı inceletiyor; ben değil.",
                   "style": "thought"
                 }
               ]
@@ -1299,7 +1328,7 @@
         {
           "id": "NQ_KANAL",
           "kind": "OPTION",
-          "label": "“Bunu bana değil, savcılığa ve mahkemeye anlatmalısınız.”",
+          "label": "“Mahkemede tanık olur musunuz?”",
           "responses": [
             {
               "lines": [
@@ -1337,11 +1366,14 @@
         {
           "id": "NQ_BELGE",
           "kind": "OPTION",
-          "label": "“Poliçe dosyasını fotokopiyle getirebilir misiniz?”",
+          "label": "“Zeyilnamenin bir suretini bana verin; mahkemeye ben sunarım.”",
           "responses": [
             {
               "lines": [
-                { "speaker": "player", "text": "Poliçe dosyasını fotokopiyle getirebilir misiniz? Bana lazım." },
+                {
+                  "speaker": "player",
+                  "text": "Zeyilnamenin bir suretini bana verin. Mahkemeye ben sunarım; sizin adınız geçmez."
+                },
                 { "speaker": "nalan", "text": "Getiririm. Risk alırım sizin için. Selim için." },
                 { "speaker": "narrator", "text": "Bir an durdu. Çayını karıştırdı; kaşık fincana değdi, bir kez." },
                 { "speaker": "nalan", "text": "Ama yakalanırsam? Ben de mi suçlu olurum?" },
@@ -1436,7 +1468,7 @@
         {
           "id": "YA_DOGRU",
           "kind": "OPTION",
-          "label": "“Defterinizde ne yazıyorsa onu. Fazlası değil.”",
+          "label": "“Defterde ne yazıyorsa o.”",
           "responses": [
             {
               "lines": [
@@ -1468,13 +1500,13 @@
         {
           "id": "YA_EZBER",
           "kind": "OPTION",
-          "label": "“Mahkemede ‘silik adamı Selim değildi’ deyin.”",
+          "label": "“Gelenin Selim olmadığını açıkça söyleyin; tereddüt hâkimi şüpheye düşürür.”",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Mahkemede “o gece gelen Selim değildi, başkasıydı” deyin. İşimiz kolaylaşır."
+                  "text": "Mahkemede açık konuşun Yaşar Usta: “O gece gelen Selim değildi.” Tereddüt ederseniz hâkim şüpheye düşer; açık söylerseniz işimiz kolaylaşır."
                 },
                 {
                   "speaker": "yasar",
@@ -1493,6 +1525,7 @@
           "effects": [
             { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
             { "type": "VAR", "var": "yasar_kocluk", "op": "set", "value": true },
+            { "type": "VAR", "var": "yasar_ezber", "op": "set", "value": true },
             { "type": "VAR", "var": "yasar_hazir", "op": "set", "value": true },
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 }
           ],
@@ -1557,7 +1590,12 @@
                 { "speaker": "player", "text": "Zimmeti mahkemeden istedim." },
                 {
                   "speaker": "hakan",
-                  "text": "İyi. O zaman benim söyleyeceğim bir şey kalmadı. Kayıt sizin olsun; ben kendiminkini yaptım."
+                  "text": "İyi. Bir şey daha; geçen sefer sormayın demiştim. O “acele etmeyin” telefonu amirime şirketten gelmiş. Genel müdürlükten. “Firmamız inceliyor, sonucu biz bildiririz” demişler. Tutanakta yok; amirimin defterinde var."
+                },
+                { "speaker": "player", "text": "Bunu savcılığa söyler misiniz?" },
+                {
+                  "speaker": "hakan",
+                  "text": "Savcı sorarsa söylerim. Sormazsa da amirim söyler; o da rahatsız. Kayıt sizin olsun; ben kendiminkini yaptım."
                 }
               ]
             }
@@ -1602,7 +1640,10 @@
             },
             { "speaker": "leyla", "text": "(telefonda) Ne buldun?" },
             { "speaker": "player", "text": "Bir isim buldum Leyla Hanım. Kayıtlar söylüyor." },
-            { "speaker": "leyla", "text": "Peki şimdi ne yapacaksın? Üç seçeneğin var; ikisi yanlış." }
+            {
+              "speaker": "leyla",
+              "text": "Peki şimdi ne yapacaksın? Seçeneklerin var. Çoğu yanlış; bazıları doğru gibi görünür."
+            }
           ]
         }
       ],
@@ -1610,7 +1651,7 @@
         {
           "id": "K_BILDIR",
           "kind": "OPTION",
-          "label": "Savcılığa yazılı suç duyurusunda bulun; delilleri ekle",
+          "label": "Dört kaydı bir dilekçeye ekle, savcılığa ver",
           "responses": [
             {
               "lines": [
@@ -1655,7 +1696,7 @@
         {
           "id": "K_YUZLES",
           "kind": "OPTION",
-          "label": "Genel müdürle yüzleş; itiraf ettirmeye çalış",
+          "label": "Genel müdürle yüz yüze konuş; tepkisini gör",
           "responses": [
             {
               "lines": [
@@ -1697,7 +1738,7 @@
         {
           "id": "K_BEKLE",
           "kind": "OPTION",
-          "label": "Hiçbir şey yapma; ikinci celsede sun",
+          "label": "Hepsini ikinci celseye sakla",
           "responses": [
             {
               "lines": [
@@ -1729,6 +1770,41 @@
           "quality": {
             "q": "NEUTRAL",
             "feedback": "Delili saklayıp celsede sunmak mümkündür; ama savcılığa önceden bildirmezsen fail bu sürede delil karartabilir ve savcıyı yanına çekemezsin (CMK 158)."
+          }
+        },
+        {
+          "id": "K_SOZLU",
+          "kind": "OPTION",
+          "label": "Savcıya koridorda sözlü bilgi ver; belgeleri ikinci celseye sakla",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Ertesi sabah adliye koridorunda Savcı Ferda Yalın’ı yakaladım. Bir ismi alçak sesle söyledim; bir cihaz adı, bir hat."
+                },
+                {
+                  "speaker": "ferda",
+                  "text": "Avukat hanım, bana koridorda bir isim söylüyorsunuz. Bir dilekçe verin; ekleriyle. Koridorda söylenen koridorda kalır."
+                },
+                { "speaker": "player", "text": "Belgeleri celsede sunacağım." },
+                { "speaker": "ferda", "text": "O zaman celsede görüşürüz." },
+                {
+                  "speaker": "player",
+                  "text": "Hem söyledim hem söylemedim. Leyla buna “avukatın en pahalı yarım adımı” der.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "ARA_HUB",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -10 },
+            { "type": "VAR", "var": "tarik_bekle", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kayda geçmeyen bir koridor sohbeti ihbar değildir; savcının harekete geçmesi için yazılı ya da tutanağa geçirilmiş bir bildirim gerekir (CMK 158/1). Belgeleri saklayınca fail üç hafta serbest kalır."
           }
         }
       ]
@@ -2384,13 +2460,47 @@
           "kind": "FALLBACK",
           "fallbackFor": "COMBINE",
           "repeat": "ONCE_PER_PARAMS",
+          "responses": [
+            {
+              "when": {
+                "any": [{ "cmp": [{ "var": "yanlis_cift" }, "==", 6] }, { "cmp": [{ "var": "yanlis_cift" }, "==", 12] }]
+              },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Leyla’nın sesi kafamda: “Rastgele gerilen ip, kürsüde rastgele konuşan avukat yapar.” Bir avuç ipucunu körlemesine eşleştiriyorum; bu alışkanlık salona da benimle gelir. (−1 güvenilirlik)",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "when": { "cmp": [{ "var": "yanlis_cift" }, ">", 6] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Yine olmadı. Durup düşünmem lazım; ipler değil, sorular eşleşir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
           "feedback": {
             "title": "Bu ikisi birbirini açıklamıyor",
             "text": "Başka bir ipucu dene.",
             "label": "BAĞLANTI YOK · −50 SKOR",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 },
+            { "type": "VAR", "var": "yanlis_cift", "op": "inc", "value": 1 },
+            {
+              "type": "IF",
+              "when": {
+                "any": [{ "cmp": [{ "var": "yanlis_cift" }, "==", 6] }, { "cmp": [{ "var": "yanlis_cift" }, "==", 12] }]
+              },
+              "then": [{ "type": "VAR", "var": "cred", "op": "dec", "value": 1 }]
+            }
+          ]
         },
         { "id": "ARA_CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "ARA_HUB" }
       ]

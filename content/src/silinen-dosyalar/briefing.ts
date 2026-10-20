@@ -9,9 +9,8 @@ const PR00 = T(`
 # 18 EKİM · GECE 02.14 — BİR ÇALIŞMA ODASI [bg:siyah]
 > Perdeler kapalıydı. Odadaki tek ışık bir ekrandan geliyordu; mavi, soğuk, bir akvaryumun ışığı gibi.
 > Masada bir fincan çay. Çoktan soğumuş. Kenarında bir dudak izi yok; içilmemiş, sadece konmuş.
-> Bir el klavyenin üstünde durdu. Kol saatinin kayışı deriydi; eskimiş, iyi bakılmış. Saat, ekranın köşesindeki saatle aynıydı: 02.14.
-> Masanın öbür ucunda açılmış bir zarf vardı. Kenarı bir mektup açacağıyla düzgünce kesilmiş. İçinden çıkan kâğıt ters duruyordu.
-> El kâğıdı çevirdi. Bir liste. Kısa satırlar, harfler, rakamlar. El bir satırın üstünde bir an bekledi.
+> Bir el klavyenin üstünde durdu. Işık yalnızca parmak uçlarına düşüyordu; gerisi karanlıktı.
+> El bir an bekledi. Hatırlamaya çalışan biri gibi; ya da hatırladığından emin olmak isteyen biri gibi.
 > Klavyede on iki tuş. Sonra bir tane daha. Ekran bir an karardı, yeniden aydınlandı.
 @BİR ADAM: Tamam.
 > Sesi alçaktı. Kendine konuşan biri gibi; ya da bir başkasına “sakin ol” diyen biri gibi.
@@ -26,8 +25,8 @@ const PR00 = T(`
 > El, düğmenin üstünde durdu. Dışarıda bir köpek havladı, sustu. Kalorifer peteğinden bir tık sesi geldi.
 > Sonra tık.
 > İlerleme çubuğu dolmaya başladı. Yeşil, yavaş, sabırlı. Yüzde bir. Yüzde dört. Yüzde on bir.
-> Adam arkasına yaslandı. Ekranın ışığında yalnızca gömleğinin yakası görünüyordu; ütülü, kolalı, gece yarısı bile.
-> Zarftaki kâğıdı katladı. Bir kez, iki kez. Ceketinin iç cebine koydu ve cebin üstüne iki kez hafifçe vurdu; bir alışkanlık gibi.
+> Adam arkasına yaslandı; yüzü ekranın ışığından çıktı, karanlığa karıştı. Masada yalnızca iki el kaldı, birbirine kenetli.
+> Parmaklardan biri masaya vurdu. Bir kez, iki kez. Sabırsız değil; sayan biri gibi.
 > Yüzde altmış. Yüzde seksen.
 > Çay soğumaya devam ediyordu. Çubuk doldu. Ekranda tek bir satır kaldı: “İşlem tamamlandı.”
 > Adam ekranı kapattı. Oda karardı. Karanlıkta bir süre kıpırdamadan oturdu.
@@ -39,11 +38,11 @@ const PR01 = T(`
 > Organize sanayide cumartesi sabahı. Dokuma makinelerinin uğultusu duvarların içinden geliyordu; bir kalbin, başka bir odadan duyulan atışı gibi.
 > Sunucu odasının kapısında üç kişi vardı. Biri, muhasebeden genç bir kadın, elinde bir çıktıyla ağlıyordu.
 @GENÇ KADIN: Siparişler yok. Hepsi. Tasarım arşivi de yok. Klasörleri açıyorum, boş. Ben… ben bir şeye mi bastım?
-> Arkalarında takım elbiseli bir adam belirdi. Saçları kır, kravatı yerinde, cumartesi sabahı bile.
-@TAKIM ELBİSELİ ADAM: Panik yok. Kimse bir şeye dokunmasın. Bülent’i arayın; o bilir.
-> Sesi sakindi. Bir fabrikanın sesini bastıracak kadar sakin.
-> Biri “polisi de arayalım mı” diye sordu. Adam bir an düşündü.
-@TAKIM ELBİSELİ ADAM: Önce ne olduğunu bilelim. Polis gelince her şeyi mühürler; sonra siparişleri kim kurtarır?
+> Masadaki sabit telefon hoparlöre alınmıştı. Hattın öbür ucunda arabada olduğu belli bir ses; sinyal lambası tıkırdıyordu.
+@HOPARLÖRDEKİ SES: Panik yok. Kimse bir şeye dokunmasın; ben yoldayım. Önce kurtarmayı deneriz. [phone]
+> Biri “polisi de arayalım mı” diye sordu. Hat bir an sustu; yalnızca sinyal lambasının tıkırtısı.
+@HOPARLÖRDEKİ SES: Önce ne olduğunu bilelim. Polis gelince her şeyi mühürler; sonra siparişleri kim kurtarır? [phone]
+> Genç kadın çıktıyı katladı, yeniden açtı. Dokuma makineleri bir an bile durmadı.
 # 22 EKİM · ŞAFAK 06.40 — NİLÜFER, BİR APARTMAN [bg:ev]
 > Dört gün sonra, şafakta, üçüncü katta bir kapı çalındı. Önce bir kez. Sonra uzun uzun.
 > Kapıyı otuzlarında, uykulu bir adam açtı. Üstünde bir tişört, elinde gözlüğü.
@@ -55,7 +54,7 @@ const PR01 = T(`
 > Kimse cevap vermedi. Biri tutanağı imzalaması için kalemi uzattı.
 > Kadın kızının kulağını avucuyla kapadı. Kız tavşanın kulağını kapadı.
 > Adam gözaltına alındı, ertesi gün adli kontrolle serbest bırakıldı: yurt dışına çıkış yasağı, haftada bir imza.
-> İki ay sonra iddianame geldi. Bir celse sonra avukatı “mesleki nedenlerle” çekildi.
+> İki ay sonra iddianame geldi. Tensip zaptından birkaç gün sonra avukatı “mesleki nedenlerle” çekildi.
 > Duruşmaya on iki gün kala, eşi bir avukat aradı.
 `);
 

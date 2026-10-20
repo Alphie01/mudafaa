@@ -2,8 +2,10 @@ import { describe, expect, it, vi } from 'vitest';
 import { loadEnv } from '../../src/config/env.js';
 import type { PrismaService } from '../../src/database/prisma.service.js';
 import {
+  assertEnvironmentAllowed,
   EntitlementService,
   isFreeCase,
+  needsRefresh,
   PREMIUM_PICKS_PER_PERIOD,
   premiumOf,
 } from '../../src/modules/purchases/entitlement.service.js';
@@ -48,6 +50,8 @@ const sub = (over: Record<string, unknown> = {}) => ({
   picksPeriodEnd: null,
   picksUsed: 0,
   checkedAt: NOW,
+  revokedAt: null,
+  environment: 'PRODUCTION',
   ...over,
 });
 
@@ -123,6 +127,13 @@ describe('EntitlementService.premium', () => {
     expect(prisma.subscription.update).toHaveBeenCalled();
   });
 
+  it('re-verifies an active subscription once the last check is stale (refund / revocation)', async () => {
+    const { svc, verifySubscription } = service({ sub: sub({ checkedAt: EARLIER }) });
+    verifySubscription.mockResolvedValueOnce({ expiresAt: NOW, autoRenewing: false, latestToken: 'tok' });
+    expect((await svc.premium('u')).active).toBe(false);
+    expect(verifySubscription).toHaveBeenCalledOnce();
+  });
+
   it('does not ask the store again within the refresh interval', async () => {
     const { svc, verifySubscription } = service({ sub: sub({ expiresAt: EARLIER, checkedAt: NOW }) });
     expect((await svc.premium('u')).active).toBe(false);
@@ -133,5 +144,39 @@ describe('EntitlementService.premium', () => {
     const { svc, verifySubscription } = service({ sub: sub({ expiresAt: EARLIER, checkedAt: EARLIER }) });
     verifySubscription.mockRejectedValueOnce(new Error('down'));
     expect((await svc.premium('u')).active).toBe(false);
+  });
+});
+
+describe('needsRefresh', () => {
+  const stale = new Date(NOW.getTime() - 11 * 60_000);
+  it('live (active or auto-renewing), not revoked and older than the interval', () => {
+    expect(needsRefresh(sub({ checkedAt: stale }), NOW)).toBe(true);
+    expect(needsRefresh(sub({ checkedAt: NOW }), NOW)).toBe(false);
+    expect(needsRefresh(sub({ checkedAt: stale, expiresAt: EARLIER, autoRenewing: false }), NOW)).toBe(false);
+    expect(needsRefresh(sub({ checkedAt: stale, expiresAt: EARLIER, autoRenewing: true }), NOW)).toBe(true);
+    expect(needsRefresh(sub({ checkedAt: stale, revokedAt: EARLIER }), NOW)).toBe(false);
+  });
+});
+
+describe('assertEnvironmentAllowed', () => {
+  const prod = (extra: Record<string, string> = {}) => loadEnv({ ...base, NODE_ENV: 'production', ...extra });
+
+  it('production rejects sandbox / test purchases unless explicitly allowed per store', () => {
+    expect(() => assertEnvironmentAllowed(prod(), 'IOS', 'SANDBOX')).toThrow(
+      expect.objectContaining({ status: 400, code: 'purchase_invalid' }),
+    );
+    expect(() => assertEnvironmentAllowed(prod(), 'ANDROID', 'SANDBOX')).toThrow(
+      expect.objectContaining({ code: 'purchase_invalid' }),
+    );
+    expect(() => assertEnvironmentAllowed(prod({ APPLE_ALLOW_SANDBOX: 'true' }), 'IOS', 'SANDBOX')).not.toThrow();
+    expect(() => assertEnvironmentAllowed(prod({ APPLE_ALLOW_SANDBOX: 'true' }), 'ANDROID', 'SANDBOX')).toThrow();
+    expect(() =>
+      assertEnvironmentAllowed(prod({ GOOGLE_ALLOW_TEST_PURCHASES: 'true' }), 'ANDROID', 'SANDBOX'),
+    ).not.toThrow();
+    expect(() => assertEnvironmentAllowed(prod(), 'IOS', 'PRODUCTION')).not.toThrow();
+  });
+
+  it('outside production sandbox purchases are accepted', () => {
+    expect(() => assertEnvironmentAllowed(loadEnv(base), 'IOS', 'SANDBOX')).not.toThrow();
   });
 });

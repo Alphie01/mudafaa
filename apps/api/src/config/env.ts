@@ -45,6 +45,18 @@ const EnvSchema = z
     APPLE_PRIVATE_KEY: optionalText,
     APPLE_BUNDLE_ID: z.string().min(1).default('com.monolithyazilim.mudafaa'),
     // App Store'daki sayısal uygulama kimliği; production imzalı işlem doğrulaması için gerekir.
+    // Production'da sandbox (App Store) ve test (Google Play lisans test kullanıcısı) satın almaları reddedilir; App Review
+    // ve kapalı test için geçici olarak açılabilir. Bu hak `case_entitlements.sandbox` ile işaretlenir.
+    APPLE_ALLOW_SANDBOX: z
+      .enum(['true', 'false'])
+      .default('false')
+      .transform((v) => v === 'true'),
+    GOOGLE_ALLOW_TEST_PURCHASES: z
+      .enum(['true', 'false'])
+      .default('false')
+      .transform((v) => v === 'true'),
+    // Play gerçek zamanlı geliştirici bildirimleri (Pub/Sub push) için paylaşılan gizli anahtar (`?secret=`).
+    GOOGLE_RTDN_SECRET: optionalText,
     APPLE_APP_ID: z.preprocess(blankAsUndefined, z.coerce.number().int().positive().optional()),
   })
   .superRefine((env, ctx) => {

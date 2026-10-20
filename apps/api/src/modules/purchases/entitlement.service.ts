@@ -7,6 +7,7 @@ import {
   type PremiumStatus,
   type PurchaseRequest,
   type PurchaseResponse,
+  type StorePlatform,
 } from '@mudafaa/case-schema';
 import { ApiError, notFound } from '../../common/api-error.js';
 import { isUuid } from '../../common/uuid.js';
@@ -15,7 +16,7 @@ import { PrismaService } from '../../database/prisma.service.js';
 import type { Prisma, Purchase, Subscription } from '../../generated/prisma/client.js';
 import { CLOCK, type Clock } from './clock.js';
 import { PurchaseVerifier } from './store/purchase-verifier.service.js';
-import type { VerifiedProduct, VerifiedSubscription } from './store/verifier.js';
+import type { StoreEnvironment, VerifiedProduct, VerifiedSubscription } from './store/verifier.js';
 
 // ── Ticari kurallar (docs/iap.md; koordinatörün takdiri, değiştirmek için tek yer) ──
 /** Ücretsiz davalar: #01 ve #02 (`meta.number`). */
@@ -43,6 +44,30 @@ export function premiumOf(
     expiresAt: sub.expiresAt.toISOString(),
     picksLeft: active ? Math.max(0, PREMIUM_PICKS_PER_PERIOD - used) : 0,
   };
+}
+
+/** Aktif ya da yenilenecek, geri alınmamış abonelik REFRESH_INTERVAL'den eskiyse mağazaya yeniden sorulur. */
+export function needsRefresh(
+  sub: Pick<Subscription, 'expiresAt' | 'autoRenewing' | 'checkedAt' | 'revokedAt'>,
+  now: Date,
+): boolean {
+  if (sub.revokedAt !== null) return false;
+  const live = sub.expiresAt.getTime() > now.getTime() || sub.autoRenewing;
+  return live && now.getTime() - sub.checkedAt.getTime() >= REFRESH_INTERVAL_MS;
+}
+
+/**
+ * Production'da sandbox (App Store) ve test (Google Play lisans test kullanıcısı) satın almaları hak vermez;
+ * APPLE_ALLOW_SANDBOX / GOOGLE_ALLOW_TEST_PURCHASES App Review ve kapalı test için geçici olarak açar.
+ */
+export function assertEnvironmentAllowed(
+  env: Pick<Env, 'NODE_ENV' | 'APPLE_ALLOW_SANDBOX' | 'GOOGLE_ALLOW_TEST_PURCHASES'>,
+  platform: StorePlatform,
+  environment: StoreEnvironment,
+): void {
+  if (env.NODE_ENV !== 'production' || environment === 'PRODUCTION') return;
+  const allowed = platform === 'IOS' ? env.APPLE_ALLOW_SANDBOX : env.GOOGLE_ALLOW_TEST_PURCHASES;
+  if (!allowed) throw new ApiError(400, 'purchase_invalid', 'Test (sandbox) satın alması bu sunucuda kabul edilmez.');
 }
 
 const tokenInUse = (): ApiError =>
@@ -98,20 +123,13 @@ export class EntitlementService {
   }
 
   /**
-   * Premium durumu. Süresi dolmuş ama otomatik yenilenen abonelik mağazaya yeniden sorulur (sunucu bildirimi
-   * olmadan yenilemeyi yakalamak için; en fazla 10 dakikada bir). Mağaza hatası durumu değiştirmez.
+   * Premium durumu. Aktif ya da otomatik yenilenen abonelik en fazla 10 dakikada bir mağazaya yeniden sorulur:
+   * bildirim kaçsa bile yenileme, iade ve iptal yakalanır. Mağaza hatası durumu değiştirmez.
    */
   async premium(userId: string): Promise<PremiumStatus> {
     const now = this.now();
     let sub = await this.latestSubscription(userId);
-    if (
-      sub !== null &&
-      sub.autoRenewing &&
-      sub.expiresAt.getTime() <= now.getTime() &&
-      now.getTime() - sub.checkedAt.getTime() >= REFRESH_INTERVAL_MS
-    ) {
-      sub = await this.refresh(sub, now);
-    }
+    if (sub !== null && needsRefresh(sub, now)) sub = await this.refresh(sub, now);
     return premiumOf(sub, now);
   }
 
@@ -120,7 +138,13 @@ export class EntitlementService {
       const v = await this.verifier.for(sub.platform).verifySubscription(sub.productId, sub.latestToken);
       return await this.prisma.subscription.update({
         where: { id: sub.id },
-        data: { expiresAt: v.expiresAt, autoRenewing: v.autoRenewing, latestToken: v.latestToken, checkedAt: now },
+        data: {
+          // Geri alınmış abonelik mağaza ne derse desin geri alma anında biter.
+          expiresAt: sub.revokedAt === null ? v.expiresAt : sub.expiresAt,
+          autoRenewing: sub.revokedAt === null && v.autoRenewing,
+          latestToken: v.latestToken,
+          checkedAt: now,
+        },
       });
     } catch (e) {
       this.logger.warn(`Abonelik yenilemesi sorgulanamadı (${sub.id}): ${(e as Error).message}`);
@@ -152,9 +176,11 @@ export class EntitlementService {
     try {
       if (req.productId === PRODUCT_CASE_UNLOCK) {
         const v = await verifier.verifyProduct(req.productId, req.token);
+        assertEnvironmentAllowed(this.env, req.platform, v.environment);
         return this.response(userId, await this.saveProduct(userId, req, v, caseRow?.id as string));
       }
       const v = await verifier.verifySubscription(req.productId, req.token);
+      assertEnvironmentAllowed(this.env, req.platform, v.environment);
       return this.response(userId, await this.saveSubscription(userId, req, v));
     } catch (e) {
       if (!isUniqueViolation(e)) throw e;
@@ -175,13 +201,16 @@ export class EntitlementService {
           token: req.token,
           orderId: v.orderId ?? null,
           caseId,
+          environment: v.environment,
           verification: v.raw as Prisma.InputJsonValue,
         },
       });
       // Dava zaten sahipliyse (ör. premium seçimi) mevcut hak korunur; satın alma yine kayıtlıdır.
       const owned = await tx.caseEntitlement.findUnique({ where: { userId_caseId: { userId, caseId } } });
       if (owned === null) {
-        await tx.caseEntitlement.create({ data: { userId, caseId, source: 'PURCHASE', purchaseId: p.id } });
+        await tx.caseEntitlement.create({
+          data: { userId, caseId, source: 'PURCHASE', purchaseId: p.id, sandbox: v.environment === 'SANDBOX' },
+        });
       }
       return p;
     });
@@ -199,17 +228,23 @@ export class EntitlementService {
         latestToken: v.latestToken,
         expiresAt: v.expiresAt,
         autoRenewing: v.autoRenewing,
+        environment: v.environment,
         checkedAt: now,
       };
       if (sub === null) {
         await tx.subscription.create({ data: { userId, platform: req.platform, originalId: v.originalId, ...fields } });
       } else {
-        await tx.subscription.update({ where: { id: sub.id }, data: fields });
+        // Geri alınmış abonelik yeniden gönderilse de geri alınmış kalır.
+        const revoked = sub.revokedAt !== null;
+        await tx.subscription.update({
+          where: { id: sub.id },
+          data: revoked ? { ...fields, expiresAt: sub.expiresAt, autoRenewing: false } : fields,
+        });
       }
       const data = {
         userId,
         orderId: v.orderId ?? null,
-        status: 'VERIFIED' as const,
+        environment: v.environment,
         verification: v.raw as Prisma.InputJsonValue,
       };
       return tx.purchase.upsert({
@@ -239,6 +274,71 @@ export class EntitlementService {
     return this.prisma.case.findUniqueOrThrow({ where: { id: caseId }, select: { id: true, number: true } });
   }
 
+  // ── İade ve geri alma (mağaza bildirimleri) ──
+  /**
+   * Satın almayı geri alır: durum REVOKED, o satın almanın verdiği dava hakkı silinir. Abonelik satın almasıysa
+   * abonelik geri alma anında biter; premium ile seçilmiş davalar kalır (docs/iap.md, bilinen ödünleşim).
+   * Bilinmeyen token sessizce yok sayılır. Dönen değer: geri alınan satın alma bulundu mu.
+   */
+  async revokePurchase(platform: StorePlatform, token: string, at: Date): Promise<boolean> {
+    return this.prisma.$transaction(async (tx) => {
+      const p = await tx.purchase.findUnique({ where: { token } });
+      if (p === null || p.platform !== platform) return false;
+      if (p.status !== 'REVOKED') {
+        await tx.purchase.update({ where: { id: p.id }, data: { status: 'REVOKED', revokedAt: at } });
+      }
+      await tx.caseEntitlement.deleteMany({ where: { purchaseId: p.id } });
+      return true;
+    });
+  }
+
+  /** Aboneliği geri alır (iade / aile paylaşımı iptali): bitiş = geri alma anı, yenileme kapalı. */
+  async revokeSubscription(platform: StorePlatform, key: string, at: Date): Promise<boolean> {
+    return this.prisma.$transaction(async (tx) => {
+      const sub = await tx.subscription.findFirst({
+        where: { platform, OR: [{ originalId: key }, { latestToken: key }] },
+      });
+      if (sub === null) return false;
+      await tx.subscription.update({
+        where: { id: sub.id },
+        data: {
+          revokedAt: sub.revokedAt ?? at,
+          expiresAt: sub.expiresAt.getTime() < at.getTime() ? sub.expiresAt : at,
+          autoRenewing: false,
+          checkedAt: this.now(),
+        },
+      });
+      return true;
+    });
+  }
+
+  /** Bildirimden gelen yeni bitiş tarihi (yenileme / süre dolumu). Geri alınmış abonelik değişmez. */
+  async updateSubscription(
+    platform: StorePlatform,
+    key: string,
+    fields: { expiresAt: Date; autoRenewing: boolean; latestToken?: string },
+  ): Promise<boolean> {
+    const r = await this.prisma.subscription.updateMany({
+      where: { platform, revokedAt: null, OR: [{ originalId: key }, { latestToken: key }] },
+      data: { ...fields, checkedAt: this.now() },
+    });
+    return r.count > 0;
+  }
+
+  /** Bildirim sonrası aboneliği mağazaya yeniden sorar (Google RTDN: bildirim yalnızca token taşır). */
+  async reverifySubscription(platform: StorePlatform, productId: string, token: string): Promise<boolean> {
+    const sub = await this.prisma.subscription.findFirst({
+      where: { platform, OR: [{ originalId: token }, { latestToken: token }] },
+    });
+    if (sub === null) return false;
+    const v = await this.verifier.for(platform).verifySubscription(productId, token);
+    return this.updateSubscription(platform, token, {
+      expiresAt: v.expiresAt,
+      autoRenewing: v.autoRenewing,
+      latestToken: v.latestToken,
+    });
+  }
+
   // ── Premium seçimi ──
   /**
    * Premium ile kalıcı dava seçimi. Zaten açık dava hak harcamaz (idempotent). Sayaç tek bir koşullu UPDATE ile
@@ -266,7 +366,13 @@ export class EntitlementService {
           RETURNING id`;
         if (rows.length === 0) throw noPicksLeft();
         await tx.caseEntitlement.create({
-          data: { userId, caseId: c.id, source: 'PREMIUM_PICK', subscriptionId: sub.id },
+          data: {
+            userId,
+            caseId: c.id,
+            source: 'PREMIUM_PICK',
+            subscriptionId: sub.id,
+            sandbox: sub.environment === 'SANDBOX',
+          },
         });
       });
     } catch (e) {

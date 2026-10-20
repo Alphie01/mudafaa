@@ -132,6 +132,14 @@ enum StorePlatform {
   @@map("store_platform")
 }
 
+// Mağaza ortamı: SANDBOX = App Store sandbox ya da Google Play test satın alması (lisans test kullanıcısı).
+enum StoreEnvironment {
+  PRODUCTION
+  SANDBOX
+
+  @@map("store_environment")
+}
+
 enum PurchaseStatus {
   VERIFIED
   REVOKED
@@ -978,21 +986,23 @@ model AdminAuditLog {
 // (`user_id` NULL): aynı token başka hesapta yeniden kullanılamasın.
 
 model Purchase {
-  id           String         @id @default(uuid(7)) @db.Uuid
-  userId       String?        @map("user_id") @db.Uuid
-  user         User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
+  id           String           @id @default(uuid(7)) @db.Uuid
+  userId       String?          @map("user_id") @db.Uuid
+  user         User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
   platform     StorePlatform
-  productId    String         @map("product_id")
+  productId    String           @map("product_id")
   // Android: purchaseToken · iOS: transactionId. Bir token yalnızca bir kez kabul edilir.
-  token        String         @unique
-  orderId      String?        @map("order_id")
-  caseId       String?        @map("case_id") @db.Uuid
-  case         Case?          @relation(fields: [caseId], references: [id], onDelete: SetNull)
-  status       PurchaseStatus @default(VERIFIED)
+  token        String           @unique
+  orderId      String?          @map("order_id")
+  caseId       String?          @map("case_id") @db.Uuid
+  case         Case?            @relation(fields: [caseId], references: [id], onDelete: SetNull)
+  status       PurchaseStatus   @default(VERIFIED)
+  environment  StoreEnvironment @default(PRODUCTION)
+  revokedAt    DateTime?        @map("revoked_at") @db.Timestamptz(3)
   // Mağazanın ham doğrulama yanıtı (denetim ve sorun giderme).
   verification Json
-  createdAt    DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt    DateTime       @updatedAt @map("updated_at") @db.Timestamptz(3)
+  createdAt    DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime         @updatedAt @map("updated_at") @db.Timestamptz(3)
 
   entitlement CaseEntitlement?
 
@@ -1007,6 +1017,8 @@ model CaseEntitlement {
   caseId         String            @map("case_id") @db.Uuid
   case           Case              @relation(fields: [caseId], references: [id], onDelete: Cascade)
   source         EntitlementSource
+  // Sandbox / test satın almasından ya da sandbox aboneliğin seçiminden gelen hak (denetim ve geri alma için).
+  sandbox        Boolean           @default(false)
   purchaseId     String?           @unique @map("purchase_id") @db.Uuid
   purchase       Purchase?         @relation(fields: [purchaseId], references: [id], onDelete: SetNull)
   subscriptionId String?           @map("subscription_id") @db.Uuid
@@ -1018,23 +1030,25 @@ model CaseEntitlement {
 }
 
 model Subscription {
-  id             String        @id @default(uuid(7)) @db.Uuid
-  userId         String        @map("user_id") @db.Uuid
-  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id             String           @id @default(uuid(7)) @db.Uuid
+  userId         String           @map("user_id") @db.Uuid
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   platform       StorePlatform
-  productId      String        @map("product_id")
+  productId      String           @map("product_id")
   // Android: ilk purchaseToken · iOS: originalTransactionId. Yenilemeler aynı satırı günceller.
-  originalId     String        @map("original_id")
+  originalId     String           @map("original_id")
+  environment    StoreEnvironment @default(PRODUCTION)
+  revokedAt      DateTime?        @map("revoked_at") @db.Timestamptz(3)
   // Mağazaya yeniden sorulurken kullanılan son token.
-  latestToken    String        @map("latest_token")
-  expiresAt      DateTime      @map("expires_at") @db.Timestamptz(3)
-  autoRenewing   Boolean       @default(true) @map("auto_renewing")
+  latestToken    String           @map("latest_token")
+  expiresAt      DateTime         @map("expires_at") @db.Timestamptz(3)
+  autoRenewing   Boolean          @default(true) @map("auto_renewing")
   // Premium seçim sayacı: dönem mağazanın bildirdiği bitiş tarihidir; bitiş değişince sayaç sıfırlanır.
-  picksPeriodEnd DateTime?     @map("picks_period_end") @db.Timestamptz(3)
-  picksUsed      Int           @default(0) @map("picks_used")
-  checkedAt      DateTime      @default(now()) @map("checked_at") @db.Timestamptz(3)
-  createdAt      DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
-  updatedAt      DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+  picksPeriodEnd DateTime?        @map("picks_period_end") @db.Timestamptz(3)
+  picksUsed      Int              @default(0) @map("picks_used")
+  checkedAt      DateTime         @default(now()) @map("checked_at") @db.Timestamptz(3)
+  createdAt      DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime         @updatedAt @map("updated_at") @db.Timestamptz(3)
 
   entitlements CaseEntitlement[]
 

@@ -1,9 +1,13 @@
 import { ApiError } from '../../../common/api-error.js';
 
+/** SANDBOX: App Store sandbox işlemi ya da Google Play test satın alması (lisans test kullanıcısı). */
+export type StoreEnvironment = 'PRODUCTION' | 'SANDBOX';
+
 /** Mağazanın doğruladığı tek seferlik ürün (dava kilidi). */
 export interface VerifiedProduct {
   productId: string;
   orderId: string | undefined;
+  environment: StoreEnvironment;
   /** Mağazanın ham yanıtı (purchases.verification). */
   raw: unknown;
 }
@@ -18,6 +22,7 @@ export interface VerifiedSubscription {
   expiresAt: Date;
   autoRenewing: boolean;
   orderId: string | undefined;
+  environment: StoreEnvironment;
   raw: unknown;
 }
 

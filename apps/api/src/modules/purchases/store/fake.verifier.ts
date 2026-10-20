@@ -15,7 +15,12 @@ export class FakeVerifier implements StoreVerifier {
 
   verifyProduct(productId: string, token: string): Promise<VerifiedProduct> {
     if (!token.startsWith('test:') || SUB.test(token)) return Promise.reject(purchaseInvalid());
-    return Promise.resolve({ productId, orderId: `FAKE.${token.slice(5)}`, raw: { fake: true, productId, token } });
+    return Promise.resolve({
+      productId,
+      orderId: `FAKE.${token.slice(5)}`,
+      environment: 'SANDBOX',
+      raw: { fake: true, productId, token },
+    });
   }
 
   verifySubscription(productId: string, token: string): Promise<VerifiedSubscription> {
@@ -30,6 +35,8 @@ export class FakeVerifier implements StoreVerifier {
       expiresAt,
       autoRenewing: days > 0,
       orderId: `FAKE.${token.slice(5)}`,
+      // Sahte satın almalar test satın alması sayılır (hakları `sandbox` işaretlidir).
+      environment: 'SANDBOX',
       raw: { fake: true, productId, token, expiresAt: expiresAt.toISOString() },
     });
   }

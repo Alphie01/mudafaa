@@ -8,12 +8,13 @@ import {
   SignedDataVerifier,
   VerificationException,
   type JWSRenewalInfoDecodedPayload,
+  type ResponseBodyV2DecodedPayload,
   type JWSTransactionDecodedPayload,
   type StatusResponse,
   type TransactionInfoResponse,
 } from '@apple/app-store-server-library';
 import { ApiError } from '../../../common/api-error.js';
-import type { StoreVerifier, VerifiedProduct, VerifiedSubscription } from './verifier.js';
+import type { StoreEnvironment, StoreVerifier, VerifiedProduct, VerifiedSubscription } from './verifier.js';
 import { purchaseInvalid, storeNotConfigured, storeUnavailable } from './verifier.js';
 
 /** Apple kök sertifikaları (apple.com/certificateauthority: Root CA, G2, G3); imzalı işlem zinciri bunlara dayanır. */
@@ -42,6 +43,8 @@ export interface AppleConfig {
   bundleId: string;
   appAppleId: number | undefined;
 }
+
+const envOf = (env: AppleEnvironment): StoreEnvironment => (env.name === 'sandbox' ? 'SANDBOX' : 'PRODUCTION');
 
 /** Bu durum kodlarında işlem bu ortamda yoktur; sıradaki ortam denenir. */
 const NOT_HERE = new Set([404]);
@@ -124,11 +127,11 @@ export class AppleVerifier implements StoreVerifier {
   async verifyProduct(productId: string, token: string): Promise<VerifiedProduct> {
     let info: TransactionInfoResponse | undefined;
     return this.inEnvironments(
-      async (_env, verifier) => {
+      async (env, verifier) => {
         if (info?.signedTransactionInfo === undefined) throw purchaseInvalid();
         const tx = await verifier.verifyAndDecodeTransaction(info.signedTransactionInfo);
         this.checkTransaction(tx, productId);
-        return { productId, orderId: tx.transactionId, raw: tx };
+        return { productId, orderId: tx.transactionId, environment: envOf(env), raw: tx };
       },
       async (env) => {
         info = await env.client.getTransactionInfo(token);
@@ -139,7 +142,7 @@ export class AppleVerifier implements StoreVerifier {
   async verifySubscription(productId: string, token: string): Promise<VerifiedSubscription> {
     let status: StatusResponse | undefined;
     return this.inEnvironments(
-      async (_env, verifier) => {
+      async (env, verifier) => {
         let best: { tx: JWSTransactionDecodedPayload; renewal: JWSRenewalInfoDecodedPayload | undefined } | undefined;
         for (const group of status?.data ?? []) {
           for (const item of group.lastTransactions ?? []) {
@@ -166,6 +169,7 @@ export class AppleVerifier implements StoreVerifier {
           expiresAt,
           autoRenewing: renewal?.autoRenewStatus === 1 && tx.revocationDate === undefined,
           orderId: tx.transactionId,
+          environment: envOf(env),
           raw: { transaction: tx, renewal },
         };
       },
@@ -173,5 +177,70 @@ export class AppleVerifier implements StoreVerifier {
         status = await env.client.getAllSubscriptionStatuses(token);
       },
     );
+  }
+}
+
+/** Çözülmüş App Store Server Notification v2. */
+export interface AppleNotification {
+  type: string;
+  subtype: string | undefined;
+  environment: StoreEnvironment;
+  transaction: JWSTransactionDecodedPayload | undefined;
+  renewal: JWSRenewalInfoDecodedPayload | undefined;
+}
+
+type NotificationVerifier = Pick<
+  SignedDataVerifier,
+  'verifyAndDecodeNotification' | 'verifyAndDecodeTransaction' | 'verifyAndDecodeRenewalInfo'
+>;
+
+/**
+ * App Store Server Notifications v2: `signedPayload` Apple kök sertifikalarıyla doğrulanır (API anahtarı gerekmez).
+ * Bildirimin ortamı imzadan önce bilinmediği için production ve sandbox doğrulayıcıları sırayla denenir.
+ */
+export class AppleNotificationDecoder {
+  constructor(private readonly verifiers: { environment: StoreEnvironment; verifier: NotificationVerifier }[]) {}
+
+  static create(bundleId: string, appAppleId: number | undefined, roots: Buffer[] = appleRootCertificates()) {
+    return new AppleNotificationDecoder([
+      // Production doğrulaması sayısal uygulama kimliği ister; yoksa yalnızca sandbox bildirimleri kabul edilir.
+      ...(appAppleId === undefined
+        ? []
+        : [
+            {
+              environment: 'PRODUCTION' as const,
+              verifier: new SignedDataVerifier(roots, true, Environment.PRODUCTION, bundleId, appAppleId),
+            },
+          ]),
+      { environment: 'SANDBOX', verifier: new SignedDataVerifier(roots, true, Environment.SANDBOX, bundleId) },
+    ]);
+  }
+
+  /** İmza geçersizse (hiçbir ortamda doğrulanamazsa) 400 `purchase_invalid`. */
+  async decode(signedPayload: string): Promise<AppleNotification> {
+    for (const { environment, verifier } of this.verifiers) {
+      let payload: ResponseBodyV2DecodedPayload;
+      try {
+        payload = await verifier.verifyAndDecodeNotification(signedPayload);
+      } catch (e) {
+        if (e instanceof VerificationException) continue;
+        throw e;
+      }
+      const data = payload.data;
+      return {
+        type: String(payload.notificationType ?? ''),
+        subtype: payload.subtype === undefined ? undefined : String(payload.subtype),
+        environment,
+        transaction:
+          data?.signedTransactionInfo === undefined
+            ? undefined
+            : await verifier.verifyAndDecodeTransaction(data.signedTransactionInfo),
+        renewal:
+          data?.signedRenewalInfo === undefined
+            ? undefined
+            : await verifier.verifyAndDecodeRenewalInfo(data.signedRenewalInfo),
+      };
+    }
+    throw purchaseInvalid('Bildirim imzası doğrulanamadı.');
   }
 }

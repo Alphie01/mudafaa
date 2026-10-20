@@ -64,6 +64,21 @@ describe('GoogleVerifier', () => {
     expect((init?.headers as Record<string, string>).Authorization).toBe('Bearer at');
   });
 
+  it('marks license-tester purchases (purchaseType 0 / testPurchase) as SANDBOX', async () => {
+    const test = make(json(200, { purchaseState: 0, purchaseType: 0 }));
+    expect((await test.v.verifyProduct('dava_kilidi', 't')).environment).toBe('SANDBOX');
+    const real = make(json(200, { purchaseState: 0 }));
+    expect((await real.v.verifyProduct('dava_kilidi', 't')).environment).toBe('PRODUCTION');
+    const sub = make(
+      json(200, {
+        subscriptionState: 'SUBSCRIPTION_STATE_ACTIVE',
+        testPurchase: {},
+        lineItems: [{ productId: 'premium_aylik', expiryTime: '2026-11-20T12:00:00Z' }],
+      }),
+    );
+    expect((await sub.v.verifySubscription('premium_aylik', 't')).environment).toBe('SANDBOX');
+  });
+
   it('rejects pending/canceled purchases and mismatched products', async () => {
     expect(await codeOf(make(json(200, { purchaseState: 2 })).v.verifyProduct('dava_kilidi', 't'))).toBe(
       '400 purchase_invalid',
@@ -163,7 +178,10 @@ describe('AppleVerifier', () => {
     const prod = env('production', {});
     const sandbox = env('sandbox', { found: { signedTransactionInfo: 'jws' } });
     const v = new AppleVerifier(BUNDLE, [prod, sandbox]);
-    await expect(v.verifyProduct('dava_kilidi', '2000001')).resolves.toMatchObject({ orderId: '2000001' });
+    await expect(v.verifyProduct('dava_kilidi', '2000001')).resolves.toMatchObject({
+      orderId: '2000001',
+      environment: 'SANDBOX',
+    });
     expect(prod.client.getTransactionInfo).toHaveBeenCalledWith('2000001');
     expect(sandbox.verifier?.verifyAndDecodeTransaction).toHaveBeenCalledWith('jws');
   });

@@ -18,13 +18,20 @@ export interface TestApp {
   close: () => Promise<void>;
 }
 
-/** Üretimle aynı ayarlarla (`/v1`, hata zarfı, gövde ayrıştırıcı) test uygulaması; ortam `testEnv` + `overrides`. */
-export async function bootstrapApp(overrides: Record<string, string | undefined> = {}): Promise<TestApp> {
+/**
+ * Üretimle aynı ayarlarla (`/v1`, hata zarfı, gövde ayrıştırıcı) test uygulaması; ortam `testEnv` + `overrides`.
+ * `providers` sağlayıcıları değiştirir (ör. imzasız App Store bildirim çözücüsü).
+ */
+export async function bootstrapApp(
+  overrides: Record<string, string | undefined> = {},
+  providers: { token: symbol | string; value: unknown }[] = [],
+): Promise<TestApp> {
   const env = testEnv(overrides);
-  const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
+  let builder = Test.createTestingModule({ imports: [AppModule] })
     .overrideProvider(ENV)
-    .useValue(env)
-    .compile();
+    .useValue(env);
+  for (const p of providers) builder = builder.overrideProvider(p.token).useValue(p.value);
+  const moduleRef = await builder.compile();
   const app = configureApp(moduleRef.createNestApplication(APP_OPTIONS));
   await app.init();
   const prisma = app.get(PrismaService);

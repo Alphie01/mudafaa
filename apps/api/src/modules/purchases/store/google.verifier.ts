@@ -22,6 +22,8 @@ interface SubscriptionPurchaseV2 {
   acknowledgementState?: string;
   latestOrderId?: string;
   linkedPurchaseToken?: string;
+  /** Yalnızca lisans test kullanıcısının satın almasında bulunur. */
+  testPurchase?: object;
   lineItems?: { productId?: string; expiryTime?: string; autoRenewingPlan?: { autoRenewEnabled?: boolean } }[];
 }
 
@@ -104,7 +106,8 @@ export class GoogleVerifier implements StoreVerifier {
     // purchaseState: 0 satın alındı · 1 iptal · 2 bekliyor.
     if (p.purchaseState !== 0) throw purchaseInvalid('Ödeme tamamlanmamış ya da iptal edilmiş.');
     if (p.productId !== undefined && p.productId !== productId) throw purchaseInvalid('Ürün eşleşmiyor.');
-    return { productId, orderId: p.orderId, raw: p };
+    // purchaseType: 0 test (lisans test kullanıcısı) · 1 promosyon · 2 ödüllü; alan yoksa gerçek ödeme.
+    return { productId, orderId: p.orderId, environment: p.purchaseType === 0 ? 'SANDBOX' : 'PRODUCTION', raw: p };
   }
 
   async verifySubscription(productId: string, token: string): Promise<VerifiedSubscription> {
@@ -125,6 +128,7 @@ export class GoogleVerifier implements StoreVerifier {
       expiresAt,
       autoRenewing: latest.autoRenewingPlan?.autoRenewEnabled === true,
       orderId: s.latestOrderId,
+      environment: s.testPurchase === undefined ? 'PRODUCTION' : 'SANDBOX',
       raw: s,
     };
   }

@@ -85,7 +85,6 @@ export const meta: CasePart = {
       scaleMax: 14800,
       thresholdBar: thresholdBar([
         ['Mahkûmiyet', 0, 'red'],
-        ['Taksir', 7000, 'amber'],
         ['Beraat', 12500, 'green'],
       ]),
       displayClampMin: 0,
@@ -111,8 +110,12 @@ export const meta: CasePart = {
     },
     {
       id: 'hizlandirici_coktu',
-      label: 'Numune zinciri koptu ve zemin izi çürüdü',
-      when: all(flag('contra_b2'), any(flag('contra_b1'), flag('contra_u2'), flag('contra_b4'), flag('contra_u3'))),
+      label: 'Numune zinciri koptu; zemin izi ve laboratuvar bulgusu çürüdü',
+      when: all(
+        flag('contra_b2'),
+        any(flag('contra_b1'), flag('contra_u2')),
+        any(flag('contra_b4'), flag('contra_u3')),
+      ),
     },
     {
       id: 'motif_coktu',

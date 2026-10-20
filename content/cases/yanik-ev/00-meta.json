@@ -90,7 +90,6 @@
       "scaleMax": 14800,
       "thresholdBar": [
         { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
-        { "label": "Taksir", "from": 7000, "tone": "amber" },
         { "label": "Beraat", "from": 12500, "tone": "green" }
       ],
       "displayClampMin": 0
@@ -120,13 +119,12 @@
     },
     {
       "id": "hizlandirici_coktu",
-      "label": "Numune zinciri koptu ve zemin izi çürüdü",
+      "label": "Numune zinciri koptu; zemin izi ve laboratuvar bulgusu çürüdü",
       "when": {
         "all": [
           { "flag": "contra_b2" },
-          {
-            "any": [{ "flag": "contra_b1" }, { "flag": "contra_u2" }, { "flag": "contra_b4" }, { "flag": "contra_u3" }]
-          }
+          { "any": [{ "flag": "contra_b1" }, { "flag": "contra_u2" }] },
+          { "any": [{ "flag": "contra_b4" }, { "flag": "contra_u3" }] }
         ]
       }
     },

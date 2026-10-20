@@ -18,10 +18,10 @@ import { card, n, s, th } from './shared.js';
 
 // 90-outcomes: altı sonuç. Öncelik sırası: ısmarlama rapor (ETİK: hızlandırıcı tespiti ayaktaysa mahkûmiyet, çöktüyse
 // taksir), 223/2-b, 223/2-e, taksire dönüşüm (TCK 171/1-a), mahkûmiyet. Hızlandırıcı tespiti çöktüyse sonuç hiçbir yolda
-// kasten mahkûmiyete düşmez (çöküş kesintisi ve düşük skor dahil): kastın tek dayanağı numune zinciriydi. Eşikler: beraat
-// 12.500, 223/2-b ayrıca 13.500; taksir bandı (7.000) eşik çubuğunda görsel bir banttır, sonucu numune zinciri belirler.
+// kasten mahkûmiyete düşmez (çöküş kesintisi ve düşük skor dahil): kastın tek dayanağı numune zinciriydi (zincir + zemin +
+// laboratuvar bulgusu). Eşikler: beraat 12.500, 223/2-b ayrıca 13.500. Taksiri skor değil numune zinciri belirlediği için
+// eşik çubuğunda taksir bandı yoktur.
 
-export const T_TAKSIR = 7000;
 export const T_BERAAT = 12500;
 export const T_BERAAT_B = 13500;
 

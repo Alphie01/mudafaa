@@ -101,6 +101,11 @@
    gerekçesinde savunma taksire cevap vermişse, mahkemenin bunu neden yeterli bulmadığı ayrıca yazılır: takvim cevabında
    "ısınan buata bağlı tesisatın enerjili bırakılması", dış etken cevabında "üçüncü kişinin kusuru illiyeti kesmez; netice uyarılan
    tesisatın aşırı gerilime dayanamamasıyla birlikte gerçekleşti" (ortak illiyet). İkisi de takdir/yorum kararıdır.
+   "Çöktü" sayılmak için üç ayağın birlikte kurulması aranır (`hizlandirici_coktu`): numunelerin elde ediliş zinciri (B2),
+   zemin izinin moloz kaldırıldıktan sonra ortaya çıkması (B1/U2) ve laboratuvar profilinin yangından geçmiş bir numuneye
+   uymaması (B4/U3). Yalnızca zincir kopukluğu ile bir fotoğraf, numunedeki benzin bulgusunu tek başına ortadan kaldırmaz;
+   mahkeme bu durumda bulguyu diğer delillerle birlikte tartabilir. Üçü birlikte kurulduğunda ise kastın dayanağı kalmaz.
+   Bu bir yorum tercihidir (CMK 217 vicdani delil serbestisi).
 10. **Tezel'in koridor konuşması.** Mahkemenin bilirkişisiyle müdafiin dosya hakkında salon dışında konuşması uygun değildir;
    H1_09 ve ikinci celse öncesinde Deniz konuşmayı keser, bilirkişiyi mahkemeye yazmaya yönlendirir. Bilirkişinin kendiliğinden
    sunduğu ek rapor (T_00T) ikinci celsede okunur.

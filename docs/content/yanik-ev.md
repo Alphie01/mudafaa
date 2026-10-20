@@ -78,13 +78,14 @@ ded_notr → `contra_u6_notr`); her yanıt yalnızca sunulan kaydı söyler. Ü�
 | 2 | ETIK_T | RECHARACTERIZED | Ismarlama rapor kabul edildi ∧ hızlandırıcı tespiti çöktü | TCK 171/1-a 5 ay, erteleme; 158/1-k’den 2-e beraat; mütalaa hükme esas alınmaz; suç duyurusu, baroya bildirim; etik kartı |
 | 3 | BERAAT_B | ACQUITTAL (223/2-b) | Hızlandırıcı çöktü + eksper kırıldı + `elektrik_ispat` (elektrik bilirkişisi raporu ve nötr kopması) + taksire cevap + gerçek savunması + ikna ≥ 8 + final eşiği | Beraat, tahliye, eksper hakkında suç duyurusu |
 | 4 | BERAAT_E | ACQUITTAL (223/2-e) | Hızlandırıcı çöktü + motif ipliklerinden ≥ 2 + taksire cevap + beraat savunması + final eşiği | Beraat |
-| 5 | TAKSIR | RECHARACTERIZED | Hızlandırıcı çöktü (skor ve çöküşten bağımsız) | TCK 171/1-a: 6 ay → TCK 62 ile 5 ay; zarar giderilmediğinden HAGB yok, TCK 51 erteleme; 158/1-k’den beraat |
+| 5 | TAKSIR | RECHARACTERIZED | Hızlandırıcı çöktü: zincir + zemin + laboratuvar (skor ve çöküşten bağımsız) | TCK 171/1-a: 6 ay → TCK 62 ile 5 ay; zarar giderilmediğinden HAGB yok, TCK 51 erteleme; 158/1-k’den beraat |
 | 6 | MAHKUMIYET | CONVICTION | Varsayılan: hızlandırıcı tespiti ayakta (çöküş dahil) | 170/1-a 1 yıl 6 ay + 158/1-k, 35/2: 2 yıl ve 500 gün; TCK 63 mahsup |
 
-Eşikler (eşik çubuğuyla aynı): Mahkûmiyet 0 · Taksir 7.000 · Beraat 12.500; 223/2-b ayrıca 13.500 ve hâkimin kanaati
+Eşikler (eşik çubuğuyla aynı): Mahkûmiyet 0 · Beraat 12.500; 223/2-b ayrıca 13.500 ve hâkimin kanaati
 (`pers`) ≥ 8. `scaleMax` 14.800. Hukuki tavan kuralı (inceleme, 2026-10-20): kastın tek dayanağı numune zinciridir; zincir
 çöktüyse (`hizlandirici_coktu`) kötü savunma, düşük skor ya da çöküş kesintisi sonucu kasten mahkûmiyete indiremez, en kötü
-sonuç taksirdir. Bu yüzden taksir bandı (7.000) eşik çubuğunda yalnızca görsel bir banttır. Çöküş (`cred` 0) zincir kurulmadan
+sonuç taksirdir. Bu yüzden eşik çubuğunda taksir bandı yoktur (eski 7.000 bandı hiçbir sonucun eşiği değildi;
+doğrulayıcının THRESHOLD_MISMATCH uyarısı da böylece kalktı). Çöküş (`cred` 0) zincir kurulmadan
 olursa MAHKUMIYET'e, kurulduktan sonra olursa TAKSIR'e gider; hiçbir gerekçe "müdafiin sunumlarını" mahkûmiyet dayanağı yapmaz.
 XP: 223/2-b 1,2 · 223/2-e 1,0 · taksir 0,85 · mahkûmiyet 0,6 · etik 0 (etik ihlalinde yarı).
 
@@ -94,7 +95,9 @@ cümleleri ilgili çelişkilere; BERAAT_E'de banka, artış, eşya, benzin cüml
 kaynaklı olması kuvvetle muhtemel" cümlesi elektrik kaydına (yoksa nötr bir cümle). T06_B ve T06_E konuşmaları da kayda göre
 üç değişkelidir.
 
-Ek koşul yüklemleri (`meta.predicates`): `hizlandirici_coktu` = contra_b2 ∧ (contra_b1 ∨ contra_u2 ∨ contra_b4 ∨ contra_u3);
+Ek koşul yüklemleri (`meta.predicates`): `hizlandirici_coktu` = contra_b2 ∧ (contra_b1 ∨ contra_u2) ∧ (contra_b4 ∨ contra_u3) — zincir, zemin ve laboratuvar
+bulgusu birlikte (eski tanım zincir + herhangi biriyle yetiniyordu; taksir 61 aksiyonda, ara evresine hiç girmeden
+alınabiliyordu);
 `motif_coktu` = en az ikisi: contra_s3, contra_s6, motif_banka, motif_artis; `elektrik_ispat` = (ev_ark ∨ ded_elektrik) ∧ ded_notr
 (eski tanım `contra_u6`'yı da kabul ediyordu: ark raporu hiç istenmeden U6'ya nötr kopması sunularak 2-b alınabiliyor, hükümde
 hiç alınmamış bir rapor anılıyordu; `N_B_ARKSIZ` negatif testi bunu kapatır).
@@ -117,30 +120,46 @@ her etkinlik doğrudan döner (kaçış uzaklığı sınırı, Dava #07 raporu �
 | G_ETIK | ETIK_T | Tam soruşturma + ısmarlama rapor; zincir kurulmuş olduğundan Halil taksirden hüküm giyer |
 | W | TAKSIR (çöküş) | Birinci celsede zincir kurulur, ikinci celsede yanlış delil sunumlarıyla güvenilirlik 0: tavan kuralı gereği taksir |
 
-## 8. Ölçümler (2026-10-20)
+## 8. Ölçümler (2026-10-21)
 
 `npm run case:duration -- yanik-ev`:
 
 ```
-  TIPIK          98.1 dk   13.4 bin sözcük   238 aksiyon  BERAAT_E (14855)
-  G_B            99.5 dk   13.5 bin sözcük   244 aksiyon  BERAAT_B (15565)
-  G_T            88.6 dk   12.0 bin sözcük   217 aksiyon  TAKSIR (11990)
-  G_M            78.0 dk   10.7 bin sözcük   188 aksiyon  MAHKUMIYET (6405)
-  G_ETIK         95.9 dk   13.0 bin sözcük   235 aksiyon  ETIK (14215)
-  W              85.3 dk   11.5 bin sözcük   213 aksiyon  MAHKUMIYET/çöküş (10575)
-  ==> TİPİK YOL (TIPIK): ✓ süre hedefte
+  TIPIK         107.3 dk   15010 sözcük   239 aksiyon  BERAAT_E (14865)
+  G_B           107.8 dk   14982 sözcük   246 aksiyon  BERAAT_B (15825)
+  N_B_ARKSIZ    105.0 dk   14592 sözcük   239 aksiyon  TAKSIR (14605)
+  G_T            94.8 dk   13151 sözcük   217 aksiyon  TAKSIR (11940)
+  G_M            84.1 dk   11759 sözcük   188 aksiyon  MAHKUMIYET (6445)
+  G_ETIK_M       77.1 dk   10811 sözcük   170 aksiyon  ETIK (5560)
+  G_ETIK        105.2 dk   14684 sözcük   236 aksiyon  ETIK_T (14225)
+  W              91.6 dk   12629 sözcük   214 aksiyon  TAKSIR (10635)
+  ==> TİPİK YOL (TIPIK): 107.3 dk  ✓ süre hedefte
+  ==> SÖZCÜK BÜTÇESİ: ✓ 15010 sözcük: hedefte (15–25 bin)
 ```
 
-`node tools/content/word-count.mjs content/cases/yanik-ev`: paket 1.164+ satır, ~14,7 bin satır sözcüğü; ekran metinleriyle toplam
-~20 bin. En uzun satır 209 karakter.
+`node tools/content/word-count.mjs content/cases/yanik-ev`: TIPIK'te görülen satırlar 12.012 sözcük; paket 1.301 satır,
+17.073 satır sözcüğü; ekran metinleriyle toplam 23.095. En uzun satır 216 karakter.
 
-`npm run case:validate -- yanik-ev --max-ms 3000000`: **PASSED — 0 hata, 1 uyarı (SIMULATION_INCOMPLETE)**; 56.177 durum, 400
-yürüyüş; bütün sonuçlara ulaşıldı; kapsam node 104/104, seçenek 213/213, kural 79/79, delil 66/66; golden path 6/6; softlock,
-sızıntı yok. Not: makine yükü (yük ortalaması ~21, 8 çekirdek; paralel ajanlar) altında süre 1.218 sn ölçüldü; varsayılan 600 sn
-sert sınırı bu yük altında aşılıyor (SIMULATION_ABORTED), sayı bütçeleri aynı olduğundan sonuç deterministiktir.
+`npm run case:validate -- yanik-ev --max-ms 3000000`: **PASSED — 0 hata**, 1 uyarı (SIMULATION_INCOMPLETE); 56.344 durum,
+400 yürüyüş; altı sonucun hepsine ulaşıldı; kapsam node 110/110, seçenek 213/213, kural 80/80, delil 66/66; golden path 8/8;
+softlock, sızıntı yok. Süre ~60 sn (boşta makinede varsayılan 600 sn sınırının çok altında).
 
-Erken çözüm denetimi (golden path'ten aksiyon silerek yerel en kısa yol, `shortest.mjs`): TIPIK 238 → 174 aksiyon (BERAAT_E,
-%73), G_B 244 → 179 (%75). Beraat; numune zinciri, temizlenmiş zemin, iki iplik ve taksire cevap olmadan kurulamıyor.
+Seçenek etiketi denetimi (derlenmiş pakette GOOD ile GOOD olmayanı karışık 13 notlu seçenek kümesi): en uzun etiketin doğru
+seçenek olduğu küme 0/13. Yanlış seçenekler aynı uzunlukta ve aynı hukuki dilde (yanlış dayanak, yanlış aralık, yanlış talep).
+
+Erken çözüm denetimi (golden path'ten aksiyon silerek, reddedilen aksiyonları atlayan yeniden oynatmayla yerel en kısa yol):
+
+| Hedef | Tohum | En kısa | Oran |
+|---|---|---|---|
+| BERAAT_E / BERAAT_B | TIPIK, G_B | 175 aksiyon (final 12.505) | TIPIK'in %73'ü |
+| BERAAT_B | G_B | 195 aksiyon (final 13.505) | G_B'nin %79'u |
+| TAKSIR | G_T, W, N_B_ARKSIZ | 75 aksiyon | G_T'nin %35'i |
+| MAHKUMIYET | G_M | 36 aksiyon | varsayılan sonuç |
+
+Beraat; numune zinciri, temizlenmiş zemin, laboratuvar bulgusu, iki iplik ve taksire cevap olmadan kurulamıyor; 2-b ayrıca
+ark raporu ve nötr kaydını istiyor. Taksir kısa yolu bilinçli bir ödünleşimdir: zincir, zemin ve laboratuvar çelişkisi birinci
+celsede kurulduğunda kasten mahkûmiyet hukuken mümkün değildir (tavan kuralı), bu yüzden taksir skordan bağımsızdır. Yüklem
+sıkılaştırması bu yolu 61'den 75 aksiyona çıkardı; daha fazlası ancak hukuki tavanı bozarak yapılabilirdi.
 
 Tahtalar: birinci evrede iki tahta (yangın: 14 kart, 6 tarif + 2 çeldirici; iplikler: 13 kart, 6 tarif + 2 çeldirici), arada
 bir tahta (13 kart, 4 tarif); tek havuzlu 28 kartlık tahta simülasyonu patlattığı için bölündü.

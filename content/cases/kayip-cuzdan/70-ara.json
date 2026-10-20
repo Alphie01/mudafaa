@@ -1,0 +1,2574 @@
+{
+  "nodes": [
+    {
+      "id": "ARA_GIRIS_0",
+      "type": "DECISION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "lines": [
+        {
+          "when": { "flag": "pisman_soruldu" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "O gece büroda tutanağı yeniden okudum: “Sanık pişmanlığını beyan etti.” Altında Arda’nın kendi cümlesi. Bir “pişman mısın” sorusu, bir ömür taşınan bir satıra dönüşebilirdi.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "arda_niyet_mahkemede" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "O gece büroda tutanağı yeniden okudum. Arda’nın cümleleri ilk kez kâğıttaydı: yanındaki yolcu, şoför, belediye, mesaj. Yedi aydır kimsenin yazmadığı cümleler.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "gulten_polis_dedi" }, { "flag": "ek_simdi" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "O gece büroda tutanağı yeniden okudum. Bazı cümleler erken söylenmişti; bazıları başkasının ağzından. Üç hafta, onları yerine oturtmak için var.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_GIRIS_1" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_GIRIS_1",
+      "type": "DECISION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "onFirstEnter": [
+        { "type": "DISCOVER", "evidence": "ev_tam_kayit" },
+        { "type": "DISCOVER", "evidence": "ev_cagri_kaydi" },
+        { "type": "VAR", "var": "ara_day", "op": "set", "value": 1 },
+        { "type": "VAR", "var": "ara_ap", "op": "set", "value": 3 }
+      ],
+      "lines": [
+        {
+          "when": { "all": [{ "hasEvidence": "ev_tam_kayit" }, { "hasEvidence": "ev_cagri_kaydi" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "3 KASIM · PAZARTESİ 08.10 — ZEHRA’NIN ARABASI",
+              "bg": "arac",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Zehra beni büronun önünden aldı. Gece nöbetinden çıkmıştı; gözleri kıpkırmızı, arabası hastane dezenfektanı ve soğuk kahve kokuyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Silecekler gıcırdıyordu. Radyoda trafik haberleri. Arda arka koltukta, telefonuna bakıyordu."
+            },
+            {
+              "speaker": "arda",
+              "text": "Staj okulundan e-posta geldi. “Yargılama sonuçlanıncaya kadar uygulama faaliyetlerinize ara verilmesi uygun görülmüştür.” Uygun görülmüş."
+            },
+            {
+              "speaker": "zehra",
+              "expression": "kizgin",
+              "text": "Uygun görülmüş! Kim görmüş? Çocuklar seni soruyormuş. Öğretmen arkadaşın söyledi."
+            },
+            {
+              "speaker": "arda",
+              "text": "Bir kız resim göndermiş, öğretmen arkadaş iletti. Bir otobüs çizmiş, içinde bir adam. Altında “Arda Öğretmenim çabuk gel” yazıyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arda telefonu kapattı ve cama yasladı. Cam buğuluydu. Parmağıyla bir şey çizmedi."
+            },
+            {
+              "speaker": "player",
+              "text": "İki hafta önce bir dosyam vardı. Şimdi bir arabanın içinde üç kişiyiz ve dosya aramızda oturuyor. Yağmur bitmiyor.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonum titredi. Kâtip Melek Hanım: “Avukat hanım, ara kararların cevabı geldi. Kent Ulaşım bir harici disk göndermiş, belediye de bir döküm.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir disk ve bir döküm. Dört kamera, bir saat. Ve bir çağrı merkezinin, kimsenin bakmadığı hafızası.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "ev_tam_kayit" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "3 KASIM · PAZARTESİ 08.10 — ZEHRA’NIN ARABASI",
+              "bg": "arac",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Zehra beni büronun önünden aldı. Gece nöbetinden çıkmıştı; gözleri kıpkırmızı, arabası hastane dezenfektanı ve soğuk kahve kokuyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Silecekler gıcırdıyordu. Radyoda trafik haberleri. Arda arka koltukta, telefonuna bakıyordu."
+            },
+            {
+              "speaker": "arda",
+              "text": "Staj okulundan e-posta geldi. “Yargılama sonuçlanıncaya kadar uygulama faaliyetlerinize ara verilmesi uygun görülmüştür.” Uygun görülmüş."
+            },
+            {
+              "speaker": "zehra",
+              "expression": "kizgin",
+              "text": "Uygun görülmüş! Kim görmüş? Çocuklar seni soruyormuş. Öğretmen arkadaşın söyledi."
+            },
+            {
+              "speaker": "arda",
+              "text": "Bir kız resim göndermiş, öğretmen arkadaş iletti. Bir otobüs çizmiş, içinde bir adam. Altında “Arda Öğretmenim çabuk gel” yazıyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arda telefonu kapattı ve cama yasladı. Cam buğuluydu. Parmağıyla bir şey çizmedi."
+            },
+            {
+              "speaker": "player",
+              "text": "İki hafta önce bir dosyam vardı. Şimdi bir arabanın içinde üç kişiyiz ve dosya aramızda oturuyor. Yağmur bitmiyor.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonum titredi. Kâtip Melek Hanım: “Avukat hanım, Kent Ulaşım ara kararın cevabını göndermiş. Bir harici disk ve kare dökümü.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Dört kamera, bir saat. Eksik dakikalar bir diskin içinde bekliyordu.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "ev_cagri_kaydi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "3 KASIM · PAZARTESİ 08.10 — ZEHRA’NIN ARABASI",
+              "bg": "arac",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Zehra beni büronun önünden aldı. Gece nöbetinden çıkmıştı; gözleri kıpkırmızı, arabası hastane dezenfektanı ve soğuk kahve kokuyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Silecekler gıcırdıyordu. Radyoda trafik haberleri. Arda arka koltukta, telefonuna bakıyordu."
+            },
+            {
+              "speaker": "arda",
+              "text": "Staj okulundan e-posta geldi. “Yargılama sonuçlanıncaya kadar uygulama faaliyetlerinize ara verilmesi uygun görülmüştür.” Uygun görülmüş."
+            },
+            {
+              "speaker": "zehra",
+              "expression": "kizgin",
+              "text": "Uygun görülmüş! Kim görmüş? Çocuklar seni soruyormuş. Öğretmen arkadaşın söyledi."
+            },
+            {
+              "speaker": "arda",
+              "text": "Bir kız resim göndermiş, öğretmen arkadaş iletti. Bir otobüs çizmiş, içinde bir adam. Altında “Arda Öğretmenim çabuk gel” yazıyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arda telefonu kapattı ve cama yasladı. Cam buğuluydu. Parmağıyla bir şey çizmedi."
+            },
+            {
+              "speaker": "player",
+              "text": "İki hafta önce bir dosyam vardı. Şimdi bir arabanın içinde üç kişiyiz ve dosya aramızda oturuyor. Yağmur bitmiyor.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonum titredi. Kâtip Melek Hanım: “Avukat hanım, belediyeden çağrı kaydı geldi. Kayıt talebiniz olmadığı için Kent Ulaşım’dan bir şey yok.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Dört kamera bir yerde duruyordu ve ben istememiştim. Bir çağrı kaydım vardı. Bir çağrı, bir saatlik kaydın yerini tutmazdı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "3 KASIM · PAZARTESİ 08.10 — ZEHRA’NIN ARABASI",
+              "bg": "arac",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Zehra beni büronun önünden aldı. Gece nöbetinden çıkmıştı; gözleri kıpkırmızı, arabası hastane dezenfektanı ve soğuk kahve kokuyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Silecekler gıcırdıyordu. Radyoda trafik haberleri. Arda arka koltukta, telefonuna bakıyordu."
+            },
+            {
+              "speaker": "arda",
+              "text": "Staj okulundan e-posta geldi. “Yargılama sonuçlanıncaya kadar uygulama faaliyetlerinize ara verilmesi uygun görülmüştür.” Uygun görülmüş."
+            },
+            {
+              "speaker": "zehra",
+              "expression": "kizgin",
+              "text": "Uygun görülmüş! Kim görmüş? Çocuklar seni soruyormuş. Öğretmen arkadaşın söyledi."
+            },
+            {
+              "speaker": "arda",
+              "text": "Bir kız resim göndermiş, öğretmen arkadaş iletti. Bir otobüs çizmiş, içinde bir adam. Altında “Arda Öğretmenim çabuk gel” yazıyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arda telefonu kapattı ve cama yasladı. Cam buğuluydu. Parmağıyla bir şey çizmedi."
+            },
+            {
+              "speaker": "player",
+              "text": "İki hafta önce bir dosyam vardı. Şimdi bir arabanın içinde üç kişiyiz ve dosya aramızda oturuyor. Yağmur bitmiyor.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonum sessizdi. Ara karardan dosyaya yeni bir kâğıt gelmeyecekti. İstemediğim şey gelmezdi."
+            },
+            {
+              "speaker": "player",
+              "text": "Elimde ne varsa o. İki buçuk dakika, bir tanık, bir not. Üç hafta da bu kâğıtları yeniden okumakla geçmeyecekti; insanlarla geçecekti.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_GIRIS" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_GIRIS",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Üç hafta",
+      "background": "arac",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "zehra",
+              "text": "Avukat hanım, ben bir şey araştırdım. HAGB diye bir şey varmış. Hükmün açıklanmasının geri… şeyi. Sicile işlemiyormuş."
+            },
+            { "speaker": "zehra", "text": "Kabul etse, parayı ödese, bitse? Ben öderim. İki maaş. Bitsin artık." },
+            { "speaker": "arda", "expression": "uzgun", "text": "Abla…" },
+            {
+              "speaker": "player",
+              "text": "Zehra yorgundu. Yorgun insanlar en kestirme yolu sever. Kestirme yollar bazen bir uçurumun kenarından geçer.",
+              "style": "thought"
+            },
+            { "speaker": "player", "text": "Bunu Arda’yla ayrıca konuşacağız. Şimdi değil." },
+            {
+              "speaker": "narrator",
+              "text": "Arabadan indim. Adliyenin önünde yağmur, ayakkabımın içine kadar işledi."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "ARAGIRIS_DEVAM",
+          "kind": "CONTINUE",
+          "label": "Ara evresine başla",
+          "role": "PRIMARY",
+          "next": "ARA_HUB"
+        }
+      ]
+    },
+    {
+      "id": "ARA_HUB",
+      "type": "INVESTIGATION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Ara",
+      "background": "buro",
+      "hud": ["ara_day", "ara_ap"],
+      "lines": [
+        {
+          "when": { "cmp": [{ "var": "ara_day" }, "==", 1] },
+          "lines": [
+            { "speaker": "narrator", "text": "ARA · GÜN 1/3 · İKİNCİ CELSEYE 14 GÜN", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: gelen kayıtları oku. Kim, ne zaman, nerede? Dürüst kalanları dürüst bırak; korkanların korkusunu anla."
+            }
+          ]
+        },
+        {
+          "when": { "cmp": [{ "var": "ara_day" }, "==", 2] },
+          "lines": [
+            { "speaker": "narrator", "text": "ARA · GÜN 2/3 · İKİNCİ CELSEYE 10 GÜN", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: tanıklar. Kimin neyi bildiğini öğren; kimseye ne diyeceğini söyleme. Bulduğun gölgeler kimin masasına gitmeli?"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARA · GÜN 3/3 · İKİNCİ CELSEYE 7 GÜN", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: ek savunma. Arda ne söyleyecek? Sen neyi ispat edeceksin? Bulduğun her şey kimin elinde olmalı?"
+            }
+          ]
+        }
+      ],
+      "tabs": [
+        {
+          "id": "t2_kayit",
+          "label": "KAYITLAR",
+          "kind": "ARCHIVE",
+          "choices": ["A2_KAYIT", "A2_CAGRI", "A2_CIKARIM", "A2_LEYLA"]
+        },
+        {
+          "id": "t2_kisi",
+          "label": "KİŞİLER",
+          "kind": "PEOPLE",
+          "choices": ["A2_GULTEN", "A2_CEMIL", "A2_ARDA", "A2_VOLKAN", "A2_OZAN", "A2_HAYRI", "A2_KARAKOL"]
+        },
+        { "id": "t2_adim", "label": "ADIMLAR", "kind": "SCENE", "choices": ["A2_SUC", "A2_YANLIS"] }
+      ],
+      "choices": [
+        {
+          "id": "A2_KAYIT",
+          "kind": "NAVIGATE",
+          "label": "Tam sefer kaydını incele",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_KAYIT",
+          "maxUses": 1,
+          "description": "Dört kanal · kare dökümü · 8 deneme",
+          "visibleWhen": { "hasEvidence": "ev_tam_kayit" }
+        },
+        {
+          "id": "A2_CAGRI",
+          "kind": "NAVIGATE",
+          "label": "153 çağrı kaydını oku",
+          "next": "ARA_CAGRI",
+          "description": "0 EP · belediye dökümü · 3 deneme",
+          "maxUses": 1,
+          "visibleWhen": { "hasEvidence": "ev_cagri_kaydi" }
+        },
+        {
+          "id": "A2_CIKARIM",
+          "kind": "NAVIGATE",
+          "label": "Çıkarım tahtası",
+          "next": "ARA_CIKARIM",
+          "description": "0 EP · yeni kartlar",
+          "enabledWhen": { "ref": "kart2" },
+          "lockedReason": "En az 2 ipucu gerekli."
+        },
+        {
+          "id": "A2_LEYLA",
+          "kind": "NAVIGATE",
+          "label": "Leyla’ya danış",
+          "next": "ARA_LEYLA",
+          "description": "0 EP · günde bir kez",
+          "visibleWhen": { "cmp": [{ "var": "leyla_ara" }, "<", { "var": "ara_day" }] },
+          "effects": [{ "type": "VAR", "var": "leyla_ara", "op": "set", "value": { "var": "ara_day" } }]
+        },
+        {
+          "id": "A2_GULTEN",
+          "kind": "NAVIGATE",
+          "label": "Gülten Hanım’ın torununun daveti",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_GULTEN",
+          "maxUses": 1,
+          "description": "Beşevler · müştekinin evi",
+          "visibleWhen": { "flag": "arda_mesaj_mahkemede" }
+        },
+        {
+          "id": "A2_CEMIL",
+          "kind": "NAVIGATE",
+          "label": "Altıparmak’taki büfeye yeniden git",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_CEMIL",
+          "maxUses": 1,
+          "description": "Cemil Usta · fiş kutusu",
+          "visibleWhen": { "any": [{ "visited": "INV_BUFE" }, { "hasEvidence": "clue_harcama_saat" }] }
+        },
+        {
+          "id": "A2_ARDA",
+          "kind": "NAVIGATE",
+          "label": "Arda ve Zehra’yla ek savunmayı konuş",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_ARDA",
+          "maxUses": 1,
+          "description": "Zehra’nın evi · akşam"
+        },
+        {
+          "id": "A2_VOLKAN",
+          "kind": "NAVIGATE",
+          "label": "Teknisyen Volkan Sezer’le konuş",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_VOLKAN",
+          "maxUses": 1,
+          "description": "Kent Ulaşım · teknik oda",
+          "visibleWhen": { "flag": "volkan_cagrildi" }
+        },
+        {
+          "id": "A2_OZAN",
+          "kind": "NAVIGATE",
+          "label": "Ozan’la konuş",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_OZAN",
+          "maxUses": 1,
+          "description": "Tanık · Görükle",
+          "visibleWhen": { "flag": "ozan_istendi" }
+        },
+        {
+          "id": "A2_KARAKOL",
+          "kind": "NAVIGATE",
+          "label": "Görükle Polis Merkezine uğra",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_KARAKOL",
+          "maxUses": 1,
+          "description": "Aramayı yapan memur"
+        },
+        {
+          "id": "A2_HAYRI",
+          "kind": "NAVIGATE",
+          "label": "Bekleme salonunda Hayri Bey",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_HAYRI",
+          "maxUses": 1,
+          "description": "Habersiz gelmiş",
+          "visibleWhen": { "any": [{ "flag": "contra_h1" }, { "flag": "contra_h4" }] }
+        },
+        {
+          "id": "A2_SUC",
+          "kind": "NAVIGATE",
+          "label": "Cumhuriyet Başsavcılığına suç duyurusu",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_SUC",
+          "description": "CMK 158 · somut delille",
+          "visibleWhen": { "not": { "flag": "suc_verildi" } }
+        },
+        {
+          "id": "A2_YANLIS",
+          "kind": "NAVIGATE",
+          "label": "Altıparmak durağında aynı saatte bekle",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_YANLIS",
+          "maxUses": 1,
+          "description": "Belki yine o hattadırlar",
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_kare_inis" }, { "hasEvidence": "ded_birakan" }] }
+        },
+        {
+          "id": "A2_DURUSMA",
+          "kind": "NAVIGATE",
+          "label": "DURUŞMAYA GİT · 2. CELSE",
+          "role": "PRIMARY",
+          "confirm": "Duruşmaya gidersen ara evresi biter. Emin misin?",
+          "next": "ARA_SON_1"
+        }
+      ]
+    },
+    {
+      "id": "ARA_DAY_END",
+      "type": "DECISION",
+      "onEnter": [
+        { "type": "VAR", "var": "ara_day", "op": "inc", "value": 1 },
+        { "type": "VAR", "var": "ara_ap", "op": "set", "value": 3 }
+      ],
+      "routes": [{ "when": { "cmp": [{ "var": "ara_day" }, "==", 2] }, "to": "ARA_AKSAM" }, { "to": "ARA_AKSAM2" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_AKSAM",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Leyla’nın çekmecesi",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "4 KASIM · SALI 21.30 — ARSLAN HUKUK",
+              "bg": "buro_gece",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla masasının alt çekmecesini açmış, içine bakıyordu. Beni görünce kapatmadı ama elini çekmecenin kenarında tuttu."
+            },
+            { "speaker": "player", "text": "Ne var orada?" },
+            {
+              "speaker": "leyla",
+              "text": "Kayıp eşya. Otuz yılın. Bir eldiven, bir tespih, bir çocuk çorabı, bir çakmak. Müvekkillerin burada unuttukları."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bazıları beraat etti, almaya gelmediler. Bazıları gelemedi. Ben de atamadım."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın bir çekmecesi varmış. Otuz yıldır sahibini bekleyen şeylerle dolu. Bunu bana neden şimdi gösterdiğini sormadım.",
+              "style": "thought"
+            },
+            { "speaker": "leyla", "text": "Sen bu dosyada neyi arıyorsun, Deniz? Kazanmayı mı, eksik dakikayı mı?" }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "AA_KAZAN",
+          "kind": "OPTION",
+          "label": "“İkisini de.”",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "İkisini de." },
+                {
+                  "speaker": "leyla",
+                  "text": "Dürüst cevap. Bir gün ikisinin aynı yere gitmediği bir dosyan olacak. O gün ne yapacağını şimdiden düşün."
+                }
+              ]
+            }
+          ],
+          "next": "ARA_HUB",
+          "effects": [{ "type": "VAR", "var": "ara_aksam_ikisi", "op": "set", "value": true }]
+        },
+        {
+          "id": "AA_DAKIKA",
+          "kind": "OPTION",
+          "label": "“Eksik dakikayı. Kazanmak onun arkasından gelirse gelir.”",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Eksik dakikayı. Kazanmak onun arkasından gelirse gelir." },
+                {
+                  "speaker": "leyla",
+                  "expression": "mutlu",
+                  "text": "Bunu duruşmada söyleme. Hâkimler bu cümleyi sever ama savcılar sevmez."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Ben bu çekmeceyi otuz yıldır kilitlemiyorum, Deniz. Biri bir gün gelip “benim” der diye. Eksik dakika da böyledir: kapıyı kilitlemezsen bir gün biri getirir."
+                },
+                { "speaker": "narrator", "text": "Çekmeceyi kapattı. Anahtarı çevirmedi." }
+              ]
+            }
+          ],
+          "next": "ARA_HUB",
+          "effects": [{ "type": "VAR", "var": "ara_aksam_dakika", "op": "set", "value": true }]
+        }
+      ]
+    },
+    {
+      "id": "ARA_KAYIT",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Tam sefer kaydı",
+      "background": "buro_gece",
+      "hud": ["kayit_left"],
+      "lines": [
+        {
+          "when": { "flag": "fact_parka_sezgi" },
+          "lines": [
+            { "speaker": "narrator", "text": "GECE 23.40 — ARSLAN HUKUK", "bg": "buro_gece", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Harici disk dizüstünde vızıldıyordu. Ekran dörde bölündü: ön, orta, orta kapı, arka. Dört gri pencere, aynı akşam, aynı yağmur."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kayıtla birlikte teknik bir kare dökümü gelmişti. Saat saat, kamera kamera. Her satır yedi ay önceki bir saniye."
+            },
+            {
+              "speaker": "player",
+              "text": "Arda “birinin ıslak parkası koluma sürtünüp duruyordu” demişti. Saçma bir ayrıntı, demişti. Saçma ayrıntılar en zor uydurulan şeylerdir.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "İzlemeye 18.10’dan başladım. Kalabalık doldu, boşaldı. Arda’yı Çarşı’da gördüm; kulaklığı, telefonu. Sonra kadını gördüm, bez çantasıyla.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Sonra başka şeyler gördüm. Satırı seç, aleti seç. Her doğru bakış bir kare açar; her yanlış bakış bir hak götürür.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "GECE 23.40 — ARSLAN HUKUK", "bg": "buro_gece", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Harici disk dizüstünde vızıldıyordu. Ekran dörde bölündü: ön, orta, orta kapı, arka. Dört gri pencere, aynı akşam, aynı yağmur."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kayıtla birlikte teknik bir kare dökümü gelmişti. Saat saat, kamera kamera. Her satır yedi ay önceki bir saniye."
+            },
+            {
+              "speaker": "player",
+              "text": "İzlemeye 18.10’dan başladım. Kalabalık doldu, boşaldı. Arda’yı Çarşı’da gördüm; kulaklığı, telefonu. Sonra kadını gördüm, bez çantasıyla.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Sonra başka şeyler gördüm. Satırı seç, aleti seç. Her doğru bakış bir kare açar; her yanlış bakış bir hak götürür.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "KENT ULAŞIM · SEFER_0306_1810-1910 · KARE DÖKÜMÜ", "right": "4 KANAL · 60 DK" },
+      "columns": [
+        { "label": "SAAT · KAMERA", "flex": 1 },
+        { "label": "GÖRÜNTÜ", "flex": 2.4 }
+      ],
+      "rows": [
+        { "id": "f1", "cells": ["18.12 · KAM-1", "Heykel: yaşlı kadın biner; ardından yolcular"] },
+        {
+          "id": "f2",
+          "cells": ["18.31 · KAM-3", "Orta kapı: kalabalık, içeride açık bir şemsiye"],
+          "lens": {
+            "mag": {
+              "cells": [
+                "18.31 · KAM-3",
+                "Şemsiyeyi tutan: yeşil bereli bir kadın; şemsiye yaşlı kadının çantasıyla kamera arasında"
+              ],
+              "tone": "special"
+            }
+          }
+        },
+        {
+          "id": "f3",
+          "cells": ["18.33 · KAM-3", "Yaşlı kadının arkasında gri kapüşonlu biri"],
+          "lens": {
+            "mag": {
+              "cells": ["18.33 · KAM-3", "Koyu gri parka, kapüşonu başında; eli bez çantanın içinde"],
+              "tone": "special"
+            },
+            "cmp": {
+              "cells": [
+                "18.33 · KAM-3",
+                "Arda iki metre solda; açık gri sweatshirt, kapüşonu sırtında, telefona bakıyor"
+              ],
+              "tone": "special"
+            }
+          }
+        },
+        {
+          "id": "f4",
+          "cells": ["18.36 · KAM-4", "Arka kapıya ilerleyen yolcular"],
+          "lens": {
+            "mag": {
+              "cells": ["18.36 · KAM-4", "Parkalı adam eğiliyor; 14 numaranın altına koyu renk bir cisim bırakıyor"],
+              "tone": "special"
+            }
+          }
+        },
+        {
+          "id": "f5",
+          "cells": ["18.37 · KAM-1", "Altıparmak: ön kapıdan inenler"],
+          "lens": {
+            "mag": {
+              "cells": ["18.37 · KAM-1", "Parkalı adam ve yeşil bereli kadın; arka arkaya, konuşmadan"],
+              "tone": "special"
+            }
+          }
+        },
+        {
+          "id": "f6",
+          "cells": ["18.43 · KAM-4", "14 numarada oturan genç, yanındaki yolcuya dönük"],
+          "lens": {
+            "play": {
+              "cells": ["18.43 · KAM-4", "Cüzdanı açık tutup yanındakine gösteriyor; yolcu başını iki yana sallıyor"],
+              "tone": "special"
+            }
+          }
+        },
+        {
+          "id": "f7",
+          "cells": ["19.05 · KAM-1", "Görükle: son durak, inen yolcular"],
+          "lens": {
+            "play": {
+              "cells": [
+                "19.05 · KAM-1",
+                "Genç şoför kabinine bir cüzdan uzatıyor; şoför elini sallayıp kapıyı gösteriyor (11 sn)"
+              ],
+              "tone": "special"
+            }
+          }
+        }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Yakınlaştır", "icon": "magnifier" },
+        { "id": "play", "label": "Kareleri oynat", "icon": "camera" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "kayit_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_R_MAG2",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "f2" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Şemsiyeyi içeride açık tutan yeşil bereli bir kadın. Şemsiye, yaşlı kadının çantasıyla kamera arasında bir perde.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kare_bere" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_R_MAG3",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "f3" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Koyu gri bir parka, kapüşonu başında. Eli bez çantanın içinde. Yüzü kameraya hiç dönmüyor.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kare_parka" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_R_CMP3",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "f3" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Aynı kare: parkalı adam kadının arkasında, kapüşonu başında. Arda iki metre solda, kapüşonu sırtında, telefonuna bakıyor.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kare_parka" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_R_MAG4",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "f4" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "18.36: parkalı adam arka kapıya yürürken eğiliyor ve 14 numaranın altına koyu renk bir cisim bırakıyor.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kare_birakma" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_R_MAG5",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "f5" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "18.37, Altıparmak: parkalı adam ve yeşil bereli kadın ön kapıdan arka arkaya iniyor. Otobüste hiç oturmamışlar.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kare_inis" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_R_PLAY6",
+          "kind": "EXAMINE",
+          "match": { "tool": "play", "target": "f6" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "18.43: CD’ye yazılamayan dakika. Arda cüzdanı açık tutup yanındakine gösteriyor. Yolcu başını sallıyor.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kare_soru" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_R_PLAY7",
+          "kind": "EXAMINE",
+          "match": { "tool": "play", "target": "f7" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "19.05, Görükle: Arda şoför kabinine cüzdanı uzatıyor. Şoför elini sallıyor, kapıyı gösteriyor. On bir saniye.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kare_sofor" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "FB_KAYIT",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu karede bu aletle yeni bir şey görünmüyor.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "KAYIT_BITIR", "kind": "CONTINUE", "label": "Diski çıkar", "role": "BACK", "next": "ARA_KAYIT_SON" }
+      ]
+    },
+    {
+      "id": "ARA_KAYIT_SON",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Gece yarısı",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "when": { "all": [{ "hasEvidence": "clue_kare_birakma" }, { "hasEvidence": "clue_kare_inis" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Diski çıkardım. Ekran karardı; ama gözlerimin önünde hâlâ dört gri pencere vardı."
+            },
+            {
+              "speaker": "player",
+              "text": "18.36: bir parka eğiliyor, koltuğun altına bir şey bırakıyor. 18.37: bir parka ve bir bere Altıparmak’ta iniyor. 18.42: Arda oturuyor.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Yedi ay boyunca herkes aynı iki buçuk dakikaya baktı. Kimse altı dakika geriye sarmadı. Bir saatlik bir hafıza bir klasörde uyuyordu.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Saat gece yarısını geçmişti. Telefonu elime aldım. Leyla uyumazdı; biliyordum. Yine de iki kere çevirip kapattım."
+            },
+            { "speaker": "leyla", "text": "Söyle.", "style": "phone" },
+            { "speaker": "player", "text": "Buldum. Eksik dakikayı. Arda’nın değil. Başkasının." },
+            {
+              "speaker": "leyla",
+              "text": "Gördüğün şeyi bana anlatma. Yarın kâğıda yaz. Gece görülen şeyler sabah büyür ya da küçülür. Hangisi olduğunu sabah anlarsın.",
+              "style": "phone"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de… kimseyi arama. Ne Arda’yı ne savcılığı. Bu gece değil.",
+              "style": "phone"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "Diski çıkardım. Ekran karardı." },
+            {
+              "speaker": "player",
+              "text": "Bir saatlik bir kaydı izledim ama hepsini görmedim. Bazı karelere doğru aletle bakmadım. Bazıları hâlâ gri bir lekeden ibaret.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Yine de bir şey biliyorum: CD bir saatin iki buçuk dakikasıydı. Gerisi bu diskte. Yarın hâkimin önünde eksik dakikayı gösterebileceğim kadarını göstereceğim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonu elime aldım, Leyla’yı aramadım. Gece yarısı kendi eksiklerimi saymak için iyi bir saat değildi."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "KS_ARDA",
+          "kind": "OPTION",
+          "label": "“Sabah ilk iş Arda’ya söyleyeceğim.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sabah sahafa gittim. Arda kitap etiketliyordu. “Bir kayıt geldi,” dedim. “Seni gösteriyor. Ama yalnız seni değil.” Etiket elinde kaldı.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "arda",
+                  "text": "Yani… biri mi bırakmış? Ben… ben hep öyle düşündüm hocam. Ama düşünmek başka."
+                }
+              ]
+            }
+          ],
+          "next": "ARA_HUB",
+          "effects": [{ "type": "VAR", "var": "kayit_arda_haber", "op": "set", "value": true }]
+        },
+        {
+          "id": "KS_SUS",
+          "kind": "OPTION",
+          "label": "“Duruşmaya kadar kimseye söylemeyeceğim. Önce bağlantıları kuracağım.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bazı haberleri erken vermek, onları taşıyacak kâğıt hazır olmadan bir umut vermektir. Umudun da bir ağırlığı var.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Panoya yeni kartları iğneledim. Kırmızı iplik bir otobüsün içinden çıkıp Altıparmak’ın ıslak kaldırımına uzandı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "ARA_HUB",
+          "effects": [{ "type": "VAR", "var": "kayit_sakla", "op": "set", "value": true }]
+        }
+      ]
+    },
+    {
+      "id": "ARA_CAGRI",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "153 çağrı kaydı",
+      "background": "buro",
+      "hud": ["cagri_left"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "BÜYÜKŞEHİR BELEDİYESİ · 153 ÇÖZÜM MERKEZİ DÖKÜMÜ",
+              "bg": "buro",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Üç sayfa, binlerce satır. Su kesintisi, çukur, sokak lambası, gürültü. Bir şehrin şikâyet defteri. Bir yerinde Arda’nın numarası."
+            }
+          ]
+        }
+      ],
+      "header": { "left": "153 ÇÖZÜM MERKEZİ · ÇAĞRI DÖKÜMÜ", "right": "6 MART · 19.00–19.30" },
+      "columns": [
+        { "label": "SAAT", "flex": 0.6 },
+        { "label": "ARAYAN", "flex": 1 },
+        { "label": "KONU", "flex": 1.6 }
+      ],
+      "rows": [
+        { "id": "c1", "cells": ["19.12", "0224 *** 18 21", "Su kesintisi · Nilüfer"] },
+        {
+          "id": "c2",
+          "cells": ["19.18", "05** *** ** 47", "Ulaşım · kayıp eşya"],
+          "lens": {
+            "mag": {
+              "cells": [
+                "19.18 · 3 dk 12 sn",
+                "05** *** ** 47 (sanık hattı)",
+                "“Hat 38’de bulunan cüzdan. Yolcuya ertesi gün terminal kayıp eşya bürosuna teslim etmesi söylendi.”"
+              ],
+              "tone": "special"
+            }
+          }
+        },
+        { "id": "c3", "cells": ["19.24", "05** *** ** 03", "Ulaşım · otobüs gecikmesi"] }
+      ],
+      "tools": [{ "id": "mag", "label": "Büyüteç", "icon": "magnifier" }],
+      "actionCosts": { "EXAMINE": [{ "var": "cagri_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_C_MAG2",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "c2" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "19.18, üç dakika on iki saniye. Operatör notu: “Hat 38’de bulunan cüzdan. Yolcuya ertesi gün terminal kayıp eşya bürosuna teslim etmesi söylendi.”",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_cagri_notu" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "FB_CAGRI",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu satır dosyayla ilgili değil.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "CAGRI_BITIR", "kind": "CONTINUE", "label": "Dökümü kapat", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
+      "id": "ARA_CIKARIM",
+      "type": "DEDUCTION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Çıkarım tahtası",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Panoya yeni kartlar eklendi. Kırmızı iplikler artık bir otobüsün içinden çıkıp Altıparmak’ın ıslak kaldırımına uzanıyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "İki kart seç. Birinci evrede kurduğun çıkarımları burada yeniden kurmak puan getirmez."
+            }
+          ]
+        }
+      ],
+      "pool": [
+        "clue_dort_kamera",
+        "clue_koltuk_boslugu",
+        "clue_cikartma",
+        "clue_dokuz_koltuk",
+        "clue_atm_fisi",
+        "clue_153_arama",
+        "clue_fb_mesaj",
+        "clue_kira",
+        "clue_fis_notu",
+        "clue_bufe_kamera",
+        "clue_kart_yok",
+        "clue_zarf",
+        "clue_sari_not",
+        "clue_kaynak_dosya",
+        "clue_bozuk_segment",
+        "clue_ilk_kare",
+        "clue_son_kare",
+        "clue_harcama_saat",
+        "clue_gozluk",
+        "clue_gri_kapuson",
+        "clue_defter",
+        "clue_olay_klasoru",
+        "clue_kare_bere",
+        "clue_kare_parka",
+        "clue_kare_birakma",
+        "clue_kare_inis",
+        "clue_kare_soru",
+        "clue_kare_sofor",
+        "clue_cagri_notu",
+        "clue_mesaj_istegi",
+        "clue_cemil_tarif"
+      ],
+      "choices": [
+        {
+          "id": "CB_BIRAKAN",
+          "kind": "COMBINE",
+          "match": { "a": "clue_kare_birakma", "b": "clue_kare_inis" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "18.36’da cüzdanı koltuğun altına bırakan parkalı adam, bir dakika sonra Altıparmak’ta iniyor. Arda otobüste kalıyor.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_birakan" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_birakan" }
+          ]
+        },
+        {
+          "id": "CB_BERE_AYNI",
+          "kind": "COMBINE",
+          "match": { "a": "clue_kare_bere", "b": "clue_fis_notu" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Orta kapıda şemsiye tutan yeşil bereli kadın 18.37’de Altıparmak’ta iniyor. 18.49’da büfede yeşil bereli biri kartı üçe bölüyor.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_bere_ayni" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_bere_ayni" }
+          ]
+        },
+        {
+          "id": "CB_KAPUSON",
+          "kind": "COMBINE",
+          "match": { "a": "clue_kare_parka", "b": "clue_gri_kapuson" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Hayri Bey’in arkadan gördüğü gri kapüşon, kapüşonu başında olan parkaydı. Arda’nın kapüşonu sırtındaydı.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_kapuson" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_kapuson" }
+          ]
+        },
+        {
+          "id": "CB_SOFOR",
+          "kind": "COMBINE",
+          "match": { "a": "clue_kare_sofor", "b": "clue_cikartma" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Kural “sürücüye teslim ediniz” diyor. 19.05’te Arda tam bunu yapıyor; şoför elini sallıyor.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_sofor_red" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_sofor_red" }
+          ]
+        },
+        {
+          "id": "CB_NIYET",
+          "kind": "COMBINE",
+          "match": { "a": "clue_cagri_notu", "b": "clue_kare_soru" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Yandaki yolcu 18.43, şoför 19.05, 153 19.18, sahibine mesaj 21.14. Dört saatte dört kapı.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_niyet_tam" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_niyet_tam" }
+          ]
+        },
+        {
+          "id": "ACB_KART",
+          "kind": "COMBINE",
+          "match": { "a": "clue_son_kare", "b": "clue_harcama_saat" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "18.44.30’da Arda Beşevler’e giden otobüsteydi. 18.49’da kartlar kilometrelerce geride kullanıldı. O değil.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_kart_baskasi" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_kart_baskasi" }
+          ]
+        },
+        {
+          "id": "ACB_ZARF",
+          "kind": "COMBINE",
+          "match": { "a": "clue_atm_fisi", "b": "clue_zarf" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "17.52’de çekilen 600 TL, “ARDA – kira” yazılı banka zarfında. Kadının parası değil.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_zarf" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_zarf" }
+          ]
+        },
+        {
+          "id": "ACB_TESLIM",
+          "kind": "COMBINE",
+          "match": { "a": "clue_sari_not", "b": "clue_153_arama" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "19.18’de belediyeye üç dakikalık çağrı, gece masada “Yarın 9 — karakol.” Saklayan biri kendine hatırlatma yazmaz.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_teslim" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_teslim" }
+          ]
+        },
+        {
+          "id": "ACB_KAYIT",
+          "kind": "COMBINE",
+          "match": { "a": "clue_dort_kamera", "b": "clue_kaynak_dosya" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Dört kamera, bir saatlik dört kanallı kaynak. CD’de tek kanal ve iki buçuk dakika. Gerisi arşivde.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_eksik_kayit" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_eksik_kayit" }
+          ]
+        },
+        {
+          "id": "ACB_HAYRI",
+          "kind": "COMBINE",
+          "match": { "a": "clue_gozluk", "b": "clue_dokuz_koltuk" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Arkaya bakan koltukta gözlüksüz gazete okuyan miyop biri, başını kaldırınca üç metre ötede bulanık bir kalabalık görür.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_hayri_gormedi" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_hayri_gormedi" }
+          ]
+        },
+        {
+          "id": "ACB_BULDU",
+          "kind": "COMBINE",
+          "match": { "a": "clue_koltuk_boslugu", "b": "clue_ilk_kare" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Ayağı takılıyor, eğiliyor, koltuğun altındaki boşluktan alıyor. Bir alma değil, bir bulma.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_buldu" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_buldu" }
+          ]
+        },
+        {
+          "id": "ACB_KLASOR",
+          "kind": "COMBINE",
+          "match": { "a": "clue_olay_klasoru", "b": "clue_dort_kamera" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Dört kamera var; her olayda bir saatlik, dört kanallı bir klasör açılıyor. CD ise tek kanal ve iki buçuk dakika. Gerisi klasörde.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_eksik_kayit" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_eksik_kayit" }
+          ]
+        },
+        {
+          "id": "ACB_BERE",
+          "kind": "COMBINE",
+          "match": { "a": "clue_kart_yok", "b": "clue_fis_notu" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Kartlar cüzdanda yoktu. 18.49’da büfede “yeşil bere” not edilmiş biri üç ayrı çekim yaptı. Kim olduğunu bilmiyoruz.",
+            "label": "ÇIKARIM · +300 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_bereli" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_bereli" }
+          ]
+        },
+        {
+          "id": "FB_ARA_CIKARIM",
+          "kind": "FALLBACK",
+          "fallbackFor": "COMBINE",
+          "repeat": "ONCE_PER_PARAMS",
+          "feedback": {
+            "title": "Bu ikisi birbirini açıklamıyor",
+            "text": "Başka bir çift dene.",
+            "label": "BAĞLANTI YOK · −50 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+        },
+        { "id": "ARA_CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
+      "id": "ARA_LEYLA",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Leyla’nın odası",
+      "background": "buro",
+      "lines": [
+        {
+          "when": {
+            "all": [
+              { "any": [{ "hasEvidence": "ded_birakan" }, { "hasEvidence": "clue_kare_inis" }] },
+              { "not": { "flag": "suc_verildi" } }
+            ]
+          },
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "bg": "buro", "style": "card" },
+            {
+              "speaker": "leyla",
+              "text": "İki insan gördün. Biri bırakıyor, biri şemsiye tutuyor. Şimdi içinden onların peşine düşmek geçiyor. Biliyorum, yüzünden."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Avukat kovalamaz, Deniz. Bildirir. Cumhuriyet Başsavcılığına, somut delille: hangi kare, hangi saat, hangi büfe. Yüz elli sekiz."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Somut olmayan bir ihbar bir çekmecede ölür. Somut olanı birinin masasına düşer. Ve bir şey daha: kimlik tespiti senin işin değil."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ev_tam_kayit" }, { "not": { "hasEvidence": "clue_kare_sofor" } }] },
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "bg": "buro", "style": "card" },
+            {
+              "speaker": "leyla",
+              "text": "Disk geldi ama hepsini izlemedin. Bir saatlik kaydın en önemli on bir saniyesi bazen en sonda olur. Son durağa kadar izle."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de şoför var. Korkan biri yalanını kürsüde değiştirir mi? Değiştirir; ama ancak bir kare onu zorlarsa."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "ek_hazir" } },
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "bg": "buro", "style": "card" },
+            {
+              "speaker": "leyla",
+              "text": "Ek savunma iki kişinin işidir: senin ve onun. Ona ne söyleyeceğini yazma. Neyi bildiğini ve neyi bilmediğini ayırmasına yardım et."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Mahkeme “özel beceri” dedi. Sen de “ne beceri ne alma” diyeceksin. Ama bir de üçüncü kapı var: yüz altmış. Oraya gitmemek için ne göstereceksin?"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "bg": "buro", "style": "card" },
+            {
+              "speaker": "leyla",
+              "text": "Elindekini say, sonra bir kez daha say. İkinci celsede tanık kürsüsüne çıkacak herkesin neyi gördüğünü ve neden öyle söylediğini bil."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de şunu unutma: tanığı utandırma. Utanan tanık savunmaya geçer. Kendini; gerçeği değil."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "ARA_LEYLA_DON", "kind": "CONTINUE", "label": "Teşekkür et", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
+      "id": "ARA_GULTEN",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Gülten Sarı",
+      "background": "ev",
+      "room": { "label": "BEŞEVLER · GÜLTEN HANIM’IN EVİ", "character": "gulten" },
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "16.00 — BEŞEVLER", "bg": "ev", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Telefon bir gün önce çalmıştı. Genç bir kız sesi: “Ben Elif, Gülten Sarı’nın torunu. Babaannem sizinle konuşmak istiyor. Avukatı yok.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Müştekinin avukatı yok. Konuşmak isteyen o. Yine de bir çizgi var: ben dinlerim; beyanını yönlendirmem, bir şey teklif etmem, şikâyetinden söz etmem.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Küçük, tertemiz bir ev. Pencerenin önünde eski bir dikiş makinesi, üstünde yarım kalmış bir perde. Duvarda üniformalı bir adamın büyütülmüş fotoğrafı."
+            },
+            {
+              "speaker": "gulten",
+              "text": "Geç kızım, otur. Elif, çay koy. Avukat hanım çay içer mi? İçer. Herkes içer."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Elif, on dokuz yaşlarında, telefonunu sıkıca tutuyordu. Babaannesine baktı; babaannesi başını salladı."
+            },
+            {
+              "speaker": "gulten",
+              "text": "Mahkemede o çocuk “Facebook’tan yazdım” dedi. Ben Facebook bilmem. Elif bakar benim yerime. Eve gelince “bir de şuraya bakalım” dedi."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "GL_DINLE",
+          "kind": "OPTION",
+          "label": "“Sizi dinlemeye geldim. Ne anlatmak isterseniz.”",
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Elif telefonu uzattı. Mesaj istekleri klasörü. En üstte, gri harflerle, okunmamış bir mesaj: 6 Mart, 21.14."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "“Merhaba, 38 numaralı otobüste cüzdanınızı buldum. Size nasıl ulaştırabilirim?”"
+                },
+                {
+                  "speaker": "gulten",
+                  "expression": "uzgun",
+                  "text": "O akşam ben karakoldaydım. O çocuk bana yazıyormuş. Ben de karakolda “cezasını çeksin” diyormuşum."
+                },
+                {
+                  "speaker": "gulten",
+                  "text": "Elif bunu görünce ağladı. Ben ağlamadım. Benim yaşımda insan önce düşünür, sonra ağlar."
+                },
+                {
+                  "speaker": "gulten",
+                  "text": "İsmail askerdeyken bana mektup yazardı. Bir keresinde mektubu yanlış eve bırakmışlar; komşu kadın getirdi, açmadan. “Senin bu,” dedi. Elli yıl oldu, unutmadım."
+                },
+                {
+                  "speaker": "gulten",
+                  "text": "O çocuk da bana getirmeye çalışmış. Ben kapımı açmamışım. Kapıyı açmayan ben olunca, kime kızacağım şimdi?"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_mesaj_istegi" },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 60 },
+            { "type": "VAR", "var": "gulten_mesaj", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Avukatı olmayan müştekiyle temas, onu dinlemekle sınırlı kaldı: yönlendirme, teklif ya da şikâyete dair bir söz yok. Bilgi kendiliğinden geldi.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "GL_MAHKEME",
+          "kind": "OPTION",
+          "label": "“Bunu mahkemeye kendiniz anlatmak ister misiniz? Size ne diyeceğinizi söylemem.”",
+          "visibleWhen": { "flag": "gulten_mesaj" },
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "gulten",
+                  "text": "Söyleyeceğim. Kimse bana ne diyeceğimi söylemesin, onu da söyleyeyim. Sen de söyleme."
+                },
+                { "speaker": "player", "text": "Söylemem." },
+                {
+                  "speaker": "gulten",
+                  "text": "Ben terziyim kızım. Bir kumaşı ters dikersen sökersin, baştan dikersin. Utanılacak bir şey yok. Utanılacak olan, ters dikip giymek."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 40 },
+            { "type": "VAR", "var": "gulten_tanik", "op": "set", "value": true },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Müştekiye ne söyleyeceği değil, söyleme hakkı hatırlatıldı. Müşteki duruşmada kendi beyanını verir; avukat onu yönlendirmez.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "GL_FOTO",
+          "kind": "OPTION",
+          "label": "“Fotoğrafı bir daha görebilir miyim?”",
+          "visibleWhen": { "flag": "foto_yerinde" },
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Gülten Hanım cüzdanı çıkardı. Fotoğrafı kimliğin arkasından çekti, masaya koydu. Üniformalı genç bir adam, bıyıklı, gülümsüyor."
+                },
+                {
+                  "speaker": "gulten",
+                  "text": "İsmail. Kırk yıl evli kaldık. Bunu cebinde taşırdı, ben de onun ölümünden sonra kendi cüzdanıma koydum."
+                },
+                {
+                  "speaker": "gulten",
+                  "text": "Hırsız fotoğraf almaz, bilirsin. Ama atar. Bu atılmamış. Biri onu kimliğin arkasında bırakmış. Dokunmamış."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "VAR", "var": "gulten_foto", "op": "set", "value": true }]
+        },
+        {
+          "id": "GL_SIKAYET",
+          "kind": "OPTION",
+          "label": "“Şikâyetinizi geri alırsanız dava düşer.”",
+          "next": "ARA_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "gulten",
+                  "expression": "kizgin",
+                  "text": "Sen beni bunun için mi dinledin? Ben seni çocuk için iyi bir şey söylersin diye çağırdım. Sen bana pazarlık getirdin."
+                },
+                { "speaker": "gulten", "text": "Elif, avukat hanımı geçir." },
+                {
+                  "speaker": "player",
+                  "text": "Kapı arkamdan kapandı. Merdivenlerde Elif’in “özür dilerim” diye fısıldadığını duydum. Özür dilemesi gereken o değildi.",
+                  "style": "thought",
+                  "fx": "shake"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -60 },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "gulten_kirildi", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Hem yanlış hem yasak: hırsızlık (TCK 141) şikâyete bağlı değildir, şikâyetten vazgeçme kamu davasını düşürmez. Üstelik müştekiyi şikâyetinden döndürmeye çalışmak onu etkileme girişimidir ve meslek kurallarına aykırıdır.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "GL_PARA",
+          "kind": "OPTION",
+          "label": "“Arda’nın ailesi zararınızı karşılamak istiyor.”",
+          "next": "ARA_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "gulten",
+                  "expression": "kizgin",
+                  "text": "Ben para mı istedim? Ben mahkemede “paran helal olsun” dedim. Duymadın mı?"
+                },
+                {
+                  "speaker": "gulten",
+                  "text": "Bu teklif o çocuğun mu, senin mi? Çocuksa, demek ki almış. Sensen, demek ki sen de inanmıyorsun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "İki yanlış cümle arasında kalan bir doğru. Elif telefonunu cebine koydu. Göstermeyecekti artık.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -60 },
+            { "type": "VAR", "var": "gulten_kirildi", "op": "set", "value": true },
+            { "type": "VAR", "var": "gulten_para", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "İnkâr eden müvekkil adına zarar ödeme teklifi, ikrar gibi okunur ve müştekinin beyanını etkileme girişimi olarak algılanabilir. Hukuken de 141’de kovuşturma bundan etkilenmez.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        { "id": "GL_BITIR", "kind": "CONTINUE", "label": "Teşekkür edip kalk", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
+      "id": "ARA_CEMIL",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Cemil Yavuz",
+      "background": "sokak_gece",
+      "room": { "label": "ALTIPARMAK · TEKEL BÜFE", "character": "cemil" },
+      "lines": [
+        {
+          "when": { "visited": "INV_BUFE" },
+          "lines": [
+            { "speaker": "narrator", "text": "18.50 — ALTIPARMAK, TEKEL BÜFE", "bg": "sokak_gece", "style": "card" },
+            {
+              "speaker": "cemil",
+              "text": "Yine mi sen abla? Fiş kutumu ezberledin artık. Sana müşteri kartı çıkarayım, onuncu ziyaret bedava."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Radyoda yine maç vardı. Yağmur yine tentenin kenarından akıyordu. Cemil Usta’nın gözleri yine hiç durmuyordu; ama bu kez bana bakıyordu."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "18.50 — ALTIPARMAK, TEKEL BÜFE", "bg": "sokak_gece", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Durağın kırk adım ötesi. Tentenin kenarından su akıyordu; radyoda bir maç."
+            },
+            { "speaker": "cemil", "text": "Buyur abla. Sigara? Kontör? Yoksa avukat havasıyla bir dert mi getirdin?" },
+            {
+              "speaker": "player",
+              "text": "Altı Mart, akşam yediye on kala. Burada bir kartla üç ayrı ödeme yapılmış."
+            },
+            { "speaker": "cemil", "text": "Altı Mart! Abla ben dün ne yediğimi hatırlamam." }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "CM_FIS",
+          "kind": "OPTION",
+          "label": "“Fişin arkasına yazdığınız notu birlikte okuyabilir miyiz?”",
+          "visibleWhen": { "hasEvidence": "clue_fis_notu" },
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Cemil Usta 6 Mart destesini çıkardı, lastiğini çözdü, fişi buldu, gözlüğünü taktı."
+                },
+                {
+                  "speaker": "cemil",
+                  "text": "“Yeşil bere, üç ayrı çek, şifresiz.” Benim yazım. Ters ibrazdan yandım bir kere abla, o yüzden yazarım."
+                },
+                {
+                  "speaker": "cemil",
+                  "text": "Dur… Hatırladım. Islak eldiven, çıkarmadı. Şifresini unutmuş, “üçe böl” dedi. Ben de “zengin misin” dedim, gülmedi bile."
+                },
+                {
+                  "speaker": "cemil",
+                  "text": "Kartın üstünde bir kadın adı vardı ama ben bakmadım. Kim bakar? Bip dedi mi, iş tamam."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_cemil_tarif" },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 60 },
+            { "type": "VAR", "var": "cemil_hatirladi", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "CM_ACIK",
+          "kind": "OPTION",
+          "label": "“O akşam aklınızda kalan tuhaf bir ödeme oldu mu?”",
+          "visibleWhen": { "not": { "hasEvidence": "clue_fis_notu" } },
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "cemil",
+                  "text": "Tuhaf… Ters ibrazdan bir kere yandım, ondan beri tuhafları fişin arkasına yazarım. Dur bakayım."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Tezgâhın altından bir ayakkabı kutusu çıktı. Lastikli desteler, aylara göre. 6 Mart. 18.49. Üç fiş."
+                },
+                {
+                  "speaker": "cemil",
+                  "text": "Burada. “Yeşil bere, üç ayrı çek, şifresiz.” Islak eldiven, şifresini unutmuş, gülmedi bile. Hatırladım şimdi."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_fis_notu" },
+            { "type": "DISCOVER", "evidence": "clue_cemil_tarif" },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 60 },
+            { "type": "VAR", "var": "cemil_hatirladi", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "CM_KARE",
+          "kind": "OPTION",
+          "label": "Tek bir kareyi gösterip “Bu kadın mıydı?” diye sor",
+          "visibleWhen": { "hasEvidence": "clue_kare_bere" },
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "cemil", "text": "Bere aynı… Olabilir abla. Bilmem. Sen öyle diyorsan öyledir." },
+                {
+                  "speaker": "player",
+                  "text": "“Sen öyle diyorsan öyledir.” Karakolda Hayri Bey’e de böyle bir kare gösterilmişti. Şimdi aynı şeyi ben yaptım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -40 },
+            { "type": "VAR", "var": "cemil_kirli", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Tanığa tek bir görüntü gösterip “bu mu?” diye sormak, Hayri Bey’e karakolda yapılanın aynısıdır: telkinli tanıma. Bu, ileride Cemil Usta’nın tanıklığını değersizleştirir; kimlik tespiti kolluğun ve savcılığın işidir.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "CM_SAVCI",
+          "kind": "OPTION",
+          "label": "“Bunu savcılığa da anlatır mısınız? Fişlerle birlikte.”",
+          "visibleWhen": { "flag": "cemil_hatirladi" },
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "cemil", "text": "Savcılık mı? Abla benim dükkânı kim bekleyecek?" },
+                { "speaker": "narrator", "text": "Bir süre radyoyu dinledi. Maçta bir gol oldu; sevinmedi." },
+                {
+                  "speaker": "cemil",
+                  "text": "Yaşlı bir kadının kartıymış, değil mi? Annem de yaşlı. Tamam. Fişleri de götürürüm. Ama sabah erken, öğleden sonra müşteri çok."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "VAR", "var": "cemil_ifade", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Bilgi sahibi kişiyi delille birlikte savcılığa yönlendirmek doğru yol: ifadeyi avukat değil, yetkili makam alır (CMK 158, 160).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        { "id": "CM_BITIR", "kind": "CONTINUE", "label": "Teşekkür et", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
+      "id": "ARA_SUC",
+      "type": "CHOICE",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Suç duyurusu (CMK 158)",
+      "background": "buro",
+      "prompt": { "speaker": "narrator", "text": "Kim hakkında, hangi somut delille? Suç duyurusu bir kez verilir." },
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Bir dilekçe daha. Bu kez mahkemeye değil, Cumhuriyet Başsavcılığına. Başkası hakkında, başkasının dosyasına.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Somut olmayan bir ihbar bir çekmecede ölür. Somut olanı birinin masasına düşer.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "SUC_DAYANAKLI",
+          "kind": "OPTION",
+          "label": "Kare dökümü, büfe fişi ve banka saatleriyle, kimliği belirsiz iki kişi hakkında",
+          "visibleWhen": { "hasEvidence": "ded_birakan" },
+          "next": "ARA_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Dilekçeye kare numaralarını, saatleri, büfenin adresini ve fişin fotoğrafını ekledim. Kimseye isim vermedim; isim bilmiyordum.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Nöbetçi savcılığın kalemi dilekçeyi aldı, damgaladı. “Hırsızlık bürosuna gider,” dedi memur. “Orada bir başkomiser var, bu işlere bakar.”"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 80 },
+            { "type": "VAR", "var": "suc_duyurusu", "op": "set", "value": true },
+            { "type": "VAR", "var": "suc_verildi", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "İhbar somut: hangi kamera, hangi saat, hangi işyeri, hangi tutar. Kimlik tespiti ve yakalama kolluğun işi; avukat bilgiyi yetkili makama iletir (CMK 158).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "SUC_GENEL",
+          "kind": "OPTION",
+          "label": "“Bursa’daki yankesici şebekesi” hakkında genel bir suç duyurusu",
+          "next": "ARA_HUB",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "narrator", "text": "Nöbetçi savcılığın memuru dilekçeyi okudu, bana baktı." },
+                {
+                  "speaker": "narrator",
+                  "name": "MEMUR",
+                  "text": "Şebeke… Hangi şebeke abla? Bursa’da kaç şebeke var biliyor musun? Ekle bir şey, kim, ne zaman. Yoksa bu dosya rafta yaşlanır."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -30 },
+            { "type": "VAR", "var": "suc_verildi", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Kimin, ne zaman, neyi yaptığını göstermeyen bir ihbar somut değildir; işlem görmeden kalır. Elindeki kareleri ve saatleri eklemeden verilen dilekçe bir hak harcamaktır.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "SUC_SOFOR",
+          "kind": "OPTION",
+          "label": "Şoför Recep Ateş hakkında yalan beyandan suç duyurusu",
+          "next": "ARA_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Dilekçe damgalandı. İki gün sonra Kent Ulaşım’ın hukuk müşavirliğinden bir telefon geldi: “Sürücümüz bir avukatla temsil edilecektir.”"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir tanığı bir şüpheliye çevirdim. Şüpheliler konuşmaz; avukatları konuşur.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
+            { "type": "VAR", "var": "recep_sucduyurusu", "op": "set", "value": true },
+            { "type": "VAR", "var": "suc_verildi", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Tanık henüz duruşmada dinlenmeden onun hakkında suç duyurusunda bulunmak, onu kendini koruyan bir şüpheliye dönüştürür: kürsüde kendisini suçlayabilecek sorulara cevap vermekten çekinebilir (CMK 48). Gerçeği kürsüde, kayıtla göstermek daha güçlüydü.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        { "id": "SUC_VAZGEC", "kind": "CONTINUE", "label": "Şimdilik verme", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
+      "id": "ARA_YANLIS",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Altıparmak, 18.37",
+      "background": "sokak_yagmur",
+      "onFirstEnter": [
+        { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
+        { "type": "VAR", "var": "yanlis_gitti", "op": "set", "value": true },
+        { "type": "VAR", "var": "trust", "op": "dec", "value": 5 }
+      ],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "18.30 — ALTIPARMAK DURAĞI", "bg": "sokak_yagmur", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Durağın camlı sığınağında, yağmurun altında bekledim. Her Hat 38 geldiğinde inenlere baktım. Parka. Bere. Şemsiye."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kırk dakikada on bir otobüs. Yüzlerce yüz. Gri parkalı otuz adam. Biri bana dönüp “bir sorun mu var?” diye sordu. Yoktu. Ben vardım."
+            },
+            { "speaker": "narrator", "text": "Telefon çaldı. Leyla." },
+            {
+              "speaker": "leyla",
+              "text": "Neredesin? Melek Hanım seni Altıparmak’ta görmüş, adliye otobüsünden. Ne yapıyorsun orada?",
+              "style": "phone"
+            },
+            { "speaker": "player", "text": "Bekliyorum. Belki yine o hattadırlar." },
+            {
+              "speaker": "leyla",
+              "text": "Bulursan ne yapacaksın, Deniz? Yakalayacak mısın? Kolundan tutup “siz misiniz” mi diyeceksin? Ya bıçakları varsa? Ya yanlış kişiyse?",
+              "style": "phone"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Avukat kovalamaz. Bildirir. Kâğıdını yaz, savcılığa ver, bir başkomiserin masasına koy. Sonra işine dön: müvekkiline.",
+              "style": "phone"
+            },
+            {
+              "speaker": "player",
+              "text": "Kapattı. Islak bankta bir süre daha oturdum. Bir saatimi ve yarım günümü yağmura verdim. Karşılığında bir ders aldım. Pahalı bir ders.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "YANLIS_DON",
+          "kind": "CONTINUE",
+          "label": "Büroya dön",
+          "role": "PRIMARY",
+          "next": "ARA_HUB",
+          "quality": {
+            "q": "BAD",
+            "feedback": "Şüphelileri aramak, izlemek ya da yakalamaya çalışmak avukatın görevi değildir ve hem kendini hem soruşturmayı tehlikeye atar. Bilgiyi Cumhuriyet Başsavcılığına iletmek gerekir (CMK 158).",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ARA_ARDA",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Ek savunma",
+      "background": "ev",
+      "room": { "label": "ZEHRA’NIN EVİ · HASTANE LOJMANI", "character": "arda" },
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "20.00 — HASTANE LOJMANI", "bg": "ev", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Zehra’nın evi küçüktü: bir oda, bir mutfak, kapı arkasında asılı iki hemşire forması. Masada mercimek çorbası, üç kaşık, bir dosya."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arda çorbasına dokunmamıştı. Zehra iki gecelik uykusuzlukla bir sandalyede oturuyordu."
+            },
+            { "speaker": "zehra", "text": "Söyleyin avukat hanım. Ne diyecek? Ben bilmem, siz bilirsiniz." },
+            {
+              "speaker": "player",
+              "text": "Ek savunma, savcının “özel beceri” cümlesine cevap. Arda, sana ne diyeceğini yazmayacağım. Ne yaşadıysan onu söyleyeceksin."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "AA_DOGRU",
+          "kind": "OPTION",
+          "label": "“Bildiğini söyle, bilmediğini söyleme. ‘Hatırlamıyorum’ da bir cevaptır.”",
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "arda",
+                  "text": "Bildiğimi söyleyeyim. Bilmediğimi söylemeyeyim. (yavaşça tekrar eder) Bu iyi. Bunu çocuklara da söylerdim."
+                },
+                { "speaker": "zehra", "text": "Ya hâkim inanmazsa?" },
+                {
+                  "speaker": "player",
+                  "text": "O zaman inanması için başka bir şey göstereceğiz. Arda’nın işi doğruyu söylemek. Benim işim onun doğrusunu kayıtla göstermek."
+                },
+                { "speaker": "arda", "text": "Hocam, bir şey sorabilir miyim? Siz bana inanıyor musunuz?" },
+                {
+                  "speaker": "player",
+                  "text": "Bir müvekkilin avukatına sorabileceği en zor soru. Cevabın ne olduğu değil, ne zaman verildiği önemlidir.",
+                  "style": "thought"
+                },
+                { "speaker": "player", "text": "Ben kayda inanıyorum, Arda. Kayıt da sana inanıyor." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 },
+            { "type": "VAR", "var": "ek_hazir", "op": "set", "value": true },
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 5 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Sanığa doğruyu söylemesi ve bilmediğini uydurmaması öğütlendi. Avukat sanığın beyanını hazırlayabilir ama içeriğini yazamaz; yalana yönlendirmek meslek kurallarına aykırıdır.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        {
+          "id": "AA_LISE",
+          "kind": "OPTION",
+          "label": "“Lisedeki geceyi mahkemede anlatmak ister misin? Zorunda değilsin.”",
+          "visibleWhen": { "all": [{ "flag": "fact_polis_neden" }, { "not": { "flag": "arda_utanc_mahkemede" } }] },
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Arda kaşığını bıraktı. Zehra ona baktı; ilk defa ablası gibi değil, bir yabancı gibi. Sonra yine ablası gibi."
+                },
+                {
+                  "speaker": "arda",
+                  "text": "Anlatırım. Utanıyorum ama anlatırım. Bir sınıfa girip “korkma” diyeceksem, önce kendim korkmamalıyım."
+                },
+                {
+                  "speaker": "zehra",
+                  "expression": "uzgun",
+                  "text": "Annem o sabahı hâlâ anlatır. Karakolun önündeki bankı. Soğuktu, der."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "arda_lise_hazir", "op": "set", "value": true },
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 3 }
+          ]
+        },
+        {
+          "id": "AA_CERCEVE",
+          "kind": "OPTION",
+          "label": "Zehra’ya ek savunmanın hukuki çerçevesini anlat",
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Üç kapı var. Savcı en büyüğünü istiyor: özel beceriyle hırsızlık. İddianame ortadakini: basit hırsızlık. Bir de en küçüğü: kaybolmuş eşyayı teslim etmemek."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bizim derdimiz hiçbir kapıdan girmemek. Hırsızlık için birinin elinden bir şey almak gerekir. Arda kimsenin elinden almadı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Küçük kapı için de “sahibi gibi davranmak” gerekir: harcamak, saklamak, kullanmak. Arda şoföre uzattı, aradı, yazdı. Sahibi gibi değil; sahibini arayan biri gibi."
+                },
+                { "speaker": "zehra", "text": "Yani… o küçük kapı da kapalı mı?" },
+                { "speaker": "player", "text": "Kapalı olduğunu göstermemiz lazım. Göstereceğiz." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 40 },
+            { "type": "VAR", "var": "ek_cerceve", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "AA_IKRAR",
+          "kind": "OPTION",
+          "label": "“Zehra haklı olabilir. Kabul eder, zararı öder, hükmün açıklanmasının geri bırakılmasını isteriz.”",
+          "next": "ARA_ARDA_IKRAR",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Odada bir sessizlik oldu. Zehra’nın yüzünde bir rahatlama belirdi; Arda’nın yüzünde başka bir şey."
+                },
+                {
+                  "speaker": "arda",
+                  "expression": "saskin",
+                  "text": "Kabul mü? Neyi kabul edeceğim hocam? Ben almadım ki."
+                },
+                { "speaker": "zehra", "text": "Arda, beş yıl diyorlar! Öde, imzala, bitsin. Sicile işlemiyormuş!" }
+              ]
+            }
+          ]
+        },
+        { "id": "AA_BITIR", "kind": "CONTINUE", "label": "Vedalaş", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
+      "id": "ARA_ARDA_IKRAR",
+      "type": "CHOICE",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Ek savunma",
+      "background": "ev",
+      "prompt": { "speaker": "arda", "expression": "uzgun", "text": "Siz de mi inanmıyorsunuz bana, hocam?" },
+      "choices": [
+        {
+          "id": "IKRAR_ISRAR",
+          "kind": "OPTION",
+          "label": "“İnanmam önemli değil. Önemli olan riski küçültmek. Kabul et.”",
+          "next": "ARA_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Arda uzun süre bana baktı. Sonra Zehra’ya. Sonra soğumuş çorbasına."
+                },
+                { "speaker": "arda", "text": "Peki. Siz bilirsiniz hocam. Siz avukatsınız." },
+                {
+                  "speaker": "player",
+                  "text": "“Siz bilirsiniz.” Bir müvekkilin avukatına söyleyebileceği en ağır cümle. Ve ben onu hak ettim.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Zehra ağlıyordu. Rahatlamadan mı, utançtan mı, bilmiyorum. Kapıdan çıkarken kimse bana iyi geceler demedi."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -300 },
+            { "type": "VAR", "var": "false_confession", "op": "set", "value": true },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "trust", "op": "dec", "value": 30 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "İnkâr eden ve suçsuzluğunu söyleyen müvekkili suçu kabule yönlendirmek, avukatın sadakat ve doğruluk yükümlülüğüne aykırıdır (Avukatlık Kanunu md. 34). Gerçeğe aykırı ikrar, suçu üstlenme (TCK 270) kapsamına girebilir. Etkin pişmanlık (TCK 168) gerçek bir pişmanlık ister.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        {
+          "id": "IKRAR_GERI",
+          "kind": "OPTION",
+          "label": "“Hayır. Haklısın. Yanlış bir cümle kurdum. Doğruyu söyleyeceksin.”",
+          "next": "ARA_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Hayır. Haklısın Arda. Yanlış bir cümle kurdum. Kabul edecek bir şeyin yok. Doğruyu söyleyeceksin."
+                },
+                { "speaker": "zehra", "expression": "kizgin", "text": "Ama…" },
+                {
+                  "speaker": "player",
+                  "text": "Zehra Hanım, HAGB bir af değil. Arda’nın yapmadığı bir şeyi yaptım demesi demek. Tutanakta kalır. Kendi içinde kalır."
+                },
+                { "speaker": "narrator", "text": "Arda başını salladı. Ama bana bakmadı. Bir süre daha bakmayacaktı." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 },
+            { "type": "VAR", "var": "trust", "op": "dec", "value": 10 },
+            { "type": "VAR", "var": "ek_hazir", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Geri adım doğru; ama inkâr eden müvekkile ikrar seçeneğini masaya koymak bile güveni sarstı.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ARA_SON",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Duruşmadan önceki gece",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Leyla kapımda belirdi. Paltosu kolunda, bir elinde iki bardak çay. Birini masama bıraktı. Öbürünü bıraktığı gibi, yarım içecekti."
+            },
+            { "speaker": "leyla", "text": "Yarın ilk cümlen ne olacak?" },
+            {
+              "speaker": "player",
+              "text": "İlk cümle. Bir duruşmada ilk cümle bir pencere açar; gerisi o pencereden görünür.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "AS_EKSIK",
+          "kind": "OPTION",
+          "label": "“Kayıt eksikti. Şimdi tam.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "İyi. Kısa. Kimseyi suçlamıyor. Savcıyı bile. Eksik kaydı savcı yapmadı; bir gece yarısı, bir yorgun memur, bir yorgun teknisyen yaptı."
+                },
+                { "speaker": "leyla", "text": "Yarın kimseyi utandırma. Utanan tanık kendini savunur, gerçeği değil." }
+              ]
+            }
+          ],
+          "next": "H2_00",
+          "effects": [{ "type": "VAR", "var": "ilk_cumle_kayit", "op": "set", "value": true }]
+        },
+        {
+          "id": "AS_MASUM",
+          "kind": "OPTION",
+          "label": "“Müvekkilim masum.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Bunu hâkim söyleyecek, sen değil. Sen yalnızca neyin eksik olduğunu, neyin tamamlandığını göster."
+                },
+                { "speaker": "leyla", "text": "Masumiyet bir sonuçtur, Deniz. Bir açılış cümlesi değil." }
+              ]
+            }
+          ],
+          "next": "H2_00",
+          "effects": [{ "type": "VAR", "var": "ilk_cumle_masum", "op": "set", "value": true }]
+        }
+      ]
+    },
+    {
+      "id": "ARA_SON_4",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "flag": "kayit_arda_haber" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Arda’ya kaydı erken söyledim. O günden beri her mesajının sonunda bir soru işareti var. Umut da bir yük; onu da ben verdim.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "kayit_sakla" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Kaydı Arda’ya söylemedim. Yarın salonda ilk kez görecek. Bir sürprizin iki yüzü vardır: sevindirir ya da sarsar.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "serkan_anlatti" }, { "flag": "serkan_cd" }, { "flag": "serkan_kizgin" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Görükle karakolunun kapısı durağın tam karşısında. Kırk adım. Arda o kırk adımı yürüdü ve döndü. Ben yürüdüm ve içeri girdim. Fark bir korkudan ibaret.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "ozan_hazir" }, { "flag": "ozan_anlatti" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ozan “ölçtüğümü söylerim” dedi. Bir mühendisten iyi bir tanık çıkar; yeter ki ona ne söyleyeceğini kimse ölçmeye kalkmasın.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "any": [
+              { "flag": "volkan_segment" },
+              { "flag": "ek_cerceve" },
+              { "flag": "ara_aksam_dakika" },
+              { "flag": "ara_aksam_ikisi" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Leyla “kazanmayı mı, eksik dakikayı mı” diye sormuştu. Bu gece ikisinin aynı yere çıkıp çıkmayacağını bilmiyorum. Yarın öğreneceğim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_SON" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_SON_1",
+      "type": "DECISION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "onFirstEnter": [
+        {
+          "type": "IF",
+          "when": {
+            "all": [{ "flag": "suc_duyurusu" }, { "hasEvidence": "ded_bere_ayni" }, { "flag": "cemil_ifade" }]
+          },
+          "then": [{ "type": "VAR", "var": "sebeke_yakalandi", "op": "set", "value": true }]
+        }
+      ],
+      "lines": [
+        {
+          "when": { "flag": "sebeke_yakalandi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "16 KASIM · PAZAR 22.00 — ARSLAN HUKUK",
+              "bg": "buro_gece",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefon akşam yedide çalmıştı. Kendini Başkomiser Orhan Kılınç diye tanıtan ağır, kuru bir ses."
+            },
+            {
+              "speaker": "orhan",
+              "text": "Avukat hanım, dilekçeniz masama geldi. Karelerinize ve büfecinin ifadesine bakınca bir şey dikkatimi çekti. Bende aynı yöntemle altı dosya var.",
+              "style": "phone"
+            },
+            {
+              "speaker": "orhan",
+              "text": "Dün akşam Hat 19’da bir çift yakalandı: bir adam, bir kadın. Üzerlerinden on dört banka kartı çıktı. Birinin üstünde “G. SARI” yazıyor.",
+              "style": "phone"
+            },
+            {
+              "speaker": "orhan",
+              "text": "Yarın mahkemeniz var, değil mi? Savcılık beni tanık olarak bildirdi. Orada görüşürüz.",
+              "style": "phone"
+            },
+            {
+              "speaker": "player",
+              "text": "Eksik dakikanın sahibi bulunmuştu. Ben bulmamıştım. Bir başkomiser, bir büfeci, bir fişin arkasındaki kurşun kalem bulmuştu. Ben yalnızca kâğıdı doğru masaya koymuştum.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "suc_duyurusu" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "16 KASIM · PAZAR 22.00 — ARSLAN HUKUK",
+              "bg": "buro_gece",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcılıktan kısa bir yazı gelmişti: “Kimliği belirsiz şüpheliler hakkında soruşturma başlatılmıştır; kimlik tespiti çalışmaları sürmektedir.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Kâğıdı doğru masaya koydum. Ama masada isim yok. Bir karede bir parka, bir karede bir bere. Yarın hâkimin önünde onlar hâlâ birer gölge olacak.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "16 KASIM · PAZAR 22.00 — ARSLAN HUKUK",
+              "bg": "buro_gece",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yarın ikinci celse. Panoya bakıyorum. Kartlar yer değiştirdi; bazıları düştü, bazıları kırmızı iplikle birbirine bağlandı."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_SON_2" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_SON_2",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "any": [{ "hasEvidence": "ded_birakan" }, { "hasEvidence": "clue_kare_birakma" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Kayıt: cüzdan Arda’ya gelmeden önce başka birinin elindeydi. 18.36’da biri onu koltuğun altına bıraktı. Bu, yarın salonun ortasına koyacağım şey.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "ev_tam_kayit" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Kayıt geldi ama hepsini okuyamadım. Bir saatlik bir hafızanın bir kısmı hâlâ karanlıkta. Yarın elimdekiyle gideceğim.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Tam kayıt yok. Eksik dakika hâlâ eksik. Yarın bunu kendi cümlemle doldurmaya çalışmayacağım; eksikliğin kendisini göstereceğim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_SON_3" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_SON_3",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "flag": "false_confession" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Arda yarın “kabul ediyorum” diyecek. Benim yüzümden. Panodaki kartlar şimdi bana bakıyor; hepsi aynı soruyu soruyor.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "gulten_tanik" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Gülten Hanım yarın kendi cümlesini söyleyecek. Ona ne diyeceğini söylemedim. Bu, bu dosyada yaptığım en doğru şeylerden biri olabilir.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Arda’ya mesaj attım: “Kendi gömleğin, kendi cümlen.” Cevap tek kelimeydi: “Tamam.”",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_SON_4" }],
+      "choices": []
+    }
+  ],
+  "triggers": [
+    {
+      "id": "tg_ara_day",
+      "scope": "ARA_HUB",
+      "priority": 1,
+      "when": { "all": [{ "cmp": [{ "var": "ara_ap" }, "<=", 0] }, { "cmp": [{ "var": "ara_day" }, "<", 3] }] },
+      "goto": "ARA_DAY_END"
+    }
+  ],
+  "discoveryPaths": [
+    {
+      "evidence": "ev_tam_kayit",
+      "source": { "type": "NODE", "id": "ARA_GIRIS_1" },
+      "requires": { "any": [{ "flag": "kayit_istendi" }, { "flag": "kayit_istendi_h1" }] },
+      "hint": "Tam sefer kaydını dilekçeyle ya da 1. celsede iste."
+    },
+    {
+      "evidence": "ev_cagri_kaydi",
+      "source": { "type": "NODE", "id": "ARA_GIRIS_1" },
+      "requires": { "any": [{ "flag": "cagri_istendi" }, { "flag": "cagri_istendi_h1" }] },
+      "hint": "153 çağrı kaydını dilekçeyle ya da 1. celsede iste."
+    },
+    { "evidence": "clue_kare_bere", "source": { "type": "RULE", "id": "EX_R_MAG2" } },
+    { "evidence": "clue_kare_parka", "source": { "type": "RULE", "id": "EX_R_MAG3" } },
+    { "evidence": "clue_kare_parka", "source": { "type": "RULE", "id": "EX_R_CMP3" } },
+    { "evidence": "clue_kare_birakma", "source": { "type": "RULE", "id": "EX_R_MAG4" } },
+    { "evidence": "clue_kare_inis", "source": { "type": "RULE", "id": "EX_R_MAG5" } },
+    { "evidence": "clue_kare_soru", "source": { "type": "RULE", "id": "EX_R_PLAY6" } },
+    { "evidence": "clue_kare_sofor", "source": { "type": "RULE", "id": "EX_R_PLAY7" } },
+    { "evidence": "clue_cagri_notu", "source": { "type": "RULE", "id": "EX_C_MAG2" } },
+    { "evidence": "ded_birakan", "source": { "type": "RULE", "id": "CB_BIRAKAN" } },
+    { "evidence": "ded_bere_ayni", "source": { "type": "RULE", "id": "CB_BERE_AYNI" } },
+    { "evidence": "ded_kapuson", "source": { "type": "RULE", "id": "CB_KAPUSON" } },
+    { "evidence": "ded_sofor_red", "source": { "type": "RULE", "id": "CB_SOFOR" } },
+    { "evidence": "ded_niyet_tam", "source": { "type": "RULE", "id": "CB_NIYET" } },
+    { "evidence": "ded_kart_baskasi", "source": { "type": "RULE", "id": "ACB_KART" } },
+    { "evidence": "ded_zarf", "source": { "type": "RULE", "id": "ACB_ZARF" } },
+    { "evidence": "ded_teslim", "source": { "type": "RULE", "id": "ACB_TESLIM" } },
+    { "evidence": "ded_eksik_kayit", "source": { "type": "RULE", "id": "ACB_KAYIT" } },
+    { "evidence": "ded_hayri_gormedi", "source": { "type": "RULE", "id": "ACB_HAYRI" } },
+    { "evidence": "ded_buldu", "source": { "type": "RULE", "id": "ACB_BULDU" } },
+    { "evidence": "ded_eksik_kayit", "source": { "type": "RULE", "id": "ACB_KLASOR" } },
+    { "evidence": "ded_bereli", "source": { "type": "RULE", "id": "ACB_BERE" } },
+    { "evidence": "clue_mesaj_istegi", "source": { "type": "CHOICE", "id": "GL_DINLE" } },
+    { "evidence": "clue_cemil_tarif", "source": { "type": "CHOICE", "id": "CM_FIS" } },
+    { "evidence": "clue_fis_notu", "source": { "type": "CHOICE", "id": "CM_ACIK" } },
+    { "evidence": "clue_cemil_tarif", "source": { "type": "CHOICE", "id": "CM_ACIK" } }
+  ]
+}

@@ -1,0 +1,407 @@
+{
+  "nodes": [
+    {
+      "id": "INV_OTOBUS",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Hat 38 · aynı saat",
+      "background": "arac",
+      "hud": ["taps"],
+      "exposeCounts": true,
+      "scene": "sc_otobus",
+      "instruction": "Otobüste dikkatini çeken yere dokun. Her dokunuş bir büyüteç hakkı harcar; boş yere dokunmak skor da götürür.",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "18.20 — HAT 38, ÇARŞI DURAĞI", "bg": "arac", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Aynı saat, aynı hat, aynı model otobüs. Kartımı okuttum. Bip. Validatör benim kim olduğumu biliyordu; nerede ineceğimi bilmiyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kalabalık bir bedene dönüştü: ıslak paltolar, şemsiyeler, uykulu yüzler. Orta kapının yanında sıkıştım. Biri ayağıma bastı, özür dilemedi."
+            },
+            {
+              "speaker": "player",
+              "text": "Arda burada durdu. Kulaklığıyla, telefonuyla. İki metre ötede yaşlı bir kadın bez çantasını kucaklıyordu. Bugün değil; yedi ay önce.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Altıparmak’ta kalabalık boşaldı. Arka kapının önündeki koltuğa oturdum. 14 numara. Etrafıma baktım."
+            }
+          ]
+        }
+      ],
+      "actionCosts": { "TAP": [{ "var": "taps", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_OTOBUS",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        {
+          "id": "OTOBUS_BITIR",
+          "kind": "CONTINUE",
+          "label": "Görükle’ye kadar devam et",
+          "role": "BACK",
+          "next": "INV_OTOBUS_SON"
+        }
+      ]
+    },
+    {
+      "id": "INV_ODA",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Görükle · öğrenci evi",
+      "background": "ev",
+      "hud": ["taps2"],
+      "exposeCounts": true,
+      "scene": "sc_oda",
+      "instruction": "Odada dikkatini çeken yere dokun. Hiçbir şeye el konmaz; yalnızca bakılır ve fotoğraflanır.",
+      "lines": [
+        {
+          "when": { "flag": "fact_zarf" },
+          "lines": [
+            { "speaker": "narrator", "text": "19.30 — GÖRÜKLE, ÖĞRENCİ EVİ", "bg": "ev", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Üçüncü kat, asansör yok. Merdiven boşluğunda kızartma ve deterjan kokusu. Kapıyı kırmızı şapkalı, uzun boylu bir genç açtı."
+            },
+            {
+              "speaker": "ozan",
+              "text": "Avukat abla siz misiniz? Ozan. Geçin, kusura bakmayın, ev bekâr evi. Arda iki gündür bulaşık yıkıyor, sizin için."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arda koridorda duruyordu. Utanmış bir ev sahibi gibi. “ATM fişi buralarda bir yerde olmalı,” dedi, “kitap ayracı yaparım.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Burada bir şeye el koymayacağım, bir şey almayacağım. Bakacağım. Fotoğraf çekeceğim. Arda’nın izniyle. Bu fark, mahkemede fark eder.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "19.30 — GÖRÜKLE, ÖĞRENCİ EVİ", "bg": "ev", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Üçüncü kat, asansör yok. Merdiven boşluğunda kızartma ve deterjan kokusu. Kapıyı kırmızı şapkalı, uzun boylu bir genç açtı."
+            },
+            {
+              "speaker": "ozan",
+              "text": "Avukat abla siz misiniz? Ozan. Geçin, kusura bakmayın, ev bekâr evi. Arda iki gündür bulaşık yıkıyor, sizin için."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arda koridorda duruyordu. Utanmış bir ev sahibi gibi. Odasının kapısını açtı ve kenara çekildi."
+            },
+            {
+              "speaker": "player",
+              "text": "Burada bir şeye el koymayacağım, bir şey almayacağım. Bakacağım. Fotoğraf çekeceğim. Arda’nın izniyle. Bu fark, mahkemede fark eder.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "actionCosts": { "TAP": [{ "var": "taps2", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_ODA",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "ODA_BITIR", "kind": "CONTINUE", "label": "Mutfağa geç", "role": "BACK", "next": "INV_ODA_SON" }
+      ]
+    },
+    {
+      "id": "INV_BUFE",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Altıparmak · büfe",
+      "background": "sokak_gece",
+      "hud": ["taps3"],
+      "exposeCounts": true,
+      "scene": "sc_bufe",
+      "instruction": "Büfede dikkatini çeken yere dokun. Cemil Usta sabırlı ama müşterisi bekliyor.",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "18.49 — ALTIPARMAK, TEKEL BÜFE", "bg": "sokak_gece", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Durağın kırk adım ötesi. Tentenin kenarından su akıyordu; radyoda yine bir maç. Yedi ay sonra aynı dakika."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tezgâhın arkasında göbekli, bıyıklı, yeşil yelekli bir adam bir müşteriye para üstü sayıyordu. Gözleri hiç durmuyordu."
+            },
+            {
+              "speaker": "cemil",
+              "text": "Buyur abla. Sigara? Kontör? Yoksa şu avukat havasıyla bir dert mi getirdin bana?"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir dert, evet. Altı Mart, akşam yediye on kala. Burada bir kartla üç ayrı ödeme yapılmış."
+            },
+            {
+              "speaker": "cemil",
+              "text": "Altı Mart! Abla ben dün akşam ne yediğimi hatırlamam. Polis sordu mu? Sormadı. Kimse bir şey sormaz bana, ben de kimseye bir şey sormam."
+            },
+            {
+              "speaker": "player",
+              "text": "Kimse ona bir şey sormamış. Yedi aydır kimse bu büfeye gelmemiş. Kartların kullanıldığı yer, dosyada yalnızca bir satır.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "actionCosts": { "TAP": [{ "var": "taps3", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_BUFE",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        {
+          "id": "BUFE_BITIR",
+          "kind": "CONTINUE",
+          "label": "Cemil Usta’yla konuş",
+          "role": "BACK",
+          "next": "INV_BUFE_SON"
+        }
+      ]
+    },
+    {
+      "id": "INV_OTOBUS_SON",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Görükle, son durak",
+      "background": "arac",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "19.05 — GÖRÜKLE KAMPÜS, SON DURAK", "bg": "arac", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Otobüs boşaldı. Ön kapıda bir öğrenci kız şoför kabinine eğildi, elinde katlanmış siyah bir şemsiye."
+            },
+            { "speaker": "narrator", "name": "ÖĞRENCİ", "text": "Abi bu arkada kalmış, birinin." },
+            {
+              "speaker": "narrator",
+              "name": "ŞOFÖR",
+              "text": "Bırak oraya kızım. Yarın kayıp eşyaya veririz. Hadi, inelim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Şoför şemsiyeyi bakmadan torpidonun yanına attı. Bir deftere bir şey yazmadı. Kız indi; ben de indim."
+            },
+            {
+              "speaker": "player",
+              "text": "Kural kapı camında yazıyordu: sürücüye teslim et. Sürücü teslim aldı mı? Aldı sayılır mı? Yazmadıysa, şemsiye hiç verilmemiş gibi olur mu?",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Arda o akşam aynı kapıda durdu. Aynı soruyu sordu. Ona da bir el sallandı mı? Bir kamera bunu görmüş müydü?",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "OTS_NOT",
+          "kind": "OPTION",
+          "label": "“Not aldım: son durak, ön kapı, şoför kabini.”",
+          "next": "$return",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Defterime üç kelime yazdım: son durak, ön kapı, kabin. Bir de soru işareti. Soru işaretleri bu dosyada benim en çok kullandığım noktalama oldu.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "VAR", "var": "sofor_gozlem", "op": "set", "value": true }]
+        },
+        {
+          "id": "OTS_SOR",
+          "kind": "OPTION",
+          "label": "Şoföre şemsiyeyi deftere yazıp yazmayacağını sor",
+          "next": "$return",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "name": "ŞOFÖR",
+                  "text": "Defter mi? Abla saat yedi, on iki saattir direksiyondayım. Yarın garajda yazarız. Herkes öyle yapar."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Herkes öyle yapar.” Bir dosyanın en tehlikeli cümlesi. Çünkü genellikle doğrudur.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "VAR", "var": "sofor_soruldu", "op": "set", "value": true }]
+        }
+      ]
+    },
+    {
+      "id": "INV_ODA_SON",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Mutfak",
+      "background": "ev",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Mutfakta Ozan çay demlemişti. Üç bardak, biri çatlak. Çatlağı Arda aldı, sormadan."
+            },
+            {
+              "speaker": "ozan",
+              "text": "O sabah polis gelince ben açtım kapıyı abla. Sekiz on beşti. Arda diş fırçalıyordu, ağzı köpüklüydü."
+            },
+            {
+              "speaker": "ozan",
+              "text": "Memur masadaki sarı kâğıdı da aldı. Ben “o ne” dedim, “delil” dedi. Gece görmüştüm o kâğıdı. “Yarın 9 — karakol” yazıyordu."
+            },
+            { "speaker": "arda", "text": "Ozan sordu o gece, “ne karakolu” diye. Ben de anlattım." },
+            {
+              "speaker": "player",
+              "text": "Bir not, bir tanık, bir saat. Arda’nın hikâyesinde ilk kez başka birinin gözü vardı.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "ODS_TANIK",
+          "kind": "OPTION",
+          "label": "“Ozan, gerekirse bunu mahkemede anlatır mısın?”",
+          "next": "$return",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "ozan",
+                  "text": "Anlatırım. Ne gördüysem. Ama beni ezbere bir şey söyletmeyin, ben sınavlarda bile ezber yapamam."
+                },
+                { "speaker": "player", "text": "Söyletmem. Gördüğünü söyleyeceksin, o kadar." }
+              ]
+            }
+          ],
+          "effects": [{ "type": "VAR", "var": "fact_ozan", "op": "set", "value": true }]
+        },
+        {
+          "id": "ODS_SUS",
+          "kind": "OPTION",
+          "label": "Çayını içip teşekkür et",
+          "next": "$return",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Çay acıydı. Arda çatlak bardağından içti; sanki o çatlak bir yerde ona aitmiş gibi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "INV_BUFE_SON",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Cemil Usta",
+      "background": "sokak_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "cemil",
+              "text": "Bak abla, ben kart sahibini sormam. Bip dedi mi iş tamamdır. Ama ters ibraz diye bir şey var, bilir misin?"
+            },
+            {
+              "speaker": "cemil",
+              "text": "Biri “kartım çalındı” der, banka parayı benden geri alır. Malı da vermişim, parayı da. Bir kere yandım. Ondan beri tuhafları not ederim."
+            },
+            { "speaker": "player", "text": "Tuhaf ne demek?" },
+            {
+              "speaker": "cemil",
+              "text": "Şifresini unutanlar. Üçe bölenler. Eldivenle ödeyenler. Kartın üstündeki adla yüzü uymayanlar. Ben polis değilim abla, ama göz var."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir büfecinin hafızası bir ayakkabı kutusunda, lastikle bağlanmış duruyordu. Kimse o kutuyu açmamıştı.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "BFS_ISIM",
+          "kind": "OPTION",
+          "label": "“Adresinizi ve telefonunuzu alabilir miyim? Belki yeniden gelirim.”",
+          "next": "$return",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "cemil",
+                  "text": "Al abla. Ama gelirsen bir şey al, boş gelme. Sigara içmiyorsan çikolata al. Esnafız biz."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "VAR", "var": "cemil_tanisti", "op": "set", "value": true }]
+        },
+        {
+          "id": "BFS_GIT",
+          "kind": "OPTION",
+          "label": "Teşekkür edip çık",
+          "next": "$return",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Tentenin altından çıktım. Durağa kırk adım. Yağmurda otuz. Saydım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sahne · Acil servis koridoru</title>
+    <!--
+  Dava #05: Devlet Hastanesi acil servis, kamuya açık bekleme koridoru. Dokunma alanları SceneDef nesneleridir:
+  triyaj panosu (20,40,110,70) · hemşire masası/çizelge (200,170,80,50) · kamera (290,20,40,36) · bank (30,290,140,50).
+  Palet: zemin #141026, duvar #2b2350, kenar #120d1c.
+-->
+    <style>
+      body {
+        margin: 0;
+        background: #141026;
+      }
+      #scene {
+        position: relative;
+        width: 344px;
+        height: 380px;
+        overflow: hidden;
+        background: #141026;
+        font-family: 'Pixelify Sans', monospace;
+        color: #efe8ff;
+      }
+      #scene div {
+        position: absolute;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <div style="left: 0; right: 0; top: 0; height: 270px; background: #c8d3dd"></div>
+      <div style="left: 0; right: 0; top: 140px; height: 6px; background: #3f8a62"></div>
+      <div style="left: 0; right: 0; top: 266px; bottom: 0; background: #8a96a3; border-top: 4px solid #120d1c"></div>
+      <div
+        style="
+          left: 0;
+          right: 0;
+          top: 266px;
+          bottom: 0;
+          background: repeating-linear-gradient(90deg, rgba(18, 13, 28, 0.15) 0 2px, transparent 2px 40px);
+        "
+      ></div>
+      <!-- florasan -->
+      <div
+        style="left: 120px; top: 6px; width: 120px; height: 6px; background: #f4efe6; border: 2px solid #120d1c"
+      ></div>
+      <!-- triyaj panosu -->
+      <div
+        style="left: 20px; top: 40px; width: 110px; height: 70px; background: #25222e; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 28px; top: 50px; width: 40px; height: 6px; background: #c0392b"></div>
+      <div style="left: 28px; top: 64px; width: 70px; height: 6px; background: #e8b13c"></div>
+      <div style="left: 28px; top: 78px; width: 56px; height: 6px; background: #3f8a62"></div>
+      <div style="left: 28px; top: 92px; width: 80px; height: 6px; background: #3f8a62"></div>
+      <!-- kamera -->
+      <div
+        style="left: 296px; top: 22px; width: 28px; height: 16px; background: #4a4656; border: 2px solid #120d1c"
+      ></div>
+      <div
+        style="
+          left: 300px;
+          top: 40px;
+          width: 22px;
+          height: 12px;
+          background: #f4efe6;
+          border: 1px solid #120d1c;
+          font-size: 5px;
+          color: #120d1c;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        30 GÜN
+      </div>
+      <!-- yeşil alan kapısı -->
+      <div
+        style="left: 150px; top: 56px; width: 40px; height: 210px; background: #9cc3e6; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="
+          left: 150px;
+          top: 56px;
+          width: 40px;
+          height: 16px;
+          background: #3f8a62;
+          border: 3px solid #120d1c;
+          font-size: 6px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        YEŞİL
+      </div>
+      <!-- perde -->
+      <div
+        style="
+          left: 206px;
+          top: 60px;
+          width: 110px;
+          height: 96px;
+          background: repeating-linear-gradient(90deg, #9cc3e6 0 8px, #7aa3c6 8px 16px);
+          border: 3px solid #120d1c;
+        "
+      ></div>
+      <!-- hemşire masası ve çizelge -->
+      <div
+        style="left: 196px; top: 206px; width: 130px; height: 60px; background: #f4efe6; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 206px; top: 172px; width: 68px; height: 44px; background: #efe8ff; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 212px; top: 180px; width: 56px; height: 3px; background: #4a4656"></div>
+      <div style="left: 212px; top: 188px; width: 48px; height: 3px; background: #4a4656"></div>
+      <div style="left: 212px; top: 196px; width: 52px; height: 3px; background: #4a4656"></div>
+      <div
+        style="left: 288px; top: 194px; width: 20px; height: 14px; background: #4a4656; border: 2px solid #120d1c"
+      ></div>
+      <!-- bank -->
+      <div
+        style="left: 30px; top: 300px; width: 140px; height: 16px; background: #e2802f; border: 3px solid #120d1c"
+      ></div>
+      <div
+        style="left: 30px; top: 282px; width: 140px; height: 16px; background: #e2802f; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 40px; top: 316px; width: 6px; height: 24px; background: #120d1c"></div>
+      <div style="left: 154px; top: 316px; width: 6px; height: 24px; background: #120d1c"></div>
+      <div style="left: 96px; top: 294px; width: 16px; height: 6px; border-radius: 3px; background: #c9805e"></div>
+    </div>
+  </body>
+</html>

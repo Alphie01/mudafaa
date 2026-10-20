@@ -1,0 +1,86 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_112",
+        "when": { "not": { "hasEvidence": "clue_halka" } },
+        "text": "İhbar formuyla birlikte gelen ses kaydını dinlemedin; kâtibin “anlaşılamadı” dediği yerde “sol kulağında halka” vardı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_bicak",
+        "when": { "not": { "hasEvidence": "clue_bicak_yok" } },
+        "text": "112 dökümünü kolluk ifadesiyle karşılaştırmadın: ilk çağrıda bıçak yok. Silah unsuru (TCK 149/1-a) buna dayanıyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_teshis",
+        "when": { "not": { "hasEvidence": "clue_foto_farkli" } },
+        "text": "Teşhis tutanağındaki fotoğrafları karşılaştırmadın: biri renkli ve büyüktü (PVSK ek md. 6: aynı büyüklük ve özellik).",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_gozlem",
+        "when": { "not": { "hasEvidence": "ev_gozlem" } },
+        "text": "Acil servisin hemşire gözlem formunu istemedin; teşhisten önce gösterilen tek fotoğrafın belgesiydi (CMK 177).",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_kadir",
+        "when": { "not": { "hasEvidence": "clue_kadir" } },
+        "text": "Kılınçların evinde balkona bakmadın; üst kattaki komşu kesinti sırasında Barış’la konuşmuştu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_uedas",
+        "when": { "not": { "hasEvidence": "ev_uedas" } },
+        "text": "Kadir Usta’nın andığı kesintiyi UEDAŞ kaydıyla saate bağlamadın; tanık saati bilmiyordu, kayıt biliyordu.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_selfie",
+        "when": { "not": { "hasEvidence": "ev_selfie" } },
+        "text": "HızlıPaket’ten giriş cihazını ve kimlik doğrulama özçekimini istemedin; hesabı kimin taşıdığını gösteren kayıt oydu.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_cihaz",
+        "when": { "all": [{ "hasEvidence": "ev_gps" }, { "not": { "hasEvidence": "clue_cihaz" } }] },
+        "text": "Konum dökümünde giriş cihazını kayıtlı cihazla karşılaştırmadın: kayıt hesabın yerini gösterir, kişinin değil.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_186",
+        "when": { "all": [{ "hasEvidence": "ev_tel" }, { "not": { "hasEvidence": "clue_186" } }] },
+        "text": "Telefon raporundaki 23.40 aramasını kesinti kaydıyla birleştirmedin; Barış evinden arıza hattını aramıştı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_salon",
+        "when": { "not": { "flag": "h104_itiraz" } },
+        "text": "Salonda, sanık sandalyesindeki tek kişiye yöneltilen teşhis sorusuna itiraz edebilirdin (CMK 201/1).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_bildir",
+        "when": { "all": [{ "flag": "fact_tolga" }, { "not": { "flag": "bildirdi" } }] },
+        "text": "Başka bir kişinin fail olabileceğini öğrendiğinde savcılığa yazılı bildirimde bulunmadın (CMK 158, 160). Kovalamak avukatın işi değildir.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_etik",
+        "when": {
+          "any": [
+            { "flag": "nermin_baski" },
+            { "flag": "kadir_kocluk" },
+            { "flag": "ali_kocluk" },
+            { "flag": "zarf_tuttu" },
+            { "flag": "etik_kirlik" }
+          ]
+        },
+        "text": "Etik çizgiyi aştın: tanığa söz ezberletmek, mağdurun kapısında ısrar etmek ya da çıkar çatışmasını saklamak (Av.K. 34; TCK 272, 277).",
+        "category": "SAVUNMA_STRATEJISI"
+      }
+    ]
+  }
+}

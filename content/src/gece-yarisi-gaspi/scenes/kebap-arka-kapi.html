@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sahne · Tophane Kebap Salonu arka kapısı</title>
+    <!--
+  Dava #05: kuryelerin sipariş aldığı arka kapı. Dokunma alanları SceneDef nesneleridir:
+  fiş koçanı (60,200,60,40) · ızgara tezgâhı (150,120,120,70) · kurye panosu (270,220,60,90) ·
+  boy aynası (20,60,60,90) · kamera (290,20,40,36). Palet: zemin #141026, duvar #2b2350, kenar #120d1c.
+-->
+    <style>
+      body {
+        margin: 0;
+        background: #141026;
+      }
+      #scene {
+        position: relative;
+        width: 344px;
+        height: 380px;
+        overflow: hidden;
+        background: #141026;
+        font-family: 'Pixelify Sans', monospace;
+        color: #efe8ff;
+      }
+      #scene div {
+        position: absolute;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <div style="left: 0; right: 0; top: 0; height: 260px; background: #4a3a2e"></div>
+      <div
+        style="
+          left: 0;
+          right: 0;
+          top: 0;
+          height: 260px;
+          background: repeating-linear-gradient(0deg, rgba(18, 13, 28, 0.2) 0 2px, transparent 2px 18px);
+        "
+      ></div>
+      <div style="left: 0; right: 0; top: 256px; bottom: 0; background: #25222e; border-top: 4px solid #120d1c"></div>
+      <!-- duman -->
+      <div
+        style="
+          left: 160px;
+          top: 40px;
+          width: 100px;
+          height: 60px;
+          border-radius: 50%;
+          background: rgba(239, 232, 255, 0.12);
+        "
+      ></div>
+      <div
+        style="
+          left: 190px;
+          top: 10px;
+          width: 70px;
+          height: 40px;
+          border-radius: 50%;
+          background: rgba(239, 232, 255, 0.08);
+        "
+      ></div>
+      <!-- kamera -->
+      <div
+        style="left: 296px; top: 22px; width: 28px; height: 16px; background: #4a4656; border: 2px solid #120d1c"
+      ></div>
+      <!-- boy aynası -->
+      <div
+        style="left: 20px; top: 60px; width: 60px; height: 90px; background: #9cc3e6; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 28px; top: 70px; width: 12px; height: 60px; background: rgba(239, 232, 255, 0.4)"></div>
+      <!-- ızgara tezgâhı -->
+      <div
+        style="left: 150px; top: 150px; width: 120px; height: 40px; background: #6e4a32; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 156px; top: 126px; width: 108px; height: 26px; background: #25222e; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 162px; top: 132px; width: 96px; height: 4px; background: #e2802f"></div>
+      <div style="left: 162px; top: 140px; width: 96px; height: 4px; background: #c0392b"></div>
+      <div style="left: 170px; top: 120px; width: 4px; height: 14px; background: #b8b8c8"></div>
+      <div style="left: 200px; top: 120px; width: 4px; height: 14px; background: #b8b8c8"></div>
+      <div style="left: 230px; top: 120px; width: 4px; height: 14px; background: #b8b8c8"></div>
+      <!-- kasa ve fiş koçanı -->
+      <div
+        style="left: 50px; top: 226px; width: 90px; height: 30px; background: #6e4a32; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 64px; top: 202px; width: 40px; height: 28px; background: #f4efe6; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 70px; top: 208px; width: 28px; height: 2px; background: #4a4656"></div>
+      <div style="left: 70px; top: 214px; width: 24px; height: 2px; background: #4a4656"></div>
+      <!-- kurye panosu -->
+      <div
+        style="left: 270px; top: 220px; width: 60px; height: 90px; background: #b08463; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 278px; top: 230px; width: 20px; height: 16px; background: #f4efe6"></div>
+      <div style="left: 302px; top: 236px; width: 20px; height: 22px; background: #e8b13c"></div>
+      <div style="left: 280px; top: 256px; width: 18px; height: 24px; background: #9cc3e6"></div>
+      <div style="left: 302px; top: 266px; width: 22px; height: 14px; background: #f4efe6"></div>
+      <!-- arka kapı ve sarı kutu -->
+      <div
+        style="
+          left: 110px;
+          top: 270px;
+          width: 60px;
+          height: 40px;
+          background: #e8b13c;
+          border: 4px solid #120d1c;
+          font-size: 7px;
+          color: #120d1c;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        HIZLIPAKET
+      </div>
+      <div style="left: 96px; top: 310px; width: 90px; height: 10px; background: #120d1c"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sahne · Altıparmak tekel büfesi, gece</title>
+    <!--
+  Dava #01: Altıparmak'ta büfe. Dokunma alanları SceneDef nesneleridir (30-scenes.json): fiş kutusu (108,206,44,24) ·
+  kamera (250,36,26,18) · POS (168,170,26,22) · durak (8,96,34,120) · raf (200,80,120,70).
+-->
+    <style>
+      body {
+        margin: 0;
+        background: #141026;
+      }
+      #scene {
+        position: relative;
+        width: 344px;
+        height: 300px;
+        overflow: hidden;
+        background: #141026;
+        font-family: 'Pixelify Sans', monospace;
+        color: #efe8ff;
+      }
+      #scene div {
+        position: absolute;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <!-- gece gökyüzü ve yağmur -->
+      <div
+        style="
+          left: 0;
+          right: 0;
+          top: 0;
+          height: 300px;
+          background: repeating-linear-gradient(105deg, #9cc3e6 0 1px, transparent 1px 14px);
+          opacity: 0.12;
+        "
+      ></div>
+      <!-- durak tabelası -->
+      <div style="left: 22px; top: 110px; width: 6px; height: 120px; background: #5c5a66"></div>
+      <div
+        style="
+          left: 8px;
+          top: 96px;
+          width: 34px;
+          height: 22px;
+          background: #2f5a96;
+          border: 3px solid #120d1c;
+          font-size: 5px;
+          color: #efe8ff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          line-height: 6px;
+        "
+      >
+        ALTI<br />PARMAK
+      </div>
+      <!-- büfe gövdesi -->
+      <div
+        style="left: 60px; top: 30px; width: 276px; height: 200px; background: #2b2350; border: 4px solid #120d1c"
+      ></div>
+      <!-- tente -->
+      <div
+        style="
+          left: 52px;
+          top: 22px;
+          width: 292px;
+          height: 18px;
+          background: repeating-linear-gradient(90deg, #c0392b 0 20px, #efe8ff 20px 40px);
+          border: 3px solid #120d1c;
+        "
+      ></div>
+      <!-- kamera -->
+      <div
+        style="left: 252px; top: 40px; width: 22px; height: 14px; background: #120d1c; border: 2px solid #4a4656"
+      ></div>
+      <!-- tabela -->
+      <div
+        style="
+          left: 80px;
+          top: 46px;
+          width: 110px;
+          height: 22px;
+          background: #e8b13c;
+          border: 3px solid #120d1c;
+          font-size: 8px;
+          color: #120d1c;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        TEKEL BÜFE
+      </div>
+      <!-- raf ve cam -->
+      <div
+        style="left: 200px; top: 80px; width: 120px; height: 70px; background: #3d5a80; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="
+          left: 206px;
+          top: 88px;
+          width: 108px;
+          height: 8px;
+          background: repeating-linear-gradient(90deg, #c4413a 0 6px, #efe8ff 6px 8px, #3f8a62 8px 14px);
+        "
+      ></div>
+      <div
+        style="
+          left: 206px;
+          top: 106px;
+          width: 108px;
+          height: 8px;
+          background: repeating-linear-gradient(90deg, #e8b13c 0 6px, #2c3e66 6px 12px);
+        "
+      ></div>
+      <div
+        style="
+          left: 206px;
+          top: 124px;
+          width: 108px;
+          height: 8px;
+          background: repeating-linear-gradient(90deg, #b0496b 0 5px, #cfc9c1 5px 10px);
+        "
+      ></div>
+      <!-- tezgâh -->
+      <div
+        style="left: 70px; top: 160px; width: 260px; height: 70px; background: #7a4a2a; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 70px; top: 160px; width: 260px; height: 8px; background: #a86d45"></div>
+      <!-- POS -->
+      <div
+        style="left: 170px; top: 172px; width: 22px; height: 18px; background: #25222e; border: 2px solid #120d1c"
+      ></div>
+      <div style="left: 174px; top: 176px; width: 14px; height: 5px; background: #3f8a62"></div>
+      <!-- fiş kutusu -->
+      <div
+        style="left: 110px; top: 208px; width: 40px; height: 20px; background: #cfc9c1; border: 3px solid #120d1c"
+      ></div>
+      <div
+        style="left: 114px; top: 204px; width: 32px; height: 6px; background: #efe8ff; border: 2px solid #120d1c"
+      ></div>
+      <!-- kaldırım ve ıslak yansıma -->
+      <div style="left: 0; right: 0; top: 230px; bottom: 0; background: #25222e; border-top: 4px solid #120d1c"></div>
+      <div style="left: 90px; top: 244px; width: 180px; height: 6px; background: #e8b13c; opacity: 0.25"></div>
+      <div style="left: 120px; top: 262px; width: 110px; height: 4px; background: #c0392b; opacity: 0.2"></div>
+    </div>
+  </body>
+</html>

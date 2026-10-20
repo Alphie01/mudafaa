@@ -1,0 +1,840 @@
+{
+  "nodes": [
+    {
+      "id": "INV_EMANET_SON",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Emanet bürosu",
+      "background": "adliye",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Melek Hanım poşetleri tek tek numaralarına göre rafa dizdi. Sarı notun poşetini en son kaldırdı, bir an baktı."
+            },
+            {
+              "speaker": "katip",
+              "text": "Yedi aydır burada. Kimse sormadı. Polis de okumadı, ben de okumadım. Okumak bizim işimiz değil, saklamak bizim işimiz."
+            },
+            { "speaker": "katip", "text": "Siz okudunuz. Avukatlar bazen okur. Bazen." },
+            {
+              "speaker": "player",
+              "text": "“Saklamak bizim işimiz.” Bir emanet bürosu ile bir kayıp eşya bürosu arasında fark var mı? İkisi de sahibini bekleyen şeyleri tutuyor.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "EMS_ORNEK",
+          "kind": "OPTION",
+          "label": "“Tutanağın onaylı örneğini istiyorum.”",
+          "effects": [{ "type": "VAR", "var": "tutanak_ornek", "op": "set", "value": true }],
+          "next": "$return",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "katip",
+                  "text": "Dilekçe verin, harcını yatırın, yarın alırsınız. Dosya inceleme hakkınız var, örnek hakkınız da var. Ama sırası var."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EMS_GIT",
+          "kind": "OPTION",
+          "label": "Teşekkür edip çık",
+          "next": "$return",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bodrumdan çıkarken merdivenlerde bir avukatın kâtibe bağırdığını duydum. Melek Hanım’a bir çikolata almayı not ettim.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "INV_EMANET",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "El koyma tutanağı · emanet",
+      "background": "adliye",
+      "hud": ["exam_left"],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "10.00 — BURSA ADLİYESİ, EMANET BÜROSU", "bg": "adliye", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Bodrum kat. Metal raflar, numaralı poşetler, nem. Masada bir kayıt defteri ve soğumuş bir simit."
+            },
+            {
+              "speaker": "katip",
+              "text": "Melek Şen, kâtip. Dosya numarası? Tamam. Dokunmak yok, bakmak serbest. Eldiven şurada. Yarım saat."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masaya beş poşet dizildi. Her biri tutanaktaki bir satır. Bir hayatın yedi ay önceki sabahı, şeffaf naylonun içinde."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bir alet seç, sonra şüpheli satıra dokun. Doğru alet ve doğru satır yeni bir ipucu verir; boş deneme bir hak götürür."
+            }
+          ]
+        }
+      ],
+      "header": { "left": "EMANET 2026/1184 · EL KOYMA TUTANAĞI", "right": "7 MART · 08.15" },
+      "columns": [
+        { "label": "SIRA", "flex": 0.5 },
+        { "label": "EŞYA", "flex": 1.6 },
+        { "label": "AÇIKLAMA", "flex": 2 }
+      ],
+      "rows": [
+        {
+          "id": "e1",
+          "cells": ["1", "Kahverengi deri kadın cüzdanı", "İçinde: kimlik, sağlık kartı, eczane fişi, 1 fotoğraf"],
+          "lens": {
+            "cmp": {
+              "cells": ["1", "Kahverengi deri kadın cüzdanı", "Müşteki: 1.200 TL + 2 kart · Emanette: YOK"],
+              "tone": "special"
+            }
+          }
+        },
+        {
+          "id": "e2",
+          "cells": ["2", "Zarf içinde 600 TL", "Sırt çantasının ön gözünde"],
+          "lens": {
+            "mag": { "cells": ["2", "Banka zarfı, bantlı", "Üstünde el yazısı: “ARDA – kira”"], "tone": "special" }
+          }
+        },
+        {
+          "id": "e3",
+          "cells": ["3", "El yazılı not kâğıdı (sarı)", "Masa üzerinde"],
+          "lens": {
+            "mag": { "cells": ["3", "Sarı yapışkan not", "“Yarın 9 — karakol. G. Sarı cüzdan.”"], "tone": "special" }
+          }
+        },
+        { "id": "e4", "cells": ["4", "Cep telefonu", "İnceleme sonrası iade edildi"] },
+        { "id": "e5", "cells": ["5", "Öğrenci kartı (kişiye özel)", "Fotokopisi alındı, iade edildi"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" },
+        { "id": "uv", "label": "UV ışık", "icon": "uv", "visualMode": "UV" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "exam_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_E_CMP1",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "e1" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Müşteki 1.200 TL ve iki kart diyor. Emanetteki cüzdanda ikisi de yok; Arda’nın üstünden ve evinden de çıkmamış.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kart_yok" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_E_MAG2",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "e2" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Bantlı bir banka zarfı. Üstünde Arda’nın el yazısı: “ARDA – kira.” Banknotlar düz, sıralı.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_zarf" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_E_MAG3",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "e3" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "“Yarın 9 — karakol. G. Sarı cüzdan.” Tutanakta yalnızca “el yazılı not” diye geçiyor. Yedi aydır kimse okumamış.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_sari_not" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_E_UV3",
+          "kind": "EXAMINE",
+          "match": { "tool": "uv", "target": "e3" },
+          "feedback": {
+            "title": "GEREK YOK",
+            "text": "Not silinmemiş, kazınmamış; UV bir şey eklemiyor. Bazen kâğıdın söylediği şey, yazanın yazdığından ibarettir.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        {
+          "id": "FB_EMANET",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle burada dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        {
+          "id": "EMANET_BITIR",
+          "kind": "CONTINUE",
+          "label": "Poşetleri kâtibe geri ver",
+          "role": "BACK",
+          "next": "INV_EMANET_SON"
+        }
+      ]
+    },
+    {
+      "id": "INV_KLIP",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "CD ve aktarım formu",
+      "background": "buro",
+      "hud": ["klip_left"],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · TOPLANTI ODASI", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "CD’nin örneğini dizüstüne taktım. Ekranda gri, gürültülü bir görüntü belirdi. Köşede saat: 18.42.00. Ses yok."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arda oturuyor. Eğiliyor. Bir şey alıyor. Açıyor. Kapatıyor. Çantasına koyuyor. Görüntü 18.44.30’da kararıyor."
+            },
+            {
+              "speaker": "player",
+              "text": "İki buçuk dakika. Savcılığın en güçlü delili. Bir kez izledim, iki kez, beş kez. Altıncıda görüntüye değil, köşedeki rakamlara bakmaya başladım.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "CD’nin yanında Kent Ulaşım’ın tek sayfalık aktarım formu. Teknisyenin imzası, bir kaşe, bir dipnot."
+            }
+          ]
+        }
+      ],
+      "header": { "left": "KENT ULAŞIM A.Ş. · KAYIT AKTARIM FORMU", "right": "6 MART 23.40 · V. SEZER" },
+      "columns": [
+        { "label": "ALAN", "flex": 1 },
+        { "label": "DEĞER", "flex": 2 }
+      ],
+      "rows": [
+        {
+          "id": "k1",
+          "cells": ["Kaynak dosya", "SEFER_0306_1810-1910"],
+          "lens": {
+            "mag": {
+              "cells": ["Kaynak dosya", "SEFER_0306_1810-1910 · 4 kanal · “olay klasörüne alındı”"],
+              "tone": "special"
+            }
+          }
+        },
+        { "id": "k2", "cells": ["Aktarılan kanal", "KAM-2 (orta)"] },
+        { "id": "k3", "cells": ["Aktarılan aralık", "18.42.00–18.44.30"] },
+        {
+          "id": "k4",
+          "cells": ["Aktarım notu", "*1 segment (bkz. dipnot)"],
+          "lens": {
+            "mag": {
+              "cells": ["Aktarım notu", "Dipnot: 18.43.00–18.43.59 yazma hatası, yeniden denenmedi"],
+              "tone": "special"
+            }
+          }
+        },
+        {
+          "id": "k5",
+          "cells": ["CD · ilk kareler", "18.42.00–18.42.20"],
+          "lens": {
+            "play": {
+              "cells": ["CD · ilk kareler", "18.42.05 oturur, ayağı takılır, koltuk altından bir cisim alır"],
+              "tone": "special"
+            }
+          }
+        },
+        {
+          "id": "k6",
+          "cells": ["CD · son kare", "18.44.30"],
+          "lens": {
+            "play": { "cells": ["CD · son kare", "Durak ekranı: “SIRADAKİ DURAK: BEŞEVLER”"], "tone": "special" }
+          }
+        },
+        { "id": "k7", "cells": ["Talep eden", "Pol. Mem. S. Ulu · “olay anı yeterli”"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "play", "label": "Kareleri izle", "icon": "camera" },
+        { "id": "lock", "label": "Bütünlük", "icon": "lock" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "klip_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_K_MAG1",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "k1" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "CD’nin kaynağı bir saatlik, dört kanallı bir sefer kaydı: 18.10–19.10. “Olay klasörüne alındı.” Tam kayıt arşivde duruyor.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kaynak_dosya" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_K_MAG4",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "k4" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "18.43’ün bütün dakikası CD’ye yazılamamış. Klipte 18.42.59’dan 18.44.00’e atlanıyor. Kimse fark etmemiş; ya da etmiş, yazmamış.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_bozuk_segment" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_K_LOCK4",
+          "kind": "EXAMINE",
+          "match": { "tool": "lock", "target": "k4" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Zaman damgaları sürekli değil: 18.42.59 → 18.44.00. Bir dakika eksik. Formun dipnotu bunu doğruluyor.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_bozuk_segment" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_K_PLAY5",
+          "kind": "EXAMINE",
+          "match": { "tool": "play", "target": "k5" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "18.42.05: oturuyor, ayağı takılıyor, eğilip koltuğun altından alıyor. Cüzdan çantadan ya da cepten çıkmıyor.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ilk_kare" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_K_PLAY6",
+          "kind": "EXAMINE",
+          "match": { "tool": "play", "target": "k6" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Son kare, 18.44.30: tavandaki durak ekranında “SIRADAKİ DURAK: BEŞEVLER”. Arda hâlâ otobüste, hâlâ oturuyor.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_son_kare" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "FB_KLIP",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle burada dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "KLIP_BITIR", "kind": "CONTINUE", "label": "CD’yi çıkar", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_BANKA",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Kart hareketleri",
+      "background": "buro",
+      "hud": ["banka_left"],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · DOSYA, EK-4", "bg": "buro", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Bankanın gönderdiği döküm tek sayfa: saat, işyeri, tutar. Kimin harcadığı yazmıyor. Kartın kimin olduğu yazıyor."
+            },
+            {
+              "speaker": "player",
+              "text": "Savcılık bu sayfayı “zarar” diye dosyaya koymuş. Ben buna bir harita gibi bakıyorum.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "BANKA · KART HAREKETLERİ (EK-4)", "right": "6 MART 2026" },
+      "columns": [
+        { "label": "SAAT", "flex": 0.7 },
+        { "label": "İŞYERİ", "flex": 2 },
+        { "label": "TUTAR", "flex": 1 }
+      ],
+      "rows": [
+        {
+          "id": "b1",
+          "cells": ["18.49", "ALTIPARMAK TEKEL BÜFE", "3 × 246,66 TL"],
+          "lens": {
+            "mag": {
+              "cells": ["18.49", "ALTIPARMAK TEKEL BÜFE · 3 ayrı temassız", "18.49.10 / .31 / .52"],
+              "tone": "special"
+            }
+          }
+        },
+        { "id": "b2", "cells": ["18.55", "ALTIPARMAK GSM AKSESUAR", "1.450,00 TL"] },
+        { "id": "b3", "cells": ["19.06", "KÜLTÜRPARK PETROL", "750,00 TL"] },
+        { "id": "b4", "cells": ["19.31", "KART BLOKE (müşteri talebi)", "—"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "banka_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_B_MAG1",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "b1" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "İlk harcama 18.49’da Altıparmak’ta, yirmişer saniye arayla üç ayrı temassız çekim. Şifresiz sınırın altında kalmak için.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_harcama_saat" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_B_CMP1",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "b1" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "18.49, Altıparmak. CD’deki saatlerle yan yana koyunca soru kendiliğinden doğuyor: Arda o sırada neredeydi?",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_harcama_saat" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "FB_BANKA",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle burada dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "BANKA_BITIR", "kind": "CONTINUE", "label": "Dosyayı kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_DIL",
+      "type": "CHOICE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Delil dilekçesi (CMK 177)",
+      "background": "buro",
+      "hud": ["dil_hak"],
+      "prompt": {
+        "speaker": "narrator",
+        "text": "Duruşmadan en az beş gün önce, ispat edilecek olayı göstererek. Üç talep hakkın var; her talebi neden istediğini bilerek seç."
+      },
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · DİLEKÇE", "bg": "buro", "style": "card" },
+            {
+              "speaker": "player",
+              "text": "Boş bir sayfa, bir imleç, bir mahkeme başkanlığı başlığı. “Sayın Hâkim, sanık müdafii olarak aşağıdaki delillerin toplanmasını talep ederim.”",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Her satır bir hak. Yanlış satır, doğru satırın yerini kaplar.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "DIL_KAYIT",
+          "kind": "OPTION",
+          "label": "Kent Ulaşım arşivindeki tam sefer kaydı (dört kamera, 18.10–19.10)",
+          "enabledWhen": { "cmp": [{ "var": "dil_hak" }, ">", 0] },
+          "lockedReason": "Talep hakkın kalmadı.",
+          "effects": [
+            { "type": "VAR", "var": "dil_hak", "op": "dec", "value": 1 },
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "VAR", "var": "kayit_istendi", "op": "set", "value": true }
+          ],
+          "next": "$stay",
+          "visibleWhen": {
+            "any": [
+              { "hasEvidence": "clue_kaynak_dosya" },
+              { "hasEvidence": "clue_dort_kamera" },
+              { "hasEvidence": "clue_olay_klasoru" }
+            ]
+          },
+          "quality": {
+            "q": "GOOD",
+            "feedback": "İspat edilecek olay belli (cüzdanın sanıktan önce kimde olduğu, sanığın teslim girişimi), delilin yeri belli (olay klasörü). CMK 177’ye uygun, somut bir talep.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_153",
+          "kind": "OPTION",
+          "label": "153 Çözüm Merkezi’nin 6 Mart 19.18 çağrı kaydı",
+          "enabledWhen": { "cmp": [{ "var": "dil_hak" }, ">", 0] },
+          "lockedReason": "Talep hakkın kalmadı.",
+          "effects": [
+            { "type": "VAR", "var": "dil_hak", "op": "dec", "value": 1 },
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "VAR", "var": "cagri_istendi", "op": "set", "value": true }
+          ],
+          "next": "$stay",
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_153_arama" }, { "flag": "fact_153_anlatti" }] },
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Teslim niyetini gösteren, üçüncü kişinin elindeki tarafsız bir kayıt. Saati ve numarası belli; talep somut.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_OZAN",
+          "kind": "OPTION",
+          "label": "Tanık: Ozan Kaplan (sabahki not ve geceki konuşma)",
+          "enabledWhen": { "cmp": [{ "var": "dil_hak" }, ">", 0] },
+          "lockedReason": "Talep hakkın kalmadı.",
+          "effects": [
+            { "type": "VAR", "var": "dil_hak", "op": "dec", "value": 1 },
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "VAR", "var": "ozan_istendi", "op": "set", "value": true }
+          ],
+          "next": "$stay",
+          "visibleWhen": { "any": [{ "flag": "fact_ozan" }, { "hasEvidence": "clue_sari_not" }] },
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Notun ne zaman ve neden yazıldığını gören bir tanık. Doğrudan gözleme dayanır.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_BILIRKISI",
+          "kind": "OPTION",
+          "label": "CD’nin bilirkişiye incelettirilmesi",
+          "enabledWhen": { "cmp": [{ "var": "dil_hak" }, ">", 0] },
+          "lockedReason": "Talep hakkın kalmadı.",
+          "effects": [{ "type": "VAR", "var": "dil_hak", "op": "dec", "value": 1 }],
+          "next": "$stay",
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Bilirkişi CD’nin oynanıp oynanmadığını söyleyebilir ama eksik kamerayı ve dakikaları tamamlayamaz; asıl delil kaynaktaki tam kayıttır."
+          }
+        },
+        {
+          "id": "DIL_BUFE",
+          "kind": "OPTION",
+          "label": "Altıparmak’taki büfenin kamera kaydı",
+          "enabledWhen": { "cmp": [{ "var": "dil_hak" }, ">", 0] },
+          "lockedReason": "Talep hakkın kalmadı.",
+          "effects": [{ "type": "VAR", "var": "dil_hak", "op": "dec", "value": 1 }],
+          "next": "$stay",
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kayıt otuz günde silinmiş; istem sonuçsuz kalır. Delilin ispata elverişsiz olduğu talepler CMK 206/2 uyarınca reddedilebilir."
+          }
+        },
+        {
+          "id": "DIL_FB",
+          "kind": "OPTION",
+          "label": "Müştekinin bütün Facebook yazışmalarının getirtilmesi",
+          "enabledWhen": { "cmp": [{ "var": "dil_hak" }, ">", 0] },
+          "lockedReason": "Talep hakkın kalmadı.",
+          "effects": [
+            { "type": "VAR", "var": "dil_hak", "op": "dec", "value": 1 },
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -20 }
+          ],
+          "next": "$stay",
+          "quality": {
+            "q": "BAD",
+            "feedback": "Ölçüsüz ve özel hayatın gizliliğine dokunan bir talep; ispat edilecek olay için gerekli olanla sınırlı değil. Reddedilir ve mahkemenin gözünde savunmanın ciddiyetini zedeler.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_VER",
+          "kind": "CONTINUE",
+          "label": "Dilekçeyi ver",
+          "enabledWhen": { "cmp": [{ "var": "dil_hak" }, "<", 3] },
+          "lockedReason": "En az bir talep seç.",
+          "role": "PRIMARY",
+          "next": "$return",
+          "effects": [{ "type": "VAR", "var": "dil_verildi", "op": "set", "value": true }]
+        }
+      ]
+    },
+    {
+      "id": "INV_CIKARIM",
+      "type": "DEDUCTION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Çıkarım tahtası",
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Mantar panoya iğnelenmiş kartlar, aralarında kırmızı iplik bekleyen boşluklar."
+            },
+            {
+              "speaker": "narrator",
+              "text": "İki kart seç. Birbirini tamamlıyorsa duruşmada sunabileceğin bir çıkarım doğar. Birbirini açıklamayan çiftler skor götürür."
+            }
+          ]
+        }
+      ],
+      "pool": [
+        "clue_dort_kamera",
+        "clue_koltuk_boslugu",
+        "clue_cikartma",
+        "clue_dokuz_koltuk",
+        "clue_atm_fisi",
+        "clue_153_arama",
+        "clue_fb_mesaj",
+        "clue_kira",
+        "clue_fis_notu",
+        "clue_bufe_kamera",
+        "clue_kart_yok",
+        "clue_zarf",
+        "clue_sari_not",
+        "clue_kaynak_dosya",
+        "clue_bozuk_segment",
+        "clue_ilk_kare",
+        "clue_son_kare",
+        "clue_harcama_saat",
+        "clue_gozluk",
+        "clue_gri_kapuson",
+        "clue_defter",
+        "clue_olay_klasoru"
+      ],
+      "choices": [
+        {
+          "id": "CB_KART",
+          "kind": "COMBINE",
+          "match": { "a": "clue_son_kare", "b": "clue_harcama_saat" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "18.44.30’da Arda Beşevler’e giden otobüsteydi. 18.49’da kartlar kilometrelerce geride kullanıldı. O değil.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_kart_baskasi" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ]
+        },
+        {
+          "id": "CB_ZARF",
+          "kind": "COMBINE",
+          "match": { "a": "clue_atm_fisi", "b": "clue_zarf" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "17.52’de çekilen 600 TL, “ARDA – kira” yazılı banka zarfında. Kadının parası değil.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_zarf" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ]
+        },
+        {
+          "id": "CB_TESLIM",
+          "kind": "COMBINE",
+          "match": { "a": "clue_sari_not", "b": "clue_153_arama" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "19.18’de belediyeye üç dakikalık çağrı, gece masada “Yarın 9 — karakol.” Saklayan biri kendine hatırlatma yazmaz.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_teslim" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ]
+        },
+        {
+          "id": "CB_KAYIT",
+          "kind": "COMBINE",
+          "match": { "a": "clue_dort_kamera", "b": "clue_kaynak_dosya" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Dört kamera, bir saatlik dört kanallı kaynak. CD’de tek kanal ve iki buçuk dakika. Gerisi arşivde.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_eksik_kayit" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ]
+        },
+        {
+          "id": "CB_HAYRI",
+          "kind": "COMBINE",
+          "match": { "a": "clue_gozluk", "b": "clue_dokuz_koltuk" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Arkaya bakan koltukta gözlüksüz gazete okuyan miyop biri, başını kaldırınca üç metre ötede bulanık bir kalabalık görür.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_hayri_gormedi" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ]
+        },
+        {
+          "id": "CB_BULDU",
+          "kind": "COMBINE",
+          "match": { "a": "clue_koltuk_boslugu", "b": "clue_ilk_kare" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Ayağı takılıyor, eğiliyor, koltuğun altındaki boşluktan alıyor. Bir alma değil, bir bulma.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_buldu" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ]
+        },
+        {
+          "id": "CB_KLASOR",
+          "kind": "COMBINE",
+          "match": { "a": "clue_olay_klasoru", "b": "clue_dort_kamera" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Dört kamera var; her olayda bir saatlik, dört kanallı bir klasör açılıyor. CD ise tek kanal ve iki buçuk dakika. Gerisi klasörde.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_eksik_kayit" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ]
+        },
+        {
+          "id": "CB_BERE",
+          "kind": "COMBINE",
+          "match": { "a": "clue_kart_yok", "b": "clue_fis_notu" },
+          "feedback": {
+            "title": "YENİ ÇIKARIM",
+            "text": "Kartlar cüzdanda yoktu. 18.49’da büfede “yeşil bere” not edilmiş biri üç ayrı çekim yaptı. Kim olduğunu bilmiyoruz.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_bereli" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ]
+        },
+        {
+          "id": "FB_CIKARIM",
+          "kind": "FALLBACK",
+          "fallbackFor": "COMBINE",
+          "repeat": "ONCE_PER_PARAMS",
+          "feedback": {
+            "title": "Bu ikisi birbirini açıklamıyor",
+            "text": "Başka bir çift dene.",
+            "label": "BAĞLANTI YOK · −50 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+        },
+        { "id": "CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_kart_yok", "source": { "type": "RULE", "id": "EX_E_CMP1" } },
+    { "evidence": "clue_zarf", "source": { "type": "RULE", "id": "EX_E_MAG2" } },
+    { "evidence": "clue_sari_not", "source": { "type": "RULE", "id": "EX_E_MAG3" } },
+    { "evidence": "clue_kaynak_dosya", "source": { "type": "RULE", "id": "EX_K_MAG1" } },
+    { "evidence": "clue_bozuk_segment", "source": { "type": "RULE", "id": "EX_K_MAG4" } },
+    { "evidence": "clue_bozuk_segment", "source": { "type": "RULE", "id": "EX_K_LOCK4" } },
+    { "evidence": "clue_ilk_kare", "source": { "type": "RULE", "id": "EX_K_PLAY5" } },
+    { "evidence": "clue_son_kare", "source": { "type": "RULE", "id": "EX_K_PLAY6" } },
+    { "evidence": "clue_harcama_saat", "source": { "type": "RULE", "id": "EX_B_MAG1" } },
+    { "evidence": "clue_harcama_saat", "source": { "type": "RULE", "id": "EX_B_CMP1" } },
+    { "evidence": "ded_kart_baskasi", "source": { "type": "RULE", "id": "CB_KART" } },
+    { "evidence": "ded_zarf", "source": { "type": "RULE", "id": "CB_ZARF" } },
+    { "evidence": "ded_teslim", "source": { "type": "RULE", "id": "CB_TESLIM" } },
+    { "evidence": "ded_eksik_kayit", "source": { "type": "RULE", "id": "CB_KAYIT" } },
+    { "evidence": "ded_hayri_gormedi", "source": { "type": "RULE", "id": "CB_HAYRI" } },
+    { "evidence": "ded_buldu", "source": { "type": "RULE", "id": "CB_BULDU" } },
+    { "evidence": "ded_eksik_kayit", "source": { "type": "RULE", "id": "CB_KLASOR" } },
+    { "evidence": "ded_bereli", "source": { "type": "RULE", "id": "CB_BERE" } }
+  ]
+}

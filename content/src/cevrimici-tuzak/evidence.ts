@@ -1,0 +1,643 @@
+import { clue, evidence, insight } from '../../../tools/content/src/kit/index.js';
+import type { CasePart, EvidenceDef } from '../../../tools/content/src/kit/index.js';
+
+// 20-evidence: deliller (EVIDENCE), ipuçları (CLUE) ve çıkarımlar (INSIGHT). Başlıklar bulunmadan önce hiçbir ekran
+// metninde geçmez (LEAK); bu yüzden başlıklar diyaloglarda kullanılmayan, kendine özgü ifadelerdir.
+// Etiketler: `kart` = çıkarım tahtası havuzu, `key` = karar ekranındaki "Delil toplama" sayacı.
+
+const card = { tags: ['kart'] };
+const cardKey = { tags: ['kart', 'key'] };
+
+const initial: EvidenceDef[] = [
+  evidence('ev_siber_rapor', {
+    type: 'ADLI_RAPOR',
+    title: 'Siber Şube soruşturma raporu',
+    shortText: 'Hesap sanığın; işlemler sanığın mobil şubesinden; 4.500 TL “kiralama bedeli”.',
+    description:
+      'Kom. Yrd. Gökhan Ateş imzalı rapor. Bankanın gönderdiği hesap özetine dayanır: “Hesap sanık adına olup 4 Kasım işlemleri sanığın mobil bankacılığı üzerinden yapılmıştır. 1 Kasım’daki 4.500 TL, hesap kiralama bedeli olarak değerlendirilmiştir.”',
+    sourceLabel: 'Soruşturma dosyası',
+    icon: 'document',
+    side: 'PROSECUTION',
+    strength: 'STRONG',
+    tagLabel: 'SAVCILIK',
+    legalNote:
+      'Kolluk raporu bir değerlendirmedir; banka cihaz ve erişim kayıtları istenmemiştir (CMK 160/2 eksik soruşturma).',
+    initiallyKnown: true,
+  }),
+  evidence('ev_hesap', {
+    type: 'BELGE',
+    title: 'Hesap hareketleri (1–4 Kasım 2025)',
+    shortText: 'Gelen avans, gelen kapora, üç çıkış.',
+    description:
+      'Ece Yalın adına vadesiz hesabın 1–4 Kasım 2025 dökümü: 4.500 TL gelen EFT, 75.000 TL gelen kapora, kripto platformuna 40.000 TL, bir şahsa 15.000 TL ve kartsız 20.000 TL çekim.',
+    sourceLabel: 'Banka yazısı',
+    icon: 'receipt',
+    side: 'NEUTRAL',
+    strength: 'MEDIUM',
+    initiallyKnown: true,
+  }),
+  evidence('ev_sikayet', {
+    type: 'BELGE',
+    title: 'Katılanın şikâyet dilekçesi',
+    shortText: 'Sahte araç ilanı, telefonda “Kaan” adlı satıcı, 75.000 TL kapora.',
+    description:
+      'Nurettin Aksoy’un el yazısıyla temize çekilmiş, iki sayfalık şikâyeti ve ekleri: ilan görüntüsü, dekont, satıcıyla görüşmenin saatleri.',
+    sourceLabel: 'Soruşturma dosyası',
+    icon: 'document',
+    side: 'PROSECUTION',
+    strength: 'MEDIUM',
+    tagLabel: 'SAVCILIK',
+    initiallyKnown: true,
+  }),
+  evidence('ev_ece_ifade', {
+    type: 'TANIK_IFADESI',
+    title: 'Ece’nin kolluk ifadesi (7 Kasım 2025)',
+    shortText: '“Bir iş başvurusu yapmıştım. Kimseyle kod paylaşmadım.”',
+    description:
+      'Müdafisiz alınmış ifade: “Bir iş başvurusu yapmıştım, maaş için IBAN verdim. Kimseyle kod paylaşmadım. Telefonum 4 Kasım’da çekmiyordu.”',
+    sourceLabel: 'Siber Şube',
+    icon: 'document',
+    side: 'PROSECUTION',
+    strength: 'WEAK',
+    tagLabel: 'SAVCILIK',
+    initiallyKnown: true,
+  }),
+];
+
+const inv1: EvidenceDef[] = [
+  clue('clue_tablo', {
+    type: 'DIJITAL',
+    title: 'Başvuru tablosu: 143 satır',
+    shortText: 'Ece her başvuruyu tarih, şirket, kişi ve durumla kaydetmiş.',
+    description:
+      'Laptopta açık bir tablo. 143 satır. 20 Ekim 2025: “Nova Dijital — Uzaktan Müşteri Temsilcisi — Kaan Bey — OLUMLU!!!” Sütunlardan biri “Ekran görüntüsü klasörü”.',
+    sourceLabel: 'Ece’nin odası',
+    icon: 'document',
+    combinable: false,
+  }),
+  evidence('ev_not', {
+    type: 'FIZIKSEL',
+    title: 'Sarı not: “4471 — SGK”',
+    shortText: 'Ece’nin el yazısı. Kodu okurken yazmış.',
+    description:
+      'Monitörün kenarına yapışık sarı not: “4471 — SGK”. Altında küçük bir gülen yüz. Not, kodun okunduğunu da, neye ait sanıldığını da gösteriyor.',
+    sourceLabel: 'Ece’nin odası',
+    icon: 'document',
+    side: 'DEFENSE',
+    strength: 'MEDIUM',
+    combinable: true,
+    legalNote: 'Çift yönlü delil: kodun paylaşıldığını ama “SGK kodu” sanıldığını gösterir (TCK 21: kast).',
+    ...cardKey,
+  }),
+  clue('clue_lamba', {
+    type: 'FOTOGRAF',
+    title: 'Beyaz LED parlaması ve bordo oje',
+    shortText: 'Masa lambası parlak yüzeylerde bir yıldız bırakıyor; ojenin başparmakta kırığı var.',
+    description:
+      'Masa lambası sert beyaz LED. Parlak her yüzeyin sol üstüne yıldız gibi bir yansıma konduruyor. Masada koyu bordo bir oje şişesi; Ece’nin sol başparmağındaki oje köşeden kırık.',
+    sourceLabel: 'Ece’nin odası',
+    icon: 'bulb',
+    ...card,
+  }),
+  clue('clue_simyok', {
+    type: 'DIJITAL',
+    title: 'Ekran görüntüsü: “SIM yok” · 10.13',
+    shortText: '4 Kasım 2025, 10.13. Telefon şebekeden düşmüş.',
+    description:
+      'Ece’nin iPhone 8’inin fotoğraf arşivinde: 4 Kasım 2025, 10.13 tarihli ekran görüntüsü. Sol üstte “SIM yok”.',
+    sourceLabel: 'Ece’nin odası',
+    icon: 'phone',
+    ...cardKey,
+  }),
+  clue('clue_cv', {
+    type: 'BELGE',
+    title: 'Yazdırılmış CV yığını',
+    shortText: 'Otuz kopya. Hepsinde aynı vesikalık.',
+    description: 'Masanın köşesinde otuz kopya CV. Hepsinde aynı vesikalık, aynı “takım çalışmasına yatkın”.',
+    sourceLabel: 'Ece’nin odası',
+    icon: 'document',
+    ...card,
+  }),
+  clue('clue_vesikalik', {
+    type: 'FOTOGRAF',
+    title: 'Ortadan yırtılmış fotoğraf şeridi',
+    shortText: 'Fotoğraf kabininden dört kare; yarısı yırtılmış.',
+    description: 'Bir AVM fotoğraf kabininden dört kare. Ece’nin yanındaki genç adamın olduğu yarı yırtılıp atılmış.',
+    sourceLabel: 'Ece’nin odası',
+    icon: 'camera',
+    ...card,
+  }),
+  clue('clue_ding_ece', {
+    type: 'TANIK_IFADESI',
+    title: 'Mülakatın arka planındaki anons',
+    shortText: 'Kaan Bey’in arkasından bir sinyal ve “Dördüncü kat”.',
+    description:
+      'Ece: “Kamerası bozukmuş. Konuşurken arkadan bir ding geldi, bir kadın sesi ‘Dördüncü kat’ dedi. İş merkezindeyiz demişti.”',
+    sourceLabel: 'Ece ile görüşme',
+    icon: 'phone',
+    ...card,
+  }),
+  clue('clue_sgk_mesaj', {
+    type: 'DIJITAL',
+    title: 'Görüntü: “SGK için kod gelecek” · 14.26',
+    shortText: '3 Kasım 14.26, Kaan Bey: “SGK işe giriş için size bir kod gelecek, beni arayıp okur musunuz?”',
+    description:
+      'Silinmiş yazışmanın ekran görüntüsü. 3 Kasım 2025, 14.26. Gönderen: “Kaan | Nova İK”. Hemen altında Ece: “Tamam efendim, hemen arıyorum.”',
+    sourceLabel: 'Ece’nin ekran görüntüleri',
+    icon: 'phone',
+    ...cardKey,
+  }),
+  clue('clue_kvkk_mesaj', {
+    type: 'DIJITAL',
+    title: 'Görüntü: “Yazışmaları silin” · 21.10',
+    shortText: '3 Kasım 21.10: “KVKK gereği yazışmaları silin; yarın hattınız birkaç saat kesilebilir.”',
+    description:
+      '3 Kasım 2025, 21.10. “Kaan | Nova İK”: “KVKK gereği yazışmalarımızı silmenizi rica ederim. Yarın kurumsal hatta geçiyoruz, hattınız birkaç saat kesilebilir.”',
+    sourceLabel: 'Ece’nin ekran görüntüleri',
+    icon: 'phone',
+    ...cardKey,
+  }),
+  clue('clue_hr_no', {
+    type: 'DIJITAL',
+    title: 'Nova İK’nın WhatsApp numarası',
+    shortText: '“Kaan | Nova İK”: 0532 614 41 07.',
+    description:
+      'Ekran görüntülerinin üstünde, profil adının altında: 0532 614 41 07. Profil fotoğrafı bir şirket logosu.',
+    sourceLabel: 'Ece’nin ekran görüntüleri',
+    icon: 'phone',
+    ...card,
+  }),
+  clue('clue_iphone_imei', {
+    type: 'FIZIKSEL',
+    title: 'Telefon kutusundaki IMEI etiketi',
+    shortText: 'Ece’nin iPhone 8’i: IMEI 35 391508 …',
+    description: 'Sevim’in sakladığı kutunun altında barkodlu etiket: Apple iPhone 8, IMEI 35 391508 72 0144 6.',
+    sourceLabel: 'Sevim Yalın',
+    icon: 'phone',
+    ...card,
+  }),
+  clue('clue_avans', {
+    type: 'BELGE',
+    title: 'EFT açıklaması: “EĞİTİM AVANSI”',
+    shortText: '1 Kasım 09.14, MEHMET DEMİR’den 4.500 TL: “EĞİTİM AVANSI”.',
+    description: 'Gelen EFT’nin açıklama alanı: “NOVA DIJITAL EGITIM AVANSI”. Gönderen: MEHMET DEMİR, IBAN …0418.',
+    sourceLabel: 'Hesap hareketleri',
+    icon: 'receipt',
+    ...cardKey,
+  }),
+  clue('clue_mdemir_cikis', {
+    type: 'BELGE',
+    title: '13.58 çıkışının alıcısı',
+    shortText: 'Kaporadan 15.000 TL, avansı gönderen IBAN’a (…0418) geri gitmiş.',
+    description:
+      '4 Kasım 13.58: 15.000 TL giden EFT. Alıcı: MEHMET DEMİR, IBAN …0418 — 1 Kasım’da avansı gönderen hesabın ta kendisi.',
+    sourceLabel: 'Hesap hareketleri',
+    icon: 'compare',
+    ...cardKey,
+  }),
+  clue('clue_qr_atm', {
+    type: 'BELGE',
+    title: 'Kartsız çekim: mobil uygulamayla QR',
+    shortText: '14.05, Kent Meydanı ATM’si: kartsız QR çekim.',
+    description:
+      'Kartsız çekim, ancak mobil şubeye tanımlı bir cihazla QR okutularak yapılabilir. Yer: Kent Meydanı, Osmangazi.',
+    sourceLabel: 'Hesap hareketleri',
+    icon: 'magnifier',
+    ...card,
+  }),
+  clue('clue_satici_no', {
+    type: 'BELGE',
+    title: 'İlandaki satıcının hattı',
+    shortText: 'Satıcı “Kaan”: 0532 614 41 07.',
+    description: 'Şikâyet ekindeki ilan görüntüsü: “Sahibinden acil, Clio 2014. Arayın: 0532 614 41 07 — Kaan.”',
+    sourceLabel: 'Şikâyet dilekçesi',
+    icon: 'phone',
+    ...card,
+  }),
+  clue('clue_ding_nurettin', {
+    type: 'BELGE',
+    title: 'Şikâyetteki anons notu',
+    shortText: 'Nurettin: “Satıcının arkasından bir kadın sesi ‘Dördüncü kat’ dedi.”',
+    description:
+      'Dilekçenin ikinci sayfası, dipnot gibi: “Görüşme sırasında arkadan bir asansör sinyali ve ‘Dördüncü kat’ anonsu duyulmuştur.”',
+    sourceLabel: 'Şikâyet dilekçesi',
+    icon: 'document',
+    ...card,
+  }),
+  evidence('ev_sim_dokum', {
+    type: 'BELGE',
+    title: 'Operatör işlem dökümü (4 Kasım 2025)',
+    shortText: '10.12 başka bayide, vekil aracılığıyla SIM değişikliği; 19.20 abonenin itirazı.',
+    description:
+      'Ece’nin kendi hattı için operatör mağazasından aldığı döküm: “04.11.2025 10.12 — SIM değişikliği — Bayi: Mavi İletişim (Kent Meydanı) — vekil aracılığıyla. 04.11.2025 19.20 — Abone itirazı: ‘İşlemi ben yapmadım.’ Yeni SIM.”',
+    sourceLabel: 'Operatör mağazası',
+    icon: 'phone',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    combinable: true,
+    legalNote: 'Abonenin kendi kişisel verisidir; müvekkil kendi talebiyle alır (KVKK md. 11).',
+    ...cardKey,
+  }),
+  evidence('ev_sozlesme', {
+    type: 'BELGE',
+    title: 'Nova Dijital sanal ofis sözleşmesi',
+    shortText: 'Kiracı: Arda Kılıç. Adres: OM İş Merkezi, Kat 4. Nakit.',
+    description:
+      'OM İş Merkezi Yönetim Ltd. Şti. ile “Nova Dijital Danışmanlık (temsilen Arda Kılıç)” arasında, 15 Eylül 2025 tarihli iki aylık sanal ofis sözleşmesi. Ekinde Arda Kılıç’ın kimlik fotokopisi. Ödeme: nakit.',
+    sourceLabel: 'OM İş Merkezi',
+    icon: 'document',
+    side: 'NEUTRAL',
+    strength: 'MEDIUM',
+    combinable: true,
+    ...card,
+  }),
+  clue('clue_kartvizit', {
+    type: 'BELGE',
+    title: 'İşletme müdürünün kartviziti',
+    shortText: 'Necdet Sarı · OM İş Merkezi · 0533 287 19 90.',
+    description:
+      'Kabartma baskılı kartvizit: “Necdet Sarı — İşletme Müdürü — OM İş Merkezi — 0533 287 19 90.” Hafif limon kolonyası kokuyor.',
+    sourceLabel: 'OM İş Merkezi',
+    icon: 'document',
+    ...card,
+  }),
+  clue('clue_asansor', {
+    type: 'TANIK_IFADESI',
+    title: 'OM asansörünün kayıtlı sesi',
+    shortText: 'Bir sinyal, ardından kayıtlı bir kadın sesi: “Dördüncü kat.”',
+    description:
+      'OM İş Merkezi asansörü her katta bir sinyal verip katı kayıtlı bir kadın sesiyle söylüyor. Necdet’in odası dördüncü katta.',
+    sourceLabel: 'OM İş Merkezi',
+    icon: 'bulb',
+    ...card,
+  }),
+  clue('clue_levha', {
+    type: 'FOTOGRAF',
+    title: 'Etiketin altındaki eski levha',
+    shortText: '“NOVA DİJİTAL” etiketinin altından “YÖNETİM ARŞİVİ” yazısı görünüyor.',
+    description:
+      'Kat 4, 407 numaralı kapı. Yapıştırma bir “NOVA DİJİTAL” etiketi kenarından kalkmış; altındaki pirinç levhada: “YÖNETİM ARŞİVİ”.',
+    sourceLabel: 'OM İş Merkezi · 4. kat',
+    icon: 'magnifier',
+    ...card,
+  }),
+  clue('clue_kiraci', {
+    type: 'FOTOGRAF',
+    title: 'Kiracı panosunda eksik isim',
+    shortText: 'Girişteki kiracı panosunda Nova Dijital yok.',
+    description: 'Lobideki kiracı panosu 2025 baskısı. Kırk iki firma; dördüncü katta 401–406 dolu, 407 boş satır.',
+    sourceLabel: 'OM İş Merkezi · lobi',
+    icon: 'document',
+    ...card,
+  }),
+  clue('clue_onur_vekil', {
+    type: 'TANIK_IFADESI',
+    title: 'Bayideki dil sürçmesi',
+    shortText: 'Onur: “Vekâletle gelen bir abiydi galiba… yani, çok müşteri var.”',
+    description:
+      'Onur Demirci, kimlik kontrolünü anlatırken bir an “vekâletle gelen bir abi” dedi, sonra lafı değiştirdi.',
+    sourceLabel: 'Mavi İletişim',
+    icon: 'phone',
+    combinable: false,
+  }),
+  clue('clue_burak_alibi', {
+    type: 'BELGE',
+    title: 'Tamirci dükkânının POS fişi',
+    shortText: '4 Kasım 10.09–10.31: Burak dükkânında üç ekran değişimi.',
+    description:
+      'Burak’ın dükkânının POS dökümü ve kendi kamerası: 4 Kasım 10.09, 10.20, 10.31’de üç ödeme; kasada kendisi.',
+    sourceLabel: 'Burak Toprak',
+    icon: 'receipt',
+    combinable: false,
+  }),
+  evidence('ev_bayi_ekran', {
+    type: 'DIJITAL',
+    title: 'Bayi sisteminden alınmış ekran görüntüsü',
+    shortText: 'Burak’ın eski bayi şifresiyle çekilmiş SIM değişikliği ekranı.',
+    description:
+      'Burak’ın artık çalışmadığı bir bayinin giriş bilgisiyle operatör sisteminden alınmış ekran görüntüsü. Ece’nin hattının 4 Kasım işlemleri görünüyor.',
+    sourceLabel: 'Burak Toprak',
+    icon: 'phone',
+    side: 'DEFENSE',
+    strength: 'WEAK',
+    legalValidity: 'EXCLUDABLE',
+    legalNote:
+      'Yetkisiz erişimle elde edildi (TCK 243, 136). Hukuka aykırı delil hükme esas alınamaz (Anayasa 38/6; CMK 206/2-a, 217/2).',
+  }),
+];
+
+const deliveries: EvidenceDef[] = [
+  evidence('ev_banka_log', {
+    type: 'DIJITAL',
+    title: 'Banka cihaz ve erişim kaydı',
+    shortText: '3 Kasım 14.29 yeni cihaz: Samsung Galaxy A54. 4 Kasım işlemleri bu cihazdan.',
+    description:
+      '“03.11.2025 14.29.41 — Mobil şube yeni cihaz tanımlama: Samsung SM-A546E — SMS doğrulama.” 4 Kasım’daki bütün işlemler bu cihazdan. Sanığın kayıtlı cihazı (Apple iPhone 8) son kez 2 Kasım 20.17’de oturum açmış.',
+    sourceLabel: 'Banka · CMK 177 talebi',
+    icon: 'phone',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    missedHint: 'Banka cihaz ve erişim kayıtlarını delil dilekçesiyle ya da duruşmada isteyebilirdin.',
+    combinable: true,
+    tags: ['key'],
+  }),
+  evidence('ev_hts', {
+    type: 'TELEFON_KAYDI',
+    title: 'Hattın iletişim tespiti (3–5 Kasım)',
+    shortText: '10.12’den sonra hat başka bir cihazda (IMEI 35 491207 …), Kent Meydanı baz istasyonunda.',
+    description:
+      'Mahkeme kararıyla (CMK 135/6) Ece’nin hattı: 4 Kasım 10.12’de IMEI değişikliği — yeni cihaz IMEI 35 491207 63 8812 2; baz: Osmangazi / Kent Meydanı. 13.41–14.06 arası gelen dört banka SMS’i bu cihazda.',
+    sourceLabel: 'Mahkeme · CMK 135/6',
+    icon: 'phone',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    missedHint: 'Müvekkilin kendi hattı için iletişimin tespiti (CMK 135/6) istenebilirdi.',
+    combinable: true,
+    tags: ['kart', 'key'],
+  }),
+  evidence('ev_bayi_belge', {
+    type: 'BELGE',
+    title: 'Bayi işlem dosyası (vekâletname ve fotokopi)',
+    shortText: 'Vekil “Arda Kılıç”, Gemlik 2. Noterliği vekâletnamesi, Ece’nin kimlik fotokopisi.',
+    description:
+      'Mavi İletişim’in 4 Kasım 10.12 işlemi için operatöre yüklediği belgeler: vekâletname (Gemlik 2. Noterliği, 28.10.2025, yevmiye 18842), vekilin kimliği (Arda Kılıç), abonenin kimlik fotokopisi.',
+    sourceLabel: 'Operatör · mahkeme yazısı',
+    icon: 'document',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    missedHint: 'SIM değişikliğinde kullanılan belgeleri operatörden isteyebilirdin.',
+    tags: ['key'],
+  }),
+  evidence('ev_atm', {
+    type: 'KAMERA_KAYDI',
+    title: 'ATM kamera kareleri (4 Kasım 14.05)',
+    shortText: 'Kapüşonlu genç bir erkek; sırtında “HIZLI PAKET”.',
+    description:
+      'Kent Meydanı ATM’sinin üç karesi: 14.05.12–14.05.58. Kapüşonlu, yirmili yaşlarında bir erkek; telefonunu ekrana tutuyor. Montunun sırtında sarı harfler: “HIZLI PAKET”.',
+    sourceLabel: 'Banka · ATM kamerası',
+    icon: 'camera',
+    side: 'DEFENSE',
+    strength: 'MEDIUM',
+    missedHint: 'ATM kamera kayıtları, çekimi kimin yaptığını gösterirdi.',
+  }),
+  evidence('ev_imei_rapor', {
+    type: 'TELEFON_KAYDI',
+    title: 'İMEİ sorgu raporu (35 491207 …)',
+    shortText: 'Aynı Samsung’da üç hat: Nova İK hattı, Ece’nin kopya SIM’i ve bir şirket hattı.',
+    description:
+      'Savcılık soruşturmasında hâkim kararıyla (CMK 135/6): IMEI 35 491207 63 8812 2 ile kullanılan hatlar — 0532 614 41 07 (abone: Arda Kılıç; 1–4 Kasım), 0555 … (Ece Yalın, kopya SIM; 4 Kasım), 0533 287 19 90 (abone: OM İş Merkezi Yönetim Ltd. Şti.; 2 Kasım 23.48, 6 dk).',
+    sourceLabel: 'Bursa C. Başsavcılığı',
+    icon: 'phone',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    missedHint: 'Failleri belirsiz suç duyurusuyla IMEI sorgusu istenebilirdi; rapor gerçek faile götürürdü.',
+    combinable: true,
+    tags: ['kart', 'key'],
+  }),
+];
+
+const ara: EvidenceDef[] = [
+  evidence('ev_noter_yok', {
+    type: 'BELGE',
+    title: 'Doğrulama sonucu: “Belge bulunamadı”',
+    shortText: 'Vekâletnamenin karekodu ve yevmiye numarası noter kayıtlarında yok.',
+    description:
+      'Vekâletnamenin karekodu ve yevmiye numarası (18842) noterlik belge doğrulama sisteminde sorgulandı: “Belge bulunamadı.”',
+    sourceLabel: 'Belge doğrulama',
+    icon: 'check',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    tags: ['key'],
+  }),
+  clue('clue_parlama', {
+    type: 'FOTOGRAF',
+    title: 'Fotokopide yıldız ve kırık oje',
+    shortText: 'Kimlik fotokopisinin sol üstünde beyaz bir yıldız; köşede bordo ojeli, kırık bir başparmak.',
+    description:
+      'Bayiye verilen kimlik fotokopisi bir fotoğraftan basılmış: kartın sol üstünde LED parlaması, alt köşede ojesi kırık bir başparmak.',
+    sourceLabel: 'Bayi işlem dosyası',
+    icon: 'magnifier',
+    ...card,
+  }),
+  clue('clue_vekil_arda', {
+    type: 'BELGE',
+    title: 'Vekâletnamedeki vekil adı',
+    shortText: 'Vekil: Arda Kılıç, 19.',
+    description:
+      'Vekâletnamede vekil olarak Arda Kılıç gösterilmiş; T.C. kimlik numarası ve fotokopisi ekli. Yaşı: 19.',
+    sourceLabel: 'Bayi işlem dosyası',
+    icon: 'compare',
+    ...card,
+  }),
+  clue('clue_arda_otopark', {
+    type: 'TANIK_IFADESI',
+    title: 'Kuryenin teslim yeri',
+    shortText: 'Arda: “Parayı iş merkezinin otoparkında, köşedeki ayrılmış yerde bekleyen arabaya verdim.”',
+    description:
+      'Arda Kılıç: “Her seferinde OM’nin otoparkı. En köşe, tabelalı yer. Siyah bir araba. Cam yarım iner, zarfı uzatırım.”',
+    sourceLabel: 'Arda Kılıç',
+    icon: 'key',
+    ...card,
+  }),
+  clue('clue_yonetim_park', {
+    type: 'FOTOGRAF',
+    title: 'Köşedeki tabelalı park yeri',
+    shortText: 'Otoparkın en köşesinde tek bir ayrılmış yer: “YÖNETİM”.',
+    description:
+      'OM İş Merkezi otoparkı, eksi birinci kat. En köşede, kameranın görmediği tek yer; duvarda sarı tabela: “YÖNETİM — 1”.',
+    sourceLabel: 'OM İş Merkezi otoparkı',
+    icon: 'key',
+    ...card,
+  }),
+  evidence('ev_ilan_foto', {
+    type: 'FOTOGRAF',
+    title: 'İlan fotoğrafındaki cam cephe',
+    shortText: 'Clio’nun fotoğrafı bir iş merkezinin cam cephesi önünde çekilmiş; camda “OM” harfleri.',
+    description:
+      'Nurettin Aksoy’un sakladığı ilan fotoğrafları. Üçüncü karede arabanın arkasındaki cam cephede ters yansımış iki harf: “OM”.',
+    sourceLabel: 'Nurettin Aksoy',
+    icon: 'camera',
+    side: 'DEFENSE',
+    strength: 'MEDIUM',
+  }),
+  clue('clue_yuzuk_ece', {
+    type: 'TANIK_IFADESI',
+    title: 'Kameranın açıldığı iki saniye',
+    shortText: 'Ece: “Kamerası bir an açıldı; yüzünü değil, elini gördüm. Eski bir yüzük.”',
+    description:
+      'Ece, mülakatta Kaan Bey’in kamerasının iki saniyeliğine açıldığını hatırladı: masada bir el, parmağında eski, yassı bir mühür yüzük.',
+    sourceLabel: 'Ece ile ara görüşme',
+    icon: 'bulb',
+    combinable: false,
+  }),
+  evidence('ev_arda_beyan', {
+    type: 'TANIK_IFADESI',
+    title: 'Arda Kılıç’ın duruşmadaki beyanı',
+    shortText: 'Sözleşme imzalamadı, bayiye gitmedi; QR çekimlerini “Kaan Abi”ye yaptı.',
+    description:
+      'Arda Kılıç 2. celsede: “Hiçbir sözleşme imzalamadım. O bayiye hiç gitmedim. Kimliğimin fotoğrafını kurye işi için Kaan Abi’ye verdim. QR’la çektiğim parayı OM’nin otoparkında verdim.”',
+    sourceLabel: 'Duruşma tutanağı',
+    icon: 'document',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+  }),
+];
+
+const insights: EvidenceDef[] = [
+  insight('ded_kaan', {
+    type: 'TELEFON_KAYDI',
+    title: 'İşveren hattı = satıcı hattı',
+    shortText: '“Kaan | Nova İK” ile sahte Clio’nun satıcısı aynı numara: iş ilanı bir tuzaktı.',
+    description:
+      'Ece’ye iş veren “Kaan Bey” ile Nurettin’e araba satan “Kaan” aynı hattı (0532 614 41 07) kullanıyor. İlan, kimlik ve hesap toplamak için kurulmuş bir tuzak.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    tags: ['key'],
+  }),
+  insight('ded_dongu', {
+    type: 'BELGE',
+    title: 'Avans geri döndü',
+    shortText: '“Kira bedeli” denen 4.500 TL’yi gönderen hesap, kaporadan 15.000 TL’yi geri aldı.',
+    description:
+      'Avansı gönderen MEHMET DEMİR hesabı, 4 Kasım’da kaporanın bir kısmını geri almış. Ödeme bir kiralama bedeli değil, aynı zincirin yemi.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+  }),
+  insight('ded_aldatma', {
+    type: 'BELGE',
+    title: 'Kod, SGK kodu diye istendi',
+    shortText: 'Mesaj “SGK kodu” diyor; Ece notuna “SGK” yazmış. Kod, aldatılarak okundu.',
+    description:
+      'Kaan’ın 14.26 mesajı ile Ece’nin aynı anda yazdığı “4471 — SGK” notu birlikte: Ece bankanın cihaz kodunu okuduğunu bilmiyordu.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    legalNote: 'Aldatılarak verilen bilgi iştirak kastını göstermez (TCK 21/1, 40/1).',
+  }),
+  insight('ded_kesinti', {
+    type: 'DIJITAL',
+    title: 'Kesinti önceden haber verildi',
+    shortText: 'Kaan, hattın kesileceğini akşamdan söyledi; ertesi sabah hat başka bayide kopyalandı.',
+    description:
+      '3 Kasım 21.10 mesajı “hattınız kesilebilir” diyor; 4 Kasım 10.12’de hat başka bir bayide vekille değiştirildi. Kesintiyi bilen, yapan kişiydi.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+  }),
+  insight('ded_bina', {
+    type: 'TANIK_IFADESI',
+    title: 'İki görüşme, aynı asansör',
+    shortText: 'Hem mülakatta hem satıcı görüşmesinde aynı anons: “Dördüncü kat.”',
+    description:
+      'Ece’nin mülakatı ve Nurettin’in satıcı görüşmesi aynı kayıtlı asansör sesini taşıyor. “Kaan” iki görüşmede de aynı binadaydı.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'MEDIUM',
+  }),
+  insight('ded_sim', {
+    type: 'TELEFON_KAYDI',
+    title: 'Hat, sahibinin elinden alındı',
+    shortText: '10.12’de başka bayide kopya SIM; 10.13’te Ece’nin ekranında “SIM yok”.',
+    description:
+      'Operatör dökümü ile Ece’nin 10.13 ekran görüntüsü birlikte: banka SMS’leri 10.12’den sonra Ece’nin telefonuna değil, kopya SIM’e gitti.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    tags: ['key'],
+  }),
+  insight('ded_imei', {
+    type: 'TELEFON_KAYDI',
+    title: 'Kopya SIM başka bir cihazda',
+    shortText: 'Ece’nin iPhone’u 35 391508…; kopya SIM’in takıldığı cihaz 35 491207…',
+    description:
+      'İletişim tespitindeki IMEI ile kutudaki IMEI farklı: 4 Kasım’da banka SMS’lerini alan cihaz Ece’nin telefonu değil.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+  }),
+  insight('ded_kopya', {
+    type: 'FOTOGRAF',
+    title: 'Fotokopi, gönderilen fotoğraftan basıldı',
+    shortText: 'Fotokopideki LED yıldızı ve kırık oje Ece’nin masasından: kaynak, Nova’ya yollanan fotoğraf.',
+    description:
+      'Bayiye verilen kimlik “fotokopisi”, Ece’nin 24 Ekim’de Nova’ya gönderdiği fotoğraftan basılmış: aynı lamba parlaması, aynı kırık oje.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+  }),
+  insight('ded_otopark', {
+    type: 'FOTOGRAF',
+    title: 'Teslimat yönetim yerinde',
+    shortText: 'Kuryenin parayı uzattığı araba, otoparkın “YÖNETİM” yerindeydi.',
+    description: 'Arda’nın tarif ettiği köşe, otoparkın kameranın görmediği tek ayrılmış yeri: “YÖNETİM — 1”.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'MEDIUM',
+  }),
+  insight('ded_necdet', {
+    type: 'TELEFON_KAYDI',
+    title: 'Altı dakikalık hata',
+    shortText: 'İMEİ raporundaki şirket hattı, kartvizitteki numara: 0533 287 19 90.',
+    description:
+      '2 Kasım 23.48’de “Kaan”ın Samsung’una altı dakikalığına takılan hat, Necdet Sarı’nın kartvizitindeki cep numarası.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    tags: ['key'],
+  }),
+  insight('ded_arda_kimlik', {
+    type: 'BELGE',
+    title: 'Bir kimlik, iki sahte belge',
+    shortText: 'Arda’nın kimliği hem sanal ofis sözleşmesinde hem vekâletnamede.',
+    description:
+      'On dokuz yaşındaki bir kuryenin kimliği hem Nova’nın sözleşmesinde hem SIM değişikliğinin vekâletnamesinde kullanılmış.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'MEDIUM',
+  }),
+];
+
+export const evidencePart: CasePart = {
+  evidence: [...initial, ...inv1, ...deliveries, ...ara, ...insights],
+  evidenceRelations: [
+    { from: 'ded_kaan', to: 'clue_hr_no', type: 'DERIVED_FROM' },
+    { from: 'ded_kaan', to: 'clue_satici_no', type: 'DERIVED_FROM' },
+    { from: 'ded_dongu', to: 'clue_avans', type: 'DERIVED_FROM' },
+    { from: 'ded_dongu', to: 'clue_mdemir_cikis', type: 'DERIVED_FROM' },
+    { from: 'ded_aldatma', to: 'clue_sgk_mesaj', type: 'DERIVED_FROM' },
+    { from: 'ded_aldatma', to: 'ev_not', type: 'DERIVED_FROM' },
+    { from: 'ded_kesinti', to: 'clue_kvkk_mesaj', type: 'DERIVED_FROM' },
+    { from: 'ded_kesinti', to: 'ev_sim_dokum', type: 'DERIVED_FROM' },
+    { from: 'ded_bina', to: 'clue_ding_ece', type: 'DERIVED_FROM' },
+    { from: 'ded_bina', to: 'clue_ding_nurettin', type: 'DERIVED_FROM' },
+    { from: 'ded_sim', to: 'clue_simyok', type: 'DERIVED_FROM' },
+    { from: 'ded_sim', to: 'ev_sim_dokum', type: 'DERIVED_FROM' },
+    { from: 'ded_imei', to: 'clue_iphone_imei', type: 'DERIVED_FROM' },
+    { from: 'ded_imei', to: 'ev_hts', type: 'DERIVED_FROM' },
+    { from: 'ded_kopya', to: 'clue_parlama', type: 'DERIVED_FROM' },
+    { from: 'ded_kopya', to: 'clue_lamba', type: 'DERIVED_FROM' },
+    { from: 'ded_otopark', to: 'clue_arda_otopark', type: 'DERIVED_FROM' },
+    { from: 'ded_otopark', to: 'clue_yonetim_park', type: 'DERIVED_FROM' },
+    { from: 'ded_necdet', to: 'ev_imei_rapor', type: 'DERIVED_FROM' },
+    { from: 'ded_necdet', to: 'clue_kartvizit', type: 'DERIVED_FROM' },
+    { from: 'ded_arda_kimlik', to: 'clue_vekil_arda', type: 'DERIVED_FROM' },
+    { from: 'ded_arda_kimlik', to: 'ev_sozlesme', type: 'DERIVED_FROM' },
+    { from: 'ev_banka_log', to: 'ev_siber_rapor', type: 'CONTRADICTS' },
+    { from: 'ded_dongu', to: 'ev_siber_rapor', type: 'REFUTES' },
+    { from: 'ded_aldatma', to: 'ev_ece_ifade', type: 'CONTRADICTS' },
+  ],
+  discoveryPaths: [],
+};

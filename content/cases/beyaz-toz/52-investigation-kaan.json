@@ -1,0 +1,1203 @@
+{
+  "nodes": [
+    {
+      "id": "INV_GORUS_G_1",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #04 · SORUŞTURMA",
+      "title": "Müvekkil görüşmesi",
+      "lines": [
+        {
+          "when": { "cmp": [{ "visits": "INV_GORUSME" }, "==", 0] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "BURSA H TİPİ CEZAEVİ — AVUKAT GÖRÜŞ ODASI",
+              "style": "card",
+              "bg": "gorus_odasi"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Üç kapı, iki arama, bir imza. Koridorlar çamaşır suyu ve demlenmiş çay kokuyordu. Her kapı arkamdan kilitlendikçe ceketim biraz daha ağırlaştı."
+            },
+            {
+              "speaker": "gardiyan",
+              "text": "Avukat görüşü. Görüş salonu beşte kapanır. Camdan bakarım; konuşmanızı duymam."
+            },
+            {
+              "speaker": "gardiyan",
+              "text": "Bu çocuk her akşam sayıyor, avukat hanım. Parmaklarıyla. Kaç gün oldu diye. Hapis gününü değil. Temiz gününü."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kaan içeri girdi. Gri eşofman, yenmiş tırnak etleri, burnunun üstünde bantlı bir gözlük. Oturdu ve gözlerini masanın vidalarına dikti."
+            },
+            {
+              "speaker": "kaan",
+              "expression": "uzgun",
+              "text": "Ablam mı gönderdi? Tabii ablam gönderdi. Ablam her şeyi gönderir. Neyse."
+            },
+            {
+              "speaker": "player",
+              "text": "“Neyse.” Konuyu kapatmak için söylenen kelime. Bu görüşmede onu çok duyacaktım.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Ablan beni gönderdi, evet. Ama ben kendi isteğimle buradayım. Sana bir şey soracağım ve cevabını bilmiyorum. Bu yüzden soruyorum."
+            },
+            {
+              "speaker": "kaan",
+              "expression": "saskin",
+              "text": "Avukatlar cevabını bildikleri soruyu sorarmış. Dizilerde öyle."
+            },
+            { "speaker": "player", "text": "Mahkemede öyle. Burada değil." },
+            {
+              "speaker": "narrator",
+              "text": "Kaan ilk kez başını kaldırdı. Gözlüğünün arkasında uykusuz, kızarık gözler. Yirmi dört yaşında birinin değil, yorgun bir babanın gözleri."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "BURSA H TİPİ CEZAEVİ — GÖRÜŞ ODASI, İKİNCİ ZİYARET",
+              "style": "card",
+              "bg": "gorus_odasi"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Hasan Çakır bu sefer başıyla selam verdi. Kaan içeri girerken ilk kez gözlerime baktı."
+            },
+            {
+              "speaker": "kaan",
+              "text": "Geldiniz. Gelmezsiniz sandım. İnsanlar bir kere gelir; ikincisinde iş olur."
+            },
+            { "speaker": "player", "text": "İş olduğu için geldim. Ama ikinci kez geldim." },
+            {
+              "speaker": "kaan",
+              "text": "Kırk dört gün oldu. Temiz. Burada temiz kalmak kolay sanıyorlar. Değil. Neyse. Sorun."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masanın üstünde, tükenmezle yazılmış bir kâğıt parçası. Kaan fark etti, kâğıdı ters çevirdi. Gördüğüm tek kelime “perşembe”ydi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir takvim. Cezaevinde bile. İnsan takvimini kaybedince kendini kaybeder; Kaan kendini kaybetmemek için perşembeleri sayıyor.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GORUSME" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GORUSME",
+      "type": "DIALOGUE",
+      "mode": "INTERVIEW",
+      "tones": [
+        { "id": "soft", "label": "Yumuşak", "hint": "+4 güven" },
+        { "id": "hard", "label": "Sert", "hint": "−8 güven · daha az savunma" }
+      ],
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #04 · SORUŞTURMA",
+      "title": "Müvekkil görüşmesi",
+      "hud": ["min", "trust"],
+      "room": { "label": "CEZAEVİ · GÖRÜŞ ODASI", "character": "kaan" },
+      "onFirstEnter": [
+        { "type": "MEET", "character": "gardiyan" },
+        {
+          "type": "IF",
+          "when": { "flag": "defne_durust" },
+          "then": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 2 }]
+        }
+      ],
+      "onEnter": [
+        {
+          "type": "IF",
+          "when": { "cmp": [{ "visits": "INV_GORUSME" }, ">", 1] },
+          "then": [{ "type": "VAR", "var": "min", "op": "set", "value": 8 }]
+        }
+      ],
+      "lines": [
+        {
+          "when": { "cmp": [{ "visits": "INV_GORUSME" }, "==", 1] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Duvarda bir saat; camının arkasında bir sinek ölüsü. Saat iki dakika ileriydi. Burada herkes zamanın biraz ilerisinde ya da gerisinde yaşıyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Görüş salonunun kapanışına 14 dakika var. Hasan Çakır camın ardında; görür ama duymaz."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "Görüş salonunun kapanışına 8 dakika var. Yeni sorular, eski bir oda." }
+          ]
+        }
+      ],
+      "moodRules": [
+        { "when": { "flag": "kaan_itiraf" }, "label": "Açılıyor", "tone": "success", "expression": "uzgun" },
+        {
+          "when": { "cmp": [{ "var": "trust" }, "<", 45] },
+          "label": "Savunmada",
+          "tone": "error",
+          "expression": "kizgin"
+        },
+        {
+          "when": { "cmp": [{ "var": "tone" }, "==", "hard"] },
+          "label": "Gergin",
+          "tone": "neutral",
+          "expression": "kizgin"
+        },
+        { "label": "Temkinli", "tone": "neutral", "expression": "normal" }
+      ],
+      "objectives": [
+        {
+          "id": "obj_sabah",
+          "when": { "flag": "fact_sabah" },
+          "known": "Kaan ön odada uyuyordu; polis arka odanın kilidini kesti.",
+          "unknown": "O sabah ne oldu?"
+        },
+        {
+          "id": "obj_oda",
+          "when": { "flag": "fact_arka" },
+          "known": "Arka oda Barış’ındı; kilidi o taktı.",
+          "unknown": "Arka oda kimindi?"
+        },
+        {
+          "id": "obj_baris",
+          "when": { "flag": "fact_baris" },
+          "known": "Barış: uzun boylu, sakallı, motorlu kurye, İzmirli.",
+          "unknown": "Barış kim?"
+        },
+        {
+          "id": "obj_sir",
+          "when": { "flag": "kaan_itiraf" },
+          "known": "Kaan eylülde Barış’tan kullanmak için iki kez aldı.",
+          "unknown": "Kaan bir şey saklıyor mu?"
+        },
+        {
+          "id": "obj_riza",
+          "when": { "flag": "kaan_riza" },
+          "known": "Kaan, kullandığını mahkemede kendisi söyleyecek.",
+          "unknown": "Kaan mahkemede ne anlatmak istiyor?"
+        }
+      ],
+      "choices": [
+        {
+          "id": "TP_SABAH",
+          "kind": "TOPIC",
+          "label": "O sabah",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "O sabahı anlatır mısın? Acele etme.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "text": "Kulaklıkla uyuyakalmışım. Ön odada, her zamanki gibi. Kitap göğsümde. Kapı vurulunca rüya sandım."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Biri “Kaan Yıldız!” diye bağırdı. Adımı kimse o kadar yüksek sesle söylememişti. Mezuniyette bile söylemezler, ben mezun olamadım ki."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "uzgun",
+                      "text": "Arka odanın kapısını sordular. “Barış’ın” dedim. “Ev senin üstüne” dediler. Sonra bir ses geldi: çıt. Kilidi kestiler."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kilidi kestiler. Tutanakta tek kelime yok: ne kilit, ne keski.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Polis geldiğinde neredeydin, ne yapıyordun? Kısa.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Uyuyordum. Ön odada. Uyumak da mı suç oldu artık?"
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Arka odayı kestiler, ben izledim. Kelepçeyi taktılar, ben izledim. İzlemekte iyiyim, abla. Bütün hayatımı izledim."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Sertlik bir kapı açtı, başka birini kapattı. Kaan’ın sesinde artık utanç değil, öfke vardı. Öfke daha kolay taşınır.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_sabah", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_ARKA",
+          "kind": "TOPIC",
+          "label": "Arka oda",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Arka oda kimindi? Ne zamandan beri?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "text": "Ağustosta evi tuttum. Arka odada önce Tolga kaldı. İki ay kirayı ödemedi; çıkardım. Eylülün yirmisinde Barış geldi."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Kirayı bana elden verirdi, ben Nesrin Teyze’ye yatırırdım. Sözleşme yok. “Sonra yaparız” dedik. Hiç yapmadık. Neyse."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "İlk hafta kapıya bir asma kilit taktı. “Kurye malzemem var, çanta, cihaz, pahalı şeyler” dedi. Ben de… sormadım."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "“Sormadım.” Bu dosyanın belki de en ağır iki kelimesi.",
+                      "style": "thought"
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Gece eve geldiğinde kapısını kilitlerdi, sabah çıkarken yine. Duşa giderken bile. Ben “kurye işte, pahalı cihazlar” dedim kendime. İnsan kendine iyi yalan söyler."
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Sözleşme senin adına, oda senin evinde. Neden başkasının olsun?",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" },
+                { "type": "VAR", "var": "fact_anahtarlik", "op": "set", "value": true }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Çünkü başkasının! Ev benim üstüme diye her odada ben mi yaşıyorum?"
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Kilidi o taktı. Anahtarı bende yok. Anahtarlığıma bakın, emanette: kapı, bina, posta kutusu. Üç anahtar. Dördüncüsü yok."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Üç anahtar. Kilitli bir odanın sahibi, o odanın anahtarını taşır. Emanet tutanağına bakmam lazım.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_arka", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_BARIS",
+          "kind": "TOPIC",
+          "label": "Barış",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Barış nasıl biriydi?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "text": "Uzun boylu. Sakallı. Sesi kalın. Gece çalışırdı, sabaha karşı gelirdi. Merdivenlerde botlarının sesini duyardım."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "İyi biriydi. Kombiyi o tamir etti. Bir keresinde annem gelecek diye mutfağı baştan sona o temizledi. İnsan… karar veremiyor bazen."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Soyadını sormadım. Telefonda “B.” diye kayıtlı. Bir keresinde “İzmirliyim” dedi. O kadar."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Uzun boylu, sakallı, gece çalışan, İzmirli. Bir hayalet için fazla ayrıntı. Bir yalancı için de fazla az.",
+                      "style": "thought"
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "uzgun",
+                      "text": "Baskından sonra aradım onu. Karakoldan değil; telefonumu almışlardı zaten. Ablamın telefonundan. Kapalıydı. Hâlâ kapalı."
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Barış diye biri var mı, Kaan? Gerçekten?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Var! Uydurmuyorum! Polis inanmadı, savcı inanmadı, siz de mi?"
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Arka odada yatağı vardı, dolabı vardı, botları vardı. Hepsini fotoğrafladılar. Fotoğraflara bakın, sonra bana sorun."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Haklıydı. Önce fotoğraflara bakmalıydım. Önce bul, sonra inan: kendi kuralımı ilk sorumda çiğnedim.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_baris", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_KENDI",
+          "kind": "TOPIC",
+          "label": "Kendin",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Biraz da senden bahset. Okul, iş, aile.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "text": "İktisat. Altıncı yıl. Babam istedi; sonra öldü. Ben de bırakamadım. İkisi de doğru, ikisi de saçma."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Kahve Durağı’nda barista. Pazar, çarşamba, cuma kapanış bende; kasayı ben kapatırım. Bir tek orada düzenliyim. Makineler düzen ister."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "uzgun",
+                      "text": "Ayakkabı 41, beden M. Ehliyetim yok. Bisiklete bile binemem; babam öğretecekti, olmadı."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "41 numara. Ehliyet yok. Kafede kapanış. Not defterimde üç satır; üçü de ileride bir yere bağlanacak gibi duruyor.",
+                      "style": "thought"
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "uzgun",
+                      "text": "Babam terziydi. Dükkânında bir mezura vardı, hep boynunda. Ölünce mezurayı ben aldım. Cezaevine almadılar; “ip sayılır” dediler. Neyse."
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Sicilin temiz, işin var, okulun var. Savcı soracak: bu kadar düzenli biri neden bu işe bulaşsın?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Düzenli mi? Kredi kartımı ablam ödüyor. Düzenli biri değilim, abla. Satıcılar düzenli olur. Ben dağınığım."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Ayakkabımı bile ablam alır. 41. Ehliyetim yok, motorum yok, hiçbir şeyim yok. Bir tek şu eşofman."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Savcının sorusunu sordum ve savcının alamayacağı bir cevap aldım. Ama bedelini Kaan’ın güveniyle ödedim.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "DISCOVER", "evidence": "clue_kaan_olcu" }
+          ]
+        },
+        {
+          "id": "TP_DEFNE",
+          "kind": "TOPIC",
+          "label": "Ablan",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Ablan seni çok seviyor. Bunu biliyor musun?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "uzgun",
+                      "text": "Biliyorum. Bu daha kötü. Sevilmek bazen borç gibi. Ödeyemiyorsun, faizi büyüyor."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Babam ölünce o babam oldu. Otuz yaşında bir eczacı, yirmi üç yaşında bir çocuğun babası. Ben de… ben de ona yük oldum."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Acilde yüzüne baktım. Kızgın değildi. Korkmuştu. Ablamı ilk defa korkmuş gördüm. O gece bıraktım. O gece."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kaan bırakmanın tarihini bir maddeyle değil, ablasının yüzüyle hatırlıyor. Bir mahkeme için bu bir ayrıntı. Kaan için bütün hikâye.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Ablan her şeyi senin yerine yapmış. Sen ne yaptın?",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" },
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 4 }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Ben mi? Kullandım. Borç yaptım. Acile düştüm. Tedaviye başladım. Bir de hapse girdim. Liste uzun. Neyse."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kendini cezalandırmaya bu kadar hazır biri, başkasının suçunu da üstlenebilir. Bunu unutmamalıyım.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+        },
+        {
+          "id": "TP_PAZAR",
+          "kind": "TOPIC",
+          "label": "9 Kasım gecesi",
+          "visibleWhen": { "hasEvidence": "clue_tolga_saat" },
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "9 Kasım, pazar gecesi. Saat 23.00 sularında neredeydin, hatırlıyor musun?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "text": "Pazar mı? Pazar kapanış bende. Kahve Durağı. Pazar akşamları maç olur, kafe dolar. Son müşteri on biri geçe falan çıkar."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Kasayı ben kapatırım, kodumla. Makineleri temizlerim, yarım saat sürer. Eve yürürüm. On iki gibi evde olurum."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kasa. Kod. Bir makine, bir saat damgası. İnsanlar unutur; kasalar unutmaz.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Muhbir 9 Kasım 23.00’te kapıda senden aldığını söylüyor. O saatte neredeydin?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Kafedeydim! Pazar kapanış bende, kasayı ben kapatırım! Kasaya sorun, kasa yalan söylemez."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kasaya sormak. Kaan farkında olmadan bir yol gösterdi. Kafenin kayıtlarına ulaşmam lazım.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_pazar", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_KILIT",
+          "kind": "TOPIC",
+          "label": "Kilit",
+          "visibleWhen": { "hasEvidence": "clue_kilit" },
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Fotoğraflarda kapının önünde kesik bir asma kilit var.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "text": "Barış’ın kilidi. Pirinç, büyük bir şey. Anahtarı boynunda, bir iple taşırdı. Duşa bile onunla girerdi herhalde."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Ben o odaya hiç girmedim. Bir kere kapı aralıktı, içine baktım. Yatak, dolap, bir mont. O kadar."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir anahtar bir ipte, bir boyunda. O boyun şimdi neredeyse, anahtar da orada.",
+                      "style": "thought"
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Kilidi taktığı gün matkabın sesi bütün binayı inletti. Nesrin Teyze aşağıdan bağırdı. Barış ona da kibar davrandı; pasta götürdü özür için."
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "O kilidi sen takmış olamaz mısın? Kendi odanı saklamak için?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Anahtarı nerede o zaman? Bütün eşyam emanette. Cebimi, cüzdanımı, çorabımı saydılar. Bulsunlar anahtarı."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Emanet tutanağında bir asma kilit anahtarı olsaydı savcı onu iddianameye yazardı. Yazmamış.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_kilit_k", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_SEKER",
+          "kind": "TOPIC",
+          "label": "Şekerlik",
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_sekerlik" }, { "hasEvidence": "clue_kavanoz_iz" }] },
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Şekerlik. Neredeydi, kim kullanırdı?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "text": "Önce mutfaktaydı. Sonra bir gün koridordaki rafa taşınmış. Barış “mutfakta yer açayım” dedi. Rafın yanı onun kapısı."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "saskin",
+                      "text": "Ben çayımı oradan alırdım. Elim hep kapağındaydı. İçine bakmazdım ki. Şeker şekerdir."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kavanozdaki parmak izi Kaan’ın, çünkü Kaan çay içiyor. Bir parmak izi bir suçu gösterebilir; bir alışkanlığı da.",
+                      "style": "thought"
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Şekeri bırakmaya çalışıyordum zaten. Doktor “önce bir bağımlılık, sonra öbürü” dedi. Gülmüştüm. Şimdi gülmüyorum."
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Şekerlikte senin parmak izin var. İçindeki paketleri sen koymadın mı?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Kavanozda izim var çünkü günde beş çay içiyorum! Paketlerde izim var mı? Yok. Sorun bakalım neden yok."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "O raf Barış’ın kapısının dibinde. Şekerliği oraya o taşıdı. Ben sadece şeker aldım."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Paketlerde iz yok. Kavanozda var. Savcı bu farkı görmemiş ya da görmek istememiş.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_seker_k", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_MESAJ",
+          "kind": "TOPIC",
+          "label": "Mesajlar",
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_odaya_girme" }, { "hasEvidence": "clue_iki_tane" }] },
+          "cost": [{ "var": "min", "amount": 3 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Mesajlarda Barış sana “odaya girme sakın” yazmış. Bir de eylülde senin “iki tane” mesajın var. Bunları konuşmamız lazım.",
+              "responses": [
+                {
+                  "when": { "cmp": [{ "var": "trust" }, ">=", 60] },
+                  "lines": [
+                    {
+                      "speaker": "narrator",
+                      "text": "Kaan uzun süre sustu. Eli masanın vidasına gitti, döndü, döndü."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "uzgun",
+                      "text": "Eylülde… ondan iki kez aldım. Kullanmak için. “İki tane” dediğim o. Kapının önüne bırakırdı, ben parasını odasının kapısının altından atardım."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "uzgun",
+                      "text": "Satmadım. Kimseye. Bir gram bile. Ama aldım. Sonra ekimde acil. Sonra tedavi. Ondan sonra bir daha istemedim; o da “bıraktın diye sevindim” yazdı."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "“Odaya girme” dediği gece… bilmiyorum. Hiçbir zaman girmedim zaten. Neden yazdı, şimdi anlıyorum. O zaman anlamadım."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "uzgun",
+                      "text": "Bunu mahkemede söylersem annem duyar. Annem bir fotoğrafımı cüzdanında taşıyor. Liseden. Onu da mı kaybedeceğim?"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kaan bana ilk kez gerçeği söyledi. Bu gerçek hem onu kurtarabilir hem de onu yaralayabilir. Hangisi olacağına ben karar veremem. O verecek.",
+                      "style": "thought"
+                    }
+                  ]
+                },
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Mesajlar… Barış’ın mesajları. Ben ne bileyim neden öyle yazdığını."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "“İki tane” mi? Çay. Simit. Ne bileyim. Neyse. Başka soru."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Duvar. Kaan henüz bana o kadar güvenmiyor. Bu konuya bir daha dönmem gerekecek; ama nasıl döndüğüm önemli.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "“İki tane” ne demek, Kaan? Savcı bunu sipariş diye okuyor. Doğruyu söyle.",
+              "responses": [
+                {
+                  "when": { "cmp": [{ "var": "trust" }, ">=", 60] },
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Doğruyu mu? Peki. Ondan aldım. İki kez. Kullanmak için. Mutlu musunuz?"
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Satmadım ama! Ekimde acile düştüm, tedaviye başladım, bıraktım. Bunu da yazın defterinize."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "uzgun",
+                      "text": "Mahkemede bunu söylersem annem duyar. Siz bunu da yazın."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Gerçeği aldım. Ama bir sorgu odasındaki gibi aldım. Kaan’ın gözünde artık biraz polis gibiyim.",
+                      "style": "thought"
+                    }
+                  ]
+                },
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Siz de mi savcı gibi konuşacaksınız? Söyleyecek bir şeyim yok."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Sertlik bu sefer hiçbir şey açmadı. Sadece bir kapıyı daha kilitledi.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "cmp": [{ "var": "trust" }, ">=", 60] },
+              "then": [
+                { "type": "VAR", "var": "kaan_itiraf", "op": "set", "value": true },
+                { "type": "SCORE", "category": "SORGULAMA", "amount": 50 }
+              ],
+              "else": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
+            }
+          ]
+        },
+        {
+          "id": "TP_TOLGA",
+          "kind": "TOPIC",
+          "label": "Tolga",
+          "visibleWhen": {
+            "any": [{ "flag": "fact_arka" }, { "visited": "INV_TOLGA" }, { "hasEvidence": "clue_kira_defteri" }]
+          },
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Tolga’yı anlat. Arka odanın ilk kiracısı.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "text": "Ağustos, eylül. İki ay kirayı ödemedi. Depozitosunu borca saydım, eşyalarını kapının önüne koydum. Kötü bir şey yaptım herhalde. Para yoktu."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Kapıda bağırdı. “Sen görürsün” dedi. Anahtarını “kaybettim” dedi. Kilidi değiştiremedim; ona da param yoktu."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Ekimde bir kere aşağıda, binanın önünde gördüm onu. Çıkarıldığı evin önünde ne arıyordu, bilmiyorum. Beni görünce yürüyüp gitti."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kovulan bir kiracı, kaybolan bir anahtar, “sen görürsün” diye bir cümle. Ve aylar sonra Kaan’ın adını veren bir muhbir.",
+                      "style": "thought"
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "uzgun",
+                      "text": "Tolga’nın da durumu iyi değildi aslında. O da kullanıyordu. Ben bunu bildiğim için çıkardım onu, kiradan çok. Evde istemedim. İkiyüzlülük, değil mi?"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kendi bağımlılığından kaçan biri, onu evinde başkasında görmeye dayanamaz. Bu bir ikiyüzlülük mü, bir savunma refleksi mi? İkisi de insanca.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Muhbir Tolga. Seni neden göstersin?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "saskin",
+                      "text": "Tolga mı? Muhbir Tolga mı? … Tabii. Tabii o."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Onu sokağa ben attım. İki ay kira, bir depozito. Şimdi o beni on beş yıla atıyor. Hesap tutmuyor ama intikam hesap tutmaz."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "İntikam hesap tutmaz. Ama muhbirlik tutanağı tutar. Ve tutanakta her kelime bir hesap verir.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_tolga_kin", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_TEDAVI",
+          "kind": "TOPIC",
+          "label": "Tedavi",
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_randevu" }, { "hasEvidence": "clue_tedavi" }] },
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Masandaki randevu kartını gördüm. Tedaviden bahsetmek ister misin?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "uzgun",
+                      "text": "Ekimde acilde uyandım. Ablam başımdaydı. Ağlamıyordu. Ağlamaması daha kötüydü."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "text": "Ertesi hafta AMATEM. Her perşembe. Bir doktor, bir psikolog, bir test. Otuz bir ekimde temizdim. Kasımda da temizdim."
+                    },
+                    {
+                      "speaker": "kaan",
+                      "expression": "uzgun",
+                      "text": "On dört kasımda randevum vardı. Cezaevindeydim. Kaçırdığım ilk randevu. Doktor “gelmedi” diye yazmıştır. Doğru da yazmıştır."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bağımlılık bir zayıflık değilse, tedavi de bir bahane değildir. Bunu mahkemeye anlatmanın bir yolunu bulmalıyım.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Tedaviye mahkemede işine yarasın diye mi başladın?",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" },
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 5 }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "kaan",
+                      "expression": "kizgin",
+                      "text": "Mahkeme yoktu o zaman! Kalbim dakikada yüz altmış atıyordu! Siz… siz de mi?"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Haksız bir soruydu. Savcı soracak diye sordum; ama savcı değilim. Kaan bunu unutmayacak.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "DISCOVER", "evidence": "clue_tedavi" }
+          ]
+        },
+        {
+          "id": "G_RIZA_C",
+          "kind": "OPTION",
+          "label": "Bunu mahkemede söylemek senin kararın. Söylersen odanın senin olmadığını anlatmak kolaylaşır; ama karar senin.",
+          "visibleWhen": {
+            "all": [
+              { "flag": "kaan_itiraf" },
+              { "not": { "any": [{ "flag": "kaan_riza" }, { "chosen": "G_RIZA_A" }, { "chosen": "G_RIZA_B" }] } }
+            ]
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "kaan",
+                  "expression": "saskin",
+                  "text": "Benim kararım mı? Kimse bana bir şey sormamıştı uzun zamandır."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kaan gözlüğünü çıkardı, bandı düzeltti, geri taktı. Ellerini masanın üstüne, düz koydu."
+                },
+                {
+                  "speaker": "kaan",
+                  "text": "Söyleyeceğim. Kullandım, satmadım. Annemi ben arayacağım, sizden önce. Ablamdan önce. Bu sefer ben."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kaan bir karar verdi. İlk kez bir başkası onun yerine vermedi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 50 },
+            { "type": "VAR", "var": "kaan_riza", "op": "set", "value": true },
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 6 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Müvekkili bilgilendirip kararı ona bıraktın: savunma stratejisi müvekkille birlikte ve onun aydınlatılmış rızasıyla kurulur (Av.K. 34; TBB Meslek Kuralları).",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        {
+          "id": "G_RIZA_A",
+          "kind": "OPTION",
+          "label": "Düşün. Acele etme; duruşmadan önce yine konuşuruz.",
+          "visibleWhen": {
+            "all": [
+              { "flag": "kaan_itiraf" },
+              { "not": { "any": [{ "flag": "kaan_riza" }, { "chosen": "G_RIZA_C" }, { "chosen": "G_RIZA_B" }] } }
+            ]
+          },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "kaan", "text": "Düşünürüm. Burada düşünecek çok vakit var. Fazla." },
+                {
+                  "speaker": "player",
+                  "text": "Zaman bıraktım. Zaman bazen bir hediyedir, bazen bir yük.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kararı ertelemek meşrudur; ama 1. celsede bu konu açılırsa Kaan hazırlıksız yakalanabilir."
+          }
+        },
+        {
+          "id": "G_RIZA_B",
+          "kind": "OPTION",
+          "label": "Bunu söylemek zorundasın. Yoksa batarız.",
+          "visibleWhen": {
+            "all": [
+              { "flag": "kaan_itiraf" },
+              { "not": { "any": [{ "flag": "kaan_riza" }, { "chosen": "G_RIZA_C" }, { "chosen": "G_RIZA_A" }] } }
+            ]
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "kaan",
+                  "expression": "kizgin",
+                  "text": "Zorunda mıyım? Herkes bana ne yapmak zorunda olduğumu söylüyor. Siz de."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kaan sandalyesini geri itti. Hasan Çakır camın arkasında bir adım attı, sonra durdu."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Doğru şeyi yanlış biçimde istedim. Bir müvekkilin sırrı, avukatın silahı değildir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 },
+            { "type": "VAR", "var": "trust", "op": "dec", "value": 15 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Müvekkili kendi aleyhine beyana zorlamak savunma ilişkisine aykırıdır; kimse kendini suçlayan beyana zorlanamaz (Anayasa 38/5, CMK 147/1-e). Karar onundur.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        { "id": "G_BITIR", "kind": "CONTINUE", "label": "Görüşmeyi bitir", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_kaan_olcu", "source": { "type": "CHOICE", "id": "TP_KENDI" } },
+    { "evidence": "clue_tedavi", "source": { "type": "CHOICE", "id": "TP_TEDAVI" } }
+  ]
+}

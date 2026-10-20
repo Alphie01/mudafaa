@@ -1,0 +1,217 @@
+{
+  "nodes": [
+    {
+      "id": "INV_ARKA",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #04 · SORUŞTURMA",
+      "title": "Arka oda · olay yeri fotoğrafları",
+      "hud": ["taps_a"],
+      "exposeCounts": true,
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ADLİYE · SAVCILIK DOSYASI — FOTOĞRAF ALBÜMÜ, 1. BÖLÜM",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kırk iki fotoğraf. Flaşla çekilmiş, köşeleri numaralı. Kâğıt üzerinde bir oda, kâğıttan daha soğuk."
+            },
+            {
+              "speaker": "player",
+              "text": "Polis bu fotoğrafları kendi tutanağını desteklemek için çekti. Bir fotoğraf ise kimseyi desteklemez; sadece gösterir.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kare 14: oda kapısı, kapalı. Kare 15: kapı, aralık. Kare 16 yok; numara atlanmış. Kare 17: odanın içi, flaşın beyaz yaraları duvarlarda."
+            }
+          ]
+        }
+      ],
+      "scene": "sc_arka",
+      "instruction": "Fotoğrafta şüpheli gördüğün yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "actionCosts": { "TAP": [{ "var": "taps_a", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_ARKA",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "ARKA_BITIR", "kind": "CONTINUE", "label": "Aramayı bitir", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_ON",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #04 · SORUŞTURMA",
+      "title": "Ön oda ve koridor · olay yeri fotoğrafları",
+      "hud": ["taps_o"],
+      "exposeCounts": true,
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ADLİYE · SAVCILIK DOSYASI — FOTOĞRAF ALBÜMÜ, 2. BÖLÜM",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ön oda, giriş, koridor. Bir öğrenci odası: kitap, gözlük, telefon şarjı. Bir de bir ayakkabılık, iki farklı hayatın ayakkabılarıyla."
+            },
+            {
+              "speaker": "player",
+              "text": "Savcının dosyasında bu fotoğraflar “genel görünüm” diye geçiyor. Genel görünüm, ayrıntının mezarlığıdır.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ön odanın duvarında bir takvim; ekim sayfasında açık kalmış. Perşembeler kırmızı kalemle yuvarlak içine alınmış. Kasım sayfasına hiç geçilmemiş."
+            }
+          ]
+        }
+      ],
+      "scene": "sc_on",
+      "instruction": "Fotoğrafta şüpheli gördüğün yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "actionCosts": { "TAP": [{ "var": "taps_o", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_ON",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "ON_BITIR", "kind": "CONTINUE", "label": "Aramayı bitir", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_BINA",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #04 · SORUŞTURMA",
+      "title": "Ihlamur Sokak 14 · bina girişi",
+      "hud": ["taps_b"],
+      "exposeCounts": true,
+      "background": "sokak_sabah",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "IHLAMUR SOKAK 14 — BİNA GİRİŞİ, 10.40",
+              "style": "card",
+              "bg": "sokak_sabah"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yağmur dinmişti ama saçaklar hâlâ damlıyordu. Bina kapısının camında bir öğrenci evinin kiralık ilanı, yarısı yırtılmış."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dairenin anahtarı Defne’deydi; ama arka odanın kapısı artık mühürlü değildi, boştu. Ben ortak alanlara baktım: kapı, posta kutuları, köşe."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir binanın girişi, sakinlerinin özgeçmişidir. Kim geliyor, kim gidiyor, kim adını nereye yazıyor.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Zemin kattaki pencerede perde bir kez daha aralandı. Bu sefer kapanmadı."
+            }
+          ]
+        }
+      ],
+      "scene": "sc_bina",
+      "instruction": "Girişte şüpheli gördüğün yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "actionCosts": { "TAP": [{ "var": "taps_b", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_BINA",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "BINA_BITIR", "kind": "CONTINUE", "label": "Girişten ayrıl", "role": "BACK", "next": "INV_MERDIVEN" }
+      ]
+    },
+    {
+      "id": "INV_MERDIVEN",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #04 · SORUŞTURMA",
+      "title": "Merdiven boşluğu",
+      "background": "sokak_karanlik",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "IHLAMUR SOKAK 14 — MERDİVEN BOŞLUĞU",
+              "style": "card",
+              "bg": "sokak_karanlik"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Merdiven ışığının otomatiği on beş saniye yanıyordu. Dördüncü kata on beş saniyede çıkılmıyordu; ikinci katta karanlık beni yakaladı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Karanlıkta bir kapı aralandı. Kapı zinciri, bir göz, bir öğrenci kulaklığından taşan müzik."
+            },
+            {
+              "speaker": "narrator",
+              "name": "KOMŞU KIZ",
+              "text": "Avukat mısınız? Yedi numaranın? … Ben altıdayım. Bir şey diyeceğim ama adımı yazmayın.",
+              "style": "whisper"
+            },
+            {
+              "speaker": "narrator",
+              "name": "KOMŞU KIZ",
+              "text": "O sabah keski sesiyle uyandım. Metal metale. Sonra biri “anahtarı ver” dedi, biri “yok bende” dedi. Sonra yine keski.",
+              "style": "whisper"
+            },
+            {
+              "speaker": "narrator",
+              "name": "KOMŞU KIZ",
+              "text": "Bir şey daha. Arka odadaki çocuk, kurye olan, gece hep merdivende telefonla konuşurdu. Fısıltıyla. Ben kulaklık takardım; duymak istemezdim.",
+              "style": "whisper"
+            },
+            { "speaker": "player", "text": "Bunu mahkemede anlatır mısınız?" },
+            {
+              "speaker": "narrator",
+              "name": "KOMŞU KIZ",
+              "text": "Hayır. Burslu okuyorum. Babam duyarsa beni eve geri alır. Size söyledim, o kadar. Kusura bakmayın.",
+              "style": "whisper"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kapı kapandı. Zincir şıkırdadı. Merdiven ışığına yeniden bastım; on beş saniye."
+            },
+            {
+              "speaker": "player",
+              "text": "“Anahtarı ver.” “Yok bende.” Bir tanık değil; bir kapının arkasından gelen bir cümle. Mahkemeye taşıyamam. Ama artık ne arayacağımı biliyorum: o cümleyi söyleyen polisin kendi ağzını.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "MERDIVEN_BITIR", "kind": "CONTINUE", "label": "Binadan çık", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ]
+}

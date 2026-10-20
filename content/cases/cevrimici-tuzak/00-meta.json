@@ -1,0 +1,404 @@
+{
+  "format": "mudafaa.case/v1",
+  "meta": {
+    "slug": "cevrimici-tuzak",
+    "number": 2,
+    "title": "Çevrimiçi Tuzak",
+    "crimeLabel": "Nitelikli dolandırıcılık",
+    "lawRef": "TCK 158/1-f",
+    "demandText": "İddianame: TCK 158/1-f, 37/1 (4–10 yıl hapis ve adli para cezası)",
+    "possibleSentence": "4–10 yıl",
+    "difficulty": 1,
+    "category": "CEZA",
+    "estimatedMinutes": 105,
+    "summary": "Bir emeklinin sahte bir araç ilanına gönderdiği 75.000 TL kapora, iş arayan 23 yaşındaki Ece Yalın’ın hesabına girip yirmi beş dakikada dağıldı. Hesap onun; para onun hesabından çıktı. Ece bir iş ilanına başvurduğunu söylüyor. Annesi bir avukat tutuyor: sen.",
+    "coverCharacter": "ece",
+    "legalReview": { "status": "APPROVED", "by": "Claude (iç inceleme)", "at": "2026-10-20" }
+  },
+  "config": {
+    "startNode": "PROLOG",
+    "scoring": {
+      "categories": [
+        {
+          "id": "HUKUKI_BILGI",
+          "label": "Hukuki bilgi",
+          "advice": {
+            "weak": "TCK 158/1-f (alt sınır dört yıl, menfaatin iki katı adli para), 158/4 ve iştirak türlerini (TCK 37, 39) tekrar et.",
+            "medium": "Suç vasfında iyisin; iştirak kastı ile aldatılma arasındaki farkı pekiştir.",
+            "strong": "Vasıf, iştirak ve lehe kanun konularında isabetlisin."
+          }
+        },
+        {
+          "id": "DELIL_ANALIZI",
+          "label": "Delil analizi",
+          "advice": {
+            "weak": "Belgeleri yan yana koy: iki numara, iki IBAN, iki IMEI. Tahtada birleştir.",
+            "medium": "Bağlantıları buldun; çeldirici kartlara dikkat et.",
+            "strong": "Dijital izleri ustaca birbirine bağladın."
+          }
+        },
+        {
+          "id": "ARASTIRMA",
+          "label": "Araştırma",
+          "advice": {
+            "weak": "Müvekkilin odasını, telefonunu ve kendi kayıtlarını sistematik tara.",
+            "medium": "Gözden kaçan kayıtlar kaldı; müvekkilin kendi verisini istemeyi unutma.",
+            "strong": "Araştırman eksiksizdi."
+          }
+        },
+        {
+          "id": "SORGULAMA",
+          "label": "Sorgulama",
+          "advice": {
+            "weak": "Önce bastır, sonra sun. Tanığın öncülünü bul ve onu çürüt.",
+            "medium": "Çelişkileri buldun; bastırarak yeni ifadeler aç.",
+            "strong": "Çapraz sorgun tanıkları çözdü."
+          }
+        },
+        {
+          "id": "SAVUNMA_STRATEJISI",
+          "label": "Savunma stratejisi",
+          "advice": {
+            "weak": "Delille desteklenen bir esas savunma kur; müvekkile yalan söyletme.",
+            "medium": "Stratejin tutarlıydı; esas savunmayı belgelere daha sıkı bağla.",
+            "strong": "Stratejin ve esas savunman davayı kazandırdı."
+          }
+        },
+        {
+          "id": "USUL_BILGISI",
+          "label": "Usul bilgisi",
+          "advice": {
+            "weak": "CMK 177 delil dilekçesi, CMK 135/6 iletişimin tespiti, CMK 158 suç duyurusu ve yönlendirici soru itirazı (CMK 201).",
+            "medium": "Usul hamlelerinin çoğu yerindeydi; dayanaksız itirazdan ve etik sınırlardan kaçın.",
+            "strong": "Usul hamlelerin yerinde ve zamanındaydı."
+          }
+        }
+      ],
+      "lines": [
+        {
+          "id": "delil",
+          "label": "Delil toplama ({{count.evidence:key}})",
+          "categories": ["ARASTIRMA", "DELIL_ANALIZI"]
+        },
+        { "id": "capraz", "label": "Çapraz sorgu", "categories": ["SORGULAMA"] },
+        {
+          "id": "itiraz",
+          "label": "İtiraz isabeti ({{var.legal_hits}})",
+          "categories": ["USUL_BILGISI", "HUKUKI_BILGI"]
+        },
+        { "id": "savunma", "label": "Savunma", "categories": ["SAVUNMA_STRATEJISI"] },
+        { "id": "hatali", "label": "Hatalı delil ({{var.wrong}})" }
+      ],
+      "bonuses": [
+        { "id": "guven", "label": "Güvenilirlik bonusu ({{var.cred}})", "value": { "mul": [{ "var": "cred" }, 100] } }
+      ],
+      "scaleMax": 10500,
+      "thresholdBar": [
+        { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
+        { "label": "İndirim", "from": 3000, "tone": "amber" },
+        { "label": "Beraat", "from": 6500, "tone": "green" }
+      ],
+      "displayClampMin": 0
+    },
+    "objectionGrounds": [
+      { "id": "g_kanaat", "label": "Tanığın kişisel kanaati" },
+      { "id": "g_duyum", "label": "Başkasından duyduğunu aktarma" },
+      { "id": "g_telkin", "label": "Telkin edici soru (CMK 201/1)", "legalBasis": "CMK 201/1" }
+    ],
+    "display": { "showRunningScore": true },
+    "chronology": [
+      { "id": "k1", "time": "20 Ekim 2025", "text": "Ece, “Nova Dijital” ilanına başvurur." },
+      { "id": "k2", "time": "1 Kasım 2025 09.14", "text": "Hesaba 4.500 TL “eğitim avansı”." },
+      { "id": "k3", "time": "4 Kasım 2025 13.40", "text": "Nurettin Aksoy 75.000 TL kapora gönderir." },
+      {
+        "id": "k4",
+        "time": "4 Kasım 2025 13.52–14.05",
+        "text": "Para kripto platformuna, bir IBAN’a ve kartsız ATM çekimine dağılır."
+      },
+      { "id": "k5", "time": "7 Kasım 2025", "text": "Ece’nin müdafisiz kolluk ifadesi." },
+      { "id": "k6", "time": "Şubat 2026", "text": "İddianame: TCK 158/1-f, 37/1." },
+      { "id": "k7", "time": "4 Kasım 2026", "text": "1. celse." }
+    ]
+  },
+  "predicates": [
+    {
+      "id": "kart2",
+      "label": "Tahtada en az 2 kart var",
+      "when": { "cmp": [{ "count": "evidence", "tag": "kart" }, ">=", 2] }
+    },
+    {
+      "id": "sim_proven",
+      "label": "Hattın sanığın elinden alındığı duruşmada gösterildi",
+      "when": { "any": [{ "flag": "contra_g3" }, { "flag": "contra_o1" }, { "flag": "contra_o2" }] }
+    },
+    {
+      "id": "cihaz_proven",
+      "label": "İşlemlerin başka bir cihazdan yapıldığı duruşmada gösterildi",
+      "when": { "any": [{ "flag": "contra_g1" }, { "flag": "cihaz_t04" }] }
+    }
+  ],
+  "variables": [
+    {
+      "id": "strategy",
+      "type": "enum",
+      "initial": "YOK",
+      "enumValues": ["YOK", "MASUMIYET", "USUL", "INDIRIM"],
+      "visibility": "VISIBLE",
+      "display": { "label": "Strateji", "widget": "label" }
+    },
+    { "id": "strategy_pct", "type": "int", "initial": 100, "min": 0, "max": 200, "visibility": "HIDDEN" },
+    {
+      "id": "day",
+      "type": "int",
+      "initial": 1,
+      "min": 1,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "display": { "label": "Gün", "widget": "pips", "max": 3 }
+    },
+    {
+      "id": "ap",
+      "type": "int",
+      "initial": 4,
+      "min": 0,
+      "max": 4,
+      "visibility": "VISIBLE",
+      "display": { "label": "Eylem puanı", "widget": "pips", "max": 4 }
+    },
+    {
+      "id": "ara_day",
+      "type": "int",
+      "initial": 1,
+      "min": 1,
+      "max": 2,
+      "visibility": "VISIBLE",
+      "display": { "label": "Ara günü", "widget": "pips", "max": 2 }
+    },
+    {
+      "id": "ara_ap",
+      "type": "int",
+      "initial": 4,
+      "min": 0,
+      "max": 4,
+      "visibility": "VISIBLE",
+      "display": { "label": "Eylem puanı", "widget": "pips", "max": 4 }
+    },
+    {
+      "id": "trust",
+      "type": "int",
+      "initial": 60,
+      "min": 0,
+      "max": 100,
+      "visibility": "VISIBLE",
+      "display": { "label": "Güven", "widget": "percentBar", "max": 100, "lowAt": 40 }
+    },
+    {
+      "id": "min",
+      "type": "int",
+      "initial": 16,
+      "min": 0,
+      "max": 16,
+      "visibility": "VISIBLE",
+      "display": { "label": "Kalan süre", "widget": "minutes", "max": 16, "lowAt": 4 }
+    },
+    {
+      "id": "taps",
+      "type": "int",
+      "initial": 6,
+      "min": 0,
+      "max": 6,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Büyüteç", "widget": "counter", "max": 6, "lowAt": 1 }
+    },
+    {
+      "id": "taps_k",
+      "type": "int",
+      "initial": 5,
+      "min": 0,
+      "max": 5,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Büyüteç", "widget": "counter", "max": 5, "lowAt": 1 }
+    },
+    {
+      "id": "taps_o",
+      "type": "int",
+      "initial": 5,
+      "min": 0,
+      "max": 5,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Büyüteç", "widget": "counter", "max": 5, "lowAt": 1 }
+    },
+    {
+      "id": "exam_left",
+      "type": "int",
+      "initial": 6,
+      "min": 0,
+      "max": 6,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 6, "lowAt": 2 }
+    },
+    {
+      "id": "exam_sk",
+      "type": "int",
+      "initial": 5,
+      "min": 0,
+      "max": 5,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 5, "lowAt": 2 }
+    },
+    {
+      "id": "exam_b",
+      "type": "int",
+      "initial": 6,
+      "min": 0,
+      "max": 6,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 6, "lowAt": 2 }
+    },
+    {
+      "id": "dil_hak",
+      "type": "int",
+      "initial": 3,
+      "min": 0,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "display": { "label": "Talep hakkı", "widget": "pips", "max": 3 }
+    },
+    {
+      "id": "cred",
+      "type": "int",
+      "initial": 5,
+      "min": 0,
+      "max": 5,
+      "visibility": "VISIBLE",
+      "display": { "label": "Güvenilirlik", "widget": "hearts", "max": 5, "lowAt": 1 }
+    },
+    {
+      "id": "pers",
+      "type": "int",
+      "initial": 2,
+      "min": 0,
+      "max": 10,
+      "visibility": "VISIBLE",
+      "display": { "label": "Hâkim iknası", "widget": "meter10", "max": 10 }
+    },
+    { "id": "tone", "type": "enum", "initial": "soft", "enumValues": ["soft", "hard"], "visibility": "HIDDEN" },
+    { "id": "leyla_gun", "type": "int", "initial": 0, "min": 0, "max": 3, "visibility": "HIDDEN" },
+    { "id": "leyla_kod", "type": "int", "initial": 0, "min": 0, "max": 1, "visibility": "HIDDEN" },
+    { "id": "leyla_ara", "type": "int", "initial": 0, "min": 0, "max": 2, "visibility": "HIDDEN" },
+    { "id": "wrong", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
+    { "id": "legal_hits", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
+    { "id": "ethics", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
+    { "id": "in_court", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "cokus", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ucret_sonra", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "deniz_durust", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "br01_dogru", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_nova", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_avans", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_simyok", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_operator", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_kod_inkar", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_kod_itiraf", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_anne", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_ekran", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_burak", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_burak_ece", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_burak_temiz", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_imei", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_sevim_arama", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_necdet_hikaye", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_bayi_yol", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_polis_eksik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_gokhan_mantik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_kaan_erkek", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_nurettin_anons", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_zincir", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_imei_yol", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ece_durust", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ece_inkar", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ece_sus", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ece_hazir", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "nurettin_saygi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "nurettin_soz", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "nurettin_yumusadi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "nurettin_baski", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "tehdit_bildirildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "arama_bildirildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "gece_mesaj", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "dl_log", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "dl_hts", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "dl_bayi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "dl_atm", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "dil_verildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "rq_log", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "rq_hts", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "rq_bayi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "rq_atm", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "onur_baski", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "onur_cagrildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "onur_bahsis", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "tanik_etkileme", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "burak_red", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "illegal_alindi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "illegal_used", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "katilma_ok", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_itiraz_tutanak", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_g1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_g2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_g3", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_g4", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_g1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_g2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_g3", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_g5", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "g2_kismi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "g2_kaan", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "obj_g4", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "obj_g5", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "kod_ortaya", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "yasak_kalkti", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "suc_duyurusu", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "suc_burak", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "imei_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "arda_cagrildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "arda_avukat", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "arda_ifade", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "arda_teslim", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "arda_yuzuk", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "burak_gelecek", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "cihaz_t04", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_o1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_o2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_o3", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_o4", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_o1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_o2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_o3", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "o1_kismi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "obj_o3", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "tarif_yuzuk", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_n1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_n2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_n3", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_n1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_n2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_n3", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_n4", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "n2_kismi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "n3_kismi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "n3_imei", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "obj_n2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "necdet_ifsa", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "istirak_cevap", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "terditli", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "terditli_erken", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "gercek_fail", "type": "bool", "initial": false, "visibility": "HIDDEN" }
+  ]
+}

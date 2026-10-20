@@ -18,7 +18,7 @@
     "test:e2e": "node apps/api/scripts/test-e2e.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "validate:cases": "npm run build && node packages/validator/dist/cli.js content/cases/gece-bekcisinin-sirri",
+    "validate:cases": "npm run build && node packages/validator/dist/cli.js content/cases/*/",
     "case:new": "tsx --tsconfig tools/content/tsconfig.json tools/content/src/cli.ts new",
     "case:build": "tsx --tsconfig tools/content/tsconfig.json tools/content/src/cli.ts build",
     "case:validate": "tsx --tsconfig tools/content/tsconfig.json tools/content/src/cli.ts validate",

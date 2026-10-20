@@ -135,7 +135,11 @@ After fixing: re-run the reviewer's kind of shortcut probe (shortest action path
 
 const STATE = ROOT + '/tools/content/workflows/state/review-state.json'
 const LOAD_NOTE = `
-Machine note: other agents run validators in parallel. If case:validate fails ONLY with SIMULATION_ABORTED / time limits, or a vitest test times out, re-run it alone with a larger budget (e.g. \`npm run case:validate -- <slug> --max-ms 3000000\`, \`npx vitest run <file> --testTimeout 600000\`) and report it as load-related; do not change content to dodge a time limit.`
+CPU DISCIPLINE (binding — the machine has 8 cores shared by several agents; earlier runs thrashed at load 30):
+- Run at most ONE CPU-heavy command at a time (case:validate, vitest, case:duration, search/shrink probes, npm run build). Never start probes in parallel or in the background; never use run_in_background for them; wait for each to finish.
+- vitest: always add \`--maxWorkers=2\`. Shortcut/search probes: single process, bounded (e.g. a node budget or ≤10 min), no fan-out.
+- Before you finish, make sure no process you started is still running (kill leftovers).
+- If case:validate fails ONLY with SIMULATION_ABORTED / time limits, or a vitest test only times out, re-run it alone with a larger budget (\`npm run case:validate -- <slug> --max-ms 3000000\`, \`--testTimeout 600000\`) and report it as load-related; do not change content to dodge a time limit.`npm run case:validate -- <slug> --max-ms 3000000\`, \`npx vitest run <file> --testTimeout 600000\`) and report it as load-related; do not change content to dodge a time limit.`
 
 const continueFixPrompt = (c, w) => `You are finishing the devil's-advocate fixes for case #${String(c.number).padStart(2, '0')} "${c.title}" (slug ${c.slug}). A previous fixer was interrupted by a machine restart; its partial work is committed (last commits may be "wip(...)" snapshots). Work in the existing git worktree ${w.worktreePath} (branch ${w.branch}): cd there for everything and commit there. Do not create a new worktree or branch.
 The review findings are in ${STATE} under key "${c.slug}" → review.findings (also review.shortestAcquittalActions / typicalActions). If a "fix" entry exists there, it is the previous fixer's report.
@@ -152,9 +156,17 @@ ${LOAD_NOTE}`
 
 const verifyPrompt = (c, w) => `Verify case #${String(c.number).padStart(2, '0')} "${c.title}" (slug ${c.slug}) after its fixes. Work in ${w.worktreePath} (branch ${w.branch}); cd there. The fixer reported that gates failed ONLY because of machine load (see ${STATE} key "${c.slug}" → fix.notFixed). Run: \`npm run build\`, \`npm run case:validate -- ${c.slug} --max-ms 3000000\`, \`npm run case:duration -- ${c.slug}\`, \`npx vitest run --project content-tools --project case-schema --project engine --project validator --testTimeout 600000\`, \`npm run lint\`. If something fails for a real (non-load) reason, fix it, commit, and re-run. Also re-run a quick shortcut probe to confirm the shortest acquittal is ≥ 60% of the typical path's actions.
 ${STANDARDS}
+${LOAD_NOTE}
 Return the structured result.`
 
-const st = (s) => s.findings ? s : null
+const MAX_ACTIVE = 4
+let active = 0
+const waiters = []
+const run = async (prompt, opts) => {
+  while (active >= MAX_ACTIVE) await new Promise((r) => waiters.push(r))
+  active++
+  try { return await agent(prompt, opts) } finally { active--; const n = waiters.shift(); if (n) n() }
+}
 const blockers = (r) => (r && r.findings ? r.findings.filter((x) => x.severity === 'blocker').length : 0)
 
 const results = await pipeline(
@@ -163,27 +175,27 @@ const results = await pipeline(
     const w = { worktreePath: c.worktreePath, branch: c.branch, wordsTypical: c.wordsTypical, actionsTypical: c.actionsTypical, durationTypicalMin: c.durationTypicalMin, outcomes: [], concerns: [`Writer/fixer history: ${STATE} key "${c.slug}"`] }
     let f = null, r = null
     if (c.stage === 'verify') {
-      f = await agent(verifyPrompt(c, w), { label: `verify:${c.slug}`, phase: 'Review', schema: FIX })
+      f = await run(verifyPrompt(c, w), { label: `verify:${c.slug}`, phase: 'Review', schema: FIX })
       return { c, w, r: null, f, needRe: false }
     }
     if (c.stage === 'review') {
-      r = await agent(reviewPrompt(c, w), { label: `review:${c.slug}`, phase: 'Review', schema: REVIEW, effort: 'high' })
+      r = await run(reviewPrompt(c, w) + LOAD_NOTE, { label: `review:${c.slug}`, phase: 'Review', schema: REVIEW, effort: 'high' })
       if (r) log(`${c.slug}: review ${r.verdict} — ${blockers(r)} blocker`)
-      if (r && (r.verdict === 'fail' || r.findings.some((x) => x.severity !== 'minor'))) f = await agent(fixPrompt(c, w, r), { label: `fix:${c.slug}`, phase: 'Fix', schema: FIX })
+      if (r && (r.verdict === 'fail' || r.findings.some((x) => x.severity !== 'minor'))) f = await run(fixPrompt(c, w, r) + LOAD_NOTE, { label: `fix:${c.slug}`, phase: 'Fix', schema: FIX })
       return { c, w, r, f, needRe: blockers(r) >= 3 }
     }
     if (c.stage === 'fix') {
-      f = await agent(continueFixPrompt(c, w), { label: `fix:${c.slug}`, phase: 'Fix', schema: FIX })
+      f = await run(continueFixPrompt(c, w), { label: `fix:${c.slug}`, phase: 'Fix', schema: FIX })
       return { c, w, r: null, f, needRe: c.blockers >= 3 }
     }
     return { c, w, r: null, f: null, needRe: true } // stage 're-review'
   },
   async (x) => {
     if (!x || !x.needRe) return x
-    const r2 = await agent(reReviewPrompt(x.c, x.w), { label: `re-review:${x.c.slug}`, phase: 'Re-review', schema: REVIEW, effort: 'high' })
+    const r2 = await run(reReviewPrompt(x.c, x.w), { label: `re-review:${x.c.slug}`, phase: 'Re-review', schema: REVIEW, effort: 'high' })
     if (r2) log(`${x.c.slug}: re-review ${r2.verdict} — ${blockers(r2)} blocker`)
     let f2 = null
-    if (r2 && r2.verdict === 'fail') f2 = await agent(fixPrompt(x.c, x.w, r2), { label: `fix2:${x.c.slug}`, phase: 'Re-review', schema: FIX })
+    if (r2 && r2.verdict === 'fail') f2 = await run(fixPrompt(x.c, x.w, r2) + LOAD_NOTE, { label: `fix2:${x.c.slug}`, phase: 'Re-review', schema: FIX })
     return { ...x, r2, f2 }
   },
 )

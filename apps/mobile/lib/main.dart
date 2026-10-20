@@ -13,7 +13,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Gömülü yazı tiplerinin SIL OFL 1.1 lisansları (Lisanslar sayfasında görünür).
   LicenseRegistry.addLicense(() async* {
-    for (final (pkg, file) in const [('Pixelify Sans', 'OFL-PixelifySans.txt'), ('VT323', 'OFL-VT323.txt')]) {
+    for (final (pkg, file) in const [('Pixelify Sans', 'OFL-PixelifySans.txt'), ('VT323', 'OFL-VT323.txt'), ('Jersey 10', 'OFL-Jersey10.txt')]) {
       yield LicenseEntryWithLineBreaks([pkg], await rootBundle.loadString('assets/fonts/$file'));
     }
   });

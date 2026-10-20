@@ -82,12 +82,13 @@ flutter:
   assets:
     - assets/fonts/OFL-PixelifySans.txt
     - assets/fonts/OFL-VT323.txt
+    - assets/fonts/OFL-Jersey10.txt
     # Geliştirici galerisi (/_dev/play, yalnızca debug) ve widget testleri aynı örnek görünümleri kullanır.
     - test/fixtures/
 
   # google_fonts kullanılmaz; yazı tipleri pakete gömülüdür (docs/plan.md §10).
   fonts:
-    # Başlık ve düğme yazısı. google/fonts yalnızca değişken font (wght 400–700) yayımlar; Flutter'ın FontWeight →
+    # Logo (MÜDAFAA). google/fonts yalnızca değişken font (wght 400–700) yayımlar; Flutter'ın FontWeight →
     # wght eşlemesine güvenmemek için fontTools varLib.instancer ile statik 400/600/700 örnekleri üretildi
     # (docs/mobile-game-feel-report.md, "Yazı tipi"). Glif şekilleri değişken fontun bu ağırlıklardaki hâlidir.
     - family: PixelifySans
@@ -98,6 +99,11 @@ flutter:
           weight: 600
         - asset: assets/fonts/PixelifySans-Bold.ttf
           weight: 700
+    # Başlık ve düğme yazısı (kullanıcı kararı 2026-10-20): Pixelify Sans küçük boyutta E/G/B'yi bozuk çizdiği için
+    # Jersey 10 (OFL, google/fonts). Tek ağırlık; sahte kalınlık piksel konturlarını bozar, PxText ağırlığı yok sayar.
+    - family: Jersey10
+      fonts:
+        - asset: assets/fonts/Jersey10-Regular.ttf
     # Gövde metni.
     - family: VT323
       fonts:

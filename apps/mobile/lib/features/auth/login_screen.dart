@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             Text('BİR AVUKATIN DAVA DEFTERİ', textAlign: TextAlign.center, style: PxText.eyebrow),
             const SizedBox(height: 8),
-            Text('MÜDAFAA', textAlign: TextAlign.center, style: PxText.pixel(56, color: PxColors.gold, spacing: 2)),
+            Text('MÜDAFAA', textAlign: TextAlign.center, style: PxText.logo(56)),
             const SizedBox(height: 4),
             Text('Her dosyanın bir hikâyesi var.', textAlign: TextAlign.center, style: PxText.body(22, color: PxColors.muted)),
             const SizedBox(height: 36),

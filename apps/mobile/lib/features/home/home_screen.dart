@@ -35,7 +35,7 @@ class HomeScreen extends ConsumerWidget {
                 children: [
                   Text('BİR AVUKATIN DAVA DEFTERİ', textAlign: TextAlign.center, style: PxText.eyebrow),
                   const SizedBox(height: 6),
-                  Text('MÜDAFAA', textAlign: TextAlign.center, style: PxText.pixel(56, color: PxColors.gold, spacing: 2)),
+                  Text('MÜDAFAA', textAlign: TextAlign.center, style: PxText.logo(56)),
                   Text('Her dosyanın bir hikâyesi var.', textAlign: TextAlign.center, style: PxText.body(22, color: PxColors.muted)),
                   const SizedBox(height: 18),
                   const _Courthouse(),

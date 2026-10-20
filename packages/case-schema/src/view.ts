@@ -5,7 +5,7 @@ import { IconKey } from './evidence.js';
 import { Block, CourtroomMode, DialogueMode, InvestigationTabKind, StoryPhase, ToolVisualMode } from './node.js';
 import { OutcomeClass, ResultTone } from './outcome.js';
 import { ObjectionGround } from './package.js';
-import { Category, Expression, Hex, Id, Rect, Tone } from './primitives.js';
+import { Backdrop, Category, Expression, Hex, Id, Rect, Tone } from './primitives.js';
 import { SpriteDef } from './sprite.js';
 import { VariableWidget } from './variable.js';
 
@@ -255,6 +255,8 @@ export const SessionView = z.strictObject({
   header: z.strictObject({
     eyebrow: z.string().optional(),
     title: z.string().optional(),
+    chapter: z.string().optional(),
+    backdrop: Backdrop.optional(),
     back: z.strictObject({ a11yLabel: z.string(), choiceId: Id }).optional(),
   }),
   hud: z.array(HudItem),

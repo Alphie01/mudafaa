@@ -118,6 +118,8 @@ export function view(c: CompiledCase, s: SessionState, meta: ViewMeta): SessionV
     header: {
       ...(def.eyebrow === undefined ? {} : { eyebrow: def.eyebrow }),
       ...(def.title === undefined ? {} : { title: def.title }),
+      ...(def.chapter === undefined ? {} : { chapter: def.chapter }),
+      ...(def.background === undefined ? {} : { backdrop: def.background }),
       ...(back === undefined ? {} : { back: { a11yLabel: back.label ?? 'Geri', choiceId: back.id } }),
     },
     hud: hudOf(vc, def),

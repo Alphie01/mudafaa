@@ -241,6 +241,9 @@ const log = documentExam('INV_LOG', {
   lines: B(`
 # BÜRO — OTURUM DÖKÜMÜ [bg:buro]
 > Bir sayfa. Altı satır. Başlıkta DataKale’nin logosu. Altında küçük harflerle: “Şirket güvenlik duvarı kayıtlarından derlenmiştir.”
+> Kâğıdın kenarında bir kahve halkası. Benim değil; dosyayı benden önce okuyan avukatın. Çekilmeden önce bu sayfada bir yerde durmuş.
+~ Altı satır, iki gece, bir kullanıcı adı. Savcılık bu sayfayı bir parmak izi gibi okuyor. Oysa kullanıcı adı bir parmak değil; bir anahtar.
+~ Anahtar kimin cebindeyse kapı onu tanır. Kapı, anahtarı tutan eli tanımaz.
 ~ Derlenmiş. Yani biri seçmiş. Bir alet seç, sonra şüpheli satıra dokun. Doğru alet, doğru yer: yeni bir ipucu.
 `),
   header: { left: 'DATAKALE · VPN OTURUM ÖZETİ · KULLANICI S.AKTAS', right: '17–18.10' },
@@ -331,7 +334,10 @@ const imaj = documentExam('INV_IMAJ', {
   lines: B(`
 # BÜRO — GECE [bg:buro_gece]
 > On dört sayfa. Kapakta bir kale logosu ve “GİZLİDİR” damgası. İçeride tablolar, ekran görüntüleri, uzun onaltılık sayılar.
+> Dışarıda yağmur hızlandı. Karşı binada tek bir pencere yanıyor; biri benim gibi geç saate kalmış, biri benim gibi bir şeyi anlamaya çalışıyor.
 ~ Bu raporu bir hâkim okusa “teknik” deyip geçer. Ben teknik değilim; o yüzden geçemem. Her satırı bir hikâye gibi okuyacağım.
+~ Her hikâyenin bir anlatıcısı vardır. Bu raporun anlatıcısı, şikâyetçi şirketin her ay fatura kestiği firma. Tarafsız bir göz değil; bir tedarikçi.
+~ Bu onu yalancı yapmaz. Ama her cümlesini iki kez okumam için yeterli bir sebep.
 `),
   header: { left: 'DATAKALE BİLİŞİM · İMAJ VE ANALİZ RAPORU', right: 'NO: DK-2611' },
   columns: [
@@ -423,6 +429,8 @@ const emn = documentExam('INV_EMN', {
 # BÜRO — EMNİYET RAPORU [bg:buro]
 > Altı sayfa. Düz, resmî, tarih sırasıyla. İlk sayfada arama kararının sayısı, el koyma tutanağı, imajın özet değeri, iki memurun imzası.
 ~ Bu rapor sıkıcı. Sıkıcı raporlar genellikle doğru raporlardır.
+> İmzalardan biri Hakan Ilgaz. Altında bir not: “İnceleme, el konulan cihazın birebir kopyası üzerinde yapılmıştır; asıl cihaz mühürlüdür.”
+~ Kopya üzerinde çalışmak. Aslına dokunmamak. Bir polisin bunu yazma zahmetine girmesi, dosyadaki en dürüst cümle olabilir.
 `),
   header: { left: 'SİBER SUÇLARLA MÜCADELE ŞUBE · İNCELEME RAPORU', right: '29.10' },
   columns: [
@@ -499,6 +507,8 @@ const devir = documentExam('INV_DEVIR', {
 # BÜRO — TUTANAK [bg:buro]
 > Tek sayfa. Şirketin antetli kâğıdı. Yedi madde, iki imza, bir paraf. Altıncı madde mavi tükenmezle, sonradan eklenmiş.
 ~ Bir adam işten çıkarken neyi kime teslim etti? Leyla’nın sorusu. Cevabı bu kâğıtta.
+> Kâğıdın arkasında, kurşun kalemle, Selim’in el yazısı: “Kartı kapıda bıraktım. Kupamı unuttum.” Altına bir gülen yüz çizmiş, sonra karalamış.
+~ İşten çıkarılan bir adamın son notu. Ne öfke ne tehdit; bir kupa. Tutanaklar insanların ne bıraktığını yazar; ne hissettiğini değil.
 `),
   header: { left: 'NİLÜFER ÖRME TEKSTİL · DEVİR-TESLİM TUTANAĞI', right: '30.09' },
   columns: [
@@ -579,6 +589,8 @@ export const tamDoc = (id: string, chapterSpread: typeof INV, returnTo?: string)
       lines: B(`
 > Şirketin avukatının üst yazısıyla gelen dört sayfa: “Mahkemenizin yazısı üzerine ham kayıt ekte sunulmuştur.” Satırlar uzun, sütunlar sık.
 ~ Özet altı satırdı. Ham kayıt yüz altmış. Arada kaybolan her sütun, birinin önemsiz bulduğu bir gerçek.
+> Gözlerim satırlar arasında kayıyor. Saat, kullanıcı, kaynak; bir de özette hiç olmayan bir sütun: cihaz. Her bağlantı kendini bir adla tanıtmış.
+~ Bilgisayarlar da insanlar gibi kapıda adını söyler. Kimse sormadığı için kimse duymamış.
 `),
       header: { left: 'GÜVENLİK DUVARI · VPN OTURUM KAYDI (HAM)', right: '17–18.10' },
       columns: [
@@ -653,6 +665,8 @@ const dil = story('INV_DIL', {
 # BÜRO — DİLEKÇE [bg:buro]
 > Boş bir sayfa. “Bursa 9. Asliye Ceza Mahkemesi Hâkimliği’ne.” İmleç yanıp sönüyor.
 ~ Üç talep. Mahkeme gerekçesiz talebi reddeder; her gereksiz talep, gerçek talebin ağırlığını eksiltir.
+> Leyla’nın eski dilekçeleri bir klasörde, rafın en üstünde. Birini açtım: iki sayfa, üç talep, her talebin altında tek bir “çünkü”.
+~ “Çünkü” yazamadığın talebi yazma. Leyla bunu ilk haftamda söylemişti. O zaman bir dilekçenin uzun olması gerektiğini sanıyordum.
 `,
     ),
     O(`
@@ -924,6 +938,11 @@ const aksam1 = story('INV_AKSAM1', {
   lines: B(`
 # GECE 22.15 — ARSLAN HUKUK [bg:buro_gece]
 > Büroda Leyla’yla ikimiz kaldık. Yağmur camda; kalorifer tıkırdıyor. Leyla gözlüğünü çıkardı, burnunun kemerini ovuşturdu.
+> Masasının köşesinde açılmamış sigara paketi. Yirmi yıldır orada olduğunu söylerler; her zor dosyada eline alır, çevirir, geri koyar.
+> Bu akşam paketi aldı. Çevirdi. Geri koymadı; avucunda tuttu.
+leyla: İlk dosyamı hatırlıyorum. Bir hırsızlık. Herkes müvekkilimin parmak izini konuşuyordu; ben pencerenin hangi yöne açıldığını sordum. Kimse sormamıştı.
+leyla: Pencere içe açılıyordu. Parmak izi dışarıdaydı. Davayı bir menteşe kazandı.
+~ Leyla hikâye anlatmaz. Anlattığında bir ders verir; dersin adını da söylemez.
 leyla: Bugün çok kâğıt okudun. Kayıtlar, raporlar, özetler. Bir şey sorayım: bugün neye inandın?
 `),
   choices: [
@@ -963,6 +982,9 @@ const aksam2 = story('INV_AKSAM2', {
   background: 'buro_gece',
   lines: B(`
 # GECE 23.40 — ARSLAN HUKUK [bg:buro_gece]
+> Büroda yalnızdım. Leyla çoktan gitmişti; koridorun ışığı otomatik, her dört dakikada bir sönüyor, ben her dört dakikada bir elimi sallıyordum.
+> Masada üç kâğıt yan yana: özet, rapor, tutanak. Aralarında bir çizgi çekmeye çalışıyordum; çizgi her seferinde bir boşlukta bitiyordu.
+~ Bir dosyada boşluklar iki türlüdür: kimsenin bakmadığı yerler ve birinin baktırmak istemediği yerler. İkisini birbirinden ayırmak bütün işim.
 > Masamdaki telefon çaldı. Ekranda “Gizli numara.” Üçüncü çalışta açtım.
 @BİR KADIN: Avukat Deniz Arslan? [phone]
 - Benim. Kimsiniz?

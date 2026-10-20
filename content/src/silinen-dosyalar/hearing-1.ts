@@ -232,8 +232,11 @@ selim: Kızgın mıyım? Dokuz yıl verdim, bir koli kablo aldım. Kızgınım t
       say: T(`
 ozan: Sayın Hâkim, dosyada DataKale Bilişim’in imaj ve analiz raporu mevcuttur. Raporun bilirkişi raporu olarak okunmasını ve hükme esas alınmasını talep ediyoruz.
 ozan: Rapor açıktır: silme işlemi sanığın hesabından yapılmıştır. Ayrıca bir bilirkişi incelemesi, şirketimizi yeniden aylarca bekletmekten başka bir işe yaramaz.
+> Ozan raporu havaya kaldırdı; kapaktaki kale logosu salonun florasanında parladı. Dinleyici sırasında Bülent Arıkan dikleşti.
+ferda: Savcılık olarak takdiri mahkemenize bırakıyoruz. Ancak raporun hazırlanış biçimi hakkında müdafinin de görüşü alınmalı.
 kemal: Müdafi, diyeceğiniz?
 ~ “Bilirkişi raporu olarak.” Bu iki kelime bu salonda kabul edilirse, şikâyetçinin firması hâkimin gözü olur.
+~ Bir rapora ad koymak, ona bir koltuk vermektir. Uzmanın koltuğu tarafların yanındadır; bilirkişininki mahkemenin yanında.
 `),
       next: 'H1_03',
       options: [
@@ -696,7 +699,7 @@ gul: Bugün kapanır demiştiniz.
         ),
         O(`
 # ADLİYE KORİDORU · ÖĞLEDEN ÖNCE [bg:adliye]
-> Selim pencerenin önünde durdu. Aşağıda adliyenin otoparkı; siyah, uzun bir araba çıkıyordu. Plakasına bakmadı. Ben baktım: 16 NS 001.
+> Selim pencerenin önünde durdu. Aşağıda adliyenin otoparkı; arabalar birer birer çıkıyordu; sileceklerin ritmi bir saat gibi. Selim hiçbirine bakmadı.
 selim: Üç hafta. Üç hafta daha herkes bana “sildin mi” diye bakacak. Komşular, Defne’nin öğretmeni, bakkal.
 - Üç hafta sonra kâğıtlar konuşacak.
 ~ Bunu söylerken sesim benimkinden daha emin çıktı. Avukatlıkta buna “mesleki ses” denir. Ben ona “yalan değil ama” derim.

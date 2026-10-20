@@ -5,7 +5,7 @@ import { O, W } from './dsl.js';
 // 90-outcomes: sonuçlar (öncelik sırasıyla) ve sonuca bağlı epiloglar. Eşikler meta’daki eşik çubuğuyla aynı.
 
 export const T_INDIRIM = 2800;
-export const T_BERAAT = 8500;
+export const T_BERAAT = 9500;
 export const T_BERAAT_B = 10500;
 
 export const outcomes: CasePart = {
@@ -162,6 +162,11 @@ kemal: Türk Milleti adına…
 ozan: İyi iş çıkardınız meslektaşım. İstinafta görüşürüz; müvekkilim rücu davasından henüz vazgeçmedi.
 - Vazgeçmeyebilir. Ama artık karşısında bir “şüpheli” değil, bir soru var.
 > Gittiler. Selim pencerenin önünde durdu; aşağıda otopark, çıkan siyah bir araba. Plakasına bu kez bakmadı.
+> Gül yanıma geldi. Elinde, sabahtan beri katlayıp açtığı resim. Bana uzatmadı; göğsüne bastırdı.
+gul: Defne’ye ne diyeceğim avukat hanım? “Baban suçsuz” mu, “suçlu olduğu kanıtlanamadı” mı?
+- “Baban eve geliyor” deyin. Gerisini o büyüyünce siz anlatırsınız. Belki o zamana kadar ikinci cümle birinciye dönüşür.
+gul: Öğretmenler cümle düzeltmeyi bilir. Bunu da düzeltiriz.
+> Selim adliyenin merdivenlerinden inerken telefonunu çıkardı; bir fotoğrafa baktı. Defne’nin doğduğu gün. O cuma akşamı kopyaladığı klasörden.
 `),
         W(
           flag('tarik_yuzles'),
@@ -232,7 +237,7 @@ gul: Hapis yok. Ama kaydında bir şey kaldı, değil mi?
       stampTone: 'red',
       sentence: '2 yıl hapis',
       verdictText:
-        'Sanık Selim Aktaş’ın üzerine atılı verileri yok etme (TCK 244/2) ve bilişim sistemine girme (TCK 243/1) suçlarını işlediği sabit görülerek; her iki suçtan ayrı ayrı, suçun işleniş biçimi ve meydana gelen zararın ağırlığı gözetilerek TCK 61 uyarınca cezalandırılmasına, verileri yok etme suçundan belirlenen 2 YIL HAPİS cezasının sonuç ceza olarak uygulanmasına; TCK 53; TCK 63 mahsup; cezanın miktarı ve sanığın olumsuz kişilik değerlendirmesi nedeniyle hükmün açıklanmasının geri bırakılmasına ve ertelemeye yer olmadığına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).',
+        'Sanık Selim Aktaş’ın üzerine atılı verileri yok etme (TCK 244/2) ve bilişim sistemine girme (TCK 243/1) suçlarını işlediği sabit görülerek; suçun işleniş biçimi ve meydana gelen zararın ağırlığı gözetilerek TCK 61 uyarınca verileri yok etme suçundan 1 YIL 8 AY, sisteme girme suçundan 4 AY olmak üzere ayrı ayrı cezalandırılmasına, cezaların toplanmasıyla sonuç olarak 2 YIL HAPİS; TCK 53; TCK 63 mahsup; cezanın miktarı ve sanığın olumsuz kişilik değerlendirmesi nedeniyle hükmün açıklanmasının geri bırakılmasına ve ertelemeye yer olmadığına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).',
       reasoning: [
         because('Oturum dökümü ve DataKale raporu silme eyleminin sanığın kullanıcı adıyla yapıldığını göstermektedir.'),
         because('Savunmanın delillere yönelik itirazları somut biçimde ispatlanamamış; imajın güvenilmezliği ve rıza yeterince ortaya konamamıştır.', not(flag('cokus'))),
@@ -263,8 +268,12 @@ ferda: Kayıt vardı bu dosyada avukat hanım. Ham kayıt, kart kaydı, bir poli
 # ADLİYE KORİDORU · HÜKÜMDEN SONRA [bg:adliye]
 > “İki yıl.” Kelime koridora benden önce çıktı. Gül, Defne’nin resmini çantasına koydu; katlayarak, dikkatle, bir daha açmamak ister gibi.
 > Selim pencerenin önünde durdu. Aşağıda otopark; siyah, uzun bir araba çıkıyordu. Uzun uzun baktı. Bu kez plakayı o okudu.
-selim: Açıklanması geri bırakıldı diyorlar. Yani kaydımda duracak. Beş yıl. Komşular, Defne’nin öğretmeni, bakkal. Hepsi “o adam” diyecek.
-- İstinaf var Selim. Bir yol daha.
+selim: Ne erteleme ne geri bırakma, diyorlar. İki yıl. Komşular, Defne’nin öğretmeni, bakkal. Hepsi “o adam” diyecek.
+- İstinaf var Selim. İki hafta içinde. Hüküm kesinleşmeden kimse seni bir yere götüremez.
+gul: İki hafta. Defne’nin doğum günü on gün sonra. Pasta mı alayım, dilekçe mi yazayım avukat hanım?
+- İkisini de. Pastayı siz alın. Dilekçeyi ben yazarım.
+> Gül güldü; ağlamaya benzeyen bir gülüş. Selim’in elini tuttu, bıraktı, yeniden tuttu.
+> Koridorun ucunda Ozan Tekin cübbesini katlıyordu. Bize bakmadı. Kazananlar koridorlarda kimseye bakmaz; kaybedenler herkese bakar.
 ~ Bir yol daha. Ama elimde kalan kâğıtları bir celse önce doğru yerde açamadım. İstinaf, geç kalmış bir cümlenin ikinci şansıdır.
 `),
         W(

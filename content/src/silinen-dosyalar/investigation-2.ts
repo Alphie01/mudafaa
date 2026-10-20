@@ -274,6 +274,9 @@ const sema = retarget(
     background: 'buro_gece',
     lines: B(`
 > Dört sayfa, sade bir dil. Mahkemenin bilirkişisi Dr. Sema Uçar. “Bulgu” ve “kanaat” ayrı başlıklar altında; bir mühendisin titizliği.
+> Tutanağın ekinde bir not: “İnceleme, taraf vekillerine bildirilen saatte, şirket sunucu odasında başlamış; orijinal diske el konulmuş, kopya alınmış, özet değer tutanağa yazılmıştır.”
+~ Taraf huzurunda, bildirilerek, tutanakla. DataKale’nin raporunda bu üç sözcüğün hiçbiri yoktu.
+> Sema Uçar’ı bir kez gördüm, adliyenin bilirkişi odasında. Gözlüğünü alnına itmiş, bir disk kutusunun etiketini okuyordu. “Bulgularımı yazarım avukat hanım; kanaatimi mahkeme sorarsa söylerim.”
 ~ İlk tarafsız göz. Bir alet seç, satırlara dokun.
 `),
     header: { left: 'BİLİRKİŞİ · ÖN İNCELEME TUTANAĞI', right: 'orijinal disk' },
@@ -349,6 +352,8 @@ const turnike = retarget(
     lines: B(`
 > İki sayfa. Birincide kart geçişleri, saat saat. İkincide demirbaş zimmet listesi; bilgisayarların adları ve kime zimmetli olduğu.
 ~ Kim girdi, kim çıktı. Yaşar Usta’nın sorusunun makineyle yazılmış hâli.
+> Üst yazıyı şirketin insan kaynakları imzalamış; altında “mahkemenin talebi üzerine eksiksiz sunulmuştur” cümlesi. Eksiksiz sözcüğünün altı çizilmiş.
+~ Bir kâğıt “eksiksiz” diye bağırıyorsa ya gerçekten eksiksizdir ya da birileri eksiği arayacak diye korkmuştur. Satırlara bakacağım.
 `),
     header: { left: 'NİLÜFER ÖRME · KART GEÇİŞ VE ZİMMET', right: '17–18.10' },
     columns: [
@@ -412,6 +417,8 @@ const opr = retarget(
     background: 'buro',
     lines: B(`
 > Operatörün mahkemeye cevabı. Tek bir oturum, tek bir saat; kanun dışına çıkmayan, dar bir cevap.
+> Mahkeme yazısında yalnızca tek bir saat ve tek bir bağlantı sorulmuştu. Cevap da o kadar: ne bir konuşma kaydı ne bir rehber; bir hat, bir abone, bir baz istasyonu.
+~ Dar sordum; dar cevap geldi. Bir avukatın istediği kadarı, hakkı olan kadardır. Fazlası başkasının hayatı.
 ~ Kaynağı “GSM” görünen oturum. Şimdi o GSM’in kime ait olduğunu okuyacağım.
 `),
     header: { left: 'GSM OPERATÖRÜ · MAHKEME CEVABI', right: '18.10 02.14' },
@@ -476,6 +483,8 @@ const zeyil = retarget(
     lines: B(`
 > Sigorta şirketinin cevabı: ana poliçe ve bir zeyilname. Zeyilname bir sayfa; iki değişiklik, iki imza, bir tarih.
 ~ Bir zararın dayanağı bir poliçedir. Poliçenin dayanağı da bazen bir plan.
+> Ana poliçe yıllardır aynı: aynı acente, aynı prim, aynı küçük limit. Sonra, bir yaz günü, tek sayfalık bir ek. Acentenin notu: “Müşteri talebiyle.”
+~ Müşteri talebiyle. Bir şirket yangından önce yangın sigortasını artırırsa sigortacılar buna bir ad verir. Ben henüz bir ad vermeyeceğim; önce satırlar.
 `),
     header: { left: 'SİBER RİSK POLİÇESİ · ZEYİLNAME', right: '03.08' },
     columns: [
@@ -545,6 +554,8 @@ const eksper = retarget(
 # BÜRO — SİGORTA HASAR DOSYASI [bg:buro]
 > Sigorta eksperi de fotoğraf çekmiş; aynı oda, başka bir göz. Bu fotoğraflar hasar dosyasında, zeyilnamenin yanında geldi.
 ~ Şirketin fotoğrafları “zarar” diyordu. Eksperin fotoğrafları “ne zaman” diyor. Aynı odada iki ayrı saat.
+> Eksper raporunun ilk cümlesi: “Sigortalının ihbarı üzerine 18.10 cumartesi sabahı mahalde inceleme yapılmıştır.” Polisin adı ilk kez iki gün sonra geçiyor.
+~ Hırsız girmiş bir eve önce polis değil sigortacı çağrılır mı? Çağrılabilir. Ama bu, sorulmaya değer bir sıralama.
 `),
   miss: fallback('ARA_EKS_FB', 'TAP', {
     score: { ARASTIRMA: -10 },
@@ -687,6 +698,7 @@ nalan: Anlatırım. Korkuyorum; ama anlatırım. Bir imzanın altında kalmaktan
 `),
     }),
     option('NQ_GM', '“Genel müdür o gece nerede olabilir?”', {
+      visibleWhen: flag('fact_nalan_police'),
       score: { SORGULAMA: 20 },
       responses: B(`
 nalan: Bilmem. Ama şunu bilirim: Tarık Bey teknik adam değilim der, oysa her sabah kendi dizüstüsüyle gelir, kimseye dokundurmaz. “Benim bilgisayarım benim kasam” der.
@@ -744,6 +756,9 @@ yasar: Sen o müdürle konuştuktan sonra oldu bu. Belki tesadüf. Belki değil.
 # PERŞEMBE 22.00 — NİLÜFER ÖRME, KULÜBE [bg:depo_gece]
 > Yaşar Usta çay koydu; eli alışkanlıkla.
 yasar: Mahkeme kâğıdı geldi kızım. Salı günü. Ömrümde ikinci kez mahkemeye gideceğim. İlkinde tarla gitti.
+> Kulübenin içinde küçük bir radyo; türkü kısık sesle çalıyordu. Yaşar Usta radyoyu kapattı, sonra yeniden açtı; sessizlik ona daha ağır geldi.
+yasar: Hanım dedi ki “Sen karışma, ekmeğimizden olmayalım.” Oğlan dedi ki “Baba, gördüğünü söyle.” İkisi de haklı. Ben ortada kaldım.
+yasar: Otuz yıl bu kapıda durdum. Kimseye yalan yazmadım o deftere. Şimdi o defter beni mahkemeye çağırıyor.
 yasar: Ne diyeyim orada? Korkuyorum.
 `),
   ],
@@ -1048,6 +1063,8 @@ const dil = story('ARA_DIL', {
       `
 # BÜRO — EK DİLEKÇE [bg:buro]
 > Boş bir dilekçe. İkinci celseye birkaç gün. Bu kez elimde daha çok şey var; ama her talep hâlâ bir gerekçe ister.
+~ İlk dilekçeyi korkuyla yazmıştım; her talebin reddedileceğini sanarak. Bu kez korkum başka: fazla isteyip mahkemenin sabrını tüketmek.
+~ Bir avukatın mahkemeden istediği her kâğıt, karşı tarafın da okuyacağı bir kâğıttır. Ne istediğim, ne düşündüğümü ele verir. Az ve isabetli.
 `,
     ),
     O(`> Dilekçe uzuyor.`),
@@ -1084,6 +1101,7 @@ const dil = story('ARA_DIL', {
       next: '$stay',
     }),
     option('AD_GM', 'Genel müdürün gözaltına alınması', {
+      visibleWhen: any(has('clue_turnike_gm'), has('clue_zimmet'), has('clue_hat_gm'), flag('fact_gm')),
       cost: [{ var: 'slots2', amount: 1 }],
       maxUses: 1,
       score: { USUL_BILGISI: -40 },
@@ -1131,9 +1149,13 @@ leyla: Yarın değil, iki gün sonra o adam kürsüde olabilir. Ona da bir kayd�
     ),
     O(`
 # GECE 23.00 — ARSLAN HUKUK [bg:buro_gece]
+> Leyla gitmeden kapımda durdu; elinde iki bardak çay, birini masama bıraktı.
 leyla: Bugün ne kadar yaklaştın?
 - Bir adım. Belki iki.
 leyla: İki adım, üç haftada iyi. Ama celse yaklaşıyor. Yarın adımlarını büyüt.
+leyla: Bir şey daha. Bu ara evresinde herkes sana bir şey getirecek: bir telefon, bir fotokopi, bir “bildiğim var”. Hepsini al; hiçbirini kucağına koyma.
+leyla: Delil mahkemeye mahkemenin yolundan gelir. Arka kapıdan gelen her kâğıt, ön kapıdan girerken seni de yanında sürükler.
+~ Çayı içtim. Leyla’nın çayı her zaman biraz fazla demli. Uyutmamak için mi, uyandırmak için mi, hiç sormadım.
 `),
   ],
   choices: [cont('ARA_AKSAM1_DEVAM', 'Yeni gün', HUB, { role: 'PRIMARY' })],
@@ -1162,9 +1184,14 @@ const aksam2 = story('ARA_AKSAM2', {
     ),
     O(`
 # GECE 22.30 — ARSLAN HUKUK [bg:buro_gece]
+> Büronun camına yağmur değil, dolu vurdu bir an; sonra yine yağmur. Sokakta bir taksi uzun uzun korna çaldı, kimse binmedi.
 leyla: Celseye iki gün. Hazır mısın?
 - Olmaya çalışıyorum.
 leyla: Çalışmak yeter. Hazır olduğunu sananlar hata yapar.
+leyla: Kürsüye çıkacak her tanığı bir kez daha düşün. Ne bildiğini değil, nereden bildiğini. Mahkeme bilgiyi değil, bilginin yolunu tartar.
+- Bir kaydın da yolu var. Kim tuttu, kim özetledi, kim getirdi.
+leyla: İşte. İki hafta önce bunu bana ben söylüyordum.
+~ Masamdaki kâğıtlar artık bir boşlukta bitmiyor. Bir yere varıyor. Nereye vardığını yüksek sesle söylemekten hâlâ korkuyorum.
 `),
   ],
   choices: [cont('ARA_AKSAM2_DEVAM', 'Devam', HUB, { role: 'PRIMARY' })],
@@ -1203,6 +1230,10 @@ const sonNodes = [
     title: 'İkinci celseden önce',
     background: 'sokak_yagmur',
     lines: B(`
+# GECE 23.55 — DENİZ’İN EVİ [bg:sokak_yagmur]
+> Cübbem kapının arkasında asılı; Leyla’nın ilk duruşmamda bana verdiği, kolunun dikişi iki kez yenilenmiş cübbe.
+> Masada dosyanın son hâli: renkli ayraçlar, kenar notları, bir çay lekesi. İlk gün altı kâğıttı. Şimdi bir parmak kalınlığında.
+~ Dosyalar büyüdükçe hafifler. Çünkü her yeni kâğıt bir soruyu cevaplar; sorular kâğıtlardan ağırdır.
 > Telefon titredi. Leyla’dan, gece yarısına beş kala.
 leyla: Yarın bir isim kürsüye oturabilir. Oturursa, ona acımadan, ama insafla davran. İnsaf, avukatın gücüdür; acımasızlık savcının. [phone]
 > Pencereyi açtım. Yağmur organize sanayinin bacalarına, Nilüfer’in balkonlarına, Görükle’nin villalarına, adliyenin taş merdivenlerine aynı anda yağıyordu. {flash}

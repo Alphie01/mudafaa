@@ -42,7 +42,7 @@ function A(src: string): Action[] {
     });
 }
 
-export const MEASURED = { G1: 12565, TIPIK: 12325, G3: 4035, G4: 380, ETIK: 8745, W: -720 };
+export const MEASURED = { G1: 12565, TIPIK: 12325, G3: 7230, G4: 1410, ETIK: 8745, W: 9025 };
 
 const win = (outcome: string, final: number) =>
   final < 0 ? { outcome, finalMax: 0 } : { outcome, finalMin: Math.floor(final * 0.9), finalMax: Math.ceil(final * 1.1) };
@@ -330,31 +330,88 @@ const TIPIK_STEPS = [
   CELSE2_FULL('S_USUL', 'L_HAFIZA'),
 ];
 
-// NITELENDIRME: rıza kurulur, imaj çürütülür; ama cihaz/hat kimliği kurulmaz → 244 düşer, 243 kalır
+// NITELENDIRME: özenli ama eksik soruşturma. Rıza kurulur, imaj çürütülür; ham kayıt okunmaz, cihaz/hat kimliği hiçbir
+// yerde kurulmaz (dizüstü çıkarımı da yapılmaz) → 244 düşer, 243 kalır.
 const G3_STEPS = [
   PROLOG('BR00_C', 'STR_INDIRIM'),
   A(`
 c H_LOG
 e mag l1
+e mag l2
+e law l4
+e compare l3
 c LOG_BITIR
 c H_IMAJ
 e mag k1
-e mag k4
 e compare k3
+e mag k4
+e law k5
 c IMAJ_BITIR
+c H_EMN
+e mag e2
+e law e1
+c EMN_BITIR
 c H_EV
 t OB_CEKMECE
 t OB_MASA
+t OB_RESIM
 c ARAMA2_BITIR
-c H_GORUS
-c TP_2130 soft
-c TP_IZIN soft
-c TP_DEVIR soft
-c G_BITIR
+c H_DEVIR
+e mag d4
+e law d6
+e compare d3
+c DEVIR_BITIR
 c H_CIKARIM
 m ev_eposta clue_2130
 m clue_imaj_tarih clue_kurtarma
 c CIKARIM_BITIR
+c H_LEYLA
+c LEYLA_DON
+c H_GORUS
+c TP_GECE soft
+c TP_DEVIR soft
+c TP_2130 soft
+c TP_IZIN soft
+c G_BITIR
+c AK1_KIMSE
+`),
+  A(`
+c H_ARAMA
+t OB_YEDEK
+t OB_KLIMA
+t OB_TUP
+c ARAMA_BITIR
+c H_KAPI
+t OB_DEFTER
+t OB_PARK
+t OB_SERVIS
+c ARAMA3_BITIR
+c H_T_YASAR
+c YQ_GECE
+c YQ_SELIM
+c YQ_KORKU
+c YASAR_KARAR
+c YD_BILDIR
+c H_T_HAKAN
+c HQ_IMAJ
+c HQ_DIZUSTU
+c HAKAN_BITIR
+c H_DIL
+c DIL_BILIRKISI
+c DIL_KART
+c DIL_VER
+c H_GORUS2
+c TP_CIKIS soft
+c TP_KIM soft
+c G_BITIR
+c NA_DINLE
+`),
+  A(`
+c H_T_BULENT
+c BQ_IMAJ
+c BQ_KURTARMA
+c BQ_TARIK
+c BULENT_BITIR
 c H_LEYLA
 c LEYLA_DON
 c H_DURUSMA
@@ -363,6 +420,7 @@ c GECE_DEVAM
   A(`
 c H100K_A
 c H100_DEVAM
+c Q_2130
 c Q_IZIN
 c Q_DEVIR
 c Q_BITIR
@@ -375,6 +433,7 @@ s ev_imaj_rapor B2
 s ev_imaj_rapor B3
 c H103K_DEVAM
 c H104_A
+c R_ZEYIL
 c R_BITIR
 c H105B_DEVAM
 c H106_DEVAM
@@ -382,12 +441,43 @@ c H106_DEVAM
   A(`
 c ARA_GIRIS_DEVAM
 c A_SEMA
-e compare s2
 e mag s4
 e mag s5
+e compare s1
 c ARA_SEMA_BITIR
 c A_LEYLA
 c ARA_LEYLA_DON
+c A_HAKAN
+c HA_DISK
+c HAKAN2_BITIR
+c A_YASAR
+c YA_DOGRU
+c A_ZEYIL
+e mag z2
+e law z3
+e mag z4
+c ARA_ZEY_BITIR
+c ARA_AKSAM1_DEVAM
+c A_EKSPER
+t OB_DAMGA
+t OB_ZDEFTER
+t OB_KAHVE
+c ARA_EKS_BITIR
+c A_CIKARIM
+m clue_limit clue_teminat
+m clue_eksper clue_ziyaretci
+c ARA_CIKARIM_BITIR
+c A_NALAN
+c NQ_POLICE
+c NQ_KANAL
+c NALAN_BITIR
+c A_SELIM
+c SQ_SON
+c SELIM_BITIR
+c A_DIL
+c AD_TANIK
+c AD_VER
+c ARA_AKSAM2_DEVAM
 c A_DURUSMA
 c ARA_SON_DEVAM
 `),
@@ -395,38 +485,136 @@ c ARA_SON_DEVAM
 c T00_DEVAM
 c T01_SEMA
 c T01_BITIR
+p T1
 p T2
+p T4
 s ev_eposta T2
+s ev_zeyil T4
 c T02_BITIR
+p Y1
+p Y2
+c T03_BITIR
+c X_ITIRAZ
+p NL1
+p NL2
+s ev_zeyil NL1
+c T04_BITIR
 c T05_DEVAM
 c P_RIZA
 c P_IMAJ
+c P_MOTIF
 c P_BITIR
 c S_TERDIT
 c L_HAFIZA
 `),
 ];
 
-// MAHKUMIYET: soruşturma yapılmadan duruşmaya; zayıf savunma
+// MAHKUMIYET: soruşturma dağınık; e-posta bulunmaz, rıza hiçbir yerde kurulmaz. Karşı tarafın genel müdürü ziyaret edilir,
+// duruşmada uzman raporu bilirkişi raporu gibi kabul edilir; zayıf savunma.
 const G4_STEPS = [
   PROLOG('BR00_B', 'STR_INDIRIM'),
   A(`
-c H_DURUSMA
-c GECE_DEVAM
+c H_LOG
+e mag l1
+e mag l2
+c LOG_BITIR
+c H_IMAJ
+e mag k1
+e law k5
+c IMAJ_BITIR
+c H_EV
+t OB_MODEM
+t OB_RESIM
+t OB_SAAT
+c ARAMA2_BITIR
+c H_T_TARIK
+c TQ_SIFRE
+c TQ_YEDEK
+c TQ_SIGORTA
+c TARIK_BITIR
+c H_EMN
+e mag e2
+e law e1
+c EMN_BITIR
+c H_GORUS
+c TP_GECE soft
+c TP_DEVIR soft
+c TP_KIM soft
+c G_BITIR
+c AK1_MAKINE
 `),
   A(`
+c H_ARAMA
+t OB_KLIMA
+t OB_TUP
+t OB_OKUYUCU
+c ARAMA_BITIR
+c H_KAPI
+t OB_PARK
+t OB_SERVIS
+t OB_TURNIKE
+t OB_DEFTER
+c ARAMA3_BITIR
+c H_T_YASAR
+c YQ_GECE
+c YQ_SELIM
+c YQ_KORKU
+c YASAR_KARAR
+c YD_BILDIR
+c H_T_HAKAN
+c HQ_IMAJ
+c HAKAN_BITIR
+c H_DIL
+c DIL_EPOSTA
+c DIL_KESIF
+c DIL_VER
+c H_LEYLA
+c LEYLA_DON
+c H_T_BULENT
+c BQ_IMAJ
+c BULENT_BITIR
+c NA_ISIM
+`),
+  A(`
+c H_GORUS2
+c TP_CIKIS soft
+c G_BITIR
+c H_DURUSMA
+c GECE_DEVAM
 c H100K_B
 c H100_DEVAM
+c Q_KIN
+c Q_SIFRE
 c Q_BITIR
 c H102_C
+p B1
+p B2
 c H103_BITIR
 c H104_B
+c R_HEPSI
 c R_BITIR
 c H105B_DEVAM
 c H106_DEVAM
 `),
   A(`
 c ARA_GIRIS_DEVAM
+c A_HAKAN
+c HAKAN2_BITIR
+c A_SELIM
+c SQ_SON
+c SELIM_BITIR
+c A_NALAN
+c NQ_POLICE
+c NQ_GM
+c NALAN_BITIR
+c A_YASAR
+c YA_DOGRU
+c ARA_AKSAM1_DEVAM
+c A_LEYLA
+c ARA_LEYLA_DON
+c A_DIL
+c AD_TANIK
+c AD_VER
 c A_DURUSMA
 c ARA_SON_DEVAM
 `),
@@ -434,11 +622,18 @@ c ARA_SON_DEVAM
 c T00_DEVAM
 c T01_KABUL
 c T01_BITIR
+p T1
+p T2
+p T3
 c T02_BITIR
+p Y1
+p Y2
+c T03_BITIR
+c X_CEVAP
 c T05_DEVAM
-c P_RIZA
 c P_IMAJ
-c P_CIHAZ
+c P_YEDEK
+c P_MOTIF
 c P_BITIR
 c S_DUYGU
 c L_SESSIZ
@@ -468,23 +663,25 @@ c TETIK_DEVAM
 `),
 ];
 
-// W (çöküş): 1. celsede savcılık tanığına art arda yanlış delil; ♥0
+// W (çöküş): tipik yolun soruşturması ve ara evresi; ikinci celsede genel müdüre art arda yanlış belge sunulur, ♥0.
 const W_STEPS = [
-  PROLOG('BR00_B', 'STR_USUL'),
+  PROLOG('BR00_A', 'STR_USUL'),
+  INV_G1,
+  INV_G2,
+  INV_G3,
+  CELSE1,
+  ARA1,
+  ARA2,
+  ARA3('K_BEKLE'),
   A(`
-c H_DURUSMA
-c GECE_DEVAM
-`),
-  A(`
-c H100K_B
-c H100_DEVAM
-c Q_BITIR
-c H102_B
-s ev_sikayet B1
-s ev_sikayet B1
-s ev_sikayet B1
-s ev_sikayet B1
-s ev_sikayet B1
+c T00_DEVAM
+c T01_SEMA
+c T01_BITIR
+s ev_sikayet T1
+s ev_sikayet T1
+s ev_sikayet T1
+s ev_sikayet T1
+s ev_sikayet T1
 c COKUS_DEVAM
 `),
 ];

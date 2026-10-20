@@ -446,6 +446,9 @@ hakan: Avukat hanım. Aktaş dosyası. Öğle arasıyım; on dakika. Mahkemede n
 hakan: Size bir rakam vereyim: büroda dört kişiyiz, masamızda üç yüz on iki dosya var. Dolandırıcılık, şantaj, çocuk… Bu dosya bizim için “kolay” dosyaydı. Şirket raporu getirdi, isim belliydi.
 hakan: Kolay dosyaları severiz avukat hanım. Zor dosyalara vakit kalsın diye.
 ~ Yorgun bir adam. Kötü değil. Yorgunluk, bir soruyu sormamak için en eski gerekçedir.
+> Merdivenin dibinde bir ekip arabası homurdandı; telsizden bir plaka okundu, sonra bir adres. Hakan başını çevirmedi bile.
+hakan: Bir şey söyleyeyim, kayda geçmez: Aktaş’ın evinde arama yaptığımızda kızı merdivendeydi. Pijamayla. Ben de babayım. O sabahı unutmadım.
+~ Bir polisin vicdanı genellikle bir rapora değil, bir merdivene sığar.
 `),
   choices: [
     option('HQ_IMAJ', '“Şirketin sunucusunu kim inceledi?”', {
@@ -497,6 +500,9 @@ const tBulent = conversation('INV_T_BULENT', {
 bulent: Avukat hanım, hoş geldiniz. Beş dakikam var, sonra bir müşteriye bağlanacağım. Rapor ortada; teknik olarak tartışılacak bir şey yok aslında.
 bulent: Selim’i tanırım. Yetenekli çocuktur. Ama biraz… kendini sistemin sahibi sanır. İşten çıkarılınca da şey yaptı işte. Teknik olarak bu tür olaylar yüzde yetmiş içeriden olur.
 ~ “Teknik olarak” diye başlayan her cümle, teknik olmayan bir şey söyler.
+> Masasında üç ekran. Birinde bir yazılım satış sunumu, birinde bir golf turnuvasının fikstürü, üçüncüsünde ekran koruyucu: dönen bir kale.
+bulent: Biz bu şirketin on yıllık servis firmasıyız. Sunucularını biz kurduk, Selim’i işe de ben önerdim, inanır mısınız? Hayat işte.
+~ Bir adamın kendi önerdiği çalışanı suçlayan rapor yazması. Ya çok dürüst ya çok sıkışmış. Hangisi olduğunu raporun tarihi söyleyecek.
 `),
   choices: [
     option('BQ_IMAJ', '“İmajı ne zaman aldınız?”', {

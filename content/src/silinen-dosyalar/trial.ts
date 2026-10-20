@@ -210,7 +210,10 @@ selim: Üzgünüm avukat hanım. Gül haklı. Başka bir avukat bulacağız.
           `
 kemal: Bilirkişi raporu okundu. Orijinal diskten alınan imaj, DataKale raporundaki bazı bulguların kurtarma yazılımının izi olduğunu tespit etmiş.
 kemal: Rapora göre silme oturumunun cihaz adı da sanığın cihazı değil. Müdafi, diyeceğiniz?
+> Dr. Sema Uçar salonun önündeki sandalyede oturuyordu; dizinde bir dosya, elinde bir kalem. Çağrılmadıkça konuşmayacak bir sabırla.
+> Ozan Tekin bilirkişi raporunu sayfa sayfa çeviriyordu; her sayfada biraz daha yavaş.
 ~ Tarafsız bir rapor. Elimdeki en sağlam kâğıt. Şimdi onu doğru kullanmam lazım.
+~ İyi bir raporu abartmak, onu zayıflatmanın en kısa yoludur. Raporun söylediğini söyleyeceğim; söylemediğini değil.
 `,
         ),
         O(`
@@ -653,10 +656,16 @@ ferda: Sanığın üzerine atılı suçları işlemediği sabittir. CMK 223/2-b 
         W(
           { ref: 'mutalaa_beraat_e' },
           `
+> Hâkim saatine baktı; sonra pencereye. Adliyenin camlarında yağmur artık ince bir sis gibiydi. Salonda kimse kıpırdamıyordu.
 kemal: Delillerin tartışılması tamamlandı. Esas hakkındaki mütalaa.
+> Savcı Ferda Yalın ayağa kalkmadan önce dosyasının ilk sayfasını kapattı; iddianameyi. Önünde yalnızca bilirkişi raporu kaldı.
 ferda: Sayın Hâkim, dosyadaki esas delil olan DataKale imajı, elde edilme zinciri ve bütünlüğü bakımından güvenilir bulunmamıştır. Bilirkişi, silme oturumunun sanığın cihazından yapıldığının söylenemeyeceğini tespit etmiştir.
 ferda: Sanığın suçu işlediği sabit olmadığından CMK 223/2-e uyarınca beraatine; fiili işleyen kişi yönünden soruşturma yapılmasına karar verilmesini talep ederim.
+> Katılan vekili Ozan Tekin kalemini masaya bıraktı; sesi çıkmadı, ama kalem masada iki kez yuvarlandı.
+ozan: Sayın Hâkim, katılan şirket olarak mütalaaya katılmıyoruz. Zarar ortadadır; zararın bir faili vardır.
+kemal: Zararın varlığı tartışmalı değil avukat bey. Tartışılan, failin kim olduğu. Not edildi.
 ~ Şüpheden beraat. Bir ismi söylemeden, bir çatlaktan geçerek. Sağlam değil; ama yeter.
+~ Selim yanımda nefesini tuttu. Ona dönüp “henüz değil” demek istedim. Demedim. Hâkimin önünde bir avukatın yüzü de bir beyan sayılır.
 `,
         ),
         O(`
@@ -675,6 +684,8 @@ ferda: Sanığın TCK 244/2 ve 243/1 uyarınca cezalandırılmasına karar veril
       background: 'durusma_salonu',
       lines: B(`
 kemal: Müdafi, esas hakkındaki savunmanız.
+> Ayağa kalktım. Cübbenin kolu masadaki suyu devirecekti; Selim bardağı son anda tuttu. Salonda biri güldü, sonra sustu.
+~ Haftalardır bu dakikayı düşünüyorum. Bir kâğıda yazdım, sildim, yeniden yazdım. Şimdi kâğıda bakmayacağım.
 ~ Üç dayanak. Leyla’nın sesi: “Fazlası gürültüdür.” Her biri dosyada bir kâğıda dayanmalı.
 `),
       choices: [
@@ -737,7 +748,9 @@ kemal: Müdafi, esas hakkındaki savunmanız.
       hud: ['cred', 'pers'],
       background: 'durusma_salonu',
       lines: B(`
+> Hâkim yazıyordu. Kâtibin parmakları klavyede; her dayanaktan sonra bir duraklama, sonra yeniden tıkırtı.
 ~ Dayanaklar söylendi. Şimdi hepsini bir talepte toplamam gerekiyor. Hâkimin kalemine geçecek tek bir cümle.
+~ Leyla’nın dediği gibi: talep, savunmanın imzasıdır. Ne istediğini bilmeyen avukata mahkeme de bir şey veremez.
 `),
       next: 'T_07',
       choices: [
@@ -834,6 +847,7 @@ selim: Ben o şirketin hafızasıydım Sayın Hâkim. Kimse kendi hafızasını 
           ],
         }),
         option('L_SUCLA', '“Asıl silen genel müdürdür!”', {
+          visibleWhen: any(flag('fact_gm'), flag('contra_t_cihaz'), flag('contra_t_hat'), has('clue_turnike_gm')),
           score: { SAVUNMA_STRATEJISI: -30 },
           effects: [dec('pers'), raise('selim_suclama')],
           bad: 'Sanığın son sözde bir kişiyi suçlaması iftira riski taşır ve lehe havayı bozar; faili savcılık soruşturur, sanık değil.',

@@ -365,8 +365,21 @@
               "text": "Rapora göre silme oturumunun cihaz adı da sanığın cihazı değil. Müdafi, diyeceğiniz?"
             },
             {
+              "speaker": "narrator",
+              "text": "Dr. Sema Uçar salonun önündeki sandalyede oturuyordu; dizinde bir dosya, elinde bir kalem. Çağrılmadıkça konuşmayacak bir sabırla."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ozan Tekin bilirkişi raporunu sayfa sayfa çeviriyordu; her sayfada biraz daha yavaş."
+            },
+            {
               "speaker": "player",
               "text": "Tarafsız bir rapor. Elimdeki en sağlam kâğıt. Şimdi onu doğru kullanmam lazım.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "İyi bir raporu abartmak, onu zayıflatmanın en kısa yoludur. Raporun söylediğini söyleyeceğim; söylemediğini değil.",
               "style": "thought"
             }
           ]
@@ -1538,7 +1551,15 @@
         {
           "when": { "ref": "mutalaa_beraat_e" },
           "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Hâkim saatine baktı; sonra pencereye. Adliyenin camlarında yağmur artık ince bir sis gibiydi. Salonda kimse kıpırdamıyordu."
+            },
             { "speaker": "kemal", "text": "Delillerin tartışılması tamamlandı. Esas hakkındaki mütalaa." },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Ferda Yalın ayağa kalkmadan önce dosyasının ilk sayfasını kapattı; iddianameyi. Önünde yalnızca bilirkişi raporu kaldı."
+            },
             {
               "speaker": "ferda",
               "text": "Sayın Hâkim, dosyadaki esas delil olan DataKale imajı, elde edilme zinciri ve bütünlüğü bakımından güvenilir bulunmamıştır. Bilirkişi, silme oturumunun sanığın cihazından yapıldığının söylenemeyeceğini tespit etmiştir."
@@ -1548,8 +1569,25 @@
               "text": "Sanığın suçu işlediği sabit olmadığından CMK 223/2-e uyarınca beraatine; fiili işleyen kişi yönünden soruşturma yapılmasına karar verilmesini talep ederim."
             },
             {
+              "speaker": "narrator",
+              "text": "Katılan vekili Ozan Tekin kalemini masaya bıraktı; sesi çıkmadı, ama kalem masada iki kez yuvarlandı."
+            },
+            {
+              "speaker": "ozan",
+              "text": "Sayın Hâkim, katılan şirket olarak mütalaaya katılmıyoruz. Zarar ortadadır; zararın bir faili vardır."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Zararın varlığı tartışmalı değil avukat bey. Tartışılan, failin kim olduğu. Not edildi."
+            },
+            {
               "speaker": "player",
               "text": "Şüpheden beraat. Bir ismi söylemeden, bir çatlaktan geçerek. Sağlam değil; ama yeter.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Selim yanımda nefesini tuttu. Ona dönüp “henüz değil” demek istedim. Demedim. Hâkimin önünde bir avukatın yüzü de bir beyan sayılır.",
               "style": "thought"
             }
           ]
@@ -1598,6 +1636,15 @@
         {
           "lines": [
             { "speaker": "kemal", "text": "Müdafi, esas hakkındaki savunmanız." },
+            {
+              "speaker": "narrator",
+              "text": "Ayağa kalktım. Cübbenin kolu masadaki suyu devirecekti; Selim bardağı son anda tuttu. Salonda biri güldü, sonra sustu."
+            },
+            {
+              "speaker": "player",
+              "text": "Haftalardır bu dakikayı düşünüyorum. Bir kâğıda yazdım, sildim, yeniden yazdım. Şimdi kâğıda bakmayacağım.",
+              "style": "thought"
+            },
             {
               "speaker": "player",
               "text": "Üç dayanak. Leyla’nın sesi: “Fazlası gürültüdür.” Her biri dosyada bir kâğıda dayanmalı.",
@@ -1869,8 +1916,17 @@
         {
           "lines": [
             {
+              "speaker": "narrator",
+              "text": "Hâkim yazıyordu. Kâtibin parmakları klavyede; her dayanaktan sonra bir duraklama, sonra yeniden tıkırtı."
+            },
+            {
               "speaker": "player",
               "text": "Dayanaklar söylendi. Şimdi hepsini bir talepte toplamam gerekiyor. Hâkimin kalemine geçecek tek bir cümle.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın dediği gibi: talep, savunmanın imzasıdır. Ne istediğini bilmeyen avukata mahkeme de bir şey veremez.",
               "style": "thought"
             }
           ]
@@ -2145,6 +2201,14 @@
           "id": "L_SUCLA",
           "kind": "OPTION",
           "label": "“Asıl silen genel müdürdür!”",
+          "visibleWhen": {
+            "any": [
+              { "flag": "fact_gm" },
+              { "flag": "contra_t_cihaz" },
+              { "flag": "contra_t_hat" },
+              { "hasEvidence": "clue_turnike_gm" }
+            ]
+          },
           "responses": [
             {
               "lines": [

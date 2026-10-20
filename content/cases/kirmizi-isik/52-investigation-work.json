@@ -1,0 +1,1084 @@
+{
+  "nodes": [
+    {
+      "id": "INV_ARAMA",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #03 · SORUŞTURMA",
+      "title": "Polis fotoğrafları · 14 Kasım",
+      "background": "sokak_yagmur",
+      "hud": ["taps"],
+      "exposeCounts": true,
+      "scene": "sc_gece",
+      "instruction": "Fotoğrafta şüpheli gördüğün yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ARŞİV — 14 KASIM 02.10 FOTOĞRAFLARI",
+              "style": "card",
+              "bg": "sokak_yagmur"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kırk iki fotoğraf. Flaşın beyazı, yağmurun griliği, sodyum lambaların turuncusu. Kimse bu fotoğraflara benden önce dikkatle bakmamış gibiydi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bilirkişi olay yerine gitmedi. Bunlar onun hiç görmediği şeyler.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Fotoğrafların arkasında kurşun kalemle numaralar: 1’den 42’ye. Bazıları bulanık, bazıları fazla net. Bir fotoğrafta bir polisin postalı, bir başkasında bir metre şeridi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir olay yerini anlamanın yolu, onu fotoğrafçıdan farklı bir yerden görmektir. Fotoğrafçı ne çekeceğini seçti; ben neye bakacağımı seçeceğim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "actionCosts": { "TAP": [{ "var": "taps", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_ARAMA",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "ARAMA_BITIR", "kind": "CONTINUE", "label": "Aramayı bitir", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_ARAMA2",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #03 · SORUŞTURMA",
+      "title": "Kavşak · bugün",
+      "background": "sokak_sabah",
+      "hud": ["taps2"],
+      "exposeCounts": true,
+      "scene": "sc_sabah",
+      "instruction": "Kavşakta o geceden kalan bir şey ara. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "GÖKDERE–ÇINARLI KAVŞAĞI — ÖĞLEN", "style": "card", "bg": "sokak_sabah" },
+            {
+              "speaker": "narrator",
+              "text": "Kavşağın ortasında durdum. Bir kamyonet korna çaldı; bir simitçi “abla oradan çekil” dedi. Çekilmedim."
+            },
+            {
+              "speaker": "player",
+              "text": "Üç ay geçti. Asfalt yenilenmemiş, ama yağmur her şeyi yıkadı. Kalan ne varsa duvarlarda, direklerde, kabinlerde olmalı.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Köşede bir büfe, karşıda bir eczane, direğin dibinde solmuş çiçekler. Gri bir kontrol kabini, üstünde belediyenin arması."
+            }
+          ]
+        }
+      ],
+      "actionCosts": { "TAP": [{ "var": "taps2", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_ARAMA2",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "ARAMA2_BITIR", "kind": "CONTINUE", "label": "Aramayı bitir", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_ARAMA3",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #03 · SORUŞTURMA",
+      "title": "Yediemin otoparkı",
+      "background": "depo",
+      "hud": ["taps3"],
+      "exposeCounts": true,
+      "scene": "sc_otopark",
+      "instruction": "Arabada o geceyi anlatan bir şey ara. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "KESTEL YOLU — YEDİEMİN OTOPARKI", "style": "card", "bg": "depo" },
+            {
+              "speaker": "narrator",
+              "text": "Tel örgü, çamurlu bir avlu, kulübede radyo dinleyen bir görevli. “Avukatsanız bakın, dokunmayın, ben de bakarım” dedi ve bakmadı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Beyaz sedan üç aydır aynı yerde duruyordu. Tozun altında hâlâ yeni bir araba kokusu vardı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arka camda bir çıkartma: “Bebek var.” Yeni yapıştırılmış, köşesi kalkmamış. O gece arabada bebek yoktu; yalnızca bekleniyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir araba, sahibinden daha az şey unutur. Tamponu, farı, ekranı. Hepsine bakacağım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "actionCosts": { "TAP": [{ "var": "taps3", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_ARAMA3",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "ARAMA3_BITIR", "kind": "CONTINUE", "label": "Aramayı bitir", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_RAPOR",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #03 · SORUŞTURMA",
+      "title": "Bilirkişi Raporu",
+      "background": "buro",
+      "hud": ["rapor_left"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Dört sayfa, iki fotoğraf, bir sonuç paragrafı. Müh. Cengiz Ateş’in imzası her sayfada aynı açıyla eğik."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bir alet seç, sonra şüpheli satıra dokun. Doğru alet + doğru yer = bulgu."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın sözü: “Bu adamın raporları birbirine benzer.” Benzeyen raporlar, bir yerde başka bir dosyadan kalan bir cümle taşır. O cümleyi bulmam gerek.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "BİLİRKİŞİ RAPORU · MÜH. C. ATEŞ", "right": "12 ARALIK" },
+      "columns": [
+        { "label": "KONU", "flex": 1 },
+        { "label": "TESPİT", "flex": 2.4 }
+      ],
+      "rows": [
+        { "id": "r_isik", "cells": ["Işık durumu", "Kavşağın sinyal planına göre sanık yönü kırmızı"] },
+        { "id": "r_hiz", "cells": ["Hız", "18 m fren izinden ~68 km/s"] },
+        { "id": "r_carpma", "cells": ["Çarpma şekli", "Araç yayaya sağ ön köşesiyle çarpmıştır"] },
+        { "id": "r_iz", "cells": ["Diğer izler", "Olay yerinde başka araca ait iz yoktur"] },
+        { "id": "r_kusur", "cells": ["Kusur", "Sanık asli kusurlu (%100); yaya kusursuz"] },
+        { "id": "r_sonuc", "cells": ["Sonuç", "Sanık bilinçli taksirle hareket etmiştir"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "rapor_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_R_ISIK",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "r_isik" },
+          "feedback": {
+            "title": "PLAN, ÖLÇÜM DEĞİL",
+            "text": "Bilirkişi ışığın o gece ne yaktığını değil, kâğıttaki programı yazmış. Denetleyicinin kaydına bakılmamış.",
+            "label": "+100 SKOR · Bulgu",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
+            { "type": "VAR", "var": "rapor_plan", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_R_HIZ",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "r_hiz" },
+          "feedback": {
+            "title": "KİMİN İZİ?",
+            "text": "Rapor izi doğrudan sanığın aracına bağlıyor; izin hangi araca ait olduğu hiçbir yerde tespit edilmemiş.",
+            "label": "+100 SKOR · Bulgu",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
+            { "type": "VAR", "var": "rapor_iz", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_R_CARPMA",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "r_carpma" },
+          "feedback": {
+            "title": "SAĞ MI, SOL MU?",
+            "text": "Tutanağa göre Volkan’ın aracında hasar sol ön tamponda. Rapor “sağ ön köşe” diyor. Ya yanlış okunmuş ya başka bir dosyadan kopyalanmış.",
+            "label": "+150 SKOR · Bulgu",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+            { "type": "VAR", "var": "rapor_kopya", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_R_IZ",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "r_iz" },
+          "feedback": {
+            "title": "SUSKUN PARAGRAF",
+            "text": "Tutanaktaki cam kırıklarından tek kelime yok. “İz yoktur” demek, bakılmadı demekle aynı şey değil.",
+            "label": "+50 SKOR · Bulgu",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 },
+            { "type": "VAR", "var": "rapor_cam", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_R_SONUC",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "r_sonuc" },
+          "feedback": {
+            "title": "MÜHENDİSİN HUKUKU",
+            "text": "“Bilinçli taksir” bir hukuki nitelendirme. Bilirkişi hâkimin yapacağı nitelendirmeyi yapamaz (CMK 67/3).",
+            "label": "+50 SKOR · Bulgu",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 50 },
+            { "type": "VAR", "var": "rapor_yorum", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "FB_RAPOR",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda yeni bir şey çıkmadı.",
+            "label": "−20 SKOR · −1 deneme",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "RAPOR_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_TUTANAK",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #03 · SORUŞTURMA",
+      "title": "Kaza Tespit Tutanağı",
+      "background": "buro",
+      "hud": ["tutanak_left"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tutanak el yazısıyla doldurulmuş, sonra daktilo edilmiş. Krokide oklar, metreler, bir insan silueti."
+            },
+            { "speaker": "player", "text": "Bilirkişi bunu okudu. Ama okumak, görmek değildir.", "style": "thought" },
+            {
+              "speaker": "narrator",
+              "text": "Krokinin köşesinde, kurşun kalemle yazılıp silinmiş ama hâlâ okunan iki harf ve bir soru işareti. Kimin yazdığı belli değil."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir tutanakta silinmiş bir soru işareti, bir avukat için bir davetiyedir.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "KAZA TESPİT TUTANAĞI · 14.11 · 01.24", "right": "POL. MEM. A. YURT" },
+      "columns": [
+        { "label": "BÖLÜM", "flex": 1 },
+        { "label": "NOT", "flex": 2.6 }
+      ],
+      "rows": [
+        { "id": "t_iz", "cells": ["Fren izi", "18 m; geçitten 4 m önce başlıyor; tek parça"] },
+        { "id": "t_bulgu", "cells": ["Bulgular", "Geçidin 9 m ilerisinde cam ve plastik parçalar (emanete alınmadı)"] },
+        { "id": "t_arac", "cells": ["Araç", "16 AVE 712 · beyaz sedan · sol ön tamponda sürtünme · farlar sağlam"] },
+        { "id": "t_tanik", "cells": ["Tanık", "N.B., taksi, Çınarlı Sk. çıkışında ilk sırada bekliyor"] },
+        { "id": "t_hava", "cells": ["Hava/zemin", "Yağışlı, zemin ıslak, aydınlatma var"] },
+        { "id": "t_saat", "cells": ["Saat", "İhbar 01.12 · ekip 01.24 · ambulans 01.26"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "olc", "label": "Cetvel", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "tutanak_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_T_IZ",
+          "kind": "EXAMINE",
+          "match": { "tool": "olc", "target": "t_iz" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "On sekiz metre, tek parça. Kesik yok, aralık yok. Kilitlenmiş tekerlek böyle yazar.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_fren" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_T_BULGU",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "t_bulgu" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Cam ve plastik parçalar, Volkan’ın aracının durduğu yerin çok önünde. Ve emanete alınmamış.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_cam" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_T_ARAC",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "t_arac" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Sol ön tamponda sürtünme. Farlar sağlam. Tek hasar bu.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_far" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_T_TANIK",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "t_tanik" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Taksi Çınarlı’dan çıkışta, ilk sırada, kendi ışığında bekliyormuş. Yani kavşağa dik.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_necati_yer" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_T_HAVA",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "t_hava" },
+          "feedback": {
+            "title": "NOT",
+            "text": "Yağmur. Herkes için yağıyordu. Bunu savcı da kullanır, ben de.",
+            "label": "Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [{ "type": "DISCOVER", "evidence": "clue_yagmur" }]
+        },
+        {
+          "id": "FB_TUTANAK",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda yeni bir şey çıkmadı.",
+            "label": "−20 SKOR · −1 deneme",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "TUTANAK_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_OTOPSI",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #03 · SORUŞTURMA",
+      "title": "Otopsi Ön Raporu",
+      "background": "buro",
+      "hud": ["otopsi_left"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Otopsi raporlarını okumak için bir yöntemim var: önce ad, sonra yaş, sonra hiç durmadan sona kadar. Durursam bir insanı okuduğumu hatırlıyorum."
+            },
+            { "speaker": "narrator", "text": "Hatice Durmaz, 54. Durmadım." },
+            {
+              "speaker": "narrator",
+              "text": "Raporun ekinde fotoğraflar. Bej bir mont, bir ayakkabı, bir hastane kartı: “H. DURMAZ · TEMİZLİK · KAT 3.” Kartın kenarı kırılmış."
+            },
+            {
+              "speaker": "player",
+              "text": "Ölüm sebebi tek satır. Ama bir ölüm birden çok yarayla gelir. Hangi yaranın nereden geldiğini rapor söylemiyor; ben soracağım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "OTOPSİ ÖN RAPORU · H. DURMAZ", "right": "14.11 · ADLİ TIP ŞUBE" },
+      "columns": [
+        { "label": "BÖLGE", "flex": 1 },
+        { "label": "BULGU", "flex": 2.6 }
+      ],
+      "rows": [
+        { "id": "o_olum", "cells": ["Ölüm sebebi", "Kafa travmasına bağlı beyin kanaması"] },
+        { "id": "o_bacak", "cells": ["Sağ alt bacak", "Tibia kırığı; topuktan 56 cm yükseklikte"] },
+        { "id": "o_sirt", "cells": ["Sırt ve omuz", "Sürüklenme sıyrıkları; kanama az"] },
+        { "id": "o_mont", "cells": ["Giysi", "Bej mont; sağ yanda yabancı boya parçası (emanette)"] },
+        { "id": "o_kan", "cells": ["Kan", "Alkol ve uyuşturucu negatif"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "otopsi_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_O_BACAK",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "o_bacak" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Elli altı santim. Ayakta duran bir insanın bacağına çarpan şeyin yüksekliği.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kirik56" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_O_SIRT",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "o_sirt" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Sıyrıklar sırtta ve omuzda; kanama az. Kafadaki travmayla aynı anda mı oldular, sonra mı? Rapor söylemiyor.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_sirt" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_O_MONT",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "o_mont" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Ekteki fotoğrafta tırnak büyüklüğünde, koyu yeşil, metalik bir boya parçası. Volkan’ın arabası beyaz.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_boya" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "FB_OTOPSI",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda yeni bir şey çıkmadı.",
+            "label": "−20 SKOR · −1 deneme",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "OTOPSI_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_BUFE",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #03 · SORUŞTURMA",
+      "title": "Büfe kamerası kaydı",
+      "background": "kafe",
+      "hud": ["bufe_left"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Görüntü bulanık, siyah beyaz, köşede bir saat. Yağmur damlaları lensin üstünde büyüyüp akıyor."
+            },
+            { "speaker": "narrator", "text": "“Kare kare” ile bir anı dondur; “oynat” ile akışı izle." },
+            {
+              "speaker": "player",
+              "text": "Kamera saatinin ileri olduğunu Sevim Hanım söyledi. Ne kadar ileri? Bunu bilmeden bu kayıt bir saat değil, bir tahmindir.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "BÜFE KAMERASI · KANAL 2", "right": "KAMERA SAATİ" },
+      "columns": [
+        { "label": "SAAT (KAMERA)", "flex": 1.2 },
+        { "label": "GÖRÜNTÜ", "flex": 2.4 }
+      ],
+      "rows": [
+        {
+          "id": "b_titreme",
+          "cells": ["01.05.12", "Kavşak, yağmur"],
+          "lens": { "kare": { "cells": ["01.05.12", "Sokak lambaları bir an söner, yanar"], "tone": "special" } }
+        },
+        { "id": "b_1830", "cells": ["01.18.30", "Boş yol"] },
+        {
+          "id": "b_1841",
+          "cells": ["01.18.41", "Farlar, hareket"],
+          "lens": {
+            "kare": {
+              "cells": ["01.18.41", "Koyu renkli hafif ticari araç; fren; sağ stop yanmıyor"],
+              "tone": "special"
+            }
+          }
+        },
+        {
+          "id": "b_1848",
+          "cells": ["01.18.48", "Farlar, hareket"],
+          "lens": { "kare": { "cells": ["01.18.48", "Beyaz sedan; fren lambaları; duruyor"], "tone": "info" } }
+        },
+        { "id": "b_1900", "cells": ["01.19.00", "Bir adam koşuyor"] }
+      ],
+      "tools": [
+        { "id": "oynat", "label": "Oynat", "icon": "camera" },
+        { "id": "kare", "label": "Kare kare", "icon": "magnifier" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "bufe_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_B_TITREME",
+          "kind": "EXAMINE",
+          "match": { "tool": "kare", "target": "b_titreme" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Bütün sokak lambaları aynı anda söner, bir saniye sonra yanar. Kameranın saati 01.05.12 diyor.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_titreme" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_B_1841",
+          "kind": "EXAMINE",
+          "match": { "tool": "kare", "target": "b_1841" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Kare kare: kutu gibi bir gövde, koyu renk. Fren yapıyor; sol stop yanıyor, sağ stop karanlık.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_tek_stop" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_B_1848",
+          "kind": "EXAMINE",
+          "match": { "tool": "kare", "target": "b_1848" },
+          "feedback": {
+            "title": "BULGU",
+            "text": "Volkan’ın beyaz arabası. Yedi saniye sonra. Fren lambaları yanıyor, duruyor.",
+            "label": "+50 SKOR · Bulgu",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 },
+            { "type": "VAR", "var": "bufe_volkan", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "FB_BUFE",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda yeni bir şey çıkmadı.",
+            "label": "−20 SKOR · −1 deneme",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "BUFE_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_SINYAL",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #03 · SORUŞTURMA",
+      "title": "Denetleyici olay günlüğü",
+      "background": "buro",
+      "hud": ["sinyal_left"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Belediyenin cevabı: bir üst yazı, iki sayfa makine dökümü, bir Beyaz Masa çıktısı. Üst yazıda “herhangi bir arızaya rastlanmamıştır” yazıyor."
+            },
+            {
+              "speaker": "player",
+              "text": "Üst yazılar özettir. Özetler, yazanın görmek istediğini özetler.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Döküm bir makinenin dilinde: saatler, kodlar, büyük harfler. Kodların anlamı ekteki bir tabloda; tablo, kimse okumasın diye en sona konmuş gibi."
+            }
+          ]
+        }
+      ],
+      "header": { "left": "KAVŞAK 112 · GÖKDERE–ÇINARLI", "right": "OLAY GÜNLÜĞÜ" },
+      "columns": [
+        { "label": "ZAMAN", "flex": 1.1 },
+        { "label": "KAYIT", "flex": 2.6 }
+      ],
+      "rows": [
+        { "id": "s_ihbar", "cells": ["09.11 19.40", "Beyaz Masa: “yaya ve araç yeşili birlikte yanıyor”"] },
+        { "id": "s_isemri", "cells": ["10.11 09.15", "İş emri 4471 · ERTELENDİ (malzeme)"] },
+        { "id": "s_restart", "cells": ["14.11 00.58.12", "GÜÇ KESİNTİSİ · YENİDEN BAŞLATMA"] },
+        { "id": "s_cakisma", "cells": ["14.11 00.58.40", "UYARI 07 · BASTIRILDI"] },
+        { "id": "s_kart", "cells": ["15.11 10.30", "Kart değişimi · rutin bakım"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "sinyal_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_S_ISEMRI",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "s_isemri" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Kazadan dört gün önce açılmış iş emri. Konu: “Gökdere–Çınarlı çatışma kartı.” Durum: ertelendi.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_is_emri" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_S_CAKISMA",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "s_cakisma" },
+          "feedback": {
+            "title": "UYARI 07",
+            "text": "Kodlar listesine baktım: UYARI 07 “çatışan yeşil”. Yani yaya ve araç yeşilinin birlikte yanması. Bastırılmış; makine uyarmış, biri susturmuş.",
+            "label": "+150 SKOR · Bulgu",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+            { "type": "VAR", "var": "sinyal_cakisma", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_S_KART",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "s_kart" },
+          "feedback": {
+            "title": "“RUTİN”",
+            "text": "Rutin bakım takvimi altı ayda bir. Son bakım eylülde. Bu kart değişimi rutin değil; kazanın ertesi günü.",
+            "label": "+50 SKOR · Bulgu",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 },
+            { "type": "VAR", "var": "sinyal_kart", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "FB_SINYAL",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda yeni bir şey çıkmadı.",
+            "label": "−20 SKOR · −1 deneme",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "SINYAL_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_DIL",
+      "type": "CHOICE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #03 · SORUŞTURMA",
+      "title": "Delil dilekçesi (CMK 177)",
+      "background": "buro",
+      "hud": ["slots"],
+      "prompt": {
+        "speaker": "narrator",
+        "text": "Mahkemeye savunma delillerinin toplanması için dilekçe. Üç talep hakkın var; her talebin hangi olayı ispatlayacağını yazmalısın."
+      },
+      "choices": [
+        {
+          "id": "DIL_SINYAL",
+          "kind": "OPTION",
+          "label": "Belediyeden kavşak denetleyici kayıtları ve ihbar dökümü",
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "VAR", "var": "dil_sinyal", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Işığın o gece ne yaktığını kâğıttaki plan değil, denetleyicinin kaydı gösterir.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_UEDAS",
+          "kind": "OPTION",
+          "label": "UEDAŞ’tan 14 Kasım gece gerilim/kesinti kaydı",
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "visibleWhen": {
+            "any": [
+              { "hasEvidence": "clue_titreme" },
+              { "hasEvidence": "clue_bufe_kamera" },
+              { "hasEvidence": "ev_bufe" }
+            ]
+          },
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 30 },
+            { "type": "VAR", "var": "dil_uedas", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Kesin saatli bir şebeke kaydı, saati yanlış bir kamerayı düzeltmenin tek yoludur.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_EDR",
+          "kind": "OPTION",
+          "label": "Aracın hava yastığı modülündeki olay verisinin (EDR) bilirkişice okunması",
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "VAR", "var": "dil_edr", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "EDR çarpışma öncesi hız ve fren verisini saklar; 68 km/s iddiasını doğrudan sınar.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_BOYA",
+          "kind": "OPTION",
+          "label": "Montta bulunan boya parçasının kriminal incelemesi",
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "visibleWhen": { "hasEvidence": "clue_boya" },
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "VAR", "var": "dil_boya", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Emanetteki incelenmemiş bir delil: boyanın hangi araca ait olduğu sorusu.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_ATK",
+          "kind": "OPTION",
+          "label": "Adli Tıp Kurumu Trafik İhtisas Dairesinden yaralanma mekanizması raporu",
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "VAR", "var": "dil_atk", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Hangi yaralanmanın hangi temastan doğduğunu ve ölüme hangisinin yol açtığını uzman kurum söyler.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_SABIKA",
+          "kind": "OPTION",
+          "label": "Maktulün sağlık kayıtları ve geçmiş kaza dosyaları",
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": -30 }],
+          "quality": {
+            "q": "BAD",
+            "feedback": "İspatlanacak olayla ilgisi olmayan, maktulü suçlamaya dönük bir talep; reddedilir (CMK 206/2-b).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_KESIF",
+          "kind": "OPTION",
+          "label": "Kavşakta gündüz keşif",
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "next": "$stay",
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Gündüz keşfi gecenin ışığını, yağmurunu ve o geceki arızayı göstermez; yine de mahkeme bir gün keşif isteyebilir."
+          }
+        },
+        {
+          "id": "DIL_VER",
+          "kind": "CONTINUE",
+          "label": "Dilekçeyi ver",
+          "role": "PRIMARY",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Dilekçeyi UYAP’tan gönderdim. Kurumlara müzekkere yazılması için hâkimin önüne düşecek."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kâğıt gitti. Şimdi kâğıtların cevap vermesini bekleyeceğim. Kâğıtlar insanlardan yavaştır ama daha az yalan söyler.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [{ "type": "VAR", "var": "dil_verildi", "op": "set", "value": true }]
+        }
+      ]
+    },
+    {
+      "id": "INV_CIKARIM",
+      "type": "DEDUCTION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #03 · SORUŞTURMA",
+      "title": "Çıkarım tahtası",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "İki kartı seç. Birbirini açıklıyorsa duruşmada kullanabileceğin bir çıkarım doğar."
+            }
+          ]
+        }
+      ],
+      "pool": [
+        "clue_fren",
+        "clue_abs",
+        "clue_cam",
+        "clue_far",
+        "clue_kirik56",
+        "clue_tampon44",
+        "clue_arka",
+        "clue_necati_yer",
+        "clue_kabin",
+        "clue_is_emri",
+        "clue_titreme",
+        "clue_uedas",
+        "clue_boya",
+        "clue_sirt",
+        "clue_tek_stop",
+        "clue_cicek",
+        "clue_yagmur",
+        "clue_yorgun"
+      ],
+      "choices": [
+        {
+          "id": "CB_FREN",
+          "kind": "COMBINE",
+          "match": { "a": "clue_fren", "b": "clue_abs" },
+          "feedback": {
+            "title": "İz başka bir aracın",
+            "text": "ABS’li bir araç sert frende tekerleği kilitlemez; on sekiz metrelik kesintisiz kilit izi bırakmaz. Raporun 68 km/s hesabı yanlış araca dayanıyor.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_fren" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_fren" }
+          ]
+        },
+        {
+          "id": "CB_CAM",
+          "kind": "COMBINE",
+          "match": { "a": "clue_cam", "b": "clue_far" },
+          "feedback": {
+            "title": "Camlar başka bir aracın",
+            "text": "Volkan’ın farları sağlam. Yaya geçidinin ilerisindeki far camı ondan dökülmedi. O camın sahibi kim?",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_cam" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_cam" }
+          ]
+        },
+        {
+          "id": "CB_YUKSEKLIK",
+          "kind": "COMBINE",
+          "match": { "a": "clue_kirik56", "b": "clue_tampon44" },
+          "feedback": {
+            "title": "İlk darbe yüksek tampondan",
+            "text": "Ayaktaki bir insanın bacağı, ona çarpan tamponun hizasından kırılır. 56 santimi 44 santimlik bir tampon kıramaz.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_yukseklik" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_yukseklik" }
+          ]
+        },
+        {
+          "id": "CB_GOREMEZ",
+          "kind": "COMBINE",
+          "match": { "a": "clue_arka", "b": "clue_necati_yer" },
+          "feedback": {
+            "title": "Taksici o ışığı göremezdi",
+            "text": "Çınarlı’da bekleyen bir taksiden Gökdere başlığının yalnızca siyah sırtı görünür. Necati’nin gördüğü kırmızı, kendi önündeki lambaydı.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_goremez" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_goremez" }
+          ]
+        },
+        {
+          "id": "CB_ARIZA",
+          "kind": "COMBINE",
+          "match": { "a": "clue_kabin", "b": "clue_is_emri" },
+          "feedback": {
+            "title": "Arıza önceden biliniyordu",
+            "text": "İş emri kazadan dört gün önce açılmış, “malzeme yok” diye ertelenmiş; kart kazadan bir gün sonra sessizce değiştirilmiş.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_ariza" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_ariza" }
+          ]
+        },
+        {
+          "id": "CB_SAAT",
+          "kind": "COMBINE",
+          "match": { "a": "clue_titreme", "b": "clue_uedas" },
+          "feedback": {
+            "title": "Yedi saniye önce geçen araç",
+            "text": "Lambaların söndüğü an UEDAŞ’a göre 00.58.12, kameraya göre 01.05.12: kamera yedi dakika ileri. Koyu araç 01.11.41’de, Volkan 01.11.48’de geçmiş.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_saat" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_saat" }
+          ]
+        },
+        {
+          "id": "FB_CIKARIM",
+          "kind": "FALLBACK",
+          "fallbackFor": "COMBINE",
+          "repeat": "ONCE_PER_PARAMS",
+          "feedback": {
+            "title": "Bu ikisi birbirini açıklamıyor",
+            "text": "İki kart yan yana duruyor ama aralarında bir cümle kurulmuyor. Başka bir kart dene.",
+            "label": "BAĞLANTI YOK · −50 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+        },
+        { "id": "CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_fren", "source": { "type": "RULE", "id": "EX_T_IZ" } },
+    { "evidence": "clue_cam", "source": { "type": "RULE", "id": "EX_T_BULGU" } },
+    { "evidence": "clue_far", "source": { "type": "RULE", "id": "EX_T_ARAC" } },
+    { "evidence": "clue_necati_yer", "source": { "type": "RULE", "id": "EX_T_TANIK" } },
+    { "evidence": "clue_yagmur", "source": { "type": "RULE", "id": "EX_T_HAVA" } },
+    { "evidence": "clue_kirik56", "source": { "type": "RULE", "id": "EX_O_BACAK" } },
+    { "evidence": "clue_sirt", "source": { "type": "RULE", "id": "EX_O_SIRT" } },
+    { "evidence": "clue_boya", "source": { "type": "RULE", "id": "EX_O_MONT" } },
+    { "evidence": "clue_titreme", "source": { "type": "RULE", "id": "EX_B_TITREME" } },
+    { "evidence": "clue_tek_stop", "source": { "type": "RULE", "id": "EX_B_1841" } },
+    { "evidence": "clue_is_emri", "source": { "type": "RULE", "id": "EX_S_ISEMRI" } },
+    { "evidence": "ded_fren", "source": { "type": "RULE", "id": "CB_FREN" } },
+    { "evidence": "ded_cam", "source": { "type": "RULE", "id": "CB_CAM" } },
+    { "evidence": "ded_yukseklik", "source": { "type": "RULE", "id": "CB_YUKSEKLIK" } },
+    { "evidence": "ded_goremez", "source": { "type": "RULE", "id": "CB_GOREMEZ" } },
+    { "evidence": "ded_ariza", "source": { "type": "RULE", "id": "CB_ARIZA" } },
+    { "evidence": "ded_saat", "source": { "type": "RULE", "id": "CB_SAAT" } }
+  ]
+}

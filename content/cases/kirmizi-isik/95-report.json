@@ -1,0 +1,126 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_fren",
+        "when": { "not": { "hasEvidence": "ded_fren" } },
+        "text": "Fren izi ile ABS’yi birleştirmedin: 18 m kilit izi ABS’li bir araçtan çıkmaz; raporun 68 km/s hesabı yanlış araca dayanıyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_cam",
+        "when": { "not": { "hasEvidence": "ded_cam" } },
+        "text": "Olay yerindeki far camı kırıkları ile Volkan’ın sağlam farlarını yan yana koymadın.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_yuks",
+        "when": { "not": { "hasEvidence": "ded_yukseklik" } },
+        "text": "Otopsideki 56 cm’lik kırık ile 44 cm’lik tamponu karşılaştırmadın: ilk darbe daha yüksek bir tampondandı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_goremez",
+        "when": { "not": { "hasEvidence": "ded_goremez" } },
+        "text": "Taksicinin durduğu köşeden Gökdere başlığının yalnızca arkası görünüyordu; gördüğü kendi kırmızısıydı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_ariza",
+        "when": { "not": { "hasEvidence": "ded_ariza" } },
+        "text": "Kabindeki 15 Kasım etiketi ile ertelenen iş emri, arızanın önceden bilindiğini gösteriyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_saat",
+        "when": { "not": { "hasEvidence": "ded_saat" } },
+        "text": "Büfe kamerasının saati yedi dakika ileriydi; UEDAŞ’ın gerilim kaydıyla düzeltilince Volkan’dan yedi saniye önce geçen bir araç görünüyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_sinyal",
+        "when": { "not": { "hasEvidence": "ev_sinyal_log" } },
+        "text": "Kavşak denetleyicisinin kayıtlarını dilekçeyle istemedin (CMK 177): üst yazı “arıza yok” derken döküm “çatışan yeşil uyarısı bastırıldı” diyordu.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_edr",
+        "when": { "not": { "hasEvidence": "ev_edr" } },
+        "text": "Aracın olay veri kaydedicisi (EDR) okutulmadı: 38 km/s ve normal fren tepkisi bilinçli taksir iddiasını çürütürdü.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_atk",
+        "when": { "not": { "hasEvidence": "ev_atk" } },
+        "text": "Adli Tıp Kurumu Trafik İhtisas Dairesinden yaralanma mekanizması raporu istenmedi; illiyet bağı ancak bu raporla tartışılabilirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_olum",
+        "when": { "not": { "hasEvidence": "ded_olum" } },
+        "text": "ATK raporunu sırttaki az kanamalı sıyrıklarla birleştirmedin: ölümcül travma birincil çarpmadaydı, Volkan’ın teması ikincildi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_bufe",
+        "when": { "not": { "hasEvidence": "ev_bufe" } },
+        "text": "Köşedeki büfenin kamerası kavşağa bakıyordu; sahibinden kaydı gönüllü ve tutanakla alabilirdin.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_multi",
+        "when": { "not": { "hasEvidence": "ev_multimedya" } },
+        "text": "Aracın multimedya ekranı görüşmenin eller serbest yapıldığını gösteriyordu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_itiraz",
+        "when": { "not": { "flag": "h1_itiraz" } },
+        "text": "Bilirkişi raporuna somut gerekçelerle itiraz edip yeni heyet istemedin (CMK 67/5); rapor tartışılmamış bir zemin olarak kaldı.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_yorum",
+        "when": { "not": { "flag": "yorum_itiraz" } },
+        "text": "Bilirkişinin “bilinçli taksirdir” cümlesine itiraz edebilirdin: bilirkişi hukuki nitelendirme yapamaz (CMK 67/3).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_heyet",
+        "when": { "all": [{ "hasEvidence": "ev_heyet" }, { "not": { "flag": "contra_heyet" } }] },
+        "text": "Heyet raporundaki “tali kusur” paragrafını EDR verisiyle karşılaştırmadın.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_suc",
+        "when": { "all": [{ "hasEvidence": "ded_arac" }, { "not": { "flag": "suc_dayanakli" } }] },
+        "text": "Kaçan aracın tarifi elindeydi; somut bir suç duyurusu (CMK 158) savcılığın aracı ve sürücüyü bulmasını sağlardı.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_ayten",
+        "when": { "flag": "ayten_kayip" },
+        "text": "Ayten’in sakladığı parçayı savcılığa tutanakla teslim etmesini önermeliydin; avukat delili kendi eline almaz.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_serkan",
+        "when": { "flag": "serkan_kirgin" },
+        "text": "Katılana şikâyetten vazgeçme ya da para teklifi: taksirle öldürme şikâyete bağlı değildir ve beyanı etkilemeye yönelik teklif etik ihlaldir.",
+        "category": "HUKUKI_BILGI"
+      },
+      {
+        "id": "h_kabul",
+        "when": { "flag": "kabul" },
+        "text": "Volkan kürsüde kusurunu kabul etti. Duruşmadan önceki gece onu bilgilendirmek, kararını bilerek vermesini sağlardı.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_garaj",
+        "when": { "flag": "etik_garaj" },
+        "text": "Kapalı bir işyerine izinsiz girerek delil toplamak suçtur ve delili hukuka aykırı kılar (TCK 116/2; CMK 206/2-a). Bilgiyi savcılığa bildirmek yeterdi.",
+        "category": "USUL_BILGISI"
+      }
+    ]
+  }
+}

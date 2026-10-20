@@ -1,0 +1,257 @@
+{
+  "scenes": [
+    {
+      "id": "sc_gece",
+      "title": "Gökdere kavşağı · 14 Kasım 02.10 fotoğrafları",
+      "description": "Trafik şubenin çektiği olay yeri fotoğrafları. Yağmur, ıslak asfalt, sodyum lambaların turuncusu.",
+      "width": 344,
+      "height": 300,
+      "image": "img_gece",
+      "objects": [
+        {
+          "id": "ob_fren",
+          "name": "Asfalttaki uzun iz",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 214, "w": 150, "h": 14 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_fren" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Yaya geçidinden önce başlayan, on sekiz metre boyunca hiç kesilmeyen tek bir koyu iz. Kilitlenmiş tekerlek. Islak asfaltta bile bu kadar düzgün bir iz, frenin hiç bırakılmadığını gösterir.",
+            "short": "18 m fren izi"
+          }
+        },
+        {
+          "id": "ob_cam",
+          "name": "Sol şeritteki parıltı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 214, "y": 236, "w": 46, "h": 20 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_cam" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Geçidin dokuz metre ilerisinde, sol şeritte saçılmış far camı ve koyu plastik parçalar. Tutanağa göre ilk temasın olduğu yaya geçidinin hemen ötesi. Parçaların bazıları yeşilimsi, bazıları şeffaf. Fotoğrafın köşesinde bir polis eldiveni, yerdeki bir parçayı işaret ediyor.",
+            "short": "Far camı kırıkları"
+          }
+        },
+        {
+          "id": "ob_arka",
+          "name": "Direkteki siyah kutu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 286, "y": 44, "w": 26, "h": 52 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_arka" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Fotoğraf Çınarlı Sokak köşesinden çekilmiş. Gökdere’ye bakan sinyal başlığının yalnızca siyah sırtı görünüyor. Işık yok, renk yok. Taksici o gece tam bu köşedeydi.",
+            "short": "Sinyalin sırtı"
+          }
+        },
+        {
+          "id": "ob_poset",
+          "name": "Kaldırımdaki naylon poşet",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 262, "w": 30, "h": 24 } }],
+          "feedback": {
+            "text": "İçinde iki simit ve bir hastane yemekhanesi fişi. Hatice Durmaz’ın son alışverişi. Delil değil; yine de baktım.",
+            "short": "Simit poşeti"
+          }
+        },
+        {
+          "id": "ob_rogar",
+          "name": "Rögar kapağı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 60, "y": 262, "w": 40, "h": 20 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": { "text": "Islak bir rögar kapağı. Kaymak için iyi bir yer, delil için değil.", "short": "Rögar" }
+        },
+        {
+          "id": "ob_afis",
+          "name": "Duvardaki afiş",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 18, "y": 70, "w": 50, "h": 70 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Yırtık bir konser afişi. Gece yarısı herkesin bir yere yetişmesi gerekiyor.",
+            "short": "Afiş"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_sabah",
+      "title": "Gökdere kavşağı · bugün",
+      "description": "Şubat sabahı. Trafik akıyor, ışıklar düzgün yanıyor, direkte solmuş karanfiller.",
+      "width": 344,
+      "height": 300,
+      "image": "img_sabah",
+      "objects": [
+        {
+          "id": "ob_kabin",
+          "name": "Gri kontrol kabini",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 150, "w": 48, "h": 70 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kabin" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Kabinin kapağında parlak, yeni bir etiket: “Kart değişimi · 15.11 · H.K.” Kazadan bir gün sonra. Kabin kilitli; ama etiket kilidin dışında, herkesin göreceği yerde.",
+            "short": "Bakım etiketi"
+          }
+        },
+        {
+          "id": "ob_kamera",
+          "name": "Tentenin altındaki kamera",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 52, "w": 30, "h": 22 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_bufe_kamera" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Köşedeki büfenin tentesinin altında, kavşağa bakan eski bir kamera. Kablosu büfenin içine giriyor. Lensinin üstünde örümcek ağı. Ama kırmızı ışığı yanıyor; çalışıyor.",
+            "short": "Büfe kamerası"
+          }
+        },
+        {
+          "id": "ob_cicek",
+          "name": "Direkteki çiçekler",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 160, "y": 170, "w": 30, "h": 40 } }],
+          "effects": [{ "type": "DISCOVER", "evidence": "clue_cicek" }],
+          "feedback": {
+            "text": "Naylona sarılı karanfiller ve bir kart: “Hatice ablamıza. Kat 3 temizlik ekibi.” Üç aydır kimse kaldırmamış.",
+            "short": "Karanfiller"
+          }
+        },
+        {
+          "id": "ob_buton",
+          "name": "Yaya butonu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 198, "y": 176, "w": 16, "h": 20 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Bastım. Yaya ışığı yeşile döndü, araçlar durdu. Bugün her şey kusursuz çalışıyor.",
+            "short": "Buton"
+          }
+        },
+        {
+          "id": "ob_pano",
+          "name": "Reklam panosu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 96, "y": 40, "w": 54, "h": 70 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": { "text": "Bir kredi kartı reklamı: “Hayat beklemez.” Bazen bekler.", "short": "Pano" }
+        }
+      ]
+    },
+    {
+      "id": "sc_otopark",
+      "title": "Yediemin otoparkı · beyaz sedan",
+      "description": "Kestel yolunda, tel örgülü bir otopark. Volkan’ın arabası üç aydır burada, örtüsüz.",
+      "width": 344,
+      "height": 300,
+      "image": "img_otopark",
+      "objects": [
+        {
+          "id": "ob_tampon",
+          "name": "Sol ön tampon",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 214, "w": 80, "h": 20 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_tampon44" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Sürtünme izi tamponun alt kenarında. Metreyi tuttum: yerden 44 santim. İzler yatay, aşağıya doğru. Bir insanın bacağına çarpan bir tampon bu kadar alçakta iz bırakmaz; ama yerde yatan birine sürtünen bir tampon bırakır.",
+            "short": "Tampon 44 cm"
+          }
+        },
+        {
+          "id": "ob_far",
+          "name": "Sol far",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 36, "y": 176, "w": 46, "h": 22 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_far" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Farlar tek parça. Çizik bile yok. Sinyal camları da sağlam. Fabrika çıkışı gibi.",
+            "short": "Farlar sağlam"
+          }
+        },
+        {
+          "id": "ob_abs",
+          "name": "Gösterge paneli",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 196, "y": 96, "w": 30, "h": 20 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_abs" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Kontağı açtırdım: ABS lambası yanıp sönüyor, sistem çalışıyor. 2019 model; ABS standart.",
+            "short": "ABS"
+          }
+        },
+        {
+          "id": "ob_ekran",
+          "name": "Multimedya ekranı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 240, "y": 96, "w": 46, "h": 30 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_multimedya" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Son aramalar: “Gül · 01.09 · Bluetooth · 02.30”. Telefonla değil, arabanın hoparlöründen konuşmuş. Ekranın kenarında bir çocuk doktorunun randevu hatırlatması: “13 Kasım 09.00.”",
+            "short": "Arama kaydı"
+          }
+        },
+        {
+          "id": "ob_bebek",
+          "name": "Arka koltuk",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 150, "w": 50, "h": 46 } }],
+          "feedback": {
+            "text": "Etiketi sökülmemiş bir bebek koltuğu. Kurulumu yarım kalmış.",
+            "short": "Bebek koltuğu"
+          }
+        },
+        {
+          "id": "ob_onluk",
+          "name": "Koltuktaki önlük",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 150, "w": 50, "h": 30 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Fabrika önlüğü, cebinde iplik tozu. O gece yorgun olduğunu zaten biliyorum.",
+            "short": "Önlük"
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "id": "img_gece", "kind": "IMAGE", "path": "assets/scenes/kavsak-gece@4x.png" },
+    { "id": "img_sabah", "kind": "IMAGE", "path": "assets/scenes/kavsak-sabah@4x.png" },
+    { "id": "img_otopark", "kind": "IMAGE", "path": "assets/scenes/otopark@4x.png" }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_fren", "source": { "type": "OBJECT", "id": "ob_fren" } },
+    { "evidence": "clue_cam", "source": { "type": "OBJECT", "id": "ob_cam" } },
+    { "evidence": "clue_arka", "source": { "type": "OBJECT", "id": "ob_arka" } },
+    { "evidence": "clue_kabin", "source": { "type": "OBJECT", "id": "ob_kabin" } },
+    { "evidence": "clue_bufe_kamera", "source": { "type": "OBJECT", "id": "ob_kamera" } },
+    { "evidence": "clue_cicek", "source": { "type": "OBJECT", "id": "ob_cicek" } },
+    { "evidence": "clue_tampon44", "source": { "type": "OBJECT", "id": "ob_tampon" } },
+    { "evidence": "clue_far", "source": { "type": "OBJECT", "id": "ob_far" } },
+    { "evidence": "clue_abs", "source": { "type": "OBJECT", "id": "ob_abs" } },
+    { "evidence": "ev_multimedya", "source": { "type": "OBJECT", "id": "ob_ekran" } }
+  ]
+}

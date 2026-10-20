@@ -124,9 +124,9 @@ export const evidencePart: CasePart = {
     evidence('ev_atk', {
       type: 'ADLI_RAPOR',
       title: 'Adli Tıp kesin raporu',
-      shortText: 'Deplasmansız burun kırığı: hayat fonksiyonlarına etkisi hafif (1). Sağ el bileğinde bası izi.',
+      shortText: 'Burundaki kırığın hayat fonksiyonlarına etkisi hafif (1). Ayrıntılar inceleme ekranında.',
       description:
-        'Adli Tıp Kurumu Bursa Grup Başkanlığı: burun kemiğinde deplasmansız kırık, hayat fonksiyonlarına etkisi hafif (1. derece). Sağ el ayasında transvers kesi. Sağ el bilek dorsalinde bası/ezilme ile uyumlu ekimoz; bilekte kırık yok.',
+        'Adli Tıp Kurumu Bursa Grup Başkanlığı kesin raporu: kırığın derecesi, eldeki kesi, bilek ve gövde muayenesi. Satırlar inceleme ekranında.',
       sourceLabel: 'Adli Tıp Kurumu',
       icon: 'receipt',
       side: 'NEUTRAL',
@@ -464,6 +464,7 @@ export const evidencePart: CasePart = {
       icon: 'bulb',
       side: 'DEFENSE',
       strength: 'MEDIUM',
+      presentable: false,
     }),
     insight('ded_bilek', {
       type: 'BELGE',
@@ -478,6 +479,7 @@ export const evidencePart: CasePart = {
     insight('ded_video', {
       type: 'BELGE',
       title: 'Masa 7’de bir kayıt var',
+      presentable: false,
       shortText: 'Masa 7 tezgâhın karşısında; kavgadan iki dakika sonra hesabı ödeyen D. Yurt hikâye çekiyordu.',
       description: 'Kameralar kapalıydı; ama o gece en az bir telefon tezgâha bakıyordu.',
       sourceLabel: 'Çıkarım tahtası',

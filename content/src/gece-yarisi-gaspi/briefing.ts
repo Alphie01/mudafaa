@@ -11,6 +11,8 @@ const PR00 = T(`
 > Yağmur akşamdan beri inceden yağıyordu. Taş basamaklar ıslaktı; her biri, üstündeki tek sokak lambasının ışığını ayrı ayrı yansıtıyordu.
 > Bir kadın iniyordu. Altmışına yakın, omuzları düşük, elinde eski bir deri çanta. Ağzında bir türkünün mırıltısı; sözlerini çoktan unutmuş biri gibi.
 > Gece vardiyasından çıkmıştı. Ayakları ağrıyordu. Evine on dakikalık yol vardı ve bu on dakikayı her gece aynı türküyle yürürdü.
+> Merdivenin başındaki eczanenin camında nöbet levhası yanıp sönüyordu. Bir kedi bir saçağın altına sığınmıştı. Bakkalın radyosundan bir maç sonucu, sonra reklam.
+> Kadın on beşinci basamakta durdu, nefeslendi, çantasını öbür omzuna aldı. Bir alışkanlık; kırk yıldır sol omzunda taşırdı, yorulunca sağa alırdı. O gece almadı.
 > Merdivenin dibinde bir motor rölantide homurdanıyordu. Farı kapalıydı. Arkasında sarı bir kurye kutusu, yağmurda parlıyordu.
 > Basamakları ikişer ikişer çıkan adımlar. Hızlı, hafif, genç. {shake}
 > Kadın döndü. Kapüşon, karanlık bir yüz, yağmurdan ıslanmış bir mont.
@@ -75,6 +77,8 @@ derya: Çay içersem ağlarım. Kahve varsa.
 derya: Barış Kılınç. Yirmi iki yaşında. Motokurye. Bir kadının çantasını kapmış diyorlar. Bıçakla.
 derya: Kardeşim kimseyi soymaz. Kendi motorunu yıkatamayacak kadar tembeldir. Bıçak mı? Ekmek keserken parmağını keser o.
 > Kartı bana doğru itti. Fotoğrafta uzun saçlı, sakallı, gülümsemeye çalışan bir genç. Kartın köşesi aşınmıştı.
+derya: Bu kartı cebinde taşırdı. Polis telefonuyla birlikte almış, sonra kartı annemi kapıya çıkarıp vermiş. “Bu lazım olmaz” demiş. Lazım oldu işte; sana getirdim.
+~ Bir yüz. Kasımda çekilmiş, bir kurye kartında. Dosyada başka bir yüz var; üç yıl önce, bir karakol duvarının önünde. Aynı insan mı? Kâğıtta aynı ad.
 - Dosyada ne olduğunu biliyor musunuz?
 derya: Kadın onu fotoğraftan tanımış. Karakolda. Altı fotoğrafın arasından seçmiş.
 derya: Bir de… dur, ben söyleyeyim, sonra başkasından duyma. Üç yıl önce bir düğünde kavgaya karıştı. Birine yumruk attı. Mahkeme cezayı geri bıraktı mı, ne dediler.

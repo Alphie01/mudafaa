@@ -1,0 +1,558 @@
+{
+  "outcomes": [
+    {
+      "id": "AZIL",
+      "class": "OTHER",
+      "priority": 1,
+      "when": { "flag": "etik_kirlik" },
+      "stamp": "AZİL",
+      "stampTone": "red",
+      "sentence": "Vekâlet sona erdi · dava sürüyor",
+      "verdictText": "Mahkemece, sanık müdafiinin duruşma dışında mağdura fotoğraf göstererek teşhis yaptırmaya çalıştığının anlaşılması üzerine durumun Bursa Barosu Başkanlığına ve Bursa Cumhuriyet Başsavcılığına bildirilmesine; mağdurun bundan sonraki teşhise ilişkin beyanlarının değerlendirmede dikkate alınmamasına; sanığın müdafiini azletmesi nedeniyle duruşmanın yeni müdafiin katılımıyla devamına karar verildi.",
+      "reasoning": [
+        { "text": "Müdafi, kolluğun teşhisi kirleten tek fotoğraf gösterimini savunma eliyle tekrarlamıştır." },
+        { "text": "Sanık, vekâlet ilişkisini tek taraflı olarak sona erdirmiştir (TBK 512/1)." },
+        { "text": "Dava, başka bir müdafiin katılımıyla devam edecektir; senin dosyan burada kapandı." }
+      ],
+      "legalBasis": "Av.K. 34; TCK 277; TBK 512/1; PVSK ek md. 6",
+      "xp": 0,
+      "howToReach": "Mağdura hiçbir koşulda fotoğraf gösterme; başka bir kişinin fail olabileceğini savcılığa yaz (CMK 158).",
+      "ethicsCard": "Tanıklık eden mağdura duruşma dışında bir fotoğraf göstererek teşhis yaptırmaya çalıştın. Bu, tanığı etkileme girişimidir (TCK 277) ve avukatın özen ve doğruluk yükümlülüğüne aykırıdır (Av.K. 34). Kirlenmiş bir hafıza, ikinci bir fotoğrafla temizlenmez.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN ÖNCE", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Azilnameyi katlayıp cüzdanıma koydum; neden bilmiyorum. Bir makbuz gibi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridorun öbür ucunda Nermin Hanım kızının koluna girmiş, çıkışa yürüyordu. Bir an durdu. Bana döndü."
+            },
+            { "speaker": "nermin", "text": "Neden herkes bana bir fotoğraf gösteriyor evladım? Sen de mi?" },
+            { "speaker": "narrator", "text": "Cevap vermedim. Vermeye hakkım yoktu. Kadın yürüdü; bir daha dönmedi." },
+            {
+              "speaker": "narrator",
+              "text": "Merdivenlerde Derya, Sevim Hanım’ın koluna girmişti. Barış önlerinden iniyordu; başı dik, gözleri hiçbir yere bakmayarak."
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · AKŞAM", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda ince bir kitapçık: “Avukatlık Meslek Kuralları.” Leyla bırakmıştı. Not yoktu. Not gerekmiyordu."
+            },
+            { "speaker": "narrator", "text": "Leyla’nın odasının kapısı kapalıydı. Işığı yanıyordu. Kapıyı çalmadım." },
+            {
+              "speaker": "player",
+              "text": "Bu dosyanın bütün hikâyesi bir polisin bir telefon ekranını bir kadının yüzüne tutmasıydı. Ben o hikâyeyi çözmeye gelmiştim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Sonunda aynı ekranı, aynı yüze, kendi elimle tuttum. Daha iyi bir niyetle. Niyet bir hafızayı temizlemez; bir avukatı da.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "tolga_kacti" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tolga hâlâ bulunamadı. Barış’ın yeni avukatı bir dilekçe yazmış; savcılık kayıtları istemiş. Doğru yol. Benim gitmediğim yol."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BERAAT_B",
+      "class": "ACQUITTAL",
+      "priority": 2,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "flag": "tolga_teslim" },
+          { "ref": "teshis_coktu" },
+          { "any": [{ "hasEvidence": "ded_baskasi" }, { "hasEvidence": "ded_hesap" }] },
+          { "any": [{ "hasEvidence": "ded_mazeret" }, { "hasEvidence": "ded_evde" }] },
+          { "cmp": [{ "var": "pers" }, ">=", 8] },
+          { "cmp": [{ "score": "final" }, ">=", 10000] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok · Tahliye",
+      "verdictText": "Sanık Barış Kılınç’ın üzerine atılı nitelikli yağma suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; başka suçtan tutuklu değilse derhâl TAHLİYESİNE, hakkındaki adli kontrol tedbirinin kaldırılmasına; CMK 141/1-e uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142 ile 6384 sayılı Kanuna göre yapılabileceğinin bildirilmesine (CMK 231/3); mağdura ait köstekli saatin mağdura iadesine; karar ve dosya örneklerinin Tolga Kılınç hakkındaki soruşturmaya ve teşhis işlemine ilişkin suç duyurusuna eklenmek üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; istinaf yolu açık olmak üzere karar verildi.",
+      "reasoning": [
+        {
+          "text": "Mağdurun teşhisi, kolluk görevlisinin teşhisten önce acil serviste tek fotoğraf göstermesi nedeniyle kanuni güvencelerden yoksundur ve hükme esas alınamaz (PVSK ek md. 6; CMK 217)."
+        },
+        {
+          "text": "Sanık, olay saatinde Yıldırım’daki evindedir; bu husus bağımsız tanık beyanı, kesinti kaydı ve telefon kaydıyla doğrulanmıştır."
+        },
+        {
+          "text": "Sanık adına açılmış kurye hesabı olay gecesi başka bir cihazdan, sol kulağında halka bulunan bir kişi tarafından kullanılmıştır; bu tarif mağdurun ilk beyanıyla örtüşmektedir."
+        },
+        { "text": "Tolga Kılınç olayı ikrar etmiş; mağdura ait köstekli saat onun odasında ele geçirilmiştir." },
+        { "text": "Deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir." }
+      ],
+      "legalBasis": "CMK 223/2-b; CMK 141/1-e, 142, 231/3; PVSK ek md. 6; CMK 217",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 120] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 120] }, 1000] }
+        }
+      },
+      "howToReach": "Teşhisin kirlendiğini kanıtla, mazereti kayda bağla, hesabı kimin taşıdığını göster ve bilgiyi savcılığa yaz; aileye ne yapacağını değil, ne yapabileceğini söyle.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "rahmi", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“İşlemediği sabit olduğundan… beraatine.” Barış kelimeleri duydu. Bir an anlamadı. Sonra kürsünün kenarına tutundu ve gözlerini kapadı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sevim Hanım ayağa kalktı. Tespih elinden kaydı, yere düştü, taneleri dağılmadı. Derya tespihi yerden aldı ve annesinin avucuna kapattı."
+            },
+            { "speaker": "narrator", "text": "ADLİYE ÖNÜ · ÖĞLEDEN SONRA", "style": "card", "bg": "sokak_sabah" },
+            {
+              "speaker": "narrator",
+              "text": "Dışarıda yağmur dinmişti. İlk kez. Adliyenin merdivenleri ıslak parlıyordu; Uludağ’ın üstünde bulutlar yırtılmış, arasından soluk bir güneş."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Nermin Hanım merdivenin başında bekliyordu. Elinde köstekli bir saat; camı çizik, zinciri yeni silinmiş. Barış’ı görünce bir adım attı. Sonra bir adım daha."
+            },
+            { "speaker": "nermin", "expression": "uzgun", "text": "Evladım… Ben seni… Ben o fotoğrafı…" },
+            { "speaker": "baris", "text": "Biliyorum teyze. Siz yalan söylemediniz. Size yalan gösterdiler." },
+            {
+              "speaker": "narrator",
+              "text": "Nermin Hanım saati avucunda sıktı. Sonra Barış’ın elini tuttu; kısa, sert, bir hasta bakıcının eli gibi."
+            },
+            {
+              "speaker": "nermin",
+              "text": "İsmail’in saati. On iki yıl. Bir daha merdivenden inerken türkü söyleyemem herhalde. Ama saat… saat eve geldi."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "derya_konustu" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Derya merdivenin dibinde, bir sigarayı yakmadan parmaklarında çeviriyordu. Yanıma geldi."
+            },
+            {
+              "speaker": "derya",
+              "text": "Tolga’yı ziyarete gideceğim. Cezaevine. Camın arkasından. Barış da gelecek; daha bilmiyor ama gelecek."
+            },
+            {
+              "speaker": "derya",
+              "text": "Bir aileyi kurtarmak için öbürünü yakmamak… Olmadı canım. Bir aileyi kurtarmak için öbürünün gerçeğini söylemek gerekiyormuş."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · AKŞAM", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla kapımda durdu. Elinde iki bardak çay. Birini masama bıraktı; bunu hiç yapmazdı."
+            },
+            { "speaker": "leyla", "text": "Bugün kimseyi yenmedin." },
+            { "speaker": "player", "text": "Yenmedim." },
+            { "speaker": "leyla", "text": "İyi." },
+            {
+              "speaker": "narrator",
+              "text": "Odasına döndü. Masasının köşesindeki ters çerçeveye bir an baktı; elini uzattı, sonra çekti."
+            },
+            { "speaker": "leyla", "text": "Bir gün sana bir dosyadan bahsedeceğim Deniz. Bugün değil." },
+            { "speaker": "narrator", "text": "SON", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Tolga Kılınç hakkında yağma suçundan dava açıldı. Kolluk görevlisi Ferhat Oral hakkında idari soruşturma başlatıldı. Mağdur, usulüne uygun yapılan teşhiste kimseyi göstermedi: “Bilmiyorum” dedi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Delil bir yüz değildi. Bir kayıttı, bir halkaydı, bir kesintiydi. Ve bir ablanın sesi."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BERAAT_E",
+      "class": "ACQUITTAL",
+      "priority": 3,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "cmp": [{ "var": "pers" }, ">=", 6] },
+          { "ref": "teshis_coktu" },
+          { "ref": "lehe2" },
+          { "cmp": [{ "score": "final" }, ">=", 9000] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok · Tahliye",
+      "verdictText": "Sanık Barış Kılınç’ın üzerine atılı nitelikli yağma suçunu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; başka suçtan tutuklu değilse derhâl TAHLİYESİNE, hakkındaki adli kontrol tedbirinin kaldırılmasına; CMK 141/1-e uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142 ile 6384 sayılı Kanuna göre yapılabileceğinin bildirilmesine (CMK 231/3); kurye hesabını olay gecesi kullanan kişi ve teşhis işlemi yönünden suç duyurusunda bulunulmasına; istinaf yolu açık olmak üzere karar verildi.",
+      "reasoning": [
+        {
+          "when": { "any": [{ "flag": "contra_n3" }, { "flag": "contra_f2" }] },
+          "text": "Mağdurun teşhisi, teşhisten önce acil serviste tek fotoğraf gösterilmesi ve tutanağın kanuni güvencelerden yoksun olması nedeniyle hükme esas alınamamıştır (PVSK ek md. 6; CMK 217)."
+        },
+        {
+          "when": { "any": [{ "hasEvidence": "ded_halka" }, { "flag": "contra_n5" }] },
+          "text": "Mağdurun kirlenmeden önceki ilk tarifinde failin sol kulağında halka bulunduğu belirtilmiş; sanığın kulaklarında delik ya da iz bulunmamaktadır."
+        },
+        {
+          "when": { "hasEvidence": "ded_mazeret" },
+          "text": "Sanığın olay saatinde evinde olduğu tanık beyanı ve kesinti kaydıyla desteklenmiştir."
+        },
+        {
+          "when": { "hasEvidence": "ded_evde" },
+          "text": "Sanığın telefonu olay saatinden iki dakika önce evinin bulunduğu bölgeden elektrik arıza hattını aramıştır."
+        },
+        {
+          "when": { "any": [{ "hasEvidence": "ded_hesap" }, { "hasEvidence": "ded_baskasi" }] },
+          "text": "Sanık adına açılmış kurye hesabı olay gecesi sanığa ait olmayan bir cihazdan açılmıştır; konum kaydı hesabın yerini gösterir, sanığın yerini göstermez."
+        },
+        {
+          "when": { "any": [{ "hasEvidence": "ded_bicak" }, { "flag": "contra_n2" }] },
+          "text": "İddia edilen bıçak bulunamamış, mağdurun ilk beyanında yer almamıştır."
+        },
+        {
+          "when": { "flag": "gamze_dinlendi" },
+          "text": "Acil servis hemşiresi, teşhisten önce mağdura telefondan tek fotoğraf gösterildiğini duruşmada doğrulamıştır."
+        },
+        {
+          "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2)."
+        }
+      ],
+      "legalBasis": "CMK 223/2-e; CMK 141/1-e, 142, 231/3; PVSK ek md. 6; CMK 217; Anayasa 38/4; AİHS 6/2",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 100] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
+        }
+      },
+      "howToReach": "Teşhisin kirlendiğini göster; mazeret ya da hesabın başkasınca kullanıldığı gibi en az iki bağımsız lehe bulgu kur.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "rahmi", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“Sabit olmadığından… beraatine.” Barış kelimeleri tek tek duydu; bir yabancı dilden çeviriyormuş gibi. Sonra anladı ve oturdu. Ayakta dinlemesi gerekiyordu; kimse bir şey demedi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sevim Hanım iki elini yüzüne kapadı. Sesi çıkmadı. Omuzları sarsıldı; o kadar."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN SONRA", "style": "card", "bg": "adliye" }
+          ]
+        },
+        {
+          "when": { "flag": "released" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Barış iki haftadır dışarıdaydı ama bugün başka türlü çıktı. İmza defteri yok, karakol yok. Kapıdan geçerken omuzlarını düzeltti."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "released" } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tahliye müzekkeresi öğleden sonra cezaevine ulaştı. Barış akşam yedide kapıdan çıktı; elinde bir naylon poşet, ayakkabıları bağcıksız. Derya arabada bekliyordu."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Koridorda iki avukat konuşuyordu; biri ötekine bir şey fısıldadı. Duydum: “Şüpheden yararlandı.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Nermin Hanım kızıyla çıkışa yürüdü. Yanımdan geçerken durdu. Bana bakmadı; konuştu."
+            },
+            { "speaker": "nermin", "text": "Saatimi kim aldı o zaman evladım?" },
+            { "speaker": "narrator", "text": "Cevabını biliyordum. Kanıtlayamamıştım. Bu ikisi aynı şey değil." },
+            {
+              "speaker": "narrator",
+              "text": "Kızı annesini kolundan çekti. Nermin Hanım yürüdü; merdivenin başında durdu, aşağı baktı. Adliyenin merdivenleri de taştı, ıslaktı. Basamakları saymadı. Biliyordum; çünkü ben saydım: yirmi iki."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir kadın bir yüzü geri verdi. Karşılığında hiçbir şey almadı; saatini de, gerçeği de. Bu beraat onun değil.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "tolga_kacti" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tolga’nın telefonu hâlâ kapalıydı. Demirtaş’taki odası boş. Savcılık bir yakalama kararı istemiş. Benim çaldığım kapıdan çıkan adam, artık bir dosya numarası."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "flag": "fact_tolga" }, { "not": { "flag": "tolga_kacti" } }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tolga’nın telefonu kapalıydı. Derya, “Gelecek” diyor. “Bir gün kendisi gelecek.” Belki."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Fişleri, dökümleri, tutanakları dosyaya kaldırdım. Panodaki kırmızı ipi çözdüm. Ortadaki boşluk hâlâ boştu."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir yüzü sildik. Yerine bir soru bıraktık. Bazen adalet bir kapıyı açar ama ışığı yakmaz.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Barış eve gitti. Bir kadının saati hâlâ bir yerlerde, bir çorabın içinde, bir çekmecede. Bunu bilmek, bu gece bana kalan şey.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "INDIRIM",
+      "class": "REDUCED",
+      "priority": 4,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "flag": "closing_terdit" },
+          { "flag": "arg_silah" },
+          { "cmp": [{ "score": "final" }, ">=", 3000] }
+        ]
+      },
+      "stamp": "İNDİRİM",
+      "stampTone": "amber",
+      "sentence": "8 yıl 4 ay hapis",
+      "verdictText": "Sanık Barış Kılınç’ın cezalandırılmasına: silah unsuru ispatlanamadığından TCK 149/1-a’nın uygulanmasına yer olmadığına; eylemin gece vaktinde işlenmesi nedeniyle TCK 149/1-h uyarınca takdiren alt sınırdan 10 YIL; sanığın geçmişi ve cezanın geleceği üzerindeki olası etkileri gözetilerek TCK 62/1 ile 8 YIL 4 AY HAPİS; TCK 53; TCK 63 mahsup; cezanın süresi nedeniyle hükmün açıklanmasının geri bırakılması (CMK 231/5) ve erteleme (TCK 51/1) koşulları bulunmadığına; tutukluluk hâlinin devamına (ikinci celseden önce adli kontrolle tahliye edilmişse, hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "reasoning": [
+        {
+          "text": "Mağdurun ilk beyanında bıçaktan söz edilmemiş, bıçak ele geçirilmemiştir; silah unsuru ispatlanamamıştır."
+        },
+        { "text": "Eylem gece vaktinde işlendiğinden TCK 149/1-h uygulanmıştır." },
+        {
+          "text": "Savunmanın terditli talebi doğrultusunda temel ceza alt sınırdan belirlenmiş ve TCK 62/1 uygulanmıştır."
+        },
+        {
+          "text": "Mağdurun teşhisi ve sanık adına açılmış hesabın konum kaydı birlikte değerlendirilmiştir; savunmanın teşhise yönelik itirazları heyeti beraate götürecek ölçüde güçlü bulunmamıştır."
+        }
+      ],
+      "legalBasis": "TCK 149/1-h, 61, 62/1, 53, 63; CMK 231/5; TCK 51/1; CMK 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 85] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
+        }
+      },
+      "howToReach": "Esas savunmada terditli talepte bulun ve silah unsurunun ispatlanmadığını delille göster (112 dökümü + cam kırığı).",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "rahmi", "text": "Sanığın cezalandırılmasına…" },
+            {
+              "speaker": "narrator",
+              "text": "“Sekiz yıl dört ay.” Barış rakamları duydu ve bana döndü. Ne anlama geldiğini soran bir bakış."
+            },
+            {
+              "speaker": "player",
+              "text": "On yıldan on beş yıla kadar istenen bir davada sekiz yıl dört ay. Bıçak düştü. Hukuken bir kazanım. Bir çocuğun gözünde, sekiz yıl dört ay.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "ADLİYE ARKA KAPISI · RİNG ARACI", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Ring aracının arka camı buğuluydu. Barış elini cama koydu. Sevim Hanım dışarıdan elini onun elinin üstüne, camın öbür tarafına koydu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Araç hareket etti. Sevim Hanım birkaç adım yürüdü, sonra durdu. Eli havada kaldı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Derya bir sigara yaktı. İki nefes çekti, sonra yere atıp ezdi; bitirmeden."
+            },
+            { "speaker": "derya", "text": "İstinaf var, değil mi canım? Bir yol daha var, değil mi?" },
+            { "speaker": "player", "text": "Var." },
+            {
+              "speaker": "player",
+              "text": "Var. İstinaf bir yoldur. Ama bir yolun sonunda ne olduğunu bilmeden ona “yol” demek, bir umut vermektir.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_tolga" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Derya, Tolga’dan söz etmedi. Ben de etmedim. İkimiz de bir ismin, bir arabanın camına çarpıp geri döndüğünü biliyorduk."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "player",
+              "text": "Bıçak yoktu. Bunu kanıtladım. Bıçağın olmadığı bir hapishanede sekiz yıl dört ay.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Terazinin bir kefesine “yapmadı”, öbürüne “yaptıysa da bıçaksız” koydum. Heyet ikinci kefeyi tuttu. Ben ikisini birden tutmak zorundaydım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MAHKUMIYET",
+      "class": "CONVICTION",
+      "priority": 5,
+      "when": { "all": [] },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "sentence": "10 yıl hapis",
+      "verdictText": "Sanık Barış Kılınç’ın üzerine atılı nitelikli yağma suçundan, eylemin silahla ve gece vaktinde işlendiği kabul edilerek TCK 149/1-a, h uyarınca iki nitelikli hâlin birlikte gerçekleşmesi gözetilerek alt sınırdan uzaklaşılarak 12 YIL; TCK 62/1 ile 10 YIL HAPİS cezası ile cezalandırılmasına; TCK 53; TCK 63 mahsup; tutukluluk hâlinin devamına (ikinci celseden önce adli kontrolle tahliye edilmişse, hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).",
+      "reasoning": [
+        {
+          "text": "Mağdurun teşhisi, sanık adına açılmış hesabın konum kaydı ve sanığın bölgede kurye olarak çalışması birlikte değerlendirilmiştir."
+        },
+        {
+          "when": { "not": { "flag": "cokus" } },
+          "text": "Savunmanın teşhise ve kayıtlara yönelik itirazları somut delillerle desteklenmemiştir."
+        },
+        {
+          "when": { "flag": "cokus" },
+          "text": "Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı."
+        }
+      ],
+      "legalBasis": "TCK 149/1-a, h, 61, 62/1, 53, 63; CMK 273/1",
+      "xp": {
+        "if": {
+          "when": { "flag": "cokus" },
+          "then": {
+            "if": {
+              "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+              "then": { "div": [{ "mul": [{ "score": "final" }, 30] }, 2000] },
+              "else": { "div": [{ "mul": [{ "score": "final" }, 30] }, 1000] }
+            }
+          },
+          "else": {
+            "if": {
+              "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+              "then": { "div": [{ "mul": [{ "score": "final" }, 60] }, 2000] },
+              "else": { "div": [{ "mul": [{ "score": "final" }, 60] }, 1000] }
+            }
+          }
+        }
+      },
+      "howToReach": "Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir. Yanlış delil ve dayanaksız itiraz güvenilirliği eritir; teşhisi çürütmeden ve mazereti kayda bağlamadan beraat gelmez.",
+      "epilogue": [
+        {
+          "when": { "flag": "cokus" },
+          "lines": [
+            { "speaker": "narrator", "text": "SALON · HÜKÜMDEN SONRA", "style": "card", "bg": "durusma_salonu" },
+            {
+              "speaker": "narrator",
+              "text": "Salon boşaldı. Jandarma Barış’ı götürdü. Sevim Hanım’ı biri koluna girip dışarı çıkardı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masamda oturuyordum. Notlarım önümde. Hiçbirine bakmamıştım; hiçbiri işe yaramamıştı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Orhan Bayar dosyasını topladı. Kapıya giderken durdu, bana döndü."
+            },
+            {
+              "speaker": "orhan",
+              "text": "Hafızayla değil, kâğıtla gelmeliydiniz avukat hanım. Bu dosyada kâğıtlar vardı."
+            },
+            { "speaker": "narrator", "text": "Kapı arkasından kapandı. Radyatör tıkırdadı. Başka ses yoktu." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · HÜKÜMDEN SONRA", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "“On yıl.” Kelime koridora benden önce çıktı. Sevim Hanım’ın tespihi koptu; taneler mermer zeminde yuvarlandı, banklarının altına, kapıların eşiğine."
+            },
+            { "speaker": "narrator", "text": "Eğildim. Topladım. Bir, iki, otuz üç. Birini bulamadım." },
+            {
+              "speaker": "narrator",
+              "text": "Derya annesinin koluna girmişti. Bana bakmadı. Merdivenin başında durdu; geri döndü."
+            },
+            { "speaker": "derya", "text": "Salonun kirası. İki koltuk. Bir de kardeşim. Hepsi gitti canım." },
+            {
+              "speaker": "narrator",
+              "text": "Nermin Hanım öbür uçta, kızının yanında oturuyordu. Kalkmadı. Sevinmiyordu. Saatini kimse geri getirmemişti."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_tolga" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tolga hakkında bir dilekçe yazacağım. Savcılığa. Bunu ikinci celseden önce yapmalıydım. Şimdi bir istinaf dilekçesine bir ek olacak."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Avucumda bir tespih tanesi. Otuz üçüncüsü yoktu; bu otuz dördüncüydü belki, ya da birinciydi. Masama koydum."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir fotoğraf bir hafızayı kirletti. Ben o kiri temizleyemedim. Kimse “yalan” demedi; herkes “eminim” dedi.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "İstinaf var. Her zaman bir sonraki kapı vardır. Ama bu gece kapıların hepsi kapalı.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

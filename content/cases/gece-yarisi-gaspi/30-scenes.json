@@ -1,0 +1,316 @@
+{
+  "scenes": [
+    {
+      "id": "sc_merdiven",
+      "title": "Sırmakeş merdivenleri · 19 Ocak 01.10 fotoğrafları",
+      "description": "Olaydan bir buçuk saat sonra çekilen olay yeri fotoğrafları.",
+      "width": 344,
+      "height": 380,
+      "image": "img_merdiven",
+      "objects": [
+        {
+          "id": "ob_cam",
+          "name": "Kırık şişe",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 210, "w": 50, "h": 36 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_cam" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Otuz birinci basamakta kırık bir bira şişesi. Keskin kenarında koyu bir leke; yanında üç kan damlası. Bir avuç bu camın üstüne düşerse kesilir. Bıçak gerekmez.",
+            "short": "Kanlı şişe camı"
+          }
+        },
+        {
+          "id": "ob_aski",
+          "name": "Çanta askısı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 84, "y": 150, "w": 44, "h": 30 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_aski" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Koparılmış deri askı, delil numarası 2. Sol halka kopmuş, sağdaki sağlam. Çanta soldan çekilmiş. Kadın, failin sol yanını görmüş olmalı.",
+            "short": "Askı soldan kopmuş"
+          }
+        },
+        {
+          "id": "ob_motor",
+          "name": "Merdiven dibi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 240, "y": 320, "w": 80, "h": 44 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_motor" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Alt başta, bakkalın önünde taze bir yağ lekesi. Yağmur suyunda gökkuşağı gibi yayılmış. Bir motor burada birkaç dakika rölantide beklemiş.",
+            "short": "Motor yağı lekesi"
+          }
+        },
+        {
+          "id": "ob_eczane",
+          "name": "Eczane kamerası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 60, "w": 70, "h": 60 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 },
+            {
+              "type": "MARK",
+              "quality": "NEUTRAL",
+              "feedback": "Kayıt hiç alınmamış; artık geri getirilemez. Burada harcanan zaman kayıptır."
+            }
+          ],
+          "feedback": {
+            "text": "Nöbetçi eczanenin kubbe kamerası merdivenin üst başına bakıyor. Tutanakta tek satır: “Kayıt alınamadı.” Kimse ikinci kez sormamış. On beş gün sonra kayıt kendiliğinden silinmiş.",
+            "short": "Kayıt yok"
+          }
+        },
+        {
+          "id": "ob_kedi",
+          "name": "Kedi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 300, "w": 40, "h": 30 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Islak bir kedi, flaşa gözlerini kırpmış. Tophane’nin tek tarafsız tanığı. Ne yazık ki ifade vermiyor.",
+            "short": "Kedi"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_ev",
+      "title": "Kılınçların evi · Yıldırım",
+      "description": "Barış’ın annesiyle yaşadığı iki oda bir salon.",
+      "width": 344,
+      "height": 380,
+      "image": "img_ev",
+      "objects": [
+        {
+          "id": "ob_ilac",
+          "name": "Komodin",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 250, "w": 56, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ates" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Komodinde yarım kutu ateş düşürücü ve katlanmış bir e-reçete çıktısı: 18 Ocak, 17.40, aile hekimi. “Ateş 39,1.” Hasta bir çocuk. Bu bir mazeret değil; ama bir başlangıç.",
+            "short": "E-reçete: ateş 39,1"
+          }
+        },
+        {
+          "id": "ob_balkon",
+          "name": "Balkon kapısı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 230, "y": 40, "w": 90, "h": 110 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_balkon" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Balkon dar, bir sandalye sığıyor. Başımı kaldırınca üst kattaki balkon demirinde erimiş mum damlaları gördüm. Biri orada, karanlıkta, mum yakmış.",
+            "short": "Üst katta mum izi"
+          }
+        },
+        {
+          "id": "ob_aile",
+          "name": "Vitrin fotoğrafı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 130, "y": 90, "w": 60, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_aile_foto" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }
+          ],
+          "feedback": {
+            "text": "Vitrinde çerçeveli bir fotoğraf: iki oğlan, eski bir motorun üstünde, on bir on iki yaşlarında. Aynı çene, aynı kaş, aynı dişlek gülüş.",
+            "short": "İki çocuk, bir motor"
+          }
+        },
+        {
+          "id": "ob_vesikalik",
+          "name": "Ayna kenarı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 120, "w": 40, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_vesikalik" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Aynanın kenarına sıkıştırılmış bir vesikalık: kasım tarihli, kurye kartı yenilemesi. Uzun saç, sakal, yorgun gözler. Dosyadaki kazınmış saçlı gençle aynı kişi olduğunu bilmesem tanımazdım.",
+            "short": "Yeni vesikalık"
+          }
+        },
+        {
+          "id": "ob_saat",
+          "name": "Duvar saati",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 20, "w": 40, "h": 40 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Duvar saati beş dakika ileri. Sevim Hanım: “Hep ileri tutarım, geç kalmayalım diye.” Bu ev saatlere güvenmiyor.",
+            "short": "İleri saat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_acil",
+      "title": "Devlet Hastanesi · acil servis koridoru",
+      "description": "Kamuya açık bekleme koridoru; yeşil alan girişi.",
+      "width": 344,
+      "height": 380,
+      "image": "img_acil",
+      "objects": [
+        {
+          "id": "ob_triyaj",
+          "name": "Triyaj panosu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 40, "w": 110, "h": 70 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_triyaj" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Duvardaki triyaj panosu her gece silinir; ama görevli kâtip eski çıktıları bir klasörde tutuyor. 19 Ocak: “N. A., yeşil alan, geliş 00.21, el yaralanması, adli vaka.”",
+            "short": "Geliş 00.21"
+          }
+        },
+        {
+          "id": "ob_cizelge",
+          "name": "Hemşire masası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 200, "y": 170, "w": 80, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_gamze" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Hemşire masasının arkasında ocak nöbet çizelgesi asılı. 18/19 Ocak gecesi yeşil alan sorumlu hemşiresi: G. Ateş. Gözlem formlarını sorumlu hemşire doldurur.",
+            "short": "Sorumlu: G. Ateş"
+          }
+        },
+        {
+          "id": "ob_kamera",
+          "name": "Koridor kamerası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 290, "y": 20, "w": 40, "h": 36 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Tavanda bir kamera ve altında bir levha: “Görüntüler 30 gün saklanır.” Olay üç ay önceydi. Kamera o geceyi gördü ve unuttu.",
+            "short": "30 gün"
+          }
+        },
+        {
+          "id": "ob_bank",
+          "name": "Bekleme bankı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 30, "y": 290, "w": 140, "h": 50 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Plastik bekleme bankı. Birinin bıraktığı yarım simit, birinin unuttuğu tespih. Burada bekleyenlerin hepsi bir şeyi kaybetmiş.",
+            "short": "Bank"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_kebap",
+      "title": "Tophane Kebap Salonu · arka kapı",
+      "description": "Kuryelerin sipariş aldığı arka kapı ve bekleme köşesi.",
+      "width": 344,
+      "height": 380,
+      "image": "img_kebap",
+      "objects": [
+        {
+          "id": "ob_fis",
+          "name": "Sipariş fişleri",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 60, "y": 200, "w": 60, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_siparis" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Kasanın yanında ocak ayına ait fiş koçanı. 18 Ocak 23.31: “Kurye: Barış K.” Fişin arkasında kasiyerin tükenmez kalemle düştüğü not: “bereli, acele.”",
+            "short": "Fiş 23.31 · “bereli”"
+          }
+        },
+        {
+          "id": "ob_tezgah",
+          "name": "Izgara tezgâhı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 120, "w": 120, "h": 70 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_cemal" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Cemal Usta şişleri çevirirken başını kaldırmadan konuştu: “O geceyi hatırlarım, yağmurdan. Kurye geç geldi, bereliydi. Kulağında halka vardı; ışıkta parladı. Adını bilmem. Kuryenin adı olmaz.”",
+            "short": "Cemal Usta: “halka”"
+          }
+        },
+        {
+          "id": "ob_pano",
+          "name": "Kuryelerin panosu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 270, "y": 220, "w": 60, "h": 90 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_bahis" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Mantar panoda maç fikstürü, kurye telefonları, bir kira ilanı. Bulaşıkçı çocuk yanıma geldi: “Ocakta buraya iki adam geldi abla. Bir kuryenin bahis borcunu sordular. Bereli olanın.” Adını bilmiyor.",
+            "short": "Bahis borcu"
+          }
+        },
+        {
+          "id": "ob_ayna",
+          "name": "Kurye aynası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 60, "w": 60, "h": 90 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Kapının yanındaki boy aynası. Kuryeler oturum açmadan önce burada özçekim yapıyormuş. Aynada yalnızca ben varım ve yağmur.",
+            "short": "Boş ayna"
+          }
+        },
+        {
+          "id": "ob_kamera2",
+          "name": "Arka kapı kamerası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 290, "y": 20, "w": 40, "h": 36 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Arka kapı kamerası. Cemal Usta omuz silkiyor: “Yirmi gün tutar, üstüne yazar.” O gece çoktan üstüne yazılmış.",
+            "short": "Kayıt yok"
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "id": "img_merdiven", "kind": "IMAGE", "path": "assets/scenes/sirmakes-merdiven@4x.png" },
+    { "id": "img_ev", "kind": "IMAGE", "path": "assets/scenes/kilinc-evi@4x.png" },
+    { "id": "img_acil", "kind": "IMAGE", "path": "assets/scenes/acil-koridor@4x.png" },
+    { "id": "img_kebap", "kind": "IMAGE", "path": "assets/scenes/kebap-arka-kapi@4x.png" }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_cam", "source": { "type": "OBJECT", "id": "ob_cam" } },
+    { "evidence": "clue_aski", "source": { "type": "OBJECT", "id": "ob_aski" } },
+    { "evidence": "clue_motor", "source": { "type": "OBJECT", "id": "ob_motor" } },
+    { "evidence": "clue_ates", "source": { "type": "OBJECT", "id": "ob_ilac" } },
+    { "evidence": "clue_balkon", "source": { "type": "OBJECT", "id": "ob_balkon" } },
+    { "evidence": "clue_aile_foto", "source": { "type": "OBJECT", "id": "ob_aile" } },
+    { "evidence": "clue_vesikalik", "source": { "type": "OBJECT", "id": "ob_vesikalik" } },
+    { "evidence": "clue_triyaj", "source": { "type": "OBJECT", "id": "ob_triyaj" } },
+    { "evidence": "clue_gamze", "source": { "type": "OBJECT", "id": "ob_cizelge" } },
+    { "evidence": "clue_siparis", "source": { "type": "OBJECT", "id": "ob_fis" } },
+    { "evidence": "clue_cemal", "source": { "type": "OBJECT", "id": "ob_tezgah" } },
+    { "evidence": "clue_bahis", "source": { "type": "OBJECT", "id": "ob_pano" } }
+  ]
+}

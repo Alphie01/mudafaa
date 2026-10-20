@@ -247,6 +247,8 @@ orhan: Sayın Başkan, HızlıPaket kaydı açıktır. Sanığın hesabı 23.41�
 orhan: Sanık “evdeydim” diyor. Kayıt “oradaydı” diyor. Kâğıt yalan söylemez.
 rahmi: Müdafi, kayıtlara ve rapora diyeceğiniz? CMK 215.
 ~ Kâğıt yalan söylemez. Doğru. Ama kâğıdı okuyan, istediği satırda durabilir.
+> Elif Karaca dökümün kendi nüshasını çevirdi. Kırmızı çizgiyi geçti, bir önceki sayfaya döndü, bir satırda durdu. Kalemiyle bir şeyin altını çizdi. Ne olduğunu göremedim.
+~ Üye hâkim okuyor. Savcının durduğu yerde durmuyor. Bu bir umut değil; bir fırsat.
 `),
       ],
       choices: [
@@ -803,6 +805,8 @@ kadir: Duydum. Gördüm demedim. Ses… ses benzer mi bilmem Sayın Savcı. Ben 
 - Sayın Başkan, tanık saati bilmiyor; bilmediğini de söylüyor. Saati UEDAŞ kaydı söylüyor: elektrik 23.36’da gitti, 23.51’de geldi.
 - Tanık bu on beş dakikanın içinde sanıkla balkonda konuştu. Bir tanığın hafızası ile bir şirketin kaydı aynı on beş dakikayı gösteriyor.
 > Savcı itiraz etmedi. Kaydın kopyasını istedi, okudu, dosyasına koydu.
+kadir: Ben söyledim avukat hanım. Ölçtüm, biçmedim. Kâğıt da aynı ölçüyü söylüyormuş. Ne güzel.
+> Salonda kısa bir gülüşme. Başkan bu sefer bakmadı; bakmasına gerek yoktu.
 `,
             ),
             O(`

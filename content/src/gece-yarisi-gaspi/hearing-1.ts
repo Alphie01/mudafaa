@@ -322,6 +322,8 @@ rahmi: Müdafi, sorularınız.
 ~ Beş cümle. Hiçbirinde yalan yok. Hepsinde birinin parmak izi var.
 > Savcı sorusunu sordu: “Teşhiste tereddüt ettiniz mi?” Nermin Hanım başını iki yana salladı. Savcı oturdu; işini bitirmişti.
 ~ Leyla’nın mesajı: “Onun ilk sözlerini göster; gerisini o kendisi görecek.” Önce dinleyeceğim. Sonra bastıracağım. Kâğıtları en son açacağım.
+> Nermin Hanım kürsüde ellerini birleştirdi. Sol avucundaki iz, ince beyaz bir çizgi, florasanın altında parladı. Bir an ona baktı; sonra elini çevirip gizledi.
+~ Her tanığın kürsüde sakladığı bir şey vardır. Bu kadının sakladığı tek şey bir yara izi. Ve bir şüphe; henüz kendisinin bile bilmediği.
 `),
       statements: [
         statement('N1', 1, [

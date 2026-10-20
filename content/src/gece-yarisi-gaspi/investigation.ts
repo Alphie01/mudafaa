@@ -1520,6 +1520,7 @@ tolga: Gidemiyorum abla. İş… gündüz izin yok. Bir de… cezaevine girince 
 > Beresinin ucunu çekiştirdi. Gözleri bir an benim gözlerimle buluştu, sonra merdivene kaydı.
 tolga: O kimseye bir şey yapmaz abla. Biz beraber büyüdük. Benden daha iyi bir çocuktur o. Her şeyden.
 ~ Bir kuzen, bir zarf ve bir cümle: “Benden daha iyi.” İnsanlar neden kendilerini birileriyle kıyaslar, gece yarısı, bir avukatın kapısında?
+> Merdiven boşluğunun lambası söndü; otomatik. Karanlıkta yalnızca onun montunun yakasındaki yansıtıcı şerit parladı. Biri düğmeye bastı, lamba yeniden yandı. Tolga hâlâ oradaydı, aynı yerde, aynı duruşla.
 `),
   choices: [
     option('ZARF_AL', 'Zarfı al, makbuz ver', {
@@ -1601,7 +1602,7 @@ const gece = [
       O(`~ Leyla’nın sorusu aklımda: kime inanıyorum? Kâğıtlara. Ve kâğıtların arasındaki boşluklara.`),
     ],
   }),
-  decisionNode('INV_GECE_6', [{ to: 'INV_GECE' }], {
+  decisionNode('INV_GECE_6', [{ to: 'INV_GECE_7' }], {
     lines: [
       W(flag('gamze_tanik'), `~ Bir hemşire, perdenin aralığından baktı ve yazdı. Mahkemede de bakacak.`),
       W(
@@ -1609,10 +1610,30 @@ const gece = [
         `~ Bir terzi, gözleri bulanık bir terzi, ölçtüğünü söyleyecek. Savcı gözlerini soracak. Terzi “ses” diyecek. Bu yetmeli.`,
       ),
       W(flag('kadir_tanik'), `~ Bir terzi, mahkemeleri sevmeyen bir terzi, yarın değil ama yakında, ölçtüğünü söyleyecek.`),
-      O(`~ Tanık listem kısa. Kısa listeler bazen dürüst listelerdir; bazen de eksik.`),
+      O(`~ Tanık listem kısa. Kısa listeler bazen dürüst listelerdir; bazen de eksik.
+`),
     ],
   }),
 ];
+
+const gece7 = decisionNode('INV_GECE_7', [{ to: 'INV_GECE' }], {
+  lines: [
+    W(
+      flag('derya_not'),
+      `
+> Telefon çaldı. Derya. Salonu kapatmış, sesinde makas ve sigara.
+derya: Barış notu almış mı canım? Annem soruyor. Bir de… yarın ben de geleceğim. Annemi tek bırakmam.
+- Aldı. Cebine koydu.
+derya: Cebine koymuştur. Küçükken de öyleydi; sevdiği her şeyi cebine koyardı. Taş, bilye, bir kere bir kurbağa.
+> Güldü; kısa, yorgun. Sonra kapattı. “Bir şey daha” demedi bu sefer. Ama dememesi de bir şeydi.
+`,
+    ),
+    O(`
+> Telefon çaldı. Derya. Yarın annesiyle geleceğini söyledi; başka bir şey söylemedi. Kapatmadan önce bir an sustu, sonra “İyi geceler canım” dedi.
+~ “Bir şey daha… yok.” O cümlenin devamı hâlâ bir yerlerde, Derya’nın ağzında duruyor.
+`),
+  ],
+});
 
 const geceSon = story('INV_GECE', {
   ...INV,
@@ -1677,6 +1698,7 @@ export const investigation: CasePart = {
     cikarim,
     leyla,
     ...gece,
+    gece7,
     geceSon,
   ],
   triggers: [

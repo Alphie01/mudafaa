@@ -5,8 +5,8 @@ import { O, W } from './dsl.js';
 // 70-outcomes: sonuçlar (öncelik sırasıyla) ve sonuca bağlı epiloglar. Eşikler meta’daki eşik çubuğuyla aynı.
 
 export const T_INDIRIM = 3000;
-export const T_BERAAT = 7000;
-export const T_BERAAT_B = 8000;
+export const T_BERAAT = 9000;
+export const T_BERAAT_B = 10000;
 
 const tutukluluk =
   'tutukluluk hâlinin devamına (ikinci celseden önce adli kontrolle tahliye edilmişse, hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101)';
@@ -178,6 +178,8 @@ rahmi: Türk Milleti adına…
 > Nermin Hanım kızıyla çıkışa yürüdü. Yanımdan geçerken durdu. Bana bakmadı; konuştu.
 nermin: Saatimi kim aldı o zaman evladım?
 > Cevabını biliyordum. Kanıtlayamamıştım. Bu ikisi aynı şey değil.
+> Kızı annesini kolundan çekti. Nermin Hanım yürüdü; merdivenin başında durdu, aşağı baktı. Adliyenin merdivenleri de taştı, ıslaktı. Basamakları saymadı. Biliyordum; çünkü ben saydım: yirmi iki.
+~ Bir kadın bir yüzü geri verdi. Karşılığında hiçbir şey almadı; saatini de, gerçeği de. Bu beraat onun değil.
 `),
         W(
           flag('tolga_kacti'),

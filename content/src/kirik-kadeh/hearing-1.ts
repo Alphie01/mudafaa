@@ -337,7 +337,7 @@ export const hearing1: CasePart = {
       ],
       next: 'H1_03R',
       options: [
-        option('H103_A', 'İtiraz: soru olayla değil sanığın geçmişiyle ilgili; kişiliği hedef alıyor', {
+        option('H103_A', 'İtiraz: soru olayla ilgisiz, sanığın geçmişini hedef alıyor', {
           score: { USUL_BILGISI: 100 },
           effects: [raise('boks_itiraz'), inc('legal_hits'), inc('pers')],
           good: 'Yerinde: soruların kabul edilebilirliğine mahkeme karar verir (CMK 201/2). Yirmi beş yıl önceki amatör spor geçmişi, olay anındaki saldırının kimden geldiğini göstermez; sanığı “tehlikeli kişi” diye etiketlemeye yöneliktir.',
@@ -347,14 +347,15 @@ export const hearing1: CasePart = {
           effects: [ifThen(flag('fact_oranti'), [inc('pers'), score('SAVUNMA_STRATEJISI', 40)])],
           good: 'Riskli ama savunulabilir: orantıyı bilen bir elin tek darbesi. Yine de soru ilgisizdi; itiraz daha temiz olurdu (CMK 201/2).',
         }),
-        option('H103_C', 'İtiraz: katılan vekili tanığa telkinde bulunuyor', {
+        option('H103_C', 'İtiraz: soru yönlendirici, cevabı kendi içinde veriyor', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Yanlış gerekçe: soru sanığa soruldu ve telkin değil, olayla ilgisiz bir karakter sorusuydu. Doğru dayanak, sorunun ilgisizliğidir (CMK 201/2).',
         }),
-        option('H103_D', 'Diyeceğimiz yok', {
+        option('H103_D', 'Etiketi büyütmeyelim; itiraz etmiyoruz', {
           effects: [dec('pers')],
-          neutral: 'Soru cevapsız ve itirazsız kaldı; “eski boksör” etiketi tutanağa girdi.',
+          neutral:
+            'Soru itirazsız kaldı; susmak etiketi küçültmedi, “eski boksör” etiketi tutanağa girdi (CMK 201/2 itiraz yolu açıktı).',
         }),
       ],
     }),

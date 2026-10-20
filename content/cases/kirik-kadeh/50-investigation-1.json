@@ -66,6 +66,15 @@
       "background": "sokak_gece",
       "lines": [
         {
+          "when": { "all": [{ "cmp": [{ "var": "ap" }, "<=", 0] }, { "cmp": [{ "var": "day" }, "<", 3] }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Akşam oldu. Defteri kapattım; Setbaşı’nda sokak lambaları birer birer yandı."
+            }
+          ]
+        },
+        {
           "when": { "cmp": [{ "var": "day" }, "==", 1] },
           "lines": [
             { "speaker": "narrator", "text": "GÜN 1/3 · BİRİNCİ CELSEYE 10 GÜN", "style": "card", "bg": "sokak_gece" },
@@ -1316,7 +1325,7 @@
                     { "speaker": "bora", "text": "Kızlara laf atar. Bir kere uyardım. O gece ikinci kezdi." },
                     {
                       "speaker": "bora",
-                      "text": "Gözlüklüyle gelir hep. Gözlüklü hesabı öder, o konuşur. Patronu mu, arkadaşı mı, bilmem. Gözlüklü hiç içmez fazla."
+                      "text": "Gözlüklü biriyle gelir hep. Hesabı o öder, Serkan konuşur. Gözlüklü hiç içmez fazla; kim olduğunu bilmem."
                     },
                     {
                       "speaker": "player",
@@ -1683,7 +1692,7 @@
         {
           "id": "BORA2_DURUST",
           "kind": "OPTION",
-          "label": "“Hayır. Sorulursa doğrusunu söyleriz: priz, ruhsat saati. Bedeli bir idari ceza.”",
+          "label": "“Hayır. Sorulursa doğrusunu söyleriz; bedeli idari ceza.”",
           "responses": [
             {
               "lines": [
@@ -1713,7 +1722,7 @@
         {
           "id": "BORA2_YALAN",
           "kind": "OPTION",
-          "label": "“Tamam. Bozuktu deriz, kimse kontrol etmez.”",
+          "label": "“Tamam. Bozuktu deriz; ruhsat işi açılmaz, kimse cihaza bakmaz.”",
           "responses": [
             {
               "lines": [
@@ -2208,7 +2217,7 @@
                     },
                     {
                       "speaker": "ece",
-                      "text": "Mahkemeye çıkarsam adım yazılır. Bar yazılır. Babam duyar. Duyarsa okul biter, ben biterim."
+                      "text": "Mahkemeye çıkarsam adım yazılır: Ece Tan, garson. Bar yazılır. Babam duyar. Duyarsa okul biter, ben biterim."
                     }
                   ]
                 }
@@ -2230,7 +2239,10 @@
                       "expression": "kizgin",
                       "text": "Siz ne bilirsiniz? Babanız size hiç “eve dön” dedi mi? Bir telefonla?"
                     },
-                    { "speaker": "ece", "text": "Sigortam yok. Babam yok. Mahkemeye çıkarsam ikisi birden yok." }
+                    {
+                      "speaker": "ece",
+                      "text": "Ece Tan diye bir garson hiçbir kayıtta yok. Sigortam yok. Mahkemeye çıkarsam babam da yok."
+                    }
                   ]
                 }
               ],
@@ -2268,6 +2280,10 @@
                       "text": "Abi bir kere vurdu. Adam düştü. Sonra… sonra ben mutfak kapısına koştum. Gerisini tam görmedim."
                     },
                     {
+                      "speaker": "ece",
+                      "text": "Arka kapıda tokam düştü. Eğilip almadım bile. Bir tokayı almaya dönsem, dönmezdim belki."
+                    },
+                    {
                       "speaker": "player",
                       "text": "“Gerisini tam görmedim.” İyi. Görmediğini söylemesi, gördüğünü söylemesinden daha değerli.",
                       "style": "thought"
@@ -2292,7 +2308,10 @@
                       "expression": "kizgin",
                       "text": "O kırdı! Serkan. Bora abi değil. Kırık tarafıyla abiye saldırdı."
                     },
-                    { "speaker": "ece", "text": "Yerde ne oldu bilmiyorum, kaçıyordum. Tamam mı? Bilmiyorum." }
+                    {
+                      "speaker": "ece",
+                      "text": "Yerde ne oldu bilmiyorum, kaçıyordum. Tokamı bile arka kapıda bıraktım. Tamam mı? Bilmiyorum."
+                    }
                   ]
                 }
               ],

@@ -578,7 +578,7 @@
         {
           "id": "H103_A",
           "kind": "OPTION",
-          "label": "İtiraz: soru olayla değil sanığın geçmişiyle ilgili; kişiliği hedef alıyor",
+          "label": "İtiraz: soru olayla ilgisiz, sanığın geçmişini hedef alıyor",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },
             { "type": "VAR", "var": "boks_itiraz", "op": "set", "value": true },
@@ -617,7 +617,7 @@
         {
           "id": "H103_C",
           "kind": "OPTION",
-          "label": "İtiraz: katılan vekili tanığa telkinde bulunuyor",
+          "label": "İtiraz: soru yönlendirici, cevabı kendi içinde veriyor",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
             { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
@@ -632,11 +632,11 @@
         {
           "id": "H103_D",
           "kind": "OPTION",
-          "label": "Diyeceğimiz yok",
+          "label": "Etiketi büyütmeyelim; itiraz etmiyoruz",
           "effects": [{ "type": "VAR", "var": "pers", "op": "dec", "value": 1 }],
           "quality": {
             "q": "NEUTRAL",
-            "feedback": "Soru cevapsız ve itirazsız kaldı; “eski boksör” etiketi tutanağa girdi."
+            "feedback": "Soru itirazsız kaldı; susmak etiketi küçültmedi, “eski boksör” etiketi tutanağa girdi (CMK 201/2 itiraz yolu açıktı)."
           },
           "next": "H1_03R"
         }

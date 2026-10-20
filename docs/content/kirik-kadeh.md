@@ -51,16 +51,19 @@ GO_H1 → INV_GECE_1..4 (koşullu hafıza zinciri) → INV_GECE
 H1_00G → H1_00G2 → H1_00K koridor → H1_00 açılış → H1_01 iddianame → H1_02 Bora'nın savunması (A–D) → H1_02R
   → H1_03 boksörlük sorusu (itiraz) → H1_03R → H1_03S savcının sorusu → H1_04V → H1_04 katılanın beyanı (K1–K5)
   → H1_04R → H1_MOLA → H1_05 delil talepleri (2 hak) → H1_ARA1..3 ara karar → H1_ARA erteleme
-ARA_GIRIS_1..3 (gelen zarflar; koşullu teslim) → ARA_GIRIS → ARA_HUB (2 gün × 4 EP; yığınsız, doğrudan dönüş)
-  KİŞİLER: ARA_ECE · ARA_SINAN · ARA_DEFNE (masa 7 ipucuyla açılır) · ARA_BORA
-  ARŞİV: ARA_ATK · ARA_KRIM (Kriminal rapor geldiyse) · ARA_ECZ (eczane kaydı geldiyse) · ARA_DIL (2 hak) · ARA_CIKARIM · ARA_LEYLA1–2
+ARA_GIRIS_1..3 (gelen zarflar; kartlar ancak okununca) → ARA_SERKAN (katılan kapıda; vekili olmadan konuşulmaz) → ARA_GIRIS
+  → ARA_HUB (2 gün × 4 EP; yığınsız, doğrudan dönüş)
+  KİŞİLER: ARA_ECE · ARA_SINAN (4 soru) · ARA_DEFNE (masa 7 ipucuyla açılır) · ARA_BORA
+  ARŞİV: ARA_ATK (ev_atk okununca) · ARA_KRIM (zarf geldiyse; ev_kriminal okununca) · ARA_ECZ (zarf geldiyse; ev_eczane
+         okununca) · ARA_DIL (2 hak) · ARA_CIKARIM (BİLEK tarifi) · ARA_LEYLA1–2
   Gün sonu: tg_ara_day → ARA_DAY_END (Onur kapıda; etik sınır) → ARA_SABAH2* (asansörde savcı) → ARA_HUB
 GO_T → ARA_SON_1..3 → ARA_SON
 T_00G (video/Kriminal teslimi) → T_00G2 → T_00 → T_01 özel rapor (itiraz) → T_02V → T_02 Onur (O1–O5; kırılma seçeneği)
-  ⇢ T_02H kırılma → T_02S salon → T_03D: Ece çağrıldıysa T_03 → T_03O (Tolga'nın sorusu; itiraz) → T_03Y
+  ⇢ T_02H kırılma → T_02HB yerdeki an (bilek kurulduysa “ayağı bileğindeydi”, değilse “görmedim”) → T_02S salon → T_03D: Ece çağrıldıysa T_03 → T_03O (Tolga'nın sorusu; itiraz) → T_03Y
      → T_03C (yönlendirilmiş tanık çöker: ETIK) | T_03K (yönlendirme düzeltilmiş) | T_03B (baskı) | T_03E (temiz anlatım)
   | T_03X boş sandalye → T_04D → T_04V video → T_04SD → T_04S memur → T_04K kamera → T_04 tutanak (itiraz)
-  → T_05P ara → T_05D → T_05A (savcı 223/2-d ister) | T_05B (tahrik, silah düşer) | T_05C (mahkûmiyet) → T_05R cevap
+  → T_05P ara → T_05D → T_05A1..3 + T_05A (savcı 223/2-d ister; yalnızca dinlenen tanıkları ve dosyadaki raporları sayar)
+     | T_05B (tahrik, silah düşer; tanık kırıldıysa “yerdeki an aydınlanmadı”) | T_05C (mahkûmiyet) → T_05R cevap
   → T_06P dayanaklar (3 hak) → T_06 esas savunma → T_06R → T_07P → T_07 son söz → T_08 → R_KARAR (+ epilog)
 tg_cokus (cred 0) → T_COKUS → T_08
 ```
@@ -91,8 +94,10 @@ tg_cokus (cred 0) → T_COKUS → T_08
 - **Tahta:** soruşturmada 8 tarif (TANIDIK, KADEH, SAVUNMA, GÖRÜŞ, YUMRUK, SALDIRGAN, KAMERA, VIDEO), ara tahtasında aynıları +
   BİLEK (9). Çeldiriciler: boks fotoğrafı, taksi defteri, masa 4 fotoğrafı, deplasmansız kırık, arka sokak, önlük, eczane
   kamerası, "tekme" (bilek bulunana dek). Yanlış çift −50 (ONCE_PER_PARAMS), `wrong_pair` raporda okunur.
-- **Gecikmeli teslimler:** ev_kriminal — `req_kriminal ∨ h1_kriminal` (ARA_GIRIS_1) ya da `ara_kriminal` (T_00G); ev_eczane —
-  `req_eczane ∨ h1_eczane` (ARA_GIRIS_1); ev_video — `defne_video` (T_00G); ev_atk koşulsuz (ARA_GIRIS_1).
+- **Gecikmeli teslimler:** zarflar ARA_GIRIS'te gelir ama delil kartı ancak belge okununca (1 EP) deftere girer:
+  ev_atk — ARA_ATK'ye girişte (koşulsuz zarf); ev_kriminal — `req_kriminal ∨ h1_kriminal` ise ARA_KRIM'e girişte, ya da
+  `ara_kriminal` ile T_00G'de; ev_eczane — `req_eczane ∨ h1_eczane` ise ARA_ECZ'ye girişte; ev_video — `defne_video` (T_00G).
+  Okunmayan rapor kürsüye taşınamaz.
 
 ## 5. Çelişkiler (çapraz sorgu)
 
@@ -116,8 +121,10 @@ tg_cokus (cred 0) → T_COKUS → T_08
 | O4 "yerde tekmeledi" | press ∨ ded_bilek ∨ atk_govde | ded_bilek → contra_o4 | ev_atk (+120) | — |
 | O5 "elini hiç kaldırmadı" | press ∨ ded_savunma ∨ ev_video | ded_savunma, ev_video, ev_darp → contra_o5 | — | — |
 
-- **Kırılma (T02_SON → T_02H):** `contra_o*` en az 3, ya da `onur_vicdan` (ARAG_DOGRU) ile en az 2. Onur çalışanı olduğunu,
-  kollukta yalan söylediğini, yerde tekme görmediğini söyler (`onur_kirildi`, +150, ikna +2).
+- **Kırılma (T02_SON → T_02H):** ara döneminden bir dayanak (`atk_govde ∨ krim_avuc ∨ ara_sinan ∨ ded_bilek ∨ onur_vicdan`)
+  **ve** `contra_o*` en az 3, ya da `onur_vicdan` ile en az 2. Onur çalışanı olduğunu, kollukta yalan söylediğini söyler
+  (`onur_kirildi`, +150, ikna +2). Yerdeki an T_02HB'de: bilek tahtada kurulduysa "ayağı bileğindeydi", değilse "görmedim;
+  kolon vardı" (tanık zemini göremezdi; an aydınlanmaz).
 - Savcılık belgeleri her iki tanığa karşı cezalı kural (−150, güvenilirlik −1, en çok 3 kez); yanlış delil FALLBACK aynı bedel.
 
 ## 6. Ters köşeler ve tohumlar
@@ -133,18 +140,33 @@ tg_cokus (cred 0) → T_COKUS → T_08
 
 ## 7. Sonuçlar
 
+Sonucu esas savunma düğmesi değil, kayıttaki delil belirler (CMK 217/1, 225/2). Yüklemler (`meta.ts`):
+
+- `saldiri_kanit` — (ded_kadeh_serkan ∨ ev_kriminal ∨ ev_video) ∧ (ded_savunma ∨ ev_video)
+- `tekme_yok` — contra_o4 ∨ onur_kirildi · `tanik_coktu` — contra_o1 ∨ contra_o2 ∨ contra_k2
+- `bagimsiz_anlatim` — video_izlendi ∨ ece_tanikti ∨ onur_kirildi · `bilek_kanit` — ded_bilek (ara tahtası)
+- `mm_tam` — saldiri_kanit ∧ tekme_yok ∧ tanik_coktu ∧ bagimsiz_anlatim ∧ bilek_kanit
+- `ara_gelisme` — atk_govde ∨ krim_avuc ∨ ecz_birlikte ∨ ara_sinan ∨ ded_bilek ∨ onur_vicdan ∨ video_izlendi
+- `tanik_guvenilmez` — onur_kirildi ∨ en az üç contra_o* · `kadeh_curudu` — contra_k3 ∨ contra_k4 ∨ contra_o3 ∨ saldiri_kanit
+- `tahrik_kanit` — ece_tanikti ∨ saldiri_kanit ∨ (contra_k5 ∧ contra_o5) · `findings` — en az dört contra_k*/contra_o*
+
 | Öncelik | Kimlik | Sınıf | Koşul | Ceza | XP |
 |---|---|---|---|---|---|
-| 0 | ETIK | CONVICTION | `ece_coktu` (Ece yönlendirildi, düzeltilmedi, kürsüde çöktü) | 2 yıl 11 ay + baro bildirimi | 0 |
-| 1 | BERAAT_D | ACQUITTAL (223/2-d) | ¬çöküş ∧ `mm_kabul` ∧ ikna ≥ 7 ∧ final ≥ 9500 | yok | 1,2 |
-| 2 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ (`supheden` ∨ `mm_kabul`) ∧ final ≥ 9500 | yok | 1,0 |
-| 3 | CVYO | OTHER (223/3-c; TCK 27/2) | ¬çöküş ∧ `sinir_kabul` ∧ final ≥ 6000 | ceza verilmesine yer yok | 0,9 |
-| 4 | INDIRIM | REDUCED | ¬çöküş ∧ `terditli` ∧ tahrik_kanit ∧ final ≥ 6000 | 11 ay 20 gün, HAGB | 0,85 |
-| 5 | MAHKUMIYET | CONVICTION (varsayılan) | — (çöküş dahil) | 2 yıl 11 ay | 0,6 (çöküşte 0,3) |
+| 0 | ETIK | CONVICTION | `ece_coktu` ∧ ¬saldiri_kanit ∧ ¬kadeh_curudu ∧ ¬tanik_guvenilmez ∧ ¬video ∧ ¬ev_kriminal (Ece tek bağımsız anlatımdı) | 2 yıl 11 ay + baro bildirimi | 0 |
+| 1 | BERAAT_D | ACQUITTAL (223/2-d) | ¬çöküş ∧ `mm_tam` ∧ final ≥ 9500 (esas savunma talebinden bağımsız) | yok | 1,2 |
+| 2 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ ¬mm_tam ∧ `supheden` ∧ tanik_guvenilmez ∧ ara_gelisme ∧ final ≥ 9500 | yok | 1,0 |
+| 3 | CVYO | OTHER (223/3-c; TCK 27/2) | ¬çöküş ∧ (`sinir_kabul` ∨ (saldiri_kanit ∧ ¬terditli)) ∧ final ≥ 7500 | ceza verilmesine yer yok | 0,9 |
+| 4 | INDIRIM | REDUCED | ¬çöküş ∧ `terditli` ∧ tahrik_kanit ∧ kadeh_curudu ∧ final ≥ 7500 | 11 ay 20 gün, HAGB | 0,85 |
+| 5 | MAHKUMIYET | CONVICTION (varsayılan) | — (çöküş dahil; saldırı gösterilmemişse) | 2 yıl 11 ay | 0,6 (çöküşte 0,3) |
 
-Esas savunma bayrakları (T_06): `mm_kabul` ← T06_MM ∧ mm_tam (saldırı + tekme yok + tanık çöktü + bağımsız anlatım);
-T06_MM yalnız saldırı kanıtıyla `sinir_kabul`; `supheden` ← T06_E ∧ findings (≥ 4 çelişki); `sinir_kabul` ← T06_SINIR ∧
-saldırı kanıtı; `terditli` ← T06_T. Mütalaa üç varyant (T_05A/B/C) delil gücüne göre.
+Değişmezler: `mm_tam` ∧ ¬çöküş ∧ final ≥ 9500 → her talep için BERAAT_D; `saldiri_kanit` ∧ ¬çöküş ∧ final ≥ 7500 → asla
+silah artırımlı mahkûmiyet; savcının 2-d mütalaası (T_05A ⇔ mm_tam) ile BERAAT_E aynı oyunda olamaz. Ece yönlendirilip
+çöktüğünde ETIK dışındaki sonuçlarda gerekçeye "beyan hükme esas alınmadı" satırı ve disiplin soruşturması epilogu eklenir.
+
+Esas savunma (T_06) yalnızca skor ve iknayı belirler: T06_MM ∧ mm_tam +250 (×1,5 MASUMIYET) ve `mm_kabul`; mm_tam yokken
+saldırı kanıtıyla `sinir_kabul` +60; T06_E ∧ findings +200 (×1,2 USUL) ve `supheden`, mm_tam varken yalnız +60 (NÖTR);
+T06_SINIR ∧ saldırı +120 `sinir_kabul`, mm_tam varken +20 (NÖTR); T06_T `terditli` +150 (×0,8 INDIRIM); T06_D (taksir,
+TCK 89) −50, ikna −1. Mütalaa üç varyant (T_05A/B/C) delil gücüne göre.
 
 **Ceza hesabı** (ayrıntı `docs/legal/kirik-kadeh.md` §2): mahkûmiyet 2 yıl → ×1,5 = 3 yıl → +1/6 = 3 yıl 6 ay → −1/6 =
 2 yıl 11 ay; indirim 1 yıl 6 ay → +1/6 = 1 yıl 9 ay → −1/3 (tahrik) = 1 yıl 2 ay → −1/6 = 11 ay 20 gün, HAGB.
@@ -153,7 +175,7 @@ saldırı kanıtı; `terditli` ← T06_T. Mütalaa üç varyant (T_05A/B/C) deli
 
 - Kategoriler: altı sabit kategori; döküm satırları delil (ARASTIRMA+DELIL_ANALIZI), çapraz sorgu (SORGULAMA), itiraz
   (USUL+HUKUKI), savunma (SAVUNMA_STRATEJISI), hatalı delil. Güvenilirlik bonusu `cred × 100`.
-- Eşik çubuğu: Mahkûmiyet 0 · İndirim 6000 · Beraat 9500 (sonuç koşullarıyla aynı). Teorik tavan 12 110 (validator);
+- Eşik çubuğu: Mahkûmiyet 0 · İndirim 7500 · Beraat 9500 (sonuç koşullarıyla aynı). Teorik tavan 12 110 (validator);
   `scaleMax` 11 500 (~%95).
 - Strateji çarpanı: MASUMIYET ×1,5 (T06_MM 250), USUL ×1,2 (T06_E 200), INDIRIM ×0,8 (T06_T 150).
 

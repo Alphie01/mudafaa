@@ -20,7 +20,7 @@ import { p1, p2 } from './shared.js';
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler.
 
 /** Sonuç eşikleri (eşik çubuğunun `from` değerleriyle aynı; THRESHOLD_MISMATCH). */
-export const T_INDIRIM = 6000;
+export const T_INDIRIM = 7500;
 export const T_BERAAT = 9500;
 
 export const meta: CasePart = {
@@ -135,9 +135,46 @@ export const meta: CasePart = {
       when: any(flag('video_izlendi'), flag('ece_tanikti'), flag('onur_kirildi')),
     },
     {
+      id: 'bilek_kanit',
+      label: 'Yerdeki hareketin, cam tutan bileğe bası olduğu tahtada kuruldu (ara dönem)',
+      when: has('ded_bilek'),
+    },
+    {
       id: 'mm_tam',
-      label: 'Meşru müdafaanın bütün şartları duruşmada gösterildi',
-      when: all({ ref: 'saldiri_kanit' }, { ref: 'tekme_yok' }, { ref: 'tanik_coktu' }, { ref: 'bagimsiz_anlatim' }),
+      label: 'Meşru savunmanın bütün şartları duruşmada gösterildi',
+      when: all(
+        { ref: 'saldiri_kanit' },
+        { ref: 'tekme_yok' },
+        { ref: 'tanik_coktu' },
+        { ref: 'bagimsiz_anlatim' },
+        { ref: 'bilek_kanit' },
+      ),
+    },
+    {
+      id: 'ara_gelisme',
+      label: 'Ara dönemde en az bir yeni gelişme kürsüye taşındı',
+      when: any(
+        flag('atk_govde'),
+        flag('krim_avuc'),
+        flag('ecz_birlikte'),
+        flag('ara_sinan'),
+        has('ded_bilek'),
+        flag('onur_vicdan'),
+        flag('video_izlendi'),
+      ),
+    },
+    {
+      id: 'tanik_guvenilmez',
+      label: 'Görgü tanığının anlatımı ikinci celsede çöktü',
+      when: any(
+        flag('onur_kirildi'),
+        atLeast(3, flag('contra_o1'), flag('contra_o2'), flag('contra_o3'), flag('contra_o4'), flag('contra_o5')),
+      ),
+    },
+    {
+      id: 'kadeh_curudu',
+      label: 'Kadehin sanık tarafından kullanıldığı anlatımı çürütüldü',
+      when: any(flag('contra_k3'), flag('contra_k4'), flag('contra_o3'), { ref: 'saldiri_kanit' }),
     },
     {
       id: 'findings',
@@ -159,7 +196,7 @@ export const meta: CasePart = {
     {
       id: 'tahrik_kanit',
       label: 'Müştekinin haksız davranışı gösterildi',
-      when: any(flag('contra_k5'), flag('contra_o5'), flag('ece_tanikti'), flag('contra_k1'), { ref: 'saldiri_kanit' }),
+      when: any(flag('ece_tanikti'), { ref: 'saldiri_kanit' }, all(flag('contra_k5'), flag('contra_o5'))),
     },
   ],
   variables: [

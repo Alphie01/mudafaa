@@ -124,11 +124,11 @@ const aramaSokak = [
   tapCenter(OB_TAKSI),
   choose('ARAMA3_BITIR'),
 ];
-const gun2 = (eceSon: string) => [
+const gun2 = (eceSon: string, board: Action[] = tahta) => [
   darp,
   ifade,
   eceGorusme(eceSon),
-  tahta,
+  board,
   chooseAll('A_LEYLA2', 'LEYLA2_DON'),
   aramaSokak,
   ...chooseAll('AKSAM2_BILDIR', 'SABAH3_DEVAM'),
@@ -175,6 +175,14 @@ const serkanSorgu = [
   choose('H104_BITIR'),
 ];
 const celse1 = [celse1Giris, serkanSorgu, chooseAll('H104R_DEVAM', 'H1MOLA_DEVAM', 'H105_BITIR', 'H1ARA_DEVAM')];
+/** K5'e önkol + kan çıkarımı yerine Bora'nın darp raporu. */
+const celse1Savunmasiz = [
+  celse1Giris,
+  serkanSorgu.map((a) =>
+    JSON.stringify(a) === JSON.stringify(present('ded_savunma', 'K5')) ? present('ev_darp', 'K5') : a,
+  ),
+  chooseAll('H104R_DEVAM', 'H1MOLA_DEVAM', 'H105_BITIR', 'H1ARA_DEVAM'),
+];
 
 const araBelgeler = [
   choose('B_ATK'),
@@ -199,7 +207,7 @@ const araTahta = [choose('B_CIKARIM'), combine('clue_bilek', 'clue_if_tekme'), c
 const araGun1 = [
   ...chooseAll('ARAGIRIS_DEVAM', 'B_LEYLA1', 'ARALEYLA1_DON'),
   araBelgeler,
-  ...chooseAll('B_SINAN', 'ARAS_FOTO', 'ARAS_ONUR', 'ARAS_BITIR', 'ARAG_DOGRU', 'ARASABAH2_DEVAM'),
+  ...chooseAll('B_SINAN', 'ARAS_FOTO', 'ARAS_ONUR', 'ARAS_GECE', 'ARAS_BITIR', 'ARAG_DOGRU', 'ARASABAH2_DEVAM'),
 ];
 const araGun2Tipik = [
   ...chooseAll('B_LEYLA2', 'ARALEYLA2_DON'),
@@ -209,6 +217,21 @@ const araGun2Tipik = [
   ...chooseAll('GO_T', 'ARASON_DEVAM'),
 ];
 
+/** Tipik ara günü 2: tahtaya dönülmez; bilek kartı panoda kalır. */
+const araGun2Bileksiz = [
+  ...chooseAll('B_LEYLA2', 'ARALEYLA2_DON'),
+  ...chooseAll('B_ECE', 'ARAE_KARAR', 'B_BORA', 'ARAB_ECE', 'ARAB_SOZ', 'ARAB_BITIR'),
+  ...chooseAll('B_DEFNE', 'ARAD_INDIR', 'ARAD_DOGRU', 'B_DIL', 'ARADIL_VIDEO', 'ARADIL_SINAN', 'ARADIL_GONDER'),
+  ...chooseAll('GO_T', 'ARASON_DEVAM'),
+];
+/** Mahkûmiyet yolu: video yok (masa 7'ye ulaşılmaz). */
+const araGun2Videosuz = [
+  ...chooseAll('B_LEYLA2', 'ARALEYLA2_DON'),
+  araTahta,
+  ...chooseAll('B_ECE', 'ARAE_KARAR', 'B_BORA', 'ARAB_ECE', 'ARAB_SOZ', 'ARAB_BITIR'),
+  ...chooseAll('B_DIL', 'ARADIL_SINAN', 'ARADIL_GONDER'),
+  ...chooseAll('GO_T', 'ARASON_DEVAM'),
+];
 const celse2Giris = chooseAll('T00G_DEVAM', 'T00_DEVAM', 'T01_A', 'T02V_DEVAM');
 const onurSorgu = [
   press('O1'),
@@ -227,31 +250,60 @@ const onurSorgu = [
   choose('T02S_DEVAM'),
 ];
 const eceKursu = chooseAll('T03_DEVAM', 'T03O_A', 'T03E_DEVAM');
-const dayanaklar = chooseAll('D_SALDIRI', 'D_TEKME', 'D_TANIK', 'T06P_BITIR');
+/** Bilek tahtada kurulmadan: O4'e yalnızca kesin rapor (kısmi), tanık yine kırılır ama yerdeki an aydınlanmaz. */
+const onurSorguBileksiz = [
+  press('O1'),
+  present('ded_tanidik', 'O1'),
+  press('O2'),
+  object('g_kanaat', 'O2'),
+  present('ded_gorus', 'O2'),
+  press('O3'),
+  present('ev_kriminal', 'O3'),
+  press('O4'),
+  present('ev_atk', 'O4'),
+  press('O5'),
+  present('ded_savunma', 'O5'),
+  choose('T02_SON'),
+  choose('T02H_DEVAM'),
+  choose('T02S_DEVAM'),
+];
+const dayanaklarE = chooseAll('D_SALDIRI', 'D_TANIK', 'D_ORANTI', 'T06P_BITIR');
+/** Tahtada önkol + kan birleştirilmeden (saldırı kâğıtla kurulmaz). */
+const tahtaSavunmasiz = [
+  choose('A_CIKARIM'),
+  combine('clue_adisyon', 'clue_if_tanimam'),
+  combine('clue_sap', 'clue_avuc'),
+  combine('clue_kolon', 'clue_if_gordum'),
+  combine('clue_anamnez', 'clue_if_kadeh'),
+  combine('clue_alkol', 'clue_kirilma'),
+  combine('clue_priz', 'clue_ruhsat'),
+  combine('clue_story', 'clue_masa7'),
+  choose('CIKARIM_BITIR'),
+];
 
 export const tests: CasePart = {
   tests: {
     goldenPaths: [
       goldenPath(
         TYPICAL_PATH,
-        { outcome: 'BERAAT_E', finalMin: 11395, finalMax: 12595 },
+        { outcome: 'BERAAT_E', finalMin: 10970, finalMax: 12120 },
         giris('STR_USUL'),
         gun1,
         gun2('ECE_DOGRU'),
         gun3,
         celse1,
         araGun1,
-        araGun2Tipik,
+        araGun2Bileksiz,
         celse2Giris,
-        onurSorgu,
+        onurSorguBileksiz,
         eceKursu,
-        chooseAll('T04V_DEVAM', 'T04S_DEVAM', 'T04K_DEVAM', 'T04_A', 'T05P_DEVAM', 'T05A_DEVAM', 'T05R_A'),
-        dayanaklar,
+        chooseAll('T04V_DEVAM', 'T04S_DEVAM', 'T04K_DEVAM', 'T04_A', 'T05P_DEVAM', 'T05B_DEVAM', 'T05R_A'),
+        dayanaklarE,
         chooseAll('T06_E', 'T06R_DEVAM', 'T07P_DEVAM', 'SS_DOGRU'),
       ),
       goldenPath(
         'G_D',
-        { outcome: 'BERAAT_D', finalMin: 11500, finalMax: 12720 },
+        { outcome: 'BERAAT_D', finalMin: 11535, finalMax: 12745 },
         giris('STR_MASUMIYET'),
         gun1,
         gun2('ECE_DOGRU'),
@@ -268,7 +320,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G_CVYO',
-        { outcome: 'CVYO', finalMin: 10220, finalMax: 11300 },
+        { outcome: 'CVYO', finalMin: 10250, finalMax: 11330 },
         giris('STR_MASUMIYET'),
         gun1,
         gun2('ECE_DOGRU'),
@@ -289,7 +341,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G_I',
-        { outcome: 'INDIRIM', finalMin: 9885, finalMax: 10935 },
+        { outcome: 'INDIRIM', finalMin: 9920, finalMax: 10960 },
         giris('STR_INDIRIM'),
         gun1,
         gun2('ECE_DOGRU'),
@@ -310,26 +362,26 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G_M',
-        { outcome: 'MAHKUMIYET', finalMin: 9310, finalMax: 10300 },
+        { outcome: 'MAHKUMIYET', finalMin: 8785, finalMax: 9705 },
         giris('STR_MASUMIYET'),
         gun1,
-        gun2('ECE_DOGRU'),
+        gun2('ECE_DOGRU', tahtaSavunmasiz),
         gun3,
-        celse1,
+        celse1Savunmasiz,
         araGun1,
-        araGun2Tipik,
+        araGun2Videosuz,
         celse2Giris,
         press('O1'),
         present('ded_tanidik', 'O1'),
         choose('T02_BITIR'),
         eceKursu,
-        chooseAll('T04V_DEVAM', 'T04S_DEVAM', 'T04K_DEVAM', 'T04_D', 'T05P_DEVAM', 'T05B_DEVAM', 'T05R_B'),
+        chooseAll('T04S_DEVAM', 'T04K_DEVAM', 'T04_D', 'T05P_DEVAM', 'T05B_DEVAM', 'T05R_B'),
         chooseAll('D_KARAKTER', 'D_BOKS', 'T06P_BITIR'),
         chooseAll('T06_D', 'T06R_DEVAM', 'T07P_DEVAM', 'SS_INKAR'),
       ),
       goldenPath(
         'W',
-        { outcome: 'MAHKUMIYET', finalMin: 7600, finalMax: 8400 },
+        { outcome: 'MAHKUMIYET', finalMin: 7630, finalMax: 8430 },
         giris('STR_USUL'),
         gun1,
         gun2('ECE_DOGRU'),
@@ -346,7 +398,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G_DUZELT',
-        { outcome: 'BERAAT_E', finalMin: 10175, finalMax: 11255 },
+        { outcome: 'BERAAT_E', finalMin: 9725, finalMax: 10745 },
         giris('STR_USUL'),
         gun1,
         gun2('ECE_YONLENDIR'),
@@ -401,17 +453,16 @@ export const tests: CasePart = {
           'ARASABAH2_DEVAM',
         ),
         chooseAll('B_LEYLA2', 'ARALEYLA2_DON'),
-        araTahta,
         chooseAll('B_SINAN', 'ARAS_FOTO', 'ARAS_BITIR', 'GO_T', 'ARASON_DEVAM'),
         celse2Giris,
-        onurSorgu,
-        chooseAll('T03_DEVAM', 'T03O_A', 'T03K_DEVAM', 'T04K_DEVAM', 'T04_A', 'T05P_DEVAM', 'T05A_DEVAM', 'T05R_A'),
-        dayanaklar,
+        onurSorguBileksiz,
+        chooseAll('T03_DEVAM', 'T03O_A', 'T03K_DEVAM', 'T04K_DEVAM', 'T04_A', 'T05P_DEVAM', 'T05B_DEVAM', 'T05R_A'),
+        dayanaklarE,
         chooseAll('T06_E', 'T06R_DEVAM', 'T07P_DEVAM', 'SS_DOGRU'),
       ),
       goldenPath(
         'G_BILGI',
-        { outcome: 'BERAAT_E', finalMin: 10870, finalMax: 12020 },
+        { outcome: 'BERAAT_E', finalMin: 10445, finalMax: 11545 },
         giris('STR_USUL'),
         gun1,
         gun2('ECE_ZORUNLU'),
@@ -444,7 +495,6 @@ export const tests: CasePart = {
         chooseAll('H104R_DEVAM', 'H1MOLA_DEVAM', 'H105_KESIF', 'H105_BITIR', 'H1ARA_DEVAM'),
         araGun1,
         chooseAll('B_LEYLA2', 'ARALEYLA2_DON'),
-        araTahta,
         chooseAll(
           'B_ECE',
           'ARAE_BILGI',
@@ -456,7 +506,7 @@ export const tests: CasePart = {
           'ARASON_DEVAM',
         ),
         celse2Giris,
-        onurSorgu,
+        onurSorguBileksiz,
         chooseAll(
           'T03_DEVAM',
           'T03O_B',
@@ -465,15 +515,15 @@ export const tests: CasePart = {
           'T04K_DEVAM',
           'T04_A',
           'T05P_DEVAM',
-          'T05A_DEVAM',
+          'T05B_DEVAM',
           'T05R_A',
         ),
-        dayanaklar,
+        dayanaklarE,
         chooseAll('T06_E', 'T06R_DEVAM', 'T07P_DEVAM', 'SS_DOGRU'),
       ),
       goldenPath(
         'G_BASKI',
-        { outcome: 'BERAAT_E', finalMin: 10470, finalMax: 11580 },
+        { outcome: 'BERAAT_E', finalMin: 10045, finalMax: 11105 },
         giris('STR_USUL'),
         gun1,
         gun2('ECE_DOGRU'),
@@ -481,29 +531,59 @@ export const tests: CasePart = {
         celse1,
         araGun1,
         chooseAll('B_LEYLA2', 'ARALEYLA2_DON'),
-        araTahta,
         chooseAll('B_ECE', 'ARAE_BASKI', 'GO_T', 'ARASON_DEVAM'),
         celse2Giris,
-        onurSorgu,
-        chooseAll('T03_DEVAM', 'T03O_C', 'T03B_DEVAM', 'T04K_DEVAM', 'T04_A', 'T05P_DEVAM', 'T05A_DEVAM', 'T05R_A'),
-        dayanaklar,
+        onurSorguBileksiz,
+        chooseAll('T03_DEVAM', 'T03O_C', 'T03B_DEVAM', 'T04K_DEVAM', 'T04_A', 'T05P_DEVAM', 'T05B_DEVAM', 'T05R_A'),
+        dayanaklarE,
         chooseAll('T06_E', 'T06R_DEVAM', 'T07P_DEVAM', 'SS_DOGRU'),
       ),
       goldenPath(
         'G_ETIK',
-        { outcome: 'ETIK', finalMin: 10750, finalMax: 11890 },
+        { outcome: 'ETIK', finalMin: 8190, finalMax: 9050 },
         giris('STR_MASUMIYET'),
         gun1,
-        gun2('ECE_YONLENDIR'),
+        gun2('ECE_YONLENDIR', tahtaSavunmasiz),
         gun3,
-        celse1,
-        araGun1,
+        celse1Giris,
+        [
+          press('K1'),
+          present('ev_hastane', 'K1'),
+          present('ded_tanidik', 'K2'),
+          press('K3'),
+          press('K4'),
+          press('K5'),
+          object('g_kanaat', 'K5'),
+          present('ev_darp', 'K5'),
+          choose('H104_BITIR'),
+        ],
+        chooseAll('H104R_DEVAM', 'H1MOLA_DEVAM', 'H105_BITIR', 'H1ARA_DEVAM'),
+        chooseAll('ARAGIRIS_DEVAM', 'B_LEYLA1', 'ARALEYLA1_DON'),
+        [
+          choose('B_ATK'),
+          examine('mag', 'a_derece'),
+          examine('mag', 'a_bilek'),
+          examine('cmp', 'a_govde'),
+          examine('mag', 'a_tani'),
+          choose('ATK_BITIR'),
+          choose('B_ECZ'),
+          examine('mag', 'e_2210'),
+          examine('mag', 'e_0152'),
+          examine('mag', 'e_0205'),
+          choose('ECZ_BITIR'),
+        ],
+        chooseAll('B_SINAN', 'ARAS_FOTO', 'ARAS_ONUR', 'ARAS_BITIR'),
+        chooseAll('B_BORA', 'ARAB_ECE', 'ARAB_SOZ', 'ARAB_BITIR', 'ARAG_DOGRU', 'ARASABAH2_DEVAM'),
         chooseAll('B_LEYLA2', 'ARALEYLA2_DON'),
         araTahta,
-        chooseAll('B_BORA', 'ARAB_ECE', 'ARAB_SOZ', 'ARAB_BITIR', 'B_DIL', 'ARADIL_SINAN', 'ARADIL_GONDER'),
-        chooseAll('GO_T', 'ARASON_DEVAM'),
+        chooseAll('B_DIL', 'ARADIL_SINAN', 'ARADIL_GONDER', 'GO_T', 'ARASON_DEVAM'),
         celse2Giris,
-        onurSorgu,
+        press('O1'),
+        present('ded_tanidik', 'O1'),
+        press('O2'),
+        object('g_kanaat', 'O2'),
+        present('ded_gorus', 'O2'),
+        choose('T02_BITIR'),
         chooseAll(
           'T03_DEVAM',
           'T03O_A',
@@ -512,11 +592,11 @@ export const tests: CasePart = {
           'T04K_DEVAM',
           'T04_A',
           'T05P_DEVAM',
-          'T05A_DEVAM',
-          'T05R_A',
+          'T05B_DEVAM',
+          'T05R_B',
         ),
-        dayanaklar,
-        chooseAll('T06_MM', 'T06R_DEVAM', 'T07P_DEVAM', 'SS_DOGRU'),
+        chooseAll('D_TANIK', 'D_KAMERA', 'T06P_BITIR'),
+        chooseAll('T06_E', 'T06R_DEVAM', 'T07P_DEVAM', 'SS_DOGRU'),
       ),
     ],
   },

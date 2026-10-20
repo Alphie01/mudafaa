@@ -24,6 +24,7 @@ okunarak karşılaştırıldı (erişim: 2026-10-20). Dikkat çeken güncel değ
 | TCK 86/2 | BR01_D (yanlış seçenek) | basit tıbbi müdahaleyle giderilebilecek yaralama, şikâyete bağlı |
 | TCK 86/3-e | iddianame, BR_01, AKSAM1, MAHKUMIYET | silahla işlenmesi: şikâyet aranmaksızın, ceza yarı oranında artırılır |
 | TCK 87/3 | BR_01, ev_gecici_rapor, T_01, hükümler | kemik kırığı: kırığın hayat fonksiyonlarındaki etkisine göre yarısına kadar artırılır (5560 s. K., 2006) |
+| TCK 89 | T06_D (yanlış esas savunma) | taksirle yaralama; bilerek atılmış tek yumrukta kast vardır, taksir savunması sanığın beyanıyla çelişir |
 | TCK 267 | T01_C | iftira (dayanaksız suçlama uyarısı) |
 | TCK 272, 274 | ARA_DIL, ARAG_DOGRU, ARA_LEYLA2, BERAAT_D | yalan tanıklık; hükümden önce gerçeğin söylenmesi hâlinde cezaya hükmolunmaz |
 | TCK 277 | AKSAM2_GIT, ONUR_TEHDIT, ECE seçenekleri, ARAG_*, ARAS_TUTANAK, ETIK | yargı görevi yapanı, bilirkişiyi veya tanıkları etkileme |
@@ -38,6 +39,7 @@ okunarak karşılaştırıldı (erişim: 2026-10-20). Dikkat çeken güncel değ
 | CMK 216/2, 216/3 | T_05R, ARAB_SOZ | cevap hakkı; son sözün sanığa ait olması |
 | CMK 217/1 | g_kanaat, T04_A | delillerin serbestçe takdiri |
 | CMK 223/2-d, 223/2-e | BERAAT_D, BERAAT_E | hukuka uygunluk nedeninin bulunması; suçun işlendiğinin sabit olmaması |
+| CMK 225/2 | BERAAT_D, CVYO gerekçeleri, T06 geri bildirimleri | mahkeme eylemin nitelendirilmesinde iddianamedeki değerlendirmelerle bağlı değildir (taraf talepleri de mahkemeyi bağlamaz; CMK 217/1 ile birlikte) |
 | CMK 223/3-c | CVYO | meşru savunmada sınırın heyecan, korku ve telaş nedeniyle aşılması: kusur yokluğundan ceza verilmesine yer olmadığı |
 | CMK 231/5, 6, 8, 9, 12 | INDIRIM | iki yıl veya daha az hapiste HAGB; şartlar (kasıtlı suçtan mahkûmiyet yok, kanaat, zararın giderilmesi ya da taksitle giderilmesi); beş yıl denetim; istinaf |
 | CMK 236/1 | H1_04V | mağdur tanık olarak dinlenirken yemin hariç tanıklık hükümleri |
@@ -70,8 +72,11 @@ Tolga Şen'in "şikâyetten vazgeçme" teklifi davayı düşürmez (AKSAM1_RED).
 - **BERAAT_D (CMK 223/2-d):** Meşru savunmanın dört şartı (haksız saldırı, o an, orantı, başka korunma imkânının yokluğu)
   delille gösterildi; fiil hukuka uygundur. Tazminat bildirimi; dosya örneği katılan hakkındaki soruşturmaya ve tanık hakkında
   yalan tanıklık iddiası yönünden savcılığa.
-- **BERAAT_E (CMK 223/2-e):** İddianamenin anlatımı (kadehle yüze vurma, yerde tekme) ispatlanamadı; kabul edilen tek
-  yumruğun haksız bir saldırıya karşı olmadığı da şüpheye yer bırakmayacak biçimde ortaya konamadı.
+- **BERAAT_E (CMK 223/2-e):** İddianamenin anlatımı (kadehle yüze vurma, yerde tekme) tek görgü tanığının çökmesiyle
+  ispatlanamadı; kabul edilen tek yumruk ile katılan düştükten sonraki hareketin hangi koşullarda gerçekleştiği, meşru
+  savunma iddiasını dışlayacak biçimde aydınlatılamadı. Giderilemeyen şüphe (hukuka uygunluk nedeninin olgusal temeline
+  ilişkin şüphe dahil) sanık lehine değerlendirilir; suçun işlendiği sabit değildir. Bu sonuç ancak meşru savunmanın bütün
+  şartları gösterilmediğinde (mm_tam yok) verilir; savcının 2-d mütalaası ile 2-e hükmü aynı oyunda buluşamaz.
 
 ## 4. Usul akışı
 
@@ -88,9 +93,16 @@ hüküm ayakta dinlenir (231/4).
 1. **İki beraat türü: 223/2-b yerine 223/2-d.** Lineup her davada 223/2-b ve 223/2-e ister. Bu davada sanık vurduğunu baştan
    kabul eder; "suçun sanık tarafından işlenmediği" (2-b) hukuken mümkün değildir. Doğru "güçlü" beraat, meşru savunma
    nedeniyle **hukuka uygunluk** beraatidir (2-d). 2-b yerine 2-d kullanıldı; sınıf (ACQUITTAL, XP 1,2) korunmuştur.
-2. **2-d ile 2-e ayrımı.** Uygulamada bazı daireler, meşru savunma koşullarının varlığı şüpheli kaldığında da "şüpheden sanık
-   yararlanır" ilkesiyle 2-d'ye hükmeder. Oyunda ayrım şöyle kuruldu: dört şart **olumlu olarak** gösterilirse 2-d; iddianın
-   anlatımı çöker ama savunma şartları tam kurulamazsa 2-e. Bu, bir öğretim tercihi olarak `BERAAT_E` gerekçesine açıkça yazıldı.
+2. **2-d ile 2-e ayrımı; sonucu delil belirler.** Uygulamada bazı daireler, meşru savunma koşullarının varlığı şüpheli
+   kaldığında da "şüpheden sanık yararlanır" ilkesiyle 2-d'ye hükmeder. Oyunda ayrım şöyle kuruldu: şartlar **olumlu olarak**
+   gösterilirse (saldırı katılandan, tanık çöktü, bağımsız bir anlatım var, yerdeki hareket bileğe bası olarak kuruldu) 2-d;
+   iddianın anlatımı çöker ama yerdeki an aydınlanmazsa 2-e. Sonuç, müdafinin esas hakkındaki talebine değil kayıttaki
+   delile bağlıdır (CMK 217/1, 225/2): şartlar gösterilmişken müdafi şüpheden yararlanmayı, sınırın aşılmasını ya da
+   terditli indirimi istese bile mahkeme 2-d'ye gider; yanlış talep yalnızca skor ve ikna kaybettirir. Saldırının katılandan
+   geldiği gösterilmiş ama şartlar tam değilse silah artırımlı mahkûmiyet verilmez: savunma terditli indirim istemişse
+   İNDİRİM (86/3-e uygulanmaz, TCK 29), aksi hâlde mahkeme sınırın mazur görülebilir biçimde aşıldığını kabul eder (CVYO).
+   Bu, bir öğretim tercihi olarak `BERAAT_E` ve `CVYO` gerekçelerine açıkça yazıldı. Oyunun skor eşiği (ikna) bu kapının
+   üstünde ayrıca işler: 2-d için beraat eşiği (9 500), CVYO/İNDİRİM için 7 500.
 3. **Bileğe basmak.** Elinde cam olan ve yerde onu yeniden kaldıran saldırganın bileğine basıp silahı bıraktırmak, saldırı
    sürdüğü için savunmanın parçası sayıldı; bu an aydınlanmazsa sınırın aşılması (27/2) tartışması açılır (CVYO).
 4. **Kırığın derecesi ve 1/6.** TCK 87/3 "yarısına kadar" der; derece başına oran kanunda yoktur. Uygulamadaki yaygın
@@ -105,7 +117,12 @@ hüküm ayakta dinlenir (231/4).
 7. **Delilin yolu.** Özel kişideki kayıtlar (eczane, Defne'nin videosu) mahkeme kanalıyla ya da gönüllü teslim + bilirkişi
    incelemesiyle dosyaya girer; elden kopya istemek (ECZ_KOPYA) ve "adınız geçmez" sözü (ARAD_GIZLI) kötü hamle olarak
    işaretlendi.
-8. **Yalan tanıklıkta etkin pişmanlık.** Onur'un hükümden önce gerçeği söylemesi TCK 274/1 kapsamında değerlendirilebilir;
+8. **ETIK sonunun kapsamı.** Yönlendirilen tanığın kürsüde çökmesi her durumda mahkûmiyet getirmez. Mahkûmiyet (ETIK),
+   yalnızca Ece olayın başlangıcına dair tek bağımsız anlatım olduğunda verilir: saldırı kâğıtla kurulmamış, kadehin
+   kullanımına ilişkin anlatım çürütülmemiş, görgü tanığı ikinci celsede çökmemiş, video izlenmemiş ve Kriminal rapor
+   dosyada değil. Diğer durumlarda Ece'nin beyanı hükme esas alınmaz, hüküm kalan delile dayanır ve müdafi hakkında baroya
+   bildirim/disiplin soruşturması sonuca bağlı epilogda ayrıca işlenir.
+9. **Yalan tanıklıkta etkin pişmanlık.** Onur'un hükümden önce gerçeği söylemesi TCK 274/1 kapsamında değerlendirilebilir;
    oyunda bu yalnızca Leyla'nın genel açıklamasında ve hükümde "savcılıkça değerlendirilmek üzere" ibaresiyle geçer.
 
 ## 6. Hassas konu denetimi

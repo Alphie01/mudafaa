@@ -1,4 +1,4 @@
-import { all, any, cmp, flag, has, hint, missedEvidence, not, v } from '../../../tools/content/src/kit/index.js';
+import { all, any, cmp, flag, has, hint, missedEvidence, not, ref, v } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 
 // 95-report: dava sonu raporundaki "kaçırdıkların". Metin oyuncuya neyi nerede kaçırdığını ve dayanağını söyler.
@@ -143,6 +143,12 @@ export const report: CasePart = {
         cmp(v('wrong_pair'), '>=', 3),
         'Tahtada çok sayıda yanlış eşleşme denedin: iki kartı birleştirmeden önce “bu ikisi aynı gerçeği mi söylüyor?” diye sor.',
         'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_ara',
+        not(ref('ara_gelisme')),
+        'Ara dönemi kürsüye taşınacak bir gelişme olmadan geçti: gelen raporları okumak, tutanağı yazan memuru dinlemek, masa 7’deki kaydı istemek ya da bileği tahtada kurmak ikinci celsenin dayanağıydı.',
+        'ARASTIRMA',
       ),
       hint(
         'h_supheden',

@@ -55,6 +55,13 @@
               "speaker": "player",
               "text": "Elinde mavi bir dosya. Leyla’nın dediği gibi: bir klinik, bir rapor, bir rakam.",
               "style": "thought"
+            },
+            { "speaker": "bora", "text": "Kız gelmiş. Ben bakmayacağım dedim, baktım. Bir kere. Olur mu?" },
+            { "speaker": "player", "text": "Bir kere olur. İkinci kez bakma." },
+            {
+              "speaker": "player",
+              "text": "Bir kere. Bora’nın bütün hayatı bu iki kelimeye sığıyordu: bir kere vurdu, bir kere baktı, bir kere kaybetti.",
+              "style": "thought"
             }
           ]
         },
@@ -132,7 +139,14 @@
       "background": "durusma_salonu",
       "lines": [
         {
-          "when": { "all": [{ "hasEvidence": "ev_kriminal" }, { "hasEvidence": "ev_eczane" }] },
+          "when": {
+            "all": [
+              {
+                "any": [{ "any": [{ "flag": "req_kriminal" }, { "flag": "h1_kriminal" }] }, { "flag": "ara_kriminal" }]
+              },
+              { "any": [{ "flag": "req_eczane" }, { "flag": "h1_eczane" }] }
+            ]
+          },
           "lines": [
             {
               "speaker": "narrator",
@@ -143,7 +157,7 @@
             { "speaker": "mubasir", "text": "Bora Yalçııın dosyasııı!" },
             {
               "speaker": "hakim",
-              "text": "Ara karar cevapları geldi: Adli Tıp kesin raporu, Kriminal Polis Laboratuvarı raporu, eczane kaydı ve bilirkişi notu. Okundu, taraflara verildi."
+              "text": "Ara karar cevapları geldi: Adli Tıp’ın kesin raporu, Kriminal Polis Laboratuvarı raporu, eczane kaydı ve bilirkişi notu. Okundu, taraflara verildi."
             },
             { "speaker": "savci", "text": "Okuduk Sayın Başkan." },
             {
@@ -153,7 +167,14 @@
           ]
         },
         {
-          "when": { "any": [{ "hasEvidence": "ev_kriminal" }, { "hasEvidence": "ev_eczane" }] },
+          "when": {
+            "any": [
+              {
+                "any": [{ "any": [{ "flag": "req_kriminal" }, { "flag": "h1_kriminal" }] }, { "flag": "ara_kriminal" }]
+              },
+              { "any": [{ "flag": "req_eczane" }, { "flag": "h1_eczane" }] }
+            ]
+          },
           "lines": [
             {
               "speaker": "narrator",
@@ -164,7 +185,7 @@
             { "speaker": "mubasir", "text": "Bora Yalçııın dosyasııı!" },
             {
               "speaker": "hakim",
-              "text": "Ara karar cevapları geldi: Adli Tıp kesin raporu ve istenen diğer kayıt. Okundu, taraflara verildi."
+              "text": "Ara karar cevapları geldi: Adli Tıp’ın kesin raporu ve istenen diğer kayıt. Okundu, taraflara verildi."
             },
             { "speaker": "savci", "text": "Okuduk Sayın Başkan." }
           ]
@@ -178,7 +199,10 @@
               "bg": "durusma_salonu"
             },
             { "speaker": "mubasir", "text": "Bora Yalçııın dosyasııı!" },
-            { "speaker": "hakim", "text": "Ara karar cevabı geldi: Adli Tıp kesin raporu. Okundu, taraflara verildi." },
+            {
+              "speaker": "hakim",
+              "text": "Ara karar cevabı geldi: Adli Tıp’ın kesin raporu. Okundu, taraflara verildi."
+            },
             { "speaker": "savci", "text": "Okuduk Sayın Başkan." }
           ]
         }
@@ -238,7 +262,7 @@
         {
           "id": "T01_A",
           "kind": "OPTION",
-          "label": "Özel rapor uzman görüşüdür; resmî rapor esastır, çelişki varsa Adli Tıp üst kurulu",
+          "label": "Uzman görüşüdür; Adli Tıp raporu esas alınsın",
           "responses": [
             {
               "when": { "hasEvidence": "clue_deplasman" },
@@ -257,7 +281,7 @@
                 },
                 {
                   "speaker": "hakim",
-                  "text": "Özel rapor uzman görüşü olarak dosyada kalır; Adli Tıp kesin raporu esas alınacaktır."
+                  "text": "Özel rapor uzman görüşü olarak dosyada kalır; Adli Tıp’ın kesin raporu esas alınacaktır."
                 },
                 { "speaker": "tolga", "expression": "kizgin", "text": "Tabii Sayın Başkan." },
                 {
@@ -279,7 +303,7 @@
                 },
                 {
                   "speaker": "hakim",
-                  "text": "Özel rapor uzman görüşü olarak dosyada kalır; Adli Tıp kesin raporu esas alınacaktır."
+                  "text": "Özel rapor uzman görüşü olarak dosyada kalır; Adli Tıp’ın kesin raporu esas alınacaktır."
                 },
                 { "speaker": "tolga", "text": "Tabii Sayın Başkan." }
               ]
@@ -301,7 +325,7 @@
         {
           "id": "T01_B",
           "kind": "OPTION",
-          "label": "Özel rapor hukuka aykırı delildir; dosyadan çıkarılsın",
+          "label": "Rapor hukuka aykırı elde edilmiştir; hükme esas alınamaz (CMK 217/2)",
           "responses": [
             {
               "lines": [
@@ -327,7 +351,7 @@
         {
           "id": "T01_C",
           "kind": "OPTION",
-          "label": "Rapor parayla alınmıştır; klinik hakkında suç duyurusunda bulunacağız",
+          "label": "Hatır raporudur; klinik hakkında suç duyurusunda bulunacağız",
           "responses": [
             {
               "lines": [
@@ -354,10 +378,11 @@
         {
           "id": "T01_D",
           "kind": "OPTION",
-          "label": "Diyeceğimiz yok",
+          "label": "İki rapor birlikte değerlendirilsin; takdir mahkemenin",
           "responses": [
             {
               "lines": [
+                { "speaker": "player", "text": "Sayın Başkan, iki rapor da dosyada. Takdir mahkemenizin." },
                 { "speaker": "hakim", "text": "Tutanağa geçti." },
                 {
                   "speaker": "player",
@@ -929,7 +954,7 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Adli Tıp kesin raporu: kaburgada, karında, başta travma bulgusu yok. Tek bir tekme izi yok."
+                  "text": "Adli Tıp’ın kesin raporu: kaburgada, karında, başta travma bulgusu yok. Tek bir tekme izi yok."
                 },
                 {
                   "speaker": "player",
@@ -1102,25 +1127,18 @@
           "kind": "CONTINUE",
           "label": "Tanığa son bir soru: “Neden şimdi?”",
           "visibleWhen": {
-            "any": [
+            "all": [
               {
-                "cmp": [
-                  {
-                    "add": [
-                      { "if": { "when": { "flag": "contra_o1" }, "then": 1, "else": 0 } },
-                      { "if": { "when": { "flag": "contra_o2" }, "then": 1, "else": 0 } },
-                      { "if": { "when": { "flag": "contra_o3" }, "then": 1, "else": 0 } },
-                      { "if": { "when": { "flag": "contra_o4" }, "then": 1, "else": 0 } },
-                      { "if": { "when": { "flag": "contra_o5" }, "then": 1, "else": 0 } }
-                    ]
-                  },
-                  ">=",
-                  3
+                "any": [
+                  { "flag": "atk_govde" },
+                  { "flag": "krim_avuc" },
+                  { "flag": "ara_sinan" },
+                  { "hasEvidence": "ded_bilek" },
+                  { "flag": "onur_vicdan" }
                 ]
               },
               {
-                "all": [
-                  { "flag": "onur_vicdan" },
+                "any": [
                   {
                     "cmp": [
                       {
@@ -1133,7 +1151,27 @@
                         ]
                       },
                       ">=",
-                      2
+                      3
+                    ]
+                  },
+                  {
+                    "all": [
+                      { "flag": "onur_vicdan" },
+                      {
+                        "cmp": [
+                          {
+                            "add": [
+                              { "if": { "when": { "flag": "contra_o1" }, "then": 1, "else": 0 } },
+                              { "if": { "when": { "flag": "contra_o2" }, "then": 1, "else": 0 } },
+                              { "if": { "when": { "flag": "contra_o3" }, "then": 1, "else": 0 } },
+                              { "if": { "when": { "flag": "contra_o4" }, "then": 1, "else": 0 } },
+                              { "if": { "when": { "flag": "contra_o5" }, "then": 1, "else": 0 } }
+                            ]
+                          },
+                          ">=",
+                          2
+                        ]
+                      }
                     ]
                   }
                 ]
@@ -1177,21 +1215,6 @@
               "speaker": "onur",
               "expression": "uzgun",
               "text": "Müdürüm o. Karakolda “sen gördün” dedi. Sedyeye binerken “Onur, arabayı sen al” dedi; kimse duymadı sandı."
-            },
-            {
-              "speaker": "onur",
-              "expression": "uzgun",
-              "text": "Yerde tekme görmedim. Ayağı bileğindeydi. Elinde cam vardı."
-            },
-            { "speaker": "narrator", "text": "Salonda kimse kıpırdamadı.", "fx": "fade" },
-            {
-              "speaker": "hakim",
-              "text": "Tutanağa aynen geçsin. Tanığın beyanı nedeniyle suç duyurusu hususu hükümle birlikte değerlendirilecek."
-            },
-            {
-              "speaker": "player",
-              "text": "“Ayırmaya çalıştım.” Bir saldırganı değil, saldırıya uğrayanı tutmuş. Bir cümlenin içinde bütün gece.",
-              "style": "thought"
             }
           ]
         },
@@ -1216,7 +1239,7 @@
             {
               "speaker": "onur",
               "expression": "uzgun",
-              "text": "Yerde… tekme görmedim. Ayağı bileğindeydi. Elinde hâlâ cam vardı. Ben sanığı arkadan tutmaya çalıştım; o yüzden “ayırdım” dedim."
+              "text": "Ben sanığı arkadan tutmaya çalıştım; o yüzden “ayırdım” dedim. Ayırmadım. Tuttum."
             },
             {
               "speaker": "onur",
@@ -1233,16 +1256,6 @@
               "speaker": "onur",
               "expression": "uzgun",
               "text": "Herkes bana bir şey vaat etti. O etmedi. Belki o yüzden."
-            },
-            { "speaker": "narrator", "text": "Salonda kimse kıpırdamadı. Rıza Bey bile.", "fx": "fade" },
-            {
-              "speaker": "hakim",
-              "text": "Tutanağa aynen geçsin. Tanığın beyanı nedeniyle suç duyurusu hususu hükümle birlikte değerlendirilecek."
-            },
-            {
-              "speaker": "player",
-              "text": "Onu batırmadım. Kendi ayağıyla indi. Kimse ona yardım etmedi; ben de. Belki en çok o yüzden.",
-              "style": "thought"
             }
           ]
         },
@@ -1262,7 +1275,42 @@
               "speaker": "onur",
               "expression": "uzgun",
               "text": "Ben kolonun arkasındaydım. Kalktığımda Serkan Bey’in elinde cam vardı. Sanık bir kere vurdu."
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "T02H_DEVAM", "kind": "CONTINUE", "label": "Devam", "next": "T_02HB" }]
+    },
+    {
+      "id": "T_02HB",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "lines": [
+        {
+          "when": { "all": [{ "hasEvidence": "ded_bilek" }, { "flag": "onur_vicdan" }] },
+          "lines": [
+            {
+              "speaker": "onur",
+              "expression": "uzgun",
+              "text": "Yerde… tekme görmedim. Ayağı bileğindeydi. Elinde hâlâ cam vardı. Bıraktırdı. Sonra çekildi."
             },
+            { "speaker": "narrator", "text": "Salonda kimse kıpırdamadı. Rıza Bey bile.", "fx": "fade" },
+            {
+              "speaker": "hakim",
+              "text": "Tutanağa aynen geçsin. Tanığın beyanı nedeniyle suç duyurusu hususu hükümle birlikte değerlendirilecek."
+            },
+            {
+              "speaker": "player",
+              "text": "Onu batırmadım. Kendi ayağıyla indi. Kimse ona yardım etmedi; ben de. Belki en çok o yüzden.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "ded_bilek" },
+          "lines": [
             {
               "speaker": "onur",
               "expression": "uzgun",
@@ -1279,9 +1327,49 @@
               "style": "thought"
             }
           ]
+        },
+        {
+          "when": { "flag": "onur_vicdan" },
+          "lines": [
+            {
+              "speaker": "onur",
+              "expression": "uzgun",
+              "text": "Yerde ne oldu, görmedim. Kolon vardı. Kalktığımda Serkan Bey yerdeydi, sanık tezgâhın önündeydi. “Tekmeledi” dememi o istedi."
+            },
+            { "speaker": "narrator", "text": "Salonda kimse kıpırdamadı. Rıza Bey bile.", "fx": "fade" },
+            {
+              "speaker": "hakim",
+              "text": "Tutanağa aynen geçsin. Tanığın beyanı nedeniyle suç duyurusu hususu hükümle birlikte değerlendirilecek."
+            },
+            {
+              "speaker": "player",
+              "text": "Onu batırmadım; kendi ayağıyla indi. Ama yerdeki o saniye hâlâ kimsenin değil. Ne onun, ne benim, ne bir kâğıdın.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "onur",
+              "expression": "uzgun",
+              "text": "Yerde ne oldu, görmedim. Kolon vardı. “Tekmeledi” dememi o istedi. Ben… bir şey gördüm sandım. Görmedim."
+            },
+            { "speaker": "narrator", "text": "Salonda kimse kıpırdamadı.", "fx": "fade" },
+            {
+              "speaker": "hakim",
+              "text": "Tutanağa aynen geçsin. Tanığın beyanı nedeniyle suç duyurusu hususu hükümle birlikte değerlendirilecek."
+            },
+            {
+              "speaker": "player",
+              "text": "Tanık bir yalanı geri aldı. Ama geri aldığı yerde bir boşluk kaldı: katılan düştükten sonra Bora ne yaptı? Bunu bu salonda kimse söylemedi.",
+              "style": "thought"
+            }
+          ]
         }
       ],
-      "choices": [{ "id": "T02H_DEVAM", "kind": "CONTINUE", "label": "Devam", "next": "T_02S" }]
+      "routes": [{ "to": "T_02S" }],
+      "choices": []
     },
     {
       "id": "T_02S",
@@ -1305,6 +1393,15 @@
               "text": "Serkan ayağa kalkmıştı. Burnundaki bant yoktu artık; yerinde ince, pembe bir çizgi. Sesi salonun duvarına çarptı."
             },
             { "speaker": "hakim", "text": "Katılan! Oturun. Bir kez daha ayağa kalkarsanız sizi salondan çıkarırım." },
+            {
+              "speaker": "serkan",
+              "expression": "kizgin",
+              "text": "Sayın hâkimim, bakın şimdi, bu çocuk… bu çocuk benim yanımda çalışıyor! Ben ona iş verdim!"
+            },
+            {
+              "speaker": "hakim",
+              "text": "Tutanağa geçsin: katılan, tanığın yanında çalıştığını kendisi beyan etti. Oturun."
+            },
             { "speaker": "tolga", "text": "Oturun Serkan Bey. Lütfen. Oturun." },
             {
               "speaker": "narrator",
@@ -1924,6 +2021,20 @@
             { "speaker": "hakim", "text": "Tutanakla fotoğraf çelişirse?" },
             { "speaker": "sinan", "text": "Fotoğrafa bakın efendim. Ben acele ettim. Fotoğraf etmedi." },
             {
+              "speaker": "tolga",
+              "text": "Memur Bey, tutanağı imzalarken okudunuz mu? Okudunuz. Bugün neden fikriniz değişti? Biri sizinle görüştü mü?"
+            },
+            {
+              "speaker": "sinan",
+              "text": "Avukat hanım karakola geldi, fotoğrafı sordu. Ben de fotoğrafı söyledim. Bana ne diyeceğimi kimse söylemedi; söyleseydi buraya gelmezdim."
+            },
+            { "speaker": "tolga", "text": "Yani tutanağınız yanlış." },
+            { "speaker": "sinan", "text": "Eksik. Yanlış yazsaydım fotoğrafı da yanlış çekerdim. Fotoğraf duruyor." },
+            {
+              "speaker": "narrator",
+              "text": "Tolga Şen bir şey yazdı, sonra çizdi. Hâkim memura teşekkür etti; Sinan şapkasını takmadan salondan çıktı."
+            },
+            {
               "speaker": "player",
               "text": "Bir memur kendi tutanağına karşı tanıklık etti. Bunu yapmak, bir mahkemede söylenebilecek en sade cesaretti.",
               "style": "thought"
@@ -1991,7 +2102,7 @@
             { "speaker": "savci", "text": "Yani her gece. O gece de." },
             {
               "speaker": "player",
-              "text": "Her gece, Sayın Savcı. Bir ay önce de, olaydan önceki gece de. Cihazın kaydı bunu gösteriyor: her gece 00.59’da son kare."
+              "text": "Her gece, Sayın Savcı. Prizin pimleri 01.00’de kesik, 09.00’da açık; tozlu, aylardır kimse dokunmamış. Kolluk cihazı açarsa her gecenin son karesini aynı saatte bulur."
             },
             { "speaker": "hakim", "text": "Tutanağa geçsin. Ruhsat hususu idari bir mesele." },
             {
@@ -2049,7 +2160,7 @@
         {
           "id": "T04_A",
           "kind": "OPTION",
-          "label": "Tutanak aksi ispatlanabilir; fotoğraf 7 ve memurun beyanı sapın yerini gösteriyor",
+          "label": "Tutanak, fotoğraf 7 ile birlikte okunmalı",
           "responses": [
             {
               "when": { "any": [{ "hasEvidence": "clue_sap" }, { "flag": "sinan_aciklama" }] },
@@ -2110,7 +2221,7 @@
         {
           "id": "T04_B",
           "kind": "OPTION",
-          "label": "Tutanak hukuka aykırı; dosyadan çıkarılsın",
+          "label": "Tutanak usule aykırı tutulmuş; delil olarak dosyadan çıkarılsın",
           "responses": [
             {
               "lines": [
@@ -2136,7 +2247,7 @@
         {
           "id": "T04_C",
           "kind": "OPTION",
-          "label": "Kriminal rapor tutanağı zaten aşıyor: sapı tutan el katılanın",
+          "label": "Kriminal rapor tutanağı aşıyor: sapı tutan el katılanın",
           "responses": [
             {
               "when": { "hasEvidence": "ev_kriminal" },
@@ -2187,8 +2298,15 @@
         {
           "id": "T04_D",
           "kind": "OPTION",
-          "label": "Diyeceğimiz yok",
-          "responses": [{ "lines": [{ "speaker": "hakim", "text": "Tutanağa geçti." }] }],
+          "label": "Tutanak resmî belgedir; esasta değerlendireceğiz",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Tutanağı esas hakkındaki savunmamızda değerlendireceğiz." },
+                { "speaker": "hakim", "text": "Tutanağa geçti." }
+              ]
+            }
+          ],
           "effects": [{ "type": "VAR", "var": "pers", "op": "dec", "value": 1 }],
           "quality": {
             "q": "NEUTRAL",
@@ -2252,23 +2370,22 @@
       "eyebrow": "DURUŞMA · 2. CELSE",
       "hud": ["cred", "pers"],
       "routes": [
-        { "when": { "ref": "mm_tam" }, "to": "T_05A" },
+        { "when": { "ref": "mm_tam" }, "to": "T_05A1" },
         { "when": { "any": [{ "ref": "saldiri_kanit" }, { "ref": "findings" }] }, "to": "T_05B" },
         { "to": "T_05C" }
       ],
       "choices": []
     },
     {
-      "id": "T_05A",
-      "type": "STORY",
+      "id": "T_05A1",
+      "type": "DECISION",
       "chapter": "Bölüm 5 · İkinci celse",
       "eyebrow": "DURUŞMA · 2. CELSE",
       "hud": ["cred", "pers"],
-      "title": "Mütalaa",
-      "background": "durusma_salonu",
-      "onFirstEnter": [{ "type": "VAR", "var": "mutalaa_beraat", "op": "set", "value": true }],
+      "onEnter": [{ "type": "VAR", "var": "mutalaa_beraat", "op": "set", "value": true }],
       "lines": [
         {
+          "when": { "flag": "onur_kirildi" },
           "lines": [
             { "speaker": "hakim", "text": "Sayın Savcı, esas hakkındaki mütalaanız?" },
             {
@@ -2282,11 +2399,125 @@
             {
               "speaker": "savci",
               "text": "Kırık kadehi katılan kırmış ve sanığa saldırmıştır. Sanık kaçma imkânı olmayan tezgâhın arkasında, kolu kesilmişken tek bir yumrukla karşılık vermiş; yerdeki hareket, elinde cam bulunan bileğe basmaktan ibarettir."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Sayın Savcı, esas hakkındaki mütalaanız?" },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Orhan Baysal ayağa kalktı. Dosyayı kapadı. Bir süre kapalı dosyaya baktı."
             },
             {
               "speaker": "savci",
-              "text": "Tanık Ece Tan ve memur Sinan Kurt’un beyanları, Kriminal rapor ve Adli Tıp raporu bu anlatımı doğrulamaktadır. Kayıt cihazındaki boşluk ise her gece tekrarlanan bir ayardan ibarettir."
+              "text": "Sayın Başkan. İddianame, tanık Onur Kılıç’ın kolluk beyanına dayanıyordu. O beyanın dayanakları bu salonda tek tek çöktü."
             },
+            {
+              "speaker": "savci",
+              "text": "Kırık kadehi katılan kırmış ve sanığa saldırmıştır. Sanık kaçma imkânı olmayan tezgâhın arkasında, kolu kesilmişken tek bir yumrukla karşılık vermiş; yerdeki hareket, elinde cam bulunan bileğe basmaktan ibarettir."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_05A2" }],
+      "choices": []
+    },
+    {
+      "id": "T_05A2",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "ece_tanikti" }, { "flag": "ara_sinan" }] },
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Tanık Ece Tan’ın ve tutanağı tutan memur Sinan Kurt’un bugünkü beyanları bu anlatımla örtüşmektedir."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "ece_tanikti" },
+          "lines": [{ "speaker": "savci", "text": "Tanık Ece Tan’ın bugünkü beyanı bu anlatımla örtüşmektedir." }]
+        },
+        {
+          "when": { "flag": "ara_sinan" },
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Tutanağı tutan memur Sinan Kurt’un beyanı ve çektiği fotoğraf 7 bu anlatımla örtüşmektedir."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "savci", "text": "Olay yeri fotoğrafları, tutanağın eksik bıraktığını tamamlamaktadır." }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_05A3" }],
+      "choices": []
+    },
+    {
+      "id": "T_05A3",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "lines": [
+        {
+          "when": { "all": [{ "hasEvidence": "ev_kriminal" }, { "flag": "video_izlendi" }] },
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Kriminal rapor sapı kavrayan elin katılana ait olduğunu, Adli Tıp raporu gövdede tekme izi bulunmadığını, izlediğimiz kayıt da saldırının yönünü göstermektedir."
+            }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "ev_kriminal" },
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Kriminal rapor sapı kavrayan elin katılana ait olduğunu, Adli Tıp raporu gövdede tekme izi bulunmadığını göstermektedir."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "video_izlendi" },
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "İzlediğimiz kayıt saldırının yönünü, Adli Tıp raporu gövdede tekme izi bulunmadığını göstermektedir."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Adli Tıp raporu gövdede tekme izi bulunmadığını, bilekteki izin bası ile uyumlu olduğunu göstermektedir."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_05A" }],
+      "choices": []
+    },
+    {
+      "id": "T_05A",
+      "type": "STORY",
+      "chapter": "Bölüm 5 · İkinci celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Mütalaa",
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
             {
               "speaker": "savci",
               "text": "Sanığın eyleminin TCK 25/1 kapsamında meşru savunma sınırları içinde kaldığı anlaşılmakla, CMK 223/2-d uyarınca beraatine karar verilmesini talep ederim."
@@ -2316,6 +2547,29 @@
       "background": "durusma_salonu",
       "onFirstEnter": [{ "type": "VAR", "var": "mutalaa_indirim", "op": "set", "value": true }],
       "lines": [
+        {
+          "when": { "flag": "onur_kirildi" },
+          "lines": [
+            { "speaker": "hakim", "text": "Sayın Savcı, esas hakkındaki mütalaanız?" },
+            {
+              "speaker": "savci",
+              "text": "Sayın Başkan. Tanık Onur Kılıç bugün kolluk beyanından döndü; o beyan hükme esas alınamaz. Olayın katılanın kışkırtıcı davranışıyla başladığı da anlaşılmıştır."
+            },
+            {
+              "speaker": "savci",
+              "text": "Ancak katılan yere düştükten sonra sanığın tezgâhtan çıkıp ne yaptığı aydınlanmamıştır. Tanık görmediğini söylüyor; dosyada bu anı açıklayan başka bir delil yok."
+            },
+            {
+              "speaker": "savci",
+              "text": "Kadehin sanık tarafından kullanıldığı ispatlanamadığından silahla işleme artırımının uygulanmamasını; sanığın TCK 86/1 ve 87/3 uyarınca cezalandırılmasını, haksız tahrik hükümlerinin (TCK 29) uygulanmasını talep ederim."
+            },
+            {
+              "speaker": "player",
+              "text": "Silah düştü. Tanık düştü. Savcı yarı yolda durdu; tam yerdeki o saniyenin önünde. Kalan yarıyı ben yürüyeceğim.",
+              "style": "thought"
+            }
+          ]
+        },
         {
           "lines": [
             { "speaker": "hakim", "text": "Sayın Savcı, esas hakkındaki mütalaanız?" },
@@ -2595,7 +2849,7 @@
           "cost": [{ "var": "noktalar", "amount": 1 }],
           "responses": [
             {
-              "when": { "ref": "tekme_yok" },
+              "when": { "all": [{ "ref": "tekme_yok" }, { "hasEvidence": "ded_bilek" }] },
               "lines": [
                 {
                   "speaker": "player",
@@ -2609,7 +2863,7 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "ref": "tekme_yok" },
+              "when": { "all": [{ "ref": "tekme_yok" }, { "hasEvidence": "ded_bilek" }] },
               "then": [
                 { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 40, "line": "savunma" },
                 {
@@ -2832,7 +3086,7 @@
         {
           "id": "T06_MM",
           "kind": "OPTION",
-          "label": "Fiil meşru savunmadır; hukuka uygunluk nedeni (CMK 223/2-d)",
+          "label": "Meşru savunma: fiil hukuka uygundur (CMK 223/2-d)",
           "responses": [
             {
               "when": { "ref": "mm_tam" },
@@ -2939,7 +3193,7 @@
         {
           "id": "T06_E",
           "kind": "OPTION",
-          "label": "İddianın anlatımı ispatlanamadı; şüpheden sanık yararlanır (CMK 223/2-e)",
+          "label": "İddia ispatlanamadı; şüpheden sanık yararlanır (CMK 223/2-e)",
           "responses": [
             {
               "when": { "ref": "findings" },
@@ -2950,7 +3204,7 @@
                 },
                 {
                   "speaker": "player",
-                  "text": "O tanık katılanın çalışanı; tesadüfen değil, birlikte gelmişler. Oturduğu yerden tezgâhın önü görünmüyor. Katılan acilde “yumrukla vuruldum” demiş; yüzünde kesi yok."
+                  "text": "O tanığın tarafsızlığı da, oturduğu yerden ne görebildiği de bu salonda tek tek sarsıldı. Katılanın kendi anlatımı bile acil kaydıyla çelişiyor."
                 },
                 {
                   "speaker": "player",
@@ -2985,36 +3239,51 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "ref": "findings" },
+              "when": { "ref": "mm_tam" },
               "then": [
-                {
-                  "type": "SCORE",
-                  "category": "SAVUNMA_STRATEJISI",
-                  "amount": {
-                    "if": {
-                      "when": { "cmp": [{ "var": "strategy" }, "==", "USUL"] },
-                      "then": { "div": [{ "mul": [200, { "var": "strategy_pct" }] }, 100] },
-                      "else": 200
-                    }
-                  },
-                  "line": "savunma"
-                },
-                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
-                { "type": "VAR", "var": "supheden", "op": "set", "value": true },
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60, "line": "savunma" },
                 {
                   "type": "MARK",
-                  "quality": "GOOD",
-                  "feedback": "İddianamenin dayanakları kürsüde çöktü; kalan şüphe sanık lehinedir (CMK 223/2-e; Anayasa 38/4).",
+                  "quality": "NEUTRAL",
+                  "feedback": "Meşru savunmanın bütün şartları ortadayken yalnızca şüpheden yararlanmayı istemek, ispatlanmış hukuka uygunluk nedenini masada bıraktı. Mahkeme talebinizle bağlı değildir; delilleri kendisi değerlendirir (CMK 217/1, 225/2).",
                   "category": "SAVUNMA_STRATEJISI"
                 }
               ],
               "else": [
-                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -100, "line": "savunma" },
                 {
-                  "type": "MARK",
-                  "quality": "BAD",
-                  "feedback": "Şüphe savunması kürsüde açılmış çelişkilere dayanmalı; yeterli çelişki ortaya konmadı.",
-                  "category": "SAVUNMA_STRATEJISI"
+                  "type": "IF",
+                  "when": { "ref": "findings" },
+                  "then": [
+                    {
+                      "type": "SCORE",
+                      "category": "SAVUNMA_STRATEJISI",
+                      "amount": {
+                        "if": {
+                          "when": { "cmp": [{ "var": "strategy" }, "==", "USUL"] },
+                          "then": { "div": [{ "mul": [200, { "var": "strategy_pct" }] }, 100] },
+                          "else": 200
+                        }
+                      },
+                      "line": "savunma"
+                    },
+                    { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+                    { "type": "VAR", "var": "supheden", "op": "set", "value": true },
+                    {
+                      "type": "MARK",
+                      "quality": "GOOD",
+                      "feedback": "İddianamenin dayanakları kürsüde çöktü; kalan şüphe sanık lehinedir (CMK 223/2-e; Anayasa 38/4).",
+                      "category": "SAVUNMA_STRATEJISI"
+                    }
+                  ],
+                  "else": [
+                    { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -100, "line": "savunma" },
+                    {
+                      "type": "MARK",
+                      "quality": "BAD",
+                      "feedback": "Şüphe savunması kürsüde açılmış çelişkilere dayanmalı; yeterli çelişki ortaya konmadı.",
+                      "category": "SAVUNMA_STRATEJISI"
+                    }
+                  ]
                 }
               ]
             }
@@ -3024,7 +3293,7 @@
         {
           "id": "T06_SINIR",
           "kind": "OPTION",
-          "label": "Saldırı katılandan geldi; sınır aşıldıysa korku ve heyecanla (TCK 27/2)",
+          "label": "Sınır aşıldıysa korku ve heyecanla: ceza verilmez (TCK 27/2)",
           "responses": [
             {
               "when": { "ref": "saldiri_kanit" },
@@ -3053,24 +3322,40 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "ref": "saldiri_kanit" },
+              "when": { "ref": "mm_tam" },
               "then": [
-                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 120, "line": "savunma" },
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 20, "line": "savunma" },
                 { "type": "VAR", "var": "sinir_kabul", "op": "set", "value": true },
                 {
                   "type": "MARK",
-                  "quality": "GOOD",
-                  "feedback": "Meşru savunmada sınırın mazur görülebilecek heyecan, korku veya telaşla aşılması hâlinde ceza verilmez (TCK 27/2; CMK 223/3-c).",
+                  "quality": "NEUTRAL",
+                  "feedback": "Meşru savunmanın bütün şartları gösterilmişken sınırın aşıldığını kabul etmek gereksiz bir tavizdi; mahkeme yine de hukuka uygunluk nedenini kendisi değerlendirir (CMK 225/2).",
                   "category": "SAVUNMA_STRATEJISI"
                 }
               ],
               "else": [
-                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -80, "line": "savunma" },
                 {
-                  "type": "MARK",
-                  "quality": "BAD",
-                  "feedback": "Sınırın aşılması bir meşru savunma durumunu varsayar; önce saldırının katılandan geldiği gösterilmeliydi.",
-                  "category": "SAVUNMA_STRATEJISI"
+                  "type": "IF",
+                  "when": { "ref": "saldiri_kanit" },
+                  "then": [
+                    { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 120, "line": "savunma" },
+                    { "type": "VAR", "var": "sinir_kabul", "op": "set", "value": true },
+                    {
+                      "type": "MARK",
+                      "quality": "GOOD",
+                      "feedback": "Meşru savunmada sınırın mazur görülebilecek heyecan, korku veya telaşla aşılması hâlinde ceza verilmez (TCK 27/2; CMK 223/3-c).",
+                      "category": "SAVUNMA_STRATEJISI"
+                    }
+                  ],
+                  "else": [
+                    { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -80, "line": "savunma" },
+                    {
+                      "type": "MARK",
+                      "quality": "BAD",
+                      "feedback": "Sınırın aşılması bir meşru savunma durumunu varsayar; önce saldırının katılandan geldiği gösterilmeliydi.",
+                      "category": "SAVUNMA_STRATEJISI"
+                    }
+                  ]
                 }
               ]
             }
@@ -3080,7 +3365,7 @@
         {
           "id": "T06_T",
           "kind": "OPTION",
-          "label": "Öncelikle beraat; aksi hâlde haksız tahrik ve silah artırımının düşmesi (terditli)",
+          "label": "Öncelikle beraat; olmazsa tahrik ve silah artırımının düşmesi",
           "responses": [
             {
               "lines": [
@@ -3124,21 +3409,24 @@
         {
           "id": "T06_D",
           "kind": "OPTION",
-          "label": "Gece ikide barda içen adam, olacaklara razıdır",
+          "label": "Kast yoktur; olsa olsa taksirle yaralama (TCK 89)",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan, gece ikide 1,9 promil içen bir adam, başına geleceklere razı olmuştur."
+                  "text": "Sayın Başkan, sanığın yaralama kastı yoktur. Netice olsa olsa taksirle meydana gelmiştir; TCK 89 uygulanmalıdır."
                 },
                 {
-                  "speaker": "serkan",
-                  "expression": "kizgin",
-                  "text": "Ne demek razı? Burnum kırıldı!",
-                  "fx": "shake"
+                  "speaker": "savci",
+                  "text": "Sanık “vurdum, bir kere” diyor müdafi. Bir yumruğun taksirlisi olur mu?"
                 },
-                { "speaker": "hakim", "text": "Katılan, lütfen. Müdafi, devam edin; ama bu dille değil." }
+                { "speaker": "hakim", "text": "Not edildi. Devam edin." },
+                {
+                  "speaker": "player",
+                  "text": "Bora’nın en sağlam cümlesini kendi elimle zayıflattım: “vurdum.” Taksir, o cümleyi geri almaya çalışmaktı.",
+                  "style": "thought"
+                }
               ]
             }
           ],
@@ -3148,7 +3436,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Katılanı küçümseyen bir söylem delilin yerini tutmaz ve hâkimi savunmadan uzaklaştırır; mağdurun alkollü olması tek başına bir hukuka uygunluk nedeni değildir.",
+            "feedback": "Bilerek atılmış tek bir yumrukta yaralama kastı vardır; taksir savunması sanığın “vurdum, bir kere” beyanıyla çelişir ve meşru savunma iddiasından vazgeçmek demektir.",
             "category": "SAVUNMA_STRATEJISI"
           },
           "next": "T_06R"
@@ -3178,6 +3466,15 @@
             },
             { "speaker": "serkan", "expression": "saskin", "text": "Tolga Bey? Tolga Bey, bu ne demek?" },
             { "speaker": "tolga", "text": "Sonra konuşuruz Serkan Bey." },
+            {
+              "speaker": "narrator",
+              "text": "Bora yanımda kıpırdamadan oturuyordu. Bir an elini sol koluna, gömleğin altındaki dikiş izine götürdü; sonra dizine geri koydu."
+            },
+            {
+              "speaker": "player",
+              "text": "Usul avcısı yayını indirince salonda bir boşluk kalır. O boşluğa ne konacağını artık hâkim seçecek.",
+              "style": "thought"
+            },
             {
               "speaker": "narrator",
               "text": "Serkan arkasına yaslandı. Ellerini dizlerine koydu; sağ avucunun içinde, enine, solgun bir çizgi."
@@ -3365,6 +3662,19 @@
             {
               "speaker": "narrator",
               "text": "Serkan telefonla konuşuyordu, alçak sesle. Onur merdivenin başında, tek başına. Kol saati cebindeydi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bir ara Serkan telefonu kapattı, bana doğru iki adım attı. Tolga Şen kolunu tuttu; Serkan durdu."
+            },
+            {
+              "speaker": "serkan",
+              "text": "Bak şimdi avukat hanım. Ne çıkarsa çıksın, ben bu şehirde yaşıyorum. Bora da yaşıyor. Görüşürüz."
+            },
+            {
+              "speaker": "player",
+              "text": "“Görüşürüz.” Bursa küçük bir şehirdir. Bazı cümleler bir veda değil, bir adres bildirimidir.",
+              "style": "thought"
             },
             {
               "speaker": "narrator",

@@ -236,3 +236,12 @@ diyeceğini söyleme. Doğruyu söylemesinin bedelini söyle."
 - **Ara dönemi** 2 gün × 4 EP; Onur'un kapıya gelişi ilk ara günün sonundaki sabit sahnedir (ARA_DAY_END).
 - **Tanık kürsüsü:** Defne kürsüye çıkmaz; videosu bilirkişi notuyla oynatılır. Sinan Kurt ek dilekçeyle çağrılırsa kısa bir
   tanıklık yapar (T_04S).
+- **İnceleme sonrası (2026-10-20, şeytanın avukatı turu).** Sonucu kapanış düğmesi değil kayıttaki delil belirler: bütün
+  şartlar gösterildiyse mahkeme 2-d'ye gider, tipik yol (2-e) "yerdeki o saniye" aydınlanmadan biter. Tipik yolda bilek
+  tahtada kurulmaz; Onur kırıldığında "Yerde ne oldu, görmedim. Kolon vardı" der (T_02HB), savcı tahrik mütalaasında
+  tam o anın önünde durur (T_05B). Ara dönemi zorunlu: zarflar gelir ama raporlar okunmadan kürsüye taşınamaz.
+- **Eklenen vuruşlar.** ARA_SERKAN (katılan büronun önünde, arabasında; Deniz vekili olmadan konuşmaz: "Herkesin bir
+  babası var"), Sinan'ın "içeri ilk girdiğimde" anlatımı ve kürsüde Tolga'ya cevabı, Defne'nin pastaya mum diken barmeni,
+  Bora'nın tozdan koruduğu önlük ve 1996'daki hakem, Ece'nin arka kapıda düşürdüğü toka (sokaktaki tohumun karşılığı),
+  koridorda Serkan'ın "Görüşürüz"ü; CVYO, İNDİRİM, MAHKÛMİYET ve ETİK epilogları genişletildi; Ece yönlendirilip
+  çöktüğünde her sonuca disiplin soruşturması epilogu eklenir.

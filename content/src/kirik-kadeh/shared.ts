@@ -1,5 +1,5 @@
-import { chapter, court, phase, rawChoice } from '../../../tools/content/src/kit/index.js';
-import type { Backdrop, ChoiceDef, Effect, Expression, Line, LineFx } from '@mudafaa/case-schema';
+import { any, chapter, court, flag, phase, rawChoice } from '../../../tools/content/src/kit/index.js';
+import type { Backdrop, ChoiceDef, Cond, Effect, Expression, Line, LineFx } from '@mudafaa/case-schema';
 import type { OptionSpec } from '../../../tools/content/src/kit/index.js';
 
 // Dava #08 genelinde paylaşılan tanımlar: bölüm etiketleri, soruşturma evreleri, duruşma salonu ve satır kısaltmaları.
@@ -102,3 +102,7 @@ export const wrongEvidence: Effect[] = [
   { type: 'VAR', var: 'cred', op: 'dec', value: 1 },
   { type: 'VAR', var: 'wrong', op: 'inc', value: 1 },
 ];
+
+/** Ara dönemde gelen zarflar: istenen inceleme sonucu büroya ulaştı (delil kartı ancak belge okununca deftere girer). */
+export const kriminalZarf: Cond = any(flag('req_kriminal'), flag('h1_kriminal'));
+export const eczaneZarf: Cond = any(flag('req_eczane'), flag('h1_eczane'));

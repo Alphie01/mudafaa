@@ -218,7 +218,7 @@ export const briefing: CasePart = {
         S('leyla', 'Dosyayı açmadan önce bir şey bil: neyle karşı karşıyayız? Aralığı ve mahkemeyi söyle.'),
       ),
       choices: [
-        option('BR01_A', '86/1, 86/3-e ve 87/3 birlikte: üst sınır 6 yıl 9 ay; asliye ceza', {
+        option('BR01_A', '86/1 + 86/3-e + 87/3: üst sınır 6 yıl 9 ay; asliye ceza', {
           score: { HUKUKI_BILGI: 100 },
           good: 'Doğru. TCK 86/1 (7550 sayılı Kanun’la 1 yıl 6 ay–3 yıl), 86/3-e yarı oranında artırım (2 yıl 3 ay–4 yıl 6 ay), 87/3 kırığın hayat fonksiyonlarına etkisine göre yarısına kadar artırım: üst sınır 6 yıl 9 ay. On yılı aşmadığı için asliye ceza görevli (5235 md. 12).',
           responses: says(
@@ -235,7 +235,7 @@ export const briefing: CasePart = {
           ),
           next: 'BR_01B',
         }),
-        option('BR01_B', 'Kırık iki katına kadar artırır: 3 yıl–13 yıl 6 ay, ağır ceza', {
+        option('BR01_B', 'Kırık cezayı iki katına kadar artırır: üst sınır 13 yıl 6 ay; ağır ceza', {
           score: { HUKUKI_BILGI: -30 },
           bad: '87/3 2006’dan beri (5560 sayılı Kanun) cezayı “yarısına kadar” artırır; “iki katına kadar” eski metin. Üst sınır 6 yıl 9 ay, görevli mahkeme asliye ceza.',
           category: 'HUKUKI_BILGI',
@@ -252,7 +252,7 @@ export const briefing: CasePart = {
           ),
           next: 'BR_01B',
         }),
-        option('BR01_C', 'Silahla yaralama yeter: 2 yıl 3 ay–4 yıl 6 ay', {
+        option('BR01_C', 'Silahla işleme artırımıyla 2 yıl 3 ay–4 yıl 6 ay; asliye ceza', {
           score: { HUKUKI_BILGI: -30 },
           bad: 'Kemik kırığı (TCK 87/3) unutuldu. Silahla işleme artırımından sonra kırığın etkisine göre ceza yarısına kadar daha artar: üst sınır 6 yıl 9 ay.',
           category: 'HUKUKI_BILGI',
@@ -262,7 +262,7 @@ export const briefing: CasePart = {
           ),
           next: 'BR_01B',
         }),
-        option('BR01_D', 'Basit yaralama, şikâyete bağlı; şikâyet geri alınırsa dava düşer', {
+        option('BR01_D', 'Basit yaralama (86/2): şikâyete bağlı, önce uzlaştırma', {
           score: { HUKUKI_BILGI: -50 },
           bad: 'Basit tıbbi müdahaleyle giderilebilecek yaralama (86/2) kırıkta uygulanmaz. Silahla işlenen yaralama (86/3) şikâyet aranmaksızın kovuşturulur; şikâyetten vazgeçme davayı düşürmez.',
           category: 'HUKUKI_BILGI',

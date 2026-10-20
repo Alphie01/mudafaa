@@ -248,6 +248,10 @@ export const investigation1: CasePart = {
       background: 'sokak_gece',
       lines: [
         when(
+          all(cmp(v('ap'), '<=', 0), cmp(v('day'), '<', 3)),
+          Nx('Akşam oldu. Defteri kapattım; Setbaşı’nda sokak lambaları birer birer yandı.'),
+        ),
+        when(
           cmp(v('day'), '==', 1),
           card('GÜN 1/3 · BİRİNCİ CELSEYE 10 GÜN', 'sokak_gece'),
           Nx('Setbaşı’nda öğleden sonra yağmur yine başladı. Gökdere’nin sesi bütün sokakların altından geçiyordu.'),
@@ -907,7 +911,7 @@ export const investigation1: CasePart = {
                 S('bora', 'Kızlara laf atar. Bir kere uyardım. O gece ikinci kezdi.'),
                 S(
                   'bora',
-                  'Gözlüklüyle gelir hep. Gözlüklü hesabı öder, o konuşur. Patronu mu, arkadaşı mı, bilmem. Gözlüklü hiç içmez fazla.',
+                  'Gözlüklü biriyle gelir hep. Hesabı o öder, Serkan konuşur. Gözlüklü hiç içmez fazla; kim olduğunu bilmem.',
                 ),
                 T(
                   'Gözlüklü. Hesabı ödeyen. Bir ayrıntı; şimdilik yalnızca bir ayrıntı. Ayrıntılar kâğıda dönüşmeden hiçbir şeydir.',
@@ -1081,7 +1085,7 @@ export const investigation1: CasePart = {
         ),
       ],
       choices: [
-        option('BORA2_DURUST', '“Hayır. Sorulursa doğrusunu söyleriz: priz, ruhsat saati. Bedeli bir idari ceza.”', {
+        option('BORA2_DURUST', '“Hayır. Sorulursa doğrusunu söyleriz; bedeli idari ceza.”', {
           score: { SAVUNMA_STRATEJISI: 60 },
           effects: [raise('kamera_durust'), inc('trust', 4)],
           good: 'Doğru: avukat gerçeğe aykırı beyan kurgulayamaz (Av.K. md. 34, TBB Meslek Kuralları). Ruhsat saatine aykırılık bir kabahattir; yalan ise savunmanın bütün güvenilirliğini yakar.',
@@ -1094,7 +1098,7 @@ export const investigation1: CasePart = {
           ),
           next: '$stay',
         }),
-        option('BORA2_YALAN', '“Tamam. Bozuktu deriz, kimse kontrol etmez.”', {
+        option('BORA2_YALAN', '“Tamam. Bozuktu deriz; ruhsat işi açılmaz, kimse cihaza bakmaz.”', {
           score: { SAVUNMA_STRATEJISI: -80 },
           effects: [raise('kamera_yalan'), inc('ethics')],
           bad: 'Avukat gerçeğe aykırı beyanı kurgulayamaz ve buna aracılık edemez (Av.K. md. 34; TBB Meslek Kuralları). Zaman ayarlı priz ortaya çıkarsa savunmanın bütün sözleri şüpheli hâle gelir.',
@@ -1344,14 +1348,17 @@ export const investigation1: CasePart = {
               prompt: 'Seni ele vermeye gelmedim. Neden bu kadar korkuyorsun?',
               says: [
                 S('ece', 'Babam. Kütahya’da. Kütüphanede çalışıyorum sanıyor. Burs yetmiyor, kira var.'),
-                S('ece', 'Mahkemeye çıkarsam adım yazılır. Bar yazılır. Babam duyar. Duyarsa okul biter, ben biterim.'),
+                S(
+                  'ece',
+                  'Mahkemeye çıkarsam adım yazılır: Ece Tan, garson. Bar yazılır. Babam duyar. Duyarsa okul biter, ben biterim.',
+                ),
               ],
             },
             hard: {
               prompt: 'Saklanmak kimseyi korumaz. Neyden kaçıyorsun?',
               says: [
                 S('ece', 'Siz ne bilirsiniz? Babanız size hiç “eve dön” dedi mi? Bir telefonla?', 'kizgin'),
-                S('ece', 'Sigortam yok. Babam yok. Mahkemeye çıkarsam ikisi birden yok.'),
+                S('ece', 'Ece Tan diye bir garson hiçbir kayıtta yok. Sigortam yok. Mahkemeye çıkarsam babam da yok.'),
               ],
             },
           },
@@ -1372,6 +1379,7 @@ export const investigation1: CasePart = {
                   'ece',
                   'Abi bir kere vurdu. Adam düştü. Sonra… sonra ben mutfak kapısına koştum. Gerisini tam görmedim.',
                 ),
+                S('ece', 'Arka kapıda tokam düştü. Eğilip almadım bile. Bir tokayı almaya dönsem, dönmezdim belki.'),
                 T('“Gerisini tam görmedim.” İyi. Görmediğini söylemesi, gördüğünü söylemesinden daha değerli.'),
               ],
             },
@@ -1379,7 +1387,10 @@ export const investigation1: CasePart = {
               prompt: 'Kadehi kim kırdı? Kısa cevap.',
               says: [
                 S('ece', 'O kırdı! Serkan. Bora abi değil. Kırık tarafıyla abiye saldırdı.', 'kizgin'),
-                S('ece', 'Yerde ne oldu bilmiyorum, kaçıyordum. Tamam mı? Bilmiyorum.'),
+                S(
+                  'ece',
+                  'Yerde ne oldu bilmiyorum, kaçıyordum. Tokamı bile arka kapıda bıraktım. Tamam mı? Bilmiyorum.',
+                ),
               ],
             },
           },

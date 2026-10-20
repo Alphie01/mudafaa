@@ -740,6 +740,11 @@
             },
             {
               "speaker": "player",
+              "text": "Gerekçenin son satırı: “şüpheden sanık yararlanır.” Anayasa’nın bir cümlesi. Bir çocuğun bir yılı. Bir avukatın bir haftası. Hepsi aynı satıra sığmıştı.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
               "text": "Bazen adalet bir kapıyı açar, ama ışığı yakmaz.",
               "style": "thought"
             }
@@ -1219,14 +1224,35 @@
         },
         {
           "when": {
-            "not": {
-              "flag": "murat_caught"
-            }
+            "all": [
+              {
+                "not": {
+                  "flag": "murat_caught"
+                }
+              },
+              {
+                "ref": "murat_iz"
+              }
+            ]
           },
           "lines": [
             {
               "speaker": "player",
               "text": "Murat Koç’un nerede olduğunu kimse bilmiyordu. Bir sigaranın kor ucu, bir yerde, yanıp sönüyordu.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "not": {
+              "ref": "murat_iz"
+            }
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "O gece Depo 3’ün arka kapısından kimin çıktığını bilmiyordum. Dosya da bilmiyordu. Bir yerde biri biliyordu; ve bu gece rahat uyuyacaktı.",
               "style": "thought"
             }
           ]

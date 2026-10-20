@@ -74,7 +74,7 @@ gösterilen metindir (aynı metin bir kez sayılır). Tipik yol (`TIPIK`) için 
 - **90–120 dakika**.
 
 İkisi birlikte tutmalıdır: 180 sözcük/dk ile 18 bin sözcük 100 dakikalık okumadır, aksiyonlar (100–250 × 6 sn =
-10–25 dk) üstüne eklenir. Pratik hedef **16–19 bin sözcük ve 120–220 aksiyon**; 21 binin üstünde 120 dakika sınırı
+10–25 dk) üstüne eklenir. Pratik hedef **15–18 bin sözcük ve 100–180 aksiyon** (ör. 16 bin + 150 aksiyon ≈ 104 dk); yaklaşık 20 binin üstünde 120 dakika sınırı
 aşılır (bkz. kit raporu).
 
 | Bölüm | Node'lar (iskelet) | ~dk | ~sözcük | İçerik |

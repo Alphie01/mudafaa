@@ -33,7 +33,7 @@
     "db:migrate": "npm run migrate -w @mudafaa/api",
     "db:migrate:test": "npm run migrate:test -w @mudafaa/api",
     "db:seed": "npm run seed -w @mudafaa/api",
-    "emulators": "firebase emulators:start --only auth --project demo-mudafaa",
+    "emulators": "firebase emulators:start --only auth --project demo-mudafaa --import=.emulator-data --export-on-exit=.emulator-data",
     "dev:api": "npm run start:dev -w @mudafaa/api",
     "dev:web": "cd apps/mobile && fvm flutter run -d web-server --web-port 8090",
     "case:import": "npm run case:import -w @mudafaa/api --",

@@ -537,6 +537,7 @@ export const invInsanlar: CasePart = {
           `),
         }),
         option('KUB_CIHAZLAR', 'Bilgisayarları kim kurardı?', {
+          visibleWhen: has('clue_cihaz3'),
           score: { ARASTIRMA: 30 },
           responses: B(`
             kubra: Ozan Bey. Bütün “dijital işler” onundu; mailler, bulut, yedekler, oturumlar. Tarık Bey bir şifreyi bile zor girerdi.
@@ -544,10 +545,11 @@ export const invInsanlar: CasePart = {
           `),
         }),
         option('KUB_OZAN', 'Ozan Bey ayrıldıktan sonra görüştünüz mü?', {
+          visibleWhen: has('clue_dock'),
           score: { ARASTIRMA: 20 },
           responses: B(`
             kubra: Bir kere. Nilüfer’de yeni ofisini açmış, beni işe çağırdı. Gitmedim; Tarık Bey’e ayıp olurdu.
-            kubra: Masasında eski ofisin bir dizüstüsü vardı sanki. “07” etiketli. Emin değilim ama. Ozan Bey “bu bana ömür boyu yeter” demişti, gülerek.
+            kubra: Masasında bir dizüstü vardı; bizim ofistekilere benziyordu. Etiketine bakmadım, emin değilim. Ozan Bey “eski dostlar ömür boyu yeter” demişti, gülerek.
           `),
         }),
         option('KUB_YONLENDIR', '“Ozan o dizüstüyü kullanıyordu” dersen çok iyi olur.', {

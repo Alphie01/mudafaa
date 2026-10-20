@@ -805,7 +805,7 @@ export const ara: CasePart = {
           has('ded_ip_tekin'),
           `
           ~ Panoda üç iplik artık tek bir yere bağlanıyor. Bir dizüstü: ofise dönmeyen 07. Bir hat: 85.105.44.17, Tekin Yapı Danışmanlık. Bir üslup: “Sn.”, üç nokta, “Saygılar.”
-          ~ Ve yarın o adresin sahibi, o dizüstünün zimmetlisi, tanık kürsüsünde yemin edecek. “Bildiğimi dosdoğru söyleyeceğime” diyecek. Bakalım söyleyebilecek mi.
+          ~ Ve yarın o adresin sahibi, o dizüstünün zimmetlisi, tanık kürsüsüne çıkacak. Bildiğini dosdoğru söyleyecek mi, göreceğiz.
           ~ İsmi ben koymadım. Bir zimmet listesi, bir sağlayıcı yazısı ve bir e-posta çıktısı koydu. Ben yalnızca onları aynı masaya dizdim.
         `,
         ),

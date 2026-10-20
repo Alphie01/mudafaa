@@ -313,7 +313,22 @@ export const trial: CasePart = {
       courtStage: 'TANIK_DINLEME',
       background: 'durusma_salonu',
       ...ozanW,
-      lines: B(`
+      lines: [
+        W(
+          flag('suc_duyurusu'),
+          `
+        recep: Tanık Ozan Tekin!
+        feride: Tanık, müdafiin suç duyurusu üzerine hakkınızda ayrı bir soruşturma yürütüldüğü anlaşılıyor. Bu nedenle yeminsiz dinleneceksiniz (CMK 50/1-c). Gerçeği söylemeniz yine beklenir.
+        > Ozan bir an duraksadı; sonra bana doğru hafifçe başını eğdi, o eski “üstat” selamıyla. Yemin etmeyecekti. Gülümsemesi bunu bir ayrıcalık sayıyordu.
+        ozan: Elbette Sayın Hâkim. Saklayacak bir şeyim yok.
+        feride: Sanıkla ilişkinizi ve bildiklerinizi anlatın.
+        ozan: On yıllık dostum, üç yıllık ortağım. Mart’ta yollarımızı ayırdık; dostça desem yalan olur, ama kan davası da değildi. İş işte, bazen biter.
+        ozan: Tarık dâhi bir mimardır. Ama öfkeli bir adamdır, insanları tanımaz. Herkese tek bir anahtarla yaklaşır; sonra o anahtarı birinin kullanmasına şaşırır.
+        ozan/uzgun: Ekim ortasında Tophane’de, türbenin altındaki çay bahçesinde oturduk. “Melis’in sırlarını biliyorum, onu pişman edeceğim” dedi. Ben güldüm, ciddiye almadım. Keşke alsaymışım.
+        > Anlatışı pürüzsüzdü. Fazla pürüzsüz. İyi yazılmış bir metin gibi. Ve ben, iyi yazılmış metinlerin kimin elinden çıktığını merak eden biriyim.
+        `,
+        ),
+        O(`
         recep: Tanık Ozan Tekin!
         > Ozan kürsüye çıkarken bana doğru hafifçe başını eğdi, o eski “üstat” selamıyla. Yeminini gür bir sesle etti; sanki bir açılış kokteylinde konuşuyordu, sanki salon onu dinlemek için toplanmıştı.
         ozan: Bildiğimi dosdoğru söyleyeceğime namusum ve vicdanım üzerine yemin ederim Sayın Hâkim.
@@ -322,7 +337,8 @@ export const trial: CasePart = {
         ozan: Tarık dâhi bir mimardır. Ama öfkeli bir adamdır, insanları tanımaz. Herkese tek bir anahtarla yaklaşır; sonra o anahtarı birinin kullanmasına şaşırır.
         ozan/uzgun: Ekim ortasında Tophane’de, türbenin altındaki çay bahçesinde oturduk. “Melis’in sırlarını biliyorum, onu pişman edeceğim” dedi. Ben güldüm, ciddiye almadım. Keşke alsaymışım.
         > Anlatışı pürüzsüzdü. Fazla pürüzsüz. İyi yazılmış bir metin gibi. Ve ben, iyi yazılmış metinlerin kimin elinden çıktığını merak eden biriyim.
-      `),
+        `),
+      ],
       choices: [cont('T03_DEVAM', 'Çapraz sorguya başla', 'T_03T')],
     }),
     court2.testimony('T_03T', {

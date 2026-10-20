@@ -654,7 +654,7 @@ export const hearing1: CasePart = {
           cost: [{ var: 'slots2', amount: 1 }],
           score: { USUL_BILGISI: 30 },
           effects: [raise('bilirkisi_istendi')],
-          good: 'Kolluk raporunun eki yorumlanmamış; mahkeme özel ve teknik bilgi gerektiren konuda bilirkişi atar (CMK 63/1). Yedekten kopya savunmaya verilir (CMK 134/4).',
+          good: 'Kolluk raporunun eki yorumlanmamış; mahkeme özel ve teknik bilgi gerektiren konuda bilirkişi atar (CMK 63/1). Yedekten bir kopya savunmaya verilir (CMK 134/5).',
           responses: B(`feride: Kabul. Bir adli bilişim bilirkişisi atanacak; imajın kopyası müdafiye verilecek.`),
           next: '$stay',
         }),

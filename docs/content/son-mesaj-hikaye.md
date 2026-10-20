@@ -174,6 +174,8 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
 - **INV_SABAH** (~250) · bg: sokak_sabah: Tophane'de sabah; han kapısında simitçi; Deniz'in planı.
 - **Hub hedefleri:** gün 1 "Mesajlar nereden çıktı? Telefon karakolda kimin elindeydi?"; gün 2 (bulgulara göre)
   "Ek-3'teki sütun / hastane gecesi / bağlı cihazlar"; gün 3 "Talepler son gün. Duruşmada neyi istiyorsun?"
+- **INV_T_KUBRA** (Tophane'de kahve): eski stajyer; tablet ve wifi notu. "Bilgisayarları kim kurardı?" ancak Ek-3'teki
+  cihaz sütunu bulunduktan, "Ozan Bey'le görüştünüz mü?" ancak ofisteki boş "07" dok bulunduktan sonra açılır.
 - **INV_GORUSME (~1.400)** · bg: buro. Tarık'ın kızını okuldan alma saatine 15 dakika var. Konular: "O geceler",
   "Melis", "Karakolda telefon", "Şifre" (ofiste yapışkan not bulunduysa), "Ozan" (dok istasyonu ya da üslup bulgusu
   varsa), "Bağlı cihazlar" (Ek-3 sütunu bulunduysa). Yumuşak ton güven +4, sert ton −8 ve ek bilgi (sert tonun
@@ -201,7 +203,7 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
 - **INV_T_OZAN** (Tekin Yapı; çay, simit, han hikâyeleri). Ozan yardımseverdir: "Tarık'ı severim üstat, ama o gece kafede
   söyledikleri…" Tuzak: Deniz bağlı cihazlardan ya da 07'den söz ederse Ozan uyarılmış olur (`ozan_uyarildi`): ara
   evresinde dizüstü bulunamaz, bir puan kaybedilir. Ayrılırken: "Hadi, saygılar üstat."
-- **INV_DIL** (talepler, 3 hak): bağımsız adli bilişim bilirkişisi ve imajın kopyası (CMK 134/4, 63, 67); IP abone sorgusu
+- **INV_DIL** (talepler, 3 hak): bağımsız adli bilişim bilirkişisi ve imajın kopyası (CMK 134/5, 63, 67); IP abone sorgusu
   (cihaz 3 ve IP bulunmuşsa); hastane kayıtları ve kamera; Hayri Sezer'in tanık olarak dinlenmesi; reddedilecek olanlar
   (katılanın telefonunun incelenmesi; platformdan yurt dışı yazışma; keşif).
 - **INV_CIKARIM** (tahta, 0 EP): altı tarif + yanlış iz kartları (pay kavgası, "Melis yazdı" teorisi).
@@ -236,17 +238,33 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
   yedeğinden silmeyi önerir. Doğru yol: reddetmek ve savcılığa suç duyurusu. Yanlış yol: `karartma` → ETİK sonu.
 - **ARA_SUC** (suç duyurusu): hesabı ele geçiren kişi(ler) hakkında; Ozan'ın adı yalnızca demirbaş + IP/bağlı cihaz
   dayanağıyla yazılabilir. Savcılık Tekin Yapı'da arama yapar; Ozan uyarılmadıysa 07 numaralı dizüstü dolapta bulunur.
+- **ARA_RAPOR** (belge, 2. hafta; ~450): Dr. Uçar'ın raporu. Leyla: "Bilirkişi senin tanığın değil; mahkemenin gözü."
+  İsabetler: cihaz 3 = PUSULA Masaüstü (Windows); 9 Kasım'da dokunma olayı yok; polisin 14 ekran görüntüsünün imajdan
+  önce telefona yazılmış olması (karşılaştır); raporun dürüst sınırı: "cihaz 3'ü kullanan bu imajdan belirlenemez."
+- **ARA_VAKIF** (Koza Han, belge; ~500): Hayri Bey ihale dosyasını gösterir ("Dosya vakfındır, mahkeme isterse
+  gönderirim; gözünle bakmana kimse bir şey demez"). Gelen evrak defterinde 10 Kasım 09.12'de Tekin Yapı'dan bir e-posta:
+  "Sn. Kurul, ortak girişimin bir üyesine ilişkin özel kayıtların dolaşımda olduğu... Saygılar." Ses kaydı yedi saat
+  önce iletilmiş, dedikodu bir hafta sonra yayılmıştır: yazanın bildiği, yalnızca göndericinin bilebileceği bir şeydir.
+  Tahtada tehditlerin üslubuyla ikinci bir "aynı imza" yolu açar.
 - **ARA_SON** (~400): IP abone yanıtı gelir (istendiyse): "85.105.44.17 — Tekin Yapı Danışmanlık Ltd. Şti., Nilüfer."
   Deniz (thought): "Bir ekran. Bir hat. Bir adres."
 
 ### Bölüm 5 · İKİNCİ CELSE (~3.000)
 - `card`: "ÜÇ HAFTA SONRA — 2. CELSE". Ozan tanık bekleme salonunda, takım elbiseli, gülümsüyor.
+- **Dizüstü (T_00L; yalnızca savcılık bulduysa, ~350):** Savcı aramayı ve mühürlü torbayı bildirir. Deniz'in sınavı:
+  "Hemen açılsın, ekranı görelim" (polisin hatasının tekrarı) mı, yoksa "mühür tutanakla açılsın, imaj ve hash alınsın,
+  inceleme kopyada yapılsın" mı? Davanın hukuki ekseni bu kez savunmanın kendi elindeki delilde sınanır.
 - **Bilirkişi Dr. Uçar:** rapor; sorular (cihaz 3, kilit kayıtları, ekran görüntülerinin değeri). Bilirkişi istenmediyse
   yalnızca polis raporu okunur.
 - **Hayri Sezer:** 02.14 bildirimi; sade doğruluk.
 - **Ozan Tekin** (O1–O5): "pişman edeceğim" iddiası (kanaat/duyum); "her şeyi teslim ettim" (demirbaş); "PUSULA'yı yalnızca
   telefonda kullanırım" (IP); "Tarık'ın şifresini nereden bileyim" (yapışkan not, kurulum); "mesajlar Tarık'ın
   üslubu" (üslup). Kırılma: hâkim CMK 48'i hatırlatır; Ozan "Bu soruya cevap vermeyeceğim." Salon uğuldar (`shake`).
+- **Ozan suç duyurusuyla şüpheli konumundaysa** hâkim onu yeminsiz dinler (CMK 50/1-c); Ozan bunu bir ayrıcalık gibi
+  gülümseyerek karşılar.
+- **Katılanın beyanı (T_04K; ara evresinde Melis'le görüşüldüyse, ~250):** Melis: "Bugün o ismin, mesajları yazan kişi
+  olduğundan emin değilim. Şikâyetimi geri almıyorum; doğru kişiye yönelsin istiyorum." Deniz beyanı saygıyla tutanağa
+  geçirtir; "vazgeçme sayılsın" demek ya da özür beklemek bedel öder.
 - **Savcının karşı delili:** 25 Ekim mesajları (saik). Doğru cevap: öfkeli ama tehdit içermeyen ticari tartışma;
   üslup farkı.
 - **Mütalaa** (iki varyant) ve cevap. **Dayanaklar** (3 seçim). **Esas savunma** 3–5 satırlık konuşma. **Son söz:** Tarık'ın
@@ -256,7 +274,7 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
 - **BERAAT_B:** "TÜRK MİLLETİ ADINA…" Koridorda Melis, Tarık'a yaklaşamaz; Deniz'e "Neyse." der, sonra "Teşekkür ederim."
   Ozan'ın adı geçen bir suç duyurusu; Tarık telefonunu emanetten alır, PUSULA'yı açar, "bağlı cihazlar"a girer ve bütün
   oturumları kapatır. Son satır: "Ekran karardı. Bu kez kimse yazmıyordu."
-- **BERAAT_E:** Beraat, ama vakıf ihaleyi başka firmaya verdi; koridorda "Şüpheden yararlandı" fısıltısı. Tarık: "Kızıma ne
+- **BERAAT_E:** (suç duyurusu verilip dizüstü bulunduysa: "Kâğıtlar ismi söyledi; ben esas savunmada susmuştum" varyantı) Beraat, ama vakıf ihaleyi başka firmaya verdi; koridorda "Şüpheden yararlandı" fısıltısı. Tarık: "Kızıma ne
   diyeceğim? 'Kanıtlayamadılar' mı?" İç ses: "Bazen beraat bir kapıyı açar, ama ekran hâlâ yanar."
 - **KISMİ (İNDİRİM):** 134'ten beraat, 107'den HAGB. Tarık: "Yarım masumiyet." Melis koridorda bakmadan geçer.
 - **MAHKÛMİYET:** Emanetten alınan telefon; arşivlenmiş sohbet hâlâ orada. İç ses: "Bir sütun. Bakmadım."

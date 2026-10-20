@@ -1309,6 +1309,7 @@
           "id": "KUB_CIHAZLAR",
           "kind": "OPTION",
           "label": "Bilgisayarları kim kurardı?",
+          "visibleWhen": { "hasEvidence": "clue_cihaz3" },
           "responses": [
             {
               "lines": [
@@ -1329,6 +1330,7 @@
           "id": "KUB_OZAN",
           "kind": "OPTION",
           "label": "Ozan Bey ayrıldıktan sonra görüştünüz mü?",
+          "visibleWhen": { "hasEvidence": "clue_dock" },
           "responses": [
             {
               "lines": [
@@ -1338,7 +1340,7 @@
                 },
                 {
                   "speaker": "kubra",
-                  "text": "Masasında eski ofisin bir dizüstüsü vardı sanki. “07” etiketli. Emin değilim ama. Ozan Bey “bu bana ömür boyu yeter” demişti, gülerek."
+                  "text": "Masasında bir dizüstü vardı; bizim ofistekilere benziyordu. Etiketine bakmadım, emin değilim. Ozan Bey “eski dostlar ömür boyu yeter” demişti, gülerek."
                 }
               ]
             }

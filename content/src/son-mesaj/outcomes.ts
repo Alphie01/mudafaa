@@ -49,7 +49,7 @@ export const outcomes: CasePart = {
       header: 'TÜRK MİLLETİ ADINA',
       sentence: 'Ceza yok · Adli kontrol kaldırıldı',
       verdictText:
-        'Sanık Tarık Aksoy’a atılı şantaj ve özel hayatın gizliliğini ihlal suçlarını sanığın işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; adli kontrolün kaldırılmasına; dosyadan gerçek fail yönünden suç duyurusunda bulunulmasına; sanık lehine CMK 141 uyarınca tazminat hakkının bulunduğunun hatırlatılmasına; istinaf yolu açık olmak üzere.',
+        'Sanık Tarık Aksoy’a atılı şantaj ve özel hayatın gizliliğini ihlal suçlarını sanığın işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; adli kontrolün kaldırılmasına; dosyadan gerçek fail yönünden suç duyurusunda bulunulmasına; telefona el koyma tedbiri nedeniyle CMK 141 vd. uyarınca tazminat isteminde bulunabileceğinin sanığa hatırlatılmasına; istinaf yolu açık olmak üzere.',
       reasoning: [
         because('Tehdit mesajları ve iletilen ses kaydı, sanığın telefonundan değil, hesabına bağlı OFIS-LAPTOP-07 masaüstü oturumundan gönderilmiştir.'),
         because('Bu dizüstü eski ortağın zimmetindedir; oturum adresleri onun firmasının iş hattıdır; mesajların dili sanığın değil, tanığınkidir.', flag('contra_o3')),
@@ -58,7 +58,7 @@ export const outcomes: CasePart = {
         because('Eski ortağın işyerinde el konulan dizüstü, mühür tutanakla açılıp imajı ve hash değeri alınarak korunmuştur (CMK 134/4).', flag('laptop_imaj')),
         because('Bu deliller birlikte değerlendirildiğinde, suçların sanık tarafından işlenmediği sabittir.'),
       ],
-      legalBasis: 'CMK 223/2-b; CMK 141; TCK 107/2, 134/2 (beraat)',
+      legalBasis: 'CMK 223/2-b; CMK 141–142; TCK 107/2, 134/2 (beraat)',
       xp: xp(1.2, { ethicsVar: 'ethics' }),
       howToReach:
         'Cihazı, hattı ve dizüstüyü delillerle göster; somut dayanaklı suç duyurusu ver; esas savunmada gerçek faili ortaya koy.',
@@ -178,12 +178,12 @@ export const outcomes: CasePart = {
       header: 'TÜRK MİLLETİ ADINA',
       sentence: '2 yıl 6 ay + 1 yıl 3 ay hapis',
       verdictText:
-        'Sanığın özel hayatın gizliliğini ihlalden (TCK 134/2) 2 yıl 6 ay, şantajdan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, TCK 53 ve 63’ün uygulanmasına; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).',
+        'Sanığın özel hayatın gizliliğini ihlalden (TCK 134/2) 2 yıl 6 ay, şantajdan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, TCK 53’ün uygulanmasına; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).',
       reasoning: [
         because('Mesajlar ve iletilen ses kaydı sanığa ait hesapta, sanığın telefonunda tespit edilmiş; aksi yönde yeterli delil ortaya konmamıştır.'),
         because('Savunmanın duruşmadaki inandırıcılığı yitirilmiş; heyet iddianamedeki anlatımı esas almıştır.', flag('cokus')),
       ],
-      legalBasis: 'TCK 134/2, 107/2, 43/1, 53, 63; CMK 273/1',
+      legalBasis: 'TCK 134/2, 107/2, 43/1, 53; CMK 273/1',
       xp: xp(0.6, { ethicsVar: 'ethics' }),
       howToReach: 'Varsayılan sonuç: mesajların kaynağına dair kuşku yaratılamazsa verilir.',
       epilogue: [

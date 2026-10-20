@@ -125,6 +125,28 @@ enum TransitionKind {
   @@map("transition_kind")
 }
 
+enum StorePlatform {
+  ANDROID
+  IOS
+
+  @@map("store_platform")
+}
+
+enum PurchaseStatus {
+  VERIFIED
+  REVOKED
+
+  @@map("purchase_status")
+}
+
+enum EntitlementSource {
+  PURCHASE
+  PREMIUM_PICK
+  GRANT
+
+  @@map("entitlement_source")
+}
+
 enum TransitionTarget {
   NODE
   STAY
@@ -154,7 +176,10 @@ model User {
   progress          UserProgress[]
   sessions          GameSession[]
   auditLogs         AdminAuditLog[]
-  publishedVersions CaseVersion[]   @relation("PublishedBy")
+  publishedVersions CaseVersion[]     @relation("PublishedBy")
+  purchases         Purchase[]
+  entitlements      CaseEntitlement[]
+  subscriptions     Subscription[]
 
   @@map("users")
 }
@@ -256,9 +281,11 @@ model Case {
   createdAt        DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
   updatedAt        DateTime       @updatedAt @map("updated_at") @db.Timestamptz(3)
 
-  versions CaseVersion[]  @relation("CaseVersions")
-  progress UserProgress[]
-  sessions GameSession[]
+  versions     CaseVersion[]     @relation("CaseVersions")
+  progress     UserProgress[]
+  sessions     GameSession[]
+  purchases    Purchase[]
+  entitlements CaseEntitlement[]
 
   @@map("cases")
 }
@@ -944,4 +971,74 @@ model AdminAuditLog {
 
   @@index([createdAt])
   @@map("admin_audit_logs")
+}
+
+// ─── Satın alma (docs/iap.md) ────────────────────────────────────────────────
+// Mağaza makbuzu sunucuda doğrulanır; hak kullanıcı hesabına yazılır. Satın alma satırı kullanıcı silinince kalır
+// (`user_id` NULL): aynı token başka hesapta yeniden kullanılamasın.
+
+model Purchase {
+  id           String         @id @default(uuid(7)) @db.Uuid
+  userId       String?        @map("user_id") @db.Uuid
+  user         User?          @relation(fields: [userId], references: [id], onDelete: SetNull)
+  platform     StorePlatform
+  productId    String         @map("product_id")
+  // Android: purchaseToken · iOS: transactionId. Bir token yalnızca bir kez kabul edilir.
+  token        String         @unique
+  orderId      String?        @map("order_id")
+  caseId       String?        @map("case_id") @db.Uuid
+  case         Case?          @relation(fields: [caseId], references: [id], onDelete: SetNull)
+  status       PurchaseStatus @default(VERIFIED)
+  // Mağazanın ham doğrulama yanıtı (denetim ve sorun giderme).
+  verification Json
+  createdAt    DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime       @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  entitlement CaseEntitlement?
+
+  @@index([userId])
+  @@map("purchases")
+}
+
+model CaseEntitlement {
+  id             String            @id @default(uuid(7)) @db.Uuid
+  userId         String            @map("user_id") @db.Uuid
+  user           User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  caseId         String            @map("case_id") @db.Uuid
+  case           Case              @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  source         EntitlementSource
+  purchaseId     String?           @unique @map("purchase_id") @db.Uuid
+  purchase       Purchase?         @relation(fields: [purchaseId], references: [id], onDelete: SetNull)
+  subscriptionId String?           @map("subscription_id") @db.Uuid
+  subscription   Subscription?     @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+  createdAt      DateTime          @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@unique([userId, caseId])
+  @@map("case_entitlements")
+}
+
+model Subscription {
+  id             String        @id @default(uuid(7)) @db.Uuid
+  userId         String        @map("user_id") @db.Uuid
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  platform       StorePlatform
+  productId      String        @map("product_id")
+  // Android: ilk purchaseToken · iOS: originalTransactionId. Yenilemeler aynı satırı günceller.
+  originalId     String        @map("original_id")
+  // Mağazaya yeniden sorulurken kullanılan son token.
+  latestToken    String        @map("latest_token")
+  expiresAt      DateTime      @map("expires_at") @db.Timestamptz(3)
+  autoRenewing   Boolean       @default(true) @map("auto_renewing")
+  // Premium seçim sayacı: dönem mağazanın bildirdiği bitiş tarihidir; bitiş değişince sayaç sıfırlanır.
+  picksPeriodEnd DateTime?     @map("picks_period_end") @db.Timestamptz(3)
+  picksUsed      Int           @default(0) @map("picks_used")
+  checkedAt      DateTime      @default(now()) @map("checked_at") @db.Timestamptz(3)
+  createdAt      DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt      DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  entitlements CaseEntitlement[]
+
+  @@unique([platform, originalId])
+  @@index([userId, expiresAt])
+  @@map("subscriptions")
 }

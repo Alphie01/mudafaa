@@ -10,7 +10,9 @@ export const TEST_ASSET_DIR = fileURLToPath(new URL('../../../storage/test-asset
 
 /**
  * E2E ortamı: hızlı doğrulama bütçesi (sayım bütçeleri; `maxMs` yalnızca acil durdurma), yüksek hız sınırı (golden
- * path'ler saniyede onlarca aksiyon gönderir), APP_ROLE=all (kuyruk işleyicisi aynı süreçte).
+ * path'ler saniyede onlarca aksiyon gönderir), APP_ROLE=all (kuyruk işleyicisi aynı süreçte). Satın alma: sahte
+ * doğrulayıcı (`test:` token'ları) ve kapalı ücret kilidi (davalar benzersiz numarayla açılır, #01–#02 dışındaki her
+ * dava ücretli olurdu); ücret kilidi testleri `PAYWALL_ENABLED: 'true'` ile açar.
  */
 export function testEnv(overrides: Record<string, string | undefined> = {}): Env {
   return loadEnv({
@@ -26,6 +28,8 @@ export function testEnv(overrides: Record<string, string | undefined> = {}): Env
     VALIDATOR_MAX_STATES: '1000',
     VALIDATOR_WALKS: '10',
     VALIDATOR_MAX_MS: '60000',
+    PURCHASE_VERIFY_MODE: 'fake',
+    PAYWALL_ENABLED: 'false',
     ...overrides,
   });
 }

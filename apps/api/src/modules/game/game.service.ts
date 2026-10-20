@@ -39,6 +39,7 @@ import { PrismaService } from '../../database/prisma.service.js';
 import type { GameSession, Prisma } from '../../generated/prisma/client.js';
 import type { AuthUser } from '../auth/decorators.js';
 import { CaseLoaderService, type LoadedCase } from '../content/case-loader.service.js';
+import { EntitlementService } from '../purchases/entitlement.service.js';
 
 type Tx = Prisma.TransactionClient;
 type Tab = 'active' | 'closed' | 'locked';
@@ -75,6 +76,7 @@ export class GameService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly loader: CaseLoaderService,
+    private readonly entitlements: EntitlementService,
   ) {}
 
   // ── Rütbe ──
@@ -98,10 +100,11 @@ export class GameService {
 
   // ── Kullanıcı ──
   async me(user: AuthUser): Promise<MeResponse> {
-    const [u, ranks, cards] = await Promise.all([
+    const [u, ranks, cards, premium] = await Promise.all([
       this.prisma.user.findUniqueOrThrow({ where: { id: user.id }, include: { profile: true, statistics: true } }),
       this.ranks(),
       this.cards(user),
+      this.entitlements.premium(user.id),
     ]);
     const st = u.statistics;
     const xp = st?.xp ?? 0;
@@ -139,6 +142,9 @@ export class GameService {
       },
       ...(active === null ? {} : { activeSession: await this.summaryOf(active) }),
       newCases: cards.filter((c) => c.status === 'NEW').length,
+      premium,
+      // Reklamsız kullanım yalnızca aktif premium aboneliğe bağlıdır (docs/iap.md).
+      adFree: premium.active,
     };
   }
 
@@ -188,7 +194,10 @@ export class GameService {
     ]);
     const userRank = this.standing(ranks, stats?.xp ?? 0).rank;
     const order = (key: string | null | undefined): number => ranks.findIndex((r) => r.key === key);
-    const art = await this.cardArt(cases, progress);
+    const [art, access] = await Promise.all([
+      this.cardArt(cases, progress),
+      this.entitlements.accessMap(user.id, cases),
+    ]);
     const out: CaseCard[] = [];
     for (const c of cases) {
       const v = c.currentVersion;
@@ -223,6 +232,7 @@ export class GameService {
           },
         },
         status: cardStatus({ locked, activeSessionId: act?.id, bestOutcomeKey: prog?.bestOutcomeKey }),
+        access: access.get(c.id) ?? 'PAID_LOCKED',
         ...(locked && required ? { lockReason: `${required.label} rütbesi gerekir`, requiredRank: required } : {}),
         ...(act === undefined ? {} : { activeSessionId: act.id }),
         ...(best === undefined || prog === undefined
@@ -363,6 +373,8 @@ export class GameService {
       where: { userId: user.id, caseId, status: 'ACTIVE', mode: 'NORMAL' },
     });
     if (existing !== null && !restart) return { created: false, body: await this.startBody(existing) };
+    // Ücret kilidi yeni oturumda uygulanır; ücret kilidinden önce açılmış oturum kaldığı yerden sürer.
+    this.entitlements.assertPlayable(card.access);
     const c = await this.prisma.case.findUniqueOrThrow({ where: { id: caseId } });
     const snap = await this.prisma.contentVersion.findFirstOrThrow({
       where: { caseVersionId: c.currentVersionId ?? '', kind: 'PUBLISH_SNAPSHOT' },

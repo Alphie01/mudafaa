@@ -137,7 +137,7 @@
       "stamp": "İNDİRİM",
       "stampTone": "amber",
       "sentence": "6 yıl 3 ay hapis",
-      "verdictText": "Sanık Kerem Aydın’ın cezalandırılmasına: TCK 142/2-h uyarınca takdiren alt sınırdan 5 YIL; gece vakti nedeniyle TCK 143 ile 7 YIL 6 AY; sanığın duruşmadaki tutum ve davranışları lehine takdiri indirim nedeni sayılarak TCK 62/1 ile 6 YIL 3 AY HAPİS; işverence teslim edilen anahtar ‘haksız yere elde bulundurulan’ nitelikte olmadığından TCK 142/2-d’nin uygulanmasına yer olmadığına; TCK 53; TCK 63; cezanın süresi nedeniyle HAGB (CMK 231/5) ve erteleme (TCK 51/1) koşulları bulunmadığına; tutukluluğun devamına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "verdictText": "Sanık Kerem Aydın’ın cezalandırılmasına: TCK 142/2-h uyarınca takdiren alt sınırdan 5 YIL; gece vakti nedeniyle TCK 143 ile 7 YIL 6 AY; sanığın sabıkasız geçmişi ve cezanın geleceği üzerindeki olası etkileri gözetilerek TCK 62/1 ile 6 YIL 3 AY HAPİS; işverence teslim edilen anahtar ‘haksız yere elde bulundurulan’ nitelikte olmadığından TCK 142/2-d’nin uygulanmasına yer olmadığına; TCK 53; TCK 63; cezanın süresi nedeniyle HAGB (CMK 231/5) ve erteleme (TCK 51/1) koşulları bulunmadığına; tutukluluğun devamına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
       "reasoning": [
         {
           "text": "Eylem bina içinde muhafaza edilen eşyaya yönelik (TCK 142/2-h) ve gece vakti (TCK 143) işlenmiştir."
@@ -171,11 +171,11 @@
       "verdictText": "Sanık Kerem Aydın’ın üzerine atılı nitelikli hırsızlık suçundan 7 YIL 6 AY HAPİS cezası ile cezalandırılmasına; TCK 53; TCK 63; tutukluluğun devamına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).",
       "reasoning": [
         {
-          "when": { "not": { "flag": "arg_142_2d" } },
+          "when": { "any": [{ "not": { "flag": "arg_142_2d" } }, { "flag": "cokus" }] },
           "text": "142/2-d ve h birlikte, zararın ağırlığı gözetilerek alt sınırdan uzaklaşılarak 6 YIL; TCK 143 ile 9 YIL; TCK 62/1 ile 7 YIL 6 AY HAPİS; TCK 53; TCK 63; tutukluluğun devamına; istinaf."
         },
         {
-          "when": { "flag": "arg_142_2d" },
+          "when": { "all": [{ "flag": "arg_142_2d" }, { "not": { "flag": "cokus" } }] },
           "text": "Yalnızca TCK 142/2-h uyarınca, zararın ağırlığı gözetilerek alt sınırdan uzaklaşılarak 6 YIL; TCK 143 ile 9 YIL; TCK 62/1 ile 7 YIL 6 AY HAPİS; işverence teslim edilen anahtar nedeniyle TCK 142/2-d’nin uygulanmasına yer olmadığına; TCK 53; TCK 63; tutukluluğun devamına; istinaf."
         },
         {

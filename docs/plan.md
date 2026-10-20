@@ -952,22 +952,22 @@ Yeni ikonlar (tasarımın stroke stilinde): fingerprint, boot, cigarette, magnif
   - Gün 2: Belediye A · Hüseyin + bildir · Dilekçe: bilirkişi, DNA, kamera.
   - Gün 3: Çıkarım: lamba + mazeret + 1 yanlış çift.
   - Duruşma: L1–L3 A · S1 vardiya · S2 ded_lamba · S3'te anahtar (yanlış) · S4a + ded_mazeret (kısmi) · Hüseyin A · L4–L7 A · esas savunma B.
-  - Beklenen: **TOPLAM 3.645**, ♥4, **XP 364**.
+  - Beklenen: **TOPLAM 3.545**, ♥4, **XP 354**. (İlk taslakta 3.645 yazıyordu; A.2 tutarlarıyla yeniden hesap 3.545 verir.)
 - **G3 → İNDİRİM** (İndirim)
   - Akış: zayıf soruşturma, Murat ziyareti, yanlış sunumlar.
   - Duruşma: L2 A (arg_142_2d) · L3 B · S2'de fiş (yanlış) · S4 kolluk (kısmi) · Hüseyin yok · L4 B · L5 bilirkişi · L6 "Kerem açıklasın" · L7 A · esas savunma C.
-  - Beklenen: **TOPLAM 2.010**, ikna 4, **XP 170**.
+  - Beklenen: **TOPLAM 2.125**, ikna 4, **XP 180** (yazılan içerikteki somut soruşturma adımlarıyla).
 - **G4 → MAHKÛMİYET A** (Masumiyet)
   - Akış: sert görüşme (güven 38), zayıf arama/inceleme.
   - Duruşma: L1 B · ek savunma B · L2 D · L3 B · iki yanlış sunum · L4 D · L5 D · L6 C · L7 B · desteksiz esas savunma A.
-  - Beklenen: **TOPLAM 100**, ♥3, **XP 6**.
+  - Beklenen: **TOPLAM 55**, ♥3, **XP 3** (L6'da "Yok"; "L6 C" bir kalp götürdüğü için ♥3 ile çelişiyordu).
 - **G5 → İKRAR** (İndirim)
   - Akış: makul soruşturma; ek savunmada D → "ısrar et"; esas savunma C.
-  - Beklenen: TOPLAM 2.235 → **İKRAR**, XP 0, etik kartı gösterilir.
+  - Beklenen: TOPLAM 2.945 → **İKRAR**, XP 0, etik kartı gösterilir.
 - **W → ÇÖKÜŞ**
   - Akış: Selin'e baskı (♥4 ile başlar) · operatördeki tanıdık · sert görüşmeler · çok ıska.
   - Duruşma: L1 C · ek savunma C · L3 C · S4a, S4b + ev_hts_illegal (♥0) → C_INT_COKUS.
-  - Beklenen: TOPLAM −635 (0 gösterilir), XP 0.
+  - Beklenen: TOPLAM −595 (0 gösterilir), XP 0 (iki sert görüşme konusunun +20'leri dahil).
 
 ### A.8 Rapor metinleri
 - **Kaçırılanlar** (`report.hints`):

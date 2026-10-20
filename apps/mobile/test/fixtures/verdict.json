@@ -1,0 +1,263 @@
+{
+ "title": "Karar · epilog",
+ "description": "Damga çarpar, skor sayarak yükselir, ardından tam ekran epilog oynar; döküm ve rapor erişilebilir kalır.",
+ "steps": [
+  {
+   "session": {
+    "id": "dev-session",
+    "caseId": "dev-case",
+    "caseNumber": 0,
+    "caseTitle": "Örnek Dosya",
+    "stateVersion": 40,
+    "status": "COMPLETED",
+    "mode": "TEST"
+   },
+   "header": {
+    "eyebrow": "ÖRNEK · HÜKÜM",
+    "title": "Karar açıklandı",
+    "backdrop": "durusma_salonu"
+   },
+   "hud": [],
+   "cast": {
+    "sen": {
+     "name": "Av. Deniz",
+     "shortLabel": "Deniz",
+     "role": "COUNSEL",
+     "accent": "#2f6dbb",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...khhhhhhhhk...",
+       "...khhhhhhhhk...",
+       "...khsssssshk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...ksssSSsssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkmwrrwmkk...",
+       "..knnmwrrwmnnk..",
+       "..knnnmrrmnnnk..",
+       "..knNnnmmnnNnk..",
+       "..knNnnmmnnNnk..",
+       "..kSnnnmmnnnSk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkk..kkkk..."
+      ]
+     }
+    },
+    "nuran": {
+     "name": "Nuran Yıldız",
+     "shortLabel": "Anne",
+     "role": "WITNESS",
+     "accent": "#b0496b",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kffffffffk...",
+       "..kffffffffffk..",
+       "..kffssssssffk..",
+       "..kfssssssssfk..",
+       "..kfsessssesfk..",
+       "..kfssssssssfk..",
+       "..kfssskksssfk..",
+       "..kffssssssffk..",
+       "..kffffFFffffk..",
+       "...kffiiiiffk...",
+       "..kiiiiiiiiiik..",
+       "..kiiiiiiiiiik..",
+       "..kiIiiiiiiIik..",
+       "..kSiiiiiiiiSk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "...kZZZZZZZZk...",
+       "...kkkk..kkkk..."
+      ]
+     }
+    },
+    "baran": {
+     "name": "Baran Yıldız",
+     "shortLabel": "Baran",
+     "role": "CLIENT",
+     "accent": "#e2802f",
+     "sprite": {
+      "rows": [
+       "....k.kkkk.k....",
+       "...kHHkHHHkHk...",
+       "...kHHHHHHHHk...",
+       "...kHsssssHHk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...kssskksssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkoowwookk...",
+       "..kooooOOooook..",
+       "..koOoooooooOk..",
+       "..koOoooooooOk..",
+       "..koOoooooooOk..",
+       "..kSooooooooSk..",
+       "...kddddddddk...",
+       "...kdddkkdddk...",
+       "...kdddkkdddk...",
+       "..kkkkk..kkkkk.."
+      ]
+     }
+    },
+    "hakim": {
+     "name": "Hâkim Selim Öz",
+     "shortLabel": "Başkan",
+     "role": "JUDGE",
+     "accent": "#4a4656",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kyyyyyyyyk...",
+       "..kyyyyyyyyyyk..",
+       "..kyyssssssyyk..",
+       "...kssssssssk...",
+       "...kkeksskekk...",
+       "...kssssssssk...",
+       "...kSskkkksSk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkgRwwRgkk...",
+       "..knngRwwRgnnk..",
+       "..knnnRRRRnnnk..",
+       "..knNnnRRnnNnk..",
+       "..knNnnRRnnNnk..",
+       "..kSnnnRRnnnSk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkkkkkkkk..."
+      ],
+      "noEyes": true
+     }
+    }
+   },
+   "lines": [],
+   "choices": [],
+   "bag": {
+    "items": []
+   },
+   "notebook": {
+    "items": []
+   },
+   "node": {
+    "type": "RESULT",
+    "id": "R_BERAAT",
+    "outcome": {
+     "id": "o_beraat",
+     "class": "ACQUITTAL",
+     "stamp": "Beraat",
+     "tone": "green"
+    },
+    "strategyLabel": "Masumiyet",
+    "sentence": {
+     "demand": "Talep: 7,5 yıl",
+     "result": "Ceza yok"
+    },
+    "verdictText": "Sanığın üzerine atılı suçu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE karar verildi.",
+    "reasoning": [
+     "Tek tanığın teşhisi, arızalı lamba nedeniyle güvenilir bulunmadı."
+    ],
+    "breakdown": [
+     {
+      "label": "Delil toplama",
+      "value": 1200,
+      "tone": "success"
+     },
+     {
+      "label": "Çapraz sorgu",
+      "value": 1350,
+      "tone": "success"
+     },
+     {
+      "label": "Hatalı delil",
+      "value": -150,
+      "tone": "error"
+     }
+    ],
+    "total": 2400,
+    "thresholds": {
+     "scaleMax": 4000,
+     "bands": [
+      {
+       "label": "Mahkûmiyet",
+       "from": 0,
+       "tone": "red"
+      },
+      {
+       "label": "İndirim",
+       "from": 1600,
+       "tone": "amber"
+      },
+      {
+       "label": "Beraat",
+       "from": 2200,
+       "tone": "green"
+      }
+     ]
+    },
+    "xp": {
+     "gained": 340
+    },
+    "epilogue": [
+     {
+      "speaker": "narrator",
+      "style": "card",
+      "text": "İki hafta sonra — Liman mahallesi",
+      "bg": "sokak_gece",
+      "fx": "fade"
+     },
+     {
+      "speaker": "nuran",
+      "expression": "mutlu",
+      "text": "Baran eve döndü. Çayı demledim, sizi bekliyoruz avukat bey."
+     },
+     {
+      "speaker": "baran",
+      "expression": "mutlu",
+      "text": "Lambayı belediye dün tamir etmiş. Sokak artık aydınlık."
+     },
+     {
+      "speaker": "narrator",
+      "name": "Bir ses",
+      "style": "phone",
+      "text": "Bu iş burada bitmedi, avukat.",
+      "bg": "liman_gece"
+     },
+     {
+      "speaker": "player",
+      "style": "thought",
+      "text": "Kumaşları kim çıkardı? Asıl dosya şimdi açılıyor."
+     }
+    ]
+   },
+   "last": {
+    "resolution": "CHOICE",
+    "lines": [
+     {
+      "speaker": "hakim",
+      "text": "Karar okunacak. Herkes ayağa kalksın."
+     }
+    ],
+    "fx": [
+     {
+      "kind": "VERDICT",
+      "label": "Beraat"
+     }
+    ],
+    "discovered": [],
+    "nodeChanged": true,
+    "completed": true
+   }
+  }
+ ]
+}

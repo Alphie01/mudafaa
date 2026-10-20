@@ -6,7 +6,7 @@ import { validatePackage } from './report.js';
 import type { ValidateOptions, ValidationReport } from './report.js';
 
 const USAGE =
-  'Kullanım: mudafaa-validate <case.json | dava dizini>... [--json] [--strict] [--max-states N] [--max-ms N] [--walks N]';
+  'Kullanım: mudafaa-validate <case.json | dava dizini>... [--json] [--strict] [--max-states N] [--max-ms N] [--walks N] [--walk-steps N]';
 
 export interface Io {
   out: (text: string) => void;
@@ -51,7 +51,7 @@ export async function main(argv: readonly string[], io: Io = defaultIo): Promise
     const arg = argv[i] ?? '';
     if (arg === '--json') json = true;
     else if (arg === '--strict') opts.strict = true;
-    else if (arg === '--max-states' || arg === '--max-ms' || arg === '--walks') {
+    else if (arg === '--max-states' || arg === '--max-ms' || arg === '--walks' || arg === '--walk-steps') {
       const n = Number(argv[++i]);
       if (!Number.isInteger(n) || n <= 0) {
         io.err(`${arg} pozitif tamsayı ister\n${USAGE}\n`);
@@ -59,6 +59,7 @@ export async function main(argv: readonly string[], io: Io = defaultIo): Promise
       }
       if (arg === '--max-states') opts.maxStates = n;
       else if (arg === '--walks') opts.walks = n;
+      else if (arg === '--walk-steps') opts.walkSteps = n;
       else opts.maxMs = n;
     } else if (arg.startsWith('--')) {
       io.err(`Bilinmeyen seçenek: ${arg}\n${USAGE}\n`);

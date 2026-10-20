@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { Effect, MarkQuality } from './effect.js';
 import { Cond } from './expr.js';
-import { Category, Expression, Id, Tone } from './primitives.js';
+import { Backdrop, Category, Expression, Id, LineFx, LineStyle, Tone } from './primitives.js';
 
 // Boş metni (etiket, satır, geri bildirim) şema değil doğrulayıcı raporlar (MISSING_TEXT); bu yüzden metin
 // alanlarında `.min(1)` yok. Varsayılanlar (`maxUses`, `repeat`) şemaya basılmaz: ayrıştırılan nesne girdiye
@@ -11,10 +11,21 @@ import { Category, Expression, Id, Tone } from './primitives.js';
  * Bir konuşma satırı. `speaker` bir karakterin kimliği ya da ayrılmış `player` / `narrator` değeridir; ikisi de
  * kimlik kalıbına uyar, bu yüzden hiçbir karakter bu kimlikleri taşımamalıdır.
  */
+/**
+ * Tek bir konuşma/anlatı satırı. `name` konuşmacının gösterilen adını geçersiz kılar (ör. kimliği henüz bilinmeyen
+ * "BİR SES"; yalnızca `speaker: 'narrator'` ile — istemci sprite yerine siluet çizer, karakter kimliği sızmaz). `bg` bu satırdan itibaren arka planı değiştirir.
+ */
 export const Line = z.strictObject({
   speaker: z.union([Id, z.literal('player'), z.literal('narrator')]),
   expression: Expression.optional(),
   text: z.string(),
+  name: z.string().min(1).optional(),
+  bg: Backdrop.optional(),
+  fx: LineFx.optional(),
+  style: LineStyle.optional(),
+}).refine((l) => l.name === undefined || l.speaker === 'narrator', {
+  message: "name yalnızca speaker 'narrator' iken verilebilir (kimliği gizli ses karakter kimliğini istemciye sızdırmamalı)",
+  path: ['name'],
 });
 export type Line = z.infer<typeof Line>;
 

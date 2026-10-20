@@ -4,7 +4,7 @@ import type { Redis } from 'ioredis';
 import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { AppModule } from '../../src/app.module.js';
-import { configureApp } from '../../src/app.setup.js';
+import { APP_OPTIONS, configureApp } from '../../src/app.setup.js';
 import { ENV, loadEnv } from '../../src/config/env.js';
 import { PrismaService } from '../../src/database/prisma.service.js';
 import { REDIS } from '../../src/redis/redis.module.js';
@@ -25,7 +25,7 @@ describe('GET /v1/health', () => {
       .overrideProvider(ENV)
       .useValue(testEnv)
       .compile();
-    app = configureApp(moduleRef.createNestApplication());
+    app = configureApp(moduleRef.createNestApplication(APP_OPTIONS));
     await app.init();
     // PrismaPg ile $connect() bağlantı açmaz; havuzun ilk TCP + kimlik doğrulama el sıkışması ve Redis'in ilk
     // bağlantısı health'in 1 sn'lik prob bütçesine düşmesin diye bağımlılıklar burada ısıtılır (deterministik test).

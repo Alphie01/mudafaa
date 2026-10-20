@@ -20,10 +20,10 @@ const pkgProject = (name: string, dir: string, include = ['test/**/*.test.ts']) 
 // NestJS DI, kurucu parametre tiplerini decorator metadata'sından okur. API testleri, NestJS'in Vitest
 // tarifindeki gibi SWC ile dönüştürülür; ayarlar apps/api/tsconfig.json'dan okunur
 // (experimentalDecorators + emitDecoratorMetadata). unplugin-swc ve @swc/core apps/api devDependencies'tedir.
-const apiProject = (name: string, include: string[]) => ({
-  ...pkgProject(name, './apps/api', include),
-  plugins: [swc.vite()],
-});
+const apiProject = (name: string, include: string[], extra: Record<string, unknown> = {}) => {
+  const base = pkgProject(name, './apps/api', include);
+  return { ...base, test: { ...base.test, ...extra }, plugins: [swc.vite()] };
+};
 
 // Projeler, dizinleri oluştukça devreye girer (Vitest var olmayan kökleri hata sayar).
 const projects = [
@@ -32,7 +32,13 @@ const projects = [
   pkgProject('validator', './packages/validator'),
   pkgProject('content-tools', './tools/content'),
   apiProject('api-unit', ['test/unit/**/*.test.ts', 'src/**/*.spec.ts']),
-  apiProject('api-e2e', ['test/e2e/**/*.e2e.test.ts']),
+  // E2E: test veritabanı bir kez sıfırlanır; dosyalar aynı DB'yi paylaştığı için sırayla çalışır.
+  apiProject('api-e2e', ['test/e2e/**/*.e2e.test.ts'], {
+    globalSetup: ['test/e2e/support/global-setup.ts'],
+    fileParallelism: false,
+    testTimeout: 30_000,
+    hookTimeout: 60_000,
+  }),
 ].filter((p) => existsSync(p.test.root));
 
 export default defineConfig({

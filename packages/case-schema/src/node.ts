@@ -4,7 +4,7 @@ import { CourtStageType, Statement } from './court.js';
 import { Effect } from './effect.js';
 import { IconKey, Strength } from './evidence.js';
 import { Cond } from './expr.js';
-import { Expression, Id, Tone } from './primitives.js';
+import { Backdrop, Expression, Id, Tone } from './primitives.js';
 
 // Aşağıdaki enum'lar görünüm sözleşmesinde (view.ts) yeniden kullanılır; içerik ve görünüm aynı değerleri paylaşır.
 
@@ -67,7 +67,7 @@ const nodeBase = {
   title: z.string().optional(),
   eyebrow: z.string().optional(),
   chapter: z.string().optional(),
-  background: z.string().optional(),
+  background: Backdrop.optional(),
   hud: z.array(Id).optional(),
   onEnter: z.array(Effect).optional(),
   onFirstEnter: z.array(Effect).optional(),

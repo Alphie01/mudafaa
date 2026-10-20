@@ -35,4 +35,27 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    // AI izolasyonu (docs/plan.md §8): Claude SDK'sı yalnızca içerik üretimi modülünde.
+    files: ['apps/api/src/**/*.ts'],
+    ignores: ['apps/api/src/modules/content-generation/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: '@anthropic-ai/sdk',
+              message: 'AI SDK yalnızca modules/content-generation altında kullanılabilir.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    // Node betikleri (.mjs): Node genel değişkenleri.
+    files: ['**/*.mjs'],
+    languageOptions: { globals: { process: 'readonly', console: 'readonly', fetch: 'readonly', URL: 'readonly' } },
+  },
 );

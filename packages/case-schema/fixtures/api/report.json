@@ -1,0 +1,120 @@
+{
+  "alternatives": [
+    {
+      "howToReach": "Usul itirazıyla anahtar delilini zayıflat.",
+      "outcomeId": "o_mid"
+    },
+    {
+      "howToReach": "Varsayılan sonuç: diğer sonuçların koşulları tutmazsa verilir.",
+      "outcomeId": "o_lose"
+    }
+  ],
+  "bad": [],
+  "breakdown": [
+    {
+      "label": "Delil toplama",
+      "tone": "success",
+      "value": 380
+    },
+    {
+      "label": "Çapraz sorgu",
+      "tone": "success",
+      "value": 300
+    },
+    {
+      "label": "İtiraz isabeti",
+      "tone": "success",
+      "value": 150
+    },
+    {
+      "label": "Savunma",
+      "tone": "success",
+      "value": 300
+    },
+    {
+      "label": "Hatalı delil",
+      "tone": "neutral",
+      "value": 0
+    },
+    {
+      "label": "Güvenilirlik bonusu",
+      "tone": "success",
+      "value": 300
+    }
+  ],
+  "final": 1430,
+  "good": [
+    {
+      "feedback": "Tanığın lamba hakkındaki sözünü çürüttün.",
+      "source": "ps_st1"
+    }
+  ],
+  "missed": [
+    {
+      "category": "DELIL_ANALIZI",
+      "text": "Vardiya çizelgesine UV ışıkla bakmadın."
+    }
+  ],
+  "outcome": {
+    "class": "ACQUITTAL",
+    "id": "o_win",
+    "legalBasis": "CMK 223/2-e",
+    "reasoning": ["Tanığın sokağı aydınlık gördüğü sözü çürütüldü."],
+    "sentence": "Ceza yok",
+    "stamp": "BERAAT",
+    "stampTone": "green",
+    "verdictText": "Sanığın beraatine karar verildi."
+  },
+  "raw": 1130,
+  "skills": [
+    {
+      "advice": "Kanun maddelerini yeniden gözden geçir.",
+      "category": "HUKUKI_BILGI",
+      "earned": 0,
+      "label": "Hukuki bilgi",
+      "level": "weak",
+      "max": 0
+    },
+    {
+      "advice": "Delilleri ustaca bağladın.",
+      "category": "DELIL_ANALIZI",
+      "earned": 300,
+      "label": "Delil analizi",
+      "level": "strong",
+      "max": 300
+    },
+    {
+      "advice": "Olay yerini daha dikkatli ara.",
+      "category": "ARASTIRMA",
+      "earned": 80,
+      "label": "Araştırma",
+      "level": "weak",
+      "max": 280
+    },
+    {
+      "advice": "Çapraz sorgun etkiliydi.",
+      "category": "SORGULAMA",
+      "earned": 300,
+      "label": "Sorgulama",
+      "level": "strong",
+      "max": 325
+    },
+    {
+      "advice": "Stratejin davayı kazandırdı.",
+      "category": "SAVUNMA_STRATEJISI",
+      "earned": 300,
+      "label": "Savunma stratejisi",
+      "level": "strong",
+      "max": 300
+    },
+    {
+      "advice": "Usul itirazların yerindeydi.",
+      "category": "USUL_BILGISI",
+      "earned": 150,
+      "label": "Usul bilgisi",
+      "level": "strong",
+      "max": 150
+    }
+  ],
+  "xp": 171
+}

@@ -27,7 +27,7 @@ const replay = (name: string): State => {
 describe('Dava #07 golden paths and validator', () => {
   it('all golden paths reach expected outcomes within windows', () => {
     const results = runGoldenPaths(c);
-    expect(results.map((r) => r.name).sort()).toEqual(['G1', 'G2', 'G3', 'G4', 'G5', 'W']);
+    expect(results.map((r) => r.name).sort()).toEqual(['G1', 'G2', 'G3', 'G4', 'G5', 'TIPIK', 'W']);
     for (const r of results) expect(r, JSON.stringify(r)).toMatchObject({ passed: true });
   });
 

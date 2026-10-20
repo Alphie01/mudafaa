@@ -5,7 +5,7 @@ import type { Action } from '@mudafaa/case-schema';
 import { act, start, view } from '../src/index.js';
 import type { CompiledCase, SessionState } from '../src/index.js';
 import { FIXTURE_DIR, buildViewFixtures } from '../scripts/export-view-fixtures.js';
-import { GP_LOSE, GP_MID, GP_WIN, at, choose, compiled, play, press, tap } from './helpers/run.js';
+import { GP_LOSE, GP_MID, GP_WIN, at, choose, compiled, miniPkg, play, press, tap } from './helpers/run.js';
 
 const META = { sessionId: 'ses_1', caseId: 'case_1', stateVersion: 0, mode: 'NORMAL' as const };
 const v = (c: CompiledCase, s: SessionState) => view(c, s, META);
@@ -111,6 +111,28 @@ describe('view', () => {
     expect(r.node.breakdown.reduce((sum, row) => sum + row.value, 0)).toBe(1430);
     expect(r.node.xp.gained).toBe(171);
     expect(r.session.status).toBe('COMPLETED');
+  });
+
+  it('result view plays every matching epilogue block of the chosen outcome and casts its speakers', () => {
+    const pkg = miniPkg();
+    const win = pkg.outcomes.find((o) => o.id === 'o_win') as Record<string, unknown>;
+    win.epilogue = [
+      { lines: [{ speaker: 'narrator', style: 'card', text: 'BİR HAFTA SONRA' }] },
+      { when: { cmp: [{ score: 'final' }, '>=', 1000] }, lines: [{ speaker: 'j', text: 'Tahliye.' }] },
+      { when: { cmp: [{ score: 'final' }, '<', 0] }, lines: [{ speaker: 'w', text: 'Görünmemeli.' }] },
+    ];
+    const c = compiled(pkg);
+    const r = v(c, play(c, GP_WIN));
+    if (r.node.type !== 'RESULT') throw new Error('RESULT bekleniyordu');
+    expect(r.node.epilogue?.map((l) => l.text)).toEqual(['BİR HAFTA SONRA', 'Tahliye.']);
+    expect(Object.keys(r.cast)).toContain('j');
+    expect(SessionView.safeParse(r).success).toBe(true);
+  });
+
+  it('compile rejects an epilogue speaker that is not a character', () => {
+    const pkg = miniPkg();
+    (pkg.outcomes[0] as Record<string, unknown>).epilogue = [{ lines: [{ speaker: 'kimse', text: 'x' }] }];
+    expect(() => compiled(pkg)).toThrow(/kimse/);
   });
 
   it('every golden-path view parses', () => {

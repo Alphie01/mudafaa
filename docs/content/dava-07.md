@@ -320,6 +320,12 @@ Yeni ikonlar (tasarımın stroke stilinde): fingerprint, boot, cigarette, magnif
     - ev_hts_illegal sunulursa: savcı itiraz eder, mahkeme dışlar (CMK 206/2-a) → −150, UB−150, ♥−2, illegal_presented.
 
 ### A.6 Sonuçlar (öncelik sırasıyla; İKRAR ve varsayılan dışındakiler ayrıca ¬cokus ister)
+
+> **v2 değişikliği (2026-10-20, Ek B.3):** Sonuç *mantığı* aynı, final eşikleri yeniden ölçeklendi: İNDİRİM ≥2.000 → **≥3.000**;
+> BERAAT_E ≥3.200 → **≥7.000** (mazeret + çöken teşhis yolunda ≥2.600 → **≥5.500**); BERAAT_B ≥3.600 → **≥8.000**. Eşik çubuğu
+> 0 / 3.000 / 7.000, `scaleMax` 10.000. Mahkûmiyet hükümlerinde "tutukluluğun devamına" → "tutukluluk hâlinin devamına
+> (2. celsede adli kontrolle tahliye edilmişse … hükümle birlikte tutuklanmasına, CMK 100–101)". Her sonucun `epilogue`'u var.
+> Aşağıdaki metin v1 eşikleriyle bırakıldı; geçerli değerler Ek B.3'tedir.
 1. **İKRAR** {false_confession}
    - Damga MAHKÛMİYET, ceza **6 yıl 3 ay**.
    - Hüküm: "…TCK 142/2-h uyarınca alt sınırdan 5 YIL; TCK 143 ile 7 YIL 6 AY; TCK 62/1 ile 6 YIL 3 AY HAPİS; zarar giderilmediğinden TCK 168/2 uygulanmasına yer olmadığına; TCK 53; TCK 63 mahsup; tutukluluğun devamına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf (CMK 273/1)."
@@ -344,6 +350,10 @@ Yeni ikonlar (tasarımın stroke stilinde): fingerprint, boot, cigarette, magnif
 **XP** = ⌊TOPLAM/10 × f⌋. f: BERAAT_B 1,2 · BERAAT_E 1,0 · İNDİRİM 0,85 · MAHKÛMİYET 0,6 · ÇÖKÜŞ 0,3 · İKRAR 0. Etik > 0 ise XP yarıya iner.
 
 ### A.7 Golden path'ler (otomatik testler; H = hub eylemi)
+
+> **v2 değişikliği:** Bütün yollar soğuk açılış, 4 günlük soruşturma (günde 4 EP), 2. celse, 3 günlük ara (günde 3 EP) ve
+> 3. celseden geçer; ayrıca tipik yol `TIPIK` (= G2) eklendi. Güncel akış, skor, XP, aksiyon ve süre Ek B.4'tedir; aşağıdaki
+> liste v1 kaydıdır.
 - **G1 → BERAAT_B** (Masumiyet)
   - Brifing: BR_01 A.
   - Gün 1: Arama (4 nokta, ıska yok) · İnceleme: UV×Selin, Büyüteç×Kerem, Karşılaştır×Murat · Görüşme (yumuşak): Anahtar, Hüseyin, O gece, ardından bot izini göster.
@@ -441,3 +451,64 @@ Yeni ikonlar (tasarımın stroke stilinde): fingerprint, boot, cigarette, magnif
 Ana menüdeki "Müvekkilim masum, Sayın Hâkim!" balonu davadan bağımsız bir tasarım öğesi olduğu için korunur.
 
 ---
+
+## Ek B — v2: hikâye ve oyun yüzeyi (2026-10-20)
+Kaynak: hikâye kitabı `docs/content/gece-bekcisinin-sirri-hikaye.md` ve kullanıcı geri bildirimi ("hikâye yok", "çok kısa").
+Hukuki gerçek, deliller ve sonuç mantığı değişmedi; eşikler yeniden ölçeklendi (B.3). Ayrıntılı rapor:
+`docs/content/dava-07-v2-report.md`.
+
+### B.1 Yapı
+| Bölüm | Node'lar | Not |
+|---|---|---|
+| Soğuk açılış | PR_00, PR_01 | İsimsiz sesler (BİR SES / İKİNCİ SES); sabah avlusu, tutanak, karakol |
+| Bölüm 1 · Dosya | BR_00, BR_01, BR_01B, BR_02 | Saniye büroda (zarf seçimi), ceza aralığı sorusu, altı kâğıt, strateji |
+| Bölüm 2 · Soruşturma | INV_SABAH, INV_HUB + 4 gün × 4 EP | 4 sahne araması, 4 belge, 7 tarifli tahta, fakta bağlı konular, akşamlar, duruşmadan önceki gece |
+| Bölüm 3 · Birinci celse (2. celse) | C_00G…C_06H, C_02Q, C_06R, C_ARA | Koridor seçimi, sanığa sorular, Selin'in beş ifadesi, kısa ara, erteleme ve tutukluluk |
+| Bölüm 4 · Ara | ARA_GIRIS, ARA_HUB + 3 gün × 3 EP | Selin, Yusuf, Hüseyin, Kerem, Saniye, ekip şefi, kart kayıtları, liman, ikinci tahta |
+| Bölüm 5 · İkinci celse (3. celse) | C_07A…C_14 | Hüseyin + savcının karşı sorusu, Kom. Yusuf'un tanıklığı, dayanaklar, esas savunma, son söz |
+| Karar | R_KARAR + sonuç başına `epilogue` | Epiloglar sonuca bağlı (OutcomeDef.epilogue) |
+
+### B.2 Yeni mekanikler ve puanlar
+| Mekanik | Node | Doğru / yanlış | Puan |
+|---|---|---|---|
+| Depo 3 içi araması | INV_ARAMA2 | sürgü +60, bant +40, dolap +40, takvim +60 · forklift/levha −10 | ARAŞTIRMA |
+| Çay ocağı araması | INV_ARAMA3 | kasa +40, pencere +60, fikstür +40, sandalye 0 · kül/radyo −10 | ARAŞTIRMA |
+| Kulübe fotoğrafları | INV_ARAMA4 | monitör +60, olay defteri +40, ilaç 0 · fincan/pano −10 | ARAŞTIRMA |
+| DVR günlüğü | INV_DVR | onaysız uyarı +100, “SK” +150, kesik +50 · toz −20, ıska −20 | DELİL ANALİZİ |
+| Kasa rulosu | INV_RULO | sıra +100, “D3” +150, 0412 +50 · toz −20, ıska −20 | DELİL ANALİZİ |
+| Belediye arıza kaydı | INV_ARIZA | erteleme +150, süre +50 · ıska −20 | DELİL ANALİZİ |
+| Kart okuyucu (ara) | ARA_KART | Murat 00.12 +150, Selin 23.29 +100, Kerem +50 · ıska −20 | DELİL ANALİZİ |
+| Tahta (2 evre) | INV_CIKARIM, ARA_CIKARIM | 7 + 4 tarif (ded_plan, ded_kulube, ded_depo3, ded_karanlik, ded_arama) +300 · yanlış çift −50 | DELİL ANALİZİ |
+| Fakta bağlı konular | INV_GORUSME | TP_ZIYA, TP_ISIK, TP_SELIN, TP_ANNE, TP_DEFTER (2 dk, +20) | SORGULAMA |
+| Tanık soruları | INV_T_HUS, INV_T_SEL, INV_T_MUR, ARA_* | +10…+40; telkinli soru −30 | SORGULAMA |
+| Leyla'ya danış | INV_LEYLA, ARA_LEYLA | günde bir, 0 EP, puansız | — |
+| Duruşmadan önceki gece | INV_GECE | tehdidi bildir +20 | USUL |
+| Sanığa sorular | C_02Q | bilgi veren soru +25 · tahmine zorlayan −25 | SAVUNMA |
+| Selin S5 | C_06 | ded_kulube +200, ikna +1 | SORGULAMA |
+| Tutukluluk | C_ARA | dayanak varsa tahliye +50 · “hemen beraat” −25 | USUL |
+| Ara etik seçimleri | ARA_SELIN, ARA_LIMAN | avukat göster +30 / kayda geçir −30 / korkut −50 · savcılığa bildir +50 / kendin git −25 | USUL / SAVUNMA |
+| Savcının karşı sorusu | C_07X | rulo sırasıyla itiraz +75, ikna +1 · suçlama −50, ♥−1 | USUL |
+| Kom. Yusuf'un tanıklığı | C_08T | 5 ifade; doğru sunum +200, ikna +1; yanlış ♥−1, −150 | SORGULAMA |
+| Esas savunma dayanakları | C_12P | en çok 3; ispatlanmış +40 / ispatlanmamış −40 | SAVUNMA |
+
+### B.3 Sonuç değişiklikleri (A.6)
+- Eşikler: İNDİRİM `final ≥ 3.000`; BERAAT_E `final ≥ 7.000 ∨ (alibi ∧ contra_s2 ∧ final ≥ 5.500)`; BERAAT_B `final ≥ 8.000`
+  (diğer koşullar aynı). Eşik çubuğu 0 / 3.000 / 7.000; `scaleMax` 10.000. Gerekçe: oyun yüzeyi yaklaşık iki katına çıktı;
+  tipik yol 8.845 ile beraat bandının ~%26 üstünde, indirim yolu 3.340 ile indirim bandında.
+- XP formülü aynı (⌊final/10 × f⌋); uzun dava daha çok XP verir.
+- Mahkûmiyet hükümleri: tutukluluk ifadesi tahliye olasılığını kapsar (docs/legal/dava-07.md, v2 #2).
+- Her sonuç `epilogue` taşır; karar ekranında koşulu tutan bütün bloklar sırayla oynar (murat_caught, kerem_released,
+  hus_gelir, koridor seçimine göre değişir).
+- `mutalaa_beraat` aynı; `murat_caught` mütalaada ikna +1 verir. `dayanak_murat` ayrıca fact_cay_selin ∨ ded_depo3 ile tutar.
+
+### B.4 Golden path'ler (v2)
+| Yol | Sonuç | Final | XP | Aksiyon | Süre (case:duration) |
+|---|---|---|---|---|---|
+| G1 (Masumiyet) | BERAAT_B | 9.620 | 1.154 | 145 | 83,8 dk |
+| G2 = TIPIK (Usul) | BERAAT_E | 8.845 | 884 | 204 | 97,3 dk |
+| G3 (İndirim) | İNDİRİM | 3.340 | 283 | 119 | 67,7 dk |
+| G4 (Masumiyet) | MAHKÛMİYET | −125 | 0 | 118 | 60,5 dk |
+| G5 (İndirim) | İKRAR | 4.670 | 0 | 121 | 70,9 dk |
+| W | MAHKÛMİYET (çöküş, 3. celsede) | −445 | 0 | 104 | 60,7 dk |
+
+Pencereler ölçülen finalin ±%5'i (`tests.goldenPaths[].expect`).

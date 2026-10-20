@@ -3,57 +3,200 @@
     "hints": [
       {
         "id": "h_iz42",
-        "when": { "not": { "hasEvidence": "clue_iz42" } },
+        "when": {
+          "not": {
+            "hasEvidence": "clue_iz42"
+          }
+        },
         "text": "Arka kapıdan sokağa uzanan çamurlu bot izini kaçırdın; ölçekli fotoğraf numarayı veriyordu.",
         "category": "ARASTIRMA"
       },
       {
         "id": "h_uv",
-        "when": { "not": { "hasEvidence": "clue_uv_silinti" } },
+        "when": {
+          "not": {
+            "hasEvidence": "clue_uv_silinti"
+          }
+        },
         "text": "Selin satırına UV tutmadın; saat sonradan değiştirilmişti.",
         "category": "DELIL_ANALIZI"
       },
       {
         "id": "h_murat42",
-        "when": { "not": { "hasEvidence": "clue_murat_42" } },
+        "when": {
+          "not": {
+            "hasEvidence": "clue_murat_42"
+          }
+        },
         "text": "Çizelgeyi İSG zimmetiyle karşılaştırmadın; Murat'ın botu 42'ydi.",
         "category": "DELIL_ANALIZI"
       },
       {
         "id": "h_ariza",
-        "when": { "not": { "hasEvidence": "ev_ariza_kaydi" } },
+        "when": {
+          "not": {
+            "hasEvidence": "ev_ariza_kaydi"
+          }
+        },
         "text": "14 no'lu direğin arıza kaydını avukat olarak doğrudan isteyebilirdin (Av.K. 2/3).",
         "category": "ARASTIRMA"
       },
       {
         "id": "h_mazeret",
-        "when": { "any": [{ "not": { "hasEvidence": "ev_fis" } }, { "not": { "flag": "huseyin_testified" } }] },
+        "when": {
+          "any": [
+            {
+              "not": {
+                "hasEvidence": "ev_fis"
+              }
+            },
+            {
+              "not": {
+                "flag": "huseyin_testified"
+              }
+            }
+          ]
+        },
         "text": "Mazeret tanığını dilekçeyle bildirmedin ya da duruşmaya getirmedin (CMK 177–179); yazılı beyan yetmez (CMK 210/1).",
         "category": "USUL_BILGISI"
       },
       {
         "id": "h_hts",
-        "when": { "not": { "hasEvidence": "ev_hts" } },
+        "when": {
+          "not": {
+            "hasEvidence": "ev_hts"
+          }
+        },
         "text": "Gerçek faile giden yol: Murat hakkında suç duyurusu ve CMK 135/6 tespit talebi.",
         "category": "USUL_BILGISI"
       },
       {
         "id": "h_dna_kamera",
-        "when": { "any": [{ "not": { "hasEvidence": "ev_dna" } }, { "not": { "hasEvidence": "ev_kamera" } }] },
+        "when": {
+          "any": [
+            {
+              "not": {
+                "hasEvidence": "ev_dna"
+              }
+            },
+            {
+              "not": {
+                "hasEvidence": "ev_kamera"
+              }
+            }
+          ]
+        },
         "text": "Emanetteki izmarit (CMK 78–79) ve kesik kablo bilirkişiye gönderilmeliydi.",
         "category": "DELIL_ANALIZI"
       },
       {
         "id": "h_kerem",
-        "when": { "any": [{ "not": { "flag": "fact_rizasiz_arama" } }, { "not": { "flag": "fact_19_30" } }] },
+        "when": {
+          "any": [
+            {
+              "not": {
+                "flag": "fact_rizasiz_arama"
+              }
+            },
+            {
+              "not": {
+                "flag": "fact_19_30"
+              }
+            }
+          ]
+        },
         "text": "Aramanın rızasız olduğunu ve parmak izinin masum açıklamasını Kerem anlatacaktı; sormadın.",
         "category": "SORGULAMA"
       },
       {
         "id": "h_suspect",
-        "when": { "not": { "flag": "suspect_murat" } },
+        "when": {
+          "not": {
+            "flag": "suspect_murat"
+          }
+        },
         "text": "Bot izini Kerem'e göstermedin; sakladığı bilgi açığa çıkmadı.",
         "category": "SORGULAMA"
+      },
+      {
+        "id": "h_surgu",
+        "when": {
+          "not": {
+            "hasEvidence": "clue_surgu"
+          }
+        },
+        "text": "Depo 3’ün içini aramadın; arka kapının sürgüsü içeriden çekilmişti: anahtar kullanılmamıştı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_dvr",
+        "when": {
+          "not": {
+            "hasEvidence": "clue_dvr_sk"
+          }
+        },
+        "text": "DVR günlüğündeki “arıza” notunu kimin girdiğine bakmadın; kullanıcı kodu Selin’i kulübeye koyuyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_rulo",
+        "when": {
+          "not": {
+            "hasEvidence": "clue_rulo_depo3"
+          }
+        },
+        "text": "Kasa rulosunun kenarındaki “D3” notunu kaçırdın; 23.40’ta Depo 3’te biri vardı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_karanlik",
+        "when": {
+          "not": {
+            "hasEvidence": "ded_karanlik"
+          }
+        },
+        "text": "Takvimdeki “Z · son gün” ile ertelenen lamba onarımını birleştirmedin; karanlık bilerek uzatılmıştı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_arama",
+        "when": {
+          "not": {
+            "hasEvidence": "ded_arama"
+          }
+        },
+        "text": "Aramayı kimin yaptığını komiserden öğrenip teslim tutanağıyla birleştirmedin.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_defter",
+        "when": {
+          "not": {
+            "hasEvidence": "clue_defter"
+          }
+        },
+        "text": "Kerem’in masraf defteri olaydan önce yazılmış bir “19.30” kaydı taşıyordu; Saniye Hanım’a sormadın.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_liman",
+        "when": {
+          "not": {
+            "flag": "murat_caught"
+          }
+        },
+        "text": "Şüphelinin kaçacağını öğrendiğinde yapılacak tek şey savcılığa haber vermekti; avukat kovalamaz.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_kart",
+        "when": {
+          "not": {
+            "hasEvidence": "clue_kart_murat"
+          }
+        },
+        "text": "Kart okuyucu kayıtlarında Depo 3 sorumlusunun çıkış saati “22.30” beyanını yalanlıyordu.",
+        "category": "DELIL_ANALIZI"
       }
     ]
   }

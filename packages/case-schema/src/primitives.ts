@@ -31,6 +31,44 @@ export type Category = z.infer<typeof Category>;
 export const Expression = z.enum(['normal', 'mutlu', 'kizgin', 'saskin', 'uzgun']);
 export type Expression = z.infer<typeof Expression>;
 
+/**
+ * Sahne arka planı: istemcinin genel illüstrasyon setinden biri (davaya özgü değildir; büro, görüş odası, gece sokağı…).
+ * Node'un açılış arka planı ve diyalog içinde satır bazında sahne değişimi için kullanılır.
+ */
+export const Backdrop = z.enum([
+  'siyah',
+  'buro',
+  'buro_gece',
+  'gorus_odasi',
+  'durusma_salonu',
+  'adliye',
+  'karakol',
+  'sokak_gece',
+  'sokak_yagmur',
+  'sokak_karanlik',
+  'sokak_sabah',
+  'depo',
+  'depo_gece',
+  'cay_ocagi',
+  'ev',
+  'kafe',
+  'hastane',
+  'liman_gece',
+  'arac',
+]);
+export type Backdrop = z.infer<typeof Backdrop>;
+
+/** Satırla birlikte oynatılan tek seferlik görsel efekt. */
+export const LineFx = z.enum(['shake', 'flash', 'fade']);
+export type LineFx = z.infer<typeof LineFx>;
+
+/**
+ * Satırın sunum biçimi: `card` tam ekran başlık kartı (yer/saat), `whisper` fısıltı, `thought` iç ses,
+ * `phone` telefon/hoparlör sesi. Yoksa olağan konuşma balonu.
+ */
+export const LineStyle = z.enum(['card', 'whisper', 'thought', 'phone']);
+export type LineStyle = z.infer<typeof LineStyle>;
+
 /** Geri bildirim ve etiketlerin rengi/anlamı. */
 export const Tone = z.enum(['success', 'error', 'neutral', 'special', 'info']);
 export type Tone = z.infer<typeof Tone>;

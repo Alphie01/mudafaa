@@ -1961,3 +1961,18 @@ describe('JSON Schema export', () => {
     expect(JSON.stringify(json).length).toBeGreaterThan(50);
   });
 });
+
+describe('Line cinematic fields', () => {
+  it('accepts an anonymous narrator voice with backdrop, fx and style', async () => {
+    const { Line } = await import('../src/choice.js');
+    expect(Line.safeParse({ speaker: 'narrator', name: 'BİR SES', text: 'Bitti mi?', bg: 'sokak_gece', fx: 'flash', style: 'phone' }).success).toBe(true);
+  });
+  it('rejects a name override on a character speaker (identity would leak)', async () => {
+    const { Line } = await import('../src/choice.js');
+    expect(Line.safeParse({ speaker: 'murat', name: 'BİR SES', text: 'Bitti.' }).success).toBe(false);
+  });
+  it('rejects an unknown backdrop', async () => {
+    const { Line } = await import('../src/choice.js');
+    expect(Line.safeParse({ speaker: 'narrator', text: 'x', bg: 'uzay' }).success).toBe(false);
+  });
+});

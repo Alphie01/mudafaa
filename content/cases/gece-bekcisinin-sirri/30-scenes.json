@@ -12,13 +12,29 @@
           "id": "ob_lamba",
           "name": "Sokak lambası",
           "marker": "HIDDEN",
-          "shapes": [{ "rect": { "x": 244, "y": 44, "w": 64, "h": 52 } }],
+          "shapes": [
+            {
+              "rect": {
+                "x": 244,
+                "y": 44,
+                "w": 64,
+                "h": 52
+              }
+            }
+          ],
           "effects": [
-            { "type": "DISCOVER", "evidence": "clue_ampul" },
-            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_ampul"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 40
+            }
           ],
           "feedback": {
-            "text": "Lamba ampulü kararmış, camı tozlu. Uzun süredir yanmıyor gibi.",
+            "text": "Lamba ampulü kararmış, camı tozlu. Uzun süredir yanmıyor gibi. Üç gündür yanmayan bir lambanın altında yirmi metreden yüz seçilir mi?",
             "short": "Lamba ampulü kararmış"
           }
         },
@@ -26,13 +42,29 @@
           "id": "ob_kamera",
           "name": "Güvenlik kamerası",
           "marker": "HIDDEN",
-          "shapes": [{ "rect": { "x": 144, "y": 76, "w": 56, "h": 90 } }],
+          "shapes": [
+            {
+              "rect": {
+                "x": 144,
+                "y": 76,
+                "w": 56,
+                "h": 90
+              }
+            }
+          ],
           "effects": [
-            { "type": "DISCOVER", "evidence": "clue_kablo" },
-            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_kablo"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 40
+            }
           ],
           "feedback": {
-            "text": "Kamera kablosu temiz bir kesikle kesilmiş, üstü bantlanmış. Bu bir kopma değil.",
+            "text": "Kamera kablosu temiz bir kesikle kesilmiş, üstü bantlanmış. Bu bir kopma değil. Arızalar bant taşımaz; birileri taşır.",
             "short": "Kamera kablosu kesilmiş"
           }
         },
@@ -40,13 +72,29 @@
           "id": "ob_iz",
           "name": "Yerdeki izler",
           "marker": "HIDDEN",
-          "shapes": [{ "rect": { "x": 180, "y": 302, "w": 60, "h": 66 } }],
+          "shapes": [
+            {
+              "rect": {
+                "x": 180,
+                "y": 302,
+                "w": 60,
+                "h": 66
+              }
+            }
+          ],
           "effects": [
-            { "type": "DISCOVER", "evidence": "clue_iz42" },
-            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_iz42"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 60
+            }
           ],
           "feedback": {
-            "text": "Çamurda 42 numara bot izi var, depodan sokağa doğru gidiyor. Ölçekli fotoğrafta iz 28,5 cm.",
+            "text": "Çamurda 42 numara bot izi var, depodan sokağa doğru gidiyor. Ölçekli fotoğrafta iz 28,5 cm. Kerem’in ayakkabısı bunu dolduramaz.",
             "short": "Çamurda 42 numara bot izi"
           },
           "badge": "42"
@@ -55,13 +103,29 @@
           "id": "ob_cop",
           "name": "Çöp kutusu",
           "marker": "HIDDEN",
-          "shapes": [{ "rect": { "x": 292, "y": 236, "w": 52, "h": 62 } }],
+          "shapes": [
+            {
+              "rect": {
+                "x": 292,
+                "y": 236,
+                "w": 52,
+                "h": 62
+              }
+            }
+          ],
           "effects": [
-            { "type": "DISCOVER", "evidence": "clue_izmarit" },
-            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_izmarit"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 40
+            }
           ],
           "feedback": {
-            "text": "Çöp kutusunda taze bir izmarit. Kerem sigara içmiyor. İzmarit Emanet No. 3 olarak alınmış ama incelemeye gönderilmemiş.",
+            "text": "Çöp kutusunda taze bir izmarit. Kerem sigara içmiyor. İzmarit Emanet No. 3 olarak alınmış ama incelemeye gönderilmemiş. Kimse merak etmemiş.",
             "short": "Çöpte taze izmarit"
           }
         }
@@ -79,28 +143,617 @@
           "id": "pv_lamba",
           "name": "Sokak lambası",
           "marker": "VISIBLE",
-          "shapes": [{ "rect": { "x": 270, "y": 46, "w": 44, "h": 44 } }],
-          "feedback": { "text": "İncelenmemiş nokta: sokak lambası.", "short": "Sokak lambası" }
+          "shapes": [
+            {
+              "rect": {
+                "x": 270,
+                "y": 46,
+                "w": 44,
+                "h": 44
+              }
+            }
+          ],
+          "feedback": {
+            "text": "İncelenmemiş nokta: sokak lambası.",
+            "short": "Sokak lambası"
+          }
         },
         {
           "id": "pv_kamera",
           "name": "Kamera",
           "marker": "VISIBLE",
-          "shapes": [{ "rect": { "x": 300, "y": 160, "w": 44, "h": 44 } }],
-          "feedback": { "text": "İncelenmemiş nokta: kamera.", "short": "Kamera" }
+          "shapes": [
+            {
+              "rect": {
+                "x": 300,
+                "y": 160,
+                "w": 44,
+                "h": 44
+              }
+            }
+          ],
+          "feedback": {
+            "text": "İncelenmemiş nokta: kamera.",
+            "short": "Kamera"
+          }
         },
         {
           "id": "pv_kapi",
           "name": "Depo kapısı",
           "marker": "VISIBLE",
-          "shapes": [{ "rect": { "x": 78, "y": 100, "w": 44, "h": 44 } }],
-          "feedback": { "text": "Depo 3’ün kapısı.", "short": "Depo kapısı" }
+          "shapes": [
+            {
+              "rect": {
+                "x": 78,
+                "y": 100,
+                "w": 44,
+                "h": 44
+              }
+            }
+          ],
+          "feedback": {
+            "text": "Depo 3’ün kapısı.",
+            "short": "Depo kapısı"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_depo3_ic",
+      "title": "Depo 3 · içeriden (13 Mart fotoğrafları)",
+      "description": "Olay yeri fotoğrafçısının Depo 3 içinden çektiği kareler.",
+      "width": 344,
+      "height": 380,
+      "image": "img_depo3_ic",
+      "objects": [
+        {
+          "id": "ob_surgu",
+          "name": "Arka kapının sürgüsü",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 248,
+                "y": 150,
+                "w": 40,
+                "h": 40
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_surgu"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 60
+            }
+          ],
+          "feedback": {
+            "text": "Arka kapının iç sürgüsü çekilmiş. Kilidin çevresinde ne çizik ne zorlama var. Bu kapı anahtarla değil, içeriden açılmış.",
+            "short": "Sürgü içeriden çekilmiş"
+          }
+        },
+        {
+          "id": "ob_bant",
+          "name": "Malzeme dolabı",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 140,
+                "y": 170,
+                "w": 60,
+                "h": 80
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_bant"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 40
+            }
+          ],
+          "feedback": {
+            "text": "Malzeme dolabının üstünde yarısı kullanılmış gri bir koli bandı. Kablodaki bantla aynı tür. Arızalar bant taşımaz; birileri taşır.",
+            "short": "Dolapta gri koli bandı"
+          }
+        },
+        {
+          "id": "ob_dolap",
+          "name": "Personel dolabı “M. KOÇ”",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 14,
+                "y": 120,
+                "w": 52,
+                "h": 130
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_yeni_bot"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 40
+            }
+          ],
+          "feedback": {
+            "text": "Kapağı aralık bir dolap: “M. KOÇ”. İçinde etiketi sökülmemiş yepyeni bir 42 numara iş botu. Eskisi yok. Bir insan eski botunu neden atar?",
+            "short": "Dolapta yeni bot"
+          }
+        },
+        {
+          "id": "ob_takvim",
+          "name": "Duvar takvimi",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 146,
+                "y": 56,
+                "w": 58,
+                "h": 56
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_takvim"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 60
+            }
+          ],
+          "feedback": {
+            "text": "Bir nalbur takvimi. 12 Mart kutusunda kırmızı kalemle, bastırarak yazılmış: “Z · SON GÜN”. Kim Z? Neyin son günü?",
+            "short": "Takvimde Z"
+          }
+        },
+        {
+          "id": "ob_forklift",
+          "name": "Forklift",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 196,
+                "y": 268,
+                "w": 100,
+                "h": 70
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": -10
+            },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Dikkat dağıtıcı bir ayrıntıya zaman harcadın.",
+              "category": "ARASTIRMA"
+            }
+          ],
+          "feedback": {
+            "text": "Forkliftin anahtarı kontakta. Tekerleklerinde çamur yok; o gece kullanılmamış. Toplar elle taşınmış. Bu, bir şey anlatmıyor.",
+            "short": "Forklift"
+          }
+        },
+        {
+          "id": "ob_levha",
+          "name": "Uyarı levhası",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 70,
+                "y": 58,
+                "w": 66,
+                "h": 34
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": -10
+            },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Dikkat dağıtıcı bir ayrıntıya zaman harcadın.",
+              "category": "ARASTIRMA"
+            }
+          ],
+          "feedback": {
+            "text": "“Sigara içmek yasaktır.” Levhanın altında yıllanmış bir kül izi. Herkes bir yerde içer. Bu levha kimseyi göstermiyor.",
+            "short": "Sigara levhası"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_cay_ocagi",
+      "title": "Çay ocağı · Hüseyin Usta’nın izniyle",
+      "description": "Hüseyin Tan’ın çay ocağı; Deniz kendi gözüyle bakıyor.",
+      "width": 344,
+      "height": 380,
+      "image": "img_cay_ocagi",
+      "objects": [
+        {
+          "id": "ob_kasa",
+          "name": "Yazar kasa",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 28,
+                "y": 186,
+                "w": 74,
+                "h": 56
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_kasa_saat"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 40
+            }
+          ],
+          "feedback": {
+            "text": "Eski bir yazar kasa. Ekrandaki saati telefonumla karşılaştırdım: dakikası dakikasına aynı. Fişteki 22.57, gerçek 22.57.",
+            "short": "Kasa saati doğru"
+          }
+        },
+        {
+          "id": "ob_pencere",
+          "name": "Buğulu pencere",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 200,
+                "y": 60,
+                "w": 120,
+                "h": 90
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_isik"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 60
+            }
+          ],
+          "feedback": {
+            "text": "Buğuyu elimle sildim. Karşıda Depo 3’ün yan penceresi, doğrudan. Işığı yansa buradan görünür. O gece yanıyor muydu?",
+            "short": "Pencereden Depo 3"
+          }
+        },
+        {
+          "id": "ob_fikstur",
+          "name": "Duvardaki fikstür",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 40,
+                "y": 68,
+                "w": 72,
+                "h": 74
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_mac"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 40
+            }
+          ],
+          "feedback": {
+            "text": "Yağ lekeli bir fikstür. 12 Mart: maç 22.00’de. İkinci yarı 23.00 gibi başlar. Hüseyin saati radyodan da bilir.",
+            "short": "Maç fikstürü"
+          }
+        },
+        {
+          "id": "ob_sandalye",
+          "name": "Tel sarılı sandalye",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 216,
+                "y": 246,
+                "w": 66,
+                "h": 96
+              }
+            }
+          ],
+          "feedback": {
+            "text": "Bacakları tel ile sarılmış eski bir sandalye. Hüseyin’in “Rıfat’ın sandalyesi” dediği. Kerem her gece buraya oturuyormuş. Delil değil; ama artık bir yüzü var.",
+            "short": "Rıfat’ın sandalyesi"
+          }
+        },
+        {
+          "id": "ob_kul",
+          "name": "Masadaki kül tablası",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 118,
+                "y": 226,
+                "w": 56,
+                "h": 36
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": -10
+            },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Dikkat dağıtıcı bir ayrıntıya zaman harcadın.",
+              "category": "ARASTIRMA"
+            }
+          ],
+          "feedback": {
+            "text": "Kül tablası izmarit dolu. Burası depoların çay ocağı; herkes sigara içiyor. Bu izmaritler o gece hakkında bir şey söylemez.",
+            "short": "Kül tablası"
+          }
+        },
+        {
+          "id": "ob_radyo",
+          "name": "Raftaki radyo",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 128,
+                "y": 104,
+                "w": 56,
+                "h": 36
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": -10
+            },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Dikkat dağıtıcı bir ayrıntıya zaman harcadın.",
+              "category": "ARASTIRMA"
+            }
+          ],
+          "feedback": {
+            "text": "Eski bir radyo. Saati yok, takvimi yok. Hüseyin’in hafızası bu radyodan daha iyi çalışıyor.",
+            "short": "Radyo"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_kulube",
+      "title": "Güvenlik kulübesi · 13 Mart fotoğrafları",
+      "description": "Olay yeri fotoğrafçısının ana kapı kulübesinde çektiği kareler.",
+      "width": 344,
+      "height": 380,
+      "image": "img_kulube",
+      "objects": [
+        {
+          "id": "ob_monitor",
+          "name": "Monitör duvarı",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 30,
+                "y": 60,
+                "w": 150,
+                "h": 100
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_monitor"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 60
+            }
+          ],
+          "feedback": {
+            "text": "Dört monitör: ana kapı, otopark, Depo 1, Depo 3 önü. Arka sokağı gösteren yok. Depo 3 kamerası da o gece kördü. Kulübeden arka sokak hiçbir yoldan görünmüyor.",
+            "short": "Monitörler arka sokağı göstermiyor"
+          }
+        },
+        {
+          "id": "ob_olay_defteri",
+          "name": "Olay defteri",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 200,
+                "y": 190,
+                "w": 70,
+                "h": 44
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "DISCOVER",
+              "evidence": "clue_tur_kaydi"
+            },
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": 40
+            }
+          ],
+          "feedback": {
+            "text": "Açık bırakılmış olay defteri: “22.00 tur normal · 23.00 tur normal” aynı mürekkeple, aynı eğimde, sıkışık yazılmış. Sonradan topluca yazılmış gibi.",
+            "short": "Tur kayıtları topluca yazılmış"
+          }
+        },
+        {
+          "id": "ob_ilac",
+          "name": "İlaç kutusu",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 280,
+                "y": 196,
+                "w": 40,
+                "h": 36
+              }
+            }
+          ],
+          "feedback": {
+            "text": "Açılmamış bir uyku ilacı kutusu. Reçete tarihi 13 Mart. Olaydan sonraki sabah. Delil değil; ama bir insanın o geceden beri uyuyamadığını söylüyor.",
+            "short": "Uyku ilacı"
+          }
+        },
+        {
+          "id": "ob_kahve",
+          "name": "Kahve fincanı",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 120,
+                "y": 200,
+                "w": 40,
+                "h": 34
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": -10
+            },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Dikkat dağıtıcı bir ayrıntıya zaman harcadın.",
+              "category": "ARASTIRMA"
+            }
+          ],
+          "feedback": {
+            "text": "Soğumuş, yarım bir kahve. Kulübede her gece biri kahve içer. Bu fincan bir şey söylemiyor.",
+            "short": "Kahve fincanı"
+          }
+        },
+        {
+          "id": "ob_anahtarlik",
+          "name": "Anahtar panosu",
+          "marker": "HIDDEN",
+          "shapes": [
+            {
+              "rect": {
+                "x": 220,
+                "y": 60,
+                "w": 90,
+                "h": 80
+              }
+            }
+          ],
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "ARASTIRMA",
+              "amount": -10
+            },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Dikkat dağıtıcı bir ayrıntıya zaman harcadın.",
+              "category": "ARASTIRMA"
+            }
+          ],
+          "feedback": {
+            "text": "Yedek anahtar panosu: her deponun üç yedeği yerinde. Zaten anahtar herkeste vardı; pano bir şey eklemiyor.",
+            "short": "Anahtar panosu"
+          }
         }
       ]
     }
   ],
   "assets": [
-    { "id": "img_depo_sokagi", "kind": "IMAGE", "path": "assets/scenes/depo-sokagi@4x.png" },
-    { "id": "img_olay_yeri_depo", "kind": "IMAGE", "path": "assets/scenes/olay-yeri-depo@4x.png" }
+    {
+      "id": "img_depo_sokagi",
+      "kind": "IMAGE",
+      "path": "assets/scenes/depo-sokagi@4x.png"
+    },
+    {
+      "id": "img_olay_yeri_depo",
+      "kind": "IMAGE",
+      "path": "assets/scenes/olay-yeri-depo@4x.png"
+    },
+    {
+      "id": "img_depo3_ic",
+      "kind": "IMAGE",
+      "path": "assets/scenes/depo3-ic@4x.png"
+    },
+    {
+      "id": "img_cay_ocagi",
+      "kind": "IMAGE",
+      "path": "assets/scenes/cay-ocagi@4x.png"
+    },
+    {
+      "id": "img_kulube",
+      "kind": "IMAGE",
+      "path": "assets/scenes/kulube@4x.png"
+    }
   ]
 }

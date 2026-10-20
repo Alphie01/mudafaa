@@ -11,5 +11,9 @@
     "emitDecoratorMetadata": true
   },
   "include": ["src", "test", "prisma.config.ts"],
-  "references": [{ "path": "../../packages/case-schema" }]
+  "references": [
+    { "path": "../../packages/case-schema" },
+    { "path": "../../packages/engine" },
+    { "path": "../../packages/validator" }
+  ]
 }

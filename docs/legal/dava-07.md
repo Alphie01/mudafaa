@@ -71,3 +71,39 @@ Kaynak taslakta (docs/content/dava-07.md) metni verilmeyen ya da `…` ile kısa
 6. **Delil dilekçesi ret gerekçeleri:** "Tanık Selin Kaya'nın HTS kaydı" → CMK 135/6 yalnızca şüpheli ve sanığın iletişimini kapsar; "Olay yerinde keşif" → lamba onarıldı, sokak değişti.
 7. **Tanık ziyaretleri:** Selin'e "baskı yap" seçeneğinin geri bildirimi TCK 277; Hüseyin'e "yazılı beyan yeter" → CMK 210/1.
 8. **Son inceleme düzeltmeleri (Plan A sonu):** İNDİRİM hükmünde TCK 62/1 gerekçesi "duruşmadaki tutum ve davranışlar" yerine "sabıkasız geçmiş ve cezanın geleceği üzerindeki olası etkiler" oldu (TCK 62/2 son cümle şeklî tutumu indirim nedeni saymaz; C13_B geri bildirimiyle tutarlı). MAHKÛMİYET'in B varyantı (yalnızca 142/2-h) çöküşte uygulanmaz; çöküşte A metni + çöküş notu kullanılır (A.6). İncelemede açık kalan içerik notları: C_07'de çağrılmamış Hüseyin'in kürsüde görünmesi (statik tanık alanı), S3'e yanlış sunumda genel geri bildirim ("Çelişki yok; bastırmak yeterliydi." yerine), sert tonun yalnızca anlatı bilgisi vermesi (fact_murat_cagirdi, hint_selin_offduty, fact_borc okunmuyor).
+
+## v2 (hikâye ve oyun yüzeyi, 2026-10-20) — incelemeye eklenenler
+v2 yeniden yazımı hukuki gerçeği değiştirmedi; yeni sahneler ve mekanikler aşağıdaki hukuki noktaları ekledi. Madde atıfları
+karakterlerin gündelik konuşmasında değil; geri bildirimde, mentorun kısa açıklamalarında, rapor ve hüküm metinlerinde yer alır.
+
+1. **Tutukluluk incelemesi ve tahliye (C_ARA):** Mahkeme delil toplamak için bir hafta erteler ve tutukluluğu inceler
+   (CMK 108/3). Teşhisi sarsan bir bulgu (contra_s1 ∨ contra_s2 ∨ selin_cozuldu, sahte ikrar yoksa) varsa adli kontrol
+   şartıyla tahliye (CMK 100/1, 109); yoksa talep reddedilir. "Hemen beraat" talebi kötü işaret alır: deliller toplanmadan
+   esas hakkında hüküm kurulmaz. İnceleme sorusu: sabıkasız sanık ve teşhisin çökmesi karşısında tahliye takdirinin gerçekçiliği.
+2. **Mahkûmiyet hükümlerinde tutukluluk ifadesi:** Sanık arada tahliye edilmiş olabileceği için hüküm fıkrası "tutukluluk
+   hâlinin devamına (2. celsede adli kontrolle tahliye edilmişse, hükmolunan cezanın miktarı gözetilerek hükümle birlikte
+   tutuklanmasına, CMK 100–101)" biçimine getirildi. Şema hükmü tek metin tuttuğu için iki durumu kapsayan bu ifade seçildi;
+   inceleme sorusu: uygulamadaki standart ifadeye ("hükümle birlikte tutuklanmasına") uygunluğu.
+3. **Kart okuyucu kayıtları (ARA_KART):** Özel şirketten belge avukatın Av.K. 2/3 yetkisiyle istenemez; kayıtlar mahkemenin
+   ara kararıyla işverenden istenir (C_ARA'da başkanın satırı). Belediye kaydı ise Av.K. 2/3 ile istenir (değişmedi).
+4. **Şüpheli konumundaki tanıkla temas (ARA_SELIN):** Selin kendiliğinden konuşmak ister. Doğru seçenek: avukatı ve
+   savcılığı göstermek; bilgi kendi isteğiyle gelir (+). Karşı tarafın tanığından beyan toplayıp tutanak düzenlemek (−; ifade
+   alma yetkisi yok, TBB Meslek Kuralları) ve korkutmak (−) cezalıdır. İnceleme sorusu: meslek kuralları atfının yeri.
+5. **Kaçma şüphesi (ARA_LIMAN):** Avukat şüpheliyi kovalamaz; bilgiyi nöbetçi savcılığa iletir (CMK 158 ihbar; yakalama
+   kolluğun işi). Kendi gitmek SS −25 ve kötü işaret alır; savcılığa bildirmek UB +50 ve `murat_caught`.
+6. **Tehdit bildirimi (INV_GECE, ARA_HUS):** Kapı altındaki not ve çay ocağının camının kırılması savcılığa/kolluğa
+   bildirilir (TCK 106 tehdit). Tanığa gözdağı için koruma talebi ve mahkemeye bildirim olumlu işaret alır.
+7. **Duruşmada delil ve tanık talebi:** Aradaki DNA ek talebi ve Hüseyin'in duruşmada dinlenmesi talebi CMK 206/1'e
+   dayandırıldı (CMK 177 süresi geçtikten sonra duruşmada talep).
+8. **Sanığa müdafiin sorusu (C_02Q, CMK 201):** Bilgi veren sorular (+), boş soru ("yaptın mı?", nötr) ve sanığı tahmine
+   zorlayan soru (savcının itirazı yerinde, −).
+9. **Kolluk görevlisinin tanıklığı (C_08T):** Tutanak düzenleyen Kom. Yusuf Er 3. celsede tanık olarak dinlenir; beyanının
+   duyuma dayanan kısmına (Murat Koç'un çıkış saati) itiraz `g_duyum` ile kabul edilir (A.9'daki "duyum" inceleme sorusu
+   burada da geçerli). Komiser aramayı kendisinin yapmadığını, arama kararı ve tutanağı olmadığını kabul eder; bu, anahtarın
+   hukuka aykırı aramayla elde edildiği tespitini (5188 md. 7/a, 9/1; CMK 119/1; Anayasa 38/6; CMK 206/2-a, 217/2) destekler.
+10. **Savcılık delilini kendi tanığına sunmak (PS_SAVCILIK):** Anahtar ya da parmak izi raporunu tanığa "çelişki" diye sunmak
+    yanlış delil gibi cezalandırılır; ayrı kural yalnızca gerekçeyi netleştirir.
+11. **Esas savunma dayanakları (C_12P):** En çok üç dayanak; yalnızca duruşmada ispatlanmış dayanak + puan alır, ispatlanmamış
+    dayanak − alır. Bu bir anlatı/strateji mekaniğidir; hukuki sonuç koşullarına girmez.
+12. **Tanığa telkinli soru (ARA_EKIP):** Belediye ekip şefine isim önermek ("Murat Koç'tu, değil mi?") nötr/eksi; açık uçlu
+    soru +. Kişi hukuken tanık sıfatı taşımaz (duruşmaya çağrılmaz); yalnızca bilgi kaynağıdır.

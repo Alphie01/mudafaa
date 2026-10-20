@@ -31,14 +31,15 @@
       "icon": "document",
       "legalValidity": "VALID",
       "presentable": false,
-      "combinable": false,
+      "combinable": true,
       "countsInBag": true,
       "initiallyKnown": true,
       "tagLabel": "SAVCILIK",
       "side": "PROSECUTION",
       "strength": "WEAK",
       "legalNote": "Arama kararı ve arama tutanağı yok.",
-      "relatedCharacters": ["yusuf", "selin"]
+      "relatedCharacters": ["yusuf", "selin"],
+      "tags": ["kart"]
     },
     {
       "id": "ev_parmak_izi_raporu",
@@ -167,7 +168,7 @@
       "sourceLabel": "Bilirkişi raporu (CMK 63)",
       "icon": "camera",
       "legalValidity": "VALID",
-      "presentable": false,
+      "presentable": true,
       "combinable": false,
       "countsInBag": true,
       "initiallyKnown": false,
@@ -227,7 +228,7 @@
       "sourceLabel": "Adli Tıp raporu (CMK 78–79)",
       "icon": "cigarette",
       "legalValidity": "VALID",
-      "presentable": false,
+      "presentable": true,
       "combinable": false,
       "countsInBag": true,
       "initiallyKnown": false,
@@ -434,25 +435,546 @@
       "initiallyKnown": false,
       "side": "DEFENSE",
       "strength": "STRONG"
+    },
+    {
+      "id": "clue_surgu",
+      "kind": "CLUE",
+      "type": "FOTOGRAF",
+      "title": "Arka kapı içeriden açılmış",
+      "shortText": "Sürgü çekilmiş; kilitte zorlama yok.",
+      "description": "Depo 3’ün arka kapısının iç sürgüsü çekilmiş. Kilitte ne zorlama ne anahtar izi var: kapı içeriden açılmış.",
+      "sourceLabel": "DEPO 3",
+      "icon": "key",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_bant",
+      "kind": "CLUE",
+      "type": "FOTOGRAF",
+      "title": "Depo 3 dolabında gri koli bandı",
+      "shortText": "Kablodaki bantla aynı tür.",
+      "description": "Depo 3’ün malzeme dolabında yarısı kullanılmış gri bir koli bandı. Kamera kablosunu saran bantla aynı tür.",
+      "sourceLabel": "DEPO 3",
+      "icon": "camera",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_yeni_bot",
+      "kind": "CLUE",
+      "type": "FOTOGRAF",
+      "title": "Dolapta hiç giyilmemiş bot",
+      "shortText": "Murat Koç’un dolabında yeni bir 42 numara.",
+      "description": "Murat Koç etiketli dolapta etiketi sökülmemiş yeni bir 42 numara iş botu. Eskisi yok.",
+      "sourceLabel": "DEPO 3",
+      "icon": "boot",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_takvim",
+      "kind": "CLUE",
+      "type": "FOTOGRAF",
+      "title": "Takvimde “Z · son gün”",
+      "shortText": "12 Mart’ın üstüne kırmızı kalemle.",
+      "description": "Depo 3’ün duvar takviminde 12 Mart kutusuna kırmızı kalemle yazılmış: “Z · SON GÜN”.",
+      "sourceLabel": "DEPO 3",
+      "icon": "document",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_isik",
+      "kind": "CLUE",
+      "type": "FOTOGRAF",
+      "title": "Ocak penceresinden Depo 3",
+      "shortText": "Çay ocağından Depo 3’ün penceresi görünüyor.",
+      "description": "Çay ocağının penceresinden Depo 3’ün yan penceresi doğrudan görünüyor. Işığı yanınca buradan fark edilir.",
+      "sourceLabel": "ÇAY OCAĞI",
+      "icon": "bulb",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_mac",
+      "kind": "CLUE",
+      "type": "FOTOGRAF",
+      "title": "Duvarda maç fikstürü",
+      "shortText": "12 Mart maçı 22.00’de başlıyor.",
+      "description": "Çay ocağının duvarındaki fikstür: 12 Mart maçı 22.00’de başlıyor; ikinci yarı yaklaşık 23.00.",
+      "sourceLabel": "ÇAY OCAĞI",
+      "icon": "document",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_kasa_saat",
+      "kind": "CLUE",
+      "type": "FOTOGRAF",
+      "title": "Yazar kasanın saati doğru",
+      "shortText": "Telefonla dakikası dakikasına aynı.",
+      "description": "Yazar kasanın saati telefonla karşılaştırıldı: dakika farkı yok. Fişteki saat güvenilir.",
+      "sourceLabel": "ÇAY OCAĞI",
+      "icon": "receipt",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_dvr_onaysiz",
+      "kind": "CLUE",
+      "type": "BELGE",
+      "title": "Sinyal uyarısı onaylanmamış",
+      "shortText": "Uyarı ekranda yanmış, kimse kapatmamış.",
+      "description": "DVR günlüğü: 22.40’ta Depo 3 için verilen sinyal uyarısının onay hanesi boş. Uyarı ekranda yanmış ama kayda geçmemiş.",
+      "sourceLabel": "İNCELEME",
+      "icon": "camera",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_dvr_sk",
+      "kind": "CLUE",
+      "type": "BELGE",
+      "title": "Arıza notunu “SK” girmiş",
+      "shortText": "23.31’de kulübedeki terminalden.",
+      "description": "DVR günlüğü: 23.31’deki “arıza” notunu kullanıcı kodu SK girmiş. Terminal ana kapı kulübesinde.",
+      "sourceLabel": "İNCELEME",
+      "icon": "document",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_rulo_sira",
+      "kind": "CLUE",
+      "type": "BELGE",
+      "title": "Rulo numaraları kesintisiz",
+      "shortText": "Araya sonradan fiş eklenemez.",
+      "description": "Kasa rulosunda 0409’dan 0414’e kadar sıra numaraları kesintisiz; saatler artan sırada.",
+      "sourceLabel": "İNCELEME",
+      "icon": "receipt",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_rulo_depo3",
+      "kind": "CLUE",
+      "type": "BELGE",
+      "title": "23.40 · iki çay paket · “D3”",
+      "shortText": "Rulonun kenarına kurşun kalemle.",
+      "description": "Kasa rulosu 0414: 23.40’ta iki çay, paket. Kenarda kurşun kalemle küçük bir not: “D3”.",
+      "sourceLabel": "İNCELEME",
+      "icon": "receipt",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_erteleme",
+      "kind": "CLUE",
+      "type": "BELGE",
+      "title": "Onarım ertelenmiş",
+      "shortText": "Depo 3 sorumlusu ekibi geri çevirmiş.",
+      "description": "Belediye kaydı: 11 Mart’ta onarım ekibi gelmiş; not: “Öztekis Depo 3 sorumlusu: araç girişi uygun değil, perşembe gelin.”",
+      "sourceLabel": "İNCELEME",
+      "icon": "bulb",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_yusuf_arama",
+      "kind": "CLUE",
+      "type": "TANIK_IFADESI",
+      "title": "Komiser: “Çanta açılmıştı”",
+      "shortText": "Kolluk geldiğinde arama bitmişti.",
+      "description": "Kom. Yusuf Er: “Ben geldiğimde çanta açılmıştı, anahtar güvenlikçinin elindeydi. Aramayı ben yapmadım.”",
+      "sourceLabel": "TANIK",
+      "icon": "key",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_defter",
+      "kind": "CLUE",
+      "type": "BELGE",
+      "title": "Kerem’in defteri: 19.30",
+      "shortText": "“Murat abiye yardım (D3)” satırı.",
+      "description": "Kerem’in masraf defteri, 12 Mart: “19.30 Murat abiye yardım (D3) · 22.57 çay+tost 85 TL”.",
+      "sourceLabel": "AİLE",
+      "icon": "document",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_kart_murat",
+      "kind": "CLUE",
+      "type": "BELGE",
+      "title": "Murat’ın kartı 00.12’de çıkmış",
+      "shortText": "“22.30’da çıktım” demişti.",
+      "description": "Kart okuyucu: Murat Koç 15.55 giriş, 00.12 çıkış. Kendisi 22.30’da kilitleyip çıktığını söylemişti.",
+      "sourceLabel": "İNCELEME",
+      "icon": "document",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_kart_selin",
+      "kind": "CLUE",
+      "type": "BELGE",
+      "title": "Selin’in kartı 23.29’da kulübede",
+      "shortText": "Kulübe kapısı okuyucusu.",
+      "description": "Kart okuyucu: Selin Kaya 23.29’da ana kapı kulübesine giriş yapmış.",
+      "sourceLabel": "İNCELEME",
+      "icon": "document",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_yuzuk",
+      "kind": "CLUE",
+      "type": "TANIK_IFADESI",
+      "title": "İnce bir nişan yüzüğü",
+      "shortText": "Selin zincirinde taşıyordu.",
+      "description": "Selin Kaya’nın boynundaki zincirde taşıdığı ince yüzük. “Bunu bana o gece verdi.”",
+      "sourceLabel": "TANIK",
+      "icon": "key",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "ded_plan",
+      "kind": "INSIGHT",
+      "type": "BELGE",
+      "title": "Kablo içeriden eklenmiş",
+      "shortText": "Depo 3’ün kendi bandı.",
+      "description": "Kamera kablosu, Depo 3’ün dolabındaki bantla eklenmiş: müdahale dışarıdan değil, içeriden.",
+      "sourceLabel": "ÇIKARIM",
+      "icon": "camera",
+      "legalValidity": "VALID",
+      "presentable": true,
+      "combinable": false,
+      "countsInBag": true,
+      "initiallyKnown": false,
+      "side": "DEFENSE",
+      "strength": "STRONG"
+    },
+    {
+      "id": "ded_kulube",
+      "kind": "INSIGHT",
+      "type": "BELGE",
+      "title": "Selin o saatte kulübedeydi",
+      "shortText": "Arka sokakta değil.",
+      "description": "Görev yeri ana kapı, vardiyası 18–24 ve gece yarısına doğru kulübedeki terminalde: “arka sokakta devriyedeydim” sözü çürür.",
+      "sourceLabel": "ÇIKARIM",
+      "icon": "document",
+      "legalValidity": "VALID",
+      "presentable": true,
+      "combinable": false,
+      "countsInBag": true,
+      "initiallyKnown": false,
+      "side": "DEFENSE",
+      "strength": "STRONG"
+    },
+    {
+      "id": "ded_depo3",
+      "kind": "INSIGHT",
+      "type": "BELGE",
+      "title": "Depo 3’te gece biri vardı",
+      "shortText": "“22.30’da kilitledim” çürür.",
+      "description": "Depo 3’ün ışığı yanıyordu ve 23.40’ta oraya iki çay gitti: biri içerideydi. Depo 3’ün sorumlusunun “22.30’da kilitleyip çıktım” sözü çürür.",
+      "sourceLabel": "ÇIKARIM",
+      "icon": "bulb",
+      "legalValidity": "VALID",
+      "presentable": true,
+      "combinable": false,
+      "countsInBag": true,
+      "initiallyKnown": false,
+      "side": "DEFENSE",
+      "strength": "STRONG"
+    },
+    {
+      "id": "ded_karanlik",
+      "kind": "INSIGHT",
+      "type": "BELGE",
+      "title": "Karanlık bilerek uzatıldı",
+      "shortText": "Son gün, ertelenen onarım.",
+      "description": "Lambanın onarımı Depo 3 sorumlusunca ertelendi; takvimde aynı gün “Z · son gün” yazıyor. Karanlık bir tesadüf değildi.",
+      "sourceLabel": "ÇIKARIM",
+      "icon": "bulb",
+      "legalValidity": "VALID",
+      "presentable": true,
+      "combinable": false,
+      "countsInBag": true,
+      "initiallyKnown": false,
+      "side": "DEFENSE",
+      "strength": "STRONG"
+    },
+    {
+      "id": "ded_arama",
+      "kind": "INSIGHT",
+      "type": "BELGE",
+      "title": "Arama görevi bitmiş güvenlikçinin",
+      "shortText": "Kolluk geldiğinde arama bitmişti.",
+      "description": "Çanta kolluk gelmeden, görev süresi bitmiş özel güvenlik görevlisince rızasız arandı; teslim tutanağı bunu örtüyor.",
+      "sourceLabel": "ÇIKARIM",
+      "icon": "key",
+      "legalValidity": "VALID",
+      "presentable": true,
+      "combinable": false,
+      "countsInBag": true,
+      "initiallyKnown": false,
+      "side": "DEFENSE",
+      "strength": "STRONG"
+    },
+    {
+      "id": "clue_ekip",
+      "kind": "CLUE",
+      "type": "TANIK_IFADESI",
+      "title": "Ekip şefi: “Perşembe gelin”",
+      "shortText": "Depo 3’ten sakallı biri geri çevirmiş.",
+      "description": "Belediye ekip şefi: 11 Mart’ta onarımı Depo 3’ün kapısından çıkan iri yarı, sakallı, turuncu montlu biri “perşembe gelin” diyerek erteletti.",
+      "sourceLabel": "TANIK",
+      "icon": "bulb",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_monitor",
+      "kind": "CLUE",
+      "type": "FOTOGRAF",
+      "title": "Monitörler arka sokağı göstermiyor",
+      "shortText": "Dört ekran; arka sokak yok.",
+      "description": "Kulübedeki dört monitör: ana kapı, otopark, Depo 1, Depo 3 önü. Arka sokağı gösteren kamera yok; Depo 3 kamerası o gece kördü.",
+      "sourceLabel": "KULÜBE",
+      "icon": "camera",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_tur_kaydi",
+      "kind": "CLUE",
+      "type": "FOTOGRAF",
+      "title": "Tur kayıtları topluca yazılmış",
+      "shortText": "Aynı mürekkep, aynı eğim.",
+      "description": "Olay defterinde “22.00 tur normal · 23.00 tur normal” satırları aynı mürekkeple, sıkışık, sonradan topluca yazılmış gibi.",
+      "sourceLabel": "KULÜBE",
+      "icon": "camera",
+      "legalValidity": "VALID",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "tags": ["kart"]
     }
   ],
   "evidenceRelations": [
-    { "from": "ded_lamba", "to": "clue_ampul", "type": "DERIVED_FROM" },
-    { "from": "ded_lamba", "to": "ev_ariza_kaydi", "type": "DERIVED_FROM" },
-    { "from": "ded_iz_murat", "to": "clue_iz42", "type": "DERIVED_FROM" },
-    { "from": "ded_iz_murat", "to": "clue_murat_42", "type": "DERIVED_FROM" },
-    { "from": "ded_mazeret", "to": "ev_fis", "type": "DERIVED_FROM" },
-    { "from": "ded_mazeret", "to": "clue_huseyin", "type": "DERIVED_FROM" },
-    { "from": "ev_ariza_kaydi", "to": "ev_selin_kolluk", "type": "SUPPORTS" },
-    { "from": "ev_hts", "to": "ev_selin_kolluk", "type": "SUPPORTS" },
-    { "from": "ded_mazeret", "to": "ev_parmak_izi_raporu", "type": "CONTRADICTS" }
+    {
+      "from": "ded_lamba",
+      "to": "clue_ampul",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_lamba",
+      "to": "ev_ariza_kaydi",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_iz_murat",
+      "to": "clue_iz42",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_iz_murat",
+      "to": "clue_murat_42",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_mazeret",
+      "to": "ev_fis",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_mazeret",
+      "to": "clue_huseyin",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ev_ariza_kaydi",
+      "to": "ev_selin_kolluk",
+      "type": "SUPPORTS"
+    },
+    {
+      "from": "ev_hts",
+      "to": "ev_selin_kolluk",
+      "type": "SUPPORTS"
+    },
+    {
+      "from": "ded_mazeret",
+      "to": "ev_parmak_izi_raporu",
+      "type": "CONTRADICTS"
+    },
+    {
+      "from": "ded_plan",
+      "to": "clue_kablo",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_plan",
+      "to": "clue_bant",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_kulube",
+      "to": "clue_uv_silinti",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_kulube",
+      "to": "clue_dvr_sk",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_depo3",
+      "to": "clue_rulo_depo3",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_depo3",
+      "to": "clue_isik",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_karanlik",
+      "to": "clue_erteleme",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_karanlik",
+      "to": "clue_takvim",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_arama",
+      "to": "clue_yusuf_arama",
+      "type": "DERIVED_FROM"
+    },
+    {
+      "from": "ded_arama",
+      "to": "ev_teslim_tutanagi",
+      "type": "DERIVED_FROM"
+    }
   ],
   "discoveryPaths": [
-    { "evidence": "ev_anahtar", "source": { "type": "INITIAL" } },
-    { "evidence": "ev_teslim_tutanagi", "source": { "type": "INITIAL" } },
-    { "evidence": "ev_parmak_izi_raporu", "source": { "type": "INITIAL" } },
-    { "evidence": "ev_selin_kolluk", "source": { "type": "INITIAL" } },
-    { "evidence": "ev_kerem_kolluk", "source": { "type": "INITIAL" } },
-    { "evidence": "ev_vardiya", "source": { "type": "INITIAL" } }
+    {
+      "evidence": "ev_anahtar",
+      "source": {
+        "type": "INITIAL"
+      }
+    },
+    {
+      "evidence": "ev_teslim_tutanagi",
+      "source": {
+        "type": "INITIAL"
+      }
+    },
+    {
+      "evidence": "ev_parmak_izi_raporu",
+      "source": {
+        "type": "INITIAL"
+      }
+    },
+    {
+      "evidence": "ev_selin_kolluk",
+      "source": {
+        "type": "INITIAL"
+      }
+    },
+    {
+      "evidence": "ev_kerem_kolluk",
+      "source": {
+        "type": "INITIAL"
+      }
+    },
+    {
+      "evidence": "ev_vardiya",
+      "source": {
+        "type": "INITIAL"
+      }
+    }
   ]
 }

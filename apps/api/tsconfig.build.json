@@ -11,5 +11,9 @@
   },
   "include": ["src"],
   "exclude": ["src/**/*.spec.ts"],
-  "references": [{ "path": "../../packages/case-schema" }]
+  "references": [
+    { "path": "../../packages/case-schema" },
+    { "path": "../../packages/engine" },
+    { "path": "../../packages/validator" }
+  ]
 }

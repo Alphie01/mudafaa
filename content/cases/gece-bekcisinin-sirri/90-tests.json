@@ -4,324 +4,4406 @@
       {
         "name": "G1",
         "actions": [
-          { "kind": "CHOOSE", "choiceId": "BR01_A" },
-          { "kind": "CHOOSE", "choiceId": "STR_MASUMIYET" },
-          { "kind": "CHOOSE", "choiceId": "H_ARAMA" },
-          { "kind": "TAP", "x": 276, "y": 70 },
-          { "kind": "TAP", "x": 172, "y": 121 },
-          { "kind": "TAP", "x": 210, "y": 335 },
-          { "kind": "TAP", "x": 318, "y": 267 },
-          { "kind": "CHOOSE", "choiceId": "ARAMA_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_INCELEME" },
-          { "kind": "EXAMINE", "tool": "uv", "target": "selin" },
-          { "kind": "EXAMINE", "tool": "mag", "target": "kerem" },
-          { "kind": "EXAMINE", "tool": "compare", "target": "murat" },
-          { "kind": "CHOOSE", "choiceId": "INCELEME_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_GORUS" },
-          { "kind": "CHOOSE", "choiceId": "TP_ANAHTAR", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "TP_HUSEYIN", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "TP_GECE", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "G_IZ" },
-          { "kind": "CHOOSE", "choiceId": "G_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "DAY_NEXT" },
-          { "kind": "CHOOSE", "choiceId": "H_BEL" },
-          { "kind": "CHOOSE", "choiceId": "BEL_A" },
-          { "kind": "CHOOSE", "choiceId": "H_T_HUS" },
-          { "kind": "CHOOSE", "choiceId": "THUS_BILDIR" },
-          { "kind": "CHOOSE", "choiceId": "H_HTS" },
-          { "kind": "CHOOSE", "choiceId": "HTS_SUC" },
-          { "kind": "CHOOSE", "choiceId": "HTSS_EKLE" },
-          { "kind": "CHOOSE", "choiceId": "DAY_NEXT" },
-          { "kind": "CHOOSE", "choiceId": "H_CIKARIM" },
-          { "kind": "COMBINE", "a": "clue_ampul", "b": "ev_ariza_kaydi" },
-          { "kind": "COMBINE", "a": "clue_iz42", "b": "clue_murat_42" },
-          { "kind": "COMBINE", "a": "ev_fis", "b": "clue_huseyin" },
-          { "kind": "CHOOSE", "choiceId": "CIKARIM_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_DIL" },
-          { "kind": "CHOOSE", "choiceId": "DIL_DNA" },
-          { "kind": "CHOOSE", "choiceId": "DIL_BILIRKISI" },
-          { "kind": "CHOOSE", "choiceId": "DIL_KAMERA" },
-          { "kind": "CHOOSE", "choiceId": "DIL_VER" },
-          { "kind": "CHOOSE", "choiceId": "H_DURUSMA" },
-          { "kind": "CHOOSE", "choiceId": "C00_DEVAM" },
-          { "kind": "CHOOSE", "choiceId": "C01_A" },
-          { "kind": "CHOOSE", "choiceId": "C02_A" },
-          { "kind": "CHOOSE", "choiceId": "C03_A" },
-          { "kind": "CHOOSE", "choiceId": "C04_YEMINSIZ" },
-          { "kind": "CHOOSE", "choiceId": "C05_A" },
-          { "kind": "PRESS", "statementId": "S1" },
-          { "kind": "PRESENT", "evidenceId": "ev_vardiya", "statementId": "S1" },
-          { "kind": "PRESS", "statementId": "S2" },
-          { "kind": "PRESENT", "evidenceId": "ded_lamba", "statementId": "S2" },
-          { "kind": "PRESS", "statementId": "S3" },
-          { "kind": "PRESS", "statementId": "S3" },
-          { "kind": "PRESS", "statementId": "S4" },
-          { "kind": "PRESS", "statementId": "S4" },
-          { "kind": "PRESENT", "evidenceId": "ev_hts", "statementId": "S4_EK" },
-          { "kind": "CHOOSE", "choiceId": "C06H_A" },
-          { "kind": "CHOOSE", "choiceId": "C06_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "C07_A" },
-          { "kind": "CHOOSE", "choiceId": "C08_A" },
-          { "kind": "CHOOSE", "choiceId": "C09_A" },
-          { "kind": "CHOOSE", "choiceId": "C10_A" },
-          { "kind": "CHOOSE", "choiceId": "C11_A2" },
-          { "kind": "CHOOSE", "choiceId": "C12_A" },
-          { "kind": "CHOOSE", "choiceId": "C13_A" }
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR01_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR00_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01B_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "STR_MASUMIYET"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "SABAH_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA"
+          },
+          {
+            "kind": "TAP",
+            "x": 276,
+            "y": 70
+          },
+          {
+            "kind": "TAP",
+            "x": 172,
+            "y": 121
+          },
+          {
+            "kind": "TAP",
+            "x": 210,
+            "y": 335
+          },
+          {
+            "kind": "TAP",
+            "x": 318,
+            "y": 267
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARAMA_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_INCELEME"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "selin"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "kerem"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "murat"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INCELEME_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA2"
+          },
+          {
+            "kind": "TAP",
+            "x": 268,
+            "y": 170
+          },
+          {
+            "kind": "TAP",
+            "x": 170,
+            "y": 210
+          },
+          {
+            "kind": "TAP",
+            "x": 40,
+            "y": 185
+          },
+          {
+            "kind": "TAP",
+            "x": 175,
+            "y": 84
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA2_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ANAHTAR",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_HUSEYIN",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_GECE",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_SELIN",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ZIYA",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_IZ"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK1_SAAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_BEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BEL_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_HUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HQ_GECE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HQ_SIRKET"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "THUS_YAZILI"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA3"
+          },
+          {
+            "kind": "TAP",
+            "x": 260,
+            "y": 105
+          },
+          {
+            "kind": "TAP",
+            "x": 65,
+            "y": 214
+          },
+          {
+            "kind": "TAP",
+            "x": 76,
+            "y": 105
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA3_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DVR"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d2240u"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "d2331"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_DVR_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK2_CALIS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_RULO"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "r0411"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "r0414"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_RULO_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARIZA"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "a14b"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARIZA_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_HTS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HTS_SUC"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HTSS_EKLE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ISIK",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_DEFTER",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DAY_NEXT3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DIL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_BILIRKISI"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_KAMERA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_VER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_CIKARIM"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_ampul",
+            "b": "ev_ariza_kaydi"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_iz42",
+            "b": "clue_murat_42"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "ev_fis",
+            "b": "clue_huseyin"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_kablo",
+            "b": "clue_bant"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_uv_silinti",
+            "b": "clue_dvr_sk"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_rulo_depo3",
+            "b": "clue_isik"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_erteleme",
+            "b": "clue_takvim"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CIKARIM_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DURUSMA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "GECE_BILDIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "KOR_DURUST"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C01_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C02_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "Q_1930"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "Q_FIS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C02Q_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C03_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C04_YEMINSIZ"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C05_A"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S1"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_vardiya",
+            "statementId": "S1"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S2"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_lamba",
+            "statementId": "S2"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S3"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S3"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S4"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S4"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_kulube",
+            "statementId": "S5"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_hts",
+            "statementId": "S4_EK"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06H_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06R_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CARA_TAHLIYE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_BASLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SELIN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASEL_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LIMAN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALIM_SAVCI"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_YUSUF"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_BULGU"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_DNA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_HUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AHUS_RULO"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AHUS_TALEP"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KEREM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKER_DOGRU"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SANIYE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_DEFTER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CIKARIM"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_yusuf_arama",
+            "b": "ev_teslim_tutanagi"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_CIKARIM_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CELSE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_SALON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H7_ISIK"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H7_D3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C07_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C07X_A"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_arama",
+            "statementId": "Y1"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_depo3",
+            "statementId": "Y2"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_kamera",
+            "statementId": "Y3"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_lamba",
+            "statementId": "Y4"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_dna",
+            "statementId": "Y5"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08T_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C09_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C10_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C11_A2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_MAZERET"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_LAMBA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_MURAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C12P_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C12_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C13_A"
+          }
         ],
-        "expect": { "outcome": "BERAAT_B", "finalMin": 4800, "finalMax": 5400 }
+        "expect": {
+          "outcome": "BERAAT_B",
+          "finalMin": 9139,
+          "finalMax": 10101
+        }
       },
       {
         "name": "G2",
         "actions": [
-          { "kind": "CHOOSE", "choiceId": "BR01_A" },
-          { "kind": "CHOOSE", "choiceId": "STR_USUL" },
-          { "kind": "CHOOSE", "choiceId": "H_GORUS" },
-          { "kind": "CHOOSE", "choiceId": "TP_GECE", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "TP_ANAHTAR", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "TP_HUSEYIN", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "TP_KENDISI", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "G_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_ARAMA" },
-          { "kind": "TAP", "x": 276, "y": 70 },
-          { "kind": "TAP", "x": 172, "y": 121 },
-          { "kind": "TAP", "x": 5, "y": 370 },
-          { "kind": "TAP", "x": 318, "y": 267 },
-          { "kind": "CHOOSE", "choiceId": "ARAMA_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_INCELEME" },
-          { "kind": "EXAMINE", "tool": "uv", "target": "selin" },
-          { "kind": "EXAMINE", "tool": "mag", "target": "kerem" },
-          { "kind": "EXAMINE", "tool": "dust", "target": "selin" },
-          { "kind": "CHOOSE", "choiceId": "INCELEME_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "DAY_NEXT" },
-          { "kind": "CHOOSE", "choiceId": "H_BEL" },
-          { "kind": "CHOOSE", "choiceId": "BEL_A" },
-          { "kind": "CHOOSE", "choiceId": "H_T_HUS" },
-          { "kind": "CHOOSE", "choiceId": "THUS_BILDIR" },
-          { "kind": "CHOOSE", "choiceId": "H_DIL" },
-          { "kind": "CHOOSE", "choiceId": "DIL_BILIRKISI" },
-          { "kind": "CHOOSE", "choiceId": "DIL_DNA" },
-          { "kind": "CHOOSE", "choiceId": "DIL_KAMERA" },
-          { "kind": "CHOOSE", "choiceId": "DIL_VER" },
-          { "kind": "CHOOSE", "choiceId": "DAY_NEXT" },
-          { "kind": "CHOOSE", "choiceId": "H_CIKARIM" },
-          { "kind": "COMBINE", "a": "clue_ampul", "b": "ev_ariza_kaydi" },
-          { "kind": "COMBINE", "a": "ev_fis", "b": "clue_huseyin" },
-          { "kind": "COMBINE", "a": "clue_kablo", "b": "clue_izmarit" },
-          { "kind": "CHOOSE", "choiceId": "CIKARIM_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_DURUSMA" },
-          { "kind": "CHOOSE", "choiceId": "C00_DEVAM" },
-          { "kind": "CHOOSE", "choiceId": "C01_A" },
-          { "kind": "CHOOSE", "choiceId": "C02_A" },
-          { "kind": "CHOOSE", "choiceId": "C03_A" },
-          { "kind": "CHOOSE", "choiceId": "C04_DEVAM" },
-          { "kind": "CHOOSE", "choiceId": "C05_A" },
-          { "kind": "PRESENT", "evidenceId": "ev_vardiya", "statementId": "S1" },
-          { "kind": "PRESENT", "evidenceId": "ded_lamba", "statementId": "S2" },
-          { "kind": "PRESENT", "evidenceId": "ev_anahtar", "statementId": "S3" },
-          { "kind": "PRESS", "statementId": "S4" },
-          { "kind": "PRESENT", "evidenceId": "ded_mazeret", "statementId": "S4" },
-          { "kind": "CHOOSE", "choiceId": "C06_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "C07_A" },
-          { "kind": "CHOOSE", "choiceId": "C08_A" },
-          { "kind": "CHOOSE", "choiceId": "C09_A" },
-          { "kind": "CHOOSE", "choiceId": "C10_A" },
-          { "kind": "CHOOSE", "choiceId": "C11_A" },
-          { "kind": "CHOOSE", "choiceId": "C12_B" },
-          { "kind": "CHOOSE", "choiceId": "C13_A" }
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR01_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR00_C"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01B_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "STR_USUL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "SABAH_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_GECE",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ANAHTAR",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_HUSEYIN",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_KENDISI",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ANNE",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_DEFTER",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA"
+          },
+          {
+            "kind": "TAP",
+            "x": 276,
+            "y": 70
+          },
+          {
+            "kind": "TAP",
+            "x": 172,
+            "y": 121
+          },
+          {
+            "kind": "TAP",
+            "x": 5,
+            "y": 370
+          },
+          {
+            "kind": "TAP",
+            "x": 318,
+            "y": 267
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARAMA_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_INCELEME"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "selin"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "kerem"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "dust",
+            "target": "selin"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INCELEME_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA2"
+          },
+          {
+            "kind": "TAP",
+            "x": 175,
+            "y": 84
+          },
+          {
+            "kind": "TAP",
+            "x": 268,
+            "y": 170
+          },
+          {
+            "kind": "TAP",
+            "x": 246,
+            "y": 303
+          },
+          {
+            "kind": "TAP",
+            "x": 170,
+            "y": 210
+          },
+          {
+            "kind": "TAP",
+            "x": 40,
+            "y": 185
+          },
+          {
+            "kind": "TAP",
+            "x": 330,
+            "y": 365
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA2_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK1_ANAHTAR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_BEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BEL_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_HUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HQ_GECE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HQ_BABA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HQ_SIRKET"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "THUS_BILDIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA3"
+          },
+          {
+            "kind": "TAP",
+            "x": 260,
+            "y": 105
+          },
+          {
+            "kind": "TAP",
+            "x": 65,
+            "y": 214
+          },
+          {
+            "kind": "TAP",
+            "x": 76,
+            "y": 105
+          },
+          {
+            "kind": "TAP",
+            "x": 146,
+            "y": 244
+          },
+          {
+            "kind": "TAP",
+            "x": 249,
+            "y": 294
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA3_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DVR"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d2240u"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "d2331"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d2240"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "d0600"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_DVR_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK2_UYU"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_RULO"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "r0411"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "r0414"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "r0412"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_RULO_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARIZA"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "a14b"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "a14c"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "a16"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARIZA_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_SEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "SQ_DVR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TSEL_GORUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_MUR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "MQ_SAAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "MQ_ZIYA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TMUR_AYRIL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DAY_NEXT3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ISIK",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_SELIN",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ZIYA",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA4"
+          },
+          {
+            "kind": "TAP",
+            "x": 105,
+            "y": 110
+          },
+          {
+            "kind": "TAP",
+            "x": 235,
+            "y": 212
+          },
+          {
+            "kind": "TAP",
+            "x": 300,
+            "y": 214
+          },
+          {
+            "kind": "TAP",
+            "x": 140,
+            "y": 217
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA4_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_HTS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HTS_TANIK"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DIL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_BILIRKISI"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_DNA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_KAMERA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_VER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_CIKARIM"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_ampul",
+            "b": "ev_ariza_kaydi"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "ev_fis",
+            "b": "clue_huseyin"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_kablo",
+            "b": "clue_bant"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_kerem_depo1",
+            "b": "clue_izmarit"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_uv_silinti",
+            "b": "clue_dvr_sk"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_rulo_depo3",
+            "b": "clue_isik"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_erteleme",
+            "b": "clue_takvim"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CIKARIM_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DURUSMA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "GECE_BILDIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "KOR_DURUST"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C01_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C02_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "Q_ANAHTAR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "Q_1930"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "Q_FIS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "Q_ISIK"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C02Q_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C03_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C04_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C05_A"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S1"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_kulube",
+            "statementId": "S1"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S2"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_lamba",
+            "statementId": "S2"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S3"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S3"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_anahtar",
+            "statementId": "S3"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S4"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_mazeret",
+            "statementId": "S4"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S5"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_kulube",
+            "statementId": "S5"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06R_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CARA_TAHLIYE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_BASLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SELIN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASEL_GEC"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_YUSUF"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_BULGU"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_BANT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_KART"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KART"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "k_murat"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "k_selin"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "k_kerem"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_KART_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_EKIP"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AEKIP_ARAC"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AEKIP_KIM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SANIYE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_HAL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_DEFTER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CIKARIM"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_yusuf_arama",
+            "b": "ev_teslim_tutanagi"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_kart_murat",
+            "b": "clue_isik"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_defter",
+            "b": "clue_mac"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_CIKARIM_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_HUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AHUS_CAY"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AHUS_KORUMA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KEREM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKQ_MURAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKQ_SELIN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKER_DOGRU"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CELSE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_SALON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H7_ISIK"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H7_BABA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C07_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C07X_A"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y1"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_arama",
+            "statementId": "Y1"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y2"
+          },
+          {
+            "kind": "OBJECT",
+            "groundId": "g_duyum",
+            "statementId": "Y2"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_depo3",
+            "statementId": "Y2"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y3"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_kamera",
+            "statementId": "Y3"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y4"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_lamba",
+            "statementId": "Y4"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y5"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_dna",
+            "statementId": "Y5"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08T_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C09_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C10_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C11_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_LAMBA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_MAZERET"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_ANAHTAR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C12P_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C12_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C13_A"
+          }
         ],
-        "expect": { "outcome": "BERAAT_E", "finalMin": 3300, "finalMax": 3900 }
+        "expect": {
+          "outcome": "BERAAT_E",
+          "finalMin": 8403,
+          "finalMax": 9287
+        }
       },
       {
         "name": "G3",
         "actions": [
-          { "kind": "CHOOSE", "choiceId": "BR01_A" },
-          { "kind": "CHOOSE", "choiceId": "STR_INDIRIM" },
-          { "kind": "CHOOSE", "choiceId": "H_GORUS" },
-          { "kind": "CHOOSE", "choiceId": "TP_GECE", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "TP_HUSEYIN", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "TP_ANAHTAR", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "TP_KENDISI", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "G_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_T_MUR" },
-          { "kind": "CHOOSE", "choiceId": "TMUR_AYRIL" },
-          { "kind": "CHOOSE", "choiceId": "H_ARAMA" },
-          { "kind": "TAP", "x": 276, "y": 70 },
-          { "kind": "TAP", "x": 172, "y": 121 },
-          { "kind": "TAP", "x": 210, "y": 335 },
-          { "kind": "TAP", "x": 318, "y": 267 },
-          { "kind": "TAP", "x": 5, "y": 370 },
-          { "kind": "CHOOSE", "choiceId": "ARAMA_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "DAY_NEXT" },
-          { "kind": "CHOOSE", "choiceId": "H_INCELEME" },
-          { "kind": "EXAMINE", "tool": "uv", "target": "selin" },
-          { "kind": "EXAMINE", "tool": "mag", "target": "kerem" },
-          { "kind": "EXAMINE", "tool": "dust", "target": "murat" },
-          { "kind": "CHOOSE", "choiceId": "INCELEME_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_BEL" },
-          { "kind": "CHOOSE", "choiceId": "BEL_A" },
-          { "kind": "CHOOSE", "choiceId": "H_DIL" },
-          { "kind": "CHOOSE", "choiceId": "DIL_BILIRKISI" },
-          { "kind": "CHOOSE", "choiceId": "DIL_KAMERA" },
-          { "kind": "CHOOSE", "choiceId": "DIL_DNA" },
-          { "kind": "CHOOSE", "choiceId": "DIL_VER" },
-          { "kind": "CHOOSE", "choiceId": "DAY_NEXT" },
-          { "kind": "CHOOSE", "choiceId": "H_CIKARIM" },
-          { "kind": "COMBINE", "a": "clue_ampul", "b": "ev_ariza_kaydi" },
-          { "kind": "COMBINE", "a": "clue_kablo", "b": "clue_izmarit" },
-          { "kind": "CHOOSE", "choiceId": "CIKARIM_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_DURUSMA" },
-          { "kind": "CHOOSE", "choiceId": "C00_DEVAM" },
-          { "kind": "CHOOSE", "choiceId": "C01_A" },
-          { "kind": "CHOOSE", "choiceId": "C02_A" },
-          { "kind": "CHOOSE", "choiceId": "C03_A" },
-          { "kind": "CHOOSE", "choiceId": "C04_DEVAM" },
-          { "kind": "CHOOSE", "choiceId": "C05_B" },
-          { "kind": "PRESENT", "evidenceId": "ev_fis", "statementId": "S2" },
-          { "kind": "PRESS", "statementId": "S4" },
-          { "kind": "PRESENT", "evidenceId": "ev_selin_kolluk", "statementId": "S4" },
-          { "kind": "CHOOSE", "choiceId": "C06_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "C07_YOK" },
-          { "kind": "CHOOSE", "choiceId": "C08_B" },
-          { "kind": "CHOOSE", "choiceId": "C09_A" },
-          { "kind": "CHOOSE", "choiceId": "C10_B" },
-          { "kind": "CHOOSE", "choiceId": "C11_A" },
-          { "kind": "CHOOSE", "choiceId": "C12_C" },
-          { "kind": "CHOOSE", "choiceId": "C13_A" }
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR01_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR00_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01B_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "STR_INDIRIM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "SABAH_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_GECE",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_HUSEYIN",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ANAHTAR",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_KENDISI",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_MUR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "MQ_SAAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TMUR_AYRIL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA"
+          },
+          {
+            "kind": "TAP",
+            "x": 276,
+            "y": 70
+          },
+          {
+            "kind": "TAP",
+            "x": 172,
+            "y": 121
+          },
+          {
+            "kind": "TAP",
+            "x": 210,
+            "y": 335
+          },
+          {
+            "kind": "TAP",
+            "x": 318,
+            "y": 267
+          },
+          {
+            "kind": "TAP",
+            "x": 5,
+            "y": 370
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARAMA_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA2"
+          },
+          {
+            "kind": "TAP",
+            "x": 246,
+            "y": 303
+          },
+          {
+            "kind": "TAP",
+            "x": 103,
+            "y": 75
+          },
+          {
+            "kind": "TAP",
+            "x": 170,
+            "y": 210
+          },
+          {
+            "kind": "TAP",
+            "x": 330,
+            "y": 365
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA2_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK1_INSAN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_INCELEME"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "selin"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "kerem"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "dust",
+            "target": "murat"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INCELEME_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_BEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BEL_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DVR"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d2238"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "d2331"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_DVR_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_SEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "SQ_DVR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TSEL_GORUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK2_UYU"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARIZA"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "a14a"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "a14b"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARIZA_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DIL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_BILIRKISI"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_KAMERA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_DNA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_VER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_HTS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HTS_KEREM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_SELIN",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DAY_NEXT3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_CIKARIM"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_ampul",
+            "b": "ev_ariza_kaydi"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_kablo",
+            "b": "clue_izmarit"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_kablo",
+            "b": "clue_bant"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CIKARIM_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DURUSMA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "GECE_SAKLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "KOR_UMUT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C01_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C02_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "Q_ANAHTAR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "Q_SUC"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C02Q_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C03_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C04_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C05_B"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_fis",
+            "statementId": "S2"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S4"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_selin_kolluk",
+            "statementId": "S4"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S5"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06R_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CARA_YOK"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_BASLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SELIN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASEL_GEC"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KEREM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKER_EZBER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KART"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "k_ahmet"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "k_murat"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_KART_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_YUSUF"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_BULGU"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_EKIP"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AEKIP_SUCLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SANIYE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_HAL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_DEFTER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CELSE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_SALON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C07_YOK"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y1"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y4"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_ariza_kaydi",
+            "statementId": "Y4"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08T_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C09_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C10_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C11_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_IZ"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_LAMBA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C12P_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C12_C"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C13_A"
+          }
         ],
-        "expect": { "outcome": "INDIRIM", "finalMin": 2000, "finalMax": 2400 }
+        "expect": {
+          "outcome": "INDIRIM",
+          "finalMin": 3173,
+          "finalMax": 3507
+        }
       },
       {
         "name": "G4",
         "actions": [
-          { "kind": "CHOOSE", "choiceId": "BR01_A" },
-          { "kind": "CHOOSE", "choiceId": "STR_MASUMIYET" },
-          { "kind": "CHOOSE", "choiceId": "H_GORUS" },
-          { "kind": "CHOOSE", "choiceId": "TP_ANAHTAR", "variant": "hard" },
-          { "kind": "CHOOSE", "choiceId": "TP_HUSEYIN", "variant": "hard" },
-          { "kind": "CHOOSE", "choiceId": "TP_KENDISI", "variant": "hard" },
-          { "kind": "CHOOSE", "choiceId": "G_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_ARAMA" },
-          { "kind": "TAP", "x": 276, "y": 70 },
-          { "kind": "TAP", "x": 5, "y": 370 },
-          { "kind": "TAP", "x": 10, "y": 10 },
-          { "kind": "TAP", "x": 100, "y": 10 },
-          { "kind": "CHOOSE", "choiceId": "ARAMA_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_INCELEME" },
-          { "kind": "EXAMINE", "tool": "dust", "target": "selin" },
-          { "kind": "EXAMINE", "tool": "mag", "target": "huseyin" },
-          { "kind": "CHOOSE", "choiceId": "INCELEME_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "DAY_NEXT" },
-          { "kind": "CHOOSE", "choiceId": "H_DURUSMA" },
-          { "kind": "CHOOSE", "choiceId": "C00_DEVAM" },
-          { "kind": "CHOOSE", "choiceId": "C01_B" },
-          { "kind": "CHOOSE", "choiceId": "C02_B" },
-          { "kind": "CHOOSE", "choiceId": "C03_D" },
-          { "kind": "CHOOSE", "choiceId": "C04_DEVAM" },
-          { "kind": "CHOOSE", "choiceId": "C05_B" },
-          { "kind": "PRESENT", "evidenceId": "ev_anahtar", "statementId": "S1" },
-          { "kind": "PRESENT", "evidenceId": "ev_parmak_izi_raporu", "statementId": "S2" },
-          { "kind": "CHOOSE", "choiceId": "C06_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "C07_YOK" },
-          { "kind": "CHOOSE", "choiceId": "C08_D" },
-          { "kind": "CHOOSE", "choiceId": "C09_E" },
-          { "kind": "CHOOSE", "choiceId": "C10_D" },
-          { "kind": "CHOOSE", "choiceId": "C11_B" },
-          { "kind": "CHOOSE", "choiceId": "C12_A" },
-          { "kind": "CHOOSE", "choiceId": "C13_A" }
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR01_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR00_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01B_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "STR_MASUMIYET"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "SABAH_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ANAHTAR",
+            "variant": "hard"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_HUSEYIN",
+            "variant": "hard"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_KENDISI",
+            "variant": "hard"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ANNE",
+            "variant": "hard"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA"
+          },
+          {
+            "kind": "TAP",
+            "x": 276,
+            "y": 70
+          },
+          {
+            "kind": "TAP",
+            "x": 5,
+            "y": 370
+          },
+          {
+            "kind": "TAP",
+            "x": 10,
+            "y": 10
+          },
+          {
+            "kind": "TAP",
+            "x": 100,
+            "y": 10
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARAMA_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_INCELEME"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "dust",
+            "target": "selin"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "huseyin"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INCELEME_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA2"
+          },
+          {
+            "kind": "TAP",
+            "x": 246,
+            "y": 303
+          },
+          {
+            "kind": "TAP",
+            "x": 103,
+            "y": 75
+          },
+          {
+            "kind": "TAP",
+            "x": 330,
+            "y": 365
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA2_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK1_SAAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_MUR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "MQ_SAAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TMUR_AYRIL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DVR"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "dust",
+            "target": "d2331"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d2238"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_DVR_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_HTS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HTS_SUC0"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_SEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TSEL_GORUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK2_CALIS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_DEFTER",
+            "variant": "hard"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA4"
+          },
+          {
+            "kind": "TAP",
+            "x": 140,
+            "y": 217
+          },
+          {
+            "kind": "TAP",
+            "x": 240,
+            "y": 100
+          },
+          {
+            "kind": "TAP",
+            "x": 10,
+            "y": 360
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA4_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_BEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BEL_C"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_INCELEME"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "dust",
+            "target": "murat"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "kerem"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INCELEME_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DAY_NEXT3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DIL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_KESIF"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_SELIN_HTS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_VER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DURUSMA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "GECE_SAKLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "KOR_UMUT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C01_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C02_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C03_D"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C04_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C05_B"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_anahtar",
+            "statementId": "S1"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_parmak_izi_raporu",
+            "statementId": "S2"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06R_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CARA_TAHLIYE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_BASLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SELIN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASEL_GEC"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KEREM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKQ_SELIN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKER_OFKE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_YUSUF"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_VICDAN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SANIYE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_HAL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_DEFTER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KART"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "k_kerem"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_KART_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CIKARIM"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_defter",
+            "b": "clue_ampul"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_CIKARIM_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CELSE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_SALON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C07_YOK"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y1"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y2"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y3"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y4"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08T_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08_D"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C09_E"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C10_D"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C11_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_MURAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_KAMERA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C12P_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C12_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C13_C"
+          }
         ],
-        "expect": { "outcome": "MAHKUMIYET", "finalMax": 800 }
+        "expect": {
+          "outcome": "MAHKUMIYET",
+          "finalMax": 400
+        }
       },
       {
         "name": "G5",
         "actions": [
-          { "kind": "CHOOSE", "choiceId": "BR01_A" },
-          { "kind": "CHOOSE", "choiceId": "STR_INDIRIM" },
-          { "kind": "CHOOSE", "choiceId": "H_GORUS" },
-          { "kind": "CHOOSE", "choiceId": "TP_GECE", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "TP_HUSEYIN", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "TP_ANAHTAR", "variant": "soft" },
-          { "kind": "CHOOSE", "choiceId": "G_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_ARAMA" },
-          { "kind": "TAP", "x": 276, "y": 70 },
-          { "kind": "TAP", "x": 172, "y": 121 },
-          { "kind": "TAP", "x": 210, "y": 335 },
-          { "kind": "TAP", "x": 318, "y": 267 },
-          { "kind": "CHOOSE", "choiceId": "ARAMA_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_INCELEME" },
-          { "kind": "EXAMINE", "tool": "uv", "target": "selin" },
-          { "kind": "EXAMINE", "tool": "mag", "target": "kerem" },
-          { "kind": "CHOOSE", "choiceId": "INCELEME_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "DAY_NEXT" },
-          { "kind": "CHOOSE", "choiceId": "H_T_HUS" },
-          { "kind": "CHOOSE", "choiceId": "THUS_BILDIR" },
-          { "kind": "CHOOSE", "choiceId": "H_BEL" },
-          { "kind": "CHOOSE", "choiceId": "BEL_A" },
-          { "kind": "CHOOSE", "choiceId": "H_DIL" },
-          { "kind": "CHOOSE", "choiceId": "DIL_BILIRKISI" },
-          { "kind": "CHOOSE", "choiceId": "DIL_KAMERA" },
-          { "kind": "CHOOSE", "choiceId": "DIL_DNA" },
-          { "kind": "CHOOSE", "choiceId": "DIL_VER" },
-          { "kind": "CHOOSE", "choiceId": "DAY_NEXT" },
-          { "kind": "CHOOSE", "choiceId": "H_CIKARIM" },
-          { "kind": "COMBINE", "a": "clue_ampul", "b": "ev_ariza_kaydi" },
-          { "kind": "COMBINE", "a": "ev_fis", "b": "clue_huseyin" },
-          { "kind": "CHOOSE", "choiceId": "CIKARIM_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_DURUSMA" },
-          { "kind": "CHOOSE", "choiceId": "C00_DEVAM" },
-          { "kind": "CHOOSE", "choiceId": "C01_A" },
-          { "kind": "CHOOSE", "choiceId": "C02_D" },
-          { "kind": "CHOOSE", "choiceId": "C02D_ISRAR" },
-          { "kind": "CHOOSE", "choiceId": "C03_A" },
-          { "kind": "CHOOSE", "choiceId": "C04_DEVAM" },
-          { "kind": "CHOOSE", "choiceId": "C05_A" },
-          { "kind": "PRESS", "statementId": "S1" },
-          { "kind": "PRESENT", "evidenceId": "ded_lamba", "statementId": "S2" },
-          { "kind": "CHOOSE", "choiceId": "C06_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "C07_A" },
-          { "kind": "CHOOSE", "choiceId": "C08_A" },
-          { "kind": "CHOOSE", "choiceId": "C09_A" },
-          { "kind": "CHOOSE", "choiceId": "C10_A" },
-          { "kind": "CHOOSE", "choiceId": "C11_A" },
-          { "kind": "CHOOSE", "choiceId": "C12_C" },
-          { "kind": "CHOOSE", "choiceId": "C13_D" }
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR01_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR00_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01B_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "STR_INDIRIM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "SABAH_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_GECE",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_HUSEYIN",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ANAHTAR",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA"
+          },
+          {
+            "kind": "TAP",
+            "x": 276,
+            "y": 70
+          },
+          {
+            "kind": "TAP",
+            "x": 172,
+            "y": 121
+          },
+          {
+            "kind": "TAP",
+            "x": 210,
+            "y": 335
+          },
+          {
+            "kind": "TAP",
+            "x": 318,
+            "y": 267
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARAMA_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_INCELEME"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "selin"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "kerem"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INCELEME_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA2"
+          },
+          {
+            "kind": "TAP",
+            "x": 268,
+            "y": 170
+          },
+          {
+            "kind": "TAP",
+            "x": 170,
+            "y": 210
+          },
+          {
+            "kind": "TAP",
+            "x": 175,
+            "y": 84
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA2_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK1_INSAN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA3"
+          },
+          {
+            "kind": "TAP",
+            "x": 260,
+            "y": 105
+          },
+          {
+            "kind": "TAP",
+            "x": 156,
+            "y": 122
+          },
+          {
+            "kind": "TAP",
+            "x": 65,
+            "y": 214
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA3_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_HUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HQ_GECE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HQ_ISIK"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "THUS_BILDIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_BEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BEL_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DVR"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "d2331"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_DVR_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK2_CALIS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_RULO"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "r0414"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "dust",
+            "target": "r0412"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_RULO_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARIZA"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "a14b"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARIZA_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DIL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_BILIRKISI"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_KAMERA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_DNA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_VER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ISIK",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ZIYA",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DAY_NEXT3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_CIKARIM"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_ampul",
+            "b": "ev_ariza_kaydi"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "ev_fis",
+            "b": "clue_huseyin"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_rulo_depo3",
+            "b": "clue_isik"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CIKARIM_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DURUSMA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "GECE_BILDIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "KOR_DURUST"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C01_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C02_D"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C02D_ISRAR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C03_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C04_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C05_A"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S1"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_lamba",
+            "statementId": "S2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06R_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CARA_YOK"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_BASLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_HUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AHUS_CAY"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AHUS_SERBEST"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KEREM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKQ_MURAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKER_DOGRU"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SELIN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASEL_GEC"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_YUSUF"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_BULGU"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_BANT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SANIYE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_HAL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_DEFTER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_EKIP"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AEKIP_KIM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CELSE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_SALON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C07_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C07X_B"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_depo3",
+            "statementId": "Y2"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_dna",
+            "statementId": "Y5"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08T_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C09_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C10_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C11_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_MAZERET"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C12P_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C12_C"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C13_D"
+          }
         ],
-        "expect": { "outcome": "IKRAR" }
+        "expect": {
+          "outcome": "IKRAR",
+          "finalMin": 4437,
+          "finalMax": 4903
+        }
       },
       {
         "name": "W",
         "actions": [
-          { "kind": "CHOOSE", "choiceId": "BR01_C" },
-          { "kind": "CHOOSE", "choiceId": "STR_MASUMIYET" },
-          { "kind": "CHOOSE", "choiceId": "H_T_SEL" },
-          { "kind": "CHOOSE", "choiceId": "TSEL_BASKI" },
-          { "kind": "CHOOSE", "choiceId": "H_HTS" },
-          { "kind": "CHOOSE", "choiceId": "HTS_OP" },
-          { "kind": "CHOOSE", "choiceId": "H_GORUS" },
-          { "kind": "CHOOSE", "choiceId": "TP_GECE", "variant": "hard" },
-          { "kind": "CHOOSE", "choiceId": "TP_ANAHTAR", "variant": "hard" },
-          { "kind": "CHOOSE", "choiceId": "G_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "DAY_NEXT" },
-          { "kind": "CHOOSE", "choiceId": "H_ARAMA" },
-          { "kind": "TAP", "x": 5, "y": 370 },
-          { "kind": "TAP", "x": 10, "y": 10 },
-          { "kind": "TAP", "x": 100, "y": 10 },
-          { "kind": "TAP", "x": 330, "y": 10 },
-          { "kind": "TAP", "x": 60, "y": 370 },
-          { "kind": "TAP", "x": 120, "y": 300 },
-          { "kind": "CHOOSE", "choiceId": "ARAMA_BITIR" },
-          { "kind": "CHOOSE", "choiceId": "H_DURUSMA" },
-          { "kind": "CHOOSE", "choiceId": "C00_DEVAM" },
-          { "kind": "CHOOSE", "choiceId": "C01_C" },
-          { "kind": "CHOOSE", "choiceId": "C02_C" },
-          { "kind": "CHOOSE", "choiceId": "C03_D" },
-          { "kind": "CHOOSE", "choiceId": "C04_DEVAM" },
-          { "kind": "CHOOSE", "choiceId": "C05_C" },
-          { "kind": "PRESS", "statementId": "S4" },
-          { "kind": "PRESS", "statementId": "S4" },
-          { "kind": "PRESENT", "evidenceId": "ev_hts_illegal", "statementId": "S4" },
-          { "kind": "CHOOSE", "choiceId": "COKUS_SON" }
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR01_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR00_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01_C"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01B_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "STR_MASUMIYET"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "SABAH_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_SEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TSEL_BASKI"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_HTS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HTS_OP"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_GECE",
+            "variant": "hard"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ANAHTAR",
+            "variant": "hard"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA"
+          },
+          {
+            "kind": "TAP",
+            "x": 5,
+            "y": 370
+          },
+          {
+            "kind": "TAP",
+            "x": 10,
+            "y": 10
+          },
+          {
+            "kind": "TAP",
+            "x": 100,
+            "y": 10
+          },
+          {
+            "kind": "TAP",
+            "x": 330,
+            "y": 10
+          },
+          {
+            "kind": "TAP",
+            "x": 60,
+            "y": 370
+          },
+          {
+            "kind": "TAP",
+            "x": 120,
+            "y": 300
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARAMA_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK1_ANAHTAR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_HUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "THUS_BILDIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_MUR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "MQ_SAAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TMUR_AYRIL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA2"
+          },
+          {
+            "kind": "TAP",
+            "x": 246,
+            "y": 303
+          },
+          {
+            "kind": "TAP",
+            "x": 103,
+            "y": 75
+          },
+          {
+            "kind": "TAP",
+            "x": 330,
+            "y": 365
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA2_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DVR"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "dust",
+            "target": "d2331"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_DVR_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK2_CALIS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_INCELEME"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "dust",
+            "target": "kerem"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "dust",
+            "target": "huseyin"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "ahmet"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INCELEME_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA4"
+          },
+          {
+            "kind": "TAP",
+            "x": 140,
+            "y": 217
+          },
+          {
+            "kind": "TAP",
+            "x": 240,
+            "y": 100
+          },
+          {
+            "kind": "TAP",
+            "x": 10,
+            "y": 360
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA4_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_BEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BEL_C"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_KENDISI",
+            "variant": "hard"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_HUSEYIN",
+            "variant": "hard"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DAY_NEXT3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DIL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_KESIF"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_VER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DURUSMA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "GECE_SAKLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "KOR_UMUT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C01_C"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C02_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C03_D"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C04_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C05_C"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S4"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06R_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CARA_BERAAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_BASLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SELIN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASEL_GEC"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_HUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AHUS_SERBEST"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KEREM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKQ_MURAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKER_OFKE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_YUSUF"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_VICDAN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SANIYE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_HAL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_DEFTER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KART"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "k_huseyin"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_KART_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CELSE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_SALON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C07_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C07X_C"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_hts_illegal",
+            "statementId": "Y2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "COKUS_SON"
+          }
         ],
-        "expect": { "outcome": "MAHKUMIYET" }
+        "expect": {
+          "outcome": "MAHKUMIYET",
+          "finalMax": 0
+        }
+      },
+      {
+        "name": "TIPIK",
+        "actions": [
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "PR01_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR00_C"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BR01B_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "STR_USUL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "SABAH_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_GECE",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ANAHTAR",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_HUSEYIN",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_KENDISI",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ANNE",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_DEFTER",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA"
+          },
+          {
+            "kind": "TAP",
+            "x": 276,
+            "y": 70
+          },
+          {
+            "kind": "TAP",
+            "x": 172,
+            "y": 121
+          },
+          {
+            "kind": "TAP",
+            "x": 5,
+            "y": 370
+          },
+          {
+            "kind": "TAP",
+            "x": 318,
+            "y": 267
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARAMA_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_INCELEME"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "selin"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "kerem"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "dust",
+            "target": "selin"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INCELEME_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA2"
+          },
+          {
+            "kind": "TAP",
+            "x": 175,
+            "y": 84
+          },
+          {
+            "kind": "TAP",
+            "x": 268,
+            "y": 170
+          },
+          {
+            "kind": "TAP",
+            "x": 246,
+            "y": 303
+          },
+          {
+            "kind": "TAP",
+            "x": 170,
+            "y": 210
+          },
+          {
+            "kind": "TAP",
+            "x": 40,
+            "y": 185
+          },
+          {
+            "kind": "TAP",
+            "x": 330,
+            "y": 365
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA2_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK1_ANAHTAR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_BEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "BEL_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_HUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HQ_GECE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HQ_BABA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HQ_SIRKET"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "THUS_BILDIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA3"
+          },
+          {
+            "kind": "TAP",
+            "x": 260,
+            "y": 105
+          },
+          {
+            "kind": "TAP",
+            "x": 65,
+            "y": 214
+          },
+          {
+            "kind": "TAP",
+            "x": 76,
+            "y": 105
+          },
+          {
+            "kind": "TAP",
+            "x": 146,
+            "y": 244
+          },
+          {
+            "kind": "TAP",
+            "x": 249,
+            "y": 294
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA3_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DVR"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d2240u"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "d2331"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d2240"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "d0600"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_DVR_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AK2_UYU"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_RULO"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "r0411"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "r0414"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "r0412"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_RULO_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARIZA"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "a14b"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "a14c"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "uv",
+            "target": "a16"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARIZA_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_SEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "SQ_DVR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TSEL_GORUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_MUR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "MQ_SAAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "MQ_ZIYA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TMUR_AYRIL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DAY_NEXT3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_GORUS2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ISIK",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_SELIN",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TP_ZIYA",
+            "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA4"
+          },
+          {
+            "kind": "TAP",
+            "x": 105,
+            "y": 110
+          },
+          {
+            "kind": "TAP",
+            "x": 235,
+            "y": 212
+          },
+          {
+            "kind": "TAP",
+            "x": 300,
+            "y": 214
+          },
+          {
+            "kind": "TAP",
+            "x": 140,
+            "y": 217
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA4_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_HTS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "HTS_TANIK"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DIL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_BILIRKISI"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_DNA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_KAMERA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "DIL_VER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_CIKARIM"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_ampul",
+            "b": "ev_ariza_kaydi"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "ev_fis",
+            "b": "clue_huseyin"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_kablo",
+            "b": "clue_bant"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_kerem_depo1",
+            "b": "clue_izmarit"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_uv_silinti",
+            "b": "clue_dvr_sk"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_rulo_depo3",
+            "b": "clue_isik"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_erteleme",
+            "b": "clue_takvim"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CIKARIM_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_DURUSMA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "GECE_BILDIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "KOR_DURUST"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C00_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C01_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C02_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "Q_ANAHTAR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "Q_1930"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "Q_FIS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "Q_ISIK"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C02Q_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C03_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C04_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C05_A"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S1"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_kulube",
+            "statementId": "S1"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S2"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_lamba",
+            "statementId": "S2"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S3"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S3"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_anahtar",
+            "statementId": "S3"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S4"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_mazeret",
+            "statementId": "S4"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S5"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_kulube",
+            "statementId": "S5"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C06R_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CARA_TAHLIYE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_BASLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SELIN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASEL_GEC"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_YUSUF"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_BULGU"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_BANT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_KART"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AYUS_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KART"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "k_murat"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "k_selin"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "k_kerem"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_KART_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_EKIP"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AEKIP_ARAC"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AEKIP_KIM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SANIYE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_HAL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_DEFTER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CIKARIM"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_yusuf_arama",
+            "b": "ev_teslim_tutanagi"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_kart_murat",
+            "b": "clue_isik"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_defter",
+            "b": "clue_mac"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_CIKARIM_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_HUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AHUS_CAY"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AHUS_KORUMA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KEREM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKQ_MURAT"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKQ_SELIN"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AKER_DOGRU"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CELSE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_SALON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H7_ISIK"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H7_BABA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C07_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C07X_A"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y1"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_arama",
+            "statementId": "Y1"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y2"
+          },
+          {
+            "kind": "OBJECT",
+            "groundId": "g_duyum",
+            "statementId": "Y2"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_depo3",
+            "statementId": "Y2"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y3"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_kamera",
+            "statementId": "Y3"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y4"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_lamba",
+            "statementId": "Y4"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y5"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_dna",
+            "statementId": "Y5"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08T_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C09_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C10_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C11_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_LAMBA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_MAZERET"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "P_ANAHTAR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C12P_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C12_B"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C13_A"
+          }
+        ],
+        "expect": {
+          "outcome": "BERAAT_E",
+          "finalMin": 8403,
+          "finalMax": 9287
+        }
       }
     ]
   }

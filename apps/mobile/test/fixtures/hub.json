@@ -1,0 +1,453 @@
+{
+ "title": "Soruşturma hub’ı",
+ "description": "Giriş satırları kısa durum kutusu; aksiyonun yanıt satırları oynar; DURUŞMAYA GİT birincil düğme.",
+ "steps": [
+  {
+   "session": {
+    "id": "dev-session",
+    "caseId": "dev-case",
+    "caseNumber": 0,
+    "caseTitle": "Örnek Dosya",
+    "stateVersion": 10,
+    "status": "ACTIVE",
+    "mode": "TEST"
+   },
+   "header": {
+    "eyebrow": "ÖRNEK · SORUŞTURMA",
+    "title": "Olay yeri: depo"
+   },
+   "hud": [
+    {
+     "id": "day",
+     "label": "Gün",
+     "widget": "pips",
+     "value": 1,
+     "max": 3
+    },
+    {
+     "id": "ap",
+     "label": "Eylem puanı",
+     "widget": "pips",
+     "value": 3,
+     "max": 3
+    }
+   ],
+   "cast": {
+    "sen": {
+     "name": "Av. Deniz",
+     "shortLabel": "Deniz",
+     "role": "COUNSEL",
+     "accent": "#2f6dbb",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...khhhhhhhhk...",
+       "...khhhhhhhhk...",
+       "...khsssssshk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...ksssSSsssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkmwrrwmkk...",
+       "..knnmwrrwmnnk..",
+       "..knnnmrrmnnnk..",
+       "..knNnnmmnnNnk..",
+       "..knNnnmmnnNnk..",
+       "..kSnnnmmnnnSk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkk..kkkk..."
+      ]
+     }
+    },
+    "nuran": {
+     "name": "Nuran Yıldız",
+     "shortLabel": "Anne",
+     "role": "WITNESS",
+     "accent": "#b0496b",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kffffffffk...",
+       "..kffffffffffk..",
+       "..kffssssssffk..",
+       "..kfssssssssfk..",
+       "..kfsessssesfk..",
+       "..kfssssssssfk..",
+       "..kfssskksssfk..",
+       "..kffssssssffk..",
+       "..kffffFFffffk..",
+       "...kffiiiiffk...",
+       "..kiiiiiiiiiik..",
+       "..kiiiiiiiiiik..",
+       "..kiIiiiiiiIik..",
+       "..kSiiiiiiiiSk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "...kZZZZZZZZk...",
+       "...kkkk..kkkk..."
+      ]
+     }
+    }
+   },
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "GÜN 1/3 · Duruşmaya 14 gün var."
+    },
+    {
+     "speaker": "narrator",
+     "text": "Hedef: bekçinin “lamba yanıyordu” sözünü sına."
+    }
+   ],
+   "choices": [
+    {
+     "id": "H_ARAMA",
+     "kind": "NAVIGATE",
+     "label": "Olay yeri fotoğraflarını ara",
+     "available": true,
+     "used": false,
+     "cost": [
+      {
+       "var": "ap",
+       "amount": 1,
+       "label": "1 EP"
+      }
+     ]
+    },
+    {
+     "id": "H_ANNE",
+     "kind": "NAVIGATE",
+     "label": "Nuran Yıldız ile konuş",
+     "available": true,
+     "used": false,
+     "tags": [
+      {
+       "label": "TANIK",
+       "tone": "witness"
+      }
+     ]
+    },
+    {
+     "id": "H_BEL",
+     "kind": "NAVIGATE",
+     "label": "Belediye arıza kaydı",
+     "available": true,
+     "used": false,
+     "cost": [
+      {
+       "var": "ap",
+       "amount": 1,
+       "label": "1 EP"
+      }
+     ]
+    },
+    {
+     "id": "H_DURUSMA",
+     "kind": "NAVIGATE",
+     "label": "DURUŞMAYA GİT",
+     "available": true,
+     "used": false,
+     "confirm": "Duruşmaya gitmek soruşturmayı bitirir. Emin misin?"
+    }
+   ],
+   "bag": {
+    "items": []
+   },
+   "notebook": {
+    "items": []
+   },
+   "node": {
+    "type": "INVESTIGATION",
+    "id": "H_HUB",
+    "tabs": [
+     {
+      "id": "t_olay",
+      "label": "OLAY YERİ",
+      "kind": "SCENE",
+      "choiceIds": [
+       "H_ARAMA"
+      ]
+     },
+     {
+      "id": "t_tanik",
+      "label": "TANIKLAR",
+      "kind": "PEOPLE",
+      "choiceIds": [
+       "H_ANNE"
+      ]
+     },
+     {
+      "id": "t_arsiv",
+      "label": "ARŞİV",
+      "kind": "ARCHIVE",
+      "choiceIds": [
+       "H_BEL"
+      ]
+     }
+    ]
+   },
+   "primary": {
+    "choiceId": "H_DURUSMA",
+    "label": "DURUŞMAYA GİT",
+    "tone": "gold"
+   }
+  },
+  {
+   "session": {
+    "id": "dev-session",
+    "caseId": "dev-case",
+    "caseNumber": 0,
+    "caseTitle": "Örnek Dosya",
+    "stateVersion": 11,
+    "status": "ACTIVE",
+    "mode": "TEST"
+   },
+   "header": {
+    "eyebrow": "ÖRNEK · SORUŞTURMA",
+    "title": "Olay yeri: depo"
+   },
+   "hud": [
+    {
+     "id": "day",
+     "label": "Gün",
+     "widget": "pips",
+     "value": 1,
+     "max": 3
+    },
+    {
+     "id": "ap",
+     "label": "Eylem puanı",
+     "widget": "pips",
+     "value": 2,
+     "max": 3
+    }
+   ],
+   "cast": {
+    "sen": {
+     "name": "Av. Deniz",
+     "shortLabel": "Deniz",
+     "role": "COUNSEL",
+     "accent": "#2f6dbb",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...khhhhhhhhk...",
+       "...khhhhhhhhk...",
+       "...khsssssshk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...ksssSSsssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkmwrrwmkk...",
+       "..knnmwrrwmnnk..",
+       "..knnnmrrmnnnk..",
+       "..knNnnmmnnNnk..",
+       "..knNnnmmnnNnk..",
+       "..kSnnnmmnnnSk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkk..kkkk..."
+      ]
+     }
+    },
+    "nuran": {
+     "name": "Nuran Yıldız",
+     "shortLabel": "Anne",
+     "role": "WITNESS",
+     "accent": "#b0496b",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kffffffffk...",
+       "..kffffffffffk..",
+       "..kffssssssffk..",
+       "..kfssssssssfk..",
+       "..kfsessssesfk..",
+       "..kfssssssssfk..",
+       "..kfssskksssfk..",
+       "..kffssssssffk..",
+       "..kffffFFffffk..",
+       "...kffiiiiffk...",
+       "..kiiiiiiiiiik..",
+       "..kiiiiiiiiiik..",
+       "..kiIiiiiiiIik..",
+       "..kSiiiiiiiiSk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "...kZZZZZZZZk...",
+       "...kkkk..kkkk..."
+      ]
+     }
+    }
+   },
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "GÜN 1/3 · Duruşmaya 14 gün var."
+    }
+   ],
+   "choices": [
+    {
+     "id": "H_ARAMA",
+     "kind": "NAVIGATE",
+     "label": "Olay yeri fotoğraflarını ara",
+     "available": true,
+     "used": false,
+     "cost": [
+      {
+       "var": "ap",
+       "amount": 1,
+       "label": "1 EP"
+      }
+     ]
+    },
+    {
+     "id": "H_ANNE",
+     "kind": "NAVIGATE",
+     "label": "Nuran Yıldız ile konuş",
+     "available": true,
+     "used": false,
+     "tags": [
+      {
+       "label": "TANIK",
+       "tone": "witness"
+      }
+     ]
+    },
+    {
+     "id": "H_BEL",
+     "kind": "NAVIGATE",
+     "label": "Belediye arıza kaydı",
+     "available": false,
+     "used": true,
+     "cost": [
+      {
+       "var": "ap",
+       "amount": 1,
+       "label": "1 EP"
+      }
+     ],
+     "lockedReason": "İncelendi"
+    },
+    {
+     "id": "H_DURUSMA",
+     "kind": "NAVIGATE",
+     "label": "DURUŞMAYA GİT",
+     "available": true,
+     "used": false,
+     "confirm": "Duruşmaya gitmek soruşturmayı bitirir. Emin misin?"
+    }
+   ],
+   "bag": {
+    "items": [
+     {
+      "id": "ev_fatura",
+      "title": "Elektrik arıza kaydı",
+      "shortText": "Sokak lambası üç gündür yanmıyor.",
+      "description": "Örnek delil.",
+      "kindLabel": "Belge",
+      "sourceLabel": "Belediye",
+      "icon": "document"
+     }
+    ]
+   },
+   "notebook": {
+    "items": [
+     {
+      "id": "cl_ariza",
+      "title": "Lamba arızalı",
+      "sourceLabel": "Belediye",
+      "icon": "document"
+     }
+    ]
+   },
+   "node": {
+    "type": "INVESTIGATION",
+    "id": "H_HUB",
+    "tabs": [
+     {
+      "id": "t_olay",
+      "label": "OLAY YERİ",
+      "kind": "SCENE",
+      "choiceIds": [
+       "H_ARAMA"
+      ]
+     },
+     {
+      "id": "t_tanik",
+      "label": "TANIKLAR",
+      "kind": "PEOPLE",
+      "choiceIds": [
+       "H_ANNE"
+      ]
+     },
+     {
+      "id": "t_arsiv",
+      "label": "ARŞİV",
+      "kind": "ARCHIVE",
+      "choiceIds": [
+       "H_BEL"
+      ]
+     }
+    ]
+   },
+   "last": {
+    "resolution": "CHOICE",
+    "lines": [
+     {
+      "speaker": "narrator",
+      "style": "card",
+      "text": "Belediye arşivi — öğleden sonra",
+      "bg": "adliye"
+     },
+     {
+      "speaker": "player",
+      "style": "thought",
+      "text": "Arıza kaydı 9 Mart tarihli. Olay 12 Mart gecesi."
+     },
+     {
+      "speaker": "player",
+      "text": "Demek ki o gece sokak lambası yanmıyordu."
+     }
+    ],
+    "fx": [
+     {
+      "kind": "VAR",
+      "label": "Eylem puanı",
+      "delta": -1,
+      "id": "ap"
+     },
+     {
+      "kind": "EVIDENCE",
+      "label": "Elektrik arıza kaydı",
+      "id": "ev_fatura"
+     },
+     {
+      "kind": "SCORE",
+      "label": "+120 SKOR",
+      "delta": 120
+     }
+    ],
+    "discovered": [
+     "ev_fatura"
+    ],
+    "nodeChanged": false,
+    "completed": false
+   },
+   "primary": {
+    "choiceId": "H_DURUSMA",
+    "label": "DURUŞMAYA GİT",
+    "tone": "gold"
+   }
+  }
+ ]
+}

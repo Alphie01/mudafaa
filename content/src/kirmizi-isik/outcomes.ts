@@ -8,7 +8,6 @@ import {
   cmp,
   finalAtLeast,
   flag,
-  has,
   not,
   outcome,
   ref,
@@ -402,5 +401,3 @@ export const outcomes: CasePart = {
     }),
   ],
 };
-
-void has;

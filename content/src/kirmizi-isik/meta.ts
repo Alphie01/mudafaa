@@ -87,7 +87,7 @@ export const meta: CasePart = {
         { id: 'hatali', label: 'Hatalı delil ({{var.wrong}})' },
       ],
       bonuses: [{ id: 'guven', label: 'Güvenilirlik bonusu ({{var.cred}})', value: { mul: [{ var: 'cred' }, 100] } }],
-      scaleMax: 11000,
+      scaleMax: 12000,
       thresholdBar: thresholdBar([
         ['Mahkûmiyet', 0, 'red'],
         ['İndirim', T_INDIRIM, 'amber'],

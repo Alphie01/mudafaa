@@ -1,94 +1,176 @@
-# Dava #03 "TODO Başlık" — Hikâye Kitabı
+# Dava #03 "Kırmızı Işık" — Dava Tasarımı
 
 > Kaynak: `content/src/kirmizi-isik/` (yazım kiti) → `content/cases/kirmizi-isik/` (`npm run case:build -- kirmizi-isik`).
-> Hukuki notlar: `docs/legal/kirmizi-isik.md`. Kılavuz: `docs/content/authoring-guide.md`. Lineup satırı: `docs/content/lineup.md`.
->
-> **Önce hikâye.** Bölüm 1–6 (hikâye kitabı) tamamlanmadan tek satır kaynak kod yazılmaz. Mekanikler sahnelere asılır;
-> bir mekanik için sahne uydurulmaz. Tipik yol 15–25 bin sözcük diyalog ve anlatı taşır (10 binin altı kapıdan geçmez).
+> Hikâye kitabı: `docs/content/kirmizi-isik-hikaye.md`. Hukuki notlar: `docs/legal/kirmizi-isik.md`. Lineup satırı #03.
+> Referans uygulama: Dava #07 v2 (`docs/content/dava-07-v2-report.md`).
 
 ## 1. Logline ve tema
-- Tek cümle: TODO (kim, neyle suçlanıyor, neyi kaybedebilir, gerçek ne?)
-- Tema / dramatik soru: TODO (ör. "sadakat mi, adalet mi?")
-- Ton: TODO (gerilim, dram, kara mizah…) · Ana mekânlar: TODO
 
-## 2. Soğuk açılış (prolog)
-Oyuncu dosyayı açmadan önce yaşanan sahne (300–800 sözcük): olay gecesinden ya da müvekkilin yakalanışından bir an. Kim
-konuşuyor, ne görüyoruz, hangi soru akılda kalıyor? TODO
+- **Logline:** Gece vardiyasından dönen Volkan Eren, Gökdere kavşağında bir yayaya çarptığına inanıyor; bilirkişi onu
+  kırmızı ışıkta, hızlı ve telefonla konuşurken %100 kusurlu buluyor. Hamile karısı bir avukat tutuyor. Gerçek: kavşağın
+  denetleyicisi arızalıydı (taşıt ve yaya yeşili birlikte yandı) ve ölümcül çarpmayı yedi saniye önce geçip kaçan bir panelvan
+  yaptı; Volkan'ın aracı yerde yatan kadına sonradan sürtündü.
+- **Tema:** suçluluk duygusu ile suç aynı şey değildir; kusur ve illiyet.
+- **Ton:** noir dram; kasım–şubat Bursası, yağmur. Ana mekânlar: Arslan Hukuk, Volkan'ın evi, Gökdere–Çınarlı kavşağı (gece ve
+  gündüz), yediemin otoparkı, taksi durağı, belediye sinyal deposu, köşedeki büfe, Devlet Hastanesi, trafik şube, adliye,
+  Kestel sanayi sitesi, Emirsultan mezarlığı, doğumhane.
 
-## 3. Karakterler (her biri ayrı bir ses)
-| Kimlik | Ad, yaş, iş | İstediği (motivasyon) | Sakladığı | Konuşma biçimi (ağız, tik, sözcük seçimi) | Örnek replik |
+## 2. Gerçek ve kronoloji
+Ayrıntılı tablo hikâye kitabında (§1). Özet: 9 Kasım ihbar → 10 Kasım iş emri ertelenir → 14 Kasım 00.58 gerilim düşümü,
+denetleyici yeniden başlar, çatışma uyarısı bastırılır → 01.05 Hatice'nin sesli mesajı → 01.11.41 panelvan çarpar ve kaçar
+(18 m kilit izi, sağ far camı, sağ stop lambası kırık) → 01.11.48 Volkan yeşilde 38 km/s, yerdeki yayaya sol ön tamponla
+sürtünür, durur, 112'yi arar → 01.12 taksici gümbürtüyle başını kaldırır, kendi kırmızısını görür → 01.24 polis; cam
+kırıkları tutanağa girer, emanete alınmaz → 14 Kasım sabah panelvan faturasız onarılır → 15 Kasım kart değişir.
+
+## 3. Yapı ve node haritası
+
+| Bölüm | Node'lar | İçerik |
+|---|---|---|
+| Soğuk açılış | PR_00, PR_01, PR_02 | İsimsiz sesler (SÜRÜCÜ, TELEFONDAKİ SES, BİR POLİS, BİR ADAM, BİR KADIN): araç içi, kavşak, eşin gecesi |
+| Bölüm 1 · Dosya | BR_00 (+BR_00B), BR_01, BR_01B, BR_01C, BR_02, INV_SABAH | Gül büroda (3 seçim), ceza aralığı (A–D), altı kâğıt + bilirkişi dersi (seçim), kusur sorusu (A–D), dosya ekranı + strateji, kavşak sabahı |
+| Bölüm 2 · Soruşturma | INV_HUB (4 gün × 4 EP; Leyla günde bir, 0 EP; tahta 0 EP) | 3 sahne araması, 5 belge, dilekçe, tahta, Volkan (2 görüşme), 6 tanık; akşamlar INV_AKSAM1/2S/2L/3; INV_GECE_1…4 + INV_GECE |
+| Bölüm 3 · 2. celse | H1_00K, H1_00, H1_00B, H1_01, H1_02Q, H1_03, H1_04, H1_04V, H1_05, H1_05R, H1_06, H1_07, H1_08 | Koridor seçimi, açılış, iddianame, savunma, sanığa sorular, telkin itirazı, katılan ve sanığın diyeceği, taksicinin çapraz sorgusu (N1–N5), kısa ara, CMK 67/5 itirazı, ara karar + adli kontrol, merdivenler |
+| Bölüm 4 · Ara | ARA_GIRIS_1/2, ARA_GIRIS, ARA_HUB (2 gün × 4 EP, yığınsız) | ARA_EDR, ARA_HEYET (belge), ARA_VOLKAN, ARA_AYTEN, ARA_SERKAN, ARA_HAMDI, ARA_NECATI, ARA_NALAN, ARA_SANAYI, ARA_SUC; ARA_CIKARIM, ARA_LEYLA; ARA_DAY_END → ARA_AKSAM; ARA_SON_1…3 → ARA_SON |
+| Bölüm 5 · 3. celse | T_00Y, T_00K, T_00G1/2, T_00, T_00S, T_01, T_02, T_03, T_04, T_05, T_05D, T_05N, T_06, T_07, T_08, T_09P, T_09, T_09R, T_10, T_11 | Sabah, koridor, savcılık yazısı/dilekçeler, sanığın diyeceği, teknisyen (TH1–TH4), telkin itirazı, bilirkişi (C1–C4), heyet başkanı, polis, delillerin tartışılması, mütalaa + cevap, dayanaklar, esas savunma, cevaplar, son söz |
+| Karar | R_KARAR + sonuç başına `epilogue`; T_COKUS (♥0) | |
+
+Celseler: `cs_2` (2. celse) ve `cs_3` (3. celse). Asliye ceza, tek hâkim; kürsüde zabıt kâtibi.
+
+## 4. Mekanikler (kılavuz §4 eşlemesi)
+
+| Mekanik | Node | Not |
+|---|---|---|
+| Soruşturma hub'ı, EP, gün sonu | INV_HUB, INV_DAY_END (DECISION) | 17 EP'lik etkinlik, 16 EP: biri dışarıda kalır; gecikmeli teslimler gün sonunda ve INV_GECE_1'de |
+| Ara hub'ı (yığınsız) | ARA_HUB, ARA_DAY_END | 10 etkinlik, 8 EP; bazıları bulguya bağlı açılır |
+| Görüşme (konu × ton) | INV_GORUSME | 16 + 8 dk; 7 konu + 3 fakta bağlı konu (TP_ONUNDE, TP_DARBE, TP_ABS) |
+| Serbest konuşma | INV_T_NEC/SER/HAM/SEV/HAS/AYT, ARA_* | etik tuzaklar (telkin, para, fotokopi, katılanı suçlama) |
+| Olay yeri araması | INV_ARAMA, INV_ARAMA2, INV_ARAMA3 | büyüteç 6/5/6; dikkat dağıtıcı nesne −10 |
+| Belge incelemesi | INV_RAPOR, INV_TUTANAK, INV_OTOPSI, INV_BUFE, INV_SINYAL, ARA_EDR, ARA_HEYET | 7 belge, alet × satır; lens (büfe kare kare) |
+| Çıkarım tahtası | INV_CIKARIM (6 tarif), ARA_CIKARIM (+2 tarif) | çeldiriciler: karanfiller, yağmur, yorgunluk, boya (INV'de), sırt (INV'de) |
+| Tanık ifadesi | H1_05 (Necati), T_03 (Hamdi), T_05 (bilirkişi) | bastır / sun / itiraz (g_kanaat, g_yorum) |
+| A–D kararları | BR_01, BR_01C, H1_03, H1_06, H1_07, T_02, T_08, T_09 … | |
+| Gecikmeli delil | ev_sinyal_log, clue_uedas, ev_edr, ev_atk, ev_boya, ev_heyet, ev_savcilik, ev_far_parca | |
+| Mentor danışması | INV_LEYLA (günde bir), ARA_LEYLA | koşullu, en uygun ipucu |
+| Çöküş | tg_cokus → T_COKUS | ♥0 |
+
+## 5. Delil zinciri
+
+| Kimlik | Tür | Bulunma | Ne işe yarar | Sunulabilir |
+|---|---|---|---|---|
+| ev_bilirkisi, ev_hts, ev_volkan_ifade, ev_necati_ifade | EVIDENCE | başlangıç | savcılık; yanlış sunum cezalı (ev_necati_ifade N3'te doğru) | evet |
+| ev_tutanak, ev_otopsi | EVIDENCE | başlangıç | C3 (tutanak), C4 kısmi (otopsi), N2 kısmi | evet |
+| clue_fren | CLUE | sahne ob_fren / tutanak t_iz | ded_fren | — |
+| clue_cam | CLUE | sahne ob_cam / tutanak t_bulgu | ded_cam; Ayten'i açar | — |
+| clue_arka | CLUE | sahne ob_arka | ded_goremez | — |
+| clue_far, clue_necati_yer, clue_yagmur | CLUE | tutanak (far, tanık, hava) / sahne ob_far / Necati | ded_cam, ded_goremez; yağmur çeldirici | — |
+| clue_kirik56, clue_sirt, clue_boya | CLUE | otopsi | ded_yukseklik, ded_olum; boya → DIL_BOYA | — |
+| clue_tampon44, clue_abs, ev_multimedya | CLUE/EVIDENCE | otopark | ded_yukseklik, ded_fren; N5 | multimedya evet |
+| clue_kabin, clue_bufe_kamera, clue_cicek | CLUE | kavşak bugün | ded_ariza; büfeyi açar; çeldirici | — |
+| clue_is_emri | CLUE | Hamdi (HQ_ISEMRI) / sinyal günlüğü | ded_ariza | — |
+| ev_bufe; clue_titreme, clue_tek_stop | EVIDENCE/CLUE | Sevim (gönüllü teslim) → büfe belgesi | ded_saat, ded_arac | ev_bufe evet |
+| ev_sinyal_log | EVIDENCE | DIL_SINYAL → gün sonu | N2 kısmi, TH1/TH2/TH4B, C1 | evet |
+| clue_uedas | CLUE | DIL_UEDAS → gün sonu | ded_saat | — |
+| ev_edr | EVIDENCE | DIL_EDR ∨ R_ITIRAZ → ARA girişi | C2, C4 kısmi, ARG_EDR, D_HIZ | evet |
+| ev_atk | EVIDENCE (combinable) | DIL_ATK ∨ R_ITIRAZ → ARA girişi | ded_olum, C4, ARG_ATK | evet |
+| ev_boya | EVIDENCE (combinable) | DIL_BOYA ∨ (R_ITIRAZ ∧ clue_boya) → ARA girişi | ded_arac, C3 kısmi | evet |
+| ev_heyet | EVIDENCE | R_ITIRAZ → ARA 1. gün sonu | C1; tali kusur paragrafı (contra_heyet) | evet |
+| ev_sesli | EVIDENCE | ARA_SERKAN (saygı yolu, Serkan'ın kendi teslimi) | TH4, C1 | evet |
+| ev_far_parca | EVIDENCE | ARA_AYTEN (AY_SAVCI) → 3. celse | C3 | evet |
+| ev_savcilik | EVIDENCE | ARA_SUC (SU_DAYANAKLI, ded_arac gerekir; garaj yoksa) → 3. celse | C4, 223/2-b | evet |
+| ev_garaj | EVIDENCE (EXCLUDABLE) | ARA_SANAYI (SA_GARAJ, etik ihlal) | PS_GARAJ cezası; ETIK sonu | evet |
+
+**Çıkarımlar:** ded_fren (fren + ABS), ded_cam (cam + sağlam farlar), ded_yukseklik (56 cm + 44 cm), ded_goremez (sinyalin sırtı +
+tanığın yeri), ded_ariza (kabin etiketi + iş emri), ded_saat (titreme + UEDAŞ), ded_olum (ATK + sırt sıyrıkları, ara),
+ded_arac (boya raporu + tek stop, ara). Çeldirici kombinasyonlar −50 (aynı çift bir kez).
+
+**Ters köşe hazırlığı:** ikinci araç — fren izi, cam, 56 cm kırık, boya, kamera, Necati'nin "minibüs"ü, Sevim'in iki freni,
+Volkan'ın "alçaktı" ve tek kırmızı lambası; sinyal arızası — kabin etiketi, iş emri, ihbar, UEDAŞ, Fadime'nin "ışıklar delirdi"si,
+Serkan'ın "annem kırmızıda geçmezdi"si, sesli mesaj, sinyalin siyah sırtı.
+
+## 6. Çelişkiler (çapraz sorgu)
+
+| Tanık | İfade | Bastır | Doğru sunum (bayrak) | Kısmi |
+|---|---|---|---|---|
+| Necati (H1_05) | N1 kırk yıllık şoför | övünme | — | — |
+| | N2 “kırmızıda daldı” | “hangi lamba?” | ded_goremez → contra_n2 | ev_sinyal_log, ded_ariza, ev_tutanak |
+| | N3 “çarptığını gördüm” | gümbürtü | ev_necati_ifade (bastırdıktan ya da durakta öğrendikten sonra) → contra_n3; g_kanaat | — |
+| | N4 “başka araç yoktu” | minibüs | ded_saat → contra_n4 | ded_fren, ded_cam, ded_yukseklik, ev_bufe |
+| | N5 “telefonla konuşuyordu” | “durunca” | ev_multimedya → contra_n5; g_kanaat | — |
+| Hamdi (T_03) | TH1 “sağlamdı” | | ev_sinyal_log → contra_h | — |
+| | TH2 “kayıtta arıza yok” | | ev_sinyal_log (UYARI 07 bulunmuşsa) → contra_h | — |
+| | TH3 “rutin bakım” | | ded_ariza → contra_h | — |
+| | TH4 “kimse şikâyet etmedi” | hastane | ev_sesli → contra_h; g_kanaat | ev_sinyal_log (ihbar) |
+| Bilirkişi (T_05) | C1 “kırmızı; bilinçli taksirdir” | plan | ev_sinyal_log, ev_heyet, ded_ariza, ev_sesli → contra_c1; **g_yorum (CMK 67/3)** | — |
+| | C2 “18 m iz = 68 km/s” | | ded_fren, ev_edr → contra_c2 | — |
+| | C3 “başka araç izi yok” | “eski kaza” | ded_cam, ev_far_parca, ev_tutanak → contra_c3; g_kanaat | ev_boya, ded_saat, ev_bufe, ded_arac |
+| | C4 “sağ ön köşesiyle” | | ded_yukseklik, ev_savcilik, ev_atk, ded_olum → contra_c4 | ev_otopsi, ev_edr |
+
+Heyet raporundaki “tali kusur” paragrafı ARA_HEYET'te EDR ile karşılaştırılarak çürütülür (contra_heyet); T_05N'de heyet
+başkanı bu paragraftan geri adım atar.
+
+## 7. Sonuçlar (öncelik sırasıyla)
+
+| Öncelik | Kimlik | Sınıf | Koşul | Ceza | XP |
 |---|---|---|---|---|---|
-| muvekkil | TODO | TODO | TODO | TODO | “TODO” |
-| tanik | TODO | TODO | TODO | TODO | “TODO” |
-| leyla (mentor) | Av. Leyla Erdem | Deniz’i yetiştirmek | TODO (davaya özgü) | Sakin, öğretici; hukuki açıklamaları O yapar | “TODO” |
+| 0 | ETIK | CONVICTION | `etik_garaj` (kapalı garaja izinsiz giriş) | 3 yıl 9 ay, disiplin | 0 + etik kartı |
+| 1 | BERAAT_B | ACQUITTAL (223/2-b) | ¬çöküş ∧ `gercek_neden` (T09_B: ded_olum ∧ ikinci_arac ∧ ev_savcilik ∧ ¬garaj) ∧ kusur_yok ∧ ikna ≥ 8 ∧ final ≥ 9.500 | yok | 1,2 |
+| 2 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ (`supheden` ∨ `gercek_neden`) ∧ kusur_yok ∧ findings (≥5 çelişki) ∧ ikna ≥ 6 ∧ final ≥ 9.000 | yok | 1,0 |
+| 3 | INDIRIM | RECHARACTERIZED | ¬çöküş ∧ (`arg_basit` ∨ `mutalaa_basit`) ∧ final ≥ 3.000 | 1 yıl 8 ay → 600 gün APC, ehliyet 6 ay | 0,85 |
+| 4 | MAHKUMIYET | CONVICTION | her zaman (çöküş dahil) | 3 yıl 9 ay, ehliyet 2 yıl | 0,6 |
 
-Kural: hukuki madde atıfları karakterlerin gündelik konuşmasında geçmez; yeri mentor açıklaması, seçenek geri bildirimi
-(`good` / `bad` / `neutral`) ve rapordur. Hâkim usul cümlelerini sade dille kurar (“Müdafi, diyeceğiniz?”).
+`kusur_yok` = contra_n2 ∨ contra_h ∨ contra_c1 (kırmızı ışık iddiası kürsüde çöktü). `supheden` T09_E ile, yalnızca kusur_yok ∧
+findings tutarsa kalkar. Mütalaa üç biçimde: beraat (ev_savcilik ∧ (ded_olum ∨ arg_atk)), basit taksir (kusur_yok ∧ (arg_edr ∨
+contra_c2 ∨ arg_heyet)), bilinçli taksir.
 
-## 4. Gerçek ve kronoloji
-Olay gerçekte nasıl oldu? Saat saat; oyuncunun hangisini nerede öğrendiği.
+## 8. Skor
 
-| Saat | Olay | Kim biliyor | Nasıl keşfedilir (sahne · mekanik) |
-|---|---|---|---|
-| TODO | TODO | TODO | TODO |
+- Döküm satırları: Delil toplama (ARAŞTIRMA + DELİL ANALİZİ), Çapraz sorgu (SORGULAMA), İtiraz isabeti (USUL + HUKUKİ BİLGİ),
+  Savunma (SAVUNMA STRATEJİSİ), Hatalı delil. Bonus: güvenilirlik × 100.
+- Tutarlar Dava #07 ölçeğinde: sahne nesnesi +40/+60, dikkat dağıtıcı −10; belge isabeti +50…+200, ıska −20; tarif +300,
+  yanlış çift −50; bastır +10/+25; doğru sunum +200/+300, kısmi +100/+150, yanlış ♥−1 ve −150; itiraz +50…+120, dayanaksız
+  ♥−1 ve −50; esas savunma `strategyAmount(200)` (uyumlu strateji ×1,5 / ×1,2 / ×0,8); dayanak ±40; etik ihlaller −30…−100.
+- Eşik çubuğu: Mahkûmiyet 0 · İndirim 3.000 · Beraat 9.000 (BERAAT_B ayrıca 9.500). `scaleMax` 12.000 (simülasyonda görülen en
+  yüksek final 12.060).
 
-## 5. Sahne listesi ve dramatik vuruşlar
-Her sahne bir dramatik vuruş taşır (yeni bilgi, karar, çatışma, duygu değişimi). Dakika ve sözcük bütçesi tipik yol içindir.
+## 9. Golden path'ler
 
-| # | Sahne (node'lar) | Bölüm | Vuruş: ne değişiyor? | Mekanik (varsa) | ~dk | ~sözcük |
-|---|---|---|---|---|---|---|
-| 1 | Soğuk açılış (PROLOG_*) | Prolog | TODO | — | 4 | 700 |
-| 2 | Büroda dosya devri (BR_*) | Brifing | TODO | A–D hukuki soru, strateji | 6 | 1 000 |
-| 3 | TODO | Soruşturma 1 | TODO | görüşme / arama / belge | TODO | TODO |
-| … | 1. celse | Duruşma 1 | TODO | itiraz, sanık savunması | TODO | TODO |
-| … | Ters köşe | Ara | TODO | gecikmeli delil | TODO | TODO |
-| … | 2. celse | Duruşma 2 | TODO | çapraz sorgu × 2–3, itirazlar, esas savunma | TODO | TODO |
-| … | Karar ve epilog | Karar | TODO | — | TODO | TODO |
-| **Toplam** | | | | | **90–120** | **15–25 bin** |
-
-## 6. Ters köşeler ve epiloglar
-- Ters köşe 1 (1. celse sonrası): TODO — nasıl hazırlandı (önceden ekilen ipuçları)?
-- Ters köşe 2 (2. celse içinde): TODO
-- Sonuç başına epilog (karar ekranından önceki kapanış sahnesi ya da `verdictText` + gerekçe; kılavuz §3.6):
-  - BERAAT_B: TODO · BERAAT_E: TODO · INDIRIM: TODO · MAHKUMIYET: TODO
-
-## 7. Delil zinciri
-| Kimlik | Ad | Tür | Keşif sahnesi / yolu | Neyi çürütür / destekler | Sunulabilir |
+| Ad | Strateji | Sonuç | Final | Aksiyon | Süre |
 |---|---|---|---|---|---|
-| TODO | TODO | EVIDENCE / CLUE / INSIGHT | TODO | TODO | TODO |
+| TIPIK | Kusur itirazı | BERAAT_E | 11.385 | 210 | 93,9 dk |
+| G_B | İlliyet | BERAAT_B | 12.060 | 217 | 95,0 dk |
+| G_ETIK | İlliyet (garaj) | ETIK | 11.060 | 216 | 93,2 dk |
+| G_I | Terditli | INDIRIM | 6.365 | 179 | 75,7 dk |
+| G_M | Kusur itirazı (kötü avukatlık) | MAHKUMIYET | −200 | 140 | 60,9 dk |
+| W | Kusur itirazı (çöküş, 3. celsede) | MAHKUMIYET | 4.700 | 149 | 68,4 dk |
 
-Çıkarımlar (tahta): TODO kart + kart → çıkarım. Çeldirici kartlar: TODO.
-Gecikmeli teslimler: TODO delil — talep (bayrak) — teslim yeri (gün sonu / celse girişi).
+Pencereler ölçülen finalin ±%5'i. Bütün yollar `case:validate` ile oynatılır; kapsam node/seçenek/kural/delil %100.
 
-## 8. Çelişkiler (çapraz sorgu)
-Her tanık için ifade listesi; hangi BASTIR yeni satır açar, hangi delil hangi ifadeyi çürütür, kısmi isabetler.
+## 10. Erken çözüm denetimi
 
-## 9. Node grafiği özeti
-Sahne listesinin node'lara dökümü (kimlikler, seçenek grupları, tetikleyiciler).
+- **En kısa beraat:** TIPIK'ten aksiyon silerek küçültme 174 aksiyonda BERAAT_E'ye (TIPIK'in %83'ü), G_B'den küçültme 185
+  aksiyonda BERAAT_B'ye (%88) iner. `enumerateActions` üzerinde ışın araması (beam 300) için §13'e bakın. Hedef ≥ %60.
+- **Neden kısa yol yok:** beraat; kırmızı ışık iddiasının kürsüde çökmesi (ded_goremez, sinyal günlüğü ya da ded_ariza + sesli
+  mesaj), en az beş çelişki, ikna ≥ 6, 9.000 final ve uyumlu esas savunmanın birlikte tutmasını ister. Bu bulguların her biri
+  ayrı bir etkinlikte, çoğu iki ayrı mekânda (sahne + belge, görüşme + tahta) kurulur; 223/2-b ayrıca ara evresinde boya
+  raporu, kamera, sanayi ve suç duyurusu zincirini ister.
+- **Sızıntı denetimi:** ikinci araç ve sinyal arızası hiçbir anlatıcı ya da iç ses satırında önceden söylenmez; ilgili satırlar
+  bulgulara bağlıdır (INV_GECE_2/3, INV_AKSAM3, hub'ın 2. gün hedefi ≥2 ipucu, Leyla'nın blokları). Soğuk açılış yalnızca
+  sürücünün gördüğünü verir (yeşil ışık, koyu bir şekil, tümsek). Panelvanın rengi, fırının ve sürücünün adı yalnızca
+  ded_arac ya da savcılık yazısından sonra geçer. Doğrulayıcı LEAK denetimi temiz.
 
-## 10. Sonuçlar
-| Öncelik | Kimlik | Sınıf | Koşul | Ceza | XP çarpanı |
-|---|---|---|---|---|---|
-| 1 | BERAAT_B | ACQUITTAL (223/2-b) | TODO | Ceza yok | 1,2 |
-| 2 | BERAAT_E | ACQUITTAL (223/2-e) | TODO | Ceza yok | 1,0 |
-| 3 | INDIRIM | REDUCED | TODO | TODO | 0,85 |
-| 4 | MAHKUMIYET | CONVICTION (varsayılan) | — | TODO | 0,6 |
+## 11. Ölçüm
 
-Ceza hesabı (adım adım): TODO temel ceza → artırım → indirim (TCK 61 sırası).
-
-## 11. Skor
-- Kategoriler ve döküm satırları: TODO
-- Eşik çubuğu: Mahkûmiyet 0 · İndirim TODO · Beraat TODO (sonuç koşullarıyla aynı).
-- Teorik tavan: TODO (`case:validate` çıktısındaki final skor aralığı).
-
-## 12. Golden path'ler
-| Ad | Sonuç | Final | Özet |
-|---|---|---|---|
-| TIPIK | TODO | TODO | Tipik oyun |
-
-## 13. Süre ve sözcük ölçümü
-`npm run case:duration -- kirmizi-isik` çıktısı (tarih, sözcük, aksiyon, dakika, kapı):
+`npm run case:duration -- kirmizi-isik` (2026-10-20):
 
 ```
-TODO
+TIPIK          93.9 dk   13129 sözcük   210 aksiyon  BERAAT_E (11385)
+G_B            95.0 dk   13193 sözcük   217 aksiyon  BERAAT_B (12060)
+G_ETIK         93.2 dk   12882 sözcük   216 aksiyon  ETIK (11060)
+G_I            75.7 dk   10398 sözcük   179 aksiyon  INDIRIM (6365)
+G_M            60.9 dk    8434 sözcük   140 aksiyon  MAHKUMIYET (-200)
+W              68.4 dk    9637 sözcük   149 aksiyon  MAHKUMIYET (4700)
+==> TİPİK YOL (TIPIK): 93.9 dk  ✓ süre hedefte
 ```
+
+Paket toplamı: 1.326 satır, 15.961 satır sözcüğü; etiket, geri bildirim, belge ve hüküm metinleriyle ~23.900 sözcük. En uzun
+satır 203 karakter.

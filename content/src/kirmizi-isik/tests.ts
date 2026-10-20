@@ -552,7 +552,7 @@ export const tests: CasePart = {
     goldenPaths: [
       goldenPath(
         TYPICAL_PATH,
-        { outcome: 'BERAAT_E' },
+        { outcome: 'BERAAT_E', finalMin: 10815, finalMax: 11955 },
         prolog('STR_KUSUR'),
         // Gün 1
         aramaGece,
@@ -597,11 +597,11 @@ export const tests: CasePart = {
         chooseAll('CIKARIM2_BITIR', 'A_DURUSMA', 'ARASON_DEVAM', 'T00Y_DEVAM'),
         celse3E,
       ),
-      goldenPath('G_B', { outcome: 'BERAAT_B' }, yolB('SA_NOT', 'T09_B', false)),
-      goldenPath('G_ETIK', { outcome: 'ETIK' }, yolB('SA_GARAJ', 'T09_B', true)),
-      goldenPath('G_I', { outcome: 'INDIRIM' }, yolI),
-      goldenPath('G_M', { outcome: 'MAHKUMIYET' }, yolM),
-      goldenPath('W', { outcome: 'MAHKUMIYET' }, yolW),
+      goldenPath('G_B', { outcome: 'BERAAT_B', finalMin: 11457, finalMax: 12663 }, yolB('SA_NOT', 'T09_B', false)),
+      goldenPath('G_ETIK', { outcome: 'ETIK', finalMin: 10507, finalMax: 11613 }, yolB('SA_GARAJ', 'T09_B', true)),
+      goldenPath('G_I', { outcome: 'INDIRIM', finalMin: 6046, finalMax: 6684 }, yolI),
+      goldenPath('G_M', { outcome: 'MAHKUMIYET', finalMin: -210, finalMax: -190 }, yolM),
+      goldenPath('W', { outcome: 'MAHKUMIYET', finalMin: 4465, finalMax: 4935 }, yolW),
     ],
   },
 };

@@ -52,7 +52,7 @@ const hubLines: ResponseBlock[] = [
     ),
   ),
   when(
-    all(cmp(v('day'), '==', 2), any(has('clue_fren'), has('clue_cam'), has('clue_boya'))),
+    all(cmp(v('day'), '==', 2), atLeastOf(2, ['clue_fren', 'clue_cam', 'clue_boya'])),
     card('GÜN 2/4 · İKİNCİ CELSEYE 12 GÜN'),
     N(
       'Hedef: fren izi, cam kırıkları, boya. Kavşakta o gece kaç araç vardı? Ve ışık: taksici durduğu yerden neyi görebilirdi?',
@@ -65,7 +65,7 @@ const hubLines: ResponseBlock[] = [
   when(
     cmp(v('day'), '==', 2),
     card('GÜN 2/4 · İKİNCİ CELSEYE 12 GÜN'),
-    N('Hedef: ışık. Taksici durduğu yerden neyi görebilirdi? Kavşağın makinesi o gece ne yapıyordu?'),
+    N('Hedef: ışık. Taksici durduğu yerden neyi görebilirdi? Kavşakla ilgili kim, hangi kaydı tutuyor?'),
     N(
       'Gece rüyamda bir trafik lambası gördüm; üç rengi aynı anda yanıyordu. Uyandığımda saçma geldi. Sonra o kadar saçma gelmedi.',
     ),
@@ -403,17 +403,29 @@ export const invHub: CasePart = {
       choices: [
         option('AK3_BEKLE', 'Işıkların bir tur daha dönmesini bekle; saatleri not al.', {
           effects: [raise('gece_nobet')],
-          responses: says(
-            N(
-              'Bir tur daha. Yaya yeşili ile Gökdere yeşili birbirini hiç görmüyordu; biri yanarken öbürü sönüktü. Bugün.',
+          responses: [
+            when(
+              any(has('ev_sinyal_log'), has('clue_is_emri'), has('clue_kabin'), flag('fact_hastane_isik')),
+              N(
+                'Bir tur daha. Yaya yeşili ile Gökdere yeşili birbirini hiç görmüyordu; biri yanarken öbürü sönüktü. Bugün.',
+              ),
+              T(
+                'Not defterime yazdım: “Bugün çatışma yok.” Bir yargıç için anlamsız bir cümle. Benim için bir soru: o gece neden vardı?',
+              ),
+              N(
+                'Saat ikiye doğru bir devriye aracı yavaşladı, camı indi. “Hanımefendi, bir sorun mu var?” “Yok,” dedim, “ışıklara bakıyorum.” Polis güldü, gitti.',
+              ),
             ),
-            T(
-              'Not defterime yazdım: “Bugün çatışma yok.” Bir yargıç için anlamsız bir cümle. Benim için bir soru: o gece neden vardı?',
+            otherwise(
+              N(
+                'Bir tur daha. Yeşil, sarı, kırmızı. Yaya ışığı, araç ışığı. Hepsi sırasıyla, kusursuz. Saatleri not defterime yazdım: her tur doksan saniye.',
+              ),
+              T('Doksan saniye. Bir yayanın karşıya geçmesine, bir sürücünün yavaşlamasına yeter. Yeter mi?'),
+              N(
+                'Saat ikiye doğru bir devriye aracı yavaşladı, camı indi. “Hanımefendi, bir sorun mu var?” “Yok,” dedim, “ışıklara bakıyorum.” Polis güldü, gitti.',
+              ),
             ),
-            N(
-              'Saat ikiye doğru bir devriye aracı yavaşladı, camı indi. “Hanımefendi, bir sorun mu var?” “Yok,” dedim, “ışıklara bakıyorum.” Polis güldü, gitti.',
-            ),
-          ),
+          ],
           next: 'INV_HUB',
         }),
         option('AK3_EV', 'Eve git. Yarın son gün; uyumak da bir iş.', {
@@ -511,7 +523,7 @@ export const invHub: CasePart = {
           L('leyla', 'Tahtaya dön. Bir kart tek başına bir şey söylemez; iki kart bir cümle kurar.'),
           L(
             'leyla',
-            'Ve şunu ayır: bilinçli taksir, neticeyi öngörüp “bir şey olmaz” demektir (TCK 22/3). Kırmızıda dalmak bunu düşündürebilir; yeşilde 38’le geçmek düşündürmez.',
+            'Ve şunu ayır: bilinçli taksir, neticeyi öngörüp “bir şey olmaz” demektir (TCK 22/3). Kırmızıda hızla dalmak bunu düşündürebilir; yeşilde, sınırın altında geçmek düşündürmez.',
           ),
           L(
             'leyla',
@@ -594,8 +606,14 @@ export const invHub: CasePart = {
           ),
         ),
         when(
-          flag('gece_nobet'),
+          all(flag('gece_nobet'), any(has('ev_sinyal_log'), has('clue_is_emri'), flag('fact_hastane_isik'))),
           T('Gece kavşakta bekledim. Bugün çatışma yok. Bugün her şey kusursuz. Kusursuzluk bazen bir itiraftır.'),
+        ),
+        when(
+          flag('gece_nobet'),
+          T(
+            'Gece kavşakta bekledim. Doksan saniyelik turlar, kusursuz. O gecenin doksan saniyesini kimse kaydetmedi mi?',
+          ),
         ),
         otherwise(T('Işık konusunda elimde sadece Volkan’ın sözü var. Söz, yemin edilse de bir rapordan hafiftir.')),
       ],

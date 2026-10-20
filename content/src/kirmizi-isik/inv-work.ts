@@ -1,19 +1,13 @@
 import {
-  L,
   N,
-  all,
   any,
-  back,
   choiceNode,
-  cmp,
   cont,
   deductionBoard,
   documentExam,
   examine,
   fallback,
-  flag,
   has,
-  inc,
   not,
   option,
   raise,
@@ -22,7 +16,6 @@ import {
   says,
   sceneSearch,
   tool,
-  v,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, ChoiceDef } from '../../../tools/content/src/kit/index.js';
 import { INV, T, card } from './shared.js';
@@ -648,11 +641,3 @@ export const invWork: CasePart = {
     }),
   ],
 };
-
-void L;
-void all;
-void back;
-void cmp;
-void flag;
-void inc;
-void v;

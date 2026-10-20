@@ -215,7 +215,7 @@
           { "kind": "CHOOSE", "choiceId": "T09R_DEVAM" },
           { "kind": "CHOOSE", "choiceId": "SS_DOGRU" }
         ],
-        "expect": { "outcome": "BERAAT_E" }
+        "expect": { "outcome": "BERAAT_E", "finalMin": 10815, "finalMax": 11955 }
       },
       {
         "name": "G_B",
@@ -438,7 +438,7 @@
           { "kind": "CHOOSE", "choiceId": "T09R_DEVAM" },
           { "kind": "CHOOSE", "choiceId": "SS_DOGRU" }
         ],
-        "expect": { "outcome": "BERAAT_B" }
+        "expect": { "outcome": "BERAAT_B", "finalMin": 11457, "finalMax": 12663 }
       },
       {
         "name": "G_ETIK",
@@ -660,7 +660,7 @@
           { "kind": "CHOOSE", "choiceId": "T09R_DEVAM" },
           { "kind": "CHOOSE", "choiceId": "SS_DOGRU" }
         ],
-        "expect": { "outcome": "ETIK" }
+        "expect": { "outcome": "ETIK", "finalMin": 10507, "finalMax": 11613 }
       },
       {
         "name": "G_I",
@@ -845,7 +845,7 @@
           { "kind": "CHOOSE", "choiceId": "T09R_DEVAM" },
           { "kind": "CHOOSE", "choiceId": "SS_SUS" }
         ],
-        "expect": { "outcome": "INDIRIM" }
+        "expect": { "outcome": "INDIRIM", "finalMin": 6046, "finalMax": 6684 }
       },
       {
         "name": "G_M",
@@ -991,7 +991,7 @@
           { "kind": "CHOOSE", "choiceId": "T09R_DEVAM" },
           { "kind": "CHOOSE", "choiceId": "SS_KABUL" }
         ],
-        "expect": { "outcome": "MAHKUMIYET" }
+        "expect": { "outcome": "MAHKUMIYET", "finalMin": -210, "finalMax": -190 }
       },
       {
         "name": "W",
@@ -1146,7 +1146,7 @@
           { "kind": "PRESENT", "evidenceId": "ev_bilirkisi", "statementId": "TH1" },
           { "kind": "CHOOSE", "choiceId": "COKUS_SON" }
         ],
-        "expect": { "outcome": "MAHKUMIYET" }
+        "expect": { "outcome": "MAHKUMIYET", "finalMin": 4465, "finalMax": 4935 }
       }
     ]
   }

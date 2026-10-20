@@ -45,7 +45,7 @@ export const scenes: CasePart = {
         sceneObject('ob_cam', 'Sol şeritteki parıltı', OB_CAM, {
           discovers: 'clue_cam',
           score: { ARASTIRMA: 60 },
-          text: 'Geçidin dokuz metre ilerisinde, sol şeritte saçılmış far camı ve koyu plastik parçalar. Volkan’ın arabası çok geride durmuş. Parçaların bazıları yeşilimsi, bazıları şeffaf. Fotoğrafın köşesinde bir polis eldiveni, yerdeki bir parçayı işaret ediyor.',
+          text: 'Geçidin dokuz metre ilerisinde, sol şeritte saçılmış far camı ve koyu plastik parçalar. Tutanağa göre ilk temasın olduğu yaya geçidinin hemen ötesi. Parçaların bazıları yeşilimsi, bazıları şeffaf. Fotoğrafın köşesinde bir polis eldiveni, yerdeki bir parçayı işaret ediyor.',
           short: 'Far camı kırıkları',
         }),
         sceneObject('ob_arka', 'Direkteki siyah kutu', OB_ARKA, {

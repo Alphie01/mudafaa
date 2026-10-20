@@ -32,7 +32,19 @@
           "when": {
             "all": [
               { "cmp": [{ "var": "day" }, "==", 2] },
-              { "any": [{ "hasEvidence": "clue_fren" }, { "hasEvidence": "clue_cam" }, { "hasEvidence": "clue_boya" }] }
+              {
+                "cmp": [
+                  {
+                    "add": [
+                      { "if": { "when": { "hasEvidence": "clue_fren" }, "then": 1, "else": 0 } },
+                      { "if": { "when": { "hasEvidence": "clue_cam" }, "then": 1, "else": 0 } },
+                      { "if": { "when": { "hasEvidence": "clue_boya" }, "then": 1, "else": 0 } }
+                    ]
+                  },
+                  ">=",
+                  2
+                ]
+              }
             ]
           },
           "lines": [
@@ -54,7 +66,7 @@
             { "speaker": "narrator", "text": "GÜN 2/4 · İKİNCİ CELSEYE 12 GÜN", "style": "card" },
             {
               "speaker": "narrator",
-              "text": "Hedef: ışık. Taksici durduğu yerden neyi görebilirdi? Kavşağın makinesi o gece ne yapıyordu?"
+              "text": "Hedef: ışık. Taksici durduğu yerden neyi görebilirdi? Kavşakla ilgili kim, hangi kaydı tutuyor?"
             },
             {
               "speaker": "narrator",
@@ -621,6 +633,14 @@
           "label": "Işıkların bir tur daha dönmesini bekle; saatleri not al.",
           "responses": [
             {
+              "when": {
+                "any": [
+                  { "hasEvidence": "ev_sinyal_log" },
+                  { "hasEvidence": "clue_is_emri" },
+                  { "hasEvidence": "clue_kabin" },
+                  { "flag": "fact_hastane_isik" }
+                ]
+              },
               "lines": [
                 {
                   "speaker": "narrator",
@@ -629,6 +649,23 @@
                 {
                   "speaker": "player",
                   "text": "Not defterime yazdım: “Bugün çatışma yok.” Bir yargıç için anlamsız bir cümle. Benim için bir soru: o gece neden vardı?",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Saat ikiye doğru bir devriye aracı yavaşladı, camı indi. “Hanımefendi, bir sorun mu var?” “Yok,” dedim, “ışıklara bakıyorum.” Polis güldü, gitti."
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Bir tur daha. Yeşil, sarı, kırmızı. Yaya ışığı, araç ışığı. Hepsi sırasıyla, kusursuz. Saatleri not defterime yazdım: her tur doksan saniye."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Doksan saniye. Bir yayanın karşıya geçmesine, bir sürücünün yavaşlamasına yeter. Yeter mi?",
                   "style": "thought"
                 },
                 {
@@ -779,7 +816,7 @@
             },
             {
               "speaker": "leyla",
-              "text": "Ve şunu ayır: bilinçli taksir, neticeyi öngörüp “bir şey olmaz” demektir (TCK 22/3). Kırmızıda dalmak bunu düşündürebilir; yeşilde 38’le geçmek düşündürmez."
+              "text": "Ve şunu ayır: bilinçli taksir, neticeyi öngörüp “bir şey olmaz” demektir (TCK 22/3). Kırmızıda hızla dalmak bunu düşündürebilir; yeşilde, sınırın altında geçmek düşündürmez."
             },
             {
               "speaker": "leyla",
@@ -944,11 +981,32 @@
           ]
         },
         {
-          "when": { "flag": "gece_nobet" },
+          "when": {
+            "all": [
+              { "flag": "gece_nobet" },
+              {
+                "any": [
+                  { "hasEvidence": "ev_sinyal_log" },
+                  { "hasEvidence": "clue_is_emri" },
+                  { "flag": "fact_hastane_isik" }
+                ]
+              }
+            ]
+          },
           "lines": [
             {
               "speaker": "player",
               "text": "Gece kavşakta bekledim. Bugün çatışma yok. Bugün her şey kusursuz. Kusursuzluk bazen bir itiraftır.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "gece_nobet" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Gece kavşakta bekledim. Doksan saniyelik turlar, kusursuz. O gecenin doksan saniyesini kimse kaydetmedi mi?",
               "style": "thought"
             }
           ]

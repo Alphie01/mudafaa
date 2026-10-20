@@ -43,7 +43,7 @@ const prosecutionPapers = ['ev_bilirkisi', 'ev_hts', 'ev_volkan_ifade'];
 export const hearing1: CasePart = {
   config: {
     objectionGrounds: [
-      ground('g_kanaat', 'Tanık görmediğini kanaatle aktarıyor', 'CMK 217/1 (takdir); CMK 52/1'),
+      ground('g_kanaat', 'Tanık görmediğini kanaatle aktarıyor', 'CMK 217/1 (takdir)'),
       ground('g_yorum', 'Bilirkişi hukuki nitelendirme yapıyor (CMK 67/3)', 'CMK 67/3'),
     ],
   },
@@ -183,7 +183,7 @@ export const hearing1: CasePart = {
           'Katılan olarak iddianameye aynen katılıyoruz Sayın Başkan. Bir anne, yeşil ışıkta, yaya geçidinde.',
         ),
         T(
-          '“Yaya geçidinde yeşil ışıkta karşıya geçen maktul.” Savcı farkında değil ama bir cümleye iki yeşil sığdırdı. Biri yayanın, biri değil.',
+          '“Yaya geçidinde yeşil ışıkta karşıya geçen maktul.” Volkan da “yeşil” diyor. İkisi aynı anda doğru olamaz; ya biri yanılıyor ya da bu dosyada henüz kimsenin sormadığı bir soru var.',
         ),
         T(
           'İddianamenin üç ayağı var: kırmızı, hız, telefon. Bir de dördüncüsü, yazılmamış olanı: “çarptım, hissettim.”',
@@ -1122,5 +1122,3 @@ export const hearing1: CasePart = {
     }),
   ],
 };
-
-void ref;

@@ -305,7 +305,7 @@ export const briefing: CasePart = {
             L('leyla', 'Kadın öldü Deniz. Yaralama değil. TCK 85/1, artı bilinçli taksir.'),
             L(
               'leyla',
-              'Gerçi… müvekkilin ölüme mi yol açtı, yoksa yalnızca bir yaraya mı, bunu ancak dosya söyler. Ama iddianame bunu söylemiyor.',
+              'Taksirle yaralama, netice ölüm değilse konuşulur. Burada netice belli; tartışma kusurda olacak.',
             ),
           ),
           next: 'BR_01B',
@@ -409,7 +409,7 @@ export const briefing: CasePart = {
               ),
               L(
                 'leyla',
-                'Bir de bunu aklının bir köşesine koy: kusur, sonuçla bağlantılı olmalı. Dikkatsiz bir sürücü, kendisinin yol açmadığı bir ölümden sorumlu tutulmaz.',
+                'Bir de bunu aklının bir köşesine koy: kusur ile netice arasında bir bağ olmalı. Hukukçular buna illiyet der. Ezberle; bir gün işine yarar.',
               ),
               T('Kusur ve illiyet. İki kelime. Leyla bunları masaya bıraktı, ben aldım.'),
             ),
@@ -542,7 +542,7 @@ export const briefing: CasePart = {
         N(
           'Okul çantalı bir çocuk yaya butonuna bastı. Araçlar durdu. Yaya ışığı yeşile döndü. Çocuk koşarak karşıya geçti; annesi arkasından bağırdı.',
         ),
-        T('Işıklar şimdi kusursuz çalışıyor. Ölüler hep düzgün çalışan makinelerin önünde ölür.'),
+        T('Bir şehrin en acımasız yanı: hiçbir şey olmamış gibi devam etmesi. Işık yanar, söner, yanar.'),
         T('On dört gün sonra ikinci celse. Dört günüm var; gerisi dilekçeye, hazırlığa ve uykusuzluğa.'),
         N('Telefonumda Gül’den bir mesaj: “Volkan evde. Çay demlendi. O konuşmaz ama siz sorun.”'),
         N(

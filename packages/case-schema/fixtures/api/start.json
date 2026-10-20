@@ -1,0 +1,140 @@
+{
+  "session": {
+    "caseId": "00000000-0000-7000-8000-000000000001",
+    "caseNumber": 0,
+    "caseTitle": "Mini Dava",
+    "id": "00000000-0000-7000-8000-000000000002",
+    "mode": "NORMAL",
+    "startedAt": "2026-10-20T00:00:00.000Z",
+    "stateVersion": 0,
+    "status": "ACTIVE"
+  },
+  "view": {
+    "bag": {
+      "items": [
+        {
+          "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+          "icon": "key",
+          "id": "e_key",
+          "kindLabel": "Fiziksel delil",
+          "shortText": "Sanığın çantasından çıktı.",
+          "sourceLabel": "Olay yeri tutanağı",
+          "title": "Depo anahtarı"
+        }
+      ]
+    },
+    "cast": {
+      "k": {
+        "accent": "#e2802f",
+        "name": "Kâmil Demir",
+        "role": "CLIENT",
+        "shortLabel": "Kâmil",
+        "sprite": {
+          "rows": [
+            "....k.kkkk.k....",
+            "...kHHkHHHkHk...",
+            "...kHHHHHHHHk...",
+            "...kHsssssHHk...",
+            "...kssssssssk...",
+            "...ksessssesk...",
+            "...kssssssssk...",
+            "...kssskksssk...",
+            "....kssssssk....",
+            ".....kkSSkk.....",
+            "...kkoowwookk...",
+            "..kooooOOooook..",
+            "..koOoooooooOk..",
+            "..koOoooooooOk..",
+            "..koOoooooooOk..",
+            "..kSooooooooSk..",
+            "...kddddddddk...",
+            "...kdddkkdddk...",
+            "...kdddkkdddk...",
+            "..kkkkk..kkkkk.."
+          ]
+        }
+      }
+    },
+    "choices": [
+      {
+        "available": true,
+        "group": "strategy",
+        "id": "ch_str_a",
+        "kind": "OPTION",
+        "label": "Masumiyet",
+        "used": false
+      },
+      {
+        "available": true,
+        "group": "strategy",
+        "id": "ch_str_b",
+        "kind": "OPTION",
+        "label": "İndirim",
+        "used": false
+      }
+    ],
+    "header": {
+      "title": "Brifing"
+    },
+    "hud": [],
+    "lines": [],
+    "node": {
+      "blocks": [
+        {
+          "character": "k",
+          "charge": "TCK 141 · Hırsızlık",
+          "demand": "1–3 yıl hapis",
+          "label": "Sanık",
+          "lines": ["45 yaşında", "Gece bekçisi"],
+          "type": "profileCard"
+        },
+        {
+          "demandLabel": "İSTEM",
+          "labels": ["Beraat", "1 yıl", "2 yıl", "3 yıl"],
+          "markerPct": 50,
+          "segments": ["green", "green", "gold", "gold", "red", "red", "darkred", "darkred"],
+          "type": "sentenceRange"
+        },
+        {
+          "text": "Gece yarısı depodan malzeme çalındı. Tek tanık, müvekkilini sokak lambasının altında gördüğünü söylüyor.",
+          "title": "Olay",
+          "type": "paragraph"
+        },
+        {
+          "items": [
+            {
+              "label": "Depo anahtarı",
+              "strength": "MEDIUM"
+            },
+            {
+              "label": "Tanık teşhisi",
+              "strength": "STRONG"
+            }
+          ],
+          "title": "Savcılık delilleri",
+          "type": "strengthList"
+        },
+        {
+          "group": "strategy",
+          "title": "Savunma stratejisi",
+          "type": "choiceGroup"
+        }
+      ],
+      "id": "n_brief",
+      "phase": "BRIEFING",
+      "type": "STORY"
+    },
+    "notebook": {
+      "items": []
+    },
+    "session": {
+      "caseId": "00000000-0000-7000-8000-000000000001",
+      "caseNumber": 0,
+      "caseTitle": "Mini Dava",
+      "id": "00000000-0000-7000-8000-000000000002",
+      "mode": "NORMAL",
+      "stateVersion": 0,
+      "status": "ACTIVE"
+    }
+  }
+}

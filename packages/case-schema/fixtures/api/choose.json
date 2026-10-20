@@ -1,0 +1,148 @@
+{
+  "result": {
+    "completed": false,
+    "discovered": [],
+    "fx": [],
+    "lines": [],
+    "nodeChanged": true,
+    "resolution": "CHOICE"
+  },
+  "view": {
+    "bag": {
+      "items": [
+        {
+          "description": "Anahtar sanığın çantasında bulundu; aynı anahtar bütün bekçilere verilmiş.",
+          "icon": "key",
+          "id": "e_key",
+          "kindLabel": "Fiziksel delil",
+          "shortText": "Sanığın çantasından çıktı.",
+          "sourceLabel": "Olay yeri tutanağı",
+          "title": "Depo anahtarı"
+        }
+      ]
+    },
+    "cast": {},
+    "choices": [
+      {
+        "available": true,
+        "cost": [
+          {
+            "amount": 1,
+            "label": "1 Eylem puanı",
+            "var": "ap"
+          }
+        ],
+        "id": "ch_go_scene",
+        "kind": "NAVIGATE",
+        "label": "Olay yerini ara",
+        "used": false
+      },
+      {
+        "available": true,
+        "cost": [
+          {
+            "amount": 1,
+            "label": "1 Eylem puanı",
+            "var": "ap"
+          }
+        ],
+        "id": "ch_go_talk",
+        "kind": "NAVIGATE",
+        "label": "Müvekkille görüş",
+        "used": false
+      },
+      {
+        "available": true,
+        "cost": [
+          {
+            "amount": 1,
+            "label": "1 Eylem puanı",
+            "var": "ap"
+          }
+        ],
+        "id": "ch_go_doc",
+        "kind": "NAVIGATE",
+        "label": "Vardiya çizelgesini incele",
+        "used": false
+      },
+      {
+        "available": true,
+        "id": "ch_go_board",
+        "kind": "NAVIGATE",
+        "label": "Çıkarım tahtası",
+        "used": false
+      },
+      {
+        "available": true,
+        "id": "ch_go_court",
+        "kind": "NAVIGATE",
+        "label": "DURUŞMAYA GİT",
+        "used": false
+      }
+    ],
+    "header": {
+      "title": "Soruşturma"
+    },
+    "hud": [
+      {
+        "id": "day",
+        "label": "Gün",
+        "max": 3,
+        "value": 1,
+        "widget": "pips"
+      },
+      {
+        "id": "ap",
+        "label": "Eylem puanı",
+        "max": 3,
+        "value": 3,
+        "widget": "pips"
+      }
+    ],
+    "last": {
+      "completed": false,
+      "discovered": [],
+      "fx": [],
+      "lines": [],
+      "nodeChanged": true,
+      "resolution": "CHOICE"
+    },
+    "lines": [],
+    "node": {
+      "id": "n_hub",
+      "tabs": [
+        {
+          "choiceIds": ["ch_go_scene"],
+          "id": "t_scene",
+          "kind": "SCENE",
+          "label": "OLAY YERİ"
+        },
+        {
+          "choiceIds": ["ch_go_talk"],
+          "id": "t_people",
+          "kind": "PEOPLE",
+          "label": "TANIKLAR"
+        },
+        {
+          "choiceIds": ["ch_go_doc", "ch_go_board"],
+          "id": "t_archive",
+          "kind": "ARCHIVE",
+          "label": "ARŞİV"
+        }
+      ],
+      "type": "INVESTIGATION"
+    },
+    "notebook": {
+      "items": []
+    },
+    "session": {
+      "caseId": "00000000-0000-7000-8000-000000000001",
+      "caseNumber": 0,
+      "caseTitle": "Mini Dava",
+      "id": "00000000-0000-7000-8000-000000000002",
+      "mode": "NORMAL",
+      "stateVersion": 1,
+      "status": "ACTIVE"
+    }
+  }
+}

@@ -1,31 +1,14 @@
 import { Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
-import { UserThrottlerGuard } from '../../common/user-throttler.guard.js';
-import { AuthCache } from '../auth/auth-cache.js';
-import { AuthGuard } from '../auth/auth.guard.js';
-import { FirebaseService } from '../auth/firebase.service.js';
 import { AssetsController } from '../content/assets.controller.js';
-import { AssetStore } from '../content/asset.store.js';
-import { CaseLoaderService } from '../content/case-loader.service.js';
-import { ContentService } from '../content/content.service.js';
-import { UsersService } from '../users/users.service.js';
+import { ContentModule } from '../content/content.module.js';
 import { GameController } from './game.controller.js';
 import { GameService } from './game.service.js';
 
-/** Oyun API'si; kimlik guard'ı hız sınırından önce çalışır (hız sınırı kullanıcı başına). */
+/** Oyun API'si: kullanıcı, katalog, oturum, aksiyon, okuma uçları ve varlıklar. */
 @Module({
+  imports: [ContentModule],
   controllers: [GameController, AssetsController],
-  providers: [
-    AuthCache,
-    FirebaseService,
-    UsersService,
-    AssetStore,
-    ContentService,
-    CaseLoaderService,
-    GameService,
-    { provide: APP_GUARD, useClass: AuthGuard },
-    { provide: APP_GUARD, useClass: UserThrottlerGuard },
-  ],
-  exports: [ContentService],
+  providers: [GameService],
+  exports: [GameService],
 })
 export class GameModule {}

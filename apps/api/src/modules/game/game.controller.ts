@@ -3,9 +3,14 @@ import {
   ActionRequest,
   type CaseListResponse,
   type CaseReport,
+  type CharactersResponse,
+  type EvidenceListResponse,
   type MeResponse,
   ProfilePatch,
+  type ProgressResponse,
   type RankDto,
+  type ScenesResponse,
+  type ScoreResponse,
   type SessionSummary,
 } from '@mudafaa/case-schema';
 import type { Request, Response } from 'express';
@@ -53,6 +58,11 @@ export class GameController {
   @Get('me/sessions')
   sessions(@CurrentUser() user: AuthUser): Promise<SessionSummary[]> {
     return this.game.listMine(user);
+  }
+
+  @Get('me/progress')
+  progress(@CurrentUser() user: AuthUser): Promise<ProgressResponse> {
+    return this.game.progress(user);
   }
 
   @Public()
@@ -126,6 +136,26 @@ export class GameController {
   @HttpCode(204)
   abandon(@CurrentUser() user: AuthUser, @Param('id') id: string): Promise<void> {
     return this.game.abandon(user, id);
+  }
+
+  @Get('sessions/:id/evidence')
+  evidence(@CurrentUser() user: AuthUser, @Param('id') id: string): Promise<EvidenceListResponse> {
+    return this.game.evidence(user, id);
+  }
+
+  @Get('sessions/:id/scenes')
+  scenes(@CurrentUser() user: AuthUser, @Param('id') id: string): Promise<ScenesResponse> {
+    return this.game.scenes(user, id);
+  }
+
+  @Get('sessions/:id/characters')
+  characters(@CurrentUser() user: AuthUser, @Param('id') id: string): Promise<CharactersResponse> {
+    return this.game.characters(user, id);
+  }
+
+  @Get('sessions/:id/score')
+  score(@CurrentUser() user: AuthUser, @Param('id') id: string): Promise<ScoreResponse> {
+    return this.game.score(user, id);
   }
 
   @Get('sessions/:id/result')

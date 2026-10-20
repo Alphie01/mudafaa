@@ -4,25 +4,37 @@ import type {
   CaseCard,
   CaseListResponse,
   CaseReport,
+  CharactersResponse,
   ChooseResponse,
+  EvidenceListResponse,
   MeResponse,
+  OutcomeClass,
+  ProgressResponse,
   RankDto,
+  ScenesResponse,
+  ScoreResponse,
   SessionSummary,
   SessionView,
   StartResponse,
 } from '@mudafaa/case-schema';
 import {
   act,
+  breakdownRows,
   canonicalJson,
+  computeScore,
   ENGINE_VERSION,
   fnv1a64,
   migrateState,
   report,
+  sessionCharacters,
+  sessionEvidence,
+  sessionScenes,
   start,
   view,
   type SessionState,
 } from '@mudafaa/engine';
 import { ApiError, notFound } from '../../common/api-error.js';
+import { isUuid } from '../../common/uuid.js';
 import { PrismaService } from '../../database/prisma.service.js';
 import type { GameSession, Prisma } from '../../generated/prisma/client.js';
 import type { AuthUser } from '../auth/decorators.js';
@@ -30,6 +42,12 @@ import { CaseLoaderService, type LoadedCase } from '../content/case-loader.servi
 
 type Tx = Prisma.TransactionClient;
 type Tab = 'active' | 'closed' | 'locked';
+type CardTone = NonNullable<CaseCard['best']>['stampTone'];
+interface CardArt {
+  cover: { name: string; accent: string } | undefined;
+  sprite: { rows: string[]; skin?: string } | undefined;
+  outcome: { id: string; class: OutcomeClass; stamp: string; stampTone: CardTone } | undefined;
+}
 
 const CLASS_FIELD = {
   ACQUITTAL: 'acquittals',
@@ -38,6 +56,18 @@ const CLASS_FIELD = {
   RECHARACTERIZED: 'recharacterized',
   OTHER: 'other',
 } as const;
+
+/** Kart durumu: kilit her şeyi ezer; sonra aktif oturum, sonra en iyi sonuç; hiçbiri yoksa yeni. */
+export function cardStatus(input: {
+  locked: boolean;
+  activeSessionId?: string | undefined;
+  bestOutcomeKey?: string | null | undefined;
+}): CaseCard['status'] {
+  if (input.locked) return 'LOCKED';
+  if (input.activeSessionId !== undefined) return 'IN_PROGRESS';
+  if (input.bestOutcomeKey !== undefined && input.bestOutcomeKey !== null) return 'COMPLETED';
+  return 'NEW';
+}
 
 /** Oyun API'sinin çekirdeği: katalog, oturum, görünüm, aksiyon (transaction + idempotency), sonuç ve ilerleme. */
 @Injectable()
@@ -158,20 +188,20 @@ export class GameService {
     ]);
     const userRank = this.standing(ranks, stats?.xp ?? 0).rank;
     const order = (key: string | null | undefined): number => ranks.findIndex((r) => r.key === key);
+    const art = await this.cardArt(cases, progress);
     const out: CaseCard[] = [];
     for (const c of cases) {
       const v = c.currentVersion;
       const snap = v?.snapshots[0];
       if (v === null || v === undefined || snap === undefined) continue;
-      const loaded = await this.loader.get(snap.id);
-      const pkg = loaded.compiled.pkg;
-      const cover = loaded.compiled.characters.get(v.coverCharacterKey);
-      const sprite = cover === undefined ? undefined : loaded.compiled.sprites.get(cover.spriteId);
       const prog = progress.find((p) => p.caseId === c.id);
+      const { cover, sprite, outcome } =
+        art.get(v.id) ?? (await this.cardArtFromSnapshot(snap.id, v.coverCharacterKey, prog?.bestOutcomeKey));
+      const best = outcome;
       const act = active.find((s) => s.caseId === c.id);
-      const required = v.requiredRankKey === null ? undefined : ranks.find((r) => r.key === v.requiredRankKey);
+      // Kilit dava satırından okunur (yayında sürümden eşitlenir; yönetici PATCH ile değiştirebilir).
+      const required = c.requiredRankKey === null ? undefined : ranks.find((r) => r.key === c.requiredRankKey);
       const locked = required !== undefined && order(userRank.key) < order(required.key);
-      const best = prog?.bestOutcomeKey ? pkg.outcomes.find((o) => o.id === prog.bestOutcomeKey) : undefined;
       out.push({
         id: c.id,
         slug: c.slug,
@@ -192,7 +222,7 @@ export class GameService {
             ...(sprite?.skin ? { skin: sprite.skin } : {}),
           },
         },
-        status: locked ? 'LOCKED' : act !== undefined ? 'IN_PROGRESS' : best !== undefined ? 'COMPLETED' : 'NEW',
+        status: cardStatus({ locked, activeSessionId: act?.id, bestOutcomeKey: prog?.bestOutcomeKey }),
         ...(locked && required ? { lockReason: `${required.label} rütbesi gerekir`, requiredRank: required } : {}),
         ...(act === undefined ? {} : { activeSessionId: act.id }),
         ...(best === undefined || prog === undefined
@@ -210,6 +240,60 @@ export class GameService {
       });
     }
     return out;
+  }
+
+  /**
+   * Kartın kapak karakteri, sprite'ı ve en iyi sonucun damgası yayınlanmış sürümün ilişkisel satırlarından okunur
+   * (katalog her dava için paketi derlemez). Satırı olmayan eski sürümler `cardArtFromSnapshot`'a düşer.
+   */
+  private async cardArt(
+    cases: { currentVersion: { id: string; coverCharacterKey: string } | null; id: string }[],
+    progress: { caseId: string; bestOutcomeKey: string | null }[],
+  ): Promise<Map<string, CardArt>> {
+    const versions = cases.flatMap((c) => (c.currentVersion === null ? [] : [{ caseId: c.id, ...c.currentVersion }]));
+    if (versions.length === 0) return new Map();
+    const characters = await this.prisma.character.findMany({
+      where: { OR: versions.map((v) => ({ caseVersionId: v.id, key: v.coverCharacterKey })) },
+    });
+    const sprites =
+      characters.length === 0
+        ? []
+        : await this.prisma.characterSprite.findMany({
+            where: { OR: characters.map((ch) => ({ caseVersionId: ch.caseVersionId, key: ch.spriteKey })) },
+          });
+    const wanted = versions.flatMap((v) => {
+      const key = progress.find((p) => p.caseId === v.caseId)?.bestOutcomeKey;
+      return key === null || key === undefined ? [] : [{ caseVersionId: v.id, key }];
+    });
+    const outcomes = wanted.length === 0 ? [] : await this.prisma.courtOutcome.findMany({ where: { OR: wanted } });
+    const out = new Map<string, CardArt>();
+    for (const v of versions) {
+      const ch = characters.find((x) => x.caseVersionId === v.id);
+      if (ch === undefined) continue;
+      const sp = sprites.find((x) => x.caseVersionId === v.id && x.key === ch.spriteKey);
+      const o = outcomes.find((x) => x.caseVersionId === v.id);
+      out.set(v.id, {
+        cover: { name: ch.name, accent: ch.accent },
+        sprite: sp === undefined ? undefined : { rows: sp.rows as string[], ...(sp.skin ? { skin: sp.skin } : {}) },
+        outcome:
+          o === undefined
+            ? undefined
+            : { id: o.key, class: o.class as OutcomeClass, stamp: o.stamp, stampTone: o.stampTone as CardTone },
+      });
+    }
+    return out;
+  }
+
+  private async cardArtFromSnapshot(snapshotId: string, coverKey: string, bestKey?: string | null): Promise<CardArt> {
+    const loaded = await this.loader.get(snapshotId);
+    const ch = loaded.compiled.characters.get(coverKey);
+    const sp = ch === undefined ? undefined : loaded.compiled.sprites.get(ch.spriteId);
+    const o = bestKey ? loaded.compiled.pkg.outcomes.find((x) => x.id === bestKey) : undefined;
+    return {
+      cover: ch === undefined ? undefined : { name: ch.name, accent: ch.accent },
+      sprite: sp === undefined ? undefined : { rows: [...sp.rows], ...(sp.skin ? { skin: sp.skin } : {}) },
+      outcome: o === undefined ? undefined : { id: o.id, class: o.class, stamp: o.stamp, stampTone: o.stampTone },
+    };
   }
 
   async listCases(user: AuthUser, tab: Tab): Promise<CaseListResponse> {
@@ -266,9 +350,7 @@ export class GameService {
   }
 
   private async owned(user: AuthUser, sessionId: string): Promise<GameSession> {
-    const s = /^[0-9a-f-]{36}$/i.test(sessionId)
-      ? await this.prisma.gameSession.findUnique({ where: { id: sessionId } })
-      : null;
+    const s = isUuid(sessionId) ? await this.prisma.gameSession.findUnique({ where: { id: sessionId } }) : null;
     if (s === null || s.userId !== user.id) throw notFound();
     return s;
   }
@@ -371,9 +453,105 @@ export class GameService {
     const s = await this.owned(user, sessionId);
     if (s.status !== 'COMPLETED') throw new ApiError(409, 'session_not_completed', 'Dava henüz bitmedi.');
     const { state, loaded } = await this.viewFor(s);
-    const version = await this.prisma.caseVersion.findUniqueOrThrow({ where: { id: s.caseVersionId } });
-    const analysis = version.analysis as { categoryMax?: Record<string, number> } | null;
-    return report(loaded.compiled, state, analysis?.categoryMax ? { categoryMax: analysis.categoryMax } : {});
+    const categoryMax = loaded.analysis?.categoryMax;
+    return report(loaded.compiled, state, categoryMax === undefined ? {} : { categoryMax });
+  }
+
+  // ── Okuma uçları ──
+  private async stateOf(user: AuthUser, sessionId: string) {
+    const s = await this.owned(user, sessionId);
+    const row = await this.prisma.sessionState.findUniqueOrThrow({ where: { sessionId: s.id } });
+    return { session: s, state: migrateState(row.state), loaded: await this.loader.get(s.snapshotId) };
+  }
+
+  async evidence(user: AuthUser, sessionId: string): Promise<EvidenceListResponse> {
+    const { state, loaded } = await this.stateOf(user, sessionId);
+    return sessionEvidence(loaded.compiled, state);
+  }
+
+  async scenes(user: AuthUser, sessionId: string): Promise<ScenesResponse> {
+    const { state, loaded } = await this.stateOf(user, sessionId);
+    return sessionScenes(loaded.compiled, state, loaded.assetUrl);
+  }
+
+  async characters(user: AuthUser, sessionId: string): Promise<CharactersResponse> {
+    const { state, loaded } = await this.stateOf(user, sessionId);
+    return sessionCharacters(loaded.compiled, state);
+  }
+
+  /** Oyun sırasında yalnızca ham skor; bitişte final, döküm ve sonuç (motorun hesabı, API skor hesaplamaz). */
+  async score(user: AuthUser, sessionId: string): Promise<ScoreResponse> {
+    const { session, state, loaded } = await this.stateOf(user, sessionId);
+    const summary = computeScore(loaded.compiled, state);
+    if (session.status !== 'COMPLETED' || state.outcome === undefined) {
+      return { status: session.status, raw: summary.raw };
+    }
+    return {
+      status: session.status,
+      raw: summary.raw,
+      final: state.outcome.final,
+      breakdown: breakdownRows(summary),
+      outcomeKey: state.outcome.id,
+    };
+  }
+
+  // ── İlerleme ──
+  async progress(user: AuthUser): Promise<ProgressResponse> {
+    const [stats, ranks, rows, active] = await Promise.all([
+      this.prisma.userStatistics.findUnique({ where: { userId: user.id } }),
+      this.ranks(),
+      this.prisma.userProgress.findMany({ where: { userId: user.id }, orderBy: { createdAt: 'asc' } }),
+      this.prisma.gameSession.findMany({ where: { userId: user.id, status: 'ACTIVE', mode: 'NORMAL' } }),
+    ]);
+    const xp = stats?.xp ?? 0;
+    return {
+      xp,
+      ...this.standing(ranks, xp),
+      outcomeCounts: {
+        ACQUITTAL: stats?.acquittals ?? 0,
+        REDUCED: stats?.reduced ?? 0,
+        CONVICTION: stats?.convictions ?? 0,
+        RECHARACTERIZED: stats?.recharacterized ?? 0,
+        OTHER: stats?.other ?? 0,
+      },
+      cases: rows.map((p) => ({
+        caseId: p.caseId,
+        status: active.some((s) => s.caseId === p.caseId)
+          ? ('IN_PROGRESS' as const)
+          : p.bestOutcomeKey !== null
+            ? ('COMPLETED' as const)
+            : ('NEW' as const),
+        ...(p.bestOutcomeKey === null ? {} : { bestOutcomeKey: p.bestOutcomeKey }),
+        ...(p.bestOutcomeClass === null ? {} : { bestOutcomeClass: p.bestOutcomeClass as OutcomeClass }),
+        ...(p.bestFinal === null ? {} : { bestFinal: p.bestFinal }),
+        xpCredited: p.xpCredited,
+      })),
+    };
+  }
+
+  // ── Test oturumu (yönetici) ──
+  /** TEST_SNAPSHOT'a sabitlenmiş TEST oturumu: normal `/sessions/*` uçlarıyla oynanır, ilerleme yazılmaz. */
+  async startTest(user: AuthUser, snapshotId: string): Promise<StartResponse> {
+    const loaded = await this.loader.get(snapshotId);
+    const first = start(loaded.compiled).state;
+    const session = await this.prisma.$transaction(async (tx) => {
+      const s = await tx.gameSession.create({
+        data: {
+          userId: user.id,
+          caseId: loaded.caseId,
+          caseVersionId: loaded.caseVersionId,
+          snapshotId,
+          mode: 'TEST',
+          engineVersion: ENGINE_VERSION,
+          currentNodeKey: first.nodeId,
+        },
+      });
+      await tx.sessionState.create({
+        data: { sessionId: s.id, state: first as unknown as Prisma.InputJsonValue, stateVersion: 0 },
+      });
+      return s;
+    });
+    return this.startBody(session);
   }
 
   // ── Aksiyon ──
@@ -440,7 +618,9 @@ export class GameService {
             where: { sessionId },
             data: { state: after as unknown as Prisma.InputJsonValue, stateVersion: version },
           });
-          await tx.sessionChoice.create({
+          // Yanıt, veritabanının sakladığı biçimle döner (jsonb anahtar sırası): ilk yanıt ile tekrarlar bayt bayt aynı.
+          const stored = await tx.sessionChoice.create({
+            select: { response: true },
             data: {
               sessionId,
               seq: after.seq,
@@ -493,7 +673,7 @@ export class GameService {
           if (scores.length > 0) await tx.sessionScore.createMany({ data: scores });
           if (done && s.mode === 'NORMAL' && outcome !== undefined)
             await this.onCompleted(tx, updated, after, outcome.class);
-          return { body, replay: false };
+          return { body: stored.response as unknown as ChooseResponse, replay: false };
         },
         { isolationLevel: 'ReadCommitted', timeout: 10_000 },
       );

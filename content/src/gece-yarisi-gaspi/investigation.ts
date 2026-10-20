@@ -299,7 +299,7 @@ baris: Sen de mi onlardansın abla? Önce suçlu, sonra insan?
         soft: {
           prompt: 'Üç yıl önceki olayı anlatır mısın?',
           says: T(`
-baris/uzgun: Kuzenimin düğünüydü. Biri halayda ablama sarkıntılık etti. Bir yumruk attım. Adamın kaşı açıldı. Bir yumruk abla.
+baris/uzgun: Bir akraba düğünüydü. Biri halayda ablama sarkıntılık etti. Bir yumruk attım. Adamın kaşı açıldı. Bir yumruk abla.
 baris: Karakola götürdüler, fotoğraf çektiler, parmak izi aldılar. Mahkeme cezayı geri bıraktı. Beş yıl temiz kalırsam silinecekmiş.
 - O fotoğrafta nasıldın?
 baris: Askerden yeni gelmiştim. Saçım sıfırdı, bir de ince bıyık bırakmıştım; herkes güldü bana. Şimdi beni o fotoğraftan kimse tanımaz.
@@ -1540,7 +1540,7 @@ tolga: Abla… kusura bakmayın. Tolga. Barış’ın amcasının oğluyum. Bir 
 tolga: Derya abla avukat tuttu, biliyorum. Salonun parası. Ben… bu da benden. Ücrete katkı.
 > Bir zarf uzattı. İnce, buruşuk, kenarı ıslanmış. Bir inşaat işçisinin haftalığı kadar.
 tolga: Ablaya söylemeyin. Kızar. “Senin paran mı var” der. Var. Biriktirdim. Barış için.
-- Barış nasıl haberi var mı, görüşe gidiyor musunuz?
+- Barış’ı görmeye gidiyor musun? Cezaevine?
 tolga: Gidemiyorum abla. İş… gündüz izin yok. Bir de… cezaevine girince insanın içi daralıyor. Ben o kapıdan giremem.
 > Beresinin ucunu çekiştirdi. Gözleri bir an benim gözlerimle buluştu, sonra merdivene kaydı.
 tolga: O kimseye bir şey yapmaz abla. Biz beraber büyüdük. Benden daha iyi bir çocuktur o. Her şeyden.

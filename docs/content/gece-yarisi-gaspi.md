@@ -147,16 +147,17 @@ yalnızca ekilmiş ayrıntılardır.
 `npm run case:duration -- gece-yarisi-gaspi` (2026-10-20):
 
 ```
-  G1             95.6 dk   13414 sözcük   211 aksiyon  BERAAT_B (11450)
-  G2             94.2 dk   13217 sözcük   208 aksiyon  BERAAT_E (11290)
-  G3             67.3 dk    9704 sözcük   134 aksiyon  INDIRIM (3870)
-  G4             62.7 dk    9032 sözcük   125 aksiyon  MAHKUMIYET (-345)
-  G5             79.2 dk   11081 sözcük   176 aksiyon  AZIL (8130)
-  W              82.1 dk   11495 sözcük   182 aksiyon  MAHKUMIYET (7180)
-  TIPIK          94.2 dk   13217 sözcük   208 aksiyon  BERAAT_E (11290)
-  ==> TİPİK YOL (TIPIK): 94.2 dk  ✓ süre hedefte
+  G1             95.6 dk   13418 sözcük   211 aksiyon  BERAAT_B (11450)
+  G2             94.3 dk   13221 sözcük   208 aksiyon  BERAAT_E (11290)
+  G3             67.3 dk    9701 sözcük   134 aksiyon  INDIRIM (3870)
+  G4             62.7 dk    9029 sözcük   125 aksiyon  MAHKUMIYET (-345)
+  G5             79.2 dk   11085 sözcük   176 aksiyon  AZIL (8130)
+  W              82.1 dk   11499 sözcük   182 aksiyon  MAHKUMIYET (7180)
+  TIPIK          94.3 dk   13221 sözcük   208 aksiyon  BERAAT_E (11290)
+  ==> TİPİK YOL (TIPIK): 94.3 dk  ✓ süre hedefte
   ==> KAPI: ✓ GEÇTİ
 ```
 
-Paket: ~1.400 satır, ~17.300 satır sözcüğü; ekran metinleriyle toplam ~21.800 sözcük (`node tools/content/word-count.mjs
-content/cases/gece-yarisi-gaspi`).
+Paket: 1.443 satır, 17.571 satır sözcüğü; ekran metinleriyle toplam 22.027 sözcük; en uzun satır 210 karakter
+(`node tools/content/word-count.mjs content/cases/gece-yarisi-gaspi`). Doğrulayıcı: PASSED — 0 hata, 1 uyarı
+(SIMULATION_INCOMPLETE); kapsam node 104/104, seçenek 203/203, kural 80/80, delil 49/49; golden path 7/7.

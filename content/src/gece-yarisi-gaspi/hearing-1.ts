@@ -720,8 +720,9 @@ rahmi: Tutukluluk hâlinin devamına. Duruşma üç hafta sonraya ertelendi.
 derya: Canım… sağ ol. Bitmedi biliyorum. Ama bugün… sağ ol.
 baris: Abla… O kadın… Halka mı dedi? Kulağında halka mı vardı?
 - Öyle dedi. O gece.
-> Barış bir şey söylemedi. Gözleri bir an boşluğa kaydı; ateşli bir gecenin içinde bir şey arıyormuş gibi. Sonra annesine döndü.
-~ Bir şey düşündü. Ne düşündüğünü sormadım. Sormam gerekirdi.
+baris: Benim kulağım delik değil ki. Söyledim ya.
+> Sevim Hanım oğlunun yüzünü iki eliyle tuttu. Bir şey sormadı; sormak için zamanı vardı artık.
+~ Bugün bir kadının ilk sözleri kürsüye geri döndü. Yarın ne döneceğini bilmiyorum.
 > Sevim Hanım oğlunun bağcıksız ayakkabılarına baktı. Çantasından iki bağcık çıkardı; evden getirmişti, “belki” diye. Diz çöktü, koridorun ortasında, bağladı.
 sevim: Ben biliyordum kızım. Bağcık getirdim. Biliyordum.
 ~ Bir anne bir bağcık getirmişti. Bir umut değil; bir hazırlık. Annelerin hukuku böyledir.

@@ -20,6 +20,7 @@ import {
   score,
   statement,
   hl,
+  set,
   story,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
@@ -133,6 +134,7 @@ mubasir: Ateş dosyası! Vedat Ateş! Ateş dosyası, Vedat Ateş!
 N: Salon küçüktü. Yüksek bir kürsü, iki sıra sandalye, duvarda “Adalet mülkün temelidir”. Pencereden gri bir ışık.
 hakim: Duruşmaya başlandı. Sanık Vedat Ateş hazır, müdafii Av. Deniz Arslan hazır. Şikâyetçi Nermin Kurt hazır. Cumhuriyet Savcısı hazır.
 hakim: Sanığın kimlik tespiti yapıldı. İddianame okunsun. Sayın Savcı, özetleyebilirsiniz.
+N: Hâkim Selma Akgün ellili yaşlarında, gözlüğünü burnunun ucuna indirmiş, dosyayı sayfa sayfa çeviren bir kadındı. Her sayfayı okuyordu; bunu görmek bile umut vericiydi.
 savci: Sanık, annesi Hayriye Ateş’e ait Hisar’daki taşınmazı, gerçekte satış yetkisi içermeyen noter vekâletnamesinden satış yetkili sahte bir suret düzenleyerek
 savci: bu sureti 18 Şubat 2026’da tapu müdürlüğünde kullanmış ve taşınmazı Erol Kılınç’a satmıştır. Tapu senedindeki imzanın sanığa ait olduğu bilirkişi raporuyla sabittir.
 savci: Sanığın, sahte resmî belge düzenleme ve kullanma suçundan TCK 204/1 uyarınca cezalandırılmasını talep ediyoruz.
@@ -170,6 +172,7 @@ vedat: Annemin evini satmadım. Ben annemin evini… 2024’te bir laf ettim, ya
 vedat: Bir imzam var, otuz yıllık. O imza o kâğıtta değil. Ben bilirim; kendi imzamı bilirim.
 hakim: Müdafi, sanığa sorularınız?
 T: Kısa ve doğru. Şimdi doğruyu kâğıda bağlayacak soruları sormalıyım.
+N: Savcı bir şey not etti. Kâtip Melek klavyede durdu, sonra yazmaya devam etti: “Sanık, imzanın kendisine ait olmadığını beyan etti.”
 `),
       choices: [
         option('Q_KIMLIK', '“Kimliğinizi nerede taşırsınız; o sabah ne oldu?”', {
@@ -225,7 +228,7 @@ savci: Sanık, 2024 Kurban Bayramı’nda annenizden bu evi satmasını istedini
 hakim: Müdafi?
 T: Sebep. Savcının elinde imzadan başka bir şey varsa, bu.
 `),
-      next: 'C1_04',
+      next: 'C1_03N',
       options: [
         option('C103_A', '“Müvekkil cevap verecek; olanı anlatsın.”', {
           visibleWhen: flag('fact_kavga'),
@@ -267,6 +270,53 @@ T: İtirazım, cevabı daha ağır yaptı.
           responses: B(`
 hakim: Sanık susma hakkını kullanıyor. Tutanağa geçsin.
 N: Savcı hafifçe gülümsedi. Gülümsemesi tutanağa geçmedi; hâkimin gözüne geçti.
+`),
+        }),
+      ],
+    }),
+    court1.objection('C1_03N', {
+      title: 'Şikâyetçinin beyanı',
+      courtStage: 'SANIK_SAVUNMASI',
+      background: 'durusma_salonu',
+      witness: 'nermin',
+      say: S(`
+hakim: Şikâyetçi Nermin Kurt, kürsüye gelin. Annenizin vasisi olarak şikâyetinizi tekrar ediyor musunuz?
+nermin: Ediyorum Sayın Hâkim. Annemin evi, annemin haberi olmadan satıldı. Annem bugün evinin perdesini soruyor. Ne diyeyim ona?
+nermin: Kardeşim evi satmak istemişti. Ben karşı çıktım. Sonra ev satıldı; onun adıyla, onun imzasıyla. Başka ne düşüneyim?
+N: Vedat başını kaldırmadı. Nermin ona bakmadı. Aralarında üç metre vardı; üç metre ve bir bayram sofrası.
+hakim: Müdafi, şikâyetçiye sorunuz var mı?
+T: Bir şikâyetçiyi kürsüde kırmaya çalışmak, bir hâkimi kaybetmenin en kısa yoludur. Ama bir soru, doğru sorulursa, onu da benim tanığım yapabilir.
+`),
+      next: 'C1_04',
+      options: [
+        option('C103N_A', '“2023’teki vekâletnamede satış yetkisi var mıydı? Siz oradaydınız.”', {
+          score: { SORGULAMA: 60 },
+          effects: [inc('pers')],
+          good: 'Şikâyetçinin kendi gözlemi, asıl vekâletnamede satış yetkisi olmadığını doğruladı: suret değiştirilmiş.',
+          category: 'SORGULAMA',
+          responses: B(`
+nermin: Yoktu. Ben oradaydım; noter okudu. Banka, maaş, kira. Annem “ev kalsın” dedi. Noter güldü.
+P: Yani kardeşiniz, annenizin evini satma yetkisine hiç sahip olmadı.
+nermin: …Olmadı. Ama birisi o kâğıda satış yazdı.
+P: Birisi. Teşekkür ederim.
+N: Hâkim “birisi” kelimesinin altını çizdi. Savcı kaşlarını kaldırdı.
+`),
+        }),
+        option('C103N_B', '“Kardeşinizin borçlu olduğunu biliyor muydunuz?”', {
+          score: { SORGULAMA: -40 },
+          effects: [dec('pers')],
+          bad: 'Kendi müvekkilinin sebebini kürsüde büyüttün; soru savcılığın teorisine hizmet etti.',
+          category: 'SORGULAMA',
+          responses: B(`
+nermin: Biliyordum. Herkes biliyordu. Dükkânın borcu vardı; bayramda da onu söyledi zaten.
+savci: Teşekkürler müdafi. Bu soruyu ben soracaktım.
+`),
+        }),
+        option('C103N_C', '“Sorum yok.”', {
+          neutral: 'Şikâyetçiyi kürsüde zorlamadın; ama asıl vekâletnameyi doğrulatma fırsatını da kullanmadın.',
+          responses: B(`
+hakim: Peki. Şikâyetçi yerine geçebilir.
+N: Nermin kürsüden inerken kardeşine baktı; bir an. Sonra yerine oturdu.
 `),
         }),
       ],
@@ -330,6 +380,8 @@ P: Fotoğraf çekerken yüzünü gördünüz mü? Tamamını?
 gulten: Kep vardı. Gözlük. Hastaymış; soğuk almış. Çıkartmak istemedi. Sistem fotoğrafı kabul etti.
 P: Sistem kabul etti. Siz kabul ettiniz mi?
 gulten: Ben… Arkada otuz kişi vardı avukat hanım.
+gulten: Kuyruk uzarsa müdür gelir, “ne oluyor” der. Kimse kuyruk uzasın istemez. Ben de istemedim.
+T: Otuz kişilik bir kuyruk. Bir sistemin onayı. Bir memurun yorgunluğu. Bir sahteci için daha iyi bir sabah düşünülemez.
 `),
         }),
         pressRule('PR_G2', 'G2', {
@@ -348,6 +400,7 @@ T: Numara gerçek. Metin değil. Kimse metne bakmamış.
 P: İmzayı atarken neler oldu? Acele etmeyin. Kalem neredeydi?
 gulten: Kalemlik sağda durur, zincirli. Hep sağda. Aldı. Sonra… bir an durdu. Kalemi tartar gibi. Sonra yazdı.
 gulten: Hangi eliyle… dikkat etmedim. Günde altmış imza avukat hanım. Kimse bana bunu sormadı.
+N: Bir an sustu. Elini kürsünün sağ köşesine götürdü; orada olmayan bir kalemliği arar gibi.
 T: Kimse sormadı. Ben soruyorum.
 `),
         }),
@@ -629,6 +682,10 @@ hakim: Kabul. Kargo şirketine yazı yazılsın; terminal kaydı ve konum dökü
           },
           score: { USUL_BILGISI: 30 },
           effects: [raise('h1_randevu')],
+          responses: B(`
+P: Sayın Hâkim, tapu randevusunun hangi numaradan alındığı ve işlem günü yapılan teyit araması, işlemi kimin yaptırdığını gösterebilir.
+savci: İtirazımız yok. Tapu müdürlüğü bir günde gönderir.
+`),
           good: 'İşlemi kimin yaptırdığının izini süren talep (CMK 177, 332).',
           category: 'USUL_BILGISI',
           responses: B(`
@@ -664,9 +721,44 @@ hakim: Şikâyetçi tapuda değildi müdafi. Neyi anlatacak? Reddedildi.
       lines: B(`
 hakim: Ara karar. Bir: istenen kayıt ve belgeler için müzekkereler yazılmasına. İki: sanık hakkındaki adli kontrol tedbirinin devamına.
 hakim: Üç: duruşmanın 4 Kasım günü saat 10.00’a ertelenmesine. Taraflar hazır; ayrıca tebligata gerek yok.
+N: Kâtip ara kararı yazdırdı. Hâkim kalemini bıraktı, bir an bana baktı. Bir şey demedi. Sonra bir sonraki dosyayı açtı.
+T: Üç hafta. Mahkeme ilk kez sorular soracak; kurumlara, şirketlere, bir laboratuvara. Cevaplar kâğıtla gelecek. Ben de kâğıtla bekleyeceğim.
 `),
     }),
-    decisionNode('C1_ARA2', [{ to: 'ARA_GIRIS_1' }], {
+    story('C1_CAY', {
+      ...HEAR1,
+      title: 'Çay ocağı',
+      background: 'cay_ocagi',
+      lines: B(`
+C#cay_ocagi: ADLİYE ÇAY OCAĞI · ÖĞLEDEN SONRA
+N: Adliyenin bodrumunda, bir merdiven altında, çaydanlığı hiç soğumayan bir ocak. Avukatlar, kâtipler, mübaşirler; herkes ayakta, herkes acelede.
+N: Leyla iki çay aldı, birini bana uzattı. Duruşmayı arka sıradan izlemişti; söylememişti.
+leyla: Fena değildi. Ama “fena değil” bir ceza davasında beraat demek değildir. Bir celseyi kazandın; davayı değil.
+leyla: Şimdi üç hafta var. Mahkeme kurumlara yazı yazacak; cevaplar gelecek. Cevaplar sana yeni sorular getirecek. Hangisinin peşine düşeceksin?
+T: Leyla soruyu sorar ve çayını içer. Cevabı ben veririm; yanlışsa, çayını bitirmeden söyler.
+`),
+      choices: [
+        option('CAY_KAYIT', '“Kayıtların. Kâğıtlar konuşursa insanlar susmak zorunda kalmaz.”', {
+          effects: [set('ara_odak', 'KAYIT')],
+          responses: B(`
+leyla: İyi. Kayıtlar tarafsızdır. Ama dikkat et: kayıtlar bir numara söyler, bir isim söylemez. Numarayı isme sen bağlamazsın; tahta bağlar. Ya da bir tanık.
+leyla: Ve bir isim bulursan…
+P: Peşinden koşmam. Yazarım.
+leyla: Öğreniyorsun.
+`),
+          next: 'ARA_GIRIS_1',
+        }),
+        option('CAY_INSAN', '“İnsanların. Bu ailede herkes bir şey saklıyor.”', {
+          effects: [set('ara_odak', 'INSAN')],
+          responses: B(`
+leyla: Herkes bir şey saklar Deniz. Avukatın işi sırları açmak değil; sırların içinden davayla ilgili olanı ayırmak.
+leyla: İnsanlara git; ama onlara bir şey söyletmek için değil, ne bildiklerini duymak için. Bir sırrı zorla açarsan, içinden yalan çıkar.
+`),
+          next: 'ARA_GIRIS_1',
+        }),
+      ],
+    }),
+    decisionNode('C1_ARA2', [{ to: 'C1_CAY' }], {
       lines: [
         W(
           flag('contra_g3'),

@@ -9,6 +9,8 @@ import { BRIEF, INV, PRO, p1 } from './shared.js';
 const PROLOG = S(`
 C#adliye: 18 ŞUBAT · 11.20 — OSMANGAZİ TAPU MÜDÜRLÜĞÜ
 N: Numaratör öttü. Kırk yedi. Bekleme salonunda ıslak şemsiyeler, floresan ışığı ve kimsenin okumadığı bir duyuru panosu.
+N: Dışarıda şubat yağmuru, Osmangazi’nin çatılarına inatla vuruyordu. İçeride herkes bir kâğıt tutuyordu: tapu, vekâletname, kimlik fotokopisi. Herkes bir şey satıyor ya da alıyordu.
+N: Köşede yaşlı bir adam, torununun hazırladığı dosyayı göğsüne bastırmıştı. Bir kadın telefonda “annemin evi, evet, sonunda” diyordu. Kimse kimsenin yüzüne bakmıyordu.
 N: Gişe camının ardında yorgun bir kadın, sabahtan beri aynı cümleyi kuruyordu. Kırk yedi numara yerinden kalktı.
 N: Kepli bir adam. Koyu camlı gözlük, boynunda gri bir atkı. Montunun omuzlarında yağmur. Gişeye yürürken başını hiç kaldırmadı.
 ?GİŞE: Adınız?
@@ -16,6 +18,7 @@ N: Kepli bir adam. Koyu camlı gözlük, boynunda gri bir atkı. Montunun omuzla
 N: Bir kimlik kartı tezgâhın üstünde kaydı. Arkasından katlanmış bir kâğıt: üstünde mühür, köşesinde “aslı gibidir”.
 ?GİŞE: Vekâleten satış. Annenizin adına. Yevmiye numarasına bakıyorum, bir dakika.
 N: Klavye. Ekranda yeşil bir satır. Kadın kâğıdın ilk satırına baktı, son satırına baktı. Ortasına bakmadı. Arkada otuz kişi vardı.
+N: Ortada bir cümle vardı. Diğerlerinden biraz daha sıkışık, biraz daha koyu. Kimsenin okumadığı cümleler, bir kâğıdın en çok konuşan yeridir.
 ?GİŞE: Kayıt mevcut. İptal yok. Alıcı burada mı?
 ?ALICI: Buradayım hanımefendi. Hayırlı işlerde gecikmeyelim.
 N: İkinci ses pürüzsüzdü; cilalı ayakkabı gibi. Adamın yanında durdu ama ona bakmadı.
@@ -31,6 +34,8 @@ N: İmza. Kısa, hızlı, alışık. Islak mürekkep floresanın altında parlad
 N!fade: Dışarıda yağmur hızlanmıştı. Tapunun saçağı altında iki adam yan yana durdu; biri sigara yaktı, öbürü atkısını burnuna kadar çekti.
 ?ALICI: Hesap kapandı. Bir daha karşıma çıkma.
 ?KEPLİ_ADAM: Çıkmam.
+?ALICI: Bir de şu atkıyı çıkar artık. Bahar geliyor.
+?KEPLİ_ADAM: Bende kış uzun sürer.
 N: Kepli adam yağmura yürüdü. Arkasına bakmadı. Bakmasına gerek yoktu; kâğıt yerine ulaşmıştı.
 N: Senette bir isim vardı. İsim doğruydu. İmza, kâğıda düştüğü anda birinin elinden çıkmıştı. Kimin elinden çıktığını o gün kimse sormadı.
 `);
@@ -40,10 +45,12 @@ C#depo: 19 ŞUBAT · 08.10 — ATEŞ MATBAASI, KAYHAN
 N: Kurşun dizgi makinesi tıkırdıyordu. Mürekkep, toner ve eski kâğıt kokusu. Bir adam, kapının arkasındaki askıdan ceketini aldı, iç cebini yokladı.
 ?BİR_ADAM: Buradaymış. Dün bütün dükkânı aradım. Sevgi’ye bile yazdım.
 N: Kimse cevap vermedi. Makine tıkırdamaya devam etti. Adam kimliği cebine geri koydu ve önlüğünü bağladı.
+N: Bir an kimliğin fotoğrafına baktı; kendi yüzüne. Sonra omuz silkti. İnsan kendi eşyasının bir gece nereye gittiğini merak etmez; geri gelmişse.
 C#ev: 3 MART · 17.40 — HİSAR
 N: Yokuşun başında, ahşap cumbalı bir ev. Bir kadın anahtarı kilide soktu. Çevirdi. Anahtar dönmedi. Kilit yeniydi; parlıyordu.
 ?BİR_KADIN: Bu kilit… Bu kilidi kim taktı?
 N: Telefonunu çıkardı. Parmakları titriyordu. Ekranda bir sayfa açıldı; bir tablo, bir ad, bir tarih.
+N: Yan evin penceresi aralandı; bir komşu başını uzattı, bir şey söylemedi, geri çekildi. Yokuştan bir araba indi, sileceği tek tarafta çalışıyordu.
 ?BİR_KADIN: Satılmış. Annemin evi… satılmış. On sekiz şubatta.
 C#siyah: 7 MAYIS
 N: Bursa Cumhuriyet Başsavcılığı. İddianame. Sanık: Vedat Ateş. Suç: resmî belgede sahtecilik.
@@ -70,6 +77,11 @@ N: Sokaktan bir korna sesi geldi. Sevgi pencereye baktı. Aşağıda bir araban�
 sevgi: Yeğenimiz. Halit ağabeyin oğlu. Getirdi beni; şimdi bekliyor, sağ olsun. O olmasa dükkân dönmezdi bu aylarda.
 sevgi: Vedat gelemedi. Gelemiyor, aslında. Adliyenin önünden geçerken bile yolunu değiştiriyor.
 T: Bir imza. Bir ev. Seksen iki yaşında, evini kaybettiğini bilmeyen bir kadın. Ve beni aşağıda bekleyen bir çift far.
+P: Vedat Bey bu imzayı gördü mü? Kendi gözüyle?
+sevgi: Gördü. Savcılıkta gösterdiler. Bir süre baktı, sonra “bu benim adım ama benim elim değil” dedi. Savcı yazdı mı, bilmiyorum.
+sevgi: Eve geldi, bir kâğıda yüz kere imza attı. Sabaha kadar. Sonra kâğıtları sobaya attı. “Kendi imzamı unutacağım” dedi.
+sevgi.uzgun: Bir adam kendi imzasını unutabilir mi Deniz Hanım? Ben öğretmenim; çocuklara adlarını yazmayı ben öğretirim. Kimse adını unutmaz.
+T: Adını unutmaz. Ama birinin onu kendi adına yazdığını görünce, kendi elinden şüphe edebilir. Bu bir imza davası değil; bir el davası.
 `);
 
 const LEYLA_KAPI = S(`
@@ -78,6 +90,9 @@ leyla: İyi akşamlar Sevgi Hanım. Leyla Erdem. Dosyayı Deniz alacak; ben arka
 leyla: Bir imzanın kime ait olduğunu bilmek için önce kimin olmadığını bilmek gerekir. Bu biraz zaman alır.
 sevgi: Zamanımız var mı?
 leyla: İlk celse on dört ekimde. Üç hafta. Bir imza için az, bir ömür için çok.
+leyla: Bir şey rica edeceğim Sevgi Hanım: kimseyle dosyayı konuşmayın. Aileyle bile. Avukatınız Deniz; dosya onunla sizin aranızda.
+sevgi: Aileyle bile mi? Biz bir aileyiz Leyla Hanım. Matbaada herkes birbirinin her şeyini bilir.
+leyla: O zaman bu dosya o matbaadaki tek sır olsun.
 N: Sevgi klasörü bıraktı, kartviziti üstüne koydu ve gitti. Merdivenlerden inen topuk sesleri, sonra bir araba kapısı, sonra yalnızca yağmur.
 `);
 
@@ -85,6 +100,7 @@ const LEYLA_DEVIR = S(`
 N: Leyla karşıma oturdu. Klasörü kendine çekmedi; parmağının ucuyla bana doğru itti.
 leyla: Okudun mu? Okuma. Önce bana suçu söyle. İddianamede ne var, ceza aralığı ne?
 T: Leyla’nın soruları sınav değildir. Tuzaktır. Tuzağa düşersen, düştüğün yeri hiç unutmazsın.
+N: Pencerenin önünde yağmur sesi. Leyla kalemini parmaklarının arasında çevirdi; bir kez, iki kez. Masasının köşesinde ters duran bir çerçeve. Hiç sormadım.
 `);
 
 export const briefing: CasePart = {
@@ -159,6 +175,8 @@ T: Haklıydı. Bu dosyada her şey bir imzayla başlayacaktı.
 leyla: Doğru. Resmî belgeyi sahte olarak düzenlemek, gerçeğini değiştirmek ya da sahtesini kullanmak. İki yıldan beş yıla.
 leyla: Şuna dikkat et: suret, noterin kendi düzenlediği vekâletnamenin aslı değil; ama noter sureti de resmî belgedir.
 leyla: Savcı “kanun hükmü gereği sahteliği sabit oluncaya kadar geçerli belge” ağırlaştırmasını, 204/3’ü koymamış. Mütalaada hatırlarsa itiraz edersin.
+leyla: Alt sınır iki yıl. Takdiri indirimle bir yıl sekiz aya iner; erteleme mümkün olur. Hükmün açıklanmasının geri bırakılması için ise zararın giderilmesi gerekir. Bir ev, kolay giderilen bir zarar değildir.
+leyla: Bunları müvekkiline şimdi söyleme. Önce imzayı konuş. Rakamlar, insanların kulağında kalır; imzayı unuturlar.
 `),
           next: 'BR_01B',
         }),
@@ -287,6 +305,7 @@ leyla: Makbuz ve irsaliye özeldir. Bilirkişinin hangi kâğıtlara baktığın
           effects: [set('strategy', 'MASUMIYET'), set('strategy_pct', 150), ...p1.start()],
           responses: B(`
 leyla: Cesur. Bir imzayı sahibinden ayırman gerekecek. Bunu yalnızca kâğıtlar yapabilir; sen de, ben de yapamayız.
+leyla: Yarın sabah matbaaya git. Dükkânı gör, insanları gör. Bir imza kâğıtta atılır ama bir dükkânda büyür.
 `),
           next: 'INV_SABAH',
         }),
@@ -325,6 +344,9 @@ N: Kapının yanında on dokuz yaşlarında bir çocuk koli bantlıyordu; bir ku
 vedat: Emre. Çırak. Öğleden sonraları gelir normalde; bugün okul tatil. Emre, avukat hanıma selam ver oğlum.
 emre: Selam abla. Yani hanım. Abla.
 T: Bir matbaa. Üç adam. Bir kurşun makinesi, bir lazer yazıcı. Kâğıt yalan söylemez, derler. Kâğıdı basan söyleyebilir.
+N: Duvarlarda eski afişler: bir 1980 seçim bildirisi, bir düğün davetiyesi örneği, bir sirk afişi. Hepsi bu makinelerden çıkmış. Hepsi biraz sararmış.
+vedat: Bakın, şu afiş. Babam bastı; ben on yaşındaydım, harfleri ben dizdim. Bir harfi ters koymuşum, kimse fark etmedi. Kırk yıldır duvarda; hâlâ ters.
+T: Kırk yıl ters duran bir harf. Kimse fark etmemiş. Bu dükkânda insanlar alışkanlıklarına bakmıyor; alışkanlıkları onlara bakıyor.
 vedat: Ne istiyorsanız bakın. Saklayacak bir şeyimiz yok. Bu dükkânda her şey kâğıtta; kâğıtta yoksa olmamıştır.
 `),
       choices: [cont('SABAH_DEVAM', 'Soruşturmaya başla', 'INV_HUB', { role: 'PRIMARY' })],

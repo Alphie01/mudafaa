@@ -99,6 +99,14 @@
             {
               "speaker": "hakim",
               "text": "Ara kararlara cevaplar geldi; dosyaya konuldu, okundu. Taraflara örnekleri verildi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Hâkim dosyanın kalınlaştığını gösterir gibi elini üstüne koydu. Üç hafta önce ince bir dosyaydı; şimdi bir matbaanın kâğıt topu gibi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Nermin Kurt ön sırada oturuyordu; bu kez kardeşinin arkasında. Sevgi ikinci sırada. Tanık sırasında bir kurye yeleği, bir altın zincir."
             }
           ]
         }
@@ -563,6 +571,11 @@
                 {
                   "speaker": "erol",
                   "text": "Bürodaydık. Kepliydi yine, soğuk almış. Yazdı, imzaladı. Ben makbuza bakarım, imzaya bakmam. Para, kâğıttan önce gelir."
+                },
+                { "speaker": "player", "text": "Hangi eliyle yazdı?" },
+                {
+                  "speaker": "erol",
+                  "text": "Avukat hanım, ben adamın eline değil cebine bakarım. Kalem masadaydı; aldı, yazdı."
                 }
               ]
             }
@@ -601,6 +614,11 @@
                 {
                   "speaker": "erol",
                   "text": "Kep, gözlük, atkı. Hastaydı. Ben adamın kepini mi çıkaracağım? Kimlik vardı, memur baktı. Benim işim değil."
+                },
+                { "speaker": "player", "text": "Daha önce yüz yüze kaç kez gördünüz onu?" },
+                {
+                  "speaker": "erol",
+                  "text": "Bir kere bürodaydı, bir kere tapuda. İkisinde de kepliydi. Grip uzun sürdü herhalde."
                 }
               ]
             }
@@ -1004,7 +1022,7 @@
       "title": "Tanıklar",
       "routes": [
         { "when": { "any": [{ "flag": "tarik_tanik" }, { "hasEvidence": "ev_tutanak" }] }, "to": "C2_03C0" },
-        { "to": "C2_04G" }
+        { "to": "C2_TENEFFUS" }
       ],
       "choices": []
     },
@@ -1183,6 +1201,10 @@
               "text": "Polis belge istediğinde dükkânda ne varsa verildi. Ben o gün… dükkândaydım, sonra hastaneye gittim. Amcam hastanedeydi, babaannem düşmüştü."
             },
             { "speaker": "tarik", "text": "Benim bu işle bir ilgim yok. Amcam da yapmaz. Kim yaptıysa… bilmiyorum." },
+            {
+              "speaker": "narrator",
+              "text": "Vedat yeğenine baktı; gururla. Bir oğula bakar gibi. Sevgi ise bakmadı; ellerine baktı."
+            },
             { "speaker": "hakim", "text": "Müdafi, sorularınız." },
             { "speaker": "narrator", "text": "Tarık kürsünün kenarını tuttu. Sol eliyle. Sağ eli cebindeydi." },
             {
@@ -1357,7 +1379,13 @@
                   "speaker": "player",
                   "text": "Yavaş, kalın, sola yatık olanlar çoğunlukta. Bilirkişiye “Vedat Ateş’in imzası” diye verilenler de bunlar. Tanık bey, bunları kim imzaladı?"
                 },
-                { "speaker": "tarik", "text": "Ben… bilmiyorum. Şoförler bekliyordu. Belki Emre." }
+                { "speaker": "tarik", "text": "Ben… bilmiyorum. Şoförler bekliyordu. Belki Emre." },
+                {
+                  "speaker": "player",
+                  "text": "Emre o aylarda öğleden sonraları geliyordu; irsaliyelerin çoğu sabah tarihli. Tanık bey, sabahları dükkânda kim olurdu?"
+                },
+                { "speaker": "tarik", "text": "Amcam. Ben. …Amcam makinede olurdu." },
+                { "speaker": "narrator", "text": "Cümlenin sonunu kendisi duydu. Bir an gözlerini kapadı." }
               ]
             }
           ],
@@ -1398,6 +1426,11 @@
                 {
                   "speaker": "narrator",
                   "text": "Vedat kürsüye döndü. “Sen mi verdin?” dedi, sesini yükseltmeden. Hâkim ona işaret etti; sustu."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bilirkişinin önüne konan kâğıtları, imzası tartışılan adam değil, başka biri seçmişti. Bir rapor böyle kirlenir; sessizce, bir klasörden.",
+                  "style": "thought"
                 }
               ]
             }
@@ -1437,7 +1470,11 @@
                 },
                 { "speaker": "tarik", "text": "Ben… biri aramıştı, evet. Yanlış numara sandım." },
                 { "speaker": "player", "text": "Kırk bir saniye." },
-                { "speaker": "narrator", "text": "Tarık cevap vermedi. Kâtip yazmayı bıraktı ve bekledi." }
+                { "speaker": "narrator", "text": "Tarık cevap vermedi. Kâtip yazmayı bıraktı ve bekledi." },
+                {
+                  "speaker": "narrator",
+                  "text": "Savcı Orhan Bilgiç kalemini masaya bıraktı ve tanığa döndü. İlk kez. Bir şey sormadı; yalnızca baktı."
+                }
               ]
             }
           ],
@@ -1640,7 +1677,7 @@
       "chapter": "Bölüm 5 · İkinci Celse",
       "eyebrow": "DURUŞMA · 2. CELSE",
       "hud": ["cred", "pers"],
-      "routes": [{ "when": { "cmp": [{ "var": "tarik_c" }, ">=", 3] }, "to": "C2_03H" }, { "to": "C2_04G" }],
+      "routes": [{ "when": { "cmp": [{ "var": "tarik_c" }, ">=", 3] }, "to": "C2_03H" }, { "to": "C2_TENEFFUS" }],
       "choices": []
     },
     {
@@ -1694,7 +1731,9 @@
           ]
         }
       ],
-      "choices": [{ "id": "C203H_DEVAM", "kind": "CONTINUE", "label": "Devam", "role": "PRIMARY", "next": "C2_04G" }],
+      "choices": [
+        { "id": "C203H_DEVAM", "kind": "CONTINUE", "label": "Devam", "role": "PRIMARY", "next": "C2_TENEFFUS" }
+      ],
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
@@ -1705,6 +1744,60 @@
         "witness": "tarik",
         "counsel": "deniz"
       }
+    },
+    {
+      "id": "C2_TENEFFUS",
+      "type": "STORY",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "On beş dakika",
+      "background": "adliye",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ON BEŞ DAKİKA ARA", "bg": "adliye", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Hâkim on beş dakika ara verdi. Koridorda kimse oturmadı. Vedat pencerenin önünde durdu; aşağıda adliyenin otoparkı, bir sıra araba, beyaz bir Doblo."
+            },
+            {
+              "speaker": "vedat",
+              "text": "Bizim Doblo bu. Tarık’la geldik sabah. Ben şoför koltuğuna oturmadım; o sürdü. On dört yıldır o sürer."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Nermin Kurt koridorun öbür ucundan geldi. Kardeşinin yanında durdu. Bir süre ikisi de pencereden aşağı baktı."
+            },
+            {
+              "speaker": "nermin",
+              "text": "Annem dün seni sordu. “Vedat’ım nerede” dedi. “İşte” dedim. Yalan söyledim."
+            },
+            {
+              "speaker": "vedat",
+              "text": "Ben de ona her pazar “evin yerinde” diyorum abla. İkimiz de yalan söylüyoruz."
+            },
+            {
+              "speaker": "nermin",
+              "text": "Bizim ailede herkes birini korumak için yalan söylüyor. Bir tek kâğıtlar söylemiyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sevgi elinde üç bardak suyla geldi. Birini Vedat’a, birini Nermin’e verdi. Üçüncüyü kendisi tutmadı; bana uzattı."
+            },
+            { "speaker": "sevgi", "text": "İçin Deniz Hanım. Sesiniz kısılmış." },
+            {
+              "speaker": "player",
+              "text": "Bir aile, bir koridorda, bir pencerenin önünde. Kimse kimseyi suçlamıyor. Herkes bir şeyi bekliyor. Ben de.",
+              "style": "thought"
+            },
+            { "speaker": "mubasir", "text": "Ateş dosyası! Taraflar salona! Ateş dosyası!" }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "TENEFFUS_DEVAM", "kind": "CONTINUE", "label": "Salona dön", "role": "PRIMARY", "next": "C2_04G" }
+      ]
     },
     {
       "id": "C2_04G",
@@ -1766,6 +1859,10 @@
                 {
                   "speaker": "player",
                   "text": "Suretin matbaada basılmış olması, onu kimin bastığını söylemez. Dükkânın ortak bilgisayarı ve pervazdaki anahtar, herkesin bildiği şeyler."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Savcılığın ihtimali bir ihtimaldir Sayın Hâkim. Adli Tıp’ınki bir sonuç."
                 },
                 { "speaker": "savci", "text": "…Not ediyorum Sayın Hâkim." }
               ]
@@ -2184,6 +2281,16 @@
           "label": "Senedi sol elini kullanan biri imzaladı; sanık sağlak",
           "visibleWhen": { "any": [{ "hasEvidence": "ded_solak" }, { "flag": "contra_g3" }] },
           "cost": [{ "var": "noktalar", "amount": 1 }],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bir: senedi sol elini kullanan biri imzaladı. Mürekkep sağa sıvanmış; tapu memuru kalemin sol ele geçtiğini ve zincirin gerildiğini hatırladı. Sanık sağ elini kullanıyor; bu salonda gördük."
+                }
+              ]
+            }
+          ],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 100 },
@@ -2202,6 +2309,16 @@
           "label": "Adli Tıp raporu: imza sanığın değil",
           "visibleWhen": { "hasEvidence": "ev_rapor2" },
           "cost": [{ "var": "noktalar", "amount": 1 }],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İki: Adli Tıp Kurumu, sanığın noterde, bankada ve nüfusta attığı imzalarla karşılaştırdı. Sonuç açık: senet ve makbuzdaki imzalar sanığın el ürünü değil."
+                }
+              ]
+            }
+          ],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 120 },
@@ -2240,6 +2357,16 @@
             "any": [{ "hasEvidence": "ded_mazeret" }, { "flag": "mazeret_tanik" }, { "flag": "contra_e4" }]
           },
           "cost": [{ "var": "noktalar", "amount": 1 }],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Üç: 11.19 ile 11.37 arasında sanık matbaasının önünde, bir kuryeyle koli bantlıyordu. Bunu bir terminal kaydı ve bir tanık söylüyor. Senet 11.24’te, dört kilometre ötede imzalandı."
+                }
+              ]
+            }
+          ],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 100 },
@@ -2388,6 +2515,10 @@
                 {
                   "speaker": "player",
                   "text": "Müvekkilim ömrü boyunca kâğıt bastı. Bugün bir kâğıt onu basmak istiyor. Kâğıdı tutan eli gördük. O el onun değil."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Savcılık bir sebep gösterdi: bir bayram sofrasında söylenmiş bir cümle. Bir cümle, bir kâğıdı basmaz. Bir kimliği bir ceketten almaz. Bir zinciri germez."
                 },
                 {
                   "speaker": "player",
@@ -2618,6 +2749,14 @@
                 {
                   "speaker": "vedat",
                   "text": "Benim adım o kâğıtta doğru okunuyor. Ama ben dizmedim. Bir isim, bir imza değildir. İmzam benim; adımı herkes yazabilir."
+                },
+                {
+                  "speaker": "vedat",
+                  "text": "Beş ay bir adı taşıdım: sahtekâr. Dükkâna müşteri gelmedi; gelen de kâğıdına bakıp gitti. Benim kâğıdıma bakıp gitti."
+                },
+                {
+                  "speaker": "vedat",
+                  "text": "Kimseye kızgın değilim Sayın Hâkim. Bilmediğim birine kızamam. Bildiğim birine… kızmak istemem."
                 },
                 {
                   "speaker": "vedat",

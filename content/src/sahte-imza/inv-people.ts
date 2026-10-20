@@ -56,6 +56,16 @@ tarik: Ne verdilerse amcamın imzalı kâğıtlarıdır. İrsaliyeleri hep o imz
 T: “Hepsini.” Vedat “çoğunu” demişti. Küçük bir fark. Küçük farklar, büyük kâğıtlara sığar.
 `),
     }),
+    option('TQ_AMCA', '“Amcan nasıl biri?”', {
+      score: { SORGULAMA: 15 },
+      responses: B(`
+tarik: Amcam mı? Babam öldüğünde on dokuz yaşındaydım. Ertesi hafta amcam beni bu dükkâna getirdi, “burada kâğıt kokusu var, ağlarsan kimse anlamaz” dedi.
+tarik: On dört yıl. Bana makineyi öğretti, dijitali ben ona öğrettim. Maaşımı bazen geç verir, ama hiç eksik vermez. Herkese öyledir.
+N: Kalemi çevirmeyi bıraktı. Masadaki kahve lekelerinden birine baktı.
+tarik: O imzayı atmaz avukat hanım. Bunu bilin. Ne olursa olsun.
+T: “Ne olursa olsun.” Sevgi’nin, Vedat’ın, şimdi de yeğenin ağzından aynı güven. Bir aile güveni; kâğıttan daha sağlam görünür, kâğıttan daha çabuk yırtılır.
+`),
+    }),
     back('TARIK_BITIR', 'Teşekkür et, çık'),
   ],
 });
@@ -99,6 +109,15 @@ T: Bir çırağın gizli işi. Saatleri tutmuyor, kâğıdı tutmuyor. Gece yar�
 emre.kizgin: Ne? Ben mi? Abla ben hiçbir şey basmadım! Gece mi? Gece ben evdeyim!
 N: Bant makinesini masaya bıraktı. Kulaklığını taktı. Konuşma bitmişti.
 T: Bir kapıyı çarparak kapattım. Bazı kapılar ikinci kez çalınınca açılmaz.
+`),
+    }),
+    option('EQ_DUKKAN', '“Dükkânda kim ne iş yapar?”', {
+      score: { SORGULAMA: 15 },
+      responses: B(`
+emre: Vedat abi makinede. Kurşun harfler, ofset, hepsi onun. Tarık abi dijitalde; bilgisayar, plotter, kartvizit. Ben koli, kargo, temizlik. Bir de ayak işleri.
+emre: Kargo gelince kim yakındaysa o koşar. Kâğıtçı gelince Tarık abi konuşur, pazarlığı o yapar. Müşteri gelince Vedat abi; müşteri onu sever.
+emre: Bir de çay. Çayı herkes kendisi koyar. O kural; Vedat abinin babasından kalma.
+T: Bir dükkânın haritası. Kim nerede durur, kim neye dokunur. İleride işime yarayacak mı, bilmiyorum; ama kâğıda yazdım.
 `),
     }),
     back('EMRE_BITIR', 'Bırak, çık'),
@@ -246,6 +265,8 @@ hayriye: Sen iyi ayırıyorsun kızım. Vedat’ım da iyi ayırırdı küçükk
 hayriye: Ben imzamı kimseye vermem, bilir misin? Annem öyle derdi: “İmzan senin namusun.” Notere gittik bir kere. Bankacı istedi diye. Vedat’ım için.
 hayriye.uzgun: Evimi de soruyorlar. Evim yerinde mi kızım? Cumbadaki perdeyi kim yıkayacak?
 T: Cevap veremedim. Bir düğmeyi sedeflerin arasına koydum. Doğru yerdi.
+N: Çıkarken bakıcı beni kapıya kadar geçirdi. “İyi yaptınız” dedi, “soru sormadınız. Gelenlerin çoğu sorar; o da her soruda biraz daha kaybolur.”
+T: Bir kadının hafızası bir delil değildir. Bir kadının onuru ise bir avukatın sınırıdır.
 `),
     }),
     option('HQ_IFADE', 'Kısa bir beyan yazıp imzasını al: “Evi satmaya izin vermedim.”', {
@@ -285,6 +306,8 @@ C#buro: HEYKEL — BURSA 14. NOTERLİĞİ
 N: Mermer merdivenler, numaratör, bekleyen bir kalabalık. Arka tarafta, dosya dolaplarının arasında, kravatı kusursuz bağlanmış altmışlık bir adam.
 bulent: Bülent Sarı, başkâtip. Otuz bir yıldır bu dairedeyim avukat hanım. Usul, usul, usul. Usulsüz bir şey sorarsanız usulle reddederim.
 bulent: Vedat Ateş’in vekili olarak geldiğinizi söylediniz. Vekâletname işleminde vekil ilgilidir; ilgilinin avukatı da ilgilidir. Buyurun.
+N: Masasında kusursuz dizilmiş üç kalem, bir mühür, bir mürekkep ıstampası. Mürekkep ıstampasının kapağı kapalıydı; her zaman kapalı olduğu belliydi.
+bulent: Otuz bir yılda iki sahte suret gördüm avukat hanım. İkisinde de mühür basılmıştı. Islak mühür taklit edilemez; mürekkep kâğıda işler, kâğıt onu emer. Toner emilmez; üstünde durur.
 `),
   choices: [
     option('BQ_ARSIV', '“08817 yevmiyeli vekâletnamenin arşiv nüshasını görebilir miyiz?”', {
@@ -391,6 +414,8 @@ T: Beyaz bir Doblo. Matbaanın da beyaz bir Doblo’su var; yanında yazı. Dük
 fikriye: Terzi. Kırk yıl. Benim gelinliğimi o dikti, kızımınkini o dikti. Halit’in cenazesinde dikiş makinesini bir hafta açmadı. Sonra açtı, bir daha kapatmadı.
 fikriye: Vedat her pazar gelirdi, Nermin ayda bir. Halit’in oğlu da gelirdi eskiden; bankaya götürür getirirdi. Sonra o da seyrekleşti.
 T: Bir komşunun hafızası bir aile ağacı gibi. Her dalda bir isim; bazıları sık, bazıları seyrek.
+fikriye: Bir de şunu yaz evladım: Hayriye evini kimseye satmazdı. “Bu evden beni tabutla çıkarırsınız” derdi. Huzurevine bile ağlayarak gitti.
+fikriye: Şimdi ev satılmış, kendisi bilmiyor. Bilmesin. Bilse… bilse o huzurevinin penceresinden atlar.
 `),
     }),
     cont('FQ_EV', 'Evi içeriden gör', 'INV_ARAMA_H', { role: 'PRIMARY' }),

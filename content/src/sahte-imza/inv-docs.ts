@@ -183,6 +183,8 @@ const rapor = documentExam('INV_RAPOR', {
 C#buro: ARSLAN HUKUK — LEYLA’NIN MASASI
 N: On iki sayfa. Büyütülmüş imza fotoğrafları, oklar, açı ölçümleri. Son sayfada tek cümle, kalın harflerle: “AYNI ELİN ÜRÜNÜDÜR.”
 leyla: Raporu sonuç cümlesinden okuma. Ekinden oku. Bilirkişi ne kadar iyi olursa olsun, önüne konan kâğıt kadar iyidir.
+leyla: Bir de şu: bilirkişi, savcının sorduğu soruya cevap verir. Savcı “bu imzalar aynı elden mi” diye sormuş. “Bu imza sanığın mı” diye sormamış. Fark ince; ama ceza bu incelikte yaşar.
+T: Doğru bir cevap, yanlış bir soruya. Raporun eklerini önüme çektim.
 `),
   header: { left: 'GRAFOLOJİ RAPORU · Ö. FARUK DEMİRTAŞ', right: '02.04.2026' },
   columns: [

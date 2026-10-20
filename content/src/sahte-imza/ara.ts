@@ -83,6 +83,7 @@ const girisNodes: NodeDef[] = [
     lines: B(`
 C#buro_gece: 20 EKİM · 18.40 — ARSLAN HUKUK
 N: Müzekkerelere cevaplar beklediğimden çabuk geldi. Şirketler mahkemeye geç kalmayı sevmez; avukatlara geç kalmayı sever.
+N: Üç gün sonra. Bursa’da yağmur bir an bile dinmemişti. Büronun penceresinde aynı çizgiler; masamda yeni bir yığın.
 `),
   }),
   decisionNode('ARA_GIRIS_2', [{ to: 'ARA_GIRIS' }], {
@@ -189,6 +190,7 @@ const hub = {
       `
 C: ARA · GÜN 1/3 · İKİNCİ CELSEYE 15 GÜN
 N: Hedef: gelen kayıtları oku. Vedat o saatte neredeydi? Randevuyu kim aldı?
+T: Birinci celse bir kapıyı araladı. Arkasında bir zincir gerildi. Şimdi o zincirin öbür ucunu tutan eli bulmam gerek; ona dokunmadan.
 `,
     ),
     W(
@@ -196,11 +198,13 @@ N: Hedef: gelen kayıtları oku. Vedat o saatte neredeydi? Randevuyu kim aldı?
       `
 C: ARA · GÜN 2/3 · İKİNCİ CELSEYE 12 GÜN
 N: Hedef: senedi imzalayan el kimin? Kayıtları insanlara, insanları kayıtlara bağla.
+T: Bir kayıt bir insanı göstermez; bir insanın bıraktığı izi gösterir. İzi insana bağlamak benim işim değil; ama izleri yan yana koymak benim işim.
 `,
     ),
     O(`
 C: ARA · GÜN 3/3 · İKİNCİ CELSEYE 9 GÜN
 N: Hedef: tanık listesi, suç duyurusu, tahta. Kürsüde kimi dinleyeceksin; neyi göstereceksin?
+T: Son gün. Dokuz gün sonra bir kürsü. Ne kadar çok şey bildiğim önemli değil; kürsüye neyi taşıyabileceğim önemli.
 `),
   ],
   tabs: hubTabs.map((t) => ({ id: t.id, label: t.label, kind: t.kind, choices: t.choices.map((c) => c.id) })),
@@ -235,6 +239,7 @@ const kargo = retarget(
     lines: B(`
 C#buro_gece: ARSLAN HUKUK — KARGO ŞİRKETİNİN CEVABI
 N: Dört sayfa. Terminal kaydı, GPS dökümü, teslim imzasının ekran görüntüsü. Bir şirketin bir sabahı nasıl hatırladığı.
+N: Ön yazı kısa: “Sayın Mahkemenizin müzekkeresi üzerine ilgili gönderiye ait kayıtlar ekte sunulmuştur. Saygılarımızla.” Altında bir imza; okunaksız, sağa yatık.
 T: İnsan hafızası unutur, süsler, korkar. Bir el terminali yalnızca kaydeder. Bazen bu bir eksiklik; bugün bir lütuf.
 `),
     header: { left: 'HIZLI KARGO · EL TERMİNALİ KAYDI', right: '18.02.2026' },
@@ -423,6 +428,15 @@ sinan: On bir yirmi beş. Tamam abla. On bir yirmi beş derim. Siz bilirsiniz.
 T: Terminal saati yazmıştı. Ben yine de bir insanın ağzına bir saat koydum. Neden?
 `),
     }),
+    option('SQ_IMZA', '“Terminale imzayı nasıl attı?”', {
+      visibleWhen: flag('sinan_gorustu'),
+      score: { SORGULAMA: 20 },
+      responses: B(`
+sinan: Parmağıyla. Herkes öyle atar ama o güldü, “kalem olsa daha güzel atardım” dedi. Sağ elinin işaret parmağıyla; sol elinde bant vardı.
+sinan: Ben imzaya bakmam abla; adresi doğru mu, ona bakarım. Ama o gün baktım, çünkü usta güldü. Kuryeye kimse gülmez.
+T: Sol elinde bant, sağ elinde imza. Bir kurye, kimsenin sormadığı bir ayrıntıyı hatırlıyor; çünkü biri ona gülmüş.
+`),
+    }),
     toHub('SINAN_BITIR', 'Teşekkür et, çık'),
   ],
 });
@@ -476,6 +490,17 @@ T: Bir şey bulursam. Sevgi bir kapının arkasında duruyor ve kapıyı ben aç
       responses: B(`
 sevgi: Geceleri mutfakta imza atıyor. Sağ elle, sol elle. Sonra kâğıtları yakıyor; ocakta. Ben sabah küllerini topluyorum.
 sevgi: Dün “Tarık dükkâna gelmedi” dedi, “hasta”. Tarık hiç hastalanmaz. On dört yıldır bir gün hastalanmadı.
+`),
+    }),
+    option('VQ_KARAR', '“Vedat Bey’e söyleyecek misiniz?”', {
+      visibleWhen: flag('sevgi_anlatti'),
+      score: { SAVUNMA_STRATEJISI: 20 },
+      responses: B(`
+sevgi: Bilmiyorum. Siz ne dersiniz?
+P: Bu sizin kararınız Sevgi Hanım. Ben size ne yapacağınızı söyleyemem. Ama bunun mahkemede bir gün konuşulabileceğini bilmenizi isterim.
+sevgi.uzgun: Mahkemede. Vedat’ın önünde. Bir öğretmen olarak hayatım boyunca çocuklara “doğruyu söyle” dedim. Kendi mutfağımda söyleyemedim.
+N: Kalktı, içerideki odanın kapısını biraz daha araladı. Vedat uyuyordu; sağ eli yastığın altında.
+sevgi: Uyansın. Uyanınca söylerim. Belki.
 `),
     }),
     toHub('SEVGI_BITIR', 'Vedalaş'),
@@ -545,6 +570,15 @@ P: Kimse bilmez. Vedat abin için.
 emre: …Vedat abi için. Tamam. Söylerim.
 N: Kulaklığını takmadı. Bir koliyi bantlamaya başladı; bant iki kere koptu.
 T: Az önce bir çocuğu bir yalanın içine koydum. Bir dava kazanmak için. Bunu kimse görmedi. Ben gördüm.
+`),
+    }),
+    option('MQ_GECE', '“6 Şubat gecesi dükkâna geldin mi?”', {
+      visibleWhen: all(flag('fact_emre_davetiye'), emreHazir),
+      score: { SORGULAMA: 20 },
+      responses: B(`
+emre: Yok abla. O hafta sınav vardı. Ama… sabah geldiğimde kesim masasında kırpıntı vardı. Beyaz, ince kâğıt. 90 gram gibi. Ben kuşe keserim, kalın.
+emre: Bir de makinenin sayacı. Ben her gece sayacı yazarım bir kâğıda, Vedat abi fark etmesin diye. Sabah iki fazlaydı.
+T: Bir çırağın gizli defteri, bir başkasının gizli işini kaydetmiş. Bunu kürsüye taşımayacağım; bir çocuğun sırrı bir savunmanın taşı olmamalı.
 `),
     }),
     toHub('EMRE2_BITIR', 'Çık'),
@@ -736,6 +770,8 @@ T: Ben yaparım. Yapmamam gereken her şeyi, bir gecede.
       responses: B(`
 N: Işığa bir süre daha baktım. Sonra arabaya döndüm. Büroya gittim, bilgisayarı açtım ve yazmaya başladım: tarih, saat, numara, tutanak.
 T: Bir avukatın silahı bir dilekçedir. Ağır değildir; ama doğru yere düşerse bir kapıyı açar. Kapıyı ben açmam; savcı açar.
+N: Gece yarısı Leyla’ya bir mesaj attım: “Kapıyı çalmadım.” Cevap bir dakika sonra geldi: “Biliyorum. Çalsaydın ben de bilirdim.”
+T: Leyla her şeyi bilir. Ya da bilmiyormuş gibi yapmanın ne işe yaradığını bilir.
 `),
       next: HUB,
     }),
@@ -752,12 +788,16 @@ const tanik = story('ARA_TANIK', {
 C#buro: ARSLAN HUKUK — TANIK LİSTESİ
 N: İkinci celseye kimi çağıracağım? Erol Kılınç savcılık tanığı olarak zaten gelecek. Gerisi bana kalmış.
 leyla: Bir tanığı ne söyleyeceği için çağırma. Ne gördüğü için çağır. Bir de: çağırdığın her tanık kürsüde sana da döner.
+leyla: Tanığı kendin götürmek istersen o da mümkün: doğrudan davet. Ama mahkemeye önceden söyle; hâkimler sürprizi sevmez.
 `),
   choices: [
     option('TN_SINAN', 'Kurye Sinan Öztürk', {
       visibleWhen: flag('sinan_razi'),
       score: { USUL_BILGISI: 60 },
       effects: [raise('sinan_tanik')],
+      responses: B(`
+T: Bir kurye. Bir çay. On sekiz dakika. Mahkemeden onu dinlemesini istiyorum; ne söyleyeceğini değil, ne gördüğünü anlatsın diye.
+`),
       good: 'Mazereti bağımsız bir tanıkla desteklemek için tanığın davetini istedin (CMK 177; gerekirse doğrudan davet, CMK 178).',
       category: 'USUL_BILGISI',
       next: '$stay',
@@ -766,6 +806,10 @@ leyla: Bir tanığı ne söyleyeceği için çağırma. Ne gördüğü için ça
       visibleWhen: halka,
       score: { USUL_BILGISI: 60 },
       effects: [raise('tarik_tanik')],
+      responses: B(`
+T: “Mukayese belgelerini teslim eden ve dükkânda bu belgelerin düzenlenişini bilen Tarık Ateş’in tanık olarak dinlenmesi.” Bir cümle; içinde bir suçlama yok. Bir soru var.
+T: Hâkim ona haklarını hatırlatacak. Susabilir. Bunu biliyorum; yine de yazıyorum.
+`),
       good: 'Mukayese malzemesinin kaynağını açıklayabilecek kişinin tanık olarak dinlenmesini istedin (CMK 177). Akraba tanığın çekinme hakkı mahkemece hatırlatılacak (CMK 45).',
       category: 'USUL_BILGISI',
       next: '$stay',
@@ -1067,6 +1111,7 @@ T: Bir kapıyı araladım; içine bir isim koymadım. Belki doğru, belki eksik.
 C#buro_gece: GECE 22.30 — ARSLAN HUKUK
 N: Büroda yalnızdım. Leyla gitmiş, ışığını açık bırakmıştı. Masasında ters duran çerçeve. Hiç sormadım; bu gece de sormadım.
 T: Yarın son gün. Sonra bir kürsü, bir savcı, bir hâkim ve bir soru: kimin eli?
+N: Telefonuma Sevgi’den bir mesaj düştü: “Vedat bu gece mutfakta imza atmıyor. Uyudu.” Altında bir kalp; öğretmenler kalp koymaz, diye düşündüm.
 `),
   ],
   choices: [cont('AA2_DEVAM', 'Yeni güne başla', HUB, { role: 'PRIMARY' })],
@@ -1143,6 +1188,10 @@ N: Pano. Kurşun harfler panonun önünde: ŞETA. Kâğıda basılınca ATEŞ.
         flag('vedat_durust'),
         `T: “Bilmiyorum” dedim Vedat’a. Kurşun harfleri bıraktı. Bir doğruyu taşımak, bir sözü taşımaktan hafiftir.`,
       ),
+      W(
+        cmp(v('ara_odak'), '==', 'INSAN'),
+        `T: “İnsanların peşine düşeceğim” dedim Leyla’ya. Düştüm. Her biri bana bir parça verdi; hiçbiri bütünü vermedi.`,
+      ),
       O(`T: Pano. Raptiyeler. Bir yığın kâğıt. Ve bir el; hâlâ havada, bir kalem tutar gibi.`),
     ],
   }),
@@ -1153,6 +1202,8 @@ N: Pano. Kurşun harfler panonun önünde: ŞETA. Kâğıda basılınca ATEŞ.
     lines: B(`
 N: Leyla odasının kapısında durdu. Paltosunu giymiş, şemsiyesi elinde.
 leyla: Yarın birinin hayatı bozulacak Deniz. Ya müvekkilinin ya da başkasının. Kâğıtların sana hangisini söylediğini dinle.
+leyla: Otuz yıl önce ben de bir gece böyle oturdum. Bir dosya, bir isim, bir sabah. Ertesi gün kazandım. Kazandığım günün akşamı da bir kapı kapandı; bir daha açılmadı.
+N: Masasındaki ters çerçeveye bakmadı. Bakmamaya çalıştı.
 leyla: Ve kimseyi kürsüde kırmaya çalışma. Kâğıtlarını göster; gerisini o kendisi yapar. Ya da yapmaz.
 N!flash: Dışarıda şimşek. Bir an bütün şehir bir fotokopi gibi beyazladı; sonra yeniden yağmur.
 `),

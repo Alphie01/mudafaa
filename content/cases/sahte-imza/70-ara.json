@@ -21,6 +21,10 @@
             {
               "speaker": "narrator",
               "text": "Müzekkerelere cevaplar beklediğimden çabuk geldi. Şirketler mahkemeye geç kalmayı sevmez; avukatlara geç kalmayı sever."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Üç gün sonra. Bursa’da yağmur bir an bile dinmemişti. Büronun penceresinde aynı çizgiler; masamda yeni bir yığın."
             }
           ]
         }
@@ -125,6 +129,11 @@
             {
               "speaker": "narrator",
               "text": "Hedef: gelen kayıtları oku. Vedat o saatte neredeydi? Randevuyu kim aldı?"
+            },
+            {
+              "speaker": "player",
+              "text": "Birinci celse bir kapıyı araladı. Arkasında bir zincir gerildi. Şimdi o zincirin öbür ucunu tutan eli bulmam gerek; ona dokunmadan.",
+              "style": "thought"
             }
           ]
         },
@@ -135,6 +144,11 @@
             {
               "speaker": "narrator",
               "text": "Hedef: senedi imzalayan el kimin? Kayıtları insanlara, insanları kayıtlara bağla."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir kayıt bir insanı göstermez; bir insanın bıraktığı izi gösterir. İzi insana bağlamak benim işim değil; ama izleri yan yana koymak benim işim.",
+              "style": "thought"
             }
           ]
         },
@@ -144,6 +158,11 @@
             {
               "speaker": "narrator",
               "text": "Hedef: tanık listesi, suç duyurusu, tahta. Kürsüde kimi dinleyeceksin; neyi göstereceksin?"
+            },
+            {
+              "speaker": "player",
+              "text": "Son gün. Dokuz gün sonra bir kürsü. Ne kadar çok şey bildiğim önemli değil; kürsüye neyi taşıyabileceğim önemli.",
+              "style": "thought"
             }
           ]
         }
@@ -332,6 +351,10 @@
             {
               "speaker": "narrator",
               "text": "Dört sayfa. Terminal kaydı, GPS dökümü, teslim imzasının ekran görüntüsü. Bir şirketin bir sabahı nasıl hatırladığı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ön yazı kısa: “Sayın Mahkemenizin müzekkeresi üzerine ilgili gönderiye ait kayıtlar ekte sunulmuştur. Saygılarımızla.” Altında bir imza; okunaksız, sağa yatık."
             },
             {
               "speaker": "player",
@@ -703,6 +726,32 @@
             "category": "SAVUNMA_STRATEJISI"
           }
         },
+        {
+          "id": "SQ_IMZA",
+          "kind": "OPTION",
+          "label": "“Terminale imzayı nasıl attı?”",
+          "visibleWhen": { "flag": "sinan_gorustu" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "sinan",
+                  "text": "Parmağıyla. Herkes öyle atar ama o güldü, “kalem olsa daha güzel atardım” dedi. Sağ elinin işaret parmağıyla; sol elinde bant vardı."
+                },
+                {
+                  "speaker": "sinan",
+                  "text": "Ben imzaya bakmam abla; adresi doğru mu, ona bakarım. Ama o gün baktım, çünkü usta güldü. Kuryeye kimse gülmez."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Sol elinde bant, sağ elinde imza. Bir kurye, kimsenin sormadığı bir ayrıntıyı hatırlıyor; çünkü biri ona gülmüş.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+        },
         { "id": "SINAN_BITIR", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "ARA_HUB" }
       ]
     },
@@ -836,6 +885,34 @@
             }
           ],
           "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
+        },
+        {
+          "id": "VQ_KARAR",
+          "kind": "OPTION",
+          "label": "“Vedat Bey’e söyleyecek misiniz?”",
+          "visibleWhen": { "flag": "sevgi_anlatti" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "sevgi", "text": "Bilmiyorum. Siz ne dersiniz?" },
+                {
+                  "speaker": "player",
+                  "text": "Bu sizin kararınız Sevgi Hanım. Ben size ne yapacağınızı söyleyemem. Ama bunun mahkemede bir gün konuşulabileceğini bilmenizi isterim."
+                },
+                {
+                  "speaker": "sevgi",
+                  "expression": "uzgun",
+                  "text": "Mahkemede. Vedat’ın önünde. Bir öğretmen olarak hayatım boyunca çocuklara “doğruyu söyle” dedim. Kendi mutfağımda söyleyemedim."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kalktı, içerideki odanın kapısını biraz daha araladı. Vedat uyuyordu; sağ eli yastığın altında."
+                },
+                { "speaker": "sevgi", "text": "Uyansın. Uyanınca söylerim. Belki." }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 20 }]
         },
         { "id": "SEVGI_BITIR", "kind": "CONTINUE", "label": "Vedalaş", "role": "BACK", "next": "ARA_HUB" }
       ]
@@ -971,6 +1048,37 @@
             "feedback": "O sabah okulda olan bir çocuğa, görmediği bir şeyi tanık olarak söylemesini istedin: yalan tanıklığa azmettirme (TCK 272, 38) ve meslekten çıkarmayı gerektirebilecek bir meslek kuralı ihlali (Av.K. 34).",
             "category": "SAVUNMA_STRATEJISI"
           }
+        },
+        {
+          "id": "MQ_GECE",
+          "kind": "OPTION",
+          "label": "“6 Şubat gecesi dükkâna geldin mi?”",
+          "visibleWhen": {
+            "all": [
+              { "flag": "fact_emre_davetiye" },
+              { "any": [{ "not": { "flag": "emre_kapandi" } }, { "flag": "emre_acildi" }] }
+            ]
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "emre",
+                  "text": "Yok abla. O hafta sınav vardı. Ama… sabah geldiğimde kesim masasında kırpıntı vardı. Beyaz, ince kâğıt. 90 gram gibi. Ben kuşe keserim, kalın."
+                },
+                {
+                  "speaker": "emre",
+                  "text": "Bir de makinenin sayacı. Ben her gece sayacı yazarım bir kâğıda, Vedat abi fark etmesin diye. Sabah iki fazlaydı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir çırağın gizli defteri, bir başkasının gizli işini kaydetmiş. Bunu kürsüye taşımayacağım; bir çocuğun sırrı bir savunmanın taşı olmamalı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
         },
         { "id": "EMRE2_BITIR", "kind": "CONTINUE", "label": "Çık", "role": "BACK", "next": "ARA_HUB" }
       ]
@@ -1387,6 +1495,15 @@
                   "speaker": "player",
                   "text": "Bir avukatın silahı bir dilekçedir. Ağır değildir; ama doğru yere düşerse bir kapıyı açar. Kapıyı ben açmam; savcı açar.",
                   "style": "thought"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Gece yarısı Leyla’ya bir mesaj attım: “Kapıyı çalmadım.” Cevap bir dakika sonra geldi: “Biliyorum. Çalsaydın ben de bilirdim.”"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Leyla her şeyi bilir. Ya da bilmiyormuş gibi yapmanın ne işe yaradığını bilir.",
+                  "style": "thought"
                 }
               ]
             }
@@ -1422,6 +1539,10 @@
             {
               "speaker": "leyla",
               "text": "Bir tanığı ne söyleyeceği için çağırma. Ne gördüğü için çağır. Bir de: çağırdığın her tanık kürsüde sana da döner."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Tanığı kendin götürmek istersen o da mümkün: doğrudan davet. Ama mahkemeye önceden söyle; hâkimler sürprizi sevmez."
             }
           ]
         }
@@ -1432,6 +1553,17 @@
           "kind": "OPTION",
           "label": "Kurye Sinan Öztürk",
           "visibleWhen": { "flag": "sinan_razi" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bir kurye. Bir çay. On sekiz dakika. Mahkemeden onu dinlemesini istiyorum; ne söyleyeceğini değil, ne gördüğünü anlatsın diye.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 60 },
@@ -1450,6 +1582,22 @@
           "visibleWhen": {
             "any": [{ "hasEvidence": "ded_randevu" }, { "hasEvidence": "ev_tutanak" }, { "flag": "fact_solak_tarik" }]
           },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "“Mukayese belgelerini teslim eden ve dükkânda bu belgelerin düzenlenişini bilen Tarık Ateş’in tanık olarak dinlenmesi.” Bir cümle; içinde bir suçlama yok. Bir soru var.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Hâkim ona haklarını hatırlatacak. Susabilir. Bunu biliyorum; yine de yazıyorum.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 60 },
@@ -2390,6 +2538,10 @@
               "speaker": "player",
               "text": "Yarın son gün. Sonra bir kürsü, bir savcı, bir hâkim ve bir soru: kimin eli?",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonuma Sevgi’den bir mesaj düştü: “Vedat bu gece mutfakta imza atmıyor. Uyudu.” Altında bir kalp; öğretmenler kalp koymaz, diye düşündüm."
             }
           ]
         }
@@ -2601,6 +2753,16 @@
           ]
         },
         {
+          "when": { "cmp": [{ "var": "ara_odak" }, "==", "INSAN"] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“İnsanların peşine düşeceğim” dedim Leyla’ya. Düştüm. Her biri bana bir parça verdi; hiçbiri bütünü vermedi.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "lines": [
             {
               "speaker": "player",
@@ -2628,6 +2790,11 @@
               "speaker": "leyla",
               "text": "Yarın birinin hayatı bozulacak Deniz. Ya müvekkilinin ya da başkasının. Kâğıtların sana hangisini söylediğini dinle."
             },
+            {
+              "speaker": "leyla",
+              "text": "Otuz yıl önce ben de bir gece böyle oturdum. Bir dosya, bir isim, bir sabah. Ertesi gün kazandım. Kazandığım günün akşamı da bir kapı kapandı; bir daha açılmadı."
+            },
+            { "speaker": "narrator", "text": "Masasındaki ters çerçeveye bakmadı. Bakmamaya çalıştı." },
             {
               "speaker": "leyla",
               "text": "Ve kimseyi kürsüde kırmaya çalışma. Kâğıtlarını göster; gerisini o kendisi yapar. Ya da yapmaz."

@@ -122,6 +122,8 @@ N: Sevgi ve Vedat kapının yanında. Tarık gelmemişti; “dükkânı açık b
 mubasir: Ateş dosyası! Vedat Ateş! Ateş dosyası!
 hakim: Duruşmaya devam edildi. Sanık ve müdafii hazır, şikâyetçi hazır, Cumhuriyet Savcısı hazır.
 hakim: Ara kararlara cevaplar geldi; dosyaya konuldu, okundu. Taraflara örnekleri verildi.
+N: Hâkim dosyanın kalınlaştığını gösterir gibi elini üstüne koydu. Üç hafta önce ince bir dosyaydı; şimdi bir matbaanın kâğıt topu gibi.
+N: Nermin Kurt ön sırada oturuyordu; bu kez kardeşinin arkasında. Sevgi ikinci sırada. Tanık sırasında bir kurye yeleği, bir altın zincir.
 `),
       choices: [cont('C200_DEVAM', 'Gelen cevaplar', 'C2_00A', { role: 'PRIMARY' })],
     }),
@@ -316,6 +318,8 @@ erol: Telefonda… Tarık konuşurdu çoğu zaman. “Amcam meşgul, makinede”
           effects: [raise('press_e2')],
           responses: B(`
 erol: Bürodaydık. Kepliydi yine, soğuk almış. Yazdı, imzaladı. Ben makbuza bakarım, imzaya bakmam. Para, kâğıttan önce gelir.
+P: Hangi eliyle yazdı?
+erol: Avukat hanım, ben adamın eline değil cebine bakarım. Kalem masadaydı; aldı, yazdı.
 `),
         }),
         pressRule('PR_E3', 'E3', {
@@ -330,6 +334,8 @@ erol: Nakit. Elden. Bir çantayla. Kimin cebine girdiğini sormak bana düşmez 
           effects: [raise('press_e4')],
           responses: B(`
 erol: Kep, gözlük, atkı. Hastaydı. Ben adamın kepini mi çıkaracağım? Kimlik vardı, memur baktı. Benim işim değil.
+P: Daha önce yüz yüze kaç kez gördünüz onu?
+erol: Bir kere bürodaydı, bir kere tapuda. İkisinde de kepliydi. Grip uzun sürdü herhalde.
 `),
         }),
         pressRule('PR_E5', 'E5', {
@@ -456,10 +462,14 @@ T: “Hesap kapandı.” Bu cümleyi bir yerde duymuştum. Bir tapunun saçağı
 `),
       choices: [cont('C202K_DEVAM', 'Devam', 'C2_02', { role: 'PRIMARY' })],
     }),
-    decisionNode('C2_03G', [{ when: any(flag('tarik_tanik'), has('ev_tutanak')), to: 'C2_03C0' }, { to: 'C2_04G' }], {
-      ...court2.base,
-      title: 'Tanıklar',
-    }),
+    decisionNode(
+      'C2_03G',
+      [{ when: any(flag('tarik_tanik'), has('ev_tutanak')), to: 'C2_03C0' }, { to: 'C2_TENEFFUS' }],
+      {
+        ...court2.base,
+        title: 'Tanıklar',
+      },
+    ),
     decisionNode('C2_03C0', [{ to: 'C2_03C' }], {
       lines: [
         W(
@@ -537,6 +547,7 @@ hakim: Anlatın.
 tarik: Ben on dört yıldır amcamın yanındayım. Dükkân benim evim. Amcam dürüst adamdır; bir kâğıda bile yanlış tarih atmaz.
 tarik: Polis belge istediğinde dükkânda ne varsa verildi. Ben o gün… dükkândaydım, sonra hastaneye gittim. Amcam hastanedeydi, babaannem düşmüştü.
 tarik: Benim bu işle bir ilgim yok. Amcam da yapmaz. Kim yaptıysa… bilmiyorum.
+N: Vedat yeğenine baktı; gururla. Bir oğula bakar gibi. Sevgi ise bakmadı; ellerine baktı.
 hakim: Müdafi, sorularınız.
 N: Tarık kürsünün kenarını tuttu. Sol eliyle. Sağ eli cebindeydi.
 T: Kimseyi kırmaya çalışma. Kâğıtlarını göster; gerisini o kendisi yapar. Ya da yapmaz.
@@ -614,6 +625,9 @@ N: Kâtibin uzattığı kâğıda adını yazdı; sağ eliyle. Yavaş, dikkatli,
 P: Sayın Hâkim, irsaliye karbonları. İki ayrı el. Akıcı ve sağa yatık olanlar azınlıkta; Vedat Bey’in bu salonda attığı imzaya benziyorlar.
 P: Yavaş, kalın, sola yatık olanlar çoğunlukta. Bilirkişiye “Vedat Ateş’in imzası” diye verilenler de bunlar. Tanık bey, bunları kim imzaladı?
 tarik: Ben… bilmiyorum. Şoförler bekliyordu. Belki Emre.
+P: Emre o aylarda öğleden sonraları geliyordu; irsaliyelerin çoğu sabah tarihli. Tanık bey, sabahları dükkânda kim olurdu?
+tarik: Amcam. Ben. …Amcam makinede olurdu.
+N: Cümlenin sonunu kendisi duydu. Bir an gözlerini kapadı.
 `),
         }),
         presentRule('PS_T2', 'T2', ['ev_tutanak'], {
@@ -625,6 +639,7 @@ P: Kolluğun asıl teslim tutanağı, 20 Mart. “On dört irsaliye ve altı kar
 P: Bilirkişiye giden kâğıtları siz seçtiniz Tarık Bey.
 tarik: Polis istedi. Ben… klasörden aldım. Ne bulduysam. Amcam hastanedeydi; ben ne yapacaktım?
 N: Vedat kürsüye döndü. “Sen mi verdin?” dedi, sesini yükseltmeden. Hâkim ona işaret etti; sustu.
+T: Bilirkişinin önüne konan kâğıtları, imzası tartışılan adam değil, başka biri seçmişti. Bir rapor böyle kirlenir; sessizce, bir klasörden.
 `),
         }),
         presentRule('PS_T3', 'T3', ['ded_randevu'], {
@@ -637,6 +652,7 @@ P: “Randevunuz 11.15’te, kimliğinizle gelin.” İnegöl’de kâğıtçıd
 tarik: Ben… biri aramıştı, evet. Yanlış numara sandım.
 P: Kırk bir saniye.
 N: Tarık cevap vermedi. Kâtip yazmayı bıraktı ve bekledi.
+N: Savcı Orhan Bilgiç kalemini masaya bıraktı ve tanığa döndü. İlk kez. Bir şey sormadı; yalnızca baktı.
 `),
         }),
         presentRule('PS_T3X', 'T3X', ['ded_randevu'], {
@@ -699,7 +715,7 @@ hakim: İtiraz reddedildi. Kendi tanığınıza mı itiraz ediyorsunuz müdafi?
       }),
       finish: { id: 'C203_BITIR', next: 'C2_03F' },
     }),
-    decisionNode('C2_03F', [{ when: cmp(v('tarik_c'), '>=', 3), to: 'C2_03H' }, { to: 'C2_04G' }], {
+    decisionNode('C2_03F', [{ when: cmp(v('tarik_c'), '>=', 3), to: 'C2_03H' }, { to: 'C2_TENEFFUS' }], {
       ...court2.base,
     }),
     court2.stage('C2_03H', {
@@ -719,7 +735,26 @@ N: Kürsüden indi. Salonun arka kapısına yürüdü; kimse onu durdurmadı. Ka
 N: Vedat sağ elini masanın üstüne koydu. Sonra sol elini. İkisine birden baktı.
 T: Bir sessizlik bir delil değildir. Ama sorulmuş sorular tutanakta kalır. Ve cevapsız kalan her soru, kendi cevabını bir yere yazar.
 `),
-      choices: [cont('C203H_DEVAM', 'Devam', 'C2_04G', { role: 'PRIMARY' })],
+      choices: [cont('C203H_DEVAM', 'Devam', 'C2_TENEFFUS', { role: 'PRIMARY' })],
+    }),
+    story('C2_TENEFFUS', {
+      ...court2.base,
+      title: 'On beş dakika',
+      background: 'adliye',
+      lines: B(`
+C#adliye: ADLİYE KORİDORU · ON BEŞ DAKİKA ARA
+N: Hâkim on beş dakika ara verdi. Koridorda kimse oturmadı. Vedat pencerenin önünde durdu; aşağıda adliyenin otoparkı, bir sıra araba, beyaz bir Doblo.
+vedat: Bizim Doblo bu. Tarık’la geldik sabah. Ben şoför koltuğuna oturmadım; o sürdü. On dört yıldır o sürer.
+N: Nermin Kurt koridorun öbür ucundan geldi. Kardeşinin yanında durdu. Bir süre ikisi de pencereden aşağı baktı.
+nermin: Annem dün seni sordu. “Vedat’ım nerede” dedi. “İşte” dedim. Yalan söyledim.
+vedat: Ben de ona her pazar “evin yerinde” diyorum abla. İkimiz de yalan söylüyoruz.
+nermin: Bizim ailede herkes birini korumak için yalan söylüyor. Bir tek kâğıtlar söylemiyor.
+N: Sevgi elinde üç bardak suyla geldi. Birini Vedat’a, birini Nermin’e verdi. Üçüncüyü kendisi tutmadı; bana uzattı.
+sevgi: İçin Deniz Hanım. Sesiniz kısılmış.
+T: Bir aile, bir koridorda, bir pencerenin önünde. Kimse kimseyi suçlamıyor. Herkes bir şeyi bekliyor. Ben de.
+mubasir: Ateş dosyası! Taraflar salona! Ateş dosyası!
+`),
+      choices: [cont('TENEFFUS_DEVAM', 'Salona dön', 'C2_04G', { role: 'PRIMARY' })],
     }),
     decisionNode('C2_04G', [{ when: has('ev_rapor2'), to: 'C2_04A' }, { to: 'C2_04B' }], { ...court2.base }),
     court2.objection('C2_04A', {
@@ -746,6 +781,7 @@ hakim: Müdafi, rapora ve iki rapor arasındaki çelişkiye diyeceğiniz?
 P: Sayın Hâkim, ilk rapor kaynağı belirsiz, iki ayrı elden çıkmış özel belgelerle yapıldı. Adli Tıp ise sanığın noterde, bankada, nüfusta attığı imzalarla.
 P: Sonuç: senetteki imza sanığın değil. İlk rapor da aslında yanlış değil; senedi atan elin irsaliyeleri de attığını söylüyor. O el, sanığın eli değil.
 P: Suretin matbaada basılmış olması, onu kimin bastığını söylemez. Dükkânın ortak bilgisayarı ve pervazdaki anahtar, herkesin bildiği şeyler.
+P: Savcılığın ihtimali bir ihtimaldir Sayın Hâkim. Adli Tıp’ınki bir sonuç.
 savci: …Not ediyorum Sayın Hâkim.
 `),
           },
@@ -888,6 +924,9 @@ T: Üç dayanak. En güçlü üçü. Bir savunma, söylediği her şey kadar sö
           cost: pointCost,
           score: { SAVUNMA_STRATEJISI: 100 },
           effects: [inc('pers'), raise('arg_solak')],
+          responses: B(`
+P: Bir: senedi sol elini kullanan biri imzaladı. Mürekkep sağa sıvanmış; tapu memuru kalemin sol ele geçtiğini ve zincirin gerildiğini hatırladı. Sanık sağ elini kullanıyor; bu salonda gördük.
+`),
           good: 'Tanığın hatırladığı sol el, sıvanmış mürekkep ve sanığın sağ eli: imzanın sanığa ait olmadığına ilişkin üç bağımsız işaret.',
           category: 'SAVUNMA_STRATEJISI',
           next: '$stay',
@@ -897,6 +936,9 @@ T: Üç dayanak. En güçlü üçü. Bir savunma, söylediği her şey kadar sö
           cost: pointCost,
           score: { SAVUNMA_STRATEJISI: 120 },
           effects: [inc('pers'), raise('arg_rapor')],
+          responses: B(`
+P: İki: Adli Tıp Kurumu, sanığın noterde, bankada ve nüfusta attığı imzalarla karşılaştırdı. Sonuç açık: senet ve makbuzdaki imzalar sanığın el ürünü değil.
+`),
           good: 'Tartışmasız mukayese imzalarına dayanan resmî rapor, davanın tek ağır delilini çökertiyor.',
           category: 'SAVUNMA_STRATEJISI',
           next: '$stay',
@@ -915,6 +957,9 @@ T: Üç dayanak. En güçlü üçü. Bir savunma, söylediği her şey kadar sö
           cost: pointCost,
           score: { SAVUNMA_STRATEJISI: 100 },
           effects: [inc('pers'), raise('arg_mazeret')],
+          responses: B(`
+P: Üç: 11.19 ile 11.37 arasında sanık matbaasının önünde, bir kuryeyle koli bantlıyordu. Bunu bir terminal kaydı ve bir tanık söylüyor. Senet 11.24’te, dört kilometre ötede imzalandı.
+`),
           good: 'Bağımsız bir kayıt ve tanıkla desteklenen mazeret: sanık 11.24’te tapuda olamaz.',
           category: 'SAVUNMA_STRATEJISI',
           next: '$stay',
@@ -981,6 +1026,7 @@ T: Ne istiyorum? Bunu yüksek sesle söylemeden önce kendime söylemeliyim.
 P: Sayın Hâkim. Bu dosyada bir ad var, bir de bir el. Ad doğru: Vedat Ateş. El yanlış.
 P: Senedi imzalayan el, kalemi sol eline geçirdi ve zinciri gerdi. Vedat Ateş o saatte dört kilometre ötede, bir kuryeyle koli bantlıyordu.
 P: Müvekkilim ömrü boyunca kâğıt bastı. Bugün bir kâğıt onu basmak istiyor. Kâğıdı tutan eli gördük. O el onun değil.
+P: Savcılık bir sebep gösterdi: bir bayram sofrasında söylenmiş bir cümle. Bir cümle, bir kâğıdı basmaz. Bir kimliği bir ceketten almaz. Bir zinciri germez.
 P: Sanığın üzerine atılı suçu işlemediği sabit olduğundan beraatini; mahkeme aksi kanaatteyse, mahkûmiyete yeter delil bulunmadığından beraatini talep ediyoruz.
 `),
         }),
@@ -1069,6 +1115,8 @@ N: Vedat ayağa kalktı. Bana baktı; bir şey söylememi bekler gibi.
           responses: B(`
 vedat: Sayın Hâkim. Ben matbaacıyım. Babam da matbaacıydı. Bize bir şey öğretti: harfler ters dizilir, kâğıda basınca doğru okunur.
 vedat: Benim adım o kâğıtta doğru okunuyor. Ama ben dizmedim. Bir isim, bir imza değildir. İmzam benim; adımı herkes yazabilir.
+vedat: Beş ay bir adı taşıdım: sahtekâr. Dükkâna müşteri gelmedi; gelen de kâğıdına bakıp gitti. Benim kâğıdıma bakıp gitti.
+vedat: Kimseye kızgın değilim Sayın Hâkim. Bilmediğim birine kızamam. Bildiğim birine… kızmak istemem.
 vedat: Annemin evini geri istiyorum. Benim için değil. Annem perdesini soruyor.
 `),
         }),

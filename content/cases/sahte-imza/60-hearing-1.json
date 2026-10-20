@@ -218,6 +218,10 @@
               "text": "Sanığın kimlik tespiti yapıldı. İddianame okunsun. Sayın Savcı, özetleyebilirsiniz."
             },
             {
+              "speaker": "narrator",
+              "text": "Hâkim Selma Akgün ellili yaşlarında, gözlüğünü burnunun ucuna indirmiş, dosyayı sayfa sayfa çeviren bir kadındı. Her sayfayı okuyordu; bunu görmek bile umut vericiydi."
+            },
+            {
               "speaker": "savci",
               "text": "Sanık, annesi Hayriye Ateş’e ait Hisar’daki taşınmazı, gerçekte satış yetkisi içermeyen noter vekâletnamesinden satış yetkili sahte bir suret düzenleyerek"
             },
@@ -319,6 +323,10 @@
               "speaker": "player",
               "text": "Kısa ve doğru. Şimdi doğruyu kâğıda bağlayacak soruları sormalıyım.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı bir şey not etti. Kâtip Melek klavyede durdu, sonra yazmaya devam etti: “Sanık, imzanın kendisine ait olmadığını beyan etti.”"
             }
           ]
         }
@@ -498,7 +506,7 @@
             "feedback": "Bildiğin bir zaafı saklamadın; müvekkil hazırlıklıydı ve doğruyu kendi ağzından anlattı. Sebep, eylemi ispat etmez.",
             "category": "SAVUNMA_STRATEJISI"
           },
-          "next": "C1_04"
+          "next": "C1_03N"
         },
         {
           "id": "C103_B",
@@ -522,7 +530,7 @@
             "q": "NEUTRAL",
             "feedback": "Müvekkilin cevap vermesi doğru; ama bu konuyu önceden bilmediğin için hazırlıksız yakalandın."
           },
-          "next": "C1_04"
+          "next": "C1_03N"
         },
         {
           "id": "C103_C",
@@ -548,7 +556,7 @@
             "feedback": "Sanığın eyleme ilişkin olası sebebi suçlamayla ilgilidir; itiraz dayanaksızdı ve saklanacak bir şey var izlenimi verdi.",
             "category": "USUL_BILGISI"
           },
-          "next": "C1_04"
+          "next": "C1_03N"
         },
         {
           "id": "C103_D",
@@ -569,6 +577,133 @@
           "quality": {
             "q": "NEUTRAL",
             "feedback": "Susma hakkı kullanılabilir (CMK 147/1-e) ve aleyhe yorumlanamaz; ama hâkim yine de insandır."
+          },
+          "next": "C1_03N"
+        }
+      ]
+    },
+    {
+      "id": "C1_03N",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "chapter": "Bölüm 3 · Birinci Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Şikâyetçinin beyanı",
+      "courtStage": "SANIK_SAVUNMASI",
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "hakim",
+              "text": "Şikâyetçi Nermin Kurt, kürsüye gelin. Annenizin vasisi olarak şikâyetinizi tekrar ediyor musunuz?"
+            },
+            {
+              "speaker": "nermin",
+              "text": "Ediyorum Sayın Hâkim. Annemin evi, annemin haberi olmadan satıldı. Annem bugün evinin perdesini soruyor. Ne diyeyim ona?"
+            },
+            {
+              "speaker": "nermin",
+              "text": "Kardeşim evi satmak istemişti. Ben karşı çıktım. Sonra ev satıldı; onun adıyla, onun imzasıyla. Başka ne düşüneyim?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Vedat başını kaldırmadı. Nermin ona bakmadı. Aralarında üç metre vardı; üç metre ve bir bayram sofrası."
+            },
+            { "speaker": "hakim", "text": "Müdafi, şikâyetçiye sorunuz var mı?" },
+            {
+              "speaker": "player",
+              "text": "Bir şikâyetçiyi kürsüde kırmaya çalışmak, bir hâkimi kaybetmenin en kısa yoludur. Ama bir soru, doğru sorulursa, onu da benim tanığım yapabilir.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.15 },
+          { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
+          { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.85 }
+        ],
+        "witness": "nermin",
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "C103N_A",
+          "kind": "OPTION",
+          "label": "“2023’teki vekâletnamede satış yetkisi var mıydı? Siz oradaydınız.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "nermin",
+                  "text": "Yoktu. Ben oradaydım; noter okudu. Banka, maaş, kira. Annem “ev kalsın” dedi. Noter güldü."
+                },
+                { "speaker": "player", "text": "Yani kardeşiniz, annenizin evini satma yetkisine hiç sahip olmadı." },
+                { "speaker": "nermin", "text": "…Olmadı. Ama birisi o kâğıda satış yazdı." },
+                { "speaker": "player", "text": "Birisi. Teşekkür ederim." },
+                { "speaker": "narrator", "text": "Hâkim “birisi” kelimesinin altını çizdi. Savcı kaşlarını kaldırdı." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 60 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Şikâyetçinin kendi gözlemi, asıl vekâletnamede satış yetkisi olmadığını doğruladı: suret değiştirilmiş.",
+            "category": "SORGULAMA"
+          },
+          "next": "C1_04"
+        },
+        {
+          "id": "C103N_B",
+          "kind": "OPTION",
+          "label": "“Kardeşinizin borçlu olduğunu biliyor muydunuz?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "nermin",
+                  "text": "Biliyordum. Herkes biliyordu. Dükkânın borcu vardı; bayramda da onu söyledi zaten."
+                },
+                { "speaker": "savci", "text": "Teşekkürler müdafi. Bu soruyu ben soracaktım." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -40 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Kendi müvekkilinin sebebini kürsüde büyüttün; soru savcılığın teorisine hizmet etti.",
+            "category": "SORGULAMA"
+          },
+          "next": "C1_04"
+        },
+        {
+          "id": "C103N_C",
+          "kind": "OPTION",
+          "label": "“Sorum yok.”",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "hakim", "text": "Peki. Şikâyetçi yerine geçebilir." },
+                {
+                  "speaker": "narrator",
+                  "text": "Nermin kürsüden inerken kardeşine baktı; bir an. Sonra yerine oturdu."
+                }
+              ]
+            }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Şikâyetçiyi kürsüde zorlamadın; ama asıl vekâletnameyi doğrulatma fırsatını da kullanmadın."
           },
           "next": "C1_04"
         }
@@ -720,7 +855,16 @@
                   "text": "Kep vardı. Gözlük. Hastaymış; soğuk almış. Çıkartmak istemedi. Sistem fotoğrafı kabul etti."
                 },
                 { "speaker": "player", "text": "Sistem kabul etti. Siz kabul ettiniz mi?" },
-                { "speaker": "gulten", "text": "Ben… Arkada otuz kişi vardı avukat hanım." }
+                { "speaker": "gulten", "text": "Ben… Arkada otuz kişi vardı avukat hanım." },
+                {
+                  "speaker": "gulten",
+                  "text": "Kuyruk uzarsa müdür gelir, “ne oluyor” der. Kimse kuyruk uzasın istemez. Ben de istemedim."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Otuz kişilik bir kuyruk. Bir sistemin onayı. Bir memurun yorgunluğu. Bir sahteci için daha iyi bir sabah düşünülemez.",
+                  "style": "thought"
+                }
               ]
             }
           ],
@@ -765,6 +909,10 @@
                 {
                   "speaker": "gulten",
                   "text": "Hangi eliyle… dikkat etmedim. Günde altmış imza avukat hanım. Kimse bana bunu sormadı."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Bir an sustu. Elini kürsünün sağ köşesine götürdü; orada olmayan bir kalemliği arar gibi."
                 },
                 { "speaker": "player", "text": "Kimse sormadı. Ben soruyorum.", "style": "thought" }
               ]
@@ -1619,12 +1767,100 @@
             {
               "speaker": "hakim",
               "text": "Üç: duruşmanın 4 Kasım günü saat 10.00’a ertelenmesine. Taraflar hazır; ayrıca tebligata gerek yok."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kâtip ara kararı yazdırdı. Hâkim kalemini bıraktı, bir an bana baktı. Bir şey demedi. Sonra bir sonraki dosyayı açtı."
+            },
+            {
+              "speaker": "player",
+              "text": "Üç hafta. Mahkeme ilk kez sorular soracak; kurumlara, şirketlere, bir laboratuvara. Cevaplar kâğıtla gelecek. Ben de kâğıtla bekleyeceğim.",
+              "style": "thought"
             }
           ]
         }
       ],
       "routes": [{ "to": "C1_ARA2" }],
       "choices": []
+    },
+    {
+      "id": "C1_CAY",
+      "type": "STORY",
+      "chapter": "Bölüm 3 · Birinci Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "title": "Çay ocağı",
+      "background": "cay_ocagi",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE ÇAY OCAĞI · ÖĞLEDEN SONRA", "bg": "cay_ocagi", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Adliyenin bodrumunda, bir merdiven altında, çaydanlığı hiç soğumayan bir ocak. Avukatlar, kâtipler, mübaşirler; herkes ayakta, herkes acelede."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla iki çay aldı, birini bana uzattı. Duruşmayı arka sıradan izlemişti; söylememişti."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Fena değildi. Ama “fena değil” bir ceza davasında beraat demek değildir. Bir celseyi kazandın; davayı değil."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Şimdi üç hafta var. Mahkeme kurumlara yazı yazacak; cevaplar gelecek. Cevaplar sana yeni sorular getirecek. Hangisinin peşine düşeceksin?"
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla soruyu sorar ve çayını içer. Cevabı ben veririm; yanlışsa, çayını bitirmeden söyler.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "CAY_KAYIT",
+          "kind": "OPTION",
+          "label": "“Kayıtların. Kâğıtlar konuşursa insanlar susmak zorunda kalmaz.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "İyi. Kayıtlar tarafsızdır. Ama dikkat et: kayıtlar bir numara söyler, bir isim söylemez. Numarayı isme sen bağlamazsın; tahta bağlar. Ya da bir tanık."
+                },
+                { "speaker": "leyla", "text": "Ve bir isim bulursan…" },
+                { "speaker": "player", "text": "Peşinden koşmam. Yazarım." },
+                { "speaker": "leyla", "text": "Öğreniyorsun." }
+              ]
+            }
+          ],
+          "next": "ARA_GIRIS_1",
+          "effects": [{ "type": "VAR", "var": "ara_odak", "op": "set", "value": "KAYIT" }]
+        },
+        {
+          "id": "CAY_INSAN",
+          "kind": "OPTION",
+          "label": "“İnsanların. Bu ailede herkes bir şey saklıyor.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Herkes bir şey saklar Deniz. Avukatın işi sırları açmak değil; sırların içinden davayla ilgili olanı ayırmak."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "İnsanlara git; ama onlara bir şey söyletmek için değil, ne bildiklerini duymak için. Bir sırrı zorla açarsan, içinden yalan çıkar."
+                }
+              ]
+            }
+          ],
+          "next": "ARA_GIRIS_1",
+          "effects": [{ "type": "VAR", "var": "ara_odak", "op": "set", "value": "INSAN" }]
+        }
+      ]
     },
     {
       "id": "C1_ARA2",
@@ -1667,7 +1903,7 @@
           ]
         }
       ],
-      "routes": [{ "to": "ARA_GIRIS_1" }],
+      "routes": [{ "to": "C1_CAY" }],
       "choices": []
     }
   ]

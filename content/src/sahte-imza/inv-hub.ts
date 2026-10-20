@@ -118,6 +118,7 @@ const hubLines = [
     `
 C: GÜN 1/4 · BİRİNCİ CELSEYE 21 GÜN
 N: Hedef: senedi imzalayan kimdi? O sabah Vedat neredeydi?
+T: Masamda dört kâğıt ve üç hafta. Bir kâğıdı okumak bir saat sürer; anlamak bir ömür. Bugün okumakla başlayacağım.
 `,
   ),
   W(
@@ -125,6 +126,7 @@ N: Hedef: senedi imzalayan kimdi? O sabah Vedat neredeydi?
     `
 C: GÜN 2/4 · BİRİNCİ CELSEYE 18 GÜN
 N: Hedef: suret nereden çıktı? Noterin arşivi ne diyor?
+T: Dün bir imzaya baktım. Bugün o imzanın dayandığı kâğıda bakacağım. Sahte bir kâğıt, sahte bir imzadan daha çok şey anlatır; çünkü onu biri tasarlamıştır.
 `,
   ),
   W(
@@ -132,11 +134,13 @@ N: Hedef: suret nereden çıktı? Noterin arşivi ne diyor?
     `
 C: GÜN 3/4 · BİRİNCİ CELSEYE 15 GÜN
 N: Hedef: raporun dayandığı kâğıtlar. Bilirkişi neye baktı, kim verdi?
+T: Bir rapor, bir binanın çatısı gibidir. Herkes çatıya bakar. Ben temele bakacağım: ekler, listeler, tutanaklar.
 `,
   ),
   O(`
 C: GÜN 4/4 · BİRİNCİ CELSEYE 12 GÜN
 N: Hedef: dilekçe ve tahta. Mahkemeden ne isteyeceksin? Kürsüde neyi göstereceksin?
+T: Son gün. Bildiklerimi mahkemenin bilebileceği şeylere çevirmem gerek. Bir avukatın bildiği, kâğıda dönüşmedikçe bir sırdır.
 `),
 ];
 
@@ -202,6 +206,7 @@ C#buro: ARSLAN HUKUK — DİLEKÇE
 N: Boş bir sayfa. “Bursa 7. Asliye Ceza Mahkemesi Hâkimliği’ne.” İmleç yanıp sönüyor.
 T: Üç talep. Mahkeme her talebi kabul etmez; her gereksiz talep, gerçek talebin ağırlığını azaltır.
 leyla: Ne istediğini değil, neden istediğini yaz. Hâkim “bu delil neyi ispat edecek” diye sorar; cevabın dilekçede olsun.
+leyla: Kanun, taleplerin duruşmadan önce verilmesini ister. Duruşmada sözlü de istersin; ama hâkim celseye hazırlıksız gelir. Hazırlıksız hâkim, “bir sonraki celseye bakarız” der.
 `,
     ),
     O(`
@@ -215,6 +220,10 @@ N: Dilekçe uzuyor. İmleç hâlâ yanıp sönüyor.
       maxUses: 1,
       score: { USUL_BILGISI: 80 },
       effects: [raise('dil_bilirkisi'), raise('dil_any')],
+      responses: B(`
+T: Birinci talep: Adli Tıp Kurumu, resmî mukayese imzaları. Noterdeki imza beyannamesi, bankadaki imza kartonu, nüfustaki başvuru formu. Kimin attığı belli olan imzalar.
+T: “Mukayese belgeleri sanığın kabul ettiği ya da resmî makam önünde attığı imzalar değildir.” Bu cümleyi üç kez yazdım, ikisini sildim.
+`),
       good: 'Mukayese imzası tartışmasız olmalıdır: resmî makam önünde atılmış ya da sanıkça kabul edilmiş imzalarla yeni inceleme istenir (CMK 63, 67/5, 177).',
       category: 'USUL_BILGISI',
       next: '$stay',
@@ -225,6 +234,10 @@ N: Dilekçe uzuyor. İmleç hâlâ yanıp sönüyor.
       maxUses: 1,
       score: { USUL_BILGISI: 60 },
       effects: [raise('dil_kargo'), raise('dil_any')],
+      responses: B(`
+T: İkinci talep: kargo şirketinin 18 Şubat kaydı. Terminal saati, konum, teslim imzası. “Sanığın işlem saatinde işyerinde bulunduğunun tespiti için.”
+T: Bir takvim notunu bir şirketin sunucusuna bağlamak. Belki boş döner. Belki bir adamın sabahını geri getirir.
+`),
       good: 'Mazereti bağımsız bir kayda bağlamak doğru talep; özel şirket kaydı mahkeme yazısıyla istenir (CMK 177, 332).',
       category: 'USUL_BILGISI',
       next: '$stay',
@@ -245,6 +258,10 @@ N: Dilekçe uzuyor. İmleç hâlâ yanıp sönüyor.
       maxUses: 1,
       score: { USUL_BILGISI: 50 },
       effects: [raise('dil_tutanak'), raise('dil_any')],
+      responses: B(`
+T: Üçüncü talep: mukayese belgelerinin kolluğa teslim tutanağının aslı. Faksta okunmayan bir ad; aslında okunur.
+T: Bilirkişiye giden kâğıtları kim seçti? Bu sorunun cevabı bir tutanağın en alt satırında duruyor.
+`),
       good: 'Mukayese belgelerinin kaynağı, raporun güvenilirliğini belirler; asıl tutanak istenir (CMK 177).',
       category: 'USUL_BILGISI',
       next: '$stay',
@@ -526,6 +543,8 @@ const aksam1 = story('INV_AKSAM1', {
 C#buro_gece: GECE 22.10 — ARSLAN HUKUK
 N: Büroda Leyla’yla ikimiz kaldık. Yağmur camda. Leyla gözlüğünü çıkardı, burnunun kemerini ovuşturdu.
 leyla: Bugün bir imzanın peşindeydin. Sana bir soru: bir insanı imzasında ne tanımlar?
+T: Leyla’nın akşam soruları bir sınav değil; günün özeti. Ne cevap verirsem, yarın o cevabın içinde yürüyeceğim.
+N: Çaycı çoktan gitmişti. Leyla kendi çayını kendisi demledi, iki bardak koydu, birini bana uzattı. Ellerim soğuktu; bardak sıcaktı.
 `),
   choices: [
     option('AK1_EL', '“Eli. Kalemi tutan el.”', {
@@ -610,6 +629,7 @@ C#buro_gece: GECE 22.40 — ARSLAN HUKUK
 sevgi@phone: Deniz Hanım, rahatsız ediyorum. Vedat uyuyamıyor. Gece kalkıp mutfakta imza atıyor; bir kâğıda, yüz kere. Kendi imzasını tanımaya çalışıyor sanki.
 sevgi@phone: Bir şey daha… Yok. Yok, boş verin. Aile işleri. Sonra anlatırım belki.
 T: “Sonra anlatırım belki.” Bir öğretmen her şeyi madde madde anlatır. Bu madde listede yoktu.
+sevgi@phone: Bugün matbaaya gitmişsiniz. Tarık söyledi; “avukat hanım her yere baktı” dedi. İyi. Her yere bakın.
 `),
   choices: [
     option('AK2S_DINLE', '“Ne zaman isterseniz. Ben buradayım.”', {
@@ -641,6 +661,7 @@ tarik: Avukat hanım, rahatsız etmiyorum. Yengem gönderdi. Kayhan Böreği; s�
 N: Tepsiyi masaya bıraktı. Gitmedi. Masadaki dosyalara baktı; bakmamaya çalışarak.
 tarik: Nasıl gidiyor? Amcam bir şey bulunduysa söylemiyor, kendini kötü hissediyor. Ben de bilmek istiyorum; dükkân benim de evim sayılır.
 T: Sıcak bir börek, ıslak saçlar ve bir soru. Bu dosyanın sırrı benim değil; müvekkilimin.
+tarik: Bir de… mukayese mukayese diyorlar. Bilirkişi neye bakmış? Amcam anlamıyor, ben de anlamıyorum. Bir şey lazımsa ben getiririm; dükkânda her kâğıt var.
 `),
   choices: [
     option('AK3_SAKLA', '“Teşekkürler Tarık. Dosyayı Vedat Bey’le konuşuyorum; başkasıyla değil.”', {
@@ -728,7 +749,7 @@ N: Panoyu son kez toparladım. Raptiyeler, ipler, bir yığın fotokopi. Bir dav
       O(`T: Suret. Herkes onu sahte diyor; kimse nasıl sahte olduğunu göstermiyor. Ben de.`),
     ],
   }),
-  decisionNode('INV_GECE_5', [{ to: 'INV_GECE' }], {
+  decisionNode('INV_GECE_5', [{ to: 'INV_GECE_6' }], {
     lines: [
       W(
         flag('hayriye_imza'),
@@ -744,6 +765,18 @@ N: Panoyu son kez toparladım. Raptiyeler, ipler, bir yığın fotokopi. Bir dav
   }),
 ];
 
+const gece6 = decisionNode('INV_GECE_6', [{ to: 'INV_GECE' }], {
+  lines: B(`
+N: Telefon çaldı. Vedat. Sesi uykusuz, arkada bir makinenin tıkırtısı.
+vedat@phone: Avukat hanım, rahatsız ediyorum. Dükkândayım. Uyuyamadım, makineyi çalıştırdım. Yarın ne giyeyim? Takım mı, önlük mü? Şaka yapıyorum.
+vedat@phone: Babam derdi ki, mahkemeye temiz gömlekle gidilir, temiz vicdanla dönülür. Gömleğim temiz. Vicdanım da. Arası nasıl olacak, bilmiyorum.
+P: Arası bizim işimiz Vedat Bey. Siz yarın doğruyu söyleyin. Bilmediğinizi bilmiyorum deyin.
+vedat@phone: Bilmediğim çok şey var. En çok da o imzayı kimin attığını bilmiyorum. Bunu da söyleyeyim mi?
+P: Onu da söyleyin.
+N: Bir süre sessizlik; sonra makinenin tıkırtısı. Vedat telefonu kapatmadan önce bir şey mırıldandı; duyamadım. Belki bir dua, belki bir harf dizisi.
+`),
+});
+
 const geceSon = story('INV_GECE', {
   ...INV,
   title: 'Duruşmadan önceki gece',
@@ -754,6 +787,8 @@ leyla@phone: Yarın tanık ne hatırlıyorsa onu sor. Ne hatırlamasını istedi
 N: Pencereyi açtım. Yağmur Kayhan’ın damlarına, Hisar’ın cumbalarına, Çekirge’deki bir huzurevinin penceresine, hepsine aynı anda yağıyordu.
 N!flash: Bir şimşek. Bir an bütün şehir bir fotokopi gibi beyazladı.
 T: Bir imza. Bir el. Yarın sabah dokuzda biri bana soracak: “Müdafi, diyeceğiniz?”
+N: Masamda Sevgi’nin bıraktığı kartvizit duruyordu. Köşesi mürekkepten mosmor. ATEŞ MATBAASI · 1971. Altında küçük harflerle: “Her harf doğrudur.”
+T: Her harf doğru. Yarın bir harfin yanlış elden çıktığını kanıtlamaya çalışacağım.
 `),
   choices: [cont('GECE_DEVAM', 'Adliyeye git', 'C1_00G', { role: 'PRIMARY' })],
 });
@@ -797,6 +832,7 @@ export const investigation1: CasePart = {
     cikarim,
     leyla,
     ...gece,
+    gece6,
     geceSon,
   ],
   triggers: [

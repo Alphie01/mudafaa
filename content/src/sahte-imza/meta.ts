@@ -153,6 +153,7 @@ export const meta: CasePart = {
     hiddenInt('leyla_gun', 0, 0, 4),
     hiddenInt('leyla_ara', 0, 0, 3),
     hiddenEnum('aksam1', ['YOK', 'EL', 'AD', 'HIC']),
+    hiddenEnum('ara_odak', ['YOK', 'KAYIT', 'INSAN']),
     hiddenEnum('mutalaa', ['YOK', 'BERAAT', 'TAKDIR', 'MAHKUMIYET']),
     ...flags(
       'arg_fail',

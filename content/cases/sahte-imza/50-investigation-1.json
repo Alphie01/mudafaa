@@ -13,21 +13,36 @@
           "when": { "cmp": [{ "var": "day" }, "==", 1] },
           "lines": [
             { "speaker": "narrator", "text": "GÜN 1/4 · BİRİNCİ CELSEYE 21 GÜN", "style": "card" },
-            { "speaker": "narrator", "text": "Hedef: senedi imzalayan kimdi? O sabah Vedat neredeydi?" }
+            { "speaker": "narrator", "text": "Hedef: senedi imzalayan kimdi? O sabah Vedat neredeydi?" },
+            {
+              "speaker": "player",
+              "text": "Masamda dört kâğıt ve üç hafta. Bir kâğıdı okumak bir saat sürer; anlamak bir ömür. Bugün okumakla başlayacağım.",
+              "style": "thought"
+            }
           ]
         },
         {
           "when": { "cmp": [{ "var": "day" }, "==", 2] },
           "lines": [
             { "speaker": "narrator", "text": "GÜN 2/4 · BİRİNCİ CELSEYE 18 GÜN", "style": "card" },
-            { "speaker": "narrator", "text": "Hedef: suret nereden çıktı? Noterin arşivi ne diyor?" }
+            { "speaker": "narrator", "text": "Hedef: suret nereden çıktı? Noterin arşivi ne diyor?" },
+            {
+              "speaker": "player",
+              "text": "Dün bir imzaya baktım. Bugün o imzanın dayandığı kâğıda bakacağım. Sahte bir kâğıt, sahte bir imzadan daha çok şey anlatır; çünkü onu biri tasarlamıştır.",
+              "style": "thought"
+            }
           ]
         },
         {
           "when": { "cmp": [{ "var": "day" }, "==", 3] },
           "lines": [
             { "speaker": "narrator", "text": "GÜN 3/4 · BİRİNCİ CELSEYE 15 GÜN", "style": "card" },
-            { "speaker": "narrator", "text": "Hedef: raporun dayandığı kâğıtlar. Bilirkişi neye baktı, kim verdi?" }
+            { "speaker": "narrator", "text": "Hedef: raporun dayandığı kâğıtlar. Bilirkişi neye baktı, kim verdi?" },
+            {
+              "speaker": "player",
+              "text": "Bir rapor, bir binanın çatısı gibidir. Herkes çatıya bakar. Ben temele bakacağım: ekler, listeler, tutanaklar.",
+              "style": "thought"
+            }
           ]
         },
         {
@@ -36,6 +51,11 @@
             {
               "speaker": "narrator",
               "text": "Hedef: dilekçe ve tahta. Mahkemeden ne isteyeceksin? Kürsüde neyi göstereceksin?"
+            },
+            {
+              "speaker": "player",
+              "text": "Son gün. Bildiklerimi mahkemenin bilebileceği şeylere çevirmem gerek. Bir avukatın bildiği, kâğıda dönüşmedikçe bir sırdır.",
+              "style": "thought"
             }
           ]
         }
@@ -285,6 +305,15 @@
             {
               "speaker": "leyla",
               "text": "Bugün bir imzanın peşindeydin. Sana bir soru: bir insanı imzasında ne tanımlar?"
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın akşam soruları bir sınav değil; günün özeti. Ne cevap verirsem, yarın o cevabın içinde yürüyeceğim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Çaycı çoktan gitmişti. Leyla kendi çayını kendisi demledi, iki bardak koydu, birini bana uzattı. Ellerim soğuktu; bardak sıcaktı."
             }
           ]
         }
@@ -493,6 +522,11 @@
               "speaker": "player",
               "text": "“Sonra anlatırım belki.” Bir öğretmen her şeyi madde madde anlatır. Bu madde listede yoktu.",
               "style": "thought"
+            },
+            {
+              "speaker": "sevgi",
+              "text": "Bugün matbaaya gitmişsiniz. Tarık söyledi; “avukat hanım her yere baktı” dedi. İyi. Her yere bakın.",
+              "style": "phone"
             }
           ]
         }
@@ -564,6 +598,10 @@
               "speaker": "player",
               "text": "Sıcak bir börek, ıslak saçlar ve bir soru. Bu dosyanın sırrı benim değil; müvekkilimin.",
               "style": "thought"
+            },
+            {
+              "speaker": "tarik",
+              "text": "Bir de… mukayese mukayese diyorlar. Bilirkişi neye bakmış? Amcam anlamıyor, ben de anlamıyorum. Bir şey lazımsa ben getiririm; dükkânda her kâğıt var."
             }
           ]
         }
@@ -952,6 +990,15 @@
                       "speaker": "player",
                       "text": "“Bu dükkânda hırsız yok.” Bunu söylerken sesi titremedi. İnanıyordu.",
                       "style": "thought"
+                    },
+                    {
+                      "speaker": "vedat",
+                      "text": "Babam derdi ki, bir esnafın kasası açık durur, kimse dokunmaz; çünkü herkes herkesi tanır. Kayhan’da kırk yıl kimse kimsenin kasasına dokunmadı."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Tanımak bir kilit değildir. Tanıdığın insan, kilidin nerede olduğunu da bilir.",
+                      "style": "thought"
                     }
                   ]
                 }
@@ -1064,6 +1111,19 @@
                       "speaker": "player",
                       "text": "Savcının sebebi. Bunu kürsüde ilk kez duymaktansa burada duymak iyi. Acı ama iyi.",
                       "style": "thought"
+                    },
+                    {
+                      "speaker": "vedat",
+                      "text": "Siz de mi düşünüyorsunuz avukat hanım? Bir laf ettim, sonra gidip sahte kâğıt mı bastım?"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Ben düşünmüyorum. Savcı düşünecek. Onun düşündüğünü sizin ağzınızdan, hazırlıklı duysun istiyorum."
+                    },
+                    {
+                      "speaker": "vedat",
+                      "expression": "uzgun",
+                      "text": "Hazırlıklı. Bir utancı hazırlıklı anlatmak. Bunu da öğreneceğim demek."
                     }
                   ]
                 }
@@ -1143,6 +1203,68 @@
           "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
         },
         {
+          "id": "TV_BORC",
+          "kind": "TOPIC",
+          "label": "Dükkânın borcu",
+          "cost": [{ "var": "min", "amount": 1 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Dükkânın borcu ne durumda? Savcı soracak.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "vedat",
+                      "text": "Kâğıt fiyatları iki yılda üç katı oldu. Bir ara bankaya borçlandım, ödedim. Şimdi ayakta duruyoruz; zor ama duruyoruz."
+                    },
+                    {
+                      "speaker": "vedat",
+                      "text": "Tarık iyi pazarlık yapar; kâğıtçıyla o konuşur, ben konuşamam. Utanırım. Borç benim için bir lekedir; mürekkep gibi, çıkmaz."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Borç bir sebep olabilir. Ama borcunu ödemiş bir adamın sebebi, ödememiş birininkinden zayıftır.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Bugün kime ne kadar borcunuz var? Rakamla.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "vedat",
+                      "expression": "kizgin",
+                      "text": "Kimseye! Bankaya bir taksit, o kadar. Tefeciye gitmedim, kumara gitmedim. Babamdan kalan dükkânı borçla mı batırayım?"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir öfke, bir rakam yokluğu. Belki dürüst, belki gururlu. İkisi aynı sesle konuşur.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
+        },
+        {
           "id": "TV_EL",
           "kind": "TOPIC",
           "label": "Hangi elle yazıyorsunuz?",
@@ -1173,6 +1295,15 @@
                       "speaker": "player",
                       "text": "Sıvanmış mürekkep, sağ el. Bu ikisi aynı masaya oturmuyor.",
                       "style": "thought"
+                    },
+                    { "speaker": "vedat", "text": "Neden soruyorsunuz? Ne var sol elde?" },
+                    {
+                      "speaker": "player",
+                      "text": "Henüz bir şey yok. Bir mürekkep izi var. İzi bir ele bağlamadan konuşmayalım."
+                    },
+                    {
+                      "speaker": "vedat",
+                      "text": "Mürekkep izi… Biz matbaacılar mürekkepten iz okuruz avukat hanım. Bir kâğıdın hangi makineden çıktığını, hangi ustanın elinden geçtiğini. Kendi imzama hiç öyle bakmadım."
                     }
                   ]
                 }
@@ -1249,6 +1380,10 @@
                       "speaker": "player",
                       "text": "Kargo terminali saati yazar. Konumu da. Ama terminal bir şirketin elinde; şirket de bir avukata değil, bir mahkemeye cevap verir.",
                       "style": "thought"
+                    },
+                    {
+                      "speaker": "vedat",
+                      "text": "Bunu polise söylemedim. Neden söylemedim? Kimse “o saatte ne yapıyordunuz” diye sormadı. “İmza sizin mi” dediler; “değil” dedim. Gerisini yazmadılar."
                     }
                   ]
                 }
@@ -1388,6 +1523,14 @@
                       "speaker": "player",
                       "text": "Saat 09.52. Tapuda kimlik 11.22’de kullanıldı. Bir adam bir saat yirmi dakika önce kimliğini kaybettiğini yazmış.",
                       "style": "thought"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bu mesajın ekran görüntüsünü alabilir miyim? Sevgi Hanım’ın telefonundan da."
+                    },
+                    {
+                      "speaker": "vedat",
+                      "text": "Alın. Ne isterseniz alın. Bir telefondan bir şey alınır mı, ben bilmem; Sevgi bilir."
                     }
                   ]
                 }
@@ -1576,6 +1719,36 @@
             { "type": "VAR", "var": "fact_tarik_polis", "op": "set", "value": true }
           ]
         },
+        {
+          "id": "TQ_AMCA",
+          "kind": "OPTION",
+          "label": "“Amcan nasıl biri?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Amcam mı? Babam öldüğünde on dokuz yaşındaydım. Ertesi hafta amcam beni bu dükkâna getirdi, “burada kâğıt kokusu var, ağlarsan kimse anlamaz” dedi."
+                },
+                {
+                  "speaker": "tarik",
+                  "text": "On dört yıl. Bana makineyi öğretti, dijitali ben ona öğrettim. Maaşımı bazen geç verir, ama hiç eksik vermez. Herkese öyledir."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kalemi çevirmeyi bıraktı. Masadaki kahve lekelerinden birine baktı."
+                },
+                { "speaker": "tarik", "text": "O imzayı atmaz avukat hanım. Bunu bilin. Ne olursa olsun." },
+                {
+                  "speaker": "player",
+                  "text": "“Ne olursa olsun.” Sevgi’nin, Vedat’ın, şimdi de yeğenin ağzından aynı güven. Bir aile güveni; kâğıttan daha sağlam görünür, kâğıttan daha çabuk yırtılır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 15 }]
+        },
         { "id": "TARIK_BITIR", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "$return" }
       ]
     },
@@ -1689,6 +1862,35 @@
             }
           ],
           "effects": [{ "type": "VAR", "var": "emre_kapandi", "op": "set", "value": true }]
+        },
+        {
+          "id": "EQ_DUKKAN",
+          "kind": "OPTION",
+          "label": "“Dükkânda kim ne iş yapar?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "emre",
+                  "text": "Vedat abi makinede. Kurşun harfler, ofset, hepsi onun. Tarık abi dijitalde; bilgisayar, plotter, kartvizit. Ben koli, kargo, temizlik. Bir de ayak işleri."
+                },
+                {
+                  "speaker": "emre",
+                  "text": "Kargo gelince kim yakındaysa o koşar. Kâğıtçı gelince Tarık abi konuşur, pazarlığı o yapar. Müşteri gelince Vedat abi; müşteri onu sever."
+                },
+                {
+                  "speaker": "emre",
+                  "text": "Bir de çay. Çayı herkes kendisi koyar. O kural; Vedat abinin babasından kalma."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir dükkânın haritası. Kim nerede durur, kim neye dokunur. İleride işime yarayacak mı, bilmiyorum; ama kâğıda yazdım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 15 }]
         },
         { "id": "EMRE_BITIR", "kind": "CONTINUE", "label": "Bırak, çık", "role": "BACK", "next": "$return" }
       ]
@@ -2044,6 +2246,15 @@
                   "speaker": "player",
                   "text": "Cevap veremedim. Bir düğmeyi sedeflerin arasına koydum. Doğru yerdi.",
                   "style": "thought"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Çıkarken bakıcı beni kapıya kadar geçirdi. “İyi yaptınız” dedi, “soru sormadınız. Gelenlerin çoğu sorar; o da her soruda biraz daha kaybolur.”"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir kadının hafızası bir delil değildir. Bir kadının onuru ise bir avukatın sınırıdır.",
+                  "style": "thought"
                 }
               ]
             }
@@ -2156,6 +2367,14 @@
             {
               "speaker": "bulent",
               "text": "Vedat Ateş’in vekili olarak geldiğinizi söylediniz. Vekâletname işleminde vekil ilgilidir; ilgilinin avukatı da ilgilidir. Buyurun."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masasında kusursuz dizilmiş üç kalem, bir mühür, bir mürekkep ıstampası. Mürekkep ıstampasının kapağı kapalıydı; her zaman kapalı olduğu belliydi."
+            },
+            {
+              "speaker": "bulent",
+              "text": "Otuz bir yılda iki sahte suret gördüm avukat hanım. İkisinde de mühür basılmıştı. Islak mühür taklit edilemez; mürekkep kâğıda işler, kâğıt onu emer. Toner emilmez; üstünde durur."
             }
           ]
         }
@@ -2434,6 +2653,14 @@
                   "speaker": "player",
                   "text": "Bir komşunun hafızası bir aile ağacı gibi. Her dalda bir isim; bazıları sık, bazıları seyrek.",
                   "style": "thought"
+                },
+                {
+                  "speaker": "fikriye",
+                  "text": "Bir de şunu yaz evladım: Hayriye evini kimseye satmazdı. “Bu evden beni tabutla çıkarırsınız” derdi. Huzurevine bile ağlayarak gitti."
+                },
+                {
+                  "speaker": "fikriye",
+                  "text": "Şimdi ev satılmış, kendisi bilmiyor. Bilmesin. Bilse… bilse o huzurevinin penceresinden atlar."
                 }
               ]
             }
@@ -2721,6 +2948,15 @@
             {
               "speaker": "leyla",
               "text": "Raporu sonuç cümlesinden okuma. Ekinden oku. Bilirkişi ne kadar iyi olursa olsun, önüne konan kâğıt kadar iyidir."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de şu: bilirkişi, savcının sorduğu soruya cevap verir. Savcı “bu imzalar aynı elden mi” diye sormuş. “Bu imza sanığın mı” diye sormamış. Fark ince; ama ceza bu incelikte yaşar."
+            },
+            {
+              "speaker": "player",
+              "text": "Doğru bir cevap, yanlış bir soruya. Raporun eklerini önüme çektim.",
+              "style": "thought"
             }
           ]
         }
@@ -2961,6 +3197,10 @@
             {
               "speaker": "leyla",
               "text": "Ne istediğini değil, neden istediğini yaz. Hâkim “bu delil neyi ispat edecek” diye sorar; cevabın dilekçede olsun."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Kanun, taleplerin duruşmadan önce verilmesini ister. Duruşmada sözlü de istersin; ama hâkim celseye hazırlıksız gelir. Hazırlıksız hâkim, “bir sonraki celseye bakarız” der."
             }
           ]
         },
@@ -2974,6 +3214,22 @@
           "visibleWhen": { "hasEvidence": "clue_mukayese_ozel" },
           "cost": [{ "var": "slots", "amount": 1 }],
           "maxUses": 1,
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Birinci talep: Adli Tıp Kurumu, resmî mukayese imzaları. Noterdeki imza beyannamesi, bankadaki imza kartonu, nüfustaki başvuru formu. Kimin attığı belli olan imzalar.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Mukayese belgeleri sanığın kabul ettiği ya da resmî makam önünde attığı imzalar değildir.” Bu cümleyi üç kez yazdım, ikisini sildim.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 80 },
@@ -2993,6 +3249,22 @@
           "visibleWhen": { "hasEvidence": "clue_takvim" },
           "cost": [{ "var": "slots", "amount": 1 }],
           "maxUses": 1,
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İkinci talep: kargo şirketinin 18 Şubat kaydı. Terminal saati, konum, teslim imzası. “Sanığın işlem saatinde işyerinde bulunduğunun tespiti için.”",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir takvim notunu bir şirketin sunucusuna bağlamak. Belki boş döner. Belki bir adamın sabahını geri getirir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 60 },
@@ -3031,6 +3303,22 @@
           "visibleWhen": { "hasEvidence": "clue_tutanak_ad" },
           "cost": [{ "var": "slots", "amount": 1 }],
           "maxUses": 1,
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Üçüncü talep: mukayese belgelerinin kolluğa teslim tutanağının aslı. Faksta okunmayan bir ad; aslında okunur.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bilirkişiye giden kâğıtları kim seçti? Bu sorunun cevabı bir tutanağın en alt satırında duruyor.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 50 },
@@ -3765,6 +4053,43 @@
           ]
         }
       ],
+      "routes": [{ "to": "INV_GECE_6" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_6",
+      "type": "DECISION",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "Telefon çaldı. Vedat. Sesi uykusuz, arkada bir makinenin tıkırtısı." },
+            {
+              "speaker": "vedat",
+              "text": "Avukat hanım, rahatsız ediyorum. Dükkândayım. Uyuyamadım, makineyi çalıştırdım. Yarın ne giyeyim? Takım mı, önlük mü? Şaka yapıyorum.",
+              "style": "phone"
+            },
+            {
+              "speaker": "vedat",
+              "text": "Babam derdi ki, mahkemeye temiz gömlekle gidilir, temiz vicdanla dönülür. Gömleğim temiz. Vicdanım da. Arası nasıl olacak, bilmiyorum.",
+              "style": "phone"
+            },
+            {
+              "speaker": "player",
+              "text": "Arası bizim işimiz Vedat Bey. Siz yarın doğruyu söyleyin. Bilmediğinizi bilmiyorum deyin."
+            },
+            {
+              "speaker": "vedat",
+              "text": "Bilmediğim çok şey var. En çok da o imzayı kimin attığını bilmiyorum. Bunu da söyleyeyim mi?",
+              "style": "phone"
+            },
+            { "speaker": "player", "text": "Onu da söyleyin." },
+            {
+              "speaker": "narrator",
+              "text": "Bir süre sessizlik; sonra makinenin tıkırtısı. Vedat telefonu kapatmadan önce bir şey mırıldandı; duyamadım. Belki bir dua, belki bir harf dizisi."
+            }
+          ]
+        }
+      ],
       "routes": [{ "to": "INV_GECE" }],
       "choices": []
     },
@@ -3796,6 +4121,15 @@
             {
               "speaker": "player",
               "text": "Bir imza. Bir el. Yarın sabah dokuzda biri bana soracak: “Müdafi, diyeceğiniz?”",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masamda Sevgi’nin bıraktığı kartvizit duruyordu. Köşesi mürekkepten mosmor. ATEŞ MATBAASI · 1971. Altında küçük harflerle: “Her harf doğrudur.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Her harf doğru. Yarın bir harfin yanlış elden çıktığını kanıtlamaya çalışacağım.",
               "style": "thought"
             }
           ]

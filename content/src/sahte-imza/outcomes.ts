@@ -223,6 +223,9 @@ N: Vedat da duydu. Durdu. Döndü. Sonra yürümeye devam etti.
 vedat: Beraat dedi avukat hanım. Ama “yapmadı” demedi. “Kanıt yok” dedi. Bunu herkes duydu.
 P: Kanıt yok demek, sizin aleyhinize hiçbir şey yok demek Vedat Bey. Kâğıtta adınız temiz.
 vedat: Kâğıtta. Evet. Ben kâğıda inanırım. Bir ömür inandım.
+N: Merdivenlerden inerken bir an durdu. Elini, sağ elini, tırabzana koydu; mürekkebin izleri hâlâ tırnaklarının dibindeydi.
+vedat: Yarın dükkânı açacağım. Bir düğün davetiyesi var; bir çift evleniyor. Kâğıdı ben seçeceğim, harfleri ben dizeceğim. İsimlerini ben basacağım.
+vedat: Bir ismi basmak kolaydır avukat hanım. Bir ismin altına imza atmak, onu taşımaktır. Ben kendi adımı yeniden taşımayı öğreneceğim.
 `),
         W(
           has('ded_randevu'),
@@ -238,8 +241,14 @@ N: Leyla odamın kapısında durdu. Elinde paltosu.
 leyla: Bir imzayı sahibinden ayırdın. İyi iş. Ama kimin eline ait olduğunu bulamadın.
 P: Bulmam gerekmiyordu.
 leyla: Gerekmiyordu. Haklısın. Ceza davasında şüphe sanığındır. Ama bir ailede şüphe herkesindir Deniz. Bu ailede artık herkes herkesin elinden şüphelenecek.
+leyla: Kâğıtlarda bir numara gördün mü? Bir randevu kaydı? Bir tutanak? Gördüysen ve bir yere yazmadıysan, onu bir gün yeniden göreceksin. Uykunda.
+P: Ben bir müvekkili savundum Leyla Hanım. Bir faili aramadım.
+leyla: Doğru. Bunu da kendine söylemeyi öğreneceksin. Her gece biraz daha kolay olur. Hiçbir gece tamamen kolay olmaz.
 N: Gitti. Kurşun harfler masamda duruyordu: Ş, E, T, A. Kâğıda basılınca ATEŞ.
 T: Bir imzayı sahibinden ayırdım. Kimin eline ait olduğunu bulamadım. Bu dosyada bir el hâlâ havada duruyor; bir kalem tutar gibi.
+N: Telefon titredi. Sevgi’den bir mesaj: “Vedat dükkânı açtı. Makineyi çalıştırdı. Bir düğün davetiyesi basıyor; isimleri kendisi diziyor.”
+N: Bir dakika sonra ikinci mesaj: “Tarık bugün gelmedi. Telefonu kapalı.”
+T: İki mesaj. Biri bir adamın hayatına döndüğünü söylüyor. Öbürü, bir başkasının hayatından bir kapının kapandığını. Kâğıtlar bunu yazmayacak; ama ben biliyorum.
 C: SON
 N: Vedat Ateş beraat etti. Hisar’daki evin tapusu hâlâ Erol Kılınç adına kayıtlı. Hayriye Hanım’ın vasisi tapu iptal davası açmayı düşünüyor.
 `),

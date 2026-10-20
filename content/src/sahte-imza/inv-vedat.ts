@@ -125,6 +125,8 @@ vedat: Ceket sabahtan akşama kapının arkasında asılı. Önlükle çalışı
 P: Kapının arkası. Dükkâna giren herkes önünden geçiyor mu?
 vedat: Geçer tabii. Kurye geçer, müşteri geçer, çırak geçer. Kimse kimsenin ceketine dokunmaz ama. Bu dükkânda hırsız yok.
 T: “Bu dükkânda hırsız yok.” Bunu söylerken sesi titremedi. İnanıyordu.
+vedat: Babam derdi ki, bir esnafın kasası açık durur, kimse dokunmaz; çünkü herkes herkesi tanır. Kayhan’da kırk yıl kimse kimsenin kasasına dokunmadı.
+T: Tanımak bir kilit değildir. Tanıdığın insan, kilidin nerede olduğunu da bilir.
 `),
         },
         hard: {
@@ -158,6 +160,9 @@ vedat: …Oldu. 2024 bayramında. Dükkânın borcu vardı; kâğıt fiyatları 
 vedat.uzgun: Annem ağladı. Nermin ablam bağırdı, “annemi sokağa atacaksın” dedi. Ben de kalkıp çıktım. Sonra bir daha açmadım konuyu. Bir daha hiç.
 vedat: Bunu söylemedim polise. Sormadılar. Siz de sormasaydınız söylemezdim.
 T: Savcının sebebi. Bunu kürsüde ilk kez duymaktansa burada duymak iyi. Acı ama iyi.
+vedat: Siz de mi düşünüyorsunuz avukat hanım? Bir laf ettim, sonra gidip sahte kâğıt mı bastım?
+P: Ben düşünmüyorum. Savcı düşünecek. Onun düşündüğünü sizin ağzınızdan, hazırlıklı duysun istiyorum.
+vedat.uzgun: Hazırlıklı. Bir utancı hazırlıklı anlatmak. Bunu da öğreneceğim demek.
 `),
         },
       },
@@ -187,6 +192,27 @@ T: Bilirkişi “Vedat Ateş’in imzası” diye bir yığın kâğıda bakmı�
         },
       },
     }),
+    topic('TV_BORC', 'Dükkânın borcu', {
+      cost: costOf('min', 1),
+      score: { SORGULAMA: 10 },
+      tones: {
+        soft: {
+          prompt: 'Dükkânın borcu ne durumda? Savcı soracak.',
+          says: S(`
+vedat: Kâğıt fiyatları iki yılda üç katı oldu. Bir ara bankaya borçlandım, ödedim. Şimdi ayakta duruyoruz; zor ama duruyoruz.
+vedat: Tarık iyi pazarlık yapar; kâğıtçıyla o konuşur, ben konuşamam. Utanırım. Borç benim için bir lekedir; mürekkep gibi, çıkmaz.
+T: Borç bir sebep olabilir. Ama borcunu ödemiş bir adamın sebebi, ödememiş birininkinden zayıftır.
+`),
+        },
+        hard: {
+          prompt: 'Bugün kime ne kadar borcunuz var? Rakamla.',
+          says: S(`
+vedat.kizgin: Kimseye! Bankaya bir taksit, o kadar. Tefeciye gitmedim, kumara gitmedim. Babamdan kalan dükkânı borçla mı batırayım?
+T: Bir öfke, bir rakam yokluğu. Belki dürüst, belki gururlu. İkisi aynı sesle konuşur.
+`),
+        },
+      },
+    }),
     topic('TV_EL', 'Hangi elle yazıyorsunuz?', {
       visibleWhen: has('clue_sivanma'),
       cost: costOf('min', 2),
@@ -200,6 +226,9 @@ N: Vedat kalemi sağ eline aldı. İmzası hızlı ve yuvarlaktı; “V” tek h
 N: Sonra kalemi sol eline geçirdi. Kâğıtta titrek, kırık bir çizgi kaldı. Bir çocuğun ilk harfleri gibi.
 vedat.saskin: Bununla mı? Sol elle mi? Ben sol elimle çatal bile tutamam avukat hanım. Askerde bile denemedik.
 T: Sıvanmış mürekkep, sağ el. Bu ikisi aynı masaya oturmuyor.
+vedat: Neden soruyorsunuz? Ne var sol elde?
+P: Henüz bir şey yok. Bir mürekkep izi var. İzi bir ele bağlamadan konuşmayalım.
+vedat: Mürekkep izi… Biz matbaacılar mürekkepten iz okuruz avukat hanım. Bir kâğıdın hangi makineden çıktığını, hangi ustanın elinden geçtiğini. Kendi imzama hiç öyle bakmadım.
 `),
         },
         hard: {
@@ -225,6 +254,7 @@ vedat.saskin: Termal broşür… Çekirge’deki otelin broşürü! Evet! Beş k
 vedat: Kolileri birlikte bantladık. Genç bir çocuk, konuşkan. Ona çay koydum; içmedi, aceleci. Hayır içti. Ben unutuyorum, o konuşuyordu.
 vedat.mutlu: El terminaline imza attım! Parmağımla! O makineler saati yazar, değil mi avukat hanım? Yazar!
 T: Kargo terminali saati yazar. Konumu da. Ama terminal bir şirketin elinde; şirket de bir avukata değil, bir mahkemeye cevap verir.
+vedat: Bunu polise söylemedim. Neden söylemedim? Kimse “o saatte ne yapıyordunuz” diye sormadı. “İmza sizin mi” dediler; “değil” dedim. Gerisini yazmadılar.
 `),
         },
         hard: {
@@ -273,6 +303,8 @@ N: Vedat telefonunu çıkardı. Ekranı çatlaktı. Bir süre kaydırdı, durdu 
 N: 18 Şubat, 09.52. “Kimliğimi bulamıyorum, ceketi de aradım. Evde mi? PTT’ye gidemedim.” Altında Sevgi’nin cevabı: “Evde yok canım.”
 vedat: Bunu kimse sormadı. Bir telefonun içinde beş aydır duruyor.
 T: Saat 09.52. Tapuda kimlik 11.22’de kullanıldı. Bir adam bir saat yirmi dakika önce kimliğini kaybettiğini yazmış.
+P: Bu mesajın ekran görüntüsünü alabilir miyim? Sevgi Hanım’ın telefonundan da.
+vedat: Alın. Ne isterseniz alın. Bir telefondan bir şey alınır mı, ben bilmem; Sevgi bilir.
 `),
         },
         hard: {

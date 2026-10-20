@@ -9,3 +9,7 @@ export { collectRefs, newRefSet } from './expr/refs.js';
 export type { RefSet } from './expr/refs.js';
 export { typeOf } from './expr/typecheck.js';
 export type { ExprType } from './expr/typecheck.js';
+export { compile, formatPath } from './compile.js';
+export type { CompileResult, Issue } from './compile.js';
+export { canonicalJson, fnv1a64, stateHash } from './hash.js';
+export { ENGINE_VERSION, cloneState, initialState } from './state.js';

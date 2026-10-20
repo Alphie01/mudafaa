@@ -27,6 +27,10 @@ export interface ValidateOptions {
   maxStates?: number;
   maxMs?: number;
   walks?: number;
+  /** Rastgele yürüyüş başına adım; verilmezse max(400, en uzun golden path × 2) (uzun davalar için ölçeklenir). */
+  walkSteps?: number;
+  escapeBudget?: number;
+  frontierSample?: number;
 }
 
 /** Bu statik hatalar varken motor güvenle çalıştırılamaz (tür hatası, rotasız DECISION, döngü…): simülasyon atlanır. */
@@ -96,13 +100,17 @@ export function validatePackage(input: unknown, opts: ValidateOptions = {}): Val
     return finish(issues, { ...meta, goldenPaths: golden });
   }
 
+  const scripts = (pkg.tests?.goldenPaths ?? []).map((g) => g.actions);
   let sim: ExploreResult;
   try {
     sim = explore(c, {
       ...(opts.maxStates === undefined ? {} : { maxStates: opts.maxStates }),
       ...(opts.maxMs === undefined ? {} : { maxMs: opts.maxMs }),
       ...(opts.walks === undefined ? {} : { walks: opts.walks }),
-      scripts: (pkg.tests?.goldenPaths ?? []).map((g) => g.actions),
+      walkSteps: opts.walkSteps ?? Math.max(400, 2 * Math.max(0, ...scripts.map((a) => a.length))),
+      ...(opts.escapeBudget === undefined ? {} : { escapeBudget: opts.escapeBudget }),
+      ...(opts.frontierSample === undefined ? {} : { frontierSample: opts.frontierSample }),
+      scripts,
     });
   } catch (e) {
     issues.push(error('SIMULATION_ERROR', '', `Simülasyon çalışmadı: ${e instanceof Error ? e.message : String(e)}`));

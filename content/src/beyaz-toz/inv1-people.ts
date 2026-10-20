@@ -45,7 +45,7 @@ export const inv1People: CasePart = {
                   'Hazırladım. Kaan cezaevinden imzalı bir onay yazısı gönderdi; sizin görmeniz için. Başka kimse için değil.',
                 ),
                 n(
-                  'Bir dosya: acil servis epikrizi, 3 Ekim, 02.10. Taşikardi. Madde kullanımı. Altında AMATEM randevu çıktıları; bir de 31 Ekim tarihli bir test: negatif.',
+                  'Bir dosya: acil servis epikrizi, 3 Ekim, 02.10. Taşikardi. Madde kullanımı. Altında AMATEM randevu çıktıları; bir de 30 Ekim tarihli bir test: negatif.',
                 ),
                 s(
                   'defne',
@@ -220,14 +220,14 @@ export const inv1People: CasePart = {
                 me('Saat kaçtı, hatırlıyor musunuz?'),
                 s(
                   'nesrin',
-                  'Ezan okunmuş, ben namazı kılmıştım. Altı yirmi, yirmi beş. Ondan sonra polis kapımı çaldı, “teyze, tanık lazım, yukarı gel” dedi.',
+                  'Namazı kılmış, kedilere mama koyuyordum. Yediyi çeyrek geçiyordu, belki yirmi. Ondan sonra polis kapımı çaldı, “teyze, tanık lazım, yukarı gel” dedi.',
                 ),
                 s(
                   'nesrin',
-                  'Ben çıktığımda arka odanın kapısı açıktı zaten. Kilit yerdeydi, ikiye bölünmüş. Bana “imzala” dediler, imzaladım. Saati de ben yazdım: altı kırk. Hep saati yazarım.',
+                  'Ben çıktığımda arka odanın kapısı açıktı zaten. Kilit yerdeydi, ikiye bölünmüş. Bana “imzala” dediler, imzaladım. Saati de ben yazdım: yediyi otuz beş geçe. Hep saati yazarım.',
                 ),
                 th(
-                  'Altı kırk. Arama altı beşte başlamış. Tanık geldiğinde kapı çoktan kırılmış. Ve altı yirmide bir kurye köşeden dönmüş.',
+                  'Yediyi otuz beş geçe. Arama yedide başlamış. Tanık geldiğinde kapı çoktan kırılmış. Ve yediyi çeyrek geçe bir kurye köşeden dönmüş.',
                 ),
               ],
             },
@@ -248,7 +248,7 @@ export const inv1People: CasePart = {
                   'Barış mı? Kaçtı mı? … Galiba. Evet, galiba öyleydi evladım. Bir motor vardı. Kaçtı diyorsan kaçmıştır.',
                   'saskin',
                 ),
-                s('nesrin', 'Ben imzaladım ama. Saati yazdım. Altı kırk. Kapı açıktı ben çıktığımda.'),
+                s('nesrin', 'Ben imzaladım ama. Saati yazdım. Yediyi otuz beş geçe. Kapı açıktı ben çıktığımda.'),
                 th(
                   '“Galiba.” Bir tanığın en tehlikeli kelimesi. Cevabı ben verdim, o onayladı. Bir mahkeme salonunda bu fark, bir tanığı ikiye böler.',
                 ),
@@ -317,7 +317,7 @@ export const inv1People: CasePart = {
           ],
           next: '$stay',
         }),
-        option('NS_TANIK', 'Bunları mahkemede de anlatır mısınız? Gördüğünüz gibi, olduğu gibi.', {
+        option('NS_TANIK', 'Bunları mahkemede de anlatır mısınız?', {
           visibleWhen: all(not(flag('nesrin_kus')), not(flag('nesrin_razi'))),
           effects: [raise('nesrin_razi')],
           score: { SORGULAMA: 40 },

@@ -81,8 +81,8 @@ export const meta: CasePart = {
       scaleMax: 10000,
       thresholdBar: thresholdBar([
         ['Mahkûmiyet', 0, 'red'],
-        ['Nitelik', 3000, 'amber'],
-        ['Beraat', 10500, 'green'],
+        ['Nitelik', 5500, 'amber'],
+        ['Beraat', 7500, 'green'],
       ]),
       displayClampMin: 0,
     },
@@ -90,21 +90,21 @@ export const meta: CasePart = {
     display: { showRunningScore: true },
     chronology: [
       { id: 'kr_eylul', time: '20 Eylül', text: 'Arka odaya yeni bir kiracı taşınır.' },
-      { id: 'kr_ekim', time: '3–10 Ekim', text: 'Kaan acile kaldırılır; tedaviye başlar.' },
+      { id: 'kr_ekim', time: '3–9 Ekim', text: 'Kaan acile kaldırılır; tedaviye başlar.' },
       { id: 'kr_9kasim', time: '9 Kasım 23.09', text: 'Muhbir üzerinde bir paketle yakalanır.' },
       { id: 'kr_10kasim', time: '10 Kasım 14.15', text: 'Arama kararı verilir.' },
-      { id: 'kr_11kasim', time: '11 Kasım 06.05', text: 'Baskın.' },
+      { id: 'kr_11kasim', time: '11 Kasım 07.00', text: 'Baskın.' },
     ],
   },
   predicates: [
     { id: 'kart2', label: 'Tahtada en az 2 kart var', when: { cmp: [{ count: 'evidence', tag: 'kart' }, '>=', 2] } },
     {
       id: 'beraat_e',
-      label: 'Oda varsayımı çöktü, şekerlik aklandı, muhbir sarsıldı',
+      label: 'Oda varsayımı çöktü, şekerlik aklandı; muhbir sarsıldı ya da arka oda materyali dışlandı',
       when: all(
         flag('contra_s2'),
         flag('jar_cleared'),
-        any(flag('contra_t3'), flag('contra_t4'), flag('tolga_kirildi')),
+        any(flag('contra_t3'), flag('contra_t4'), flag('tolga_kirildi'), flag('key_excluded')),
       ),
     },
   ],

@@ -78,10 +78,14 @@
         {
           "id": "TK_A",
           "kind": "OPTION",
-          "label": "Ezberlemeyin. Ne gördüyseniz onu anlatın; hatırlamadığınızı “hatırlamıyorum” deyin.",
+          "label": "Ezberlenecek bir şey yok. Gördüğünüzü anlatın.",
           "responses": [
             {
               "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Ne gördüyseniz onu anlatın. Hatırlamadığınız yerde “hatırlamıyorum” deyin."
+                },
                 { "speaker": "nesrin", "text": "Hatırlamıyorum demek ayıp değil mi?" },
                 { "speaker": "player", "text": "Hayır. Uydurmak ayıp. Hatırlamamak insanlık." },
                 {
@@ -135,7 +139,7 @@
         {
           "id": "TK_C",
           "kind": "OPTION",
-          "label": "Ben size bir şey söyleyemem, Nesrin Hanım. Sadece yemin ettiğinizi unutmayın.",
+          "label": "Size bir şey söyleyemem; yemin ettiniz.",
           "responses": [
             {
               "lines": [
@@ -181,6 +185,7 @@
       ],
       "lines": [
         {
+          "when": { "flag": "kaan_tahliye" },
           "lines": [
             {
               "speaker": "narrator",
@@ -188,12 +193,7 @@
               "style": "card",
               "bg": "durusma_salonu"
             },
-            { "speaker": "mubasir", "text": "Kaan Yıldız! Kaan Yıldız! Taraflar salona!" }
-          ]
-        },
-        {
-          "when": { "flag": "kaan_tahliye" },
-          "lines": [
+            { "speaker": "mubasir", "text": "Kaan Yıldız! Kaan Yıldız! Taraflar salona!" },
             {
               "speaker": "narrator",
               "text": "Dinleyici sırasında Defne, yanında beyaz saçlı bir kadın. Kadın bir tespih çeviriyordu; tespihin her tanesinde bir an duruyor, sonra bırakıyordu."
@@ -208,7 +208,14 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "Kaan iki jandarmanın arasında girdi. Gözlükteki bant yenilenmişti. Kırk yedi gün; parmaklarıyla saydığını biliyordum."
+              "text": "16 ŞUBAT · PAZARTESİ 10.05 — BURSA 5. AĞIR CEZA MAHKEMESİ",
+              "style": "card",
+              "bg": "durusma_salonu"
+            },
+            { "speaker": "mubasir", "text": "Kaan Yıldız! Kaan Yıldız! Taraflar salona!" },
+            {
+              "speaker": "narrator",
+              "text": "Kaan iki jandarmanın arasında girdi. Gözlükteki bant yenilenmişti. Yüz otuz altı gün; parmaklarıyla saydığını biliyordum."
             }
           ]
         }
@@ -433,7 +440,7 @@
             },
             {
               "speaker": "nesrin",
-              "text": "Sabah altı yirmide kurye oğlanın motoru köşeye geldi, döndü. Altı kırkta beni yukarı çağırdılar; kapı açıktı, kilit yerdeydi."
+              "text": "Sabah yediyi çeyrek geçe kurye oğlanın motoru köşeye geldi, döndü. Yediyi otuz beş geçe beni yukarı çağırdılar; kapı açıktı, kilit yerdeydi."
             },
             {
               "speaker": "savci",
@@ -464,11 +471,11 @@
             },
             {
               "speaker": "nesrin",
-              "text": "Sabah altı yirmide kurye oğlanın motoru köşeye geldi. Arabaları gördü, döndü gitti. Hep köşeye park ederdi, zinciri korkuluğa dolardı."
+              "text": "Sabah yediyi çeyrek geçe kurye oğlanın motoru köşeye geldi. Arabaları gördü, döndü gitti. Hep köşeye park ederdi, zinciri korkuluğa dolardı."
             },
             {
               "speaker": "nesrin",
-              "text": "Altı kırkta beni yukarı çağırdılar. Arka odanın kapısı açıktı, kilit yerdeydi. İmzala dediler; saati ben yazdım."
+              "text": "Yediyi otuz beş geçe beni yukarı çağırdılar. Arka odanın kapısı açıktı, kilit yerdeydi. İmzala dediler; saati ben yazdım."
             },
             { "speaker": "uye", "text": "Saati neden yazdınız, tanık?" },
             {
@@ -530,7 +537,7 @@
         {
           "id": "T01_A",
           "kind": "OPTION",
-          "label": "Arka odada kimlerin kaldığını kaydettiniz mi? Defterinizi gösterir misiniz?",
+          "label": "Arka odanın kiracılarını bir yere yazar mıydınız?",
           "visibleWhen": { "hasEvidence": "clue_kira_defteri" },
           "responses": [
             {
@@ -1459,7 +1466,7 @@
         {
           "id": "T04_A",
           "kind": "OPTION",
-          "label": "Arka oda kararın kapsamı dışında, kilit kırılarak arandı: hükme esas alınamaz (Anayasa 38/6, CMK 206/2-a, 217/2)",
+          "label": "Arka oda kararın dışında kaldı; kilit kırıldı",
           "responses": [
             {
               "when": { "any": [{ "flag": "contra_s1" }, { "flag": "contra_s3" }] },
@@ -1470,7 +1477,7 @@
                 },
                 {
                   "speaker": "player",
-                  "text": "Hâkim, talep yazısında bir ev arkadaşı olduğunu bile bile sınırı çizmişti. Kolluk o sınırı bir keskiyle geçti. Kapsam dışı bir aramanın meyvesi, ne kadar ağır olursa olsun, hükmün kefesine konamaz."
+                  "text": "Hâkim, talep yazısında bir ev arkadaşı olduğunu bile bile sınırı çizmişti. Kolluk o sınırı bir keskiyle geçti. Anayasa 38/6, CMK 206/2-a ve 217/2: kapsam dışı bir aramanın meyvesi hükmün kefesine konamaz."
                 },
                 { "speaker": "savci", "text": "Sayın Başkan, kolluğun iyi niyetle hareket ettiği açıktır." },
                 { "speaker": "player", "text": "İyi niyet bir kilidi açmaz, Sayın Savcı. Bir karar açar." },
@@ -1529,13 +1536,13 @@
         {
           "id": "T04_C",
           "kind": "OPTION",
-          "label": "Arama gece vakti yapıldı (CMK 118)",
+          "label": "Arama karanlıkta, gece vakti başladı; gece araması için ayrıca gerekçe yok",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "savci",
-                  "text": "Saat altıyı geçmişti, güneşin doğuşuna bir saatten az vardı. Gece değil."
+                  "text": "Güneş yediyi kırk üç geçe doğdu, Sayın Başkan. Gece vakti ondan bir saat önce biter. Ekip kapıyı yedide çaldı. Karanlık, gece demek değildir."
                 },
                 { "speaker": "baskan", "text": "Reddedildi." }
               ]
@@ -1547,7 +1554,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Gece vakti, güneş batışından bir saat sonra başlayıp doğuşundan bir saat öncesine kadar süren zamandır (TCK 6/1-e). 11 Kasım’da Bursa’da güneş saat yediden sonra doğar; 06.05’te gece sona ermişti. Dayanaksız itiraz.",
+            "feedback": "Gece vakti, güneşin batmasından bir saat sonra başlayıp doğmasından bir saat öncesine kadar süren zamandır (TCK 6/1-e; CMK 118). 11 Kasım’da Bursa’da güneş 07.43’te doğar; gece vakti 06.43’te biter. Arama 07.00’de başladı: hava karanlık olsa da gece vakti değildi. Dayanaksız itiraz.",
             "category": "USUL_BILGISI"
           },
           "next": "T_04R"
@@ -1555,10 +1562,17 @@
         {
           "id": "T04_D",
           "kind": "OPTION",
-          "label": "Diyeceğimiz yok",
+          "label": "Takdir heyetindir; bir diyeceğimiz yok",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "baskan", "text": "Peki. Savcılığın delillerine karşı bir beyan yok; kayda geçti." }
+              ]
+            }
+          ],
           "quality": {
             "q": "BAD",
-            "feedback": "Kapsam dışı aramaya itiraz edilmedi; delil yasağı ileri sürülmedi.",
+            "feedback": "Delil yasağı bir takdir meselesi değildir: hukuka aykırı elde edilen delil hükme esas alınamaz ve bunu tartışmanın yeri tam da delillerin tartışılmasıdır (CMK 206/2-a, 217/2). Kapsam dışı arama ileri sürülmedi.",
             "category": "USUL_BILGISI"
           },
           "next": "T_04R"
@@ -1607,7 +1621,7 @@
         {
           "id": "T04B_A",
           "kind": "OPTION",
-          "label": "Şekerlik arka oda kapısının dibindeydi; paketler arka odanın stoğundan. Kavanozdaki iz, kavanozu kullananı gösterir",
+          "label": "Şekerlik arka odanın kapısındaydı; paketler oradan",
           "visibleWhen": { "hasEvidence": "ded_sekerlik" },
           "responses": [
             {
@@ -1678,7 +1692,7 @@
         {
           "id": "T04B_C",
           "kind": "OPTION",
-          "label": "Ortak alanda bulunan madde ev sahibine aittir",
+          "label": "Şekerlik ev sahibinin demirbaşıdır; ortak alandaki eşya kiraya verenin zilyetliğinde sayılır",
           "responses": [
             { "lines": [{ "speaker": "baskan", "text": "Müdafi, bu iddianın bir dayanağı var mı? Kayda geçmedi." }] }
           ],
@@ -1696,7 +1710,7 @@
         {
           "id": "T04B_D",
           "kind": "OPTION",
-          "label": "Diyeceğimiz yok",
+          "label": "Ek beyanımız yok",
           "quality": {
             "q": "BAD",
             "feedback": "Savcılığın “ortak alan” tezi cevapsız kaldı.",
@@ -1715,7 +1729,7 @@
       "routes": [
         { "when": { "all": [{ "flag": "tolga_kirildi" }, { "hasEvidence": "ev_iz_eslesme" }] }, "to": "T_05B" },
         { "when": { "ref": "beraat_e" }, "to": "T_05E" },
-        { "when": { "flag": "contra_s2" }, "to": "T_05N" },
+        { "when": { "all": [{ "flag": "contra_s2" }, { "not": { "flag": "jar_cleared" } }] }, "to": "T_05N" },
         { "to": "T_05M" }
       ],
       "choices": []
@@ -1796,6 +1810,19 @@
       "courtStage": "MUTALAA",
       "lines": [
         {
+          "when": {
+            "all": [
+              { "flag": "contra_s2" },
+              {
+                "any": [
+                  { "flag": "contra_t3" },
+                  { "flag": "contra_t4" },
+                  { "flag": "contra_t5" },
+                  { "flag": "tolga_kirildi" }
+                ]
+              }
+            ]
+          },
           "lines": [
             {
               "speaker": "savci",
@@ -1804,6 +1831,32 @@
             {
               "speaker": "savci",
               "text": "Muhbir beyanı çelişkilidir: kask, saat ve tanığın sanıkla olan geçmişi beyanın güvenilirliğini zayıflatmaktadır."
+            },
+            {
+              "speaker": "savci",
+              "text": "Sanığın madde kullanıcısı olduğu sabittir; ancak kullanım bu davanın konusu değildir. Ticaret kastına dair kesin ve inandırıcı delil yoktur."
+            },
+            {
+              "speaker": "savci",
+              "text": "Sanığın atılı suçu işlediği sabit olmadığından beraatine; arka odanın kiracısı hakkında suç duyurusunda bulunulmasına karar verilmesini talep ederim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Serap Akın oturdu. Kalemini masanın kenarına paralel bıraktı; her zamanki gibi. Bana bakmadı. Bakmasına gerek yoktu."
+            },
+            { "speaker": "baskan", "text": "Müdafi, mütalaaya karşı diyeceğiniz?" }
+          ]
+        },
+        {
+          "when": { "flag": "contra_s2" },
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Sayın Başkan. Arka odanın sanığın kullanımında olduğu kanıtlanamamıştır; kolluk bunu varsaydığını beyan etmiştir. Şekerlikteki paketlerin de aynı stoktan geldiği anlaşılmaktadır."
+            },
+            {
+              "speaker": "savci",
+              "text": "Arka odadaki materyal hükme esas alınamayacağına göre geriye muhbirin beyanı kalıyor: etkin pişmanlık beklentisiyle verilmiş, başka bir delille desteklenmeyen tek bir beyan."
             },
             {
               "speaker": "savci",
@@ -1834,7 +1887,7 @@
         {
           "id": "T05E_A",
           "kind": "OPTION",
-          "label": "Mütalaaya katılıyoruz; sanığın kullanıcılığı ticaret kastının kanıtı değildir",
+          "label": "Katılıyoruz; kullanım ticaretin kanıtı değildir",
           "responses": [
             {
               "lines": [
@@ -1870,7 +1923,7 @@
         {
           "id": "T05E_C",
           "kind": "OPTION",
-          "label": "Polis hakkında da suç duyurusu talep ediyoruz",
+          "label": "Arama hukuka aykırıydı; kolluk görevlileri hakkında da suç duyurusunda bulunulmasını talep ediyoruz",
           "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": -30 }],
           "quality": {
             "q": "BAD",
@@ -1921,7 +1974,7 @@
         {
           "id": "T05N_A",
           "kind": "OPTION",
-          "label": "Ek savunma için süre talep ediyoruz; şekerliğin kime ait olduğu tartışılmadı",
+          "label": "Nitelik değişti; ek savunma için süre talep ediyoruz",
           "responses": [
             {
               "lines": [
@@ -1947,7 +2000,7 @@
         {
           "id": "T05N_B",
           "kind": "OPTION",
-          "label": "Ek savunmamız hazır: sanık kullanıcıdır ama o paketler onun değildir",
+          "label": "Ek savunmamız hazır: paketler onun değil",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 50 },
             { "type": "VAR", "var": "ek_savunma", "op": "set", "value": true }
@@ -1997,6 +2050,20 @@
       "title": "Mütalaa",
       "courtStage": "MUTALAA",
       "lines": [
+        {
+          "when": { "flag": "contra_s2" },
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Sayın Başkan. Arka odanın sanığın kullanımında olduğu kanıtlanamamıştır; bunu kabul ediyorum. Ama muhbir paketi Daire 7’den, sanıktan aldığını söylüyor ve bu salonda da söyledi."
+            },
+            {
+              "speaker": "savci",
+              "text": "Aynı dairede kırk altı paket, hassas terazi ve kilitli poşetler ele geçti. Muhbirin anlattığı satış bir boşlukta durmuyor. Sanığın TCK 188/3 ve 188/4-a uyarınca cezalandırılmasını talep ederim."
+            },
+            { "speaker": "baskan", "text": "Müdafi, mütalaaya karşı diyeceğiniz?" }
+          ]
+        },
         {
           "lines": [
             {
@@ -2327,6 +2394,7 @@
           "label": "Yüklenen suç sanık tarafından işlenmemiştir; gerçek fail arka odanın kiracısıdır (CMK 223/2-b)",
           "responses": [
             {
+              "when": { "all": [{ "flag": "tolga_kirildi" }, { "hasEvidence": "ev_iz_eslesme" }] },
               "lines": [
                 {
                   "speaker": "player",
@@ -2343,6 +2411,31 @@
                 {
                   "speaker": "player",
                   "text": "Suç işlenmiştir; ama müvekkilim tarafından değil. Beraatini talep ediyorum."
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, Sayın Üye. Bu dosya bir varsayımla başladı: ev onun, oda onun, toz onun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "O arka odada başka biri yaşıyordu. Malı satan, kapıyı kilitleyen, anahtarı cebinde taşıyan oydu. Müvekkilim suçu işlememiştir; gerçek fail arka odanın kiracısıdır."
+                },
+                {
+                  "speaker": "savci",
+                  "text": "Müdafi bir isim söylüyor, Sayın Başkan. Dosyada o isme ait bir iz yok, o ismi söyleyen bir tanık yok. Bir isim delil değildir."
+                },
+                {
+                  "speaker": "uye",
+                  "text": "Müdafi, “işlemediği sabit” dediğiniz şeyi hangi delile dayandırıyorsunuz?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Hangi delile? Bir kira defteri, bir posta kutusu, bir şüphe. “Sabit” için bunlar yetmez.",
+                  "style": "thought"
                 }
               ]
             }
@@ -2393,6 +2486,14 @@
           "label": "Suçun sanık tarafından işlendiği sabit değildir; şüpheden sanık yararlanır (CMK 223/2-e)",
           "responses": [
             {
+              "when": {
+                "all": [
+                  { "flag": "contra_s2" },
+                  { "flag": "jar_cleared" },
+                  { "flag": "contra_s3" },
+                  { "flag": "contra_t3" }
+                ]
+              },
               "lines": [
                 {
                   "speaker": "player",
@@ -2419,6 +2520,54 @@
                   "text": "Sanığın beraatini talep ediyorum. Ve bir şey daha: bu salondan çıktığında perşembe günü bir doktoru var. Onu oraya gönderin; buraya değil."
                 }
               ]
+            },
+            {
+              "when": { "flag": "contra_s2" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan. Savcılığın bütün hikâyesi tek bir kelimeye dayanıyordu ve o kelimeyi tanık bu salonda söyledi: varsaydım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir ev, iki oda. Kira sözleşmesi bir evin kime kiralandığını söyler; bir odanın kimin hâkimiyetinde olduğunu söylemez."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Dosyada geriye kalan her şey o varsayımın üstüne kurulmuştu. Varsayım gidince, kalan delil sanığın suçu işlediğini kesin olarak göstermiyor. Kuşku varsa, o kuşku onundur."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Sanığın beraatini talep ediyorum. Ve bir şey daha: bu salondan çıktığında perşembe günü bir doktoru var. Onu oraya gönderin; buraya değil."
+                }
+              ]
+            },
+            {
+              "when": { "flag": "key_excluded" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan. Arka odadaki her şey, kararın sınırını bir keskiyle geçen bir aramanın ürünüdür; hükme esas alınamaz. Keskiyi tanık kendi ağzıyla anlattı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "O materyal düşünce geriye bir muhbirin sözü kalıyor. Başka hiçbir delille desteklenmeyen, ceza indirimi umuduyla verilmiş tek bir söz."
+                },
+                { "speaker": "player", "text": "Kuşku varsa, o kuşku onundur. Sanığın beraatini talep ediyorum." }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan. Savcılık bu odanın müvekkilime ait olduğunu ispat etmedi; bir kira sözleşmesi bir odanın kimin hâkimiyetinde olduğunu söylemez."
+                },
+                { "speaker": "player", "text": "Kuşku varsa, o kuşku onundur. Sanığın beraatini talep ediyorum." },
+                {
+                  "speaker": "savci",
+                  "text": "Kolluk tanığı odanın sanığa ait olduğunu söyledi, Sayın Başkan; aksini söyleyen kimse çıkmadı. Kuşku bir iddiayla doğmaz."
+                }
+              ]
             }
           ],
           "effects": [
@@ -2427,7 +2576,14 @@
               "when": {
                 "all": [
                   { "flag": "contra_s2" },
-                  { "any": [{ "flag": "contra_t3" }, { "flag": "contra_t4" }, { "flag": "tolga_kirildi" }] }
+                  {
+                    "any": [
+                      { "flag": "contra_t3" },
+                      { "flag": "contra_t4" },
+                      { "flag": "tolga_kirildi" },
+                      { "flag": "key_excluded" }
+                    ]
+                  }
                 ]
               },
               "then": [
@@ -2447,7 +2603,7 @@
                 {
                   "type": "MARK",
                   "quality": "GOOD",
-                  "feedback": "Odanın sanığa ait olduğu varsayımı çöktü, muhbirin anlatısı çelişkili: kalan şüphe sanık lehine (Anayasa 38/4).",
+                  "feedback": "Odanın sanığa ait olduğu varsayımı çöktü; muhbirin anlatısı ya çelişkili ya da tek başına kaldı: kalan şüphe sanık lehine (Anayasa 38/4).",
                   "category": "SAVUNMA_STRATEJISI"
                 }
               ],
@@ -2550,7 +2706,7 @@
         {
           "id": "T07_A",
           "kind": "OPTION",
-          "label": "“Kullandım. Satmadım. Perşembe randevum var; gitmek istiyorum.”",
+          "label": "“Kullandım. Satmadım. Perşembe randevum var.”",
           "responses": [
             {
               "lines": [

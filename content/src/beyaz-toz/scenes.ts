@@ -18,7 +18,7 @@ export const OB_AYAKKABI = rect(246, 232, 84, 48);
 export const OB_GITAR = rect(100, 56, 30, 110);
 export const OB_KULTABLA = rect(150, 160, 22, 14);
 // Bina girişi
-export const OB_POSTA = rect(30, 126, 42, 30);
+export const OB_POSTA = rect(30, 124, 26, 26);
 export const OB_YAG = rect(220, 250, 92, 30);
 export const OB_SALTER = rect(150, 100, 18, 22);
 export const OB_IZMARIT = rect(136, 262, 44, 20);
@@ -86,7 +86,7 @@ export const scenes: CasePart = {
         sceneObject('ob_randevu', 'Masadaki kart', OB_RANDEVU, {
           discovers: 'clue_randevu',
           score: { ARASTIRMA: 40 },
-          text: 'Bardak altlığının yanında bir randevu kartı. AMATEM, ayaktan tedavi, 14 Kasım Perşembe 10.30. Baskından üç gün sonrası.',
+          text: 'Bardak altlığının yanında bir randevu kartı. AMATEM, ayaktan tedavi, 13 Kasım Perşembe 10.30. Baskından iki gün sonrası.',
           short: 'Randevu kartı',
         }),
         sceneObject('ob_sekerlik', 'Koridor rafı', OB_SEKERLIK, {

@@ -208,7 +208,7 @@ export const hearing1: CasePart = {
             th('Söyledi. Kendi sesiyle, kendi kararıyla. Savcı bir an kalemini bıraktı.'),
             s(
               'kaan',
-              'Bunu söylemek için buraya gelmem gerekti, Sayın Başkan. Annem bunu bugün buradan duyacak. Ama yalan söyleyerek çıkmak istemiyorum. Kullandım. Satmadım.',
+              'Bunu söylemek için buraya gelmem gerekti, Sayın Başkan. Annem bugün burada. Ne duyacaksa benden duysun. Yalan söyleyerek çıkmak istemiyorum. Kullandım. Satmadım.',
             ),
             n(
               'Defne’nin yanındaki boş sandalye boş kalmadı. Kapının yanında, elinde bir ıslak şemsiyeyle, beyaz saçlı bir kadın durmuştu. Kimse onu fark etmedi; Kaan dışında.',
@@ -307,7 +307,7 @@ export const hearing1: CasePart = {
                 ),
                 s(
                   'kaan',
-                  'Ekimden beri tedavideyim. Otuz bir ekimde testim temizdi. Cezaevinde de temizim. Kırk dört gün.',
+                  'Ekimden beri tedavideyim. Otuz ekimde testim temizdi. Cezaevinde de temizim. Yüz on beş gün.',
                 ),
                 s('uye', 'Arka odadaki maddeyi biliyor muydunuz?'),
                 s('kaan', 'Bilmiyordum. Sormadım. Sormamak da bir suçsa… o suçu işledim.', 'uzgun'),
@@ -345,7 +345,7 @@ export const hearing1: CasePart = {
                 ),
                 s(
                   'kaan',
-                  'Her perşembe randevum vardı. Otuz bir ekimde test verdim, temizdi. On dört kasımda da randevum vardı; ben o gün cezaevindeydim.',
+                  'Her perşembe randevum vardı. Otuz ekimde test verdim, temizdi. On üç kasımda da randevum vardı; ben o gün cezaevindeydim.',
                 ),
                 s('uye', 'Tedaviye başvurduğunuzda hakkınızda bir soruşturma var mıydı?'),
                 s('kaan', 'Hayır, Sayın Hâkim. Kimse bir şey bilmiyordu. Ablamdan başka.'),
@@ -473,7 +473,7 @@ export const hearing1: CasePart = {
             ),
             s(
               'tuncay',
-              'Muhbir beyanı üzerine adres tespit edildi. Sabah altı beşte ekibimle daireye girdik. Şüpheli ön odada uyuyordu. Arka odada materyal ele geçirildi. Mutfakta da iki paket.',
+              'Muhbir beyanı üzerine adres tespit edildi. Sabah yedide ekibimle daireye girdik. Şüpheli ön odada uyuyordu. Arka odada materyal ele geçirildi. Mutfakta da iki paket.',
             ),
             s(
               'tuncay',
@@ -772,7 +772,7 @@ export const hearing1: CasePart = {
             inc('pers'),
             mark(
               'GOOD',
-              'Tanık aramanın başında değil, kapı açıldıktan sonra çağrıldı: CMK 119/4 uyarınca savcı yokken iki komşu ya da ihtiyar heyeti bulundurulur. Kayıt, aramanın güvencesini zayıflattı.',
+              'Tanık aramanın başında değil, kapı açıldıktan sonra çağrıldı; üstelik tekti. CMK 119/4 uyarınca savcı yokken ihtiyar heyetinden ya da komşulardan iki kişi bulundurulur. Aramanın güvencesi zayıfladı.',
               'SORGULAMA',
             ),
           ],
@@ -780,11 +780,13 @@ export const hearing1: CasePart = {
             {
               lines: [
                 me(
-                  'Tanık Nesrin Uysal imzasının yanına saati kendi eliyle yazmış: 06.40. Arama 06.05’te başlamış. Arka oda açıldığında tanık neredeydi?',
+                  'Tanık Nesrin Uysal imzasının yanına saati kendi eliyle yazmış: 07.35. Arama 07.00’de başlamış. Arka oda açıldığında tanık neredeydi?',
                 ),
                 s('tuncay', 'Tanığı… tanığı biraz sonra çağırdık. Yaşlı bir kadın, giyinmesi lazımdı.'),
                 me('Yani arka oda açılırken tanık yoktu. Ve tutanağa “arama başında hazır” yazdınız.'),
                 s('tuncay', 'Matbu bir ifade. Her tutanakta öyle yazar.', 'uzgun'),
+                me('Tutanakta tek bir tanık imzası var. Savcı yokken iki komşu bulundurulmaz mı?'),
+                s('tuncay', 'Sabahın yedisinde bir komşu bulabildik, Sayın Başkan. O da geldi işte.', 'uzgun'),
                 th('“Her tutanakta öyle yazar.” Sorun da tam olarak bu.'),
               ],
             },
@@ -939,7 +941,7 @@ export const hearing1: CasePart = {
         },
       ],
       choices: [
-        option('TL_KURYE', 'Ev arkadaşının çalıştığı kurye şirketinden personel ve GPS kayıtlarının istenmesi', {
+        option('TL_KURYE', 'Kurye şirketinden personel ve GPS kayıtlarının istenmesi', {
           visibleWhen: all(
             not(flag('kurye_istendi')),
             any(has('clue_mont'), has('ded_kurye'), has('clue_kira_defteri')),
@@ -965,7 +967,7 @@ export const hearing1: CasePart = {
           responses: [{ lines: [s('baskan', 'Tutukluluk hâli ara kararda değerlendirilecek.')] }],
           next: '$stay',
         }),
-        option('TL_BERAAT', 'Sanığın hemen beraatine karar verilmesi', {
+        option('TL_BERAAT', 'Delil yetersizliğinden sanığın bu celsede hemen beraatine karar verilmesi', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Deliller toplanmadan ve mütalaa alınmadan esas hakkında hüküm kurulmaz (CMK 216). Talep ciddiyetini zedeledi.',
@@ -1050,7 +1052,7 @@ export const hearing1: CasePart = {
             n('Koridorda Serap Akın yanımdan geçerken durdu. Elinde dosya, yüzünde hiçbir şey.'),
             s(
               'savci',
-              'Kilit fotoğrafı iyiydi, avukat hanım. Ama arka odada kırk paket vardı. Kimin olduğunu hâlâ bilmiyoruz. Siz de bilmiyorsunuz.',
+              'Kilit fotoğrafı iyiydi, avukat hanım. Ama arka odada kırk altı paket vardı. Kimin olduğunu hâlâ bilmiyoruz. Siz de bilmiyorsunuz.',
             ),
             s('savci', 'Bana bir isim getirin. Bir hayalet değil, bir isim. O zaman konuşuruz.'),
             s(
@@ -1066,19 +1068,46 @@ export const hearing1: CasePart = {
             n('Koridorda Serap Akın yanımdan geçerken durdu. Elinde dosya, yüzünde hiçbir şey.'),
             s(
               'savci',
-              'Arka odada kırk paket vardı, avukat hanım. Bir oda, bir kiracı. Bana başka bir isim getirmedikçe o oda sizin müvekkilinizin.',
+              'Arka odada kırk altı paket vardı, avukat hanım. Bir oda, bir kiracı. Bana başka bir isim getirmedikçe o oda sizin müvekkilinizin.',
             ),
             th('Bir isim. Bir soyadı, bir adres, bir yüz. Üç haftam var.'),
           ],
         },
       ],
-      choices: [cont('H107_DEVAM', 'Devam', 'H1_08', { role: 'PRIMARY' })],
+      choices: [cont('H107_DEVAM', 'Devam', 'ARA_GIRIS_1', { role: 'PRIMARY' })],
     }),
     story('H1_08', {
       ...HEAR1,
       title: 'O akşam',
       background: 'buro_gece',
       lines: [
+        {
+          when: all(flag('kaan_tahliye'), any(flag('kaan_riza'), flag('anne_kaan'))),
+          lines: [
+            card('26 OCAK · 21.30 — MUDANYA, DEFNE’NİN EVİ', 'ev'),
+            n(
+              'Defne beni yemeğe çağırmıştı. Sofrada üç tabak vardı; birine kimse dokunmadı. Kaan çorbasını soğuttu, ısıttı, yine soğuttu.',
+            ),
+            s(
+              'kaan',
+              'Cezaevinde yemek beşte veriliyor. Saat beşte açlık başlıyor, dokuzda bitiyor. Şimdi dokuz buçuk. Vücudum hâlâ orada.',
+            ),
+            s('defne', 'Yavaş ye. Mide de alışkanlıktır.', 'mutlu'),
+            n('Telefon çaldı. Ekranda: Anne. Kaan telefona baktı, bana baktı, ablasına baktı. Defne başını salladı.'),
+            s('kaan', 'Anne? … Evet. Buradayım. Ablamdayım. … Biliyorum anne. Duydun. Hepsini duydun.', 'uzgun'),
+            n(
+              'Balkona çıktı. Camın arkasından bir süre konuştuğunu gördük; sonra sustuğunu; sonra yalnızca dinlediğini.',
+            ),
+            s('defne', 'On yıl sonra hatırlayacağım bu akşamı. Bir çorba, bir balkon, bir telefon.'),
+            n(
+              'Kaan balkondan döndüğünde gözleri kırmızıydı. Oturdu, çorbasını iki elle tuttu, içti. Bu sefer soğutmadı.',
+            ),
+            s('kaan', 'Annem “eve gel” dedi. “Sınav” lafını hiç açmadı. Sadece “yemeğini ye” dedi. Annem işte.'),
+            th(
+              'Tahliye bir beraat değil. Ama bir sofrada üçüncü tabağın dolu olması, bazen bir hükümden daha uzun yaşar.',
+            ),
+          ],
+        },
         {
           when: flag('kaan_tahliye'),
           lines: [
@@ -1132,7 +1161,7 @@ export const hearing1: CasePart = {
               ],
             },
           ],
-          next: 'ARA_GIRIS_1',
+          next: 'ARA_GIRIS',
         }),
         option('H108_B', 'Defne’ye kısa ve dürüst bir cevap yaz', {
           effects: [inc('trust', 3)],
@@ -1145,7 +1174,7 @@ export const hearing1: CasePart = {
               ],
             },
           ],
-          next: 'ARA_GIRIS_1',
+          next: 'ARA_GIRIS',
         }),
       ],
     }),

@@ -12,7 +12,7 @@ export const evidencePart: CasePart = {
     evidence('ev_tutanak', {
       type: 'BELGE',
       title: 'Arama ve el koyma tutanağı',
-      shortText: '11 Kasım 06.05–07.40 · arka oda, mutfak · kroki ekli.',
+      shortText: '11 Kasım 07.00–08.35 · arka oda, mutfak · kroki ekli.',
       description:
         'Kom. Yrd. Tuncay Sezer imzalı tutanak: “şüphelinin ikametinde, evin arka odasında (şüphelinin kullanımındaki) dolapta 46 paket, hassas terazi, kilitli poşetler, 8.750 TL; mutfakta şekerlikte 2 paket.” Tanık: Nesrin Uysal (komşu). Ekte olay yeri krokisi.',
       sourceLabel: 'Soruşturma dosyası',
@@ -40,7 +40,7 @@ export const evidencePart: CasePart = {
     evidence('ev_kriminal', {
       type: 'ADLI_RAPOR',
       title: 'Kriminal polis laboratuvarı raporu',
-      shortText: '46 paket net 39,8 g + 2 paket 1,7 g kokain · terazide yabancı iz.',
+      shortText: '46 paket net 39,8 g + 2 paket 1,7 g kokain · terazi, kavanoz, para.',
       description:
         'Arka odadaki 46 paket net 39,8 g, şekerlikteki 2 paket net 1,7 g kokain. Terazinin kefesinde kokain bulaşığı ve karşılaştırmaya elverişli bir parmak izi. Şekerlik kavanozunda iz incelemesi.',
       sourceLabel: 'Kriminal Polis Laboratuvarı',
@@ -111,9 +111,9 @@ export const evidencePart: CasePart = {
     evidence('ev_tedavi', {
       type: 'BELGE',
       title: 'Epikriz ve AMATEM kayıtları',
-      shortText: '3 Ekim acil · 10 Ekim’den beri ayaktan tedavi · 31 Ekim test negatif.',
+      shortText: '3 Ekim acil · 9 Ekim’den beri ayaktan tedavi · 30 Ekim test negatif.',
       description:
-        'Kaan’ın yazılı onayıyla Defne’nin getirdiği belgeler: 3 Ekim acil servis epikrizi (taşikardi, madde kullanımı), 10 Ekim’den itibaren AMATEM ayaktan tedavi randevuları, 31 Ekim idrar testi negatif.',
+        'Kaan’ın yazılı onayıyla Defne’nin getirdiği belgeler: 3 Ekim acil servis epikrizi (taşikardi, madde kullanımı), 9 Ekim’den itibaren AMATEM ayaktan tedavi randevuları, 30 Ekim idrar testi negatif.',
       sourceLabel: 'Defne Yıldız (müvekkilin onayıyla)',
       icon: 'receipt',
       side: 'DEFENSE',
@@ -123,7 +123,7 @@ export const evidencePart: CasePart = {
     evidence('ev_kurye', {
       type: 'BELGE',
       title: 'Paketçi personel ve GPS kayıtları',
-      shortText: 'Kurye Barış Demirel · 11 Kasım 06.21 Ihlamur Sok. · 12 Kasım ayrılış.',
+      shortText: 'Kurye Barış Demirel · 11 Kasım 07.16 Ihlamur Sok. · 12 Kasım ayrılış.',
       description:
         'Mahkemenin ara kararıyla Paketçi’den gelen kayıtlar: kurye Barış Demirel’in personel dosyası (İzmir adresli), 10–11 Kasım gece vardiyası GPS dökümü ve 12 Kasım tarihli iş akdi feshi.',
       sourceLabel: 'Paketçi (mahkeme ara kararı)',
@@ -213,7 +213,7 @@ export const evidencePart: CasePart = {
       title: 'Randevu kartı (AMATEM)',
       shortText: 'AMATEM ayaktan tedavi randevu kartı.',
       description:
-        'Ön odadaki çalışma masasında, bir bardak altlığının yanında AMATEM ayaktan tedavi randevu kartı: 14 Kasım, Perşembe 10.30.',
+        'Ön odadaki çalışma masasında, bir bardak altlığının yanında AMATEM ayaktan tedavi randevu kartı: 13 Kasım, Perşembe 10.30.',
       sourceLabel: 'Olay yeri fotoğrafı (ön oda)',
       icon: 'receipt',
       tags: kart,
@@ -271,9 +271,9 @@ export const evidencePart: CasePart = {
     clue('clue_tanik_saat', {
       type: 'BELGE',
       title: 'Tanık imzasının saati',
-      shortText: 'Arama 06.05’te başlamış; tanık imzasının yanında 06.40 yazıyor.',
+      shortText: 'Arama 07.00’de başlamış; tanık imzasının yanında 07.35 yazıyor.',
       description:
-        'Tutanağın başında “arama 06.05’te başladı” yazıyor; komşu tanığın imzasının yanında el yazısıyla “06.40”.',
+        'Tutanağın başında “arama 07.00’de başladı” yazıyor; komşu tanığın imzasının yanında el yazısıyla “07.35”.',
       sourceLabel: 'Arama tutanağı',
       icon: 'magnifier',
       combinable: false,
@@ -343,7 +343,7 @@ export const evidencePart: CasePart = {
       title: 'Aynı poşet, aynı gramaj',
       shortText: 'Şekerlikteki 2 paket ile arka odadaki 46 paket aynı poşet tipi ve gramajda.',
       description:
-        'Şekerlikteki iki paket, arka odadaki paketlerle aynı marka kilitli poşette, aynı kesimle ve aynı ortalama gramajda (0,85 g): aynı stoktan.',
+        'Şekerlikteki iki paket, arka odadaki paketlerle aynı marka kilitli poşette, aynı kesimle ve aynı ortalama gramajda (0,85–0,87 g): aynı stoktan.',
       sourceLabel: 'Kriminal rapor',
       icon: 'compare',
       tags: kart,
@@ -394,7 +394,7 @@ export const evidencePart: CasePart = {
       title: 'Tedavi süreci',
       shortText: 'Acil, AMATEM, negatif test: ekimden beri tedavide.',
       description:
-        'Kaan 3 Ekim’de acile kaldırıldı, 10 Ekim’de AMATEM’de ayaktan tedaviye başladı, 31 Ekim testi negatif.',
+        'Kaan 3 Ekim’de acile kaldırıldı, 9 Ekim’de AMATEM’de ayaktan tedaviye başladı, 30 Ekim testi negatif.',
       sourceLabel: 'Defne / tedavi kayıtları',
       icon: 'receipt',
       tags: kart,
@@ -411,10 +411,10 @@ export const evidencePart: CasePart = {
     }),
     clue('clue_nesrin_moto', {
       type: 'TANIK_IFADESI',
-      title: 'Sabah 06.20’deki motor',
+      title: 'Sabah 07.15’teki motor',
       shortText: 'Nesrin: baskın sırasında kurye oğlan motoruyla köşeye geldi, döndü.',
       description:
-        'Nesrin sabah namazına kalkmış, kedilere mama koyarken pencereden görmüş: 06.20 gibi “kurye oğlan” motoruyla köşeye geldi, polis araçlarını görünce döndü.',
+        'Nesrin sabah namazından sonra uyumamış; kedilere mama koyarken pencereden görmüş: 07.15 gibi “kurye oğlan” motoruyla köşeye geldi, polis araçlarını görünce döndü.',
       sourceLabel: 'Nesrin Uysal',
       icon: 'camera',
       tags: kart,
@@ -432,10 +432,10 @@ export const evidencePart: CasePart = {
     // --- Ara evre ipuçları ---
     clue('clue_gps', {
       type: 'DIJITAL',
-      title: 'GPS dökümündeki 06.21',
-      shortText: '11 Kasım 06.21 · Ihlamur Sok. · 40 sn duruş · “teslimat iptal”.',
+      title: 'GPS dökümündeki 07.16',
+      shortText: '11 Kasım 07.16 · Ihlamur Sok. · 40 sn duruş · “teslimat iptal”.',
       description:
-        'Barış Demirel’in kurye cihazı 11 Kasım 06.21’de Ihlamur Sokak 14 önünde 40 saniye duruyor, ardından ters yöne gidiyor; sistemde “teslimat iptal” kaydı.',
+        'Barış Demirel’in kurye cihazı 11 Kasım 07.16’da Ihlamur Sokak 14 önünde 40 saniye duruyor, ardından ters yöne gidiyor; sistemde “teslimat iptal” kaydı.',
       sourceLabel: 'Paketçi GPS kaydı',
       icon: 'phone',
       tags: ara,
@@ -594,9 +594,9 @@ export const evidencePart: CasePart = {
     insight('ded_kacis', {
       type: 'DIJITAL',
       title: 'Baskını gören kurye',
-      shortText: 'Barış 06.21’de baskını görüp döndü, ertesi gün işi bıraktı.',
+      shortText: 'Barış 07.16’da baskını görüp döndü, ertesi gün işi bıraktı.',
       description:
-        'GPS 06.21’de Ihlamur Sokak’ta kırk saniyelik bir duruş ve dönüş gösteriyor; Nesrin aynı dakikada motorun döndüğünü gördü. Ertesi gün Barış işi bıraktı.',
+        'GPS 07.16’da Ihlamur Sokak’ta kırk saniyelik bir duruş ve dönüş gösteriyor; Nesrin aynı dakikada motorun döndüğünü gördü. Ertesi gün Barış işi bıraktı.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'phone',
       side: 'DEFENSE',

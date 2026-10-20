@@ -45,13 +45,13 @@ export const inv1Docs: CasePart = {
           ],
         },
       ],
-      header: { left: 'ARAMA VE EL KOYMA TUTANAĞI', right: '11.11 · 06.05–07.40' },
+      header: { left: 'ARAMA VE EL KOYMA TUTANAĞI', right: '11.11 · 07.00–08.35' },
       columns: [
         { label: 'BÖLÜM', flex: 1 },
         { label: 'KAYIT', flex: 3 },
       ],
       rows: [
-        row('r_bas', ['Başlangıç', '06.05 · Kapı açıldı. Şüpheli ön odada yatağında uyurken bulundu.']),
+        row('r_bas', ['Başlangıç', '07.00 · Kapı açıldı. Şüpheli ön odada yatağında uyurken bulundu.']),
         row('r_kapi', ['Giriş', 'Odaların kapıları olağan şekilde açıldı; zor kullanılmadı.']),
         row(
           'r_arka',
@@ -71,7 +71,7 @@ export const inv1Docs: CasePart = {
         ),
         row('r_mutfak', ['Mutfak', 'Mutfakta şekerlik içinde 2 paket.']),
         row('r_tanik', ['Tanık', 'Arama başında hazır bulundurulan komşu: Nesrin Uysal · imza'], {
-          lupe: { cells: ['Tanık', 'Nesrin Uysal · imzanın yanında el yazısıyla: 06.40'], tone: 'special' },
+          lupe: { cells: ['Tanık', 'Nesrin Uysal · imzanın yanında el yazısıyla: 07.35'], tone: 'special' },
         }),
         row('r_kroki', [
           'Kroki',
@@ -94,8 +94,8 @@ export const inv1Docs: CasePart = {
           discovers: 'clue_tanik_saat',
           score: { DELIL_ANALIZI: 100 },
           feedback: hit(
-            '06.40',
-            'Arama 06.05’te başlamış. Tanık imzasının yanında 06.40 yazıyor. “Arama başında hazır” bulunan tanık, otuz beş dakika sonra gelmiş.',
+            '07.35',
+            'Arama 07.00’de başlamış. Tanık imzasının yanında 07.35 yazıyor. “Arama başında hazır” bulunan tanık, otuz beş dakika sonra gelmiş.',
             100,
           ),
         }),
@@ -163,7 +163,7 @@ export const inv1Docs: CasePart = {
           score: { DELIL_ANALIZI: 20 },
           feedback: {
             title: 'SÜRE İÇİNDE',
-            text: 'Karar 10 Kasım 14.15’te verilmiş; arama 11 Kasım 06.05’te. 48 saatin içinde. Burada bir hata yok; her kapı kırık değildir.',
+            text: 'Karar 10 Kasım 14.15’te verilmiş; arama 11 Kasım 07.00’de. 48 saatin içinde. Burada bir hata yok; her kapı kırık değildir.',
             label: '+20 SKOR · doğru okuma',
             tone: 'info',
           },
@@ -270,7 +270,7 @@ export const inv1Docs: CasePart = {
           kars: {
             cells: [
               'Şekerlik',
-              '2 paket · poşet tipi, kesim ve ortalama gramaj (0,85 g) arka odadaki paketlerle aynı.',
+              '2 paket · poşet tipi ve kesim arka odadaki paketlerle aynı; ortalama gramaj 0,85 g (arka oda 0,87 g).',
             ],
             tone: 'special',
           },
@@ -407,7 +407,7 @@ export const inv1Docs: CasePart = {
           ],
         },
       ],
-      header: { left: 'EMANET EŞYA TUTANAĞI · KAAN YILDIZ', right: '11.11 · 07.55' },
+      header: { left: 'EMANET EŞYA TUTANAĞI · KAAN YILDIZ', right: '11.11 · 08.50' },
       columns: [
         { label: 'EŞYA', flex: 1 },
         { label: 'AÇIKLAMA', flex: 3 },

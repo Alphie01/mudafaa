@@ -115,7 +115,7 @@ export const investigation1: CasePart = {
         {
           when: cmp(v('day'), '==', 1),
           lines: [
-            card('GÜN 1/3 · BİRİNCİ CELSEYE 12 GÜN', 'buro'),
+            card('GÜN 1/3 · BİRİNCİ CELSEYE 11 GÜN', 'buro'),
             n(
               'Masamda savcılık dosyasının fotokopisi: dört yüz on iki sayfa. Bir kahve, bir kalem, bir de bir sürü sarı yapışkan not. Henüz hiçbirine bir şey yazmadım.',
             ),
@@ -128,7 +128,7 @@ export const investigation1: CasePart = {
         {
           when: all(cmp(v('day'), '==', 2), any(has('clue_kilit'), has('clue_kira_defteri'), has('clue_odaya_girme'))),
           lines: [
-            card('GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN', 'buro'),
+            card('GÜN 2/3 · BİRİNCİ CELSEYE 10 GÜN', 'buro'),
             th('Dün bir hayaletin peşindeydim. Bugün bir mont, bir zincir, bir mesaj. Hayaletler mont giymez.'),
             n('Hedef: arka odada başka biri yaşıyordu. Kim? Ve polis o odaya nasıl girdi?'),
           ],
@@ -136,13 +136,13 @@ export const investigation1: CasePart = {
         {
           when: cmp(v('day'), '==', 2),
           lines: [
-            card('GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN', 'buro'),
+            card('GÜN 2/3 · BİRİNCİ CELSEYE 10 GÜN', 'buro'),
             n('Hedef: kâğıtlar ne diyor, fotoğraflar ne gösteriyor? Tutanak ile fotoğraf aynı evi mi anlatıyor?'),
           ],
         },
         {
           lines: [
-            card('GÜN 3/3 · BİRİNCİ CELSEYE 6 GÜN', 'buro'),
+            card('GÜN 3/3 · BİRİNCİ CELSEYE 9 GÜN', 'buro'),
             n(
               'Sabah erkenden büroya geldiğimde Leyla çoktan oradaydı. Masamın üstüne bir not bırakmıştı: “Beş gün kuralı. Bugün son.” Altına küçük bir çizgi çekmişti.',
             ),
@@ -165,6 +165,7 @@ export const investigation1: CasePart = {
       choices: [
         nav('GO_H1', 'DURUŞMAYA GİT · 1. CELSE', 'INV_GECE_1', {
           role: 'PRIMARY',
+          visibleWhen: cmp(v('day'), '==', 3),
           confirm: 'Duruşmaya gidersen soruşturma biter. Emin misin?',
         }),
       ],
@@ -181,7 +182,7 @@ export const investigation1: CasePart = {
       lines: [
         {
           lines: [
-            card('CUMA 22.15 — ARSLAN HUKUK', 'buro_gece'),
+            card('PERŞEMBE 22.15 — ARSLAN HUKUK', 'buro_gece'),
             n('Leyla paltosunu giymiş, kapının eşiğinde duruyordu. Gitmek üzereydi; gitmedi.'),
             s('leyla', 'Bugün öğrendiğin en önemli şey neydi, Deniz? Delili değil. Şeyi.'),
             th('Masamda fotokopiler, bir kahve, bir de soru. Leyla’nın soruları hep cevaptan uzundur.'),
@@ -250,11 +251,11 @@ export const investigation1: CasePart = {
       lines: [
         {
           lines: [
-            card('CUMARTESİ 23.05 — ARSLAN HUKUK', 'buro_gece'),
+            card('CUMA 23.05 — ARSLAN HUKUK', 'buro_gece'),
             n('Telefon titredi. Ekranda: Defne Yıldız. Arkasından eczane kapanırken çekilen kepenk sesi geliyordu.'),
             s(
               'defne',
-              'Rahatsız ediyorum, biliyorum. Annem aradı. Kaan’ın sesini duymak istiyormuş. Bir aydır “sınav” diyorum.',
+              'Rahatsız ediyorum, biliyorum. Annem aradı. Kaan’ın sesini duymak istiyormuş. İki aydır “sınav” diyorum.',
               'uzgun',
             ),
             s(
@@ -319,7 +320,7 @@ export const investigation1: CasePart = {
       lines: [
         {
           lines: [
-            card('PAZAR 08.10 — GÖRÜKLE, KAHVE DURAĞI', 'kafe'),
+            card('CUMARTESİ 08.10 — GÖRÜKLE, KAHVE DURAĞI', 'kafe'),
             n(
               'Kaan’ın çalıştığı kafe. Küçük, sıcak, tavanına çekilmiş sarı ampuller. Kahve makinesi tıslıyordu; tezgâhın arkasında kırklarında, saçını tokayla toplamış bir kadın.',
             ),
@@ -465,7 +466,7 @@ export const investigation1: CasePart = {
       ],
       prompt: 'Mahkemeye delil dilekçesi: duruşmadan en az beş gün önce. Üç talep hakkın var; neyi isteyeceksin?',
       choices: [
-        option('DIL_KURYE', 'Paketçi kurye şirketinden, adresteki kuryenin personel ve GPS kayıtlarının istenmesi', {
+        option('DIL_KURYE', 'Kurye şirketinden personel ve GPS kayıtları', {
           visibleWhen: any(has('clue_mont'), has('ded_kurye'), has('clue_kira_defteri')),
           cost: [{ var: 'dil_hak', amount: 1 }],
           score: { USUL_BILGISI: 50 },

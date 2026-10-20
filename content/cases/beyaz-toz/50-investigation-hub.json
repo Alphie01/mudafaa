@@ -12,7 +12,7 @@
         {
           "when": { "cmp": [{ "var": "day" }, "==", 1] },
           "lines": [
-            { "speaker": "narrator", "text": "GÜN 1/3 · BİRİNCİ CELSEYE 12 GÜN", "style": "card", "bg": "buro" },
+            { "speaker": "narrator", "text": "GÜN 1/3 · BİRİNCİ CELSEYE 11 GÜN", "style": "card", "bg": "buro" },
             {
               "speaker": "narrator",
               "text": "Masamda savcılık dosyasının fotokopisi: dört yüz on iki sayfa. Bir kahve, bir kalem, bir de bir sürü sarı yapışkan not. Henüz hiçbirine bir şey yazmadım."
@@ -39,7 +39,7 @@
             ]
           },
           "lines": [
-            { "speaker": "narrator", "text": "GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN", "style": "card", "bg": "buro" },
+            { "speaker": "narrator", "text": "GÜN 2/3 · BİRİNCİ CELSEYE 10 GÜN", "style": "card", "bg": "buro" },
             {
               "speaker": "player",
               "text": "Dün bir hayaletin peşindeydim. Bugün bir mont, bir zincir, bir mesaj. Hayaletler mont giymez.",
@@ -54,7 +54,7 @@
         {
           "when": { "cmp": [{ "var": "day" }, "==", 2] },
           "lines": [
-            { "speaker": "narrator", "text": "GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN", "style": "card", "bg": "buro" },
+            { "speaker": "narrator", "text": "GÜN 2/3 · BİRİNCİ CELSEYE 10 GÜN", "style": "card", "bg": "buro" },
             {
               "speaker": "narrator",
               "text": "Hedef: kâğıtlar ne diyor, fotoğraflar ne gösteriyor? Tutanak ile fotoğraf aynı evi mi anlatıyor?"
@@ -63,7 +63,7 @@
         },
         {
           "lines": [
-            { "speaker": "narrator", "text": "GÜN 3/3 · BİRİNCİ CELSEYE 6 GÜN", "style": "card", "bg": "buro" },
+            { "speaker": "narrator", "text": "GÜN 3/3 · BİRİNCİ CELSEYE 9 GÜN", "style": "card", "bg": "buro" },
             {
               "speaker": "narrator",
               "text": "Sabah erkenden büroya geldiğimde Leyla çoktan oradaydı. Masamın üstüne bir not bırakmıştı: “Beş gün kuralı. Bugün son.” Altına küçük bir çizgi çekmişti."
@@ -254,6 +254,7 @@
           "kind": "NAVIGATE",
           "label": "DURUŞMAYA GİT · 1. CELSE",
           "role": "PRIMARY",
+          "visibleWhen": { "cmp": [{ "var": "day" }, "==", 3] },
           "confirm": "Duruşmaya gidersen soruşturma biter. Emin misin?",
           "next": "INV_GECE_1"
         }
@@ -282,7 +283,7 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "CUMA 22.15 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            { "speaker": "narrator", "text": "PERŞEMBE 22.15 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
             {
               "speaker": "narrator",
               "text": "Leyla paltosunu giymiş, kapının eşiğinde duruyordu. Gitmek üzereydi; gitmedi."
@@ -377,7 +378,7 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "CUMARTESİ 23.05 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            { "speaker": "narrator", "text": "CUMA 23.05 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
             {
               "speaker": "narrator",
               "text": "Telefon titredi. Ekranda: Defne Yıldız. Arkasından eczane kapanırken çekilen kepenk sesi geliyordu."
@@ -385,7 +386,7 @@
             {
               "speaker": "defne",
               "expression": "uzgun",
-              "text": "Rahatsız ediyorum, biliyorum. Annem aradı. Kaan’ın sesini duymak istiyormuş. Bir aydır “sınav” diyorum."
+              "text": "Rahatsız ediyorum, biliyorum. Annem aradı. Kaan’ın sesini duymak istiyormuş. İki aydır “sınav” diyorum."
             },
             {
               "speaker": "defne",
@@ -488,7 +489,7 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "PAZAR 08.10 — GÖRÜKLE, KAHVE DURAĞI", "style": "card", "bg": "kafe" },
+            { "speaker": "narrator", "text": "CUMARTESİ 08.10 — GÖRÜKLE, KAHVE DURAĞI", "style": "card", "bg": "kafe" },
             {
               "speaker": "narrator",
               "text": "Kaan’ın çalıştığı kafe. Küçük, sıcak, tavanına çekilmiş sarı ampuller. Kahve makinesi tıslıyordu; tezgâhın arkasında kırklarında, saçını tokayla toplamış bir kadın."
@@ -697,7 +698,7 @@
         {
           "id": "DIL_KURYE",
           "kind": "OPTION",
-          "label": "Paketçi kurye şirketinden, adresteki kuryenin personel ve GPS kayıtlarının istenmesi",
+          "label": "Kurye şirketinden personel ve GPS kayıtları",
           "visibleWhen": {
             "any": [
               { "hasEvidence": "clue_mont" },

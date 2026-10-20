@@ -3,8 +3,8 @@
     {
       "id": "ARA_GIRIS_1",
       "type": "DECISION",
-      "chapter": "Bölüm 4 · Ara",
-      "eyebrow": "DAVA #04 · ARA",
+      "chapter": "Bölüm 3 · Birinci celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
       "title": "Ara",
       "lines": [
         {
@@ -26,7 +26,7 @@
               "text": "Tahliye bir beraat değil. Ama bir kapı. Kaan o kapıdan geçerken bir kez dönüp adliyeye baktı.",
               "style": "thought"
             },
-            { "speaker": "kaan", "text": "Elli bir gün. Saydım. Şimdi neyi sayacağım?" },
+            { "speaker": "kaan", "text": "Yüz on beş gün. Temiz. Saydım. Şimdi neyi sayacağım?" },
             { "speaker": "defne", "expression": "mutlu", "text": "Perşembeleri. Doktorunu. Bir de bana borcunu." },
             {
               "speaker": "narrator",
@@ -53,7 +53,7 @@
           ]
         }
       ],
-      "routes": [{ "to": "ARA_GIRIS" }],
+      "routes": [{ "to": "H1_08" }],
       "choices": []
     },
     {
@@ -299,6 +299,7 @@
           "kind": "NAVIGATE",
           "label": "DURUŞMAYA GİT · 2. CELSE",
           "role": "PRIMARY",
+          "visibleWhen": { "cmp": [{ "var": "day2" }, "==", 2] },
           "confirm": "Duruşmaya gidersen ara evre biter. Emin misin?",
           "next": "ARA_SON_1"
         }
@@ -364,7 +365,7 @@
         {
           "id": "ARAK_A",
           "kind": "OPTION",
-          "label": "O çocuk şimdi nerede?",
+          "label": "O çocuk şimdi nerede, biliyor musunuz?",
           "responses": [
             {
               "lines": [
@@ -865,7 +866,7 @@
         },
         {
           "id": "g_11kasim",
-          "cells": ["11 Kasım", "06.21 · Ihlamur Sok. 14 önü · duruş 40 sn · rota ters yön · “teslimat iptal”"]
+          "cells": ["11 Kasım", "07.16 · Ihlamur Sok. 14 önü · duruş 40 sn · rota ters yön · “teslimat iptal”"]
         },
         {
           "id": "g_fesih",
@@ -883,8 +884,8 @@
           "kind": "EXAMINE",
           "match": { "tool": "lupe", "target": "g_11kasim" },
           "feedback": {
-            "title": "06.21",
-            "text": "Baskın sabahı 06.21’de Barış’ın cihazı binanın önünde kırk saniye duruyor, sonra ters yöne gidiyor. Polis araçlarını gören biri böyle durur.",
+            "title": "07.16",
+            "text": "Baskın sabahı 07.16’da Barış’ın cihazı binanın önünde kırk saniye duruyor, sonra ters yöne gidiyor. Polis araçlarını gören biri böyle durur.",
             "label": "+150 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -1090,7 +1091,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Hasan Çakır kapıyı açarken başını salladı. “Elli bir gün” dedi, sormadığım hâlde."
+              "text": "Hasan Çakır kapıyı açarken başını salladı. “Hâlâ sayıyor” dedi, sormadığım hâlde."
             },
             {
               "speaker": "kaan",
@@ -1103,7 +1104,7 @@
         {
           "id": "KA_RIZA",
           "kind": "OPTION",
-          "label": "Mahkemede kullandığını söylemek ister misin? Karar senin; ne istersen öyle yaparız.",
+          "label": "Mahkemede kullandığını söylemek ister misin? Karar senin.",
           "visibleWhen": { "all": [{ "flag": "kaan_itiraf" }, { "not": { "flag": "kaan_riza" } }] },
           "responses": [
             {
@@ -1294,10 +1295,11 @@
         {
           "id": "DN_RED",
           "kind": "OPTION",
-          "label": "Hayır. Bu yalan tanıklık olur. Okan gerçekten bir şey biliyorsa savcılığa kendisi gitsin; parasız.",
+          "label": "Hayır. Bu yalan tanıklık olur; parayla tanık olmaz.",
           "responses": [
             {
               "lines": [
+                { "speaker": "player", "text": "Okan gerçekten bir şey biliyorsa savcılığa kendisi gitsin. Parasız." },
                 { "speaker": "defne", "expression": "uzgun", "text": "Ama o zaman Kaan…" },
                 {
                   "speaker": "player",
@@ -1333,7 +1335,7 @@
         {
           "id": "DN_DINLE",
           "kind": "OPTION",
-          "label": "Önce Okan’ın gerçekten ne bildiğini öğrenelim. Para konuşmadan.",
+          "label": "Önce Okan ne biliyor, onu öğrenelim. Parasız.",
           "responses": [
             {
               "lines": [
@@ -1441,7 +1443,7 @@
         {
           "id": "NS2_DEFTER",
           "kind": "OPTION",
-          "label": "Defterinizin o sayfalarının fotokopisini alabilir miyim? Mahkemede aslını da görmek isteyebilirler.",
+          "label": "Defterin o sayfalarının bir fotokopisini alabilir miyim?",
           "visibleWhen": { "hasEvidence": "clue_kira_defteri" },
           "responses": [
             {
@@ -1527,7 +1529,7 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "CUMARTESİ 11.20 — TELEFON", "style": "card", "bg": "ev" },
+            { "speaker": "narrator", "text": "ÖĞLE 11.20 — TELEFON", "style": "card", "bg": "ev" },
             {
               "speaker": "nesrin",
               "text": "Evladım, sen misin? Nesrin. Bodruma kömürlüğe indim, kediler oraya kaçtı. Yedi numaranın kömürlüğü açık."
@@ -1551,10 +1553,14 @@
         {
           "id": "BD_SAVCI",
           "kind": "OPTION",
-          "label": "Dokunmayın, kimse dokunmasın. Savcılığa hemen bildiriyorum; el koysunlar.",
+          "label": "Dokunmayın. Savcılığı arıyorum.",
           "responses": [
             {
               "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Kimse dokunmasın, Nesrin Hanım. Kediler de. Savcılığa bildiriyorum; el koysunlar."
+                },
                 {
                   "speaker": "narrator",
                   "text": "Bir saat sonra iki kolluk görevlisi bodrumdaydı; eldivenle, poşetle, tutanakla. Nesrin Hanım merdivenin başında, kucağında kedi."
@@ -1620,7 +1626,7 @@
         {
           "id": "BD_FOTO",
           "kind": "OPTION",
-          "label": "Bir fotoğrafını çekip bana gönderin; sonra bakarız.",
+          "label": "Fotoğrafını çekip yollayın; sonra bakarız.",
           "responses": [
             {
               "lines": [
@@ -1781,7 +1787,10 @@
         "clue_nesrin_moto",
         "clue_tolga_kask",
         "clue_tolga_saat",
-        "clue_iki_tane"
+        "clue_iki_tane",
+        "clue_iz_yabanci",
+        "clue_ekleme",
+        "clue_yag"
       ],
       "choices": [
         {
@@ -1790,7 +1799,7 @@
           "match": { "a": "clue_gps", "b": "clue_nesrin_moto" },
           "feedback": {
             "title": "Baskını gören kurye",
-            "text": "GPS 06.21’de kırk saniyelik bir duruş; Nesrin aynı dakikada dönen motoru gördü. Barış baskını gördü ve gitti.",
+            "text": "GPS 07.16’da kırk saniyelik bir duruş; Nesrin aynı dakikada dönen motoru gördü. Barış baskını gördü ve gitti.",
             "label": "YENİ DELİL · +300 SKOR",
             "tone": "success"
           },

@@ -74,6 +74,78 @@
         "category": "USUL_BILGISI"
       },
       {
+        "id": "h_tedavi",
+        "when": { "not": { "hasEvidence": "ev_tedavi" } },
+        "text": "Defne’nin getirdiği epikriz ve AMATEM kayıtları kullanıcı profilini kurardı; Kaan’ın yazılı onayıyla.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_kullanici",
+        "when": { "not": { "hasEvidence": "ded_kullanici" } },
+        "text": "Randevu kartı ile tedavi kayıtları birlikte, odadaki ilaçların bir tedaviye ait olduğunu gösterirdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_odaya_girme",
+        "when": { "not": { "hasEvidence": "clue_odaya_girme" } },
+        "text": "Telefon raporunda B. imzalı “odaya girme sakın” mesajı vardı: arka odanın başka birinin olduğunu Kaan’ın telefonu söylüyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_baris",
+        "when": { "not": { "hasEvidence": "ded_baris" } },
+        "text": "Mesaj ile kira defteri birlikte, arka odada Barış adında bir kiracının yaşadığını gösterirdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_sekerlik_yer",
+        "when": { "not": { "hasEvidence": "clue_sekerlik" } },
+        "text": "Koridor fotoğrafında şekerlik mutfakta değil, arka oda kapısının dibindeki raftaydı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_ayni_parti",
+        "when": { "not": { "hasEvidence": "clue_ayni_parti" } },
+        "text": "Kriminal raporda şekerlikteki iki paketin poşeti ve kesimi arka odadakilerle aynıydı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_olcu",
+        "when": { "not": { "hasEvidence": "clue_kaan_olcu" } },
+        "text": "Kaan’a ayakkabı numarasını ve ehliyetini sorabilirdin: 41 numara, ehliyet yok.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_kask_ded",
+        "when": { "not": { "hasEvidence": "ded_kask" } },
+        "text": "Muhbirin “elinde kask vardı” sözü ile Kaan’ın ölçüleri birlikte, kapıyı açanın Kaan olmadığını gösterirdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_gps",
+        "when": { "not": { "hasEvidence": "clue_gps" } },
+        "text": "Kurye şirketinin GPS dökümü baskın sabahı 07.16’da binanın önünde duran ve geri dönen bir motoru gösteriyordu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_kacis",
+        "when": { "not": { "hasEvidence": "ded_kacis" } },
+        "text": "GPS kaydı ile Nesrin Hanım’ın gördüğü motor birlikte, baskını görüp dönen kuryeyi gösterirdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_tanik_saat",
+        "when": { "not": { "flag": "contra_s4" } },
+        "text": "Nesrin Hanım imzasının yanına saati yazmıştı: tanık aramanın başında değil, kapı açıldıktan sonra ve tek başına çağrılmıştı (CMK 119/4).",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_canta_foto",
+        "when": { "flag": "canta_foto" },
+        "text": "Fotoğraf delil değildir ve çantayı yerinde korumaz; el koyma savcılığın ve kolluğun işidir (CMK 123, 127). Çanta kayboldu.",
+        "category": "USUL_BILGISI"
+      },
+      {
         "id": "h_riza",
         "when": { "not": { "flag": "kaan_riza" } },
         "text": "Kaan’ın kullanıcı olduğunu mahkemede kendisinin söylemesi, odanın onun olmadığını anlatmayı kolaylaştırırdı; ama bunun için rızası gerekiyordu.",

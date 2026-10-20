@@ -35,7 +35,7 @@ export const countWords = (text: string): number => text.split(/\s+/u).filter((t
  * - görüşme hedefleri;
  * - belge hücreleri;
  * - son aksiyonun satırları ve geri bildirimi (`last`);
- * - RESULT'ta ceza, hüküm metni ve gerekçe.
+ * - RESULT'ta ceza, hüküm metni, gerekçe ve sonuca bağlı epilog satırları.
  */
 export function viewTexts(v: SessionView): string[] {
   const out: string[] = [];
@@ -83,6 +83,7 @@ export function viewTexts(v: SessionView): string[] {
       push(n.sentence.result);
       push(n.verdictText);
       n.reasoning.forEach(push);
+      for (const l of n.epilogue ?? []) push(l.text);
       break;
     default:
       break;

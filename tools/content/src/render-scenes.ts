@@ -10,6 +10,9 @@ import { renderSceneHtml } from './lib/scenes.js';
 export const SCENES = [
   { name: 'olay-yeri-depo', width: 344, height: 214 },
   { name: 'depo-sokagi', width: 344, height: 380 },
+  { name: 'depo3-ic', width: 344, height: 380 },
+  { name: 'cay-ocagi', width: 344, height: 380 },
+  { name: 'kulube', width: 344, height: 380 },
 ] as const;
 
 const scenesDir = join(repoRoot, 'tools/content/scenes');

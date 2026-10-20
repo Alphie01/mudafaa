@@ -940,6 +940,11 @@ Yeni ikonlar (tasarımın stroke stilinde): fingerprint, boot, cigarette, magnif
 **XP** = ⌊TOPLAM/10 × f⌋. f: BERAAT_B 1,2 · BERAAT_E 1,0 · İNDİRİM 0,85 · MAHKÛMİYET 0,6 · ÇÖKÜŞ 0,3 · İKRAR 0. Etik > 0 ise XP yarıya iner.
 
 ### A.7 Golden path'ler (otomatik testler; H = hub eylemi)
+
+> **v2 (2026-10-20, hikâye ve oyun yüzeyi; docs/content/dava-07.md Ek B):** yollar soğuk açılış, 4 günlük soruşturma,
+> 2. celse, 3 günlük ara ve 3. celseden geçer; eşikler 3.000 / 7.000 (5.500) / 8.000. Güncel beklenen değerler:
+> G1 → BERAAT_B **9.620**, XP 1.154 · G2 = TIPIK → BERAAT_E **8.845**, XP 884, 204 aksiyon, 97,3 dk · G3 → İNDİRİM **3.340**,
+> XP 283 · G4 → MAHKÛMİYET **−125** · G5 → İKRAR **4.670**, XP 0 · W → ÇÖKÜŞ (3. celsede) **−445**. Aşağıdaki liste v1 kaydıdır.
 - **G1 → BERAAT_B** (Masumiyet)
   - Brifing: BR_01 A.
   - Gün 1: Arama (4 nokta, ıska yok) · İnceleme: UV×Selin, Büyüteç×Kerem, Karşılaştır×Murat · Görüşme (yumuşak): Anahtar, Hüseyin, O gece, ardından bot izini göster.

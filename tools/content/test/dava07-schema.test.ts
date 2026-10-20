@@ -76,7 +76,7 @@ describe('Dava #07 package (schema-level)', () => {
   it('parts merge in filename order and parse as CasePackage', () => {
     expect(partFiles()[0]).toBe('00-meta.json');
     expect(pkg.meta.slug).toBe('gece-bekcisinin-sirri');
-    expect(pkg.config.startNode).toBe('BR_01');
+    expect(pkg.config.startNode).toBe('PR_00');
   });
 
   it('ids are unique per namespace', () => {

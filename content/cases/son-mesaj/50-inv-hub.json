@@ -1,0 +1,901 @@
+{
+  "nodes": [
+    {
+      "id": "INV_HUB",
+      "type": "INVESTIGATION",
+      "hud": ["day", "ap"],
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Soruşturma",
+      "background": "buro",
+      "lines": [
+        {
+          "when": { "cmp": [{ "var": "day" }, "==", 1] },
+          "lines": [
+            { "speaker": "narrator", "text": "GÜN 1/3 · BİRİNCİ CELSEYE 12 GÜN", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda dosyanın bir kopyası, duvarda boş bir pano, elimde bir kutu raptiye. Bir davayı çözmek, bir binayı çizmek gibidir: önce zemini bilirsin, sonra duvarı çıkarsın."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: telefon Şube’de kimin elindeydi? O mesajlar, bir sanığın telefonunun içinde nasıl olup da öyle rahat duruyor? Önce kolluğun kâğıtlarını oku, sonra müvekkili dinle."
+            },
+            {
+              "speaker": "player",
+              "text": "Herkes telefona baktı. Ben telefonun etrafına bakacağım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "cmp": [{ "var": "day" }, "==", 2] }, { "hasEvidence": "clue_cihaz3" }] },
+          "lines": [
+            { "speaker": "narrator", "text": "GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Pano dolmaya başladı. Bir iplik “cihaz 3” yazan bir karttan çıkıp boşlukta sallanıyor; henüz bir yere bağlanmıyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: o “cihaz 3” nedir? Tarık’ın bir telefonu var. Peki bir hesabın kaç kapısı olur? Ve o üç gece, saat ikide, Tarık tam olarak neredeydi?"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir hesap bir eve benzer. Kaç kapısı olduğunu bilmeden içeride kimin olduğunu söyleyemezsin.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "cmp": [{ "var": "day" }, "==", 2] },
+          "lines": [
+            { "speaker": "narrator", "text": "GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Pano yarı dolu, ama ortadaki boşluk büyük. Bir şeyi atladığımı hissediyorum; raporun eklerinde, kimsenin bakmadığı bir sütunda."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: üç gece. Saat ikiyi geçerken Tarık neredeydi, telefonu neredeydi? Kolluk raporunun eklerini sonuna kadar okudun mu, yoksa sonucuyla mı yetindin?"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "GÜN 3/3 · BİRİNCİ CELSEYE 6 GÜN", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Son gün. Yarın dilekçe kapanıyor; mahkemeden isteyeceklerimi bugün yazmazsam, duruşmada elim boş kalır."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: talepler. Duruşmada kimi dinletmek, neyi inceletmek istiyorsun? Panodaki iplikleri topla; dağınık bir pano, dağınık bir savunmadır."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir bilirkişi, bir tanık, bir kayıt. Doğru üç talep, on iki günlük emeğin tamamını taşıyabilir.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "scenePreview": { "scene": "sc_ofis" },
+      "quickTalk": {
+        "character": "tarik",
+        "line": "“Ben yazmadım. Bir telefonum var, bir hesabım var. Hepsi bu.”",
+        "choices": ["H_GORUS", "H_GORUS2"]
+      },
+      "tabs": [
+        { "id": "t_olay", "label": "OLAY YERİ", "kind": "SCENE", "choices": ["H_OFIS", "H_HASTANE"] },
+        {
+          "id": "t_insan",
+          "label": "İNSANLAR",
+          "kind": "PEOPLE",
+          "choices": ["H_GORUS", "H_GORUS2", "H_GULAY", "H_HAYRI", "H_SINAN", "H_KUBRA", "H_OZAN"]
+        },
+        {
+          "id": "t_arsiv",
+          "label": "ARŞİV",
+          "kind": "ARCHIVE",
+          "choices": ["H_TUTANAK", "H_IMAJ", "H_HESAP_IND", "H_HESAP", "H_HKAYIT", "H_DIL", "H_CIKARIM", "H_LEYLA"]
+        }
+      ],
+      "choices": [
+        {
+          "id": "H_OFIS",
+          "kind": "NAVIGATE",
+          "label": "Aksoy Mimarlık ofisi",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_OFIS_GIRIS" },
+          "maxUses": 1,
+          "description": "Eski Pirinç Han · büyüteç 7"
+        },
+        {
+          "id": "H_HASTANE",
+          "kind": "NAVIGATE",
+          "label": "Acil servis",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_HASTANE_GIRIS" },
+          "maxUses": 1,
+          "visibleWhen": { "flag": "fact_hastane" },
+          "description": "9 Kasım gecesi · büyüteç 6"
+        },
+        {
+          "id": "H_GORUS",
+          "kind": "NAVIGATE",
+          "label": "Tarık’la görüş",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_GORUSME" },
+          "visibleWhen": { "not": { "visited": "INV_GORUSME" } },
+          "description": "Kızını okuldan almasına yarım saat",
+          "effects": [{ "type": "VAR", "var": "min", "op": "set", "value": 27 }]
+        },
+        {
+          "id": "H_GORUS2",
+          "kind": "NAVIGATE",
+          "label": "Tarık’la yeniden görüş",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_GORUSME" },
+          "visibleWhen": { "visited": "INV_GORUSME" },
+          "maxUses": 1,
+          "description": "8 dk",
+          "effects": [{ "type": "VAR", "var": "min", "op": "set", "value": 18 }]
+        },
+        {
+          "id": "H_GULAY",
+          "kind": "NAVIGATE",
+          "label": "Hemşire Gülay Tunç",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_T_GULAY" },
+          "maxUses": 1,
+          "visibleWhen": { "visited": "INV_ARAMA_HASTANE" },
+          "description": "Acil servis · gece nöbeti"
+        },
+        {
+          "id": "H_HAYRI",
+          "kind": "NAVIGATE",
+          "label": "Hayri Sezer",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_T_HAYRI" },
+          "maxUses": 1,
+          "description": "Vakıf yönetim kurulu · ses kaydının alıcısı"
+        },
+        {
+          "id": "H_SINAN",
+          "kind": "NAVIGATE",
+          "label": "Av. Sinan Bulut",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_T_SINAN" },
+          "maxUses": 1,
+          "description": "Katılan vekili"
+        },
+        {
+          "id": "H_KUBRA",
+          "kind": "NAVIGATE",
+          "label": "Stajyer Kübra Şen",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_T_KUBRA" },
+          "maxUses": 1,
+          "description": "Eski stajyer · ofisi içeriden bilir"
+        },
+        {
+          "id": "H_OZAN",
+          "kind": "NAVIGATE",
+          "label": "Ozan Tekin",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_T_OZAN" },
+          "maxUses": 1,
+          "description": "Eski ortak · katılan vekilinin bildirdiği tanık"
+        },
+        {
+          "id": "H_TUTANAK",
+          "kind": "NAVIGATE",
+          "label": "Ön inceleme tutanağı",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_TUTANAK" },
+          "maxUses": 1,
+          "description": "Kalemde asıl evrak · 5 deneme"
+        },
+        {
+          "id": "H_IMAJ",
+          "kind": "NAVIGATE",
+          "label": "Adli kopya raporu ve ekleri",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_IMAJ" },
+          "maxUses": 1,
+          "description": "114 sayfa ek · 8 deneme"
+        },
+        {
+          "id": "H_HESAP_IND",
+          "kind": "NAVIGATE",
+          "label": "Hesap verisini indirt",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_HESAP_IND" },
+          "visibleWhen": {
+            "all": [
+              { "any": [{ "flag": "fact_hesap_fikri" }, { "hasEvidence": "clue_cihaz3" }] },
+              { "not": { "flag": "hesap_istendi" } }
+            ]
+          },
+          "description": "Tarık ve noter · yarın akşam hazır"
+        },
+        {
+          "id": "H_HESAP",
+          "kind": "NAVIGATE",
+          "label": "Hesap verisi raporu",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_HESAP" },
+          "maxUses": 1,
+          "visibleWhen": { "hasEvidence": "ev_hesap" },
+          "description": "Noter tespitli döküm · 6 deneme"
+        },
+        {
+          "id": "H_HKAYIT",
+          "kind": "NAVIGATE",
+          "label": "Hastane kayıtları",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_HKAYIT_GIRIS" },
+          "maxUses": 1,
+          "visibleWhen": { "flag": "fact_hastane" },
+          "description": "Babasının muvafakatiyle · 4 deneme"
+        },
+        {
+          "id": "H_DIL",
+          "kind": "NAVIGATE",
+          "label": "Delil ve bilirkişi talepleri",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_DIL" },
+          "maxUses": 1,
+          "description": "3 talep hakkı"
+        },
+        {
+          "id": "H_CIKARIM",
+          "kind": "NAVIGATE",
+          "label": "Çıkarım tahtası",
+          "next": { "push": "INV_CIKARIM" },
+          "description": "0 EP · kartları birleştir",
+          "enabledWhen": { "ref": "kart2" },
+          "lockedReason": "En az 2 kart gerekli."
+        },
+        {
+          "id": "H_LEYLA",
+          "kind": "NAVIGATE",
+          "label": "Leyla’ya danış",
+          "next": { "push": "INV_LEYLA" },
+          "description": "0 EP · günde bir kez",
+          "visibleWhen": { "cmp": [{ "var": "leyla_gun" }, "<", { "var": "day" }] }
+        },
+        {
+          "id": "GO_H1",
+          "kind": "NAVIGATE",
+          "label": "DURUŞMADAN ÖNCEKİ GECE",
+          "role": "PRIMARY",
+          "confirm": "Soruşturma evresi biter. Emin misin?",
+          "next": "INV_GECE_1"
+        }
+      ]
+    },
+    {
+      "id": "INV_DAY_END",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Gün sonu",
+      "onEnter": [
+        { "type": "VAR", "var": "day", "op": "inc", "value": 1 },
+        { "type": "VAR", "var": "ap", "op": "set", "value": 6 }
+      ],
+      "routes": [{ "when": { "cmp": [{ "var": "day" }, "==", 2] }, "to": "INV_AKSAM1" }, { "to": "INV_AKSAM2_1" }],
+      "choices": []
+    },
+    {
+      "id": "INV_AKSAM1",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Akşam",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "when": { "hasEvidence": "ev_hesap" },
+          "lines": [
+            { "speaker": "narrator", "text": "AKŞAM 21.10 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Kapının altından noterin zarfı itilmişti. Mühürlü. Üstünde Tarık’ın el yazısı: “geldi”. Küçük harf. Nokta yok."
+            },
+            { "speaker": "narrator", "text": "Leyla’nın odasında ışık yanıyordu. Kapısı aralık." },
+            { "speaker": "leyla", "text": "Gel. Bugün ne öğrendin? Bir cümleyle." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "AKŞAM 21.10 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Büro boşalmış. Yağmur yeniden başlamış; oluklardan taşan su kaldırıma vuruyor."
+            },
+            { "speaker": "narrator", "text": "Leyla’nın odasında ışık yanıyordu. Kapısı aralık." },
+            { "speaker": "leyla", "text": "Gel. Bugün ne öğrendin? Bir cümleyle." }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "AK1_SUTUN",
+          "kind": "OPTION",
+          "label": "Bir sütun. Raporun kimsenin okumadığı bir sütunu.",
+          "visibleWhen": { "hasEvidence": "clue_cihaz3" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Sütunlar ilginçtir Deniz. Kimse okumaz, ama hepsi oradadır. Bir tablonun en sağındaki sütun, çoğu zaman davanın kendisidir."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Kendine şunu sor: o “cihaz” neyse, o gece kimin elindeydi? Hesap ile cihaz aynı şey değildir. Raporu yazan memur ikisini bir sanmış; iddianame de o yanılgının üstüne kurulmuş."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Yarın o cihazın ne olduğunu öğren. Bir telefon mu, bir tablet mi, bir bilgisayar mı? Ve en önemlisi: kime ait?"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Çayından bir yudum aldı, soğumuştu. Yüzünü buruşturmadı; soğuk çaya alışkındı, soğuk gerçeklere de."
+                }
+              ]
+            }
+          ],
+          "next": "INV_HUB",
+          "effects": [{ "type": "VAR", "var": "aksam1", "op": "set", "value": "SUTUN" }]
+        },
+        {
+          "id": "AK1_TUTANAK",
+          "kind": "OPTION",
+          "label": "Polis kararı beklememiş. Ve imza almamış.",
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_ss_karar" }, { "hasEvidence": "clue_imza_yok" }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "İyi. Ekran görüntülerini düşürebilirsin. Ama dikkat: düşürdüğün şey görüntüler, mesajlar değil."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Mesajlar imajda da var. İmaj kararla alındı. Usul sana bir kapı açar; içeride yine bir oda var."
+                }
+              ]
+            }
+          ],
+          "next": "INV_HUB",
+          "effects": [{ "type": "VAR", "var": "aksam1", "op": "set", "value": "TUTANAK" }]
+        },
+        {
+          "id": "AK1_HASTANE",
+          "kind": "OPTION",
+          "label": "9 Kasım gecesi babasıyla hastanedeymiş.",
+          "visibleWhen": { "flag": "fact_hastane" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Hastanedeymiş. Telefonu da cebindeymiş, değil mi? Mesaj atmak için masa başında oturmak gerekmez."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Bir mazeret, telefonun nerede ve ne hâlde olduğunu söylemiyorsa yarım mazerettir."
+                }
+              ]
+            }
+          ],
+          "next": "INV_HUB",
+          "effects": [{ "type": "VAR", "var": "aksam1", "op": "set", "value": "HASTANE" }]
+        },
+        {
+          "id": "AK1_HIC",
+          "kind": "OPTION",
+          "label": "Hiçbir şey. Bir günü harcadım.",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "leyla", "text": "Harcanmış gün yoktur, okunmamış ek vardır. Yarın eklere bak." },
+                {
+                  "speaker": "narrator",
+                  "text": "Masasındaki sigara paketini bir parmağıyla bana doğru itti, sonra geri çekti. Bir şaka. Ya da bir ders."
+                }
+              ]
+            }
+          ],
+          "next": "INV_HUB",
+          "effects": [{ "type": "VAR", "var": "aksam1", "op": "set", "value": "HIC" }]
+        }
+      ]
+    },
+    {
+      "id": "INV_AKSAM2_1",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Akşam",
+      "lines": [
+        {
+          "when": { "flag": "ozan_ziyaret" },
+          "lines": [
+            { "speaker": "narrator", "text": "AKŞAM 22.30 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Telefon masada titredi. Bilinmeyen bir numara değil; kaydetmiştim.",
+              "fx": "flash"
+            },
+            {
+              "speaker": "narrator",
+              "name": "PUSULA",
+              "text": "Ozan Tekin · “Sn. Arslan, bugünkü ziyaretiniz için teşekkür ederim. Yardımcı olabileceğim her konuda... Saygılar.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Kibar bir adam. Ekranı kapattım. Ekran bir süre daha karanlıkta parladı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "AKŞAM 22.30 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Büro sessiz. Masadaki lambanın altında yarım kalmış bir çay. Pencerede kendi yansımam ve arkasında Bursa’nın ıslak ışıkları."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_AKSAM2_2" }],
+      "choices": []
+    },
+    {
+      "id": "INV_AKSAM2_2",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Akşam",
+      "lines": [
+        {
+          "when": { "flag": "fact_ece" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "6 Kasım gecesi Ece de evdeymiş. Salonda kanepede uyuyakalmış; babası taşımış. Dokuz yaşında bir tanık. Onu asla kürsüye çıkarmayacağım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Üç gece. Birinde hastane. İkisinde bir ev, bir yatak, bir şarj aleti. Bir mimarın uykusu tanık olmaz.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_AKSAM2" }],
+      "choices": []
+    },
+    {
+      "id": "INV_AKSAM2",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Telefon",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Telefon çaldı. Tarık. Arkadan bir televizyon sesi, bir çizgi film müziği."
+            },
+            { "speaker": "tarik", "text": "Kusura bakmayın, geç oldu. Ece uyumuyor. Size bir şey sormak istiyor." },
+            {
+              "speaker": "narrator",
+              "name": "BİR ÇOCUK SESİ",
+              "text": "Avukat teyze? Babam yalan söylemez. Bunu hâkime söyler misiniz?"
+            },
+            { "speaker": "narrator", "text": "Bir an ne diyeceğimi bilemedim. Arkada Tarık’ın “Ece, yeter” deyişi." },
+            {
+              "speaker": "tarik",
+              "text": "Özür dilerim. Okulda yine bir şey olmuş. Ne diyeyim ona? Siz söyleyin. Ne diyeyim?"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "AK2_DOGRU",
+          "kind": "OPTION",
+          "label": "“Babam yazmadığını söylüyor; avukatı da bunu göstermeye çalışıyor.” Doğruyu söyleyin.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Doğruyu. Peki. Sekiz yaşında olsa yalan söylerdim. Dokuzda… anlıyor artık."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Telefonu kapatmadan önce Ece’nin sesi bir kez daha duyuldu: “Göstersin ama.”"
+                }
+              ]
+            }
+          ],
+          "next": "INV_HUB",
+          "effects": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 5 }]
+        },
+        {
+          "id": "AK2_BEKLE",
+          "kind": "OPTION",
+          "label": "Şimdilik bir şey söylemeyin. Duruşmadan sonra konuşursunuz.",
+          "responses": [
+            { "lines": [{ "speaker": "tarik", "text": "Susayım. Peki. Ben susmayı iyi bilirim. Ece bilmez." }] }
+          ],
+          "next": "INV_HUB",
+          "effects": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 1 }]
+        },
+        {
+          "id": "AK2_SOZ",
+          "kind": "OPTION",
+          "label": "“Babana hiçbir şey olmayacak.” Bunu söyleyin.",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "tarik", "text": "Olmayacak mı?" },
+                {
+                  "speaker": "narrator",
+                  "text": "Cevap vermedim. Telefonun öbür ucunda bir çocuk, babasının ağzından benim sözümü duyacaktı."
+                },
+                { "speaker": "player", "text": "İkinci kez. Leyla bunu duysa ne derdi, biliyorum.", "style": "thought" }
+              ]
+            }
+          ],
+          "next": "INV_HUB",
+          "effects": [
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 3 },
+            { "type": "VAR", "var": "soz_verildi", "op": "set", "value": true }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "INV_LEYLA",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Leyla’ya danış",
+      "background": "buro",
+      "onEnter": [
+        { "type": "VAR", "var": "leyla_gun", "op": "set", "value": { "var": "day" } },
+        {
+          "type": "IF",
+          "when": { "hasEvidence": "clue_cihaz3" },
+          "then": [{ "type": "VAR", "var": "fact_hesap_fikri", "op": "set", "value": true }]
+        }
+      ],
+      "lines": [
+        {
+          "when": { "all": [{ "hasEvidence": "clue_cihaz3" }, { "not": { "flag": "hesap_istendi" } }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Cihaz 3. İyi. Şimdi o cihazın ne olduğunu kimden öğreneceksin? Polisten mi, şirketten mi?"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Hesap Tarık’ın. Hesabın sahibi kendi oturum geçmişini isteyebilir. Ama dikkat: elinden çıkan her kâğıt, polisinki kadar sorgulanacak. Noter. Hash."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "flag": "fact_hastane" }, { "not": { "hasEvidence": "ev_hastane" } }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Hastane dedin. Hastanede her şeyin saati yazılır. Babasının muvafakatini al, kayıtları iste."
+            },
+            { "speaker": "leyla", "text": "Saat yazan bir hemşire, saatini bilmeyen on tanıktan iyidir." }
+          ]
+        },
+        {
+          "when": { "not": { "visited": "INV_TUTANAK" } },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Önce tutanak. Polis telefona ne zaman dokundu, karar ne zaman verildi? İki tarihi yan yana koy."
+            },
+            { "speaker": "leyla", "text": "Bir de imzaya bak. “Rıza” diyorlarsa, rızanın bir izi olmalı." }
+          ]
+        },
+        {
+          "when": { "not": { "visited": "INV_IMAJ" } },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Raporun sonucunu okudun mu? Okuma. Eklerini oku. Ek-2, Ek-3. Sonuç bir kanaattir."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_bagli" }, { "not": { "flag": "bilirkisi_istendi" } }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Elinde bir teori var, artık bir uzmana ihtiyacın var. Senin değil, mahkemenin uzmanına. Bilirkişi iste."
+            },
+            { "speaker": "leyla", "text": "Avukatın söylediği teoridir. Bilirkişinin söylediği delildir." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "leyla", "text": "Bir mesajın altında bir isim yazar Deniz. Mesajı kimin yazdığını yazmaz." },
+            { "speaker": "leyla", "text": "Her gece için üç soru: hangi cihaz, kimin elinde, hangi hattan?" }
+          ]
+        }
+      ],
+      "choices": [{ "id": "LEY_BITIR", "kind": "CONTINUE", "label": "Teşekkür et", "role": "BACK", "next": "$return" }]
+    },
+    {
+      "id": "INV_GECE_1",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Duruşmadan önceki gece",
+      "onEnter": [],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "DURUŞMADAN ÖNCEKİ GECE — ARSLAN HUKUK",
+              "style": "card",
+              "bg": "buro_gece"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gece yarısına yakın. Büro boşalalı çok oldu; sadece masa lambam ve panonun üstündeki ışık yanıyor. Dışarıda yağmur, camda kendi yansımam."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Panoya iğnelediğim kâğıtlar iplerle birbirine bağlı: bir ön inceleme tutanağı, bir mesaj tablosu, bir hastane formu, Tophane’nin bir haritası. Bir örümcek ağı gibi, ama ortasında bir boşluk."
+            },
+            {
+              "speaker": "player",
+              "text": "Elimde ne var? Saydım. Bir kez, bir daha. Yarın sabah bu kâğıtlar bir mahkeme salonunda sınanacak. Eksik bıraktığım her iplik, orada kopacak.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir yıl önce bir duruşmadan önceki gece erkenden uyumuştum. Sabah dosyayı okumadan girmiştim salona. O gün bir insanı yarı yolda bıraktım. Bu gece uyumuyorum.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_2" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_2",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Duruşmadan önceki gece",
+      "lines": [
+        {
+          "when": { "hasEvidence": "ded_ss" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ekran görüntüleri: kararsız, imzasız. Bunu yarın söyleyeceğim. Salonda biri yüzünü buruşturacak.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "hasEvidence": "clue_ss_karar" }, { "hasEvidence": "clue_imza_yok" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ekran görüntülerinde bir sorun var. Tarihler mi, imza mı? İkisini birden bağlayamadım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ekran görüntüleri. Polisin elindeki en güçlü kâğıt. Ona hiç dokunmadım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_3" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_3",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Duruşmadan önceki gece",
+      "lines": [
+        {
+          "when": { "hasEvidence": "ded_bagli" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Cihaz 3. Bir dizüstü. Şubat’ta bağlanmış, hiç kapatılmamış bir oturum. Mesajlar bir telefondan çıkmadı. Bunu bir polis memuruna söyleteceğim.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "clue_cihaz3" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Cihaz 3. Ne olduğunu bilmiyorum. Bildiğim tek şey: Tarık’ın telefonu değil.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Mesajlar telefondaydı. Polis öyle diyor, rapor öyle diyor. Ben de başka bir şey diyemiyorum.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_4" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_4",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Duruşmadan önceki gece",
+      "lines": [
+        {
+          "when": { "hasEvidence": "ded_hastane" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "9 Kasım, 02.14. Telefon kilitli, hemşire masasında. Tarık bir form imzalıyor. O gece, o eller değil.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "fact_gulay" }, { "hasEvidence": "clue_onam" }, { "hasEvidence": "clue_sarj" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Acil servis. Bir bant, bir saat. Bir parçası elimde, öbür parçası raporda bir yerde olmalı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_hastane" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Hastane. Tarık o gece hastanedeydi. Ama kâğıda dökemedim.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "player", "text": "Üç gece. Bir adamın uykusu. Uykunun tanığı olmaz.", "style": "thought" }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_5" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_5",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Duruşmadan önceki gece",
+      "lines": [
+        {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "lines": [
+            { "speaker": "narrator", "text": "Leyla kapıda belirdi. Paltosunu giymişti. Bir süre sustu." },
+            { "speaker": "leyla", "text": "Bugün biri beni aradı Deniz. Ne dediğini biliyorsun. Bir daha olmasın." },
+            { "speaker": "narrator", "text": "Gitti. Kapı yavaşça kapandı." }
+          ]
+        },
+        {
+          "when": { "cmp": [{ "var": "aksam1" }, "==", "SUTUN"] },
+          "lines": [
+            { "speaker": "narrator", "text": "Leyla kapıda belirdi. Paltosunu giymişti." },
+            {
+              "speaker": "leyla",
+              "text": "Sütun meselesi. Yarın polisin kendi ağzından duymak istiyorum. Kendi tablosunu ona okut."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "Leyla kapıda belirdi. Paltosunu giymişti." },
+            {
+              "speaker": "leyla",
+              "text": "Yarın tanık kürsüde ne derse desin, tutanağı oku. İnsanlar unutur, kâğıt unutmaz."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Duruşmadan önceki gece",
+      "background": "sokak_yagmur",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Işığı söndürdüm. Panoya son bir kez baktım; karanlıkta iplikler ince gümüş çizgilere döndü."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Merdivenden inerken telefonum titredi. Tarık’tan bir mesaj: “yarın 9da kapıdayım”. Küçük harf. Nokta yok. Virgül yok. İşte, bir adamın gerçek sesi böyle yazıyordu.",
+              "bg": "sokak_yagmur"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dışarıda yağmur incelmişti. Tophane’nin saat kulesi on ikiyi vurdu, sesi ıslak sokaklarda uzadı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir yerde, bir ekran hâlâ yanıyor olabilirdi. Yarın o ekranın kime ait olduğunu bir salon dolusu insana göstereceğim. Yeter ki kâğıtlar beni yarı yolda bırakmasın.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "GECE_DEVAM", "kind": "CONTINUE", "label": "Duruşmaya git", "role": "PRIMARY", "next": "H1_00" }
+      ]
+    }
+  ],
+  "triggers": [
+    {
+      "id": "tg_inv_day",
+      "scope": "INV_HUB",
+      "priority": 1,
+      "when": { "all": [{ "cmp": [{ "var": "ap" }, "<=", 0] }, { "cmp": [{ "var": "day" }, "<", 3] }] },
+      "goto": "INV_DAY_END"
+    }
+  ],
+  "discoveryPaths": []
+}

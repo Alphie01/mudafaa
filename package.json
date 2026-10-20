@@ -15,7 +15,7 @@
     "build": "tsc -b tsconfig.build.json",
     "typecheck": "tsc -b tsconfig.build.json --pretty && tsc -p tools/content/tsconfig.json --noEmit",
     "test": "vitest run --project case-schema --project engine --project validator --project content-tools --project api-unit",
-    "test:e2e": "vitest run --project api-e2e",
+    "test:e2e": "node apps/api/scripts/test-e2e.mjs",
     "lint": "eslint .",
     "format": "prettier --write .",
     "validate:cases": "npm run build && node packages/validator/dist/cli.js content/cases/gece-bekcisinin-sirri",
@@ -28,7 +28,9 @@
     "db:migrate:test": "npm run migrate:test -w @mudafaa/api",
     "db:seed": "npm run seed -w @mudafaa/api",
     "emulators": "firebase emulators:start --only auth --project demo-mudafaa",
-    "dev:api": "npm run start:dev -w @mudafaa/api"
+    "dev:api": "npm run start:dev -w @mudafaa/api",
+    "case:import": "npm run case:import -w @mudafaa/api --",
+    "user:role": "npm run user:role -w @mudafaa/api --"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

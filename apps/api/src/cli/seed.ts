@@ -1,10 +1,11 @@
-// Geliştirme verisi: content/cases altındaki her davayı içe aktarıp yayınlar.
+// Geliştirme verisi: content/cases altındaki her davayı içe aktarır, doğrular ve yayınlar (case:import --publish).
+// Hukuki inceleme kullanıcı tarafından Claude'a devredildiği için onaylı yayınlanır.
 // Kullanım: npm run seed -w @mudafaa/api [-- <dava dizini>...]
 import { existsSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from '../app.module.js';
-import { ContentService } from '../modules/content/content.service.js';
+import { describeImport, importCase } from './case-import.js';
+import { CliModule } from './cli.module.js';
 
 const envFile = join(import.meta.dirname, '..', '..', '.env');
 if (existsSync(envFile)) process.loadEnvFile(envFile);
@@ -14,13 +15,13 @@ const dirs =
   process.argv.slice(2).length > 0
     ? process.argv.slice(2).map((d) => resolve(d))
     : readdirSync(root).map((d) => join(root, d));
-const app = await NestFactory.createApplicationContext(AppModule, { logger: ['error', 'warn'] });
-const content = app.get(ContentService);
+const app = await NestFactory.createApplicationContext(CliModule, { logger: ['error', 'warn'] });
 let failed = 0;
 for (const dir of dirs) {
   try {
-    const r = await content.importDir(dir, { legalApproved: true });
-    console.log(`yayınlandı: ${dir} → sürüm ${r.versionId}`);
+    const r = await importCase(app, dir, { publish: true, legalApproved: true, reviewer: 'Claude (iç inceleme)' });
+    for (const line of describeImport(dir, r)) console.log(line);
+    if (r.snapshotId === undefined) failed += 1;
   } catch (e) {
     failed += 1;
     console.error(

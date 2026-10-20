@@ -144,8 +144,12 @@ katılan vekili kürsüde değil, taraf sırasındadır (stage düzeninde kürs�
     karşıtı). INDIRIM gerekçesi bu nedenle pozitif tespittir ("özen yükümlülüğüne aykırı davrandığı ve bu davranışla ölüm
     arasında illiyet bağının bulunduğu kanaatine varılmıştır"); "illiyetin bulunmadığı ispatlanamadı" biçimindeki ispat
     yükünü tersine çeviren ifade kaldırıldı. Savunma Adli Tıp raporuyla illiyeti tartışmışsa (`arg_atk`) INDIRIM
-    verilmez; o durumda kusur iddiası da çökmüşse BERAAT_E, çökmemişse MAHKUMIYET gerekçesine ATK raporunun neden yeterli
-    görülmediği (başka aracın varlığının ispatlanamaması) yazılır. INDIRIM ayrıca kürsüde hız iddiasının çürütülmesini
+    verilmez; o durumda kusur iddiası da çökmüşse BERAAT_E olur. Çökmemişse (MAHKUMIYET ya da ETIK) gerekçe yine pozitif
+    bir tespittir: ATK raporu yalnızca bir çarpma biçimini "uyumlu" bulmuş, aracı belirlememiştir; mahkeme raporu diğer
+    delillerle birlikte vicdani kanaatle tartıp (CMK 217/1) ölümcül çarpmanın sanığın aracıyla gerçekleştiğini ve illiyet
+    bağını kabul eder. "Başka aracın varlığı ispatlanamadığından" biçimindeki, ispat yükünü savunmaya yükleyen ifade
+    kaldırıldı. Yorum: böyle bir hüküm istinafta ATK raporu karşısında gerekçe yetersizliği yönünden ciddi biçimde
+    tartışılır; oyun bu sonucu yalnızca kırmızı ışık iddiası kürsüde çürütülemediğinde verir. INDIRIM ayrıca kürsüde hız iddiasının çürütülmesini
     (EDR ya da fren izi) ve soruşturmada en az iki saha çıkarımını ister; bilinçli taksirin düşmesi bir dayanağa bağlanır.
 16. **Sanayi sitesi ve kovalamama:** Avukat yedek parçacıda bir model aralığının tampon ölçüsünü öğrenir (bilirkişiye
     soracağı soru için genel bilgi); dönüşte kaldırımdan, kamuya açık yerden gördüklerini not alır. Kaportacıyı

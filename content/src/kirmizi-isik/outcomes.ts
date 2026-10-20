@@ -370,7 +370,7 @@ export const outcomes: CasePart = {
           'Savunma, kırmızı ışık iddiasını hukuka uygun delillerle sarsabilecek tanık ve belgeleri kürsüye taşımamıştır.',
         ),
         because(
-          'Adli Tıp raporu yaralanmaların birincil bir çarpmayla uyumlu olduğunu belirtmekle birlikte, başka bir aracın varlığı hukuka uygun delillerle ispatlanamadığından mahkeme birincil çarpmanın da sanığın aracından kaynaklandığı kanaatine varmıştır.',
+          'Adli Tıp raporu yaralanmaların “uyumlu” olduğu bir çarpma biçimini tarif etmiş, aracı belirlememiştir; mahkeme raporu bilirkişi raporu, tutanak ve tanık beyanıyla birlikte değerlendirerek (CMK 217/1) ölümcül çarpmanın sanığın aracıyla gerçekleştiğini ve sanığın davranışı ile ölüm arasında illiyet bağının bulunduğunu kabul etmiştir.',
           flag('arg_atk'),
         ),
       ],
@@ -423,7 +423,7 @@ export const outcomes: CasePart = {
           ref('kusur_yok'),
         ),
         because(
-          'Adli Tıp raporu yaralanmaların birincil bir çarpmayla uyumlu olduğunu belirtmekle birlikte, olay yerinde başka bir aracın bulunduğu duruşmada ispatlanamadığından mahkeme birincil çarpmanın da sanığın aracından kaynaklandığı kanaatine varmıştır.',
+          'Adli Tıp raporu yaralanmaların “uyumlu” olduğu bir çarpma biçimini tarif etmiş, aracı belirlememiştir; mahkeme raporu bilirkişi raporu, tutanak ve tanık beyanıyla birlikte değerlendirerek (CMK 217/1) ölümcül çarpmanın sanığın aracıyla gerçekleştiğini ve sanığın davranışı ile ölüm arasında illiyet bağının bulunduğunu kabul etmiştir.',
           flag('arg_atk'),
         ),
         because('Savunmanın itirazları somut delillerle desteklenmemiştir.', not(ref('kusur_yok'))),

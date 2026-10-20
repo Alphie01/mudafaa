@@ -179,12 +179,15 @@ H_DURUSMA + golden path'in kalanı).
 - **İndirim:** bilerek "kısmi kazanç" olarak daha erişilebilir bırakıldı (yaklaşık iki soruşturma günü + iki celse). Yine de
   soruşturmayı atlayan yol kapalıdır.
 - **Sızıntı denetimi:** ikinci araç ve sinyal arızası hiçbir anlatıcı ya da iç ses satırında önceden söylenmez. Soğuk
-  açılışta "yerde mi" kalktı ("bir poşet mi, bir gölge mi"); Volkan'ın "Ayakta biri değildi sanki"si kalktı. Tampon nesnesi
+  açılışta "yerde mi" kalktı ("bir poşet mi, bir gölge mi"); Volkan'ın "Ayakta biri değildi sanki"si ve sert tondaki "Yerdeydi belki"si kalktı ("Alçaktı" tohumu kalır). Tampon nesnesi
   yalnızca ölçümü verir (44 cm, yatay iz); yorum tahtadaki ded_yukseklik geri bildirimindedir. clue_sirt ve clue_kirik56
   açıklamaları olgusaldır. INV_AKSAM3'teki sayılmış "altı saniye" kalktı. Strateji menüsünde "İlliyet: ölümün gerçek nedeni
   başka" yerine genel "Masumiyet" var; Leyla'nın illiyet dersi göz kırpmadan, ispat yüküne bağlanır. Doğrulayıcı LEAK
   denetimi temiz.
-- **Seçenek dengesi:** iyi ve kötü seçeneği olan 32 setin 10'unda (%31) doğru seçenek en uzun etiket; madde numarası
+- **Hüküm gerekçeleri ve ispat yükü:** MAHKUMIYET ve ETIK'teki `arg_atk` gerekçesi de pozitif tespite çevrildi (ATK
+  raporu aracı belirlememiş; mahkeme raporu diğer delillerle CMK 217/1 uyarınca tartıp illiyeti kabul eder). "Başka aracın
+  varlığı ispatlanamadığından" ifadesi kalktı (bkz. docs/legal/kirmizi-isik.md §5/15).
+- **Seçenek dengesi:** iyi ve kötü seçeneği olan 32 setin 8'inde (%25) doğru seçenek en uzun etiket; madde numarası
   yanlış seçeneklerde de geçer (K_SUS, O_SUS, R_CIKAR, AK_BERAAT, O2_SALDIR, ARG_DUYGU, M_CIKAR).
 
 ## 11. Ölçüm

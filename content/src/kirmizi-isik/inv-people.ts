@@ -270,7 +270,7 @@ export const invPeople: CasePart = {
               says: [
                 L(
                   'volkan',
-                  'Bilmiyorum! Görmedim! Bir gölge gördüm! Yürümüyordu, koşmuyordu. Alçaktı. Yerdeydi belki, eğilmişti belki!',
+                  'Bilmiyorum! Görmedim! Bir gölge gördüm! Yürümüyordu, koşmuyordu. Alçaktı. Eğilmişti belki, bilmiyorum!',
                   'kizgin',
                 ),
                 L(

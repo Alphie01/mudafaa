@@ -13,13 +13,47 @@
       "verdictText": "Sanık Kerem Aydın’ın ikrarı da dikkate alınarak cezalandırılmasına: TCK 142/2-h uyarınca alt sınırdan 5 YIL; TCK 143 ile 7 YIL 6 AY; TCK 62/1 ile 6 YIL 3 AY HAPİS; zarar giderilmediğinden TCK 168/2 uygulanmasına yer olmadığına; TCK 53; TCK 63 mahsup; tutukluluk hâlinin devamına (2. celsede adli kontrolle tahliye edilmişse, hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf (CMK 273/1).",
       "reasoning": [
         {
-          "text": "Sanık ek savunmasında üzerine atılı suçu ikrar etmiştir; ikrar, dosyadaki mazeret delilleriyle çelişse de hükme esas alınmıştır."
+          "text": "Sanık, müdafii huzurunda yaptığı ek savunmada üzerine atılı eylemi ikrar etmiş, son sözünde de ikrarını sürdürmüştür. İkrarın baskı ya da yasak usullerle alındığına dair bir iddia ve emare yoktur (CMK 148/1)."
+        },
+        {
+          "when": {
+            "not": {
+              "flag": "key_excluded"
+            }
+          },
+          "text": "İkrar; Depo 3’ün dış kapı kolundaki parmak izi ve sanıkta ele geçen depo anahtarıyla örtüşmekte, sanığın olay gecesi aynı tesiste çalıştığı da sabit bulunmaktadır (CMK 217/1)."
+        },
+        {
+          "when": {
+            "flag": "key_excluded"
+          },
+          "text": "Depo anahtarı hukuka aykırı aramayla elde edildiğinden hükme esas alınmamıştır (CMK 217/2). İkrar, kapı kolundaki parmak izi ve sanığın olay gecesi aynı tesiste çalıştığının sabit olmasıyla örtüşmektedir (CMK 217/1)."
+        },
+        {
+          "when": {
+            "ref": "alibi"
+          },
+          "text": "Tanık Hüseyin Tan’ın beyanı ve 22.57 tarihli fiş değerlendirilmiştir. Fiş bir ödemenin saatini gösterir; sanığın 22.30–23.15 arasında kesintisiz çay ocağında kaldığını göstermez. Çay ocağının Depo 3 ile aynı tesiste bulunduğu ve tanığın sanığın ailesine yakınlığı gözetilerek bu deliller, sanığın duruşmada sürdürdüğü ikrarı karşısında itibar görmemiştir."
+        },
+        {
+          "when": {
+            "flag": "contra_s2"
+          },
+          "text": "Görgü tanığının teşhisine, beyanındaki çelişkiler nedeniyle itibar edilmemiştir; hüküm teşhise değil, ikrara ve onu destekleyen delillere dayandırılmıştır."
+        },
+        {
+          "when": {
+            "not": {
+              "flag": "contra_s2"
+            }
+          },
+          "text": "Görgü tanığı Selin Kaya’nın teşhisi ikrarla örtüşmektedir."
         },
         {
           "text": "Zarar giderilmediğinden etkin pişmanlık (TCK 168) uygulanmamıştır."
         }
       ],
-      "legalBasis": "TCK 142/2-h, 143, 62/1, 168/2, 53, 63; CMK 273/1",
+      "legalBasis": "TCK 142/2-h, 143, 62/1, 168/2, 53, 63; CMK 148/1, 217, 230/1; CMK 273/1",
       "xp": 0,
       "howToReach": "Terditli savunma (önce beraat, aksi halde lehe hükümler) meşru yoldur; sahte ikrar asla.",
       "ethicsCard": "Masum olduğunu söyleyen müvekkili suçu üstlenmeye yönlendirdin (Av.K. md. 34; TBB Meslek Kuralları). Gerçeğe aykırı ikrar TCK 270 kapsamında ayrı suç olabilir.",
@@ -744,6 +778,20 @@
       "verdictText": "Sanık Kerem Aydın’ın cezalandırılmasına: TCK 142/2-h uyarınca takdiren alt sınırdan 5 YIL; gece vakti nedeniyle TCK 143 ile 7 YIL 6 AY; sanığın sabıkasız geçmişi ve cezanın geleceği üzerindeki olası etkileri gözetilerek TCK 62/1 ile 6 YIL 3 AY HAPİS; işverence teslim edilen anahtar ‘haksız yere elde bulundurulan’ nitelikte olmadığından TCK 142/2-d’nin uygulanmasına yer olmadığına; TCK 53; TCK 63; cezanın süresi nedeniyle HAGB (CMK 231/5) ve erteleme (TCK 51/1) koşulları bulunmadığına; tutukluluk hâlinin devamına (2. celsede adli kontrolle tahliye edilmişse, hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
       "reasoning": [
         {
+          "when": {
+            "not": {
+              "flag": "key_excluded"
+            }
+          },
+          "text": "Görgü tanığının teşhisi, kapı kolundaki parmak izi ve sanıkta ele geçen anahtar birlikte değerlendirildiğinde eylemin sanık tarafından işlendiği kanaatine varılmıştır."
+        },
+        {
+          "when": {
+            "flag": "key_excluded"
+          },
+          "text": "Anahtar hukuka aykırı aramayla elde edildiğinden değerlendirme dışı bırakılmış; teşhis ve parmak izi birlikte değerlendirildiğinde eylemin sanık tarafından işlendiği kanaatine varılmıştır."
+        },
+        {
           "text": "Eylem bina içinde muhafaza edilen eşyaya yönelik (TCK 142/2-h) ve gece vakti (TCK 143) işlenmiştir."
         },
         {
@@ -907,6 +955,62 @@
       "reasoning": [
         {
           "when": {
+            "not": {
+              "flag": "contra_s2"
+            }
+          },
+          "text": "Görgü tanığı Selin Kaya’nın sanığı teşhis eden beyanı duruşmada çürütülmemiş, hükme esas alınmıştır."
+        },
+        {
+          "when": {
+            "flag": "contra_s2"
+          },
+          "text": "Görgü tanığının teşhisindeki çelişkiler değerlendirilmiş; ancak teşhis, dosyadaki diğer delillerle birlikte bütünüyle çürütülmüş sayılmamıştır."
+        },
+        {
+          "when": {
+            "not": {
+              "flag": "fp_neutralized"
+            }
+          },
+          "text": "Depo 3’ün dış kapı kolundaki parmak izi sanığa aittir; izin olay saatinden önce bırakıldığına dair somut bir açıklama duruşmada ortaya konmamıştır."
+        },
+        {
+          "when": {
+            "flag": "fp_neutralized"
+          },
+          "text": "Parmak izinin daha önce bırakılmış olabileceği değerlendirilmiş; ancak bu ihtimal teşhis karşısında sanık lehine sonuç doğurmamıştır."
+        },
+        {
+          "when": {
+            "not": {
+              "flag": "key_excluded"
+            }
+          },
+          "text": "Sanıkta ele geçen depo anahtarı, teşhis ve parmak iziyle birlikte destekleyici delil olarak değerlendirilmiştir."
+        },
+        {
+          "when": {
+            "flag": "key_excluded"
+          },
+          "text": "Depo anahtarı hukuka aykırı aramayla elde edildiğinden hükme esas alınmamıştır (CMK 217/2)."
+        },
+        {
+          "when": {
+            "not": {
+              "ref": "alibi"
+            }
+          },
+          "text": "Sanığın olay saatinde çay ocağında bulunduğu savunması, duruşmada dinlenen tanık ve sunulan belgelerle ispatlanamamıştır."
+        },
+        {
+          "when": {
+            "ref": "alibi"
+          },
+          "text": "Mazeret tanığının beyanı ve fiş değerlendirilmiş; tanığın sanığın ailesine yakınlığı ve fişin ödemeyi yapanı göstermemesi nedeniyle teşhisi ortadan kaldırmaya yeterli görülmemiştir."
+        },
+        {
+          "when": {
             "any": [
               {
                 "not": {
@@ -934,15 +1038,9 @@
             ]
           },
           "text": "Yalnızca TCK 142/2-h uyarınca, zararın ağırlığı gözetilerek alt sınırdan uzaklaşılarak 6 YIL; TCK 143 ile 9 YIL; TCK 62/1 ile 7 YIL 6 AY HAPİS; işverence teslim edilen anahtar nedeniyle TCK 142/2-d’nin uygulanmasına yer olmadığına; TCK 53; TCK 63; istinaf."
-        },
-        {
-          "when": {
-            "flag": "cokus"
-          },
-          "text": "Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı."
         }
       ],
-      "legalBasis": "TCK 142/2-d, h, 143, 62/1, 53, 63; CMK 273/1",
+      "legalBasis": "TCK 142/2-d, h, 143, 62/1, 53, 63; CMK 217, 230/1; CMK 273/1",
       "xp": {
         "if": {
           "when": {

@@ -798,24 +798,20 @@
           },
           "effects": [
             {
-              "type": "VAR",
-              "var": "selin_hint_liman",
-              "op": "set",
-              "value": true
-            },
-            {
               "type": "SCORE",
               "category": "USUL_BILGISI",
               "amount": -30
             },
             {
-              "type": "DISCOVER",
-              "evidence": "clue_yuzuk"
+              "type": "VAR",
+              "var": "ethics",
+              "op": "inc",
+              "value": 1
             }
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Avukat karşı tarafın tanığından beyan toplayıp tutanak düzenleyemez; ifade alma yetkisi yoktur (TBB Meslek Kuralları).",
+            "feedback": "Avukat karşı tarafın, üstelik hakkında soruşturma bulunan tanığından beyan toplayıp imzalatamaz; ifade alma kolluk ve savcılığın işidir (CMK 147, 160–161; Av.K. 34; TBB Meslek Kuralları).",
             "category": "USUL_BILGISI"
           },
           "responses": [
@@ -823,24 +819,29 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Anlatın. Ben not alayım, imzalarsınız, dosyaya koyarım."
+                  "text": "Anlatın. Ben not alayım, siz imzalarsınız, dosyaya koyarım."
                 },
                 {
                   "speaker": "narrator",
-                  "text": "Defterimi açtım. Selin baktı, tereddüt etti. Sonra anlattı. Kara Ziya, borç, yüzük. Ve Gemlik: “Limanda bir gemide tanıdığı var.”"
+                  "text": "Defterimi açtım, kalemi kapağından çıkardım. Selin defteri gördü. Kalemi gördü. Bir adım geri çekildi."
+                },
+                {
+                  "speaker": "selin",
+                  "text": "Siz de mi? İmza, tutanak… Polis de böyle başlamıştı. “Anlat, yazalım, imzala.”",
+                  "expression": "kizgin"
                 },
                 {
                   "speaker": "narrator",
-                  "text": "İmzalamadı. Defteri bana geri itti ve yağmurun içine yürüdü."
+                  "text": "Ağzını açtı, bir şey söyleyecekti. Sonra kapattı. Yüzüğü avucunda sıktı ve yağmurun içine yürüdü. Arkasına bakmadı."
                 },
                 {
                   "speaker": "player",
-                  "text": "Bir avukat karşı tarafın tanığından beyan toplamaz. Benim kayıt tutma yetkim yok. Bu notlar mahkemede bir işe yaramaz; bana da yaramaz.",
+                  "text": "Bir avukat karşı tarafın tanığından beyan toplamaz. Benim ifade alma yetkim yok. Bunu biliyordum. Bir şey söylemek için beklemişti; ben ona bir tutanak uzattım.",
                   "style": "thought"
                 },
                 {
                   "speaker": "player",
-                  "text": "Leyla bunu görse ne derdi, biliyorum. Ama Gemlik’i biliyorum artık.",
+                  "text": "Leyla bunu görse ne derdi, biliyorum. Hiçbir şey. Ve o sessizlik, bu yağmurdan soğuk olurdu.",
                   "style": "thought"
                 }
               ]
@@ -860,11 +861,17 @@
               "type": "SCORE",
               "category": "USUL_BILGISI",
               "amount": -50
+            },
+            {
+              "type": "VAR",
+              "var": "ethics",
+              "op": "inc",
+              "value": 1
             }
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Tanığı korkuttun; kendi isteğiyle konuşmak isteyen biri kaçtı.",
+            "feedback": "Soruşturma altındaki tanığı korkuttun: tanığa gözdağı meslek kurallarına aykırıdır (Av.K. 34; TBB Meslek Kuralları) ve TCK 277 kapsamında değerlendirilebilir. Kendi isteğiyle konuşmak isteyen biri kaçtı.",
             "category": "USUL_BILGISI"
           },
           "responses": [
@@ -2156,11 +2163,23 @@
               "var": "trust",
               "op": "dec",
               "value": 4
+            },
+            {
+              "type": "VAR",
+              "var": "ethics",
+              "op": "inc",
+              "value": 1
+            },
+            {
+              "type": "SCORE",
+              "category": "SAVUNMA_STRATEJISI",
+              "amount": -30
             }
           ],
           "quality": {
-            "q": "NEUTRAL",
-            "feedback": "Ezber metin heyete samimiyetsiz gelir; son söz sanığındır."
+            "q": "BAD",
+            "feedback": "Son söz sanığındır (CMK 216/3). Müvekkile ezber metin vermek beyanını yönlendirmektir; avukat müvekkilin ağzına söz koymaz (Av.K. 34; TBB Meslek Kuralları).",
+            "category": "SAVUNMA_STRATEJISI"
           },
           "responses": [
             {
@@ -2340,11 +2359,17 @@
               "type": "SCORE",
               "category": "SAVUNMA_STRATEJISI",
               "amount": -25
+            },
+            {
+              "type": "VAR",
+              "var": "ethics",
+              "op": "inc",
+              "value": 1
             }
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Şüpheliyi kovalamak avukatın işi değil: hem güvenlik riski hem kaçış fırsatı.",
+            "feedback": "Kaçan şüpheliyi kovalamak avukatın işi değil; ihbar savcılığa yapılır (CMK 158). Kendini tehlikeye attın ve şüpheliyi uyardın (Av.K. 34; TBB Meslek Kuralları).",
             "category": "SAVUNMA_STRATEJISI"
           },
           "next": "ARA_LIMAN_GECE"

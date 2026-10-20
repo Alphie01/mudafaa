@@ -24,11 +24,33 @@ class PlayState {
 
 const _storage = FlutterSecureStorage();
 
+/// Oyun ekranının bellekte tuttuğu sunum durumu (sunucu durumu değildir).
+class PlayMemory {
+  /// Girişi (perde, kartlar, satırlar) tamamlanmış `stateVersion`'lar: aynı sürümde yeniden çizimde tekrar oynamaz.
+  final played = <int>{};
+
+  /// Epilogu oynatılmış sonuç sürümleri.
+  final epilogueDone = <int>{};
+
+  /// Oturum boyunca oynatılan tüm satırlar (GEÇMİŞ).
+  final history = <Map<String, dynamic>>[];
+
+  /// Sürüm → o sürümde oynatılan satırlar (seçenekler gelince son satır kutusu için).
+  final lastLines = <int, List<Map<String, dynamic>>>{};
+
+  /// Son gösterilen bölüm başlığı.
+  String? chapter;
+}
+
 /// Aynı anda tek aksiyon gönderir; aksiyon gönderilmeden önce outbox'a yazılır (aynı clientActionId ile yeniden
 /// gönderim çift puan yaratmaz). 409'da görünüm yenilenir, 422'de hata bandı gösterilir.
 class SessionController extends Notifier<PlayState> {
   SessionController(this.sessionId);
   final String sessionId;
+
+  /// Sunum belleği: hangi sürümün satırları oynatıldı, konuşma geçmişi, son bölüm. Uygulama yeniden başlayınca
+  /// sıfırlanır (satırların yeniden oynaması kabul edilir).
+  final memory = PlayMemory();
 
   @override
   PlayState build() {

@@ -1,0 +1,737 @@
+{
+ "title": "Soğuk açılış",
+ "description": "Kart satırları, isimsiz telefon sesi, arka plan geçişleri, sarsıntı/flaş/kararma; ardından görüşme ve YENİ DELİL.",
+ "steps": [
+  {
+   "session": {
+    "id": "dev-session",
+    "caseId": "dev-case",
+    "caseNumber": 0,
+    "caseTitle": "Örnek Dosya",
+    "stateVersion": 1,
+    "status": "ACTIVE",
+    "mode": "TEST"
+   },
+   "header": {
+    "eyebrow": "ÖRNEK · SOĞUK AÇILIŞ",
+    "title": "Gece vardiyası",
+    "chapter": "Bölüm 1 · Gece",
+    "backdrop": "siyah"
+   },
+   "hud": [],
+   "cast": {
+    "sen": {
+     "name": "Av. Deniz",
+     "shortLabel": "Deniz",
+     "role": "COUNSEL",
+     "accent": "#2f6dbb",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...khhhhhhhhk...",
+       "...khhhhhhhhk...",
+       "...khsssssshk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...ksssSSsssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkmwrrwmkk...",
+       "..knnmwrrwmnnk..",
+       "..knnnmrrmnnnk..",
+       "..knNnnmmnnNnk..",
+       "..knNnnmmnnNnk..",
+       "..kSnnnmmnnnSk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkk..kkkk..."
+      ]
+     }
+    },
+    "ece": {
+     "name": "Stajyer Ece Kara",
+     "shortLabel": "Ece",
+     "role": "ASSISTANT",
+     "accent": "#6a4a9c",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kyyyyyyyyk...",
+       "..kyyyyyyyyyyk..",
+       "..kyyssssssyyk..",
+       "..kyssssssssyk..",
+       "..kysessssesyk..",
+       "..kyssssssssyk..",
+       "..kysssrrsssyk..",
+       "..kyyssssssyyk..",
+       "..kyykkSSkkyyk..",
+       "...kkuwwwwukk...",
+       "..kuuuwkkwuuuk..",
+       "..kuuuuwwuuuuk..",
+       "..kuUuuuuuuUuk..",
+       "..kSuuuuuuuuSk..",
+       "...kUUUUUUUUk...",
+       "...kUUUUUUUUk...",
+       "....kSk..kSk....",
+       "....kSk..kSk....",
+       "...kkkk..kkkk..."
+      ]
+     }
+    }
+   },
+   "lines": [
+    {
+     "speaker": "narrator",
+     "style": "card",
+     "text": "Gece 23.04 — Liman mahallesi, depo sokağı",
+     "bg": "sokak_yagmur",
+     "fx": "fade"
+    },
+    {
+     "speaker": "narrator",
+     "text": "Yağmur, sokak lambasının titreyen ışığında iğne gibi parlıyor."
+    },
+    {
+     "speaker": "narrator",
+     "name": "Bir ses",
+     "style": "phone",
+     "text": "Kumaşlar sabah altıda çıkıyor. Bekçi uyuyor olacak. Kimse görmeyecek."
+    },
+    {
+     "speaker": "player",
+     "style": "thought",
+     "text": "Bu sesi bir yerden tanıyorum…"
+    },
+    {
+     "speaker": "narrator",
+     "name": "Bir ses",
+     "style": "whisper",
+     "text": "Kapat. Biri geliyor."
+    },
+    {
+     "speaker": "narrator",
+     "text": "Demir kapı çarpar. Ardından sessizlik.",
+     "fx": "shake",
+     "bg": "depo_gece"
+    },
+    {
+     "speaker": "narrator",
+     "style": "card",
+     "text": "Ertesi sabah — Büro",
+     "bg": "buro",
+     "fx": "fade"
+    },
+    {
+     "speaker": "ece",
+     "expression": "mutlu",
+     "text": "Günaydın! Masanda yeni bir dosya var. Depo hırsızlığı, tek tanık gece bekçisi."
+    },
+    {
+     "speaker": "player",
+     "text": "Tek tanık mı? Anlat bakalım."
+    },
+    {
+     "speaker": "ece",
+     "expression": "saskin",
+     "text": "Bekçi, saat 23.00’te depodan çıkanı sokak lambasının ışığında gördüğünü söylüyor.",
+     "fx": "flash"
+    }
+   ],
+   "choices": [
+    {
+     "id": "C_ACIL",
+     "kind": "CONTINUE",
+     "label": "Dosyayı aç",
+     "available": true,
+     "used": false
+    }
+   ],
+   "bag": {
+    "items": []
+   },
+   "notebook": {
+    "items": []
+   },
+   "node": {
+    "type": "STORY",
+    "id": "S_COLD",
+    "blocks": [
+     {
+      "type": "paragraph",
+      "title": "Dosya",
+      "text": "Gece bekçisi tek tanık. Elinde bir anahtar, bir telefon kaydı ve bir yalan var."
+     }
+    ]
+   }
+  },
+  {
+   "session": {
+    "id": "dev-session",
+    "caseId": "dev-case",
+    "caseNumber": 0,
+    "caseTitle": "Örnek Dosya",
+    "stateVersion": 2,
+    "status": "ACTIVE",
+    "mode": "TEST"
+   },
+   "header": {
+    "eyebrow": "ÖRNEK · CEZAEVİ",
+    "title": "Müvekkil görüşmesi",
+    "chapter": "Bölüm 2 · Görüşme",
+    "backdrop": "gorus_odasi",
+    "back": {
+     "a11yLabel": "Görüşmeyi bitir",
+     "choiceId": "G_BITIR"
+    }
+   },
+   "hud": [
+    {
+     "id": "min",
+     "label": "Kalan süre",
+     "widget": "minutes",
+     "value": 14,
+     "max": 14
+    },
+    {
+     "id": "trust",
+     "label": "Güven",
+     "widget": "percentBar",
+     "value": 62,
+     "max": 100
+    }
+   ],
+   "cast": {
+    "sen": {
+     "name": "Av. Deniz",
+     "shortLabel": "Deniz",
+     "role": "COUNSEL",
+     "accent": "#2f6dbb",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...khhhhhhhhk...",
+       "...khhhhhhhhk...",
+       "...khsssssshk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...ksssSSsssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkmwrrwmkk...",
+       "..knnmwrrwmnnk..",
+       "..knnnmrrmnnnk..",
+       "..knNnnmmnnNnk..",
+       "..knNnnmmnnNnk..",
+       "..kSnnnmmnnnSk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkk..kkkk..."
+      ]
+     }
+    },
+    "baran": {
+     "name": "Baran Yıldız",
+     "shortLabel": "Baran",
+     "role": "CLIENT",
+     "accent": "#e2802f",
+     "sprite": {
+      "rows": [
+       "....k.kkkk.k....",
+       "...kHHkHHHkHk...",
+       "...kHHHHHHHHk...",
+       "...kHsssssHHk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...kssskksssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkoowwookk...",
+       "..kooooOOooook..",
+       "..koOoooooooOk..",
+       "..koOoooooooOk..",
+       "..koOoooooooOk..",
+       "..kSooooooooSk..",
+       "...kddddddddk...",
+       "...kdddkkdddk...",
+       "...kdddkkdddk...",
+       "..kkkkk..kkkkk.."
+      ]
+     }
+    },
+    "nuran": {
+     "name": "Nuran Yıldız",
+     "shortLabel": "Anne",
+     "role": "WITNESS",
+     "accent": "#b0496b",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kffffffffk...",
+       "..kffffffffffk..",
+       "..kffssssssffk..",
+       "..kfssssssssfk..",
+       "..kfsessssesfk..",
+       "..kfssssssssfk..",
+       "..kfssskksssfk..",
+       "..kffssssssffk..",
+       "..kffffFFffffk..",
+       "...kffiiiiffk...",
+       "..kiiiiiiiiiik..",
+       "..kiiiiiiiiiik..",
+       "..kiIiiiiiiIik..",
+       "..kSiiiiiiiiSk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "...kZZZZZZZZk...",
+       "...kkkk..kkkk..."
+      ]
+     }
+    }
+   },
+   "lines": [
+    {
+     "speaker": "nuran",
+     "expression": "uzgun",
+     "text": "Avukat bey, oğlum o gece evdeydi. Yemin ederim."
+    },
+    {
+     "speaker": "baran",
+     "expression": "uzgun",
+     "text": "Ben bir şey yapmadım. Ama anahtar… anahtar bendeydi."
+    }
+   ],
+   "choices": [
+    {
+     "id": "TP_GECE",
+     "kind": "TOPIC",
+     "label": "O gece",
+     "variants": [
+      {
+       "id": "soft",
+       "label": "Yumuşak"
+      },
+      {
+       "id": "hard",
+       "label": "Sert"
+      }
+     ],
+     "cost": [
+      {
+       "var": "min",
+       "amount": 3,
+       "label": "3 dk"
+      }
+     ],
+     "available": true,
+     "used": false
+    },
+    {
+     "id": "TP_ANAHTAR",
+     "kind": "TOPIC",
+     "label": "Anahtar",
+     "variants": [
+      {
+       "id": "soft",
+       "label": "Yumuşak"
+      },
+      {
+       "id": "hard",
+       "label": "Sert"
+      }
+     ],
+     "cost": [
+      {
+       "var": "min",
+       "amount": 3,
+       "label": "3 dk"
+      }
+     ],
+     "available": true,
+     "used": false
+    },
+    {
+     "id": "G_BITIR",
+     "kind": "CONTINUE",
+     "label": "Görüşmeyi bitir",
+     "available": true,
+     "used": false
+    }
+   ],
+   "bag": {
+    "items": []
+   },
+   "notebook": {
+    "items": []
+   },
+   "node": {
+    "type": "DIALOGUE",
+    "id": "D_GORUS",
+    "mode": "INTERVIEW",
+    "room": {
+     "label": "Cezaevi · görüş odası",
+     "characterKey": "baran",
+     "expression": "uzgun"
+    },
+    "mood": {
+     "label": "Temkinli",
+     "tone": "neutral"
+    },
+    "objectives": [
+     {
+      "text": "O gece neredeydi?",
+      "known": false
+     },
+     {
+      "text": "Anahtar kimde?",
+      "known": false
+     }
+    ],
+    "tones": [
+     {
+      "id": "soft",
+      "label": "Yumuşak"
+     },
+     {
+      "id": "hard",
+      "label": "Sert"
+     }
+    ],
+    "allowPresent": false
+   },
+   "last": {
+    "resolution": "CHOICE",
+    "lines": [
+     {
+      "speaker": "player",
+      "text": "Dosyayı açıyorum. Önce müvekkille konuşmalıyım."
+     }
+    ],
+    "fx": [
+     {
+      "kind": "SCORE",
+      "label": "+50 SKOR",
+      "delta": 50
+     },
+     {
+      "kind": "CHARACTER",
+      "label": "Baran Yıldız",
+      "id": "baran"
+     },
+     {
+      "kind": "CHARACTER",
+      "label": "Nuran Yıldız",
+      "id": "nuran"
+     }
+    ],
+    "discovered": [],
+    "nodeChanged": true,
+    "completed": false
+   }
+  },
+  {
+   "session": {
+    "id": "dev-session",
+    "caseId": "dev-case",
+    "caseNumber": 0,
+    "caseTitle": "Örnek Dosya",
+    "stateVersion": 3,
+    "status": "ACTIVE",
+    "mode": "TEST"
+   },
+   "header": {
+    "eyebrow": "ÖRNEK · CEZAEVİ",
+    "title": "Müvekkil görüşmesi",
+    "chapter": "Bölüm 2 · Görüşme",
+    "backdrop": "gorus_odasi",
+    "back": {
+     "a11yLabel": "Görüşmeyi bitir",
+     "choiceId": "G_BITIR"
+    }
+   },
+   "hud": [
+    {
+     "id": "min",
+     "label": "Kalan süre",
+     "widget": "minutes",
+     "value": 11,
+     "max": 14
+    },
+    {
+     "id": "trust",
+     "label": "Güven",
+     "widget": "percentBar",
+     "value": 54,
+     "max": 100
+    }
+   ],
+   "cast": {
+    "sen": {
+     "name": "Av. Deniz",
+     "shortLabel": "Deniz",
+     "role": "COUNSEL",
+     "accent": "#2f6dbb",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...khhhhhhhhk...",
+       "...khhhhhhhhk...",
+       "...khsssssshk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...ksssSSsssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkmwrrwmkk...",
+       "..knnmwrrwmnnk..",
+       "..knnnmrrmnnnk..",
+       "..knNnnmmnnNnk..",
+       "..knNnnmmnnNnk..",
+       "..kSnnnmmnnnSk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkk..kkkk..."
+      ]
+     }
+    },
+    "baran": {
+     "name": "Baran Yıldız",
+     "shortLabel": "Baran",
+     "role": "CLIENT",
+     "accent": "#e2802f",
+     "sprite": {
+      "rows": [
+       "....k.kkkk.k....",
+       "...kHHkHHHkHk...",
+       "...kHHHHHHHHk...",
+       "...kHsssssHHk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...kssskksssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkoowwookk...",
+       "..kooooOOooook..",
+       "..koOoooooooOk..",
+       "..koOoooooooOk..",
+       "..koOoooooooOk..",
+       "..kSooooooooSk..",
+       "...kddddddddk...",
+       "...kdddkkdddk...",
+       "...kdddkkdddk...",
+       "..kkkkk..kkkkk.."
+      ]
+     }
+    },
+    "nuran": {
+     "name": "Nuran Yıldız",
+     "shortLabel": "Anne",
+     "role": "WITNESS",
+     "accent": "#b0496b",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kffffffffk...",
+       "..kffffffffffk..",
+       "..kffssssssffk..",
+       "..kfssssssssfk..",
+       "..kfsessssesfk..",
+       "..kfssssssssfk..",
+       "..kfssskksssfk..",
+       "..kffssssssffk..",
+       "..kffffFFffffk..",
+       "...kffiiiiffk...",
+       "..kiiiiiiiiiik..",
+       "..kiiiiiiiiiik..",
+       "..kiIiiiiiiIik..",
+       "..kSiiiiiiiiSk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "...kZZZZZZZZk...",
+       "...kkkk..kkkk..."
+      ]
+     }
+    }
+   },
+   "lines": [
+    {
+     "speaker": "nuran",
+     "expression": "uzgun",
+     "text": "Avukat bey, oğlum o gece evdeydi."
+    }
+   ],
+   "choices": [
+    {
+     "id": "TP_GECE",
+     "kind": "TOPIC",
+     "label": "O gece",
+     "variants": [
+      {
+       "id": "soft",
+       "label": "Yumuşak"
+      },
+      {
+       "id": "hard",
+       "label": "Sert"
+      }
+     ],
+     "cost": [
+      {
+       "var": "min",
+       "amount": 3,
+       "label": "3 dk"
+      }
+     ],
+     "available": true,
+     "used": false
+    },
+    {
+     "id": "TP_ANAHTAR",
+     "kind": "TOPIC",
+     "label": "Anahtar",
+     "variants": [
+      {
+       "id": "soft",
+       "label": "Yumuşak"
+      },
+      {
+       "id": "hard",
+       "label": "Sert"
+      }
+     ],
+     "cost": [
+      {
+       "var": "min",
+       "amount": 3,
+       "label": "3 dk"
+      }
+     ],
+     "available": true,
+     "used": true
+    },
+    {
+     "id": "G_BITIR",
+     "kind": "CONTINUE",
+     "label": "Görüşmeyi bitir",
+     "available": true,
+     "used": false
+    }
+   ],
+   "bag": {
+    "items": [
+     {
+      "id": "ev_anahtar",
+      "title": "Yedek depo anahtarı",
+      "shortText": "Vardiya dolabında, etiketsiz bir anahtar.",
+      "description": "Örnek delil.",
+      "kindLabel": "Fiziksel delil",
+      "sourceLabel": "Görüşme · müvekkil",
+      "icon": "key"
+     }
+    ]
+   },
+   "notebook": {
+    "items": []
+   },
+   "node": {
+    "type": "DIALOGUE",
+    "id": "D_GORUS",
+    "mode": "INTERVIEW",
+    "room": {
+     "label": "Cezaevi · görüş odası",
+     "characterKey": "baran",
+     "expression": "saskin"
+    },
+    "mood": {
+     "label": "Gergin",
+     "tone": "error"
+    },
+    "objectives": [
+     {
+      "text": "O gece neredeydi?",
+      "known": false
+     },
+     {
+      "text": "Anahtar herkeste var: tek başına delil değil.",
+      "known": true
+     }
+    ],
+    "tones": [
+     {
+      "id": "soft",
+      "label": "Yumuşak"
+     },
+     {
+      "id": "hard",
+      "label": "Sert"
+     }
+    ],
+    "allowPresent": false
+   },
+   "last": {
+    "resolution": "CHOICE",
+    "feedback": {
+     "title": "Sert soru",
+     "text": "Baran savunmaya geçti ama anahtarın sırrını verdi.",
+     "label": "−8 GÜVEN",
+     "tone": "neutral"
+    },
+    "lines": [
+     {
+      "speaker": "player",
+      "text": "Anahtar neden senin çantandaydı? Dürüst ol."
+     },
+     {
+      "speaker": "baran",
+      "expression": "kizgin",
+      "text": "Bütün vardiyaya aynı anahtarı veriyorlar! Benimki hep çantamda durur.",
+      "fx": "shake"
+     },
+     {
+      "speaker": "player",
+      "style": "thought",
+      "text": "Herkeste aynı anahtar varsa, anahtar kimseyi göstermez."
+     }
+    ],
+    "fx": [
+     {
+      "kind": "VAR",
+      "label": "Güven",
+      "delta": -8,
+      "id": "trust"
+     },
+     {
+      "kind": "VAR",
+      "label": "Kalan süre",
+      "delta": -3,
+      "id": "min"
+     },
+     {
+      "kind": "EVIDENCE",
+      "label": "Yedek depo anahtarı",
+      "id": "ev_anahtar"
+     },
+     {
+      "kind": "SCORE",
+      "label": "+40 SKOR",
+      "delta": 40
+     }
+    ],
+    "discovered": [
+     "ev_anahtar"
+    ],
+    "nodeChanged": false,
+    "completed": false
+   }
+  }
+ ]
+}

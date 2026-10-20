@@ -1,0 +1,934 @@
+{
+ "title": "Duruşma · İTİRAZ!",
+ "description": "Bölüm kartı, İTİRAZ! pankartı ve sarsıntı, ölçer hücre hücre dolar, kaybedilen kalp yanıp söner.",
+ "steps": [
+  {
+   "session": {
+    "id": "dev-session",
+    "caseId": "dev-case",
+    "caseNumber": 0,
+    "caseTitle": "Örnek Dosya",
+    "stateVersion": 30,
+    "status": "ACTIVE",
+    "mode": "TEST"
+   },
+   "header": {
+    "eyebrow": "ÖRNEK · DURUŞMA",
+    "title": "Duruşma · 2. celse",
+    "chapter": "Bölüm 3 · Duruşma",
+    "backdrop": "durusma_salonu"
+   },
+   "hud": [
+    {
+     "id": "cred",
+     "label": "Güvenilirlik",
+     "widget": "hearts",
+     "value": 5,
+     "max": 5,
+     "low": false
+    },
+    {
+     "id": "pers",
+     "label": "Heyet iknası",
+     "widget": "meter10",
+     "value": 2,
+     "max": 10
+    }
+   ],
+   "cast": {
+    "sen": {
+     "name": "Av. Deniz",
+     "shortLabel": "Deniz",
+     "role": "COUNSEL",
+     "accent": "#2f6dbb",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...khhhhhhhhk...",
+       "...khhhhhhhhk...",
+       "...khsssssshk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...ksssSSsssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkmwrrwmkk...",
+       "..knnmwrrwmnnk..",
+       "..knnnmrrmnnnk..",
+       "..knNnnmmnnNnk..",
+       "..knNnnmmnnNnk..",
+       "..kSnnnmmnnnSk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkk..kkkk..."
+      ]
+     }
+    },
+    "hakim": {
+     "name": "Hâkim Selim Öz",
+     "shortLabel": "Başkan",
+     "role": "JUDGE",
+     "accent": "#4a4656",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kyyyyyyyyk...",
+       "..kyyyyyyyyyyk..",
+       "..kyyssssssyyk..",
+       "...kssssssssk...",
+       "...kkeksskekk...",
+       "...kssssssssk...",
+       "...kSskkkksSk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkgRwwRgkk...",
+       "..knngRwwRgnnk..",
+       "..knnnRRRRnnnk..",
+       "..knNnnRRnnNnk..",
+       "..knNnnRRnnNnk..",
+       "..kSnnnRRnnnSk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkkkkkkkk..."
+      ],
+      "noEyes": true
+     }
+    },
+    "uye": {
+     "name": "Hâkim Derya Tan",
+     "shortLabel": "Üye hâkim",
+     "role": "JUDGE",
+     "accent": "#4a4656",
+     "sprite": {
+      "rows": [
+       "......kkkk......",
+       ".....khhhhk.....",
+       "...kkhhhhhhkk...",
+       "..khhhhhhhhhhk..",
+       "..khsssssssshk..",
+       "..khsesssseshk..",
+       "..khsssssssshk..",
+       "..khsssrrssshk..",
+       "...kkssssssk....",
+       ".....kkSSkk.....",
+       "...kkgRwwRgkk...",
+       "..knngRwwRgnnk..",
+       "..knnnRRRRnnnk..",
+       "..knNnnRRnnNnk..",
+       "..knNnnRRnnNnk..",
+       "..kSnnnRRnnnSk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkkkkkkkk..."
+      ]
+     }
+    },
+    "savci": {
+     "name": "Savcı Kaan Er",
+     "shortLabel": "Savcı",
+     "role": "PROSECUTOR",
+     "accent": "#7a2f45",
+     "sprite": {
+      "rows": [
+       "...kkkkkkkkk....",
+       "..khhhhhhhhhk...",
+       "..khhhhhhhhhhk..",
+       "...khhssssssk...",
+       "...kssssssssk...",
+       "...kskesskesk...",
+       "...kssssssssk...",
+       "...ksssskkssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkgRwwRgkk...",
+       "..kgnnRwwRnnnk..",
+       "..kngnnRRnnnnk..",
+       "..knNgnRRnnNnk..",
+       "..knNngRRnnNnk..",
+       "..kSnnnRRnnnSk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkkkkkkkk..."
+      ]
+     }
+    },
+    "nuran": {
+     "name": "Nuran Yıldız",
+     "shortLabel": "Anne",
+     "role": "WITNESS",
+     "accent": "#b0496b",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kffffffffk...",
+       "..kffffffffffk..",
+       "..kffssssssffk..",
+       "..kfssssssssfk..",
+       "..kfsessssesfk..",
+       "..kfssssssssfk..",
+       "..kfssskksssfk..",
+       "..kffssssssffk..",
+       "..kffffFFffffk..",
+       "...kffiiiiffk...",
+       "..kiiiiiiiiiik..",
+       "..kiiiiiiiiiik..",
+       "..kiIiiiiiiIik..",
+       "..kSiiiiiiiiSk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "...kZZZZZZZZk...",
+       "...kkkk..kkkk..."
+      ]
+     }
+    }
+   },
+   "lines": [
+    {
+     "speaker": "hakim",
+     "text": "Tanık, ifadenizi tekrar eder misiniz?"
+    },
+    {
+     "speaker": "nuran",
+     "expression": "uzgun",
+     "text": "Saat 23.00 gibi birini gördüm. Lamba yanıyordu."
+    }
+   ],
+   "choices": [],
+   "bag": {
+    "items": []
+   },
+   "notebook": {
+    "items": []
+   },
+   "node": {
+    "type": "COURTROOM",
+    "id": "CR_1",
+    "mode": "TESTIMONY",
+    "stage": {
+     "banner": "ADALET MÜLKÜN TEMELİDİR",
+     "bench": [
+      {
+       "characterKey": "uye",
+       "label": "ÜYE HÂKİM",
+       "xFrac": 0.2
+      },
+      {
+       "characterKey": "hakim",
+       "label": "BAŞKAN",
+       "xFrac": 0.5
+      },
+      {
+       "characterKey": "savci",
+       "label": "C. SAVCISI",
+       "xFrac": 0.8
+      }
+     ],
+     "witness": "nuran",
+     "counsel": "sen"
+    },
+    "statements": [
+     {
+      "id": "st1",
+      "segments": [
+       {
+        "text": "Saat 23.00 gibi depodan çıkan birini gördüm. ",
+        "highlight": false
+       },
+       {
+        "text": "Sokak lambası yanıyordu",
+        "highlight": true
+       },
+       {
+        "text": ", yüzünü net seçtim.",
+        "highlight": false
+       }
+      ],
+      "pressed": false
+     },
+     {
+      "id": "st2",
+      "segments": [
+       {
+        "text": "Sonra eve gidip yattım.",
+        "highlight": false
+       }
+      ],
+      "pressed": false
+     }
+    ],
+    "presentable": [
+     {
+      "id": "ev_fatura",
+      "title": "Elektrik arıza kaydı",
+      "shortText": "Sokak lambası üç gündür yanmıyor.",
+      "description": "Örnek delil.",
+      "kindLabel": "Belge",
+      "sourceLabel": "Belediye",
+      "icon": "document"
+     },
+     {
+      "id": "ev_anahtar",
+      "title": "Yedek depo anahtarı",
+      "shortText": "Vardiya dolabında, etiketsiz bir anahtar.",
+      "description": "Örnek delil.",
+      "kindLabel": "Fiziksel delil",
+      "sourceLabel": "Görüşme · müvekkil",
+      "icon": "key"
+     }
+    ],
+    "objectionGrounds": [
+     {
+      "id": "og_yonlendirme",
+      "label": "Yönlendirici soru",
+      "legalBasis": "CMK 201"
+     }
+    ],
+    "witnessLabel": "Tanık kürsüsü"
+   }
+  },
+  {
+   "session": {
+    "id": "dev-session",
+    "caseId": "dev-case",
+    "caseNumber": 0,
+    "caseTitle": "Örnek Dosya",
+    "stateVersion": 31,
+    "status": "ACTIVE",
+    "mode": "TEST"
+   },
+   "header": {
+    "eyebrow": "ÖRNEK · DURUŞMA",
+    "title": "Duruşma · 2. celse",
+    "chapter": "Bölüm 3 · Duruşma",
+    "backdrop": "durusma_salonu"
+   },
+   "hud": [
+    {
+     "id": "cred",
+     "label": "Güvenilirlik",
+     "widget": "hearts",
+     "value": 5,
+     "max": 5,
+     "low": false
+    },
+    {
+     "id": "pers",
+     "label": "Heyet iknası",
+     "widget": "meter10",
+     "value": 5,
+     "max": 10
+    }
+   ],
+   "cast": {
+    "sen": {
+     "name": "Av. Deniz",
+     "shortLabel": "Deniz",
+     "role": "COUNSEL",
+     "accent": "#2f6dbb",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...khhhhhhhhk...",
+       "...khhhhhhhhk...",
+       "...khsssssshk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...ksssSSsssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkmwrrwmkk...",
+       "..knnmwrrwmnnk..",
+       "..knnnmrrmnnnk..",
+       "..knNnnmmnnNnk..",
+       "..knNnnmmnnNnk..",
+       "..kSnnnmmnnnSk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkk..kkkk..."
+      ]
+     }
+    },
+    "hakim": {
+     "name": "Hâkim Selim Öz",
+     "shortLabel": "Başkan",
+     "role": "JUDGE",
+     "accent": "#4a4656",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kyyyyyyyyk...",
+       "..kyyyyyyyyyyk..",
+       "..kyyssssssyyk..",
+       "...kssssssssk...",
+       "...kkeksskekk...",
+       "...kssssssssk...",
+       "...kSskkkksSk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkgRwwRgkk...",
+       "..knngRwwRgnnk..",
+       "..knnnRRRRnnnk..",
+       "..knNnnRRnnNnk..",
+       "..knNnnRRnnNnk..",
+       "..kSnnnRRnnnSk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkkkkkkkk..."
+      ],
+      "noEyes": true
+     }
+    },
+    "uye": {
+     "name": "Hâkim Derya Tan",
+     "shortLabel": "Üye hâkim",
+     "role": "JUDGE",
+     "accent": "#4a4656",
+     "sprite": {
+      "rows": [
+       "......kkkk......",
+       ".....khhhhk.....",
+       "...kkhhhhhhkk...",
+       "..khhhhhhhhhhk..",
+       "..khsssssssshk..",
+       "..khsesssseshk..",
+       "..khsssssssshk..",
+       "..khsssrrssshk..",
+       "...kkssssssk....",
+       ".....kkSSkk.....",
+       "...kkgRwwRgkk...",
+       "..knngRwwRgnnk..",
+       "..knnnRRRRnnnk..",
+       "..knNnnRRnnNnk..",
+       "..knNnnRRnnNnk..",
+       "..kSnnnRRnnnSk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkkkkkkkk..."
+      ]
+     }
+    },
+    "savci": {
+     "name": "Savcı Kaan Er",
+     "shortLabel": "Savcı",
+     "role": "PROSECUTOR",
+     "accent": "#7a2f45",
+     "sprite": {
+      "rows": [
+       "...kkkkkkkkk....",
+       "..khhhhhhhhhk...",
+       "..khhhhhhhhhhk..",
+       "...khhssssssk...",
+       "...kssssssssk...",
+       "...kskesskesk...",
+       "...kssssssssk...",
+       "...ksssskkssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkgRwwRgkk...",
+       "..kgnnRwwRnnnk..",
+       "..kngnnRRnnnnk..",
+       "..knNgnRRnnNnk..",
+       "..knNngRRnnNnk..",
+       "..kSnnnRRnnnSk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkkkkkkkk..."
+      ]
+     }
+    },
+    "nuran": {
+     "name": "Nuran Yıldız",
+     "shortLabel": "Anne",
+     "role": "WITNESS",
+     "accent": "#b0496b",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kffffffffk...",
+       "..kffffffffffk..",
+       "..kffssssssffk..",
+       "..kfssssssssfk..",
+       "..kfsessssesfk..",
+       "..kfssssssssfk..",
+       "..kfssskksssfk..",
+       "..kffssssssffk..",
+       "..kffffFFffffk..",
+       "...kffiiiiffk...",
+       "..kiiiiiiiiiik..",
+       "..kiiiiiiiiiik..",
+       "..kiIiiiiiiIik..",
+       "..kSiiiiiiiiSk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "...kZZZZZZZZk...",
+       "...kkkk..kkkk..."
+      ]
+     }
+    }
+   },
+   "lines": [],
+   "choices": [],
+   "bag": {
+    "items": []
+   },
+   "notebook": {
+    "items": []
+   },
+   "node": {
+    "type": "COURTROOM",
+    "id": "CR_1",
+    "mode": "TESTIMONY",
+    "stage": {
+     "banner": "ADALET MÜLKÜN TEMELİDİR",
+     "bench": [
+      {
+       "characterKey": "uye",
+       "label": "ÜYE HÂKİM",
+       "xFrac": 0.2
+      },
+      {
+       "characterKey": "hakim",
+       "label": "BAŞKAN",
+       "xFrac": 0.5
+      },
+      {
+       "characterKey": "savci",
+       "label": "C. SAVCISI",
+       "xFrac": 0.8
+      }
+     ],
+     "witness": "nuran",
+     "counsel": "sen"
+    },
+    "statements": [
+     {
+      "id": "st1",
+      "segments": [
+       {
+        "text": "Saat 23.00 gibi depodan çıkan birini gördüm. ",
+        "highlight": false
+       },
+       {
+        "text": "Sokak lambası yanıyordu",
+        "highlight": true
+       },
+       {
+        "text": ", yüzünü net seçtim.",
+        "highlight": false
+       }
+      ],
+      "pressed": true
+     },
+     {
+      "id": "st2",
+      "segments": [
+       {
+        "text": "Sonra eve gidip yattım.",
+        "highlight": false
+       }
+      ],
+      "pressed": false
+     }
+    ],
+    "presentable": [
+     {
+      "id": "ev_fatura",
+      "title": "Elektrik arıza kaydı",
+      "shortText": "Sokak lambası üç gündür yanmıyor.",
+      "description": "Örnek delil.",
+      "kindLabel": "Belge",
+      "sourceLabel": "Belediye",
+      "icon": "document"
+     },
+     {
+      "id": "ev_anahtar",
+      "title": "Yedek depo anahtarı",
+      "shortText": "Vardiya dolabında, etiketsiz bir anahtar.",
+      "description": "Örnek delil.",
+      "kindLabel": "Fiziksel delil",
+      "sourceLabel": "Görüşme · müvekkil",
+      "icon": "key"
+     }
+    ],
+    "objectionGrounds": [
+     {
+      "id": "og_yonlendirme",
+      "label": "Yönlendirici soru",
+      "legalBasis": "CMK 201"
+     }
+    ],
+    "witnessLabel": "Tanık kürsüsü"
+   },
+   "last": {
+    "resolution": "RULE",
+    "lines": [
+     {
+      "speaker": "player",
+      "text": "Lamba üç gündür arızalıydı, Sayın Başkan. İşte belediye kaydı!",
+      "fx": "flash"
+     },
+     {
+      "speaker": "savci",
+      "expression": "kizgin",
+      "text": "Bu kayıt dosyaya ne zaman girdi?!"
+     },
+     {
+      "speaker": "hakim",
+      "expression": "saskin",
+      "text": "Kayıt dosyada mevcut. Tanık, bu durumda yüzü nasıl seçtiniz?"
+     }
+    ],
+    "fx": [
+     {
+      "kind": "SHOUT",
+      "label": "İtiraz!"
+     },
+     {
+      "kind": "VAR",
+      "label": "Heyet iknası",
+      "delta": 3,
+      "id": "pers"
+     },
+     {
+      "kind": "SCORE",
+      "label": "+300 SKOR",
+      "delta": 300
+     }
+    ],
+    "discovered": [],
+    "nodeChanged": false,
+    "completed": false
+   }
+  },
+  {
+   "session": {
+    "id": "dev-session",
+    "caseId": "dev-case",
+    "caseNumber": 0,
+    "caseTitle": "Örnek Dosya",
+    "stateVersion": 32,
+    "status": "ACTIVE",
+    "mode": "TEST"
+   },
+   "header": {
+    "eyebrow": "ÖRNEK · DURUŞMA",
+    "title": "Duruşma · 2. celse",
+    "chapter": "Bölüm 3 · Duruşma",
+    "backdrop": "durusma_salonu"
+   },
+   "hud": [
+    {
+     "id": "cred",
+     "label": "Güvenilirlik",
+     "widget": "hearts",
+     "value": 4,
+     "max": 5,
+     "low": false
+    },
+    {
+     "id": "pers",
+     "label": "Heyet iknası",
+     "widget": "meter10",
+     "value": 4,
+     "max": 10
+    }
+   ],
+   "cast": {
+    "sen": {
+     "name": "Av. Deniz",
+     "shortLabel": "Deniz",
+     "role": "COUNSEL",
+     "accent": "#2f6dbb",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...khhhhhhhhk...",
+       "...khhhhhhhhk...",
+       "...khsssssshk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...ksssSSsssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkmwrrwmkk...",
+       "..knnmwrrwmnnk..",
+       "..knnnmrrmnnnk..",
+       "..knNnnmmnnNnk..",
+       "..knNnnmmnnNnk..",
+       "..kSnnnmmnnnSk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkk..kkkk..."
+      ]
+     }
+    },
+    "hakim": {
+     "name": "Hâkim Selim Öz",
+     "shortLabel": "Başkan",
+     "role": "JUDGE",
+     "accent": "#4a4656",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kyyyyyyyyk...",
+       "..kyyyyyyyyyyk..",
+       "..kyyssssssyyk..",
+       "...kssssssssk...",
+       "...kkeksskekk...",
+       "...kssssssssk...",
+       "...kSskkkksSk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkgRwwRgkk...",
+       "..knngRwwRgnnk..",
+       "..knnnRRRRnnnk..",
+       "..knNnnRRnnNnk..",
+       "..knNnnRRnnNnk..",
+       "..kSnnnRRnnnSk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkkkkkkkk..."
+      ],
+      "noEyes": true
+     }
+    },
+    "uye": {
+     "name": "Hâkim Derya Tan",
+     "shortLabel": "Üye hâkim",
+     "role": "JUDGE",
+     "accent": "#4a4656",
+     "sprite": {
+      "rows": [
+       "......kkkk......",
+       ".....khhhhk.....",
+       "...kkhhhhhhkk...",
+       "..khhhhhhhhhhk..",
+       "..khsssssssshk..",
+       "..khsesssseshk..",
+       "..khsssssssshk..",
+       "..khsssrrssshk..",
+       "...kkssssssk....",
+       ".....kkSSkk.....",
+       "...kkgRwwRgkk...",
+       "..knngRwwRgnnk..",
+       "..knnnRRRRnnnk..",
+       "..knNnnRRnnNnk..",
+       "..knNnnRRnnNnk..",
+       "..kSnnnRRnnnSk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkkkkkkkk..."
+      ]
+     }
+    },
+    "savci": {
+     "name": "Savcı Kaan Er",
+     "shortLabel": "Savcı",
+     "role": "PROSECUTOR",
+     "accent": "#7a2f45",
+     "sprite": {
+      "rows": [
+       "...kkkkkkkkk....",
+       "..khhhhhhhhhk...",
+       "..khhhhhhhhhhk..",
+       "...khhssssssk...",
+       "...kssssssssk...",
+       "...kskesskesk...",
+       "...kssssssssk...",
+       "...ksssskkssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkgRwwRgkk...",
+       "..kgnnRwwRnnnk..",
+       "..kngnnRRnnnnk..",
+       "..knNgnRRnnNnk..",
+       "..knNngRRnnNnk..",
+       "..kSnnnRRnnnSk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnRRnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkkkkkkkk..."
+      ]
+     }
+    },
+    "nuran": {
+     "name": "Nuran Yıldız",
+     "shortLabel": "Anne",
+     "role": "WITNESS",
+     "accent": "#b0496b",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...kffffffffk...",
+       "..kffffffffffk..",
+       "..kffssssssffk..",
+       "..kfssssssssfk..",
+       "..kfsessssesfk..",
+       "..kfssssssssfk..",
+       "..kfssskksssfk..",
+       "..kffssssssffk..",
+       "..kffffFFffffk..",
+       "...kffiiiiffk...",
+       "..kiiiiiiiiiik..",
+       "..kiiiiiiiiiik..",
+       "..kiIiiiiiiIik..",
+       "..kSiiiiiiiiSk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "..kZZZZZZZZZZk..",
+       "...kZZZZZZZZk...",
+       "...kkkk..kkkk..."
+      ]
+     }
+    }
+   },
+   "lines": [],
+   "choices": [],
+   "bag": {
+    "items": []
+   },
+   "notebook": {
+    "items": []
+   },
+   "node": {
+    "type": "COURTROOM",
+    "id": "CR_1",
+    "mode": "TESTIMONY",
+    "stage": {
+     "banner": "ADALET MÜLKÜN TEMELİDİR",
+     "bench": [
+      {
+       "characterKey": "uye",
+       "label": "ÜYE HÂKİM",
+       "xFrac": 0.2
+      },
+      {
+       "characterKey": "hakim",
+       "label": "BAŞKAN",
+       "xFrac": 0.5
+      },
+      {
+       "characterKey": "savci",
+       "label": "C. SAVCISI",
+       "xFrac": 0.8
+      }
+     ],
+     "witness": "nuran",
+     "counsel": "sen"
+    },
+    "statements": [
+     {
+      "id": "st1",
+      "segments": [
+       {
+        "text": "Saat 23.00 gibi depodan çıkan birini gördüm. ",
+        "highlight": false
+       },
+       {
+        "text": "Sokak lambası yanıyordu",
+        "highlight": true
+       },
+       {
+        "text": ", yüzünü net seçtim.",
+        "highlight": false
+       }
+      ],
+      "pressed": true
+     },
+     {
+      "id": "st2",
+      "segments": [
+       {
+        "text": "Sonra eve gidip yattım.",
+        "highlight": false
+       }
+      ],
+      "pressed": false
+     }
+    ],
+    "presentable": [
+     {
+      "id": "ev_fatura",
+      "title": "Elektrik arıza kaydı",
+      "shortText": "Sokak lambası üç gündür yanmıyor.",
+      "description": "Örnek delil.",
+      "kindLabel": "Belge",
+      "sourceLabel": "Belediye",
+      "icon": "document"
+     },
+     {
+      "id": "ev_anahtar",
+      "title": "Yedek depo anahtarı",
+      "shortText": "Vardiya dolabında, etiketsiz bir anahtar.",
+      "description": "Örnek delil.",
+      "kindLabel": "Fiziksel delil",
+      "sourceLabel": "Görüşme · müvekkil",
+      "icon": "key"
+     }
+    ],
+    "objectionGrounds": [
+     {
+      "id": "og_yonlendirme",
+      "label": "Yönlendirici soru",
+      "legalBasis": "CMK 201"
+     }
+    ],
+    "witnessLabel": "Tanık kürsüsü"
+   },
+   "last": {
+    "resolution": "FALLBACK",
+    "feedback": {
+     "title": "Yanlış delil",
+     "text": "Anahtar bu ifadeyle çelişmiyor.",
+     "label": "−150 SKOR",
+     "tone": "error"
+    },
+    "lines": [
+     {
+      "speaker": "hakim",
+      "expression": "kizgin",
+      "text": "Avukat bey, bu delilin ifadeyle ilgisi yok."
+     }
+    ],
+    "fx": [
+     {
+      "kind": "VAR",
+      "label": "Güvenilirlik",
+      "delta": -1,
+      "id": "cred"
+     },
+     {
+      "kind": "VAR",
+      "label": "Heyet iknası",
+      "delta": -1,
+      "id": "pers"
+     },
+     {
+      "kind": "SCORE",
+      "label": "−150 SKOR",
+      "delta": -150
+     }
+    ],
+    "discovered": [],
+    "nodeChanged": false,
+    "completed": false
+   }
+  }
+ ]
+}

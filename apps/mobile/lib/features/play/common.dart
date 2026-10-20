@@ -70,25 +70,46 @@ class _Line extends StatelessWidget {
 
 Color hexAccent(Object? hex) => hex is String ? hexColor(hex) : PxColors.panelHi;
 
-/// Son aksiyonun geri bildirimi (başarılı / hatalı / nötr renkle).
+/// Son aksiyonun geri bildirimi (başarılı / hatalı / nötr renkle). Başlık ve metin gövdede; `label` (ör. "−10 SKOR")
+/// metne eklenmez, sağda etiket olarak durur.
 class FeedbackBanner extends StatelessWidget {
   const FeedbackBanner({super.key, required this.feedback});
   final Map<String, dynamic> feedback;
 
+  static Color colorOf(String? tone) => switch (tone) {
+        'success' => PxColors.green,
+        'error' => PxColors.red,
+        'special' => PxColors.blue,
+        _ => PxColors.panelHi,
+      };
+
   @override
   Widget build(BuildContext context) {
-    final tone = feedback['tone'] as String? ?? 'neutral';
-    final color = switch (tone) {
-      'success' => PxColors.green,
-      'error' => PxColors.red,
-      'special' => PxColors.blue,
-      _ => PxColors.panelHi,
-    };
-    final parts = [feedback['title'], feedback['text'], feedback['label']].whereType<String>().where((s) => s.isNotEmpty).toList();
-    if (parts.isEmpty) return const SizedBox.shrink();
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: PxBox(color: color, child: Text(parts.join(' — '), style: PxText.body(20))),
+    final color = colorOf(feedback['tone'] as String?);
+    String? s(Object? v) => v is String && v.isNotEmpty ? v : null;
+    final title = s(feedback['title']);
+    final text = s(feedback['text']);
+    final label = s(feedback['label']);
+    if (title == null && text == null && label == null) return const SizedBox.shrink();
+    return PxBox(
+      color: color,
+      padding: const EdgeInsets.fromLTRB(12, 8, 10, 8),
+      child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Expanded(
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            if (title != null) Text(trUpper(title), style: PxText.pixel(13, color: PxColors.white)),
+            if (text != null) Text(text, style: PxText.body(20)),
+          ]),
+        ),
+        if (label != null)
+          Container(
+            key: const ValueKey('feedback-tag'),
+            margin: const EdgeInsets.only(left: 8, top: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+            color: PxColors.ink,
+            child: Text(label, style: PxText.pixel(11, color: PxColors.gold)),
+          ),
+      ]),
     );
   }
 }
@@ -142,27 +163,7 @@ class ChoiceTile extends StatelessWidget {
   final String? variant;
   final bool busy;
 
-  Future<void> _tap(BuildContext context) async {
-    final confirm = choice['confirm'] as String?;
-    if (confirm != null) {
-      final ok = await showDialog<bool>(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          backgroundColor: PxColors.panel,
-          shape: const RoundedRectangleBorder(side: BorderSide(color: PxColors.ink, width: 3)),
-          content: Text(confirm, style: PxText.body(21)),
-          actions: [
-            TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text('VAZGEÇ', style: PxText.pixel(13, color: PxColors.muted))),
-            TextButton(onPressed: () => Navigator.pop(ctx, true), child: Text('EVET', style: PxText.pixel(13, color: PxColors.gold))),
-          ],
-        ),
-      );
-      if (ok != true) return;
-    }
-    final variants = ms(choice['variants']);
-    final v = variants.isEmpty ? null : (variant ?? variants.first['id'] as String);
-    await dispatch({'kind': 'CHOOSE', 'choiceId': choice['id'], 'variant': ?v});
-  }
+  Future<void> _tap(BuildContext context) => chooseWithConfirm(context, choice, dispatch, variant: variant);
 
   @override
   Widget build(BuildContext context) {
@@ -255,4 +256,27 @@ Future<String?> pickEvidence(BuildContext context, List<Map<String, dynamic>> it
       ),
     ),
   );
+}
+
+/// Seçeneği gönderir; `confirm` varsa önce onay sorar. TOPIC seçenekleri `variant` ister.
+Future<void> chooseWithConfirm(BuildContext context, Map<String, dynamic> choice, Dispatch dispatch, {String? variant}) async {
+  final confirm = choice['confirm'] as String?;
+  if (confirm != null) {
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: PxColors.panel,
+        shape: const RoundedRectangleBorder(side: BorderSide(color: PxColors.ink, width: 3)),
+        content: Text(confirm, style: PxText.body(21)),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text('VAZGEÇ', style: PxText.pixel(13, color: PxColors.muted))),
+          TextButton(onPressed: () => Navigator.pop(ctx, true), child: Text('EVET', style: PxText.pixel(13, color: PxColors.gold))),
+        ],
+      ),
+    );
+    if (ok != true) return;
+  }
+  final variants = ms(choice['variants']);
+  final v = variants.isEmpty ? null : (variant ?? variants.first['id'] as String);
+  await dispatch({'kind': 'CHOOSE', 'choiceId': choice['id'], 'variant': ?v});
 }

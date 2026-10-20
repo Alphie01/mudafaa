@@ -66,6 +66,9 @@ export const card = (text: string, bg: Backdrop, fx?: LineFx): Line => ({
 export const th = (text: string): Line => ({ speaker: 'player', text, style: 'thought' });
 /** Deniz'in kendi konuşması. */
 export const me = (text: string): Line => ({ speaker: 'player', text });
+/** Kadroda olmayan, adı bilinen biri (sprite yerine siluet). */
+export const named = (name: string, text: string): Line => ({ speaker: 'narrator', name, text });
+
 /** Kimliği gizli ses (telefon). */
 export const voice = (name: string, text: string, style: 'phone' | 'whisper' = 'phone'): Line => ({
   speaker: 'narrator',

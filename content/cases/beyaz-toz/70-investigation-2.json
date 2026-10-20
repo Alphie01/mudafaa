@@ -88,6 +88,11 @@
             {
               "speaker": "leyla",
               "text": "Sana bir isim gerekiyordu. İşte bir isim. Şimdi o ismi mahkemeye taşımanın doğru yolunu bul. Kovalamadan."
+            },
+            {
+              "speaker": "player",
+              "text": "Kovalamadan. Leyla bunu her söylediğinde, bir zamanlar birini kovaladığını düşünürüm. Sormam.",
+              "style": "thought"
             }
           ]
         },
@@ -369,7 +374,8 @@
               ]
             }
           ],
-          "next": "ARA_TELEFON"
+          "next": "ARA_TELEFON",
+          "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 20 }]
         },
         {
           "id": "ARAK_C",
@@ -391,6 +397,79 @@
           ],
           "next": "ARA_TELEFON"
         }
+      ]
+    },
+    {
+      "id": "ARA_SABAH",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #04 · ARA",
+      "title": "Sabah",
+      "background": "sokak_sabah",
+      "lines": [
+        {
+          "when": { "flag": "kaan_tahliye" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 09.15 — GÖRÜKLE KARAKOLU ÖNÜ",
+              "style": "card",
+              "bg": "sokak_sabah"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kaan’ın ilk imza günüydü. Karakolun önünde, bir elinde bir dosya, bir elinde bir simit, sırasını bekliyordu. Beni görünce simidi uzattı; almadım, güldü."
+            },
+            {
+              "speaker": "kaan",
+              "text": "İmza atacağım, sonra AMATEM. Aynı gün. Önce devlet, sonra doktor. Perşembeler artık resmî."
+            },
+            {
+              "speaker": "kaan",
+              "text": "Karakoldaki memur “yine mi sen” dedi. İlk defa gelmiştim. Herkes birine benziyor burada, galiba."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kapının yanında, duvara yaslanmış bir motor vardı; kaskı aynasında. Kaan baktı, gözlerini kaçırdı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir motor, bir kask. Kaan için artık sıradan bir eşya değiller. Bir odanın, bir kilidin, bir isimsiz korkunun şekli.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 09.15 — BURSA H TİPİ CEZAEVİ ÖNÜ",
+              "style": "card",
+              "bg": "sokak_sabah"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Görüş günüydü. Cezaevinin önünde uzun bir kuyruk: annenler, eşler, çocuklar, poşetler. Defne en öndeydi; elinde bir torba temiz çamaşır, bir de bir kitap."
+            },
+            {
+              "speaker": "defne",
+              "expression": "uzgun",
+              "text": "Roman getirdim. İktisat kitabı istemiyor artık. “Abla, biraz da başkasının hikâyesini okuyayım” dedi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kuyrukta önümüzdeki kadın Defne’ye döndü; oğlu da içerideymiş. Uyuşturucu. Ne kadar, hangisi, nedendi; sormadılar. Birbirlerine sadece başlarını salladılar."
+            },
+            {
+              "speaker": "player",
+              "text": "Bu kuyrukta kimse kimseye ne yaptığını sormuyor. Sadece ne kadar kaldığını. Bir mahkeme salonunda tersi olur.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "ARA_SABAH_DEVAM", "kind": "CONTINUE", "label": "Güne başla", "role": "PRIMARY", "next": "ARA_HUB" }
       ]
     },
     {
@@ -472,7 +551,7 @@
               ]
             }
           ],
-          "next": "ARA_HUB",
+          "next": "ARA_SABAH",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 50 },
             { "type": "VAR", "var": "tehdit_bildirildi", "op": "set", "value": true }
@@ -502,7 +581,7 @@
               ]
             }
           ],
-          "next": "ARA_HUB",
+          "next": "ARA_SABAH",
           "effects": [
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -60 },
             { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 }
@@ -524,11 +603,16 @@
                   "speaker": "player",
                   "text": "Uyumadım. Telefon komodinin üstünde bir taş gibi duruyordu.",
                   "style": "thought"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir hayalet aradı ve ben ona hiçbir şey sormadım. Sabah olunca kendime sordum: neden? Cevabı bilmiyordum. Belki de korkmuştum. Avukatlar da korkar.",
+                  "style": "thought"
                 }
               ]
             }
           ],
-          "next": "ARA_HUB",
+          "next": "ARA_SABAH",
           "quality": {
             "q": "NEUTRAL",
             "feedback": "Şüphelinin temasını bildirmemek bir hata değil ama kaçırılmış bir fırsattır: kayıt tespit edilemedi."
@@ -595,6 +679,10 @@
                   "text": "On iki kasım sabahı mesaj attı: “Abi ben bırakıyorum.” Montu, çantayı getirmedi. Depozito kesildi, neyse."
                 },
                 { "speaker": "selim", "text": "Polis sordu mu? Kimse sormadı abla. Sen ilksin." },
+                {
+                  "speaker": "selim",
+                  "text": "Ayın kuryesi seçmiştik onu ekimde. Belgesi duvarda. Gitti, adını karaladım. Kızdım çünkü. İyi çocuk sandım."
+                },
                 {
                   "speaker": "player",
                   "text": "Barış Demirel. Bir soyadı, bir istifa mesajı, iade edilmemiş bir çanta. Ve kimsenin sormadığı bir soru.",
@@ -947,6 +1035,14 @@
               "speaker": "kaan",
               "expression": "mutlu",
               "text": "Aynı gün. Önce karakol, sonra doktor. Perşembeler artık benim. Neyse. Ne içersiniz?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Fincanı önüme koydu. Köpüğün üstüne bir yaprak çizmişti; titrek ama düzgün. Bunu yapabilmek için ellerinin sakin olması gerekirdi."
+            },
+            {
+              "speaker": "kaan",
+              "text": "Elif Hanım “müşteriler sordu” dedi. “Kaan nerede?” diye. Biri bana kitap bırakmış. İktisat değil, roman. Neyse. Okuyorum."
             }
           ]
         },
@@ -1089,6 +1185,15 @@
                   "speaker": "player",
                   "text": "Tolga çıkarken odayı birine devretmiş. O biri Barış. Bir anahtar elden ele geçmiş; belki bir anahtardan fazlası.",
                   "style": "thought"
+                },
+                {
+                  "speaker": "kaan",
+                  "expression": "uzgun",
+                  "text": "Ben ne kadar aptalım, değil mi? Hiçbir şeyi sormadım. Kim, neden, nereden. Sormamak rahattı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Sormamak bir suç değil, Kaan. Ama bundan sonra sor. En çok da kendine."
                 }
               ]
             }
@@ -1172,6 +1277,10 @@
                   "speaker": "player",
                   "text": "Gece üçte herkes her kapıyı çalar. Bir avukatın işi, hangi kapının açılmaması gerektiğini bilmektir.",
                   "style": "thought"
+                },
+                {
+                  "speaker": "defne",
+                  "text": "Zarfı geri koydum. Kaan’ın tedavisine harcarım. Doktor grup terapisi önerdi; ücretli. Bunun için harcarım."
                 }
               ]
             }
@@ -1417,6 +1526,10 @@
                   "text": "Bir saat sonra iki kolluk görevlisi bodrumdaydı; eldivenle, poşetle, tutanakla. Nesrin Hanım merdivenin başında, kucağında kedi."
                 },
                 {
+                  "speaker": "narrator",
+                  "text": "Görevlilerden biri çantanın astarını el fenerinin ışığında açtı; içinde elle dikilmiş bir bölme. Hiçbir şey söylemedi. Söylemesine gerek yoktu."
+                },
+                {
                   "speaker": "nesrin",
                   "text": "Bu sefer bana saat sordular evladım. Saati ben yazdım. On iki on beş."
                 },
@@ -1505,6 +1618,22 @@
       "eyebrow": "DAVA #04 · ARA",
       "title": "Suç duyurusu",
       "background": "adliye",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE — NÖBETÇİ CUMHURİYET SAVCILIĞI", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Nöbetçi savcılığın koridorunda kırık bir floresan, bir su sebili, iki kelepçeli şüpheli ve bir çaycı. Sıramı bekledim. Kırk dakika."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir avukatın kovalayabileceği tek şey bir dilekçedir. Şüpheliyi aramak, bulmak, yakalamak başkalarının işi. Benim işim onlara doğru adresi vermek.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
       "prompt": { "speaker": "narrator", "text": "Nöbetçi savcılık. Kim hakkında, hangi somut bilgiyle?" },
       "choices": [
         {
@@ -1521,6 +1650,15 @@
                   "speaker": "savci",
                   "text": "Barış Demirel. Karşıyaka. Personel kaydı, GPS. … Peki. Bunu bir soruşturma numarasına bağlarım. Yakalama kararı için yeterli olabilir."
                 },
+                {
+                  "speaker": "savci",
+                  "text": "Bir şey soracağım, avukat hanım. Bunu ona gitmeden, onu aramadan mı topladınız?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kâğıtlardan, Sayın Savcı. Kâğıtlardan ve bir ev sahibinin defterinden."
+                },
+                { "speaker": "savci", "text": "İyi. Öyle kalsın." },
                 {
                   "speaker": "player",
                   "text": "Savcı bir isim istemişti. Bir isim götürdüm. İsim artık bir dosyanın kapağında.",
@@ -1609,25 +1747,7 @@
         "clue_nesrin_moto",
         "clue_tolga_kask",
         "clue_tolga_saat",
-        "clue_kilit",
-        "clue_kapsam",
-        "clue_on_oda",
-        "clue_kroki",
-        "clue_mont",
-        "clue_zincir",
-        "clue_ayakkabi",
-        "clue_kaan_olcu",
-        "clue_odaya_girme",
-        "clue_kira_defteri",
-        "clue_hat",
-        "clue_posta",
-        "clue_ayni_parti",
-        "clue_sekerlik",
-        "clue_randevu",
-        "clue_tedavi",
-        "clue_iki_tane",
-        "clue_kavanoz_iz",
-        "clue_anahtarlik"
+        "clue_iki_tane"
       ],
       "choices": [
         {
@@ -1673,216 +1793,6 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_alibi" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
-        },
-        {
-          "id": "CB2_KAPSAM",
-          "kind": "COMBINE",
-          "match": { "a": "clue_kilit", "b": "clue_kapsam" },
-          "feedback": {
-            "title": "Kapsam dışı arama",
-            "text": "Bu bağlantıyı tahtaya yeniden iğneledin.",
-            "label": "ÇIKARIM",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_kapsam" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_kapsam" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CB2_ODA",
-          "kind": "COMBINE",
-          "match": { "a": "clue_on_oda", "b": "clue_kroki" },
-          "feedback": {
-            "title": "Kaan ön odada yaşıyor",
-            "text": "Bu bağlantıyı tahtaya yeniden iğneledin.",
-            "label": "ÇIKARIM",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_oda" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_oda" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CB2_KURYE",
-          "kind": "COMBINE",
-          "match": { "a": "clue_mont", "b": "clue_zincir" },
-          "feedback": {
-            "title": "Arka odadaki kurye",
-            "text": "Bu bağlantıyı tahtaya yeniden iğneledin.",
-            "label": "ÇIKARIM",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_kurye" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_kurye" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CB2_NUMARA",
-          "kind": "COMBINE",
-          "match": { "a": "clue_ayakkabi", "b": "clue_kaan_olcu" },
-          "feedback": {
-            "title": "İki ayrı ayak",
-            "text": "Bu bağlantıyı tahtaya yeniden iğneledin.",
-            "label": "ÇIKARIM",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_numara" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_numara" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CB2_BARIS",
-          "kind": "COMBINE",
-          "match": { "a": "clue_odaya_girme", "b": "clue_kira_defteri" },
-          "feedback": {
-            "title": "Barış gerçek",
-            "text": "Bu bağlantıyı tahtaya yeniden iğneledin.",
-            "label": "ÇIKARIM",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_baris" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_baris" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CB2_DEMIREL",
-          "kind": "COMBINE",
-          "match": { "a": "clue_hat", "b": "clue_posta" },
-          "feedback": {
-            "title": "B. = Demirel",
-            "text": "Bu bağlantıyı tahtaya yeniden iğneledin.",
-            "label": "ÇIKARIM",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_demirel" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_demirel" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CB2_SEKER",
-          "kind": "COMBINE",
-          "match": { "a": "clue_ayni_parti", "b": "clue_sekerlik" },
-          "feedback": {
-            "title": "Şekerlik arka odanın deposu",
-            "text": "Bu bağlantıyı tahtaya yeniden iğneledin.",
-            "label": "ÇIKARIM",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_sekerlik" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_sekerlik" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CB2_KASK",
-          "kind": "COMBINE",
-          "match": { "a": "clue_tolga_kask", "b": "clue_kaan_olcu" },
-          "feedback": {
-            "title": "Kasklı adam Kaan değil",
-            "text": "Bu bağlantıyı tahtaya yeniden iğneledin.",
-            "label": "ÇIKARIM",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_kask" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_kask" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CB2_ANAHTAR",
-          "kind": "COMBINE",
-          "match": { "a": "clue_anahtarlik", "b": "clue_kilit" },
-          "feedback": {
-            "title": "Anahtarsız kiracı",
-            "text": "Bu bağlantıyı tahtaya yeniden iğneledin.",
-            "label": "ÇIKARIM",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_anahtar" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_anahtar" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CB2_KULLANICI",
-          "kind": "COMBINE",
-          "match": { "a": "clue_randevu", "b": "clue_tedavi" },
-          "feedback": {
-            "title": "Kullanıcı, satıcı değil",
-            "text": "Bu bağlantıyı tahtaya yeniden iğneledin.",
-            "label": "ÇIKARIM",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_kullanici" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_kullanici" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
           ]
         },
         {
@@ -1945,6 +1855,10 @@
           },
           "lines": [
             {
+              "speaker": "narrator",
+              "text": "Leyla bir sandalyeyi masamın yanına çekti ve oturdu. Bunu çok nadir yapardı."
+            },
+            {
               "speaker": "leyla",
               "text": "Muhbir kürsüye gelecek. Ondan ne bekliyorsun? Yalanını söylemesini değil; yalanının bir yerinde takılmasını. Saat mi, kask mı, kin mi? Birini seç, ona hazırlan."
             }
@@ -1961,6 +1875,7 @@
         },
         {
           "lines": [
+            { "speaker": "narrator", "text": "Leyla kapı eşiğinde durdu; paltosu kolunda." },
             {
               "speaker": "leyla",
               "text": "Savcının yedek planı her zaman bir “ortak alan”dır. Şekerlik, mutfak, koridor. Arka odayı kazanıp mutfakta kaybetme."
@@ -1994,6 +1909,11 @@
             {
               "speaker": "narrator",
               "text": "Lodos dinmiş, yerini kuru bir ayaza bırakmıştı. Adliye merdivenlerinde sigara içen avukatlar, ellerinde dosyalar, gözlerinde başka davalar."
+            },
+            {
+              "speaker": "player",
+              "text": "Üç hafta önce bu merdivenlerden bir hayaletle çıktım. Bugün çantamda bir soyadı, bir saat ve bir kask var. Ve hâlâ bir soru: yeterli mi?",
+              "style": "thought"
             }
           ]
         }
@@ -2096,16 +2016,6 @@
     { "evidence": "clue_z_rapor", "source": { "type": "RULE", "id": "EX_Z_KAPANIS" } },
     { "evidence": "ded_kacis", "source": { "type": "RULE", "id": "CB_KACIS" } },
     { "evidence": "ded_tolga_baris", "source": { "type": "RULE", "id": "CB_TOLGA" } },
-    { "evidence": "ded_alibi", "source": { "type": "RULE", "id": "CB_ALIBI" } },
-    { "evidence": "ded_kapsam", "source": { "type": "RULE", "id": "CB2_KAPSAM" } },
-    { "evidence": "ded_oda", "source": { "type": "RULE", "id": "CB2_ODA" } },
-    { "evidence": "ded_kurye", "source": { "type": "RULE", "id": "CB2_KURYE" } },
-    { "evidence": "ded_numara", "source": { "type": "RULE", "id": "CB2_NUMARA" } },
-    { "evidence": "ded_baris", "source": { "type": "RULE", "id": "CB2_BARIS" } },
-    { "evidence": "ded_demirel", "source": { "type": "RULE", "id": "CB2_DEMIREL" } },
-    { "evidence": "ded_sekerlik", "source": { "type": "RULE", "id": "CB2_SEKER" } },
-    { "evidence": "ded_kask", "source": { "type": "RULE", "id": "CB2_KASK" } },
-    { "evidence": "ded_anahtar", "source": { "type": "RULE", "id": "CB2_ANAHTAR" } },
-    { "evidence": "ded_kullanici", "source": { "type": "RULE", "id": "CB2_KULLANICI" } }
+    { "evidence": "ded_alibi", "source": { "type": "RULE", "id": "CB_ALIBI" } }
   ]
 }

@@ -60,6 +60,8 @@ export const inv1Kaan: CasePart = {
             s('kaan', 'Geldiniz. Gelmezsiniz sandım. İnsanlar bir kere gelir; ikincisinde iş olur.'),
             me('İş olduğu için geldim. Ama ikinci kez geldim.'),
             s('kaan', 'Kırk dört gün oldu. Temiz. Burada temiz kalmak kolay sanıyorlar. Değil. Neyse. Sorun.'),
+            n('Masanın üstünde, tükenmezle yazılmış bir kâğıt parçası. Kaan fark etti, kâğıdı ters çevirdi. Gördüğüm tek kelime “perşembe”ydi.'),
+            th('Bir takvim. Cezaevinde bile. İnsan takvimini kaybedince kendini kaybeder; Kaan kendini kaybetmemek için perşembeleri sayıyor.'),
           ],
         },
       ],
@@ -136,6 +138,7 @@ export const inv1Kaan: CasePart = {
                 s('kaan', 'Kirayı bana elden verirdi, ben Nesrin Teyze’ye yatırırdım. Sözleşme yok. “Sonra yaparız” dedik. Hiç yapmadık. Neyse.'),
                 s('kaan', 'İlk hafta kapıya bir asma kilit taktı. “Kurye malzemem var, çanta, cihaz, pahalı şeyler” dedi. Ben de… sormadım.'),
                 th('“Sormadım.” Bu dosyanın belki de en ağır iki kelimesi.'),
+                s('kaan', 'Gece eve geldiğinde kapısını kilitlerdi, sabah çıkarken yine. Duşa giderken bile. Ben “kurye işte, pahalı cihazlar” dedim kendime. İnsan kendine iyi yalan söyler.'),
               ],
             },
             hard: {
@@ -161,6 +164,7 @@ export const inv1Kaan: CasePart = {
                 s('kaan', 'İyi biriydi. Kombiyi o tamir etti. Bir keresinde annem gelecek diye mutfağı baştan sona o temizledi. İnsan… karar veremiyor bazen.'),
                 s('kaan', 'Soyadını sormadım. Telefonda “B.” diye kayıtlı. Bir keresinde “İzmirliyim” dedi. O kadar.'),
                 th('Uzun boylu, sakallı, gece çalışan, İzmirli. Bir hayalet için fazla ayrıntı. Bir yalancı için de fazla az.'),
+                s('kaan', 'Baskından sonra aradım onu. Karakoldan değil; telefonumu almışlardı zaten. Ablamın telefonundan. Kapalıydı. Hâlâ kapalı.', 'uzgun'),
               ],
             },
             hard: {
@@ -185,6 +189,7 @@ export const inv1Kaan: CasePart = {
                 s('kaan', 'Kahve Durağı’nda barista. Pazar, çarşamba, cuma kapanış bende; kasayı ben kapatırım. Bir tek orada düzenliyim. Makineler düzen ister.'),
                 s('kaan', 'Ayakkabı 41, beden M. Ehliyetim yok. Bisiklete bile binemem; babam öğretecekti, olmadı.', 'uzgun'),
                 th('41 numara. Ehliyet yok. Kafede kapanış. Not defterimde üç satır; üçü de ileride bir yere bağlanacak gibi duruyor.'),
+                s('kaan', 'Babam terziydi. Dükkânında bir mezura vardı, hep boynunda. Ölünce mezurayı ben aldım. Cezaevine almadılar; “ip sayılır” dediler. Neyse.', 'uzgun'),
               ],
             },
             hard: {
@@ -255,6 +260,7 @@ export const inv1Kaan: CasePart = {
                 s('kaan', 'Barış’ın kilidi. Pirinç, büyük bir şey. Anahtarı boynunda, bir iple taşırdı. Duşa bile onunla girerdi herhalde.'),
                 s('kaan', 'Ben o odaya hiç girmedim. Bir kere kapı aralıktı, içine baktım. Yatak, dolap, bir mont. O kadar.'),
                 th('Bir anahtar bir ipte, bir boyunda. O boyun şimdi neredeyse, anahtar da orada.'),
+                s('kaan', 'Kilidi taktığı gün matkabın sesi bütün binayı inletti. Nesrin Teyze aşağıdan bağırdı. Barış ona da kibar davrandı; pasta götürdü özür için.'),
               ],
             },
             hard: {
@@ -278,6 +284,7 @@ export const inv1Kaan: CasePart = {
                 s('kaan', 'Önce mutfaktaydı. Sonra bir gün koridordaki rafa taşınmış. Barış “mutfakta yer açayım” dedi. Rafın yanı onun kapısı.'),
                 s('kaan', 'Ben çayımı oradan alırdım. Elim hep kapağındaydı. İçine bakmazdım ki. Şeker şekerdir.', 'saskin'),
                 th('Kavanozdaki parmak izi Kaan’ın, çünkü Kaan çay içiyor. Bir parmak izi bir suçu gösterebilir; bir alışkanlığı da.'),
+                s('kaan', 'Şekeri bırakmaya çalışıyordum zaten. Doktor “önce bir bağımlılık, sonra öbürü” dedi. Gülmüştüm. Şimdi gülmüyorum.'),
               ],
             },
             hard: {
@@ -353,6 +360,8 @@ export const inv1Kaan: CasePart = {
                 s('kaan', 'Kapıda bağırdı. “Sen görürsün” dedi. Anahtarını “kaybettim” dedi. Kilidi değiştiremedim; ona da param yoktu.'),
                 s('kaan', 'Ekimde bir kere aşağıda, binanın önünde gördüm onu. Çıkarıldığı evin önünde ne arıyordu, bilmiyorum. Beni görünce yürüyüp gitti.'),
                 th('Kovulan bir kiracı, kaybolan bir anahtar, “sen görürsün” diye bir cümle. Ve aylar sonra Kaan’ın adını veren bir muhbir.'),
+                s('kaan', 'Tolga’nın da durumu iyi değildi aslında. O da kullanıyordu. Ben bunu bildiğim için çıkardım onu, kiradan çok. Evde istemedim. İkiyüzlülük, değil mi?', 'uzgun'),
+                th('Kendi bağımlılığından kaçan biri, onu evinde başkasında görmeye dayanamaz. Bu bir ikiyüzlülük mü, bir savunma refleksi mi? İkisi de insanca.'),
               ],
             },
             hard: {

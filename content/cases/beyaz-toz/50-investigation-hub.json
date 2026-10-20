@@ -13,6 +13,15 @@
           "when": { "cmp": [{ "var": "day" }, "==", 1] },
           "lines": [
             { "speaker": "narrator", "text": "GÜN 1/3 · BİRİNCİ CELSEYE 12 GÜN", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda savcılık dosyasının fotokopisi: dört yüz on iki sayfa. Bir kahve, bir kalem, bir de bir sürü sarı yapışkan not. Henüz hiçbirine bir şey yazmadım."
+            },
+            {
+              "speaker": "player",
+              "text": "Dosya bir ev gibidir. Önce kapısından girersin, sonra odalarını tek tek dolaşırsın. Bu evin bir odası kilitli. Önce o kilide bakacağım.",
+              "style": "thought"
+            },
             { "speaker": "narrator", "text": "Hedef: arka oda kimin? Kaan’ı dinle; fotoğraflara ve kâğıtlara bak." }
           ]
         },
@@ -32,6 +41,11 @@
           "lines": [
             { "speaker": "narrator", "text": "GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN", "style": "card", "bg": "buro" },
             {
+              "speaker": "player",
+              "text": "Dün bir hayaletin peşindeydim. Bugün bir mont, bir zincir, bir mesaj. Hayaletler mont giymez.",
+              "style": "thought"
+            },
+            {
               "speaker": "narrator",
               "text": "Hedef: arka odada başka biri yaşıyordu. Kim? Ve polis o odaya nasıl girdi?"
             }
@@ -50,6 +64,10 @@
         {
           "lines": [
             { "speaker": "narrator", "text": "GÜN 3/3 · BİRİNCİ CELSEYE 6 GÜN", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Sabah erkenden büroya geldiğimde Leyla çoktan oradaydı. Masamın üstüne bir not bırakmıştı: “Beş gün kuralı. Bugün son.” Altına küçük bir çizgi çekmişti."
+            },
             {
               "speaker": "narrator",
               "text": "Hedef: delil dilekçesi için son gün. Tahtayı topla; duruşmada kimi dinletmek, neyi okutmak istiyorsun?"
@@ -406,7 +424,7 @@
               ]
             }
           ],
-          "next": "INV_HUB",
+          "next": "INV_SABAH3",
           "effects": [{ "type": "VAR", "var": "anne_kaan", "op": "set", "value": true }]
         },
         {
@@ -428,7 +446,7 @@
               ]
             }
           ],
-          "next": "INV_HUB"
+          "next": "INV_SABAH3"
         },
         {
           "id": "AK2_C",
@@ -450,13 +468,74 @@
               ]
             }
           ],
-          "next": "INV_HUB",
+          "next": "INV_SABAH3",
           "effects": [{ "type": "VAR", "var": "trust", "op": "dec", "value": 5 }],
           "quality": {
             "q": "BAD",
             "feedback": "Müvekkilin sağlık bilgisi ve sırrı ona aittir; onun rızası olmadan ailesine bile açıklanamaz (Av.K. 36 sır saklama; KVKK özel nitelikli veri).",
             "category": "SAVUNMA_STRATEJISI"
           }
+        }
+      ]
+    },
+    {
+      "id": "INV_SABAH3",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #04 · SORUŞTURMA",
+      "title": "Kahve Durağı",
+      "background": "kafe",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "PAZAR 08.10 — GÖRÜKLE, KAHVE DURAĞI", "style": "card", "bg": "kafe" },
+            {
+              "speaker": "narrator",
+              "text": "Kaan’ın çalıştığı kafe. Küçük, sıcak, tavanına çekilmiş sarı ampuller. Kahve makinesi tıslıyordu; tezgâhın arkasında kırklarında, saçını tokayla toplamış bir kadın."
+            },
+            {
+              "speaker": "narrator",
+              "name": "ELİF HANIM",
+              "text": "Siz Kaan’ın avukatısınız, değil mi? Defne söyledi. Ben Elif. Oturun, kahve benden."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Fincanı önüme koydu. Köpüğün üstünde bir yaprak; titrek, yarım. “Kaan’ın yaptığı kadar güzel olmadı” dedi."
+            },
+            {
+              "speaker": "narrator",
+              "name": "ELİF HANIM",
+              "text": "Üç yıldır burada. Kasayı ona bırakırım; bir kuruş eksik çıkmadı. Pazarları, çarşambaları, cumaları kapanış onda. Müşteriler onu sever; konuşmaz ama dinler."
+            },
+            {
+              "speaker": "narrator",
+              "name": "ELİF HANIM",
+              "text": "Bir şey olduğunu biliyordum. Ekimde birkaç kere ellerini titrerken gördüm. Sonra bir gün “abla, perşembeleri izin alabilir miyim, doktora gidiyorum” dedi. Sormadım. Verdim."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir kasiyer kodu, bir kapanış saati, bir izin günü. Bir insanın hayatı çoğu zaman en sıradan kâğıtlarda saklıdır.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kapıdan bir kurye girdi; kaskını tezgâha koydu, iki kahve aldı, çıktı. Elif Hanım arkasından baktı."
+            },
+            {
+              "speaker": "narrator",
+              "name": "ELİF HANIM",
+              "text": "Bunlardan biri de onların evinde kalıyormuş, değil mi? Kaan bir kere “ev arkadaşım gece çalışıyor, sabah uyuyor, ben de sessiz giyiniyorum” demişti. Gülmüştük."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "SABAH3_DEVAM",
+          "kind": "CONTINUE",
+          "label": "Kahveyi bitir ve güne başla",
+          "role": "PRIMARY",
+          "next": "INV_HUB"
         }
       ]
     },
@@ -489,6 +568,10 @@
           },
           "lines": [
             {
+              "speaker": "narrator",
+              "text": "Leyla gözlüğünü çıkardı, camlarını kazağının ucuyla sildi. Ne zaman bir şey söyleyecek olsa önce gözlüğünü silerdi; sanki görmek için değil, düşünmek için."
+            },
+            {
               "speaker": "leyla",
               "text": "Kaan nerede uyuyordu? Bu basit soru bazen bütün tutanağı devirir. Kroki ile fotoğrafı yan yana koy."
             },
@@ -501,6 +584,10 @@
         {
           "when": { "all": [{ "hasEvidence": "clue_kilit" }, { "not": { "hasEvidence": "clue_kapsam" } }] },
           "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Leyla fotoğraf albümünün 17 numaralı karesine uzun uzun baktı. Parmağını kilidin üstüne koydu, çekti."
+            },
             {
               "speaker": "leyla",
               "text": "Kesik bir kilit gördün. Güzel. Şimdi kararın kendisini oku. Hâkim polise nereyi aramasına izin verdi? Evi mi, odayı mı?"
@@ -515,6 +602,10 @@
           "when": { "all": [{ "not": { "met": "nesrin" } }, { "cmp": [{ "var": "day" }, ">=", 2] }] },
           "lines": [
             {
+              "speaker": "narrator",
+              "text": "Leyla tutanağın son sayfasını çevirdi. İmzaların olduğu sayfa. Üç imza, biri titrek."
+            },
+            {
               "speaker": "leyla",
               "text": "Tutanakta bir tanık imzası var. Tanıkları kâğıttan değil, kapısından tanı. Zemin kattaki kadın o sabah ne gördü?"
             },
@@ -527,6 +618,7 @@
         {
           "when": { "all": [{ "hasEvidence": "clue_ayni_parti" }, { "not": { "hasEvidence": "ded_sekerlik" } }] },
           "lines": [
+            { "speaker": "narrator", "text": "Leyla kriminal raporun ikinci sayfasını kalemiyle iki kez tıklattı." },
             {
               "speaker": "leyla",
               "text": "Şekerlik. Savcının yedek planı orası. Arka odayı kaybederse mutfağa sarılır: “ortak alan, ortak zilyetlik.”"
@@ -541,6 +633,10 @@
           "when": { "not": { "any": [{ "visited": "INV_TOLGA" }, { "hasEvidence": "clue_kira_defteri" }] } },
           "lines": [
             {
+              "speaker": "narrator",
+              "text": "Leyla muhbir ifadesinin fotokopisini masaya, benim tarafıma doğru itti. Okumamıştı; okumuş gibi bakıyordu."
+            },
+            {
               "speaker": "leyla",
               "text": "Muhbirin ifadesini oku. Kelime kelime. İnsanlar yalan söylerken ayrıntıyı unutur ya da fazla verir. İkisi de iz bırakır."
             }
@@ -548,6 +644,10 @@
         },
         {
           "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Leyla pencerenin önünde duruyordu. Dışarıda yağmur; içeride radyatörün tıkırtısı."
+            },
             {
               "speaker": "leyla",
               "text": "Delil dilekçesini geciktirme. Duruşmadan en az beş gün önce verilmeli. Kimi dinletmek istediğini bil; kimin seni yarı yolda bırakacağını da."
@@ -570,6 +670,21 @@
       "eyebrow": "DAVA #04 · SORUŞTURMA",
       "title": "Delil dilekçesi (CMK 177)",
       "hud": ["dil_hak"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Boş bir dilekçe şablonu ekranda. İmleç yanıp sönüyordu. Bir avukatın en güçlü silahı da en sıkıcı belgesidir: “Sayın Başkanlığınıza…”"
+            },
+            {
+              "speaker": "player",
+              "text": "Üç talep. Her biri bir kapı. Yanlış kapıyı çalarsam, doğru kapıya vaktim kalmayabilir.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
       "prompt": {
         "speaker": "narrator",
         "text": "Mahkemeye delil dilekçesi: duruşmadan en az beş gün önce. Üç talep hakkın var; neyi isteyeceksin?"
@@ -738,23 +853,17 @@
         "clue_sekerlik",
         "clue_ayakkabi",
         "clue_posta",
-        "clue_yag",
         "clue_kroki",
-        "clue_tanik_saat",
-        "clue_ekleme",
         "clue_kapsam",
         "clue_odaya_girme",
         "clue_iki_tane",
         "clue_hat",
-        "clue_iz_yabanci",
         "clue_ayni_parti",
         "clue_kavanoz_iz",
         "clue_tolga_kask",
-        "clue_tolga_saat",
         "clue_kaan_olcu",
         "clue_tedavi",
         "clue_kira_defteri",
-        "clue_nesrin_moto",
         "clue_anahtarlik"
       ],
       "choices": [

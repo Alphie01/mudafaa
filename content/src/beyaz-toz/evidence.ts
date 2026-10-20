@@ -246,7 +246,7 @@ export const evidencePart: CasePart = {
       description: 'Bina köşesinde, yağmura rağmen silinmemiş bir yağ lekesi ve demir korkulukta zincir sürtmesi.',
       sourceLabel: 'Bina girişi (bizzat)',
       icon: 'magnifier',
-      tags: kart,
+      combinable: false,
     }),
     // --- Belge ipuçları ---
     clue('clue_kroki', {
@@ -265,7 +265,7 @@ export const evidencePart: CasePart = {
       description: 'Tutanağın başında “arama 06.05’te başladı” yazıyor; komşu tanığın imzasının yanında el yazısıyla “06.40”.',
       sourceLabel: 'Arama tutanağı',
       icon: 'magnifier',
-      tags: kart,
+      combinable: false,
     }),
     clue('clue_ekleme', {
       type: 'BELGE',
@@ -274,7 +274,7 @@ export const evidencePart: CasePart = {
       description: 'Büyüteçle bakınca “arka odada” ile “dolapta” arasına küçük harflerle, farklı bir kalemle “(şüphelinin kullanımındaki)” ibaresi sıkıştırılmış.',
       sourceLabel: 'Arama tutanağı',
       icon: 'magnifier',
-      tags: kart,
+      combinable: false,
     }),
     clue('clue_kapsam', {
       type: 'BELGE',
@@ -319,7 +319,7 @@ export const evidencePart: CasePart = {
       description: 'Terazinin kefesindeki karşılaştırmaya elverişli iz şüpheli Kaan Yıldız’a ait değil; parmak izi sisteminde kaydı bulunamadı.',
       sourceLabel: 'Kriminal rapor',
       icon: 'fingerprint',
-      tags: kart,
+      combinable: false,
     }),
     clue('clue_ayni_parti', {
       type: 'ADLI_RAPOR',
@@ -453,7 +453,7 @@ export const evidencePart: CasePart = {
     // --- Çıkarımlar ---
     insight('ded_kapsam', {
       type: 'BELGE',
-      title: 'Kapsam dışı arama',
+      title: 'Kararın dışında kalan oda',
       shortText: 'Kilitli üçüncü kişi odası, kararın kapsamı dışında zorla açılarak arandı.',
       description: 'Karar yalnızca şüphelinin kullanımındaki oda ve ortak alanları kapsıyordu. Arka oda asma kilitliydi; kilit keskiyle kesildi. Başka birinin kilitli odası kararın dışındadır.',
       sourceLabel: 'Çıkarım tahtası',

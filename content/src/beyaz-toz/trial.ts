@@ -272,6 +272,9 @@ export const trial: CasePart = {
             n('Nesrin Hanım kürsüye bir el çantası ve kareli bir defterle çıktı. Gözlüğünü taktı, yemini bir kez okuyarak, bir kez ezbere tekrar etti.'),
             s('nesrin', 'Sabah altı yirmide kurye oğlanın motoru köşeye geldi. Arabaları gördü, döndü gitti. Hep köşeye park ederdi, zinciri korkuluğa dolardı.'),
             s('nesrin', 'Altı kırkta beni yukarı çağırdılar. Arka odanın kapısı açıktı, kilit yerdeydi. İmzala dediler; saati ben yazdım.'),
+            s('uye', 'Saati neden yazdınız, tanık?'),
+            s('nesrin', 'Hep yazarım, Sayın Hâkim. Rahmetli muhasebeciydi. “Saatsiz imza, tarihsiz çek gibidir” derdi. Ben de o günden beri her imzanın yanına saat yazarım.'),
+            n('Salonda biri gülümsedi. Başkan bile. Nesrin Hanım fark etmedi; gözlüğünü düzeltti ve bekledi.'),
             s('savci', 'Tanık, avukat hanım sizinle görüştü mü? Size ne sordu?'),
             s('nesrin', 'Görüştü. “Ne gördünüz?” dedi. Ben de anlattım. Çay içtik. Kediler de oradaydı.'),
             s('savci', 'Teşekkür ederim.'),
@@ -336,8 +339,11 @@ export const trial: CasePart = {
       lines: [
         {
           lines: [
+            n('Nesrin Hanım kürsüden indi, dinleyici sırasına oturdu, defterini kucağına koydu. Kaan’a gülümsedi; Kaan gözlerini indirdi, sonra kaldırdı, gülümsedi.'),
             s('mubasir', 'Tanık Tolga Kaplan! Tanık Tolga Kaplan!'),
             n('İki polisin arasında geldi; zorla getirilmişti. Kırmızı bere elinde, saçları dağınık. Kürsüye çıkarken sanık sırasına bakmadı.'),
+            n('Yirmi dokuz yaşındaydı ama kırkında gibi görünüyordu. Tırnaklarının etleri Kaan’ınkiler gibi yenmişti. İki kullanıcı, aynı salonda, iki ayrı sırada.'),
+            th('Ona öfkelenmem gerekirdi. Öfkelenemedim. Gece yarısı bir karakolda bir isim vermek zorunda kalan bir adam. Ama verdiği isim yanlış isimdi; bunu ona kendi sözleriyle göstereceğim.'),
             s('baskan', 'Kimliğiniz tespit edildi. Gerçeği söylemekle yükümlüsünüz; yalan tanıklığın cezası size hatırlatıldı. Kendinizi suçlama tehlikesi olan sorulara cevap vermeyebilirsiniz.'),
             s('tolga', 'Yemin ederim. Yani… bildiğimi söyleyeceğim.'),
             s('savci', 'Tanık, 9 Kasım gecesi üzerinizde bulunan paketi sanık Kaan Yıldız’dan aldınız, değil mi?'),
@@ -393,6 +399,8 @@ export const trial: CasePart = {
         {
           lines: [
             s('tolga', 'Paketi o evden aldım. Kaan sattı. Herkes biliyordu zaten. Ben sadece… yakalandım, yani.'),
+            n('Bereyi dizinde ezip duruyordu. Arada bir savcıya bakıyordu, sanki bir sonraki cümleyi oradan okuyacakmış gibi.'),
+            th('Bir muhbirin beyanı tek bir ayağa dayanır: kendi sözüne. O ayağı sallamak için ona yeni bir şey söylemem gerekmiyor. Kendi eski sözünü hatırlatmam yeter.'),
             s('baskan', 'Tanık ifadesini verdi. Müdafi, sorularınız?'),
           ],
         },
@@ -438,6 +446,8 @@ export const trial: CasePart = {
                 me('Tanık, ekimden beri Paketçi’nin Görükle durağına gidip Barış’ı soruyordunuz. Köşede konuşuyordunuz. Siz “param yarın gelecek” dediniz; o “yarın yok” dedi.'),
                 me('Ve ifadenizde kapıyı açanın elinde kask vardı. Kask taşıyan, motorlu kurye Barış Demirel’di. Kimden aldınız?'),
                 n('Tolga bereyi iki eliyle sıktı. Bir süre kimseye bakmadı.', { fx: 'shake' }),
+                s('baskan', 'Tanık, size kendinizi suçlama tehlikesi olan sorulara cevap vermeyebileceğinizi hatırlatmıştım. Ama verdiğiniz cevaplar doğru olmak zorunda. Kimden aldınız?'),
+                n('Salonda bir sandalye gıcırdadı. Defne’nin elindeki poşet. Kaan başını kaldırdı ve Tolga’ya baktı; ilk kez, uzun uzun.'),
                 s('tolga', '…Barış’tı. Barış’tan aldım. Hep ondan alırdım.', 'uzgun'),
                 s('tolga', '“Beni söylersen biterim seni” dedi. Korktum. Kaan’ı söyledim çünkü Kaan beni sokağa atmıştı. Depozitomu kesti.', 'uzgun'),
                 s('tolga', 'O gece kapıyı Barış açtı. Koridordaki şekerlikten iki paket aldı, birini bana verdi. Kask elindeydi; çıkacaktı.'),
@@ -524,6 +534,8 @@ export const trial: CasePart = {
                 s('uye', 'Demişsiniz. İmzanız var.'),
                 n('Tolga dudaklarını ısırdı. Elindeki bere bir bez parçası gibi buruşmuştu.'),
                 th('Kendi cümlesi, kendi imzası. Bir yalanın en büyük düşmanı, ilk anlatılışıdır.'),
+                s('savci', 'Sayın Başkan, tanığın gece yarısı verdiği ifadedeki ayrıntıların kesinliği tartışılabilir.'),
+                s('baskan', 'Tartışılabilir, Sayın Savcı. Ama tartışmayı tanığın kendi imzası başlattı.'),
               ],
             },
           ],
@@ -623,6 +635,9 @@ export const trial: CasePart = {
               when: any(flag('contra_s1'), flag('contra_s3')),
               lines: [
                 me('Sayın Başkan, karar arka odayı kapsamıyordu. Tanık kilidin keskiyle kesildiğini, odanın sanığa ait olduğunu “sandığını” birinci celsede kabul etti.'),
+                me('Hâkim, talep yazısında bir ev arkadaşı olduğunu bile bile sınırı çizmişti. Kolluk o sınırı bir keskiyle geçti. Kapsam dışı bir aramanın meyvesi, ne kadar ağır olursa olsun, hükmün kefesine konamaz.'),
+                s('savci', 'Sayın Başkan, kolluğun iyi niyetle hareket ettiği açıktır.'),
+                me('İyi niyet bir kilidi açmaz, Sayın Savcı. Bir karar açar.'),
                 s('baskan', 'Kayıtlara geçti. Heyet hükümde değerlendirecek.'),
               ],
             },
@@ -731,7 +746,10 @@ export const trial: CasePart = {
       courtStage: 'MUTALAA',
       say: [
         s('savci', 'Sayın Başkan. Arka odanın sanığın kullanımında olduğu kanıtlanamamıştır; kolluk bunu varsaydığını beyan etmiştir. Şekerlikteki paketlerin de aynı stoktan geldiği anlaşılmaktadır.'),
-        s('savci', 'Muhbir beyanı çelişkilidir. Sanığın atılı suçu işlediği sabit olmadığından beraatine; arka odanın kiracısı hakkında suç duyurusunda bulunulmasına karar verilmesini talep ederim.'),
+        s('savci', 'Muhbir beyanı çelişkilidir: kask, saat ve tanığın sanıkla olan geçmişi beyanın güvenilirliğini zayıflatmaktadır.'),
+        s('savci', 'Sanığın madde kullanıcısı olduğu sabittir; ancak kullanım bu davanın konusu değildir. Ticaret kastına dair kesin ve inandırıcı delil yoktur.'),
+        s('savci', 'Sanığın atılı suçu işlediği sabit olmadığından beraatine; arka odanın kiracısı hakkında suç duyurusunda bulunulmasına karar verilmesini talep ederim.'),
+        n('Serap Akın oturdu. Kalemini masanın kenarına paralel bıraktı; her zamanki gibi. Bana bakmadı. Bakmasına gerek yoktu.'),
         s('baskan', 'Müdafi, mütalaaya karşı diyeceğiniz?'),
       ],
       next: 'T_06P',
@@ -740,6 +758,14 @@ export const trial: CasePart = {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits')],
           good: 'Cevap hakkı yerinde kullanıldı (CMK 216/2): kullanım ile ticaret ayrımı hükmün gerekçesine taşındı.',
+          responses: [
+            {
+              lines: [
+                me('Sayın Başkan, mütalaaya katılıyoruz. Yalnızca bir şeyin gerekçeye girmesini istiyoruz: müvekkilim kullanıcı olduğunu bu salonda kendisi söyledi.'),
+                me('Bir insanın hastalığını kendi ağzıyla söylemesi, ona karşı bir delil değil; dürüstlüğüne bir delildir.'),
+              ],
+            },
+          ],
         }),
         option('T05E_B', 'Diyeceğimiz yok', { neutral: 'Lehe mütalaa karşısında söz kullanılmadı.' }),
         option('T05E_C', 'Polis hakkında da suç duyurusu talep ediyoruz', {
@@ -799,6 +825,15 @@ export const trial: CasePart = {
       title: 'Esas savunmanın dayanakları',
       background: 'durusma_salonu',
       hud: ['dayanak', 'cred', 'pers'],
+      lines: [
+        {
+          lines: [
+            n('Başkan esas hakkındaki savunma için söz vermeden önce dosyasını kapattı ve bekledi. Bir dakika. Belki iki. Salonda yalnızca kaloriferin tıkırtısı.'),
+            th('Notlarım önümde. Dört haftanın notları: kilit, kroki, şekerlik, kask, saat, bir defter, bir randevu kartı. Hepsini söyleyemem. Heyet en çok üç şeyi hatırlar.'),
+            th('Leyla’nın kuralı: ispatlayamadığın bir cümleyi esas savunmaya koyma. Bir boş cümle, dolu üç cümleyi de götürür.'),
+          ],
+        },
+      ],
       prompt: 'Esas savunmadan önce notlarına bak: en çok üç dayanak seç. Duruşmada ispatlanmış dayanak heyeti ikna eder; ispatlanmamış dayanak seni zayıflatır.',
       choices: [
         option('D_ODA', 'Arka oda sanığın değil: kroki bir varsayım', {
@@ -919,9 +954,11 @@ export const trial: CasePart = {
             {
               lines: [
                 me('Sayın Başkan. Savcılığın bütün hikâyesi tek bir kelimeye dayanıyordu ve o kelimeyi tanık bu salonda söyledi: varsaydım.'),
+                me('Bir ev, iki oda. Kira sözleşmesi bir evin kime kiralandığını söyler; bir odanın kimin hâkimiyetinde olduğunu söylemez. O odanın kilidi, anahtarı, botu, montu başka birinindi.'),
+                me('Şekerlik mutfakta değil, o odanın kapısının dibindeydi. İçindeki paketler o odanın stoğundandı. Kavanozdaki parmak izi bir çay alışkanlığıdır; bir ticaret değil.'),
                 me('Arka oda kilitliydi; anahtarı müvekkilimde değildi; kapı keskiyle açıldı. Kroki, tutanağın kendisiyle çelişiyor. Muhbirin satıcısı elinde kaskla kapıyı açtı; müvekkilimin ne kaskı var ne ehliyeti.'),
                 me('Kaan Yıldız kullanıcıydı ve tedaviye kendi ayağıyla gitti. Kullanmak, satmak değildir. Kuşku varsa, o kuşku onundur.'),
-                me('Sanığın beraatini talep ediyorum.'),
+                me('Sanığın beraatini talep ediyorum. Ve bir şey daha: bu salondan çıktığında perşembe günü bir doktoru var. Onu oraya gönderin; buraya değil.'),
               ],
             },
           ],
@@ -970,9 +1007,11 @@ export const trial: CasePart = {
           responses: [
             {
               lines: [
+                n('Başkan gözlüğünü çıkardı. “Sanık, son sözünüz” dedi; bu sefer sesi daha alçaktı.'),
                 n('Kaan ayağa kalktı. Avucuna bir şey yazmıştı; baktı, sonra bakmadan söyledi.'),
                 s('kaan', 'Kullandım. Satmadım. Perşembe randevum var. Gitmek istiyorum. Bu kadar.'),
                 n('Salon bir an sustu. Defne’nin elindeki poşet bu sefer hışırdamadı.'),
+                n('Kaan oturdu. Avucunu kapattı. İki kelime, mürekkebi terden dağılmış, avucunun içinde kaldı.'),
               ],
             },
           ],

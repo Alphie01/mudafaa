@@ -61,12 +61,6 @@ const kurye = deliver('ARA_GIRIS', [
   { evidence: 'ev_kurye', requires: flag('kurye_istendi'), hint: 'Kurye şirketinin kayıtlarını delil dilekçesiyle ya da 1. celsede isteyebilirdin.' },
 ]);
 
-const again = (id: string, a: string, b: string, out: string, title: string) =>
-  recipe(id, a, b, {
-    effects: [ifThen(not(has(out)), [discover(out), score('DELIL_ANALIZI', 300)])],
-    feedback: { title, text: 'Bu bağlantıyı tahtaya yeniden iğneledin.', label: 'ÇIKARIM', tone: 'success' },
-  });
-
 const fresh = (id: string, a: string, b: string, out: string, title: string, text: string) =>
   recipe(id, a, b, {
     discovers: out,
@@ -116,6 +110,7 @@ export const investigation2: CasePart = {
             n('Personel dosyasında bir vesikalık vardı. Uzun yüzlü, sakallı, gülümsemeye çalışan bir adam. Fotoğrafçının “gülün” dediği anda gülmemiş, bir saniye sonra gülmüş gibi.'),
             th('Polis bu fotoğrafı hiç görmedi. Çünkü kimse kurye şirketine bir soru sormadı. Bazen bir dosyada eksik olan delil değil, merakın kendisidir.'),
             s('leyla', 'Sana bir isim gerekiyordu. İşte bir isim. Şimdi o ismi mahkemeye taşımanın doğru yolunu bul. Kovalamadan.'),
+            th('Kovalamadan. Leyla bunu her söylediğinde, bir zamanlar birini kovaladığını düşünürüm. Sormam.'),
           ],
         },
         {
@@ -237,6 +232,7 @@ export const investigation2: CasePart = {
           next: 'ARA_TELEFON',
         }),
         option('ARAK_B', 'Bunu bana neden şimdi anlatıyorsunuz?', {
+          score: { SAVUNMA_STRATEJISI: 20 },
           responses: [
             {
               lines: [
@@ -259,6 +255,34 @@ export const investigation2: CasePart = {
           next: 'ARA_TELEFON',
         }),
       ],
+    }),
+    story('ARA_SABAH', {
+      ...INV2,
+      title: 'Sabah',
+      background: 'sokak_sabah',
+      lines: [
+        {
+          when: flag('kaan_tahliye'),
+          lines: [
+            card('PERŞEMBE 09.15 — GÖRÜKLE KARAKOLU ÖNÜ', 'sokak_sabah'),
+            n('Kaan’ın ilk imza günüydü. Karakolun önünde, bir elinde bir dosya, bir elinde bir simit, sırasını bekliyordu. Beni görünce simidi uzattı; almadım, güldü.'),
+            s('kaan', 'İmza atacağım, sonra AMATEM. Aynı gün. Önce devlet, sonra doktor. Perşembeler artık resmî.'),
+            s('kaan', 'Karakoldaki memur “yine mi sen” dedi. İlk defa gelmiştim. Herkes birine benziyor burada, galiba.'),
+            n('Kapının yanında, duvara yaslanmış bir motor vardı; kaskı aynasında. Kaan baktı, gözlerini kaçırdı.'),
+            th('Bir motor, bir kask. Kaan için artık sıradan bir eşya değiller. Bir odanın, bir kilidin, bir isimsiz korkunun şekli.'),
+          ],
+        },
+        {
+          lines: [
+            card('PERŞEMBE 09.15 — BURSA H TİPİ CEZAEVİ ÖNÜ', 'sokak_sabah'),
+            n('Görüş günüydü. Cezaevinin önünde uzun bir kuyruk: annenler, eşler, çocuklar, poşetler. Defne en öndeydi; elinde bir torba temiz çamaşır, bir de bir kitap.'),
+            s('defne', 'Roman getirdim. İktisat kitabı istemiyor artık. “Abla, biraz da başkasının hikâyesini okuyayım” dedi.', 'uzgun'),
+            n('Kuyrukta önümüzdeki kadın Defne’ye döndü; oğlu da içerideymiş. Uyuşturucu. Ne kadar, hangisi, nedendi; sormadılar. Birbirlerine sadece başlarını salladılar.'),
+            th('Bu kuyrukta kimse kimseye ne yaptığını sormuyor. Sadece ne kadar kaldığını. Bir mahkeme salonunda tersi olur.'),
+          ],
+        },
+      ],
+      choices: [cont('ARA_SABAH_DEVAM', 'Güne başla', HUB, { role: 'PRIMARY' })],
     }),
     story('ARA_TELEFON', {
       ...INV2,
@@ -294,7 +318,7 @@ export const investigation2: CasePart = {
               ],
             },
           ],
-          next: HUB,
+          next: 'ARA_SABAH',
         }),
         option('TEL_B', 'Geri ara; teslim olursa Kaan’ın ifadesini yumuşatabileceğini söyle', {
           score: { SAVUNMA_STRATEJISI: -60 },
@@ -308,12 +332,19 @@ export const investigation2: CasePart = {
               ],
             },
           ],
-          next: HUB,
+          next: 'ARA_SABAH',
         }),
         option('TEL_C', 'Telefonu kapat ve uyumaya çalış', {
           neutral: 'Şüphelinin temasını bildirmemek bir hata değil ama kaçırılmış bir fırsattır: kayıt tespit edilemedi.',
-          responses: [{ lines: [th('Uyumadım. Telefon komodinin üstünde bir taş gibi duruyordu.')] }],
-          next: HUB,
+          responses: [
+            {
+              lines: [
+                th('Uyumadım. Telefon komodinin üstünde bir taş gibi duruyordu.'),
+                th('Bir hayalet aradı ve ben ona hiçbir şey sormadım. Sabah olunca kendime sordum: neden? Cevabı bilmiyordum. Belki de korkmuştum. Avukatlar da korkar.'),
+              ],
+            },
+          ],
+          next: 'ARA_SABAH',
         }),
       ],
     }),
@@ -347,6 +378,7 @@ export const investigation2: CasePart = {
                   s('selim', 'Barış Demirel. İzmirli. İyi çalışırdı; gece vardiyası, hiç şikâyet gelmezdi. Yağmurda bile.'),
                   s('selim', 'On iki kasım sabahı mesaj attı: “Abi ben bırakıyorum.” Montu, çantayı getirmedi. Depozito kesildi, neyse.'),
                   s('selim', 'Polis sordu mu? Kimse sormadı abla. Sen ilksin.'),
+                  s('selim', 'Ayın kuryesi seçmiştik onu ekimde. Belgesi duvarda. Gitti, adını karaladım. Kızdım çünkü. İyi çocuk sandım.'),
                   th('Barış Demirel. Bir soyadı, bir istifa mesajı, iade edilmemiş bir çanta. Ve kimsenin sormadığı bir soru.'),
                 ],
               },
@@ -517,6 +549,8 @@ export const investigation2: CasePart = {
               card('KAHVE DURAĞI — KAPANIŞTAN SONRA', 'kafe'),
               n('Kaan tezgâhı siliyordu. İşe dönmüştü; Elif Hanım “kasayı yine sen kapat” demişti. İmza günü perşembeymiş; AMATEM randevusu da perşembe.'),
               s('kaan', 'Aynı gün. Önce karakol, sonra doktor. Perşembeler artık benim. Neyse. Ne içersiniz?', 'mutlu'),
+              n('Fincanı önüme koydu. Köpüğün üstüne bir yaprak çizmişti; titrek ama düzgün. Bunu yapabilmek için ellerinin sakin olması gerekirdi.'),
+              s('kaan', 'Elif Hanım “müşteriler sordu” dedi. “Kaan nerede?” diye. Biri bana kitap bırakmış. İktisat değil, roman. Neyse. Okuyorum.'),
             ],
           },
           {
@@ -579,6 +613,8 @@ export const investigation2: CasePart = {
                   s('kaan', 'Tanışıyorlar mıydı? … Tolga çıktıktan sonra Barış geldi. Barış’ı ev ilanından bulduğunu söylemişti. İlanı kim verdi, biliyor musunuz?', 'saskin'),
                   s('kaan', 'Ben vermedim. Tolga “bir arkadaşım odayı arıyor” demişti, çıkmadan önce. Ben unutmuşum bunu. Şimdi hatırladım.'),
                   th('Tolga çıkarken odayı birine devretmiş. O biri Barış. Bir anahtar elden ele geçmiş; belki bir anahtardan fazlası.'),
+                  s('kaan', 'Ben ne kadar aptalım, değil mi? Hiçbir şeyi sormadım. Kim, neden, nereden. Sormamak rahattı.', 'uzgun'),
+                  me('Sormamak bir suç değil, Kaan. Ama bundan sonra sor. En çok da kendine.'),
                 ],
               },
             ],
@@ -631,6 +667,7 @@ export const investigation2: CasePart = {
                   me('Kaan’ı yalanla kurtaramayız, Defne Hanım. Yalan, onun doğrusunu da yanında götürür. Okan bir gün kürsüde çözülür ve Kaan’ın her sözü onunla birlikte düşer.'),
                   s('defne', 'Haklısınız. Biliyorum. Bilmek bazen yetmiyor. Gece üçte insan her kapıyı çalıyor.'),
                   th('Gece üçte herkes her kapıyı çalar. Bir avukatın işi, hangi kapının açılmaması gerektiğini bilmektir.'),
+                  s('defne', 'Zarfı geri koydum. Kaan’ın tedavisine harcarım. Doktor grup terapisi önerdi; ücretli. Bunun için harcarım.'),
                 ],
               },
             ],
@@ -759,6 +796,7 @@ export const investigation2: CasePart = {
             {
               lines: [
                 n('Bir saat sonra iki kolluk görevlisi bodrumdaydı; eldivenle, poşetle, tutanakla. Nesrin Hanım merdivenin başında, kucağında kedi.'),
+                n('Görevlilerden biri çantanın astarını el fenerinin ışığında açtı; içinde elle dikilmiş bir bölme. Hiçbir şey söylemedi. Söylemesine gerek yoktu.'),
                 s('nesrin', 'Bu sefer bana saat sordular evladım. Saati ben yazdım. On iki on beş.'),
                 th('Bu sefer tutanakta doğru saat var. Bazen adalet bir saatin doğru yazılmasıdır.'),
               ],
@@ -800,6 +838,15 @@ export const investigation2: CasePart = {
       ...INV2,
       title: 'Suç duyurusu',
       background: 'adliye',
+      lines: [
+        {
+          lines: [
+            card('ADLİYE — NÖBETÇİ CUMHURİYET SAVCILIĞI', 'adliye'),
+            n('Nöbetçi savcılığın koridorunda kırık bir floresan, bir su sebili, iki kelepçeli şüpheli ve bir çaycı. Sıramı bekledim. Kırk dakika.'),
+            th('Bir avukatın kovalayabileceği tek şey bir dilekçedir. Şüpheliyi aramak, bulmak, yakalamak başkalarının işi. Benim işim onlara doğru adresi vermek.'),
+          ],
+        },
+      ],
       prompt: 'Nöbetçi savcılık. Kim hakkında, hangi somut bilgiyle?',
       choices: [
         option('SC_KIMLIK', 'Barış Demirel hakkında; kimlik, Bursa adresi ve kurye kayıtlarıyla suç duyurusu', {
@@ -811,6 +858,9 @@ export const investigation2: CasePart = {
             {
               lines: [
                 s('savci', 'Barış Demirel. Karşıyaka. Personel kaydı, GPS. … Peki. Bunu bir soruşturma numarasına bağlarım. Yakalama kararı için yeterli olabilir.'),
+                s('savci', 'Bir şey soracağım, avukat hanım. Bunu ona gitmeden, onu aramadan mı topladınız?'),
+                me('Kâğıtlardan, Sayın Savcı. Kâğıtlardan ve bir ev sahibinin defterinden.'),
+                s('savci', 'İyi. Öyle kalsın.'),
                 th('Savcı bir isim istemişti. Bir isim götürdüm. İsim artık bir dosyanın kapağında.'),
               ],
             },
@@ -859,40 +909,12 @@ export const investigation2: CasePart = {
           'clue_nesrin_moto',
           'clue_tolga_kask',
           'clue_tolga_saat',
-          'clue_kilit',
-          'clue_kapsam',
-          'clue_on_oda',
-          'clue_kroki',
-          'clue_mont',
-          'clue_zincir',
-          'clue_ayakkabi',
-          'clue_kaan_olcu',
-          'clue_odaya_girme',
-          'clue_kira_defteri',
-          'clue_hat',
-          'clue_posta',
-          'clue_ayni_parti',
-          'clue_sekerlik',
-          'clue_randevu',
-          'clue_tedavi',
           'clue_iki_tane',
-          'clue_kavanoz_iz',
-          'clue_anahtarlik',
         ],
         recipes: [
           fresh('CB_KACIS', 'clue_gps', 'clue_nesrin_moto', 'ded_kacis', 'Baskını gören kurye', 'GPS 06.21’de kırk saniyelik bir duruş; Nesrin aynı dakikada dönen motoru gördü. Barış baskını gördü ve gitti.'),
           fresh('CB_TOLGA', 'clue_selim_tolga', 'clue_tolga_kask', 'ded_tolga_baris', 'Tolga’nın satıcısı', 'Tolga durağa gelip Barış’ı soruyordu; ifadesinde kapıdaki adamın elinde kask vardı. Muhbir satıcıyı tanıyordu ve adını vermedi.'),
           fresh('CB_ALIBI', 'clue_z_rapor', 'clue_tolga_saat', 'ded_alibi', 'Satış anında kafede', 'Satış 23.00’te; Kaan 23.18’de satış yapmış, 23.41’de kasayı kapatmış. Kaan o kapıda olamaz.'),
-          again('CB2_KAPSAM', 'clue_kilit', 'clue_kapsam', 'ded_kapsam', 'Kapsam dışı arama'),
-          again('CB2_ODA', 'clue_on_oda', 'clue_kroki', 'ded_oda', 'Kaan ön odada yaşıyor'),
-          again('CB2_KURYE', 'clue_mont', 'clue_zincir', 'ded_kurye', 'Arka odadaki kurye'),
-          again('CB2_NUMARA', 'clue_ayakkabi', 'clue_kaan_olcu', 'ded_numara', 'İki ayrı ayak'),
-          again('CB2_BARIS', 'clue_odaya_girme', 'clue_kira_defteri', 'ded_baris', 'Barış gerçek'),
-          again('CB2_DEMIREL', 'clue_hat', 'clue_posta', 'ded_demirel', 'B. = Demirel'),
-          again('CB2_SEKER', 'clue_ayni_parti', 'clue_sekerlik', 'ded_sekerlik', 'Şekerlik arka odanın deposu'),
-          again('CB2_KASK', 'clue_tolga_kask', 'clue_kaan_olcu', 'ded_kask', 'Kasklı adam Kaan değil'),
-          again('CB2_ANAHTAR', 'clue_anahtarlik', 'clue_kilit', 'ded_anahtar', 'Anahtarsız kiracı'),
-          again('CB2_KULLANICI', 'clue_randevu', 'clue_tedavi', 'ded_kullanici', 'Kullanıcı, satıcı değil'),
         ],
         miss: fallback('FB_ARA_CIKARIM', 'COMBINE', {
           repeat: 'ONCE_PER_PARAMS',
@@ -924,6 +946,7 @@ export const investigation2: CasePart = {
         {
           when: all(has('clue_tolga_kask'), not(has('ded_tolga_baris')), not(has('ded_alibi'))),
           lines: [
+            n('Leyla bir sandalyeyi masamın yanına çekti ve oturdu. Bunu çok nadir yapardı.'),
             s('leyla', 'Muhbir kürsüye gelecek. Ondan ne bekliyorsun? Yalanını söylemesini değil; yalanının bir yerinde takılmasını. Saat mi, kask mı, kin mi? Birini seç, ona hazırlan.'),
           ],
         },
@@ -935,6 +958,7 @@ export const investigation2: CasePart = {
         },
         {
           lines: [
+            n('Leyla kapı eşiğinde durdu; paltosu kolunda.'),
             s('leyla', 'Savcının yedek planı her zaman bir “ortak alan”dır. Şekerlik, mutfak, koridor. Arka odayı kazanıp mutfakta kaybetme.'),
             s('leyla', 'Ve unutma: beraat iki türlüdür. Biri “yapmadı” der, biri “yaptığı ispatlanamadı.” Hangisini istediğine değil, hangisini ispatlayabildiğine bak.'),
           ],
@@ -951,6 +975,7 @@ export const investigation2: CasePart = {
           lines: [
             card('16 ŞUBAT · PAZARTESİ 08.30 — ADLİYE ÖNÜ', 'adliye'),
             n('Lodos dinmiş, yerini kuru bir ayaza bırakmıştı. Adliye merdivenlerinde sigara içen avukatlar, ellerinde dosyalar, gözlerinde başka davalar.'),
+            th('Üç hafta önce bu merdivenlerden bir hayaletle çıktım. Bugün çantamda bir soyadı, bir saat ve bir kask var. Ve hâlâ bir soru: yeterli mi?'),
           ],
         },
       ],

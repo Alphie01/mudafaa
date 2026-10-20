@@ -26,6 +26,10 @@
               "speaker": "player",
               "text": "Polis bu fotoğrafları kendi tutanağını desteklemek için çekti. Bir fotoğraf ise kimseyi desteklemez; sadece gösterir.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kare 14: oda kapısı, kapalı. Kare 15: kapı, aralık. Kare 16 yok; numara atlanmış. Kare 17: odanın içi, flaşın beyaz yaraları duvarlarda."
             }
           ]
         }
@@ -70,6 +74,10 @@
               "speaker": "player",
               "text": "Savcının dosyasında bu fotoğraflar “genel görünüm” diye geçiyor. Genel görünüm, ayrıntının mezarlığıdır.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ön odanın duvarında bir takvim; ekim sayfasında açık kalmış. Perşembeler kırmızı kalemle yuvarlak içine alınmış. Kasım sayfasına hiç geçilmemiş."
             }
           ]
         }
@@ -137,7 +145,72 @@
           "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
           "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
         },
-        { "id": "BINA_BITIR", "kind": "CONTINUE", "label": "Girişten ayrıl", "role": "BACK", "next": "$return" }
+        { "id": "BINA_BITIR", "kind": "CONTINUE", "label": "Girişten ayrıl", "role": "BACK", "next": "INV_MERDIVEN" }
+      ]
+    },
+    {
+      "id": "INV_MERDIVEN",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #04 · SORUŞTURMA",
+      "title": "Merdiven boşluğu",
+      "background": "sokak_karanlik",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "IHLAMUR SOKAK 14 — MERDİVEN BOŞLUĞU",
+              "style": "card",
+              "bg": "sokak_karanlik"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Merdiven ışığının otomatiği on beş saniye yanıyordu. Dördüncü kata on beş saniyede çıkılmıyordu; ikinci katta karanlık beni yakaladı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Karanlıkta bir kapı aralandı. Kapı zinciri, bir göz, bir öğrenci kulaklığından taşan müzik."
+            },
+            {
+              "speaker": "narrator",
+              "name": "KOMŞU KIZ",
+              "text": "Avukat mısınız? Yedi numaranın? … Ben altıdayım. Bir şey diyeceğim ama adımı yazmayın.",
+              "style": "whisper"
+            },
+            {
+              "speaker": "narrator",
+              "name": "KOMŞU KIZ",
+              "text": "O sabah keski sesiyle uyandım. Metal metale. Sonra biri “anahtarı ver” dedi, biri “yok bende” dedi. Sonra yine keski.",
+              "style": "whisper"
+            },
+            {
+              "speaker": "narrator",
+              "name": "KOMŞU KIZ",
+              "text": "Bir şey daha. Arka odadaki çocuk, kurye olan, gece hep merdivende telefonla konuşurdu. Fısıltıyla. Ben kulaklık takardım; duymak istemezdim.",
+              "style": "whisper"
+            },
+            { "speaker": "player", "text": "Bunu mahkemede anlatır mısınız?" },
+            {
+              "speaker": "narrator",
+              "name": "KOMŞU KIZ",
+              "text": "Hayır. Burslu okuyorum. Babam duyarsa beni eve geri alır. Size söyledim, o kadar. Kusura bakmayın.",
+              "style": "whisper"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kapı kapandı. Zincir şıkırdadı. Merdiven ışığına yeniden bastım; on beş saniye."
+            },
+            {
+              "speaker": "player",
+              "text": "“Anahtarı ver.” “Yok bende.” Bir tanık değil; bir kapının arkasından gelen bir cümle. Mahkemeye taşıyamam. Ama artık ne arayacağımı biliyorum: o cümleyi söyleyen polisin kendi ağzını.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "MERDIVEN_BITIR", "kind": "CONTINUE", "label": "Binadan çık", "role": "BACK", "next": "$return" }
       ]
     }
   ]

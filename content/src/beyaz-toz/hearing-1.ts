@@ -160,6 +160,8 @@ export const hearing1: CasePart = {
             n('Salon sustu. Defne’nin elindeki poşet hışırdadı.'),
             s('kaan', 'Ben kullanıcıydım. Kokain. Babam öldükten sonra. Ekimde acile düştüm, sonra AMATEM’e başladım. Satmadım. Hiç kimseye. Bir gram bile.'),
             th('Söyledi. Kendi sesiyle, kendi kararıyla. Savcı bir an kalemini bıraktı.'),
+            s('kaan', 'Bunu söylemek için buraya gelmem gerekti, Sayın Başkan. Annem bunu bugün buradan duyacak. Ama yalan söyleyerek çıkmak istemiyorum. Kullandım. Satmadım.'),
+            n('Defne’nin yanındaki boş sandalye boş kalmadı. Kapının yanında, elinde bir ıslak şemsiyeyle, beyaz saçlı bir kadın durmuştu. Kimse onu fark etmedi; Kaan dışında.'),
           ],
         },
         {
@@ -187,6 +189,7 @@ export const hearing1: CasePart = {
               lines: [
                 s('kaan', 'Ön odada. Balkonlu oda. Her gece orada uyurum. Kitaplarım, gitarım, gözlüğüm orada. Polis de beni orada buldu.'),
                 s('uye', 'Arka odaya neden girmediniz hiç?'),
+                s('kaan', 'Arka odaya da hiç girmedim. Bir kere kapı aralıktı, baktım. O kadar. Bir mont, bir yatak, bir dolap.'),
                 s('kaan', 'Kilitliydi, Sayın Hâkim. Ve… başkasının odasıydı. Başkasının odasına girilmez.'),
               ],
             },
@@ -300,6 +303,7 @@ export const hearing1: CasePart = {
             s('mubasir', 'Tanık Tuncay Sezer! Tanık Tuncay Sezer!'),
             n('Kırklı yaşlarında, kısa saçlı, ütülü bir gömlek. Kürsüye bir rapor okumaya gelir gibi geldi.'),
             s('baskan', 'Kimliğiniz tespit edildi. Gerçeği söylemekle yükümlüsünüz; yalan tanıklığın cezası size hatırlatıldı. Yemininizi edin.'),
+            n('Tuncay Sezer sağ elini kaldırdı. Avucunun içi nasırlıydı; yıllarca bir telsiz, bir direksiyon, bir kapı kolu tutmuş bir el.'),
             s('tuncay', 'Bildiğimi dosdoğru söyleyeceğime namusum ve vicdanım üzerine yemin ederim.'),
             s('savci', 'Tanık, aramayı siz yönettiniz. Arka oda sanığın kullanımındaydı, değil mi? Ev onun adına kiralıydı.'),
           ],
@@ -362,6 +366,9 @@ export const hearing1: CasePart = {
         {
           lines: [
             s('tuncay', 'Arama, Sulh Ceza Hâkimliğinin kararıyla, usulüne uygun yapıldı. Ben yirmi yıldır bu işi yapıyorum.'),
+            s('tuncay', 'Muhbir beyanı üzerine adres tespit edildi. Sabah altı beşte ekibimle daireye girdik. Şüpheli ön odada uyuyordu. Arka odada materyal ele geçirildi. Mutfakta da iki paket.'),
+            s('tuncay', 'Ev şüphelinin adına kiralı. Başka kiracı kaydı yok. Tutanağı ben düzenledim, krokiyi ben çizdim. Tanık komşu hazır bulunduruldu.'),
+            th('Kısa cümleler, düz bir ses. Bir tutanak okur gibi konuşuyordu. Çünkü bir tutanak okuyordu: kendi kafasındakini.'),
             s('baskan', 'Tanık ifadesini verdi. Müdafi, sorularınız?'),
           ],
         },
@@ -474,6 +481,7 @@ export const hearing1: CasePart = {
                 s('uye', 'Yani arka odanın sanığa ait olduğunu tespit etmediniz. Varsaydınız.'),
                 s('tuncay', 'Varsaydım, Sayın Hâkim.'),
                 th('Bir kelime. Varsaydım. Savcının bütün hikâyesi bu kelimenin üstünde duruyordu.'),
+                n('Kaan sanık sırasında doğruldu. Bir şey söylemek istedi; Defne arkadan, sessizce, başını iki yana salladı. Kaan oturdu.'),
               ],
             },
           ],
@@ -526,6 +534,9 @@ export const hearing1: CasePart = {
                 me('Vermedi mi, yok muydu?'),
                 s('tuncay', '…Üzerinde yoktu. Evde de çıkmadı.'),
                 th('Kilitli bir odanın anahtarı, odanın sahibinde olur. Kaan’da değildi. Bunu polis kendi ağzıyla söyledi.'),
+                s('uye', 'Tanık, kilidi keskiyle açtığınızı tutanağa neden yazmadınız?'),
+                s('tuncay', 'Önemli görmedim, Sayın Hâkim. Kapı açılmıştı; materyal oradaydı.', 'uzgun'),
+                s('uye', 'Bir kapının nasıl açıldığı, ardında ne bulunduğu kadar önemlidir.'),
               ],
             },
           ],
@@ -686,6 +697,7 @@ export const hearing1: CasePart = {
           lines: [
             n('Heyet döndü. Başkan gözlüğünü taktı; kâğıdı iki eliyle tuttu.'),
             s('baskan', 'Ara karar: Paketçi şirketine ve kolluğa yazılan yazıların cevaplarının beklenmesine; muhbir tanığın zorla getirilmesine; duruşmanın 16 Şubat’a ertelenmesine.'),
+            s('baskan', 'Kolluk tanığının beyanı ve arama tutanağı esas hakkındaki kararla birlikte değerlendirilecektir. Taraflara, ikinci celseye kadar delillerini bildirmeleri hatırlatıldı.'),
           ],
         },
       ],
@@ -727,6 +739,7 @@ export const hearing1: CasePart = {
             n('Koridorda Serap Akın yanımdan geçerken durdu. Elinde dosya, yüzünde hiçbir şey.'),
             s('savci', 'Kilit fotoğrafı iyiydi, avukat hanım. Ama arka odada kırk paket vardı. Kimin olduğunu hâlâ bilmiyoruz. Siz de bilmiyorsunuz.'),
             s('savci', 'Bana bir isim getirin. Bir hayalet değil, bir isim. O zaman konuşuruz.'),
+            s('savci', 'Bir de şunu bilin: o polis kötü bir polis değil. Acele eden bir polis. Benim dosyalarımın yarısı acele eden polislerle dolu.'),
             th('Bir isim. Bir soyadı, bir adres, bir yüz. Üç haftam var.'),
           ],
         },

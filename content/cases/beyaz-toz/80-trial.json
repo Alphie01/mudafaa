@@ -457,6 +457,15 @@
               "speaker": "nesrin",
               "text": "Altı kırkta beni yukarı çağırdılar. Arka odanın kapısı açıktı, kilit yerdeydi. İmzala dediler; saati ben yazdım."
             },
+            { "speaker": "uye", "text": "Saati neden yazdınız, tanık?" },
+            {
+              "speaker": "nesrin",
+              "text": "Hep yazarım, Sayın Hâkim. Rahmetli muhasebeciydi. “Saatsiz imza, tarihsiz çek gibidir” derdi. Ben de o günden beri her imzanın yanına saat yazarım."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Salonda biri gülümsedi. Başkan bile. Nesrin Hanım fark etmedi; gözlüğünü düzeltti ve bekledi."
+            },
             { "speaker": "savci", "text": "Tanık, avukat hanım sizinle görüştü mü? Size ne sordu?" },
             {
               "speaker": "nesrin",
@@ -606,10 +615,23 @@
       "lines": [
         {
           "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Nesrin Hanım kürsüden indi, dinleyici sırasına oturdu, defterini kucağına koydu. Kaan’a gülümsedi; Kaan gözlerini indirdi, sonra kaldırdı, gülümsedi."
+            },
             { "speaker": "mubasir", "text": "Tanık Tolga Kaplan! Tanık Tolga Kaplan!" },
             {
               "speaker": "narrator",
               "text": "İki polisin arasında geldi; zorla getirilmişti. Kırmızı bere elinde, saçları dağınık. Kürsüye çıkarken sanık sırasına bakmadı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yirmi dokuz yaşındaydı ama kırkında gibi görünüyordu. Tırnaklarının etleri Kaan’ınkiler gibi yenmişti. İki kullanıcı, aynı salonda, iki ayrı sırada."
+            },
+            {
+              "speaker": "player",
+              "text": "Ona öfkelenmem gerekirdi. Öfkelenemedim. Gece yarısı bir karakolda bir isim vermek zorunda kalan bir adam. Ama verdiği isim yanlış isimdi; bunu ona kendi sözleriyle göstereceğim.",
+              "style": "thought"
             },
             {
               "speaker": "baskan",
@@ -729,6 +751,15 @@
             {
               "speaker": "tolga",
               "text": "Paketi o evden aldım. Kaan sattı. Herkes biliyordu zaten. Ben sadece… yakalandım, yani."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bereyi dizinde ezip duruyordu. Arada bir savcıya bakıyordu, sanki bir sonraki cümleyi oradan okuyacakmış gibi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir muhbirin beyanı tek bir ayağa dayanır: kendi sözüne. O ayağı sallamak için ona yeni bir şey söylemem gerekmiyor. Kendi eski sözünü hatırlatmam yeter.",
+              "style": "thought"
             },
             { "speaker": "baskan", "text": "Tanık ifadesini verdi. Müdafi, sorularınız?" }
           ]
@@ -897,6 +928,14 @@
                   "speaker": "narrator",
                   "text": "Tolga bereyi iki eliyle sıktı. Bir süre kimseye bakmadı.",
                   "fx": "shake"
+                },
+                {
+                  "speaker": "baskan",
+                  "text": "Tanık, size kendinizi suçlama tehlikesi olan sorulara cevap vermeyebileceğinizi hatırlatmıştım. Ama verdiğiniz cevaplar doğru olmak zorunda. Kimden aldınız?"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Salonda bir sandalye gıcırdadı. Defne’nin elindeki poşet. Kaan başını kaldırdı ve Tolga’ya baktı; ilk kez, uzun uzun."
                 },
                 { "speaker": "tolga", "expression": "uzgun", "text": "…Barış’tı. Barış’tan aldım. Hep ondan alırdım." },
                 {
@@ -1119,6 +1158,14 @@
                   "speaker": "player",
                   "text": "Kendi cümlesi, kendi imzası. Bir yalanın en büyük düşmanı, ilk anlatılışıdır.",
                   "style": "thought"
+                },
+                {
+                  "speaker": "savci",
+                  "text": "Sayın Başkan, tanığın gece yarısı verdiği ifadedeki ayrıntıların kesinliği tartışılabilir."
+                },
+                {
+                  "speaker": "baskan",
+                  "text": "Tartışılabilir, Sayın Savcı. Ama tartışmayı tanığın kendi imzası başlattı."
                 }
               ]
             }
@@ -1347,6 +1394,12 @@
                   "speaker": "player",
                   "text": "Sayın Başkan, karar arka odayı kapsamıyordu. Tanık kilidin keskiyle kesildiğini, odanın sanığa ait olduğunu “sandığını” birinci celsede kabul etti."
                 },
+                {
+                  "speaker": "player",
+                  "text": "Hâkim, talep yazısında bir ev arkadaşı olduğunu bile bile sınırı çizmişti. Kolluk o sınırı bir keskiyle geçti. Kapsam dışı bir aramanın meyvesi, ne kadar ağır olursa olsun, hükmün kefesine konamaz."
+                },
+                { "speaker": "savci", "text": "Sayın Başkan, kolluğun iyi niyetle hareket ettiği açıktır." },
+                { "speaker": "player", "text": "İyi niyet bir kilidi açmaz, Sayın Savcı. Bir karar açar." },
                 { "speaker": "baskan", "text": "Kayıtlara geçti. Heyet hükümde değerlendirecek." }
               ]
             },
@@ -1676,7 +1729,19 @@
             },
             {
               "speaker": "savci",
-              "text": "Muhbir beyanı çelişkilidir. Sanığın atılı suçu işlediği sabit olmadığından beraatine; arka odanın kiracısı hakkında suç duyurusunda bulunulmasına karar verilmesini talep ederim."
+              "text": "Muhbir beyanı çelişkilidir: kask, saat ve tanığın sanıkla olan geçmişi beyanın güvenilirliğini zayıflatmaktadır."
+            },
+            {
+              "speaker": "savci",
+              "text": "Sanığın madde kullanıcısı olduğu sabittir; ancak kullanım bu davanın konusu değildir. Ticaret kastına dair kesin ve inandırıcı delil yoktur."
+            },
+            {
+              "speaker": "savci",
+              "text": "Sanığın atılı suçu işlediği sabit olmadığından beraatine; arka odanın kiracısı hakkında suç duyurusunda bulunulmasına karar verilmesini talep ederim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Serap Akın oturdu. Kalemini masanın kenarına paralel bıraktı; her zamanki gibi. Bana bakmadı. Bakmasına gerek yoktu."
             },
             { "speaker": "baskan", "text": "Müdafi, mütalaaya karşı diyeceğiniz?" }
           ]
@@ -1696,6 +1761,20 @@
           "id": "T05E_A",
           "kind": "OPTION",
           "label": "Mütalaaya katılıyoruz; sanığın kullanıcılığı ticaret kastının kanıtı değildir",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, mütalaaya katılıyoruz. Yalnızca bir şeyin gerekçeye girmesini istiyoruz: müvekkilim kullanıcı olduğunu bu salonda kendisi söyledi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir insanın hastalığını kendi ağzıyla söylemesi, ona karşı bir delil değil; dürüstlüğüne bir delildir."
+                }
+              ]
+            }
+          ],
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },
             { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 }
@@ -1893,6 +1972,26 @@
       "hud": ["dayanak", "cred", "pers"],
       "title": "Esas savunmanın dayanakları",
       "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Başkan esas hakkındaki savunma için söz vermeden önce dosyasını kapattı ve bekledi. Bir dakika. Belki iki. Salonda yalnızca kaloriferin tıkırtısı."
+            },
+            {
+              "speaker": "player",
+              "text": "Notlarım önümde. Dört haftanın notları: kilit, kroki, şekerlik, kask, saat, bir defter, bir randevu kartı. Hepsini söyleyemem. Heyet en çok üç şeyi hatırlar.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın kuralı: ispatlayamadığın bir cümleyi esas savunmaya koyma. Bir boş cümle, dolu üç cümleyi de götürür.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
       "prompt": {
         "speaker": "narrator",
         "text": "Esas savunmadan önce notlarına bak: en çok üç dayanak seç. Duruşmada ispatlanmış dayanak heyeti ikna eder; ispatlanmamış dayanak seni zayıflatır."
@@ -2227,13 +2326,24 @@
                 },
                 {
                   "speaker": "player",
+                  "text": "Bir ev, iki oda. Kira sözleşmesi bir evin kime kiralandığını söyler; bir odanın kimin hâkimiyetinde olduğunu söylemez. O odanın kilidi, anahtarı, botu, montu başka birinindi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Şekerlik mutfakta değil, o odanın kapısının dibindeydi. İçindeki paketler o odanın stoğundandı. Kavanozdaki parmak izi bir çay alışkanlığıdır; bir ticaret değil."
+                },
+                {
+                  "speaker": "player",
                   "text": "Arka oda kilitliydi; anahtarı müvekkilimde değildi; kapı keskiyle açıldı. Kroki, tutanağın kendisiyle çelişiyor. Muhbirin satıcısı elinde kaskla kapıyı açtı; müvekkilimin ne kaskı var ne ehliyeti."
                 },
                 {
                   "speaker": "player",
                   "text": "Kaan Yıldız kullanıcıydı ve tedaviye kendi ayağıyla gitti. Kullanmak, satmak değildir. Kuşku varsa, o kuşku onundur."
                 },
-                { "speaker": "player", "text": "Sanığın beraatini talep ediyorum." }
+                {
+                  "speaker": "player",
+                  "text": "Sanığın beraatini talep ediyorum. Ve bir şey daha: bu salondan çıktığında perşembe günü bir doktoru var. Onu oraya gönderin; buraya değil."
+                }
               ]
             }
           ],
@@ -2372,13 +2482,21 @@
               "lines": [
                 {
                   "speaker": "narrator",
+                  "text": "Başkan gözlüğünü çıkardı. “Sanık, son sözünüz” dedi; bu sefer sesi daha alçaktı."
+                },
+                {
+                  "speaker": "narrator",
                   "text": "Kaan ayağa kalktı. Avucuna bir şey yazmıştı; baktı, sonra bakmadan söyledi."
                 },
                 {
                   "speaker": "kaan",
                   "text": "Kullandım. Satmadım. Perşembe randevum var. Gitmek istiyorum. Bu kadar."
                 },
-                { "speaker": "narrator", "text": "Salon bir an sustu. Defne’nin elindeki poşet bu sefer hışırdamadı." }
+                { "speaker": "narrator", "text": "Salon bir an sustu. Defne’nin elindeki poşet bu sefer hışırdamadı." },
+                {
+                  "speaker": "narrator",
+                  "text": "Kaan oturdu. Avucunu kapattı. İki kelime, mürekkebi terden dağılmış, avucunun içinde kaldı."
+                }
               ]
             }
           ],

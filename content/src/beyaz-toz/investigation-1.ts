@@ -26,7 +26,7 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import type { ChoiceDef } from '@mudafaa/case-schema';
-import { INV1, card, me, n, p1, s, th } from './shared.js';
+import { INV1, card, me, n, named, p1, s, th } from './shared.js';
 
 // 50-investigation-hub: 1. evre hub'ı (3 gün × 4 EP), gün sonu ve akşam sahneleri, Leyla'ya danış, delil dilekçesi
 // (CMK 177), çıkarım tahtası ve duruşmadan önceki gece.
@@ -116,6 +116,8 @@ export const investigation1: CasePart = {
           when: cmp(v('day'), '==', 1),
           lines: [
             card('GÜN 1/3 · BİRİNCİ CELSEYE 12 GÜN', 'buro'),
+            n('Masamda savcılık dosyasının fotokopisi: dört yüz on iki sayfa. Bir kahve, bir kalem, bir de bir sürü sarı yapışkan not. Henüz hiçbirine bir şey yazmadım.'),
+            th('Dosya bir ev gibidir. Önce kapısından girersin, sonra odalarını tek tek dolaşırsın. Bu evin bir odası kilitli. Önce o kilide bakacağım.'),
             n('Hedef: arka oda kimin? Kaan’ı dinle; fotoğraflara ve kâğıtlara bak.'),
           ],
         },
@@ -123,6 +125,7 @@ export const investigation1: CasePart = {
           when: all(cmp(v('day'), '==', 2), any(has('clue_kilit'), has('clue_kira_defteri'), has('clue_odaya_girme'))),
           lines: [
             card('GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN', 'buro'),
+            th('Dün bir hayaletin peşindeydim. Bugün bir mont, bir zincir, bir mesaj. Hayaletler mont giymez.'),
             n('Hedef: arka odada başka biri yaşıyordu. Kim? Ve polis o odaya nasıl girdi?'),
           ],
         },
@@ -136,6 +139,7 @@ export const investigation1: CasePart = {
         {
           lines: [
             card('GÜN 3/3 · BİRİNCİ CELSEYE 6 GÜN', 'buro'),
+            n('Sabah erkenden büroya geldiğimde Leyla çoktan oradaydı. Masamın üstüne bir not bırakmıştı: “Beş gün kuralı. Bugün son.” Altına küçük bir çizgi çekmişti.'),
             n('Hedef: delil dilekçesi için son gün. Tahtayı topla; duruşmada kimi dinletmek, neyi okutmak istiyorsun?'),
           ],
         },
@@ -249,7 +253,7 @@ export const investigation1: CasePart = {
               ],
             },
           ],
-          next: 'INV_HUB',
+          next: 'INV_SABAH3',
         }),
         option('AK2_B', 'Şimdilik söylemeyin. Dosya kapanınca konuşursunuz.', {
           responses: [
@@ -260,7 +264,7 @@ export const investigation1: CasePart = {
               ],
             },
           ],
-          next: 'INV_HUB',
+          next: 'INV_SABAH3',
         }),
         option('AK2_C', 'Annenize ben anlatayım; daha sakin olur.', {
           effects: [dec('trust', 5)],
@@ -274,9 +278,30 @@ export const investigation1: CasePart = {
               ],
             },
           ],
-          next: 'INV_HUB',
+          next: 'INV_SABAH3',
         }),
       ],
+    }),
+    story('INV_SABAH3', {
+      ...INV1,
+      title: 'Kahve Durağı',
+      background: 'kafe',
+      lines: [
+        {
+          lines: [
+            card('PAZAR 08.10 — GÖRÜKLE, KAHVE DURAĞI', 'kafe'),
+            n('Kaan’ın çalıştığı kafe. Küçük, sıcak, tavanına çekilmiş sarı ampuller. Kahve makinesi tıslıyordu; tezgâhın arkasında kırklarında, saçını tokayla toplamış bir kadın.'),
+            named('ELİF HANIM', 'Siz Kaan’ın avukatısınız, değil mi? Defne söyledi. Ben Elif. Oturun, kahve benden.'),
+            n('Fincanı önüme koydu. Köpüğün üstünde bir yaprak; titrek, yarım. “Kaan’ın yaptığı kadar güzel olmadı” dedi.'),
+            named('ELİF HANIM', 'Üç yıldır burada. Kasayı ona bırakırım; bir kuruş eksik çıkmadı. Pazarları, çarşambaları, cumaları kapanış onda. Müşteriler onu sever; konuşmaz ama dinler.'),
+            named('ELİF HANIM', 'Bir şey olduğunu biliyordum. Ekimde birkaç kere ellerini titrerken gördüm. Sonra bir gün “abla, perşembeleri izin alabilir miyim, doktora gidiyorum” dedi. Sormadım. Verdim.'),
+            th('Bir kasiyer kodu, bir kapanış saati, bir izin günü. Bir insanın hayatı çoğu zaman en sıradan kâğıtlarda saklıdır.'),
+            n('Kapıdan bir kurye girdi; kaskını tezgâha koydu, iki kahve aldı, çıktı. Elif Hanım arkasından baktı.'),
+            named('ELİF HANIM', 'Bunlardan biri de onların evinde kalıyormuş, değil mi? Kaan bir kere “ev arkadaşım gece çalışıyor, sabah uyuyor, ben de sessiz giyiniyorum” demişti. Gülmüştük.'),
+          ],
+        },
+      ],
+      choices: [cont('SABAH3_DEVAM', 'Kahveyi bitir ve güne başla', 'INV_HUB', { role: 'PRIMARY' })],
     }),
     story('INV_LEYLA', {
       ...INV1,
@@ -293,6 +318,7 @@ export const investigation1: CasePart = {
         {
           when: all(not(has('ded_oda')), any(has('clue_kroki'), has('clue_on_oda'))),
           lines: [
+            n('Leyla gözlüğünü çıkardı, camlarını kazağının ucuyla sildi. Ne zaman bir şey söyleyecek olsa önce gözlüğünü silerdi; sanki görmek için değil, düşünmek için.'),
             s('leyla', 'Kaan nerede uyuyordu? Bu basit soru bazen bütün tutanağı devirir. Kroki ile fotoğrafı yan yana koy.'),
             s('leyla', 'Tahtada iki kartı birleştirmek, mahkemede tek bir cümle kurmaktır. Kartları ona göre seç.'),
           ],
@@ -300,6 +326,7 @@ export const investigation1: CasePart = {
         {
           when: all(has('clue_kilit'), not(has('clue_kapsam'))),
           lines: [
+            n('Leyla fotoğraf albümünün 17 numaralı karesine uzun uzun baktı. Parmağını kilidin üstüne koydu, çekti.'),
             s('leyla', 'Kesik bir kilit gördün. Güzel. Şimdi kararın kendisini oku. Hâkim polise nereyi aramasına izin verdi? Evi mi, odayı mı?'),
             s('leyla', 'Arama kararı açık çek değildir. Kim, nerede, ne: hepsi yazılı olur. Yazılı olmayan yer, aranmamış sayılır.'),
           ],
@@ -307,6 +334,7 @@ export const investigation1: CasePart = {
         {
           when: all(not(met('nesrin')), cmp(v('day'), '>=', 2)),
           lines: [
+            n('Leyla tutanağın son sayfasını çevirdi. İmzaların olduğu sayfa. Üç imza, biri titrek.'),
             s('leyla', 'Tutanakta bir tanık imzası var. Tanıkları kâğıttan değil, kapısından tanı. Zemin kattaki kadın o sabah ne gördü?'),
             s('leyla', 'Ama dikkat: tanığa cevabı sen verme. Soruyu sor, sus. Sessizlik, iyi bir tanığın en iyi dostudur.'),
           ],
@@ -314,6 +342,7 @@ export const investigation1: CasePart = {
         {
           when: all(has('clue_ayni_parti'), not(has('ded_sekerlik'))),
           lines: [
+            n('Leyla kriminal raporun ikinci sayfasını kalemiyle iki kez tıklattı.'),
             s('leyla', 'Şekerlik. Savcının yedek planı orası. Arka odayı kaybederse mutfağa sarılır: “ortak alan, ortak zilyetlik.”'),
             s('leyla', 'O iki paket nereden geldi, şekerlik nerede duruyordu? Kavanozdaki parmak izi, kavanozu kimin açtığını söyler; içine kimin ne koyduğunu değil.'),
           ],
@@ -321,11 +350,13 @@ export const investigation1: CasePart = {
         {
           when: not(any(visited('INV_TOLGA'), has('clue_kira_defteri'))),
           lines: [
+            n('Leyla muhbir ifadesinin fotokopisini masaya, benim tarafıma doğru itti. Okumamıştı; okumuş gibi bakıyordu.'),
             s('leyla', 'Muhbirin ifadesini oku. Kelime kelime. İnsanlar yalan söylerken ayrıntıyı unutur ya da fazla verir. İkisi de iz bırakır.'),
           ],
         },
         {
           lines: [
+            n('Leyla pencerenin önünde duruyordu. Dışarıda yağmur; içeride radyatörün tıkırtısı.'),
             s('leyla', 'Delil dilekçesini geciktirme. Duruşmadan en az beş gün önce verilmeli. Kimi dinletmek istediğini bil; kimin seni yarı yolda bırakacağını da.'),
             s('leyla', 'Ve Kaan’ın sırrı. Onu ancak o isterse kullanırsın. Rıza bir kez alınmaz; her adımda yeniden sorulur.'),
           ],
@@ -337,6 +368,14 @@ export const investigation1: CasePart = {
       ...INV1,
       title: 'Delil dilekçesi (CMK 177)',
       hud: ['dil_hak'],
+      lines: [
+        {
+          lines: [
+            n('Boş bir dilekçe şablonu ekranda. İmleç yanıp sönüyordu. Bir avukatın en güçlü silahı da en sıkıcı belgesidir: “Sayın Başkanlığınıza…”'),
+            th('Üç talep. Her biri bir kapı. Yanlış kapıyı çalarsam, doğru kapıya vaktim kalmayabilir.'),
+          ],
+        },
+      ],
       prompt: 'Mahkemeye delil dilekçesi: duruşmadan en az beş gün önce. Üç talep hakkın var; neyi isteyeceksin?',
       choices: [
         option('DIL_KURYE', 'Paketçi kurye şirketinden, adresteki kuryenin personel ve GPS kayıtlarının istenmesi', {
@@ -420,23 +459,17 @@ export const investigation1: CasePart = {
         'clue_sekerlik',
         'clue_ayakkabi',
         'clue_posta',
-        'clue_yag',
         'clue_kroki',
-        'clue_tanik_saat',
-        'clue_ekleme',
         'clue_kapsam',
         'clue_odaya_girme',
         'clue_iki_tane',
         'clue_hat',
-        'clue_iz_yabanci',
         'clue_ayni_parti',
         'clue_kavanoz_iz',
         'clue_tolga_kask',
-        'clue_tolga_saat',
         'clue_kaan_olcu',
         'clue_tedavi',
         'clue_kira_defteri',
-        'clue_nesrin_moto',
         'clue_anahtarlik',
       ],
       recipes: [

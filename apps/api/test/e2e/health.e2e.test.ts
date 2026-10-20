@@ -1,10 +1,13 @@
 import type { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
+import type { Redis } from 'ioredis';
 import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { AppModule } from '../../src/app.module.js';
 import { configureApp } from '../../src/app.setup.js';
 import { ENV, loadEnv } from '../../src/config/env.js';
+import { PrismaService } from '../../src/database/prisma.service.js';
+import { REDIS } from '../../src/redis/redis.module.js';
 
 // Docker "test" profili (npm run db:test:up): postgres-test 5434, redis-test 6380.
 const testEnv = loadEnv({
@@ -24,6 +27,10 @@ describe('GET /v1/health', () => {
       .compile();
     app = configureApp(moduleRef.createNestApplication());
     await app.init();
+    // PrismaPg ile $connect() bağlantı açmaz; havuzun ilk TCP + kimlik doğrulama el sıkışması ve Redis'in ilk
+    // bağlantısı health'in 1 sn'lik prob bütçesine düşmesin diye bağımlılıklar burada ısıtılır (deterministik test).
+    await app.get(PrismaService).$queryRaw`SELECT 1`;
+    await app.get<Redis>(REDIS).ping();
   });
 
   afterAll(async () => {

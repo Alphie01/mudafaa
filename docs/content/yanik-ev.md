@@ -142,18 +142,19 @@ her etkinlik doğrudan döner (kaçış uzaklığı sınırı, Dava #07 raporu �
 
 `npm run case:validate -- yanik-ev --max-ms 3000000`: **PASSED — 0 hata**, 1 uyarı (SIMULATION_INCOMPLETE); 56.344 durum,
 400 yürüyüş; altı sonucun hepsine ulaşıldı; kapsam node 110/110, seçenek 213/213, kural 80/80, delil 66/66; golden path 8/8;
-softlock, sızıntı yok. Süre ~60 sn (boşta makinede varsayılan 600 sn sınırının çok altında).
+softlock, sızıntı yok. Süre 57,6 sn, varsayılan 600 sn sınırıyla (2026-10-21 yeniden doğrulama, yük ortalaması ~6).
 
 Seçenek etiketi denetimi (derlenmiş pakette GOOD ile GOOD olmayanı karışık 13 notlu seçenek kümesi): en uzun etiketin doğru
-seçenek olduğu küme 0/13. Yanlış seçenekler aynı uzunlukta ve aynı hukuki dilde (yanlış dayanak, yanlış aralık, yanlış talep).
+seçenek olduğu küme 0/13. Yeniden denetim (2026-10-21, NEUTRAL seçenekleri de "doğru değil" sayan geniş ölçüt, 18 küme): en uzun
+etiket 3/18 kümede doğru (H1_00K4, ARA_CEVDET, ARA_HALIL; fark ≤ 13 karakter), T_06'da doğru seçenek en kısasıdır. Yanlış seçenekler aynı uzunlukta ve aynı hukuki dilde (yanlış dayanak, yanlış aralık, yanlış talep).
 
 Erken çözüm denetimi (golden path'ten aksiyon silerek, reddedilen aksiyonları atlayan yeniden oynatmayla yerel en kısa yol):
 
 | Hedef | Tohum | En kısa | Oran |
 |---|---|---|---|
-| BERAAT_E / BERAAT_B | TIPIK, G_B | 175 aksiyon (final 12.505) | TIPIK'in %73'ü |
-| BERAAT_B | G_B | 195 aksiyon (final 13.505) | G_B'nin %79'u |
-| TAKSIR | G_T, W, N_B_ARKSIZ | 75 aksiyon | G_T'nin %35'i |
+| BERAAT_E / BERAAT_B | TIPIK, G_B | 172 aksiyon (final 12.505) | TIPIK'in %72'si |
+| BERAAT_B | G_B | 183 aksiyon (final 13.515) | G_B'nin %74'ü |
+| TAKSIR | G_T, W, N_B_ARKSIZ | 75 aksiyon (W'den 79) | G_T'nin %35'i |
 | MAHKUMIYET | G_M | 36 aksiyon | varsayılan sonuç |
 
 Beraat; numune zinciri, temizlenmiş zemin, laboratuvar bulgusu, iki iplik ve taksire cevap olmadan kurulamıyor; 2-b ayrıca

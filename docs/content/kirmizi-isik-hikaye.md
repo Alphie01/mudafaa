@@ -72,13 +72,14 @@ termosu, Hamdi'nin tornavidası, Sevim'in çaydanlığı: her karakterin bir nes
 
 ```
 PR_00 Soğuk açılış (01.09, SÜRÜCÜ ve TELEFONDAKİ SES)                STORY → PR_01
-PR_01 01.24 kavşak: polis, taksici, kelepçesiz bir gözaltı             STORY → BR_00
+PR_01 01.24 kavşak: polis, taksici, kelepçesiz bir gözaltı             STORY → PR_02
+PR_02 02.10 bir mutfak: eşin gecesi (BİR KADIN, TELEFONDAKİ SES)       STORY → BR_00
 BR_00 Bölüm 1 · Gül büroda (zarf/söz seçimi)                          STORY
 BR_01 Leyla: ceza aralığı (A–D)                                       STORY
 BR_01B Dosyanın kâğıtları, bilirkişi raporu dersi (seçim)             STORY
 BR_02 Dosya ekranı + strateji                                         STORY → INV_SABAH
 INV_SABAH Kavşak sabahı, direkte çiçekler                             STORY → INV_HUB
-INV_HUB Bölüm 2 · SORUŞTURMA (3 gün × 4 EP; Leyla günde bir, 0 EP)
+INV_HUB Bölüm 2 · SORUŞTURMA (4 gün × 4 EP; Leyla günde bir, 0 EP; + INV_T_HAS hastane, INV_AKSAM3 gece 01.11)
   Olay yeri: INV_ARAMA (polis fotoğrafları) · INV_ARAMA2 (kavşak bugün) · INV_ARAMA3 (yediemin otoparkı, araç)
   Kişiler: INV_GORUSME (Volkan, evde; fakta bağlı konular) · INV_T_NEC · INV_T_SER · INV_T_HAM · INV_T_SEV · INV_T_AYT
   Arşiv: INV_RAPOR · INV_TUTANAK · INV_OTOPSI · INV_BUFE · INV_SINYAL (belgeler) · INV_DIL (dilekçe) · INV_CIKARIM (tahta)
@@ -87,7 +88,7 @@ INV_GECE_* Duruşmadan önceki gece (koşullu hafıza zinciri) → INV_GECE (Vol
 H1_00K Koridor (Volkan "kabul edeceğim" der: seçim) → H1_00 açılış → H1_01 sanık savunması → H1_02Q sanığa sorular
 H1_03 katılan vekilinin sorusu (itiraz) → H1_04 Serkan'ın beyanı (seçim) → H1_05 Necati (N1–N5; bastır/sun/itiraz)
 H1_06 bilirkişi raporu (CMK 67/5 itirazı + talepler) → H1_07 ara karar (adli kontrol talebi) → ARA_GIRIS
-ARA_HUB Bölüm 4 · ARA (2 gün × 3 EP; yığınsız, doğrudan dönüş)
+ARA_HUB Bölüm 4 · ARA (2 gün × 4 EP; yığınsız, doğrudan dönüş; + ARA_NECATI, ARA_NALAN)
   ARA_EDR (belge) · ARA_HEYET (belge) · ARA_AYTEN · ARA_SANAYI · ARA_SUC · ARA_VOLKAN · ARA_SERKAN · ARA_HAMDI
   ARA_CIKARIM (ikinci tahta) · ARA_LEYLA
   ARA_DAY_END → ARA_AKSAM ; ARA_SON_* → ARA_SON (gece) → T_00K
@@ -97,7 +98,8 @@ T_07P dayanaklar → T_07 esas savunma → T_08 son söz → T_09 → R_KARAR (+
 T_COKUS (♥0) → T_09
 ```
 
-Celseler: `cs_1` (1. celse: açılış, sanık savunması, tanık, delil tartışması) ve `cs_2` (2. celse: tanıklar, bilirkişi,
+İlk celse (kimlik, iddianame, sorgu) oyundan önce baro avukatıyla yapılmıştır; oyundaki celseler `cs_2` (2. celse: açılış,
+savunmanın tamamlanması, tanık, delil tartışması) ve `cs_3` (3. celse: tanıklar, bilirkişi ve heyet başkanı,
 delil tartışması, mütalaa, savunma, son söz, karar). Mahkeme Bursa 7. Asliye Ceza (TCK 85/1 + 22/3'ün üst sınırı 9 yıl;
 ağır ceza değil), tek hâkim.
 
@@ -216,7 +218,7 @@ ile kısa bir sahne.
 "Yarın kabul edeceğim. Gül'e söylemeyin." Seçim: aramak ve konuşmak (doğru; karar onun ama bilgilendirilmiş olsun) / yazıp
 "sabah konuşuruz" / görmezden gelmek.
 
-### Bölüm 3 · BİRİNCİ CELSE (~2.400)
+### Bölüm 3 · İKİNCİ CELSE (2. celse, ~2.400; ayrıca H1_00B iddianame, H1_04V sanığın diyeceği, H1_05R kısa ara, H1_08 merdivenler)
 - H1_00K koridor: Volkan kararsız. Seçim: "Ne hatırlıyorsan onu söyle; bilmediğini bilmiyorum de" (doğru) / "Susma hakkını
   kullan" (meşru, nötr) / "Kabul et, indirim alırız" (yanlış: `kabul_tavsiye`; bu durumda H1_01'de Volkan kusurunu kabul
   eder; terditli yol kalır, beraat zorlaşır).
@@ -250,7 +252,7 @@ ile kısa bir sahne.
 - ARA_SON: gece; Deniz'in elindekiler; Leyla: "Yarın iki şey kanıtlayacaksın ya da bir şeyi şüpheye düşüreceksin. Hangisini
   seçtiğini bil."
 
-### Bölüm 5 · İKİNCİ CELSE (~2.500)
+### Bölüm 5 · ÜÇÜNCÜ CELSE (3. celse, ~2.500; ayrıca T_00Y sabah, T_00S sanığın diyeceği, T_05N heyet başkanı, T_09R cevaplar)
 - T_00K koridor: Gül bebek arabasıyla; Serkan uzakta. T_00 açılış: raporlar okunur; suç duyurusu dayanaklıysa savcı
   "Altın Başak Fırını'na ait panelvan ve sürücüsü Tarık Sezer hakkında ayrı soruşturma; araçta onarım ve boya eşleşmesi"
   bildirir (`ev_savcilik`).

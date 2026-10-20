@@ -297,7 +297,7 @@ export const investigation1: CasePart = {
           ],
           next: 'INV_SABAH3',
         }),
-        option('AK2_C', 'Annenize ben anlatayım; daha sakin olur.', {
+        option('AK2_C', 'Annenize ben anlatayım; bir yabancıdan duymak bazen daha kolay olur.', {
           effects: [dec('trust', 5)],
           bad: 'Müvekkilin sağlık bilgisi ve sırrı ona aittir; onun rızası olmadan ailesine bile açıklanamaz (Av.K. 36 sır saklama; KVKK özel nitelikli veri).',
           category: 'SAVUNMA_STRATEJISI',
@@ -695,7 +695,7 @@ export const investigation1: CasePart = {
           when: cmp(v('ders'), '==', 'hikaye'),
           lines: [
             th(
-              '“Tutarlılık bazen tek bir kişinin aceleciliğidir.” Savcının hikâyesini kimin yazdığını düşünüyorum: bir komiser yardımcısı, sabah altıda, bir kroki kalemiyle.',
+              '“Tutarlılık bazen tek bir kişinin aceleciliğidir.” Savcının hikâyesini kimin yazdığını düşünüyorum: bir komiser yardımcısı, sabah yedide, bir kroki kalemiyle.',
             ),
           ],
         },

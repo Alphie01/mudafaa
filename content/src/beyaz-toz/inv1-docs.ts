@@ -398,7 +398,7 @@ export const inv1Docs: CasePart = {
           lines: [
             card('ADLİYE · EMANET BÜROSU', 'adliye'),
             n(
-              'Emanet memuru kalın bir defteri açtı, parmağını satırların üstünde gezdirdi, bir naylon torba çıkardı. Torbanın içinde bir insanın sabah altıda cebinde taşıdığı her şey.',
+              'Emanet memuru kalın bir defteri açtı, parmağını satırların üstünde gezdirdi, bir naylon torba çıkardı. Torbanın içinde bir insanın sabah yedide cebinde taşıdığı her şey.',
             ),
             s('defne', 'Kaan’ın anahtarlığı bu. Liseden kalma bir kartal figürü var ucunda. Hâlâ taşıyormuş.'),
             th(

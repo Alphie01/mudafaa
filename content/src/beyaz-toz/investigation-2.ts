@@ -1153,7 +1153,7 @@ export const investigation2: CasePart = {
       ],
       prompt: 'Nöbetçi savcılık. Kim hakkında, hangi somut bilgiyle?',
       choices: [
-        option('SC_KIMLIK', 'Barış Demirel hakkında; kimlik, Bursa adresi ve kurye kayıtlarıyla suç duyurusu', {
+        option('SC_KIMLIK', 'Barış Demirel hakkında, kurye kayıtlarıyla suç duyurusu', {
           visibleWhen: any(has('ev_kurye'), flag('fact_soyad'), has('ded_demirel')),
           score: { USUL_BILGISI: 60 },
           effects: [raise('suc_duyurusu')],
@@ -1189,7 +1189,7 @@ export const investigation2: CasePart = {
           ],
           next: HUB,
         }),
-        option('SC_TOLGA', 'Tolga Kaplan hakkında iftira suçundan suç duyurusu', {
+        option('SC_TOLGA', 'Tolga Kaplan hakkında, Kaan’ı bile bile suçladığı için iftiradan suç duyurusu', {
           score: { USUL_BILGISI: -40 },
           bad: 'Muhbirin yalan söylediği henüz ispatlanmadı; erken bir iftira isnadı hem tanığı karşı tarafa iter hem de somut dayanak olmadığından geri teper. Çelişki önce duruşmada ortaya konur.',
           responses: [

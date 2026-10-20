@@ -312,7 +312,7 @@
           ]
         },
         {
-          "when": { "not": { "flag": "anne_kaan" } },
+          "when": { "not": { "any": [{ "flag": "kaan_riza" }, { "flag": "anne_kaan" }] } },
           "lines": [
             {
               "speaker": "narrator",
@@ -321,7 +321,7 @@
           ]
         },
         {
-          "when": { "flag": "anne_kaan" },
+          "when": { "any": [{ "flag": "kaan_riza" }, { "flag": "anne_kaan" }] },
           "lines": [
             {
               "speaker": "narrator",
@@ -556,7 +556,6 @@
           "when": {
             "all": [
               { "flag": "key_excluded" },
-              { "not": { "flag": "contra_s2" } },
               {
                 "not": {
                   "any": [
@@ -569,26 +568,48 @@
               }
             ]
           },
-          "text": "Arka oda materyali hükme esas alınmamış olsa da, kolluk tanığının anlatımına göre sanığın kullanımındaki dairede satış yapıldığına ilişkin muhbir beyanı, sanığın telefonundaki “2 tane” yazışmasıyla desteklenmektedir."
+          "text": "Arka oda materyali hükme esas alınmamış olsa da, muhbir tanığın sanıktan paket aldığına ilişkin beyanı, heyetçe sanığın telefonundaki “2 tane” yazışmasıyla desteklenmiş sayılmıştır."
         },
         {
           "when": {
-            "any": [
-              { "flag": "contra_t3" },
-              { "flag": "contra_t4" },
-              { "flag": "contra_t5" },
-              { "flag": "tolga_kirildi" }
+            "all": [
+              { "any": [{ "flag": "contra_t3" }, { "flag": "contra_t4" }, { "flag": "contra_t5" }] },
+              { "not": { "flag": "tolga_kirildi" } }
             ]
           },
-          "text": "Muhbir tanığın anlatımındaki çelişkiler kayda geçmiştir; heyet bu beyanı tek başına değil, dosyadaki diğer delillerle birlikte değerlendirmiştir."
+          "text": "Muhbir tanığın kask ve saat ayrıntılarındaki çelişkileri kayda geçmiştir. Heyet bunları gece yarısı alınan ifadenin çevresel ayrıntıları saymış, tanığın satışın Daire 7’de yapıldığı yönündeki çekirdek beyanını inandırıcı bulmuştur (CMK 217)."
         },
         {
-          "when": { "all": [{ "flag": "contra_s2" }, { "not": { "flag": "cokus" } }] },
+          "when": { "flag": "tolga_kirildi" },
+          "text": "Muhbir tanık duruşmada önceki beyanından dönmüştür; heyet, aynı tanığın birbiriyle çelişen iki beyanından hiçbirini tek başına hükme esas almamıştır."
+        },
+        {
+          "when": {
+            "all": [
+              { "flag": "key_excluded" },
+              {
+                "any": [
+                  { "flag": "contra_t3" },
+                  { "flag": "contra_t4" },
+                  { "flag": "contra_t5" },
+                  { "flag": "tolga_kirildi" }
+                ]
+              }
+            ]
+          },
+          "text": "Heyet, sanığın “2 tane” yazışmasını ve kavanozdaki izini dairedeki madde trafiğine katıldığının göstergesi saymış; savunmanın bu iki delile ilişkin açıklamasını yeterli bulmamıştır (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir."
+        },
+        {
+          "when": { "flag": "contra_s2" },
           "text": "Arama tutanağındaki eksiklikler kayda geçmiştir; deliller bir bütün olarak değerlendirildiğinde heyet, ticaret fiilinin sanık tarafından işlendiği kanaatine varmıştır (CMK 217)."
         },
         {
-          "when": { "flag": "cokus" },
+          "when": { "all": [{ "flag": "cokus" }, { "not": { "flag": "contra_s2" } }] },
           "text": "Savunmanın duruşmada sunduğu belgeler ileri sürdüğü çelişkileri göstermemiş; heyet delilleri iddianamedeki anlatım doğrultusunda değerlendirmiştir (CMK 217)."
+        },
+        {
+          "when": { "all": [{ "flag": "cokus" }, { "flag": "contra_s2" }] },
+          "text": "Savunma, duruşmanın sonunda tanığa ilgisiz belgeler sunarak kendi anlatımını zayıflatmıştır; heyet savunmanın dayanaksız kalan iddialarına itibar etmemiştir."
         }
       ],
       "legalBasis": "TCK 188/3, 188/4-a, 52, 53, 54, 62/1; CMK 273/1",
@@ -636,6 +657,24 @@
             {
               "speaker": "leyla",
               "text": "İstinaf var. İki hafta. Bu gece ağla, yarın yaz. Dosya bitmedi; sadece bir celse bitti."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "not": { "flag": "cokus" } }, { "ref": "beraat_e" }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Tutanağı oku, Deniz. Kilit orada, kroki orada, şekerlik orada, muhbirin çelişkisi orada. Heyet hepsini yazmış; sonra “takdiren” deyip üstünden geçmiş."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Böyle bir gerekçe istinafta zor ayakta durur. Ama sen de dağınıktın: yanlış kapılar, boş itirazlar, savrulan kartlar. Dağınık bir savunma, sağlam bir kaydı bile bulanıklaştırır."
+            },
+            {
+              "speaker": "player",
+              "text": "Bütün parçalar elimdeydi. Onları bir hikâyeye değil, bir yığına çevirdim. İstinaf dilekçesinin ilk cümlesi belli: kayıt.",
+              "style": "thought"
             }
           ]
         }

@@ -102,7 +102,7 @@ export const hearing1: CasePart = {
           ],
           next: 'H1_00',
         }),
-        option('K_C', 'Mahkemede kullandığını söylemek istiyorsan, ilk sen söyle. Kimse senden önce söylemesin.', {
+        option('K_C', 'Kullandığını söyleyeceksen, ilk sen söyle.', {
           visibleWhen: flag('kaan_riza'),
           effects: [inc('trust', 6)],
           responses: [

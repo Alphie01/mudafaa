@@ -454,20 +454,32 @@ export const outcomes: CasePart = {
           not(muhbirSarsildi),
         ),
         because(
-          'Arka oda materyali hükme esas alınmamış olsa da, kolluk tanığının anlatımına göre sanığın kullanımındaki dairede satış yapıldığına ilişkin muhbir beyanı, sanığın telefonundaki “2 tane” yazışmasıyla desteklenmektedir.',
-          all(flag('key_excluded'), not(flag('contra_s2')), not(muhbirSarsildi)),
+          'Arka oda materyali hükme esas alınmamış olsa da, muhbir tanığın sanıktan paket aldığına ilişkin beyanı, heyetçe sanığın telefonundaki “2 tane” yazışmasıyla desteklenmiş sayılmıştır.',
+          all(flag('key_excluded'), not(muhbirSarsildi)),
         ),
         because(
-          'Muhbir tanığın anlatımındaki çelişkiler kayda geçmiştir; heyet bu beyanı tek başına değil, dosyadaki diğer delillerle birlikte değerlendirmiştir.',
-          muhbirSarsildi,
+          'Muhbir tanığın kask ve saat ayrıntılarındaki çelişkileri kayda geçmiştir. Heyet bunları gece yarısı alınan ifadenin çevresel ayrıntıları saymış, tanığın satışın Daire 7’de yapıldığı yönündeki çekirdek beyanını inandırıcı bulmuştur (CMK 217).',
+          all(any(flag('contra_t3'), flag('contra_t4'), flag('contra_t5')), not(flag('tolga_kirildi'))),
+        ),
+        because(
+          'Muhbir tanık duruşmada önceki beyanından dönmüştür; heyet, aynı tanığın birbiriyle çelişen iki beyanından hiçbirini tek başına hükme esas almamıştır.',
+          flag('tolga_kirildi'),
+        ),
+        because(
+          'Heyet, sanığın “2 tane” yazışmasını ve kavanozdaki izini dairedeki madde trafiğine katıldığının göstergesi saymış; savunmanın bu iki delile ilişkin açıklamasını yeterli bulmamıştır (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir.',
+          all(flag('key_excluded'), muhbirSarsildi),
         ),
         because(
           'Arama tutanağındaki eksiklikler kayda geçmiştir; deliller bir bütün olarak değerlendirildiğinde heyet, ticaret fiilinin sanık tarafından işlendiği kanaatine varmıştır (CMK 217).',
-          all(flag('contra_s2'), not(flag('cokus'))),
+          flag('contra_s2'),
         ),
         because(
           'Savunmanın duruşmada sunduğu belgeler ileri sürdüğü çelişkileri göstermemiş; heyet delilleri iddianamedeki anlatım doğrultusunda değerlendirmiştir (CMK 217).',
-          flag('cokus'),
+          all(flag('cokus'), not(flag('contra_s2'))),
+        ),
+        because(
+          'Savunma, duruşmanın sonunda tanığa ilgisiz belgeler sunarak kendi anlatımını zayıflatmıştır; heyet savunmanın dayanaksız kalan iddialarına itibar etmemiştir.',
+          all(flag('cokus'), flag('contra_s2')),
         ),
       ],
       legalBasis: 'TCK 188/3, 188/4-a, 52, 53, 54, 62/1; CMK 273/1',
@@ -497,6 +509,22 @@ export const outcomes: CasePart = {
             ),
             card('ARSLAN HUKUK — O GECE', 'buro_gece'),
             s('leyla', 'İstinaf var. İki hafta. Bu gece ağla, yarın yaz. Dosya bitmedi; sadece bir celse bitti.'),
+          ],
+        },
+        {
+          when: all(not(flag('cokus')), ref('beraat_e')),
+          lines: [
+            s(
+              'leyla',
+              'Tutanağı oku, Deniz. Kilit orada, kroki orada, şekerlik orada, muhbirin çelişkisi orada. Heyet hepsini yazmış; sonra “takdiren” deyip üstünden geçmiş.',
+            ),
+            s(
+              'leyla',
+              'Böyle bir gerekçe istinafta zor ayakta durur. Ama sen de dağınıktın: yanlış kapılar, boş itirazlar, savrulan kartlar. Dağınık bir savunma, sağlam bir kaydı bile bulanıklaştırır.',
+            ),
+            th(
+              'Bütün parçalar elimdeydi. Onları bir hikâyeye değil, bir yığına çevirdim. İstinaf dilekçesinin ilk cümlesi belli: kayıt.',
+            ),
           ],
         },
       ],

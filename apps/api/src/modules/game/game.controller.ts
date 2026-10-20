@@ -13,6 +13,7 @@ import { z } from 'zod';
 import { ZodValidationPipe } from '../../common/zod.pipe.js';
 import { PrismaService } from '../../database/prisma.service.js';
 import { type AuthUser, CurrentUser, Public } from '../auth/decorators.js';
+import { AuthCache } from '../auth/auth-cache.js';
 import { FirebaseService } from '../auth/firebase.service.js';
 import { GameService } from './game.service.js';
 
@@ -25,6 +26,7 @@ export class GameController {
     private readonly game: GameService,
     private readonly prisma: PrismaService,
     private readonly firebase: FirebaseService,
+    private readonly authCache: AuthCache,
   ) {}
 
   @Get('me')
@@ -44,6 +46,7 @@ export class GameController {
   @HttpCode(204)
   async deleteMe(@CurrentUser() user: AuthUser): Promise<void> {
     await this.prisma.user.delete({ where: { id: user.id } });
+    this.authCache.evict(user.firebaseUid);
     await this.firebase.deleteUser(user.firebaseUid);
   }
 

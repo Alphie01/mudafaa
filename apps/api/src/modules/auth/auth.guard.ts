@@ -1,9 +1,9 @@
 import { type CanActivate, type ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import type { Request } from 'express';
-import { LRUCache } from 'lru-cache';
 import { ApiError } from '../../common/api-error.js';
 import { UsersService } from '../users/users.service.js';
+import { AuthCache } from './auth-cache.js';
 import { type AuthUser, IS_PUBLIC, ROLES } from './decorators.js';
 import { FirebaseService } from './firebase.service.js';
 
@@ -13,17 +13,12 @@ import { FirebaseService } from './firebase.service.js';
  */
 @Injectable()
 export class AuthGuard implements CanActivate {
-  private readonly cache = new LRUCache<string, AuthUser>({ max: 10_000, ttl: 60_000 });
-
   constructor(
+    private readonly cache: AuthCache,
     private readonly reflector: Reflector,
     private readonly firebase: FirebaseService,
     private readonly users: UsersService,
   ) {}
-
-  evict(uid: string): void {
-    this.cache.delete(uid);
-  }
 
   async canActivate(ctx: ExecutionContext): Promise<boolean> {
     const targets = [ctx.getHandler(), ctx.getClass()];
@@ -35,11 +30,11 @@ export class AuthGuard implements CanActivate {
     let user: AuthUser | undefined;
     try {
       const decoded = await this.firebase.verify(token, false);
-      user = this.cache.get(decoded.uid);
+      user = this.cache.users.get(decoded.uid);
       if (user === undefined) {
         const checked = await this.firebase.verify(token, true);
         user = await this.users.upsertFromToken(checked);
-        this.cache.set(checked.uid, user);
+        this.cache.users.set(checked.uid, user);
       }
     } catch (e) {
       if (e instanceof ApiError) throw e;

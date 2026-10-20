@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { UserThrottlerGuard } from '../../common/user-throttler.guard.js';
+import { AuthCache } from '../auth/auth-cache.js';
 import { AuthGuard } from '../auth/auth.guard.js';
 import { FirebaseService } from '../auth/firebase.service.js';
 import { AssetsController } from '../content/assets.controller.js';
@@ -15,6 +16,7 @@ import { GameService } from './game.service.js';
 @Module({
   controllers: [GameController, AssetsController],
   providers: [
+    AuthCache,
     FirebaseService,
     UsersService,
     AssetStore,

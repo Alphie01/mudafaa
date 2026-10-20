@@ -521,7 +521,7 @@
             },
             {
               "speaker": "nevzat",
-              "text": "Celse açıldı. Sanık Kerem Aydın bağsız olarak alındı. Müdafii Av. Deniz Arslan hazır. Tanıklar salondan çıkarıldı."
+              "text": "Celse açıldı. Heyet: Başkan Nevzat Ural, üyeler Ayşe Demir ve Orhan Tekin. Sanık Kerem Aydın bağsız olarak alındı. Müdafii Av. Deniz Arslan hazır. Tanıklar salondan çıkarıldı."
             },
             {
               "speaker": "nevzat",
@@ -563,7 +563,7 @@
             },
             {
               "speaker": "nevzat",
-              "text": "Celse açıldı. Sanık Kerem Aydın bağsız olarak alındı. Müdafii Av. Deniz Arslan hazır. Tanıklar salondan çıkarıldı."
+              "text": "Celse açıldı. Heyet: Başkan Nevzat Ural, üyeler Ayşe Demir ve Orhan Tekin. Sanık Kerem Aydın bağsız olarak alındı. Müdafii Av. Deniz Arslan hazır. Tanıklar salondan çıkarıldı."
             },
             {
               "speaker": "nevzat",
@@ -2706,6 +2706,50 @@
           ]
         },
         {
+          "id": "PS_S2_MON",
+          "kind": "PRESENT",
+          "match": {
+            "statement": "S2",
+            "evidence": ["clue_monitor"]
+          },
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "SORGULAMA",
+              "amount": 100
+            },
+            {
+              "type": "MARK",
+              "quality": "NEUTRAL",
+              "feedback": "Kısmi: kulübenin monitörleri arka sokağı göstermiyor; tanığın gördüğünü yalnızca yürüyerek görmüş olabileceği tutanağa geçti. Işık sorusu açık kaldı.",
+              "category": "SORGULAMA"
+            }
+          ],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, ana kapı kulübesindeki dört monitörün hiçbiri arka sokağı göstermiyor. Depo 3 kamerası da o gece kördü."
+                },
+                {
+                  "speaker": "selin",
+                  "text": "Ben monitörden görmedim ki. Oradaydım. Yürüyerek."
+                },
+                {
+                  "speaker": "ayse",
+                  "text": "Not edildi. Tanık, olayı kulübeden değil, yerinde gördüğünü söylüyor."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir kapıyı kapattım; tanık öbür kapıdan çıktı. Lambayı göstermeden bu cümle yıkılmaz.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PR_S3A",
           "kind": "PRESS",
           "match": {
@@ -3345,7 +3389,7 @@
           "id": "PS_SAVCILIK",
           "kind": "PRESENT",
           "match": {
-            "evidence": ["ev_anahtar", "ev_parmak_izi_raporu"]
+            "evidence": ["ev_anahtar", "ev_parmak_izi_raporu", "ev_kerem_kolluk"]
           },
           "maxUses": 10,
           "effects": [

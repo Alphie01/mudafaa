@@ -242,6 +242,110 @@
             },
             {
               "speaker": "narrator",
+              "text": "Avlu bir an dondu. Herkes bir şeye bakıyordu; kimse aynı şeye değil."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "PR01_CANTA",
+          "kind": "OPTION",
+          "label": "Çamurdaki çantaya bak",
+          "next": "PR_01B",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Çanta çamurun içinde açık duruyordu. Bir termos, bir ekmek arası, bir okul defteri. Defterin kapağında, çocuk yazısıyla: “Annemin hesapları.”"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kimse defteri almadı. Kimse sormadı. Yağmur kapağın köşesini yumuşatmaya başlamıştı."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "VAR",
+              "var": "pr_bakis",
+              "op": "set",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "PR01_KAGIT",
+          "kind": "OPTION",
+          "label": "Komiserin kâğıdına bak",
+          "next": "PR_01B",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Komiser dizinin üstünde yazıyordu. Kâğıtta “teslim alındı” yazıyordu; “arandı” yazmıyordu. Kimin aradığı da yazmıyordu."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kalemin ucu bir an boşlukta durdu. Sonra devam etti. Boşluk kâğıtta kaldı."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "VAR",
+              "var": "pr_bakis",
+              "op": "set",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "id": "PR01_KALABALIK",
+          "kind": "OPTION",
+          "label": "Kalabalığın yüzlerine bak",
+          "next": "PR_01B",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Turuncu montlar. Islak saçlar. Sigaralar, eller cepte. Herkes Kerem’e bakıyordu; bakmayanlar da birbirine bakmamaya çalışıyordu."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kırk kişi aynı montu giyiyordu. Avluda kırk turuncu leke, yağmurun altında aynı renge bürünmüştü."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "VAR",
+              "var": "pr_bakis",
+              "op": "set",
+              "value": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "PR_01B",
+      "type": "STORY",
+      "title": "Karakol",
+      "eyebrow": "DAVA #07 · SOĞUK AÇILIŞ",
+      "chapter": "Soğuk Açılış",
+      "background": "karakol",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
               "text": "KARAKOL · 09.30",
               "bg": "karakol",
               "style": "card"
@@ -1132,7 +1236,211 @@
             },
             {
               "speaker": "narrator",
-              "text": "14 numaralı direğin ampulü yanıyordu. Yeni takılmış; camı pırıl pırıl. Altındaki kaldırımda belediyenin bıraktığı bir karton kutu, ıslanmış."
+              "text": "14 numaralı direğin ampulü yanıyordu. Onarılmış; camı yeniden tozlanmaya başlamış. Aylar önce birinin işine gelen karanlık, şimdi kimsenin aklında değil."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir lamba onarılınca, bozuk olduğu günler de silinir mi? Fotoğraflar silmez. Kayıtlar silmez. Ama insanlar siler.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Depo 3’ün arka kapısı yeni bir asma kilitle kilitliydi. Kapının önündeki çamur kurumuş, çatlamıştı. Kimse oraya basmamıştı aylardır."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sokağın öbür ucunda, depoların arasında bir kulübenin bacasından duman çıkıyordu. Çay ocağı. Buğulu camın ardında bir gölge gidip geliyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ana kapıdaki güvenlik kulübesinin camında sabah vardiyasının yüzü vardı. Selin değildi. Monitörlerin mavi ışığı adamın yüzüne vuruyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Ana kapıdan arka sokağa baktım. Görmüyordum. Depo 3’ün duvarı araya giriyordu. Bunu bir yere yazdım ve altını çizdim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kaldırımda bir izmarit, yağmurdan şişmiş. Bugünün izmariti; o gecenin değil. Olay yeri artık bir olay yeri değildi. Sadece bir sokaktı."
+            },
+            {
+              "speaker": "player",
+              "text": "Benim olay yerim artık başka yerde: fotoğraflarda, emanette, bir cezaevinin görüş odasında, bir çay ocağında. Dört günüm, günde dört adımım var.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Dün gece klasördeki fotoğraflardan biri aklımdan çıkmadı: çamurda açık kalmış bir çanta, kenarında bir okul defteri. Kimse defteri fotoğraflamak için eğilmemiş.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın notu cebimde: “Okumadığın her sayfa, birinin bir günüdür.” Bu sefer her sayfayı okuyacağım.",
+              "style": "thought"
+            }
+          ],
+          "when": {
+            "cmp": [
+              {
+                "var": "pr_bakis"
+              },
+              "==",
+              1
+            ]
+          }
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 06.50 — NİLÜFER, DEPO SOKAĞI",
+              "bg": "sokak_sabah",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sabahın ilk otobüsüyle geldim. Sokak, fotoğraflardakinden daha dar, daha kısaydı. Gece yağmuru asfaltta ince bir film bırakmıştı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "14 numaralı direğin ampulü yanıyordu. Onarılmış; camı yeniden tozlanmaya başlamış. Aylar önce birinin işine gelen karanlık, şimdi kimsenin aklında değil."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir lamba onarılınca, bozuk olduğu günler de silinir mi? Fotoğraflar silmez. Kayıtlar silmez. Ama insanlar siler.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Depo 3’ün arka kapısı yeni bir asma kilitle kilitliydi. Kapının önündeki çamur kurumuş, çatlamıştı. Kimse oraya basmamıştı aylardır."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sokağın öbür ucunda, depoların arasında bir kulübenin bacasından duman çıkıyordu. Çay ocağı. Buğulu camın ardında bir gölge gidip geliyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ana kapıdaki güvenlik kulübesinin camında sabah vardiyasının yüzü vardı. Selin değildi. Monitörlerin mavi ışığı adamın yüzüne vuruyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Ana kapıdan arka sokağa baktım. Görmüyordum. Depo 3’ün duvarı araya giriyordu. Bunu bir yere yazdım ve altını çizdim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kaldırımda bir izmarit, yağmurdan şişmiş. Bugünün izmariti; o gecenin değil. Olay yeri artık bir olay yeri değildi. Sadece bir sokaktı."
+            },
+            {
+              "speaker": "player",
+              "text": "Benim olay yerim artık başka yerde: fotoğraflarda, emanette, bir cezaevinin görüş odasında, bir çay ocağında. Dört günüm, günde dört adımım var.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Teslim tutanağını dün gece üç kez okudum. “Teslim alındı.” Kim aradı, kim çıkardı; tek kelime yok. Bir tutanağın boşlukları da bir şey söyler.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın notu cebimde: “Okumadığın her sayfa, birinin bir günüdür.” Bu sefer her sayfayı okuyacağım.",
+              "style": "thought"
+            }
+          ],
+          "when": {
+            "cmp": [
+              {
+                "var": "pr_bakis"
+              },
+              "==",
+              2
+            ]
+          }
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 06.50 — NİLÜFER, DEPO SOKAĞI",
+              "bg": "sokak_sabah",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sabahın ilk otobüsüyle geldim. Sokak, fotoğraflardakinden daha dar, daha kısaydı. Gece yağmuru asfaltta ince bir film bırakmıştı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "14 numaralı direğin ampulü yanıyordu. Onarılmış; camı yeniden tozlanmaya başlamış. Aylar önce birinin işine gelen karanlık, şimdi kimsenin aklında değil."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir lamba onarılınca, bozuk olduğu günler de silinir mi? Fotoğraflar silmez. Kayıtlar silmez. Ama insanlar siler.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Depo 3’ün arka kapısı yeni bir asma kilitle kilitliydi. Kapının önündeki çamur kurumuş, çatlamıştı. Kimse oraya basmamıştı aylardır."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sokağın öbür ucunda, depoların arasında bir kulübenin bacasından duman çıkıyordu. Çay ocağı. Buğulu camın ardında bir gölge gidip geliyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ana kapıdaki güvenlik kulübesinin camında sabah vardiyasının yüzü vardı. Selin değildi. Monitörlerin mavi ışığı adamın yüzüne vuruyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Ana kapıdan arka sokağa baktım. Görmüyordum. Depo 3’ün duvarı araya giriyordu. Bunu bir yere yazdım ve altını çizdim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kaldırımda bir izmarit, yağmurdan şişmiş. Bugünün izmariti; o gecenin değil. Olay yeri artık bir olay yeri değildi. Sadece bir sokaktı."
+            },
+            {
+              "speaker": "player",
+              "text": "Benim olay yerim artık başka yerde: fotoğraflarda, emanette, bir cezaevinin görüş odasında, bir çay ocağında. Dört günüm, günde dört adımım var.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Avlu fotoğraflarında kırk turuncu mont. Kırk kişi aynı rengi giymiş. Bir teşhis bir renge dayanıyorsa, kırk kişiye dayanıyor demektir.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın notu cebimde: “Okumadığın her sayfa, birinin bir günüdür.” Bu sefer her sayfayı okuyacağım.",
+              "style": "thought"
+            }
+          ],
+          "when": {
+            "cmp": [
+              {
+                "var": "pr_bakis"
+              },
+              "==",
+              3
+            ]
+          }
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 06.50 — NİLÜFER, DEPO SOKAĞI",
+              "bg": "sokak_sabah",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sabahın ilk otobüsüyle geldim. Sokak, fotoğraflardakinden daha dar, daha kısaydı. Gece yağmuru asfaltta ince bir film bırakmıştı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "14 numaralı direğin ampulü yanıyordu. Onarılmış; camı yeniden tozlanmaya başlamış. Aylar önce birinin işine gelen karanlık, şimdi kimsenin aklında değil."
             },
             {
               "speaker": "player",

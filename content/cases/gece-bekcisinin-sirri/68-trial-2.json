@@ -705,14 +705,35 @@
               ],
               "else": [
                 {
-                  "type": "SCORE",
-                  "category": "USUL_BILGISI",
-                  "amount": 25
-                },
-                {
-                  "type": "MARK",
-                  "quality": "NEUTRAL",
-                  "feedback": "İtiraz yerinde ama ruloyu incelemediğin için cevabın eksik kaldı."
+                  "type": "IF",
+                  "when": {
+                    "hasEvidence": "clue_kasa_saat"
+                  },
+                  "then": [
+                    {
+                      "type": "SCORE",
+                      "category": "USUL_BILGISI",
+                      "amount": 50
+                    },
+                    {
+                      "type": "MARK",
+                      "quality": "GOOD",
+                      "feedback": "Kasanın saati doğru; fiş o saatte kesilmiş. Rulo sırası da gösterilseydi soru tamamen kapanırdı.",
+                      "category": "USUL_BILGISI"
+                    }
+                  ],
+                  "else": [
+                    {
+                      "type": "SCORE",
+                      "category": "USUL_BILGISI",
+                      "amount": 25
+                    },
+                    {
+                      "type": "MARK",
+                      "quality": "NEUTRAL",
+                      "feedback": "İtiraz yerinde ama ruloyu incelemediğin için cevabın eksik kaldı."
+                    }
+                  ]
                 }
               ]
             }
@@ -734,6 +755,38 @@
                 {
                   "speaker": "huseyin",
                   "text": "Kırk yıldır kimse bana yalancı demedi savcı bey. Bugün de diyemezsin."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Hüseyin ruloyu poşetine geri koydu, ağzını düğümledi. Elleri artık titremiyordu."
+                }
+              ]
+            },
+            {
+              "when": {
+                "all": [
+                  {
+                    "not": {
+                      "hasEvidence": "clue_rulo_sira"
+                    }
+                  },
+                  {
+                    "hasEvidence": "clue_kasa_saat"
+                  }
+                ]
+              },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İtiraz ediyorum Sayın Başkan. Yakınlık bir tanığı yalancı yapmaz. Çay ocağındaki yazar kasanın saatini kendim karşılaştırdım: dakikası dakikasına doğru. Fişi kasa keser, tanık değil."
+                },
+                {
+                  "speaker": "nevzat",
+                  "text": "Not edildi. Kasa saatinin doğruluğu tutanağa geçsin. Savcım, devam edin."
+                },
+                {
+                  "speaker": "huseyin",
+                  "text": "Kasa yalan söylemez savcı bey. Ben söylesem bile kasa söylemez."
                 },
                 {
                   "speaker": "narrator",
@@ -4289,6 +4342,10 @@
               "text": "Heyet geliyor! Ayağa kalkın!"
             },
             {
+              "speaker": "narrator",
+              "text": "Üç hâkim yerlerine oturdu: Nevzat Ural ortada, Ayşe Demir solunda, Orhan Tekin sağında. Kimse kimseye bakmadı."
+            },
+            {
               "speaker": "nevzat",
               "text": "Hüküm fıkrası ayakta dinlenir."
             }
@@ -4317,6 +4374,10 @@
             {
               "speaker": "riza",
               "text": "Heyet geliyor! Ayağa kalkın!"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Üç hâkim yerlerine oturdu: Nevzat Ural ortada, Ayşe Demir solunda, Orhan Tekin sağında. Kimse kimseye bakmadı."
             },
             {
               "speaker": "nevzat",

@@ -2733,13 +2733,13 @@
             {
               "type": "SCORE",
               "category": "SORGULAMA",
-              "amount": -20
+              "amount": -30
             },
             {
               "type": "VAR",
               "var": "trust",
               "op": "dec",
-              "value": 3
+              "value": 2
             },
             {
               "type": "MARK",
@@ -3294,7 +3294,8 @@
         "clue_dvr_onaysiz",
         "clue_rulo_sira",
         "clue_monitor",
-        "clue_tur_kaydi"
+        "clue_tur_kaydi",
+        "ev_isg_zimmet"
       ],
       "choices": [
         {
@@ -3589,6 +3590,98 @@
                 {
                   "speaker": "player",
                   "text": "Saat başı tur yazan bir defter ve gece yarısına yarım saat kala klavyede bir kullanıcı kodu. Biri devriyedeyken öbürü kulübede olamaz.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CB_IZ2",
+          "kind": "COMBINE",
+          "match": {
+            "a": "clue_iz42",
+            "b": "ev_isg_zimmet"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": {
+                "not": {
+                  "hasEvidence": "ded_iz_murat"
+                }
+              },
+              "then": [
+                {
+                  "type": "DISCOVER",
+                  "evidence": "ded_iz_murat"
+                },
+                {
+                  "type": "SCORE",
+                  "category": "DELIL_ANALIZI",
+                  "amount": 300
+                }
+              ]
+            }
+          ],
+          "feedback": {
+            "title": "İz Murat Koç’a ait olabilir",
+            "text": "Depo 3’ün çalışanı 42 numara giyiyor; Kerem 39. Yeni şüpheli!",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Zimmet listesinde iki satır: Murat Koç 42, Kerem Aydın 39. Çamurdaki iz 28,5 santim. Bir liste, bir fotoğraf; bir numara.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CB_IZ3",
+          "kind": "COMBINE",
+          "match": {
+            "a": "clue_iz42",
+            "b": "clue_yeni_bot"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": {
+                "not": {
+                  "hasEvidence": "ded_iz_murat"
+                }
+              },
+              "then": [
+                {
+                  "type": "DISCOVER",
+                  "evidence": "ded_iz_murat"
+                },
+                {
+                  "type": "SCORE",
+                  "category": "DELIL_ANALIZI",
+                  "amount": 300
+                }
+              ]
+            }
+          ],
+          "feedback": {
+            "title": "İz Murat Koç’a ait olabilir",
+            "text": "Depo 3’ün çalışanı 42 numara giyiyor; Kerem 39. Yeni şüpheli!",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Dolapta etiketi sökülmemiş yeni bir 42 numara bot. Eskisi yok. Çamurda 42 numara bir iz. İnsan eski botunu, çamuru yüzünden atar.",
                   "style": "thought"
                 }
               ]
@@ -6989,7 +7082,7 @@
             },
             {
               "speaker": "leyla",
-              "text": "Son gün. Delil dilekçesi bugün verilmezse duruşmada istediğin her şey “geç” diye reddedilebilir. Beş günden az kalırsa kapı kapanır."
+              "text": "Son gün. Dilekçeyi bugün verirsen mahkeme duruşmadan önce celbeder. Duruşmada da isteyebilirsin; ama o zaman erteleme ister, gerekçe ister, sabır ister."
             },
             {
               "speaker": "leyla",
@@ -7352,6 +7445,20 @@
       "source": {
         "type": "RULE",
         "id": "CB_KULUBE3"
+      }
+    },
+    {
+      "evidence": "ded_iz_murat",
+      "source": {
+        "type": "RULE",
+        "id": "CB_IZ2"
+      }
+    },
+    {
+      "evidence": "ded_iz_murat",
+      "source": {
+        "type": "RULE",
+        "id": "CB_IZ3"
       }
     }
   ]

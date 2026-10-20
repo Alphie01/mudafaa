@@ -2070,6 +2070,15 @@
                   "speaker": "player",
                   "text": "Bir el, bir omuz, bir teşekkür. Murat o sabah bir hırsızlığı değil, bir çocuğun güvenini çalmıştı.",
                   "style": "thought"
+                },
+                {
+                  "speaker": "kerem",
+                  "text": "Bir de… koğuştaki o yeni adam var ya, Murat abiyi soran. Ali Bey ertesi sabah onu başka koğuşa aldırdı. Giderken kulağıma “Ziya abinin selamı var” dedi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Ziya’nın selamı. Bir tehdit, bir koğuş kapısından geçebiliyorsa, bir hafta çok uzun bir süre. Notuma yazdım: savcılığa, tehdit tutanağına ek.",
+                  "style": "thought"
                 }
               ]
             }
@@ -3570,7 +3579,8 @@
         "clue_defter",
         "clue_yuzuk",
         "clue_ekip",
-        "ev_hts"
+        "ev_hts",
+        "ev_isg_zimmet"
       ],
       "choices": [
         {
@@ -4093,6 +4103,98 @@
           ]
         },
         {
+          "id": "CB2_IZ2",
+          "kind": "COMBINE",
+          "match": {
+            "a": "clue_iz42",
+            "b": "ev_isg_zimmet"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": {
+                "not": {
+                  "hasEvidence": "ded_iz_murat"
+                }
+              },
+              "then": [
+                {
+                  "type": "DISCOVER",
+                  "evidence": "ded_iz_murat"
+                },
+                {
+                  "type": "SCORE",
+                  "category": "DELIL_ANALIZI",
+                  "amount": 300
+                }
+              ]
+            }
+          ],
+          "feedback": {
+            "title": "İz Murat Koç’a ait olabilir",
+            "text": "Depo 3’ün çalışanı 42 numara giyiyor; Kerem 39. Yeni şüpheli!",
+            "label": "TAHTADA · ÇIKARIM",
+            "tone": "success"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Zimmet listesinde iki satır: Murat Koç 42, Kerem Aydın 39. Çamurdaki iz 28,5 santim. Bir liste, bir fotoğraf; bir numara.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CB2_IZ3",
+          "kind": "COMBINE",
+          "match": {
+            "a": "clue_iz42",
+            "b": "clue_yeni_bot"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": {
+                "not": {
+                  "hasEvidence": "ded_iz_murat"
+                }
+              },
+              "then": [
+                {
+                  "type": "DISCOVER",
+                  "evidence": "ded_iz_murat"
+                },
+                {
+                  "type": "SCORE",
+                  "category": "DELIL_ANALIZI",
+                  "amount": 300
+                }
+              ]
+            }
+          ],
+          "feedback": {
+            "title": "İz Murat Koç’a ait olabilir",
+            "text": "Depo 3’ün çalışanı 42 numara giyiyor; Kerem 39. Yeni şüpheli!",
+            "label": "TAHTADA · ÇIKARIM",
+            "tone": "success"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Dolapta etiketi sökülmemiş yeni bir 42 numara bot. Eskisi yok. Çamurda 42 numara bir iz. İnsan eski botunu, çamuru yüzünden atar.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "FB_ARA_CIKARIM",
           "kind": "FALLBACK",
           "fallbackFor": "COMBINE",
@@ -4480,13 +4582,6 @@
       }
     },
     {
-      "evidence": "clue_yuzuk",
-      "source": {
-        "type": "CHOICE",
-        "id": "ASEL_B"
-      }
-    },
-    {
       "evidence": "clue_yusuf_arama",
       "source": {
         "type": "CHOICE",
@@ -4625,6 +4720,20 @@
       "source": {
         "type": "RULE",
         "id": "CB2_NISAN"
+      }
+    },
+    {
+      "evidence": "ded_iz_murat",
+      "source": {
+        "type": "RULE",
+        "id": "CB2_IZ2"
+      }
+    },
+    {
+      "evidence": "ded_iz_murat",
+      "source": {
+        "type": "RULE",
+        "id": "CB2_IZ3"
       }
     }
   ]

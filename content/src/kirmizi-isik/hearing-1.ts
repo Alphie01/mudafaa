@@ -5,7 +5,6 @@ import {
   all,
   any,
   choiceNode,
-  cmp,
   cont,
   courtSession,
   decisionNode,

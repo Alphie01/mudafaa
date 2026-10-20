@@ -64,10 +64,12 @@ class HomeScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 14),
                   Row(children: [
-                    const Expanded(flex: 3, child: MotionToggle()),
+                    const Expanded(child: MotionToggle(fontSize: 12)),
                     const SizedBox(width: 10),
-                    Expanded(flex: 2, child: PxButton(label: 'Çıkış', tone: PxTone.secondary, height: 46, fontSize: 14, onTap: AuthActions.signOut)),
+                    const Expanded(child: SoundToggle(fontSize: 12)),
                   ]),
+                  const SizedBox(height: 10),
+                  PxButton(label: 'Çıkış', tone: PxTone.secondary, height: 46, fontSize: 14, onTap: AuthActions.signOut),
                   const SizedBox(height: 22),
                   PxBox(
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

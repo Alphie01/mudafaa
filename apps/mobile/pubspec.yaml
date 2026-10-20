@@ -47,6 +47,7 @@ dependencies:
   flutter_svg: ^2.3.0
   uuid: ^4.6.0
   intl: ^0.20.3
+  audioplayers: ^6.8.1
 
 dev_dependencies:
   flutter_test:
@@ -86,13 +87,17 @@ flutter:
 
   # google_fonts kullanılmaz; yazı tipleri pakete gömülüdür (docs/plan.md §10).
   fonts:
-    # Başlık ve düğme yazısı. google/fonts deposunda yalnızca değişken font var
-    # (wght ekseni 400–700, static/ klasörü yok). Flutter FontWeight değerini wght
-    # eksenine eşler (400/600/700 için ayrı dosya gerekmez); motor pubspec'teki
-    # `weight` alanını kullanmaz.
+    # Başlık ve düğme yazısı. google/fonts yalnızca değişken font (wght 400–700) yayımlar; Flutter'ın FontWeight →
+    # wght eşlemesine güvenmemek için fontTools varLib.instancer ile statik 400/600/700 örnekleri üretildi
+    # (docs/mobile-game-feel-report.md, "Yazı tipi"). Glif şekilleri değişken fontun bu ağırlıklardaki hâlidir.
     - family: PixelifySans
       fonts:
-        - asset: assets/fonts/PixelifySans-VariableFont_wght.ttf
+        - asset: assets/fonts/PixelifySans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/PixelifySans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/PixelifySans-Bold.ttf
+          weight: 700
     # Gövde metni.
     - family: VT323
       fonts:

@@ -222,3 +222,17 @@ diyeceğini söyleme. Doğruyu söylemesinin bedelini söyle."
 - **MAHKÛMİYET:** 2 yıl 11 ay. Bora anahtarı Deniz'e geri verir. "Barı sat. Ya da yak. Fark etmez." Yağmur.
 - **ETİK:** Ece kürsüde ağlar; Leyla Deniz'in masasına Meslek Kuralları kitapçığını bırakır. Tek kelime yok.
 - **ÇÖKÜŞ:** Tolga dosyasını toplarken: "Meslektaşım, bir dahaki sefere delilinizi sunmadan önce okuyun."
+
+## 6. Uygulama notları (yazım sırasında verilen kararlar)
+
+- **Sonuç seti.** Beraatler: meşru savunma **223/2-d** (BERAAT_D; lineup'taki 2-b'nin yerine, çünkü Bora vurduğunu kabul
+  eder) ve **223/2-e** (BERAAT_E, tipik yol). Ayrıca **CVYO** (223/3-c, TCK 27/2), **INDIRIM** (tahrik + silah artırımının
+  düşmesi, 11 ay 20 gün HAGB), **MAHKUMIYET** (2 yıl 11 ay; çöküş dahil) ve **ETIK** (yönlendirilen Ece kürsüde çöker).
+  Gerekçe `docs/legal/kirik-kadeh.md` §5.
+- **Eklenen sahneler.** BR_03 (dosya gecesi), INV_SABAH2/3 (Leyla ve gazete; köprüdeki simitçi), H1_03S (savcının "neden
+  tezgâhtan çıktınız?" sorusu), H1_MOLA (on dakikalık ara), ARA_SABAH2 (asansörde savcı), T_02S (Serkan'ın patlaması),
+  T_05P (mütalaa arası), T_07P (son sözden önce). Bunlar hikâye kitabındaki vuruşları bölmek ve yorgun savcıyı bir
+  karakter olarak açmak için yazıldı.
+- **Ara dönemi** 2 gün × 4 EP; Onur'un kapıya gelişi ilk ara günün sonundaki sabit sahnedir (ARA_DAY_END).
+- **Tanık kürsüsü:** Defne kürsüye çıkmaz; videosu bilirkişi notuyla oynatılır. Sinan Kurt ek dilekçeyle çağrılırsa kısa bir
+  tanıklık yapar (T_04S).

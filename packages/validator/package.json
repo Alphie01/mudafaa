@@ -1,0 +1,26 @@
+{
+  "name": "@mudafaa/validator",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Müdafaa hikâye doğrulayıcı: statik kontroller, durum uzayı simülasyonu, golden path ve CLI",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "mudafaa-validate": "dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "@mudafaa/case-schema": "*",
+    "@mudafaa/engine": "*"
+  }
+}

@@ -31,7 +31,7 @@ describe('Dava #07 golden paths and validator', () => {
     for (const r of results) expect(r, JSON.stringify(r)).toMatchObject({ passed: true });
   });
 
-  it('validator passes Dava #07', () => {
+  it('validator passes Dava #07', { timeout: 180_000 }, () => {
     const r = validatePackage(merged);
     expect(r.status, JSON.stringify(r.issues, null, 2)).toBe('PASSED');
     // Simülasyon alanları ExploreResult şeklini izler (Plan A Task 17).

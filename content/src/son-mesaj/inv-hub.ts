@@ -189,6 +189,16 @@ export const invHub: CasePart = {
         choices: ['H_GORUS', 'H_GORUS2'],
       },
       choices: [
+        {
+          id: 'I_BEKLE',
+          kind: 'NAVIGATE',
+          label: 'Günü kapat',
+          description: 'Kalan eylem puanlarını bırak',
+          visibleWhen: all(cmp(v('ap'), '>', 0), cmp(v('day'), '<', 3)),
+          confirm: 'Bugünün kalan eylem puanları yanar. Emin misin?',
+          effects: [set('ap', 0)],
+          next: '$stay',
+        },
         nav('GO_H1', 'DURUŞMADAN ÖNCEKİ GECE', 'INV_GECE_1', {
           role: 'PRIMARY',
           confirm: 'Soruşturma evresi biter. Emin misin?',

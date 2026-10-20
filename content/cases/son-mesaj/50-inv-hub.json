@@ -276,6 +276,16 @@
           "visibleWhen": { "cmp": [{ "var": "leyla_gun" }, "<", { "var": "day" }] }
         },
         {
+          "id": "I_BEKLE",
+          "kind": "NAVIGATE",
+          "label": "Günü kapat",
+          "description": "Kalan eylem puanlarını bırak",
+          "visibleWhen": { "all": [{ "cmp": [{ "var": "ap" }, ">", 0] }, { "cmp": [{ "var": "day" }, "<", 3] }] },
+          "confirm": "Bugünün kalan eylem puanları yanar. Emin misin?",
+          "effects": [{ "type": "VAR", "var": "ap", "op": "set", "value": 0 }],
+          "next": "$stay"
+        },
+        {
           "id": "GO_H1",
           "kind": "NAVIGATE",
           "label": "DURUŞMADAN ÖNCEKİ GECE",

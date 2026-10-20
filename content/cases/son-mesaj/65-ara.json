@@ -280,13 +280,8 @@
           "kind": "NAVIGATE",
           "label": "Haftayı kapat",
           "description": "Kalan eylem puanlarını bırak",
-          "visibleWhen": {
-            "all": [
-              { "cmp": [{ "var": "ara_ap" }, ">", 0] },
-              { "visited": "ARA_NURTEN" },
-              { "visited": "ARA_ARAMA_EV" }
-            ]
-          },
+          "visibleWhen": { "cmp": [{ "var": "ara_ap" }, ">", 0] },
+          "confirm": "Haftanın kalan eylem puanları yanar. Emin misin?",
           "effects": [{ "type": "VAR", "var": "ara_ap", "op": "set", "value": 0 }],
           "next": "$stay"
         },

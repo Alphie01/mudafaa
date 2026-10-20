@@ -1,5 +1,6 @@
 import { TYPICAL_PATH, chooseAll, goldenPath, step } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
+import type { Action } from '@mudafaa/case-schema';
 import {
   OB_ABS,
   OB_AFIS,
@@ -362,6 +363,85 @@ const yolEtik = [
   celse3Etik,
 ];
 
+// ETIK (yeni): garaja girilir; dosyada heyet raporu, sinyal kaydı, sesli mesaj ve EDR yok;
+// kırmızı ışık iddiası kürsüde hukuka uygun delille çürütülmez. Kanıtı garajdan başka yerde olmayan bir mahkûmiyet.
+const celse2EtikDar = [
+  ...chooseAll('K_DOGRU', 'H100_DEVAM', 'H100B_DEVAM', 'H101_DEVAM', 'Q_TEL', 'Q_HIZ', 'Q_GOLGE', 'H102_BITIR'),
+  ...chooseAll('O_TELKIN', 'S4_SAYGI', 'H104V_DEVAM'),
+  press('N1'),
+  press('N2'),
+  press('N3'),
+  present('ev_necati_ifade', 'N3'),
+  press('N5'),
+  present('ev_multimedya', 'N5'),
+  ...chooseAll('H105_BITIR', 'R5_VOLKAN', 'R_DINLE', 'AK_IZIN', 'H108_VOLKAN'),
+];
+const araEtikDar = [
+  choose('ARAG_DEVAM'),
+  choose('A_CIKARIM'),
+  combine('ev_atk', 'clue_sirt'),
+  combine('ev_boya', 'clue_tek_stop'),
+  choose('CIKARIM2_BITIR'),
+  ...chooseAll('A_SANAYI', 'SA_GARAJ', 'A_SUC', 'SU_DAYANAKLI', 'A_VOLKAN', 'VO_DOGRU', 'A_HAMDI', 'HA_BILGI'),
+  choose('ARAK_DEVAM'),
+  ...chooseAll('A_AYTEN', 'AY_SAVCI', 'A_DURUSMA', 'ARASON_DEVAM', 'T00Y_DEVAM'),
+];
+const celse3EtikDar = [
+  ...chooseAll('K2_SERKAN', 'T00_DEVAM', 'S0_GORDUGU', 'T01_DEVAM', 'O2_TELKIN'),
+  press('TH1'),
+  press('TH2'),
+  press('TH4'),
+  choose('T03_BITIR'),
+  choose('T04_DEVAM'),
+  press('C1'),
+  press('C2'),
+  press('C3'),
+  present('ev_garaj', 'C3'),
+  object('g_kanaat', 'C3'),
+  present('ev_far_parca', 'C3'),
+  press('C4'),
+  present('ded_yukseklik', 'C4'),
+  choose('T05_BITIR'),
+  ...chooseAll('AT_CAM', 'AT_IZ', 'T06_BITIR', 'ARG_ATK', 'T07_BITIR', 'M_ILLIYET'),
+  ...chooseAll('D_OLUM', 'D_IZ', 'D_ILK', 'T09P_BITIR', 'T09_B', 'T09R_DEVAM', 'SS_DOGRU'),
+];
+const yolEtikDar = [
+  prolog('STR_MASUMIYET'),
+  aramaGece,
+  choose('H_LEYLA'),
+  choose('LEYLA_GERI'),
+  rapor,
+  tutanak,
+  gorusme1,
+  choose('AK1_A'),
+  kavsak,
+  otopsi,
+  dilekce('DIL_BOYA', 'DIL_UEDAS', 'DIL_ATK'),
+  otopark,
+  choose('AK2L_DEVAM'),
+  necati,
+  sevim,
+  bufe,
+  serkan,
+  choose('AK3_EV'),
+  hamdi,
+  gorusme2,
+  hastane,
+  ayten,
+  tahtaB,
+  chooseAll('H_DURUSMA', 'GECE_ARA'),
+  celse2EtikDar,
+  araEtikDar,
+  celse3EtikDar,
+];
+
+const tahtaI = [
+  choose('H_CIKARIM'),
+  combine('clue_fren', 'clue_abs'),
+  combine('clue_cam', 'clue_far'),
+  combine('clue_kirik56', 'clue_tampon44'),
+  choose('CIKARIM_BITIR'),
+];
 const yolI = [
   prolog('STR_INDIRIM', 'BR00_B', 'BR01_B'),
   // Gün 1
@@ -402,13 +482,7 @@ const yolI = [
     choose('G_BITIR'),
   ],
   chooseAll('H_T_SEV', 'VQ_IZLE', 'VQ_KAYIT', 'VQ_BITIR'),
-  [
-    choose('H_CIKARIM'),
-    combine('clue_fren', 'clue_abs'),
-    combine('clue_cam', 'clue_far'),
-    combine('clue_kirik56', 'clue_tampon44'),
-    choose('CIKARIM_BITIR'),
-  ],
+  tahtaI,
   chooseAll('H_DURUSMA', 'GECE_YAZ'),
   // 2. celse
   chooseAll(
@@ -458,6 +532,10 @@ const yolI = [
   chooseAll('T05_BITIR', 'AT_AMIR', 'T06_BITIR', 'ARG_EDR', 'ARG_DUYGU', 'T07_BITIR', 'M_BASIT'),
   chooseAll('D_HIZ', 'D_TEL', 'D_PISMAN', 'T09P_BITIR', 'T09_T', 'T09R_DEVAM', 'SS_SUS'),
 ];
+
+// BASIT_HAPIS: G_I'nin aynısı ama tahtada hiçbir saha çıkarımı kurulmaz. EDR okunup hız iddiası
+// kürsüde yıkıldığı için bilinçli taksir düşer; soruşturma sığ kaldığı için çevirme (TCK 50/4) gelmez.
+const yolBasit = yolI.filter((seg) => seg !== tahtaI);
 
 const yolM = [
   prolog('STR_KUSUR', 'BR00_C', 'BR01_C'),
@@ -610,58 +688,74 @@ const yolW = [
   choose('COKUS_SON'),
 ];
 
+const tipik = [
+    prolog('STR_KUSUR'),
+    // Gün 1
+    aramaGece,
+    choose('H_LEYLA'),
+    choose('LEYLA_GERI'),
+    rapor,
+    tutanak,
+    gorusme1,
+    choose('AK1_B'),
+    // Gün 2
+    dilekce('DIL_SINYAL', 'DIL_EDR', 'DIL_ATK'),
+    otopark,
+    otopsi,
+    necati,
+    choose('AK2L_DEVAM'),
+    // Gün 3
+    kavsak,
+    sinyal,
+    choose('H_LEYLA'),
+    choose('LEYLA_GERI'),
+    serkan,
+    hastane,
+    choose('AK3_BEKLE'),
+    // Gün 4
+    tahta1,
+    sevim,
+    bufe,
+    gorusme2,
+    hamdi,
+    choose('H_DURUSMA'),
+    choose('GECE_ARA'),
+    celse2,
+    // Ara
+    choose('ARAG_DEVAM'),
+    edr,
+    chooseAll('A_VOLKAN', 'VO_DOGRU', 'A_HAMDI', 'HA_BILGI', 'A_NECATI', 'NE_DINLE'),
+    choose('ARAK_DEVAM'),
+    heyet,
+    chooseAll('A_AYTEN', 'AY_SAVCI', 'A_SERKAN', 'SE_SAVCI', 'A_NALAN', 'NA_RED'),
+    chooseAll('A_LEYLA', 'ARALEY_GERI', 'A_CIKARIM'),
+    combine('ev_atk', 'clue_sirt'),
+    chooseAll('CIKARIM2_BITIR', 'A_DURUSMA', 'ARASON_DEVAM', 'T00Y_DEVAM'),
+    celse3E,
+];
+
+// Negatif test: TIPIK'in delil sunumları ve itirazları olmadan; ARG_ATK yapılır ama BERAAT_E eşiği tutmaz.
+// Doğru illiyet argümanı müvekkili hapse göndermemeli: sonuç İNDİRİM kalmalı.
+const zayifAtk = (tipik.flat(Infinity) as Action[]).filter(
+  (a) =>
+    !(a.kind === 'PRESENT' && ['C1', 'C2', 'C3', 'C4', 'N3', 'N4', 'N5', 'TH3', 'TH4'].includes(a.statementId ?? '')) &&
+    a.kind !== 'OBJECT',
+);
+
 export const tests: CasePart = {
   tests: {
     goldenPaths: [
       goldenPath(
         TYPICAL_PATH,
         { outcome: 'BERAAT_E', finalMin: 10815, finalMax: 11955 },
-        prolog('STR_KUSUR'),
-        // Gün 1
-        aramaGece,
-        choose('H_LEYLA'),
-        choose('LEYLA_GERI'),
-        rapor,
-        tutanak,
-        gorusme1,
-        choose('AK1_B'),
-        // Gün 2
-        dilekce('DIL_SINYAL', 'DIL_EDR', 'DIL_ATK'),
-        otopark,
-        otopsi,
-        necati,
-        choose('AK2L_DEVAM'),
-        // Gün 3
-        kavsak,
-        sinyal,
-        choose('H_LEYLA'),
-        choose('LEYLA_GERI'),
-        serkan,
-        hastane,
-        choose('AK3_BEKLE'),
-        // Gün 4
-        tahta1,
-        sevim,
-        bufe,
-        gorusme2,
-        hamdi,
-        choose('H_DURUSMA'),
-        choose('GECE_ARA'),
-        celse2,
-        // Ara
-        choose('ARAG_DEVAM'),
-        edr,
-        chooseAll('A_VOLKAN', 'VO_DOGRU', 'A_HAMDI', 'HA_BILGI', 'A_NECATI', 'NE_DINLE'),
-        choose('ARAK_DEVAM'),
-        heyet,
-        chooseAll('A_AYTEN', 'AY_SAVCI', 'A_SERKAN', 'SE_SAVCI', 'A_NALAN', 'NA_RED'),
-        chooseAll('A_LEYLA', 'ARALEY_GERI', 'A_CIKARIM'),
-        combine('ev_atk', 'clue_sirt'),
-        chooseAll('CIKARIM2_BITIR', 'A_DURUSMA', 'ARASON_DEVAM', 'T00Y_DEVAM'),
-        celse3E,
+        tipik,
       ),
       goldenPath('G_B', { outcome: 'BERAAT_B', finalMin: 11457, finalMax: 12663 }, yolB('SA_NOT', 'T09_B', false)),
-      goldenPath('G_ETIK', { outcome: 'ETIK', finalMin: 8830, finalMax: 9760 }, yolEtik),
+      goldenPath('G_ETIK', { outcome: 'ETIK', finalMin: 7255, finalMax: 8015 }, yolEtikDar),
+      // Garaj + hukuka uygun heyet raporu, sinyal kaydı ve EDR dosyada: hüküm basit taksire iner, disiplin epilogu yine gelir.
+      goldenPath('G_ETIK_I', { outcome: 'INDIRIM', finalMin: 8965, finalMax: 9905 }, yolEtik),
+      goldenPath('NEG_ATK_I', { outcome: 'INDIRIM', finalMin: 8165, finalMax: 9025 }, zayifAtk),
+      goldenPath('G_BH', { outcome: 'BASIT_HAPIS', finalMin: 5190, finalMax: 5740 }, yolBasit),
       goldenPath(
         'G_ETIK_E',
         { outcome: 'BERAAT_E', finalMin: 10507, finalMax: 11613 },

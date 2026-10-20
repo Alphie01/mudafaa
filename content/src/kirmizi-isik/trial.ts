@@ -376,7 +376,7 @@ export const trial: CasePart = {
       ],
       next: 'T_03',
       options: [
-        option('O2_TELKIN', 'İtiraz: telkin edici soru.', {
+        option('O2_TELKIN', 'İtiraz: soru, sonucu tanığa hazır veriyor; telkin edici soru.', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), inc('pers', 1)],
           good: 'Tanığa bir sonuç onaylatan soru telkin edicidir; başkan sorunun gerekip gerekmediğine karar verir (CMK 201/1).',
@@ -396,11 +396,11 @@ export const trial: CasePart = {
         }),
         option(
           'O2_SALDIR',
-          'İtiraz (CMK 201): savcı tanığı yönlendiriyor; belediye bir şeyleri örtüyor, bu tutanağa geçsin!',
+          'İtiraz: belediye bir şeyleri örtüyor; tutanağa geçsin!',
           {
             score: { USUL_BILGISI: -50 },
             effects: [dec('cred')],
-            bad: 'Kurum ve savcı hakkında dayanaksız suçlama itiraz değildir; dayanak bir usul kuralı olmalı.',
+            bad: 'Kurum hakkında dayanaksız suçlama itiraz değildir; itirazın dayanağı somut bir usul kuralı olmalı (burada telkin edici soru, CMK 201/1).',
             responses: says(L('hakim', 'Müdafi! Salonda suçlama yok, itiraz var. Uyarıyorum.')),
           },
         ),
@@ -1065,8 +1065,8 @@ export const trial: CasePart = {
       prompt: L('hakim', 'Raporlar ve tanık beyanları hakkında diyeceklerinizi alayım. Müdafi?'),
       choices: [
         option('ARG_EDR', 'EDR: 38 km/s, fren 1,2 sn önce, ABS aktif. Öngörü unsuru yok.', {
-          enabledWhen: has('ev_edr'),
-          lockedReason: 'EDR raporu dosyada yok.',
+          enabledWhen: any(flag('edr_hiz'), flag('edr_dv')),
+          lockedReason: 'EDR dökümü okunmadı.',
           score: { HUKUKI_BILGI: 100 },
           effects: [
             raise('arg_edr'),
@@ -1174,7 +1174,7 @@ export const trial: CasePart = {
         }),
         option(
           'ARG_DUYGU',
-          'Sanık iyi bir insan, sabıkası yok, bir haftalık bir kızı var; cezanın bireyselleştirilmesinde bunlar tartılmalı (TCK 61).',
+          'Sanığın kişisel durumu da tartılmalı: sabıkasız, yeni baba.',
           {
             score: { SAVUNMA_STRATEJISI: -30 },
             effects: [dec('pers', 1)],
@@ -1301,7 +1301,7 @@ export const trial: CasePart = {
         }),
         option(
           'M_CIKAR',
-          'Mütalaa dayanaksız; CMK 216/1 uyarınca tutanaktan çıkarılmasını ve yeniden mütalaa verilmesini talep ediyoruz.',
+          'Mütalaa dayanaksız; tutanaktan çıkarılsın.',
           {
             score: { USUL_BILGISI: -50 },
             effects: [dec('cred')],
@@ -1329,7 +1329,7 @@ export const trial: CasePart = {
         dayanak(
           'D_HIZ',
           'Hız 38 km/s; fren 1,2 sn önce',
-          has('ev_edr'),
+          any(flag('edr_hiz'), flag('edr_dv')),
           'Sanık şehir içi sınırın çok altında gidiyordu ve normal sürede frene bastı.',
         ),
         dayanak(
@@ -1485,7 +1485,7 @@ export const trial: CasePart = {
         }),
         option(
           'T09_D',
-          'Bir kadın öldü, evet; ama müvekkilim de bu gecenin kurbanı. Vicdanınıza sesleniyorum: bir babayı hapse göndermeyin.',
+          'Vicdanınıza sesleniyorum: bir babayı hapse göndermeyin.',
           {
             score: { SAVUNMA_STRATEJISI: -50 },
             effects: [dec('pers', 1)],

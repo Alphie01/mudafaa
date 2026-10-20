@@ -474,7 +474,12 @@ export const briefing: CasePart = {
         {
           type: 'paragraph',
           title: 'OLAY ÖZETİ',
-          text: '14 Kasım gecesi 01.11’de Gökdere–Çınarlı kavşağında, yaya geçidinde Hatice Durmaz (54) hayatını kaybetti. Volkan Eren’in aracı olay yerinde, yayanın yanında durdu; Volkan 112’yi aradı. Taksici Necati Bulut, aracın kırmızıda geçtiğini söylüyor. Bilirkişi Volkan’ı %100 asli kusurlu buldu. Volkan yeşil yandığını söylüyor ama “çarptım, hissettim” diyor.',
+          text: '14 Kasım gecesi 01.11’de Gökdere–Çınarlı kavşağında, yaya geçidinde Hatice Durmaz (54) hayatını kaybetti. Volkan Eren’in aracı yayanın yanında durdu; Volkan 112’yi aradı.',
+        },
+        {
+          type: 'paragraph',
+          title: 'İDDİA VE SAVUNMA',
+          text: 'Taksici Necati Bulut, aracın kırmızıda geçtiğini söylüyor. Bilirkişi Volkan’ı %100 asli kusurlu buldu. Volkan yeşil yandığını söylüyor ama “çarptım, hissettim” diyor.',
         },
         {
           type: 'strengthList',

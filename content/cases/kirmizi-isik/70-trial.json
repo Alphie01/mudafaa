@@ -516,7 +516,7 @@
         {
           "id": "O2_TELKIN",
           "kind": "OPTION",
-          "label": "İtiraz: telkin edici soru.",
+          "label": "İtiraz: soru, sonucu tanığa hazır veriyor; telkin edici soru.",
           "responses": [
             {
               "lines": [
@@ -560,7 +560,7 @@
         {
           "id": "O2_SALDIR",
           "kind": "OPTION",
-          "label": "İtiraz (CMK 201): savcı tanığı yönlendiriyor; belediye bir şeyleri örtüyor, bu tutanağa geçsin!",
+          "label": "İtiraz: belediye bir şeyleri örtüyor; tutanağa geçsin!",
           "responses": [
             { "lines": [{ "speaker": "hakim", "text": "Müdafi! Salonda suçlama yok, itiraz var. Uyarıyorum." }] }
           ],
@@ -570,7 +570,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Kurum ve savcı hakkında dayanaksız suçlama itiraz değildir; dayanak bir usul kuralı olmalı.",
+            "feedback": "Kurum hakkında dayanaksız suçlama itiraz değildir; itirazın dayanağı somut bir usul kuralı olmalı (burada telkin edici soru, CMK 201/1).",
             "category": "USUL_BILGISI"
           },
           "next": "T_03"
@@ -1879,8 +1879,8 @@
           "id": "ARG_EDR",
           "kind": "OPTION",
           "label": "EDR: 38 km/s, fren 1,2 sn önce, ABS aktif. Öngörü unsuru yok.",
-          "enabledWhen": { "hasEvidence": "ev_edr" },
-          "lockedReason": "EDR raporu dosyada yok.",
+          "enabledWhen": { "any": [{ "flag": "edr_hiz" }, { "flag": "edr_dv" }] },
+          "lockedReason": "EDR dökümü okunmadı.",
           "responses": [
             {
               "lines": [
@@ -2048,7 +2048,7 @@
         {
           "id": "ARG_DUYGU",
           "kind": "OPTION",
-          "label": "Sanık iyi bir insan, sabıkası yok, bir haftalık bir kızı var; cezanın bireyselleştirilmesinde bunlar tartılmalı (TCK 61).",
+          "label": "Sanığın kişisel durumu da tartılmalı: sabıkasız, yeni baba.",
           "responses": [
             {
               "lines": [
@@ -2286,7 +2286,7 @@
         {
           "id": "M_CIKAR",
           "kind": "OPTION",
-          "label": "Mütalaa dayanaksız; CMK 216/1 uyarınca tutanaktan çıkarılmasını ve yeniden mütalaa verilmesini talep ediyoruz.",
+          "label": "Mütalaa dayanaksız; tutanaktan çıkarılsın.",
           "responses": [
             { "lines": [{ "speaker": "hakim", "text": "Böyle bir usul yok müdafi. Cevabınız varsa verin." }] }
           ],
@@ -2363,7 +2363,7 @@
           "cost": [{ "var": "noktalar", "amount": 1 }],
           "responses": [
             {
-              "when": { "hasEvidence": "ev_edr" },
+              "when": { "any": [{ "flag": "edr_hiz" }, { "flag": "edr_dv" }] },
               "lines": [
                 {
                   "speaker": "player",
@@ -2376,7 +2376,7 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "hasEvidence": "ev_edr" },
+              "when": { "any": [{ "flag": "edr_hiz" }, { "flag": "edr_dv" }] },
               "then": [
                 { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 40, "line": "savunma" },
                 {
@@ -2809,7 +2809,7 @@
         {
           "id": "T09_D",
           "kind": "OPTION",
-          "label": "Bir kadın öldü, evet; ama müvekkilim de bu gecenin kurbanı. Vicdanınıza sesleniyorum: bir babayı hapse göndermeyin.",
+          "label": "Vicdanınıza sesleniyorum: bir babayı hapse göndermeyin.",
           "responses": [
             {
               "lines": [

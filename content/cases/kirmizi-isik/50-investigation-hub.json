@@ -70,7 +70,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Gece rüyamda bir trafik lambası gördüm; üç rengi aynı anda yanıyordu. Uyandığımda saçma geldi. Sonra o kadar saçma gelmedi."
+              "text": "Gece rüyamda yine o kavşaktaydım. Yağmur, ıslak asfalt, karşıda Necati’nin kırmızısı. Uyandığımda saat dördü geçiyordu; bir daha uyuyamadım."
             }
           ]
         },
@@ -631,10 +631,7 @@
               "speaker": "narrator",
               "text": "Gece yarısından sonra kavşağa geri döndüm. Aynı saat, aynı yağmur. Köşede durup ışıkların değişmesini izledim. Yeşil, sarı, kırmızı. Kusursuz."
             },
-            {
-              "speaker": "narrator",
-              "text": "Gökdere’den bir kamyonet geçti, sonra bir otomobil. Kimse kimseye bakmadı."
-            },
+            { "speaker": "narrator", "text": "Gökdere’den arada bir araç geçiyordu. Kimse kimseye bakmadı." },
             {
               "speaker": "player",
               "text": "Bu kavşakta o gece biri bir şey gördü, biri bir şey duydu, biri bir şey hissetti. Ben hâlâ hiçbirini tam bilmiyorum.",
@@ -932,23 +929,125 @@
       "lines": [
         {
           "when": {
-            "cmp": [
-              {
-                "add": [
-                  { "if": { "when": { "hasEvidence": "ded_fren" }, "then": 1, "else": 0 } },
-                  { "if": { "when": { "hasEvidence": "ded_cam" }, "then": 1, "else": 0 } },
-                  { "if": { "when": { "hasEvidence": "ded_yukseklik" }, "then": 1, "else": 0 } },
-                  { "if": { "when": { "hasEvidence": "ded_saat" }, "then": 1, "else": 0 } }
-                ]
-              },
-              ">=",
-              2
+            "all": [
+              { "hasEvidence": "ded_fren" },
+              { "hasEvidence": "ded_cam" },
+              { "hasEvidence": "ded_yukseklik" },
+              { "hasEvidence": "ded_saat" }
             ]
           },
           "lines": [
             {
               "speaker": "player",
-              "text": "Fren izi, camlar, kırığın yüksekliği. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "text": "Fren izi, camlar, kırığın yüksekliği ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [{ "hasEvidence": "ded_fren" }, { "hasEvidence": "ded_cam" }, { "hasEvidence": "ded_yukseklik" }]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Fren izi, camlar ve kırığın yüksekliği. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [{ "hasEvidence": "ded_fren" }, { "hasEvidence": "ded_cam" }, { "hasEvidence": "ded_saat" }]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Fren izi, camlar ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [{ "hasEvidence": "ded_fren" }, { "hasEvidence": "ded_yukseklik" }, { "hasEvidence": "ded_saat" }]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Fren izi, kırığın yüksekliği ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [{ "hasEvidence": "ded_cam" }, { "hasEvidence": "ded_yukseklik" }, { "hasEvidence": "ded_saat" }]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Camlar, kırığın yüksekliği ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_fren" }, { "hasEvidence": "ded_cam" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Fren izi ve camlar. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_fren" }, { "hasEvidence": "ded_yukseklik" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Fren izi ve kırığın yüksekliği. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_cam" }, { "hasEvidence": "ded_yukseklik" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Camlar ve kırığın yüksekliği. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_fren" }, { "hasEvidence": "ded_saat" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Fren izi ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_cam" }, { "hasEvidence": "ded_saat" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Camlar ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_yukseklik" }, { "hasEvidence": "ded_saat" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Kırığın yüksekliği ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
               "style": "thought"
             }
           ]
@@ -1000,11 +1099,23 @@
       "eyebrow": "DAVA #03 · SORUŞTURMA",
       "lines": [
         {
-          "when": { "any": [{ "hasEvidence": "ded_ariza" }, { "hasEvidence": "ev_sinyal_log" }] },
+          "when": {
+            "all": [{ "any": [{ "hasEvidence": "ded_ariza" }, { "hasEvidence": "ev_sinyal_log" }] }, { "met": "hamdi" }]
+          },
           "lines": [
             {
               "speaker": "player",
               "text": "Ve makine. Kavşağın makinesi o gece doğruyu göstermiyordu. Bunu bir teknisyen biliyordu, bir iş emri biliyordu. Bilirkişi bilmiyordu.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "hasEvidence": "ded_ariza" }, { "hasEvidence": "ev_sinyal_log" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ve makine. Kavşağın makinesi o gece doğruyu göstermiyor olabilir. Bir kayıt bunu fısıldıyor. Bilirkişi o kaydı hiç istememiş.",
               "style": "thought"
             }
           ]

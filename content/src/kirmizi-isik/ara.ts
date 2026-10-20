@@ -684,7 +684,7 @@ export const ara: CasePart = {
         }),
         option(
           'HA_PROVA',
-          '“Kürsüde size şunları soracağım; cevaplarınızı birlikte hazırlayalım ki orada şaşırmayın, heyecanlanmayın.”',
+          '“Kürsüde soracaklarımı şimdi birlikte prova edelim.”',
           {
             score: { USUL_BILGISI: -60 },
             effects: [inc('ethics', 1)],
@@ -987,7 +987,7 @@ export const ara: CasePart = {
             raise('suc_dayanakli'),
             ifThen(flag('sanayi_not'), [{ type: 'SCORE', category: 'USUL_BILGISI', amount: 40 }]),
           ],
-          good: 'Somut olgulara dayanan bir ihbar savcılığın soruşturma yükümlülüğünü doğurur (CMK 158, 160); kaportacıların araştırılmasını savcılık ister. Kaçan sürücü için taksirle öldürmenin yanında yardım ve bildirim yükümlülüğünün yerine getirilmemesi (TCK 98) de gündeme gelir.',
+          good: 'Somut bir ihbar savcılığın soruşturma yükümlülüğünü doğurur (CMK 158, 160); kaportacıları savcılık araştırır. Kaçan sürücü için taksirle öldürmenin yanında TCK 98 de gündeme gelir.',
           responses: [
             when(
               flag('sanayi_not'),

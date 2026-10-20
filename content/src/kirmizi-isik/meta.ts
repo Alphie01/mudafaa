@@ -19,7 +19,7 @@ import { p1, p2 } from './shared.js';
 
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler.
 
-export const T_INDIRIM = 5000;
+export const T_INDIRIM = 6000;
 export const T_BERAAT_E = 9000;
 export const T_BERAAT_B = 9500;
 
@@ -120,8 +120,14 @@ export const meta: CasePart = {
     },
     {
       id: 'kusur_yok',
-      label: 'Kırmızı ışık iddiası kürsüde çöktü',
-      when: any(flag('contra_n2'), flag('contra_h'), flag('contra_c1')),
+      label: 'Kırmızı ışık iddiası çöktü (kürsüde ya da dosyadaki hukuka uygun delille)',
+      when: any(
+        flag('contra_n2'),
+        flag('contra_h'),
+        flag('contra_c1'),
+        has('ev_heyet'),
+        all(has('ev_sinyal_log'), has('ev_sesli')),
+      ),
     },
     {
       id: 'findings',
@@ -187,6 +193,11 @@ export const meta: CasePart = {
         has('ded_ariza'),
         has('ded_saat'),
       ),
+    },
+    {
+      id: 'ara_okuma',
+      label: 'Arada gelen raporlardan en az biri okundu',
+      when: any(flag('edr_hiz'), flag('edr_dv'), flag('heyet_isik')),
     },
     {
       id: 'tahliye_dayanak',

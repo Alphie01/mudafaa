@@ -12,6 +12,7 @@ import {
   flag,
   has,
   inc,
+  met,
   nav,
   not,
   option,
@@ -67,7 +68,7 @@ const hubLines: ResponseBlock[] = [
     card('GÜN 2/4 · İKİNCİ CELSEYE 12 GÜN'),
     N('Hedef: ışık. Taksici durduğu yerden neyi görebilirdi? Kavşakla ilgili kim, hangi kaydı tutuyor?'),
     N(
-      'Gece rüyamda bir trafik lambası gördüm; üç rengi aynı anda yanıyordu. Uyandığımda saçma geldi. Sonra o kadar saçma gelmedi.',
+      'Gece rüyamda yine o kavşaktaydım. Yağmur, ıslak asfalt, karşıda Necati’nin kırmızısı. Uyandığımda saat dördü geçiyordu; bir daha uyuyamadım.',
     ),
   ),
   when(
@@ -407,7 +408,7 @@ export const invHub: CasePart = {
           N(
             'Gece yarısından sonra kavşağa geri döndüm. Aynı saat, aynı yağmur. Köşede durup ışıkların değişmesini izledim. Yeşil, sarı, kırmızı. Kusursuz.',
           ),
-          N('Gökdere’den bir kamyonet geçti, sonra bir otomobil. Kimse kimseye bakmadı.'),
+          N('Gökdere’den arada bir araç geçiyordu. Kimse kimseye bakmadı.'),
           T(
             'Bu kavşakta o gece biri bir şey gördü, biri bir şey duydu, biri bir şey hissetti. Ben hâlâ hiçbirini tam bilmiyorum.',
           ),
@@ -592,12 +593,7 @@ export const invHub: CasePart = {
     decisionNode('INV_GECE_2', [{ to: 'INV_GECE_3' }], {
       ...INV,
       lines: [
-        when(
-          atLeastOf(2, ['ded_fren', 'ded_cam', 'ded_yukseklik', 'ded_saat']),
-          T(
-            'Fren izi, camlar, kırığın yüksekliği. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?',
-          ),
-        ),
+        ...ikinciAracSatirlari(),
         when(
           any(has('ded_fren'), has('ded_cam'), has('ded_yukseklik'), has('ded_saat')),
           T('Bir çatlak buldum. Raporda, tutanakta, bir yerde. Bir çatlak duvarı yıkmaz; ama içeri ışık sızdırır.'),
@@ -619,9 +615,15 @@ export const invHub: CasePart = {
       ...INV,
       lines: [
         when(
-          any(has('ded_ariza'), has('ev_sinyal_log')),
+          all(any(has('ded_ariza'), has('ev_sinyal_log')), met('hamdi')),
           T(
             'Ve makine. Kavşağın makinesi o gece doğruyu göstermiyordu. Bunu bir teknisyen biliyordu, bir iş emri biliyordu. Bilirkişi bilmiyordu.',
+          ),
+        ),
+        when(
+          any(has('ded_ariza'), has('ev_sinyal_log')),
+          T(
+            'Ve makine. Kavşağın makinesi o gece doğruyu göstermiyor olabilir. Bir kayıt bunu fısıldıyor. Bilirkişi o kaydı hiç istememiş.',
           ),
         ),
         when(
@@ -751,6 +753,29 @@ export const invHub: CasePart = {
 };
 
 /** En az n delil bulunmuş mu. */
+/** INV_GECE_2: tahtada gerçekten kurulan ikinci araç çıkarımlarını sayar (en geniş alt küme önce eşleşir). */
+function ikinciAracSatirlari(): ResponseBlock[] {
+  const ad: Record<string, string> = {
+    ded_fren: 'fren izi',
+    ded_cam: 'camlar',
+    ded_yukseklik: 'kırığın yüksekliği',
+    ded_saat: 'kameradaki yedi saniye',
+  };
+  const ids = Object.keys(ad);
+  const subsets: string[][] = [];
+  for (let mask = 1; mask < 1 << ids.length; mask++) {
+    const sub = ids.filter((_, i) => mask & (1 << i));
+    if (sub.length >= 2) subsets.push(sub);
+  }
+  subsets.sort((a, b) => b.length - a.length);
+  return subsets.map((sub) => {
+    const names = sub.map((id) => ad[id]!);
+    const list = names.slice(0, -1).join(', ') + ' ve ' + names[names.length - 1];
+    const text = `${list.charAt(0).toLocaleUpperCase('tr')}${list.slice(1)}. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?`;
+    return when(all(...sub.map((id) => has(id))), T(text));
+  });
+}
+
 function atLeastOf(n: number, ids: string[]) {
   return cmp({ add: ids.map((id) => ({ if: { when: has(id), then: 1, else: 0 } })) }, '>=', n);
 }

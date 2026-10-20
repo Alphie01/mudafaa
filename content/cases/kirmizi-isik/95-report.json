@@ -74,6 +74,30 @@
         "category": "ARASTIRMA"
       },
       {
+        "id": "h_boya",
+        "when": { "not": { "hasEvidence": "ev_boya" } },
+        "text": "Maktulün montundaki boya parçasının kriminal incelemesini dilekçeyle istemedin (CMK 177); boya, ilk çarpan aracın rengini ve türünü gösterirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_arac",
+        "when": { "not": { "hasEvidence": "ded_arac" } },
+        "text": "Boya raporu ile tek yanan stop lambasını tahtada birleştirmedin: kaçan aracın tarifi ancak bu ikisiyle kurulurdu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_sesli",
+        "when": { "not": { "hasEvidence": "ev_sesli" } },
+        "text": "Hatice Hanım’ın o gece oğluna bıraktığı sesli mesaj dosyaya girmedi. Serkan’a saygıyla yaklaşıp annesini dinlemek, onun kendi kararıyla mesajı savcılığa vermesinin yolunu açardı.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_savcilik",
+        "when": { "not": { "hasEvidence": "ev_savcilik" } },
+        "text": "Savcılığın panelvanı ve sürücüsünü tespit eden yazısı dosyaya hiç girmedi; aracın tarifine dayanan somut bir suç duyurusu (CMK 158) bunu sağlardı.",
+        "category": "USUL_BILGISI"
+      },
+      {
         "id": "h_itiraz",
         "when": { "not": { "flag": "h1_itiraz" } },
         "text": "Bilirkişi raporuna somut gerekçelerle itiraz edip yeni heyet istemedin (CMK 67/5); rapor tartışılmamış bir zemin olarak kaldı.",

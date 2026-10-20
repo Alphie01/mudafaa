@@ -8,6 +8,7 @@ import {
   cmp,
   finalAtLeast,
   flag,
+  has,
   not,
   outcome,
   ref,
@@ -22,6 +23,47 @@ import { T, card, fx } from './shared.js';
 // Epiloglar karar ekranında hükümden sonra oynar; koşulu tutan bütün bloklar sırayla birleşir.
 
 const block = (lines: Line[], when?: Parameters<typeof all>[0]) => (when === undefined ? { lines } : { when, lines });
+
+/** Adli Tıp raporu dosyada ya da tartışılmışken illiyetin neden yine de kabul edildiği (mahkûmiyet gerekçeleri). */
+const atkCausation = [
+  because(
+    'Adli Tıp raporu yaralanmaların “uyumlu” olduğu bir çarpma biçimini tarif etmiş, çarpan aracı belirlememiştir.',
+    any(flag('arg_atk'), has('ev_atk')),
+  ),
+  because(
+    'Mahkeme raporu bilirkişi raporu, tutanak ve tanık beyanıyla birlikte değerlendirerek (CMK 217/1) ölümcül çarpmanın sanığın aracıyla gerçekleştiğini kabul etmiştir.',
+    any(flag('arg_atk'), has('ev_atk')),
+  ),
+];
+
+/** Kürsüde ikinci bir araca işaret eden izler açıldıysa mahkûmiyet/indirim gerekçesi bunları tartar. */
+const ikinciIz = because(
+  'Olay yerinde başka bir araca ait olabilecek izler bulunmuşsa da bu izlerin çarpma anına ait olduğu ve yayaya sanıktan önce çarpıldığı dosyada kesinleşmemiştir.',
+  any(flag('contra_n4'), flag('contra_c3'), flag('contra_c4')),
+);
+
+/** Garaj epilogu: hangi hüküm olursa olsun disiplin soruşturması gelir. */
+const garajEpilog = block(
+  [
+    card('ARSLAN HUKUK — ERTESİ SABAH', 'buro'),
+    N(
+      'Masamda bir zarf: Rüstem Usta’nın avukatından şikâyet dilekçesinin örneği. Altında baro disiplin kurulunun bildirimi. Hükmün ne olduğu zarfın umurunda değildi.',
+    ),
+    N(
+      'Leyla odama girdi, masaya ince, kırmızı kapaklı bir kitapçık bıraktı: meslek kuralları. Hiçbir şey söylemedi.',
+    ),
+    T(
+      'Mahkeme o fotoğrafları yok saydı; dosya onlarsız da ayaktaydı ya da değildi. Ama ben o garaja girdim. Bunu hiçbir hüküm silmiyor.',
+    ),
+    fx(card('Av. Deniz Arslan hakkında disiplin soruşturması başlatıldı.'), 'fade'),
+  ],
+  flag('etik_garaj'),
+);
+
+const garajGerekce = because(
+  'Savunmanın sunduğu garaj fotoğrafları hukuka aykırı yoldan elde edildiğinden hükme esas alınmamıştır; karar yalnızca hukuka uygun delillere dayanmaktadır (Anayasa 38/6, CMK 206/2-a, 217/2).',
+  flag('etik_garaj'),
+);
 
 export const outcomes: CasePart = {
   outcomes: [
@@ -154,10 +196,7 @@ export const outcomes: CasePart = {
         because(
           'Ölümcül çarpmanın sanığın aracından kaynaklandığı şüpheye yer bırakmayacak biçimde ispatlanamamıştır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2).',
         ),
-        because(
-          'Savunmanın sunduğu garaj fotoğrafları hukuka aykırı yoldan elde edildiğinden hükme esas alınmamıştır; karar yalnızca hukuka uygun delillere dayanmaktadır (Anayasa 38/6, CMK 206/2-a, 217/2).',
-          flag('etik_garaj'),
-        ),
+        garajGerekce,
       ],
       legalBasis: 'CMK 223/2-e; Anayasa 38/4; AİHS 6/2; CMK 141/1, 142, 231/3',
       xp: xp(1, { ethicsVar: 'ethics' }),
@@ -199,10 +238,27 @@ export const outcomes: CasePart = {
         block(
           [
             T(
+              'Savcılığın yazısı dosyada: bir fırının panelvanı, onarılmış bir köşe, bir sürücünün adı. Mahkeme o adı hükmüne yazmadı; yazması gerekmiyordu.',
+            ),
+            T('O ad artık başka bir dosyanın kapağında. Benim işim Volkan’dı. Ötesi savcının.'),
+          ],
+          has('ev_savcilik'),
+        ),
+        block(
+          [
+            T(
               'Suç duyurum hâlâ bir savcının masasında. Koyu yeşil bir panelvan, bir sanayi sitesi, bir isim olmayan bir dosya. Belki bir gün bir isim olur.',
             ),
           ],
-          flag('suc_dayanakli'),
+          all(flag('suc_dayanakli'), flag('sanayi_not'), not(has('ev_savcilik'))),
+        ),
+        block(
+          [
+            T(
+              'Suç duyurum hâlâ bir savcının masasında. Koyu bir araç, yüksek bir tampon, bir dizi iz. Bir isim değil. Belki bir gün bir isim olur.',
+            ),
+          ],
+          all(flag('suc_dayanakli'), not(flag('sanayi_not')), not(has('ev_savcilik'))),
         ),
         block(
           [
@@ -210,7 +266,7 @@ export const outcomes: CasePart = {
               'O gece Gökdere’de kim vardı, bilmiyorum. Bir iz, birkaç cam parçası, bir şüphe. Hiçbiri bir isim değil.',
             ),
           ],
-          not(flag('suc_dayanakli')),
+          all(not(flag('suc_dayanakli')), not(has('ev_savcilik'))),
         ),
         block(
           [
@@ -229,7 +285,13 @@ export const outcomes: CasePart = {
             'leyla',
             'Şüpheden beraat. Bazıları bunu yarım zafer sayar. Ben otuz yıldır şunu biliyorum: şüphe, bir insanı yanlış bir kesinlikten korur. Bu az şey değil.',
           ),
-          L('leyla', 'Ama o koyu araç hâlâ orada bir yerde. Bunu da unutma.'),
+        ]),
+        block([L('leyla', 'Ama o koyu araç hâlâ orada bir yerde. Bunu da unutma.')], not(has('ev_savcilik'))),
+        block(
+          [L('leyla', 'O panelvanın sürücüsü artık bir savcının sorunu, senin değil. Ama adını sen buldun. Bunu da unutma.')],
+          has('ev_savcilik'),
+        ),
+        block([
           T('Bazen adalet bir kapıyı açar ama ışığı yakmaz. Bu sefer en azından kırmızı değildi.'),
           N(
             'Telefonu kapattım. Pencereden Gökdere’nin ışıkları görünüyordu, uzakta. Yeşil, sarı, kırmızı; sırayla, kusursuz.',
@@ -238,22 +300,7 @@ export const outcomes: CasePart = {
             'Bir gün bir adam o kavşaktan kızını okula götürecek. Işık yeşil yanacak. Geçecek. Belki biraz yavaşlayacak; sebebini kimseye söylemeyecek.',
           ),
         ]),
-        block(
-          [
-            card('ARSLAN HUKUK — ERTESİ SABAH', 'buro'),
-            N(
-              'Masamda bir zarf: Rüstem Usta’nın avukatından şikâyet dilekçesinin örneği. Altında baro disiplin kurulunun bildirimi. Hükmün ne olduğu zarfın umurunda değildi.',
-            ),
-            N(
-              'Leyla odama girdi, masaya ince, kırmızı kapaklı bir kitapçık bıraktı: meslek kuralları. Hiçbir şey söylemedi.',
-            ),
-            T(
-              'Mahkeme o fotoğrafları yok saydı; dosya onlarsız da ayaktaydı ya da değildi. Ama ben o garaja girdim. Bunu hiçbir hüküm silmiyor.',
-            ),
-            fx(card('Av. Deniz Arslan hakkında disiplin soruşturması başlatıldı.'), 'fade'),
-          ],
-          flag('etik_garaj'),
-        ),
+        garajEpilog,
       ],
     }),
     outcome('INDIRIM', {
@@ -261,8 +308,8 @@ export const outcomes: CasePart = {
       priority: 3,
       when: all(
         not(flag('cokus')),
-        not(flag('arg_atk')),
         ref('inv_derin'),
+        ref('ara_okuma'),
         any(flag('mutalaa_basit'), all(flag('arg_basit'), any(ref('kusur_yok'), flag('arg_edr'), flag('contra_c2')))),
         finalAtLeast(T_INDIRIM),
       ),
@@ -273,19 +320,30 @@ export const outcomes: CasePart = {
         'Sanık Volkan Eren’in eyleminin bilinçli taksir değil basit taksir kapsamında kaldığı kabul edilerek TCK 85/1 uyarınca kusurunun hafifliği gözetilerek alt sınırdan 2 YIL hapis cezası ile cezalandırılmasına; sanığın olay sonrası yardım ve bildirim davranışı ile duruşmadaki tutumu gözetilerek TCK 62/1 uyarınca 1 YIL 8 AY HAPİS cezasına; TCK 50/1-a ve 50/4 uyarınca bu cezanın 600 GÜN adli para cezasına çevrilmesine, TCK 52/2 uyarınca günlüğü 100 TL’den 60.000 TL ADLİ PARA CEZASINA; TCK 53/6 uyarınca sürücü belgesinin 6 AY süreyle geri alınmasına; adli kontrol tedbirlerinin kaldırılmasına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
         because(
-          'Hız iddiası duruşmada araç verisi ve çapraz sorguyla desteklenmemiş; sanığın neticeyi öngördüğü hâlde davrandığı (TCK 22/3) ispatlanamamıştır.',
+          'Araç verisi (EDR) ve çapraz sorgu, bilirkişi raporundaki 68 km/s hız tespitini çürütmüştür.',
+          any(flag('contra_c2'), flag('arg_edr')),
         ),
         because(
-          'Ancak sanığın yağışlı havada, yaya geçidine yaklaşırken hızını ve dikkatini koşullara uydurmayarak özen yükümlülüğüne aykırı davrandığı ve bu davranış ile ölüm arasında illiyet bağının bulunduğu kanaatine varılmıştır.',
+          'Sanığın neticeyi öngördüğü hâlde davrandığı, yani bilinçli taksirin öngörü unsuru (TCK 22/3) ispatlanamamıştır.',
         ),
+        because(
+          'Sanığın yağışlı havada yaya geçidine yaklaşırken hızını ve dikkatini koşullara uydurmadığı, böylece özen yükümlülüğüne aykırı davrandığı kabul edilmiştir.',
+        ),
+        because(
+          'Adli Tıp raporu ölümcül travmanın birincil bir çarpmayla oluştuğunu belirtmiş, bu çarpmanın hangi araçla gerçekleştiğini tespit etmemiştir.',
+          any(flag('arg_atk'), has('ev_atk')),
+        ),
+        because(
+          'Mahkeme raporu bilirkişi raporu, tutanak ve tanık beyanıyla birlikte değerlendirmiş (CMK 217/1); birincil çarpmanın da sanığın aracıyla gerçekleştiği kanaatine varmıştır.',
+          any(flag('arg_atk'), has('ev_atk')),
+        ),
+        ikinciIz,
+        because('Bu davranış ile ölüm arasında illiyet bağının bulunduğu kanaatine varılmıştır.'),
         because(
           'Taksirli suçlarda hükmolunan hapis cezası, bilinçli taksir hâli dışında adli para cezasına çevrilebilir (TCK 50/4).',
         ),
         because('Sanık duruşmada kusurunu kabul etmiştir.', flag('kabul')),
-        because(
-          'Savunmanın sunduğu garaj fotoğrafları hukuka aykırı yoldan elde edildiğinden hükme esas alınmamıştır; karar yalnızca hukuka uygun delillere dayanmaktadır (Anayasa 38/6, CMK 206/2-a, 217/2).',
-          flag('etik_garaj'),
-        ),
+        garajGerekce,
       ],
       legalBasis: 'TCK 85/1, 22/2, 22/4, 62/1, 50/1-a, 50/4, 52/2, 53/6; CMK 273/1',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
@@ -327,28 +385,13 @@ export const outcomes: CasePart = {
             'Yedi buçuk yıl değil, hapis değil. Kazanmak buysa neden bu kadar ağır? Çünkü o gece kavşakta kim vardı, hâlâ kimse bilmiyor.',
           ),
         ]),
-        block(
-          [
-            card('ARSLAN HUKUK — ERTESİ SABAH', 'buro'),
-            N(
-              'Masamda bir zarf: Rüstem Usta’nın avukatından şikâyet dilekçesinin örneği. Altında baro disiplin kurulunun bildirimi. Hükmün ne olduğu zarfın umurunda değildi.',
-            ),
-            N(
-              'Leyla odama girdi, masaya ince, kırmızı kapaklı bir kitapçık bıraktı: meslek kuralları. Hiçbir şey söylemedi.',
-            ),
-            T(
-              'Mahkeme o fotoğrafları yok saydı; dosya onlarsız da ayaktaydı ya da değildi. Ama ben o garaja girdim. Bunu hiçbir hüküm silmiyor.',
-            ),
-            fx(card('Av. Deniz Arslan hakkında disiplin soruşturması başlatıldı.'), 'fade'),
-          ],
-          flag('etik_garaj'),
-        ),
+        garajEpilog,
       ],
     }),
     outcome('ETIK', {
       class: 'CONVICTION',
       priority: 4,
-      when: all(flag('etik_garaj'), not(ref('kusur_yok'))),
+      when: all(flag('etik_garaj'), not(ref('kusur_yok')), not(flag('arg_edr')), not(flag('contra_c2'))),
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
       header: 'TÜRK MİLLETİ ADINA',
@@ -357,22 +400,34 @@ export const outcomes: CasePart = {
         'Hukuka aykırı yoldan elde edilen garaj fotoğraflarının hükme esas alınmamasına; sanık Volkan Eren’in TCK 85/1 uyarınca kusur durumu gözetilerek 3 YIL hapis cezası ile cezalandırılmasına; eylem bilinçli taksirle işlendiğinden TCK 22/3 uyarınca cezanın yarısı oranında artırılarak 4 YIL 6 AY; sanığın olay sonrası yardım ve bildirim davranışı gözetilerek TCK 62/1 uyarınca 3 YIL 9 AY HAPİS cezası ile cezalandırılmasına; bilinçli taksir nedeniyle TCK 50/4’ün, cezanın süresi nedeniyle TCK 51/1’in uygulanmasına yer olmadığına; TCK 53/6 uyarınca sürücü belgesinin 2 YIL süreyle geri alınmasına; müdafiin işyerine izinsiz girişine ilişkin tutanak örneğinin Cumhuriyet Başsavcılığına ve baroya gönderilmesine; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
         because(
-          'Savunmanın sunduğu fotoğraflar, rızaya aykırı girilen bir işyerinde çekildiğinden hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2). Bu fotoğraflar dışarıda bırakılarak dosyadaki hukuka uygun deliller tek tek değerlendirilmiştir.',
+          'Savunmanın sunduğu fotoğraflar, rızaya aykırı girilen bir işyerinde çekildiğinden hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2).',
+        ),
+        because('Bu fotoğraflar dışarıda bırakılarak dosyadaki hukuka uygun deliller tek tek değerlendirilmiştir.'),
+        because(
+          'Bilirkişi raporu, görgü tanığının beyanı ve olay tutanağı birbirini doğrulamaktadır; sanığın kavşağa kırmızı ışıkta girdiği kabul edilmiştir.',
+          not(has('ev_heyet')),
         ),
         because(
-          'Hukuka uygun deliller arasında bilirkişi raporu ve görgü tanığının beyanı duruşmada çürütülememiş; sanığın kırmızı ışıkta, neticeyi öngörerek kavşağa girdiği kabul edilmiştir.',
+          'Kırmızı ışıkta yaya geçidine giren sürücünün bir yayaya çarpma ihtimalini öngördüğü kabul edilerek eylem bilinçli taksir (TCK 22/3) olarak nitelendirilmiştir.',
         ),
         because(
           'Müdafi bu fotoğrafları duruşmada delil olarak sunmuş; mahkeme sunumu tutanağa geçirmiştir. Müdafiin davranışı sanık aleyhine delil olarak değerlendirilmemiştir.',
           flag('garaj_sunuldu'),
         ),
         because(
-          'Savunma, kırmızı ışık iddiasını hukuka uygun delillerle sarsabilecek tanık ve belgeleri kürsüye taşımamıştır.',
+          'Dosyada kırmızı ışık tespitiyle çelişen hukuka uygun bir sinyal kaydı, bilirkişi heyeti raporu ya da tanık beyanı bulunmamaktadır.',
+          all(not(has('ev_sinyal_log')), not(has('ev_sesli')), not(has('ev_heyet'))),
         ),
         because(
-          'Adli Tıp raporu yaralanmaların “uyumlu” olduğu bir çarpma biçimini tarif etmiş, aracı belirlememiştir; mahkeme raporu bilirkişi raporu, tutanak ve tanık beyanıyla birlikte değerlendirerek (CMK 217/1) ölümcül çarpmanın sanığın aracıyla gerçekleştiğini ve sanığın davranışı ile ölüm arasında illiyet bağının bulunduğunu kabul etmiştir.',
-          flag('arg_atk'),
+          'Denetleyici günlüğündeki yeniden başlatma ve uyarı kaydı, arızanın kaza anında sanığın geldiği yöndeki ışığı etkilediğini tek başına göstermemektedir.',
+          all(has('ev_sinyal_log'), not(has('ev_sesli'))),
         ),
+        because(
+          'Maktulün sesli mesajı kavşaktaki ışıklara ilişkin genel bir gözlem içermekte, kaza anında sanık yönündeki ışığın rengini tek başına göstermemektedir.',
+          all(has('ev_sesli'), not(has('ev_sinyal_log'))),
+        ),
+        ...atkCausation,
+        ikinciIz,
       ],
       legalBasis: 'TCK 85/1, 22/3, 62/1, 53/6; Anayasa 38/6; CMK 206/2-a, 217/2, 273/1; TCK 116/2; Av.K. md. 34',
       xp: xp(0),
@@ -403,9 +458,83 @@ export const outcomes: CasePart = {
         block([fx(card('Av. Deniz Arslan hakkında disiplin soruşturması başlatıldı.'), 'fade')]),
       ],
     }),
-    outcome('MAHKUMIYET', {
+    outcome('BASIT_HAPIS', {
       class: 'CONVICTION',
       priority: 5,
+      when: any(ref('kusur_yok'), flag('arg_edr'), flag('contra_c2')),
+      stamp: 'MAHKÛMİYET',
+      stampTone: 'red',
+      header: 'TÜRK MİLLETİ ADINA',
+      sentence: '2 yıl 1 ay hapis',
+      verdictText:
+        'Sanık Volkan Eren’in eyleminin bilinçli taksir değil basit taksir kapsamında kaldığı kabul edilerek TCK 85/1 ve 22/4 uyarınca kusur durumu gözetilerek 2 YIL 6 AY hapis cezası ile cezalandırılmasına; sanığın olay sonrası yardım ve bildirim davranışı gözetilerek TCK 62/1 uyarınca 2 YIL 1 AY HAPİS cezası ile cezalandırılmasına; TCK 50/4 uyarınca seçenek yaptırıma çevrilmesine takdiren yer olmadığına; cezanın süresi nedeniyle TCK 51/1 ve CMK 231/5’in uygulanmasına yer olmadığına; TCK 53/6 uyarınca sürücü belgesinin 1 YIL süreyle geri alınmasına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
+      reasoning: [
+        because(
+          'Kırmızı ışık iddiası duruşmada ve dosyadaki hukuka uygun delillerle çürütülmüş; sanığa kırmızı ışık ihlali atfedilememiştir.',
+          ref('kusur_yok'),
+        ),
+        because(
+          'Kırmızı ışık tespiti dosyadaki bilirkişi raporu ve tanık beyanıyla desteklenmektedir; ancak bu tespit tek başına neticenin öngörüldüğünü göstermez.',
+          not(ref('kusur_yok')),
+        ),
+        because(
+          'Araç verisi (EDR) ve çapraz sorgu, bilirkişi raporundaki 68 km/s hız tespitini çürütmüştür.',
+          any(flag('contra_c2'), flag('arg_edr')),
+        ),
+        because(
+          'Cumhuriyet savcısı da esas hakkındaki mütalaasında eylemin basit taksir kapsamında kaldığını belirtmiştir.',
+          flag('mutalaa_basit'),
+        ),
+        because(
+          'Sanığın neticeyi öngördüğü hâlde davrandığı (TCK 22/3) sabit olmadığından eylem basit taksir olarak nitelendirilmiştir.',
+        ),
+        because(
+          'Sanığın yağışlı gecede yaya geçidine yaklaşırken hızını ve dikkatini koşullara uydurmadığı, böylece özen yükümlülüğüne aykırı davrandığı kabul edilmiştir.',
+        ),
+        ...atkCausation,
+        ikinciIz,
+        because('Bu davranış ile ölüm arasında illiyet bağının bulunduğu kanaatine varılmıştır.'),
+        because(
+          'TCK 50/4’teki çevirme takdire bağlıdır. Bir insanın yaşamını yitirmesi ve özen yükümlülüğüne aykırılığın niteliği gözetilerek hapis cezası seçenek yaptırıma çevrilmemiştir.',
+        ),
+        because('Sanık duruşmada kusurunu kabul etmiştir.', flag('kabul')),
+        garajGerekce,
+      ],
+      legalBasis: 'TCK 85/1, 22/2, 22/4, 62/1, 50/4, 51/1, 53/6; CMK 231/5, 273/1',
+      xp: xp(0.7, { ethicsVar: 'ethics' }),
+      howToReach:
+        'Bilinçli taksiri düşür (kırmızı ışık iddiasını çürüt ya da EDR ile hız iddiasını yık) ama soruşturmayı ve arada gelen raporları yarım bırak, ya da basit taksir ve TCK 50/4 talebini savunmaya taşıma.',
+      epilogue: [
+        block([
+          L('hakim', 'Türk Milleti adına…'),
+          N(
+            '“Basit taksir.” Bir an salonda bir şey gevşedi. Sonra “çevrilmesine yer olmadığına” dendi ve gevşeyen şey yeniden gerildi.',
+          ),
+          N('İki yıl bir ay. Bilinçli taksir düşmüştü. Hapis düşmemişti.'),
+          card('ADLİYE KORİDORU — ÖĞLEN', 'adliye'),
+          L('volkan', 'Yeşildi dedim. Kabul ettiler. Yine de içerideyim.'),
+          L('gul', 'İstinaf var, değil mi? Deniz Hanım, istinaf var.'),
+          { speaker: 'player', text: 'Var. İki hafta içinde.' },
+          T(
+            'Hâkim ışığı yeşil saydı, hızı düşük saydı. Sonra sordu: başka ne var? Ben ona başka bir şey göstermemiştim.',
+          ),
+        ]),
+        block(
+          [N('Serkan koridorun sonunda duruyordu. Bana bakmadı. Annesinin adını kimsenin ağzından duymamıştı bugün.')],
+          not(flag('serkan_saygi')),
+        ),
+        block([
+          card('ARSLAN HUKUK — GECE', 'buro_gece'),
+          L('leyla', 'Yarısını kazandın. Yarısı da bir adamın iki yılı.'),
+          L('leyla', 'Hâkime bir çerçeve verdin, içini doldurmadın. İstinafta o çerçeveyi dolduracaksın.'),
+          T('Masama oturdum. Dosyanın içinde açmadığım zarflar vardı. Birini açtım. Sonra ötekini.'),
+        ]),
+        garajEpilog,
+      ],
+    }),
+    outcome('MAHKUMIYET', {
+      class: 'CONVICTION',
+      priority: 6,
       when: always,
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
@@ -415,24 +544,19 @@ export const outcomes: CasePart = {
         'Sanık Volkan Eren’in TCK 85/1 uyarınca kusur durumu gözetilerek 3 YIL hapis cezası ile cezalandırılmasına; eylem bilinçli taksirle işlendiğinden TCK 22/3 uyarınca cezanın yarısı oranında artırılarak 4 YIL 6 AY; sanığın olay sonrası yardım ve bildirim davranışı gözetilerek TCK 62/1 uyarınca 3 YIL 9 AY HAPİS cezası ile cezalandırılmasına; bilinçli taksir nedeniyle TCK 50/4’ün, cezanın süresi nedeniyle TCK 51/1’in uygulanmasına yer olmadığına; TCK 53/6 uyarınca sürücü belgesinin 2 YIL süreyle geri alınmasına; hükmün kesinleşmesine kadar adli kontrol tedbirlerinin devamına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
         because(
-          'Bilirkişi raporu, tanık beyanı ve sanığın kendi anlatımı birlikte değerlendirilerek sanığın kırmızı ışıkta, dikkatsizce kavşağa girdiği kabul edilmiştir.',
-          not(ref('kusur_yok')),
+          'Bilirkişi raporu, tanık beyanı ve olay tutanağı birlikte değerlendirilerek sanığın kavşağa kırmızı ışıkta, dikkatsizce girdiği kabul edilmiştir.',
         ),
         because(
-          'Kırmızı ışık iddiası duruşmada sarsılmış ise de hız, dikkat ve telefon görüşmesine ilişkin deliller birlikte değerlendirilerek sanığın neticeyi öngördüğü kanaatine varılmıştır; savunma bu nitelendirmeye karşı somut bir dayanak ortaya koymamıştır.',
-          ref('kusur_yok'),
+          'Kırmızı ışıkta yaya geçidine giren sürücünün bir yayaya çarpma ihtimalini öngördüğü kabul edilerek eylem bilinçli taksir (TCK 22/3) olarak nitelendirilmiştir.',
         ),
-        because(
-          'Adli Tıp raporu yaralanmaların “uyumlu” olduğu bir çarpma biçimini tarif etmiş, aracı belirlememiştir; mahkeme raporu bilirkişi raporu, tutanak ve tanık beyanıyla birlikte değerlendirerek (CMK 217/1) ölümcül çarpmanın sanığın aracıyla gerçekleştiğini ve sanığın davranışı ile ölüm arasında illiyet bağının bulunduğunu kabul etmiştir.',
-          flag('arg_atk'),
-        ),
-        because('Savunmanın itirazları somut delillerle desteklenmemiştir.', not(ref('kusur_yok'))),
+        ...atkCausation,
+        ikinciIz,
         because('Sanık duruşmada kusurunu kabul etmiştir.', flag('kabul')),
-        because('Savunmanın inandırıcılığı duruşmada çöktü; mahkeme iddianamedeki anlatımı esas aldı.', flag('cokus')),
         because(
-          'Savunmanın sunduğu garaj fotoğrafları hukuka aykırı yoldan elde edildiğinden hükme esas alınmamıştır; karar yalnızca hukuka uygun delillere dayanmaktadır (Anayasa 38/6, CMK 206/2-a, 217/2).',
-          flag('etik_garaj'),
+          'Müdafiin itirazları somut delille desteklenmediğinden, bilirkişi raporu, tutanak ve tanık beyanı birlikte değerlendirilmiş; olay anlatımının dosya kapsamıyla doğrulandığı görülmüştür.',
+          flag('cokus'),
         ),
+        garajGerekce,
       ],
       legalBasis: 'TCK 85/1, 22/3, 62/1, 53/6; CMK 273/1',
       xp: xp(0.6, { ethicsVar: 'ethics' }),
@@ -462,22 +586,7 @@ export const outcomes: CasePart = {
             'Bir kadın öldü, bir adam ceza aldı. Teraziyi dengeli sanan herkes yanılıyordu; ben de. İstinaf dilekçesini yazmaya oturdum.',
           ),
         ]),
-        block(
-          [
-            card('ARSLAN HUKUK — ERTESİ SABAH', 'buro'),
-            N(
-              'Masamda bir zarf: Rüstem Usta’nın avukatından şikâyet dilekçesinin örneği. Altında baro disiplin kurulunun bildirimi. Hükmün ne olduğu zarfın umurunda değildi.',
-            ),
-            N(
-              'Leyla odama girdi, masaya ince, kırmızı kapaklı bir kitapçık bıraktı: meslek kuralları. Hiçbir şey söylemedi.',
-            ),
-            T(
-              'Mahkeme o fotoğrafları yok saydı; dosya onlarsız da ayaktaydı ya da değildi. Ama ben o garaja girdim. Bunu hiçbir hüküm silmiyor.',
-            ),
-            fx(card('Av. Deniz Arslan hakkında disiplin soruşturması başlatıldı.'), 'fade'),
-          ],
-          flag('etik_garaj'),
-        ),
+        garajEpilog,
       ],
     }),
   ],

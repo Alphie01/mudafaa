@@ -108,7 +108,7 @@ export const hearing1: CasePart = {
         }),
         option(
           'K_SUS',
-          '“Bugün susma hakkınızı kullanın; bu sizin anayasal hakkınız (CMK 147/1-e). Konuşmayı ben yaparım.”',
+          '“Bugün susma hakkınızı kullanın. Kimse bunu aleyhinize yorumlayamaz; konuşmayı ben yaparım.”',
           {
             effects: [raise('susma')],
             neutral:
@@ -1132,7 +1132,7 @@ export const hearing1: CasePart = {
         }),
         option(
           'AK_BERAAT',
-          'Adli kontrolün kaldırılmasını (CMK 110) ve delil beklenmeden sanığın hemen beraatini talep ediyoruz.',
+          'Delil beklenmeden sanığın beraatini istiyoruz.',
           {
             score: { USUL_BILGISI: -30 },
             bad: 'Delil toplanırken “hemen beraat” talebi erken ve dayanaksızdır; mahkeme bunu ciddiye almaz.',

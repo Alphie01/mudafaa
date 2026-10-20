@@ -270,7 +270,7 @@ export const invPeople: CasePart = {
               says: [
                 L(
                   'volkan',
-                  'Bilmiyorum! Görmedim! Bir gölge gördüm! Yürümüyordu, koşmuyordu. Alçaktı. Eğilmişti belki, bilmiyorum!',
+                  'Bilmiyorum! Görmedim! Bir gölge… bilmiyorum! Her şey bir saniyeydi!',
                   'kizgin',
                 ),
                 L(
@@ -278,7 +278,7 @@ export const invPeople: CasePart = {
                   'Ben bunu polise de söyleyemedim. Söylesem “kendini kurtarmaya çalışıyor” derler diye.',
                   'uzgun',
                 ),
-                T('“Alçaktı.” Sonra üstünde duracağım. Şimdi değil.'),
+                T('Bağırarak kimse hatırlamaz. Bunu sonra, sakin bir anda yeniden soracağım.'),
               ],
             },
           },
@@ -678,7 +678,7 @@ export const invPeople: CasePart = {
               'serkan',
               'Bir keresinde, ben on yaşındayken, kırmızıda karşıya koştum. Beni kolumdan tutup geri çekti, bir hafta konuşmadı benimle. Bir hafta.',
             ),
-            T('Ben de söyletmek isterim. Çünkü o gece yaya ışığı yeşilse, birinin daha yeşili vardı.'),
+            T('Otuz yıl kırmızıda geçmemiş bir kadın. Kırmızıda geçmediğine yemin eden bir sürücü. Biri yanılıyor; kim?'),
           ),
         }),
         option('SQ_GECE', '“O gece sizinle konuştu mu?”', {

@@ -25,7 +25,7 @@
 - Yüz ifadeleri tam olarak: `normal, mutlu, kizgin, saskin, uzgun`.
 - Negatif skor/etki etiketlerinde Unicode eksi (U+2212, "−") kullanılır; ör. `"−150 SKOR"`, `"+300 SKOR"`.
 - Yalnızca npm kullanılır. Kök `package.json`: `"packageManager": "npm@11.3.0"`, `"engines": {"node": ">=24"}`.
-- Portlar: dev postgres 5432 / redis 6379; test profili postgres 5433 / redis 6380; Auth Emulator 9099; API 3000.
+- Portlar: dev postgres 5432 / redis 6379; test profili postgres 5434 / redis 6380; Auth Emulator 9099; API 3000.
 - Her görev sonunda commit atılır (conventional commits). Mesajın sonu: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 - Task 1 bu konuşmanın içeriğine (spesifikasyon metni, Artifact aracı) ihtiyaç duyduğu için **controller tarafından** yapılır.
 - Plan A'da gerçek bir Firebase projesine gerek yoktur; Auth Emulator yeterlidir. Firebase konsol adımları (proje, sağlayıcılar, `flutterfire configure`, service account) Plan B başlamadan önce kullanıcıdan istenir.
@@ -89,7 +89,7 @@
   - Servisler:
     - `postgres`: postgres:17-alpine, user/pass/db `mudafaa`, 5432, healthcheck `pg_isready`, volume `pgdata`.
     - `redis`: redis:8-alpine, `redis-server --maxmemory-policy noeviction --appendonly yes`, 6379, healthcheck `redis-cli ping`.
-    - `postgres-test`: profile `test`, 5433, db `mudafaa_test`, tmpfs.
+    - `postgres-test`: profile `test`, 5434, db `mudafaa_test`, tmpfs.
     - `redis-test`: profile `test`, 6380, noeviction.
   - `firebase.json`: `{"emulators":{"auth":{"host":"0.0.0.0","port":9099},"ui":{"enabled":false},"singleProjectMode":true}}`.
   - `.firebaserc`: `{"projects":{"default":"demo-mudafaa"}}`.

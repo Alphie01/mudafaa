@@ -20,7 +20,7 @@
     "format": "prettier --write .",
     "validate:cases": "node packages/validator/dist/cli.js content/cases/gece-bekcisinin-sirri",
     "db:up": "docker compose up -d --wait postgres redis",
-    "db:down": "docker compose down",
+    "db:down": "docker compose --profile test down",
     "db:test:up": "docker compose --profile test up -d --wait postgres-test redis-test",
     "mobile:test": "cd apps/mobile && fvm flutter test",
     "mobile:analyze": "cd apps/mobile && fvm flutter analyze"

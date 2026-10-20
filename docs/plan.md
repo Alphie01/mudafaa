@@ -527,7 +527,7 @@ Onaydan sonra bu plan `docs/` altına kaydedilir. M0–M1 küçük TDD görevler
    - Tasarım dosyalarını ve `artifact-type/dc-runtime.js`'i `design/reference/`'a kopyala (gerekirse Artifact'ten yeniden indir).
    - Orijinal spesifikasyonu `docs/spec/legal-case-simulator.md`'ye kaydet.
    - Planı `docs/plan.md`'ye, Ek A'yı `docs/content/dava-07.md` ve `docs/legal/dava-07.md`'ye yaz.
-2. `docker-compose.yml` (postgres 17, redis 8 `noeviction`; `test` profili 5433/6380 portlarında) ve `firebase.json` (auth emulator, proje `demo-mudafaa`).
+2. `docker-compose.yml` (postgres 17, redis 8 `noeviction`; `test` profili 5434/6380 portlarında) ve `firebase.json` (auth emulator, proje `demo-mudafaa`).
 3. Gün-1 denemesi:
    - NestJS 12 modül formatı (ESM mi CJS mi) ve workspace paketlerinin API'den tüketimi.
    - Prisma 7.10 `prisma-client` üreteci ve `PrismaPg` adaptörü.

@@ -1,9 +1,9 @@
 # Müdafaa — yerel altyapı: PostgreSQL 17 ve Redis 8.
 #
 #   npm run db:up        postgres (5432) + redis (6379); veri adlandırılmış volume'lerde kalıcıdır
-#   npm run db:test:up   postgres-test (5433) + redis-test (6380); "test" profili, veri bellekte (tmpfs)
-#   npm run db:down      dev konteynerlerini kaldırır; volume'ler kalır (silmek için: docker compose down -v)
-#                        test profilini de kaldırmak için: docker compose --profile test down
+#   npm run db:test:up   postgres-test (5434) + redis-test (6380); "test" profili, veri bellekte (tmpfs)
+#   npm run db:down      dev ve test konteynerlerini ve ağı kaldırır; volume'ler kalır
+#                        (volume'leri de silmek için: docker compose --profile test down -v)
 #
 # Portlar yalnızca 127.0.0.1'e açılır; kimlik bilgileri yalnızca yerel geliştirme içindir.
 
@@ -51,7 +51,7 @@ services:
       POSTGRES_PASSWORD: mudafaa
       POSTGRES_DB: mudafaa_test
     ports:
-      - '127.0.0.1:5433:5432'
+      - '127.0.0.1:5434:5432'
     tmpfs:
       - /var/lib/postgresql/data
     healthcheck:

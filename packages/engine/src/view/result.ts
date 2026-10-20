@@ -2,7 +2,7 @@ import type { NodeDef, NodeView } from '@mudafaa/case-schema';
 import { EngineError } from '../errors.js';
 import { evalCond } from '../expr/eval.js';
 import { breakdownRows, computeScore } from '../scoring.js';
-import { usedOnce } from './common.js';
+import { addSpeakers, copy, usedOnce } from './common.js';
 import type { ViewCtx } from './common.js';
 
 /** Strateji etiketi: ilk strateji grubunun (choiceGroup bloğu) seçilmiş seçeneğinin etiketi. */
@@ -24,6 +24,8 @@ export function resultView(vc: ViewCtx, def: Extract<NodeDef, { type: 'RESULT' }
   const scoring = vc.c.pkg.config.scoring;
   const ctx = { c: vc.c, s: vc.s, final: done.final };
   const strategy = strategyLabel(vc);
+  const epilogue = (outcome.epilogue ?? []).filter((b) => b.when === undefined || evalCond(b.when, ctx)).flatMap((b) => copy(b.lines));
+  addSpeakers(vc, epilogue);
   return {
     type: 'RESULT',
     id: def.id,
@@ -32,6 +34,7 @@ export function resultView(vc: ViewCtx, def: Extract<NodeDef, { type: 'RESULT' }
     sentence: { demand: vc.c.pkg.meta.demandText, result: outcome.sentence },
     verdictText: outcome.verdictText,
     reasoning: outcome.reasoning.filter((r) => r.when === undefined || evalCond(r.when, ctx)).map((r) => r.text),
+    ...(epilogue.length === 0 ? {} : { epilogue }),
     breakdown: breakdownRows(computeScore(vc.c, vc.s)),
     total: scoring.displayClampMin === undefined ? done.final : Math.max(scoring.displayClampMin, done.final),
     thresholds: {

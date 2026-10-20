@@ -207,6 +207,7 @@ export const NodeView = z.discriminatedUnion('type', [
     sentence: z.strictObject({ demand: z.string(), result: z.string() }),
     verdictText: z.string(),
     reasoning: z.array(z.string()),
+    epilogue: z.array(Line).optional(),
     breakdown: z.array(BreakdownRow),
     total: z.int(),
     thresholds: z.strictObject({

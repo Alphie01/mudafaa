@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ResponseBlock } from './choice.js';
 import { Cond, Val } from './expr.js';
 import { Id } from './primitives.js';
 
@@ -14,6 +15,8 @@ export type ResultTone = z.infer<typeof ResultTone>;
  * Dava sonucu. Motor, `priority` artan sırayla `when` koşulunu tutan ilk sonucu seçer; listedeki son sonuç
  * varsayılandır (koşulu `{all: []}`). `reasoning` parçalarından `when`'i tutanlar gerekçeyi oluşturur; `xp` bir
  * ifadedir (ör. skorun yüzdesi). `howToReach`, ulaşılamayan sonuç için raporda "nasıl ulaşılır" metni olur.
+ * `epilogue`, karar ekranında hükümden sonra oynatılan kapanış sahnesidir: `when`'i tutan **tüm** bloklar sırayla
+ * birleştirilir (gerekçe parçaları gibi), böylece epilog sonuçla asla çelişmez ve bayraklara göre ayrıntı ekleyebilir.
  */
 export const OutcomeDef = z.strictObject({
   id: Id,
@@ -32,5 +35,6 @@ export const OutcomeDef = z.strictObject({
   xp: Val,
   howToReach: z.string(),
   ethicsCard: z.string().optional(),
+  epilogue: z.array(ResponseBlock).optional(),
 });
 export type OutcomeDef = z.infer<typeof OutcomeDef>;

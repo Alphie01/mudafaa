@@ -452,6 +452,7 @@ export function compile(input: unknown): CompileResult {
   pkg.outcomes.forEach((o, i) => {
     checkCond(o.when, `outcomes[${i}].when`);
     o.reasoning.forEach((r, j) => checkCond(r.when, `outcomes[${i}].reasoning[${j}].when`));
+    checkResponses(o.epilogue, `outcomes[${i}].epilogue`);
     checkVal(o.xp, `outcomes[${i}].xp`);
   });
   pkg.predicates.forEach((pr, i) => checkCond(pr.when, `predicates[${i}].when`));

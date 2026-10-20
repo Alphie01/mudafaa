@@ -25,7 +25,7 @@ Dava 2027 baharında geçer; bugünkü (Ekim 2026) metinlerin o tarihte değişm
 | TCK 257/1 | BR_01 (C), T_04, T_07 (C), GOREV | Kanunda ayrıca suç olarak tanımlananlar dışında, görevin gereklerine aykırı hareketle kişilerin mağduriyetine/kamunun zararına neden olma ya da haksız menfaat sağlama: **6 ay–2 yıl** (6086 ile). |
 | TCK 53/1, 53/5, 62/1, 63 | hükümler | Hak yoksunlukları; yetkinin kötüye kullanılmasıyla işlenen suçta infazdan sonra yarıdan bir katına kadar yasak (53/5); takdiri indirim altıda bir; tutuklulukta geçen sürenin mahsubu. |
 | TCK 51/1 | MAHKUMIYET | Erteleme ≤ 2 yıl. |
-| TCK 106, 267, 272, 277, 285 | etik seçenekler, rapor, BERAAT_B | Tehdit; iftira (ve 267/4: iftira sonucu tutuklama); yalan tanıklık; görülmekte olan davada tanığı etkileme; gizliliğin ihlali. |
+| TCK 106, 267, 272, 277 | etik seçenekler, rapor, BERAAT_B, ETIK | Tehdit; iftira (ve 267/4: iftira sonucu tutuklama); yalan tanıklık; görülmekte olan davada tanığı etkileme. (Önceki taslaktaki sızdırılmış kayıt / TCK 285 dalı oyunda hiçbir seçenekle tetiklenmediği için kaldırıldı.) |
 | Anayasa 38/4, 38/6 | gerekçeler, Leyla | Masumiyet karinesi; kanuna aykırı elde edilen bulgular delil olarak kabul edilemez. |
 | AİHS 6, 6/2 | Leyla gün 1, PS_K2, gerekçeler | Adil yargılanma; kışkırtıcı ajan ölçütleri (devletin pasif kalıp kalmadığı, önceden somut şüphe bulunup bulunmadığı). |
 | CMK 48 | T_01, T_02, T_02Y | Tanık kendisini ceza kovuşturmasına uğratabilecek sorulara cevap vermekten çekinebilir; önceden bildirilir. |
@@ -52,19 +52,24 @@ Dava 2027 baharında geçer; bugünkü (Ekim 2026) metinlerin o tarihte değişm
 | CMK 225/2, 226/1, 226/3 | T_04 | Mahkeme nitelendirmede bağlı değildir; vasıf değişecekse önce haber verilip ek savunma alınır; istem üzerine süre verilir. |
 | CMK 231/3 | beraat hükümleri | Beraat eden sanığa tazminat isteyebileceği bildirilir. |
 | CMK 231/5, 231/6, 231/8, 231/12 (7589 ile değişik) | GOREV | HAGB ≤ 2 yıl; beş yıl denetim; karara karşı **istinaf**. |
-| CMK 141/1-a | beraat hükümleri | Kanunlarda öngörülen koşullar dışında / sonradan beraat eden tutuklunun tazminat hakkı (sanık 13 Mart'tan itibaren tutuklu). |
+| CMK 141/1-e, 142 | beraat hükümleri, ETIK | **141/1-e**: kanuna uygun olarak tutuklanıp sonradan beraat eden kişinin tazminat hakkı (Halil'i sulh ceza hâkimi usulüne uygun tutukladı; 141/1-a "kanunlarda belirtilen koşullar dışında" tutmayı düzenler ve bu dosyaya uymaz). Talep süresi ve usulü CMK 142. |
 | CMK 273/1 | hükümler | İstinaf: gerekçeli hükmün tebliğinden itibaren iki hafta. |
 | Av.K. 34, 38/1-b | etik seçenekler, ETIK kartı | Doğruluk ve meslek kurallarına uyma; menfaati zıt tarafa avukatlık yasağı (muhbire hukuki yardım verilmemesi, adli yardıma yönlendirme). |
 
 ## 2. Ceza hesabı
 
-- **MAHKUMIYET / ETIK** (252/2): alt sınırdan **4 yıl** → TCK 62/1 (1/6) → **3 yıl 4 ay**. TCK 53/1 ve 53/5. Tutuklulukta
+- **MAHKUMIYET** (252/2): alt sınırdan **4 yıl** → TCK 62/1 (1/6) → **3 yıl 4 ay**. TCK 53/1 ve 53/5. Tutuklulukta
   geçen süre mahsup (TCK 63). 2 yılı aştığından erteleme ve HAGB yok. Para Emniyet'in olduğundan müsadere değil, iade.
 - **GOREV** (257/1, ek savunma alınarak vasıf değişikliği): temel **1 yıl** (alt sınırdan uzaklaşma gerekçesi: kamu
   hizmetine güven ve yetki aşımı) → TCK 62/1 → **10 ay** → CMK 231/5 HAGB, beş yıl denetim (231/8); 231/6-c bakımından
   giderilecek somut bir zarar yok. HAGB'de hapis ertelenemez (231/7). Kanun yolu istinaf (231/12).
 - **BERAAT_B / BERAAT_E**: ceza yok; tutuklama/adli kontrol kalkar; 40.000 TL Emniyet'e iade; dinleme kayıtlarının imhası
-  (CMK 137/3); tazminat bildirimi (CMK 231/3, 141/1). 223/2-b'de Sinan Kaplan ve Bayram Öz için dosya örneği Başsavcılığa.
+  (CMK 137/3); tazminat bildirimi (CMK 231/3, 141/1-e, 142). 223/2-b'de Sinan Kaplan ve Bayram Öz için dosya örneği Başsavcılığa.
+- **ETIK** (müdafi tanığı yönlendirdi): sanık nesnel delillerle **223/2-e beraat** eder; yönlendirilen beyan hükme esas
+  alınmaz (CMK 217/1); müdafi hakkında TCK 277 yönünden suç duyurusu ve baroya bildirim (Av.K. 34). Avukatın ihlali müvekkilin
+  aleyhine değerlendirilmez. Nesnel deliller beraate yetmezse hüküm hukuki bayraklara göre kurulur, ihlal epilogda ve
+  gerekçede ayrıca yer alır. Tanık yönlendirilmeden yapılan etik ihlaller (inkâr tavsiyesi, tanığı izleme; `ethics ≥ 2`)
+  hükmü değiştirmez; her sonucun epilogunda Leyla'nın uyarısı ve Deniz'in baroya kendi bildirimi yer alır.
 
 ## 3. Usul akışı
 
@@ -102,8 +107,21 @@ Dava 2027 baharında geçer; bugünkü (Ekim 2026) metinlerin o tarihte değişm
 7. **Avukatın tanıkla teması.** Tanıkla görüşmek yasak değildir, ama ifadesini almak, yazdırmak, yönlendirmek ve bir isim
    vermek meslek ve ceza hukuku ihlalidir (Av.K. 34, TCK 277). Oyunda doğru seçimler: muhbiri adli yardıma, çaycıyı mahkemeye
    yönlendirmek; Devir-2 memurunun yaklaşmasını belgelemek ve savcılığa bildirmek; şüpheliyi izlememek.
-8. **Tazminat bildirimi.** Beraat eden ve tutuklu kalmış sanığa CMK 141/1 ve 231/3 uyarınca tazminat bildirimi yapılır;
-   tahliye edilmiş olsa da 13 Mart–tahliye arası tutukluluk vardır.
+8. **Tazminat bildirimi.** Beraat eden ve tutuklu kalmış sanığa CMK 141/1-e, 142 ve 231/3 uyarınca tazminat bildirimi
+   yapılır; tahliye edilmiş olsa da 13 Mart–tahliye arası tutukluluk vardır. Tutuklama kanuna uygun olduğundan 141/1-a değil,
+   "sonradan beraat" bendi (e) uygulanır.
+9. **Sonuçların hukuki koşulu.** Beraat skora bağlanmaz; savcının beraat mütalaası verdiği koşulla aynı koşula bağlıdır:
+   (a) iki kayıt da hukuka aykırı delil olarak ayıklanmış, (b) zarfın sanık odada yokken girdiği tutanakla, sanığın
+   makamdan geldiği izlenimi veren **sahte bir çağrıyla** uzaklaştırıldığı (takvimdeki dahili ya da santral) ve kayıt
+   cihazının elle durdurulduğu (bilirkişi) gösterilmiş, (c) muhbirin "bekletti" ve "anlaştık" anlatılarının ikisi de
+   belgeyle çürütülmüştür. Yorum kararı: sanığın yalnızca odada olmadığını göstermek yetmez; ayrılışın dışarıdan, sahte
+   bir çağrıyla sağlandığı gösterilmezse "zarfın bırakılacağını bilerek çıktı" ihtimali (TCK 252/1, anlaşmayla tamamlanma)
+   açık kalır ve MAHKUMIYET gerekçesi bunu söyler. Gerçek failin gösterildiği yol da kayıtların ayıklanmasını ve odanın boş
+   olduğunu ister: kayıtlar okunduysa "zarf yarın masada" cümlesi muhbirin "koridorda birine verdim, Halil Bey'e iletecekti"
+   anlatısını aracılı teslim olarak okumaya elverir. Skor yalnızca 2-b/2-e derecesini (12.000) ve XP'yi belirler.
+10. **Ek savunma ve 257/1 (GOREV).** Terditli savunma ancak öncelikli randevu kaydı (ev_sira_disi) dosyada iken açılır;
+   vasıf değişikliği için muhbirin anlatısının en az bir ayağı çürütülmüş ve kayıtlardan biri ya da tutanağın saatleri
+   tartışılmış olmalıdır; aksi hâlde 252/2 mahkûmiyeti kalır.
 
 ## 5. Hassas konu denetimi
 Cinsel suç, çocuklara yönelik suç ya da terör içeriği yoktur. Kamu görevlileri gerçek kişi ya da kurumlara gönderme yapmaz;

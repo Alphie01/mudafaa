@@ -57,24 +57,50 @@ sanığın hattından alınmıştır. Halil'in tek kusuru: yirmi yedi yılda bir
 
 Sinan'ın çözülmesi: dört çelişkiden en az üçü → `sinan_ifsa` (T_02Y; CMK 48 ile susar).
 
-## 4. Usul kararları (A–D)
+## 4. Usul kararları (A–D) ve oyun kuralları
 H1_02 savcının yönlendirici sorusu · H1_03 kayıtların okunması (CMK 206/2-a: iki çıkarım birlikte → `red_14`, `red_9`) ·
 H1_05 talepler ve tahliye (≥ 2 çelişki/ret → `halil_tahliye`) · T_04 vasıf değişikliği ve ek savunma (CMK 226) · T_05 mütalaaya
-cevap · T_07 esas savunma · T_08 son söz. Etik kararlar: TAV_B (inkâr tavsiyesi), BAY_B/BAY_C (muhbire beyan yazdırma /
-dikte), MUZ_BASKI, ARAK_C (tanığı izleme), HK2_B (koridorda tanıkla temas).
+cevap · T_07 esas savunma (parçaları T_07P1…P4/S1…S3 karar node'larında, o oyunda kurulan olguya bağlı) · T_08 son söz.
+Etik kararlar: TAV_B (inkâr tavsiyesi), BAY_B/BAY_C (muhbire beyan yazdırma / dikte), MUZ_BASKI, ARAK_C (tanığı izleme),
+HK2_B (koridorda tanıkla temas).
+
+Oyun kuralları (erken çözümü önleyen yapı, Dava #07 ile uyumlu):
+- **Celse günü sabittir.** `GO_H1` 3. günün eylem puanı bitince ve Leyla'ya danışılmışsa; `GO_T` ara evresinin 2. günü
+  eylem puanı bitince ve Leyla'ya danışılmışsa açılır. Yumuşak kilit olmasın diye her iki hub'da 1 EP'lik, en çok üç kez
+  kullanılabilen yedek etkinlik var (`A_DOSYA` "Dosyayı baştan oku", `A2_DOSYA` "Duruşma hazırlığı"); metinleri o ana kadar
+  kurulan zincire göre değişir.
+- **Boş ziyaret yok.** Görüşmelerden (Müdür, Komiser, Zehra, Devir-2, Muzaffer, ara evresinde Halil) en az bir soru
+  sorulmadan; ara evresindeki sahne/belgelerden (kamera, arşiv, santral, cihaz) en az bir ayrıntıya bakılmadan çıkılamaz.
+- **Önce bastır, sonra sun.** Komiser, muhbir ve Devir-2 memurunun çürütülebilir ifadelerinde doğru belge ancak ifadeye
+  bastırıldıktan sonra işler; erken sunum cezasız geri çevrilir (`PS_*_ERKEN`: "önce sorunuzu sorun").
 
 ## 5. Sonuçlar ve koşullar
 
+Suçluluk skora bağlanmaz. Beraat, savcının beraat mütalaası verdiği koşulla aynı koşula bağlıdır; skor yalnızca 2-b / 2-e
+derecesini ve XP'yi belirler. Mahkûmiyet ve 257 gerekçe satırları o oyunda duruşmada kurulan olgulara göre koşulludur.
+
 | Sonuç | Sınıf | Koşul | Eşik |
 |---|---|---|---|
-| ETIK | CONVICTION | `illegal_used` ∨ `tanik_etkileme` ∨ `ethics ≥ 2` | — |
-| BERAAT_B | ACQUITTAL (223/2-b) | ¬çöküş ∧ gerçek fail kanıtlandı (`sinan_ifsa` ∨ `bayram_ifsa` ∧ zarf/tek kişi) ∧ `gercek_fail` (T07_A) ∧ `kayit_disi` ∧ pers ≥ 7 | 12.000 |
-| BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ `kayit_disi` ∧ `zarf_suphe` ∧ pers ≥ 5 | 10.000 |
-| GOREV | RECHARACTERIZED (257/1 + HAGB) | ¬çöküş ∧ `terditli` (T07_C) | 3.000 |
-| MAHKUMIYET | CONVICTION (252/2) | varsayılan; çöküşte savcının cümlesi | — |
+| ETIK | OTHER (beraat + baro) | ¬çöküş ∧ `tanik_etkileme` (BAY_C / MUZ_BASKI) ∧ (`beraat_kosul` ∨ gerçek fail) | — |
+| BERAAT_B | ACQUITTAL (223/2-b) | ¬çöküş ∧ ¬tanık etkileme ∧ gerçek fail ∧ `gercek_fail` (T07_A) ∧ `kayit_disi` | 12.000 |
+| BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ ¬tanık etkileme ∧ (`beraat_kosul` ∨ gerçek fail) | — |
+| GOREV | RECHARACTERIZED (257/1 + HAGB) | ¬çöküş ∧ `terditli` (T07_C; `ev_sira_disi` gerekir) ∧ (contra_b1 ∨ contra_b2) ∧ (red_14 ∨ contra_k1 ∨ contra_b3 ∨ contra_k3) | 4.000 |
+| MAHKUMIYET | CONVICTION (252/2) | varsayılan; tanık etkilemede ve etik ihlallerde epilog notu | — |
 
-Yüklemler: `kayit_disi` = (red_14 ∨ contra_k1) ∧ (red_9 ∨ contra_k5 ∨ obj_k5); `zarf_suphe` = en az ikisi
-{contra_k3, contra_b3, contra_b4, contra_b5}. Eşik çubuğu 0 / 3.000 / 10.000; `scaleMax` 11.000.
+Yüklemler:
+- `kayit_disi` = (red_14 ∨ contra_k1) ∧ (red_9 ∨ contra_k5 ∨ obj_k5)
+- `oda_bos` = contra_k3 ∨ contra_b3 ∨ k3_kismi
+- `ayrilis` (sahte çağrı) = q_takvim (H101Q_B; `ded_sahte_cagri` gerekir) ∨ contra_s2 (santral). Kamera tek başına yetmez:
+  sanığın çıktığını gösterir, neden çıktığını göstermez.
+- `zarf_suphe` = oda_bos ∧ ayrilis ∧ contra_b4
+- `muhbir_coktu` = contra_b1 ∧ contra_b2
+- `beraat_kosul` = kayit_disi ∧ zarf_suphe ∧ muhbir_coktu (T_05'te savcı da beraat ister)
+- gerçek fail (`gercekProven`) = kayit_disi ∧ oda_bos ∧ ((sinan_ifsa ∧ contra_b2) ∨ (bayram_ifsa ∧ ¬etki_bayram ∧
+  (ded_tek_kisi ∨ ded_zarf_kaynagi) ∧ muhbir_coktu))
+
+Etik ihlaller (tanık etkileme dışında, `ethics ≥ 2`): hüküm hukuki bayraklara göre kurulur; her sonucun epilogunda Leyla'nın
+uyarısı ve Deniz'in baroya kendi bildirimi yer alır. Tanık etkileme beraate yetmeyen bir oyunda olursa yönlendirilen beyan
+gerekçede dışlanır ve epiloga savcılık/baro yazısı eklenir. Eşik çubuğu 0 / 4.000 / 12.000; `scaleMax` 11.000.
 
 ## 6. Skor
 Kit ölçeği (Dava #07): sahne nesnesi +40/+60 (defter +80), ıska −10; belge +100/+150, yanlış alet −20; tarif +300, yanlış çift

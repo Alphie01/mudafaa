@@ -408,8 +408,8 @@ export const tests: CasePart = {
         muzaffer,
         C('T035_B', 'T04_B', 'T045_DEVAM', 'T05_B', 'T07_B', 'T08_A'),
       ),
-      goldenPath('G_GOREV', { outcome: 'GOREV', finalMin: 4317, finalMax: 4773 }, gorev),
-      goldenPath('G_M', { outcome: 'MAHKUMIYET', finalMin: 536, finalMax: 594 }, mahkumiyet),
+      goldenPath('G_GOREV', { outcome: 'GOREV', finalMin: 5182, finalMax: 5728 }, gorev),
+      goldenPath('G_M', { outcome: 'MAHKUMIYET', finalMin: 594, finalMax: 656 }, mahkumiyet),
       goldenPath(
         'G_ETIK',
         { outcome: 'ETIK', finalMin: 10625, finalMax: 11745 },

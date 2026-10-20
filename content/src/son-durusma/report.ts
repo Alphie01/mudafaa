@@ -91,6 +91,12 @@ export const report: CasePart = {
         'USUL_BILGISI',
       ),
       hint(
+        'h_salon',
+        not(flag('h104_itiraz')),
+        'Savcının cevabı içinde taşıyan, tanığı bir kanaate yönlendiren sorusuna itiraz edebilirdin (CMK 201).',
+        'USUL_BILGISI',
+      ),
+      hint(
         'h_bildir',
         all(any(has('ded_mektup'), has('ded_canli'), has('ded_gomlek')), not(flag('bildirdi'))),
         'Başka bir kişinin fail olabileceğine dair bulgularını savcılığa yazılı olarak bildirmedin (CMK 158, 160). Aramayı ve soruşturmayı ancak savcı yaptırabilir.',
@@ -104,7 +110,13 @@ export const report: CasePart = {
       ),
       hint(
         'h_etik',
-        any(flag('suleyman_kocluk'), flag('cansu_vaat'), flag('ikrar_onerisi'), flag('leyla_not'), flag('teklif_kabul')),
+        any(
+          flag('suleyman_kocluk'),
+          flag('cansu_vaat'),
+          flag('ikrar_onerisi'),
+          flag('leyla_not'),
+          flag('teklif_kabul'),
+        ),
         'Etik çizgiyi aştın: tanığa nasıl konuşacağını söylemek, tanığa menfaat vaat etmek, müvekkile gerçeğe aykırı ikrar önermek ya da meslek sırrına dokunmak (Av.K. 34, 36; TCK 272, 277).',
         'SAVUNMA_STRATEJISI',
       ),

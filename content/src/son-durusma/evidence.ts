@@ -39,7 +39,8 @@ export const evidencePart: CasePart = {
       type: 'DIJITAL',
       title: 'İddianamedeki pazartesi mesajı (alıntı)',
       shortText: '“Babamın hayatını yakan adammış. Bu hafta hesabını soracağım.”',
-      description: 'Sanığın 10 Kasım 21.14’te bir arkadaşına yazdığı mesaj; iddianame tasarlamanın kararı olarak alıntılar.',
+      description:
+        'Sanığın 10 Kasım 21.14’te bir arkadaşına yazdığı mesaj; iddianame tasarlamanın kararı olarak alıntılar.',
       sourceLabel: 'İddianame',
       icon: 'phone',
       side: 'PROSECUTION',
@@ -111,7 +112,8 @@ export const evidencePart: CasePart = {
       type: 'DIJITAL',
       title: 'Sanığın telefonu · inceleme raporu',
       shortText: 'Emir’in telefonundaki mesajların tam dökümü.',
-      description: 'Bilişim büronun raporu: mesajlar, saatleri ve baz bilgisiyle. İddianame tek bir mesajın yarısını alıntılar.',
+      description:
+        'Bilişim büronun raporu: mesajlar, saatleri ve baz bilgisiyle. İddianame tek bir mesajın yarısını alıntılar.',
       sourceLabel: 'Soruşturma dosyası · Bilişim',
       icon: 'phone',
       side: 'NEUTRAL',
@@ -159,7 +161,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Nişan masasının fotoğrafı · 23.12',
       shortText: 'Arkada Tarık Sezer, lacivert gömlek.',
-      description: 'Garson Cansu Güler’in telefonundaki fotoğraf; dosya bilgisi 14.11 23.12. Kesilen pastanın arkasında işletme ortağı.',
+      description:
+        'Garson Cansu Güler’in telefonundaki fotoğraf; dosya bilgisi 14.11 23.12. Kesilen pastanın arkasında işletme ortağı.',
       sourceLabel: 'Cansu Güler',
       icon: 'camera',
       side: 'DEFENSE',
@@ -170,7 +173,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Not bloğu inceleme tutanağı (yan ışık)',
       shortText: 'Koparılmış sayfanın alttaki sayfaya geçen izi.',
-      description: 'Emanette, mahkeme izniyle ve kâtip huzurunda: maktulün not bloğunda kurşun kalem izleriyle okunan kelimeler.',
+      description:
+        'Emanette, mahkeme izniyle ve kâtip huzurunda: maktulün not bloğunda kurşun kalem izleriyle okunan kelimeler.',
       sourceLabel: 'Adliye emanet bürosu',
       icon: 'magnifier',
       side: 'DEFENSE',
@@ -193,7 +197,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: '2004 arşiv dosyası · arama tutanağı',
       shortText: 'Görükle’deki evin üç kiracısı.',
-      description: 'Bursa 2. Ağır Ceza 2004/311 Esas dosyasından arama ve el koyma tutanağı; evde bulunanların adları ve imzaları.',
+      description:
+        'Bursa 2. Ağır Ceza 2004/311 Esas dosyasından arama ve el koyma tutanağı; evde bulunanların adları ve imzaları.',
       sourceLabel: 'Adliye arşivi',
       icon: 'document',
       side: 'DEFENSE',
@@ -286,7 +291,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Mutfak tahtası: “Cuma 120 kişi nişan — bıçaklar bileylensin”',
       shortText: 'Şefin çarşamba yazdığı talimat.',
-      description: 'Beyaz tahtada şefin el yazısı, çarşamba tarihli. Altında yedi aşçının adı; hepsinin yanında bir tik.',
+      description:
+        'Beyaz tahtada şefin el yazısı, çarşamba tarihli. Altında yedi aşçının adı; hepsinin yanında bir tik.',
       sourceLabel: 'Toker Balık mutfağı',
       icon: 'document',
     }),
@@ -318,7 +324,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Süleyman: 23.45 dolmuşundan önce, elleri boş',
       shortText: 'Emir 23.40 gibi arka kapıdan elleri boş, önlüksüz çıktı.',
-      description: 'Bulaşıkçı her gece 23.45 dolmuşuna biner; çocuğu ondan beş dakika önce, çöp kovalarının yanında gördü.',
+      description:
+        'Bulaşıkçı her gece 23.45 dolmuşuna biner; çocuğu ondan beş dakika önce, çöp kovalarının yanında gördü.',
       sourceLabel: 'Süleyman Çiftçi',
       icon: 'document',
     }),
@@ -326,7 +333,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Pazartesi akşamı evdeki kavga',
       shortText: 'Emir patronunun kim olduğunu babasından öğrendi; ayrıntısız.',
-      description: 'Kemal bağırdı: “O adamın yanında çalışmayacaksın, benim hayatımı o yaktı.” Başka bir şey söylemedi.',
+      description:
+        'Kemal bağırdı: “O adamın yanında çalışmayacaksın, benim hayatımı o yaktı.” Başka bir şey söylemedi.',
       sourceLabel: 'Yalçın ailesi',
       icon: 'document',
     }),
@@ -334,7 +342,8 @@ export const evidencePart: CasePart = {
       type: 'DIJITAL',
       title: 'Pazartesi mesajının tamamı',
       shortText: '“…Neden yaptığını yüzüne soracağım.”',
-      description: 'İddianamenin kestiği son cümle: “Neden yaptığını yüzüne soracağım. Babamın yüzüne nasıl baktığını.”',
+      description:
+        'İddianamenin kestiği son cümle: “Neden yaptığını yüzüne soracağım. Babamın yüzüne nasıl baktığını.”',
       sourceLabel: 'Telefon inceleme raporu',
       icon: 'phone',
     }),
@@ -374,7 +383,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Durak tabelası: meyhaneye 700 m',
       shortText: 'Arka kapıdan durağa dokuz dakika.',
-      description: 'Belediyenin yaya yönlendirme tabelası: “Toker Balık / Balıkçı barınağı 700 m.” Yürüdün: dokuz dakika.',
+      description:
+        'Belediyenin yaya yönlendirme tabelası: “Toker Balık / Balıkçı barınağı 700 m.” Yürüdün: dokuz dakika.',
       sourceLabel: 'İskele durağı',
       icon: 'magnifier',
     }),
@@ -414,7 +424,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'İz yazısı: “…terazi senin değildi… T…ık’ın…”',
       shortText: 'Koparılan sayfanın alttaki izi.',
-      description: 'Yan ışıkta okunan kelimeler: “Kemal… o terazi senin değildi… dolap benimdi, mal T…ık’ın… susan bendim… yarın…”',
+      description:
+        'Yan ışıkta okunan kelimeler: “Kemal… o terazi senin değildi… dolap benimdi, mal T…ık’ın… susan bendim… yarın…”',
       sourceLabel: 'Not bloğu inceleme tutanağı',
       icon: 'magnifier',
     }),
@@ -422,7 +433,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Gülay: mektup eşyalar arasında yoktu',
       shortText: 'Ercan haftalardır bir mektup yazıyordu.',
-      description: 'Gülay Toker: “Geceleri ofiste eski bir arkadaşına mektup yazıyordu. Polisin geri verdiği eşyalarda yoktu.”',
+      description:
+        'Gülay Toker: “Geceleri ofiste eski bir arkadaşına mektup yazıyordu. Polisin geri verdiği eşyalarda yoktu.”',
       sourceLabel: 'Gülay Toker',
       icon: 'document',
     }),
@@ -483,7 +495,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Emir 23.40’ta çıkmıştı',
       shortText: 'Bulaşıkçı 23.40 diyor; baş tanık 23.55.',
-      description: 'Bağımsız bir tanık, dolmuş saatiyle, sanığı baş tanığın söylediğinden on beş dakika önce kapıdan çıkarken gördü.',
+      description:
+        'Bağımsız bir tanık, dolmuş saatiyle, sanığı baş tanığın söylediğinden on beş dakika önce kapıdan çıkarken gördü.',
       sourceLabel: 'Çıkarım',
       icon: 'bulb',
       side: 'DEFENSE',
@@ -523,7 +536,8 @@ export const evidencePart: CasePart = {
       type: 'TELEFON_KAYDI',
       title: 'Ercan 23.58’de yaşıyordu',
       shortText: 'Sanık otobüsteyken maktul konuşuyordu; kapıda biri vardı.',
-      description: 'Sesli mesaj 23.58.07’de başlıyor; Emir 23.52’de otobüste. Maktulü öldüren, 23.58’den sonra kapıya gelen kişidir.',
+      description:
+        'Sesli mesaj 23.58.07’de başlıyor; Emir 23.52’de otobüste. Maktulü öldüren, 23.58’den sonra kapıya gelen kişidir.',
       sourceLabel: 'Çıkarım',
       icon: 'bulb',
       side: 'DEFENSE',

@@ -122,6 +122,9 @@ const SABAH = T(`
 ~ Savcının hikâyesinde bir saat var: 23.55. O saatte bir çocuk elinde bıçakla bu kapıdan kaçmış.
 ~ Benim elimde başka bir saat yok. Henüz. Ama bu kıyıda her şeyin bir saati var: teknelerin, dolmuşların, kasaların.
 > Meyhanenin arka sokağına yürüdüm. Çöp kovaları, bir bulaşıkhanenin buğulu penceresi, bir kapı. Kapının üstünde kırmızı ışığı sönük bir kamera.
+> Arka kapının yanında bulaşıkhanenin buğulu penceresi; içeride bir radyo, bir musluk sesi. Biri sabahın sekizinde tabak yıkıyordu; ya da dünün tabaklarını.
+> Kapının eşiğinde ıslak bir izmarit, yanında bir çakmak kapağı. Polis bandının bir parçası bir çöp kovasının kulpuna takılı kalmış; rüzgârda sallanıyordu.
+~ Üç ay. Bir olay yeri üç ayda unutur; ama bir mutfak unutmaz. Her gece aynı saatte aynı tabaklar, aynı dolmuş, aynı kasa.
 ~ Kapanmış bir meyhane, kimsenin sormadığı bir kamera ve on bir gün. Leyla’nın sesi aklımda: “Seninki lazım.”
 `);
 
@@ -283,7 +286,8 @@ leyla: Babasına yanlış rakam söyleme. O adam yirmi iki yıl önce bir avukat
           group: 'g_strateji',
           hints: {
             STR_MASUMIYET: 'Masumiyet: Emir öldürmedi. Uyan esas savunma ×1,5 puan.',
-            STR_TASARLAMA: 'Tasarlamayı çürüt: savcının üç ayağını tek tek yık; şüpheden yararlanma. Uyan esas savunma ×1,2.',
+            STR_TASARLAMA:
+              'Tasarlamayı çürüt: savcının üç ayağını tek tek yık; şüpheden yararlanma. Uyan esas savunma ×1,2.',
             STR_TERDIT: 'Terditli: önce beraat; olmazsa tasarlama yok, haksız tahrik var. Uyan esas savunma ×0,8.',
           },
         },

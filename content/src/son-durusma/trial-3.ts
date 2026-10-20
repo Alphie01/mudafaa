@@ -38,7 +38,11 @@ import { H3, court3, wrongMove } from './shared.js';
 // dinlenmesi (R1–R4) ve çöküşü, mütalaa, dayanaklar, esas savunma, son söz, hüküm; çöküş kesintisi.
 
 const arsiv = deliver('T3_00G_1', [
-  { evidence: 'ev_arsiv', requires: flag('arsiv_talep'), hint: 'Leyla’nın verdiği esas numarasıyla 2004 dosyasını mahkemeden iste.' },
+  {
+    evidence: 'ev_arsiv',
+    requires: flag('arsiv_talep'),
+    hint: 'Leyla’nın verdiği esas numarasıyla 2004 dosyasını mahkemeden iste.',
+  },
 ]);
 
 const collapse: Effect = ifThen(
@@ -79,7 +83,10 @@ export const trial3: CasePart = {
     {
       id: 'tanik_coktu',
       label: 'Baş tanığın anlatımı çöktü',
-      when: any(ref('tarik_sarsildi'), atLeast(2, flag('contra_s2'), flag('contra_s4'), flag('contra_r1'), flag('contra_r4'))),
+      when: any(
+        ref('tarik_sarsildi'),
+        atLeast(2, flag('contra_s2'), flag('contra_s4'), flag('contra_r1'), flag('contra_r4')),
+      ),
     },
     {
       id: 'lehe2',
@@ -143,7 +150,7 @@ export const trial3: CasePart = {
 `),
       ],
     }),
-    decisionNode('T3_00G_3', [{ to: 'T3_00' }], {
+    decisionNode('T3_00G_3', [{ to: 'T3_00G_4' }], {
       lines: [
         W(
           flag('bildirdi'),
@@ -156,6 +163,40 @@ export const trial3: CasePart = {
 `),
       ],
     }),
+    decisionNode('T3_00G_4', [{ to: 'T3_00L' }], {
+      lines: [
+        W(
+          flag('aile_baris'),
+          `
+> Kemal salona girerken bir an durdu. Leyla’nın oturduğu sıraya baktı. Sonra, yirmi iki yıl sonra ilk kez, başıyla selam verdi. Leyla aynı selamı verdi; o kadar.
+`,
+        ),
+        W(
+          any(flag('leyla_kemal'), flag('leyla_acik')),
+          `
+> Leyla elinde bir zarf tutuyordu; kalın, eski bir zarf. Kimseye vermedi. Dinleyici sırasında dizlerinin üstünde tuttu.
+`,
+        ),
+        O(`
+> Leyla’nın elleri boştu. Sigara paketini bu sabah masasında bırakmıştı; ilk kez.
+`),
+      ],
+    }),
+    story('T3_00L', {
+      ...H3,
+      title: 'Kapının önü',
+      background: 'adliye',
+      lines: B(`
+> Salonun kapısı açılmadan önce Leyla yanıma geldi. Cübbemin yakasını düzeltti; bunu hiç yapmazdı.
+leyla: On beş dava. Hepsinde ben sana bir şey söyledim, sen de bir şey yaptın. Bugün bir şey söylemeyeceğim.
+- Hiçbir şey mi?
+leyla: Bir şey. Yirmi iki yıl önce bu koridorda bir çocuğa “olmazsa indirim” dedim. Bugün o koridorda sen varsın; ben değil.
+leyla: Kazanırsan benim yerime kazanma. Kaybedersen benim yerime kaybetme. Kendi davanı savun: bir çocuğun o geceki on beş dakikasını.
+> Kapı açıldı. Mübaşirin kalın sesi koridora taştı. Leyla geri çekildi; dinleyici sırasına yürüdü, en arkaya oturdu.
+~ Bir mentor bir gün susar. Susması, ilk kez sana güvendiği gündür. Ya da ilk kez kendine güvenmediği.
+`),
+      choices: [cont('T300L_DEVAM', 'Salona gir', 'T3_00', { role: 'PRIMARY' })],
+    }),
     court3.stage('T3_00', {
       title: 'Son duruşma',
       courtStage: 'ACILIS',
@@ -167,7 +208,8 @@ export const trial3: CasePart = {
 recep: Emir Yalçın dosyası! Hım-hım.
 # BURSA 3. AĞIR CEZA MAHKEMESİ — 3. CELSE [bg:durusma_salonu]
 baskan: Duruşmaya devam olundu. Bursa 2. Ağır Ceza’nın 2004/311 Esas sayılı dosyasındaki arama tutanağı getirtildi, okundu.
-savci: Sayın Başkan, bir bilgi sunmak isterim. Müdafiin yazılı bildirimi üzerine Başsavcılığımızca bir soruşturma başlatılmıştır. Hâkim kararıyla yapılan aramada tanık Tarık Sezer’in aracının bagajında yıkanmış bir lacivert gömlek ele geçirilmiş; kriminal incelemesi sürmektedir.
+savci: Sayın Başkan, bir bilgi sunmak isterim. Müdafiin yazılı bildirimi üzerine Başsavcılığımızca bir soruşturma başlatılmıştır.
+savci: Hâkim kararıyla yapılan aramada tanık Tarık Sezer’in aracının bagajında yıkanmış bir lacivert gömlek ele geçirilmiş; kriminal incelemesi sürmektedir.
 > Salon bir an sustu. Gülay Toker başını çevirdi; tanık sırasında oturan Tarık’a baktı. Tarık bakmadı.
 baskan: Tanık Tarık Sezer yeniden dinlenecek. Tanık, yemininiz devam ediyor. Kendinizi ya da yakınlarınızı suçlayacak sorulara cevap vermeyebilirsiniz.
 `,
@@ -215,16 +257,32 @@ baskan: Müdafi, sorularınız.
 ~ Son kez. Leyla’nın sesi: “Ona kendi kâğıtlarını okut.” Bugün kâğıtlarım onun kâğıtları değil; yirmi iki yıl öncesinin ve bir ölünün.
 `),
       statements: [
-        statement('R1', 1, ['Önceki ifademin arkasındayım; ', hl('ne gördüysem onu söyledim', any(flag('press_r1'), has('ded_gomlek'))), '.']),
+        statement('R1', 1, [
+          'Önceki ifademin arkasındayım; ',
+          hl('ne gördüysem onu söyledim', any(flag('press_r1'), has('ded_gomlek'))),
+          '.',
+        ]),
         statement('R2', 2, [
-          hl('Ofise 00.15’te girdim; ondan önce Ercan’ın yanına giden olmadı', any(flag('press_r2'), has('ded_canli'), has('ev_sesli'))),
+          hl(
+            'Ofise 00.15’te girdim; ondan önce Ercan’ın yanına giden olmadı',
+            any(flag('press_r2'), has('ded_canli'), has('ev_sesli')),
+          ),
           '.',
         ]),
         statement('R3', 3, [
-          hl('Görükle’deki o evde hiç kalmadım; Kemal Yalçın’ı tanımam', any(flag('press_r3'), has('ev_arsiv'), flag('fact_tarik_gemlik'))),
+          hl(
+            'Görükle’deki o evde hiç kalmadım; Kemal Yalçın’ı tanımam',
+            any(flag('press_r3'), has('ev_arsiv'), flag('fact_tarik_gemlik')),
+          ),
           '.',
         ]),
-        statement('R4', 4, [hl('Ercan’ın bir mektup yazdığını bilmiyordum', any(flag('press_r4'), has('ded_mektup'), has('ev_iz_yazisi'))), '.']),
+        statement('R4', 4, [
+          hl(
+            'Ercan’ın bir mektup yazdığını bilmiyordum',
+            any(flag('press_r4'), has('ded_mektup'), has('ev_iz_yazisi')),
+          ),
+          '.',
+        ]),
       ],
       rules: [
         pressRule('PR_R1', 'R1', {
@@ -238,11 +296,21 @@ tarik: Aynı. Saatler karışmış olabilir. Gördüğüm şey karışmadı.
         pressRule('PR_R2', 'R2', {
           score: { SORGULAMA: 25 },
           effects: [raise('press_r2')],
-          responses: B(`
+          responses: [
+            W(
+              flag('fact_fatura'),
+              `
+- 23.48’de kasayı kapattınız. 00.15’e kadar nerede beklediniz? Bir de: perşembe akşamı Ercan Bey “Sezer Gıda’nın faturaları ne?” diye bağırmış. Sezer Gıda kimin?
+tarik: Ben… salonda oturdum. Bir sigara içtim. Sezer Gıda… kuzenimin firması. Balık getirir. Faturalar… muhasebe işi. Ercan bağırırdı, huyuydu.
+~ İkinci celsede “sayım” dedi, bugün “sigara.” Her celsede yirmi sekiz dakikanın başka bir adı var. Bir de bir kuzenin firması.
+`,
+            ),
+            O(`
 - 23.48’de kasayı kapattınız. 00.15’e kadar nerede beklediniz?
 tarik: Salonda. Oturdum. Bir sigara içtim. Ofise gidemedim; korktum. Sonra gittim.
 ~ İkinci celsede “sayım” dedi, bugün “sigara.” Her celsede yirmi sekiz dakikanın başka bir adı var.
 `),
+          ],
         }),
         pressRule('PR_R3', 'R3', {
           score: { SORGULAMA: 25 },
@@ -486,7 +554,8 @@ baskan: Müdafi, esas hakkındaki savunmanız.
           any(has('ded_mektup'), has('ded_gomlek'), flag('contra_r2')),
           'arg_fail',
           `
-- Maktulün haftalarca yazdığı mektup olay yerinden götürüldü; izi bir adı gösteriyor. Baş tanık o gece gömleğini değiştirdi ve teslim etmedi. Bu bir başka kişinin varlığını gösterir; bulması savunmanın değil, Başsavcılığın işidir.
+- Maktulün haftalarca yazdığı mektup olay yerinden götürüldü; izi bir adı gösteriyor.
+- Baş tanık o gece gömleğini değiştirdi ve teslim etmedi. Bu bir başka kişinin varlığını gösterir; bulması savunmanın değil, Başsavcılığın işidir.
 `,
         ),
         cont('P_BITIR', 'Esas savunmaya geç', 'T3_03', {
@@ -512,7 +581,7 @@ baskan: Müdafi, esas hakkındaki savunmanız.
       lines: B(`
 ~ Dayanaklar söylendi. Şimdi hepsini bir talepte toplamam gerekiyor. Heyetin kalemine geçecek tek bir cümle.
 `),
-      next: 'T3_04',
+      next: 'T3_04G',
       choices: [
         option('S_MASUMIYET', 'Beraat: Emir öldürmedi; o saatte otobüsteydi, maktul 23.58’de yaşıyordu', {
           effects: [
@@ -569,6 +638,25 @@ baskan: Müdafi, esas hakkında. Bu davanın esası hakkında.
 ~ Kemal başını kaldırdı ve bana baktı. Onu da kullandım. Utandım.
 `),
         }),
+      ],
+    }),
+    decisionNode('T3_04G', [{ to: 'T3_04' }], {
+      lines: [
+        W(
+          flag('emir_kararli'),
+          `
+> Emir dinlerken bir kez babasına döndü. Kemal başını salladı; çok az. Görüş odasındaki konuşmanın devamı bir baş hareketiydi.
+`,
+        ),
+        W(
+          flag('teklif_red'),
+          `
+> Kemal bütün savunma boyunca öne eğik oturdu; bir paletin başında yükü bekleyen bir adam gibi. Bir ikrarın değil, bir kararın yükünü.
+`,
+        ),
+        O(`
+> Salonda bir sessizlik. Meral’in iğnesi durdu. Kemal ellerini dizlerinin üstünde birleştirdi.
+`),
       ],
     }),
     choiceNode('T3_04', {

@@ -40,7 +40,12 @@ export const feedbackNew = (title: string, text: string, label = 'YENİ DELİL �
 const miss = (id: string) =>
   fallback(id, 'EXAMINE', {
     score: { DELIL_ANALIZI: -20 },
-    feedback: { title: 'SONUÇ YOK', text: 'Bu aletle bu satırda bir şey görünmüyor.', label: '−20 SKOR', tone: 'error' },
+    feedback: {
+      title: 'SONUÇ YOK',
+      text: 'Bu aletle bu satırda bir şey görünmüyor.',
+      label: '−20 SKOR',
+      tone: 'error',
+    },
   });
 
 export const ifade = documentExam('INV_IFADE', {
@@ -231,7 +236,11 @@ export const tel = documentExam('INV_TEL', {
   rows: [
     row(
       't1',
-      ['10.11 21.14', 'Emir → Onur', '“Patronun kim olduğunu öğrendim. Babamın hayatını yakan adammış. Bu hafta hesabını soracağım. […]”'],
+      [
+        '10.11 21.14',
+        'Emir → Onur',
+        '“Patronun kim olduğunu öğrendim. Babamın hayatını yakan adammış. Bu hafta hesabını soracağım. […]”',
+      ],
       {
         mag: {
           cells: [
@@ -243,9 +252,21 @@ export const tel = documentExam('INV_TEL', {
         },
       },
     ),
-    row('t2', ['12.11 08.03', 'Şef Nuri → Mutfak (grup)', '“Cuma nişan, 120 kişi. Herkes taşını alsın, bıçaklar bileylensin.”']),
-    row('t3', ['14.11 22.47', 'Ercan Toker → Emir', '“Kapanıştan sonra ofise uğra. Baban hakkında konuşmamız lazım. E.”']),
-    row('t4', ['14.11 23.46', 'Emir → Onur', '“Otobüse yetişeceğim. Kafam yandı abi. Babam suçsuzmuş.” (baz: Mudanya İskele)']),
+    row('t2', [
+      '12.11 08.03',
+      'Şef Nuri → Mutfak (grup)',
+      '“Cuma nişan, 120 kişi. Herkes taşını alsın, bıçaklar bileylensin.”',
+    ]),
+    row('t3', [
+      '14.11 22.47',
+      'Ercan Toker → Emir',
+      '“Kapanıştan sonra ofise uğra. Baban hakkında konuşmamız lazım. E.”',
+    ]),
+    row('t4', [
+      '14.11 23.46',
+      'Emir → Onur',
+      '“Otobüse yetişeceğim. Kafam yandı abi. Babam suçsuzmuş.” (baz: Mudanya İskele)',
+    ]),
     row('t5', ['15.11 00.47', 'Emir → Annem', '“Geliyorum.”']),
   ],
   tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('compare', 'İddianameyle karşılaştır', 'compare')],
@@ -426,21 +447,30 @@ export const INV_POOL = [
 export const invRecipes = (p: string): ChoiceDef[] => [
   recipe(`${p}_DAVET`, 'clue_davet', 'clue_dolandi', {
     effects: firstTime('ded_davet'),
-    feedback: feedbackNew('Kalmasını maktul istedi', '“Gitmedi, dolandı” denen çocuk, 22.47’de gelen bir mesajla ofise çağrılmıştı.'),
+    feedback: feedbackNew(
+      'Kalmasını maktul istedi',
+      '“Gitmedi, dolandı” denen çocuk, 22.47’de gelen bir mesajla ofise çağrılmıştı.',
+    ),
     responses: B(`
 ~ İddianame bir bekleyiş görüyor: kararında sebat eden bir katil, kapının önünde. Telefon başka bir şey gösteriyor: bir patron, bir çağrı, “baban hakkında.”
 `),
   }),
   recipe(`${p}_BILEME`, 'clue_nisan', 'clue_tas', {
     effects: firstTime('ded_bileme'),
-    feedback: feedbackNew('Bileği taşı mutfağın talimatıydı', 'Çarşamba sabahı şef bütün mutfağa “taşını al” dedi; taş aynı gün alındı.'),
+    feedback: feedbackNew(
+      'Bileği taşı mutfağın talimatıydı',
+      'Çarşamba sabahı şef bütün mutfağa “taşını al” dedi; taş aynı gün alındı.',
+    ),
     responses: B(`
 ~ Bir hazırlık değil, bir iş emri. Yedi aşçı o gün taş aldı ya da bıçağını bileyledi. Savcının “plan”ı bir mutfak tahtasında yazılı.
 `),
   }),
   recipe(`${p}_BILEME2`, 'clue_nisan', 'clue_canta', {
     effects: firstTime('ded_bileme'),
-    feedback: feedbackNew('Bileği taşı mutfağın talimatıydı', 'Şefin talimatı ve her gün gelip giden bıçak çantası: bir aşçının sıradan haftası.'),
+    feedback: feedbackNew(
+      'Bileği taşı mutfağın talimatıydı',
+      'Şefin talimatı ve her gün gelip giden bıçak çantası: bir aşçının sıradan haftası.',
+    ),
     responses: B(`
 ~ Bıçağını her gün taşıyan biri o gün de taşıdı. Şefin dediği gibi bileyledi. Bunun adı plan değil, meslek.
 `),
@@ -471,7 +501,10 @@ export const invRecipes = (p: string): ChoiceDef[] => [
   }),
   recipe(`${p}_SAAT`, 'clue_dolmus', 'clue_tarik_saat', {
     effects: firstTime('ded_saat'),
-    feedback: feedbackNew('Emir 23.40’ta çıkmıştı', 'Bulaşıkçı 23.45 dolmuşundan beş dakika önce gördü; baş tanık 23.55 diyor.'),
+    feedback: feedbackNew(
+      'Emir 23.40’ta çıkmıştı',
+      'Bulaşıkçı 23.45 dolmuşundan beş dakika önce gördü; baş tanık 23.55 diyor.',
+    ),
     responses: B(`
 ~ On beş dakika. Bir dolmuşun saati ile bir tanığın saati arasında on beş dakika var. O on beş dakikada ne oldu?
 `),

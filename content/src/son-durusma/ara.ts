@@ -32,7 +32,7 @@ import {
   v,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, ChoiceDef } from '../../../tools/content/src/kit/index.js';
-import { B, O, T, W, retarget } from './dsl.js';
+import { B, O, W, retarget } from './dsl.js';
 import { INV_POOL, boardMiss, feedbackNew, firstTime, invDecoys, invRecipes } from './inv-docs.js';
 import { kemalKararNode } from './inv-people.js';
 import { ARA, ARA_AP, ARA_DAYS } from './shared.js';
@@ -57,10 +57,22 @@ const free = (id: string, label: string, to: string, opts: Partial<ChoiceDef> = 
 const toHub = (id: string, label = 'Büroya dön') => cont(id, label, HUB, { role: 'BACK' });
 
 const giris = deliver('ARA_GIRIS_1', [
-  { evidence: 'ev_kentkart', requires: any(flag('dil_kent'), flag('h1_kent')), hint: 'Kentkart binişlerini dilekçeyle ya da duruşmada iste.' },
-  { evidence: 'ev_dvr', requires: any(flag('dil_dvr'), flag('h1_dvr')), hint: '“Arızalı” denen kayıt cihazının incelenmesini iste.' },
+  {
+    evidence: 'ev_kentkart',
+    requires: any(flag('dil_kent'), flag('h1_kent')),
+    hint: 'Kentkart binişlerini dilekçeyle ya da duruşmada iste.',
+  },
+  {
+    evidence: 'ev_dvr',
+    requires: any(flag('dil_dvr'), flag('h1_dvr')),
+    hint: '“Arızalı” denen kayıt cihazının incelenmesini iste.',
+  },
   { evidence: 'ev_z', requires: any(flag('dil_z'), flag('h1_z')), hint: 'Kasanın Z raporunu iste.' },
-  { evidence: 'ev_sesli', requires: any(flag('dil_sesli'), flag('h1_sesli')), hint: 'Sesli mesajın bilirkişi incelemesini iste.' },
+  {
+    evidence: 'ev_sesli',
+    requires: any(flag('dil_sesli'), flag('h1_sesli')),
+    hint: 'Sesli mesajın bilirkişi incelemesini iste.',
+  },
 ]);
 const son = deliver('ARA_SON_1', [
   { evidence: 'ev_kentkart', requires: flag('ara_dil_kent'), hint: 'Kentkart binişlerini ek dilekçeyle iste.' },
@@ -71,13 +83,18 @@ const son = deliver('ARA_SON_1', [
 const exMiss = (id: string) =>
   fallback(id, 'EXAMINE', {
     score: { DELIL_ANALIZI: -20 },
-    feedback: { title: 'SONUÇ YOK', text: 'Bu aletle bu satırda bir şey görünmüyor.', label: '−20 SKOR', tone: 'error' },
+    feedback: {
+      title: 'SONUÇ YOK',
+      text: 'Bu aletle bu satırda bir şey görünmüyor.',
+      label: '−20 SKOR',
+      tone: 'error',
+    },
   });
 
 // --- Giriş ---
 
 const girisNodes = [
-  decisionNode('ARA_GIRIS_1', [{ to: 'ARA_GIRIS' }], {
+  decisionNode('ARA_GIRIS_1', [{ to: 'ARA_GIRIS_2' }], {
     ...ARA,
     title: 'Ara',
     onEnter: [set('in_court', false), set('ara_day', 1), set('ara_ap', ARA_AP), ...giris.effects],
@@ -85,6 +102,19 @@ const girisNodes = [
 # BİR HAFTA SONRA · SALI 19.20 — ARSLAN HUKUK [bg:buro_gece]
 > Mahkemenin yazılarına cevaplar geldi. Kurumlar mahkemeye geç kalmayı sevmez; avukatlara geç kalmayı sever.
 `),
+  }),
+  decisionNode('ARA_GIRIS_2', [{ to: 'ARA_GIRIS' }], {
+    lines: [
+      W(
+        flag('h1_tahliye_dayanak'),
+        `
+~ Başkan “yeniden değerlendirilecek” demişti. Bir ret içinde bir kapı aralığı. O kapının açılması ikinci celsede baş tanığın kürsüdeki on beş dakikasına bağlı.
+`,
+      ),
+      O(`
+~ Tutukluluk sürüyor. İkinci celsede tahliye isteyeceksem elimde bir dilekten fazlası olmalı: bir tanığın çöken saatleri, bir tasarlamanın çöken ayakları.
+`),
+    ],
   }),
   story('ARA_GIRIS', {
     ...ARA,
@@ -557,6 +587,8 @@ const cansu = conversation('ARA_CANSU', {
 > Cansu Güler artık Toker Balık’ta çalışmıyordu; iskelenin öbür ucundaki bir kafede tepsi taşıyordu. Molasında karşıma oturdu, telefonunu masaya ters koydu.
 cansu: Beş dakika abla. Patron kızar. Bu da patron; her yerde bir patron var.
 cansu: Ben bir şey görmedim ki. Erkenden çıktım. Polis de sormadı zaten; kimse garsona soru sormaz, garson soru sorar: “Başka bir şey?”
+cansu: Bir de abla, ben Toker’den çıktım. O geceden sonra duramadım. Mutfağa girince Ercan abinin ofisinin kapısına bakıyordum; hep kapalı.
+cansu: Tarık abi “kal” dedi, maaşı artırdı bile. Kalmadım. Bilmiyorum neden. Bir şey içimi sıktı.
 ~ Hızlı, alaycı, korkmuş. Telefonunu ters koyan biri bir şey saklar; ya da bir şeyin ona bakmasından korkar.
 `),
   choices: [
@@ -571,7 +603,11 @@ cansu: Ben de sevindim açıkçası; yüz yirmi kişi, ayaklarım şişmişti. �
     option('CQ_FOTO', '“O geceden telefonunuzda fotoğraf var mı?”', {
       score: { SORGULAMA: 30 },
       effects: [
-        ifThen(not(flag('tarik_uyarildi')), [discover('ev_cansu_foto'), discover('clue_lacivert'), score('ARASTIRMA', 60)]),
+        ifThen(not(flag('tarik_uyarildi')), [
+          discover('ev_cansu_foto'),
+          discover('clue_lacivert'),
+          score('ARASTIRMA', 60),
+        ]),
       ],
       responses: [
         W(
@@ -779,7 +815,8 @@ emir: Peki. Düşünürüm. Babam da düşünmüş herhalde.
     }),
     option('AE_SEN', '“Karar senin. Ben sana yalnızca sonuçlarını anlatabilirim.”', {
       visibleWhen: flag('kemal_teklif'),
-      neutral: 'Müvekkile hukuki sonuçları anlatmak meşrudur; ama masumiyetini söyleyen birine bir ikrarı “seçenek” diye sunmak, o seçeneğin ağırlığını ona yükler.',
+      neutral:
+        'Müvekkile hukuki sonuçları anlatmak meşrudur; ama masumiyetini söyleyen birine bir ikrarı “seçenek” diye sunmak, o seçeneğin ağırlığını ona yükler.',
       responses: B(`
 - Karar senin Emir. Ben yalnızca sonuçlarını anlatırım: ikrar edersen…
 emir: Yapmadım abla. Yapmadığım şeyi nasıl anlatayım? Hangi elimle, kaç kere, nereye? Ben bilmiyorum ki.
@@ -985,7 +1022,11 @@ const araRecipes: ChoiceDef[] = [
   }),
   recipe('AC_CANLI', 'clue_sesli', 'clue_kent', {
     effects: firstTime('ded_canli', 400),
-    feedback: feedbackNew('Ercan 23.58’de yaşıyordu', 'Kart 23.52’de otobüste; maktul 23.58’de konuşuyor. Kapıda biri.', 'YENİ DELİL · +400 SKOR'),
+    feedback: feedbackNew(
+      'Ercan 23.58’de yaşıyordu',
+      'Kart 23.52’de otobüste; maktul 23.58’de konuşuyor. Kapıda biri.',
+      'YENİ DELİL · +400 SKOR',
+    ),
     responses: B(`
 ~ Emir otobüsteyken Ercan konuşuyordu. “Kapıda biri var. Gel, otur.” Ercan’ı öldüren kişi o kapıdan girdi. O kapıdan giren, Emir değildi.
 `),
@@ -999,7 +1040,10 @@ const araRecipes: ChoiceDef[] = [
   }),
   recipe('AC_MEKTUP', 'clue_iz', 'clue_mektup_kayip', {
     effects: firstTime('ded_mektup'),
-    feedback: feedbackNew('Mektup olay yerinden alındı', 'Haftalarca yazılan bir mektup; masada izi var, eşyalarda kendisi yok.'),
+    feedback: feedbackNew(
+      'Mektup olay yerinden alındı',
+      'Haftalarca yazılan bir mektup; masada izi var, eşyalarda kendisi yok.',
+    ),
     responses: B(`
 ~ Bir mektup bir masadan kendi kalkmaz. O gece onu bir el aldı. O el, mektupta adı geçen birinin eli olabilir.
 `),
@@ -1113,7 +1157,8 @@ kemal/uzgun: Ne yapacağım o zaman? Ben ne yapacağım?
     }),
     option('AKS_DUSUN', '“Emir’le konuşurum; seçenekleri anlatırım.”', {
       effects: [raise('kemal_teklif')],
-      neutral: 'Müvekkile seçenekleri anlatmak avukatın işidir; ama aileden gelen bir “ikrar” planını taşımak, o planı müvekkilin önüne koymaktır.',
+      neutral:
+        'Müvekkile seçenekleri anlatmak avukatın işidir; ama aileden gelen bir “ikrar” planını taşımak, o planı müvekkilin önüne koymaktır.',
       responses: B(`
 - Emir’le konuşurum Kemal Bey. Seçenekleri anlatırım. Karar onun.
 kemal: Anlat. Anlat ona. Otuz yıl ile dokuz yıl arasındaki farkı anlat.
@@ -1160,7 +1205,7 @@ const sonNodes = [
       O(`~ Baş tanığın saatleri hâlâ yalnızca onun saatleri. Karşısına koyacak bir makinem yok.`),
     ],
   }),
-  decisionNode('ARA_SON_3', [{ to: 'ARA_SON_T' }], {
+  decisionNode('ARA_SON_3', [{ to: 'ARA_SON_4' }], {
     lines: [
       W(
         all(has('ded_kasa'), has('ded_kamera')),
@@ -1171,6 +1216,44 @@ const sonNodes = [
       W(flag('ikrar_onerisi'), `~ Emir’in sesi: “Sen de mi abla?” Yarın o kürsüde ne diyecek, bilmiyorum.`),
       W(flag('cansu_vaat'), `~ Cansu’ya bir iş vaat ettim. Yarın savcı ona “neden geldiniz” diye sorarsa…`),
       O(`~ Yarın ikinci celse. Leyla’nın sesi: “Ona kendi ifadesini okut.”`),
+    ],
+  }),
+  decisionNode('ARA_SON_4', [{ to: 'ARA_SON_5' }], {
+    lines: [
+      W(
+        all(flag('fact_sesli_saat'), flag('fact_ikinci_ses')),
+        `~ Bilirkişinin dalga formu: 23.58.07’de bir adamın sesi, son dört saniyede bir kapı ve bir başkasının kısa bir sözü. Kelimesi anlaşılmıyor; varlığı anlaşılıyor.`,
+      ),
+      W(
+        any(flag('fact_metro'), flag('fact_sefer')),
+        `~ Son 1/M 23.52’de kalkar; ondan sonra İskele’den Bursa’ya toplu taşıma yok. Kart 00.41’de Emek’te. Geri dönen bir yolculuk yok; yalnızca eve giden bir çocuk.`,
+      ),
+      W(
+        any(flag('fact_cansu_erken'), flag('fact_fatura')),
+        `~ Bir garson 23.25’te eve gönderildi. Perşembe bir ofisten “faturalar” diye bir bağırış yükseldi. İki küçük şey; ikisi de aynı adamın etrafında.`,
+      ),
+      O(`~ Makineler konuşmaya başladı. İnsanlar hâlâ susuyor.`),
+    ],
+  }),
+  decisionNode('ARA_SON_5', [{ to: 'ARA_SON_T' }], {
+    lines: [
+      W(
+        flag('sesli_kopya'),
+        `~ Kemal’in telefonundaki sesin bir kopyası benim telefonumda. Bir bilirkişi bana “bu ne” diye sorsa, utanırım. Aslı bir babanın avucunda; orada kalmalıydı.`,
+      ),
+      W(
+        flag('emir_kararli'),
+        `~ Emir’in sesi: “Yaptım demem abla. Yapmadım.” Bir çocuk, babasının yirmi iki yıl önce veremediği cevabı verdi.`,
+      ),
+      W(
+        flag('teklif_red'),
+        `~ Kemal benim büromda ilk kez oturdu. “Ne yapacağım?” dedi. Bekleyecek. Ben de çalışacağım. Bu dosyada en zor iş bekleyenlerin işi.`,
+      ),
+      W(
+        flag('kemal_yumusadi'),
+        `~ Kemal’in sesi: “İlk adımını bir görüş odasında attı.” Bir baba bir cümle arıyor; yirmi iki yıldır aynı cümleyi.`,
+      ),
+      O(`~ Leyla’nın kapısı bütün gün kapalıydı. Bir kez açıldı; Kemal’in adı geçtiğinde. Sonra yine kapandı.`),
     ],
   }),
   story('ARA_SON_T', {
@@ -1275,4 +1358,3 @@ export const ara: CasePart = {
   ],
   discoveryPaths: [...giris.discoveryPaths, ...son.discoveryPaths],
 };
-

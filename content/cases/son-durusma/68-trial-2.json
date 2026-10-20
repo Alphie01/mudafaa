@@ -522,6 +522,24 @@
           "match": { "statement": "T0" },
           "responses": [
             {
+              "when": { "any": [{ "flag": "fact_sessiz" }, { "flag": "fact_tas_bilgi" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "“Kin güdüyordu” dediniz. Şef Nuri o hafta sanığın mutfakta tek kelime etmediğini söylüyor. Bileği taşını da kolluktan duyduğunuzu bana telefonda söylediniz."
+                },
+                {
+                  "speaker": "tarik",
+                  "text": "Ben… gözlerinden anladım. Bir insanın kinini gözlerinden anlarsınız avukat hanım. Taşı da… evet, Yavuz Bey söyledi. Ne var bunda?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Gözlerinden anlamış. Bir tanık gördüğünü anlatır; tahmin ettiğini değil.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
               "lines": [
                 { "speaker": "player", "text": "Bileme ve bekleme. Bunları siz mi gördünüz?" },
                 {
@@ -995,6 +1013,34 @@
           "kind": "PRESENT",
           "match": { "statement": "T6", "evidence": ["ded_gomlek", "ev_cansu_foto"] },
           "responses": [
+            {
+              "when": { "all": [{ "flag": "fact_dolap" }, { "flag": "fact_kan_beklenir" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, nişan masasının 23.12 fotoğrafı: tanık lacivert gömlekle. Olay yeri karesi 44, 00.52: ütülü, temiz bir beyaz gömlek."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Adli tıp uzmanı az önce söyledi: maktule sarılan birinin göğsünde ve kollarında belirgin kan olur."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Tanık, personel dolabınızda yedek gömlek tuttuğunuzu şef söylüyor. Kanlı gömleği nerede çıkardınız? Polise neden vermediniz?"
+                },
+                {
+                  "speaker": "tarik",
+                  "text": "Dolabımda… evet. Değiştirdim. Üstüm kan içindeydi, dayanamadım. Attım. Şoktaydım."
+                },
+                { "speaker": "baskan", "text": "Polise kanlı gömleğinizi teslim ettiniz mi?" },
+                { "speaker": "tarik", "text": "Hayır efendim. Aklıma gelmedi." },
+                {
+                  "speaker": "narrator",
+                  "text": "Dr. Sema Ilgaz bilirkişi sırasında başını kaldırdı ve tanığa baktı. Salonda bir uğultu. Başkan tokmağa uzandı; vurmadı.",
+                  "fx": "shake"
+                }
+              ]
+            },
             {
               "lines": [
                 {
@@ -1603,6 +1649,10 @@
             {
               "speaker": "narrator",
               "text": "Yürüdü. Kemal duvardan ayrıldı; arkasından baktı, adam merdivenlerde kaybolana kadar."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Merdivenin başında Tarık bir an durdu, cebinden anahtarlığını çıkardı. Parmağında çevirdi; bir, iki. Sonra indi."
             },
             { "speaker": "kemal", "text": "O adam… Gemlik dedi kürsüde. Görükle’ye “misafir” gelirmiş." },
             {

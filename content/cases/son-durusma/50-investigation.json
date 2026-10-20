@@ -526,6 +526,18 @@
             {
               "speaker": "leyla",
               "text": "Bulaşıkçı yaşlı bir adammış. Yaşlı insanlar saat sormaz; dolmuş sorar, ezan sorar, bir dizinin başlangıcını sorar. Onun saatini bul."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de şu: ölümden sonra ilk ifade önemlidir. Bir buçuk saat sonra alınmış, düzgün cümleli bir ifade gördüğünde kendine sor: bu adam bu cümleleri ne zaman kurdu?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla bir an pencereye baktı. Yağmur Uludağ’ın yamacından aşağı iniyordu."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Şok geçiren insanlar düzgün konuşmaz Deniz. Kekeler, tekrar eder, saatleri karıştırır. Düzgün konuşan, ya çok güçlüdür ya da çok hazırlıklı."
             }
           ]
         },
@@ -3650,6 +3662,63 @@
             {
               "speaker": "player",
               "text": "Baş tanığın 23.55’i hâlâ panonun ortasında. Ona karşı koyacak bir saatim yok.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_3B" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_3B",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "fact_sessiz" }, { "flag": "fact_istasyon" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Şef Nuri: “Bütün hafta tek kelime etmedi.” Bir bıçak tezgâhta kaldı; bir çanta açık. Kin anlatan bir çocuk değil, susan bir çocuk.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "fact_dolap" }, { "flag": "fact_arka_kapi" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Bir mutfağın haritası aklımda: bir arka kapı, bir bulaşıkhane, altı dolap. Herkesin dolabında yedek bir üst. Not aldım; nedenini bilmeden.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_tas_bilgi" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Bir tanık bir delili bir komiserden duymuş. Bu dosyada herkes birbirine bir şey anlatmış; yalnızca sanığa kimse bir şey sormamış.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_aramalar" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ercan Toker eylülden beri aramış. Bir adam yirmi iki yıl sonra bir telefon numarasını aylarca çevirir mi? Bir borç ödenmek ister.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Dosyanın kenarlarına bakmadım belki. Kenarlar, ortadan daha çok şey söyler.",
               "style": "thought"
             }
           ]

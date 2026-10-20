@@ -143,6 +143,9 @@ savci: 12 Kasım’da bileği taşı satın almış; 14 Kasım gecesi kapanışt
 savci: Görgü tanığı Tarık Sezer sanığı elinde bıçakla ofisten çıkarken görmüştür. Eylem TCK 82/1-a kapsamında, tasarlayarak kasten öldürmedir.
 baskan: Sanığa hakları hatırlatıldı. Sanık, savunmanızı yapın.
 ~ Üç gün, üç kâğıt, bir tanık. Savcı bir hikâye anlattı; düzgün, sıralı, kâğıtlı. Mahkemeler düzgün hikâyeleri sever.
+> Katılan sırasında Gülay Toker iddianamenin her cümlesinde başını salladı. “Bıçak” kelimesinde gözlerini kapadı.
+> Emir sanık sandalyesinde sol elinin başparmağıyla sağ elinin sırtındaki yanık izini ovuyordu. Mutfakta kazanılmış bir iz; bir fırının kenarı.
+~ Bir aşçının elleri. Savcı bu elleri bir katilin elleri diye anlattı. Ben bu ellerin o gece neye dokunduğunu, neye dokunmadığını anlatacağım.
 `),
       choices: [cont('H100_DEVAM', 'Sanığın savunması', 'H1_01', { role: 'PRIMARY' })],
     }),
@@ -277,7 +280,8 @@ baskan: Saik bakımından ilgisiz değil müdafi. Kabul edildi.
         option('H102_D', '“O hüküm yanlıştı; babası masumdu, bunu da tartışalım.”', {
           score: { USUL_BILGISI: -20 },
           effects: [dec('pers')],
-          neutral: 'Kesinleşmiş bir hükmün doğruluğu bu davanın konusu değildir; o yol yargılamanın yenilenmesidir. Heyet, savunmanın davayı başka bir davaya çevirmek istediğini düşündü.',
+          neutral:
+            'Kesinleşmiş bir hükmün doğruluğu bu davanın konusu değildir; o yol yargılamanın yenilenmesidir. Heyet, savunmanın davayı başka bir davaya çevirmek istediğini düşündü.',
           responses: B(`
 - Talebe katılıyoruz; ancak o hüküm yanlıştı Sayın Başkan. Kemal Yalçın masumdu.
 baskan: Kesinleşmiş bir hüküm bu davanın konusu değil müdafi. Kabul edildi.
@@ -304,15 +308,26 @@ baskan: Müdafi, sorularınız.
 ~ Leyla’nın mesajı: “Ona saati sorma. Dolmuşu sor.” Önce dinleyeceğim. Sonra bastıracağım. Kâğıtları en son açacağım.
 `),
       statements: [
-        statement('S1', 1, ['O gece bulaşıkhanedeydim. Ofisten bağırış geldi: ', hl('“Babamın hayatını çaldın!”', flag('press_s1')), ' Emir’in sesiydi, vallahi.']),
-        statement('S2', 2, ['Saat… ', hl('on bir buçuğu geçiyordu herhalde', any(flag('press_s2'), has('clue_dolmus'), flag('fact_dolmus'))), '.']),
+        statement('S1', 1, [
+          'O gece bulaşıkhanedeydim. Ofisten bağırış geldi: ',
+          hl('“Babamın hayatını çaldın!”', flag('press_s1')),
+          ' Emir’in sesiydi, vallahi.',
+        ]),
+        statement('S2', 2, [
+          'Saat… ',
+          hl('on bir buçuğu geçiyordu herhalde', any(flag('press_s2'), has('clue_dolmus'), flag('fact_dolmus'))),
+          '.',
+        ]),
         statement('S3', 3, ['Sonra çocuk arka kapıdan ', hl('koşarak çıktı', flag('press_s3')), '; çok sinirliydi.']),
         statement(
           'S4',
           4,
           [
             'Önümden geçti. ',
-            hl('Elinde bir şey yoktu; önlüğü de üstünde değildi', any(has('clue_tarik_bicak'), has('ded_onluk'), has('ded_bicak_yeri'))),
+            hl(
+              'Elinde bir şey yoktu; önlüğü de üstünde değildi',
+              any(has('clue_tarik_bicak'), has('ded_onluk'), has('ded_bicak_yeri')),
+            ),
             ', vallahi.',
           ],
           flag('press_s3'),
@@ -385,7 +400,8 @@ suleyman: Ben elleri cebinde gördüm. Önlüksüz. Kan mı? Yoktu vallahi. Kan�
           visibleWhen: any(has('clue_onluk'), has('clue_bicak_ofiste')),
           score: { SORGULAMA: 150 },
           effects: [inc('pers')],
-          neutral: 'Kısmi isabet: olay yeri karesi tanığın gözlemini destekliyor; ama çelişkiyi baş tanığın sözüyle yan yana koymadın.',
+          neutral:
+            'Kısmi isabet: olay yeri karesi tanığın gözlemini destekliyor; ama çelişkiyi baş tanığın sözüyle yan yana koymadın.',
           responses: B(`
 - Sayın Başkan, olay yeri albümü kare 31: önlük koridordaki askıda, lekesiz. Tanık, sanık çıkarken önlüğü üstünde miydi?
 suleyman: Değildi. Askıdaydı herhalde; ben görmedim askıyı. Üstünde yoktu.
@@ -400,6 +416,16 @@ suleyman: Değildi. Askıdaydı herhalde; ben görmedim askıyı. Üstünde yokt
 - İtiraz ediyorum Sayın Başkan. “Yapar, gençlik” bir gözlem değil, tanığın kanaatidir.
 baskan: Yerinde. Tanık, yalnızca gördüklerinizi anlatın. Bu cümle tutanağa geçmeyecek.
 suleyman: Kusura bakmayın. Ağzımdan çıktı. Ben… ben yapmaz diyecektim aslında; ters söyledim.
+`),
+        }),
+        presentRule('PS_DOSYA', undefined, ['ev_hts', 'ev_tel_rapor'], {
+          maxUses: 10,
+          effects: [...wrongMove, score('SORGULAMA', -150, 'hatali')],
+          bad: 'Bu kayıtların bulaşıkçının beyanıyla bir ilgisi yok; doğru kâğıdı doğru tanığa göster. −1 güvenilirlik, −150 skor.',
+          category: 'SORGULAMA',
+          responses: B(`
+suleyman: Telefon mu? Ben telefon kullanmam avukat hanım; dolmuşa binerim.
+baskan: Müdafi, bu kaydın tanıkla ilgisi nedir?
 `),
         }),
         presentRule('PS_SAVCILIK', undefined, savcilikDelili, {
@@ -428,7 +454,7 @@ baskan: Bu delilin beyanla ilgisini göremedim müdafi.
 baskan: İtiraz reddedildi. Dayanağı yok.
 `),
       }),
-      finish: { id: 'H103_BITIR', next: 'H1_04' },
+      finish: { id: 'H103_BITIR', next: 'H1_03S' },
     }),
     court1.stage('H1_03K', {
       title: 'Kimse sormadı',
@@ -444,7 +470,50 @@ baskan: Tutanağa geçsin: tanık, kollukta kendisine yalnızca bağırışın s
 > Üye Pınar Yener dosyadaki Tarık Sezer’in ifadesini çıkardı, yanına bir şey yazdı. Savcı Karaman o sayfaya baktı; uzun uzun.
 ~ Bir tanığı kırmadım. Bir tanığa, üç ay sonra, ilk kez soru sordum. Bu ikisinin farkı bu dosyanın bütün hikâyesi.
 `),
-      choices: [cont('H103K_DEVAM', 'Devam', 'H1_04', { role: 'PRIMARY' })],
+      choices: [cont('H103K_DEVAM', 'Devam', 'H1_03S', { role: 'PRIMARY' })],
+    }),
+    decisionNode('H1_03S', [{ to: 'H1_03S2' }], {
+      lines: [
+        W(
+          all(flag('fact_kulak'), flag('suleyman_hazir')),
+          `
+> Savcı yeniden ayağa kalktı. Bu kez sorusu tanığın kulağına dairdi.
+savci: Tanık, sol kulağınız ağır işitiyor, değil mi? Bağırışı nasıl duydunuz, saati nasıl bildiniz?
+suleyman: Sol kulak, evet. Ama ofis sağımda kalır Savcı Bey; sağ kulağım tıkır tıkır. Saati de dolmuştan bilirim, dedim ya. On bir yıl, aynı dolmuş.
+> Savcı başını salladı ve oturdu. Kulağı önceden sormuştum; tanık kürsüde şaşırmadı. Kendi bildiğini, kendi sözleriyle söyledi.
+`,
+        ),
+        W(
+          flag('suleyman_kocluk'),
+          `
+> Savcı yeniden ayağa kalktı.
+savci: Tanık, bu sabah koridorda bir kâğıda bakıyordunuz. Ne yazıyordu?
+suleyman: Ben… Hiç. Unutmayayım diye. Avukat hanım “kesin söyle” dedi, ben de yazdım…
+> Başkan bana baktı. Uzun uzun. Bir şey söylemedi; söylemesine gerek yoktu.
+~ Tanığın ağzına bir kelime koydum. Şimdi o kelime bütün tanıklığının üstünde bir leke gibi duruyor.
+`,
+        ),
+        O(`
+> Savcı yeniden ayağa kalktı.
+savci: Tanık, sol kulağınız ağır işitiyor, değil mi? Bağırışı nasıl duydunuz?
+suleyman: Sol kulak… evet. Ama… sağdan geldi galiba. Bilmiyorum, şaşırdım.
+> Savcı oturdu; küçük bir kazanç. Bunu önceden sorup tanığın kürsüde şaşırmamasını sağlayabilirdim.
+`),
+      ],
+    }),
+    decisionNode('H1_03S2', [{ to: 'H1_04' }], {
+      onEnter: [ifThen(flag('suleyman_kocluk'), [dec('cred')])],
+      lines: [
+        W(
+          flag('press_s4'),
+          `
+~ “Işığın altındaydı.” Kapının üstündeki lamba. Süleyman bunu iki kez söyledi; ikincisinde sesi titremedi. Tutanakta artık bir lamba, bir çocuk ve iki boş el var.
+`,
+        ),
+        O(`
+~ Süleyman’ın gördüğü çocuğun elleri: bunu tutanağa daha güçlü geçirebilirdim. Bir soru daha sormalıydım.
+`),
+      ],
     }),
     court1.objection('H1_04', {
       title: 'Savcının sorusu',
@@ -593,33 +662,37 @@ baskan: Müdafi, tutukluluk hâline ilişkin diyeceğiniz?
 `),
       next: 'H1_06',
       options: [
-        option('H105B_A', 'Tahliye: tasarlama dayanakları ve tek görgü tanığının anlatımı sarsıldı; adli kontrol yeterli', {
-          effects: [
-            ifThen(
-              all(ref('tasarlama_sarsildi'), ref('tanik_celiski')),
-              [score('USUL_BILGISI', 100), inc('legal_hits'), raise('h1_tahliye_dayanak')],
-              [score('USUL_BILGISI', 20)],
-            ),
-          ],
-          good: 'Kuvvetli suç şüphesini sarsan somut bulgulara dayanarak tutukluluğun gözden geçirilmesini istedin (CMK 100, 101, 108, 109).',
-          category: 'USUL_BILGISI',
-          responses: [
-            W(
-              all(ref('tasarlama_sarsildi'), ref('tanik_celiski')),
-              `
+        option(
+          'H105B_A',
+          'Tahliye: tasarlama dayanakları ve tek görgü tanığının anlatımı sarsıldı; adli kontrol yeterli',
+          {
+            effects: [
+              ifThen(
+                all(ref('tasarlama_sarsildi'), ref('tanik_celiski')),
+                [score('USUL_BILGISI', 100), inc('legal_hits'), raise('h1_tahliye_dayanak')],
+                [score('USUL_BILGISI', 20)],
+              ),
+            ],
+            good: 'Kuvvetli suç şüphesini sarsan somut bulgulara dayanarak tutukluluğun gözden geçirilmesini istedin (CMK 100, 101, 108, 109).',
+            category: 'USUL_BILGISI',
+            responses: [
+              W(
+                all(ref('tasarlama_sarsildi'), ref('tanik_celiski')),
+                `
 - Sayın Başkan, tasarlamanın dayanaklarından biri bugün çöktü; tek görgü tanığının anlatımı bağımsız bir tanıkla çelişiyor. Kuvvetli suç şüphesi sarsılmıştır. Adli kontrol yeterlidir.
 > Heyet kısa bir müzakere için ayağa kalktı. Üç dakika. Meral’in elindeki poşet hışırdadı.
 baskan: Görgü tanığı henüz dinlenmediğinden ve delillerin bir kısmı toplanmadığından tutukluluk hâlinin devamına; tanık dinlendikten sonra yeniden değerlendirilmesine.
 ~ Hayır, ama “yeniden.” Bir ret içinde bir kapı aralığı. Başkan bu kelimeyi bilerek seçti.
 `,
-            ),
-            O(`
+              ),
+              O(`
 - Sayın Başkan, sanığın tahliyesini ve adli kontrol uygulanmasını talep ediyoruz.
 baskan: Suçun niteliği, mevcut delil durumu ve görgü tanığının henüz dinlenmemiş olması gözetilerek tutukluluk hâlinin devamına.
 ~ Bir çatlak gösteremedim. Tutukluluk bir çatlakla sarsılır; bir dilekle değil.
 `),
-          ],
-        }),
+            ],
+          },
+        ),
         option('H105B_B', 'Tahliye: müvekkil masumdur', {
           score: { USUL_BILGISI: -20 },
           neutral: 'Tahliye talebi somut bir gerekçe ister; masumiyet karinesi herkes için zaten geçerlidir.',
@@ -677,7 +750,41 @@ leyla: Bugün iyi soru sordun. Bir yaşlı adama, üç ay sonra, ilk kez.
 leyla: Kemal Bey haklı. Ben merdivenin başında dururum. Yanında değil.
 ~ Bir avukat bir müvekkile yirmi iki yıl borçlu kalabilir mi? Bu dosya bunu soruyor. Ben de cevabını bilmiyorum.
 `),
-      choices: [cont('H107_DEVAM', 'Üç hafta', 'ARA_GIRIS_1', { role: 'PRIMARY' })],
+      choices: [cont('H107_DEVAM', 'Akşam', 'H1_08', { role: 'PRIMARY' })],
+    }),
+    story('H1_08', {
+      ...H1,
+      title: 'Hamitler, akşam',
+      background: 'ev',
+      lines: [
+        W(
+          flag('koridor_durust'),
+          `
+# SALI 20.30 — HAMİTLER [bg:ev]
+> Söz vermiştim: akşam ben anlatacaktım. Meral kapıyı açtı; elinde yine bir iğne. Mutfakta Kemal, önünde soğumuş bir çay.
+meral: Gelin. Siz söylemiştiniz; bugün çıkmaz diye. Ben yine de yemek yaptım; iki tabak fazla.
+> Masaya oturdum. Süleyman’ı, dolmuşu, iki boş eli anlattım. Kemal dinledi; bir kez bile sözümü kesmedi.
+kemal: O yaşlı adam… “kimse sormadı” dedi, öyle mi?
+- Öyle dedi.
+kemal: Benim dosyamda da kimse bir şey sormamıştı. Üç kişi vardı o evde; yalnızca ikimize soru soruldu.
+> Bir an durdu, çayını karıştırdı. Kaşık bardağa çarptı; bir, iki.
+kemal: Avukat hanım. Bugün o kadın merdivenin başında durdu. Ben ona “yanında durma” dedim. O da durmadı; çekildi. Yirmi iki yıl önce de böyle çekilmişti; ben içeri girerken.
+> Meral kocasının omzuna elini koydu. Kemal elini çekmedi.
+~ Bir söz tuttum: akşam geldim, anlattım. Küçük sözler daha zor tutulur; çünkü kimse onları tuttuğunu fark etmez. Bu evde ettiler.
+`,
+        ),
+        O(`
+# SALI 20.30 — HAMİTLER [bg:ev]
+> Meral kapıyı açtı. Yüzünde bir şey vardı; kızgınlık değil, yorgunluk. Gömlek poşeti hâlâ kapının yanındaydı.
+meral: Akşam evde olur demiştiniz. Kemal mutfakta. Konuşmaz.
+> Mutfağa geçtim. Kemal bana bakmadan konuştu.
+kemal: Yirmi iki yıl önce de bir avukat bana “bu akşam evdesin” demişti. İnanmıştım. Bir daha inanmam dedim; Meral inandı.
+> Süleyman’ı, dolmuşu, iki boş eli anlattım. Kemal dinledi. Sonunda tek bir şey söyledi.
+kemal: Bir daha söz verme. Kâğıt getir.
+~ Bir söz yerine bir kâğıt. Bu evde bunun değerini benden iyi bilen yok.
+`),
+      ],
+      choices: [cont('H108_DEVAM', 'Üç hafta', 'ARA_GIRIS_1', { role: 'PRIMARY' })],
     }),
   ],
   triggers: [

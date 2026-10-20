@@ -112,7 +112,12 @@ const hub = {
 > Hedef: iki eylem puanı, üç hafta. Bir arşiv, bir savcı, bir baba. Neye harcayacaksın?
 `),
   tabs: [
-    { id: 't_ara2', label: 'KARARLAR', kind: 'ARCHIVE' as const, choices: ['B_ARSIV', 'B_BILDIR', 'B_YUZLES', 'B_AILE'] },
+    {
+      id: 't_ara2',
+      label: 'KARARLAR',
+      kind: 'ARCHIVE' as const,
+      choices: ['B_ARSIV', 'B_BILDIR', 'B_YUZLES', 'B_AILE'],
+    },
   ],
   choices: [
     act('B_ARSIV', '2004 dosyası', 'ARA2_ARSIV', { description: 'Bursa 2. Ağır Ceza · 2004/311' }),

@@ -181,6 +181,7 @@ c ${ek}
 c ${tutukluluk}
 c H106_DEVAM
 c H107_DEVAM
+c H108_DEVAM
 `);
 
 // --- 2. celse ---
@@ -311,6 +312,7 @@ c B_AILE
 c AILE_DON
 c B_DURUSMA
 c ARA2_SON_DEVAM
+c T300L_DEVAM
 c T300_DEVAM
 p R1
 s ded_gomlek R1
@@ -424,6 +426,7 @@ c B_BILDIR
 c BILDIR_DON
 c B_DURUSMA
 c ARA2_SON_DEVAM
+c T300L_DEVAM
 c T300_DEVAM
 p R1
 s ded_gomlek R1
@@ -442,16 +445,289 @@ c L_MEKTUP
 `),
 ];
 
+// --- Türetilmiş yollar ---
+
+const flat = (steps: readonly (Action | readonly Action[])[]): Action[] =>
+  steps.flatMap((x) => (Array.isArray(x) ? x : [x as Action]));
+const swap = (acts: Action[], from: string, to: string): Action[] =>
+  acts.map((a) => (a.kind === 'CHOOSE' && a.choiceId === from ? { ...a, choiceId: to } : a));
+const insertAfter = (acts: Action[], after: string, add: Action[]): Action[] =>
+  acts.flatMap((a) => (a.kind === 'CHOOSE' && a.choiceId === after ? [a, ...add] : [a]));
+const cutAfter = (acts: Action[], id: string): Action[] => {
+  const k = acts.findIndex((a) => a.kind === 'CHOOSE' && a.choiceId === id);
+  return acts.slice(0, k + 1);
+};
+
+/** G3 (farklı nitelendirme): tipik yolun soruşturması ve 1. celsesi; kısa bir ara, zayıf çapraz sorgu, terditli savunma. */
+const G3_STEPS = [
+  ...swap(cutAfter(flat(TIPIK_STEPS), 'H108_DEVAM'), 'STR_TASARLAMA', 'STR_TERDIT'),
+  ...A(`
+c ARA_GIRIS_DEVAM
+c A_KENT
+e compare k3
+e mag k1
+c KENT_BITIR
+c A_Z
+e compare z2
+c Z_BITIR
+c A_DURAK
+t OB_TABELA
+t OB_CIZELGE
+t OB_BANK
+c DURAK_BITIR
+c A_KEMAL
+c AK_EMIR
+c KEMAL_BITIR
+c AKS_RED
+c A_CIKARIM
+m clue_kent clue_mesafe
+c ARA_CIKARIM_BITIR
+c A_LEYLA
+c ARA_LEYLA_DON
+c A_EMIR
+c AE_BABA
+c A_GULAY
+c GQ_TAZIYE
+c GQ_MEKTUP
+c GULAY_BITIR
+c A_CANSU
+c CQ_ERKEN
+c CQ_FOTO
+c CANSU_KARAR
+c CK_FOTO
+c A_DIL
+c AD_DOLAP
+c AD_GERI
+c A_DURUSMA
+c TS_SUS
+c ARA_SON_DEVAM
+c T200_DEVAM
+c AQ_SAAT
+c AQ_KAN
+c AQ_BITIR
+p T0
+s ded_davet T0
+p T1
+s ded_yol T1
+c T202_BITIR
+c L_KATIL
+c TH_C
+c T205_DEVAM
+c T206_DEVAM
+c CR_KEMAL
+c B_AILE
+c AILE_DON
+c B_DURUSMA
+c ARA2_SON_DEVAM
+c T300L_DEVAM
+c T300_DEVAM
+p R1
+p R2
+c T301_BITIR
+c T302_DEVAM
+c P_TASARLAMA
+c P_TAHRIK
+c P_SAAT
+c P_BITIR
+c S_TERDIT
+c L_BABA
+`),
+];
+
+/** G5 (etik ihlali): Kemal’in önerisini taşıyıp Emir’e sahte ikrarı önermek. */
+const G5_STEPS = insertAfter(
+  swap(swap(flat(TIPIK_STEPS), 'AKS_RED', 'AKS_DUSUN'), 'AE_UMUT', 'AE_IKRAR'),
+  'T200_DEVAM',
+  A('c T2IKRAR_DEVAM'),
+);
+
+/** W (çöküş): tipik yol ikinci celseye kadar; sonra baş tanığa art arda savcılık delili. */
+const W_STEPS = [
+  ...cutAfter(flat(TIPIK_STEPS), 'ARA_SON_DEVAM'),
+  ...A(`
+c T200_DEVAM
+c AQ_SAAT
+c AQ_BITIR
+s ev_bicak T1
+s ev_mesaj_pzt T1
+s ev_tas_fis T1
+s ev_otopsi T1
+s ev_suleyman_ifade T1
+c COKUS_DEVAM
+`),
+];
+
+/** G4 (mahkûmiyet): dağınık soruşturma, etik sınır ihlalleri, dayanaksız savunma. */
+const G4_STEPS = [
+  A(`
+c PR00_DEVAM
+c PR01_DEVAM
+c BR00_C
+c BR01_C
+c BR01B_DEVAM
+c STR_MASUMIYET
+c SABAH_DEVAM
+c H_OFIS
+t OB_AKVARYUM
+t OB_RAKI
+t OB_BLOK
+t OB_BICAK
+t OB_DVR
+c OFIS_BITIR
+c H_EV
+t OB_BOKS
+t OB_SET
+t OB_SAAT
+c EV_BITIR
+c H_MUTFAK
+t OB_BUZ
+t OB_TAHTA
+t OB_KASA
+c MUTFAK_NURI
+c NQ_EMIR
+c NQ_KAMERA
+c NURI_TARIK
+c TQ_SERT
+c AK1_KENDI
+c H_CIKARIM
+m clue_raki clue_bicak_ofiste
+m clue_boks clue_nisan
+c CIKARIM_BITIR
+c H_GORUS
+c TP_GECE hard
+c TP_CANTA hard
+c TP_MESAJ hard
+c TP_ERCAN hard
+c TP_BABA hard
+c G_BITIR
+c H_SULEYMAN
+c SQ_DUYDU
+c SQ_GORDU
+c SULEYMAN_KARAR
+c SK_BICAK
+c H_HTS
+e compare h4
+e mag h2
+c HTS_BITIR
+c AK2_ANLAT
+c H_KEMAL
+c K_2004 hard
+c K_ARAMA hard
+c K_KAVGA hard
+c K_SON
+c KS_KOPYA
+c H_TEL
+e mag t1
+e mag t5
+c TEL_BITIR
+c H_DIL
+c DIL_TARIK_HTS
+c DIL_DNA
+c DIL_KESIF
+c DIL_VER
+c H_DURUSMA
+c GECE_DEVAM
+c H100K_B
+c H100_DEVAM
+c Q_NEFRET
+c Q_HATIRLA
+c Q_BITIR
+c H102_C
+p S1
+p S2
+p S3
+c H103_BITIR
+c H104_D
+c H105_SESLI
+c H105B_B
+c H106_DEVAM
+c H107_DEVAM
+c H108_DEVAM
+c ARA_GIRIS_DEVAM
+c A_CIKARIM
+m clue_raki clue_son_arama
+m clue_boks clue_mesaj_tam
+c ARA_CIKARIM_BITIR
+c A_DIL
+c AD_DVR
+c AD_Z
+c AD_VER
+c A_CANSU
+c CQ_ERKEN
+c CQ_FOTO
+c CQ_SILINEN
+c CANSU_KARAR
+c CK_IS
+c A_GULAY
+c GQ_SERT
+c A_KEMAL
+c AK_EMIR
+c KEMAL_BITIR
+c AKS_EVET
+c A_EMIR
+c AE_SEN
+c A_DURAK
+t OB_KAMERA
+t OB_BANK
+t OB_TABELA
+c DURAK_BITIR
+c A_EMANET
+e mag b1
+e mag b3
+c EMANET_BITIR
+c A_DURUSMA
+c TS_TEHDIT
+c ARA_SON_DEVAM
+c T200_DEVAM
+c AQ_KESIN
+c AQ_SAAT
+c AQ_BITIR
+p T0
+p T1
+p T2
+c T202_BITIR
+c T202C_DEVAM
+c L_ILGISIZ
+c TH_C
+c T205_DEVAM
+c T206_DEVAM
+c CR_SUS
+c B_YUZLES
+c YUZLES_DON
+c B_AILE
+c AILE_DON
+c B_DURUSMA
+c ARA2_SON_DEVAM
+c T300L_DEVAM
+c T300_DEVAM
+p R1
+p R3
+c T301_BITIR
+c T302_DEVAM
+c P_SAAT
+c P_CANLI
+c P_FAIL
+c P_BITIR
+c S_DUYGU
+c L_SESSIZ
+`),
+];
+
 const win = (outcome: string, final: number) =>
-  final < 0 ? { outcome, finalMax: 0 } : { outcome, finalMin: Math.floor(final * 0.95), finalMax: Math.ceil(final * 1.05) };
-export const MEASURED = { G1: 12000, TIPIK: 10000 };
+  final < 0
+    ? { outcome, finalMax: 0 }
+    : { outcome, finalMin: Math.floor(final * 0.95), finalMax: Math.ceil(final * 1.05) };
+export const MEASURED = { G1: 13430, G3: 7860, G4: 510, G5: 12380, W: 7450, TIPIK: 12680 };
 
 export const tests: CasePart = {
   tests: {
     goldenPaths: [
-      goldenPath('G1', { outcome: 'BERAAT_B' }, ...G1_STEPS),
-      goldenPath(TYPICAL_PATH, { outcome: 'BERAAT_E' }, ...TIPIK_STEPS),
+      goldenPath('G1', win('BERAAT_B', MEASURED.G1), ...G1_STEPS),
+      goldenPath('G3', win('INDIRIM', MEASURED.G3), ...G3_STEPS),
+      goldenPath('G4', win('MAHKUMIYET', MEASURED.G4), ...G4_STEPS),
+      goldenPath('G5', win('IKRAR', MEASURED.G5), ...G5_STEPS),
+      goldenPath('W', win('MAHKUMIYET', MEASURED.W), ...W_STEPS),
+      goldenPath(TYPICAL_PATH, win('BERAAT_E', MEASURED.TIPIK), ...TIPIK_STEPS),
     ],
   },
 };
-void win;

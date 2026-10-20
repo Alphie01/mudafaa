@@ -83,7 +83,7 @@
           { "ref": "fail_belli" },
           { "any": [{ "flag": "closing_masumiyet" }, { "flag": "closing_suphe" }] },
           { "cmp": [{ "var": "pers" }, ">=", 8] },
-          { "cmp": [{ "score": "final" }, ">=", 10500] }
+          { "cmp": [{ "score": "final" }, ">=", 12500] }
         ]
       },
       "stamp": "BERAAT",
@@ -211,7 +211,7 @@
           { "any": [{ "ref": "tasarlama_coktu" }, { "ref": "lehe2" }] },
           { "any": [{ "flag": "closing_masumiyet" }, { "flag": "closing_suphe" }] },
           { "cmp": [{ "var": "pers" }, ">=", 6] },
-          { "cmp": [{ "score": "final" }, ">=", 9000] }
+          { "cmp": [{ "score": "final" }, ">=", 11000] }
         ]
       },
       "stamp": "BERAAT",
@@ -239,6 +239,10 @@
         {
           "when": { "hasEvidence": "ded_gomlek" },
           "text": "Tanığın olay gecesi gömleğini değiştirdiği ve teslim etmediği anlaşılmıştır."
+        },
+        {
+          "when": { "flag": "arg_el" },
+          "text": "Adli tıp uzmanına göre yara kanalı en çok sağ elle tutulan bir bıçakla uyumludur; sanık soldur."
         },
         {
           "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2)."
@@ -282,7 +286,11 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "Tahliye müzekkeresi öğleden sonra cezaevine ulaştı. Emir akşam yedide kapıdan çıktı; elinde bir naylon poşet, ayakkabıları bağcıksız. Kemal kapıdaydı; Meral arabada. Kemal oğlunun bağcıksız ayakkabılarına baktı, bir şey demedi; montunun cebinden iki bağcık çıkardı."
+              "text": "Tahliye müzekkeresi öğleden sonra cezaevine ulaştı. Emir akşam yedide kapıdan çıktı; elinde bir naylon poşet, ayakkabıları bağcıksız."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kemal kapıdaydı; Meral arabada. Kemal oğlunun bağcıksız ayakkabılarına baktı, bir şey demedi; montunun cebinden iki bağcık çıkardı."
             }
           ]
         },
@@ -315,6 +323,23 @@
             {
               "speaker": "narrator",
               "text": "Çerçeveyi ters çevirmedi. Düz de bırakmadı; yan yatırdı. Yarım bir şey gibi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masamın kenarına oturdu. Bir süre ikimiz de konuşmadık. Sonra Leyla gözlüğünü çıkardı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir arşiv dosyası, bir imza, bir gömlek. Hepsini buldun. Birini savcıya götürmedin."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Biz kovalamayız Deniz. Ama bildiğimizi yazarız. Yazmazsan, bildiğin şey senin masanda kalır; bir çerçeve gibi."
+            },
+            {
+              "speaker": "player",
+              "text": "Haklıydı. Bir dilekçe yazmadım. Bir adam bugün adliyeden anahtarını parmağında çevirerek çıktı.",
+              "style": "thought"
             },
             {
               "speaker": "player",

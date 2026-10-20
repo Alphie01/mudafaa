@@ -15,7 +15,6 @@ import {
   interview,
   meet,
   mood,
-  not,
   option,
   raise,
   score,
@@ -455,7 +454,8 @@ suleyman: Ama ben ışığın altında gördüm dedim avukat. Kesin gördüm. Se
       next: '$return',
     }),
     option('SK_KORKU', '“Korkmayın; size bir şey olmayacak, söz.”', {
-      neutral: 'Tanığa güvence vermek insani; ama bir avukat bir tanığın güvenliğini vaat edemez, kürsüde onun yerine konuşamaz.',
+      neutral:
+        'Tanığa güvence vermek insani; ama bir avukat bir tanığın güvenliğini vaat edemez, kürsüde onun yerine konuşamaz.',
       responses: B(`
 - Korkmayın Süleyman Bey. Size bir şey olmayacak. Söz.
 suleyman: Söz mü? Avukat söz verir mi? Peki. Senin sözüne gelirim.
@@ -634,22 +634,22 @@ export const kemalKararNode = (
   where: { bg: 'depo_gece' | 'ev'; label: string } = { bg: 'depo_gece', label: 'DEMİRTAŞ · DEPO RAMPASI' },
 ) =>
   conversation(id, {
-  ...chap,
-  title: 'Kemal Yalçın',
-  background: where.bg,
-  room: { label: where.label, character: 'kemal' },
-  lines: B(`
+    ...chap,
+    title: 'Kemal Yalçın',
+    background: where.bg,
+    room: { label: where.label, character: 'kemal' },
+    lines: B(`
 > Kemal telefonu avucunda tutuyordu. Parmağı simgenin üstünde, basmadan.
 kemal: Dinleyeyim mi? Sen söyle avukat hanım. Yirmi iki yıl önce bir avukat bana ne yapacağımı söyledi. Şimdi sen söyle.
 `),
-  choices: [
-    option(`${p}_KORU`, '“Birlikte bir kez dinleyelim. Sonra silmeyin; bilirkişiye inceletelim.”', {
-      discovers: 'clue_sesli',
-      score: { USUL_BILGISI: 100 },
-      effects: [raise('sesli_korundu'), inc('legal_hits')],
-      good: 'Kaydın aslını korudun ve mahkeme kanalıyla bilirkişi incelemesi (CMK 63, 177) yolunu seçtin; rızaya dayalı inceleme ve operatör kaydıyla delilin bütünlüğü kanıtlanır.',
-      category: 'USUL_BILGISI',
-      responses: B(`
+    choices: [
+      option(`${p}_KORU`, '“Birlikte bir kez dinleyelim. Sonra silmeyin; bilirkişiye inceletelim.”', {
+        discovers: 'clue_sesli',
+        score: { USUL_BILGISI: 100 },
+        effects: [raise('sesli_korundu'), inc('legal_hits')],
+        good: 'Kaydın aslını korudun ve mahkeme kanalıyla bilirkişi incelemesi (CMK 63, 177) yolunu seçtin; rızaya dayalı inceleme ve operatör kaydıyla delilin bütünlüğü kanıtlanır.',
+        category: 'USUL_BILGISI',
+        responses: B(`
 > Kemal hoparlörü açtı. Önce bir hışırtı. Sonra bir adamın sesi; yorgun, alçak, ağlamamaya çalışan bir ses.
 @SESLİ MESAJ · ERCAN TOKER: Kemal… benim. Ercan. Kapatma. Oğlun buradaydı az önce. Söyledim ona. Hepsini. Haklı, bağırdı. Hakkı var. [phone]
 @SESLİ MESAJ · ERCAN TOKER: Mektup masamda. Yarın sabah sana getiriyorum; bu sefer kaçmayacağım. Yirmi iki yıl… [phone]
@@ -662,34 +662,34 @@ kemal: Oğlun buradaydı… az önce. Az önce. Avukat hanım… az önce.
 kemal: Dokunmam. Yirmi iki yıldır hiçbir şeye dokunmadım zaten.
 ~ “Az önce.” Emir’in çıktığı saat ile bu ses arasında bir aralık var. O aralıkta bir kapı çalınıyor.
 `),
-      next: ret,
-    }),
-    option(`${p}_KOPYA`, '“Dinleyelim; ben de telefonuma kaydedeyim, yeter.”', {
-      discovers: 'clue_sesli',
-      score: { USUL_BILGISI: -30 },
-      effects: [raise('sesli_korundu'), raise('sesli_kopya')],
-      bad: 'Kaydı kendi telefonuna kopyalamak delilin bütünlüğünü tartışmaya açar; aslı korunmalı ve bilirkişiye gitmeli (CMK 63, 134 kıyasen; delil zinciri). Kopya, mahkemede tek başına yetmez.',
-      category: 'USUL_BILGISI',
-      responses: B(`
+        next: ret,
+      }),
+      option(`${p}_KOPYA`, '“Dinleyelim; ben de telefonuma kaydedeyim, yeter.”', {
+        discovers: 'clue_sesli',
+        score: { USUL_BILGISI: -30 },
+        effects: [raise('sesli_korundu'), raise('sesli_kopya')],
+        bad: 'Kaydı kendi telefonuna kopyalamak delilin bütünlüğünü tartışmaya açar; aslı korunmalı ve bilirkişiye gitmeli (CMK 63, 134 kıyasen; delil zinciri). Kopya, mahkemede tek başına yetmez.',
+        category: 'USUL_BILGISI',
+        responses: B(`
 > Kemal hoparlörü açtı. Ben telefonumu hoparlöre yaklaştırdım, kayda bastım.
 @SESLİ MESAJ · ERCAN TOKER: Kemal… benim. Ercan. Kapatma. Oğlun buradaydı az önce. Söyledim ona. Hepsini. [phone]
 @SESLİ MESAJ · ERCAN TOKER: Mektup masamda. Yarın sabah sana getiriyorum… Bir dakika… Kapıda biri var. Gel, otur… [phone]
 > Hat kesildi. Kemal hiçbir şey söylemedi. Benim telefonumda bir kaydın kaydı; uğultulu, forklift sesli, bir hoparlörün hoparlörü.
 ~ Bir bilirkişi bu kopyaya bakıp “bu ne” diyecek. Aslı hâlâ Kemal’in avucunda. Onu istemem gerekecek.
 `),
-      next: ret,
-    }),
-    option(`${p}_SONRA`, '“Şimdi değil. Önce dosyayı bitireyim.”', {
-      neutral: 'Bir delili ertelemek bazen gerekir; ama dinlenmemiş bir kayıt, kimsenin bilmediği bir delildir.',
-      responses: B(`
+        next: ret,
+      }),
+      option(`${p}_SONRA`, '“Şimdi değil. Önce dosyayı bitireyim.”', {
+        neutral: 'Bir delili ertelemek bazen gerekir; ama dinlenmemiş bir kayıt, kimsenin bilmediği bir delildir.',
+        responses: B(`
 - Şimdi değil Kemal Bey. Önce dosyayı bitireyim, sonra birlikte bakarız.
 kemal: Nasıl istersen. Yirmi iki yıl bekledi; birkaç gün daha bekler.
 > Telefonu cebine koydu. Molanın bittiğini gösteren zil çaldı. Forkliftin kabinine çıktı; bip, bip, bip.
 `),
-      next: ret,
-    }),
-  ],
-});
+        next: ret,
+      }),
+    ],
+  });
 
 export const kemalKarar = kemalKararNode('INV_KEMAL_K', 'KS', '$return', INV);
 

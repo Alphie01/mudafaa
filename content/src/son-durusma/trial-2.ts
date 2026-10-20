@@ -3,7 +3,6 @@ import {
   any,
   atLeast,
   choiceNode,
-  cmp,
   cont,
   courtSession,
   dec,
@@ -215,12 +214,18 @@ baskan: Müdafi, sorularınız.
         ]),
         statement('T1', 1, [
           'O gece 23.30’dan itibaren kasadaydım; ',
-          hl('23.55 gibi ofisten bağırış duydum', any(flag('press_t1'), has('ded_saat'), has('ded_yol'), has('clue_kent'), flag('contra_s2'))),
+          hl(
+            '23.55 gibi ofisten bağırış duydum',
+            any(flag('press_t1'), has('ded_saat'), has('ded_yol'), has('clue_kent'), flag('contra_s2')),
+          ),
           '.',
         ]),
         statement('T2', 2, [
           'Emir ofisten koşarak çıktı; ',
-          hl('elinde bıçak, önlüğünde kan vardı', any(flag('press_t2'), has('ded_onluk'), has('ded_bicak_yeri'), flag('contra_s4'), has('ded_canli'))),
+          hl(
+            'elinde bıçak, önlüğünde kan vardı',
+            any(flag('press_t2'), has('ded_onluk'), has('ded_bicak_yeri'), flag('contra_s4'), has('ded_canli')),
+          ),
           '.',
         ]),
         statement('T3', 3, [
@@ -228,12 +233,22 @@ baskan: Müdafi, sorularınız.
           hl('00.15’e kadar sayımı bitirdim', any(flag('press_t3'), has('clue_z'), has('ded_kasa'))),
           '; sonra ofise girip Ercan’ı yerde buldum.',
         ]),
-        statement('T4', 4, [hl('Kamera sistemi üç gündür arızalıydı', any(flag('press_t4'), has('clue_dvr'), has('ded_kamera'))), '; servis çağırmıştık.']),
-        statement('T5', 5, [hl('Sanığın ailesini tanımam', any(flag('press_t5'), has('ded_mektup'))), '; Ercan’ın eski meselelerinden haberim yoktu.']),
+        statement('T4', 4, [
+          hl('Kamera sistemi üç gündür arızalıydı', any(flag('press_t4'), has('clue_dvr'), has('ded_kamera'))),
+          '; servis çağırmıştık.',
+        ]),
+        statement('T5', 5, [
+          hl('Sanığın ailesini tanımam', any(flag('press_t5'), has('ded_mektup'))),
+          '; Ercan’ın eski meselelerinden haberim yoktu.',
+        ]),
         statement(
           'T6',
           6,
-          ['Ercan’ı yerde görünce ona sarıldım; ', hl('üstüm başım kan oldu', any(has('ded_gomlek'), has('clue_lacivert'), flag('fact_kan_beklenir'))), '. Polise öyle anlattım.'],
+          [
+            'Ercan’ı yerde görünce ona sarıldım; ',
+            hl('üstüm başım kan oldu', any(has('ded_gomlek'), has('clue_lacivert'), flag('fact_kan_beklenir'))),
+            '. Polise öyle anlattım.',
+          ],
           flag('press_t3'),
         ),
       ],
@@ -241,10 +256,20 @@ baskan: Müdafi, sorularınız.
         pressRule('PR_T0', 'T0', {
           score: { SORGULAMA: 25 },
           effects: [raise('press_t0')],
-          responses: B(`
+          responses: [
+            W(
+              any(flag('fact_sessiz'), flag('fact_tas_bilgi')),
+              `
+- “Kin güdüyordu” dediniz. Şef Nuri o hafta sanığın mutfakta tek kelime etmediğini söylüyor. Bileği taşını da kolluktan duyduğunuzu bana telefonda söylediniz.
+tarik: Ben… gözlerinden anladım. Bir insanın kinini gözlerinden anlarsınız avukat hanım. Taşı da… evet, Yavuz Bey söyledi. Ne var bunda?
+~ Gözlerinden anlamış. Bir tanık gördüğünü anlatır; tahmin ettiğini değil.
+`,
+            ),
+            O(`
 - Bileme ve bekleme. Bunları siz mi gördünüz?
 tarik: Şef söyledi taşı. Beklemeyi ben gördüm; kapanışta ofisin önünde dolanıyordu. Ercan da bana söylemişti zaten: “Bu çocuk bir şey yapacak.”
 `),
+          ],
         }),
         pressRule('PR_T1', 'T1', {
           score: { SORGULAMA: 25 },
@@ -364,7 +389,8 @@ tarik: Belki… geri döndü. Ben görmedim. Ben bir an gördüm. Bir an.
           visibleWhen: any(has('clue_onluk'), has('clue_bicak_ofiste')),
           score: { SORGULAMA: 150 },
           effects: [inc('pers')],
-          neutral: 'Kısmi isabet: olay yeri karesini gösterdin; çelişkiyi tanığın sözüyle birleştiren çıkarımı kurmadın.',
+          neutral:
+            'Kısmi isabet: olay yeri karesini gösterdin; çelişkiyi tanığın sözüyle birleştiren çıkarımı kurmadın.',
           responses: B(`
 - Olay yeri albümü kare 17: bıçak ofiste. Kare 31: önlük askıda.
 tarik: Fotoğraf sonra çekilmiş avukat hanım. Ben o anı anlatıyorum.
@@ -426,7 +452,20 @@ tarik: Görmedim. “T…ık” mı? Tarık mı yazıyor orada? Türkiye’de ka
           effects: [inc('pers', 2), raise('contra_t6'), breakIfShaken],
           good: '23.12’de lacivert, 00.52’de ütülü ve temiz beyaz bir gömlek: “üstüm başım kan oldu” diyen tanığın kanlı giysisi dosyada yok.',
           category: 'SORGULAMA',
-          responses: B(`
+          responses: [
+            W(
+              all(flag('fact_dolap'), flag('fact_kan_beklenir')),
+              `
+- Sayın Başkan, nişan masasının 23.12 fotoğrafı: tanık lacivert gömlekle. Olay yeri karesi 44, 00.52: ütülü, temiz bir beyaz gömlek.
+- Adli tıp uzmanı az önce söyledi: maktule sarılan birinin göğsünde ve kollarında belirgin kan olur.
+- Tanık, personel dolabınızda yedek gömlek tuttuğunuzu şef söylüyor. Kanlı gömleği nerede çıkardınız? Polise neden vermediniz?
+tarik: Dolabımda… evet. Değiştirdim. Üstüm kan içindeydi, dayanamadım. Attım. Şoktaydım.
+baskan: Polise kanlı gömleğinizi teslim ettiniz mi?
+tarik: Hayır efendim. Aklıma gelmedi.
+> Dr. Sema Ilgaz bilirkişi sırasında başını kaldırdı ve tanığa baktı. Salonda bir uğultu. Başkan tokmağa uzandı; vurmadı. {shake}
+`,
+            ),
+            O(`
 - Sayın Başkan, nişan masasının 23.12 tarihli fotoğrafı: tanık lacivert bir gömlek giyiyor. Olay yeri albümü kare 44, saat 00.52: tanık ütülü, temiz, beyaz bir gömlekle.
 - Tanık, “sarıldım, üstüm başım kan oldu” diyorsunuz. Kanlı gömlek nerede? Polis geldiğinde neden üstünüzde değildi?
 tarik: Ben… değiştirdim. Üstüm kan içindeydi, dayanamadım. Dolabımda yedek vardı. Attım onu. Ne yapsaydım?
@@ -434,6 +473,7 @@ baskan: Polise kanlı gömleğinizi teslim ettiniz mi?
 tarik: Hayır efendim. Aklıma gelmedi. Şoktaydım.
 > Salonda bir uğultu. Başkan tokmağa uzandı; vurmadı. {shake}
 `),
+          ],
         }),
         presentRule('PS_SAVCILIK2', undefined, savcilikDelili2, {
           maxUses: 10,
@@ -521,21 +561,26 @@ baskan: Müdafi, talebe diyeceğiniz?
 `),
       next: 'T2_04',
       options: [
-        option('L_SIR', '“Av. Erdem, avukatlığı sırasında öğrendikleri hakkında tanıklıktan çekinebilir; sır müvekkilinindir.”', {
-          score: { USUL_BILGISI: 120 },
-          effects: [inc('legal_hits'), inc('pers'), raise('leyla_korundu')],
-          good: 'Doğru dayanak: avukat, meslek sıfatıyla öğrendiği bilgiler hakkında tanıklıktan çekinebilir (CMK 46/1-a) ve sır saklamakla yükümlüdür (Av.K. 36); sırrın sahibi müvekkildir. Husumet zaten dosyadaki hükümle sabit.',
-          category: 'USUL_BILGISI',
-          responses: B(`
+        option(
+          'L_SIR',
+          '“Av. Erdem, avukatlığı sırasında öğrendikleri hakkında tanıklıktan çekinebilir; sır müvekkilinindir.”',
+          {
+            score: { USUL_BILGISI: 120 },
+            effects: [inc('legal_hits'), inc('pers'), raise('leyla_korundu')],
+            good: 'Doğru dayanak: avukat, meslek sıfatıyla öğrendiği bilgiler hakkında tanıklıktan çekinebilir (CMK 46/1-a) ve sır saklamakla yükümlüdür (Av.K. 36); sırrın sahibi müvekkildir. Husumet zaten dosyadaki hükümle sabit.',
+            category: 'USUL_BILGISI',
+            responses: B(`
 - Sayın Başkan, Av. Leyla Erdem’in bilgisi Kemal Yalçın’ın avukatı olarak öğrendiği bilgilerdir. Meslek sırrıdır ve bu sırrın sahibi müvekkildir; tanıklıktan çekinme hakkı vardır.
 - Husumetin varlığı zaten getirtilen hükümle sabittir. Bir avukatı eski müvekkilinin aleyhine kürsüye çıkarmanın bu dosyaya katacağı bir şey yoktur.
 baskan: Talep reddedildi. Av. Erdem’in meslek sırrı gözetilerek.
 > Leyla dinleyici sırasında başını bir santim eğdi. Kemal döndü; Leyla’ya değil, bana baktı.
 `),
-        }),
+          },
+        ),
         option('L_KATIL', '“Katılıyoruz; dinlensin.”', {
           effects: [dec('pers')],
-          neutral: 'Avukatın meslek sırrı nedeniyle çekinme hakkını gözetmedin; Leyla kürsüye çıkıp çekindi, yalnızca zaman ve güven kaybettin.',
+          neutral:
+            'Avukatın meslek sırrı nedeniyle çekinme hakkını gözetmedin; Leyla kürsüye çıkıp çekindi, yalnızca zaman ve güven kaybettin.',
           responses: B(`
 - Katılıyoruz Sayın Başkan.
 > Leyla kürsüye geldi. Yemin etmeden önce tek bir cümle kurdu: “Meslek sırrım nedeniyle tanıklıktan çekiniyorum.” Başkan kabul etti.
@@ -615,7 +660,8 @@ baskan: Mevcut delil durumu, suçun niteliği ve öngörülen ceza miktarı göz
         }),
         option('TH_B', 'Tahliye: tutukluluk uzadı', {
           score: { USUL_BILGISI: -20 },
-          neutral: 'Sürenin uzaması tek başına tahliye gerekçesi değildir; kuvvetli şüpheyi sarsan somut bulgu göstermedin.',
+          neutral:
+            'Sürenin uzaması tek başına tahliye gerekçesi değildir; kuvvetli şüpheyi sarsan somut bulgu göstermedin.',
           responses: B(`
 - Sanık dört aydır tutuklu Sayın Başkan.
 baskan: Ağır ceza dosyası için makul sürenin içinde müdafi. Tutukluluk hâlinin devamına.
@@ -666,6 +712,7 @@ kemal: Oğlum.
 > Tarık Sezer tanık odasından çıktı; ceketini koluna almış. Yanımdan geçerken durdu.
 tarik: Ercan sizi severdi avukat hanım. Böyle inatçı birini. Severdi.
 > Yürüdü. Kemal duvardan ayrıldı; arkasından baktı, adam merdivenlerde kaybolana kadar.
+> Merdivenin başında Tarık bir an durdu, cebinden anahtarlığını çıkardı. Parmağında çevirdi; bir, iki. Sonra indi.
 kemal: O adam… Gemlik dedi kürsüde. Görükle’ye “misafir” gelirmiş.
 kemal: Gemlikli. Yirmi iki yıl. Saçı vardı o zaman, şimdi yok; ama yürüyüşü aynı. Arabanın anahtarını parmağında çevirirdi; şimdi de çeviriyor.
 ~ Bir ad yok. Bir yürüyüş, bir anahtar, bir kasaba adı. Bir mahkeme yürüyüşleri kabul etmez; bir arşiv belki eder.

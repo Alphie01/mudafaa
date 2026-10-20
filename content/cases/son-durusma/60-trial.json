@@ -239,6 +239,19 @@
               "speaker": "player",
               "text": "Üç gün, üç kâğıt, bir tanık. Savcı bir hikâye anlattı; düzgün, sıralı, kâğıtlı. Mahkemeler düzgün hikâyeleri sever.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Katılan sırasında Gülay Toker iddianamenin her cümlesinde başını salladı. “Bıçak” kelimesinde gözlerini kapadı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Emir sanık sandalyesinde sol elinin başparmağıyla sağ elinin sırtındaki yanık izini ovuyordu. Mutfakta kazanılmış bir iz; bir fırının kenarı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir aşçının elleri. Savcı bu elleri bir katilin elleri diye anlattı. Ben bu ellerin o gece neye dokunduğunu, neye dokunmadığını anlatacağım.",
+              "style": "thought"
             }
           ]
         }
@@ -944,6 +957,31 @@
           }
         },
         {
+          "id": "PS_DOSYA",
+          "kind": "PRESENT",
+          "match": { "evidence": ["ev_hts", "ev_tel_rapor"] },
+          "maxUses": 10,
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "suleyman", "text": "Telefon mu? Ben telefon kullanmam avukat hanım; dolmuşa binerim." },
+                { "speaker": "baskan", "text": "Müdafi, bu kaydın tanıkla ilgisi nedir?" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -150, "line": "hatali" }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Bu kayıtların bulaşıkçının beyanıyla bir ilgisi yok; doğru kâğıdı doğru tanığa göster. −1 güvenilirlik, −150 skor.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
           "id": "PS_SAVCILIK",
           "kind": "PRESENT",
           "match": { "evidence": ["ev_bicak", "ev_mesaj_pzt", "ev_suleyman_ifade", "ev_tas_fis", "ev_otopsi"] },
@@ -1003,7 +1041,7 @@
           ],
           "quality": { "q": "BAD", "feedback": "Dayanaksız itiraz.", "category": "SORGULAMA" }
         },
-        { "id": "H103_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "H1_04" }
+        { "id": "H103_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "H1_03S" }
       ]
     },
     {
@@ -1051,7 +1089,7 @@
           ]
         }
       ],
-      "choices": [{ "id": "H103K_DEVAM", "kind": "CONTINUE", "label": "Devam", "role": "PRIMARY", "next": "H1_04" }],
+      "choices": [{ "id": "H103K_DEVAM", "kind": "CONTINUE", "label": "Devam", "role": "PRIMARY", "next": "H1_03S" }],
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
@@ -1062,6 +1100,97 @@
         "witness": "suleyman",
         "counsel": "deniz"
       }
+    },
+    {
+      "id": "H1_03S",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "fact_kulak" }, { "flag": "suleyman_hazir" }] },
+          "lines": [
+            { "speaker": "narrator", "text": "Savcı yeniden ayağa kalktı. Bu kez sorusu tanığın kulağına dairdi." },
+            {
+              "speaker": "savci",
+              "text": "Tanık, sol kulağınız ağır işitiyor, değil mi? Bağırışı nasıl duydunuz, saati nasıl bildiniz?"
+            },
+            {
+              "speaker": "suleyman",
+              "text": "Sol kulak, evet. Ama ofis sağımda kalır Savcı Bey; sağ kulağım tıkır tıkır. Saati de dolmuştan bilirim, dedim ya. On bir yıl, aynı dolmuş."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı başını salladı ve oturdu. Kulağı önceden sormuştum; tanık kürsüde şaşırmadı. Kendi bildiğini, kendi sözleriyle söyledi."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "suleyman_kocluk" },
+          "lines": [
+            { "speaker": "narrator", "text": "Savcı yeniden ayağa kalktı." },
+            { "speaker": "savci", "text": "Tanık, bu sabah koridorda bir kâğıda bakıyordunuz. Ne yazıyordu?" },
+            {
+              "speaker": "suleyman",
+              "text": "Ben… Hiç. Unutmayayım diye. Avukat hanım “kesin söyle” dedi, ben de yazdım…"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Başkan bana baktı. Uzun uzun. Bir şey söylemedi; söylemesine gerek yoktu."
+            },
+            {
+              "speaker": "player",
+              "text": "Tanığın ağzına bir kelime koydum. Şimdi o kelime bütün tanıklığının üstünde bir leke gibi duruyor.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "Savcı yeniden ayağa kalktı." },
+            { "speaker": "savci", "text": "Tanık, sol kulağınız ağır işitiyor, değil mi? Bağırışı nasıl duydunuz?" },
+            { "speaker": "suleyman", "text": "Sol kulak… evet. Ama… sağdan geldi galiba. Bilmiyorum, şaşırdım." },
+            {
+              "speaker": "narrator",
+              "text": "Savcı oturdu; küçük bir kazanç. Bunu önceden sorup tanığın kürsüde şaşırmamasını sağlayabilirdim."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H1_03S2" }],
+      "choices": []
+    },
+    {
+      "id": "H1_03S2",
+      "type": "DECISION",
+      "onEnter": [
+        {
+          "type": "IF",
+          "when": { "flag": "suleyman_kocluk" },
+          "then": [{ "type": "VAR", "var": "cred", "op": "dec", "value": 1 }]
+        }
+      ],
+      "lines": [
+        {
+          "when": { "flag": "press_s4" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Işığın altındaydı.” Kapının üstündeki lamba. Süleyman bunu iki kez söyledi; ikincisinde sesi titremedi. Tutanakta artık bir lamba, bir çocuk ve iki boş el var.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Süleyman’ın gördüğü çocuğun elleri: bunu tutanağa daha güçlü geçirebilirdim. Bir soru daha sormalıydım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H1_04" }],
+      "choices": []
     },
     {
       "id": "H1_04",
@@ -1601,8 +1730,79 @@
           ]
         }
       ],
+      "choices": [{ "id": "H107_DEVAM", "kind": "CONTINUE", "label": "Akşam", "role": "PRIMARY", "next": "H1_08" }]
+    },
+    {
+      "id": "H1_08",
+      "type": "STORY",
+      "chapter": "Bölüm 3 · Birinci Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "title": "Hamitler, akşam",
+      "background": "ev",
+      "lines": [
+        {
+          "when": { "flag": "koridor_durust" },
+          "lines": [
+            { "speaker": "narrator", "text": "SALI 20.30 — HAMİTLER", "style": "card", "bg": "ev" },
+            {
+              "speaker": "narrator",
+              "text": "Söz vermiştim: akşam ben anlatacaktım. Meral kapıyı açtı; elinde yine bir iğne. Mutfakta Kemal, önünde soğumuş bir çay."
+            },
+            {
+              "speaker": "meral",
+              "text": "Gelin. Siz söylemiştiniz; bugün çıkmaz diye. Ben yine de yemek yaptım; iki tabak fazla."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masaya oturdum. Süleyman’ı, dolmuşu, iki boş eli anlattım. Kemal dinledi; bir kez bile sözümü kesmedi."
+            },
+            { "speaker": "kemal", "text": "O yaşlı adam… “kimse sormadı” dedi, öyle mi?" },
+            { "speaker": "player", "text": "Öyle dedi." },
+            {
+              "speaker": "kemal",
+              "text": "Benim dosyamda da kimse bir şey sormamıştı. Üç kişi vardı o evde; yalnızca ikimize soru soruldu."
+            },
+            { "speaker": "narrator", "text": "Bir an durdu, çayını karıştırdı. Kaşık bardağa çarptı; bir, iki." },
+            {
+              "speaker": "kemal",
+              "text": "Avukat hanım. Bugün o kadın merdivenin başında durdu. Ben ona “yanında durma” dedim. O da durmadı; çekildi. Yirmi iki yıl önce de böyle çekilmişti; ben içeri girerken."
+            },
+            { "speaker": "narrator", "text": "Meral kocasının omzuna elini koydu. Kemal elini çekmedi." },
+            {
+              "speaker": "player",
+              "text": "Bir söz tuttum: akşam geldim, anlattım. Küçük sözler daha zor tutulur; çünkü kimse onları tuttuğunu fark etmez. Bu evde ettiler.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "SALI 20.30 — HAMİTLER", "style": "card", "bg": "ev" },
+            {
+              "speaker": "narrator",
+              "text": "Meral kapıyı açtı. Yüzünde bir şey vardı; kızgınlık değil, yorgunluk. Gömlek poşeti hâlâ kapının yanındaydı."
+            },
+            { "speaker": "meral", "text": "Akşam evde olur demiştiniz. Kemal mutfakta. Konuşmaz." },
+            { "speaker": "narrator", "text": "Mutfağa geçtim. Kemal bana bakmadan konuştu." },
+            {
+              "speaker": "kemal",
+              "text": "Yirmi iki yıl önce de bir avukat bana “bu akşam evdesin” demişti. İnanmıştım. Bir daha inanmam dedim; Meral inandı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Süleyman’ı, dolmuşu, iki boş eli anlattım. Kemal dinledi. Sonunda tek bir şey söyledi."
+            },
+            { "speaker": "kemal", "text": "Bir daha söz verme. Kâğıt getir." },
+            {
+              "speaker": "player",
+              "text": "Bir söz yerine bir kâğıt. Bu evde bunun değerini benden iyi bilen yok.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
       "choices": [
-        { "id": "H107_DEVAM", "kind": "CONTINUE", "label": "Üç hafta", "role": "PRIMARY", "next": "ARA_GIRIS_1" }
+        { "id": "H108_DEVAM", "kind": "CONTINUE", "label": "Üç hafta", "role": "PRIMARY", "next": "ARA_GIRIS_1" }
       ]
     }
   ],

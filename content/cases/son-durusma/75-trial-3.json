@@ -178,8 +178,85 @@
           ]
         }
       ],
-      "routes": [{ "to": "T3_00" }],
+      "routes": [{ "to": "T3_00G_4" }],
       "choices": []
+    },
+    {
+      "id": "T3_00G_4",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "flag": "aile_baris" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Kemal salona girerken bir an durdu. Leyla’nın oturduğu sıraya baktı. Sonra, yirmi iki yıl sonra ilk kez, başıyla selam verdi. Leyla aynı selamı verdi; o kadar."
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "leyla_kemal" }, { "flag": "leyla_acik" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Leyla elinde bir zarf tutuyordu; kalın, eski bir zarf. Kimseye vermedi. Dinleyici sırasında dizlerinin üstünde tuttu."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Leyla’nın elleri boştu. Sigara paketini bu sabah masasında bırakmıştı; ilk kez."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T3_00L" }],
+      "choices": []
+    },
+    {
+      "id": "T3_00L",
+      "type": "STORY",
+      "chapter": "Bölüm 7 · Son Duruşma",
+      "eyebrow": "DURUŞMA · 3. CELSE",
+      "title": "Kapının önü",
+      "background": "adliye",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Salonun kapısı açılmadan önce Leyla yanıma geldi. Cübbemin yakasını düzeltti; bunu hiç yapmazdı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "On beş dava. Hepsinde ben sana bir şey söyledim, sen de bir şey yaptın. Bugün bir şey söylemeyeceğim."
+            },
+            { "speaker": "player", "text": "Hiçbir şey mi?" },
+            {
+              "speaker": "leyla",
+              "text": "Bir şey. Yirmi iki yıl önce bu koridorda bir çocuğa “olmazsa indirim” dedim. Bugün o koridorda sen varsın; ben değil."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Kazanırsan benim yerime kazanma. Kaybedersen benim yerime kaybetme. Kendi davanı savun: bir çocuğun o geceki on beş dakikasını."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kapı açıldı. Mübaşirin kalın sesi koridora taştı. Leyla geri çekildi; dinleyici sırasına yürüdü, en arkaya oturdu."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir mentor bir gün susar. Susması, ilk kez sana güvendiği gündür. Ya da ilk kez kendine güvenmediği.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "T300L_DEVAM", "kind": "CONTINUE", "label": "Salona gir", "role": "PRIMARY", "next": "T3_00" }
+      ]
     },
     {
       "id": "T3_00",
@@ -210,7 +287,11 @@
             },
             {
               "speaker": "savci",
-              "text": "Sayın Başkan, bir bilgi sunmak isterim. Müdafiin yazılı bildirimi üzerine Başsavcılığımızca bir soruşturma başlatılmıştır. Hâkim kararıyla yapılan aramada tanık Tarık Sezer’in aracının bagajında yıkanmış bir lacivert gömlek ele geçirilmiş; kriminal incelemesi sürmektedir."
+              "text": "Sayın Başkan, bir bilgi sunmak isterim. Müdafiin yazılı bildirimi üzerine Başsavcılığımızca bir soruşturma başlatılmıştır."
+            },
+            {
+              "speaker": "savci",
+              "text": "Hâkim kararıyla yapılan aramada tanık Tarık Sezer’in aracının bagajında yıkanmış bir lacivert gömlek ele geçirilmiş; kriminal incelemesi sürmektedir."
             },
             {
               "speaker": "narrator",
@@ -411,6 +492,24 @@
           "kind": "PRESS",
           "match": { "statement": "R2" },
           "responses": [
+            {
+              "when": { "flag": "fact_fatura" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "23.48’de kasayı kapattınız. 00.15’e kadar nerede beklediniz? Bir de: perşembe akşamı Ercan Bey “Sezer Gıda’nın faturaları ne?” diye bağırmış. Sezer Gıda kimin?"
+                },
+                {
+                  "speaker": "tarik",
+                  "text": "Ben… salonda oturdum. Bir sigara içtim. Sezer Gıda… kuzenimin firması. Balık getirir. Faturalar… muhasebe işi. Ercan bağırırdı, huyuydu."
+                },
+                {
+                  "speaker": "player",
+                  "text": "İkinci celsede “sayım” dedi, bugün “sigara.” Her celsede yirmi sekiz dakikanın başka bir adı var. Bir de bir kuzenin firması.",
+                  "style": "thought"
+                }
+              ]
+            },
             {
               "lines": [
                 { "speaker": "player", "text": "23.48’de kasayı kapattınız. 00.15’e kadar nerede beklediniz?" },
@@ -1182,7 +1281,11 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Maktulün haftalarca yazdığı mektup olay yerinden götürüldü; izi bir adı gösteriyor. Baş tanık o gece gömleğini değiştirdi ve teslim etmedi. Bu bir başka kişinin varlığını gösterir; bulması savunmanın değil, Başsavcılığın işidir."
+                  "text": "Maktulün haftalarca yazdığı mektup olay yerinden götürüldü; izi bir adı gösteriyor."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Baş tanık o gece gömleğini değiştirdi ve teslim etmedi. Bu bir başka kişinin varlığını gösterir; bulması savunmanın değil, Başsavcılığın işidir."
                 }
               ]
             },
@@ -1319,7 +1422,7 @@
             "feedback": "Delillerle desteklenen beraat talebi: suçun sanık tarafından işlenmediğinin sabit olması (CMK 223/2-b), olmazsa işlendiğinin sabit olmaması (223/2-e).",
             "category": "SAVUNMA_STRATEJISI"
           },
-          "next": "T3_04"
+          "next": "T3_04G"
         },
         {
           "id": "S_SUPHE",
@@ -1367,7 +1470,7 @@
             "feedback": "Tek görgü tanığının beyanı çöktüğünde ve tasarlamanın unsurları kanıtlanamadığında şüpheden sanık yararlanır (CMK 223/2-e; Anayasa 38/4).",
             "category": "SAVUNMA_STRATEJISI"
           },
-          "next": "T3_04"
+          "next": "T3_04G"
         },
         {
           "id": "S_TERDIT",
@@ -1408,7 +1511,7 @@
             "feedback": "Terditli savunma: önce beraat; aksi hâlde tasarlamanın unsurlarının oluşmadığı (TCK 81/1) ve haksız tahrik (TCK 29), TCK 62/1.",
             "category": "SAVUNMA_STRATEJISI"
           },
-          "next": "T3_04"
+          "next": "T3_04G"
         },
         {
           "id": "S_DUYGU",
@@ -1439,9 +1542,43 @@
             "feedback": "Esas savunma delil tartışmasıdır; yirmi iki yıl önceki bir haksızlık bu davadaki delillerin yerini tutmaz.",
             "category": "SAVUNMA_STRATEJISI"
           },
-          "next": "T3_04"
+          "next": "T3_04G"
         }
       ]
+    },
+    {
+      "id": "T3_04G",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "flag": "emir_kararli" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Emir dinlerken bir kez babasına döndü. Kemal başını salladı; çok az. Görüş odasındaki konuşmanın devamı bir baş hareketiydi."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "teklif_red" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Kemal bütün savunma boyunca öne eğik oturdu; bir paletin başında yükü bekleyen bir adam gibi. Bir ikrarın değil, bir kararın yükünü."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Salonda bir sessizlik. Meral’in iğnesi durdu. Kemal ellerini dizlerinin üstünde birleştirdi."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T3_04" }],
+      "choices": []
     },
     {
       "id": "T3_04",

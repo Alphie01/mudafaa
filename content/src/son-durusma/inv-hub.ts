@@ -171,6 +171,9 @@ leyla: Tanıklar. Bu dosyada iki kişi o koridordaydı: bir bulaşıkçı ve bir
 leyla: İki tanığın anlattığı aynı geceyse, saatleri de aynı olmalı. Değilse biri yanılıyor. Hangisinin yanıldığını onlara değil, saatlere sor.
 leyla: Bir de şunu unutma: tanığa ne diyeceğini söylediğin an o senin tanığın olur. Senin tanığın da kimsenin tanığı değildir.
 leyla: Bulaşıkçı yaşlı bir adammış. Yaşlı insanlar saat sormaz; dolmuş sorar, ezan sorar, bir dizinin başlangıcını sorar. Onun saatini bul.
+leyla: Bir de şu: ölümden sonra ilk ifade önemlidir. Bir buçuk saat sonra alınmış, düzgün cümleli bir ifade gördüğünde kendine sor: bu adam bu cümleleri ne zaman kurdu?
+> Leyla bir an pencereye baktı. Yağmur Uludağ’ın yamacından aşağı iniyordu.
+leyla: Şok geçiren insanlar düzgün konuşmaz Deniz. Kekeler, tekrar eder, saatleri karıştırır. Düzgün konuşan, ya çok güçlüdür ya da çok hazırlıklı.
 `,
     ),
     O(`
@@ -325,7 +328,7 @@ export const gece: NodeDef[] = [
       O(`~ Bir mesaj, bir taş, bir bekleyiş. Savcının hikâyesi bu gece de kendi sırasıyla duruyor.`),
     ],
   }),
-  decisionNode('INV_GECE_3', [{ to: 'INV_GECE_4' }], {
+  decisionNode('INV_GECE_3', [{ to: 'INV_GECE_3B' }], {
     lines: [
       W(
         all(has('ded_saat'), any(has('ded_onluk'), has('ded_bicak_yeri'))),
@@ -342,15 +345,42 @@ export const gece: NodeDef[] = [
       O(`~ Baş tanığın 23.55’i hâlâ panonun ortasında. Ona karşı koyacak bir saatim yok.`),
     ],
   }),
+  decisionNode('INV_GECE_3B', [{ to: 'INV_GECE_4' }], {
+    lines: [
+      W(
+        all(flag('fact_sessiz'), flag('fact_istasyon')),
+        `~ Şef Nuri: “Bütün hafta tek kelime etmedi.” Bir bıçak tezgâhta kaldı; bir çanta açık. Kin anlatan bir çocuk değil, susan bir çocuk.`,
+      ),
+      W(
+        any(flag('fact_dolap'), flag('fact_arka_kapi')),
+        `~ Bir mutfağın haritası aklımda: bir arka kapı, bir bulaşıkhane, altı dolap. Herkesin dolabında yedek bir üst. Not aldım; nedenini bilmeden.`,
+      ),
+      W(
+        flag('fact_tas_bilgi'),
+        `~ Bir tanık bir delili bir komiserden duymuş. Bu dosyada herkes birbirine bir şey anlatmış; yalnızca sanığa kimse bir şey sormamış.`,
+      ),
+      W(
+        flag('fact_aramalar'),
+        `~ Ercan Toker eylülden beri aramış. Bir adam yirmi iki yıl sonra bir telefon numarasını aylarca çevirir mi? Bir borç ödenmek ister.`,
+      ),
+      O(`~ Dosyanın kenarlarına bakmadım belki. Kenarlar, ortadan daha çok şey söyler.`),
+    ],
+  }),
   decisionNode('INV_GECE_4', [{ to: 'INV_GECE_5' }], {
     lines: [
-      W(flag('suleyman_kocluk'), `~ Süleyman’a “kesin söyleyin” dedim. Yaşlı bir adamın gözlerindeki korku: kime, neyi kesin?`),
+      W(
+        flag('suleyman_kocluk'),
+        `~ Süleyman’a “kesin söyleyin” dedim. Yaşlı bir adamın gözlerindeki korku: kime, neyi kesin?`,
+      ),
       W(flag('tarik_uyarildi'), `~ Tarık Sezer’e kamerayı söyledim. Telefondaki sessizlik hâlâ kulağımda.`),
       W(
         flag('sesli_korundu'),
         `~ Kemal’in telefonunda iki aydır dinlenmemiş bir ses vardı. Artık bir bilirkişinin masasına gidecek. Bir ölünün sesi.`,
       ),
-      W(cmp(v('aksam1'), '==', 'KENDI'), `~ “Kendi hikâyeni savunma.” Leyla’nın sesi. Masamda ters çevrilecek bir çerçeve yok; henüz.`),
+      W(
+        cmp(v('aksam1'), '==', 'KENDI'),
+        `~ “Kendi hikâyeni savunma.” Leyla’nın sesi. Masamda ters çevrilecek bir çerçeve yok; henüz.`,
+      ),
       O(`~ Emir’in sesi: “Bağırdım abla. Bağırdım ve çıktım.” Yarın bunu dokuz kişi daha duyacak.`),
     ],
   }),

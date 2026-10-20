@@ -1,0 +1,84 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_terminal",
+        "when": { "not": { "hasEvidence": "clue_terminal" } },
+        "text": "İptal kayıtlarının terminal sütununu okumadın: 47 iptalin hepsi ön odadaki MHM-PC03’ten, hiçbiri Vezne 2’den değildi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_cikis",
+        "when": { "not": { "hasEvidence": "clue_cikis" } },
+        "text": "Orhan’ın turnike dökümünü iptal saatleriyle karşılaştırmadın: her akşam 17.10’dan önce çıkmıştı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_talimat",
+        "when": { "not": { "hasEvidence": "ev_talimat" } },
+        "text": "Orhan’ın klasörlerine bakmadın; “Şifreler zarfta” diyen el yazısı not bordroların arasındaydı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_karbon",
+        "when": { "not": { "hasEvidence": "ev_karbon" } },
+        "text": "Teslim tutanaklarının karbon kopyalarını bulmadın; dosyadaki asıllarla karşılaştırınca tutarlar farklıydı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_zilyet",
+        "when": { "not": { "hasEvidence": "ded_teslim" } },
+        "text": "Paranın teslimden sonra kimin gözetiminde olduğunu kanıtlamadın (defter + karbon). Zimmetin ilk unsuru zilyetliktir (TCK 247/1).",
+        "category": "HUKUKI_BILGI"
+      },
+      {
+        "id": "h_bilirkisi",
+        "when": { "not": { "hasEvidence": "ev_bilirkisi" } },
+        "text": "Teftiş raporuna karşı bilişim bilirkişisi istemedin; idari inceleme bilirkişi raporu değildir (CMK 63, 67/3).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_kasa",
+        "when": { "not": { "hasEvidence": "ev_kasa" } },
+        "text": "Kasa odasının alarm kayıtlarını istemedin; iptallerin ardından kasa her akşam aynı kodla açılmıştı.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_pdks",
+        "when": { "not": { "hasEvidence": "ev_pdks_mud" } },
+        "text": "Müdürlük personelinin turnike kayıtlarını istemedin; iptal saatlerinde binada kimin kaldığını gösterecekti.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_ticket",
+        "when": { "not": { "hasEvidence": "ev_ticket" } },
+        "text": "Bilgi işlemin şifre sıfırlama taleplerini istemedin; 14 Ocak akşamı sıfırlamayı isteyen Orhan değildi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_suc",
+        "when": { "not": { "flag": "suc_duyurusu" } },
+        "text": "Elindeki somut delillerle savcılığa suç duyurusunda bulunmadın (CMK 158); zarflar ancak aramayla emanete girebilirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_248",
+        "when": { "not": { "flag": "bilgilendirdi" } },
+        "text": "Etkin pişmanlık (TCK 248/3) yolunu müvekkiline dürüstçe anlatmadın; seçmek onundu, bilgilendirmek senin.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_zarf_acik",
+        "when": { "all": [{ "flag": "fact_zarf" }, { "not": { "flag": "orhan_zarf_acik" } }] },
+        "text": "Orhan’ın zarfı kendisinin anlatmasını sağlamadın; gerçeği önce başka bir tanık söyleyince sanığın sözü değer kaybeder.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_teklif",
+        "when": { "all": [{ "flag": "teklif_iletildi" }] },
+        "text": "Tanığın “ifademi düzeltirim” teklifini müvekkiline taşıdın; bildirilmesi gereken yer savcılıktı (CMK 158).",
+        "category": "SAVUNMA_STRATEJISI"
+      }
+    ]
+  }
+}

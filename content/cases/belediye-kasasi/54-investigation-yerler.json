@@ -1,0 +1,216 @@
+{
+  "variables": [
+    { "id": "fact_vz02", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_onoda", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_kasa_kod", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_turnike", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_talimat", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_9ocak", "type": "bool", "initial": false, "visibility": "HIDDEN" }
+  ],
+  "nodes": [
+    {
+      "id": "INV_VEZNE",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "Vezne salonu",
+      "hud": ["taps_v"],
+      "exposeCounts": true,
+      "scene": "sc_vezne",
+      "background": "buro",
+      "instruction": "Salonda dikkatini çeken yere dokun. Her dokunuş bir büyüteç hakkı yer.",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "CUMA 10.40 — HİSARÖNÜ BELEDİYESİ, VEZNE SALONU",
+              "style": "card",
+              "bg": "buro"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Vezne salonu gündüz başka bir yerdi: sıra fişi makinesi öttükçe biri kalkıyor, biri oturuyordu. Kalorifer peteklerinin üstünde ıslak eldivenler kuruyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Vezne 1’de Melek, kulağında telefon, bir eliyle para sayıyordu. Vezne 2’nin camında bir kâğıt: “KAPALI — Lütfen Vezne 1’e başvurunuz.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Güvenlik görevlisi kartıma baktı, avukat kimliğime baktı, sonra bana. “Mükellef gibi gezin abla, kimseye bir şey sormayın, ben bir şey görmedim.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir suç mahallinde değilim. Bir işyerindeyim. Burada her şey yerinde; tuhaf olan da bu.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "actionCosts": { "TAP": [{ "var": "taps_v", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_VEZNE",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "VEZNE_BITIR", "kind": "CONTINUE", "label": "Salondan çık", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_EV_G",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "Kılıçların evi",
+      "onFirstEnter": [{ "type": "MEET", "character": "nazan" }],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "CUMARTESİ 16.00 — YILDIRIM, DÖRDÜNCÜ KAT", "style": "card", "bg": "ev" },
+            {
+              "speaker": "narrator",
+              "text": "Asansörsüz bir apartman. Her katta başka bir yemek kokusu: birinci katta kızartma, ikincide pekmez, üçüncüde çamaşır suyu. Dördüncüde dikiş makinesinin tıkırtısı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Nazan kapıyı ağzında iğnelerle açtı. Arkasında, salonun ortasında bir manken; üstünde iğnelenmiş bir gelinlik."
+            },
+            {
+              "speaker": "nazan",
+              "text": "Gel avukat hanım. Kusura bakma, provası yarın. Orhan servisle gelecek, yarım saate. Elif içeride, ders çalışıyor; yani telefon."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Duvarlarda raptiyeyle tutturulmuş çizimler: kalpler, bir kuş, bir hastane yatağı, bir de kalemle çizilmiş gözlüklü bir adam. Altında: “BABAM — HESAP UZMANI.”"
+            },
+            { "speaker": "nazan", "text": "Elif çizdi. Hastanedeyken. Her gün bir tane. O gözlüklüyü en çok sever." },
+            {
+              "speaker": "nazan",
+              "text": "Orhan’ın masası şurada. Kimse dokunmaz; ben toz bile almam. Bir kâğıdın yerini değiştirsem üç gün arar, bulunca “burada değildi” der."
+            },
+            {
+              "speaker": "nazan",
+              "text": "Bak, ne istersen. Bu evde saklanacak bir şey yok. Olsa ben bilirdim; yirmi iki yıldır cebini ben boşaltıyorum çamaşırdan önce."
+            },
+            {
+              "speaker": "player",
+              "text": "Saklanacak bir şey yok. Ama saklanmış bir şey olabilir. İkisi aynı şey değil.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_EV" }],
+      "choices": []
+    },
+    {
+      "id": "INV_EV",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "Orhan’ın çalışma masası",
+      "hud": ["taps_e"],
+      "exposeCounts": true,
+      "scene": "sc_calisma",
+      "background": "ev",
+      "instruction": "Masada ve raflarda dikkatini çeken yere dokun. Her dokunuş bir büyüteç hakkı yer.",
+      "actionCosts": { "TAP": [{ "var": "taps_e", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_EV",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": { "text": "Sıradan bir köşe. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "EV_BITIR", "kind": "CONTINUE", "label": "Masadan kalk", "role": "BACK", "next": "INV_EV_SON_1" }
+      ]
+    },
+    {
+      "id": "INV_EV_SON_1",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "Kılıçların evi",
+      "lines": [
+        {
+          "when": { "hasEvidence": "ev_talimat" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Kapı açıldı. Orhan servisten inmiş, merdivenleri çıkmış, nefes nefese. Masasının başında beni, elimde kareli bir kâğıtla görünce olduğu yerde durdu."
+            },
+            {
+              "speaker": "orhan",
+              "expression": "uzgun",
+              "text": "O kâğıt… O kâğıdı nereden… Ben onu bordroların arasına…"
+            },
+            { "speaker": "nazan", "text": "Ne kâğıdı Orhan? Ne var o kâğıtta?" },
+            {
+              "speaker": "narrator",
+              "text": "Orhan cevap vermedi. Paltosunu çıkarmadan sandalyesine oturdu. Gözlüğünü çıkardı, sildi, yeniden taktı. Sonra bir daha çıkardı."
+            },
+            { "speaker": "orhan", "text": "Herkes verdi efendim. Ben de verdim. Yönergeyi biliyordum." },
+            { "speaker": "nazan", "text": "Neyi verdin Orhan? Neyi?" },
+            {
+              "speaker": "player",
+              "text": "Mahkemede söylenmesi gereken bir cümle, bir terzinin salonunda, bir gelinliğin önünde yarım kaldı. Gerisini büroda, sakin bir saatte sormalıyım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Kapı açıldı. Orhan servisten inmiş, merdivenleri çıkmış. Masasının başında beni görünce bir an durdu, sonra gülümsemeye çalıştı."
+            },
+            {
+              "speaker": "orhan",
+              "text": "Bir şey buldunuz mu efendim? Her şey yerindedir. Ben her şeyi yerinde tutarım."
+            },
+            { "speaker": "nazan", "text": "Avukat hanım yorulmuştur Orhan, bir çay koy." },
+            {
+              "speaker": "narrator",
+              "text": "Çay geldi. Kalkarken raflardaki mavi klasörlere bir kez daha baktım. Bordrolar, makbuz koçanları, yıllar. Hepsine bakmadım."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_EV_SON" }],
+      "choices": []
+    },
+    {
+      "id": "INV_EV_SON",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "Kılıçların evi",
+      "background": "ev",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Merdivenleri inerken üçüncü kattan bir televizyon sesi geldi; ikincide pekmez kokusu soğumuştu. Sokağa çıktığımda yağmur başlamıştı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dördüncü katın penceresinde bir silüet: Elif, telefonu elinde, aşağı bakıyordu. El salladım. O da salladı; sonra perdeyi çekti."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir kız, bir “hesap uzmanı” çizimi, bir gelinlik. Bu evde herkes birini bekliyor; kimse ne zaman geleceğini bilmiyor.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "EV_SON_DON", "kind": "CONTINUE", "label": "Büroya dön", "role": "BACK", "next": "$return" }]
+    }
+  ]
+}

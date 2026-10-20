@@ -1,3 +1,4 @@
+import { Category } from '@mudafaa/case-schema';
 import { canonicalJson, fnv1a64, getOwn } from '@mudafaa/engine';
 import type { CompiledCase, SessionState } from '@mudafaa/engine';
 import { analyzeLiveness } from './liveness.js';
@@ -7,7 +8,7 @@ import type { LiveSet, Liveness } from './liveness.js';
  * Durum indirgeme anahtarı üretici. Anahtar: node, yığın, durum ve sonuç ile, mevcut node'dan (ve yığındaki dönüş
  * node'larından) itibaren hâlâ okunabilecek parçalar: değişkenler, bulunmuş deliller, tanışılan karakterler, bulunan
  * nesneler, tetikleyici mandalları, sınırına kadar kullanım ve ziyaret sayaçları, parametre başına fallback kayıtları
- * (bkz. `analyzeLiveness`). Ölü parçalar (ör. duruşmada artık okunmayan soruşturma kaynakları) anahtara girmez; skor
+ * ve — yalnızca gidişatı etkileyen bir koşul okuyorsa — kategori skorları (bkz. `analyzeLiveness`). Ölü parçalar (ör. duruşmada artık okunmayan soruşturma kaynakları) anahtara girmez; skor
  * da girmez, `explore` onu anahtar başına aralık olarak izler. Anahtar, kanonik JSON'un node önekli 64 bit özetidir.
  */
 export function reducer(c: CompiledCase, liveness: Liveness = analyzeLiveness(c)): (s: SessionState) => string {
@@ -29,6 +30,7 @@ export function reducer(c: CompiledCase, liveness: Liveness = analyzeLiveness(c)
             visits: new Map(parts.flatMap((p) => [...p.visits])),
             latches: new Set(parts.flatMap((p) => [...p.latches])),
             paramUses: new Set(parts.flatMap((p) => [...p.paramUses])),
+            score: parts.some((p) => p.score),
           };
     if (parts.length > 1) {
       for (const p of parts) {
@@ -65,6 +67,8 @@ export function reducer(c: CompiledCase, liveness: Liveness = analyzeLiveness(c)
       u: counts(s.uses, live.uses),
       vi: counts(s.visits, live.visits),
       p: members(s.paramUses, live.paramUses).map((k) => [k, [...(getOwn(s.paramUses, k) ?? [])].sort()]),
+      // Skor yalnızca bir koşul onu okuyorsa anahtara girer (aksi hâlde anahtar başına aralık olarak izlenir).
+      sc: live.score ? Category.options.map((k) => s.score.cat[k]) : null,
     });
     return `${s.nodeId}#${fnv1a64(key)}`;
   };

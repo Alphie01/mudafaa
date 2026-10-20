@@ -40,6 +40,19 @@ describe('cli', () => {
     writeFileSync(garbled, '{ "format": ');
     expect(await main([garbled], capture().io)).toBe(1);
 
+    const typed = join(dir, 'typed.json');
+    writeFileSync(
+      typed,
+      JSON.stringify(
+        withPatch(
+          (p) => (choice(p, 'n_hub', 'ch_go_board').effects = [{ type: 'VAR', var: 'trust', op: 'set', value: true }]),
+        ),
+      ),
+    );
+    const typedOut = capture();
+    expect(await main([typed, ...FAST], typedOut.io)).toBe(1);
+    expect(typedOut.out()).toContain('TYPE_MISMATCH');
+
     const missing = capture();
     expect(await main([join(dir, 'yok.json')], missing.io)).toBe(2);
     expect(missing.err()).toContain('bulunamadı');
@@ -57,5 +70,7 @@ describe('cli', () => {
     expect(await main([dir, '--json', ...FAST], cap.io)).toBe(0);
     const report = JSON.parse(cap.out()) as { status: string; slug: string };
     expect(report).toMatchObject({ status: 'PASSED', slug: 'mini-case' });
+    writeFileSync(join(dir, 'case.json'), '{}');
+    expect(await main([dir, ...FAST], capture().io)).toBe(1);
   });
 });

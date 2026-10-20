@@ -20,6 +20,8 @@ export interface LiveSet {
   latches: Set<string>;
   /** `ONCE_PER_PARAMS` fallback kimlikleri. */
   paramUses: Set<string>;
+  /** Gidişatı etkileyen bir koşul skoru (`raw` ya da kategori) okuyor mu (sonuç koşulları hariç). */
+  score: boolean;
 }
 
 const emptyLive = (): LiveSet => ({
@@ -31,6 +33,7 @@ const emptyLive = (): LiveSet => ({
   visits: new Map(),
   latches: new Set(),
   paramUses: new Set(),
+  score: false,
 });
 
 const raise = (m: Map<string, number>, k: string, n: number): void => {
@@ -43,16 +46,36 @@ function mergeInto(into: LiveSet, from: LiveSet): void {
   }
   for (const [k, n] of from.uses) raise(into.uses, k, n);
   for (const [k, n] of from.visits) raise(into.visits, k, n);
+  into.score ||= from.score;
 }
 
-/** Koşul ve değer okumalarını canlı kümeye ekler (`{ref}` yüklemleri çözülerek). */
-function readCond(c: CompiledCase, cond: Cond, out: LiveSet, seen = new Set<string>()): void {
-  if ('all' in cond) for (const x of cond.all) readCond(c, x, out, seen);
-  else if ('any' in cond) for (const x of cond.any) readCond(c, x, out, seen);
-  else if ('not' in cond) readCond(c, cond.not, out, seen);
+/** Sayaç değeri tam tutulacaksa kullanılan sınır (karşılaştırma sabiti bilinmeyen okumalar). */
+const EXACT = Number.MAX_SAFE_INTEGER;
+
+/** `{uses}` / `{visits}` bir sayı sabitiyle karşılaştırılıyorsa sabit+1'e kadar ayırt etmek yeter. */
+function counterCap(v: Val, other: Val): { kind: 'uses' | 'visits'; id: string; cap: number } | undefined {
+  if (typeof v !== 'object' || v === null || typeof other !== 'number') return undefined;
+  if ('uses' in v) return { kind: 'uses', id: v.uses, cap: Math.max(1, Math.floor(other) + 1) };
+  if ('visits' in v) return { kind: 'visits', id: v.visits, cap: Math.max(1, Math.floor(other) + 1) };
+  return undefined;
+}
+
+/**
+ * Koşul ve değer okumalarını canlı kümeye ekler (`{ref}` yüklemleri çözülerek). `scoreLive` false ise skor okumaları
+ * sayılmaz (sonuç koşulları: final skor zaten anahtar başına aralık olarak izlenir).
+ */
+function readCond(c: CompiledCase, cond: Cond, out: LiveSet, seen = new Set<string>(), scoreLive = true): void {
+  if ('all' in cond) for (const x of cond.all) readCond(c, x, out, seen, scoreLive);
+  else if ('any' in cond) for (const x of cond.any) readCond(c, x, out, seen, scoreLive);
+  else if ('not' in cond) readCond(c, cond.not, out, seen, scoreLive);
   else if ('cmp' in cond) {
-    readVal(c, cond.cmp[0], out, seen);
-    readVal(c, cond.cmp[2], out, seen);
+    const [l, , r] = cond.cmp;
+    const capped = counterCap(l, r) ?? counterCap(r, l);
+    if (capped !== undefined) raise(capped.kind === 'uses' ? out.uses : out.visits, capped.id, capped.cap);
+    else {
+      readVal(c, l, out, seen, scoreLive);
+      readVal(c, r, out, seen, scoreLive);
+    }
   } else if ('hasEvidence' in cond) out.evidence.add(cond.hasEvidence);
   else if ('met' in cond) out.characters.add(cond.met);
   else if ('visited' in cond) raise(out.visits, cond.visited, 1);
@@ -64,15 +87,16 @@ function readCond(c: CompiledCase, cond: Cond, out: LiveSet, seen = new Set<stri
     if (seen.has(cond.ref)) return;
     seen.add(cond.ref);
     const p = c.predicates.get(cond.ref);
-    if (p !== undefined) readCond(c, p, out, seen);
+    if (p !== undefined) readCond(c, p, out, seen, scoreLive);
   }
 }
 
-function readVal(c: CompiledCase, v: Val, out: LiveSet, seen = new Set<string>()): void {
+function readVal(c: CompiledCase, v: Val, out: LiveSet, seen = new Set<string>(), scoreLive = true): void {
   if (typeof v !== 'object' || v === null) return;
   if ('var' in v) out.vars.add(v.var);
-  else if ('uses' in v) raise(out.uses, v.uses, 3);
-  else if ('visits' in v) raise(out.visits, v.visits, 3);
+  else if ('uses' in v) raise(out.uses, v.uses, EXACT);
+  else if ('visits' in v) raise(out.visits, v.visits, EXACT);
+  else if ('score' in v) out.score ||= scoreLive;
   else if ('count' in v) {
     for (const ev of c.evidence.values()) {
       if ((v.kind === undefined || ev.kind === v.kind) && (v.tag === undefined || (ev.tags ?? []).includes(v.tag))) {
@@ -80,15 +104,15 @@ function readVal(c: CompiledCase, v: Val, out: LiveSet, seen = new Set<string>()
       }
     }
   } else if ('if' in v) {
-    readVal(c, v.if.then, out, seen);
-    readVal(c, v.if.else, out, seen);
-  } else if (!('score' in v)) {
+    readVal(c, v.if.then, out, seen, scoreLive);
+    readVal(c, v.if.else, out, seen, scoreLive);
+  } else {
     for (const part of Object.values(v)) {
-      if (Array.isArray(part)) for (const p of part as Val[]) readVal(c, p, out, seen);
-      else readVal(c, part as Val, out, seen);
+      if (Array.isArray(part)) for (const p of part as Val[]) readVal(c, p, out, seen, scoreLive);
+      else readVal(c, part as Val, out, seen, scoreLive);
     }
   }
-  eachValCond(v, (cond) => readCond(c, cond, out, seen));
+  eachValCond(v, (cond) => readCond(c, cond, out, seen, scoreLive));
 }
 
 function readEffects(c: CompiledCase, effects: readonly Effect[] | undefined, out: LiveSet): void {
@@ -149,9 +173,11 @@ export function analyzeLiveness(c: CompiledCase): Liveness {
       }
     }
   }
-  for (const o of c.outcomes) readCond(c, o.when, global);
-  for (const b of c.pkg.config.scoring.bonuses) readVal(c, b.value, global);
-  if (c.pkg.config.scoring.multiplierPct !== undefined) readVal(c, c.pkg.config.scoring.multiplierPct, global);
+  for (const o of c.outcomes) readCond(c, o.when, global, new Set(), false);
+  for (const b of c.pkg.config.scoring.bonuses) readVal(c, b.value, global, new Set(), false);
+  if (c.pkg.config.scoring.multiplierPct !== undefined) {
+    readVal(c, c.pkg.config.scoring.multiplierPct, global, new Set(), false);
+  }
   for (const d of c.pkg.discoveryPaths) if (d.requires !== undefined) readCond(c, d.requires, global);
 
   const addNode = (n: NodeDef): void => {

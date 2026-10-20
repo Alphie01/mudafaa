@@ -79,12 +79,13 @@ export async function main(argv: readonly string[], io: Io = defaultIo): Promise
         io.err(`${e.message}\n`);
         return 2;
       }
-      if (!(e instanceof ParseError)) throw e;
+      // Ayrıştırma hatası içerik hatasıdır; beklenmeyen bir iç hata da rapora girer (çıkış 1, yığın izi yok).
+      const code = e instanceof ParseError ? 'SCHEMA' : 'INTERNAL_ERROR';
       report = {
         status: 'FAILED',
         engineVersion: 0,
         summary: { errors: 1, warnings: 0, infos: 0 },
-        issues: [{ severity: 'ERROR', code: 'SCHEMA', path: '', message: e.message }],
+        issues: [{ severity: 'ERROR', code, path: '', message: e instanceof Error ? e.message : String(e) }],
       };
     }
     reports.push({ path, report });

@@ -18,7 +18,8 @@ export class ParseError extends Error {
   }
 }
 
-const PART = /^\d+-.*\.json$/;
+/** Parça dosyası: iki basamaklı önek (`00-meta.json` … `90-tests.json`); ada göre sıralama sırayı verir. */
+const PART = /^\d{2}-[^/]+\.json$/;
 
 async function readJson(path: string): Promise<unknown> {
   let text: string;
@@ -35,8 +36,8 @@ async function readJson(path: string): Promise<unknown> {
 }
 
 /**
- * Dava içeriğini yükler: dosya ise JSON olarak okur; dizin ise ada göre sıralı `NN-*.json` parçalarını (yoksa bütün
- * `.json` dosyalarını) `mergeCaseParts` ile birleştirir.
+ * Dava içeriğini yükler: dosya ise JSON olarak okur; dizin ise ada göre sıralı `NN-*.json` parçalarını
+ * `mergeCaseParts` ile birleştirir (başka adlı `.json` dosyası parça hatasıdır).
  */
 export async function loadCase(path: string): Promise<unknown> {
   let info;
@@ -46,8 +47,9 @@ export async function loadCase(path: string): Promise<unknown> {
     throw new LoadError(`${path} bulunamadı: ${e instanceof Error ? e.message : String(e)}`);
   }
   if (!info.isDirectory()) return readJson(path);
-  const all = (await readdir(path)).filter((f) => f.endsWith('.json')).sort();
-  const parts = all.some((f) => PART.test(f)) ? all.filter((f) => PART.test(f)) : all;
+  const parts = (await readdir(path)).filter((f) => f.endsWith('.json')).sort();
+  const stray = parts.filter((f) => !PART.test(f));
+  if (stray.length > 0) throw new ParseError(`${path}: parça adı NN-ad.json olmalı: ${stray.join(', ')}`);
   if (parts.length === 0) throw new LoadError(`${path} dizininde JSON parçası yok`);
   const values = await Promise.all(parts.map((f) => readJson(join(path, f))));
   try {

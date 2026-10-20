@@ -15,7 +15,10 @@ const leavesNode = (effects: readonly ChoiceDef['effects'][]): boolean => {
   return found;
 };
 
-/** Node'dan bir çıkış var mı: `$stay` olmayan bir `next`, DECISION rotası, GOTO/END etkisi ya da node'a bağlı tetikleyici. */
+/**
+ * Node'dan bir çıkış var mı: `$stay` olmayan bir `next`, DECISION rotası, GOTO/END etkisi (sahne nesnelerininkiler dahil)
+ * ya da node'a bağlı tetikleyici. Genel tetikleyiciler (ör. çöküş kesintisi) koşullu olduğu için çıkış sayılmaz.
+ */
 function hasExit(pkg: CasePackage, n: NodeDef): boolean {
   if (n.type === 'DECISION') return true;
   if (n.choices.some((ch) => ch.next !== undefined && ch.next !== '$stay')) return true;
@@ -24,6 +27,8 @@ function hasExit(pkg: CasePackage, n: NodeDef): boolean {
     n.onFirstEnter,
     ...n.choices.flatMap((ch) => [ch.effects, ...(ch.variants ?? []).map((v) => v.effects)]),
   ];
+  if (n.type === 'SCENE')
+    effects.push(...(pkg.scenes.find((sc) => sc.id === n.scene)?.objects ?? []).map((o) => o.effects));
   if (leavesNode(effects)) return true;
   return pkg.triggers.some((t) => t.scope === n.id && (t.goto !== undefined || leavesNode([t.effects])));
 }
@@ -64,6 +69,38 @@ function indistinguishable(n: NodeDef, path: string, out: Issue[]): void {
       );
     } else seen.set(sig, ch.id);
   });
+}
+
+/**
+ * Koşulsuz otomatik geçiş döngüleri: koşulsuz DECISION rotaları ve giriş etkilerindeki (IF dışındaki) GOTO'lar bir
+ * döngü kurarsa her girişte aksiyon LOOP_LIMIT ile düşer.
+ */
+function automaticCycles(pkg: CasePackage, out: Issue[]): void {
+  const next = new Map<string, string[]>();
+  for (const n of pkg.nodes) {
+    const targets: string[] = [];
+    if (n.type === 'DECISION') for (const r of n.routes) if (r.when === undefined) targets.push(r.to);
+    for (const e of [...(n.onFirstEnter ?? []), ...(n.onEnter ?? [])]) if (e.type === 'GOTO') targets.push(e.node);
+    next.set(n.id, targets);
+  }
+  const state = new Map<string, 'open' | 'done'>();
+  const reported = new Set<string>();
+  const visit = (id: string, trail: string[]): void => {
+    state.set(id, 'open');
+    for (const t of next.get(id) ?? []) {
+      if (state.get(t) === 'open') {
+        const cycle = [...trail.slice(trail.indexOf(t)), t];
+        const head = [...cycle].sort()[0] ?? t;
+        if (!reported.has(head)) {
+          reported.add(head);
+          const i = pkg.nodes.findIndex((n) => n.id === t);
+          out.push(error('DECISION_CYCLE', `nodes[${i}]`, `Koşulsuz otomatik geçiş döngüsü: ${cycle.join(' → ')}`));
+        }
+      } else if (state.get(t) === undefined) visit(t, [...trail, t]);
+    }
+    state.set(id, 'done');
+  };
+  for (const n of pkg.nodes) if (state.get(n.id) === undefined) visit(n.id, [n.id]);
 }
 
 /** Node türü kuralları: fallback'ler, varsayılan rotalar, RESULT, çıkış, HUD ve ayırt edilemeyen seçenekler. */
@@ -114,5 +151,6 @@ export function nodeRuleChecks(pkg: CasePackage, c: CompiledCase): Issue[] {
     });
     indistinguishable(n, p, out);
   });
+  automaticCycles(pkg, out);
   return out;
 }

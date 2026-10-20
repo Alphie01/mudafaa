@@ -36,5 +36,11 @@ export function compiled(p: unknown): CompiledCase {
   return r.c;
 }
 
-/** Testlerde hızlı simülasyon: küçük BFS bütçesi ve az yürüyüş. */
-export const FAST = { maxStates: 4_000, walks: 60, maxMs: 20_000 } as const;
+/** Testlerde hızlı simülasyon: küçük BFS bütçesi ve az yürüyüş (sayı bütçeleri; süre yalnızca sert sınır). */
+export const FAST = { maxStates: 4_000, walks: 60, maxMs: 120_000 } as const;
+
+/** Başlangıca, `n_brief`'e giden seçenekleri olan yeni bir node ekler. */
+export function preStart(p: Json, choices: Record<string, unknown>[]): void {
+  p.nodes.unshift({ id: 'n_pre', type: 'CHOICE', title: 'Ön', choices });
+  p.config.startNode = 'n_pre';
+}

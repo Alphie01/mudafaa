@@ -62,6 +62,16 @@ describe('staticChecks', () => {
     ['TYPE_MISMATCH', (p) => (choice(p, 'n_obj', 'ob_b').visibleWhen = { cmp: [{ var: 'trust' }, '==', true] })],
     ['TYPE_MISMATCH', (p) => (choice(p, 'n_obj', 'ob_b').visibleWhen = { cmp: [{ score: 'final' }, '>', 0] })],
     ['RESERVED_ID', (p) => p.predicates.push({ id: 'constructor', label: 'x', when: { all: [] } })],
+    [
+      'DECISION_CYCLE',
+      (p) => {
+        p.nodes.push(
+          { id: 'n_d1', type: 'DECISION', choices: [], routes: [{ to: 'n_d2' }] },
+          { id: 'n_d2', type: 'DECISION', choices: [], routes: [{ to: 'n_d1' }] },
+        );
+        node(p, 'n_hub').choices.push({ id: 'ch_loop', kind: 'NAVIGATE', label: 'Döngü', next: 'n_d1' });
+      },
+    ],
   ];
   for (const [code, mutate] of cases) {
     it(`detects ${code}`, () => {
@@ -81,6 +91,19 @@ describe('staticChecks', () => {
     );
     expect(codes(band)).toContain('THRESHOLD_MISMATCH');
     expect(errors(twins)).toEqual([]);
+  });
+
+  it('role, unread variable and scene-exit checks', () => {
+    const roles = withPatch((p) => node(p, 'n_court1').stage.bench.push({ character: 'k', label: 'Üye', xFrac: 0.2 }));
+    expect(codes(roles)).toContain('ROLE_MISMATCH');
+    expect(codes(fresh())).toContain('UNREAD_VARIABLE');
+    const objectExit = withPatch((p) => {
+      const scene = node(p, 'n_scene');
+      scene.choices = scene.choices.filter((ch: { id: string }) => ch.id !== 'ch_scene_end');
+      const obj = p.scenes[0].objects.find((o: { id: string }) => o.id === 'o_cam');
+      obj.effects = [...(obj.effects ?? []), { type: 'GOTO', node: 'n_hub' }];
+    });
+    expect(errors(objectExit)).not.toContain('NO_EXIT');
   });
 
   it('legal review pending is INFO, ERROR when strict', () => {

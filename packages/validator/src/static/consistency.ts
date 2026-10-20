@@ -1,5 +1,5 @@
 import type { CasePackage, Cond, Val } from '@mudafaa/case-schema';
-import { typeOf } from '@mudafaa/engine';
+import { collectRefs, typeOf } from '@mudafaa/engine';
 import type { CompiledCase, ExprType } from '@mudafaa/engine';
 import { error, warning } from '../issues.js';
 import type { Issue } from '../issues.js';
@@ -203,6 +203,59 @@ function typeChecks(pkg: CasePackage, c: CompiledCase, out: Issue[]): void {
   }
 }
 
+const BENCH_ROLES: ReadonlySet<string> = new Set(['JUDGE', 'PROSECUTOR', 'CLERK', 'USHER']);
+const NOT_WITNESS: ReadonlySet<string> = new Set(['JUDGE', 'PROSECUTOR', 'COUNSEL', 'CLERK', 'USHER']);
+
+/** Duruşma kadrosunun rolleri: avukat COUNSEL, kürsü hâkim/savcı/kâtip/mübaşir, tanık bunlardan biri değil (uyarı). */
+function roleChecks(pkg: CasePackage, c: CompiledCase, out: Issue[]): void {
+  const role = (id: string): string | undefined => c.characters.get(id)?.role;
+  pkg.nodes.forEach((n, i) => {
+    if (n.type !== 'COURTROOM') return;
+    const p = `nodes[${i}].stage`;
+    if (role(n.stage.counsel) !== 'COUNSEL') {
+      out.push(warning('ROLE_MISMATCH', `${p}.counsel`, `${n.stage.counsel} COUNSEL rolünde değil`));
+    }
+    n.stage.bench.forEach((b, j) => {
+      const r = role(b.character);
+      if (r !== undefined && !BENCH_ROLES.has(r)) {
+        out.push(warning('ROLE_MISMATCH', `${p}.bench[${j}]`, `${b.character} (${r}) kürsüde`));
+      }
+    });
+    const w = n.stage.witness === undefined ? undefined : role(n.stage.witness);
+    if (w !== undefined && NOT_WITNESS.has(w)) {
+      out.push(warning('ROLE_MISMATCH', `${p}.witness`, `${n.stage.witness ?? ''} (${w}) tanık olamaz`));
+    }
+  });
+}
+
+const VAR_TEMPLATE = /\{\{var\.([A-Za-z][A-Za-z0-9_]*)\}\}/g;
+
+/** Yazılan ama hiçbir koşulda, değer ifadesinde, HUD'da, maliyette ya da etiket şablonunda okunmayan değişkenler (uyarı). */
+function unreadVariables(pkg: CasePackage, out: Issue[]): void {
+  const read = new Set<string>();
+  const addRefs = (x: Parameters<typeof collectRefs>[0]): void => {
+    for (const v of collectRefs(x).vars) read.add(v);
+  };
+  for (const { cond } of condSites(pkg)) addRefs(cond);
+  for (const { val } of intValSites(pkg)) addRefs(val);
+  for (const { effect } of allEffects(pkg)) if (effect.type === 'VAR') addRefs(effect.value);
+  for (const n of pkg.nodes) {
+    for (const v of n.hud ?? []) read.add(v);
+    for (const ch of n.choices) for (const k of ch.cost ?? []) read.add(k.var);
+    if (n.type === 'SCENE') for (const k of n.actionCosts?.TAP ?? []) read.add(k.var);
+    if (n.type === 'DOCUMENT') for (const k of n.actionCosts?.EXAMINE ?? []) read.add(k.var);
+  }
+  const labels = [...pkg.config.scoring.lines.map((l) => l.label), ...pkg.config.scoring.bonuses.map((b) => b.label)];
+  for (const label of labels) for (const m of label.matchAll(VAR_TEMPLATE)) if (m[1] !== undefined) read.add(m[1]);
+  const written = new Set<string>();
+  for (const { effect } of allEffects(pkg)) if (effect.type === 'VAR') written.add(effect.var);
+  pkg.variables.forEach((v, i) => {
+    if (written.has(v.id) && !read.has(v.id)) {
+      out.push(warning('UNREAD_VARIABLE', `variables[${i}]`, `${v.id} yazılıyor ama hiçbir yerde okunmuyor`));
+    }
+  });
+}
+
 /** Tutarlılık: ayrılmış adlar, bulunma yolları, delil kullanımı ve ifade türleri. */
 export function consistencyChecks(pkg: CasePackage, c: CompiledCase): Issue[] {
   const out: Issue[] = [];
@@ -211,5 +264,7 @@ export function consistencyChecks(pkg: CasePackage, c: CompiledCase): Issue[] {
   shownEvidenceChecks(pkg, c, out);
   evidenceUseChecks(pkg, c, out);
   typeChecks(pkg, c, out);
+  roleChecks(pkg, c, out);
+  unreadVariables(pkg, out);
   return out;
 }

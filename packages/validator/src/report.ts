@@ -2,7 +2,7 @@ import type { Action, CasePackage, Category } from '@mudafaa/case-schema';
 import { ENGINE_VERSION, compile } from '@mudafaa/engine';
 import { runGoldenPaths } from './golden.js';
 import type { GoldenResult } from './golden.js';
-import { error, warning } from './issues.js';
+import { error, info, warning } from './issues.js';
 import type { Issue } from './issues.js';
 import { explore } from './simulate/explore.js';
 import type { ExploreResult } from './simulate/explore.js';
@@ -28,6 +28,15 @@ export interface ValidateOptions {
   maxMs?: number;
   walks?: number;
 }
+
+/** Bu statik hatalar varken motor güvenle çalıştırılamaz (tür hatası, rotasız DECISION, döngü…): simülasyon atlanır. */
+const SIMULATION_BLOCKERS: ReadonlySet<string> = new Set([
+  'RESERVED_ID',
+  'TYPE_MISMATCH',
+  'DECISION_NO_DEFAULT',
+  'DECISION_CYCLE',
+  'MISSING_FALLBACK',
+]);
 
 /** Tanık aksiyon dizisinin kısa gösterimi. */
 export function formatActions(actions: readonly Action[]): string {
@@ -77,21 +86,39 @@ export function validatePackage(input: unknown, opts: ValidateOptions = {}): Val
   const pkg = c.pkg as CasePackage;
   const meta = { slug: pkg.meta.slug, title: pkg.meta.title, packageHash: c.hash };
   const issues: Issue[] = [...compiled.warnings, ...staticChecks(pkg, c, opts)];
-  if (issues.some((i) => i.code === 'RESERVED_ID')) return finish(issues, meta);
-
-  const sim = explore(c, {
-    ...(opts.maxStates === undefined ? {} : { maxStates: opts.maxStates }),
-    ...(opts.maxMs === undefined ? {} : { maxMs: opts.maxMs }),
-    ...(opts.walks === undefined ? {} : { walks: opts.walks }),
-    scripts: (pkg.tests?.goldenPaths ?? []).map((g) => g.actions),
-  });
   const golden = runGoldenPaths(c);
-  if (!sim.complete) {
+  golden.forEach((g, i) => {
+    if (!g.passed)
+      issues.push(error('GOLDEN_PATH_FAILED', `tests.goldenPaths[${i}]`, `${g.name}: ${g.error ?? 'başarısız'}`));
+  });
+  if (issues.some((i) => i.severity === 'ERROR' && SIMULATION_BLOCKERS.has(i.code))) {
+    issues.push(info('SIMULATION_SKIPPED', '', 'Statik hatalar motoru güvensiz kıldığı için simülasyon atlandı'));
+    return finish(issues, { ...meta, goldenPaths: golden });
+  }
+
+  let sim: ExploreResult;
+  try {
+    sim = explore(c, {
+      ...(opts.maxStates === undefined ? {} : { maxStates: opts.maxStates }),
+      ...(opts.maxMs === undefined ? {} : { maxMs: opts.maxMs }),
+      ...(opts.walks === undefined ? {} : { walks: opts.walks }),
+      scripts: (pkg.tests?.goldenPaths ?? []).map((g) => g.actions),
+    });
+  } catch (e) {
+    issues.push(error('SIMULATION_ERROR', '', `Simülasyon çalışmadı: ${e instanceof Error ? e.message : String(e)}`));
+    return finish(issues, { ...meta, goldenPaths: golden });
+  }
+  if (sim.aborted) {
+    issues.push(
+      error('SIMULATION_ABORTED', '', `Süre sınırı aşıldı (${sim.states} durum); sonuç eksik, yeniden çalıştırın`),
+    );
+  } else if (!sim.complete) {
     issues.push(
       warning(
         'SIMULATION_INCOMPLETE',
         '',
-        `BFS sınırda kesildi (${sim.states} durum); derin durumlar ${sim.walks} yürüyüş ve kaçış aramasıyla örneklendi`,
+        `BFS durum bütçesinde kesildi (${sim.states} durum); derin durumlar ${sim.walks} yürüyüş ve kaçış aramasıyla ` +
+          `örneklendi, ${sim.frontierUnchecked} sınır durumu denetlenmedi`,
       ),
     );
   }
@@ -100,27 +127,49 @@ export function validatePackage(input: unknown, opts: ValidateOptions = {}): Val
       issues.push(error('OUTCOME_UNREACHABLE', `outcomes[${i}]`, `${o.id} sonucuna hiçbir yolla ulaşılamıyor`));
     }
   });
+  for (const d of sim.rejected) {
+    issues.push(
+      error(
+        'ACTION_REJECTED',
+        d.key,
+        `Sunulan aksiyon motorca reddedildi (${d.code}: ${d.message}); tanık: ${formatActions(d.witness)}`,
+      ),
+    );
+  }
+  for (const d of sim.engineErrors) {
+    issues.push(error('ENGINE_ERROR', d.key, `Motor hatası: ${d.message}; tanık: ${formatActions(d.witness)}`));
+  }
   for (const d of sim.deadEnds) {
     issues.push(error('DEAD_END', d.key, `Seçeneksiz durum; tanık: ${formatActions(d.witness)}`));
   }
   for (const d of sim.softlocks) {
     issues.push(error('SOFTLOCK', d.key, `Bu durumdan dava sonuna ulaşılamıyor; tanık: ${formatActions(d.witness)}`));
   }
+  const unverifiedLevel = opts.strict === true ? error : warning;
   for (const d of sim.unverified) {
     issues.push(
-      warning(
+      unverifiedLevel(
         'SOFTLOCK_UNVERIFIED',
         d.key,
         `Kaçış araması bütçesinde dava sonuna ulaşılamadı; tanık: ${formatActions(d.witness)}`,
       ),
     );
   }
-  for (const key of sim.scoreLoops) issues.push(error('SCORE_LOOP', key, 'Döngüyle sınırsız büyüyen skor'));
+  for (const key of sim.scoreLoops)
+    issues.push(error('SCORE_LOOP', key, 'Tekrarlanabilen döngü skoru sınırsız artırıyor'));
+  for (const key of sim.penaltyLoops) {
+    issues.push(warning('PENALTY_LOOP', key, 'Kaynak tüketmeden tekrarlanabilen döngü skoru düşürüyor'));
+  }
   for (const l of sim.leaks) issues.push(error('LEAK', l.key, `Görünümde gizli bilgi: ${l.token}`));
-  golden.forEach((g, i) => {
-    if (!g.passed)
-      issues.push(error('GOLDEN_PATH_FAILED', `tests.goldenPaths[${i}]`, `${g.name}: ${g.error ?? 'başarısız'}`));
-  });
+  const unreachedLevel = sim.complete ? error : warning;
+  const unreached = (code: string, ids: readonly string[], what: string): void => {
+    if (ids.length > 0) {
+      issues.push(unreachedLevel(code, '', `Ulaşılamayan ${what} (${ids.length}): ${ids.slice(0, 20).join(', ')}`));
+    }
+  };
+  unreached('UNREACHED_NODE', sim.coverage.nodes.missing, "node'lar");
+  unreached('UNREACHED_CHOICE', [...sim.coverage.choices.missing, ...sim.coverage.variants.missing], 'seçenekler');
+  unreached('UNREACHED_RULE', [...sim.coverage.rules.missing, ...sim.coverage.fallbacks.missing], 'kurallar');
   return finish(issues, {
     ...meta,
     simulation: sim,

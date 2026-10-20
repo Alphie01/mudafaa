@@ -15,7 +15,8 @@
   bozmanın ya da iz silmenin yöntemini anlatmaz.
 - **Hukuk konuşmada değil, sonuçta yaşar.** Madde numaraları yalnızca Leyla'nın kısa açıklamalarında, geri bildirimde,
   rapor ipuçlarında, hüküm metinlerinde ve duruşmanın resmî dilinde geçer.
-- **Gizem korunur.** Soğuk açılışta konuşan isimsizdir (`narrator` + `name: "BİR ADAM"`), yüz görünmez. Genel müdürün
+- **Gizem korunur.** Soğuk açılışta konuşan isimsizdir (`narrator` + `name: "BİR ADAM"`), yüz görünmez; bir kadroya
+  eşlenebilecek hiçbir giysi, aksesuar ya da jest (yaka, saat, iç cep, zarf) gösterilmez: yalnızca eller, ekran, sesler. Genel müdürün
   sabotajı oyuncuya hiçbir zaman söylenmez; turnike kaydı, cihaz adı ve poliçe zeyilnamesi bir araya gelene kadar Tarık
   Sezer yalnızca "müşteki şirketin kibar genel müdürü"dür. Ekilen ipuçları (zarflanmış şifreler, "evrak unuttum",
   ağustosta yenilenen poliçe, aylardır arızalı denen yedek) tek başına bir şey söylemez.
@@ -63,7 +64,7 @@
 ## 3. Yapı ve node haritası
 
 ```
-PR_00  Soğuk açılış: 02.14, isimsiz bir adam, bir ekran, bir zarf                  STORY
+PR_00  Soğuk açılış: 02.14, isimsiz bir adam, iki el, bir ekran                      STORY
 PR_01  18 Ekim 08.30 sunucu odası → 22 Ekim 06.40 arama                             STORY
 BR_00  Gül büroda (ücret: sonra / sözleşme / dürüstlük)                             STORY (seçim)
 BR_01  Leyla dosyayı devreder: ceza aralığı A–D                                     STORY
@@ -82,26 +83,30 @@ ARA_GIRIS_* → ARA_HUB (3 gün × 3 EP; yığınsız)
   ARA_NALAN (telefon → doğru kanal) · ARA_YASAR (tanık hazırlığı) · ARA_HAKAN (vicdan ipucu) · ARA_SELIM (eski şifre teklifi)
   ARA_EKSPER (sahne 4: eksper fotoğrafları) · ARA_DIL · ARA_KARAR (savcılığa yaz / yüzleş / bekle) · ARA_CIKARIM · ARA_LEYLA
   ARA_DAY_END → ARA_AKSAM1/2 → ARA_SON_* → ARA_SON
-T_00G_* → T_00 (yeni gelişme / etik ihlali) → T_01 bilirkişi raporu tartışması → T_02 Tarık'ın tanıklığı (T1–T5)
-  ⇄ T_02K çekinme → T_03 Yaşar → T_03X katılan vekilinin sorusu (itiraz) → T_05 mütalaa → T_06P dayanaklar → T_06 esas savunma
+T_00G_* → T_00 (yeni gelişme / etik ihlali) → T_01 bilirkişi raporu tartışması ⇄ T_01S bilirkişinin dinlenmesi (S1–S4)
+  → T_01X katılan vekilinin bilirkişiye sorusu → T_02 Tarık'ın tanıklığı (T1–T5) ⇄ T_02K çekinme → T_03 Yaşar
+  → T_03X katılan vekilinin sorusu (itiraz) → T_04 Nalan (NL1–NL4) → T_05 mütalaa → T_06P dayanaklar → T_06 esas savunma
   → T_07 son söz → T_08 hüküm → R_KARAR (+ epilog)
-T_INT_COKUS (♥0) → T_08 · T_ETIK → R_KARAR
+T_INT_COKUS (♥0: müvekkil vekâleti sona erdirir) → R_KARAR (COKUS ara kararı) · T_ETIK → R_KARAR
 ```
 
 ## 4. Sahne sahne (sözcük bütçesi tipik yol içindir, ±%20)
 
 ### PR_00 — Soğuk açılış · "02.14" (~550) · bg: siyah → sokak_karanlik
-Bir evin çalışma odası, perdeler kapalı, yalnızca bir ekranın mavi ışığı. Yüz görünmez: bir el, bir kol saati, bir
-fincanın kenarı. Masada açılmış bir zarf; içinden çıkan kâğıdı biri çevirir. Ekranda ilerleme çubuğu. Telefon titrer;
-`phone`, BİR KADIN: "Uyumadın mı?" BİR ADAM: "Bir iş bitiriyorum. Yat sen." Çubuk doluyor. Adam kâğıdı katlar, ceketinin
-iç cebine koyar. narrator: "Bir şirketin on iki yıllık hafızası, bir çay soğuyana kadar sürdü." `fx: fade`. Kimlik ipucu
-yok: oda, saat, ses tonu bir "ev sahibi" kadar genel; zarf, ileride devir-teslim tutanağının "kapalı zarf"ına bağlanacak.
+Bir evin çalışma odası, perdeler kapalı, yalnızca bir ekranın mavi ışığı. Yüz görünmez: parmak uçları, soğumuş bir
+çay. El bir an bekler, on üç tuşa basar. Ekranda ilerleme çubuğu. Telefon titrer; `phone`, BİR KADIN: "Uyumadın mı?
+… Doktor ne dedi, unuttun mu?" BİR ADAM: "Unutmadım. Az kaldı." Adam arkasına yaslanır, yüzü karanlığa karışır; masada
+yalnızca iki kenetli el. narrator: "Bir şirketin on iki yıllık hafızası, bir çay soğuyana kadar sürmüştü." `fx: fade`.
+Kimlik ipucu yok: giysi, saat, zarf, iç cep gibi bir kadroya eşlenebilecek hiçbir ayrıntı gösterilmez. Telefondaki
+"doktor" yalnızca ara evresinde, poliçe ve cihaz zinciri kurulduktan sonra Nalan'ın "geçen yıl kalp ameliyatı oldu"
+cümlesiyle karşılık bulur.
 
 ### PR_01 — "SABAH 08.30" + "ARAMA 06.40" (~550) · bg: depo → ev
-Sunucu odasında boş klasörler; genç bir muhasebe elemanı ağlıyor: "Siparişlerin hepsi yok." Takım elbiseli genel müdür
-sakin: "Panik yok. Bülent'i arayın." Dört gün sonra şafakta Aktaşların kapısı çalınır; altı yaşındaki Defne pijamasıyla
+Sunucu odasında boş klasörler; genç bir muhasebe elemanı ağlıyor: "Siparişlerin hepsi yok." Hoparlördeki bir ses
+(yoldaki bilgi işlem firması; adı geçmez): "Panik yok. Kimse dokunmasın; önce kurtarmayı deneriz… Polis gelince her şeyi
+mühürler." Bu ses imajdan önceki kurtarma denemesini (Ek-3) ekler; faili değil. Dört gün sonra şafakta Aktaşların kapısı çalınır; altı yaşındaki Defne pijamasıyla
 merdivende; dizüstü bilgisayar şeffaf poşete girer. Selim: "Ben bir şey silmedim. Ben ömrüm boyunca yedek aldım."
-Narratör: "İki ay sonra iddianame. Bir celse sonra avukatı çekildi. Duruşmaya on iki gün kala, eşi bir avukat aradı."
+Narratör: "İki ay sonra iddianame. Tensip zaptından birkaç gün sonra avukatı çekildi. Duruşmaya on iki gün kala, eşi bir avukat aradı."
 
 ### BR_00 — Bölüm 1 · DOSYA · "Gül" (~900) · bg: buro_gece
 Gül, öğretmen çantası ve bir naylon dosyayla gelir. Ücret konusunda seçim (Dava #07 kalıbı): "sonra konuşuruz" (Gül
@@ -176,13 +181,20 @@ Hedef: "Biri o hesabı kullandı. Kim? Kanıtla; kovalamadan." Yeni gelişmeler:
 savcılığa ya da mahkemeye tanık olarak söyleyin; belge getirmeyin"; yanlış yol "Muhasebeden poliçe dosyasını
 fotokopiyle getirin" (etik ve hukuka aykırı delil riski). Selim'in teklifi: "Yedek yönetici hesabı hâlâ açıksa
 girip gerçek kayıtları indiririm." → doğru: reddet ve mahkemeye bildir; yanlış: kabul et → **ETİK** sonu. Yaşar
-korkutulmuş (Tarık ziyaret edildiyse vardiyası gündüze alınmış): koruma talebi/bildirim. Hakan çay içerken: "Orijinal
-diskler şirkette, sunucu odasında; kimse istemedi." Karar: savcılığa yaz (doğru; BERAAT_B için şart) / Tarık'la yüzleş
-(delil kaybı: dizüstü "çalınmış" olarak bildirilir) / bekle.
+korkutulmuş (Tarık ziyaret edildiyse vardiyası gündüze alınmış). Yaşar'a "gelenin Selim olmadığını açıkça söyleyin"
+demek tanığı yönlendirmektir: Yaşar reddeder ve duruşmada Ozan'ın sorusuna dürüstçe anlatır (♥ ve ikna düşer, beyan
+değerlendirme dışı kalır, 2-b beraati kapanır). Hakan: "Orijinal diskler şirkette" ve "acele etmeyin" telefonunun
+genel müdürlükten geldiği. Leyla imzasız notun savcılığa teslim edildiğini söyler; Nalan genel müdürlüğün krem rengi,
+filigranlı kâğıdını anar (benzerlik delil değildir; kâğıdı savcı inceletir). Karar: savcılığa yaz (doğru; gerçek
+failin soruşturmasını başlatır, epilogu değiştirir) / Tarık'la yüzleş (delil kaybı: dizüstü "çalınmış" olarak
+bildirilir) / koridorda sözlü bilgi (ihbar sayılmaz) / bekle.
 
 ### Bölüm 5 · İKİNCİ CELSE (~3.300)
-Bilirkişi Sema Uçar'ın raporu: DataKale imajı güvenilmez; orijinal diskten yeni imaj: 02.14 oturumunun cihaz adı
-`NOS-GM-LT`. **T_02 Tarık (T1–T5)**: evdeydim / şifre bilmem / yedek zaten arızalıydı / poliçe yıllardır aynı / o cihaz
+Bilirkişi Sema Uçar kürsüde (S1–S4): imaj iki gün sonra alındı; bazı "silme izleri" kurtarma yazılımının; orijinal
+diskte 02.14'ün cihaz adı `NOS-GM-LT`; "kimin kullandığına kanaat bildirmem." Ozan "ad değiştirilebilir mi?" diye
+sorar; doğru hamle itiraz değil cevabı beklemektir: "Ad değişir; sertifika değişmez." Nalan (NL1–NL4): zeyilname,
+nakit sıkıntısı, "gerekçesini bilmiyorum" (bastırınca: "bir çalışan sorun çıkarırsa diye"), "ihbar pazartesi" (eksper
+fotoğrafıyla çürür: genel müdür cumartesi sabahı sigortayı aramış). **T_02 Tarık (T1–T5)**: evdeydim / şifre bilmem / yedek zaten arızalıydı / poliçe yıllardır aynı / o cihaz
 Selim'in. Kırılma: turnike + cihaz adı + operatör → hâkimin CMK 48 hatırlatması; Tarık "Avukatımla görüşmeden cevap
 vermeyeceğim." Salon donar. Yaşar'ın kısa tanıklığı; Ozan'ın yönlendirici sorusuna itiraz. Mütalaa varyantları; dayanaklar
 (3 hak); esas savunma (masumiyet/usul/terdit/duygu); son söz (Selim'in cümlesi); hüküm.
@@ -192,19 +204,25 @@ vermeyeceğim." Salon donar. Yaşar'ın kısa tanıklığı; Ozan'ın yönlendir
 1. **Selim de o gece bağlandı** (21.30): dökümde açık satır; Selim ilk görüşmede söylemez; Gül'ün "o akşam fotoğraflara
    bakıyordu" cümlesi; hard tonla açılır. Ters köşe oyuncunun güvenini sarsar, ardından izin e-postasıyla hukuki çekirdeğe
    döner: yetki ve rıza.
-2. **Sabotajı yapan genel müdürdür:** zarf (prolog), devir-teslim, "evrak unuttum" (bekçi defteri), "yedek aylardır
+2. **Sabotajı yapan genel müdürdür:** zarflanmış şifreler (devir-teslim), "evrak unuttum" (bekçi defteri), "yedek aylardır
    arızalıydı" (yedek ekranı tersini söyler), Nalan'ın telefonu, poliçe zeyilnamesi, cihaz adı. Hiçbiri tek başına bir
    isim söylemez; isim ancak ARA'da turnike + cihaz adı tahtada birleşince düşer (`ded_gm`).
 
 ## 6. Epiloglar (OutcomeDef.epilogue; 250–400 sözcük)
 
-- **BERAAT_B:** "Suçun sanık tarafından işlenmediği sabit." Koridorda Nalan; adliye önünde yağmur diner; Defne'nin
-  resmi; Leyla iki bardak çay; son kart: Tarık Sezer hakkında soruşturma, sigorta ödemesi durduruldu.
+- **BERAAT_B:** 244/2'den "işlenmediği sabit" (2-b), 243/1'den rıza nedeniyle 2-a. Koridorda Nalan; adliye önünde yağmur
+  diner; Leyla iki bardak çay. Savcılığa yazıldıysa "işte bu yüzden ortak oldun"; yazılmadıysa "yarın yaz" ve
+  soruşturmanın üç hafta gecikmesi.
 - **BERAAT_E:** "Sabit olmadığından." Ozan'ın "istinafta görüşürüz"ü; şirket rücu davasını askıya alır ama vazgeçmez;
   Selim balkonda modemin etiketini söker: "Artık kimseye kanıtlayacak bir şeyim yok. Ya da her şey."
-- **NITELENDIRME:** 244/2'den beraat, 243/1'den adli para cezası ve HAGB. Selim: "Kendi fotoğraflarımı almak suç
-  muymuş." Deniz e-postayı geç bulduğunu bilir.
-- **MAHKUMIYET:** Gül, Defne'nin resmini çantasına katlar; rücu davası tebligatı; çöküşte savcının cümlesi.
+- **NITELENDIRME:** rıza kurulamadı: 244/2'den 2-e beraat, 243/1'den adli para cezası ve HAGB. Selim: "Kendi
+  fotoğraflarımı almaktan." Gül e-postanın bir yerde yazılı olduğunu söyler; Deniz onu bulamadığını bilir.
+- **KISMI:** rıza kuruldu ama silme koparılamadı: 243/1'den 2-a beraat, 244/2'den 1 yıl 3 ay, ertelendi (HAGB yok:
+  zarar giderilmedi). Selim: "Fotoğraflarım için beraat, hiç dokunmadığım şey için ceza."
+- **MAHKUMIYET:** 1 yıl 8 ay + adli para; HAGB ve erteleme somut gerekçeyle reddedilir. Gül resmi katlar; Selim'in
+  "zararı giderir misiniz" sorusuna verdiği cevap; Leyla "neyi kaçırdın?"
+- **COKUS (ara karar):** ♥0'da Selim vekâleti sona erdirir, yeni müdafi için duruşma ertelenir. Ferda: "Kâğıtla
+  gelmeliydiniz; hararetle değil." Bilirkişi dinlendiyse delil dosyada kalır; yeni el taşıyacaktır.
 - **ETİK:** Leyla masaya meslek kurallarını bırakır; Selim'in yeni avukatı; hukuka aykırı delil dosyadan çıkarılır.
 
 ## 7. Mekanik bağlar (yazım kontrol listesi)
@@ -220,4 +238,7 @@ vermeyeceğim." Salon donar. Yaşar'ın kısa tanıklığı; Ozan'ın yönlendir
 - Gizem denetimi: genel müdürü adıyla hedef alan seçenekler (ek dilekçede gözaltı talebi, Nalan'a "o gece nerede?",
   son sözde suçlama) ancak genel müdüre bağlayan bir bulgudan sonra görünür. Birinci celse koridorunda plaka vurgusu yok.
 - MAHKÛMİYET epilogu hükümle uyumlu: "ne erteleme ne geri bırakma"; istinaf için iki hafta; Gül'ün pasta/dilekçe cümlesi.
-- W (çöküş) artık ikinci celsede: oyuncu bütün kâğıtları bulur ama genel müdürün kürsüsünde ilgisiz belgeyle ısrar eder.
+- W (çöküş) ikinci celsede: oyuncu bütün kâğıtları bulur ama genel müdürün kürsüsünde ilgisiz belgeyle ısrar eder.
+  Çöküş bir mahkûmiyet değil, COKUS ara kararıdır (müvekkil azleder); hiçbir hüküm müdafiin güvenilirliğine dayanmaz.
+- Leyla'nın sigara paketi tek bir zaman çizgisinde: bıraktığı gün aldığı paket, dört yıldır dolu. Defne'nin güneşli
+  resmi "avukat teyzeye"dir; Selim'e iletilecek olan, balkon ve "YASAK" işaretli ikinci resimdir.

@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sahne · Vezne salonu</title>
+    <!--
+  Dava #11: Hisarönü Belediyesi vezne salonu, zemin kat.
+  Dokunma alanları SceneDef nesneleridir: pano (18,40,70,84) · VZ-02 (196,168,60,40) · sarı not (112,168,50,36) · kamera (150,6,44,30) · ön oda kapısı (270,60,64,150) · tuş takımı (104,70,40,54) · turnike (20,300,90,60) · sıra makinesi (230,300,70,60).
+  Palet: zemin #141026, duvar #2b2350, kenar #120d1c.
+-->
+    <style>
+      body {
+        margin: 0;
+        background: #141026;
+      }
+      #scene {
+        position: relative;
+        width: 344px;
+        height: 380px;
+        overflow: hidden;
+        background: #141026;
+        font-family: 'Pixelify Sans', monospace;
+        color: #efe8ff;
+      }
+      #scene div {
+        position: absolute;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <!-- duvar, zemin, karo -->
+      <div style="left: 0; right: 0; top: 0; height: 280px; background: #2b2350"></div>
+      <div
+        style="
+          left: 0;
+          right: 0;
+          top: 0;
+          height: 280px;
+          background: repeating-linear-gradient(90deg, rgba(18, 13, 28, 0.18) 0 2px, transparent 2px 28px);
+        "
+      ></div>
+      <div style="left: 0; right: 0; top: 276px; bottom: 0; background: #5c5a66; border-top: 4px solid #120d1c"></div>
+      <div
+        style="
+          left: 0;
+          right: 0;
+          top: 280px;
+          bottom: 0;
+          background: repeating-linear-gradient(90deg, rgba(18, 13, 28, 0.2) 0 2px, transparent 2px 34px);
+        "
+      ></div>
+      <!-- florasan -->
+      <div
+        style="left: 60px; top: 14px; width: 80px; height: 6px; background: #f4efe6; border: 2px solid #120d1c"
+      ></div>
+      <div
+        style="left: 210px; top: 14px; width: 80px; height: 6px; background: #f4efe6; border: 2px solid #120d1c"
+      ></div>
+      <!-- tavan kamerası (150,6,44,30) -->
+      <div
+        style="left: 160px; top: 8px; width: 24px; height: 10px; background: #4a4656; border: 2px solid #120d1c"
+      ></div>
+      <div
+        style="
+          left: 164px;
+          top: 18px;
+          width: 16px;
+          height: 14px;
+          background: #25222e;
+          border-radius: 0 0 8px 8px;
+          border: 2px solid #120d1c;
+        "
+      ></div>
+      <div style="left: 170px; top: 22px; width: 4px; height: 4px; background: #c0392b"></div>
+      <!-- duyuru panosu ve yönerge (18,40,70,84) -->
+      <div
+        style="left: 18px; top: 40px; width: 70px; height: 84px; background: #7b4fb0; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 26px; top: 48px; width: 54px; height: 68px; background: #b08463"></div>
+      <div
+        style="left: 30px; top: 52px; width: 30px; height: 40px; background: #f4efe6; border: 1px solid #120d1c"
+      ></div>
+      <div style="left: 34px; top: 58px; width: 22px; height: 3px; background: #120d1c"></div>
+      <div style="left: 34px; top: 64px; width: 18px; height: 3px; background: #120d1c"></div>
+      <div style="left: 34px; top: 70px; width: 22px; height: 3px; background: #c0392b"></div>
+      <div style="left: 34px; top: 76px; width: 16px; height: 3px; background: #120d1c"></div>
+      <div
+        style="left: 62px; top: 58px; width: 14px; height: 18px; background: #e8b13c; border: 1px solid #120d1c"
+      ></div>
+      <div
+        style="left: 62px; top: 84px; width: 14px; height: 24px; background: #9cc3e6; border: 1px solid #120d1c"
+      ></div>
+      <!-- kasa odası kapısı ve tuş takımı (104,70,40,54) -->
+      <div
+        style="left: 96px; top: 40px; width: 56px; height: 236px; background: #4f5560; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 104px; top: 70px; width: 40px; height: 54px; background: #25222e; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 110px; top: 76px; width: 28px; height: 10px; background: #3f8a62"></div>
+      <div style="left: 110px; top: 92px; width: 8px; height: 6px; background: #cfc9c1"></div>
+      <div style="left: 122px; top: 92px; width: 8px; height: 6px; background: #cfc9c1"></div>
+      <div style="left: 110px; top: 102px; width: 8px; height: 6px; background: #cfc9c1"></div>
+      <div style="left: 122px; top: 102px; width: 8px; height: 6px; background: #cfc9c1"></div>
+      <div style="left: 110px; top: 112px; width: 8px; height: 6px; background: #cfc9c1"></div>
+      <div style="left: 122px; top: 112px; width: 8px; height: 6px; background: #cfc9c1"></div>
+      <!-- vezne camları ve tezgâh -->
+      <div
+        style="
+          left: 104px;
+          top: 140px;
+          width: 166px;
+          height: 26px;
+          background: #9cc3e6;
+          opacity: 0.55;
+          border: 3px solid #120d1c;
+        "
+      ></div>
+      <div
+        style="left: 104px; top: 164px; width: 166px; height: 56px; background: #6e4a32; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 186px; top: 140px; width: 4px; height: 80px; background: #120d1c"></div>
+      <!-- VEZNE 1 monitör ve sarı not (112,168,50,36) -->
+      <div
+        style="left: 116px; top: 170px; width: 40px; height: 28px; background: #25222e; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 120px; top: 174px; width: 32px; height: 18px; background: #2f5a96"></div>
+      <div
+        style="left: 146px; top: 166px; width: 14px; height: 12px; background: #e8b13c; border: 1px solid #120d1c"
+      ></div>
+      <!-- VEZNE 2 terminali VZ-02 (196,168,60,40) -->
+      <div
+        style="left: 200px; top: 170px; width: 48px; height: 30px; background: #25222e; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 204px; top: 174px; width: 40px; height: 20px; background: #3d5a80"></div>
+      <div
+        style="left: 206px; top: 198px; width: 24px; height: 8px; background: #f4efe6; border: 1px solid #120d1c"
+      ></div>
+      <!-- vezne tabelaları -->
+      <div
+        style="left: 118px; top: 128px; width: 52px; height: 10px; background: #e8b13c; border: 2px solid #120d1c"
+      ></div>
+      <div
+        style="left: 202px; top: 128px; width: 52px; height: 10px; background: #e8b13c; border: 2px solid #120d1c"
+      ></div>
+      <!-- ön oda buzlu camlı kapı (270,60,64,150) -->
+      <div
+        style="left: 270px; top: 60px; width: 64px; height: 216px; background: #4a3a2e; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="
+          left: 278px;
+          top: 70px;
+          width: 48px;
+          height: 120px;
+          background: #9cc3e6;
+          opacity: 0.45;
+          border: 2px solid #120d1c;
+        "
+      ></div>
+      <div style="left: 288px; top: 110px; width: 26px; height: 18px; background: #2f6dbb; opacity: 0.8"></div>
+      <div style="left: 318px; top: 200px; width: 8px; height: 8px; background: #e6c46a; border-radius: 50%"></div>
+      <!-- turnike (20,300,90,60) -->
+      <div
+        style="left: 22px; top: 300px; width: 14px; height: 60px; background: #7d8590; border: 3px solid #120d1c"
+      ></div>
+      <div
+        style="left: 90px; top: 300px; width: 14px; height: 60px; background: #7d8590; border: 3px solid #120d1c"
+      ></div>
+      <div
+        style="left: 36px; top: 318px; width: 54px; height: 6px; background: #cfc9c1; border: 2px solid #120d1c"
+      ></div>
+      <div style="left: 26px; top: 306px; width: 6px; height: 6px; background: #3f8a62"></div>
+      <!-- sıra fişi makinesi (230,300,70,60) -->
+      <div
+        style="left: 240px; top: 296px; width: 50px; height: 64px; background: #c0392b; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 248px; top: 304px; width: 34px; height: 16px; background: #120d1c"></div>
+      <div style="left: 252px; top: 308px; width: 26px; height: 8px; background: #e8b13c"></div>
+      <div style="left: 254px; top: 330px; width: 22px; height: 6px; background: #f4efe6"></div>
+      <!-- bekleme sandalyeleri -->
+      <div
+        style="left: 130px; top: 320px; width: 80px; height: 10px; background: #3d5a80; border: 2px solid #120d1c"
+      ></div>
+      <div style="left: 136px; top: 330px; width: 6px; height: 26px; background: #120d1c"></div>
+      <div style="left: 198px; top: 330px; width: 6px; height: 26px; background: #120d1c"></div>
+    </div>
+  </body>
+</html>

@@ -15,7 +15,6 @@ import {
   ifThen,
   inc,
   meet,
-  not,
   objectRule,
   option,
   presentRule,
@@ -34,13 +33,6 @@ import { H1, court1, wrongMove } from './shared.js';
 
 // 60-trial: 1. celse. Koridor, açılış, sanığın savunması, savcının kayıt talebi, mağdurun tanıklığı (N1–N5),
 // salonda teşhis isteği, ara karar ve tutukluluk.
-
-const wrongPresent = (feedback: string) => ({
-  score: { SORGULAMA: -150 },
-  effects: [...wrongMove, { type: 'SCORE' as const, category: 'SORGULAMA' as const, amount: 0, line: 'hatali' }],
-  bad: feedback,
-  category: 'SORGULAMA' as const,
-});
 
 export const hearing1: CasePart = {
   config: {
@@ -294,7 +286,8 @@ rahmi: Sanığın kurye olarak olay yerine yakın bölgede çalıştığı iddia
         }),
         option('H102_D', '“Telefon incelemesine karşı çıkıyoruz: özel hayat.”', {
           score: { USUL_BILGISI: -20 },
-          neutral: 'El konulan cihazın incelenmesine mahkeme CMK 134 çerçevesinde karar verir; genel bir özel hayat itirazı bu aşamada sonuç vermez.',
+          neutral:
+            'El konulan cihazın incelenmesine mahkeme CMK 134 çerçevesinde karar verir; genel bir özel hayat itirazı bu aşamada sonuç vermez.',
           responses: B(`
 - Telefonun incelenmesine karşı çıkıyoruz; müvekkilin özel hayatına ilişkin veriler içeriyor.
 rahmi: Cihaz zaten el konulmuş. İnceleme kapsamını mahkeme belirler; yalnızca olay gecesiyle sınırlı tutulur. Talep bu kapsamda kabul edildi.
@@ -331,7 +324,11 @@ rahmi: Müdafi, sorularınız.
           hl('yüzünü çok yakından gördüm', any(flag('press_n1'), has('ded_eski_foto'))),
           '. O yüzü unutmam.',
         ]),
-        statement('N2', 2, ['Elinde ', hl('bıçak vardı, parladı', any(flag('press_n2'), has('clue_bicak_yok'))), '; elimi o kesti.']),
+        statement('N2', 2, [
+          'Elinde ',
+          hl('bıçak vardı, parladı', any(flag('press_n2'), has('clue_bicak_yok'))),
+          '; elimi o kesti.',
+        ]),
         statement('N3', 3, [
           hl('Polis bana kimseyi göstermedi', any(flag('press_n3'), has('ev_gozlem'), has('ded_kirlenme'))),
           '; karakolda fotoğrafların arasından kendim seçtim.',
@@ -344,7 +341,11 @@ rahmi: Müdafi, sorularınız.
         statement(
           'N5',
           5,
-          ['Düz, temiz bir çocuktu; ', hl('kulağında, burnunda bir şey yoktu', any(has('clue_halka'), has('clue_ali_halka'))), '.'],
+          [
+            'Düz, temiz bir çocuktu; ',
+            hl('kulağında, burnunda bir şey yoktu', any(has('clue_halka'), has('clue_ali_halka'))),
+            '.',
+          ],
           flag('press_n1'),
         ),
       ],
@@ -742,6 +743,8 @@ sevim/uzgun: Akşam gelir dedin kızım. Akşam gelir dedin.
 derya: Üç hafta. Üç hafta daha. Ne yapacaksın canım?
 - Kayıtlar gelecek. Kâğıtlar konuşacak.
 ~ Bunu söylerken sesim benimkinden daha emin çıktı. Avukatlıkta buna “mesleki ses” denir. Ben ona “yalan değil ama” derim.
+> Sevim Hanım’ın elinde, evden getirdiği iki ayakkabı bağcığı vardı. Ring aracı köşeyi dönünce onları çantasına geri koydu; dikkatle, katlayarak.
+~ Bir anne bağcık getirmişti, “belki” diye. Bugün “belki” olmadı. Bağcıklar çantada bekleyecek.
 `),
       ],
       choices: [cont('H106_DEVAM', 'Üç hafta', 'ARA_GIRIS_1', { role: 'PRIMARY' })],
@@ -758,6 +761,3 @@ derya: Üç hafta. Üç hafta daha. Ne yapacaksın canım?
     },
   ],
 };
-
-void wrongPresent;
-void not;

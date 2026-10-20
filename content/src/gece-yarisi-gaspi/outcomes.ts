@@ -1,4 +1,17 @@
-import { all, any, because, cmp, finalAtLeast, flag, has, not, outcome, ref, v, xp } from '../../../tools/content/src/kit/index.js';
+import {
+  all,
+  any,
+  because,
+  cmp,
+  finalAtLeast,
+  flag,
+  has,
+  not,
+  outcome,
+  ref,
+  v,
+  xp,
+} from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { O, W } from './dsl.js';
 
@@ -27,11 +40,12 @@ export const outcomes: CasePart = {
         because('Sanık, vekâlet ilişkisini tek taraflı olarak sona erdirmiştir (TBK 512/1).'),
         because('Dava, başka bir müdafiin katılımıyla devam edecektir; senin dosyan burada kapandı.'),
       ],
-      legalBasis: 'Av.K. 34; TCK 277; TBK 512/1; PVSK ek md. 6',
+      legalBasis: 'Av.K. 34; TCK 277; TBK 512/1; PVSK ek md. 6; CMK 217',
       xp: 0,
-      howToReach: 'Mağdura hiçbir koşulda fotoğraf gösterme; başka bir kişinin fail olabileceğini savcılığa yaz (CMK 158).',
+      howToReach:
+        'Mağdura hiçbir koşulda fotoğraf gösterme; başka bir kişinin fail olabileceğini savcılığa yaz (CMK 158).',
       ethicsCard:
-        'Tanıklık eden mağdura duruşma dışında bir fotoğraf göstererek teşhis yaptırmaya çalıştın. Bu, tanığı etkileme girişimidir (TCK 277) ve avukatın özen ve doğruluk yükümlülüğüne aykırıdır (Av.K. 34). Kirlenmiş bir hafıza, ikinci bir fotoğrafla temizlenmez.',
+        'Tanıklık eden mağdura duruşma dışında bir fotoğraf göstererek teşhis yaptırmaya çalıştın. Bu, avukatın özen ve doğruluk yükümlülüğüne aykırıdır (Av.K. 34) ve tanığı etkileme girişimi olarak soruşturulabilir (TCK 277). Kirlenmiş bir hafıza, ikinci bir fotoğrafla temizlenmez.',
       epilogue: [
         O(`
 # ADLİYE KORİDORU · ÖĞLEDEN ÖNCE [bg:adliye]
@@ -76,7 +90,9 @@ nermin: Neden herkes bana bir fotoğraf gösteriyor evladım? Sen de mi?
         because(
           'Mağdurun teşhisi, kolluk görevlisinin teşhisten önce acil serviste tek fotoğraf göstermesi nedeniyle kanuni güvencelerden yoksundur ve hükme esas alınamaz (PVSK ek md. 6; CMK 217).',
         ),
-        because('Sanık, olay saatinde Yıldırım’daki evindedir; bu husus bağımsız tanık beyanı, kesinti kaydı ve telefon kaydıyla doğrulanmıştır.'),
+        because(
+          'Sanık, olay saatinde Yıldırım’daki evindedir; bu husus bağımsız tanık beyanı, kesinti kaydı ve telefon kaydıyla doğrulanmıştır.',
+        ),
         because(
           'Sanık adına açılmış kurye hesabı olay gecesi başka bir cihazdan, sol kulağında halka bulunan bir kişi tarafından kullanılmıştır; bu tarif mağdurun ilk beyanıyla örtüşmektedir.',
         ),
@@ -141,19 +157,34 @@ leyla: Bir gün sana bir dosyadan bahsedeceğim Deniz. Bugün değil.
           'Mağdurun kirlenmeden önceki ilk tarifinde failin sol kulağında halka bulunduğu belirtilmiş; sanığın kulaklarında delik ya da iz bulunmamaktadır.',
           any(has('ded_halka'), flag('contra_n5')),
         ),
-        because('Sanığın olay saatinde evinde olduğu tanık beyanı ve kesinti kaydıyla desteklenmiştir.', has('ded_mazeret')),
-        because('Sanığın telefonu olay saatinden iki dakika önce evinin bulunduğu bölgeden elektrik arıza hattını aramıştır.', has('ded_evde')),
+        because(
+          'Sanığın olay saatinde evinde olduğu tanık beyanı ve kesinti kaydıyla desteklenmiştir.',
+          has('ded_mazeret'),
+        ),
+        because(
+          'Sanığın telefonu olay saatinden iki dakika önce evinin bulunduğu bölgeden elektrik arıza hattını aramıştır.',
+          has('ded_evde'),
+        ),
         because(
           'Sanık adına açılmış kurye hesabı olay gecesi sanığa ait olmayan bir cihazdan açılmıştır; konum kaydı hesabın yerini gösterir, sanığın yerini göstermez.',
           any(has('ded_hesap'), has('ded_baskasi')),
         ),
-        because('İddia edilen bıçak bulunamamış, mağdurun ilk beyanında yer almamıştır.', any(has('ded_bicak'), flag('contra_n2'))),
-        because('Acil servis hemşiresi, teşhisten önce mağdura telefondan tek fotoğraf gösterildiğini duruşmada doğrulamıştır.', flag('gamze_dinlendi')),
-        because('Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2).'),
+        because(
+          'İddia edilen bıçak bulunamamış, mağdurun ilk beyanında yer almamıştır.',
+          any(has('ded_bicak'), flag('contra_n2')),
+        ),
+        because(
+          'Acil servis hemşiresi, teşhisten önce mağdura telefondan tek fotoğraf gösterildiğini duruşmada doğrulamıştır.',
+          flag('gamze_dinlendi'),
+        ),
+        because(
+          'Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2).',
+        ),
       ],
       legalBasis: 'CMK 223/2-e; CMK 141/1-e, 142, 231/3; PVSK ek md. 6; CMK 217; Anayasa 38/4; AİHS 6/2',
       xp: xp(1, { ethicsVar: 'ethics' }),
-      howToReach: 'Teşhisin kirlendiğini göster; mazeret ya da hesabın başkasınca kullanıldığı gibi en az iki bağımsız lehe bulgu kur.',
+      howToReach:
+        'Teşhisin kirlendiğini göster; mazeret ya da hesabın başkasınca kullanıldığı gibi en az iki bağımsız lehe bulgu kur.',
       epilogue: [
         O(`
 rahmi: Türk Milleti adına…
@@ -210,16 +241,21 @@ nermin: Saatimi kim aldı o zaman evladım?
       sentence: '8 yıl 4 ay hapis',
       verdictText: `Sanık Barış Kılınç’ın cezalandırılmasına: silah unsuru ispatlanamadığından TCK 149/1-a’nın uygulanmasına yer olmadığına; eylemin gece vaktinde işlenmesi nedeniyle TCK 149/1-h uyarınca takdiren alt sınırdan 10 YIL; sanığın geçmişi ve cezanın geleceği üzerindeki olası etkileri gözetilerek TCK 62/1 ile 8 YIL 4 AY HAPİS; TCK 53; TCK 63 mahsup; cezanın süresi nedeniyle hükmün açıklanmasının geri bırakılması (CMK 231/5) ve erteleme (TCK 51/1) koşulları bulunmadığına; ${tutukluluk}; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).`,
       reasoning: [
-        because('Mağdurun ilk beyanında bıçaktan söz edilmemiş, bıçak ele geçirilmemiştir; silah unsuru ispatlanamamıştır.'),
+        because(
+          'Mağdurun ilk beyanında bıçaktan söz edilmemiş, bıçak ele geçirilmemiştir; silah unsuru ispatlanamamıştır.',
+        ),
         because('Eylem gece vaktinde işlendiğinden TCK 149/1-h uygulanmıştır.'),
-        because('Savunmanın terditli talebi doğrultusunda temel ceza alt sınırdan belirlenmiş ve TCK 62/1 uygulanmıştır.'),
+        because(
+          'Savunmanın terditli talebi doğrultusunda temel ceza alt sınırdan belirlenmiş ve TCK 62/1 uygulanmıştır.',
+        ),
         because(
           'Mağdurun teşhisi ve sanık adına açılmış hesabın konum kaydı birlikte değerlendirilmiştir; savunmanın teşhise yönelik itirazları heyeti beraate götürecek ölçüde güçlü bulunmamıştır.',
         ),
       ],
       legalBasis: 'TCK 149/1-h, 61, 62/1, 53, 63; CMK 231/5; TCK 51/1; CMK 273/1',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
-      howToReach: 'Esas savunmada terditli talepte bulun ve silah unsurunun ispatlanmadığını delille göster (112 dökümü + cam kırığı).',
+      howToReach:
+        'Esas savunmada terditli talepte bulun ve silah unsurunun ispatlanmadığını delille göster (112 dökümü + cam kırığı).',
       epilogue: [
         O(`
 rahmi: Sanığın cezalandırılmasına…
@@ -255,8 +291,13 @@ derya: İstinaf var, değil mi canım? Bir yol daha var, değil mi?
       sentence: '10 yıl hapis',
       verdictText: `Sanık Barış Kılınç’ın üzerine atılı nitelikli yağma suçundan, eylemin silahla ve gece vaktinde işlendiği kabul edilerek TCK 149/1-a, h uyarınca iki nitelikli hâlin birlikte gerçekleşmesi gözetilerek alt sınırdan uzaklaşılarak 12 YIL; TCK 62/1 ile 10 YIL HAPİS cezası ile cezalandırılmasına; TCK 53; TCK 63 mahsup; ${tutukluluk}; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).`,
       reasoning: [
-        because('Mağdurun teşhisi, sanık adına açılmış hesabın konum kaydı ve sanığın bölgede kurye olarak çalışması birlikte değerlendirilmiştir.'),
-        because('Savunmanın teşhise ve kayıtlara yönelik itirazları somut delillerle desteklenmemiştir.', not(flag('cokus'))),
+        because(
+          'Mağdurun teşhisi, sanık adına açılmış hesabın konum kaydı ve sanığın bölgede kurye olarak çalışması birlikte değerlendirilmiştir.',
+        ),
+        because(
+          'Savunmanın teşhise ve kayıtlara yönelik itirazları somut delillerle desteklenmemiştir.',
+          not(flag('cokus')),
+        ),
         because('Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı.', flag('cokus')),
       ],
       legalBasis: 'TCK 149/1-a, h, 61, 62/1, 53, 63; CMK 273/1',

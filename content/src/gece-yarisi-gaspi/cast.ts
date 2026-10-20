@@ -1,7 +1,8 @@
 import { character, sharedSprite } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
+import { SPRITE_DERYA, SPRITE_GAMZE, SPRITE_KADIR, SPRITE_NERMIN, SPRITE_TOLGA } from './sprites.js';
 
-// 10-cast: sprite'lar, karakterler ve ilişkiler. Yeni karakterler: content/shared/sprites/gece-yarisi-gaspi-*.json.
+// 10-cast: sprite'lar, karakterler ve ilişkiler. Yeni karakterlerin sprite'ları sprites.ts'te (satır içi).
 
 export const cast: CasePart = {
   sprites: [
@@ -17,11 +18,11 @@ export const cast: CasePart = {
     sharedSprite('gardiyan'),
     sharedSprite('bora'),
     sharedSprite('bilirkisi'),
-    sharedSprite('gece-yarisi-gaspi-derya', 'gyg_derya'),
-    sharedSprite('gece-yarisi-gaspi-tolga', 'gyg_tolga'),
-    sharedSprite('gece-yarisi-gaspi-nermin', 'gyg_nermin'),
-    sharedSprite('gece-yarisi-gaspi-kadir', 'gyg_kadir'),
-    sharedSprite('gece-yarisi-gaspi-gamze', 'gyg_gamze'),
+    SPRITE_DERYA,
+    SPRITE_TOLGA,
+    SPRITE_NERMIN,
+    SPRITE_KADIR,
+    SPRITE_GAMZE,
   ],
   characters: [
     character('deniz', {
@@ -54,7 +55,8 @@ export const cast: CasePart = {
       bio: 'Yıldırım’da annesiyle yaşıyor. Üç yıl önce bir düğün kavgasından açılmış, hükmün açıklanması geri bırakılmış bir dosyası var.',
       accent: '#e2802f',
       spriteId: 'muvekkil',
-      notes: 'Masum. Kurye hesabını ve motorunu ehliyeti askıdaki kuzeni Tolga’ya kullandırıyor; o gece de Tolga çalıştı.',
+      notes:
+        'Masum. Kurye hesabını ve motorunu ehliyeti askıdaki kuzeni Tolga’ya kullandırıyor; o gece de Tolga çalıştı.',
     }),
     character('derya', {
       name: 'Derya Kılınç',

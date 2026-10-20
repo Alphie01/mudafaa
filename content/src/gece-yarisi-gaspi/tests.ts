@@ -263,7 +263,9 @@ c X_215
 
 /** ±%5 final penceresi (ölçülen değerden). */
 const win = (outcome: string, final: number) =>
-  final < 0 ? { outcome, finalMax: 0 } : { outcome, finalMin: Math.floor(final * 0.95), finalMax: Math.ceil(final * 1.05) };
+  final < 0
+    ? { outcome, finalMax: 0 }
+    : { outcome, finalMin: Math.floor(final * 0.95), finalMax: Math.ceil(final * 1.05) };
 export const MEASURED = { G1: 11450, G2: 11290, G3: 3870, G4: -345, G5: 8130, W: 7180 };
 
 const TIPIK_STEPS = [

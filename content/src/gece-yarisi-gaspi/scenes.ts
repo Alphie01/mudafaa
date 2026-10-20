@@ -92,7 +92,7 @@ export const scenes: CasePart = {
         sceneObject('ob_aile', 'Vitrin fotoğrafı', OB_AILE, {
           discovers: 'clue_aile_foto',
           score: { ARASTIRMA: 20 },
-          text: 'Vitrinde çerçeveli bir fotoğraf: iki oğlan, eski bir motorun üstünde, on bir on iki yaşlarında. Aynı çene, aynı kaş, aynı dişlek gülüş.',
+          text: 'Vitrinde çerçeveli bir fotoğraf: iki oğlan, eski bir motorun üstünde, on bir on iki yaşlarında; ikisi de objektife dil çıkarıyor. Sevim Hanım: “Barış’la amcasının oğlu. Bayram sabahı.”',
           short: 'İki çocuk, bir motor',
         }),
         sceneObject('ob_vesikalik', 'Ayna kenarı', OB_VESIKALIK, {

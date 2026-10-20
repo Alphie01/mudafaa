@@ -23,7 +23,6 @@ import {
   ref,
   resultNode,
   score,
-  set,
   statement,
   story,
   strategyAmount,
@@ -37,14 +36,16 @@ import { H2, court2, wrongMove } from './shared.js';
 // Ferhat Oral’ın tanıklığı (F1–F5), Kadir Usta ve savcının karşı sorusu, Gamze, mütalaa, dayanaklar, esas savunma,
 // son söz, hüküm.
 
-const hasPoint = (id: string): Cond => cmp(v('noktalar'), '>', 0);
-
 const dayanak = (id: string, label: string, backed: Cond, argFlag: string, line: string) =>
   option(id, label, {
     cost: [{ var: 'noktalar', amount: 1 }],
     maxUses: 1,
     effects: [
-      ifThen(backed, [raise(argFlag), score('SAVUNMA_STRATEJISI', 60), inc('pers')], [score('SAVUNMA_STRATEJISI', -40), dec('pers')]),
+      ifThen(
+        backed,
+        [raise(argFlag), score('SAVUNMA_STRATEJISI', 60), inc('pers')],
+        [score('SAVUNMA_STRATEJISI', -40), dec('pers')],
+      ),
     ],
     responses: [
       W(backed, line),
@@ -196,11 +197,16 @@ sukru: Barış Kılınç dosyası! Hı-hım.
 # BURSA 6. AĞIR CEZA MAHKEMESİ — 2. CELSE [bg:durusma_salonu]
 rahmi: Duruşmaya devam olundu. Ara karar gereği HızlıPaket firmasının cevabı ve telefon inceleme raporu dosyaya girmiştir. Tanık Ferhat Oral hazır.
 > Savcı Orhan Bayar dökümün kırmızı çizgili sayfasını önüne açmıştı. Bana baktı; bir satranççının bir sonraki hamleyi bildiğini düşündüğü bakışla.
+> Dinleyici sırasında Derya ile Sevim Hanım. Öbür uçta Nermin Hanım ve kızı. Ortada boş sıralar; iki aile arasında bir ırmak gibi.
+~ İkinci celse. İlkinde bir kadının hafızasını gördük. Bugün bir kâğıdın hafızasını göreceğiz.
 `),
       ],
       choices: [
         cont('T00_ETIK', 'Devam', 'T_ETIK', { role: 'PRIMARY', visibleWhen: flag('etik_kirlik') }),
-        cont('T00_DEVAM', 'Kayıtların tartışılması', 'T_01', { role: 'PRIMARY', visibleWhen: not(flag('etik_kirlik')) }),
+        cont('T00_DEVAM', 'Kayıtların tartışılması', 'T_01', {
+          role: 'PRIMARY',
+          visibleWhen: not(flag('etik_kirlik')),
+        }),
       ],
     }),
     story('T_ETIK', {
@@ -389,13 +395,25 @@ rahmi: Müdafi, sorularınız.
 ~ O kadın bu adama güvendi. Bu adam da o kadına bir fotoğraf gösterdi. İkisi de iyi bir şey yaptığını düşündü.
 `),
       statements: [
-        statement('F1', 1, ['Teşhisi ', hl('kurallara uygun', any(flag('press_f1'), has('ded_usulsuz'))), ' yaptırdım.']),
+        statement('F1', 1, [
+          'Teşhisi ',
+          hl('kurallara uygun', any(flag('press_f1'), has('ded_usulsuz'))),
+          ' yaptırdım.',
+        ]),
         statement('F2', 2, [
           hl('Acilde mağdura kimseyi göstermedim', any(flag('press_f2'), has('ev_gozlem'), has('ded_kirlenme'))),
           '; yalnızca geçmiş olsun dedim.',
         ]),
-        statement('F3', 3, ['Altı fotoğraf ', hl('birbirine benziyordu', any(flag('press_f3'), has('clue_foto_farkli'))), '.']),
-        statement('F4', 4, ['Sanığın kaydında ', hl('bıçaklı yaralama var', any(flag('press_f4'), has('clue_eski_foto'))), '; mağdur da bıçak dedi.']),
+        statement('F3', 3, [
+          'Altı fotoğraf ',
+          hl('birbirine benziyordu', any(flag('press_f3'), has('clue_foto_farkli'))),
+          '.',
+        ]),
+        statement('F4', 4, [
+          'Sanığın kaydında ',
+          hl('bıçaklı yaralama var', any(flag('press_f4'), has('clue_eski_foto'))),
+          '; mağdur da bıçak dedi.',
+        ]),
         statement('F5', 5, [
           'Bölgedeki kuryeler arasında ',
           hl('tarife uyan tek kişi', any(flag('press_f5'), has('ded_halka'), has('ded_baskasi'))),
@@ -592,16 +610,21 @@ rahmi: Vardı tanık. Dosyada.
 rahmi: Yerinde. Tanık, olgulara dönün.
 `),
         }),
-        presentRule('PS_SAVCILIK2', undefined, ['ev_teshis', 'ev_nermin_kolluk', 'ev_darp', 'ev_gps', 'ev_ihbar', 'ev_sabika'], {
-          maxUses: 10,
-          effects: [...wrongMove, score('SORGULAMA', -150, 'hatali')],
-          bad: 'Bu delil bu ifadeyle çelişmiyor. −1 güvenilirlik, −150 skor.',
-          category: 'SORGULAMA',
-          responses: B(`
+        presentRule(
+          'PS_SAVCILIK2',
+          undefined,
+          ['ev_teshis', 'ev_nermin_kolluk', 'ev_darp', 'ev_gps', 'ev_ihbar', 'ev_sabika'],
+          {
+            maxUses: 10,
+            effects: [...wrongMove, score('SORGULAMA', -150, 'hatali')],
+            bad: 'Bu delil bu ifadeyle çelişmiyor. −1 güvenilirlik, −150 skor.',
+            category: 'SORGULAMA',
+            responses: B(`
 orhan: Sayın Başkan, müdafi elindeki her kâğıdı tanığa okutuyor.
 ~ Kâğıt doğru, ifade yanlıştı.
 `),
-        }),
+          },
+        ),
       ],
       presentMiss: fallback('FB_T02_PRESENT', 'PRESENT', {
         effects: [...wrongMove, score('SORGULAMA', -150, 'hatali')],
@@ -740,8 +763,15 @@ rahmi: Tanığın bu beyanı tutanağa geçsin. Müdafi, diyeceğiniz?
 ~ Bir terziye bir sayı ezberlettim. O da dürüst bir adam olduğu için, ezberlettiğimi de söyledi.
 `,
         ),
-        O(`
+        W(
+          flag('fact_tolga'),
+          `
 orhan: Tanık, karanlıkta, kataraktla, balkondan aşağıdaki kişiyi gördünüz mü, yoksa duydunuz mu? Sanığın bir de ona çok benzeyen bir kuzeni varmış; ikisini sesinden ayırabilir misiniz?
+~ Meşru bir soru. Acımasız ama meşru.
+`,
+        ),
+        O(`
+orhan: Tanık, karanlıkta, kataraktla, balkondan aşağıdaki kişiyi gördünüz mü, yoksa duydunuz mu? Bir sesi başka bir sese benzetmiş olamaz mısınız?
 ~ Meşru bir soru. Acımasız ama meşru.
 `),
       ],
@@ -916,8 +946,11 @@ orhan: Dosyada sanığın suçu işlediğine dair başka kesin delil bulunmamakt
         O(`
 rahmi: Delillerin tartışılması tamamlandı. Esas hakkındaki mütalaa.
 orhan: Sayın Başkan, mağdurun teşhisi, sanığın hesabının olay yerindeki konum kaydı ve sanığın bölgede kurye olarak çalışması birlikte değerlendirildiğinde atılı suçun sabit olduğu kanaatindeyiz.
-orhan: Sanığın TCK 149/1-a ve h uyarınca, iki nitelikli hâlin birlikte gerçekleşmesi gözetilerek alt sınırdan uzaklaşılarak cezalandırılmasına; TCK 53 ve 63’ün uygulanmasına; tutukluluk hâlinin devamına karar verilmesini talep ederim.
+orhan: Sanığın TCK 149/1-a ve h uyarınca, iki nitelikli hâlin birlikte gerçekleşmesi gözetilerek alt sınırdan uzaklaşılarak cezalandırılmasına;
+orhan: TCK 53 ve 63’ün uygulanmasına; tutukluluk hâlinin devamına karar verilmesini talep ederim.
 ~ “Kâğıt yalan söylemez.” Savcı kâğıdı okudu. Kâğıdın yarısını.
+> Savcı oturdu. Barış bana döndü; dudakları kıpırdadı ama ses çıkmadı. Sevim Hanım’ın tespihi durdu, sonra yeniden döndü; bu sefer daha hızlı.
+~ Mütalaa bir hüküm değil. Bir savcının kanaati. Ama heyetin kalemine ilk düşen kanaat odur; benimki ikinci gelir.
 `),
       ],
       choices: [cont('T05_DEVAM', 'Esas hakkında savunma', 'T_06P', { role: 'PRIMARY' })],
@@ -1040,10 +1073,7 @@ rahmi: Müdafi, esas hakkındaki savunmanız.
 `),
         }),
         option('S_TERDIT', 'Önce beraat; olmazsa silah unsuru düşsün, alt sınır ve takdiri indirim', {
-          effects: [
-            raise('closing_terdit'),
-            score('SAVUNMA_STRATEJISI', strategyAmount(150, 'INDIRIM')),
-          ],
+          effects: [raise('closing_terdit'), score('SAVUNMA_STRATEJISI', strategyAmount(150, 'INDIRIM'))],
           good: 'Terditli savunma: önce beraat; aksi hâlde silah unsurunun (TCK 149/1-a) ispatlanmadığı, temel cezanın alt sınırdan belirlenmesi ve TCK 62/1.',
           category: 'SAVUNMA_STRATEJISI',
           responses: B(`
@@ -1167,6 +1197,3 @@ rahmi: Müdafi, sunduklarınızın dosyayla ilgisi kalmadı. Mahkeme yeterince d
     resultNode('R_KARAR', { ...H2, title: 'Karar', background: 'durusma_salonu' }),
   ],
 };
-
-void hasPoint;
-void set;

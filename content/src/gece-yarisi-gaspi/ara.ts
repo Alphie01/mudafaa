@@ -1,11 +1,9 @@
 import {
   all,
   any,
-  back,
   cmp,
   conversation,
   cont,
-  dec,
   decisionNode,
   deductionBoard,
   deliver,
@@ -34,8 +32,8 @@ import {
   v,
   visited,
 } from '../../../tools/content/src/kit/index.js';
-import type { CasePart, ChoiceDef, Cond, Effect } from '../../../tools/content/src/kit/index.js';
-import { B, O, T, W, retarget } from './dsl.js';
+import type { CasePart, ChoiceDef, Effect } from '../../../tools/content/src/kit/index.js';
+import { B, O, W, retarget } from './dsl.js';
 import { invRecipes, uedasDoc } from './investigation.js';
 import { ARA, ARA_AP, ARA_DAYS } from './shared.js';
 
@@ -683,7 +681,8 @@ derya: Tolga’yla ben konuşurum. Ben. Senden önce, polisten önce. Ona bunu b
     option('D_TOLGA', '“Tolga’yı ikna edin; teslim olsun.”', {
       score: { SAVUNMA_STRATEJISI: 10 },
       effects: [raise('derya_konustu')],
-      neutral: 'Amacın meşru; ama müvekkilin avukatı olarak üçüncü kişinin ailesine ne yapması gerektiğini söylemek, sınırda bir yönlendirmedir.',
+      neutral:
+        'Amacın meşru; ama müvekkilin avukatı olarak üçüncü kişinin ailesine ne yapması gerektiğini söylemek, sınırda bir yönlendirmedir.',
       responses: B(`
 - Tolga’yı ikna edin Derya Hanım. Teslim olsun. Hem Barış için hem kendisi için.
 derya/kizgin: Kolay mı canım? Annesiz büyümüş bir çocuğa “git hapse gir” mi diyeyim?
@@ -781,7 +780,7 @@ kadir: Ses dedim. Ses yalan söylemez avukat. Yüzler değişir; öksürük değ
     }),
     option('KA_SAAT', '“Saati sorarlarsa 23.40 deyin; kayıt öyle.”', {
       effects: [inc('ethics'), raise('kadir_kocluk'), score('SAVUNMA_STRATEJISI', -50)],
-      bad: 'Tanığa bilmediği bir saati söyletmeye çalıştın: tanığı yönlendirmek meslek kurallarına aykırıdır (Av.K. 34; TCK 277) ve tanıklığı çürütür.',
+      bad: 'Tanığa bilmediği bir saati söyletmeye çalıştın: tanığı yönlendirmek meslek kurallarına aykırıdır (Av.K. 34), yalan tanıklığa azmettirme riski taşır (TCK 272, 38) ve tanıklığı çürütür.',
       category: 'SAVUNMA_STRATEJISI',
       responses: B(`
 - Saati sorarlarsa 23.40 deyin. Kayıt zaten öyle.
@@ -793,7 +792,8 @@ kadir: 23.40. Peki.
     option('KA_GELME', '“Gelmek istemezseniz anlarım.”', {
       score: { SAVUNMA_STRATEJISI: -20 },
       effects: [raise('kadir_gelmez')],
-      neutral: 'Çağrılan tanık gelmekle yükümlüdür (CMK 44); korkusunu meşrulaştırmak, mazeretin tek bağımsız sesini kaybettirebilir.',
+      neutral:
+        'Çağrılan tanık gelmekle yükümlüdür (CMK 44); korkusunu meşrulaştırmak, mazeretin tek bağımsız sesini kaybettirebilir.',
       responses: B(`
 - Gelmek istemezseniz anlarım Kadir Usta. Zorlamam.
 kadir: Sağ ol avukat. Ben… doktor raporu alırım belki. Gözlerimden.
@@ -845,7 +845,7 @@ const karar = story('ARA_KARAR', {
     option('K_NERMIN', 'Nermin Hanım’a özçekimi göster; o tanısın', {
       visibleWhen: has('ev_selfie'),
       effects: [inc('ethics', 2), raise('etik_kirlik'), raise('karar_verildi'), score('SAVUNMA_STRATEJISI', -150)],
-      bad: 'Tanıklık eden mağdura tek bir fotoğraf göstermek, kolluğun hatasını savunma eliyle tekrarlamaktır: tanığı etkileme (TCK 277), meslek kurallarına aykırılık (Av.K. 34); yeni “teşhis” değersizdir.',
+      bad: 'Tanıklık eden mağdura tek bir fotoğraf göstermek, kolluğun hatasını savunma eliyle tekrarlamaktır: meslek kurallarına aykırıdır (Av.K. 34), tanığı etkileme olarak değerlendirilebilir (TCK 277); yeni “teşhis” değersizdir (PVSK ek md. 6).',
       category: 'SAVUNMA_STRATEJISI',
       next: 'ARA_NERMIN',
     }),
@@ -1058,7 +1058,12 @@ const POOL2 = [
   'clue_bahis',
 ];
 
-const newDed = (title: string, text: string) => ({ title, text, label: 'YENİ DELİL · +300 SKOR', tone: 'success' as const });
+const newDed = (title: string, text: string) => ({
+  title,
+  text,
+  label: 'YENİ DELİL · +300 SKOR',
+  tone: 'success' as const,
+});
 
 const cikarim = retarget(
   deductionBoard('ARA_CIKARIM', {
@@ -1072,14 +1077,20 @@ const cikarim = retarget(
     recipes: [
       recipe('AC_BASKASI', 'clue_selfie', 'clue_halka', {
         effects: firstTime('ded_baskasi'),
-        feedback: newDed('Hesabı taşıyan, mağdurun tarif ettiği kişiydi', 'Özçekimdeki sol kulak halkası, 112’deki halkayla aynı.'),
+        feedback: newDed(
+          'Hesabı taşıyan, mağdurun tarif ettiği kişiydi',
+          'Özçekimdeki sol kulak halkası, 112’deki halkayla aynı.',
+        ),
         responses: B(`
 ~ Bir makinenin hafızası ile bir kadının ilk sözleri, aynı kulağı gösteriyor. Sol kulak. Halka. Ve Barış’ın kulakları hiç delinmemiş.
 `),
       }),
       recipe('AC_BASKASI2', 'clue_cemal', 'clue_halka', {
         effects: firstTime('ded_baskasi'),
-        feedback: newDed('Hesabı taşıyan, mağdurun tarif ettiği kişiydi', 'Siparişi alan kuryenin kulağı halkalıydı; 112’deki fail de öyle.'),
+        feedback: newDed(
+          'Hesabı taşıyan, mağdurun tarif ettiği kişiydi',
+          'Siparişi alan kuryenin kulağı halkalıydı; 112’deki fail de öyle.',
+        ),
         responses: B(`
 ~ Kebapçı ustası bir yüzü değil, bir halkayı hatırladı. Mağdur da. On bir dakika arayla, iki farklı yerde, aynı halka.
 `),
@@ -1093,7 +1104,10 @@ const cikarim = retarget(
       }),
       recipe('AC_EVDE', 'clue_186', 'clue_kesinti', {
         effects: firstTime('ded_evde'),
-        feedback: newDed('23.40’ta Yıldırım’dan arıza hattı arandı', 'Kesintinin ortasında Barış’ın telefonu evinden 186’yı aradı.'),
+        feedback: newDed(
+          '23.40’ta Yıldırım’dan arıza hattı arandı',
+          'Kesintinin ortasında Barış’ın telefonu evinden 186’yı aradı.',
+        ),
         responses: B(`
 ~ 23.40’ta Yıldırım’da bir telefon arıza hattını arıyor. 23.42’de dört kilometre ötede bir kadın itiliyor. Aynı insan iki dakikada ikisini yapamaz.
 `),
@@ -1121,7 +1135,12 @@ const cikarim = retarget(
     miss: fallback('FB_CIKARIM2', 'COMBINE', {
       repeat: 'ONCE_PER_PARAMS',
       score: { DELIL_ANALIZI: -50 },
-      feedback: { title: 'Bu ikisi birbirini açıklamıyor', text: 'Başka bir ipucu dene.', label: 'BAĞLANTI YOK · −50 SKOR', tone: 'error' },
+      feedback: {
+        title: 'Bu ikisi birbirini açıklamıyor',
+        text: 'Başka bir ipucu dene.',
+        label: 'BAĞLANTI YOK · −50 SKOR',
+        tone: 'error',
+      },
     }),
     finish: { id: 'CIKARIM2_BITIR' },
   }),
@@ -1298,16 +1317,31 @@ derya: Barış’a söyledim. Hiçbir şey demedi. Balkona çıktı. Hâlâ orad
   }),
   decisionNode('ARA_SON_3', [{ to: 'ARA_SON' }], {
     lines: [
-      W(flag('etik_kirlik'), `~ Nermin Hanım’ın sesi kulağımda: “Neden herkes bana bir fotoğraf gösteriyor?” Yarın bunu mahkemede de soracak. Bana.`),
-      W(flag('kadir_kocluk'), `~ Kadir Usta’nın iğneyi ceketin koluna saplayışı. Bir saat ezberlettim; o da ezberledi. Yarın savcı ona saati soracak.`),
+      W(
+        flag('etik_kirlik'),
+        `~ Nermin Hanım’ın sesi kulağımda: “Neden herkes bana bir fotoğraf gösteriyor?” Yarın bunu mahkemede de soracak. Bana.`,
+      ),
+      W(
+        flag('kadir_kocluk'),
+        `~ Kadir Usta’nın iğneyi ceketin koluna saplayışı. Bir saat ezberlettim; o da ezberledi. Yarın savcı ona saati soracak.`,
+      ),
       W(flag('zarf_tuttu'), `~ Çekmece kilitli. Anahtarı cebimde. Ağırlığı bir zarfın ağırlığı değil.`),
-      W(flag('fact_anahtar'), `~ “Anahtarı paspasın altına koydum.” 00.38. Bir motorun anahtarı, bir gecenin sonu, okunmamış bir mesaj.`),
+      W(
+        flag('fact_anahtar'),
+        `~ “Anahtarı paspasın altına koydum.” 00.38. Bir motorun anahtarı, bir gecenin sonu, okunmamış bir mesaj.`,
+      ),
       W(
         flag('fact_tolga_halka'),
         `~ “Sol kulağında. Askerden sonra taktı.” Barış bunu söylerken sesi bir kuzenin değil, bir kardeşin sesiydi.`,
       ),
-      W(has('ded_baskasi'), `~ Bir halka. Sol kulakta. Bir makinenin hafızasında, bir kebapçının hafızasında, bir kadının ilk sözünde. Üçü aynı yeri gösteriyor.`),
-      W(has('ded_evde'), `~ 23.40, Yıldırım, 186. Bir telefon, bir kesinti, bir balkon. Barış evdeydi; bunu artık bir makine de söylüyor.`),
+      W(
+        has('ded_baskasi'),
+        `~ Bir halka. Sol kulakta. Bir makinenin hafızasında, bir kebapçının hafızasında, bir kadının ilk sözünde. Üçü aynı yeri gösteriyor.`,
+      ),
+      W(
+        has('ded_evde'),
+        `~ 23.40, Yıldırım, 186. Bir telefon, bir kesinti, bir balkon. Barış evdeydi; bunu artık bir makine de söylüyor.`,
+      ),
       O(`~ Yarın ikinci celse. Elimde olanlar yeterli mi? Bunu yarın bir başkası söyleyecek.`),
     ],
   }),
@@ -1364,6 +1398,3 @@ export const ara: CasePart = {
   ],
   discoveryPaths: [...giris.discoveryPaths, ...gunSonu.discoveryPaths, ...son.discoveryPaths],
 };
-
-void dec;
-void (null as unknown as Cond);

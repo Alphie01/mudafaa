@@ -124,8 +124,8 @@ export const evidencePart: CasePart = {
     clue('clue_aile_foto', {
       type: 'FOTOGRAF',
       title: 'Motorun üstünde iki çocuk (2014)',
-      shortText: 'Eski bir aile fotoğrafı: iki oğlan, aynı çene, aynı kaş.',
-      description: 'Sevim Hanım’ın vitrininde duran fotoğraf. Derya: “İkiz sanılırlardı.”',
+      shortText: 'Eski bir aile fotoğrafı: Barış ve amcaoğlu, bir bayram sabahı.',
+      description: 'Sevim Hanım’ın vitrininde duran fotoğraf. İki çocuk, bir motor, bir bayram.',
       sourceLabel: 'Kılınçların evi',
       icon: 'camera',
       tags: ['kart'],
@@ -134,7 +134,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Kasım vesikalığı · uzun saç, sakal',
       shortText: 'Barış’ın iki ay önceki vesikalığı.',
-      description: 'Kurye kartı yenilemesi için çekilmiş: uzun saç, sakal. 2023’teki kazınmış saçlı gençten çok farklı.',
+      description:
+        'Kurye kartı yenilemesi için çekilmiş: uzun saç, sakal. 2023’teki kazınmış saçlı gençten çok farklı.',
       sourceLabel: 'Kılınçların evi',
       icon: 'camera',
       tags: ['kart'],
@@ -178,7 +179,8 @@ export const evidencePart: CasePart = {
       type: 'TELEFON_KAYDI',
       title: '112: “itti, düştüm, elim kesildi”',
       shortText: 'İlk çağrıda bıçaktan hiç söz yok.',
-      description: 'Mağdur 112’de itildiğini, düştüğünü ve elinin kesildiğini söylüyor. Bıçak, ertesi sabahki ifadede ortaya çıkıyor.',
+      description:
+        'Mağdur 112’de itildiğini, düştüğünü ve elinin kesildiğini söylüyor. Bıçak, ertesi sabahki ifadede ortaya çıkıyor.',
       sourceLabel: '112 çağrı dökümü',
       icon: 'phone',
       tags: ['kart'],
@@ -241,7 +243,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Kadir Usta: “Elektrik gidince balkonda konuştuk.”',
       shortText: 'Kesinti sırasında Barış balkondaydı, öksürüyordu.',
-      description: 'Üst kat komşusu Kadir Bayram, elektrik kesildiğinde Barış’la balkondan konuştuğunu söylüyor. Saate bakmamış.',
+      description:
+        'Üst kat komşusu Kadir Bayram, elektrik kesildiğinde Barış’la balkondan konuştuğunu söylüyor. Saate bakmamış.',
       sourceLabel: 'Tanık görüşmesi',
       icon: 'bulb',
       tags: ['kart'],
@@ -500,7 +503,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: '23.40’ta Yıldırım’dan arıza hattı arandı',
       shortText: 'Kesinti sırasında Barış’ın telefonu evinden 186’yı aradı.',
-      description: 'Kesinti kaydı ve telefon kaydı aynı dakikayı gösteriyor; olay iki dakika sonra, dört kilometre ötede.',
+      description:
+        'Kesinti kaydı ve telefon kaydı aynı dakikayı gösteriyor; olay iki dakika sonra, dört kilometre ötede.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'DEFENSE',

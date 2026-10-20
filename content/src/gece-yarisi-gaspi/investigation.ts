@@ -23,7 +23,6 @@ import {
   mood,
   nav,
   not,
-  objective,
   option,
   raise,
   recipe,
@@ -206,8 +205,18 @@ const gorusme = interview('INV_GORUSME', {
     mood('Yorgun', 'neutral', 'normal'),
   ],
   objectives: [
-    { id: 'obj_gece', when: flag('fact_gece'), known: 'Ateşli, evde yatıyordu; motor aşağıdaydı.', unknown: 'O gece neredeydi?' },
-    { id: 'obj_foto', when: has('clue_eski_foto'), known: 'Polisin fotoğrafı üç yıllık.', unknown: 'Mağdur hangi yüzü tanıdı?' },
+    {
+      id: 'obj_gece',
+      when: flag('fact_gece'),
+      known: 'Ateşli, evde yatıyordu; motor aşağıdaydı.',
+      unknown: 'O gece neredeydi?',
+    },
+    {
+      id: 'obj_foto',
+      when: has('clue_eski_foto'),
+      known: 'Polisin fotoğrafı üç yıllık.',
+      unknown: 'Mağdur hangi yüzü tanıdı?',
+    },
     { id: 'obj_kulak', when: has('clue_kulak'), known: 'Kulakları delinmemiş.', unknown: 'İlk tarif ona uyuyor mu?' },
     {
       id: 'obj_balkon',
@@ -319,8 +328,8 @@ baris/uzgun: Annem her hafta geliyor. Camın arkasından bakıyor, konuşamıyor
 baris: Derya ablam… o bizim babamız gibi. Salonu açtığından beri evi o çeviriyor. Avukata da o koştu, biliyorum.
 baris: Amcamın oğlu Tolga da var; kardeş gibi büyüdük. O gelemiyor görüşe; inşaatta çalışıyor, gündüz izin vermiyorlar.
 ~ Bir aile. Herkesin bir yeri, herkesin bir yükü.
-baris: Ben kurye oldum, Tolga inşaata gitti. Ben gece, o gündüz. Bayramlarda bile zor görüşüyoruz artık. Eskiden aynı motora binerdik, şimdi aynı sofraya oturamıyoruz.
-~ Bir kuzen. Gündüzleri inşaatta. Not defterime yazdım; bir aile ağacının dalı olarak, başka bir şey olarak değil.
+baris: Ben kurye oldum, Tolga inşaata gitti. Ben gece, o gündüz. Bayramlarda bile zor görüşüyoruz artık. Eskiden aynı mahallede top oynardık.
+~ Bir anne, bir abla, bir kuzen. Herkes birini koruyor bu ailede. Barış’ı kim koruyacak?
 `),
         },
         hard: {
@@ -466,6 +475,8 @@ const arama = sceneSearch('INV_ARAMA', {
 # ARŞİV · 19 OCAK 01.10 OLAY YERİ FOTOĞRAFLARI [bg:sokak_karanlik]
 > Otuz sekiz fotoğraf. Flaşla, yağmurda, aceleyle çekilmiş. Basamaklar beyaz patlıyor, kenarlar karanlıkta kayboluyor.
 ~ Olay yerinde bir buçuk saat sonra çekilmiş bir fotoğraf, o gecenin en dürüst tanığıdır. Kimseye bir şey anlatmaz; sadece gösterir.
+> Fotoğrafların arkasında olay yeri ekibinin kurşun kalemle düştüğü numaralar: 1’den 38’e. Bazılarının yanında soru işareti. Kimse o soru işaretlerine dönmemiş.
+~ Bir fotoğrafçı bir şeyi merak etmiş ve bir soru işareti koymuş. Üç ay sonra o soruyu ben soruyorum.
 `),
   miss: fallback('FB_ARAMA', 'TAP', {
     score: { ARASTIRMA: -10 },
@@ -525,6 +536,8 @@ const arama3 = sceneSearch('INV_ARAMA3', {
 > Gece yarısına on dakika. Acilin kapısı her açıldığında soğuk bir rüzgâr ve bir sedye giriyordu.
 > Bekleme koridoru kamuya açıktı. Kimse kim olduğumu sormadı; acilde kimse kimseye bir şey sormaz, herkes kendi derdinde.
 ~ Nermin Hanım burada oturdu. Burada dikiş attılar. Ve bir adam, buradan bir yerden içeri girdi.
+> Bekleme bankında bir adam başını duvara dayamış uyuyordu. Bir kadın, kucağında ateşli bir çocukla bir aşağı bir yukarı yürüyordu. Görevli kâtip camın ardından herkese aynı yorgun gözle bakıyordu.
+~ Acil servis bir şehrin vicdanı gibidir; gece yarısı herkes buraya düşer, sabah herkes unutur.
 `),
   miss: fallback('FB_ARAMA3', 'TAP', {
     score: { ARASTIRMA: -10 },
@@ -596,7 +609,7 @@ const tAliKarar = conversation('INV_T_ALI_K', {
   choices: [
     option('ALI_DOGRU', '“Yalnızca duyduğunuzu. Fazlasını değil.”', {
       score: { SAVUNMA_STRATEJISI: 50 },
-      good: 'Tanığa ne söyleyeceğini söylemedin; yalnızca kendi algısını anlatmasını istedin (Av.K. 34; TCK 277 sınırı).',
+      good: 'Tanığa ne söyleyeceğini söylemedin; yalnızca kendi algısını anlatmasını istedin (Av.K. 34).',
       category: 'SAVUNMA_STRATEJISI',
       responses: B(`
 - Ali Bey, siz yalnızca duyduğunuzu söyleyeceksiniz. Görmediğiniz bir şeyi değil. Fazlası, ablaya da Barış’a da zarar verir.
@@ -609,7 +622,7 @@ ali: Bir de Nermin ablanın yüzünü. Onu da gördüm. Kimse ona sormadı ama b
     }),
     option('ALI_EVET', '“Bıçak olmadığını da söylerseniz iyi olur.”', {
       effects: [inc('ethics'), raise('ali_kocluk'), score('SAVUNMA_STRATEJISI', -50)],
-      bad: 'Görmediği bir şeyi söylemesini istedin: tanığı yönlendirmek meslek kurallarına aykırıdır ve tanığın değerini yok eder (Av.K. 34; TCK 277).',
+      bad: 'Görmediği bir şeyi söylemesini istedin: tanığı yönlendirmek meslek kurallarına aykırıdır (Av.K. 34), yalan tanıklığa azmettirme riski taşır (TCK 272, 38) ve tanığın değerini yok eder.',
       category: 'SAVUNMA_STRATEJISI',
       responses: B(`
 - Bıçak olmadığını da söylerseniz iyi olur.
@@ -710,7 +723,7 @@ kadir: Kâğıda yazarım, imzalarım. Kâğıt yalan söylemez, insan söyler; 
     }),
     option('KD_SAAT', '“Elektrik 23.40’ta gitti deseniz, kayıt da öyle”', {
       effects: [inc('ethics'), raise('kadir_kocluk'), raise('kadir_tanik'), score('SAVUNMA_STRATEJISI', -50)],
-      bad: 'Tanığa bilmediği bir saati söyletmeye çalıştın: tanığı yönlendirmek meslek kurallarına aykırıdır, tanıklığı çürütür (Av.K. 34; TCK 277).',
+      bad: 'Tanığa bilmediği bir saati söyletmeye çalıştın: tanığı yönlendirmek meslek kurallarına aykırıdır (Av.K. 34), yalan tanıklığa azmettirme riski taşır (TCK 272, 38).',
       category: 'SAVUNMA_STRATEJISI',
       responses: B(`
 - Mahkemede “elektrik 23.40 gibi gitti” derseniz işimiz kolaylaşır. Kayıt da zaten öyle çıkacak.
@@ -795,7 +808,8 @@ gamze: Peki. Nöbetim olmayan bir güne denk getirin; yoksa bir adli vakayı dah
     }),
     option('G_FORM', 'Yalnızca formu mahkemeden isteyeceğim', {
       score: { USUL_BILGISI: 20 },
-      neutral: 'Form tek başına da bir belgedir; ama yazanı dinlenmezse savcılık “ne gösterildi” sorusunu açık bırakır.',
+      neutral:
+        'Form tek başına da bir belgedir; ama yazanı dinlenmezse savcılık “ne gösterildi” sorusunu açık bırakır.',
       responses: B(`
 - Size yük olmasın. Yalnızca formu mahkemeden isterim.
 gamze: Sağ olun. Form bende değil zaten; hastane arşivinde. Müzekkere yazarlarsa bir haftada gider.
@@ -1039,7 +1053,10 @@ const ihbar = documentExam('INV_112', {
     row('c3', ['23.43.40', 'Operatör', 'Kim aldı, gördünüz mü?']),
     row('c4', ['23.43.47', 'Arayan', 'Kurye gibiydi, sırtında sarı kutu.']),
     row('c5', ['23.44.02', 'Arayan', 'Genç. İnce. Kulağında… (anlaşılamadı)'], {
-      dinle: { cells: ['23.44.02', 'Arayan', 'Genç. İnce. Kulağında halka vardı, parladı. Sol kulağında.'], tone: 'special' },
+      dinle: {
+        cells: ['23.44.02', 'Arayan', 'Genç. İnce. Kulağında halka vardı, parladı. Sol kulağında.'],
+        tone: 'special',
+      },
     }),
     row('c6', ['23.44.15', 'Bakkal', 'Abla otur, ambulans geliyor.']),
     row('c7', ['23.44.30', 'Operatör', 'Ekip yönlendirildi.']),
@@ -1103,66 +1120,69 @@ const ihbar = documentExam('INV_112', {
 
 export const uedasDoc = (id: string, chapterSpread: typeof INV, returnTo?: string) =>
   retarget(
-  documentExam(id, {
-    ...chapterSpread,
-    title: 'UEDAŞ kesinti kaydı',
-    hud: ['ued_left'],
-    background: 'buro',
-    lines: B(`
+    documentExam(id, {
+      ...chapterSpread,
+      title: 'UEDAŞ kesinti kaydı',
+      hud: ['ued_left'],
+      background: 'buro',
+      lines: B(`
 > UEDAŞ’ın cevabı iki sayfa. Kurumsal bir dil, tablolar, kısaltmalar. Bir şehrin bir gecesi, kilovatsaat cinsinden.
 `),
-    header: { left: 'UEDAŞ · ARIZA VE KESİNTİ KAYDI', right: '18.01' },
-    columns: [
-      { label: 'BÖLGE', flex: 1.5 },
-      { label: 'SAAT', flex: 1 },
-      { label: 'AÇIKLAMA', flex: 1.5 },
-    ],
-    rows: [
-      row('u1', ['Osmangazi / Tophane', '—', 'Kesinti yok']),
-      row('u2', ['Yıldırım / Mimar Sinan', '23.36–23.51', 'Trafo arızası (T-114)']),
-      row('u3', ['Yıldırım / Vatan', '22.10–22.25', 'Planlı bakım']),
-      row('u4', ['186 çağrıları, T-114', '23.37–23.50', '41 çağrı']),
-    ],
-    tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('compare', 'Kadir Usta’nın anlatısıyla karşılaştır', 'compare')],
-    costVar: 'ued_left',
-    rules: [
-      examine(`${id}_EX_U2`, 'compare', 'u2', {
-        discovers: 'clue_kesinti',
-        score: { DELIL_ANALIZI: 150 },
-        feedback: {
-          title: 'YENİ İPUCU · KESİNTİ',
-          text: 'Mimar Sinan Mahallesi: 23.36’da kesildi, 23.51’de verildi. Kadir Usta’nın mumu, Barış’ın öksürüğü, televizyonun kendi kendine açılması: hepsi bu on beş dakikanın içinde.',
-          label: '+150 SKOR · Not defterine eklendi',
-          tone: 'special',
-        },
+      header: { left: 'UEDAŞ · ARIZA VE KESİNTİ KAYDI', right: '18.01' },
+      columns: [
+        { label: 'BÖLGE', flex: 1.5 },
+        { label: 'SAAT', flex: 1 },
+        { label: 'AÇIKLAMA', flex: 1.5 },
+      ],
+      rows: [
+        row('u1', ['Osmangazi / Tophane', '—', 'Kesinti yok']),
+        row('u2', ['Yıldırım / Mimar Sinan', '23.36–23.51', 'Trafo arızası (T-114)']),
+        row('u3', ['Yıldırım / Vatan', '22.10–22.25', 'Planlı bakım']),
+        row('u4', ['186 çağrıları, T-114', '23.37–23.50', '41 çağrı']),
+      ],
+      tools: [
+        tool('mag', 'Büyüteç', 'magnifier'),
+        tool('compare', 'Kadir Usta’nın anlatısıyla karşılaştır', 'compare'),
+      ],
+      costVar: 'ued_left',
+      rules: [
+        examine(`${id}_EX_U2`, 'compare', 'u2', {
+          discovers: 'clue_kesinti',
+          score: { DELIL_ANALIZI: 150 },
+          feedback: {
+            title: 'YENİ İPUCU · KESİNTİ',
+            text: 'Mimar Sinan Mahallesi: 23.36’da kesildi, 23.51’de verildi. Kadir Usta’nın mumu, Barış’ın öksürüğü, televizyonun kendi kendine açılması: hepsi bu on beş dakikanın içinde.',
+            label: '+150 SKOR · Not defterine eklendi',
+            tone: 'special',
+          },
+        }),
+        examine(`${id}_EX_U4`, 'mag', 'u4', {
+          score: { DELIL_ANALIZI: 20 },
+          effects: [raise('fact_186')],
+          feedback: {
+            title: '41 ÇAĞRI',
+            text: 'Kesinti sırasında kırk bir kişi arıza hattını aramış. Kim oldukları bu kayıtta yok. Arayanların telefonlarında var.',
+            label: '+20 SKOR',
+            tone: 'neutral',
+          },
+        }),
+        examine(`${id}_EX_U1`, 'mag', 'u1', {
+          score: { DELIL_ANALIZI: 10 },
+          feedback: {
+            title: 'TOPHANE',
+            text: 'Olay yerinde kesinti yok. Merdivenin lambası yanıyordu. Kadının bir yüz görmesi mümkündü; bu dosyanın sorusu görüp görmemesi değil.',
+            label: '+10 SKOR',
+            tone: 'neutral',
+          },
+        }),
+      ],
+      miss: fallback(`${id}_FB`, 'EXAMINE', {
+        score: { DELIL_ANALIZI: -20 },
+        feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bir şey yok.', label: '−20 SKOR', tone: 'error' },
       }),
-      examine(`${id}_EX_U4`, 'mag', 'u4', {
-        score: { DELIL_ANALIZI: 20 },
-        effects: [raise('fact_186')],
-        feedback: {
-          title: '41 ÇAĞRI',
-          text: 'Kesinti sırasında kırk bir kişi arıza hattını aramış. Kim oldukları bu kayıtta yok. Arayanların telefonlarında var.',
-          label: '+20 SKOR',
-          tone: 'neutral',
-        },
-      }),
-      examine(`${id}_EX_U1`, 'mag', 'u1', {
-        score: { DELIL_ANALIZI: 10 },
-        feedback: {
-          title: 'TOPHANE',
-          text: 'Olay yerinde kesinti yok. Merdivenin lambası yanıyordu. Kadının bir yüz görmesi mümkündü; bu dosyanın sorusu görüp görmemesi değil.',
-          label: '+10 SKOR',
-          tone: 'neutral',
-        },
-      }),
-    ],
-    miss: fallback(`${id}_FB`, 'EXAMINE', {
-      score: { DELIL_ANALIZI: -20 },
-      feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bir şey yok.', label: '−20 SKOR', tone: 'error' },
+      finish: { id: `${id}_BITIR` },
     }),
-    finish: { id: `${id}_BITIR` },
-  }),
-  returnTo,
+    returnTo,
   );
 
 // --- Dilekçe ---
@@ -1297,7 +1317,10 @@ export const invRecipes = (prefix: string): ChoiceDef[] => [
   }),
   recipe(`${prefix}_HALKA`, 'clue_halka', 'clue_kulak', {
     effects: firstTime('ded_halka'),
-    feedback: feedbackNew('İlk tarif müvekkile uymuyor', 'Failin sol kulağında halka vardı; Barış’ın kulakları hiç delinmemiş.'),
+    feedback: feedbackNew(
+      'İlk tarif müvekkile uymuyor',
+      'Failin sol kulağında halka vardı; Barış’ın kulakları hiç delinmemiş.',
+    ),
     responses: B(`
 ~ Kirlenmeden önceki tek tarif. Bir dakika sonra, bir bakkalın telefonundan. Ve o tarif, sanık sandalyesinde oturan çocuğu dışarıda bırakıyor.
 `),
@@ -1318,16 +1341,22 @@ export const invRecipes = (prefix: string): ChoiceDef[] => [
   }),
   recipe(`${prefix}_MAZERET`, 'clue_kadir', 'clue_kesinti', {
     effects: firstTime('ded_mazeret'),
-    feedback: feedbackNew('Barış kesintide evdeydi', 'Kadir Usta kesinti sırasında onunla balkonda konuştu: 23.36–23.51.'),
+    feedback: feedbackNew(
+      'Barış kesintide evdeydi',
+      'Kadir Usta kesinti sırasında onunla balkonda konuştu: 23.36–23.51.',
+    ),
     responses: B(`
 ~ Bir terzinin mumu ve bir şirketin kaydı. Biri hafıza, öbürü makine; ikisi aynı on beş dakikayı söylüyor. Olay yeri dört kilometre ötede.
 `),
   }),
   recipe(`${prefix}_ESKI`, 'clue_eski_foto', 'clue_vesikalik', {
     effects: firstTime('ded_eski_foto'),
-    feedback: feedbackNew('Gösterilen yüz bugünkü Barış değil', 'Kazınmış saçlı üç yıllık kare; bugünkü Barış uzun saçlı, sakallı.'),
+    feedback: feedbackNew(
+      'Gösterilen yüz bugünkü Barış değil',
+      'Kazınmış saçlı üç yıllık kare; bugünkü Barış uzun saçlı, sakallı.',
+    ),
     responses: B(`
-~ Kadın bir yüzü tanıdı. Ama o yüz artık kimseye ait değil. Ya da… bugün kime benziyor?
+~ Kadın bir yüzü tanıdı. Ama o yüz artık kimseye ait değil; üç yıl önce bir karakol duvarının önünde kalmış bir yüz.
 `),
   }),
 ];
@@ -1441,15 +1470,11 @@ leyla: Bir şey daha: o kadının kapısını çalma. Çaldıysan bir daha çalm
 
 // --- Gün sonları ---
 
-const dayEnd = decisionNode(
-  'INV_DAY_END',
-  [{ when: cmp(v('day'), '==', 2), to: 'INV_AKSAM1' }, { to: 'INV_AKSAM2' }],
-  {
-    ...INV,
-    title: 'Gün sonu',
-    onEnter: [...dayEndDeliveries.effects, inc('day', 1), set('ap', 4)],
-  },
-);
+const dayEnd = decisionNode('INV_DAY_END', [{ when: cmp(v('day'), '==', 2), to: 'INV_AKSAM1' }, { to: 'INV_AKSAM2' }], {
+  ...INV,
+  title: 'Gün sonu',
+  onEnter: [...dayEndDeliveries.effects, inc('day', 1), set('ap', 4)],
+});
 
 const aksam1 = story('INV_AKSAM1', {
   ...INV,
@@ -1520,12 +1545,13 @@ tolga: Gidemiyorum abla. İş… gündüz izin yok. Bir de… cezaevine girince 
 > Beresinin ucunu çekiştirdi. Gözleri bir an benim gözlerimle buluştu, sonra merdivene kaydı.
 tolga: O kimseye bir şey yapmaz abla. Biz beraber büyüdük. Benden daha iyi bir çocuktur o. Her şeyden.
 ~ Bir kuzen, bir zarf ve bir cümle: “Benden daha iyi.” İnsanlar neden kendilerini birileriyle kıyaslar, gece yarısı, bir avukatın kapısında?
-> Merdiven boşluğunun lambası söndü; otomatik. Karanlıkta yalnızca onun montunun yakasındaki yansıtıcı şerit parladı. Biri düğmeye bastı, lamba yeniden yandı. Tolga hâlâ oradaydı, aynı yerde, aynı duruşla.
+> Merdiven boşluğunun lambası söndü; otomatik. Karanlıkta bir süre ikimiz de kıpırdamadık. Sonra düğmeye bastım; lamba yeniden yandı. Tolga hâlâ oradaydı, aynı yerde, aynı duruşla.
 `),
   choices: [
     option('ZARF_AL', 'Zarfı al, makbuz ver', {
       effects: [raise('zarf_aldi')],
-      neutral: 'Üçüncü kişinin ücrete katkısı tek başına yasak değildir; ama ilerde çıkar çatışması doğarsa iade ve bildirim gerekir.',
+      neutral:
+        'Üçüncü kişinin ücrete katkısı tek başına yasak değildir; ama ilerde çıkar çatışması doğarsa iade ve bildirim gerekir.',
       responses: B(`
 - Peki Tolga. Makbuzunu keseyim; adına.
 tolga: Adıma olmasın abla… Barış’ın adına yazın. Ben… bir şey değil.
@@ -1573,32 +1599,59 @@ const gece = [
   }),
   decisionNode('INV_GECE_2', [{ to: 'INV_GECE_3' }], {
     lines: [
-      W(any(has('ded_kirlenme'), has('ev_gozlem')), `~ Perdenin arkasında ne olduğunu artık biliyorum. Bir telefon, bir kare, bir “galiba.”`),
-      W(has('clue_foto_farkli'), `~ Tutanakta bir fotoğraf ötekilerden parlıyor. Neden parladığını henüz kanıtlayamıyorum.`),
+      W(
+        any(has('ded_kirlenme'), has('ev_gozlem')),
+        `~ Perdenin arkasında ne olduğunu artık biliyorum. Bir telefon, bir kare, bir “galiba.”`,
+      ),
+      W(
+        has('clue_foto_farkli'),
+        `~ Tutanakta bir fotoğraf ötekilerden parlıyor. Neden parladığını henüz kanıtlayamıyorum.`,
+      ),
       O(`~ Teşhis tutanağı hâlâ bana sırtını dönmüş duruyor. Okudum mu, gerçekten okudum mu?`),
     ],
   }),
   decisionNode('INV_GECE_3', [{ to: 'INV_GECE_4' }], {
     lines: [
       W(has('ded_halka'), `~ Bir halka. Kirlenmeden önceki tek tarif. Barış’ın kulakları kadar temiz bir gerçek.`),
-      W(has('clue_halka'), `~ “Kulağında halka vardı.” Bunu duyan oldu. Görmeyen biri lazım: halkası olmayan bir kulak.`),
+      W(
+        has('clue_halka'),
+        `~ “Kulağında halka vardı.” Bunu duyan oldu. Görmeyen biri lazım: halkası olmayan bir kulak.`,
+      ),
       O(`~ Kadının o gece ilk ne dediğini hâlâ tam bilmiyorum. Bu bir eksik.`),
     ],
   }),
   decisionNode('INV_GECE_4', [{ to: 'INV_GECE_5' }], {
     lines: [
-      W(has('ded_mazeret'), `~ Bir mum, bir öksürük, bir kesinti kaydı. Barış o on beş dakika evdeydi. Bunu bir şirket ve bir terzi söylüyor.`),
-      W(has('clue_kadir'), `~ Kadir Usta onu balkonda gördü. Saati bilmiyor. Saati söyleyecek bir kâğıda ihtiyacım var.`),
+      W(
+        has('ded_mazeret'),
+        `~ Bir mum, bir öksürük, bir kesinti kaydı. Barış o on beş dakika evdeydi. Bunu bir şirket ve bir terzi söylüyor.`,
+      ),
+      W(
+        has('clue_kadir'),
+        `~ Kadir Usta onu balkonda gördü. Saati bilmiyor. Saati söyleyecek bir kâğıda ihtiyacım var.`,
+      ),
       O(`~ Mazeret: bir anne ve bir ateş. Mahkeme anneleri dinler, sonra kenara koyar.`),
     ],
   }),
   decisionNode('INV_GECE_5', [{ to: 'INV_GECE_6' }], {
     lines: [
-      W(flag('kadir_kocluk'), `~ Kadir Usta’ya bir saat ezberlettim. Gözlüğünün arkasından bana bakışını unutamıyorum.`),
+      W(
+        flag('kadir_kocluk'),
+        `~ Kadir Usta’ya bir saat ezberlettim. Gözlüğünün arkasından bana bakışını unutamıyorum.`,
+      ),
       W(flag('nermin_baski'), `~ Nermin Hanım’ın kapısı. Zincir. İki kilit. Yarın o kadın bana nasıl bakacak?`),
-      W(flag('zarf_aldi'), `~ Masamda bir zarf var; ıslak lekesi kurudu ama izi kaldı. Tolga’nın haftalığı. Neden bu kadar ağır?`),
-      W(flag('tolga_derya'), `~ “Derya Hanım’la birlikte konuşalım” dediğimde merdivenleri ikişer ikişer inen bir genç. Bir kuzenin utancı mı, başka bir şey mi?`),
-      W(cmp(v('aksam1'), '==', 'NERMIN'), `~ Nermin Hanım yalan söylemiyor. Bunu bir kez daha kendime söyledim. Yarın da söyleyeceğim.`),
+      W(
+        flag('zarf_aldi'),
+        `~ Masamda bir zarf var; ıslak lekesi kurudu ama izi kaldı. Tolga’nın haftalığı. Neden bu kadar ağır?`,
+      ),
+      W(
+        flag('tolga_derya'),
+        `~ “Derya Hanım’la birlikte konuşalım” dediğimde merdivenleri ikişer ikişer inen bir genç. Bir kuzenin utancı mı, başka bir şey mi?`,
+      ),
+      W(
+        cmp(v('aksam1'), '==', 'NERMIN'),
+        `~ Nermin Hanım yalan söylemiyor. Bunu bir kez daha kendime söyledim. Yarın da söyleyeceğim.`,
+      ),
       O(`~ Leyla’nın sorusu aklımda: kime inanıyorum? Kâğıtlara. Ve kâğıtların arasındaki boşluklara.`),
     ],
   }),
@@ -1609,7 +1662,10 @@ const gece = [
         all(flag('kadir_tanik'), flag('kadir_goz')),
         `~ Bir terzi, gözleri bulanık bir terzi, ölçtüğünü söyleyecek. Savcı gözlerini soracak. Terzi “ses” diyecek. Bu yetmeli.`,
       ),
-      W(flag('kadir_tanik'), `~ Bir terzi, mahkemeleri sevmeyen bir terzi, yarın değil ama yakında, ölçtüğünü söyleyecek.`),
+      W(
+        flag('kadir_tanik'),
+        `~ Bir terzi, mahkemeleri sevmeyen bir terzi, yarın değil ama yakında, ölçtüğünü söyleyecek.`,
+      ),
       O(`~ Tanık listem kısa. Kısa listeler bazen dürüst listelerdir; bazen de eksik.
 `),
     ],
@@ -1712,4 +1768,3 @@ export const investigation: CasePart = {
   ],
   discoveryPaths: [...dayEndDeliveries.discoveryPaths, ...nightDeliveries.discoveryPaths],
 };
-

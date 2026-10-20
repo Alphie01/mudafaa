@@ -1,4 +1,12 @@
-import type { Backdrop, Cond, Expression, Line, LineFx, LineStyle, ResponseBlock } from '../../../tools/content/src/kit/index.js';
+import type {
+  Backdrop,
+  Cond,
+  Expression,
+  Line,
+  LineFx,
+  LineStyle,
+  ResponseBlock,
+} from '../../../tools/content/src/kit/index.js';
 
 // Dava #05 satır kısaltması. Her satır bir konuşma satırıdır (boş satırlar atlanır):
 //   # METİN [bg:depo]      yer/saat kartı (anlatıcı, style card)
@@ -18,7 +26,7 @@ function parse(raw: string): Line {
   let fx: LineFx | undefined;
   let bg: Backdrop | undefined;
   let style: LineStyle | undefined;
-  for (let changed = true; changed; ) {
+  for (let changed = true; changed;) {
     changed = false;
     const f = FX.exec(s);
     if (f) {

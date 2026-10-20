@@ -77,7 +77,7 @@ derya: Çay içersem ağlarım. Kahve varsa.
 derya: Barış Kılınç. Yirmi iki yaşında. Motokurye. Bir kadının çantasını kapmış diyorlar. Bıçakla.
 derya: Kardeşim kimseyi soymaz. Kendi motorunu yıkatamayacak kadar tembeldir. Bıçak mı? Ekmek keserken parmağını keser o.
 > Kartı bana doğru itti. Fotoğrafta uzun saçlı, sakallı, gülümsemeye çalışan bir genç. Kartın köşesi aşınmıştı.
-derya: Bu kartı cebinde taşırdı. Polis telefonuyla birlikte almış, sonra kartı annemi kapıya çıkarıp vermiş. “Bu lazım olmaz” demiş. Lazım oldu işte; sana getirdim.
+derya: Bu kartı cebinde taşırdı. Polis telefonuyla birlikte almış, sonra kapıda anneme geri vermiş. “Bu lazım olmaz” demiş. Lazım oldu işte; sana getirdim.
 ~ Bir yüz. Kasımda çekilmiş, bir kurye kartında. Dosyada başka bir yüz var; üç yıl önce, bir karakol duvarının önünde. Aynı insan mı? Kâğıtta aynı ad.
 - Dosyada ne olduğunu biliyor musunuz?
 derya: Kadın onu fotoğraftan tanımış. Karakolda. Altı fotoğrafın arasından seçmiş.

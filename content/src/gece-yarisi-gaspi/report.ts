@@ -75,7 +75,7 @@ export const report: CasePart = {
       hint(
         'h_etik',
         any(flag('nermin_baski'), flag('kadir_kocluk'), flag('ali_kocluk'), flag('zarf_tuttu'), flag('etik_kirlik')),
-        'Etik çizgiyi aştın: tanığa söz ezberletmek, mağdurun kapısında ısrar etmek ya da çıkar çatışmasını saklamak (Av.K. 34; TCK 277).',
+        'Etik çizgiyi aştın: tanığa söz ezberletmek, mağdurun kapısında ısrar etmek ya da çıkar çatışmasını saklamak (Av.K. 34; TCK 272, 277).',
         'SAVUNMA_STRATEJISI',
       ),
     ],

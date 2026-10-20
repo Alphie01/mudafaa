@@ -1,0 +1,528 @@
+{
+  "outcomes": [
+    {
+      "id": "ETIK",
+      "class": "CONVICTION",
+      "priority": 1,
+      "when": {
+        "any": [{ "flag": "illegal_used" }, { "flag": "tanik_etkileme" }, { "cmp": [{ "var": "ethics" }, ">=", 2] }]
+      },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "3 yıl 4 ay hapis · 125.000 TL adli para cezası",
+      "verdictText": "Sanık Ece Yalın’ın TCK 158/1-f ve 37/1 uyarınca 4 yıl hapis ve menfaatin iki katından az olmamak üzere 1.500 gün adli para cezası ile cezalandırılmasına; TCK 62/1 uyarınca 3 yıl 4 ay hapis ve 1.250 gün adli para cezasına; günlüğü 100 TL’den 125.000 TL adli para cezasına; TCK 53’teki hak yoksunluklarına; müdafiin duruşmadaki tutumu nedeniyle karar örneğinin Bursa Barosuna gönderilmesine; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "reasoning": [
+        {
+          "when": { "flag": "illegal_used" },
+          "text": "Savunmanın sunduğu kayıt yetkisiz erişimle elde edildiğinden hükme esas alınmamıştır (Anayasa 38/6; CMK 206/2-a, 217/2)."
+        },
+        {
+          "when": { "flag": "tanik_etkileme" },
+          "text": "Tanığın beyanının müdafi tarafından yönlendirildiği anlaşıldığından beyana itibar edilmemiştir (CMK 217)."
+        },
+        {
+          "text": "Hukuka uygun delillerle sanığın hesabının başkasının elinde olduğu ispatlanamamış; hesap ve işlemler sanığa aittir."
+        },
+        { "text": "Sanığın sabıkasız oluşu ve duruşmadaki tutumu takdiri indirim nedeni sayılmıştır (TCK 62/1)." }
+      ],
+      "legalBasis": "TCK 158/1-f, 37/1, 52, 53, 62/1; Anayasa 38/6; CMK 206/2-a, 217/2, 273/1; Av.K. 34",
+      "xp": 0,
+      "howToReach": "Hukuka aykırı bir kaydı duruşmada sunmak ya da bir tanığa ne söyleyeceğini dikte etmek. Bu sona ulaşmamak gerekir.",
+      "ethicsCard": "Avukat delili yasal yoldan ister; operatör sistemine yetkisiz girişle alınan kayıt suçtur (TCK 243, 136) ve hükme esas alınamaz (CMK 206/2-a, 217/2). Tanığa ne söyleyeceğini dikte etmek tanığı etkilemedir (TCK 277) ve meslekten çıkarmaya kadar giden disiplin yaptırımı doğurabilir (Av.K. 34, 135 vd.). Bu davada doğru yol, CMK 177 dilekçesi ve CMK 135/6 kararıydı.",
+      "epilogue": [
+        {
+          "when": { "flag": "illegal_used" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Hâkim hükmü okurken bir an durdu, kâğıdın kenarına bir not düştü. Sonra okumaya devam etti: “…karar örneğinin Bursa Barosuna gönderilmesine.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ece’nin yüzü bembeyazdı. Sevim plastik dosyayı göğsüne bastırdı; sanki içindeki kâğıtları birinin elinden kurtarıyormuş gibi."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Hâkim hükmü okurken bir an durdu. Tanık kürsüsünün önündeki boşluğa baktı; sonra bana."
+            },
+            { "speaker": "narrator", "text": "Ece’nin yüzü bembeyazdı. Sevim plastik dosyayı göğsüne bastırdı." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · O GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda bir kitap duruyordu. Avukatlık Kanunu. Leyla’nın eski, sayfa kenarları kıvrılmış nüshası. Otuz dördüncü madde, kurşun kalemle çizilmiş."
+            },
+            { "speaker": "narrator", "text": "Leyla odasındaydı. Kapısı kapalıydı. Bir kez bile dışarı çıkmadı." },
+            {
+              "speaker": "player",
+              "text": "Bir yıl önce bir kız bir kodu yanlış kişiye okudu ve bedelini ödedi. Ben bir kuralı bilerek çiğnedim. Bedelini o ödeyecek.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Hesabın kimin elinde olduğunu bulamadım. Benim elimde neyin olduğunu da kaybettim.",
+              "style": "thought",
+              "fx": "fade"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BERAAT_B",
+      "class": "ACQUITTAL",
+      "priority": 2,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "flag": "necdet_ifsa" },
+          { "flag": "gercek_fail" },
+          { "ref": "sim_proven" },
+          { "ref": "cihaz_proven" },
+          { "cmp": [{ "var": "pers" }, ">=", 7] },
+          { "cmp": [{ "score": "final" }, ">=", 8000] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok · Adli kontrol kalktı",
+      "verdictText": "Sanık Ece Yalın’ın üzerine atılı nitelikli dolandırıcılık suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; hakkındaki adli kontrol tedbirinin (yurt dışına çıkış yasağı) kaldırılmasına; karar ve dosya örneklerinin Necdet Sarı ve diğer şüpheliler hakkında işlem yapılmak üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "reasoning": [
+        {
+          "text": "Banka cihaz kaydı ve iletişim tespiti, 4 Kasım işlemlerinin sanığın telefonundan değil, başka bir cihazdan yapıldığını göstermiştir (CMK 135/6)."
+        },
+        {
+          "text": "Sanığın hattı sahte vekâletname ve sanığın iş başvurusu için gönderdiği kimlik fotoğrafından basılmış bir fotokopiyle başka bir bayide kopyalanmıştır."
+        },
+        {
+          "when": { "any": [{ "flag": "ece_durust" }, { "flag": "istirak_cevap" }] },
+          "text": "Sanık, bir iş ilanı aracılığıyla aldatılmış; okuduğu kodun bankaya ait olduğunu bilmemiştir. İştirak kastı yoktur (TCK 21/1, 40/1)."
+        },
+        {
+          "text": "İMEİ sorgusu, sahte işveren hattının, kopya SIM’in ve tanık Necdet Sarı’nın kullandığı hattın aynı cihazda kullanıldığını ortaya koymuştur."
+        },
+        { "text": "Bu deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir." }
+      ],
+      "legalBasis": "CMK 223/2-b; CMK 135/6, 217; TCK 21/1, 37, 39, 40/1; CMK 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 120] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 120] }, 1000] }
+        }
+      },
+      "howToReach": "Hattın ve cihazın sanığın elinde olmadığını tartıştır; suç duyurusuyla İMEİ sorgusu iste; raporu iş merkezi müdürünün kartvizitiyle eşleştirip duruşmada sun; esas savunmada gerçek faili göster.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“Beraatine” kelimesi salona düştüğünde Ece hiçbir şey yapmadı. Sonra oturdu. Sonra yeniden kalktı, çünkü hüküm ayakta dinlenir. Gülmeye çalıştı; ağladı."
+            },
+            { "speaker": "narrator", "text": "ADLİYE MERDİVENLERİ · ÖĞLE", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Yağmur dinmişti. Uludağ’ın üstünde soluk bir güneş vardı. Sevim Hanım plastik dosyayı açtı, en üstteki kâğıdı, iddianameyi çıkardı, dörde katladı ve çöp kutusuna attı."
+            },
+            { "speaker": "sevim", "text": "Ben kâğıt atmam. Bunu atarım." }
+          ]
+        },
+        {
+          "when": { "flag": "nurettin_saygi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Nurettin Aksoy merdivenlerin başında bekliyordu. Ece’ye doğru yürüdü, elini uzattı."
+            },
+            {
+              "speaker": "nurettin",
+              "text": "Kusura bakma kızım. Bir yıl adını taşıdım; yanlış adı. İkimizi de aynı ses kandırmış."
+            },
+            { "speaker": "ece", "text": "Ben de özür dilerim. Paranız…" },
+            { "speaker": "nurettin", "text": "Param onda. Senin adın sende. Bugün bu kadar yeter." }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Nurettin Aksoy merdivenlerin başında bekliyordu. Bir an tereddüt etti, sonra Ece’ye başını eğdi. Bir öğretmenin, yanlış not verdiği bir öğrenciye eğildiği gibi."
+            },
+            { "speaker": "nurettin", "text": "İkimizi de aynı ses kandırmış. Kusura bakma." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · O GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla odamın kapısında durdu. Elinde tuşlu telefonu vardı. Bir mesaj gösterdi: savcılıktan. “Necdet Sarı gözaltına alındı. Kayıp eşya defterinde o telefon yok.”"
+            },
+            { "speaker": "leyla", "text": "Benim telefonum yine tuşlu, Deniz. Kimse benim altı dakikamı bulamaz." },
+            {
+              "speaker": "narrator",
+              "text": "Masasındaki ters çerçeveye baktı. Çevirmedi. Ama bir parmağıyla kenarına dokundu, sanki birine “az kaldı” der gibi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bazen bir insanın bütün yalanı altı dakikadır. Bazen bir insanın bütün masumiyeti, bir sarı nota yazılmış dört rakam.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Ece başvuru tablosuna yüz kırk dördüncü satırı yazacak. Bu sefer kendi adıyla.",
+              "style": "thought",
+              "fx": "fade"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Necdet Sarı hakkında soruşturma başlatıldı. Arda Kılıç ve Mehmet Demir’in dosyaları birleştirildi.",
+              "style": "card"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BERAAT_E",
+      "class": "ACQUITTAL",
+      "priority": 3,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "ref": "sim_proven" },
+          { "ref": "cihaz_proven" },
+          { "cmp": [{ "var": "pers" }, ">=", 5] },
+          { "cmp": [{ "score": "final" }, ">=", 6500] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok · Adli kontrol kalktı",
+      "verdictText": "Sanık Ece Yalın’ın üzerine atılı nitelikli dolandırıcılık suçunu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; hakkındaki adli kontrol tedbirinin (yurt dışına çıkış yasağı) kaldırılmasına; dosyanın bir örneğinin kimliği belirlenemeyen failler hakkında soruşturmaya devam edilmek üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "reasoning": [
+        {
+          "when": { "ref": "cihaz_proven" },
+          "text": "İşlemlerin sanığın telefonundan değil, başka bir cihazdan yapıldığı banka ve iletişim kayıtlarıyla anlaşılmıştır."
+        },
+        {
+          "when": { "ref": "sim_proven" },
+          "text": "Sanığın hattı 4 Kasım sabahı başka bir bayide vekil aracılığıyla değiştirilmiş; sanık aynı akşam operatöre itiraz etmiştir."
+        },
+        {
+          "when": { "flag": "contra_g2" },
+          "text": "Sanığa gönderilen 4.500 TL’yi gönderen hesap kaporadan pay almıştır; ödemenin kiralama bedeli olduğu ispatlanamamıştır."
+        },
+        {
+          "when": { "flag": "ece_durust" },
+          "text": "Sanık kodu “SGK kodu” sanarak okuduğunu açıklamış; bunu doğrulayan not ve yazışma dosyadadır."
+        },
+        {
+          "when": { "flag": "onur_bahsis" },
+          "text": "Bayi çalışanı, SIM değişikliğini belgeleri doğrulamadan ve kendisine bırakılan para karşılığında yaptığını kabul etmiştir."
+        },
+        {
+          "when": { "flag": "contra_n1" },
+          "text": "Sanal ofis sözleşmesinde kiracı gösterilen kişinin sözleşmeyi imzalamadığı ve kimliğinin başka bir sahte belgede de kullanıldığı anlaşılmıştır."
+        },
+        {
+          "when": { "flag": "contra_n2" },
+          "text": "Sahte işverenin görüşmelerinin tanık Necdet Sarı’nın yönettiği binanın dördüncü katından yapıldığı anlaşılmıştır."
+        },
+        {
+          "when": { "flag": "contra_n4" },
+          "text": "Para teslimlerinin yönetime ayrılmış park yerinde yapıldığı tespit edilmiştir."
+        },
+        {
+          "when": { "flag": "contra_o3" },
+          "text": "SIM değişikliğine gelen kişinin sanık ya da vekil gösterilen kişi olmadığı tanık beyanıyla anlaşılmıştır."
+        },
+        {
+          "when": {
+            "any": [
+              { "flag": "obj_g4" },
+              { "flag": "obj_g5" },
+              { "flag": "obj_o3" },
+              { "flag": "obj_n2" },
+              { "flag": "press_g4" }
+            ]
+          },
+          "text": "Tanıkların kişisel kanaat ve tahminleri hükme esas alınmamıştır (CMK 217)."
+        },
+        {
+          "text": "Sanığın suçu işlediğine dair her türlü şüpheden uzak, kesin ve inandırıcı delil elde edilememiştir; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2)."
+        }
+      ],
+      "legalBasis": "CMK 223/2-e; Anayasa 38/4; AİHS 6/2; CMK 135/6, 217, 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 100] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
+        }
+      },
+      "howToReach": "Hattın kopyalandığını ve işlemlerin başka bir cihazdan yapıldığını duruşmada tartıştır; esas savunmada şüphenin sanık lehine olduğunu savun.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“Beraatine.” Ece ayakta duruyordu; dizleri titredi ama oturmadı. Hüküm ayakta dinlenir. Bir yıldır her şeyi ayakta dinlemişti."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLE", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Koridorda biri, bir başkasına fısıldadı; duyulmasın diye değil, duyulsun diye: “Şüpheden yararlandı.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ece duydu. Durmadı. Sevim durdu; dönüp fısıldayana baktı. Dikişçi bakışı: bir sökük gördüğünde iğneye uzanan el."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla merdivenin başında bekliyordu. Bana bir şey söylemedi; Ece’nin omzuna bir kez dokundu, o kadar. Leyla’nın dokunuşu, başkalarının nutku kadar sürer."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Beraat beraattir, kızım. Gerekçesini kimse okumaz. Sen de okuma; çerçevele."
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "tarif_yuzuk" }, { "flag": "arda_yuzuk" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Merdivenlerde, aşağıda, ütülü bir takım elbise yağmurluğunu giyiyordu. Bir limon kolonyası kokusu. Bana dönüp başıyla selam verdi; kibar, acelesiz."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir tarif. Bir yüzük. Bir koku. Hiçbiri bir kâğıt değil. Savcılık “failleri belirsiz” diye yazdı. Belirsiz değil. Kanıtsız.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Gökhan Ateş adliyenin önünde beni bekliyordu. “Dosyayı yeniden açtılar” dedi. “Bu sefer cihazdan başlayacağım. Dört yüz dosyanın hepsine bir daha bakacağım. Belki.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Resmî olarak Kaan’ın kim olduğunu kimse bilmiyordu. Bir ses, bir numara, bir asansör. Savcılık dosyayı “failleri belirsiz” diye yeniden açtı."
+            },
+            { "speaker": "player", "text": "Bazı kapılar açılır, ama ışığı kimse yakmaz.", "style": "thought" }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "YILDIRIM · O AKŞAM", "style": "card", "bg": "ev" },
+            {
+              "speaker": "narrator",
+              "text": "Sevim Hanım mutfakta dikiş makinesinin başındaydı; ama makine çalışmıyordu. Elinde bir kumaş, bir iğne. Dikmiyor, sadece tutuyordu."
+            },
+            { "speaker": "sevim", "text": "Kızım. Bir yıl. Bir yıl sonra ilk kez evde sessizlik kötü değil." },
+            {
+              "speaker": "narrator",
+              "text": "Ece laptopunu açtı. Tabloya yüz kırk dördüncü satırı ekledi. Şirket sütununa bir şey yazmadı; durum sütununa yazdı: “BERAAT.”"
+            },
+            {
+              "speaker": "ece",
+              "text": "Bir de şey… sizin büroda stajyer alıyor musunuz? Ekran görüntüsü almakta çok iyiyim."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’ya soracağım. Muhtemelen tuşlu telefonuyla güler.",
+              "style": "thought",
+              "fx": "fade"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "INDIRIM",
+      "class": "RECHARACTERIZED",
+      "priority": 4,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "any": [{ "flag": "terditli" }, { "flag": "terditli_erken" }] },
+          { "cmp": [{ "score": "final" }, ">=", 3000] }
+        ]
+      },
+      "stamp": "158/4 · HAGB",
+      "stampTone": "amber",
+      "sentence": "1 yıl 8 ay hapis · 62.500 TL adli para · HAGB",
+      "verdictText": "Sanığın katkısının hesabın kullanılmasını sağlayan bilgiyi vermekle sınırlı olduğu kabul edilerek TCK 158/1-f ve 37/1 uyarınca 4 yıl hapis ve 1.500 gün adli para cezası belirlenmesine; 16.7.2026 tarihli 7589 sayılı Kanunla eklenen ve lehe olan TCK 158/4 uyarınca (TCK 7/2) yarı oranında indirilerek 2 yıl hapis ve 750 gün adli para cezasına; TCK 62/1 uyarınca 1 yıl 8 ay hapis ve 625 gün adli para cezasına, günlüğü 100 TL’den 62.500 TL’ye; zararın denetim süresi içinde aylık taksitlerle giderilmesi koşuluyla CMK 231/5, 231/9 uyarınca HÜKMÜN AÇIKLANMASININ GERİ BIRAKILMASINA ve beş yıl denetim süresine; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 231/12, 273/1).",
+      "reasoning": [
+        {
+          "text": "Sanığın, hesaba erişimi sağlayan kodu 4.500 TL karşılığında verdiği kabul edilmiştir; işlemleri bizzat yaptığına ya da kaporadan pay aldığına dair delil yoktur. Katkı, hesaba erişimi sağlayan bilgiyi vermekle sınırlıdır (TCK 158/4)."
+        },
+        {
+          "when": { "any": [{ "flag": "g2_kismi" }, { "flag": "g2_kaan" }] },
+          "text": "Avans açıklamasının “eğitim avansı” olduğu ve işverenle satıcının aynı hattı kullandığı dosyaya yansımış; ancak ödemenin bir kiralama bedeli olmadığı tam olarak gösterilememiştir."
+        },
+        {
+          "when": {
+            "any": [{ "flag": "o1_kismi" }, { "flag": "n3_imei" }, { "flag": "n3_kismi" }, { "flag": "n2_kismi" }]
+          },
+          "text": "Hattın vekil aracılığıyla değiştirildiği ve kopya SIM’in başka bir cihazda olduğu dosyaya girmiş; ancak sanığın bilgisi dışında olduğu kesin olarak ispatlanamamıştır."
+        },
+        {
+          "text": "7589 sayılı Kanunla eklenen TCK 158/4 sanık lehine olduğundan suç tarihinden sonra yürürlüğe girmiş olmasına rağmen uygulanmıştır (TCK 7/2). Aynı katkı için ayrıca TCK 39 indirimi yapılmamıştır."
+        },
+        { "text": "Sanığın sabıkasızlığı ve duruşmadaki tutumu takdiri indirim nedeni sayılmıştır (TCK 62/1)." },
+        {
+          "text": "Hükmolunan ceza iki yılı aşmadığından ve zararın taksitle giderilmesi kabul edildiğinden hükmün açıklanması geri bırakılmıştır (CMK 231/5, 231/6, 231/9)."
+        }
+      ],
+      "legalBasis": "TCK 158/1-f, 158/4, 7/2, 37/1, 52, 62/1; CMK 231/5, 231/6, 231/9",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 85] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
+        }
+      },
+      "howToReach": "Beraat için gereken kayıtları tartıştıramadığında, esas savunmada terditli olarak TCK 158/4’ü ve lehe hükümleri iste.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "…hükmün açıklanmasının geri bırakılmasına." },
+            {
+              "speaker": "narrator",
+              "text": "Ece “geri bırakılmasına” kelimesini anlamadı. Anlamadığı için yüzü bir an aydınlandı. Sonra bana baktı; ben yüzümü düz tutmaya çalıştım."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLE", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Kalemde bir kâğıt imzalattılar: taksit planı. Yetmiş beş bin lira, beş yıl, aylık. Alacaklı: Nurettin Aksoy."
+            },
+            { "speaker": "ece", "text": "Yani ben… onun parasını ödeyeceğim. Beni dolandıranın aldığı parayı." },
+            {
+              "speaker": "player",
+              "text": "Beş yıl içinde başka bir şey olmazsa, bu hüküm hiç kurulmamış sayılacak. Sicilin temiz kalacak."
+            },
+            { "speaker": "ece", "text": "Temiz. Peki." }
+          ]
+        },
+        {
+          "when": { "flag": "nurettin_saygi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Nurettin kâğıdı imzalarken Ece’ye baktı. “Taksitleri aksatma kızım” dedi; sonra bir şey ekledi, sesi alçaldı: “Ben de aksatmam. Ödediğin her ayı sana yazacağım.”"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Kazandığımızı söylediler. Leyla bile “fena değil” dedi. Ece taksit planını imzalarken eli titremedi. Benimki titredi.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Kaan’ın kim olduğunu kimse sormadı artık. Dosya kapandı; kapı açık kaldı. Leyla en sona sakla demişti. Ben sona gelmeden açtım.",
+              "style": "thought",
+              "fx": "fade"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MAHKUMIYET",
+      "class": "CONVICTION",
+      "priority": 5,
+      "when": { "all": [] },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "3 yıl 4 ay hapis · 125.000 TL adli para cezası",
+      "verdictText": "Sanık Ece Yalın’ın TCK 158/1-f ve 37/1 uyarınca 4 yıl hapis ve menfaatin iki katından az olmamak üzere 1.500 gün adli para cezası ile cezalandırılmasına; TCK 62/1 uyarınca 3 yıl 4 ay hapis ve 1.250 gün adli para cezasına; günlüğü 100 TL’den 125.000 TL adli para cezasına; TCK 53’teki hak yoksunluklarına; cezanın süresi nedeniyle erteleme ve hükmün açıklanmasının geri bırakılması koşulları bulunmadığına; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "reasoning": [
+        {
+          "text": "Suçtan elde edilen para sanığın hesabına girmiş ve aynı hesaptan çıkmıştır; hesabın sanığın elinde olmadığı ispatlanamamıştır."
+        },
+        {
+          "when": { "flag": "ece_inkar" },
+          "text": "Sanığın kod paylaşmadığı yönündeki beyanı banka kaydıyla çelişmiştir."
+        },
+        {
+          "when": { "flag": "cokus" },
+          "text": "Savunmanın inandırıcılığı duruşmada çökmüş; mahkeme iddianamedeki anlatımı esas almıştır."
+        },
+        {
+          "text": "Temel ceza alt sınırdan belirlenmiş; sanığın sabıkasızlığı takdiri indirim nedeni sayılmıştır (TCK 62/1). Ceza iki yılı aştığından erteleme ve HAGB uygulanamamıştır (TCK 51/1; CMK 231/5)."
+        }
+      ],
+      "legalBasis": "TCK 158/1-f, 37/1, 52, 53, 62/1; TCK 51/1; CMK 231/5, 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 60] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 60] }, 1000] }
+        }
+      },
+      "howToReach": "Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir.",
+      "epilogue": [
+        {
+          "when": { "flag": "cokus" },
+          "lines": [
+            { "speaker": "narrator", "text": "Salon boşalırken savcı dosyasını topladı. Yanımdan geçerken durdu." },
+            { "speaker": "savci", "text": "İyi bir avukat olacaksınız. Bugün değil." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "…üç yıl dört ay hapis cezası ile cezalandırılmasına." },
+            {
+              "speaker": "narrator",
+              "text": "Ece ayakta kaldı. Hüküm ayakta dinlenir. Bir yıl önce bir ifade odasında oturarak söylediği cümle, bugün ayakta onu bulmuştu."
+            },
+            { "speaker": "narrator", "text": "ADLİYE MERDİVENLERİ · ÖĞLE", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Ece kelepçesiz, tutuksuz, ama bir hükümle merdivenleri indi. Cezası kesinleşmeden infaz yoktu; ama kesinleşme bir takvim meselesiydi, bir umut değil."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yağmur yeniden başlamıştı. Sevim Hanım plastik dosyayı açtı. En üstte hâlâ duruyordu: sarı bir not. “4471 — SGK.” Altında küçük bir gülen yüz."
+            },
+            {
+              "speaker": "sevim",
+              "text": "İstinaf, değil mi? İki hafta. Ben dikişçiyim; bir dikiş sökülürse yeniden dikilir."
+            },
+            {
+              "speaker": "player",
+              "text": "Dört rakam. Bir gülen yüz. Bir kızı kurtarmaya yetmedi. Ben yetmedim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Ve bir yerde, bir binanın dördüncü katında, bir asansör hâlâ “Dördüncü kat” diyor. Kimse kimin indiğine bakmıyor.",
+              "style": "thought",
+              "fx": "fade"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

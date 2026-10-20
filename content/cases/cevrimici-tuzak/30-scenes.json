@@ -1,0 +1,246 @@
+{
+  "scenes": [
+    {
+      "id": "sc_oda",
+      "title": "Ece’nin odası",
+      "description": "Yıldırım, yokuşun ortasında iki odalı bir ev. Masa, lamba, şarjdaki eski telefon.",
+      "width": 344,
+      "height": 300,
+      "image": "img_oda",
+      "objects": [
+        {
+          "id": "ob_lamba",
+          "name": "Masa lambası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 34, "y": 56, "w": 56, "h": 70 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_lamba" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Sert, beyaz bir LED. Laptopun kapağına, sarı notun selofanına, oje şişesine aynı yerden bir yıldız konduruyor. Şişe koyu bordo; Ece’nin başparmağındaki oje köşeden kırık.",
+            "short": "Lamba ve oje"
+          }
+        },
+        {
+          "id": "ob_not",
+          "name": "Sarı not",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 196, "y": 74, "w": 22, "h": 20 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_not" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Monitörün kenarında bir sarı not: “4471 — SGK”. Altında küçük bir gülen yüz. Bir kodu dikte edilirken yazılmış gibi aceleci rakamlar.",
+            "short": "Sarı not"
+          }
+        },
+        {
+          "id": "ob_laptop",
+          "name": "Laptop",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 118, "y": 100, "w": 76, "h": 46 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_tablo" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Açık bir tablo: 143 satır, her başvuru tarihli. 20 Ekim satırında büyük harfler: “NOVA DİJİTAL — OLUMLU!!!” Bir sütunun adı: “Ekran görüntüsü klasörü”.",
+            "short": "Başvuru tablosu"
+          }
+        },
+        {
+          "id": "ob_telefon",
+          "name": "Şarjdaki telefon",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 236, "y": 148, "w": 34, "h": 44 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_simyok" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Ekranı çatlak bir iPhone 8. Fotoğraflarda 4 Kasım 2025, 10.13 tarihli bir ekran görüntüsü: sol üstte “SIM yok”.",
+            "short": "Eski telefon"
+          }
+        },
+        {
+          "id": "ob_cv",
+          "name": "CV yığını",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 16, "y": 126, "w": 62, "h": 22 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_cv" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }
+          ],
+          "feedback": {
+            "text": "Otuz kopya CV. Hepsinde aynı vesikalık, aynı “takım çalışmasına yatkın”. Bir umut yığını; delil değil.",
+            "short": "CV yığını"
+          }
+        },
+        {
+          "id": "ob_serit",
+          "name": "Fotoğraf şeridi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 276, "y": 36, "w": 36, "h": 56 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_vesikalik" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }
+          ],
+          "feedback": {
+            "text": "Fotoğraf kabininden dört kare. Yanındaki genç adamın olduğu yarısı yırtılmış. Kırgınlık her zaman ipucu değildir.",
+            "short": "Yırtık şerit"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_koridor",
+      "title": "OM İş Merkezi · 4. kat",
+      "description": "Halı kokulu, sessiz bir koridor. Kapılar, bir pano, bir asansör.",
+      "width": 344,
+      "height": 300,
+      "image": "img_koridor",
+      "objects": [
+        {
+          "id": "ob_pano",
+          "name": "Kat panosu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 26, "y": 60, "w": 62, "h": 70 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kiraci" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Kat panosu, 2025 baskısı: 401’den 406’ya firma adları. 407’nin satırı boş. Nova Dijital burada yazmıyor.",
+            "short": "Kat panosu"
+          }
+        },
+        {
+          "id": "ob_kapi",
+          "name": "407 numaralı kapı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 140, "y": 70, "w": 54, "h": 22 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_levha" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Yapıştırma bir “NOVA DİJİTAL” etiketi. Köşesi kalkmış; altındaki pirinç levhada iki kelime okunuyor: “YÖNETİM ARŞİVİ”.",
+            "short": "407 kapısı"
+          }
+        },
+        {
+          "id": "ob_asansor",
+          "name": "Asansör",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 268, "y": 56, "w": 64, "h": 144 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_asansor" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Kapı açılırken bir sinyal, sonra kayıtlı bir kadın sesi: “Dördüncü kat.” Sesin tonu, kaydı yapanın sıkıldığını belli ediyor.",
+            "short": "Asansör"
+          }
+        },
+        {
+          "id": "ob_tup",
+          "name": "Yangın tüpü",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 104, "y": 150, "w": 20, "h": 40 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Son kontrol tarihi geçmiş bir yangın tüpü. Binanın bakımı hakkında bir şey söylüyor; davan hakkında değil.",
+            "short": "Yangın tüpü"
+          }
+        },
+        {
+          "id": "ob_saksi",
+          "name": "Saksı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 210, "y": 156, "w": 36, "h": 44 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Plastik bir kauçuk ağacı. Yaprakları tozlu. Toprağında üç izmarit. Kimin olduğu bilinmez; önemi de yok.",
+            "short": "Saksı"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_otopark",
+      "title": "OM İş Merkezi · otopark",
+      "description": "Eksi birinci kat. Islak beton, sarı çizgiler, bir kamera.",
+      "width": 344,
+      "height": 300,
+      "image": "img_otopark",
+      "objects": [
+        {
+          "id": "ob_yonetim",
+          "name": "Köşedeki tabela",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 256, "y": 110, "w": 72, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_yonetim_park" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "En köşede tek bir ayrılmış yer. Sarı tabela: “YÖNETİM — 1”. Kameranın açısı tam bu köşeye varmadan bitiyor.",
+            "short": "Ayrılmış yer"
+          }
+        },
+        {
+          "id": "ob_kamera",
+          "name": "Kamera",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 146, "y": 22, "w": 34, "h": 22 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }],
+          "feedback": {
+            "text": "Bariyere bakan tek kamera. Altında bir etiket: “Kayıtlar 30 gün saklanır.” Bir yıl önceki bir gece çoktan silinmiş.",
+            "short": "Kamera"
+          }
+        },
+        {
+          "id": "ob_bariyer",
+          "name": "Bariyer",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 14, "y": 170, "w": 80, "h": 30 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Plakayı okuyan bir bariyer. Abonelere açılıyor. Kimin girip çıktığını gösterir; ama bir yıl önceyi değil.",
+            "short": "Bariyer"
+          }
+        },
+        {
+          "id": "ob_birikinti",
+          "name": "Su birikintisi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 130, "y": 240, "w": 80, "h": 24 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Tavandaki çatlaktan damlayan suyun yaptığı bir birikinti. İçinde kendi yansıman. Başka bir şey yok.",
+            "short": "Birikinti"
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "id": "img_oda", "kind": "IMAGE", "path": "assets/scenes/ece-oda@4x.png" },
+    { "id": "img_koridor", "kind": "IMAGE", "path": "assets/scenes/om-koridor@4x.png" },
+    { "id": "img_otopark", "kind": "IMAGE", "path": "assets/scenes/om-otopark@4x.png" }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_lamba", "source": { "type": "OBJECT", "id": "ob_lamba" } },
+    { "evidence": "ev_not", "source": { "type": "OBJECT", "id": "ob_not" } },
+    { "evidence": "clue_tablo", "source": { "type": "OBJECT", "id": "ob_laptop" } },
+    { "evidence": "clue_simyok", "source": { "type": "OBJECT", "id": "ob_telefon" } },
+    { "evidence": "clue_cv", "source": { "type": "OBJECT", "id": "ob_cv" } },
+    { "evidence": "clue_vesikalik", "source": { "type": "OBJECT", "id": "ob_serit" } },
+    { "evidence": "clue_kiraci", "source": { "type": "OBJECT", "id": "ob_pano" } },
+    { "evidence": "clue_levha", "source": { "type": "OBJECT", "id": "ob_kapi" } },
+    { "evidence": "clue_asansor", "source": { "type": "OBJECT", "id": "ob_asansor" } },
+    { "evidence": "clue_yonetim_park", "source": { "type": "OBJECT", "id": "ob_yonetim" } }
+  ]
+}

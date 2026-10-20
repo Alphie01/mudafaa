@@ -1,0 +1,501 @@
+{
+  "nodes": [
+    {
+      "id": "INV_DEFNE",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #04 · SORUŞTURMA",
+      "title": "Mudanya · eczane",
+      "background": "hastane",
+      "room": { "label": "MUDANYA · YILDIZ ECZANESİ", "character": "defne" },
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "MUDANYA — YILDIZ ECZANESİ, 13.20", "style": "card", "bg": "hastane" },
+            {
+              "speaker": "narrator",
+              "text": "Eczane deniz kokuyordu, bir de alkollü pamuk. Raflarda vitaminler, bebek mamaları, bir köşede tansiyon aleti. Defne beyaz önlüğüyle tezgâhın arkasındaydı."
+            },
+            {
+              "speaker": "defne",
+              "text": "Bir dakika. Teyzenin ilacını vereyim. … Günde iki kez, tok karnına. Geçmiş olsun."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kadın çıkınca Defne kapının camındaki “Hemen dönerim” levhasını çevirdi. Sesi eczacının sesinden ablanın sesine indi."
+            },
+            { "speaker": "defne", "text": "Buyurun. Ne lazımsa. Ama hızlı olsun; öğleden sonra reçeteler başlar." },
+            {
+              "speaker": "narrator",
+              "text": "Arkasındaki rafta kilitli bir dolap vardı; üstünde kırmızı bir etiket: “Kontrollü ilaçlar.” Defne gözümün nereye gittiğini fark etti."
+            },
+            {
+              "speaker": "defne",
+              "text": "Her kutunun bir kaydı var. Her biri sayılır, imzalanır. Kardeşimin kanına giren şeyin ise kaydı yok. Bunu her sabah dolabı açarken düşünüyorum."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "DF_TEDAVI",
+          "kind": "OPTION",
+          "label": "Kaan’ın tedavi kayıtlarını görebilir miyim?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "defne",
+                  "text": "Hazırladım. Kaan cezaevinden imzalı bir onay yazısı gönderdi; sizin görmeniz için. Başka kimse için değil."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Bir dosya: acil servis epikrizi, 3 Ekim, 02.10. Taşikardi. Madde kullanımı. Altında AMATEM randevu çıktıları; bir de 31 Ekim tarihli bir test: negatif."
+                },
+                {
+                  "speaker": "defne",
+                  "expression": "uzgun",
+                  "text": "O gece onu ben taşıdım. Arabanın arka koltuğunda titriyordu. “Annem bilmesin” dedi. Kalbi duracaktı, “annem bilmesin” dedi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir satıcı acile kaldırılmaz. Ya da kaldırılır; ama tedaviye kendi ayağıyla gitmez. Bu kâğıtlar Kaan’ın kim olduğunu söylüyor. Kim olmadığını değil.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_tedavi" },
+            { "type": "DISCOVER", "evidence": "clue_tedavi" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ]
+        },
+        {
+          "id": "DF_GUNLUK",
+          "kind": "OPTION",
+          "label": "Kaan’ın günlük hayatını anlatır mısınız? En sıradan hâliyle.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "defne",
+                  "text": "Sıradan hâli mi? Öğlene kadar uyur. Kafeye gider. Kapanışta kasayı kapatır, eve yürür. Ehliyeti yok; bisiklet bile süremez, babam öğretemeden…"
+                },
+                {
+                  "speaker": "defne",
+                  "text": "Ayakkabısını ben alırım, 41. Montu M. Geçen kış bir motor sürücüsü montu almak istedi, “havalı” diye. Kollarından taştı. Güldük."
+                },
+                {
+                  "speaker": "defne",
+                  "text": "Bir de şu var: kokuya hassastır. Motor egzozundan midesi bulanır. Kuryelerin durduğu köşeden geçmez, karşıya geçer. Saçma bir ayrıntı, biliyorum."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Ehliyet yok, motor yok, 41 numara. Küçük ayrıntılar. Bu dosyada küçük ayrıntılar büyük kapıları açacak.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kaan_olcu" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ]
+        },
+        {
+          "id": "DF_PARA",
+          "kind": "OPTION",
+          "label": "Kaan’ın parası nasıldı? Borcu, birikimi?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "defne",
+                  "expression": "kizgin",
+                  "text": "Birikim mi? Kredi kartının asgarisini ben ödüyorum. Geçen ay telefon faturası için benden beş yüz lira istedi."
+                },
+                {
+                  "speaker": "defne",
+                  "text": "Arka odada sekiz bin yedi yüz elli lira bulmuşlar. O para Kaan’da olsa kartını öderdi. Bana borç sormazdı."
+                },
+                {
+                  "speaker": "defne",
+                  "text": "Bir satıcı tanıdım ben, eczanede. Reçetesiz ilaç almaya gelirdi. Saati altın, telefonu yeni, ayakkabısı pahalı. Kaan’ın ayakkabısını ben alıyorum."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Satıcıların parası olur. Kullanıcıların borcu. Basit bir muhasebe; ama mahkemeler muhasebeyi sever.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_para", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "DF_BARIS",
+          "kind": "OPTION",
+          "label": "Barış hakkında ne biliyorsunuz?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "defne",
+                  "text": "Hiç görmedim. Bir kere eve gittiğimde arka odanın kapısı kilitliydi; Kaan “Barış uyuyor, gece çalışıyor” dedi."
+                },
+                {
+                  "speaker": "defne",
+                  "text": "Bir kere de Kaan’ın telefonu çaldı, hoparlördeydi. Kalın bir ses “kardeş, kombiyi hallettim” dedi. Bu kadar."
+                },
+                {
+                  "speaker": "defne",
+                  "text": "Polis “yok” diyor. Ben de bilmiyorum. Bir sesten başka kanıtım yok. Ama bir ses, bir hayalet değildir, değil mi?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir ses, bir hayalet değildir. Ama mahkemede bir ses, bir delil de değildir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay"
+        },
+        {
+          "id": "DF_HAKIM",
+          "kind": "OPTION",
+          "label": "Sizce Kaan mahkemede kullandığını söylemeli mi?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "defne",
+                  "expression": "uzgun",
+                  "text": "Ben mi? Ben eczacıyım. Bir insanın kimya yüzünden hasta olabileceğini bilirim. Ama annem bilmez."
+                },
+                {
+                  "speaker": "defne",
+                  "text": "Kaan karar versin. Bu sefer ben onun yerine karar vermeyeceğim. Hep ben verdim; bakın nereye geldik."
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Bu soru Defne’nin değil, Kaan’ın kararıdır; yine de ailenin kaygısını bilmek savunmayı hazırlarken işe yarar."
+          }
+        },
+        { "id": "DF_BITIR", "kind": "CONTINUE", "label": "Teşekkür et ve çık", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_NESRIN",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #04 · SORUŞTURMA",
+      "title": "Zemin kat · Daire 1",
+      "background": "ev",
+      "room": { "label": "IHLAMUR SOKAK 14 · DAİRE 1", "character": "nesrin" },
+      "onFirstEnter": [{ "type": "MEET", "character": "nesrin" }],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "IHLAMUR SOKAK 14 — DAİRE 1, NESRİN UYSAL", "style": "card", "bg": "ev" },
+            {
+              "speaker": "narrator",
+              "text": "Kapıyı zincirini çıkarmadan açtı. Gözlüğünün üstünden baktı; aşağıdan iki kedi baktı."
+            },
+            {
+              "speaker": "nesrin",
+              "text": "Avukat mısın evladım? Kaan’ın avukatı? … Gel. Ayakkabılarını çıkarma, yeni sildim ama, neyse, çıkarma."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Salonda bir dikiş makinesi, üstünde bir dantel. Duvarda bıyıklı bir adamın fotoğrafı. Çaydanlık zaten ocaktaydı."
+            },
+            {
+              "speaker": "nesrin",
+              "text": "Rahmetli derdi ki: “Nesrin, apartman sahibi olmak kiracıların bütün dertlerini satın almaktır.” Haklıymış. Şekerli mi?"
+            },
+            {
+              "speaker": "nesrin",
+              "text": "Polise her şeyi söyledim ben. İmzamı da attım. Ama kimse bana bir şey sormadı ki. Sadece “imzala teyze” dediler."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kedilerden biri kucağıma atladı, beni kokladı, beğenmedi, indi. Nesrin Hanım güldü; ilk kez."
+            },
+            {
+              "speaker": "nesrin",
+              "text": "Pamuk seçicidir. Polisleri hiç sevmedi. Kaan’ı severdi; Barış’ı da severdi. Tolga’yı hiç sevmedi. Kediler bilir evladım."
+            },
+            {
+              "speaker": "player",
+              "text": "Kedilerin bildiğini mahkemeye anlatamam. Ama bir kadının kedileri kimin sevdiğini bilecek kadar dikkatli olduğunu anlatabilirim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "NS_ACIK",
+          "kind": "OPTION",
+          "label": "O sabahı sizden dinlemek isterim. Ne gördünüz, ne duydunuz?",
+          "visibleWhen": { "not": { "any": [{ "chosen": "NS_YONLENDIR" }] } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "nesrin",
+                  "text": "Sabah namazına kalkmıştım. Altıyı geçiyordu. Kedilere mama koyarken pencereden baktım; sokakta üç araba, ışıkları sönük."
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Sonra yukarıda bir gürültü. Bir “çat”. Ben bir şey olmuş sandım, kalorifer borusu sandım."
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Sonra o kurye oğlan geldi motoruyla. Barış. Hep köşeye park eder, zinciri korkuluğa dolar. Bu sefer köşede durdu, arabalara baktı, motoru çevirdi, gitti."
+                },
+                { "speaker": "player", "text": "Saat kaçtı, hatırlıyor musunuz?" },
+                {
+                  "speaker": "nesrin",
+                  "text": "Ezan okunmuş, ben namazı kılmıştım. Altı yirmi, yirmi beş. Ondan sonra polis kapımı çaldı, “teyze, tanık lazım, yukarı gel” dedi."
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Ben çıktığımda arka odanın kapısı açıktı zaten. Kilit yerdeydi, ikiye bölünmüş. Bana “imzala” dediler, imzaladım. Saati de ben yazdım: altı kırk. Hep saati yazarım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Altı kırk. Arama altı beşte başlamış. Tanık geldiğinde kapı çoktan kırılmış. Ve altı yirmide bir kurye köşeden dönmüş.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_nesrin_moto" },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 60 },
+            { "type": "VAR", "var": "nesrin_saat", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Açık uçlu soru: tanığın kendi gözlemini kendi sözleriyle almak, beyanın değerini korur.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "NS_YONLENDIR",
+          "kind": "OPTION",
+          "label": "O sabah Barış’ı gördünüz, değil mi? Polisi görünce motoruyla kaçtı.",
+          "visibleWhen": { "not": { "any": [{ "chosen": "NS_ACIK" }] } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "nesrin",
+                  "expression": "saskin",
+                  "text": "Barış mı? Kaçtı mı? … Galiba. Evet, galiba öyleydi evladım. Bir motor vardı. Kaçtı diyorsan kaçmıştır."
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Ben imzaladım ama. Saati yazdım. Altı kırk. Kapı açıktı ben çıktığımda."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Galiba.” Bir tanığın en tehlikeli kelimesi. Cevabı ben verdim, o onayladı. Bir mahkeme salonunda bu fark, bir tanığı ikiye böler.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_nesrin_moto" },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -40 },
+            { "type": "VAR", "var": "nesrin_telkin", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Yönlendirici soru: cevabı tanığa sen verdin. Tanığın beyanı artık senin sözlerinle kirlendi; karşı taraf bunu duruşmada sorar (CMK 201/1’in ruhu, TBB Meslek Kuralları).",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "NS_DEFTER",
+          "kind": "OPTION",
+          "label": "Kirayı nasıl alıyordunuz? Arka odada kimler kaldı?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "nesrin",
+                  "text": "Kirayı Kaan getirir, elden. Ben deftere yazarım. Vergiden korkuyorum evladım, ama defter tutarım. Rahmetli muhasebeciydi."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Dikiş makinesinin çekmecesinden kareli bir defter çıkardı. Sayfalar el yazısıyla doluydu: tarihler, tutarlar, küçük notlar."
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Bak: “Eylül başı, Tolga çıkarıldı, depozito borca sayıldı.” Bir sayfa sonra: “20 Eylül, Barış, kurye oğlan, arka oda, Kaan’la paylaşıyor; kira Kaan’dan.”"
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Barış iyi çocuktu. Pazar filelerimi yukarı taşırdı. “Teyze, ben İzmirliyim, annem de senin gibi kedi besler” derdi."
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Barış elden verirdi kirayı, Kaan’a. Kaan bana getirirdi, yuvarlak hesap. Hep yirmisinde. Bir kere yirmi birinde getirdi; özür diledi. Böyle çocuklar."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir hayaletin kira kaydı. El yazısıyla, tarihli. Savcılık bu kapıyı hiç çalmamış.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kira_defteri" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ]
+        },
+        {
+          "id": "NS_TOLGA",
+          "kind": "OPTION",
+          "label": "Tolga kimdi?",
+          "visibleWhen": { "any": [{ "chosen": "NS_DEFTER" }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "nesrin",
+                  "text": "Ah, o. Kırmızı bereli. Kirayı geciktirirdi, gece yarısı müzik açardı. Kaan çıkardı onu; ben de rahatladım, Allah affetsin."
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Anahtarı vermedi. “Kaybettim” dedi. Kayıp anahtar olur mu, olur. Ama bu kaybolmadı bence."
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Ekimde, kasımda birkaç kere gördüm onu sokakta. Gece. Kapının önünde birini bekler gibiydi. Kimi beklediğini bilmem; ben perdeyi kapattım."
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Bir gece kapıyı çaldı bile. “Teyze, Barış yukarıda mı?” dedi. Gece yarısı. Ben “git oğlum, saat kaç” dedim. Gitti."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Çıkarıldığı evin önünde, geceleri, birini bekleyen bir eski kiracı. Kimi bekliyordu?",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_tolga_n", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "NS_TANIK",
+          "kind": "OPTION",
+          "label": "Bunları mahkemede de anlatır mısınız? Gördüğünüz gibi, olduğu gibi.",
+          "visibleWhen": { "all": [{ "not": { "flag": "nesrin_kus" } }, { "not": { "flag": "nesrin_razi" } }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "nesrin",
+                  "expression": "saskin",
+                  "text": "Mahkemede mi? Ben hayatımda bir kere mahkemeye gittim, rahmetlinin miras işi. Elim ayağım titredi."
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Ama Kaan iyi çocuktur. Çayını şekersiz içer, borcunu geciktirmez. Ben gördüğümü söylerim. Gördüğümü, fazlasını değil."
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Kediler ne olacak? Komşuya bırakırım. Defterimi de getiririm. Rahmetli “kayıt, insandan uzun yaşar” derdi."
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 40 },
+            { "type": "VAR", "var": "nesrin_razi", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "NS_BASKI",
+          "kind": "OPTION",
+          "label": "Gelmezseniz mahkeme sizi zorla getirtir, bilin.",
+          "visibleWhen": { "all": [{ "not": { "flag": "nesrin_kus" } }, { "not": { "flag": "nesrin_razi" } }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "nesrin",
+                  "expression": "kizgin",
+                  "text": "Zorla mı? Ben yetmiş yaşında kadınım evladım. Beni zorla mı getirteceksin?"
+                },
+                {
+                  "speaker": "nesrin",
+                  "expression": "kizgin",
+                  "text": "Polisler de öyle konuştu. “İmzala teyze.” Herkes bana bir şey yaptırıyor. Kalk git şimdi. Kediler acıktı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kapı arkamdan zincirlendi. Bir tanığı kaybetmenin en kısa yolu, ona elinde ne olduğunu hatırlatmaktır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -40 },
+            { "type": "VAR", "var": "nesrin_kus", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Tanığı korkutmak, onu karşı tarafa iter. Mahkemenin zorla getirme yetkisi (CMK 44) bir tehdit cümlesi değildir; tanıkla görüşmede baskı kurulmaz.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "NS_BITIR",
+          "kind": "CONTINUE",
+          "label": "Çay için teşekkür et ve çık",
+          "role": "BACK",
+          "next": "$return"
+        }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "ev_tedavi", "source": { "type": "CHOICE", "id": "DF_TEDAVI" } },
+    { "evidence": "clue_tedavi", "source": { "type": "CHOICE", "id": "DF_TEDAVI" } },
+    { "evidence": "clue_kaan_olcu", "source": { "type": "CHOICE", "id": "DF_GUNLUK" } },
+    { "evidence": "clue_nesrin_moto", "source": { "type": "CHOICE", "id": "NS_ACIK" } },
+    { "evidence": "clue_nesrin_moto", "source": { "type": "CHOICE", "id": "NS_YONLENDIR" } },
+    { "evidence": "clue_kira_defteri", "source": { "type": "CHOICE", "id": "NS_DEFTER" } }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "scenes": [
+    {
+      "id": "sc_arka",
+      "title": "Arka oda · 11 Kasım olay yeri fotoğrafları",
+      "description": "Kolluğun arama sırasında çektiği fotoğraflar: arka odanın içi ve kapı eşiği.",
+      "width": 344,
+      "height": 300,
+      "image": "img_arka",
+      "objects": [
+        {
+          "id": "ob_kilit",
+          "name": "Kapı eşiği",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 272, "y": 236, "w": 40, "h": 26 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kilit" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Eşiğin dibinde çelik halkası kesilmiş bir asma kilit. Kesik kilit, kilitli bir kapı demektir. Kilitli kapı, başkasının odası.",
+            "short": "Kesik asma kilit"
+          }
+        },
+        {
+          "id": "ob_mont",
+          "name": "Sandalye",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 146, "y": 118, "w": 56, "h": 74 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_mont" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Sandalyenin sırtında reflektörlü, logolu bir kurye montu. Etiket: XL. Kaan’ın montu olsa içinde kaybolurdu.",
+            "short": "XL kurye montu"
+          }
+        },
+        {
+          "id": "ob_zincir",
+          "name": "Yatağın altı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 196, "y": 266, "w": 70, "h": 20 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_zincir" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Flaşın yakaladığı bir parıltı: yatağın altında kalın bir motosiklet zincir kilidi. Duvarda boş bir kask askısı.",
+            "short": "Zincir kilit, kask askısı"
+          }
+        },
+        {
+          "id": "ob_dolap",
+          "name": "Dolap",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 40, "w": 90, "h": 150 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Dolabın kapakları açık, rafları boş. Ayakkabı kutusu çoktan emanete gitmiş. Fotoğraf sadece yokluğu gösteriyor.",
+            "short": "Önemsiz"
+          }
+        },
+        {
+          "id": "ob_poster",
+          "name": "Duvardaki poster",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 126, "y": 36, "w": 60, "h": 50 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Bir futbol takımının eski sezon posteri. Köşesi bantla tutturulmuş. Bir zevki gösteriyor, bir kimliği değil.",
+            "short": "Önemsiz"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_on",
+      "title": "Ön oda ve koridor · 11 Kasım olay yeri fotoğrafları",
+      "description": "Kaan’ın uyandırıldığı ön oda, giriş ve koridor.",
+      "width": 344,
+      "height": 300,
+      "image": "img_on",
+      "objects": [
+        {
+          "id": "ob_yatak",
+          "name": "Dağınık yatak",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 16, "y": 196, "w": 124, "h": 64 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_on_oda" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Dağınık bir yatak, yarı açık bir iktisat kitabı, kulaklık, gözlük kılıfı ve bir öğrenci kartı: Kaan Yıldız. Tutanak da onu burada uyurken bulduklarını yazıyor.",
+            "short": "Kaan’ın yatağı"
+          }
+        },
+        {
+          "id": "ob_randevu",
+          "name": "Masadaki kart",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 176, "y": 136, "w": 30, "h": 16 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_randevu" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Bardak altlığının yanında bir randevu kartı. AMATEM, ayaktan tedavi, 14 Kasım Perşembe 10.30. Baskından üç gün sonrası.",
+            "short": "Randevu kartı"
+          }
+        },
+        {
+          "id": "ob_sekerlik",
+          "name": "Koridor rafı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 262, "y": 104, "w": 34, "h": 34 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_sekerlik" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Şekerlik. Ama mutfakta değil; koridordaki küçük rafta, arka oda kapısına iki adım. Tutanak “mutfakta şekerlikte” diyor. Fotoğraf başka bir yer gösteriyor.",
+            "short": "Şekerliğin yeri"
+          }
+        },
+        {
+          "id": "ob_ayakkabi",
+          "name": "Ayakkabılık",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 246, "y": 232, "w": 84, "h": 48 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ayakkabi" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Ayakkabılıkta iki dünya: temiz, 41 numara bir spor ayakkabı ve çamurlu, 45 numara, burnu çelik bir kurye botu.",
+            "short": "41 ve 45 numara"
+          }
+        },
+        {
+          "id": "ob_gitar",
+          "name": "Duvardaki gitar",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 100, "y": 56, "w": 30, "h": 110 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Teli kopmuş bir gitar. Bir zamanlar çalınmış, sonra unutulmuş. Kaan hakkında bir şey söylüyor, dosya hakkında değil.",
+            "short": "Önemsiz"
+          }
+        },
+        {
+          "id": "ob_kultabla",
+          "name": "Kül tablası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 160, "w": 22, "h": 14 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Masada boş bir kül tablası. Bazen bir kül tablası sadece bir kül tablasıdır.",
+            "short": "Önemsiz"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_bina",
+      "title": "Ihlamur Sokak 14 · bina girişi",
+      "description": "Binanın girişi, posta kutuları ve köşedeki park yeri; bizzat, ocak sabahı.",
+      "width": 344,
+      "height": 300,
+      "image": "img_bina",
+      "objects": [
+        {
+          "id": "ob_posta",
+          "name": "Posta kutuları",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 30, "y": 126, "w": 42, "h": 30 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_posta" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Daire 7’nin posta kutusu. Matbu etikette “YILDIZ”. Altına keçeli kalemle, eğri harflerle bir soyadı daha eklenmiş: “DEMİREL”.",
+            "short": "İki soyadı"
+          }
+        },
+        {
+          "id": "ob_yag",
+          "name": "Bina köşesi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 220, "y": 250, "w": 92, "h": 30 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_yag" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Köşede, yağmura direnen koyu bir yağ lekesi; demir korkulukta zincir sürtmesinden parlamış bir halka izi. Burada uzun süre bir motosiklet park edilmiş.",
+            "short": "Motor park izi"
+          }
+        },
+        {
+          "id": "ob_salter",
+          "name": "Merdiven otomatiği",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 100, "w": 18, "h": 22 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Merdiven ışığının otomatiği. Basınca on beş saniye yanıyor. Bir bina hakkında çok şey söyler; bu dava hakkında değil.",
+            "short": "Önemsiz"
+          }
+        },
+        {
+          "id": "ob_izmarit",
+          "name": "İzmaritler",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 136, "y": 262, "w": 44, "h": 20 } }],
+          "maxUses": 1,
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Kapının önünde ıslak izmaritler. Görükle’nin her kapısında var. İki ay sonra kimseye ait değiller.",
+            "short": "Önemsiz"
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "id": "img_arka", "kind": "IMAGE", "path": "assets/scenes/arka-oda@4x.png" },
+    { "id": "img_on", "kind": "IMAGE", "path": "assets/scenes/on-oda@4x.png" },
+    { "id": "img_bina", "kind": "IMAGE", "path": "assets/scenes/bina@4x.png" }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_kilit", "source": { "type": "OBJECT", "id": "ob_kilit" } },
+    { "evidence": "clue_mont", "source": { "type": "OBJECT", "id": "ob_mont" } },
+    { "evidence": "clue_zincir", "source": { "type": "OBJECT", "id": "ob_zincir" } },
+    { "evidence": "clue_on_oda", "source": { "type": "OBJECT", "id": "ob_yatak" } },
+    { "evidence": "clue_randevu", "source": { "type": "OBJECT", "id": "ob_randevu" } },
+    { "evidence": "clue_sekerlik", "source": { "type": "OBJECT", "id": "ob_sekerlik" } },
+    { "evidence": "clue_ayakkabi", "source": { "type": "OBJECT", "id": "ob_ayakkabi" } },
+    { "evidence": "clue_posta", "source": { "type": "OBJECT", "id": "ob_posta" } },
+    { "evidence": "clue_yag", "source": { "type": "OBJECT", "id": "ob_yag" } }
+  ]
+}

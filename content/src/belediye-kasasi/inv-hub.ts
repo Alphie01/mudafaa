@@ -318,6 +318,10 @@ const gece = [
         `~ Bir yönerge ve onu çiğneten bir not. Şifre bir insan değil; bir zarfın içindeki bir satır. Zarf kimin çekmecesindeydi?`,
       ),
       W(flag('fact_zarf'), `~ Orhan şifresini verdi. Bile bile. Bunu kürsüde ondan önce kimse söylememeli.`),
+      W(
+        flag('fact_yonerge_orhan'),
+        `~ Altı çizili bir kelime ve bir gözlük. Orhan yönergeyi ezbere biliyor; ama o kelimeyi söylemedi. Bir kâğıt eksik.`,
+      ),
       O(`~ “Şifre kişiye özeldir efendim.” İlk gece bunu söylerken gözlüğünü elinde tutuyordu. Neden?`),
     ],
   }),

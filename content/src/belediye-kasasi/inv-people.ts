@@ -237,6 +237,7 @@ orhan: Yönergeyi biliyordum, evet. Bile bile verdim. Şimdi bunu da mı mahkeme
       cost: costOf('min', 2),
       visibleWhen: all(has('clue_yonerge'), not(has('ev_talimat'))),
       score: { SORGULAMA: 10 },
+      effects: [raise('fact_yonerge_orhan')],
       tones: {
         soft: {
           prompt: 'Panodaki yönergede bir kelimenin altı çizili. Kim çizmiş olabilir?',
@@ -578,6 +579,7 @@ export const invPeople: CasePart = {
     'fact_ercan_teslim',
     'ercan_zarf_inkar',
     'fact_melek_orhan',
+    'fact_yonerge_orhan',
   ),
   nodes: [gorusmeGiris, gorusme, tHayri, tMelek, tErcan],
 };

@@ -15,7 +15,8 @@
     { "id": "ercan_sistem", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_ercan_teslim", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "ercan_zarf_inkar", "type": "bool", "initial": false, "visibility": "HIDDEN" },
-    { "id": "fact_melek_orhan", "type": "bool", "initial": false, "visibility": "HIDDEN" }
+    { "id": "fact_melek_orhan", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_yonerge_orhan", "type": "bool", "initial": false, "visibility": "HIDDEN" }
   ],
   "nodes": [
     {
@@ -618,7 +619,10 @@
               ]
             }
           ],
-          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 10 },
+            { "type": "VAR", "var": "fact_yonerge_orhan", "op": "set", "value": true }
+          ]
         },
         {
           "id": "TP_9OCAK",

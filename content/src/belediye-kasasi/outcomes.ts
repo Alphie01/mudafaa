@@ -286,6 +286,7 @@ leyla: Başsavcılık o dosyayı ya açar ya rafta bırakır. Senin elindeki her
           'Sanık, kurum yönergesine aykırı olarak şifresini zarf içinde müdürlüğe teslim etmiş ve kamu zararının doğmasına imkân vermiştir.',
         ),
         because('Eylem TCK 257/2 kapsamında değerlendirilmiş; sanığa CMK 226 uyarınca ek savunma hakkı tanınmıştır.'),
+        because('Sanık ek savunmada şifresini vermekle ihmal gösterdiğini kabul etmiştir.', flag('ihmal_kabul')),
         because(
           'Kamu zararı giderilmediğinden hükmün açıklanmasının geri bırakılması koşulları oluşmamıştır (CMK 231/6-c); sanığın sabıkasız geçmişi gözetilerek takdiri indirim ve erteleme uygulanmıştır.',
         ),

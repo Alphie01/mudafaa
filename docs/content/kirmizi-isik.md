@@ -29,7 +29,7 @@ kırıkları tutanağa girer, emanete alınmaz → 14 Kasım sabah panelvan fatu
 | Soğuk açılış | PR_00, PR_01, PR_02 | İsimsiz sesler (SÜRÜCÜ, TELEFONDAKİ SES, BİR POLİS, BİR ADAM, BİR KADIN): araç içi, kavşak, eşin gecesi |
 | Bölüm 1 · Dosya | BR_00 (+BR_00B), BR_01, BR_01B, BR_01C, BR_02, INV_SABAH | Gül büroda (3 seçim), ceza aralığı (A–D), altı kâğıt + bilirkişi dersi (seçim), kusur sorusu (A–D), dosya ekranı + strateji, kavşak sabahı |
 | Bölüm 2 · Soruşturma | INV_HUB (4 gün × 4 EP; Leyla günde bir, 0 EP; tahta 0 EP) | 3 sahne araması, 5 belge, dilekçe, tahta, Volkan (2 görüşme), 6 tanık; akşamlar INV_AKSAM1/2S/2L/3; INV_GECE_1…4 + INV_GECE |
-| Bölüm 3 · 2. celse | H1_00K, H1_00, H1_00B, H1_01, H1_02Q, H1_03, H1_04, H1_04V, H1_05, H1_05R, H1_06, H1_07, H1_08 | Koridor seçimi, açılış, iddianame, savunma, sanığa sorular, telkin itirazı, katılan ve sanığın diyeceği, taksicinin çapraz sorgusu (N1–N5), kısa ara, CMK 67/5 itirazı, ara karar + adli kontrol, merdivenler |
+| Bölüm 3 · 2. celse | H1_00K, H1_00, H1_00B, H1_01, H1_02Q, H1_03, H1_04, H1_04V, H1_05, H1_05R, H1_06, H1_06T…T6, H1_07, H1_08 | Koridor seçimi, açılış, iddianame, savunma, sanığa sorular, telkin itirazı, katılan ve sanığın diyeceği, taksicinin çapraz sorgusu (N1–N5), kısa ara, CMK 67/5 itirazı (kabulse bulunan eksikler H1_06T zincirinde tek tek sayılır; soyutsa gerekçeli ret), ara karar + adli kontrol, merdivenler |
 | Bölüm 4 · Ara | ARA_GIRIS_1/2, ARA_GIRIS, ARA_HUB (2 gün × 4 EP, yığınsız) | ARA_EDR, ARA_HEYET (belge), ARA_VOLKAN, ARA_AYTEN, ARA_SERKAN, ARA_HAMDI, ARA_NECATI, ARA_NALAN, ARA_SANAYI, ARA_SUC; ARA_CIKARIM, ARA_LEYLA; ARA_DAY_END → ARA_AKSAM; ARA_SON_1…3 → ARA_SON |
 | Bölüm 5 · 3. celse | T_00Y, T_00K, T_00G1/2, T_00, T_00S, T_01, T_02, T_03, T_04, T_05, T_05D, T_05N, T_06, T_07, T_08, T_09P, T_09, T_09R, T_10, T_11 | Sabah, koridor, savcılık yazısı/dilekçeler, sanığın diyeceği, teknisyen (TH1–TH4), telkin itirazı, bilirkişi (C1–C4), heyet başkanı, polis, delillerin tartışılması, mütalaa + cevap, dayanaklar, esas savunma, cevaplar, son söz |
 | Karar | R_KARAR + sonuç başına `epilogue`; T_COKUS (♥0) | |
@@ -47,6 +47,7 @@ Celseler: `cs_2` (2. celse) ve `cs_3` (3. celse). Asliye ceza, tek hâkim; kürs
 | Olay yeri araması | INV_ARAMA, INV_ARAMA2, INV_ARAMA3 | büyüteç 6/5/6; dikkat dağıtıcı nesne −10 |
 | Belge incelemesi | INV_RAPOR, INV_TUTANAK, INV_OTOPSI, INV_BUFE, INV_SINYAL, ARA_EDR, ARA_HEYET | 7 belge, alet × satır; lens (büfe kare kare) |
 | Çıkarım tahtası | INV_CIKARIM (6 tarif), ARA_CIKARIM (+2 tarif) | çeldiriciler: karanfiller, yağmur, yorgunluk, boya (INV'de), sırt (INV'de) |
+| Rapora itiraz | H1_06 R_ITIRAZ → H1_06T…T6 | `itiraz_dayanak` = en az 3 somut eksik (rapor_plan/iz/kopya/cam/yorum, ded_fren/cam/yukseklik/ariza), en az biri saha çıkarımı; `itiraz_guclu` ≥ 5 eksik (+150, +1 ikna). Soyut itiraz: −40, ♥−1, gerekçeli ret |
 | Tanık ifadesi | H1_05 (Necati), T_03 (Hamdi), T_05 (bilirkişi) | bastır / sun / itiraz (g_kanaat, g_yorum) |
 | A–D kararları | BR_01, BR_01C, H1_03, H1_06, H1_07, T_02, T_08, T_09 … | |
 | Gecikmeli delil | ev_sinyal_log, clue_uedas, ev_edr, ev_atk, ev_boya, ev_heyet, ev_savcilik, ev_far_parca | |
@@ -70,14 +71,14 @@ Celseler: `cs_2` (2. celse) ve `cs_3` (3. celse). Asliye ceza, tek hâkim; kürs
 | ev_bufe; clue_titreme, clue_tek_stop | EVIDENCE/CLUE | Sevim (gönüllü teslim) → büfe belgesi | ded_saat, ded_arac | ev_bufe evet |
 | ev_sinyal_log | EVIDENCE | DIL_SINYAL → gün sonu | N2 kısmi, TH1/TH2/TH4B, C1 | evet |
 | clue_uedas | CLUE | DIL_UEDAS → gün sonu | ded_saat | — |
-| ev_edr | EVIDENCE | DIL_EDR ∨ R_ITIRAZ → ARA girişi | C2, C4 kısmi, ARG_EDR, D_HIZ | evet |
-| ev_atk | EVIDENCE (combinable) | DIL_ATK ∨ R_ITIRAZ → ARA girişi | ded_olum, C4, ARG_ATK | evet |
-| ev_boya | EVIDENCE (combinable) | DIL_BOYA ∨ (R_ITIRAZ ∧ clue_boya) → ARA girişi | ded_arac, C3 kısmi | evet |
-| ev_heyet | EVIDENCE | R_ITIRAZ → ARA 1. gün sonu | C1; tali kusur paragrafı (contra_heyet) | evet |
+| ev_edr | EVIDENCE | DIL_EDR ∨ kabul edilen R_ITIRAZ (`h1_itiraz`) → ARA girişi | C2, C4 kısmi, ARG_EDR, D_HIZ | evet |
+| ev_atk | EVIDENCE (combinable) | DIL_ATK ∨ kabul edilen R_ITIRAZ → ARA girişi | ded_olum, C4, ARG_ATK | evet |
+| ev_boya | EVIDENCE (combinable) | DIL_BOYA ∨ (kabul edilen R_ITIRAZ ∧ clue_boya) → ARA girişi | ded_arac, C3 kısmi | evet |
+| ev_heyet | EVIDENCE | kabul edilen R_ITIRAZ → ARA 1. gün sonu | C1; tali kusur paragrafı (contra_heyet) | evet |
 | ev_sesli | EVIDENCE | ARA_SERKAN (saygı yolu, Serkan'ın kendi teslimi) | TH4, C1 | evet |
 | ev_far_parca | EVIDENCE | ARA_AYTEN (AY_SAVCI) → 3. celse | C3 | evet |
 | ev_savcilik | EVIDENCE | ARA_SUC (SU_DAYANAKLI, ded_arac gerekir; garaj yoksa) → 3. celse | C4, 223/2-b | evet |
-| ev_garaj | EVIDENCE (EXCLUDABLE) | ARA_SANAYI (SA_GARAJ, etik ihlal) | PS_GARAJ cezası; ETIK sonu | evet |
+| ev_garaj | EVIDENCE (EXCLUDABLE) | ARA_SANAYI (SA_GARAJ, etik ihlal) | PS_GARAJ cezası; hükme esas alınmaz; ETIK sonu ya da disiplin epilogu | evet |
 
 **Çıkarımlar:** ded_fren (fren + ABS), ded_cam (cam + sağlam farlar), ded_yukseklik (56 cm + 44 cm), ded_goremez (sinyalin sırtı +
 tanığın yeri), ded_ariza (kabin etiketi + iş emri), ded_saat (titreme + UEDAŞ), ded_olum (ATK + sırt sıyrıkları, ara),
@@ -112,11 +113,15 @@ başkanı bu paragraftan geri adım atar.
 
 | Öncelik | Kimlik | Sınıf | Koşul | Ceza | XP |
 |---|---|---|---|---|---|
-| 0 | ETIK | CONVICTION | `etik_garaj` (kapalı garaja izinsiz giriş) | 3 yıl 9 ay, disiplin | 0 + etik kartı |
 | 1 | BERAAT_B | ACQUITTAL (223/2-b) | ¬çöküş ∧ `gercek_neden` (T09_B: ded_olum ∧ ikinci_arac ∧ ev_savcilik ∧ ¬garaj) ∧ kusur_yok ∧ ikna ≥ 8 ∧ final ≥ 9.500 | yok | 1,2 |
-| 2 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ (`supheden` ∨ `gercek_neden`) ∧ kusur_yok ∧ findings (≥5 çelişki) ∧ ikna ≥ 6 ∧ final ≥ 9.000 | yok | 1,0 |
-| 3 | INDIRIM | RECHARACTERIZED | ¬çöküş ∧ (`arg_basit` ∨ `mutalaa_basit`) ∧ final ≥ 3.000 | 1 yıl 8 ay → 600 gün APC, ehliyet 6 ay | 0,85 |
-| 4 | MAHKUMIYET | CONVICTION | her zaman (çöküş dahil) | 3 yıl 9 ay, ehliyet 2 yıl | 0,6 |
+| 2 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ (`supheden` ∨ `gercek_neden` ∨ `arg_atk`) ∧ kusur_yok ∧ findings (≥5 çelişki) ∧ ikna ≥ 6 ∧ final ≥ 9.000 | yok | 1,0 |
+| 3 | INDIRIM | RECHARACTERIZED | ¬çöküş ∧ ¬`arg_atk` ∧ `inv_derin` (≥2 saha çıkarımı) ∧ (`mutalaa_basit` ∨ (`arg_basit` ∧ (kusur_yok ∨ `arg_edr` ∨ contra_c2))) ∧ final ≥ 5.000 | 1 yıl 8 ay → 600 gün APC, ehliyet 6 ay | 0,85 |
+| 4 | ETIK | CONVICTION | `etik_garaj` ∧ ¬kusur_yok (garaja izinsiz giriş ve kırmızı ışık iddiası hukuka uygun delillerle çürütülmedi) | 3 yıl 9 ay; fotoğraflar dışlanır; savcılığa ve baroya bildirim | 0 + etik kartı |
+| 5 | MAHKUMIYET | CONVICTION | her zaman (çöküş dahil) | 3 yıl 9 ay, ehliyet 2 yıl | 0,6 |
+
+**Garaj (etik_garaj) diğer sonuçlarla:** hüküm hukuka uygun delillerden kurulur. BERAAT_E, INDIRIM ve MAHKUMIYET gerekçesine
+"garaj fotoğrafları hükme esas alınmamıştır" eklenir ve epiloga disiplin bloğu (şikâyet, baro bildirimi, Leyla'nın kitapçığı)
+eklenir. BERAAT_B garajla kurulamaz (T09_B ¬garaj ister; savcılık yazısı garajda gelmez).
 
 `kusur_yok` = contra_n2 ∨ contra_h ∨ contra_c1 (kırmızı ışık iddiası kürsüde çöktü). `supheden` T09_E ile, yalnızca kusur_yok ∧
 findings tutarsa kalkar. Mütalaa üç biçimde: beraat (ev_savcilik ∧ (ded_olum ∨ arg_atk)), basit taksir (kusur_yok ∧ (arg_edr ∨
@@ -129,58 +134,83 @@ contra_c2 ∨ arg_heyet)), bilinçli taksir.
 - Tutarlar Dava #07 ölçeğinde: sahne nesnesi +40/+60, dikkat dağıtıcı −10; belge isabeti +50…+200, ıska −20; tarif +300,
   yanlış çift −50; bastır +10/+25; doğru sunum +200/+300, kısmi +100/+150, yanlış ♥−1 ve −150; itiraz +50…+120, dayanaksız
   ♥−1 ve −50; esas savunma `strategyAmount(200)` (uyumlu strateji ×1,5 / ×1,2 / ×0,8); dayanak ±40; etik ihlaller −30…−100.
-- Eşik çubuğu: Mahkûmiyet 0 · İndirim 3.000 · Beraat 9.000 (BERAAT_B ayrıca 9.500). `scaleMax` 12.000 (simülasyonda görülen en
+- Eşik çubuğu: Mahkûmiyet 0 · İndirim 5.000 · Beraat 9.000 (BERAAT_B ayrıca 9.500). `scaleMax` 12.000 (simülasyonda görülen en
   yüksek final 12.060).
 
 ## 9. Golden path'ler
 
 | Ad | Strateji | Sonuç | Final | Aksiyon | Süre |
 |---|---|---|---|---|---|
-| TIPIK | Kusur itirazı | BERAAT_E | 11.385 | 210 | 94,1 dk |
-| G_B | İlliyet | BERAAT_B | 12.060 | 217 | 95,2 dk |
-| G_ETIK | İlliyet (garaj) | ETIK | 11.060 | 216 | 93,3 dk |
-| G_I | Terditli | INDIRIM | 6.365 | 179 | 75,8 dk |
-| G_M | Kusur itirazı (kötü avukatlık) | MAHKUMIYET | −200 | 142 | 61,4 dk |
-| W | Kusur itirazı (çöküş, 3. celsede) | MAHKUMIYET | 4.700 | 149 | 68,6 dk |
+| TIPIK | Kusur itirazı | BERAAT_E | 11.385 | 210 | 101,7 dk |
+| G_B | Masumiyet | BERAAT_B | 12.060 | 217 | 101,6 dk |
+| G_ETIK | Masumiyet (garaj; kırmızı ışık kürsüde çürütülmez) | ETIK | 9.295 | 206 | 96,2 dk |
+| G_ETIK_E | Masumiyet (garaj; T09_B garaj yüzünden düşer, ATK + şüphe) | BERAAT_E + disiplin epilogu | 11.060 | 216 | 101,2 dk |
+| G_I | Terditli | INDIRIM | 6.365 | 179 | 80,5 dk |
+| G_M | Kusur itirazı (kötü avukatlık) | MAHKUMIYET | −200 | 142 | 64,6 dk |
+| W | Kusur itirazı (çöküş, 3. celsede) | MAHKUMIYET | 4.700 | 149 | 72,6 dk |
+| NEG_GUN1 | Negatif test: soruşturma atlanır, ilk gün duruşma | MAHKUMIYET | 770 | 44 | 34,7 dk |
 
+NEG_GUN1 bir sonuç yolu değil, erken çözüm için negatif testtir (60 dk tabanı ona uygulanmaz): soyut itiraz reddedilir,
+heyet/ATK/EDR gelmez, kırmızı ışık çökmez → mahkûmiyet.
 Pencereler ölçülen finalin ±%5'i. Bütün yollar `case:validate` ile oynatılır; kapsam node/seçenek/kural/delil %100.
 
 ## 10. Erken çözüm denetimi
 
-- **En kısa beraat:** iki yöntemle arandı. (1) Golden path'ten aksiyon silerek küçültme (ddmin, 32'lik bloklardan teke):
-  TIPIK → 174 aksiyonda BERAAT_E (TIPIK'in 210 aksiyonunun %83'ü); G_B → 185 aksiyonda BERAAT_B (%88). (2) `enumerateActions`
-  üzerinde ışın araması (beam 300, ilerleme = ham skor + çelişki bayrakları + ikna + delil sayısı): ilk beraat 202 aksiyonda
-  (BERAAT_B, %96). En kısa bulunan beraat 174 aksiyon = **%83** (hedef ≥ %60).
-- **Neden kısa yol yok:** beraat; kırmızı ışık iddiasının kürsüde çökmesi (ded_goremez, sinyal günlüğü ya da ded_ariza + sesli
-  mesaj), en az beş çelişki, ikna ≥ 6, 9.000 final ve uyumlu esas savunmanın birlikte tutmasını ister. Bu bulguların her biri
-  ayrı bir etkinlikte, çoğu iki ayrı mekânda (sahne + belge, görüşme + tahta) kurulur; 223/2-b ayrıca ara evresinde boya
-  raporu, kamera, sanayi ve suç duyurusu zincirini ister.
-- **Sızıntı denetimi:** ikinci araç ve sinyal arızası hiçbir anlatıcı ya da iç ses satırında önceden söylenmez; ilgili satırlar
-  bulgulara bağlıdır (INV_GECE_2/3, INV_AKSAM3, hub'ın 2. gün hedefi ≥2 ipucu, Leyla'nın blokları). Soğuk açılış yalnızca
-  sürücünün gördüğünü verir (yeşil ışık, koyu bir şekil, tümsek). Panelvanın rengi, fırının ve sürücünün adı yalnızca
-  ded_arac ya da savcılık yazısından sonra geçer. Doğrulayıcı LEAK denetimi temiz.
+İnceleme sonrası (devil's advocate) yeniden ölçüldü. Yöntem: golden path'ten aksiyon blokları silerek yerel en kısa yolu
+arayan küçültme (24'lük bloklardan teke, reddedilen aksiyonlar atlanır) ve "ilk gün duruşmaya git" tohumları (prolog +
+H_DURUSMA + golden path'in kalanı).
+
+| Hedef | Tohum | En kısa | TIPIK'e oran | Süre |
+|---|---|---|---|---|
+| Beraat (B ∨ E) | G_B | 138 aksiyon (BERAAT_E) | %66 | 69,1 dk |
+| Beraat (B ∨ E) | TIPIK | 155 aksiyon | %74 | — |
+| Beraat (B ∨ E) | G_ETIK_E | 165 aksiyon | %79 | — |
+| Beraat / İndirim | ilk gün duruşma (TIPIK, G_I tohumları) | ulaşılamıyor → MAHKUMIYET | — | — |
+| İndirim | G_I | 98 aksiyon | %47 | 49,1 dk |
+
+- **Kapatılan kısa yol:** önceki sürümde R_ITIRAZ her durumda kabul ediliyordu; ilk gün duruşmaya giden oyuncu heyet, ATK ve
+  EDR'yi bedavaya alıp 73 aksiyonda İNDİRİM'e ulaşıyordu. Şimdi itiraz `itiraz_dayanak` (en az üç somut eksik, biri sahadan)
+  ister; aksi hâlde CMK 67/5 gerekçeli ret, −40, ♥−1. İNDİRİM ayrıca `inv_derin` (≥2 saha çıkarımı), kürsüde hız iddiasının
+  çürütülmesi (kusur_yok ∨ arg_edr ∨ contra_c2) ve 5.000 final ister. NEG_GUN1 golden path'i ilk gün duruşmanın mahkûmiyetle
+  bittiğini sabitler.
+- **En kısa beraatin içeriği:** gece araması, rapor, tutanak, kavşak, otopsi, dilekçe (ATK), otopark, tanıklar, tahtada
+  dört çıkarım, 2. celsede kabul edilen itiraz, arada heyet + EDR + ATK × sırt (ded_olum), 3. celsede kırmızı ışığın
+  çökmesi ve en az beş çelişki. Kısa yol yok: beraat; kusur_yok, findings (≥5), ikna ≥ 6 ve 9.000 finali birlikte ister.
+- **İndirim:** bilerek "kısmi kazanç" olarak daha erişilebilir bırakıldı (yaklaşık iki soruşturma günü + iki celse). Yine de
+  soruşturmayı atlayan yol kapalıdır.
+- **Sızıntı denetimi:** ikinci araç ve sinyal arızası hiçbir anlatıcı ya da iç ses satırında önceden söylenmez. Soğuk
+  açılışta "yerde mi" kalktı ("bir poşet mi, bir gölge mi"); Volkan'ın "Ayakta biri değildi sanki"si kalktı. Tampon nesnesi
+  yalnızca ölçümü verir (44 cm, yatay iz); yorum tahtadaki ded_yukseklik geri bildirimindedir. clue_sirt ve clue_kirik56
+  açıklamaları olgusaldır. INV_AKSAM3'teki sayılmış "altı saniye" kalktı. Strateji menüsünde "İlliyet: ölümün gerçek nedeni
+  başka" yerine genel "Masumiyet" var; Leyla'nın illiyet dersi göz kırpmadan, ispat yüküne bağlanır. Doğrulayıcı LEAK
+  denetimi temiz.
+- **Seçenek dengesi:** iyi ve kötü seçeneği olan 32 setin 10'unda (%31) doğru seçenek en uzun etiket; madde numarası
+  yanlış seçeneklerde de geçer (K_SUS, O_SUS, R_CIKAR, AK_BERAAT, O2_SALDIR, ARG_DUYGU, M_CIKAR).
 
 ## 11. Ölçüm
 
-`npm run case:duration -- kirmizi-isik` (2026-10-20):
+`npm run case:duration -- kirmizi-isik` (2026-10-20, inceleme düzeltmeleri sonrası):
 
 ```
-TIPIK          94.1 dk   13159 sözcük   210 aksiyon  BERAAT_E (11385)
-G_B            95.2 dk   13223 sözcük   217 aksiyon  BERAAT_B (12060)
-G_ETIK         93.3 dk   12912 sözcük   216 aksiyon  ETIK (11060)
-G_I            75.8 dk   10428 sözcük   179 aksiyon  INDIRIM (6365)
-G_M            61.4 dk    8490 sözcük   142 aksiyon  MAHKUMIYET (-200)
-W              68.6 dk    9667 sözcük   149 aksiyon  MAHKUMIYET (4700)
-==> TİPİK YOL (TIPIK): 94.1 dk  ✓ süre hedefte
+TIPIK         101.7 dk   14524 sözcük   210 aksiyon  BERAAT_E (11385)
+G_B           101.6 dk   14379 sözcük   217 aksiyon  BERAAT_B (12060)
+G_ETIK         96.2 dk   13602 sözcük   206 aksiyon  ETIK (9295)
+G_ETIK_E      101.2 dk   14329 sözcük   216 aksiyon  BERAAT_E (11060)
+G_I            80.5 dk   11265 sözcük   179 aksiyon  INDIRIM (6365)
+G_M            64.6 dk    9077 sözcük   142 aksiyon  MAHKUMIYET (-200)
+NEG_GUN1       34.7 dk    5445 sözcük    44 aksiyon  MAHKUMIYET (770)
+W              72.6 dk   10384 sözcük   149 aksiyon  MAHKUMIYET (4700)
+==> TİPİK YOL (TIPIK): 101.7 dk  ✓ süre hedefte
 ==> KAPI: ✓ GEÇTİ
 ```
 
-`npm run case:validate -- kirmizi-isik`: **PASSED — 0 hata, 1 uyarı (SIMULATION_INCOMPLETE, uzun davada beklenen)**;
-~61.500 durum, 400 yürüyüş; bütün sonuçlara ulaşıldı; kapsam node 101/101, seçenek 236/236, kural 77/77, delil 44/44;
-golden path 6/6; softlock, çıkmaz, sızıntı yok. Final skor aralığı −3.435…12.060.
+`npm run case:validate -- kirmizi-isik --max-ms 3000000` (makine yükü nedeniyle süre sınırı yükseltildi; varsayılan
+600 sn'de yoğun makinede SIMULATION_ABORTED alınabilir): **PASSED — 0 hata, 1 uyarı (SIMULATION_INCOMPLETE, uzun davada
+beklenen)**; ~60.000 durum, 400 yürüyüş; bütün sonuçlara ulaşıldı; kapsam node 107/107, seçenek 236/236, kural 77/77,
+delil 44/44; golden path 8/8; softlock, çıkmaz, sızıntı yok.
 
-Paket toplamı: 1.326 satır, 15.961 satır sözcüğü; etiket, geri bildirim, belge ve hüküm metinleriyle ~23.900 sözcük. En uzun
-satır 203 karakter.
+Paket toplamı: 1.436 satır, 17.951 satır sözcüğü; etiket, geri bildirim, belge ve hüküm metinleriyle ~26.500 sözcük. En
+uzun satır 203 karakter.
 
 ## 12. Görseller ve sprite'lar
 

@@ -19,7 +19,7 @@ import { p1, p2 } from './shared.js';
 
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler.
 
-export const T_INDIRIM = 4000;
+export const T_INDIRIM = 5000;
 export const T_BERAAT_E = 9000;
 export const T_BERAAT_B = 9500;
 

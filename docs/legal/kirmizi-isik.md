@@ -28,13 +28,15 @@ sürücüyü asli kusurlu sayar; kırmızıda geçmek bunların başında") kull
 | CMK 63, 67/3, 67/5, 67/6 | BR_01B, INV_RAPOR, H1_06, T_05 (g_yorum), T_05N | 1.5.5271.pdf | bilirkişi hukuki nitelendirme yapamaz (67/3); itiraz ve yeni inceleme için süre, ret gerekçeli (67/5); bilimsel mütalaa (67/6) |
 | CMK 68, 69 | H1_06 R_DINLE, ARA_NALAN | 1.5.5271.pdf | bilirkişinin duruşmada dinlenmesi; ret sebepleri |
 | CMK 109/3-a,b,d; 109/5 | PR_01, H1_07 AK_IZIN | 1.5.5271.pdf | yurt dışı yasağı, imza, taşıt kullanmama; mesleki uğraş için araç kullanma izni |
+| CMK 110/2-3 | H1_07 AK_BERAAT (yanlış seçeneğin etiketi) | 1.5.5271.pdf | yükümlülüklerin kaldırılması/değiştirilmesi; kovuşturmada mahkemece de uygulanır |
 | CMK 135/6 | ev_hts açıklaması | 1.5.5271.pdf | iletişim tespiti hâkim kararıyla |
-| CMK 147/1-e | H1_00K K_SUS, H1_03 O_SUS | 1.5.5271.pdf | susma hakkı |
-| CMK 158, 160 | ARA_SANAYI, ARA_SUC | 1.5.5271.pdf | ihbar; savcılığın araştırma yükümlülüğü |
+| CMK 147/1-e | H1_00K K_SUS, H1_03 O_SUS (etiketlerde) | 1.5.5271.pdf | susma hakkı |
+| CMK 158, 160 | ARA_SANAYI (SA_NOT, SA_SOR), ARA_SUC | 1.5.5271.pdf | ihbar; savcılığın araştırma yükümlülüğü (kaportacıların araştırılmasını savcılık ister) |
 | CMK 177 | INV_DIL, INV_LEYLA | 1.5.5271.pdf | savunma delillerinin toplanması dilekçesi, duruşmadan en az beş gün önce |
 | CMK 201/1 | H1_03, T_02 | 1.5.5271.pdf | doğrudan soru; itiraz edilince başkan karar verir |
 | CMK 206/2 | DIL_SABIKA, R_CIKAR, ETIK | 1.5.5271.pdf | kanuna aykırı delil (a), karara etkisiz (b), uzatma (c) |
-| CMK 215, 216/1-3 | T_00S, H1_04, T_08, T_09R, T_10 | 1.5.5271.pdf | sanığa her delilden sonra diyeceği; delillerin tartışılmasında söz sırası; cevap hakkı; son söz |
+| TCK 61 | T_07 ARG_DUYGU (yanlış seçeneğin etiketi) | 1.5.5237.pdf | cezanın belirlenmesi; kişisel durum delil tartışmasının değil ceza takdirinin konusu |
+| CMK 215, 216/1-3 | T_00S, H1_04, T_08 (M_CIKAR etiketi dahil), T_09R, T_10 |  1.5.5271.pdf | sanığa her delilden sonra diyeceği; delillerin tartışılmasında söz sırası; cevap hakkı; son söz |
 | CMK 217/1-2 | bilirkişi raporu, g_kanaat, ETIK | 1.5.5271.pdf | vicdani kanaat; hukuka uygun delille ispat |
 | CMK 223/2-b, 223/2-e | BERAAT_B, BERAAT_E | 1.5.5271.pdf | suçun sanık tarafından işlenmediğinin sabit olması / işlendiğinin sabit olmaması |
 | CMK 231/3; 141/1, 142 | beraat hükümleri | 1.5.5271.pdf | tazminat hakkının bildirilmesi |
@@ -61,6 +63,12 @@ katılan vekili kürsüde değil, taraf sırasındadır (stage düzeninde kürs�
   (1/6) **1 yıl 8 ay** → TCK 50/1-a ve 50/4 ile **600 gün** adli para cezası (1 yıl 8 ay = 20 ay × 30 gün) × 100 TL
   (TCK 52/2 alt sınırı) = **60.000 TL** → TCK 53/6 sürücü belgesinin **6 ay** geri alınması. 22/3 uygulanmadığı için 50/4
   kapısı açıktır. Sınıf: `RECHARACTERIZED`.
+- **ETIK (müdafiin etik ihlali + hukuka uygun delillerle mahkûmiyet):** Garaj fotoğrafları hükme esas alınmaz (Anayasa 38/6,
+  CMK 206/2-a, 217/2); mahkeme dosyadaki **hukuka uygun** delilleri ayrıca tartar. ETIK yalnızca `etik_garaj` ∧ ¬`kusur_yok`
+  hâlinde, yani kırmızı ışık iddiası hukuka uygun delillerle kürsüde çürütülmediğinde verilir; ceza MAHKUMIYET ile aynıdır.
+  Müdafiin ihlali sanık aleyhine delil sayılmaz; tutanak örneği savcılığa ve baroya gönderilir. Garaja girilip dava hukuka
+  uygun delillerle kazanılırsa (BERAAT_E) ya da indirim alınırsa hüküm değişmez; gerekçeye "fotoğraflar hükme esas
+  alınmamıştır" eklenir ve epilogda disiplin soruşturması oynar.
 - **MAHKUMIYET / ETIK:** TCK 85/1 temel **3 yıl** (asli kusur kabulüyle alt sınırdan uzaklaşma) → TCK 22/3 ile yarı oranında
   artırım **4 yıl 6 ay** → TCK 62/1 **3 yıl 9 ay**. Bilinçli taksir nedeniyle TCK 50/4 uygulanmaz; 2 yılı aştığı için
   TCK 51/1 erteleme ve CMK 231/5 HAGB yoktur. TCK 53/1 hak yoksunlukları kasten işlenen suçlara özgü olduğundan
@@ -126,7 +134,25 @@ katılan vekili kürsüde değil, taraf sırasındadır (stage düzeninde kürs�
 13. **Sanığın son sözü:** Delillerle çelişen bir "ben öldürdüm" son sözü ikrar değil, sanığın kanaatidir; oyunda ikna puanını
     düşürür, sonuç koşullarını doğrudan değiştirmez. Sanığın kürsüde kusuru kabul etmesi (`kabul`) mahkûmiyet ve indirim
     gerekçelerinde ayrıca anılır.
-14. **Saatler:** Gün doğumu/batımı hesabı gerektiren bir nitelik (TCK 6/1-e gece vakti) bu suç tipinde ceza artırımı
+14. **Rapora itirazın kabulü (H1_06):** CMK 67/5 itirazı ancak raporun hangi tespitine, hangi somut gerekçeyle yöneldiği
+    gösterilirse yeni incelemeye yol açar. Oyunda itiraz, en az üç somut eksik (rapor satırlarındaki bulgular ve saha
+    çıkarımları; en az biri sahadan: fren izi, camlar, kırık yüksekliği ya da arıza) varsa kabul edilir ve gerekçe yalnızca
+    bulunan eksikleri sayar. Soyut itiraz ("rapor haksız") gerekçeyle reddedilir; heyet, ATK ve EDR gelmez, yalnızca
+    bilirkişi dinlenir. Yorum: uygulamada mahkemeler somut olmayan itirazı da kimi zaman yeni raporla karşılar; oyun
+    öğretici olarak somutlaştırma yükünü vurgular.
+15. **İNDİRİM gerekçesi ve illiyet:** Mahkûmiyet için illiyetin şüpheden uzak ispatı gerekir (Anayasa 38/4; CMK 223/2-e
+    karşıtı). INDIRIM gerekçesi bu nedenle pozitif tespittir ("özen yükümlülüğüne aykırı davrandığı ve bu davranışla ölüm
+    arasında illiyet bağının bulunduğu kanaatine varılmıştır"); "illiyetin bulunmadığı ispatlanamadı" biçimindeki ispat
+    yükünü tersine çeviren ifade kaldırıldı. Savunma Adli Tıp raporuyla illiyeti tartışmışsa (`arg_atk`) INDIRIM
+    verilmez; o durumda kusur iddiası da çökmüşse BERAAT_E, çökmemişse MAHKUMIYET gerekçesine ATK raporunun neden yeterli
+    görülmediği (başka aracın varlığının ispatlanamaması) yazılır. INDIRIM ayrıca kürsüde hız iddiasının çürütülmesini
+    (EDR ya da fren izi) ve soruşturmada en az iki saha çıkarımını ister; bilinçli taksirin düşmesi bir dayanağa bağlanır.
+16. **Sanayi sitesi ve kovalamama:** Avukat yedek parçacıda bir model aralığının tampon ölçüsünü öğrenir (bilirkişiye
+    soracağı soru için genel bilgi); dönüşte kaldırımdan, kamuya açık yerden gördüklerini not alır. Kaportacıyı
+    sorgulamak (SA_SOR) etik hata sayılır: soruşturmayı savcılık yürütür (CMK 160) ve soru delilin yok edilmesine yol
+    açabilir. Suç duyurusu (SU_DAYANAKLI) renk, model, kırık stop ve düzeltilmiş saate dayanır; kaporta işyerlerinin
+    araştırılmasını savcılıktan ister.
+17. **Saatler:** Gün doğumu/batımı hesabı gerektiren bir nitelik (TCK 6/1-e gece vakti) bu suç tipinde ceza artırımı
     doğurmaz; saatler yalnızca olay örgüsü içindir.
 
 ## 6. Hassas konu denetimi
@@ -140,6 +166,8 @@ yenidoğan bebek yalnızca aile dramının parçasıdır, hiçbir suçun mağdur
 - [x] Ceza hesapları alt/üst sınırlar içinde ve aritmetik doğru (2 yıl → 1 yıl 8 ay → 600 gün; 3 yıl → 4 yıl 6 ay → 3 yıl 9 ay).
 - [x] Mahkemeye hitap "Sayın Başkan"; görevli mahkeme asliye ceza, tek hâkim.
 - [x] Hüküm metinlerinde istinaf süresi (CMK 273/1) ve beraatte tazminat bildirimi (CMK 141/1, 142, 231/3) var.
-- [x] Etik ihlal seçenekleri doğru maddeye bağlı (Av.K. md. 34, TCK 116/2, 267, 277; CMK 69).
+- [x] Etik ihlal seçenekleri doğru maddeye bağlı (Av.K. md. 34, TCK 116/2, 267, 277; CMK 69, 160).
+- [x] Hukuka aykırı delil yalnızca kendisi dışlanır; hukuka uygun deliller ayrıca tartılır (ETIK ve disiplin epilogları).
+- [x] Mahkûmiyet gerekçeleri illiyeti pozitif tespit olarak kurar; ispat yükü tersine çevrilmez.
 - [x] Madde numaraları gündelik konuşmada geçmiyor; yalnızca Leyla'nın kısa açıklamalarında, geri bildirimde, rapor ve
       hüküm metninde ve resmî duruşma dilinde.

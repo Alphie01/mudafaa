@@ -149,7 +149,7 @@ ağır ceza değil), tek hâkim.
 - Seçim: "İlk nereden başlarsın?" (rapor / kavşak / müvekkil) → yalnızca Leyla'nın cevabı ve küçük bir bayrak.
 
 ### BR_02 — Dosya ekranı + strateji (~300)
-- Profil kartı, ceza aralığı, olay özeti, savcılığın elindekiler, strateji: **İlliyet** (gerçek neden başka), **Kusur
+- Profil kartı, ceza aralığı, olay özeti, savcılığın elindekiler, strateji: **Masumiyet** (suçu işlemediğini ispat; 223/2-b, yüksek risk; ters köşeyi ima etmez), **Kusur
   itirazı** (ışık, hız, rapor), **Terditli** (basit taksir, alt sınır, 50/4). Leyla tek cümleyle karşılar.
 
 ### INV_SABAH — "Kavşak, sabah" (~350) · bg: sokak_sabah
@@ -240,9 +240,13 @@ ile kısa bir sahne.
   paragrafın EDR ile çeliştiğini bulur (`contra_heyet`).
 - ARA_AYTEN (vicdan): dolaptaki cam parçası. Seçim: "Savcılığa teslim et, tutanakla" (doğru) / "Bana ver" (−, zincir
   bozulur) / "Kimseye söyleme" (parça kaybolur).
-- ARA_SANAYI (yalnızca `ded_arac` sonrası): Kestel, taşlama sesi. Rüstem kaçamak; yerde yeşil boya tozu. Seçim: notu al ve
-  savcılığa bildir (doğru) / arka garaja izinsiz girip fotoğraf çek (etik ihlal; ETIK sonu) / Rüstem'i korkut (−).
-- ARA_SUC: suç duyurusu (dayanaklı: boya + kamera + sanayi bilgisi / dayanaksız "biri çarpmış olmalı" −).
+- ARA_SANAYI (yalnızca `ded_arac` sonrası): Deniz Kestel'e bir yedek parçacının kataloğu için gelir (o model aralığının
+  tampon ölçüsü, bilirkişiye soracağı soru). Dönüşte kaldırımdan geçerken kaporta dükkânının önünde yeşil boya tozu, yeni
+  stop lambası kutusu, aralık garaj kapısı görür. Kimseyi sorgulamaz. Seçim: "Bir şey lazım değil" de, köşede not al
+  (doğru; savcılığa bildirilecek) / ustaya panelvanı sor (etik hata: soruşturma savcılığın, soru uyarı olur) / arka garaja
+  izinsiz girip fotoğraf çek (etik ihlal; disiplin epilogu, kürsüde çürütülemezse ETIK sonu).
+- ARA_SUC: suç duyurusu (dayanaklı: boya + kamera + kırık stop + düzeltilmiş saat; kaporta işyerlerinin araştırılmasını
+  savcılıktan iste; sanayi notu varsa blok numarasıyla bir satır / dayanaksız "başka bir araç olmalı" −).
 - ARA_VOLKAN: kızları doğmuştur (Ela). Volkan: "Ona bir yalanla bakamam." Ek savunmaya hazırlık: doğruyu söylemesini
   öğütlemek.
 - ARA_SERKAN (saygı yolunda): annesinin 01.05 sesli mesajını dinletir; Serkan'ın kendi kararıyla savcılığa teslimi (doğru)
@@ -282,5 +286,10 @@ ile kısa bir sahne.
 - **MAHKUMIYET:** Volkan'ın elleri; bebek arabası koridorda. Serkan da rahatlamaz. thought: "Bir kadın öldü, bir adam ceza
   aldı. Teraziyi dengeli sanan herkes yanılıyordu; ben de." Çöküşte savcının cümlesi: "İyi bir avukat olacaksınız. Bugün
   değil."
-- **ETIK (garaj):** Garaj fotoğrafı hukuka aykırı delil sayılır; Rüstem'in şikâyeti, baroya bildirim. Leyla meslek kuralları
-  kitapçığını masaya bırakır ve hiçbir şey söylemez. Panelvan o hafta hurdaya çıkarılmıştır.
+- **ETIK (garaj + kürsüde çürütülemeyen kırmızı ışık):** Garaj fotoğrafı hukuka aykırı delil sayılır ve dışlanır; mahkeme
+  hukuka uygun delilleri ayrıca tartar ve kırmızı ışık iddiası kürsüde çökmediği için mahkûm eder. Rüstem'in şikâyeti,
+  baroya bildirim. Leyla meslek kuralları kitapçığını masaya bırakır ve hiçbir şey söylemez. Panelvan o hafta hurdaya
+  çıkarılmıştır.
+- **Disiplin epilogu (garaj + başka sonuç):** Garaja girilip dava hukuka uygun delillerle kazanılır ya da indirim alınırsa
+  hüküm değişmez; gerekçeye "fotoğraflar hükme esas alınmamıştır" eklenir. Ertesi sabah şikâyet ve baro bildirimi; Leyla'nın
+  kırmızı kitapçığı. "Mahkeme o fotoğrafları yok saydı. Ama ben o garaja girdim."

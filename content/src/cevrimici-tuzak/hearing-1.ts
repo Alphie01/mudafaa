@@ -156,7 +156,7 @@ export const hearing1: CasePart = {
       `,
       next: 'H1_02',
       options: [
-        option('H101_A', 'Doğrudan zarar gördüğü için itirazımız yok.', {
+        option('H101_A', 'Doğrudan zarar gören odur; katılmasına itirazımız yok.', {
           score: { USUL_BILGISI: 50 },
           effects: [inc('legal_hits'), raise('katilma_ok')],
           good: 'Suçtan zarar gören, hüküm verilinceye kadar kamu davasına katılabilir (CMK 237/1); katılan, kendisini zarara uğratan suçta doğrudan zarar görendir. Burada itiraz dayanaksızdır.',
@@ -306,7 +306,7 @@ export const hearing1: CasePart = {
       `,
       next: 'H1_03R',
       options: [
-        option('H103_A', 'İtiraz: yönlendirici soru.', {
+        option('H103_A', 'İtiraz: soru yönlendirici, cevabı içinde taşıyor.', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits')],
           good: 'Savcı sanığa doğrudan soru sorabilir (CMK 201/1); ancak cevabı içinde taşıyan, yönlendirici soru reddedilir. Hâkim soruyu yeniden kurdurur.',
@@ -405,7 +405,7 @@ export const hearing1: CasePart = {
           `),
           next: '$stay',
         }),
-        option('H104Q_C', 'Parayı tanımadığınız bir hesaba neden gönderdiniz?', {
+        option('H104Q_C', 'Hiç görmediğiniz bir satıcıya, tanımadığınız bir hesaba parayı neden gönderdiniz?', {
           score: { SORGULAMA: -50 },
           effects: [dec('pers')],
           bad: 'Mağduru suçlayan soru, savunmaya hiçbir şey kazandırmaz ve heyetin gözünde müdafiyi küçültür.',
@@ -838,7 +838,7 @@ export const hearing1: CasePart = {
           ],
           next: '$stay',
         }),
-        option('RQ_BERAAT', 'Sanığın hemen bugün beraatine karar verilmesi', {
+        option('RQ_BERAAT', 'Delil yetersizliğinden sanığın bu celsede, hemen bugün beraatine karar verilmesi', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Eksik deliller toplanmadan ve mütalaa alınmadan hüküm kurulmaz; erken beraat talebi heyeti ikna etmez.',

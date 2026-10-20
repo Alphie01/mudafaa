@@ -327,7 +327,7 @@ export const inv1Ev: CasePart = {
       choices: [
         option(
           'TAV_A',
-          'Doğruyu anlat. Notu ve mesajı biz sunarız.',
+          'Doğruyu anlat; notu ve mesajı biz sunarız, yalnız kalmayacaksın.',
           {
             score: { SAVUNMA_STRATEJISI: 100 },
             effects: [raise('ece_durust'), inc('trust', 4)],
@@ -354,7 +354,7 @@ export const inv1Ev: CasePart = {
           `),
           next: 'INV1_ECE',
         }),
-        option('TAV_C', 'Bu konuda susma hakkın var; sorulursa cevap vermeyebilirsin, kimse seni zorlayamaz.', {
+        option('TAV_C', 'Susma hakkın var; sorulursa cevap vermeyebilirsin.', {
           neutral: 'Susma hakkı meşrudur (CMK 147/1-e); ama sessizlik, savcının anlatısına boşluk bırakır.',
           effects: [raise('ece_sus')],
           responses: B(S`

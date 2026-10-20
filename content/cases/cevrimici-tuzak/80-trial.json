@@ -139,7 +139,7 @@
         {
           "id": "KOR_C",
           "kind": "OPTION",
-          "label": "Cevap verme; Ece’nin yanına geç.",
+          "label": "Cevap verme; Ece’ye geç.",
           "responses": [
             {
               "lines": [
@@ -411,7 +411,7 @@
         {
           "id": "T00K_C",
           "kind": "OPTION",
-          "label": "Kayıtların tamamının hukuka aykırı olduğunu ileri sürüyoruz.",
+          "label": "Kayıtlar hukuka aykırıdır.",
           "responses": [
             {
               "lines": [
@@ -578,7 +578,7 @@
         {
           "id": "T01Q_B",
           "kind": "OPTION",
-          "label": "Kaan’ı hiç gördünüz mü?",
+          "label": "Kaan’ı hiç yüz yüze gördünüz mü?",
           "responses": [
             {
               "lines": [
@@ -609,7 +609,7 @@
         {
           "id": "T01Q_C",
           "kind": "OPTION",
-          "label": "Parayı alan Kaan’dı, değil mi? Yani bu tuzağı o kurdu?",
+          "label": "Bu tuzağı Kaan kurdu, değil mi?",
           "responses": [
             {
               "lines": [
@@ -769,7 +769,7 @@
         {
           "id": "T02P_A",
           "kind": "OPTION",
-          "label": "İtiraz: yönlendirici soru.",
+          "label": "İtiraz, Sayın Hâkim: soru cevabı tanığın ağzına koyuyor.",
           "responses": [
             {
               "lines": [
@@ -1738,7 +1738,7 @@
                 { "speaker": "player", "text": "Cep telefonunuzun numarası nedir, Necdet Bey?" },
                 {
                   "speaker": "necdet",
-                  "text": "Kartvizitimde yazıyor efendim, size de vermiştim. Saklayacak bir şeyim yok."
+                  "text": "Bir cep numaram var efendim, iş merkezinde herkes bilir. Saklayacak bir şeyim yok."
                 },
                 { "speaker": "narrator", "text": "Yüzüğünü çevirdi. Mühür, ışıkta bir an parladı." },
                 {
@@ -1753,7 +1753,7 @@
                 { "speaker": "player", "text": "Cep telefonunuzun numarası nedir, Necdet Bey?" },
                 {
                   "speaker": "necdet",
-                  "text": "Kartvizitimde yazıyor efendim, size de vermiştim. Saklayacak bir şeyim yok."
+                  "text": "Bir cep numaram var efendim, iş merkezinde herkes bilir. Saklayacak bir şeyim yok."
                 }
               ]
             }
@@ -2149,9 +2149,12 @@
             },
             {
               "speaker": "savci",
-              "text": "Tanık hakkında suç duyurusunda bulunuyorum. Dosyanın bir örneğinin Başsavcılığa gönderilmesini talep ederim."
+              "text": "Tanık hakkında soruşturma yapılmak üzere tutanağın ve dosyanın bir örneğinin Başsavcılığa gönderilmesini talep ederim."
             },
-            { "speaker": "hakim", "text": "Talep kabul. Tanık, salonu terk etmeyin. Kolluk görevlisi, lütfen." },
+            {
+              "speaker": "hakim",
+              "text": "Talep kabul. Tutanağın ve dosyanın bir örneği Başsavcılığa gönderilsin. Tanık, dinlenmeniz bitmedi; salondan ayrılmayın."
+            },
             {
               "speaker": "narrator",
               "text": "Salonun arka sırasında Ece iki elini yüzüne kapattı. Sevim ona sarıldı."
@@ -2311,6 +2314,11 @@
                   "speaker": "player",
                   "text": "Bir yıl boyunca bu iki insan birbirinin adını bir düşman adı gibi taşıdı. Şimdi aynı koridorda, aynı çayı içiyorlar. Hüküm daha verilmedi; ama bir şey verildi.",
                   "style": "thought"
+                },
+                { "speaker": "narrator", "text": "DURUŞMA SALONU · 12.05", "style": "card", "bg": "durusma_salonu" },
+                {
+                  "speaker": "narrator",
+                  "text": "Kapı açıldı; salon yeniden doldu. Hâkim cübbesini düzeltti, savcı bir kâğıdı en üste aldı."
                 }
               ]
             }
@@ -2357,6 +2365,11 @@
                   "speaker": "player",
                   "text": "Masasındaki ters çerçeve. Bir gün soracağım. Bugün değil; bugün kâğıtlarıma bakacağım.",
                   "style": "thought"
+                },
+                { "speaker": "narrator", "text": "DURUŞMA SALONU · 12.05", "style": "card", "bg": "durusma_salonu" },
+                {
+                  "speaker": "narrator",
+                  "text": "Kapı açıldı; salon yeniden doldu. Hâkim cübbesini düzeltti, savcı bir kâğıdı en üste aldı."
                 }
               ]
             }
@@ -2448,7 +2461,7 @@
         {
           "id": "T04_A",
           "kind": "OPTION",
-          "label": "Aldatılan kişide iştirak kastı olmaz.",
+          "label": "Aldatılan kişide iştirak kastı olmaz; sanık kodun ne olduğunu bilmiyordu.",
           "responses": [
             {
               "when": { "any": [{ "hasEvidence": "ded_aldatma" }, { "flag": "ece_durust" }] },
@@ -2563,7 +2576,7 @@
         {
           "id": "T04_D",
           "kind": "OPTION",
-          "label": "Diyeceğimiz yok; takdir mahkemenizdedir.",
+          "label": "Takdir mahkemenizdedir.",
           "effects": [{ "type": "VAR", "var": "pers", "op": "dec", "value": 1 }],
           "quality": {
             "q": "BAD",
@@ -2823,7 +2836,7 @@
         {
           "id": "T05_C",
           "kind": "OPTION",
-          "label": "Mütalaanın tutanaktan çıkarılmasını talep ediyoruz.",
+          "label": "Mütalaanın, dayanağı olmayan kısımlarıyla birlikte tutanaktan çıkarılmasını talep ediyoruz.",
           "responses": [{ "lines": [{ "speaker": "hakim", "text": "Reddedildi. Cevap verecekseniz verin." }] }],
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
@@ -3053,7 +3066,7 @@
         {
           "id": "T07_D",
           "kind": "OPTION",
-          "label": "Bu kızın gözlerine bakın. Bir dolandırıcı böyle mi bakar?",
+          "label": "Bu kızın gözlerine bakın, Sayın Hâkim. Bir dolandırıcı böyle mi bakar? Bir yılını kaybetti; bu kadar ceza yeter.",
           "responses": [
             {
               "lines": [

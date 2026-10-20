@@ -961,7 +961,7 @@ export const ara: CasePart = {
           has('ev_imei_rapor'),
           S`
             = 24 KASIM 2026 · 23.30 — ARSLAN HUKUK @buro_gece
-            - Duruşmadan önceki gece. İMEİ raporu masamda. Üç hat. Üçüncüsü kurumsal bir hat, abonesi yazmıyor. On haneli bir numara; sanki bir yerde görmüşüm. Nerede?
+            - Duruşmadan önceki gece. İMEİ raporu masamda. Üç hat. Üçüncüsü kurumsal bir hat, abonesi yazmıyor. On haneli bir numara; bir isim değil.
           `,
         ),
         O(S`

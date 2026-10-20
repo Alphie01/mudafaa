@@ -105,7 +105,7 @@ export const trial: CasePart = {
           `),
           next: 'T_KORIDOR2',
         }),
-        option('KOR_C', 'Cevap verme; Ece’nin yanına geç.', {
+        option('KOR_C', 'Cevap verme; Ece’ye geç.', {
           neutral: 'Tanıkla konuşmamak doğrudur; ama bir cümleyle sınırı açıklamak, tanığın da kafasını netleştirirdi.',
           responses: B(S`
             - Onur'un yanından geçtim. Arkamdan bir an baktı; sonra bankına döndü. Telefonunu yeniden ters çevirdi.
@@ -218,7 +218,7 @@ export const trial: CasePart = {
           neutral:
             'Yeni gelen kayıt, tartışılmadan hükme esas alınamaz (CMK 217/1); savunma lehine kaydı konuşmamak bir fırsat kaybıdır.',
         }),
-        option('T00K_C', 'Kayıtların tamamının hukuka aykırı olduğunu ileri sürüyoruz.', {
+        option('T00K_C', 'Kayıtlar hukuka aykırıdır.', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Mahkeme kararıyla gelen kayıt hukuka uygundur; üstelik savunmanın lehinedir. Kendi delilini dışlatmaya çalıştın.',
@@ -279,7 +279,7 @@ export const trial: CasePart = {
           `),
           next: '$stay',
         }),
-        option('T01Q_B', 'Kaan’ı hiç gördünüz mü?', {
+        option('T01Q_B', 'Kaan’ı hiç yüz yüze gördünüz mü?', {
           score: { SORGULAMA: 50 },
           effects: [inc('pers'), raise('arda_yuzuk')],
           good: 'Açık uçlu soru; tanığın hatırladığını kendi sözleriyle anlatmasına izin verdin.',
@@ -289,7 +289,7 @@ export const trial: CasePart = {
           `),
           next: '$stay',
         }),
-        option('T01Q_C', 'Parayı alan Kaan’dı, değil mi? Yani bu tuzağı o kurdu?', {
+        option('T01Q_C', 'Bu tuzağı Kaan kurdu, değil mi?', {
           score: { SORGULAMA: -50 },
           effects: [dec('cred'), dec('pers')],
           bad: 'Cevabı içinde taşıyan soru yönlendiricidir; itiraz üzerine hâkim soruyu reddeder (CMK 201/1). Tanığın kendi gözlemi değer taşır, müdafinin sonucu değil.',
@@ -349,7 +349,7 @@ export const trial: CasePart = {
       `,
       next: 'T_02T',
       options: [
-        option('T02P_A', 'İtiraz: yönlendirici soru.', {
+        option('T02P_A', 'İtiraz, Sayın Hâkim: soru cevabı tanığın ağzına koyuyor.', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), inc('pers')],
           good: 'Yönlendirici soruya itiraz edildiğinde sorunun yöneltilip yöneltilmeyeceğine hâkim karar verir (CMK 201/1); tanığın kendi gözlemi istenir.',
@@ -765,14 +765,14 @@ export const trial: CasePart = {
               any(flag('tarif_yuzuk'), flag('arda_yuzuk'), has('clue_yuzuk_ece')),
               S`
                 > Cep telefonunuzun numarası nedir, Necdet Bey?
-                necdet: Kartvizitimde yazıyor efendim, size de vermiştim. Saklayacak bir şeyim yok.
+                necdet: Bir cep numaram var efendim, iş merkezinde herkes bilir. Saklayacak bir şeyim yok.
                 - Yüzüğünü çevirdi. Mühür, ışıkta bir an parladı.
                 ~ Ece'nin iki saniyelik kamerası. Arda'nın yarım inen camı. Onur'un tezgâhı. Üç yüzük mü, bir yüzük mü? Bunu bir yüzük söyleyemez. Bir rapor söyler.
               `,
             ),
             O(S`
               > Cep telefonunuzun numarası nedir, Necdet Bey?
-              necdet: Kartvizitimde yazıyor efendim, size de vermiştim. Saklayacak bir şeyim yok.
+              necdet: Bir cep numaram var efendim, iş merkezinde herkes bilir. Saklayacak bir şeyim yok.
             `),
           ],
         }),
@@ -956,8 +956,8 @@ export const trial: CasePart = {
         necdet: …Evet. Kayıp eşya. Kiracılardan biri unutmuştur.
         savci: Sayın Hâkim. Kopya SIM'in takıldığı, Nova İK hattının ve satıcı hattının kullanıldığı cihaz, tanığın "kayıp eşyasından" çıkıyor. Kayıp eşya defterini görmek isteriz.
         - Necdet yüzüğünü çevirdi. Bir kez, iki kez. Kürsüye vurmadı bu sefer. !shake
-        savci: Tanık hakkında suç duyurusunda bulunuyorum. Dosyanın bir örneğinin Başsavcılığa gönderilmesini talep ederim.
-        hakim: Talep kabul. Tanık, salonu terk etmeyin. Kolluk görevlisi, lütfen.
+        savci: Tanık hakkında soruşturma yapılmak üzere tutanağın ve dosyanın bir örneğinin Başsavcılığa gönderilmesini talep ederim.
+        hakim: Talep kabul. Tutanağın ve dosyanın bir örneği Başsavcılığa gönderilsin. Tanık, dinlenmeniz bitmedi; salondan ayrılmayın.
         - Salonun arka sırasında Ece iki elini yüzüne kapattı. Sevim ona sarıldı.
         ~ "Biz burada güven satıyoruz." Bir yıl boyunca bir binanın dördüncü katında güven satmış. Altı dakikalık bir şarj meselesi, dükkânı kapattı.
       `),
@@ -1027,6 +1027,8 @@ export const trial: CasePart = {
             sevim: Ben de size bir yıl kızdım. Adınızı bile bilmeden.
             - Başka bir şey demediler. Çaylarını yan yana, ayakta içtiler; iki kişi bir sokağın iki ucundan gelmiş de aynı otobüsü bekliyormuş gibi.
             ~ Bir yıl boyunca bu iki insan birbirinin adını bir düşman adı gibi taşıdı. Şimdi aynı koridorda, aynı çayı içiyorlar. Hüküm daha verilmedi; ama bir şey verildi.
+            = DURUŞMA SALONU · 12.05 @durusma_salonu
+            - Kapı açıldı; salon yeniden doldu. Hâkim cübbesini düzeltti, savcı bir kâğıdı en üste aldı.
           `),
           next: 'T_04',
         }),
@@ -1041,6 +1043,8 @@ export const trial: CasePart = {
             - Telefonunu kapattı. Pencereden aşağı, adliyenin önündeki kalabalığa baktı; bir süre kimseyi aramıyormuş gibi.
             leyla: Otuz yıl önce bu koridorda da bir mola vardı. On beş dakika. Ben o on beş dakikayı müvekkilimi teselli ederek geçirdim; kâğıtlarıma bakmadım. Sonra bir soru geldi, cevabı kâğıtlarımın arasındaydı.
             ~ Masasındaki ters çerçeve. Bir gün soracağım. Bugün değil; bugün kâğıtlarıma bakacağım.
+            = DURUŞMA SALONU · 12.05 @durusma_salonu
+            - Kapı açıldı; salon yeniden doldu. Hâkim cübbesini düzeltti, savcı bir kâğıdı en üste aldı.
           `),
           next: 'T_04',
         }),
@@ -1082,7 +1086,7 @@ export const trial: CasePart = {
       ],
       next: 'T_045',
       options: [
-        option('T04_A', 'Aldatılan kişide iştirak kastı olmaz.', {
+        option('T04_A', 'Aldatılan kişide iştirak kastı olmaz; sanık kodun ne olduğunu bilmiyordu.', {
           effects: [
             ifThen(
               any(has('ded_aldatma'), flag('ece_durust'), flag('necdet_ifsa')),
@@ -1141,7 +1145,7 @@ export const trial: CasePart = {
           bad: 'Aldatılarak kod okumak ayrı bir suç değildir; bir yıllık süre de zamanaşımına uğratmaz (TCK 66).',
           responses: B(S`hakim: Müdafi, hangi suç, hangi zamanaşımı? Reddedildi.`),
         }),
-        option('T04_D', 'Diyeceğimiz yok; takdir mahkemenizdedir.', {
+        option('T04_D', 'Takdir mahkemenizdedir.', {
           effects: [dec('pers')],
           bad: 'Savcının iştirak iddiasına cevap verilmedi; kast tartışması savunmanın en güçlü alanıydı.',
           category: 'HUKUKI_BILGI',
@@ -1259,7 +1263,7 @@ export const trial: CasePart = {
             - Hâkim kalemini bıraktı ve dinledi. Bazı cümleler tutanağa geçmek için değil, bir salondan geçmek için söylenir.
           `),
         }),
-        option('T05_C', 'Mütalaanın tutanaktan çıkarılmasını talep ediyoruz.', {
+        option('T05_C', 'Mütalaanın, dayanağı olmayan kısımlarıyla birlikte tutanaktan çıkarılmasını talep ediyoruz.', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Mütalaa tutanaktan çıkarılmaz; müdafi ona cevap verir (CMK 216/2).',
@@ -1364,7 +1368,7 @@ export const trial: CasePart = {
           `),
           },
         ),
-        option('T07_D', 'Bu kızın gözlerine bakın. Bir dolandırıcı böyle mi bakar?', {
+        option('T07_D', 'Bu kızın gözlerine bakın, Sayın Hâkim. Bir dolandırıcı böyle mi bakar? Bir yılını kaybetti; bu kadar ceza yeter.', {
           score: { SAVUNMA_STRATEJISI: -50 },
           effects: [dec('pers')],
           bad: 'Duygusal söylem delilin yerini tutmaz; heyet gözlere değil, dosyaya bakar.',

@@ -72,7 +72,7 @@ export const inv1Saha: CasePart = {
           score: { SORGULAMA: 20 },
           responses: B(S`
 necdet: Sanal ofis efendim; kimse gelmez ki görsün. Posta gelir, biz alırız, haber veririz. Nova'ya iki zarf geldi galiba, bir de kargo. Sonra o da kesildi.
-necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazılımcı, bir sigorta acentesi. Bir de bizim arşiv. Herkes kendi işinde.
+necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazılımcı, bir sigorta acentesi. Bir de Nova, kâğıt üstünde. Herkes kendi işinde.
 `),
           next: '$stay',
         }),
@@ -253,7 +253,7 @@ necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazıl
       background: 'sokak_gece',
       prompt: { speaker: 'burak', text: 'Ne diyorsun? Kimse bilmez. Ece için.' },
       choices: [
-        option('BURT_RED', 'Hayır. Mahkemeden isteriz; şifreyi kapat.', {
+        option('BURT_RED', 'Hayır. Şifreyi kapat, Burak; o kaydı mahkemeden yasal yoldan isteriz.', {
           score: { USUL_BILGISI: 60 },
           effects: [raise('burak_red')],
           good: 'Yetkisiz erişimle alınan kayıt suçtur (TCK 243, 136) ve delil olarak kullanılamaz (Anayasa 38/6; CMK 206/2-a, 217/2). Doğru yol mahkeme yazısıdır (CMK 177).',

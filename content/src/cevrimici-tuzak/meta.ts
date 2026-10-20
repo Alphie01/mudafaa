@@ -1,18 +1,22 @@
 import {
+  all,
   any,
   categories,
   CASE_FORMAT_ID,
   counter,
   flag,
   flags,
+  has,
   hiddenEnum,
   hiddenInt,
   labelEnum,
   meter,
+  not,
+  ref,
   thresholdBar,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
-import { T_BERAAT, T_INDIRIM } from './outcomes.js';
+import { T_BERAAT_B, T_INDIRIM } from './outcomes.js';
 import { p1, p2 } from './shared.js';
 
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler.
@@ -82,7 +86,7 @@ export const meta: CasePart = {
       thresholdBar: thresholdBar([
         ['Mahkûmiyet', 0, 'red'],
         ['İndirim', T_INDIRIM, 'amber'],
-        ['Beraat', T_BERAAT, 'green'],
+        ['Beraat (2-b)', T_BERAAT_B, 'green'],
       ]),
       displayClampMin: 0,
     },
@@ -109,14 +113,82 @@ export const meta: CasePart = {
   predicates: [
     { id: 'kart2', label: 'Tahtada en az 2 kart var', when: { cmp: [{ count: 'evidence', tag: 'kart' }, '>=', 2] } },
     {
-      id: 'sim_proven',
-      label: 'Hattın sanığın elinden alındığı duruşmada gösterildi',
+      id: 'sim_kismen',
+      label: 'Hattın 4 Kasım’da değiştirildiği duruşmada gösterildi',
       when: any(flag('contra_g3'), flag('contra_o1'), flag('contra_o2')),
     },
     {
-      id: 'cihaz_proven',
-      label: 'İşlemlerin başka bir cihazdan yapıldığı duruşmada gösterildi',
+      id: 'sim_proven',
+      label: 'Hattın sanığın bilgisi dışında, sahte vekâlet ve Nova’ya gönderilen fotoğraftan basılmış fotokopiyle başka biri tarafından alındığı gösterildi',
+      when: all(
+        flag('contra_g3'),
+        flag('contra_o1'),
+        flag('contra_o2'),
+        flag('contra_o3'),
+        has('ded_kopya'),
+        any(has('ded_sim'), has('ded_kesinti')),
+      ),
+    },
+    {
+      id: 'cihaz_kismen',
+      label: 'İşlemlerin başka bir cihazdan yapıldığı duruşmada tartışıldı',
       when: any(flag('contra_g1'), flag('cihaz_t04')),
+    },
+    {
+      id: 'cihaz_proven',
+      label: 'İşlemlerin ve banka SMS’lerinin sanığın telefonu olmayan bir cihazda olduğu belgelendi',
+      when: all(flag('contra_g1'), has('ded_imei')),
+    },
+    {
+      id: 'kast_yok',
+      label: 'Kodun bir tuzakla, aldatılarak okunduğu duruşmada gösterildi',
+      when: all(
+        any(flag('istirak_cevap'), flag('contra_g5'), flag('necdet_ifsa')),
+        has('ded_kaan'),
+        has('ded_aldatma'),
+        flag('fact_itiraz_tutanak'),
+        flag('fact_kaan_erkek'),
+        any(flag('arda_teslim'), flag('necdet_ifsa')),
+      ),
+    },
+    {
+      id: 'nova_sahte',
+      label: 'Nova Dijital’in kâğıt üstünde bir işveren olduğu iş merkezi müdürünün çapraz sorgusunda gösterildi',
+      when: any(all(flag('contra_n1'), flag('contra_n2')), flag('necdet_ifsa')),
+    },
+    {
+      id: 'kira_yok',
+      label: '4.500 TL’nin hesap kiralama bedeli olmadığı duruşmada gösterildi',
+      when: any(flag('contra_g2'), flag('g2_kaan')),
+    },
+    {
+      id: 'savunma_tam',
+      label: 'Hat, cihaz, kast ve kira iddiası hukuka uygun delillerle çürütüldü',
+      when: all(ref('sim_proven'), ref('cihaz_proven'), ref('kast_yok'), ref('kira_yok'), ref('nova_sahte')),
+    },
+    {
+      id: 'savunma_arda_disi',
+      label: 'Yönlendirilen kuryenin beyanı dışlandığında kalan hukuka uygun delil beraate yetiyor',
+      when: all(
+        flag('contra_g3'),
+        flag('contra_o1'),
+        flag('contra_o2'),
+        has('ded_kopya'),
+        ref('cihaz_proven'),
+        ref('kira_yok'),
+        has('ded_kaan'),
+        has('ded_aldatma'),
+        any(flag('contra_g5'), flag('istirak_cevap')),
+      ),
+    },
+    {
+      id: 'delil_beraat',
+      label: 'Hukuka uygun delil beraate yetiyor (tam savunma ya da gerçek failin ortaya çıkması + aldatma + kira iddiasının çürümesi)',
+      when: any(
+        all(not(all(flag('arda_etkileme'), flag('arda_cagrildi'))), ref('savunma_tam')),
+        all(flag('arda_etkileme'), flag('arda_cagrildi'), ref('savunma_arda_disi')),
+        all(flag('necdet_ifsa'), ref('sim_proven'), ref('cihaz_proven'), has('ded_aldatma'), ref('kira_yok')),
+      ),
     },
   ],
   variables: [
@@ -248,6 +320,11 @@ export const meta: CasePart = {
       'terditli',
       'terditli_erken',
       'gercek_fail',
+      'kor_mesafe',
+      'mola_ece',
+      'mola_leyla',
+      'arda_etkileme',
+      'onur_para',
     ),
   ],
 };

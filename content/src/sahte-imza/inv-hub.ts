@@ -667,7 +667,7 @@ const aksam3 = story('INV_AKSAM3', {
 C#buro_gece: GECE 21.30 — ARSLAN HUKUK
 N: Zil çaldı. Kapıda Tarık; elinde bir tepsi börek, üstü alüminyum folyo. Saçları ıslak.
 tarik: Avukat hanım, rahatsız etmiyorum. Yengem gönderdi. Kayhan Böreği; sıcak. Amcam “avukat hanım aç kalmasın” dedi.
-N: Tepsiyi masaya bıraktı. Gitmedi. Masadaki dosyalara baktı; bakmamaya çalışarak.
+N: Tepsiyi masaya bıraktı, paltosundaki yağmuru kapının önünde silkeledi. Saçından damlayan su folyonun üstünde boncuklandı.
 tarik: Nasıl gidiyor? Duruşma ne zaman, tam? Amcam uyuyamıyor; yengem de. Dükkân benim de evim sayılır; ben de bilmek istiyorum.
 T: Sıcak bir börek, ıslak saçlar ve bir soru. Bu dosyanın sırrı benim değil; müvekkilimin.
 tarik: Bir şey lazımsa söyleyin. Yengem “avukat hanıma ne lazımsa götür” dedi. Ben getiririm.

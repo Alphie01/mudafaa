@@ -19,7 +19,7 @@ tarik: Gelin avukat hanım, oturun. Burası benim mağaram derler; aslında herk
 tarik: Amcam size her şeyi anlattı mı? Anlatmaz o. Utanır. Bir ömür “Ateş Matbaası” dedi, şimdi adı bir dosyada.
 N: Konuşurken sesini hiç yükseltmedi. Bir kalemi parmaklarının arasında çeviriyordu; durmadan, ses çıkarmadan.
 tarik: Ne lazımsa. Fatura, irsaliye, müşteri listesi. Ben bulurum.
-T: Şifresiz bir bilgisayar, kapısı camdan bir oda. Bu dükkânda her şey herkesin. Bir sır saklamak için kötü bir yer; ya da çok iyi bir yer.
+T: Şifresiz bir bilgisayar, kapısı camdan bir oda. Bu dükkânda her şey herkesin. Bir kâğıdın hangi elden çıktığını bulmak zor olacak.
 `),
   choices: [
     option('TQ_GUN', '“18 Şubat sabahı neredeydin?”', {

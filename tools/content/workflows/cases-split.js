@@ -9,7 +9,8 @@ export const meta = {
   ],
 }
 
-const ROOT = '/Users/onderalpselcuk/works/mudafaa'
+const ROOT = (args && args.root) || '/Users/onderalpselcuk/works/mudafaa'
+const NO_BROWSER = !!(args && args.noBrowser)
 
 const STANDARDS = `
 ## The standard (binding; Dava #07 v2 is the reference implementation)
@@ -25,11 +26,12 @@ Hard requirements:
 - Legal citations live in Leyla's brief explanations, feedback/report/verdict text and formal courtroom speech — never in everyday dialogue. Legal substance must be correct for current Turkish law (verify articles; note sources and interpretive calls in docs/legal/<slug>.md). Lawyer ethics must be right (no coaching or pressuring witnesses, no chasing suspects — report to the prosecutor; false confession paths are ethics violations).
 - Mystery integrity: the true culprit/twist is NEVER stated or strongly hinted before the player has earned it through evidence. Cold opens use anonymous voices/silhouettes. Choice labels must not give away the right answer (vary length/register; wrong options must be plausible to a non-expert).
 - Structure: cold open → chapter 1 (client/family + mentor handover) → investigation hub (days × action points) → first hearing → adjournment/ARA phase with new developments → second hearing → verdict with per-outcome epilogue (OutcomeDef.epilogue). At least 4 outcome classes per lineup (two acquittal kinds CMK 223/2-b and 223/2-e, reduction or recharacterization, conviction), plus an ethics/collapse ending where it fits.
-- Gameplay carries ~half the time: ≥3 searchable scenes (PNG via case:scenes), ≥3 document puzzles, a deduction board with ≥6 recipes + decoys, interviews whose topics unlock from facts found elsewhere, testimony with press/present across both hearings, objections, a mentor consultation. Wrong moves cost something.
+- Gameplay carries ~half the time: ≥3 searchable scenes (scene HTML in content/src/<slug>/scenes/*.html; PNG rendering per the browser rule below), ≥3 document puzzles, a deduction board with ≥6 recipes + decoys, interviews whose topics unlock from facts found elsewhere, testimony with press/present across both hearings, objections, a mentor consultation. Wrong moves cost something.
 - Size: typical path (the main 223/2-e acquittal golden path) ≈ 13–16k words of lines (hard ceiling ~18k) and ≥200 player actions; \`npm run case:duration -- <slug>\` must report 90–120 min for the typical path and ≥60 min for every other outcome path. Total case text ≥18k words. Max ~220 chars per line.
 - Golden paths for every outcome in 90-tests.json. Gates: \`npm run build\` (run \`cd apps/api && npx prisma generate\` first if needed), \`npm run case:validate -- <slug>\` PASSED with full coverage, no softlock/leak; \`npx vitest run --project content-tools --project case-schema --project engine --project validator\`; \`npm run lint\`.
 - Known engine limits (work around in content; do NOT modify packages/* or apps/*): node lines show only the FIRST matching response block (chain conditional pieces via DECISION nodes); $return from nodes reachable from several pushing hubs confuses the validator's escape distance — return to the hub directly; repeatable penalty rules need maxUses; the validator doesn't read epilogue conditions.
 - Files you may create/modify: content/cases/<slug>/**, content/src/<slug>/** (if the kit uses it), content/shared/sprites/<slug>-*.json (new characters only; reuse shared sprites like mentor.json/avukat.json/hakim.json/savci.json where they fit), docs/content/<slug>.md (case design: truth, chronology, evidence chain, contradictions, node map, outcomes, golden paths, measurements), docs/content/<slug>-hikaye.md (story bible), docs/legal/<slug>.md. Do NOT edit root package.json, docs/plan.md, docs/content/lineup.md or any other case.
+${NO_BROWSER ? `- BROWSER RULE (server mode): this machine is a headless Debian server where Playwright/Chromium does not work reliably. Do NOT run \`npm run case:scenes\`, \`npm run case:sprite-preview\`, \`npx playwright install\` or anything that launches a browser, and do not try to work around it. Write scene HTML (content/src/<slug>/scenes/*.html, exact SceneDef width×height, design palette) and sprite JSON only; leave assets/scenes/*.png missing. The coordinator renders PNGs and does all visual/browser checks later on another machine — list every scene/sprite you created in your final concerns so they can be checked. All other gates (build, case:validate, case:duration, vitest, lint) must still pass.\n` : ''}- New character sprites: define them inline in content/src/<slug>/sprites.ts (as #01–#05 do). content/shared/sprites/ must hold only the 21 design sprites; tools/content/test/extract-sprites.test.ts enforces this.
 - Mark meta legal review as approved by "Claude (iç inceleme)" consistently with Dava #07.
 - Do not dispatch subagents. Commit in logical steps on your current branch with Turkish conventional commit messages ending with the line "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>".
 `
@@ -52,7 +54,8 @@ D) GATES: run case:validate, the vitest projects listed in the standard, lint.
 Severity: "blocker" = violates a hard requirement (early solution, spoiler, below length/duration, missing epilogue, failing gate, legal error in verdict); "major" = clearly hurts quality/fairness; "minor" = polish. Each finding must have a precise location (file + node/choice id) and a concrete fix. Do not edit files yourself.
 `
 
-const CASES = args.items
+const abs = (p) => (p && !p.startsWith('/') ? ROOT + '/' + p : p)
+const CASES = args.items.map(c => ({ ...c, worktreePath: abs(c.worktreePath), w: c.w ? { ...c.w, worktreePath: abs(c.w.worktreePath) } : c.w }))
 
 const WRITE = {
   type: 'object',
@@ -123,7 +126,7 @@ Case brief from the lineup:
 - Rank requirement: ${c.rank}; difficulty ${c.difficulty}/5.
 ${c.extra ? '- Extra: ' + c.extra : ''}
 ${STANDARDS}
-Process: (1) scaffold with \`npm run case:new\` (see the guide); (2) write the story bible docs/content/${c.slug}-hikaye.md FIRST (truth & chronology, cast table with voices/secrets/arcs, structure, scene-by-scene beats with word budgets, epilogues); (3) write docs/content/${c.slug}.md (evidence chain, contradictions, outcome conditions, scoring); (4) build the content chapter by chapter, committing per chapter; (5) scenes via case:scenes, new sprites; (6) golden paths for every outcome; (7) legal notes docs/legal/${c.slug}.md; (8) self-check for early solutions: find the shortest action path to each acquittal with a quick search over enumerateActions and make sure acquittals require the real evidence chain (target: shortest acquittal ≥ 60% of the typical path's actions); dump the typical path's lines and remove anything that spoils the culprit early; (9) all gates green.
+Process: (1) scaffold with \`npm run case:new\` (see the guide); (2) write the story bible docs/content/${c.slug}-hikaye.md FIRST (truth & chronology, cast table with voices/secrets/arcs, structure, scene-by-scene beats with word budgets, epilogues); (3) write docs/content/${c.slug}.md (evidence chain, contradictions, outcome conditions, scoring); (4) build the content chapter by chapter, committing per chapter; (5) scenes (HTML; render with case:scenes only if the browser rule allows), new sprites; (6) golden paths for every outcome; (7) legal notes docs/legal/${c.slug}.md; (8) self-check for early solutions: find the shortest action path to each acquittal with a quick search over enumerateActions and make sure acquittals require the real evidence chain (target: shortest acquittal ≥ 60% of the typical path's actions); dump the typical path's lines and remove anything that spoils the culprit early; (9) all gates green.
 
 Return the structured result (worktreePath and branch from step 0; numbers from case:duration and your word count).`
 

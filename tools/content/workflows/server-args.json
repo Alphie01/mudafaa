@@ -1,0 +1,327 @@
+{
+ "root": "__ROOT__",
+ "noBrowser": true,
+ "items": [
+  {
+   "number": 1,
+   "slug": "kayip-cuzdan",
+   "title": "Kayıp Cüzdan",
+   "crime": "Hırsızlık (TCK 141)",
+   "core": "Kast ve vasıf: TCK 160 (kaybolmuş eşya üzerinde tasarruf) ile 141 ayrımı; teslim niyeti; kamera kaydının bütünlüğü",
+   "truth": "Müvekkil (üniversite öğrencisi) cüzdanı otobüste bulup teslim edecekti; kartları kullanan, cüzdanın ilk sahibinden onu çalan yankesici şebekesidir.",
+   "rank": "none",
+   "difficulty": 1,
+   "extra": "First case of the series: also teaches mechanics gently through story, but it is a full 90–120 min story.",
+   "mode": "done",
+   "w": {
+    "slug": "kayip-cuzdan",
+    "worktreePath": ".claude/worktrees/review-kayip-cuzdan",
+    "branch": "review/kayip-cuzdan",
+    "status": "done",
+    "gatesPassed": true,
+    "actionsTypical": 217,
+    "durationTypicalMin": 94.2,
+    "wordsTypical": 13051,
+    "wordsTotal": 22689,
+    "outcomes": [
+     "IKRAR (CONVICTION + ethics card: false confession → TCK 141/1, 168/2, 62/1, HAGB) — G_I 9030",
+     "BERAAT_B (CMK 223/2-b: full 4-channel recording + Cemil to prosecutor + grounded suç duyurusu → ring caught, Bşk. Orhan testifies) — G_B 11555",
+     "BERAAT_E (CMK 223/2-e, typical: ≥3 of 6 findings + acquittal plea + final ≥9300) — TIPIK 11395, G_E2 9920",
+     "NITELENDIRME (RECHARACTERIZED: TCK 160, 50 days ADP 5,000 TL, HAGB, kesin) — G_N 3170",
+     "MAHKUMIYET (TCK 141/1 → 62/1 → 10 months, TCK 51 erteleme; collapse variant) — G_M 370, W 7980 (collapse in 2nd hearing)"
+    ],
+    "concerns": [
+     "Sprite location: the guide says new sprites go to content/shared/sprites/<slug>-<ad>.json, but tools/content/test/extract-sprites.test.ts requires that directory to hold exactly the 21 design sprites (the content-tools test failed with them there). To keep the gates green I defined the 7 new sprites inline in content/src/kayip-cuzdan/sprites.ts and removed the shared JSON files. All other case agents will hit the same conflict; the guide or the test needs reconciling.",
+     "Typical path is 13,051 words by case:duration (inside the 13–16k task target, but case:duration prints its '15–25k LOW' warning). It runs 94.2 min with 217 actions. G_M (60.7 min) and G_N (61.4 min) clear the ≥60 min floor with little margin, so any trimming would drop them below it.",
+     "The early-solution check was a delta-debugging / greedy block-removal search over golden paths replayed with act(), not an exhaustive BFS over enumerateActions (the validator's BFS also stops at its state budget: SIMULATION_INCOMPLETE). Shortest acquittals found: BERAAT_E in 137 actions (63% of 217) after I raised its threshold from 9000 to 9300 (the earlier run found 128 = 59%), and BERAAT_B in 153 (71%). All shortened paths still contain the full evidence chain.",
+     "Legal points flagged for a human reviewer in docs/legal/kayip-cuzdan.md §4: (1) TCK 160 applied to a stolen-then-abandoned wallet (whether that counts as 'kaybedilmiş' eşya; the ban on analogy); (2) the verdict text compresses CMK 254/1 uzlaştırma after recharacterization to TCK 160; (3) the TCK 160 HAGB is written as 'kesin' (CMK 231/12 together with 272/3-a); (4) TCK 168 with the sister paying the damage on the IKRAR path; (5) a single-judge court is addressed as 'Sayın Hâkim', not the guide's 'Sayın Başkan'. meta.legalReview is APPROVED by 'Claude (iç inceleme)'.",
+     "No Yargıtay decision numbers are cited anywhere. Kent Ulaşım A.Ş., the büfe and all people are fictional.",
+     "Validator: PASSED with 0 errors and 1 warning (SIMULATION_INCOMPLETE, expected for long cases). Coverage is full: nodes 112/112, choices 234/234, rules 72/72, evidence 53/53. Golden paths 7/7 (one per outcome, plus G_E2 to reach otherwise-unreached rules, plus collapse path W)."
+    ]
+   }
+  },
+  {
+   "number": 2,
+   "slug": "cevrimici-tuzak",
+   "title": "Çevrimiçi Tuzak",
+   "crime": "Nitelikli dolandırıcılık (TCK 158/1-f)",
+   "core": "Hesabın kimin elinde olduğu; SIM kart kopyalama (CMK 135/6 kayıtları); TCK 39 yardım etme ile müşterek faillik ayrımı",
+   "truth": "Müvekkilin kimlik bilgileri bir 'iş ilanı' ile ele geçirilmiş, hesabı habersizce kullanılmış; gerçek organizatör ilanı veren 'işverendir'.",
+   "rank": "none",
+   "difficulty": 1,
+   "mode": "done",
+   "w": {
+    "slug": "cevrimici-tuzak",
+    "worktreePath": ".claude/worktrees/review-cevrimici-tuzak",
+    "branch": "review/cevrimici-tuzak",
+    "status": "done",
+    "gatesPassed": true,
+    "durationTypicalMin": 93.1,
+    "wordsTypical": 13161,
+    "actionsTypical": 200,
+    "wordsTotal": 20177,
+    "outcomes": [
+     "ETIK (CONVICTION + etik kartı): G_ETIK 90.0 dk, final 8735",
+     "BERAAT_B (CMK 223/2-b, Necdet Sarı İMEİ raporu + kartvizit ile ifşa): G_B 92.3 dk, final 11085",
+     "BERAAT_E (CMK 223/2-e, typical): TIPIK 93.1 dk, final 10750; G_E2 90.0 dk, final 10360",
+     "INDIRIM (RECHARACTERIZED, TCK 158/4 lehe kanun + TCK 62 + HAGB/231-9): G_I 66.3 dk, final 4195",
+     "MAHKUMIYET (TCK 158/1-f, 37/1 + 62: 3 yıl 4 ay + 125.000 TL): G_M 61.5 dk, final 455; W (collapse) 77.3 dk, final 5750"
+    ],
+    "concerns": [
+     "The test tools/content/test/extract-sprites.test.ts requires content/shared/sprites to hold exactly the 21 design sprites. A new <slug>-*.json file there makes vitest fail, even though the authoring guide and the task say to put new sprites there. To keep the gates green, the six new character sprites are defined inside the package in content/src/cevrimici-tuzak/sprites.ts (ct_ece, ct_nurettin, ct_onur, ct_arda, ct_necdet, ct_burak). The other 14 case agents will hit the same conflict.",
+     "The typical path is 13,161 words / 200 actions / 93.1 min. That is inside the 13–16k target and the 90–120 min gate, but under the guide's 15–25k soft band, so the tool prints a LOW warning. The G_E2 and G_ETIK paths sit right at 90.0 min, and G_M is at 61.5 min (hard floor 60). Cutting text from shared nodes could push these under their limits.",
+     "Legal interpretive calls are documented in docs/legal/cevrimici-tuzak.md §4. The main ones: TCK 158/4 is applied without an additional TCK 39 reduction (no double reduction for the same contribution). The IMEI cross-query is treated as CMK 135/6 tespit via a suç duyurusu. Since Law 7499, the HAGB appeal route is istinaf (CMK 231/12). No CMK 141 compensation notice is given, because a yurt dışı yasağı is not covered by 141/1.",
+     "The case uses the 16/7/2026 Law 7589 amendments (TCK 158/4 and CMK 231 as amended), taken from mevzuat.gov.tr PDFs downloaded on 2026-10-20.",
+     "Early-solution check: deleting actions from the golden paths gives locally shortest acquittals of 137 actions for both BERAAT_E and BERAAT_B, which is 68.5% of the typical path's 200. Both still need the bank device log, proof the SIM was taken over, and the score threshold; B also needs the IMEI report linked to the card. This is a local minimum, not an exhaustive search.",
+     "Culprit hints were trimmed after reviewing the typical-path dump. What remains before the second hearing is subtle planted detail: lemon cologne, a signet ring and a 'YÖNETİM ARŞİVİ' plate in investigation 1, plus Ece's two-second ring memory and the management parking spot in ARA. Strong pointers come only from Onur's testimony in the second hearing. The devil's-advocate review should check whether the ARA ring memory and the parking-spot deduction point to the culprit too early."
+    ]
+   }
+  },
+  {
+   "number": 3,
+   "slug": "kirmizi-isik",
+   "title": "Kırmızı Işık",
+   "crime": "Taksirle öldürme (TCK 85)",
+   "core": "Kusur oranı ve bilirkişi raporuna itiraz (CMK 67); bilinçli taksir (TCK 22/3) ile basit taksir ayrımı; illiyet bağı",
+   "truth": "Kavşaktaki sinyalizasyon arızalıdır; asıl çarpmayı yapıp kaçan ikinci bir araç vardır, müvekkilin aracı yayaya sonradan sürtünmüştür.",
+   "rank": "none",
+   "difficulty": 2,
+   "mode": "done",
+   "w": {
+    "slug": "kirmizi-isik",
+    "worktreePath": ".claude/worktrees/review-kirmizi-isik",
+    "branch": "review/kirmizi-isik",
+    "status": "done",
+    "gatesPassed": true,
+    "durationTypicalMin": 94.1,
+    "wordsTypical": 13159,
+    "actionsTypical": 210,
+    "wordsTotal": 23882,
+    "outcomes": [
+     "BERAAT_B (223/2-b) — G_B: final 12.060, 217 aksiyon, 95,2 dk",
+     "BERAAT_E (223/2-e) — TIPIK: final 11.385, 210 aksiyon, 94,1 dk",
+     "INDIRIM (RECHARACTERIZED: basit taksir, TCK 50/4 ile 600 gün adli para cezası) — G_I: final 6.365, 179 aksiyon, 75,8 dk",
+     "MAHKUMIYET (3 yıl 9 ay, bilinçli taksir) — G_M: final −200, 142 aksiyon, 61,4 dk",
+     "MAHKUMIYET (çöküş, ♥0 3. celsede) — W: final 4.700, 149 aksiyon, 68,6 dk",
+     "ETIK (garaja izinsiz giriş: TCK 116/2, hukuka aykırı delil, disiplin) — G_ETIK: final 11.060, 216 aksiyon, 93,3 dk"
+    ],
+    "concerns": [
+     "Kılavuz yeni sprite'ları content/shared/sprites/<slug>-*.json olarak istiyor, ama tools/content/test/extract-sprites.test.ts o dizinde yalnızca tasarımdan çıkarılan 21 sprite'a izin veriyor. Bu yüzden content-tools kapısı kırılıyordu. 8 yeni sprite (Volkan, Gül, Necati, Serkan, Hamdi, Sevim, Nalan, Rüstem) önce dosya olarak yazılıp case:sprite-preview ile denetlendi, sonra content/src/kirmizi-isik/sprites.ts içine satır içi taşındı. Diğer 13 davayı yazan ajanlar da aynı çelişkiye takılacak; koordinatörün kılavuzu ya da testi düzeltmesi gerekiyor.",
+     "Tipik yol 13.159 sözcük. Görevdeki 13–16 bin bandında, ama case:duration aracı kendi 15–25 bin hedefinin altında olduğu için '!' uyarısı veriyor. Kapı geçiyor.",
+     "G_M (mahkûmiyet) yolu 61,4 dk ile 60 dk tabanına yakın.",
+     "2918 sayılı KTK'nın mevzuat.gov.tr PDF'i indirilirken zaman aşımına uğradı. md. 84/a yalnızca ikincil kaynaklarla doğrulandı. Oyunda madde numarası verilmeden, Leyla'nın genel açıklamasında geçiyor. TCK ve CMK maddeleri mevzuat.gov.tr metninden doğrulandı.",
+     "Bazı hukuki tercihler bir avukatın incelemesine açık; docs/legal/kirmizi-isik.md §5'te 14 madde olarak yazılı. Başlıcaları: illiyet koptuğunda 223/2-b mi, 2-a ya da 2-c mi; indirim sonucunda HAGB/erteleme yerine TCK 50/4 seçilmesi; polisin üç ay dolabında sakladığı cam parçasının delil zinciri.",
+     "En kısa beraat araması: golden path'ten aksiyon silerek küçültmede 174 aksiyon (TIPIK'in %83'ü, BERAAT_E). Işın aramasında (beam 300) ilk beraat 202 aksiyonda bulundu (BERAAT_B). İkisi de sezgisel arama; tam BFS yapılamadı. Doğrulayıcının SIMULATION_INCOMPLETE uyarısı da uzun dava için beklenen türden.",
+     "Yazım sonrası kendi taramamda erken ipucu veren satırlar ayıklandı: soğuk açılıştaki 'kimse kimseyi görmez', Leyla'nın illiyet ve 38 km/s cümleleri, gece nöbetindeki 'çatışma' satırı, taksiciye 'gümbürtüden önce' sorusu. Yine de şeytanın avukatı incelemesi bu konuya ayrıca bakmalı."
+    ]
+   }
+  },
+  {
+   "number": 4,
+   "slug": "beyaz-toz",
+   "title": "Beyaz Toz",
+   "crime": "Uyuşturucu ticareti (TCK 188/3)",
+   "core": "188 ile 191 (kullanmak için bulundurma) ayrımı: miktar, paketleme, terazi, iletişim; arama kararının kapsamı (CMK 119)",
+   "truth": "Madde ev arkadaşınındır; paketleme ve terazi onun odasındadır, müvekkil kullanıcıdır, satıcı değildir.",
+   "rank": "none",
+   "difficulty": 2,
+   "extra": "Handle drug use soberly; no glamorisation.",
+   "mode": "done",
+   "w": {
+    "slug": "beyaz-toz",
+    "worktreePath": ".claude/worktrees/review-beyaz-toz",
+    "branch": "review/beyaz-toz",
+    "status": "done",
+    "gatesPassed": true,
+    "durationTypicalMin": 93.3,
+    "wordsTypical": 13093,
+    "actionsTypical": 206,
+    "wordsTotal": 20655,
+    "outcomes": [
+     "TIPIK → BERAAT_E (CMK 223/2-e): final 12145, 93.3 dk, 206 eylem",
+     "G_B → BERAAT_B (CMK 223/2-b): final 12530, 91.3 dk",
+     "G_N → NITELIK_191 (TCK 191/1 + 191/8 HAGB, CMK 226 ek savunma): final 6645, 76.4 dk",
+     "G_M → MAHKUMIYET (188/3 + 188/4-a + 62: 12 yıl 6 ay, 125.000 TL APC): final 855, 62.7 dk",
+     "G_ETIK → TELKIN (sahte tanık; mahkûmiyet 15 yıl + etik kartı, XP 0): final 9210, 76.4 dk",
+     "W → MAHKUMIYET (çöküş, 2. celsede güvenilirlik 0): final 8360, 78.9 dk",
+     "case:validate PASSED: 0 hata, tek uyarı SIMULATION_INCOMPLETE; kapsam node 93/93, seçenek 212/212, kural 67/67, delil 56/56; golden path 6/6; softlock ya da sızıntı yok",
+     "Erken çözüm denetimi: elle kurulan en yoğun yol 104 eylemde 8390 puanda kalıyor (beraat eşiği 10500). Beraate ulaşmak için yaklaşık 135–140 eylem gerekiyor (tipik yolun %65–68'i). Puan sezgiselli ışın araması ilk beraati 186. eylemde buldu",
+     "vitest (content-tools, case-schema, engine, validator) 1885/1885 geçti; npm run lint ve npm run build temiz; prettier --check temiz"
+    ],
+    "concerns": [
+     "Tipik yol 13.093 sözcük. Görevdeki 13–16 bin bandının alt ucunda; case:duration kapısı geçiyor ama kılavuzun 15–25 bin 'hedef' uyarısı veriyor (Dava #07 v2 de 13.841 sözcükle aynı uyarıyı alıyordu)",
+     "Kurallar ile test çelişiyor. Kılavuz yeni karakter sprite'larını content/shared/sprites/<slug>-*.json olarak istiyor; ama tools/content/test/extract-sprites.test.ts o dizinin tasarımdan çıkarılan setle birebir aynı olmasını şart koşuyor. Dört yeni sprite (Kaan, Defne, Nesrin, Tolga) bu yüzden content/src/beyaz-toz/cast.ts içinde satır satır tanımlandı; case:sprite-preview ile önizleme bu dosyalar silinmeden önce yapıldı. Diğer 13 dava da aynı sorunla karşılaşacak",
+     "Kılavuzun 'en kısa beraat' ölçütü tam bir arama değil, iki tahmin: elle kurulan en yoğun yol ve genişliği 60 olan ışın araması. Beraat, gerçek delil zincirinin (oda varsayımı + şekerlik + muhbirin çelişkisi) yanında 10.500 puan eşiğiyle de kilitli; eşik yükseltildi (eskisi 7.000 idi)",
+     "Hukuki yorum noktaları docs/legal/beyaz-toz.md §4'te açık bırakıldı: kapsam dışı aramanın delil yasağı sayılması, CMK 119/4, 'telkin edici soru / duyum / kanaat' itirazlarının adlandırılması, TELKİN sonunda heyetin savunmaya itibar etmemesi, gün doğumu ~07.05 varsayımı",
+     "Hükümlerdeki adli para cezası TCK 52/2'nin güncel alt sınırıyla (günü 100 TL) hesaplandı. Dava #07'nin hükümlerinde bu kontrol edilmeli",
+     "Validator FALLBACK'teki maxUses değerini yok sayıyor. Tahta havuzları kaçış araması bütçesine sığsın diye daraltıldı; ara evre tahtası birinci evre tariflerini yeniden kurdurmuyor",
+     "Ekran yalnızca iki hâkim gösteriyor; gerçek ağır ceza heyeti üç hâkim (Dava #07'deki tasarım sınırı). Yeni sahne arka planları (kafe, hastane = eczane) istemcide çizilmeli"
+    ]
+   }
+  },
+  {
+   "number": 5,
+   "slug": "gece-yarisi-gaspi",
+   "title": "Gece Yarısı Gaspı",
+   "crime": "Yağma (TCK 148, 149/1-a)",
+   "core": "Teşhis usulünün güvenilirliği (tek fotoğrafla teşhis, telkin), mazeret; CMK 217 takdir",
+   "truth": "Benzer görünümlü kuzen; mağdura gösterilen tek fotoğraf teşhisi kirletmiştir.",
+   "rank": "none",
+   "difficulty": 2,
+   "extra": "Avoid repeating Dava #07's identification/alibi beats; make the photo-lineup contamination and the cousin reveal feel fresh.",
+   "mode": "done",
+   "w": {
+    "slug": "gece-yarisi-gaspi",
+    "worktreePath": ".claude/worktrees/review-gece-yarisi-gaspi",
+    "branch": "review/gece-yarisi-gaspi",
+    "status": "done",
+    "gatesPassed": true,
+    "outcomes": [
+     "AZIL (OTHER, etik sonu: mağdura özçekim gösterilir, vekâlet azille biter) — G5 8130",
+     "BERAAT_B (CMK 223/2-b; savcılığa bildirim + Derya yolu → Tolga teslim olur, saat iade) — G1 11450",
+     "BERAAT_E (CMK 223/2-e; tipik yol) — G2/TIPIK 11290",
+     "INDIRIM (REDUCED; silah unsuru düşer, 149/1-h 10 yıl → TCK 62/1 → 8 yıl 4 ay) — G3 3870",
+     "MAHKUMIYET (149/1-a,h 12 yıl → 62/1 → 10 yıl) — G4 -345; W çöküş yolu 7180"
+    ],
+    "durationTypicalMin": 94.3,
+    "wordsTypical": 13221,
+    "wordsTotal": 22027,
+    "actionsTypical": 208,
+    "concerns": [
+     "Yeni karakter sprite'ları (Derya, Tolga, Nermin, Kadir, Gamze) content/shared/sprites/ yerine content/src/gece-yarisi-gaspi/sprites.ts'te satır içi duruyor. Sebebi: tools/content/test/extract-sprites.test.ts, o dizinde yalnızca tasarımdan çıkarılmış sprite dosyalarına izin veriyor; content/shared/sprites/gece-yarisi-gaspi-*.json eklemek content-tools testini kırıyordu. Aynı yolu izleyen diğer dava ajanları da bu çakışmaya düşecek; kılavuz ile test arasında bir karar verilmesi gerekiyor.",
+     "İddianame lineup'taki 'TCK 148, 149/1-a' yerine 149/1-a, h olarak yazıldı. Olay 23.42'de, yani TCK 6/1-e anlamında gece vaktinde; bu ekleme indirim sonucunun hukuken tutarlı olması için gerekli. Ayrıntı docs/legal/gece-yarisi-gaspi.md §4.1'de.",
+     "Etik sonu Dava #07'deki gibi zorlanmış bir mahkûmiyet değil. AZIL (sınıf OTHER) olarak kuruldu: hüküm verilmiyor, Baroya ve savcılığa bildirim yapılıyor, müvekkil vekâleti geri alıyor. Böylece hüküm mantığı bozulmuyor; inceleyenin bu tercihi onaylaması gerekebilir.",
+     "Tipik yol case:duration ölçüsüyle 13.221 sözcük. Görevdeki 13–16 bin bandında, ama kılavuzun 15–25 bin 'hedef' bandının altında; bu yalnızca uyarı veriyor, kapı geçiyor.",
+     "Mahkûmiyet yolu G4 62,7 dakika ölçülüyor, 60 dakikalık tabanın hemen üstünde. Sonradan bu yoldan yapılacak metin kısaltmaları onu tabanın altına düşürebilir.",
+     "Erken çözüm denetimi kapsamlı bir arama değil. TIPIK yolundan aksiyon parçalarını açgözlü biçimde silen yerel bir küçültme yapıldı: beraate götüren en kısa yol 169/208 aksiyon (oran 0,81, hedef ≥0,60). Beraat 9.000 final, ikna ≥6, teşhisin çökmesi ve iki bağımsız lehe bulgu istiyor.",
+     "TCK 277'nin özel kastı, avukatın iyi niyetli etkileme girişimlerinde tartışmalı. Bu yüzden geri bildirimlerde 'sayılabilir / soruşturulabilir' dili kullanıldı; tanığa saat ezberletme seçenekleri TCK 272 ve 38'e bağlandı. Gerekçe hukuki notlar §4.8'de.",
+     "Doğrulayıcı uzun davalarda beklendiği gibi SIMULATION_INCOMPLETE uyarısı veriyor. Kapsam tam: 104/104 node, 203/203 seçenek, 80/80 kural, 49/49 delil; 7/7 golden path geçiyor.",
+     "docs/plan.md ve lineup, görev kuralı gereği güncellenmedi. Bu davanın golden path sonuçlarının plana işlenmesi koordinatöre kalıyor."
+    ]
+   }
+  },
+  {
+   "number": 6,
+   "slug": "son-mesaj",
+   "title": "Son Mesaj",
+   "crime": "Şantaj (TCK 107/2) ve özel hayatın gizliliğini ihlal (TCK 134)",
+   "core": "Mesajların kimden çıktığı (hesap ele geçirme, cihaz incelemesi); dijital delilin imaj alma ve hash ile korunması (CMK 134)",
+   "truth": "Müvekkilin telefonundaki mesajlar, onun hesabını ele geçiren eski iş ortağı tarafından gönderilmiştir.",
+   "rank": "none",
+   "difficulty": 3,
+   "extra": "Private-life content must stay non-explicit (no sexual material).",
+   "mode": "resume",
+   "worktreePath": ".claude/worktrees/wip-son-mesaj",
+   "branch": "wip/son-mesaj"
+  },
+  {
+   "number": 8,
+   "slug": "kirik-kadeh",
+   "title": "Kırık Kadeh",
+   "crime": "Kasten yaralama (TCK 86/1, 86/3-e)",
+   "core": "Meşru müdafaa (TCK 25/1), sınırın aşılması (27/2), haksız tahrik (TCK 29); kemik kırığının derecesi (TCK 87 ile ilişkisi)",
+   "truth": "Bar kavgasında müvekkil saldırıya uğrayan taraftır; görgü tanıklarının biri saldırganın arkadaşıdır.",
+   "rank": "none",
+   "difficulty": 3,
+   "extra": "Design card exists: keep the title; recurring cast hint: Bora Yalçın, Av. Tolga Şen (shared sprites bora.json, rakip.json may fit).",
+   "mode": "resume",
+   "worktreePath": ".claude/worktrees/wip-kirik-kadeh",
+   "branch": "wip/kirik-kadeh"
+  },
+  {
+   "number": 9,
+   "slug": "sahte-imza",
+   "title": "Sahte İmza",
+   "crime": "Resmî belgede sahtecilik (TCK 204/1)",
+   "core": "İmza incelemesi (bilirkişi, karşılaştırma imzaları), noter işlemleri; özel belge ile resmî belge ayrımı (TCK 207)",
+   "truth": "Tapu devrindeki imzayı, müvekkilin vekâletnamesini kopyalayan yeğeni atmıştır.",
+   "rank": "none",
+   "difficulty": 3,
+   "mode": "resume",
+   "worktreePath": ".claude/worktrees/wip-sahte-imza",
+   "branch": "wip/sahte-imza"
+  },
+  {
+   "number": 10,
+   "slug": "liman-gecesi",
+   "title": "Liman Gecesi",
+   "crime": "Kasten öldürme (TCK 81/1)",
+   "core": "Kastın yokluğu: neticesi sebebiyle ağırlaşmış yaralama (TCK 87/4), olası kast (TCK 21/2), haksız tahrik; otopsi raporu ve ölüm saatinin tespiti",
+   "truth": "Liman işçisinin ölümü: müvekkilin vurduğu darbe öldürücü değildir; asıl ölüm sebebi sonradan gelen ikinci kişinin müdahalesidir.",
+   "rank": "KIDEMLI",
+   "difficulty": 4,
+   "extra": "Set in Gemlik/Mudanya port; avoid overlap with Dava #07's Gemlik port scene.",
+   "mode": "resume",
+   "worktreePath": ".claude/worktrees/wip-liman-gecesi",
+   "branch": "wip/liman-gecesi"
+  },
+  {
+   "number": 11,
+   "slug": "belediye-kasasi",
+   "title": "Belediye Kasası",
+   "crime": "Zimmet (TCK 247/1-2)",
+   "core": "Kullanıcı yetkileri ve log kayıtları; hizmet nedeniyle zilyetliğin kimde olduğu; etkin pişmanlık (TCK 248) seçeneğinin etik sınırı",
+   "truth": "Vezne sistemindeki açık, müvekkilin şifresini kullanan müdür yardımcısı tarafından istismar edilmiştir.",
+   "rank": "KIDEMLI",
+   "difficulty": 4,
+   "mode": "resume",
+   "worktreePath": ".claude/worktrees/wip-belediye-kasasi",
+   "branch": "wip/belediye-kasasi"
+  },
+  {
+   "number": 12,
+   "slug": "zarf",
+   "title": "Zarf",
+   "crime": "Rüşvet (TCK 252)",
+   "core": "İletişimin tespiti kararının kapsamı (CMK 135) ve hukuka aykırı delil (CMK 206/2-a, 217/2); kışkırtıcı ajan; rüşvet ile irtikap (TCK 250) ayrımı",
+   "truth": "Zarfı tapu memuru müvekkilin çekmecesine, ondan kurtulmak isteyen başka bir memur bırakmıştır; dinleme kayıtları kapsam dışıdır.",
+   "rank": "KIDEMLI",
+   "difficulty": 4,
+   "mode": "resume",
+   "worktreePath": ".claude/worktrees/wip-zarf",
+   "branch": "wip/zarf"
+  },
+  {
+   "number": 13,
+   "slug": "silinen-dosyalar",
+   "title": "Silinen Dosyalar",
+   "crime": "Bilişim sistemindeki verileri bozma, yok etme (TCK 244/2), sisteme girme (TCK 243)",
+   "core": "Log analizi, bilirkişi imajı, yetki ve rıza; 'yetkisiz' girişin unsurları",
+   "truth": "Şirket verilerini silen, sigorta tazminatı için kendi sistemini sabote eden genel müdürdür.",
+   "rank": "ORTAK",
+   "difficulty": 4,
+   "mode": "resume",
+   "worktreePath": ".claude/worktrees/wip-silinen-dosyalar",
+   "branch": "wip/silinen-dosyalar"
+  },
+  {
+   "number": 14,
+   "slug": "yanik-ev",
+   "title": "Yanık Ev",
+   "crime": "Genel güvenliği kasten tehlikeye sokma (TCK 170/1-a) ve nitelikli dolandırıcılık, sigorta (TCK 158/1-k)",
+   "core": "Yangın bilirkişi raporu (elektrik arızası mı, hızlandırıcı mı), sigorta poliçesinin zamanlaması; dolaylı delillerin zinciri",
+   "truth": "Yangın elektrik arızasıyla çıkmıştır; hızlandırıcı izi, olay yerine sonradan giren bir eksperin sahte raporundandır.",
+   "rank": "ORTAK",
+   "difficulty": 5,
+   "mode": "resume",
+   "worktreePath": ".claude/worktrees/wip-yanik-ev",
+   "branch": "wip/yanik-ev"
+  },
+  {
+   "number": 15,
+   "slug": "son-durusma",
+   "title": "Son Duruşma",
+   "crime": "Tasarlayarak kasten öldürme (TCK 82/1-a)",
+   "core": "Tasarlamanın unsurları; haksız tahrik (TCK 29); üç celseye yayılan duruşma; tanıkların birbirini çürüten anlatımları",
+   "truth": "Büronun eski bir davasıyla bağlantılı final: mentor Leyla Erdem'in yıllar önceki bir müvekkilinin oğlu suçlanmıştır; gerçek fail davanın baş tanığıdır.",
+   "rank": "ORTAK",
+   "difficulty": 5,
+   "extra": "Series finale: pay off Leyla's turned-over photo frame seeded in Dava #07 (her old client); three hearings.",
+   "mode": "new"
+  },
+  {
+   "mode": "review7",
+   "slug": "gece-bekcisinin-sirri"
+  }
+ ]
+}

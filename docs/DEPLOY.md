@@ -86,6 +86,8 @@ git pull && npm ci && npm run build && npm run db:migrate && npm run db:seed
 
 ## 8. Dava üretimini sunucuda sürdürmek (isteğe bağlı)
 
+Hazır prompt: [docs/content/server-prompt.md](content/server-prompt.md) (headless Debian; tarayıcı kontrolleri koordinatöre bırakılır).
+
 Dava yazım/inceleme hattı Claude Code iş akışı olarak `tools/content/workflows/` altında durur:
 
 - `cases-split.js` — yaz → şeytanın avukatı incelemesi → düzelt → (≥3 engel varsa) yeniden incele.

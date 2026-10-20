@@ -105,6 +105,14 @@
             },
             { "speaker": "baskan", "text": "Raporu düzenleyen uzman Doç. Dr. Selma Karaca hazır. Dinleyeceğiz." },
             {
+              "speaker": "savci",
+              "text": "Sayın Başkan, kurumların cevaplarını inceledik. Esasa ilişkin görüşümüzü mütalaada bildireceğiz."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcının sesi ilk celsedekinden daha yavaştı. Dosyasının sekmeleri de değişmişti; yeni renkler, yeni sayfalar."
+            },
+            {
               "speaker": "narrator",
               "text": "Kırklarının ortasında, sade, gözlüklü bir kadın kürsüye geçti. Elinde rapor, raporun içinde renkli sekmeler."
             },
@@ -112,6 +120,10 @@
               "speaker": "player",
               "text": "Bir bilirkişi “olabilir” der. Bir avukatın işi, “olabilir”in yanına “ama” koydurabilmektir. Kâğıtla.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tarık sanık sırasında, ellerini dizlerine koymuş, kürsüye bakıyordu. Bu kez ellerini saklamıyordu."
             }
           ]
         }
@@ -400,7 +412,7 @@
         {
           "id": "PS_B2_KANTIN",
           "kind": "PRESENT",
-          "match": { "statement": "B2", "evidence": ["ev_kantin"] },
+          "match": { "statement": "B2", "evidence": ["ev_kantin", "ev_telefon"] },
           "responses": [
             {
               "lines": [
@@ -583,6 +595,10 @@
               "speaker": "player",
               "text": "Darbe, düşme değil. Saat, kavgadan sonra. Bir uzman bunları kendi ağzıyla söyledi. Şimdi ikinci soru: kim?",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı kısa bir not aldı; sonra kalemini yavaşça masaya bıraktı. Gülay galeride Sevim’e baktı. Sevim bu kez başını çevirmedi."
             }
           ]
         },
@@ -801,7 +817,7 @@
         {
           "id": "PS_K6",
           "kind": "PRESENT",
-          "match": { "statement": "K6", "evidence": ["ev_abone", "ded_motif"] },
+          "match": { "statement": "K6", "evidence": ["ev_abone", "ded_motif", "ev_defter"] },
           "responses": [
             {
               "when": { "hasEvidence": "ded_motif" },
@@ -995,8 +1011,29 @@
               "text": "Kenan kürsüden indi. Avukatı onu kapıya kadar götürdü. Salonda kimse bir şey söylemedi."
             },
             {
+              "speaker": "narrator",
+              "text": "Sevim Yavuz galeride, kocasının amirinin arkasından baktı. Dudakları kıpırdadı; bir şey söyledi, kimse duymadı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Bora Kılınç dosyasında bir sayfayı çevirdi, sonra bir daha. Bir şey arıyordu; aradığı artık dosyada değildi."
+            },
+            {
               "speaker": "player",
               "text": "Susan bir tanık. Susmak bir hak; ama bir heyetin önünde susmak da bir şey söyler.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Üye hâkim Alkan başkana doğru eğildi, bir şey fısıldadı. Başkan başını salladı ve kâtibe bir not yazdırdı."
+            },
+            {
+              "speaker": "baskan",
+              "text": "Tanığın beyanları ve cevap vermekten kaçındığı sorular tutanağa geçmiştir. Heyet bunları değerlendirecektir."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir kâtip bir not yazdı. Bir dosyada bir satır. Bazen bir dava o satırda biter; bazen başka bir dava o satırda başlar.",
               "style": "thought"
             }
           ]
@@ -1266,6 +1303,10 @@
               "speaker": "player",
               "text": "Bir kapı açıldı. Savcının yedeği masaya kondu. Şimdi söyleyeceğim şey, terazinin hangi kefesinde durduğumu gösterecek.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tarık bana döndü. Fısıldadı: “Abla, bu ne demek?” “Senin yumruğunla onun ölümü arasında bir bağ var mı diye soruyorlar” dedim. “Ben de yok diyeceğim.”"
             }
           ]
         }
@@ -1537,6 +1578,15 @@
               "speaker": "narrator",
               "text": "Ayağa kalktım. Cübbenin kolları ağırdı; üç aydır taşıdığım bir dosya kadar."
             },
+            {
+              "speaker": "narrator",
+              "text": "Galeride Gülay, arkada Sevim. Savcı kalemini masaya koymuş, kollarını kavuşturmuştu. Heyet bekliyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın sesi: “Üçe böl.” Bir yumruk. Bir boşluk. Bir ölüm. Her birinin kendi kâğıdı var.",
+              "style": "thought"
+            },
             { "speaker": "player", "text": "Bir yumruk ve bir ölüm. Hangisini savunuyorum?", "style": "thought" }
           ]
         }
@@ -1741,6 +1791,22 @@
             {
               "speaker": "player",
               "text": "Sanığın geri döndüğünü söyleyen tek tanık yanıldığını kabul etti. Geriye bir yumruk ve bir şüphe kalıyor. Şüphe sanık lehinedir. Beraatini talep ediyoruz."
+            },
+            {
+              "speaker": "player",
+              "text": "Savcılık, yumruğun Ercan’ı düşürüp başını çarptırdığını söylüyor. Bilirkişi bunun bir düşme değil, bir darbe olduğunu söyledi; karşı tarafta iz yok, kırık bir aletin şeklini taşıyor."
+            },
+            {
+              "speaker": "player",
+              "text": "Savcılığın aleti yaranın ölçüsüne uymuyor. Savcılığın tanığı o saatte o yerde sanığı göremezdi. Savcılığın saati, maktulün kendi telefonuyla çelişiyor."
+            },
+            {
+              "speaker": "player",
+              "text": "Geriye ne kalıyor? Bir kavga. Bir yumruk. Bir ağabeyin adı ve bir tükürük. Bunlar bir ölümü açıklamaz."
+            },
+            {
+              "speaker": "player",
+              "text": "Ceza yargılamasında sanık masumluğunu ispatlamak zorunda değildir. Suçluluğu kesin ve inandırıcı delille ispatlanmalıdır. Burada ispatlanmamıştır."
             }
           ]
         },
@@ -1809,6 +1875,10 @@
                 {
                   "speaker": "tarik",
                   "text": "Ama ben o adamı öldürmedim. Kızım büyüyünce “baba sen ne yaptın” diye sorarsa, ne yaptıysam onu söylemek istiyorum. Bu kadar."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Oturdu. Başını eğmedi. Gülay galeride gözlerini sildi; Elif’in resim defterini göğsüne bastırdı."
                 },
                 {
                   "speaker": "narrator",
@@ -1897,6 +1967,13 @@
               "speaker": "narrator",
               "text": "Kırk dakika. Koridorda Gülay ayakta, Sevim oturuyordu. Kimse konuşmadı. Pencereden limanın vinçleri görünmüyordu; ama ben onları görüyordum."
             },
+            {
+              "speaker": "narrator",
+              "text": "Tarık koridorun sonundaki pencerenin önünde duruyordu. Elini cama koymuştu, sağ elini. Boğumlardaki iz neredeyse geçmişti."
+            },
+            { "speaker": "tarik", "text": "Abla, ne olursa olsun… teşekkür ederim. Beni dinleyen ilk sen oldun." },
+            { "speaker": "player", "text": "Daha bitmedi." },
+            { "speaker": "tarik", "text": "Biliyorum. Ama ben bitirdim. Söyleyeceğimi söyledim. Doğrusunu." },
             { "speaker": "mubasir", "text": "Heyet geliyor! Ayağa kalkın!" },
             { "speaker": "baskan", "text": "Hüküm fıkrası ayakta dinlenir." }
           ]

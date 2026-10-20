@@ -18,6 +18,8 @@ export const briefing: CasePart = {
 # 14 KASIM · GECE 23.02 — MUDANYA LİMANI, 4 NO’LU RIHTIM [bg:liman_gece]
 > Poyraz konteynerlerin arasında ıslık çalıyordu. Yağmur yatay geliyordu; denizden mi gökten mi, belli değildi.
 > Rıhtımın ucunda bir gemi yükleniyordu. Vinçlerin uyarı düdüğü, çeliğe çarpan çelik, bir yerde motoru rölantide bir forklift.
+> Konteynerler üst üste, sokak sokak, bir şehrin bloklarına benziyordu. Aralarındaki dar koridorlarda sodyum lambalarının turuncusu ve ıslak gölgeler.
+> Bir yerde bir telsiz cızırdadı, sonra sustu. Gece vardiyası kahvesini termostan içiyor, saatine bakıyordu. Herkes biraz yorgun, herkes biraz ıslak.
 > Uzaktaki bir forkliftin farı iki silueti yakaladı. Biri iri, biri ince. İkisi de turuncu yelekli.
 @SARHOŞ SES: Ne bakıyorsun öyle? Kafanı kaldır, kafanı. Senin soyunuz hep yere bakar zaten.
 @GENÇ SES: Git işine abi. Vardiya bitiyor.
@@ -60,6 +62,14 @@ nurten: Kiminle?
 @BİR LİMANCI: Tarık’la. Laşingci Tarık.
 nurten: Adresi?
 > Amir sigarasını cebine koydu. Yakmadı. Hiç yakmazdı.
+> Bir olay yeri teknisyeni, beyaz tulumuyla iki konteynerin arasından çıktı. Elinde naylon bir poşet; poşetin içinde hiçbir şey yoktu.
+@TEKNİSYEN: Alet yok amirim. Etrafta da yok. Rıhtımdaki kafeste yüzlerce kilit var ama, ağır şeyler. Biri olabilir.
+nurten: “Biri olabilir.” Hepsini mi toplayalım?
+@TEKNİSYEN: Kavganın olduğu yere en yakın kafes. Oradan bir tane alırız, izine bakarız.
+> Amir cevap vermedi. Cesede bir kez daha baktı: yüzüstü, başı içeri doğru, iki kolu yanlarında. Kimse böyle düşmez.
+nurten: Kamera?
+@BİR LİMANCI: B sahasında kamera yok amirim. İstif sahası. Gece kimse gelmez buraya.
+> Amir başını kaldırıp projektör direğine baktı. Bir şey not aldı. Sonra not defterini kapattı, sanki not almamış gibi.
 `),
       onFirstEnter: [meet('nurten')],
       choices: [cont('PR01_DEVAM', 'Devam', 'PR_02', { role: 'PRIMARY' })],
@@ -74,6 +84,11 @@ nurten: Adresi?
 > Tarık kapıyı açtığında üstünde dünkü tişört vardı. Sağ elinin boğumlarında kabuk bağlamış, morarmış bir yara.
 > İçeride altı yaşında bir kız uyuyordu. Masada yarım kalmış bir gemi resmi; mavi kalemle çizilmiş, bacasından duman çıkan.
 @KADIN SESİ: Tarık? Kim gelmiş? Ne oldu?
+> Kapıdaki adamlardan biri bir kâğıt gösterdi. Diğeri Tarık’ın sağ eline baktı, uzun uzun.
+@SİVİL POLİS: Elinize ne oldu?
+> Tarık elini çevirdi, boğumlara baktı. Sanki ilk kez görüyordu.
+@SİVİL POLİS: Ercan Yavuz’u tanır mısınız? Dün gece öldü. Bizimle gelin.
+> Bir an, kapı aralığında, Tarık’ın yüzünden bir şey geçti. Korku değildi. Şaşkınlık da değil. Bir adamın kendi eline inanamaması.
 > Tarık cevap vermedi. Elini arkasına sakladı. Sonra, çocuk uyanmasın diye, kapıyı yavaşça arkasından çekti.
 > Dört gün sonra tutuklandı. İki ay sonra iddianame düzenlendi: kasten öldürme.
 > İlk celseye on altı gün kala, yağmurlu bir perşembe akşamı, bir kadın Bursa’da bir avukatın kapısını çaldı. {fade}
@@ -104,6 +119,9 @@ gulay: İddianameyi okudum avukat hanım. Kasten öldürme yazıyor. Müebbet di
 gulay: Vurmuş. Biliyorum, vurmuş. Eli öyle geldi, yarası öyleydi. Bana söylemedi ama ben bilirim, on yıllık kocam.
 gulay: Ama benim kocam adam öldürmez avukat hanım. Vurur belki. Öldürmez. O adam kalktı, yürüdü diyorlar, kantine gitti diyorlar. Sonra nasıl ölü buldular?
 gulay/uzgun: Param az. Bir bileziğim var, bir de makinem. Makineyi satamam, ekmeğimiz o. Bileziği getirdim.
+> Pencereden bir sokak lambası yanıp söndü. Gülay’ın yüzü bir an aydınlandı, bir an karanlıkta kaldı. İki ay uykusuz bir yüz.
+gulay: Gece yatağa giriyorum, kapı çalınacak sanıyorum. Sabah oluyor, kapı çalınmıyor. Elif’i okula götürüyorum, öğretmen bana öyle bakıyor ki…
+gulay: Mahallede herkes biliyor. Bakkal veresiye defterimi kapattı. “Katilin karısına veresiye yok” demedi; demesine gerek yoktu.
 > Çantanın dibinden bir mendil çıkardı. Mendilin içinde ince bir altın bilezik.
 `),
       choices: [
@@ -206,10 +224,19 @@ leyla: Yedi kâğıt. Hangisi en ağır?
 leyla: Peki en hafif hangisi?
 - Telefon tutanağı. Kimse dokunmamış; altında bir imza, bir tarih, o kadar.
 leyla: Kimsenin dokunmadığı kâğıt, ya boştur ya da kimsenin görmek istemediği bir şeyi taşır. İkisini de okuyacaksın.
+- Ya forkliftçi? “Seni gebertirim” diye bağırmış.
+leyla: Kim bağırmış? Kâğıtta “sanık bağırdı” yazıyor. Tanık bunu mu gördü, yoksa duydu mu? Duymakla görmek arasında bir dava kaybedilir.
+leyla: Twistlock? Üstünde iz var. Kan var mı?
+- Yok. Kriminal rapor biyolojik iz bulamamış.
+leyla: Bir kafatasını kıran demir tertemiz çıkmış. Bunu not et ve şimdilik unut. Unutmadığın şeyi kürsüde fazla erken söylersin.
 > Tarık’ın ifadesini önüme itti. Kısa bir metin. “Ağzını bozdu, ittim, düştü. Sonra eve gittim.”
 leyla: Karısı “vurmuş” diyor. Kocası “ittim” diyor. Birinin sözü bir kadının korkusu, öbürü bir erkeğin utancı. İkisini de tart.
 leyla: Bir şey daha. Ölüm saati raporda iki saatlik bir aralık: on birle bir arası. İki saat, bir limanda çok uzun bir zaman.
 ~ İki saat. Bir yumruk on birde. Bir ceset altıda. Arada bir şehrin uykusu kadar boşluk.
+> Leyla kalkıp pencereyi araladı. Dışarıda yağmur, Uludağ’ın eteklerine asılı bir bulut. Masasında ters çevrilmiş bir çerçeve; hep öyle durur.
+~ O çerçeveyi on yıldır kimse düzeltmedi. Ben de sormadım. Bu büroda bazı sorular dosyalarda, bazıları masalarda bekler.
+leyla: Bir şey daha Deniz. Bu dosyada herkes sana Tarık’ı anlatacak. Karısı, ustası, şefi. Kimse sana Ercan’ı anlatmayacak.
+leyla: Ölen adam da bir dosyadır. O gece ne yaptı, kimi aradı, ne yedi, kime borçluydu. Maktulü tanımayan avukat, sanığı da tanımaz.
 `),
       choices: [cont('BR01B_DEVAM', 'Dosya özetini aç', 'BR_02', { role: 'PRIMARY' })],
     }),
@@ -307,6 +334,8 @@ leyla: Kürsüde “bir yumruktu” demeden önce, o yumruğun neye mal olduğun
 > Prefabriğin camında buğu, içeride bir termos, bir radyo. Bir adam pencereden el salladı; içeri gel der gibi.
 ~ Bir limanda her şey saatle işler. Gemi saatiyle, vardiya saatiyle, gelgit saatiyle. İnsanlar o saatlerin arasında kaybolur.
 ~ Dört günüm vardı. Günde üç adım. Rıhtım, büfe, cezaevi, kâğıtlar. Hepsine yetmeyecekti; seçmek zorundaydım.
+> Kapıdan geri döndüm. Rıhtımın yürüyüş yolundan denize baktım: bir römorkör, iki martı, bir yük gemisinin paslı gövdesi. Gemiler kimseyi beklemiyordu.
+~ Bir limanda tanık aramak, bir denizde balık aramak gibi. Balıklar oradadır; ama sen yanlış saatte gelmişsindir. Ben iki ay geç gelmiştim.
 `),
       choices: [cont('SABAH_DEVAM', 'Panoya iğnele', 'INV_HUB', { role: 'PRIMARY' })],
     }),

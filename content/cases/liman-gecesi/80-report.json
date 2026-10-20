@@ -113,6 +113,42 @@
         "when": { "all": [{ "ref": "donus_yok" }, { "not": { "ref": "olum_sonra" } }] },
         "text": "Dönüşün olmadığını kanıtladın ama ölümün sonradan geldiğini kanıtlamadın; mahkeme ölümü yumruğa bağladı (TCK 87/4).",
         "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_sukru",
+        "when": { "all": [{ "hasEvidence": "clue_pil" }, { "not": { "flag": "contra_s1" } }] },
+        "text": "Şükrü Usta’nın pilinin bittiğini biliyordun ama kürsüde göstermedin; “seni gebertirim” sanığa yazılı kaldı.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_baba",
+        "when": { "all": [{ "hasEvidence": "ded_kan" }, { "not": { "flag": "contra_s2" } }] },
+        "text": "Yumruğun başı babaya vurdurmadığını kurdun ama görgü tanığının “kafası çarptı” beyanına karşı sunmadın.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_twist",
+        "when": { "not": { "flag": "twist_itiraz" } },
+        "text": "Emanetteki kilide karşı söz almadın: biyolojik iz yok, parmak izi meslekten (CMK 217).",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_olcu",
+        "when": { "all": [{ "flag": "olcu_talep" }, { "not": { "hasEvidence": "ded_silah" } }] },
+        "text": "Kilidin ölçüsünün kırıkla karşılaştırılmasını istedin; ama emanet fotoğraflarında koniyi ölçmedin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_atk",
+        "when": { "not": { "flag": "talep_atk" } },
+        "text": "Raporu düzenleyen uzmanın duruşmada dinlenmesini istemedin (CMK 67/4, 211); mahkeme onu resen çağırdı.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_b",
+        "when": { "flag": "b_basarisiz" },
+        "text": "Esas savunmada başka bir failden söz ettin ama bunu kayıtlarla ve savcılığa bildirimle kurmadın; bir beraat türü delilin taşıyabileceği kadardır.",
+        "category": "SAVUNMA_STRATEJISI"
       }
     ]
   }

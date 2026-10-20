@@ -63,7 +63,7 @@
           { "not": { "flag": "cokus" } },
           { "flag": "gercek_fail" },
           { "cmp": [{ "var": "pers" }, ">=", 8] },
-          { "cmp": [{ "score": "final" }, ">=", 8000] }
+          { "cmp": [{ "score": "final" }, ">=", 10000] }
         ]
       },
       "stamp": "BERAAT",
@@ -185,7 +185,7 @@
           { "not": { "flag": "cokus" } },
           { "any": [{ "flag": "supheli" }, { "flag": "gercek_fail" }] },
           { "cmp": [{ "var": "pers" }, ">=", 6] },
-          { "cmp": [{ "score": "final" }, ">=", 7000] }
+          { "cmp": [{ "score": "final" }, ">=", 9000] }
         ]
       },
       "stamp": "BERAAT",
@@ -244,6 +244,10 @@
             },
             {
               "speaker": "narrator",
+              "text": "Rıhtım 4’ün babası hâlâ oradaydı. Gövdesindeki kan izi yağmurlarla çoktan gitmişti; ama Tarık babaya baktı, sonra başını çevirdi."
+            },
+            {
+              "speaker": "narrator",
               "text": "Kantinin önünde üç işçi sigara içiyordu. Biri başını çevirdi. Bir diğeri fısıldadı; poyraz sözün yarısını getirdi."
             },
             { "speaker": "narrator", "name": "BİR İŞÇİ", "text": "…şüpheden çıkmış. Şüpheden." },
@@ -272,6 +276,15 @@
               "speaker": "leyla",
               "text": "Kantinleri biz düzeltemeyiz. Ama bir dahaki sefere bir kâğıdı kime götüreceğini bilirsin.",
               "style": "phone"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gülay bir mesaj gönderdi: bir fotoğraf. Elif’in odasındaki harita; toplu iğne evin üstünde, bantla tutturulmuş."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir iğne eve döndü. Bir dosya kapandı. Ve 23.41’deki iki dakikanın öbür ucu, bir limanda hâlâ termos kahvesi içiyor.",
+              "style": "thought"
             },
             { "speaker": "player", "text": "Kapı açıldı. Işık hâlâ kapalı.", "style": "thought" }
           ]
@@ -387,6 +400,10 @@
         },
         {
           "text": "Başın arkasına sert bir cisimle vurulan darbede ölüm neticesinin öngörüldüğü kabul edilmiştir (TCK 21/2)."
+        },
+        {
+          "when": { "flag": "olasi_kabul" },
+          "text": "Müdafi esas savunmada olası kastı kabul ederek yalnızca tahrik indirimi istemiştir."
         },
         {
           "when": { "flag": "cokus" },

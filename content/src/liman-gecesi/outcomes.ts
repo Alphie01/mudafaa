@@ -18,8 +18,8 @@ import { O, W } from './dsl.js';
 // 70-outcomes: sonuçlar (öncelik sırasıyla) ve sonuca bağlı epiloglar. Eşikler meta'daki eşik çubuğuyla aynı.
 
 export const T_NITELIK = 3000;
-export const T_BERAAT = 7000;
-export const T_BERAAT_B = 8000;
+export const T_BERAAT = 9000;
+export const T_BERAAT_B = 10000;
 
 const tahliye =
   'tutuklu ise derhâl TAHLİYESİNE, adli kontrol altındaysa tedbirin kaldırılmasına; CMK 141/1-e uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142 ile 6384 sayılı Kanuna göre yapılabileceğinin bildirilmesine (CMK 231/3)';
@@ -170,6 +170,7 @@ baskan: Türk Milleti adına…
 > Gülay galeride iki elini ağzına kapadı. Sevim Yavuz ise kımıldamadan oturuyordu; gözleri boş kürsüdeydi.
 # MUDANYA LİMANI · PERSONEL KAPISI · BİR HAFTA SONRA [bg:liman_gece]
 > Tarık işe dönmek için kapıya geldi. Kartını okuttu; turnike döndü. Bir makinenin hafızası onu yeniden içeri aldı.
+> Rıhtım 4’ün babası hâlâ oradaydı. Gövdesindeki kan izi yağmurlarla çoktan gitmişti; ama Tarık babaya baktı, sonra başını çevirdi.
 > Kantinin önünde üç işçi sigara içiyordu. Biri başını çevirdi. Bir diğeri fısıldadı; poyraz sözün yarısını getirdi.
 @BİR İŞÇİ: …şüpheden çıkmış. Şüpheden.
 > Tarık durmadı. Rıhtım 4’e yürüdü, eldivenlerini taktı, ilk kilidi aldı.
@@ -181,6 +182,8 @@ baskan: Türk Milleti adına…
 leyla: Beraat beraattir Deniz. “Şüpheden” diye bir damga yok kararda. [phone]
 - Kararda yok. Kantinde var.
 leyla: Kantinleri biz düzeltemeyiz. Ama bir dahaki sefere bir kâğıdı kime götüreceğini bilirsin. [phone]
+> Gülay bir mesaj gönderdi: bir fotoğraf. Elif’in odasındaki harita; toplu iğne evin üstünde, bantla tutturulmuş.
+~ Bir iğne eve döndü. Bir dosya kapandı. Ve 23.41’deki iki dakikanın öbür ucu, bir limanda hâlâ termos kahvesi içiyor.
 ~ Kapı açıldı. Işık hâlâ kapalı.
 `),
         W(
@@ -257,6 +260,10 @@ leyla: Müebbetten altı yıla indin. Bu bir yenilgi değil. Ama bir zafer oldu�
         ),
         because(
           'Başın arkasına sert bir cisimle vurulan darbede ölüm neticesinin öngörüldüğü kabul edilmiştir (TCK 21/2).',
+        ),
+        because(
+          'Müdafi esas savunmada olası kastı kabul ederek yalnızca tahrik indirimi istemiştir.',
+          flag('olasi_kabul'),
         ),
         because('Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı.', flag('cokus')),
       ],

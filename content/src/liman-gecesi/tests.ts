@@ -78,6 +78,11 @@ m clue_matara clue_kafes
 c CIKARIM_BITIR
 c H_LEYLA
 c LEYLA_DON
+c H_IFADE
+e mag i2
+e compare i1
+e mag i3
+c IFADE_BITIR
 c H_GORUS
 c TP_GECE soft
 c TP_ERCAN hard
@@ -86,7 +91,7 @@ c TP_YUMRUK soft
 c TP_VARDIYA soft
 c TP_EMRE soft
 c G_BITIR
-c AKSAM1_DEVAM
+c AK1_A
 `);
 
 const GUN2 = A(`
@@ -107,7 +112,7 @@ c H_DIL
 c DIL_TURNIKE
 c DIL_KANTIN
 c DIL_GONDER
-c AKSAM2_DEVAM
+c AK2_B
 `);
 
 const GUN3 = A(`
@@ -132,7 +137,7 @@ c KN_GECE
 c KN_ERCAN
 c KN_TARIK
 c KN_BITIR
-c AKSAM3_DEVAM
+c AK3_A
 `);
 
 const GUN4 = A(`
@@ -173,6 +178,8 @@ c H100_DEVAM
 c H101_DEVAM
 c H102_A
 c H102S_DEVAM
+c H102Q_A
+c H102Q_DEVAM
 p S1
 s clue_pil S1
 p S2
@@ -181,6 +188,7 @@ p S3
 o g_kanaat S4
 c H103_BITIR
 c H104_A
+c H104B_DEVAM
 p K1
 s ded_cikis K1
 p K2
@@ -213,7 +221,7 @@ c TR_SEMA
 c TR_SONSOZ
 c TR_GECE
 c TR_BITIR
-c ARA_AKSAM1_DEVAM
+c AA1_A
 c A_KAYIT
 e mag a2
 e compare z1
@@ -227,7 +235,7 @@ c A_EMANET
 t OB_KONI
 t OB_MONT
 c EMANET_BITIR
-c ARA_AKSAM2_DEVAM
+c AA2_B
 c A_DEFTER
 e mag d4
 e compare d3
@@ -298,7 +306,7 @@ c H_KENAN
 c KN_GECE
 c KN_TARIK
 c KN_BITIR
-c AKSAM1_DEVAM
+c AK1_A
 c H_GULAY
 c GL_SAAT
 c GL_KART
@@ -318,7 +326,7 @@ c H_BUFE
 c NL_GECE
 c NL_SAAT
 c NL_BITIR
-c AKSAM2_DEVAM
+c AK2_B
 c H_LEYLA
 c LEYLA_DON
 c H_BSAHA
@@ -330,11 +338,11 @@ c H_GORUS2
 c TP_DONUS soft
 c TP_KENAN soft
 c G_BITIR
-c H_DIL
-c DIL_KESIF
-c DIL_HTS
-c DIL_GONDER
-c AKSAM3_DEVAM
+c H_TELEFON
+e mag t3
+e mag t1
+c TELEFON_BITIR
+c AK3_A
 c H_LEYLA
 c LEYLA_DON
 c GO_H1
@@ -346,12 +354,15 @@ c H100_DEVAM
 c H101_DEVAM
 c H102_A
 c H102S_DEVAM
+c H102Q_A
+c H102Q_DEVAM
 p S1
 s clue_pil S1
 p S2
 s ev_onrapor S2
 c H103_BITIR
 c H104_D
+c H104B_DEVAM
 p K1
 s ev_hesap K1
 p K2
@@ -375,7 +386,7 @@ c SV_TAZIYE
 c SV_HAFTA
 c SV_AL
 c SV_BITIR
-c ARA_AKSAM1_DEVAM
+c AA1_A
 c A_LEYLA
 c LEYLA2_DON
 c A_EMANET
@@ -387,7 +398,10 @@ c A_DEFTER
 e compare d1
 e mag d4
 c DEFTER_BITIR
-c ARA_AKSAM2_DEVAM
+c AA2_B
+c A_TALEP
+c EK_ABONE
+c EK_GONDER
 c GO_T2
 c ARA_SON_DEVAM
 `);
@@ -433,7 +447,7 @@ c TP_VARDIYA soft
 c TP_ERCAN soft
 c TP_KENAN hard
 c G_BITIR
-c AKSAM1_DEVAM
+c AK1_A
 c H_SUKRU
 c SK_GECE
 c SK_KIM
@@ -449,7 +463,7 @@ c H_DIL
 c DIL_KESIF
 c DIL_HTS
 c DIL_GONDER
-c AKSAM2_DEVAM
+c AK2_B
 c H_BSAHA
 t OB_KEDI
 t OB_PALET
@@ -466,21 +480,38 @@ c GL_SAAT
 c GL_TEKLIF
 c GL_GEC
 c GL_BITIR
-c AKSAM3_DEVAM
+c AK3_A
 c H_LEYLA
 c LEYLA_DON
+c H_BUFE
+c NL_GECE
+c NL_POLIS
+c NL_BITIR
+c H_ORHAN
+c OR_ALET
+c OR_BITIR
+c H_GORUS2
+c TP_YUMRUK hard
+c TP_DONUS soft
+c G_BITIR
 c GO_H1
 c GECE_DEVAM
 c H100_DEVAM
 c H101_DEVAM
 c H102_B
 c H102S_DEVAM
+c H102Q_C
+c H102Q_DEVAM
 p S1
 p S2
+p S3
 c H103_BITIR
 c H104_B
+c H104B_DEVAM
 p K1
 p K2
+p K3
+p K4
 c H105_BITIR
 c TL_YAKALA
 c TL_ATK
@@ -494,7 +525,7 @@ c SV_BITIR
 c A_TARIK
 c TR_SONSOZ
 c TR_BITIR
-c ARA_AKSAM1_DEVAM
+c AA1_A
 c A_EMANET
 t OB_ETIKET
 t OB_ELDIVEN
@@ -507,8 +538,11 @@ c ARA_SON_DEVAM
 c T00_DEVAM
 p B1
 p B2
+p B3
 c T01_BITIR
 p K5
+p K6
+p K7
 c T02_BITIR
 c T03_B
 c T03G_DEVAM
@@ -539,7 +573,7 @@ c TP_ERCAN hard
 c TP_YUMRUK soft
 c TP_DONUS soft
 c G_BITIR
-c AKSAM1_DEVAM
+c AK1_A
 c H_ONRAPOR
 e mag o1
 e ruler o2
@@ -554,7 +588,7 @@ c SK_GECE
 c SK_KIM
 c SK_KANTIN
 c SK_BITIR
-c AKSAM2_DEVAM
+c AK2_B
 c H_CIKARIM
 m clue_desen clue_kontrkup
 m clue_mide clue_kantin
@@ -574,7 +608,7 @@ c H_DIL
 c DIL_TURNIKE
 c DIL_KANTIN
 c DIL_GONDER
-c AKSAM3_DEVAM
+c AK3_A
 c H_LEYLA
 c LEYLA_DON
 c H_BSAHA
@@ -595,12 +629,15 @@ c H100_DEVAM
 c H101_DEVAM
 c H102_A
 c H102S_DEVAM
+c H102Q_A
+c H102Q_DEVAM
 p S1
 s clue_pil S1
 p S2
 s ded_kan S2
 c H103_BITIR
 c H104_A
+c H104B_DEVAM
 p K1
 s ev_hesap K1
 p K2
@@ -621,7 +658,7 @@ c A_TARIK
 c TR_SEMA
 c TR_GECE
 c TR_BITIR
-c ARA_AKSAM1_DEVAM
+c AA1_A
 c A_EMANET
 t OB_KONI
 t OB_MONT
@@ -633,7 +670,7 @@ c A_DEFTER
 e mag d4
 e compare d3
 c DEFTER_BITIR
-c ARA_AKSAM2_DEVAM
+c AA2_B
 c A_CIKARIM
 m clue_defter_satir clue_arama2341
 c ARA_CIKARIM_BITIR
@@ -657,57 +694,20 @@ c T03E_DEVAM
 
 // --- Çöküş (W) ---
 
-const W_YOL = A(`
-c H_RIHTIM
-t OB_BABA
-t OB_PROJ
-c RIHTIM_BITIR
-c H_GORUS
-c TP_GECE soft
-c TP_ERCAN soft
-c TP_VARDIYA soft
-c G_BITIR
-c H_KENAN
-c KN_GECE
-c KN_ERCAN
-c KN_BITIR
-c AKSAM1_DEVAM
-c H_SUKRU
-c SK_GECE
-c SK_EMRE
-c SK_BITIR
-c H_GULAY
-c GL_SAAT
-c GL_EMRE
-c GL_BITIR
-c H_ONRAPOR
-e mag o1
-e mag o4
-c ONRAPOR_BITIR
-c AKSAM2_DEVAM
-c H_TELEFON
-e mag t3
-c TELEFON_BITIR
-c H_BSAHA
-t OB_SURUK
-t OB_LASTIK
-c BSAHA_BITIR
-c H_BUFE
-c NL_GECE
-c NL_BITIR
-c AKSAM3_DEVAM
-c GO_H1
-c GECE_DEVAM
-c H100_DEVAM
-c H101_DEVAM
-c H102_C
-c H102S_DEVAM
-s ev_twistlock S1
-s ev_kenan_ifade S2
-s clue_projektor S1
-s ev_onrapor S3
-s ev_telefon S1
-`);
+const W_YOL = [
+  ...G3_SORUSTURMA,
+  ...G3_CELSE1,
+  ...G3_ARA,
+  ...A(`
+c T00_DEVAM
+s ev_twistlock B1
+s ev_kenan_ifade B2
+p B1
+s ev_tarik_ifade B3
+s clue_pil B1
+s ev_hesap B2
+`),
+];
 
 export const tests: CasePart = {
   tests: {

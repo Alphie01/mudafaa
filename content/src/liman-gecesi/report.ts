@@ -115,6 +115,42 @@ export const report: CasePart = {
         'Dönüşün olmadığını kanıtladın ama ölümün sonradan geldiğini kanıtlamadın; mahkeme ölümü yumruğa bağladı (TCK 87/4).',
         'DELIL_ANALIZI',
       ),
+      hint(
+        'h_sukru',
+        all(has('clue_pil'), not(flag('contra_s1'))),
+        'Şükrü Usta’nın pilinin bittiğini biliyordun ama kürsüde göstermedin; “seni gebertirim” sanığa yazılı kaldı.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_baba',
+        all(has('ded_kan'), not(flag('contra_s2'))),
+        'Yumruğun başı babaya vurdurmadığını kurdun ama görgü tanığının “kafası çarptı” beyanına karşı sunmadın.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_twist',
+        not(flag('twist_itiraz')),
+        'Emanetteki kilide karşı söz almadın: biyolojik iz yok, parmak izi meslekten (CMK 217).',
+        'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_olcu',
+        all(flag('olcu_talep'), not(has('ded_silah'))),
+        'Kilidin ölçüsünün kırıkla karşılaştırılmasını istedin; ama emanet fotoğraflarında koniyi ölçmedin.',
+        'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_atk',
+        not(flag('talep_atk')),
+        'Raporu düzenleyen uzmanın duruşmada dinlenmesini istemedin (CMK 67/4, 211); mahkeme onu resen çağırdı.',
+        'USUL_BILGISI',
+      ),
+      hint(
+        'h_b',
+        flag('b_basarisiz'),
+        'Esas savunmada başka bir failden söz ettin ama bunu kayıtlarla ve savcılığa bildirimle kurmadın; bir beraat türü delilin taşıyabileceği kadardır.',
+        'SAVUNMA_STRATEJISI',
+      ),
     ],
   },
 };

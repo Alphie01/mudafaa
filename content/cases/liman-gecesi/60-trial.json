@@ -140,6 +140,15 @@
               "speaker": "player",
               "text": "Dosyasını seven bir savcı. Sanığı değil. İyi savcı da budur; tehlikeli savcı da.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Üye hâkim Derya Alkan, kırklarında, gözlükleri burnunun ucunda, dosyayı benden önce okumuş gibi görünüyordu. Başkan Melih Sarp sabırlı, ağır, her cümlesini bitirmeden önce bir nefes alan biri."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir heyet. Üç insan, bir masa, bir terazi. Hangisinin hangi kefeye ne koyacağını bilmeden, hepsine aynı kâğıtları göstereceğim.",
+              "style": "thought"
             }
           ]
         }
@@ -190,6 +199,10 @@
               "speaker": "player",
               "text": "Görüştüm. Ama ne söyleyeceğine o karar verecek. Ben yalnızca ne söylemenin ne demek olduğunu anlattım.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Galeride Sevim Yavuz arkaya, duvarın dibine oturmuştu. Elinde bir mendil; hiç kullanmadı. Savcı “TCK 81/1” dediğinde gözlerini kapadı."
             }
           ]
         }
@@ -408,7 +421,155 @@
           ]
         }
       ],
-      "choices": [{ "id": "H102S_DEVAM", "kind": "CONTINUE", "label": "Tanık Şükrü Balcı", "next": "H1_03" }]
+      "choices": [{ "id": "H102S_DEVAM", "kind": "CONTINUE", "label": "Sanığa sorular", "next": "H1_02Q" }]
+    },
+    {
+      "id": "H1_02Q",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "chapter": "Bölüm 3 · Birinci Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Sanığa sorular",
+      "courtStage": "SANIK_SAVUNMASI",
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "Sayın Savcı, sanığa sorunuz var mı?" },
+            {
+              "speaker": "savci",
+              "text": "Var Sayın Başkan. Sanık, kavgadan sonra bir saat boyunca nerede olduğunuzu kim doğrulayabilir? B sahasına gitmediğinizi kanıtlayabilir misiniz?"
+            },
+            { "speaker": "narrator", "text": "Tarık bana baktı. Sonra savcıya. Ağzını açtı, kapadı." },
+            {
+              "speaker": "player",
+              "text": "Bir soru, iki soru gibi duruyor. İkincisi bir tuzak: sanıktan masumiyetini kanıtlamasını istiyor.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "uye", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "baskan", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "H102Q_A",
+          "kind": "OPTION",
+          "label": "İtiraz: sanık masumiyetini ispatla yükümlü değildir; ispat yükü iddiadadır",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İtiraz, Sayın Başkan. Sanık bir şeyi kanıtlamak zorunda değildir. İspat yükü iddia makamındadır."
+                },
+                {
+                  "speaker": "baskan",
+                  "text": "Yerinde. Sayın Savcı, sorunuzu sanığın ne yaptığını soracak biçimde sorun."
+                },
+                { "speaker": "savci", "text": "Sanık, kavgadan sonra nereye gittiniz?" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 80 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Masumiyet karinesi (Anayasa 38/4, AİHS 6/2): sanık suçsuzluğunu ispatlamak zorunda değildir; soru bu haliyle sorulamaz.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "H102Q_SON"
+        },
+        {
+          "id": "H102Q_B",
+          "kind": "OPTION",
+          "label": "Sanık cevaplasın",
+          "responses": [{ "lines": [{ "speaker": "baskan", "text": "Sanık, cevap verin." }] }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Soru cevaplandı; ama sanıktan masumiyetini kanıtlaması istendiği tutanağa itirazsız geçti."
+          },
+          "next": "H102Q_SON"
+        },
+        {
+          "id": "H102Q_C",
+          "kind": "OPTION",
+          "label": "“Bu soru savcının önyargısını gösteriyor!”",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "baskan", "text": "Müdafi, itirazınızı hukuki dayanağıyla yapın. Sanık, cevap verin." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "İtiraz bir usul kuralına dayanmalıdır; savcıya kişisel çıkış heyetin sabrını tüketir.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "H102Q_SON"
+        }
+      ]
+    },
+    {
+      "id": "H102Q_SON",
+      "type": "STORY",
+      "chapter": "Bölüm 3 · Birinci Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Sanığa sorular",
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "when": { "flag": "durust_savunma" },
+          "lines": [
+            {
+              "speaker": "tarik",
+              "text": "Turnikeden çıktım efendim. Kartım okundu. İskeleye indim, Nail Usta’nın büfesine. İki çay aldım, kartla ödedim. Oturdum."
+            },
+            { "speaker": "tarik", "text": "Haberler başlayınca kalktım. Eve on ikiyi on geçe vardım. Karım bilir." },
+            { "speaker": "savci", "text": "Bir saat bir büfede, tek başına mı oturdunuz?" },
+            {
+              "speaker": "tarik",
+              "expression": "uzgun",
+              "text": "Ağladım efendim. Bir saat ağladım. Bunu kimse görmesin istedim; şimdi herkes biliyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Galeride biri burnunu çekti. Savcı bir şey not aldı; bu kez altını çizmedi."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "tarik", "text": "Eve gittim efendim. Yürüdüm. Biraz oturdum yolda. Sonra eve gittim." },
+            { "speaker": "savci", "text": "Nerede oturdunuz? Kim gördü?" },
+            { "speaker": "tarik", "text": "Bilmiyorum efendim… Bir yerde. Kimse görmedi herhalde." },
+            { "speaker": "narrator", "text": "Savcı başını salladı; kendi kendine. Heyet bir şey yazmadı." },
+            {
+              "speaker": "player",
+              "text": "Bir saatin cevabı Tarık’ın içinde duruyor; ama o cevabı kürsüye taşıyacak kelimeleri ona kimse vermedi. Ben de vermedim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "H102Q_DEVAM", "kind": "CONTINUE", "label": "Tanık Şükrü Balcı", "next": "H1_03" }]
     },
     {
       "id": "H1_03",
@@ -864,7 +1025,7 @@
             "feedback": "Biyolojik izin yokluğu ve iz ile meslek arasındaki bağ, aletle eylem arasında bir irtibat kurulamadığını gösterir (CMK 217).",
             "category": "DELIL_ANALIZI"
           },
-          "next": "H1_05"
+          "next": "H1_04B"
         },
         {
           "id": "H104_B",
@@ -889,7 +1050,7 @@
             "feedback": "Kilit kolluk tarafından olay yerinde usulüne uygun alınmış ve emanete konmuştur; hukuka aykırılık iddiası dayanaksız (CMK 206/2-a’nın şartları yok).",
             "category": "USUL_BILGISI"
           },
-          "next": "H1_05"
+          "next": "H1_04B"
         },
         {
           "id": "H104_C",
@@ -938,7 +1099,7 @@
               ]
             }
           ],
-          "next": "H1_05"
+          "next": "H1_04B"
         },
         {
           "id": "H104_D",
@@ -949,9 +1110,64 @@
             "q": "NEUTRAL",
             "feedback": "Savcılığın aletine karşı söz almadın; heyet onu tartışılmamış bir delil olarak not etti."
           },
-          "next": "H1_05"
+          "next": "H1_04B"
         }
       ]
+    },
+    {
+      "id": "H1_04B",
+      "type": "STORY",
+      "chapter": "Bölüm 3 · Birinci Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Kısa ara",
+      "background": "adliye",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "On dakika ara." },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · 11.20", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Koridorda pencereler buğuluydu. Bir avukat telefonda bağırıyor, bir mübaşir bir listeyi duvara asıyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gülay bankta oturuyordu. Önünde Kenan Aksoy duruyordu; elinde plastik bir bardak su. Bardağı Gülay’a uzattı."
+            },
+            {
+              "speaker": "kenan",
+              "text": "İç kızım, iç. Üzülme. Allah büyük. Ben ne gördüysem onu söyleyeceğim; elimden başka bir şey gelmez."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gülay bardağı aldı, içmedi. Kenan beni görünce başıyla selam verdi ve koridorun öbür ucuna, tanık odasına yürüdü."
+            },
+            {
+              "speaker": "gulay",
+              "text": "İyi adam. Tarık’a iş o buldu. Şimdi onun sözüyle… Ne biçim dünya bu avukat hanım?"
+            },
+            { "speaker": "narrator", "text": "Telefonum titredi. Leyla.", "style": "phone" },
+            { "speaker": "leyla", "text": "Forkliftçi nasıl gitti?", "style": "phone" },
+            { "speaker": "player", "text": "Dürüst bir adam. Yanıldığını kendisi söyledi." },
+            {
+              "speaker": "leyla",
+              "text": "Güzel. Şimdi sıra kesin olanda. Ona “yanıldınız” deme; kâğıdı göster, bırak kendisi söylesin. Söylemezse heyet söyler.",
+              "style": "phone"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tanık odasının kapısı aralıktı. İçeride Kenan, bir sandalyede, dirsekleri dizlerinde. Bez parçasını iki elinin arasında katlıyor, açıyor, yeniden katlıyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Her tanığın kürsüden önce bir alışkanlığı var. Şükrü Usta’nınki cihazına dokunmaktı. Bunun ki bir bez parçası.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "H104B_DEVAM", "kind": "CONTINUE", "label": "Tanık Kenan Aksoy", "next": "H1_05" }]
     },
     {
       "id": "H1_05",
@@ -989,7 +1205,16 @@
               "speaker": "player",
               "text": "Kürsüde ağır bir tanık: üzgün, babacan, isteksiz. İsteksiz tanığa herkes inanır.",
               "style": "thought"
-            }
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı ayağa kalktı. Sorularını tek tek, aceleyle değil, bir kayık yanaştırır gibi sordu."
+            },
+            { "speaker": "savci", "text": "Tanık, sanığı kaç yıldır tanırsınız?" },
+            { "speaker": "kenan", "text": "Dört yıl efendim. Ağabeyi öldükten sonra ben işe aldım. Oğlum gibidir." },
+            { "speaker": "savci", "text": "O gece onu gördüğünüzden eminsiniz." },
+            { "speaker": "kenan", "expression": "uzgun", "text": "Keşke emin olmasaydım." },
+            { "speaker": "narrator", "text": "Savcı oturdu. Galeride biri iç çekti. Başkan bana döndü." }
           ]
         }
       ],
@@ -1024,7 +1249,10 @@
           "order": 3,
           "segments": [
             { "text": "Elinde demir gibi bir şey vardı. " },
-            { "text": "O çocuğun içinde yangın vardı; yapar", "highlightWhen": { "all": [] } },
+            {
+              "text": "O çocuğun içinde yangın vardı; yapar",
+              "highlightWhen": { "any": [{ "flag": "press_k3" }, { "hasEvidence": "clue_kenan_isik" }] }
+            },
             { "text": "." }
           ]
         },
@@ -1279,7 +1507,7 @@
         {
           "id": "PS_K4",
           "kind": "PRESENT",
-          "match": { "statement": "K4", "evidence": ["clue_servis_arac"] },
+          "match": { "statement": "K4", "evidence": ["clue_servis_arac", "ded_tasima"] },
           "responses": [
             {
               "lines": [
@@ -1382,6 +1610,15 @@
               "speaker": "player",
               "text": "Kürsüden bir teşhis düştü. Ama iyi bir adam “yanılmışım” dediğinde salon onu affeder. Kimse sormaz: neden yanıldı?",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tarık sanık sırasında başını kaldırdı ve Kenan’a baktı. Kızgın değildi; şaşkındı. Bir çocuğun babasına bakışı gibi."
+            },
+            { "speaker": "tarik", "text": "Abi… ben orada değildim." },
+            {
+              "speaker": "narrator",
+              "text": "Kenan cevap vermedi. Kürsüden indi, Tarık’ın yanından geçerken bu kez omzuna dokunmadı; elini cebindeki bez parçasına götürdü."
             }
           ]
         },
@@ -1432,6 +1669,15 @@
               "speaker": "player",
               "text": "Mahkemeden üç şey isteyebilirim; fazlası okunmaz. Neyi isteyeceğim, ikinci celsenin elinde ne olacağını belirler.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı dosyasını çevirdi. Kendi talepleri kısaydı: “Tanıkların yeniden dinlenmesine gerek yoktur; ATK raporu beklenebilir.” Bir savcı için dosya kapanmıştı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir dosya, bir savcı için kapanınca, avukat için açılır. Kapıyı neyle açık tutacağımı seçmem gerekiyor.",
+              "style": "thought"
             }
           ]
         }
@@ -1467,7 +1713,7 @@
           "id": "TL_GPS",
           "kind": "OPTION",
           "label": "Servis kamyoneti 16 LMN 07’nin araç takip ve zimmet kayıtları",
-          "visibleWhen": { "hasEvidence": "clue_servis_arac" },
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_servis_arac" }, { "flag": "k4_arac" }] },
           "enabledWhen": { "cmp": [{ "var": "talep_n" }, "<", 3] },
           "responses": [
             {

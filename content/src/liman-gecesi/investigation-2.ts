@@ -123,6 +123,10 @@ leyla: 23.41’de Ercan’ın aradığı hat. Abonesi Kenan Aksoy.
 ~ Ercan kavgadan otuz yedi dakika sonra onu aramıştı. İki dakika yedi saniye. Kenan bu aramadan hiç söz etmemişti; ne kolluğa, ne mahkemeye.
 leyla: Şimdi dikkatli dinle. Bir arama bir cinayet değildir. Bir yalan bile cinayet değildir. Ama bir soru işaretidir; o soru işaretini sen kovalamayacaksın.
 leyla: Bulduğunu yaz. Savcıya yaz. Kenan’ın kapısına gitme, telefonunu açma, liman kapısında bekleme. Biz kolluk değiliz Deniz. Bunu bir kere söylüyorum.
+> Leyla gitti. Odada mavi kapaklı rapor, tek sayfalık bir cevap ve ben kaldık.
+~ Mahkemede Kenan’ın elini Tarık’ın omzuna koyuşunu hatırladım. Bir babanın eli. Bir bez parçası, avucunda sıkılan.
+~ Bir an, yalnızca bir an, ondan değil kendimden şüphelendim. Bir isim bulmak kolay. Bir ismi doğru kâğıda bağlamak zor.
+> Raporu açtım. Ekinde bir şema: kafatasının kesiti, kırığın profili. Yuvarlak bir çukur, basamaklı kenarlar. Bir şeyin şekli.
 `,
       ),
       O(`
@@ -212,6 +216,7 @@ const hub = {
       `
 # ARA · GÜN 1/3 · İKİNCİ CELSEYE 10 GÜN
 > Hedef: rapor ne diyor? Ercan’ın son iki dakikası kimeydi ve neden?
+~ Tarık on gündür ya evde ya içeride; Gülay her akşam arıyor. Sevim Yavuz duruşma salonunda Kenan’a bakıyordu. Bunu unutmadım.
 ~ Panoya yeni bir kâğıt iğneledim: “23.41.” Altına üç soru: Kim? Neden? Sonra ne oldu?
 `,
     ),
@@ -220,6 +225,7 @@ const hub = {
       `
 # ARA · GÜN 2/3 · İKİNCİ CELSEYE 7 GÜN
 > Hedef: kâğıtlar ve fotoğraflar. Bir alet, bir araç, bir defter.
+~ Sabah adliyenin emanet bürosunu aradım; kâtip “salı on” dedi. Bir delile bakmak bile randevulu. Dokunmak ise hiç yok.
 `,
     ),
     O(`
@@ -268,6 +274,8 @@ sevim/uzgun: Kimse “başınız sağ olsun” demedi bana. Polis bile. Savcı �
 > Zinciri çıkardı. Kapıyı açmadı; yalnızca aralığı biraz genişletti.
 sevim: Mahkemede o adama baktım. Kenan Bey’e. Herkes çocuğa bakarken ben ona baktım. Ercan ona “Kaptan” derdi, bilir misiniz? Eskiden römorkör kaptanıymış.
 ~ “Kaptan.” Rehberde dört harf: “Kptn.” Bir lakap, bir dulun ağzından.
+sevim: O gece dokuz buçukta aradı beni. Sesi neşeliydi; içmişti ama neşeliydi. “Bu gece bir işi bitireceğim Sevim, yarın sana bir şey alacağım” dedi.
+sevim/uzgun: Ne alacaktın Ercan? Ne bitirecektin? Gece yarısı aradım, açmadı. Sabaha karşı yine aradım. Sabah polis geldi.
 `),
     }),
     option('SV_ISRAR', '“Konuşmanız lazım. Yoksa sizi tanık olarak çağırırım.”', {
@@ -336,12 +344,15 @@ const tarikGiris = decisionNode('ARA_TARIK_G', [{ to: 'ARA_TARIK' }], {
 > Balkonda iki tabure, bir küllük, denize bakan bir korkuluk. Tarık bir taburede, Elif dizinde. Elif bir gemi çiziyordu; babası yelkenleri tutuyordu.
 tarik: Elif, abla geldi. İçeri git, annene yardım et.
 > Elif gitmeden önce resmi bana uzattı. Bir gemi, iki çöp adam. Bu kez ikisinin de elinde bir şey yoktu.
+tarik: On gündür uyuyorum abla. İçeride uyuyamazdım; burada uyuyorum. Ama her sabah kalkınca ellerime bakıyorum.
+tarik: Gülay diyor ki “bitti.” Bitmedi biliyorum. Ama Elif’in odasındaki haritada iğne artık evde. Onu oynatmasın diye bantladım.
 `,
     ),
     O(`
 # PAZARTESİ 14.00 — CEZAEVİ, AVUKAT GÖRÜŞ ODASI [bg:gorus_odasi]
 > Cevdet kapıyı açtı. “Hâlâ resme bakıyor” dedi, başka bir şey demedi.
 > Tarık daha zayıftı. Ama gözleri bu kez masada değil, bendeydi.
+tarik: Gülay söyledi, Kenan abi geçen celsede “belki yanıldım” demiş. Ben de ona kızmadım abla. İnsan yanılır.
 `),
   ],
 });
@@ -400,6 +411,7 @@ const kayit = retarget(
     lines: B(`
 > İşletmenin filo takip sisteminin dökümü ve zimmet defterinin fotokopisi. Kapak yazısında “mahkemenizin ara kararı üzerine.”
 ~ Bir kamyonetin hafızası. Kim kullandığını bilmez; nerede durduğunu bilir.
+> Kâğıdın altına liman işletmesinin hukuk müşaviri bir not düşmüş: “Araç, gece vardiyasında vardiya amirliğinin kullanımındadır.” Bir cümle; kimin olduğunu söylemeyen, söylemekten kaçınan.
 `),
     header: { left: 'FİLO TAKİP · 16 LMN 07 / ZİMMET DEFTERİ', right: '14–15.11' },
     columns: [
@@ -519,6 +531,8 @@ const emanet = retarget(
 # SALI 10.00 — ADLİYE, EMANET BÜROSU [bg:adliye]
 > Bodrum katta, demir raflar arasında bir masa. Kâtip emanet defterini açtı, poşetleri tek tek çıkarıp fotoğraf çekmeme izin verdi. Dokunmak yok.
 ~ Delile dokunmam. Bakarım. Avukatın eli delilin değil, dosyanın üstündedir.
+> Kâtip genç bir adamdı; her poşeti çıkarırken numarasını yüksek sesle okudu, deftere işaret koydu. “Usul” dedi gülümseyerek, “usul olmazsa her şey kaybolur.”
+~ Usul olmazsa her şey kaybolur. Bir limanda bir kilit kaybolur; bir emanet bürosunda kaybolmaz. Fark, bir defterdir.
 `),
     miss: fallback('FB_EMANET', 'TAP', {
       score: { ARASTIRMA: -10 },
@@ -540,6 +554,7 @@ const nurten = conversation('ARA_NURTEN', {
 # ÇARŞAMBA 08.30 — BURSA EMNİYET, CİNAYET BÜRO [bg:karakol]
 > Çay ocağında, ayakta. Amir Aydemir ağzındaki yakılmamış sigarayı parmaklarının arasında çeviriyordu.
 nurten: Beş dakikam var avukat hanım. Dosyam kapandı, iddianame çıktı. Bana ne getirdiniz?
+~ Yakılmamış bir sigara. Kapatılmış bir dosya. İkisinin de içinde yanmayan bir şey var.
 `),
   choices: [
     option('NU_TWIST', '“Kilidi beğenmediniz, değil mi? Kan yoktu.”', {
@@ -549,6 +564,7 @@ nurten: Beş dakikam var avukat hanım. Dosyam kapandı, iddianame çıktı. Ban
 > Sigarayı ağzından aldı. Uzun bir süre bana baktı.
 nurten: Kan yoktu. Doku yoktu. Bir kafatası kırılır, kilit tertemiz kalır. Beğenmedim, evet. Ama bir tanık vardı, bir kavga vardı, bir parmak izi vardı.
 nurten: İki günde dosya kapattım. Yukarısı memnun. Ben memnun değilim. Bunu kimseye söylemedim; size de söylemedim.
+nurten: Yirmi iki yıldır cinayet bürosundayım. Bir şey öğrendim: kolay dosya yoktur. Kolay görünen dosya vardır. Kolay görünen dosya, birinin kolay görünmesini istediği dosyadır.
 `),
     }),
     option('NU_KIT', '“Servis kamyonetlerinin laşing kitlerine baktınız mı?”', {
@@ -787,7 +803,7 @@ const leyla = story('ARA_LEYLA', {
   background: 'buro',
   lines: [
     W(
-      all(any(has('ev_abone'), has('ded_arac')), not(flag('suc_duyurusu'))),
+      all(cmp(v('ara_day'), '==', 1), any(has('ev_abone'), has('ded_arac')), not(flag('suc_duyurusu'))),
       `
 # LEYLA’NIN ODASI [bg:buro]
 leyla: Bir isim var elinde. Bir numara, belki bir araç. Ne yapacaksın?
@@ -795,6 +811,14 @@ leyla: Bir isim var elinde. Bir numara, belki bir araç. Ne yapacaksın?
 leyla: Ne zaman? Bekledikçe kâğıtlar kaybolur. Kayıtlar silinir, kilitler “kayıp” olur.
 leyla: Suç duyurusu herkesin hakkıdır, CMK 158. Ama avukatın duyurusu bir dilekçe değildir; bir dosyadır. Ekleri olur. İsim, saat, belge.
 leyla: Ve kürsüde o adam yeniden yemin edecek. Kendisini suçlayacak bir soruya cevap vermeyebilir; CMK 48. Sustuğunda üstüne gitme. Susması da bir cevaptır.
+`,
+    ),
+    W(
+      cmp(v('ara_day'), '==', 1),
+      `
+# LEYLA’NIN ODASI [bg:buro]
+leyla: Nihai raporu okudun mu? Dairesel çökme, sınırlı yüzeyli cisim. Uzman bunu yazdı ama ne olduğunu söylemedi.
+leyla: Rapor ölüm saatini iki saatlik bir aralık veriyor. Midede ne var, ne zaman yenmiş, sor. Uzmanlar sorulmayanı söylemez.
 `,
     ),
     W(
@@ -806,11 +830,20 @@ leyla: İkinci celsede savcı ne yapacak, biliyor musun? Bir savcı, kendi tanı
 leyla: Yumruğa sarılırsa mahkeme suçun vasfının değişebileceğini söyler; ek savunma hakkın doğar, CMK 226. Hazır ol: “Ölüm o yumruktan gelmedi” diyebilecek kadar.
 `,
     ),
+    W(
+      cmp(v('ara_day'), '==', 2),
+      `
+# LEYLA’NIN ODASI [bg:buro]
+leyla: Bilirkişiyi kürsüde zorlamayacaksın. Ona soracaksın: “olabilir” mi, “uyumlu” mu? Bir bilirkişi ikisinin farkını bilir; sen de bil.
+leyla: “Olabilir” bir kapıyı açık bırakır. “Uyumlu” bir kapıyı gösterir. “Uyumlu değil” bir kapıyı kapatır. Savcı birinciyle yetinir; sen üçüncüyü ararsın.
+leyla: Bir de şunu unutma: bilirkişi hukuki değerlendirme yapmaz, yalnızca teknik görüş verir. “Sanık öldürdü mü” diye sorma; “bu yara bu aletle açılır mı” diye sor.
+`,
+    ),
     O(`
 # LEYLA’NIN ODASI [bg:buro]
-leyla: Nihai raporu okudun mu? Dairesel çökme, sınırlı yüzeyli cisim. Uzman bunu yazdı ama ne olduğunu söylemedi.
-leyla: Bilirkişiyi kürsüde zorlamayacaksın. Ona soracaksın: “olabilir” mi, “uyumlu” mu? Bir bilirkişi ikisinin farkını bilir; sen de bil.
-leyla: Rapor ölüm saatini iki saatlik bir aralık veriyor. Midede ne var, ne zaman yenmiş, sor. Uzmanlar sorulmayanı söylemez.
+leyla: Esas savunmanı düşündün mü? İki tür beraat var, Deniz. Biri “suçu sanık işlemedi, bu sabit.” Öbürü “suçu sanığın işlediği sabit değil.”
+leyla: Birincisi daha güçlüdür ama daha pahalıdır; gerçeği göstermeni ister. İkincisi şüpheyle yetinir; ama şüphenin iki ayağı olmalı.
+leyla: Hangisini istediğini ancak elindeki kâğıt söyler. Kâğıdın taşıyamayacağı bir yükü ona yükleme; masa devrilir.
 `),
   ],
   choices: [toHub('LEYLA2_DON', 'Teşekkür et')],
@@ -851,7 +884,30 @@ leyla: Bugün müvekkilinden şüphelendin mi?
 leyla: Güzel. Hiç şüphelenmeyen avukat, müvekkilinin hikâyesini değil kendi hikâyesini savunur. Şimdi bir başkasından şüpheleniyorsan aynı kuralı ona da uygula: önce kâğıt.
 `),
   ],
-  choices: [cont('ARA_AKSAM1_DEVAM', 'Yeni gün', HUB, { role: 'PRIMARY' })],
+  choices: [
+    cont('ARA_AKSAM1_DEVAM', 'Yeni gün', HUB, { role: 'PRIMARY', visibleWhen: flag('kenan_yuzles') }),
+    option('AA1_A', '“Bir an. Şimdi başka birinden.”', {
+      score: { SAVUNMA_STRATEJISI: 10 },
+      visibleWhen: not(flag('kenan_yuzles')),
+      next: HUB,
+      responses: B(`
+- Bir an şüphelendim. Şimdi başka birinden şüpheleniyorum.
+leyla: O zaman aynı kuralı ona da uygula. Bir an şüphelen; sonra kâğıda bak. Kâğıt seni nereye götürürse oraya git; bir adım ötesine değil.
+leyla: Bir de… o adam bir zamanlar senin müvekkiline iş vermiş. Bir babalık yapmış. Bunu unutma. İnsanlar tek bir şey değildir; dosyalar onları tek bir şeye indirir.
+> Şemsiyesini açtı, merdivenlere yürüdü. Topuk sesleri, sonra sokak kapısı, sonra yağmur.
+`),
+    }),
+    option('AA1_B', '“Hayır. Hiç.”', {
+      visibleWhen: not(flag('kenan_yuzles')),
+      next: HUB,
+      responses: B(`
+- Hayır. Hiç şüphelenmedim.
+leyla: O zaman dikkat et. Hiç şüphelenmeyen avukat, gözlerini kapatmış demektir. Gözü kapalı avukatı ilk tökezleten de kendi müvekkilinin bir cümlesi olur.
+> Kapıyı arkasından çekti. Bir süre kapalı kapıya baktım.
+~ Belki haklıydı. Ama bu gece şüphelenmek istemiyordum; uyumak istiyordum. İkisini aynı anda yapamadım.
+`),
+    }),
+  ],
 });
 
 const aksam2 = story('ARA_AKSAM2', {
@@ -873,7 +929,24 @@ const aksam2 = story('ARA_AKSAM2', {
 ~ Üç tabak, iki sandalye. Bu dosyanın bütün hesabı bu.
 `),
   ],
-  choices: [cont('ARA_AKSAM2_DEVAM', 'Son gün', HUB, { role: 'PRIMARY' })],
+  choices: [
+    option('AA2_A', 'Balkona bakmadan geç', {
+      next: HUB,
+      responses: B(`
+> Başımı çevirmeden geçtim. Bir avukat müvekkilinin balkonuna bakmaz; bakarsa bir şey vaat etmiş olur.
+~ Yarın son gün. Elimdeki kâğıtları sayıyorum: bir rapor, bir defter, bir kamyonet, bir koni. Saydıkça çoğalıyorlar; saydıkça yetmiyorlar.
+`),
+    }),
+    option('AA2_B', 'Durup denize bak', {
+      score: { DELIL_ANALIZI: 10 },
+      next: HUB,
+      responses: B(`
+> Arabayı sahile çektim, motoru kapattım. Deniz siyahtı; ufukta bir geminin ışıkları, Mudanya’ya doğru yavaşça kayıyordu.
+~ Bir gemi. Bir çocuğun resmindeki gibi. Birinin babası o gemide, birinin değil. Ercan’ın gemileri saydığı gibi saydım: biri, ikisi, üçü.
+~ Üç kutu. Bir defterde üç numara. Bir puantörün son hesabı.
+`),
+    }),
+  ],
 });
 
 // --- Duruşmadan önceki gece ---
@@ -886,6 +959,8 @@ const sonNodes = [
     lines: B(`
 # PAZARTESİ 22.40 — ARSLAN HUKUK [bg:buro_gece]
 > Panoyu ikinci kez topluyordum. İlk celseden önce bir iskeletti; şimdi bir haritaydı. Bir rıhtımdan bir iskeleye, bir iskeleden bir kamyonete.
+> Kırmızı iplikler artık tek bir noktada düğümleniyordu: 23.41. Bir telefon, iki dakika, bir rehberde dört harf.
+> Panonun köşesinde Elif’in gemi resmi. Altına küçük bir kâğıt iliştirdim: “Kaç kutu?” Ercan’ın sorusu. Şimdi benim sorum.
 `),
   }),
   decisionNode('ARA_SON_2', [{ to: 'ARA_SON_3' }], {
@@ -908,7 +983,28 @@ nurten: Yarın duruşmada savcınız bunu bilecek. Siz de bilin. [phone]
       ),
     ],
   }),
-  decisionNode('ARA_SON_3', [{ to: 'ARA_SON' }], {
+  decisionNode('ARA_SON_3B', [{ to: 'ARA_SON' }], {
+    lines: [
+      W(
+        flag('envanter_duzeltilmis'),
+        `~ “10/11 kayıp.” Başka bir mürekkep, bir satır yukarıda. Bir soruyu yanlış zamanda sordum; bir kâğıt benden önce davrandı.`,
+      ),
+      W(
+        flag('sevim_kapandi'),
+        `~ Halitpaşa’da bir kapı, bir sürgü sesi. Bir dulun kapısını ben kapattım; içeride bir defter kaldı.`,
+      ),
+      W(
+        flag('defter_usul'),
+        `~ Bir tutanak, bir imza, bir sayfa sayısı. Defter mahkemede; kimse “avukat getirdi” diyemeyecek.`,
+      ),
+      W(
+        flag('fact_gece_yukleme'),
+        `~ “Kâğıdı sonradan yazılır derler.” Gece yüklemeleri. Bir puantörün saydığı ve yazdığı her şey.`,
+      ),
+      O(`~ Bir defter, bir kamyonet, bir koni. Hepsini bir masaya dizdim; hepsi aynı yöne bakmıyor. Henüz.`),
+    ],
+  }),
+  decisionNode('ARA_SON_3', [{ to: 'ARA_SON_3B' }], {
     lines: [
       W(
         has('ded_arac'),

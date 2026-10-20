@@ -137,6 +137,8 @@ baskan: Sanığın kimliği tespit edildi. İddianame okunmuş sayılsın mı, S
 savci: Özetle okuyalım Sayın Başkan.
 > Savcı Bora Kılınç, otuzlarının sonunda, kravatı düzgün, dosyası sekmelerle bölünmüş. Sanığa bakmadı; dosyaya baktı.
 ~ Dosyasını seven bir savcı. Sanığı değil. İyi savcı da budur; tehlikeli savcı da.
+> Üye hâkim Derya Alkan, kırklarında, gözlükleri burnunun ucunda, dosyayı benden önce okumuş gibi görünüyordu. Başkan Melih Sarp sabırlı, ağır, her cümlesini bitirmeden önce bir nefes alan biri.
+~ Bir heyet. Üç insan, bir masa, bir terazi. Hangisinin hangi kefeye ne koyacağını bilmeden, hepsine aynı kâğıtları göstereceğim.
 `),
       choices: [cont('H100_DEVAM', 'Devam', 'H1_01')],
     }),
@@ -152,6 +154,7 @@ baskan: Sanık, iddianameyi duydunuz. Susma hakkınız var; müdafiinizden yarar
 tarik: Anladım efendim.
 baskan: Müdafi, sanıkla savunma hakkında görüştünüz mü?
 ~ Görüştüm. Ama ne söyleyeceğine o karar verecek. Ben yalnızca ne söylemenin ne demek olduğunu anlattım.
+> Galeride Sevim Yavuz arkaya, duvarın dibine oturmuştu. Elinde bir mendil; hiç kullanmadı. Savcı “TCK 81/1” dediğinde gözlerini kapadı.
 `),
       choices: [cont('H101_DEVAM', 'Sanığın savunması', 'H1_02')],
     }),
@@ -247,7 +250,66 @@ tarik: Yok… itmişti. Tükürmüştü.
 ~ Korunma bir saldırıya karşı olur. Hakarete karşı değil. Yanlış kapıyı çaldırdım; kapı kapandı.
 `),
       ],
-      choices: [cont('H102S_DEVAM', 'Tanık Şükrü Balcı', 'H1_03')],
+      choices: [cont('H102S_DEVAM', 'Sanığa sorular', 'H1_02Q')],
+    }),
+    court1.objection('H1_02Q', {
+      title: 'Sanığa sorular',
+      courtStage: 'SANIK_SAVUNMASI',
+      background: 'durusma_salonu',
+      say: T(`
+baskan: Sayın Savcı, sanığa sorunuz var mı?
+savci: Var Sayın Başkan. Sanık, kavgadan sonra bir saat boyunca nerede olduğunuzu kim doğrulayabilir? B sahasına gitmediğinizi kanıtlayabilir misiniz?
+> Tarık bana baktı. Sonra savcıya. Ağzını açtı, kapadı.
+~ Bir soru, iki soru gibi duruyor. İkincisi bir tuzak: sanıktan masumiyetini kanıtlamasını istiyor.
+`),
+      next: 'H102Q_SON',
+      options: [
+        option('H102Q_A', 'İtiraz: sanık masumiyetini ispatla yükümlü değildir; ispat yükü iddiadadır', {
+          score: { USUL_BILGISI: 80 },
+          effects: [inc('legal_hits'), inc('pers')],
+          good: 'Masumiyet karinesi (Anayasa 38/4, AİHS 6/2): sanık suçsuzluğunu ispatlamak zorunda değildir; soru bu haliyle sorulamaz.',
+          responses: B(`
+- İtiraz, Sayın Başkan. Sanık bir şeyi kanıtlamak zorunda değildir. İspat yükü iddia makamındadır.
+baskan: Yerinde. Sayın Savcı, sorunuzu sanığın ne yaptığını soracak biçimde sorun.
+savci: Sanık, kavgadan sonra nereye gittiniz?
+`),
+        }),
+        option('H102Q_B', 'Sanık cevaplasın', {
+          neutral: 'Soru cevaplandı; ama sanıktan masumiyetini kanıtlaması istendiği tutanağa itirazsız geçti.',
+          responses: B(`baskan: Sanık, cevap verin.`),
+        }),
+        option('H102Q_C', '“Bu soru savcının önyargısını gösteriyor!”', {
+          score: { USUL_BILGISI: -50 },
+          effects: [dec('cred')],
+          bad: 'İtiraz bir usul kuralına dayanmalıdır; savcıya kişisel çıkış heyetin sabrını tüketir.',
+          responses: B(`baskan: Müdafi, itirazınızı hukuki dayanağıyla yapın. Sanık, cevap verin.`),
+        }),
+      ],
+    }),
+    story('H102Q_SON', {
+      ...court1.base,
+      title: 'Sanığa sorular',
+      background: 'durusma_salonu',
+      lines: [
+        W(
+          flag('durust_savunma'),
+          `
+tarik: Turnikeden çıktım efendim. Kartım okundu. İskeleye indim, Nail Usta’nın büfesine. İki çay aldım, kartla ödedim. Oturdum.
+tarik: Haberler başlayınca kalktım. Eve on ikiyi on geçe vardım. Karım bilir.
+savci: Bir saat bir büfede, tek başına mı oturdunuz?
+tarik/uzgun: Ağladım efendim. Bir saat ağladım. Bunu kimse görmesin istedim; şimdi herkes biliyor.
+> Galeride biri burnunu çekti. Savcı bir şey not aldı; bu kez altını çizmedi.
+`,
+        ),
+        O(`
+tarik: Eve gittim efendim. Yürüdüm. Biraz oturdum yolda. Sonra eve gittim.
+savci: Nerede oturdunuz? Kim gördü?
+tarik: Bilmiyorum efendim… Bir yerde. Kimse görmedi herhalde.
+> Savcı başını salladı; kendi kendine. Heyet bir şey yazmadı.
+~ Bir saatin cevabı Tarık’ın içinde duruyor; ama o cevabı kürsüye taşıyacak kelimeleri ona kimse vermedi. Ben de vermedim.
+`),
+      ],
+      choices: [cont('H102Q_DEVAM', 'Tanık Şükrü Balcı', 'H1_03')],
     }),
     court1.testimony('H1_03', {
       title: 'Görgü tanığı',
@@ -383,7 +445,7 @@ savci: Sayın Başkan, emanetteki kilit. Maktulün bulunduğu yerin yakınındak
 > Mübaşir naylon poşetin içindeki sarı, ağır kilidi kürsünün önüne koydu. Galeride biri yutkundu.
 baskan: Müdafi, delile karşı diyeceğiniz?
 `),
-      next: 'H1_05',
+      next: 'H1_04B',
       options: [
         option(
           'H104_A',
@@ -452,6 +514,27 @@ baskan: Yaranın ölçüsü nedir, müdafi? … Bilirkişi dinlenirken sorarsın
         }),
       ],
     }),
+    story('H1_04B', {
+      ...court1.base,
+      title: 'Kısa ara',
+      background: 'adliye',
+      lines: B(`
+baskan: On dakika ara.
+# ADLİYE KORİDORU · 11.20 [bg:adliye]
+> Koridorda pencereler buğuluydu. Bir avukat telefonda bağırıyor, bir mübaşir bir listeyi duvara asıyordu.
+> Gülay bankta oturuyordu. Önünde Kenan Aksoy duruyordu; elinde plastik bir bardak su. Bardağı Gülay’a uzattı.
+kenan: İç kızım, iç. Üzülme. Allah büyük. Ben ne gördüysem onu söyleyeceğim; elimden başka bir şey gelmez.
+> Gülay bardağı aldı, içmedi. Kenan beni görünce başıyla selam verdi ve koridorun öbür ucuna, tanık odasına yürüdü.
+gulay: İyi adam. Tarık’a iş o buldu. Şimdi onun sözüyle… Ne biçim dünya bu avukat hanım?
+> Telefonum titredi. Leyla. [phone]
+leyla: Forkliftçi nasıl gitti? [phone]
+- Dürüst bir adam. Yanıldığını kendisi söyledi.
+leyla: Güzel. Şimdi sıra kesin olanda. Ona “yanıldınız” deme; kâğıdı göster, bırak kendisi söylesin. Söylemezse heyet söyler. [phone]
+> Tanık odasının kapısı aralıktı. İçeride Kenan, bir sandalyede, dirsekleri dizlerinde. Bez parçasını iki elinin arasında katlıyor, açıyor, yeniden katlıyordu.
+~ Her tanığın kürsüden önce bir alışkanlığı var. Şükrü Usta’nınki cihazına dokunmaktı. Bunun ki bir bez parçası.
+`),
+      choices: [cont('H104B_DEVAM', 'Tanık Kenan Aksoy', 'H1_05')],
+    }),
     court1.testimony('H1_05', {
       title: 'Vardiya şefi',
       courtStage: 'TANIK_DINLEME',
@@ -468,6 +551,12 @@ kenan: Efendim, o gece vardiya şefiydim. Kavgayı ben ayırdım. Sonra…
 > Bir an durdu. Elini cebine soktu, bir bez parçası çıkardı, avucunda sıktı, geri koydu.
 kenan/uzgun: Sonra bu çocuğu gördüm. Söylemek istemezdim. Ama yemin ettim.
 ~ Kürsüde ağır bir tanık: üzgün, babacan, isteksiz. İsteksiz tanığa herkes inanır.
+> Savcı ayağa kalktı. Sorularını tek tek, aceleyle değil, bir kayık yanaştırır gibi sordu.
+savci: Tanık, sanığı kaç yıldır tanırsınız?
+kenan: Dört yıl efendim. Ağabeyi öldükten sonra ben işe aldım. Oğlum gibidir.
+savci: O gece onu gördüğünüzden eminsiniz.
+kenan/uzgun: Keşke emin olmasaydım.
+> Savcı oturdu. Galeride biri iç çekti. Başkan bana döndü.
 `),
       statements: [
         statement('K1', 1, [
@@ -481,7 +570,7 @@ kenan/uzgun: Sonra bu çocuğu gördüm. Söylemek istemezdim. Ama yemin ettim.
         ]),
         statement('K3', 3, [
           'Elinde demir gibi bir şey vardı. ',
-          hl('O çocuğun içinde yangın vardı; yapar', always),
+          hl('O çocuğun içinde yangın vardı; yapar', any(flag('press_k3'), has('clue_kenan_isik'))),
           '.',
         ]),
         statement('K4', 4, [
@@ -579,7 +668,7 @@ kenan: Haklısınız efendim. Babalık işte… insan karışıyor.
 kenan: Çıkmadım. Defter yazdım, telsize baktım. Gece vardiyası öyledir; sabaha kadar ofis.
 `),
         }),
-        presentRule('PS_K4', 'K4', ['clue_servis_arac'], {
+        presentRule('PS_K4', 'K4', ['clue_servis_arac', 'ded_tasima'], {
           score: { SORGULAMA: 100 },
           effects: [inc('pers'), raise('k4_arac')],
           neutral:
@@ -609,6 +698,9 @@ baskan: Tanık, 23.40’ta B sahasının ağzında gördüğünüz kişinin san�
 kenan: Emin… değilim efendim.
 > Savcı kalemini masaya bıraktı. Galeride Gülay elini ağzına kapadı. Sevim Yavuz ise Kenan’a bakıyordu; dikkatle, kaşlarını çatarak.
 ~ Kürsüden bir teşhis düştü. Ama iyi bir adam “yanılmışım” dediğinde salon onu affeder. Kimse sormaz: neden yanıldı?
+> Tarık sanık sırasında başını kaldırdı ve Kenan’a baktı. Kızgın değildi; şaşkındı. Bir çocuğun babasına bakışı gibi.
+tarik: Abi… ben orada değildim.
+> Kenan cevap vermedi. Kürsüden indi, Tarık’ın yanından geçerken bu kez omzuna dokunmadı; elini cebindeki bez parçasına götürdü.
 `,
         ),
         W(
@@ -631,6 +723,8 @@ kenan: Emin… değilim efendim.
       lines: B(`
 baskan: Taraflar, eksik hususlar ve delil talepleri? Önce müdafi.
 ~ Mahkemeden üç şey isteyebilirim; fazlası okunmaz. Neyi isteyeceğim, ikinci celsenin elinde ne olacağını belirler.
+> Savcı dosyasını çevirdi. Kendi talepleri kısaydı: “Tanıkların yeniden dinlenmesine gerek yoktur; ATK raporu beklenebilir.” Bir savcı için dosya kapanmıştı.
+~ Bir dosya, bir savcı için kapanınca, avukat için açılır. Kapıyı neyle açık tutacağımı seçmem gerekiyor.
 `),
       choices: [
         option('TL_ATK', 'ATK’dan nihai raporun alınması ve raporu düzenleyenin duruşmada dinlenmesi', {
@@ -641,7 +735,7 @@ baskan: Taraflar, eksik hususlar ve delil talepleri? Önce müdafi.
           responses: B(`baskan: Kabul. Kurumun nihai raporu beklenecek, raporu düzenleyen uzman dinlenecek.`),
         }),
         option('TL_GPS', 'Servis kamyoneti 16 LMN 07’nin araç takip ve zimmet kayıtları', {
-          visibleWhen: has('clue_servis_arac'),
+          visibleWhen: any(has('clue_servis_arac'), flag('k4_arac')),
           enabledWhen: cmp(v('talep_n'), '<', 3),
           score: { USUL_BILGISI: 80 },
           effects: [raise('talep_gps'), inc('talep_n')],

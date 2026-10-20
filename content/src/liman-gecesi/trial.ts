@@ -103,6 +103,7 @@ export const trial: CasePart = {
         O(`
 # PAZARTESİ 09.10 — BURSA ADLİYESİ, 6. AĞIR CEZA KORİDORU [bg:adliye]
 > Gülay bankta, Elif’in resim defteri kucağında. Sevim Yavuz koridorun öbür ucunda. İkisinin arasında bir kapı ve üç hafta.
+
 `),
       ],
     }),
@@ -115,8 +116,11 @@ export const trial: CasePart = {
 mubasir: Bursa Altıncı Ağır Ceza! Tarık Demirel dosyası! Taraflar, bilirkişi, tanıklar… salona!
 baskan: Yoklama yapıldı. Ara karar cevapları okundu: Adli Tıp Kurumu’nun nihai raporu ve kurumların cevapları dosyaya girdi.
 baskan: Raporu düzenleyen uzman Doç. Dr. Selma Karaca hazır. Dinleyeceğiz.
+savci: Sayın Başkan, kurumların cevaplarını inceledik. Esasa ilişkin görüşümüzü mütalaada bildireceğiz.
+> Savcının sesi ilk celsedekinden daha yavaştı. Dosyasının sekmeleri de değişmişti; yeni renkler, yeni sayfalar.
 > Kırklarının ortasında, sade, gözlüklü bir kadın kürsüye geçti. Elinde rapor, raporun içinde renkli sekmeler.
 ~ Bir bilirkişi “olabilir” der. Bir avukatın işi, “olabilir”in yanına “ama” koydurabilmektir. Kâğıtla.
+> Tarık sanık sırasında, ellerini dizlerine koymuş, kürsüye bakıyordu. Bu kez ellerini saklamıyordu.
 `),
       choices: [cont('T00_DEVAM', 'Bilirkişi dinlensin', 'T_01')],
     }),
@@ -228,7 +232,7 @@ karaca: Kırık, 23.41’den sonra oluşmuştur.
 `),
           ],
         }),
-        presentRule('PS_B2_KANTIN', 'B2', ['ev_kantin'], {
+        presentRule('PS_B2_KANTIN', 'B2', ['ev_kantin', 'ev_telefon'], {
           score: { SORGULAMA: 100 },
           effects: [inc('pers')],
           neutral:
@@ -300,6 +304,7 @@ karaca: Sınırlı yüzeyli, sert bir cisimle. Düşme ihtimalini dışlamıyoru
           `
 > Karaca raporunu kapattı. Kürsüden inerken bir an bana baktı; ne onay ne kınama. Bir meslektaşın bakışı.
 ~ Darbe, düşme değil. Saat, kavgadan sonra. Bir uzman bunları kendi ağzıyla söyledi. Şimdi ikinci soru: kim?
+> Savcı kısa bir not aldı; sonra kalemini yavaşça masaya bıraktı. Gülay galeride Sevim’e baktı. Sevim bu kez başını çevirmedi.
 `,
         ),
         O(`
@@ -378,7 +383,7 @@ baskan: Tutanağa geçsin: tanık, kendisini suçlayabilecek soruya cevap vermey
 kenan: Ederdi. Sarhoşken herkesi arardı. O gece etmedi.
 `),
         }),
-        presentRule('PS_K6', 'K6', ['ev_abone', 'ded_motif'], {
+        presentRule('PS_K6', 'K6', ['ev_abone', 'ded_motif', 'ev_defter'], {
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_k6')],
           good: '23.41’deki iki dakikalık görüşmenin muhatabı tanıktı; tanığın bunu iki kez gizlediği ortaya kondu.',
@@ -453,7 +458,12 @@ savci: Tanığın bu davadaki beyanlarının değerlendirilmesini takdirinize b�
           any(flag('contra_k5'), flag('contra_k6'), flag('contra_k7')),
           `
 > Kenan kürsüden indi. Avukatı onu kapıya kadar götürdü. Salonda kimse bir şey söylemedi.
+> Sevim Yavuz galeride, kocasının amirinin arkasından baktı. Dudakları kıpırdadı; bir şey söyledi, kimse duymadı.
+> Savcı Bora Kılınç dosyasında bir sayfayı çevirdi, sonra bir daha. Bir şey arıyordu; aradığı artık dosyada değildi.
 ~ Susan bir tanık. Susmak bir hak; ama bir heyetin önünde susmak da bir şey söyler.
+> Üye hâkim Alkan başkana doğru eğildi, bir şey fısıldadı. Başkan başını salladı ve kâtibe bir not yazdırdı.
+baskan: Tanığın beyanları ve cevap vermekten kaçındığı sorular tutanağa geçmiştir. Heyet bunları değerlendirecektir.
+~ Bir kâtip bir not yazdı. Bir dosyada bir satır. Bazen bir dava o satırda biter; bazen başka bir dava o satırda başlar.
 `,
         ),
         O(`
@@ -569,6 +579,7 @@ gulay: Kimse sormadı efendim. Sorsalar söylerdim. Bugün soruldu; söylüyorum
       say: T(`
 baskan: Sanık ve müdafii, dikkat edin. Yapılan yargılama sonucunda, eylemin kasten yaralama sonucu ölüme sebebiyet verme suçunu oluşturabileceği değerlendirilmektedir. Ek savunmanız?
 ~ Bir kapı açıldı. Savcının yedeği masaya kondu. Şimdi söyleyeceğim şey, terazinin hangi kefesinde durduğumu gösterecek.
+> Tarık bana döndü. Fısıldadı: “Abla, bu ne demek?” “Senin yumruğunla onun ölümü arasında bir bağ var mı diye soruyorlar” dedim. “Ben de yok diyeceğim.”
 `),
       next: 'T_05',
       options: [
@@ -688,6 +699,8 @@ baskan: Müdafi, mütalaaya karşı diyeceğiniz?
       lines: B(`
 baskan: Müdafi, esas hakkındaki savunmanızı yapın.
 > Ayağa kalktım. Cübbenin kolları ağırdı; üç aydır taşıdığım bir dosya kadar.
+> Galeride Gülay, arkada Sevim. Savcı kalemini masaya koymuş, kollarını kavuşturmuştu. Heyet bekliyordu.
+~ Leyla’nın sesi: “Üçe böl.” Bir yumruk. Bir boşluk. Bir ölüm. Her birinin kendi kâğıdı var.
 ~ Bir yumruk ve bir ölüm. Hangisini savunuyorum?
 `),
       choices: [
@@ -786,6 +799,10 @@ baskan: Müdafi, esas hakkındaki savunmanızı yapın.
 - Sayın Başkan, sayın üye, Tarık Demirel o gece bir yumruk attı. Bunu inkâr etmiyoruz.
 - Ama o yumruktan sonra Ercan Yavuz yaşadı: yürüdü, yedi, konuştu. Ölümcül darbe ensesine, sanık limandan çıktıktan sonra ve emanetteki kilitle açılamayacak bir cisimle vuruldu.
 - Sanığın geri döndüğünü söyleyen tek tanık yanıldığını kabul etti. Geriye bir yumruk ve bir şüphe kalıyor. Şüphe sanık lehinedir. Beraatini talep ediyoruz.
+- Savcılık, yumruğun Ercan’ı düşürüp başını çarptırdığını söylüyor. Bilirkişi bunun bir düşme değil, bir darbe olduğunu söyledi; karşı tarafta iz yok, kırık bir aletin şeklini taşıyor.
+- Savcılığın aleti yaranın ölçüsüne uymuyor. Savcılığın tanığı o saatte o yerde sanığı göremezdi. Savcılığın saati, maktulün kendi telefonuyla çelişiyor.
+- Geriye ne kalıyor? Bir kavga. Bir yumruk. Bir ağabeyin adı ve bir tükürük. Bunlar bir ölümü açıklamaz.
+- Ceza yargılamasında sanık masumluğunu ispatlamak zorunda değildir. Suçluluğu kesin ve inandırıcı delille ispatlanmalıdır. Burada ispatlanmamıştır.
 `,
         ),
         W(
@@ -820,6 +837,7 @@ baskan: Sanık, ayağa kalkın. Son sözünüz?
           responses: B(`
 tarik: Efendim, ben o gece bir kere vurdum. Ondan utanıyorum. Ercan abinin karısından da özür dilerim.
 tarik: Ama ben o adamı öldürmedim. Kızım büyüyünce “baba sen ne yaptın” diye sorarsa, ne yaptıysam onu söylemek istiyorum. Bu kadar.
+> Oturdu. Başını eğmedi. Gülay galeride gözlerini sildi; Elif’in resim defterini göğsüne bastırdı.
 > Galeride Sevim Yavuz başını kaldırdı. Tarık’a baktı. Bir şey söylemedi; ama başını da çevirmedi.
 `),
         }),
@@ -851,6 +869,10 @@ baskan: Sanık, oturun. Son sözünüz alındı.
       lines: B(`
 baskan: Heyet müzakereye çekiliyor.
 > Kırk dakika. Koridorda Gülay ayakta, Sevim oturuyordu. Kimse konuşmadı. Pencereden limanın vinçleri görünmüyordu; ama ben onları görüyordum.
+> Tarık koridorun sonundaki pencerenin önünde duruyordu. Elini cama koymuştu, sağ elini. Boğumlardaki iz neredeyse geçmişti.
+tarik: Abla, ne olursa olsun… teşekkür ederim. Beni dinleyen ilk sen oldun.
+- Daha bitmedi.
+tarik: Biliyorum. Ama ben bitirdim. Söyleyeceğimi söyledim. Doğrusunu.
 mubasir: Heyet geliyor! Ayağa kalkın!
 baskan: Hüküm fıkrası ayakta dinlenir.
 `),

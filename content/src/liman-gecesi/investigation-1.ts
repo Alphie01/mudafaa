@@ -229,6 +229,10 @@ const hubChoices = {
       description: 'Liman işletmesinin cevabı geldi',
       visibleWhen: has('ev_turnike'),
     }),
+    p1.free('H_IFADE', 'Kolluk ifadelerini yeniden oku', 'INV_IFADE', {
+      once: true,
+      description: '0 EP · üç ifade, bir daktilo',
+    }),
     p1.activity('H_DIL', 'Delil dilekçesi (CMK 177)', 'INV_DIL', { once: true, description: '2 talep hakkı' }),
     p1.free('H_CIKARIM', 'Çıkarım tahtası', 'INV_CIKARIM', {
       description: '0 EP · ipuçlarını birleştir',
@@ -257,6 +261,7 @@ const hubLines = [
     `
 # GÜN 2/4 · BİRİNCİ CELSEYE 12 GÜN
 > Hedef: Ercan kavgadan sonra ne kadar yaşadı? Kim gördü, ne kanıtlar?
+~ Dün gece rüyamda bir turnike gördüm. Dönüyordu, dönüyordu; kimse geçmiyordu. Sabah ilk iş kahve, ikinci iş pano.
 `,
   ),
   W(
@@ -264,6 +269,7 @@ const hubLines = [
     `
 # GÜN 3/4 · BİRİNCİ CELSEYE 10 GÜN
 > Hedef: kâğıtlar konuşmaya başladı. Rapor, telefon, kart. Bir de kürsüye çıkacak iki adam.
+~ Leyla sabah masama bir not bırakmış: “İnsanlar yanılır. Makineler unutur. Sen ikisini de hatırla.”
 `,
   ),
   O(`
@@ -602,6 +608,8 @@ const rihtim = sceneSearch('INV_RIHTIM', {
 > Kırk bir fotoğraf. Flaşla, yağmurda çekilmiş. Islak beton beyaz patlıyor, konteynerlerin arası simsiyah.
 ~ Fotoğraf kimseye bir şey anlatmaz; yalnızca gösterir. Asıl soru, kimin neye bakmadığıdır.
 > Kavga burada oldu. Ceset ise üç yüz metre ötede, B sahasında bulundu. Kolluk iki yeri tek bir hikâyeyle birleştirmiş: kavga, dönüş, darbe.
+> Fotoğrafçı her kareye bir numara yazmış, yanına kurşun kalemle küçük notlar: “kan?”, “iz?”, “matara.” Kimse bu notlara cevap vermemiş.
+~ Bir fotoğrafçı bir şeyi merak etmiş ve bir soru işareti koymuş. İki ay sonra o soruyu ben soruyorum.
 `),
   miss: searchMiss('FB_RIHTIM'),
   finish: { id: 'RIHTIM_BITIR' },
@@ -621,6 +629,8 @@ const bsaha = sceneSearch('INV_BSAHA', {
 > İki kırmızı konteynerin arasında bir dar koridor. Ceset yüzüstü, başı içeri doğru. Turuncu yelek ıslak ve kararmış.
 > Fotoğrafçı her şeyi çekmiş; kimse fotoğraflara dönüp bakmamış. Dosyada tek satır: “Olay yerinde dikkat çeken başka bulguya rastlanmadı.”
 ~ “Dikkat çeken.” Kimin dikkatini? Dikkati çekilmek istenmeyen biri için çok rahat bir cümle.
+> Cesedin yeri rıhtımdan üç yüz metre. Arada iki sıra konteyner, bir forklift yolu, bir drenaj kanalı. Kolluğa göre Ercan bu yolu kendi yürümüş.
+~ Burnu kanayan, sarhoş, söylenen bir adam. Üç yüz metre. Ne için? Kime?
 `),
   miss: searchMiss('FB_BSAHA'),
   finish: { id: 'BSAHA_BITIR' },
@@ -646,6 +656,7 @@ const nail = conversation('INV_NAIL', {
   lines: B(`
 > Çayı önüme koydu. İnce belli bardak, kulpsuz, sıcak. İskelenin ötesinde feribotun ışıkları sise karışıyordu.
 nail: Avukat mısın? Tarık’ın avukatı mı? Ha. Ben de bekliyordum biri gelsin. İki ay oldu. Kimse gelmedi.
+nail: Kırk yıldır bu iskeledeyim. Feribot gelir, gider. İnsanlar gelir, gider. Kimse bir şey sormaz; ben de anlatmam. Ama sorsan anlatırım.
 `),
   choices: [
     option('NL_GECE', '“14 Kasım gecesini hatırlıyor musunuz?”', {
@@ -797,6 +808,16 @@ gulay/uzgun: Peki. On ikiyi on geçe. Doğrusu bu.
 ~ Bir kapıyı kapatmadım. Aralık bıraktım. Aralık kapılar rüzgârda çarpar.
 `),
     }),
+    option('GL_ELIF', '“Elif babasını soruyor mu?”', {
+      score: { SORGULAMA: 10 },
+      effects: [inc('trust', 4)],
+      responses: B(`
+gulay/uzgun: Her akşam. “Babam gemiden ne zaman inecek?” Ben de “uzun sefer” diyorum. Haritadan bir yer seçtik, oraya gittiğini sanıyor.
+gulay: Odasında bir harita var, okuldan getirdi. Bir toplu iğne taktı: babası orada. Her gün iğneyi biraz daha eve doğru oynatıyor.
+> Makinenin yanında bir toplu iğne kutusu. Gülay bir iğne aldı, parmaklarının arasında çevirdi, geri koydu.
+~ Bir haritada bir iğne. Benim panomda kırmızı iplikler. Hepimiz aynı şeyi yapıyoruz: bir adamı eve getirmeye çalışıyoruz.
+`),
+    }),
     back('GL_BITIR', 'Teşekkür et ve çık'),
   ],
 });
@@ -813,6 +834,8 @@ const sukru = conversation('INV_SUKRU', {
 # PERŞEMBE 13.10 — LİMAN, FORKLİFT GARAJI [bg:depo]
 > Mazot, yanık yağ, demir. Bir forkliftin çatalının altında altmışlarında bir adam, elinde bir kaşık, bir kap yemek. Kulağının arkasında ten rengi bir cihaz.
 sukru: Ha? Avukat mı? Kimin avukatı? Tarık’ın mı? Otur kızım, otur. Yüksek konuş ama, kulak yok bende.
+> Kabının kapağını kapattı, bir bezle çatalını sildi. Forkliftin yanındaki tahtada bir takvim: emekliliğine kalan günler, çarpılarla.
+sukru: Dört ay. Yüz on iki gün. Kırk yıl forklift sürdüm, bir kere bir kutu düşürmedim. Bir kere bir yalan da söylemedim. Ne sorarsan sor.
 `),
   choices: [
     option('SK_GECE', '“O gece ne gördünüz, Usta?”', {
@@ -867,6 +890,15 @@ sukru: Bana ne diyeceğimi söyleme. Kırk yıl kimse söylemedi, sen de söylem
 ~ Dürüst bir adama kendi tahminimi verdim. O geri itti. Utanması gereken o değildi.
 `),
     }),
+    option('SK_KABIN', '“Kabinden kavganın olduğu yer ne kadar uzaktı?”', {
+      visibleWhen: chosen('SK_GECE'),
+      score: { SORGULAMA: 15 },
+      responses: B(`
+sukru: Yirmi metre. Belki yirmi beş. Arada bir baba, bir kafes. Yağmur cama vuruyordu, silecek de bozuk.
+sukru: Farı onlara çevirdim, gördüm. Ama far ışığı ne kadar gösterir? Siluet. İki turuncu yelek. Biri iri, biri ince.
+~ Siluet. İki yelek. Bir yumruk. Ve bir ses, kimin olduğunu kimsenin görmediği.
+`),
+    }),
     back('SK_BITIR', 'Teşekkür et ve ayrıl'),
   ],
 });
@@ -885,6 +917,8 @@ const kenan = conversation('INV_KENAN', {
 > Ellilerinde, kır sakallı, iri bir adam. Lacivert kazak. Konuşurken ellerini cebinden çıkardığı bir bez parçasına siliyordu; temiz ellerini.
 kenan: Gel kızım, gel. Kahve? Termos kahvesi, acıdır ama ısıtır. Deniz durgunken herkes kaptan; poyrazda adam belli olur.
 kenan: Tarık’ın avukatısın. Bilirim. Yazık oldu o çocuğa. Yazık oldu Ercan’a da. İkisi de benim vardiyamdı.
+> Römorkör fotoğrafının altında el yazısıyla bir tarih ve bir isim: “Kaya-3, 1998.” Fotoğrafta genç bir adam, dümenin başında, gülümsüyor.
+kenan: Eskiden denizdeydim. Römorkör. Gemileri limana sokardım. Şimdi kutuları sayıyorum. Deniz insanı bırakmaz kızım; kıyıya çeker, orada tutar.
 `),
   choices: [
     option('KN_GECE', '“O gece neler gördünüz?”', {
@@ -906,6 +940,7 @@ kenan: Puantördü. Gemiye giren çıkan kutuyu sayardı. İyi sayardı. Bazen f
 > Bez parçasını katladı, cebine koydu.
 kenan: İçerdi. Dili kötüydü. Ama kimse ölmeyi hak etmez. Kimse.
 ~ “Bazen fazla sayardı.” Bir puantör için tuhaf bir kusur.
+
 `),
     }),
     option('KN_TARIK', '“Tarık nasıl biridir?”', {
@@ -929,6 +964,18 @@ kenan: Sen bunlarla yorma kendini. Çocuğun bir yumruğu var, onu savun. Gerisi
 ~ Bir soru sordum ve cevabı dinledim. Cevaptan çok, cevaptan önceki saniyeyi.
 `),
     }),
+    option('KN_FENER', '“Kavgayı ayırırken Ercan ne diyordu?”', {
+      visibleWhen: chosen('KN_GECE'),
+      score: { SORGULAMA: 20 },
+      responses: B(`
+kenan: Küfrediyordu. Ne diyecek? Burnu kanıyordu, yerde oturuyordu. “Bitireceğim onu” diyordu, “görürsün.”
+kenan: Ben kaldırdım onu. Kolundan tuttum, ayağa diktim. “Yürü kantine, yüzünü yıka” dedim. Yürüdü. Sallanarak ama yürüdü.
+- Yani kendi ayağıyla gitti.
+kenan: Gitti tabii. O zaman ölmemişti ki kızım. Sonra… sonra ne olduysa.
+> Termosu açtı, bardağına kahve doldurdu. Bana doldurmadı; bardağım hâlâ doluydu.
+~ “Sonra ne olduysa.” Bu dosyanın bütün sorusu o cümlenin içinde. Kimse o cümlenin devamını yazmamış.
+`),
+    }),
     back('KN_BITIR', 'Kahve için teşekkür et'),
   ],
 });
@@ -945,6 +992,10 @@ const orhan = conversation('INV_ORHAN', {
 # CUMA 17.00 — ÇEKİRGE, BİR APARTMAN DAİRESİ [bg:buro]
 > Kitaplarla dolu bir oda. Masada bir kafatası maketi, bir büyüteç, soğumuş bir çay. Çaya hiç dokunmuyor; yalnızca ara ara bardağı çeviriyor.
 orhan: Leyla aradı. “Çocuğum geliyor” dedi. Otur. Kırk yıl kesip biçtim; artık yalnızca anlatıyorum. Anlatmak daha zor.
+> Duvarda eski bir fotoğraf: otopsi salonunda genç bir adam, yanında daha genç bir kadın, elinde not defteri. Kadının yüzü bana tanıdık geldi.
+orhan: Leyla. Otuz yıl önce. Stajyerdi; her otopside en ön sırada dururdu, hiç bayılmazdı. Bir davada bana öyle bir soru sordu ki raporumu yeniden yazdım.
+orhan: O dava… neyse. O başka bir hikâye. Senin dosyana bakalım.
+~ Leyla’nın masasındaki ters çerçeve. Burada, bir duvarda, düz duruyor. Sormadım.
 `),
   choices: [
     option('OR_DERS', '“Düşme ile darbeyi raporda nasıl ayırırız?”', {
@@ -1001,6 +1052,7 @@ const onrapor = documentExam('INV_ONRAPOR', {
   lines: B(`
 > Dört sayfa. Sade, kuru bir dil. Bir alet seç, sonra şüpheli satıra dokun. Doğru alet + doğru satır = yeni ipucu.
 ~ Raporu iki kişi okumuş: yazan ve imzalayan. Üçüncüsü benim.
+> İlk sayfada bir vücut şeması, üstünde kırmızı kalemle iki işaret: yüz ve ense. Kimse aradaki mesafeyi sormamış.
 `),
   header: { left: 'BURSA ATŞ · ÖN OTOPSİ RAPORU', right: '15.11 · E. YAVUZ' },
   columns: [
@@ -1081,6 +1133,7 @@ const telefon = documentExam('INV_TELEFON', {
   lines: B(`
 > Kolluğun tutanağı: cesedin cebinden çıkan telefonun son aramaları. Altında bir imza ve “herhangi bir hususa rastlanmamıştır.”
 ~ “Herhangi bir husus.” Bir hususun hangisi olduğuna kim karar verdi?
+> Tutanağın kenarında, kurşun kalemle, bir el yazısı: “Kptn kim?” Altında cevap yok. Birisi sormuş, kimse cevaplamamış.
 `),
   header: { left: 'TELEFON İNCELEME TUTANAĞI · E. YAVUZ', right: '16.11' },
   columns: [
@@ -1141,6 +1194,7 @@ const turnike = documentExam('INV_TURNIKE', {
   lines: B(`
 > Liman işletmesinin cevabı: iki sayfa döküm, bir kapak yazısı. “Mahkemenizin müzekkeresi üzerine…”
 ~ Bir makinenin hafızası. Kimseyi sevmez, kimseden korkmaz; yalnızca saat tutar.
+> Kapak yazısında bir cümle daha: “Kayıtlar altı ay saklanmaktadır.” Dilekçeyi birkaç ay geç verseydim, bu kâğıt hiç olmayacaktı.
 `),
   header: { left: 'MUDANYA LİMANI · GEÇİŞ KAYITLARI', right: '14–15.11' },
   columns: [
@@ -1192,6 +1246,66 @@ const turnike = documentExam('INV_TURNIKE', {
   finish: { id: 'TURNIKE_BITIR' },
 });
 
+const ifade = documentExam('INV_IFADE', {
+  ...INV,
+  title: 'Kolluk ifadeleri',
+  hud: ['ifade_left'],
+  background: 'buro',
+  lines: B(`
+> Üç ifade, üç ayrı saat, aynı daktilo. Kolluk ifadeleri bir hikâyenin ilk taslağıdır; sonra herkes o taslağı ezberler.
+~ İlk taslakta sonradan silinen cümleler olur. Bazen de hiç yazılmayan cümleler.
+`),
+  header: { left: 'BURSA EMNİYET · CİNAYET BÜRO · İFADE TUTANAKLARI', right: '15–16.11' },
+  columns: [
+    { label: 'KİŞİ · SAAT', flex: 1.1 },
+    { label: 'BEYAN', flex: 2.8 },
+  ],
+  rows: [
+    row('i1', ['K. Aksoy · 15.11 08.00', '“23.40’ta B sahasının ağzında Tarık’ı gördüm. Projektörler yanıyordu.”']),
+    row('i2', ['Ş. Balcı · 15.11 10.30', '“Tarık seni gebertirim diye bağırdı. Ercan’ın kafası babaya çarptı.”'], {
+      mag: {
+        cells: ['Ş. Balcı · 15.11 10.30', 'Kenarda kurşun kalem: “tanık cihaz kullanıyor, tekrar sor.”'],
+        tone: 'special',
+      },
+    }),
+    row('i3', ['T. Demirel · 15.11 14.00', '“Ağzını bozdu, ittim, düştü. On bir buçuk gibi çıktım.”']),
+    row('i4', ['K. Aksoy · 15.11 08.00 (devamı)', '“Sonra ofise döndüm. Sabaha kadar ofisteydim.”']),
+  ],
+  tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('compare', 'Karşılaştır', 'compare')],
+  costVar: 'ifade_left',
+  rules: [
+    examine('EX_I2', 'mag', 'i2', {
+      score: { DELIL_ANALIZI: 60 },
+      effects: [raise('fact_ifade_cihaz')],
+      feedback: {
+        title: 'KENAR NOTU',
+        text: 'İfadeyi alan memur bir şey fark etmiş: tanık işitme cihazı kullanıyor. “Tekrar sor” yazmış. Kimse tekrar sormamış.',
+        label: '+60 SKOR',
+        tone: 'special',
+      },
+    }),
+    examine('EX_I1', 'compare', 'i1', {
+      score: { DELIL_ANALIZI: 60 },
+      effects: [raise('fact_ifade_saat')],
+      feedback: {
+        title: 'SAATLER',
+        text: 'Vardiya şefi ifadesini cesedin bulunmasından iki saat sonra, herkesten önce vermiş. Saati dakikasına kadar söylüyor: 23.40. Kavganın saatini ise “on bir gibi” diyor.',
+        label: '+60 SKOR',
+        tone: 'special',
+      },
+    }),
+  ],
+  miss: fallback('FB_IFADE', 'EXAMINE', {
+    score: { DELIL_ANALIZI: -20 },
+    feedback: {
+      title: 'SONUÇ YOK',
+      text: 'Bu satırda bu aletle dikkat çeken bir şey yok.',
+      label: '−20 SKOR',
+      tone: 'error',
+    },
+  }),
+  finish: { id: 'IFADE_BITIR' },
+});
 // --- Dilekçe ---
 
 const dilekce = story('INV_DIL', {
@@ -1273,7 +1387,7 @@ const leyla = story('INV_LEYLA', {
   background: 'buro',
   lines: [
     W(
-      all(has('ded_darbe'), not(has('ded_saat'))),
+      all(cmp(v('day'), '==', 1), has('ded_darbe')),
       `
 # LEYLA’NIN ODASI [bg:buro]
 leyla: Düşme değil, darbe. Güzel. Şimdi savcı ne der, biliyor musun? “Darbe olabilir; sanık geri döndü ve vurdu.”
@@ -1282,30 +1396,59 @@ leyla: Kural şu: ceza davasında şüphe sanık lehine. Ama hâkim şüpheyi se
 `,
     ),
     W(
-      any(has('ded_saat'), has('ded_canli')),
+      cmp(v('day'), '==', 1),
       `
-# LEYLA’NIN ODASI [bg:buro]
-leyla: Ercan kavgadan sonra yaşıyordu. Yemek yedi, telefon etti. Bunu gösterebilirsen savcının hikâyesi bir yerinden yırtılır.
-leyla: Ama yırtığa elini sokma. 23.41’de biri aranmışsa, o kişiyi bulmak senin işin değil. Mahkemeden iste. Savcılığa bildir. Biz kolluk değiliz.
-leyla: Bir de şunu düşün: savcı geri çekilirse nereye çekilir? Yumruğa. Yumruktan ölüm çıktı derse, kastın yaralamaya yönelik olduğunu kabul etmiş olursun.
-leyla: Yaralama sonucu ölümde ceza, ağır neticeye göre değil, failin o netice bakımından en az taksirle hareket edip etmediğine göre kurulur; TCK 23. Ölüm o yumruktan gelmediyse, 87/4 bile değil.
-`,
-    ),
-    W(
-      flag('fact_yumruk'),
-      `
-# LEYLA’NIN ODASI [bg:buro]
-leyla: “Vurdum” dedi demek. Kolluk ifadesinde “ittim” vardı.
-leyla: Kürsüde ne diyecek? İnkâr ederse forkliftçi onu yalancı çıkarır; yalancı çıkan sanığın doğru söylediği hiçbir şeye inanılmaz.
-leyla: Dürüst bir savunma bir taviz değildir Deniz. Haksız tahrik ancak sanığın kendi anlatımıyla kurulur: neye kızdı, ne duydu, ne yaptı. TCK 29 bir duygunun hukukudur; duyguyu anlatacak olan o.
-`,
-    ),
-    O(`
 # LEYLA’NIN ODASI [bg:buro]
 > Leyla pencerenin önünde, kapalı sigara paketi elinde. Dışarıda Uludağ bulutların içinde kaybolmuştu.
 leyla: Dosyada iki adam var: biri vurdu, biri gördü. İkisinin de bir saati var. Vuranın saati 23.04. Görenin saati 23.40.
 leyla: Saatleri kâğıda bağla. Turnike, kart, telefon. İnsanlar yanılır; makineler yanılmaz, yalnızca eksik kalır.
 leyla: Delil toplamak için mahkemeye dilekçe verebilirsin; CMK 177. Ne istediğini, neden istediğini yaz. Gerekçesiz talep, okunmamış talep demektir.
+`,
+    ),
+    W(
+      all(cmp(v('day'), '==', 2), flag('fact_yumruk')),
+      `
+# LEYLA’NIN ODASI [bg:buro]
+leyla: “Vurdum” dedi demek. Kolluk ifadesinde “ittim” vardı.
+leyla: Kürsüde ne diyecek? İnkâr ederse forkliftçi onu yalancı çıkarır; yalancı çıkan sanığın doğru söylediği hiçbir şeye inanılmaz.
+leyla: Dürüst bir savunma bir taviz değildir Deniz. Haksız tahrik ancak sanığın kendi anlatımıyla kurulur: neye kızdı, ne duydu, ne yaptı. TCK 29 bir duygunun hukukudur; duyguyu anlatacak olan o.
+leyla: Kanun der ki haksız bir fiilin yarattığı hiddetle suç işleyene ceza indirilir. Ölmüş bir ağabeyle alay etmek, yüze tükürmek, itmek: üçü de haksız fiil. Ama üçünü de birinin anlatması gerekir.
+`,
+    ),
+    W(
+      cmp(v('day'), '==', 2),
+      `
+# LEYLA’NIN ODASI [bg:buro]
+leyla: Bugün tanıklarla konuşacaksın. Bir kural: tanığa soru sorarsın, cevap vermezsin.
+leyla: Bir tanığa “şöyle hatırlıyorsunuz, değil mi” dediğin an, onu kendi hafızasından çıkarıp seninkine sokarsın. Mahkeme bunu anlar; kanun da buna bir ad verir: tanığı etkileme, TCK 277.
+leyla: Bir de aile. Karısı, annesi, kardeşi seni sever ve sana yardım etmek ister. Yardım etmek isteyen tanık en tehlikelisidir; çünkü doğruyu biraz düzeltmeye hazırdır.
+`,
+    ),
+    W(
+      all(cmp(v('day'), '==', 3), any(has('ded_saat'), has('ded_canli'))),
+      `
+# LEYLA’NIN ODASI [bg:buro]
+leyla: Ercan kavgadan sonra yaşıyordu. Yemek yedi, telefon etti. Bunu gösterebilirsen savcının hikâyesi bir yerinden yırtılır.
+leyla: Ama yırtığa elini sokma. 23.41’de biri aranmışsa, o kişiyi bulmak senin işin değil. Mahkemeden iste. Savcılığa bildir. Biz kolluk değiliz.
+leyla: Bir de şunu düşün: savcı geri çekilirse nereye çekilir? Yumruğa. Yumruktan ölüm çıktı derse, kastın yaralamaya yönelik olduğunu kabul etmiş olursun.
+leyla: Yaralama sonucu ölümde ceza, failin o netice bakımından en az taksirle hareket edip etmediğine göre kurulur; TCK 23. Ölüm o yumruktan gelmediyse, 87/4 bile değil.
+`,
+    ),
+    W(
+      cmp(v('day'), '==', 3),
+      `
+# LEYLA’NIN ODASI [bg:buro]
+leyla: Kolluk ifadesi bir başlangıçtır, bir son değil. Duruşmada tanık yeniden yemin eder ve yeniden anlatır; heyet ikisini karşılaştırır.
+leyla: İki anlatım arasındaki fark bir çelişkidir. Ama çelişkiyi kürsüde sen yaratmazsın; kâğıtta zaten vardır. Sen yalnızca gösterirsin.
+`,
+    ),
+    O(`
+# LEYLA’NIN ODASI [bg:buro]
+leyla: Son gün. Yarından sonra kürsüye iki adam çıkacak: biri dürüst ve yanılan, biri babacan ve kesin. Hangisi daha tehlikeli?
+- Kesin olan.
+leyla: Evet. Kesinlik kürsüde bulaşıcıdır. Heyet kesin bir tanığa inanmak ister; çünkü inanmak, düşünmekten kolaydır.
+leyla: Sorularını kısa tut. Önce bastır, bırak kendisi anlatsın. Kâğıdı en son göster. Tanığa soru sorma hakkın var, CMK 201; tanığı tartışmaya açma hakkın da var, CMK 215. İkisini karıştırma.
+leyla: Bir de ara karar. Celsenin sonunda mahkeme sana “talepleriniz” diyecek. O an, ikinci celsede elinde ne olacağına karar verdiğin andır. Hazırlıksız gitme.
 `),
   ],
   choices: [back('LEYLA_DON', 'Teşekkür et')],
@@ -1341,6 +1484,8 @@ const aksam1 = story('INV_AKSAM1', {
 gulay: Avukat hanım, rahatsız etmiyorum değil mi? Elif sordu. “Babam gemiden ne zaman inecek” dedi. Ne diyeyim? [phone]
 - Yakında deyin. Ama söz vermeyin.
 gulay: Söz vermem. Siz de vermediniz zaten. Ona güveniyorum. [phone]
+> Kapattıktan sonra zarfı açtım. Bir döküm, saatler, kart numaraları. Kâğıt soğuktu; makineden yeni çıkmış gibi değil, buzdolabından çıkmış gibi.
+~ Bir limanın hafızası. Kimseyi sevmez, kimseden korkmaz. Yarın okuyacağım; bu gece yalnızca masaya koydum.
 `,
     ),
     O(`
@@ -1350,9 +1495,31 @@ gulay: Avukat hanım, Elif sordu. “Babam gemiden ne zaman inecek” dedi. Ne d
 - Yakında deyin. Ama söz vermeyin.
 > Telefonu kapattıktan sonra uzun süre panoya baktım. Üç saat, üç kâğıt, aralarında boşluk.
 ~ Bir çocuk babasının gemide olduğunu sanıyor. Bir bakıma doğru: hepimiz aynı gemideyiz ve kimse iskeleyi görmüyor.
+> Panoya bir kâğıt daha iğneledim. Üstüne büyük harflerle: “ERCAN NE YEDİ? KİMİ ARADI?” Altını iki kez çizdim.
 `),
   ],
-  choices: [cont('AKSAM1_DEVAM', 'Yeni gün', 'INV_HUB', { role: 'PRIMARY' })],
+  choices: [
+    option('AK1_A', '“Babası uzun bir seferde deyin. Bir sefer daha.”', {
+      effects: [inc('trust', 2)],
+      next: 'INV_HUB',
+      responses: B(`
+- Uzun bir sefer deyin, Gülay Hanım. Bir sefer daha. Çocuklar beklemeyi bizden iyi bilir.
+gulay: Uzun sefer… Peki. Haritada bir iğne var, biliyor musunuz? Her gün biraz oynatıyor. Yarın da oynatır.
+> Telefonu kapattıktan sonra Elif’in gemi resmini masamın camının altına koydum. Gemi, iki çöp adam, bir kalp.
+~ Bir çocuğa yalan söylemek mi, doğruyu ertelemek mi? Bu meslekte ikisinin farkını her gün yeniden öğreniyorum.
+`),
+    }),
+    option('AK1_B', '“Ona doğruyu söyleyin; yaşına göre, kısa.”', {
+      effects: [inc('trust', 4)],
+      next: 'INV_HUB',
+      responses: B(`
+- Doğruyu söyleyin, Gülay Hanım. Kısa ve yaşına göre: “Baban bir hata yaptı, şimdi büyükler o hatanın ne kadar büyük olduğunu konuşuyor.”
+gulay/uzgun: Hata… Peki. Ama “baban adam öldürdü diyorlar” demem. Onu demem.
+- Demeyin. Çünkü bilmiyoruz. Ben bilmiyorum, siz bilmiyorsunuz. Bildiğimizi söyleyin.
+~ Bir çocuğa söylenecek doğrunun boyu, bir mahkemeye söylenecek doğrunun boyuyla aynı: yalnızca bilinen kadar.
+`),
+    }),
+  ],
 });
 
 const aksam2 = story('INV_AKSAM2', {
@@ -1376,9 +1543,29 @@ kenan: Kendini yorma diye aradım. Bu iş polisin işi. Sen çocuğun yumruğunu
 > Eve yürüyerek döndüm. Gökdere köprünün altında bulanık akıyordu. Bir yerde bir köpek havladı, sonra sustu.
 ~ Bir limanın gecesi, bir şehrin gecesinden uzundur. Gemiler uyumaz; vinçler, kantinler, turnikeler uyumaz. Bir de vicdanlar.
 ~ O gece birisi uyumadı. Ercan değil; o gece Ercan uyudu, hiç uyanmadı. Uyumayan başka biri.
+> Eve vardığımda kapının altından bir fatura atılmıştı, bir de bir apartman duyurusu: “Asansör bakımdadır.” Gülümsedim; bakım etiketleri bu dosyanın kaderi.
 `),
   ],
-  choices: [cont('AKSAM2_DEVAM', 'Yeni gün', 'INV_HUB', { role: 'PRIMARY' })],
+  choices: [
+    option('AK2_A', 'Leyla’yı ara', {
+      next: 'INV_HUB',
+      responses: B(`
+leyla: Gecenin bu saatinde? Ne oldu? [phone]
+- Hiçbir şey. Yürüyorum. Bir limanı düşünüyorum.
+leyla: Limanlar düşünülmez Deniz, sayılır. Kaç kişi girdi, kaç kişi çıktı, kim kaçta. Say. Sonra uyu. [phone]
+> Hat kapandı. Yağmur hafifledi. Leyla haklıydı; ama saymak için önce saymayı bilen birini bulmak gerekiyordu.
+`),
+    }),
+    option('AK2_B', 'Büroya dön, panoyu yeniden kur', {
+      score: { DELIL_ANALIZI: 10 },
+      next: 'INV_HUB',
+      responses: B(`
+> Eve gitmedim. Büroya döndüm, ışığı yaktım, panonun önünde durdum. Kırmızı iplikleri söküp yeniden diktim.
+> Bir iplik 23.04’ten 23.18’e, turnikeye. Bir iplik 23.04’ten 06.10’a, cesede. İkisi aynı noktadan çıkıyor; aynı yere varmıyor.
+~ Kolluk tek bir iplik çekmiş. Bir ipliğin iki ucu olur. Kimse öbür ucuna bakmamış.
+`),
+    }),
+  ],
 });
 
 const aksam3 = story('INV_AKSAM3', {
@@ -1393,8 +1580,28 @@ leyla: Yarın son gün. Ne eksik?
 leyla: Hiçbir kâğıt tek başına yeterli değildir. Kâğıtlar birbirine yaslanır. Yaslanacak duvarı sen örersin.
 > Şemsiyesini açtı, kapıda bir an bekledi.
 leyla: Uyu biraz. Yorgun avukat tanığa değil kendine soru sorar.
+> Leyla gittikten sonra bir saat daha oturdum. Panodaki kırmızı iplikleri yeniden gerdim. Bir iplik, bir yumruktan bir taburede ağlayan bir adama gidiyordu.
+~ Bir iplik de bir yumruktan iki konteynerin arasındaki bir cesede. Kolluk ikisini aynı iplikle bağlamış. Ben iki iplik görüyorum.
 `),
-  choices: [cont('AKSAM3_DEVAM', 'Son gün', 'INV_HUB', { role: 'PRIMARY' })],
+  choices: [
+    option('AK3_A', 'Tarık’ın kürsüde ne söyleyebileceğini düşün', {
+      score: { SAVUNMA_STRATEJISI: 10 },
+      next: 'INV_HUB',
+      responses: B(`
+~ Bir sanık kürsüde iki şey yapabilir: susar ya da anlatır. Susarsa hakkını kullanır. Anlatırsa hikâyesini kullanır.
+~ Tarık’ın hikâyesi: bir ağabey, bir tükürük, bir yumruk, bir tabure, bir radyo. Hiçbirinde bir kilit yok. Hiçbirinde B sahası yok.
+~ Ona ne diyeceğini söylemeyeceğim. Ne demenin ne anlama geldiğini söyleyeceğim. Aradaki çizgi, bu mesleğin en ince çizgisi.
+`),
+    }),
+    option('AK3_B', 'Kâğıtları bir kez daha baştan oku', {
+      score: { DELIL_ANALIZI: 10 },
+      next: 'INV_HUB',
+      responses: B(`
+> İddianameyi baştan okudum. Sonra ön raporu. Sonra ifadeleri. Her seferinde başka bir kelimeye takıldım: “dönmüş”, “oluşabilir”, “gibi.”
+~ Bir iddianame kesin cümlelerle yazılır. Altındaki kâğıtlar ise “gibi” ile, “olabilir” ile doludur. Kesinlik yukarıda; şüphe aşağıda.
+`),
+    }),
+  ],
 });
 
 // --- Duruşmadan önceki gece (koşullu hafıza zinciri) ---
@@ -1418,7 +1625,20 @@ const geceNodes = [
       O(`~ Tarık’ın 23.18’den sonrası hâlâ boş. Bir adamın bir saatini kimse görmedi; ya da gören kimseye söylemedi.`),
     ],
   }),
-  decisionNode('INV_GECE_3', [{ to: 'INV_GECE_4' }], {
+  decisionNode('INV_GECE_3B', [{ to: 'INV_GECE_4' }], {
+    lines: [
+      W(
+        flag('fact_ifade_cihaz'),
+        `~ Bir memurun kenar notu: “tanık cihaz kullanıyor, tekrar sor.” İki ay sonra o soruyu ben soracağım.`,
+      ),
+      W(
+        flag('fact_ifade_saat'),
+        `~ Kavganın saati “on bir gibi.” Gördüğünün saati “23.40.” Bir adam bir saati neden dakikasına kadar bilir?`,
+      ),
+      O(`~ Üç ifade, bir daktilo. Yarın üçü de kürsüde yeniden anlatılacak; daktilonun yazmadıklarıyla birlikte.`),
+    ],
+  }),
+  decisionNode('INV_GECE_3', [{ to: 'INV_GECE_3B' }], {
     lines: [
       W(
         any(has('ded_isik'), has('clue_projektor')),
@@ -1427,7 +1647,22 @@ const geceNodes = [
       O(`~ Vardiya şefi yarın yemin edecek. Bir adamı yürüyüşünden tanıdığını söyleyecek. Neye bakarak?`),
     ],
   }),
-  decisionNode('INV_GECE_4', [{ to: 'INV_GECE_5' }], {
+  decisionNode('INV_GECE_4B', [{ to: 'INV_GECE_5' }], {
+    lines: [
+      W(
+        flag('fact_olcu'),
+        `~ Dr. Beyaz: “Çökme kırığı aletin parmak izidir.” Emanetteki kilidin ölçüsü bilinmiyor. Henüz.`,
+      ),
+      W(
+        flag('fact_coup'),
+        `~ Hareketli baş, sabit zemin; sabit baş, hareketli cisim. Bir maketin ensesinde, yaşlı bir adamın parmağı.`,
+      ),
+      W(flag('fact_mide'), `~ “Kesin saat çıkmaz; sıra çıkar.” Son yemek. Kimse sormamış.`),
+      W(flag('fact_iz'), `~ Dört yüz kilit bir gecede. Bir iz bir meslekse, bir delil değildir.`),
+      O(`~ Bir rapor dört sayfa. Dört sayfanın içinde bir ölüm. Kimse ikinci kez okumamış.`),
+    ],
+  }),
+  decisionNode('INV_GECE_4', [{ to: 'INV_GECE_4B' }], {
     lines: [
       W(has('ded_darbe'), `~ Düşme değil, darbe. Ölüm bir yumruktan değil, küçük, yuvarlak, sert bir şeyden geldi.`),
       W(has('clue_desen'), `~ 3,2 santim. Yuvarlak bir çukur. Bir beton zemin böyle bir şey bırakmaz.`),
@@ -1444,13 +1679,39 @@ const geceNodes = [
       O(`~ Ölüm saati iki saatlik bir aralık. İki saatin içine bir adam da sığar, iki adam da.`),
     ],
   }),
-  decisionNode('INV_GECE_6', [{ to: 'INV_GECE' }], {
+  decisionNode('INV_GECE_6B', [{ to: 'INV_GECE' }], {
+    lines: [
+      W(
+        flag('gulay_kararsiz'),
+        `~ “Bunu duymamış olayım.” Gülay’a böyle dedim. Bir kapıyı aralık bıraktım; yarın o kapıdan rüzgâr girer mi, bilmiyorum.`,
+      ),
+      W(
+        flag('fact_emre_gulay'),
+        `~ Gülay: “Herkes biliyor bunu, bir mahkeme bilmiyor.” Yarın mahkeme de bilecek; Emre’nin adı tutanağa girecek.`,
+      ),
+      W(
+        flag('gulay_sozlesme'),
+        `~ Gülay’ın imzaladığı sözleşme dosyanın en altında. Kâğıt, korkan insana söz vermekten daha dürüst bir güvence.`,
+      ),
+      W(
+        flag('gulay_minnet'),
+        `~ Bir bilezik, bir mendil, kaldırılmış. “Ne derseniz” demişti. Yarın ona hiçbir şey dememeyi başarmalıyım.`,
+      ),
+      O(`~ Gülay yarın koridorda olacak. Ona ne söyleyeceğimi değil, neyi söylemeyeceğimi biliyorum.`),
+    ],
+  }),
+  decisionNode('INV_GECE_6', [{ to: 'INV_GECE_6B' }], {
     lines: [
       W(
         flag('etik_gulay'),
         `~ Gülay’ın kaşığı bardağa çarpıyordu. “On bir buçuk.” Bir saati sildim. Yarın değil; ama bir gün o saat geri gelecek.`,
       ),
+      W(
+        all(flag('fact_yumruk'), flag('yumruk_sert')),
+        `~ “Vurdum.” Ona bağırarak söylettim. Yarın kürsüde kendi sesiyle söyleyebilecek mi, yoksa benim sesimi mi hatırlayacak?`,
+      ),
       W(flag('fact_yumruk'), `~ “Vurdum. Bir kere.” Yarın bunu kürsüde söyleyecek mi? Söylemesini mi istiyorum?`),
+
       O(`~ Tarık hâlâ “ittim” diyor. Yarın ne diyecek, ben de bilmiyorum.`),
     ],
   }),
@@ -1465,6 +1726,9 @@ leyla: Savcı ikisini aynı cümlede söyleyecek: “kavga etti, döndü, öldü
 > Paketi çevirdi. Bir tur. Durdu.
 leyla: Bir de vardiya şefine dikkat et. İyi bir adam gibi görünüyor, iyi bir adam gibi konuşuyor. İyi adamlar kürsüde en tehlikeli tanıklardır; çünkü onlara inanılır.
 leyla: İnanılan bir tanığı yalancı çıkarmaya çalışma. Yanıldığını göster. Kâğıtla.
+- Ya yanılmıyorsa? Ya biliyorsa?
+leyla: O zaman da aynı. Kürsüde “yalancı” diyen avukat salonu kaybeder. “Kâğıt başka bir saat söylüyor” diyen avukat salonu kazanır. Gerisini heyet düşünür.
+leyla: Bir de Tarık. Yarın ilk kez herkesin önünde konuşacak. Ne diyeceğine o karar verir; ama ne demenin ne anlama geldiğini ona sen anlatırsın. Telkin değil; bilgi.
 ~ Pencereyi açtım. Yağmur dinmişti; poyraz dinmemişti. Uzakta, limanın vinçleri kırmızı ışıklarıyla göz kırpıyordu.
 `),
     choices: [cont('GECE_DEVAM', 'Adliyeye git', 'H1_00G', { role: 'PRIMARY' })],
@@ -1520,6 +1784,7 @@ export const investigation: CasePart = {
     onrapor,
     telefon,
     turnike,
+    ifade,
     dilekce,
     cikarim,
     leyla,

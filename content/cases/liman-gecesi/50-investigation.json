@@ -28,7 +28,12 @@
           "when": { "cmp": [{ "var": "day" }, "==", 2] },
           "lines": [
             { "speaker": "narrator", "text": "GÜN 2/4 · BİRİNCİ CELSEYE 12 GÜN", "style": "card" },
-            { "speaker": "narrator", "text": "Hedef: Ercan kavgadan sonra ne kadar yaşadı? Kim gördü, ne kanıtlar?" }
+            { "speaker": "narrator", "text": "Hedef: Ercan kavgadan sonra ne kadar yaşadı? Kim gördü, ne kanıtlar?" },
+            {
+              "speaker": "player",
+              "text": "Dün gece rüyamda bir turnike gördüm. Dönüyordu, dönüyordu; kimse geçmiyordu. Sabah ilk iş kahve, ikinci iş pano.",
+              "style": "thought"
+            }
           ]
         },
         {
@@ -38,6 +43,11 @@
             {
               "speaker": "narrator",
               "text": "Hedef: kâğıtlar konuşmaya başladı. Rapor, telefon, kart. Bir de kürsüye çıkacak iki adam."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla sabah masama bir not bırakmış: “İnsanlar yanılır. Makineler unutur. Sen ikisini de hatırla.”",
+              "style": "thought"
             }
           ]
         },
@@ -70,7 +80,7 @@
           "id": "t_arsiv",
           "label": "ARŞİV",
           "kind": "ARCHIVE",
-          "choices": ["H_ONRAPOR", "H_TELEFON", "H_TURNIKE", "H_DIL", "H_CIKARIM", "H_LEYLA"]
+          "choices": ["H_ONRAPOR", "H_TELEFON", "H_TURNIKE", "H_IFADE", "H_DIL", "H_CIKARIM", "H_LEYLA"]
         }
       ],
       "choices": [
@@ -189,6 +199,14 @@
           "visibleWhen": { "hasEvidence": "ev_turnike" }
         },
         {
+          "id": "H_IFADE",
+          "kind": "NAVIGATE",
+          "label": "Kolluk ifadelerini yeniden oku",
+          "next": { "push": "INV_IFADE" },
+          "maxUses": 1,
+          "description": "0 EP · üç ifade, bir daktilo"
+        },
+        {
           "id": "H_DIL",
           "kind": "NAVIGATE",
           "label": "Delil dilekçesi (CMK 177)",
@@ -267,7 +285,16 @@
               "style": "phone"
             },
             { "speaker": "player", "text": "Yakında deyin. Ama söz vermeyin." },
-            { "speaker": "gulay", "text": "Söz vermem. Siz de vermediniz zaten. Ona güveniyorum.", "style": "phone" }
+            { "speaker": "gulay", "text": "Söz vermem. Siz de vermediniz zaten. Ona güveniyorum.", "style": "phone" },
+            {
+              "speaker": "narrator",
+              "text": "Kapattıktan sonra zarfı açtım. Bir döküm, saatler, kart numaraları. Kâğıt soğuktu; makineden yeni çıkmış gibi değil, buzdolabından çıkmış gibi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir limanın hafızası. Kimseyi sevmez, kimseden korkmaz. Yarın okuyacağım; bu gece yalnızca masaya koydum.",
+              "style": "thought"
+            }
           ]
         },
         {
@@ -288,12 +315,76 @@
               "speaker": "player",
               "text": "Bir çocuk babasının gemide olduğunu sanıyor. Bir bakıma doğru: hepimiz aynı gemideyiz ve kimse iskeleyi görmüyor.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Panoya bir kâğıt daha iğneledim. Üstüne büyük harflerle: “ERCAN NE YEDİ? KİMİ ARADI?” Altını iki kez çizdim."
             }
           ]
         }
       ],
       "choices": [
-        { "id": "AKSAM1_DEVAM", "kind": "CONTINUE", "label": "Yeni gün", "role": "PRIMARY", "next": "INV_HUB" }
+        {
+          "id": "AK1_A",
+          "kind": "OPTION",
+          "label": "“Babası uzun bir seferde deyin. Bir sefer daha.”",
+          "next": "INV_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Uzun bir sefer deyin, Gülay Hanım. Bir sefer daha. Çocuklar beklemeyi bizden iyi bilir."
+                },
+                {
+                  "speaker": "gulay",
+                  "text": "Uzun sefer… Peki. Haritada bir iğne var, biliyor musunuz? Her gün biraz oynatıyor. Yarın da oynatır."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Telefonu kapattıktan sonra Elif’in gemi resmini masamın camının altına koydum. Gemi, iki çöp adam, bir kalp."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir çocuğa yalan söylemek mi, doğruyu ertelemek mi? Bu meslekte ikisinin farkını her gün yeniden öğreniyorum.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 2 }]
+        },
+        {
+          "id": "AK1_B",
+          "kind": "OPTION",
+          "label": "“Ona doğruyu söyleyin; yaşına göre, kısa.”",
+          "next": "INV_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Doğruyu söyleyin, Gülay Hanım. Kısa ve yaşına göre: “Baban bir hata yaptı, şimdi büyükler o hatanın ne kadar büyük olduğunu konuşuyor.”"
+                },
+                {
+                  "speaker": "gulay",
+                  "expression": "uzgun",
+                  "text": "Hata… Peki. Ama “baban adam öldürdü diyorlar” demem. Onu demem."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Demeyin. Çünkü bilmiyoruz. Ben bilmiyorum, siz bilmiyorsunuz. Bildiğimizi söyleyin."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir çocuğa söylenecek doğrunun boyu, bir mahkemeye söylenecek doğrunun boyuyla aynı: yalnızca bilinen kadar.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 4 }]
+        }
       ]
     },
     {
@@ -339,12 +430,64 @@
               "speaker": "player",
               "text": "O gece birisi uyumadı. Ercan değil; o gece Ercan uyudu, hiç uyanmadı. Uyumayan başka biri.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Eve vardığımda kapının altından bir fatura atılmıştı, bir de bir apartman duyurusu: “Asansör bakımdadır.” Gülümsedim; bakım etiketleri bu dosyanın kaderi."
             }
           ]
         }
       ],
       "choices": [
-        { "id": "AKSAM2_DEVAM", "kind": "CONTINUE", "label": "Yeni gün", "role": "PRIMARY", "next": "INV_HUB" }
+        {
+          "id": "AK2_A",
+          "kind": "OPTION",
+          "label": "Leyla’yı ara",
+          "next": "INV_HUB",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "leyla", "text": "Gecenin bu saatinde? Ne oldu?", "style": "phone" },
+                { "speaker": "player", "text": "Hiçbir şey. Yürüyorum. Bir limanı düşünüyorum." },
+                {
+                  "speaker": "leyla",
+                  "text": "Limanlar düşünülmez Deniz, sayılır. Kaç kişi girdi, kaç kişi çıktı, kim kaçta. Say. Sonra uyu.",
+                  "style": "phone"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Hat kapandı. Yağmur hafifledi. Leyla haklıydı; ama saymak için önce saymayı bilen birini bulmak gerekiyordu."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "AK2_B",
+          "kind": "OPTION",
+          "label": "Büroya dön, panoyu yeniden kur",
+          "next": "INV_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Eve gitmedim. Büroya döndüm, ışığı yaktım, panonun önünde durdum. Kırmızı iplikleri söküp yeniden diktim."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Bir iplik 23.04’ten 23.18’e, turnikeye. Bir iplik 23.04’ten 06.10’a, cesede. İkisi aynı noktadan çıkıyor; aynı yere varmıyor."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kolluk tek bir iplik çekmiş. Bir ipliğin iki ucu olur. Kimse öbür ucuna bakmamış.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 10 }]
+        }
       ]
     },
     {
@@ -369,12 +512,70 @@
               "text": "Hiçbir kâğıt tek başına yeterli değildir. Kâğıtlar birbirine yaslanır. Yaslanacak duvarı sen örersin."
             },
             { "speaker": "narrator", "text": "Şemsiyesini açtı, kapıda bir an bekledi." },
-            { "speaker": "leyla", "text": "Uyu biraz. Yorgun avukat tanığa değil kendine soru sorar." }
+            { "speaker": "leyla", "text": "Uyu biraz. Yorgun avukat tanığa değil kendine soru sorar." },
+            {
+              "speaker": "narrator",
+              "text": "Leyla gittikten sonra bir saat daha oturdum. Panodaki kırmızı iplikleri yeniden gerdim. Bir iplik, bir yumruktan bir taburede ağlayan bir adama gidiyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir iplik de bir yumruktan iki konteynerin arasındaki bir cesede. Kolluk ikisini aynı iplikle bağlamış. Ben iki iplik görüyorum.",
+              "style": "thought"
+            }
           ]
         }
       ],
       "choices": [
-        { "id": "AKSAM3_DEVAM", "kind": "CONTINUE", "label": "Son gün", "role": "PRIMARY", "next": "INV_HUB" }
+        {
+          "id": "AK3_A",
+          "kind": "OPTION",
+          "label": "Tarık’ın kürsüde ne söyleyebileceğini düşün",
+          "next": "INV_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bir sanık kürsüde iki şey yapabilir: susar ya da anlatır. Susarsa hakkını kullanır. Anlatırsa hikâyesini kullanır.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Tarık’ın hikâyesi: bir ağabey, bir tükürük, bir yumruk, bir tabure, bir radyo. Hiçbirinde bir kilit yok. Hiçbirinde B sahası yok.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Ona ne diyeceğini söylemeyeceğim. Ne demenin ne anlama geldiğini söyleyeceğim. Aradaki çizgi, bu mesleğin en ince çizgisi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 10 }]
+        },
+        {
+          "id": "AK3_B",
+          "kind": "OPTION",
+          "label": "Kâğıtları bir kez daha baştan oku",
+          "next": "INV_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "İddianameyi baştan okudum. Sonra ön raporu. Sonra ifadeleri. Her seferinde başka bir kelimeye takıldım: “dönmüş”, “oluşabilir”, “gibi.”"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir iddianame kesin cümlelerle yazılır. Altındaki kâğıtlar ise “gibi” ile, “olabilir” ile doludur. Kesinlik yukarıda; şüphe aşağıda.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 10 }]
+        }
       ]
     },
     {
@@ -1147,6 +1348,15 @@
             {
               "speaker": "narrator",
               "text": "Kavga burada oldu. Ceset ise üç yüz metre ötede, B sahasında bulundu. Kolluk iki yeri tek bir hikâyeyle birleştirmiş: kavga, dönüş, darbe."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Fotoğrafçı her kareye bir numara yazmış, yanına kurşun kalemle küçük notlar: “kan?”, “iz?”, “matara.” Kimse bu notlara cevap vermemiş."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir fotoğrafçı bir şeyi merak etmiş ve bir soru işareti koymuş. İki ay sonra o soruyu ben soruyorum.",
+              "style": "thought"
             }
           ]
         }
@@ -1194,6 +1404,15 @@
             {
               "speaker": "player",
               "text": "“Dikkat çeken.” Kimin dikkatini? Dikkati çekilmek istenmeyen biri için çok rahat bir cümle.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Cesedin yeri rıhtımdan üç yüz metre. Arada iki sıra konteyner, bir forklift yolu, bir drenaj kanalı. Kolluğa göre Ercan bu yolu kendi yürümüş."
+            },
+            {
+              "speaker": "player",
+              "text": "Burnu kanayan, sarhoş, söylenen bir adam. Üç yüz metre. Ne için? Kime?",
               "style": "thought"
             }
           ]
@@ -1259,6 +1478,10 @@
             {
               "speaker": "nail",
               "text": "Avukat mısın? Tarık’ın avukatı mı? Ha. Ben de bekliyordum biri gelsin. İki ay oldu. Kimse gelmedi."
+            },
+            {
+              "speaker": "nail",
+              "text": "Kırk yıldır bu iskeledeyim. Feribot gelir, gider. İnsanlar gelir, gider. Kimse bir şey sormaz; ben de anlatmam. Ama sorsan anlatırım."
             }
           ]
         }
@@ -1633,6 +1856,39 @@
             "feedback": "Duymazdan gelmek yalanı engellemez; tanığa doğruyu söyleme yükümlülüğünü açıkça hatırlatmak gerekirdi."
           }
         },
+        {
+          "id": "GL_ELIF",
+          "kind": "OPTION",
+          "label": "“Elif babasını soruyor mu?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "gulay",
+                  "expression": "uzgun",
+                  "text": "Her akşam. “Babam gemiden ne zaman inecek?” Ben de “uzun sefer” diyorum. Haritadan bir yer seçtik, oraya gittiğini sanıyor."
+                },
+                {
+                  "speaker": "gulay",
+                  "text": "Odasında bir harita var, okuldan getirdi. Bir toplu iğne taktı: babası orada. Her gün iğneyi biraz daha eve doğru oynatıyor."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Makinenin yanında bir toplu iğne kutusu. Gülay bir iğne aldı, parmaklarının arasında çevirdi, geri koydu."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir haritada bir iğne. Benim panomda kırmızı iplikler. Hepimiz aynı şeyi yapıyoruz: bir adamı eve getirmeye çalışıyoruz.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 10 },
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 4 }
+          ]
+        },
         { "id": "GL_BITIR", "kind": "CONTINUE", "label": "Teşekkür et ve çık", "role": "BACK", "next": "$return" }
       ]
     },
@@ -1657,6 +1913,14 @@
             {
               "speaker": "sukru",
               "text": "Ha? Avukat mı? Kimin avukatı? Tarık’ın mı? Otur kızım, otur. Yüksek konuş ama, kulak yok bende."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kabının kapağını kapattı, bir bezle çatalını sildi. Forkliftin yanındaki tahtada bir takvim: emekliliğine kalan günler, çarpılarla."
+            },
+            {
+              "speaker": "sukru",
+              "text": "Dört ay. Yüz on iki gün. Kırk yıl forklift sürdüm, bir kere bir kutu düşürmedim. Bir kere bir yalan da söylemedim. Ne sorarsan sor."
             }
           ]
         }
@@ -1814,6 +2078,32 @@
             "category": "USUL_BILGISI"
           }
         },
+        {
+          "id": "SK_KABIN",
+          "kind": "OPTION",
+          "label": "“Kabinden kavganın olduğu yer ne kadar uzaktı?”",
+          "visibleWhen": { "chosen": "SK_GECE" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "sukru",
+                  "text": "Yirmi metre. Belki yirmi beş. Arada bir baba, bir kafes. Yağmur cama vuruyordu, silecek de bozuk."
+                },
+                {
+                  "speaker": "sukru",
+                  "text": "Farı onlara çevirdim, gördüm. Ama far ışığı ne kadar gösterir? Siluet. İki turuncu yelek. Biri iri, biri ince."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Siluet. İki yelek. Bir yumruk. Ve bir ses, kimin olduğunu kimsenin görmediği.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 15 }]
+        },
         { "id": "SK_BITIR", "kind": "CONTINUE", "label": "Teşekkür et ve ayrıl", "role": "BACK", "next": "$return" }
       ]
     },
@@ -1846,6 +2136,14 @@
             {
               "speaker": "kenan",
               "text": "Tarık’ın avukatısın. Bilirim. Yazık oldu o çocuğa. Yazık oldu Ercan’a da. İkisi de benim vardiyamdı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Römorkör fotoğrafının altında el yazısıyla bir tarih ve bir isim: “Kaya-3, 1998.” Fotoğrafta genç bir adam, dümenin başında, gülümsüyor."
+            },
+            {
+              "speaker": "kenan",
+              "text": "Eskiden denizdeydim. Römorkör. Gemileri limana sokardım. Şimdi kutuları sayıyorum. Deniz insanı bırakmaz kızım; kıyıya çeker, orada tutar."
             }
           ]
         }
@@ -1976,6 +2274,38 @@
             "category": "SAVUNMA_STRATEJISI"
           }
         },
+        {
+          "id": "KN_FENER",
+          "kind": "OPTION",
+          "label": "“Kavgayı ayırırken Ercan ne diyordu?”",
+          "visibleWhen": { "chosen": "KN_GECE" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "kenan",
+                  "text": "Küfrediyordu. Ne diyecek? Burnu kanıyordu, yerde oturuyordu. “Bitireceğim onu” diyordu, “görürsün.”"
+                },
+                {
+                  "speaker": "kenan",
+                  "text": "Ben kaldırdım onu. Kolundan tuttum, ayağa diktim. “Yürü kantine, yüzünü yıka” dedim. Yürüdü. Sallanarak ama yürüdü."
+                },
+                { "speaker": "player", "text": "Yani kendi ayağıyla gitti." },
+                { "speaker": "kenan", "text": "Gitti tabii. O zaman ölmemişti ki kızım. Sonra… sonra ne olduysa." },
+                {
+                  "speaker": "narrator",
+                  "text": "Termosu açtı, bardağına kahve doldurdu. Bana doldurmadı; bardağım hâlâ doluydu."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Sonra ne olduysa.” Bu dosyanın bütün sorusu o cümlenin içinde. Kimse o cümlenin devamını yazmamış.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+        },
         { "id": "KN_BITIR", "kind": "CONTINUE", "label": "Kahve için teşekkür et", "role": "BACK", "next": "$return" }
       ]
     },
@@ -2005,6 +2335,20 @@
             {
               "speaker": "orhan",
               "text": "Leyla aradı. “Çocuğum geliyor” dedi. Otur. Kırk yıl kesip biçtim; artık yalnızca anlatıyorum. Anlatmak daha zor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Duvarda eski bir fotoğraf: otopsi salonunda genç bir adam, yanında daha genç bir kadın, elinde not defteri. Kadının yüzü bana tanıdık geldi."
+            },
+            {
+              "speaker": "orhan",
+              "text": "Leyla. Otuz yıl önce. Stajyerdi; her otopside en ön sırada dururdu, hiç bayılmazdı. Bir davada bana öyle bir soru sordu ki raporumu yeniden yazdım."
+            },
+            { "speaker": "orhan", "text": "O dava… neyse. O başka bir hikâye. Senin dosyana bakalım." },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın masasındaki ters çerçeve. Burada, bir duvarda, düz duruyor. Sormadım.",
+              "style": "thought"
             }
           ]
         }
@@ -2138,6 +2482,10 @@
               "speaker": "player",
               "text": "Raporu iki kişi okumuş: yazan ve imzalayan. Üçüncüsü benim.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "İlk sayfada bir vücut şeması, üstünde kırmızı kalemle iki işaret: yüz ve ense. Kimse aradaki mesafeyi sormamış."
             }
           ]
         }
@@ -2273,6 +2621,10 @@
               "speaker": "player",
               "text": "“Herhangi bir husus.” Bir hususun hangisi olduğuna kim karar verdi?",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tutanağın kenarında, kurşun kalemle, bir el yazısı: “Kptn kim?” Altında cevap yok. Birisi sormuş, kimse cevaplamamış."
             }
           ]
         }
@@ -2362,6 +2714,10 @@
               "speaker": "player",
               "text": "Bir makinenin hafızası. Kimseyi sevmez, kimseden korkmaz; yalnızca saat tutar.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kapak yazısında bir cümle daha: “Kayıtlar altı ay saklanmaktadır.” Dilekçeyi birkaç ay geç verseydim, bu kâğıt hiç olmayacaktı."
             }
           ]
         }
@@ -2429,6 +2785,106 @@
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
         { "id": "TURNIKE_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_IFADE",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #10 · SORUŞTURMA",
+      "title": "Kolluk ifadeleri",
+      "hud": ["ifade_left"],
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Üç ifade, üç ayrı saat, aynı daktilo. Kolluk ifadeleri bir hikâyenin ilk taslağıdır; sonra herkes o taslağı ezberler."
+            },
+            {
+              "speaker": "player",
+              "text": "İlk taslakta sonradan silinen cümleler olur. Bazen de hiç yazılmayan cümleler.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "BURSA EMNİYET · CİNAYET BÜRO · İFADE TUTANAKLARI", "right": "15–16.11" },
+      "columns": [
+        { "label": "KİŞİ · SAAT", "flex": 1.1 },
+        { "label": "BEYAN", "flex": 2.8 }
+      ],
+      "rows": [
+        {
+          "id": "i1",
+          "cells": ["K. Aksoy · 15.11 08.00", "“23.40’ta B sahasının ağzında Tarık’ı gördüm. Projektörler yanıyordu.”"]
+        },
+        {
+          "id": "i2",
+          "cells": ["Ş. Balcı · 15.11 10.30", "“Tarık seni gebertirim diye bağırdı. Ercan’ın kafası babaya çarptı.”"],
+          "lens": {
+            "mag": {
+              "cells": ["Ş. Balcı · 15.11 10.30", "Kenarda kurşun kalem: “tanık cihaz kullanıyor, tekrar sor.”"],
+              "tone": "special"
+            }
+          }
+        },
+        {
+          "id": "i3",
+          "cells": ["T. Demirel · 15.11 14.00", "“Ağzını bozdu, ittim, düştü. On bir buçuk gibi çıktım.”"]
+        },
+        { "id": "i4", "cells": ["K. Aksoy · 15.11 08.00 (devamı)", "“Sonra ofise döndüm. Sabaha kadar ofisteydim.”"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "compare", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ifade_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_I2",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "i2" },
+          "feedback": {
+            "title": "KENAR NOTU",
+            "text": "İfadeyi alan memur bir şey fark etmiş: tanık işitme cihazı kullanıyor. “Tekrar sor” yazmış. Kimse tekrar sormamış.",
+            "label": "+60 SKOR",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 60 },
+            { "type": "VAR", "var": "fact_ifade_cihaz", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_I1",
+          "kind": "EXAMINE",
+          "match": { "tool": "compare", "target": "i1" },
+          "feedback": {
+            "title": "SAATLER",
+            "text": "Vardiya şefi ifadesini cesedin bulunmasından iki saat sonra, herkesten önce vermiş. Saati dakikasına kadar söylüyor: 23.40. Kavganın saatini ise “on bir gibi” diyor.",
+            "label": "+60 SKOR",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 60 },
+            { "type": "VAR", "var": "fact_ifade_saat", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "FB_IFADE",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu satırda bu aletle dikkat çeken bir şey yok.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "IFADE_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
       ]
     },
     {
@@ -2814,7 +3270,7 @@
       "background": "buro",
       "lines": [
         {
-          "when": { "all": [{ "hasEvidence": "ded_darbe" }, { "not": { "hasEvidence": "ded_saat" } }] },
+          "when": { "all": [{ "cmp": [{ "var": "day" }, "==", 1] }, { "hasEvidence": "ded_darbe" }] },
           "lines": [
             { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "style": "card", "bg": "buro" },
             {
@@ -2832,43 +3288,7 @@
           ]
         },
         {
-          "when": { "any": [{ "hasEvidence": "ded_saat" }, { "hasEvidence": "ded_canli" }] },
-          "lines": [
-            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "style": "card", "bg": "buro" },
-            {
-              "speaker": "leyla",
-              "text": "Ercan kavgadan sonra yaşıyordu. Yemek yedi, telefon etti. Bunu gösterebilirsen savcının hikâyesi bir yerinden yırtılır."
-            },
-            {
-              "speaker": "leyla",
-              "text": "Ama yırtığa elini sokma. 23.41’de biri aranmışsa, o kişiyi bulmak senin işin değil. Mahkemeden iste. Savcılığa bildir. Biz kolluk değiliz."
-            },
-            {
-              "speaker": "leyla",
-              "text": "Bir de şunu düşün: savcı geri çekilirse nereye çekilir? Yumruğa. Yumruktan ölüm çıktı derse, kastın yaralamaya yönelik olduğunu kabul etmiş olursun."
-            },
-            {
-              "speaker": "leyla",
-              "text": "Yaralama sonucu ölümde ceza, ağır neticeye göre değil, failin o netice bakımından en az taksirle hareket edip etmediğine göre kurulur; TCK 23. Ölüm o yumruktan gelmediyse, 87/4 bile değil."
-            }
-          ]
-        },
-        {
-          "when": { "flag": "fact_yumruk" },
-          "lines": [
-            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "style": "card", "bg": "buro" },
-            { "speaker": "leyla", "text": "“Vurdum” dedi demek. Kolluk ifadesinde “ittim” vardı." },
-            {
-              "speaker": "leyla",
-              "text": "Kürsüde ne diyecek? İnkâr ederse forkliftçi onu yalancı çıkarır; yalancı çıkan sanığın doğru söylediği hiçbir şeye inanılmaz."
-            },
-            {
-              "speaker": "leyla",
-              "text": "Dürüst bir savunma bir taviz değildir Deniz. Haksız tahrik ancak sanığın kendi anlatımıyla kurulur: neye kızdı, ne duydu, ne yaptı. TCK 29 bir duygunun hukukudur; duyguyu anlatacak olan o."
-            }
-          ]
-        },
-        {
+          "when": { "cmp": [{ "var": "day" }, "==", 1] },
           "lines": [
             { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "style": "card", "bg": "buro" },
             {
@@ -2886,6 +3306,106 @@
             {
               "speaker": "leyla",
               "text": "Delil toplamak için mahkemeye dilekçe verebilirsin; CMK 177. Ne istediğini, neden istediğini yaz. Gerekçesiz talep, okunmamış talep demektir."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "cmp": [{ "var": "day" }, "==", 2] }, { "flag": "fact_yumruk" }] },
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "style": "card", "bg": "buro" },
+            { "speaker": "leyla", "text": "“Vurdum” dedi demek. Kolluk ifadesinde “ittim” vardı." },
+            {
+              "speaker": "leyla",
+              "text": "Kürsüde ne diyecek? İnkâr ederse forkliftçi onu yalancı çıkarır; yalancı çıkan sanığın doğru söylediği hiçbir şeye inanılmaz."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Dürüst bir savunma bir taviz değildir Deniz. Haksız tahrik ancak sanığın kendi anlatımıyla kurulur: neye kızdı, ne duydu, ne yaptı. TCK 29 bir duygunun hukukudur; duyguyu anlatacak olan o."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Kanun der ki haksız bir fiilin yarattığı hiddetle suç işleyene ceza indirilir. Ölmüş bir ağabeyle alay etmek, yüze tükürmek, itmek: üçü de haksız fiil. Ama üçünü de birinin anlatması gerekir."
+            }
+          ]
+        },
+        {
+          "when": { "cmp": [{ "var": "day" }, "==", 2] },
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "style": "card", "bg": "buro" },
+            {
+              "speaker": "leyla",
+              "text": "Bugün tanıklarla konuşacaksın. Bir kural: tanığa soru sorarsın, cevap vermezsin."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir tanığa “şöyle hatırlıyorsunuz, değil mi” dediğin an, onu kendi hafızasından çıkarıp seninkine sokarsın. Mahkeme bunu anlar; kanun da buna bir ad verir: tanığı etkileme, TCK 277."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de aile. Karısı, annesi, kardeşi seni sever ve sana yardım etmek ister. Yardım etmek isteyen tanık en tehlikelisidir; çünkü doğruyu biraz düzeltmeye hazırdır."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "cmp": [{ "var": "day" }, "==", 3] },
+              { "any": [{ "hasEvidence": "ded_saat" }, { "hasEvidence": "ded_canli" }] }
+            ]
+          },
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "style": "card", "bg": "buro" },
+            {
+              "speaker": "leyla",
+              "text": "Ercan kavgadan sonra yaşıyordu. Yemek yedi, telefon etti. Bunu gösterebilirsen savcının hikâyesi bir yerinden yırtılır."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Ama yırtığa elini sokma. 23.41’de biri aranmışsa, o kişiyi bulmak senin işin değil. Mahkemeden iste. Savcılığa bildir. Biz kolluk değiliz."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de şunu düşün: savcı geri çekilirse nereye çekilir? Yumruğa. Yumruktan ölüm çıktı derse, kastın yaralamaya yönelik olduğunu kabul etmiş olursun."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Yaralama sonucu ölümde ceza, failin o netice bakımından en az taksirle hareket edip etmediğine göre kurulur; TCK 23. Ölüm o yumruktan gelmediyse, 87/4 bile değil."
+            }
+          ]
+        },
+        {
+          "when": { "cmp": [{ "var": "day" }, "==", 3] },
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "style": "card", "bg": "buro" },
+            {
+              "speaker": "leyla",
+              "text": "Kolluk ifadesi bir başlangıçtır, bir son değil. Duruşmada tanık yeniden yemin eder ve yeniden anlatır; heyet ikisini karşılaştırır."
+            },
+            {
+              "speaker": "leyla",
+              "text": "İki anlatım arasındaki fark bir çelişkidir. Ama çelişkiyi kürsüde sen yaratmazsın; kâğıtta zaten vardır. Sen yalnızca gösterirsin."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "style": "card", "bg": "buro" },
+            {
+              "speaker": "leyla",
+              "text": "Son gün. Yarından sonra kürsüye iki adam çıkacak: biri dürüst ve yanılan, biri babacan ve kesin. Hangisi daha tehlikeli?"
+            },
+            { "speaker": "player", "text": "Kesin olan." },
+            {
+              "speaker": "leyla",
+              "text": "Evet. Kesinlik kürsüde bulaşıcıdır. Heyet kesin bir tanığa inanmak ister; çünkü inanmak, düşünmekten kolaydır."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Sorularını kısa tut. Önce bastır, bırak kendisi anlatsın. Kâğıdı en son göster. Tanığa soru sorma hakkın var, CMK 201; tanığı tartışmaya açma hakkın da var, CMK 215. İkisini karıştırma."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de ara karar. Celsenin sonunda mahkeme sana “talepleriniz” diyecek. O an, ikinci celsede elinde ne olacağına karar verdiğin andır. Hazırlıksız gitme."
             }
           ]
         }
@@ -2944,6 +3464,43 @@
       "choices": []
     },
     {
+      "id": "INV_GECE_3B",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "flag": "fact_ifade_cihaz" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Bir memurun kenar notu: “tanık cihaz kullanıyor, tekrar sor.” İki ay sonra o soruyu ben soracağım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_ifade_saat" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Kavganın saati “on bir gibi.” Gördüğünün saati “23.40.” Bir adam bir saati neden dakikasına kadar bilir?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Üç ifade, bir daktilo. Yarın üçü de kürsüde yeniden anlatılacak; daktilonun yazmadıklarıyla birlikte.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_4" }],
+      "choices": []
+    },
+    {
       "id": "INV_GECE_3",
       "type": "DECISION",
       "lines": [
@@ -2967,7 +3524,64 @@
           ]
         }
       ],
-      "routes": [{ "to": "INV_GECE_4" }],
+      "routes": [{ "to": "INV_GECE_3B" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_4B",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "flag": "fact_olcu" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Dr. Beyaz: “Çökme kırığı aletin parmak izidir.” Emanetteki kilidin ölçüsü bilinmiyor. Henüz.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_coup" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Hareketli baş, sabit zemin; sabit baş, hareketli cisim. Bir maketin ensesinde, yaşlı bir adamın parmağı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_mide" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Kesin saat çıkmaz; sıra çıkar.” Son yemek. Kimse sormamış.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_iz" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Dört yüz kilit bir gecede. Bir iz bir meslekse, bir delil değildir.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Bir rapor dört sayfa. Dört sayfanın içinde bir ölüm. Kimse ikinci kez okumamış.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_5" }],
       "choices": []
     },
     {
@@ -3004,7 +3618,7 @@
           ]
         }
       ],
-      "routes": [{ "to": "INV_GECE_5" }],
+      "routes": [{ "to": "INV_GECE_4B" }],
       "choices": []
     },
     {
@@ -3045,6 +3659,63 @@
       "choices": []
     },
     {
+      "id": "INV_GECE_6B",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "flag": "gulay_kararsiz" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Bunu duymamış olayım.” Gülay’a böyle dedim. Bir kapıyı aralık bıraktım; yarın o kapıdan rüzgâr girer mi, bilmiyorum.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_emre_gulay" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Gülay: “Herkes biliyor bunu, bir mahkeme bilmiyor.” Yarın mahkeme de bilecek; Emre’nin adı tutanağa girecek.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "gulay_sozlesme" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Gülay’ın imzaladığı sözleşme dosyanın en altında. Kâğıt, korkan insana söz vermekten daha dürüst bir güvence.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "gulay_minnet" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Bir bilezik, bir mendil, kaldırılmış. “Ne derseniz” demişti. Yarın ona hiçbir şey dememeyi başarmalıyım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Gülay yarın koridorda olacak. Ona ne söyleyeceğimi değil, neyi söylemeyeceğimi biliyorum.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE" }],
+      "choices": []
+    },
+    {
       "id": "INV_GECE_6",
       "type": "DECISION",
       "lines": [
@@ -3054,6 +3725,16 @@
             {
               "speaker": "player",
               "text": "Gülay’ın kaşığı bardağa çarpıyordu. “On bir buçuk.” Bir saati sildim. Yarın değil; ama bir gün o saat geri gelecek.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "flag": "fact_yumruk" }, { "flag": "yumruk_sert" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Vurdum.” Ona bağırarak söylettim. Yarın kürsüde kendi sesiyle söyleyebilecek mi, yoksa benim sesimi mi hatırlayacak?",
               "style": "thought"
             }
           ]
@@ -3078,7 +3759,7 @@
           ]
         }
       ],
-      "routes": [{ "to": "INV_GECE" }],
+      "routes": [{ "to": "INV_GECE_6B" }],
       "choices": []
     },
     {
@@ -3108,6 +3789,15 @@
             {
               "speaker": "leyla",
               "text": "İnanılan bir tanığı yalancı çıkarmaya çalışma. Yanıldığını göster. Kâğıtla."
+            },
+            { "speaker": "player", "text": "Ya yanılmıyorsa? Ya biliyorsa?" },
+            {
+              "speaker": "leyla",
+              "text": "O zaman da aynı. Kürsüde “yalancı” diyen avukat salonu kaybeder. “Kâğıt başka bir saat söylüyor” diyen avukat salonu kazanır. Gerisini heyet düşünür."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de Tarık. Yarın ilk kez herkesin önünde konuşacak. Ne diyeceğine o karar verir; ama ne demenin ne anlama geldiğini ona sen anlatırsın. Telkin değil; bilgi."
             },
             {
               "speaker": "player",

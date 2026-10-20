@@ -101,10 +101,7 @@ export const meta: CasePart = {
       id: 'kaynak_suphesi',
       label: 'Mesajların telefondan çıkmadığı gösterildi',
       when: {
-        any: [
-          { flag: 'contra_s3' },
-          { all: [{ flag: 'bilirkisi_cihaz' }, { hasEvidence: 'ded_bagli' }] },
-        ],
+        any: [{ flag: 'contra_s3' }, { all: [{ flag: 'bilirkisi_cihaz' }, { hasEvidence: 'ded_bagli' }] }],
       },
     },
     {
@@ -115,8 +112,27 @@ export const meta: CasePart = {
           {
             add: [
               { if: { when: { any: [{ flag: 'ss_excluded' }, { flag: 'bilirkisi_ss' }] }, then: 1, else: 0 } },
-              { if: { when: { any: [{ flag: 'contra_s2' }, { flag: 'contra_s4' }, { flag: 'bilirkisi_zincir' }] }, then: 1, else: 0 } },
-              { if: { when: { any: [{ flag: 'hayri_saat' }, { flag: 'fact_hayri_saat' }, { flag: 'bilirkisi_kilit' }, { flag: 'kilit_mahkemede' }] }, then: 1, else: 0 } },
+              {
+                if: {
+                  when: { any: [{ flag: 'contra_s2' }, { flag: 'contra_s4' }, { flag: 'bilirkisi_zincir' }] },
+                  then: 1,
+                  else: 0,
+                },
+              },
+              {
+                if: {
+                  when: {
+                    any: [
+                      { flag: 'hayri_saat' },
+                      { flag: 'fact_hayri_saat' },
+                      { flag: 'bilirkisi_kilit' },
+                      { flag: 'kilit_mahkemede' },
+                    ],
+                  },
+                  then: 1,
+                  else: 0,
+                },
+              },
               { if: { when: { flag: 'pay_cevap' }, then: 1, else: 0 } },
               { if: { when: { flag: 'contra_s1' }, then: 1, else: 0 } },
             ],

@@ -196,19 +196,16 @@ export const invHub: CasePart = {
             cmp(v('day'), '==', 3),
             all(visited('INV_GORUSME'), visited('INV_TUTANAK'), visited('INV_IMAJ'), visited('INV_ARAMA_OFIS')),
           ),
-          lockedReason: 'Dilekçe süresi 3. gün doluyor. Erken gitmek için önce müvekkili dinle, tutanağı ve raporu oku, ofisi ara.',
+          lockedReason:
+            'Dilekçe süresi 3. gün doluyor. Erken gitmek için önce müvekkili dinle, tutanağı ve raporu oku, ofisi ara.',
         }),
       ],
     }),
-    decisionNode(
-      'INV_DAY_END',
-      [{ when: cmp(v('day'), '==', 2), to: 'INV_AKSAM1' }, { to: 'INV_AKSAM2_1' }],
-      {
-        ...C2,
-        title: 'Gün sonu',
-        onEnter: [...dayEndDelivery.effects, inc('day', 1), set('ap', 6)],
-      },
-    ),
+    decisionNode('INV_DAY_END', [{ when: cmp(v('day'), '==', 2), to: 'INV_AKSAM1' }, { to: 'INV_AKSAM2_1' }], {
+      ...C2,
+      title: 'Gün sonu',
+      onEnter: [...dayEndDelivery.effects, inc('day', 1), set('ap', 6)],
+    }),
     story('INV_AKSAM1', {
       ...C2,
       title: 'Akşam',
@@ -343,10 +340,7 @@ export const invHub: CasePart = {
       ...C2,
       title: 'Leyla’ya danış',
       background: 'buro',
-      onEnter: [
-        set('leyla_gun', v('day')),
-        ifThen(has('clue_cihaz3'), [raise('fact_hesap_fikri')]),
-      ],
+      onEnter: [set('leyla_gun', v('day')), ifThen(has('clue_cihaz3'), [raise('fact_hesap_fikri')])],
       lines: [
         W(
           all(has('clue_cihaz3'), not(flag('hesap_istendi'))),
@@ -405,7 +399,10 @@ export const invHub: CasePart = {
       ...C2,
       title: 'Duruşmadan önceki gece',
       lines: [
-        W(has('ded_ss'), `~ Ekran görüntüleri: kararsız, imzasız. Bunu yarın söyleyeceğim. Salonda biri yüzünü buruşturacak.`),
+        W(
+          has('ded_ss'),
+          `~ Ekran görüntüleri: kararsız, imzasız. Bunu yarın söyleyeceğim. Salonda biri yüzünü buruşturacak.`,
+        ),
         W(
           any(has('clue_ss_karar'), has('clue_imza_yok')),
           `~ Ekran görüntülerinde bir sorun var. Tarihler mi, imza mı? İkisini birden bağlayamadım.`,
@@ -421,10 +418,7 @@ export const invHub: CasePart = {
           has('ded_bagli'),
           `~ Cihaz 3. Bir dizüstü. Şubat’ta bağlanmış, hiç kapatılmamış bir oturum. Mesajlar bir telefondan çıkmadı. Bunu bir polis memuruna söyleteceğim.`,
         ),
-        W(
-          has('clue_cihaz3'),
-          `~ Cihaz 3. Ne olduğunu bilmiyorum. Bildiğim tek şey: Tarık’ın telefonu değil.`,
-        ),
+        W(has('clue_cihaz3'), `~ Cihaz 3. Ne olduğunu bilmiyorum. Bildiğim tek şey: Tarık’ın telefonu değil.`),
         O(`~ Mesajlar telefondaydı. Polis öyle diyor, rapor öyle diyor. Ben de başka bir şey diyemiyorum.`),
       ],
     }),
@@ -432,8 +426,14 @@ export const invHub: CasePart = {
       ...C2,
       title: 'Duruşmadan önceki gece',
       lines: [
-        W(has('ded_hastane'), `~ 9 Kasım, 02.14. Telefon kilitli, hemşire masasında. Tarık bir form imzalıyor. O gece, o eller değil.`),
-        W(any(flag('fact_gulay'), has('clue_onam'), has('clue_sarj')), `~ Acil servis. Bir bant, bir saat. Bir parçası elimde, öbür parçası raporda bir yerde olmalı.`),
+        W(
+          has('ded_hastane'),
+          `~ 9 Kasım, 02.14. Telefon kilitli, hemşire masasında. Tarık bir form imzalıyor. O gece, o eller değil.`,
+        ),
+        W(
+          any(flag('fact_gulay'), has('clue_onam'), has('clue_sarj')),
+          `~ Acil servis. Bir bant, bir saat. Bir parçası elimde, öbür parçası raporda bir yerde olmalı.`,
+        ),
         W(flag('fact_hastane'), `~ Hastane. Tarık o gece hastanedeydi. Ama kâğıda dökemedim.`),
         O(`~ Üç gece. Bir adamın uykusu. Uykunun tanığı olmaz.`),
       ],

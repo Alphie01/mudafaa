@@ -85,7 +85,15 @@ export function hesapDoc(id: string, prefix: string, costVar: string, chapterSpr
         'Üç gecenin üçünde de cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.',
       ),
       hit(`${prefix}EX_IP2`, 'cmp', `${prefix}h5`, 'clue_ip_ayni', 0, 'AYNI ADRES', '9 Kasım: 85.105.44.17. Yine.'),
-      hit(`${prefix}EX_IP3`, 'cmp', `${prefix}h6`, 'clue_ip_ayni', 0, 'AYNI ADRES', '12 Kasım: 85.105.44.17. Üçüncü kez.'),
+      hit(
+        `${prefix}EX_IP3`,
+        'cmp',
+        `${prefix}h6`,
+        'clue_ip_ayni',
+        0,
+        'AYNI ADRES',
+        '12 Kasım: 85.105.44.17. Üçüncü kez.',
+      ),
       hit(
         `${prefix}EX_ARSIV`,
         'mag',
@@ -234,9 +242,17 @@ export const invArsiv: CasePart = {
         { label: 'AÇIKLAMA', flex: 2.6 },
       ],
       rows: [
-        row('t0', ['14.30', 'Davet', 'Şüpheli, ofisinde ifadeye davet edildi; telefonunu kendi rızasıyla teslim etti.']),
+        row('t0', [
+          '14.30',
+          'Davet',
+          'Şüpheli, ofisinde ifadeye davet edildi; telefonunu kendi rızasıyla teslim etti.',
+        ]),
         row('t1', ['15.40', 'Kilit', 'Şüphelinin rızasıyla telefon kilidi açıldı.']),
-        row('t2', ['15.44–15.51', 'Görüntü', 'PUSULA: Melis Karaca sohbeti (arşiv). 14 ekran görüntüsü alındı; ekranlar ayrıca fotoğraflandı.']),
+        row('t2', [
+          '15.44–15.51',
+          'Görüntü',
+          'PUSULA: Melis Karaca sohbeti (arşiv). 14 ekran görüntüsü alındı; ekranlar ayrıca fotoğraflandı.',
+        ]),
         row('t3', ['15.52', 'Kapanış', 'Cihaz kapatıldı, kahverengi zarfa konuldu.']),
         row('t4', ['—', 'Mühür', '—']),
         row('t5', ['—', 'Ek', 'Hâkimlik kararı: Bursa 3. Sulh Ceza · 13.11 · 10.20']),
@@ -386,8 +402,24 @@ export const invArsiv: CasePart = {
           'YENİ İPUCU',
           '“bkz.” yazan hücre açıldı, ham veri döküldü: sender_device = 3. Tarık’ın 25 Ekim’deki kendi mesajında bu değer 0. Aynı hesap, farklı cihaz. Bütün dava bu tek rakamda saklıymış.',
         ),
-        hit('EX_I_C7', 'cmp', 'i7', 'clue_cihaz3', 0, 'CİHAZ 3', 'İletilen ses kaydı da cihaz 3’ten çıkmış. Tarık’ın telefonu değil; başka bir cihaz, aynı hesaba bağlı.'),
-        hit('EX_I_C8', 'cmp', 'i8', 'clue_cihaz3', 0, 'CİHAZ 3', '“Son mesajım.” Yine cihaz 3. Üç tehdidin üçü de aynı yerden: bir masaüstü oturumundan, bir telefondan değil.'),
+        hit(
+          'EX_I_C7',
+          'cmp',
+          'i7',
+          'clue_cihaz3',
+          0,
+          'CİHAZ 3',
+          'İletilen ses kaydı da cihaz 3’ten çıkmış. Tarık’ın telefonu değil; başka bir cihaz, aynı hesaba bağlı.',
+        ),
+        hit(
+          'EX_I_C8',
+          'cmp',
+          'i8',
+          'clue_cihaz3',
+          0,
+          'CİHAZ 3',
+          '“Son mesajım.” Yine cihaz 3. Üç tehdidin üçü de aynı yerden: bir masaüstü oturumundan, bir telefondan değil.',
+        ),
         hit(
           'EX_I_C5',
           'cmp',
@@ -476,9 +508,7 @@ export const invArsiv: CasePart = {
         tarik: Babam “Ne istiyorlarsa verin, oğlum o gece buradaydı” dedi. Hemşireye de selam söyledi.
         > Bir epikriz, bir müdahale çizelgesi, bir onam formu. Hepsinin altında saat.
       `),
-      choices: [
-        { id: 'HKG_DEVAM', kind: 'CONTINUE', label: 'Kayıtları incele', next: 'INV_HKAYIT' },
-      ],
+      choices: [{ id: 'HKG_DEVAM', kind: 'CONTINUE', label: 'Kayıtları incele', next: 'INV_HKAYIT' }],
     }),
     documentExam('INV_HKAYIT', {
       ...C2,
@@ -519,15 +549,7 @@ export const invArsiv: CasePart = {
           'ONAM',
           'Formun saati ile Ek-3’teki ileti arasında dört dakika.',
         ),
-        hit(
-          'EX_K_KABUL',
-          'mag',
-          'k1',
-          undefined,
-          0,
-          'KABUL',
-          'Refakatçi: oğlu. 01.20’den itibaren buradaydı.',
-        ),
+        hit('EX_K_KABUL', 'mag', 'k1', undefined, 0, 'KABUL', 'Refakatçi: oğlu. 01.20’den itibaren buradaydı.'),
       ],
       miss: docMiss('FB_HKAYIT'),
       finish: { id: 'HKAYIT_BITIR', label: 'Kayıtları kapat' },
@@ -570,20 +592,25 @@ export const invArsiv: CasePart = {
         }),
         option('DIL_KATILAN', 'Katılanın telefonunun da incelenmesi', {
           cost: [{ var: 'slots', amount: 1 }],
-          neutral: 'Somut bir dayanak olmadan mağdurun cihazının incelenmesi istenirse mahkeme reddeder; ilişkiyi de zehirler. Mesajların alıcıda olduğu tartışmasız.',
-          responses: B(`leyla: Mesajın geldiği tartışılmıyor ki. Kimden çıktığı tartışılıyor. Kadının telefonunda ne arayacaksın?`),
+          neutral:
+            'Somut bir dayanak olmadan mağdurun cihazının incelenmesi istenirse mahkeme reddeder; ilişkiyi de zehirler. Mesajların alıcıda olduğu tartışmasız.',
+          responses: B(
+            `leyla: Mesajın geldiği tartışılmıyor ki. Kimden çıktığı tartışılıyor. Kadının telefonunda ne arayacaksın?`,
+          ),
           next: '$stay',
         }),
         option('DIL_PLATFORM', 'Uygulama şirketinden yazışma ve oturum kayıtları', {
           cost: [{ var: 'slots', amount: 1 }],
           effects: [raise('fact_hesap_fikri')],
-          neutral: 'Yurt dışındaki bir şirketten kayıt istemek uluslararası adli yardım ister; aylar sürer. Oysa hesap sahibi kendi oturum geçmişini kendisi indirebilir.',
+          neutral:
+            'Yurt dışındaki bir şirketten kayıt istemek uluslararası adli yardım ister; aylar sürer. Oysa hesap sahibi kendi oturum geçmişini kendisi indirebilir.',
           responses: B(`leyla: Aylar. Duruşmaya on iki gün var. Hesap kimin Deniz? Sahibi istese?`),
           next: '$stay',
         }),
         option('DIL_KESIF', 'Ofiste keşif yapılması', {
           cost: [{ var: 'slots', amount: 1 }],
-          neutral: 'Keşif, olay yerinin bizzat görülmesinin uyuşmazlığı çözeceği durumlar içindir; bir mimarlık ofisini görmek mesajların kaynağını söylemez.',
+          neutral:
+            'Keşif, olay yerinin bizzat görülmesinin uyuşmazlığı çözeceği durumlar içindir; bir mimarlık ofisini görmek mesajların kaynağını söylemez.',
           responses: B(`~ Hâkim ofise gelip ne görecek? Kemerleri mi?`),
           next: '$stay',
         }),
@@ -605,9 +632,7 @@ export const invArsiv: CasePart = {
       background: 'buro_gece',
       lines: B(`> İki kart seç. Birbirini tamamlıyorsa duruşmada kullanabileceğin bir delil doğar.`),
       pool: POOL,
-      recipes: [
-        ...baseRecipes(''),
-      ],
+      recipes: [...baseRecipes('')],
       miss: boardMiss('FB_CIKARIM'),
       finish: { id: 'CIKARIM_BITIR' },
     }),

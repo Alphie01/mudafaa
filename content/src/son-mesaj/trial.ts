@@ -95,7 +95,15 @@ export const trial: CasePart = {
       choices: [
         option('T00L_IMAJ', 'Mühür tutanakla açılsın; önce imaj ve hash alınsın.', {
           score: { USUL_BILGISI: 120 },
-          effects: [inc('legal_hits'), raise('laptop_imaj'), mark('GOOD', 'Dijital delil önce yedeklenir: birebir kopya (imaj) alınır, hash değeri tutanağa geçer, inceleme kopya üzerinde yapılır (CMK 134/4). Asıl cihaz mühürlü kalır.', 'USUL_BILGISI')],
+          effects: [
+            inc('legal_hits'),
+            raise('laptop_imaj'),
+            mark(
+              'GOOD',
+              'Dijital delil önce yedeklenir: birebir kopya (imaj) alınır, hash değeri tutanağa geçer, inceleme kopya üzerinde yapılır (CMK 134/4). Asıl cihaz mühürlü kalır.',
+              'USUL_BILGISI',
+            ),
+          ],
           responses: B(`
             P: Sayın Hâkim, bu dosyanın bütün yarası bir cihazın usulsüz açılmasıydı. Aynı yarayı bu kez savunmanın lehine açmak istemiyorum.
             P: Mühür, tarafların huzurunda tutanakla açılsın. Bilirkişi cihazın birebir kopyasını alsın, hash değerini hesaplasın ve tutanağa geçirsin. İnceleme yalnızca kopya üzerinde yapılsın.
@@ -128,33 +136,33 @@ export const trial: CasePart = {
 
     // --- Bilirkişi ---
     court2.stage('T_01', {
-        title: 'Bilirkişi',
-        courtStage: 'TANIK_DINLEME',
-        background: 'durusma_salonu',
-        lines: [
-          W(
-            flag('bilirkisi_istendi'),
-            `
+      title: 'Bilirkişi',
+      courtStage: 'TANIK_DINLEME',
+      background: 'durusma_salonu',
+      lines: [
+        W(
+          flag('bilirkisi_istendi'),
+          `
             recep: Bilirkişi Dr. Nazlı Uçar!
             > Kırklı yaşlarda bir kadın. Elinde ince bir rapor, bir de dizüstü. Gözlüğünü taktı.
             feride: Raporunuzu özetleyin.
           `,
-          ),
-          O(`
+        ),
+        O(`
             feride: Dosyada ayrıca bir bilirkişi incelemesi talep edilmedi. Kolluğun raporu okundu.
             > Bilirkişi sırası boş kaldı. Savcı rahatladı; onun en zayıf tanığı, orada olmayan tanıktı.
           `),
-        ],
-        onFirstEnter: [meet('nazli'), meet('ozan'), meet('hayri')],
-        choices: [
-          {
-            id: 'T01_DEVAM',
-            kind: 'CONTINUE',
-            label: 'Devam',
-            next: { routes: [{ when: flag('bilirkisi_istendi'), to: 'T_01T' }, { to: 'T_02' }] },
-          },
-        ],
-      }),
+      ],
+      onFirstEnter: [meet('nazli'), meet('ozan'), meet('hayri')],
+      choices: [
+        {
+          id: 'T01_DEVAM',
+          kind: 'CONTINUE',
+          label: 'Devam',
+          next: { routes: [{ when: flag('bilirkisi_istendi'), to: 'T_01T' }, { to: 'T_02' }] },
+        },
+      ],
+    }),
     court2.testimony('T_01T', {
       title: 'Bilirkişi Dr. Uçar',
       courtStage: 'TANIK_DINLEME',
@@ -162,7 +170,10 @@ export const trial: CasePart = {
       witness: 'nazli',
       witnessLabel: 'BİLİRKİŞİ · DR. NAZLI UÇAR',
       say: [
-        { speaker: 'nazli', text: 'İmaj üzerinde inceleme yaptım. Hash değeri raporla uyumlu. Bulgularımı başlıklar hâlinde sunuyorum.' },
+        {
+          speaker: 'nazli',
+          text: 'İmaj üzerinde inceleme yaptım. Hash değeri raporla uyumlu. Bulgularımı başlıklar hâlinde sunuyorum.',
+        },
         { speaker: 'feride', text: 'Müdafi, bilirkişiye sorularınız?' },
       ],
       rulesText: 'Bilirkişinin bulgularını doğru delille pekiştir; yanlış delil yine güvenilirliği düşürür.',
@@ -200,7 +211,15 @@ export const trial: CasePart = {
         }),
         presentRule('PS_B1', 'B1', ['ded_bagli', 'clue_bagli_cihaz'], {
           score: { SORGULAMA: 200 },
-          effects: [inc('pers'), raise('bilirkisi_cihaz'), mark('GOOD', 'Bilirkişi, tehditlerin telefondan değil bağlı bir masaüstü oturumundan çıktığını teyit etti.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('bilirkisi_cihaz'),
+            mark(
+              'GOOD',
+              'Bilirkişi, tehditlerin telefondan değil bağlı bir masaüstü oturumundan çıktığını teyit etti.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
             P: Hesap verisindeki cihaz 3 ile raporun Ek-3’ündeki “gönderen cihaz 3” aynı cihaz mı?
             nazli: Aynı. Tek bir oturum. 14 Şubat’ta hesaba bağlanmış, o günden beri hiç kapatılmamış bir masaüstü oturumu. Üç tehdit mesajı ve iletilen ses kaydı, bu oturumdan gönderilmiş.
@@ -221,7 +240,15 @@ export const trial: CasePart = {
         }),
         presentRule('PS_B2', 'B2', ['ded_hastane', 'clue_kilit'], {
           score: { SORGULAMA: 200 },
-          effects: [inc('pers'), raise('bilirkisi_kilit'), mark('GOOD', '9 Kasım gecesi telefon kilitli; ileti başka oturumdan: mazeret teknik olarak doğrulandı.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('bilirkisi_kilit'),
+            mark(
+              'GOOD',
+              '9 Kasım gecesi telefon kilitli; ileti başka oturumdan: mazeret teknik olarak doğrulandı.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
             P: 9 Kasım gecesine bakalım. Raporun Ek-2’sine göre telefon 01.40’ta kilitlenmiş, 06.10’a kadar hiç açılmamış. Aynı gece 02.10’da müvekkilim acil serviste bir onam formu imzalıyor; saati hemşire yazmış.
             P: Ama 02.14’te, o telefon kilitliyken, o hesaptan Hayri Sezer’e bir ses kaydı iletiliyor. Bu nasıl olur?
@@ -234,7 +261,10 @@ export const trial: CasePart = {
         }),
         presentRule('PS_B3', 'B3', ['ded_ss', 'ev_ss'], {
           score: { SORGULAMA: 100 },
-          effects: [raise('bilirkisi_ss'), mark('GOOD', 'Bilirkişi, ekran görüntülerinin delil değeri olmadığını söyledi.', 'SORGULAMA')],
+          effects: [
+            raise('bilirkisi_ss'),
+            mark('GOOD', 'Bilirkişi, ekran görüntülerinin delil değeri olmadığını söyledi.', 'SORGULAMA'),
+          ],
           responses: B(`
             P: Şube’nin aldığı on dört ekran görüntüsü? Savcılık en çok onlara dayanıyor.
             nazli: Bir ekranın fotoğrafı, Sayın Hâkim. Teknik olarak bir delil değil, olsa olsa bir anekdot. Kaynağı denetlenemez, bütünlüğü sağlanamaz. İsteyen istediği ekranı kurgular, fotoğrafını çeker.
@@ -253,7 +283,15 @@ export const trial: CasePart = {
         }),
         presentRule('PS_B4', 'B4', ['ded_ip_tekin', 'ev_isp'], {
           score: { SORGULAMA: 150 },
-          effects: [inc('pers'), raise('bilirkisi_el'), mark('GOOD', 'Hat bilgisi bilirkişinin “sanık da olabilir” cümlesini daralttı: cihaz 3 sanığın hattından bağlanmamış.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('bilirkisi_el'),
+            mark(
+              'GOOD',
+              'Hat bilgisi bilirkişinin “sanık da olabilir” cümlesini daralttı: cihaz 3 sanığın hattından bağlanmamış.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
             P: Hesap verisine göre cihaz 3, üç gecenin üçünde de 85.105.44.17 adresinden bağlanmış. Servis sağlayıcısının mahkemeye yazısı dosyada.
             P: Müvekkilimin ev hattı 176.88.12.4. O adres, üç gecenin hiçbirinde görünmüyor.
@@ -264,7 +302,10 @@ export const trial: CasePart = {
         }),
         presentRule('PS_B4H', 'B4', ['ded_hastane'], {
           score: { SORGULAMA: 80 },
-          effects: [raise('bilirkisi_el'), mark('GOOD', 'En az bir gece için sanık, cihaz 3’ün başında olamazdı.', 'SORGULAMA')],
+          effects: [
+            raise('bilirkisi_el'),
+            mark('GOOD', 'En az bir gece için sanık, cihaz 3’ün başında olamazdı.', 'SORGULAMA'),
+          ],
           responses: B(`
             P: 9 Kasım gecesi 02.14’te müvekkilim bir acil serviste onam formu imzalıyor; telefonu hemşire masasında, kilitli.
             nazli: O gece için bir dizüstünün başında olması da beklenemez. En azından bir gece için, “sanık da olabilir” cümlemi geri alırım.
@@ -280,7 +321,15 @@ export const trial: CasePart = {
         }),
         presentRule('PS_B5', 'B5', ['ded_zincir'], {
           score: { SORGULAMA: 150 },
-          effects: [inc('pers'), raise('bilirkisi_zincir'), mark('GOOD', 'Bilirkişi, hash’in yalnızca 14 Kasım sonrasını koruduğunu, 12–14 Kasım arasının belgesiz kaldığını kabul etti.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('bilirkisi_zincir'),
+            mark(
+              'GOOD',
+              'Bilirkişi, hash’in yalnızca 14 Kasım sonrasını koruduğunu, 12–14 Kasım arasının belgesiz kaldığını kabul etti.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
             P: Hash 14 Kasım 11.05’te alındı. Telefon ise 12 Kasım’da mühürsüz, bantlı bir zarfta Şube’de açıldı; iki gün bir çekmecede kaldı.
             P: Raporunuzun Bulgu 3’ü: 12 Kasım 15.40–15.52 arası kilit açma, uygulama gezinmesi ve cihaza yazılan on dört yeni dosya.
@@ -290,7 +339,11 @@ export const trial: CasePart = {
         }),
       ],
       presentMiss: fallback('FB_B_PRESENT', 'PRESENT', {
-        effects: [...wrongEvidence, score('SORGULAMA', -120, 'hatali'), mark('BAD', 'Bu delil bilirkişinin bu bulgusuyla ilgili değil.', 'SORGULAMA')],
+        effects: [
+          ...wrongEvidence,
+          score('SORGULAMA', -120, 'hatali'),
+          mark('BAD', 'Bu delil bilirkişinin bu bulgusuyla ilgili değil.', 'SORGULAMA'),
+        ],
         responses: B(`nazli: Bu belgenin sorduğunuz bulguyla teknik bir ilgisi yok.`),
       }),
       finish: { id: 'T01T_BITIR', label: 'Bilirkişiyi bırak', next: 'T_02' },
@@ -359,7 +412,9 @@ export const trial: CasePart = {
             hayri: Ertesi hafta bütün teklif sahipleri biliyordu. Üç firma. Bursa bir avlu Sayın Hâkim.
           `),
         }),
-        option('T02Q_YOK', 'Sorum yok; tanığın beyanı dosyadaki ifadesiyle zaten aynı.', { neutral: 'Tanığın telefonundaki saati tutanağa geçirme fırsatı kullanılmadı.' }),
+        option('T02Q_YOK', 'Sorum yok; tanığın beyanı dosyadaki ifadesiyle zaten aynı.', {
+          neutral: 'Tanığın telefonundaki saati tutanağa geçirme fırsatı kullanılmadı.',
+        }),
       ],
     }),
 
@@ -418,7 +473,10 @@ export const trial: CasePart = {
         ]),
         statement('O3', 3, [
           'Ben kendi işimle meşgulüm, yeni bir firma kurdum. PUSULA’yı yalnızca kendi telefonumda kullanırım. ',
-          hl('Tarık’ın hesabına nasıl gireyim, ne diye gireyim', any(flag('press_o3'), has('clue_ip_ayni'), has('ded_ip_tekin'))),
+          hl(
+            'Tarık’ın hesabına nasıl gireyim, ne diye gireyim',
+            any(flag('press_o3'), has('clue_ip_ayni'), has('ded_ip_tekin')),
+          ),
           '? Benim öyle bir derdim yok.',
         ]),
         statement('O4', 4, [
@@ -435,7 +493,11 @@ export const trial: CasePart = {
       rules: [
         presentRule('PS_T_SAVCILIK', undefined, ['ev_ss', 'ev_sikayet', 'ev_ozan_ifade'], {
           maxUses: 3,
-          effects: [...wrongEvidence, score('SORGULAMA', -150, 'hatali'), mark('BAD', 'Bu delil tanığı çürütmez; savcılığın anlatımını tekrarlar.', 'SORGULAMA')],
+          effects: [
+            ...wrongEvidence,
+            score('SORGULAMA', -150, 'hatali'),
+            mark('BAD', 'Bu delil tanığı çürütmez; savcılığın anlatımını tekrarlar.', 'SORGULAMA'),
+          ],
           responses: B(`ozan: Aynen öyle üstat. Teşekkür ederim.`),
         }),
         pressRule('PR_O1', 'O1', {
@@ -452,7 +514,15 @@ export const trial: CasePart = {
         }),
         objectRule('OB_O1', 'O1', 'g_kanaat', {
           score: { USUL_BILGISI: 60 },
-          effects: [inc('legal_hits'), inc('pers'), mark('GOOD', 'Tanık bir sözden kendi sonucunu çıkarıyor; yorumu değil olguyu anlatmalı (CMK 217).', 'USUL_BILGISI')],
+          effects: [
+            inc('legal_hits'),
+            inc('pers'),
+            mark(
+              'GOOD',
+              'Tanık bir sözden kendi sonucunu çıkarıyor; yorumu değil olguyu anlatmalı (CMK 217).',
+              'USUL_BILGISI',
+            ),
+          ],
           responses: B(`
             P: İtiraz. Tanık duyduğu sözü değil, o sözden çıkardığı sonucu anlatıyor.
             feride: Kabul. Tanık, ne duyduğunuzu söyleyin, ne anladığınızı değil.
@@ -460,7 +530,15 @@ export const trial: CasePart = {
         }),
         presentRule('PS_O2', 'O2', ['clue_envanter', 'ded_laptop_ozan', 'ev_laptop'], {
           score: { SORGULAMA: 300 },
-          effects: [inc('pers', 2), raise('contra_o2'), mark('GOOD', 'Demirbaş listesi: 07 numaralı dizüstü iade edilmedi. “Her şeyi teslim ettim” çöktü.', 'SORGULAMA')],
+          effects: [
+            inc('pers', 2),
+            raise('contra_o2'),
+            mark(
+              'GOOD',
+              'Demirbaş listesi: 07 numaralı dizüstü iade edilmedi. “Her şeyi teslim ettim” çöktü.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
             P: Her şeyi mi teslim ettiniz? Protokolün ekindeki demirbaş listesi önümde Sayın Hâkim. Plotter iade, tablet iade, Tarık’ın dizüstüsü ofiste. 07 numara: bir dizüstü ve dok istasyonu, zimmet Ozan Tekin. İade hanesi: boş.
             ozan: O dizüstü bozulmuştu üstat. Ekranı gitmişti, açılmıyordu, hurdaya döndü. Attım. Mali müşavire de söyledim zaten, “gerek yok” dedim.
@@ -474,7 +552,11 @@ export const trial: CasePart = {
         presentRule('PS_O2K', 'O2', ['clue_koli'], {
           enabledWhen: flag('press_o2'),
           score: { SORGULAMA: 150 },
-          effects: [inc('pers'), raise('contra_o2'), mark('GOOD', 'Koli listesi: dizüstü hariç her şey iade edilmiş.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('contra_o2'),
+            mark('GOOD', 'Koli listesi: dizüstü hariç her şey iade edilmiş.', 'SORGULAMA'),
+          ],
           responses: B(`
             P: Gönderdiğiniz koli. İçinde anahtarlar, cetvel, şarj aleti. Dizüstü yok. Şarj aletini saklamaya değer bulmuşsunuz, dizüstüyü atmışsınız.
             ozan: …Öyle oldu işte.
@@ -490,7 +572,11 @@ export const trial: CasePart = {
         }),
         presentRule('PS_O3', 'O3', ['ded_ip_tekin', 'ev_isp'], {
           score: { SORGULAMA: 300 },
-          effects: [inc('pers', 2), raise('contra_o3'), mark('GOOD', 'Sağlayıcının yanıtı: tehdit oturumlarının IP adresi Tekin Yapı’nın iş hattı.', 'SORGULAMA')],
+          effects: [
+            inc('pers', 2),
+            raise('contra_o3'),
+            mark('GOOD', 'Sağlayıcının yanıtı: tehdit oturumlarının IP adresi Tekin Yapı’nın iş hattı.', 'SORGULAMA'),
+          ],
           responses: B(`
             P: Üç tehdit gecesinin üçünde de mesajlar tek bir adresten gönderilmiş: 85.105.44.17. Rastlantı değil, aynı adres, üç kez.
             P: Servis sağlayıcısının mahkemeye yazısı elimde. O adres, o tarihlerde Tekin Yapı Danışmanlık Limited Şirketi’nin iş hattına atanmış. Sizin firmanız Ozan Bey.
@@ -514,7 +600,15 @@ export const trial: CasePart = {
         }),
         presentRule('PS_O4', 'O4', ['ev_not', 'clue_dock'], {
           score: { SORGULAMA: 200 },
-          effects: [inc('pers'), raise('contra_o4'), mark('GOOD', 'Yapışkan not ve cihazları kuran kişi: şifre herkesin, en çok da onun bildiği bir şeydi.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('contra_o4'),
+            mark(
+              'GOOD',
+              'Yapışkan not ve cihazları kuran kişi: şifre herkesin, en çok da onun bildiği bir şeydi.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
             P: Şifresini bilmeniz mümkün değilmiş. Ofisin bütün cihazlarını kim kurdu Ozan Bey?
             ozan: Ben kurdum. Bilgisayar işlerine ben bakardım.
@@ -535,7 +629,11 @@ export const trial: CasePart = {
         }),
         presentRule('PS_O5', 'O5', ['ded_uslup_ozan', 'clue_uslup_ozan'], {
           score: { SORGULAMA: 150 },
-          effects: [inc('pers'), raise('contra_o5'), mark('GOOD', 'Tehditlerin dili Tarık’ın değil, tanığın e-postalarındaki dildir.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('contra_o5'),
+            mark('GOOD', 'Tehditlerin dili Tarık’ın değil, tanığın e-postalarındaki dildir.', 'SORGULAMA'),
+          ],
           responses: B(`
             P: Bu mesajlar Tarık’ın tarzıymış, öyle dediniz. Oysa Tarık hiç büyük harfle başlamaz, hiç nokta koymaz, hiç “Sn.” demez.
             P: Oysa bu üç tehdit “Sn. Karaca” ile başlıyor, üç noktayla duruyor, “Saygılar.” ile bitiyor. Tıpkı mali müşavire yazdığınız “gerek görmüyorum” e-postası gibi. Gönderen: o.tekin.
@@ -547,7 +645,11 @@ export const trial: CasePart = {
         }),
       ],
       presentMiss: fallback('FB_O_PRESENT', 'PRESENT', {
-        effects: [...wrongEvidence, score('SORGULAMA', -150, 'hatali'), mark('BAD', 'Sunduğun delil tanığın bu ifadesiyle çelişmiyor.', 'SORGULAMA')],
+        effects: [
+          ...wrongEvidence,
+          score('SORGULAMA', -150, 'hatali'),
+          mark('BAD', 'Sunduğun delil tanığın bu ifadesiyle çelişmiyor.', 'SORGULAMA'),
+        ],
         responses: B(`ozan: Bunun benimle ne ilgisi var üstat? Anlamadım.`),
       }),
       objectMiss: fallback('FB_O_OBJECT', 'OBJECT', {
@@ -557,7 +659,21 @@ export const trial: CasePart = {
       finish: {
         id: 'T03T_BITIR',
         label: 'Çapraz sorguyu bitir',
-        next: { routes: [{ when: { cmp: [{ add: [oneIf('contra_o2'), oneIf('contra_o3'), oneIf('contra_o4'), oneIf('contra_o5')] }, '>=', 2] }, to: 'T_04' }, { to: 'T_05' }] },
+        next: {
+          routes: [
+            {
+              when: {
+                cmp: [
+                  { add: [oneIf('contra_o2'), oneIf('contra_o3'), oneIf('contra_o4'), oneIf('contra_o5')] },
+                  '>=',
+                  2,
+                ],
+              },
+              to: 'T_04',
+            },
+            { to: 'T_05' },
+          ],
+        },
       },
     }),
     court2.stage('T_04', {
@@ -583,7 +699,9 @@ export const trial: CasePart = {
           id: 'T04_DEVAM',
           kind: 'CONTINUE',
           label: 'Devam',
-          next: { routes: [{ when: all(visited('ARA_MELIS'), not(flag('melis_kapandi'))), to: 'T_04K' }, { to: 'T_05' }] },
+          next: {
+            routes: [{ when: all(visited('ARA_MELIS'), not(flag('melis_kapandi'))), to: 'T_04K' }, { to: 'T_05' }],
+          },
         },
       ],
     }),
@@ -646,7 +764,10 @@ export const trial: CasePart = {
       background: 'durusma_salonu',
       prosecutionEvidence: 'ev_pay',
       say: [
-        { speaker: 'tolga', text: '25 Ekim gecesi sanık katılana “bu şartlarla devam edemeyiz” yazmış; sert, tehditkâr bir üslup. Bu, saikin delilidir.' },
+        {
+          speaker: 'tolga',
+          text: '25 Ekim gecesi sanık katılana “bu şartlarla devam edemeyiz” yazmış; sert, tehditkâr bir üslup. Bu, saikin delilidir.',
+        },
         { speaker: 'feride', text: 'Müdafi?' },
       ],
       next: 'T_06',
@@ -656,8 +777,23 @@ export const trial: CasePart = {
             raise('pay_cevap'),
             ifThen(
               any(has('clue_uslup_tarik'), has('ded_uslup'), has('ded_uslup_ozan')),
-              [score('HUKUKI_BILGI', 120, 'itiraz'), inc('pers'), mark('GOOD', 'Ticari bir tartışmadaki sert söz, şantaj unsuru taşımaz; dahası 25 Ekim mesajları “cihaz 0”dan, Tarık’ın kendi diliyle: tehditlerse “cihaz 3”ten, başka bir dille.', 'HUKUKI_BILGI')],
-              [score('HUKUKI_BILGI', 60, 'itiraz'), mark('GOOD', 'Sert bir ticari tartışma, kişinin bir şey elde etmek için yaptığı tehdit (şantaj) değildir.', 'HUKUKI_BILGI')],
+              [
+                score('HUKUKI_BILGI', 120, 'itiraz'),
+                inc('pers'),
+                mark(
+                  'GOOD',
+                  'Ticari bir tartışmadaki sert söz, şantaj unsuru taşımaz; dahası 25 Ekim mesajları “cihaz 0”dan, Tarık’ın kendi diliyle: tehditlerse “cihaz 3”ten, başka bir dille.',
+                  'HUKUKI_BILGI',
+                ),
+              ],
+              [
+                score('HUKUKI_BILGI', 60, 'itiraz'),
+                mark(
+                  'GOOD',
+                  'Sert bir ticari tartışma, kişinin bir şey elde etmek için yaptığı tehdit (şantaj) değildir.',
+                  'HUKUKI_BILGI',
+                ),
+              ],
             ),
           ],
           responses: B(`
@@ -675,7 +811,9 @@ export const trial: CasePart = {
             feride: Müdafi, Ek-3’te bu mesajlar sanığın kendi cihazından görünüyor. Dikkatli olun.
           `),
         }),
-        option('T05_C', 'Saik tek başına delil değildir; bu konuda ayrıca diyeceğimiz yok.', { neutral: 'Savcının saik anlatımı yanıtsız kaldı.' }),
+        option('T05_C', 'Saik tek başına delil değildir; bu konuda ayrıca diyeceğimiz yok.', {
+          neutral: 'Savcının saik anlatımı yanıtsız kaldı.',
+        }),
       ],
     }),
 
@@ -716,7 +854,14 @@ export const trial: CasePart = {
       options: [
         option('T06_A', 'Ekran görüntüleri hukuka aykırı, kaynak başka cihaz: delil yetersiz.', {
           score: { USUL_BILGISI: 100 },
-          effects: [inc('legal_hits'), mark('GOOD', 'Cevap hakkı yerinde kullanıldı: hukuka aykırı delil hükme esas alınamaz (CMK 217/2), kalan deliller mahkûmiyete yetmez.', 'USUL_BILGISI')],
+          effects: [
+            inc('legal_hits'),
+            mark(
+              'GOOD',
+              'Cevap hakkı yerinde kullanıldı: hukuka aykırı delil hükme esas alınamaz (CMK 217/2), kalan deliller mahkûmiyete yetmez.',
+              'USUL_BILGISI',
+            ),
+          ],
           responses: [
             W(
               flag('bilirkisi_cihaz'),
@@ -740,7 +885,10 @@ export const trial: CasePart = {
         }),
       ],
     }),
-    decisionNode('T_07', [{ to: 'T_08P' }], { ...C5, lines: B(`feride: Müdafi, esas hakkındaki savunmanıza geçelim.`) }),
+    decisionNode('T_07', [{ to: 'T_08P' }], {
+      ...C5,
+      lines: B(`feride: Müdafi, esas hakkındaki savunmanıza geçelim.`),
+    }),
 
     // --- Dayanaklar ---
     choiceNode('T_08P', {
@@ -748,7 +896,10 @@ export const trial: CasePart = {
       title: 'Dayanaklar',
       hud: ['noktalar', 'pers'],
       background: 'durusma_salonu',
-      prompt: { speaker: 'narrator', text: 'Esas savunmadan önce üç dayanağını seç. Her biri savunmanı güçlendirir; dayanaksız savunma havada kalır.' },
+      prompt: {
+        speaker: 'narrator',
+        text: 'Esas savunmadan önce üç dayanağını seç. Her biri savunmanı güçlendirir; dayanaksız savunma havada kalır.',
+      },
       choices: [
         option('NK_SS', 'Ekran görüntüleri hukuka aykırı; hükme esas alınamaz', {
           cost: [{ var: 'noktalar', amount: 1 }],
@@ -822,12 +973,20 @@ export const trial: CasePart = {
                 score('SAVUNMA_STRATEJISI', strategyAmount(220, 'MASUMIYET'), 'savunma'),
                 inc('pers'),
                 raise('gercek_fail'),
-                mark('GOOD', 'Gerçek failin cihazı, hattı ve kimliği delillerle ortaya kondu; mesajların sanık tarafından gönderilmediği sabit.', 'SAVUNMA_STRATEJISI'),
+                mark(
+                  'GOOD',
+                  'Gerçek failin cihazı, hattı ve kimliği delillerle ortaya kondu; mesajların sanık tarafından gönderilmediği sabit.',
+                  'SAVUNMA_STRATEJISI',
+                ),
               ],
               [
                 score('SAVUNMA_STRATEJISI', -100, 'savunma'),
                 dec('pers'),
-                mark('BAD', 'Gerçek fail iddiası için delil zinciri tamamlanmadı (hat, dizüstü ve suç duyurusu birlikte gerekir).', 'SAVUNMA_STRATEJISI'),
+                mark(
+                  'BAD',
+                  'Gerçek fail iddiası için delil zinciri tamamlanmadı (hat, dizüstü ve suç duyurusu birlikte gerekir).',
+                  'SAVUNMA_STRATEJISI',
+                ),
               ],
             ),
           ],
@@ -856,11 +1015,19 @@ export const trial: CasePart = {
                 score('SAVUNMA_STRATEJISI', strategyAmount(200, 'USUL'), 'savunma'),
                 inc('pers'),
                 raise('supheden'),
-                mark('GOOD', 'Mesajların telefondan çıkmadığı ve delil zincirindeki boşluklar: sanığın fail olduğu kuşkulu; şüpheden sanık yararlanır.', 'SAVUNMA_STRATEJISI'),
+                mark(
+                  'GOOD',
+                  'Mesajların telefondan çıkmadığı ve delil zincirindeki boşluklar: sanığın fail olduğu kuşkulu; şüpheden sanık yararlanır.',
+                  'SAVUNMA_STRATEJISI',
+                ),
               ],
               [
                 score('SAVUNMA_STRATEJISI', -80, 'savunma'),
-                mark('BAD', 'Şüphe savunması için en az mesajların kaynağına dair bir bulgu ortaya konmalıydı.', 'SAVUNMA_STRATEJISI'),
+                mark(
+                  'BAD',
+                  'Şüphe savunması için en az mesajların kaynağına dair bir bulgu ortaya konmalıydı.',
+                  'SAVUNMA_STRATEJISI',
+                ),
               ],
             ),
           ],
@@ -886,7 +1053,11 @@ export const trial: CasePart = {
           effects: [
             score('SAVUNMA_STRATEJISI', strategyAmount(150, 'INDIRIM'), 'savunma'),
             raise('terditli'),
-            mark('GOOD', 'Terditli savunma meşrudur; hiç değilse ifşa suçunun unsurlarını tartışır (134: kaydın bizzat sanıkça ifşası ispatlanmalı).', 'SAVUNMA_STRATEJISI'),
+            mark(
+              'GOOD',
+              'Terditli savunma meşrudur; hiç değilse ifşa suçunun unsurlarını tartışır (134: kaydın bizzat sanıkça ifşası ispatlanmalı).',
+              'SAVUNMA_STRATEJISI',
+            ),
           ],
           responses: B(`
             P: Öncelikle beraatini talep ediyorum Sayın Hâkim. Kabul görmezse: ses kaydının müvekkilim tarafından iletildiği ispatlanamamıştır; 134’ten beraat gerekir.
@@ -932,7 +1103,8 @@ export const trial: CasePart = {
           `),
         }),
         option('T09_C', '“Söyleyecek bir şeyim yok.”', {
-          neutral: 'Suskunluk bir haktır; ama tutarlı bir savunmanın ardından bir cümle, heyetin vicdanına dokunabilirdi.',
+          neutral:
+            'Suskunluk bir haktır; ama tutarlı bir savunmanın ardından bir cümle, heyetin vicdanına dokunabilirdi.',
           responses: B(`tarik: Söyleyecek bir şeyim yok Sayın Hâkim. Her şeyi avukatım söyledi.`),
         }),
       ],

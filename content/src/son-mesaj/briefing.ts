@@ -304,7 +304,9 @@ export const briefing: CasePart = {
         option('STR_USUL', 'Usul', {
           group: 'g_strateji',
           effects: [set('strategy', 'USUL'), set('strategy_pct', 120), ...p1.start()],
-          responses: B(`leyla: Ekran görüntüleri kararsız alındıysa yarı yoldasın. Yarısı. Mesajlar yine telefonda duruyor.`),
+          responses: B(
+            `leyla: Ekran görüntüleri kararsız alındıysa yarı yoldasın. Yarısı. Mesajlar yine telefonda duruyor.`,
+          ),
           next: 'INV_SABAH',
         }),
         option('STR_INDIRIM', 'Terditli savunma', {

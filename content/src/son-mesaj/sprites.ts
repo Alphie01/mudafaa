@@ -24,8 +24,8 @@ export const tarikSprite: SpriteDef = {
     '...knnnkknnnk...',
     '...knnnkknnnk...',
     '...knnnkknnnk...',
-    '..kkkkk..kkkkk..'
-  ]
+    '..kkkkk..kkkkk..',
+  ],
 };
 
 export const melisSprite: SpriteDef = {
@@ -50,8 +50,8 @@ export const melisSprite: SpriteDef = {
     '...knnnkknnnk...',
     '...knnnkknnnk...',
     '...knnnkknnnk...',
-    '..kkkkk..kkkkk..'
-  ]
+    '..kkkkk..kkkkk..',
+  ],
 };
 
 export const ozanSprite: SpriteDef = {
@@ -76,7 +76,6 @@ export const ozanSprite: SpriteDef = {
     '...kAAAkkAAAk...',
     '...kAAAkkAAAk...',
     '..kjjjjkkjjjjk..',
-    '.kkkkkkk.kkkkkk.'
-  ]
+    '.kkkkkkk.kkkkkk.',
+  ],
 };
-

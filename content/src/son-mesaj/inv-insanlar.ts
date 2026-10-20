@@ -442,7 +442,8 @@ export const invInsanlar: CasePart = {
           `),
         }),
         option('GUL_TANIK', 'Gerekirse mahkemede bunu anlatır mısınız?', {
-          neutral: 'Tanığa ne söyleyeceğini değil, ne gördüğünü sormak doğru yoldur; çağrılırsa tanık kendi bildiğini anlatır.',
+          neutral:
+            'Tanığa ne söyleyeceğini değil, ne gördüğünü sormak doğru yoldur; çağrılırsa tanık kendi bildiğini anlatır.',
           responses: B(`
             gulay: Çağırırlarsa gelirim. Nöbetim yoksa. Gördüğümü söylerim, gördüğümden fazlasını değil.
             gulay: Ama bakın: o bandı da, o saati de ben yazdım, imzam altında. Mahkeme kayıtları isterse, benim sözüm zaten o kâğıtta.
@@ -570,7 +571,10 @@ export const invInsanlar: CasePart = {
       title: 'Av. Sinan Bulut',
       background: 'kafe',
       room: { label: 'ADLİYE KANTİNİ', character: 'sinan' },
-      onFirstEnter: [{ type: 'MEET', character: 'sinan' }, { type: 'MEET', character: 'melis' }],
+      onFirstEnter: [
+        { type: 'MEET', character: 'sinan' },
+        { type: 'MEET', character: 'melis' },
+      ],
       lines: B(`
         # ADLİYE · KANTİN — 12.30 |bg=kafe
         > Kantin kalabalık; cübbeler sandalyelerin arkasına asılmış. Av. Sinan Bulut tek başına, önünde bir tost, yanında dört dosya.
@@ -588,15 +592,19 @@ export const invInsanlar: CasePart = {
             ~ Nokta. Bir avukat bana bir noktayı hediye etti.
           `),
         }),
-        option('SIN_DOGRUDAN', 'Melis Hanım’ı ben ararım; iki meslek insanı arasında, avukatsız konuşmak daha kolay olur.', {
-          score: { USUL_BILGISI: -50 },
-          effects: [inc('ethics'), raise('melis_dogrudan')],
-          bad: 'Avukatı bulunan karşı tarafla avukatı atlanarak doğrudan görüşmek meslek kurallarına aykırıdır; katılanı etkileme girişimi gibi de algılanır.',
-          responses: B(`
+        option(
+          'SIN_DOGRUDAN',
+          'Melis Hanım’ı ben ararım; iki meslek insanı arasında, avukatsız konuşmak daha kolay olur.',
+          {
+            score: { USUL_BILGISI: -50 },
+            effects: [inc('ethics'), raise('melis_dogrudan')],
+            bad: 'Avukatı bulunan karşı tarafla avukatı atlanarak doğrudan görüşmek meslek kurallarına aykırıdır; katılanı etkileme girişimi gibi de algılanır.',
+            responses: B(`
             sinan/kizgin: Denersen baroya yazarım. Ciddiyim. Müvekkilemle konuşacaksan benimle konuşursun.
             > Tostunu yarım bıraktı, dosyalarını topladı, kalktı.
           `),
-        }),
+          },
+        ),
         option('SIN_UYDURMA', 'Bu mesajları müvekkiliniz kendisi yazmış olabilir mi?', {
           score: { SAVUNMA_STRATEJISI: -40 },
           bad: 'Somut dayanak olmadan mağduru suçlamak hem savunmayı zayıflatır hem de iftira (TCK 267) riski doğurur. Mesajlar sanığın hesabında duruyor; mağdurun uydurduğuna dair tek bir veri yok.',
@@ -657,4 +665,3 @@ export const invInsanlar: CasePart = {
     }),
   ],
 };
-

@@ -113,7 +113,10 @@ export const hearing1: CasePart = {
       courtStage: 'SANIK_SAVUNMASI',
       background: 'durusma_salonu',
       say: [
-        { speaker: 'feride', text: 'Sanık, savunmanızı alalım. Müdafi, müvekkilinizle son kez görüşmek ister misiniz?' },
+        {
+          speaker: 'feride',
+          text: 'Sanık, savunmanızı alalım. Müdafi, müvekkilinizle son kez görüşmek ister misiniz?',
+        },
         { speaker: 'narrator', text: 'Tarık bana döndü. Gözleri bir şey soruyordu. Eğildim, kulağına fısıldadım.' },
       ],
       next: 'H1_02S',
@@ -155,7 +158,8 @@ export const hearing1: CasePart = {
           ],
         }),
         option('H102_B', 'Susma hakkını kullansın; savunmayı bilirkişi raporundan sonra yapsın.', {
-          neutral: 'Susma hakkı anayasal bir haktır (CMK 147/1-e) ve aleyhe yorumlanamaz; ama mazeretini kendi ağzından anlatma fırsatı bu celsede kullanılmamış oldu.',
+          neutral:
+            'Susma hakkı anayasal bir haktır (CMK 147/1-e) ve aleyhe yorumlanamaz; ama mazeretini kendi ağzından anlatma fırsatı bu celsede kullanılmamış oldu.',
           responses: B(`
             tarik: Sayın Hâkim, şu aşamada susma hakkımı kullanıyorum.
             > Savcı hafifçe gülümsedi. Hâkim yüzünü değiştirmedi; hakkın aleyhe yorumlanamayacağını biliyordu. Ben de biliyordum. Salon bilmiyordu.
@@ -190,7 +194,10 @@ export const hearing1: CasePart = {
       courtStage: 'SANIK_SAVUNMASI',
       background: 'durusma_salonu',
       say: [
-        { speaker: 'tolga', text: 'Bir sorum var Sayın Hâkim. Sanık, şifrenizi kimseyle paylaşmadığınıza göre bu mesajları siz gönderdiniz, öyle değil mi?' },
+        {
+          speaker: 'tolga',
+          text: 'Bir sorum var Sayın Hâkim. Sanık, şifrenizi kimseyle paylaşmadığınıza göre bu mesajları siz gönderdiniz, öyle değil mi?',
+        },
       ],
       next: 'H1_03',
       options: [
@@ -206,7 +213,8 @@ export const hearing1: CasePart = {
           `),
         }),
         option('H102S_B', 'Müvekkilim bu soruya cevap vermeyecek.', {
-          neutral: 'Sanık her soruda susma hakkını kullanabilir (CMK 147/1-e). Ama burada itiraz edilebilir bir soru vardı; susmak, sorunun izlenimini salonda bıraktı.',
+          neutral:
+            'Sanık her soruda susma hakkını kullanabilir (CMK 147/1-e). Ama burada itiraz edilebilir bir soru vardı; susmak, sorunun izlenimini salonda bıraktı.',
           responses: B(`
             tarik: Cevap vermeyeceğim.
             tolga: Not edilsin Sayın Hâkim.
@@ -224,7 +232,8 @@ export const hearing1: CasePart = {
         }),
         option('H102S_D', 'Bırak cevaplasın; saklayacak bir şeyi yok, kendisi anlatsın.', {
           effects: [ifThen(flag('fact_pay_sert'), [], [dec('pers')])],
-          neutral: 'Soru yönlendiriciydi; itiraz edilmedi. Hazırlıklı bir sanık bundan zarar görmeyebilir, hazırlıksız biri görür.',
+          neutral:
+            'Soru yönlendiriciydi; itiraz edilmedi. Hazırlıklı bir sanık bundan zarar görmeyebilir, hazırlıksız biri görür.',
           responses: [
             W(
               flag('fact_pay_sert'),
@@ -306,7 +315,10 @@ export const hearing1: CasePart = {
       background: 'durusma_salonu',
       prosecutionEvidence: 'ev_ss',
       say: [
-        { speaker: 'tolga', text: 'Sayın Hâkim, Şube’nin tespit ettiği on dört ekran görüntüsünün okunmasını ve delil olarak değerlendirilmesini talep ediyorum.' },
+        {
+          speaker: 'tolga',
+          text: 'Sayın Hâkim, Şube’nin tespit ettiği on dört ekran görüntüsünün okunmasını ve delil olarak değerlendirilmesini talep ediyorum.',
+        },
         { speaker: 'feride', text: 'Okundu. Müdafi, diyeceğiniz?' },
       ],
       next: 'H1_05',
@@ -454,7 +466,11 @@ export const hearing1: CasePart = {
           effects: [
             ...wrongEvidence,
             score('SORGULAMA', -150, 'hatali'),
-            mark('BAD', 'Bu, savcılığın iddiasını taşıyan bir delil; tanığın ifadesini çürütmez, iddiayı tekrarlar.', 'SORGULAMA'),
+            mark(
+              'BAD',
+              'Bu, savcılığın iddiasını taşıyan bir delil; tanığın ifadesini çürütmez, iddiayı tekrarlar.',
+              'SORGULAMA',
+            ),
           ],
           responses: B(`
             tolga: Sayın Hâkim, müdafi bizim delilimizi sunuyor. Teşekkür ederiz.
@@ -474,7 +490,11 @@ export const hearing1: CasePart = {
         }),
         presentRule('PS_S1A', 'S1', ['ded_ss'], {
           score: { SORGULAMA: 300 },
-          effects: [inc('pers', 2), raise('contra_s1'), mark('GOOD', 'Rıza belgelenmemiş, görüntüler karardan önce: tanığın “rıza” anlatımı çöktü.', 'SORGULAMA')],
+          effects: [
+            inc('pers', 2),
+            raise('contra_s1'),
+            mark('GOOD', 'Rıza belgelenmemiş, görüntüler karardan önce: tanığın “rıza” anlatımı çöktü.', 'SORGULAMA'),
+          ],
           responses: B(`
             P: 15.44. Görüntüler. 13 Kasım 10.20. Karar. İmza hanesi boş. “İmzadan kaçındı” şerhi yok. Bu rızayı kim verdi Komiser Bey?
             hakan/saskin: Şüpheli… telefonu kendisi verdi.
@@ -485,7 +505,11 @@ export const hearing1: CasePart = {
         presentRule('PS_S1B', 'S1', ['ev_tutanak'], {
           enabledWhen: all(flag('press_s1'), has('clue_imza_yok')),
           score: { SORGULAMA: 150 },
-          effects: [inc('pers'), raise('contra_s1'), mark('GOOD', 'Tanığın kendi tutanağı rızayı belgelemiyor.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('contra_s1'),
+            mark('GOOD', 'Tanığın kendi tutanağı rızayı belgelemiyor.', 'SORGULAMA'),
+          ],
           responses: B(`
             P: Kendi tutanağınız. Son satır. Şüpheli imzası: noktalar. Bu bir rıza mı?
             hakan: Sonradan alınacaktı.
@@ -510,7 +534,11 @@ export const hearing1: CasePart = {
         }),
         presentRule('PS_S2', 'S2', ['ded_zincir'], {
           score: { SORGULAMA: 300 },
-          effects: [inc('pers', 2), raise('contra_s2'), mark('GOOD', 'Mühürsüz geçen iki gün ve Şube’deki son kilit açılışı: delil zinciri belgesiz.', 'SORGULAMA')],
+          effects: [
+            inc('pers', 2),
+            raise('contra_s2'),
+            mark('GOOD', 'Mühürsüz geçen iki gün ve Şube’deki son kilit açılışı: delil zinciri belgesiz.', 'SORGULAMA'),
+          ],
           responses: B(`
             P: “Güvence altına aldık” diyorsunuz. Nasıl? Mühürlü bir torbayla mı, kayıtlı bir emanet defteriyle mi?
             hakan: Kahverengi bir zarfa koyduk, ağzını bantladık. Benim çekmecem kilitlidir.
@@ -537,7 +565,11 @@ export const hearing1: CasePart = {
           effects: [
             inc('pers', 2),
             raise('contra_s3'),
-            mark('GOOD', 'Raporun kendi Ek-3 tablosu ve hesap verisi: tehditler telefondan değil, hesaba bağlı bir masaüstü oturumundan gönderildi.', 'SORGULAMA'),
+            mark(
+              'GOOD',
+              'Raporun kendi Ek-3 tablosu ve hesap verisi: tehditler telefondan değil, hesaba bağlı bir masaüstü oturumundan gönderildi.',
+              'SORGULAMA',
+            ),
           ],
           responses: B(`
             P: Kendi raporunuzun Ek-3’ü. En sağdaki sütun: gönderen cihaz numarası. Tarık’ın 25 Ekim’deki kendi mesajları: cihaz 0. Peki ya üç tehdit ve iletilen ses kaydı?
@@ -554,7 +586,11 @@ export const hearing1: CasePart = {
         presentRule('PS_S3B', 'S3', ['ev_imaj'], {
           enabledWhen: has('clue_cihaz3'),
           score: { SORGULAMA: 150 },
-          effects: [inc('pers'), raise('partial_s3'), mark('GOOD', 'Ek-3’teki cihaz sütununu gösterdin; ama cihaz 3’ün ne olduğunu kuramadın.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('partial_s3'),
+            mark('GOOD', 'Ek-3’teki cihaz sütununu gösterdin; ama cihaz 3’ün ne olduğunu kuramadın.', 'SORGULAMA'),
+          ],
           responses: B(`
             P: Kendi raporunuz, Ek-3. Gönderen cihaz: Tarık’ın mesajlarında 0, tehditlerde 3. Cihaz 3 nedir?
             hakan: Teknik bir ayrıntı. Aynı hesap.
@@ -564,7 +600,16 @@ export const hearing1: CasePart = {
         }),
         presentRule('PS_S3C', 'S3', ['ded_hastane'], {
           score: { SORGULAMA: 150 },
-          effects: [inc('pers'), raise('partial_s3'), raise('kilit_mahkemede'), mark('GOOD', '9 Kasım gecesi telefon kilitli ve şarjdaydı: “onun eliyle” anlatımı en azından bir gece için çöktü.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('partial_s3'),
+            raise('kilit_mahkemede'),
+            mark(
+              'GOOD',
+              '9 Kasım gecesi telefon kilitli ve şarjdaydı: “onun eliyle” anlatımı en azından bir gece için çöktü.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
             P: 9 Kasım, 02.14. Raporunuzun Ek-2’sine göre telefon 01.40’tan 06.10’a kadar kilitli. Müvekkilim 02.10’da acil serviste bir onam formu imzalıyor.
             hakan: Telefon kilitliyken de… bildirimden… yani…
@@ -584,7 +629,11 @@ export const hearing1: CasePart = {
         }),
         presentRule('PS_S4A', 'S4', ['ded_zincir'], {
           score: { SORGULAMA: 200 },
-          effects: [inc('pers'), raise('contra_s4'), mark('GOOD', 'Hash, alındığı andan sonrasını korur; öncesini değil. İki gün belgesiz.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('contra_s4'),
+            mark('GOOD', 'Hash, alındığı andan sonrasını korur; öncesini değil. İki gün belgesiz.', 'SORGULAMA'),
+          ],
           responses: B(`
             P: Hash, imajın alındığı anın parmak izidir. 14 Kasım’dan sonrası için “bütünlük tam” diyebilirsiniz. 12 ile 14 arası için hangi parmak izi var?
             hakan: …Yok.
@@ -593,7 +642,11 @@ export const hearing1: CasePart = {
         presentRule('PS_S4B', 'S4', ['ev_imaj'], {
           enabledWhen: all(flag('press_s4'), has('clue_son_erisim')),
           score: { SORGULAMA: 150 },
-          effects: [inc('pers'), raise('contra_s4'), mark('GOOD', 'Raporun kendi Ek-2’si: son kilit açılışı imajdan iki gün önce.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('contra_s4'),
+            mark('GOOD', 'Raporun kendi Ek-2’si: son kilit açılışı imajdan iki gün önce.', 'SORGULAMA'),
+          ],
           responses: B(`
             P: Raporunuzun Ek-2’si. Son kilit açılışı 12 Kasım 15.52. Hash 14 Kasım’da. Arada açılmış bir telefon. “Bütünlük tam” mı?
             hakan: O açılış… bizim incelememizdi.
@@ -608,7 +661,15 @@ export const hearing1: CasePart = {
         }),
         objectRule('OB_S5', 'S5', 'g_kanaat', {
           score: { USUL_BILGISI: 80 },
-          effects: [inc('legal_hits'), inc('pers'), mark('GOOD', 'Tanık olguyu anlatır; genelleme ve kişisel kanaati delil değildir (CMK 217). İtiraz yerinde.', 'USUL_BILGISI')],
+          effects: [
+            inc('legal_hits'),
+            inc('pers'),
+            mark(
+              'GOOD',
+              'Tanık olguyu anlatır; genelleme ve kişisel kanaati delil değildir (CMK 217). İtiraz yerinde.',
+              'USUL_BILGISI',
+            ),
+          ],
           responses: B(`
             P: İtiraz ediyorum. Tanık gördüğünü değil, kanaatini anlatıyor.
             feride: Kabul. Tanık, yalnızca bu dosyada yaptıklarınızı anlatın.
@@ -616,7 +677,11 @@ export const hearing1: CasePart = {
         }),
       ],
       presentMiss: fallback('FB_H1_PRESENT', 'PRESENT', {
-        effects: [...wrongEvidence, score('SORGULAMA', -150, 'hatali'), mark('BAD', 'Sunduğun delil bu ifadeyle çelişmiyor.', 'SORGULAMA')],
+        effects: [
+          ...wrongEvidence,
+          score('SORGULAMA', -150, 'hatali'),
+          mark('BAD', 'Sunduğun delil bu ifadeyle çelişmiyor.', 'SORGULAMA'),
+        ],
         responses: B(`feride: Müdafi, bu delilin bu ifadeyle ilgisini göremedim.`),
       }),
       objectMiss: fallback('FB_H1_OBJECT', 'OBJECT', {
@@ -673,7 +738,8 @@ export const hearing1: CasePart = {
         option('T1_ISP_GENEL', 'Hesaba bağlanan bütün IP adreslerinin araştırılması', {
           visibleWhen: { not: has('clue_ip_ayni') },
           cost: [{ var: 'slots2', amount: 1 }],
-          neutral: 'Hangi adres, hangi zaman? Belirsiz talepler reddedilir. Hesap verisindeki oturum kayıtları talebi somutlaştırırdı.',
+          neutral:
+            'Hangi adres, hangi zaman? Belirsiz talepler reddedilir. Hesap verisindeki oturum kayıtları talebi somutlaştırırdı.',
           responses: B(`feride: Hangi adres müdafi? Hangi saat? Bu hâliyle talep reddedildi.`),
           next: '$stay',
         }),
@@ -703,9 +769,19 @@ export const hearing1: CasePart = {
               [
                 raise('adli_kontrol_kalkti'),
                 score('USUL_BILGISI', 30),
-                mark('GOOD', 'Delil durumu değişti; ölçülülük gereği adli kontrol kaldırılabilir (CMK 109, 110).', 'USUL_BILGISI'),
+                mark(
+                  'GOOD',
+                  'Delil durumu değişti; ölçülülük gereği adli kontrol kaldırılabilir (CMK 109, 110).',
+                  'USUL_BILGISI',
+                ),
               ],
-              [mark('NEUTRAL', 'Delil durumu değişmeden adli kontrolün kaldırılması talebi kabul görmez.', 'USUL_BILGISI')],
+              [
+                mark(
+                  'NEUTRAL',
+                  'Delil durumu değişmeden adli kontrolün kaldırılması talebi kabul görmez.',
+                  'USUL_BILGISI',
+                ),
+              ],
             ),
           ],
           responses: [
@@ -748,7 +824,10 @@ export const hearing1: CasePart = {
       ...C3,
       title: 'Ara karar',
       lines: [
-        W(isp(), `feride: İki: 85.105.44.17 adresinin belirtilen tarih ve saatlerdeki abone bilgisinin servis sağlayıcıdan sorulmasına.`),
+        W(
+          isp(),
+          `feride: İki: 85.105.44.17 adresinin belirtilen tarih ve saatlerdeki abone bilgisinin servis sağlayıcıdan sorulmasına.`,
+        ),
         W(flag('hayri_istendi'), `feride: İki: tanık Hayri Sezer’in gelecek celsede dinlenmesine.`),
         O(`feride: İki: katılan vekilinin bildirdiği tanık Ozan Tekin’in gelecek celsede dinlenmesine.`),
       ],

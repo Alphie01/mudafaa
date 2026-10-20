@@ -258,8 +258,10 @@ export const evidencePart: CasePart = {
     clue('clue_vakif_yazi', {
       type: 'BELGE',
       title: 'Vakfa gelen yazı [10 Kasım 09.12]',
-      shortText: 'Tekin Yapı’dan kurula: “ortak girişimin bir üyesine ilişkin özel kayıtların dolaşımda olduğu... Saygılar.”',
-      description: 'Vakfın gelen evrak defteri. Ses kaydının iletilmesinden yedi saat sonra; dedikodu yayılmadan bir hafta önce.',
+      shortText:
+        'Tekin Yapı’dan kurula: “ortak girişimin bir üyesine ilişkin özel kayıtların dolaşımda olduğu... Saygılar.”',
+      description:
+        'Vakfın gelen evrak defteri. Ses kaydının iletilmesinden yedi saat sonra; dedikodu yayılmadan bir hafta önce.',
       sourceLabel: 'Bursa Kültür Vakfı',
       icon: 'document',
       tags: K,

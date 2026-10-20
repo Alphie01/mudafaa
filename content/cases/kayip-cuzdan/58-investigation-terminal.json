@@ -1,0 +1,199 @@
+{
+  "nodes": [
+    {
+      "id": "INV_TERMINAL",
+      "type": "CHOICE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #01 · SORUŞTURMA",
+      "title": "Kent Ulaşım terminali",
+      "background": "depo",
+      "prompt": {
+        "speaker": "narrator",
+        "text": "Kayıp eşya bürosunun tezgâhı. Arkada hareket memurluğunun camı. Ne soracaksın?"
+      },
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "09.05 — KENT ULAŞIM TERMİNALİ, KAYIP EŞYA BÜROSU",
+              "bg": "depo",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Terminalin en arka köşesinde, tuvaletlerle kantin arasında küçük bir oda. Kapısında el yazısıyla: “KAYIP EŞYA — 09.00–17.00 (CMT 09.00–13.00)”."
+            },
+            {
+              "speaker": "narrator",
+              "text": "İçeride metal raflar. Şemsiyeler. Yüzlerce şemsiye. Bir çocuk bisikleti, bir koli anahtar, tek eşi kalmış eldivenler, bir gelinlik kutusu."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir şehrin unuttukları burada bekliyor. Kimse almaya gelmiyor. Gelenler de çoğu zaman aradığını bulamıyor.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "name": "BÜRO MEMURU", "text": "Buyurun abla. Kayıp mı, buluntu mu?" },
+            { "speaker": "player", "text": "Ne kayıp ne buluntu. Bir dava. Avukatım." },
+            {
+              "speaker": "narrator",
+              "name": "BÜRO MEMURU",
+              "text": "Eyvah. Avukat gelince ya bir şey kaybolmuştur ya biri."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "TR_SAAT",
+          "kind": "OPTION",
+          "label": "“Cumartesi sabahı kaçta açılıyorsunuz?”",
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "name": "BÜRO MEMURU",
+                  "text": "Dokuzda. Cumartesi de dokuzda, öğlene kadar. Kapıda yazıyor ama kimse okumaz."
+                },
+                {
+                  "speaker": "narrator",
+                  "name": "BÜRO MEMURU",
+                  "text": "Cuma akşamı bulan cumartesi dokuzda gelir, öyle bir alışkanlık var. Polise götüren de olur, buraya getiren de. İkisi de olur."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Dokuz. “Yarın 9 — karakol.” Arda o saati bir yerden duymuştu. Ya da öyle bir saat, bir öğretmen adayına doğru gelmişti.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_buro_dokuz", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TR_DEFTER",
+          "kind": "OPTION",
+          "label": "“7 Mart’ta Hat 38’den bir cüzdan teslim edildi mi?”",
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Memur kalın, mavi kapaklı bir defteri açtı, parmağını satırlarda gezdirdi."
+                },
+                {
+                  "speaker": "narrator",
+                  "name": "BÜRO MEMURU",
+                  "text": "7 Mart… Bir şemsiye, bir kartlı cüzdan değil, bir okul çantası. Hat 38’den yok. Ama o sabah polis gelmişti, teknik odaya."
+                },
+                {
+                  "speaker": "narrator",
+                  "name": "BÜRO MEMURU",
+                  "text": "Polisler gelince ortalık karışır. Bizim defter o gün yarım kaldı zaten."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "VAR", "var": "fact_buro_defter", "op": "set", "value": true }]
+        },
+        {
+          "id": "TR_KLASOR",
+          "kind": "OPTION",
+          "label": "Hareket memurluğuna: “Polis kayıt isteyince ne oluyor?”",
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Hareket memurluğunun camı açıldı. Kulaklıklı, kırk yaşlarında bir adam başını uzattı."
+                },
+                {
+                  "speaker": "narrator",
+                  "name": "HAREKET MEMURU",
+                  "text": "Kayıt mı? Teknik odası halleder. Polis isteyince o seferin bir saatini, dört kamerayı birden “olay klasörü”ne alırlar. İki yıl durur."
+                },
+                {
+                  "speaker": "narrator",
+                  "name": "HAREKET MEMURU",
+                  "text": "CD’ye ne isterlerse onu basarlar. Polis “şu dakika” der, o dakika basılır. Klasör yerinde kalır. Mahkeme yazı yazsın, gönderirler."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Olay klasörü. Bir saat, dört kamera, iki yıl. Ve bir CD’ye basılmış iki buçuk dakika.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_olay_klasoru" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ]
+        },
+        {
+          "id": "TR_RECEP",
+          "kind": "OPTION",
+          "label": "“Şoför Recep Ateş’i tanıyor musunuz?”",
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "name": "HAREKET MEMURU",
+                  "text": "Recep abi? Tanımayan yok. İyi adamdır. Yorgundur. Geçen yıl iki tutanak yedi; unutulan çanta, geç teslim falan."
+                },
+                {
+                  "speaker": "narrator",
+                  "name": "HAREKET MEMURU",
+                  "text": "Üçüncüsü olursa… Neyse. Ben bir şey demedim abla. Siz de duymadınız."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Duydum. Bir adamın neden yalan söyleyebileceğini öğrenmek, yalan söylediğini öğrenmek değildir. Ama bir başlangıçtır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_recep_tutanak", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TR_ISIM",
+          "kind": "OPTION",
+          "label": "“O sabah polise CD’yi kim hazırladı? Adını verir misiniz?”",
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "name": "HAREKET MEMURU",
+                  "text": "Volkan. Teknikte. Gece vardiyası. Formda adı yazar zaten, imzalar o."
+                },
+                {
+                  "speaker": "narrator",
+                  "name": "HAREKET MEMURU",
+                  "text": "Ama Volkan’ı sıkıştırmayın abla. Gece yarısı polis gelir, “şunu bas” der, basar. Çocuk teknik adam, hukukçu değil."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "VAR", "var": "fact_volkan_adi", "op": "set", "value": true }]
+        },
+        { "id": "TR_BITIR", "kind": "CONTINUE", "label": "Teşekkür edip çık", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ],
+  "discoveryPaths": [{ "evidence": "clue_olay_klasoru", "source": { "type": "CHOICE", "id": "TR_KLASOR" } }]
+}

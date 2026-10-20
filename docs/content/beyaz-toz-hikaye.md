@@ -74,9 +74,9 @@
 | 10 Kasım 01.30 | Tolga ifadesinde "Daire 7'den, Kaan'dan aldım" der; ama "kapıyı açanın elinde kask vardı" diye bir ayrıntı kaçırır. | Tolga'nın ifadesi (belge incelemesi) |
 | 10 Kasım 14.15 | Sulh ceza hâkimliği arama kararı verir: "şüphelinin kullanımındaki oda, ortak alanlar ve üzeri"; 48 saat. | Arama kararı (belge incelemesi) |
 | 10 Kasım 22.40 | Barış, Kaan'a yazar: "bu gece geç gelirim, odaya girme sakın". | Mesaj dökümü |
-| 11 Kasım 06.05 | Baskın. Kaan ön odada uyurken yakalanır. Arka oda kilitli; polis kilidi keskiyle keser. 46 paket, terazi, poşet, 8.750 TL. Mutfaktaki şekerlikte 2 paket. | Tutanak, kroki, fotoğraflar |
-| 06.20 | Barış motosikletiyle köşeye gelir, polis araçlarını görür, döner. Nesrin sabah namazına kalkmıştır, pencereden görür. | Nesrin; Paketçi GPS kaydı (06.21) |
-| 06.40 | Nesrin aramaya tanık olarak çağrılır; arka oda kapısı çoktan açılmıştır. Tutanağa "arama başında hazır" diye yazılır. | Nesrin; tutanakta imza saati |
+| 11 Kasım 07.00 | Baskın. Kaan ön odada uyurken yakalanır. Arka oda kilitli; polis kilidi keskiyle keser. 46 paket, terazi, poşet, 8.750 TL. Mutfaktaki şekerlikte 2 paket. | Tutanak, kroki, fotoğraflar |
+| 07.15 | Barış motosikletiyle köşeye gelir, polis araçlarını görür, döner. Nesrin her sabahki gibi erkenden kalkmıştır, pencereden görür. | Nesrin; Paketçi GPS kaydı (07.16) |
+| 07.35 | Nesrin aramaya tanık olarak çağrılır; arka oda kapısı çoktan açılmıştır. Tutanağa "arama başında hazır" diye yazılır. | Nesrin; tutanakta imza saati |
 | 12 Kasım | Barış Paketçi'den "kendi isteğiyle" ayrılır; Kaan tutuklanır. | Paketçi kayıtları |
 | Aralık | Kriminal rapor: 46 paket net 39,8 g kokain; şekerlikteki 2 paket aynı poşet ve gramaj (0,85 g); terazide şüpheliyle uyuşmayan bir parmak izi; şekerlik kavanozunda Kaan'ın izi. Saç analizi: son üç ayda kullanım. İddianame: TCK 188/3, 188/4-a. | Kriminal rapor, saç analizi |
 | 14 Ocak | Defne Arslan Hukuk'a gelir. 1. celseye 12 gün var. | Bölüm 1 |
@@ -124,7 +124,7 @@ T_COKUS (♥0) → T_08
 - Köşede üç araç farlarını söndürür. Biri bir keski uzatır. `fx: fade`.
 - **Kural:** iki ses de kimliksizdir; kimin konuştuğu, kimin dinlediği söylenmez.
 
-### PR_02 — "06.05" baskın (~550) · bg: ev
+### PR_02 — "07.00" baskın (~550) · bg: ev
 - Kapı vurulur (`shake`). Kaan ön odada, kulaklıkla uyuyakalmıştır. Narkotik ekibi içeri dolar.
 - Tuncay: "Kaan Yıldız? Arama kararı var. Kalk." Kaan: "Ben… arka oda benim değil." Tuncay: "Ev senin üstüne değil mi?"
 - Keskinin metal sesi (`flash`, bir fotoğraf makinesi patlar). Ayakkabı kutusundan paketler. Mutfakta şekerlik.
@@ -175,7 +175,7 @@ taşıdım. Siz satıcı diyorsunuz."
 
 **INV_NESRIN — Zemin kat (~1.000) · bg: ev:** Kediler, çay, rahmetlinin dikiş makinesi. Doğru yaklaşım sabır ve açık uçlu
 soru; "Barış'ı gördünüz, değil mi?" gibi yönlendirici soru `nesrin_telkin` olur (kürsüde bedeli ödenir). Kira defteri,
-06.20'de dönen motor, kapının "ben çıkınca zaten kırılmıştı" hâli.
+07.15'te dönen motor, kapının "ben çıkınca zaten kırılmıştı" hâli.
 
 **Belge incelemeleri (~250 her biri):** Tutanak ve kroki (UV değil, büyüteç ve karşılaştırma); arama kararı (kapsam);
 mesaj dökümü (odaya girme, iki tane, hat sahibi); kriminal rapor (yabancı iz, aynı parti, kavanoz izi); Tolga'nın
@@ -196,7 +196,7 @@ ifadesi (kask, saat).
 - ARA_GIRIS: Tahliye edildiyse adliye merdiveninde Defne ile Kaan'ın sessiz sarılması; değilse ring aracının camı.
 - ARA_SELIM (~600, bg: kafe — kurye durağı): Barış'ın gerçek adı soyadı, astarını kendi diktiği çanta, "Tolga diye biri
   sık uğrardı", 12 Kasım sabahı gelen "abi ben bırakıyorum" mesajı.
-- ARA_GPS (belge): Paketçi kayıtları (istenmişse): 06.21 Ihlamur Sok. "teslimat iptal"; ayrılış 12 Kasım; İzmir adresi.
+- ARA_GPS (belge): Paketçi kayıtları (istenmişse): 07.16 Ihlamur Sok. "teslimat iptal"; ayrılış 12 Kasım; İzmir adresi.
 - ARA_ZRAPOR (belge): Kahve Durağı Z raporu, kasa kapanışı 23.41 — Tolga'nın "23.00, Kaan sattı" anlatısının altı oyulur.
 - ARA_KAAN (~500): rıza. "Söyleyeceğim. Annemi ben arayacağım, sizden önce."
 - ARA_DEFNE (~500): **Etik tuzak.** "Barış'ın arkadaşı Okan, biraz para verirsek 'Barış bana itiraf etti' der." Doğru:

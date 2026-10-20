@@ -33,7 +33,7 @@ etiketlemiş, tanığı kapı açıldıktan sonra çağırmıştır. Kronoloji: 
 | ev_kira | Kira sözleşmesi | EVIDENCE (savcılık) | başlangıç | savcılık tezi | evet (cezalı kural) |
 | ev_sac | Saç analizi raporu | EVIDENCE (savcılık) | başlangıç | kullanım | evet (cezalı kural) |
 | ev_tedavi | Epikriz ve AMATEM kayıtları | EVIDENCE | INV_DEFNE | kullanıcı profili | evet (S5) |
-| ev_kurye | Paketçi personel ve GPS kayıtları | EVIDENCE | DIL_KURYE / TL_KURYE → ARA girişi | kimlik, 9 Kasım 23.00 ve 11 Kasım 06.21 | evet (T3) |
+| ev_kurye | Paketçi personel ve GPS kayıtları | EVIDENCE | DIL_KURYE / TL_KURYE → ARA girişi | kimlik, 9 Kasım 23.00 ve 11 Kasım 07.16 | evet (T3) |
 | ev_zrapor | Kahve Durağı Z raporu | EVIDENCE | ARA_ZRAPOR | mazeret (23.41) | evet (T4) |
 | ev_canta | El konulan kurye çantası | EVIDENCE | ARA_BODRUM → BD_SAVCI → T_00 | gizli bölme, bulaşık | evet (T1 kısmi) |
 | ev_iz_eslesme | Parmak izi karşılaştırma raporu | EVIDENCE | SC_KIMLIK + TEL_A → Barış yakalanır → T_00 | terazideki iz Barış'ın | evet (T1) |
@@ -47,8 +47,8 @@ etiketlemiş, tanığı kapı açıldıktan sonra çağırmıştır. Kronoloji: 
 | clue_tolga_kask · clue_tolga_saat | muhbir ifadesi | CLUE | INV_TOLGA | kask; 23.00 | tahta |
 | clue_anahtarlik | emanet | CLUE | INV_EMANET | asma kilit anahtarı yok | tahta |
 | clue_kaan_olcu · clue_tedavi | kişiler, emanet | CLUE | TP_KENDI / DF_GUNLUK; DF_TEDAVI / TP_TEDAVI / EX_EMA_ILAC | 41 numara, ehliyet yok; tedavi | tahta |
-| clue_kira_defteri · clue_nesrin_moto | Nesrin | CLUE | INV_NESRIN | Barış'ın kiracılığı; 06.20 motor | tahta / ara tahta |
-| clue_gps · clue_istifa | Paketçi | CLUE | ARA_GPS | 06.21; ertesi gün ayrılış | ara tahta |
+| clue_kira_defteri · clue_nesrin_moto | Nesrin | CLUE | INV_NESRIN | Barış'ın kiracılığı; 07.15 motor | tahta / ara tahta |
+| clue_gps · clue_istifa | Paketçi | CLUE | ARA_GPS | 07.16; ertesi gün ayrılış | ara tahta |
 | clue_selim_tolga · clue_selim_astar | Selim Usta | CLUE | ARA_SELIM | Tolga ↔ Barış; astar | ara tahta |
 | clue_z_rapor | kafe | CLUE | ARA_ZRAPOR | 23.41 | ara tahta |
 
@@ -92,14 +92,21 @@ Yanlış çift −50 (her çift bir kez). Kaçış araması için havuzlar yaln�
 ## 5. Sonuçlar
 | Öncelik | Kimlik | Sınıf | Koşul | Hüküm | XP |
 |---|---|---|---|---|---|
-| 1 | TELKIN | CONVICTION + etik kartı | okan_tanik (para karşılığı tanık kürsüye çıktı) | 188/3 + 188/4-a: 15 yıl, 1.500 gün (150.000 TL) | 0 |
+| 1 | TELKIN | CONVICTION + etik kartı | okan_tanik (para karşılığı tanık kürsüye çıktı) | 188/3 + 188/4-a, TCK 62/1: 12 yıl 6 ay, 1.250 gün (125.000 TL); arka oda materyali `contra_s3` varsa dışlanır | 0 |
 | 2 | BERAAT_B | ACQUITTAL (223/2-b) | ¬çöküş ∧ tolga_kirildi ∧ ev_iz_eslesme ∧ gercek_fail ∧ ikna ≥ 8 ∧ final ≥ 11.000 | ceza yok | 1,2 |
-| 3 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ beraat_e (contra_s2 ∧ jar_cleared ∧ (contra_t3 ∨ contra_t4 ∨ tolga_kirildi)) ∧ (beraat_savunma ∨ terditli) ∧ ikna ≥ 6 ∧ final ≥ 10.500 | ceza yok | 1,0 |
-| 4 | NITELIK_191 | RECHARACTERIZED | ¬çöküş ∧ (contra_s2 ∨ terditli) ∧ ek_savunma ∧ final ≥ 3.000 | 191/1: 2 yıl; 191/8 HAGB | 0,85 |
+| 3 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ beraat_e (contra_s2 ∧ jar_cleared ∧ (contra_t3 ∨ contra_t4 ∨ contra_t5 ∨ tolga_kirildi ∨ key_excluded)) ∧ final ≥ 7.500 | ceza yok | 1,0 |
+| 4 | NITELIK_191 | RECHARACTERIZED | ¬çöküş ∧ ¬jar_cleared ∧ (contra_s2 ∨ terditli) ∧ ek_savunma ∧ (contra_s5 ∨ kaan_durust) ∧ muhbir en az bir kez sorgulandı ∧ final ≥ 5.500 | 191/1: 2 yıl; 191/8 HAGB | 0,85 |
 | 5 | MAHKUMIYET | CONVICTION (varsayılan; çöküş varyantı) | — | 12 yıl 6 ay, 1.250 gün (125.000 TL) | 0,6 |
 
 Mütalaa yönlendirmesi (T_05): tolga_kirildi ∧ ev_iz_eslesme → T_05B (beraat, Barış hakkında soruşturma); beraat_e →
-T_05E (şüphe beraati); contra_s2 → T_05N (191 + CMK 226 ek savunma); diğer → T_05M (188). Ceza hesabı: hukuki notlar §2.
+T_05E (şüphe beraati); contra_s2 ∧ ¬jar_cleared → T_05N (191 + CMK 226 ek savunma); diğer → T_05M (188). Ceza hesabı:
+hukuki notlar §2.
+
+Gerekçe satırları bayraklara bağlıdır ve duruşmada çürütülmüş bir olguya dayanmaz: MAHKÛMİYET'te arka oda satırı
+yalnızca `¬key_excluded`, şekerlik satırı yalnızca `¬jar_cleared`, “muhbir sarsılmadı” satırı yalnızca muhbir
+sarsılmadıysa okunur; muhbir sarsıldıysa heyetin çelişkileri “çevresel” sayan takdiri, döndüyse iki beyanın da esas
+alınmadığı yazılır. Zincir kurulduğu hâlde puan eşiğin altında kalırsa (`beraat_e` ∧ final < 7.500) epilogda Leyla
+gerekçenin istinafta zor duracağını söyler (bkz. hukuki notlar §4-12).
 
 ## 6. Skor
 - Kategoriler ve döküm satırları kılavuzdaki gibi; güvenilirlik bonusu cred × 100.
@@ -107,8 +114,8 @@ T_05E (şüphe beraati); contra_s2 → T_05N (191 + CMK 226 ek savunma); diğer 
   −20; tarif +300, yanlış çift −50; BASTIR +25/+50; doğru sunum +300, kısmi +100, yanlış −150 (♥−1); usul itirazı/talebi
   +30…+150, dayanaksız −40/−50 (♥−1); esas savunma +200 (strateji çarpanı yalnızca uyumlu savunmada: 2-b ↔ Masumiyet,
   2-e ↔ Usul, terditli ↔ İndirim); dayanak +40/−40; etik sınır ihlalleri −40…−100.
-- Eşik çubuğu: Mahkûmiyet 0 · Nitelik 3.000 · Beraat 10.500; `scaleMax` 10.000 (doğrulayıcının en yüksek ölçtüğü final
-  12.595 civarı; çubuk taşar, bilinçli). 223/2-b ayrıca 11.000 ister.
+- Eşik çubuğu: Mahkûmiyet 0 · Nitelik 5.500 · Beraat 7.500; `scaleMax` 10.000 (tipik final 12.145; çubuk taşar,
+  bilinçli). 223/2-b ayrıca 11.000 ister.
 
 ## 7. Node grafiği özeti
 `PROLOG → PR_02 → BR_00 → BR_00L → BR_01 → BR_01B → BR_02 → INV_SABAH → INV_HUB` (3 gün × 5 EP; Leyla günde bir, 0 EP).
@@ -125,6 +132,7 @@ T_03 → T_03S → T_04 → T_04R → (T_04B) → T_05 → T_05B/E/N/M → T_06P
 | Ad | Sonuç | Özet |
 |---|---|---|
 | TIPIK | BERAAT_E | Her mekânı dolaşan, birkaç hata yapan oyuncu: oda varsayımı çöker, şekerlik 2. celsede aklanır, muhbir kask ve saatte çöker ama adı vermez; esas savunma 223/2-e. |
+| G_E2 | BERAAT_E | Muhbir ayakta kalır (sorgu zayıf), ama arka oda materyali dışlanmış ve şekerlik aklanmıştır; geriye desteksiz tek beyan kalır; esas savunma duygusal olsa da zincir beraat getirir. |
 | G_B | BERAAT_B | Kimlikle suç duyurusu + gece telefonunun bildirimi + bodrum çantasının usulüne uygun el konulması; Barış yakalanır, iz eşleşir; muhbir çözülür; esas savunma 223/2-b. |
 | G_N | NITELIK_191 | Oda varsayımı çöker, kriminal rapor ve muhbir ifadesi okunmaz; şekerlik ve muhbir ayakta kalır; ek savunma ve terditli savunma. |
 | G_M | MAHKUMIYET | Yönlendirici tanık sorusu, yanlış deliller, dayanaksız itirazlar; oda varsayımı ayakta. |
@@ -138,15 +146,19 @@ T_03 → T_03S → T_04 → T_04R → (T_04B) → T_05 → T_05B/E/N/M → T_06P
   (2-b yolunda) parmak iziyle kurulur. Gece telefonundaki Barış satıcılığı inkâr eder ve Tolga'yı işaret eder (çeldirici).
   Tipik yolun satır dökümü taranarak 4. kattaki “perde” satırı soğuk açılıştan çıkarıldı (Kaan'ın evde olduğunu ima
   ediyordu).
-- **Etiketler:** ceza aralığı seçenekleri aynı biçime getirildi; yanlış itiraz seçeneklerinden biri madde atfı taşır
-  (CMK 217, CMK 118) ki doğru seçenek yalnızca atıf taşıdığı için seçilmesin.
-- **En kısa beraat:** (a) Elle kurulan en yoğun yol (her eylemi en yüksek puanlı bulguya harcayan, ara evreyi atlayan)
-  104 eylemde 8.390 puana ulaşır ve eşiğin altında kalır; 10.500'e ulaşmak için ara evre kayıtları (Z raporu, GPS,
-  ara tahtası, T4 sunumu), ek belge satırları ve duruşma bastırmaları gerekir: ~135–140 eylem (tipik yolun %65–68'i).
-  (b) `enumerateActions` üzerinde puan + anahtar bayrak sezgiselli ışın araması (genişlik 60) ilk beraati **186.
-  eylemde** buldu (BERAAT_B, 12.500). İki ölçüm de hedefi (en kısa beraat ≥ tipik yolun %60'ı = 124 eylem) karşılar.
-  Beraat yalnızca puanla değil, gerçek zincirle kilitlidir: contra_s2 (ön oda + kroki), jar_cleared (aynı parti +
-  şekerliğin yeri ya da muhbirin dönüşü), muhbir çelişkisi (kask ya da saat) ve uyumlu esas savunma.
+- **Etiketler:** 3+ seçenekli kararlarda doğru seçeneğin en uzun etiket olduğu oran 2026-10-21 taramasında 3/26'ya
+  indi (T_04, T_04B, T_05E, G_RIZA, DN_RED, K_C, SC_KIMLIK yeniden dengelendi; T_04'teki madde atıfları kaldırıldı).
+- **En kısa beraat (2026-10-21):** golden path'lerden açgözlü silme (64→1 eylemlik dilimlerle, sonucu bozmayan her
+  eylemi silen yöntem; `enumerateActions`/`act` üzerinde) en kısa beraati **G_E2'den 133 eylemde** (69,0 dk; tipik
+  yolun %64,6'sı) buldu; TIPIK'ten 142, G_B'den 138. Her üçünde de 7.500 puan eşiği bağlayıcıdır. Eşiksiz deneme 91
+  eyleme (56,8 dk) iniyor; eşiği 5.500'e indiren ya da `key_excluded ∧ muhbir sarsıldı` veya `tolga_kirildi` için
+  eşiksiz ikinci koşul ekleyen denemeler 90–115 eyleme indi. Bu yüzden 7.500 tek eşik olarak kaldı (hukuki notlar §4-12).
+- **Diğer sonuçlar:** NITELIK_191'e en kısa yol 115 eylem / 62,1 dk (ara evre etkinlikleri ve muhbir sorgusu
+  gerekir; GO_H1 yalnızca 3. gün, GO_T yalnızca ara evrenin 2. günü görünür). MAHKÛMİYET 71, TELKİN 76 eylem (kötü
+  sonuçlar; hız koşusu engellenmez).
+- **Gizem (yeniden tarama):** Tipik yolun satır dökümü (1.214 satır) yeniden tarandı: “Demirel” soyadı ilk kez mesaj raporunda (eylem 51),
+  tam ad ancak ara evrede Paketçi kayıtlarıyla (eylem 141) görünür; satıcının kim olduğu hiçbir yerde muhbirin
+  çelişkisinden önce söylenmez. “Barış” yalnızca Kaan'ın savunma iddiası olarak (eylem 1) geçer.
 
 ## 13. Ölçümler
 `npm run case:duration -- beyaz-toz` (2026-10-20):

@@ -137,8 +137,14 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
 12. **Hükmün delil zincirine bağlanması:** Beraat (223/2-e) delil zinciri kurulduğunda (`beraat_e`) verilir; esas
     savunmanın biçimi ve ikna sayacı hükmü değiştirmez. Oyun puanı yalnızca bir “özen” eşiği olarak kalır (7.500):
     zincir kurulduğu hâlde puan bunun altındaysa (tipik yoldan ~90 yanlış kart çifti kadar bilinçli kayıp) varsayılan
-    mahkûmiyet okunur; gerekçe satırları bu durumda da duruşmada çürütülmüş hiçbir olguya dayanmaz. Bu bir oyun
-    kısıtıdır (kestirme oyunun beraat almasını engeller), hukuki bir iddia değildir.
+    mahkûmiyet okunur; gerekçe satırları bu durumda da duruşmada çürütülmüş hiçbir olguya dayanmaz: dışlanan arka oda
+    materyali ve aklanan şekerlik gerekçeye girmez, muhbir sarsıldıysa heyetin çelişkileri “çevresel ayrıntı” sayan
+    takdiri, döndüyse iki beyanından hiçbirinin esas alınmadığı yazılır; geriye kalan dayanak (“2 tane” yazışması ve
+    kavanozdaki iz) açıkça bir delil takdiri olarak, ispat yükü sanığa yüklenmeden ifade edilir. Bu takdir, hukuken
+    istinafta zor ayakta duracak zayıf bir mahkûmiyettir; epilogda Leyla bunu açıkça söyler (kayıt eksiksizdir,
+    gerekçe zayıftır, istinaf yolu açıktır). Puan eşiği bir oyun kısıtıdır (kestirme oyunun beraat almasını
+    engeller), hukuki bir iddia değildir. Eşiği düşüren ya da zincir için eşiksiz ikinci koşul ekleyen denemeler en
+    kısa beraati tipik yolun %60'ının altına indirdiği için (tasarım belgesi §12) tek eşik korundu.
 13. **Takvim:** 9 Kasım 2025 pazar, 11 Kasım salı, 13 Kasım perşembe (AMATEM randevusu), 14 Ocak 2026 çarşamba (Defne
     büroya gelir), 15–17 Ocak perşembe–cumartesi (soruşturma), 26 Ocak pazartesi (1. celse), 29 Ocak ve 5 Şubat
     perşembe (ara günler), 16 Şubat pazartesi (2. celse). Tedavi 9 Ekim perşembe başlar, test 30 Ekim perşembe.

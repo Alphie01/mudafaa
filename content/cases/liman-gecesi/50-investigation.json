@@ -1240,10 +1240,7 @@
                       "speaker": "tarik",
                       "text": "Kenan abi iyi adamdır. Bana iş o buldu. Ağabeyim ölünce “sen de burada kal evlat” dedi. Yanlış görmüştür. Gece, yağmur…"
                     },
-                    {
-                      "speaker": "tarik",
-                      "text": "Çıkarken kamyoneti ofisin önündeydi. Motoru çalışıyordu, farları sönük. O kadar. Ondan sonrasını bilmem."
-                    },
+                    { "speaker": "tarik", "text": "Ben turnikeden çıktım, iskeleye indim. Ondan sonrasını bilmem." },
                     {
                       "speaker": "player",
                       "text": "Müvekkilim, aleyhine tanıklık eden adamı savunuyor. Bu dosyada herkes birini koruyor.",
@@ -2123,11 +2120,11 @@
             { "speaker": "narrator", "text": "LİMAN — VARDİYA OFİSİ", "style": "card", "bg": "depo" },
             {
               "speaker": "narrator",
-              "text": "Prefabrik bir oda. Masada bir termos, iki bardak, bir telsiz. Duvarda gelgit tablosu, bir gemi takvimi, çerçevesiz bir römorkör fotoğrafı."
+              "text": "Prefabrik bir oda. Masada bir termos, iki bardak, bir telsiz. Duvarda gelgit tablosu, bir gemi takvimi, rıhtımların el çizimi bir planı."
             },
             {
               "speaker": "narrator",
-              "text": "Ellilerinde, kır sakallı, iri bir adam. Lacivert kazak. Konuşurken ellerini cebinden çıkardığı bir bez parçasına siliyordu; temiz ellerini."
+              "text": "Ellilerinde, kır sakallı, iri bir adam. Lacivert kazak. Konuşurken ellerini cebinden çıkardığı bir bez parçasına siliyordu; yağ, mürekkep, belki yalnızca alışkanlık."
             },
             {
               "speaker": "kenan",
@@ -2241,10 +2238,6 @@
             {
               "lines": [
                 {
-                  "speaker": "narrator",
-                  "text": "Bez parçası elinde durdu. Bir an. Sonra yeniden silmeye başladı; temiz ellerini."
-                },
-                {
                   "speaker": "kenan",
                   "text": "Beni mi? Yok kızım. Telefonum ofiste şarjdaydı. Ercan herkesi arardı içince; karısını, anasını, ölmüş babasını."
                 },
@@ -2254,7 +2247,7 @@
                 },
                 {
                   "speaker": "player",
-                  "text": "Bir soru sordum ve cevabı dinledim. Cevaptan çok, cevaptan önceki saniyeyi.",
+                  "text": "Kimin olduğunu bilmediğim bir numarayı, mahkemeden önce bir tanığın masasına koydum. Bir kaydın değeri, kimin elinde ilk durduğuyla ölçülür.",
                   "style": "thought"
                 }
               ]
@@ -2620,7 +2613,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Tutanağın kenarında, kurşun kalemle, bir el yazısı: “Kptn kim?” Altında cevap yok. Birisi sormuş, kimse cevaplamamış."
+              "text": "Tutanağın altında tek bir imza; kontrol eden ikinci bir göz yok. Altı satır, iki dakikada okunmuş."
             }
           ]
         }
@@ -2729,6 +2722,7 @@
         { "id": "g1", "cells": ["23.02", "Personel 1", "Ş. BALCI", "giriş"] },
         { "id": "g2", "cells": ["23.18", "Personel 2", "T. DEMİREL", "çıkış"] },
         { "id": "g3", "cells": ["23.26", "Personel 1", "M. ÖZ", "çıkış"] },
+        { "id": "g3b", "cells": ["23.21", "Araç kapısı", "16 LMN 07 · servis", "çıkış"] },
         { "id": "g4", "cells": ["23.49 / 00.14", "Araç kapısı", "16 LMN 07 · servis", "giriş / çıkış"] },
         { "id": "g5", "cells": ["06.02", "Personel 1", "H. KARA", "giriş"] }
       ],
@@ -2759,7 +2753,7 @@
           "match": { "tool": "mag", "target": "g4" },
           "feedback": {
             "title": "YENİ İPUCU",
-            "text": "Gece yarısına doğru limana giren tek araç: 16 LMN 07, bir servis kamyoneti. 23.49 giriş, 00.14 çıkış. Kimin kullandığı yazmıyor.",
+            "text": "Gece yarısına doğru limana giren tek araç: 16 LMN 07, bir servis kamyoneti. 23.21’de çıkmış, 23.49’da geri girmiş, 00.14’te yeniden çıkmış. Kimin kullandığı yazmıyor.",
             "label": "+100 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -2977,15 +2971,15 @@
         {
           "id": "DIL_HTS",
           "kind": "OPTION",
-          "label": "Vardiya şefinin HTS kayıtları",
+          "label": "Liman güvenlik kamerası kayıtları (B sahası ve rıhtımlar)",
           "enabledWhen": { "cmp": [{ "var": "dil_n" }, "<", 2] },
           "responses": [
             {
               "lines": [
-                { "speaker": "player", "text": "Vardiya şefinin iletişim kayıtları." },
+                { "speaker": "player", "text": "Liman güvenlik kamerası kayıtları; B sahası ve rıhtımlar." },
                 {
                   "speaker": "player",
-                  "text": "Gerekçe yazmaya çalıştım. İki satırdan sonra durdum: elimde bir his vardı, bir delil yoktu. Mahkeme hisleri okumaz.",
+                  "text": "Dilekçeyi gönderdikten sonra olay yeri tutanağını yeniden açtım. Üçüncü sayfa, son satır: “Olay mahallinde kamera bulunmamaktadır.” Okumuştum. Unutmuştum.",
                   "style": "thought"
                 }
               ]
@@ -2997,7 +2991,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Elinde somut bir şüphe yokken bir tanığın iletişim kayıtlarını istemek CMK 135’in ölçülülük şartını karşılamaz; mahkeme reddeder.",
+            "feedback": "Kolluğun olay yeri tutanağı B sahasında ve 4 no’lu rıhtımda kamera bulunmadığını yazıyordu; dosyayı okumadan istenen kayıt bir talep hakkını boşa harcar (CMK 177).",
             "category": "USUL_BILGISI"
           }
         },
@@ -3783,7 +3777,7 @@
               "speaker": "leyla",
               "text": "İnanılan bir tanığı yalancı çıkarmaya çalışma. Yanıldığını göster. Kâğıtla."
             },
-            { "speaker": "player", "text": "Ya yanılmıyorsa? Ya biliyorsa?" },
+            { "speaker": "player", "text": "Ya yanılmıyorsa?" },
             {
               "speaker": "leyla",
               "text": "O zaman da aynı. Kürsüde “yalancı” diyen avukat salonu kaybeder. “Kâğıt başka bir saat söylüyor” diyen avukat salonu kazanır. Gerisini heyet düşünür."

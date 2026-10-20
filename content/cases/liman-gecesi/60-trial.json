@@ -255,6 +255,17 @@
       },
       "choices": [
         {
+          "id": "H102_D",
+          "kind": "OPTION",
+          "label": "Susma hakkını kullansın; anlatımı kayıtlar ve tanıklar üzerinden müdafi kursun",
+          "effects": [{ "type": "VAR", "var": "sustu", "op": "set", "value": true }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Susma hakkı meşrudur (CMK 147/1-e); ama yumruğun nedenini ve sonrasını anlatabilecek tek kişi o."
+          },
+          "next": "H1_02S"
+        },
+        {
           "id": "H102_A",
           "kind": "OPTION",
           "label": "Ne olduysa onu: bir kez vurduğunu, nedenini ve sonrasını kendisi anlatsın",
@@ -278,24 +289,9 @@
           "next": "H1_02S"
         },
         {
-          "id": "H102_B",
-          "kind": "OPTION",
-          "label": "Kolluktaki gibi: “ittim, düştü”",
-          "effects": [
-            { "type": "VAR", "var": "inkar", "op": "set", "value": true },
-            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -60 }
-          ],
-          "quality": {
-            "q": "BAD",
-            "feedback": "Görgü tanığının yumruğu gördüğü bir dosyada inkâr, sanığın güvenilirliğini ve tahrik zeminini birlikte yok eder.",
-            "category": "SAVUNMA_STRATEJISI"
-          },
-          "next": "H1_02S"
-        },
-        {
           "id": "H102_C",
           "kind": "OPTION",
-          "label": "Meşru müdafaa: Ercan onu babaya itti, kendini korudu",
+          "label": "Meşru müdafaa: Ercan onu babaya itip yüzüne tükürdü; saldırıyı tek yumrukla defetti",
           "effects": [
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -60 },
             { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
@@ -308,13 +304,17 @@
           "next": "H1_02S"
         },
         {
-          "id": "H102_D",
+          "id": "H102_B",
           "kind": "OPTION",
-          "label": "Susma hakkını kullansın; savunmayı müdafi yapsın",
-          "effects": [{ "type": "VAR", "var": "sustu", "op": "set", "value": true }],
+          "label": "Kolluktaki anlatımda kalsın: “ittim, düştü”; yumruğu kabul etmek kastı kabul etmektir",
+          "effects": [
+            { "type": "VAR", "var": "inkar", "op": "set", "value": true },
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -60 }
+          ],
           "quality": {
-            "q": "NEUTRAL",
-            "feedback": "Susma hakkı meşrudur (CMK 147/1-e); ama yumruğun nedenini ve sonrasını anlatabilecek tek kişi o."
+            "q": "BAD",
+            "feedback": "Görgü tanığının yumruğu gördüğü bir dosyada inkâr, sanığın güvenilirliğini ve tahrik zeminini birlikte yok eder.",
+            "category": "SAVUNMA_STRATEJISI"
           },
           "next": "H1_02S"
         }
@@ -461,9 +461,42 @@
       },
       "choices": [
         {
+          "id": "H102Q_B",
+          "kind": "OPTION",
+          "label": "Sanık cevaplasın; turnike ve büfe kayıtları bu soruyu zaten cevaplıyor",
+          "responses": [{ "lines": [{ "speaker": "baskan", "text": "Sanık, cevap verin." }] }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Soru cevaplandı; ama sanıktan masumiyetini kanıtlaması istendiği tutanağa itirazsız geçti. Kayıtların varlığı, sorunun biçimini düzeltmez."
+          },
+          "next": "H102Q_SON"
+        },
+        {
+          "id": "H102Q_C",
+          "kind": "OPTION",
+          "label": "İtiraz: soru, savcılığın sanık hakkındaki önyargısını açıkça gösteriyor",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "baskan", "text": "Müdafi, itirazınızı hukuki dayanağıyla yapın. Sanık, cevap verin." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "İtiraz bir usul kuralına dayanmalıdır; savcıya kişisel çıkış heyetin sabrını tüketir.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "H102Q_SON"
+        },
+        {
           "id": "H102Q_A",
           "kind": "OPTION",
-          "label": "İtiraz: sanık masumiyetini ispatla yükümlü değildir; ispat yükü iddiadadır",
+          "label": "İtiraz: sanık suçsuzluğunu kanıtlamak zorunda değil; ispat yükü iddiada",
           "responses": [
             {
               "lines": [
@@ -487,39 +520,6 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Masumiyet karinesi (Anayasa 38/4, AİHS 6/2): sanık suçsuzluğunu ispatlamak zorunda değildir; soru bu haliyle sorulamaz.",
-            "category": "USUL_BILGISI"
-          },
-          "next": "H102Q_SON"
-        },
-        {
-          "id": "H102Q_B",
-          "kind": "OPTION",
-          "label": "Sanık cevaplasın",
-          "responses": [{ "lines": [{ "speaker": "baskan", "text": "Sanık, cevap verin." }] }],
-          "quality": {
-            "q": "NEUTRAL",
-            "feedback": "Soru cevaplandı; ama sanıktan masumiyetini kanıtlaması istendiği tutanağa itirazsız geçti."
-          },
-          "next": "H102Q_SON"
-        },
-        {
-          "id": "H102Q_C",
-          "kind": "OPTION",
-          "label": "“Bu soru savcının önyargısını gösteriyor!”",
-          "responses": [
-            {
-              "lines": [
-                { "speaker": "baskan", "text": "Müdafi, itirazınızı hukuki dayanağıyla yapın. Sanık, cevap verin." }
-              ]
-            }
-          ],
-          "effects": [
-            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
-            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
-          ],
-          "quality": {
-            "q": "BAD",
-            "feedback": "İtiraz bir usul kuralına dayanmalıdır; savcıya kişisel çıkış heyetin sabrını tüketir.",
             "category": "USUL_BILGISI"
           },
           "next": "H102Q_SON"
@@ -995,67 +995,9 @@
       },
       "choices": [
         {
-          "id": "H104_A",
-          "kind": "OPTION",
-          "label": "Kriminal rapor: biyolojik iz yok; iz, işçinin her gün tuttuğu kilitte mesleki temasla açıklanır",
-          "responses": [
-            {
-              "lines": [
-                {
-                  "speaker": "player",
-                  "text": "Sayın Başkan, kriminal rapor kilitte kan, doku ya da saç bulunmadığını söylüyor. Kafatasını kıran bir darbe bu kilitte iz bırakırdı."
-                },
-                {
-                  "speaker": "player",
-                  "text": "Parmak izine gelince: sanık laşing işçisi. Her gece dört yüz kilit takıp sökerdi. Kafesteki her kilitte onun izi olması bir delil değil, bir meslek."
-                },
-                { "speaker": "savci", "text": "Kilit silinmiş olabilir." },
-                { "speaker": "player", "text": "O zaman parmak izi de silinirdi, Sayın Savcı." },
-                { "speaker": "narrator", "text": "Üye hâkim kısa bir not aldı. Savcı cevap vermedi." }
-              ]
-            }
-          ],
-          "effects": [
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
-            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
-            { "type": "VAR", "var": "twist_itiraz", "op": "set", "value": true }
-          ],
-          "quality": {
-            "q": "GOOD",
-            "feedback": "Biyolojik izin yokluğu ve iz ile meslek arasındaki bağ, aletle eylem arasında bir irtibat kurulamadığını gösterir (CMK 217).",
-            "category": "DELIL_ANALIZI"
-          },
-          "next": "H1_04B"
-        },
-        {
-          "id": "H104_B",
-          "kind": "OPTION",
-          "label": "Delil hukuka aykırı elde edilmiştir; dışlanmalıdır",
-          "responses": [
-            {
-              "lines": [
-                {
-                  "speaker": "baskan",
-                  "text": "Hangi usul kuralı ihlal edildi, müdafi? … Belirtemiyorsunuz. Talep reddedildi."
-                }
-              ]
-            }
-          ],
-          "effects": [
-            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
-            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
-          ],
-          "quality": {
-            "q": "BAD",
-            "feedback": "Kilit kolluk tarafından olay yerinde usulüne uygun alınmış ve emanete konmuştur; hukuka aykırılık iddiası dayanaksız (CMK 206/2-a’nın şartları yok).",
-            "category": "USUL_BILGISI"
-          },
-          "next": "H1_04B"
-        },
-        {
           "id": "H104_C",
           "kind": "OPTION",
-          "label": "Kilidin ölçüsü kırıkla karşılaştırılmalı; bilirkişiden sorulsun",
+          "label": "Kilidin ölçüsü kırıkla karşılaştırılmalı; bu husus bilirkişiye sorulsun",
           "responses": [
             {
               "when": { "hasEvidence": "clue_desen" },
@@ -1102,9 +1044,67 @@
           "next": "H1_04B"
         },
         {
+          "id": "H104_B",
+          "kind": "OPTION",
+          "label": "Kilit müdafi huzuru olmadan alınmış; hukuka aykırı delil olarak dışlanmalı",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "baskan",
+                  "text": "Olay yerinde el koyma için müdafi hazır bulunması gerekmez, müdafi. Tutanak dosyada. Talep reddedildi."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Olay yerinde kolluğun eşya toplaması için müdafi bulunması şart değildir; kilit tutanakla alınmış ve emanete konmuştur. Hukuka aykırılık iddiası dayanaksız (CMK 206/2-a’nın şartları yok).",
+            "category": "USUL_BILGISI"
+          },
+          "next": "H1_04B"
+        },
+        {
+          "id": "H104_A",
+          "kind": "OPTION",
+          "label": "Kriminal rapor: kilitte biyolojik iz yok; parmak izi mesleki temasla açıklanır",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, kriminal rapor kilitte kan, doku ya da saç bulunmadığını söylüyor. Kafatasını kıran bir darbe bu kilitte iz bırakırdı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Parmak izine gelince: sanık laşing işçisi. Her gece dört yüz kilit takıp sökerdi. Kafesteki her kilitte onun izi olması bir delil değil, bir meslek."
+                },
+                { "speaker": "savci", "text": "Kilit silinmiş olabilir." },
+                { "speaker": "player", "text": "O zaman parmak izi de silinirdi, Sayın Savcı." },
+                { "speaker": "narrator", "text": "Üye hâkim kısa bir not aldı. Savcı cevap vermedi." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "twist_itiraz", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Biyolojik izin yokluğu ve iz ile meslek arasındaki bağ, aletle eylem arasında bir irtibat kurulamadığını gösterir (CMK 217).",
+            "category": "DELIL_ANALIZI"
+          },
+          "next": "H1_04B"
+        },
+        {
           "id": "H104_D",
           "kind": "OPTION",
-          "label": "Diyeceğimiz yok",
+          "label": "Delile diyeceğimiz yok; kilidin değerlendirmesini bilirkişiye bırakıyoruz",
           "effects": [{ "type": "VAR", "var": "pers", "op": "dec", "value": 1 }],
           "quality": {
             "q": "NEUTRAL",
@@ -1780,14 +1780,14 @@
         {
           "id": "TL_YAKALA",
           "kind": "OPTION",
-          "label": "Vardiya şefi hakkında yakalama kararı verilmesi",
+          "label": "Teşhiste yanılan tanık hakkında yalan tanıklıktan suç duyurusu",
           "enabledWhen": { "cmp": [{ "var": "talep_n" }, "<", 3] },
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "baskan",
-                  "text": "Müdafi, burası sizin müvekkilinizin yargılandığı dava. Tanık hakkında bir şüpheniz varsa yeri savcılıktır. Reddedildi."
+                  "text": "Müdafi, tanık emin olmadığını söyledi; yanılmak suç değildir. Bir şüpheniz varsa yeri savcılıktır, bu mahkeme değil. Reddedildi."
                 },
                 { "speaker": "narrator", "text": "Savcı hafifçe başını salladı; benim için değil, başkan için." }
               ]
@@ -1800,7 +1800,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Müdafi bir tanık hakkında yakalama isteyemez; tanığın suç işlediği şüphesi varsa yol, Cumhuriyet Başsavcılığına suç duyurusudur (CMK 158).",
+            "feedback": "Yanılmak yalan tanıklık değildir; tanık emin olmadığını kendisi söyledi. Üstelik suç duyurusu mahkemeden değil Cumhuriyet Başsavcılığından istenir (CMK 158); bir ara karar hakkını boşa harcadın.",
             "category": "USUL_BILGISI"
           }
         },
@@ -1840,9 +1840,17 @@
       },
       "choices": [
         {
+          "id": "H107_C",
+          "kind": "OPTION",
+          "label": "Tutukluluk incelemesini kayıtlar gelince ikinci celsede isteyelim",
+          "responses": [{ "lines": [{ "speaker": "baskan", "text": "Tutukluluğun devamına." }] }],
+          "quality": { "q": "NEUTRAL", "feedback": "Tahliye talep edilmedi; müvekkil bir ay daha içeride." },
+          "next": "H1_08"
+        },
+        {
           "id": "H107_A",
           "kind": "OPTION",
-          "label": "Adli kontrolle tahliye: sanığın dönmediği kayıtla sabit; kaçma şüphesi yok",
+          "label": "Adli kontrolle tahliye: dönüş kayıtla çürüdü, kuvvetli şüphe kalmadı",
           "responses": [
             {
               "when": { "flag": "contra_k1" },
@@ -1921,14 +1929,6 @@
             "category": "USUL_BILGISI"
           },
           "next": "H1_08"
-        },
-        {
-          "id": "H107_C",
-          "kind": "OPTION",
-          "label": "Takdir mahkemenizindir",
-          "responses": [{ "lines": [{ "speaker": "baskan", "text": "Tutukluluğun devamına." }] }],
-          "quality": { "q": "NEUTRAL", "feedback": "Tahliye talep edilmedi; müvekkil bir ay daha içeride." },
-          "next": "H1_08"
         }
       ]
     },
@@ -1954,11 +1954,11 @@
             { "speaker": "player", "text": "Bitmedi. Daha bir celse var. Ama bu akşam Elif’i öpebilirsin." },
             {
               "speaker": "narrator",
-              "text": "Merdivenin dibinde, siyahlar içinde Sevim Yavuz duruyordu. Tarık onu görünce durdu. Sevim ona bakmadı. Kenan’ın gittiği yöne bakıyordu."
+              "text": "Merdivenin dibinde, siyahlar içinde Sevim Yavuz duruyordu. Tarık onu görünce durdu. Sevim ona bakmadı; yağmura bakıyordu."
             },
             {
               "speaker": "player",
-              "text": "Kocasının katili diye bildiği adama değil, kocasının amirine bakan bir dul. Not aldım.",
+              "text": "Kocasının katili diye bildiği adama bakmayan bir dul. Öfkeden mi, yorgunluktan mı, bilmiyordum. Not aldım.",
               "style": "thought"
             }
           ]
@@ -1979,7 +1979,7 @@
             { "speaker": "player", "text": "Babası gemide diyeceksiniz. Bir sefer daha." },
             {
               "speaker": "narrator",
-              "text": "Merdivenin dibinde, siyahlar içinde Sevim Yavuz duruyordu. Gözleri Kenan’ın gittiği yöndeydi."
+              "text": "Merdivenin dibinde, siyahlar içinde Sevim Yavuz duruyordu. Kimseye bakmıyordu; elindeki şemsiyeyi açmayı unutmuştu."
             }
           ]
         }

@@ -206,6 +206,22 @@ c H107_A
 c H108_DEVAM
 `);
 
+const NURTEN = `
+c A_NURTEN
+c NU_TWIST
+c NU_KIT
+c NU_BITIR
+c A_CIKARIM
+m clue_envanter clue_tarik_koni
+c ARA_CIKARIM_BITIR
+`;
+
+const SAVCI = `
+c A_SAVCI
+c SAV_ATK
+c SAV_BITIR
+`;
+
 const ARA_TAM = (suc: boolean) =>
   A(`
 c ARA_GIRIS_DEVAM
@@ -213,6 +229,7 @@ c A_LEYLA
 c LEYLA2_DON
 c A_SEVIM
 c SV_TAZIYE
+c SV_ERCAN
 c SV_HAFTA
 c SV_TUTANAK
 c SV_BITIR
@@ -248,41 +265,52 @@ c ARA_CIKARIM_BITIR
 ${suc ? 'c A_SUC\nc SUC_A' : ''}
 c A_LEYLA
 c LEYLA2_DON
-c A_NURTEN
-c NU_TWIST
-c NU_KIT
-c NU_BITIR
-c A_CIKARIM
-m clue_envanter clue_tarik_koni
-c ARA_CIKARIM_BITIR
+${suc ? NURTEN : SAVCI}
 c GO_T2
 c ARA_SON_DEVAM
 `);
 
-const CELSE2 = (esas: string) =>
-  A(`
-c T00_DEVAM
+const BILIRKISI = `
 p B1
 s ded_darbe B1
 p B2
 s ded_saat B2
 p B3
 s ded_silah B3
+`;
+
+const BILIRKISI_YOK = `
+p B1
+p B2
+p B3
+`;
+
+const CELSE2 = (esas: string, devam: string, opts: { k7?: boolean; bilirkisi?: boolean } = {}) =>
+  A(`
+c T00_DEVAM
+${opts.bilirkisi === false ? BILIRKISI_YOK : BILIRKISI}
 c T01_BITIR
 p K5
 s ded_arac K5
 p K6
 s ded_motif K6
 p K7
-s ded_eksik K7
+${opts.k7 === false ? '' : 's ded_eksik K7'}
+p K8
 o g_kanaat K8
 c T02_BITIR
-c T03_A
+p N1
+s ev_hesap N1
+p N2
+s ded_buf N2
+p N3
+p N4
+c T03_BITIR
 c T03G_DEVAM
 c T04_A
 c T05_A
 c ${esas}
-c T06S_DEVAM
+c ${devam}
 c T07_A
 `);
 
@@ -417,12 +445,15 @@ c T01_BITIR
 p K5
 p K6
 c T02_BITIR
-c T03_A
+p N1
+s ev_hesap N1
+o g_telkin N2
+c T03_BITIR
 c T03G_DEVAM
 c T04_B
 c T05_A
 c T06_T
-c T06S_DEVAM
+c T06ST_DEVAM
 c T07_A
 `);
 
@@ -533,6 +564,10 @@ t OB_MONT
 c EMANET_BITIR
 c A_LEYLA
 c LEYLA2_DON
+c A_SAVCI
+c SAV_PAZAR
+c SAV_BITIR
+c AA2_A
 c GO_T2
 c ARA_SON_DEVAM
 c T00_DEVAM
@@ -544,12 +579,13 @@ p K5
 p K6
 p K7
 c T02_BITIR
-c T03_B
+p N2
+c T03_BITIR
 c T03G_DEVAM
 c T04_C
 c T05_B
 c T06_D
-c T06S_DEVAM
+c T06SD_DEVAM
 c T07_C
 `);
 
@@ -722,7 +758,7 @@ export const tests: CasePart = {
         GUN4,
         CELSE1,
         ARA_TAM(true),
-        CELSE2('T06_B'),
+        CELSE2('T06_B', 'T06SB_DEVAM'),
       ),
       goldenPath(
         TYPICAL_PATH,
@@ -734,7 +770,7 @@ export const tests: CasePart = {
         GUN4,
         CELSE1,
         ARA_TAM(false),
-        CELSE2('T06_E'),
+        CELSE2('T06_E', 'T06SE_DEVAM', { k7: false }),
       ),
       goldenPath(
         'G3',
@@ -758,9 +794,48 @@ export const tests: CasePart = {
         G5_SORUSTURMA,
         G5_CELSE1,
       ),
+      // Olgu testleri: dönüş yok + ölüm sonra kayıttaysa esas savunmanın adı beraati değiştirmez; bilirkişiye kâğıt
+      // gösterilmeden (ölüm sonra kurulmadan) gerçek fail savunması 223/2-b'ye ulaşamaz.
+      goldenPath(
+        'OLGU_D',
+        { outcome: 'BERAAT_E' },
+        PROLOG('BR00_C', 'BR01_A', 'STR_USUL'),
+        GUN1,
+        GUN2,
+        GUN3,
+        GUN4,
+        CELSE1,
+        ARA_TAM(false),
+        CELSE2('T06_D', 'T06SD_DEVAM', { k7: false }),
+      ),
+      goldenPath(
+        'OLGU_T',
+        { outcome: 'BERAAT_E' },
+        PROLOG('BR00_C', 'BR01_A', 'STR_INDIRIM'),
+        GUN1,
+        GUN2,
+        GUN3,
+        GUN4,
+        CELSE1,
+        ARA_TAM(false),
+        CELSE2('T06_T', 'T06ST_DEVAM', { k7: false }),
+      ),
+      goldenPath(
+        'OLGU_B',
+        { outcome: 'NITELIK' },
+        PROLOG('BR00_C', 'BR01_A', 'STR_MASUMIYET'),
+        GUN1,
+        GUN2,
+        GUN3,
+        GUN4,
+        CELSE1,
+        ARA_TAM(true),
+        CELSE2('T06_B', 'T06SF_DEVAM', { bilirkisi: false }),
+      ),
+      // Çöküş: savunma ikinci celsede düşer; dönüş yok ilk celsede kayda geçtiği için heyet 87/4'te kalır.
       goldenPath(
         'W',
-        { outcome: 'MAHKUMIYET', finalMin: 1999, finalMax: 2211 },
+        { outcome: 'NITELIK' },
         PROLOG('BR00_B', 'BR01_C', 'STR_MASUMIYET'),
         W_YOL,
         A('c COKUS_SON'),

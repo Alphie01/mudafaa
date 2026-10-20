@@ -38,7 +38,6 @@ export const briefing: CasePart = {
 @GENÇ SES: Abi ben…
 @FENERLİ SES: Eve git dedim evlat.
 > İnce siluet yürüdü. Arkasına bir kez baktı; babanın dibinde oturan adam hâlâ küfrediyordu. Küfreden adam ölmez. Öyle düşündü.
-> Fener bir süre olduğu yerde kaldı. Sonra o da karanlığa döndü.
 > Rıhtımda yalnızca yağmur, bir matara ve bir babanın gövdesinden aşağı süzülen birkaç damla kan kaldı.
 > Saat 23.10’du. Ercan Yavuz’un hayatının son saatinin başı.
 > Ya da sonu. Dosya buna henüz karar vermemişti. {fade}
@@ -171,6 +170,24 @@ leyla: İddianame kasten öldürme diyor. Savcı bu kavgayı kaybederse geri çe
 leyla: Söyle bakalım: üç hat. Savcının iddiası, savcının yedeği, bizim tabanımız. Rakamlarıyla.
 `),
       choices: [
+        option('BR01_B', 'Müebbet · olası kastla 15–20 yıl · yaralama sonucu ölümde 8–12 yıl', {
+          next: 'BR_01B',
+          bad: 'Eski ve yanlış rakamlar: olası kastta müebbet yerine 20–25 yıl (TCK 21/2); TCK 87/4’te 86/1 hâli 7550 sayılı Kanunla 10–14 yıldır.',
+          category: 'HUKUKI_BILGI',
+          responses: B(`
+leyla: Hayır. Kitabın eski baskısını okumuşsun. Olası kastta yirmi–yirmi beş. Yaralama sonucu ölümde artık on–on dört; geçen yıl değişti.
+leyla: Rakamı yanlış bilen avukat, müvekkiline yanlış umut verir. Yanlış umut, yanlış korkudan daha pahalıdır.
+`),
+        }),
+        option('BR01_D', 'Müebbet · olası kastla 20–25 yıl · taban taksirle öldürme, 2–6 yıl', {
+          next: 'BR_01B',
+          bad: 'Yumruk kasten atıldığı için taban TCK 85 (taksirle öldürme) değil; kasten yaralamadan doğan ölümde TCK 87/4 uygulanır (TCK 23: ağır netice bakımından en az taksir).',
+          category: 'HUKUKI_BILGI',
+          responses: B(`
+leyla: İlk ikisi doğru. Üçüncüsü bir dilek. Taksir, dikkatsizce yapılan şey içindir; yumruk dikkatsizlik değildir.
+leyla: Kasten yaralayıp ölüme sebep olursan kanun bunu ayrıca düzenler. Tabanını yanlış yere koyarsan duvar senin üstüne çöker.
+`),
+        }),
         option('BR01_A', 'Müebbet · olası kastla 20–25 yıl · yaralama sonucu ölümde 10–14 yıl', {
           next: 'BR_01B',
           score: { HUKUKI_BILGI: 150 },
@@ -181,15 +198,6 @@ leyla: Şimdi şunu unutma: 87/4 bir taban değil, bir tavan da değil. Kastın 
 leyla: Ölüm o yumruktan gelmediyse, o tabana bile inmemek gerekir. Teraziyi sen kur; ama hangi kefeye ne koyduğunu bil.
 `),
         }),
-        option('BR01_B', 'Müebbet · olası kastla 15–20 yıl · yaralama sonucu ölümde 8–12 yıl', {
-          next: 'BR_01B',
-          bad: 'Eski ve yanlış rakamlar: olası kastta müebbet yerine 20–25 yıl (TCK 21/2); TCK 87/4’te 86/1 hâli 7550 sayılı Kanunla 10–14 yıldır.',
-          category: 'HUKUKI_BILGI',
-          responses: B(`
-leyla: Hayır. Kitabın eski baskısını okumuşsun. Olası kastta yirmi–yirmi beş. Yaralama sonucu ölümde artık on–on dört; geçen yıl değişti.
-leyla: Rakamı yanlış bilen avukat, müvekkiline yanlış umut verir. Yanlış umut, yanlış korkudan daha pahalıdır.
-`),
-        }),
         option('BR01_C', 'Ağırlaştırılmış müebbet · olası kastla müebbet · taksirle öldürmede 2–6 yıl', {
           next: 'BR_01B',
           bad: 'Ağırlaştırılmış müebbet TCK 82’nin cezasıdır; iddianame 81/1. Kasten vurulan yumrukta taban taksirle öldürme (TCK 85) değil, neticesi sebebiyle ağırlaşmış yaralamadır (TCK 87/4, 23).',
@@ -197,15 +205,6 @@ leyla: Rakamı yanlış bilen avukat, müvekkiline yanlış umut verir. Yanlış
           responses: B(`
 leyla: Hayır. Ağırlaştırılmış müebbet nitelikli hâllerin cezası; burada tasarlama yok, eziyet yok. İddianame düz 81/1.
 leyla: Taksir de değil. Yumruk kasten atıldı. Kasten atılan bir yumruktan ölüm çıkarsa kanun ona başka bir ad verir.
-`),
-        }),
-        option('BR01_D', 'Müebbet · olası kastla 20–25 yıl · taban taksirle öldürme, 2–6 yıl', {
-          next: 'BR_01B',
-          bad: 'Yumruk kasten atıldığı için taban TCK 85 (taksirle öldürme) değil; kasten yaralamadan doğan ölümde TCK 87/4 uygulanır (TCK 23: ağır netice bakımından en az taksir).',
-          category: 'HUKUKI_BILGI',
-          responses: B(`
-leyla: İlk ikisi doğru. Üçüncüsü bir dilek. Taksir, dikkatsizce yapılan şey içindir; yumruk dikkatsizlik değildir.
-leyla: Kasten yaralayıp ölüme sebep olursan kanun bunu ayrıca düzenler. Tabanını yanlış yere koyarsan duvar senin üstüne çöker.
 `),
         }),
       ],

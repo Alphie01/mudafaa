@@ -1,11 +1,9 @@
 import {
   all,
-  any,
   because,
   cmp,
   finalAtLeast,
   flag,
-  has,
   not,
   outcome,
   ref,
@@ -17,8 +15,8 @@ import { O, W } from './dsl.js';
 
 // 70-outcomes: sonuçlar (öncelik sırasıyla) ve sonuca bağlı epiloglar. Eşikler meta'daki eşik çubuğuyla aynı.
 
-export const T_NITELIK = 3000;
-export const T_BERAAT = 9000;
+// Sonuçlar kayıttaki olgulara bağlıdır (dönüş yok + ölüm sonra → beraat; yalnızca dönüş yok → 87/4; ikisi de yoksa
+// 81/1 + 21/2). Skor yalnızca XP'yi, notu ve 223/2-b ile 2-e arasındaki ayrımı (gerçek fail olgusu üstüne) etkiler.
 export const T_BERAAT_B = 10000;
 
 const tahliye =
@@ -65,26 +63,43 @@ gulay/uzgun: “Ne derseniz” demiştim size. Siz de dediniz.
 > Leyla’nın odasının kapısı kapalıydı, ışığı yanıyordu. Kapıyı çalmadım.
 ~ Bir saati sildim. Bir kadının ağzından. O saat iki ay sonra bir mahkeme salonunda geri geldi ve beni de yanında götürdü.
 ~ Oysa saat bir suç değildi. Saat bir büfede, bir taburede, ağlayan bir adamdı. Doğruyu söyleseydi, o bir saat Tarık’ın en iyi tanığı olacaktı.
+# ÜÇ HAFTA SONRA · BURSA BAROSU, DİSİPLİN KURULU KORİDORU [bg:adliye]
+> Tahta bir bank, bir dosya, bir çağrı kâğıdı. Kâğıtta adım ve bir madde numarası.
+> Leyla geldi. Yanıma oturdu. Bir süre ikimiz de karşı duvardaki ilanlara baktık.
+leyla: Savunmanı yaz. Doğruyu yaz. Bir kere de olsa bir saati silmeden.
+- Tarık’ın yeni avukatı kim?
+leyla: Genç bir kadın. İyi. Turnike kaydını ilk gün istemiş. Sevim Yavuz’a gidip başsağlığı dilemiş.
+~ Benim yapabileceğim her şeyi yapıyor. Benim yapmamam gereken tek şeyi yapmadan.
 `),
       ],
     }),
     outcome('BERAAT_B', {
       class: 'ACQUITTAL',
       priority: 2,
-      when: all(not(flag('cokus')), flag('gercek_fail'), cmp(v('pers'), '>=', 8), finalAtLeast(T_BERAAT_B)),
+      when: all(
+        not(flag('cokus')),
+        flag('gercek_fail'),
+        ref('donus_yok'),
+        ref('olum_sonra'),
+        cmp(v('pers'), '>=', 8),
+        finalAtLeast(T_BERAAT_B),
+      ),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
       sentence: 'Ceza yok · Tahliye',
       verdictText: `Sanık Tarık Demirel’in üzerine atılı kasten öldürme suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; ${dusme}; ${tahliye}; karar ve duruşma tutanaklarının Kenan Aksoy hakkındaki soruşturma dosyasına eklenmek üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; ${istinaf}`,
       reasoning: [
+        because('Sanık 23.18’de limandan çıkmış ve geri dönmemiştir; aksi yöndeki teşhis kayıtlar karşısında çökmüştür.'),
         because(
-          'Ölüme yol açan darbe, maktulün 23.34’te yemek yemesinden ve 23.41’de telefonla görüşmesinden sonra vurulmuştur; sanık 23.18’de limandan çıkmış ve dönmemiştir.',
+          'Maktul 23.34’te yemek yemiş, 23.41’de telefonla görüşmüştür; ölüme yol açan darbe bundan sonra vurulmuştur.',
+          flag('contra_b2'),
         ),
         because(
-          'Kırık, düşmeyle değil sınırlı yüzeyli bir cisimle oluşmuştur; emanetteki kilit yaranın ölçüsüne uymamaktadır.',
-          has('ded_silah'),
+          'Kırık, yumrukla düşmeden değil, sabit duran başa sınırlı yüzeyli bir cisimle vurulmasından oluşmuştur.',
+          flag('contra_b1'),
         ),
+        because('Emanetteki kilit yaranın ölçüsüne uymamaktadır; savcılığın gösterdiği alet ölümle bağlantılı değildir.', flag('contra_b3')),
         because(
           'Ölüm saatinde olay yerinde bulunan tek araç başka bir kişinin zimmetindedir; bu kişi kendisini suçlayabilecek sorulara cevap vermemiş, hakkında soruşturma başlatılmıştır.',
         ),
@@ -136,12 +151,7 @@ tarik: Ağabey… ayağına bakmazdın derler. Ben baktım. Bir kere yine de tö
     outcome('BERAAT_E', {
       class: 'ACQUITTAL',
       priority: 3,
-      when: all(
-        not(flag('cokus')),
-        any(flag('supheli'), flag('gercek_fail')),
-        cmp(v('pers'), '>=', 6),
-        finalAtLeast(T_BERAAT),
-      ),
+      when: all(ref('donus_yok'), ref('olum_sonra')),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -151,6 +161,10 @@ tarik: Ağabey… ayağına bakmazdın derler. Ben baktım. Bir kere yine de tö
         because(
           'Sanığı olay yerine dönerken gördüğünü söyleyen tanığın teşhisi, sanığın 23.18’de limandan çıktığını gösteren kayıtlar ve aydınlatmanın kapalı olduğu karşısında güvenilirliğini yitirmiştir.',
           flag('contra_k1'),
+        ),
+        because(
+          'Sanığın 23.18’de limandan çıktığı ve 23.37’de iskele büfesinde bulunduğu kayıtlarla anlaşılmıştır; olay yerine döndüğü ispatlanamamıştır.',
+          not(flag('contra_k1')),
         ),
         because('Ölüme yol açan kırık, düşmeyle değil sınırlı yüzeyli bir cisimle oluşmuştur.', flag('contra_b1')),
         because('Maktulün 23.34’ten sonra yaşadığı mide içeriği ve kayıtlarla anlaşılmıştır.', flag('contra_b2')),
@@ -162,7 +176,7 @@ tarik: Ağabey… ayağına bakmazdın derler. Ben baktım. Bir kere yine de tö
       legalBasis: 'CMK 223/2-e, 223/8; TCK 86/2; Anayasa 38/4; AİHS 6/2; CMK 141/1-e, 142, 231/3',
       xp: xp(1, { ethicsVar: 'ethics' }),
       howToReach:
-        'Vardiya şefinin teşhisini kayıtlarla çürüt; bilirkişiye darbe şeklini, ölüm saatini ve aletin ölçüsünü göster; esas savunmada şüpheyi bu iki ayağa dayandır.',
+        'Sanığın dönmediğini kayıtla göster (teşhisi çürüt ya da çıkış + büfe); ikinci celsede bilirkişiye darbe şeklini, ölüm saatini ve aletin ölçüsünden en az ikisini kâğıtla göster. Karar bu olgulara bakar; esas savunmanın adı puanı ve notu belirler.',
       epilogue: [
         O(`
 baskan: Türk Milleti adına…
@@ -178,40 +192,53 @@ baskan: Türk Milleti adına…
 sukru: Ha? Duydun mu beni? Bu sefer duyuyorum oğlum. Her şeyi duyuyorum.
 > Tarık güldü. İki aydır ilk kez. Şükrü Usta omzuna vurdu, forkliftine yürüdü; emekliliğine üç ay kalmıştı.
 `),
+        W(
+          flag('cokus'),
+          `
+~ Heyet savunmamı yarıda kesmişti. Kararı yine de tutanak verdi; benim söyleyemediğim cümleleri kâğıtlar söylemişti. Bunu bir zafer saymadım.
+`,
+        ),
         O(`
 # ARSLAN HUKUK · GECE [bg:buro_gece]
 > Panodaki son kâğıdı söktüm: “23.41.” Altında üç soru vardı: Kim? Neden? Sonra ne oldu?
-~ Birincisine bir isim yazabilirdim. Ama o ismi bir savcıya hiç yazmadım. Bir mahkeme beraat dedi; bir liman hâlâ fısıldıyor.
-leyla: Beraat beraattir Deniz. “Şüpheden” diye bir damga yok kararda. [phone]
-- Kararda yok. Kantinde var.
-leyla: Kantinleri biz düzeltemeyiz. Ama bir dahaki sefere bir kâğıdı kime götüreceğini bilirsin. [phone]
-> Gülay bir mesaj gönderdi: bir fotoğraf. Elif’in odasındaki harita; toplu iğne evin üstünde, bantla tutturulmuş.
-~ Bir iğne eve döndü. Bir dosya kapandı. Ve 23.41’deki iki dakikanın öbür ucu, bir limanda hâlâ termos kahvesi içiyor.
-~ Kapı açıldı. Işık hâlâ kapalı.
 `),
         W(
           not(flag('suc_duyurusu')),
           `
+~ Birincisine bir isim yazabilirdim. Ama o ismi bir savcıya hiç yazmadım. Bir mahkeme beraat dedi; bir liman hâlâ fısıldıyor.
+leyla: Beraat beraattir Deniz. “Şüpheden” diye bir damga yok kararda. [phone]
+- Kararda yok. Kantinde var.
+leyla: Kantinleri biz düzeltemeyiz. Ama bir dahaki sefere bir kâğıdı kime götüreceğini bilirsin. [phone]
 > Kenan Aksoy o hafta vardiya şefliğinden emekliye ayrıldı. Bir veda yemeği verildi; Tarık gitmedi.
+~ Ve 23.41’deki iki dakikanın öbür ucu, bir limanda hâlâ termos kahvesi içiyor.
 `,
         ),
+        W(
+          flag('suc_duyurusu'),
+          `
+~ Birincisine bir isim yazmıştım; bir savcıya, ekleriyle. O dosya başka bir masada, başka bir hızla yürüyor. Benim dosyam bugün kapandı.
+leyla: Beraat beraattir Deniz. “Şüpheden” diye bir damga yok kararda. [phone]
+- Kararda yok. Kantinde var.
+leyla: Kantinleri biz düzeltemeyiz. Duyurunu yazdın; gerisi savcılığın. Bekleyebilmek de bu mesleğin parçası. [phone]
+`,
+        ),
+        O(`
+> Gülay bir mesaj gönderdi: bir fotoğraf. Elif’in odasındaki harita; toplu iğne evin üstünde, bantla tutturulmuş.
+> Bir saat sonra bir mesaj daha: “Elif sordu: avukat abla da gemiye biner mi?” Cevap yazmadım. Yazamadım.
+~ Bir iğne eve döndü. Bir dosya kapandı.
+~ Kapı açıldı. Işık hâlâ kapalı.
+`),
       ],
     }),
     outcome('NITELIK', {
       class: 'RECHARACTERIZED',
       priority: 4,
-      when: all(
-        not(flag('cokus')),
-        ref('donus_yok'),
-        any(flag('terditli'), flag('supheli'), flag('kabul87')),
-        any(flag('durust_savunma'), flag('fact_kardes')),
-        finalAtLeast(T_NITELIK),
-      ),
+      when: all(ref('donus_yok'), not(ref('olum_sonra'))),
       stamp: '87/4 · TAHRİK',
       stampTone: 'amber',
       header: 'TÜRK MİLLETİ ADINA',
       sentence: '6 yıl 3 ay hapis',
-      verdictText: `Sanığın eyleminin kasten yaralama sonucu ölüme neden olma (TCK 87/4) suçunu oluşturduğu kabul edilerek: yaralamanın 86/1 kapsamında kaldığı gözetilerek temel cezanın alt sınırdan 10 yıl hapis olarak belirlenmesine; maktulün sanığın ölen ağabeyine yönelik hakareti, tükürmesi ve itmesi nedeniyle haksız tahrik altında hareket ettiği anlaşıldığından TCK 29 uyarınca dörtte bir oranında indirimle 7 yıl 6 ay; sanığın yargılama sürecindeki tutumu nedeniyle TCK 62/1 uyarınca altıda bir oranında indirimle sonuç olarak 6 YIL 3 AY HAPİS cezasıyla cezalandırılmasına; TCK 53’teki hak yoksunluklarına; ${tutukluluk}; ${istinaf}`,
+      verdictText: `Sanığın eyleminin kasten yaralama sonucu ölüme neden olma (TCK 87/4) suçunu oluşturduğu kabul edilerek: yaralamanın basit tıbbi müdahaleyle giderilebilir nitelikte olması TCK 87/4 birinci cümlesinin uygulanmasına engel görülmeyerek temel cezanın alt sınırdan 10 yıl hapis olarak belirlenmesine; maktulün sanığın ölen ağabeyine yönelik hakareti, tükürmesi ve itmesi nedeniyle haksız tahrik altında hareket ettiği anlaşıldığından TCK 29 uyarınca dörtte bir oranında indirimle 7 yıl 6 ay; sanığın yargılama sürecindeki tutumu nedeniyle TCK 62/1 uyarınca altıda bir oranında indirimle sonuç olarak 6 YIL 3 AY HAPİS cezasıyla cezalandırılmasına; TCK 53’teki hak yoksunluklarına; ${tutukluluk}; ${istinaf}`,
       reasoning: [
         because('Sanığın olay yerine geri döndüğü ispatlanamamış; öldürme kastı sabit görülmemiştir.'),
         because(
@@ -223,10 +250,10 @@ leyla: Kantinleri biz düzeltemeyiz. Ama bir dahaki sefere bir kâğıdı kime g
         ),
         because('Ceza 87/4’ün alt sınırından belirlenmiş; tahrik ve takdiri indirim uygulanmıştır.'),
       ],
-      legalBasis: 'TCK 87/4, 86/1, 29, 62/1, 53, 63; CMK 226, 273/1',
+      legalBasis: 'TCK 87/4, 86/1–2, 29, 62/1, 53, 63; CMK 226, 273/1',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        'Dönüşün olmadığını kanıtla; tahrikin ve kastın yaralamaya yönelik olduğunu sanığın dürüst anlatımıyla kur; terditli savunma yap.',
+        'Dönüşün olmadığını kanıtla ama ölümün sonradan ve başka bir cisimle geldiğini bilirkişiye gösteremezsen mahkeme savcılığın yedek tezini (yumruk → düşme → ölüm, TCK 87/4) benimser.',
       epilogue: [
         O(`
 baskan: Türk Milleti adına… altı yıl üç ay hapis cezasıyla…
@@ -243,7 +270,13 @@ tarik: Kimin o zaman?
 ~ Kırk dakika. Ercan’ın kantinden çıktığı saat ile gece yarısı arasında, kimsenin bakmadığı kırk dakika.
 ~ O kırk dakikayı dolduramadım. Mahkeme onu bir yumrukla doldurdu; en kolay dolgu.
 leyla: Müebbetten altı yıla indin. Bu bir yenilgi değil. Ama bir zafer olduğunu da söyleme kendine. İstinafa hazırlan. [phone]
+- Bilirkişiye doğru kâğıdı göstermedim, Leyla. Elimdeydi belki. Ya da hiç toplamadım.
+leyla: İstinaf dosyaya bakar, senin vicdanına değil. Kâğıtları topla. İki hafta. Uyuyabildiğin kadar uyu, gerisini oku. [phone]
 > Gülay o akşam aradı. Bir şey söylemedi; yalnızca nefesini duydum. Arkada Elif’in sesi: “Babam hangi gemide?”
+# İKİ HAFTA SONRA · ARSLAN HUKUK [bg:buro]
+> İstinaf dilekçesinin son sayfasını yazarken masama bir zarf bırakıldı. İçinde Elif’in yeni bir resmi: mavi bir gemi, bu kez güvertede üç kişi.
+> Birinin elinde bir çanta vardı. Gülay arkasına kurşun kalemle yazmıştı: “Avukat abla. Elif öyle istedi.”
+~ Bir resim bir dilekçe değildir. Ama dilekçeyi bitirene kadar masamdan kaldırmadım.
 `),
       ],
     }),
@@ -275,7 +308,7 @@ leyla: Müebbetten altı yıla indin. Bu bir yenilgi değil. Ama bir zafer oldu�
         if: { when: flag('cokus'), then: xp(0.3, { ethicsVar: 'ethics' }), else: xp(0.6, { ethicsVar: 'ethics' }) },
       },
       howToReach:
-        'Varsayılan sonuç: dönüşün olmadığını, ölümün sonradan geldiğini ya da en azından kastın yaralamaya yönelik olduğunu kanıtlayamazsan verilir.',
+        'Varsayılan sonuç: sanığın olay yerine dönmediğini kayıtla gösteremezsen teşhis ayakta kalır ve heyet iddianamedeki anlatımı esas alır.',
       epilogue: [
         O(`
 baskan: Türk Milleti adına… on altı yıl sekiz ay hapis cezasıyla…
@@ -298,6 +331,15 @@ gulay/uzgun: Bunu siz saklayın avukat hanım. Ben bakamıyorum. Elif yenisini �
 leyla: İstinaf süresi iki hafta. Kırk dakikayı bul, Deniz. Bu sefer kâğıtla. [phone]
 `,
         ),
+        O(`
+# ARSLAN HUKUK · GECE YARISI [bg:buro_gece]
+> Gece yarısına doğru Leyla büroya geldi. Kapımda durdu. Elinde sigara paketi; bu kez çevirmiyordu.
+leyla: Bir yumruk ile bir ölümü ayıramadın. İlk celseden önce sana ne dedim, hatırlıyor musun?
+- “Üçe böl.”
+leyla: Üçe bölmek için önce üçünü de bulmak gerekir. Turnike, büfe, bir telefon. Hepsi kimsenin okumadığı kâğıtlardaydı.
+> Paketi masama bıraktı. Gitti. Paketin içinde sigara yoktu; katlanmış bir kâğıt vardı: kendi el yazısıyla, otuz yıl önceki bir davanın ölüm saati.
+~ Herkesin dolduramadığı bir kırk dakikası var. Leyla’nınki bir paketin içinde. Benimki şimdi Gülay’ın çantasında, mavi bir gemi.
+`),
       ],
     }),
   ],

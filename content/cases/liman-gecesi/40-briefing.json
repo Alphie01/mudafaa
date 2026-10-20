@@ -91,7 +91,6 @@
               "speaker": "narrator",
               "text": "İnce siluet yürüdü. Arkasına bir kez baktı; babanın dibinde oturan adam hâlâ küfrediyordu. Küfreden adam ölmez. Öyle düşündü."
             },
-            { "speaker": "narrator", "text": "Fener bir süre olduğu yerde kaldı. Sonra o da karanlığa döndü." },
             {
               "speaker": "narrator",
               "text": "Rıhtımda yalnızca yağmur, bir matara ve bir babanın gövdesinden aşağı süzülen birkaç damla kan kaldı."
@@ -464,6 +463,56 @@
       ],
       "choices": [
         {
+          "id": "BR01_B",
+          "kind": "OPTION",
+          "label": "Müebbet · olası kastla 15–20 yıl · yaralama sonucu ölümde 8–12 yıl",
+          "next": "BR_01B",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Hayır. Kitabın eski baskısını okumuşsun. Olası kastta yirmi–yirmi beş. Yaralama sonucu ölümde artık on–on dört; geçen yıl değişti."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Rakamı yanlış bilen avukat, müvekkiline yanlış umut verir. Yanlış umut, yanlış korkudan daha pahalıdır."
+                }
+              ]
+            }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Eski ve yanlış rakamlar: olası kastta müebbet yerine 20–25 yıl (TCK 21/2); TCK 87/4’te 86/1 hâli 7550 sayılı Kanunla 10–14 yıldır.",
+            "category": "HUKUKI_BILGI"
+          }
+        },
+        {
+          "id": "BR01_D",
+          "kind": "OPTION",
+          "label": "Müebbet · olası kastla 20–25 yıl · taban taksirle öldürme, 2–6 yıl",
+          "next": "BR_01B",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "İlk ikisi doğru. Üçüncüsü bir dilek. Taksir, dikkatsizce yapılan şey içindir; yumruk dikkatsizlik değildir."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Kasten yaralayıp ölüme sebep olursan kanun bunu ayrıca düzenler. Tabanını yanlış yere koyarsan duvar senin üstüne çöker."
+                }
+              ]
+            }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Yumruk kasten atıldığı için taban TCK 85 (taksirle öldürme) değil; kasten yaralamadan doğan ölümde TCK 87/4 uygulanır (TCK 23: ağır netice bakımından en az taksir).",
+            "category": "HUKUKI_BILGI"
+          }
+        },
+        {
           "id": "BR01_A",
           "kind": "OPTION",
           "label": "Müebbet · olası kastla 20–25 yıl · yaralama sonucu ölümde 10–14 yıl",
@@ -495,31 +544,6 @@
           }
         },
         {
-          "id": "BR01_B",
-          "kind": "OPTION",
-          "label": "Müebbet · olası kastla 15–20 yıl · yaralama sonucu ölümde 8–12 yıl",
-          "next": "BR_01B",
-          "responses": [
-            {
-              "lines": [
-                {
-                  "speaker": "leyla",
-                  "text": "Hayır. Kitabın eski baskısını okumuşsun. Olası kastta yirmi–yirmi beş. Yaralama sonucu ölümde artık on–on dört; geçen yıl değişti."
-                },
-                {
-                  "speaker": "leyla",
-                  "text": "Rakamı yanlış bilen avukat, müvekkiline yanlış umut verir. Yanlış umut, yanlış korkudan daha pahalıdır."
-                }
-              ]
-            }
-          ],
-          "quality": {
-            "q": "BAD",
-            "feedback": "Eski ve yanlış rakamlar: olası kastta müebbet yerine 20–25 yıl (TCK 21/2); TCK 87/4’te 86/1 hâli 7550 sayılı Kanunla 10–14 yıldır.",
-            "category": "HUKUKI_BILGI"
-          }
-        },
-        {
           "id": "BR01_C",
           "kind": "OPTION",
           "label": "Ağırlaştırılmış müebbet · olası kastla müebbet · taksirle öldürmede 2–6 yıl",
@@ -541,31 +565,6 @@
           "quality": {
             "q": "BAD",
             "feedback": "Ağırlaştırılmış müebbet TCK 82’nin cezasıdır; iddianame 81/1. Kasten vurulan yumrukta taban taksirle öldürme (TCK 85) değil, neticesi sebebiyle ağırlaşmış yaralamadır (TCK 87/4, 23).",
-            "category": "HUKUKI_BILGI"
-          }
-        },
-        {
-          "id": "BR01_D",
-          "kind": "OPTION",
-          "label": "Müebbet · olası kastla 20–25 yıl · taban taksirle öldürme, 2–6 yıl",
-          "next": "BR_01B",
-          "responses": [
-            {
-              "lines": [
-                {
-                  "speaker": "leyla",
-                  "text": "İlk ikisi doğru. Üçüncüsü bir dilek. Taksir, dikkatsizce yapılan şey içindir; yumruk dikkatsizlik değildir."
-                },
-                {
-                  "speaker": "leyla",
-                  "text": "Kasten yaralayıp ölüme sebep olursan kanun bunu ayrıca düzenler. Tabanını yanlış yere koyarsan duvar senin üstüne çöker."
-                }
-              ]
-            }
-          ],
-          "quality": {
-            "q": "BAD",
-            "feedback": "Yumruk kasten atıldığı için taban TCK 85 (taksirle öldürme) değil; kasten yaralamadan doğan ölümde TCK 87/4 uygulanır (TCK 23: ağır netice bakımından en az taksir).",
             "category": "HUKUKI_BILGI"
           }
         }

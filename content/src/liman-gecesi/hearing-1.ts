@@ -168,6 +168,10 @@ tarik: Ne diyeyim abla? Sen ne dersen.
 `),
       next: 'H1_02S',
       options: [
+        option('H102_D', 'Susma hakkını kullansın; anlatımı kayıtlar ve tanıklar üzerinden müdafi kursun', {
+          effects: [raise('sustu')],
+          neutral: 'Susma hakkı meşrudur (CMK 147/1-e); ama yumruğun nedenini ve sonrasını anlatabilecek tek kişi o.',
+        }),
         option('H102_A', 'Ne olduysa onu: bir kez vurduğunu, nedenini ve sonrasını kendisi anlatsın', {
           effects: [
             ifThen(
@@ -183,19 +187,15 @@ tarik: Ne diyeyim abla? Sen ne dersen.
             category: 'SAVUNMA_STRATEJISI',
           },
         }),
-        option('H102_B', 'Kolluktaki gibi: “ittim, düştü”', {
-          effects: [raise('inkar'), score('SAVUNMA_STRATEJISI', -60)],
-          bad: 'Görgü tanığının yumruğu gördüğü bir dosyada inkâr, sanığın güvenilirliğini ve tahrik zeminini birlikte yok eder.',
-          category: 'SAVUNMA_STRATEJISI',
-        }),
-        option('H102_C', 'Meşru müdafaa: Ercan onu babaya itti, kendini korudu', {
+        option('H102_C', 'Meşru müdafaa: Ercan onu babaya itip yüzüne tükürdü; saldırıyı tek yumrukla defetti', {
           effects: [score('SAVUNMA_STRATEJISI', -60), dec('pers')],
           bad: 'İtiş sona ermişti; yumruk bir saldırıyı defetmek için değil, hakarete ve tükürüğe karşılıktı. TCK 25’in güncellik ve orantılılık şartı yok; doğru zemin TCK 29.',
           category: 'SAVUNMA_STRATEJISI',
         }),
-        option('H102_D', 'Susma hakkını kullansın; savunmayı müdafi yapsın', {
-          effects: [raise('sustu')],
-          neutral: 'Susma hakkı meşrudur (CMK 147/1-e); ama yumruğun nedenini ve sonrasını anlatabilecek tek kişi o.',
+        option('H102_B', 'Kolluktaki anlatımda kalsın: “ittim, düştü”; yumruğu kabul etmek kastı kabul etmektir', {
+          effects: [raise('inkar'), score('SAVUNMA_STRATEJISI', -60)],
+          bad: 'Görgü tanığının yumruğu gördüğü bir dosyada inkâr, sanığın güvenilirliğini ve tahrik zeminini birlikte yok eder.',
+          category: 'SAVUNMA_STRATEJISI',
         }),
       ],
     }),
@@ -263,7 +263,18 @@ savci: Var Sayın Başkan. Sanık, kavgadan sonra bir saat boyunca nerede olduğ
 `),
       next: 'H102Q_SON',
       options: [
-        option('H102Q_A', 'İtiraz: sanık masumiyetini ispatla yükümlü değildir; ispat yükü iddiadadır', {
+        option('H102Q_B', 'Sanık cevaplasın; turnike ve büfe kayıtları bu soruyu zaten cevaplıyor', {
+          neutral:
+            'Soru cevaplandı; ama sanıktan masumiyetini kanıtlaması istendiği tutanağa itirazsız geçti. Kayıtların varlığı, sorunun biçimini düzeltmez.',
+          responses: B(`baskan: Sanık, cevap verin.`),
+        }),
+        option('H102Q_C', 'İtiraz: soru, savcılığın sanık hakkındaki önyargısını açıkça gösteriyor', {
+          score: { USUL_BILGISI: -50 },
+          effects: [dec('cred')],
+          bad: 'İtiraz bir usul kuralına dayanmalıdır; savcıya kişisel çıkış heyetin sabrını tüketir.',
+          responses: B(`baskan: Müdafi, itirazınızı hukuki dayanağıyla yapın. Sanık, cevap verin.`),
+        }),
+        option('H102Q_A', 'İtiraz: sanık suçsuzluğunu kanıtlamak zorunda değil; ispat yükü iddiada', {
           score: { USUL_BILGISI: 80 },
           effects: [inc('legal_hits'), inc('pers')],
           good: 'Masumiyet karinesi (Anayasa 38/4, AİHS 6/2): sanık suçsuzluğunu ispatlamak zorunda değildir; soru bu haliyle sorulamaz.',
@@ -272,16 +283,6 @@ savci: Var Sayın Başkan. Sanık, kavgadan sonra bir saat boyunca nerede olduğ
 baskan: Yerinde. Sayın Savcı, sorunuzu sanığın ne yaptığını soracak biçimde sorun.
 savci: Sanık, kavgadan sonra nereye gittiniz?
 `),
-        }),
-        option('H102Q_B', 'Sanık cevaplasın', {
-          neutral: 'Soru cevaplandı; ama sanıktan masumiyetini kanıtlaması istendiği tutanağa itirazsız geçti.',
-          responses: B(`baskan: Sanık, cevap verin.`),
-        }),
-        option('H102Q_C', '“Bu soru savcının önyargısını gösteriyor!”', {
-          score: { USUL_BILGISI: -50 },
-          effects: [dec('cred')],
-          bad: 'İtiraz bir usul kuralına dayanmalıdır; savcıya kişisel çıkış heyetin sabrını tüketir.',
-          responses: B(`baskan: Müdafi, itirazınızı hukuki dayanağıyla yapın. Sanık, cevap verin.`),
         }),
       ],
     }),
@@ -446,31 +447,7 @@ baskan: Müdafi, delile karşı diyeceğiniz?
 `),
       next: 'H1_04B',
       options: [
-        option(
-          'H104_A',
-          'Kriminal rapor: biyolojik iz yok; iz, işçinin her gün tuttuğu kilitte mesleki temasla açıklanır',
-          {
-            score: { DELIL_ANALIZI: 100 },
-            effects: [inc('pers'), raise('twist_itiraz')],
-            good: 'Biyolojik izin yokluğu ve iz ile meslek arasındaki bağ, aletle eylem arasında bir irtibat kurulamadığını gösterir (CMK 217).',
-            responses: B(`
-- Sayın Başkan, kriminal rapor kilitte kan, doku ya da saç bulunmadığını söylüyor. Kafatasını kıran bir darbe bu kilitte iz bırakırdı.
-- Parmak izine gelince: sanık laşing işçisi. Her gece dört yüz kilit takıp sökerdi. Kafesteki her kilitte onun izi olması bir delil değil, bir meslek.
-savci: Kilit silinmiş olabilir.
-- O zaman parmak izi de silinirdi, Sayın Savcı.
-> Üye hâkim kısa bir not aldı. Savcı cevap vermedi.
-`),
-          },
-        ),
-        option('H104_B', 'Delil hukuka aykırı elde edilmiştir; dışlanmalıdır', {
-          score: { USUL_BILGISI: -50 },
-          effects: [dec('cred')],
-          bad: 'Kilit kolluk tarafından olay yerinde usulüne uygun alınmış ve emanete konmuştur; hukuka aykırılık iddiası dayanaksız (CMK 206/2-a’nın şartları yok).',
-          responses: B(`
-baskan: Hangi usul kuralı ihlal edildi, müdafi? … Belirtemiyorsunuz. Talep reddedildi.
-`),
-        }),
-        option('H104_C', 'Kilidin ölçüsü kırıkla karşılaştırılmalı; bilirkişiden sorulsun', {
+        option('H104_C', 'Kilidin ölçüsü kırıkla karşılaştırılmalı; bu husus bilirkişiye sorulsun', {
           effects: [
             ifThen(
               has('clue_desen'),
@@ -507,7 +484,31 @@ baskan: Yaranın ölçüsü nedir, müdafi? … Bilirkişi dinlenirken sorarsın
 `),
           ],
         }),
-        option('H104_D', 'Diyeceğimiz yok', {
+        option('H104_B', 'Kilit müdafi huzuru olmadan alınmış; hukuka aykırı delil olarak dışlanmalı', {
+          score: { USUL_BILGISI: -50 },
+          effects: [dec('cred')],
+          bad: 'Olay yerinde kolluğun eşya toplaması için müdafi bulunması şart değildir; kilit tutanakla alınmış ve emanete konmuştur. Hukuka aykırılık iddiası dayanaksız (CMK 206/2-a’nın şartları yok).',
+          responses: B(`
+baskan: Olay yerinde el koyma için müdafi hazır bulunması gerekmez, müdafi. Tutanak dosyada. Talep reddedildi.
+`),
+        }),
+        option(
+          'H104_A',
+          'Kriminal rapor: kilitte biyolojik iz yok; parmak izi mesleki temasla açıklanır',
+          {
+            score: { DELIL_ANALIZI: 100 },
+            effects: [inc('pers'), raise('twist_itiraz')],
+            good: 'Biyolojik izin yokluğu ve iz ile meslek arasındaki bağ, aletle eylem arasında bir irtibat kurulamadığını gösterir (CMK 217).',
+            responses: B(`
+- Sayın Başkan, kriminal rapor kilitte kan, doku ya da saç bulunmadığını söylüyor. Kafatasını kıran bir darbe bu kilitte iz bırakırdı.
+- Parmak izine gelince: sanık laşing işçisi. Her gece dört yüz kilit takıp sökerdi. Kafesteki her kilitte onun izi olması bir delil değil, bir meslek.
+savci: Kilit silinmiş olabilir.
+- O zaman parmak izi de silinirdi, Sayın Savcı.
+> Üye hâkim kısa bir not aldı. Savcı cevap vermedi.
+`),
+          },
+        ),
+        option('H104_D', 'Delile diyeceğimiz yok; kilidin değerlendirmesini bilirkişiye bırakıyoruz', {
           effects: [dec('pers')],
           neutral: 'Savcılığın aletine karşı söz almadın; heyet onu tartışılmamış bir delil olarak not etti.',
         }),
@@ -763,13 +764,13 @@ baskan: Kabul. BTK’ya yazılsın.
           good: 'Maktulün kavgadan sonraki hayatını belgeleyen kayıt (CMK 332).',
           responses: B(`baskan: Kabul.`),
         }),
-        option('TL_YAKALA', 'Vardiya şefi hakkında yakalama kararı verilmesi', {
+        option('TL_YAKALA', 'Teşhiste yanılan tanık hakkında yalan tanıklıktan suç duyurusu', {
           enabledWhen: cmp(v('talep_n'), '<', 3),
           score: { USUL_BILGISI: -80 },
           effects: [dec('cred'), inc('talep_n')],
-          bad: 'Müdafi bir tanık hakkında yakalama isteyemez; tanığın suç işlediği şüphesi varsa yol, Cumhuriyet Başsavcılığına suç duyurusudur (CMK 158).',
+          bad: 'Yanılmak yalan tanıklık değildir; tanık emin olmadığını kendisi söyledi. Üstelik suç duyurusu mahkemeden değil Cumhuriyet Başsavcılığından istenir (CMK 158); bir ara karar hakkını boşa harcadın.',
           responses: B(`
-baskan: Müdafi, burası sizin müvekkilinizin yargılandığı dava. Tanık hakkında bir şüpheniz varsa yeri savcılıktır. Reddedildi.
+baskan: Müdafi, tanık emin olmadığını söyledi; yanılmak suç değildir. Bir şüpheniz varsa yeri savcılıktır, bu mahkeme değil. Reddedildi.
 > Savcı hafifçe başını salladı; benim için değil, başkan için.
 `),
         }),
@@ -787,7 +788,11 @@ baskan: Müdafi?
 `),
       next: 'H1_08',
       options: [
-        option('H107_A', 'Adli kontrolle tahliye: sanığın dönmediği kayıtla sabit; kaçma şüphesi yok', {
+        option('H107_C', 'Tutukluluk incelemesini kayıtlar gelince ikinci celsede isteyelim', {
+          neutral: 'Tahliye talep edilmedi; müvekkil bir ay daha içeride.',
+          responses: B(`baskan: Tutukluluğun devamına.`),
+        }),
+        option('H107_A', 'Adli kontrolle tahliye: dönüş kayıtla çürüdü, kuvvetli şüphe kalmadı', {
           effects: [
             ifThen(
               flag('contra_k1'),
@@ -826,10 +831,6 @@ baskan: Tanık beyanları ve delil durumu gözetilerek tutukluluğun devamına.
           bad: 'Tutuklama kararı o tarihteki delillere göre verildi; şimdi istenmesi gereken tahliyedir, tazminat tartışması değil (CMK 141 hükümden sonra).',
           responses: B(`baskan: Tazminat hükümden sonra konuşulur, müdafi. Tutukluluğun devamına.`),
         }),
-        option('H107_C', 'Takdir mahkemenizindir', {
-          neutral: 'Tahliye talep edilmedi; müvekkil bir ay daha içeride.',
-          responses: B(`baskan: Tutukluluğun devamına.`),
-        }),
       ],
     }),
     story('H1_08', {
@@ -845,8 +846,8 @@ baskan: Eksik hususların tamamlanması için duruşma üç hafta sonraya ertele
 > Tarık adliyenin merdivenlerinden indi. Gülay ona sarılmadı; elini tuttu, sıktı, bıraktı. Yağmur dinmişti.
 tarik: Abla… Bitti mi?
 - Bitmedi. Daha bir celse var. Ama bu akşam Elif’i öpebilirsin.
-> Merdivenin dibinde, siyahlar içinde Sevim Yavuz duruyordu. Tarık onu görünce durdu. Sevim ona bakmadı. Kenan’ın gittiği yöne bakıyordu.
-~ Kocasının katili diye bildiği adama değil, kocasının amirine bakan bir dul. Not aldım.
+> Merdivenin dibinde, siyahlar içinde Sevim Yavuz duruyordu. Tarık onu görünce durdu. Sevim ona bakmadı; yağmura bakıyordu.
+~ Kocasının katili diye bildiği adama bakmayan bir dul. Öfkeden mi, yorgunluktan mı, bilmiyordum. Not aldım.
 `,
         ),
         O(`
@@ -856,7 +857,7 @@ baskan: Eksik hususların tamamlanması için duruşma üç hafta sonraya ertele
 > Gülay merdivenlerde, Elif’in resim defterini göğsüne bastırmış duruyordu.
 gulay: Üç hafta daha. Elif’e ne diyeceğim?
 - Babası gemide diyeceksiniz. Bir sefer daha.
-> Merdivenin dibinde, siyahlar içinde Sevim Yavuz duruyordu. Gözleri Kenan’ın gittiği yöndeydi.
+> Merdivenin dibinde, siyahlar içinde Sevim Yavuz duruyordu. Kimseye bakmıyordu; elindeki şemsiyeyi açmayı unutmuştu.
 `),
       ],
       choices: [cont('H108_DEVAM', 'Ara · üç hafta', 'ARA_GIRIS_1', { role: 'PRIMARY' })],

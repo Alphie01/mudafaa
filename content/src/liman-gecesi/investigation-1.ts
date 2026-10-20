@@ -552,7 +552,7 @@ tarik/uzgun: Adam onunla dalga geçti. “Ezildi” dedi. Tükürdü yüzüme. B
           says: T(`
 tarik/saskin: Kenan abi mi? B sahasında mı? Ben B sahasına hiç gitmedim abla. O tarafta işim yok, orası istif.
 tarik: Kenan abi iyi adamdır. Bana iş o buldu. Ağabeyim ölünce “sen de burada kal evlat” dedi. Yanlış görmüştür. Gece, yağmur…
-tarik: Çıkarken kamyoneti ofisin önündeydi. Motoru çalışıyordu, farları sönük. O kadar. Ondan sonrasını bilmem.
+tarik: Ben turnikeden çıktım, iskeleye indim. Ondan sonrasını bilmem.
 ~ Müvekkilim, aleyhine tanıklık eden adamı savunuyor. Bu dosyada herkes birini koruyor.
 `),
         },
@@ -910,8 +910,8 @@ const kenan = conversation('INV_KENAN', {
   room: { label: 'LİMAN · VARDİYA OFİSİ', character: 'kenan' },
   lines: B(`
 # LİMAN — VARDİYA OFİSİ [bg:depo]
-> Prefabrik bir oda. Masada bir termos, iki bardak, bir telsiz. Duvarda gelgit tablosu, bir gemi takvimi, çerçevesiz bir römorkör fotoğrafı.
-> Ellilerinde, kır sakallı, iri bir adam. Lacivert kazak. Konuşurken ellerini cebinden çıkardığı bir bez parçasına siliyordu; temiz ellerini.
+> Prefabrik bir oda. Masada bir termos, iki bardak, bir telsiz. Duvarda gelgit tablosu, bir gemi takvimi, rıhtımların el çizimi bir planı.
+> Ellilerinde, kır sakallı, iri bir adam. Lacivert kazak. Konuşurken ellerini cebinden çıkardığı bir bez parçasına siliyordu; yağ, mürekkep, belki yalnızca alışkanlık.
 kenan: Gel kızım, gel. Kahve? Termos kahvesi, acıdır ama ısıtır. Limanda iyi gün herkesin; poyrazda adam belli olur.
 kenan: Tarık’ın avukatısın. Bilirim. Yazık oldu o çocuğa. Yazık oldu Ercan’a da. İkisi de benim vardiyamdı.
 kenan: Yirmi yıldır bu limandayım. Kutuları sayarız, adamları sayarız, geceleri sayarız. Liman insanı bırakmaz kızım; kıyıya çeker, orada tutar.
@@ -954,10 +954,9 @@ kenan/uzgun: Ama içinde bir yangın vardı o çocuğun. Ağabeyi meselesi. Erca
       bad: 'Tanığa elindeki kaydı gösterdin; kim olduğunu bilmediğin bir numarayı bir tanığın ağzına verdin. Bilgi önce mahkemeye ve savcılığa gitmeli (CMK 158, 177).',
       category: 'SAVUNMA_STRATEJISI',
       responses: B(`
-> Bez parçası elinde durdu. Bir an. Sonra yeniden silmeye başladı; temiz ellerini.
 kenan: Beni mi? Yok kızım. Telefonum ofiste şarjdaydı. Ercan herkesi arardı içince; karısını, anasını, ölmüş babasını.
 kenan: Sen bunlarla yorma kendini. Çocuğun bir yumruğu var, onu savun. Gerisi polisin işi.
-~ Bir soru sordum ve cevabı dinledim. Cevaptan çok, cevaptan önceki saniyeyi.
+~ Kimin olduğunu bilmediğim bir numarayı, mahkemeden önce bir tanığın masasına koydum. Bir kaydın değeri, kimin elinde ilk durduğuyla ölçülür.
 `),
     }),
     option('KN_FENER', '“Kavgayı ayırırken Ercan ne diyordu?”', {
@@ -1129,7 +1128,7 @@ const telefon = documentExam('INV_TELEFON', {
   lines: B(`
 > Kolluğun tutanağı: cesedin cebinden çıkan telefonun son aramaları. Altında bir imza ve “herhangi bir hususa rastlanmamıştır.”
 ~ “Herhangi bir husus.” Bir hususun hangisi olduğuna kim karar verdi?
-> Tutanağın kenarında, kurşun kalemle, bir el yazısı: “Kptn kim?” Altında cevap yok. Birisi sormuş, kimse cevaplamamış.
+> Tutanağın altında tek bir imza; kontrol eden ikinci bir göz yok. Altı satır, iki dakikada okunmuş.
 `),
   header: { left: 'TELEFON İNCELEME TUTANAĞI · E. YAVUZ', right: '16.11' },
   columns: [
@@ -1203,6 +1202,7 @@ const turnike = documentExam('INV_TURNIKE', {
     row('g1', ['23.02', 'Personel 1', 'Ş. BALCI', 'giriş']),
     row('g2', ['23.18', 'Personel 2', 'T. DEMİREL', 'çıkış']),
     row('g3', ['23.26', 'Personel 1', 'M. ÖZ', 'çıkış']),
+    row('g3b', ['23.21', 'Araç kapısı', '16 LMN 07 · servis', 'çıkış']),
     row('g4', ['23.49 / 00.14', 'Araç kapısı', '16 LMN 07 · servis', 'giriş / çıkış']),
     row('g5', ['06.02', 'Personel 1', 'H. KARA', 'giriş']),
   ],
@@ -1224,7 +1224,7 @@ const turnike = documentExam('INV_TURNIKE', {
       score: { DELIL_ANALIZI: 100 },
       feedback: {
         title: 'YENİ İPUCU',
-        text: 'Gece yarısına doğru limana giren tek araç: 16 LMN 07, bir servis kamyoneti. 23.49 giriş, 00.14 çıkış. Kimin kullandığı yazmıyor.',
+        text: 'Gece yarısına doğru limana giren tek araç: 16 LMN 07, bir servis kamyoneti. 23.21’de çıkmış, 23.49’da geri girmiş, 00.14’te yeniden çıkmış. Kimin kullandığı yazmıyor.',
         label: '+100 SKOR · Not defterine eklendi',
         tone: 'special',
       },
@@ -1338,13 +1338,13 @@ const dilekce = story('INV_DIL', {
         'Üç ay sonra yapılacak keşif izleri göstermez; fotoğraflar zaten dosyada. Talep hakkını başka bir kayda harcayabilirdin.',
       responses: B(`- Olay yerinde keşif. Mesafeleri ve aydınlatmayı görmek için.`),
     }),
-    option('DIL_HTS', 'Vardiya şefinin HTS kayıtları', {
+    option('DIL_HTS', 'Liman güvenlik kamerası kayıtları (B sahası ve rıhtımlar)', {
       enabledWhen: cmp(v('dil_n'), '<', 2),
       score: { USUL_BILGISI: -40 },
       effects: [inc('dil_n')],
-      bad: 'Elinde somut bir şüphe yokken bir tanığın iletişim kayıtlarını istemek CMK 135’in ölçülülük şartını karşılamaz; mahkeme reddeder.',
-      responses: B(`- Vardiya şefinin iletişim kayıtları.
-~ Gerekçe yazmaya çalıştım. İki satırdan sonra durdum: elimde bir his vardı, bir delil yoktu. Mahkeme hisleri okumaz.`),
+      bad: 'Kolluğun olay yeri tutanağı B sahasında ve 4 no’lu rıhtımda kamera bulunmadığını yazıyordu; dosyayı okumadan istenen kayıt bir talep hakkını boşa harcar (CMK 177).',
+      responses: B(`- Liman güvenlik kamerası kayıtları; B sahası ve rıhtımlar.
+~ Dilekçeyi gönderdikten sonra olay yeri tutanağını yeniden açtım. Üçüncü sayfa, son satır: “Olay mahallinde kamera bulunmamaktadır.” Okumuştum. Unutmuştum.`),
     }),
     back('DIL_GONDER', 'Dilekçeyi gönder'),
   ],
@@ -1722,7 +1722,7 @@ leyla: Savcı ikisini aynı cümlede söyleyecek: “kavga etti, döndü, öldü
 > Paketi çevirdi. Bir tur. Durdu.
 leyla: Bir de vardiya şefine dikkat et. İyi bir adam gibi görünüyor, iyi bir adam gibi konuşuyor. İyi adamlar kürsüde en tehlikeli tanıklardır; çünkü onlara inanılır.
 leyla: İnanılan bir tanığı yalancı çıkarmaya çalışma. Yanıldığını göster. Kâğıtla.
-- Ya yanılmıyorsa? Ya biliyorsa?
+- Ya yanılmıyorsa?
 leyla: O zaman da aynı. Kürsüde “yalancı” diyen avukat salonu kaybeder. “Kâğıt başka bir saat söylüyor” diyen avukat salonu kazanır. Gerisini heyet düşünür.
 leyla: Bir de Tarık. Yarın ilk kez herkesin önünde konuşacak. Ne diyeceğine o karar verir; ama ne demenin ne anlama geldiğini ona sen anlatırsın. Telkin değil; bilgi.
 ~ Pencereyi açtım. Yağmur dinmişti; poyraz dinmemişti. Uzakta, limanın vinçleri kırmızı ışıklarıyla göz kırpıyordu.

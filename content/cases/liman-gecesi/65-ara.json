@@ -167,6 +167,11 @@
               "speaker": "player",
               "text": "Panoya yeni bir kâğıt iğneledim: “23.41.” Altına üç soru: Kim? Neden? Sonra ne oldu?",
               "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "İkinci celse on gün sonra; tarih ara kararda yazılı. O güne kadar ne bulursam onu götüreceğim. Bulmadığımı da.",
+              "style": "thought"
             }
           ]
         },
@@ -179,6 +184,10 @@
               "speaker": "player",
               "text": "Sabah adliyenin emanet bürosunu aradım; kâtip “salı on” dedi. Bir delile bakmak bile randevulu. Dokunmak ise hiç yok.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yağmur üç gündür dinmemişti. Büronun penceresinde damlalar, camın ardında ıslak bir Bursa; Uludağ bulutların içinde kaybolmuştu."
             }
           ]
         },
@@ -199,7 +208,7 @@
           "kind": "PEOPLE",
           "choices": ["A_SEVIM", "A_TARIK", "A_NURTEN", "A_KENAN"]
         },
-        { "id": "t2_emanet", "label": "EMANET", "kind": "SCENE", "choices": ["A_EMANET"] },
+        { "id": "t2_emanet", "label": "EMANET", "kind": "SCENE", "choices": ["A_EMANET", "A_SAVCI"] },
         {
           "id": "t2_arsiv",
           "label": "ARŞİV",
@@ -256,6 +265,15 @@
           "next": "ARA_EMANET",
           "maxUses": 1,
           "description": "Adliye emanet bürosu · kâtip huzurunda"
+        },
+        {
+          "id": "A_SAVCI",
+          "kind": "NAVIGATE",
+          "label": "Savcı Bora Kılınç",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_SAVCI",
+          "maxUses": 1,
+          "description": "Adliye · savcılık katı"
         },
         {
           "id": "A_KAYIT",
@@ -322,6 +340,7 @@
           "kind": "NAVIGATE",
           "label": "DURUŞMAYA GİT · 2. CELSE",
           "role": "PRIMARY",
+          "visibleWhen": { "cmp": [{ "var": "ara_day" }, ">=", 3] },
           "confirm": "Duruşmaya gidersen ara biter. Emin misin?",
           "next": "ARA_SON_1"
         }
@@ -401,12 +420,12 @@
                 },
                 {
                   "speaker": "sevim",
-                  "text": "O gece dokuz buçukta aradı beni. Sesi neşeliydi; içmişti ama neşeliydi. “Bu gece bir işi bitireceğim Sevim, yarın sana bir şey alacağım” dedi."
+                  "text": "O gece onu on’u çeyrek geçe ben aradım. Sesi neşeliydi; içmişti ama neşeliydi. “Bu gece bir işi bitireceğim Sevim, yarın sana bir şey alacağım” dedi."
                 },
                 {
                   "speaker": "sevim",
                   "expression": "uzgun",
-                  "text": "Ne alacaktın Ercan? Ne bitirecektin? Gece yarısı aradım, açmadı. Sabaha karşı yine aradım. Sabah polis geldi."
+                  "text": "Ne alacaktın Ercan? Ne bitirecektin? Gece yarısı aradım, açmadı. Yarım saat sonra yine aradım. Sabah polis geldi."
                 }
               ]
             }
@@ -481,6 +500,41 @@
             { "type": "SCORE", "category": "SORGULAMA", "amount": 40 },
             { "type": "VAR", "var": "sevim_defter", "op": "set", "value": true }
           ]
+        },
+        {
+          "id": "SV_ERCAN",
+          "kind": "OPTION",
+          "label": "“Ercan nasıl biriydi? Dosyada yalnızca bir puantör yazıyor.”",
+          "visibleWhen": { "flag": "sevim_acti" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "sevim",
+                  "text": "Puantör. Evet. Gemiye giren kutuyu sayardı. Evde de sayardı; merdivenleri, tabakları, benim saçımdaki beyazları."
+                },
+                {
+                  "speaker": "sevim",
+                  "expression": "uzgun",
+                  "text": "İçerdi. Dili kötüydü; içince daha kötü. O çocuğa ne dediğini duydum, polis okudu bana. Utandım. Ercan adına utandım."
+                },
+                {
+                  "speaker": "sevim",
+                  "text": "Ama hırsız değildi. Yanlış saymazdı. “Sevim, bir kutuyu yanlış sayarsan bir gün biri seni de yanlış sayar” derdi."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kapının kenarındaki eli gevşedi. Hırkasının cebinden buruşuk bir mendil çıkardı, katladı, geri koydu."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir dulun ağzından bir maktul. Dosyada iki satırdı; kapı aralığında bir insan oldu.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
         },
         {
           "id": "SV_TUTANAK",
@@ -637,6 +691,15 @@
                   "speaker": "player",
                   "text": "Bir laşing işçisinin gözü. Bir otopsi şemasında bir kilidin konisini görmek için dört yüz kilit takıp sökmüş olmak gerekiyordu.",
                   "style": "thought"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bunu mahkemede sen söylemeyeceksin, Tarık. Ölçüyü bilirkişiye ben götüreceğim; emanetteki kilidin fotoğrafıyla."
+                },
+                { "speaker": "tarik", "text": "Neden ben söylemiyorum abla? Ben biliyorum." },
+                {
+                  "speaker": "player",
+                  "text": "Çünkü senin bildiğini herkes “sanık söylüyor” diye dinler. Bir cetvelin söylediğini kimse öyle dinlemez."
                 }
               ]
             }
@@ -690,6 +753,10 @@
                   "text": "Kimse sormadı abla. Bir de… Kenan abi bana iş verdi. Ağabeyim ölünce. İnsan iş verene laf söylemez."
                 },
                 {
+                  "speaker": "tarik",
+                  "text": "Bir şey daha. O gece turnikeye yürürken kamyonet ofisin önündeydi. Motoru çalışıyordu, farları sönük. Önemli değil sandım; söylemedim."
+                },
+                {
                   "speaker": "player",
                   "text": "Bir borç. Müvekkilim bile bir borcun altında. Bu limanda herkes birine borçlu.",
                   "style": "thought"
@@ -727,6 +794,10 @@
             },
             {
               "speaker": "narrator",
+              "text": "Döküm saniyesi saniyesine. Hız, yön, motor. Bir makine bir gecenin yarısını yazmış; öbür yarısını bir insanın imzası tamamlıyor."
+            },
+            {
+              "speaker": "narrator",
               "text": "Kâğıdın altına liman işletmesinin hukuk müşaviri bir not düşmüş: “Araç, gece vardiyasında vardiya amirliğinin kullanımındadır.” Bir cümle; kimin olduğunu söylemeyen, söylemekten kaçınan."
             }
           ]
@@ -739,6 +810,7 @@
         { "label": "NOT", "flex": 1.2 }
       ],
       "rows": [
+        { "id": "a0", "cells": ["23.21", "Araç kapısı · çıkış", "hız 15 km/s"] },
         { "id": "a1", "cells": ["23.49", "Araç kapısı · giriş", "hız 12 km/s"] },
         { "id": "a2", "cells": ["23.52–00.06", "Konum: B sahası, 3. sıra · durdu", "motor çalışır"] },
         { "id": "a3", "cells": ["00.14", "Araç kapısı · çıkış", "hız 18 km/s"] },
@@ -810,6 +882,11 @@
             {
               "speaker": "narrator",
               "text": "Kareli bir defter. Sayfaların çoğu iş: tarih, gemi, sayı. Arada bir doğum günü, bir borç, bir telefon numarası. Yanına o geceki geminin manifestosunu koydum."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir ölünün el yazısını okumak, kapısını çalmadan bir evin içine girmek gibi. Sayfaları yavaş çevirdim; tutanakta sayfa sayısı yazılıydı.",
+              "style": "thought"
             }
           ]
         }
@@ -908,6 +985,10 @@
               "speaker": "player",
               "text": "Usul olmazsa her şey kaybolur. Bir limanda bir kilit kaybolur; bir emanet bürosunda kaybolmaz. Fark, bir defterdir.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masaya bir cetvel koydum; kâtip baktı, bir şey demedi. Ölçmek dokunmak değildi. Fotoğrafa cetvelle birlikte girecekti."
             }
           ]
         }
@@ -1147,9 +1228,62 @@
       ],
       "choices": [
         {
+          "id": "SUC_B",
+          "kind": "OPTION",
+          "label": "Kısa duyuru: maktulün son görüşmesi araştırılsın, ekler sonra sunulur",
+          "next": "ARA_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "İki paragraf yazdım. Kimseyi göstermeyen, hiçbir şeyi eklemeyen. Kâğıt ön büroda bir numara aldı ve kayboldu."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": -10 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Elindeki belgeleri eklemeyen bir duyuru savcılık için bir iş yükünden ibarettir; somut dayanağı ilk dilekçede vermeliydin."
+          }
+        },
+        {
+          "id": "SUC_C",
+          "kind": "OPTION",
+          "label": "Kamuoyuna açıklama: savcılık harekete geçsin diye kayıtları basına anlat",
+          "next": "ARA_HUB",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Bir muhabire iki cümle söyledim. Ertesi sabah küçük bir haber: “Avukat: Gerçek katil limanda.”"
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Ne yaptın sen? Bir adamı manşette suçladın, delilini de ona duyurdun. Bir daha benim büromdan basına tek cümle çıkmayacak.",
+                  "style": "phone"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -80 },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "basin", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Soruşturması olmayan bir kişiyi basın önünde suçlamak hakaret ve iftira riskidir (TCK 125, 267) ve avukatlık meslek kurallarına aykırıdır (Av.K. 34); delili de karartmaya davet eder.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
           "id": "SUC_A",
           "kind": "OPTION",
-          "label": "Somut dayanaklı duyuru: abone kaydı, araç takip ve zimmet, B sahasındaki izler, ekleriyle",
+          "label": "Somut dayanaklı duyuru: abone, araç takip ve zimmet kayıtları, ekleriyle",
           "next": "ARA_HUB",
           "responses": [
             {
@@ -1181,60 +1315,205 @@
             "category": "USUL_BILGISI"
           }
         },
+        { "id": "SUC_VAZGEC", "kind": "CONTINUE", "label": "Vazgeç", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
+      "id": "ARA_SAVCI",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #10 · ARA",
+      "title": "Savcı Bora Kılınç",
+      "background": "adliye",
+      "lines": [
         {
-          "id": "SUC_B",
+          "when": { "flag": "suc_duyurusu" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 11.00 — BURSA ADLİYESİ, SAVCILIK KATI",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridorun sonunda bir oda, kapısında küçük bir pirinç levha. Savcı Bora Kılınç masasında, önünde iki dosya: biri kalın, biri yeni ve ince."
+            },
+            {
+              "speaker": "savci",
+              "text": "Avukat hanım. Oturun. İnce olanı siz yazdınız. Dört sayfa, dört ek. Okudum."
+            },
+            {
+              "speaker": "narrator",
+              "text": "İnce dosyanın kapağında bir soruşturma numarası. Altında el yazısıyla bir not: “Kolluk: Bşk. Aydemir.”"
+            },
+            {
+              "speaker": "savci",
+              "text": "Bir şeyi açık söyleyeyim. Ben bu davada iddia makamıyım ve bu duyuruyu da ben inceleyeceğim. İkisini karıştırmam; siz de karıştırmayın."
+            },
+            {
+              "speaker": "savci",
+              "text": "Duyurudaki kişiye ulaşmayın. Telefon etmeyin, kapısına gitmeyin. Bir soruşturmayı en çok iyi niyetli avukatlar bozar."
+            },
+            { "speaker": "player", "text": "Gitmeyeceğim. Bulduğum her şey o dosyada." },
+            {
+              "speaker": "savci",
+              "text": "Güzel. Mütalaamı duruşmadaki delile göre veririm. Bilirkişinin ne diyeceğini ben de merak ediyorum; bunu da açık söyleyeyim."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir savcının “merak ediyorum” demesi. Üç ay önce dosyası kapalıydı. Bugün masasında iki dosya var.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 11.00 — BURSA ADLİYESİ, SAVCILIK KATI",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridorun sonunda bir oda, kapısında küçük bir pirinç levha. Savcı Bora Kılınç masasında; önünde tek bir dosya, sekmeleri renk renk."
+            },
+            {
+              "speaker": "savci",
+              "text": "Avukat hanım. Beş dakika. Dosya mahkemede; iddianameyi yazan ben değilim ama arkasındayım."
+            },
+            {
+              "speaker": "savci",
+              "text": "Elinizde bir şey varsa iki yolu var. Ya duruşmada sunarsınız, ya bana yazarsınız. Ben dilekçe okurum; koridor sohbeti değil."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kalemini çevirdi. Bir tur. Leyla’nın sigara paketi gibi; bu adliyede herkesin elinde dönen bir şey vardı."
+            },
+            {
+              "speaker": "savci",
+              "text": "Bir de şunu bilin: yumruk sabit. Sanığın kendisi söyledi. Gerisini heyet tartar."
+            },
+            { "speaker": "player", "text": "Yumruk sabit. Ölüm saati sabit değil." },
+            {
+              "speaker": "savci",
+              "text": "Rapor iki saatlik bir aralık veriyor. İki saat bir ceza dosyasında uzun bir süre değildir, avukat hanım."
+            },
+            { "speaker": "player", "text": "Bir turnikeden çıkıp bir iskeleye yürümek için yeterince uzun." },
+            {
+              "speaker": "narrator",
+              "text": "Bir an sustu. Sonra dosyasını kapattı; bu, görüşmenin bittiği anlamına geliyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir savcı bir yumruğa yaslanıyor. Benim işim, o yumruğun ne kadar ağırlık taşıyabildiğini göstermek.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "SAV_ATK",
           "kind": "OPTION",
-          "label": "İsim vermeden genel bir duyuru: “gerçek fail araştırılsın”",
-          "next": "ARA_HUB",
+          "label": "“Nihai raporun ölüm saatini nasıl okuyorsunuz?”",
           "responses": [
             {
               "lines": [
                 {
-                  "speaker": "narrator",
-                  "text": "İki paragraf yazdım. Kimseyi göstermeyen, hiçbir şeyi eklemeyen. Kâğıt ön büroda bir numara aldı ve kayboldu."
+                  "speaker": "savci",
+                  "text": "Raporu okudum. Yirmi üç ile bir arası. Kavga on bir sularında. Aralık sanığı dışarıda bırakmıyor."
+                },
+                { "speaker": "player", "text": "Mide içeriği de raporda." },
+                {
+                  "speaker": "savci",
+                  "text": "Yazılmış, yorumlanmamış. Yorumu ben yapmam, bilirkişi yapar. Sorarsanız cevap verir; sormazsanız rapor bana yeter."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Sorarsanız.” Bir savcı bana yolu gösterdi; bilerek mi bilmeyerek mi, bilmiyorum.",
+                  "style": "thought"
                 }
               ]
             }
           ],
-          "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": -10 }],
-          "quality": {
-            "q": "NEUTRAL",
-            "feedback": "Somut dayanağı ve şüpheliyi göstermeyen bir duyuru savcılık için bir iş yükünden ibarettir; elindeki belgeleri eklemeliydin."
-          }
+          "effects": [{ "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 20 }]
         },
         {
-          "id": "SUC_C",
+          "id": "SAV_PAZAR",
           "kind": "OPTION",
-          "label": "Basına bir açıklama: “Gerçek katil limanda”",
-          "next": "ARA_HUB",
+          "label": "“Yumruğu kabul edersek iddianameyi 87/4’e çekmeyi düşünür müsünüz?”",
           "responses": [
             {
               "lines": [
                 {
-                  "speaker": "narrator",
-                  "text": "Bir muhabire iki cümle söyledim. Ertesi sabah küçük bir haber: “Avukat: Gerçek katil limanda.”"
+                  "speaker": "savci",
+                  "text": "Avukat hanım, burası Amerikan dizisi değil. İddianame mahkemede; vasfı heyet belirler. Benim işim mütalaa vermek, pazarlık değil."
+                },
+                { "speaker": "narrator", "text": "Kalemini bıraktı. Bana ilk kez dosyasından değil, yüzümden baktı." },
+                {
+                  "speaker": "savci",
+                  "text": "Bir de… müvekkilinizin yumruğunu bana satmaya çalışmayın. Onu zaten kendisi mahkemeye verdi."
                 },
                 {
-                  "speaker": "leyla",
-                  "text": "Ne yaptın sen? Bir adamı manşette suçladın, delilini de ona duyurdun. Bir daha benim büromdan basına tek cümle çıkmayacak.",
-                  "style": "phone"
+                  "speaker": "player",
+                  "text": "Bir cümleyle iki şey kaybettim: savcının saygısını ve kendi delillerime olan inancımı. Biri geri gelir. Öbürünü bilmiyorum.",
+                  "style": "thought"
                 }
               ]
             }
           ],
           "effects": [
-            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -80 },
-            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
-            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
-            { "type": "VAR", "var": "basin", "op": "set", "value": true }
+            { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": -40 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Soruşturması olmayan bir kişiyi basın önünde suçlamak hakaret ve iftira riskidir (TCK 125, 267) ve avukatlık meslek kurallarına aykırıdır (Av.K. 34); delili de karartmaya davet eder.",
+            "feedback": "Türk ceza muhakemesinde kasten öldürme ya da yaralama sonucu ölüm için savcıyla “suç vasfı pazarlığı” yoktur; iddianame bir kez kabul edildikten sonra vasfı mahkeme belirler (CMK 225, 226). Teklif, savunmanın kendi delillerine güvenmediğini gösterdi.",
+            "category": "HUKUKI_BILGI"
+          }
+        },
+        {
+          "id": "SAV_ASIL",
+          "kind": "OPTION",
+          "label": "Duyurudaki kayıtların asıllarını soruşturma dosyasına sunmayı teklif et",
+          "visibleWhen": { "flag": "suc_duyurusu" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Eklerin asılları bende değil, mahkemede. Defterin teslim tutanağı, BTK ve işletme cevaplarının müzekkere yazıları. Örneklerini getirebilirim."
+                },
+                {
+                  "speaker": "savci",
+                  "text": "Getirin. Kalem amirine bırakın, tutanakla. Benim dosyamla mahkemenin dosyası aynı kâğıdı iki kez saymasın."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "İnce dosyanın kapağına bir not daha düştü. Kalemin ucu kâğıtta bir an durdu."
+                },
+                {
+                  "speaker": "savci",
+                  "text": "Zimmet defterleri, araç takip dökümleri… İşletmeler bunları altı ay saklar. Altı ay dolmadan alınması gerekir."
+                },
+                { "speaker": "player", "text": "O yüzden yazdım." },
+                { "speaker": "savci", "text": "Biliyorum. Bakacağız." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "VAR", "var": "savci_asil", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Suç duyurusuna eklenen belgelerin asıllarını ve elde ediliş tutanaklarını soruşturma makamına sunmak delil zincirini korur (CMK 158, 160).",
             "category": "USUL_BILGISI"
           }
         },
-        { "id": "SUC_VAZGEC", "kind": "CONTINUE", "label": "Vazgeç", "role": "BACK", "next": "ARA_HUB" }
+        { "id": "SAV_BITIR", "kind": "CONTINUE", "label": "Teşekkür et ve çık", "role": "BACK", "next": "ARA_HUB" }
       ]
     },
     {
@@ -1251,6 +1530,10 @@
             {
               "speaker": "narrator",
               "text": "Prefabriğin kapısı açıktı. Kenan masasında, termosun yanında. Beni görünce gülümsedi; gözleri gülümsemedi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Duvarda, planın yanında, çerçevesiz bir fotoğraf: bir römorkörün dümeninde genç, sakalsız bir adam. Altında solmuş bir mürekkep: “Kaptan K. · 1998.”"
             },
             { "speaker": "kenan", "text": "Avukat hanım. Yine mi? Gel, kahve var." },
             {
@@ -1994,6 +2277,15 @@
             {
               "speaker": "player",
               "text": "Bir yumruk ve bir ölüm. Üç ay boyunca herkes ikisini aynı cümlede söyledi. Yarın onları ayıracağım.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Lambayı söndürmeden önce panoya son bir kez baktım. Kırmızı iplikler, toplu iğneler, bir gemi resmi. Bir haritaya benziyordu; ama bir limanın değil, bir gecenin haritasına."
+            },
+            {
+              "speaker": "player",
+              "text": "Haritada her yer işaretliydi. Bir tek B sahasının üçüncü sırası boştu. Oraya iğne batırmak benim işim değildi.",
               "style": "thought"
             }
           ]

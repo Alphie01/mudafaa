@@ -15,10 +15,11 @@ import {
   thresholdBar,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, VariableDef } from '../../../tools/content/src/kit/index.js';
-import { T_BERAAT, T_NITELIK } from './outcomes.js';
+import { T_BERAAT_B } from './outcomes.js';
 import { ARA_AP, ARA_DAYS, p1 } from './shared.js';
 
-// 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler. Eşik çubuğu sonuç eşikleriyle aynı (THRESHOLD_MISMATCH).
+// 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler. Sonuçlar olgulara bağlı; eşik çubuğunda yalnızca
+// 223/2-b'nin skor eşiği var (THRESHOLD_MISMATCH).
 
 const pips = (id: string, label: string, initial: number, max: number): VariableDef => ({
   id,
@@ -94,9 +95,8 @@ export const meta: CasePart = {
       bonuses: [{ id: 'guven', label: 'Güvenilirlik bonusu', value: { mul: [{ var: 'cred' }, 100] } }],
       scaleMax: 11800,
       thresholdBar: thresholdBar([
-        ['Mahkûmiyet', 0, 'red'],
-        ['87/4', T_NITELIK, 'amber'],
-        ['Beraat', T_BERAAT, 'green'],
+        ['Savunma puanı', 0, 'amber'],
+        ['223/2-b eşiği', T_BERAAT_B, 'green'],
       ]),
       displayClampMin: 0,
     },
@@ -225,6 +225,12 @@ export const meta: CasePart = {
       'supheli',
       'terditli',
       'olasi_kabul',
+      'press_n1',
+      'press_n2',
+      'press_n3',
+      'contra_n1',
+      'contra_n2',
+      'savci_asil',
     ),
   ],
 };

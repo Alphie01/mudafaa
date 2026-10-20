@@ -554,8 +554,19 @@ s ev_tas_fis T1
 s ev_otopsi T1
 s ev_suleyman_ifade T1
 c COKUS_DEVAM
+c COKUS_MUT_DEVAM
+c C_BERAAT
+c L_SESSIZ
 `),
 ];
+
+/** G6 (farklı nitelendirme, tahriksiz): G3’ün tahrik dayanağı yerine kâğıtsız bir fail iddiası; heyet tasarlamayı düşürür. */
+const G6_STEPS = swap(G3_STEPS.flat() as Action[], 'P_TAHRIK', 'P_FAIL');
+
+/** Kapanış etiketi hükmü belirlemez: tipik yol ve G1 terditli savunmayla da beraatle biter. */
+const TIPIK_TERDIT_STEPS = swap(flat(TIPIK_STEPS), 'S_SUPHE', 'S_TERDIT');
+const TIPIK_DUYGU_STEPS = swap(flat(TIPIK_STEPS), 'S_SUPHE', 'S_DUYGU');
+const G1_TERDIT_STEPS = swap(flat(G1_STEPS), 'S_MASUMIYET', 'S_TERDIT');
 
 /** G4 (mahkûmiyet): dağınık soruşturma, etik sınır ihlalleri, dayanaksız savunma. */
 const G4_STEPS = [
@@ -705,7 +716,7 @@ p R3
 c T301_BITIR
 c T302_DEVAM
 c P_SAAT
-c P_CANLI
+c P_TASARLAMA
 c P_FAIL
 c P_BITIR
 c S_DUYGU
@@ -717,16 +728,31 @@ const win = (outcome: string, final: number) =>
   final < 0
     ? { outcome, finalMax: 0 }
     : { outcome, finalMin: Math.floor(final * 0.95), finalMax: Math.ceil(final * 1.05) };
-export const MEASURED = { G1: 13430, G3: 7860, G4: 510, G5: 12380, W: 7450, TIPIK: 12680 };
+export const MEASURED = {
+  G1: 13430,
+  G1_TERDIT: 13280,
+  G3: 7860,
+  G4: 510,
+  G5: 12380,
+  G6: 7760,
+  W: 7450,
+  TIPIK: 12680,
+  TIPIK_TERDIT: 12590,
+  TIPIK_DUYGU: 12390,
+};
 
 export const tests: CasePart = {
   tests: {
     goldenPaths: [
       goldenPath('G1', win('BERAAT_B', MEASURED.G1), ...G1_STEPS),
+      goldenPath('G1_TERDIT', win('BERAAT_B', MEASURED.G1_TERDIT), ...G1_TERDIT_STEPS),
       goldenPath('G3', win('INDIRIM', MEASURED.G3), ...G3_STEPS),
+      goldenPath('G6', win('NITELIK', MEASURED.G6), ...G6_STEPS),
       goldenPath('G4', win('MAHKUMIYET', MEASURED.G4), ...G4_STEPS),
       goldenPath('G5', win('IKRAR', MEASURED.G5), ...G5_STEPS),
       goldenPath('W', win('MAHKUMIYET', MEASURED.W), ...W_STEPS),
+      goldenPath('TIPIK_TERDIT', win('BERAAT_E', MEASURED.TIPIK_TERDIT), ...TIPIK_TERDIT_STEPS),
+      goldenPath('TIPIK_DUYGU', win('BERAAT_E', MEASURED.TIPIK_DUYGU), ...TIPIK_DUYGU_STEPS),
       goldenPath(TYPICAL_PATH, win('BERAAT_E', MEASURED.TIPIK), ...TIPIK_STEPS),
     ],
   },

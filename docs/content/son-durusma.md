@@ -85,13 +85,24 @@ ARA ek dilekçesi (`ara_dil_*`) → ARA_SON_1 (sesli mesaj → ARA2_G0); arşiv 
 | Öncelik | Kimlik | Sınıf | Koşul | Ceza | XP |
 |---|---|---|---|---|---|
 | 1 | IKRAR | OTHER (etik) | `sahte_ikrar` | 12 yıl 6 ay (81/1 + 29 + 62) | 0 |
-| 2 | BERAAT_B | ACQUITTAL 223/2-b | ¬çöküş ∧ alibi_tam ∧ fail_belli ∧ beraat savunması ∧ ikna ≥ 8 ∧ final ≥ 12.500 | — | 1,2 |
-| 3 | BERAAT_E | ACQUITTAL 223/2-e | ¬çöküş ∧ tanik_coktu ∧ (tasarlama_coktu ∨ lehe2) ∧ beraat savunması ∧ ikna ≥ 6 ∧ final ≥ 11.000 | — | 1,0 |
-| 4 | INDIRIM | RECHARACTERIZED | ¬çöküş ∧ terditli savunma ∧ tahrik dayanağı ∧ tasarlama_coktu ∧ final ≥ 3.500 | 12 yıl 6 ay | 0,85 |
-| 5 | MAHKUMIYET | CONVICTION (varsayılan) | — | ağırlaştırılmış müebbet → 62/1 müebbet | 0,6 (çöküş 0,3) |
+| 2 | BERAAT_B | ACQUITTAL 223/2-b | ¬çöküş ∧ alibi_tam ∧ fail_belli ∧ ikna ≥ 8 ∧ final ≥ 12.500 | — | 1,2 |
+| 3 | BERAAT_E | ACQUITTAL 223/2-e | ¬çöküş ∧ ((tanik_coktu ∧ (tasarlama_coktu ∨ lehe2) ∧ ikna ≥ 6 ∧ final ≥ 11.000) ∨ fail_belli) | — | 1,0 |
+| 4 | INDIRIM | RECHARACTERIZED | ¬çöküş ∧ tahrik dayanağı (`arg_tahrik`) ∧ tasarlama_coktu ∧ final ≥ 3.500 | 12 yıl 6 ay (81/1 + 29 + 62/1) | 0,85 |
+| 5 | MAHKUMIYET | CONVICTION | ¬tasarlama_dustu | ağırlaştırılmış müebbet → 62/1 müebbet | 0,6 (çöküş 0,3) |
+| 6 | NITELIK | RECHARACTERIZED (varsayılan) | — (tasarlama düştü, beraat ve tahrik yok) | 25 yıl (81/1 müebbet → 62/1) | 0,7 |
+
+**Hüküm kapanış etiketine değil delile bağlıdır.** Mahkeme ne savunmanın talebiyle ne iddianamedeki vasıfla bağlıdır (CMK
+225/2, 217): esas savunmada hangi talep seçilirse seçilsin (beraat, şüphe, terdit, duygu), beraatin koşulları kâğıtlar,
+ikna ve skordur; S_DUYGU yalnızca skor ve ikna kaybettirir. `tasarlama_dustu` = (¬çöküş ∧ tasarlama_coktu) ∨ contra_t0
+(çöküşte heyetin önünde mesajın tamamı okunmuşsa): tasarlaması düşen bir dosyada 82/1-a hiçbir yolda uygulanmaz; tahrik
+dayanağı kurulmamışsa ya da skor 3.500'ün altındaysa sonuç 81/1 + 62/1'dir (NITELIK). Mahkûmiyet hükümlerinde (INDIRIM,
+NITELIK, MAHKUMIYET, IKRAR) tutukluluk kararı tek bir karar olarak epilogda okunur: tahliye edilmişse hükümle birlikte
+tutuklama, değilse tutukluluğun devamı. Gerekçeler koşulludur: tanığın çöktüğü dosyada "tanık beyanı" gerekçe olarak
+kullanılmaz, savcının beraat istediği dosyada mütalaaya neden itibar edilmediği yazılır, `alibi_tam` varken üye hâkimin
+karşı oyu eklenir; MAHKUMIYET ve BERAAT_E epiloglarında Tarık'ın koridordan çıkışı `fail_belli`ye göre değişir.
 
 Yüklemler: `tasarlama_sarsildi` (bir ayak), `tasarlama_coktu` (iki ayak), `tanik_celiski` (S2 ∨ S4), `tarik_sarsildi` (≥3 T),
-`tanik_coktu`, `lehe2`, `alibi_tam` (ded_canli ∧ (ded_yol ∨ ev_kentkart)), `fail_belli` (tarik_ifsa ∧ bildirdi ∧ ¬yüzleşme).
+`tanik_coktu` (tarik_sarsildi ∨ S2/S4/R1/R4'ten en az üçü: tek celsedeki iki çelişki yetmez), `lehe2`, `alibi_tam` (ded_canli ∧ (ded_yol ∨ ev_kentkart)), `fail_belli` (tarik_ifsa ∧ bildirdi ∧ ¬yüzleşme).
 Etik sayaç: SK_BICAK, CK_IS, AKS_EVET, AR_NOT (+1), AE_IKRAR (+2). XP etikte yarıya iner.
 
 ## 7. Skor
@@ -116,10 +127,14 @@ T3_04G). Tekrarlayan ceza kuralları `maxUses`; iki tahtadaki tarifler `IF ¬has
 |---|---|---|---|
 | G1 | BERAAT_B | 13.430 | Masumiyet; HTS → Kemal → sesli mesaj korunur ve bilirkişiye gider; ara evrede bütün kayıtlar; arşiv + savcılığa bildirim; son celsede R1–R3 → tanık susar |
 | TIPIK | BERAAT_E | 12.680 | Tasarlamayı çürüt; sesli mesaj yolu yok; tanık ikinci celsede çöker; arşiv istenir ama bildirim yapılmaz |
-| G3 | INDIRIM | 7.860 | Terditli; tipik soruşturma, kısa ara, zayıf çapraz sorgu; esas savunmada tahrik |
+| G1_TERDIT | BERAAT_B | 13.280 | G1, esas savunmada terditli talep: hüküm yine 2-b |
+| G3 | INDIRIM | 7.860 | Terditli; tipik soruşturma, kısa ara, zayıf çapraz sorgu (tanık çökmez); esas savunmada tahrik |
+| G6 | NITELIK | 7.760 | G3, tahrik dayanağı yerine kâğıtsız bir fail iddiası: tasarlama düşer, tahrik yok → 81/1 + 62/1 = 25 yıl |
+| TIPIK_TERDIT | BERAAT_E | 12.590 | Tipik yol, esas savunmada terditli talep: hüküm yine 2-e |
+| TIPIK_DUYGU | BERAAT_E | 12.390 | Tipik yol, esas savunmada duygusal çağrı: skor ve ikna kaybı, hüküm yine 2-e |
 | G4 | MAHKUMIYET | 510 | Dağınık soruşturma, sert tonlar, tanığa söz ezberletme, menfaat vaadi, yüzleşme, dayanaksız savunma |
 | G5 | IKRAR | 12.380 | Tipik yol; Kemal'in önerisi Emir'e taşınır, Emir ikinci celsede sahte ikrar eder |
-| W | MAHKUMIYET (çöküş) | 7.450 | Tipik yol ikinci celseye kadar; baş tanığa art arda savcılık delili, ♥0 |
+| W | MAHKUMIYET (çöküş) | 7.450 | Tipik yol ikinci celseye kadar; baş tanığa art arda savcılık delili, ♥0 → başkan talepleri CMK 206 ile reddeder, delil tartışmasını kapatır; mütalaa, kısa esas savunma (T_COKUS_SAV) ve son söz alınır, sonra hüküm |
 
 ## 10. Erken çözüm denetimi
 

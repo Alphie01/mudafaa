@@ -50,8 +50,9 @@ const collapse: Effect = ifThen(
   [goto('T3_01K')],
 );
 
-const dayanak = (id: string, label: string, backed: Cond, argFlag: string, line: string) =>
+const dayanak = (id: string, label: string, backed: Cond, argFlag: string, line: string, visibleWhen?: Cond) =>
   option(id, label, {
+    ...(visibleWhen === undefined ? {} : { visibleWhen }),
     cost: [{ var: 'noktalar', amount: 1 }],
     maxUses: 1,
     effects: [
@@ -82,10 +83,10 @@ export const trial3: CasePart = {
     },
     {
       id: 'tanik_coktu',
-      label: 'Baş tanığın anlatımı çöktü',
+      label: 'Baş tanığın anlatımı çöktü (ikinci celsede üç çelişki ya da iki celsede üç çelişki)',
       when: any(
         ref('tarik_sarsildi'),
-        atLeast(2, flag('contra_s2'), flag('contra_s4'), flag('contra_r1'), flag('contra_r4')),
+        atLeast(3, flag('contra_s2'), flag('contra_s4'), flag('contra_r1'), flag('contra_r4')),
       ),
     },
     {
@@ -223,10 +224,18 @@ baskan: Duruşmaya devam olundu. Bursa 2. Ağır Ceza’nın 2004/311 Esas sayı
 baskan: Tanık Tarık Sezer müdafiin talebi üzerine yeniden dinlenecek. Tanık, yemininiz devam ediyor.
 `,
         ),
+        W(
+          flag('released'),
+          `
+recep: Emir Yalçın dosyası! Hım-hım.
+# BURSA 3. AĞIR CEZA MAHKEMESİ — 3. CELSE [bg:durusma_salonu]
+baskan: Duruşmaya devam olundu. Tutuksuz sanık, müdafii, katılan hazır. Tanık Tarık Sezer müdafiin talebi üzerine yeniden dinlenecek.
+`,
+        ),
         O(`
 recep: Emir Yalçın dosyası! Hım-hım.
 # BURSA 3. AĞIR CEZA MAHKEMESİ — 3. CELSE [bg:durusma_salonu]
-baskan: Duruşmaya devam olundu. Tutuklu ya da tutuksuz sanık, müdafii, katılan hazır. Tanık Tarık Sezer müdafiin talebi üzerine yeniden dinlenecek.
+baskan: Duruşmaya devam olundu. Tutuklu sanık, müdafii, katılan hazır. Tanık Tarık Sezer müdafiin talebi üzerine yeniden dinlenecek.
 `),
       ],
       choices: [cont('T300_DEVAM', 'Tanık kürsüde', 'T3_00I', { role: 'PRIMARY' })],
@@ -383,13 +392,25 @@ baskan: Dinleyici, lütfen oturun.
           effects: [inc('pers', 2), raise('contra_r4'), collapse],
           good: 'Not bloğundaki iz yazısı ve eşin beyanı: maktulün haftalarca yazdığı ve adı geçen birini işaret eden mektup olay yerinden götürülmüştü.',
           category: 'SORGULAMA',
-          responses: B(`
+          responses: [
+            W(
+              has('ev_sesli'),
+              `
 - Sayın Başkan, maktulün not bloğundaki iz yazısı: “Kemal… o terazi senin değildi… dolap benimdi, mal T…ık’ın… susan bendim…”
 - Mektup masadaydı; maktul 23.58’de “mektup masamda” diyor. Olay yerinde masada kâğıt yok. Tanık, mektubu kim aldı?
 tarik: Ben… görmedim. “T…ık.” Bir harf…
 gulay: Sen aldın. Tarık. Ercan sana söylemişti, değil mi? Mektubu sana söylemişti.
 baskan: Katılan hanım!
+`,
+            ),
+            O(`
+- Sayın Başkan, maktulün not bloğundaki iz yazısı: “Kemal… o terazi senin değildi… dolap benimdi, mal T…ık’ın… susan bendim…”
+- Bu satırların yazıldığı sayfa koparılmış. Olay yerinde masada tek kâğıt yok. Haftalardır yazılan bir mektup o gece nereye gitti? Tanık, mektubu kim aldı?
+tarik: Ben… görmedim. “T…ık.” Bir harf…
+gulay: Sen aldın. Tarık. Ercan sana söylemişti, değil mi? Mektubu sana söylemişti.
+baskan: Katılan hanım!
 `),
+          ],
         }),
         presentRule('PS_SAVCILIK3', undefined, savcilikDelili3, {
           maxUses: 10,
@@ -520,6 +541,7 @@ baskan: Müdafi, esas hakkındaki savunmanız.
           `
 - Maktul 23.58’de, sanık otobüsteyken, sanığın babasına bir sesli mesaj bıraktı ve “Kapıda biri var. Gel, otur” dedi. Ercan Toker’i öldüren o kapıdan girdi. Sanık o kapıdan değil, bir otobüsün kapısından girmişti.
 `,
+          any(has('ded_canli'), has('ev_sesli')),
         ),
         dayanak(
           'P_TANIK',
@@ -583,7 +605,7 @@ baskan: Müdafi, esas hakkındaki savunmanız.
 `),
       next: 'T3_04G',
       choices: [
-        option('S_MASUMIYET', 'Beraat: Emir öldürmedi; o saatte otobüsteydi, maktul 23.58’de yaşıyordu', {
+        option('S_MASUMIYET', 'Beraat: Emir o saatte otobüsteydi; öldürmedi', {
           effects: [
             raise('closing_masumiyet'),
             ifThen(
@@ -600,7 +622,7 @@ baskan: Müdafi, esas hakkındaki savunmanız.
 - Müvekkilimin suçu işlemediğinin sabit olduğu kanaatindeyiz. Beraatini ve tahliyesini talep ediyoruz.
 `),
         }),
-        option('S_SUPHE', 'Beraat: tek tanık çöktü, tasarlama da fiil de ispatlanamadı', {
+        option('S_SUPHE', 'Beraat: tek tanık çöktü, fiil ispatlanamadı', {
           effects: [
             raise('closing_suphe'),
             ifThen(
@@ -627,7 +649,7 @@ baskan: Müdafi, esas hakkındaki savunmanız.
 ~ Bir yandan “yapmadı” diyorum, öbür yandan “yaptıysa öfkeden.” Hukuk bunu ister. Emir’in gözleri istemiyor. Kemal’in gözleri yirmi iki yıl önceki bir avukatı hatırlıyor.
 `),
         }),
-        option('S_DUYGU', 'Bir babanın yirmi iki yılına seslen', {
+        option('S_DUYGU', 'Bir babanın yirmi iki yılına, bu salonun vicdanına seslen', {
           score: { SAVUNMA_STRATEJISI: -50 },
           effects: [dec('pers')],
           bad: 'Esas savunma delil tartışmasıdır; yirmi iki yıl önceki bir haksızlık bu davadaki delillerin yerini tutmaz.',
@@ -698,7 +720,7 @@ emir: Bir şey söylemeyeceğim Sayın Başkan.
 > Oturdu. Salonun ortasında Kemal’in elleri dizlerinin üstünde birleşti.
 `),
         }),
-        option('L_BABA', '“Babama… babama bir şey söylemek istiyorum.”', {
+        option('L_BABA', '“Babama… babama bir şey söylemek istiyorum Sayın Başkan.”', {
           neutral: 'Son söz sanığındır; aileye seslenmek insani, ama heyete bir şey anlatmaz.',
           responses: B(`
 emir: Baba. Ben yapmadım. Sen de yapmamıştın. Biliyorum artık.
@@ -738,10 +760,78 @@ recep: Taraflar salona! Hükmü ayakta dinleyin. Hım-hım.
       background: 'durusma_salonu',
       lines: B(`
 > Bir yanlış daha. Başkan kalemini bıraktı. Üye Pınar Yener dosyayı kapattı. Savcı bana bakmadı bile; bakmasına gerek yoktu.
-baskan: Müdafi, sunduklarınızın dosyayla ilgisi kalmadı. Mahkeme yeterince dinledi. Tarafların son beyanları alınmış kabul edilerek hüküm için ara verilecek.
-~ Güvenimi tek tek harcadım. Her yanlış kâğıt bir kalp götürdü. Şimdi kalbim yok; yalnızca bir dosyam var.
+baskan: Müdafi, son sunduklarınızın tanığın beyanıyla ilgisi bulunmamaktadır. Bu yöndeki talepleriniz, ispatı istenen hususun dosyayla ilgisiz olması nedeniyle CMK 206 uyarınca reddedildi.
+baskan: Toplanacak başka delil görülmediğinden delillerin tartışılması tamamlandı. Esas hakkındaki mütalaa alınacak; ardından savunma ve sanığın son sözü.
+~ Güvenimi tek tek harcadım. Her yanlış kâğıt bir kalp götürdü. Şimdi kalbim yok; yalnızca bir dosyam ve kâğıtsız birkaç cümlem var.
 `),
-      choices: [cont('COKUS_DEVAM', 'Hüküm', 'T3_05', { role: 'PRIMARY' })],
+      choices: [cont('COKUS_DEVAM', 'Mütalaa', 'T_COKUS_MUT', { role: 'PRIMARY' })],
+    }),
+    story('T_COKUS_MUT', {
+      ...H3,
+      title: 'Mütalaa',
+      background: 'durusma_salonu',
+      lines: [
+        W(
+          flag('sahte_ikrar'),
+          `
+savci: Sayın Başkan, sanık eylemi ikrar etmiştir. Dosya kapsamında tasarlama unsurunun oluştuğuna dair yeterli delil bulunmamaktadır.
+savci: Sanığın maktulün o gece açıkladığı haksız fiilin etkisiyle hareket ettiği kabul edilerek TCK 81/1 ve 29 uyarınca cezalandırılmasını talep ederim.
+> Emir başını kaldırmadı. Kemal’in elleri dizlerinin üstünde birleşti.
+`,
+        ),
+        W(
+          flag('contra_t0'),
+          `
+savci: Sayın Başkan, iddianamede tasarlamaya dayanak gösterilen mesajın tamamı birlikte değerlendirildiğinde tasarlama unsuru sabit değildir.
+savci: Ancak tanık beyanı ve bıçağın sanığa ait olması gözetildiğinde sanığın TCK 81/1 uyarınca cezalandırılmasını talep ederim.
+~ Bir mesajın son cümlesi. Bu salonda kâğıtla kurduğum tek şey o kaldı.
+`,
+        ),
+        O(`
+savci: Sayın Başkan, tanık beyanı, bıçağın sanığa ait olması, sanığın olaydan dört gün önceki mesajı ve bileği taşı birlikte değerlendirildiğinde sanığın eylemi tasarlayarak gerçekleştirdiği sabittir.
+savci: Sanığın TCK 82/1-a uyarınca ağırlaştırılmış müebbet hapis cezasıyla cezalandırılmasını; TCK 53’ün uygulanmasını talep ederim.
+> Meral’in iğnesi elinden kaydı; mermerin üstünde ince bir ses çıkardı. Kimse eğilip almadı.
+`),
+      ],
+      choices: [cont('COKUS_MUT_DEVAM', 'Esas hakkında savunma', 'T_COKUS_SAV', { role: 'PRIMARY' })],
+    }),
+    choiceNode('T_COKUS_SAV', {
+      ...H3,
+      title: 'Kısa savunma',
+      hud: ['cred', 'pers'],
+      background: 'durusma_salonu',
+      lines: B(`
+baskan: Müdafi, esas hakkındaki savunmanız. Kısa tutun; delil tartışması bitti.
+~ Dayanak kuracak kâğıdım yok; heyet de artık kâğıt beklemiyor. Bir talep. Bir cümle.
+`),
+      next: 'T3_04G',
+      choices: [
+        option('C_BERAAT', 'Beraat; şüpheden sanık yararlanır', {
+          effects: [raise('closing_suphe')],
+          neutral: 'Beraat istemek hakkındı; ama dayanaksız bir talep, çökmüş bir savunmanın ardından heyete bir şey anlatmaz.',
+          responses: B(`
+- Sayın Başkan, müvekkilimin atılı suçu işlediğine dair kesin delil yoktur. Şüpheden sanık yararlanır; beraatini talep ediyoruz.
+baskan: Not edildi.
+`),
+        }),
+        option('C_INDIRIM', 'Olmazsa haksız tahrik ve takdiri indirim', {
+          effects: [raise('closing_terdit')],
+          neutral: 'Terditli talep yerindedir; ama dayanaklarını kuramadığın bir tahrik iddiası heyeti ikna etmez.',
+          responses: B(`
+- Öncelikle beraat. Mahkeme aksi kanaatteyse haksız tahrik hükümleri ve takdiri indirim uygulanmalıdır.
+baskan: Not edildi.
+`),
+        }),
+        option('C_TAKDIR', 'Takdiri mahkemeye bırakıyoruz', {
+          score: { SAVUNMA_STRATEJISI: -50 },
+          bad: 'Ağırlaştırılmış müebbet istenen bir davada takdiri mahkemeye bırakmak, savunma görevini yerine getirmemektir.',
+          category: 'SAVUNMA_STRATEJISI',
+          responses: B(`
+- Takdiri mahkemenize bırakıyoruz Sayın Başkan.
+> Emir bana döndü. Ne demek olduğunu bilmiyordu. Kemal biliyordu.
+`),
+        }),
+      ],
     }),
     resultNode('R_KARAR', { ...H3, title: 'Karar', background: 'durusma_salonu' }),
   ],

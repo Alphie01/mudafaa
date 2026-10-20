@@ -16,11 +16,11 @@ Metinler aşağıdaki güncel mevzuat metinleriyle karşılaştırılmıştır (
 
 | Madde | Kullanıldığı yer | Kontrol edilen metin (kısa) |
 |---|---|---|
-| TCK 81/1 | BR_01 (B şıkkı), mütalaa varyantı, INDIRIM, IKRAR | Bir insanı kasten öldüren kişi müebbet hapis cezası ile cezalandırılır. |
+| TCK 81/1 | BR_01 (B şıkkı), mütalaa varyantı, INDIRIM, NITELIK, IKRAR | Bir insanı kasten öldüren kişi müebbet hapis cezası ile cezalandırılır. |
 | TCK 82/1-a | lawRef, iddianame (H1_00), BR_01 (doğru şık), MAHKUMIYET | Kasten öldürmenin tasarlayarak işlenmesi: ağırlaştırılmış müebbet hapis. |
 | TCK 29 | INV_LEYLA (3. gün), BR_01 (C şıkkı), P_TAHRIK, S_TERDIT, INDIRIM, IKRAR | Haksız bir fiilin meydana getirdiği hiddet veya şiddetli elemin etkisi altında suç işleyene ağırlaştırılmış müebbet yerine 18–24 yıl, müebbet yerine 12–18 yıl; diğer hâllerde ¼–¾ indirim. |
 | TCK 61 | INDIRIM (temel ceza belirlemesi) | Temel cezanın belirlenmesi ve indirim sırası. |
-| TCK 62/1 | INDIRIM, IKRAR, MAHKUMIYET, BR_01 (D şıkkı) | Takdiri indirim: ağırlaştırılmış müebbet yerine müebbet, müebbet yerine 25 yıl; diğer cezalarda altıda birine kadar indirim. |
+| TCK 62/1 | INDIRIM, NITELIK, IKRAR, MAHKUMIYET, BR_01 (D şıkkı) | Takdiri indirim: ağırlaştırılmış müebbet yerine müebbet, müebbet yerine 25 yıl; diğer cezalarda altıda birine kadar indirim. |
 | TCK 53, 63 | Mahkûmiyet hükümleri | Hak yoksunlukları; tutuklulukta geçen sürenin mahsubu. |
 | TCK 272, 38 | Süleyman'a söz ezberletme (SK_BICAK), rapor | Gerçeğe aykırı tanıklık; azmettirme. |
 | TCK 277 | Cansu'ya menfaat vaadi (CK_IS), rapor | Yargı görevi yapanı, bilirkişiyi veya tanığı hukuka aykırı olarak etkilemeye teşebbüs. |
@@ -28,7 +28,7 @@ Metinler aşağıdaki güncel mevzuat metinleriyle karşılaştırılmıştır (
 | CMK 48 | T3_01K (baş tanığın susması), T3_00 başkan ihtarı | Tanık, kendisini veya 45. maddedeki yakınlarını ceza kovuşturmasına uğratabilecek sorulara cevap vermeyebilir. |
 | CMK 52/2, 217 | İtiraz gerekçesi g_kanaat | Tanık bildiklerini anlatır; değerlendirme hâkimin vicdani kanaatine aittir. |
 | CMK 63, 67 | Sesli mesaj ve DVR bilirkişi incelemesi, adli tıp uzmanı (AQ_EL, AQ_KESIN) | Özel ve teknik bilgi gerektiren hâllerde bilirkişi; bilirkişi hukuki değerlendirme yapamaz. |
-| CMK 100, 101, 108, 109 | H1_05B, T2_04 tutukluluk ve adli kontrol | Kuvvetli suç şüphesi; tutukluluğun incelenmesi; adli kontrol (konutu terk etmeme, imza). |
+| CMK 100, 101, 108, 109 | H1_05B, T2_04 tutukluluk ve adli kontrol; mahkûmiyet epiloglarında hükümle birlikte tutuklama ya da tutukluluğun devamı | Kuvvetli suç şüphesi; tutukluluğun incelenmesi; adli kontrol (konutu terk etmeme, imza). |
 | CMK 116, 119 | AD_DOLAP geri bildirimi | Makul şüphe ve arama kararı. |
 | CMK 135 | DIL_TARIK_HTS geri bildirimi | İletişimin tespiti ölçülülük ve somut şüphe ister. |
 | CMK 141/1-e, 142, 231/3 | Beraat hükümleri | Tutuklandıktan sonra beraat edene tazminat hakkı; hükümde bildirimi. |
@@ -36,7 +36,9 @@ Metinler aşağıdaki güncel mevzuat metinleriyle karşılaştırılmıştır (
 | CMK 158, 160 | ARA2_BILDIR, rapor ipucu h_bildir, ARA_LEYLA | Suç duyurusu; savcının araştırma yükümlülüğü. |
 | CMK 177, 178 | INV_DIL, ARA_DIL, tanık bildirimleri | Sanık ve müdafiin delil talebi; duruşmadan en az beş gün önce dilekçe; reddedilen tanığın doğrudan getirilmesi. |
 | CMK 201 | İtiraz gerekçesi g_telkin, H1_04 | Doğrudan soru hakkı; soruya itirazda başkan karar verir. |
-| CMK 206, 209 | H1_05 sözlü talepler, ARA2_ARSIV | Duruşmada delil ikamesi talebi; belgelerin okunması. |
+| CMK 206, 209 | H1_05 sözlü talepler, ARA2_ARSIV, T_INT_COKUS (çöküşte ret) | Duruşmada delil ikamesi talebi; ispatı istenen olgunun karar için önemsiz olması hâlinde ret (206/2-b); belgelerin okunması. |
+| CMK 216 | T3_02–T3_04, T_COKUS_MUT/T_COKUS_SAV | Delillerin tartışılması; mütalaa, müdafiin savunması ve sanığın son sözü; son söz alınmadan hüküm kurulamaz. |
+| CMK 217, 225/2 | Gerekçeler (INDIRIM, NITELIK, IKRAR) | Hâkim vicdani kanaatini duruşmada ortaya konan delillerle oluşturur; mahkeme iddianamedeki nitelendirmeyle bağlı değildir. |
 | CMK 210 | İtiraz gerekçesi g_duyum, EX_I_R6 | Delil bir kişinin açıklamasından ibaretse o kişi dinlenir. |
 | CMK 223/2-b, e | BERAAT_B, BERAAT_E, mütalaa varyantları | Suçun sanık tarafından işlenmediğinin sabit olması / işlendiğinin sabit olmaması. |
 | CMK 226 | T3_00 sahte ikrar yolunda ihtar | Hukuki nitelendirmenin değişmesi hâlinde sanığa ek savunma hakkı. |
@@ -55,8 +57,18 @@ Metinler aşağıdaki güncel mevzuat metinleriyle karşılaştırılmıştır (
   → TCK 62/1 (altıda bir: 2 yıl 6 ay) → **12 yıl 6 ay**. TCK 53, 63. Ceza 2 yılı aştığından HAGB ve erteleme yok.
 - **IKRAR (etik sonu):** aynı nitelendirme ve hesap (81/1 + 29 + 62/1 = 12 yıl 6 ay); oyun içinde etik ihlal sonucu olarak
   `OTHER` sınıfındadır ve XP vermez.
-- **MAHKUMIYET:** TCK 82/1-a: ağırlaştırılmış müebbet → TCK 62/1 ile **müebbet** hapis. TCK 53, 63. İstinaf CMK 273/1.
-- **Çöküş:** aynı mahkûmiyet hükmü; gerekçeye "savunmanın inandırıcılığı çöktü" notu eklenir (oyun içi açıklama).
+- **NITELIK (farklı nitelendirme, tahriksiz):** tasarlama unsuru oluşmadığından 82/1-a yerine 81/1 → **müebbet** → TCK 62/1
+  ile müebbet yerine **25 yıl** hapis. TCK 53, 63. Tahrik dayanağı kurulmamışsa ya da heyet ikna olmamışsa; savcının beraat
+  istediği dosyada gerekçe mütalaaya neden itibar edilmediğini yazar (mahkeme mütalaayla bağlı değildir).
+- **MAHKUMIYET:** yalnızca tasarlama heyet önünde düşmediyse: TCK 82/1-a: ağırlaştırılmış müebbet → TCK 62/1 ile **müebbet**
+  hapis. TCK 53, 63. İstinaf CMK 273/1.
+- **Tutukluluk:** mahkûmiyet hükümlerinde tek bir karar okunur: sanık ikinci celsede adli kontrolle tahliye edilmişse
+  hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanması, değilse tutukluluk hâlinin devamı (CMK 100–101).
+- **Çöküş (güvenilirlik 0):** başkan müdafiin ilgisiz sunumlarını ve taleplerini CMK 206/2 uyarınca reddeder ve delillerin
+  tartışılmasını kapatır; ancak mütalaa, müdafiin esas hakkındaki savunması ve sanığın son sözü alınır (CMK 216; son söz
+  alınmadan hüküm kurmak mutlak bozma sebebidir). Kısa esas savunmada yalnızca dayanaksız talepler kalır. Hüküm gerekçesi
+  delile dayanır ("savunmanın son sunduğu belgeler tanığın anlatımını sarsmamıştır"); mesajın tamamı heyet önünde
+  okunmuşsa (contra_t0) 82/1-a uygulanmaz, 81/1 + 62/1 verilir.
 
 ## 3. Usul akışı
 
@@ -84,8 +96,9 @@ Metinler aşağıdaki güncel mevzuat metinleriyle karşılaştırılmıştır (
    Oyunda terditli savunma "tasarlama yok **ve** tahrik var" yapısıyla kurulur; INDIRIM sonucu 81/1 + 29'dur. Leyla'nın
    uyarısı ("öfke ile plan aynı odada zor oturur") bu gerilimi öğretir.
 3. **Tahrikin kaynağı yirmi iki yıllık bir fiil.** Haksız fiil eski olsa da sanığın onu olay gecesi öğrenmesi (maktulün
-   kendi itirafı) hiddetin güncelliğini sağlar; oyunda yalnızca terditli savunmada ve maktulün itirafı bulunduysa
-   (`fact_itiraf`) dayanak sayılır. Tahrik indirimi orta derecede (15 yıl) seçilmiştir.
+   kendi itirafı) hiddetin güncelliğini sağlar; oyunda tahrik dayanağı (P_TAHRIK, "mahkeme aksi kanaatteyse") yalnızca
+   maktulün itirafı bulunduysa (`fact_itiraf`) kurulur. Mahkeme talebe bağlı olmadığından belirleyici olan esas savunmanın
+   etiketi değil, dayanağın dosyada kurulmuş olmasıdır. Tahrik indirimi orta derecede (15 yıl) seçilmiştir.
 4. **Bıçağın sanığa ait olması ve tasarlama.** Aşçının bıçak çantasını her gün taşıması mesleğin olağanıdır; bileği taşı
    şefin yazılı talimatıyla alınmıştır. Bunlar hazırlık sayılmaz (ded_bileme).
 5. **Maktulün sesli mesajı.** Sesli mesaj, Kemal Yalçın'ın kendi telefonundadır; sahibinin rızasıyla incelenmesi ve operatör
@@ -104,12 +117,24 @@ Metinler aşağıdaki güncel mevzuat metinleriyle karşılaştırılmıştır (
 9. **2-b ile 2-e ayrımı.** Sanığın olay anında başka yerde bulunduğu kesinleşir ve maktulün sanık gittikten sonra yaşadığı
    kayıtla sabit olursa 223/2-b; tek tanığın çöküşü ve tasarlamanın kanıtlanamaması ise 223/2-e'dir. Tipik yol (TIPIK)
    sesli mesajı bulmadığı için 2-e'de kalır.
-10. **Sahte ikrar.** Masumiyetini söyleyen müvekkile daha az ceza için gerçeğe aykırı ikrar önermek Av.K. 34'e aykırıdır;
+10. **Hüküm, kapanış talebinin etiketine bağlı değildir.** Terditli savunma önce beraat ister; mahkeme savunmanın talebiyle
+    ve iddianamedeki vasıfla bağlı değildir (CMK 225/2, 217). Bu nedenle beraatin koşulları esas savunmanın etiketinden
+    bağımsızdır; tanığın çöktüğü ve savcının beraat istediği bir dosyada terditli ya da duygusal kapanış beraati
+    engellemez (yalnızca skor ve ikna kaybettirir). Başsavcılığın tanığı gözaltına aldığı (fail_belli) dosyada beraat
+    her durumda verilir (heyet tam ikna olmuşsa 2-b, değilse 2-e). Tasarlaması düşen dosyada 82/1-a uygulanmaz.
+11. **Tanığın çöküşü.** Tek celsedeki iki saat çelişkisi tanığın anlatımını bütünüyle çökertmez; `tanik_coktu` ikinci
+    celsede üç çelişki ya da iki celseye yayılan en az üç çelişki ister. Çökmüş bir tanığın beyanı mahkûmiyet gerekçesinde
+    "tanık beyanı" olarak anılmaz; gerekçe kalan delillere (bıçak, sanığın kendi beyanı) dayanır ve, maktulün 23.58'de yaşadığı
+    kayıtla sabitse, üye hâkimin karşı oyu yazılır.
+12. **Sahte ikrar.** Masumiyetini söyleyen müvekkile daha az ceza için gerçeğe aykırı ikrar önermek Av.K. 34'e aykırıdır;
     oyunda etik ihlal sonu (IKRAR, XP 0). Mahkeme ikrarı dosya kapsamıyla birlikte değerlendirir ve tasarlamayı yeterli
-    bulmayarak 81/1 + 29 uygular; nitelendirme değişikliği için CMK 226 ihtarı yapılır.
-11. **Sesli mesajın içeriği ve gizem.** Mesaj bir kişinin kapıya geldiğini söyler ama adını söylemez; failin kimliği arşiv,
+    bulmayarak 81/1 + 29 uygular; nitelendirme değişikliği için CMK 226 ihtarı yapılır. Yargıtay ikrarın dosyadaki diğer
+    delillerle doğrulanmasını arar; bu yolda ikrar kart kaydıyla çeliştiğinde gerekçe bu uyumsuzluğu açıkça tartışır,
+    çoğunluk ikrara itibar eder ve üye hâkim karşı oy yazar (CMK 217). Tanık çökmüşse gerekçe tanık beyanına dayanmaz.
+    İkrardan sonra Deniz'in iç sesi, müvekkilin beyanının karşısına geçemeyeceğini kabul eder.
+13. **Sesli mesajın içeriği ve gizem.** Mesaj bir kişinin kapıya geldiğini söyler ama adını söylemez; failin kimliği arşiv,
     gömlek ve iz yazısıyla birlikte kurulur.
-12. **Yargılamanın yenilenmesi.** B epilogunda Leyla, Kemal Yalçın'ın 2004 mahkûmiyeti için CMK 311/1-e uyarınca
+14. **Yargılamanın yenilenmesi.** B epilogunda Leyla, Kemal Yalçın'ın 2004 mahkûmiyeti için CMK 311/1-e uyarınca
     yargılamanın yenilenmesi dilekçesi yazar; CMK 312 hükmün infaz edilmiş olmasını engel saymaz. 2004 olayları 765
     sayılı TCK dönemindedir; oyun eski hükmün maddesini anmaz.
 

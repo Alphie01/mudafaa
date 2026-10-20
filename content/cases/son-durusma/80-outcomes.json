@@ -8,10 +8,27 @@
       "stamp": "İKRAR",
       "stampTone": "red",
       "sentence": "12 yıl 6 ay hapis · etik ihlal",
-      "verdictText": "Sanık Emir Yalçın’ın ikrarı ve dosya kapsamı birlikte değerlendirilerek tasarlama unsuru oluşmadığından eyleminin TCK 81/1 kapsamında kaldığına; maktulün haksız fiilinin meydana getirdiği hiddet etkisiyle hareket ettiği kabul edilerek TCK 29 uyarınca müebbet hapis yerine 15 YIL; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile 12 YIL 6 AY HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; tutukluluk hâlinin devamına (ikinci celsede adli kontrolle tahliye edilmişse hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "verdictText": "Sanık Emir Yalçın’ın ikrarı ve dosya kapsamı birlikte değerlendirilerek tasarlama unsuru oluşmadığından eyleminin TCK 81/1 kapsamında kaldığına; maktulün haksız fiilinin meydana getirdiği hiddet etkisiyle hareket ettiği kabul edilerek TCK 29 uyarınca müebbet hapis yerine 15 YIL; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile 12 YIL 6 AY HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
       "reasoning": [
-        { "text": "Sanık ikinci celsede eylemi ikrar etmiş; ancak ayrıntılarını anlatamamıştır." },
-        { "text": "İkrar, tanık beyanı ve bıçağın sanığa ait olması birlikte değerlendirilmiştir." },
+        {
+          "text": "Sanık ikinci celsede, müdafii huzurunda ve serbest iradesiyle eylemi ikrar etmiş; ancak ayrıntılarını anlatamamıştır."
+        },
+        {
+          "when": { "not": { "ref": "tanik_coktu" } },
+          "text": "İkrar, tanık beyanı ve bıçağın sanığa ait olması birlikte değerlendirilmiştir."
+        },
+        {
+          "when": { "ref": "tanik_coktu" },
+          "text": "Tanığın saatlere ilişkin beyanları kayıtlarla çeliştiğinden tanık beyanı hükme esas alınmamıştır; hüküm sanığın ikrarına, ölüm aletinin sanığa ait olmasına ve sanığın olay gecesi maktulle ofiste tartıştığına dayanmaktadır."
+        },
+        {
+          "when": { "hasEvidence": "ev_kentkart" },
+          "text": "Kart kaydındaki 23.52 binişi ile ikrar arasındaki zaman uyumsuzluğu heyetçe tartışılmış; sanığın “hatırlamıyorum” şeklindeki anlatımı ve ikrarın müdafi huzurunda tekrarlanması karşısında çoğunlukla ikrara itibar edilmiştir."
+        },
+        {
+          "when": { "hasEvidence": "ev_kentkart" },
+          "text": "Karşı oy (Üye Hâkim Pınar Yener): Ayrıntılarını anlatamayan ve kart kaydıyla çelişen bir ikrar, dosyadaki diğer delillerle doğrulanmadıkça tek başına mahkûmiyete yetmez (CMK 217)."
+        },
         {
           "text": "Maktulün olay gecesi sanığın babasına ilişkin açıkladığı haksız fiil nedeniyle haksız tahrik hükmü uygulanmıştır."
         },
@@ -24,9 +41,31 @@
       "howToReach": "Kemal’in “ikrar” önerisini Emir’e taşıma; masum olduğunu söyleyen müvekkile asla yapmadığı bir şeyi ikrar etmeyi önerme.",
       "ethicsCard": "Masum olduğunu söyleyen müvekkiline daha az ceza için gerçeğe aykırı bir ikrarı önerdin. Bu, avukatın doğruluk ve özen yükümlülüğüne aykırıdır (Av.K. 34) ve müvekkilin kendini suçlamama hakkını (CMK 147/1-e) onun aleyhine çevirir. Yirmi iki yıl önce Leyla aynı cümleyi kurdu; bugün sen kurdun.",
       "epilogue": [
+        { "lines": [{ "speaker": "baskan", "text": "Türk Milleti adına…" }] },
+        {
+          "when": { "flag": "released" },
+          "lines": [
+            {
+              "speaker": "baskan",
+              "text": "Hükmolunan cezanın miktarı, kaçma şüphesini kuvvetlendiren olgu olarak gözetilerek sanığın hükümle birlikte TUTUKLANMASINA; müzekkere yazılmasına."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Jandarma iki adım attı. Emir üç haftadır kelepçesiz yürüyordu; bileklerini kendisi uzattı."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "released" } },
+          "lines": [
+            {
+              "speaker": "baskan",
+              "text": "Sanığın tutuklu kaldığı süre ve hükmolunan cezanın miktarı gözetilerek TUTUKLULUK HÂLİNİN DEVAMINA."
+            }
+          ]
+        },
         {
           "lines": [
-            { "speaker": "baskan", "text": "Türk Milleti adına…" },
             {
               "speaker": "narrator",
               "text": "“On iki yıl altı ay.” Emir kelimeleri duydu ve oturdu. Ayakta dinlemesi gerekiyordu; kimse bir şey demedi. Bana bakmadı. Babasına baktı."
@@ -81,7 +120,6 @@
           { "not": { "flag": "cokus" } },
           { "ref": "alibi_tam" },
           { "ref": "fail_belli" },
-          { "any": [{ "flag": "closing_masumiyet" }, { "flag": "closing_suphe" }] },
           { "cmp": [{ "var": "pers" }, ">=", 8] },
           { "cmp": [{ "score": "final" }, ">=", 12500] }
         ]
@@ -114,7 +152,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 120] }, 1000] }
         }
       },
-      "howToReach": "Sesli mesajı koru ve bilirkişiye gönder; Kentkart’la birleştir; Leyla’nın verdiği esas numarasıyla 2004 arşivini iste; bildiklerini savcılığa yaz ve son celsede baş tanığa kendi kâğıtlarını okut. Kovalamak senin işin değil.",
+      "howToReach": "Heyet tam ikna olmalı. Sesli mesajı koru ve bilirkişiye gönder; Kentkart’la birleştir; Leyla’nın verdiği esas numarasıyla 2004 arşivini iste; bildiklerini savcılığa yaz ve son celsede baş tanığa kendi kâğıtlarını okut. Kovalamak senin işin değil.",
       "epilogue": [
         {
           "lines": [
@@ -207,11 +245,19 @@
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
-          { "ref": "tanik_coktu" },
-          { "any": [{ "ref": "tasarlama_coktu" }, { "ref": "lehe2" }] },
-          { "any": [{ "flag": "closing_masumiyet" }, { "flag": "closing_suphe" }] },
-          { "cmp": [{ "var": "pers" }, ">=", 6] },
-          { "cmp": [{ "score": "final" }, ">=", 11000] }
+          {
+            "any": [
+              {
+                "all": [
+                  { "ref": "tanik_coktu" },
+                  { "any": [{ "ref": "tasarlama_coktu" }, { "ref": "lehe2" }] },
+                  { "cmp": [{ "var": "pers" }, ">=", 6] },
+                  { "cmp": [{ "score": "final" }, ">=", 11000] }
+                ]
+              },
+              { "ref": "fail_belli" }
+            ]
+          }
         ]
       },
       "stamp": "BERAAT",
@@ -223,6 +269,10 @@
         {
           "when": { "ref": "tanik_coktu" },
           "text": "Tek görgü tanığının beyanları kayıtlarla, olay yeri bulgularıyla ve diğer tanıkla çelişmiş; hükme esas alınamamıştır."
+        },
+        {
+          "when": { "ref": "fail_belli" },
+          "text": "Tanık son celsede kendisini suçlayacak sorulara cevap vermemiş; Başsavcılığın soruşturmasında tanığın o gece değiştirdiği gömlek ele geçirilmiş ve tanık gözaltına alınmıştır."
         },
         {
           "when": { "ref": "tasarlama_coktu" },
@@ -256,7 +306,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
         }
       },
-      "howToReach": "Baş tanığın anlatımını kayıtlarla çürüt; tasarlamanın ayaklarını kâğıtlarla kes ya da en az iki bağımsız lehe bulgu kur; esas savunmada beraat iste.",
+      "howToReach": "Baş tanığın anlatımını kayıtlarla çürüt (ikinci celsede üç çelişki ya da iki celseye yayılan üç çelişki); tasarlamanın ayaklarını kâğıtlarla kes ya da en az iki bağımsız lehe bulgu kur; heyeti ikna et. Esas savunmanın etiketi değil, kâğıtlar karar verdirir.",
       "epilogue": [
         {
           "lines": [
@@ -305,7 +355,40 @@
               "text": "Gülay Toker katılan sırasından kalktı, yanımdan geçerken durdu. Bana bakmadı; konuştu."
             },
             { "speaker": "gulay", "text": "Kocamı kim öldürdü o zaman avukat hanım?" },
-            { "speaker": "narrator", "text": "Cevabını biliyordum. Kanıtlayamamıştım. Bu ikisi aynı şey değil." },
+            { "speaker": "narrator", "text": "Cevabını biliyordum. Kanıtlayamamıştım. Bu ikisi aynı şey değil." }
+          ]
+        },
+        {
+          "when": { "ref": "fail_belli" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Koridorun öbür ucu boştu. Tarık Sezer’in ceketi tanık sırasında kalmıştı; kendisi bir kat aşağıda, savcılığın nezarethanesindeydi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bir soruşturma başlamıştı; benim değil, savcının işi. Gülay Toker’in sorusunun cevabı artık bir dosyanın içindeydi."
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            { "speaker": "narrator", "text": "Leyla masasındaki çerçeveyi çevirdi; düz bıraktı. Bir süre baktı." },
+            {
+              "speaker": "leyla",
+              "text": "Çocuk eve gitti. Bir adam da savcının odasında. İkisini de sen kovalamadın; kâğıtlar götürdü."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Mahkeme “sabit değil” dedi; “sabit” demedi. Fark küçük görünür. Bir gün Emir bir iş başvurusunda o farkı anlatmak zorunda kalabilir."
+            },
+            {
+              "speaker": "player",
+              "text": "Şüpheden yararlanmak bir beraattir. Ama “yapmadı” cümlesi bir başka kapının arkasında; o kapıyı heyet açmadı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "not": { "ref": "fail_belli" } },
+          "lines": [
             {
               "speaker": "narrator",
               "text": "Koridorun öbür ucunda Tarık Sezer ceketini koluna almış, merdivenlere yürüyordu. Bir suç duyurusu, bir dosya numarası; bir de anahtarını parmağında çeviren bir adam."
@@ -327,10 +410,15 @@
             {
               "speaker": "narrator",
               "text": "Masamın kenarına oturdu. Bir süre ikimiz de konuşmadık. Sonra Leyla gözlüğünü çıkardı."
-            },
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "not": { "ref": "fail_belli" } }, { "not": { "flag": "bildirdi" } }] },
+          "lines": [
             {
               "speaker": "leyla",
-              "text": "Bir arşiv dosyası, bir imza, bir gömlek. Hepsini buldun. Birini savcıya götürmedin."
+              "text": "Bir arşiv dosyası, bir imza, bir gömlek. Ne bulduysan buldun. Hiçbirini savcıya götürmedin."
             },
             {
               "speaker": "leyla",
@@ -339,6 +427,29 @@
             {
               "speaker": "player",
               "text": "Haklıydı. Bir dilekçe yazmadım. Bir adam bugün adliyeden anahtarını parmağında çevirerek çıktı.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Bazen adalet bir kapıyı açar ama ışığı yakmaz. Mudanya’da bir neonun I harfi hâlâ yanmıyor.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "not": { "ref": "fail_belli" } }, { "flag": "bildirdi" }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Savcıya yazdın. Doğrusunu yaptın. Ama yazdığın kâğıt bir soruşturmanın ilk sayfası; son sayfası değil."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir adam bugün anahtarını çevirerek çıktı. Yarın bir savcı onun kapısını çalabilir de, çalmayabilir de. O kapı artık bizim değil."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir dilekçe yazdım. Kovalamadım. Belki de ilk kez, yapmam gereken her şeyi yaptım ve yine de yetmedi.",
               "style": "thought"
             },
             {
@@ -357,7 +468,6 @@
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
-          { "flag": "closing_terdit" },
           { "flag": "arg_tahrik" },
           { "ref": "tasarlama_coktu" },
           { "cmp": [{ "score": "final" }, ">=", 3500] }
@@ -366,19 +476,43 @@
       "stamp": "FARKLI NİTELENDİRME",
       "stampTone": "amber",
       "sentence": "12 yıl 6 ay hapis",
-      "verdictText": "Sanık Emir Yalçın’ın eyleminde tasarlama unsuru oluşmadığından TCK 82/1-a’nın uygulanmasına yer olmadığına; eylemin TCK 81/1 kapsamında kaldığına; maktulün olay gecesi açıkladığı haksız fiilin meydana getirdiği hiddetin etkisiyle hareket ettiği kabul edilerek TCK 29 uyarınca müebbet hapis yerine 15 YIL; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile 12 YIL 6 AY HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; tutukluluk hâlinin devamına (ikinci celsede adli kontrolle tahliye edilmişse hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "verdictText": "Sanık Emir Yalçın’ın eyleminde tasarlama unsuru oluşmadığından TCK 82/1-a’nın uygulanmasına yer olmadığına; eylemin TCK 81/1 kapsamında kaldığına; maktulün olay gecesi açıkladığı haksız fiilin meydana getirdiği hiddetin etkisiyle hareket ettiği kabul edilerek TCK 29 uyarınca müebbet hapis yerine 15 YIL; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile 12 YIL 6 AY HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
       "reasoning": [
         {
           "text": "İddianamede tasarlamaya dayanak gösterilen mesajın tamamı, bileği taşının alınış nedeni ve sanığın iş yerinde kalış nedeni tasarlama unsurunu göstermemektedir."
         },
         {
+          "when": { "flag": "closing_terdit" },
           "text": "Savunmanın terditli talebi doğrultusunda, maktulün olay gecesi sanığa babasının yirmi iki yıl önceki mahkûmiyetinin asıl sorumlusu olduğunu açıklaması haksız tahrik olarak kabul edilmiştir."
         },
         {
+          "when": { "not": { "flag": "closing_terdit" } },
+          "text": "Savunmanın dayanakları arasında ileri sürüldüğü üzere, maktulün olay gecesi sanığa babasının yirmi iki yıl önceki mahkûmiyetinin asıl sorumlusu olduğunu açıklaması haksız tahrik olarak kabul edilmiştir; mahkeme savunmanın talebiyle bağlı değildir."
+        },
+        {
+          "when": { "not": { "ref": "tanik_coktu" } },
           "text": "Tanık beyanı ve bıçağın sanığa ait olması birlikte değerlendirilmiş; savunmanın fiile yönelik itirazları heyeti beraate götürecek ölçüde güçlü bulunmamıştır."
+        },
+        {
+          "when": {
+            "all": [
+              { "ref": "tanik_coktu" },
+              {
+                "any": [
+                  { "ref": "fail_belli" },
+                  { "all": [{ "ref": "tanik_coktu" }, { "any": [{ "ref": "tasarlama_coktu" }, { "ref": "lehe2" }] }] }
+                ]
+              }
+            ]
+          },
+          "text": "Cumhuriyet savcısının beraat yönündeki mütalaasına itibar edilmemiştir: tanığın saatlere ilişkin beyanları kayıtlarla çelişse de sanığın olay gecesi ofiste maktulle tartıştığı kendi beyanıyla sabittir ve ölüm aleti sanığa aittir."
+        },
+        {
+          "when": { "ref": "alibi_tam" },
+          "text": "Karşı oy (Üye Hâkim Pınar Yener): Maktulün 23.58’de hayatta olduğu ve kapıya gelen birini içeri davet ettiği, sanığın ise 23.52’de toplu taşıma aracına bindiği dosyada sabittir; sanığın beraatine karar verilmesi gerekirdi."
         }
       ],
-      "legalBasis": "TCK 81/1, 29, 61, 62/1, 53, 63; CMK 273/1",
+      "legalBasis": "TCK 81/1, 29, 61, 62/1, 53, 63; CMK 225/2, 273/1",
       "xp": {
         "if": {
           "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
@@ -386,11 +520,33 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "Esas savunmada terditli talepte bulun; tasarlamanın unsurlarının oluşmadığını kâğıtlarla göster ve haksız tahrik dayanağını kur.",
+      "howToReach": "Tasarlamanın unsurlarının oluşmadığını kâğıtlarla göster ve haksız tahrik dayanağını kur (maktulün o gece açıkladığı haksız fiil); ama baş tanığın anlatımını tam çökertmeden ya da heyeti beraate ikna etmeden.",
       "epilogue": [
+        { "lines": [{ "speaker": "baskan", "text": "Sanığın cezalandırılmasına…" }] },
+        {
+          "when": { "flag": "released" },
+          "lines": [
+            {
+              "speaker": "baskan",
+              "text": "Hükmolunan cezanın miktarı, kaçma şüphesini kuvvetlendiren olgu olarak gözetilerek sanığın hükümle birlikte TUTUKLANMASINA; müzekkere yazılmasına."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Jandarma iki adım attı. Emir üç haftadır kelepçesiz yürüyordu; bileklerini kendisi uzattı."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "released" } },
+          "lines": [
+            {
+              "speaker": "baskan",
+              "text": "Sanığın tutuklu kaldığı süre ve hükmolunan cezanın miktarı gözetilerek TUTUKLULUK HÂLİNİN DEVAMINA."
+            }
+          ]
+        },
         {
           "lines": [
-            { "speaker": "baskan", "text": "Sanığın cezalandırılmasına…" },
             {
               "speaker": "narrator",
               "text": "“On iki yıl altı ay.” Emir rakamı duydu ve bana döndü. Ne anlama geldiğini soran bir bakış. Sonra babasına; babası başını eğdi."
@@ -430,25 +586,45 @@
       "id": "MAHKUMIYET",
       "class": "CONVICTION",
       "priority": 5,
-      "when": { "all": [] },
+      "when": {
+        "not": {
+          "any": [{ "all": [{ "not": { "flag": "cokus" } }, { "ref": "tasarlama_coktu" }] }, { "flag": "contra_t0" }]
+        }
+      },
       "stamp": "MAHKÛMİYET",
       "stampTone": "red",
       "sentence": "Müebbet hapis",
-      "verdictText": "Sanık Emir Yalçın’ın üzerine atılı tasarlayarak kasten öldürme suçundan TCK 82/1-a uyarınca AĞIRLAŞTIRILMIŞ MÜEBBET HAPİS; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile MÜEBBET HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; tutukluluk hâlinin devamına (ikinci celsede adli kontrolle tahliye edilmişse hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).",
+      "verdictText": "Sanık Emir Yalçın’ın üzerine atılı tasarlayarak kasten öldürme suçundan TCK 82/1-a uyarınca AĞIRLAŞTIRILMIŞ MÜEBBET HAPİS; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile MÜEBBET HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).",
       "reasoning": [
         {
+          "when": { "not": { "ref": "tanik_coktu" } },
           "text": "Tanık beyanı, sanığa ait bıçak, sanığın olaydan dört gün önceki mesajı ve bileği taşı birlikte değerlendirilmiştir."
         },
         {
+          "when": { "ref": "tanik_coktu" },
+          "text": "Tanığın saatlere ilişkin beyanlarındaki çelişkiler, olayın özüne ilişkin anlatımını ortadan kaldırmamıştır; sanığa ait bıçak, olaydan dört gün önceki mesaj ve bileği taşı birlikte değerlendirilmiştir."
+        },
+        {
+          "text": "Mesaj ile bileği taşının alınışı arasındaki süre ve sanığın kapanıştan sonra iş yerinde kalması, öldürme kararının önceden verildiğini ve sebatla sürdürüldüğünü göstermektedir."
+        },
+        {
           "when": { "not": { "flag": "cokus" } },
-          "text": "Savunmanın tanığa ve tasarlamaya yönelik itirazları somut delillerle desteklenmemiştir."
+          "text": "Savunmanın tasarlamaya yönelik itirazları dosyadaki belgelerle desteklenmemiştir."
         },
         {
           "when": { "flag": "cokus" },
-          "text": "Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı."
+          "text": "Savunmanın son sunduğu belgelerin tanığın beyanıyla ilgisi bulunmadığından bu yöndeki talepler CMK 206 uyarınca reddedilmiştir; sunulan belgeler tanığın anlatımını sarsmamıştır."
+        },
+        {
+          "when": { "flag": "tarik_ifsa" },
+          "text": "Tanığın kendisini suçlayacak sorulara cevap vermemesi bir hak kullanımıdır; tanık hakkındaki iddialar ayrı bir soruşturmanın konusudur."
+        },
+        {
+          "when": { "ref": "alibi_tam" },
+          "text": "Karşı oy (Üye Hâkim Pınar Yener): Maktulün 23.58’de hayatta olduğu ve kapıya gelen birini içeri davet ettiği, sanığın ise 23.52’de toplu taşıma aracına bindiği dosyada sabittir; sanığın beraatine karar verilmesi gerekirdi."
         }
       ],
-      "legalBasis": "TCK 82/1-a, 62/1, 53, 63; CMK 273/1",
+      "legalBasis": "TCK 82/1-a, 62/1, 53, 63; CMK 206, 217, 273/1",
       "xp": {
         "if": {
           "when": { "flag": "cokus" },
@@ -468,8 +644,30 @@
           }
         }
       },
-      "howToReach": "Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir. Yanlış delil ve dayanaksız itiraz güvenilirliği eritir; baş tanığı çürütmeden ve tasarlamanın ayaklarını kesmeden beraat gelmez.",
+      "howToReach": "Tasarlamanın ayaklarını kâğıtlarla kesemezsen (mesajın tamamı, taşın alınış nedeni, maktulün daveti) heyet iddianamedeki vasfı esas alır. Yanlış delil güvenilirliği eritir; güvenilirlik biterse mahkeme delil taleplerini reddedip hükme geçer.",
       "epilogue": [
+        {
+          "when": { "flag": "released" },
+          "lines": [
+            {
+              "speaker": "baskan",
+              "text": "Hükmolunan cezanın miktarı, kaçma şüphesini kuvvetlendiren olgu olarak gözetilerek sanığın hükümle birlikte TUTUKLANMASINA; müzekkere yazılmasına."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Jandarma iki adım attı. Emir üç haftadır kelepçesiz yürüyordu; bileklerini kendisi uzattı."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "released" } },
+          "lines": [
+            {
+              "speaker": "baskan",
+              "text": "Sanığın tutuklu kaldığı süre ve hükmolunan cezanın miktarı gözetilerek TUTUKLULUK HÂLİNİN DEVAMINA."
+            }
+          ]
+        },
         {
           "when": { "flag": "cokus" },
           "lines": [
@@ -504,11 +702,29 @@
             {
               "speaker": "narrator",
               "text": "Gülay Toker katılan sırasından kalktı. Sevinmiyordu. Kocası yine dönmemişti."
-            },
+            }
+          ]
+        },
+        {
+          "when": { "ref": "fail_belli" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Koridorun ucu boştu. Tarık Sezer bir kat aşağıda, nezarethanedeydi; onun dosyası yeni açılmıştı. Bizimki bugün kapandı. İki dosya aynı geceyi anlatıyordu; biri bir çocuğu içeride bıraktı."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "ref": "fail_belli" } },
+          "lines": [
             {
               "speaker": "narrator",
               "text": "Koridorun ucunda Tarık Sezer, ceketini koluna almış, merdivenlere yürüyordu. Anahtarını parmağında çeviriyordu."
-            },
+            }
+          ]
+        },
+        {
+          "lines": [
             { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
             {
               "speaker": "narrator",
@@ -523,6 +739,139 @@
             {
               "speaker": "player",
               "text": "Avucumda Meral’in iğnesi. Ona geri vermeyi unuttum. Masamın köşesine koydum; bir çerçevenin olacağı yere.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "NITELIK",
+      "class": "RECHARACTERIZED",
+      "priority": 6,
+      "when": { "all": [] },
+      "stamp": "FARKLI NİTELENDİRME",
+      "stampTone": "amber",
+      "sentence": "25 yıl hapis",
+      "verdictText": "Sanık Emir Yalçın’ın eyleminde tasarlama unsuru oluşmadığından TCK 82/1-a’nın uygulanmasına yer olmadığına; eylemin TCK 81/1 kapsamında kaldığına; MÜEBBET HAPİS; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile 25 YIL HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
+      "reasoning": [
+        {
+          "text": "İddianamede tasarlamaya dayanak gösterilen mesajın tamamı, bileği taşının alınış nedeni ve sanığın iş yerinde kalış nedeni birlikte değerlendirildiğinde tasarlama unsuru sabit değildir; mahkeme iddianamedeki vasıfla bağlı değildir (CMK 225/2)."
+        },
+        {
+          "when": { "not": { "ref": "tanik_coktu" } },
+          "text": "Tanık beyanı, bıçağın sanığa ait olması ve sanığın olay gecesi maktulle tartıştığına ilişkin kendi beyanı birlikte değerlendirildiğinde eylemin sanık tarafından gerçekleştirildiği kanaatine varılmıştır."
+        },
+        {
+          "when": { "ref": "tanik_coktu" },
+          "text": "Cumhuriyet savcısının beraat yönündeki mütalaasına itibar edilmemiştir: tanığın saatlere ilişkin beyanları kayıtlarla çelişse de sanığın olay gecesi ofiste maktulle tartıştığı kendi beyanıyla sabittir ve ölüm aleti sanığa aittir."
+        },
+        {
+          "when": { "not": { "flag": "fact_itiraf" } },
+          "text": "Haksız tahrik hükümlerinin uygulanmasını gerektirecek bir haksız fiil dosyada ileri sürülüp ispatlanmamıştır."
+        },
+        {
+          "when": { "flag": "fact_itiraf" },
+          "text": "Maktulün o gece bir açıklama yaptığı anlaşılmakla birlikte, savunma bunun sanıkta yarattığı hiddeti dayanaklarıyla ortaya koymamış; heyet haksız tahrik indirimini uygulamamıştır."
+        },
+        {
+          "when": { "ref": "alibi_tam" },
+          "text": "Karşı oy (Üye Hâkim Pınar Yener): Maktulün 23.58’de hayatta olduğu ve kapıya gelen birini içeri davet ettiği, sanığın ise 23.52’de toplu taşıma aracına bindiği dosyada sabittir; sanığın beraatine karar verilmesi gerekirdi."
+        }
+      ],
+      "legalBasis": "TCK 81/1, 62/1, 53, 63; CMK 225/2, 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 70] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 70] }, 1000] }
+        }
+      },
+      "howToReach": "Tasarlamanın ayaklarını kâğıtlarla kes; ama baş tanığın anlatımını çökertemez ve haksız tahrik dayanağını kuramazsan heyet tasarlamayı düşürür, fiili sanığa yükler.",
+      "epilogue": [
+        { "lines": [{ "speaker": "baskan", "text": "Sanığın cezalandırılmasına…" }] },
+        {
+          "when": { "flag": "released" },
+          "lines": [
+            {
+              "speaker": "baskan",
+              "text": "Hükmolunan cezanın miktarı, kaçma şüphesini kuvvetlendiren olgu olarak gözetilerek sanığın hükümle birlikte TUTUKLANMASINA; müzekkere yazılmasına."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Jandarma iki adım attı. Emir üç haftadır kelepçesiz yürüyordu; bileklerini kendisi uzattı."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "released" } },
+          "lines": [
+            {
+              "speaker": "baskan",
+              "text": "Sanığın tutuklu kaldığı süre ve hükmolunan cezanın miktarı gözetilerek TUTUKLULUK HÂLİNİN DEVAMINA."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "“Yirmi beş yıl.” Emir rakamı duydu; bir an anlamadı. Ağırlaştırılmış değildi. Müebbet değildi. Yirmi beş yıldı."
+            },
+            {
+              "speaker": "player",
+              "text": "Tasarlama düştü. Bir kâğıt bir kelimeyi sildi; bir ömrün yerine yirmi beş yıl yazıldı. Yirmi iki yaşında bir çocuk için bu fark, kırk yedi ile ömür arasındaki fark.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN SONRA", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Koridorda yağmur kokusu vardı; biri şemsiyesini kapının yanına bırakmıştı, mermerde küçük bir göl."
+            },
+            { "speaker": "narrator", "text": "Meral iğnesini parmaklarının arasında çeviriyordu. Bana döndü." }
+          ]
+        },
+        {
+          "when": { "flag": "released" },
+          "lines": [
+            {
+              "speaker": "meral",
+              "text": "Üç hafta evdeydi. Üç hafta. Her sabah ütülü gömleğini giydi, imzaya gitti. Bir daha ütüleyecek miyim?"
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "released" } },
+          "lines": [
+            {
+              "speaker": "meral",
+              "text": "Dört aydır her pazartesi bir gömlek ütülüyorum. Yirmi beş yıl… Kaç gömlek eder avukat hanım?"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "Cevap vermedim. Kemal karısının omzuna dokundu; ilk kez. İğne durdu." },
+            {
+              "speaker": "kemal",
+              "text": "İstinaf var dediniz. Gidin. Bu kez ben de gelirim; salonun arkasında değil, önünde otururum."
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla masasındaki çerçeveyi aldı; çevirmeden çekmeceye koydu. Çekmeceyi kapatmadı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Tasarlamayı düşürdün. Bunu az insan yapar. Ama fiili düşüremedin; o kapı açık kaldı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "İstinafta bir kâğıt daha getireceksin. Bir ses, bir imza, bir gömlek. Hangisi eksikse."
+            },
+            {
+              "speaker": "player",
+              "text": "Mudanya’da yağmur dinmedi. Bir neonun I harfi hâlâ yanmıyor; bir dosyada bir ad hâlâ okunmamış.",
               "style": "thought"
             }
           ]

@@ -130,6 +130,7 @@ emir: Tezgâhtan… Bir kere. Hatırlamıyorum. Yaptım.
 > Üye Pınar Yener sanığa uzun uzun baktı; sonra bana. Bir soru soran bir bakış.
 > Salonun arkasında bir kapı açıldı, kapandı. Leyla çıkmıştı.
 ~ “Hatırlamıyorum.” Yapmadığı bir şeyi anlatamayan bir çocuk, onu ikrar etti. Benim cümlemle.
+~ Bundan sonra kürsüde açtığım her çelişki önce onun ikrarına çarpacak. Müvekkilimin sözünün karşısına geçemem; kâğıtlarım artık ikimize karşı da konuşuyor.
 `),
       choices: [cont('T2IKRAR_DEVAM', 'Devam', 'T2_01', { role: 'PRIMARY' })],
     }),
@@ -173,7 +174,7 @@ sema: Maktule sonradan sarılan biri ise… ön yüzünde, göğsünde ve kollar
 `),
           next: '$stay',
         }),
-        option('AQ_KESIN', '“Sanığın yapmadığını söyleyebilir misiniz?”', {
+        option('AQ_KESIN', '“Bilimsel olarak sanığın yapmadığını söyleyebilir misiniz?”', {
           score: { SORGULAMA: -30 },
           effects: [dec('pers')],
           bad: 'Bilirkişiye hukuki bir değerlendirme sordun; uzman yalnızca teknik konuda görüş bildirir (CMK 63/1, 67). Cevap aleyhine döndü.',
@@ -308,12 +309,23 @@ tarik: Salı. Pazartesi… Hafta başı. Servis firması gelmedi; Mudanya’ya g
         pressRule('PR_T5', 'T5', {
           score: { SORGULAMA: 25 },
           effects: [raise('press_t5'), raise('fact_tarik_gemlik')],
-          responses: B(`
+          responses: [
+            W(
+              flag('fact_gemlikli'),
+              `
 - Ercan Bey’in yirmi iki yıl önceki öğrenci evini hiç duymadınız mı?
 tarik: Duydum… yani Ercan anlatırdı. Görükle’deki ev. Bir kere gitmişimdir belki, misafir. Ben öğrenci değildim. Gemlik’ten gelir giderdim.
 > Salonun arkasında biri doğruldu. Kemal. Yüzü bembeyazdı.
 ~ Gemlik’ten gelir giderdi. Bir bodrum katında, hafta sonları. Kemal’in sesi kulağımda: “Gemlikli derdik.”
+`,
+            ),
+            O(`
+- Ercan Bey’in yirmi iki yıl önceki öğrenci evini hiç duymadınız mı?
+tarik: Duydum… yani Ercan anlatırdı. Görükle’deki ev. Bir kere gitmişimdir belki, misafir. Ben öğrenci değildim. Gemlik’ten gelir giderdim.
+> Salonun arkasında biri doğruldu. Kemal. Yüzü bembeyazdı.
+~ “Bir kere, belki.” Yirmi iki yıllık bir evi bu kadar az hatırlayan biri, Kemal’in yüzünü neden bu kadar iyi tanıyor?
 `),
+          ],
         }),
         objectRule('OB_T0', 'T0', 'g_duyum', {
           score: { SORGULAMA: 50 },
@@ -563,7 +575,7 @@ baskan: Müdafi, talebe diyeceğiniz?
       options: [
         option(
           'L_SIR',
-          '“Av. Erdem, avukatlığı sırasında öğrendikleri hakkında tanıklıktan çekinebilir; sır müvekkilinindir.”',
+          '“Av. Erdem, o dosyada öğrendikleri için tanıklıktan çekinebilir.”',
           {
             score: { USUL_BILGISI: 120 },
             effects: [inc('legal_hits'), inc('pers'), raise('leyla_korundu')],
@@ -588,13 +600,13 @@ baskan: Talep reddedildi. Av. Erdem’in meslek sırrı gözetilerek.
 ~ Bir avukatı, eski müvekkilinin önünde kürsüye çıkardım. Ona çekinme hakkını kendisi hatırlatmak zorunda kaldı.
 `),
         }),
-        option('L_ORTAK', '“Av. Erdem savunma ekibinden; tanık olamaz.”', {
+        option('L_ORTAK', '“Av. Erdem bu davada müdafiin yanında çalışıyor; tanık olarak dinlenemez.”', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred'), dec('pers')],
           bad: 'Yanlış dayanak: Av. Erdem bu davada müdafi değil. Engel savunma ekibinde olmak değil, meslek sırrıdır (CMK 46/1-a; Av.K. 36).',
           category: 'USUL_BILGISI',
           responses: B(`
-- Sayın Başkan, Av. Erdem savunma ekibindendir; tanık olamaz.
+- Sayın Başkan, Av. Erdem bu davada müdafiin yanında, aynı büroda çalışıyor; tanık olarak dinlenemez.
 baskan: Vekâletnamede adı yok müdafi. Bu davada müdafi değil. Bu gerekçe kabul edilemez.
 > Savcı hafifçe gülümsedi. Leyla’nın kendisi ayağa kalkıp meslek sırrını hatırlattı; talep ancak öyle reddedildi.
 `),
@@ -631,7 +643,7 @@ baskan: Müdafi, tutukluluğa ilişkin diyeceğiniz?
       ],
       next: 'T2_05',
       options: [
-        option('TH_A', 'Tahliye: baş tanığın anlatımı kayıtlarla çöktü, tasarlama dayanakları kalmadı; adli kontrol', {
+        option('TH_A', 'Tahliye: tanık kayıtlarla çöktü', {
           effects: [
             ifThen(
               all(ref('tarik_sarsildi'), ref('tasarlama_sarsildi')),
@@ -658,12 +670,12 @@ baskan: Mevcut delil durumu, suçun niteliği ve öngörülen ceza miktarı göz
 `),
           ],
         }),
-        option('TH_B', 'Tahliye: tutukluluk uzadı', {
+        option('TH_B', 'Tahliye: tutukluluk dört ayı buldu, aile ve adres sabit; adli kontrol', {
           score: { USUL_BILGISI: -20 },
           neutral:
             'Sürenin uzaması tek başına tahliye gerekçesi değildir; kuvvetli şüpheyi sarsan somut bulgu göstermedin.',
           responses: B(`
-- Sanık dört aydır tutuklu Sayın Başkan.
+- Sanık dört aydır tutuklu Sayın Başkan. Ailesi, sabit adresi var; adli kontrol yeterlidir.
 baskan: Ağır ceza dosyası için makul sürenin içinde müdafi. Tutukluluk hâlinin devamına.
 `),
         }),

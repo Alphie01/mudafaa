@@ -20,7 +20,7 @@
     },
     {
       "id": "tanik_coktu",
-      "label": "Baş tanığın anlatımı çöktü",
+      "label": "Baş tanığın anlatımı çöktü (ikinci celsede üç çelişki ya da iki celsede üç çelişki)",
       "when": {
         "any": [
           { "ref": "tarik_sarsildi" },
@@ -35,7 +35,7 @@
                 ]
               },
               ">=",
-              2
+              3
             ]
           }
         ]
@@ -324,6 +324,7 @@
           ]
         },
         {
+          "when": { "flag": "released" },
           "lines": [
             { "speaker": "recep", "text": "Emir Yalçın dosyası! Hım-hım." },
             {
@@ -334,7 +335,22 @@
             },
             {
               "speaker": "baskan",
-              "text": "Duruşmaya devam olundu. Tutuklu ya da tutuksuz sanık, müdafii, katılan hazır. Tanık Tarık Sezer müdafiin talebi üzerine yeniden dinlenecek."
+              "text": "Duruşmaya devam olundu. Tutuksuz sanık, müdafii, katılan hazır. Tanık Tarık Sezer müdafiin talebi üzerine yeniden dinlenecek."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "recep", "text": "Emir Yalçın dosyası! Hım-hım." },
+            {
+              "speaker": "narrator",
+              "text": "BURSA 3. AĞIR CEZA MAHKEMESİ — 3. CELSE",
+              "style": "card",
+              "bg": "durusma_salonu"
+            },
+            {
+              "speaker": "baskan",
+              "text": "Duruşmaya devam olundu. Tutuklu sanık, müdafii, katılan hazır. Tanık Tarık Sezer müdafiin talebi üzerine yeniden dinlenecek."
             }
           ]
         }
@@ -734,6 +750,7 @@
           "match": { "statement": "R4", "evidence": ["ded_mektup", "ev_iz_yazisi"] },
           "responses": [
             {
+              "when": { "hasEvidence": "ev_sesli" },
               "lines": [
                 {
                   "speaker": "player",
@@ -742,6 +759,24 @@
                 {
                   "speaker": "player",
                   "text": "Mektup masadaydı; maktul 23.58’de “mektup masamda” diyor. Olay yerinde masada kâğıt yok. Tanık, mektubu kim aldı?"
+                },
+                { "speaker": "tarik", "text": "Ben… görmedim. “T…ık.” Bir harf…" },
+                {
+                  "speaker": "gulay",
+                  "text": "Sen aldın. Tarık. Ercan sana söylemişti, değil mi? Mektubu sana söylemişti."
+                },
+                { "speaker": "baskan", "text": "Katılan hanım!" }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, maktulün not bloğundaki iz yazısı: “Kemal… o terazi senin değildi… dolap benimdi, mal T…ık’ın… susan bendim…”"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bu satırların yazıldığı sayfa koparılmış. Olay yerinde masada tek kâğıt yok. Haftalardır yazılan bir mektup o gece nereye gitti? Tanık, mektubu kim aldı?"
                 },
                 { "speaker": "tarik", "text": "Ben… görmedim. “T…ık.” Bir harf…" },
                 {
@@ -1095,6 +1130,7 @@
           "id": "P_CANLI",
           "kind": "OPTION",
           "label": "Maktul 23.58’de yaşıyordu; kapıda başka biri vardı",
+          "visibleWhen": { "any": [{ "hasEvidence": "ded_canli" }, { "hasEvidence": "ev_sesli" }] },
           "cost": [{ "var": "noktalar", "amount": 1 }],
           "maxUses": 1,
           "responses": [
@@ -1363,7 +1399,7 @@
         {
           "id": "S_MASUMIYET",
           "kind": "OPTION",
-          "label": "Beraat: Emir öldürmedi; o saatte otobüsteydi, maktul 23.58’de yaşıyordu",
+          "label": "Beraat: Emir o saatte otobüsteydi; öldürmedi",
           "responses": [
             {
               "lines": [
@@ -1427,7 +1463,7 @@
         {
           "id": "S_SUPHE",
           "kind": "OPTION",
-          "label": "Beraat: tek tanık çöktü, tasarlama da fiil de ispatlanamadı",
+          "label": "Beraat: tek tanık çöktü, fiil ispatlanamadı",
           "responses": [
             {
               "lines": [
@@ -1516,7 +1552,7 @@
         {
           "id": "S_DUYGU",
           "kind": "OPTION",
-          "label": "Bir babanın yirmi iki yılına seslen",
+          "label": "Bir babanın yirmi iki yılına, bu salonun vicdanına seslen",
           "responses": [
             {
               "lines": [
@@ -1669,7 +1705,7 @@
         {
           "id": "L_BABA",
           "kind": "OPTION",
-          "label": "“Babama… babama bir şey söylemek istiyorum.”",
+          "label": "“Babama… babama bir şey söylemek istiyorum Sayın Başkan.”",
           "responses": [
             {
               "lines": [
@@ -1750,17 +1786,177 @@
             },
             {
               "speaker": "baskan",
-              "text": "Müdafi, sunduklarınızın dosyayla ilgisi kalmadı. Mahkeme yeterince dinledi. Tarafların son beyanları alınmış kabul edilerek hüküm için ara verilecek."
+              "text": "Müdafi, son sunduklarınızın tanığın beyanıyla ilgisi bulunmamaktadır. Bu yöndeki talepleriniz, ispatı istenen hususun dosyayla ilgisiz olması nedeniyle CMK 206 uyarınca reddedildi."
+            },
+            {
+              "speaker": "baskan",
+              "text": "Toplanacak başka delil görülmediğinden delillerin tartışılması tamamlandı. Esas hakkındaki mütalaa alınacak; ardından savunma ve sanığın son sözü."
             },
             {
               "speaker": "player",
-              "text": "Güvenimi tek tek harcadım. Her yanlış kâğıt bir kalp götürdü. Şimdi kalbim yok; yalnızca bir dosyam var.",
+              "text": "Güvenimi tek tek harcadım. Her yanlış kâğıt bir kalp götürdü. Şimdi kalbim yok; yalnızca bir dosyam ve kâğıtsız birkaç cümlem var.",
               "style": "thought"
             }
           ]
         }
       ],
-      "choices": [{ "id": "COKUS_DEVAM", "kind": "CONTINUE", "label": "Hüküm", "role": "PRIMARY", "next": "T3_05" }]
+      "choices": [
+        { "id": "COKUS_DEVAM", "kind": "CONTINUE", "label": "Mütalaa", "role": "PRIMARY", "next": "T_COKUS_MUT" }
+      ]
+    },
+    {
+      "id": "T_COKUS_MUT",
+      "type": "STORY",
+      "chapter": "Bölüm 7 · Son Duruşma",
+      "eyebrow": "DURUŞMA · 3. CELSE",
+      "title": "Mütalaa",
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "when": { "flag": "sahte_ikrar" },
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Sayın Başkan, sanık eylemi ikrar etmiştir. Dosya kapsamında tasarlama unsurunun oluştuğuna dair yeterli delil bulunmamaktadır."
+            },
+            {
+              "speaker": "savci",
+              "text": "Sanığın maktulün o gece açıkladığı haksız fiilin etkisiyle hareket ettiği kabul edilerek TCK 81/1 ve 29 uyarınca cezalandırılmasını talep ederim."
+            },
+            { "speaker": "narrator", "text": "Emir başını kaldırmadı. Kemal’in elleri dizlerinin üstünde birleşti." }
+          ]
+        },
+        {
+          "when": { "flag": "contra_t0" },
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Sayın Başkan, iddianamede tasarlamaya dayanak gösterilen mesajın tamamı birlikte değerlendirildiğinde tasarlama unsuru sabit değildir."
+            },
+            {
+              "speaker": "savci",
+              "text": "Ancak tanık beyanı ve bıçağın sanığa ait olması gözetildiğinde sanığın TCK 81/1 uyarınca cezalandırılmasını talep ederim."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir mesajın son cümlesi. Bu salonda kâğıtla kurduğum tek şey o kaldı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Sayın Başkan, tanık beyanı, bıçağın sanığa ait olması, sanığın olaydan dört gün önceki mesajı ve bileği taşı birlikte değerlendirildiğinde sanığın eylemi tasarlayarak gerçekleştirdiği sabittir."
+            },
+            {
+              "speaker": "savci",
+              "text": "Sanığın TCK 82/1-a uyarınca ağırlaştırılmış müebbet hapis cezasıyla cezalandırılmasını; TCK 53’ün uygulanmasını talep ederim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Meral’in iğnesi elinden kaydı; mermerin üstünde ince bir ses çıkardı. Kimse eğilip almadı."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "COKUS_MUT_DEVAM",
+          "kind": "CONTINUE",
+          "label": "Esas hakkında savunma",
+          "role": "PRIMARY",
+          "next": "T_COKUS_SAV"
+        }
+      ]
+    },
+    {
+      "id": "T_COKUS_SAV",
+      "type": "CHOICE",
+      "chapter": "Bölüm 7 · Son Duruşma",
+      "eyebrow": "DURUŞMA · 3. CELSE",
+      "title": "Kısa savunma",
+      "hud": ["cred", "pers"],
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "Müdafi, esas hakkındaki savunmanız. Kısa tutun; delil tartışması bitti." },
+            {
+              "speaker": "player",
+              "text": "Dayanak kuracak kâğıdım yok; heyet de artık kâğıt beklemiyor. Bir talep. Bir cümle.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "C_BERAAT",
+          "kind": "OPTION",
+          "label": "Beraat; şüpheden sanık yararlanır",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, müvekkilimin atılı suçu işlediğine dair kesin delil yoktur. Şüpheden sanık yararlanır; beraatini talep ediyoruz."
+                },
+                { "speaker": "baskan", "text": "Not edildi." }
+              ]
+            }
+          ],
+          "effects": [{ "type": "VAR", "var": "closing_suphe", "op": "set", "value": true }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Beraat istemek hakkındı; ama dayanaksız bir talep, çökmüş bir savunmanın ardından heyete bir şey anlatmaz."
+          },
+          "next": "T3_04G"
+        },
+        {
+          "id": "C_INDIRIM",
+          "kind": "OPTION",
+          "label": "Olmazsa haksız tahrik ve takdiri indirim",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Öncelikle beraat. Mahkeme aksi kanaatteyse haksız tahrik hükümleri ve takdiri indirim uygulanmalıdır."
+                },
+                { "speaker": "baskan", "text": "Not edildi." }
+              ]
+            }
+          ],
+          "effects": [{ "type": "VAR", "var": "closing_terdit", "op": "set", "value": true }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Terditli talep yerindedir; ama dayanaklarını kuramadığın bir tahrik iddiası heyeti ikna etmez."
+          },
+          "next": "T3_04G"
+        },
+        {
+          "id": "C_TAKDIR",
+          "kind": "OPTION",
+          "label": "Takdiri mahkemeye bırakıyoruz",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Takdiri mahkemenize bırakıyoruz Sayın Başkan." },
+                { "speaker": "narrator", "text": "Emir bana döndü. Ne demek olduğunu bilmiyordu. Kemal biliyordu." }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 }],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Ağırlaştırılmış müebbet istenen bir davada takdiri mahkemeye bırakmak, savunma görevini yerine getirmemektir.",
+            "category": "SAVUNMA_STRATEJISI"
+          },
+          "next": "T3_04G"
+        }
+      ]
     },
     {
       "id": "R_KARAR",

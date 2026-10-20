@@ -219,6 +219,11 @@
               "speaker": "player",
               "text": "“Hatırlamıyorum.” Yapmadığı bir şeyi anlatamayan bir çocuk, onu ikrar etti. Benim cümlemle.",
               "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Bundan sonra kürsüde açtığım her çelişki önce onun ikrarına çarpacak. Müvekkilimin sözünün karşısına geçemem; kâğıtlarım artık ikimize karşı da konuşuyor.",
+              "style": "thought"
             }
           ]
         }
@@ -325,7 +330,7 @@
         {
           "id": "AQ_KESIN",
           "kind": "OPTION",
-          "label": "“Sanığın yapmadığını söyleyebilir misiniz?”",
+          "label": "“Bilimsel olarak sanığın yapmadığını söyleyebilir misiniz?”",
           "responses": [
             {
               "lines": [
@@ -646,6 +651,7 @@
           "match": { "statement": "T5" },
           "responses": [
             {
+              "when": { "flag": "fact_gemlikli" },
               "lines": [
                 { "speaker": "player", "text": "Ercan Bey’in yirmi iki yıl önceki öğrenci evini hiç duymadınız mı?" },
                 {
@@ -656,6 +662,21 @@
                 {
                   "speaker": "player",
                   "text": "Gemlik’ten gelir giderdi. Bir bodrum katında, hafta sonları. Kemal’in sesi kulağımda: “Gemlikli derdik.”",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                { "speaker": "player", "text": "Ercan Bey’in yirmi iki yıl önceki öğrenci evini hiç duymadınız mı?" },
+                {
+                  "speaker": "tarik",
+                  "text": "Duydum… yani Ercan anlatırdı. Görükle’deki ev. Bir kere gitmişimdir belki, misafir. Ben öğrenci değildim. Gemlik’ten gelir giderdim."
+                },
+                { "speaker": "narrator", "text": "Salonun arkasında biri doğruldu. Kemal. Yüzü bembeyazdı." },
+                {
+                  "speaker": "player",
+                  "text": "“Bir kere, belki.” Yirmi iki yıllık bir evi bu kadar az hatırlayan biri, Kemal’in yüzünü neden bu kadar iyi tanıyor?",
                   "style": "thought"
                 }
               ]
@@ -1318,7 +1339,7 @@
         {
           "id": "L_SIR",
           "kind": "OPTION",
-          "label": "“Av. Erdem, avukatlığı sırasında öğrendikleri hakkında tanıklıktan çekinebilir; sır müvekkilinindir.”",
+          "label": "“Av. Erdem, o dosyada öğrendikleri için tanıklıktan çekinebilir.”",
           "responses": [
             {
               "lines": [
@@ -1385,11 +1406,14 @@
         {
           "id": "L_ORTAK",
           "kind": "OPTION",
-          "label": "“Av. Erdem savunma ekibinden; tanık olamaz.”",
+          "label": "“Av. Erdem bu davada müdafiin yanında çalışıyor; tanık olarak dinlenemez.”",
           "responses": [
             {
               "lines": [
-                { "speaker": "player", "text": "Sayın Başkan, Av. Erdem savunma ekibindendir; tanık olamaz." },
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, Av. Erdem bu davada müdafiin yanında, aynı büroda çalışıyor; tanık olarak dinlenemez."
+                },
                 {
                   "speaker": "baskan",
                   "text": "Vekâletnamede adı yok müdafi. Bu davada müdafi değil. Bu gerekçe kabul edilemez."
@@ -1486,7 +1510,7 @@
         {
           "id": "TH_A",
           "kind": "OPTION",
-          "label": "Tahliye: baş tanığın anlatımı kayıtlarla çöktü, tasarlama dayanakları kalmadı; adli kontrol",
+          "label": "Tahliye: tanık kayıtlarla çöktü",
           "responses": [
             {
               "when": { "all": [{ "ref": "tarik_sarsildi" }, { "ref": "tasarlama_sarsildi" }] },
@@ -1549,11 +1573,14 @@
         {
           "id": "TH_B",
           "kind": "OPTION",
-          "label": "Tahliye: tutukluluk uzadı",
+          "label": "Tahliye: tutukluluk dört ayı buldu, aile ve adres sabit; adli kontrol",
           "responses": [
             {
               "lines": [
-                { "speaker": "player", "text": "Sanık dört aydır tutuklu Sayın Başkan." },
+                {
+                  "speaker": "player",
+                  "text": "Sanık dört aydır tutuklu Sayın Başkan. Ailesi, sabit adresi var; adli kontrol yeterlidir."
+                },
                 {
                   "speaker": "baskan",
                   "text": "Ağır ceza dosyası için makul sürenin içinde müdafi. Tutukluluk hâlinin devamına."

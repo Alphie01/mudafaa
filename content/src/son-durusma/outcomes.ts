@@ -16,13 +16,40 @@ import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { O, W } from './dsl.js';
 
 // 80-outcomes: sonuçlar (öncelik sırasıyla) ve sonuca bağlı epiloglar. Eşikler meta’daki eşik çubuğuyla aynı.
+// Hüküm kapanış talebinin etiketine değil delile bağlıdır (mahkeme ne savunmanın talebiyle ne iddianamedeki vasıfla
+// bağlıdır; CMK 225/2, 217): tasarlaması düşen bir dosyada 82/1-a uygulanmaz; savcının beraat istediği ve başsavcılığın
+// tanığı gözaltına aldığı dosyada beraat çıkar.
 
 export const T_INDIRIM = 3500;
 export const T_BERAAT = 11000;
 export const T_BERAAT_B = 12500;
 
-const tutukluluk =
-  'tutukluluk hâlinin devamına (ikinci celsede adli kontrolle tahliye edilmişse hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101)';
+/** Mahkûmiyet hükümlerinde tutukluluk kararı: sanığın o anki durumuna göre tek bir karar okunur (CMK 100–101). */
+const tutukluluk = [
+  W(
+    flag('released'),
+    `
+baskan: Hükmolunan cezanın miktarı, kaçma şüphesini kuvvetlendiren olgu olarak gözetilerek sanığın hükümle birlikte TUTUKLANMASINA; müzekkere yazılmasına.
+> Jandarma iki adım attı. Emir üç haftadır kelepçesiz yürüyordu; bileklerini kendisi uzattı.
+`,
+  ),
+  W(
+    not(flag('released')),
+    `
+baskan: Sanığın tutuklu kaldığı süre ve hükmolunan cezanın miktarı gözetilerek TUTUKLULUK HÂLİNİN DEVAMINA.
+`,
+  ),
+];
+
+/** Mütalaada savcı beraat istediyse (3. celse). */
+const mutalaaBeraat = any(ref('fail_belli'), all(ref('tanik_coktu'), any(ref('tasarlama_coktu'), ref('lehe2'))));
+/** Heyet önünde tasarlama düştü: savcı kabul etti ya da (çöküşte) mesajın tamamı salonda okundu. */
+const tasarlamaDustu = any(all(not(flag('cokus')), ref('tasarlama_coktu')), flag('contra_t0'));
+/** Azınlık oyu: maktulün 23.58’de yaşadığı ve sanığın otobüste olduğu dosyadaysa. */
+const karsiOy = because(
+  'Karşı oy (Üye Hâkim Pınar Yener): Maktulün 23.58’de hayatta olduğu ve kapıya gelen birini içeri davet ettiği, sanığın ise 23.52’de toplu taşıma aracına bindiği dosyada sabittir; sanığın beraatine karar verilmesi gerekirdi.',
+  ref('alibi_tam'),
+);
 
 export const outcomes: CasePart = {
   outcomes: [
@@ -33,10 +60,22 @@ export const outcomes: CasePart = {
       stamp: 'İKRAR',
       stampTone: 'red',
       sentence: '12 yıl 6 ay hapis · etik ihlal',
-      verdictText: `Sanık Emir Yalçın’ın ikrarı ve dosya kapsamı birlikte değerlendirilerek tasarlama unsuru oluşmadığından eyleminin TCK 81/1 kapsamında kaldığına; maktulün haksız fiilinin meydana getirdiği hiddet etkisiyle hareket ettiği kabul edilerek TCK 29 uyarınca müebbet hapis yerine 15 YIL; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile 12 YIL 6 AY HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; ${tutukluluk}; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).`,
+      verdictText: `Sanık Emir Yalçın’ın ikrarı ve dosya kapsamı birlikte değerlendirilerek tasarlama unsuru oluşmadığından eyleminin TCK 81/1 kapsamında kaldığına; maktulün haksız fiilinin meydana getirdiği hiddet etkisiyle hareket ettiği kabul edilerek TCK 29 uyarınca müebbet hapis yerine 15 YIL; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile 12 YIL 6 AY HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).`,
       reasoning: [
-        because('Sanık ikinci celsede eylemi ikrar etmiş; ancak ayrıntılarını anlatamamıştır.'),
-        because('İkrar, tanık beyanı ve bıçağın sanığa ait olması birlikte değerlendirilmiştir.'),
+        because('Sanık ikinci celsede, müdafii huzurunda ve serbest iradesiyle eylemi ikrar etmiş; ancak ayrıntılarını anlatamamıştır.'),
+        because('İkrar, tanık beyanı ve bıçağın sanığa ait olması birlikte değerlendirilmiştir.', not(ref('tanik_coktu'))),
+        because(
+          'Tanığın saatlere ilişkin beyanları kayıtlarla çeliştiğinden tanık beyanı hükme esas alınmamıştır; hüküm sanığın ikrarına, ölüm aletinin sanığa ait olmasına ve sanığın olay gecesi maktulle ofiste tartıştığına dayanmaktadır.',
+          ref('tanik_coktu'),
+        ),
+        because(
+          'Kart kaydındaki 23.52 binişi ile ikrar arasındaki zaman uyumsuzluğu heyetçe tartışılmış; sanığın “hatırlamıyorum” şeklindeki anlatımı ve ikrarın müdafi huzurunda tekrarlanması karşısında çoğunlukla ikrara itibar edilmiştir.',
+          has('ev_kentkart'),
+        ),
+        because(
+          'Karşı oy (Üye Hâkim Pınar Yener): Ayrıntılarını anlatamayan ve kart kaydıyla çelişen bir ikrar, dosyadaki diğer delillerle doğrulanmadıkça tek başına mahkûmiyete yetmez (CMK 217).',
+          has('ev_kentkart'),
+        ),
         because(
           'Maktulün olay gecesi sanığın babasına ilişkin açıkladığı haksız fiil nedeniyle haksız tahrik hükmü uygulanmıştır.',
         ),
@@ -53,6 +92,9 @@ export const outcomes: CasePart = {
       epilogue: [
         O(`
 baskan: Türk Milleti adına…
+`),
+        ...tutukluluk,
+        O(`
 > “On iki yıl altı ay.” Emir kelimeleri duydu ve oturdu. Ayakta dinlemesi gerekiyordu; kimse bir şey demedi. Bana bakmadı. Babasına baktı.
 > Kemal başını iki elinin arasına almıştı. Yirmi iki yıl önce o da bir salonda, bir ikrarın ardından, bir rakam duymuştu.
 # ADLİYE KORİDORU · ÖĞLEDEN SONRA [bg:adliye]
@@ -76,7 +118,6 @@ leyla: Bunu sen taşıyacaksın artık. Ters de çevirebilirsin; ama ters çevir
         not(flag('cokus')),
         ref('alibi_tam'),
         ref('fail_belli'),
-        any(flag('closing_masumiyet'), flag('closing_suphe')),
         cmp(v('pers'), '>=', 8),
         finalAtLeast(T_BERAAT_B),
       ),
@@ -104,7 +145,7 @@ leyla: Bunu sen taşıyacaksın artık. Ters de çevirebilirsin; ama ters çevir
       legalBasis: 'CMK 223/2-b; CMK 141/1-e, 142, 231/3; CMK 217',
       xp: xp(1.2, { ethicsVar: 'ethics' }),
       howToReach:
-        'Sesli mesajı koru ve bilirkişiye gönder; Kentkart’la birleştir; Leyla’nın verdiği esas numarasıyla 2004 arşivini iste; bildiklerini savcılığa yaz ve son celsede baş tanığa kendi kâğıtlarını okut. Kovalamak senin işin değil.',
+        'Heyet tam ikna olmalı. Sesli mesajı koru ve bilirkişiye gönder; Kentkart’la birleştir; Leyla’nın verdiği esas numarasıyla 2004 arşivini iste; bildiklerini savcılığa yaz ve son celsede baş tanığa kendi kâğıtlarını okut. Kovalamak senin işin değil.',
       epilogue: [
         O(`
 baskan: Türk Milleti adına…
@@ -143,11 +184,15 @@ leyla: Hükmün infaz edilmiş olması engel değil. Yirmi iki yıl geç; ama en
       priority: 3,
       when: all(
         not(flag('cokus')),
-        ref('tanik_coktu'),
-        any(ref('tasarlama_coktu'), ref('lehe2')),
-        any(flag('closing_masumiyet'), flag('closing_suphe')),
-        cmp(v('pers'), '>=', 6),
-        finalAtLeast(T_BERAAT),
+        any(
+          all(
+            ref('tanik_coktu'),
+            any(ref('tasarlama_coktu'), ref('lehe2')),
+            cmp(v('pers'), '>=', 6),
+            finalAtLeast(T_BERAAT),
+          ),
+          ref('fail_belli'),
+        ),
       ),
       stamp: 'BERAAT',
       stampTone: 'green',
@@ -159,6 +204,10 @@ leyla: Hükmün infaz edilmiş olması engel değil. Yirmi iki yıl geç; ama en
         because(
           'Tek görgü tanığının beyanları kayıtlarla, olay yeri bulgularıyla ve diğer tanıkla çelişmiş; hükme esas alınamamıştır.',
           ref('tanik_coktu'),
+        ),
+        because(
+          'Tanık son celsede kendisini suçlayacak sorulara cevap vermemiş; Başsavcılığın soruşturmasında tanığın o gece değiştirdiği gömlek ele geçirilmiş ve tanık gözaltına alınmıştır.',
+          ref('fail_belli'),
         ),
         because(
           'İddianamede tasarlamaya dayanak gösterilen mesajın tamamı, bileği taşının alınış nedeni ve sanığın iş yerinde kalış nedeni tasarlamayı göstermemektedir.',
@@ -184,7 +233,7 @@ leyla: Hükmün infaz edilmiş olması engel değil. Yirmi iki yıl geç; ama en
       legalBasis: 'CMK 223/2-e; CMK 141/1-e, 142, 231/3; CMK 217; Anayasa 38/4; AİHS 6/2',
       xp: xp(1, { ethicsVar: 'ethics' }),
       howToReach:
-        'Baş tanığın anlatımını kayıtlarla çürüt; tasarlamanın ayaklarını kâğıtlarla kes ya da en az iki bağımsız lehe bulgu kur; esas savunmada beraat iste.',
+        'Baş tanığın anlatımını kayıtlarla çürüt (ikinci celsede üç çelişki ya da iki celseye yayılan üç çelişki); tasarlamanın ayaklarını kâğıtlarla kes ya da en az iki bağımsız lehe bulgu kur; heyeti ikna et. Esas savunmanın etiketi değil, kâğıtlar karar verdirir.',
       epilogue: [
         O(`
 baskan: Türk Milleti adına…
@@ -210,6 +259,22 @@ baskan: Türk Milleti adına…
 > Gülay Toker katılan sırasından kalktı, yanımdan geçerken durdu. Bana bakmadı; konuştu.
 gulay: Kocamı kim öldürdü o zaman avukat hanım?
 > Cevabını biliyordum. Kanıtlayamamıştım. Bu ikisi aynı şey değil.
+`),
+        W(
+          ref('fail_belli'),
+          `
+> Koridorun öbür ucu boştu. Tarık Sezer’in ceketi tanık sırasında kalmıştı; kendisi bir kat aşağıda, savcılığın nezarethanesindeydi.
+> Bir soruşturma başlamıştı; benim değil, savcının işi. Gülay Toker’in sorusunun cevabı artık bir dosyanın içindeydi.
+# ARSLAN HUKUK · GECE [bg:buro_gece]
+> Leyla masasındaki çerçeveyi çevirdi; düz bıraktı. Bir süre baktı.
+leyla: Çocuk eve gitti. Bir adam da savcının odasında. İkisini de sen kovalamadın; kâğıtlar götürdü.
+leyla: Mahkeme “sabit değil” dedi; “sabit” demedi. Fark küçük görünür. Bir gün Emir bir iş başvurusunda o farkı anlatmak zorunda kalabilir.
+~ Şüpheden yararlanmak bir beraattir. Ama “yapmadı” cümlesi bir başka kapının arkasında; o kapıyı heyet açmadı.
+`,
+        ),
+        W(
+          not(ref('fail_belli')),
+          `
 > Koridorun öbür ucunda Tarık Sezer ceketini koluna almış, merdivenlere yürüyordu. Bir suç duyurusu, bir dosya numarası; bir de anahtarını parmağında çeviren bir adam.
 # ARSLAN HUKUK · GECE [bg:buro_gece]
 > Leyla masasındaki çerçeveyi çevirdi. Fotoğrafa uzun uzun baktı; bir cezaevi kapısı, bir adam, bir çocuk ve bir kepçe.
@@ -217,45 +282,68 @@ leyla: Çocuk eve gitti. Bu iyi.
 leyla: Ama bir şey eksik Deniz. Biri yirmi iki yıl önce bir dolabı sakladı; biri bu kez bir mektubu. İkisi de dışarıda.
 > Çerçeveyi ters çevirmedi. Düz de bırakmadı; yan yatırdı. Yarım bir şey gibi.
 > Masamın kenarına oturdu. Bir süre ikimiz de konuşmadık. Sonra Leyla gözlüğünü çıkardı.
-leyla: Bir arşiv dosyası, bir imza, bir gömlek. Hepsini buldun. Birini savcıya götürmedin.
+`,
+        ),
+        W(
+          all(not(ref('fail_belli')), not(flag('bildirdi'))),
+          `
+leyla: Bir arşiv dosyası, bir imza, bir gömlek. Ne bulduysan buldun. Hiçbirini savcıya götürmedin.
 leyla: Biz kovalamayız Deniz. Ama bildiğimizi yazarız. Yazmazsan, bildiğin şey senin masanda kalır; bir çerçeve gibi.
 ~ Haklıydı. Bir dilekçe yazmadım. Bir adam bugün adliyeden anahtarını parmağında çevirerek çıktı.
 ~ Bazen adalet bir kapıyı açar ama ışığı yakmaz. Mudanya’da bir neonun I harfi hâlâ yanmıyor.
-`),
+`,
+        ),
+        W(
+          all(not(ref('fail_belli')), flag('bildirdi')),
+          `
+leyla: Savcıya yazdın. Doğrusunu yaptın. Ama yazdığın kâğıt bir soruşturmanın ilk sayfası; son sayfası değil.
+leyla: Bir adam bugün anahtarını çevirerek çıktı. Yarın bir savcı onun kapısını çalabilir de, çalmayabilir de. O kapı artık bizim değil.
+~ Bir dilekçe yazdım. Kovalamadım. Belki de ilk kez, yapmam gereken her şeyi yaptım ve yine de yetmedi.
+~ Bazen adalet bir kapıyı açar ama ışığı yakmaz. Mudanya’da bir neonun I harfi hâlâ yanmıyor.
+`,
+        ),
       ],
     }),
     outcome('INDIRIM', {
       class: 'RECHARACTERIZED',
       priority: 4,
-      when: all(
-        not(flag('cokus')),
-        flag('closing_terdit'),
-        flag('arg_tahrik'),
-        ref('tasarlama_coktu'),
-        finalAtLeast(T_INDIRIM),
-      ),
+      when: all(not(flag('cokus')), flag('arg_tahrik'), ref('tasarlama_coktu'), finalAtLeast(T_INDIRIM)),
       stamp: 'FARKLI NİTELENDİRME',
       stampTone: 'amber',
       sentence: '12 yıl 6 ay hapis',
-      verdictText: `Sanık Emir Yalçın’ın eyleminde tasarlama unsuru oluşmadığından TCK 82/1-a’nın uygulanmasına yer olmadığına; eylemin TCK 81/1 kapsamında kaldığına; maktulün olay gecesi açıkladığı haksız fiilin meydana getirdiği hiddetin etkisiyle hareket ettiği kabul edilerek TCK 29 uyarınca müebbet hapis yerine 15 YIL; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile 12 YIL 6 AY HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; ${tutukluluk}; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).`,
+      verdictText: `Sanık Emir Yalçın’ın eyleminde tasarlama unsuru oluşmadığından TCK 82/1-a’nın uygulanmasına yer olmadığına; eylemin TCK 81/1 kapsamında kaldığına; maktulün olay gecesi açıkladığı haksız fiilin meydana getirdiği hiddetin etkisiyle hareket ettiği kabul edilerek TCK 29 uyarınca müebbet hapis yerine 15 YIL; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile 12 YIL 6 AY HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).`,
       reasoning: [
         because(
           'İddianamede tasarlamaya dayanak gösterilen mesajın tamamı, bileği taşının alınış nedeni ve sanığın iş yerinde kalış nedeni tasarlama unsurunu göstermemektedir.',
         ),
         because(
           'Savunmanın terditli talebi doğrultusunda, maktulün olay gecesi sanığa babasının yirmi iki yıl önceki mahkûmiyetinin asıl sorumlusu olduğunu açıklaması haksız tahrik olarak kabul edilmiştir.',
+          flag('closing_terdit'),
+        ),
+        because(
+          'Savunmanın dayanakları arasında ileri sürüldüğü üzere, maktulün olay gecesi sanığa babasının yirmi iki yıl önceki mahkûmiyetinin asıl sorumlusu olduğunu açıklaması haksız tahrik olarak kabul edilmiştir; mahkeme savunmanın talebiyle bağlı değildir.',
+          not(flag('closing_terdit')),
         ),
         because(
           'Tanık beyanı ve bıçağın sanığa ait olması birlikte değerlendirilmiş; savunmanın fiile yönelik itirazları heyeti beraate götürecek ölçüde güçlü bulunmamıştır.',
+          not(ref('tanik_coktu')),
         ),
+        because(
+          'Cumhuriyet savcısının beraat yönündeki mütalaasına itibar edilmemiştir: tanığın saatlere ilişkin beyanları kayıtlarla çelişse de sanığın olay gecesi ofiste maktulle tartıştığı kendi beyanıyla sabittir ve ölüm aleti sanığa aittir.',
+          all(ref('tanik_coktu'), mutalaaBeraat),
+        ),
+        karsiOy,
       ],
-      legalBasis: 'TCK 81/1, 29, 61, 62/1, 53, 63; CMK 273/1',
+      legalBasis: 'TCK 81/1, 29, 61, 62/1, 53, 63; CMK 225/2, 273/1',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        'Esas savunmada terditli talepte bulun; tasarlamanın unsurlarının oluşmadığını kâğıtlarla göster ve haksız tahrik dayanağını kur.',
+        'Tasarlamanın unsurlarının oluşmadığını kâğıtlarla göster ve haksız tahrik dayanağını kur (maktulün o gece açıkladığı haksız fiil); ama baş tanığın anlatımını tam çökertmeden ya da heyeti beraate ikna etmeden.',
       epilogue: [
         O(`
 baskan: Sanığın cezalandırılmasına…
+`),
+        ...tutukluluk,
+        O(`
 > “On iki yıl altı ay.” Emir rakamı duydu ve bana döndü. Ne anlama geldiğini soran bir bakış. Sonra babasına; babası başını eğdi.
 ~ Ağırlaştırılmış müebbet istenen bir davada on iki yıl altı ay. Tasarlama düştü. Hukuken bir kazanım. Bir çocuğun gözünde, yapmadığı bir şey için on iki yıl altı ay.
 # ADLİYE ARKA KAPISI · RİNG ARACI [bg:adliye]
@@ -273,22 +361,38 @@ leyla: İstinaf var. Yarın sabah başlıyoruz; ikimiz.
     outcome('MAHKUMIYET', {
       class: 'CONVICTION',
       priority: 5,
-      when: { all: [] },
+      when: not(tasarlamaDustu),
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
       sentence: 'Müebbet hapis',
-      verdictText: `Sanık Emir Yalçın’ın üzerine atılı tasarlayarak kasten öldürme suçundan TCK 82/1-a uyarınca AĞIRLAŞTIRILMIŞ MÜEBBET HAPİS; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile MÜEBBET HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; ${tutukluluk}; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).`,
+      verdictText: `Sanık Emir Yalçın’ın üzerine atılı tasarlayarak kasten öldürme suçundan TCK 82/1-a uyarınca AĞIRLAŞTIRILMIŞ MÜEBBET HAPİS; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile MÜEBBET HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).`,
       reasoning: [
         because(
           'Tanık beyanı, sanığa ait bıçak, sanığın olaydan dört gün önceki mesajı ve bileği taşı birlikte değerlendirilmiştir.',
+          not(ref('tanik_coktu')),
         ),
         because(
-          'Savunmanın tanığa ve tasarlamaya yönelik itirazları somut delillerle desteklenmemiştir.',
+          'Tanığın saatlere ilişkin beyanlarındaki çelişkiler, olayın özüne ilişkin anlatımını ortadan kaldırmamıştır; sanığa ait bıçak, olaydan dört gün önceki mesaj ve bileği taşı birlikte değerlendirilmiştir.',
+          ref('tanik_coktu'),
+        ),
+        because(
+          'Mesaj ile bileği taşının alınışı arasındaki süre ve sanığın kapanıştan sonra iş yerinde kalması, öldürme kararının önceden verildiğini ve sebatla sürdürüldüğünü göstermektedir.',
+        ),
+        because(
+          'Savunmanın tasarlamaya yönelik itirazları dosyadaki belgelerle desteklenmemiştir.',
           not(flag('cokus')),
         ),
-        because('Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı.', flag('cokus')),
+        because(
+          'Savunmanın son sunduğu belgelerin tanığın beyanıyla ilgisi bulunmadığından bu yöndeki talepler CMK 206 uyarınca reddedilmiştir; sunulan belgeler tanığın anlatımını sarsmamıştır.',
+          flag('cokus'),
+        ),
+        because(
+          'Tanığın kendisini suçlayacak sorulara cevap vermemesi bir hak kullanımıdır; tanık hakkındaki iddialar ayrı bir soruşturmanın konusudur.',
+          flag('tarik_ifsa'),
+        ),
+        karsiOy,
       ],
-      legalBasis: 'TCK 82/1-a, 62/1, 53, 63; CMK 273/1',
+      legalBasis: 'TCK 82/1-a, 62/1, 53, 63; CMK 206, 217, 273/1',
       xp: {
         if: {
           when: flag('cokus'),
@@ -297,8 +401,9 @@ leyla: İstinaf var. Yarın sabah başlıyoruz; ikimiz.
         },
       },
       howToReach:
-        'Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir. Yanlış delil ve dayanaksız itiraz güvenilirliği eritir; baş tanığı çürütmeden ve tasarlamanın ayaklarını kesmeden beraat gelmez.',
+        'Tasarlamanın ayaklarını kâğıtlarla kesemezsen (mesajın tamamı, taşın alınış nedeni, maktulün daveti) heyet iddianamedeki vasfı esas alır. Yanlış delil güvenilirliği eritir; güvenilirlik biterse mahkeme delil taleplerini reddedip hükme geçer.',
       epilogue: [
+        ...tutukluluk,
         W(
           flag('cokus'),
           `
@@ -315,13 +420,95 @@ savci: Hafızayla değil, kâğıtla gelmeliydiniz avukat hanım. Bu dosyada kâ
 > “Müebbet.” Kelime koridora benden önce çıktı. Meral’in iğnesi elinden kaydı; mermerin üstünde ince bir ses çıkardı. Eğildim, aldım, ona uzattım. Almadı.
 > Kemal duvara yaslanmıştı. Gözleri kapalı. Yirmi iki yıl önce bir salonda bir rakam duymuştu; bugün bir kelime duydu.
 > Gülay Toker katılan sırasından kalktı. Sevinmiyordu. Kocası yine dönmemişti.
+`),
+        W(
+          ref('fail_belli'),
+          `
+> Koridorun ucu boştu. Tarık Sezer bir kat aşağıda, nezarethanedeydi; onun dosyası yeni açılmıştı. Bizimki bugün kapandı. İki dosya aynı geceyi anlatıyordu; biri bir çocuğu içeride bıraktı.
+`,
+        ),
+        W(
+          not(ref('fail_belli')),
+          `
 > Koridorun ucunda Tarık Sezer, ceketini koluna almış, merdivenlere yürüyordu. Anahtarını parmağında çeviriyordu.
+`,
+        ),
+        O(`
 # ARSLAN HUKUK · GECE [bg:buro_gece]
 > Leyla masasındaki çerçeveyi çevirdi; bir cezaevi kapısı, bir adam, kucağında bir çocuk. Uzun uzun baktı. Sonra yeniden ters çevirdi.
 > Çekmecesinden bir klasör çıkardı: 2004/311. Masama bıraktı.
 leyla: İstinafa ikimiz gideceğiz. Bu kez ben de imza atacağım.
 leyla: Yirmi iki yıl önce bir çocuğu kaybettim. Bu kez babasının gözü önünde oğlunu kaybettik. Ama istinaf var; her zaman bir sonraki kapı vardır.
 ~ Avucumda Meral’in iğnesi. Ona geri vermeyi unuttum. Masamın köşesine koydum; bir çerçevenin olacağı yere.
+`),
+      ],
+    }),
+    outcome('NITELIK', {
+      class: 'RECHARACTERIZED',
+      priority: 6,
+      when: { all: [] },
+      stamp: 'FARKLI NİTELENDİRME',
+      stampTone: 'amber',
+      sentence: '25 yıl hapis',
+      verdictText: `Sanık Emir Yalçın’ın eyleminde tasarlama unsuru oluşmadığından TCK 82/1-a’nın uygulanmasına yer olmadığına; eylemin TCK 81/1 kapsamında kaldığına; MÜEBBET HAPİS; duruşmadaki tutum ve davranışları gözetilerek TCK 62/1 ile 25 YIL HAPİS cezasıyla cezalandırılmasına; TCK 53; TCK 63 mahsup; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).`,
+      reasoning: [
+        because(
+          'İddianamede tasarlamaya dayanak gösterilen mesajın tamamı, bileği taşının alınış nedeni ve sanığın iş yerinde kalış nedeni birlikte değerlendirildiğinde tasarlama unsuru sabit değildir; mahkeme iddianamedeki vasıfla bağlı değildir (CMK 225/2).',
+        ),
+        because(
+          'Tanık beyanı, bıçağın sanığa ait olması ve sanığın olay gecesi maktulle tartıştığına ilişkin kendi beyanı birlikte değerlendirildiğinde eylemin sanık tarafından gerçekleştirildiği kanaatine varılmıştır.',
+          not(ref('tanik_coktu')),
+        ),
+        because(
+          'Cumhuriyet savcısının beraat yönündeki mütalaasına itibar edilmemiştir: tanığın saatlere ilişkin beyanları kayıtlarla çelişse de sanığın olay gecesi ofiste maktulle tartıştığı kendi beyanıyla sabittir ve ölüm aleti sanığa aittir.',
+          ref('tanik_coktu'),
+        ),
+        because(
+          'Haksız tahrik hükümlerinin uygulanmasını gerektirecek bir haksız fiil dosyada ileri sürülüp ispatlanmamıştır.',
+          not(flag('fact_itiraf')),
+        ),
+        because(
+          'Maktulün o gece bir açıklama yaptığı anlaşılmakla birlikte, savunma bunun sanıkta yarattığı hiddeti dayanaklarıyla ortaya koymamış; heyet haksız tahrik indirimini uygulamamıştır.',
+          flag('fact_itiraf'),
+        ),
+        karsiOy,
+      ],
+      legalBasis: 'TCK 81/1, 62/1, 53, 63; CMK 225/2, 273/1',
+      xp: xp(0.7, { ethicsVar: 'ethics' }),
+      howToReach:
+        'Tasarlamanın ayaklarını kâğıtlarla kes; ama baş tanığın anlatımını çökertemez ve haksız tahrik dayanağını kuramazsan heyet tasarlamayı düşürür, fiili sanığa yükler.',
+      epilogue: [
+        O(`
+baskan: Sanığın cezalandırılmasına…
+`),
+        ...tutukluluk,
+        O(`
+> “Yirmi beş yıl.” Emir rakamı duydu; bir an anlamadı. Ağırlaştırılmış değildi. Müebbet değildi. Yirmi beş yıldı.
+~ Tasarlama düştü. Bir kâğıt bir kelimeyi sildi; bir ömrün yerine yirmi beş yıl yazıldı. Yirmi iki yaşında bir çocuk için bu fark, kırk yedi ile ömür arasındaki fark.
+# ADLİYE KORİDORU · ÖĞLEDEN SONRA [bg:adliye]
+> Koridorda yağmur kokusu vardı; biri şemsiyesini kapının yanına bırakmıştı, mermerde küçük bir göl.
+> Meral iğnesini parmaklarının arasında çeviriyordu. Bana döndü.
+`),
+        W(
+          flag('released'),
+          `
+meral: Üç hafta evdeydi. Üç hafta. Her sabah ütülü gömleğini giydi, imzaya gitti. Bir daha ütüleyecek miyim?
+`,
+        ),
+        W(
+          not(flag('released')),
+          `
+meral: Dört aydır her pazartesi bir gömlek ütülüyorum. Yirmi beş yıl… Kaç gömlek eder avukat hanım?
+`,
+        ),
+        O(`
+> Cevap vermedim. Kemal karısının omzuna dokundu; ilk kez. İğne durdu.
+kemal: İstinaf var dediniz. Gidin. Bu kez ben de gelirim; salonun arkasında değil, önünde otururum.
+# ARSLAN HUKUK · GECE [bg:buro_gece]
+> Leyla masasındaki çerçeveyi aldı; çevirmeden çekmeceye koydu. Çekmeceyi kapatmadı.
+leyla: Tasarlamayı düşürdün. Bunu az insan yapar. Ama fiili düşüremedin; o kapı açık kaldı.
+leyla: İstinafta bir kâğıt daha getireceksin. Bir ses, bir imza, bir gömlek. Hangisi eksikse.
+~ Mudanya’da yağmur dinmedi. Bir neonun I harfi hâlâ yanmıyor; bir dosyada bir ad hâlâ okunmamış.
 `),
       ],
     }),

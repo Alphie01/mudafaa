@@ -66,7 +66,7 @@
 | 23.18 | Tarık 2 no'lu personel turnikesinden çıkar; bir daha girmez. | Kayıt | Turnike dökümü (dilekçe → 1. celse) |
 | 23.34 | Ercan kantinde personel kartıyla tost ve ayran alır; burnunda pamuk. | Şükrü, kantin kaydı | Şükrü görüşmesi (kantin), otopsi: mide içeriği |
 | 23.37 | Tarık iskele büfesinde kartla iki çay öder; Nail Usta elindeki kanlı peçeteyi görür. | Tarık (saklıyor), Nail | Gülay'ın hesap dökümü, Nail Usta |
-| 23.41 | Ercan, rehberde "Kaptan" diye kayıtlı numarayı arar (2 dk 07 sn): "Gel beni al… ya da yarın her şeyi anlatırım." İçerik bilinmez, yalnızca kayıt. | Kenan | Maktulün telefon inceleme tutanağı (belge), "Kaptan" lakabı (Şükrü, Tarık) |
+| 23.41 | Ercan, rehberde "Kptn" diye kayıtlı numarayı arar (2 dk 07 sn): "Gel beni al… ya da yarın her şeyi anlatırım." İçerik bilinmez, yalnızca kayıt. | Kenan | Maktulün telefon inceleme tutanağı (belge; rehber kısaltması "Kptn"), BTK abone cevabı (ara karar), "Kaptan" lakabı (yalnızca Sevim Yavuz, ARA_SEVIM) |
 | 23.52–00.06 | Kenan'ın servis kamyoneti B sahasında durur. Kenan, kamyonetteki laşing kitinden aldığı twistlock'la Ercan'ın başının arkasına vurur; onu iki konteynerin arasına sürükler. | Kenan | Araç takip kaydı (ara karar), lastik izi ve sürüklenme izi (B sahası), otopsi (desenli kırık, karşı kutup yok) |
 | 00.10 | Tarık eve döner; Gülay saati bilir. | Gülay | Gülay görüşmesi |
 | 00.14 | Kenan'ın kamyoneti araç kapısından çıkar. | Kayıt | Turnike/araç kapısı dökümü |
@@ -153,17 +153,17 @@ T_COKUS (♥0) → T_09
 ### Bölüm 2 · SORUŞTURMA (INV_*), ~5.000
 - **INV_SABAH (~300):** Deniz'in arabası Mudanya yolunda; poyraz; liman vinçleri sisin içinde. Kapıdaki güvenlik:
   "İzin vardiya şefinden." **Uygulama kararı:** “Kaptan” lakabı soruşturmada hiç geçmez; telefon tutanağında yalnızca
-  rehber kısaltması “Kptn” ve kenar notu “Kptn kim?” vardır. Vardiya ofisindeki çerçevesiz römorkör fotoğrafı tohumdur;
-  lakabı ara evresinde Sevim Yavuz söyler (“Ercan ona Kaptan derdi; eskiden römorkör kaptanıymış”).
+  rehber kısaltması “Kptn” vardır (kenar notu yok). Römorkör fotoğrafı soruşturmada değil, ara evresindeki
+  ARA_KENAN ziyaretinde görünür; lakabı ara evresinde yalnızca Sevim Yavuz söyler (“Ercan ona Kaptan derdi; eskiden römorkör kaptanıymış”).
 - **INV_HUB:** gün başına hedef kutusu (gün 1 "Tarık'ın ne yaptığını ve ne yapmadığını ayır"; gün 2 "Ercan kavgadan sonra
   ne kadar yaşadı?"; gün 3 "Kâğıtlar: rapor, telefon, kart"; gün 4 "Dilekçe son gün").
 - **INV_GORUSME — Görüş odası (~1.400):** Cevdet: "Kızının resmine bakıyor her gece." Tarık ellerine bakar.
   Konular: O gece · Ercan · Vardiya (twistlock) · Eve dönüş (açılır: Gülay ya da hesap dökümü) · Ağabeyin (açılır: Şükrü ya
-  da "Ercan" konusu) · Kaptan (açılır: Kenan ziyareti ya da telefon kaydı). Sert ton bilgi verir, güveni düşürür.
+  da "Ercan" konusu) (vardiya şefiyle ilgili ayrı bir konu açılmaz). Sert ton bilgi verir, güveni düşürür.
   - Kırılma: güven yeterliyse "Vurdum. Bir kere. Polise ittim dedim, utandım." Bu, savunmanın temelidir.
 - **INV_GULAY — Güzelyalı'daki ev (~800):** dikiş makinesi, Elif'in resmi. Hesap dökümü: 23.37 İskele Büfe. **Etik tuzak:**
   "Saati 23.30 desem? Kimse bilmez." Doğru: "Gördüğünüz saati söyleyin." Yanlış: "23.30 deyin" → TCK 272 + 38, Av.K. 34.
-- **INV_SUKRU — Forklift garajı (~600):** "Ha?" Cihazın pili. Kantin: "Burnunda pamuk, tost yiyordu." "Kaptan ayırdı."
+- **INV_SUKRU — Forklift garajı (~600):** "Ha?" Cihazın pili. Kantin: "Burnunda pamuk, tost yiyordu." "Vardiya şefi ayırdı."
 - **INV_KENAN — Vardiya ofisi (~600):** termos kahve, bez parçası, "evlat". "Projektörler yanıyordu, gündüz gibiydi."
   Telefon kaydı bulunduysa "Ercan seni aramış mı?" sorusu açılır: sormak **Kenan'ı uyarır** (`kenan_uyarildi`; arada
   envanter düzeltilir, bir delil kaybolur).
@@ -174,7 +174,7 @@ T_COKUS (♥0) → T_09
 - **INV_RIHTIM / INV_BSAHA (sahneler):** baba 7'deki kan oturma hizasında; projektör direğinde bakım etiketi; laşing kafesi;
   B sahasında topuk sürüklenme izleri, taze çift lastik izi, rıhtımdan B'ye kan izi yok. Çeldiriciler: rakı matarası, martı
   tüyü, eski kaynak lekeleri.
-- **INV_TELEFON / INV_ONRAPOR (belgeler):** "Kaptan 23.41 · 2 dk 07 sn"; "3,2 cm dairesel çökme kırığı", "karşı kutup
+- **INV_TELEFON / INV_ONRAPOR (belgeler):** "Kptn 23.41 · 2 dk 07 sn"; "3,2 cm dairesel çökme kırığı", "karşı kutup
   lezyonu saptanmadı" (küçük not), "mide: yarı sindirilmiş ekmek, peynir, süt ürünü", "burun/dudak: basit tıbbi müdahale".
 - **INV_AKSAM (gün sonları):** Leyla ile kısa sahne; Gülay'ın telefonu (Elif'in sorusu); Kenan uyarıldıysa babacan bir
   arama: "Evlat, kendini yorma."

@@ -39,8 +39,10 @@ Ayrıntılı tablo hikâye kitabının §3'ündedir. Oyuncunun öğrenme sıras�
 
 Mystery integrity: Kenan'ın fail olduğu hiçbir satırda söylenmez. İlk celsede onun teşhisi yalnızca “yanıldı” düzeyinde
 çöker; kimliği ara evresinde mahkemenin istediği abone kaydıyla, ancak oyuncu 23.41 aramasını bulup talep ettiyse gelir.
-Erken tohumlar: “bazen fazla sayardı”, kamyonetin ofis önünde çalışır duruşu (Tarık), römorkör fotoğrafı, telefon
-tutanağının kenarındaki “Kptn kim?” notu.
+Soruşturmadaki tohumlar yalnızca kayda dayanır: aydınlatma etiketi (“gündüz gibiydi”e karşı), araç kapısı dökümü
+(23.21 çıkış, 23.49 giriş) ve rehber kısaltması “Kptn”. Kamyonetin ofis önünde çalışır duruşu (Tarık) ve römorkör
+fotoğrafı ara evresine (ARA_TARIK, ARA_KENAN) taşındı; “Kptn kim?” kenar notu, “Fener … kaldı” satırı, gün 1’deki HTS
+seçeneği ve “Ya biliyorsa?” kaldırıldı.
 
 ## 3. Kadro
 

@@ -461,6 +461,37 @@
       },
       "choices": [
         {
+          "id": "H102Q_A",
+          "kind": "OPTION",
+          "label": "İtiraz: sanık suçsuzluğunu kanıtlamak zorunda değil; ispat yükü iddiada",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İtiraz, Sayın Başkan. Sanık bir şeyi kanıtlamak zorunda değildir. İspat yükü iddia makamındadır."
+                },
+                {
+                  "speaker": "baskan",
+                  "text": "Yerinde. Sayın Savcı, sorunuzu sanığın ne yaptığını soracak biçimde sorun."
+                },
+                { "speaker": "savci", "text": "Sanık, kavgadan sonra nereye gittiniz?" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 80 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Masumiyet karinesi (Anayasa 38/4, AİHS 6/2): sanık suçsuzluğunu ispatlamak zorunda değildir; soru bu haliyle sorulamaz.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "H102Q_SON"
+        },
+        {
           "id": "H102Q_B",
           "kind": "OPTION",
           "label": "Sanık cevaplasın; turnike ve büfe kayıtları bu soruyu zaten cevaplıyor",
@@ -489,37 +520,6 @@
           "quality": {
             "q": "BAD",
             "feedback": "İtiraz bir usul kuralına dayanmalıdır; savcıya kişisel çıkış heyetin sabrını tüketir.",
-            "category": "USUL_BILGISI"
-          },
-          "next": "H102Q_SON"
-        },
-        {
-          "id": "H102Q_A",
-          "kind": "OPTION",
-          "label": "İtiraz: sanık suçsuzluğunu kanıtlamak zorunda değil; ispat yükü iddiada",
-          "responses": [
-            {
-              "lines": [
-                {
-                  "speaker": "player",
-                  "text": "İtiraz, Sayın Başkan. Sanık bir şeyi kanıtlamak zorunda değildir. İspat yükü iddia makamındadır."
-                },
-                {
-                  "speaker": "baskan",
-                  "text": "Yerinde. Sayın Savcı, sorunuzu sanığın ne yaptığını soracak biçimde sorun."
-                },
-                { "speaker": "savci", "text": "Sanık, kavgadan sonra nereye gittiniz?" }
-              ]
-            }
-          ],
-          "effects": [
-            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 80 },
-            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
-            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
-          ],
-          "quality": {
-            "q": "GOOD",
-            "feedback": "Masumiyet karinesi (Anayasa 38/4, AİHS 6/2): sanık suçsuzluğunu ispatlamak zorunda değildir; soru bu haliyle sorulamaz.",
             "category": "USUL_BILGISI"
           },
           "next": "H102Q_SON"

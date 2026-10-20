@@ -1,13 +1,11 @@
 import {
   any,
   all,
-  atLeast,
   categories,
   CASE_FORMAT_ID,
   counter,
   flag,
   flags,
-  has,
   hiddenEnum,
   hiddenInt,
   labelEnum,
@@ -107,13 +105,18 @@ export const meta: CasePart = {
     { id: 'kart2', label: 'Tahtada en az 2 kart var', when: { cmp: [{ count: 'evidence', tag: 'kart' }, '>=', 2] } },
     {
       id: 'donus_yok',
-      label: 'Sanığın olay yerine dönmediği gösterildi',
-      when: any(flag('contra_k1'), all(has('ded_cikis'), has('ded_buf'))),
+      // CMK 217/1: hüküm yalnızca duruşmada tartışılmış delile dayanır. Soruşturmada kurulan çıkarımlar (ded_cikis,
+      // ded_buf) kürsüde sunulmadıkça kayda geçmez: ya teşhis kayıtla çürütülür (K1) ya da büfeci ikinci celsede
+      // saatleri kayıtla sabitler (N1 + N2).
+      label: 'Sanığın olay yerine dönmediği duruşmada kayıtla gösterildi',
+      when: any(flag('contra_k1'), all(flag('contra_n1'), flag('contra_n2'))),
     },
     {
       id: 'olum_sonra',
-      label: 'Ölümün sonradan ve başka bir cisimle geldiği gösterildi',
-      when: atLeast(2, flag('contra_b1'), flag('contra_b2'), flag('contra_b3')),
+      // Düşme mekanizmasını (ve yumruk → düşme → gecikmiş ölüm ihtimalini) dışlayan darbe şekli (B1) ile ölümün sanığın
+      // ayrılışından sonra geldiğini gösteren saat (B2) birlikte gerekir; kilit ölçüsü (B3) tek başına bunların yerini tutmaz.
+      label: 'Ölümün düşmeden değil, sanığın ayrılışından sonra bir cisimle geldiği gösterildi',
+      when: all(flag('contra_b1'), flag('contra_b2')),
     },
   ],
   variables: [

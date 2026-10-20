@@ -856,15 +856,6 @@ baskan: Müdafi, mütalaaya karşı diyeceğiniz?
       ],
       next: 'T_06',
       options: [
-        option('T05_B', 'Ayrıca cevap vermeyelim; bütün cevabı esas savunmada toplarız', {
-          neutral: 'Mütalaaya ayrıca cevap vermedin; hakkın kaybolmadı ama kayıtları savcının sözünün hemen ardına koyma fırsatı geçti.',
-        }),
-        option('T05_C', 'Mütalaa delillere dayanmıyor; tutanaktan çıkarılmasını isteriz', {
-          score: { USUL_BILGISI: -50 },
-          effects: [dec('cred')],
-          bad: 'Mütalaa savcının hakkıdır; tutanaktan çıkarılamaz. Yapılacak şey cevap vermektir (CMK 216/2).',
-          responses: B(`baskan: Böyle bir usul yok, müdafi. Esas hakkındaki savunmanızı alalım.`),
-        }),
         option('T05_A', 'Kısa cevap: sanık dönmedi; bunu kanaat değil kayıtlar söylüyor', {
           effects: [
             ifThen(
@@ -891,6 +882,15 @@ baskan: Müdafi, mütalaaya karşı diyeceğiniz?
 - Sayın Başkan, kısaca: sanık 23.18’de limandan çıktı ve geri dönmedi. Bunlar kanaat değil, kayıttır.
 `),
           ],
+        }),
+        option('T05_B', 'Ayrıca cevap vermeyelim; bütün cevabı esas savunmada toplarız', {
+          neutral: 'Mütalaaya ayrıca cevap vermedin; hakkın kaybolmadı ama kayıtları savcının sözünün hemen ardına koyma fırsatı geçti.',
+        }),
+        option('T05_C', 'Mütalaa delillere dayanmıyor; tutanaktan çıkarılmasını isteriz', {
+          score: { USUL_BILGISI: -50 },
+          effects: [dec('cred')],
+          bad: 'Mütalaa savcının hakkıdır; tutanaktan çıkarılamaz. Yapılacak şey cevap vermektir (CMK 216/2).',
+          responses: B(`baskan: Böyle bir usul yok, müdafi. Esas hakkındaki savunmanızı alalım.`),
         }),
       ],
     }),
@@ -1015,6 +1015,12 @@ baskan: Müdafi, esas hakkındaki savunmanızı yapın.
 - Ama o yumruktan sonra Ercan Yavuz yaşadı: yürüdü, kantine gitti. Sanık ise limandan çıktı ve dönmedi.
 - Savcılık, yumruğun Ercan’ı düşürüp başını çarptırdığını söylüyor. Bilirkişi, dosyadaki kâğıtlar önüne konunca raporunu bu salonda daralttı.
 - Savcılığın tanığı o saatte o yerde sanığı göremezdi. Savcılığın anlatımı, maktulün kendi son saatleriyle çelişiyor.
+- Saatleri bu salonda birlikte okuduk. 23.18: sanığın kartı turnikeden çıkıyor ve bir daha girmiyor. 23.34: maktul kantinde tost ve ayran alıyor.
+- 23.37: sanığın kartı iskele büfesinde iki çay ödüyor. 23.41: maktul iki dakika yedi saniye telefonda konuşuyor; sanık o dakikada limanın dışında.
+- Bilirkişi mide içeriğini son öğünün saatiyle yorumladı: ölüm 23.34’ten sonra. Kırık 3,2 santim, dairesel; karşı tarafta darbe izi yok.
+- Düşen bir baş böyle kırılmaz. Sabit duran bir başa küçük, sert bir cisim böyle vurur.
+- Bu kâğıtların hiçbiri savunmanın kanaati değildir. Hepsi dosyada, hepsi bu duruşmada okundu ve tartışıldı. Mahkemeniz hükmünü yalnızca bunlara dayandırabilir.
+> Savcı kalemini bir kez masaya vurdu; itiraz etmedi. Kâtibin parmakları klavyede saatleri yazıyordu, birer birer.
 - Geriye ne kalıyor? Bir kavga. Bir yumruk. Bir ağabeyin adı ve bir tükürük. Bunlar bir ölümü açıklamaz.
 - Ceza yargılamasında sanık masumluğunu ispatlamak zorunda değildir. Suçluluğu kesin ve inandırıcı delille ispatlanmalıdır. Burada ispatlanmamıştır. Beraatini talep ediyoruz.
 > Oturdum. Ellerim titremiyordu; şaşırdım. Tarık bana bakmıyordu, heyete bakıyordu. İlk kez bir şey bekler gibi.
@@ -1089,17 +1095,6 @@ tarik/uzgun: Efendim… ben… kızım var efendim. Merhamet edin.
 > Sesi çatladı. Oturdu. Gülay galeride başını eğdi.
 `),
         }),
-        option('T07_C', '“Kenan abi o gece oradaydı! Herkes biliyor, onu soruşturun!”', {
-          next: 'T_08',
-          score: { SAVUNMA_STRATEJISI: -50 },
-          effects: [dec('pers')],
-          bad: 'Son sözde kanıtsız bir suçlama, sanığın dürüst anlatımının gölgesinde kaldı; bu iş savcılığındı.',
-          responses: B(`
-tarik/kizgin: Efendim, o yaptı! Kenan abi! Herkes biliyor!
-baskan: Sanık, oturun. Son sözünüz alındı.
-~ Ona bunu söylemedim. Ama ona bunun neden söylenmemesi gerektiğini de söylemedim.
-`),
-        }),
         option('T07_A', '“Bir kere vurdum, utanıyorum. Ama o adamı ben öldürmedim.”', {
           next: 'T_08',
           score: { SAVUNMA_STRATEJISI: 25 },
@@ -1111,6 +1106,17 @@ tarik: Ama ben o adamı öldürmedim. Kızım büyüyünce “baba sen ne yaptı
 > Oturdu. Başını eğmedi. Gülay galeride gözlerini sildi; Elif’in resim defterini göğsüne bastırdı.
 > Savcı kalemini kapattı. Dosyasının üstüne koydu, kapağı kapalı.
 > Galeride Sevim Yavuz başını kaldırdı. Tarık’a baktı. Bir şey söylemedi; ama başını da çevirmedi.
+`),
+        }),
+        option('T07_C', '“Kenan abi o gece oradaydı! Herkes biliyor, onu soruşturun!”', {
+          next: 'T_08',
+          score: { SAVUNMA_STRATEJISI: -50 },
+          effects: [dec('pers')],
+          bad: 'Son sözde kanıtsız bir suçlama, sanığın dürüst anlatımının gölgesinde kaldı; bu iş savcılığındı.',
+          responses: B(`
+tarik/kizgin: Efendim, o yaptı! Kenan abi! Herkes biliyor!
+baskan: Sanık, oturun. Son sözünüz alındı.
+~ Ona bunu söylemedim. Ama ona bunun neden söylenmemesi gerektiğini de söylemedim.
 `),
         }),
       ],

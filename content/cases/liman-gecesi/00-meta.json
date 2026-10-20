@@ -105,27 +105,13 @@
     },
     {
       "id": "donus_yok",
-      "label": "Sanığın olay yerine dönmediği gösterildi",
-      "when": {
-        "any": [{ "flag": "contra_k1" }, { "all": [{ "hasEvidence": "ded_cikis" }, { "hasEvidence": "ded_buf" }] }]
-      }
+      "label": "Sanığın olay yerine dönmediği duruşmada kayıtla gösterildi",
+      "when": { "any": [{ "flag": "contra_k1" }, { "all": [{ "flag": "contra_n1" }, { "flag": "contra_n2" }] }] }
     },
     {
       "id": "olum_sonra",
-      "label": "Ölümün sonradan ve başka bir cisimle geldiği gösterildi",
-      "when": {
-        "cmp": [
-          {
-            "add": [
-              { "if": { "when": { "flag": "contra_b1" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "flag": "contra_b2" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "flag": "contra_b3" }, "then": 1, "else": 0 } }
-            ]
-          },
-          ">=",
-          2
-        ]
-      }
+      "label": "Ölümün düşmeden değil, sanığın ayrılışından sonra bir cisimle geldiği gösterildi",
+      "when": { "all": [{ "flag": "contra_b1" }, { "flag": "contra_b2" }] }
     }
   ],
   "variables": [

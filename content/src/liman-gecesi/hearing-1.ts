@@ -263,6 +263,16 @@ savci: Var Sayın Başkan. Sanık, kavgadan sonra bir saat boyunca nerede olduğ
 `),
       next: 'H102Q_SON',
       options: [
+        option('H102Q_A', 'İtiraz: sanık suçsuzluğunu kanıtlamak zorunda değil; ispat yükü iddiada', {
+          score: { USUL_BILGISI: 80 },
+          effects: [inc('legal_hits'), inc('pers')],
+          good: 'Masumiyet karinesi (Anayasa 38/4, AİHS 6/2): sanık suçsuzluğunu ispatlamak zorunda değildir; soru bu haliyle sorulamaz.',
+          responses: B(`
+- İtiraz, Sayın Başkan. Sanık bir şeyi kanıtlamak zorunda değildir. İspat yükü iddia makamındadır.
+baskan: Yerinde. Sayın Savcı, sorunuzu sanığın ne yaptığını soracak biçimde sorun.
+savci: Sanık, kavgadan sonra nereye gittiniz?
+`),
+        }),
         option('H102Q_B', 'Sanık cevaplasın; turnike ve büfe kayıtları bu soruyu zaten cevaplıyor', {
           neutral:
             'Soru cevaplandı; ama sanıktan masumiyetini kanıtlaması istendiği tutanağa itirazsız geçti. Kayıtların varlığı, sorunun biçimini düzeltmez.',
@@ -273,16 +283,6 @@ savci: Var Sayın Başkan. Sanık, kavgadan sonra bir saat boyunca nerede olduğ
           effects: [dec('cred')],
           bad: 'İtiraz bir usul kuralına dayanmalıdır; savcıya kişisel çıkış heyetin sabrını tüketir.',
           responses: B(`baskan: Müdafi, itirazınızı hukuki dayanağıyla yapın. Sanık, cevap verin.`),
-        }),
-        option('H102Q_A', 'İtiraz: sanık suçsuzluğunu kanıtlamak zorunda değil; ispat yükü iddiada', {
-          score: { USUL_BILGISI: 80 },
-          effects: [inc('legal_hits'), inc('pers')],
-          good: 'Masumiyet karinesi (Anayasa 38/4, AİHS 6/2): sanık suçsuzluğunu ispatlamak zorunda değildir; soru bu haliyle sorulamaz.',
-          responses: B(`
-- İtiraz, Sayın Başkan. Sanık bir şeyi kanıtlamak zorunda değildir. İspat yükü iddia makamındadır.
-baskan: Yerinde. Sayın Savcı, sorunuzu sanığın ne yaptığını soracak biçimde sorun.
-savci: Sanık, kavgadan sonra nereye gittiniz?
-`),
         }),
       ],
     }),

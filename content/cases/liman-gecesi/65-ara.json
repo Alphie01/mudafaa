@@ -1415,6 +1415,45 @@
       ],
       "choices": [
         {
+          "id": "SAV_ASIL",
+          "kind": "OPTION",
+          "label": "Duyurudaki kayıtların asıllarını soruşturma dosyasına sunmayı teklif et",
+          "visibleWhen": { "flag": "suc_duyurusu" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Eklerin asılları bende değil, mahkemede. Defterin teslim tutanağı, BTK ve işletme cevaplarının müzekkere yazıları. Örneklerini getirebilirim."
+                },
+                {
+                  "speaker": "savci",
+                  "text": "Getirin. Kalem amirine bırakın, tutanakla. Benim dosyamla mahkemenin dosyası aynı kâğıdı iki kez saymasın."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "İnce dosyanın kapağına bir not daha düştü. Kalemin ucu kâğıtta bir an durdu."
+                },
+                {
+                  "speaker": "savci",
+                  "text": "Zimmet defterleri, araç takip dökümleri… İşletmeler bunları altı ay saklar. Altı ay dolmadan alınması gerekir."
+                },
+                { "speaker": "player", "text": "O yüzden yazdım." },
+                { "speaker": "savci", "text": "Biliyorum. Bakacağız." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "VAR", "var": "savci_asil", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Suç duyurusuna eklenen belgelerin asıllarını ve elde ediliş tutanaklarını soruşturma makamına sunmak delil zincirini korur (CMK 158, 160).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
           "id": "SAV_ATK",
           "kind": "OPTION",
           "label": "“Nihai raporun ölüm saatini nasıl okuyorsunuz?”",
@@ -1472,45 +1511,6 @@
             "q": "BAD",
             "feedback": "Türk ceza muhakemesinde kasten öldürme ya da yaralama sonucu ölüm için savcıyla “suç vasfı pazarlığı” yoktur; iddianame bir kez kabul edildikten sonra vasfı mahkeme belirler (CMK 225, 226). Teklif, savunmanın kendi delillerine güvenmediğini gösterdi.",
             "category": "HUKUKI_BILGI"
-          }
-        },
-        {
-          "id": "SAV_ASIL",
-          "kind": "OPTION",
-          "label": "Duyurudaki kayıtların asıllarını soruşturma dosyasına sunmayı teklif et",
-          "visibleWhen": { "flag": "suc_duyurusu" },
-          "responses": [
-            {
-              "lines": [
-                {
-                  "speaker": "player",
-                  "text": "Eklerin asılları bende değil, mahkemede. Defterin teslim tutanağı, BTK ve işletme cevaplarının müzekkere yazıları. Örneklerini getirebilirim."
-                },
-                {
-                  "speaker": "savci",
-                  "text": "Getirin. Kalem amirine bırakın, tutanakla. Benim dosyamla mahkemenin dosyası aynı kâğıdı iki kez saymasın."
-                },
-                {
-                  "speaker": "narrator",
-                  "text": "İnce dosyanın kapağına bir not daha düştü. Kalemin ucu kâğıtta bir an durdu."
-                },
-                {
-                  "speaker": "savci",
-                  "text": "Zimmet defterleri, araç takip dökümleri… İşletmeler bunları altı ay saklar. Altı ay dolmadan alınması gerekir."
-                },
-                { "speaker": "player", "text": "O yüzden yazdım." },
-                { "speaker": "savci", "text": "Biliyorum. Bakacağız." }
-              ]
-            }
-          ],
-          "effects": [
-            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
-            { "type": "VAR", "var": "savci_asil", "op": "set", "value": true }
-          ],
-          "quality": {
-            "q": "GOOD",
-            "feedback": "Suç duyurusuna eklenen belgelerin asıllarını ve elde ediliş tutanaklarını soruşturma makamına sunmak delil zincirini korur (CMK 158, 160).",
-            "category": "USUL_BILGISI"
           }
         },
         { "id": "SAV_BITIR", "kind": "CONTINUE", "label": "Teşekkür et ve çık", "role": "BACK", "next": "ARA_HUB" }

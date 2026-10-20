@@ -176,7 +176,7 @@ tarik: Ağabey… ayağına bakmazdın derler. Ben baktım. Bir kere yine de tö
       legalBasis: 'CMK 223/2-e, 223/8; TCK 86/2; Anayasa 38/4; AİHS 6/2; CMK 141/1-e, 142, 231/3',
       xp: xp(1, { ethicsVar: 'ethics' }),
       howToReach:
-        'Sanığın dönmediğini kayıtla göster (teşhisi çürüt ya da çıkış + büfe); ikinci celsede bilirkişiye darbe şeklini, ölüm saatini ve aletin ölçüsünden en az ikisini kâğıtla göster. Karar bu olgulara bakar; esas savunmanın adı puanı ve notu belirler.',
+        'Sanığın dönmediğini kürsüde kayıtla göster (teşhisi çürüt ya da büfecinin saatlerini kayıtla sabitle); ikinci celsede bilirkişiye darbe şeklini ve ölüm saatini kâğıtla göster. Karar duruşmada tartışılan bu olgulara bakar (CMK 217/1); esas savunmanın adı puanı ve notu belirler.',
       epilogue: [
         O(`
 baskan: Türk Milleti adına…
@@ -243,7 +243,15 @@ leyla: Kantinleri biz düzeltemeyiz. Duyurunu yazdın; gerisi savcılığın. Be
         because('Sanığın olay yerine geri döndüğü ispatlanamamış; öldürme kastı sabit görülmemiştir.'),
         because(
           'Heyet, ölümün sanığın yumruğuyla düşen maktulün başını çarpmasıyla oluştuğu kanaatine varmıştır; ölüm saatini ve darbe şeklini daraltan bir delil ortaya konmamıştır.',
-          not(ref('olum_sonra')),
+          all(not(flag('contra_b1')), not(flag('contra_b2'))),
+        ),
+        because(
+          'Maktulün 23.41’den sonra yaşadığı anlaşılmışsa da düşmeye bağlı kafa travmalarında ölüm bir bilinç açıklığı döneminden sonra gelebilir; darbe şeklini düşmeden ayıran bir bulgu kürsüde ortaya konmadığından yumruk ile ölüm arasındaki bağ kopmamıştır.',
+          all(flag('contra_b2'), not(flag('contra_b1'))),
+        ),
+        because(
+          'Bilirkişi kırığın sınırlı yüzeyli bir cisimle oluşabileceğini söylemişse de ölümün sanığın limandan ayrılmasından sonra geldiği ortaya konmamıştır; heyet darbenin kavga sırasında oluştuğu ihtimalini dışlayamamış, kuşkuyu sanık lehine en hafif nitelikte değerlendirmiştir.',
+          all(flag('contra_b1'), not(flag('contra_b2'))),
         ),
         because(
           'Maktulün sanığın ölen ağabeyiyle alay etmesi, yüzüne tükürmesi ve onu itmesi haksız fiildir (TCK 29).',
@@ -253,7 +261,7 @@ leyla: Kantinleri biz düzeltemeyiz. Duyurunu yazdın; gerisi savcılığın. Be
       legalBasis: 'TCK 87/4, 86/1–2, 29, 62/1, 53, 63; CMK 226, 273/1',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        'Dönüşün olmadığını kanıtla ama ölümün sonradan ve başka bir cisimle geldiğini bilirkişiye gösteremezsen mahkeme savcılığın yedek tezini (yumruk → düşme → ölüm, TCK 87/4) benimser.',
+        'Dönüşün olmadığını kürsüde kanıtla ama bilirkişiye hem darbe şeklini hem ölüm saatini kâğıtla göstermezsen mahkeme savcılığın yedek tezini (yumruk → düşme → ölüm, TCK 87/4) benimser.',
       epilogue: [
         O(`
 baskan: Türk Milleti adına… altı yıl üç ay hapis cezasıyla…

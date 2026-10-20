@@ -783,7 +783,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G4',
-        { outcome: 'MAHKUMIYET', finalMin: 209, finalMax: 231 },
+        { outcome: 'MAHKUMIYET', finalMin: 195, finalMax: 215 },
         PROLOG('BR00_B', 'BR01_B', 'STR_MASUMIYET'),
         G4,
       ),
@@ -819,6 +819,18 @@ export const tests: CasePart = {
         CELSE1,
         ARA_TAM(false),
         CELSE2('T06_T', 'T06ST_DEVAM', { k7: false }),
+      ),
+      goldenPath(
+        'OLGU_X',
+        { outcome: 'BERAAT_E' },
+        PROLOG('BR00_C', 'BR01_A', 'STR_INDIRIM'),
+        GUN1,
+        GUN2,
+        GUN3,
+        GUN4,
+        CELSE1,
+        ARA_TAM(false),
+        CELSE2('T06_X', 'T06SX_DEVAM', { k7: false }),
       ),
       goldenPath(
         'OLGU_B',

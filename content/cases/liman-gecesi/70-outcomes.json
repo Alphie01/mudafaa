@@ -251,7 +251,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
         }
       },
-      "howToReach": "Sanığın dönmediğini kayıtla göster (teşhisi çürüt ya da çıkış + büfe); ikinci celsede bilirkişiye darbe şeklini, ölüm saatini ve aletin ölçüsünden en az ikisini kâğıtla göster. Karar bu olgulara bakar; esas savunmanın adı puanı ve notu belirler.",
+      "howToReach": "Sanığın dönmediğini kürsüde kayıtla göster (teşhisi çürüt ya da büfecinin saatlerini kayıtla sabitle); ikinci celsede bilirkişiye darbe şeklini ve ölüm saatini kâğıtla göster. Karar duruşmada tartışılan bu olgulara bakar (CMK 217/1); esas savunmanın adı puanı ve notu belirler.",
       "epilogue": [
         {
           "lines": [
@@ -397,8 +397,16 @@
       "reasoning": [
         { "text": "Sanığın olay yerine geri döndüğü ispatlanamamış; öldürme kastı sabit görülmemiştir." },
         {
-          "when": { "not": { "ref": "olum_sonra" } },
+          "when": { "all": [{ "not": { "flag": "contra_b1" } }, { "not": { "flag": "contra_b2" } }] },
           "text": "Heyet, ölümün sanığın yumruğuyla düşen maktulün başını çarpmasıyla oluştuğu kanaatine varmıştır; ölüm saatini ve darbe şeklini daraltan bir delil ortaya konmamıştır."
+        },
+        {
+          "when": { "all": [{ "flag": "contra_b2" }, { "not": { "flag": "contra_b1" } }] },
+          "text": "Maktulün 23.41’den sonra yaşadığı anlaşılmışsa da düşmeye bağlı kafa travmalarında ölüm bir bilinç açıklığı döneminden sonra gelebilir; darbe şeklini düşmeden ayıran bir bulgu kürsüde ortaya konmadığından yumruk ile ölüm arasındaki bağ kopmamıştır."
+        },
+        {
+          "when": { "all": [{ "flag": "contra_b1" }, { "not": { "flag": "contra_b2" } }] },
+          "text": "Bilirkişi kırığın sınırlı yüzeyli bir cisimle oluşabileceğini söylemişse de ölümün sanığın limandan ayrılmasından sonra geldiği ortaya konmamıştır; heyet darbenin kavga sırasında oluştuğu ihtimalini dışlayamamış, kuşkuyu sanık lehine en hafif nitelikte değerlendirmiştir."
         },
         {
           "text": "Maktulün sanığın ölen ağabeyiyle alay etmesi, yüzüne tükürmesi ve onu itmesi haksız fiildir (TCK 29)."
@@ -413,7 +421,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "Dönüşün olmadığını kanıtla ama ölümün sonradan ve başka bir cisimle geldiğini bilirkişiye gösteremezsen mahkeme savcılığın yedek tezini (yumruk → düşme → ölüm, TCK 87/4) benimser.",
+      "howToReach": "Dönüşün olmadığını kürsüde kanıtla ama bilirkişiye hem darbe şeklini hem ölüm saatini kâğıtla göstermezsen mahkeme savcılığın yedek tezini (yumruk → düşme → ölüm, TCK 87/4) benimser.",
       "epilogue": [
         {
           "lines": [

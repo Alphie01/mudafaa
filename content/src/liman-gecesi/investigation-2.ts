@@ -858,6 +858,21 @@ savci: Rapor iki saatlik bir aralık veriyor. İki saat bir ceza dosyasında uzu
 `),
   ],
   choices: [
+    option('SAV_ASIL', 'Duyurudaki kayıtların asıllarını soruşturma dosyasına sunmayı teklif et', {
+      visibleWhen: flag('suc_duyurusu'),
+      score: { USUL_BILGISI: 40 },
+      effects: [raise('savci_asil')],
+      good: 'Suç duyurusuna eklenen belgelerin asıllarını ve elde ediliş tutanaklarını soruşturma makamına sunmak delil zincirini korur (CMK 158, 160).',
+      category: 'USUL_BILGISI',
+      responses: B(`
+- Eklerin asılları bende değil, mahkemede. Defterin teslim tutanağı, BTK ve işletme cevaplarının müzekkere yazıları. Örneklerini getirebilirim.
+savci: Getirin. Kalem amirine bırakın, tutanakla. Benim dosyamla mahkemenin dosyası aynı kâğıdı iki kez saymasın.
+> İnce dosyanın kapağına bir not daha düştü. Kalemin ucu kâğıtta bir an durdu.
+savci: Zimmet defterleri, araç takip dökümleri… İşletmeler bunları altı ay saklar. Altı ay dolmadan alınması gerekir.
+- O yüzden yazdım.
+savci: Biliyorum. Bakacağız.
+`),
+    }),
     option('SAV_ATK', '“Nihai raporun ölüm saatini nasıl okuyorsunuz?”', {
       score: { HUKUKI_BILGI: 20 },
       responses: B(`
@@ -877,21 +892,6 @@ savci: Avukat hanım, burası Amerikan dizisi değil. İddianame mahkemede; vasf
 > Kalemini bıraktı. Bana ilk kez dosyasından değil, yüzümden baktı.
 savci: Bir de… müvekkilinizin yumruğunu bana satmaya çalışmayın. Onu zaten kendisi mahkemeye verdi.
 ~ Bir cümleyle iki şey kaybettim: savcının saygısını ve kendi delillerime olan inancımı. Biri geri gelir. Öbürünü bilmiyorum.
-`),
-    }),
-    option('SAV_ASIL', 'Duyurudaki kayıtların asıllarını soruşturma dosyasına sunmayı teklif et', {
-      visibleWhen: flag('suc_duyurusu'),
-      score: { USUL_BILGISI: 40 },
-      effects: [raise('savci_asil')],
-      good: 'Suç duyurusuna eklenen belgelerin asıllarını ve elde ediliş tutanaklarını soruşturma makamına sunmak delil zincirini korur (CMK 158, 160).',
-      category: 'USUL_BILGISI',
-      responses: B(`
-- Eklerin asılları bende değil, mahkemede. Defterin teslim tutanağı, BTK ve işletme cevaplarının müzekkere yazıları. Örneklerini getirebilirim.
-savci: Getirin. Kalem amirine bırakın, tutanakla. Benim dosyamla mahkemenin dosyası aynı kâğıdı iki kez saymasın.
-> İnce dosyanın kapağına bir not daha düştü. Kalemin ucu kâğıtta bir an durdu.
-savci: Zimmet defterleri, araç takip dökümleri… İşletmeler bunları altı ay saklar. Altı ay dolmadan alınması gerekir.
-- O yüzden yazdım.
-savci: Biliyorum. Bakacağız.
 `),
     }),
     toHub('SAV_BITIR', 'Teşekkür et ve çık'),

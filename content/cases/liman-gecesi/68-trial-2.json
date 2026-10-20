@@ -2001,38 +2001,6 @@
       },
       "choices": [
         {
-          "id": "T05_B",
-          "kind": "OPTION",
-          "label": "Ayrıca cevap vermeyelim; bütün cevabı esas savunmada toplarız",
-          "quality": {
-            "q": "NEUTRAL",
-            "feedback": "Mütalaaya ayrıca cevap vermedin; hakkın kaybolmadı ama kayıtları savcının sözünün hemen ardına koyma fırsatı geçti."
-          },
-          "next": "T_06"
-        },
-        {
-          "id": "T05_C",
-          "kind": "OPTION",
-          "label": "Mütalaa delillere dayanmıyor; tutanaktan çıkarılmasını isteriz",
-          "responses": [
-            {
-              "lines": [
-                { "speaker": "baskan", "text": "Böyle bir usul yok, müdafi. Esas hakkındaki savunmanızı alalım." }
-              ]
-            }
-          ],
-          "effects": [
-            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
-            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
-          ],
-          "quality": {
-            "q": "BAD",
-            "feedback": "Mütalaa savcının hakkıdır; tutanaktan çıkarılamaz. Yapılacak şey cevap vermektir (CMK 216/2).",
-            "category": "USUL_BILGISI"
-          },
-          "next": "T_06"
-        },
-        {
           "id": "T05_A",
           "kind": "OPTION",
           "label": "Kısa cevap: sanık dönmedi; bunu kanaat değil kayıtlar söylüyor",
@@ -2081,6 +2049,38 @@
               "else": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 }]
             }
           ],
+          "next": "T_06"
+        },
+        {
+          "id": "T05_B",
+          "kind": "OPTION",
+          "label": "Ayrıca cevap vermeyelim; bütün cevabı esas savunmada toplarız",
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Mütalaaya ayrıca cevap vermedin; hakkın kaybolmadı ama kayıtları savcının sözünün hemen ardına koyma fırsatı geçti."
+          },
+          "next": "T_06"
+        },
+        {
+          "id": "T05_C",
+          "kind": "OPTION",
+          "label": "Mütalaa delillere dayanmıyor; tutanaktan çıkarılmasını isteriz",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "baskan", "text": "Böyle bir usul yok, müdafi. Esas hakkındaki savunmanızı alalım." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Mütalaa savcının hakkıdır; tutanaktan çıkarılamaz. Yapılacak şey cevap vermektir (CMK 216/2).",
+            "category": "USUL_BILGISI"
+          },
           "next": "T_06"
         }
       ]
@@ -2357,6 +2357,30 @@
             },
             {
               "speaker": "player",
+              "text": "Saatleri bu salonda birlikte okuduk. 23.18: sanığın kartı turnikeden çıkıyor ve bir daha girmiyor. 23.34: maktul kantinde tost ve ayran alıyor."
+            },
+            {
+              "speaker": "player",
+              "text": "23.37: sanığın kartı iskele büfesinde iki çay ödüyor. 23.41: maktul iki dakika yedi saniye telefonda konuşuyor; sanık o dakikada limanın dışında."
+            },
+            {
+              "speaker": "player",
+              "text": "Bilirkişi mide içeriğini son öğünün saatiyle yorumladı: ölüm 23.34’ten sonra. Kırık 3,2 santim, dairesel; karşı tarafta darbe izi yok."
+            },
+            {
+              "speaker": "player",
+              "text": "Düşen bir baş böyle kırılmaz. Sabit duran bir başa küçük, sert bir cisim böyle vurur."
+            },
+            {
+              "speaker": "player",
+              "text": "Bu kâğıtların hiçbiri savunmanın kanaati değildir. Hepsi dosyada, hepsi bu duruşmada okundu ve tartışıldı. Mahkemeniz hükmünü yalnızca bunlara dayandırabilir."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı kalemini bir kez masaya vurdu; itiraz etmedi. Kâtibin parmakları klavyede saatleri yazıyordu, birer birer."
+            },
+            {
+              "speaker": "player",
               "text": "Geriye ne kalıyor? Bir kavga. Bir yumruk. Bir ağabeyin adı ve bir tükürük. Bunlar bir ölümü açıklamaz."
             },
             {
@@ -2548,34 +2572,6 @@
           }
         },
         {
-          "id": "T07_C",
-          "kind": "OPTION",
-          "label": "“Kenan abi o gece oradaydı! Herkes biliyor, onu soruşturun!”",
-          "next": "T_08",
-          "responses": [
-            {
-              "lines": [
-                { "speaker": "tarik", "expression": "kizgin", "text": "Efendim, o yaptı! Kenan abi! Herkes biliyor!" },
-                { "speaker": "baskan", "text": "Sanık, oturun. Son sözünüz alındı." },
-                {
-                  "speaker": "player",
-                  "text": "Ona bunu söylemedim. Ama ona bunun neden söylenmemesi gerektiğini de söylemedim.",
-                  "style": "thought"
-                }
-              ]
-            }
-          ],
-          "effects": [
-            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 },
-            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
-          ],
-          "quality": {
-            "q": "BAD",
-            "feedback": "Son sözde kanıtsız bir suçlama, sanığın dürüst anlatımının gölgesinde kaldı; bu iş savcılığındı.",
-            "category": "SAVUNMA_STRATEJISI"
-          }
-        },
-        {
           "id": "T07_A",
           "kind": "OPTION",
           "label": "“Bir kere vurdum, utanıyorum. Ama o adamı ben öldürmedim.”",
@@ -2614,6 +2610,34 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Kısa, dürüst bir son söz (CMK 216/3): yumruğu kabul eden, ölümü reddeden.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        {
+          "id": "T07_C",
+          "kind": "OPTION",
+          "label": "“Kenan abi o gece oradaydı! Herkes biliyor, onu soruşturun!”",
+          "next": "T_08",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "tarik", "expression": "kizgin", "text": "Efendim, o yaptı! Kenan abi! Herkes biliyor!" },
+                { "speaker": "baskan", "text": "Sanık, oturun. Son sözünüz alındı." },
+                {
+                  "speaker": "player",
+                  "text": "Ona bunu söylemedim. Ama ona bunun neden söylenmemesi gerektiğini de söylemedim.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Son sözde kanıtsız bir suçlama, sanığın dürüst anlatımının gölgesinde kaldı; bu iş savcılığındı.",
             "category": "SAVUNMA_STRATEJISI"
           }
         }

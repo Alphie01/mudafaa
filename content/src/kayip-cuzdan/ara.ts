@@ -976,7 +976,7 @@ zehra.uzgun: Annem o sabahı hâlâ anlatır. Karakolun önündeki bankı. Soğu
           responses: B(`
 P: Üç kapı var. Savcı en büyüğünü istiyor: özel beceriyle hırsızlık. İddianame ortadakini: basit hırsızlık. Bir de en küçüğü: kaybolmuş eşyayı teslim etmemek.
 P: Bizim derdimiz hiçbir kapıdan girmemek. Hırsızlık için birinin elinden bir şey almak gerekir. Arda kimsenin elinden almadı.
-P: Küçük kapı için de “sahibi gibi davranmak” gerekir: harcamak, saklamak, kullanmak. Arda şoföre uzattı, aradı, yazdı. Sahibi gibi değil; sahibini arayan biri gibi.
+P: Küçük kapı için de “sahibi gibi davranmak” gerekir: gizlemek, harcamak, kullanmak, elden çıkarmak. Arda şoföre uzattı, aradı, yazdı. Sahibi gibi değil; sahibini arayan biri gibi.
 zehra: Yani… o küçük kapı da kapalı mı?
 P: Kapalı olduğunu göstermemiz lazım. Göstereceğiz.
 `),

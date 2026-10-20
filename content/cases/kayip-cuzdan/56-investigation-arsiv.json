@@ -86,7 +86,16 @@
             },
             {
               "speaker": "narrator",
-              "text": "Masaya beş poşet dizildi. Her biri tutanaktaki bir satır. Bir hayatın yedi ay önceki sabahı, şeffaf naylonun içinde."
+              "text": "Masaya dört poşet ve bir tutanak fotokopisi dizildi. Cüzdanın kendisi burada değildi; soruşturmada yediemin olarak sahibine verilmişti."
+            },
+            {
+              "speaker": "katip",
+              "text": "Cüzdanı savcılık müştekiye bıraktı, yediemin. Fotoğrafı varmış içinde, kadın ağlamış. Teslim tutanağı dosyada; içindekiler tek tek yazılı."
+            },
+            {
+              "speaker": "player",
+              "text": "Her poşet tutanaktaki bir satır. Bir hayatın yedi ay önceki sabahı, şeffaf naylonun içinde.",
+              "style": "thought"
             },
             {
               "speaker": "narrator",
@@ -104,10 +113,14 @@
       "rows": [
         {
           "id": "e1",
-          "cells": ["1", "Kahverengi deri kadın cüzdanı", "İçinde: kimlik, sağlık kartı, eczane fişi, 1 fotoğraf"],
+          "cells": [
+            "1",
+            "Kahverengi deri kadın cüzdanı",
+            "Yediemin olarak müştekiye teslim edildi; fotoğraf ve kimlik müştekide"
+          ],
           "lens": {
             "cmp": {
-              "cells": ["1", "Kahverengi deri kadın cüzdanı", "Müşteki: 1.200 TL + 2 kart · Emanette: YOK"],
+              "cells": ["1", "Kahverengi deri kadın cüzdanı", "Müşteki: 1.200 TL + 2 kart · Teslim dökümünde: YOK"],
               "tone": "special"
             }
           }
@@ -142,7 +155,7 @@
           "match": { "tool": "cmp", "target": "e1" },
           "feedback": {
             "title": "YENİ İPUCU",
-            "text": "Müşteki 1.200 TL ve iki kart diyor. Emanetteki cüzdanda ikisi de yok; Arda’nın üstünden ve evinden de çıkmamış.",
+            "text": "Müşteki 1.200 TL ve iki kart diyor. Teslim tutanağındaki cüzdan dökümünde ikisi de yok; Arda’nın üstünden ve evinden de çıkmamış.",
             "label": "+150 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -232,7 +245,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Arda oturuyor. Eğiliyor. Bir şey alıyor. Açıyor. Kapatıyor. Çantasına koyuyor. Görüntü 18.44.30’da kararıyor."
+              "text": "Arda oturuyor. Elinde bir cüzdan. Açıyor. Kapatıyor. Çantasına koyuyor. Görüntü 18.44.30’da kararıyor."
             },
             {
               "speaker": "player",

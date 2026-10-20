@@ -12,9 +12,9 @@ export const evidencePart: CasePart = {
     evidence('ev_klip', {
       type: 'KAMERA_KAYDI',
       title: 'CD · KAM-2 klibi (18.42.00–18.44.30)',
-      shortText: 'Arda boşalan koltuğa oturuyor, yerden bir cüzdan alıp sırt çantasına koyuyor.',
+      shortText: 'Arda 14 numaralı koltukta bir cüzdanı alıp sırt çantasına koyuyor.',
       description:
-        'Kent Ulaşım’ın polise verdiği CD. Yalnızca orta kameranın (KAM-2) 2,5 dakikası. Arda 18.42’de 14 numaralı koltuğa oturur, eğilir, bir cüzdan alır, açar, kapatır ve çantasına koyar. Ses yoktur.',
+        'Kent Ulaşım’ın polise verdiği CD. Yalnızca orta kameranın (KAM-2) 2,5 dakikası. Arda 18.42’de 14 numaralı koltuktadır; cüzdanı eline alır, açar, kapatır, çantasına koyar. Ses yoktur.',
       sourceLabel: 'Soruşturma dosyası · Ek-2',
       icon: 'camera',
       side: 'PROSECUTION',
@@ -41,13 +41,12 @@ export const evidencePart: CasePart = {
       title: 'Arama ve el koyma tutanağı (7 Mart 08.15)',
       shortText: 'Öğrenci evinde, Arda’nın rızasıyla yapılan arama; el konulan eşyaların listesi.',
       description:
-        'Polis memurları Görükle’deki evde Arda’nın sırt çantasında kahverengi bir kadın cüzdanı, bir zarf içinde 600 TL ve masada sarı bir not kâğıdı bulup el koymuştur. Eşyalar adliye emanetindedir.',
+        'Polis memurları Görükle’deki evde Arda’nın sırt çantasında kahverengi bir kadın cüzdanı, bir zarf içinde 600 TL ve masada sarı bir not kâğıdı bulup el koymuştur. Cüzdan soruşturmada yediemin sıfatıyla müştekiye teslim edilmiş; zarf ve not adliye emanetindedir.',
       sourceLabel: 'Soruşturma dosyası · Ek-3',
       icon: 'document',
       side: 'PROSECUTION',
       strength: 'MEDIUM',
       tagLabel: 'SAVCILIK',
-      presentable: false,
       initiallyKnown: true,
     }),
     evidence('ev_banka', {
@@ -109,7 +108,6 @@ export const evidencePart: CasePart = {
       icon: 'document',
       side: 'PROSECUTION',
       tagLabel: 'SAVCILIK',
-      presentable: false,
       initiallyKnown: true,
     }),
 
@@ -227,10 +225,10 @@ export const evidencePart: CasePart = {
     // --- İpuçları: emanet ---
     k('clue_kart_yok', {
       type: 'BELGE',
-      title: 'Emanetteki cüzdanın içeriği',
+      title: 'Yediemin tutanağındaki cüzdan dökümü',
       shortText: 'Kimlik, sağlık kartı, eczane fişi, fotoğraf. Nakit yok, kart yok.',
       description: 'Müşteki 1.200 TL ve iki kart olduğunu söylüyor. Arda’da ne kart ne de kadının parası bulundu.',
-      sourceLabel: 'Adliye emaneti · karşılaştırma',
+      sourceLabel: 'Emanet dosyası · karşılaştırma',
       icon: 'compare',
     }),
     k('clue_zarf', {
@@ -291,6 +289,7 @@ export const evidencePart: CasePart = {
         'CD’ye yalnızca polisin istediği dakikalar basılır; klasör yerinde kalır. Mahkeme yazı yazarsa gönderilir.',
       sourceLabel: 'Kent Ulaşım terminali · hareket memurluğu',
       icon: 'document',
+      presentable: true,
     }),
     k('clue_harcama_saat', {
       type: 'BELGE',
@@ -464,7 +463,7 @@ export const evidencePart: CasePart = {
     }),
     insight('ded_bereli', {
       type: 'BELGE',
-      title: 'Çıkarım: kartları bereli bir kadın kullandı',
+      title: 'Çıkarım: kartları bereli biri kullandı',
       shortText: 'Kartlar cüzdanda yoktu; büfede “yeşil bere” not edilmiş biri üç ayrı çekim yapmış.',
       description: 'Kim olduğu bilinmiyor. Savcılık ona “suç ortağı” diyebilir.',
       sourceLabel: 'Çıkarım tahtası',

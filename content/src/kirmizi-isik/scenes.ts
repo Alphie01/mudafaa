@@ -116,7 +116,7 @@ export const scenes: CasePart = {
         sceneObject('ob_tampon', 'Sol ön tampon', OB_TAMPON, {
           discovers: 'clue_tampon44',
           score: { ARASTIRMA: 60 },
-          text: 'Sürtünme izi tamponun alt kenarında. Metreyi tuttum: yerden 44 santim. İzler yatay, aşağıya doğru. Bir insanın bacağına çarpan bir tampon bu kadar alçakta iz bırakmaz; ama yerde yatan birine sürtünen bir tampon bırakır.',
+          text: 'Sürtünme izi tamponun alt kenarında. Metreyi tuttum: yerden 44 santim. İzler yatay, aşağıya doğru. Plastik ezilmemiş; boyası sıyrılmış, o kadar.',
           short: 'Tampon 44 cm',
         }),
         sceneObject('ob_far', 'Sol far', OB_FAR, {

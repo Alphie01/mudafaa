@@ -386,7 +386,7 @@ export const invHub: CasePart = {
             'Fotoğraf yalan söylememiş. Buradan Gökdere’nin rengi görülmüyor. Görülen tek renk, insanın kendi önündeki renk.',
           ),
           N(
-            'Gökdere’den bir kamyonet geçti, sonra bir otomobil. Saydım: aralarında altı saniye. Kimse kimseye bakmadı.',
+            'Gökdere’den arada bir araç geçiyordu. Islak asfaltta lastik sesi, sonra uzun bir sessizlik. Kimse kimseye bakmadı.',
           ),
         ),
         otherwise(
@@ -527,7 +527,7 @@ export const invHub: CasePart = {
           ),
           L(
             'leyla',
-            'Bir de illiyet. Bir sonuç için ceza vermek, o sonuca senin davranışının yol açtığını göstermeyi gerektirir. Orada olmak yetmez.',
+            'Bir de illiyet. Bir sonuç için ceza vermek, davranış ile sonuç arasındaki bağı göstermeyi gerektirir. O bağı ispat yükü iddiadadır.',
           ),
         ),
       ],

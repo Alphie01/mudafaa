@@ -373,7 +373,7 @@ export const trial: CasePart = {
       ],
       next: 'T_03',
       options: [
-        option('O2_TELKIN', 'İtiraz: soru tanığa bir sonucu onaylatıyor; telkin edici (CMK 201/1).', {
+        option('O2_TELKIN', 'İtiraz: telkin edici soru.', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), inc('pers', 1)],
           good: 'Tanığa bir sonuç onaylatan soru telkin edicidir; başkan sorunun gerekip gerekmediğine karar verir (CMK 201/1).',
@@ -391,12 +391,16 @@ export const trial: CasePart = {
             T('“Herhalde.” Bu dosyada en çok kullanılan kelime.'),
           ),
         }),
-        option('O2_SALDIR', 'Sayın savcı tanığı yönlendiriyor; belediye bir şeyleri örtüyor!', {
-          score: { USUL_BILGISI: -50 },
-          effects: [dec('cred')],
-          bad: 'Kurum ve savcı hakkında dayanaksız suçlama itiraz değildir; dayanak bir usul kuralı olmalı.',
-          responses: says(L('hakim', 'Müdafi! Salonda suçlama yok, itiraz var. Uyarıyorum.')),
-        }),
+        option(
+          'O2_SALDIR',
+          'İtiraz (CMK 201): savcı tanığı yönlendiriyor; belediye bir şeyleri örtüyor, bu tutanağa geçsin!',
+          {
+            score: { USUL_BILGISI: -50 },
+            effects: [dec('cred')],
+            bad: 'Kurum ve savcı hakkında dayanaksız suçlama itiraz değildir; dayanak bir usul kuralı olmalı.',
+            responses: says(L('hakim', 'Müdafi! Salonda suçlama yok, itiraz var. Uyarıyorum.')),
+          },
+        ),
       ],
     }),
     court2.testimony('T_03', {
@@ -1045,81 +1049,73 @@ export const trial: CasePart = {
       background: 'durusma_salonu',
       prompt: L('hakim', 'Raporlar ve tanık beyanları hakkında diyeceklerinizi alayım. Müdafi?'),
       choices: [
-        option(
-          'ARG_EDR',
-          'EDR: 38 km/s, fren 1,2 sn önce, ABS aktif. Hız ve özensizlik iddiası çürük; bilinçli taksirin öngörü unsuru yok.',
-          {
-            enabledWhen: has('ev_edr'),
-            lockedReason: 'EDR raporu dosyada yok.',
-            score: { HUKUKI_BILGI: 100 },
-            effects: [
-              raise('arg_edr'),
-              inc('pers', 1),
-              ifThen(atLeast(2, flag('edr_hiz'), flag('edr_fren'), flag('edr_dv')), [score('HUKUKI_BILGI', 50)]),
-            ],
-            good: 'Bilinçli taksir neticenin öngörülmesini ister (TCK 22/3); sınırın altında hız ve normal tepki süresi bu öngörüyü kurmaz.',
-            responses: says(
-              P(
-                'Sayın Başkan, sanığın aracı 38 km/s ile gidiyordu; şehir içi sınırın çok altında. Engeli görünce 1,2 saniyede frene bastı.',
-              ),
-              P(
-                'Altmış sekiz kilometre bir izden, yanlış bir araçtan hesaplanmış. Bilinçli taksirin “öngördüğü hâlde devam etme” unsuru bu verilerle kurulamaz.',
-              ),
-              L(
-                'savci',
-                'Sayın Başkan, EDR verisi bilirkişice okunmuştur; savcılık olarak verinin doğruluğuna itirazımız yoktur.',
-              ),
-              T('Savcı “itirazımız yoktur” dedi. Bir savcının “haklısınız” demesinin resmî hâli.'),
+        option('ARG_EDR', 'EDR: 38 km/s, fren 1,2 sn önce, ABS aktif. Öngörü unsuru yok.', {
+          enabledWhen: has('ev_edr'),
+          lockedReason: 'EDR raporu dosyada yok.',
+          score: { HUKUKI_BILGI: 100 },
+          effects: [
+            raise('arg_edr'),
+            inc('pers', 1),
+            ifThen(atLeast(2, flag('edr_hiz'), flag('edr_fren'), flag('edr_dv')), [score('HUKUKI_BILGI', 50)]),
+          ],
+          good: 'Bilinçli taksir neticenin öngörülmesini ister (TCK 22/3); sınırın altında hız ve normal tepki süresi bu öngörüyü kurmaz.',
+          responses: says(
+            P(
+              'Sayın Başkan, sanığın aracı 38 km/s ile gidiyordu; şehir içi sınırın çok altında. Engeli görünce 1,2 saniyede frene bastı.',
             ),
-          },
-        ),
-        option(
-          'ARG_ATK',
-          'ATK: ölüme yol açan travma birincil çarpmada; sanığın teması ikincil. İlliyet bağı kurulamıyor.',
-          {
-            enabledWhen: has('ev_atk'),
-            lockedReason: 'ATK raporu dosyada yok.',
-            effects: [
-              ifThen(
-                has('ded_olum'),
-                [
-                  score('HUKUKI_BILGI', 150),
-                  raise('arg_atk'),
-                  inc('pers', 1),
-                  mark(
-                    'GOOD',
-                    'Taksirli suçta netice faile ancak davranışı ile netice arasında illiyet bağı varsa yüklenebilir; ölümcül travma ilk çarpmada.',
-                    'HUKUKI_BILGI',
-                  ),
-                ],
-                [
-                  score('HUKUKI_BILGI', 30),
-                  mark(
-                    'NEUTRAL',
-                    'Rapor okunmuş ama ölümcül yaralanma ile sanığın teması arasındaki bağ tahtada kurulmamış; argüman yarım kaldı.',
-                  ),
-                ],
-              ),
-            ],
-            responses: [
-              when(
-                has('ded_olum'),
-                P(
-                  'Adli Tıp: kafa travması ve 56 santimdeki kırık, ayakta duran yayaya yüksek tamponlu bir aracın birincil çarpmasıyla uyumlu. Sırttaki az kanamalı sıyrıklar ikincil temas.',
+            P(
+              'Altmış sekiz kilometre bir izden, yanlış bir araçtan hesaplanmış. Bilinçli taksirin “öngördüğü hâlde devam etme” unsuru bu verilerle kurulamaz.',
+            ),
+            L(
+              'savci',
+              'Sayın Başkan, EDR verisi bilirkişice okunmuştur; savcılık olarak verinin doğruluğuna itirazımız yoktur.',
+            ),
+            T('Savcı “itirazımız yoktur” dedi. Bir savcının “haklısınız” demesinin resmî hâli.'),
+          ),
+        }),
+        option('ARG_ATK', 'ATK: ölümcül travma birincil çarpmada; sanığın teması ikincil.', {
+          enabledWhen: has('ev_atk'),
+          lockedReason: 'ATK raporu dosyada yok.',
+          effects: [
+            ifThen(
+              has('ded_olum'),
+              [
+                score('HUKUKI_BILGI', 150),
+                raise('arg_atk'),
+                inc('pers', 1),
+                mark(
+                  'GOOD',
+                  'Taksirli suçta netice faile ancak davranışı ile netice arasında illiyet bağı varsa yüklenebilir; ölümcül travma ilk çarpmada.',
+                  'HUKUKI_BILGI',
                 ),
-                P(
-                  'Sanığın aracı oradaydı. Hatice Hanım’a dokundu. Ama onu öldüren darbe o değildi. Bir sonucun faile yüklenebilmesi için o sonuca onun davranışının yol açtığı gösterilmelidir.',
+              ],
+              [
+                score('HUKUKI_BILGI', 30),
+                mark(
+                  'NEUTRAL',
+                  'Rapor okunmuş ama ölümcül yaralanma ile sanığın teması arasındaki bağ tahtada kurulmamış; argüman yarım kaldı.',
                 ),
-                L('savci', 'Not ediyorum Sayın Başkan.'),
+              ],
+            ),
+          ],
+          responses: [
+            when(
+              has('ded_olum'),
+              P(
+                'Adli Tıp: kafa travması ve 56 santimdeki kırık, ayakta duran yayaya yüksek tamponlu bir aracın birincil çarpmasıyla uyumlu. Sırttaki az kanamalı sıyrıklar ikincil temas.',
               ),
-              otherwise(
-                P('Adli Tıp raporu yaralanmaların birden fazla temastan kaynaklandığını gösteriyor.'),
-                L('hakim', 'Hangisinin ölüme yol açtığını söylüyor musunuz, müdafi?'),
-                P('…Rapor bunu değerlendiriyor, Sayın Başkan.'),
+              P(
+                'Sanığın aracı oradaydı. Hatice Hanım’a dokundu. Ama onu öldüren darbe o değildi. Bir sonucun faile yüklenebilmesi için o sonuca onun davranışının yol açtığı gösterilmelidir.',
               ),
-            ],
-          },
-        ),
+              L('savci', 'Not ediyorum Sayın Başkan.'),
+            ),
+            otherwise(
+              P('Adli Tıp raporu yaralanmaların birden fazla temastan kaynaklandığını gösteriyor.'),
+              L('hakim', 'Hangisinin ölüme yol açtığını söylüyor musunuz, müdafi?'),
+              P('…Rapor bunu değerlendiriyor, Sayın Başkan.'),
+            ),
+          ],
+        }),
         option('ARG_HEYET', 'Heyetin “tali kusur” paragrafı hiçbir veriye dayanmıyor.', {
           enabledWhen: has('ev_heyet'),
           lockedReason: 'Heyet raporu dosyada yok.',
@@ -1161,15 +1157,19 @@ export const trial: CasePart = {
             ),
           ],
         }),
-        option('ARG_DUYGU', 'Sanık iyi bir insan; bir haftalık bir kızı var.', {
-          score: { SAVUNMA_STRATEJISI: -30 },
-          effects: [dec('pers', 1)],
-          bad: 'Kişisel koşullar delil tartışmasının değil, olsa olsa ceza takdirinin konusudur (TCK 62).',
-          responses: says(
-            L('vekil', 'Annemin… pardon, müvekkilimin annesinin de bir oğlu vardı Sayın Başkan.'),
-            L('hakim', 'Delile dönelim, müdafi.'),
-          ),
-        }),
+        option(
+          'ARG_DUYGU',
+          'Sanık iyi bir insan, sabıkası yok, bir haftalık bir kızı var; cezanın bireyselleştirilmesinde bunlar tartılmalı (TCK 61).',
+          {
+            score: { SAVUNMA_STRATEJISI: -30 },
+            effects: [dec('pers', 1)],
+            bad: 'Kişisel koşullar delil tartışmasının değil, olsa olsa ceza takdirinin konusudur (TCK 62).',
+            responses: says(
+              L('vekil', 'Annemin… pardon, müvekkilimin annesinin de bir oğlu vardı Sayın Başkan.'),
+              L('hakim', 'Delile dönelim, müdafi.'),
+            ),
+          },
+        ),
         cont('T07_BITIR', 'Diyeceklerimiz bu kadar', 'T_08'),
       ],
     }),
@@ -1284,12 +1284,16 @@ export const trial: CasePart = {
             ),
           ),
         }),
-        option('M_CIKAR', 'Mütalaa tutanaktan çıkarılsın.', {
-          score: { USUL_BILGISI: -50 },
-          effects: [dec('cred')],
-          bad: 'Mütalaa tutanaktan çıkarılamaz; çare cevap hakkıdır (CMK 216/2).',
-          responses: says(L('hakim', 'Böyle bir usul yok müdafi. Cevabınız varsa verin.')),
-        }),
+        option(
+          'M_CIKAR',
+          'Mütalaa dayanaksız; CMK 216/1 uyarınca tutanaktan çıkarılmasını ve yeniden mütalaa verilmesini talep ediyoruz.',
+          {
+            score: { USUL_BILGISI: -50 },
+            effects: [dec('cred')],
+            bad: 'Mütalaa tutanaktan çıkarılamaz; çare cevap hakkıdır (CMK 216/2).',
+            responses: says(L('hakim', 'Böyle bir usul yok müdafi. Cevabınız varsa verin.')),
+          },
+        ),
       ],
     }),
     choiceNode('T_09P', {
@@ -1464,16 +1468,20 @@ export const trial: CasePart = {
             ),
           ),
         }),
-        option('T09_D', 'Bir kadın öldü, ama müvekkilim de bu gecenin kurbanı.', {
-          score: { SAVUNMA_STRATEJISI: -50 },
-          effects: [dec('pers', 1)],
-          bad: 'Duygusal söylem delilin yerini tutmaz; katılanın acısının yanında “o da kurban” demek hâkimi savunmadan uzaklaştırır.',
-          responses: says(
-            P('Sayın Başkan, bir kadın öldü. Ama bu adam da o gece bir şey kaybetti…'),
-            fx(L('serkan', 'Ne kaybetti? Ne kaybetti?', 'kizgin'), 'shake'),
-            L('hakim', 'Katılan, lütfen. Müdafi, devam edin.'),
-          ),
-        }),
+        option(
+          'T09_D',
+          'Bir kadın öldü, evet; ama müvekkilim de bu gecenin kurbanı. Vicdanınıza sesleniyorum: bir babayı hapse göndermeyin.',
+          {
+            score: { SAVUNMA_STRATEJISI: -50 },
+            effects: [dec('pers', 1)],
+            bad: 'Duygusal söylem delilin yerini tutmaz; katılanın acısının yanında “o da kurban” demek hâkimi savunmadan uzaklaştırır.',
+            responses: says(
+              P('Sayın Başkan, bir kadın öldü. Ama bu adam da o gece bir şey kaybetti…'),
+              fx(L('serkan', 'Ne kaybetti? Ne kaybetti?', 'kizgin'), 'shake'),
+              L('hakim', 'Katılan, lütfen. Müdafi, devam edin.'),
+            ),
+          },
+        ),
       ],
     }),
     story('T_09R', {
@@ -1525,46 +1533,42 @@ export const trial: CasePart = {
       prompt: L('hakim', 'Sanık, ayağa kalkın. Son sözünüz?'),
       next: 'T_11',
       choices: [
-        option(
-          'SS_DOGRU',
-          '“Hatice Hanım’ın oğlundan özür dilerim. Ben yeşilde geçtim. Bildiğim bu, bilmediğim de bu.”',
-          {
-            effects: [
-              ifThen(
-                any(flag('volkan_dogru'), flag('volkan_hazir')),
-                [
-                  score('SAVUNMA_STRATEJISI', 40, 'savunma'),
-                  raise('son_soz_iyi'),
-                  mark('GOOD', 'Kendi sözcükleriyle, dürüst ve ölçülü bir son söz.', 'SAVUNMA_STRATEJISI'),
-                ],
-                [score('SAVUNMA_STRATEJISI', 10, 'savunma')],
+        option('SS_DOGRU', '“Hatice Hanım’ın oğlundan özür dilerim. Yeşilde geçtim. Bildiğim bu.”', {
+          effects: [
+            ifThen(
+              any(flag('volkan_dogru'), flag('volkan_hazir')),
+              [
+                score('SAVUNMA_STRATEJISI', 40, 'savunma'),
+                raise('son_soz_iyi'),
+                mark('GOOD', 'Kendi sözcükleriyle, dürüst ve ölçülü bir son söz.', 'SAVUNMA_STRATEJISI'),
+              ],
+              [score('SAVUNMA_STRATEJISI', 10, 'savunma')],
+            ),
+          ],
+          responses: [
+            when(
+              any(flag('volkan_dogru'), flag('volkan_hazir')),
+              L(
+                'volkan',
+                'Serkan Bey. Annenizin adını üç aydır her gece söylüyorum. Hatice. Özür dilerim. Orada olduğum için, yetişemediğim için.',
               ),
-            ],
-            responses: [
-              when(
-                any(flag('volkan_dogru'), flag('volkan_hazir')),
-                L(
-                  'volkan',
-                  'Serkan Bey. Annenizin adını üç aydır her gece söylüyorum. Hatice. Özür dilerim. Orada olduğum için, yetişemediğim için.',
-                ),
-                L(
-                  'volkan',
-                  'Ben yeşilde geçtim. Bildiğim bu. Bir kızım var; bir hafta oldu. Ona bir gün bu geceyi anlatacağım. Doğrusunu anlatacağım. Ne karar verirseniz.',
-                ),
-                N(
-                  'Salonun arka sırasında hastane önlüklü kadınlardan biri gözlerini sildi. Necati, dinleyici sırasında, kasketini dizine koydu.',
-                ),
-                N(
-                  'Serkan başını kaldırdı. Uzun bir süre Volkan’a baktı. Sonra başını eğdi. Bir kabul mü, bir yorgunluk mu, bilinmez.',
-                ),
+              L(
+                'volkan',
+                'Ben yeşilde geçtim. Bildiğim bu. Bir kızım var; bir hafta oldu. Ona bir gün bu geceyi anlatacağım. Doğrusunu anlatacağım. Ne karar verirseniz.',
               ),
-              otherwise(
-                L('volkan', 'Özür dilerim. Ben… yeşilde geçtim. Sanırım. Bildiğim bu.'),
-                T('“Sanırım.” Doğru cümle, yanlış yerde bir kelime.'),
+              N(
+                'Salonun arka sırasında hastane önlüklü kadınlardan biri gözlerini sildi. Necati, dinleyici sırasında, kasketini dizine koydu.',
               ),
-            ],
-          },
-        ),
+              N(
+                'Serkan başını kaldırdı. Uzun bir süre Volkan’a baktı. Sonra başını eğdi. Bir kabul mü, bir yorgunluk mu, bilinmez.',
+              ),
+            ),
+            otherwise(
+              L('volkan', 'Özür dilerim. Ben… yeşilde geçtim. Sanırım. Bildiğim bu.'),
+              T('“Sanırım.” Doğru cümle, yanlış yerde bir kelime.'),
+            ),
+          ],
+        }),
         option('SS_KABUL', '“Ben öldürdüm. Ne ceza verirseniz razıyım.”', {
           score: { SAVUNMA_STRATEJISI: -40 },
           effects: [dec('pers', 1)],

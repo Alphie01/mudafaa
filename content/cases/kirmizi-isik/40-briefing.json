@@ -74,7 +74,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Farların ucunda koyu bir şey. Bir poşet mi, bir gölge mi. Yerde mi, değil mi. Göz bunu söyleyemeden ayak frene gitti."
+              "text": "Farların ucunda koyu bir şey. Bir poşet mi, bir gölge mi. Göz bunu söyleyemeden ayak frene gitti."
             },
             {
               "speaker": "narrator",
@@ -543,7 +543,7 @@
         {
           "id": "BR01_C",
           "kind": "OPTION",
-          "label": "Olası kastla öldürme (TCK 81, 21/2): ağır cezalık bir suç.",
+          "label": "Olası kastla öldürme (TCK 81, 21/2): sürücü ölümü göze aldığı için ağır ceza mahkemesinde yargılanır.",
           "responses": [
             {
               "lines": [
@@ -726,7 +726,7 @@
         {
           "id": "BR01C_A",
           "kind": "OPTION",
-          "label": "Ceza failin kusuruna göre belirlenir; birden çok kişinin taksiri varsa herkes kendi kusurundan sorumludur.",
+          "label": "Failin kusuruna göre; birden çok failde herkes kendi kusurundan sorumludur.",
           "responses": [
             {
               "lines": [
@@ -736,11 +736,11 @@
                 },
                 {
                   "speaker": "leyla",
-                  "text": "Bir de bunu aklının bir köşesine koy: kusur ile netice arasında bir bağ olmalı. Hukukçular buna illiyet der. Ezberle; bir gün işine yarar."
+                  "text": "Bir de şu: kusur tek başına yetmez, kusurlu davranış ile netice arasında bir bağ gerekir. Hukukçular buna illiyet der. Her taksir dosyasında savcının ispat yükü budur."
                 },
                 {
                   "speaker": "player",
-                  "text": "Kusur ve illiyet. İki kelime. Leyla bunları masaya bıraktı, ben aldım.",
+                  "text": "Kusur ve illiyet. İki kelime. Leyla bunları ders kitabından okur gibi söyledi; ben not aldım.",
                   "style": "thought"
                 }
               ]
@@ -785,7 +785,7 @@
         {
           "id": "BR01C_C",
           "kind": "OPTION",
-          "label": "Bilirkişinin belirlediği oran mahkemeyi bağlar.",
+          "label": "Bilirkişinin belirlediği kusur oranı mahkemeyi bağlar; hâkim yalnızca cezanın miktarını takdir eder.",
           "responses": [
             {
               "lines": [
@@ -849,7 +849,7 @@
           "title": "SAVUNMA STRATEJİSİ SEÇ",
           "group": "g_strateji",
           "hints": {
-            "STR_MASUMIYET": "İlliyet: ölümün gerçek nedeni başka; beraat (223/2-b) hedeflenir. Uyan esas savunma ×1,5 puan.",
+            "STR_MASUMIYET": "Masumiyet: müvekkilin suçu işlemediğini ispat; beraat (223/2-b). Yüksek risk: bütün dayanakları ispatlaman gerekir. Uyan esas savunma ×1,5 puan.",
             "STR_KUSUR": "Kusur itirazı: ışık, hız ve rapor çürütülür; şüpheden beraat (223/2-e). Uyan esas savunma ×1,2 puan.",
             "STR_INDIRIM": "Terditli: önce beraat, olmazsa basit taksir ve alt sınır (TCK 50/4). Uyan esas savunma ×0,8 puan."
           }
@@ -859,14 +859,14 @@
         {
           "id": "STR_MASUMIYET",
           "kind": "OPTION",
-          "label": "İlliyet",
+          "label": "Masumiyet",
           "group": "g_strateji",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "leyla",
-                  "text": "Cesur. “Başkası yaptı” demek kolay; göstermek zor. Göstermezsen hâkim bunu kaçamak sayar."
+                  "text": "Cesur. “Suçsuz” demek kolay; ispatlamak zor. İspatlayamazsan hâkim bunu kaçamak sayar."
                 }
               ]
             }

@@ -315,7 +315,7 @@
           "label": "Kestel sanayi sitesi",
           "cost": [{ "var": "ara_ap", "amount": 1 }],
           "next": "ARA_SANAYI",
-          "description": "Koyu yeşil bir hafif ticari, sağ ön köşe",
+          "description": "Yedek parçacı · tampon ölçüsü",
           "visibleWhen": { "hasEvidence": "ded_arac" },
           "maxUses": 1
         },
@@ -411,10 +411,24 @@
               ]
             },
             {
+              "when": { "cmp": [{ "var": "aksam1" }, "==", "BEKLE"] },
               "lines": [
                 {
                   "speaker": "gul",
                   "text": "Adını henüz koymadık. Yüzüne bakıp karar vereceğiz demiştiniz. Bakıyoruz."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir dosyanın içinden bir yüz. Şimdilik bu kadar. Yeter.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "gul",
+                  "text": "Adını henüz koymadık. Volkan bir şey diyor, ben bir şey. Bebek bir şey demiyor; uyuyor."
                 },
                 {
                   "speaker": "player",
@@ -690,7 +704,7 @@
         {
           "id": "AY_SAVCI",
           "kind": "OPTION",
-          "label": "“O parçayı bana değil, tutanakla savcılığa teslim edin. Nerede, nasıl bulduğunuzu da yazın.”",
+          "label": "“Parçayı tutanakla savcılığa teslim edin; nerede bulduğunuzu da yazın.”",
           "responses": [
             {
               "lines": [
@@ -719,7 +733,7 @@
         {
           "id": "AY_BANA",
           "kind": "OPTION",
-          "label": "“Bana verin, ben mahkemeye sunarım. Daha hızlı olur.”",
+          "label": "“Bana verin, dilekçeme ekleyip mahkemeye ben sunarım. Savcılığın sırasını beklemekten hızlı olur.”",
           "responses": [
             {
               "lines": [
@@ -925,7 +939,7 @@
         {
           "id": "HA_BILGI",
           "kind": "OPTION",
-          "label": "“Mahkeme sizi çağırdı. Ne gördüyseniz onu anlatın. Ne söyleyeceğinizi ne ben söylerim ne müdürünüz.”",
+          "label": "“Ne gördüyseniz onu anlatın. Ne söyleyeceğinizi kimse size söyleyemez; ben de.”",
           "responses": [
             {
               "lines": [
@@ -959,7 +973,7 @@
         {
           "id": "HA_PROVA",
           "kind": "OPTION",
-          "label": "“Kürsüde size şunları soracağım; cevaplarınızı birlikte hazırlayalım.”",
+          "label": "“Kürsüde size şunları soracağım; cevaplarınızı birlikte hazırlayalım ki orada şaşırmayın, heyecanlanmayın.”",
           "responses": [
             {
               "lines": [
@@ -1032,7 +1046,7 @@
         {
           "id": "VO_DOGRU",
           "kind": "OPTION",
-          "label": "“Bildiğinizi söyleyin, bilmediğinize bilmiyorum deyin. Hatice Hanım’ın oğluna söyleyecekseniz, ona gerçekten söyleyin.”",
+          "label": "“Bildiğinizi söyleyin; bilmediğinize ‘bilmiyorum’ deyin. Kendi sözcüklerinizle.”",
           "responses": [
             {
               "lines": [
@@ -1073,7 +1087,7 @@
         {
           "id": "VO_EZBER",
           "kind": "OPTION",
-          "label": "“Size bir son söz metni yazayım; onu ezberleyin.”",
+          "label": "“Size son söz için bir metin yazayım; hâkimin duymak istediklerini sırayla, ezbere söyleyin.”",
           "responses": [
             {
               "lines": [
@@ -1130,7 +1144,7 @@
         {
           "id": "NE_DINLE",
           "kind": "OPTION",
-          "label": "Dinle; mahkemede ne gördüyse onu söylemeye devam etmesini, gerekirse mahkemeye kendisinin başvurabileceğini söyle.",
+          "label": "Dinle. Bir şey eklemek isterse bunu bana değil, mahkemeye kendisinin yazabileceğini hatırlat.",
           "responses": [
             {
               "lines": [
@@ -1232,7 +1246,7 @@
         {
           "id": "NA_RED",
           "kind": "OPTION",
-          "label": "“Teşekkür ederim. Sorularımı duruşmada, mahkeme huzurunda soracağım.”",
+          "label": "“Teşekkürler. Sorularımı duruşmada soracağım.”",
           "responses": [
             {
               "lines": [
@@ -1303,34 +1317,37 @@
       "eyebrow": "DAVA #03 · ARA",
       "title": "Kestel sanayi sitesi",
       "background": "depo",
-      "room": { "label": "KAPORTA-BOYA · 3. BLOK", "character": "rustem" },
+      "room": { "label": "KESTEL SANAYİ · 3. BLOK", "character": "rustem" },
       "onFirstEnter": [{ "type": "MEET", "character": "rustem" }],
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "KESTEL SANAYİ SİTESİ · 3. BLOK — 15.00", "style": "card", "bg": "depo" },
+            { "speaker": "narrator", "text": "KESTEL SANAYİ SİTESİ — 15.00", "style": "card", "bg": "depo" },
             {
               "speaker": "narrator",
-              "text": "Taşlama sesi, tiner kokusu, bir radyoda arabesk. Sıra sıra kaporta dükkânları. “Rüstem Kaporta-Boya” yazan tabelanın altında yağlı tulumlu bir adam."
+              "text": "Bir yedek parçacının kataloğuna bakmaya gelmiştim: 2005–2010 model hafif ticarilerin ön tampon ölçüsü. Kataloğa göre yerden altmış santim kadar."
             },
             {
               "speaker": "player",
-              "text": "Kriminal raporu bir rengi söyledi; kamera bir kırık stopu. Böyle bir hasar faturasız onarılacaksa, bu sitede onarılır. On iki kaportacıya sordum; on biri “bilmem” dedi. Biri başını çevirdi.",
+              "text": "Bilirkişiye soracağım bir soru için bir rakam. Kimseyi aramaya gelmedim. Rakamı defterime yazdım, dükkândan çıktım.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dönüş yolu kaporta dükkânlarının önünden geçiyordu. Taşlama sesi, tiner kokusu, bir radyoda arabesk. Kaldırımdan yürüdüm."
+            },
+            {
+              "speaker": "narrator",
+              "text": "“Rüstem Kaporta-Boya” tabelasının altında, açık kepengin önünde, kompresörün dibinde koyu yeşil boya tozu. Kapının yanında yeni bir sağ stop lambasının boş kutusu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arka garajın kapısı aralık; içeride örtülü bir şeyin hatları. Yağlı tulumlu bir adam başını kaldırdı."
             },
             { "speaker": "rustem", "text": "Ne lazım abla? Boya mı, kaporta mı? Sigorta işi yapmam, peşin çalışırım." },
             {
               "speaker": "player",
-              "text": "Kasımın ortasında koyu yeşil bir hafif ticari gelmiş olabilir mi? Sağ ön köşesi, sağ stopu."
-            },
-            { "speaker": "rustem", "text": "Ne bileyim abla, günde on araba girer çıkar. Hatırlamam." },
-            {
-              "speaker": "narrator",
-              "text": "Yerde, kompresörün dibinde koyu yeşil boya tozu. Bir köşede yeni bir sağ stop lambasının kutusu. Arka garajın kapısı aralık; içeride örtülü bir şeyin hatları."
-            },
-            {
-              "speaker": "player",
-              "text": "Gördüğümü gördüm. Şimdi ne yapacağım, beni bu dosyadan daha uzun süre takip edecek.",
+              "text": "Bir renk, bir kutu, bir örtü. Bunların hiçbiri benim delilim değil. Şimdi ne yapacağım, beni bu dosyadan daha uzun süre takip edecek.",
               "style": "thought"
             }
           ]
@@ -1340,18 +1357,18 @@
         {
           "id": "SA_NOT",
           "kind": "OPTION",
-          "label": "Gördüklerini not al, fotoğrafını dükkânın önünden, kamuya açık yerden çek; tek kelime etmeden çık ve savcılığa bildir.",
+          "label": "“Bir şey lazım değil, sağ ol usta.” Yürü; köşede not al.",
           "responses": [
             {
               "lines": [
-                { "speaker": "player", "text": "Teşekkür ederim usta. Kolay gelsin." },
+                { "speaker": "player", "text": "Bir şey lazım değil, sağ ol usta. Kolay gelsin." },
                 {
                   "speaker": "narrator",
-                  "text": "Tabelanın, kompresörün ve yerdeki tozun fotoğrafını kaldırımdan çektim. Rüstem arkamdan baktı, taşlamayı açmadı."
+                  "text": "Köşeyi dönünce durdum. Saati, blok numarasını, tabelayı, gördüklerimi defterime yazdım. Fotoğraf çekmedim; kimsenin kapısına bakmadım."
                 },
                 {
                   "speaker": "player",
-                  "text": "Kovalamak, yakalamak, itiraf ettirmek: dizilerdeki avukat. Ben bir dilekçe yazacağım. Dilekçeler daha az heyecanlı ama daha çok kişiyi yakalar.",
+                  "text": "Kovalamak, yakalamak, itiraf ettirmek: dizilerdeki avukat. Ben bir dilekçeye bir satır ekleyeceğim. Gerisini yetkisi olan yapar.",
                   "style": "thought"
                 }
               ]
@@ -1364,14 +1381,45 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Avukat şüpheliyi kovalamaz, işyerine girmez; kamuya açık yerden gördüğünü not alır ve somut bilgiyi savcılığa bildirir (CMK 158).",
+            "feedback": "Avukat şüpheliyi aramaz, sorgulamaz, işyerine girmez. Kamuya açık yerden gördüğünü not alır, somut bilgiyi savcılığa bildirir (CMK 158); araştırmayı savcılık yapar (CMK 160).",
+            "category": "ARASTIRMA"
+          }
+        },
+        {
+          "id": "SA_SOR",
+          "kind": "OPTION",
+          "label": "“Usta, kasımda koyu yeşil, sağ önü vuruk bir panelvan geldi mi buraya?” diye sor.",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "rustem", "text": "Ne bileyim abla, günde on araba girer çıkar. Polis misin sen?" },
+                {
+                  "speaker": "narrator",
+                  "text": "Taşlamayı açtı. Konuşma bitti. Birkaç dakika sonra arka garajın kapısı içeriden kapandı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir soru sordum ve bir kapı kapandı. Belki savcının açacağı bir kapıydı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "ARA_HUB",
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -40 },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Kaçan sürücüyle bağlantısı olabilecek birini sorgulamak avukatın işi değil; soruşturmayı savcılık yürütür (CMK 160). Soru yalnızca uyarı olur: ilgili kişiler delili ortadan kaldırabilir.",
             "category": "ARASTIRMA"
           }
         },
         {
           "id": "SA_GARAJ",
           "kind": "OPTION",
-          "label": "Rüstem içeri girdiğinde aralık garaj kapısından süzül; örtüyü kaldırıp fotoğraf çek.",
+          "label": "Rüstem içeri girince aralık kapıdan garaja gir; örtüyü kaldırıp çek.",
           "responses": [
             {
               "lines": [
@@ -1409,30 +1457,6 @@
             "feedback": "Kapalı bir işyerine rızaya aykırı girmek suçtur (TCK 116/2) ve bu yolla elde edilen fotoğraf hükme esas alınamaz (Anayasa 38/6, CMK 206/2-a, 217/2). Avukatlık meslek kurallarına da açıkça aykırı (Av.K. md. 34).",
             "category": "ARASTIRMA"
           }
-        },
-        {
-          "id": "SA_TEHDIT",
-          "kind": "OPTION",
-          "label": "“Usta, bunu savcıya söylersem sen de yanarsın. Şimdi anlatırsan iyi olur.”",
-          "responses": [
-            {
-              "lines": [
-                {
-                  "speaker": "rustem",
-                  "expression": "kizgin",
-                  "text": "Beni mi korkutuyorsun abla? Sanayide büyüdüm ben."
-                },
-                { "speaker": "narrator", "text": "Taşlamayı açtı. Konuşma bitti. Garajın kapısı kapandı." }
-              ]
-            }
-          ],
-          "next": "ARA_HUB",
-          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -40 }],
-          "quality": {
-            "q": "BAD",
-            "feedback": "Tanık olabilecek birini korkutmak bilgi getirmez, uyarı getirir; ilgili kişiler delili ortadan kaldırabilir.",
-            "category": "ARASTIRMA"
-          }
         }
       ]
     },
@@ -1451,16 +1475,35 @@
         {
           "id": "SU_DAYANAKLI",
           "kind": "OPTION",
-          "label": "Kaçan araç sürücüsü hakkında (TCK 85, 98): boya raporu, saati düzeltilmiş kamera kaydı ve sanayideki onarım bilgisiyle.",
+          "label": "Kaçan aracın sürücüsü hakkında; renk, model ve saatle somut bir tarif.",
           "enabledWhen": { "hasEvidence": "ded_arac" },
           "lockedReason": "Kaçan aracı tarif edecek somut bir çıkarım gerekli.",
           "responses": [
             {
+              "when": { "flag": "sanayi_not" },
               "lines": [
                 {
                   "speaker": "narrator",
-                  "text": "Dilekçe dört sayfa oldu. Renk, model aralığı, kırık stop, saat, sanayinin adresi. İsim yok; isim savcılığın işi."
+                  "text": "Dilekçe dört sayfa oldu. Renk, model aralığı, kırık stop, düzeltilmiş saat. Son paragrafa bir satır: Kestel sanayi sitesinde kaldırımdan gördüklerim, blok numarasıyla."
                 },
+                {
+                  "speaker": "narrator",
+                  "text": "“Bölgedeki kaporta ve boya işyerlerinin araştırılmasını talep ederim.” İsim yok; isim savcılığın işi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kimseye bir şey sormadım. Bir zarf gönderdim. Zarflar bazen kovalamaktan hızlıdır.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Dilekçe üç sayfa oldu. Renk, model aralığı, kırık stop, düzeltilmiş saat. “Kazanın ertesi günlerinde bu tarife uyan bir aracın onarıldığı kaporta işyerlerinin araştırılmasını talep ederim.”"
+                },
+                { "speaker": "narrator", "text": "İsim yok; isim savcılığın işi." },
                 {
                   "speaker": "player",
                   "text": "Kimseyi kovalamadım. Bir zarf gönderdim. Zarflar bazen kovalamaktan hızlıdır.",
@@ -1481,7 +1524,7 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Somut olgulara dayanan bir ihbar savcılığın soruşturma yükümlülüğünü doğurur (CMK 158, 160). Kaçan sürücü için taksirle öldürmenin yanında yardım etmeme (TCK 98) de gündeme gelir.",
+            "feedback": "Somut olgulara dayanan bir ihbar savcılığın soruşturma yükümlülüğünü doğurur (CMK 158, 160); kaportacıların araştırılmasını savcılık ister. Kaçan sürücü için taksirle öldürmenin yanında yardım ve bildirim yükümlülüğünün yerine getirilmemesi (TCK 98) de gündeme gelir.",
             "category": "USUL_BILGISI"
           }
         },

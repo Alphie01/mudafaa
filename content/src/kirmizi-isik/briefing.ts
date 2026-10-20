@@ -52,9 +52,7 @@ export const briefing: CasePart = {
         N(
           'Islak asfaltta sodyum lambalarının turuncusu, bir de yeşilin titreyen yansıması. Yaya geçidinin beyaz çizgileri. Yağmur onları siliyordu.',
         ),
-        N(
-          'Farların ucunda koyu bir şey. Bir poşet mi, bir gölge mi. Yerde mi, değil mi. Göz bunu söyleyemeden ayak frene gitti.',
-        ),
+        N('Farların ucunda koyu bir şey. Bir poşet mi, bir gölge mi. Göz bunu söyleyemeden ayak frene gitti.'),
         fx(
           N('Pedal titredi. Lastikler çığlık atmadı; tıkırdadı. Sonra sol önde bir tümsek. Yumuşak, kısa, korkunç.'),
           'shake',
@@ -290,18 +288,22 @@ export const briefing: CasePart = {
           ),
           next: 'BR_01B',
         }),
-        option('BR01_C', 'Olası kastla öldürme (TCK 81, 21/2): ağır cezalık bir suç.', {
-          bad: 'Olası kast, neticeyi öngörüp “olursa olsun” diye kabullenmektir (TCK 21/2). İddianame bunu değil, bilinçli taksiri (TCK 22/3) iddia ediyor: netice öngörülmüş ama istenmemiş.',
-          category: 'HUKUKI_BILGI',
-          responses: says(
-            L(
-              'leyla',
-              'Savcı da öyle demiyor, sen hiç deme. Olası kast “olursa olsun”dur. Bilinçli taksir “olmaz, bir şey olmaz”dır.',
+        option(
+          'BR01_C',
+          'Olası kastla öldürme (TCK 81, 21/2): sürücü ölümü göze aldığı için ağır ceza mahkemesinde yargılanır.',
+          {
+            bad: 'Olası kast, neticeyi öngörüp “olursa olsun” diye kabullenmektir (TCK 21/2). İddianame bunu değil, bilinçli taksiri (TCK 22/3) iddia ediyor: netice öngörülmüş ama istenmemiş.',
+            category: 'HUKUKI_BILGI',
+            responses: says(
+              L(
+                'leyla',
+                'Savcı da öyle demiyor, sen hiç deme. Olası kast “olursa olsun”dur. Bilinçli taksir “olmaz, bir şey olmaz”dır.',
+              ),
+              L('leyla', 'İddianame: TCK 85/1 ve 22/3. İki–altı yıl, üçte birden yarıya kadar artış.'),
             ),
-            L('leyla', 'İddianame: TCK 85/1 ve 22/3. İki–altı yıl, üçte birden yarıya kadar artış.'),
-          ),
-          next: 'BR_01B',
-        }),
+            next: 'BR_01B',
+          },
+        ),
         option('BR01_D', 'Taksirle yaralama (TCK 89): ölüm ayrıca değerlendirilir.', {
           bad: 'Netice ölümdür; suç tipi taksirle öldürmedir (TCK 85). Taksirle yaralama (TCK 89) ölüm gerçekleşmediğinde uygulanır.',
           category: 'HUKUKI_BILGI',
@@ -399,27 +401,23 @@ export const briefing: CasePart = {
         ),
       ),
       choices: [
-        option(
-          'BR01C_A',
-          'Ceza failin kusuruna göre belirlenir; birden çok kişinin taksiri varsa herkes kendi kusurundan sorumludur.',
-          {
-            score: { HUKUKI_BILGI: 100 },
-            effects: [inc('legal_hits')],
-            good: 'TCK 22/4: taksirle işlenen suçta ceza failin kusuruna göre belirlenir. TCK 22/5: birden fazla kişinin taksiriyle işlenen suçta herkes kendi kusurundan sorumludur.',
-            responses: says(
-              L(
-                'leyla',
-                'Doğru. Yani rapordaki yüzde değişirse ceza değişir. Yüzde sıfıra inerse… ne olur, onu sen söyleyeceksin.',
-              ),
-              L(
-                'leyla',
-                'Bir de bunu aklının bir köşesine koy: kusur ile netice arasında bir bağ olmalı. Hukukçular buna illiyet der. Ezberle; bir gün işine yarar.',
-              ),
-              T('Kusur ve illiyet. İki kelime. Leyla bunları masaya bıraktı, ben aldım.'),
+        option('BR01C_A', 'Failin kusuruna göre; birden çok failde herkes kendi kusurundan sorumludur.', {
+          score: { HUKUKI_BILGI: 100 },
+          effects: [inc('legal_hits')],
+          good: 'TCK 22/4: taksirle işlenen suçta ceza failin kusuruna göre belirlenir. TCK 22/5: birden fazla kişinin taksiriyle işlenen suçta herkes kendi kusurundan sorumludur.',
+          responses: says(
+            L(
+              'leyla',
+              'Doğru. Yani rapordaki yüzde değişirse ceza değişir. Yüzde sıfıra inerse… ne olur, onu sen söyleyeceksin.',
             ),
-            next: 'BR_02',
-          },
-        ),
+            L(
+              'leyla',
+              'Bir de şu: kusur tek başına yetmez, kusurlu davranış ile netice arasında bir bağ gerekir. Hukukçular buna illiyet der. Her taksir dosyasında savcının ispat yükü budur.',
+            ),
+            T('Kusur ve illiyet. İki kelime. Leyla bunları ders kitabından okur gibi söyledi; ben not aldım.'),
+          ),
+          next: 'BR_02',
+        }),
         option('BR01C_B', 'Neticenin ağırlığına göre; ölüm varsa kusur oranı önemli değildir.', {
           bad: 'Taksirli suçta ceza neticenin ağırlığına değil, failin kusuruna göre belirlenir (TCK 22/4).',
           category: 'HUKUKI_BILGI',
@@ -435,18 +433,22 @@ export const briefing: CasePart = {
           ),
           next: 'BR_02',
         }),
-        option('BR01C_C', 'Bilirkişinin belirlediği oran mahkemeyi bağlar.', {
-          bad: 'Bilirkişi raporu mahkemeyi bağlamaz; deliller hâkimin vicdani kanaatiyle takdir edilir (CMK 217/1). Ceza failin kusuruna göre belirlenir (TCK 22/4).',
-          category: 'HUKUKI_BILGI',
-          responses: says(
-            L(
-              'leyla',
-              'Bağlasaydı hâkim yerine bilirkişi otururdu. Rapor bir görüştür; hâkim onu tartar. Tartısı da senin itirazındır.',
+        option(
+          'BR01C_C',
+          'Bilirkişinin belirlediği kusur oranı mahkemeyi bağlar; hâkim yalnızca cezanın miktarını takdir eder.',
+          {
+            bad: 'Bilirkişi raporu mahkemeyi bağlamaz; deliller hâkimin vicdani kanaatiyle takdir edilir (CMK 217/1). Ceza failin kusuruna göre belirlenir (TCK 22/4).',
+            category: 'HUKUKI_BILGI',
+            responses: says(
+              L(
+                'leyla',
+                'Bağlasaydı hâkim yerine bilirkişi otururdu. Rapor bir görüştür; hâkim onu tartar. Tartısı da senin itirazındır.',
+              ),
+              L('leyla', 'Ceza kusura göre belirlenir. Kusuru da en son hâkim belirler.'),
             ),
-            L('leyla', 'Ceza kusura göre belirlenir. Kusuru da en son hâkim belirler.'),
-          ),
-          next: 'BR_02',
-        }),
+            next: 'BR_02',
+          },
+        ),
       ],
     }),
     story('BR_02', {
@@ -490,7 +492,7 @@ export const briefing: CasePart = {
           group: 'g_strateji',
           hints: {
             STR_MASUMIYET:
-              'İlliyet: ölümün gerçek nedeni başka; beraat (223/2-b) hedeflenir. Uyan esas savunma ×1,5 puan.',
+              'Masumiyet: müvekkilin suçu işlemediğini ispat; beraat (223/2-b). Yüksek risk: bütün dayanakları ispatlaman gerekir. Uyan esas savunma ×1,5 puan.',
             STR_KUSUR:
               'Kusur itirazı: ışık, hız ve rapor çürütülür; şüpheden beraat (223/2-e). Uyan esas savunma ×1,2 puan.',
             STR_INDIRIM:
@@ -499,11 +501,11 @@ export const briefing: CasePart = {
         },
       ],
       choices: [
-        option('STR_MASUMIYET', 'İlliyet', {
+        option('STR_MASUMIYET', 'Masumiyet', {
           group: 'g_strateji',
           effects: [set('strategy', 'MASUMIYET'), set('strategy_pct', 150), ...p1.start()],
           responses: says(
-            L('leyla', 'Cesur. “Başkası yaptı” demek kolay; göstermek zor. Göstermezsen hâkim bunu kaçamak sayar.'),
+            L('leyla', 'Cesur. “Suçsuz” demek kolay; ispatlamak zor. İspatlayamazsan hâkim bunu kaçamak sayar.'),
           ),
           next: 'INV_SABAH',
         }),

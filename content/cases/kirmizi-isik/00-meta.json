@@ -95,7 +95,7 @@
       "scaleMax": 12000,
       "thresholdBar": [
         { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
-        { "label": "İndirim", "from": 3000, "tone": "amber" },
+        { "label": "İndirim", "from": 4000, "tone": "amber" },
         { "label": "Beraat", "from": 9000, "tone": "green" }
       ],
       "displayClampMin": 0
@@ -167,6 +167,84 @@
           },
           ">=",
           5
+        ]
+      }
+    },
+    {
+      "id": "itiraz_dayanak",
+      "label": "Rapora somut itiraz: en az üç eksik, biri sahadan",
+      "when": {
+        "all": [
+          {
+            "cmp": [
+              {
+                "add": [
+                  { "if": { "when": { "flag": "rapor_plan" }, "then": 1, "else": 0 } },
+                  { "if": { "when": { "flag": "rapor_iz" }, "then": 1, "else": 0 } },
+                  { "if": { "when": { "flag": "rapor_kopya" }, "then": 1, "else": 0 } },
+                  { "if": { "when": { "flag": "rapor_cam" }, "then": 1, "else": 0 } },
+                  { "if": { "when": { "flag": "rapor_yorum" }, "then": 1, "else": 0 } },
+                  { "if": { "when": { "hasEvidence": "ded_fren" }, "then": 1, "else": 0 } },
+                  { "if": { "when": { "hasEvidence": "ded_cam" }, "then": 1, "else": 0 } },
+                  { "if": { "when": { "hasEvidence": "ded_yukseklik" }, "then": 1, "else": 0 } },
+                  { "if": { "when": { "hasEvidence": "ded_ariza" }, "then": 1, "else": 0 } }
+                ]
+              },
+              ">=",
+              3
+            ]
+          },
+          {
+            "any": [
+              { "hasEvidence": "ded_fren" },
+              { "hasEvidence": "ded_cam" },
+              { "hasEvidence": "ded_yukseklik" },
+              { "hasEvidence": "ded_ariza" }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "itiraz_guclu",
+      "label": "Rapora güçlü itiraz: en az beş eksik",
+      "when": {
+        "cmp": [
+          {
+            "add": [
+              { "if": { "when": { "flag": "rapor_plan" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "flag": "rapor_iz" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "flag": "rapor_kopya" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "flag": "rapor_cam" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "flag": "rapor_yorum" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_fren" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_cam" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_yukseklik" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_ariza" }, "then": 1, "else": 0 } }
+            ]
+          },
+          ">=",
+          5
+        ]
+      }
+    },
+    {
+      "id": "inv_derin",
+      "label": "Soruşturmada en az iki saha çıkarımı",
+      "when": {
+        "cmp": [
+          {
+            "add": [
+              { "if": { "when": { "hasEvidence": "ded_fren" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_cam" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_yukseklik" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_goremez" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_ariza" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "hasEvidence": "ded_saat" }, "then": 1, "else": 0 } }
+            ]
+          },
+          ">=",
+          2
         ]
       }
     },

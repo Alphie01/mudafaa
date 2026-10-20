@@ -82,7 +82,7 @@
         {
           "id": "K_DOGRU",
           "kind": "OPTION",
-          "label": "“İçeride ne gördüyseniz onu anlatın. Bilmediğinize ‘bilmiyorum’ deyin. Kabul kararı sizin; ama bilmeden vermeyin.”",
+          "label": "“Ne gördüyseniz onu anlatın; bilmediğinize ‘bilmiyorum’ deyin. Kabul kararı sizin.”",
           "responses": [
             {
               "lines": [
@@ -112,7 +112,7 @@
         {
           "id": "K_SUS",
           "kind": "OPTION",
-          "label": "“Bugün susma hakkınızı kullanın. Konuşmayı ben yaparım.”",
+          "label": "“Bugün susma hakkınızı kullanın; bu sizin anayasal hakkınız (CMK 147/1-e). Konuşmayı ben yaparım.”",
           "responses": [
             {
               "lines": [
@@ -615,7 +615,7 @@
         {
           "id": "O_TELKIN",
           "kind": "OPTION",
-          "label": "İtiraz: soru cevabını içinde taşıyor, telkin edici (CMK 201/1).",
+          "label": "İtiraz: soru cevabını içinde taşıyor (CMK 201/1).",
           "responses": [
             {
               "lines": [
@@ -643,7 +643,7 @@
         {
           "id": "O_SUS",
           "kind": "OPTION",
-          "label": "Sanık bu soruya cevap vermek istemiyor; susma hakkını kullanıyor.",
+          "label": "Sanık bu soruya cevap vermeyecek; susma hakkını kullanıyor (CMK 147/1-e).",
           "responses": [
             {
               "lines": [
@@ -743,7 +743,7 @@
         {
           "id": "S4_SAYGI",
           "kind": "OPTION",
-          "label": "Söz alma; yalnızca kısa bir başsağlığı ve “Hatice Hanım” adıyla anılmasına dikkat et.",
+          "label": "Söz alma. Kısa bir başsağlığı; adını “Hatice Hanım” diye an.",
           "responses": [
             {
               "lines": [
@@ -1693,49 +1693,15 @@
         {
           "id": "R_ITIRAZ",
           "kind": "OPTION",
-          "label": "Rapora itiraz (CMK 67/5): ışık ölçülmemiş, iz araca bağlanmamış, camlar yok sayılmış. Yeni heyet, ATK ve EDR incelemesi talep ediyoruz.",
+          "label": "Rapora itiraz ediyoruz; yeni bir inceleme istiyoruz.",
+          "next": "H1_06T",
           "responses": [
             {
-              "when": {
-                "cmp": [
-                  {
-                    "add": [
-                      { "if": { "when": { "flag": "rapor_plan" }, "then": 1, "else": 0 } },
-                      { "if": { "when": { "flag": "rapor_iz" }, "then": 1, "else": 0 } },
-                      { "if": { "when": { "flag": "rapor_kopya" }, "then": 1, "else": 0 } },
-                      { "if": { "when": { "flag": "rapor_cam" }, "then": 1, "else": 0 } },
-                      { "if": { "when": { "flag": "rapor_yorum" }, "then": 1, "else": 0 } }
-                    ]
-                  },
-                  ">=",
-                  3
-                ]
-              },
+              "when": { "ref": "itiraz_dayanak" },
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan, rapor ışığın o gece ne yaktığını ölçmemiş, kâğıttaki sinyal planını yazmış. Fren izini sanığın aracına bağlamış ama hangi araca ait olduğunu tespit etmemiş."
-                },
-                {
-                  "speaker": "player",
-                  "text": "Sanığın aracındaki hasar sol önde; rapor “sağ ön köşe” diyor. Tutanaktaki far camı kırıklarından hiç söz etmemiş. Ve “bilinçli taksir” bir mühendisin değil, mahkemenin nitelendirmesidir (CMK 67/3)."
-                },
-                {
-                  "speaker": "player",
-                  "text": "Üç kişilik bir bilirkişi heyeti, Adli Tıp Kurumu Trafik İhtisas Dairesinden yaralanma mekanizması raporu ve aracın olay veri kaydedicisinin okunmasını talep ediyoruz."
-                },
-                {
-                  "speaker": "savci",
-                  "text": "Sayın Başkan… “sağ ön köşe” konusunda müdafi haklı görünüyor. Talebe katılmıyoruz ama karşı da değiliz."
-                },
-                {
-                  "speaker": "player",
-                  "text": "Savcı “karşı değiliz” dedi. Bir savcıdan duyabileceğin en sıcak cümle.",
-                  "style": "thought"
-                },
-                {
-                  "speaker": "narrator",
-                  "text": "Katılan vekili ayağa kalktı, “süreci uzatma çabası” dedi; hâkim eliyle oturmasını işaret etti. Serkan, vekilinin koluna dokundu; bu sefer onu durduran oydu."
+                  "text": "Sayın Başkan, rapora CMK 67/5 uyarınca itiraz ediyoruz. Eksikleri tek tek sayacağım."
                 }
               ]
             },
@@ -1743,55 +1709,67 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan, rapor olay yeri incelemesi yapılmadan, yalnızca dosya üzerinden hazırlanmıştır. Işığın gerçek durumu ve fren izinin aidiyeti tespit edilmemiştir."
+                  "text": "Sayın Başkan, rapor sanığı haksız yere tam kusurlu bulmaktadır. Yeni bir bilirkişi heyeti, Adli Tıp raporu ve araç verisinin okunmasını talep ediyoruz."
                 },
                 {
-                  "speaker": "player",
-                  "text": "Üç kişilik bir bilirkişi heyeti, Adli Tıp Kurumu Trafik İhtisas Dairesinden yaralanma mekanizması raporu ve aracın olay veri kaydedicisinin okunmasını talep ediyoruz."
+                  "speaker": "hakim",
+                  "text": "Hangi tespitine itiraz ediyorsunuz müdafi? Rapordaki hangi hesap, hangi eksik?"
                 },
-                { "speaker": "savci", "text": "Takdir mahkemenindir." }
+                { "speaker": "player", "text": "…Raporun bütününe, Sayın Başkan." },
+                {
+                  "speaker": "hakim",
+                  "text": "Ara karar: Müdafiin itirazı raporun hangi tespitine yöneldiği somut olarak gösterilmeden yapıldığından, CMK 67/5 uyarınca gerekçesiz bir talep niteliğinde görülerek reddine."
+                },
+                { "speaker": "savci", "text": "Takdir mahkemenindir." },
+                {
+                  "speaker": "player",
+                  "text": "Bir itiraz, bir kâğıt değil; bir liste. Benim listem boştu.",
+                  "style": "thought"
+                }
               ]
             }
           ],
           "effects": [
-            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 120 },
-            { "type": "VAR", "var": "h1_itiraz", "op": "set", "value": true },
-            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
-            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
             {
               "type": "IF",
-              "when": { "hasEvidence": "clue_boya" },
-              "then": [{ "type": "VAR", "var": "h1_boya", "op": "set", "value": true }]
-            },
-            {
-              "type": "IF",
-              "when": {
-                "cmp": [
-                  {
-                    "add": [
-                      { "if": { "when": { "flag": "rapor_plan" }, "then": 1, "else": 0 } },
-                      { "if": { "when": { "flag": "rapor_iz" }, "then": 1, "else": 0 } },
-                      { "if": { "when": { "flag": "rapor_kopya" }, "then": 1, "else": 0 } },
-                      { "if": { "when": { "flag": "rapor_cam" }, "then": 1, "else": 0 } },
-                      { "if": { "when": { "flag": "rapor_yorum" }, "then": 1, "else": 0 } }
-                    ]
-                  },
-                  ">=",
-                  3
-                ]
-              },
+              "when": { "ref": "itiraz_dayanak" },
               "then": [
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
-                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+                { "type": "SCORE", "category": "USUL_BILGISI", "amount": 120 },
+                { "type": "VAR", "var": "h1_itiraz", "op": "set", "value": true },
+                { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+                {
+                  "type": "IF",
+                  "when": { "hasEvidence": "clue_boya" },
+                  "then": [{ "type": "VAR", "var": "h1_boya", "op": "set", "value": true }]
+                },
+                {
+                  "type": "IF",
+                  "when": { "ref": "itiraz_guclu" },
+                  "then": [
+                    { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                    { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+                  ]
+                },
+                {
+                  "type": "MARK",
+                  "quality": "GOOD",
+                  "feedback": "Rapor tamamlandığında taraflar itiraz ve yeni bilirkişi incelemesi isteyebilir; ret gerekçeli olmalıdır (CMK 67/5). Somut eksikleri saymak talebi “davayı uzatma” olmaktan çıkarır (CMK 206/2-c).",
+                  "category": "USUL_BILGISI"
+                }
+              ],
+              "else": [
+                { "type": "SCORE", "category": "USUL_BILGISI", "amount": -40 },
+                { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+                {
+                  "type": "MARK",
+                  "quality": "BAD",
+                  "feedback": "CMK 67/5 itirazı raporun hangi tespitine, hangi somut gerekçeyle yöneldiğini göstermeli. Raporu ve olay yerini incelemeden yapılan soyut itiraz gerekçeyle reddedilir; yeni inceleme gelmez.",
+                  "category": "USUL_BILGISI"
+                }
               ]
             }
-          ],
-          "quality": {
-            "q": "GOOD",
-            "feedback": "Rapor tamamlandığında taraflar itiraz ve yeni bilirkişi incelemesi isteyebilir; ret gerekçeli olmalıdır (CMK 67/5). Somut eksikleri saymak talebi “davayı uzatma” olmaktan çıkarır (CMK 206/2-c).",
-            "category": "USUL_BILGISI"
-          },
-          "next": "H1_07"
+          ]
         },
         {
           "id": "R_DINLE",
@@ -1825,7 +1803,7 @@
         {
           "id": "R_CIKAR",
           "kind": "OPTION",
-          "label": "Rapor hukuka aykırıdır, dosyadan çıkarılmalıdır.",
+          "label": "Rapor CMK 206/2-a ve 217/2 uyarınca hukuka aykırı delildir; dosyadan çıkarılmasını talep ediyoruz.",
           "responses": [
             {
               "lines": [
@@ -1867,6 +1845,161 @@
           "next": "H1_07"
         }
       ]
+    },
+    {
+      "id": "H1_06T",
+      "type": "DECISION",
+      "chapter": "Bölüm 3 · İkinci celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "İtirazın gerekçesi",
+      "lines": [
+        {
+          "when": { "all": [{ "ref": "itiraz_dayanak" }, { "flag": "rapor_plan" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Rapor ışığın o gece ne yaktığını ölçmemiş, kâğıttaki sinyal planını yazmıştır. Denetleyicinin kaydına bakılmamıştır."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H1_06T2" }],
+      "choices": []
+    },
+    {
+      "id": "H1_06T2",
+      "type": "DECISION",
+      "chapter": "Bölüm 3 · İkinci celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "İtirazın gerekçesi",
+      "lines": [
+        {
+          "when": { "all": [{ "ref": "itiraz_dayanak" }, { "hasEvidence": "ded_fren" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Rapor on sekiz metrelik fren izini sanığın aracına bağlamış; oysa sanığın aracında ABS vardır ve kesintisiz kilit izi bırakmaz. İzin hangi araca ait olduğu tespit edilmemiştir."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "ref": "itiraz_dayanak" }, { "flag": "rapor_iz" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Rapor on sekiz metrelik fren izini sanığın aracına bağlamış; izin hangi araca ait olduğu hiçbir yerde tespit edilmemiştir."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H1_06T3" }],
+      "choices": []
+    },
+    {
+      "id": "H1_06T3",
+      "type": "DECISION",
+      "chapter": "Bölüm 3 · İkinci celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "İtirazın gerekçesi",
+      "lines": [
+        {
+          "when": { "all": [{ "ref": "itiraz_dayanak" }, { "flag": "rapor_kopya" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Sanığın aracındaki hasar tutanağa göre sol öndedir; rapor “sağ ön köşe” demektedir."
+            },
+            { "speaker": "savci", "text": "Sayın Başkan… “sağ ön köşe” konusunda müdafi haklı görünüyor." }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H1_06T4" }],
+      "choices": []
+    },
+    {
+      "id": "H1_06T4",
+      "type": "DECISION",
+      "chapter": "Bölüm 3 · İkinci celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "İtirazın gerekçesi",
+      "lines": [
+        {
+          "when": { "all": [{ "ref": "itiraz_dayanak" }, { "hasEvidence": "ded_cam" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Tutanakta olay yerinde far camı kırıkları vardır; sanığın farları sağlamdır. Rapor bu kırıklardan ve ait oldukları araçtan hiç söz etmemiştir."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "ref": "itiraz_dayanak" }, { "flag": "rapor_cam" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Rapor “başka araca ait iz yoktur” demektedir; oysa tutanakta olay yerinde cam kırıkları vardır. Rapor bunları hiç değerlendirmemiştir."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H1_06T5" }],
+      "choices": []
+    },
+    {
+      "id": "H1_06T5",
+      "type": "DECISION",
+      "chapter": "Bölüm 3 · İkinci celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "İtirazın gerekçesi",
+      "lines": [
+        {
+          "when": { "all": [{ "ref": "itiraz_dayanak" }, { "flag": "rapor_yorum" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ve “bilinçli taksir” bir mühendisin değil, mahkemenin nitelendirmesidir (CMK 67/3)."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H1_06T6" }],
+      "choices": []
+    },
+    {
+      "id": "H1_06T6",
+      "type": "DECISION",
+      "chapter": "Bölüm 3 · İkinci celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "İtirazın gerekçesi",
+      "lines": [
+        {
+          "when": { "ref": "itiraz_dayanak" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Üç kişilik bir bilirkişi heyeti, Adli Tıp Kurumu Trafik İhtisas Dairesinden yaralanma mekanizması raporu ve aracın olay veri kaydedicisinin okunmasını talep ediyoruz."
+            },
+            { "speaker": "savci", "text": "Talebe katılmıyoruz Sayın Başkan. Ama karşı da değiliz." },
+            {
+              "speaker": "player",
+              "text": "Savcı “karşı değiliz” dedi. Bir savcıdan duyabileceğin en sıcak cümle.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Katılan vekili ayağa kalktı, “süreci uzatma çabası” dedi; hâkim eliyle oturmasını işaret etti. Serkan, vekilinin koluna dokundu; bu sefer onu durduran oydu."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H1_07" }],
+      "choices": []
     },
     {
       "id": "H1_07",
@@ -1918,7 +2051,7 @@
         {
           "id": "AK_IZIN",
           "kind": "OPTION",
-          "label": "Adli kontrolde taşıt yasağına, işe gidiş için izin talep ediyoruz (CMK 109/5).",
+          "label": "Taşıt yasağında işe gidiş için izin istiyoruz (CMK 109/5).",
           "responses": [
             {
               "when": { "ref": "tahliye_dayanak" },
@@ -1962,7 +2095,7 @@
         {
           "id": "AK_BERAAT",
           "kind": "OPTION",
-          "label": "Adli kontrolün kaldırılmasını ve sanığın hemen beraatini talep ediyoruz.",
+          "label": "Adli kontrolün kaldırılmasını (CMK 110) ve delil beklenmeden sanığın hemen beraatini talep ediyoruz.",
           "responses": [
             { "lines": [{ "speaker": "hakim", "text": "Delil toplanıyor müdafi. Talebiniz reddedildi." }] }
           ],

@@ -250,10 +250,7 @@ export const invPeople: CasePart = {
               responses: [
                 when(
                   trustOk,
-                  L(
-                    'volkan',
-                    'Koyu bir şey. Farların ucunda. Bir poşet sandım önce. Alçaktı. Ayakta biri değildi sanki… bilmiyorum.',
-                  ),
+                  L('volkan', 'Koyu bir şey. Farların ucunda. Bir poşet sandım önce. Alçaktı… bilmiyorum.'),
                   L('volkan', 'Frene bastım. Pedal titredi, o titreme hep olur. Sonra sol önde… bir tümsek. Yumuşak.'),
                   L(
                     'volkan',
@@ -637,27 +634,23 @@ export const invPeople: CasePart = {
         ),
       ),
       choices: [
-        option(
-          'SQ_SAYGI',
-          '“Başınız sağ olsun. Bir şey istemeye gelmedim; yalnızca anneniz hakkında dinlemek isterim.”',
-          {
-            score: { SORGULAMA: 20 },
-            effects: [raise('serkan_saygi')],
-            visibleWhen: not(flag('serkan_kirgin')),
-            good: 'Katılanla görüşmede ölçü: talep yok, telkin yok, saygı var.',
-            responses: says(
-              N('Zincir bir süre takılı kaldı. Sonra çözüldü. Kapı açılmadı ama aralık büyüdü.'),
-              L(
-                'serkan',
-                'Annem. Hatice. Hastanede temizlikçiydi. Otuz yıl. Gece vardiyası, gündüz vardiyası, bayram vardiyası.',
-              ),
-              L(
-                'serkan',
-                'Eve hep yürüyerek gelirdi. Otobüs parası biriktirirdi. Benim inşaat ayakkabılarımı o aldı, ilk işime girdiğimde.',
-              ),
+        option('SQ_SAYGI', '“Başınız sağ olsun. Anneniz hakkında dinlemeye geldim.”', {
+          score: { SORGULAMA: 20 },
+          effects: [raise('serkan_saygi')],
+          visibleWhen: not(flag('serkan_kirgin')),
+          good: 'Katılanla görüşmede ölçü: talep yok, telkin yok, saygı var.',
+          responses: says(
+            N('Zincir bir süre takılı kaldı. Sonra çözüldü. Kapı açılmadı ama aralık büyüdü.'),
+            L(
+              'serkan',
+              'Annem. Hatice. Hastanede temizlikçiydi. Otuz yıl. Gece vardiyası, gündüz vardiyası, bayram vardiyası.',
             ),
-          },
-        ),
+            L(
+              'serkan',
+              'Eve hep yürüyerek gelirdi. Otobüs parası biriktirirdi. Benim inşaat ayakkabılarımı o aldı, ilk işime girdiğimde.',
+            ),
+          ),
+        }),
         option('SQ_ANNE', '“Anneniz o kavşaktan nasıl geçerdi?”', {
           score: { SORGULAMA: 30 },
           effects: [raise('fact_anne')],
@@ -799,20 +792,24 @@ export const invPeople: CasePart = {
             L('hamdi', 'Ben söyledim. Yazdım. Kimse okumadı.', 'uzgun'),
           ),
         }),
-        option('HQ_FOTOKOPI', '“Bana şimdi kayıtların bir kopyasını verin, kimse bilmez.”', {
-          score: { USUL_BILGISI: -30 },
-          effects: [raise('hamdi_kizgin')],
-          bad: 'Kayıt dışı belge almak, delilin kaynağını ve kullanılabilirliğini tartışmalı kılar; yol dilekçe ve mahkeme müzekkeresidir (CMK 177).',
-          category: 'USUL_BILGISI',
-          responses: says(
-            L(
-              'hamdi',
-              'Kimse bilmez mi? Herkes bilir abla. Burada duvarların kulağı var, müdürün iki kulağı var.',
-              'kizgin',
+        option(
+          'HQ_FOTOKOPI',
+          '“Kayıtların bir kopyasını şimdi bana verin; mahkemeye ben sunarım, sizin adınız hiç geçmez.”',
+          {
+            score: { USUL_BILGISI: -30 },
+            effects: [raise('hamdi_kizgin')],
+            bad: 'Kayıt dışı belge almak, delilin kaynağını ve kullanılabilirliğini tartışmalı kılar; yol dilekçe ve mahkeme müzekkeresidir (CMK 177).',
+            category: 'USUL_BILGISI',
+            responses: says(
+              L(
+                'hamdi',
+                'Kimse bilmez mi? Herkes bilir abla. Burada duvarların kulağı var, müdürün iki kulağı var.',
+                'kizgin',
+              ),
+              L('hamdi', 'Yazıyla. Ben yazıdan başka bir şey vermem. Gidin artık.', 'kizgin'),
             ),
-            L('hamdi', 'Yazıyla. Ben yazıdan başka bir şey vermem. Gidin artık.', 'kizgin'),
-          ),
-        }),
+          },
+        ),
         option('HQ_TANIK', '“Mahkeme sizi tanık olarak çağırabilir. Gördüğünüzü anlatmanız yeter; fazlası değil.”', {
           score: { SORGULAMA: 20 },
           effects: [raise('hamdi_bilgi')],
@@ -1052,7 +1049,7 @@ export const invPeople: CasePart = {
             L('ayten', 'Bilirkişi o izi araca bağlamış. Onu ben bağlamadım.'),
           ),
         }),
-        option('AQ_AMIR', '“Amirinizin hatasını mahkemede anlatır mısınız?”', {
+        option('AQ_AMIR', '“Amirinizin o gece delili emanete almamasını, hatasını mahkemede açıkça anlatır mısınız?”', {
           score: { SORGULAMA: -20 },
           effects: [raise('ayten_kapali')],
           bad: 'Tanığı amirine karşı konumlandırmak onu kapatır; tanıktan beklenen gözlemidir, başkalarını suçlaması değil.',

@@ -512,7 +512,7 @@
         {
           "id": "O2_TELKIN",
           "kind": "OPTION",
-          "label": "İtiraz: soru tanığa bir sonucu onaylatıyor; telkin edici (CMK 201/1).",
+          "label": "İtiraz: telkin edici soru.",
           "responses": [
             {
               "lines": [
@@ -556,7 +556,7 @@
         {
           "id": "O2_SALDIR",
           "kind": "OPTION",
-          "label": "Sayın savcı tanığı yönlendiriyor; belediye bir şeyleri örtüyor!",
+          "label": "İtiraz (CMK 201): savcı tanığı yönlendiriyor; belediye bir şeyleri örtüyor, bu tutanağa geçsin!",
           "responses": [
             { "lines": [{ "speaker": "hakim", "text": "Müdafi! Salonda suçlama yok, itiraz var. Uyarıyorum." }] }
           ],
@@ -1857,7 +1857,7 @@
         {
           "id": "ARG_EDR",
           "kind": "OPTION",
-          "label": "EDR: 38 km/s, fren 1,2 sn önce, ABS aktif. Hız ve özensizlik iddiası çürük; bilinçli taksirin öngörü unsuru yok.",
+          "label": "EDR: 38 km/s, fren 1,2 sn önce, ABS aktif. Öngörü unsuru yok.",
           "enabledWhen": { "hasEvidence": "ev_edr" },
           "lockedReason": "EDR raporu dosyada yok.",
           "responses": [
@@ -1914,7 +1914,7 @@
         {
           "id": "ARG_ATK",
           "kind": "OPTION",
-          "label": "ATK: ölüme yol açan travma birincil çarpmada; sanığın teması ikincil. İlliyet bağı kurulamıyor.",
+          "label": "ATK: ölümcül travma birincil çarpmada; sanığın teması ikincil.",
           "enabledWhen": { "hasEvidence": "ev_atk" },
           "lockedReason": "ATK raporu dosyada yok.",
           "responses": [
@@ -2027,7 +2027,7 @@
         {
           "id": "ARG_DUYGU",
           "kind": "OPTION",
-          "label": "Sanık iyi bir insan; bir haftalık bir kızı var.",
+          "label": "Sanık iyi bir insan, sabıkası yok, bir haftalık bir kızı var; cezanın bireyselleştirilmesinde bunlar tartılmalı (TCK 61).",
           "responses": [
             {
               "lines": [
@@ -2265,7 +2265,7 @@
         {
           "id": "M_CIKAR",
           "kind": "OPTION",
-          "label": "Mütalaa tutanaktan çıkarılsın.",
+          "label": "Mütalaa dayanaksız; CMK 216/1 uyarınca tutanaktan çıkarılmasını ve yeniden mütalaa verilmesini talep ediyoruz.",
           "responses": [
             { "lines": [{ "speaker": "hakim", "text": "Böyle bir usul yok müdafi. Cevabınız varsa verin." }] }
           ],
@@ -2788,7 +2788,7 @@
         {
           "id": "T09_D",
           "kind": "OPTION",
-          "label": "Bir kadın öldü, ama müvekkilim de bu gecenin kurbanı.",
+          "label": "Bir kadın öldü, evet; ama müvekkilim de bu gecenin kurbanı. Vicdanınıza sesleniyorum: bir babayı hapse göndermeyin.",
           "responses": [
             {
               "lines": [
@@ -2890,7 +2890,7 @@
         {
           "id": "SS_DOGRU",
           "kind": "OPTION",
-          "label": "“Hatice Hanım’ın oğlundan özür dilerim. Ben yeşilde geçtim. Bildiğim bu, bilmediğim de bu.”",
+          "label": "“Hatice Hanım’ın oğlundan özür dilerim. Yeşilde geçtim. Bildiğim bu.”",
           "responses": [
             {
               "when": { "any": [{ "flag": "volkan_dogru" }, { "flag": "volkan_hazir" }] },

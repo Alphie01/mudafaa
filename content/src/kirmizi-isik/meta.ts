@@ -1,5 +1,6 @@
 import {
   CASE_FORMAT_ID,
+  all,
   any,
   atLeast,
   categories,
@@ -18,7 +19,7 @@ import { p1, p2 } from './shared.js';
 
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler.
 
-export const T_INDIRIM = 3000;
+export const T_INDIRIM = 4000;
 export const T_BERAAT_E = 9000;
 export const T_BERAAT_B = 9500;
 
@@ -137,6 +138,54 @@ export const meta: CasePart = {
         flag('contra_c3'),
         flag('contra_c4'),
         flag('contra_heyet'),
+      ),
+    },
+    {
+      id: 'itiraz_dayanak',
+      label: 'Rapora somut itiraz: en az üç eksik, biri sahadan',
+      when: all(
+        atLeast(
+          3,
+          flag('rapor_plan'),
+          flag('rapor_iz'),
+          flag('rapor_kopya'),
+          flag('rapor_cam'),
+          flag('rapor_yorum'),
+          has('ded_fren'),
+          has('ded_cam'),
+          has('ded_yukseklik'),
+          has('ded_ariza'),
+        ),
+        any(has('ded_fren'), has('ded_cam'), has('ded_yukseklik'), has('ded_ariza')),
+      ),
+    },
+    {
+      id: 'itiraz_guclu',
+      label: 'Rapora güçlü itiraz: en az beş eksik',
+      when: atLeast(
+        5,
+        flag('rapor_plan'),
+        flag('rapor_iz'),
+        flag('rapor_kopya'),
+        flag('rapor_cam'),
+        flag('rapor_yorum'),
+        has('ded_fren'),
+        has('ded_cam'),
+        has('ded_yukseklik'),
+        has('ded_ariza'),
+      ),
+    },
+    {
+      id: 'inv_derin',
+      label: 'Soruşturmada en az iki saha çıkarımı',
+      when: atLeast(
+        2,
+        has('ded_fren'),
+        has('ded_cam'),
+        has('ded_yukseklik'),
+        has('ded_goremez'),
+        has('ded_ariza'),
+        has('ded_saat'),
       ),
     },
     {

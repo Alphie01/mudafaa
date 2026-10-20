@@ -1,0 +1,1462 @@
+{
+  "nodes": [
+    {
+      "id": "INV_GORUSME_G_1",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #13 · SORUŞTURMA",
+      "title": "Selim",
+      "onFirstEnter": [
+        { "type": "MEET", "character": "selim" },
+        {
+          "type": "IF",
+          "when": { "flag": "deniz_durust" },
+          "then": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 4 }]
+        }
+      ],
+      "lines": [
+        {
+          "when": { "cmp": [{ "visits": "INV_GORUSME" }, "==", 0] },
+          "lines": [
+            { "speaker": "narrator", "text": "SALI 18.10 — NİLÜFER, AKTAŞLARIN BALKONU", "style": "card", "bg": "ev" },
+            {
+              "speaker": "narrator",
+              "text": "Üçüncü kat. Balkon dar; iki plastik sandalye, bir saksıda kurumuş bir fesleğen, kenarı yanık bir kül tablası."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Selim beni balkonda karşıladı. İçeri davet etmedi. “Defne ödev yapıyor” dedi; sanki ödev yapan bir çocuğun yanında bu dosya konuşulamazmış gibi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Otuzlarının ortasında, ince, gözlüklü. Saçları kısa ve düzgün; sakalı üç gündür kesilmemiş. Ellerini nereye koyacağını bilmiyordu; sonunda bir sigara yaktı."
+            },
+            {
+              "speaker": "selim",
+              "text": "Avukat hanım. Gül anlattı. Önceki avukat da gelmişti; burada oturdu, çay içti, “formalite” dedi. Üç hafta sonra çekildi."
+            },
+            {
+              "speaker": "selim",
+              "text": "Size baştan söyleyeyim: ben dokuz yıl o şirketin her gece yedeğini aldım. Elektrik kesildiğinde gece ikide fabrikaya giden bendim. Ben veri silmem. Benim dinime aykırı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir sistem yöneticisi “dinime aykırı” diyorsa, inandığı şeyi söylüyordur. Ama insanlar inandıkları şeyleri de saklar.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "Saatine baktım. Gül, “Akşam yemeğine kadar” demişti; on dört dakika." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "NİLÜFER — AKTAŞLARIN BALKONU", "style": "card", "bg": "ev" },
+            {
+              "speaker": "narrator",
+              "text": "Aynı balkon, aynı iki sandalye. Fesleğen hâlâ kuru. Selim beni görünce sigarasını söndürdü; bu sefer erken."
+            },
+            { "speaker": "selim", "text": "Yine mi siz? İyi. Bugün daha iyi bir günüm. Yüzde altmış." }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GORUSME" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GORUSME",
+      "type": "DIALOGUE",
+      "mode": "INTERVIEW",
+      "tones": [
+        { "id": "soft", "label": "Yumuşak", "hint": "+4 güven" },
+        { "id": "hard", "label": "Sert", "hint": "−8 güven · daha fazla bilgi" }
+      ],
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #13 · SORUŞTURMA",
+      "title": "Müvekkil görüşmesi",
+      "hud": ["min", "trust"],
+      "background": "ev",
+      "room": { "label": "NİLÜFER · BALKON", "character": "selim" },
+      "onEnter": [
+        {
+          "type": "IF",
+          "when": { "cmp": [{ "visits": "INV_GORUSME" }, ">", 1] },
+          "then": [{ "type": "VAR", "var": "min", "op": "set", "value": 8 }]
+        }
+      ],
+      "lines": [
+        {
+          "when": { "cmp": [{ "visits": "INV_GORUSME" }, "==", 1] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "İçeriden Defne’nin sesi geliyordu; çarpım tablosunu yüksek sesle okuyordu. Yedi kere sekiz. Elli altı."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Akşam yemeğine sekiz dakika. Gül mutfaktan seslendi: “Avukat hanım da yesin!” Selim duymazdan geldi."
+            }
+          ]
+        }
+      ],
+      "moodRules": [
+        { "when": { "hasEvidence": "clue_kisisel" }, "label": "Açılıyor", "tone": "success", "expression": "saskin" },
+        {
+          "when": { "cmp": [{ "var": "trust" }, "<", 40] },
+          "label": "Kapalı",
+          "tone": "error",
+          "expression": "kizgin"
+        },
+        {
+          "when": { "cmp": [{ "var": "tone" }, "==", "hard"] },
+          "label": "Gergin",
+          "tone": "neutral",
+          "expression": "kizgin"
+        },
+        { "label": "Yorgun", "tone": "neutral", "expression": "normal" }
+      ],
+      "objectives": [
+        {
+          "id": "obj_gece",
+          "when": { "flag": "fact_gece" },
+          "known": "O gece evdeydi; bilgisayar “gece” kapalıydı.",
+          "unknown": "O gece ne yaptı?"
+        },
+        {
+          "id": "obj_devir",
+          "when": { "flag": "fact_devir" },
+          "known": "Şifreleri zarfla genel müdüre verdi.",
+          "unknown": "Şifreler kimdeydi?"
+        },
+        {
+          "id": "obj_2130",
+          "when": { "hasEvidence": "clue_kisisel" },
+          "known": "21.30’da kendi klasörünü aldı.",
+          "unknown": "Neden saklıyor?"
+        },
+        {
+          "id": "obj_izin",
+          "when": { "flag": "fact_izin" },
+          "known": "Hesap izinle açık kalmıştı.",
+          "unknown": "Girmeye yetkisi var mıydı?"
+        }
+      ],
+      "choices": [
+        {
+          "id": "TP_GECE",
+          "kind": "TOPIC",
+          "label": "O gece",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "O geceyi anlatır mısın? Cuma akşamından başla.",
+              "responses": [
+                {
+                  "when": { "cmp": [{ "var": "trust" }, "<", 40] },
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "expression": "kizgin",
+                      "text": "Anlattım. Polise anlattım, savcıya anlattım, önceki avukata iki kere anlattım. Evdeydim. Uyudum. Bu kadar."
+                    },
+                    { "speaker": "player", "text": "Bir duvar. Duvara bağırılmaz; kapısı aranır.", "style": "thought" }
+                  ]
+                },
+                {
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "text": "Cuma akşamı evdeydim. Defne’yi yatırdım; masal okudum, aynı masal, üçüncü kez. Gül’le bir dizi izledik; yarısında uyudum."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Gece kalkmadım. Sabah polis değil, Gül uyandırdı; cumartesi pazarına gidecektik."
+                    },
+                    { "speaker": "player", "text": "Bilgisayarın?" },
+                    {
+                      "speaker": "selim",
+                      "text": "Kapalıydı. Gece kapalıydı. Ben bilgisayarı gece kapatırım; elektrik faturası, fan sesi, Defne uyanır."
+                    },
+                    {
+                      "speaker": "narrator",
+                      "text": "“Gece” kelimesinin üstünde bir an durdu. Sigarasının külünü silkeledi; kül zaten yoktu."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "“Gece kapalıydı.” Akşam açık mıydı? Sormadım. Henüz.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Saat saat. Cuma 21.00 ile cumartesi 03.00 arası.",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" },
+                { "type": "VAR", "var": "fact_masa", "op": "set", "value": true }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "expression": "kizgin",
+                      "text": "Saat saat mi? Ben makine değilim avukat hanım. Makineler saat tutar; ben uyurum."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Dokuzda Defne yattı. Ondan sonra… ondan sonra masadaydım biraz. Sonra Gül’ün yanına geçtim. Gece ikide uyuyordum. Kanıtlayamam; uyuyan adamın tanığı yastığıdır."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "“Masadaydım biraz.” Bir masa, bir saat, yarım bir cümle. Not aldım.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_gece", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_CIKIS",
+          "kind": "TOPIC",
+          "label": "İşten çıkarılış",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Neden çıkardılar seni? Ne oldu?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "text": "Yedek cihazının diskleri dolmuştu. Yeni disk istedim; iki bin dolar. Tarık Bey “bütçe yok” dedi. Üçüncü kez istedim; bağırdı."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Ben de toplantıda dedim ki: “Bir gün her şey silinirse, beni aramayın.” Herkesin önünde. Aptalca. Şimdi o cümle iddianamede."
+                    },
+                    { "speaker": "narrator", "text": "Gözlüğünü çıkarıp gömleğinin ucuyla sildi. Gözlük temizdi." },
+                    {
+                      "speaker": "selim",
+                      "text": "Bir hafta sonra İK aradı. “Yeniden yapılanma.” Dokuz yıl. Bir kahve fincanı, bir kaktüs, bir kutu kablo; hepsi bir koliye sığdı."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "“Bir gün her şey silinirse.” Bir kehanet mi, bir tehdit mi? Savcı ikincisini seçmiş.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Tehdit ettin mi onları? “Her şey silinirse” dedin mi?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "expression": "kizgin",
+                      "text": "Dedim! Uyardım! Tehdit etmedim, uyardım. Yangın alarmını takan adam yangını çıkarmış mı oluyor?"
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Yedek alınmazsa veri gider. Bunu söyledim. Yedek alınmadı mı? Ben gittikten sonra kim baktı yedeğe, onu sorun."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir soru. Ona değil, bir başkasına sorulacak bir soru.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 15 },
+            { "type": "VAR", "var": "fact_kavga", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_DEVIR",
+          "kind": "TOPIC",
+          "label": "Devir-teslim",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Ayrılırken neyi kime teslim ettin?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "text": "Her şeyi. Dizüstü, personel kartı, anahtarlar, dokümantasyon. Bir de şifreler."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Şifreleri Tarık Bey kendisi istedi. “Bülent’e değil, bana ver; şifreler bende dursun” dedi. Ben de hepsini bir kâğıda yazdım, zarfa koydum, kapattım, imzaladım. Kendi eliyle aldı."
+                    },
+                    { "speaker": "player", "text": "Tutanak var mı?" },
+                    {
+                      "speaker": "selim",
+                      "text": "Var tabii. Ben tutanaksız çay bile içmem. Bir nüshası bende, masadaki dosyada. Polis almadı; dizüstüyü aldılar, kâğıda bakmadılar."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir zarf. Bir genel müdürün elinde. Dosyada bunun bir satırı bile yok.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Şifreleri değiştirmediler mi? Hâlâ biliyor musun?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "text": "Değiştirmeleri gerekirdi. İlk iş. Ben olsam değiştirirdim. Değiştirmemişler; kayıtta benim kullanıcı adım çıkıyorsa, değiştirmemişler."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Biliyor muyum? Biliyorum tabii. Dokuz yıl ben koydum o şifreleri. Ama bilmek girmek değil avukat hanım. Bilmek bir şey, kullanmak başka."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Zarfı Tarık Bey’e verdim. Kendi eliyle aldı. Masasının çekmecesine koydu. Gözümün önünde."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Biliyor. Bunu kürsüde söylemesin. Ya da söylesin, ama nasıl söyleyeceğini bilsin.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "fact_devir", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_YEDEK",
+          "kind": "TOPIC",
+          "label": "Yedek cihazı",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_son_yedek" }, { "hasEvidence": "clue_bos_yuva" }] },
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Yedek cihazı çalışıyor muydu? Şikâyette “aylardır arızalı” yazıyor.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "expression": "saskin",
+                      "text": "Arızalı mı? Diskleri dolmak üzereydi, arızalı değildi. Her gece saat onda çalışırdı. Bıraktığım gün çalışıyordu."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Kablosu mu? Kablosu kendiliğinden çıkmaz avukat hanım. O kablo kilitlidir; mandallı. Çekmek için eğilip mandala basman gerekir."
+                    },
+                    {
+                      "speaker": "narrator",
+                      "text": "Sigarasını söndürdü. Bir süre konuşmadı. Sonra çok alçak sesle:"
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Biri o odaya girmiş. Ben giremem; kartımı teslim ettim. Tutanakta yazar."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir kablo kendiliğinden çıkmaz. Bunu bir sistemciden duymak, bir fizik kanununu duymak gibiydi.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Yedeği sen mi devre dışı bıraktın, ayrılmadan önce?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "expression": "kizgin",
+                      "text": "Ben mi? Ben o cihazı bebek gibi baktım! Bıraktığım gün son yedek tamamdı, tutanağa bile yazdırdım."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Kablo çekilmişse, çeken o odaya girmiş biri. Benim kartım yok. İsteyin kart kayıtlarını; kim girdiyse orada yazar."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kart kayıtları. Bir sunucuda bir yerde. Mahkeme isterse gelir.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+        },
+        {
+          "id": "TP_2130",
+          "kind": "TOPIC",
+          "label": "Cuma 21.30",
+          "cost": [{ "var": "min", "amount": 3 }],
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_2130" }, { "hasEvidence": "clue_emn_yok" }] },
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Kayıtta cuma 21.30’da senin evinden bir bağlantı var. Bana anlatmak ister misin?",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" },
+                { "type": "DISCOVER", "evidence": "clue_kisisel" },
+                { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+              ],
+              "responses": [
+                {
+                  "when": { "any": [{ "cmp": [{ "var": "trust" }, ">=", 60] }, { "flag": "gul_resim_verildi" }] },
+                  "lines": [
+                    {
+                      "speaker": "narrator",
+                      "text": "Selim uzun süre sustu. İçeriden Defne’nin sesi: “Dokuz kere dokuz, seksen bir.”"
+                    },
+                    {
+                      "speaker": "selim",
+                      "expression": "uzgun",
+                      "text": "Fotoğraflarımı aldım. Defne’nin doğduğu günün fotoğrafları o klasördeydi. Hastanede çektim, şirketin bilgisayarına aktarmıştım; evdeki disk bozulmuştu."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Bir de özgeçmişim. İş arıyorum. Yirmi dakika. Kendi klasörüm. Başka hiçbir şeye dokunmadım. Yemin ederim; Defne’nin üstüne."
+                    },
+                    { "speaker": "player", "text": "Neden söylemedin?" },
+                    {
+                      "speaker": "selim",
+                      "text": "Çünkü kim inanır? Gece bağlanmış, ertesi sabah her şey silinmiş. Önceki avukata söyledim, yüzü değişti. Ertesi hafta çekildi."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "İnsanlar inandıkları şeyleri saklar. Bazen de inanılmayacaklarını bildikleri gerçeği.",
+                      "style": "thought"
+                    }
+                  ]
+                },
+                {
+                  "lines": [
+                    { "speaker": "selim", "text": "Kayıt kayıttır. Ben ne diyeyim. Akşam masadaydım dedim ya." },
+                    { "speaker": "narrator", "text": "Gözlerini kaçırdı. Elindeki çakmağı çevirdi, çevirdi." },
+                    {
+                      "speaker": "selim",
+                      "text": "Peki. Peki. Bağlandım. Kendi klasörüm. Fotoğraflar, özgeçmiş. Yirmi dakika. Başka bir şeye dokunmadım."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "İtiraf değil; yorgunluk. Ama doğru gibi duruyor. Doğruyu yorgunluk söyletir bazen.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "21.30’da sistemdeydin. Bana yalan söyledin.",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" },
+                { "type": "DISCOVER", "evidence": "clue_kisisel" },
+                { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "expression": "kizgin",
+                      "text": "Yalan söylemedim! Söylemedim, o kadar. Bir şeyi söylememek yalan mı?"
+                    },
+                    {
+                      "speaker": "narrator",
+                      "text": "Ayağa kalktı. Balkon demirine tutundu. Aşağıda bir otobüs geçti; camları buğulu."
+                    },
+                    {
+                      "speaker": "selim",
+                      "expression": "uzgun",
+                      "text": "Fotoğraflarımı aldım. Kızımın doğum fotoğraflarını. Bir de özgeçmişimi. Yirmi dakika. Başka bir şeye dokunmadım. Dokunsam, iz bırakmadan dokunurdum; dokuz yıl o sistemi ben kurdum."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Bunu da yazın mahkemeye: “İz bırakan adam silmez.” Kim siliyorsa, benim adımı bilerek kullanıyor."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Öfkeyle gelen bir doğru, sakin bir yalandan daha çok iz bırakır.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }]
+        },
+        {
+          "id": "TP_IZIN",
+          "kind": "TOPIC",
+          "label": "Genel müdürün e-postası",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "visibleWhen": { "hasEvidence": "ev_eposta" },
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Gül bu e-postayı çekmecede saklamış. Hatırlıyor musun?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "narrator",
+                      "text": "Kâğıdı aldı. Okudu. Bir kez daha okudu. Kaşları yavaşça kalktı."
+                    },
+                    {
+                      "speaker": "selim",
+                      "expression": "saskin",
+                      "text": "Bunu Tarık Bey yazmıştı. Son gün akşamı. “Kişisel dosyalarını ay sonuna kadar alabilirsin, hesabın açık kalacak.” Unutmuşum."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Gül basmış mı bunu? Ben ona telefondan göstermiştim; “Bak, adam gibi adam” demiştim. Gül basmış. Gül her şeyi basar."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bu e-posta, o akşam girdiğin kapının sana açık bırakıldığını gösteriyor."
+                    },
+                    { "speaker": "selim", "text": "Yani… suç değil mi? Kendi klasörümü almam?" },
+                    {
+                      "speaker": "player",
+                      "text": "Bir kapı izinle açık bırakılmışsa, o kapıdan girmek suç olmaz. Ama kapının kime açık bırakıldığı da bir soru.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Bu e-postayı neden polise vermedin?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "expression": "kizgin",
+                      "text": "Hatırlamadım! Polis sabah altıda kapıyı çaldı, kızım merdivende ağlıyordu. Bir e-posta mı aklıma gelecekti?"
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Hem kim sordu? Kimse “girmeye izniniz var mıydı” demedi. Herkes “sildiniz mi” dedi."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Herkes yanlış soruyu sordu. Yanlış soruların doğru cevabı olmaz.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_izin", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_KIM",
+          "kind": "TOPIC",
+          "label": "Kim olabilir?",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Sen değilsen, kim? Bir fikrin var mı?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "text": "Bilmiyorum. Bülent’in firması dokuz yıl benim yaptığım işi yapmak istiyordu; benim gitmem onların işine geldi. Ama Bülent veri silmez; korkar."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Şifreler bir zarftaydı. Zarf bir çekmecedeydi. Çekmeceyi kim açtıysa."
+                    },
+                    {
+                      "speaker": "selim",
+                      "text": "Ben ağ yöneticisiyim avukat hanım, dedektif değilim. Bana bir kayıt verin; kime ait olduğunu söyleyeyim. İnsanların kalbini okuyamam."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir çekmece. Bir zarf. Kimseyi suçlamıyor. Bu iyi; suçlayan müvekkil, mahkemede kendine benzer.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Biri sana kin mi besliyordu? İsim ver.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "selim",
+                      "expression": "kizgin",
+                      "text": "İsim mi? Ben kimseyi suçlamam. Bana yaptıkları gibi. Kanıtınız varsa söyleyin, yoksa kimsenin adını ağzıma almam."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Haklı. Kanıtsız bir isim, bu dosyada zaten bir kere söylendi: onunki.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
+        },
+        {
+          "id": "G_RESIM",
+          "kind": "OPTION",
+          "label": "Defne’nin resmini ver",
+          "visibleWhen": { "flag": "gul_resim" },
+          "maxUses": 1,
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Katlanmış resmi uzattım. Selim açtı. Bir balkon, bir adam, adamın elinde bir sigara ve kocaman bir “YASAK” işareti."
+                },
+                {
+                  "speaker": "selim",
+                  "expression": "uzgun",
+                  "text": "Bunu her akşam çiziyor mu? Gül söyledi; ben bakmadım. Bakamadım."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Sigarasını kül tablasına bastırdı; daha yarısındaydı. Resmi katladı, gömleğinin cebine koydu."
+                },
+                { "speaker": "selim", "text": "Peki avukat hanım. Ne sorarsanız. Doğrusunu." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 10 },
+            { "type": "VAR", "var": "gul_resim_verildi", "op": "set", "value": true }
+          ]
+        },
+        { "id": "G_BITIR", "kind": "CONTINUE", "label": "Görüşmeyi bitir", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_T_YASAR",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "TANIKLAR",
+      "title": "Yaşar Kılıç",
+      "background": "depo_gece",
+      "room": { "label": "FABRİKA KAPISI · KULÜBE", "character": "yasar" },
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ÇARŞAMBA 22.40 — NİLÜFER ÖRME, BEKÇİ KULÜBESİ",
+              "style": "card",
+              "bg": "depo_gece"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gece vardiyası. Fabrikanın ışıkları yağmurda bulanık yanıyordu. Kulübede bir elektrikli soba, bir radyo, bir tespih."
+            },
+            {
+              "speaker": "yasar",
+              "text": "Gel kızım, gel. Islanma. Gündüz konuşamazdık; müdürler var. Gece kimse yok. Bir ben varım, bir de köpek."
+            },
+            {
+              "speaker": "yasar",
+              "text": "Çay. Şekersiz mi? Avukatlar şekersiz içer, bilirim. Selim de şekersiz içerdi; “şeker beyni yavaşlatır Yaşar Usta” derdi."
+            },
+            {
+              "speaker": "yasar",
+              "text": "O çocuk gece bilgisayar bozulunca gelirdi. Saat iki, üç. Bana simit getirirdi. Kimse getirmez. Otuz yıldır bu kapıdayım; simit getiren bir o oldu."
+            },
+            {
+              "speaker": "yasar",
+              "text": "Şimdi diyorlar, o her şeyi silmiş. Ben bilmem kızım. Bilgisayar benim aklımın ermediği iş. Benim aklım kapıya erer: kim girdi, kim çıktı."
+            },
+            {
+              "speaker": "player",
+              "text": "Kim girdi, kim çıktı. Bu dosyanın sorusunu bir bekçi, bir cümleyle söyledi.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "YQ_GECE",
+          "kind": "OPTION",
+          "label": "“Cuma gecesi kapıdan kimse girdi mi?”",
+          "responses": [
+            {
+              "when": { "hasEvidence": "clue_defter" },
+              "lines": [
+                { "speaker": "player", "text": "Defterinizde cuma 23.05 için bir araç yazıyor. “GM aracı. Evrak.”" },
+                { "speaker": "narrator", "text": "Yaşar Usta tespihini bıraktı. Sobanın ateşine baktı." },
+                {
+                  "speaker": "yasar",
+                  "text": "Yazdım ya. Ben ne gelirse yazarım. Genel müdürün arabası geldi. Siyah. Camı indirdi: “Evrak unuttum Yaşar” dedi. Açtım. Ne diyeyim? Patron."
+                },
+                {
+                  "speaker": "yasar",
+                  "text": "İdari binaya girdi. Yarım saat kaldı. Çıktı, el salladı, gitti. Elinde evrak yoktu; ama ben bakmadım, belki cebindeydi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir genel müdür, cuma gecesi yarım saat. Evrak unutmak sık olur. Bunu not ediyorum; bir isim değil, bir saat olarak.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "yasar",
+                  "text": "Cuma gecesi mi? Kim girecek kızım? Gece vardiyası, servisler… Kimse girmez. Ben de dalmışımdır belki."
+                },
+                { "speaker": "narrator", "text": "Gözleri bir an masadaki deftere kaydı. Sonra sobaya." },
+                {
+                  "speaker": "player",
+                  "text": "Bir defter. Kulübenin camının önünde. Gündüz okuyamazdım; okumam lazım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            {
+              "type": "IF",
+              "when": { "hasEvidence": "clue_defter" },
+              "then": [
+                { "type": "DISCOVER", "evidence": "clue_yasar" },
+                { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "YQ_SELIM",
+          "kind": "OPTION",
+          "label": "“Selim’i işten çıktıktan sonra gördünüz mü?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "yasar",
+                  "text": "Görmedim. Kartını bıraktı, bana bir paket simit bıraktı, “Usta hakkını helal et” dedi. Bir daha gelmedi."
+                },
+                {
+                  "speaker": "yasar",
+                  "text": "Gelemez de zaten. Kartı yok. Kartı olmayan bu turnikeden geçemez; ben açmazsam."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kartı olmayan geçemez. Kartı olan geçer. Kartlar kimdeyse.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
+        },
+        {
+          "id": "YQ_KORKU",
+          "kind": "OPTION",
+          "label": "“Bunları anlatmaktan çekiniyor musunuz?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "yasar",
+                  "text": "Çekinmez miyim kızım? İki yıl sonra emekliyim. Kapıdan atarlarsa nereye giderim? Kırk yaşında olsam neyse."
+                },
+                {
+                  "speaker": "yasar",
+                  "text": "Ama yalan da söylemem. Otuz yıldır bu deftere ne gördüysem onu yazdım. Defter benim namusum."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
+        },
+        {
+          "id": "YASAR_KARAR",
+          "kind": "CONTINUE",
+          "label": "Tanıklığını konuş",
+          "role": "PRIMARY",
+          "enabledWhen": { "hasEvidence": "clue_yasar" },
+          "lockedReason": "Önce o geceyi sor.",
+          "next": "INV_T_YASAR_K"
+        },
+        { "id": "YASAR_BITIR", "kind": "CONTINUE", "label": "Çay için teşekkür et", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_T_YASAR_K",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "TANIKLAR",
+      "title": "Yaşar Kılıç",
+      "background": "depo_gece",
+      "room": { "label": "FABRİKA KAPISI · KULÜBE", "character": "yasar" },
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "yasar",
+              "text": "Mahkemeye mi çağıracaksın beni? Ben mahkemeye bir kere gittim; tarla davası. Kırk yıl sürdü, tarla kaldı, adam kalmadı."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "YD_BILDIR",
+          "kind": "OPTION",
+          "label": "Sizi tanık olarak bildireceğim",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sizi tanık olarak bildireceğim Yaşar Usta. Mahkeme çağıracak. Defterinize ne yazdıysanız, ne gördüyseniz onu anlatacaksınız. Fazlasını değil."
+                },
+                { "speaker": "yasar", "text": "Fazlasını değil. Peki. Defter ne diyorsa o." },
+                {
+                  "speaker": "narrator",
+                  "text": "Kapıya kadar geçirdi beni. Yağmur durmuştu; asfalt fabrika ışıklarını yansıtıyordu."
+                },
+                { "speaker": "yasar", "text": "Bir de… Selim’e selam söyle. Simit borcum var ona." }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 50 },
+            { "type": "VAR", "var": "yasar_tanik", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Saat ve giriş bilgisi veren tanığı delil dilekçesiyle bildirmek, beyanın duruşmada doğrudan dinlenmesini sağlar (CMK 177–178).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "YD_SAAT",
+          "kind": "OPTION",
+          "label": "“Saati sorarlarsa tam 23.05 deyin; şaşmayın.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Saati sorarlarsa tam 23.05 deyin. Şaşmayın. Savcı sizi şaşırtmaya çalışır."
+                },
+                { "speaker": "yasar", "text": "23.05. Peki kızım. Ezberlerim." },
+                { "speaker": "narrator", "text": "Bir an durdu. Deftere baktı." },
+                {
+                  "speaker": "yasar",
+                  "text": "Ama defterde zaten yazıyor. Niye ezberleteyim? Ben gördüğümü söylerim."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Haklıydı. Benim söylediğim, onun gördüğünün üstüne yazılan bir cümleydi. Bir savcı bunu kolayca kazır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "yasar_kocluk", "op": "set", "value": true },
+            { "type": "VAR", "var": "yasar_tanik", "op": "set", "value": true },
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Tanığa ne söyleyeceğini ezberletmek tanığı yönlendirmektir (Av.K. 34) ve beyanın değerini yok eder; yalan tanıklığa azmettirme riski taşır (TCK 272, 38).",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        {
+          "id": "YD_YAZILI",
+          "kind": "OPTION",
+          "label": "Yazılı bir beyan yeter",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bir kâğıda yazıp imzalasanız yeter Yaşar Usta. Gelmenize gerek kalmaz."
+                },
+                { "speaker": "yasar", "text": "Yazarım. Ama kâğıt soru sorulunca cevap vermez kızım; sen bilirsin." },
+                {
+                  "speaker": "player",
+                  "text": "Mahkeme, dinleyebileceği tanığın kâğıdını okumaz. Bunu biliyordum. Onun korkusunu kolaylaştırdım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": -30 }],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Duruşmada dinlenebilecek tanığın beyanı yerine yazılı belge okunamaz (CMK 210/1).",
+            "category": "USUL_BILGISI"
+          }
+        }
+      ]
+    },
+    {
+      "id": "INV_T_HAKAN",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "TANIKLAR",
+      "title": "Kom. Yrd. Hakan Ilgaz",
+      "background": "karakol",
+      "room": { "label": "EMNİYET ÖNÜ", "character": "hakan" },
+      "onFirstEnter": [{ "type": "MEET", "character": "hakan" }],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 12.20 — EMNİYET MÜDÜRLÜĞÜ, SİBER BÜRO ÖNÜ",
+              "style": "card",
+              "bg": "karakol"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Hakan Ilgaz merdivende bir simit yiyordu; yarısını güvercinlere atıyordu. Beni görünce simidi kâğıda sardı."
+            },
+            {
+              "speaker": "hakan",
+              "text": "Avukat hanım. Aktaş dosyası. Öğle arasıyım; on dakika. Mahkemede ne soracaksanız sorun, burada ifade vermem."
+            },
+            {
+              "speaker": "hakan",
+              "text": "Size bir rakam vereyim: büroda dört kişiyiz, masamızda üç yüz on iki dosya var. Dolandırıcılık, şantaj, çocuk… Bu dosya bizim için “kolay” dosyaydı. Şirket raporu getirdi, isim belliydi."
+            },
+            { "speaker": "hakan", "text": "Kolay dosyaları severiz avukat hanım. Zor dosyalara vakit kalsın diye." },
+            {
+              "speaker": "player",
+              "text": "Yorgun bir adam. Kötü değil. Yorgunluk, bir soruyu sormamak için en eski gerekçedir.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "HQ_IMAJ",
+          "kind": "OPTION",
+          "label": "“Şirketin sunucusunu kim inceledi?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "hakan",
+                  "text": "Biz incelemedik. Şirket, DataKale’nin aldığı imajı ve raporunu getirdi. Diskler şirkette kaldı; üretim duramaz dediler."
+                },
+                {
+                  "speaker": "hakan",
+                  "text": "Biz sanığın bilgisayarına baktık. Kurallara uygun: arama kararı, tutanak, imaj, özet değer. Orada kusur bulamazsınız."
+                },
+                { "speaker": "player", "text": "Peki şirket tarafında?" },
+                { "speaker": "hakan", "text": "Şirket tarafında… elimize ne verdilerse onu inceledik. Bu kadar." },
+                {
+                  "speaker": "player",
+                  "text": "“Elimize ne verdilerse.” Bir dosyanın yarısı bir polisin eline hiç geçmemiş.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_hakan" },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 }
+          ]
+        },
+        {
+          "id": "HQ_DIZUSTU",
+          "kind": "OPTION",
+          "label": "“Selim’in bilgisayarında ne buldunuz?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "hakan",
+                  "text": "Cuma akşamı bir bağlantı. 21.30, yirmi dakika. Kendi klasörünü kopyalamış; fotoğraflar, bir özgeçmiş. Rapora yazdık."
+                },
+                {
+                  "speaker": "hakan",
+                  "text": "Gece yarısından sonrası? Hiçbir şey. Bilgisayar kapalı. Ama savcı “başka bir cihaz kullanmış olabilir” dedi. Olabilir. Olmayabilir de."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Polis, kendi raporunda bir boşluk bırakmış; savcı o boşluğa bir varsayım koymuş.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_emn", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "HQ_DISK",
+          "kind": "OPTION",
+          "label": "“Orijinal diskler şimdi nerede?”",
+          "visibleWhen": { "hasEvidence": "clue_hakan" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "hakan", "text": "Şirkette. Sunucu odasında, çalışıyor olmalı. Kimse el koymadı." },
+                { "speaker": "narrator", "text": "Bir an durdu. Simidin kâğıdını katladı." },
+                {
+                  "speaker": "hakan",
+                  "text": "Biri isterse, mahkeme bilirkişi atar, gider orijinalden yeni imaj alır. Ama kimse istemedi. Siz isteyecek misiniz?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir polisin “siz isteyecek misiniz” sorusu bir tavsiye değildir. Ama bir tavsiye kadar ağırdır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_disk", "op": "set", "value": true }
+          ]
+        },
+        { "id": "HAKAN_BITIR", "kind": "CONTINUE", "label": "Teşekkür et, ayrıl", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_T_BULENT",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "TANIKLAR",
+      "title": "Bülent Arıkan",
+      "background": "buro",
+      "room": { "label": "DATAKALE BİLİŞİM", "character": "bulent" },
+      "onFirstEnter": [{ "type": "MEET", "character": "bulent" }],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 16.00 — DATAKALE BİLİŞİM, FSM BULVARI",
+              "style": "card",
+              "bg": "buro"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Cam bir ofis. Duvarlarda “Siber Güvenlik Uzmanı” sertifikaları, çerçeveli. Köşede bir golf çantası; sopaların başlarına örgü kılıflar geçirilmiş."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bülent Arıkan kırklarının başında, spor ceketli, kulağında kablosuz bir kulaklık. Elimi sıkarken telefonuna baktı."
+            },
+            {
+              "speaker": "bulent",
+              "text": "Avukat hanım, hoş geldiniz. Beş dakikam var, sonra bir müşteriye bağlanacağım. Rapor ortada; teknik olarak tartışılacak bir şey yok aslında."
+            },
+            {
+              "speaker": "bulent",
+              "text": "Selim’i tanırım. Yetenekli çocuktur. Ama biraz… kendini sistemin sahibi sanır. İşten çıkarılınca da şey yaptı işte. Teknik olarak bu tür olaylar yüzde yetmiş içeriden olur."
+            },
+            {
+              "speaker": "player",
+              "text": "“Teknik olarak” diye başlayan her cümle, teknik olmayan bir şey söyler.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "BQ_IMAJ",
+          "kind": "OPTION",
+          "label": "“İmajı ne zaman aldınız?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "bulent",
+                  "text": "Aynı sabah. Tarık Bey aradı, koştuk. Olay yerine ilk biz girdik, her şeyi dondurduk. Altın kural: önce imaj."
+                },
+                { "speaker": "bulent", "text": "Raporda her şey yazıyor. Tarih, saat, özet değer. Profesyonel iş." },
+                {
+                  "speaker": "player",
+                  "text": "“Aynı sabah.” Bu cümleyi bir yere yazdım. Raporun künyesiyle karşılaştıracağım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_bulent_sabah", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "BQ_KURTARMA",
+          "kind": "OPTION",
+          "label": "“İmajdan önce sistemde bir şey yaptınız mı?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "bulent",
+                  "text": "Yani… şirket ayağa kalkmak istiyordu. Siparişler. Tarık Bey “ne kurtarırsak kârdır” dedi."
+                },
+                {
+                  "speaker": "bulent",
+                  "text": "Cumartesi sabahı biraz kurcaladık; belki kurtarırız diye. Kurtarma programları, bilirsiniz. Standart prosedür. Sonra imaj aldık."
+                },
+                { "speaker": "narrator", "text": "Kendi cümlesinin ortasında durdu. Kulaklığını çıkardı." },
+                { "speaker": "bulent", "text": "Ama bu sonucu değiştirmez. Teknik olarak." },
+                {
+                  "speaker": "player",
+                  "text": "Sonucu değiştirmez mi? Bir olay yerinde iki gün dolaşıp sonra fotoğraf çekmek gibi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_bulent" },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 }
+          ]
+        },
+        {
+          "id": "BQ_TARIK",
+          "kind": "OPTION",
+          "label": "“Tarık Bey’i ne zamandır tanıyorsunuz?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "bulent",
+                  "text": "On beş yıl. Golften. Kulüpte tanıştık; o zaman DataKale iki kişiydi, şimdi otuz. Nilüfer Örme ilk büyük müşterimizdi."
+                },
+                { "speaker": "bulent", "text": "Arkadaşız, evet. Ama iş iştir. Rapor tarafsız." },
+                {
+                  "speaker": "player",
+                  "text": "İlk büyük müşteri. On beş yıl. Golf. Tarafsızlık, bu üç kelimenin yanında biraz zayıf duruyor.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 15 },
+            { "type": "VAR", "var": "fact_golf", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "BQ_TEHDIT",
+          "kind": "OPTION",
+          "label": "“Bu raporla meslekten men edilebilirsiniz.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "bulent",
+                  "expression": "kizgin",
+                  "text": "Men mi? Benim meslek odam yok avukat hanım, şirketim var. Avukatımla konuşun. Çıkışı biliyorsunuz."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kapıyı açtı. Golf çantasının yanından geçerken sopalardan biri devrildi; kaldırmadı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kazanamayacağım bir kavgaya girdim. Hem de kürsüye çıkacak bir tanıkla.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": -30 }],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Tanık olacak bir uzmanı ofisinde tehdit etmek ondan bilgi almaz; duruşmada sana karşı daha da kapanır.",
+            "category": "SORGULAMA"
+          }
+        },
+        { "id": "BULENT_BITIR", "kind": "CONTINUE", "label": "Teşekkür et, ayrıl", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_T_TARIK",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "TANIKLAR",
+      "title": "Tarık Sezer",
+      "background": "buro",
+      "room": { "label": "GENEL MÜDÜRLÜK", "character": "tarik" },
+      "onFirstEnter": [
+        { "type": "MEET", "character": "tarik" },
+        { "type": "VAR", "var": "tarik_ziyaret", "op": "set", "value": true },
+        { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+        { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
+        {
+          "type": "MARK",
+          "quality": "BAD",
+          "feedback": "Katılan şirketin vekili varken onun bilgisi olmadan şirketin genel müdürüyle görüştün; meslek kurallarına aykırı (TBB Meslek Kuralları 38; Av.K. 34).",
+          "category": "SAVUNMA_STRATEJISI"
+        }
+      ],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "CUMA 10.30 — NİLÜFER ÖRME, GENEL MÜDÜRLÜK KATI",
+              "style": "card",
+              "bg": "buro"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ceviz bir masa, deri koltuklar, duvarda bir ihracat ödülü ve çerçeveli bir golf turnuvası fotoğrafı. Pencereden dokuma salonunun çatısı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tarık Sezer kapıda karşıladı, elimi iki eliyle sıktı. Sekreterine çay söyledi; “Avukat hanımınkini ince belli getir” dedi."
+            },
+            {
+              "speaker": "tarik",
+              "text": "Evladım, hoş geldiniz. Bu iş beni de çok üzdü, inanın. Selim’i ben işe aldım. Oğlum gibiydi. Oğullar da bazen babalarına kızar, değil mi?"
+            },
+            {
+              "speaker": "tarik",
+              "text": "Ben bu şirketi otuz yıl önce iki makineyle kurdum. Siparişler, tasarımlar… on iki yılın emeği bir gecede gitti. Ama kin tutmuyorum. Yeter ki gerçek ortaya çıksın."
+            },
+            {
+              "speaker": "player",
+              "text": "Sıcak bir el, ince belli bir bardak, bir “evladım.” Bu odada herkes misafir; ama kimse rahat değil.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonu çaldı. “Ozan, avukat hanım burada” dedi. Bir an dinledi; yüzü değişmedi. “Tabii, tabii” dedi ve kapattı."
+            },
+            { "speaker": "tarik", "text": "Avukatımız biraz kızdı. Siz yine de çayınızı için." }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "TQ_SIFRE",
+          "kind": "OPTION",
+          "label": "“Selim ayrılırken şifreleri kime teslim etti?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Şifre mi? Ben teknik adam değilim evladım. Şifre mifre bilmem. O işleri Bülent’e bırakırım; ben telefonumun şifresini bile kızıma sorarım."
+                },
+                { "speaker": "narrator", "text": "Güldü. Çayını karıştırdı; kaşık bardağa hiç değmedi." },
+                {
+                  "speaker": "player",
+                  "text": "“Şifre mifre bilmem.” Bir cümle. Bir gün bir tutanağın yanına koyulabilir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_tarik_sifre", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TQ_YEDEK",
+          "kind": "OPTION",
+          "label": "“Yedek sistemi neden çalışmıyordu?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Aylardır arızalıydı. Selim ilgilenmedi; para istedi, “bütçe” dedi. Bir yedek cihazı için iki bin dolar. Ben size söyleyeyim, o cihaz bahaneydi."
+                },
+                {
+                  "speaker": "tarik",
+                  "text": "Gitmeden önce de bozup gitmiştir belki. Bilemem. Ben teknik adam değilim."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Aylardır arızalıydı.” Şikâyette de aynı cümle var. Kelimesi kelimesine.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_tarik_yedek", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TQ_SIGORTA",
+          "kind": "OPTION",
+          "label": "“Şirketin siber sigortası var mı?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Var tabii; her şirketin var. Ama ben o işlerle ilgilenmem; mali işler bakar. Zaten olaydan sonra konuştuk, eksik olmasın."
+                },
+                { "speaker": "narrator", "text": "Ayağa kalktı. Pencereye yürüdü. Dokuma salonunun çatısına baktı." },
+                {
+                  "speaker": "tarik",
+                  "text": "Evladım, sizin de işiniz bu; anlıyorum. Ama o çocuğu savunurken bu şirketin üç yüz işçisini de düşünün. Siparişsiz kalırsak onlar ne yapacak?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Üç yüz işçi. Bir tutanak. Bir sigorta “olaydan sonra.” Çayımı bitirmeden kalktım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
+        },
+        { "id": "TARIK_BITIR", "kind": "CONTINUE", "label": "Teşekkür et, ayrıl", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_kisisel", "source": { "type": "CHOICE", "id": "TP_2130" } },
+    { "evidence": "clue_yasar", "source": { "type": "CHOICE", "id": "YQ_GECE" } },
+    { "evidence": "clue_hakan", "source": { "type": "CHOICE", "id": "HQ_IMAJ" } },
+    { "evidence": "clue_bulent", "source": { "type": "CHOICE", "id": "BQ_KURTARMA" } }
+  ]
+}

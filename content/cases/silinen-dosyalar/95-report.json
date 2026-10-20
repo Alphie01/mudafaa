@@ -1,0 +1,86 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_hash",
+        "when": { "not": { "hasEvidence": "clue_hash" } },
+        "text": "DataKale raporundaki iki özet değeri karşılaştırmadın; biri “…71c2”, biri “…08be” ile bitiyordu. İmajın bütünlüğü (CMK 134) buna dayanıyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kurtarma",
+        "when": { "not": { "hasEvidence": "clue_kurtarma" } },
+        "text": "Raporun Ek-3’ünü okumadın: imajdan önce iki gün boyunca diske kurtarma yazılımı yazılmıştı. Delilin elde etme zinciri oradan kırılıyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_devir",
+        "when": { "not": { "hasEvidence": "ev_devir" } },
+        "text": "Selim’in evindeki devir-teslim tutanağını almadın; yönetici şifrelerinin genel müdüre zarfla teslim edildiğini gösteriyordu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_eposta",
+        "when": { "not": { "hasEvidence": "ev_eposta" } },
+        "text": "Gül’ün çekmecesindeki e-posta çıktısını bulmadın; 21.30 girişinin izinli olduğunun kanıtıydı (TCK 243/1 rıza).",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_cihaz",
+        "when": {
+          "all": [
+            { "any": [{ "hasEvidence": "ev_tam_log" }, { "hasEvidence": "ev_sema" }] },
+            { "not": { "hasEvidence": "clue_cihaz_adi" } },
+            { "not": { "hasEvidence": "clue_sema_cihaz" } }
+          ]
+        },
+        "text": "Ham kayıttaki cihaz adını incelemedin: 21.30 SELIM-PC, 02.14 ise NOS-GM-LT. Silme başka bir cihazdandı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_turnike",
+        "when": { "not": { "hasEvidence": "ev_turnike" } },
+        "text": "Kart geçiş kayıtlarını istemedin; silme gecesi sunucu odasına kimin girdiğini ve NOS-GM-LT’nin kimin zimmetinde olduğunu gösteriyordu.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_operator",
+        "when": { "not": { "hasEvidence": "ev_operator" } },
+        "text": "Silme oturumunun geldiği GSM hattını operatörden istemedin; hat genel müdüre tahsisliydi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_zeyil",
+        "when": { "not": { "hasEvidence": "ev_zeyil" } },
+        "text": "Sigorta poliçesini istemedin; limit olaydan önce on katına çıkarılmış ve çalışan sabotajı teminatı eklenmişti (saik).",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_bilirkisi",
+        "when": { "not": { "flag": "bilirkisi_atandi" } },
+        "text": "İlk celsede mahkemeden bağımsız bilirkişi atanmasını ve orijinal disklerin muhafazasını isteyebilirdin (CMK 63, 134).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_bildir",
+        "when": { "all": [{ "flag": "fact_gm" }, { "not": { "flag": "bildirdi" } }] },
+        "text": "Silmenin başka birinden çıktığını gösteren delilleri savcılığa yazılı olarak bildirmedin (CMK 158, 160). Faili kovalamak ya da beklemek değil, bildirmek doğru yoldur.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_etik",
+        "when": {
+          "any": [
+            { "flag": "yasar_kocluk" },
+            { "flag": "nalan_belge" },
+            { "flag": "tarik_yuzles" },
+            { "flag": "selim_giris" },
+            { "flag": "tarik_ziyaret" }
+          ]
+        },
+        "text": "Etik çizgiyi zorladın: tanığa söz ezberletmek, çalışana belge çaldırmak, faille yüzleşmek ya da müvekkile izinsiz giriş yaptırmak (Av.K. 34; TCK 243, 272, 277; CMK 158).",
+        "category": "SAVUNMA_STRATEJISI"
+      }
+    ]
+  }
+}

@@ -1,0 +1,292 @@
+{
+  "scenes": [
+    {
+      "id": "sc_sunucu",
+      "title": "Sunucu odası · 18 Ekim fotoğrafları",
+      "description": "Şikâyet dilekçesine eklenmiş yirmi dört fotoğraf; şirketin kendi çektikleri.",
+      "width": 344,
+      "height": 380,
+      "image": "img_sunucu",
+      "objects": [
+        {
+          "id": "ob_yedek",
+          "name": "Yedek cihazı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 30, "y": 150, "w": 90, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_son_yedek" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Fotoğraf 7. Rafın altındaki yedek cihazının küçük yeşil ekranı. Büyüttüm: “Son başarılı yedek: 17.10 22.00.” Şikâyette “yedek sistemi aylardır çalışmıyordu” yazıyor.",
+            "short": "Son yedek cuma 22.00"
+          }
+        },
+        {
+          "id": "ob_yuva",
+          "name": "Arka panel",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 30, "y": 210, "w": 90, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_bos_yuva" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Fotoğraf 9, arkadan. Kabloların hepsi yerinde, biri hariç: yedek cihazının bağlantısı. Yuvanın çevresindeki tozda temiz bir dikdörtgen. Kablo aylardır değil, yakın zamanda çekilmiş.",
+            "short": "Sökülmüş kablo"
+          }
+        },
+        {
+          "id": "ob_okuyucu",
+          "name": "Kapı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 280, "y": 140, "w": 40, "h": 60 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kartli_kapi" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Kapının yanında kartlı okuyucu. Üstünde boş bir kamera yuvası; vidaları paslanmış. Bu odaya kartsız girilmez. Kart da her girişi bir yere yazar.",
+            "short": "Kartlı giriş"
+          }
+        },
+        {
+          "id": "ob_klima",
+          "name": "Klima",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 130, "y": 20, "w": 110, "h": 40 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Tavana asılı klima, ekranında 18 derece. Sunucular serin sever. Bu fotoğraf bana yalnızca üşüdüğümü hatırlattı.",
+            "short": "Klima"
+          }
+        },
+        {
+          "id": "ob_tup",
+          "name": "Yangın tüpü",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 270, "y": 280, "w": 40, "h": 70 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 },
+            { "type": "MARK", "quality": "NEUTRAL", "feedback": "Dosyayla ilgisiz bir ayrıntı; zaman kaybı." }
+          ],
+          "feedback": {
+            "text": "Kırmızı bir yangın tüpü, son kontrol etiketi geçen yıl. Bu odada yanan bir şey yok. Sadece silinen.",
+            "short": "Tüp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_ev",
+      "title": "Aktaşların evi · Nilüfer",
+      "description": "İki oda bir salon; salonun köşesi Selim’in çalışma masası.",
+      "width": 344,
+      "height": 380,
+      "image": "img_ev",
+      "objects": [
+        {
+          "id": "ob_cekmece",
+          "name": "Mutfak çekmecesi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 30, "y": 260, "w": 90, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_eposta" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Gül çekmeceyi açtı: faturalar, garanti belgeleri, bir zarfın içinde katlanmış bir A4. “Bunu basıp koymuştum, ne olur ne olmaz.” Bir e-posta: 30 Eylül, 18.02, gönderen T. Sezer.",
+            "short": "Bir e-posta çıktısı"
+          }
+        },
+        {
+          "id": "ob_masa",
+          "name": "Çalışma masası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 180, "y": 200, "w": 130, "h": 60 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_devir" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Masada polisin bıraktığı boşluk: dizüstünün yeri. Yanında etiketli karton dosyalar. “İŞ – AYRILIŞ” yazanın içinde iki imzalı bir tutanak. Selim’in nüshası.",
+            "short": "İmzalı tutanak"
+          }
+        },
+        {
+          "id": "ob_modem",
+          "name": "Modem",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 110, "w": 60, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_modem" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Modemin üstünde etiket makinesiyle basılmış bir şerit: “Ev hattı · sabit adres.” Gül güldü, ilk kez: “Her şeyi etiketler. Buzdolabındaki yoğurdu bile.”",
+            "short": "Etiketli modem"
+          }
+        },
+        {
+          "id": "ob_resim",
+          "name": "Duvardaki resim",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 60, "w": 70, "h": 70 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Defne’nin pastel resmi: bir masa, bir ekran, ekranın önünde bir adam. Altında yamuk harflerle: “BABAM ÇALIŞIYOR.” Kanıt değil. Ama duvardan indirmedim.",
+            "short": "Defne’nin resmi"
+          }
+        },
+        {
+          "id": "ob_saat",
+          "name": "Duvar saati",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 20, "w": 40, "h": 40 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Pilli bir duvar saati, üç dakika geri. Selim’in evinde bile bir şey senkronize değil. Belki de bu evde kimse saate değil, birbirine bakıyor.",
+            "short": "Saat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_kapi",
+      "title": "Nilüfer Örme · fabrika kapısı",
+      "description": "Organize sanayideki fabrikanın ana kapısı; bekçi kulübesi ve turnike, dışarıdan.",
+      "width": 344,
+      "height": 380,
+      "image": "img_kapi",
+      "objects": [
+        {
+          "id": "ob_defter",
+          "name": "Kapı defteri",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 220, "w": 80, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_defter" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Yaşar Usta defteri camın önüne çevirdi; dokunmama izin vermedi, okumama verdi. Cuma 17 Ekim: “23.05 GM aracı. Evrak.” Çıkış: “23.34.” Kurşun kalem, eğik harfler.",
+            "short": "Cuma 23.05 · GM aracı"
+          }
+        },
+        {
+          "id": "ob_turnike",
+          "name": "Turnike",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 210, "y": 180, "w": 50, "h": 110 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_turnike", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Kart okutulan paslanmaz bir turnike; üstünde küçük bir ekran: “Geçiş kaydedildi.” Her kart, her saat, bir sunucuda. Bunu isteyebilirim; mahkeme kanalıyla.",
+            "short": "Kart kaydı tutuyor"
+          }
+        },
+        {
+          "id": "ob_park",
+          "name": "Park yeri",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 270, "y": 300, "w": 70, "h": 50 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Bir park yeri, beyaz boyayla yazılmış: “GENEL MÜDÜR.” Boş. Sabah dokuzdan önce kimse buraya araba koymaz.",
+            "short": "Boş park yeri"
+          }
+        },
+        {
+          "id": "ob_servis",
+          "name": "Servis tabelası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 40, "w": 80, "h": 50 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Vardiya servislerinin saatleri: 07.30, 15.30, 23.30. Cuma gecesi son servis 23.30’da kalkmış. Bu bilgi kimsenin işine yaramıyor; benimki dahil.",
+            "short": "Servis saatleri"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_eksper",
+      "title": "Sigorta eksper raporu · sunucu odası",
+      "description": "Sigortacının mahkemeye gönderdiği hasar dosyasındaki fotoğraflar.",
+      "width": 344,
+      "height": 380,
+      "image": "img_eksper",
+      "objects": [
+        {
+          "id": "ob_damga",
+          "name": "Tarih damgası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 240, "y": 20, "w": 90, "h": 30 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_eksper" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Fotoğrafın köşesinde kameranın turuncu damgası: “18.10 11.20.” Eksper odada; cumartesi sabahı. Şikâyet ve imaj iki gün sonra.",
+            "short": "Damga 18.10 11.20"
+          }
+        },
+        {
+          "id": "ob_zdefter",
+          "name": "Ziyaretçi defteri",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 240, "w": 90, "h": 60 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ziyaretci" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Kapının içinde, raf üstünde açık bir defter. Fotoğrafı büyüttüm: “17.10 · 23.11 · T.S. · kontrol.” Bir paraf. Bir saat. Bir cuma gecesi.",
+            "short": "23.11 · T.S."
+          }
+        },
+        {
+          "id": "ob_raf",
+          "name": "Sunucu rafı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 100, "w": 100, "h": 160 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Aynı raf, aynı ışıklar; Selim’in yıllarca baktığı makineler. Fotoğrafta bir şey eksik değil. Eksik olan, içlerindeydi.",
+            "short": "Raf"
+          }
+        },
+        {
+          "id": "ob_kahve",
+          "name": "Kahve bardağı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 270, "y": 300, "w": 50, "h": 40 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Eksperin unuttuğu bir karton bardak, kapağında ruj izi yok, bir golf kulübünün logosu var. Bursa’da üç golf sahası var; herkes birine gider.",
+            "short": "Karton bardak"
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "id": "img_sunucu", "kind": "IMAGE", "path": "assets/scenes/sunucu-odasi@4x.png" },
+    { "id": "img_ev", "kind": "IMAGE", "path": "assets/scenes/aktas-evi@4x.png" },
+    { "id": "img_kapi", "kind": "IMAGE", "path": "assets/scenes/fabrika-kapisi@4x.png" },
+    { "id": "img_eksper", "kind": "IMAGE", "path": "assets/scenes/eksper-fotograflari@4x.png" }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_son_yedek", "source": { "type": "OBJECT", "id": "ob_yedek" } },
+    { "evidence": "clue_bos_yuva", "source": { "type": "OBJECT", "id": "ob_yuva" } },
+    { "evidence": "clue_kartli_kapi", "source": { "type": "OBJECT", "id": "ob_okuyucu" } },
+    { "evidence": "ev_eposta", "source": { "type": "OBJECT", "id": "ob_cekmece" } },
+    { "evidence": "ev_devir", "source": { "type": "OBJECT", "id": "ob_masa" } },
+    { "evidence": "clue_modem", "source": { "type": "OBJECT", "id": "ob_modem" } },
+    { "evidence": "clue_defter", "source": { "type": "OBJECT", "id": "ob_defter" } },
+    { "evidence": "clue_eksper", "source": { "type": "OBJECT", "id": "ob_damga" } },
+    { "evidence": "clue_ziyaretci", "source": { "type": "OBJECT", "id": "ob_zdefter" } }
+  ]
+}

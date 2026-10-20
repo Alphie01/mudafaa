@@ -1,43 +1,39 @@
-import { chapter, court, phase } from '../../../tools/content/src/kit/index.js';
+import { chapter, court, dec, inc, phase } from '../../../tools/content/src/kit/index.js';
+import type { Effect } from '../../../tools/content/src/kit/index.js';
 
-// Dava genelinde paylaşılan tanımlar: bölüm etiketleri, soruşturma evreleri ve duruşma salonları.
-// TODO: bölüm adlarını ve evre takvimini hikâyeye göre düzenle (kılavuz: docs/content/authoring-guide.md §2).
+// Dava genelinde paylaşılan tanımlar: bölüm etiketleri, soruşturma evresi ve duruşma salonları.
 
-export const BRIEF = chapter('Brifing', 'DAVA #13 · BRİFİNG');
-export const INV1 = chapter('Soruşturma · 1. evre', 'DAVA #13 · SORUŞTURMA');
-export const HEAR1 = chapter('1. Celse', 'DURUŞMA · 1. CELSE');
-export const INV2 = chapter('Soruşturma · 2. evre', 'DAVA #13 · SORUŞTURMA');
-export const TRIAL = chapter('2. Celse', 'DURUŞMA · 2. CELSE');
-export const VERDICT = chapter('Karar', 'DAVA #13 · HÜKÜM');
+export const PRO = chapter('Soğuk Açılış', 'DAVA #13 · SOĞUK AÇILIŞ');
+export const C1 = chapter('Bölüm 1 · Dosya', 'DAVA #13 · BÖLÜM 1');
+export const INV = chapter('Bölüm 2 · Soruşturma', 'DAVA #13 · SORUŞTURMA');
+export const H1 = chapter('Bölüm 3 · Birinci Celse', 'DURUŞMA · 1. CELSE');
+export const ARA = chapter('Bölüm 4 · Ara', 'DAVA #13 · ARA');
+export const H2 = chapter('Bölüm 5 · İkinci Celse', 'DURUŞMA · 2. CELSE');
 
-/** 1. evre: 1. celseden önce. */
+/** Soruşturma: 3 gün × 5 eylem puanı (push / $return). */
 export const p1 = phase({
-  hub: 'INV1_HUB',
-  dayEnd: 'INV1_DAY_END',
-  trigger: 'tg_inv1_day',
+  hub: 'INV_HUB',
+  dayEnd: 'INV_DAY_END',
+  trigger: 'tg_day_end',
   dayVar: 'day',
   apVar: 'ap',
-  days: 2,
-  ap: 3,
+  days: 3,
+  ap: 5,
 });
 
-/** 2. evre: ters köşeden sonra, 2. celseden önce (ayrı değişkenler). */
-export const p2 = phase({
-  hub: 'INV2_HUB',
-  dayEnd: 'INV2_DAY_END',
-  trigger: 'tg_inv2_day',
-  dayVar: 'day2',
-  apVar: 'ap2',
-  days: 2,
-  ap: 2,
-});
+/** Ara evresi: 3 gün × 3 eylem puanı; yığınsız (etkinlikler doğrudan ARA_HUB'a döner). */
+export const ARA_DAYS = 3;
+export const ARA_AP = 3;
 
-/** Ağır ceza heyeti: üye hâkim, başkan, cumhuriyet savcısı. */
+/** Bursa 9. Asliye Ceza: tek hâkim; solda katılan vekili, sağda Cumhuriyet savcısı. */
 const bench = [
-  ['uye', 'ÜYE HÂKİM', 0.2],
-  ['baskan', 'BAŞKAN', 0.5],
-  ['savci', 'C. SAVCISI', 0.8],
+  ['ozan', 'KATILAN VEKİLİ', 0.2],
+  ['kemal', 'HÂKİM', 0.5],
+  ['ferda', 'C. SAVCISI', 0.8],
 ] as const;
 
-export const court1 = court({ bench, counsel: 'deniz', hud: ['cred', 'pers'], ...HEAR1 });
-export const court2 = court({ bench, counsel: 'deniz', hud: ['cred', 'pers'], ...TRIAL });
+export const court1 = court({ bench, counsel: 'deniz', hud: ['cred', 'pers'], ...H1 });
+export const court2 = court({ bench, counsel: 'deniz', hud: ['cred', 'pers'], ...H2 });
+
+/** Yanlış sunum / dayanaksız itiraz ortak etkileri. */
+export const wrongMove: Effect[] = [dec('cred'), dec('pers'), inc('wrong')];

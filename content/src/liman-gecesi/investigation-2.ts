@@ -32,7 +32,7 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, ChoiceDef } from '../../../tools/content/src/kit/index.js';
 import { B, O, W, retarget } from './dsl.js';
-import { INV_POOL, firstTime, invRecipes } from './investigation-1.js';
+import { firstTime } from './investigation-1.js';
 import { ARA, ARA_AP, ARA_DAYS } from './shared.js';
 
 // 65-ara: 1. ve 2. celse arası (3 gün × 2 EP; yığınsız). Nihai rapor ve mahkemenin müzekkere cevapları gelir; Sevim
@@ -722,7 +722,10 @@ kenan: Sen kimin avukatısın? O çocuğun. Onu savun. Başkasının kapısını
 // --- Tahta ---
 
 const ARA_POOL = [
-  ...INV_POOL,
+  'clue_desen',
+  'clue_arama2341',
+  'clue_servis_arac',
+  'clue_pamuk',
   'clue_koni',
   'clue_mont',
   'clue_tarik_koni',
@@ -743,7 +746,6 @@ const cikarim = retarget(
 `),
     pool: ARA_POOL,
     recipes: [
-      ...invRecipes('CA'),
       recipe('CA_SILAH', 'clue_koni', 'clue_desen', {
         effects: firstTime('ded_silah'),
         feedback: feedbackNew(

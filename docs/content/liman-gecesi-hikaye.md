@@ -43,7 +43,7 @@
 | **Leyla Erdem** (mentor) | 58, büronun kurucusu. | Az konuşur, her cümlesi bir ders; kapalı sigara paketini çevirir. | Ters çerçeve masada (Dava #15 tohumu, yalnızca bir ima). | Deniz'i izler; etik çizgide sert. |
 | **Tarık Demirel** (müvekkil) | 33, laşing işçisi, Rize'den Mudanya'ya göçmüş; bir kızı (Elif, 6) var. | Kısa cümleler, Karadeniz ağzından kırıntılar ("ha", "da"), kendi ellerine bakarak konuşur. Utandıkça susar. | Kolluğa "ittim, düştü" dedi; yumruğu utancından sakladı. Eve 00.10'da döndü; arada iskelede ağladı, bunu kimseye söylemedi. Ağabeyi Emre iki yıl önce gece yüklemesinde konteyner altında kaldı. | Utanç → dürüstlük. Duruşmada "vurdum" diyebildiği an, savunmanın kurulduğu andır. |
 | **Gülay Demirel** (eş) | 30, evde terzilik yapar. | Hızlı, pratik, cümlesini bitirmeden ikincisine geçer; iğneyi yakasına takar. | Kocasının eve geç geldiğini biliyor ve bunun aleyhe kullanılacağından korkuyor: "23.30'da geldi derim" önerisi. | Korku → güven. Doğruyu söylemeyi seçerse duruşmada en güçlü tanık olur. |
-| **Kenan Aksoy "Kaptan"** (vardiya şefi) | 52, eski römorkör kaptanı; limanda herkes ona Kaptan der. | Babacan, deniz benzetmeleriyle konuşur ("Deniz durgunken herkes kaptan"), herkese "evlat" der; konuşurken elini bir bez parçasına siler. | Gece yüklemelerinde manifestoya girmeyen konteynerler. Ercan bunu biliyordu ve "yarın her şeyi anlatırım" dedi. | Yardımsever tanık → çatlayan ifade → susma hakkına sığınan adam. Oyuncuya hiçbir zaman "katil" diye gösterilmez. |
+| **Kenan Aksoy** (vardiya şefi) | 52, eski römorkör kaptanı; maktul ona “Kaptan” derdi (oyuncu bunu ara evresinde öğrenir). | Babacan, deniz benzetmeleriyle konuşur ("Deniz durgunken herkes kaptan"), herkese "evlat" der; konuşurken elini bir bez parçasına siler. | Gece yüklemelerinde manifestoya girmeyen konteynerler. Ercan bunu biliyordu ve "yarın her şeyi anlatırım" dedi. | Yardımsever tanık → çatlayan ifade → susma hakkına sığınan adam. Oyuncuya hiçbir zaman "katil" diye gösterilmez. |
 | **Şükrü Balcı** (görgü tanığı) | 61, forklift operatörü, emekliliğine dört ay var. | Yüksek sesle konuşur, her soruyu "Ha?" diye bir kez tekrarlatır; dürüst, inatçı. | O gece işitme cihazının pili bitikti; "Seni gebertirim"i kimin bağırdığını görmedi, sesin geldiği yönü tahmin etti. | Yanlış emin → dürüst şüphe. Kürsüde "Bilmiyorum" diyebilmesi bir onur anıdır. |
 | **Nail Usta** (mazeret tanığı) | 72, iskele büfesinin sahibi, uykusuz. | Radyosu hep açık; her cümleyi bir hava durumu raporuyla bitirir. | — | Görmezden gelinen tanık → kürsüde birkaç cümlelik doğruluk. |
 | **Sevim Yavuz** (maktulün eşi) | 41, kasiyer. | Kesik, öfkeli; sonra yorgun. | Ercan'ın son haftalarda "Kaptan bize borçlu, yakında rahatlayacağız" dediğini ve bir defter sakladığını biliyor. | Düşmanlık → ortak bir gerçeğe ihtiyaç. Kocasının katilinin Tarık olmadığını kabullenmek zorundadır. |
@@ -91,16 +91,17 @@ Teori çökerse savcının yedeği: yumruk Ercan'ı babaya düşürdü, kafatas�
 ```
 PR_00 Soğuk açılış (14 Kasım 23.02, isimsiz sesler) → PR_01 15 Kasım 06.10 B sahası → PR_02 08.00 Güzelyalı, gözaltı
 BR_00 Bölüm 1 · Gülay büroda (yağmurlu gece; söz / ücret / dürüstlük) → BR_01 Leyla, ceza aralığı → BR_01B dosyadaki kâğıtlar → BR_02 Dosya + strateji
-INV_SABAH Mudanya sabahı (araba, poyraz) → INV_HUB (4 gün × 3 EP; Leyla'ya danış günde 1, 0 EP)
+INV_SABAH Mudanya sabahı (araba, poyraz) → INV_HUB (4 gün × 3 EP; Leyla'ya danış günde 1, 0 EP; kolluk ifadeleri 0 EP)
   Olay yeri: INV_RIHTIM (sahne) · INV_BSAHA (sahne)
   Cezaevi: INV_GORUSME (konu × ton; konular fakta bağlı açılır)
   İnsanlar: INV_GULAY (ev; etik tuzak) · INV_SUKRU · INV_KENAN · INV_NAIL · INV_ORHAN (uzman görüşü)
-  Arşiv: INV_TELEFON (belge) · INV_ONRAPOR (belge) · INV_DIL (CMK 177, 3 hak) · INV_CIKARIM (tahta, 6 tarif + çeldiriciler) · INV_LEYLA
+  Arşiv: INV_TELEFON · INV_ONRAPOR · INV_TURNIKE (dilekçeyle) · INV_IFADE (0 EP) · INV_DIL (CMK 177, 2 hak) · INV_CIKARIM (9 tarif + çeldiriciler) · INV_LEYLA
   Gün sonu: INV_DAY_END (DECISION) → INV_AKSAM1 / INV_AKSAM2 / INV_AKSAM3
 INV_GECE_* Duruşmadan önceki gece → H1_00 (koridor) → H1_01 iddianame → H1_02 sanık savunması → H1_03 Şükrü (ifade) → H1_04 itiraz
-→ H1_05 Kenan (ifade; bastır/sun/itiraz) → H1_06 ara karar talepleri → H1_07 tutukluluk + erteleme
+→ H1_02Q sanığa sorular (masumiyet karinesi) → H1_04B kısa ara → H1_05 Kenan (ifade; bastır/sun/itiraz) → H1_05K → H1_06 ara karar
+talepleri (3 hak) → H1_07 tutukluluk → H1_08 erteleme
 ARA_GIRIS_* → ARA_HUB (3 gün × 2 EP; yığınsız, doğrudan dönüş)
-  ARA_SEVIM (maktulün eşi; defter) · ARA_TARIK (desen = twistlock konisi) · ARA_GPS (belge) · ARA_DEFTER (belge) · ARA_EMANET (sahne)
+  ARA_SEVIM (maktulün eşi; defter, “Kaptan” lakabı) · ARA_TARIK (şema = eski tip kilit konisi) · ARA_KAYIT (araç takip + zimmet) · ARA_DEFTER · ARA_EMANET (sahne) · ARA_TALEP (ek talep)
   ARA_NURTEN (kolluk) · ARA_SUC (suç duyurusu) · ARA_KENAN (yüzleşme tuzağı) · ARA_CIKARIM (tahta) · ARA_LEYLA
   ARA_DAY_END → ARA_AKSAM_*
 ARA_SON_* → T_00 → T_01 bilirkişi (ifade) → T_02 Kenan yeniden (ifade, CMK 48) | T_02Y → T_03 Nail → T_04 ek savunma (CMK 226)
@@ -151,7 +152,9 @@ T_COKUS (♥0) → T_09
 
 ### Bölüm 2 · SORUŞTURMA (INV_*), ~5.000
 - **INV_SABAH (~300):** Deniz'in arabası Mudanya yolunda; poyraz; liman vinçleri sisin içinde. Kapıdaki güvenlik:
-  "Avukatsanız şefle konuşun. Kaptan ofiste."  (Lakap burada bir kez ve sıradan biçimde geçer.)
+  "İzin vardiya şefinden." **Uygulama kararı:** “Kaptan” lakabı soruşturmada hiç geçmez; telefon tutanağında yalnızca
+  rehber kısaltması “Kptn” ve kenar notu “Kptn kim?” vardır. Vardiya ofisindeki çerçevesiz römorkör fotoğrafı tohumdur;
+  lakabı ara evresinde Sevim Yavuz söyler (“Ercan ona Kaptan derdi; eskiden römorkör kaptanıymış”).
 - **INV_HUB:** gün başına hedef kutusu (gün 1 "Tarık'ın ne yaptığını ve ne yapmadığını ayır"; gün 2 "Ercan kavgadan sonra
   ne kadar yaşadı?"; gün 3 "Kâğıtlar: rapor, telefon, kart"; gün 4 "Dilekçe son gün").
 - **INV_GORUSME — Görüş odası (~1.400):** Cevdet: "Kızının resmine bakıyor her gece." Tarık ellerine bakar.
@@ -209,3 +212,12 @@ T_COKUS (♥0) → T_09
   boşluk. Ve benim dolduramadığım kırk dakika."
 - **ETİK:** Leyla masaya Avukatlık Kanunu'nu bırakır, bir şey söylemez. Gülay hakkında yalan tanıklık soruşturması.
 - **ÇÖKÜŞ:** Savcı dosyasını toplarken: "Bir yumruğu savunmak zordur, avukat hanım. Bir cinayeti savunmaktan zor."
+
+## 6. Uygulama notları (yazımdan sonra)
+
+- Kod: `content/src/liman-gecesi/` (96 node). Bölümler, node haritası ve ölçümler için bkz. `docs/content/liman-gecesi.md`.
+- 1. celse ile 2. celse arasındaki ters köşe, mahkemeden istenen BTK abone bilgisiyle gelir; oyuncu 23.41 aramasını bulup
+  talep etmemişse ara evresinde ek talep (ARA_TALEP) ya da Sevim Yavuz'un “Kaptan” lakabı ve defter yoluyla da bağ
+  kurulabilir.
+- Akşam sahneleri (INV_AKSAM1–3, ARA_AKSAM1–2) kısa seçimlerle biter; “Devam” düğmesi yerine bir karar.
+- Epiloglar `OutcomeDef.epilogue` olarak yazıldı: ETIK, BERAAT_B, BERAAT_E, NITELIK (87/4 + 29), MAHKUMIYET (çöküş notuyla).

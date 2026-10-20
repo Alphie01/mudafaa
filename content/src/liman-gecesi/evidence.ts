@@ -473,7 +473,7 @@ export const evidencePart: CasePart = {
     ),
     c(
       'clue_kardes',
-      'Emre’nin adı',
+      'Hakaret: “ayağına bakmazdı, ezildi”',
       'Ercan, iki yıl önce ölen ağabeyi Emre için “ayağına bakmazdı, o yüzden ezildi” dedi; tükürdü, itti.',
       'Yumruktan hemen önce.',
       'Tarık Demirel',

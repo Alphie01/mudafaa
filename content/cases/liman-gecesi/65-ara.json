@@ -1350,29 +1350,10 @@
         }
       ],
       "pool": [
-        "clue_baba_kan",
-        "clue_basit",
-        "clue_projektor",
-        "clue_kenan_isik",
         "clue_desen",
-        "clue_kontrkup",
-        "clue_mide",
-        "clue_kantin",
         "clue_arama2341",
-        "clue_cikis",
-        "clue_pos",
-        "clue_nail",
-        "clue_radyo",
-        "clue_surukleme",
-        "clue_lastik",
-        "clue_kan_yolu",
-        "clue_matara",
-        "clue_kafes",
-        "clue_pamuk",
-        "clue_cevapsiz",
         "clue_servis_arac",
-        "clue_pil",
-        "clue_kardes",
+        "clue_pamuk",
         "clue_koni",
         "clue_mont",
         "clue_tarik_koni",
@@ -1383,195 +1364,6 @@
         "clue_envanter"
       ],
       "choices": [
-        {
-          "id": "CA_CIKIS",
-          "kind": "COMBINE",
-          "match": { "a": "clue_cikis", "b": "clue_pos" },
-          "feedback": {
-            "title": "Tarık geri dönmedi",
-            "text": "23.18’de turnikeden çıktı, 23.37’de iskele büfesinde kartla ödedi. Vardiya şefinin 23.40’taki “B sahasının ağzı” ile arada yirmi dakikalık yol var.",
-            "label": "YENİ DELİL · +300 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_cikis" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_cikis" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CA_BUF",
-          "kind": "COMBINE",
-          "match": { "a": "clue_nail", "b": "clue_radyo" },
-          "feedback": {
-            "title": "Gece yarısına kadar iskelede",
-            "text": "Nail Usta onu ağlarken gördü; gece haberleri başladığında hâlâ taburedeydi. 23.37’den 00.00’a kadar iskele.",
-            "label": "YENİ DELİL · +300 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_buf" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_buf" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CA_ISIK",
-          "kind": "COMBINE",
-          "match": { "a": "clue_kenan_isik", "b": "clue_projektor" },
-          "feedback": {
-            "title": "Projektörler sönüktü",
-            "text": "“Gündüz gibiydi” diyor. Etikete göre B sahasının projektörleri 23.00–02.00 bakımdaydı. Gece, sisli, ışıksız bir sahada yirmi metreden yüz.",
-            "label": "YENİ DELİL · +300 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_isik" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_isik" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CA_KAN",
-          "kind": "COMBINE",
-          "match": { "a": "clue_baba_kan", "b": "clue_basit" },
-          "feedback": {
-            "title": "Yumruk başı vurdurmadı",
-            "text": "Kan babanın gövdesinde, oturma hizasında; rapor burun ve dudağı basit tıbbi müdahalelik sayıyor. Baş babaya çarpmadı; burun kanadı.",
-            "label": "YENİ DELİL · +300 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_kan" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_kan" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CA_DARBE",
-          "kind": "COMBINE",
-          "match": { "a": "clue_desen", "b": "clue_kontrkup" },
-          "feedback": {
-            "title": "Düşme değil, darbe",
-            "text": "Küçük, dairesel, keskin kenarlı bir çökme ve karşı tarafta hiçbir şey. Hareket eden baş değil, hareket eden cisim.",
-            "label": "YENİ DELİL · +300 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_darbe" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_darbe" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CA_SAAT",
-          "kind": "COMBINE",
-          "match": { "a": "clue_mide", "b": "clue_kantin" },
-          "feedback": {
-            "title": "Ölüm 23.34’ten sonra",
-            "text": "Midede yarı sindirilmiş ekmek, peynir ve süt ürünü. Kantinde 23.34’te tost ve ayran. Ercan yedikten sonra öldü; yemek henüz midesindeydi.",
-            "label": "YENİ DELİL · +300 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_saat" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_saat" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CA_CANLI",
-          "kind": "COMBINE",
-          "match": { "a": "clue_arama2341", "b": "clue_cikis" },
-          "feedback": {
-            "title": "23.41’de yaşıyordu",
-            "text": "Tarık 23.18’de limandan çıktı. Ercan 23.41’de iki dakika yedi saniye telefonda konuştu. Kimle?",
-            "label": "YENİ DELİL · +300 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_canli" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_canli" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CA_TASIMA",
-          "kind": "COMBINE",
-          "match": { "a": "clue_surukleme", "b": "clue_lastik" },
-          "feedback": {
-            "title": "Araçla gelen biri onu taşıdı",
-            "text": "Topuk izleri bir kamyonetin dönüş izinin hemen yanında başlıyor. Ercan oraya yürümedi.",
-            "label": "YENİ DELİL · +300 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_tasima" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_tasima" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "CA_TASIMA2",
-          "kind": "COMBINE",
-          "match": { "a": "clue_kan_yolu", "b": "clue_lastik" },
-          "feedback": {
-            "title": "Araçla gelen biri onu taşıdı",
-            "text": "Rıhtımdan B sahasına tek damla kan yok; B sahasında taze bir kamyonet izi. Ercan oraya yürümedi.",
-            "label": "YENİ DELİL · +300 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_tasima" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_tasima" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
         {
           "id": "CA_SILAH",
           "kind": "COMBINE",
@@ -2273,15 +2065,6 @@
     { "evidence": "clue_defter_satir", "source": { "type": "RULE", "id": "EX_D4" } },
     { "evidence": "clue_manifesto", "source": { "type": "RULE", "id": "EX_D2" } },
     { "evidence": "clue_envanter", "source": { "type": "CHOICE", "id": "NU_KIT" } },
-    { "evidence": "ded_cikis", "source": { "type": "RULE", "id": "CA_CIKIS" } },
-    { "evidence": "ded_buf", "source": { "type": "RULE", "id": "CA_BUF" } },
-    { "evidence": "ded_isik", "source": { "type": "RULE", "id": "CA_ISIK" } },
-    { "evidence": "ded_kan", "source": { "type": "RULE", "id": "CA_KAN" } },
-    { "evidence": "ded_darbe", "source": { "type": "RULE", "id": "CA_DARBE" } },
-    { "evidence": "ded_saat", "source": { "type": "RULE", "id": "CA_SAAT" } },
-    { "evidence": "ded_canli", "source": { "type": "RULE", "id": "CA_CANLI" } },
-    { "evidence": "ded_tasima", "source": { "type": "RULE", "id": "CA_TASIMA" } },
-    { "evidence": "ded_tasima", "source": { "type": "RULE", "id": "CA_TASIMA2" } },
     { "evidence": "ded_silah", "source": { "type": "RULE", "id": "CA_SILAH" } },
     { "evidence": "ded_arac", "source": { "type": "RULE", "id": "CA_ARAC" } },
     { "evidence": "ded_motif", "source": { "type": "RULE", "id": "CA_MOTIF" } },

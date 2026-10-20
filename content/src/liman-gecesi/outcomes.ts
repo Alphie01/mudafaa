@@ -174,6 +174,9 @@ baskan: Türk Milleti adına…
 > Kantinin önünde üç işçi sigara içiyordu. Biri başını çevirdi. Bir diğeri fısıldadı; poyraz sözün yarısını getirdi.
 @BİR İŞÇİ: …şüpheden çıkmış. Şüpheden.
 > Tarık durmadı. Rıhtım 4’e yürüdü, eldivenlerini taktı, ilk kilidi aldı.
+> Akşam vardiyası biterken Şükrü Usta yanına geldi. Kulağının arkasında yeni bir cihaz, pili dolu.
+sukru: Ha? Duydun mu beni? Bu sefer duyuyorum oğlum. Her şeyi duyuyorum.
+> Tarık güldü. İki aydır ilk kez. Şükrü Usta omzuna vurdu, forkliftine yürüdü; emekliliğine üç ay kalmıştı.
 `),
         O(`
 # ARSLAN HUKUK · GECE [bg:buro_gece]

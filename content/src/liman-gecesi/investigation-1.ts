@@ -164,10 +164,7 @@ export const INV_POOL = [
   'clue_matara',
   'clue_kafes',
   'clue_pamuk',
-  'clue_cevapsiz',
   'clue_servis_arac',
-  'clue_pil',
-  'clue_kardes',
 ];
 
 // --- Hub ---
@@ -915,10 +912,9 @@ const kenan = conversation('INV_KENAN', {
 # LİMAN — VARDİYA OFİSİ [bg:depo]
 > Prefabrik bir oda. Masada bir termos, iki bardak, bir telsiz. Duvarda gelgit tablosu, bir gemi takvimi, çerçevesiz bir römorkör fotoğrafı.
 > Ellilerinde, kır sakallı, iri bir adam. Lacivert kazak. Konuşurken ellerini cebinden çıkardığı bir bez parçasına siliyordu; temiz ellerini.
-kenan: Gel kızım, gel. Kahve? Termos kahvesi, acıdır ama ısıtır. Deniz durgunken herkes kaptan; poyrazda adam belli olur.
+kenan: Gel kızım, gel. Kahve? Termos kahvesi, acıdır ama ısıtır. Limanda iyi gün herkesin; poyrazda adam belli olur.
 kenan: Tarık’ın avukatısın. Bilirim. Yazık oldu o çocuğa. Yazık oldu Ercan’a da. İkisi de benim vardiyamdı.
-> Römorkör fotoğrafının altında el yazısıyla bir tarih ve bir isim: “Kaya-3, 1998.” Fotoğrafta genç bir adam, dümenin başında, gülümsüyor.
-kenan: Eskiden denizdeydim. Römorkör. Gemileri limana sokardım. Şimdi kutuları sayıyorum. Deniz insanı bırakmaz kızım; kıyıya çeker, orada tutar.
+kenan: Yirmi yıldır bu limandayım. Kutuları sayarız, adamları sayarız, geceleri sayarız. Liman insanı bırakmaz kızım; kıyıya çeker, orada tutar.
 `),
   choices: [
     option('KN_GECE', '“O gece neler gördünüz?”', {

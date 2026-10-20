@@ -714,7 +714,7 @@ export const tests: CasePart = {
     goldenPaths: [
       goldenPath(
         'G1',
-        { outcome: 'BERAAT_B' },
+        { outcome: 'BERAAT_B', finalMin: 11780, finalMax: 13020 },
         PROLOG('BR00_C', 'BR01_A', 'STR_MASUMIYET'),
         GUN1,
         GUN2,
@@ -726,7 +726,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         TYPICAL_PATH,
-        { outcome: 'BERAAT_E' },
+        { outcome: 'BERAAT_E', finalMin: 11509, finalMax: 12721 },
         PROLOG('BR00_C', 'BR01_A', 'STR_USUL'),
         GUN1,
         GUN2,
@@ -738,16 +738,33 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G3',
-        { outcome: 'NITELIK' },
+        { outcome: 'NITELIK', finalMin: 3804, finalMax: 4206 },
         PROLOG('BR00_A', 'BR01_D', 'STR_INDIRIM'),
         G3_SORUSTURMA,
         G3_CELSE1,
         G3_ARA,
         G3_CELSE2,
       ),
-      goldenPath('G4', { outcome: 'MAHKUMIYET' }, PROLOG('BR00_B', 'BR01_B', 'STR_MASUMIYET'), G4),
-      goldenPath('G5', { outcome: 'ETIK' }, PROLOG('BR00_A', 'BR01_A', 'STR_USUL'), G5_SORUSTURMA, G5_CELSE1),
-      goldenPath('W', { outcome: 'MAHKUMIYET' }, PROLOG('BR00_B', 'BR01_C', 'STR_MASUMIYET'), W_YOL, A('c COKUS_SON')),
+      goldenPath(
+        'G4',
+        { outcome: 'MAHKUMIYET', finalMin: 209, finalMax: 231 },
+        PROLOG('BR00_B', 'BR01_B', 'STR_MASUMIYET'),
+        G4,
+      ),
+      goldenPath(
+        'G5',
+        { outcome: 'ETIK', finalMin: 7752, finalMax: 8568 },
+        PROLOG('BR00_A', 'BR01_A', 'STR_USUL'),
+        G5_SORUSTURMA,
+        G5_CELSE1,
+      ),
+      goldenPath(
+        'W',
+        { outcome: 'MAHKUMIYET', finalMin: 1999, finalMax: 2211 },
+        PROLOG('BR00_B', 'BR01_C', 'STR_MASUMIYET'),
+        W_YOL,
+        A('c COKUS_SON'),
+      ),
     ],
   },
 };

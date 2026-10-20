@@ -610,6 +610,9 @@ baskan: Sanık ve müdafii, dikkat edin. Yapılan yargılama sonucunda, eylemin 
           responses: B(`
 - Sayın Başkan, ek savunmamız şudur: yumruk maktulün burnunu kanattı; ölüm o yumruktan gelmedi. Darbe, sanığın limandan çıkmasından sonra ve başka bir cisimle vuruldu.
 - Yaralama sonucu ölümden sorumluluk için ölümün o yaralamadan doğması gerekir. Burada doğmamıştır.
+> Savcı başını kaldırdı, bir şey söyleyecek gibi oldu, sonra notlarına döndü. Üye hâkim Alkan bir sayfayı işaretledi.
+baskan: Ek savunma tutanağa geçti. Sanık, katılıyor musunuz?
+tarik: Katılıyorum efendim. Ben bir kere vurdum. Sonrasını ben yapmadım.
 `),
         }),
         option('T04_B', 'Ek savunma için süre isteriz', {

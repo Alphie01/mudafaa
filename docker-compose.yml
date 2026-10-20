@@ -1,0 +1,79 @@
+# Müdafaa — yerel altyapı: PostgreSQL 17 ve Redis 8.
+#
+#   npm run db:up        postgres (5432) + redis (6379); veri adlandırılmış volume'lerde kalıcıdır
+#   npm run db:test:up   postgres-test (5433) + redis-test (6380); "test" profili, veri bellekte (tmpfs)
+#   npm run db:down      dev konteynerlerini kaldırır; volume'ler kalır (silmek için: docker compose down -v)
+#                        test profilini de kaldırmak için: docker compose --profile test down
+#
+# Portlar yalnızca 127.0.0.1'e açılır; kimlik bilgileri yalnızca yerel geliştirme içindir.
+
+# Sabit proje adı: git worktree gibi farklı dizinlerde de aynı konteyner ve volume'ler kullanılır.
+name: mudafaa
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: mudafaa
+      POSTGRES_PASSWORD: mudafaa
+      POSTGRES_DB: mudafaa
+    ports:
+      - '127.0.0.1:5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      # TCP (-h 127.0.0.1) ile denenir: ilk açılışta initdb sırasındaki geçici sunucu yalnızca unix soketini dinler.
+      test: ['CMD', 'pg_isready', '-h', '127.0.0.1', '-U', 'mudafaa', '-d', 'mudafaa']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:8-alpine
+    # noeviction: BullMQ işleri bellek dolsa bile sessizce silinmesin.
+    command: ['redis-server', '--maxmemory-policy', 'noeviction', '--appendonly', 'yes']
+    ports:
+      - '127.0.0.1:6379:6379'
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  # Test profili: `npm run db:test:up` ile açılır, geliştirme verisine dokunmaz.
+  postgres-test:
+    profiles: ['test']
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: mudafaa
+      POSTGRES_PASSWORD: mudafaa
+      POSTGRES_DB: mudafaa_test
+    ports:
+      - '127.0.0.1:5433:5432'
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-h', '127.0.0.1', '-U', 'mudafaa', '-d', 'mudafaa_test']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  redis-test:
+    profiles: ['test']
+    image: redis:8-alpine
+    command: ['redis-server', '--maxmemory-policy', 'noeviction']
+    ports:
+      - '127.0.0.1:6380:6379'
+    tmpfs:
+      - /data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  pgdata:
+  redisdata:

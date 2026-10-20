@@ -1,5 +1,78 @@
 {
-  "court": { "sessions": [] },
+  "config": {
+    "objectionGrounds": [
+      { "id": "g_duyum", "label": "Tanık kendi gözlemini değil başkasının söylediğini aktarıyor" },
+      { "id": "g_kanaat", "label": "Tanığın kişisel kanaati" },
+      { "id": "g_telkin", "label": "Telkin edici soru (CMK 201/1)", "legalBasis": "CMK 201/1" }
+    ]
+  },
+  "predicates": [
+    {
+      "id": "hus_gelir",
+      "label": "Mazeret tanığı duruşmada",
+      "when": { "any": [{ "flag": "huseyin_will_attend" }, { "flag": "huseyin_summoned" }] }
+    },
+    {
+      "id": "alibi",
+      "label": "Mazeret ispatlandı",
+      "when": { "all": [{ "hasEvidence": "ded_mazeret" }, { "flag": "huseyin_testified" }] }
+    },
+    {
+      "id": "findings2",
+      "label": "En az 2 bulgu",
+      "when": {
+        "cmp": [
+          {
+            "add": [
+              { "if": { "when": { "flag": "contra_s1" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "flag": "contra_s2" }, "then": 1, "else": 0 } },
+              {
+                "if": {
+                  "when": {
+                    "any": [
+                      { "flag": "contra_s4_kolluk" },
+                      { "flag": "contra_s4_mazeret" },
+                      { "flag": "contra_s4_hts" }
+                    ]
+                  },
+                  "then": 1,
+                  "else": 0
+                }
+              },
+              { "if": { "when": { "ref": "alibi" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "flag": "key_excluded" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "flag": "fp_neutralized" }, "then": 1, "else": 0 } }
+            ]
+          },
+          ">=",
+          2
+        ]
+      }
+    },
+    {
+      "id": "mutalaa_beraat",
+      "label": "Savcı beraat istiyor",
+      "when": { "all": [{ "flag": "selin_cozuldu" }, { "hasEvidence": "ded_iz_murat" }] }
+    }
+  ],
+  "court": {
+    "sessions": [
+      {
+        "id": "cs_2",
+        "title": "2. Celse",
+        "stages": [
+          { "id": "stg_acilis", "type": "ACILIS", "entryNode": "C_00" },
+          { "id": "stg_ek_savunma", "type": "EK_SAVUNMA", "entryNode": "C_01" },
+          { "id": "stg_tanik", "type": "TANIK_DINLEME", "entryNode": "C_04" },
+          { "id": "stg_delil", "type": "DELIL_TARTISMA", "entryNode": "C_08" },
+          { "id": "stg_mutalaa", "type": "MUTALAA", "entryNode": "C_11" },
+          { "id": "stg_savunma", "type": "SAVUNMA", "entryNode": "C_12" },
+          { "id": "stg_son_soz", "type": "SON_SOZ", "entryNode": "C_13" },
+          { "id": "stg_karar", "type": "KARAR", "entryNode": "C_14" }
+        ]
+      }
+    ]
+  },
   "nodes": [
     {
       "id": "C_00",
@@ -12,12 +85,19 @@
       "courtStage": "ACILIS",
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
-        "bench": [{ "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 }],
+        "bench": [
+          { "character": "ayse", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "cem", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
         "counsel": "deniz"
       },
       "onFirstEnter": [
         { "type": "VAR", "var": "in_court", "op": "set", "value": true },
         { "type": "MEET", "character": "nevzat" },
+        { "type": "MEET", "character": "ayse" },
+        { "type": "MEET", "character": "cem" },
+        { "type": "MEET", "character": "riza" },
         {
           "type": "IF",
           "when": { "flag": "selin_pressured" },
@@ -31,16 +111,1706 @@
       "lines": [
         {
           "lines": [
+            { "speaker": "riza", "text": "Kerem Aydın dosyası! Taraflar salona." },
             {
               "speaker": "nevzat",
-              "text": "Sanık Kerem Aydın bağsız olarak alındı; tanıklar salondan çıkarıldı. Ara karar cevapları okundu."
+              "text": "Sanık Kerem Aydın bağsız olarak alındı; tanıklar salondan çıkarıldı. Ara karar cevapları okundu: talep edilen kayıt ve raporlar dosyaya eklendi, diğer talepler gerekçesiyle reddedildi."
             }
           ]
         }
       ],
-      "choices": [{ "id": "C00_DEVAM", "kind": "CONTINUE", "label": "Devam", "next": "RESULT_STUB" }]
+      "choices": [{ "id": "C00_DEVAM", "kind": "CONTINUE", "label": "Devam", "next": "C_01" }]
     },
-    { "id": "RESULT_STUB", "type": "RESULT", "title": "Karar", "choices": [] }
+    {
+      "id": "C_01",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "title": "Ek savunma hakkı",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "courtStage": "EK_SAVUNMA",
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ayse", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "cem", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      },
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "nevzat",
+              "text": "Sanık, eyleminizin TCK 142/2-d kapsamında da değerlendirilebileceği anlaşıldığından CMK 226 uyarınca ek savunma hakkınız hatırlatılır."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "C01_A",
+          "kind": "OPTION",
+          "label": "Ek savunma için süre iste (CMK 226/3)",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 50 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "ara_verildi", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": { "cmp": [{ "var": "trust" }, "<", 50] },
+              "then": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 10 }]
+            }
+          ],
+          "next": "C_02",
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Değişen hukuki nitelendirme için ek savunma süresi istendi (CMK 226/3).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "C01_B",
+          "kind": "OPTION",
+          "label": "Devam",
+          "next": "C_02",
+          "quality": { "q": "NEUTRAL", "feedback": "Ek savunma süresi istenmedi." }
+        },
+        {
+          "id": "C01_C",
+          "kind": "OPTION",
+          "label": "İtiraz: iddianameye bağlısınız",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "next": "C_02",
+          "quality": {
+            "q": "BAD",
+            "feedback": "CMK 225/2: mahkeme fiilin nitelendirilmesinde iddianameyle bağlı değildir.",
+            "category": "USUL_BILGISI"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C_02",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "title": "Sanığın ek savunması",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "room": { "label": "SANIK KÜRSÜSÜ", "character": "kerem" },
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "nevzat", "text": "Sanık, ek savunmanızı yapın." },
+            { "speaker": "kerem", "text": "Avukat bey, ne diyeyim?" }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "C02_A",
+          "kind": "OPTION",
+          "label": "Reddet; 22.30–23.15 çay ocağı; 19.30 yardım; anahtar herkeste",
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "all": [{ "cmp": [{ "var": "trust" }, "<", 40] }, { "not": { "flag": "ara_verildi" } }] },
+              "then": [
+                { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+                { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+                {
+                  "type": "MARK",
+                  "quality": "BAD",
+                  "feedback": "Güveni düşük Kerem kürsüde patladı; mazereti dağınık kaldı.",
+                  "category": "SAVUNMA_STRATEJISI"
+                }
+              ],
+              "else": [
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 100 },
+                {
+                  "type": "MARK",
+                  "quality": "GOOD",
+                  "feedback": "Kerem mazeretini, 19.30’daki taşımayı ve anahtarın herkeste olduğunu kendi ağzından anlattı.",
+                  "category": "SAVUNMA_STRATEJISI"
+                }
+              ]
+            }
+          ],
+          "next": "C_03",
+          "responses": [
+            {
+              "when": { "all": [{ "cmp": [{ "var": "trust" }, "<", 40] }, { "not": { "flag": "ara_verildi" } }] },
+              "lines": [
+                {
+                  "speaker": "kerem",
+                  "expression": "kizgin",
+                  "text": "Bana mı yükleniyorsunuz?! Ben yapmadım işte!"
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "kerem",
+                  "text": "Suçlamayı kabul etmiyorum. 19.30’da Murat abiye top taşımada yardım ettim; 22.30’dan 23.15’e kadar çay ocağında Hüseyin abiyleydim. O anahtar bütün vardiyada var."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "C02_B",
+          "kind": "OPTION",
+          "label": "Susma hakkını kullansın (CMK 147/1-e)",
+          "next": "C_03",
+          "quality": { "q": "NEUTRAL", "feedback": "Mazereti kendi ağzından anlatma fırsatı kaçtı." },
+          "responses": [{ "lines": [{ "speaker": "kerem", "text": "Susma hakkımı kullanıyorum." }] }]
+        },
+        {
+          "id": "C02_C",
+          "kind": "OPTION",
+          "label": "Murat’ı suçlasın",
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "flag": "fact_murat_reveal" },
+              "then": [
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 25 },
+                {
+                  "type": "MARK",
+                  "quality": "NEUTRAL",
+                  "feedback": "Kerem Murat’ın o gece Depo 3’te olduğunu söyledi; bunu delille desteklemen gerekecek.",
+                  "category": "SAVUNMA_STRATEJISI"
+                }
+              ],
+              "else": [
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 },
+                { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+                {
+                  "type": "MARK",
+                  "quality": "BAD",
+                  "feedback": "Dayanaksız suçlama: TCK 267 riski.",
+                  "category": "SAVUNMA_STRATEJISI"
+                }
+              ]
+            }
+          ],
+          "next": "C_03",
+          "responses": [
+            {
+              "when": { "flag": "fact_murat_reveal" },
+              "lines": [{ "speaker": "kerem", "text": "Murat abi o gece Depo 3’teydi. Botları hep çamurluydu." }]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "kerem",
+                  "expression": "saskin",
+                  "text": "Bence Murat abi yaptı! …Neden mi? Bilmiyorum."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "C02_D",
+          "kind": "OPTION",
+          "label": "Suçu kabul etsin; TCK 168 ve 62 isteyelim",
+          "next": "C_02D",
+          "responses": [{ "lines": [{ "speaker": "kerem", "expression": "uzgun", "text": "Ama ben yapmadım…" }] }]
+        }
+      ]
+    },
+    {
+      "id": "C_02D",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "title": "Sanığın ek savunması",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "room": { "label": "SANIK KÜRSÜSÜ", "character": "kerem", "expression": "uzgun" },
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "kerem", "expression": "uzgun", "text": "Ama ben yapmadım avukat bey… Neden kabul edeyim?" }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "C02D_ISRAR",
+          "kind": "OPTION",
+          "label": "Israr et",
+          "effects": [
+            { "type": "VAR", "var": "false_confession", "op": "set", "value": true },
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -300 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 2 },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 }
+          ],
+          "next": "C_03",
+          "quality": {
+            "q": "BAD",
+            "feedback": "Av.K. 34; sahte ikrar TCK 270; 168 tam tazmin ister.",
+            "category": "SAVUNMA_STRATEJISI"
+          },
+          "responses": [{ "lines": [{ "speaker": "kerem", "expression": "uzgun", "text": "…Peki. Kabul ediyorum." }] }]
+        },
+        {
+          "id": "C02D_GERI",
+          "kind": "OPTION",
+          "label": "Geri adım at",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 },
+            { "type": "VAR", "var": "trust", "op": "dec", "value": 10 }
+          ],
+          "next": "C_03",
+          "quality": {
+            "q": "BAD",
+            "feedback": "Masum olduğunu söyleyen müvekkile ikrar önermek güvenini sarstı.",
+            "category": "SAVUNMA_STRATEJISI"
+          },
+          "responses": [{ "lines": [{ "speaker": "kerem", "expression": "uzgun", "text": "Bana inanmıyor musunuz?" }] }]
+        }
+      ]
+    },
+    {
+      "id": "C_03",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "title": "Müdafiin ek savunması",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "courtStage": "EK_SAVUNMA",
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ayse", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "cem", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      },
+      "lines": [{ "lines": [{ "speaker": "nevzat", "text": "Müdafi, ek savunmanız?" }] }],
+      "choices": [
+        {
+          "id": "C03_A",
+          "kind": "OPTION",
+          "label": "142/2-d oluşmadı: işverence verilen anahtar ‘haksız yere elde bulundurulan’ değil; kullanıldığına delil yok",
+          "effects": [
+            { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 150 },
+            { "type": "VAR", "var": "arg_142_2d", "op": "set", "value": true },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 }
+          ],
+          "next": "C_04",
+          "quality": {
+            "q": "GOOD",
+            "feedback": "İşverence teslim edilen anahtar 142/2-d’nin “haksız yere elde bulundurulan anahtar” unsurunu karşılamaz.",
+            "category": "HUKUKI_BILGI"
+          }
+        },
+        {
+          "id": "C03_B",
+          "kind": "OPTION",
+          "label": "142/1-e uygulansın",
+          "effects": [
+            { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": -50 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "next": "C_04",
+          "quality": {
+            "q": "BAD",
+            "feedback": "142/1 bentleri bina içindeki eşyaya uymaz; olay 142/2-h kapsamında.",
+            "category": "HUKUKI_BILGI"
+          }
+        },
+        {
+          "id": "C03_C",
+          "kind": "OPTION",
+          "label": "TCK 145 uygulansın",
+          "effects": [
+            { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": -50 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "next": "C_04",
+          "quality": {
+            "q": "BAD",
+            "feedback": "Değerin azlığı (TCK 145) 40 top kumaşa uygulanamaz.",
+            "category": "HUKUKI_BILGI"
+          }
+        },
+        { "id": "C03_D", "kind": "OPTION", "label": "Diyecek yok", "next": "C_04" }
+      ]
+    },
+    {
+      "id": "C_04",
+      "type": "COURTROOM",
+      "mode": "STAGE",
+      "title": "Tanık Selin Kaya",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "courtStage": "TANIK_DINLEME",
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ayse", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "cem", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "selin",
+        "counsel": "deniz"
+      },
+      "onFirstEnter": [{ "type": "MEET", "character": "selin" }],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "riza", "text": "Tanık Selin Kaya!" },
+            {
+              "speaker": "nevzat",
+              "text": "Kimliğiniz tespit edildi (CMK 58). Gerçeği söylemekle yükümlüsünüz; yalan tanıklığın cezası hatırlatıldı."
+            }
+          ]
+        }
+      ],
+      "witnessLabel": "TANIK · SELİN KAYA",
+      "choices": [
+        {
+          "id": "C04_YEMINSIZ",
+          "kind": "OPTION",
+          "label": "CMK 50/1-c: tanık yeminsiz dinlensin",
+          "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": 25 }],
+          "next": "C_05",
+          "visibleWhen": { "flag": "sucduyurusu_selin" },
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Hakkında soruşturma bulunan tanık yeminsiz dinlenir (CMK 50/1-c).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        { "id": "C04_DEVAM", "kind": "CONTINUE", "label": "Tanık yemin ederek dinlensin", "next": "C_05" }
+      ]
+    },
+    {
+      "id": "C_05",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "title": "Savcının sorusu",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "courtStage": "TANIK_DINLEME",
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ayse", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "cem", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "selin",
+        "counsel": "deniz"
+      },
+      "lines": [{ "lines": [{ "speaker": "cem", "text": "Tanık, o gece gördüğünüz kişi sanıktı, değil mi?" }] }],
+      "witnessLabel": "TANIK · SELİN KAYA",
+      "choices": [
+        {
+          "id": "C05_A",
+          "kind": "OPTION",
+          "label": "İtiraz: telkin edici soru (CMK 201/1)",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 }
+          ],
+          "next": "C_06",
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Telkin edici soru yasaktır (CMK 201/1); itiraz kabul edildi.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "C05_B",
+          "kind": "OPTION",
+          "label": "Sessiz kal",
+          "effects": [{ "type": "VAR", "var": "pers", "op": "dec", "value": 1 }],
+          "next": "C_06",
+          "quality": { "q": "NEUTRAL", "feedback": "Telkinli soru cevaplandı; heyet bunu not etti." }
+        },
+        {
+          "id": "C05_C",
+          "kind": "OPTION",
+          "label": "Tanık yalan söylüyor!",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
+          ],
+          "next": "C_06",
+          "quality": {
+            "q": "BAD",
+            "feedback": "Dayanaksız suçlama; itiraz bir usul kuralına dayanmalı.",
+            "category": "USUL_BILGISI"
+          }
+        }
+      ]
+    },
+    {
+      "id": "C_06",
+      "type": "COURTROOM",
+      "mode": "TESTIMONY",
+      "title": "Çapraz sorgu",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "courtStage": "TANIK_DINLEME",
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ayse", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "cem", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "selin",
+        "counsel": "deniz"
+      },
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "nevzat", "text": "Tanık ifadesini kesintisiz verdi (CMK 59/1). Müdafi, sorularınız?" }
+          ]
+        }
+      ],
+      "statements": [
+        {
+          "id": "S1",
+          "order": 1,
+          "segments": [
+            { "text": "O gece " },
+            {
+              "text": "22.00–06.00 vardiyasındaydım",
+              "highlightWhen": { "any": [{ "flag": "press_s1" }, { "hasEvidence": "clue_uv_silinti" }] }
+            },
+            { "text": ". Depo kapısını her saat kontrol ederim." }
+          ]
+        },
+        {
+          "id": "S2",
+          "order": 2,
+          "segments": [
+            { "text": "Saat 23.00 gibi depodan çıkan birini gördüm. " },
+            { "text": "Sokak lambası yanıyordu", "highlightWhen": { "all": [] } },
+            { "text": ", yüzünü net seçtim." }
+          ]
+        },
+        {
+          "id": "S3",
+          "order": 3,
+          "segments": [{ "text": "Turuncu bir mont giyiyordu, elinde büyük bir çuval vardı." }]
+        },
+        {
+          "id": "S4",
+          "order": 4,
+          "segments": [{ "text": "Ertesi sabah Kerem’i görünce hemen tanıdım. Aynı adamdı." }]
+        },
+        {
+          "id": "S4_EK",
+          "order": 5,
+          "visibleWhen": { "flag": "press_s4b" },
+          "segments": [
+            { "text": "Murat Koç’u… " },
+            { "text": "pek tanımam", "highlightWhen": { "all": [] } },
+            { "text": "." }
+          ]
+        }
+      ],
+      "witnessLabel": "TANIK · SELİN KAYA",
+      "rulesText": "İpucu: Çelişkiyi bul ve doğru delille vur. Yanlış delil güvenilirliği ve skoru düşürür.",
+      "objectionGrounds": ["g_duyum", "g_kanaat", "g_telkin"],
+      "choices": [
+        {
+          "id": "PS_ILLEGAL",
+          "kind": "PRESENT",
+          "match": { "evidence": ["ev_hts_illegal"] },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -150, "line": "hatali" },
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -150 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 2 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "illegal_presented", "op": "set", "value": true },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Hukuka aykırı delil reddedildi (CMK 206/2-a): −2 güvenilirlik.",
+              "category": "USUL_BILGISI"
+            }
+          ],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "cem",
+                  "expression": "kizgin",
+                  "text": "İtiraz ediyorum Sayın Başkan! Bu döküm hukuka aykırı yoldan elde edilmiştir."
+                },
+                { "speaker": "nevzat", "text": "Delil CMK 206/2-a uyarınca reddedildi." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PR_S1",
+          "kind": "PRESS",
+          "match": { "statement": "S1" },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_s1", "op": "set", "value": true }
+          ],
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "23.00’te neredeydiniz?" },
+                { "speaker": "selin", "text": "Depo 3’ün arka sokağında, devriyede." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PS_S1",
+          "kind": "PRESENT",
+          "match": { "statement": "S1", "evidence": ["ev_vardiya"] },
+          "visibleWhen": { "hasEvidence": "clue_uv_silinti" },
+          "enabledWhen": { "hasEvidence": "clue_uv_silinti" },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "contra_s1", "op": "set", "value": true },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Çizelgedeki silinti tanığın görev saatini çürüttü.",
+              "category": "SORGULAMA"
+            }
+          ],
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "selin", "expression": "saskin", "text": "…18–24’teydim, ana kapıda." },
+                { "speaker": "ayse", "text": "Ana kapıdan arka sokak görünür mü?" },
+                { "speaker": "selin", "expression": "uzgun", "text": "…Görünmez." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PS_S1_X",
+          "kind": "PRESENT",
+          "match": { "statement": "S1", "evidence": ["ev_vardiya"] },
+          "visibleWhen": { "not": { "hasEvidence": "clue_uv_silinti" } },
+          "enabledWhen": { "not": { "hasEvidence": "clue_uv_silinti" } },
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -150, "line": "hatali" },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "UV ipucu olmadan çizelge tanığı çürütmez.",
+              "category": "SORGULAMA"
+            }
+          ],
+          "responses": [{ "lines": [{ "speaker": "selin", "text": "Çizelgede de 22–06 yazıyor." }] }]
+        },
+        {
+          "id": "PR_S2",
+          "kind": "PRESS",
+          "match": { "statement": "S2" },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_s2", "op": "set", "value": true }
+          ],
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Lambayla aranızda ne kadar mesafe vardı?" },
+                { "speaker": "selin", "text": "Yirmi metre; 14 numaralı direk." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PS_S2",
+          "kind": "PRESENT",
+          "match": { "statement": "S2", "evidence": ["ev_ariza_kaydi", "ded_lamba", "ev_selin_kolluk"] },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "contra_s2", "op": "set", "value": true },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Teşhisin dayanağı çöktü: o gece sokak karanlıktı.",
+              "category": "SORGULAMA"
+            }
+          ],
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "selin", "expression": "saskin", "text": "…Belki yanmıyordu. Ama montunu gördüm!" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PR_S3A",
+          "kind": "PRESS",
+          "match": { "statement": "S3" },
+          "visibleWhen": { "not": { "flag": "press_s3a" } },
+          "enabledWhen": { "not": { "flag": "press_s3a" } },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 50 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "press_s3a", "op": "set", "value": true }
+          ],
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Turuncu mont kimlere verilir?" },
+                { "speaker": "selin", "text": "Firmanın iş montu; herkes giyer, Murat da Kerem de." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PR_S3B",
+          "kind": "PRESS",
+          "match": { "statement": "S3" },
+          "visibleWhen": { "flag": "press_s3a" },
+          "enabledWhen": { "flag": "press_s3a" },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_s3b", "op": "set", "value": true }
+          ],
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "40 top kumaş bir çuvala sığar mı?" },
+                { "speaker": "selin", "expression": "saskin", "text": "…Belki bir araç vardı." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PR_S4A",
+          "kind": "PRESS",
+          "match": { "statement": "S4" },
+          "visibleWhen": { "not": { "flag": "press_s4a" } },
+          "enabledWhen": { "not": { "flag": "press_s4a" } },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 50 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "press_s4a", "op": "set", "value": true }
+          ],
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Sanığı nasıl tanıdınız?" },
+                { "speaker": "selin", "text": "Murat Koç ‘Kerem’di’ dedi; baktım, oydu." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PR_S4B",
+          "kind": "PRESS",
+          "match": { "statement": "S4" },
+          "visibleWhen": { "flag": "press_s4a" },
+          "enabledWhen": { "flag": "press_s4a" },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_s4b", "op": "set", "value": true }
+          ],
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Murat Koç’u ne kadar tanırsınız?" },
+                { "speaker": "selin", "text": "Pek tanımam." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PS_S4_KOLLUK",
+          "kind": "PRESENT",
+          "match": { "statement": "S4", "evidence": ["ev_selin_kolluk"] },
+          "visibleWhen": { "flag": "press_s4a" },
+          "enabledWhen": { "flag": "press_s4a" },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
+            { "type": "VAR", "var": "contra_s4_kolluk", "op": "set", "value": true },
+            {
+              "type": "MARK",
+              "quality": "NEUTRAL",
+              "feedback": "Kısmi isabet: kollukta yüzünü seçemediğini söylemişti; ifade hâlâ açık.",
+              "category": "SORGULAMA"
+            }
+          ],
+          "responses": [
+            { "lines": [{ "speaker": "selin", "text": "Uzaktan gördüm, evet. Ama sabah görünce emin oldum." }] }
+          ]
+        },
+        {
+          "id": "PS_S4_MAZERET",
+          "kind": "PRESENT",
+          "match": { "statement": "S4", "evidence": ["ded_mazeret"] },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
+            { "type": "VAR", "var": "contra_s4_mazeret", "op": "set", "value": true },
+            {
+              "type": "MARK",
+              "quality": "NEUTRAL",
+              "feedback": "Kısmi isabet: mazeret teşhisle çelişiyor; ama tanık geri adım atmadı.",
+              "category": "SORGULAMA"
+            }
+          ],
+          "responses": [{ "lines": [{ "speaker": "selin", "text": "Fişi bilmem. Ben gördüğümü söylüyorum." }] }]
+        },
+        {
+          "id": "PS_S4_HTS",
+          "kind": "PRESENT",
+          "match": { "statement": "S4_EK", "evidence": ["ev_hts"] },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "contra_s4_hts", "op": "set", "value": true },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "HTS kaydı tanığın Murat Koç’la bağlantısını ortaya koydu.",
+              "category": "SORGULAMA"
+            },
+            { "type": "GOTO", "node": "C_06H" }
+          ],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "23.05’te Murat Koç’la 6 dakika konuşmuşsunuz. “Pek tanımam” dediğiniz kişiyle mi?"
+                },
+                { "speaker": "selin", "expression": "saskin", "text": "…" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "OB_S4_DUYUM",
+          "kind": "OBJECT",
+          "match": { "statement": "S4", "ground": "g_duyum" },
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 50 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "İtiraz yerinde: tanık kendi gözlemini değil, Murat Koç’un söylediğini aktarıyor.",
+              "category": "SORGULAMA"
+            }
+          ],
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "nevzat", "text": "İtiraz yerinde. Tanık, yalnızca kendi gördüklerinizi anlatın." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "FB_C06_PRESENT",
+          "kind": "FALLBACK",
+          "fallbackFor": "PRESENT",
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -150, "line": "hatali" },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Yanlış delil: −1 güvenilirlik, −150 skor.",
+              "category": "SORGULAMA"
+            }
+          ],
+          "responses": [{ "lines": [{ "speaker": "nevzat", "text": "Bu delilin ifadeyle ilgisi görülmedi." }] }]
+        },
+        {
+          "id": "FB_C06_OBJECT",
+          "kind": "FALLBACK",
+          "fallbackFor": "OBJECT",
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -50, "line": "hatali" },
+            { "type": "MARK", "quality": "BAD", "feedback": "Dayanaksız itiraz.", "category": "SORGULAMA" }
+          ],
+          "responses": [{ "lines": [{ "speaker": "nevzat", "text": "İtiraz reddedildi." }] }]
+        },
+        { "id": "C06_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "C_07" }
+      ]
+    },
+    {
+      "id": "C_06H",
+      "type": "COURTROOM",
+      "mode": "STAGE",
+      "title": "Tanığa hatırlatma",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "courtStage": "TANIK_DINLEME",
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ayse", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "cem", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "selin",
+        "counsel": "deniz"
+      },
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "nevzat",
+              "text": "Tanık, kendinizi ya da yakınlarınızı ceza soruşturmasına maruz bırakabilecek sorulara cevap vermekten çekinebilirsiniz (CMK 48)."
+            }
+          ]
+        }
+      ],
+      "witnessLabel": "TANIK · SELİN KAYA",
+      "choices": [
+        {
+          "id": "C06H_A",
+          "kind": "OPTION",
+          "label": "TCK 274’ün hatırlatılmasını talep et",
+          "effects": [
+            { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 50 },
+            { "type": "VAR", "var": "selin_cozuldu", "op": "set", "value": true }
+          ],
+          "next": "C_06",
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Yalan tanıklıkta etkin pişmanlık (TCK 274) hatırlatıldı; tanık gerçeği anlattı.",
+            "category": "HUKUKI_BILGI"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "selin",
+                  "expression": "uzgun",
+                  "text": "Murat… nişanlım. ‘Kerem’di de’ dedi. Çizelgeyi ben düzelttim."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "C06H_B",
+          "kind": "OPTION",
+          "label": "Tehdit et",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
+          ],
+          "next": "C_06",
+          "quality": {
+            "q": "BAD",
+            "feedback": "Tanığı tehdit etmek usule aykırıdır; heyet seni uyardı.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        { "id": "C06H_C", "kind": "OPTION", "label": "Geri çek", "next": "C_06" }
+      ]
+    },
+    {
+      "id": "C_07",
+      "type": "COURTROOM",
+      "mode": "STAGE",
+      "title": "Tanık Hüseyin Tan",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "courtStage": "TANIK_DINLEME",
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ayse", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "cem", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "huseyin",
+        "counsel": "deniz"
+      },
+      "lines": [
+        {
+          "when": { "ref": "hus_gelir" },
+          "lines": [
+            { "speaker": "riza", "text": "Tanık Hüseyin Tan!" },
+            { "speaker": "huseyin", "text": "Buradayım." }
+          ]
+        },
+        { "lines": [{ "speaker": "narrator", "text": "Mazeret tanığı dinlenmedi." }] }
+      ],
+      "witnessLabel": "TANIK · HÜSEYİN TAN",
+      "choices": [
+        {
+          "id": "C07_A",
+          "kind": "OPTION",
+          "label": "Fişle sor: kasanızdan mı, saat kaçta?",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
+            {
+              "type": "IF",
+              "when": { "hasEvidence": "ded_mazeret" },
+              "then": [
+                { "type": "SCORE", "category": "SORGULAMA", "amount": 50 },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 2 }
+              ],
+              "else": [{ "type": "VAR", "var": "pers", "op": "inc", "value": 1 }]
+            },
+            { "type": "VAR", "var": "huseyin_testified", "op": "set", "value": true },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Fiş ve yeminli tanık mazereti doğruladı.",
+              "category": "SORGULAMA"
+            }
+          ],
+          "next": "C_08",
+          "visibleWhen": { "ref": "hus_gelir" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "huseyin",
+                  "text": "Benim kasamdan, saat 22.57. Rulo kopyası da duruyor. Kerem 23.15’e kadar yanımdaydı."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "C07_B",
+          "kind": "OPTION",
+          "label": "İyi çocuk mudur?",
+          "effects": [{ "type": "VAR", "var": "huseyin_testified", "op": "set", "value": true }],
+          "next": "C_08",
+          "visibleWhen": { "ref": "hus_gelir" },
+          "quality": { "q": "NEUTRAL", "feedback": "Karakter tanıklığı mazereti ispatlamaz." },
+          "responses": [{ "lines": [{ "speaker": "huseyin", "text": "Çok iyi çocuktur, kimseye zararı yoktur." }] }]
+        },
+        {
+          "id": "C07_YOK",
+          "kind": "CONTINUE",
+          "label": "Devam",
+          "visibleWhen": { "not": { "ref": "hus_gelir" } },
+          "next": "C_08"
+        }
+      ]
+    },
+    {
+      "id": "C_08",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "title": "Anahtar ve teslim tutanağı",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "courtStage": "DELIL_TARTISMA",
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ayse", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "cem", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      },
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "cem",
+              "text": "Sanığın çantasından çıkan depo anahtarı ve 08.20 tarihli teslim tutanağı okundu."
+            },
+            { "speaker": "nevzat", "text": "Müdafi, diyeceğiniz? (CMK 215)" }
+          ]
+        }
+      ],
+      "prosecutionEvidence": "ev_anahtar",
+      "choices": [
+        {
+          "id": "C08_A",
+          "kind": "OPTION",
+          "label": "Hukuka aykırı arama: görev süresi dışında (5188 md. 9/1), yetki aşımı (md. 7/a yalnızca cihazla giriş kontrolü), karar/emir yok (CMK 119/1), rıza yok → Anayasa 38/6, CMK 206/2-a, 217/2, 230/1-b",
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "USUL_BILGISI",
+              "amount": { "if": { "when": { "flag": "fact_rizasiz_arama" }, "then": 150, "else": 100 } }
+            },
+            { "type": "VAR", "var": "key_excluded", "op": "set", "value": true },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Anahtar hukuka aykırı aramayla elde edildi; hükme esas alınamaz.",
+              "category": "USUL_BILGISI"
+            }
+          ],
+          "next": "C_09"
+        },
+        {
+          "id": "C08_B",
+          "kind": "OPTION",
+          "label": "İspat gücü yok: aynı anahtar bütün vardiyada var",
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 75 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Anahtar tek başına sanıkla irtibat kurmuyor.",
+              "category": "DELIL_ANALIZI"
+            }
+          ],
+          "next": "C_09"
+        },
+        {
+          "id": "C08_C",
+          "kind": "OPTION",
+          "label": "Gece araması yasağı (CMK 118)",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "MARK", "quality": "BAD", "feedback": "Arama 08.05’te.", "category": "USUL_BILGISI" }
+          ],
+          "next": "C_09"
+        },
+        {
+          "id": "C08_D",
+          "kind": "OPTION",
+          "label": "Diyeceğimiz yok",
+          "effects": [
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Hukuka aykırı aramayla elde edilen delile itiraz edilmedi.",
+              "category": "USUL_BILGISI"
+            }
+          ],
+          "next": "C_09"
+        }
+      ]
+    },
+    {
+      "id": "C_09",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "title": "Parmak izi raporu",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "courtStage": "DELIL_TARTISMA",
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ayse", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "cem", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      },
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "cem", "text": "Depo 3 dış kapı kolundaki parmak izi sanığa aittir." },
+            { "speaker": "nevzat", "text": "Müdafi, diyeceğiniz?" }
+          ]
+        }
+      ],
+      "prosecutionEvidence": "ev_parmak_izi_raporu",
+      "choices": [
+        {
+          "id": "C09_A",
+          "kind": "OPTION",
+          "label": "Bilirkişiye sor: izin bırakıldığı zaman belirlenebilir mi?",
+          "effects": [
+            { "type": "MEET", "character": "kaan" },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 50 },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
+            { "type": "VAR", "var": "fp_neutralized", "op": "set", "value": true },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Bilirkişi: parmak izinin bırakıldığı zaman belirlenemez.",
+              "category": "DELIL_ANALIZI"
+            }
+          ],
+          "next": "C_10",
+          "visibleWhen": { "flag": "bilirkisi_present" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "kaan",
+                  "text": "Hayır. Parmak izinin ne zaman bırakıldığı bilimsel olarak belirlenemez."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "C09_B",
+          "kind": "OPTION",
+          "label": "Sanık orada çalışıyor; izin zamanı belirsiz, 19.30’da top taşıdı",
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "DELIL_ANALIZI",
+              "amount": { "if": { "when": { "flag": "fact_19_30" }, "then": 150, "else": 100 } }
+            },
+            { "type": "VAR", "var": "fp_neutralized", "op": "set", "value": true },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Parmak izi, sanığın 19.30’daki taşıma işiyle açıklandı; zamanı belirsiz.",
+              "category": "DELIL_ANALIZI"
+            }
+          ],
+          "next": "C_10",
+          "visibleWhen": { "not": { "flag": "bilirkisi_present" } }
+        },
+        {
+          "id": "C09_C",
+          "kind": "OPTION",
+          "label": "İz hukuka aykırı alındı",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "CMK 81/1 savcı emriyle alındı.",
+              "category": "USUL_BILGISI"
+            }
+          ],
+          "next": "C_10"
+        },
+        {
+          "id": "C09_D",
+          "kind": "OPTION",
+          "label": "Yeni bilirkişi incelemesi iste",
+          "effects": [
+            {
+              "type": "MARK",
+              "quality": "NEUTRAL",
+              "feedback": "Rapor usule uygun; yeni inceleme sonucu değiştirmez."
+            }
+          ],
+          "next": "C_10"
+        },
+        {
+          "id": "C09_E",
+          "kind": "OPTION",
+          "label": "Diyeceğimiz yok",
+          "effects": [
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Parmak izinin masum açıklaması ortaya konmadı.",
+              "category": "DELIL_ANALIZI"
+            }
+          ],
+          "next": "C_10"
+        }
+      ]
+    },
+    {
+      "id": "C_10",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "title": "Savcının karşı delili",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "courtStage": "DELIL_TARTISMA",
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ayse", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "cem", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      },
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "cem",
+              "text": "Karşı delil olarak sanığın kolluk ifadesini sunuyorum: Depo 3’e girdiğini kabul etmiştir."
+            }
+          ]
+        }
+      ],
+      "prosecutionEvidence": "ev_kerem_kolluk",
+      "choices": [
+        {
+          "id": "C10_A",
+          "kind": "OPTION",
+          "label": "CMK 148/4: müdafisiz kolluk ifadesi hükme esas alınamaz; üstelik 23.00’ü değil 19.30’u anlatıyor",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Müdafisiz kolluk ifadesi hükme esas alınamaz (CMK 148/4); bağlamı da sanık lehine.",
+              "category": "USUL_BILGISI"
+            }
+          ],
+          "next": "C_11"
+        },
+        {
+          "id": "C10_B",
+          "kind": "OPTION",
+          "label": "Kerem 19.30’daki taşımayı açıklasın",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 75 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Sanık 19.30’daki taşımayı açıkladı; ifade 23.00’le ilgili değil.",
+              "category": "SAVUNMA_STRATEJISI"
+            }
+          ],
+          "next": "C_11",
+          "visibleWhen": { "flag": "fact_19_30" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "kerem",
+                  "text": "19.30’da Murat abinin isteğiyle Depo 3’e top taşıdım. Gece oraya hiç girmedim."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "C10_C",
+          "kind": "OPTION",
+          "label": "İfade işkenceyle alındı",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Somut dayanağı olmayan ağır iddia; heyet nezdinde güven kaybettin.",
+              "category": "USUL_BILGISI"
+            }
+          ],
+          "next": "C_11"
+        },
+        { "id": "C10_D", "kind": "OPTION", "label": "Diyeceğimiz yok", "next": "C_11" }
+      ]
+    },
+    {
+      "id": "C_11",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "title": "Mütalaa",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "courtStage": "MUTALAA",
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ayse", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "cem", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      },
+      "onFirstEnter": [
+        {
+          "type": "IF",
+          "when": { "hasEvidence": "ev_dna" },
+          "then": [{ "type": "VAR", "var": "pers", "op": "inc", "value": 1 }]
+        },
+        {
+          "type": "IF",
+          "when": { "hasEvidence": "ev_kamera" },
+          "then": [{ "type": "VAR", "var": "pers", "op": "inc", "value": 1 }]
+        }
+      ],
+      "lines": [
+        {
+          "when": { "ref": "mutalaa_beraat" },
+          "lines": [
+            { "speaker": "narrator", "text": "Delillerin tartışması tamamlandı." },
+            {
+              "speaker": "cem",
+              "text": "Toplanan delillerle sanığın üzerine atılı suçu işlediği sabit olmadığından beraatine; dosya örneğinin Murat Koç ve Selin Kaya hakkında suç duyurusu olarak Başsavcılığa gönderilmesine karar verilmesini talep ederim."
+            },
+            { "speaker": "nevzat", "text": "Müdafi, mütalaaya karşı diyeceğiniz? (CMK 216/2)" }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "Delillerin tartışması tamamlandı." },
+            {
+              "speaker": "cem",
+              "text": "Sanığın eylemine uyan TCK 142/2-d, h ve 143. maddeleri uyarınca cezalandırılmasına, TCK 53’ün uygulanmasına ve tutukluluk hâlinin devamına karar verilmesini talep ederim."
+            },
+            { "speaker": "nevzat", "text": "Müdafi, mütalaaya karşı diyeceğiniz? (CMK 216/2)" }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "C11_A",
+          "kind": "OPTION",
+          "label": "Hukuka aykırı delil hükme esas alınamaz (CMK 217/2, 230/1-b)",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Cevap hakkını yerinde kullandın (CMK 216/2).",
+              "category": "USUL_BILGISI"
+            }
+          ],
+          "next": "C_12",
+          "visibleWhen": { "not": { "ref": "mutalaa_beraat" } }
+        },
+        {
+          "id": "C11_A2",
+          "kind": "OPTION",
+          "label": "Katılıyoruz; beraatin dayanağı CMK 223/2-b olmalı",
+          "effects": [
+            { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 100 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Suçun sanık tarafından işlenmediği sabit: dayanak CMK 223/2-b.",
+              "category": "HUKUKI_BILGI"
+            }
+          ],
+          "next": "C_12",
+          "visibleWhen": { "ref": "mutalaa_beraat" }
+        },
+        { "id": "C11_B", "kind": "OPTION", "label": "Cevap yok", "next": "C_12" },
+        {
+          "id": "C11_C",
+          "kind": "OPTION",
+          "label": "Mütalaa tutanaktan çıkarılsın",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Mütalaa tutanaktan çıkarılamaz; savunma ancak cevap verir (CMK 216/2).",
+              "category": "USUL_BILGISI"
+            }
+          ],
+          "next": "C_12"
+        }
+      ]
+    },
+    {
+      "id": "C_12",
+      "type": "CHOICE",
+      "title": "Esas hakkında savunma",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "prompt": { "speaker": "nevzat", "text": "Müdafi, esas hakkındaki savunmanızı yapın." },
+      "choices": [
+        {
+          "id": "C12_A",
+          "kind": "OPTION",
+          "label": "Gerçek fail başkası: CMK 223/2-b ve suç duyurusu",
+          "effects": [
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "flag": "contra_s4_hts" },
+                  { "hasEvidence": "ded_iz_murat" },
+                  { "any": [{ "hasEvidence": "ded_mazeret" }, { "flag": "contra_s2" }] }
+                ]
+              },
+              "then": [
+                {
+                  "type": "SCORE",
+                  "category": "SAVUNMA_STRATEJISI",
+                  "amount": {
+                    "if": {
+                      "when": { "cmp": [{ "var": "strategy" }, "==", "MASUMIYET"] },
+                      "then": { "div": [{ "mul": [200, { "var": "strategy_pct" }] }, 100] },
+                      "else": 200
+                    }
+                  }
+                },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+                { "type": "VAR", "var": "murat_theory", "op": "set", "value": true },
+                {
+                  "type": "MARK",
+                  "quality": "GOOD",
+                  "feedback": "Gerçek fail iddiası delillerle örtüşüyor: HTS, bot izi ve çöken teşhis.",
+                  "category": "SAVUNMA_STRATEJISI"
+                }
+              ],
+              "else": [
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -100 },
+                { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+                {
+                  "type": "MARK",
+                  "quality": "BAD",
+                  "feedback": "Gerçek fail iddiası delille desteklenmedi.",
+                  "category": "SAVUNMA_STRATEJISI"
+                }
+              ]
+            }
+          ],
+          "next": "C_13"
+        },
+        {
+          "id": "C12_B",
+          "kind": "OPTION",
+          "label": "Şüpheden sanık yararlanır: CMK 223/2-e",
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "all": [{ "ref": "findings2" }, { "any": [{ "flag": "contra_s2" }, { "ref": "alibi" }] }] },
+              "then": [
+                {
+                  "type": "SCORE",
+                  "category": "SAVUNMA_STRATEJISI",
+                  "amount": {
+                    "if": {
+                      "when": { "cmp": [{ "var": "strategy" }, "==", "USUL"] },
+                      "then": { "div": [{ "mul": [200, { "var": "strategy_pct" }] }, 100] },
+                      "else": 200
+                    }
+                  }
+                },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+                {
+                  "type": "MARK",
+                  "quality": "GOOD",
+                  "feedback": "Teşhis çöktü ya da mazeret ispatlandı; kalan şüphe sanık lehine.",
+                  "category": "SAVUNMA_STRATEJISI"
+                }
+              ],
+              "else": [
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -100 },
+                {
+                  "type": "MARK",
+                  "quality": "BAD",
+                  "feedback": "Şüphe savunması için yeterli bulgu ortaya konmadı.",
+                  "category": "SAVUNMA_STRATEJISI"
+                }
+              ]
+            }
+          ],
+          "next": "C_13"
+        },
+        {
+          "id": "C12_C",
+          "kind": "OPTION",
+          "label": "Öncelikle beraat; aksi hâlde 142/2-d düşsün, alt sınır ve TCK 62 (terditli)",
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "SAVUNMA_STRATEJISI",
+              "amount": {
+                "if": {
+                  "when": { "cmp": [{ "var": "strategy" }, "==", "INDIRIM"] },
+                  "then": { "div": [{ "mul": [150, { "var": "strategy_pct" }] }, 100] },
+                  "else": 150
+                }
+              }
+            },
+            { "type": "VAR", "var": "closing_lehe", "op": "set", "value": true },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Terditli savunma meşru bir yoldur.",
+              "category": "SAVUNMA_STRATEJISI"
+            }
+          ],
+          "next": "C_13"
+        },
+        {
+          "id": "C12_D",
+          "kind": "OPTION",
+          "label": "Etkin pişmanlık ve HAGB",
+          "effects": [
+            { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": -150 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 2 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "168 failin tazminini, HAGB ≤2 yıl ceza ve tam tazmini ister; masumiyetle çelişir.",
+              "category": "HUKUKI_BILGI"
+            }
+          ],
+          "next": "C_13"
+        },
+        {
+          "id": "C12_E",
+          "kind": "OPTION",
+          "label": "Duygusal saldırı",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Duygusal söylem delilin yerini tutmaz.",
+              "category": "SAVUNMA_STRATEJISI"
+            }
+          ],
+          "next": "C_13"
+        }
+      ]
+    },
+    {
+      "id": "C_13",
+      "type": "CHOICE",
+      "title": "Son söz",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "prompt": { "speaker": "nevzat", "text": "Sanık, son sözünüz? (CMK 216/3)" },
+      "choices": [
+        {
+          "id": "C13_A",
+          "kind": "OPTION",
+          "label": "“Ben yapmadım. Adaletinize güveniyorum.”",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 25 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Kısa ve onurlu bir son söz.",
+              "category": "SAVUNMA_STRATEJISI"
+            }
+          ],
+          "next": "C_14",
+          "visibleWhen": { "not": { "flag": "false_confession" } }
+        },
+        {
+          "id": "C13_B",
+          "kind": "OPTION",
+          "label": "Ağlayarak merhamet dilesin",
+          "effects": [
+            { "type": "MARK", "quality": "NEUTRAL", "feedback": "TCK 62/2: şeklî tutum indirim nedeni değildir." }
+          ],
+          "next": "C_14",
+          "visibleWhen": { "not": { "flag": "false_confession" } }
+        },
+        {
+          "id": "C13_C",
+          "kind": "OPTION",
+          "label": "Selin’e öfkesini kussun",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -25 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "Tanığa öfke heyeti sanığın aleyhine etkiledi.",
+              "category": "SAVUNMA_STRATEJISI"
+            }
+          ],
+          "next": "C_14",
+          "visibleWhen": { "not": { "flag": "false_confession" } }
+        },
+        {
+          "id": "C13_D",
+          "kind": "CONTINUE",
+          "label": "“Pişmanım.”",
+          "visibleWhen": { "flag": "false_confession" },
+          "next": "C_14"
+        }
+      ]
+    },
+    {
+      "id": "C_14",
+      "type": "DECISION",
+      "title": "Hüküm",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "lines": [{ "lines": [{ "speaker": "nevzat", "text": "Hüküm fıkrası ayakta dinlenir (CMK 231/4)." }] }],
+      "routes": [{ "to": "R_KARAR" }],
+      "choices": []
+    },
+    {
+      "id": "C_INT_COKUS",
+      "type": "STORY",
+      "title": "Çöküş",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "Heyet nezdinde savunmanın inandırıcılığı kalmadı." },
+            { "speaker": "nevzat", "text": "Sanık, kısaca son sözünüz?" }
+          ]
+        }
+      ],
+      "choices": [{ "id": "COKUS_SON", "kind": "CONTINUE", "label": "Son söz: “Ben yapmadım.”", "next": "C_14" }]
+    },
+    {
+      "id": "R_KARAR",
+      "type": "RESULT",
+      "title": "Karar Açıklandı",
+      "eyebrow": "DAVA #07 · HÜKÜM",
+      "chapter": "Karar",
+      "choices": []
+    }
+  ],
+  "triggers": [
+    {
+      "id": "tg_cokus",
+      "priority": 0,
+      "once": true,
+      "when": { "all": [{ "flag": "in_court" }, { "cmp": [{ "var": "cred" }, "<=", 0] }] },
+      "effects": [{ "type": "VAR", "var": "cokus", "op": "set", "value": true }],
+      "goto": "C_INT_COKUS"
+    }
   ],
   "discoveryPaths": [
     {

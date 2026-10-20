@@ -1,0 +1,60 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_iz42",
+        "when": { "not": { "hasEvidence": "clue_iz42" } },
+        "text": "Arka kapıdan sokağa uzanan çamurlu bot izini kaçırdın; ölçekli fotoğraf numarayı veriyordu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_uv",
+        "when": { "not": { "hasEvidence": "clue_uv_silinti" } },
+        "text": "Selin satırına UV tutmadın; saat sonradan değiştirilmişti.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_murat42",
+        "when": { "not": { "hasEvidence": "clue_murat_42" } },
+        "text": "Çizelgeyi İSG zimmetiyle karşılaştırmadın; Murat'ın botu 42'ydi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_ariza",
+        "when": { "not": { "hasEvidence": "ev_ariza_kaydi" } },
+        "text": "14 no'lu direğin arıza kaydını avukat olarak doğrudan isteyebilirdin (Av.K. 2/3).",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_mazeret",
+        "when": { "any": [{ "not": { "hasEvidence": "ev_fis" } }, { "not": { "flag": "huseyin_testified" } }] },
+        "text": "Mazeret tanığını dilekçeyle bildirmedin ya da duruşmaya getirmedin (CMK 177–179); yazılı beyan yetmez (CMK 210/1).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_hts",
+        "when": { "not": { "hasEvidence": "ev_hts" } },
+        "text": "Gerçek faile giden yol: Murat hakkında suç duyurusu ve CMK 135/6 tespit talebi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_dna_kamera",
+        "when": { "any": [{ "not": { "hasEvidence": "ev_dna" } }, { "not": { "hasEvidence": "ev_kamera" } }] },
+        "text": "Emanetteki izmarit (CMK 78–79) ve kesik kablo bilirkişiye gönderilmeliydi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kerem",
+        "when": { "any": [{ "not": { "flag": "fact_rizasiz_arama" } }, { "not": { "flag": "fact_19_30" } }] },
+        "text": "Aramanın rızasız olduğunu ve parmak izinin masum açıklamasını Kerem anlatacaktı; sormadın.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_suspect",
+        "when": { "not": { "flag": "suspect_murat" } },
+        "text": "Bot izini Kerem'e göstermedin; sakladığı bilgi açığa çıkmadı.",
+        "category": "SORGULAMA"
+      }
+    ]
+  }
+}

@@ -28,6 +28,10 @@ function corsOrigin(env: Env): (origin: string | undefined, cb: (err: Error | nu
 export function configureApp<T extends INestApplication>(app: T): T {
   const env = app.get<Env>(ENV);
   app.useLogger(app.get(Logger));
+  // Tünel/ters vekil arkasında istemci IP'si (anonim istek kısıtlaması req.ip kullanır).
+  if (env.TRUST_PROXY !== undefined) {
+    (app.getHttpAdapter().getInstance() as { set(k: string, v: unknown): void }).set('trust proxy', env.TRUST_PROXY);
+  }
   app.use(requestId);
   app.use(helmet());
   app.enableCors({ origin: corsOrigin(env), exposedHeaders: ['X-Request-Id', 'ETag', 'X-Idempotent-Replay'] });

@@ -16,7 +16,7 @@ services:
     image: postgres:17-alpine
     environment:
       POSTGRES_USER: mudafaa
-      POSTGRES_PASSWORD: mudafaa
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mudafaa}
       POSTGRES_DB: mudafaa
     ports:
       - '127.0.0.1:${POSTGRES_PORT:-5432}:5432'
@@ -42,6 +42,49 @@ services:
       interval: 3s
       timeout: 3s
       retries: 20
+
+  # Üretim profili: API konteyneri + Cloudflare tüneli (mudafaa.sehirkilavuzu.com → api:3000).
+  #   docker compose --profile prod up -d --build
+  # Gerekenler: apps/api/.env.production (bkz. apps/api/production.env.example) ve kökteki .env'de CLOUDFLARE_TUNNEL_TOKEN.
+  api:
+    profiles: ['prod']
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    env_file: apps/api/.env.production
+    environment:
+      NODE_ENV: production
+      APP_ROLE: all
+      TRUST_PROXY: '1'
+      DATABASE_URL: postgresql://mudafaa:${POSTGRES_PASSWORD:-mudafaa}@postgres:5432/mudafaa
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - '127.0.0.1:${API_PORT:-3000}:3000'
+    volumes:
+      - assets:/app/apps/api/storage
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:3000/v1/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      start_period: 60s
+      retries: 5
+
+  tunnel:
+    profiles: ['prod']
+    image: cloudflare/cloudflared:2024.12.2
+    command: ['tunnel', '--no-autoupdate', 'run']
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
 
   # Test profili: `npm run db:test:up` ile açılır, geliştirme verisine dokunmaz.
   postgres-test:
@@ -78,3 +121,4 @@ services:
 volumes:
   pgdata:
   redisdata:
+  assets:

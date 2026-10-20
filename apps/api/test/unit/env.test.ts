@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { loadEnv } from '../../src/config/env.js';
+import { loadEnv, parseServiceAccount } from '../../src/config/env.js';
 
 const base = {
   DATABASE_URL: 'postgresql://mudafaa:mudafaa@localhost:5432/mudafaa',
@@ -33,5 +33,18 @@ describe('loadEnv', () => {
     expect(() => loadEnv({ ...base, NODE_ENV: 'production', FIREBASE_AUTH_EMULATOR_HOST: 'localhost:9099' })).toThrow(
       /FIREBASE_AUTH_EMULATOR_HOST/,
     );
+  });
+
+  it('accepts a service account key as JSON or base64', () => {
+    const key = JSON.stringify({ project_id: 'mudafaa-app', client_email: 'sa@x.iam', private_key: 'a\\nb' });
+
+    expect(parseServiceAccount(key)).toEqual({ projectId: 'mudafaa-app', clientEmail: 'sa@x.iam', privateKey: 'a\nb' });
+    expect(parseServiceAccount(Buffer.from(key).toString('base64'))?.projectId).toBe('mudafaa-app');
+    expect(loadEnv({ ...base, FIREBASE_SERVICE_ACCOUNT: key }).FIREBASE_SERVICE_ACCOUNT).toBe(key);
+  });
+
+  it('rejects a malformed service account key', () => {
+    expect(parseServiceAccount('{"project_id":1}')).toBeNull();
+    expect(() => loadEnv({ ...base, FIREBASE_SERVICE_ACCOUNT: 'not-a-key' })).toThrow(/FIREBASE_SERVICE_ACCOUNT/);
   });
 });

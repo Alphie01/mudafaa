@@ -1,4 +1,4 @@
-import { all, always, any, because, cmp, finalAtLeast, flag, not, outcome, ref, v, xp } from '../../../tools/content/src/kit/index.js';
+import { all, always, any, because, cmp, finalAtLeast, flag, has, not, outcome, ref, v, xp } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { B, W } from './dsl.js';
 import { T_BERAAT, T_BERAAT_B, T_INDIRIM } from './thresholds.js';
@@ -55,6 +55,7 @@ export const outcomes: CasePart = {
         because('Bu dizüstü eski ortağın zimmetindedir; oturum adresleri onun firmasının iş hattıdır; mesajların dili sanığın değil, tanığınkidir.', flag('contra_o3')),
         because('Ekran görüntüleri hukuka aykırı elde edildiğinden hükme esas alınmamıştır.', flag('ss_excluded')),
         because('Savunma, baştan sona hukuka uygun yollarla yürütülmüştür.', flag('tarik_red')),
+        because('Eski ortağın işyerinde el konulan dizüstü, mühür tutanakla açılıp imajı ve hash değeri alınarak korunmuştur (CMK 134/4).', flag('laptop_imaj')),
         because('Bu deliller birlikte değerlendirildiğinde, suçların sanık tarafından işlenmediği sabittir.'),
       ],
       legalBasis: 'CMK 223/2-b; CMK 141; TCK 107/2, 134/2 (beraat)',
@@ -69,7 +70,13 @@ export const outcomes: CasePart = {
             { speaker: 'narrator', text: 'Melis koridorda durdu. Tarık’a yaklaşamadı; yaklaşmadı.' },
             { speaker: 'melis', text: 'Neyse. Teşekkür ederim avukat hanım.', expression: 'uzgun' },
             { speaker: 'narrator', text: 'Sonra Sinan’la gittiler. Vakıf ihaleyi yeniden açacakmış; bu kez Tekin Yapı teklif veremeyecek.' },
-            { speaker: 'narrator', text: 'Savcılık, Ozan Tekin hakkında soruşturma başlattı. El konulan dizüstünün imajı alınıyor.' },
+            { speaker: 'narrator', text: 'Savcılık, Ozan Tekin hakkında soruşturma başlattı.' },
+          ],
+        },
+        W(has('ev_laptop'), `> El konulan 07 numaralı dizüstünün imajı, mühür tutanakla açılarak alınıyor; hash değeri dosyada. Bu kez kimse bir ekranın fotoğrafını çekmeyecek.`),
+        W(not(has('ev_laptop')), `> Dizüstü bulunamadı; ama bir hat, bir zimmet ve bir yemin altında susuş, bir soruşturmayı başlatmaya yetti.`),
+        {
+          lines: [
             { speaker: 'tarik', text: 'Telefonumu emanetten aldım. Bir şey yapacağım, izninizle.' },
             { speaker: 'narrator', text: 'PUSULA’yı açtı. “Bağlı cihazlar.” Listede hâlâ duran bütün oturumları tek tek kapattı. En sonda “OFIS-LAPTOP-07”.' },
             { speaker: 'player', text: 'Ekran karardı. Bu kez kimse yazmıyordu.', style: 'thought' },
@@ -106,12 +113,27 @@ export const outcomes: CasePart = {
             { speaker: 'tarik', text: 'Kazandık mı?', expression: 'saskin' },
             { speaker: 'player', text: 'Beraat ettiniz Tarık Bey. Sabıkanız olmayacak. Yasak kalktı.' },
             { speaker: 'tarik', text: 'Kızıma ne diyeceğim peki? “Baban yapmadı” mı, yoksa “kanıtlayamadılar” mı? İkisi aynı cümle değil.', expression: 'uzgun' },
-            { speaker: 'narrator', text: 'Cevap veremedim. Mesajların başka bir cihazdan çıktığı dosyada yazıyordu, ama o cihazın ucundaki eli bir isme bağlayamamıştık. Ozan Tekin tanık sırasından kalkıp gitmişti; bir soruşturma açılmamıştı.' },
-            { speaker: 'narrator', text: 'Vakıf ihaleyi bir başka firmaya verdi; “ortalık durulsun” dediler. Tarık’ın teklifi, suçsuzluğuyla birlikte rafa kalktı.' },
-            { speaker: 'player', text: 'Bazen adalet bir kapıyı açar, ama ışığı yakmaz. İçeri girersin, ama karanlıkta. Bir yerde, bir ekran hâlâ yanıyordu; kimin elinde, bilmiyordum.', style: 'thought' },
-            { speaker: 'leyla', text: 'Beraat beraattir Deniz. Ama senin yüzünden anlıyorum: bu kez “yapmadı” diyemedin, “yapamadılar” dedin. Aradaki farkı hiç unutma.' },
           ],
         },
+        W(
+          all(flag('suc_duyurusu'), not(flag('laptop_kayip'))),
+          `
+          > Cevap veremedim. Kâğıtlar ismi söylemişti: bir zimmet, bir hat, bir dizüstü. Ama esas savunmada o ismi ben söylemedim; “şüphe” dedim, “kesinlik yok” dedim. Hâkim de benden fazlasını yazamazdı.
+          > Ozan Tekin hakkında soruşturma açıldı; el konulan dizüstünün imajı alınıyor. Belki bir gün başka bir salonda, başka bir hâkim o cümleyi kuracak. Bugün kurulmadı.
+          > Vakıf ihaleyi askıda tuttu; “soruşturma bitsin” dediler. Tarık’ın teklifi bir rafta bekliyor, adı gibi.
+          ~ Elimde bir isim vardı. Onu salona taşımaya cesaret edemedim; şüphenin güvenli odasında kaldım. Bazen avukat da kendi telefonunu kilitli bırakır.
+          leyla: Beraat beraattir Deniz. Ama kâğıtların söylediğini sen söylemezsen, o cümle bir başkasının ağzında yarım kalır. Aradaki farkı hiç unutma.
+        `,
+        ),
+        W(
+          not(all(flag('suc_duyurusu'), not(flag('laptop_kayip')))),
+          `
+          > Cevap veremedim. Mesajların başka bir cihazdan çıktığı dosyada yazıyordu, ama o cihazın ucundaki eli bir isme bağlayamamıştık. Ozan Tekin tanık sırasından kalkıp gitmişti.
+          > Vakıf ihaleyi bir başka firmaya verdi; “ortalık durulsun” dediler. Tarık’ın teklifi, suçsuzluğuyla birlikte rafa kalktı.
+          ~ Bazen adalet bir kapıyı açar, ama ışığı yakmaz. İçeri girersin, ama karanlıkta. Bir yerde, bir ekran hâlâ yanıyordu; kimin elinde, bilmiyordum.
+          leyla: Beraat beraattir Deniz. Ama senin yüzünden anlıyorum: bu kez “yapmadı” diyemedin, “yapamadılar” dedin. Aradaki farkı hiç unutma.
+        `,
+        ),
         sozHatirlat,
       ],
     }),
@@ -139,8 +161,8 @@ export const outcomes: CasePart = {
             { speaker: 'narrator', text: 'Hâkim bir suçtan beraat, bir suçtan hükmün açıklanmasının geri bırakılmasına karar verdi. Tarık bir an ne hissedeceğini bilemedi; sevinçle hüzün arasında bir yerde kaldı.' },
             { speaker: 'tarik', text: 'Yani sabıkam olmayacak. Ama bir yıl, denetim altında, başımın üstünde duracak. Bir hata yaparsam açılacak.', expression: 'uzgun' },
             { speaker: 'tarik', text: 'Yarım masumiyet. Mimarlıkta yarım kemer olmaz avukat hanım. Bir kemer ya bütün yükü taşır, ya çöker. Ortası yoktur.' },
-            { speaker: 'player', text: 'Ekran görüntülerini düşürdük, bir kuşku yarattık. Ama o kuşkuyu bir isme bağlayamadık. İsmi kâğıtlar söylemeliydi; kâğıtlar yarım kaldı.', style: 'thought' },
-            { speaker: 'narrator', text: 'Koridorda Melis bana bakmadan geçti. Haklıydı. Bir sütunu görmüştüm, ama ucundaki eli tutamamıştım. Ozan Tekin, dışarıda, bir yerde, gülümsüyordu belki.' },
+            { speaker: 'player', text: 'Bir kuşku yarattık. Ama o kuşkuyu sonuna kadar taşıyamadık. İsmi kâğıtlar söylemeliydi; kâğıtlar yarım kaldı.', style: 'thought' },
+            { speaker: 'narrator', text: 'Koridorda Melis bana bakmadan geçti. Haklıydı. Mesajları kimin yazdığı sorusu, salonda cevapsız kaldı; bir ekran, bir yerde, hâlâ yanıyordu belki.' },
             { speaker: 'leyla', text: 'Yarım da olsa bir sonuç Deniz. Ama senin yüzünden anlıyorum: bu çocuğa tam masumiyeti borçluydun. Bir dahakine, sütunu gördüğünde, elini de bul.' },
           ],
         },
@@ -156,7 +178,7 @@ export const outcomes: CasePart = {
       header: 'TÜRK MİLLETİ ADINA',
       sentence: '2 yıl 6 ay + 1 yıl 3 ay hapis',
       verdictText:
-        'Sanığın özel hayatın gizliliğini ihlalden (TCK 134/2) 2 yıl 6 ay, şantaftan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, TCK 53 ve 63’ün uygulanmasına; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).',
+        'Sanığın özel hayatın gizliliğini ihlalden (TCK 134/2) 2 yıl 6 ay, şantajdan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, TCK 53 ve 63’ün uygulanmasına; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).',
       reasoning: [
         because('Mesajlar ve iletilen ses kaydı sanığa ait hesapta, sanığın telefonunda tespit edilmiş; aksi yönde yeterli delil ortaya konmamıştır.'),
         because('Savunmanın duruşmadaki inandırıcılığı yitirilmiş; heyet iddianamedeki anlatımı esas almıştır.', flag('cokus')),
@@ -165,24 +187,33 @@ export const outcomes: CasePart = {
       xp: xp(0.6, { ethicsVar: 'ethics' }),
       howToReach: 'Varsayılan sonuç: mesajların kaynağına dair kuşku yaratılamazsa verilir.',
       epilogue: [
+        B(`
+          # TÜRK MİLLETİ ADINA |bg=durusma_salonu
+          > Hâkim cezayı okudu. Rakamlar salonun içinde soğuk soğuk yankılandı. Tarık ayağa kalkmıştı; oturmayı unuttu, mübaşir koluna girdi.
+        `)[0]!,
         W(
           flag('cokus'),
           `
           > Salon boşaldı. Savcı dosyasını toplarken yanımdan geçti, durdu.
           tolga: İyi bir avukat olacaksınız. Bugün değil.
-          ~ Haklıydı. Elimdeki en güçlü kartı, bir sütunu, hiç oynamadım.
+          ~ Haklıydı. Elimdeki kartları birer birer yaktım; salon, en sonunda, beni dinlemeyi bıraktı.
         `,
         ),
-        {
-          lines: [
-            { speaker: 'narrator', text: '# TÜRK MİLLETİ ADINA |bg=durusma_salonu', style: 'card' },
-            { speaker: 'narrator', text: 'Hâkim cezayı okudu. Rakamlar salonun içinde soğuk soğuk yankılandı. Tarık ayağa kalkmıştı; oturmayı unuttu, mübaşir koluna girdi.' },
-            { speaker: 'narrator', text: 'Tarık telefonunu emanetten aldı. Ekranı açtı; arşivlenmiş sohbet hâlâ oradaydı, aynı yerde, aynı “Saygılar.” ile. Kapatmadı. Bakamadı bile.' },
-            { speaker: 'player', text: 'Bir sütun vardı. Raporun ekinde, kimsenin bakmadığı son sütun. Gönderen cihaz. Ben de bakmadım. Bir insanın hayatı o sütundaydı.', style: 'thought' },
-            { speaker: 'tarik', text: 'Ece’ye ne diyeceğim avukat hanım? Bana bir cümle verin. Bir tek cümle.', expression: 'uzgun' },
-            { speaker: 'narrator', text: 'Cümlem yoktu. Yağmur yeniden başlamıştı; camdan, bir çocuğun sorusuna benzeyen bir ses geliyordu.' },
-          ],
-        },
+        B(`
+          > Tarık telefonunu emanetten aldı. Ekranı açtı; arşivlenmiş sohbet hâlâ oradaydı, aynı yerde, aynı “Saygılar.” ile. Kapatmadı. Bakamadı bile.
+        `)[0]!,
+        W(
+          not(has('clue_cihaz3')),
+          `~ Bir sütun vardı. Raporun ekinde, kimsenin bakmadığı son sütun. Gönderen cihaz. Ben de bakmadım. Bir insanın hayatı o sütundaydı.`,
+        ),
+        W(
+          has('clue_cihaz3'),
+          `~ Sütunu görmüştüm. Cihaz 3. Ama gördüğümü salona taşıyamadım; bir sütun, okunmadıkça yalnızca bir sütundur.`,
+        ),
+        B(`
+          tarik/uzgun: Ece’ye ne diyeceğim avukat hanım? Bana bir cümle verin. Bir tek cümle.
+          > Cümlem yoktu. Yağmur yeniden başlamıştı; camdan, bir çocuğun sorusuna benzeyen bir ses geliyordu.
+        `)[0]!,
         sozHatirlat,
       ],
     }),

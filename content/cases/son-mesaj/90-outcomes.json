@@ -78,6 +78,10 @@
           "text": "Ekran görüntüleri hukuka aykırı elde edildiğinden hükme esas alınmamıştır."
         },
         { "when": { "flag": "tarik_red" }, "text": "Savunma, baştan sona hukuka uygun yollarla yürütülmüştür." },
+        {
+          "when": { "flag": "laptop_imaj" },
+          "text": "Eski ortağın işyerinde el konulan dizüstü, mühür tutanakla açılıp imajı ve hash değeri alınarak korunmuştur (CMK 134/4)."
+        },
         { "text": "Bu deliller birlikte değerlendirildiğinde, suçların sanık tarafından işlenmediği sabittir." }
       ],
       "legalBasis": "CMK 223/2-b; CMK 141; TCK 107/2, 134/2 (beraat)",
@@ -103,10 +107,29 @@
               "speaker": "narrator",
               "text": "Sonra Sinan’la gittiler. Vakıf ihaleyi yeniden açacakmış; bu kez Tekin Yapı teklif veremeyecek."
             },
+            { "speaker": "narrator", "text": "Savcılık, Ozan Tekin hakkında soruşturma başlattı." }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "ev_laptop" },
+          "lines": [
             {
               "speaker": "narrator",
-              "text": "Savcılık, Ozan Tekin hakkında soruşturma başlattı. El konulan dizüstünün imajı alınıyor."
-            },
+              "text": "El konulan 07 numaralı dizüstünün imajı, mühür tutanakla açılarak alınıyor; hash değeri dosyada. Bu kez kimse bir ekranın fotoğrafını çekmeyecek."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "hasEvidence": "ev_laptop" } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Dizüstü bulunamadı; ama bir hat, bir zimmet ve bir yemin altında susuş, bir soruşturmayı başlatmaya yetti."
+            }
+          ]
+        },
+        {
+          "lines": [
             { "speaker": "tarik", "text": "Telefonumu emanetten aldım. Bir şey yapacağım, izninizle." },
             {
               "speaker": "narrator",
@@ -184,10 +207,41 @@
               "speaker": "tarik",
               "text": "Kızıma ne diyeceğim peki? “Baban yapmadı” mı, yoksa “kanıtlayamadılar” mı? İkisi aynı cümle değil.",
               "expression": "uzgun"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "flag": "suc_duyurusu" }, { "not": { "flag": "laptop_kayip" } }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Cevap veremedim. Kâğıtlar ismi söylemişti: bir zimmet, bir hat, bir dizüstü. Ama esas savunmada o ismi ben söylemedim; “şüphe” dedim, “kesinlik yok” dedim. Hâkim de benden fazlasını yazamazdı."
             },
             {
               "speaker": "narrator",
-              "text": "Cevap veremedim. Mesajların başka bir cihazdan çıktığı dosyada yazıyordu, ama o cihazın ucundaki eli bir isme bağlayamamıştık. Ozan Tekin tanık sırasından kalkıp gitmişti; bir soruşturma açılmamıştı."
+              "text": "Ozan Tekin hakkında soruşturma açıldı; el konulan dizüstünün imajı alınıyor. Belki bir gün başka bir salonda, başka bir hâkim o cümleyi kuracak. Bugün kurulmadı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Vakıf ihaleyi askıda tuttu; “soruşturma bitsin” dediler. Tarık’ın teklifi bir rafta bekliyor, adı gibi."
+            },
+            {
+              "speaker": "player",
+              "text": "Elimde bir isim vardı. Onu salona taşımaya cesaret edemedim; şüphenin güvenli odasında kaldım. Bazen avukat da kendi telefonunu kilitli bırakır.",
+              "style": "thought"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Beraat beraattir Deniz. Ama kâğıtların söylediğini sen söylemezsen, o cümle bir başkasının ağzında yarım kalır. Aradaki farkı hiç unutma."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "all": [{ "flag": "suc_duyurusu" }, { "not": { "flag": "laptop_kayip" } }] } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Cevap veremedim. Mesajların başka bir cihazdan çıktığı dosyada yazıyordu, ama o cihazın ucundaki eli bir isme bağlayamamıştık. Ozan Tekin tanık sırasından kalkıp gitmişti."
             },
             {
               "speaker": "narrator",
@@ -266,12 +320,12 @@
             },
             {
               "speaker": "player",
-              "text": "Ekran görüntülerini düşürdük, bir kuşku yarattık. Ama o kuşkuyu bir isme bağlayamadık. İsmi kâğıtlar söylemeliydi; kâğıtlar yarım kaldı.",
+              "text": "Bir kuşku yarattık. Ama o kuşkuyu sonuna kadar taşıyamadık. İsmi kâğıtlar söylemeliydi; kâğıtlar yarım kaldı.",
               "style": "thought"
             },
             {
               "speaker": "narrator",
-              "text": "Koridorda Melis bana bakmadan geçti. Haklıydı. Bir sütunu görmüştüm, ama ucundaki eli tutamamıştım. Ozan Tekin, dışarıda, bir yerde, gülümsüyordu belki."
+              "text": "Koridorda Melis bana bakmadan geçti. Haklıydı. Mesajları kimin yazdığı sorusu, salonda cevapsız kaldı; bir ekran, bir yerde, hâlâ yanıyordu belki."
             },
             {
               "speaker": "leyla",
@@ -300,7 +354,7 @@
       "stampTone": "red",
       "header": "TÜRK MİLLETİ ADINA",
       "sentence": "2 yıl 6 ay + 1 yıl 3 ay hapis",
-      "verdictText": "Sanığın özel hayatın gizliliğini ihlalden (TCK 134/2) 2 yıl 6 ay, şantaftan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, TCK 53 ve 63’ün uygulanmasına; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).",
+      "verdictText": "Sanığın özel hayatın gizliliğini ihlalden (TCK 134/2) 2 yıl 6 ay, şantajdan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, TCK 53 ve 63’ün uygulanmasına; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).",
       "reasoning": [
         {
           "text": "Mesajlar ve iletilen ses kaydı sanığa ait hesapta, sanığın telefonunda tespit edilmiş; aksi yönde yeterli delil ortaya konmamıştır."
@@ -321,33 +375,56 @@
       "howToReach": "Varsayılan sonuç: mesajların kaynağına dair kuşku yaratılamazsa verilir.",
       "epilogue": [
         {
+          "lines": [
+            { "speaker": "narrator", "text": "TÜRK MİLLETİ ADINA", "style": "card", "bg": "durusma_salonu" },
+            {
+              "speaker": "narrator",
+              "text": "Hâkim cezayı okudu. Rakamlar salonun içinde soğuk soğuk yankılandı. Tarık ayağa kalkmıştı; oturmayı unuttu, mübaşir koluna girdi."
+            }
+          ]
+        },
+        {
           "when": { "flag": "cokus" },
           "lines": [
             { "speaker": "narrator", "text": "Salon boşaldı. Savcı dosyasını toplarken yanımdan geçti, durdu." },
             { "speaker": "tolga", "text": "İyi bir avukat olacaksınız. Bugün değil." },
             {
               "speaker": "player",
-              "text": "Haklıydı. Elimdeki en güçlü kartı, bir sütunu, hiç oynamadım.",
+              "text": "Haklıydı. Elimdeki kartları birer birer yaktım; salon, en sonunda, beni dinlemeyi bıraktı.",
               "style": "thought"
             }
           ]
         },
         {
           "lines": [
-            { "speaker": "narrator", "text": "# TÜRK MİLLETİ ADINA |bg=durusma_salonu", "style": "card" },
-            {
-              "speaker": "narrator",
-              "text": "Hâkim cezayı okudu. Rakamlar salonun içinde soğuk soğuk yankılandı. Tarık ayağa kalkmıştı; oturmayı unuttu, mübaşir koluna girdi."
-            },
             {
               "speaker": "narrator",
               "text": "Tarık telefonunu emanetten aldı. Ekranı açtı; arşivlenmiş sohbet hâlâ oradaydı, aynı yerde, aynı “Saygılar.” ile. Kapatmadı. Bakamadı bile."
-            },
+            }
+          ]
+        },
+        {
+          "when": { "not": { "hasEvidence": "clue_cihaz3" } },
+          "lines": [
             {
               "speaker": "player",
               "text": "Bir sütun vardı. Raporun ekinde, kimsenin bakmadığı son sütun. Gönderen cihaz. Ben de bakmadım. Bir insanın hayatı o sütundaydı.",
               "style": "thought"
-            },
+            }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "clue_cihaz3" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Sütunu görmüştüm. Cihaz 3. Ama gördüğümü salona taşıyamadım; bir sütun, okunmadıkça yalnızca bir sütundur.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
             {
               "speaker": "tarik",
               "text": "Ece’ye ne diyeceğim avukat hanım? Bana bir cümle verin. Bir tek cümle.",

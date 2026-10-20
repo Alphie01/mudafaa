@@ -176,9 +176,21 @@ export const ara: CasePart = {
               visibleWhen: all(has('ev_hesap'), not(visited('INV_HESAP'))),
               description: 'Noter tespitli döküm · 6 deneme',
             }),
+            p2.activity('A_RAPOR', 'Bilirkişi raporu', 'ARA_RAPOR', {
+              once: true,
+              next: 'ARA_RAPOR',
+              visibleWhen: all(flag('bilirkisi_istendi'), cmp(v('ara_day'), '==', 2)),
+              description: 'Dr. Uçar · imaj incelemesi · 5 deneme',
+            }),
+            p2.activity('A_VAKIF', 'Vakfın ihale dosyası', 'ARA_VAKIF_GIRIS', {
+              once: true,
+              next: 'ARA_VAKIF_GIRIS',
+              visibleWhen: visited('INV_T_HAYRI'),
+              description: 'Hayri Bey’in izniyle · gelen evrak defteri',
+            }),
             p2.activity('A_SUC', 'Savcılığa suç duyurusu', 'ARA_SUC', {
               next: 'ARA_SUC',
-              visibleWhen: has('ded_bagli'),
+              visibleWhen: all(has('ded_bagli'), not(flag('suc_duyurusu')), not(flag('suc_mechul'))),
               description: 'Kimin hakkında, hangi dayanakla?',
             }),
             p2.free('A_CIKARIM', 'Çıkarım tahtası', 'ARA_CIKARIM', {
@@ -318,6 +330,7 @@ export const ara: CasePart = {
         }),
         option('MEL_VAZGEC', 'Şikâyetinizden vazgeçmeyi düşünür müsünüz?', {
           score: { SAVUNMA_STRATEJISI: -40 },
+          effects: [raise('melis_kapandi')],
           bad: 'Görüşmenin amacı anlamaktı; vazgeçme talebi katılanı baskı altında hissettirir ve görüşmeyi bitirir. Üstelik şantaj suçu şikâyete bağlı değildir.',
           responses: B(`
             sinan: Görüşme burada bitti meslektaşım.
@@ -446,6 +459,158 @@ export const ara: CasePart = {
       HUB,
     ),
     toHub(hesapDoc('ARA_HESAP', 'A', 'ex3b', C4), HUB),
+    toHub(documentExam('ARA_RAPOR', {
+      ...C4,
+      title: 'Bilirkişi raporu',
+      hud: ['ex6'],
+      background: 'buro',
+      lines: B(`
+        # ARSLAN HUKUK · ARŞİV MASASI — 09.40 |bg=buro
+        > Kalemden UYAP’a düşen rapor: on bir sayfa, iki ek. Dr. Nazlı Uçar’ın imzası her sayfanın altında, aynı açıyla, aynı mürekkeple.
+        > Leyla raporu masama bıraktı ama elini üstünden çekmedi.
+        leyla: Bilirkişi senin tanığın değil Deniz. Mahkemenin gözü. Lehine olanı da, aleyhine olanı da aynı soğukkanlılıkla yazar. İkisini de oku.
+        ~ Bir rapor, bir sonuç cümlesi ve onu taşıyan satırlar. Polisin raporunda satırlar sonuçla kavga ediyordu. Bakalım bu kez nasıl.
+        > Bir alet seç, sonra satıra dokun.
+      `),
+      header: { left: 'ADLİ BİLİŞİM BİLİRKİŞİ RAPORU · DR. N. UÇAR', right: 'İMAJ: 9f3a…c41e' },
+      columns: [
+        { label: 'BAŞLIK', flex: 0.8 },
+        { label: 'TESPİT', flex: 3 },
+      ],
+      rows: [
+        row('r1', ['Yöntem', 'İmaj hash’i yeniden hesaplandı: SHA-256 9f3a…c41e · 14.11 değeriyle eşleşti']),
+        row('r2', ['Bulgu 1', 'Ek-3 sender_device = 3 → bağlı cihaz kaydı: “OFIS-LAPTOP-07 · PUSULA Masaüstü (Windows)”']),
+        row('r3', ['Bulgu 2', '09.11 01.40–06.10: ekran kilitli; kilit açma ya da dokunma olayı yok']),
+        row('r4', ['Bulgu 3', '12.11 15.40–15.52: kilit açma, uygulama gezinmesi; cihazda 14 yeni ekran görüntüsü dosyası']),
+        row('r5', ['Bulgu 4', '06.11 02.13 sohbet arşivleme olayı · kaynak cihaz: 3']),
+        row('r6', ['Sınır', 'Cihaz 3’ün kendisi incelenmemiştir; onu kullanan kişi bu imajdan belirlenemez.']),
+        row('r7', ['Kanaat', 'Mesajların telefondan gönderildiği yönündeki kolluk değerlendirmesi teknik verilerle desteklenmemektedir.']),
+      ],
+      tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('cmp', 'Karşılaştır', 'compare')],
+      costVar: 'ex6',
+      rules: [
+        hit(
+          'EX_R_CIHAZ',
+          'mag',
+          'r2',
+          undefined,
+          80,
+          'BULGU 1',
+          'Büyüteci ilk bulguya tuttum. Bilirkişi benim noterde tespit ettirdiğim hesap verisini görmemiş; aynı sonuca imajın kendisinden varmış. Gönderen cihaz 3, bir masaüstü uygulaması, bir Windows makinesi. İki ayrı yol, aynı kapıya çıkıyor.',
+        ),
+        hit(
+          'EX_R_KILIT',
+          'mag',
+          'r3',
+          undefined,
+          80,
+          'BULGU 2',
+          '9 Kasım gecesi dört buçuk saat boyunca telefona tek bir parmak değmemiş. Bilirkişi bunu kendi diliyle yazmış: “dokunma olayı yok.” Hemşirenin bandı, onam formu ve şimdi de makinenin kendi günlüğü. Üç tanık, hiçbiri yalan söylemeyi bilmiyor.',
+        ),
+        hit(
+          'EX_R_SS',
+          'cmp',
+          'r4',
+          undefined,
+          100,
+          'BULGU 3 · DELİLİN İÇİNE YAZILAN',
+          'Karşılaştır aletini Bulgu 3 ile Yöntem satırına tuttum. Polisin aldığı on dört ekran görüntüsü telefonun kendi hafızasına yazılmış; imaj iki gün sonra alınmış. Yani delil, kopyası alınmadan önce, incelemeyi yapanın eliyle değiştirilmiş. Hash 14 Kasım’ı korur; 12 Kasım’ı değil.',
+          'USUL_BILGISI',
+        ),
+        hit(
+          'EX_R_SINIR',
+          'mag',
+          'r6',
+          undefined,
+          60,
+          'SINIR',
+          'İyi bir bilirkişi bilmediğini de yazar. Telefonun imajı mesajların telefondan çıkmadığını söylüyor; ama cihaz 3’ün başında kimin oturduğunu söyleyemez. O sorunun cevabı bir dizüstünün, bir hattın, bir demirbaş listesinin içinde. Rapor bana bir kapı açıyor; kapıdan geçmek bana kalıyor.',
+          'SAVUNMA_STRATEJISI',
+        ),
+        hit(
+          'EX_R_KANAAT',
+          'mag',
+          'r7',
+          undefined,
+          0,
+          'KANAAT',
+          'Kanaat cümlesi temkinli: “desteklenmemektedir.” Bilirkişiler “kesinlikle” demez. Ama bu temkinli cümle, polisin kesin cümlesini yerinden söküyor.',
+        ),
+      ],
+      miss: docMiss('FB_RAPOR'),
+      finish: { id: 'RAPOR_BITIR', label: 'Raporu kapat' },
+    }), HUB),
+    story('ARA_VAKIF_GIRIS', {
+      ...C4,
+      title: 'Vakıf odası',
+      background: 'buro',
+      lines: B(`
+        # KOZA HAN · VAKIF ODASI — 15.00 |bg=buro
+        > Koza Han’ın avlusunda şadırvan yine kurumuş, ipek tezgâhları yağmura karşı naylonla örtülmüş. Vakıf odasında aynı kitap kokusu, aynı ince belli bardaklar.
+        hayri: Gene geldin evladım. Duruşmayı duydum; bir sütunmuş, bir cihazmış. Ben anlamam. Ama bir şey anladım: sen dosyanın kenarını okuyorsun.
+        P: İhale dosyasını görmem mümkün mü Hayri Bey? Gelen evrakı, teklifleri. Bir şey almayacağım; yalnızca bakacağım.
+        hayri: Dosya vakfındır, sana veremem. Mahkeme isterse gönderirim, kanun neyse o. Ama gözünle bakmana kimse bir şey demez. Ben de buradayım zaten.
+        hayri: Gelen evrakı sekreterlik kaydeder; ben imzalarım, okumam. Yaşlandıkça insan imzayı okumaktan daha kolay bulur. Kötü bir alışkanlık.
+        > Önüme kalın, sırtı yıpranmış bir klasör koydu. Üstünde mürekkeple: “Eski Pirinç Han Restorasyonu · 2. kısım.”
+      `),
+      choices: [{ id: 'VAKIF_BASLA', kind: 'CONTINUE', label: 'Klasörü aç', next: 'ARA_VAKIF' }],
+    }),
+    toHub(documentExam('ARA_VAKIF', {
+      ...C4,
+      title: 'İhale dosyası',
+      hud: ['ex7'],
+      background: 'buro',
+      lines: B(`> Gelen evrak defterinin ihaleyle ilgili sayfası. Bir alet seç, sonra satıra dokun.`),
+      header: { left: 'BURSA KÜLTÜR VAKFI · GELEN EVRAK', right: 'ESKİ PİRİNÇ HAN' },
+      columns: [
+        { label: 'TARİH', flex: 0.9 },
+        { label: 'TÜR', flex: 0.9 },
+        { label: 'KONU', flex: 2.6 },
+      ],
+      rows: [
+        row('v1', ['02.10', 'İlan', 'Eski Pirinç Han restorasyonu · son teklif 30.10']),
+        row('v2', ['28.10', 'Teklif', 'Aksoy–Karaca Ortak Girişimi · restorasyon belgesi: M. Karaca']),
+        row('v3', ['29.10', 'Teklif', 'Tekin Yapı Danışmanlık Ltd. Şti.']),
+        row('v4', ['30.10', 'Teklif', 'Marmara Restorasyon A.Ş.']),
+        row('v5', ['10.11 · 09.12', 'E-posta', 'Tekin Yapı: “Sn. Kurul, ortak girişimin bir üyesine ilişkin özel kayıtların dolaşımda olduğu... Saygılar.”']),
+        row('v6', ['19.11', 'Kurul kararı', 'Değerlendirme askıya alındı']),
+      ],
+      tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('cmp', 'Karşılaştır', 'compare')],
+      costVar: 'ex7',
+      rules: [
+        hit(
+          'EX_V_YAZI',
+          'mag',
+          'v5',
+          'clue_vakif_yazi',
+          150,
+          'YENİ İPUCU',
+          '10 Kasım, sabah 09.12. Ses kaydı Hayri Bey’e 9 Kasım gecesi 02.14’te gitmişti; Hayri Bey dinlemeden kapatmış, Melis’ten başka kimseye söylememişti. Dedikodu “ertesi hafta” yayılmış. Ama bu e-posta, yedi saat sonra, kaydın varlığını biliyor. Ve “Sn.” ile açılıp “Saygılar.” ile kapanıyor.',
+          'ARASTIRMA',
+        ),
+        hit(
+          'EX_V_TEKLIF',
+          'cmp',
+          'v3',
+          undefined,
+          60,
+          'ÜÇ TEKLİF',
+          'Karşılaştır aletini iki teklif satırına tuttum. Ortak girişimin teklifi Melis’in restorasyon belgesine yaslanıyor; o çekilirse teklif düşer. Geriye iki firma kalır: büyük bir şirket ve Tekin Yapı. Kimin işine yarar? Bu bir delil değil; bir soru. Ama doğru soru.',
+          'ARASTIRMA',
+        ),
+        hit(
+          'EX_V_KARAR',
+          'mag',
+          'v6',
+          undefined,
+          0,
+          'KURUL KARARI',
+          'Kurul 19 Kasım’da değerlendirmeyi askıya almış; gerekçede “kamuoyuna yansıyan soruşturma” yazıyor. Bir dedikodu bir ihaleyi durdurmuş.',
+        ),
+      ],
+      miss: docMiss('FB_VAKIF'),
+      finish: { id: 'VAKIF_BITIR', label: 'Klasörü kapat' },
+    }), HUB),
     choiceNodeSuc(),
     toHub(
       deductionBoard('ARA_CIKARIM', {
@@ -453,7 +618,7 @@ export const ara: CasePart = {
         title: 'Çıkarım tahtası',
         background: 'buro_gece',
         lines: B(`> İki kart seç. Yeni kartlar tahtada: demirbaş, koli, sağlayıcının yanıtı.`),
-        pool: [...BOARD_POOL, 'clue_koli', 'clue_envanter', 'ev_isp'],
+        pool: [...BOARD_POOL, 'clue_koli', 'clue_envanter', 'ev_isp', 'clue_vakif_yazi'],
         recipes: [
           ...baseRecipes('A'),
           rec(
@@ -491,6 +656,15 @@ export const ara: CasePart = {
             200,
             'Aynı imza',
             '“Sn.”, üç nokta, “Saygılar.” Eski ortağın e-postası ile tehditler aynı elden çıkmış gibi. Tek başına ispat değil; ama artık yalnız değil.',
+          ),
+          rec(
+            'CB_A_VAKIF',
+            'clue_vakif_yazi',
+            'clue_uslup_tehdit',
+            'ded_uslup_ozan',
+            200,
+            'Aynı imza, aynı sabah',
+            'Vakfa giden yazı “Sn. Kurul” diye açılıyor, üç noktayla duruyor, “Saygılar.” ile kapanıyor. Tehditlerle aynı el. Ve bu el, kaydın varlığını herkesten bir hafta önce biliyordu.',
           ),
         ],
         miss: boardMiss('FB_A_CIKARIM'),

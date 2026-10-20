@@ -26,6 +26,7 @@ import {
   statement,
   strategyAmount,
   v,
+  visited,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { B, O, W } from './dsl.js';
@@ -66,7 +67,63 @@ export const trial: CasePart = {
         > Melis yine katılan sırasında. Bu kez paltosu dizlerinde değil, omzunda. Küçük bir fark, ama bir restoratör gibi ben de küçük farkları okumayı öğrenmiştim.
         feride: İkinci celse açıldı. Ara kararların infazı tamamlandı. Servis sağlayıcısının yazısı, hastane kayıtları ve bilirkişi raporu geldiyse okundu, dosyaya kondu. Tanıklar hazır.
       `),
-      choices: [cont('T00_DEVAM', 'Devam', 'T_01')],
+      choices: [
+        {
+          id: 'T00_DEVAM',
+          kind: 'CONTINUE',
+          label: 'Devam',
+          next: { routes: [{ when: has('ev_laptop'), to: 'T_00L' }, { to: 'T_01' }] },
+        },
+      ],
+    }),
+
+    // --- El konulan dizüstü: imaj ve hash (CMK 134) ---
+    choiceNode('T_00L', {
+      ...C5,
+      title: 'El konulan dizüstü',
+      background: 'durusma_salonu',
+      lines: B(`
+        tolga: Sayın Hâkim, bir bilgi sunmam gerekiyor. Müdafiin suç duyurusu üzerine dün Tekin Yapı Danışmanlık’ın ofisinde, hâkimlik kararıyla arama yapıldı.
+        tolga: Arşiv dolabında “Aksoy Tekin Demirbaş 07” etiketli bir dizüstü bulundu. Açıktı; ekranda bir mesajlaşma uygulaması. El konuldu, mühürlü torbada emanette.
+        > Tanık sırasında Ozan’ın gülümsemesi yerinde duruyordu. Yalnızca palto, dizinde biraz kaydı.
+        feride: Dizüstü, imajı alınmadan incelenmedi mi?
+        tolga: İncelenmedi Sayın Hâkim. Torba mühürlü. Talimatınızı bekliyoruz.
+        ~ Üç ay önce bir telefon bir çekmecede, bantlı bir zarfta iki gün durdu. Bu kez bir torba, bir mühür. Hata ikinci kez yapılmamalı.
+        feride: Müdafi, bu cihazla ilgili talebiniz?
+      `),
+      prompt: { speaker: 'narrator', text: 'El konulan dizüstü için ne istersin?' },
+      choices: [
+        option('T00L_IMAJ', 'Mühür tutanakla açılsın; imajı alınıp hash’i hesaplansın, inceleme yalnızca kopyada yapılsın.', {
+          score: { USUL_BILGISI: 120 },
+          effects: [inc('legal_hits'), raise('laptop_imaj'), mark('GOOD', 'Dijital delil önce yedeklenir: birebir kopya (imaj) alınır, hash değeri tutanağa geçer, inceleme kopya üzerinde yapılır (CMK 134/4). Asıl cihaz mühürlü kalır.', 'USUL_BILGISI')],
+          responses: B(`
+            P: Sayın Hâkim, bu dosyanın bütün yarası bir cihazın usulsüz açılmasıydı. Aynı yarayı bu kez savunmanın lehine açmak istemiyorum.
+            P: Mühür, tarafların huzurunda tutanakla açılsın. Bilirkişi cihazın birebir kopyasını alsın, hash değerini hesaplasın ve tutanağa geçirsin. İnceleme yalnızca kopya üzerinde yapılsın.
+            P: Asıl cihaz yeniden mühürlensin. O dizüstüdeki her kayıt, kimin lehine olursa olsun, sorgulanamaz biçimde korunsun.
+            feride: Kabul. Cihaz bu usulle adli bilişim bilirkişisine teslim edilecek; mühür açma, imaj ve hash tutanağa geçecek.
+            > Savcı bir an bana baktı; o bakışta bir onay vardı, belki biraz da şaşkınlık. Kendi lehine olan bir delili frenleyen bir savunmaya pek rastlamamıştı.
+            ~ Bir delil, ne kadar kuvvetliyse o kadar dikkatli taşınır. Leyla bunu bir kez söylemişti; ben iki kez duydum.
+          `),
+          next: 'T_01',
+        }),
+        option('T00L_AC', 'Dizüstü şimdi burada açılsın; ekranı hep birlikte görelim.', {
+          score: { USUL_BILGISI: -100 },
+          effects: [dec('cred')],
+          bad: 'Kopyası alınmadan açılan cihazın kayıtları değişir; savunma, polisin yaptığı hatayı kendi delilinde tekrarlamış olur. Önce imaj ve hash (CMK 134/4).',
+          responses: B(`
+            feride: Müdafi, bu dosyada bir cihazın usulsüz açılmasından şikâyet eden sizdiniz. Talebiniz reddedildi. Cihaz önce kopyalanacak.
+            ~ Haklıydı. Bir an için, bir ekranı görme hevesi, bütün dersimi unutturdu.
+          `),
+          next: 'T_01',
+        }),
+        option('T00L_YOK', 'Talebimiz yok; elimizdeki deliller yeterli.', {
+          neutral: 'Mahkeme cihazı yine de bilirkişiye gönderir; ama savunma, delilin korunmasında söz sahibi olmadı.',
+          responses: B(`
+            feride: Cihaz, olağan usulle bilirkişiye gönderilecek. Devam ediyoruz.
+          `),
+          next: 'T_01',
+        }),
+      ],
     }),
 
     // --- Bilirkişi ---
@@ -329,7 +386,7 @@ export const trial: CasePart = {
             feride: Kabul. Tanık, ne duyduğunuzu söyleyin, ne anladığınızı değil.
           `),
         }),
-        presentRule('PS_O2', 'O2', ['clue_envanter', 'ded_laptop_ozan'], {
+        presentRule('PS_O2', 'O2', ['clue_envanter', 'ded_laptop_ozan', 'ev_laptop'], {
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_o2'), mark('GOOD', 'Demirbaş listesi: 07 numaralı dizüstü iade edilmedi. “Her şeyi teslim ettim” çöktü.', 'SORGULAMA')],
           responses: B(`
@@ -449,7 +506,65 @@ export const trial: CasePart = {
         feride: Tutanağa geçirin. Tanık, kendisini suçlayabilecek sorulara cevap vermekten çekindi. Bu beyan, susma hakkının kullanımıdır; tek başına bir delil değildir, ama mahkeme takdirini kullanır.
         ~ Bir insan, “yapmadım” demek varken susmayı seçtiyse, o suskunluğun bir ağırlığı vardır. Hukuk onu delil saymaz; ama o salonda herkes aynı şeyi duydu: sessizliği.
       `),
-      choices: [cont('T04_DEVAM', 'Devam', 'T_05')],
+      choices: [
+        {
+          id: 'T04_DEVAM',
+          kind: 'CONTINUE',
+          label: 'Devam',
+          next: { routes: [{ when: all(visited('ARA_MELIS'), not(flag('melis_kapandi'))), to: 'T_04K' }, { to: 'T_05' }] },
+        },
+      ],
+    }),
+
+    // --- Katılanın beyanı (ara evresindeki görüşme yapıldıysa) ---
+    choiceNode('T_04K', {
+      ...C5,
+      title: 'Katılanın beyanı',
+      background: 'durusma_salonu',
+      lines: B(`
+        sinan: Sayın Hâkim, müvekkilem kısa bir beyanda bulunmak istiyor.
+        feride: Buyurun katılan.
+        > Melis ayağa kalktı. Paltosu bu kez omzunda değil, sandalyenin arkasındaydı. Elleri cebinde değil, önünde kenetliydi.
+        melis: Üç gece boyunca bana yazan kişiyi şikâyet ettim. Ekranda bir isim vardı; o ismi şikâyet ettim. Başka ne yapabilirdim?
+        melis: Bugün o ismin, o mesajları yazan kişi olduğundan emin değilim. Bunu söylemek kolay değil. Ama emin olmadığım bir şeyi de söylemem.
+        feride: Katılan, şikâyetinizden vazgeçiyor musunuz?
+        melis: Hayır Sayın Hâkim. Şikâyetimi geri almıyorum. Yalnızca doğru kişiye yönelsin istiyorum. Neyse. Bu kadar.
+        > Oturdu. Tarık başını kaldırmadı; kurşun kalemi parmaklarının arasında, hareketsiz.
+        feride: Müdafi, beyana karşı diyeceğiniz?
+      `),
+      prompt: { speaker: 'narrator', text: 'Katılanın beyanına ne dersin?' },
+      choices: [
+        option('T04K_SAYGI', 'Beyan tutanağa geçsin; müvekkilim katılanın yaşadıklarını hiçbir zaman küçümsemedi.', {
+          score: { SAVUNMA_STRATEJISI: 60 },
+          effects: [inc('pers')],
+          good: 'Katılanın acısını tanıyıp beyanı olduğu gibi tutanağa geçirtmek; savunmayı mağdurla değil, gerçek kaynakla karşı karşıya getirir.',
+          responses: B(`
+            P: Sayın Hâkim, katılanın beyanının olduğu gibi tutanağa geçmesini rica ediyorum. Müvekkilim, onun yaşadıklarını bu dosyanın hiçbir aşamasında küçümsemedi; ben de küçümsemedim.
+            P: Biz de aynı şeyi istiyoruz: şikâyetin doğru kişiye yönelmesini. Bu salonda katılanla savunma, bugün ilk kez aynı yöne bakıyor.
+            > Melis bana bakmadı; ama başını bir kez, belli belirsiz salladı.
+          `),
+          next: 'T_05',
+        }),
+        option('T04K_VAZGEC', 'Bu beyanın şikâyetten vazgeçme olarak değerlendirilmesini talep ediyorum.', {
+          score: { USUL_BILGISI: -60 },
+          effects: [dec('cred')],
+          bad: 'Katılan vazgeçmediğini açıkça söyledi; beyanı çarpıtmak güvenilirliği düşürür. Üstelik şantaj (TCK 107) şikâyete bağlı değildir; vazgeçme yalnızca şikâyete bağlı suçta (TCK 134, 139) sonuç doğurur ve açık olmalıdır (TCK 73).',
+          responses: B(`
+            feride: Katılan “vazgeçmiyorum” dedi müdafi. Onun söylemediği bir şeyi tutanağa yazamam.
+            > Sinan kaşlarını kaldırdı. Melis bir an bana baktı; o bakışta yeniden bir duvar örülüyordu.
+          `),
+          next: 'T_05',
+        }),
+        option('T04K_OZUR', 'Katılan, bugün müvekkilimden özür dilemelidir.', {
+          score: { SAVUNMA_STRATEJISI: -50 },
+          bad: 'Katılan elindeki tek isme göre şikâyet etti; ondan özür beklemek, savunmayı mağdurla kavgaya sokar.',
+          responses: B(`
+            sinan: Müvekkilemden kimse özür beklemesin meslektaşım. Ekranda yazan ismi şikâyet etti; başka bir şey yapmadı.
+            feride: Devam ediyoruz.
+          `),
+          next: 'T_05',
+        }),
+      ],
     }),
 
     // --- Savcının karşı delili ---
@@ -498,10 +613,10 @@ export const trial: CasePart = {
       courtStage: 'MUTALAA',
       background: 'durusma_salonu',
       lines: [
-        { lines: [{ speaker: 'feride', text: 'Cumhuriyet savcısı esas hakkındaki mütalaasını versin.' }] },
         W(
           flag('bilirkisi_cihaz'),
           `
+          feride: Cumhuriyet savcısı esas hakkındaki mütalaasını versin.
           tolga: Sayın Hâkim. Bir savcının görevi mahkûmiyet almak değil, adaleti sağlamaktır. Bugün dinlediklerimden sonra mütalaamı değiştiriyorum.
           tolga: Mesajların sanığın telefonundan gönderildiği iddiası teknik olarak doğrulanmadı. Aksine, hesaba bağlı başka bir cihazdan, başka bir internet hattından gönderildiği anlaşıldı. 9 Kasım gecesi sanığın telefonu kilitliydi.
           tolga: Bu tabloda, sanık hakkında şüpheden uzak bir mahkûmiyet oluşmamıştır. Dahası, dosyada gerçek failin izleri belirmiştir.
@@ -513,12 +628,14 @@ export const trial: CasePart = {
         W(
           flag('contra_o3'),
           `
+          feride: Cumhuriyet savcısı esas hakkındaki mütalaasını versin.
           tolga: Sayın Hâkim. Tanık beyanları ve gelen belgeler, mesajların kaynağı konusunda ciddi tereddütler doğurdu. Mahkûmiyet için gereken kesinlik oluşmadı.
           tolga: Takdiri mahkemeye bırakıyorum; ayrıca gerçek failin tespiti için soruşturma genişletilmelidir.
           feride: Müdafi?
         `,
         ),
         O(`
+          feride: Cumhuriyet savcısı esas hakkındaki mütalaasını versin.
           tolga: Sayın Hâkim. Mesajlar sanığa ait hesapta, sanığın telefonunda tespit edilmiştir. Sanığın 107/2 ve 134/2’den cezalandırılmasını talep ederim.
           feride: Müdafi, mütalaaya karşı diyecekleriniz?
         `),
@@ -528,11 +645,19 @@ export const trial: CasePart = {
         option('T06_A', 'Hukuka aykırı ekran görüntüleri ve bağlı cihaz bulgusu birlikte: delil yetersiz.', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), mark('GOOD', 'Cevap hakkı yerinde kullanıldı: hukuka aykırı delil hükme esas alınamaz (CMK 217/2), kalan deliller mahkûmiyete yetmez.', 'USUL_BILGISI')],
-          responses: B(`
-            P: Sayın Savcının mütalaasına katılıyorum Sayın Hâkim; cesareti için de teşekkür ederim. Bir savcının görüşünü delil karşısında değiştirmesi, bu salonun en güzel anıdır.
-            P: Ekran görüntüleri hukuka aykırı elde edildiği için hükme esas alınamaz. Mesajların telefondan çıkmadığı sabittir. 9 Kasım gecesi müvekkilim acil serviste, telefonu kilitliydi.
-            P: Geriye, bir insanı mahkûm etmek için hiçbir şey kalmıyor. Aksine, gerçek failin cihazı, hattı ve kimliği dosyadadır. Müvekkilimin beraatini ve gerçek fail yönünden suç duyurusunu talep ediyorum.
-          `),
+          responses: [
+            W(
+              flag('bilirkisi_cihaz'),
+              `
+              P: Sayın Savcının mütalaasına katılıyorum Sayın Hâkim; cesareti için de teşekkür ederim. Bir savcının görüşünü delil karşısında değiştirmesi, bu salonun en güzel anıdır.
+              P: Ekran görüntüleri hukuka aykırı elde edildiği için hükme esas alınamaz. Mesajların telefondan çıkmadığı bilirkişi raporuyla sabittir. Geriye bir insanı mahkûm etmeye yetecek hiçbir şey kalmıyor.
+            `,
+            ),
+            O(`
+              P: Sayın Hâkim, mütalaaya katılmıyoruz. Ekran görüntüleri hukuka aykırı elde edildi; hükme esas alınamaz.
+              P: Geriye kalan, bir hesabın bir telefonda açık durmasıdır. Mesajların o telefondan, o elle gönderildiği gösterilmedi. Bu, bir mahkûmiyeti taşımaz.
+            `),
+          ],
         }),
         option('T06_B', 'Mütalaaya diyeceğimiz yok.', { neutral: 'Cevap hakkı kullanılmadı.' }),
         option('T06_C', 'Mütalaa tutanaktan çıkarılsın.', {

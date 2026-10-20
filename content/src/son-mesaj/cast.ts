@@ -1,16 +1,17 @@
 import { character, sharedSprite } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
+import { melisSprite, ozanSprite, tarikSprite } from './sprites.js';
 
-// 10-cast: sprite'lar, karakterler ve ilişkiler. Yeni üç karakter (Tarık, Melis, Ozan) için sprite dosyaları
-// content/shared/sprites/son-mesaj-*.json; geri kalanlar ortak sprite'lardır.
+// 10-cast: sprite'lar, karakterler ve ilişkiler. Yeni üç karakterin (Tarık, Melis, Ozan) sprite'ları satır içi
+// (./sprites.ts); geri kalanlar ortak sprite'lardır.
 
 export const cast: CasePart = {
   sprites: [
     sharedSprite('avukat_cubbe'),
     sharedSprite('mentor'),
-    sharedSprite('son-mesaj-tarik', 'son_mesaj_tarik'),
-    sharedSprite('son-mesaj-melis', 'son_mesaj_melis'),
-    sharedSprite('son-mesaj-ozan', 'son_mesaj_ozan'),
+    tarikSprite,
+    melisSprite,
+    ozanSprite,
     sharedSprite('rakip'),
     sharedSprite('huseyin'),
     sharedSprite('tanik'),

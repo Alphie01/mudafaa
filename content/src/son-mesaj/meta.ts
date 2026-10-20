@@ -154,6 +154,8 @@ export const meta: CasePart = {
     meter('ex3b', 'Deneme hakkı', 'counter', 6, 6, { lowAt: 2, resource: true }),
     meter('ex4', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('ex5', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 2, resource: true }),
+    meter('ex6', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 2, resource: true }),
+    meter('ex7', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('slots', 'Talep hakkı', 'counter', 3, 3),
     meter('slots2', 'Talep hakkı', 'counter', 3, 3),
     meter('noktalar', 'Dayanak', 'counter', 3, 3),
@@ -209,6 +211,8 @@ export const meta: CasePart = {
       'karartma',
       'tarik_red',
       'laptop_kayip',
+      'laptop_imaj',
+      'melis_kapandi',
       // ikinci celse
       'bilirkisi_cihaz',
       'bilirkisi_kilit',

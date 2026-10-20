@@ -255,6 +255,15 @@ export const evidencePart: CasePart = {
       icon: 'document',
       tags: K,
     }),
+    clue('clue_vakif_yazi', {
+      type: 'BELGE',
+      title: 'Vakfa gelen yazı [10 Kasım 09.12]',
+      shortText: 'Tekin Yapı’dan kurula: “ortak girişimin bir üyesine ilişkin özel kayıtların dolaşımda olduğu... Saygılar.”',
+      description: 'Vakfın gelen evrak defteri. Ses kaydının iletilmesinden yedi saat sonra; dedikodu yayılmadan bir hafta önce.',
+      sourceLabel: 'Bursa Kültür Vakfı',
+      icon: 'document',
+      tags: K,
+    }),
     clue('clue_koli', {
       type: 'FIZIKSEL',
       title: 'Mart kolisi',
@@ -262,6 +271,7 @@ export const evidencePart: CasePart = {
       description: 'Üstünde el yazısıyla: “Gerisi sende... Saygılar.”',
       sourceLabel: 'Tarık’ın evi',
       icon: 'magnifier',
+      presentable: true,
       tags: K,
     }),
     clue('clue_envanter', {
@@ -332,7 +342,6 @@ export const evidencePart: CasePart = {
       missedHint: 'Üç gecenin IP adresinin abonesini mahkemeden sorgulatabilirdin.',
     }),
     evidence('ev_laptop', {
-      presentable: false,
       type: 'FIZIKSEL',
       title: '07 numaralı dizüstü [el konuldu]',
       shortText: 'Savcılığın aramasında Tekin Yapı’nın arşiv dolabında bulundu; PUSULA Masaüstü açık.',

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sahne · OM İş Merkezi otoparkı (eksi 1)</title>
+    <!--
+  Dava #02: iş merkezinin kapalı otoparkı. 344 × 300 sahne birimi. Dokunma alanları SceneDef nesneleridir:
+  köşedeki tabelalı yer (256,110,72,40) · kamera (146,22,34,22) · bariyer (14,170,80,30) · birikinti (130,240,80,24).
+  Palet: zemin #141026, duvar #2b2350, kenar #120d1c.
+-->
+    <style>
+      body {
+        margin: 0;
+        background: #141026;
+      }
+      #scene {
+        position: relative;
+        width: 344px;
+        height: 300px;
+        overflow: hidden;
+        background: #141026;
+        font-family: 'Pixelify Sans', monospace;
+        color: #efe8ff;
+      }
+      #scene div {
+        position: absolute;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <div style="left: 0; right: 0; top: 0; height: 160px; background: #25222e"></div>
+      <div style="left: 0; right: 0; top: 18px; height: 6px; background: #4a4656"></div>
+      <div style="left: 0; right: 0; top: 160px; bottom: 0; background: #3b3550; border-top: 4px solid #120d1c"></div>
+      <!-- park çizgileri -->
+      <div style="left: 110px; top: 170px; width: 4px; height: 120px; background: #e6c46a"></div>
+      <div style="left: 180px; top: 170px; width: 4px; height: 120px; background: #e6c46a"></div>
+      <div style="left: 250px; top: 170px; width: 4px; height: 120px; background: #e6c46a"></div>
+      <!-- kolonlar -->
+      <div style="left: 96px; top: 24px; width: 18px; height: 140px; background: #4a4656; border: 3px solid #120d1c"></div>
+      <div style="left: 236px; top: 24px; width: 18px; height: 140px; background: #4a4656; border: 3px solid #120d1c"></div>
+      <!-- kamera -->
+      <div style="left: 146px; top: 22px; width: 34px; height: 22px; background: #efe8ff; border: 3px solid #120d1c"></div>
+      <div style="left: 170px; top: 28px; width: 6px; height: 6px; background: #c4413a"></div>
+      <!-- tabela ve köşe -->
+      <div style="left: 256px; top: 110px; width: 72px; height: 40px; background: #e8b13c; border: 3px solid #120d1c; font-size: 7px; color: #120d1c; padding: 4px">
+        YÖNETİM 1
+      </div>
+      <div style="left: 262px; top: 200px; width: 70px; height: 40px; background: #120d1c; opacity: 0.6"></div>
+      <!-- bariyer -->
+      <div style="left: 14px; top: 170px; width: 14px; height: 30px; background: #efe8ff; border: 3px solid #120d1c"></div>
+      <div style="left: 28px; top: 176px; width: 66px; height: 8px; background: #c4413a; border: 2px solid #120d1c"></div>
+      <!-- birikinti -->
+      <div style="left: 130px; top: 240px; width: 80px; height: 24px; background: #1c2846; border-radius: 12px"></div>
+    </div>
+  </body>
+</html>

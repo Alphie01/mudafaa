@@ -1,17 +1,126 @@
 import { character, sharedSprite } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
+import type { SpriteDef } from '@mudafaa/case-schema';
 
-// 10-cast: sprite'lar, karakterler ve ilişkiler. Yeni karakterler content/shared/sprites/beyaz-toz-*.json.
+// 10-cast: sprite'lar, karakterler ve ilişkiler.
 // Gerçek satıcı (Barış Demirel) kadroda yoktur: yalnızca bir telefon sesi ve delillerdeki bir isimdir.
+
+// Davaya özgü dört karakterin sprite'ları burada tanımlıdır: content/shared/sprites/ tasarımdan çıkarılmış ortak
+// sprite'larla birebir eşleşmek zorunda (tools/content/test/extract-sprites.test.ts), bu yüzden oraya dosya eklenmez.
+// Önizleme için satırlar geçici bir JSON'a yazılıp `npm run case:sprite-preview` ile denetlendi.
+
+const SPRITE_KAAN: SpriteDef = {
+  id: 'beyaz_toz_kaan',
+  rows: [
+    '...k.kkkkk.k....',
+    '..khkhhhhhkhk...',
+    '..khhhhhhhhhhk..',
+    '..khhssssshhhk..',
+    '...kssssssssk...',
+    '...ksessssesk...',
+    '...kssssssssk...',
+    '...kssskksssk...',
+    '....kssssssk....',
+    '.....kkSSkk.....',
+    '...kkzzzzzzkk...',
+    '..kzzzzwwzzzzk..',
+    '..kzZzzzzzzZzk..',
+    '..kzZzzzzzzZzk..',
+    '..kzZzzzzzzZzk..',
+    '..kSzzzzzzzzSk..',
+    '...kddddddddk...',
+    '...kdddkkdddk...',
+    '...kdddkkdddk...',
+    '..kkkkk..kkkkk..',
+  ],
+};
+
+const SPRITE_DEFNE: SpriteDef = {
+  id: 'beyaz_toz_defne',
+  rows: [
+    '....kkkkkkkk....',
+    '...kjjjjjjjjk...',
+    '..kjjjjjjjjjjk..',
+    '..kjjssssssjjk..',
+    '..kjssssssssjk..',
+    '..kjsessssesjk..',
+    '..kjssssssssjk..',
+    '..kjsssrrsssjk..',
+    '..kjjssssssjjk..',
+    '..kjjkkSSkkjjk..',
+    '..kjkwwbbwwkjk..',
+    '..kwwwwbbwwwwk..',
+    '..kwwwwwwwwwwk..',
+    '..kwCwwwwwwCwk..',
+    '..kSwwwwwwwwSk..',
+    '..kwwwwwwwwwwk..',
+    '...kNNNNNNNNk...',
+    '...kNNNkkNNNk...',
+    '...kNNNkkNNNk...',
+    '..kkkkk..kkkkk..',
+  ],
+};
+
+const SPRITE_NESRIN: SpriteDef = {
+  id: 'beyaz_toz_nesrin',
+  rows: [
+    '....kkkkkkkk....',
+    '...kuuuuuuuuk...',
+    '..kuuuuuuuuuuk..',
+    '..kuussssssuuk..',
+    '..kussssssssuk..',
+    '..kusessssesuk..',
+    '..kussssssssuk..',
+    '..kussskksssuk..',
+    '..kuussssssuuk..',
+    '..kUuuuSSuuuUk..',
+    '...kppyyyyppk...',
+    '..kppppyyppppk..',
+    '..kppppppppppk..',
+    '..kpPppppppPpk..',
+    '..kSppppppppSk..',
+    '..kNNNNNNNNNNk..',
+    '..kNNNNNNNNNNk..',
+    '..kNNNNNNNNNNk..',
+    '...kNNNNNNNNk...',
+    '...kkkk..kkkk...',
+  ],
+};
+
+const SPRITE_TOLGA: SpriteDef = {
+  id: 'beyaz_toz_tolga',
+  rows: [
+    '....kkkkkkkk....',
+    '...kRRRRRRRRk...',
+    '..kRRRRRRRRRRk..',
+    '..kkkkkkkkkkkk..',
+    '...kssssssssk...',
+    '...ksessssesk...',
+    '...kssssssssk...',
+    '...kshskkshsk...',
+    '....khhhhhhk....',
+    '.....kkSSkk.....',
+    '...kkiiiiiikk...',
+    '..kiiiiwwiiiik..',
+    '..kiIiiiiiiIik..',
+    '..kiIiiiiiiIik..',
+    '..kiIiiiiiiIik..',
+    '..kSiiiiiiiiSk..',
+    '...knnnnnnnnk...',
+    '...knnnkknnnk...',
+    '...knnnkknnnk...',
+    '..kkkkk..kkkkk..',
+  ],
+};
 
 export const cast: CasePart = {
   sprites: [
     sharedSprite('avukat_cubbe'),
     sharedSprite('mentor'),
-    sharedSprite('beyaz-toz-kaan', 'beyaz_toz_kaan'),
-    sharedSprite('beyaz-toz-defne', 'beyaz_toz_defne'),
-    sharedSprite('beyaz-toz-nesrin', 'beyaz_toz_nesrin'),
-    sharedSprite('beyaz-toz-tolga', 'beyaz_toz_tolga'),
+    SPRITE_KAAN,
+    SPRITE_DEFNE,
+    SPRITE_NESRIN,
+    SPRITE_TOLGA,
     sharedSprite('polis'),
     sharedSprite('bora'),
     sharedSprite('gardiyan'),

@@ -243,3 +243,30 @@ ifadesi (kask, saat).
 - Yeni bayraklar sonuçlara ve hükümlere metinsel olarak yansır; sonuç koşulları ve puan tabloları `docs/content/beyaz-toz.md`
   §10–11'de.
 - Golden path'ler: TIPIK (BERAAT_E), G_B (BERAAT_B), G_N (NİTELİK), G_M (MAHKÛMİYET), G_ETIK (TELKİN), W (çöküş).
+
+## 8. Uygulamada eklenen ve değişen sahneler
+
+Yazım sırasında tempo ve süre bütçesi için hikâyeye şu vuruşlar eklendi (node kimlikleriyle):
+
+- **INV_MERDIVEN** — bina aramasından sonra merdiven boşluğu: 6 numaradaki öğrenci, adını vermeden keski sesini ve
+  “anahtarı ver / yok bende” konuşmasını anlatır; tanıklık etmez. Deniz bunu mahkemeye taşımaz; yalnızca polise
+  soracağı soruyu öğrenir.
+- **INV_SABAH3** — üçüncü gün sabahı Kahve Durağı: kafe sahibi Elif Hanım, Kaan'ın pazar kapanışlarını ve perşembe
+  izinlerini anlatır (mazeretin ilk tohumu; Z raporu ara evrede gelir).
+- **INV_EMANET** — emanet eşya tutanağı (belge): üç anahtarlı anahtarlık, 140 TL, reçeteli ilaç.
+- **H1_00K** — birinci celseden önce nezarethane: beş dakikalık avukat görüşü; rıza varsa avucuna yazılmış “Satmadım”.
+- **H1_08** — birinci celsenin akşamı: tahliyede Defne'nin sofrası ve annenin telefonu; değilse büroda tek başına Deniz.
+- **ARA_AKSAM** — ara evrenin ilk gecesi: Leyla yirmi iki yıl önceki bir dosyayı anlatır (bir müvekkili ikrara
+  yönlendirmiş, terazinin sahibi sonradan çıkmış). Dava #15 tohumu; ters çerçevenin bir köşesi.
+- **ARA_SABAH** — ikinci gün sabahı: tahliyedeyse ilk imza günü ve AMATEM; değilse cezaevi görüş kuyruğu.
+- **ARA_NESRIN** — Nesrin'e teşekkür ziyareti; kira defterinin fotokopisi (“aslı bende kalır”).
+- **T_00K** — ikinci celseden önce koridor: Nesrin “ne diyeyim, söyle ezberleyeyim” der; doğru cevap ona bir şey
+  söylememektir (dikte etmek TCK 277 ve meslek kuralları ihlalidir).
+- **T_03S** — muhbir kürsüden inerken: çözüldüyse polis eşliğinde, çelişkiye düştüyse “ben söyledim işte” diye
+  mırıldanarak, ayakta kaldıysa savcının onaylayan bakışıyla.
+- **T_06P** — esas savunmadan önce dayanak seçimi (en çok üç; ispatlanmış dayanak ikna eder, ispatlanmamış zayıflatır).
+- **Eylem puanları:** soruşturma 3 gün × 5 EP, ara evre 2 gün × 4 EP (ilk tasarımda 3 × 4 ve 2 × 3).
+- **Tipik yolun duygusal çizgisi:** 223/2-e beraatte muhbir kask ve saat çelişkisinde çöker ama satıcının adını vermez;
+  şekerlik ikinci celsede delil tartışmasında aklanır. Adın söylendiği an (Tolga'nın kırılması) 223/2-b yolunun ve
+  ara evrede kurye durağına gidenlerin ödülüdür.
+- **Eşikler:** beraat bandı 10.500 (223/2-b ayrıca 11.000); erken çözüm denetimi için `docs/content/beyaz-toz.md` §12.

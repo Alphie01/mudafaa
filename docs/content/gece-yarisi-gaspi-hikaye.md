@@ -185,8 +185,8 @@ askısı (sol halka; clue_aski), alt başta motor yağı lekesi (clue_motor), ec
 çeldirici), bir kedi (ıska).
 
 **INV_ARAMA2 — Kılınçların evi** — Derya ve Sevim. Nesneler: ilaç kutusu + e-reçete 17.40 (clue_ates), balkon ve üst kattaki
-mum izi (clue_balkon → INV_T_KADIR açılır), aile fotoğrafı (iki çocuk bir motorun üstünde: "Barış ve… amcaoğlu. İkiz
-sanılırlardı." clue_aile_foto; çeldirici, ara evresinde anlam kazanır), Barış'ın yeni vesikalığı (saçlı, sakallı;
+mum izi (clue_balkon → INV_T_KADIR açılır), aile fotoğrafı (iki çocuk bir motorun üstünde, bir bayram sabahı: "Barış'la
+amcasının oğlu." clue_aile_foto; çeldirici, ara evresinde anlam kazanır), Barış'ın yeni vesikalığı (saçlı, sakallı;
 clue_vesikalik), duvar saati (ıska).
 
 **INV_ARAMA3 — Acil servis koridoru (kamuya açık alan)** — nesneler: triyaj panosu (geliş 00.21; clue_triyaj), "polis
@@ -316,7 +316,7 @@ der.) INV_AKSAM3: Derya arar; annesi Barış'ın yorganını yıkamış.
 | "Bıçak" bir parıltıydı | Soğuk açılış: "Belki bir bıçak, belki bir küpe"; 112'de bıçak yok; basamaktaki kırık şişe camı; Ferhat'ın "bıçakla yakalanmıştı" yalanı (2023 dosyası yumruk) |
 | Fail halkalı biri | 112 "kulağında halka"; Ali Rıza'nın tanıklığı; Barış'ın delinmemiş kulağı |
 | Hesabı başkası kullandı | Barış'ın "motor hep aşağıda durur" eksik cevabı; HızlıPaket kaydında farklı cihaz |
-| Kuzen Tolga | Aile fotoğrafı ("ikiz sanılırlardı"); 2. gün akşamı bereli, ıslak genç ve zarfı; Derya'nın "bir şey daha… yok"; 2023 fotoğrafının bugünkü Barış'a benzememesi |
+| Kuzen Tolga | Görüşmede "amcamın oğlu Tolga" (iş, aile); aile fotoğrafı; 2. gün akşamı beresi kulaklarına inmiş, ıslak genç ve zarfı; Derya'nın "bir şey daha… yok"; Barış'ın "motor hep aşağıda durur" eksik cevabı |
 
 ## 6. Epiloglar (OutcomeDef.epilogue; her biri ~250–400 sözcük)
 
@@ -330,8 +330,10 @@ der.) INV_AKSAM3: Derya arar; annesi Barış'ın yorganını yıkamış.
   yoktu. Bunu kanıtladım. Bıçağın olmadığı bir hapishanede sekiz yıl."
 - **MAHKÛMİYET:** 10 yıl. Sevim'in tespihi koptu; taneler koridorda yuvarlanır; Deniz eğilip toplar. (Çöküşte) savcı:
   "Hafızayla değil, kâğıtla gelmeliydiniz avukat hanım."
-- **ETİK (mağdura fotoğraf):** Nermin kürsüde: "Avukat hanım evime geldi, bir fotoğraf daha gösterdi. Artık hangi yüzü
-  gördüğümü bilmiyorum." Leyla, Deniz'in masasına meslek kuralları kitapçığını bırakır. Barış'ın son bakışı.
+- **AZİL (mağdura fotoğraf; etik sonu):** 2. celsenin açılışında savcı mağdurun başvurusunu okur; başkan durumu Baroya ve
+  Başsavcılığa bildirir. Koridorda Derya azilnameyi uzatır: "Kardeşimi bir fotoğraf yaktı; sen de bir fotoğraf daha
+  gösterdin." Nermin: "Neden herkes bana bir fotoğraf gösteriyor evladım? Sen de mi?" Leyla masaya meslek kuralları
+  kitapçığını bırakır. (Hüküm verilmez; dava başka müdafiyle sürer; sonuç sınıfı OTHER.)
 
 ## 7. Mekanik bağlar (yazım kontrol listesi)
 
@@ -339,4 +341,7 @@ der.) INV_AKSAM3: Derya arar; annesi Barış'ın yorganını yıkamış.
   `tolga_teslim`, `tolga_kacti`, `kadir_tanik`).
 - Etik bayrakları: `nermin_baski` (kapı ısrarı), `kadir_kocluk` (saat ezberletme), `zarf_tuttu` (Tolga'nın zarfı),
   `etik_kirlik` (mağdura özçekim; etik sonu). Hepsi `ethics` sayacını artırır; yalnızca sonuncusu sonu zorlar.
-- Golden path'ler: G1 BERAAT_B, G2 = TIPIK BERAAT_E, G3 İNDİRİM, G4 MAHKÛMİYET, G5 ETİK, W çöküş.
+- Golden path'ler: G1 BERAAT_B, G2 = TIPIK BERAAT_E, G3 İNDİRİM, G4 MAHKÛMİYET, G5 AZİL (etik), W çöküş.
+- Uygulamada eklenenler: 1. celsede kısa ara (H1_04B, mağdurun kızı), 2. celsede kısa ara (T_02R, Ferhat ile Nermin), Cemal
+  Usta'nın tanıklığı (T_04C, ARA_DIL ile istenirse), Ferhat'ın F6 ifadesi ("annesinden başka bir şey yoktu"), duruşmadan önceki
+  gece Derya'nın telefonu (INV_GECE_7). Ölçümler ve sonuç koşulları `docs/content/gece-yarisi-gaspi.md`'de.

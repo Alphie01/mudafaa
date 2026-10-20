@@ -204,14 +204,14 @@ TCK 89) −50, ikna −1. Bu bayraklar yalnızca gerekçe satırlarını, epilog
   delil kartı belge ara dönemde açılınca verilir, açılmadan kürsüde sunulamaz.
 - Ara dönem atlama yoklaması (ARAGIRIS_DEVAM'dan doğrudan GO_T): hiçbir yol beraate ulaşmıyor (TIPIK/G_D/G_DUZELT/G_BILGI/
   G_BASKI ikinci celsede sunacak kâğıt bulamıyor); G_CVYO → CVYO 8 400, G_I → İNDİRİM 7 695, G_M → MAHKUMIYET.
-- Kısayol yoklaması (2026-10-21; her golden path'ten başlayıp reddedilen aksiyonları atlayarak 64→1 boyutlu parçaları
-  silen açgözlü küçültme, `enumerateActions` ile kabul edilen aksiyonlar sayıldı): BERAAT_E en kısa **142** (G_DUZELT'ten;
-  TIPIK'ten 151, G_BASKI'dan 145), BERAAT_D **167**, CVYO 161, İNDİRİM 143. En kısa beraat tipik yolun 209 aksiyonunun
-  **%68**'i; hepsi üç arama sahnesi, hastane/darp/ifade belgeleri, sekiz tahta tarifi, Ece görüşmesi ve ara dönemde ATK +
+- Kısayol yoklaması (2026-10-21, ikinci tur; her golden path'ten başlayıp reddedilen aksiyonları atlayarak 64→1 boyutlu
+  parçaları silen açgözlü küçültme, tek süreç, kabul edilen aksiyonlar sayıldı): BERAAT_E en kısa **145** (G_BASKI'dan;
+  G_DUZELT'ten 147, TIPIK'ten 152, G_BILGI'den 161), BERAAT_D **165** (G_D'den). Önceki turda CVYO 161, İNDİRİM 143. En kısa
+  beraat tipik yolun 209 aksiyonunun **%69**'u; hepsi üç arama sahnesi, hastane/darp/ifade belgeleri, sekiz tahta tarifi, Ece görüşmesi ve ara dönemde ATK +
   Kriminal + eczane + Sinan gerektiriyor.
 - Tipik yol satırları döküldü (`case:duration` görünüm metinleri): soğuk açılış ve karakol isimsiz; Onur'un Serkan'la ilişkisi
-  oyuncu adisyonu/eczaneyi bulmadan söylenmez (Bora görüşmesindeki "patronu mu" ve ifade belgesindeki "sigortacının imzası"
-  çıkarıldı); kimin saldırdığı yalnızca müvekkilin kendi anlatımı olarak geçer, kâğıtla kanıtlanana dek iç ses
+  oyuncu adisyonu/eczaneyi bulmadan söylenmez (Bora görüşmesindeki "patronu mu", ifade belgesindeki "sigortacının imzası",
+  Ece'nin "iş arkadaşı galiba" sözü ve birinci celsede ded_tanidik'e bağlı olmayan iki "patron/çalışan" iç sesi çıkarıldı); kimin saldırdığı yalnızca müvekkilin kendi anlatımı olarak geçer, kâğıtla kanıtlanana dek iç ses
   "kanıtlayabilirsem" kaydıyla konuşur.
 
 ## 11. Süre ve sözcük ölçümü
@@ -219,17 +219,17 @@ TCK 89) −50, ikna −1. Bu bayraklar yalnızca gerekçe satırlarını, epilog
 `npm run case:duration -- kirik-kadeh` (2026-10-21):
 
 ```
-  TIPIK          98.8 dk   14013 sözcük   209 aksiyon  BERAAT_E (11545)
-  G_D            98.1 dk   13836 sözcük   212 aksiyon  BERAAT_D (12140)
-  G_CVYO         92.5 dk   13012 sözcük   202 aksiyon  CVYO (10790)
-  G_I            88.4 dk   12436 sözcük   193 aksiyon  INDIRIM (9495)
-  G_M            81.1 dk   11395 sözcük   178 aksiyon  MAHKUMIYET (7775)
-  W              81.8 dk   11396 sözcük   185 aksiyon  MAHKUMIYET (8030)
-  G_DUZELT       89.7 dk   12746 sözcük   189 aksiyon  BERAAT_E (10235)
-  G_BILGI        92.6 dk   13081 sözcük   199 aksiyon  BERAAT_E (10995)
-  G_BASKI        91.9 dk   13019 sözcük   196 aksiyon  BERAAT_E (10575)
-  G_ETIK         85.5 dk   12037 sözcük   186 aksiyon  ETIK (8620)
-  ==> TİPİK YOL (TIPIK): 98.8 dk  ✓ süre hedefte
+  TIPIK          98.7 dk   14009 sözcük   209 aksiyon  BERAAT_E (11545)
+  G_D            98.0 dk   13832 sözcük   212 aksiyon  BERAAT_D (12140)
+  G_CVYO         92.5 dk   13008 sözcük   202 aksiyon  CVYO (10790)
+  G_I            88.5 dk   12456 sözcük   193 aksiyon  INDIRIM (9495)
+  G_M            81.1 dk   11391 sözcük   178 aksiyon  MAHKUMIYET (7775)
+  W              81.8 dk   11392 sözcük   185 aksiyon  MAHKUMIYET (8030)
+  G_DUZELT       89.7 dk   12742 sözcük   189 aksiyon  BERAAT_E (10235)
+  G_BILGI        92.6 dk   13077 sözcük   199 aksiyon  BERAAT_E (10995)
+  G_BASKI        91.9 dk   13015 sözcük   196 aksiyon  BERAAT_E (10575)
+  G_ETIK         85.4 dk   12033 sözcük   186 aksiyon  ETIK (8620)
+  ==> TİPİK YOL (TIPIK): 98.7 dk  ✓ süre hedefte
   ==> KAPI: ✓ GEÇTİ
 ```
 

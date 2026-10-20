@@ -1,0 +1,30 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_a",
+        "when": { "not": { "hasEvidence": "clue_a" } },
+        "text": "TODO: olay yerindeki A bulgusunu kaçırdın.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_c",
+        "when": { "not": { "hasEvidence": "clue_c" } },
+        "text": "TODO: belgeye UV tutmadın.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_ded",
+        "when": { "not": { "hasEvidence": "ded_ab" } },
+        "text": "TODO: A ile B’yi tahtada birleştirmedin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_suc",
+        "when": { "not": { "flag": "suc_duyurusu" } },
+        "text": "TODO: gerçek faile giden yol suç duyurusuydu (CMK 158).",
+        "category": "USUL_BILGISI"
+      }
+    ]
+  }
+}

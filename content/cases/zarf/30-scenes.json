@@ -1,0 +1,41 @@
+{
+  "scenes": [
+    {
+      "id": "sc_olay",
+      "title": "TODO Olay yeri · fotoğraflar",
+      "description": "TODO",
+      "width": 344,
+      "height": 300,
+      "image": "img_olay",
+      "objects": [
+        {
+          "id": "ob_a",
+          "name": "TODO nesne A",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 150, "w": 60, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_a" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": { "text": "TODO bulunca gösterilen metin.", "short": "TODO kısa etiket A" }
+        },
+        {
+          "id": "ob_b",
+          "name": "TODO nesne B",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 230, "y": 60, "w": 60, "h": 60 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_b" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": { "text": "TODO bulunca gösterilen metin.", "short": "TODO kısa etiket B" }
+        }
+      ]
+    }
+  ],
+  "assets": [{ "id": "img_olay", "kind": "IMAGE", "path": "assets/scenes/olay-yeri@4x.png" }],
+  "discoveryPaths": [
+    { "evidence": "clue_a", "source": { "type": "OBJECT", "id": "ob_a" } },
+    { "evidence": "clue_b", "source": { "type": "OBJECT", "id": "ob_b" } }
+  ]
+}

@@ -1,94 +1,102 @@
-# Dava #12 "TODO Başlık" — Hikâye Kitabı
+# Dava #12 "Zarf" — Dava Tasarımı
 
-> Kaynak: `content/src/zarf/` (yazım kiti) → `content/cases/zarf/` (`npm run case:build -- zarf`).
-> Hukuki notlar: `docs/legal/zarf.md`. Kılavuz: `docs/content/authoring-guide.md`. Lineup satırı: `docs/content/lineup.md`.
->
-> **Önce hikâye.** Bölüm 1–6 (hikâye kitabı) tamamlanmadan tek satır kaynak kod yazılmaz. Mekanikler sahnelere asılır;
-> bir mekanik için sahne uydurulmaz. Tipik yol 15–25 bin sözcük diyalog ve anlatı taşır (10 binin altı kapıdan geçmez).
+> Anlatı kaynağı: `docs/content/zarf-hikaye.md` (hikâye kitabı). Hukuki notlar: `docs/legal/zarf.md`.
+> Kaynak: `content/src/zarf/` (yazım kiti + satır DSL'i) → `content/cases/zarf/` (`npm run case:build -- zarf`).
+> Rütbe: KIDEMLI · Zorluk 4/5 · Bursa 5. Ağır Ceza Mahkemesi (heyet).
 
-## 1. Logline ve tema
-- Tek cümle: TODO (kim, neyle suçlanıyor, neyi kaybedebilir, gerçek ne?)
-- Tema / dramatik soru: TODO (ör. "sadakat mi, adalet mi?")
-- Ton: TODO (gerilim, dram, kara mizah…) · Ana mekânlar: TODO
+## 1. Gerçek (oyuncunun kurması gereken)
+Tapu kontrol memuru Halil Ekinci, Ateşoğlu İnşaat'ın on bir şerhli dosyasını durdurdu ve bir deftere yazdı. Devir Servisi-2
+memuru Sinan Kaplan (dosyaları parayla hızlandıran) onu "masasından kaldırmak" için borçlu takipçi Bayram Öz'ü polise
+"memur zorla para istiyor" diye gönderdi. Polis kendi parasıyla kontrollü teslimat kurdu. 12 Mart 10.35'te Sinan, kendi dahilisi
+214'ten Halil'i "Müdür Hanım çağırıyor" diye odasından indirdi; Bayram kayıt cihazını 10.39.12'de elle durdurdu ve zarfı
+koridorda Sinan'a verdi; Sinan 10.41'de zarfı Halil'in kilitsiz üçüncü çekmecesine bıraktı. Polis 10.44'te boş odaya girdi,
+Halil 10.46'da döndü. İddianamenin iki kaydı hukuka aykırıdır: #14 kararın süresi bittikten sonra, #9 kararda olmayan
+sanığın hattından alınmıştır. Halil'in tek kusuru: yirmi yedi yılda bir kez, yetkisi olmadan Bayram'a öncelikli randevu vermesi.
 
-## 2. Soğuk açılış (prolog)
-Oyuncu dosyayı açmadan önce yaşanan sahne (300–800 sözcük): olay gecesinden ya da müvekkilin yakalanışından bir an. Kim
-konuşuyor, ne görüyoruz, hangi soru akılda kalıyor? TODO
+## 2. Delil zinciri
 
-## 3. Karakterler (her biri ayrı bir ses)
-| Kimlik | Ad, yaş, iş | İstediği (motivasyon) | Sakladığı | Konuşma biçimi (ağız, tik, sözcük seçimi) | Örnek replik |
-|---|---|---|---|---|---|
-| muvekkil | TODO | TODO | TODO | TODO | “TODO” |
-| tanik | TODO | TODO | TODO | TODO | “TODO” |
-| leyla (mentor) | Av. Leyla Erdem | Deniz’i yetiştirmek | TODO (davaya özgü) | Sakin, öğretici; hukuki açıklamaları O yapar | “TODO” |
-
-Kural: hukuki madde atıfları karakterlerin gündelik konuşmasında geçmez; yeri mentor açıklaması, seçenek geri bildirimi
-(`good` / `bad` / `neutral`) ve rapordur. Hâkim usul cümlelerini sade dille kurar (“Müdafi, diyeceğiniz?”).
-
-## 4. Gerçek ve kronoloji
-Olay gerçekte nasıl oldu? Saat saat; oyuncunun hangisini nerede öğrendiği.
-
-| Saat | Olay | Kim biliyor | Nasıl keşfedilir (sahne · mekanik) |
+| Halka | Delil / ipucu (kimlik) | Nerede | Çıkarım |
 |---|---|---|---|
-| TODO | TODO | TODO | TODO |
+| Kayıtların kapsamı | `clue_sure` + `clue_kayit14` | INV1_KARAR (chk k3, mag k6) | `ded_sure_disi` |
+| | `clue_hedef_hat` + `clue_kayit9` | INV1_KARAR (mag k2, mag k5) | `ded_hat_disi` |
+| Sahte çağrı | `clue_takvim_214` + `clue_rehber_214` | INV1_ODA + INV1_KORIDOR | `ded_sahte_cagri` |
+| Boş oda | `clue_saat_tutanak` + `clue_kayit_durdu` | INV1_TUTANAK (cmp t4, mag t2) | `ded_bos_oda` |
+| İrtikabın çöküşü | `clue_dosya_devir2` + `clue_ihbar_icbar` | INV1_MUDUR + INV1_IFADE | `ded_yetkisiz` |
+| Muhbirin iki hikâyesi | `clue_ihbar_icbar` + `clue_savcilik_anlasma` | INV1_IFADE | `ded_iki_hikaye` |
+| Hedef | `clue_inat` + `clue_uyari_notu` | INV1_KARAR (k4) + INV1_ZEHRA | `ded_hedef` |
+| Kışkırtma | `ev_para` (başlangıç) + `fact_para_emniyet` | Komiser | K2 çürütmesi |
+| Cihaz | `ev_cihaz` → `clue_manuel`, `clue_fisilti` | ARA_CIHAZ (teslim: dl/rq cihaz) | B4, B5 |
+| Zarfın kaynağı | `clue_barkod` + `clue_zimmet` | INV1_TUTANAK + ARA_ARSIV | `ded_zarf_kaynagi` |
+| Tek masa | `clue_214_cagri`/`clue_takvim_214` + `clue_izin_gulay` | ARA_SANTRAL (teslim: dl/rq santral) | `ded_tek_kisi` |
+| Kamera | `ev_kamera` → `clue_kare_saat`, `clue_kol_saat` + `clue_sinan_saat` | ARA_KAMERA + INV1_SINAN | `ded_kameradaki` |
+| Alibi | `clue_cay_defteri` + `clue_sinan_arsiv` | ARA_MUZAFFER + INV1_SINAN | `ded_alibi` |
+| Çıkar | `ev_kirmizi_defter` | ARA_ARSIV (defterin yeri: TP_DEFTER güven ≥ 55 ya da AH_DEFTER) | S4 |
+| Çift yönlü | `ev_sira_disi` | INV1_MUDUR | yüzleşme, terditli savunma; tanığa karşı sunulursa ceza |
 
-## 5. Sahne listesi ve dramatik vuruşlar
-Her sahne bir dramatik vuruş taşır (yeni bilgi, karar, çatışma, duygu değişimi). Dakika ve sözcük bütçesi tipik yol içindir.
+Çeldiriciler (tahta): `clue_kilit`, `clue_kamera_var`, `clue_zarf_stok`, `clue_manuel`, `clue_fisilti`, `clue_kare_zarf`,
+`clue_kare_saat` (tarifsiz). Yanlış çift −50.
 
-| # | Sahne (node'lar) | Bölüm | Vuruş: ne değişiyor? | Mekanik (varsa) | ~dk | ~sözcük |
-|---|---|---|---|---|---|---|
-| 1 | Soğuk açılış (PROLOG_*) | Prolog | TODO | — | 4 | 700 |
-| 2 | Büroda dosya devri (BR_*) | Brifing | TODO | A–D hukuki soru, strateji | 6 | 1 000 |
-| 3 | TODO | Soruşturma 1 | TODO | görüşme / arama / belge | TODO | TODO |
-| … | 1. celse | Duruşma 1 | TODO | itiraz, sanık savunması | TODO | TODO |
-| … | Ters köşe | Ara | TODO | gecikmeli delil | TODO | TODO |
-| … | 2. celse | Duruşma 2 | TODO | çapraz sorgu × 2–3, itirazlar, esas savunma | TODO | TODO |
-| … | Karar ve epilog | Karar | TODO | — | TODO | TODO |
-| **Toplam** | | | | | **90–120** | **15–25 bin** |
+## 3. Çelişkiler (duruşma)
 
-## 6. Ters köşeler ve epiloglar
-- Ters köşe 1 (1. celse sonrası): TODO — nasıl hazırlandı (önceden ekilen ipuçları)?
-- Ters köşe 2 (2. celse içinde): TODO
-- Sonuç başına epilog (karar ekranından önceki kapanış sahnesi ya da `verdictText` + gerekçe; kılavuz §3.6):
-  - BERAAT_B: TODO · BERAAT_E: TODO · INDIRIM: TODO · MAHKUMIYET: TODO
+| Tanık · ifade | Çürüten | Bayrak |
+|---|---|---|
+| Komiser K1 "kuvvetli deliller" | `ded_sure_disi` | `contra_k1` |
+| K2 "parayı muhbir getirdi" | `ev_para` | `contra_k2` (kışkırtma) |
+| K3 "sanık başındayken" | `ded_bos_oda` (tam) / `ev_tutanak` (kısmi) | `contra_k3` / `k3_kismi` |
+| K4 "olağandır" | itiraz: kanaat | `obj_k4` |
+| K5 "kendi telefonunda" (bastırınca) | `ded_hat_disi` / itiraz: hukuka aykırı delil | `contra_k5` / `obj_k5` |
+| Bayram B1 "dosyamı bekletti" | `ded_yetkisiz` | `contra_b1` |
+| B2 "anlaştık; herkesten aldığı bilinir" | `ded_iki_hikaye` / itiraz: duyum | `contra_b2` / `obj_b2` |
+| B3 "kendi elimle verdim" | `ded_bos_oda`, `ev_kamera` | `contra_b3` |
+| B4 "kendiliğinden kapandı" | `ev_cihaz` (manuel durdurma bulunduysa) | `contra_b4` |
+| B5 "koridorda birine verdim" (B3 + B4/fısıltıdan sonra) | `ded_tek_kisi` / `ded_zarf_kaynagi` / `ded_kameradaki` | `contra_b5`, `bayram_ifsa` |
+| Sinan S1 "arşivdeydim" | `ded_alibi` / `ded_kameradaki` | `contra_s1` |
+| S2 "aramadım" | `ev_santral` / `ded_tek_kisi` | `contra_s2` |
+| S3 "zarflar ortak dolaptan" | `ded_zarf_kaynagi` | `contra_s3` |
+| S4 "ne çıkarım olur; abi yorgundu" | `ev_kirmizi_defter` / itiraz: kanaat | `contra_s4` / `obj_s4` |
 
-## 7. Delil zinciri
-| Kimlik | Ad | Tür | Keşif sahnesi / yolu | Neyi çürütür / destekler | Sunulabilir |
-|---|---|---|---|---|---|
-| TODO | TODO | EVIDENCE / CLUE / INSIGHT | TODO | TODO | TODO |
+Sinan'ın çözülmesi: dört çelişkiden en az üçü → `sinan_ifsa` (T_02Y; CMK 48 ile susar).
 
-Çıkarımlar (tahta): TODO kart + kart → çıkarım. Çeldirici kartlar: TODO.
-Gecikmeli teslimler: TODO delil — talep (bayrak) — teslim yeri (gün sonu / celse girişi).
+## 4. Usul kararları (A–D)
+H1_02 savcının yönlendirici sorusu · H1_03 kayıtların okunması (CMK 206/2-a: iki çıkarım birlikte → `red_14`, `red_9`) ·
+H1_05 talepler ve tahliye (≥ 2 çelişki/ret → `halil_tahliye`) · T_04 vasıf değişikliği ve ek savunma (CMK 226) · T_05 mütalaaya
+cevap · T_07 esas savunma · T_08 son söz. Etik kararlar: TAV_B (inkâr tavsiyesi), BAY_B/BAY_C (muhbire beyan yazdırma /
+dikte), MUZ_BASKI, ARAK_C (tanığı izleme), HK2_B (koridorda tanıkla temas).
 
-## 8. Çelişkiler (çapraz sorgu)
-Her tanık için ifade listesi; hangi BASTIR yeni satır açar, hangi delil hangi ifadeyi çürütür, kısmi isabetler.
+## 5. Sonuçlar ve koşullar
 
-## 9. Node grafiği özeti
-Sahne listesinin node'lara dökümü (kimlikler, seçenek grupları, tetikleyiciler).
-
-## 10. Sonuçlar
-| Öncelik | Kimlik | Sınıf | Koşul | Ceza | XP çarpanı |
-|---|---|---|---|---|---|
-| 1 | BERAAT_B | ACQUITTAL (223/2-b) | TODO | Ceza yok | 1,2 |
-| 2 | BERAAT_E | ACQUITTAL (223/2-e) | TODO | Ceza yok | 1,0 |
-| 3 | INDIRIM | REDUCED | TODO | TODO | 0,85 |
-| 4 | MAHKUMIYET | CONVICTION (varsayılan) | — | TODO | 0,6 |
-
-Ceza hesabı (adım adım): TODO temel ceza → artırım → indirim (TCK 61 sırası).
-
-## 11. Skor
-- Kategoriler ve döküm satırları: TODO
-- Eşik çubuğu: Mahkûmiyet 0 · İndirim TODO · Beraat TODO (sonuç koşullarıyla aynı).
-- Teorik tavan: TODO (`case:validate` çıktısındaki final skor aralığı).
-
-## 12. Golden path'ler
-| Ad | Sonuç | Final | Özet |
+| Sonuç | Sınıf | Koşul | Eşik |
 |---|---|---|---|
-| TIPIK | TODO | TODO | Tipik oyun |
+| ETIK | CONVICTION | `illegal_used` ∨ `tanik_etkileme` ∨ `ethics ≥ 2` | — |
+| BERAAT_B | ACQUITTAL (223/2-b) | ¬çöküş ∧ gerçek fail kanıtlandı (`sinan_ifsa` ∨ `bayram_ifsa` ∧ zarf/tek kişi) ∧ `gercek_fail` (T07_A) ∧ `kayit_disi` ∧ pers ≥ 7 | 12.000 |
+| BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ `kayit_disi` ∧ `zarf_suphe` ∧ pers ≥ 5 | 10.000 |
+| GOREV | RECHARACTERIZED (257/1 + HAGB) | ¬çöküş ∧ `terditli` (T07_C) | 3.000 |
+| MAHKUMIYET | CONVICTION (252/2) | varsayılan; çöküşte savcının cümlesi | — |
 
-## 13. Süre ve sözcük ölçümü
-`npm run case:duration -- zarf` çıktısı (tarih, sözcük, aksiyon, dakika, kapı):
+Yüklemler: `kayit_disi` = (red_14 ∨ contra_k1) ∧ (red_9 ∨ contra_k5 ∨ obj_k5); `zarf_suphe` = en az ikisi
+{contra_k3, contra_b3, contra_b4, contra_b5}. Eşik çubuğu 0 / 3.000 / 10.000; `scaleMax` 11.000.
 
-```
-TODO
-```
+## 6. Skor
+Kit ölçeği (Dava #07): sahne nesnesi +40/+60 (defter +80), ıska −10; belge +100/+150, yanlış alet −20; tarif +300, yanlış çift
+−50; bastır +25; doğru sunum +300, kısmi +100, yanlış −150 ve ♥−1; itiraz +50, dayanaksız ♥−1 −50; usul hamleleri +20…+150;
+esas savunma `strategyAmount(200, …)`; bonus `cred × 100`. XP: 223/2-b 1,2 · 223/2-e 1,0 · 257 0,85 · mahkûmiyet 0,6 · etik 0.
+
+## 7. Node haritası
+Hikâye kitabı §4. Parçalar: `40-briefing` (PROLOG…INV1_ILK), `50-inv1-hub` (hub, gün sonları, Leyla, dilekçe, tahta, gece
+zinciri), `51-inv1-people` (Halil görüşmesi, tavsiye, Zehra, müdür, Devir-2, Komiser), `52-inv1-docs` (iki sahne, üç belge),
+`60-hearing-1`, `70-ara` (yığınsız hub; iki belge, iki sahne, üç kişi, suç duyurusu, tahta, gece/sabah sahneleri, son gece
+zinciri), `80-trial` (koridor, üç tanık, kısa ara, ek savunma, mütalaa, savunma, son söz, hüküm), `90-outcomes`, `95-report`.
+
+## 8. Golden path'ler ve ölçüm (`npm run case:duration -- zarf`)
+
+| Yol | Sonuç | Final | Sözcük | Aksiyon | Süre |
+|---|---|---|---|---|---|
+| TIPIK | BERAAT_E | (bkz. §9) | | | |
+| G_B | BERAAT_B | | | | |
+| G_GOREV | GOREV | | | | |
+| G_M | MAHKUMIYET | | | | |
+| G_ETIK | ETIK | | | | |
+| W | MAHKUMIYET (çöküş) | | | | |
+
+## 9. Ölçüm çıktısı
+Teslim ölçümleri aşağıya yapıştırılır.

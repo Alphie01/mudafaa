@@ -85,6 +85,14 @@ export const hearing1: CasePart = {
             zehra: Getirecekler mi? Kelepçeyle mi? Babam kelepçeyle... Neyse. Hemşireyim, kelepçe gördüm. Babamda görmedim.
           `,
         ),
+        W(
+          flag('gece_pano'),
+          S`
+            = 10 MAYIS 2027 · 09.30 — BURSA ADLİYESİ, 4. KAT @adliye
+            - Uykusuz bir gecenin ardından koridor fazla aydınlıktı. Kafamda panonun ipleri: 10.35, 10.39, 10.44, 10.46. Gözlerimi kapatınca bile kırmızı.
+            - Zehra bankta oturuyordu, formasının üstüne bir ceket giymişti. Bana baktı: "Siz de mi uyumadınız? Hemşire olarak söylüyorum: belli oluyor."
+          `,
+        ),
         O(S`
           = 10 MAYIS 2027 · 09.30 — BURSA ADLİYESİ, 4. KAT @adliye
           - Koridor ıslak şemsiyeler ve ucuz kahve kokuyordu. Uykusuz bir gecenin ardından kafamda saatler dönüyordu: 10.35, 10.39, 10.44, 10.46.
@@ -104,7 +112,29 @@ export const hearing1: CasePart = {
         - Koridorun öbür ucunda, kahverengi deri montlu bir adam pencereden dışarı bakıyordu. Bir eliyle telefonunu, öbürüyle bir tespihi çeviriyordu. Bize hiç bakmadı.
         ~ Muhbir. Bayram Öz. Bugün dinlenmeyecek; tanık listesinde ikinci celsede. Ama gelmiş. Neden geldiğini merak ediyorum.
       `),
-      choices: [cont('HK2_DEVAM', 'Salona gir', 'H1_K3', { role: 'PRIMARY' })],
+      choices: [
+        option('HK2_A', 'Muhbire bakma. Zehra’yı al, salona gir.', {
+          effects: [raise('k2_mesafe')],
+          good: 'Duruşmadan önce karşı tarafın tanığıyla temas kurulmaz; mesafe, tanığın beyanının da savunmanın da güvencesidir.',
+          category: 'USUL_BILGISI',
+          score: { USUL_BILGISI: 20 },
+          responses: B(S`
+            - Zehra'nın koluna dokundum. "İçeri girelim." Muhbirin önünden geçerken başımı çevirmedim. Tespihin boncuklarının sesi, kapı kapanana kadar arkamızdan geldi.
+          `),
+          next: 'H1_K3',
+        }),
+        option('HK2_B', 'Muhbirin yanına git; neden geldiğini sor.', {
+          effects: [dec('cred'), raise('k2_temas')],
+          bad: 'Tanık olarak çağrılacak kişiyle duruşma koridorunda dava hakkında konuşmak, tanığı etkileme şüphesi doğurur; savcı ve heyet bunu görür.',
+          category: 'USUL_BILGISI',
+          responses: B(S`
+            - Yanına gittim. Bayram beni görünce tespihi düşürdü, eğilip aldı, doğrulmadan uzaklaştı.
+            - Koridorun öbür ucunda Savcı Kenan Yavuz durmuş, bizi izliyordu. Bir şey söylemedi. Söylemesine gerek yoktu.
+            ~ Bir adım. Yanlış bir adım. Duruşma, koridorda atılan adımları da hatırlar.
+          `),
+          next: 'H1_K3',
+        }),
+      ],
     }),
     decisionNode('H1_K3', [{ to: 'H1_00' }], {
       ...HEAR1,
@@ -112,6 +142,10 @@ export const hearing1: CasePart = {
         W(
           flag('ucret_sonra'),
           S`- Zehra salona girerken koluma dokundu. "Ücreti sonra konuşuruz demiştiniz" dedi. "Konuşacağız. Ama önce babamı çıkarın."`,
+        ),
+        W(
+          all(flag('k2_mesafe'), flag('fact_zehra')),
+          S`- Salona girerken Zehra fısıldadı: "Babam ek nöbet almamı istemiyormuş. Siz söylemişsiniz." Sonra ekledi: "Almayacağım. Bu hafta."`,
         ),
         W(
           flag('deniz_durust'),
@@ -136,7 +170,22 @@ export const hearing1: CasePart = {
         savci: Sayın Başkan, dosya açıktır. Zarf sanığın çekmecesinde, para işaretli, kayıt ortada. Sanığın kendi telefonundaki sözler de ortada. Gerisi, sanığın inkârıdır.
         ~ "Gerisi inkârdır." Savcılar, inkârı bir delil gibi sayar. Ben inkârın arkasındaki on dakikayı saymaya geldim.
       `),
-      choices: [cont('H100_DEVAM', 'Devam', 'H1_01')],
+      choices: [cont('H100_DEVAM', 'Devam', 'H1_00B')],
+    }),
+    story('H1_00B', {
+      ...court1.base,
+      title: 'İddianame',
+      background: 'durusma_salonu',
+      lines: B(S`
+        - Savcı iddianamenin özetini okudu; ezberden, ama bir kâğıda bakar gibi yaparak. Bazı savcılar kâğıda bakar gibi yapar; heyet, kâğıtsız konuşanı sevmez.
+        savci: Sanık, kontrol memuru sıfatıyla, muhbir Bayram Öz'ün başvurusunu bekleterek kırk bin lira talep etmiş, anlaşmaya varmış ve on iki Mart günü parayı makamında almıştır. Para sanığın çekmecesinde ele geçirilmiştir.
+        savci: İletişimin denetlenmesi kayıtları, sanığın muhbire "dosyana bakarım" dediğini ve bir üçüncü kişinin "kontrolcüyü hallettik, zarf yarın masada" dediğini göstermektedir.
+        - Halil iddianame okunurken başını eğmedi. Gözlüğünü bir kez düzeltti; "makamında" kelimesinde. Odasına makam dendiğini ilk kez duyuyormuş gibi.
+        - Dinleyici sıralarında birkaç memur vardı. Tapu müdürlüğünden; mesai saatinde, izin alarak gelmişlerdi. Aralarında Muzaffer Usta'yı gördüm; önlüğünü çıkarmamıştı. Ve kahverengi deri montlu adam, en arkada, kapıya yakın.
+        ~ Bir iddianame, bir hikâyenin en kısa hâlidir. Bugün o hikâyenin uzun hâlini anlatacağım; dakika dakika.
+        baskan: Savunma? Önce sanığı dinleyeceğiz, müdafi. Sonra delilleri.
+      `),
+      choices: [cont('H100B_DEVAM', 'Sanığın sorgusu', 'H1_01')],
     }),
     court1.stage('H1_01', {
       title: 'Sanığın sorgusu',
@@ -443,12 +492,25 @@ export const hearing1: CasePart = {
         }),
       ],
     }),
-    decisionNode('H1_03R', [{ to: 'H1_04' }], {
+    decisionNode('H1_03R', [{ to: 'H1_03S' }], {
       ...HEAR1,
       lines: [
         W(
           flag('red_kabul'),
           S`- Halil bana dönmedi. Ama önündeki kâğıdın kenarını bir kez daha hizaladı; bu sefer elleri titremiyordu.`,
+        ),
+      ],
+    }),
+    decisionNode('H1_03S', [{ to: 'H1_04' }], {
+      ...HEAR1,
+      lines: [
+        W(
+          flag('fact_komiser_ogul'),
+          S`- Komiser salona girerken masasındaki fotoğraf aklıma geldi: üniformalı bir genç. "Tutanak senin vicdanındır." Bugün o vicdanın satırlarını birlikte okuyacağız.`,
+        ),
+        W(
+          flag('k2_temas'),
+          S`- Savcı, Komiser'i çağırmadan önce bana döndü. "Koridorda tanıklarla sohbet etmeyi severiz demek, müdafi." Tutanağa geçmedi. Ama heyet duydu.`,
         ),
       ],
     }),
@@ -691,7 +753,28 @@ export const hearing1: CasePart = {
         effects: [dec('cred'), score('SORGULAMA', -50, 'hatali'), mark('BAD', 'Dayanaksız itiraz.', 'SORGULAMA')],
         responses: B(S`baskan: İtiraz reddedildi. Devam edin.`),
       }),
-      finish: { id: 'H104_BITIR', label: 'Çapraz sorguyu bitir', next: 'H1_05' },
+      finish: { id: 'H104_BITIR', label: 'Çapraz sorguyu bitir', next: 'H1_04R' },
+    }),
+    decisionNode('H1_04R', [{ to: 'H1_05' }], {
+      ...HEAR1,
+      lines: [
+        W(
+          all(flag('k3_kismi'), not(flag('contra_k3'))),
+          S`- Komiser kürsüden inerken "zarf ondan önce verilmiş olabilir" cümlesi havada kaldı. Odanın boş olduğunu gösterdim; ne zaman boş olduğunu göstermedim.`,
+        ),
+        W(
+          all(flag('press_k4'), not(flag('obj_k4'))),
+          S`- "Bu tür cihazlarda olağandır." Cümle tutanağa geçti. İtiraz etmedim; bir kanaat, itirazsız kalınca tespit gibi okunur.`,
+        ),
+        W(
+          all(flag('fact_komiser_oda'), flag('contra_k3')),
+          S`- Şubede bana "değerlendirdik" demişti. Bugün aynı kelimeyi kürsüde kullanmadı. Tutanağın saatleri, değerlendirmeden ağır geldi.`,
+        ),
+        W(
+          all(flag('fact_kayit_ariza'), flag('fact_komiser_dinleme')),
+          S`- Komiser iki kez "teknik" dedi: biri cihaz için, biri kararın süresi için. Bu dosyada "teknik" kelimesi, kimsenin sormadığı soruların adı.`,
+        ),
+      ],
     }),
     choiceNode('H1_05', {
       ...court1.base,
@@ -813,7 +896,31 @@ export const hearing1: CasePart = {
           - Jandarma Halil'in kollarına dokundu. Halil kalktı, kelepçeyi kendisi uzattı. Zehra'ya bakmadı.
         `),
       ],
-      choices: [cont('H106_DEVAM', 'Salondan çık', 'H1_07', { role: 'PRIMARY' })],
+      choices: [cont('H106_DEVAM', 'Salondan çık', 'H1_06B', { role: 'PRIMARY' })],
+    }),
+    story('H1_06B', {
+      ...HEAR1,
+      title: 'Kürsünün önünde',
+      background: 'durusma_salonu',
+      lines: [
+        W(
+          flag('halil_tahliye'),
+          S`
+            - Salon boşalırken Halil yanıma geldi. Elleri serbestti; ne yapacağını bilmiyordu. Sonunda ceketinin önünü ilikledi.
+            halil: Avukat hanım. Kayda geçsin: bugün ilk kez biri kâğıtları benim gibi okudu. Satır satır. Teşekkür ederim.
+            halil: Bir de... o altı numaralı kayıt. "Kontrolcü yine imzalamadı." Savcı okutmadı. Ben duymak isterdim. Bir kez olsun biri, kayıtta benim için iyi bir şey söylesin.
+            > İkinci celsede, Halil Bey. Okutmak isterlerse, okunur. Biz okutmayız; ama okunursa sizin lehinize.
+            - Halil başını salladı. Kızının yanına yürüdü; Zehra ona bir şişe su uzattı, Halil şişenin kapağını açmadan önce etiketini düzeltti.
+          `,
+        ),
+        O(S`
+          - Jandarma Halil'i kapıya doğru götürürken Halil bir an durdu, bana döndü. Sesi alçaktı; jandarmalar duymasın diye değil, Zehra duymasın diye.
+          halil: Avukat hanım. Kızım bana kızgın değil, ama yorgun. Ona söyleyin: ek nöbet almasın. Üç hafta daha kütüphanedeyim. Kütüphane iyi bir yer.
+          halil: Ve kayda geçsin: bugün biri kâğıtları benim gibi okudu. Satır satır.
+          - Kapı kapandı. Zehra arka sırada oturmaya devam etti; kimse ona kalkmasını söylemedi.
+        `),
+      ],
+      choices: [cont('H106B_DEVAM', 'Dışarı çık', 'H1_07', { role: 'PRIMARY' })],
     }),
     story('H1_07', {
       ...HEAR1,

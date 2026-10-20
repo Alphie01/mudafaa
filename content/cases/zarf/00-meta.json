@@ -97,7 +97,7 @@
       "thresholdBar": [
         { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
         { "label": "257 · HAGB", "from": 3000, "tone": "amber" },
-        { "label": "Beraat", "from": 9000, "tone": "green" }
+        { "label": "Beraat", "from": 10000, "tone": "green" }
       ],
       "displayClampMin": 0
     },
@@ -340,6 +340,10 @@
     { "id": "wrong", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
     { "id": "legal_hits", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
     { "id": "ethics", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
+    { "id": "ara_leyla_tel", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ara_mesafe", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ara_odak_insan", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ara_odak_kagit", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "bayram_avukat", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "bayram_ifsa", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "bayram_yazdirildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
@@ -372,10 +376,12 @@
     { "id": "fact_cagri", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_defter_yeri", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_ev_ziyaret", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_kariyer", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_kayit_ariza", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_kilitsiz", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_komiser_dinleme", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_komiser_oda", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_komiser_ogul", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_mudur_cagirmadi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_onbir_dosya", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_para_emniyet", "type": "bool", "initial": false, "visibility": "HIDDEN" },
@@ -394,9 +400,13 @@
     { "id": "halil_sinan", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "halil_sus", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "halil_tahliye", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ilk_insan", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ilk_kagit", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "illegal_used", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "in_court", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "in_court2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "k2_mesafe", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "k2_temas", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "k3_kismi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "muzaffer_cagrildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "muzaffer_defter", "type": "bool", "initial": false, "visibility": "HIDDEN" },
@@ -433,6 +443,8 @@
     { "id": "rq_karar", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "rq_santral", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "rq_sinan", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "sab2_guvenlik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "sab2_plaka", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "santral_cay", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "sinan_bildirildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "sinan_cagrildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
@@ -446,6 +458,8 @@
     { "id": "tanik_etkileme", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "tehdit_bildirildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "terditli", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "tk_kagit", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "tk_soz", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "ucret_sonra", "type": "bool", "initial": false, "visibility": "HIDDEN" }
   ]
 }

@@ -169,10 +169,37 @@
       "choices": [
         {
           "id": "ARA_GIRIS_DEVAM",
-          "kind": "CONTINUE",
-          "label": "Ara evresine başla",
-          "role": "PRIMARY",
-          "next": "ARA_HUB"
+          "kind": "OPTION",
+          "label": "“Önce zarfın yolunu kuracağım: kayıtlar, kamera, cihaz.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "İyi. Zarf bir yoldan geldi. Yolun her durağında bir kâğıt vardır. Ama yolun sonunda bir insan olduğunu unutma; onu da salona çağırman gerekecek."
+                }
+              ]
+            }
+          ],
+          "next": "ARA_HUB",
+          "effects": [{ "type": "VAR", "var": "ara_odak_kagit", "op": "set", "value": true }]
+        },
+        {
+          "id": "ARA_GIRIS_B",
+          "kind": "OPTION",
+          "label": "“Önce insanlar: Halil, çaycı, muhbir. Kâğıtlar bekler.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "İnsanlar bekleyemez, doğru. Ama her insan kendi kâğıdını getirmez. Kâğıtsız bir tanık, kürsüde en çok ağlayan olur; en çok inanılan değil."
+                }
+              ]
+            }
+          ],
+          "next": "ARA_HUB",
+          "effects": [{ "type": "VAR", "var": "ara_odak_insan", "op": "set", "value": true }]
         }
       ]
     },
@@ -396,7 +423,7 @@
               ]
             }
           ],
-          "next": "ARA_HUB",
+          "next": "ARA_GECE1",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 30 },
             { "type": "VAR", "var": "sinan_bildirildi", "op": "set", "value": true }
@@ -427,7 +454,7 @@
               ]
             }
           ],
-          "next": "ARA_HUB",
+          "next": "ARA_GECE1",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": -40 },
             { "type": "VAR", "var": "sinan_uyarildi", "op": "set", "value": true }
@@ -457,7 +484,7 @@
               ]
             }
           ],
-          "next": "ARA_HUB",
+          "next": "ARA_GECE1",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": -40 },
             { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 }
@@ -466,6 +493,157 @@
             "q": "BAD",
             "feedback": "Avukat tanıkları ya da şüphelileri izlemez; bu hem etik bir ihlaldir hem de kişisel güvenliği tehlikeye atar. Gördüğünü belgele, savcılığa bildir.",
             "category": "USUL_BILGISI"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ARA_GECE1",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #12 · ARA",
+      "title": "Leyla’nın kapısı",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ARA 1. GÜNÜN GECESİ · 22.40 — ARSLAN HUKUK",
+              "style": "card",
+              "bg": "buro_gece"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Büroya döndüğümde Leyla’nın odasının ışığı hâlâ yanıyordu. Kapısı aralıktı. Ceketimden damlayan yağmuru görünce bir şey sormadı; havluyu uzattı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Biri seni bekliyordu, değil mi? Yüzünden belli. Avukatlar korkunca saçlarını düzeltir; sen iki kez düzelttin."
+            },
+            {
+              "speaker": "player",
+              "text": "Devir-2’deki memur. Şemsiye tuttu. Nane şekeri ikram etti. “Bir dahili bir şey kanıtlamaz” dedi."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Kanıtlamaz. Ama o bunu senden önce söylediyse, kanıtlayabileceğini düşünüyor demektir. İnsan, korktuğu cümleyi önce kendisi söyler."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla masasındaki ters çerçeveye baktı. Bir an elini uzattı; sonra geri çekti."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Yıllar önce bir dosyada bir tanık benim de kapımda bekledi. Ona cevap verdim. O cevap, mahkemede benim ağzımdan değil, onun ağzından okundu. Çarpıtılmış olarak."
+            },
+            { "speaker": "leyla", "text": "Tanığa cevap verme, Deniz. Hiçbir zaman. Cevabını kürsüde, kâğıtla ver." },
+            {
+              "speaker": "player",
+              "text": "Leyla geçmişinden bir cümle verdi; bir dosya değil, bir cümle. Bu bile, onun için çok.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "ARA_GECE1_DEVAM", "kind": "CONTINUE", "label": "Yarın", "role": "PRIMARY", "next": "ARA_SABAH2" }
+      ]
+    },
+    {
+      "id": "ARA_SABAH2",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #12 · ARA",
+      "title": "Sabah",
+      "background": "hastane",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ARA 2. GÜN · 07.40 — ŞEHİR HASTANESİ, ACİL SERVİS ÇIKIŞI",
+              "style": "card",
+              "bg": "hastane"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Zehra nöbetten çıkarken beni kapıda buldu. Kahve almıştım; iki tane. Birini uzattım. Hemşireler kahveyi sormadan alır; zamanları yoktur sormaya."
+            },
+            {
+              "speaker": "zehra",
+              "text": "Gece üç trafik kazası, bir bıçaklama, bir de kalbini kalp krizi sanan bir avukat. Siz değildiniz, merak etmeyin. Bir kadın avukattı; yaşlı. Leyla Hanım’a benziyordu."
+            },
+            { "speaker": "narrator", "text": "Güldü; sonra gülmeyi bıraktı." },
+            {
+              "speaker": "zehra",
+              "text": "Babam dün gece beni aradı. “Kızım, kütüphanede bir kitap buldum: Ceza Muhakemesi” dedi. “Okuyorum. Avukatın her şeyi doğru yapıyor.” Babam kimseye “doğru yapıyor” demez. Size söyleyeyim dedim."
+            },
+            {
+              "speaker": "zehra",
+              "text": "Bir de şu: dün akşam evin önünde bir araba bekledi. Yarım saat. Sonra gitti. Plakasını yazdım; hemşireyiz, not alırız."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir araba, yarım saat. Kim olduğunu tahmin etmek kolay; kanıtlamak zor. Ve kanıtlamak benim işim değil; bildirmek benim işim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "zehra",
+              "text": "Savcılığa yazdım. Sizin dediğiniz gibi. Saat, plaka, renk. Artık bunu refleksle yapıyorum. Babamın kızıyım; tutanak tutmayı kandan öğrendim."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "SAB2_A",
+          "kind": "OPTION",
+          "label": "“İyi yapmışsın. Kapını kimseye açma; bir şey olursa önce polisi, sonra beni ara.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "zehra",
+                  "text": "Önce polis, sonra siz. Tamam. Acilde de öyle: önce hayati bulgu, sonra hikâye."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kahvesini bitirdi, bardağı çöp kutusuna attı, kutunun kapağını düzgünce kapattı. Babasının kızı."
+                }
+              ]
+            }
+          ],
+          "next": "ARA_HUB",
+          "effects": [
+            { "type": "VAR", "var": "sab2_guvenlik", "op": "set", "value": true },
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 2 }
+          ]
+        },
+        {
+          "id": "SAB2_B",
+          "kind": "OPTION",
+          "label": "“Plakayı bana ver; kimin olduğuna bakarım.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "zehra",
+                  "text": "Siz mi bakacaksınız? Avukat hanım, sizin işiniz babam. Plaka savcılığın işi. Bunu siz bana öğrettiniz."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Haklı. Bir hemşire bana mesleğimi hatırlattı. Leyla duysa gülümserdi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "ARA_HUB",
+          "effects": [{ "type": "VAR", "var": "sab2_plaka", "op": "set", "value": true }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Avukatın plaka sorgulama yetkisi yoktur; bildirilen kayıt savcılığın işidir. Bu, yalnızca zaman yer."
           }
         }
       ]
@@ -498,7 +676,9 @@
           ]
         }
       ],
-      "choices": [{ "id": "ARAK2_DEVAM", "kind": "CONTINUE", "label": "Yarın", "role": "PRIMARY", "next": "ARA_HUB" }]
+      "choices": [
+        { "id": "ARAK2_DEVAM", "kind": "CONTINUE", "label": "Yarın", "role": "PRIMARY", "next": "ARA_SABAH2" }
+      ]
     },
     {
       "id": "ARA_LEYLA",
@@ -1845,6 +2025,15 @@
           ]
         },
         {
+          "when": { "all": [{ "flag": "pil_dolu" }, { "not": { "hasEvidence": "clue_manuel" } }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Cihazın pili yüzde altmış sekizdi; arıza kaydı yoktu. Tuşa kimin bastığını göremedim, ama pilin bitmediğini biliyorum."
+            }
+          ]
+        },
+        {
           "when": { "hasEvidence": "clue_fisilti" },
           "lines": [
             {
@@ -1872,6 +2061,42 @@
       "chapter": "Bölüm 4 · Ara",
       "eyebrow": "DAVA #12 · ARA",
       "lines": [
+        {
+          "when": { "flag": "sab2_plaka" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Zehra’nın plakası hâlâ cebimde. Bakmadım; bakmamam gerekiyordu. Savcılık bakacak. Bir hemşire bana mesleğimi hatırlattı."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "flag": "sab2_guvenlik" }, { "flag": "ara_odak_insan" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Zehra’ya “önce polis, sonra ben” dedim. Bu gece telefonum çalmadı. Bazen iyi haber, sessizliktir."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "flag": "ara_odak_kagit" }, { "flag": "muzaffer_cagrildi" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Önce kâğıtlar dedim; sonunda bir çaycıya vardım. Muzaffer Usta yarın kürsüde, defteri önlüğünün cebinde. Ne söyleyeceğini ben bilmiyorum; bilmemem gerekiyor."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "ara_odak_insan" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Önce insanlar dedim. İnsanlar konuştu; şimdi dosyada her birinin bir kâğıdı var. Yarın kâğıtlar, insanlardan önce kürsüye çıkacak."
+            }
+          ]
+        },
         {
           "when": { "flag": "muzaffer_cagrildi" },
           "lines": [
@@ -1922,7 +2147,20 @@
               "speaker": "leyla",
               "text": "Ve hatırla: bir tanığı yıkmak, bir sanığı kurtarmak değildir. Yıkıntının altından ne çıkacağını bilmeden hiçbir duvarı itme."
             },
-            { "speaker": "narrator", "text": "Gitti. Saat birde telefonum titredi. Zehra." },
+            {
+              "speaker": "narrator",
+              "text": "Gitti. Büroda tek başıma kaldım. Panoya son kez baktım: dört soru. Kayıt hangi kapının deliğinden alındı? Halil neredeydi? Muhbir neyi kime verdi? Zarf kimin işine yarar?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Üç sorunun altında artık kâğıtlar vardı. Dördüncüsünün altında bir boşluk ve bir soru işareti; Halil’in takviminde olduğu gibi."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla dördüncüyü en sona sakla demişti. Yarın son gün.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "Saat birde telefonum titredi. Zehra." },
             {
               "speaker": "zehra",
               "text": "Babam yarın için kravatını üç kez değiştirdi. Sonunda annemin aldığını taktı. Size söylememi istedi: “Kâğıtlar hazırsa ben hazırım.”",
@@ -1947,7 +2185,7 @@
               ]
             }
           ],
-          "next": "T_00",
+          "next": "T_KORIDOR",
           "effects": [
             { "type": "VAR", "var": "trust", "op": "inc", "value": 2 },
             { "type": "VAR", "var": "son_mesaj", "op": "set", "value": true }
@@ -1967,7 +2205,7 @@
               ]
             }
           ],
-          "next": "T_00"
+          "next": "T_KORIDOR"
         }
       ]
     }

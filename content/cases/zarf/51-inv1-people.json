@@ -633,6 +633,84 @@
           ]
         },
         {
+          "id": "TP_YIRMIYEDI",
+          "kind": "TOPIC",
+          "label": "Yirmi yedi yıl",
+          "visibleWhen": { "cmp": [{ "visits": "INV1_HALIL" }, ">=", 2] },
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Bu işe nasıl başladınız? Neden kontrol?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Doksan yılında girdim. Tapu sicil katibi. O zaman her şey kâğıttı; mürekkep, mühür, bir de koca defterler. Bir parselin geçmişini öğrenmek bir gün sürerdi."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Kontrole on beş yıl önce geçtim. Kimse istemez; kontrol, herkesin işini geri çeviren adamdır. Ben istedim. Çünkü bir imzanın arkasında bir aile vardır, avukat hanım."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Bir keresinde bir kadının evi, kocasının sahte vekâletiyle satılmak üzereydi. Ben bir imzanın eğriliğinden şüphelendim. Durdurdum."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Kadın bir yıl sonra bir kutu lokum getirdi; tutanak tuttum, lokumu iade ettim. Kızım hâlâ benimle dalga geçer."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Şimdi bir zarf yüzünden buradayım. Lokumu iade eden adam, zarfla yakalandı. Kader bazen kötü bir şakacıdır.",
+                      "expression": "uzgun"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir adamın bütün hayatı, geri çevirdiği şeylerin listesi. Ve şimdi kendisi, birinin geri çeviremediği bir hediye.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Yirmi yedi yıl. Hiç mi hata yapmadınız?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Yaptım. Bir kere. Biliyorsunuz zaten. Onu da size anlattım. Bir hata, avukat hanım, bir pazarlık değildir. Ben ikisinin farkını yirmi yedi yıl başkalarına anlattım."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Şimdi kendime anlatamıyorum. Garip, değil mi?",
+                      "expression": "kizgin"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 10 },
+            { "type": "VAR", "var": "fact_kariyer", "op": "set", "value": true }
+          ]
+        },
+        {
           "id": "TP_ZEHRA",
           "kind": "TOPIC",
           "label": "Zehra",
@@ -1261,7 +1339,7 @@
                 },
                 {
                   "speaker": "sinan",
-                  "text": "Gülay Hanım da yoktu o hafta, izindeydi. Oda bana kalmıştı. Telefonlara ben bakıyordum, dosyalara ben. Bir de arşiv. Kendimi bölemiyorum ki."
+                  "text": "Bizim oda sabahları ana baba günüdür abla. Telefon susmaz, takipçi eksik olmaz. Arşive kaçmak bazen nefes almaktır."
                 },
                 {
                   "speaker": "player",
@@ -1543,6 +1621,39 @@
           "effects": [
             { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
             { "type": "VAR", "var": "fact_komiser_oda", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "KOM_OGUL",
+          "kind": "OPTION",
+          "label": "Masanızdaki fotoğraf?",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Komiser fotoğrafa baktı; yumuşadı, sonra yumuşadığını fark edip yeniden sertleşti."
+                },
+                {
+                  "speaker": "komiser",
+                  "text": "Oğlum. Polis okulundan mezun oldu geçen yıl. Ona ilk günden şunu söyledim: “Tutanak senin vicdanındır. Ne gördüysen onu yaz.”"
+                },
+                {
+                  "speaker": "komiser",
+                  "text": "Ben de öyle yazdım, avukat hanım. Ne gördüysem. Görmediğimi de... değerlendirdim. Değerlendirme de işimiz."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Ne gördüysen onu yaz.” İyi bir öğüt. Tutanağı bir daha okuyacağım; gördüğünü yazmış mı, değerlendirdiğini mi?",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 10 },
+            { "type": "VAR", "var": "fact_komiser_ogul", "op": "set", "value": true }
           ]
         },
         { "id": "KOM_GERI", "kind": "CONTINUE", "label": "Teşekkür et, çık", "role": "BACK", "next": "$return" }

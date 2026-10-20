@@ -20,8 +20,8 @@ import { O, S, W } from './dsl.js';
 // (farklı nitelendirme, HAGB), mahkûmiyet (varsayılan). Final eşikleri eşik çubuğunun `from` değerleriyle aynıdır.
 
 export const T_GOREV = 3000;
-export const T_BERAAT = 9000;
-export const T_BERAAT_B = 11500;
+export const T_BERAAT = 10000;
+export const T_BERAAT_B = 12000;
 
 const notCollapsed = not(flag('cokus'));
 const gercekProven = any(
@@ -90,7 +90,7 @@ export const outcomes: CasePart = {
       header: 'TÜRK MİLLETİ ADINA',
       sentence: 'Ceza yok · tedbirler kalktı',
       verdictText:
-        'Sanık Halil Ekinci’nin üzerine atılı rüşvet suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; hakkındaki tutuklama ve adli kontrol tedbirlerinin kaldırılmasına; el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; hukuka aykırı elde edilen dinleme kayıtlarının hâkim denetiminde yok edilmesine (CMK 137/3); Sinan Kaplan ve Bayram Öz hakkında iftira ve diğer suçlar yönünden işlem yapılmak üzere dosya örneğinin Bursa Cumhuriyet Başsavcılığına gönderilmesine; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
+        'Sanık Halil Ekinci’nin üzerine atılı rüşvet suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; hakkındaki tutuklama ve adli kontrol tedbirlerinin kaldırılmasına; el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; hukuka aykırı elde edilen dinleme kayıtlarının hâkim denetiminde yok edilmesine (CMK 137/3); Sinan Kaplan ve Bayram Öz hakkında iftira ve diğer suçlar yönünden işlem yapılmak üzere dosya örneğinin Bursa Cumhuriyet Başsavcılığına gönderilmesine; sanığa tutuklu kaldığı süre için tazminat isteyebileceğinin bildirilmesine (CMK 141/1-a, 231/3); hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
         because(
           'İddianamenin dayandığı 9 ve 14 numaralı kayıtlar, kararda gösterilmeyen bir hattan ve kararın süresi dolduktan sonra alındığından hükme esas alınmamıştır (CMK 135/1, 135/4, 206/2-a, 217/2; Anayasa 38/6).',
@@ -153,7 +153,7 @@ export const outcomes: CasePart = {
       header: 'TÜRK MİLLETİ ADINA',
       sentence: 'Ceza yok · tedbirler kalktı',
       verdictText:
-        'Sanık Halil Ekinci’nin üzerine atılı rüşvet suçunu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; hakkındaki tutuklama ve adli kontrol tedbirlerinin kaldırılmasına; el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; hukuka aykırı elde edilen dinleme kayıtlarının hâkim denetiminde yok edilmesine (CMK 137/3); dosyanın bir örneğinin zarfı çekmeceye bırakanın belirlenmesi için Bursa Cumhuriyet Başsavcılığına gönderilmesine; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
+        'Sanık Halil Ekinci’nin üzerine atılı rüşvet suçunu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; hakkındaki tutuklama ve adli kontrol tedbirlerinin kaldırılmasına; el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; hukuka aykırı elde edilen dinleme kayıtlarının hâkim denetiminde yok edilmesine (CMK 137/3); dosyanın bir örneğinin zarfı çekmeceye bırakanın belirlenmesi için Bursa Cumhuriyet Başsavcılığına gönderilmesine; sanığa tutuklu kaldığı süre için tazminat isteyebileceğinin bildirilmesine (CMK 141/1-a, 231/3); hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
         because(
           'Kararın süresi dolduktan sonra alınan 14 numaralı kayıt hükme esas alınmamıştır (CMK 135/4, 206/2-a, 217/2; Anayasa 38/6).',
@@ -227,7 +227,7 @@ export const outcomes: CasePart = {
       stampTone: 'amber',
       sentence: '10 ay hapis · hükmün açıklanması geri bırakıldı',
       verdictText:
-        'Sanık Halil Ekinci’nin eyleminin, rüşvetin iş–menfaat bağı kurulamadığından TCK 252/2 değil, ek savunması alınarak (CMK 226/1) TCK 257/1 kapsamında görevi kötüye kullanma olduğu kabul edilerek 1 yıl hapis cezası ile cezalandırılmasına; TCK 62/1 uyarınca 10 ay hapis cezasına; sanığın sabıkasız olması ve yeniden suç işlemeyeceği kanaatiyle CMK 231/5 uyarınca HÜKMÜN AÇIKLANMASININ GERİ BIRAKILMASINA ve beş yıl denetim süresine; tutuklama ve adli kontrol tedbirlerinin kaldırılmasına; el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde itiraz yolu açık olmak üzere (CMK 231/12).',
+        'Sanık Halil Ekinci’nin eyleminin, rüşvetin iş–menfaat bağı kurulamadığından TCK 252/2 değil, ek savunması alınarak (CMK 226/1) TCK 257/1 kapsamında görevi kötüye kullanma olduğu kabul edilerek 1 yıl hapis cezası ile cezalandırılmasına; TCK 62/1 uyarınca 10 ay hapis cezasına; sanığın sabıkasız olması ve yeniden suç işlemeyeceği kanaatiyle CMK 231/5 uyarınca HÜKMÜN AÇIKLANMASININ GERİ BIRAKILMASINA ve beş yıl denetim süresine; tutuklama ve adli kontrol tedbirlerinin kaldırılmasına; el konulan 40.000 TL’nin Emniyet Müdürlüğüne iadesine; giderilmesi gereken somut bir zarar bulunmadığının tespitine (CMK 231/6-c); hükmün gerekçesiyle tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 231/12, 273/1).',
       reasoning: [
         because(
           'Sanığın, yetkisi bulunmadığı hâlde muhbirin başvurusuna öncelikli randevu onayı verdiği sabittir; bu davranış görevin gereklerine aykırıdır ve sıradaki başvuru sahiplerini mağdur etmiştir (TCK 257/1).',
@@ -248,7 +248,7 @@ export const outcomes: CasePart = {
           'Hükmolunan ceza iki yılı aşmadığından ve sanığın kişiliği olumlu değerlendirildiğinden hükmün açıklanması geri bırakılmıştır (CMK 231/5, 231/6).',
         ),
       ],
-      legalBasis: 'TCK 257/1, 62/1; CMK 226/1, 231/5, 231/6, 231/12; CMK 206/2-a, 217/2',
+      legalBasis: 'TCK 257/1, 62/1; CMK 225/2, 226/1, 231/5, 231/6, 231/8, 231/12; CMK 206/2-a, 217/2',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
         'Beraat için gereken delil zincirini kuramadığında, esas savunmada terditli olarak eylemin en fazla görevi kötüye kullanma olduğunu savun.',

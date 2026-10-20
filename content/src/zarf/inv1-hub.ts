@@ -545,7 +545,7 @@ export const inv1Hub: CasePart = {
         O(S`- Mahkemeden hiçbir şey istemedim. Yarın isterim; ama yarın, dünden pahalıdır.`),
       ],
     }),
-    decisionNode('INV1_GECE_5', [{ to: 'INV1_GECE' }], {
+    decisionNode('INV1_GECE_5', [{ to: 'INV1_GECE_6' }], {
       ...INV1,
       lines: [
         W(
@@ -560,7 +560,36 @@ export const inv1Hub: CasePart = {
           has('ded_yetkisiz'),
           S`- Muhbir "dosyamı bekletiyordu" diyor. Dosya Halil'in masasına hiç gelmemiş. Bekletemeyeceğin bir dosya için zorla para istenmez.`,
         ),
+        W(
+          flag('ilk_kagit'),
+          S`- İlk gün "kâğıt insanlardan önce" demiştim. Kâğıtlar konuştu; şimdi sıra, kâğıdı yarın salonda kimin okuyacağında.`,
+        ),
+        W(
+          flag('ilk_insan'),
+          S`- İlk gün "hafıza beklemez" demiştim. Herkesin hafızası bir yere kadar konuştu; geri kalanını yarın kâğıtlar söyleyecek.`,
+        ),
         W(flag('br01_dogru'), S`- Leyla ilk gece bir kez "doğru" demişti. Dört ile on iki. Yarın o dört yılın altına bir çizgi çekmeye çalışacağım.`),
+      ],
+    }),
+    decisionNode('INV1_GECE_6', [{ to: 'INV1_GECE' }], {
+      ...INV1,
+      lines: [
+        W(
+          all(flag('fact_mudur_cagirmadi'), flag('fact_takvim_aliskanlik')),
+          S`- Müdür kimseyi çağırmamış. Halil arayanın numarasını yazmış; Zehra'nın dediği gibi, "unutmamak için değil, inkâr etmemek için." Bir alışkanlık, bir alibiden daha sağlam bir tanık.`,
+        ),
+        W(
+          flag('fact_mudur_cagirmadi'),
+          S`- Müdür o sabah kimseyi çağırmamış. Biri onun adını kullanmış. Bir binada müdür adına konuşabilen kaç ses var?`,
+        ),
+        W(
+          all(flag('fact_kilitsiz'), flag('fact_ev_ziyaret')),
+          S`- Yirmi yedi yıl kilitlenmemiş bir çekmece. Ve Halil'in evine "belki arşivde" diye telefonla konuşarak gelen biri. Biri neyi, nerede arayacağını biliyor.`,
+        ),
+        W(
+          flag('fact_kilitsiz'),
+          S`- Yirmi yedi yıl kilitlenmemiş bir çekmece. Katta herkes biliyordu. Bilen herkes, açabilirdi.`,
+        ),
       ],
     }),
     story('INV1_GECE', {

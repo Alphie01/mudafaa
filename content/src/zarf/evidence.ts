@@ -165,7 +165,7 @@ const inv1: EvidenceDef[] = [
   }),
   clue('clue_inat', {
     type: 'TELEFON_KAYDI',
-    title: 'Kayıt #6 · 19.02 14.12',
+    title: 'Çözüm tutanağı 6: “Masasından kaldırırız”',
     shortText: '“Kontrolcü yine imzalamadı. On bir dosya.” — “Masasından kaldırırız.”',
     description:
       'Kararın süresi içinde, hedef hatta. Ateşoğlu: “Kontrolcü yine imzalamadı. On bir dosya, inatçı keçi.” Kimliği tespit edilemeyen hat: “Sen merak etme abi. Masasından kaldırırız onu.”',
@@ -185,7 +185,7 @@ const inv1: EvidenceDef[] = [
   }),
   clue('clue_kayit14', {
     type: 'TELEFON_KAYDI',
-    title: 'Kayıt #14 · 11.03 21.05',
+    title: 'Çözüm tutanağı 14: süre sonrası bir cümle',
     shortText: 'Hedef hatta: “Kontrolcüyü hallettik. Zarf yarın masada.”',
     description:
       'Hedef hatta, kimliği tespit edilemeyen bir hatla görüşme. 11 Mart 2027, 21.05. İddianamenin anahtar cümlesi buradan.',
@@ -351,6 +351,7 @@ const deliveries: EvidenceDef[] = [
     icon: 'document',
     side: 'DEFENSE',
     strength: 'STRONG',
+    presentable: false,
     tags: ['key'],
     legalNote:
       'Kararın süresi iki aydır (CMK 135/4); süre bitince tedbir derhâl sona erdirilir ve işlemin bitiş saati tutanağa geçirilir (CMK 137/1). Süre dışı kayıt hukuka aykırıdır.',
@@ -526,7 +527,7 @@ const insights: EvidenceDef[] = [
   }),
   insight('ded_iki_hikaye', {
     type: 'TANIK_IFADESI',
-    title: 'Muhbirin iki hikâyesi',
+    title: 'İki ifade, iki rol',
     shortText: 'Önce “zorla istedi”, iki gün sonra “anlaştık”. Biri irtikap, öbürü rüşvet anlatısı.',
     description:
       '11 Mart’ta memur parayı zorla istemiş; 13 Mart’ta birlikte anlaşmışlar ve zarf memurun eline verilmiş. İki anlatı birbirini dışlıyor.',

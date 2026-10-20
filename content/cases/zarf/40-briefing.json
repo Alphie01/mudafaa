@@ -777,7 +777,7 @@
               ]
             }
           ],
-          "next": "INV1_HUB",
+          "next": "INV1_ILK",
           "effects": [
             { "type": "VAR", "var": "trust", "op": "inc", "value": 5 },
             { "type": "VAR", "var": "gozluk", "op": "set", "value": true }
@@ -803,8 +803,85 @@
               ]
             }
           ],
-          "next": "INV1_HUB",
+          "next": "INV1_ILK",
           "effects": [{ "type": "VAR", "var": "trust", "op": "dec", "value": 4 }]
+        }
+      ]
+    },
+    {
+      "id": "INV1_ILK",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #12 · SORUŞTURMA",
+      "title": "Pano",
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "23 NİSAN · 11.40 — ARSLAN HUKUK", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Büroya döndüğümde Leyla mantar panoyu odamın duvarına çoktan asmıştı. Boş. Yalnızca ortada bir iğne, iğnede bir kâğıt: “ZARF.”"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Her dosyanın bir merkezi vardır, Deniz. Bu dosyanın merkezi bir zarf. Etrafına dört soru yaz. Cevaplarını değil; soruları."
+            },
+            { "speaker": "narrator", "text": "Kalemi aldım. Dört kâğıt, dört soru." },
+            {
+              "speaker": "narrator",
+              "text": "Birincisi: “Kayıt hangi kapının deliğinden alındı?” İkincisi: “Halil 10.35 ile 10.46 arasında neredeydi?” Üçüncüsü: “Muhbir neyi, kime, ne zaman verdi?” Dördüncüsü: “Bu zarf kimin işine yarar?”"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Dördüncüsünü en sona sakla. Mahkeme “kimin işine yarar” diye hüküm kurmaz. Ama sen o soruyu sormadan ilk üçüne doğru cevap bulamazsın."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla bir dosya kutusunu masama bıraktı. İçinde dinleme kayıtlarının çözümleri, tutanaklar, bir CD. CD’nin üstünde kolluğun el yazısıyla: “Kayıt 1–14.”"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Kayıtları dinlemeye kalkma. Önce kararı oku. Kayıt sana ne söylendiğini söyler; karar, söylenenin duyulmaya izinli olup olmadığını."
+            },
+            { "speaker": "player", "text": "On dört kayıt, bir karar, bir zarf. Ve on yedi gün.", "style": "thought" }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "ILK_A",
+          "kind": "OPTION",
+          "label": "Önce kararı ve tutanakları okuyacağım; kâğıt, insanlardan önce.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Kâğıt sabırlıdır. İnsanlar değil. Ama kâğıdı okumadan insanla konuşan, insanın anlattığını kâğıt sanar."
+                }
+              ]
+            }
+          ],
+          "next": "INV1_HUB",
+          "effects": [{ "type": "VAR", "var": "ilk_kagit", "op": "set", "value": true }]
+        },
+        {
+          "id": "ILK_B",
+          "kind": "OPTION",
+          "label": "Önce insanları göreceğim; kâğıt bekler, hafıza beklemez.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Doğru. Yedi hafta geçti; hafıza her gün biraz daha tutanak gibi konuşmaya başlar. Ama kararı da unutma."
+                }
+              ]
+            }
+          ],
+          "next": "INV1_HUB",
+          "effects": [{ "type": "VAR", "var": "ilk_insan", "op": "set", "value": true }]
         }
       ]
     }

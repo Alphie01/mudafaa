@@ -28,8 +28,8 @@ const soft = (topic: string): Action => choose(topic, 'soft');
 const hard = (topic: string): Action => choose(topic, 'hard');
 
 // --- Bölüm 1 ---
-const intro = (strategy: string, ucret = 'BR00_C', ceza = 'BR01_A', sabah = 'SABAH_A') =>
-  C('PROLOG_DEVAM', 'PROLOG2_DEVAM', ucret, ceza, 'BR01K_DEVAM', 'BR01B_DEVAM', strategy, sabah);
+const intro = (strategy: string, ucret = 'BR00_C', ceza = 'BR01_A', sabah = 'SABAH_A', ilk = 'ILK_A') =>
+  C('PROLOG_DEVAM', 'PROLOG2_DEVAM', ucret, ceza, 'BR01K_DEVAM', 'BR01B_DEVAM', strategy, sabah, ilk);
 
 // --- Soruşturma ---
 const mudur = C('A_MUDUR', 'MUD_SABAH', 'MUD_DOSYA', 'MUD_ODA', 'MUD_HALIL', 'MUD_GERI');
@@ -71,7 +71,7 @@ const koridor = [
   tapCenter(OB_OCAK),
   C('KORIDOR_BITIR'),
 ];
-const komiser = C('A_KOMISER', 'KOM_BASLA', 'KOM_PARA', 'KOM_CIHAZ', 'KOM_ODA', 'KOM_GERI');
+const komiser = C('A_KOMISER', 'KOM_BASLA', 'KOM_PARA', 'KOM_CIHAZ', 'KOM_ODA', 'KOM_OGUL', 'KOM_GERI');
 const zehra = C('A_ZEHRA', 'ZEH_NOT', 'ZEH_TAKVIM', 'ZEH_EV', 'ZEH_GERI');
 const sinan = C('A_SINAN', 'SIN_SABAH', 'SIN_SAAT', 'SIN_BAYRAM', 'SIN_HALIL', 'SIN_GERI');
 const tahta1 = [
@@ -94,13 +94,14 @@ const gun3 = [
   tahta1,
   C('A_HALIL2'),
   soft('TP_ZEHRA'),
+  soft('TP_YIRMIYEDI'),
   C('G_BITIR'),
   sinan,
   C('A_DIL', 'DIL_KAMERA', 'DIL_SANTRAL', 'DIL_CIHAZ', 'DIL_VER', 'GO_H1', 'GECE_A'),
 ];
 
 // --- 1. celse ---
-const celse1Acilis = C('HK_DEVAM', 'HK2_DEVAM', 'H100_DEVAM', 'H101_DEVAM');
+const celse1Acilis = C('HK_DEVAM', 'HK2_A', 'H100_DEVAM', 'H100B_DEVAM', 'H101_DEVAM');
 const komiserTam = [
   press('K1'),
   present('ded_sure_disi', 'K1'),
@@ -118,7 +119,7 @@ const celse1 = (rq: string[]) => [
   celse1Acilis,
   C('H101D_DEVAM', 'H101Q_A', 'H101Q_B', 'H101Q_C', 'H101Q_D', 'H101Q_BITTI', 'H102_A', 'H103_A', 'H104_DEVAM'),
   komiserTam,
-  C(...rq, 'RQ_KARAR', 'RQ_TAHLIYE', 'RQ_BITTI', 'H106_DEVAM', 'H107_DEVAM'),
+  C(...rq, 'RQ_KARAR', 'RQ_TAHLIYE', 'RQ_BITTI', 'H106_DEVAM', 'H106B_DEVAM', 'H107_DEVAM'),
 ];
 
 // --- Ara ---
@@ -134,13 +135,13 @@ const tahta2 = [
   combine('clue_cay_defteri', 'clue_sinan_arsiv'),
   C('ARA_CIKARIM_BITIR'),
 ];
-const ara1 = [C('ARA_GIRIS_DEVAM', 'A2_LEYLA', 'ARALEYLA_GERI'), cihaz, santral, kamera, C('A2_BAYRAM', 'BAY_A', 'ARAK_A')];
+const ara1 = [C('ARA_GIRIS_DEVAM', 'A2_LEYLA', 'ARALEYLA_GERI'), cihaz, santral, kamera, C('A2_BAYRAM', 'BAY_A', 'ARAK_A', 'ARA_GECE1_DEVAM', 'SAB2_A')];
 const ara2 = [
   C('A2_LEYLA', 'ARALEYLA_GERI', 'A2_HALIL', 'AH_HAZIR', 'AH_GERI'),
   C('A2_MUZAFFER', 'MUZ_DEFTER', 'MUZ_GORDU', 'MUZ_TANIK', 'MUZ_GERI'),
   arsiv,
   tahta2,
-  C('A2_SUC', 'SUC_A', 'SUC_VER', 'GO_T', 'SON_A'),
+  C('A2_SUC', 'SUC_A', 'SUC_VER', 'GO_T', 'SON_A', 'TK_A'),
 ];
 
 // --- 2. celse ---
@@ -176,7 +177,7 @@ const muzaffer = C('T03_DEVAM', 'T03Q_A', 'T03Q_B', 'T03Q_BITTI');
 
 // --- GÖREVİ KÖTÜYE KULLANMA: kayıtlar ayıklanmaz, zarf açıklanamaz; terditli savunma. ---
 const gorev = [
-  intro('STR_INDIRIM', 'BR00_B', 'BR01_B', 'SABAH_B'),
+  intro('STR_INDIRIM', 'BR00_B', 'BR01_B', 'SABAH_B', 'ILK_B'),
   mudur,
   C('A_HALIL'),
   hard('TP_SABAH'),
@@ -210,13 +211,13 @@ const gorev = [
   present('ev_para', 'K2'),
   press('K3'),
   press('K4'),
-  C('H104_BITIR', 'RQ_SINAN', 'RQ_BITTI', 'H106_DEVAM', 'H107_DEVAM'),
+  C('H104_BITIR', 'RQ_SINAN', 'RQ_BITTI', 'H106_DEVAM', 'H106B_DEVAM', 'H107_DEVAM'),
   C('ARA_GIRIS_DEVAM', 'A2_LEYLA', 'ARALEYLA_GERI'),
   santral,
-  C('A2_BAYRAM', 'BAY_A', 'A2_HALIL', 'AH_HAZIR', 'AH_GERI', 'A2_MUZAFFER', 'MUZ_GORDU', 'MUZ_GERI', 'ARAK_A'),
+  C('A2_BAYRAM', 'BAY_A', 'A2_HALIL', 'AH_HAZIR', 'AH_GERI', 'A2_MUZAFFER', 'MUZ_GORDU', 'MUZ_GERI', 'ARAK_A', 'ARA_GECE1_DEVAM', 'SAB2_A'),
   C('A2_LEYLA', 'ARALEYLA_GERI'),
   arsiv,
-  C('A2_SUC', 'SUC_B', 'SUC_VER', 'GO_T', 'SON_B'),
+  C('A2_SUC', 'SUC_B', 'SUC_VER', 'GO_T', 'SON_B', 'TK_B'),
   C('T00_DEVAM', 'T00S_DEVAM', 'T01_DEVAM'),
   press('B1'),
   present('ded_yetkisiz', 'B1'),
@@ -226,12 +227,12 @@ const gorev = [
   C('T01T_BITIR', 'T02_DEVAM'),
   press('S1'),
   press('S2'),
-  C('T02T_BITIR', 'T02Z_DEVAM', 'T04_B', 'T045_DEVAM', 'T05_A', 'T07_C', 'T08_C'),
+  C('T02T_BITIR', 'T02Z_DEVAM', 'T035_B', 'T04_B', 'T045_DEVAM', 'T05_A', 'T07_C', 'T08_C'),
 ];
 
 // --- MAHKÛMİYET: sert tonlar, eksik araştırma, dayanaksız itirazlar, duygusal savunma. ---
 const mahkumiyet = [
-  intro('STR_MASUMIYET', 'BR00_B', 'BR01_C', 'SABAH_B'),
+  intro('STR_MASUMIYET', 'BR00_B', 'BR01_C', 'SABAH_B', 'ILK_B'),
   C('A_HALIL'),
   hard('TP_SABAH'),
   hard('TP_BAYRAM'),
@@ -250,32 +251,34 @@ const mahkumiyet = [
   tapCenter(OB_SEBIL),
   tapCenter(OB_DOLAP),
   C('KORIDOR_BITIR', 'AK1_B'),
-  C('A_KOMISER', 'KOM_BASLA', 'KOM_ODA', 'KOM_GERI', 'A_SINAN', 'SIN_BAYRAM', 'SIN_HALIL', 'SIN_GERI'),
+  C('A_KOMISER', 'KOM_BASLA', 'KOM_ODA', 'KOM_PARA', 'KOM_OGUL', 'KOM_GERI', 'A_SINAN', 'SIN_BAYRAM', 'SIN_HALIL', 'SIN_GERI'),
   C('A_IFADE'),
-  examine('cmp', 'i1'),
+  examine('mag', 'i1'),
   examine('mag', 'i2'),
-  C('IFADE_BITIR', 'A_ZEHRA', 'ZEH_TAKVIM', 'ZEH_GERI', 'AK2_B'),
+  C('IFADE_BITIR', 'A_CIKARIM'),
+  combine('clue_zarf_stok', 'clue_ihbar_icbar'),
+  C('CIKARIM_BITIR', 'A_ZEHRA', 'ZEH_TAKVIM', 'ZEH_NOT', 'ZEH_GERI', 'AK2_B'),
   C('A_DIL', 'DIL_CENGIZ', 'DIL_KESIF', 'DIL_VER', 'A_HALIL2'),
   C('G_YUZLES_X', 'G_BITIR', 'A_TUTANAK'),
   examine('cmp', 't1'),
   C('TUTANAK_BITIR', 'A_KARAR'),
   examine('cmp', 'k1'),
   C('KARAR_BITIR', 'GO_H1', 'GECE_B'),
-  celse1Acilis,
-  C('H101I_DEVAM', 'H101Q_A', 'H101Q_E', 'H101Q_BITTI', 'H102_B', 'H103_B', 'H104_DEVAM'),
+  C('HK_DEVAM', 'HK2_B', 'H100_DEVAM', 'H100B_DEVAM', 'H101_DEVAM'),
+  C('H101I_DEVAM', 'H101Q_A', 'H101Q_E', 'H101Q_BITTI', 'H102_D', 'H103_B', 'H104_DEVAM'),
   press('K1'),
   press('K2'),
   press('K3'),
-  C('H104_BITIR', 'RQ_BERAAT', 'RQ_BITTI', 'H106_DEVAM', 'H107_DEVAM'),
-  C('ARA_GIRIS_DEVAM', 'A2_SUC', 'SUC_B', 'SUC_VER', 'A2_BAYRAM', 'BAY_B', 'A2_HALIL', 'AH_EZBER', 'AH_GERI'),
-  C('A2_MUZAFFER', 'MUZ_GORDU', 'MUZ_GERI', 'ARAK_B'),
+  C('H104_BITIR', 'RQ_BITTI', 'H106_DEVAM', 'H106B_DEVAM', 'H107_DEVAM'),
+  C('ARA_GIRIS_B', 'A2_SUC', 'SUC_B', 'SUC_VER', 'A2_BAYRAM', 'BAY_B', 'A2_HALIL', 'AH_EZBER', 'AH_GERI'),
+  C('A2_MUZAFFER', 'MUZ_GORDU', 'MUZ_GERI', 'ARAK_B', 'ARA_GECE1_DEVAM', 'SAB2_B'),
   C('A2_ARSIV'),
   tapCenter(OB_CILTLER),
-  C('ARSIV_BITIR', 'GO_T', 'SON_B'),
+  C('ARSIV_BITIR', 'GO_T', 'SON_B', 'TK_B'),
   C('T00_DEVAM', 'T00S_DEVAM', 'T01_DEVAM'),
   press('B1'),
   press('B3'),
-  C('T01T_BITIR', 'T02N_DEVAM', 'T04_D', 'T045_DEVAM', 'T05_C', 'T07_D', 'T08_B'),
+  C('T01T_BITIR', 'T02N_DEVAM', 'T035_B', 'T04_D', 'T045_DEVAM', 'T05_C', 'T07_D', 'T08_B'),
 ];
 
 // --- ETİK: tipik yol, ama muhbire mahkemede ne söyleyeceği dikte edilir. ---
@@ -284,7 +287,7 @@ const ara1etik = [
   cihaz,
   santral,
   kamera,
-  C('A2_BAYRAM', 'BAY_C', 'ARAK_A'),
+  C('A2_BAYRAM', 'BAY_C', 'ARAK_A', 'ARA_GECE1_DEVAM', 'SAB2_A'),
 ];
 
 // --- ÇÖKÜŞ (W): ikinci celsede yanlış deliller sunulur, güvenilirlik sıfıra iner. ---
@@ -307,7 +310,7 @@ export const tests: CasePart = {
     goldenPaths: [
       goldenPath(
         TYPICAL_PATH,
-        { outcome: 'BERAAT_E' },
+        { outcome: 'BERAAT_E', finalMin: 10825, finalMax: 11965 },
         intro('STR_USUL'),
         gun1,
         gun2,
@@ -318,11 +321,11 @@ export const tests: CasePart = {
         bayramTam(false),
         C('T02N_DEVAM'),
         muzaffer,
-        C('T04_A', 'T045_DEVAM', 'T05_A', 'T07_B', 'T08_A'),
+        C('T035_A', 'T04_A', 'T045_DEVAM', 'T05_A', 'T07_B', 'T08_A'),
       ),
       goldenPath(
         'G_B',
-        { outcome: 'BERAAT_B' },
+        { outcome: 'BERAAT_B', finalMin: 12392, finalMax: 13698 },
         intro('STR_MASUMIYET'),
         gun1,
         gun2,
@@ -333,13 +336,13 @@ export const tests: CasePart = {
         bayramTam(true),
         sinanTam,
         muzaffer,
-        C('T04_A', 'T045_DEVAM', 'T05_D', 'T07_A', 'T08_A'),
+        C('T035_A', 'T04_A', 'T045_DEVAM', 'T05_D', 'T07_A', 'T08_A'),
       ),
-      goldenPath('G_GOREV', { outcome: 'GOREV' }, gorev),
-      goldenPath('G_M', { outcome: 'MAHKUMIYET' }, mahkumiyet),
+      goldenPath('G_GOREV', { outcome: 'GOREV', finalMin: 4317, finalMax: 4773 }, gorev),
+      goldenPath('G_M', { outcome: 'MAHKUMIYET', finalMin: 536, finalMax: 594 }, mahkumiyet),
       goldenPath(
         'G_ETIK',
-        { outcome: 'ETIK' },
+        { outcome: 'ETIK', finalMin: 10625, finalMax: 11745 },
         intro('STR_USUL'),
         gun1,
         gun2,
@@ -350,11 +353,11 @@ export const tests: CasePart = {
         bayramTam(false),
         C('T02N_DEVAM'),
         muzaffer,
-        C('T04_A', 'T045_DEVAM', 'T05_A', 'T07_B', 'T08_A'),
+        C('T035_A', 'T04_A', 'T045_DEVAM', 'T05_A', 'T07_B', 'T08_A'),
       ),
       goldenPath(
         'W',
-        { outcome: 'MAHKUMIYET' },
+        { outcome: 'MAHKUMIYET', finalMin: 7756, finalMax: 8574 },
         intro('STR_USUL'),
         gun1,
         gun2,

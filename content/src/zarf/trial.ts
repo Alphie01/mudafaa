@@ -16,6 +16,7 @@ import {
   inc,
   mark,
   meet,
+  not,
   objectRule,
   option,
   presentRule,
@@ -67,6 +68,48 @@ export const trial: CasePart = {
     ],
   },
   nodes: [
+    story('T_KORIDOR', {
+      ...TRIAL,
+      title: 'Koridor',
+      background: 'adliye',
+      lines: [
+        W(
+          flag('halil_tahliye'),
+          S`
+            = 31 MAYIS 2027 · 09.20 — BURSA ADLİYESİ, 4. KAT @adliye
+            - Halil koridorun başında, pencerenin önünde duruyordu. Annesinin aldığı kravat. Elinde bir dosya; kendi dosyası değil, bir boş dosya. "Elim boş durmasın diye" dedi. "Yirmi yedi yıl hiç boş durmadı."
+            - Zehra yanında, gece nöbetinden çıkmış; elinde iki karton bardak çay. Birini babasına uzattı. Halil çayı aldı, kapağının yazısını düzeltti, içmedi.
+            halil: Avukat hanım. Bugün o adam da gelecek, değil mi? Muhbir. Bir de... diğerleri. Bakmayacağım. Kural gereği değil; bakarsam bir şey söylerim diye.
+          `,
+        ),
+        O(S`
+          = 31 MAYIS 2027 · 09.20 — BURSA ADLİYESİ, 4. KAT @adliye
+          - Koridorda Zehra bekliyordu. Gece nöbetinden çıkmış; elinde iki karton bardak çay. "Biri babama" dedi. "Ring gelince veremezler, biliyorum. Ama yine de aldım."
+          - Asansör açıldı; jandarmalar Halil'i getirdi. Halil kızını gördü, kelepçeli elleriyle ceketinin önünü düzeltmeye çalıştı, beceremedi.
+          halil: Avukat hanım. Bugün o adam da gelecek, değil mi? Bakmayacağım. Bakarsam bir şey söylerim.
+        `),
+      ],
+      choices: [
+        option('TK_A', '“Bakmayın. Kâğıtlar bakacak.”', {
+          effects: [inc('trust', 2), raise('tk_kagit')],
+          responses: B(S`
+            halil: Kâğıtlar. Evet. Ben kâğıtlara güvenirim. İnsanlara... artık daha az.
+            - Leyla merdivenden çıktı, bize doğru yürüdü, bir şey söylemeden Halil'in elini sıktı. Kısa, sert, yirmi yıllık bir avukatın el sıkışı.
+            leyla: Halil Bey. Bugün çok konuşmayın. Bugün başkaları konuşacak.
+          `),
+          next: 'T_00',
+        }),
+        option('TK_B', '“Bugün ne olursa olsun, sonuna kadar buradayım.”', {
+          effects: [raise('tk_soz')],
+          responses: B(S`
+            halil: Söz vermeyin, avukat hanım. Söz, kayda geçmeyen bir taahhüttür. Siz kayda geçeni yapın.
+            - Zehra güldü; nöbetten çıkmış birinin, yorgunluktan gelen kısa gülüşü.
+            zehra: Gördünüz mü? Hâkim Bey. Her zaman.
+          `),
+          next: 'T_00',
+        }),
+      ],
+    }),
     court2.stage('T_00', {
       title: 'Duruşma · 2. Celse',
       courtStage: 'ACILIS',
@@ -91,7 +134,7 @@ export const trial: CasePart = {
       onFirstEnter: [raise('in_court2')],
       choices: [cont('T00_DEVAM', 'Raporlar', 'T_00R')],
     }),
-    decisionNode('T_00R', [{ to: 'T_00S' }], {
+    decisionNode('T_00R', [{ to: 'T_00Q' }], {
       ...TRIAL,
       lines: [
         W(
@@ -107,6 +150,31 @@ export const trial: CasePart = {
         `),
       ],
     }),
+    decisionNode('T_00Q', [{ to: 'T_00S' }], {
+      ...TRIAL,
+      lines: [
+        W(
+          all(flag('suc_duyurusu'), flag('halil_sinan')),
+          S`- Savcılık kalemi suç duyurumun numarasını dosyaya eklemişti. Halil'in "kâğıtlarınız söylesin" cümlesi aklımdaydı; kâğıtlar artık hem bu dosyada hem başka bir dosyada konuşuyordu.`,
+        ),
+        W(
+          flag('suc_duyurusu'),
+          S`- Savcılık kalemi suç duyurumun numarasını dosyaya eklemişti. Savcı Kenan Yavuz o numaraya bir kez baktı, sonra bana; bir şey söylemedi.`,
+        ),
+        W(
+          flag('suc_cengiz'),
+          S`- Müteahhit hakkındaki dilekçem dosyaya "ayrıca değerlendirilmek üzere" diye girmişti. Savcı sayfayı çevirirken dudaklarını büzdü. Öfke, bir dilekçede iz bırakır.`,
+        ),
+        W(
+          flag('sinan_uyarildi'),
+          S`- Otoparkta sorduğum soru aklımdaydı. "Biri, avukat hanım. Bir kişi." Bugün o kişi hazırlıklı gelecek; ona hazırlanma fırsatını ben verdim.`,
+        ),
+        W(
+          flag('son_mesaj'),
+          S`- Zehra sabah bir mesaj daha atmıştı: "Babam uyumadı. Kravatını dört kez bağladı. Sonunda annemin aldığında karar kıldı."`,
+        ),
+      ],
+    }),
     story('T_00S', {
       ...court2.base,
       title: 'Koridorda bekleyenler',
@@ -114,6 +182,7 @@ export const trial: CasePart = {
       lines: B(S`
         - Salonun dışında bekleyen tanıklar sıraya girmişti: tespihini kucağında tutan bir takipçi, ütülü açık renk ceketiyle bir memur ve önlüğünün cebinde bir defterle yaşlı bir çaycı.
         - Pencereden soluk bir güneş giriyordu; yağmur gece dinmiş, Uludağ'ın üstünde bir bulut kalmıştı. Tozun içinde ışıktan bir sütun.
+        - Savcı Kenan Yavuz salona girerken dosyasını iki eliyle taşıyordu; geçen celse tek eliyle taşımıştı. Komiser izleyici sıralarında, en arkada oturdu. Ferda Yalçın da gelmişti; bordo ceketiyle, kurumun yüzü.
         ~ Üç tanık, bir zarf, on dakika. Bugün o on dakika bir kez daha yaşanacak; bu sefer yüksek sesle.
       `),
       choices: [cont('T00S_DEVAM', 'Tanık: Bayram Öz', 'T_01')],
@@ -390,7 +459,15 @@ export const trial: CasePart = {
     decisionNode(
       'T_02R',
       [{ when: flag('sinan_cagrildi'), to: 'T_02' }, { when: flag('bayram_ifsa'), to: 'T_02B' }, { to: 'T_02N' }],
-      { ...TRIAL },
+      {
+        ...TRIAL,
+        lines: [
+          W(
+            all(flag('press_b2'), not(flag('contra_b2'))),
+            S`- Bayram kürsüden inerken "anlaştık" ile "zorladı" arasındaki boşluk salonda asılı kaldı. Onu bir kâğıtla doldurmadım; heyet kendi doldurur.`,
+          ),
+        ],
+      },
     ),
     story('T_02B', {
       ...court2.base,
@@ -499,7 +576,7 @@ export const trial: CasePart = {
             sinan: ...İzindeydi.
           `),
         }),
-        presentRule('PS_S2', 'S2', ['ev_santral', 'ded_tek_kisi'], {
+        presentRule('PS_S2', 'S2', ['ev_santral', 'ded_tek_kisi', 'ded_sahte_cagri'], {
           enabledWhen: any(has('clue_214_cagri'), has('ded_tek_kisi')),
           score: { SORGULAMA: 300 },
           effects: [
@@ -558,7 +635,7 @@ export const trial: CasePart = {
             sinan: Birkaç tane. Herkesinkini çevirir. Ben müdür yardımcısı olacağım; birkaç dosya beni ilgilendirmez.
           `),
         }),
-        presentRule('PS_S4', 'S4', ['ev_kirmizi_defter'], {
+        presentRule('PS_S4', 'S4', ['ev_kirmizi_defter', 'ded_hedef'], {
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -595,7 +672,15 @@ export const trial: CasePart = {
         },
         { to: 'T_02Z' },
       ],
-      { ...TRIAL },
+      {
+        ...TRIAL,
+        lines: [
+          W(
+            all(flag('press_s4'), not(flag('contra_s4'))),
+            S`- "Benim ne çıkarım olur?" Soru cevapsız kaldı. Cevabı bir defterdeydi; defteri salona getirmemiştim.`,
+          ),
+        ],
+      },
     ),
     story('T_02Y', {
       ...court2.base,
@@ -624,7 +709,7 @@ export const trial: CasePart = {
       `),
       choices: [cont('T02Z_DEVAM', 'Devam', 'T_03R')],
     }),
-    decisionNode('T_03R', [{ when: flag('muzaffer_cagrildi'), to: 'T_03' }, { to: 'T_04' }], { ...TRIAL }),
+    decisionNode('T_03R', [{ when: flag('muzaffer_cagrildi'), to: 'T_03' }, { to: 'T_035' }], { ...TRIAL }),
     story('T_03', {
       ...court2.base,
       title: 'Tanık: çaycı',
@@ -676,7 +761,54 @@ export const trial: CasePart = {
           `),
           next: '$stay',
         }),
-        cont('T03Q_BITTI', 'Başka sorum yok', 'T_04', { role: 'PRIMARY' }),
+        cont('T03Q_BITTI', 'Başka sorum yok', 'T_035', { role: 'PRIMARY' }),
+      ],
+    }),
+    story('T_035', {
+      ...court2.base,
+      title: 'Kısa ara',
+      background: 'adliye',
+      lines: [
+        W(
+          any(flag('contra_k1'), flag('contra_k2'), flag('contra_k3')),
+          S`
+            baskan: Duruşmaya on beş dakika ara verildi.
+            = ADLİYE KORİDORU · 11.40 @adliye
+            - Koridorun ucunda, yangın merdiveninin kapısında Komiser Levent Arı duruyordu. İzleyici olarak gelmişti; tanıklığı bitmişti, ama gitmemişti.
+            - Beni görünce bir adım attı, sonra durdu. Bir polisin bir avukata yaklaşması, bir tanığın bir avukata yaklaşmasından farklıdır; ama koridor ikisini de aynı tonda kaydeder.
+            komiser: Avukat hanım. Tanıklığım bitti; size bir şey sormayacağım. Bir şey söyleyeceğim, o kadar.
+            komiser: O sonlandırma yazısını ben yazmalıydım. Dört Mart'ta. Yazmadım; sistem kaydetmeye devam etti, ben de gelen her şeyi dosyaya koydum. Oğluma "ne gördüysen yaz" diyorum. Ben gördüğümü yazmışım; görmem gerekeni değil.
+            komiser: Muhbiri de sorgulamadım. Zarf çekmecedeydi, seri numaraları tutuyordu. Ders kitabı gibi dedim. Ders kitapları da bazen yanlış basılır.
+            - Cevap vermedim. Bir tanığın vicdanı tutanağa geçmez; ama bir koridorda duyulur ve unutulmaz.
+            ~ Bu adam kötü bir polis değil. Acele eden bir polis. Bu dosyada herkes biraz acele etti; bir tek Halil, aşağıda, usulüne uygun beş dakika bekledi.
+          `,
+        ),
+        O(S`
+          baskan: Duruşmaya on beş dakika ara verildi.
+          = ADLİYE KORİDORU · 11.40 @adliye
+          - Koridorun ucunda, yangın merdiveninin kapısında Komiser Levent Arı duruyordu. İzleyici olarak gelmişti; tanıklığı bitmişti, ama gitmemişti.
+          - Beni görünce başıyla selam verdi. Yüzünde bir şey vardı; tutanağa geçmeyen türden bir şey. Sonra merdivenden indi.
+          ~ Bu dosyada herkes biraz acele etti. Bir tek Halil, aşağıda, usulüne uygun beş dakika bekledi. Ben de acele ettim mi? Bunu hükümden sonra soracağım.
+        `),
+      ],
+      choices: [
+        option('T035_A', 'Komiserle konuşma; Halil’in yanına dön.', {
+          effects: [raise('ara_mesafe')],
+          responses: B(S`
+            - Halil koridordaki sıraya oturmuş, elindeki boş dosyanın kenarını hizalıyordu. Yanına oturdum. Bir şey söylemedik. Zehra iki bardak su getirdi; birini bana uzattı.
+            zehra: Hemşire tavsiyesi: duruşmada su için. Ağız kurursa cümle kurumaz.
+          `),
+          next: 'T_04',
+        }),
+        option('T035_B', 'Leyla’yı ara; kısa bir akıl danış.', {
+          effects: [raise('ara_leyla_tel')],
+          responses: B(S`
+            leyla{phone}: Ara mı verdiler? İyi. Şimdi vasfı değiştirmeyi deneyecekler; savcının yüzü bunu söylüyordur. İrtikap ya da görevi kötüye kullanma.
+            leyla{phone}: İrtikabın kalbi zorlamadır, Deniz. Zorlayacak yetkisi olmayan zorlayamaz. Görevi kötüye kullanmanın kalbi zarardır ya da haksız menfaat. İkisini de belgeyle karşıla; sesle değil.
+            - Hat kapandı. Leyla "hoşça kal" demez; bitirir.
+          `),
+          next: 'T_04',
+        }),
       ],
     }),
     court2.objection('T_04', {
@@ -974,17 +1106,50 @@ export const trial: CasePart = {
           S`> Bir de şunu kayda geçirmek isterim: para Emniyet'ten çıktı, plan Emniyet'ten çıktı, cihaz Emniyet'ten çıktı. Devlet bir suçu ortaya çıkarabilir; yaratamaz. Burada yaratmaya çok yaklaşmıştır.`,
         ),
         W(
+          all(any({ chosen: 'T07_A' }, { chosen: 'T07_B' }), flag('muzaffer_defter'), flag('muzaffer_sirt')),
+          S`> Bir çaycının defteri ve bir sırt. Yüz değil; ama bir alibinin soğumuş çayı ve kontrol odasından çıkan açık renk bir ceket. Tanık görmediği yüzü söylemedi; bu yüzden gördüğüne inanılır.`,
+        ),
+        W(
           all(any({ chosen: 'T07_A' }, { chosen: 'T07_B' }), has('ded_hedef')),
           S`> Ve kararın içindeki tek hukuka uygun kayıt, on dokuz Şubat'ta, sanığın aleyhine değil, lehine konuşuyor: "Kontrolcü yine imzalamadı. Masasından kaldırırız onu."`,
         ),
       ],
     }),
-    decisionNode('T_07S2', [{ to: 'T_08' }], {
+    decisionNode('T_07S2', [{ to: 'T_07S3' }], {
       ...TRIAL,
       lines: [
         W(
+          all(any({ chosen: 'T07_B' }, { chosen: 'T07_C' }), flag('q_karsilik')),
+          S`> Sanık bu salonda açık bir soruya cevap verdi: öncelikli randevu için ne bir şey istendi ne bir şey verildi. Karşılıksız bir iyilik, rüşvetin "işi" olamaz.`,
+        ),
+        W(
           all(any({ chosen: 'T07_A' }, { chosen: 'T07_B' }, { chosen: 'T07_C' }), flag('q_tam_cumle')),
           S`> Sanığın cümlesi de yarım alıntılanmıştı: "Dosyana bakarım Bayram, ama şerh kalkmadan imza yok." Bir rüşvetçi, parayı alacağı dosyayı reddettiğini telefonda söylemez.`,
+        ),
+      ],
+    }),
+    decisionNode('T_07S3', [{ to: 'T_08' }], {
+      ...TRIAL,
+      lines: [
+        W(
+          flag('tk_kagit'),
+          S`- Halil sabah koridorda "kâğıtlar bakacak" sözümü duymuştu. Savunmam bittiğinde bana bakmadı; önündeki dosyanın kenarını hizaladı. Bir onay.`,
+        ),
+        W(
+          flag('tk_soz'),
+          S`- Halil sabah "söz vermeyin" demişti. Savunmam bittiğinde bana bir kez baktı; kayda geçmeyen bir bakış.`,
+        ),
+        W(
+          flag('ara_leyla_tel'),
+          S`- Leyla'nın aradaki cümlesi kulağımdaydı: "Belgeyle karşıla; sesle değil." Sesimi alçalttım, kâğıtları yükselttim.`,
+        ),
+        W(
+          flag('ara_mesafe'),
+          S`- Arada Halil'in yanında, sessizce, su içerek oturmuştum. Şimdi salonda da aynı sessizlik vardı; ama bu sefer onun lehine.`,
+        ),
+        W(
+          flag('fact_kariyer'),
+          S`- Halil'in hikâyesi aklımdaydı: lokumu iade eden adam. Heyete söylemedim; ama Defne Sezer onun sicilini okumuş olmalıydı, çünkü bir an Halil'e baktı ve kalemini bıraktı.`,
         ),
       ],
     }),
@@ -1024,6 +1189,9 @@ export const trial: CasePart = {
         baskan: Heyet müzakereye çekiliyor.
         - Yarım saat. Koridorda kimse konuşmadı. Zehra pencerenin önünde, elleri önlüğünün ceplerinde. Halil bir sandalyenin kenarına oturdu; sandalyenin kenarı duvarla hizalı değildi, düzeltmedi.
         - Leyla yanıma geldi, bir şey söylemedi. Sadece elimdeki kalemi aldı ve kapağını taktı. Ucu açık kalmıştı; bir saattir.
+        - Pencerenin önünde Muzaffer Usta, önlüğünün cebinden defterini çıkarmış, bir şey yazıyordu. Merak edip sordum. "Bugünün siparişlerini" dedi. "Mahkemede de insanlar çay içer. Kimse yazmaz; ben yazarım."
+        - Halil bir an gözlerini kapadı. Sonra açtı ve kızına döndü: "Kararı ne olursa olsun, sardunyayı sen sula. Ben artık her şeyi kendim yapmayacağım."
+        ~ Yarım saatte yirmi yedi yıl geçmez. Ama yirmi yedi yıl, yarım saatte bir kez daha düşünülür.
         mubasir: Halil Ekinci dosyası! Hüküm!
         baskan: Hüküm fıkrası ayakta dinlenir.
       `),

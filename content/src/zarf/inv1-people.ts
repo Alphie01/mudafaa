@@ -257,6 +257,32 @@ export const inv1People: CasePart = {
             },
           },
         }),
+        topic('TP_YIRMIYEDI', 'Yirmi yedi yıl', {
+          visibleWhen: cmp({ visits: 'INV1_HALIL' }, '>=', 2),
+          cost: costOf('min', 2),
+          score: { SORGULAMA: 10 },
+          effects: [raise('fact_kariyer')],
+          tones: {
+            soft: {
+              prompt: 'Bu işe nasıl başladınız? Neden kontrol?',
+              says: S`
+                halil: Doksan yılında girdim. Tapu sicil katibi. O zaman her şey kâğıttı; mürekkep, mühür, bir de koca defterler. Bir parselin geçmişini öğrenmek bir gün sürerdi.
+                halil: Kontrole on beş yıl önce geçtim. Kimse istemez; kontrol, herkesin işini geri çeviren adamdır. Ben istedim. Çünkü bir imzanın arkasında bir aile vardır, avukat hanım.
+                halil: Bir keresinde bir kadının evi, kocasının sahte vekâletiyle satılmak üzereydi. Ben bir imzanın eğriliğinden şüphelendim. Durdurdum.
+                halil: Kadın bir yıl sonra bir kutu lokum getirdi; tutanak tuttum, lokumu iade ettim. Kızım hâlâ benimle dalga geçer.
+                halil/uzgun: Şimdi bir zarf yüzünden buradayım. Lokumu iade eden adam, zarfla yakalandı. Kader bazen kötü bir şakacıdır.
+                ~ Bir adamın bütün hayatı, geri çevirdiği şeylerin listesi. Ve şimdi kendisi, birinin geri çeviremediği bir hediye.
+              `,
+            },
+            hard: {
+              prompt: 'Yirmi yedi yıl. Hiç mi hata yapmadınız?',
+              says: S`
+                halil: Yaptım. Bir kere. Biliyorsunuz zaten. Onu da size anlattım. Bir hata, avukat hanım, bir pazarlık değildir. Ben ikisinin farkını yirmi yedi yıl başkalarına anlattım.
+                halil/kizgin: Şimdi kendime anlatamıyorum. Garip, değil mi?
+              `,
+            },
+          },
+        }),
         topic('TP_ZEHRA', 'Zehra', {
           cost: costOf('min', 2),
           score: { SORGULAMA: 10 },
@@ -490,7 +516,7 @@ export const inv1People: CasePart = {
           responses: B(S`
             sinan: Ben mi? Arşivdeydim abla. On buçuktan on bire kadar. 1987 ciltleriyle boğuşuyordum; bir parsel geçmişi lazımdı, Görükle'den.
             sinan: Gürültüyü duyunca çıktım. Halil abiyi polisler arasında gördüm. İnanamadım. Hâlâ inanamıyorum.
-            sinan: Gülay Hanım da yoktu o hafta, izindeydi. Oda bana kalmıştı. Telefonlara ben bakıyordum, dosyalara ben. Bir de arşiv. Kendimi bölemiyorum ki.
+            sinan: Bizim oda sabahları ana baba günüdür abla. Telefon susmaz, takipçi eksik olmaz. Arşive kaçmak bazen nefes almaktır.
             ~ Arşiv. 1987 ciltleri. Bir parsel geçmişi için yarım saat. Arşivciler bu kadar sabırlı olmaz.
           `),
           next: '$stay',
@@ -587,6 +613,17 @@ export const inv1People: CasePart = {
             komiser: Biz girdiğimizde oda boştu, iki dakika sonra geldi. Ama arama onun huzurunda yapıldı; usule uygun. Zarf çekmecesindeydi.
             komiser: Muhbir zarfı ona verdiğini söyledi. Biz de verdikten sonra çekmeceye koyup çıktığını değerlendirdik. Mantıklı.
             ~ "Değerlendirdik." Bir tutanakta görülen ile değerlendirilen arasındaki mesafe, bazen bir insanın özgürlüğüdür.
+          `),
+          next: '$stay',
+        }),
+        option('KOM_OGUL', 'Masanızdaki fotoğraf?', {
+          score: { SORGULAMA: 10 },
+          effects: [raise('fact_komiser_ogul')],
+          responses: B(S`
+            - Komiser fotoğrafa baktı; yumuşadı, sonra yumuşadığını fark edip yeniden sertleşti.
+            komiser: Oğlum. Polis okulundan mezun oldu geçen yıl. Ona ilk günden şunu söyledim: "Tutanak senin vicdanındır. Ne gördüysen onu yaz."
+            komiser: Ben de öyle yazdım, avukat hanım. Ne gördüysem. Görmediğimi de... değerlendirdim. Değerlendirme de işimiz.
+            ~ "Ne gördüysen onu yaz." İyi bir öğüt. Tutanağı bir daha okuyacağım; gördüğünü yazmış mı, değerlendirdiğini mi?
           `),
           next: '$stay',
         }),

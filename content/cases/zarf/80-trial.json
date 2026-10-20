@@ -18,6 +18,107 @@
   },
   "nodes": [
     {
+      "id": "T_KORIDOR",
+      "type": "STORY",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "title": "Koridor",
+      "background": "adliye",
+      "lines": [
+        {
+          "when": { "flag": "halil_tahliye" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "31 MAYIS 2027 · 09.20 — BURSA ADLİYESİ, 4. KAT",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Halil koridorun başında, pencerenin önünde duruyordu. Annesinin aldığı kravat. Elinde bir dosya; kendi dosyası değil, bir boş dosya. “Elim boş durmasın diye” dedi. “Yirmi yedi yıl hiç boş durmadı.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Zehra yanında, gece nöbetinden çıkmış; elinde iki karton bardak çay. Birini babasına uzattı. Halil çayı aldı, kapağının yazısını düzeltti, içmedi."
+            },
+            {
+              "speaker": "halil",
+              "text": "Avukat hanım. Bugün o adam da gelecek, değil mi? Muhbir. Bir de... diğerleri. Bakmayacağım. Kural gereği değil; bakarsam bir şey söylerim diye."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "31 MAYIS 2027 · 09.20 — BURSA ADLİYESİ, 4. KAT",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridorda Zehra bekliyordu. Gece nöbetinden çıkmış; elinde iki karton bardak çay. “Biri babama” dedi. “Ring gelince veremezler, biliyorum. Ama yine de aldım.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Asansör açıldı; jandarmalar Halil’i getirdi. Halil kızını gördü, kelepçeli elleriyle ceketinin önünü düzeltmeye çalıştı, beceremedi."
+            },
+            {
+              "speaker": "halil",
+              "text": "Avukat hanım. Bugün o adam da gelecek, değil mi? Bakmayacağım. Bakarsam bir şey söylerim."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "TK_A",
+          "kind": "OPTION",
+          "label": "“Bakmayın. Kâğıtlar bakacak.”",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "halil", "text": "Kâğıtlar. Evet. Ben kâğıtlara güvenirim. İnsanlara... artık daha az." },
+                {
+                  "speaker": "narrator",
+                  "text": "Leyla merdivenden çıktı, bize doğru yürüdü, bir şey söylemeden Halil’in elini sıktı. Kısa, sert, yirmi yıllık bir avukatın el sıkışı."
+                },
+                { "speaker": "leyla", "text": "Halil Bey. Bugün çok konuşmayın. Bugün başkaları konuşacak." }
+              ]
+            }
+          ],
+          "next": "T_00",
+          "effects": [
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "tk_kagit", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TK_B",
+          "kind": "OPTION",
+          "label": "“Bugün ne olursa olsun, sonuna kadar buradayım.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "halil",
+                  "text": "Söz vermeyin, avukat hanım. Söz, kayda geçmeyen bir taahhüttür. Siz kayda geçeni yapın."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Zehra güldü; nöbetten çıkmış birinin, yorgunluktan gelen kısa gülüşü."
+                },
+                { "speaker": "zehra", "text": "Gördünüz mü? Hâkim Bey. Her zaman." }
+              ]
+            }
+          ],
+          "next": "T_00",
+          "effects": [{ "type": "VAR", "var": "tk_soz", "op": "set", "value": true }]
+        }
+      ]
+    },
+    {
       "id": "T_00",
       "type": "COURTROOM",
       "mode": "STAGE",
@@ -116,6 +217,61 @@
           ]
         }
       ],
+      "routes": [{ "to": "T_00Q" }],
+      "choices": []
+    },
+    {
+      "id": "T_00Q",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "suc_duyurusu" }, { "flag": "halil_sinan" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Savcılık kalemi suç duyurumun numarasını dosyaya eklemişti. Halil’in “kâğıtlarınız söylesin” cümlesi aklımdaydı; kâğıtlar artık hem bu dosyada hem başka bir dosyada konuşuyordu."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "suc_duyurusu" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Savcılık kalemi suç duyurumun numarasını dosyaya eklemişti. Savcı Kenan Yavuz o numaraya bir kez baktı, sonra bana; bir şey söylemedi."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "suc_cengiz" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Müteahhit hakkındaki dilekçem dosyaya “ayrıca değerlendirilmek üzere” diye girmişti. Savcı sayfayı çevirirken dudaklarını büzdü. Öfke, bir dilekçede iz bırakır."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "sinan_uyarildi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Otoparkta sorduğum soru aklımdaydı. “Biri, avukat hanım. Bir kişi.” Bugün o kişi hazırlıklı gelecek; ona hazırlanma fırsatını ben verdim."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "son_mesaj" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Zehra sabah bir mesaj daha atmıştı: “Babam uyumadı. Kravatını dört kez bağladı. Sonunda annemin aldığında karar kıldı.”"
+            }
+          ]
+        }
+      ],
       "routes": [{ "to": "T_00S" }],
       "choices": []
     },
@@ -137,6 +293,10 @@
             {
               "speaker": "narrator",
               "text": "Pencereden soluk bir güneş giriyordu; yağmur gece dinmiş, Uludağ’ın üstünde bir bulut kalmıştı. Tozun içinde ışıktan bir sütun."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Kenan Yavuz salona girerken dosyasını iki eliyle taşıyordu; geçen celse tek eliyle taşımıştı. Komiser izleyici sıralarında, en arkada oturdu. Ferda Yalçın da gelmişti; bordo ceketiyle, kurumun yüzü."
             },
             {
               "speaker": "player",
@@ -810,6 +970,17 @@
       "type": "DECISION",
       "chapter": "Bölüm 5 · İkinci Celse",
       "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "press_b2" }, { "not": { "flag": "contra_b2" } }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Bayram kürsüden inerken “anlaştık” ile “zorladı” arasındaki boşluk salonda asılı kaldı. Onu bir kâğıtla doldurmadım; heyet kendi doldurur."
+            }
+          ]
+        }
+      ],
       "routes": [
         { "when": { "flag": "sinan_cagrildi" }, "to": "T_02" },
         { "when": { "flag": "bayram_ifsa" }, "to": "T_02B" },
@@ -1099,7 +1270,7 @@
         {
           "id": "PS_S2",
           "kind": "PRESENT",
-          "match": { "statement": "S2", "evidence": ["ev_santral", "ded_tek_kisi"] },
+          "match": { "statement": "S2", "evidence": ["ev_santral", "ded_tek_kisi", "ded_sahte_cagri"] },
           "enabledWhen": { "any": [{ "hasEvidence": "clue_214_cagri" }, { "hasEvidence": "ded_tek_kisi" }] },
           "responses": [
             {
@@ -1240,7 +1411,7 @@
         {
           "id": "PS_S4",
           "kind": "PRESENT",
-          "match": { "statement": "S4", "evidence": ["ev_kirmizi_defter"] },
+          "match": { "statement": "S4", "evidence": ["ev_kirmizi_defter", "ded_hedef"] },
           "responses": [
             {
               "lines": [
@@ -1313,6 +1484,17 @@
       "type": "DECISION",
       "chapter": "Bölüm 5 · İkinci Celse",
       "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "press_s4" }, { "not": { "flag": "contra_s4" } }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "“Benim ne çıkarım olur?” Soru cevapsız kaldı. Cevabı bir defterdeydi; defteri salona getirmemiştim."
+            }
+          ]
+        }
+      ],
       "routes": [
         {
           "when": {
@@ -1408,7 +1590,7 @@
       "type": "DECISION",
       "chapter": "Bölüm 5 · İkinci Celse",
       "eyebrow": "DURUŞMA · 2. CELSE",
-      "routes": [{ "when": { "flag": "muzaffer_cagrildi" }, "to": "T_03" }, { "to": "T_04" }],
+      "routes": [{ "when": { "flag": "muzaffer_cagrildi" }, "to": "T_03" }, { "to": "T_035" }],
       "choices": []
     },
     {
@@ -1528,7 +1710,117 @@
             "category": "SORGULAMA"
           }
         },
-        { "id": "T03Q_BITTI", "kind": "CONTINUE", "label": "Başka sorum yok", "role": "PRIMARY", "next": "T_04" }
+        { "id": "T03Q_BITTI", "kind": "CONTINUE", "label": "Başka sorum yok", "role": "PRIMARY", "next": "T_035" }
+      ]
+    },
+    {
+      "id": "T_035",
+      "type": "STORY",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Kısa ara",
+      "background": "adliye",
+      "lines": [
+        {
+          "when": { "any": [{ "flag": "contra_k1" }, { "flag": "contra_k2" }, { "flag": "contra_k3" }] },
+          "lines": [
+            { "speaker": "baskan", "text": "Duruşmaya on beş dakika ara verildi." },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · 11.40", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Koridorun ucunda, yangın merdiveninin kapısında Komiser Levent Arı duruyordu. İzleyici olarak gelmişti; tanıklığı bitmişti, ama gitmemişti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Beni görünce bir adım attı, sonra durdu. Bir polisin bir avukata yaklaşması, bir tanığın bir avukata yaklaşmasından farklıdır; ama koridor ikisini de aynı tonda kaydeder."
+            },
+            {
+              "speaker": "komiser",
+              "text": "Avukat hanım. Tanıklığım bitti; size bir şey sormayacağım. Bir şey söyleyeceğim, o kadar."
+            },
+            {
+              "speaker": "komiser",
+              "text": "O sonlandırma yazısını ben yazmalıydım. Dört Mart’ta. Yazmadım; sistem kaydetmeye devam etti, ben de gelen her şeyi dosyaya koydum. Oğluma “ne gördüysen yaz” diyorum. Ben gördüğümü yazmışım; görmem gerekeni değil."
+            },
+            {
+              "speaker": "komiser",
+              "text": "Muhbiri de sorgulamadım. Zarf çekmecedeydi, seri numaraları tutuyordu. Ders kitabı gibi dedim. Ders kitapları da bazen yanlış basılır."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Cevap vermedim. Bir tanığın vicdanı tutanağa geçmez; ama bir koridorda duyulur ve unutulmaz."
+            },
+            {
+              "speaker": "player",
+              "text": "Bu adam kötü bir polis değil. Acele eden bir polis. Bu dosyada herkes biraz acele etti; bir tek Halil, aşağıda, usulüne uygun beş dakika bekledi.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "Duruşmaya on beş dakika ara verildi." },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · 11.40", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Koridorun ucunda, yangın merdiveninin kapısında Komiser Levent Arı duruyordu. İzleyici olarak gelmişti; tanıklığı bitmişti, ama gitmemişti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Beni görünce başıyla selam verdi. Yüzünde bir şey vardı; tutanağa geçmeyen türden bir şey. Sonra merdivenden indi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bu dosyada herkes biraz acele etti. Bir tek Halil, aşağıda, usulüne uygun beş dakika bekledi. Ben de acele ettim mi? Bunu hükümden sonra soracağım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "T035_A",
+          "kind": "OPTION",
+          "label": "Komiserle konuşma; Halil’in yanına dön.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Halil koridordaki sıraya oturmuş, elindeki boş dosyanın kenarını hizalıyordu. Yanına oturdum. Bir şey söylemedik. Zehra iki bardak su getirdi; birini bana uzattı."
+                },
+                { "speaker": "zehra", "text": "Hemşire tavsiyesi: duruşmada su için. Ağız kurursa cümle kurumaz." }
+              ]
+            }
+          ],
+          "next": "T_04",
+          "effects": [{ "type": "VAR", "var": "ara_mesafe", "op": "set", "value": true }]
+        },
+        {
+          "id": "T035_B",
+          "kind": "OPTION",
+          "label": "Leyla’yı ara; kısa bir akıl danış.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Ara mı verdiler? İyi. Şimdi vasfı değiştirmeyi deneyecekler; savcının yüzü bunu söylüyordur. İrtikap ya da görevi kötüye kullanma.",
+                  "style": "phone"
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "İrtikabın kalbi zorlamadır, Deniz. Zorlayacak yetkisi olmayan zorlayamaz. Görevi kötüye kullanmanın kalbi zarardır ya da haksız menfaat. İkisini de belgeyle karşıla; sesle değil.",
+                  "style": "phone"
+                },
+                { "speaker": "narrator", "text": "Hat kapandı. Leyla “hoşça kal” demez; bitirir." }
+              ]
+            }
+          ],
+          "next": "T_04",
+          "effects": [{ "type": "VAR", "var": "ara_leyla_tel", "op": "set", "value": true }]
+        }
       ]
     },
     {
@@ -2258,6 +2550,21 @@
         },
         {
           "when": {
+            "all": [
+              { "any": [{ "chosen": "T07_A" }, { "chosen": "T07_B" }] },
+              { "flag": "muzaffer_defter" },
+              { "flag": "muzaffer_sirt" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Bir çaycının defteri ve bir sırt. Yüz değil; ama bir alibinin soğumuş çayı ve kontrol odasından çıkan açık renk bir ceket. Tanık görmediği yüzü söylemedi; bu yüzden gördüğüne inanılır."
+            }
+          ]
+        },
+        {
+          "when": {
             "all": [{ "any": [{ "chosen": "T07_A" }, { "chosen": "T07_B" }] }, { "hasEvidence": "ded_hedef" }]
           },
           "lines": [
@@ -2278,6 +2585,15 @@
       "eyebrow": "DURUŞMA · 2. CELSE",
       "lines": [
         {
+          "when": { "all": [{ "any": [{ "chosen": "T07_B" }, { "chosen": "T07_C" }] }, { "flag": "q_karsilik" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Sanık bu salonda açık bir soruya cevap verdi: öncelikli randevu için ne bir şey istendi ne bir şey verildi. Karşılıksız bir iyilik, rüşvetin “işi” olamaz."
+            }
+          ]
+        },
+        {
           "when": {
             "all": [
               { "any": [{ "chosen": "T07_A" }, { "chosen": "T07_B" }, { "chosen": "T07_C" }] },
@@ -2288,6 +2604,61 @@
             {
               "speaker": "player",
               "text": "Sanığın cümlesi de yarım alıntılanmıştı: “Dosyana bakarım Bayram, ama şerh kalkmadan imza yok.” Bir rüşvetçi, parayı alacağı dosyayı reddettiğini telefonda söylemez."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_07S3" }],
+      "choices": []
+    },
+    {
+      "id": "T_07S3",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": { "flag": "tk_kagit" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Halil sabah koridorda “kâğıtlar bakacak” sözümü duymuştu. Savunmam bittiğinde bana bakmadı; önündeki dosyanın kenarını hizaladı. Bir onay."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "tk_soz" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Halil sabah “söz vermeyin” demişti. Savunmam bittiğinde bana bir kez baktı; kayda geçmeyen bir bakış."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "ara_leyla_tel" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Leyla’nın aradaki cümlesi kulağımdaydı: “Belgeyle karşıla; sesle değil.” Sesimi alçalttım, kâğıtları yükselttim."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "ara_mesafe" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Arada Halil’in yanında, sessizce, su içerek oturmuştum. Şimdi salonda da aynı sessizlik vardı; ama bu sefer onun lehine."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "fact_kariyer" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Halil’in hikâyesi aklımdaydı: lokumu iade eden adam. Heyete söylemedim; ama Defne Sezer onun sicilini okumuş olmalıydı, çünkü bir an Halil’e baktı ve kalemini bıraktı."
             }
           ]
         }
@@ -2397,6 +2768,19 @@
             {
               "speaker": "narrator",
               "text": "Leyla yanıma geldi, bir şey söylemedi. Sadece elimdeki kalemi aldı ve kapağını taktı. Ucu açık kalmıştı; bir saattir."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Pencerenin önünde Muzaffer Usta, önlüğünün cebinden defterini çıkarmış, bir şey yazıyordu. Merak edip sordum. “Bugünün siparişlerini” dedi. “Mahkemede de insanlar çay içer. Kimse yazmaz; ben yazarım.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Halil bir an gözlerini kapadı. Sonra açtı ve kızına döndü: “Kararı ne olursa olsun, sardunyayı sen sula. Ben artık her şeyi kendim yapmayacağım.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Yarım saatte yirmi yedi yıl geçmez. Ama yirmi yedi yıl, yarım saatte bir kez daha düşünülür.",
+              "style": "thought"
             },
             { "speaker": "mubasir", "text": "Halil Ekinci dosyası! Hüküm!" },
             { "speaker": "baskan", "text": "Hüküm fıkrası ayakta dinlenir." }

@@ -301,7 +301,7 @@ export const briefing: CasePart = {
             zehra: Teşekkür ederim. Ona söyleyin: sardunya kurudu ama ben yeni bir tane aldım.
             ~ Bir müvekkilin güveni bazen bir dosyayla değil, bir gözlükle başlar.
           `),
-          next: 'INV1_HUB',
+          next: 'INV1_ILK',
         }),
         option('SABAH_B', 'Kurallar belli; ben dosyayla girerim, siz görüş gününü bekleyin.', {
           effects: [dec('trust', 4)],
@@ -309,6 +309,38 @@ export const briefing: CasePart = {
             zehra: Haklısınız. Babam da öyle derdi. Kural kural.
             - Kılıfı çantasına geri koydu. Fermuarı yavaş kapattı; sesi, bir kapının kapanması kadar uzun sürdü.
             ~ Doğru bir cümle, yanlış bir anda söylenince kapı yarı kapanır.
+          `),
+          next: 'INV1_ILK',
+        }),
+      ],
+    }),
+      story('INV1_ILK', {
+      ...INV1,
+      title: 'Pano',
+      background: 'buro',
+      lines: B(S`
+        = 23 NİSAN · 11.40 — ARSLAN HUKUK @buro
+        - Büroya döndüğümde Leyla mantar panoyu odamın duvarına çoktan asmıştı. Boş. Yalnızca ortada bir iğne, iğnede bir kâğıt: "ZARF."
+        leyla: Her dosyanın bir merkezi vardır, Deniz. Bu dosyanın merkezi bir zarf. Etrafına dört soru yaz. Cevaplarını değil; soruları.
+        - Kalemi aldım. Dört kâğıt, dört soru.
+        - Birincisi: "Kayıt hangi kapının deliğinden alındı?" İkincisi: "Halil 10.35 ile 10.46 arasında neredeydi?" Üçüncüsü: "Muhbir neyi, kime, ne zaman verdi?" Dördüncüsü: "Bu zarf kimin işine yarar?"
+        leyla: Dördüncüsünü en sona sakla. Mahkeme "kimin işine yarar" diye hüküm kurmaz. Ama sen o soruyu sormadan ilk üçüne doğru cevap bulamazsın.
+        - Leyla bir dosya kutusunu masama bıraktı. İçinde dinleme kayıtlarının çözümleri, tutanaklar, bir CD. CD'nin üstünde kolluğun el yazısıyla: "Kayıt 1–14."
+        leyla: Kayıtları dinlemeye kalkma. Önce kararı oku. Kayıt sana ne söylendiğini söyler; karar, söylenenin duyulmaya izinli olup olmadığını.
+        ~ On dört kayıt, bir karar, bir zarf. Ve on yedi gün.
+      `),
+      choices: [
+        option('ILK_A', 'Önce kararı ve tutanakları okuyacağım; kâğıt, insanlardan önce.', {
+          effects: [raise('ilk_kagit')],
+          responses: B(S`
+            leyla: Kâğıt sabırlıdır. İnsanlar değil. Ama kâğıdı okumadan insanla konuşan, insanın anlattığını kâğıt sanar.
+          `),
+          next: 'INV1_HUB',
+        }),
+        option('ILK_B', 'Önce insanları göreceğim; kâğıt bekler, hafıza beklemez.', {
+          effects: [raise('ilk_insan')],
+          responses: B(S`
+            leyla: Doğru. Yedi hafta geçti; hafıza her gün biraz daha tutanak gibi konuşmaya başlar. Ama kararı da unutma.
           `),
           next: 'INV1_HUB',
         }),

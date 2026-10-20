@@ -109,16 +109,16 @@ sonuçlarda ek satır.
 - Eşik çubuğu: Mahkûmiyet 0 · Kısmi 3000 · Beraat 7000 (BERAAT_B için 8000), `thresholds.ts`.
 - Bedeller: yanlış delil (♥ ve −150), belge/sahne ıskası (−10/−20, deneme hakkı), tahta ıskası (−50), sert görüşme tonu
   (güven), etik dışı seçenekler (Melis'i doğrudan arama, tanığa yön verme, Ozan'a teori anlatma → dizüstü kaybolur).
-- `case:validate` final skor aralığı: −5780…11265.
+- `case:validate` final skor aralığı: −5720…11265.
 
 ## 8. Golden path'ler
 | Ad | Sonuç | Final | Özet |
 |---|---|---|---|
 | TIPIK | BERAAT_E | 11175 | Usul stratejisi, tam soruşturma, Ozan'a karşı delil, esas savunma "şüpheden" |
 | G_B | BERAAT_B | 11265 | Masumiyet stratejisi; IP + demirbaş + üslup; esas savunmada gerçek fail |
-| G_KISMI | KISMI | 4515 | Eksik delil zinciri; terditli savunma |
-| G_M | MAHKUMIYET | 5280 | Sütunu sunmadan; "Melis yazdı" iftira savunması |
-| G_ETIK | ETIK | 10315 | Güçlü dava, ama Tarık'ın "sil" teklifi kabul |
+| G_KISMI | KISMI | 4485 | Eksik delil zinciri; terditli savunma |
+| G_M | MAHKUMIYET | 5250 | Sütunu sunmadan; "Melis yazdı" iftira savunması |
+| G_ETIK | ETIK | 10285 | Güçlü dava, ama Tarık'ın "sil" teklifi kabul |
 | W | MAHKUMIYET | 7580 | Çöküş: yanlış delillerle güvenilirlik sıfırlanır |
 
 **Erken çözüm denetimi (2026-10-20):** golden path'ler üzerinde aksiyon silme (delta) aramasıyla yerel en kısa yollar:
@@ -130,11 +130,11 @@ Ozan'ın çapraz sorgusunu ister.
 `npm run case:duration -- son-mesaj` (2026-10-20):
 
 ```
-TIPIK          96.9 dk   13833 sözcük   200 aksiyon  BERAAT_E (11175)
-G_B            95.3 dk   13681 sözcük   193 aksiyon  BERAAT_B (11265)
-G_KISMI        65.6 dk    9549 sözcük   125 aksiyon  KISMI (4515)
-G_M            68.1 dk    9670 sözcük   144 aksiyon  MAHKUMIYET (5280)
-G_ETIK         90.3 dk   12777 sözcük   193 aksiyon  ETIK (10315)
+TIPIK          96.9 dk   13839 sözcük   200 aksiyon  BERAAT_E (11175)
+G_B            95.5 dk   13709 sözcük   193 aksiyon  BERAAT_B (11265)
+G_KISMI        65.2 dk    9510 sözcük   124 aksiyon  KISMI (4485)
+G_M            67.8 dk    9629 sözcük   143 aksiyon  MAHKUMIYET (5250)
+G_ETIK         90.0 dk   12745 sözcük   192 aksiyon  ETIK (10285)
 W              79.7 dk   11243 sözcük   172 aksiyon  MAHKUMIYET (7580)
 ==> TİPİK YOL (TIPIK): 96.9 dk  ✓ süre hedefte · KAPI: ✓ GEÇTİ
 ```

@@ -27,7 +27,17 @@ const reject = (s: State, a: Action) => {
   return r.code;
 };
 
-const BRIEF: Action[] = [choose('BR01_A'), choose('STR_MASUMIYET')];
+// v2: soğuk açılış (PR_00, PR_01), Saniye (BR_00), dosya devri (BR_01, BR_01B), strateji, depo sokağı sabahı.
+const PROLOG: Action[] = [choose('PR00_DEVAM'), choose('PR01_DEVAM'), choose('BR00_B')];
+const BRIEF: Action[] = [
+  ...PROLOG,
+  choose('BR01_A'),
+  choose('BR01B_DEVAM'),
+  choose('STR_MASUMIYET'),
+  choose('SABAH_DEVAM'),
+];
+// Bir günün dört eylem puanını bitiren kısa yol (gün sonu tetiklenir).
+const DVR: Action[] = [choose('H_DVR'), choose('INV_DVR_BITIR')];
 const TAP = {
   lamba: center(244, 44, 64, 52),
   kamera: center(144, 76, 56, 90),
@@ -41,11 +51,13 @@ describe('Dava #07 investigation (engine)', () => {
   });
 
   it('briefing quiz and strategy', () => {
-    const quiz = play([choose('BR01_A')]);
+    const quiz = play([...PROLOG, choose('BR01_A')]);
     expect(quiz.score.cat.HUKUKI_BILGI).toBe(50);
-    const s = play([choose('STR_MASUMIYET')], quiz);
-    expect(s.vars).toMatchObject({ strategy: 'MASUMIYET', strategy_pct: 150, day: 1, ap: 3 });
-    expect(s.nodeId).toBe('INV_HUB');
+    expect(quiz.nodeId).toBe('BR_01B');
+    const s = play([choose('BR01B_DEVAM'), choose('STR_MASUMIYET')], quiz);
+    expect(s.vars).toMatchObject({ strategy: 'MASUMIYET', strategy_pct: 150, day: 1, ap: 4 });
+    expect(s.nodeId).toBe('INV_SABAH');
+    expect(play([choose('SABAH_DEVAM')], s).nodeId).toBe('INV_HUB');
   });
 
   it('interview soft topics', () => {
@@ -55,7 +67,7 @@ describe('Dava #07 investigation (engine)', () => {
       fact_rizasiz_arama: true,
       fact_mazeret: true,
       trust: 70,
-      min: 8,
+      min: 10,
     });
     expect(s.evidence.ev_fis).toBeDefined();
 
@@ -108,11 +120,14 @@ describe('Dava #07 investigation (engine)', () => {
       choose('TSEL_GORUS'),
       choose('H_T_HUS'),
       choose('THUS_YAZILI'),
+      ...DVR,
     ]);
-    expect(s.nodeId).toBe('INV_DAY_END');
+    // INV_DAY_END bir DECISION: teslimleri yapar, ilk akşam sahnesine yönlendirir.
+    expect(s.visits.INV_DAY_END).toBe(1);
+    expect(s.nodeId).toBe('INV_AKSAM1');
     expect(s.evidence.ev_ariza_kaydi).toBeDefined();
-    expect(s.vars).toMatchObject({ day: 2, ap: 3 });
-    expect(play([choose('DAY_NEXT')], s).nodeId).toBe('INV_HUB');
+    expect(s.vars).toMatchObject({ day: 2, ap: 4 });
+    expect(play([choose('AK1_SAAT')], s).nodeId).toBe('INV_HUB');
   });
 
   it('deduction lamba', () => {
@@ -125,7 +140,8 @@ describe('Dava #07 investigation (engine)', () => {
       choose('BEL_A'),
       choose('H_T_SEL'),
       choose('TSEL_GORUS'),
-      choose('DAY_NEXT'),
+      ...DVR,
+      choose('AK1_SAAT'),
       choose('H_CIKARIM'),
     ]);
     const after = play([{ kind: 'COMBINE', a: 'clue_ampul', b: 'ev_ariza_kaydi' }], s);

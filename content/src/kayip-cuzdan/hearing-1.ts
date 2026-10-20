@@ -216,7 +216,7 @@ Savcı Tolga Uçar gözlüğünü çıkardı, camını kravatının ucuyla sildi
 `),
       choices: [
         option('H101S1_CEVAP', 'Arda cevap versin', {
-          next: 'H1_01S2',
+          next: 'H1_01S1B',
           effects: [ifThen(any(flag('fact_kira_konustu'), flag('fact_zehra_kira'), flag('fact_staj')), [inc('pers')])],
           neutral:
             'Güdüye dair soru meşrudur; ilgisiz değildir. Müvekkilin dürüst cevabı, hazırlıklıysa savcının elindeki “motivi” zayıflatır.',
@@ -238,7 +238,7 @@ savci: İlgisini mahkeme değerlendirir. Teşekkür ederim.
           ],
         }),
         option('H101S1_ITIRAZ', 'İtiraz: soru davayla ilgisiz', {
-          next: 'H1_01S2',
+          next: 'H1_01S1B',
           effects: [dec('cred'), score('USUL_BILGISI', -50, 'hatali')],
           bad: 'Sanığın ekonomik durumu güdü bakımından iddiayla ilgilidir; soru yöneltilebilir (CMK 201/1). Dayanaksız itiraz, savcının sorusunu daha önemli gösterdi.',
           category: 'USUL_BILGISI',
@@ -246,6 +246,85 @@ savci: İlgisini mahkeme değerlendirir. Teşekkür ederim.
 hakim: Soru güdüyle ilgili, müdafi. Reddedildi. Sanık, cevap verin.
 arda: Var. İki ay.
 > İtirazım soruyu küçültmek yerine büyüttü. Salondaki herkes artık “kira borcu” kelimesini hatırlayacaktı.
+`),
+        }),
+      ],
+    },
+    {
+      id: 'H1_01S1B',
+      type: 'CHOICE',
+      ...court1.base,
+      title: 'Savcının soruları',
+      background: 'durusma_salonu',
+      prompt: {
+        speaker: 'savci',
+        text: 'Çantanızdaki zarftan 600 TL çıktı. Müştekinin cüzdanında 1.200 TL vardı; tam yarısı. Bu para nereden geldi?',
+      },
+      lines: B(`
+Savcı el koyma tutanağının fotokopisini kaldırdı, ikinci satırın altını kalemiyle çizdi. “Zarf içinde 600 TL.”
+> Savcının hikâyesinde bu satır bir köprü: bin iki yüzün yarısı Arda’nın çantasında, yarısı kartlarla birlikte bir ortakta.
+`),
+      choices: [
+        option('H101S1B_CEVAP', 'Arda cevap versin', {
+          next: 'H1_01S2',
+          neutral:
+            'Paranın kaynağına dair soru meşrudur. Sanığın kendi açıklaması değerlidir; ama bir kâğıtla desteklenmezse savcının köprüsü ayakta kalır.',
+          responses: [
+            W(
+              flag('fact_zarf'),
+              `
+arda: Bursumdan, Sayın Savcı. O gün sahaftan çıkınca Çarşı’daki ATM’den çektim. Kira payım. Zarfın üstüne kendi adımı yazdım.
+savci: Bunu gösteren bir belge?
+arda: Fişi… bir kitabın arasına koymuştum. Bilmiyorum, şimdi nerede.
+> Doğru cevap, eksik kâğıt. Savcı başını salladı; inanmadığını değil, beklediğini gösteren bir baş sallayışı.
+`,
+            ),
+            O(`
+arda.saskin: Benim param o. Benim. Bankadan çektim.
+savci: Ne zaman, hangi bankadan?
+arda: O gün… akşamüstü. Hatırlamıyorum tam.
+> “Hatırlamıyorum tam.” Bir hâkimin defterine düşen en ağır üç kelime. Bu soruyu onunla önceden konuşmalıydım.
+`),
+          ],
+        }),
+        option('H101S1B_FIS', 'Arda anlatsın; ardından ATM fişini ve zarfı göster', {
+          visibleWhen: any(has('clue_atm_fisi'), has('ded_zarf')),
+          next: 'H1_01S2',
+          effects: [
+            ifThen(
+              has('ded_zarf'),
+              [score('SORGULAMA', 150), inc('pers'), raise('zarf_mahkemede')],
+              [score('SORGULAMA', 50)],
+            ),
+          ],
+          responses: [
+            W(
+              has('ded_zarf'),
+              `
+arda: Bursumdan. Sahaftan çıkınca Çarşı’daki ATM’den çektim, zarfa koydum, üstüne “kira” yazdım.
+P: Sayın Hâkim, sanığın masa çekmecesindeki ATM fişini sunuyoruz: 6 Mart, 17.52, Çarşı şubesi, 600 TL. Kartın son dört hanesi sanığın burs hesabının.
+P: Emanetteki zarf bantlı bir banka zarfı; üstünde sanığın el yazısıyla “ARDA – kira”. Cüzdan çalınmadan kırk dakika önce çekilmiş bir para, cüzdandan çıkmış olamaz.
+Hâkim fişi aldı, saate baktı, tutanağın fotokopisiyle yan yana koydu. Kâtibe döndü: “Fişin bir örneği dosyaya.”
+savci: Paranın kaynağı yönünden diyeceğim yok, Sayın Hâkim.
+> Köprünün bir ayağı çöktü. Savcı bunu bir cümleyle kabul etti. İyi savcılar kaybettikleri yerde uzun konuşmaz.
+`,
+            ),
+            O(`
+arda: Bursumdan. ATM’den çektim.
+P: Sayın Hâkim, sanığın çekmecesinde bulunan ATM fişini sunuyoruz: 6 Mart, 17.52, 600 TL.
+savci: Fiş bir para çekildiğini gösterir. Zarftaki paranın o para olduğunu göstermez.
+> Fişi zarfla birlikte okumamıştım. Elimde iki ayrı kâğıt vardı; savcı aralarındaki boşluğa bir cümle sığdırdı.
+`),
+          ],
+        }),
+        option('H101S1B_ITIRAZ', 'İtiraz: paranın kaynağı davanın konusu değil', {
+          next: 'H1_01S2',
+          effects: [dec('cred'), score('USUL_BILGISI', -50, 'hatali')],
+          bad: 'Çantada bulunan paranın kaynağı, iddianın “cüzdandan alındı” savıyla doğrudan ilgilidir; soru yöneltilebilir (CMK 201/1). Dayanaksız itiraz, savcının köprüsünü daha görünür yaptı.',
+          category: 'USUL_BILGISI',
+          responses: B(`
+hakim: Para, iddianın parçası, müdafi. Reddedildi. Sanık, cevap verin.
+arda: Benim param. Bursumdan çektim.
 `),
         }),
       ],
@@ -291,7 +370,7 @@ arda: Islanmasın diye. Kimlik vardı, fotoğraf vardı.
         text: 'Sabah dokuzda karakola gidecektiniz. Polis sekiz on beşte geldi. Yani dokuzu bekleyerek cüzdanı saklamaya devam ettiğinizi kabul ediyorsunuz, değil mi?',
       },
       choices: [
-        option('H101S3_ITIRAZ', 'İtiraz: soru tartışmacı ve cevabı içeriyor (CMK 201/1)', {
+        option('H101S3_ITIRAZ', 'İtiraz: soru bir sonucu sanığa kabul ettirmeye çalışıyor', {
           next: 'H1_02',
           effects: [...legal(80), inc('pers')],
           good: 'Soru bir değerlendirmeyi (“saklamaya devam ettiğinizi kabul ediyorsunuz”) sanığın ağzına veriyordu. Soruya itiraz edildiğinde hâkim sorunun yöneltilip yöneltilmeyeceğine karar verir (CMK 201/1).',
@@ -314,7 +393,18 @@ arda: Sabah erken… Bilmiyorum. Dokuz iyi bir saat gibi geldi.
 `),
           ],
         }),
-        option('H101S3_CEVAP', 'Arda cevap versin', {
+        option('H101S3_TEKRAR', 'İtiraz: sanık dokuz saatini ilk anlatımında açıkladı', {
+          next: 'H1_02',
+          effects: [dec('pers'), score('USUL_BILGISI', -30, 'hatali')],
+          bad: 'Sanık “dokuzda gidecektim” demişti ama nedenini açıklamamıştı; “cevaplandı” itirazı tutmadı. Sorunun asıl kusuru, bir değerlendirmeyi (“saklamaya devam ettiğinizi kabul ediyorsunuz”) sanığa kabul ettirmeye çalışmasıydı (CMK 201/1).',
+          category: 'USUL_BILGISI',
+          responses: B(`
+hakim: Sanık saati söyledi, nedenini söylemedi, müdafi. Reddedildi. Sanık, cevap verin.
+arda.saskin: Saklamak değil… Dokuzda gidecektim. Kabul etmiyorum.
+savci: Sorum bu kadar.
+`),
+        }),
+        option('H101S3_CEVAP', 'Arda cevap versin; söyleyecekleri var', {
           next: 'H1_02',
           effects: [dec('pers')],
           neutral:
@@ -403,7 +493,7 @@ hakim: Not alındı. Müdafi, tanıkla duruşma dışında temasınızın sını
       ],
       next: 'H1_04',
       options: [
-        option('H103_A', 'İtiraz: soru cevabı içeriyor, tanığa telkin ediyor (CMK 201/1)', {
+        option('H103_A', 'İtiraz: soru cevabı içinde taşıyor; tanık kendisi anlatsın', {
           effects: [...legal(100), inc('pers')],
           good: 'Savcının sorusu cevabı içeriyordu. Soruya itiraz edildiğinde hâkim sorunun sorulup sorulmayacağına karar verir (CMK 201/1); telkinli soru tanığın kendi gözlemini kirletir.',
           category: 'USUL_BILGISI',
@@ -413,31 +503,31 @@ hakim: İtiraz yerinde. Sayın Savcı, soruyu açık sorun.
 savci: Tanık, otobüste ne gördünüz?
 `),
         }),
-        option('H103_B', 'Sessiz kal', {
+        option('H103_B', 'İtiraz etme; cevabı çapraz sorguda sarsarsın', {
           effects: [dec('pers')],
           neutral:
-            'Telkinli soru cevaplandı; tanığın “evet”i artık onun gözlemi değil, savcının cümlesi oldu. Böyle bir soruya itiraz edilebilirdi (CMK 201/1).',
+            'Telkinli soru cevaplandı; tanığın “evet”i artık onun gözlemi değil, savcının cümlesi oldu. Çapraz sorgu sonradan sarsabilir, ama böyle bir soruya o anda itiraz edilebilirdi (CMK 201/1).',
           responses: B(`
 hayri: Evet. O çocuktu.
 > Bir “evet” ile tanık, savcının cümlesini kendi cümlesi yaptı. Sustum. Susmak bazen en pahalı cevaptır.
 `),
         }),
-        option('H103_C', 'İtiraz: tanık yalan söylüyor', {
+        option('H103_C', 'İtiraz: kolluk beyanı dosyada; tanığı yeniden dinlemeye gerek yok', {
           effects: [dec('cred'), score('USUL_BILGISI', -50, 'hatali')],
-          bad: 'İtiraz bir usul kuralına dayanmalı. Henüz konuşmamış bir tanığı yalancılıkla suçlamak dayanaksızdır ve tanığı da hâkimi de savunmaya karşı sertleştirir.',
+          bad: 'Doğrudan doğruyalık ilkesi gereği tanık duruşmada dinlenir; kolluk beyanının okunmasıyla yetinilemez (CMK 210). Üstelik savunmanın en çok ihtiyaç duyduğu şey, bu tanığı kürsüde soru sorarak dinlemekti.',
           category: 'USUL_BILGISI',
           responses: B(`
-hakim: Tanık henüz bir şey söylemedi, müdafi. İtirazınız reddedildi. Sayın Savcı, devam edin.
-hayri.kizgin: Yalancı mı? Ben mi?
+hakim: Tanık duruşmada dinlenir, müdafi. Kolluk beyanı onun yerini tutmaz. Reddedildi. Sayın Savcı, devam edin.
+> Kendi elimle kendi çapraz sorgumu engellemeye çalıştım. Hâkim beni benden korudu.
 `),
         }),
-        option('H103_D', 'İtiraz: tanık yaşlı, gözleri zayıf, dinlenmesin', {
+        option('H103_D', 'İtiraz: tanık sanığı karakolda gördü, tarafsız değil', {
           effects: [dec('cred'), dec('pers'), score('USUL_BILGISI', -50, 'hatali')],
-          bad: 'Yaş, tanıklığa engel değildir; tanığın görme koşulları dinlendikten sonra sorularla ve delillerin takdirinde (CMK 217) tartışılır. Tanığın dinlenmesini engellemeye çalışmak dayanaksızdır.',
+          bad: 'Tanığın sanıkla akrabalığı ya da husumeti yoktur; karakolda görüntü gösterilmesi tanığı tanıklıktan yasaklamaz. Bu, dinlendikten sonra teşhisin değerine dair çapraz sorguda ve delillerin takdirinde (CMK 217) tartışılır.',
           category: 'USUL_BILGISI',
           responses: B(`
-hakim: Tanığın neyi ne kadar gördüğünü dinledikten sonra değerlendiririz, müdafi. Reddedildi.
-> Salonda biri güldü. Gülmeyen tek kişi Hayri Bey’di.
+hakim: Tanığın neyi nasıl gördüğünü dinledikten sonra değerlendiririz, müdafi. Reddedildi.
+> Doğru soruyu yanlış anda, yanlış kılıfla sordum. Karakoldaki görüntüyü çapraz sorguya saklamalıydım.
 `),
         }),
       ],
@@ -611,6 +701,7 @@ hayri.saskin: Eğildi… evet. Yerden aldı. Ben… çantadan aldı sanıyordum.
 `),
         }),
         presentRule('PS_HS4_KLIP', 'HS4', ['ev_klip'], {
+          enabledWhen: has('clue_ilk_kare'),
           effects: [
             score('SORGULAMA', 150),
             inc('pers'),
@@ -627,6 +718,12 @@ Ekranda gri kareler. Arda oturuyor, ayağı takılıyor, eğiliyor.
 hayri: Eğiliyor… yerden alıyor. Ben bunu çantadan sanıyordum. Doğru, eğildi.
 `),
         }),
+        presentRule('PS_HS4_KLIP_ERKEN', 'HS4', ['ev_klip'], {
+          maxUses: 2,
+          responses: B(`
+> Kaydı tanığa göstermeden önce ilk saniyelerini kendim kare kare izlemeliydim. Neyi göstereceğimi bilmeden ekranı açamam. Kâğıdı indirdim.
+`),
+        }),
         presentRule(
           'PS_HAYRI_ILGISIZ',
           undefined,
@@ -638,6 +735,8 @@ hayri: Eğiliyor… yerden alıyor. Ben bunu çantadan sanıyordum. Doğru, eği
             'ded_bereli',
             'ev_recep_ifade',
             'ev_aktarim_formu',
+            'ev_tutanak',
+            'ev_kentkart',
           ],
           {
             maxUses: 4,
@@ -703,7 +802,7 @@ savci: Kayıt ortada, Sayın Hâkim. Sanık cüzdanı alıyor ve çantasına koy
 `),
       ],
       choices: [
-        option('H105_EKSIK', 'Kayıt eksik: Kent Ulaşım’daki dört kanallı tam sefer kaydı getirtilsin (CMK 206/1)', {
+        option('H105_EKSIK', 'Kayıt eksik: dört kanallı tam sefer kaydı getirtilsin', {
           visibleWhen: any(
             has('clue_kaynak_dosya'),
             has('clue_dort_kamera'),
@@ -732,7 +831,7 @@ hakim: Talep ara kararda değerlendirilecek.
 `),
           ],
         }),
-        option('H105_SEGMENT', 'CD bütün değil: 18.43 dakikası yazılamamış; teknisyen dinlensin', {
+        option('H105_SEGMENT', 'CD bütün değil: bir dakika yazılamamış; teknisyen dinlensin', {
           visibleWhen: has('clue_bozuk_segment'),
           next: '$stay',
           effects: [...legal(80), raise('volkan_cagrildi')],
@@ -744,7 +843,7 @@ hakim: Kâtip hanım, formu bana uzatır mısınız?
 Hâkim dipnotu okudu. Kaşları bir milim kalktı.
 `),
         }),
-        option('H105_HUKUKA', 'Kayıt hukuka aykırı elde edildi; delil olarak dışlansın (CMK 206/2-a)', {
+        option('H105_HUKUKA', 'Kayıt hukuka aykırı alındı; delil olarak dışlansın', {
           next: '$stay',
           effects: [dec('cred'), score('USUL_BILGISI', -50, 'hatali')],
           bad: 'Toplu taşıma aracındaki güvenlik kamerası kaydının polis talebiyle işletmeden alınması hukuka aykırı bir elde etme değildir. Sorun kaydın hukuka uygunluğu değil, eksik olmasıdır.',
@@ -752,6 +851,17 @@ Hâkim dipnotu okudu. Kaşları bir milim kalktı.
           responses: B(`
 hakim: Kaydın hukuka aykırı elde edildiğine dair bir husus göremiyorum, müdafi. Talep reddedildi.
 savci: Teşekkürler Sayın Hâkim.
+`),
+        }),
+        option('H105_BILIRKISI', 'CD bilirkişiye gönderilsin; oynanmış olabilir', {
+          next: '$stay',
+          maxUses: 1,
+          effects: [score('USUL_BILGISI', -20)],
+          neutral:
+            'Bilirkişi CD’nin üzerinde oynanıp oynanmadığını söyleyebilir; ama eksik kameraları ve dakikaları tamamlayamaz. Somut bir oynama iddiası da yoktu. Asıl delil kaynaktaki tam kayıttır.',
+          responses: B(`
+hakim: CD’nin üzerinde oynandığına dair somut bir husus ileri sürmediniz, müdafi. Şimdilik gerek görmüyorum.
+savci: Savunma kayda güvenmiyorsa, neye güveniyor, merak ediyorum.
 `),
         }),
         cont('H105_BITIR', 'Başka diyeceğimiz yok', 'H1_06'),
@@ -841,7 +951,7 @@ hakim: Sanık ve müdafiine, eylemin TCK 142/2-b kapsamında değerlendirilebile
 `),
       next: 'H1_08',
       options: [
-        option('H107_SURE', 'Ek savunma için süre istiyoruz (CMK 226/3)', {
+        option('H107_SURE', 'Ek savunmamızı hazırlamak için süre istiyoruz', {
           effects: [...legal(80), raise('ek_sure')],
           good: 'Suçun hukuki niteliği değişebilecekse sanığa haber verilir ve ek savunma imkânı tanınır (CMK 226/1); istem üzerine ek savunmayı hazırlamak için süre verilir (CMK 226/3).',
           category: 'USUL_BILGISI',
@@ -859,7 +969,7 @@ hakim: Mahkeme fiilin nitelendirilmesinde bağlı değildir, müdafi. Hatırlatm
 > Yanlış kapıyı çaldım. Kapı açılmadı; ama ses salonda kaldı.
 `),
         }),
-        option('H107_SIMDI', 'Şimdi kısaca cevap verelim: “özel beceri” yok, alma eylemi yok', {
+        option('H107_SIMDI', 'Ek savunmayı hemen yapalım: beceri de alma da yok', {
           effects: [score('HUKUKI_BILGI', 30), raise('ek_simdi')],
           neutral:
             'Hemen cevap vermek mümkündür; ama tam kayıt ve yeni deliller gelmeden yapılan ek savunma eksik kalır. Süre istemek (CMK 226/3) daha güçlü bir zemin bırakırdı.',
@@ -868,7 +978,7 @@ P: Özel beceri bir yana, ortada bir alma eylemi yok Sayın Hâkim. Sanık cüzd
 hakim: Beyanınız tutanağa geçti. Ek savunmanızı genişletmek isterseniz bir sonraki celsede de alınır.
 `),
         }),
-        option('H107_YOK', 'Diyeceğimiz yok', {
+        option('H107_YOK', 'Uyarıya diyeceğimiz yok; esasta cevap veririz', {
           effects: [dec('pers')],
           neutral:
             'Nitelendirme uyarısı karşılıksız kaldı. Ek savunma hakkı (CMK 226) bir sonraki celsede yine kullanılabilir; ama bugün hâkimin önünde savcının cümlesi tek başına kaldı.',

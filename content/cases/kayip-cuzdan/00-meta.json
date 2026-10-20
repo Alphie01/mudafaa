@@ -90,7 +90,7 @@
         { "id": "hatali", "label": "Hatalı delil ({{var.wrong}})" }
       ],
       "bonuses": [{ "id": "guven", "label": "Güvenilirlik bonusu", "value": { "mul": [{ "var": "cred" }, 100] } }],
-      "scaleMax": 12000,
+      "scaleMax": 14000,
       "thresholdBar": [
         { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
         { "label": "TCK 160", "from": 3000, "tone": "amber" },
@@ -418,6 +418,20 @@
     { "id": "recep_insan", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "serkan_anlatti", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "serkan_cd", "type": "bool", "initial": false, "visibility": "HIDDEN" },
-    { "id": "serkan_kizgin", "type": "bool", "initial": false, "visibility": "HIDDEN" }
+    { "id": "serkan_kizgin", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "zarf_mahkemede", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_vs4", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ob_vs4", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_v3", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_os2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_os3", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ozan_saat", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ozan_tutanak", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ortak_curudu", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "hayri_yeniden", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_hr1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_hr2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "hayri_kapuson", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "hayri_kentkart", "type": "bool", "initial": false, "visibility": "HIDDEN" }
   ]
 }

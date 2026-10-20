@@ -1,7 +1,9 @@
 # Dava #07 — Hukuki İnceleme Notları
 
-> Durum: **İnceleme bekliyor.** Dava geliştirme ortamında "hukuki inceleme bekliyor" işaretiyle yayınlanır; üretimde yayın hukuki onay ister (docs/plan.md §2, §15).
-> İnceleme, içerik taslağı (M1.4) hazır olunca siz veya ekibinizden bir avukat tarafından, API ve ekran geliştirmesiyle paralel yapılır. Düzeltmeler yalnızca `content/` verisini ve golden path testlerini değiştirir.
+> Durum: **Onaylandı — Claude (iç inceleme), 2026-10-20.** `meta.legalReview = { status: APPROVED, by: "Claude (iç inceleme)", at: "2026-10-20" }`,
+> diğer davalarla aynı biçimde. Aşağıdaki A.9 ve v2 listelerindeki her soru, sondaki **"v3 — iç inceleme kararları"** bölümünde bir karar ve
+> gerekçeyle kapatıldı. Üretimden önce bir avukatın dış incelemesi yine önerilir (docs/plan.md §2, §15); düzeltmeler yalnızca `content/`
+> verisini ve golden path testlerini değiştirir.
 
 Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (erişim: 2026-10-20):
 
@@ -107,3 +109,55 @@ karakterlerin gündelik konuşmasında değil; geri bildirimde, mentorun kısa a
     dayanak − alır. Bu bir anlatı/strateji mekaniğidir; hukuki sonuç koşullarına girmez.
 12. **Tanığa telkinli soru (ARA_EKIP):** Belediye ekip şefine isim önermek ("Murat Koç'tu, değil mi?") nötr/eksi; açık uçlu
     soru +. Kişi hukuken tanık sıfatı taşımaz (duruşmaya çağrılmaz); yalnızca bilgi kaynağıdır.
+
+
+## v3 — iç inceleme kararları (2026-10-20)
+
+Kaynaklar yukarıdaki mevzuat metinleridir (erişim 2026-10-20). "Yorum" işaretli kararlar mevzuatın açıkça düzenlemediği, oyunda bir
+tercih yapılan yerlerdir.
+
+### A.9 listesinin kapanışı
+| # | Soru | Karar |
+|---|---|---|
+| 1 | Görev süresi dışındaki özel güvenlik görevlisinin rızaya aykırı çanta araması | 5188 md. 7 yetkileri görev alanı ve süresiyle sınırlıdır; görev süresi bitmiş görevlinin rızasız el araması ne 5188 md. 7 ne CMK 116–119 kapsamındadır. Delil hukuka aykırı yöntemle elde edilmiştir (Anayasa 38/6, CMK 206/2-a, 217/2, 230/1-b). **v3:** Mahkemenin bunu tespit edebilmesi için aramanın kim tarafından, nasıl yapıldığının dosyada gösterilmesi gerekir; oyunda bu, Kom. Yusuf'un anlatımı (clue_yusuf_arama → ded_arama) ile sağlanır. ded_arama yoksa C08_A tutanağa geçer ama anahtar dışlanmaz (yorum: ispat yükü iddia edende, CMK 206/2-a uygulaması somut tespit ister). |
+| 2 | Tanık HTS'si | CMK 135/6 yalnızca şüpheli ve sanığın iletişimini kapsar; tanığın kaydı istenemez (HTS_TANIK, DIL_SELIN_HTS reddedilir). Murat hakkında somut dayanakla yapılan suç duyurusu üzerine ayrı soruşturmada hâkim kararıyla alınan kayıt (ev_hts), CMK 135/6'daki "aynı soruşturma" sınırlaması tartışmalı olsa da, bu davada savcılıkça dosyaya getirilen ve tarafların tartıştığı bir belge olarak değerlendirilir (yorum; CMK 138/2 tesadüfen elde edilen delil kurumu bu durumu doğrudan düzenlemez). |
+| 3 | İşverenin verdiği anahtar ve 142/2-d | Bent "haksız yere elde bulundurulan anahtar" der; işverence teslim edilen anahtar bu kapsama girmez (C03_A, İNDİRİM ve MAHKÛMİYET B hükmü). İki bent birlikte uygulanırsa temel cezanın alt sınırdan uzaklaşması (TCK 61/1) olağandır. |
+| 4 | Görevli mahkeme ve heyet | 5235 md. 12: ağır ceza mahkemesi başkan ve iki üyeden oluşur. **v3:** C_00 açılışında heyet "Başkan Nevzat Ural, üyeler Ayşe Demir ve Orhan Tekin" olarak okunur; hüküm sahnesinde üç hâkim yerini alır. Kürsü görseli iki hâkim gösterir (istemci sınırı). |
+| 5 | 142/2-d için ek savunma | CMK 226/1 ek savunma hakkı; 226/3 hazırlanma süresi talebi (C01_A). |
+| 6 | Sahte ikrar, TCK 270 ve mahkûmiyetin gerçekçiliği | Sanığın gerçeğe aykırı ikrarı TCK 270 kapsamında değerlendirilebilir; avukatın yönlendirmesi Av.K. 34 ve TBB Meslek Kuralları ihlalidir (etik kartı). **v3:** İKRAR gerekçesi artık mazeretle çelişen ikrarı "çelişse de" esas almaz. Mahkeme; ikrarın müdafi huzurunda ve iradi yapıldığını, son sözde sürdürüldüğünü (CMK 148/1), parmak izi ve [dışlanmamışsa] anahtarla örtüştüğünü (CMK 217/1) açıklar; mazeret ispatlanmışsa fişin bir ödemenin saatini gösterdiğini ama sanığın 22.30–23.15 arası kesintisiz çay ocağında kaldığını göstermediğini, çay ocağının aynı tesiste olduğunu ve tanığın aileye yakınlığını gerekçe gösterir (CMK 230/1 gerekçe yükümlülüğü). Yorum: istinafta bozulma ihtimali yüksek bir gerekçedir; oyunda bu, sahte ikrarın bedelini göstermek için bilerek seçildi ve epilog bunu anlatır. |
+| 7 | Savunmanın talebiyle TCK 274 hatırlatması | CMK 48 yalnızca tanıklıktan çekinmeyi düzenler; TCK 274 (yalan tanıklıkta etkin pişmanlık) hatırlatmasını müdafi talep edebilir, başkan takdiren yapar (C06H_A). Yorum: uygulamada başkanın genel uyarısı olarak yer alır. |
+| 8 | Şüpheli konumundaki tanığın yeminsiz dinlenmesi | CMK 50/1-c: hakkında soruşturma bulunan tanık yeminsiz dinlenir (C04_YEMINSIZ, sucduyurusu_selin ile). |
+| 9 | Teşhis usulü | Mevzuatta ayrıntılı bir teşhis prosedürü yoktur; Yakalama, Gözaltına Alma ve İfade Alma Yönetmeliği'ndeki teşhis (sıra hâlinde gösterme) usulü uygulanmamış, teşhis başkasının sözüyle sabah yapılmıştır. Delil değeri CMK 217 serbest takdirine göre düşer (S4 bastırma, PS_S4_KOLLUK). |
+
+### v2 listesinin kapanışı
+| # | Konu | Karar |
+|---|---|---|
+| 1 | Tahliye takdiri (C_ARA) | Teşhisi sarsan bulgu varken sabıkasız ve ikametgâhı belli sanığın adli kontrolle tahliyesi gerçekçidir (CMK 100/1, 108/3, 109). Değişmedi. |
+| 2 | Mahkûmiyet hükmünde tutukluluk ifadesi | İki durumu kapsayan ifade korunur; şema tek metin taşıdığı için bilinçli tercih. |
+| 3 | Kart okuyucu kayıtları | Özel şirket kaydı Av.K. 2/3 ile istenemez; mahkemenin ara kararıyla gelir (CMK 332'deki bilgi isteme yetkisi ve CMK 206 çerçevesinde). Değişmedi. |
+| 4 | Şüpheli konumundaki tanıkla temas | **v3:** ASEL_B (beyan toplayıp imzalatmak) ve ASEL_C (korkutmak) etik sayacını artırır; atıf Av.K. 34, TBB Meslek Kuralları, CMK 147/160–161 (ifade alma kolluk ve savcılığındır); korkutma TCK 277 yönünden değerlendirilebilir. ASEL_B artık bilgi de vermez. |
+| 5 | Kaçma şüphesi | İhbar CMK 158; **v3:** kendi gitmek (ALIM_KENDIN) etik ihlali sayılır (Av.K. 34). |
+| 6 | Tehdit bildirimi | TCK 106; değişmedi. |
+| 7 | Duruşmada delil talebi | CMK 206/1; **v3:** Leyla'nın 4. gün cümlesi "geç verilen talep reddedilir" yanlışından arındırıldı: CMK 206/2 gecikmeyi ret sebebi saymaz; duruşmada talep erteleme ve gerekçe gerektirir. |
+| 8 | Sanığa müdafiin sorusu | CMK 201; değişmedi. |
+| 9 | Kolluk görevlisinin tanıklığı ve "duyum" itirazı | Türk usulünde ayrı bir "duyum itirazı" kurumu yoktur; oyunda bu, beyanın doğrudan doğruyalık (CMK 210) ve takdir (CMK 217) yönünden zayıflığını ileri süren bir "diyecek" (CMK 215) olarak çerçevelenir (yorum, oyun mekaniği). |
+| 10 | Savcılık delilini tanığa sunmak | PS_SAVCILIK; **v3:** Kerem'in kolluk ifadesi de bu kurala eklendi. |
+| 11 | Esas savunma dayanakları | Strateji mekaniği; hukuki sonuç koşullarına girmez. |
+| 12 | Belediye ekip şefine telkinli soru | Kişi tanık değil, bilgi kaynağıdır; telkinli soru eksi puan alır. Değişmedi. |
+
+### v3'te eklenen ya da değişen hukuki noktalar
+1. **Ceza aralığı (kart ve BR_01):** TCK 142/2-h 5–10 yıl; TCK 143/1 gece vakti cezayı "yarısına kadar" artırır. Üst sınır 15 yıldır;
+   artırım oranı mahkemenin takdirindedir, bu yüzden alt sınır 5 yılın biraz üstünden başlar. Kart artık "5–15 yıl (TCK 143 ile)" der;
+   BR_01 bu aralığı değil, artırımın niteliğini sorar. Hükümlerde mahkeme yarı oranında artırır (5 yıl → 7 yıl 6 ay); bu takdir içindedir.
+2. **HTSS_EKLE:** Çizelgede saatin sonradan değiştirilmesi iftira (TCK 267) değil; yalan tanıklık (TCK 272) ve özel belgede sahtecilik
+   (TCK 207) yönünden değerlendirilir. Atıf etiketten geri bildirime taşındı.
+3. **MAHKÛMİYET gerekçesi:** Mahkûmiyet delil değerlendirmesine dayanır (CMK 217, 230/1): teşhis (çürütülmediyse esas alınır; çeliştiyse
+   bütünüyle çürümüş sayılmaz), parmak izi, anahtar (dışlanmadıysa destekleyici), mazeret (ispatlanmadı ya da teşhisi ortadan kaldırmaya
+   yetmedi) ve ceza aritmetiği. "Savunmanın inandırıcılığı çöktü" bir hukuki gerekçe olmadığından gerekçeden çıkarıldı; çöküş yalnızca epilogda.
+4. **İNDİRİM gerekçesi:** Hesaptan önce delil değerlendirmesi satırı eklendi (anahtar dışlandıysa teşhis ve iz).
+5. **Etik ihlalleri:** TSEL_BASKI, HTS_OP, C02D_ISRAR'a ek olarak C06H_B (kürsüde tanığa gözdağı), ASEL_B, ASEL_C, ALIM_KENDIN ve AKER_EZBER
+   (son söz sanığındır, CMK 216/3; müvekkilin ağzına söz konmaz, Av.K. 34) etik sayacını artırır; XP yarıya iner.
+6. **C08_A:** Hukuka aykırı arama itirazı her zaman tutanağa geçer; ama anahtarın dışlanması (key_excluded) aramanın nasıl yapıldığının
+   dosyada gösterilmesine (ded_arama) bağlıdır (bkz. A.9 #1).
+7. **ded_nisan (tanığı susturan bağ):** Tanığın gerçek failin nişanlısı olması, beyanının güvenilirliği yönünden CMK 217/1 takdirine girer;
+   esas savunmada 223/2-b anlatısını güçlendirir, kendi başına bir hukuki sonuç doğurmaz.

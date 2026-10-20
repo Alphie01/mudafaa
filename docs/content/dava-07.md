@@ -326,6 +326,9 @@ Yeni ikonlar (tasarımın stroke stilinde): fingerprint, boot, cigarette, magnif
 > 0 / 3.000 / 7.000, `scaleMax` 10.000. Mahkûmiyet hükümlerinde "tutukluluğun devamına" → "tutukluluk hâlinin devamına
 > (2. celsede adli kontrolle tahliye edilmişse … hükümle birlikte tutuklanmasına, CMK 100–101)". Her sonucun `epilogue`'u var.
 > Aşağıdaki metin v1 eşikleriyle bırakıldı; geçerli değerler Ek B.3'tedir.
+>
+> **v3 değişikliği (2026-10-20, Ek C.3):** BERAAT_E ara evresinden bir bulgu ister (ded_arama ∨ clue_kart_murat) ve ikinci eşik 6.500'dür;
+> BERAAT_B Murat'a giden bir ara bulgusu ister (murat_caught ∨ clue_kart_murat ∨ ded_nisan) ve eşiği 8.500'dür.
 1. **İKRAR** {false_confession}
    - Damga MAHKÛMİYET, ceza **6 yıl 3 ay**.
    - Hüküm: "…TCK 142/2-h uyarınca alt sınırdan 5 YIL; TCK 143 ile 7 YIL 6 AY; TCK 62/1 ile 6 YIL 3 AY HAPİS; zarar giderilmediğinden TCK 168/2 uygulanmasına yer olmadığına; TCK 53; TCK 63 mahsup; tutukluluğun devamına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf (CMK 273/1)."
@@ -512,3 +515,73 @@ Hukuki gerçek, deliller ve sonuç mantığı değişmedi; eşikler yeniden öl�
 | W | MAHKÛMİYET (çöküş, 3. celsede) | −445 | 0 | 104 | 60,7 dk |
 
 Pencereler ölçülen finalin ±%5'i (`tests.goldenPaths[].expect`).
+
+
+## Ek C — v3: inceleme düzeltmeleri (2026-10-20)
+
+Kaynak: devil's-advocate incelemesi (kısa yoldan beraat, soğuk açılış sızıntıları, seçenek biçimi, İKRAR ve MAHKÛMİYET gerekçeleri, etik
+sayımı, kullanılmayan deliller, uzunluk). Hukuki kararlar: `docs/legal/dava-07.md` "v3 — iç inceleme kararları".
+
+### C.1 Yapı ve kapılar
+| Değişiklik | Node / seçenek | Gerekçe |
+|---|---|---|
+| 2. celseye ancak soruşturmanın 4. günü | INV_HUB · H_DURUSMA `enabledWhen day ≥ 4` (kilit gerekçesiyle) | 3. günde, EP'ler dururken mahkemeye gidip soruşturmanın yarısını atlamak mümkündü. |
+| 3. celseye ancak aranın 3. günü | ARA_HUB · H2_CELSE `enabledWhen ara_day ≥ 3` | Ara evresi sıfır eylemle atlanabiliyordu. |
+| Yeni ara etkinliği (1 EP) | H2_TUTANAK → ARA_TUTANAK_1…4 (DECISION zinciri) → ARA_TUTANAK | 6 koşulsuz etkinlik olsun diye (gün 1–2'de 6 EP harcanmalı; kilitlenme yok). Tutanak sahneleri contra_s2, selin_cozuldu / contra_s1–s5, kerem_released'e göre değişir. |
+| Soğuk açılışın sabahı bölündü | PR_01 (avlu) → PR01_CANTA / PR01_KAGIT / PR01_KALABALIK → PR_01B (karakol, Saniye) | 400 sözcük okuma sınırı; seçim `pr_bakis`'e yazılır, INV_SABAH'ta geri döner. |
+| Kerem görüşmesinde fotoğraf seçimi | INV_GORUSME · G_IZ (doğru) + G_IZMARIT, G_KABLO (−20/−30, güven −3/−2, 3 dk) | Tek, önceden seçilmiş "ipucu göster" bedava +200 idi. |
+
+### C.2 Gizem ve spoiler düzeltmeleri
+- PR_00 telefonu: cinsiyet, meslek, monitör ve defter yok; "Bitti mi? / Bitti. / Ya biri sorarsa? / Kimse sormaz." (hikâye kitabı PR_00).
+- PR_01: önce Murat suçlar, sonra Selin çantayı açar; "parmakları bir an fazla uzun kaldı" çıkarıldı.
+- BR_01B ve `ev_selin_kolluk`: ifadenin "Sabah Murat 'Kerem'di' deyince…" kısmı yok; bu bilgi S4 bastırmasıyla kürsüde kazanılır.
+- INV_T_MUR: "o turuncu noktayı hatırlıyorum" düşüncesi ve giriş geri bildirimindeki "olası fail" ifadesi çıkarıldı; INV_HTS istemi tarafsız.
+- Yeni yüklem `murat_iz` = dayanak_murat ∨ contra_s4_hts ∨ selin_cozuldu. ARA_HUB gün 1 hedefi, ARA_GIRIS, ARA_GIRIS_2 (merdivende bekleyen
+  adam), ARA_AKSAM (iplerin Depo 3'e gitmesi) ve MAHKÛMİYET epilogundaki Murat satırı bu yükleme bağlı; aksi hâlde tarafsız sürüm oynar.
+
+### C.3 Sonuç koşulları ve puan
+| Sonuç | v2 | v3 |
+|---|---|---|
+| BERAAT_B | contra_s4_hts ∧ ded_iz_murat ∧ murat_theory ∧ alibi ∧ contra_s2 ∧ ¬illegal ∧ pers ≥ 8 ∧ final ≥ 8.000 | + (murat_caught ∨ clue_kart_murat ∨ ded_nisan); final ≥ **8.500** |
+| BERAAT_E | pers ≥ 6 ∧ (contra_s2 ∨ alibi) ∧ findings2 ∧ (final ≥ 7.000 ∨ (alibi ∧ contra_s2 ∧ final ≥ 5.500)) | + (ded_arama ∨ clue_kart_murat); ikinci eşik **6.500** |
+| İNDİRİM, MAHKÛMİYET, İKRAR | — | Koşullar aynı; gerekçeler yeniden yazıldı (delil değerlendirmesi; İKRAR'da mazeretin neden itibar görmediği). |
+
+Diğer mekanik değişiklikler:
+- C08_A anahtarı yalnızca ded_arama varken dışlatır (+100/150, key_excluded, ikna +1, isabet); yoksa +50 ve "dayanağını gösteremediniz".
+- C_08T · PS_Y2 artık clue_kart_murat ile de çürür (Y2 vurgusu da yanar).
+- C07X_A: rulo sırası (clue_rulo_sira) tam cevap (+75, ikna +1); yalnızca kasa saati (clue_kasa_saat) orta cevap (+50); hiçbiri +25.
+- Yeni tarifler: CB_IZ2 / CB2_IZ2 (clue_iz42 + ev_isg_zimmet), CB_IZ3 / CB2_IZ3 (clue_iz42 + clue_yeni_bot) → ded_iz_murat;
+  CB2_NISAN (clue_yuzuk + ev_hts) → **ded_nisan** (+300). ded_nisan, C12_A başarılıysa +100 ve bir savunma cümlesi ekler.
+- PS_S2_MON: clue_monitor S2'ye kısmi sunum (+100, çelişki yok). ev_kerem_kolluk savcılık delili olarak PS_SAVCILIK'e eklendi.
+- Etik: C06H_B, ASEL_B, ASEL_C, ALIM_KENDIN, AKER_EZBER `ethics +1` ve atıflı kötü işaret; ASEL_B liman ipucu ve yüzük vermez.
+- Seçenek biçimi: tek doğru cevaplı 21 seçenek setinin hiçbirinde doğru seçenek en uzun ya da tek atıflı etiket değil (önceden 16/21 ve 3/21).
+  Atıflar Deniz'in duruşmadaki cümlesine ve geri bildirime taşındı; çeldiricilere makul atıflar verildi.
+- BR_01 artık kartın cevaplamadığı TCK 143 artırımını sorar (4 seçenek); kart aralığı "5–15 yıl (TCK 143 ile)".
+- Küçük: üçüncü hâkim Orhan Tekin; Tuncay'a `ekip_sefi` sprite'ı (10-cast `sprites`, gardiyan paletinden: baret, turuncu yelek); INV_SABAH lamba
+  sürekliliği; Leyla'nın 4. gün cümlesi; koğuştaki adamın ara Kerem görüşmesinde kapanması.
+
+### C.4 Golden path'ler ve ölçümler (v3)
+`npm run case:duration -- gece-bekcisinin-sirri` (sözcük = satır + ekran metinleri) ve `node tools/content/word-count.mjs` (yalnızca satırlar):
+
+| Yol | Sonuç | Final | Aksiyon | Satır sözcüğü | Süre sözcüğü | Süre |
+|---|---|---|---|---|---|---|
+| G1 (Masumiyet) | BERAAT_B | 9.620 | 146 | 11.406 | 13.262 | 88,3 dk |
+| G2 = TIPIK (Usul) | BERAAT_E | 8.845 | 205 | 13.259 | 15.292 | 105,5 dk |
+| G3 (İndirim) | İNDİRİM | 3.310 | 120 | 9.414 | 10.968 | 72,9 dk |
+| G4 (Masumiyet) | MAHKÛMİYET | −125 | 122 | 8.632 | 9.882 | 67,1 dk |
+| G5 (İndirim) | İKRAR | 4.570 | 122 | 9.970 | 11.600 | 76,6 dk |
+| W | MAHKÛMİYET (çöküş) | −445 | 105 | 8.664 | 9.823 | 65,1 dk |
+
+Paket: 1.862 satır, 23.783 satır sözcüğü; ekran metinleriyle 28.092. En uzun satır 214 karakter.
+
+**Kısa yol sondası** (golden path'ten başlayıp motorla yeniden oynayan, reddedilen eylemi atlayan delta küçültücü; hedef beraat):
+
+| Başlangıç → hedef | v2 | v3 | v3 süre |
+|---|---|---|---|
+| G2 → BERAAT_E/B | 92 aksiyon (%45), BERAAT_E 5.500, 59,2 dk | **127** aksiyon (%62), BERAAT_E 7.000 | 75,2 dk |
+| TIPIK → BERAAT_E/B | — | **127** (%62) | 75,2 dk |
+| G1 → BERAAT_B | 109 (%53) | **135** (%66), 8.510 | 79,4 dk |
+| G1 → BERAAT_E/B | — | **131** (%64), BERAAT_E 7.000 | 79,3 dk |
+
+En kısa beraat bile 4 günlük soruşturmayı, aranın üç gününü (komiser görüşmesi ve tahtada ded_arama ya da kart kaydı dahil) ve iki celsedeki
+çapraz sorguyu ister.

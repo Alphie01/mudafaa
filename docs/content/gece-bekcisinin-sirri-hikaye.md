@@ -74,21 +74,28 @@ Her şey karanlıkta. Konuşmacılar isimsiz.
 - `card`: "12 MART · GECE 23.04 — NİLÜFER, DEPO SOKAĞI"
 - narrator: "On dört numaralı direğin ampulü üç gündür yanmıyordu. Kimse şikâyet etmemişti. Karanlık, bazılarının işine geliyordu."
 - Bir minibüsün kapısı kapanır (`fx: shake`). Islak asfaltta bot sesleri. Bir izmaritin kor ucu yanar, söner.
-- `phone`, BİR SES (kadın, fısıltı): "Bitti mi?"
-- `phone`, İKİNCİ SES (erkek): "Bitti. Kimse bir şey görmedi. Sen de görmedin. … Ama biri sorarsa, turuncu montlu birini gördün."
-- BİR SES: "Kimi?"
-- İKİNCİ SES (bir süre sessizlik): "Sen kimi gördüğünü bilirsin."
-- narrator: "Hat kesildi. Depo 3'ün kamerası kırk dakikadır karanlığa bakıyordu."
-- `fx: fade`
+- `phone`, BİR SES: "Bitti mi?" — anlatıcı sesin kime ait olduğunun seçilmediğini söyler (cinsiyet, meslek, monitör, defter **yok**).
+- `phone`, İKİNCİ SES: "Bitti."
+- BİR SES: "Ya biri sorarsa?"
+- İKİNCİ SES (uzun bir sessizlikten sonra): "Kimse sormaz. Bu sokakta kimse bir şey sormaz."
+- narrator: "Hat kesildi. İzmarit çöp kutusunun dibine düştü ve tısladı." `fx: fade`
 
-> İsim **söylenmez**; v0 önizlemesindeki "Kerem'i" cevabı gizemi bozduğu için çıkarıldı. "Sen kimi gördüğünü bilirsin" hem kurgunun varlığını hissettirir, hem de failin kim olduğunu açık bırakır.
+> **v3 (inceleme sonrası):** Önceki sürümdeki "monitörde sinyalin gittiğini gördüm, deftere yazmam lazım" (güvenlik görevlisini ele veriyordu) ve
+> "turuncu montlu birini gördün… sen kimi gördüğünü bilirsin" (teşhisin dikte edildiğini söylüyordu) satırları çıkarıldı. Telefonun
+> anlamı ancak C_06H'de Selin'in itirafıyla ("O gece aradı. 'Bitti' dedi…") ve CMK 135/6 kaydıyla (23.05, 6 dk) kazanılır. "Kimse sormaz"
+> davanın nakaratıdır ("kimse sormadı") ve hiçbir şüpheliyi göstermez.
 
 ### PR_01 — "SABAH 08.05" (~500 kelime) · bg: depo → karakol
 - Hırsızlık fark edilir; polis gelir; işçiler avluda toplanmıştır.
-- Selin, görevi bitmiş olduğu halde avluya gelir, Kerem'in çantasını elinden alır ve anahtarı havaya kaldırır: "Bu ne o zaman?" (`fx: flash`, bir fotoğraf makinesi patlar).
-- Murat kalabalıktan kısa bir cümleyle: "Gece Depo 3'ün orada Kerem dolaşıyordu, ben gördüm." Söyledikten sonra Kerem'in omzunu sıkar: "Korkma kardeşim, yanlış anlaşılma." Oyuncu ileride bu jesti hatırlayacak.
+- Önce Murat kalabalıktan kısa bir cümleyle suçlar: "Gece Depo 3'ün orada Kerem dolaşıyordu, ben gördüm." Bütün başlar Kerem'e döner.
+- Sonra Selin, görevi bitmiş olduğu halde kulübeden çıkar, Kerem'in çantasını elinden alır ve anahtarı havaya kaldırır: "Bu ne o zaman?" (`fx: flash`).
+  Sıra önemlidir: bir iş arkadaşı suçlar, güvenlikçi arar; doğal görünür. Selin'in doğrudan çantaya yürümesi ve Murat'ın "fazla uzun kalan
+  parmakları" (v2) bağlantıyı erkenden ele verdiği için kaldırıldı.
+- Murat Kerem'in omzunu sıkar: "Korkma. Yanlış anlaşılmadır, düzelir." (Ara evresinde Kerem bu ânı kendisi hatırlar.)
+- **Gözlem seçimi [v3]:** avlu donar; oyuncu "çamurdaki çanta / komiserin kâğıdı / kalabalığın yüzleri"nden birine bakar (PR01_*). Seçim
+  `pr_bakis` değişkenine yazılır ve INV_SABAH'ta Deniz'in dosyadan (fotoğraf, tutanak, avlu kareleri) hatırladığı bir ayrıntı olarak geri döner.
 - Kerem: "Abi ben… ben sadece top taşıdım…" Kelepçe sesi.
-- `card`: "KARAKOL, 09.30". Kerem'in müdafisiz ifadesinden tek bir cümle: "19.30'da Murat abinin isteğiyle Depo 3'e top taşıdım." Oyuncu bunu fark edebilir; daha sonra hem silah hem tehlike olur.
+- `card`: "KARAKOL, 09.30" (PR_01B). Kerem'in müdafisiz ifadesinden tek bir cümle: "19.30'da Murat abinin isteğiyle Depo 3'e top taşıdım." Oyuncu bunu fark edebilir; daha sonra hem silah hem tehlike olur.
 - narrator: "Üç gün sonra tutuklandı. İki ay sonra iddianame. Bir celse sonra, annesi bir avukat aradı."
 
 ### BR_00 — Bölüm 1 · DOSYA · "Saniye Hanım" (~900 kelime) · bg: buro_gece
@@ -107,8 +114,10 @@ Her şey karanlıkta. Konuşmacılar isimsiz.
 
 ### BR_01 — Leyla dosyayı devreder (~600 kelime) · bg: buro_gece
 - Ceza aralığı sorusu kalır, ama sahnenin içinde sorulur.
-  - Leyla dosyayı masaya bırakır: "Kerem Aydın. İddianame ağır cezada. Önce şunu bil: neyle karşı karşıyayız?"
-  - Seçenekler aynı kalır. Doğru cevapta Leyla, "Doğru. Gece vakti cezayı yarısına kadar artırır. Yani müvekkilin yedi buçuk yıldan başlıyor." der ve sigara paketini çevirir.
+  - **v3:** Kartta "TCK 142/2-h, 143" ve aralık yazdığı için soru artık kartın cevaplamadığı şeyi sorar: "Kapakta iki madde var: 142/2-h ve
+    143. İkincisi ne yapar? Gece vakti cezaya ne olur?" Seçenekler: yarısına kadar artırılabilir (doğru, TCK 143/1) · üçte bir oranında ·
+    gece ayrı suç sayılır, cezalar toplanır · alt ve üst sınır iki katına çıkar. Etiketler benzer uzunlukta.
+  - Doğru cevapta Leyla: "Bu heyet gece hırsızlığında genelde yarıyı uygular. Alt sınırdan bile kurulsa, müvekkilin yedi buçuk yıl konuşuyor." ve sigara paketini çevirir.
   - Yanlış cevapta kısa, sert bir ders verir.
 - İma (thought): Leyla'nın masasındaki ters çerçeve. "Hiç sormadım. Sormamam gerektiğini biliyordum."
 
@@ -259,3 +268,21 @@ Blokların metinleri sadeleşir. Strateji seçimini Leyla tek bir cümleyle kar�
   - Tipik yol (BERAAT_E golden path'inde görülen satırlar) **≥14.000 kelime**.
   - Tüm içerik ≥20.000 kelime.
   - `case:duration` ölçümü 90–120 dk.
+
+## v3 — inceleme sonrası değişiklikler (2026-10-20)
+
+- **Gizem:** Soğuk açılış ve sabah sahnesi yukarıdaki gibi yeniden kuruldu. BR_01B'de Selin'in kolluk ifadesi yalnızca "Uzaktan, karanlıktı,
+  yüzünü tam seçemedim; turuncu iş montu." diye biter; teşhisin Murat'ın sözüyle yapıldığı ancak kürsüde S4 bastırılınca öğrenilir. Murat'la
+  konuşan Deniz soğuk açılıştaki kor ucu "hatırlamaz" (bakış açısı ihlali). Telefon kayıtları istemi tarafsızdır. Ara evresinin açılışındaki
+  "Murat nerede?" hedefi, Selin'in merdivende bekleyen adamın yanına koşması ve panodaki iplerin "Depo 3'ün kapısına" gitmesi yalnızca
+  `murat_iz` (dayanak_murat ∨ contra_s4_hts ∨ selin_cozuldu) tutarken görünür; aksi hâlde tarafsız sürümler oynar.
+- **Ara evresi sonucu belirler:** 3. celseye ancak aranın son günü gidilir. Yeni etkinlik **Duruşma tutanağını oku** (ARA_TUTANAK_1…4 →
+  ARA_TUTANAK): Deniz 2. celsenin tutanağını okur; kürsüde neyi kazandığı, neyi kaybettiği kâtibin cümleleriyle geri döner; Leyla "kısa konuş"
+  dersini verir. Komiserin anlatımı (ded_arama) olmadan anahtar dışlanmaz; kart kayıtları Murat'ın 00.12 çıkışını gösterir ve Kom. Yusuf'un
+  Y2 beyanını doğrudan çürütür. Nişan yüzüğü + CMK 135/6 kaydı ara tahtasında **ded_nisan** ("Tanığı susturan bağ") olur; esas savunmada
+  gerçek fail anlatısına bir cümle ekler.
+- **Etik:** Tanığa kürsüde gözdağı, aradaki Selin'den beyan toplamak ya da onu korkutmak, kaçan şüpheliyi limanda kovalamak ve Kerem'e ezber
+  son söz vermek artık etik sayacını artırır. Selin'den tutanak isteyen avukat liman ipucunu da yüzüğü de alamaz: Selin imzalamadan gider.
+- **Yeni küçük sahneler:** Kerem görüşmesinde üç fotoğraftan birini gösterme (yanlışı dakika ve güven götürür); koğuşta Murat'ı soran adamın
+  "Ziya abinin selamı var" diyerek başka koğuşa alınması; belediye ekip şefi Tuncay'ın kendi sprite'ı (baret, turuncu yelek); heyetin üçüncü
+  hâkimi Orhan Tekin; müzakere beklerken Hüseyin ile Saniye'nin koridordaki şekeri.

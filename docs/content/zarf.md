@@ -117,24 +117,39 @@ zinciri), `80-trial` (koridor, üç tanık, kısa ara, ek savunma, mütalaa, sav
 
 | Yol | Sonuç | Final | Sözcük | Aksiyon | Süre |
 |---|---|---|---|---|---|
-| **TIPIK** | BERAAT_E | 11.395 | 13.266 | 204 | **94,1 dk** |
-| G_B | BERAAT_B | 13.045 | 13.875 | 217 | 98,8 dk |
-| G_E2 (kısmi K3, muhbir adı söyler, Sinan çağrılmaz) | BERAAT_E | 11.005 | 13.370 | 205 | 94,8 dk |
-| G_GOREV | GOREV (257/1 + HAGB) | 4.545 | 10.900 | 153 | 75,9 dk |
-| G_M | MAHKUMIYET | 565 | 9.006 | 124 | 62,4 dk |
-| G_ETIK | ETIK | 11.185 | 13.059 | 204 | 92,9 dk |
-| W | MAHKUMIYET (çöküş) | 8.165 | 11.778 | 190 | 84,4 dk |
+| **TIPIK** | BERAAT_E | 11.515 | 15.008 | 213 | **104,7 dk** |
+| G_B | BERAAT_B | 13.165 | 15.317 | 226 | 107,7 dk |
+| G_E2 (kısmi K3, muhbir adı söyler, Sinan çağrılmaz) | BERAAT_E | 11.475 | 14.917 | 214 | 104,3 dk |
+| G_GOREV | GOREV (257/1 + HAGB) | 5.455 | 11.846 | 172 | 83,0 dk |
+| G_M | MAHKUMIYET | 625 | 9.563 | 135 | 66,6 dk |
+| G_ETIK | ETIK (beraat + baro) | 11.305 | 14.764 | 213 | 103,3 dk |
+| W | MAHKUMIYET (çöküş) | 8.265 | 12.811 | 197 | 90,9 dk |
 
-Paket metni: ~20.800 sözcük ekran metni (satır `text` alanları ~18.700).
+Paket metni: satır `text` alanlarında ~23.600 sözcük (seçenek etiketleri, geri bildirim ve rapor metinleriyle ~32.000).
 
-**Erken çözüm denetimi:** TIPIK yolundan aksiyon blokları silinerek beraate ulaşan yerel en kısa yol arandı
-(`enumerateActions`/`act` ile oynatma): **168 aksiyon** (tipik yolun %82'si). Beraat; karar belgesinin üç satırı, tutanak,
-ifadeler ve tahtadaki çıkarımlar, CMK 206 itirazı, ara evresinde cihaz raporu ve Bayram'ın kürsüde çözülmesi olmadan
-gelmez (`kayit_disi` ∧ `zarf_suphe` ∧ pers ≥ 5 ∧ final ≥ 10.000).
+**Erken çözüm denetimi** (sonuç koşulları hukuki zincire bağlandıktan sonra yeniden ölçüldü): golden path'lerden aksiyon
+blokları silinerek (64→1) ve ardından `enumerateActions` ile her adımda alternatif eylem deneyip silerek (yerel arama, tek
+süreç, 8 dk bütçe; yakınsadı) her sonuca ulaşan en kısa yol arandı:
+
+| Hedef | Başlangıç | En kısa | Tipik yola oranı | Süre |
+|---|---|---|---|---|
+| Beraat (2-e/2-b/ETIK) | TIPIK | **134 aksiyon** | %63 (213) | ~74 dk |
+| Beraat | G_E2 | 138 | %65 | 76,0 dk |
+| ETIK | G_ETIK | 136 | %64 | 74,3 dk |
+| BERAAT_B | G_B | 206 | %91 | 100,8 dk |
+| GOREV | G_GOREV | 142 | — | 73,3 dk |
+| MAHKUMIYET | W | 106 | — | 60,1 dk |
+
+Beraat, `beraat_kosul` (kayıtlar ayıklandı ∧ boş oda ∧ sahte çağrı ∧ elle durdurulan cihaz ∧ muhbirin iki anlatısı
+çöktü) olmadan gelmez; skor yalnızca 2-b/2-e derecesini belirler. Celse günlerinin sabit olması (eylem puanı bitmeden ve
+Leyla'ya danışmadan duruşmaya gidilmez) ve boş ziyaret yasağı, bütün sonuç yollarını 60 dakikanın üstünde tutar.
 
 **Gizem denetimi:** tipik yolun satırları döküldü; Sinan Kaplan'ın fail olduğu ARA_CIKARIM'daki `ded_tek_kisi` /
-`ded_kameradaki` tariflerinden ve çay defterinden önce hiçbir satırda söylenmez. Önceden ekilen zararsız ipuçları: nane
-şekeri (soğuk açılışta koku, komşunun çocuğu, Devir-2 masası), akıllı saat, "arşivdeydim", 214'ün iki kişilik oda olması.
+`ded_kameradaki` tariflerinden ve çay defterinden önce hiçbir satırda söylenmez. Soruşturma evresinde Sinan'a bağlı
+tek adil ipucu kalır: bileğindeki akıllı saat (renk, sahne). Nane şekeri yalnız soğuk açılışta ve kapıdaki adamın hikâyesinde
+geçer; Devir-2 odasında kase ve ikram yoktur (ARA'ya ertelendi). Sinan'ın mazereti kadastro paftalarıdır (Halil'in defter
+için verdiği 1987 ciltleri değil); `clue_sinan_saat` ancak kamera karesindeki kol saati bulunduktan sonra deftere girer.
+Şüphe uyandıran iç ses satırları kaldırıldı. Yeniden döküm (Ekim 2026): ARA öncesinde fail ima eden satır yok.
 Seçenek etiketlerinden isim çıkarıldı (BAY_C, MUZ_BASKI).
 
 ## 9. Doğrulayıcı

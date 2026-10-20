@@ -81,7 +81,7 @@ export const report: CasePart = {
       hint(
         'h_tutanak',
         not(has('ded_sahte_tutanak')),
-        'Dosyadaki tutanakların basım saatine ve imzanın eğik ışıktaki görüntüsüne bakmadın: rapor 17.56’da yeniden basılmış, imza toner. Belgenin sonradan düzenlendiğini göstermek, savcılığın “hileli davranış” dediği şeyin kime ait olduğunu sorar (TCK 247/2).',
+        'Tutanakların basım saatine ve imzanın eğik ışıktaki görüntüsüne bakmadın: rapor 17.56’da yeniden basılmış, imza toner. Sonradan düzenleme, “hileli davranış”ın kime ait olduğunu sorar (TCK 247/2).',
         'DELIL_ANALIZI',
       ),
       hint(

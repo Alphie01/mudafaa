@@ -270,7 +270,7 @@ leyla: Fiilin adı bazen davanın kendisidir. Ama bu dosyada ad belli. Sorun, ad
         {
           type: 'paragraph',
           title: 'OLAY ÖZETİ',
-          text: '3 Kasım 2025 ile 27 Şubat 2026 arasında Hisarönü Belediyesi vezne programında, veznedar Orhan Kılıç’ın kullanıcı adıyla 23 günde 47 tahsilat makbuzu iptal edildi; kasada 386.400 TL açık doğdu. Açık, bir mükellefin borç bildirimine itirazıyla ortaya çıktı. Orhan Kılıç iptallerin hiçbirini yapmadığını söylüyor.',
+          text: 'Kasım 2025–Şubat 2026 arasında Orhan Kılıç’ın kullanıcı adıyla 23 günde 47 makbuz iptal edildi; kasada 386.400 TL açık var. Açığı bir mükellefin itirazı ortaya çıkardı. Orhan iptallerin hiçbirini yapmadığını söylüyor.',
         },
         {
           type: 'strengthList',

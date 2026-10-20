@@ -38,7 +38,7 @@ export const outcomes: CasePart = {
           'Sanığın ikrarı, kamu zararının varlığı ve miktarı yönünden dosyadaki kayıtlarla örtüşmektedir; zarar da hükümden önce sanık tarafından giderilmiştir.',
         ),
         because(
-          'Sanığın ikrarı, iptallerin hangi bilgisayardan ve hangi saatte yapıldığına ilişkin kayıtlarla çelişmektedir; sanık bu konudaki soruları cevapsız bırakmıştır. Heyet çelişkiyi tutanağa geçirmiş, ikrarı zarar ve iade olgusuyla birlikte değerlendirmiştir (CMK 217).',
+          'Sanığın ikrarı iptallerin bilgisayar ve saat kayıtlarıyla çelişmekte, sanık bu soruları cevapsız bırakmıştır. Çelişki tutanağa geçirilmiş, ikrar zarar ve iade olgusuyla birlikte değerlendirilmiştir (CMK 217).',
         ),
         because('Etkin pişmanlık (TCK 248/3) ve takdiri indirim (TCK 62/1) uygulanmıştır.'),
       ],
@@ -102,7 +102,7 @@ nazan: Orhan size versin istedi. Son sayfayı okuyun dedi.
           'Tanık Ercan Tunalı kendisini suçlayabilecek sorulara cevap vermekten çekinmiştir (CMK 48); bu çekinme tek başına delil sayılmamış, diğer delillerle birlikte değerlendirilmiştir.',
         ),
         because(
-          'Ek savunma da gözetildiğinde, şifrenin amirin yazılı talimatıyla teslimi ile doğan zarar arasındaki illiyet bağı üçüncü kişinin kasıtlı fiiliyle kesildiğinden TCK 257/2’deki ihmal suretiyle görevi kötüye kullanma suçunun unsurları da oluşmamıştır.',
+          'Ek savunma gözetildiğinde, şifrenin amirin yazılı talimatıyla teslimi ile zarar arasındaki illiyet bağı üçüncü kişinin kasıtlı fiiliyle kesildiğinden TCK 257/2 suçunun unsurları da oluşmamıştır.',
           flag('nitel_uyari'),
         ),
         because(
@@ -205,7 +205,7 @@ leyla: Bir gün sana o eski dosyadan bahsedeceğim Deniz. Tamamını. Bugün de�
           any(flag('arg_kredi'), has('ded_kredi')),
         ),
         because(
-          'Ek savunma da gözetildiğinde, şifrenin amirin yazılı talimatıyla teslimi ile doğan zarar arasındaki illiyet bağı üçüncü kişinin kasıtlı fiiliyle kesildiğinden TCK 257/2’deki ihmal suretiyle görevi kötüye kullanma suçunun unsurları da oluşmamıştır.',
+          'Ek savunma gözetildiğinde, şifrenin amirin yazılı talimatıyla teslimi ile zarar arasındaki illiyet bağı üçüncü kişinin kasıtlı fiiliyle kesildiğinden TCK 257/2 suçunun unsurları da oluşmamıştır.',
           flag('nitel_uyari'),
         ),
         because(

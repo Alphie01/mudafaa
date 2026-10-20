@@ -164,7 +164,7 @@ export const scenes: CasePart = {
           discovers: 'clue_cuma',
           score: { ARASTIRMA: 40 },
           effects: [raise('fact_cuma')],
-          text: 'Bir bankanın promosyon takvimi. Kasım’dan Şubat’a bazı cumalar kurşun kalemle yuvarlak içine alınmış; 13 Şubat da. Yanlarında rakam yok, isim yok. Bilirkişi iptal listesini yanına tuttu: her halkadan önceki iki iş gününde iptal var.',
+          text: 'Bir bankanın promosyon takvimi. Kasım’dan Şubat’a bazı cumalar kurşun kalemle halkalanmış; 13 Şubat da. Rakam yok, isim yok. Bilirkişi iptal listesini yanına tuttu: her halkadan önceki iki iş gününde iptal var.',
           short: 'İşaretli cumalar',
         }),
         sceneObject('ob_yazici', 'Yazıcı', OB_YAZICI, {

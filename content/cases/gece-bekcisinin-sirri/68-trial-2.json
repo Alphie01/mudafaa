@@ -955,7 +955,14 @@
             {
               "text": "22.30’da kilitleyip çıktığını",
               "highlightWhen": {
-                "hasEvidence": "ded_depo3"
+                "any": [
+                  {
+                    "hasEvidence": "ded_depo3"
+                  },
+                  {
+                    "hasEvidence": "clue_kart_murat"
+                  }
+                ]
               }
             },
             {
@@ -1166,7 +1173,7 @@
           "kind": "PRESENT",
           "match": {
             "statement": "Y2",
-            "evidence": ["ded_depo3"]
+            "evidence": ["ded_depo3", "clue_kart_murat"]
           },
           "effects": [
             {
@@ -1194,6 +1201,39 @@
             }
           ],
           "responses": [
+            {
+              "when": {
+                "all": [
+                  {
+                    "hasEvidence": "clue_kart_murat"
+                  },
+                  {
+                    "not": {
+                      "hasEvidence": "ded_depo3"
+                    }
+                  }
+                ]
+              },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Komiserim, mahkemenin ara kararıyla gelen kart okuyucu kaydı: Murat Koç’un kartı o gece 00.12’de çıkış yapmış. 22.30’da değil."
+                },
+                {
+                  "speaker": "yusuf",
+                  "text": "…Kart kaydına bakmadık. O gün kimse istemedi. Kendisi söyledi, biz yazdık."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir buçuk saat. Bir tutanağın içine bir buçuk saatlik bir boşluk sığmıştı.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Savcı Cem Toprak kart kaydının fotokopisini istedi. Okudu. Kalemini masaya koydu ve bir daha almadı."
+                }
+              ]
+            },
             {
               "lines": [
                 {
@@ -1688,41 +1728,62 @@
           "label": "Arama hukuka aykırı; anahtar dışlansın",
           "effects": [
             {
-              "type": "SCORE",
-              "category": "USUL_BILGISI",
-              "amount": {
-                "if": {
-                  "when": {
-                    "flag": "fact_rizasiz_arama"
-                  },
-                  "then": 150,
-                  "else": 100
+              "type": "IF",
+              "when": {
+                "hasEvidence": "ded_arama"
+              },
+              "then": [
+                {
+                  "type": "SCORE",
+                  "category": "USUL_BILGISI",
+                  "amount": {
+                    "if": {
+                      "when": {
+                        "flag": "fact_rizasiz_arama"
+                      },
+                      "then": 150,
+                      "else": 100
+                    }
+                  }
+                },
+                {
+                  "type": "VAR",
+                  "var": "key_excluded",
+                  "op": "set",
+                  "value": true
+                },
+                {
+                  "type": "VAR",
+                  "var": "pers",
+                  "op": "inc",
+                  "value": 1
+                },
+                {
+                  "type": "VAR",
+                  "var": "legal_hits",
+                  "op": "inc",
+                  "value": 1
+                },
+                {
+                  "type": "MARK",
+                  "quality": "GOOD",
+                  "feedback": "Anahtar hukuka aykırı aramayla elde edildi; hükme esas alınamaz.",
+                  "category": "USUL_BILGISI"
                 }
-              }
-            },
-            {
-              "type": "VAR",
-              "var": "key_excluded",
-              "op": "set",
-              "value": true
-            },
-            {
-              "type": "VAR",
-              "var": "pers",
-              "op": "inc",
-              "value": 1
-            },
-            {
-              "type": "VAR",
-              "var": "legal_hits",
-              "op": "inc",
-              "value": 1
-            },
-            {
-              "type": "MARK",
-              "quality": "GOOD",
-              "feedback": "Anahtar hukuka aykırı aramayla elde edildi; hükme esas alınamaz.",
-              "category": "USUL_BILGISI"
+              ],
+              "else": [
+                {
+                  "type": "SCORE",
+                  "category": "USUL_BILGISI",
+                  "amount": 50
+                },
+                {
+                  "type": "MARK",
+                  "quality": "NEUTRAL",
+                  "feedback": "Hukuka aykırılık iddiası doğru yönde; ama aramayı kimin, nasıl yaptığı dosyada ispatlanmadan heyet anahtarı dışlamaz. Arada komiserin anlatımını tespit etmeliydin (Anayasa 38/6, CMK 206/2-a, 217/2).",
+                  "category": "USUL_BILGISI"
+                }
+              ]
             }
           ],
           "next": "C_09",
@@ -1735,11 +1796,11 @@
                 },
                 {
                   "speaker": "player",
-                  "text": "Özel güvenlik görevlisinin görev alanı dışında ve görev süresi dışında arama yetkisi yoktur. Arama kararı, arama emri, arama tutanağı yoktur. Teslim tutanağı bir arama tutanağı değildir."
+                  "text": "Özel güvenlik görevlisinin görev alanı ve süresi dışında arama yetkisi yoktur (5188 s.K. md. 7, 9/1). Arama kararı, arama emri, arama tutanağı yoktur (CMK 119/1). Teslim tutanağı bir arama tutanağı değildir."
                 },
                 {
                   "speaker": "player",
-                  "text": "Hukuka aykırı yöntemle elde edilen delil hükme esas alınamaz. Anahtarın ve tutanağın değerlendirme dışı bırakılmasını talep ediyoruz."
+                  "text": "Hukuka aykırı yöntemle elde edilen delil hükme esas alınamaz (Anayasa 38/6, CMK 206/2-a, 217/2). Anahtarın ve tutanağın değerlendirme dışı bırakılmasını talep ediyoruz."
                 },
                 {
                   "speaker": "cem",
@@ -1756,6 +1817,30 @@
                 {
                   "speaker": "player",
                   "text": "Değerlendirecek. Bir haftadır bu kelimeyi duymak için çalışıyordum.",
+                  "style": "thought"
+                }
+              ],
+              "when": {
+                "hasEvidence": "ded_arama"
+              }
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, anahtar sanığın çantasından, görev süresi bitmiş bir özel güvenlik görevlisi tarafından, rızası olmadan çıkarılmıştır. Hukuka aykırı delil hükme esas alınamaz."
+                },
+                {
+                  "speaker": "cem",
+                  "text": "Sayın Başkan, tutanak kolluğun anahtarı teslim aldığını gösteriyor. Aramayı kimin, nasıl yaptığına dair dosyada bir tespit yok. Müdafiin anlatımı bir varsayım."
+                },
+                {
+                  "speaker": "nevzat",
+                  "text": "İddianız tutanağa geçti avukat hanım. Dayanağını dosyada gösteremediğiniz sürece heyet anahtarı delil olarak değerlendirecektir."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Doğru kapı, eksik anahtar. Aramayı kimin yaptığını söyleyebilecek tek kişiyle bir hafta boyunca oturup konuşmamıştım.",
                   "style": "thought"
                 }
               ]
@@ -3434,6 +3519,25 @@
                   "quality": "GOOD",
                   "feedback": "Gerçek fail iddiası delillerle örtüşüyor: HTS, bot izi ve çöken teşhis.",
                   "category": "SAVUNMA_STRATEJISI"
+                },
+                {
+                  "type": "IF",
+                  "when": {
+                    "hasEvidence": "ded_nisan"
+                  },
+                  "then": [
+                    {
+                      "type": "SCORE",
+                      "category": "SAVUNMA_STRATEJISI",
+                      "amount": 100
+                    },
+                    {
+                      "type": "MARK",
+                      "quality": "GOOD",
+                      "feedback": "Tanığın neden sustuğunu da gösterdin: gerçek failin nişanlısı (CMK 217/1 takdiri).",
+                      "category": "SAVUNMA_STRATEJISI"
+                    }
+                  ]
                 }
               ],
               "else": [
@@ -3459,6 +3563,61 @@
           ],
           "next": "C_13",
           "responses": [
+            {
+              "when": {
+                "all": [
+                  {
+                    "all": [
+                      {
+                        "flag": "contra_s4_hts"
+                      },
+                      {
+                        "hasEvidence": "ded_iz_murat"
+                      },
+                      {
+                        "any": [
+                          {
+                            "hasEvidence": "ded_mazeret"
+                          },
+                          {
+                            "flag": "contra_s2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "hasEvidence": "ded_nisan"
+                  }
+                ]
+              },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, sayın üyeler. Bu dosyada bir çocuk değil, bir plan yargılanıyor."
+                },
+                {
+                  "speaker": "player",
+                  "text": "9 Mart’ta bir lamba bozuldu. 12 Mart’ta biri, o lambanın altında, kırk dakikalığına bir kamerayı kör etti. 42 numara botlarla bir minibüse kumaş yükledi. 23.05’te nişanlısını aradı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Ve bir yüzük. Görgü tanığının boynundaki zincirde taşıdığı, o gece verilmiş bir nişan yüzüğü. Bir tanığı susturan şey bazen korku değildir Sayın Başkan; bir sözdür."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Ve ertesi sabah, 19.30’da kapıyı tutturduğu çocuğu gösterdi. Parmak izi o kapıda kalsın diye. Fişlerini saklayan, sigara içmeyen bir çocuğu."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kerem Aydın bu suçu işlemedi. Bu dosyada şüphe yok; gerçek var. Sanığın beraatine ve dosyanın gerçek fail hakkındaki soruşturmaya gönderilmesine karar verilmesini talep ediyoruz."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Oturduğumda ellerim titremiyordu. Leyla arka sırada sigara paketini avucunda çeviriyordu."
+                }
+              ]
+            },
             {
               "when": {
                 "all": [

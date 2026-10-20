@@ -492,7 +492,17 @@
           "label": "DURUŞMAYA GİT · 2. CELSE",
           "role": "PRIMARY",
           "confirm": "Duruşmaya gidersen soruşturma biter. Emin misin?",
-          "next": "INV_GECE_1"
+          "next": "INV_GECE_1",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "var": "day"
+              },
+              ">=",
+              4
+            ]
+          },
+          "lockedReason": "Duruşmaya daha günler var. Soruşturmanın son günü (4. gün) gidebilirsin."
         }
       ],
       "background": "buro"

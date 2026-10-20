@@ -418,7 +418,7 @@
           "id": "t2_arsiv",
           "label": "ARŞİV",
           "kind": "ARCHIVE",
-          "choices": ["H2_KART", "H2_CIKARIM", "H2_LEYLA"]
+          "choices": ["H2_KART", "H2_TUTANAK", "H2_CIKARIM", "H2_LEYLA"]
         }
       ],
       "choices": [
@@ -527,6 +527,20 @@
           "maxUses": 1
         },
         {
+          "id": "H2_TUTANAK",
+          "kind": "NAVIGATE",
+          "label": "Duruşma tutanağını oku",
+          "cost": [
+            {
+              "var": "ara_ap",
+              "amount": 1
+            }
+          ],
+          "next": "ARA_TUTANAK_1",
+          "description": "2. celsenin tutanağı UYAP’ta",
+          "maxUses": 1
+        },
+        {
           "id": "H2_CIKARIM",
           "kind": "NAVIGATE",
           "label": "Çıkarım tahtası",
@@ -584,7 +598,17 @@
           "label": "DURUŞMAYA GİT · 3. CELSE",
           "role": "PRIMARY",
           "confirm": "Duruşmaya gidersen ara biter. Emin misin?",
-          "next": "ARA_SON_1"
+          "next": "ARA_SON_1",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "var": "ara_day"
+              },
+              ">=",
+              3
+            ]
+          },
+          "lockedReason": "Üçüncü celseye günler var. Haftanın son gününe kadar çalış."
         }
       ]
     },
@@ -3243,6 +3267,233 @@
       ]
     },
     {
+      "id": "ARA_TUTANAK_1",
+      "type": "DECISION",
+      "title": "Duruşma tutanağı",
+      "chapter": "Bölüm 4 · Ara",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ARSLAN HUKUK · DURUŞMA TUTANAĞI",
+              "bg": "buro",
+              "style": "card"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kâtibin tuttuğu tutanak UYAP’a düşmüştü. On dört sayfa. Bir celsenin bütün sesleri, kâğıtta düz ve sessiz."
+            },
+            {
+              "speaker": "player",
+              "text": "Duruşmada söylenen her şey uçar; tutanağa geçen kalır. Leyla’nın bana ilk öğrettiği şey buydu. Kalemi aldım, baştan okudum.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "to": "ARA_TUTANAK_2"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "ARA_TUTANAK_2",
+      "type": "DECISION",
+      "title": "Duruşma tutanağı",
+      "chapter": "Bölüm 4 · Ara",
+      "lines": [
+        {
+          "when": {
+            "flag": "contra_s2"
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Sayfa yedi. Üye hâkimin sorusu ve tanığın cevabı: “Montu gördüm. Yüzü… sabah gördüm.” Kâtip üç noktayı bile atlamamış."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir teşhisin gece değil sabah yapıldığı artık bir resmî belgede yazıyor. Bunu kimse geri alamaz; tanık bile.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Sayfa yedi. Tanığın anlatımı düzgün, virgülleri yerinde: “Lambanın altından geçti. Yüzünü gördüm.” Altında bir itiraz yok."
+            },
+            {
+              "speaker": "player",
+              "text": "Kâğıtta itiraz edilmemiş bir cümle, dosyanın en sağlam cümlesidir. Bu cümleyi kürsüde yıkamadım. Üçüncü celsede başka yerden yıkmam gerek: ışıktan, saatten, yerden.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "to": "ARA_TUTANAK_3"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "ARA_TUTANAK_3",
+      "type": "DECISION",
+      "title": "Duruşma tutanağı",
+      "chapter": "Bölüm 4 · Ara",
+      "lines": [
+        {
+          "when": {
+            "flag": "selin_cozuldu"
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Sayfa on bir. Tanığın kendi ağzından bir nişanlı, bir telefon, düzeltilmiş bir çizelge. Altında titrek bir imza; kâtip “tanık ağlayarak imzaladı” diye not düşmüş."
+            },
+            {
+              "speaker": "player",
+              "text": "Kâtiplerin not düşmesi yasak değil, ama nadirdir. Bazen bir salonun havası bir kâtibin kalemine bile sızar.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "any": [
+              {
+                "flag": "contra_s1"
+              },
+              {
+                "flag": "contra_s5"
+              }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Sayfa dokuz. “Ana kapıdan arka sokak görünür mü?” “…Görünmez.” İki kelime. Kâtip ikisini de büyük harfle başlatmış."
+            },
+            {
+              "speaker": "player",
+              "text": "Görev yeri ana kapı olan bir tanık, görmediği bir sokağı anlatmıştı. Bu da yazıldı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Sayfa dokuz. Çapraz sorgunun soruları sıralanmış; cevapların çoğu kısa, kesin. “Görevimi yaptım.” “Ne gördüysem.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Kesin cevaplar kâğıtta güçlü durur. Ama bir cevabın kesinliği, sorunun eksikliğini gizleyebilir. Sorulmamış soruları kenara yazdım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "to": "ARA_TUTANAK_4"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "ARA_TUTANAK_4",
+      "type": "DECISION",
+      "title": "Duruşma tutanağı",
+      "chapter": "Bölüm 4 · Ara",
+      "lines": [
+        {
+          "when": {
+            "flag": "kerem_released"
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Son sayfa: “Haftada bir imza şartıyla tahliyesine.” Kerem’in adı bu sefer bir kelepçenin değil, bir imza defterinin yanında."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Son sayfa: “Tutukluluk hâlinin devamına.” Dört kelime. Bir haftalık bir koğuş."
+            }
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "to": "ARA_TUTANAK"
+        }
+      ],
+      "choices": []
+    },
+    {
+      "id": "ARA_TUTANAK",
+      "type": "STORY",
+      "title": "Duruşma tutanağı",
+      "eyebrow": "DAVA #07 · ARA",
+      "chapter": "Bölüm 4 · Ara",
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Leyla kapının eşiğinde durdu. Elinde kendi dosyası, gözü benim masamdaki on dört sayfada."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Tutanağı okuyan avukat az bulunur. Çoğu duruşmada ne söylediğini hatırlar; ne yazıldığını değil. Heyet ise yalnızca yazılanı okur."
+            },
+            {
+              "speaker": "player",
+              "text": "Ne söylediğimle ne yazıldığı arasında bir fark var mı diye baktım."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Var mı?"
+            },
+            {
+              "speaker": "player",
+              "text": "Her zaman var. Ben üç cümle kurmuşum; kâtip birini yazmış. Ama yazdığı, doğru olanı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Kâtipler sabırsızdır, Deniz. Gereksiz kelimeyi yazmazlar. Bu yüzden kısa konuş; kısa konuşan avukatın sözü tutanağa tam geçer."
+            },
+            {
+              "speaker": "player",
+              "text": "Kısa konuş. Notlarımın en üstüne yazdım. Altına, sorulmamış soruların listesini.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "ATUT_DON",
+          "kind": "CONTINUE",
+          "label": "Tutanağı kapat",
+          "role": "BACK",
+          "next": "ARA_HUB"
+        }
+      ]
+    },
+    {
       "id": "ARA_CIKARIM",
       "type": "DEDUCTION",
       "title": "Çıkarım Tahtası",
@@ -3293,7 +3544,8 @@
         "clue_kart_selin",
         "clue_defter",
         "clue_yuzuk",
-        "clue_ekip"
+        "clue_ekip",
+        "ev_hts"
       ],
       "choices": [
         {
@@ -3763,6 +4015,52 @@
                 {
                   "speaker": "player",
                   "text": "“Perşembe her şey boşalır.” Takvimde perşembeden önceki salı: son gün. Karanlık bir tesadüf değildi; ısmarlanmıştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CB2_NISAN",
+          "kind": "COMBINE",
+          "match": {
+            "a": "clue_yuzuk",
+            "b": "ev_hts"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": {
+                "not": {
+                  "hasEvidence": "ded_nisan"
+                }
+              },
+              "then": [
+                {
+                  "type": "DISCOVER",
+                  "evidence": "ded_nisan"
+                },
+                {
+                  "type": "SCORE",
+                  "category": "DELIL_ANALIZI",
+                  "amount": 300
+                }
+              ]
+            }
+          ],
+          "feedback": {
+            "title": "Tanığı susturan bağ",
+            "text": "O gece verilen bir yüzük ve 23.05’te altı dakikalık bir telefon: Selin’in teşhisi bir sadakatti.",
+            "label": "TAHTADA · ÇIKARIM",
+            "tone": "success"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bir yüzük, bir telefon. “Bunu bana o gece verdi.” Altı dakika sonra telefon çalmış. Bir kadın, bir sözün karşılığında bir yüz seçmişti; görmediği bir yüz.",
                   "style": "thought"
                 }
               ]
@@ -4296,6 +4594,13 @@
         "flag": "kamera_requested"
       },
       "hint": "Kamera ve kablo için bilirkişi incelemesi iste."
+    },
+    {
+      "evidence": "ded_nisan",
+      "source": {
+        "type": "RULE",
+        "id": "CB2_NISAN"
+      }
     }
   ]
 }

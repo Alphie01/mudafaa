@@ -24,6 +24,9 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
 | TCK 53, 62/1 | hükümler | Hak yoksunlukları; takdiri indirim altıda bire kadar. |
 | TCK 51/1 | MAHKUMIYET | Erteleme ≤ 2 yıl hapis. |
 | TCK 106, 136, 243, 267, 277 | etik seçenekler, rapor | Tehdit; kişisel verileri hukuka aykırı ele geçirme; bilişim sistemine girme; iftira; "görülmekte olan bir davada" tanığı etkilemeye teşebbüs. |
+| TCK 38 | BURT_KABUL, ETIK/ETIK_BERAAT kartı | Azmettirme: başkasını suç işlemeye azmettiren, işlenen suçun cezasıyla cezalandırılır. Müdafiin Burak'a operatör sistemine girip kayıt çektirmesi TCK 243 ve 136'ya azmettirmedir. |
+| CMK 206/2-a, 217/2; Anayasa 38/6 | PS_G_ILLEGAL, PS_O/N_ILLEGAL, ETIK, ETIK_BERAAT | Kanuna aykırı elde edilmiş delil reddolunur; hukuka aykırı elde edilmiş delil hükme esas alınamaz. |
+| Av.K. 58 | ETIK/ETIK_BERAAT gerekçesi | Avukatın görevinden doğan suçlarında soruşturma Adalet Bakanlığı izniyle Cumhuriyet savcısınca yapılır; mahkeme karar örneğini "gereği için" Başsavcılığa, disiplin yönünden baroya gönderir. |
 | CMK 48 | T_01, T_02, PR_O4 | Tanık kendini suçlayabilecek sorulara cevap vermekten çekinebilir; önceden bildirilir. |
 | CMK 109/3-a, 110 | RQ_YASAK, hükümler | Yurt dışına çıkamamak adli kontrol yükümlülüğü; kaldırılması. |
 | CMK 135/6 | INV1_DIL, H1_06, ARA_SUC, ev_hts, ev_imei_rapor | Şüpheli/sanığın telekomünikasyon yoluyla iletişiminin tespiti; kovuşturmada **mahkeme kararı**, soruşturmada hâkim kararı. 135/8 kataloğu dinleme içindir; tespit için katalog yoktur. |
@@ -51,8 +54,10 @@ Menfaat (kapora): 75.000 TL → adli para cezası tabanı 150.000 TL (158/1 son 
 - **INDIRIM** (158/1-f, 37/1 + 158/4, TCK 7/2): 4 yıl + 1.500 gün → 158/4 (1/2): **2 yıl**, 750 gün → TCK 62/1: **1 yıl 8 ay**,
   625 gün × 100 TL = **62.500 TL** → CMK 231/5 HAGB (231/6-a, b; c koşulu 231/9 uyarınca denetim süresinde aylık taksitle),
   beş yıl denetim (231/8). HAGB kararında hapis ertelenemez (231/7). Kanun yolu: istinaf (231/12, 7499 ile itirazdan istinafa çevrildi).
-- **BERAAT_B / BERAAT_E**: ceza yok; adli kontrol (yurt dışı yasağı) kaldırılır; 223/2-b'de Necdet Sarı ve diğerleri
-  hakkında dosya örneği Başsavcılığa; 223/2-e'de kimliği belirsiz failler için soruşturmaya devam.
+- **BERAAT_B / BERAAT_E / ETIK_BERAAT**: ceza yok; adli kontrol (yurt dışı yasağı) 1. celsede kaldırılmadıysa (yasak_kalkti
+  yoksa) hükümde kaldırılır, kaldırıldıysa gerekçede yalnızca anılır; 223/2-b'de Necdet Sarı ve diğerleri hakkında dosya
+  örneği Başsavcılığa; 223/2-e'de kimliği belirsiz failler için soruşturmaya devam. ETIK_BERAAT'ta hukuka aykırı kayıt ve
+  yönlendirilen tanığın beyanı dışlanır; ihlal salonda görüldüyse karar örneği baroya ve Başsavcılığa gönderilir.
 
 ## 3. Usul akışı
 - **Görevli mahkeme:** 158/1-f'nin üst sınırı 10 yıl olduğundan asliye ceza (5235 md. 12: ağır ceza "on yıldan fazla"
@@ -101,9 +106,27 @@ Menfaat (kapora): 75.000 TL → adli para cezası tabanı 150.000 TL (158/1 son 
     adli kontrolü kaldırması makul bir takdir olarak yazıldı.
 12. **Asliye cezada "Türk Milleti Adına" başlığı ve heyet yerine tek hâkim.** Hükümler tek hâkim tarafından kurulur;
     başlık her hükümde kullanılır.
-13. **ETİK sonucunda mahkûmiyet.** Hukuka aykırı delilin dışlanması kendi başına mahkûmiyet sebebi değildir; ETİK sonu,
-    müdafinin hukuka uygun delilleri toplamadığı ve güvenilirliğini yitirdiği bir dosyada mahkemenin iddianameyi esas
-    alması olarak kurgulandı; bu sonuca yalnızca açık etik ihlalleriyle ulaşılır.
+13. **Etik ihlalinde hüküm (inceleme sonrası düzeltme).** Hukuka aykırı delilin dışlanması kendi başına mahkûmiyet
+    sebebi değildir ve müdafiin kusuru sanığın aleyhine yorumlanamaz. *Karar:* etik ihlal + hukuka uygun delil beraate
+    yetiyorsa (`delil_beraat`) sonuç **ETIK_BERAAT**: 223/2-e beraat, dışlama gerekçesi (CMK 206/2-a, 217/2), ihlal salonda
+    görüldüyse karar örneğinin baroya ve Başsavcılığa gönderilmesi, XP 0, Deniz'in disiplin kurulu epilogu (Dava #07'nin
+    `key_excluded` beraatleriyle tutarlı). **ETIK** mahkûmiyeti yalnızca ihlal varken hukuka uygun delil de yetmediğinde
+    gelir; gerekçesi o durumu söyler. Tanığı yönlendirmede (AR_C) kuryenin beyanı ve ona dayanan çıkarımlar dışlanıp kalan
+    delil yeniden tartılır (`savunma_arda_disi`); bayi çalışanına para bırakmada (BAY_PARA) tanığın beyanı yalnızca
+    belgelerle doğrulandığı ölçüde değerlendirilir. BURT_KABUL tek başına ağır ihlal (ethics +2; TCK 243, 136, 38).
+14. **Delil tamken skorun hükme etkisi yok.** Hat (sahte vekâlet, başka kişi), cihaz, kast ve kira iddiası hukuka uygun
+    delillerle çürütüldüğünde (`delil_beraat`) hüküm skor ne olursa olsun beraattir; mahkeme ispatlanmış olguya karşı
+    mahkûmiyet kurmaz. Savcının beraat mütalaası ayrıca ikna ≥ 8 ve güvenilirlik ≥ 2 ister; hâkim mütalaayla bağlı
+    olmadığından mütalaa mahkûmiyet yönünde olsa da delil tamsa hüküm beraattir. Mahkûmiyet gerekçesi, hattın ve cihazın
+    kısmen gösterildiği durumda "ileri sürülmüşse de her yönüyle gösterilememiş; kodu bilerek sağladığı kabul edilmiştir"
+    (TCK 37/1) olarak, hiç gösterilmediğinde "hesabın sanığın elinde olmadığı ispatlanamamıştır" olarak ayrışır.
+15. **Talep dayanağı.** CMK 177 dilekçesi ve duruşmadaki talepler aynı üç hakla sınırlandırıldı ve her talep soruşturmada
+    bulunmuş bir olguya bağlandı. Gerçekte mahkeme dayanaksız talebi de resen araştırma yükümlülüğü (CMK 160/2 kıyasen,
+    225) çerçevesinde kabul edebilir; oyun bunu, araştırma yapmadan kayıt istemenin "avukatın eksiğini göstermesi" diye
+    soyutlar. Bu, hukuki bir kural değil, tasarım kararıdır.
+16. **Kayıt dışı tanık görüşmesi (H1_09, T_KORIDOR).** Dinlenmiş ve yeniden çağrılabilecek kolluk tanığıyla kayıt dışı
+    görüşmek ve duruşma kapısında tanığa güvence vermek yasak bir eylem olarak değil, TCK 277 şüphesi doğuran ve TBB
+    Meslek Kurallarına aykırı bir tutum olarak puanlandı (etik sayaç değil, yalnızca skor/ikna).
 
 ## 5. Hassas konu denetimi
 Lineup sınırı: cinsel suçlar, çocuklara yönelik suçlar ve terör yok. Bu davada: yok. Yaşlı mağdur ve hasta eş unsuru dram
@@ -114,5 +137,7 @@ için kullanıldı; TCK 158/1-c (algılama yeteneğinin zayıflığı) iddia edi
 - [x] Ceza hesapları alt/üst sınırlar içinde ve aritmetik doğru (4 yıl → 3 yıl 4 ay; 4 yıl → 2 yıl → 1 yıl 8 ay; adli para tabanı).
 - [x] Görevli mahkeme asliye ceza; tek hâkim; hitap "Sayın Hâkim"; savcı duruşmada.
 - [x] Hükümlerde ve HAGB kararında istinaf (CMK 231/12, 273/1); adli kontrolün kaldırılması; suç duyurusu.
-- [x] Etik ihlal seçenekleri doğru maddeye bağlı (Av.K. 34, 38; TCK 136, 243, 267, 277).
+- [x] Etik ihlal seçenekleri doğru maddeye bağlı (Av.K. 34, 38; TCK 38, 136, 243, 267, 277).
+- [x] Etik ihlalde hukuka uygun delil beraate yetiyorsa beraat (ETIK_BERAAT); müdafiin kusuru sanığa yüklenmez.
+- [x] Mahkûmiyet gerekçeleri duruşma kaydıyla çelişmez (kısmi/hiç gösterilmeme ayrımı); beraat mütalaası verilen yolda hüküm beraattir.
 - [x] Delil yasakları: yetkisiz erişimle alınan kayıt (Anayasa 38/6; CMK 206/2-a, 217/2).

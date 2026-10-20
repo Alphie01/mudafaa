@@ -38,7 +38,7 @@ Samsung'da (IMEI 35 491207…) kullanıldı; 2 Kasım 23.48'de Necdet kendi hatt
 | 6 | INV1_HESAP, INV1_SIKAYET | Avans açıklaması, dönen 15.000 TL, QR çekim; satıcı numarası, "Dördüncü kat" dipnotu | belge incelemesi ×2 |
 | 7 | INV1_OPERATOR | Ece kendi kaydını ister: 10.12 vekil, 19.20 itiraz | seçim |
 | 8 | INV1_SEVIM | Burak şüphesi, IMEI kutusu, 11.05 araması | konuşma |
-| 9 | INV1_OM → INV1_KORIDOR | Necdet, sözleşme (kiracı Arda), kartvizit; Nova etiketinin altında "YÖNETİM ARŞİVİ" | konuşma, sahne araması |
+| 9 | INV1_OM → INV1_KORIDOR | Necdet, sözleşme (kiracı Arda), kartvizit; asansörün kayıtlı sesi; Nova etiketinin altında sökülmüş bir levhanın "ARŞİV" izi | konuşma, sahne araması |
 | 10 | INV1_BAYI, INV1_BURAK(+_T), INV1_GOKHAN | "Vekâletle gelen bir abi"; Burak alibisi, IMEI dersi, **etik tuzak**; polis cihazı sormamış | konuşma, etik seçim |
 | 11 | INV1_DIL, INV1_CIKARIM | CMK 177 (3 hak); altı tarif | dilekçe, çıkarım |
 | 12 | INV1_AKSAM1/2(B), INV1_GECE_1…6 → INV1_GECE | Nurettin'in telefonu; tehdit mesajı; hafıza zinciri | seçim, DECISION zinciri |
@@ -52,9 +52,13 @@ Samsung'da (IMEI 35 491207…) kullanıldı; 2 Kasım 23.48'de Necdet kendi hatt
 1. **İş ilanı bir tuzaktı** (soruşturma): `ded_kaan` = İK numarası (ekran görüntüleri) + satıcı numarası (şikâyet).
    Ekimler: Ece'nin kamerası bozuk işvereni, "Dördüncü kat" (iki ayrı kaynak), avansın geri dönüşü.
 2. **"Kaan" = Necdet Sarı** (2. celse): `ev_imei_rapor` + `clue_kartvizit` (= `ded_necdet`) ya da İMEİ raporunun
-   kartvizit varken sunulması. Ekimler (hiçbiri tek başına isim vermez): limon kolonyası ve mühür yüzük (INV1_OM),
-   "YÖNETİM ARŞİVİ" levhası (koridor), yönetim park yeri (otopark + Arda), Ece'nin iki saniyelik kamera anısı (yüzük),
-   Onur'un kürsüdeki tarifi, Necdet'in "kâğıt üstünde bizdeydiler" sözü.
+   kartvizit varken sunulması. Ekimler (hiçbiri tek başına isim vermez): limon kolonyası (INV1_OM; yüzük orada
+   gösterilmez), sökülmüş levhada yalnızca "ARŞİV" izi (koridor; "yönetim arşivi" ancak N2'de Necdet'in ağzından çıkar),
+   yönetim park yeri (otopark + Arda), Ece'nin iki saniyelik kamera anısı ("bir yüzük parladı"; biçimi yok), H2'de Arda'nın
+   ve Onur'un yüzük/kolonya tarifi, T_03'te kürsüye vurulan yüzük. İnceleme sonrası (devil's advocate) kaldırılan
+   ipuçları: `clue_asansor`'daki "Necdet'in odası dördüncü katta", INV1_OM'daki yaş/yüzük tarifi, Nurettin'in "kırkını
+   geçmiş, kibar ses"i, ARA_AKSAM'daki arayanın "efendim"i ve "tanıdık şirket adı" satırları, İMEİ raporundaki abone adı
+   (artık yalnızca "kurumsal hat; abone bilgisi ayrıca istendi"; bağ yalnızca kartvizitle kurulur).
 
 ## 7. Delil zinciri
 | Kimlik | Ad | Tür | Keşif | Ne işe yarar | Sunulabilir |
@@ -73,7 +77,7 @@ Samsung'da (IMEI 35 491207…) kullanıldı; 2 Kasım 23.48'de Necdet kendi hatt
 | clue_asansor, clue_levha, clue_kiraci | Koridor bulguları | CLUE | INV1_KORIDOR | tahta kartları | — |
 | clue_onur_vekil, clue_burak_alibi | Sürçme, alibi | CLUE | INV1_BAYI / INV1_BURAK | anlatı | — |
 | ev_bayi_ekran | Yetkisiz bayi ekranı | EVIDENCE (EXCLUDABLE) | BURT_KABUL | **ETİK** | ✓ (cezalı) |
-| ev_banka_log | Banka cihaz/erişim kaydı | EVIDENCE | H1_KORIDOR (DIL_LOG) / ARA_GIRIS_1 (RQ_LOG) | G1, T_00K | ✓ |
+| ev_banka_log | Banka cihaz/erişim kaydı | EVIDENCE | H1_KORIDOR (DIL_LOG) / ARA_GIRIS_1 (RQ_LOG) | G1, T_00K, ded_cihaz | ✓ |
 | ev_hts | Hattın iletişim tespiti | EVIDENCE | ARA_GIRIS_1 (DIL_HTS/RQ_HTS) | ded_imei, İMEİ talebi | ✓ |
 | ev_bayi_belge | Bayi işlem dosyası | EVIDENCE | ARA_GIRIS_1 (DIL_BAYI/RQ_BAYI) | O1, ARA_BELGE | ✓ |
 | ev_atm | ATM kareleri | EVIDENCE | ARA_GIRIS_1 (DIL_ATM/RQ_ATM) | Arda'yı açar, O3_EK | ✓ |
@@ -84,10 +88,19 @@ Samsung'da (IMEI 35 491207…) kullanıldı; 2 Kasım 23.48'de Necdet kendi hatt
 | ev_arda_beyan | Arda'nın duruşma beyanı | EVIDENCE | T_01 | O3_EK, N1 | ✓ |
 
 Çıkarımlar (tahta, +300): **INV1** ded_kaan, ded_dongu, ded_aldatma, ded_kesinti, ded_bina, ded_sim · **ARA** ded_imei,
-ded_kopya, ded_otopark, ded_necdet, ded_arda_kimlik (+ INV1 tariflerinin ARA kopyaları; puan yalnız ilk kurulumda).
+ded_kopya, ded_otopark, ded_necdet, ded_arda_kimlik, ded_cihaz (ev_banka_log + clue_iphone_imei: "Samsung, iPhone değil")
+(+ INV1 tariflerinin ARA kopyaları; puan yalnız ilk kurulumda).
+
+**Talep dayanağı (erken çözüm kapısı).** CMK 177 dilekçesi (INV1_DIL) ve 1. celse talepleri (H1_06) aynı `dil_hak` bütçesini
+(3) paylaşır ve her talep soruşturmada bulunmuş bir olguya bağlıdır: banka cihaz kaydı ← `fact_polis_eksik` (Gökhan'a
+"cihaz kaydı istediniz mi?"); iletişim tespiti ← `clue_simyok` ∨ `clue_iphone_imei`; bayi belgeleri ← `ev_sim_dokum`
+(operatör ziyareti); ATM ← `clue_qr_atm`. Dolayısıyla `ev_bayi_belge` (O1) operatör dökümü olmadan gelmez.
 Çeldirici kartlar: clue_cv, clue_vesikalik, clue_kiraci, clue_levha, clue_asansor, clue_qr_atm (yanlış çift −50).
 
 ## 8. Çelişkiler (çapraz sorgu)
+Bütün tam/kısmi sunumlar ilgili ifadenin önce **bastırılmasını** ister (`enabledWhen: press_x`); bastırmadan
+sunulan belge için hâkim "önce tanığa sorun" der (`PS_*_ERKEN`, `maxUses: 3`, cezasız ama boşa aksiyon).
+
 **Gökhan Ateş (H1_05T)**
 | İfade | Bastır | Doğru sunum | Kısmi | Not |
 |---|---|---|---|---|
@@ -120,13 +133,34 @@ ded_kopya, ded_otopark, ded_necdet, ded_arda_kimlik (+ INV1 tariflerinin ARA kop
 ## 10. Sonuçlar
 | Öncelik | Kimlik | Sınıf | Koşul | Ceza | XP |
 |---|---|---|---|---|---|
-| 1 | ETIK | CONVICTION + etik kartı | illegal_used ∨ tanik_etkileme ∨ ethics ≥ 2 | 3 yıl 4 ay + 125.000 TL; baroya bildirim | 0 |
-| 2 | BERAAT_B | ACQUITTAL (223/2-b) | ¬çöküş ∧ necdet_ifsa ∧ gercek_fail ∧ sim_proven ∧ cihaz_proven ∧ ikna ≥ 7 ∧ final ≥ 8.000 | — | 1,2 |
-| 3 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ sim_proven ∧ cihaz_proven ∧ ikna ≥ 5 ∧ final ≥ 6.500 | — | 1,0 |
-| 4 | INDIRIM | RECHARACTERIZED (158/4) | ¬çöküş ∧ (terditli ∨ terditli_erken) ∧ final ≥ 3.000 | 1 yıl 8 ay + 62.500 TL, HAGB (CMK 231/5, 231/9) | 0,85 |
-| 5 | MAHKUMIYET | CONVICTION | varsayılan | 3 yıl 4 ay + 125.000 TL | 0,6 |
+| 1 | ETIK_BERAAT | ACQUITTAL (223/2-e) + etik kartı | ¬çöküş ∧ etik_ihlal ∧ delil_beraat | — ; kayıt dışlanır, ihlal salonda görüldüyse karar örneği baroya ve Başsavcılığa | 0 |
+| 2 | ETIK | CONVICTION + etik kartı | etik_ihlal (ve hukuka uygun delil beraate yetmiyor) | 3 yıl 4 ay + 125.000 TL | 0 |
+| 3 | BERAAT_B | ACQUITTAL (223/2-b) | ¬çöküş ∧ necdet_ifsa ∧ gercek_fail ∧ sim_proven ∧ cihaz_proven ∧ ikna ≥ 7 ∧ final ≥ 8.000 | — | 1,2 |
+| 4 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ delil_beraat (skordan bağımsız) | — | 1,0 |
+| 5 | INDIRIM | RECHARACTERIZED (158/4) | ¬çöküş ∧ (terditli ∨ terditli_erken) ∧ final ≥ 3.000 | 1 yıl 8 ay + 62.500 TL, HAGB (CMK 231/5, 231/9) | 0,85 |
+| 6 | MAHKUMIYET | CONVICTION | varsayılan | 3 yıl 4 ay + 125.000 TL | 0,6 |
 
-Yüklemler: `sim_proven` = contra_g3 ∨ contra_o1 ∨ contra_o2 · `cihaz_proven` = contra_g1 ∨ cihaz_t04.
+`etik_ihlal` = illegal_used ∨ tanik_etkileme ∨ ethics ≥ 2 (BURT_KABUL tek başına ethics +2: TCK 243/136'ya azmettirme).
+Tek bir hafif ihlal (TAV_B, BAY_BASKI, NU_VAZGEC; ethics 1, ♥−1) beraati engellemez ama BERAAT_E/B epiloguna Leyla'nın
+ihtar sahnesi eklenir.
+
+Yüklemler (`00-meta.json`):
+- `sim_kismen` = contra_g3 ∨ contra_o1 ∨ contra_o2 · `cihaz_kismen` = contra_g1 ∨ cihaz_t04 (yalnız gerekçe seçimi için).
+- `sim_proven` = contra_g3 ∧ contra_o1 ∧ contra_o2 ∧ contra_o3 ∧ ded_kopya ∧ (ded_sim ∨ ded_kesinti).
+- `cihaz_proven` = contra_g1 ∧ ded_imei (T00K_A tek başına yetmez).
+- `kast_yok` = (istirak_cevap ∨ contra_g5 ∨ necdet_ifsa) ∧ ded_kaan ∧ ded_aldatma ∧ fact_itiraz_tutanak ∧ fact_kaan_erkek ∧
+  (arda_teslim ∨ necdet_ifsa) · `kira_yok` = contra_g2 ∨ g2_kaan · `nova_sahte` = (contra_n1 ∧ contra_n2) ∨ necdet_ifsa.
+- `savunma_tam` = sim_proven ∧ cihaz_proven ∧ kast_yok ∧ kira_yok ∧ nova_sahte.
+- `savunma_arda_disi`: yönlendirilen kuryenin (AR_C) beyanı ve ona dayanan çıkarımlar düşüldüğünde kalan hukuka uygun delil.
+- `delil_beraat` = (¬Arda yönlendirildi-ve-dinlendi ∧ savunma_tam) ∨ (Arda yönlendirildi-ve-dinlendi ∧ savunma_arda_disi) ∨
+  (necdet_ifsa ∧ sim_proven ∧ cihaz_proven).
+
+**Mütalaa (T_05):** `delil_beraat ∧ ikna ≥ 8 ∧ ♥ ≥ 2` ise savcı beraat ister (necdet_ifsa varsa 2-b gerekçesiyle); aksi hâlde
+mahkûmiyet ister (hat ve cihaz kısmen gösterildiyse "kodu bilerek sağladı" gerekçesiyle). Beraat mütalaası verilen her yolda delil koşulu tam olduğundan hüküm beraattir;
+mahkûmiyet gerekçesi `sim_kismen ∧ cihaz_kismen` durumunda "ileri sürülmüşse de her yönüyle gösterilememiş" diye ayrışır.
+Beraat hükümlerinde yurt dışı yasağı 1. celsede kaldırıldıysa (yasak_kalkti) yeniden kaldırılmaz, yalnızca gerekçede anılır.
+Epiloglar: motor eşleşen bütün blokları gösterdiği için her yedek blok, koşullu kardeşinin olumsuzunu taşır
+(nurettin_saygi, illegal_used, ev_not); `ct/probe.mts epi` ile 8 golden path'in epilogu tekrar satır içermez.
 Ceza hesapları ve gerekçeler: `docs/legal/cevrimici-tuzak.md` §2.
 
 ## 11. Skor
@@ -134,34 +168,52 @@ Ceza hesapları ve gerekçeler: `docs/legal/cevrimici-tuzak.md` §2.
   çift −50; bastır +25; doğru sunum +300, kısmi +100, yanlış ♥−1 −150; usul itirazı +50…+150, dayanaksız ♥−1 −50; esas
   savunma `strategyAmount(200, …)`; etik ihlalleri −60…−150 ve `ethics`.
 - Döküm satırları: Delil toplama ({{count.evidence:key}}) · Çapraz sorgu · İtiraz isabeti · Savunma · Hatalı delil.
-- Eşik çubuğu: Mahkûmiyet 0 · İndirim 3.000 · Beraat 6.500 (BERAAT_B ayrıca 8.000). `scaleMax` 10.500 (teorik tavan ≈ 11.085).
+- Eşik çubuğu: Mahkûmiyet 0 · İndirim 3.000 · Beraat (2-b) 8.000. İnceleme sonrası BERAAT_E için skor kapısı yok (delil
+  koşulu `delil_beraat`); skor yalnızca INDIRIM (3.000) ve BERAAT_B (8.000) için kapıdır. `scaleMax` 10.500 (teorik tavan ≈ 11.465).
 
 ## 12. Golden path'ler
 | Ad | Sonuç | Final | Özet |
 |---|---|---|---|
-| TIPIK | BERAAT_E | 10.750 | Eksik soruşturma stratejisi; bütün kayıtlar; G1–G5; Onur çöker; Necdet'in numarası bağlanmaz |
-| G_B | BERAAT_B | 11.085 | Masumiyet; İMEİ raporu + kartvizit tahtada; N3'te ded_necdet; esas savunmada gerçek fail |
-| G_E2 | BERAAT_E | 10.360 | İş merkezine hiç gidilmez; İMEİ raporu kartvizitsiz (kısmi) |
+| TIPIK | BERAAT_E | 11.130 | Eksik soruşturma stratejisi; bütün kayıtlar; G1–G5; Onur çöker; Necdet'in numarası bağlanmaz |
+| G_B | BERAAT_B | 11.465 | Masumiyet; İMEİ raporu + kartvizit tahtada; N3'te ded_necdet; esas savunmada gerçek fail |
+| G_E2 | BERAAT_E | 10.420 | İş merkezine hiç gidilmez; İMEİ raporu kartvizitsiz (kısmi) |
 | G_I | INDIRIM | 4.195 | Yanlış dilekçe talepleri, hat/cihaz gösterilemez; susma tavsiyesi; erken ve esasta terditli |
-| G_M | MAHKUMIYET | 455 | Sert tonlar, yanlış ceza aralığı, dayanaksız itirazlar, Burak'a iftira dilekçesi, duygusal savunma |
-| G_ETIK | ETIK | 8.735 | Burak'ın yetkisiz bayi ekranı alınır ve H1/H2'de sunulur |
-| W | MAHKUMIYET (çöküş) | 5.750 | Ece kodu anlatmaz; müdafi onu G5'te yalanlar; 2. celsede yanlış deliller, ♥0 |
+| G_M | MAHKUMIYET | 385 | Sert tonlar, yanlış ceza aralığı, dayanaksız itirazlar, Burak'a iftira dilekçesi, duygusal savunma |
+| G_ETIK | ETIK_BERAAT | 9.840 | Burak'ın yetkisiz bayi ekranı alınır ve H1'de sunulur; hukuka uygun deliller yine de beraate yeter; baroya bildirim |
+| G_ETIK2 | ETIK | 235 | G_M'nin zayıf soruşturması + Burak'ın yetkisiz kaydını kabul (BURT_KABUL, ethics +2); hukuka uygun delil yok |
+| W | MAHKUMIYET (çöküş) | 6.130 | Ece kodu anlatmaz; müdafi onu G5'te yalanlar; 2. celsede yanlış deliller, ♥0 |
 
-**Erken çözüm denetimi:** golden path'lerden aksiyon silerek (16→1 blok) yerel en kısa beraat yolu arandı
-(`scratchpad/shortest.mjs`, motor `act` ile): BERAAT_E 137 aksiyon (TIPIK'in %68,5'i), BERAAT_B 137 aksiyon. İkisi de banka
-kaydını, hattın elden çıktığını (G3 ya da O1/O2) ve skor eşiğini zorunlu tutar; B ayrıca İMEİ + kartvizit bağını ister.
+**Erken çözüm denetimi (devil's advocate sonrası yeniden ölçüldü).** İnceleme, 1. celseye gün 2'de gidip H1_06'da bütün
+kayıtları dayanaksız isteyerek 104 aksiyonda BERAAT_E'ye, 116 aksiyonda BERAAT_B'ye ulaşıldığını gösterdi (eski §12'deki
+137 ölçümü yanlıştı). Düzeltmeler: (1) H1_06 talepleri INV1 olgularına bağlandı ve INV1_DIL ile aynı `dil_hak` (3)
+bütçesini paylaşıyor; (2) bütün sunumlar önce bastırma istiyor; (3) çıplak itirazlar (H103_A, OB_G4, OB_G5) ikna vermiyor;
+(4) `cihaz_proven` T00K_A ile değil contra_g1 ∧ ded_imei ile, `sim_proven` G3 + O1 + O2 + O3 + ded_kopya ile kuruluyor;
+(5) beraat `delil_beraat` yüklemine (hat, cihaz, kast, kira, Nova) bağlı, skor eşiğine değil.
+Sonda: `scratchpad/ct/probe.mts` (motor `act`; golden path'ler ve "erken mahkeme" eklemeli tohumlar — H1'e itiraz/
+bastırma, bütün RQ talepleri, T00K_A — üzerinde 32→1 blok silme minimizasyonu). Sonuç (2026-10-20):
+
+| Hedef | En kısa | TIPIK'e oranı | Süre | Sözcük |
+|---|---|---|---|---|
+| Herhangi bir beraat (BERAAT_E/B, ETIK_BERAAT) | 123 aksiyon | %60 (123/205) | 70,9 dk | 10.555 |
+| BERAAT_B | 130 aksiyon | %63 | 73,8 dk | 10.951 |
+
+En kısa beraat yolu da odayı, Ece görüşmesini (sarı notla yüzleşme), operatörü, Sevim'in kutusunu, iş merkezini,
+Gökhan'ı, dayanaklı dilekçeyi, bayi dosyası incelemesini, suç duyurusunu, kuryeyi, tahtayı ve iki celsenin çapraz
+sorgularını içerir. Soruşturmasız erken mahkeme (inceleme yolu a1) artık MAHKUMIYET verir (hiçbir talep açılmaz, savcı mahkûmiyet ister, gerekçe kayıtla çelişmez).
 
 ## 13. Süre ve sözcük ölçümü
 `npm run case:duration -- cevrimici-tuzak` (2026-10-20):
 
 ```
-  TIPIK          93.1 dk   13161 sözcük   200 aksiyon  BERAAT_E (10750)
-  G_B            92.3 dk   13019 sözcük   200 aksiyon  BERAAT_B (11085)
-  G_E2           90.0 dk   12738 sözcük   192 aksiyon  BERAAT_E (10360)
-  G_I            66.1 dk    9476 sözcük   135 aksiyon  INDIRIM (4195)
-  G_M            61.5 dk    8729 sözcük   130 aksiyon  MAHKUMIYET (455)
-  G_ETIK         90.0 dk   12705 sözcük   194 aksiyon  ETIK (8735)
-  W              77.3 dk   10849 sözcük   170 aksiyon  MAHKUMIYET (5750)
-  ==> TİPİK YOL (TIPIK): 93.1 dk  ✓ süre hedefte
+  TIPIK         103.9 dk   15014 sözcük   205 aksiyon  BERAAT_E (11130)
+  G_B           102.5 dk   14761 sözcük   205 aksiyon  BERAAT_B (11465)
+  G_E2           99.8 dk   14460 sözcük   195 aksiyon  BERAAT_E (10420)
+  G_I            73.0 dk   10636 sözcük   139 aksiyon  INDIRIM (4195)
+  G_M            68.3 dk    9876 sözcük   134 aksiyon  MAHKUMIYET (385)
+  G_ETIK2        68.2 dk    9863 sözcük   134 aksiyon  ETIK (235)
+  G_ETIK        101.5 dk   14676 sözcük   200 aksiyon  ETIK_BERAAT (9840)
+  W              86.2 dk   12381 sözcük   174 aksiyon  MAHKUMIYET (6130)
+  ==> TİPİK YOL (TIPIK): 103.9 dk  ✓ süre hedefte
+  ==> SÖZCÜK BÜTÇESİ: ✓ 15014 sözcük: hedefte (15–25 bin)
   ==> KAPI: ✓ GEÇTİ
 ```

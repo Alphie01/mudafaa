@@ -19,7 +19,8 @@
      satıcısı aynı hattır. Bu bağ, oyuncu iki belgeyi tahtada birleştirmeden **hiçbir satırda söylenmez.**
   2. *İkinci katman (davanın gerçek ters köşesi):* "Kaan", OM İş Merkezi'nin yardımsever işletme müdürü **Necdet Sarı**'dır.
      Bu, ancak İMEİ raporu + kartvizit birleşince (ya da duruşmada sunulunca) açıklanır. Ondan önce Necdet'e dair yalnızca
-     *zararsız görünen* ayrıntılar ekilir (limon kolonyası, eski mühür yüzük, dördüncü kattaki ofisi, yönetim park yeri).
+     *zararsız görünen* ayrıntılar ekilir (limon kolonyası, bir "ARŞİV" levhası izi, yönetim park yeri). Yüzüğün biçimi
+     (eski, yassı, mühür) ve kürsüye vuruşu ancak 2. celsede (Arda, Onur, T_03) görünür; Ece ARA'da yalnızca "bir yüzük parladı" der.
      Takma ad "Kaan" ile gerçek ad arasında ses benzerliği **yoktur** (bilerek seçildi).
 - **Soğuk açılışta** sesler isimsizdir: `speaker: "narrator"` + `name: "SATICI"`, `"KAPÜŞONLU"`; karakter kimliği kullanılmaz.
 - **Satır kuralları:** satır ≤ 220 karakter; yeni mekân `style: "card"` + `bg` ile açılır ("22 EKİM · 21.10 — ARSLAN HUKUK,
@@ -50,7 +51,7 @@
 | **gokhan** | Kom. Yrd. Gökhan Ateş, 38; Emniyet Siber Suçlarla Mücadele. | Jargonlu, yorgun: "log", "IP", "MASAK", "bende dört yüz dosya var". Dürüst. | Bankadan yalnızca hesap özetini almış; cihaz kayıtlarını ve SIM değişikliği geçmişini hiç istememiş. | Rakipten profesyonele: kürsüde eksiğini kabul eder; arada "bu bir zincir" der. |
 | **onur** | Onur Demirci, 26; Mavi İletişim bayisinde satış danışmanı. | Hızlı, argo ("abla", "kanka", "sistem öyle"), savunmacı; korkunca sesi incelir. | 4 Kasım'da sahte vekâletname ve kimlik fotokopisiyle SIM değiştirdi; masaya bırakılan bin lirayı aldı. İşini ve kendi dosyasını kaybetmekten korkar. | Yalan → itiraf. Kürsüde "takım elbiseli, kolonya kokan, eski mühür yüzüklü" adamı tarif eder. |
 | **arda** | Arda Kılıç, 19; motorlu kurye. | Kısa, çekingen, "abi/abla"; telefonu elinden bırakmaz. | "Kurye işi" ilanıyla aynı "Kaan Abi" tarafından işe alındı; kimliğinin fotoğrafını verdi. ATM'den QR kodla para çekti, çekim başına 500 TL aldı; parayı OM İş Merkezi otoparkında yarım inen bir araba camından uzattı. Kimliği hem sanal ofis sözleşmesinde hem sahte vekâletnamede kullanıldı. | Korku → tanıklık. Kendisi de soruşturulabilir; hâkim onu kendini suçlamama hakkıyla uyarır. |
-| **necdet** (gerçek fail) | Necdet Sarı, 47; OM İş Merkezi işletme müdürü. | Sıcak, cilalı, satıcı nezaketi: "efendim", "estağfurullah", "biz burada güven satıyoruz". Herkese limon kolonyası ikram eder. Çay karıştırırken eski mühür yüzüğü bardağa çarpar. | **"Kaan Bey"dir.** Kripto borcu var. Dördüncü kattaki "Yönetim Arşivi" odasını "Nova Dijital"in sanal ofisi diye kâğıt üstünde Arda'nın kimliğiyle kiraya vermiş, İK hattını ve sahte satıcı hattını aynı Samsung telefonda kullanmıştır. 2 Kasım gecesi telefonunun şarjı bitince kendi hattını bu cihaza altı dakikalığına takmıştır: tek hatası. | Yardımsever tanık maskesi → kürsüde çöküş. Deniz'e sözleşmeyi kendi eliyle verir; o sözleşme Arda'yı işaret eder. |
+| **necdet** (gerçek fail) | Necdet Sarı, 47; OM İş Merkezi işletme müdürü. | Sıcak, cilalı, satıcı nezaketi: "efendim", "estağfurullah", "biz burada güven satıyoruz". Herkese limon kolonyası ikram eder. Eski, yassı bir mühür yüzüğü vardır; oyunda ilk kez 2. celsede görünür, INV1_OM'da gösterilmez. | **"Kaan Bey"dir.** Kripto borcu var. Dördüncü kattaki "Yönetim Arşivi" odasını "Nova Dijital"in sanal ofisi diye kâğıt üstünde Arda'nın kimliğiyle kiraya vermiş, İK hattını ve sahte satıcı hattını aynı Samsung telefonda kullanmıştır. 2 Kasım gecesi telefonunun şarjı bitince kendi hattını bu cihaza altı dakikalığına takmıştır: tek hatası. | Yardımsever tanık maskesi → kürsüde çöküş. Deniz'e sözleşmeyi kendi eliyle verir; o sözleşme Arda'yı işaret eder. |
 | **burak** (kırmızı ringa) | Burak Toprak, 25; Yıldırım'da telefon tamircisi, Ece'nin eski sevgilisi. | Alaycı, kırgın, teknik: "SIM kart dediğin bir anahtar, bayi de çilingir." | Ayrılıkta "pişman olacaksın" diye mesaj attı; Ece'nin telefon şifresini biliyordu. Eski bir bayi giriş bilgisiyle Ece'nin hat kayıtlarını "çekebileceğini" söyler (etik tuzak). 4 Kasım 10.12'de dükkânındaydı (POS ve kamera). | Şüpheliden yardımcıya; IMEI'nin önemini Deniz'e o öğretir. |
 | **hakim** | Hâkim Orhan Bilgiç, 52; Bursa 7. Asliye Ceza (tek hâkim). | Sabırlı, kısa: "Müdafi, buyurun." | — | Delile bakar, gösteriye değil. |
 | **savci** | Cumhuriyet Savcısı Tarık Özen, 41. | Keskin, adil, acele: "Hesap sizin, para sizin hesabınıza geldi, sizin hesabınızdan çıktı. Gerisi hikâye." | — | Doğru delil karşısında mütalaasını değiştiren bir rakip. |
@@ -180,17 +181,19 @@ büyüteçle QR çekim.
 
 **INV1_OPERATOR — Operatör mağazası (~350)**: Ece'yle; avukat hiçbir şey talep etmez, Ece kendi kaydını ister → işlem dökümü.
 
-**INV1_OM — OM İş Merkezi (~700)** · bg: buro: Necdet'in odası dördüncü katta. Çay, limon kolonyası, mühür yüzük bardağa çarpar.
+**INV1_OM — OM İş Merkezi (~700)** · bg: sokak_yagmur → buro: Lobide asansör "İkinci kat" der (kayıtlı ses tanıdık gelir;
+Deniz bağlantıyı kurmaz). Çay, limon kolonyası, kaşık bardağa çarpar (yüzük yok; yaş tarifi yok).
 "Nova mı? İki ay kira ödediler, sonra kayboldular. Gençler iş arıyor, ilanlara inanıyor; yazık." Sözleşmenin bir örneğini kendi
-eliyle verir (kiracı: Arda Kılıç). Kartvizitini bırakır. Asansör: "Dördüncü kat." **Necdet'e dair hiçbir şüphe satırı yazılmaz.**
-- Ardından isteğe bağlı **INV1_KORIDOR** (sahne): Nova etiketi, altındaki "YÖNETİM ARŞİVİ" levhası, kiracı panosu (Nova yok),
+eliyle verir (kiracı: Arda Kılıç). Kartvizitini bırakır. **Necdet'e dair hiçbir şüphe satırı yazılmaz.**
+- Ardından isteğe bağlı **INV1_KORIDOR** (sahne): asansörün "Dördüncü kat" anonsu, Nova etiketi ve altında harfleri sökülmüş
+  bir levhanın "ARŞİV" izi ("yönetim arşivi" ancak N2'de Necdet'in ağzından), kiracı panosu (Nova yok),
   misafir ağı tabelası; çeldiriciler.
 
-**INV1_BAYI — Mavi İletişim (~400)** · bg: sokak_gece: Onur "KVKK abla"; kibar soruya prosedürü anlatır ("kimliğin aslı, yüz yüze");
+**INV1_BAYI — Mavi İletişim (~400)** · bg: sokak_yagmur: Onur "KVKK abla"; kibar soruya prosedürü anlatır ("kimliğin aslı, yüz yüze");
 bir dil sürçmesi: "vekâletle gelen bir abi… yani, çok müşteri var." Baskı → etik uyarısı; para teklifi → etik ihlali.
 
 **INV1_BURAK — Tamirci (~450)**: Burak alaycı; alibisi (10.12'de dükkânda, POS); IMEI dersi; **etik tuzak:** "Eski bayi şifrem
-duruyor, hattın kaydını çekerim." Kabul → `ev_bayi_ekran` (hukuka aykırı), etik +1.
+duruyor, hattın kaydını çekerim." Kabul → `ev_bayi_ekran` (hukuka aykırı), etik +2 (TCK 243/136'ya azmettirme, TCK 38).
 
 **INV1_GOKHAN — Siber Şube (~400)**: "Dört yüz dosya." Banka yalnızca özet göndermiş; SIM geçmişi istenmemiş; ATM görüntüsü bekleniyor.
 
@@ -225,10 +228,11 @@ yemek getirir; Ece'ye gece gelen tek satırlık mesaj: "Avukatına çok konuşma
 - **ARA_NURETTIN** (~350): Adliye merdiveni; ilan fotoğrafları. Deniz teklif etmez, baskı yapmaz.
 - **ARA_GOKHAN** (~300): "Bu bir zincir." İMEİ sorgusu için şüpheli soruşturması gerekir → suç duyurusu.
 - **ARA_SUC**: Failleri belirsiz suç duyurusu + 135/6 talepleri (İK hattı, IMEI). Dayanaksız suçlama (Burak/Onur) iftira riski.
-- **ARA_ECE** (~350): İş teklifini kaybetmiş; mülakatta bir an açılan kamerada gördüğü yüzüklü eli hatırlar.
+- **ARA_ECE** (~350): İş teklifini kaybetmiş; mülakatta bir an açılan kamerada bir elde parlayan bir yüzüğü hatırlar (biçimi yok).
 - **ARA_BURAK**: Sevim'in özrü; Burak'ın IMEI'yi kontrol etmesi için öğüt (kendisi hiçbir kayda dokunmaz).
 - **ARA_AKSAM**: Suç duyurusundan sonra büroya isimsiz telefon (`phone`, BİR SES): "Avukat hanım, bazı dosyalar uzarsa insanın
-  işi de uzar." Ses "efendim" der. Kimse adını söylemez.
+  işi de uzar." Fısıltı; yaşı, cinsiyeti seçilemez; tik yok. Kimse adını söylemez. İMEİ raporundaki üçüncü hat yalnızca
+  "kurumsal hat, abone bilgisi ayrıca istendi" diye görünür.
 - **ARA_SON**: Duruşmadan önceki gece (koşullu zincir).
 
 ### Bölüm 5 · İKİNCİ CELSE (T_*, ~3.000)
@@ -247,4 +251,11 @@ yemek getirir; Ece'ye gece gelen tek satırlık mesaj: "Avukatına çok konuşma
 - **İNDİRİM (158/4):** HAGB; Ece, kendisini dolandırmış bir zincirin borcunu aylık taksitle Nurettin'e ödeyecek. thought:
   "Kazandığımızı söylediler. Ece taksit planını imzalarken eli titremedi. Benimki titredi."
 - **MAHKÛMİYET:** Sevim plastik dosyayı kapatır; içinde hâlâ sarı not. Çöküşte savcı: "İyi bir avukat olacaksınız. Bugün değil."
-- **ETİK:** Hâkim hukuka aykırı kaydı tutanağa geçirir; baroya yazı. Leyla masaya Avukatlık Kanunu'nu bırakır, bir şey demez.
+- **ETİK_BERAAT:** Hukuka uygun deliller yeter; Ece beraat eder, ama hâkim aynı nefeste karar örneğini baroya ve Başsavcılığa
+  gönderir (ihlal salonda görüldüyse; görülmediyse Leyla Deniz'e kendini bildirmesini söyler). Sevim: "Kızımı kurtardınız.
+  Kendinizi kurtaramadınız galiba." Üç hafta sonra disiplin kurulu koridoru; Leyla Deniz'in avukatıdır: "Seni savunurum,
+  ama seni aklamam."
+- **ETİK (mahkûmiyet):** Yalnızca ihlal varken hukuka uygun delil de yetmediğinde. Hâkim hukuka aykırı kaydı dışlar; Leyla
+  masaya Avukatlık Kanunu'nu bırakır, bir şey demez.
+- **Hafif ihlalli beraat:** BERAAT_E/B'ye Leyla'nın ertesi sabahki ihtarı eklenir (inkâr tavsiyesi, bayide tehdit, katılana
+  "vazgeç" telkini; her biri ayrı bir cümle).

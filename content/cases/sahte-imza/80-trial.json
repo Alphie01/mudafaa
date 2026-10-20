@@ -1,0 +1,648 @@
+{
+  "config": {
+    "objectionGrounds": [
+      { "id": "g_kanaat", "label": "Tanığın kişisel kanaati" },
+      { "id": "g_telkin", "label": "Telkin edici soru (CMK 201/1)", "legalBasis": "CMK 201/1" }
+    ]
+  },
+  "court": {
+    "sessions": [
+      {
+        "id": "cs_2",
+        "title": "2. Celse",
+        "stages": [
+          { "id": "s2_acilis", "type": "ACILIS", "entryNode": "T_00" },
+          { "id": "s2_tanik", "type": "TANIK_DINLEME", "entryNode": "T_01" },
+          { "id": "s2_delil", "type": "DELIL_TARTISMA", "entryNode": "T_04" },
+          { "id": "s2_mutalaa", "type": "MUTALAA", "entryNode": "T_05" },
+          { "id": "s2_savunma", "type": "SAVUNMA", "entryNode": "T_06" },
+          { "id": "s2_son_soz", "type": "SON_SOZ", "entryNode": "T_07" },
+          { "id": "s2_karar", "type": "KARAR", "entryNode": "T_08" }
+        ]
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "T_00",
+      "type": "COURTROOM",
+      "mode": "STAGE",
+      "chapter": "2. Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Duruşma · 2. Celse",
+      "courtStage": "ACILIS",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "mubasir", "text": "TODO dosyası! Taraflar salona." },
+            { "speaker": "baskan", "text": "Yoklama yapıldı; ara karar cevapları okundu." }
+          ]
+        }
+      ],
+      "choices": [{ "id": "T00_DEVAM", "kind": "CONTINUE", "label": "Devam", "next": "T_01" }],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "uye", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "baskan", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      }
+    },
+    {
+      "id": "T_01",
+      "type": "COURTROOM",
+      "mode": "STAGE",
+      "chapter": "2. Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Tanık",
+      "courtStage": "TANIK_DINLEME",
+      "witnessLabel": "TANIK · TODO",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "mubasir", "text": "Tanık TODO!" },
+            { "speaker": "baskan", "text": "Kimliğiniz tespit edildi. Gerçeği söylemekle yükümlüsünüz." }
+          ]
+        }
+      ],
+      "choices": [{ "id": "T01_DEVAM", "kind": "CONTINUE", "label": "Tanık yemin ederek dinlensin", "next": "T_02" }],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "uye", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "baskan", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "tanik",
+        "counsel": "deniz"
+      }
+    },
+    {
+      "id": "T_02",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "chapter": "2. Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Savcının sorusu",
+      "courtStage": "TANIK_DINLEME",
+      "witnessLabel": "TANIK · TODO",
+      "lines": [{ "lines": [{ "speaker": "savci", "text": "Tanık, gördüğünüz kişi sanıktı, değil mi?" }] }],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "uye", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "baskan", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "tanik",
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "T02_A",
+          "kind": "OPTION",
+          "label": "İtiraz: telkin edici soru (CMK 201/1)",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Telkin edici soru yasaktır (CMK 201/1); itiraz kabul edildi.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "T_03"
+        },
+        {
+          "id": "T02_B",
+          "kind": "OPTION",
+          "label": "Sessiz kal",
+          "effects": [{ "type": "VAR", "var": "pers", "op": "dec", "value": 1 }],
+          "quality": { "q": "NEUTRAL", "feedback": "Telkinli soru cevaplandı." },
+          "next": "T_03"
+        },
+        {
+          "id": "T02_C",
+          "kind": "OPTION",
+          "label": "Tanık yalan söylüyor!",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Dayanaksız suçlama; itiraz bir usul kuralına dayanmalı.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "T_03"
+        }
+      ]
+    },
+    {
+      "id": "T_03",
+      "type": "COURTROOM",
+      "mode": "TESTIMONY",
+      "chapter": "2. Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Çapraz sorgu",
+      "courtStage": "TANIK_DINLEME",
+      "witnessLabel": "TANIK · TODO",
+      "rulesText": "İpucu: Çelişkiyi bul ve doğru delille vur. Yanlış delil güvenilirliği ve skoru düşürür.",
+      "objectionGrounds": ["g_kanaat", "g_telkin"],
+      "lines": [
+        { "lines": [{ "speaker": "baskan", "text": "Tanık ifadesini kesintisiz verdi. Müdafi, sorularınız?" }] }
+      ],
+      "statements": [
+        {
+          "id": "S1",
+          "order": 1,
+          "segments": [
+            { "text": "TODO " },
+            {
+              "text": "çelişkili parça",
+              "highlightWhen": { "any": [{ "flag": "press_s1" }, { "hasEvidence": "ded_ab" }] }
+            },
+            { "text": " TODO devamı." }
+          ]
+        },
+        {
+          "id": "S2",
+          "order": 2,
+          "segments": [
+            { "text": "TODO ikinci ifade; " },
+            { "text": "bence o yaptı", "highlightWhen": { "all": [] } },
+            { "text": "." }
+          ]
+        }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "uye", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "baskan", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "tanik",
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "PS_IDDIA",
+          "kind": "PRESENT",
+          "match": { "evidence": ["ev_iddia"] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "savci", "text": "Sayın Başkan, müdafi bizim delilimizi sunuyor." },
+                { "speaker": "baskan", "text": "Devam edin." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -150, "line": "hatali" },
+            {
+              "type": "MARK",
+              "quality": "BAD",
+              "feedback": "TODO bu delil iddianın dayanağı.",
+              "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "PR_S1",
+          "kind": "PRESS",
+          "match": { "statement": "S1" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "TODO bastırma sorusu?" },
+                { "speaker": "tanik", "text": "TODO yanıt." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_s1", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PS_S1",
+          "kind": "PRESENT",
+          "match": { "statement": "S1", "evidence": ["ded_ab", "ev_tanik_kolluk"] },
+          "responses": [
+            { "lines": [{ "speaker": "tanik", "expression": "saskin", "text": "TODO tanık geri adım atar." }] }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "contra_s1", "op": "set", "value": true },
+            { "type": "MARK", "quality": "GOOD", "feedback": "TODO çelişki çürütüldü.", "category": "SORGULAMA" }
+          ]
+        },
+        {
+          "id": "PR_S2",
+          "kind": "PRESS",
+          "match": { "statement": "S2" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "TODO bastırma sorusu?" },
+                { "speaker": "tanik", "text": "TODO yanıt." }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 25 }]
+        },
+        {
+          "id": "PS_S2",
+          "kind": "PRESENT",
+          "match": { "statement": "S2", "evidence": ["ev_rapor", "ev_yeni"] },
+          "responses": [
+            { "lines": [{ "speaker": "tanik", "expression": "uzgun", "text": "TODO …belki yanılmışımdır." }] }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "contra_s2", "op": "set", "value": true },
+            { "type": "MARK", "quality": "GOOD", "feedback": "TODO teşhis çöktü.", "category": "SORGULAMA" }
+          ]
+        },
+        {
+          "id": "OB_S2",
+          "kind": "OBJECT",
+          "match": { "statement": "S2", "ground": "g_kanaat" },
+          "responses": [
+            { "lines": [{ "speaker": "baskan", "text": "İtiraz yerinde. Tanık, yalnızca gördüklerinizi anlatın." }] }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 50 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "İtiraz yerinde: tanık kanaatini aktarıyor.",
+              "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "FB_T03_PRESENT",
+          "kind": "FALLBACK",
+          "fallbackFor": "PRESENT",
+          "responses": [{ "lines": [{ "speaker": "baskan", "text": "Bu delilin ifadeyle ilgisi görülmedi." }] }],
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -150, "line": "hatali" },
+            { "type": "MARK", "quality": "BAD", "feedback": "Yanlış delil.", "category": "SORGULAMA" }
+          ]
+        },
+        {
+          "id": "FB_T03_OBJECT",
+          "kind": "FALLBACK",
+          "fallbackFor": "OBJECT",
+          "responses": [{ "lines": [{ "speaker": "baskan", "text": "İtiraz reddedildi." }] }],
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -50, "line": "hatali" },
+            { "type": "MARK", "quality": "BAD", "feedback": "Dayanaksız itiraz.", "category": "SORGULAMA" }
+          ]
+        },
+        { "id": "T03_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "T_04" }
+      ]
+    },
+    {
+      "id": "T_04",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "chapter": "2. Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Savcılık delilinin tartışılması",
+      "courtStage": "DELIL_TARTISMA",
+      "prosecutionEvidence": "ev_iddia",
+      "lines": [{ "lines": [{ "speaker": "baskan", "text": "Müdafi, delile karşı diyeceğiniz?" }] }],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "uye", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "baskan", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "T04_A",
+          "kind": "OPTION",
+          "label": "TODO hukuka aykırı delil: Anayasa 38/6, CMK 206/2-a, 217/2",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 150 },
+            { "type": "VAR", "var": "key_excluded", "op": "set", "value": true },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": { "q": "GOOD", "feedback": "TODO delil hükme esas alınamaz.", "category": "USUL_BILGISI" },
+          "next": "T_05"
+        },
+        {
+          "id": "T04_B",
+          "kind": "OPTION",
+          "label": "TODO ispat gücü yok",
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 75 }],
+          "quality": { "q": "GOOD", "feedback": "TODO tek başına irtibat kurmaz.", "category": "DELIL_ANALIZI" },
+          "next": "T_05"
+        },
+        {
+          "id": "T04_C",
+          "kind": "OPTION",
+          "label": "TODO yanlış dayanak",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
+          ],
+          "quality": { "q": "BAD", "feedback": "TODO neden yanlış.", "category": "USUL_BILGISI" },
+          "next": "T_05"
+        },
+        {
+          "id": "T04_D",
+          "kind": "OPTION",
+          "label": "Diyeceğimiz yok",
+          "quality": { "q": "BAD", "feedback": "TODO itiraz edilmedi.", "category": "USUL_BILGISI" },
+          "next": "T_05"
+        }
+      ]
+    },
+    {
+      "id": "T_05",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "chapter": "2. Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Mütalaa",
+      "courtStage": "MUTALAA",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "TODO mütalaa: sanığın TCK md. uyarınca cezalandırılmasına karar verilmesini talep ederim."
+            },
+            { "speaker": "baskan", "text": "Müdafi, mütalaaya karşı diyeceğiniz?" }
+          ]
+        }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "uye", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "baskan", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "T05_A",
+          "kind": "OPTION",
+          "label": "TODO cevap: hukuka aykırı delil hükme esas alınamaz (CMK 217/2, 230/1-b)",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Cevap hakkını yerinde kullandın (CMK 216/2).",
+            "category": "USUL_BILGISI"
+          },
+          "next": "T_06"
+        },
+        { "id": "T05_B", "kind": "OPTION", "label": "Cevap yok", "next": "T_06" },
+        {
+          "id": "T05_C",
+          "kind": "OPTION",
+          "label": "Mütalaa tutanaktan çıkarılsın",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Mütalaa tutanaktan çıkarılamaz (CMK 216/2).",
+            "category": "USUL_BILGISI"
+          },
+          "next": "T_06"
+        }
+      ]
+    },
+    {
+      "id": "T_06",
+      "type": "CHOICE",
+      "chapter": "2. Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Esas hakkında savunma",
+      "prompt": { "speaker": "baskan", "text": "Müdafi, esas hakkındaki savunmanızı yapın." },
+      "choices": [
+        {
+          "id": "T06_A",
+          "kind": "OPTION",
+          "label": "Gerçek fail başkası: CMK 223/2-b",
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "all": [{ "flag": "contra_s2" }, { "hasEvidence": "ev_yeni" }, { "flag": "suc_duyurusu" }] },
+              "then": [
+                {
+                  "type": "SCORE",
+                  "category": "SAVUNMA_STRATEJISI",
+                  "amount": {
+                    "if": {
+                      "when": { "cmp": [{ "var": "strategy" }, "==", "MASUMIYET"] },
+                      "then": { "div": [{ "mul": [200, { "var": "strategy_pct" }] }, 100] },
+                      "else": 200
+                    }
+                  }
+                },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+                { "type": "VAR", "var": "gercek_fail", "op": "set", "value": true },
+                {
+                  "type": "MARK",
+                  "quality": "GOOD",
+                  "feedback": "TODO gerçek fail iddiası delillerle örtüşüyor.",
+                  "category": "SAVUNMA_STRATEJISI"
+                }
+              ],
+              "else": [
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -100 },
+                { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+                {
+                  "type": "MARK",
+                  "quality": "BAD",
+                  "feedback": "Gerçek fail iddiası delille desteklenmedi.",
+                  "category": "SAVUNMA_STRATEJISI"
+                }
+              ]
+            }
+          ],
+          "next": "T_07"
+        },
+        {
+          "id": "T06_B",
+          "kind": "OPTION",
+          "label": "Şüpheden sanık yararlanır: CMK 223/2-e",
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "any": [{ "flag": "contra_s1" }, { "flag": "contra_s2" }] },
+              "then": [
+                {
+                  "type": "SCORE",
+                  "category": "SAVUNMA_STRATEJISI",
+                  "amount": {
+                    "if": {
+                      "when": { "cmp": [{ "var": "strategy" }, "==", "USUL"] },
+                      "then": { "div": [{ "mul": [200, { "var": "strategy_pct" }] }, 100] },
+                      "else": 200
+                    }
+                  }
+                },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+                {
+                  "type": "MARK",
+                  "quality": "GOOD",
+                  "feedback": "TODO teşhis çöktü; kalan şüphe sanık lehine.",
+                  "category": "SAVUNMA_STRATEJISI"
+                }
+              ],
+              "else": [
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -100 },
+                {
+                  "type": "MARK",
+                  "quality": "BAD",
+                  "feedback": "Şüphe savunması için yeterli bulgu ortaya konmadı.",
+                  "category": "SAVUNMA_STRATEJISI"
+                }
+              ]
+            }
+          ],
+          "next": "T_07"
+        },
+        {
+          "id": "T06_C",
+          "kind": "OPTION",
+          "label": "Öncelikle beraat; aksi hâlde lehe hükümler (terditli)",
+          "effects": [
+            {
+              "type": "SCORE",
+              "category": "SAVUNMA_STRATEJISI",
+              "amount": {
+                "if": {
+                  "when": { "cmp": [{ "var": "strategy" }, "==", "INDIRIM"] },
+                  "then": { "div": [{ "mul": [150, { "var": "strategy_pct" }] }, 100] },
+                  "else": 150
+                }
+              }
+            },
+            { "type": "VAR", "var": "terditli", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Terditli savunma meşru bir yoldur.",
+            "category": "SAVUNMA_STRATEJISI"
+          },
+          "next": "T_07"
+        },
+        {
+          "id": "T06_D",
+          "kind": "OPTION",
+          "label": "Duygusal saldırı",
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Duygusal söylem delilin yerini tutmaz.",
+            "category": "SAVUNMA_STRATEJISI"
+          },
+          "next": "T_07"
+        }
+      ]
+    },
+    {
+      "id": "T_07",
+      "type": "CHOICE",
+      "chapter": "2. Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Son söz",
+      "prompt": { "speaker": "baskan", "text": "Sanık, son sözünüz?" },
+      "choices": [
+        {
+          "id": "T07_A",
+          "kind": "OPTION",
+          "label": "“TODO kısa ve onurlu son söz.”",
+          "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 25 }],
+          "quality": { "q": "GOOD", "feedback": "Kısa ve onurlu bir son söz.", "category": "SAVUNMA_STRATEJISI" },
+          "next": "T_08"
+        },
+        {
+          "id": "T07_B",
+          "kind": "OPTION",
+          "label": "Ağlayarak merhamet dilesin",
+          "quality": { "q": "NEUTRAL", "feedback": "TCK 62/2: şeklî tutum tek başına indirim nedeni değildir." },
+          "next": "T_08"
+        }
+      ]
+    },
+    {
+      "id": "T_08",
+      "type": "DECISION",
+      "chapter": "2. Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [{ "lines": [{ "speaker": "baskan", "text": "Hüküm fıkrası ayakta dinlenir." }] }],
+      "routes": [{ "to": "R_KARAR" }],
+      "choices": []
+    },
+    {
+      "id": "T_COKUS",
+      "type": "STORY",
+      "chapter": "2. Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Çöküş",
+      "lines": [{ "lines": [{ "speaker": "baskan", "text": "Sanık, kısaca son sözünüz?" }] }],
+      "choices": [{ "id": "COKUS_SON", "kind": "CONTINUE", "label": "Son söz: “Ben yapmadım.”", "next": "T_08" }]
+    },
+    {
+      "id": "R_KARAR",
+      "type": "RESULT",
+      "chapter": "Karar",
+      "eyebrow": "DAVA #09 · HÜKÜM",
+      "title": "Karar Açıklandı",
+      "choices": []
+    }
+  ],
+  "triggers": [
+    {
+      "id": "tg_cokus",
+      "priority": 0,
+      "once": true,
+      "when": { "all": [{ "flag": "in_court" }, { "cmp": [{ "var": "cred" }, "<=", 0] }] },
+      "effects": [{ "type": "VAR", "var": "cokus", "op": "set", "value": true }],
+      "goto": "T_COKUS"
+    }
+  ]
+}

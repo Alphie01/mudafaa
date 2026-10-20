@@ -1,0 +1,148 @@
+{
+  "court": {
+    "sessions": [
+      {
+        "id": "cs_1",
+        "title": "1. Celse",
+        "stages": [
+          { "id": "s1_acilis", "type": "ACILIS", "entryNode": "H1_00" },
+          { "id": "s1_delil", "type": "DELIL_TARTISMA", "entryNode": "H1_01" }
+        ]
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "H1_00",
+      "type": "COURTROOM",
+      "mode": "STAGE",
+      "chapter": "1. Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Duruşma · 1. Celse",
+      "courtStage": "ACILIS",
+      "onFirstEnter": [
+        { "type": "VAR", "var": "in_court", "op": "set", "value": true },
+        { "type": "MEET", "character": "baskan" },
+        { "type": "MEET", "character": "uye" },
+        { "type": "MEET", "character": "savci" },
+        { "type": "MEET", "character": "mubasir" }
+      ],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "mubasir", "text": "TODO dosyası! Taraflar salona." },
+            {
+              "speaker": "baskan",
+              "text": "Sanığın kimliği tespit edildi. İddianame okundu; sanığa hakları hatırlatıldı."
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "H100_DEVAM", "kind": "CONTINUE", "label": "Devam", "next": "H1_01" }],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "uye", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "baskan", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      }
+    },
+    {
+      "id": "H1_01",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "chapter": "1. Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Savcılık delili",
+      "courtStage": "DELIL_TARTISMA",
+      "prosecutionEvidence": "ev_iddia",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "savci", "text": "TODO savcılık delili okundu." },
+            { "speaker": "baskan", "text": "Müdafi, diyeceğiniz?" }
+          ]
+        }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "uye", "label": "ÜYE HÂKİM", "xFrac": 0.2 },
+          { "character": "baskan", "label": "BAŞKAN", "xFrac": 0.5 },
+          { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "H101_A",
+          "kind": "OPTION",
+          "label": "TODO doğru itiraz (madde)",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": { "q": "GOOD", "feedback": "TODO doğru itirazın gerekçesi.", "category": "USUL_BILGISI" },
+          "next": "H1_02"
+        },
+        {
+          "id": "H101_B",
+          "kind": "OPTION",
+          "label": "TODO zayıf ama meşru itiraz",
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 }],
+          "quality": { "q": "GOOD", "feedback": "TODO kısmen isabetli.", "category": "DELIL_ANALIZI" },
+          "next": "H1_02"
+        },
+        {
+          "id": "H101_C",
+          "kind": "OPTION",
+          "label": "TODO dayanaksız itiraz",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -50 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
+          ],
+          "quality": { "q": "BAD", "feedback": "TODO neden dayanaksız.", "category": "USUL_BILGISI" },
+          "next": "H1_02"
+        },
+        {
+          "id": "H101_D",
+          "kind": "OPTION",
+          "label": "Diyeceğimiz yok",
+          "quality": { "q": "NEUTRAL", "feedback": "TODO fırsat kaçtı." },
+          "next": "H1_02"
+        }
+      ]
+    },
+    {
+      "id": "H1_02",
+      "type": "STORY",
+      "chapter": "1. Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "title": "Ara karar · ters köşe",
+      "hud": ["cred", "pers"],
+      "onFirstEnter": [
+        { "type": "DISCOVER", "evidence": "ev_yeni" },
+        { "type": "VAR", "var": "day2", "op": "set", "value": 1 },
+        { "type": "VAR", "var": "ap2", "op": "set", "value": 2 }
+      ],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "Eksik hususların tamamlanması için duruşma ertelendi." },
+            { "speaker": "narrator", "text": "TODO ters köşe: koridorda dosyayı değiştiren yeni bilgi." },
+            { "speaker": "leyla", "text": "TODO mentorun yorumu; ikinci evrede neye bakmalı?" }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "H102_DEVAM", "kind": "CONTINUE", "label": "Soruşturmaya dön", "role": "PRIMARY", "next": "INV2_HUB" }
+      ]
+    }
+  ],
+  "discoveryPaths": [{ "evidence": "ev_yeni", "source": { "type": "NODE", "id": "H1_02" } }]
+}

@@ -97,6 +97,8 @@ Sunucuda Claude Code ile repo kökünde çalıştırılır; argüman `{"items":[
 
 ## Sorun giderme
 
+- **`Bind for 127.0.0.1:5432 failed: port is already allocated`** (sunucuda başka bir PostgreSQL/Redis var): repo kökünde `.env` oluştur (`POSTGRES_PORT=5433`, gerekirse `REDIS_PORT=6381`), `apps/api/.env` içinde `DATABASE_URL`/`REDIS_URL` portlarını aynı yap, `docker compose down` ve `npm run db:up` ile yeniden başlat. 5434 ve 6380 test profiline ayrılmıştır.
+
 - **`Geçersiz ortam değişkenleri`**: `apps/api/.env` eksik/yanlış; `DATABASE_URL`, `REDIS_URL`, `FIREBASE_PROJECT_ID` zorunlu.
 - **`api-key-not-valid` girişte**: web derlemesi emülatöre bağlanamıyor; `AUTH_EMULATOR_HOST` ve 9099 portunu kontrol et.
 - **CORS hatası**: `CORS_ORIGINS` web adresini (şema + port dahil) içermeli.

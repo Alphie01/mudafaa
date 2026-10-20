@@ -6,6 +6,7 @@
 #                        (volume'leri de silmek için: docker compose --profile test down -v)
 #
 # Portlar yalnızca 127.0.0.1'e açılır; kimlik bilgileri yalnızca yerel geliştirme içindir.
+# Port doluysa repo kökündeki .env dosyasında POSTGRES_PORT / REDIS_PORT ile değiştir (DATABASE_URL / REDIS_URL de aynı portu kullanmalı).
 
 # Sabit proje adı: git worktree gibi farklı dizinlerde de aynı konteyner ve volume'ler kullanılır.
 name: mudafaa
@@ -18,7 +19,7 @@ services:
       POSTGRES_PASSWORD: mudafaa
       POSTGRES_DB: mudafaa
     ports:
-      - '127.0.0.1:5432:5432'
+      - '127.0.0.1:${POSTGRES_PORT:-5432}:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -33,7 +34,7 @@ services:
     # noeviction: BullMQ işleri bellek dolsa bile sessizce silinmesin.
     command: ['redis-server', '--maxmemory-policy', 'noeviction', '--appendonly', 'yes']
     ports:
-      - '127.0.0.1:6379:6379'
+      - '127.0.0.1:${REDIS_PORT:-6379}:6379'
     volumes:
       - redisdata:/data
     healthcheck:

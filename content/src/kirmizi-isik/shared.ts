@@ -36,7 +36,7 @@ export const p2 = phase({
 
 /** Asliye ceza: tek hâkim; savcı ve katılan vekili. */
 const bench = [
-  ['vekil', 'KATILAN VEKİLİ', 0.18],
+  ['katip', 'ZABIT KÂTİBİ', 0.18],
   ['hakim', 'HÂKİM', 0.5],
   ['savci', 'C. SAVCISI', 0.82],
 ] as const;

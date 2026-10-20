@@ -53,6 +53,15 @@
             {
               "speaker": "narrator",
               "text": "Leyla’nın kalemi ceketimin iç cebindeydi. Elimi göğsüme koydum; oradaydı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Adliyenin camlı kapısında yansımamı gördüm. Cübbe kolumda, saçım ıslak, gözlerimin altı mor. Bir avukat gibi değil, bir tanık gibi görünüyordum."
+            },
+            {
+              "speaker": "player",
+              "text": "Belki de öyleyim. Bu dosyanın en uzun tanığıyım: her şeyi gördüm, hiçbirini o gece görmedim.",
+              "style": "thought"
             }
           ]
         }
@@ -302,6 +311,10 @@
               "speaker": "player",
               "text": "“Tali kusur.” Mahkemenin ağzından bir kez çıktı. Şimdi her cümlede yankılanacak.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı dosyasından başını kaldırdı, heyet raporunun bir sayfasını işaretledi. Katılan vekili de aynı sayfayı işaretledi. Aynı sayfa, iki ayrı kalem."
             }
           ]
         },
@@ -319,7 +332,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -427,7 +440,7 @@
       "witnessLabel": "TANIK · HAMDİ KOCABAŞ",
       "lines": [
         {
-          "when": { "flag": "hamdi_cagrildi" },
+          "when": { "any": [{ "flag": "hamdi_cagrildi" }, { "flag": "hamdi_bilgi" }] },
           "lines": [
             { "speaker": "mubasir", "text": "Tanık Hamdi Kocabaş!" },
             {
@@ -456,7 +469,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -488,7 +501,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -638,7 +651,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -1014,6 +1027,11 @@
             {
               "speaker": "cengiz",
               "text": "Otuz bir yıllık bilirkişiyim Sayın Başkan. Heyetin raporunu okudum. Saygı duyarım. Ama tecrübe başka şey söyler."
+            },
+            {
+              "speaker": "player",
+              "text": "Tecrübe. Bir bilirkişinin elindeki en tehlikeli kelime: ölçülemez, sorgulanamaz, yalnızca yaşa ve yıla dayanır. Ona rakamla gitmem gerek.",
+              "style": "thought"
             }
           ]
         },
@@ -1035,7 +1053,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -1112,7 +1130,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -1611,7 +1629,14 @@
               ]
             }
           ],
-          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 30 }]
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            {
+              "type": "IF",
+              "when": { "any": [{ "flag": "heyet_isik" }, { "flag": "heyet_iz" }] },
+              "then": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+            }
+          ]
         },
         {
           "id": "NQ_KUSUR",
@@ -1763,6 +1788,11 @@
               "type": "IF",
               "when": { "flag": "ayten_teslim" },
               "then": [{ "type": "VAR", "var": "pers", "op": "inc", "value": 1 }]
+            },
+            {
+              "type": "IF",
+              "when": { "flag": "fact_emanet_yok" },
+              "then": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
             }
           ]
         },
@@ -1780,7 +1810,14 @@
               ]
             }
           ],
-          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 30 }]
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            {
+              "type": "IF",
+              "when": { "flag": "fact_iz_belirsiz" },
+              "then": [{ "type": "VAR", "var": "pers", "op": "inc", "value": 1 }]
+            }
+          ]
         },
         {
           "id": "AT_AMIR",
@@ -1849,7 +1886,24 @@
           "effects": [
             { "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 100 },
             { "type": "VAR", "var": "arg_edr", "op": "set", "value": true },
-            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            {
+              "type": "IF",
+              "when": {
+                "cmp": [
+                  {
+                    "add": [
+                      { "if": { "when": { "flag": "edr_hiz" }, "then": 1, "else": 0 } },
+                      { "if": { "when": { "flag": "edr_fren" }, "then": 1, "else": 0 } },
+                      { "if": { "when": { "flag": "edr_dv" }, "then": 1, "else": 0 } }
+                    ]
+                  },
+                  ">=",
+                  2
+                ]
+              },
+              "then": [{ "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 50 }]
+            }
           ],
           "quality": {
             "q": "GOOD",
@@ -2010,7 +2064,9 @@
       "onFirstEnter": [
         {
           "type": "IF",
-          "when": { "all": [{ "hasEvidence": "ev_savcilik" }, { "hasEvidence": "ded_olum" }] },
+          "when": {
+            "all": [{ "hasEvidence": "ev_savcilik" }, { "any": [{ "hasEvidence": "ded_olum" }, { "flag": "arg_atk" }] }]
+          },
           "then": [
             { "type": "VAR", "var": "mutalaa_beraat", "op": "set", "value": true },
             { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
@@ -2018,7 +2074,12 @@
           "else": [
             {
               "type": "IF",
-              "when": { "all": [{ "ref": "kusur_yok" }, { "any": [{ "flag": "arg_edr" }, { "flag": "contra_c2" }] }] },
+              "when": {
+                "all": [
+                  { "ref": "kusur_yok" },
+                  { "any": [{ "flag": "arg_edr" }, { "flag": "contra_c2" }, { "flag": "arg_heyet" }] }
+                ]
+              },
               "then": [{ "type": "VAR", "var": "mutalaa_basit", "op": "set", "value": true }]
             }
           ]
@@ -2026,7 +2087,9 @@
       ],
       "lines": [
         {
-          "when": { "all": [{ "hasEvidence": "ev_savcilik" }, { "hasEvidence": "ded_olum" }] },
+          "when": {
+            "all": [{ "hasEvidence": "ev_savcilik" }, { "any": [{ "hasEvidence": "ded_olum" }, { "flag": "arg_atk" }] }]
+          },
           "lines": [
             { "speaker": "hakim", "text": "Esas hakkındaki mütalaanız, Sayın Savcı?" },
             {
@@ -2046,7 +2109,12 @@
           ]
         },
         {
-          "when": { "all": [{ "ref": "kusur_yok" }, { "any": [{ "flag": "arg_edr" }, { "flag": "contra_c2" }] }] },
+          "when": {
+            "all": [
+              { "ref": "kusur_yok" },
+              { "any": [{ "flag": "arg_edr" }, { "flag": "contra_c2" }, { "flag": "arg_heyet" }] }
+            ]
+          },
           "lines": [
             { "speaker": "hakim", "text": "Esas hakkındaki mütalaanız, Sayın Savcı?" },
             {
@@ -2078,7 +2146,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],

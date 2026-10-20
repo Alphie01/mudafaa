@@ -44,6 +44,10 @@ export const outcomes: CasePart = {
           'Hukuka aykırı delille kurulan savunma, hukuka uygun delillerin de ikna gücünü zayıflatmış; şikâyet üzerine aracın hurdaya çıkarıldığı anlaşılmıştır.',
         ),
         because(
+          'Müdafi bu fotoğrafları duruşmada delil olarak sunmuş; mahkeme sunumu tutanağa geçirmiştir.',
+          flag('garaj_sunuldu'),
+        ),
+        because(
           'Sanığın kırmızı ışık ihlali iddiası duruşmada sarsılmış olsa da mahkeme iddianamedeki nitelendirmeyi esas almıştır.',
           ref('kusur_yok'),
         ),
@@ -109,6 +113,10 @@ export const outcomes: CasePart = {
         because(
           'Cumhuriyet savcısı da esas hakkındaki mütalaasında sanığın beraatini talep etmiştir.',
           flag('mutalaa_beraat'),
+        ),
+        because(
+          'Sanık son sözünde katılandan özür dilemiş, gördüğünü ve görmediğini ayırarak anlatmıştır.',
+          flag('son_soz_iyi'),
         ),
       ],
       legalBasis: 'CMK 223/2-b; TCK 22/2, 85/1 (illiyet); CMK 141/1, 142, 231/3',
@@ -196,6 +204,10 @@ export const outcomes: CasePart = {
         ),
         because('Heyet raporundaki tali kusur değerlendirmesi araç verisiyle desteklenmemiştir.', flag('contra_heyet')),
         because(
+          'Adli Tıp raporu karşısında, ölüme yol açan travma ile sanığın aracının teması arasındaki illiyet bağı şüpheye yer bırakmayacak biçimde kurulamamıştır.',
+          flag('arg_atk'),
+        ),
+        because(
           'Ölümcül çarpmanın sanığın aracından kaynaklandığı şüpheye yer bırakmayacak biçimde ispatlanamamıştır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2).',
         ),
       ],
@@ -268,6 +280,12 @@ export const outcomes: CasePart = {
           ),
           L('leyla', 'Ama o koyu araç hâlâ orada bir yerde. Bunu da unutma.'),
           T('Bazen adalet bir kapıyı açar ama ışığı yakmaz. Bu sefer en azından kırmızı değildi.'),
+          N(
+            'Telefonu kapattım. Pencereden Gökdere’nin ışıkları görünüyordu, uzakta. Yeşil, sarı, kırmızı; sırayla, kusursuz.',
+          ),
+          T(
+            'Bir gün bir adam o kavşaktan kızını okula götürecek. Işık yeşil yanacak. Geçecek. Belki biraz yavaşlayacak; sebebini kimseye söylemeyecek.',
+          ),
         ]),
       ],
     }),

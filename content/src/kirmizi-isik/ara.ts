@@ -161,6 +161,9 @@ export const ara: CasePart = {
           'Bir şey daha. Müvekkilin bir bebeği olacak bu hafta. Bunu dosyaya katma ama aklından da çıkarma. İnsanlar bebekleri olunca ya çok cesur ya çok korkak olur.',
         ),
         T('İki gün. Dörder işlik iki gün. Bir yenidoğanın uyku düzeni kadar kısa.'),
+        N(
+          'Masamda üç rapor için üç boş dosya açtım: EDR, heyet, Adli Tıp. Sırtlarına el yazısıyla etiket yazdım; Gül’den öğrendiğim bir alışkanlık.',
+        ),
       ),
       choices: [cont('ARAG_DEVAM', 'Başla', HUB, { role: 'PRIMARY' })],
     }),
@@ -233,7 +236,7 @@ export const ara: CasePart = {
             araAct('A_VOLKAN', 'Volkan ve Gül', 'ARA_VOLKAN', { description: 'Hastane · doğumhane katı' }),
             araAct('A_AYTEN', 'Ayten Yurt aradı', 'ARA_AYTEN', {
               description: '“Bir şey konuşmamız lazım.”',
-              visibleWhen: any(met('ayten'), has('clue_cam')),
+              visibleWhen: any(met('ayten'), has('clue_cam'), flag('ayten_bilgi')),
             }),
             araAct('A_SERKAN', 'Serkan Durmaz aradı', 'ARA_SERKAN', {
               description: '“Dinledim.”',
@@ -276,6 +279,9 @@ export const ara: CasePart = {
           card('PERŞEMBE 20.30 — ARSLAN HUKUK', 'buro_gece'),
           N(
             'Akşam UYAP’a heyet raporu düştü. Otuz bir sayfa, üç imza, bir sonuç paragrafı. İlk sayfayı okudum ve oturdum.',
+          ),
+          N(
+            'Raporun ekinde kavşağın bir planı: yaya geçidi, iki sinyal başlığı, okla gösterilmiş bir “çatışma bölgesi.” Kırmızı kalemle taranmış bir dikdörtgen; Hatice Hanım’ın son adımları o dikdörtgenin içinde.',
           ),
           T(
             '“Sanığa kırmızı ışık ihlali atfedilemez.” Bir cümle. Üç aydır bir adamın üstünde duran bir kaya, bir cümleyle kalktı. Ama otuz bir sayfa var.',
@@ -663,7 +669,7 @@ export const ara: CasePart = {
           '“Bildiğinizi söyleyin, bilmediğinize bilmiyorum deyin. Hatice Hanım’ın oğluna söyleyecekseniz, ona gerçekten söyleyin.”',
           {
             score: { SAVUNMA_STRATEJISI: 40 },
-            effects: [raise('volkan_dogru'), inc('trust', 6)],
+            effects: [raise('volkan_dogru'), inc('trust', 6), ifThen(flag('fact_gul'), [inc('trust', 2)])],
             good: 'Müvekkili kendi anlatımına güvendirmek; metin ezberletmeden, doğruyu söylemeye teşvik etmek.',
             responses: says(
               L('volkan', 'Bilmediğime bilmiyorum. Bildiğime… biliyorum. Tamam.'),
@@ -1022,6 +1028,13 @@ export const ara: CasePart = {
           card('PAZAR 23.50 — ARSLAN HUKUK', 'buro_gece'),
           N(
             'Savcılıktan bir telefon geldi akşamüstü; adını vermeyen bir kâtip: “Yazınız işleme alındı, bir araç tespit edilmiş. Dosyanıza yazı gidecek.” Fazlasını söylemedi.',
+          ),
+        ),
+        when(
+          flag('suc_bos'),
+          card('PAZAR 23.50 — ARSLAN HUKUK', 'buro_gece'),
+          N(
+            'Savcılıktan iki satırlık bir yazı geldi: “İhbarınız üzerine araştırma başlatılmıştır.” Bir araç adı yok, bir sürücü adı yok. Bir dosya numarası var.',
           ),
         ),
         otherwise(

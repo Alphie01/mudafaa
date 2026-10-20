@@ -4,6 +4,7 @@ import {
   P,
   all,
   any,
+  atLeast,
   choiceNode,
   cmp,
   cont,
@@ -74,8 +75,8 @@ const penalty = (id: string, who: 'hakim' | 'savci') =>
     ),
   });
 
-const mutalaaBeraat: Cond = all(has('ev_savcilik'), has('ded_olum'));
-const mutalaaBasit: Cond = all(ref('kusur_yok'), any(flag('arg_edr'), flag('contra_c2')));
+const mutalaaBeraat: Cond = all(has('ev_savcilik'), any(has('ded_olum'), flag('arg_atk')));
+const mutalaaBasit: Cond = all(ref('kusur_yok'), any(flag('arg_edr'), flag('contra_c2'), flag('arg_heyet')));
 
 /** Kanıtlanmış ise +40, değilse −40 (esas savunmanın dayanağı). */
 const dayanak = (id: string, label: string, proven: Cond, okText: string): ReturnType<typeof option> =>
@@ -137,6 +138,10 @@ export const trial: CasePart = {
           'Üç hafta önce bu merdivenlerde herkes bir tarafı tutuyordu. Bugün herkes bir şeyi tutuyor: bir dosya, bir termos, bir sigara. Taraflar inceliyor; sorular kalınlaşıyor.',
         ),
         N('Leyla’nın kalemi ceketimin iç cebindeydi. Elimi göğsüme koydum; oradaydı.'),
+        N(
+          'Adliyenin camlı kapısında yansımamı gördüm. Cübbe kolumda, saçım ıslak, gözlerimin altı mor. Bir avukat gibi değil, bir tanık gibi görünüyordum.',
+        ),
+        T('Belki de öyleyim. Bu dosyanın en uzun tanığıyım: her şeyi gördüm, hiçbirini o gece görmedim.'),
       ),
       choices: [cont('T00Y_DEVAM', 'Koridora çık', 'T_00K', { role: 'PRIMARY' })],
     }),
@@ -275,6 +280,9 @@ export const trial: CasePart = {
           ),
           L('hakim', 'Tanıkları dinleyeceğiz. Önce belediye teknisyeni.'),
           T('“Tali kusur.” Mahkemenin ağzından bir kez çıktı. Şimdi her cümlede yankılanacak.'),
+          N(
+            'Savcı dosyasından başını kaldırdı, heyet raporunun bir sayfasını işaretledi. Katılan vekili de aynı sayfayı işaretledi. Aynı sayfa, iki ayrı kalem.',
+          ),
         ),
         otherwise(
           L('hakim', 'Taraflar hazır. Bekleyen müzekkere cevapları dosyaya girmiş, taraflara tebliğ edilmiştir.'),
@@ -331,7 +339,7 @@ export const trial: CasePart = {
       witnessLabel: 'TANIK · HAMDİ KOCABAŞ',
       lines: [
         when(
-          flag('hamdi_cagrildi'),
+          any(flag('hamdi_cagrildi'), flag('hamdi_bilgi')),
           L('mubasir', 'Tanık Hamdi Kocabaş!'),
           N(
             'Hamdi baretsiz, ütülü bir gömlekle girdi. Ellerini nereye koyacağını bilemedi; sonunda kürsünün kenarını tuttu.',
@@ -621,6 +629,9 @@ export const trial: CasePart = {
             'cengiz',
             'Otuz bir yıllık bilirkişiyim Sayın Başkan. Heyetin raporunu okudum. Saygı duyarım. Ama tecrübe başka şey söyler.',
           ),
+          T(
+            'Tecrübe. Bir bilirkişinin elindeki en tehlikeli kelime: ölçülemez, sorgulanamaz, yalnızca yaşa ve yıla dayanır. Ona rakamla gitmem gerek.',
+          ),
         ),
         otherwise(
           L('mubasir', 'Bilirkişi Cengiz Ateş!'),
@@ -908,6 +919,7 @@ export const trial: CasePart = {
       choices: [
         option('NQ_ISIK', '“Işık konusundaki tespitinizin dayanağı nedir?”', {
           score: { SORGULAMA: 30 },
+          effects: [ifThen(any(flag('heyet_isik'), flag('heyet_iz')), [score('SORGULAMA', 20)])],
           responses: says(
             L(
               'nalan',
@@ -981,7 +993,10 @@ export const trial: CasePart = {
       choices: [
         option('AT_CAM', '“Geçidin ilerisindeki far camı kırıklarını anlatır mısınız?”', {
           score: { SORGULAMA: 40 },
-          effects: [ifThen(flag('ayten_teslim'), [inc('pers', 1)])],
+          effects: [
+            ifThen(flag('ayten_teslim'), [inc('pers', 1)]),
+            ifThen(flag('fact_emanet_yok'), [score('SORGULAMA', 20)]),
+          ],
           responses: [
             when(
               flag('ayten_teslim'),
@@ -1007,6 +1022,7 @@ export const trial: CasePart = {
         }),
         option('AT_IZ', '“Fren izinin hangi araca ait olduğunu tespit ettiniz mi?”', {
           score: { SORGULAMA: 30 },
+          effects: [ifThen(flag('fact_iz_belirsiz'), [inc('pers', 1)])],
           responses: says(
             L('ayten', 'Hayır. İz ölçüldü. Hangi araca ait olduğu tespit edilmedi. Tutanakta da öyle yazar.'),
           ),
@@ -1036,7 +1052,11 @@ export const trial: CasePart = {
             enabledWhen: has('ev_edr'),
             lockedReason: 'EDR raporu dosyada yok.',
             score: { HUKUKI_BILGI: 100 },
-            effects: [raise('arg_edr'), inc('pers', 1)],
+            effects: [
+              raise('arg_edr'),
+              inc('pers', 1),
+              ifThen(atLeast(2, flag('edr_hiz'), flag('edr_fren'), flag('edr_dv')), [score('HUKUKI_BILGI', 50)]),
+            ],
             good: 'Bilinçli taksir neticenin öngörülmesini ister (TCK 22/3); sınırın altında hız ve normal tepki süresi bu öngörüyü kurmaz.',
             responses: says(
               P(

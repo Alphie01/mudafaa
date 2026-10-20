@@ -71,6 +71,12 @@ export const hearing1: CasePart = {
           ),
           L('volkan', 'Ne gördüysem. Söz verdim. Ama avukat hanım… korkuyorum. Ya yanlış hatırlıyorsam?'),
           N(
+            'Koridorun duvarında eski bir ilan panosu: “Arabuluculuk bürosu 2. katta.” “Kayıp eşya: siyah şemsiye.” “Sessiz olunuz.” Kimse sessiz değildi.',
+          ),
+          T(
+            'Bugün Volkan’ın hafızası bir rapora karşı yarışacak. Hafıza yorulur, rapor yorulmaz. Ama rapor da yanılır; yalnızca yanıldığını bilmez.',
+          ),
+          N(
             'Koridorun öbür ucunda Serkan Durmaz. Siyah bir ceket, elinde bir fotoğraf çerçevesi. Bize bakmadı. Bakmamaya çalıştı.',
           ),
           T(
@@ -131,7 +137,7 @@ export const hearing1: CasePart = {
       title: '2. Celse · Açılış',
       courtStage: 'ACILIS',
       background: 'durusma_salonu',
-      onFirstEnter: [raise('in_court'), meet('hakim'), meet('savci'), meet('vekil'), meet('mubasir')],
+      onFirstEnter: [raise('in_court'), meet('hakim'), meet('savci'), meet('vekil'), meet('mubasir'), meet('katip')],
       lines: says(
         card('BURSA 7. ASLİYE CEZA MAHKEMESİ — 2. CELSE', 'durusma_salonu'),
         L('mubasir', 'Volkan Eren dosyası! Taraflar salona!'),
@@ -262,6 +268,14 @@ export const hearing1: CasePart = {
               flag('susma'),
               L('volkan', 'Avukatım… peki, bunu söyleyebilirim. Arabanın ekranından. Telefon bardaklıktaydı.'),
             ),
+            when(
+              flag('fact_ekran'),
+              L(
+                'volkan',
+                'Arabanın ekranından, hoparlörden. Telefon bardaklıktaydı. Kapatmak için ekrana bir saniye dokundum; bunu saklamıyorum.',
+              ),
+              T('Saklamıyor. İyi. Saklanan bir saniye, söylenen bir saniyeden ağırdır.'),
+            ),
             otherwise(
               L(
                 'volkan',
@@ -272,8 +286,12 @@ export const hearing1: CasePart = {
         }),
         option('Q_HIZ', '“Kavşağa yaklaşırken hızınız neydi, hatırlıyor musunuz?”', {
           score: { SAVUNMA_STRATEJISI: 25 },
+          effects: [ifThen(any(flag('fact_abs'), flag('fact_darbe')), [inc('pers', 1)])],
           responses: says(
             L('volkan', 'Kırk kadar. Yağmur vardı. O yolda hep kırkla giderim; çukur çok.'),
+            T(
+              'Kırk. Volkan’ın hafızası ile raporun hesabı arasında yirmi sekiz kilometre. Biri bir insandan, biri bir izden geliyor.',
+            ),
             L('savci', 'Bilirkişi altmış sekiz diyor.'),
             L('volkan', 'Bilmiyorum bilirkişi nereden bakmış. Ben kırkla gidiyordum.'),
           ),
@@ -455,6 +473,23 @@ export const hearing1: CasePart = {
           L('volkan', 'Haklı. Her söylediğinde haklı. Ben… ne desem az.', 'uzgun'),
           N('Serkan başını çevirdi. Pencereye baktı. Yağmur camda, salonun sarı ışığında, eğik çizgiler.'),
           T('“Haklı.” Bir sanığın katılana söyleyebileceği en dürüst ve en tehlikeli kelime.'),
+        ),
+        when(
+          flag('fact_hatice'),
+          L('hakim', 'Sanık, katılanın beyanına karşı diyeceğiniz?'),
+          L(
+            'volkan',
+            'Serkan Bey. Cenazeye geldim. Avlunun ucunda, ağacın arkasındaydım. Siz tabutu omuzladınız. Yanınıza gelemedim. Özür dilerim.',
+          ),
+          L(
+            'volkan',
+            'Ben yeşil gördüm. Bunu söylemek size hakaret gibi geliyorsa özür dilerim. Ama başka türlü söyleyemem; başka türlüsü yalan olur.',
+          ),
+          N(
+            'Serkan başını kaldırdı. Bir an, sanki o avlunun ucundaki gölgeyi hatırlamaya çalışır gibi, Volkan’a baktı.',
+          ),
+          L('hakim', 'Tutanağa geçti. Tanığı alalım.'),
+          T('İki adam, bir kadının adını aynı cümlede söyledi. Biri öfkeyle, biri utançla. İkisi de doğru söylüyordu.'),
         ),
         otherwise(
           L('hakim', 'Sanık, katılanın beyanına karşı diyeceğiniz?'),

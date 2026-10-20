@@ -18,6 +18,10 @@
           "text": "Hukuka aykırı delille kurulan savunma, hukuka uygun delillerin de ikna gücünü zayıflatmış; şikâyet üzerine aracın hurdaya çıkarıldığı anlaşılmıştır."
         },
         {
+          "when": { "flag": "garaj_sunuldu" },
+          "text": "Müdafi bu fotoğrafları duruşmada delil olarak sunmuş; mahkeme sunumu tutanağa geçirmiştir."
+        },
+        {
           "when": { "ref": "kusur_yok" },
           "text": "Sanığın kırmızı ışık ihlali iddiası duruşmada sarsılmış olsa da mahkeme iddianamedeki nitelendirmeyi esas almıştır."
         }
@@ -84,7 +88,7 @@
           { "flag": "gercek_neden" },
           { "ref": "kusur_yok" },
           { "cmp": [{ "var": "pers" }, ">=", 8] },
-          { "cmp": [{ "score": "final" }, ">=", 8500] }
+          { "cmp": [{ "score": "final" }, ">=", 9500] }
         ]
       },
       "stamp": "BERAAT",
@@ -108,6 +112,10 @@
         {
           "when": { "flag": "mutalaa_beraat" },
           "text": "Cumhuriyet savcısı da esas hakkındaki mütalaasında sanığın beraatini talep etmiştir."
+        },
+        {
+          "when": { "flag": "son_soz_iyi" },
+          "text": "Sanık son sözünde katılandan özür dilemiş, gördüğünü ve görmediğini ayırarak anlatmıştır."
         }
       ],
       "legalBasis": "CMK 223/2-b; TCK 22/2, 85/1 (illiyet); CMK 141/1, 142, 231/3",
@@ -197,7 +205,7 @@
           { "ref": "kusur_yok" },
           { "ref": "findings" },
           { "cmp": [{ "var": "pers" }, ">=", 6] },
-          { "cmp": [{ "score": "final" }, ">=", 7000] }
+          { "cmp": [{ "score": "final" }, ">=", 9000] }
         ]
       },
       "stamp": "BERAAT",
@@ -221,6 +229,10 @@
         {
           "when": { "flag": "contra_heyet" },
           "text": "Heyet raporundaki tali kusur değerlendirmesi araç verisiyle desteklenmemiştir."
+        },
+        {
+          "when": { "flag": "arg_atk" },
+          "text": "Adli Tıp raporu karşısında, ölüme yol açan travma ile sanığın aracının teması arasındaki illiyet bağı şüpheye yer bırakmayacak biçimde kurulamamıştır."
         },
         {
           "text": "Ölümcül çarpmanın sanığın aracından kaynaklandığı şüpheye yer bırakmayacak biçimde ispatlanamamıştır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2)."
@@ -326,6 +338,15 @@
             {
               "speaker": "player",
               "text": "Bazen adalet bir kapıyı açar ama ışığı yakmaz. Bu sefer en azından kırmızı değildi.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonu kapattım. Pencereden Gökdere’nin ışıkları görünüyordu, uzakta. Yeşil, sarı, kırmızı; sırayla, kusursuz."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir gün bir adam o kavşaktan kızını okula götürecek. Işık yeşil yanacak. Geçecek. Belki biraz yavaşlayacak; sebebini kimseye söylemeyecek.",
               "style": "thought"
             }
           ]

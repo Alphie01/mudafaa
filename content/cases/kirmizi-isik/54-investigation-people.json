@@ -28,6 +28,21 @@
             {
               "speaker": "narrator",
               "text": "Masada bu sefer katalog yoktu. Bir fincan, bir paket sigara, açılmamış. Volkan paketi elinde çevirdi; Leyla’yı hatırladım."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gül salondan çıktı, kapının eşiğinde durdu. Elinde bir dosya: bebek için hastane evrakı. Yorgun, sekizinci ayın sonunda, ayakta duramayacak kadar ağır."
+            },
+            {
+              "speaker": "gul",
+              "text": "Bugün doktor “her an” dedi. Her an. Ben de “mahkemeden önce olmasın” dedim. Doktor güldü. Ben gülmedim."
+            },
+            { "speaker": "volkan", "text": "Gül, otur. Lütfen." },
+            { "speaker": "gul", "text": "Oturursam kalkamam. Siz konuşun. Ben buradayım." },
+            {
+              "speaker": "player",
+              "text": "Bir evin içinde iki saat işliyor: biri bir bebeğin, biri bir duruşmanın. İkisi de geri sayıyor.",
+              "style": "thought"
             }
           ]
         },
@@ -1567,7 +1582,12 @@
           ],
           "effects": [
             { "type": "DISCOVER", "evidence": "ev_bufe" },
-            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 },
+            {
+              "type": "IF",
+              "when": { "flag": "fact_kayit" },
+              "then": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }]
+            }
           ],
           "quality": {
             "q": "GOOD",

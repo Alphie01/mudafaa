@@ -16,6 +16,7 @@ export const cast: CasePart = {
     sharedSprite('polis'),
     sharedSprite('bilirkisi'),
     sharedSprite('anne'),
+    sharedSprite('katip'),
     own('volkan'),
     own('gul'),
     own('necati'),
@@ -180,6 +181,13 @@ export const cast: CasePart = {
       occupation: 'Katılan vekili',
       accent: '#7d2e48',
       spriteId: 'rakip',
+    }),
+    character('katip', {
+      name: 'Zabıt Kâtibi Nur',
+      shortLabel: 'Kâtip',
+      role: 'CLERK',
+      accent: '#7d8590',
+      spriteId: 'katip',
     }),
     character('mubasir', {
       name: 'Mübaşir Şükrü',

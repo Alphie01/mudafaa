@@ -50,6 +50,16 @@ export const invPeople: CasePart = {
           N(
             'Masada bu sefer katalog yoktu. Bir fincan, bir paket sigara, açılmamış. Volkan paketi elinde çevirdi; Leyla’yı hatırladım.',
           ),
+          N(
+            'Gül salondan çıktı, kapının eşiğinde durdu. Elinde bir dosya: bebek için hastane evrakı. Yorgun, sekizinci ayın sonunda, ayakta duramayacak kadar ağır.',
+          ),
+          L(
+            'gul',
+            'Bugün doktor “her an” dedi. Her an. Ben de “mahkemeden önce olmasın” dedim. Doktor güldü. Ben gülmedim.',
+          ),
+          L('volkan', 'Gül, otur. Lütfen.'),
+          L('gul', 'Oturursam kalkamam. Siz konuşun. Ben buradayım.'),
+          T('Bir evin içinde iki saat işliyor: biri bir bebeğin, biri bir duruşmanın. İkisi de geri sayıyor.'),
         ),
         otherwise(
           card('VOLKAN’IN EVİ — ÖĞLEDEN SONRA', 'ev'),
@@ -857,6 +867,7 @@ export const invPeople: CasePart = {
           '“Kaydı gönüllü olarak verir misiniz? Tutanakla teslim alayım; savcılığa ve mahkemeye sunulacak.”',
           {
             discovers: 'ev_bufe',
+            effects: [ifThen(flag('fact_kayit'), [{ type: 'SCORE', category: 'ARASTIRMA', amount: 20 }])],
             score: { ARASTIRMA: 60 },
             good: 'Kaydı sahibinin rızasıyla, teslim tutanağıyla almak; zinciri koruyan ve sonradan tartışılmayacak bir yol.',
             category: 'ARASTIRMA',

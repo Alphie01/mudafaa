@@ -19,8 +19,8 @@ import { p1, p2 } from './shared.js';
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler.
 
 export const T_INDIRIM = 3000;
-export const T_BERAAT_E = 7000;
-export const T_BERAAT_B = 8500;
+export const T_BERAAT_E = 9000;
+export const T_BERAAT_B = 9500;
 
 export const meta: CasePart = {
   format: CASE_FORMAT_ID,

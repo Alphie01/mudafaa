@@ -135,6 +135,10 @@
               "speaker": "player",
               "text": "İki gün. Dörder işlik iki gün. Bir yenidoğanın uyku düzeni kadar kısa.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masamda üç rapor için üç boş dosya açtım: EDR, heyet, Adli Tıp. Sırtlarına el yazısıyla etiket yazdım; Gül’den öğrendiğim bir alışkanlık."
             }
           ]
         }
@@ -261,7 +265,7 @@
           "cost": [{ "var": "ara_ap", "amount": 1 }],
           "next": "ARA_AYTEN",
           "description": "“Bir şey konuşmamız lazım.”",
-          "visibleWhen": { "any": [{ "met": "ayten" }, { "hasEvidence": "clue_cam" }] },
+          "visibleWhen": { "any": [{ "met": "ayten" }, { "hasEvidence": "clue_cam" }, { "flag": "ayten_bilgi" }] },
           "maxUses": 1
         },
         {
@@ -353,6 +357,10 @@
             {
               "speaker": "narrator",
               "text": "Akşam UYAP’a heyet raporu düştü. Otuz bir sayfa, üç imza, bir sonuç paragrafı. İlk sayfayı okudum ve oturdum."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Raporun ekinde kavşağın bir planı: yaya geçidi, iki sinyal başlığı, okla gösterilmiş bir “çatışma bölgesi.” Kırmızı kalemle taranmış bir dikdörtgen; Hatice Hanım’ın son adımları o dikdörtgenin içinde."
             },
             {
               "speaker": "player",
@@ -1049,7 +1057,12 @@
           "effects": [
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 40 },
             { "type": "VAR", "var": "volkan_dogru", "op": "set", "value": true },
-            { "type": "VAR", "var": "trust", "op": "inc", "value": 6 }
+            { "type": "VAR", "var": "trust", "op": "inc", "value": 6 },
+            {
+              "type": "IF",
+              "when": { "flag": "fact_gul" },
+              "then": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 2 }]
+            }
           ],
           "quality": {
             "q": "GOOD",
@@ -1800,6 +1813,16 @@
             {
               "speaker": "narrator",
               "text": "Savcılıktan bir telefon geldi akşamüstü; adını vermeyen bir kâtip: “Yazınız işleme alındı, bir araç tespit edilmiş. Dosyanıza yazı gidecek.” Fazlasını söylemedi."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "suc_bos" },
+          "lines": [
+            { "speaker": "narrator", "text": "PAZAR 23.50 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Savcılıktan iki satırlık bir yazı geldi: “İhbarınız üzerine araştırma başlatılmıştır.” Bir araç adı yok, bir sürücü adı yok. Bir dosya numarası var."
             }
           ]
         },

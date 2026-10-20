@@ -46,6 +46,15 @@
             },
             {
               "speaker": "narrator",
+              "text": "Koridorun duvarında eski bir ilan panosu: “Arabuluculuk bürosu 2. katta.” “Kayıp eşya: siyah şemsiye.” “Sessiz olunuz.” Kimse sessiz değildi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bugün Volkan’ın hafızası bir rapora karşı yarışacak. Hafıza yorulur, rapor yorulmaz. Ama rapor da yanılır; yalnızca yanıldığını bilmez.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
               "text": "Koridorun öbür ucunda Serkan Durmaz. Siyah bir ceket, elinde bir fotoğraf çerçevesi. Bize bakmadı. Bakmamaya çalıştı."
             },
             {
@@ -167,7 +176,8 @@
         { "type": "MEET", "character": "hakim" },
         { "type": "MEET", "character": "savci" },
         { "type": "MEET", "character": "vekil" },
-        { "type": "MEET", "character": "mubasir" }
+        { "type": "MEET", "character": "mubasir" },
+        { "type": "MEET", "character": "katip" }
       ],
       "lines": [
         {
@@ -207,7 +217,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -260,7 +270,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -379,7 +389,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -412,6 +422,20 @@
               ]
             },
             {
+              "when": { "flag": "fact_ekran" },
+              "lines": [
+                {
+                  "speaker": "volkan",
+                  "text": "Arabanın ekranından, hoparlörden. Telefon bardaklıktaydı. Kapatmak için ekrana bir saniye dokundum; bunu saklamıyorum."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Saklamıyor. İyi. Saklanan bir saniye, söylenen bir saniyeden ağırdır.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
               "lines": [
                 {
                   "speaker": "volkan",
@@ -430,12 +454,24 @@
             {
               "lines": [
                 { "speaker": "volkan", "text": "Kırk kadar. Yağmur vardı. O yolda hep kırkla giderim; çukur çok." },
+                {
+                  "speaker": "player",
+                  "text": "Kırk. Volkan’ın hafızası ile raporun hesabı arasında yirmi sekiz kilometre. Biri bir insandan, biri bir izden geliyor.",
+                  "style": "thought"
+                },
                 { "speaker": "savci", "text": "Bilirkişi altmış sekiz diyor." },
                 { "speaker": "volkan", "text": "Bilmiyorum bilirkişi nereden bakmış. Ben kırkla gidiyordum." }
               ]
             }
           ],
-          "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 25 }]
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 25 },
+            {
+              "type": "IF",
+              "when": { "any": [{ "flag": "fact_abs" }, { "flag": "fact_darbe" }] },
+              "then": [{ "type": "VAR", "var": "pers", "op": "inc", "value": 1 }]
+            }
+          ]
         },
         {
           "id": "Q_GOLGE",
@@ -572,7 +608,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -838,6 +874,30 @@
           ]
         },
         {
+          "when": { "flag": "fact_hatice" },
+          "lines": [
+            { "speaker": "hakim", "text": "Sanık, katılanın beyanına karşı diyeceğiniz?" },
+            {
+              "speaker": "volkan",
+              "text": "Serkan Bey. Cenazeye geldim. Avlunun ucunda, ağacın arkasındaydım. Siz tabutu omuzladınız. Yanınıza gelemedim. Özür dilerim."
+            },
+            {
+              "speaker": "volkan",
+              "text": "Ben yeşil gördüm. Bunu söylemek size hakaret gibi geliyorsa özür dilerim. Ama başka türlü söyleyemem; başka türlüsü yalan olur."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Serkan başını kaldırdı. Bir an, sanki o avlunun ucundaki gölgeyi hatırlamaya çalışır gibi, Volkan’a baktı."
+            },
+            { "speaker": "hakim", "text": "Tutanağa geçti. Tanığı alalım." },
+            {
+              "speaker": "player",
+              "text": "İki adam, bir kadının adını aynı cümlede söyledi. Biri öfkeyle, biri utançla. İkisi de doğru söylüyordu.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "lines": [
             { "speaker": "hakim", "text": "Sanık, katılanın beyanına karşı diyeceğiniz?" },
             {
@@ -865,7 +925,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -978,7 +1038,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -1627,7 +1687,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],
@@ -1930,7 +1990,7 @@
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
-          { "character": "vekil", "label": "KATILAN VEKİLİ", "xFrac": 0.18 },
+          { "character": "katip", "label": "ZABIT KÂTİBİ", "xFrac": 0.18 },
           { "character": "hakim", "label": "HÂKİM", "xFrac": 0.5 },
           { "character": "savci", "label": "C. SAVCISI", "xFrac": 0.82 }
         ],

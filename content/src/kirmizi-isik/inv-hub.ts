@@ -1,4 +1,5 @@
 import {
+  ifThen,
   L,
   N,
   P,
@@ -92,6 +93,11 @@ const hubLines: ResponseBlock[] = [
       'Son gün. Yarın dilekçe süresi doluyor; öbür gün duruşmaya hazırlık. Bugün eksik kalan her şey, duruşmada bir sessizlik olarak geri gelecek.',
     ),
   ),
+];
+
+/** Akşam telefonunda Gül'ün ilk cümlesi (aynı satır her iki seçenekte). */
+const gulAcilis = [
+  L('gul', 'Bir de… ilk gün size söylediklerim için. Siz sordunuz, ben anlattım. Uzun zamandır kimse sormuyordu.'),
 ];
 
 export const invHub: CasePart = {
@@ -273,8 +279,13 @@ export const invHub: CasePart = {
       ),
       choices: [
         option('AK1_A', '“Henüz koymayın. Doğduğunda yüzüne bakınca bilirsiniz.”', {
-          effects: [set('aksam1', 'BEKLE')],
+          effects: [
+            set('aksam1', 'BEKLE'),
+            ifThen(flag('gul_dinle'), [inc('trust', 2)]),
+            ifThen(flag('gul_kirgin'), [inc('trust', 2)]),
+          ],
           responses: says(
+            ...gulAcilis,
             L('gul', 'Yüzüne bakınca. Evet. Babasına benzerse “Sabır” koyarım.'),
             N('Güldü. İlk kez. Sonra sustu.'),
             L('gul', 'İyi geceler avukat hanım. Teşekkür ederim. İsim için değil.'),
@@ -283,11 +294,19 @@ export const invHub: CasePart = {
           next: 'INV_HUB',
         }),
         option('AK1_B', '“Ela. Kısa, aydınlık. Bu dosyanın içinden çıkacak bir şey aydınlık olsun.”', {
-          effects: [set('aksam1', 'ELA')],
+          effects: [
+            set('aksam1', 'ELA'),
+            ifThen(flag('gul_dinle'), [inc('trust', 2)]),
+            ifThen(flag('gul_kirgin'), [inc('trust', 2)]),
+          ],
           responses: says(
+            ...gulAcilis,
             L('gul', 'Ela. … Volkan’a söyleyeceğim. Gözleri ela onun, biliyor musunuz?'),
             L('gul', 'İyi geceler. Siz de uyuyun. Bir avukatın uykusuz olması bize iyi gelmez.'),
             T('Uyumadım. Ama denedim; bunu da sayın.'),
+            N(
+              'Masadaki lambayı kapattım. Karanlıkta krokinin beyaz çizgileri hâlâ seçiliyordu; gözlerimde, kâğıtta değil.',
+            ),
           ),
           next: 'INV_HUB',
         }),
@@ -335,6 +354,15 @@ export const invHub: CasePart = {
           'Şüphe sanık lehinedir. Ama şüpheyi “olabilir” diye değil, “olmadığı gösterilemedi” diye kurarsın. İkisi aynı cümle değil.',
         ),
         N('Sigara paketini parmaklarıyla çevirdi, açmadı.'),
+        L(
+          'leyla',
+          'Bir de şu: bu dosyada herkes bir şeyden suçluluk duyuyor. Müvekkilin direksiyondan, karısı telefondan, taksici gözünden. Suçluluk bulaşıcıdır. Sana bulaşmasın.',
+        ),
+        P('Bana bulaşırsa ne olur?'),
+        L(
+          'leyla',
+          'Hata yapmaktan korkarsın. Korkan avukat itiraz etmez. İtiraz etmeyen avukat, raporu imzalamış sayılır.',
+        ),
         L('leyla', 'Git uyu. İki gün kaldı; iki gün, bir dosya için hem çok hem az.'),
       ),
       choices: [cont('AK2L_DEVAM', 'Yeni güne başla', 'INV_HUB', { role: 'PRIMARY' })],
@@ -382,6 +410,9 @@ export const invHub: CasePart = {
             T(
               'Not defterime yazdım: “Bugün çatışma yok.” Bir yargıç için anlamsız bir cümle. Benim için bir soru: o gece neden vardı?',
             ),
+            N(
+              'Saat ikiye doğru bir devriye aracı yavaşladı, camı indi. “Hanımefendi, bir sorun mu var?” “Yok,” dedim, “ışıklara bakıyorum.” Polis güldü, gitti.',
+            ),
           ),
           next: 'INV_HUB',
         }),
@@ -398,6 +429,24 @@ export const invHub: CasePart = {
       title: 'Leyla’ya danış',
       background: 'buro',
       lines: [
+        when(
+          all(cmp(v('ilk_adim'), '==', 'RAPOR'), not(visited('INV_RAPOR'))),
+          L(
+            'leyla',
+            'Rapordan başlayacağını söylemiştin. Hâlâ açmadın. Bir avukatın ilk sözünü tutması, müvekkilinden önce kendine verdiği bir sözdür.',
+          ),
+          L(
+            'leyla',
+            'Raporun her cümlesinin altında bir varsayım var. Varsayımları say: ışık, iz, çarpma. Hangisini ölçmüş, hangisini sanmış?',
+          ),
+        ),
+        when(
+          all(cmp(v('ilk_adim'), '==', 'MUVEKKIL'), not(visited('INV_GORUSME'))),
+          L(
+            'leyla',
+            'Müvekkilden başlayacaktın. Gitmedin mi? Gül Hanım her gün çay demliyor; bir gün demlediği çay soğuyacak.',
+          ),
+        ),
         when(
           not(any(has('clue_fren'), has('clue_cam'), visited('INV_TUTANAK'))),
           N('Leyla bir dosyanın kenarına not alıyordu. Başını kaldırmadı.'),
@@ -510,6 +559,12 @@ export const invHub: CasePart = {
           any(has('ded_fren'), has('ded_cam'), has('ded_yukseklik'), has('ded_saat')),
           T('Bir çatlak buldum. Raporda, tutanakta, bir yerde. Bir çatlak duvarı yıkmaz; ama içeri ışık sızdırır.'),
         ),
+        when(
+          all(flag('bufe_volkan'), flag('fact_iki_ses')),
+          T(
+            'Bir kamera kaydı, bir büfecinin kulağı: bir fren, bir gümbürtü, bir fren daha. Volkan’ın beyaz arabası ikinci frende. Birincisi kimin?',
+          ),
+        ),
         otherwise(
           T(
             'Elimde bir müvekkilin “yeşildi” sözü ve bir raporun “kırmızıydı” sözü var. Yarın ikisi aynı masaya oturacak.',
@@ -559,6 +614,12 @@ export const invHub: CasePart = {
           flag('fact_rota'),
           T(
             'Kırk dakikalık bir yürüyüş, iki simit, biriktirilen otobüs parası. Hatice Hanım o yolu ezbere biliyordu. Yolun onu ezbere bilmediği tek gece.',
+          ),
+        ),
+        when(
+          flag('fact_anne'),
+          T(
+            '“Işık senin için yanar, sen onun için değil.” Hatice Hanım’ın oğluna öğrettiği cümle. Yarın bunu bir mahkemeye taşıyacağım; kimin ağzından, bilmiyorum.',
           ),
         ),
         otherwise(T('Volkan’ı düşündüm. Balkonda, altı yıl sonra yaktığı ilk sigara.')),

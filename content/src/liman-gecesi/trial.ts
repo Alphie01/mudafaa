@@ -88,6 +88,15 @@ export const trial: CasePart = {
       onEnter: [raise('in_court')],
       lines: [
         W(
+          all(flag('suc_duyurusu'), flag('savci_asil')),
+          `
+# PAZARTESİ 09.10 — BURSA ADLİYESİ, 6. AĞIR CEZA KORİDORU [bg:adliye]
+> Koridorda, pencerenin önünde Amir Aydemir. Yakılmamış sigarası elinde. Beni görünce başını çok hafifçe salladı ve başka yöne baktı.
+> Kalem amirinin masasında, tutanakla bıraktığım zarfın üstünde savcılığın kaşesi vardı: “Soruşturma dosyasına eklendi.”
+> Sevim Yavuz bu kez Gülay’ın oturduğu banka oturmuştu. Aralarında bir kişilik boşluk. Konuşmuyorlardı; ama ikisi de aynı kapıya bakıyordu.
+`,
+        ),
+        W(
           flag('suc_duyurusu'),
           `
 # PAZARTESİ 09.10 — BURSA ADLİYESİ, 6. AĞIR CEZA KORİDORU [bg:adliye]
@@ -837,6 +846,15 @@ baskan: Müdafi, mütalaaya karşı diyeceğiniz?
 savci: Sayın Başkan, sanığın geri döndüğüne dair teşhis güvenilirliğini yitirmiştir. Bilirkişi beyanını da dinledik; kayıt altındadır.
 savci: Ancak sanık maktulü darp etmiş, maktul aynı gece ölmüştür. İddia makamı, bir yumruğun bir ölümle bağını takdirinize sunmakla yükümlüdür.
 savci: Sanığın yaralama kastıyla hareket ettiği ve ölüm neticesinden sorumlu olduğu kanaatiyle eylemin TCK 87/4 kapsamında değerlendirilmesini, haksız tahrik hükümlerinin takdirini talep ederim.
+baskan: Müdafi, mütalaaya karşı diyeceğiniz?
+`,
+        ),
+        W(
+          all(ref('donus_yok'), flag('kabul87')),
+          `
+savci: Sayın Başkan, teşhis zayıflamıştır. Müdafi de ek savunmasında eylemin yaralama sonucu ölüm kapsamında kaldığını kabul etmiştir.
+savci: Sanığın yumruğu maktulü yere düşürmüş, kafatası kırığı bu düşmeyle oluşmuştur. TCK 87/4 uyarınca cezalandırılmasını talep ederim.
+> Savcı bunu söylerken bana bakmadı. Bakmasına gerek yoktu; cümlenin yarısını ben kurmuştum.
 baskan: Müdafi, mütalaaya karşı diyeceğiniz?
 `,
         ),

@@ -26,6 +26,29 @@
       "onEnter": [{ "type": "VAR", "var": "in_court", "op": "set", "value": true }],
       "lines": [
         {
+          "when": { "all": [{ "flag": "suc_duyurusu" }, { "flag": "savci_asil" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PAZARTESİ 09.10 — BURSA ADLİYESİ, 6. AĞIR CEZA KORİDORU",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridorda, pencerenin önünde Amir Aydemir. Yakılmamış sigarası elinde. Beni görünce başını çok hafifçe salladı ve başka yöne baktı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kalem amirinin masasında, tutanakla bıraktığım zarfın üstünde savcılığın kaşesi vardı: “Soruşturma dosyasına eklendi.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sevim Yavuz bu kez Gülay’ın oturduğu banka oturmuştu. Aralarında bir kişilik boşluk. Konuşmuyorlardı; ama ikisi de aynı kapıya bakıyordu."
+            }
+          ]
+        },
+        {
           "when": { "flag": "suc_duyurusu" },
           "lines": [
             {
@@ -1961,6 +1984,24 @@
             {
               "speaker": "savci",
               "text": "Sanığın yaralama kastıyla hareket ettiği ve ölüm neticesinden sorumlu olduğu kanaatiyle eylemin TCK 87/4 kapsamında değerlendirilmesini, haksız tahrik hükümlerinin takdirini talep ederim."
+            },
+            { "speaker": "baskan", "text": "Müdafi, mütalaaya karşı diyeceğiniz?" }
+          ]
+        },
+        {
+          "when": { "all": [{ "ref": "donus_yok" }, { "flag": "kabul87" }] },
+          "lines": [
+            {
+              "speaker": "savci",
+              "text": "Sayın Başkan, teşhis zayıflamıştır. Müdafi de ek savunmasında eylemin yaralama sonucu ölüm kapsamında kaldığını kabul etmiştir."
+            },
+            {
+              "speaker": "savci",
+              "text": "Sanığın yumruğu maktulü yere düşürmüş, kafatası kırığı bu düşmeyle oluşmuştur. TCK 87/4 uyarınca cezalandırılmasını talep ederim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı bunu söylerken bana bakmadı. Bakmasına gerek yoktu; cümlenin yarısını ben kurmuştum."
             },
             { "speaker": "baskan", "text": "Müdafi, mütalaaya karşı diyeceğiniz?" }
           ]

@@ -206,6 +206,104 @@ c H107_A
 c H108_DEVAM
 `);
 
+// İlk celsede araç kaydı istenmez; ara evresinde ek talep dilekçesiyle istenir (EK_GPS).
+const CELSE1_ARACSIZ = CELSE1.filter((a) => !('choiceId' in a && a.choiceId === 'TL_GPS'));
+
+// Ek talep yolu: ilk gün dilekçe, araç kaydı ikinci gün gelir; savcı ziyareti yerine Sevim üçüncü güne kalır.
+const ARA_EK = A(`
+c ARA_GIRIS_DEVAM
+c A_LEYLA
+c LEYLA2_DON
+c A_TALEP
+c EK_GPS
+c EK_GONDER
+c A_TARIK
+c TR_SEMA
+c TR_SONSOZ
+c TR_GECE
+c TR_BITIR
+c AA1_A
+c A_KAYIT
+e mag a2
+e compare z1
+c KAYIT_BITIR
+c A_CIKARIM
+m clue_gps clue_zimmet
+c ARA_CIKARIM_BITIR
+c A_LEYLA
+c LEYLA2_DON
+c A_EMANET
+t OB_KONI
+t OB_MONT
+c EMANET_BITIR
+c AA2_B
+c A_SEVIM
+c SV_TAZIYE
+c SV_ERCAN
+c SV_HAFTA
+c SV_TUTANAK
+c SV_BITIR
+c A_DEFTER
+e mag d4
+e compare d3
+c DEFTER_BITIR
+c A_CIKARIM
+m clue_koni clue_desen
+m clue_defter_satir clue_arama2341
+m clue_mont clue_pamuk
+c ARA_CIKARIM_BITIR
+c A_LEYLA
+c LEYLA2_DON
+c GO_T2
+c ARA_SON_DEVAM
+`);
+
+// Yüzleşme tuzağı (KY_SOR) ve savcıya asılların sunulması (SAV_ASIL); bilirkişiye kâğıt gösterilmez.
+const ARA_YUZLESME = A(`
+c ARA_GIRIS_DEVAM
+c A_LEYLA
+c LEYLA2_DON
+c A_SEVIM
+c SV_TAZIYE
+c SV_ERCAN
+c SV_HAFTA
+c SV_TUTANAK
+c SV_BITIR
+c A_KENAN
+c KY_SOR
+c ARA_AKSAM1_DEVAM
+c A_KAYIT
+e mag a2
+e compare z1
+c KAYIT_BITIR
+c A_CIKARIM
+m clue_gps clue_zimmet
+c ARA_CIKARIM_BITIR
+c A_LEYLA
+c LEYLA2_DON
+c A_EMANET
+t OB_KONI
+t OB_MONT
+c EMANET_BITIR
+c AA2_B
+c A_DEFTER
+e mag d4
+e compare d3
+c DEFTER_BITIR
+c A_CIKARIM
+m clue_defter_satir clue_arama2341
+c ARA_CIKARIM_BITIR
+c A_SUC
+c SUC_A
+c A_LEYLA
+c LEYLA2_DON
+c A_SAVCI
+c SAV_ASIL
+c SAV_BITIR
+c GO_T2
+c ARA_SON_DEVAM
+`);
+
 const NURTEN = `
 c A_NURTEN
 c NU_TWIST
@@ -794,7 +892,8 @@ export const tests: CasePart = {
         G5_SORUSTURMA,
         G5_CELSE1,
       ),
-      // Olgu testleri: dönüş yok + ölüm sonra kayıttaysa esas savunmanın adı beraati değiştirmez; bilirkişiye kâğıt
+      // Olgu testleri: dönüş yok + ölüm sonra duruşma kaydındaysa esas savunmanın adı (E, T, D, X) beraati değiştirmez;
+      // OLGU_EK araç kaydını ara evresinde ister; OLGU_B yüzleşme tuzağına düşer ve bilirkişiye kâğıt
       // gösterilmeden (ölüm sonra kurulmadan) gerçek fail savunması 223/2-b'ye ulaşamaz.
       goldenPath(
         'OLGU_D',
@@ -833,6 +932,18 @@ export const tests: CasePart = {
         CELSE2('T06_X', 'T06SX_DEVAM', { k7: false }),
       ),
       goldenPath(
+        'OLGU_EK',
+        { outcome: 'BERAAT_E' },
+        PROLOG('BR00_C', 'BR01_A', 'STR_USUL'),
+        GUN1,
+        GUN2,
+        GUN3,
+        GUN4,
+        CELSE1_ARACSIZ,
+        ARA_EK,
+        CELSE2('T06_E', 'T06SE_DEVAM', { k7: false }),
+      ),
+      goldenPath(
         'OLGU_B',
         { outcome: 'NITELIK' },
         PROLOG('BR00_C', 'BR01_A', 'STR_MASUMIYET'),
@@ -841,8 +952,8 @@ export const tests: CasePart = {
         GUN3,
         GUN4,
         CELSE1,
-        ARA_TAM(true),
-        CELSE2('T06_B', 'T06SF_DEVAM', { bilirkisi: false }),
+        ARA_YUZLESME,
+        CELSE2('T06_B', 'T06SF_DEVAM', { bilirkisi: false, k7: false }),
       ),
       // Çöküş: savunma ikinci celsede düşer; dönüş yok ilk celsede kayda geçtiği için heyet 87/4'te kalır.
       goldenPath(

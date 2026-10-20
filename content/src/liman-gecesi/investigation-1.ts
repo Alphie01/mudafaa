@@ -1201,8 +1201,8 @@ const turnike = documentExam('INV_TURNIKE', {
   rows: [
     row('g1', ['23.02', 'Personel 1', 'Ş. BALCI', 'giriş']),
     row('g2', ['23.18', 'Personel 2', 'T. DEMİREL', 'çıkış']),
-    row('g3', ['23.26', 'Personel 1', 'M. ÖZ', 'çıkış']),
     row('g3b', ['23.21', 'Araç kapısı', '16 LMN 07 · servis', 'çıkış']),
+    row('g3', ['23.26', 'Personel 1', 'M. ÖZ', 'çıkış']),
     row('g4', ['23.49 / 00.14', 'Araç kapısı', '16 LMN 07 · servis', 'giriş / çıkış']),
     row('g5', ['06.02', 'Personel 1', 'H. KARA', 'giriş']),
   ],

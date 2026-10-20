@@ -105,6 +105,11 @@ alındı, fıkra numaraları bu metne göredir).
    incelemeye eklemesi) hızı da bilinçli bir sıkıştırmadır.
 11. **Süreklilik.** Halit Ateş 14 yıl önce (2012) öldü; Tarık o sırada 27 yaşındaydı (2026'da 41). 1992 fotoğrafındaki
    yedi yaşındaki çocuk Tarık'tır.
+12. **Yeni rapor olmadan beraat (BERAAT_E_RAPORSUZ).** Savunma yeni bilirkişi istemese de soruşturmadaki raporun mukayese
+   malzemesinin özel ve iki ayrı elden olduğunu (C204B_A), tapu memurunun sol el beyanını ve kurye kaydını kürsüde
+   gösterirse mahkeme raporu tek başına hükme esas almaz; delil serbestçe takdir edilir (CMK 217) ve şüpheden sanık
+   yararlanır (CMK 223/2-e). Gerekçede Adli Tıp raporu satırı yalnızca rapor dosyadaysa görünür. Gerekçesiz talepte gelen
+   belirsiz rapor ise ilk raporu çürütmez; mahkûmiyet gerekçesi bunu ayrıca yazar (MAHKUMIYET_BELIRSIZ).
 
 ## 5. Hassas konu denetimi
 

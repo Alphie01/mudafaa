@@ -117,13 +117,17 @@ yanlış −150 ve −1 güvenilirlik; itiraz +50/+100, dayanaksız −50; esas 
 | ETIK | ETIK | 7 695 | Ara evrede Emre'ye yalan söyletme → 2. celsede çöküş ve azil |
 | COKUS | COKUS | 6 765 | Bilirkişi istenmiyor (dilekçede ve kürsüde); Erol'a beş kez ilgisiz delil → güvenilirlik 0 |
 | UST_KURUL | UST_KURUL | 7 935 | Tipik soruşturma ve gerekçeli rapor; ama 1. celsede sol el açılmıyor, 2. celsede hiçbir çelişki sunulmuyor, terditli savunma |
+| BERAAT_E_RAPORSUZ | BERAAT_E | 10 340 | Tipik soruşturma, bilirkişi hiç istenmiyor; 2. celsede kirli mukayese itirazı (C204B_A) + sol el + mazeret |
+| MAHKUMIYET_BELIRSIZ | MAHKUMIYET | 330 | Mahkûmiyet yolu, ama rapor eki okunup gerekçesiz bilirkişi isteniyor (C105_A2) → belirsiz Adli Tıp raporu (C204B_D) |
 
 ## 9. Erken çözüm denetimi
 
 **İnceleme sonrası (2026-10-21).** Kısa yol araması golden path'lerden açgözlü eksiltmeyle yapıldı (`enumerateActions`
 uzayı tam taranamıyor): her adımda 32/16/8/4/2/1 aksiyonluk bloklar çıkarılıp sonuç beraat kaldıkça kabul edildi.
-Sonuçlar: TIPIK tohumundan **168** aksiyon (BERAAT_E, 9 505), BERAAT_B tohumundan **154** aksiyon (BERAAT_E, 9 500).
-Tipik yol 205 aksiyon: en kısa beraat **%75**. Eski kısa yollar kapandı:
+Sonuçlar (2026-10-21, son düzeltmelerden sonra; tek süreç, 9 dk bütçe): TIPIK tohumundan **143** aksiyon (BERAAT_E,
+9 505), BERAAT_E_RAPORSUZ tohumundan **145** (BERAAT_E, 9 505), BERAAT_B tohumundan **155** (BERAAT_E, 9 505).
+Tipik yol 205 aksiyon: en kısa beraat **%70** (≥ %60 hedefi). Her kısa yol kirli mukayese çıkarımını, sol el
+çelişkisini ve mazereti hâlâ içerir. Eski kısa yollar kapandı:
 
 - İlk gün duruşmaya gidip "yeni rapor" istemek (eski 51 aksiyonluk yol, dosyada kesin Adli Tıp raporuyla mahkûmiyet)
   artık mümkün değil: C105_A2/T_BILIRKISI rapor eki okunmadan görünmez; gerekçesiz talep yalnızca belirsiz rapor getirir.
@@ -131,9 +135,10 @@ Tipik yol 205 aksiyon: en kısa beraat **%75**. Eski kısa yollar kapandı:
   mahkûmiyet de değil).
 - BERAAT_E, rapora ek olarak bağımsız bir destek (sol el çelişkisi ya da mazeret) ve 9 500 eşiği ister.
 
-Seçenek etiketleri: puanı farklı 29 seçenek setinde en iyi seçenek 5 sette en uzun, 5 sette en kısa (önceki 20/31 en uzun).
+Seçenek etiketleri: puanı farklı 31 seçenek setinde en iyi seçenek 5 sette en uzun, 4 sette en kısa (önceki 20/31 en uzun).
 Tipik yolun 1. evre satırları tarandı: Tarık'ın adı yalnızca sıradan bir yeğen olarak (Sevgi'yi getiren, çay ikram eden,
-börek getiren) ve numara çizelgesinde geçer; anlatı onu şüpheli diye işaretlemez; "ne lazımsa" yardımseverliği Emre'de de
+börek getiren) ve numara çizelgesinde geçer; anlatı onu şüpheli diye işaretlemez (börek gecesinde dosyalara bakışı ve
+dijital odadaki "sır" düşüncesi de çıkarıldı); "ne lazımsa" yardımseverliği Emre'de de
 var. Soğuk açılış el değişimini göstermez ("Zincir gerildi."); yazıcı günlüğündeki bilgisayar MATBAA-PC.
 
 **Leyla'nın ters çerçevesi** (BR_01, ARA_AKSAM2, ARA_SON, BERAAT_B epilogu) bilinçli olarak bu davada çözülmez: seri
@@ -145,15 +150,21 @@ düzeyinde bir arktır (Leyla'nın otuz yıl önceki davası), sonraki davalara 
 
 ```
   TIPIK         103.9 dk   15013 sözcük   205 aksiyon  BERAAT_E (11020)
-  BERAAT_B      104.2 dk   14988 sözcük   210 aksiyon  BERAAT_B (12060)
-  INDIRIM        81.5 dk   11794 sözcük   160 aksiyon  INDIRIM (4490)
-  MAHKUMIYET     67.7 dk    9509 sözcük   149 aksiyon  MAHKUMIYET (-100)
-  ETIK           85.3 dk   12151 sözcük   178 aksiyon  ETIK (7695)
-  COKUS          88.5 dk   12569 sözcük   187 aksiyon  COKUS (6765)
-  UST_KURUL      94.1 dk   13453 sözcük   194 aksiyon  UST_KURUL (7935)
+  BERAAT_B      104.3 dk   14988 sözcük   210 aksiyon  BERAAT_B (12060)
+  INDIRIM        81.6 dk   11809 sözcük   160 aksiyon  INDIRIM (4490)
+  MAHKUMIYET     67.8 dk    9524 sözcük   149 aksiyon  MAHKUMIYET (-100)
+  ETIK           85.4 dk   12166 sözcük   178 aksiyon  ETIK (7695)
+  COKUS          88.6 dk   12584 sözcük   187 aksiyon  COKUS (6765)
+  UST_KURUL      94.2 dk   13468 sözcük   194 aksiyon  UST_KURUL (7935)
+  BERAAT_E_RAPORSUZ  101.7 dk   14673 sözcük   202 aksiyon  BERAAT_E (10340)
+  MAHKUMIYET_BELIRSIZ   68.7 dk    9719 sözcük   147 aksiyon  MAHKUMIYET (330)
   ==> TİPİK YOL (TIPIK): 103.9 dk  ✓ süre hedefte
   ==> SÖZCÜK BÜTÇESİ: ✓ 15013 sözcük: hedefte (15–25 bin)
 ```
+
+`npm run case:validate -- sahte-imza` (varsayılan bütçe, 2026-10-21): **PASSED**, 0 hata; kapsam node 115/115, seçenek
+239/239, kural 83/83, delil 49/49; 9/9 golden path. Kalan uyarılar: BFS durum bütçesi (derin durumlar yürüyüşle
+örneklendi) ve `ev_rapor2_belirsiz` için PRESENT kuralı olmaması (belirsiz rapor yalnızca C204B_D'de ve gerekçede kullanılır).
 
 ## 11. Toplam metin
 

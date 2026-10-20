@@ -31,7 +31,29 @@ class _InvestigationNodeState extends State<InvestigationNode> {
     final cast = m(widget.view['cast']);
     final preview = m(node['scenePreview']);
     final current = tabs.isEmpty ? null : tabs[_tab.clamp(0, tabs.length - 1)];
+    final status = ms(widget.view['lines']);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      // Hub bir menüdür: giriş satırları oynatılmaz, kısa durum / hedef kutusu olarak durur.
+      if (status.isNotEmpty) ...[
+        Container(
+          key: const ValueKey('hub-status'),
+          padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+          decoration: BoxDecoration(color: PxColors.ink, border: Border.all(color: PxColors.panelHi, width: 2)),
+          child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Container(width: 8, height: 8, margin: const EdgeInsets.only(top: 6, right: 8), color: PxColors.gold),
+            Expanded(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                for (final l in status)
+                  Text(
+                    l['speaker'] == 'narrator' || l['speaker'] == 'player' ? l['text'] as String : '${trUpper((m(cast[l['speaker']])['shortLabel'] ?? l['speaker']) as String)}: ${l['text']}',
+                    style: PxText.body(19, color: PxColors.muted),
+                  ),
+              ]),
+            ),
+          ]),
+        ),
+        const SizedBox(height: 12),
+      ],
       if (tabs.isNotEmpty)
         Row(children: [
           for (var i = 0; i < tabs.length; i++)

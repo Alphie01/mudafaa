@@ -1,0 +1,338 @@
+{
+ "title": "Olay yeri araması",
+ "description": "Iska ve isabet: geri bildirim üstte toast olarak çıkar, görsel kımıldamaz; skor etiketi rozet.",
+ "steps": [
+  {
+   "session": {
+    "id": "dev-session",
+    "caseId": "dev-case",
+    "caseNumber": 0,
+    "caseTitle": "Örnek Dosya",
+    "stateVersion": 20,
+    "status": "ACTIVE",
+    "mode": "TEST"
+   },
+   "header": {
+    "eyebrow": "ÖRNEK · ARA",
+    "title": "Depo sokağı fotoğrafları",
+    "back": {
+     "a11yLabel": "Aramayı bitir",
+     "choiceId": "A_BITIR"
+    }
+   },
+   "hud": [
+    {
+     "id": "taps",
+     "label": "Büyüteç",
+     "widget": "counter",
+     "value": 6,
+     "max": 6
+    }
+   ],
+   "cast": {
+    "sen": {
+     "name": "Av. Deniz",
+     "shortLabel": "Deniz",
+     "role": "COUNSEL",
+     "accent": "#2f6dbb",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...khhhhhhhhk...",
+       "...khhhhhhhhk...",
+       "...khsssssshk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...ksssSSsssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkmwrrwmkk...",
+       "..knnmwrrwmnnk..",
+       "..knnnmrrmnnnk..",
+       "..knNnnmmnnNnk..",
+       "..knNnnmmnnNnk..",
+       "..kSnnnmmnnnSk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkk..kkkk..."
+      ]
+     }
+    }
+   },
+   "lines": [],
+   "choices": [
+    {
+     "id": "A_BITIR",
+     "kind": "CONTINUE",
+     "label": "Aramayı bitir",
+     "available": true,
+     "used": false
+    }
+   ],
+   "bag": {
+    "items": []
+   },
+   "notebook": {
+    "items": []
+   },
+   "node": {
+    "type": "SCENE",
+    "id": "SC_ARAMA",
+    "imageUrl": "/_dev/sahne-yok.png",
+    "width": 344,
+    "height": 214,
+    "instruction": "Fotoğrafta tuhaf olanı bul. Her dokunuş bir büyüteç harcar.",
+    "found": [],
+    "hiddenTotal": 3
+   }
+  },
+  {
+   "session": {
+    "id": "dev-session",
+    "caseId": "dev-case",
+    "caseNumber": 0,
+    "caseTitle": "Örnek Dosya",
+    "stateVersion": 21,
+    "status": "ACTIVE",
+    "mode": "TEST"
+   },
+   "header": {
+    "eyebrow": "ÖRNEK · ARA",
+    "title": "Depo sokağı fotoğrafları",
+    "back": {
+     "a11yLabel": "Aramayı bitir",
+     "choiceId": "A_BITIR"
+    }
+   },
+   "hud": [
+    {
+     "id": "taps",
+     "label": "Büyüteç",
+     "widget": "counter",
+     "value": 5,
+     "max": 6
+    }
+   ],
+   "cast": {
+    "sen": {
+     "name": "Av. Deniz",
+     "shortLabel": "Deniz",
+     "role": "COUNSEL",
+     "accent": "#2f6dbb",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...khhhhhhhhk...",
+       "...khhhhhhhhk...",
+       "...khsssssshk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...ksssSSsssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkmwrrwmkk...",
+       "..knnmwrrwmnnk..",
+       "..knnnmrrmnnnk..",
+       "..knNnnmmnnNnk..",
+       "..knNnnmmnnNnk..",
+       "..kSnnnmmnnnSk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkk..kkkk..."
+      ]
+     }
+    }
+   },
+   "lines": [],
+   "choices": [
+    {
+     "id": "A_BITIR",
+     "kind": "CONTINUE",
+     "label": "Aramayı bitir",
+     "available": true,
+     "used": false
+    }
+   ],
+   "bag": {
+    "items": []
+   },
+   "notebook": {
+    "items": []
+   },
+   "node": {
+    "type": "SCENE",
+    "id": "SC_ARAMA",
+    "imageUrl": "/_dev/sahne-yok.png",
+    "width": 344,
+    "height": 214,
+    "instruction": "Fotoğrafta tuhaf olanı bul. Her dokunuş bir büyüteç harcar.",
+    "found": [],
+    "hiddenTotal": 3
+   },
+   "last": {
+    "resolution": "MISS",
+    "feedback": {
+     "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)",
+     "label": "−10 SKOR",
+     "tone": "error"
+    },
+    "lines": [],
+    "fx": [
+     {
+      "kind": "VAR",
+      "label": "Büyüteç",
+      "delta": -1,
+      "id": "taps"
+     },
+     {
+      "kind": "SCORE",
+      "label": "−10 SKOR",
+      "delta": -10
+     }
+    ],
+    "discovered": [],
+    "nodeChanged": false,
+    "completed": false
+   }
+  },
+  {
+   "session": {
+    "id": "dev-session",
+    "caseId": "dev-case",
+    "caseNumber": 0,
+    "caseTitle": "Örnek Dosya",
+    "stateVersion": 22,
+    "status": "ACTIVE",
+    "mode": "TEST"
+   },
+   "header": {
+    "eyebrow": "ÖRNEK · ARA",
+    "title": "Depo sokağı fotoğrafları",
+    "back": {
+     "a11yLabel": "Aramayı bitir",
+     "choiceId": "A_BITIR"
+    }
+   },
+   "hud": [
+    {
+     "id": "taps",
+     "label": "Büyüteç",
+     "widget": "counter",
+     "value": 4,
+     "max": 6
+    }
+   ],
+   "cast": {
+    "sen": {
+     "name": "Av. Deniz",
+     "shortLabel": "Deniz",
+     "role": "COUNSEL",
+     "accent": "#2f6dbb",
+     "sprite": {
+      "rows": [
+       "....kkkkkkkk....",
+       "...khhhhhhhhk...",
+       "...khhhhhhhhk...",
+       "...khsssssshk...",
+       "...kssssssssk...",
+       "...ksessssesk...",
+       "...kssssssssk...",
+       "...ksssSSsssk...",
+       "....kssssssk....",
+       ".....kkSSkk.....",
+       "...kkmwrrwmkk...",
+       "..knnmwrrwmnnk..",
+       "..knnnmrrmnnnk..",
+       "..knNnnmmnnNnk..",
+       "..knNnnmmnnNnk..",
+       "..kSnnnmmnnnSk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnmmnnnnk..",
+       "..knnnnnnnnnnk..",
+       "...kkkk..kkkk..."
+      ]
+     }
+    }
+   },
+   "lines": [],
+   "choices": [
+    {
+     "id": "A_BITIR",
+     "kind": "CONTINUE",
+     "label": "Aramayı bitir",
+     "available": true,
+     "used": false
+    }
+   ],
+   "bag": {
+    "items": []
+   },
+   "notebook": {
+    "items": [
+     {
+      "id": "cl_ampul",
+      "title": "Lamba ampulü kararmış",
+      "sourceLabel": "Olay yeri",
+      "icon": "bulb"
+     }
+    ]
+   },
+   "node": {
+    "type": "SCENE",
+    "id": "SC_ARAMA",
+    "imageUrl": "/_dev/sahne-yok.png",
+    "width": 344,
+    "height": 214,
+    "instruction": "Fotoğrafta tuhaf olanı bul. Her dokunuş bir büyüteç harcar.",
+    "found": [
+     {
+      "objectId": "ob_lamba",
+      "rect": {
+       "x": 244,
+       "y": 44,
+       "w": 64,
+       "h": 52
+      },
+      "label": "Lamba"
+     }
+    ],
+    "hiddenTotal": 3
+   },
+   "last": {
+    "resolution": "HIT",
+    "feedback": {
+     "text": "Lamba ampulü kararmış, camı tozlu. Uzun süredir yanmıyor gibi.",
+     "tone": "success"
+    },
+    "lines": [],
+    "fx": [
+     {
+      "kind": "VAR",
+      "label": "Büyüteç",
+      "delta": -1,
+      "id": "taps"
+     },
+     {
+      "kind": "EVIDENCE",
+      "label": "Lamba ampulü kararmış",
+      "id": "cl_ampul"
+     },
+     {
+      "kind": "SCORE",
+      "label": "+40 SKOR",
+      "delta": 40
+     }
+    ],
+    "discovered": [
+     "cl_ampul"
+    ],
+    "nodeChanged": false,
+    "completed": false
+   }
+  }
+ ]
+}

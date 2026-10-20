@@ -1,10 +1,14 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../design_system/motion/retro_motion.dart';
 import '../design_system/tokens/px_colors.dart';
+import '../features/dev/dev_gallery.dart';
 import '../features/auth/login_screen.dart';
 import '../features/cases/cases_screen.dart';
 import '../features/home/home_screen.dart';
@@ -29,6 +33,8 @@ final router = GoRouter(
   initialLocation: '/',
   refreshListenable: _auth,
   redirect: (context, state) {
+    // Geliştirici galerisi yalnızca debug derlemede vardır ve oturum gerektirmez.
+    if (kDebugMode && state.matchedLocation.startsWith('/_dev')) return null;
     final signedIn = FirebaseAuth.instance.currentUser != null;
     final atLogin = state.matchedLocation == '/login';
     if (!signedIn && !atLogin) return '/login';
@@ -41,6 +47,10 @@ final router = GoRouter(
     GoRoute(path: '/cases', builder: (_, _) => const CasesScreen()),
     GoRoute(path: '/play/:id', builder: (_, s) => PlayScreen(sessionId: s.pathParameters['id']!)),
     GoRoute(path: '/sessions/:id/report', builder: (_, s) => ResultScreen(sessionId: s.pathParameters['id']!)),
+    if (kDebugMode) ...[
+      GoRoute(path: '/_dev/play', builder: (_, _) => const DevGalleryScreen()),
+      GoRoute(path: '/_dev/play/:fixture', builder: (_, s) => DevPlayScreen(fixture: s.pathParameters['fixture']!)),
+    ],
   ],
 );
 
@@ -68,7 +78,12 @@ class MudafaaApp extends StatelessWidget {
         );
         return MediaQuery(
           data: mq.copyWith(textScaler: mq.textScaler.clamp(minScaleFactor: 1, maxScaleFactor: 1.3)),
-          child: mq.size.width >= 600 ? framed : (child ?? const SizedBox()),
+          child: Consumer(
+            builder: (context, ref, _) => MotionScope(
+              motion: ref.watch(retroMotionProvider),
+              child: mq.size.width >= 600 ? framed : (child ?? const SizedBox()),
+            ),
+          ),
         );
       },
     );

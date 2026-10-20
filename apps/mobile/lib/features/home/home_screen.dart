@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../data/auth.dart';
 import '../../data/providers.dart';
+import '../../design_system/motion/motion_toggle.dart';
 import '../../design_system/tokens/px_colors.dart';
 import '../../design_system/tokens/px_text.dart';
 import '../../design_system/widgets/px_box.dart';
@@ -63,7 +64,9 @@ class HomeScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 14),
                   Row(children: [
-                    Expanded(child: PxButton(label: 'Çıkış', tone: PxTone.secondary, height: 46, fontSize: 14, onTap: AuthActions.signOut)),
+                    const Expanded(flex: 3, child: MotionToggle()),
+                    const SizedBox(width: 10),
+                    Expanded(flex: 2, child: PxButton(label: 'Çıkış', tone: PxTone.secondary, height: 46, fontSize: 14, onTap: AuthActions.signOut)),
                   ]),
                   const SizedBox(height: 22),
                   PxBox(

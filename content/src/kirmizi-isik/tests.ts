@@ -423,7 +423,7 @@ const yolM = [
     choose('TP_CARPMA', 'hard'),
     choose('G_BITIR'),
   ],
-  chooseAll('H_T_SER', 'SQ_SIKAYET', 'SQ_OUT'),
+  chooseAll('H_LEYLA', 'LEYLA_GERI', 'H_T_SER', 'SQ_SIKAYET', 'SQ_OUT'),
   choose('AK1_A'),
   // Gün 2
   dilekce('DIL_SABIKA', 'DIL_KESIF'),

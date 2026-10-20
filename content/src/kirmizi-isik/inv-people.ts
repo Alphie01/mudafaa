@@ -135,7 +135,10 @@ export const invPeople: CasePart = {
             soft: {
               prompt: 'O geceyi baştan anlatır mısınız? Fabrikadan çıktığınız andan.',
               says: [
-                L('volkan', 'Vardiya on birde bitiyordu. Makine durdu, ustabaşı gelmedi, kaldım. Biri on geçe çıktım.'),
+                L(
+                  'volkan',
+                  'Vardiya on birde bitiyordu. Makine durdu, ustabaşı gelmedi, kaldım. On iki kırkta çıktım.',
+                ),
                 L(
                   'volkan',
                   'Sabah dokuzda Gül’le doktordaydık. Kızın kalbini dinlettiler. Sonra akşam vardiya. Uyumadım. On dokuz saat.',
@@ -152,7 +155,7 @@ export const invPeople: CasePart = {
               says: [
                 L(
                   'volkan',
-                  'Sabah yedide kalktım. Doktor dokuzda. İkide eve geldim, yatamadım. Üçte vardiya. Biri on geçe çıktım.',
+                  'Sabah yedide kalktım. Doktor dokuzda. İkide eve geldim, yatamadım. Üçte vardiya. On iki kırkta çıktım.',
                   'kizgin',
                 ),
                 L(
@@ -551,7 +554,7 @@ export const invPeople: CasePart = {
             T('“Biri suçlu olmalı.” Bu dosyanın bütün yükü bu üç kelimede. Herkes birini arıyor; en yakındaki Volkan.'),
           ),
         }),
-        option('NQ_ARAC', '“Gümbürtüden önce Gökdere’den başka bir araç geçti mi?”', {
+        option('NQ_ARAC', '“Siz ışıkta beklerken Gökdere’den başka araç geçti mi?”', {
           score: { SORGULAMA: 30 },
           effects: [raise('fact_minibus')],
           responses: says(

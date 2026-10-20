@@ -136,19 +136,21 @@ contra_c2 ∨ arg_heyet)), bilinçli taksir.
 
 | Ad | Strateji | Sonuç | Final | Aksiyon | Süre |
 |---|---|---|---|---|---|
-| TIPIK | Kusur itirazı | BERAAT_E | 11.385 | 210 | 93,9 dk |
-| G_B | İlliyet | BERAAT_B | 12.060 | 217 | 95,0 dk |
-| G_ETIK | İlliyet (garaj) | ETIK | 11.060 | 216 | 93,2 dk |
-| G_I | Terditli | INDIRIM | 6.365 | 179 | 75,7 dk |
-| G_M | Kusur itirazı (kötü avukatlık) | MAHKUMIYET | −200 | 140 | 60,9 dk |
-| W | Kusur itirazı (çöküş, 3. celsede) | MAHKUMIYET | 4.700 | 149 | 68,4 dk |
+| TIPIK | Kusur itirazı | BERAAT_E | 11.385 | 210 | 94,1 dk |
+| G_B | İlliyet | BERAAT_B | 12.060 | 217 | 95,2 dk |
+| G_ETIK | İlliyet (garaj) | ETIK | 11.060 | 216 | 93,3 dk |
+| G_I | Terditli | INDIRIM | 6.365 | 179 | 75,8 dk |
+| G_M | Kusur itirazı (kötü avukatlık) | MAHKUMIYET | −200 | 142 | 61,4 dk |
+| W | Kusur itirazı (çöküş, 3. celsede) | MAHKUMIYET | 4.700 | 149 | 68,6 dk |
 
 Pencereler ölçülen finalin ±%5'i. Bütün yollar `case:validate` ile oynatılır; kapsam node/seçenek/kural/delil %100.
 
 ## 10. Erken çözüm denetimi
 
-- **En kısa beraat:** TIPIK'ten aksiyon silerek küçültme 174 aksiyonda BERAAT_E'ye (TIPIK'in %83'ü), G_B'den küçültme 185
-  aksiyonda BERAAT_B'ye (%88) iner. `enumerateActions` üzerinde ışın araması (beam 300) için §13'e bakın. Hedef ≥ %60.
+- **En kısa beraat:** iki yöntemle arandı. (1) Golden path'ten aksiyon silerek küçültme (ddmin, 32'lik bloklardan teke):
+  TIPIK → 174 aksiyonda BERAAT_E (TIPIK'in 210 aksiyonunun %83'ü); G_B → 185 aksiyonda BERAAT_B (%88). (2) `enumerateActions`
+  üzerinde ışın araması (beam 300, ilerleme = ham skor + çelişki bayrakları + ikna + delil sayısı): ilk beraat 202 aksiyonda
+  (BERAAT_B, %96). En kısa bulunan beraat 174 aksiyon = **%83** (hedef ≥ %60).
 - **Neden kısa yol yok:** beraat; kırmızı ışık iddiasının kürsüde çökmesi (ded_goremez, sinyal günlüğü ya da ded_ariza + sesli
   mesaj), en az beş çelişki, ikna ≥ 6, 9.000 final ve uyumlu esas savunmanın birlikte tutmasını ister. Bu bulguların her biri
   ayrı bir etkinlikte, çoğu iki ayrı mekânda (sahne + belge, görüşme + tahta) kurulur; 223/2-b ayrıca ara evresinde boya
@@ -163,14 +165,29 @@ Pencereler ölçülen finalin ±%5'i. Bütün yollar `case:validate` ile oynatı
 `npm run case:duration -- kirmizi-isik` (2026-10-20):
 
 ```
-TIPIK          93.9 dk   13129 sözcük   210 aksiyon  BERAAT_E (11385)
-G_B            95.0 dk   13193 sözcük   217 aksiyon  BERAAT_B (12060)
-G_ETIK         93.2 dk   12882 sözcük   216 aksiyon  ETIK (11060)
-G_I            75.7 dk   10398 sözcük   179 aksiyon  INDIRIM (6365)
-G_M            60.9 dk    8434 sözcük   140 aksiyon  MAHKUMIYET (-200)
-W              68.4 dk    9637 sözcük   149 aksiyon  MAHKUMIYET (4700)
-==> TİPİK YOL (TIPIK): 93.9 dk  ✓ süre hedefte
+TIPIK          94.1 dk   13159 sözcük   210 aksiyon  BERAAT_E (11385)
+G_B            95.2 dk   13223 sözcük   217 aksiyon  BERAAT_B (12060)
+G_ETIK         93.3 dk   12912 sözcük   216 aksiyon  ETIK (11060)
+G_I            75.8 dk   10428 sözcük   179 aksiyon  INDIRIM (6365)
+G_M            61.4 dk    8490 sözcük   142 aksiyon  MAHKUMIYET (-200)
+W              68.6 dk    9667 sözcük   149 aksiyon  MAHKUMIYET (4700)
+==> TİPİK YOL (TIPIK): 94.1 dk  ✓ süre hedefte
+==> KAPI: ✓ GEÇTİ
 ```
+
+`npm run case:validate -- kirmizi-isik`: **PASSED — 0 hata, 1 uyarı (SIMULATION_INCOMPLETE, uzun davada beklenen)**;
+~61.500 durum, 400 yürüyüş; bütün sonuçlara ulaşıldı; kapsam node 101/101, seçenek 236/236, kural 77/77, delil 44/44;
+golden path 6/6; softlock, çıkmaz, sızıntı yok. Final skor aralığı −3.435…12.060.
 
 Paket toplamı: 1.326 satır, 15.961 satır sözcüğü; etiket, geri bildirim, belge ve hüküm metinleriyle ~23.900 sözcük. En uzun
 satır 203 karakter.
+
+## 12. Görseller ve sprite'lar
+
+- Sahneler: `content/src/kirmizi-isik/scenes/{kavsak-gece,kavsak-sabah,otopark}.html` → `npm run case:scenes -- kirmizi-isik`
+  → `content/cases/kirmizi-isik/assets/scenes/*@4x.png` (344 × 300, ×4).
+- Yeni karakterler (Volkan, Gül, Necati, Serkan, Hamdi, Sevim, Nalan, Rüstem) `content/src/kirmizi-isik/sprites.ts` içinde
+  satır içi `SpriteDef` olarak tutulur. Önce kılavuzdaki gibi `content/shared/sprites/kirmizi-isik-*.json` olarak yazılıp
+  `case:sprite-preview` ile denetlendi; ancak `tools/content/test/extract-sprites.test.ts` o dizinin yalnızca tasarımdan
+  çıkarılan 21 ortak sprite'ı içermesini şart koştuğundan (content-tools kapısı) dava kaynağına taşındı. Ortak sprite'lar
+  (mentor, avukat_cubbe, hakim, savci, rakip, mubasir, polis, bilirkisi, anne, katip) `sharedSprite` ile kullanılır.

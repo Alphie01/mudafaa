@@ -34,9 +34,13 @@ export const briefing: CasePart = {
         ),
         V('TELEFONDAKİ SES', 'Yine mi son vardiya? Saat bir oldu.', 'phone'),
         V('SÜRÜCÜ', 'Ustabaşı gelmedi. Makine durdu. Ne yapayım, bırakıp mı geleyim?'),
-        V('TELEFONDAKİ SES', 'Yarın doktor var. Saat dokuzda. Unuttun değil mi?', 'phone'),
-        V('SÜRÜCÜ', 'Unutmadım.'),
-        V('TELEFONDAKİ SES', 'Unuttun. Bebek bütün akşam tekmeledi. Sen yoktun. Kira da…', 'phone'),
+        V(
+          'TELEFONDAKİ SES',
+          'Sabah doktordaydık, öğleden sonra vardiya, şimdi gece biri. Ne zaman uyuyacaksın?',
+          'phone',
+        ),
+        V('SÜRÜCÜ', 'Eve gelince.'),
+        V('TELEFONDAKİ SES', 'Hep eve gelince. Bebek bütün akşam tekmeledi. Sen yoktun. Kira da…', 'phone'),
         V('SÜRÜCÜ', 'Kirayı biliyorum. Biliyorum. Lütfen şimdi değil.'),
         N('Bir sessizlik. Hoparlörden onun nefesi geliyordu, bir de mutfakta açık kalmış bir musluğun sesi.'),
         V('TELEFONDAKİ SES', 'Dikkatli gel. Yollar kaygan.', 'phone'),
@@ -44,7 +48,7 @@ export const briefing: CasePart = {
         N(
           'Parmağı ekrandaki kırmızı ahizeye dokundu. Ekran karardı. Önünde, iki yüz metre ileride, kavşağın ışığı yeşil yanıyordu.',
         ),
-        N('Gökdere’nin bu saatte boş olduğu söylenir. Boş değildir. Sadece kimse kimseyi görmez.'),
+        N('Gökdere bu saatte boş görünür. Gece yarısından sonra bütün yollar boş görünür; insanın kafası doluysa.'),
         N(
           'Islak asfaltta sodyum lambalarının turuncusu, bir de yeşilin titreyen yansıması. Yaya geçidinin beyaz çizgileri. Yağmur onları siliyordu.',
         ),

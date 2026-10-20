@@ -214,7 +214,7 @@ export const evidencePart: CasePart = {
     clue('clue_uedas', {
       type: 'BELGE',
       title: 'UEDAŞ yazısı: 00.58 gerilim düşümü',
-      shortText: 'Gökdere fiderinde 14 Kasım 00.58.10’da 3 saniyelik gerilim düşümü.',
+      shortText: 'Gökdere fiderinde 14 Kasım 00.58.12’de 3 saniyelik gerilim düşümü.',
       description: 'Elektrik dağıtım şirketinin resmî yanıtı. Saat, şebeke kayıtlarına göre kesindir.',
       sourceLabel: 'UEDAŞ (dilekçe)',
       icon: 'bulb',

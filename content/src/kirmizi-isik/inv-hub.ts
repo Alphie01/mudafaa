@@ -541,7 +541,7 @@ export const invHub: CasePart = {
       lines: [
         when(
           all(flag('dil_verildi'), any(has('ev_sinyal_log'), has('clue_uedas'))),
-          card('PAZARTESİ 23.30 — ARSLAN HUKUK', 'buro_gece'),
+          card('DURUŞMADAN ÖNCEKİ GECE · 23.30 — ARSLAN HUKUK', 'buro_gece'),
           N(
             'Son evrak bu akşam geldi. Zarfları açtım, masaya dizdim, panoya iğneledim. Duvar bir suç haritasına döndü; ya da bir kaza haritasına. Hangisi olduğunu yarın öğreneceğiz.',
           ),
@@ -550,7 +550,7 @@ export const invHub: CasePart = {
           ),
         ),
         otherwise(
-          card('PAZARTESİ 23.30 — ARSLAN HUKUK', 'buro_gece'),
+          card('DURUŞMADAN ÖNCEKİ GECE · 23.30 — ARSLAN HUKUK', 'buro_gece'),
           N(
             'Panoyu topladım. Raptiyeler, kroki, bir otopsi raporunun fotokopisi. Yağmur yine başlamıştı; camda ince çizgiler.',
           ),

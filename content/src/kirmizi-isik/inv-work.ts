@@ -102,7 +102,7 @@ export const baseRecipes = (prefix: string): ChoiceDef[] => {
       'clue_uedas',
       'ded_saat',
       'Yedi saniye önce geçen araç',
-      'Lambaların söndüğü an UEDAŞ’a göre 00.58.10, kameraya göre 01.05.12: kamera yedi dakika ileri. Koyu araç 01.11.41’de, Volkan 01.11.48’de geçmiş.',
+      'Lambaların söndüğü an UEDAŞ’a göre 00.58.12, kameraya göre 01.05.12: kamera yedi dakika ileri. Koyu araç 01.11.41’de, Volkan 01.11.48’de geçmiş.',
     ),
   ];
 };

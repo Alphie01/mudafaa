@@ -1,9 +1,8 @@
 import { character, sharedSprite } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
+import { caseSprites } from './sprites.js';
 
 // 10-cast: sprite'lar, karakterler ve ilişkiler. Yeni karakterler content/shared/sprites/kirmizi-isik-*.json.
-
-const own = (name: string) => sharedSprite(`kirmizi-isik-${name}`, `kirmizi_isik_${name}`);
 
 export const cast: CasePart = {
   sprites: [
@@ -17,14 +16,7 @@ export const cast: CasePart = {
     sharedSprite('bilirkisi'),
     sharedSprite('anne'),
     sharedSprite('katip'),
-    own('volkan'),
-    own('gul'),
-    own('necati'),
-    own('serkan'),
-    own('hamdi'),
-    own('sevim'),
-    own('nalan'),
-    own('rustem'),
+    ...caseSprites,
   ],
   characters: [
     character('deniz', {

@@ -134,7 +134,7 @@ export const scenes: CasePart = {
         sceneObject('ob_ekran', 'Multimedya ekranı', OB_EKRAN, {
           discovers: 'ev_multimedya',
           score: { ARASTIRMA: 60 },
-          text: 'Son aramalar: “Gül · 01.09 · Bluetooth · 02.30”. Telefonla değil, arabanın hoparlöründen konuşmuş. Ekranın kenarında bir çocuk doktorunun randevu hatırlatması: “14 Kasım 09.00.”',
+          text: 'Son aramalar: “Gül · 01.09 · Bluetooth · 02.30”. Telefonla değil, arabanın hoparlöründen konuşmuş. Ekranın kenarında bir çocuk doktorunun randevu hatırlatması: “13 Kasım 09.00.”',
           short: 'Arama kaydı',
         }),
         sceneObject('ob_bebek', 'Arka koltuk', OB_BEBEK, {

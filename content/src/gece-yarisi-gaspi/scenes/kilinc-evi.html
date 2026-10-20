@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sahne · Kılınçların evi</title>
+    <!--
+  Dava #05: Yıldırım'da iki oda bir salon. Dokunma alanları SceneDef nesneleridir:
+  komodin (40,250,56,40) · balkon kapısı (230,40,90,110) · vitrin fotoğrafı (130,90,60,50) ·
+  ayna kenarı vesikalık (40,120,40,50) · duvar saati (150,20,40,40). Palet: zemin #141026, duvar #2b2350, kenar #120d1c.
+-->
+    <style>
+      body {
+        margin: 0;
+        background: #141026;
+      }
+      #scene {
+        position: relative;
+        width: 344px;
+        height: 380px;
+        overflow: hidden;
+        background: #141026;
+        font-family: 'Pixelify Sans', monospace;
+        color: #efe8ff;
+      }
+      #scene div {
+        position: absolute;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <!-- duvar ve halı -->
+      <div style="left: 0; right: 0; top: 0; height: 240px; background: #3a2f4a"></div>
+      <div
+        style="
+          left: 0;
+          right: 0;
+          top: 0;
+          height: 240px;
+          background: repeating-linear-gradient(90deg, rgba(18, 13, 28, 0.12) 0 2px, transparent 2px 22px);
+        "
+      ></div>
+      <div style="left: 0; right: 0; top: 236px; bottom: 0; background: #4a3a2e; border-top: 4px solid #120d1c"></div>
+      <div
+        style="left: 110px; top: 300px; width: 200px; height: 60px; background: #7d2e48; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 122px; top: 310px; width: 176px; height: 40px; border: 2px dashed #e8b13c"></div>
+      <!-- duvar saati -->
+      <div
+        style="
+          left: 152px;
+          top: 22px;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: #f4efe6;
+          border: 3px solid #120d1c;
+        "
+      ></div>
+      <div style="left: 169px; top: 28px; width: 2px; height: 13px; background: #120d1c"></div>
+      <div style="left: 169px; top: 39px; width: 11px; height: 2px; background: #120d1c"></div>
+      <!-- vitrin ve fotoğraf -->
+      <div
+        style="left: 112px; top: 70px; width: 96px; height: 150px; background: #6e4a32; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 120px; top: 150px; width: 80px; height: 4px; background: #120d1c"></div>
+      <div
+        style="left: 136px; top: 96px; width: 48px; height: 38px; background: #e6c46a; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 142px; top: 104px; width: 12px; height: 12px; border-radius: 50%; background: #c9805e"></div>
+      <div style="left: 164px; top: 104px; width: 12px; height: 12px; border-radius: 50%; background: #c9805e"></div>
+      <div style="left: 140px; top: 120px; width: 40px; height: 8px; background: #4a4656"></div>
+      <div
+        style="
+          left: 124px;
+          top: 164px;
+          width: 16px;
+          height: 22px;
+          background: rgba(156, 195, 230, 0.5);
+          border: 2px solid #120d1c;
+        "
+      ></div>
+      <div
+        style="
+          left: 148px;
+          top: 164px;
+          width: 16px;
+          height: 22px;
+          background: rgba(156, 195, 230, 0.5);
+          border: 2px solid #120d1c;
+        "
+      ></div>
+      <div
+        style="
+          left: 172px;
+          top: 164px;
+          width: 16px;
+          height: 22px;
+          background: rgba(156, 195, 230, 0.5);
+          border: 2px solid #120d1c;
+        "
+      ></div>
+      <!-- ayna ve vesikalık -->
+      <div
+        style="left: 30px; top: 100px; width: 62px; height: 90px; background: #9cc3e6; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 44px; top: 126px; width: 22px; height: 28px; background: #f4efe6; border: 2px solid #120d1c"
+      ></div>
+      <div style="left: 49px; top: 130px; width: 12px; height: 12px; border-radius: 50%; background: #c9805e"></div>
+      <div style="left: 47px; top: 128px; width: 16px; height: 6px; background: #3a2a24"></div>
+      <!-- balkon kapısı -->
+      <div
+        style="left: 230px; top: 40px; width: 90px; height: 196px; background: #1d1733; border: 5px solid #120d1c"
+      ></div>
+      <div style="left: 273px; top: 40px; width: 5px; height: 196px; background: #120d1c"></div>
+      <div style="left: 238px; top: 56px; width: 30px; height: 60px; background: rgba(239, 232, 255, 0.08)"></div>
+      <div style="left: 236px; top: 120px; width: 80px; height: 6px; background: #4a4656"></div>
+      <div style="left: 296px; top: 60px; width: 6px; height: 10px; background: #f4d36b"></div>
+      <div style="left: 298px; top: 54px; width: 2px; height: 6px; background: #e2802f"></div>
+      <!-- komodin, ilaç -->
+      <div
+        style="left: 36px; top: 250px; width: 64px; height: 60px; background: #6e4a32; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 46px; top: 240px; width: 18px; height: 12px; background: #f4efe6; border: 2px solid #120d1c"
+      ></div>
+      <div
+        style="left: 68px; top: 242px; width: 20px; height: 6px; background: #efe8ff; border: 1px solid #120d1c"
+      ></div>
+      <!-- divan -->
+      <div style="left: 0; top: 200px; width: 30px; height: 70px; background: #45306a; border: 3px solid #120d1c"></div>
+    </div>
+  </body>
+</html>

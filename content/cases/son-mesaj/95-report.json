@@ -44,6 +44,42 @@
         "category": "USUL_BILGISI"
       },
       {
+        "id": "h_ded_zincir",
+        "when": { "not": { "hasEvidence": "ded_zincir" } },
+        "text": "Telefon mühürsüz bir zarfta iki gün durdu, hash ancak 14 Kasım’da alındı; bu boşluğu tahtada kurup kolluğa ve bilirkişiye sorabilirdin (CMK 134).",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_ded_ip",
+        "when": { "not": { "hasEvidence": "ded_ip_tekin" } },
+        "text": "Sağlayıcının yanıtını hesap verisindeki IP ile birleştirseydin, tehdit hattının kime ait olduğu tahtada belirirdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_vakif",
+        "when": { "not": { "hasEvidence": "clue_vakif_yazi" } },
+        "text": "Vakfın gelen evrak defterinde, ses kaydından yedi saat sonra kaydın varlığını bilen bir e-posta duruyordu; ihale dosyasına bakabilirdin.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_uslup_ozan",
+        "when": { "not": { "hasEvidence": "ded_uslup_ozan" } },
+        "text": "Tehditlerin “Sn.” ve “Saygılar.” imzası, mali müşavirin sakladığı e-postada ve vakfa giden yazıda da vardı; tahtada yan yana koyabilirdin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_bilirkisi",
+        "when": { "not": { "flag": "bilirkisi_istendi" } },
+        "text": "Bağımsız bir adli bilişim bilirkişisi istemedin; avukatın teorisi, bilirkişinin ağzından delile dönüşür (CMK 63 vd.).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_rapor",
+        "when": { "all": [{ "flag": "bilirkisi_istendi" }, { "not": { "visited": "ARA_RAPOR" } }] },
+        "text": "Bilirkişi raporu arada dosyaya girdi ama okumadın; Bulgu 3 ve “Sınır” satırı ikinci celsede bilirkişiyi daraltmanın anahtarıydı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
         "id": "h_suc",
         "when": { "all": [{ "not": { "flag": "suc_duyurusu" } }, { "not": { "flag": "karartma" } }] },
         "text": "Gerçek faile giden yol suç duyurusuydu (CMK 158): avukat şüpheliyi kovalamaz, delili savcılığa taşır.",

@@ -114,7 +114,7 @@
         {
           "id": "T00L_IMAJ",
           "kind": "OPTION",
-          "label": "Mühür tutanakla açılsın; imajı alınıp hash’i hesaplansın, inceleme yalnızca kopyada yapılsın.",
+          "label": "Mühür tutanakla açılsın; önce imaj ve hash alınsın.",
           "responses": [
             {
               "lines": [
@@ -162,7 +162,7 @@
         {
           "id": "T00L_AC",
           "kind": "OPTION",
-          "label": "Dizüstü şimdi burada açılsın; ekranı hep birlikte görelim.",
+          "label": "Dizüstü tarafların huzurunda burada açılsın; ekran olduğu gibi tutanağa geçsin.",
           "responses": [
             {
               "lines": [
@@ -318,6 +318,30 @@
           "id": "B3",
           "order": 3,
           "segments": [{ "text": "Ekran görüntüsü teknik olarak bir delil değildir; olsa olsa bir anekdottur." }]
+        },
+        {
+          "id": "B4",
+          "order": 4,
+          "segments": [
+            { "text": "Cihaz 3’ün başında kimin oturduğunu imajdan söyleyemem; " },
+            {
+              "text": "teknik olarak sanığın kendisi de olabilir",
+              "highlightWhen": { "any": [{ "hasEvidence": "ev_isp" }, { "hasEvidence": "ded_hastane" }] }
+            },
+            { "text": "." }
+          ]
+        },
+        {
+          "id": "B5",
+          "order": 5,
+          "segments": [
+            { "text": "İmajın hash değeri, " },
+            {
+              "text": "telefondaki verilerin el değmeden korunduğunu",
+              "highlightWhen": { "hasEvidence": "ded_zincir" }
+            },
+            { "text": " gösterir; bütünlük sorunu yoktur." }
+          ]
         }
       ],
       "stage": {
@@ -510,6 +534,156 @@
           ]
         },
         {
+          "id": "PR_B4",
+          "kind": "PRESS",
+          "match": { "statement": "B4" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Sanık da olabilir, dediniz. Neye dayanarak?" },
+                {
+                  "speaker": "nazli",
+                  "text": "Hiçbir şeye dayanarak değil, müdafi. Bilmediğim şeyi dışlamıyorum. Hesap onun; bir dizüstüden de girebilirdi. Ben yalnızca cihazı söylerim, eli söyleyemem."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bilirkişinin dürüstlüğü, bu dosyada savcının en iyi cümlesi olabilir. Onu daraltmak bana düşüyor; ama kendi kâğıtlarımla.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 25 }]
+        },
+        {
+          "id": "PS_B4",
+          "kind": "PRESENT",
+          "match": { "statement": "B4", "evidence": ["ded_ip_tekin", "ev_isp"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Hesap verisine göre cihaz 3, üç gecenin üçünde de 85.105.44.17 adresinden bağlanmış. Servis sağlayıcısının mahkemeye yazısı dosyada."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Müvekkilimin ev hattı 176.88.12.4. O adres, üç gecenin hiçbirinde görünmüyor."
+                },
+                {
+                  "speaker": "nazli",
+                  "text": "Bu bilgiyle cümlemi daraltırım Sayın Hâkim. Cihaz 3, o gecelerde sanığın evinden değil, bir iş hattından bağlanmış. “Sanık da olabilir” demiştim; doğrusu, “sanığın evinden değil.”"
+                },
+                { "speaker": "tolga", "text": "Sanık o hatta başka bir yoldan erişmiş olamaz mı?" },
+                {
+                  "speaker": "nazli",
+                  "text": "Olabilir, Sayın Savcı. Ama bunu gösteren bir veri yok. Benim işim veriyle konuşmak."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "bilirkisi_el", "op": "set", "value": true },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Hat bilgisi bilirkişinin “sanık da olabilir” cümlesini daralttı: cihaz 3 sanığın hattından bağlanmamış.",
+              "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "PS_B4H",
+          "kind": "PRESENT",
+          "match": { "statement": "B4", "evidence": ["ded_hastane"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "9 Kasım gecesi 02.14’te müvekkilim bir acil serviste onam formu imzalıyor; telefonu hemşire masasında, kilitli."
+                },
+                {
+                  "speaker": "nazli",
+                  "text": "O gece için bir dizüstünün başında olması da beklenemez. En azından bir gece için, “sanık da olabilir” cümlemi geri alırım."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 80 },
+            { "type": "VAR", "var": "bilirkisi_el", "op": "set", "value": true },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "En az bir gece için sanık, cihaz 3’ün başında olamazdı.",
+              "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "PR_B5",
+          "kind": "PRESS",
+          "match": { "statement": "B5" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Hash neyi korur, tam olarak?" },
+                {
+                  "speaker": "nazli",
+                  "text": "Alındığı andaki hâli. Ondan sonra bir bit bile değişse, değer tutmaz. Ondan önceyi ise… hash bilmez."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Ondan önceyi bilmez.” Bir cümle, bir kapı aralığı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 25 }]
+        },
+        {
+          "id": "PS_B5",
+          "kind": "PRESENT",
+          "match": { "statement": "B5", "evidence": ["ded_zincir"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Hash 14 Kasım 11.05’te alındı. Telefon ise 12 Kasım’da mühürsüz, bantlı bir zarfta Şube’de açıldı; iki gün bir çekmecede kaldı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Raporunuzun Bulgu 3’ü: 12 Kasım 15.40–15.52 arası kilit açma, uygulama gezinmesi ve cihaza yazılan on dört yeni dosya."
+                },
+                {
+                  "speaker": "nazli",
+                  "text": "Doğru. Cümlemi düzeltiyorum Sayın Hâkim: hash 14 Kasım’dan sonrasının bütünlüğünü korur. 12 ile 14 Kasım arasını değil; o aralık için elimde bir güvence yok."
+                },
+                {
+                  "speaker": "feride",
+                  "text": "Tutanağa geçirin: el koyma ile kopyalama arasındaki süre için bütünlük güvencesi bulunmamaktadır."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "bilirkisi_zincir", "op": "set", "value": true },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Bilirkişi, hash’in yalnızca 14 Kasım sonrasını koruduğunu, 12–14 Kasım arasının belgesiz kaldığını kabul etti.",
+              "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
           "id": "FB_B_PRESENT",
           "kind": "FALLBACK",
           "fallbackFor": "PRESENT",
@@ -635,13 +809,17 @@
         {
           "id": "T02Q_SAAT",
           "kind": "OPTION",
-          "label": "Bildirimin saatini telefonunuzdan gösterir misiniz?",
+          "label": "Bildirimin saatini gösterir misiniz?",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "narrator",
                   "text": "Hayri Bey telefonu titreyen eliyle hâkime uzattı. Zabıt kâtibi yanına geldi, ekrana baktı, bir şeyler yazdı."
+                },
+                {
+                  "speaker": "derya",
+                  "text": "Ekranda 9 Kasım, saat 02.14 görünüyor Sayın Hâkim. Gönderen: Tarık Aksoy."
                 },
                 {
                   "speaker": "hayri",
@@ -700,7 +878,7 @@
         {
           "id": "T02Q_YOK",
           "kind": "OPTION",
-          "label": "Sorum yok.",
+          "label": "Sorum yok; tanığın beyanı dosyadaki ifadesiyle zaten aynı.",
           "quality": {
             "q": "NEUTRAL",
             "feedback": "Tanığın telefonundaki saati tutanağa geçirme fırsatı kullanılmadı."
@@ -1199,7 +1377,7 @@
                 },
                 {
                   "speaker": "player",
-                  "text": "Oysa bu üç tehdit “Sn. Karaca” ile başlıyor, üç noktayla duruyor, “Saygılar.” ile bitiyor. Tıpkı sizin e-postalarınız gibi. Ofiste bir çıktısı duruyor, gönderen: o.tekin."
+                  "text": "Oysa bu üç tehdit “Sn. Karaca” ile başlıyor, üç noktayla duruyor, “Saygılar.” ile bitiyor. Tıpkı mali müşavire yazdığınız “gerek görmüyorum” e-postası gibi. Gönderen: o.tekin."
                 },
                 {
                   "speaker": "ozan",
@@ -1414,7 +1592,7 @@
         {
           "id": "T04K_SAYGI",
           "kind": "OPTION",
-          "label": "Beyan tutanağa geçsin; müvekkilim katılanın yaşadıklarını hiçbir zaman küçümsemedi.",
+          "label": "Beyan olduğu gibi tutanağa geçsin.",
           "responses": [
             {
               "lines": [
@@ -1473,7 +1651,7 @@
         {
           "id": "T04K_OZUR",
           "kind": "OPTION",
-          "label": "Katılan, bugün müvekkilimden özür dilemelidir.",
+          "label": "Katılan, müvekkilime yönelttiği suçlama için bugün burada özür dilemelidir.",
           "responses": [
             {
               "lines": [
@@ -1530,7 +1708,7 @@
         {
           "id": "T05_A",
           "kind": "OPTION",
-          "label": "25 Ekim mesajları öfkeli ama tehdit değil; üstelik Tarık’ın kendi diliyle, kendi cihazından.",
+          "label": "25 Ekim mesajları öfkeli ama tehdit değil; dili de cihazı da başka.",
           "responses": [
             {
               "lines": [
@@ -1590,7 +1768,7 @@
         {
           "id": "T05_B",
           "kind": "OPTION",
-          "label": "25 Ekim’de hiç mesaj atmadı; o da uydurma.",
+          "label": "25 Ekim mesajlarını da müvekkilim yazmadı; aynı hesaptan aynı kişi göndermiş olabilir.",
           "responses": [
             {
               "lines": [
@@ -1615,7 +1793,7 @@
         {
           "id": "T05_C",
           "kind": "OPTION",
-          "label": "Diyeceğimiz yok.",
+          "label": "Saik tek başına delil değildir; bu konuda ayrıca diyeceğimiz yok.",
           "quality": { "q": "NEUTRAL", "feedback": "Savcının saik anlatımı yanıtsız kaldı." },
           "next": "T_06"
         }
@@ -1698,7 +1876,7 @@
         {
           "id": "T06_A",
           "kind": "OPTION",
-          "label": "Hukuka aykırı ekran görüntüleri ve bağlı cihaz bulgusu birlikte: delil yetersiz.",
+          "label": "Ekran görüntüleri hukuka aykırı, kaynak başka cihaz: delil yetersiz.",
           "responses": [
             {
               "when": { "flag": "bilirkisi_cihaz" },
@@ -1741,14 +1919,14 @@
         {
           "id": "T06_B",
           "kind": "OPTION",
-          "label": "Mütalaaya diyeceğimiz yok.",
+          "label": "Mütalaa ortada; takdiri mahkemeye bırakıyoruz.",
           "quality": { "q": "NEUTRAL", "feedback": "Cevap hakkı kullanılmadı." },
           "next": "T_07"
         },
         {
           "id": "T06_C",
           "kind": "OPTION",
-          "label": "Mütalaa tutanaktan çıkarılsın.",
+          "label": "Mütalaa delil değerlendirmesi içerdiğinden tutanaktan çıkarılmasını talep ediyoruz.",
           "responses": [
             {
               "lines": [
@@ -2153,7 +2331,7 @@
         {
           "id": "T09_A",
           "kind": "OPTION",
-          "label": "“Ben yazmadım. Kızıma gerçeği söyleyebilmek istiyorum.”",
+          "label": "“Ben yazmadım. Kızıma gerçeği söylemek istiyorum.”",
           "responses": [
             {
               "lines": [
@@ -2191,7 +2369,7 @@
         {
           "id": "T09_B",
           "kind": "OPTION",
-          "label": "“Ozan Tekin’den davacıyım, hepinizin önünde!”",
+          "label": "“Ozan Tekin’den davacıyım! Bunu hepinizin önünde söylüyorum!”",
           "responses": [
             {
               "lines": [

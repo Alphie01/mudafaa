@@ -75,6 +75,7 @@ export const outcomes: CasePart = {
         because('Savunma, baştan sona hukuka uygun yollarla yürütülmüştür.', flag('tarik_red')),
         because('Eski ortağın işyerinde el konulan dizüstü, mühür tutanakla açılıp imajı ve hash değeri alınarak korunmuştur (CMK 134/4).', flag('laptop_imaj')),
         because('Bu deliller birlikte değerlendirildiğinde, suçların sanık tarafından işlenmediği sabittir.'),
+        because('Birinci celsede kaldırılmayan adli kontrol tedbiri (yurt dışı çıkış yasağı) hükümle birlikte kaldırılmıştır.', not(flag('adli_kontrol_kalkti'))),
       ],
       legalBasis: 'CMK 223/2-b; CMK 141–142; TCK 107/2, 134/2 (beraat)',
       xp: xp(1.2, { ethicsVar: 'ethics' }),
@@ -125,6 +126,7 @@ export const outcomes: CasePart = {
         because('Ekran görüntüleri hukuka aykırı elde edilmiştir.', flag('ss_excluded')),
         because('9 Kasım gecesi telefonun kilitli olduğu, iletinin başka bir oturumdan çıktığı görülmüştür.', any(flag('bilirkisi_kilit'), flag('kilit_mahkemede'))),
         because('Sanığın fail olduğuna dair kesin kanaate ulaşılamamıştır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2).'),
+        because('Birinci celsede kaldırılmayan adli kontrol tedbiri (yurt dışı çıkış yasağı) hükümle birlikte kaldırılmıştır.', not(flag('adli_kontrol_kalkti'))),
       ],
       legalBasis: 'CMK 223/2-e; Anayasa 38/4; AİHS 6/2',
       xp: xp(1, { ethicsVar: 'ethics' }),
@@ -169,7 +171,8 @@ export const outcomes: CasePart = {
       when: all(
         not(flag('cokus')),
         any(flag('terditli'), flag('supheden'), flag('ss_excluded')),
-        any(has('ded_hastane'), flag('bilirkisi_kilit')),
+        any(flag('kilit_mahkemede'), flag('bilirkisi_kilit')),
+        any(flag('contra_s1'), flag('contra_s2'), flag('contra_s4'), flag('ss_excluded'), flag('bilirkisi_zincir')),
         finalAtLeast(T_INDIRIM),
       ),
       stamp: 'KISMEN',
@@ -186,7 +189,7 @@ export const outcomes: CasePart = {
       ],
       legalBasis: 'TCK 107/2, 43/1, 62; TCK 134/2 (beraat); CMK 231',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
-      howToReach: '9 Kasım mazeretini kur (kilit kaydı ve hastane) ve ekran görüntülerini düşür ya da terditli savun; tam beraat için delil zincirini tamamla.',
+      howToReach: '9 Kasım mazeretini duruşmada kur (kilit kaydı ve hastane), kolluğun anlatımında bir çatlak aç ve ekran görüntülerini düşür ya da terditli savun; tam beraat için delil zincirini tamamla.',
       epilogue: [
         {
           lines: [

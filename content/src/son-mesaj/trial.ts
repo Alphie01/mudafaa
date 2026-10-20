@@ -93,7 +93,7 @@ export const trial: CasePart = {
       `),
       prompt: { speaker: 'narrator', text: 'El konulan dizüstü için ne istersin?' },
       choices: [
-        option('T00L_IMAJ', 'Mühür tutanakla açılsın; imajı alınıp hash’i hesaplansın, inceleme yalnızca kopyada yapılsın.', {
+        option('T00L_IMAJ', 'Mühür tutanakla açılsın; önce imaj ve hash alınsın.', {
           score: { USUL_BILGISI: 120 },
           effects: [inc('legal_hits'), raise('laptop_imaj'), mark('GOOD', 'Dijital delil önce yedeklenir: birebir kopya (imaj) alınır, hash değeri tutanağa geçer, inceleme kopya üzerinde yapılır (CMK 134/4). Asıl cihaz mühürlü kalır.', 'USUL_BILGISI')],
           responses: B(`
@@ -106,7 +106,7 @@ export const trial: CasePart = {
           `),
           next: 'T_01',
         }),
-        option('T00L_AC', 'Dizüstü şimdi burada açılsın; ekranı hep birlikte görelim.', {
+        option('T00L_AC', 'Dizüstü tarafların huzurunda burada açılsın; ekran olduğu gibi tutanağa geçsin.', {
           score: { USUL_BILGISI: -100 },
           effects: [dec('cred')],
           bad: 'Kopyası alınmadan açılan cihazın kayıtları değişir; savunma, polisin yaptığı hatayı kendi delilinde tekrarlamış olur. Önce imaj ve hash (CMK 134/4).',
@@ -178,6 +178,16 @@ export const trial: CasePart = {
           '; ileti başka bir oturumdan çıkmış.',
         ]),
         statement('B3', 3, ['Ekran görüntüsü teknik olarak bir delil değildir; olsa olsa bir anekdottur.']),
+        statement('B4', 4, [
+          'Cihaz 3’ün başında kimin oturduğunu imajdan söyleyemem; ',
+          hl('teknik olarak sanığın kendisi de olabilir', any(has('ev_isp'), has('ded_hastane'))),
+          '.',
+        ]),
+        statement('B5', 5, [
+          'İmajın hash değeri, ',
+          hl('telefondaki verilerin el değmeden korunduğunu', has('ded_zincir')),
+          ' gösterir; bütünlük sorunu yoktur.',
+        ]),
       ],
       rules: [
         pressRule('PR_B1', 'B1', {
@@ -233,6 +243,51 @@ export const trial: CasePart = {
             > Savcı başını hafifçe öne eğdi. Bu bir kabulden çok, bir teslimdi.
           `),
         }),
+        pressRule('PR_B4', 'B4', {
+          score: { SORGULAMA: 25 },
+          responses: B(`
+            P: Sanık da olabilir, dediniz. Neye dayanarak?
+            nazli: Hiçbir şeye dayanarak değil, müdafi. Bilmediğim şeyi dışlamıyorum. Hesap onun; bir dizüstüden de girebilirdi. Ben yalnızca cihazı söylerim, eli söyleyemem.
+            ~ Bilirkişinin dürüstlüğü, bu dosyada savcının en iyi cümlesi olabilir. Onu daraltmak bana düşüyor; ama kendi kâğıtlarımla.
+          `),
+        }),
+        presentRule('PS_B4', 'B4', ['ded_ip_tekin', 'ev_isp'], {
+          score: { SORGULAMA: 150 },
+          effects: [inc('pers'), raise('bilirkisi_el'), mark('GOOD', 'Hat bilgisi bilirkişinin “sanık da olabilir” cümlesini daralttı: cihaz 3 sanığın hattından bağlanmamış.', 'SORGULAMA')],
+          responses: B(`
+            P: Hesap verisine göre cihaz 3, üç gecenin üçünde de 85.105.44.17 adresinden bağlanmış. Servis sağlayıcısının mahkemeye yazısı dosyada.
+            P: Müvekkilimin ev hattı 176.88.12.4. O adres, üç gecenin hiçbirinde görünmüyor.
+            nazli: Bu bilgiyle cümlemi daraltırım Sayın Hâkim. Cihaz 3, o gecelerde sanığın evinden değil, bir iş hattından bağlanmış. “Sanık da olabilir” demiştim; doğrusu, “sanığın evinden değil.”
+            tolga: Sanık o hatta başka bir yoldan erişmiş olamaz mı?
+            nazli: Olabilir, Sayın Savcı. Ama bunu gösteren bir veri yok. Benim işim veriyle konuşmak.
+          `),
+        }),
+        presentRule('PS_B4H', 'B4', ['ded_hastane'], {
+          score: { SORGULAMA: 80 },
+          effects: [raise('bilirkisi_el'), mark('GOOD', 'En az bir gece için sanık, cihaz 3’ün başında olamazdı.', 'SORGULAMA')],
+          responses: B(`
+            P: 9 Kasım gecesi 02.14’te müvekkilim bir acil serviste onam formu imzalıyor; telefonu hemşire masasında, kilitli.
+            nazli: O gece için bir dizüstünün başında olması da beklenemez. En azından bir gece için, “sanık da olabilir” cümlemi geri alırım.
+          `),
+        }),
+        pressRule('PR_B5', 'B5', {
+          score: { SORGULAMA: 25 },
+          responses: B(`
+            P: Hash neyi korur, tam olarak?
+            nazli: Alındığı andaki hâli. Ondan sonra bir bit bile değişse, değer tutmaz. Ondan önceyi ise… hash bilmez.
+            ~ “Ondan önceyi bilmez.” Bir cümle, bir kapı aralığı.
+          `),
+        }),
+        presentRule('PS_B5', 'B5', ['ded_zincir'], {
+          score: { SORGULAMA: 150 },
+          effects: [inc('pers'), raise('bilirkisi_zincir'), mark('GOOD', 'Bilirkişi, hash’in yalnızca 14 Kasım sonrasını koruduğunu, 12–14 Kasım arasının belgesiz kaldığını kabul etti.', 'SORGULAMA')],
+          responses: B(`
+            P: Hash 14 Kasım 11.05’te alındı. Telefon ise 12 Kasım’da mühürsüz, bantlı bir zarfta Şube’de açıldı; iki gün bir çekmecede kaldı.
+            P: Raporunuzun Bulgu 3’ü: 12 Kasım 15.40–15.52 arası kilit açma, uygulama gezinmesi ve cihaza yazılan on dört yeni dosya.
+            nazli: Doğru. Cümlemi düzeltiyorum Sayın Hâkim: hash 14 Kasım’dan sonrasının bütünlüğünü korur. 12 ile 14 Kasım arasını değil; o aralık için elimde bir güvence yok.
+            feride: Tutanağa geçirin: el koyma ile kopyalama arasındaki süre için bütünlük güvencesi bulunmamaktadır.
+          `),
+        }),
       ],
       presentMiss: fallback('FB_B_PRESENT', 'PRESENT', {
         effects: [...wrongEvidence, score('SORGULAMA', -120, 'hatali'), mark('BAD', 'Bu delil bilirkişinin bu bulgusuyla ilgili değil.', 'SORGULAMA')],
@@ -284,12 +339,13 @@ export const trial: CasePart = {
       say: [{ speaker: 'feride', text: 'Müdafi, tanığa sorularınız?' }],
       next: 'T_03',
       options: [
-        option('T02Q_SAAT', 'Bildirimin saatini telefonunuzdan gösterir misiniz?', {
+        option('T02Q_SAAT', 'Bildirimin saatini gösterir misiniz?', {
           score: { SORGULAMA: 60 },
           effects: [inc('pers'), raise('hayri_saat')],
           good: 'Tanığın kendi cihazındaki nesnel kayda dayanan bir soru.',
           responses: B(`
             > Hayri Bey telefonu titreyen eliyle hâkime uzattı. Zabıt kâtibi yanına geldi, ekrana baktı, bir şeyler yazdı.
+            derya: Ekranda 9 Kasım, saat 02.14 görünüyor Sayın Hâkim. Gönderen: Tarık Aksoy.
             hayri: Bakın işte. 9 Kasım, 02.14. Silmedim. Ben eski bir adamım, ama bildiğim bir şey var: bir kâğıt, bir saat, yalan söylemez. İnsanlar söyler, saatler söylemez.
             feride: Tutanağa geçirin. Tanığın telefonundaki bildirim saati: 9 Kasım, saat 02.14.
             > Hâkim telefonu geri uzattı. Hayri Bey bir teşekkür mırıldandı, telefonu cebine, kalbinin üstüne koydu.
@@ -303,7 +359,7 @@ export const trial: CasePart = {
             hayri: Ertesi hafta bütün teklif sahipleri biliyordu. Üç firma. Bursa bir avlu Sayın Hâkim.
           `),
         }),
-        option('T02Q_YOK', 'Sorum yok.', { neutral: 'Tanığın telefonundaki saati tutanağa geçirme fırsatı kullanılmadı.' }),
+        option('T02Q_YOK', 'Sorum yok; tanığın beyanı dosyadaki ifadesiyle zaten aynı.', { neutral: 'Tanığın telefonundaki saati tutanağa geçirme fırsatı kullanılmadı.' }),
       ],
     }),
 
@@ -482,7 +538,7 @@ export const trial: CasePart = {
           effects: [inc('pers'), raise('contra_o5'), mark('GOOD', 'Tehditlerin dili Tarık’ın değil, tanığın e-postalarındaki dildir.', 'SORGULAMA')],
           responses: B(`
             P: Bu mesajlar Tarık’ın tarzıymış, öyle dediniz. Oysa Tarık hiç büyük harfle başlamaz, hiç nokta koymaz, hiç “Sn.” demez.
-            P: Oysa bu üç tehdit “Sn. Karaca” ile başlıyor, üç noktayla duruyor, “Saygılar.” ile bitiyor. Tıpkı sizin e-postalarınız gibi. Ofiste bir çıktısı duruyor, gönderen: o.tekin.
+            P: Oysa bu üç tehdit “Sn. Karaca” ile başlıyor, üç noktayla duruyor, “Saygılar.” ile bitiyor. Tıpkı mali müşavire yazdığınız “gerek görmüyorum” e-postası gibi. Gönderen: o.tekin.
             ozan/kizgin: Herkes öyle yazar! Resmî yazışma böyle yazılır! Bu bir kanıt değil!
             P: Haklısınız, tek başına kanıt değil. Ama bir dizüstü, bir hat ve bir imza bir araya gelince, üslup da bir parmak izi olur.
             P: Tarık böyle yazmıyor Ozan Bey. Siz yazıyorsunuz. Herkes gibi değil; sizin gibi.
@@ -550,7 +606,7 @@ export const trial: CasePart = {
       `),
       prompt: { speaker: 'narrator', text: 'Katılanın beyanına ne dersin?' },
       choices: [
-        option('T04K_SAYGI', 'Beyan tutanağa geçsin; müvekkilim katılanın yaşadıklarını hiçbir zaman küçümsemedi.', {
+        option('T04K_SAYGI', 'Beyan olduğu gibi tutanağa geçsin.', {
           score: { SAVUNMA_STRATEJISI: 60 },
           effects: [inc('pers')],
           good: 'Katılanın acısını tanıyıp beyanı olduğu gibi tutanağa geçirtmek; savunmayı mağdurla değil, gerçek kaynakla karşı karşıya getirir.',
@@ -571,7 +627,7 @@ export const trial: CasePart = {
           `),
           next: 'T_05',
         }),
-        option('T04K_OZUR', 'Katılan, bugün müvekkilimden özür dilemelidir.', {
+        option('T04K_OZUR', 'Katılan, müvekkilime yönelttiği suçlama için bugün burada özür dilemelidir.', {
           score: { SAVUNMA_STRATEJISI: -50 },
           bad: 'Katılan elindeki tek isme göre şikâyet etti; ondan özür beklemek, savunmayı mağdurla kavgaya sokar.',
           responses: B(`
@@ -595,7 +651,7 @@ export const trial: CasePart = {
       ],
       next: 'T_06',
       options: [
-        option('T05_A', '25 Ekim mesajları öfkeli ama tehdit değil; üstelik Tarık’ın kendi diliyle, kendi cihazından.', {
+        option('T05_A', '25 Ekim mesajları öfkeli ama tehdit değil; dili de cihazı da başka.', {
           effects: [
             raise('pay_cevap'),
             ifThen(
@@ -611,7 +667,7 @@ export const trial: CasePart = {
             P: Savcılığın saik dediği şey, aslında savunmanın en güçlü deliline dönüşüyor: iki ayrı el, iki ayrı cihaz, iki ayrı insan.
           `),
         }),
-        option('T05_B', '25 Ekim’de hiç mesaj atmadı; o da uydurma.', {
+        option('T05_B', '25 Ekim mesajlarını da müvekkilim yazmadı; aynı hesaptan aynı kişi göndermiş olabilir.', {
           effects: [score('SAVUNMA_STRATEJISI', -80, 'savunma'), dec('cred')],
           bad: '25 Ekim mesajları gerçek ve cihaz 0’dan gönderildi; bunu inkâr etmek müvekkilin inandırıcılığını yok eder. Doğru olan, o mesajları sahiplenip tehditlerden ayırmaktır.',
           responses: B(`
@@ -619,7 +675,7 @@ export const trial: CasePart = {
             feride: Müdafi, Ek-3’te bu mesajlar sanığın kendi cihazından görünüyor. Dikkatli olun.
           `),
         }),
-        option('T05_C', 'Diyeceğimiz yok.', { neutral: 'Savcının saik anlatımı yanıtsız kaldı.' }),
+        option('T05_C', 'Saik tek başına delil değildir; bu konuda ayrıca diyeceğimiz yok.', { neutral: 'Savcının saik anlatımı yanıtsız kaldı.' }),
       ],
     }),
 
@@ -658,7 +714,7 @@ export const trial: CasePart = {
       ],
       next: 'T_07',
       options: [
-        option('T06_A', 'Hukuka aykırı ekran görüntüleri ve bağlı cihaz bulgusu birlikte: delil yetersiz.', {
+        option('T06_A', 'Ekran görüntüleri hukuka aykırı, kaynak başka cihaz: delil yetersiz.', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), mark('GOOD', 'Cevap hakkı yerinde kullanıldı: hukuka aykırı delil hükme esas alınamaz (CMK 217/2), kalan deliller mahkûmiyete yetmez.', 'USUL_BILGISI')],
           responses: [
@@ -675,8 +731,8 @@ export const trial: CasePart = {
             `),
           ],
         }),
-        option('T06_B', 'Mütalaaya diyeceğimiz yok.', { neutral: 'Cevap hakkı kullanılmadı.' }),
-        option('T06_C', 'Mütalaa tutanaktan çıkarılsın.', {
+        option('T06_B', 'Mütalaa ortada; takdiri mahkemeye bırakıyoruz.', { neutral: 'Cevap hakkı kullanılmadı.' }),
+        option('T06_C', 'Mütalaa delil değerlendirmesi içerdiğinden tutanaktan çıkarılmasını talep ediyoruz.', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Mütalaa tutanağın bir parçasıdır; çıkarılması istenemez. Cevap hakkı kullanılır (CMK 216/2).',
@@ -855,7 +911,7 @@ export const trial: CasePart = {
       prompt: { speaker: 'feride', text: 'Sanık, son sözünüz?' },
       next: 'T_10',
       choices: [
-        option('T09_A', '“Ben yazmadım. Kızıma gerçeği söyleyebilmek istiyorum.”', {
+        option('T09_A', '“Ben yazmadım. Kızıma gerçeği söylemek istiyorum.”', {
           score: { SAVUNMA_STRATEJISI: 25 },
           good: 'Kısa, onurlu, savunmayla tutarlı bir son söz.',
           responses: B(`
@@ -866,7 +922,7 @@ export const trial: CasePart = {
             > Oturdu. Arka sırada, bir an için, Melis’in de başını öne eğdiğini gördüm.
           `),
         }),
-        option('T09_B', '“Ozan Tekin’den davacıyım, hepinizin önünde!”', {
+        option('T09_B', '“Ozan Tekin’den davacıyım! Bunu hepinizin önünde söylüyorum!”', {
           score: { SAVUNMA_STRATEJISI: -25 },
           effects: [dec('pers')],
           bad: 'Son söz bir öfke anı değildir; suç duyurusu dilekçeyle yapılır. Öfkeli bir çıkış heyette olumsuz izlenim bırakır.',

@@ -116,7 +116,11 @@
           "when": { "flag": "laptop_imaj" },
           "text": "Eski ortağın işyerinde el konulan dizüstü, mühür tutanakla açılıp imajı ve hash değeri alınarak korunmuştur (CMK 134/4)."
         },
-        { "text": "Bu deliller birlikte değerlendirildiğinde, suçların sanık tarafından işlenmediği sabittir." }
+        { "text": "Bu deliller birlikte değerlendirildiğinde, suçların sanık tarafından işlenmediği sabittir." },
+        {
+          "when": { "not": { "flag": "adli_kontrol_kalkti" } },
+          "text": "Birinci celsede kaldırılmayan adli kontrol tedbiri (yurt dışı çıkış yasağı) hükümle birlikte kaldırılmıştır."
+        }
       ],
       "legalBasis": "CMK 223/2-b; CMK 141–142; TCK 107/2, 134/2 (beraat)",
       "xp": {
@@ -214,6 +218,10 @@
         },
         {
           "text": "Sanığın fail olduğuna dair kesin kanaate ulaşılamamıştır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2)."
+        },
+        {
+          "when": { "not": { "flag": "adli_kontrol_kalkti" } },
+          "text": "Birinci celsede kaldırılmayan adli kontrol tedbiri (yurt dışı çıkış yasağı) hükümle birlikte kaldırılmıştır."
         }
       ],
       "legalBasis": "CMK 223/2-e; Anayasa 38/4; AİHS 6/2",
@@ -314,7 +322,16 @@
         "all": [
           { "not": { "flag": "cokus" } },
           { "any": [{ "flag": "terditli" }, { "flag": "supheden" }, { "flag": "ss_excluded" }] },
-          { "any": [{ "hasEvidence": "ded_hastane" }, { "flag": "bilirkisi_kilit" }] },
+          { "any": [{ "flag": "kilit_mahkemede" }, { "flag": "bilirkisi_kilit" }] },
+          {
+            "any": [
+              { "flag": "contra_s1" },
+              { "flag": "contra_s2" },
+              { "flag": "contra_s4" },
+              { "flag": "ss_excluded" },
+              { "flag": "bilirkisi_zincir" }
+            ]
+          },
           { "cmp": [{ "score": "final" }, ">=", 3000] }
         ]
       },
@@ -345,7 +362,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "9 Kasım mazeretini kur (kilit kaydı ve hastane) ve ekran görüntülerini düşür ya da terditli savun; tam beraat için delil zincirini tamamla.",
+      "howToReach": "9 Kasım mazeretini duruşmada kur (kilit kaydı ve hastane), kolluğun anlatımında bir çatlak aç ve ekran görüntülerini düşür ya da terditli savun; tam beraat için delil zincirini tamamla.",
       "epilogue": [
         {
           "lines": [

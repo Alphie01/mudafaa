@@ -418,7 +418,7 @@ export const ara: CasePart = {
           'clue_envanter',
           150,
           'YENİ İPUCU',
-          'Büyüteci 07 numaralı satıra tuttum. “Dizüstü + dok istasyonu. Zimmet: O. Tekin.” İade hanesi bomboş. Kenarda Nurten Hanım’ın kırk yıllık muhasebeci el yazısı: “O.T. bozuldu dedi.” Diğer bütün demirbaşların iadesi işaretli; yalnız 07 boşta. Dok ofiste, tozlu yuvasında kaldı; ama dizüstü, “bozuldu” denip tutanaksız, demirbaştan düşülmeden kayıplara karıştı.',
+          '“07 · Dizüstü + dok · Zimmet: O. Tekin.” İade hanesi boş; kenarda “O.T. bozuldu dedi.” Bütün demirbaşların iadesi işaretli, yalnız 07 değil. Dok ofiste kaldı; dizüstü tutanaksız kayboldu.',
           'ARASTIRMA',
         ),
         hit(
@@ -511,7 +511,7 @@ export const ara: CasePart = {
           undefined,
           80,
           'BULGU 1',
-          'Büyüteci ilk bulguya tuttum. Bilirkişi benim noterde tespit ettirdiğim hesap verisini görmemiş; aynı sonuca imajın kendisinden varmış. Gönderen cihaz 3, bir masaüstü uygulaması, bir Windows makinesi. İki ayrı yol, aynı kapıya çıkıyor.',
+          'Büyüteci ilk bulguya tuttum. Bilirkişi aynı sonuca hiçbir dış kayda bakmadan, imajın kendisinden varmış. Gönderen cihaz 3, bir masaüstü uygulaması, bir Windows makinesi. İki ayrı yol, aynı kapıya çıkıyor.',
         ),
         hit(
           'EX_R_KILIT',
@@ -520,7 +520,7 @@ export const ara: CasePart = {
           undefined,
           80,
           'BULGU 2',
-          '9 Kasım gecesi dört buçuk saat boyunca telefona tek bir parmak değmemiş. Bilirkişi bunu kendi diliyle yazmış: “dokunma olayı yok.” Hemşirenin bandı, onam formu ve şimdi de makinenin kendi günlüğü. Üç tanık, hiçbiri yalan söylemeyi bilmiyor.',
+          '9 Kasım gecesi dört buçuk saat telefona tek parmak değmemiş: “dokunma olayı yok.” Hemşirenin bandı, onam formu, şimdi de makinenin günlüğü. Üç tanık; hiçbiri yalan söylemeyi bilmiyor.',
         ),
         hit(
           'EX_R_SS',
@@ -529,7 +529,7 @@ export const ara: CasePart = {
           undefined,
           100,
           'BULGU 3 · DELİLİN İÇİNE YAZILAN',
-          'Karşılaştır aletini Bulgu 3 ile Yöntem satırına tuttum. Polisin aldığı on dört ekran görüntüsü telefonun kendi hafızasına yazılmış; imaj iki gün sonra alınmış. Yani delil, kopyası alınmadan önce, incelemeyi yapanın eliyle değiştirilmiş. Hash 14 Kasım’ı korur; 12 Kasım’ı değil.',
+          'Bulgu 3 ile Yöntem yan yana: on dört ekran görüntüsü telefonun hafızasına yazılmış, imaj iki gün sonra alınmış. Delil, kopyası alınmadan değiştirilmiş. Hash 14 Kasım’ı korur; 12’sini değil.',
           'USUL_BILGISI',
         ),
         hit(
@@ -539,7 +539,7 @@ export const ara: CasePart = {
           undefined,
           60,
           'SINIR',
-          'İyi bir bilirkişi bilmediğini de yazar. Telefonun imajı mesajların telefondan çıkmadığını söylüyor; ama cihaz 3’ün başında kimin oturduğunu söyleyemez. O sorunun cevabı bir dizüstünün, bir hattın, bir demirbaş listesinin içinde. Rapor bana bir kapı açıyor; kapıdan geçmek bana kalıyor.',
+          'İyi bilirkişi bilmediğini de yazar: imaj, cihaz 3’ün başında kimin oturduğunu söyleyemez. Duruşmada bunu soracaklar. Cevap bir dizüstünde, bir hatta, bir demirbaş listesinde.',
           'SAVUNMA_STRATEJISI',
         ),
         hit(
@@ -600,7 +600,7 @@ export const ara: CasePart = {
           'clue_vakif_yazi',
           150,
           'YENİ İPUCU',
-          '10 Kasım, sabah 09.12. Ses kaydı Hayri Bey’e 9 Kasım gecesi 02.14’te gitmişti; Hayri Bey dinlemeden kapatmış, Melis’ten başka kimseye söylememişti. Dedikodu “ertesi hafta” yayılmış. Ama bu e-posta, yedi saat sonra, kaydın varlığını biliyor. Ve “Sn.” ile açılıp “Saygılar.” ile kapanıyor.',
+          '10 Kasım 09.12. Ses kaydı yedi saat önce gitmiş; Hayri Bey kimseye söylememiş, dedikodu ertesi hafta yayılmış. Ama bu e-posta kaydı şimdiden biliyor. “Sn.” ile açılıyor, “Saygılar.” ile kapanıyor.',
           'ARASTIRMA',
         ),
         hit(
@@ -610,7 +610,7 @@ export const ara: CasePart = {
           undefined,
           60,
           'ÜÇ TEKLİF',
-          'Karşılaştır aletini iki teklif satırına tuttum. Ortak girişimin teklifi Melis’in restorasyon belgesine yaslanıyor; o çekilirse teklif düşer. Geriye iki firma kalır: büyük bir şirket ve Tekin Yapı. Kimin işine yarar? Bu bir delil değil; bir soru. Ama doğru soru.',
+          'Ortak girişimin teklifi Melis’in belgesine yaslanıyor; o çekilirse teklif düşer, geriye büyük bir şirket ve Tekin Yapı kalır. Kimin işine yarar? Bu bir delil değil; bir soru. Ama doğru soru.',
           'ARASTIRMA',
         ),
         hit(
@@ -887,7 +887,7 @@ function choiceNodeSuc() {
         effects: [raise('suc_duyurusu')],
         good: 'Somut dayanaklı suç duyurusu (CMK 158): cihaz 3 = OFIS-LAPTOP-07, 07’nin zimmeti ve iadesizliği. Arama ve el koyma savcılığın ve hâkimin işidir (CMK 116 vd., 127); avukat kendisi kovalamaz.',
         responses: B(`
-          > Dilekçeyi dört sayfada yazdım. Ekleri kalınca: noter tespitli hesap verisi, demirbaş listesi, sağlayıcının yazısı, Ek-3’ün bir kopyası.
+          > Dilekçeyi dört sayfada yazdım. Ekleri kalınca: Ek-3’ün bir kopyası, demirbaş listesi, sağlayıcının mahkemeye yazısı.
           > Sonuna somut bir talep koydum: “07 numaralı dizüstünün bulunması, aranması ve el konulması; hesabı ele geçiren kişi hakkında soruşturma açılması.”
           leyla: Avukat dedektif değildir Deniz. Biz kovalamayız, savcılığa yazarız. Arama kararı hâkimin, infaz savcınındır. Bizim işimiz dayanağı kusursuz koymak.
           P: Dayanak kusursuz. Bir zimmet, bir hat, bir oturum. İsmi ben koymuyorum; kâğıtlar koyuyor.

@@ -543,8 +543,29 @@ export const invPeople: CasePart = {
         }),
         option('SA_ESYA', 'Halil Bey’in o hafta eşya taşıdığını söylemişsiniz.', {
           score: { SORGULAMA: 30 },
-          effects: [raise('fact_teneke_saadet')],
+          effects: [ifThen(any(has('clue_numune'), has('clue_eksper_foto')), [raise('fact_teneke_saadet')])],
           responses: [
+            {
+              when: any(has('clue_numune'), has('clue_eksper_foto')),
+              lines: [
+                s(
+                  'saadet',
+                  'Taşıdı. Bir kamyonetle. Sandık, konsol, bir de dikiş makinesi. Nermin’in makinesi. Gözüm doldu.',
+                ),
+                s(
+                  'saadet',
+                  'Bir gün de elinde kırmızı bir bidon gördüm, arabasına koydu. Polise söyledim; “benzin bidonu” diye yazdılar.',
+                ),
+                me('Yangının sabahı şeridin içine kimler girdi, gördünüz mü?'),
+                s(
+                  'saadet',
+                  'Polisler gittikten sonra dokuz gibi şık bir adam geldi. Takım elbiseli. Elinde iki teneke, omzunda bir çanta. Girdi, çıktı. Onu kimse sormadı; sen soruyorsun.',
+                ),
+                th(
+                  'Raporun ekinde bir eksper adı ve bir saat vardı. Şimdi bir komşunun ağzında iki teneke. Saadet Hanım’ın tanıklığı bir çuval gibi: içinden ne çıkacağı, kimin elini soktuğuna bağlı.',
+                ),
+              ],
+            },
             {
               lines: [
                 s(
@@ -557,10 +578,10 @@ export const invPeople: CasePart = {
                 ),
                 s(
                   'saadet',
-                  'Bir de yangının sabahı, dokuz gibi, şık bir adam geldi. Takım elbiseli. Elinde iki teneke, omzunda bir çanta. Girdi, çıktı. Onu kimse sormadı.',
+                  'Sabah da bir sürü insan geldi gitti. Polis, itfaiye, belediye. Ben pencereden baktım; kimse bana bir şey sormadı, ben de çay demledim.',
                 ),
                 th(
-                  'Şık bir adam, iki teneke. Polisin sormadığı bir cümle daha. Saadet Hanım’ın tanıklığı bir çuval gibi: içinden ne çıkacağı, kimin elini soktuğuna bağlı.',
+                  'Bir kamyonet, bir sandık, kırmızı bir bidon. Saadet Hanım’ın tanıklığı bir çuval gibi: içinden ne çıkacağı, kimin elini soktuğuna bağlı.',
                 ),
               ],
             },
@@ -685,6 +706,10 @@ export const invPeople: CasePart = {
               lines: [
                 s('cevdet', 'Mahkemede mi? Amirim ne der? Şeridin altından adam soktum diye başım yanar.', 'uzgun'),
                 s('cevdet', 'Ama çağrılırsam gelirim. Yalan söyleyemem. Defter benim el yazım.'),
+                s(
+                  'cevdet',
+                  'Yirmi iki yıldır bu mahallede bekçiyim, avukat hanım. Kapıları yoklarım, ışıkları sayarım, kimin geç geldiğini bilirim. Bir şey bilmem ama: kimin neyi neden yaptığını. Onu siz bulun.',
+                ),
                 th('Çağrılırsa gelecek. Çağırmak benim işim; ona ne söyleyeceğini söylemek değil.'),
               ],
             },
@@ -798,6 +823,14 @@ export const invPeople: CasePart = {
                   'necati',
                   'Ama doğrusu buydu. Otuz beş yıldır bu işi yapıyorum. O tesisat o gece kendi kendine yanmaz. Bir şey oldu o gece.',
                 ),
+                s(
+                  'necati',
+                  'Bak kızım, ben çırakken ustam bir şey derdi: “Kablo yalan söylemez, ama kimse onu dinlemez.” Yangından sonra kimse bana gelmedi. Ne polis, ne bilirkişi. Notum dosyada duruyormuş; okuyan olmamış.',
+                ),
+                s(
+                  'necati',
+                  'Mahkeme çağırırsa gelirim. Ne gördüysem onu söylerim. “Eskiydi” derim, “ılıktı” derim, “acil değildi” derim. Üçü de doğru.',
+                ),
                 th(
                   'Suçluluk dürüst insanları ya susturur ya fazla konuşturur. Necati Usta’yı tanıklığa hazırlarsam, bu ikisinin arasında yürümesi gerekecek.',
                 ),
@@ -888,6 +921,10 @@ export const invPeople: CasePart = {
                   'İhbarı öğlen ikide girdim. Ama eksper zaten sabah olay yerindeymiş. Şirket gece haber almış, bölge müdürlüğü göndermiş.',
                 ),
                 s('kader', 'Tarık Bey. Hızlıdır. Büyük dosyalara o bakar. Şirket onu sever.'),
+                s(
+                  'kader',
+                  'On beş yıllık acenteyim. Bir eksperin ihbardan önce yola çıktığını ilk kez gördüm demeyeceğim; ama yazılı olarak ilk kez görüyorum. Sistem saat basıyor, avukat hanım. Sistem unutmaz.',
+                ),
                 th(
                   'İhbar öğlen ikide. Eksper sabah dokuz yirmide. Bir eksper, ihbardan beş saat önce olay yerinde. Hızlı, evet.',
                 ),

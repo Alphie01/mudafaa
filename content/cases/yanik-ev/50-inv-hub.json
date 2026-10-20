@@ -42,7 +42,7 @@
             ]
           },
           "lines": [
-            { "speaker": "narrator", "text": "GÜN 2/3 · BİRİNCİ CELSEYE 7 GÜN", "style": "card", "bg": "buro" },
+            { "speaker": "narrator", "text": "GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN", "style": "card", "bg": "buro" },
             {
               "speaker": "player",
               "text": "Dün bir yangının yerini aradım. Bugün halatın ipliklerine bakacağım: poliçe, eşyalar, benzin.",
@@ -57,7 +57,7 @@
         {
           "when": { "cmp": [{ "var": "day" }, "==", 2] },
           "lines": [
-            { "speaker": "narrator", "text": "GÜN 2/3 · BİRİNCİ CELSEYE 7 GÜN", "style": "card", "bg": "buro" },
+            { "speaker": "narrator", "text": "GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN", "style": "card", "bg": "buro" },
             {
               "speaker": "narrator",
               "text": "Hedef: rapor neye dayanıyor? Fotoğraflar ne gösteriyor? Savcının ipliklerini tek tek ayır."
@@ -66,14 +66,14 @@
         },
         {
           "lines": [
-            { "speaker": "narrator", "text": "GÜN 3/3 · BİRİNCİ CELSEYE 4 GÜN", "style": "card", "bg": "buro" },
+            { "speaker": "narrator", "text": "GÜN 3/3 · BİRİNCİ CELSEYE 8 GÜN", "style": "card", "bg": "buro" },
             {
               "speaker": "narrator",
-              "text": "Sabah erkenden geldiğimde Leyla masama bir not bırakmıştı: “Delil dilekçesi bugün. Beş gün kuralını hatırla.” Altına küçük bir çizgi."
+              "text": "Sabah erkenden geldiğimde Leyla masama bir not bırakmıştı: “Dilekçe bugün yazılır, yarın sabah kaleme verilir. Müzekkereye, davetiyeye gün lazım.” Altına küçük bir çizgi."
             },
             {
               "speaker": "narrator",
-              "text": "Hedef: delil dilekçesi için son gün. Tahtayı topla; duruşmada neyi istediğini bil."
+              "text": "Hedef: delil dilekçesini yazmak için son gün. Tahtayı topla; duruşmada neyi istediğini bil."
             }
           ]
         }
@@ -303,6 +303,10 @@
               "speaker": "zehra",
               "text": "Size bir şey soracağım ve dürüst cevap vermenizi istiyorum. Hastaya da hep dürüst söylerim; yalan söylenen hasta iyileşmez."
             },
+            {
+              "speaker": "zehra",
+              "text": "Acilde bir kural var: hasta “düştüm” der, morluk “dövüldüm” der. Biz morluğa inanırız. Babam “yapmadım” diyor. Peki morluk ne diyor?"
+            },
             { "speaker": "zehra", "text": "Sizce babam yaptı mı?" },
             {
               "speaker": "player",
@@ -432,6 +436,15 @@
               "speaker": "player",
               "text": "İkisi de olabilir. Bu yüzden bu bir delil değil. Bu bir insan.",
               "style": "thought"
+            },
+            {
+              "speaker": "halil",
+              "expression": "uzgun",
+              "text": "Bir de… koğuşta bir çocuk var, on dokuz yaşında. Ayakkabısının tabanı açılmış. Diktim. “Abi sen ne yaptın da buradasın” dedi. Bilmiyorum dedim. Gerçekten bilmiyorum, avukat hanım."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Anons araya girdi: “Görüşmenizin bitmesine bir dakika.” Halil bir şey söyleyecekti; söylemedi."
             }
           ]
         }
@@ -541,7 +554,7 @@
             {
               "speaker": "narrator",
               "name": "ÇAYCI",
-              "text": "O sabah bir de sigortacı geldi, abla. Kara takımlı. Buradan geçti, bir şey sormadı, eve girdi. Çay da içmedi."
+              "text": "O gece itfaiye gelince bütün mahalle buraya doldu, abla. Ocağı ben yaktım, sabaha kadar çay. Herkes bir şey gördüğünü söyledi; kimse bir şey görmedi."
             },
             {
               "speaker": "player",
@@ -550,7 +563,7 @@
             },
             {
               "speaker": "player",
-              "text": "Çay içmeyen bir sigortacı. Muradiye’de bu bile bir iz.",
+              "text": "Herkes bir şey gördü, kimse bir şey görmedi. Muradiye’de tanıklık böyle başlar.",
               "style": "thought"
             }
           ]
@@ -588,11 +601,11 @@
             {
               "speaker": "leyla",
               "expression": "uzgun",
-              "text": "Sahibi borçluydu, depo sigortalıydı, bir gece yandı. Bilirkişi “hızlandırıcı” dedi. Herkes inandı. Ben de inandım; müvekkilime “ikrar et, indirim alırsın” dedim."
+              "text": "Sahibi borçluydu, depo sigortalıydı, bir gece yandı. Bilirkişi “kasten” dedi. Herkes inandı. Ben de inandım; müvekkilime “ikrar et, indirim alırsın” dedim."
             },
             {
               "speaker": "leyla",
-              "text": "Etmedi. Dört yıl yattı. Sonra bir elektrik mühendisi depoya gitti, kabloları söktü, bir ark buldu. Dört yıl, Deniz. Bir bilirkişinin bakmadığı bir kablo yüzünden."
+              "text": "Etmedi. Dört yıl yattı. Sonra bir başka bilirkişi raporu baştan okudu ve ilk bilirkişinin depoya hiç gitmediğini, raporu fotoğraflardan yazdığını gösterdi. Dört yıl, Deniz. Kimse “ne gördün” diye sormadığı için."
             },
             { "speaker": "narrator", "text": "Dosyayı kapattı. Sigara paketini çevirdi; bir kere, iki kere." },
             {
@@ -603,6 +616,15 @@
               "speaker": "player",
               "text": "Gemlik. Büyükbabamın evi. Sigortanın “kusur” dediği o kış. Leyla bunu biliyor mu? Sormadım. Bazı tesadüfler, sorulunca tesadüf olmaktan çıkar.",
               "style": "thought"
+            },
+            {
+              "speaker": "leyla",
+              "expression": "uzgun",
+              "text": "O adam çıktığında kırk yaşındaydı. Bir daha iş kuramadı; elleri titriyordu. Tazminat aldı. Para dört yılı geri getirmedi. Bir mahkeme yanıldığını yazdı; o yazı benim masamda, bu dosyanın içinde."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla dosyayı rafa kaldırmadı. Masasının köşesinde, ters çevrilmiş çerçevenin yanında bıraktı."
             },
             { "speaker": "leyla", "text": "Bugün son gün. Dilekçeni yaz. Ve kimsenin bakmadığı şeyi iste." }
           ]
@@ -631,6 +653,32 @@
               "text": "Bilirkişi evi yangından kaç gün sonra gördü? Polis kaç saat sonra? Sen üç ay sonra göreceksin. Her birinin gördüğü ev başka evdir."
             },
             { "speaker": "leyla", "text": "Önce en eski fotoğrafa bak. En eski fotoğraf, en az dokunulmuş olandır." }
+          ]
+        },
+        {
+          "when": { "all": [{ "cmp": [{ "var": "day" }, "==", 3] }, { "hasEvidence": "clue_numune" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Pazar öğlesi. Leyla dilekçe taslağımı kırmızı kalemle okuyordu; kırmızı kalemi yalnızca önemli dosyalarda kullanırdı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Üç talep hakkın var, üç kapı. Bir kapı ne bulunduğunu sorar, bir kapı kimin bulduğunu, bir kapı da kimsenin bakmadığı yeri. Hangisi hangisi, sen bilirsin."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Ve şunu unutma: dilekçede istediğin her şey savcının da önüne gelir. Bir rapor senin lehine çıkmazsa, onu sen istemiş olursun. Bu yüzden ne istediğini değil, neden istediğini bil."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de Halil. Celseden önce ona salonda neler olacağını anlat. Kürsüde şaşıran sanık, hâkimin gözünde saklanan sanıktır. Ona cevap ezberletme; doğruyu kendi sözleriyle söylemeyi öğret."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın kırmızı kalemi üç cümlenin altını çizdi, birinin üstünü. Üstü çizilen cümle benim en sevdiğimdi: “Rapor baştan sona çürüktür.” Haklıydı. Çürük bir rapor sökülür, bağırılmaz.",
+              "style": "thought"
+            }
           ]
         },
         {
@@ -753,7 +801,7 @@
         {
           "id": "DIL_PANO",
           "kind": "OPTION",
-          "label": "Emanetteki sigorta panosunun ve koridor hattının elektrik bilirkişisine incelettirilmesi",
+          "label": "Emanetteki sigorta panosu ve koridor hattının elektrik bilirkişisince incelenmesi",
           "visibleWhen": {
             "any": [
               { "hasEvidence": "clue_pano" },
@@ -776,7 +824,7 @@
         {
           "id": "DIL_ARIZA",
           "kind": "OPTION",
-          "label": "Elektrik dağıtım şirketinden 15 Ocak gecesine ait sokak hattı arıza kayıtlarının istenmesi",
+          "label": "Dağıtım şirketinden 15 Ocak gecesinin sokak hattı arıza kayıtlarının istenmesi",
           "visibleWhen": { "flag": "fact_tv" },
           "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
@@ -844,20 +892,20 @@
         {
           "id": "DIL_RET",
           "kind": "OPTION",
-          "label": "Bilirkişi raporunun dosyadan çıkarılması",
+          "label": "Bilirkişi raporunun hukuka aykırı delil olarak dosyadan çıkarılması",
           "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": -30 }],
           "quality": {
             "q": "BAD",
-            "feedback": "Aleyhe bir bilirkişi raporu bu nedenle dosyadan çıkarılmaz; rapor serbestçe takdir edilir ve itiraz, yeni bilirkişi ya da bilimsel mütalaa ile sınanır (CMK 67/5–6, 217).",
+            "feedback": "Bilirkişi raporu hukuka aykırı yöntemle elde edilmiş bir delil değildir; aleyhe olması onu dosyadan çıkarmaz (CMK 206/2-a, 217/2 hukuka aykırı delil içindir). Rapor serbestçe takdir edilir; itiraz, yeni bilirkişi ya da bilimsel mütalaa ile sınanır (CMK 67/5–6).",
             "category": "USUL_BILGISI"
           }
         },
         {
           "id": "DIL_KESIF",
           "kind": "OPTION",
-          "label": "Yanık evde keşif yapılması",
+          "label": "Yanık evde hâkim ve bilirkişi huzurunda keşif ve olay yerinin yeniden fotoğraflanması",
           "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "quality": {
@@ -1369,6 +1417,10 @@
               "text": "Ve komşu. Yaşlı bir kadın, keskin bir burun, bir polis sorusu. Onu yalancı çıkarma. Hatırladığı şeyi kimin ona hatırlattığını göster."
             },
             {
+              "speaker": "leyla",
+              "text": "Bir de şunu bil: yarın kaybedebilirsin. İlk celsede kimse kazanmaz zaten; ama kaybedilebilir. Sakin ol, yazdır, iste. Bir celse bir dosyanın bitişi değil, bir ara kararın başlangıcıdır."
+            },
+            {
               "speaker": "narrator",
               "text": "Pencerenin dışında şimşek çaktı; bir an bütün fotoğraflar beyaza kesti.",
               "fx": "flash"
@@ -1427,7 +1479,7 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Uyumadım. Ama ışığı kapattım. Karanlıkta bir evin yanışını düşündüm; turuncu bir koridor camı.",
+                  "text": "Uyumadım. Ama ışığı kapattım. Karanlıkta bir evin yanışını düşündüm; turuncu bir pencere, yağmurda bir fener.",
                   "style": "thought"
                 }
               ]

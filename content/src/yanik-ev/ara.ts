@@ -153,7 +153,20 @@ export const ara: CasePart = {
       background: 'buro',
       lines: [
         {
-          lines: [th('Üç hafta. İki raporu değil, bir adamı okumam gerekiyor artık. Ve bir sokağın elektriğini.')],
+          lines: [
+            n(
+              'Akşam büroya döndüğümde Leyla’nın kapısı aralıktı. Masasında 1996 tarihli dosya yoktu; rafına kaldırmıştı. Bunu bir iltifat olarak aldım.',
+            ),
+            s(
+              'leyla',
+              'Bilirkişiyi sarstın. Güzel. Ama şimdi asıl adam ortaya çıktı: hiç kürsüye çıkmadan dosyanın ilk sayfasını yazan adam. Ona kızma. Onu oku.',
+            ),
+            s(
+              'leyla',
+              'Üç hafta uzun gibi görünür. Değildir. Müzekkereler geç gelir, tanıklar korkar, müvekkiller ümitlenir. Ümit en pahalı masraftır.',
+            ),
+            th('Üç hafta. İki raporu değil, bir adamı okumam gerekiyor artık. Ve bir sokağın elektriğini.'),
+          ],
         },
       ],
       choices: [cont('ARAGIRIS_DEVAM', 'Ara evresine başla', HUB, { role: 'PRIMARY' })],
@@ -167,7 +180,7 @@ export const ara: CasePart = {
       hud: ['day2', 'ap2'],
       lines: p2.dayLines([
         'GÜN 1/2 · İKİNCİ CELSEYE 20 GÜN. Hedef: gelen kayıtları oku; eksperin kim olduğunu öğren.',
-        'GÜN 2/2 · İKİNCİ CELSEYE 13 GÜN. Hedef: tanıklarını hazırla, tahtayı topla, kararını ver.',
+        'GÜN 2/2 · İKİNCİ CELSEYE 12 GÜN. Hedef: tanıklarını hazırla, tahtayı topla, kararını ver.',
       ]),
       tabs: [
         {
@@ -264,7 +277,7 @@ export const ara: CasePart = {
         },
       ],
       choices: [
-        option('ON_RED', 'Hayır. Ve bunu bir daha kimseye teklif etmeyin; babanızı en çok bu batırır.', {
+        option('ON_RED', 'Hayır. Bunu bir daha kimseye teklif etmeyin; babanızı en çok bu batırır.', {
           score: { SAVUNMA_STRATEJISI: 60 },
           effects: [raise('onur_red')],
           good: 'Doğru. Gerçeğe aykırı içerikte bir uzman raporu ısmarlamak, yalan tanıklığa ve delil uydurmaya varan bir yoldur (TCK 272, 38; Av.K. 34). Bir yalan, savunmanın bütün gerçeklerini yanında götürür.',
@@ -282,29 +295,25 @@ export const ara: CasePart = {
           ],
           next: 'ARA_SABAH2',
         }),
-        option(
-          'ON_MUTALAA',
-          'Ismarlama rapor olmaz. Ama bağımsız bir uzmandan bilimsel mütalaa alabiliriz; sonucu ne çıkarsa.',
-          {
-            score: { SAVUNMA_STRATEJISI: 80, USUL_BILGISI: 40 },
-            effects: [raise('onur_red'), raise('mutalaa')],
-            good: 'Yerinde. Taraflar uzmanından bilimsel mütalaa alabilir (CMK 67/6) ve uzmanın dinlenmesini isteyebilir (CMK 68/3); ama sonucu önceden belirlenmiş, parayla yazılmış bir rapor delil değil, suçtur.',
-            responses: [
-              {
-                lines: [
-                  me(
-                    'Üniversitede bir elektrik mühendisi var. Raporları okusun, panonun incelemesine baksın, ne düşünüyorsa yazsın. Lehimize ya da aleyhimize.',
-                  ),
-                  named('ONUR TAŞ', 'Ya aleyhimize yazarsa?'),
-                  me('O zaman bunu mahkemeden önce biz öğrenmiş oluruz. Bu da bir şeydir.'),
-                  s('zehra', 'Bunu yapalım. Doğrusunu.', 'mutlu'),
-                ],
-              },
-            ],
-            next: 'ARA_SABAH2',
-          },
-        ),
-        option('ON_DUSUN', 'Bunu şimdi konuşmayalım; düşüneyim.', {
+        option('ON_MUTALAA', 'Ismarlama rapor olmaz; bağımsız bir uzmandan mütalaa alırız, sonucu ne olursa.', {
+          score: { SAVUNMA_STRATEJISI: 80, USUL_BILGISI: 40 },
+          effects: [raise('onur_red'), raise('mutalaa')],
+          good: 'Yerinde. Taraflar uzmanından bilimsel mütalaa alabilir (CMK 67/6) ve uzmanın dinlenmesini isteyebilir (CMK 68/3); ama sonucu önceden belirlenmiş, parayla yazılmış bir rapor delil değil, suçtur.',
+          responses: [
+            {
+              lines: [
+                me(
+                  'Üniversitede bir elektrik mühendisi var. Raporları okusun, panonun incelemesine baksın, ne düşünüyorsa yazsın. Lehimize ya da aleyhimize.',
+                ),
+                named('ONUR TAŞ', 'Ya aleyhimize yazarsa?'),
+                me('O zaman bunu mahkemeden önce biz öğrenmiş oluruz. Bu da bir şeydir.'),
+                s('zehra', 'Bunu yapalım. Doğrusunu.', 'mutlu'),
+              ],
+            },
+          ],
+          next: 'ARA_SABAH2',
+        }),
+        option('ON_DUSUN', 'Bunu şimdi konuşmayalım. Bir gece düşüneyim, yarın size dönerim.', {
           effects: [raise('onur_dusun')],
           neutral: 'Bir avukatın bu teklifi “düşünmesi” bile karşı tarafa bir kapı aralar. Hayır, ilk anda söylenir.',
           responses: [
@@ -317,7 +326,7 @@ export const ara: CasePart = {
           ],
           next: 'ARA_SABAH2',
         }),
-        option('ON_KABUL', 'Yazsın. Onlar oyunu kurallarına göre oynamıyorsa biz de oynamayız.', {
+        option('ON_KABUL', 'Yazsın. Onlar oyunu kurallarına göre oynamıyorsa biz de oynamak zorunda değiliz.', {
           score: { SAVUNMA_STRATEJISI: -200 },
           effects: [raise('sahte_rapor'), inc('ethics')],
           bad: 'Gerçeğe aykırı, parayla ısmarlanmış bir uzman raporunu mahkemeye sunmak yalan tanıklığa azmettirme ve delil uydurmadır (TCK 272, 38) ve meslekten çıkarmaya varan bir disiplin ihlalidir (Av.K. 34).',
@@ -361,6 +370,12 @@ export const ara: CasePart = {
             ),
             me('Korkuyorum. Ama korkunun bir raporu olmaz. Benim elimde raporlar var; korkudan daha sağlam.'),
             th('Bir yalan söyledim mi? Bilmiyorum. Raporlar sağlam. Ben o kadar değilim.'),
+            n(
+              'Zehra mektup destesini çantasına koydu, bir tanesini bana uzattı. “Bunu okuyun” dedi. “Babamı benden iyi anlatıyor.” Kırk yıllık bir el yazısı: “Halil evi cilaladı yine. Ben ona ‘evi değil beni cilala’ dedim, güldü.”',
+            ),
+            th(
+              'Bir dosyada okunması gereken her kâğıt bir delil değildir. Bazısı yalnızca kimi savunduğunu hatırlatır.',
+            ),
           ],
         },
         {
@@ -378,6 +393,13 @@ export const ara: CasePart = {
             th(
               'Halil yanık evin önünde sigara yakıp tutardı. Zehra annesinin öldüğü hastanede nöbet tutuyor. Bu ailede herkes bir yasın nöbetini tutuyor.',
             ),
+            s(
+              'zehra',
+              'Babam koğuşta ayakkabı dikiyormuş. Gardiyanlara, mahkûmlara. Para almıyormuş. “Elim boş durursa aklım dolar” diyor.',
+            ),
+            th(
+              'Bir döşemecinin elleri. Bir hemşirenin nöbeti. Benim de dosyam. Herkes boş kalmamak için bir şey tutuyor.',
+            ),
           ],
         },
       ],
@@ -390,7 +412,7 @@ export const ara: CasePart = {
       lines: [
         {
           lines: [
-            card('16 NİSAN · 11.00 — ARSLAN HUKUK', 'buro'),
+            card('ARSLAN HUKUK — SABAH', 'buro'),
             n(
               'Zehra’nın arkasından altmışlarında, siyah başörtülü, bir naylon dosya tutan bir kadın girdi. Oturmadan önce koltuğa baktı; oturulup oturulmayacağını sorar gibi.',
             ),
@@ -500,7 +522,7 @@ export const ara: CasePart = {
         lines: [
           {
             lines: [
-              card('KALEM SOKAK 7 — 17 NİSAN, 16.20', 'ev'),
+              card('KALEM SOKAK 7 — İKİNDİ', 'ev'),
               s('saadet', 'Gel kızım. Mahkemede beni kızdırdın ama haklıydın. Cevdet’miş o adam. Utandım.'),
               s(
                 'saadet',
@@ -530,7 +552,7 @@ export const ara: CasePart = {
           {
             when: flag('fact_teneke_saadet'),
             lines: [
-              card('MURADİYE MEYDANI — 18 NİSAN, 21.00', 'sokak_karanlik'),
+              card('MURADİYE MEYDANI — GECE', 'sokak_karanlik'),
               s(
                 'cevdet',
                 'Avukat hanım. Mahkemeden davetiye geldi. Amirime söyledim. Kızdı, sonra “git, doğruyu söyle” dedi.',
@@ -542,7 +564,7 @@ export const ara: CasePart = {
           },
           {
             lines: [
-              card('MURADİYE MEYDANI — 18 NİSAN, 21.00', 'sokak_karanlik'),
+              card('MURADİYE MEYDANI — GECE', 'sokak_karanlik'),
               s(
                 'cevdet',
                 'Avukat hanım. Mahkemeden davetiye geldi. Amirime söyledim. Kızdı, sonra “git, doğruyu söyle” dedi.',
@@ -579,21 +601,17 @@ export const ara: CasePart = {
             ],
             next: '$stay',
           }),
-          option(
-            'CV2_AMIR',
-            'Mahkemede yalnızca defterinizi ve gördüğünüzü anlatın. Ne söyleyeceğinizi ben söylemem.',
-            {
-              score: { SORGULAMA: 30 },
-              effects: [raise('cevdet_hazir')],
-              good: 'Doğru sınır: tanığa ne söyleyeceği söylenmez; yalnızca kendi algısını anlatması gerektiği hatırlatılır.',
-              responses: [
-                {
-                  lines: [s('cevdet', 'Defter ne diyorsa. Gözüm ne gördüyse. O kadar. Başka türlüsünü bilmem zaten.')],
-                },
-              ],
-              next: '$stay',
-            },
-          ),
+          option('CV2_AMIR', 'Mahkemede defterinizi ve gördüğünüzü anlatın; ne diyeceğinizi ben söylemem.', {
+            score: { SORGULAMA: 30 },
+            effects: [raise('cevdet_hazir')],
+            good: 'Doğru sınır: tanığa ne söyleyeceği söylenmez; yalnızca kendi algısını anlatması gerektiği hatırlatılır.',
+            responses: [
+              {
+                lines: [s('cevdet', 'Defter ne diyorsa. Gözüm ne gördüyse. O kadar. Başka türlüsünü bilmem zaten.')],
+              },
+            ],
+            next: '$stay',
+          }),
           rawChoice('CONTINUE', 'CV2_BITIR', 'Teşekkür et ve çık', { role: 'BACK', next: '$return' }),
         ],
       }),
@@ -654,29 +672,25 @@ export const ara: CasePart = {
             ],
             next: '$stay',
           }),
-          option(
-            'HL_EK',
-            'Hâkim size dikkatsizlik sorabilir. Elektrikçiyi ve takvimi, olduğu gibi anlatın; fazlasını değil.',
-            {
-              score: { SAVUNMA_STRATEJISI: 40 },
-              effects: [raise('halil_ek_hazir')],
-              good: 'Doğru hazırlık: müvekkile hakkını ve sürecin olası yönünü (CMK 226 ek savunma) anlatmak, ne söyleyeceğini ezberletmeden doğruyu söylemesini istemek.',
-              responses: [
-                {
-                  lines: [
-                    s('halil', 'Dikkatsizlik mi? Yani evi yakmadım ama yanmasına göz mü yumdum?'),
-                    me('Öyle sorabilirler. Siz ne yaptıysanız onu söyleyin. Usta ne dedi, siz ne yaptınız.'),
-                    s(
-                      'halil',
-                      'Usta “ağır yük çekme” dedi. Çekmedim. Restorasyona koydum. Son hafta evde de değildim. Bu kadar.',
-                    ),
-                    th('Bu kadar. Halil’in en sevdiği iki kelime. Mahkemede de en işe yarayanlar.'),
-                  ],
-                },
-              ],
-              next: '$stay',
-            },
-          ),
+          option('HL_EK', 'Hâkim dikkatsizliği sorabilir; elektrikçiyi, takvimi olduğu gibi anlatın.', {
+            score: { SAVUNMA_STRATEJISI: 40 },
+            effects: [raise('halil_ek_hazir')],
+            good: 'Doğru hazırlık: müvekkile hakkını ve sürecin olası yönünü (CMK 226 ek savunma) anlatmak, ne söyleyeceğini ezberletmeden doğruyu söylemesini istemek.',
+            responses: [
+              {
+                lines: [
+                  s('halil', 'Dikkatsizlik mi? Yani evi yakmadım ama yanmasına göz mü yumdum?'),
+                  me('Öyle sorabilirler. Siz ne yaptıysanız onu söyleyin. Usta ne dedi, siz ne yaptınız.'),
+                  s(
+                    'halil',
+                    'Usta “ağır yük çekme” dedi. Çekmedim. Restorasyona koydum. Son hafta evde de değildim. Bu kadar.',
+                  ),
+                  th('Bu kadar. Halil’in en sevdiği iki kelime. Mahkemede de en işe yarayanlar.'),
+                ],
+              },
+            ],
+            next: '$stay',
+          }),
           option('HL_EV', 'Dava bitince Kalem Sokak’a ne olacak?', {
             score: { SAVUNMA_STRATEJISI: 10 },
             responses: [
@@ -691,6 +705,10 @@ export const ara: CasePart = {
                     'Ahşap yine ahşap olacak. Belediye de öyle istiyor, tescilli sokak. Nermin’in tavan göbeğini fotoğraftan çizdireceğim.',
                   ),
                   s('halil', 'Ama içeride uyuyamam herhalde. Bir süre. Atölyede kanepe var.', 'uzgun'),
+                  s(
+                    'halil',
+                    'Saadet’e de bir pencere yapacağım. Onun cumbası yandı, benim yüzümden değil ama benim evimden. Komşuluk böyle bir şey; kimin kibriti olduğuna bakılmaz, kimin saçağı olduğuna bakılır.',
+                  ),
                   th(
                     'Bir adam yanmış evini yeniden yapmayı planlıyor; aynı yerde, aynı ahşapla. Bir kundakçı küllerine geri dönmez. Ya da döner; ama sandığını yanına alarak değil.',
                   ),
@@ -747,7 +765,7 @@ export const ara: CasePart = {
       ],
       prompt: 'Eksper hakkında ne yapacaksın?',
       choices: [
-        option('SC_DUYURU', 'Savcılığa yazılı suç duyurusu: delil uydurarak iftira ve delillerle oynama şüphesi', {
+        option('SC_DUYURU', 'Savcılığa yazılı suç duyurusu: delil uydurma ve iftira şüphesi', {
           score: { USUL_BILGISI: 100 },
           effects: [raise('suc_duyurusu'), inc('legal_hits')],
           good: 'Doğru yol. Şüpheli bir delil uydurma (TCK 267/2) ve delilleri değiştirme (TCK 281) için yetkili merci Cumhuriyet savcılığıdır (CMK 158). Delil toplamak, el koymak ve şüpheliyi dinlemek savcılığın işidir; avukat kovalamaz, bildirir.',
@@ -765,7 +783,7 @@ export const ara: CasePart = {
           ],
           next: HUB,
         }),
-        option('SC_KENDIN', 'Eksperin bürosuna git ve onunla yüzleş', {
+        option('SC_KENDIN', 'Eksperin bürosuna git; onunla yüz yüze konuş ve tepkisini kendi gözünle gör', {
           score: { USUL_BILGISI: -60 },
           effects: [raise('eksper_uyarildi')],
           bad: 'Şüpheliyi kendin sorgulamaya ya da sıkıştırmaya kalkmak, onu uyarır ve delilleri yok etmesine fırsat verir; avukatın işi değildir. Yetkili merci savcılıktır (CMK 158).',
@@ -979,7 +997,7 @@ export const ara: CasePart = {
         },
       ],
       choices: [
-        option('KP_BILDIR', 'Konuşmayı saatiyle not et ve sabah savcılığa ve mahkemeye bildir', {
+        option('KP_BILDIR', 'Konuşmayı saatiyle not et; sabah savcılığa ve mahkemeye bildir', {
           score: { USUL_BILGISI: 40 },
           effects: [raise('tehdit_bildirildi')],
           good: 'Doğru: dinlenecek bir tanığın duruşma öncesi karşı tarafın avukatına yaklaşması kayda geçirilir ve yetkili mercie bildirilir.',
@@ -994,7 +1012,7 @@ export const ara: CasePart = {
           ],
           next: 'ARA_SON_1',
         }),
-        option('KP_TEHDIT', 'Arkasından seslen: “Yarın kürsüde kaçacak yerin olmayacak.”', {
+        option('KP_TEHDIT', 'Arkasından seslen: “Yarın kürsüde kaçacak yerin olmayacak, Tarık Bey.”', {
           score: { SAVUNMA_STRATEJISI: -30 },
           effects: [raise('deniz_tehdit')],
           bad: 'Dinlenecek bir tanığa duruşma öncesi gözdağı vermek, ertesi gün katılan vekilinin elinde savunmaya karşı bir koz olur.',
@@ -1008,7 +1026,7 @@ export const ara: CasePart = {
           ],
           next: 'ARA_SON_1',
         }),
-        option('KP_GIT', 'Hiçbir şey söyleme; kapıyı kilitle ve eve git', {
+        option('KP_GIT', 'Hiçbir şey söyleme; kapıyı kilitle, eve git ve sabahı bekle', {
           responses: [{ lines: [th('Bir şey söylemedim. Bazen en iyi cevap, ertesi sabah kürsüde verilendir.')] }],
           next: 'ARA_SON_1',
         }),
@@ -1025,6 +1043,9 @@ export const ara: CasePart = {
             th(
               'Tenekeler içeri dolu girdi. Laboratuvar yangını değil, tenekeleri ölçtü. Yarın bunu ona, kendi tenekesiyle soracağım.',
             ),
+            th(
+              'Kızgın değilim. Bunu fark edince şaşırdım. Kızgınlık bir avukatın elinde iyi bir alet değil; kayar, keser, insanın kendi elini keser. Yarın kayıtlarla konuşacağım. Kayıtlar kızmaz.',
+            ),
           ],
         },
         {
@@ -1037,7 +1058,7 @@ export const ara: CasePart = {
         },
       ],
     }),
-    decisionNode('ARA_SON_2', [{ to: 'T_00K' }], {
+    decisionNode('ARA_SON_2', [{ to: 'ARA_SON_3' }], {
       ...INV2,
       lines: [
         {
@@ -1060,6 +1081,38 @@ export const ara: CasePart = {
           lines: [
             th(
               'Yarın hâkim “kasıt yoksa dikkatsizlik var mı” diye soracak. Cevabım henüz ince. İnce bir kumaş gibi; gerilince yırtılabilir.',
+            ),
+          ],
+        },
+      ],
+    }),
+    decisionNode('ARA_SON_3', [{ to: 'T_00K' }], {
+      ...INV2,
+      lines: [
+        {
+          lines: [
+            n(
+              'Gece yarısına doğru telefon çaldı. Zehra. Arkada bir hastane koridorunun uğultusu, bir monitörün düzenli sesi.',
+            ),
+            s(
+              'zehra',
+              'Uyuyor muydunuz? Ben nöbetteyim. Babam yarın için o dar ceketi giyecekmiş. Yenisini almayayım dedi; “annen gibi bir beden küçük olsun, uğur getirir.”',
+            ),
+            s(
+              'zehra',
+              'Telefonda güldü. İki aydır ilk kez. “Omzunu yarın adliyede açarım” dedi. “Döşemeci ceket dikemez mi sanıyorsun?”',
+              'mutlu',
+            ),
+            me('Yarın erken gelin. Babanız sizi salonda görsün; kürsüye bakmadan önce.'),
+            s(
+              'zehra',
+              'Avukat hanım… yarın ne olursa olsun, babamın derecesini biliyorum artık. Birinci derece. Geçer.',
+            ),
+            th(
+              'Birinci derece yanık: kızarır, acır, iz bırakmaz. Bir kızın babasına koyduğu en merhametli teşhis. Yarın hâkim kendi teşhisini koyacak.',
+            ),
+            n(
+              'Telefonu kapattım. Masada üç yığın: Tarık’ın kitabı, Halil’in iplikleri, bir sokağın elektriği. Lambayı söndürdüm. Yağmur yine başlamıştı.',
             ),
           ],
         },

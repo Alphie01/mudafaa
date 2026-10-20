@@ -67,24 +67,37 @@ ded_taze; B5 poliçe ve borç → İTİRAZ (uzmanlık dışı, CMK 67/3).
 
 **Tarık Sönmez (2. celse):** U1 polis izni → ev_cizelge; U2 molozun altında iz → ded_temizlenmis; U3 numune zeminden →
 ded_ekilmis / ev_elkoyma (tam), ev_lab / ded_taze (kısmi); U4 raporlarım doğrulandı → ev_tahkim; U5 beklentim yok → ded_kopya;
-U6 elektrik olsaydı görürdüm → ev_ark / ded_elektrik / ded_notr. Üç çelişkiden sonra kırılma (CMK 48 uyarısı, susma).
+U6 elektrik olsaydı görürdüm → iki ayrı kural: ark (ev_ark / ded_elektrik → `contra_u6_ark`) ve nötr kopması (ev_ariza /
+ded_notr → `contra_u6_notr`); her yanıt yalnızca sunulan kaydı söyler. Üç çelişkiden sonra kırılma (CMK 48 uyarısı, susma).
 
 ## 5. Sonuçlar
 
 | Öncelik | Kimlik | Sınıf | Koşul (özet) | Hüküm |
 |---|---|---|---|---|
-| 1 | ETIK | CONVICTION | Para karşılığı karşı rapor kabul edildi | 170/1-a + 158/1-k, 35; etik kartı |
-| 2 | BERAAT_B | ACQUITTAL (223/2-b) | Hızlandırıcı çöktü + eksper kırıldı + elektrik kaynağı ispatlandı (ark ya da elektrik çıkarımı ve nötr) + taksire cevap + gerçek savunması + ikna ≥ 8 + final eşiği | Beraat, tahliye, eksper hakkında suç duyurusu |
-| 3 | BERAAT_E | ACQUITTAL (223/2-e) | Hızlandırıcı çöktü + motif ipliklerinden ≥ 2 + taksire cevap + beraat savunması + final eşiği | Beraat |
-| 4 | TAKSIR | RECHARACTERIZED | Hızlandırıcı çöktü + final eşiği | TCK 171/1-a: 6 ay → TCK 62 ile 5 ay; zarar giderilmediğinden HAGB yok, TCK 51 erteleme; 158/1-k’den beraat |
-| 5 | MAHKUMIYET | CONVICTION | Varsayılan (çöküş dahil) | 170/1-a 1 yıl 6 ay + 158/1-k, 35/2: 2 yıl ve 500 gün |
+| 1 | ETIK | CONVICTION | Ismarlama rapor kabul edildi ∧ hızlandırıcı tespiti ayakta | 170/1-a + 158/1-k, 35; mütalaa hükme esas alınmaz; suç duyurusu, baroya bildirim; etik kartı |
+| 2 | ETIK_T | RECHARACTERIZED | Ismarlama rapor kabul edildi ∧ hızlandırıcı tespiti çöktü | TCK 171/1-a 5 ay, erteleme; 158/1-k’den 2-e beraat; mütalaa hükme esas alınmaz; suç duyurusu, baroya bildirim; etik kartı |
+| 3 | BERAAT_B | ACQUITTAL (223/2-b) | Hızlandırıcı çöktü + eksper kırıldı + `elektrik_ispat` (elektrik bilirkişisi raporu ve nötr kopması) + taksire cevap + gerçek savunması + ikna ≥ 8 + final eşiği | Beraat, tahliye, eksper hakkında suç duyurusu |
+| 4 | BERAAT_E | ACQUITTAL (223/2-e) | Hızlandırıcı çöktü + motif ipliklerinden ≥ 2 + taksire cevap + beraat savunması + final eşiği | Beraat |
+| 5 | TAKSIR | RECHARACTERIZED | Hızlandırıcı çöktü (skor ve çöküşten bağımsız) | TCK 171/1-a: 6 ay → TCK 62 ile 5 ay; zarar giderilmediğinden HAGB yok, TCK 51 erteleme; 158/1-k’den beraat |
+| 6 | MAHKUMIYET | CONVICTION | Varsayılan: hızlandırıcı tespiti ayakta (çöküş dahil) | 170/1-a 1 yıl 6 ay + 158/1-k, 35/2: 2 yıl ve 500 gün; TCK 63 mahsup |
 
 Eşikler (eşik çubuğuyla aynı): Mahkûmiyet 0 · Taksir 7.000 · Beraat 12.500; 223/2-b ayrıca 13.500 ve hâkimin kanaati
-(`pers`) ≥ 8. `scaleMax` 14.800 (doğrulayıcının final skor aralığı −2.520…15.565). Çöküş (`cred` 0) hangi skorda olursa olsun
-MAHKUMIYET'e gider. XP: 223/2-b 1,2 · 223/2-e 1,0 · taksir 0,85 · mahkûmiyet 0,6 · etik 0 (etik ihlalinde yarı).
+(`pers`) ≥ 8. `scaleMax` 14.800. Hukuki tavan kuralı (inceleme, 2026-10-20): kastın tek dayanağı numune zinciridir; zincir
+çöktüyse (`hizlandirici_coktu`) kötü savunma, düşük skor ya da çöküş kesintisi sonucu kasten mahkûmiyete indiremez, en kötü
+sonuç taksirdir. Bu yüzden taksir bandı (7.000) eşik çubuğunda yalnızca görsel bir banttır. Çöküş (`cred` 0) zincir kurulmadan
+olursa MAHKUMIYET'e, kurulduktan sonra olursa TAKSIR'e gider; hiçbir gerekçe "müdafiin sunumlarını" mahkûmiyet dayanağı yapmaz.
+XP: 223/2-b 1,2 · 223/2-e 1,0 · taksir 0,85 · mahkûmiyet 0,6 · etik 0 (etik ihlalinde yarı).
+
+Gerekçe parçaları kayda bağlıdır: BERAAT_B'de ark cümlesi `ev_ark`, nötr cümlesi `ded_notr`/`ev_ariza`, zemin ve piroliz
+cümleleri ilgili çelişkilere; BERAAT_E'de banka, artış, eşya, benzin cümleleri sırasıyla `motif_banka`, `motif_artis`,
+`contra_s3`, `contra_s6`'ya; takvim cümlesi taksire takvimle verilen cevaba, dış etken cümlesi `taksir_dis`'e; "elektrik
+kaynaklı olması kuvvetle muhtemel" cümlesi elektrik kaydına (yoksa nötr bir cümle). T06_B ve T06_E konuşmaları da kayda göre
+üç değişkelidir.
 
 Ek koşul yüklemleri (`meta.predicates`): `hizlandirici_coktu` = contra_b2 ∧ (contra_b1 ∨ contra_u2 ∨ contra_b4 ∨ contra_u3);
-`motif_coktu` = en az ikisi: contra_s3, contra_s6, motif_banka, motif_artis; `elektrik_ispat` = (ded_elektrik ∨ contra_u6) ∧ ded_notr.
+`motif_coktu` = en az ikisi: contra_s3, contra_s6, motif_banka, motif_artis; `elektrik_ispat` = (ev_ark ∨ ded_elektrik) ∧ ded_notr
+(eski tanım `contra_u6`'yı da kabul ediyordu: ark raporu hiç istenmeden U6'ya nötr kopması sunularak 2-b alınabiliyor, hükümde
+hiç alınmamış bir rapor anılıyordu; `N_B_ARKSIZ` negatif testi bunu kapatır).
 
 ## 6. Node grafiği
 
@@ -95,12 +108,14 @@ her etkinlik doğrudan döner (kaçış uzaklığı sınırı, Dava #07 raporu �
 
 | Ad | Sonuç | Özet |
 |---|---|---|
-| TIPIK | BERAAT_E | Bütün soruşturma; 1. celsede numune zinciri ve temizlenmiş zemin; pano ve lab talebi; arada tahkim ve lab; suç duyurusu yok; 2-e savunması |
-| G_B | BERAAT_B | Ayrıca arıza kaydı + ark raporu + nötr; suç duyurusu (el koyma); eksper kırılır; 2-b savunması |
+| TIPIK | BERAAT_E | Bütün soruşturma; 1. celsede numune zinciri, temizlenmiş zemin ve atölye kapı defteri (Q_GECE); pano ve lab talebi; arada tahkim ve lab; suç duyurusu (SC_DUYURU, el koyma); Necati hazır tanık; 2-e savunması |
+| G_B | BERAAT_B | Ayrıca arıza kaydı + ark raporu + nötr; U6'ya ark ve nötr ayrı ayrı; eksper kırılır; 2-b savunması |
+| N_B_ARKSIZ | TAKSIR | Negatif test: pano incelemesi hiç istenmez, U6'ya yalnızca nötr kopması; 2-b savunması ispatsız kalır (BERAAT_B'ye ulaşılamaz) |
 | G_T | TAKSIR | Hızlandırıcı çöker, ama yenileme takvimi ve nötr bulunmaz; taksire cevap verilemez |
 | G_M | MAHKUMIYET | Yüzeysel soruşturma, çelişkiler kurulamaz |
-| G_ETIK | ETIK | Karşı rapor teklifi kabul edilir |
-| W | MAHKUMIYET (çöküş) | Yanlış delil sunumlarıyla güvenilirlik 0 |
+| G_ETIK_M | ETIK | G_M + ısmarlama rapor; ikinci celsede güven biter (çöküş) |
+| G_ETIK | ETIK_T | Tam soruşturma + ısmarlama rapor; zincir kurulmuş olduğundan Halil taksirden hüküm giyer |
+| W | TAKSIR (çöküş) | Birinci celsede zincir kurulur, ikinci celsede yanlış delil sunumlarıyla güvenilirlik 0: tavan kuralı gereği taksir |
 
 ## 8. Ölçümler (2026-10-20)
 

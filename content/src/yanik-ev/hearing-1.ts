@@ -161,6 +161,12 @@ export const hearing1: CasePart = {
             th(
               'Kalkan Sigorta’nın eksperi. Raporun altındaki imza. Benimle göz göze geldi ve kibarca başını eğdi. Ben de eğdim. Kibarlık, bazen bir silahın kılıfıdır.',
             ),
+            n(
+              'Pencerenin önünde Saadet Hanım, siyah bir manto, elinde bir tespih. Beni görünce tespihi çantasına soktu; bir suç aletini saklar gibi. Savcılığın tanığıydı ve bunu biliyordu.',
+            ),
+            th(
+              'Bugün o kadının hafızasını sınayacağım. Yalancı çıkarmadan. Leyla’nın cümlesi: “Hatırladığı şeyi kimin ona hatırlattığını göster.” Bir hafıza da bir olay yeri gibidir; kimin bastığına bakarsın.',
+            ),
             n('Halil’le iki dakikam vardı. Jandarma saatine baktı.'),
           ],
         },
@@ -400,7 +406,23 @@ export const hearing1: CasePart = {
         }),
         option('Q_GECE', 'Yangın gecesi nerede olduğunuzu kim bilir?', {
           score: { SORGULAMA: 20 },
+          effects: [ifThen(flag('fact_alibi'), [raise('alibi_kayit'), score('SORGULAMA', 40), inc('pers')])],
           responses: [
+            {
+              when: flag('fact_alibi'),
+              lines: [
+                s(
+                  'halil',
+                  'Atölyedeydim, hâkim hanım. Sanayinin kapısı on birde kilitlenir, altıda açılır. Bekçi gece birde, üçte tur attı; makinenin sesini duymuş. Sabah beşte çay getirdi.',
+                ),
+                me(
+                  'Sayın Hâkim, sitenin kapı defterinin o geceki sayfası: “23.00 kilit, 06.00 açık, giriş-çıkış yok.” Örneğini sunuyoruz; bekçi gerekirse dinlenebilir.',
+                ),
+                s('savci', 'Bir mazeret bir yangının nasıl çıktığını açıklamaz, Sayın Hâkim.'),
+                s('hakim', 'Ama bir sanığın o gece nerede olduğunu açıklar. Defter örneği dosyaya konsun.'),
+                th('Bir kalkan değil; bir ağırlık. Hâkimin terazisine konan küçük, düzgün, kâğıttan bir ağırlık.'),
+              ],
+            },
             {
               lines: [
                 s('halil', 'Atölyenin bekçisi. Sabah beşte çay getirdi. Kimse ona sormadı.'),
@@ -463,33 +485,29 @@ export const hearing1: CasePart = {
       ],
       next: 'H1_04',
       options: [
-        option(
-          'H103_A',
-          'İtiraz: bu katılanın kendi uzmanının görüşüdür, mahkemenin bilirkişisi değil; gözlemleri varsa eksper tanık olarak dinlenmeli',
-          {
-            score: { USUL_BILGISI: 100 },
-            effects: [inc('legal_hits'), inc('pers'), raise('tarik_istendi'), raise('h1_eksper_itiraz')],
-            good: 'Doğru. Taraflar uzmandan bilimsel mütalaa alabilir (CMK 67/6), ama bu, mahkemenin atadığı bilirkişinin raporu değildir. Olayın ispatı bir kişinin algısına dayanıyorsa o kişi duruşmada dinlenir; yazılı açıklama okunarak dinlemenin yerine konamaz (CMK 210/1). Uzmanın dinlenmesi CMK 68/3 ile istenir.',
-            responses: [
-              {
-                lines: [
-                  s(
-                    'hakim',
-                    'İtiraz yerinde. Rapor katılanın sunduğu bir uzman görüşü olarak dosyada kalır; bilirkişi raporu yerine geçmez.',
-                  ),
-                  s(
-                    'hakim',
-                    'Raporu düzenleyen kişinin olay yerindeki gözlemleri için tanık olarak dinlenmesine karar verilmesi değerlendirilecektir.',
-                  ),
-                  n(
-                    'Katılan vekili oturdu. Arka sırada takım elbiseli adam bir şey yazdı, sonra yazdığının üstünü çizdi.',
-                  ),
-                ],
-              },
-            ],
-          },
-        ),
-        option('H103_B', 'Raporun dosyadan tamamen çıkarılmasını talep ederiz', {
+        option('H103_A', 'İtiraz: bu katılanın uzman görüşü, bilirkişi raporu değil; eksper dinlensin', {
+          score: { USUL_BILGISI: 100 },
+          effects: [inc('legal_hits'), inc('pers'), raise('tarik_istendi'), raise('h1_eksper_itiraz')],
+          good: 'Doğru. Taraflar uzmandan bilimsel mütalaa alabilir (CMK 67/6), ama bu, mahkemenin atadığı bilirkişinin raporu değildir. Olayın ispatı bir kişinin algısına dayanıyorsa o kişi duruşmada dinlenir; yazılı açıklama okunarak dinlemenin yerine konamaz (CMK 210/1). Uzmanın dinlenmesi CMK 68/3 ile istenir.',
+          responses: [
+            {
+              lines: [
+                s(
+                  'hakim',
+                  'İtiraz yerinde. Rapor katılanın sunduğu bir uzman görüşü olarak dosyada kalır; bilirkişi raporu yerine geçmez.',
+                ),
+                s(
+                  'hakim',
+                  'Raporu düzenleyen kişinin olay yerindeki gözlemleri için tanık olarak dinlenmesine karar verilmesi değerlendirilecektir.',
+                ),
+                n(
+                  'Katılan vekili oturdu. Arka sırada takım elbiseli adam bir şey yazdı, sonra yazdığının üstünü çizdi.',
+                ),
+              ],
+            },
+          ],
+        }),
+        option('H103_B', 'Talep: rapor usulsüz düzenlendiğinden delil olarak dosyadan tamamen çıkarılsın', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Katılanın sunduğu bir belge dosyadan “çıkarılmaz”; değeri hükümde takdir edilir (CMK 217). Doğru yol, raporun bilirkişi raporu yerine geçemeyeceğini ve yazarının dinlenmesi gerektiğini ileri sürmektir (CMK 67/6, 210/1).',
@@ -502,7 +520,7 @@ export const hearing1: CasePart = {
             },
           ],
         }),
-        option('H103_C', 'Sessiz kal', {
+        option('H103_C', 'Bir şey söyleme; raporun zayıflığını esas hakkındaki savunmada ortaya koy', {
           effects: [dec('pers')],
           neutral:
             'Ekspertiz raporu itirazsız okundu; hâkim onu bilirkişi raporunun yanında, onunla aynı ağırlıkta dinledi.',
@@ -517,7 +535,7 @@ export const hearing1: CasePart = {
             },
           ],
         }),
-        option('H103_D', 'Bu rapor sahtedir; eksperin kendisi yargılanmalı', {
+        option('H103_D', 'İtiraz: rapor gerçeğe aykırıdır; eksper hakkında suç duyurusunda bulunuyoruz', {
           score: { USUL_BILGISI: -80 },
           effects: [dec('cred'), dec('pers')],
           bad: 'Elinde delil yokken duruşmada bir kişiyi sahtecilikle suçlamak, savunmanın güvenilirliğini harcar ve stratejini erkenden ele verir. Önce dinlenmesini iste; iddia delille kurulur.',
@@ -927,27 +945,23 @@ export const hearing1: CasePart = {
       ],
       next: 'H1_06',
       options: [
-        option(
-          'H105_A',
-          'İtiraz: soru cevabı içinde taşıyor; bilirkişiye gözlemini değil, katılanın sonucunu söyletiyor',
-          {
-            score: { USUL_BILGISI: 100 },
-            effects: [inc('legal_hits'), inc('pers')],
-            good: 'Yerinde. Soruların yöneltilmesi hâkimin yönetimindedir (CMK 192, 201); cevabı içeren soru bilirkişinin kendi incelemesini anlatmasını engeller. Ayrıca “kasten” sorusu bilirkişiye değil hâkime aittir (CMK 67/3).',
-            responses: [
-              {
-                lines: [
-                  s(
-                    'hakim',
-                    'İtiraz yerinde. Bilirkişi, ne gördüğünüzü ve neye dayandığınızı anlatın. Kastı ben değerlendiririm.',
-                  ),
-                  s('tezel', 'Elbette, hâkim hanım. Bulgularımı anlatayım.'),
-                ],
-              },
-            ],
-          },
-        ),
-        option('H105_B', 'Sessiz kal', {
+        option('H105_A', 'İtiraz: soru cevabı içinde taşıyor; bilirkişiye sonucu söyletiyor', {
+          score: { USUL_BILGISI: 100 },
+          effects: [inc('legal_hits'), inc('pers')],
+          good: 'Yerinde. Soruların yöneltilmesi hâkimin yönetimindedir (CMK 192, 201); cevabı içeren soru bilirkişinin kendi incelemesini anlatmasını engeller. Ayrıca “kasten” sorusu bilirkişiye değil hâkime aittir (CMK 67/3).',
+          responses: [
+            {
+              lines: [
+                s(
+                  'hakim',
+                  'İtiraz yerinde. Bilirkişi, ne gördüğünüzü ve neye dayandığınızı anlatın. Kastı ben değerlendiririm.',
+                ),
+                s('tezel', 'Elbette, hâkim hanım. Bulgularımı anlatayım.'),
+              ],
+            },
+          ],
+        }),
+        option('H105_B', 'Sus; cevabı çapraz sorguda kendi sorularınla çürüt', {
           effects: [dec('pers')],
           neutral: 'Telkin edici soru cevaplandı: bilirkişi “kesin” kelimesini katılanın ağzından aldı.',
           responses: [
@@ -962,7 +976,7 @@ export const hearing1: CasePart = {
             },
           ],
         }),
-        option('H105_C', 'Bilirkişinin reddini talep ediyoruz', {
+        option('H105_C', 'Bilirkişinin reddini talep ediyoruz: tarafgir bir görüş bildiriyor', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Bilirkişinin reddi ancak hâkimin reddini gerektiren sebeplerle mümkündür (CMK 69/1); aleyhe görüş bir ret sebebi değildir. Görüş çapraz sorguda ve gerekirse yeni bilirkişiyle sınanır.',
@@ -975,7 +989,7 @@ export const hearing1: CasePart = {
             },
           ],
         }),
-        option('H105_D', 'Soruyu ben sormak istiyorum, Sayın Hâkim', {
+        option('H105_D', 'Soruyu müdafi olarak şimdi ben sormak istiyorum, Sayın Hâkim', {
           neutral:
             'Soru sırası katılandadır; müdafi kendi sırasında sorar. Talep reddedildi, telkin edici soru cevaplandı.',
           responses: [
@@ -1392,7 +1406,7 @@ export const hearing1: CasePart = {
           good: 'Kabul: olay yerini muhafaza eden ve girişleri kaydeden kişi (CMK 206/1).',
           next: '$stay',
         }),
-        option('T1_HEYET', 'Yeni bir yangın bilirkişi heyetinden rapor alınması', {
+        option('T1_HEYET', 'Yeni bir yangın bilirkişi heyetinden, tesisatı ve zemini de kapsayan rapor alınması', {
           cost: [{ var: 'h1_hak', amount: 1 }],
           score: { USUL_BILGISI: 10 },
           neutral:
@@ -1479,21 +1493,16 @@ export const hearing1: CasePart = {
             card('14 NİSAN · 12.10 — ADLİYE KORİDORU', 'adliye'),
             n('Koridorda biri adımı söyledi. Dr. Orhan Tezel, tüvit ceketi kolunda, dosyası koltuğunun altında.'),
             s('tezel', 'Av. Arslan. Bir dakikanızı alabilir miyim? Kürsüde söyleyemediğim bir şey var.'),
-            s(
-              'tezel',
-              'Otuz bir yıldır bilirkişilik yaparım. Bana gelen numunenin kimden geldiğini hiç sormadım. Savcılık mühürlü getirir, ben açarım. Mühür bana yeterdi.',
+            me(
+              'Hocam, siz mahkemenin bilirkişisisiniz. Dosya hakkında sizinle salon dışında konuşamam. Söyleyeceğiniz bir şey varsa mahkemeye yazın; ben de okurum, savcı da.',
             ),
+            n('Bir an durdu. Sonra, otuz bir yılın bütün ağırlığıyla, başını salladı.'),
             s(
               'tezel',
-              'Bugün bir mühürün, onu kimin bastığından daha güvenilir olamayacağını öğrendim. Altmış bir yaşında. Geç.',
+              'Haklısınız. Yazacağım. Bana gelen numunenin kimden geldiğini hiç sormadım; mühür bana yeterdi. Bunu mahkemeye yazacağım. Altmış bir yaşında. Geç.',
               'uzgun',
             ),
-            me('Bana teşekkür etmeyin. Raporunuzun ekini okudum, o kadar. Siz yazmışsınız; kimse okumamış.'),
-            s('tezel', 'Okumamışlar. Ben de okumamışım aslında; kendi ekimi.'),
-            n(
-              'Gitmeden önce durdu, dosyasından bir kâğıt çıkarıp bana uzattı: emanet makbuzu. Sigorta panosu, emanet numarası, raf.',
-            ),
-            s('tezel', 'Panoyu bir elektrikçiye gösterin. Benim bakmam gerekirdi. Bakmadım.'),
+            n('Gitti. Ayakkabılarının sesi Tarık Sönmez’inki gibi düzenli değildi; yorgun ve dürüst.'),
             th('Bir bilirkişinin kendi raporuna yazdığı en dürüst dipnot, bir koridorda söylediği cümleydi.'),
           ],
         },

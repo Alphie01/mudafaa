@@ -9,12 +9,12 @@ export const briefing: CasePart = {
   nodes: [
     story('PROLOG', {
       ...PRO,
-      title: '02.08',
+      title: 'Gece',
       background: 'sokak_karanlik',
       lines: [
         {
           lines: [
-            card('15 OCAK · GECE 01.30 — MURADİYE, KALEM SOKAK', 'sokak_karanlik'),
+            card('15 OCAK · GECE — MURADİYE, KALEM SOKAK', 'sokak_karanlik'),
             n(
               'Yağmur akşamdan beri yağıyordu. Cumbaların altından damlayan su, arnavutkaldırımının taşları arasında küçük, siyah dereler açıyordu.',
             ),
@@ -22,22 +22,15 @@ export const briefing: CasePart = {
               'Sokağın evleri yüz yaşındaydı. Ahşap, sıva, kerpiç; biri ötekine yaslanmış, yorgun ihtiyarlar gibi. Birinin saçağı ötekinin penceresine değiyordu.',
             ),
             n(
-              'Bir el feneri kapıları tek tek yokladı. Bir tokmak, bir kilit, bir düdük. Bir köpek havladı, vazgeçti. Fener sokağın sonunda döndü ve gitti.',
+              'Bir el feneri sokağın başında belirdi. Işığı kapılarda, pencerelerde, bir cumbanın altında gezindi; bir evin önünde bir an durdu. Sonra döndü ve yağmurun içinde küçüldü.',
             ),
             voice('BİR KADIN', 'Kim o? … Kim o dedim? … Neyse. Bu saatte kimse kimse değil.', 'whisper'),
             n('Bir perde kapandı. Bir soba borusu tısladı. Sokak yeniden yağmurun oldu.'),
-            card('02.08', 'sokak_karanlik'),
             n(
-              'Sokak lambaları bir an karardı. Sonra fazla parlak yandı; o kadar parlak ki ıslak taşlar bir saniyeliğine gündüz gibi oldu.',
+              'Kimse ilk kıvılcımı görmedi. Gören, alevi gördü: dokuz numaranın pencereleri içeriden turuncu bir ışıkla doldu, sanki ev gece yarısı bütün lambalarını birden yakmıştı.',
             ),
             n(
-              'Karşı evlerden birinin penceresinde mavi bir ekran “pat” diye söndü. Kimse kalkıp bakmadı. Gece yarısı bozulan şeylere sabah bakılır.',
-            ),
-            n(
-              'Dokuz numaranın içinde bir şey çıtırdadı. Bir böcek gibi küçük, bir saat gibi düzenli. Sonra koridor camında turuncu bir ışık doğdu.',
-            ),
-            n(
-              'Işık büyüdü. Lambri tutuştu, cila kabardı, yüz yıllık ceviz bir iç çeker gibi çatırdadı. Camlar önce terledi, sonra çatladı.',
+              'Saçaktan duman sızdı, cila kokusu sokağa taştı; yüz yıllık ceviz bir iç çeker gibi çatırdadı. Camlar önce terledi, sonra çatladı.',
               { fx: 'flash' },
             ),
             voice(
@@ -49,7 +42,7 @@ export const briefing: CasePart = {
               { fx: 'shake' },
             ),
             n(
-              'Ev bir fener gibi yandı. Komşular pijamalarıyla, şemsiyesiz, şeridin henüz olmadığı bir sınırın arkasında durup baktılar.',
+              'Ev bir fener gibi yandı. Komşular pijamalarıyla, şemsiyesiz, şeridin henüz olmadığı bir sınırın arkasında durup baktılar. Kimse ötekine bir şey sormadı; herkes bir şey bildiğini sandı.',
             ),
             n(
               'Sabaha karşı ateş söndü. Ama bir şey yanmaya devam etti; adı henüz konmamış, dumanı henüz görünmeyen bir şey.',
@@ -91,7 +84,7 @@ export const briefing: CasePart = {
               'Polis fişi çevirdi, meslektaşına gösterdi. Biri bir şey not etti. Kimse Halil’e bir şey sormadı. Sormaya gerek görmediler.',
             ),
             n(
-              'Saat dokuzu yirmi geçe, şeridin altından biri daha geçti. Bekçinin defterine bir satır daha yazıldı. O satırı aylarca kimse okumadı.',
+              'Sabah boyunca şeridin önünden komşular geçti, bir belediye kamyoneti geçti, işe geç kalanlar geçti. Bekçi defterine bir şeyler yazdı; bekçiler hep bir şeyler yazar.',
             ),
             n(
               'Öğleden sonra bir hasar ihbarı yapıldı. Üç gün sonra bir rapor yazıldı. Bir ay sonra bir bilirkişi, bir laboratuvar, bir kelime: hızlandırıcı.',
@@ -276,32 +269,28 @@ export const briefing: CasePart = {
         },
       ],
       choices: [
-        option(
-          'BR01_A',
-          'Yangın için bir ila beş yıl; sigorta için dört ila on yıl ve adli para, ama teşebbüs olduğundan indirimli',
-          {
-            score: { HUKUKI_BILGI: 50 },
-            good: 'Doğru. TCK 170/1-a (7571 sayılı Kanunla 2025’te değişik) bir yıldan beş yıla kadar hapis; TCK 158/1-k üç–on yıl, (k) bendinde alt sınır dört yıl ve adli para menfaatin iki katından az olamaz. Bedel ödenmediği için teşebbüs: TCK 35/2 ile dörtte birden dörtte üçe indirim.',
-            responses: [
-              {
-                lines: [
-                  s(
-                    'leyla',
-                    'Doğru. Ve tazminat ödenmedi; sigorta parası hiç ele geçmedi. Teşebbüs. Bunu unutma.',
-                    'mutlu',
-                  ),
-                  n('Leyla sigara paketini çevirdi. Bir şey anlatmak istediğinde hep bunu yapardı.'),
-                  s(
-                    'leyla',
-                    'İkisi yan yana konursa üç dört yıl eder. Ama asıl tehlike rakamda değil. Asıl tehlike, hâkimin bu evi bir kundakçının evi olarak görmesi.',
-                  ),
-                ],
-              },
-            ],
-            next: 'BR_01B',
-          },
-        ),
-        option('BR01_B', 'Altı ay ila üç yıl; dolandırıcılıkta da üç ila on yıl', {
+        option('BR01_A', 'Yangın bir–beş yıl; sigorta dört–on yıl ve adli para, teşebbüs indirimli', {
+          score: { HUKUKI_BILGI: 50 },
+          good: 'Doğru. TCK 170/1-a (7571 sayılı Kanunla 2025’te değişik) bir yıldan beş yıla kadar hapis; TCK 158/1-k üç–on yıl, (k) bendinde alt sınır dört yıl ve adli para menfaatin iki katından az olamaz. Bedel ödenmediği için teşebbüs: TCK 35/2 ile dörtte birden dörtte üçe indirim.',
+          responses: [
+            {
+              lines: [
+                s(
+                  'leyla',
+                  'Doğru. Ve tazminat ödenmedi; sigorta parası hiç ele geçmedi. Teşebbüs. Bunu unutma.',
+                  'mutlu',
+                ),
+                n('Leyla sigara paketini çevirdi. Bir şey anlatmak istediğinde hep bunu yapardı.'),
+                s(
+                  'leyla',
+                  'İkisi yan yana konursa üç dört yıl eder. Ama asıl tehlike rakamda değil. Asıl tehlike, hâkimin bu evi bir kundakçının evi olarak görmesi.',
+                ),
+              ],
+            },
+          ],
+          next: 'BR_01B',
+        }),
+        option('BR01_B', 'Yangında altı ay–üç yıl; sigortada üç–on yıl ve adli para, teşebbüs indirimi yapılmaz', {
           bad: 'Eski metin. TCK 170/1’deki “altı aydan üç yıla” ibaresi 24/12/2025 tarihli 7571 sayılı Kanunla “bir yıldan beş yıla” olarak değişti. 158/1-k’de alt sınır dört yıldır; bedel alınmadığı için TCK 35 uyarınca teşebbüs indirimi uygulanır.',
           category: 'HUKUKI_BILGI',
           responses: [
@@ -320,8 +309,8 @@ export const briefing: CasePart = {
           ],
           next: 'BR_01B',
         }),
-        option('BR01_C', 'On yılın üstü; ağır ceza işi bu', {
-          bad: 'Hayır. TCK 170/1-a’nın üst sınırı beş, 158/1’in on yıldır; on yılı aşmadığı için görevli mahkeme ağır ceza değil asliye cezadır (5235 sayılı Kanun md. 12).',
+        option('BR01_C', 'Yangında üç–on yıl; ikisi birlikte on yılı aşar, görev ağır cezada', {
+          bad: 'Hayır. TCK 170/1-a’nın üst sınırı beş, 158/1’in on yıldır. Görev her suçun kanundaki üst sınırına göre belirlenir, cezalar toplanmaz; ikisi de on yılı aşmadığı için görevli mahkeme ağır ceza değil asliye cezadır (5235 sayılı Kanun md. 11, 12).',
           category: 'HUKUKI_BILGI',
           responses: [
             {
@@ -336,8 +325,8 @@ export const briefing: CasePart = {
           ],
           next: 'BR_01B',
         }),
-        option('BR01_D', 'Üç ay ila bir yıl', {
-          bad: 'O, taksirle yangına neden olmanın (TCK 171/1-a) cezasıdır; iddianame kastı ileri sürüyor: TCK 170/1-a (bir–beş yıl) ve 158/1-k, 35.',
+        option('BR01_D', 'Yangında üç ay–bir yıl; sigortada altı ay–iki yıl ve adli para cezası', {
+          bad: 'Üç ay–bir yıl, taksirle yangına neden olmanın (TCK 171/1-a) cezasıdır; iddianame kastı ileri sürüyor: TCK 170/1-a (bir–beş yıl). Altı ay–iki yıl ise basit dolandırıcılığın bile altında; 158/1-k’de alt sınır dört yıldır.',
           category: 'HUKUKI_BILGI',
           responses: [
             {
@@ -408,7 +397,7 @@ export const briefing: CasePart = {
           type: 'sentenceRange',
           segments: ['green', 'green', 'gold', 'gold', 'red', 'red', 'darkred', 'darkred'],
           markerPct: 60,
-          labels: ['Beraat', '171: HAGB', '170 + 158/35', '5 + 7,5 yıl'],
+          labels: ['Beraat', '171: erteleme', '170 + 158/35', '5 + 7,5 yıl'],
           demandLabel: 'İSTEM: 170/1-a + 158/1-k, 35',
         },
         {
@@ -493,6 +482,12 @@ export const briefing: CasePart = {
             ),
             th(
               'Büyükbabamın Gemlik’teki evi ben sekiz yaşındayken yanmıştı. Sigorta “kusur” dedi, ödemedi. Dedem o kışı bir akrabanın kilerinde geçirdi. Bu dosyayı o kilerden okumamaya çalışıyorum.',
+            ),
+            n(
+              'Köşedeki fırının önünde bir çocuk, elinde poşetle, yanık eve bakıp durdu. Annesi kolundan çekti: “Bakma, uğursuzluktur.” Çocuk baktı. Çocuklar uğursuzluğa değil, merak ettiklerine bakar.',
+            ),
+            th(
+              'Muradiye’de bu evin hikâyesi çoktan yazılmış: borçlu bir dul, sigortalı bir ev, bir bidon benzin. Bir mahallenin yazdığı hikâyeyi bir mahkeme kolay kolay silmez. Ben silmeye değil, okumaya geldim.',
             ),
             th('Kural: önce bul, sonra inan. Yangında ikisini karıştırmak kolay; ikisi de sıcaktır.'),
           ],

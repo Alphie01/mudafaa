@@ -9,11 +9,12 @@
 |---|---|---|---|---|
 | TCK 170/1-a | İddianame, BR_01, hüküm (MAHKUMIYET, ETIK) | mevzuat.gov.tr/MevzuatMetin/1.5.5237.pdf | 2026-10-20 | Kişilerin hayatı, sağlığı veya malvarlığı bakımından tehlikeli olacak biçimde yangın çıkaran: **bir yıldan beş yıla** hapis (24/12/2025 tarihli 7571 s. K. md. 19 ile "altı aydan üç yıla" ibaresi değişti). |
 | TCK 170/2 | Kullanılmadı (not) | aynı | 2026-10-20 | 7571 ile eklenen fıkra: kişilerin toplu bulunduğu yerlerde yarı oranında artırım; olayda uygulanmaz (konut sokağı). |
-| TCK 171/1-a | BR_01-D, T_05 (ek savunma), TAKSIR hükmü | aynı | 2026-10-20 | Taksirle yangına neden olan, fiil başkalarının hayatı/sağlığı/malvarlığı bakımından tehlikeliyse: **üç aydan bir yıla** hapis (seçimlik adli para yok). |
+| TCK 171/1-a | BR_01-D, T_05 (ek savunma), TAKSIR ve ETIK_T hükmü | aynı | 2026-10-20 | Taksirle yangına neden olan, fiil başkalarının hayatı/sağlığı/malvarlığı bakımından tehlikeliyse: **üç aydan bir yıla** hapis (seçimlik adli para yok). |
 | TCK 158/1-k | İddianame, BR_01, hüküm | aynı | 2026-10-20 | Sigorta bedelini almak maksadıyla: üç–on yıl hapis ve 5.000 güne kadar adli para; (e),(f),(j),(k),(l) bentlerinde hapis alt sınırı **dört yıl**, adli para menfaatin iki katından az olamaz (6763 s. K. ile değişik). |
 | TCK 35/1–2 | BR_01, hüküm | aynı | 2026-10-20 | Teşebbüs: zarar/tehlikenin ağırlığına göre cezanın dörtte birinden dörtte üçüne kadarı indirilir. |
 | TCK 22/2 | T_05 geri bildirimi, BERAAT_B/TAKSIR gerekçesi | aynı | 2026-10-20 | Taksir: dikkat ve özen yükümlülüğüne aykırılıkla, öngörülebilir neticenin istenmeden gerçekleşmesi. |
 | TCK 51/1 | TAKSIR hükmü | aynı | 2026-10-20 | İki yıl veya daha az hapiste erteleme; kasıtlı suçtan üç aydan fazla mahkûmiyet olmaması vb. |
+| TCK 63 | MAHKUMIYET, ETIK hükmü | aynı | 2026-10-20 | Tutuklulukta geçen sürenin hükmolunan cezadan mahsubu. |
 | TCK 52, 53, 62/1 | Hükümler | aynı | 2026-10-20 | Adli para hesabı (gün × 20–100 TL), hak yoksunlukları, takdiri indirim altıda bir. |
 | TCK 267/1–2 | ARA_SUC, epilog kartları | aynı | 2026-10-20 | İftira; fiilin maddi eser ve delillerini uydurarak iftirada ceza yarı oranında artırılır. |
 | TCK 281/1 | ARA_SUC | aynı | 2026-10-20 | Gerçeğin ortaya çıkmasını engellemek amacıyla delilleri yok eden, değiştiren… |
@@ -24,7 +25,8 @@
 | CMK 158 | ARA_SUC | aynı | 2026-10-20 | Suç duyurusu Cumhuriyet başsavcılığına yapılır. |
 | CMK 177/1 | INV_DIL | aynı | 2026-10-20 | Sanığın delil toplanması istemi; somut olay ve delil gösterilir. |
 | CMK 192, 201 | H1_05, T_02 | aynı | 2026-10-20 | Duruşmanın yönetimi ve soru sorma; başkan/hâkim uygun görmediği soruyu reddeder. |
-| CMK 206/1 | H1_07 | aynı | 2026-10-20 | Delil ikamesi istemi. |
+| CMK 178 | T_05 (Necati hazır tanık), Q_GECE | aynı | 2026-10-20 | Sanık ve müdafiin tanık ve bilirkişiyi davet ettirmesi/hazır etmesi. |
+| CMK 206/1 | H1_07, T_05, Q_GECE | aynı | 2026-10-20 | Delil ikamesi istemi. |
 | CMK 210/1 | H1_03, T1_TARIK | aynı | 2026-10-20 | İspat bir kişinin algısına dayanıyorsa o kişi dinlenir; yazılı açıklama okunarak dinlemenin yerine konamaz. |
 | CMK 216, 217 | Mütalaa, son söz, takdir | aynı | 2026-10-20 | Mütalaa ve cevap hakkı, son söz; delillerin serbestçe takdiri. |
 | CMK 223/2-b, 2-e | Beraat hükümleri | aynı | 2026-10-20 | 2-b: yüklenen suçun sanık tarafından işlenmediğinin sabit olması; 2-e: işlendiğinin sabit olmaması. |
@@ -32,7 +34,7 @@
 | CMK 231/5–6 | TAKSIR hükmü | aynı | 2026-10-20 | HAGB için iki yıl veya daha az ceza ve zararın tamamen giderilmesi şartı (7589 s. K. ile değişik metin; şartlar korunmuş). |
 | CMK 273/1 | Bütün hükümler | aynı | 2026-10-20 | İstinaf: hükmün gerekçesiyle birlikte tebliğinden itibaren iki hafta. |
 | CMK 141, 142, 231/3 | Beraat hükümleri | aynı | 2026-10-20 | Tazminat hakkı ve bildirimi. |
-| 5235 s. K. md. 12 | BR_01-C | mevzuat.gov.tr/MevzuatMetin/1.5.5235.pdf | 2026-10-20 | Ağır ceza, on yıldan fazla hapis gerektiren suçlara ve sayılan suçlara bakar; 170/1 ve 158/1 bu kapsamda değil → **asliye ceza** (tek hâkim). |
+| 5235 s. K. md. 11, 12 | BR_01-C | mevzuat.gov.tr/MevzuatMetin/1.5.5235.pdf | 2026-10-20 | Ağır ceza, on yıldan fazla hapis gerektiren suçlara ve sayılan suçlara bakar; 170/1 ve 158/1 bu kapsamda değil → **asliye ceza** (tek hâkim). |
 | Anayasa 38/4–5 | Gerekçe, K_SUS | — | 2026-10-20 | Suçluluk hükmen sabit oluncaya kadar masumiyet; kimse kendini suçlayan beyana zorlanamaz. |
 | Av.K. 34, TBB Meslek Kuralları | Etik geri bildirimler | — | 2026-10-20 | Avukatın doğruluk ve mesleğin onuruna uygun davranma yükümlülüğü. |
 | 5684 s. Sigortacılık Kanunu md. 22, 30 | Arka plan (eksperlik, Sigorta Tahkim Komisyonu) | — | — | Metinde madde numarasıyla anılmaz; yalnızca kurumlar (eksper, tahkim komisyonu) adıyla geçer. |
@@ -44,6 +46,7 @@
 - **TAKSIR (RECHARACTERIZED):** TCK 171/1-a, temel ceza 6 ay (alt sınırdan uzaklaşma: yan binaya sıçrama); TCK 62/1 ile
   1/6 indirim → **5 ay**. Yan binadaki zarar giderilmediğinden CMK 231/6-c şartı oluşmaz; HAGB yerine **TCK 51/1 ile erteleme**,
   denetim süresi 1 yıl (51/3: 1–3 yıl). Dolandırıcılığa teşebbüsten CMK 223/2-e ile beraat. Ek savunma alınmış (CMK 226).
+- **ETIK_T:** TAKSIR ile aynı hesap (171/1-a, 6 ay → 5 ay, TCK 51/1 erteleme; 158/1-k’den 2-e beraat).
 - **MAHKUMIYET / ETIK:** TCK 170/1-a → **1 yıl 6 ay** (bir–beş yıl aralığında, sıçrama nedeniyle alt sınırdan uzaklaşma).
   TCK 158/1-k → temel **4 yıl** hapis ve 1.000 gün adli para; teşebbüs (bedel ödenmedi) TCK 35/2 ile 1/2 indirim → **2 yıl** ve
   **500 gün**; gün 100 TL → 50.000 TL. Toplam 3 yıl 6 ay hapis (gerçek içtima, TCK 44 değil — bkz. §4.3). TCK 62 uygulanmadı
@@ -85,7 +88,25 @@
    bilirkişi raporu, arıza kaydı ve numune zinciri esas alınır.
 7. **Tutuklama ve görev.** Asliye cezada tutuklama mümkündür (CMK 100). Birinci celsede tahliye, ancak numune zinciri koptuysa
    ve talep edildiyse verilir (H1_08).
-8. **Dağıtım şirketi.** Gerçek bir kuruluş adı kullanılmadı ("dağıtım şirketi"). Sigorta şirketi (Kalkan Sigorta) kurgusaldır.
+8. **Ismarlama mütalaa ve hüküm (ETIK, ETIK_T).** Para karşılığı, sonucu önceden belirlenmiş bir uzman mütalaası (CMK 67/6
+   kılıfında) hükme esas alınmaz; ancak savunmanın sahte delil sunması iddianın ispat yükünü kaldırmaz ve çürümüş iddia
+   delillerini canlandırmaz (Anayasa 38/4; CMK 217). Bu yüzden mahkeme mütalaayı dışlar ve kalan kayda göre karar verir:
+   numune zinciri ayaktaysa kasten mahkûmiyet (ETIK), çökmüşse kast düşer, taksirden hüküm kurulur (ETIK_T; savcının T_05E
+   mütalaasıyla aynı yönde, talebi aşmaz). ETIK_T'de özen yükümlülüğü savunmasına itibar edilmemesi bir takdir kararıdır: savunma
+   bu noktayı büyük ölçüde dışlanan mütalaaya dayandırmıştır. Her iki sonda müdafi hakkında baroya bildirim ve suç duyurusu
+   (TCK 272, 38; Av.K. 34). Önceki metin, savunmanın elektrik beyanlarının "tümüne itibar edilmediği" gerekçesiyle zincir çökmüş
+   olsa da kasten mahkûmiyet veriyordu; bu, savcının talebini de aşan bir hukuka aykırılıktı ve düzeltildi.
+9. **Çöküş ve tavan.** Hızlandırıcı tespiti çöktükten sonra müdafiin hatalı sunumları mahkûmiyet gerekçesi olamaz; bir sanığın
+   hukuki durumu avukatının duruşma performansıyla ağırlaşmaz. Zincir çöktüyse en ağır sonuç TCK 171/1-a'dır (TAKSIR). TAKSIR
+   gerekçesinde savunma taksire cevap vermişse, mahkemenin bunu neden yeterli bulmadığı ayrıca yazılır: takvim cevabında
+   "ısınan buata bağlı tesisatın enerjili bırakılması", dış etken cevabında "üçüncü kişinin kusuru illiyeti kesmez; netice uyarılan
+   tesisatın aşırı gerilime dayanamamasıyla birlikte gerçekleşti" (ortak illiyet). İkisi de takdir/yorum kararıdır.
+10. **Tezel'in koridor konuşması.** Mahkemenin bilirkişisiyle müdafiin dosya hakkında salon dışında konuşması uygun değildir;
+   H1_09 ve ikinci celse öncesinde Deniz konuşmayı keser, bilirkişiyi mahkemeye yazmaya yönlendirir. Bilirkişinin kendiliğinden
+   sunduğu ek rapor (T_00T) ikinci celsede okunur.
+11. **Hazır tanık.** Necati Usta ve atölye bekçisinin defteri: duruşmada hazır edilen tanık ve belge, delil ikamesi talebiyle
+   dinlenir/dosyaya konur (CMK 178, 206/1).
+12. **Dağıtım şirketi.** Gerçek bir kuruluş adı kullanılmadı ("dağıtım şirketi"). Sigorta şirketi (Kalkan Sigorta) kurgusaldır.
 
 ## 5. Hassas konu denetimi
 
@@ -96,7 +117,7 @@ yalnızca maddi zarar ve tahliye vardır.
 
 - Tanığa cevap vermek (SA_TELKIN) ve tanığa görmediğini söyletmeye çalışmak (CV_YONLENDIR): ceza + `ethics` + duruşmada ortaya çıkar.
 - Müvekkile kaçamak cevap öğretmek (K_BORC): ceza, duruşmada güven kaybı.
-- Para karşılığı karşı rapor (ON_KABUL): ETIK sonu (XP 0, etik kartı).
+- Para karşılığı karşı rapor (ON_KABUL): ETIK ya da ETIK_T sonu (XP 0, etik kartı; Halil'in hükmü kalan kayda göre).
 - Şüpheliyi kendin sıkıştırmak (SC_KENDIN) ve basına sızdırmak (SC_BASIN): ceza; doğru yol suç duyurusu.
 - Dinlenecek tanığa gözdağı (KP_TEHDIT): duruşmada uyarı.
 

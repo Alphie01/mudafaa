@@ -29,6 +29,7 @@ import {
   strategyAmount,
   choiceNode,
   v,
+  visited,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { TRIAL, VERDICT, card, court2, me, n, s, th, wrongEvidence } from './shared.js';
@@ -127,6 +128,26 @@ export const trial: CasePart = {
       background: 'adliye',
       lines: [
         {
+          when: flag('fact_acil_degil'),
+          lines: [
+            n(
+              'Bankın ucunda bekçi Cevdet, şapkası dizinde, defteri elinde. Gülsüm Hanım dinleyici sırasına geçmişti; başörtüsünü düzeltip bekliyordu.',
+            ),
+            n(
+              'Pencerenin önünde Necati Usta, tulumunun üstüne bir ceket geçirmiş, elindeki keşif defterini ikide bir açıp kapatıyordu. Dün akşam telefonda “gelirim kızım, doğruyu söylemeye gelinir” demişti.',
+            ),
+            s('necati', 'Avukat hanım, ben ne diyeceğim? Bana bir şey söyleyin.'),
+            me(
+              'Size ne soracaklarını söyleyemem, usta. Ne gördüyseniz onu anlatın. Hatırlamıyorsanız “hatırlamıyorum” deyin.',
+            ),
+            s('necati', 'Ondan kolay ne var. Ben kabloya yalan söylemem; insana hiç söylemem.'),
+            n('Koridorun öbür ucunda Tarık Sönmez katılan vekiliyle konuşuyordu. Bana baktı; bu sefer başını eğmedi.'),
+            th(
+              'İkinci celse. Raporlar geldi, tanıklar geldi. Bugün bir adamın kitabını açacağım; o kitabın sayfalarını kendi eliyle yazdığını göstermek için.',
+            ),
+          ],
+        },
+        {
           lines: [
             n(
               'Bankın ucunda bekçi Cevdet, şapkası dizinde, defteri elinde. Gülsüm Hanım dinleyici sırasına geçmişti; başörtüsünü düzeltip bekliyordu.',
@@ -140,7 +161,7 @@ export const trial: CasePart = {
       ],
       choices: [cont('T00K_DEVAM', 'Salona gir', 'T_00', { role: 'PRIMARY' })],
     }),
-    decisionNode('T_00', [{ to: 'T_00A' }], {
+    decisionNode('T_00', [{ to: 'T_00T' }], {
       ...court2.base,
       title: 'Açılış',
       onEnter: elkoyma.effects,
@@ -152,6 +173,28 @@ export const trial: CasePart = {
             s(
               'hakim',
               'Duruşmaya devam olunuyor. Ara kararı gereği gelen yazı ve raporlar okundu. Taraflara örnekleri verildi.',
+            ),
+          ],
+        },
+      ],
+    }),
+    decisionNode('T_00T', [{ to: 'T_00A' }], {
+      ...court2.base,
+      lines: [
+        {
+          when: flag('contra_b2'),
+          lines: [
+            s(
+              'hakim',
+              'Bilirkişi Dr. Orhan Tezel’in kendiliğinden sunduğu ek rapor okundu: “Numunelerin olay yerinden kim tarafından ve nasıl alındığını incelemedim.”',
+            ),
+            s('hakim', '“Hızlandırıcı tespitim, numunelerin olay yerinden alındığı varsayımına dayanmaktadır.”'),
+            s(
+              'hakim',
+              '“Sigorta panosu ve koridor hattı tarafımca incelenmemiştir. Bu inceleme yapılmadan yangının elektrik kaynaklı olmadığı sonucuna varılamaz.”',
+            ),
+            n(
+              'Katılan vekili ek raporu iki kez okudu. Savcı bir kez okudu ve kalemini bıraktı. Ben okumadım; ezbere biliyordum, çünkü ilk celsede kürsüde söylenmişti.',
             ),
           ],
         },
@@ -393,7 +436,16 @@ export const trial: CasePart = {
             {
               lines: [
                 s('katilan', 'Tanığa sorumuz yok.'),
+                s('savci', 'Tanık, o sabah eksperin girdiğini neden polise hemen bildirmediniz?'),
+                s(
+                  'cevdet',
+                  'Bildirdim savcı bey. Deftere yazdım, onda gelen polise defteri gösterdim. “Tamam” dedi. Okudu mu, bilmem. Ben yazdım; okumak benim işim değil.',
+                ),
+                n('Savcı başını salladı ve bir not aldı. Uzun bir not. Kâtip bekledi.'),
                 s('hakim', 'Tanık çekilebilir. Sıradaki tanık, Tarık Sönmez.'),
+                n(
+                  'Cevdet kürsüden inerken şapkasını yeniden taktı, sonra salonda olduğunu hatırlayıp çıkardı. Dinleyici sırasında bir yer bulup oturdu; defteri dizinin üstünde, kapalı.',
+                ),
               ],
             },
           ],
@@ -435,7 +487,7 @@ export const trial: CasePart = {
       ],
       next: 'T_03',
       options: [
-        option('T02_A', 'İtiraz: soru cevabı içinde taşıyor; tanığa “usulüne uygun” dedirtiyor', {
+        option('T02_A', 'İtiraz: soru yönlendirici; cevabı tanığa hazır veriyor', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), inc('pers')],
           good: 'Yerinde. Cevabı içeren soru tanığın kendi algısını değil, sorunun sonucunu kayda geçirir; hâkim soruyu değiştirtir (CMK 192, 201).',
@@ -449,13 +501,13 @@ export const trial: CasePart = {
             },
           ],
         }),
-        option('T02_B', 'Sessiz kal', {
+        option('T02_B', 'Sus; cevabı çapraz sorguda kayıtla çürütürsün', {
           effects: [dec('pers')],
           neutral:
             'Telkin edici soru cevaplandı; “usulüne uygun” kelimesi tanığın değil katılan vekilinin ağzından kayda geçti.',
           responses: [{ lines: [s('tarik', 'Elbette. Usulüne uygun. Yirmi yıldır böyle çalışırım.')] }],
         }),
-        option('T02_C', 'İtiraz: tanık katılanın çalışanıdır, yeminle dinlenemez', {
+        option('T02_C', 'İtiraz: tanık katılanın çalışanı; yeminle dinlenemez', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Taraflarla iş ilişkisi tanıklığa engel değildir; yemin yasağı CMK 54’te sayılı hâllerle sınırlıdır. Tarafgirlik çapraz sorguda delille gösterilir.',
@@ -468,7 +520,7 @@ export const trial: CasePart = {
             },
           ],
         }),
-        option('T02_D', 'Tanığın gözaltına alınmasını talep ediyorum', {
+        option('T02_D', 'Talep: tanık hakkında derhal gözaltı kararı verilsin, Sayın Hâkim', {
           score: { USUL_BILGISI: -80 },
           effects: [dec('cred'), dec('pers')],
           bad: 'Duruşmada tanık hakkında gözaltı talebinin dayanağı yok; şüphe varsa yol savcılığa bildirmektir (CMK 158). Bu talep hâkimin gözünde savunmayı öfkeli gösterir.',
@@ -539,7 +591,7 @@ export const trial: CasePart = {
         ]),
         statement('U6', 6, [
           'Elektrik kaynaklı olsaydı ',
-          hl('ben görürdüm; panoya baktım', any(flag('press_u6'), has('ev_ark'), has('ded_pano'))),
+          hl('ben görürdüm; panoya baktım', any(flag('press_u6'), has('ev_ark'), has('ev_ariza'), has('ded_pano'))),
           '.',
         ]),
       ],
@@ -812,13 +864,13 @@ export const trial: CasePart = {
             },
           ],
         }),
-        presentRule('PS_U6', 'U6', ['ev_ark', 'ded_elektrik', 'ded_notr', 'ev_ariza'], {
-          score: { SORGULAMA: 300 },
-          effects: [inc('pers', 2), raise('contra_u6')],
+        presentRule('PS_U6_ARK', 'U6', ['ev_ark', 'ded_elektrik'], {
+          score: { SORGULAMA: 250 },
+          effects: [inc('pers'), raise('contra_u6'), raise('contra_u6_ark')],
           quality: {
             q: 'GOOD',
             feedback:
-              'Pano o sabah emanetteydi; eksper ona bakamazdı. Mahkemenin elektrik bilirkişisi koridor hattında birincil ark buldu; dağıtım kaydı 02.08’de aşırı gerilim gösteriyor.',
+              'Pano o sabah emanetteydi; eksper ona bakamazdı. Mahkemenin elektrik bilirkişisi koridor hattında birincil ark buldu: “ben görürdüm” dediği iz, bakmadığı yerdeydi.',
             category: 'SORGULAMA',
           },
           responses: [
@@ -827,11 +879,31 @@ export const trial: CasePart = {
                 me(
                   'Pano o sabah emanetteydi; ona bakmanız mümkün değildi. Mahkemenin elektrik bilirkişisi baktı: koridor hattında birincil ark.',
                 ),
-                me(
-                  'Ve 02.08’de sokağın hattında nötr kopması; komşuların cihazları yanıyor. “Ben görürdüm” dediğiniz şey, siz bakmadığınız için görünmedi.',
-                ),
+                me('“Ben görürdüm” dediğiniz şey, siz bakmadığınız için görünmedi.'),
                 s('tarik', 'Elektrik bilirkişisinin bulguları… ikincil ark da olabilir.', 'kizgin'),
                 s('hakim', 'Bilirkişi raporu “birincil” diyor, tanık. Sizin bir inceleme yapmadığınız anlaşılıyor.'),
+              ],
+            },
+          ],
+        }),
+        presentRule('PS_U6_NOTR', 'U6', ['ev_ariza', 'ded_notr'], {
+          score: { SORGULAMA: 250 },
+          effects: [inc('pers'), raise('contra_u6'), raise('contra_u6_notr')],
+          quality: {
+            q: 'GOOD',
+            feedback:
+              'Dağıtım şirketinin kaydı: yangın gecesi sokak hattında nötr kopması ve komşu abonelerde aşırı gerilim. Eksperin raporunda bu kaydın adı bile geçmiyor.',
+            category: 'SORGULAMA',
+          },
+          responses: [
+            {
+              lines: [
+                me(
+                  'Dağıtım şirketinin kaydı: o gece sokağın hattında nötr kopması. Komşuların cihazları aynı dakikada yandı. Raporunuzda bu kayıt var mı?',
+                ),
+                s('tarik', 'Şebeke kayıtları… benim incelememin konusu değildi.', 'saskin'),
+                me('Elektrik kaynaklı olsaydı görürdünüz, dediniz. Görmek için hangi kayda baktınız?'),
+                n('Tarık cevap vermedi. Kâtip bir süre bekledi, sonra “cevap yok” yazdı.'),
               ],
             },
           ],
@@ -919,6 +991,12 @@ export const trial: CasePart = {
             ),
             s('savci', 'Başsavcılığımızda zaten bir soruşturma var, Sayın Hâkim. Tutanağı ekleyeceğiz.'),
             th('Kitap kapandı. Yazarı kendi kitabını okumayı reddetti. Halil’in halatından en kalın iplik koptu.'),
+            n(
+              'Katılan vekili ayağa kalktı. “Sayın Hâkim, tanığın sağlık durumu…” dedi. Hâkim ona baktı. Vekil cümlesini bitirmeden oturdu.',
+            ),
+            th(
+              'Bir avukatın en zor işi müvekkilinin yanından ayrılmaktır; Kalkan Sigorta’nın vekili bunu bir oturuşla yaptı. Şirket eksperini kürsüde bıraktı. Şirketler hep bırakır.',
+            ),
             n('Halil sanık sırasında oturuyordu. Bana bakmadı; ellerine baktı. Elleri ilk kez durgundu.'),
             n(
               'Tarık Sönmez kürsüden indi. Katılan vekilinin yanından geçerken vekil ona bakmadı. Dinleyici sırasının önünden geçerken Gülsüm Hanım’la göz göze geldi. Adımlarının düzeni bir an bozuldu; sonra yeniden düzeldi.',
@@ -931,21 +1009,69 @@ export const trial: CasePart = {
       ],
       choices: [cont('T03K_DEVAM', 'Devam', 'T_04')],
     }),
-    story('T_04', {
+    decisionNode('T_04', [{ to: 'T_04T' }], {
       ...court2.base,
       title: 'İkinci oturum',
-      background: 'durusma_salonu',
       lines: [
         {
           lines: [
             s('hakim', 'Öğle arası veriyoruz. 13.40’ta devam edilecek.'),
-            card('13.40 — İKİNCİ OTURUM', 'durusma_salonu'),
+            card('ÖĞLE ARASI — ADLİYE KORİDORU', 'adliye'),
             n(
               'Öğle arasında kimse yemek yemedi. Zehra kantinden iki simit aldı; ikisi de dokunulmadan bankın üstünde kaldı.',
             ),
             n(
               'Koridorun penceresinden adliyenin otoparkı görünüyordu. Tarık Sönmez arabasına bindi; çalıştırmadı. Bir süre direksiyona bakıp oturdu, sonra indi ve yürüyerek gitti.',
             ),
+          ],
+        },
+      ],
+    }),
+    decisionNode('T_04T', [{ to: 'T_04B' }], {
+      ...court2.base,
+      lines: [
+        {
+          when: visited('INV_KADER'),
+          lines: [
+            n(
+              'Merdiven sahanlığında bir kadın, elinde bir dosya, yağmurluğunun yakası kalkık: acente Kader Acar. Dinleyici sırasında oturduğunu fark etmemiştim.',
+            ),
+            s(
+              'kader',
+              'Avukat hanım, kimse beni çağırmadı. Kendim geldim. Kırk yedi gün, on iki gün; o rakamları ben ürettim. Kampanyayı ben teklif ettim, aramayı ben yaptım.',
+            ),
+            s(
+              'kader',
+              'Bölgeden telefon geldi geçen hafta: “Siz ifade vermeyin, şirket konuşur.” Ben de buraya geldim. Gerekirse dinlesinler. Kayıtlar zaten sizde.',
+            ),
+            me('Teşekkür ederim, Kader Hanım. Mahkeme sizi dinlemek isterse ne gördüyseniz onu anlatırsınız. O kadar.'),
+            s('kader', 'O kadar. Bir sigortacının tek sermayesi kaydıdır. Benimki temiz.'),
+            th(
+              'Bir acente bir sigorta şirketinin öğle arasında, şirketin avukatının üç metre ötesinde duruyordu. Bazen cesaret bir merdiven sahanlığında, yağmurluk yakasının arkasında durur.',
+            ),
+          ],
+        },
+      ],
+    }),
+    story('T_04B', {
+      ...court2.base,
+      title: 'İkinci oturum',
+      background: 'durusma_salonu',
+      lines: [
+        {
+          when: not(flag('eksper_kirildi')),
+          lines: [
+            s('halil', 'Avukat hanım, o adam hâlâ dimdik oturuyor. Kravatı bile kaymadı. Şimdi ne olacak?', 'uzgun'),
+            me('Şimdi hâkim sizi soracak, Halil Bey. Kasıt yoksa dikkatsizlik var mı, diye.'),
+            n(
+              'Leyla bir mesaj atmıştı: “Hâkim şimdi dikkatsizliği soracak. Kapıyı kapat.” Altında bir nokta; Leyla’nın nokta koyduğu mesajlar ciddiydi.',
+            ),
+            card('13.40 — İKİNCİ OTURUM', 'durusma_salonu'),
+            s('hakim', 'Duruşmaya devam olunuyor.'),
+          ],
+        },
+        {
+          lines: [
             n(
               'Gülsüm Hanım yanıma geldi. Elimi tuttu; bir şey söylemedi. Elinde iki yıl önceki kararın bir fotokopisi vardı, buruşmuş. Onu bana verdi, sanki artık taşımasına gerek yokmuş gibi.',
             ),
@@ -958,6 +1084,7 @@ export const trial: CasePart = {
             n(
               'Leyla bir mesaj atmıştı: “Hâkim şimdi dikkatsizliği soracak. Kapıyı kapat.” Altında bir nokta; Leyla’nın nokta koyduğu mesajlar ciddiydi.',
             ),
+            card('13.40 — İKİNCİ OTURUM', 'durusma_salonu'),
             s('hakim', 'Duruşmaya devam olunuyor.'),
           ],
         },
@@ -1003,11 +1130,11 @@ export const trial: CasePart = {
       ],
       next: 'T_05M',
       options: [
-        option('T05_A', 'Uyarı alınmış, yenileme ustanın önerdiği takvime konmuştu; özen yükümlülüğüne aykırılık yok', {
+        option('T05_A', 'Uyarı alındı, yenileme takvime kondu; özen yükümlülüğü yerine getirildi', {
           visibleWhen: has('ded_onlem'),
           score: { HUKUKI_BILGI: 100, SAVUNMA_STRATEJISI: 60 },
           effects: [raise('taksir_cevap'), inc('pers'), inc('legal_hits')],
-          good: 'Taksir, dikkat ve özen yükümlülüğüne aykırılıkla öngörülebilir neticenin gerçekleşmesidir (TCK 22/2). Uzmanın “acil değil, restorasyonla yenileyin” dediği tesisatta yenilemeyi takvime koyan ve yükü azaltan kişi özen yükümlülüğünü yerine getirmiştir.',
+          good: 'Taksir, dikkat ve özen yükümlülüğüne aykırılıkla öngörülebilir neticenin gerçekleşmesidir (TCK 22/2). Uzmanın “acil değil, restorasyonla yenileyin” dediği tesisatta yenilemeyi takvime koyan ve yükü azaltan kişi özen yükümlülüğünü yerine getirmiştir. Duruşmada hazır edilen tanık, delil ikamesi talebiyle dinlenebilir (CMK 178, 206).',
           responses: [
             {
               when: flag('fact_acil_degil'),
@@ -1015,8 +1142,26 @@ export const trial: CasePart = {
                 me(
                   'Sayın Hâkim, elektrikçinin notu: “acil değil, yenileme restorasyonun ilk haftası, ağır yük çekmeyin.” Sözleşme: 19 Ocak, ilk iş tesisat.',
                 ),
-                me(
-                  'Necati Usta bana açıkça söyledi: “Acil olsaydı elektriği keserdim. Normal kullanımda yıllarca gider.” Gerekirse dinlenmesini talep ederiz.',
+                me('Notu yazan elektrikçi Necati Usta koridorda hazır, Sayın Hâkim. Dinlenmesini talep ediyoruz.'),
+                s('hakim', 'Hazır tanık dinlensin. Kısa tutalım.'),
+                n(
+                  'Necati Usta kürsüye iş tulumunun üstüne giydiği bayramlık ceketle çıktı. Ellerini nereye koyacağını bilemedi; sonunda arkasında kavuşturdu, okul çocuğu gibi.',
+                ),
+                s(
+                  'necati',
+                  'Otuz yıllık elektrikçiyim, hâkim hanım. O evin tesisatına aralıkta baktım. Eskiydi, kumaş kaplı kablo. Koridor buatı ılıktı. Yanık değil; ılık.',
+                ),
+                s(
+                  'necati',
+                  'Halil Abi’ye dedim: “Ağır yük çekme, soba yerine elektrikli ısıtıcı koyma, restorasyonun ilk haftası hepsini sökeriz.” Takvime yazdık. On dokuz ocak.',
+                ),
+                s('savci', 'Usta, tehlikeli olduğunu düşünseydiniz ne yapardınız?'),
+                s(
+                  'necati',
+                  'Sigortayı indirirdim, savcı bey. Bir dakika beklemezdim. Ben o gün sigortayı indirmedim. Çünkü normal kullanımda yıllarca giderdi. Ben öyle gördüm.',
+                ),
+                n(
+                  'Necati Usta kürsüden inerken Halil’e baktı. “Kusura bakma abi” der gibi bir bakış. Halil başını iki yana salladı: kusur yok.',
                 ),
                 me(
                   'Müvekkilim uyarıyı duydu, ustanın dediğini yaptı, yükü kaldırdı, evden çıktı. Uzmanın “acil değil” dediği yerde, uzmandan daha dikkatli olması beklenemez.',
@@ -1037,30 +1182,26 @@ export const trial: CasePart = {
             },
           ],
         }),
-        option(
-          'T05_B',
-          'Yangın dış bir etkenle çıktı: 02.08’de sokak hattındaki nötr kopması; illiyet sanığın kusuruna bağlanamaz',
-          {
-            visibleWhen: has('ded_notr'),
-            score: { HUKUKI_BILGI: 120, SAVUNMA_STRATEJISI: 60 },
-            effects: [raise('taksir_cevap'), raise('taksir_dis'), inc('pers', 2), inc('legal_hits')],
-            good: 'Taksirli sorumluluk için netice failin özen yükümlülüğüne aykırılığına bağlanabilmelidir. Dağıtım hattındaki nötr kopmasının yarattığı aşırı gerilim, normal kullanımda yıllarca dayanacak bir tesisatı yakmıştır: netice, sanığın değil üçüncü kişinin alanındaki bir arızaya bağlıdır.',
-            responses: [
-              {
-                lines: [
-                  me(
-                    'Sayın Hâkim, dağıtım şirketinin kaydı: 02.08, nötr kopması. Komşuların cihazları aynı dakikada yandı. Elektrikçi “normal kullanımda yıllarca gider” dedi.',
-                  ),
-                  me(
-                    'Bu yangını eski bir tesisat değil, sokağın hattından gelen aşırı gerilim çıkardı. Müvekkilim ne o hattı biliyordu ne de ona dokunabilirdi.',
-                  ),
-                  s('savci', 'Sayın Hâkim, bu kayıt karşısında taksir değerlendirmemizi gözden geçireceğiz.'),
-                ],
-              },
-            ],
-          },
-        ),
-        option('T05_C', 'Sanık o gece evde değildi; evde olmayan biri taksirle yangın çıkaramaz', {
+        option('T05_B', 'Yangını 02.08’deki nötr kopması çıkardı; netice sanığın kusuruna bağlanamaz', {
+          visibleWhen: has('ded_notr'),
+          score: { HUKUKI_BILGI: 120, SAVUNMA_STRATEJISI: 60 },
+          effects: [raise('taksir_cevap'), raise('taksir_dis'), inc('pers', 2), inc('legal_hits')],
+          good: 'Taksirli sorumluluk için netice failin özen yükümlülüğüne aykırılığına bağlanabilmelidir. Dağıtım hattındaki nötr kopmasının yarattığı aşırı gerilim, normal kullanımda yıllarca dayanacak bir tesisatı yakmıştır: netice, sanığın değil üçüncü kişinin alanındaki bir arızaya bağlıdır.',
+          responses: [
+            {
+              lines: [
+                me(
+                  'Sayın Hâkim, dağıtım şirketinin kaydı: 02.08, nötr kopması. Komşuların cihazları aynı dakikada yandı. Elektrikçi “normal kullanımda yıllarca gider” dedi.',
+                ),
+                me(
+                  'Bu yangını eski bir tesisat değil, sokağın hattından gelen aşırı gerilim çıkardı. Müvekkilim ne o hattı biliyordu ne de ona dokunabilirdi.',
+                ),
+                s('savci', 'Sayın Hâkim, bu kayıt karşısında taksir değerlendirmemizi gözden geçireceğiz.'),
+              ],
+            },
+          ],
+        }),
+        option('T05_C', 'Sanık o gece evde değildi; olay yerinde olmayan kişi taksirle yangın çıkaramaz', {
           score: { HUKUKI_BILGI: -50 },
           effects: [dec('pers')],
           bad: 'Taksir için failin olay anında orada bulunması gerekmez; özen yükümlülüğüne aykırılık önceden de gerçekleşebilir (bakımsız tesisat gibi). Savunma bu noktada özen yükümlülüğünün yerine getirildiğini ya da illiyetin kesildiğini göstermeliydi.',
@@ -1072,7 +1213,7 @@ export const trial: CasePart = {
             },
           ],
         }),
-        option('T05_D', 'Ek savunma için süre istiyoruz', {
+        option('T05_D', 'Nitelik değişti; ek savunmayı hazırlamak için CMK 226 uyarınca süre istiyoruz', {
           neutral:
             'Sanık, nitelik değişikliği hatırlatmasında ek savunma için süre isteyebilir (CMK 226/4); ama delillerin hazır olduğu bir celsede süre istemek, cevabın olmadığı izlenimini verir.',
           responses: [
@@ -1149,6 +1290,15 @@ export const trial: CasePart = {
               'Sanığın eylemine uyan taksirle genel güvenliği tehlikeye sokma suçundan cezalandırılmasını; dolandırıcılığa teşebbüsten beraatini talep ediyorum.',
             ),
             s('katilan', 'Katılan olarak sanığın dolandırıcılıktan cezalandırılması talebimizi tekrar ediyoruz.'),
+            n(
+              'Katılan vekili oturmadan önce dosyasından bir sayfa çıkardı, baktı, geri koydu. Eksperin raporuydu. Bir daha açmadı.',
+            ),
+            s(
+              'hakim',
+              'Katılan vekili, dolandırıcılık talebinizin dayanağı bilirkişi raporu mudur, başka bir delil midir? Kayda geçsin diye soruyorum.',
+            ),
+            s('katilan', 'Dosyanın bütünü, Sayın Hâkim.', 'saskin'),
+            th('Dosyanın bütünü. Bir avukatın elinde tek bir kâğıt kalmadığında söylediği cümle.'),
             th('Kasıt düştü. Savcı ikinci kapıya yürüdü: dikkatsizlik. Şimdi o kapıyı kapatmam gerek.'),
           ],
         },
@@ -1203,6 +1353,10 @@ export const trial: CasePart = {
                 me(
                   'Poliçeyi müvekkilim aramadı; banka şart koştu. Ve özel şart: tazminat kredi bakiyesi kadar önce bankaya. Kırk yedi gün, bir kredinin yaşıdır, bir planın değil.',
                 ),
+                s('katilan', 'Sayın Hâkim, kredi şartı olması poliçeden yararlanma iradesini ortadan kaldırmaz.'),
+                me(
+                  'Kaldırmaz. Ama tazminatın önce bankaya gideceği bir poliçe, borçlu bir adama parasal bir kurtuluş vaat etmez. Kurtulacak olan banka.',
+                ),
               ],
             },
           ],
@@ -1219,12 +1373,22 @@ export const trial: CasePart = {
                 me(
                   'Teminat artışı: acentenin sistemi, giden arama, 3 Ocak 11.12, kampanya kodu KMP-RST. Müvekkilim sigortacıya “olur” dedi. Bu bir suç değil.',
                 ),
+                n(
+                  'Dinleyici sırasında yağmurluklu bir kadın başını bir kez salladı. Acente Kader Acar. Kimse onu çağırmamıştı; sistem saatini o basmıştı.',
+                ),
+                s(
+                  'savci',
+                  'Acentenin kaydını gördüm, Sayın Hâkim. Artışın sanıktan geldiğine dair dosyada başka bir delil yoktur; bunu kayda geçirmek isterim.',
+                ),
+                th(
+                  'Bir savcının kendi ipliğini kendi eliyle koparması. Dürüst savcılar da vardır; bu dosyada biri var.',
+                ),
               ],
             },
           ],
           next: '$stay',
         }),
-        option('R_BIDON', 'Benzin hâlâ atölyede; bidonu kolluk da tespit etti', {
+        option('R_BIDON', 'Benzin hâlâ atölyede; fişteki beş litrenin dördünü kolluk da tespit etti', {
           visibleWhen: flag('contra_s6'),
           score: { SAVUNMA_STRATEJISI: 40 },
           responses: [
@@ -1351,6 +1515,7 @@ export const trial: CasePart = {
             ],
             responses: [
               {
+                when: all(ref('elektrik_ispat'), any(flag('contra_u3'), flag('contra_b4'))),
                 lines: [
                   me(
                     'Sayın Hâkim. Bu dosya bir kokuyla başladı. Bir komşu “benzin” dedi; bir polis o kelimeyi ona vermişti. Bir eksper “döküntü izi” dedi; o izi kendi eliyle açmıştı.',
@@ -1364,6 +1529,31 @@ export const trial: CasePart = {
                   me(
                     'Kalem Sokak 9 kundaklanmadı. Yandı. Müvekkilim karısının evini yakmadı; o evin yangınında, bir başkasının hikâyesine yakıldı. Beraatini talep ediyorum.',
                   ),
+                ],
+              },
+              {
+                when: ref('elektrik_ispat'),
+                lines: [
+                  me(
+                    'Sayın Hâkim. Bu dosya bir kokuyla başladı. Bir komşu “benzin” dedi; bir polis o kelimeyi ona vermişti. Bir eksper “döküntü izi” dedi; o izi kendi eliyle açmıştı.',
+                  ),
+                  me(
+                    'Bugün o kokunun yerinde bir bakır boncuk var. Koridor hattında, yangından önce oluşmuş. Bir sokağın hattında 02.08’de kopan bir tel var. Komşuların yanan cihazları var.',
+                  ),
+                  me(
+                    'Kalem Sokak 9 kundaklanmadı. Yandı. Müvekkilim karısının evini yakmadı; o evin yangınında, bir başkasının hikâyesine yakıldı. Beraatini talep ediyorum.',
+                  ),
+                ],
+              },
+              {
+                lines: [
+                  me(
+                    'Sayın Hâkim. Bu dosya bir kokuyla başladı. Bir komşu “benzin” dedi; bir eksper “döküntü izi” dedi. Ama o koku da o iz de kimsenin önünde ortaya çıkmadı.',
+                  ),
+                  me(
+                    'Ev eskiydi, tesisatı eskiydi. Yangın bir kibritle değil, bir telle başlamış olmalı. Kalem Sokak 9 kundaklanmadı; yandı. Beraatini talep ediyorum.',
+                  ),
+                  th('“Olmalı.” Bir esas savunmada en pahalı kelime. Hâkim kalemini oynatmadı.'),
                 ],
               },
             ],
@@ -1398,6 +1588,7 @@ export const trial: CasePart = {
             ],
             responses: [
               {
+                when: all(ref('hizlandirici_coktu'), ref('motif_coktu'), flag('alibi_kayit')),
                 lines: [
                   me(
                     'Sayın Hâkim. Savcılık bir halat ördü: poliçe, artış, eşyalar, benzin, borç. Ve ucunu bir rapora bağladı.',
@@ -1406,11 +1597,42 @@ export const trial: CasePart = {
                     'O raporun dayanağı olan numuneleri kimse o zeminden alırken görmedi. Bilirkişi “ben almadım” dedi. Zemin izi, molozu kaldıranın fotoğrafında doğdu.',
                   ),
                   me(
-                    'İplikler: poliçe bir kredinin şartı, artış bir acentenin kampanyası, eşyalar bir ustanın takvimi, benzin bir jeneratörün deposu. Borç gerçek; ama borç bir yangın değildir.',
+                    'O gece müvekkilim kilitli bir sanayi sitesinin içindeydi. Kapı on birde kilitlendi, altıda açıldı; anahtar bekçideydi, defter de. Bir otelin kırk sandalyesi tanık.',
+                  ),
+                  me(
+                    'İplikler belgeli: kâğıdı olan her ipliği tek tek çözdük. Borç gerçek; ama borç bir yangın değildir.',
                   ),
                   me(
                     'Tek tek bakınca her şeyin açıklaması var, dedi savcı. Yan yana koyunca da var. Halat çözüldü; elde ipler kaldı. Kuşku varsa, o kuşku Halil Bozkurt’undur. Beraatini talep ediyorum.',
                   ),
+                ],
+              },
+              {
+                when: all(ref('hizlandirici_coktu'), ref('motif_coktu')),
+                lines: [
+                  me(
+                    'Sayın Hâkim. Savcılık bir halat ördü: poliçe, artış, eşyalar, benzin, borç. Ve ucunu bir rapora bağladı.',
+                  ),
+                  me(
+                    'O raporun dayanağı olan numuneleri kimse o zeminden alırken görmedi. Bilirkişi “ben almadım” dedi. Zemin izi, molozu kaldıranın fotoğrafında doğdu.',
+                  ),
+                  me(
+                    'İplikler belgeli: kâğıdı olan her ipliği tek tek çözdük. Borç gerçek; ama borç bir yangın değildir.',
+                  ),
+                  me(
+                    'Tek tek bakınca her şeyin açıklaması var, dedi savcı. Yan yana koyunca da var. Halat çözüldü; elde ipler kaldı. Kuşku varsa, o kuşku Halil Bozkurt’undur. Beraatini talep ediyorum.',
+                  ),
+                ],
+              },
+              {
+                lines: [
+                  me(
+                    'Sayın Hâkim. Savcılık bir halat ördü: poliçe, artış, eşyalar, benzin, borç. Ve ucunu bir rapora bağladı.',
+                  ),
+                  me(
+                    'Ben o halatın her ipliğini koparamadım; biliyorum. Ama hiçbir iplik, bir insanın evini yaktığını tek başına göstermez. Kuşku sanık lehinedir. Beraatini talep ediyorum.',
+                  ),
+                  th('Bir ilke okudum; bir delil değil. Hâkim ilkeyi biliyordu. Benden delil bekliyordu.'),
                 ],
               },
             ],
@@ -1433,21 +1655,25 @@ export const trial: CasePart = {
             },
           ],
         }),
-        option('T06_D', 'Karısını kaybetmiş bir adam; onun evini yakmayın bir de', {
-          score: { SAVUNMA_STRATEJISI: -50 },
-          effects: [dec('pers')],
-          bad: 'Duygusal söylem delilin yerini tutmaz; esas savunma delillerin tartışılmasıdır.',
-          responses: [
-            {
-              lines: [
-                me(
-                  'Sayın Hâkim, karşınızda karısını kaybetmiş, şimdi de karısının evini kaybetmiş bir adam var. Bir de özgürlüğünü almayın.',
-                ),
-                s('katilan', 'Herkesin bir hikâyesi var, Sayın Hâkim. Dosyada bir laboratuvar raporu var.'),
-              ],
-            },
-          ],
-        }),
+        option(
+          'T06_D',
+          'Sanık karısını da evini de kaybetmiştir; hakkaniyet ve şahsi durumu gözetilerek cezalandırılmamalıdır (TCK 62)',
+          {
+            score: { SAVUNMA_STRATEJISI: -50 },
+            effects: [dec('pers')],
+            bad: 'Duygusal söylem delilin yerini tutmaz; TCK 62 bir cezayı indirir, bir beraatin dayanağı olmaz. Esas savunma delillerin tartışılmasıdır.',
+            responses: [
+              {
+                lines: [
+                  me(
+                    'Sayın Hâkim, karşınızda karısını kaybetmiş, şimdi de karısının evini kaybetmiş bir adam var. Bir de özgürlüğünü almayın.',
+                  ),
+                  s('katilan', 'Herkesin bir hikâyesi var, Sayın Hâkim. Dosyada bir laboratuvar raporu var.'),
+                ],
+              },
+            ],
+          },
+        ),
       ],
     }),
     choiceNode('T_07', {
@@ -1477,12 +1703,12 @@ export const trial: CasePart = {
             },
           ],
         }),
-        option('T07_B', '“Hâkim hanım, merhamet edin; yaşlı bir adamım.”', {
+        option('T07_B', '“Hâkim hanım, merhamet edin; yaşlı bir adamım, bir kızım var.”', {
           neutral:
             'Merhamet talebi tek başına bir indirim nedeni değildir (TCK 62/2); son söz kendini anlatmanın yeridir.',
           responses: [{ lines: [s('halil', 'Hâkim hanım, ben yaşlı bir adamım. Merhamet edin.', 'uzgun')] }],
         }),
-        option('T07_C', '“O eksper yaktı benim evimi! O!”', {
+        option('T07_C', '“O eksper yaktı benim evimi! Kalemiyle yaktı, hâkim hanım!”', {
           score: { SAVUNMA_STRATEJISI: -25 },
           bad: 'Son söz bir başkasını suçlamanın değil kendini anlatmanın yeridir; eksper evi yakmadı, raporu yazdı. Hâkim bunu öfke olarak okudu.',
           responses: [
@@ -1496,7 +1722,7 @@ export const trial: CasePart = {
         }),
       ],
     }),
-    decisionNode('T_08', [{ to: 'R_KARAR' }], {
+    decisionNode('T_08', [{ to: 'T_08L' }], {
       ...TRIAL,
       lines: [
         {
@@ -1516,11 +1742,28 @@ export const trial: CasePart = {
             th(
               'Müzakere odasının kapısı kapalıyken bir avukatın elinde hiçbir şey yoktur. Bütün dosya artık bir başkasının vicdanında. En dürüst kırk dakika.',
             ),
-            s('mubasir', 'Ayağa kalkın!'),
-            s('hakim', 'Hüküm fıkrası ayakta dinlenir.'),
           ],
         },
       ],
+    }),
+    decisionNode('T_08L', [{ to: 'T_08M' }], {
+      ...TRIAL,
+      lines: [
+        {
+          when: not(flag('cokus')),
+          lines: [
+            n(
+              'Müzakere odasının kapısı açılmadan önce Leyla koridorun ucunda belirdi. Gelmeyeceğini söylemişti. Sigara paketi elinde, açılmamış.',
+            ),
+            s('leyla', 'Ne olursa olsun, Deniz, bugün dosyayı sen taşıdın. Karar senin değil; dosya senindi.'),
+            th('Leyla’nın “ne olursa olsun” dediği günler, bir şeyin olacağını bildiği günlerdi. Hangisi, söylemedi.'),
+          ],
+        },
+      ],
+    }),
+    decisionNode('T_08M', [{ to: 'R_KARAR' }], {
+      ...TRIAL,
+      lines: [{ lines: [s('mubasir', 'Ayağa kalkın!'), s('hakim', 'Hüküm fıkrası ayakta dinlenir.')] }],
     }),
     story('T_COKUS', {
       ...court2.base,

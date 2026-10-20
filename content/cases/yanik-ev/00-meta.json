@@ -150,9 +150,12 @@
     },
     {
       "id": "elektrik_ispat",
-      "label": "Yangının elektrik kaynaklı olduğu ve dış etken ispatlandı",
+      "label": "Elektrik bilirkişisi raporu (birincil ark) ve dağıtım kaydındaki nötr kopması birlikte elde",
       "when": {
-        "all": [{ "any": [{ "hasEvidence": "ded_elektrik" }, { "flag": "contra_u6" }] }, { "hasEvidence": "ded_notr" }]
+        "all": [
+          { "any": [{ "hasEvidence": "ev_ark" }, { "hasEvidence": "ded_elektrik" }] },
+          { "hasEvidence": "ded_notr" }
+        ]
       }
     }
   ],
@@ -429,6 +432,10 @@
     { "id": "contra_u4", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "contra_u5", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "contra_u6", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_u6_ark", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_u6_notr", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_alibi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "alibi_kayit", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "deniz_tehdit", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "eksper_kirildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "eksper_uyarildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },

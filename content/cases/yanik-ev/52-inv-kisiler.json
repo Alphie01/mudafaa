@@ -938,6 +938,29 @@
           "label": "Halil Bey’in o hafta eşya taşıdığını söylemişsiniz.",
           "responses": [
             {
+              "when": { "any": [{ "hasEvidence": "clue_numune" }, { "hasEvidence": "clue_eksper_foto" }] },
+              "lines": [
+                {
+                  "speaker": "saadet",
+                  "text": "Taşıdı. Bir kamyonetle. Sandık, konsol, bir de dikiş makinesi. Nermin’in makinesi. Gözüm doldu."
+                },
+                {
+                  "speaker": "saadet",
+                  "text": "Bir gün de elinde kırmızı bir bidon gördüm, arabasına koydu. Polise söyledim; “benzin bidonu” diye yazdılar."
+                },
+                { "speaker": "player", "text": "Yangının sabahı şeridin içine kimler girdi, gördünüz mü?" },
+                {
+                  "speaker": "saadet",
+                  "text": "Polisler gittikten sonra dokuz gibi şık bir adam geldi. Takım elbiseli. Elinde iki teneke, omzunda bir çanta. Girdi, çıktı. Onu kimse sormadı; sen soruyorsun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Raporun ekinde bir eksper adı ve bir saat vardı. Şimdi bir komşunun ağzında iki teneke. Saadet Hanım’ın tanıklığı bir çuval gibi: içinden ne çıkacağı, kimin elini soktuğuna bağlı.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
               "lines": [
                 {
                   "speaker": "saadet",
@@ -949,11 +972,11 @@
                 },
                 {
                   "speaker": "saadet",
-                  "text": "Bir de yangının sabahı, dokuz gibi, şık bir adam geldi. Takım elbiseli. Elinde iki teneke, omzunda bir çanta. Girdi, çıktı. Onu kimse sormadı."
+                  "text": "Sabah da bir sürü insan geldi gitti. Polis, itfaiye, belediye. Ben pencereden baktım; kimse bana bir şey sormadı, ben de çay demledim."
                 },
                 {
                   "speaker": "player",
-                  "text": "Şık bir adam, iki teneke. Polisin sormadığı bir cümle daha. Saadet Hanım’ın tanıklığı bir çuval gibi: içinden ne çıkacağı, kimin elini soktuğuna bağlı.",
+                  "text": "Bir kamyonet, bir sandık, kırmızı bir bidon. Saadet Hanım’ın tanıklığı bir çuval gibi: içinden ne çıkacağı, kimin elini soktuğuna bağlı.",
                   "style": "thought"
                 }
               ]
@@ -962,7 +985,11 @@
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
-            { "type": "VAR", "var": "fact_teneke_saadet", "op": "set", "value": true }
+            {
+              "type": "IF",
+              "when": { "any": [{ "hasEvidence": "clue_numune" }, { "hasEvidence": "clue_eksper_foto" }] },
+              "then": [{ "type": "VAR", "var": "fact_teneke_saadet", "op": "set", "value": true }]
+            }
           ]
         },
         {
@@ -1137,6 +1164,10 @@
                 },
                 { "speaker": "cevdet", "text": "Ama çağrılırsam gelirim. Yalan söyleyemem. Defter benim el yazım." },
                 {
+                  "speaker": "cevdet",
+                  "text": "Yirmi iki yıldır bu mahallede bekçiyim, avukat hanım. Kapıları yoklarım, ışıkları sayarım, kimin geç geldiğini bilirim. Bir şey bilmem ama: kimin neyi neden yaptığını. Onu siz bulun."
+                },
+                {
                   "speaker": "player",
                   "text": "Çağrılırsa gelecek. Çağırmak benim işim; ona ne söyleyeceğini söylemek değil.",
                   "style": "thought"
@@ -1296,6 +1327,14 @@
                   "text": "Ama doğrusu buydu. Otuz beş yıldır bu işi yapıyorum. O tesisat o gece kendi kendine yanmaz. Bir şey oldu o gece."
                 },
                 {
+                  "speaker": "necati",
+                  "text": "Bak kızım, ben çırakken ustam bir şey derdi: “Kablo yalan söylemez, ama kimse onu dinlemez.” Yangından sonra kimse bana gelmedi. Ne polis, ne bilirkişi. Notum dosyada duruyormuş; okuyan olmamış."
+                },
+                {
+                  "speaker": "necati",
+                  "text": "Mahkeme çağırırsa gelirim. Ne gördüysem onu söylerim. “Eskiydi” derim, “ılıktı” derim, “acil değildi” derim. Üçü de doğru."
+                },
+                {
                   "speaker": "player",
                   "text": "Suçluluk dürüst insanları ya susturur ya fazla konuşturur. Necati Usta’yı tanıklığa hazırlarsam, bu ikisinin arasında yürümesi gerekecek.",
                   "style": "thought"
@@ -1420,6 +1459,10 @@
                   "text": "İhbarı öğlen ikide girdim. Ama eksper zaten sabah olay yerindeymiş. Şirket gece haber almış, bölge müdürlüğü göndermiş."
                 },
                 { "speaker": "kader", "text": "Tarık Bey. Hızlıdır. Büyük dosyalara o bakar. Şirket onu sever." },
+                {
+                  "speaker": "kader",
+                  "text": "On beş yıllık acenteyim. Bir eksperin ihbardan önce yola çıktığını ilk kez gördüm demeyeceğim; ama yazılı olarak ilk kez görüyorum. Sistem saat basıyor, avukat hanım. Sistem unutmaz."
+                },
                 {
                   "speaker": "player",
                   "text": "İhbar öğlen ikide. Eksper sabah dokuz yirmide. Bir eksper, ihbardan beş saat önce olay yerinde. Hızlı, evet.",

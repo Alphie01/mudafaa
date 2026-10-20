@@ -168,7 +168,7 @@ const tezelCapraz = [
 const celse1 = (talepler: string[]): Action[] =>
   [
     chooseAll('GECE_B', 'K_DOGRU', 'H100_DEVAM', 'H101_DEVAM', 'H102_DEVAM'),
-    chooseAll('Q_BENZIN', 'Q_ESYA', 'Q_ELEKTRIK', 'Q_ONLEM', 'Q_BITIR', 'H103_A'),
+    chooseAll('Q_BENZIN', 'Q_ESYA', 'Q_ELEKTRIK', 'Q_ONLEM', 'Q_GECE', 'Q_BITIR', 'H103_A'),
     saadetCapraz,
     choose('H105_A'),
     tezelCapraz,
@@ -202,10 +202,10 @@ const saadet2 = [
 const cevdet2 = chooseAll('A2_CEVDET', 'CV2_CANTA', 'CV2_AMIR', 'CV2_BITIR');
 const halil2 = chooseAll('A2_HALIL', 'HL_GERCEK', 'HL_EK', 'HL_EV', 'HL_ZEHRA', 'HL_BITIR');
 const leyla2 = chooseAll('A2_LEYLA', 'LEYLA2_BITIR');
-const tahta2 = (notr: boolean): Action[] => [
+const tahta2 = (notr: boolean, arkVar = true): Action[] => [
   choose('A2_CIKARIM'),
   combine('clue_piroliz', 'clue_teneke'),
-  combine('clue_ark', 'clue_buat'),
+  ...(arkVar ? [combine('clue_ark', 'clue_buat')] : []),
   combine('clue_ayni', 'clue_prim'),
   ...(notr ? [combine('clue_notr', 'clue_tv')] : []),
   choose('CIKARIM2_BITIR'),
@@ -226,13 +226,17 @@ const tarikCapraz = [
   present('ev_ark', 'U6'),
   choose('T03_BITIR'),
 ];
+/** 223/2-b yolu: U6'ya ark raporu da nötr kopması da ayrı ayrı sunulur. */
+/** Ark raporu yokken U6'ya yalnızca nötr kopması sunulur (223/2-b'nin elektrik bilirkişisi olmadan kurulamadığının testi). */
+const tarikCaprazNotr = [...tarikCapraz.slice(0, -2), present('ded_notr', 'U6'), choose('T03_BITIR')];
+const tarikCaprazB = [...tarikCapraz.slice(0, -1), present('ded_notr', 'U6'), choose('T03_BITIR')];
 
 export const tests: CasePart = {
   tests: {
     goldenPaths: [
       goldenPath(
         TYPICAL_PATH,
-        { outcome: 'BERAAT_E', finalMin: 14112, finalMax: 15598 },
+        { outcome: 'BERAAT_E', finalMin: 14122, finalMax: 15608 },
         brifing('STR_USUL'),
         sorusturma(['DIL_PANO', 'DIL_LAB', 'DIL_CEVDET']),
         celse1([]),
@@ -257,7 +261,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G_B',
-        { outcome: 'BERAAT_B', finalMin: 14786, finalMax: 16344 },
+        { outcome: 'BERAAT_B', finalMin: 15034, finalMax: 16616 },
         brifing('STR_MASUMIYET'),
         sorusturma(['DIL_PANO', 'DIL_ARIZA', 'DIL_LAB']),
         celse1(['T1_CEVDET']),
@@ -275,13 +279,38 @@ export const tests: CasePart = {
         tahta2(true),
         chooseAll('A2_SUC', 'SC_DUYURU'),
         chooseAll('GO_T', 'KP_BILDIR', 'T00K_DEVAM', 'CV_Q1', 'CV_Q2', 'CV_Q3', 'CV_QBITIR', 'T02_A'),
-        tarikCapraz,
+        tarikCaprazB,
         chooseAll('T03K_DEVAM', 'T04_DEVAM', 'T05_B', 'T05B_DEVAM', 'R_BANKA', 'R_ARTIS', 'R_BIDON', 'R_BITIR'),
         chooseAll('D_ELEKTRIK', 'D_EKSPER', 'D_ZINCIR', 'D_BITIR', 'T06_B', 'T07_A'),
       ),
+      // Negatif test: elektrik bilirkişisi raporu (ev_ark) hiç istenmezse, U6'ya nötr kopması sunulsa da 2-b savunması
+      // ispatsız kalır (elektrik_ispat yok): BERAAT_B değil, beraat savunması da kurulmadığından taksir.
+      goldenPath(
+        'N_B_ARKSIZ',
+        { outcome: 'TAKSIR', finalMin: 13875, finalMax: 15335 },
+        brifing('STR_MASUMIYET'),
+        sorusturma(['DIL_ARIZA', 'DIL_LAB', 'DIL_CEVDET']),
+        celse1([]),
+        leyla2,
+        lab,
+        ariza,
+        gulsum,
+        tahkim,
+        chooseAll('ON_MUTALAA', 'ARASABAH2_DEVAM'),
+        leyla2,
+        saadet2,
+        cevdet2,
+        halil2,
+        tahta2(true, false),
+        chooseAll('A2_SUC', 'SC_DUYURU'),
+        chooseAll('GO_T', 'KP_BILDIR', 'T00K_DEVAM', 'CV_Q1', 'CV_Q2', 'CV_Q3', 'CV_QBITIR', 'T02_A'),
+        tarikCaprazNotr,
+        chooseAll('T03K_DEVAM', 'T04_DEVAM', 'T05_B', 'T05E_DEVAM', 'R_BANKA', 'R_ARTIS', 'R_BIDON', 'R_BITIR'),
+        chooseAll('D_EKSPER', 'D_ZINCIR', 'D_IPLIK', 'D_BITIR', 'T06_B', 'T07_A'),
+      ),
       goldenPath(
         'G_T',
-        { outcome: 'TAKSIR', finalMin: 11390, finalMax: 12590 },
+        { outcome: 'TAKSIR', finalMin: 11343, finalMax: 12537 },
         brifing('STR_INDIRIM', 'BR00_B', 'BR01_B'),
         // 1. gün
         leyla,
@@ -346,7 +375,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G_M',
-        { outcome: 'MAHKUMIYET', finalMin: 6084, finalMax: 6726 },
+        { outcome: 'MAHKUMIYET', finalMin: 6123, finalMax: 6767 },
         brifing('STR_MASUMIYET', 'BR00_C', 'BR01_C'),
         leyla,
         ev,
@@ -414,8 +443,70 @@ export const tests: CasePart = {
         chooseAll('D_ZEMIN', 'D_ELEKTRIK', 'D_EKSPER', 'D_BITIR', 'T06_B', 'T07_C'),
       ),
       goldenPath(
+        'G_ETIK_M',
+        { outcome: 'ETIK', finalMin: 5282, finalMax: 5838 },
+        brifing('STR_MASUMIYET', 'BR00_C', 'BR01_C'),
+        leyla,
+        ev,
+        foto,
+        bilirkisi,
+        saadet,
+        chooseAll('AK1_C', 'SABAH2_DEVAM'),
+        leyla,
+        gorus1,
+        atolye,
+        itfaiye,
+        necati,
+        chooseAll('AK2_C', 'SABAH3_DEVAM'),
+        leyla,
+        police,
+        kader,
+        gorus2,
+        choose('A_CIKARIM'),
+        combine('clue_foto_tavan', 'clue_eksper_foto'),
+        combine('clue_taze', 'clue_su'),
+        choose('CIKARIM_BITIR'),
+        choose('A_IPLIK'),
+        combine('clue_borc', 'clue_kampanya'),
+        combine('clue_esyalar', 'clue_restorasyon'),
+        combine('clue_bidon', 'clue_jenerator'),
+        choose('IPLIK_BITIR'),
+        chooseAll('A_DIL', 'DIL_RET', 'DIL_KESIF', 'DIL_TARIK', 'DIL_VER', 'GO_H1'),
+        chooseAll('GECE_C', 'K_BORC', 'H100_DEVAM', 'H101_DEVAM', 'H102_DEVAM'),
+        chooseAll('Q_BENZIN', 'Q_ESYA', 'Q_GECE', 'Q_BITIR', 'H103_B'),
+        press('S1'),
+        press('S2'),
+        present('ev_itfaiye', 'S2'),
+        press('S3'),
+        present('ded_tasima', 'S3'),
+        press('S6'),
+        present('ded_bidon', 'S6'),
+        chooseAll('H104_BITIR', 'H104S_DEVAM', 'H105_C'),
+        press('B1'),
+        present('ded_temizlenmis', 'B1'),
+        press('B2'),
+        press('B3'),
+        press('B4'),
+        present('ded_taze', 'B4'),
+        chooseAll('H106_BITIR', 'T1_LAB', 'T1_HEYET', 'T1_BITIR', 'H108_DEVAM', 'H109_DEVAM', 'ARAGIRIS_DEVAM'),
+        leyla2,
+        gulsum,
+        tahkim,
+        saadet2,
+        chooseAll('A2_HALIL', 'HL_GERCEK', 'HL_ZEHRA', 'HL_BITIR'),
+        chooseAll('ON_KABUL', 'ARASABAH2_DEVAM'),
+        leyla2,
+        choose('A2_LAB'),
+        examine('kars', 'l_profil'),
+        examine('lupe', 'l_piroliz'),
+        choose('LAB_BITIR'),
+        chooseAll('A2_SUC', 'SC_KENDIN'),
+        // Ismarlama rapor açıklanınca güvenilirlik biter: çöküş kesintisi.
+        chooseAll('GO_T', 'KP_TEHDIT', 'T00K_DEVAM', 'COKUS_SON'),
+      ),
+      goldenPath(
         'G_ETIK',
-        { outcome: 'ETIK', finalMin: 13504, finalMax: 14926 },
+        { outcome: 'ETIK_T', finalMin: 13514, finalMax: 14936 },
         brifing('STR_MASUMIYET'),
         sorusturma(['DIL_PANO', 'DIL_LAB', 'DIL_CEVDET']),
         celse1([]),
@@ -437,7 +528,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'W',
-        { outcome: 'MAHKUMIYET', finalMin: 10046, finalMax: 11104 },
+        { outcome: 'TAKSIR', finalMin: 10103, finalMax: 11167 },
         brifing('STR_USUL'),
         sorusturma(['DIL_PANO', 'DIL_LAB', 'DIL_CEVDET']),
         celse1([]),

@@ -1,4 +1,13 @@
-import { cont, fallback, has, meet, rawChoice, sceneSearch, story } from '../../../tools/content/src/kit/index.js';
+import {
+  cont,
+  fallback,
+  has,
+  meet,
+  raise,
+  rawChoice,
+  sceneSearch,
+  story,
+} from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import type { NodeDef } from '@mudafaa/case-schema';
 import { INV1, card, me, n, named, s, th } from './shared.js';
@@ -148,7 +157,7 @@ export const invPlaces: CasePart = {
       ...INV1,
       title: 'Atölye',
       background: 'depo',
-      onFirstEnter: [meet('zehra')],
+      onFirstEnter: [meet('zehra'), raise('fact_alibi')],
       lines: [
         {
           lines: [
@@ -165,7 +174,21 @@ export const invPlaces: CasePart = {
               'Halil Abi’nin avukatı mısınız? O gece buradaydı abla. Işığı sabaha kadar yandı. Sabah beşte ben çay götürdüm, makinenin başındaydı.',
             ),
             named('ATÖLYE BEKÇİSİ', 'Polis bana hiç sormadı. Ben de kimseye söylemedim; soran olmadı ki.'),
-            th('Bir tanık daha; ama mahkemenin göremeyeceği bir tanık değil. Sadece kimsenin sormadığı bir tanık.'),
+            me('Sanayinin kapısı gece açık mı kalır?'),
+            named(
+              'ATÖLYE BEKÇİSİ',
+              'Yok abla. On birde kilitlerim, altıda açarım. Anahtar bende. Giren çıkan arabayı deftere yazarım; kooperatif ister. O gece kapı hiç açılmadı. Halil Abi’nin kamyoneti de sabaha kadar şurada durdu.',
+            ),
+            named(
+              'ATÖLYE BEKÇİSİ',
+              'Gece birde, üçte tur atarım. İki turda da makinenin sesi geliyordu. Defter kulübede; isterseniz fotoğrafını çekin, saklayacak bir şeyim yok.',
+            ),
+            n(
+              'Kulübenin camından uzattığı defterin o geceki sayfası boştu: “23.00 kapı kilit. 06.00 kapı açık. Giriş-çıkış yok.”',
+            ),
+            th(
+              'Bir mazeret. Bu dosyada tek başına bir kalkan değil; savcı bir mazeretin bir yangını açıklamadığını söyleyecek. Ama hâkimin önüne konacak her “nasıl?” sorusunun yanına iyi bir “ne zaman?” koyar.',
+            ),
             n('Kilit gıcırdadı. İçeriden kumaş, tutkal ve soğuk makine yağı kokusu taştı.'),
           ],
         },

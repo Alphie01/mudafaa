@@ -146,6 +146,18 @@
         {
           "lines": [
             {
+              "speaker": "narrator",
+              "text": "Akşam büroya döndüğümde Leyla’nın kapısı aralıktı. Masasında 1996 tarihli dosya yoktu; rafına kaldırmıştı. Bunu bir iltifat olarak aldım."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bilirkişiyi sarstın. Güzel. Ama şimdi asıl adam ortaya çıktı: hiç kürsüye çıkmadan dosyanın ilk sayfasını yazan adam. Ona kızma. Onu oku."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Üç hafta uzun gibi görünür. Değildir. Müzekkereler geç gelir, tanıklar korkar, müvekkiller ümitlenir. Ümit en pahalı masraftır."
+            },
+            {
               "speaker": "player",
               "text": "Üç hafta. İki raporu değil, bir adamı okumam gerekiyor artık. Ve bir sokağın elektriğini.",
               "style": "thought"
@@ -185,7 +197,7 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "GÜN 2/2 · İKİNCİ CELSEYE 13 GÜN. Hedef: tanıklarını hazırla, tahtayı topla, kararını ver."
+              "text": "GÜN 2/2 · İKİNCİ CELSEYE 12 GÜN. Hedef: tanıklarını hazırla, tahtayı topla, kararını ver."
             }
           ]
         }
@@ -379,7 +391,7 @@
         {
           "id": "ON_RED",
           "kind": "OPTION",
-          "label": "Hayır. Ve bunu bir daha kimseye teklif etmeyin; babanızı en çok bu batırır.",
+          "label": "Hayır. Bunu bir daha kimseye teklif etmeyin; babanızı en çok bu batırır.",
           "responses": [
             {
               "lines": [
@@ -410,7 +422,7 @@
         {
           "id": "ON_MUTALAA",
           "kind": "OPTION",
-          "label": "Ismarlama rapor olmaz. Ama bağımsız bir uzmandan bilimsel mütalaa alabiliriz; sonucu ne çıkarsa.",
+          "label": "Ismarlama rapor olmaz; bağımsız bir uzmandan mütalaa alırız, sonucu ne olursa.",
           "responses": [
             {
               "lines": [
@@ -440,7 +452,7 @@
         {
           "id": "ON_DUSUN",
           "kind": "OPTION",
-          "label": "Bunu şimdi konuşmayalım; düşüneyim.",
+          "label": "Bunu şimdi konuşmayalım. Bir gece düşüneyim, yarın size dönerim.",
           "responses": [
             {
               "lines": [
@@ -463,7 +475,7 @@
         {
           "id": "ON_KABUL",
           "kind": "OPTION",
-          "label": "Yazsın. Onlar oyunu kurallarına göre oynamıyorsa biz de oynamayız.",
+          "label": "Yazsın. Onlar oyunu kurallarına göre oynamıyorsa biz de oynamak zorunda değiliz.",
           "responses": [
             {
               "lines": [
@@ -537,6 +549,15 @@
               "speaker": "player",
               "text": "Bir yalan söyledim mi? Bilmiyorum. Raporlar sağlam. Ben o kadar değilim.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Zehra mektup destesini çantasına koydu, bir tanesini bana uzattı. “Bunu okuyun” dedi. “Babamı benden iyi anlatıyor.” Kırk yıllık bir el yazısı: “Halil evi cilaladı yine. Ben ona ‘evi değil beni cilala’ dedim, güldü.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir dosyada okunması gereken her kâğıt bir delil değildir. Bazısı yalnızca kimi savunduğunu hatırlatır.",
+              "style": "thought"
             }
           ]
         },
@@ -565,6 +586,15 @@
               "speaker": "player",
               "text": "Halil yanık evin önünde sigara yakıp tutardı. Zehra annesinin öldüğü hastanede nöbet tutuyor. Bu ailede herkes bir yasın nöbetini tutuyor.",
               "style": "thought"
+            },
+            {
+              "speaker": "zehra",
+              "text": "Babam koğuşta ayakkabı dikiyormuş. Gardiyanlara, mahkûmlara. Para almıyormuş. “Elim boş durursa aklım dolar” diyor."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir döşemecinin elleri. Bir hemşirenin nöbeti. Benim de dosyam. Herkes boş kalmamak için bir şey tutuyor.",
+              "style": "thought"
             }
           ]
         }
@@ -583,7 +613,7 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "16 NİSAN · 11.00 — ARSLAN HUKUK", "style": "card", "bg": "buro" },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — SABAH", "style": "card", "bg": "buro" },
             {
               "speaker": "narrator",
               "text": "Zehra’nın arkasından altmışlarında, siyah başörtülü, bir naylon dosya tutan bir kadın girdi. Oturmadan önce koltuğa baktı; oturulup oturulmayacağını sorar gibi."
@@ -734,7 +764,7 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "KALEM SOKAK 7 — 17 NİSAN, 16.20", "style": "card", "bg": "ev" },
+            { "speaker": "narrator", "text": "KALEM SOKAK 7 — İKİNDİ", "style": "card", "bg": "ev" },
             {
               "speaker": "saadet",
               "text": "Gel kızım. Mahkemede beni kızdırdın ama haklıydın. Cevdet’miş o adam. Utandım."
@@ -778,12 +808,7 @@
         {
           "when": { "flag": "fact_teneke_saadet" },
           "lines": [
-            {
-              "speaker": "narrator",
-              "text": "MURADİYE MEYDANI — 18 NİSAN, 21.00",
-              "style": "card",
-              "bg": "sokak_karanlik"
-            },
+            { "speaker": "narrator", "text": "MURADİYE MEYDANI — GECE", "style": "card", "bg": "sokak_karanlik" },
             {
               "speaker": "cevdet",
               "text": "Avukat hanım. Mahkemeden davetiye geldi. Amirime söyledim. Kızdı, sonra “git, doğruyu söyle” dedi."
@@ -797,12 +822,7 @@
         },
         {
           "lines": [
-            {
-              "speaker": "narrator",
-              "text": "MURADİYE MEYDANI — 18 NİSAN, 21.00",
-              "style": "card",
-              "bg": "sokak_karanlik"
-            },
+            { "speaker": "narrator", "text": "MURADİYE MEYDANI — GECE", "style": "card", "bg": "sokak_karanlik" },
             {
               "speaker": "cevdet",
               "text": "Avukat hanım. Mahkemeden davetiye geldi. Amirime söyledim. Kızdı, sonra “git, doğruyu söyle” dedi."
@@ -852,7 +872,7 @@
         {
           "id": "CV2_AMIR",
           "kind": "OPTION",
-          "label": "Mahkemede yalnızca defterinizi ve gördüğünüzü anlatın. Ne söyleyeceğinizi ben söylemem.",
+          "label": "Mahkemede defterinizi ve gördüğünüzü anlatın; ne diyeceğinizi ben söylemem.",
           "responses": [
             {
               "lines": [
@@ -955,7 +975,7 @@
         {
           "id": "HL_EK",
           "kind": "OPTION",
-          "label": "Hâkim size dikkatsizlik sorabilir. Elektrikçiyi ve takvimi, olduğu gibi anlatın; fazlasını değil.",
+          "label": "Hâkim dikkatsizliği sorabilir; elektrikçiyi, takvimi olduğu gibi anlatın.",
           "responses": [
             {
               "lines": [
@@ -1006,6 +1026,10 @@
                   "speaker": "halil",
                   "expression": "uzgun",
                   "text": "Ama içeride uyuyamam herhalde. Bir süre. Atölyede kanepe var."
+                },
+                {
+                  "speaker": "halil",
+                  "text": "Saadet’e de bir pencere yapacağım. Onun cumbası yandı, benim yüzümden değil ama benim evimden. Komşuluk böyle bir şey; kimin kibriti olduğuna bakılmaz, kimin saçağı olduğuna bakılır."
                 },
                 {
                   "speaker": "player",
@@ -1085,7 +1109,7 @@
         {
           "id": "SC_DUYURU",
           "kind": "OPTION",
-          "label": "Savcılığa yazılı suç duyurusu: delil uydurarak iftira ve delillerle oynama şüphesi",
+          "label": "Savcılığa yazılı suç duyurusu: delil uydurma ve iftira şüphesi",
           "responses": [
             {
               "lines": [
@@ -1116,7 +1140,7 @@
         {
           "id": "SC_KENDIN",
           "kind": "OPTION",
-          "label": "Eksperin bürosuna git ve onunla yüzleş",
+          "label": "Eksperin bürosuna git; onunla yüz yüze konuş ve tepkisini kendi gözünle gör",
           "responses": [
             {
               "lines": [
@@ -1438,7 +1462,7 @@
         {
           "id": "KP_BILDIR",
           "kind": "OPTION",
-          "label": "Konuşmayı saatiyle not et ve sabah savcılığa ve mahkemeye bildir",
+          "label": "Konuşmayı saatiyle not et; sabah savcılığa ve mahkemeye bildir",
           "responses": [
             {
               "lines": [
@@ -1464,7 +1488,7 @@
         {
           "id": "KP_TEHDIT",
           "kind": "OPTION",
-          "label": "Arkasından seslen: “Yarın kürsüde kaçacak yerin olmayacak.”",
+          "label": "Arkasından seslen: “Yarın kürsüde kaçacak yerin olmayacak, Tarık Bey.”",
           "responses": [
             {
               "lines": [
@@ -1490,7 +1514,7 @@
         {
           "id": "KP_GIT",
           "kind": "OPTION",
-          "label": "Hiçbir şey söyleme; kapıyı kilitle ve eve git",
+          "label": "Hiçbir şey söyleme; kapıyı kilitle, eve git ve sabahı bekle",
           "responses": [
             {
               "lines": [
@@ -1520,6 +1544,11 @@
             {
               "speaker": "player",
               "text": "Tenekeler içeri dolu girdi. Laboratuvar yangını değil, tenekeleri ölçtü. Yarın bunu ona, kendi tenekesiyle soracağım.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Kızgın değilim. Bunu fark edince şaşırdım. Kızgınlık bir avukatın elinde iyi bir alet değil; kayar, keser, insanın kendi elini keser. Yarın kayıtlarla konuşacağım. Kayıtlar kızmaz.",
               "style": "thought"
             }
           ]
@@ -1570,6 +1599,47 @@
               "speaker": "player",
               "text": "Yarın hâkim “kasıt yoksa dikkatsizlik var mı” diye soracak. Cevabım henüz ince. İnce bir kumaş gibi; gerilince yırtılabilir.",
               "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_SON_3" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_SON_3",
+      "type": "DECISION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #14 · ARA",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Gece yarısına doğru telefon çaldı. Zehra. Arkada bir hastane koridorunun uğultusu, bir monitörün düzenli sesi."
+            },
+            {
+              "speaker": "zehra",
+              "text": "Uyuyor muydunuz? Ben nöbetteyim. Babam yarın için o dar ceketi giyecekmiş. Yenisini almayayım dedi; “annen gibi bir beden küçük olsun, uğur getirir.”"
+            },
+            {
+              "speaker": "zehra",
+              "expression": "mutlu",
+              "text": "Telefonda güldü. İki aydır ilk kez. “Omzunu yarın adliyede açarım” dedi. “Döşemeci ceket dikemez mi sanıyorsun?”"
+            },
+            { "speaker": "player", "text": "Yarın erken gelin. Babanız sizi salonda görsün; kürsüye bakmadan önce." },
+            {
+              "speaker": "zehra",
+              "text": "Avukat hanım… yarın ne olursa olsun, babamın derecesini biliyorum artık. Birinci derece. Geçer."
+            },
+            {
+              "speaker": "player",
+              "text": "Birinci derece yanık: kızarır, acır, iz bırakmaz. Bir kızın babasına koyduğu en merhametli teşhis. Yarın hâkim kendi teşhisini koyacak.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonu kapattım. Masada üç yığın: Tarık’ın kitabı, Halil’in iplikleri, bir sokağın elektriği. Lambayı söndürdüm. Yağmur yine başlamıştı."
             }
           ]
         }

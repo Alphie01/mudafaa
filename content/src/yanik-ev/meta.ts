@@ -121,8 +121,8 @@ export const meta: CasePart = {
     },
     {
       id: 'elektrik_ispat',
-      label: 'Yangının elektrik kaynaklı olduğu ve dış etken ispatlandı',
-      when: all(any(has('ded_elektrik'), flag('contra_u6')), has('ded_notr')),
+      label: 'Elektrik bilirkişisi raporu (birincil ark) ve dağıtım kaydındaki nötr kopması birlikte elde',
+      when: all(any(has('ev_ark'), has('ded_elektrik')), has('ded_notr')),
     },
   ],
   variables: [
@@ -200,6 +200,10 @@ export const meta: CasePart = {
       'contra_u4',
       'contra_u5',
       'contra_u6',
+      'contra_u6_ark',
+      'contra_u6_notr',
+      'fact_alibi',
+      'alibi_kayit',
       'deniz_tehdit',
       'eksper_kirildi',
       'eksper_uyarildi',

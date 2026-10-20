@@ -192,7 +192,10 @@
       "eyebrow": "DAVA #14 · SORUŞTURMA",
       "title": "Atölye",
       "background": "depo",
-      "onFirstEnter": [{ "type": "MEET", "character": "zehra" }],
+      "onFirstEnter": [
+        { "type": "MEET", "character": "zehra" },
+        { "type": "VAR", "var": "fact_alibi", "op": "set", "value": true }
+      ],
       "lines": [
         {
           "lines": [
@@ -224,9 +227,24 @@
               "name": "ATÖLYE BEKÇİSİ",
               "text": "Polis bana hiç sormadı. Ben de kimseye söylemedim; soran olmadı ki."
             },
+            { "speaker": "player", "text": "Sanayinin kapısı gece açık mı kalır?" },
+            {
+              "speaker": "narrator",
+              "name": "ATÖLYE BEKÇİSİ",
+              "text": "Yok abla. On birde kilitlerim, altıda açarım. Anahtar bende. Giren çıkan arabayı deftere yazarım; kooperatif ister. O gece kapı hiç açılmadı. Halil Abi’nin kamyoneti de sabaha kadar şurada durdu."
+            },
+            {
+              "speaker": "narrator",
+              "name": "ATÖLYE BEKÇİSİ",
+              "text": "Gece birde, üçte tur atarım. İki turda da makinenin sesi geliyordu. Defter kulübede; isterseniz fotoğrafını çekin, saklayacak bir şeyim yok."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kulübenin camından uzattığı defterin o geceki sayfası boştu: “23.00 kapı kilit. 06.00 kapı açık. Giriş-çıkış yok.”"
+            },
             {
               "speaker": "player",
-              "text": "Bir tanık daha; ama mahkemenin göremeyeceği bir tanık değil. Sadece kimsenin sormadığı bir tanık.",
+              "text": "Bir mazeret. Bu dosyada tek başına bir kalkan değil; savcı bir mazeretin bir yangını açıklamadığını söyleyecek. Ama hâkimin önüne konacak her “nasıl?” sorusunun yanına iyi bir “ne zaman?” koyar.",
               "style": "thought"
             },
             {

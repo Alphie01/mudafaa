@@ -91,7 +91,7 @@ yangın dosyasında aynı kalıpla rapor yazmış; Sigorta Tahkim Komisyonu o ra
 ## 4. Yapı ve node haritası
 
 ```
-PROLOG  Soğuk açılış (15 Ocak 01.30–02.30; isimsiz sesler)            → PR_02
+PROLOG  Soğuk açılış (15 Ocak gecesi; yalnızca dışarıdan, isimsiz sesler)            → PR_02
 PR_02   Sabah 07.40: kül, cüzdan, fiş                                  → BR_00
 BR_00   Bölüm 1 · DOSYA: Zehra büroda (söz / tarife / dürüstlük)      → BR_00L Leyla
 BR_01   Ceza aralığı sorusu (A–D) → BR_01B Halatın üç ipliği → BR_02 Dosya + strateji → INV_SABAH Kalem Sokak
@@ -121,14 +121,13 @@ mütalaa, savunma, son söz, karar). Zorluk 5: son celse iki oturuma bölünmü�
 
 > Sözcük sayıları tipik yol içindir (± %20).
 
-### PROLOG — "02.08" (~650) · bg: sokak_karanlik
-- `card`: "15 OCAK · GECE 01.30 — MURADİYE, KALEM SOKAK".
-- Islak arnavutkaldırımı, cumbaların altından damlayan yağmur. Bir el feneri kapıları tek tek yoklar; bir düdük, bir köpek.
-  Bir pencerenin perdesi aralanır (Saadet, isimsiz: "BİR KADIN"): "Kim o? … Neyse."
-- 02.08: sokak lambaları bir an kararır, sonra fazla parlak yanar. Bir pencerede televizyon "pat" diye söner. Kimse
-  önemsemez. (Ekilen ipucu 1; yorum yok.)
-- Bir evin içinden çatırtı; turuncu bir ışık koridor camında büyür. "BİR SES" (komşu, telefonda): "İtfaiye! Kalem Sokak,
-  dokuz numara! Ahşap ev, çabuk!" (`fx: flash`).
+### PROLOG — "Gece" (~550) · bg: sokak_karanlik
+- `card`: "15 OCAK · GECE — MURADİYE, KALEM SOKAK". Saat verilmez (02.08 çözümün anahtarıdır; ara evresinde kazanılır).
+- Islak arnavutkaldırımı, cumbaların altından damlayan yağmur. Bir el feneri sokakta gezinir, bir evin önünde durur, gider
+  (kim olduğu söylenmez; düdük, tokmak yok). Bir pencerenin perdesi aralanır (Saadet, isimsiz: "BİR KADIN"): "Kim o? … Neyse."
+- Yangın yalnızca dışarıdan görülür: "Kimse ilk kıvılcımı görmedi"; dokuz numaranın pencereleri içeriden turuncuya döner. Çıkış
+  yeri, lambalar, televizyon gösterilmez (inceleme gözden geçirmesi, 2026-10-20: soğuk açılış elektrik gerçeğini ele veriyordu).
+  "BİR SES" (komşu, telefonda): "İtfaiye! Kalem Sokak, dokuz numara! Ahşap ev, çabuk!" (`fx: flash`).
 - Sirenler, hortumlar, yan evin saçağı tutuşur; bir anne çocuğunu battaniyeyle taşır. Ev bir fener gibi yanar.
 - Son: "Sabaha karşı ateş söndü. Ama bir şey yanmaya devam etti; adı henüz konmamış bir şey." `fade`.
 
@@ -137,7 +136,8 @@ mütalaa, savunma, son söz, karar). Zorluk 5: son celse iki oturuma bölünmü�
 - Bir polis kimlik ister; cüzdandan bir fiş düşer: "12 Ocak, kurşunsuz benzin, 5 litre, bidon." Polis fişi çevirir, bir
   meslektaşına gösterir. Kimse Halil'e bir şey sormaz; sormaya gerek görmezler.
 - Halil: "Jeneratör için…" — cümlesini kimse duymaz.
-- Belirsiz bir satır: "Saat dokuzu yirmi geçe, şeridin altından biri daha geçti. Bekçi defterine bir satır daha yazıldı.
+- Bulanık bir satır (saat ve kişi yok): "Sabah boyunca şeridin önünden komşular geçti… Bekçi defterine bir şeyler yazdı;
+  bekçiler hep bir şeyler yazar." Eski metin ("dokuzu yirmi geçe… o satırı aylarca kimse okumadı") çözümü işaret ettiği için kaldırıldı.
   Kimse o satırı aylarca okumadı." (Ekilen ipucu 2; isim yok.)
 - `card`: "YİRMİ GÜN SONRA TUTUKLANDI. İDDİANAME MARTTA GELDİ. BİRİNCİ CELSEYE ON BİR GÜN VAR."
 
@@ -252,19 +252,24 @@ mütalaa, savunma, son söz, karar). Zorluk 5: son celse iki oturuma bölünmü�
   başlatıldı. Kalkan Sigorta hasar dosyasını yeniden açtı."
 - **BERAAT_E:** Serbest ama yarım: "şüpheden yararlandı." Kalem Sokak'ta kömür tahtalar; Halil çeyiz sandığını yanık evin
   önüne koyar, açar. Deniz (thought): "Bir halatı çözdük. Halatı öreni değil."
-- **TAKSIR:** "Taksirle… hükmün açıklanmasının geri bırakılmasına." Halil evine bakar: "Kundakçı değilmişim; dikkatsizmişim.
-  Nermin buna da kızardı." Kuru, acı.
-- **MAHKUMIYET:** Ring aracı; Zehra bir hemşire soğukkanlılığıyla ağlamamaya çalışır. Deniz fişi düşünür: 5 litre. "Bidon
-  atölyede hâlâ dolu duruyordu. Kimse bakmadı. Ben de yeterince göstermedim." Çöküşte: hâkimin cümlesi.
-- **ETIK:** Onur'un eksperi kürsüde çözülür; Leyla masaya meslek kuralları kitapçığını bırakır. "Onlar sahte rapor yazdı;
-  biz de yazdık. Hâkim aradaki farkı soracaktı. Fark yoktu."
+- **TAKSIR:** "Taksirle… beş ay… ertelenmesine." Halil: "Kundakçı değilmişim; dikkatsizmişim. Nermin buna da kızardı." Kuru,
+  acı. Çöküşle gelinen taksirde (hızlandırıcı tespiti birinci celsede çökmüş, ikinci celsede güven bitmiş) savcının cümlesi:
+  "Numune zincirini siz kurdunuz; o zincir müvekkilinizi kurtardı. Bugün yanlış kâğıtlar beraati götürdü."
+- **MAHKUMIYET:** Ring aracı; Zehra bir hemşire soğukkanlılığıyla ağlamamaya çalışır. Bidon bulunmadıysa: "Kimse bakmadı; ben
+  de bakmadım." Bulunduysa: "İplikleri gevşettim ama halatın ucundaki rapora dokunamadım." Çöküşte ayrı, tek bir blok (tek
+  "Türk Milleti adına"): savcının "yanlış tanığa, yanlış anda" cümlesi.
+- **ETIK (iki yüz):** Onur'un eksperi koridorda ifade imzalar; Leyla masaya meslek kuralları kitapçığını bırakır. Mahkeme
+  ısmarlama mütalaayı hükme esas almaz ve Halil'i kalan delillere göre yargılar: numune zinciri kurulmamışsa mahkûmiyet (ETIK),
+  kurulmuşsa taksir (ETIK_T; Halil: "Kundakçı değilmişim. Bunu bir bekçinin defteri söyledi; o satın aldığınız kâğıt değil.").
 
 ## 6. Ters köşeler ve hazırlığı
 
-1. **Numuneler eksperindi (1. celse doruğu).** Ekilen ipuçları: prologdaki "dokuzu yirmi geçe defterdeki satır", bilirkişi
-   raporundaki numune kaynağı satırı, bekçi çizelgesi, Saadet'in "sabah bir adam iki tenekeyle çıktı" yan cümlesi.
-2. **Yangın elektrikle çıktı (ara evresi).** Ekilen ipuçları: prologda lambaların titremesi ve sönen televizyon, Saadet'in
-   kürsüdeki "televizyonum bile bozuldu", buattaki eriyik bakır, itfaiyenin "mutfak–koridor" tespiti, Necati'nin keşif notu.
+1. **Numuneler eksperindi (1. celse doruğu).** Ekilen ipuçları: prologdaki bekçi defteri (saatsiz), bilirkişi raporundaki numune
+   kaynağı satırı, bekçi çizelgesi, Saadet'in "şık bir adam, iki teneke" yan cümlesi (yalnızca numune satırı ya da eksperin
+   fotoğrafı bulunduktan sonra söylenir; önce sorulursa Saadet yalnızca kamyoneti ve bidonu anlatır).
+2. **Yangın elektrikle çıktı (ara evresi).** Ekilen ipuçları: Saadet'in "televizyonum pat dedi", buattaki eriyik bakır, V izi,
+   itfaiyenin "mutfak–koridor" tespiti, Necati'nin keşif notu. Leyla'nın 1996 hikâyesi genel bir derstir (fotoğraftan rapor
+   yazan bir bilirkişi); çözüm şablonu (ark) değildir. Kahvehanedeki çaycı sigortacıdan söz etmez.
 3. **Eksperin nedeni (ara evresi).** Gülsüm'ün gelişi; aynı paragraf; prim yazısı.
 
 ## 7. Sözcük bütçesi (tipik yol)
@@ -276,4 +281,4 @@ mütalaa, savunma, son söz, karar). Zorluk 5: son celse iki oturuma bölünmü�
 | Birinci celse | 2.600 |
 | Ara | 3.000 |
 | İkinci celse + karar + epilog | 3.300 |
-| **Toplam** | **~16.900 (ölçüm: case:duration)** |
+| **Toplam** | **~16.900 planlanan; ölçüm (case:duration) 15.010 sözcük, 239 aksiyon, 107,3 dk** |

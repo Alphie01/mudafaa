@@ -16,43 +16,63 @@ import {
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { card, n, s, th } from './shared.js';
 
-// 90-outcomes: beş sonuç. Öncelik sırası: ısmarlama rapor (ETİK), 223/2-b, 223/2-e, taksire dönüşüm (TCK 171/1-a),
-// mahkûmiyet. Eşikler eşik çubuğuyla aynı: 0 / 7.000 / 12.500; 223/2-b ayrıca 13.500.
+// 90-outcomes: altı sonuç. Öncelik sırası: ısmarlama rapor (ETİK: hızlandırıcı tespiti ayaktaysa mahkûmiyet, çöktüyse
+// taksir), 223/2-b, 223/2-e, taksire dönüşüm (TCK 171/1-a), mahkûmiyet. Hızlandırıcı tespiti çöktüyse sonuç hiçbir yolda
+// kasten mahkûmiyete düşmez (çöküş kesintisi ve düşük skor dahil): kastın tek dayanağı numune zinciriydi. Eşikler: beraat
+// 12.500, 223/2-b ayrıca 13.500; taksir bandı (7.000) eşik çubuğunda görsel bir banttır, sonucu numune zinciri belirler.
 
 export const T_TAKSIR = 7000;
 export const T_BERAAT = 12500;
 export const T_BERAAT_B = 13500;
+
+const ETIK_KART =
+  'Gerçeğe aykırı içerikte bir uzman raporunu para karşılığı ısmarlayıp mahkemeye sunmak yalan tanıklığa azmettirme ve delil uydurmadır (TCK 272, 38) ve avukat için meslekten çıkarmaya varan bir disiplin ihlalidir (Av.K. 34; TBB Meslek Kuralları). Mahkeme ısmarlama mütalaayı hükme esas almaz ve kararını kalan delillere göre verir: sahte bir rapor müvekkili kurtarmaz, yalnızca savunmanın sesini kısar.';
+
+const ETIK_BURO = [
+  card('ARSLAN HUKUK — O GECE', 'buro_gece'),
+  n(
+    'Masamda bir kitapçık vardı: Türkiye Barolar Birliği Meslek Kuralları. Leyla bırakmıştı. Bir not yoktu. Sigara paketi yerinde, açılmamış.',
+  ),
+  n(
+    'Kapıdaki yeni pirinç levhada iki isim yazıyordu. Birinin yanında bir boşluk vardı; sanki yazılmayı bekleyen değil, silinmeyi bekleyen bir boşluk.',
+  ),
+];
 
 export const outcomes: CasePart = {
   outcomes: [
     outcome('ETIK', {
       class: 'CONVICTION',
       priority: 1,
-      when: flag('sahte_rapor'),
+      when: all(flag('sahte_rapor'), not(ref('hizlandirici_coktu'))),
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
       header: 'TÜRK MİLLETİ ADINA',
       sentence: '3 yıl 6 ay hapis · 50.000 TL adli para cezası',
       verdictText:
-        'Sanık Halil Bozkurt’un TCK 170/1-a uyarınca takdiren 1 yıl 6 ay hapis cezası ile; TCK 158/1-k uyarınca 4 yıl hapis ve 1.000 gün adli para cezası üzerinden, suçun teşebbüs aşamasında kalması nedeniyle TCK 35/2 uyarınca yarı oranında indirilerek 2 yıl hapis ve 500 gün adli para cezası ile CEZALANDIRILMASINA; bir gün karşılığı 100 TL’den 50.000 TL adli para cezasına (TCK 52/2); TCK 53 uyarınca hak yoksunluklarına; savunmanın sunduğu uzman raporunu düzenleyen kişi ve raporu ısmarlayanlar hakkında suç duyurusunda bulunulmasına; müdafi hakkında baroya bildirimde bulunulmasına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
+        'Sanık Halil Bozkurt’un TCK 170/1-a uyarınca takdiren 1 yıl 6 ay hapis cezası ile; TCK 158/1-k uyarınca 4 yıl hapis ve 1.000 gün adli para cezası üzerinden, suçun teşebbüs aşamasında kalması nedeniyle TCK 35/2 uyarınca yarı oranında indirilerek 2 yıl hapis ve 500 gün adli para cezası ile CEZALANDIRILMASINA; bir gün karşılığı 100 TL’den 50.000 TL adli para cezasına (TCK 52/2); TCK 53 uyarınca hak yoksunluklarına; tutuklulukta geçen sürenin TCK 63 uyarınca mahsubuna; savunmanın sunduğu uzman mütalaasını düzenleyen kişi ve mütalaayı ısmarlayanlar hakkında suç duyurusunda bulunulmasına; müdafi hakkında baroya bildirimde bulunulmasına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
         because(
-          'Savunmanın sunduğu uzman raporunun, para karşılığı ve önceden belirlenmiş bir sonuca göre yazıldığı, raporu yazanın yazılı beyanıyla sabit olmuştur.',
+          'Savunmanın sunduğu uzman mütalaasının para karşılığı ve önceden belirlenmiş bir sonuca göre yazıldığı, düzenleyenin yazılı beyanıyla anlaşılmıştır; bu mütalaa hükme esas alınmamıştır.',
         ),
         because(
-          'Bu rapor nedeniyle savunmanın elektrik kaynağına ilişkin bütün beyanlarına itibar edilmemiş; iddianamedeki anlatım esas alınmıştır (CMK 217).',
+          'Mütalaa dışlandıktan sonra dosyadaki diğer deliller değerlendirilmiştir. Bilirkişi raporundaki hızlandırıcı tespiti ve laboratuvar bulgusu, duruşmada çürütülememiştir (CMK 217).',
         ),
         because(
-          'Numune zincirine ilişkin eksiklikler kayda geçmiş, ancak mahkemenin vicdani kanaatini değiştirmemiştir.',
-          flag('contra_b2'),
+          'Numune zincirine ilişkin itirazlar kayda geçmiş, ancak hızlandırıcı tespitini ortadan kaldıracak ölçüde ispatlanamamıştır.',
+          any(flag('contra_b1'), flag('contra_b2'), flag('contra_b4')),
+        ),
+        because(
+          'Bilirkişi raporu, poliçenin zamanlaması, teminat artışı, eşyaların taşınması ve benzin alımı birlikte değerlendirildiğinde sanığın evini sigorta bedelini almak amacıyla yaktığı kanaatine varılmıştır.',
+        ),
+        because(
+          'Hasar bedeli şirketin şüphesi üzerine ödenmediğinden dolandırıcılık teşebbüs aşamasında kalmıştır (TCK 35).',
         ),
       ],
-      legalBasis: 'TCK 170/1-a, 158/1-k, 35/2, 52, 53; CMK 217, 273/1; TCK 272, 38; Av.K. 34',
+      legalBasis: 'TCK 170/1-a, 158/1-k, 35/2, 52, 53, 63; CMK 217, 273/1; TCK 272, 38; Av.K. 34',
       xp: xp(0),
       howToReach:
-        'Para karşılığı, sonucu önceden belirlenmiş bir karşı rapor ısmarlamak (etik ihlali). Bu sona ulaşmamak gerekir.',
-      ethicsCard:
-        'Gerçeğe aykırı içerikte bir uzman raporunu para karşılığı ısmarlayıp mahkemeye sunmak yalan tanıklığa azmettirme ve delil uydurmadır (TCK 272, 38) ve avukat için meslekten çıkarmaya varan bir disiplin ihlalidir (Av.K. 34; TBB Meslek Kuralları). Dava sahte bir raporla açılmıştı; bir başka sahte rapor onu kapatmadı, gömdü.',
+        'Para karşılığı, sonucu önceden belirlenmiş bir karşı rapor ısmarlamak (etik ihlali), numune zinciri de birinci celsede kurulamamışsa. Bu sona ulaşmamak gerekir.',
+      ethicsCard: ETIK_KART,
       epilogue: [
         {
           lines: [
@@ -66,22 +86,76 @@ export const outcomes: CasePart = {
             ),
             s('zehra', 'Ben istemedim. Ama sustum. Siz de “yazsın” dediniz. Hepimiz onu kurtarmak istedik.', 'uzgun'),
             th(
-              'Kurtarmak istedik. Bir yalanla. Ve yalan, bekçinin defterini de, iki fotoğrafı da, bakır boncuğu da yanında götürdü.',
+              'Kurtarmak istedik. Bir yalanla. Gerçeğin kanıtını bulamadığım yerde bir yalan satın aldım; yalan da kendi faturasını kesti.',
             ),
-            card('ARSLAN HUKUK — O GECE', 'buro_gece'),
+            ...ETIK_BURO,
+          ],
+        },
+      ],
+    }),
+    outcome('ETIK_T', {
+      class: 'RECHARACTERIZED',
+      priority: 2,
+      when: all(flag('sahte_rapor'), ref('hizlandirici_coktu')),
+      stamp: 'TAKSİR',
+      stampTone: 'amber',
+      header: 'TÜRK MİLLETİ ADINA',
+      sentence: '5 ay hapis · ertelendi · dolandırıcılıktan beraat · müdafi baroya bildirildi',
+      verdictText:
+        'Sanık Halil Bozkurt’un eylemine uyan TCK 171/1-a uyarınca takdiren 6 ay hapis cezası ile cezalandırılmasına, TCK 62/1 uyarınca 1/6 oranında indirilerek 5 ay hapis cezası ile CEZALANDIRILMASINA; cezanın TCK 51/1 uyarınca ERTELENMESİNE, denetim süresinin 1 yıl olarak belirlenmesine; nitelikli dolandırıcılığa teşebbüs suçundan atılı suçu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; tutuklu ise tahliyesine; savunmanın sunduğu uzman mütalaasını düzenleyen kişi ve mütalaayı ısmarlayanlar hakkında suç duyurusunda bulunulmasına; müdafi hakkında baroya bildirimde bulunulmasına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
+      reasoning: [
+        because(
+          'Savunmanın sunduğu uzman mütalaasının para karşılığı ve önceden belirlenmiş bir sonuca göre yazıldığı, düzenleyenin yazılı beyanıyla anlaşılmıştır; bu mütalaa hükme esas alınmamıştır.',
+        ),
+        because(
+          'Mütalaanın dışlanması iddianın ispat yükünü ortadan kaldırmaz: hızlandırıcı tespitinin dayanağı olan numunelerin elde ediliş zinciri güvenilir olmadığından yangının kasten çıkarıldığı ispatlanamamıştır (Anayasa 38/4; CMK 217).',
+        ),
+        because(
+          'Mahkemenin elektrik bilirkişisinin koridor hattında tespit ettiği birincil ark, yangının elektrik kaynaklı olduğunu göstermektedir.',
+          has('ev_ark'),
+        ),
+        because(
+          'Sanık, tesisatın eski olduğu ve koridor buatının ısındığı konusunda elektrikçi tarafından uyarılmış, tesisatı kullanmaya devam etmiştir.',
+        ),
+        because(
+          'Özen yükümlülüğünün yerine getirildiğine ilişkin savunma büyük ölçüde hükme esas alınmayan mütalaaya dayandırıldığından, bu yönde vicdani kanaat oluşmamıştır.',
+        ),
+        because('Sanığa nitelik değişikliği hatırlatılmış ve ek savunması alınmıştır (CMK 226).'),
+        because('Hasar ihbarı gerçek bir hasara dayandığından dolandırıcılık kastı ispatlanamamıştır.'),
+      ],
+      legalBasis: 'TCK 171/1-a, 22/2, 62/1, 51/1; CMK 217, 223/2-e, 226, 273/1; Anayasa 38/4; TCK 272, 38; Av.K. 34',
+      xp: xp(0),
+      howToReach:
+        'Numune zincirini kurup hızlandırıcı tespitini çürüttükten sonra para karşılığı bir karşı rapor ısmarlamak (etik ihlali). Halil kasıttan kurtulur; savunması senin yalanının gölgesinde kalır. Bu sona ulaşmamak gerekir.',
+      ethicsCard: ETIK_KART,
+      epilogue: [
+        {
+          lines: [
+            s('hakim', 'Türk Milleti adına…'),
             n(
-              'Masamda bir kitapçık vardı: Türkiye Barolar Birliği Meslek Kuralları. Leyla bırakmıştı. Bir not yoktu. Sigara paketi yerinde, açılmamış.',
+              '“Taksirle… beş ay… ertelenmesine… müdafi hakkında baroya bildirimde bulunulmasına.” Son cümlede salon döndü ve bana baktı. Halil bakmadı.',
             ),
+            card('ADLİYE KORİDORU — AKŞAMÜSTÜ', 'adliye'),
             n(
-              'Kapıdaki yeni pirinç levhada iki isim yazıyordu. Birinin yanında bir boşluk vardı; sanki yazılmayı bekleyen değil, silinmeyi bekleyen bir boşluk.',
+              'Onur’un tanıdığı eksper koridorda iki polisin yanında bir ifade tutanağı imzalıyordu. Zehra bir bankta oturuyordu; elleri dizlerinin üstünde, avuçları yukarı, babası gibi.',
             ),
+            s(
+              'halil',
+              'Kundakçı değilmişim, avukat hanım. Bunu bir bekçinin defteri söyledi, iki fotoğraf söyledi. O satın aldığınız kâğıt değil.',
+              'uzgun',
+            ),
+            s('zehra', 'Ben istemedim. Ama sustum. Hepimiz onu kurtarmak istedik.', 'uzgun'),
+            th(
+              'Gerçeği bulmuştum. Defteri, fotoğrafları, tenekeleri. Sonra korktum ve gerçeğin yanına bir yalan koydum. Hâkim ikisini ayırdı; yalanı da sahibini de.',
+            ),
+            ...ETIK_BURO,
           ],
         },
       ],
     }),
     outcome('BERAAT_B', {
       class: 'ACQUITTAL',
-      priority: 2,
+      priority: 3,
       when: all(
         not(flag('cokus')),
         ref('hizlandirici_coktu'),
@@ -100,13 +174,31 @@ export const outcomes: CasePart = {
         'Sanık Halil Bozkurt’un üzerine atılı genel güvenliği kasten tehlikeye sokma ve nitelikli dolandırıcılığa teşebbüs suçlarını işlemediği sabit olduğundan, ayrı ayrı CMK 223/2-b uyarınca BERAATİNE; tutuklu ise derhal tahliyesine, adli kontrol altında ise adli kontrolün kaldırılmasına; CMK 141/1 uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142 uyarınca yapılabileceğinin bildirilmesine (CMK 231/3); duruşma tutanağı ve dosya örneğinin, tanık Tarık Sönmez hakkındaki soruşturmaya eklenmek üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
         because(
-          'Elektrik bilirkişisi raporuna göre koridor hattında yangından önce oluşmuş birincil ark boncuğu bulunmuş; dağıtım şirketi kaydına göre yangından dakikalar önce sokak hattında nötr iletken kopmuş, komşu abonelerde aşırı gerilim meydana gelmiştir.',
+          'Mahkemenin elektrik bilirkişisinin raporuna göre koridor hattında yangından önce oluşmuş birincil ark boncuğu bulunmuştur.',
+          has('ev_ark'),
+        ),
+        because(
+          'Dağıtım şirketinin kaydına göre yangından dakikalar önce sokak hattında nötr iletken kopmuş, komşu abonelerde aşırı gerilim meydana gelmiştir.',
+          any(has('ded_notr'), has('ev_ariza')),
         ),
         because(
           'Hızlandırıcı tespitinin dayanağı olan numuneler kolluk tarafından değil, olay yerine muhafaza altındayken refakatsiz giren katılan eksperi tarafından teslim edilmiş; elde edilişine ilişkin tutanak bulunmamaktadır.',
         ),
         because(
-          'Kolluğun ilk fotoğraflarında örtülü olan zeminin eksper tarafından açıldığı, numunelerde yanma ürünü bulunmadığı ve benzinin buharlaşmamış olduğu anlaşılmıştır.',
+          'Kolluğun ilk fotoğraflarında örtülü olan zeminin sonradan, eksper tarafından açıldığı anlaşılmıştır.',
+          any(flag('contra_b1'), flag('contra_u2')),
+        ),
+        because(
+          'Numunelerde yanmış ahşabın piroliz ürünleri bulunmadığı ve benzinin buharlaşmamış olduğu anlaşılmıştır.',
+          any(flag('contra_b4'), flag('contra_u3')),
+        ),
+        because(
+          'Eksper, sigorta panosunun o sabah emanette olduğunu ve elektrik incelemesi yapmadığını çapraz sorguda açıklayamamıştır.',
+          flag('contra_u6_ark'),
+        ),
+        because(
+          'Eksperin raporunda yangın gecesine ait dağıtım hattı kaydı incelenmemiş; eksper bu konudaki soruya cevap verememiştir.',
+          flag('contra_u6_notr'),
         ),
         because(
           'Tanık Tarık Sönmez, numunelerin içeriğine ilişkin soruya kendini suçlandırmama hakkını kullanarak cevap vermemiştir.',
@@ -186,7 +278,7 @@ export const outcomes: CasePart = {
     }),
     outcome('BERAAT_E', {
       class: 'ACQUITTAL',
-      priority: 3,
+      priority: 4,
       when: all(
         not(flag('cokus')),
         ref('hizlandirici_coktu'),
@@ -210,14 +302,29 @@ export const outcomes: CasePart = {
           any(flag('contra_b1'), flag('contra_u2')),
         ),
         because('Bilirkişi, elektrik tesisatını ve sigorta panosunu incelemediğini kabul etmiştir.', flag('contra_b3')),
+        because('Poliçe, banka kredisinin kullandırım şartı olarak yapılmıştır.', flag('motif_banka')),
+        because('Teminat artışı acentenin kampanya teklifiyle gerçekleşmiştir.', flag('motif_artis')),
+        because('Eşyalar restorasyon sözleşmesi gereği, etiketlenerek taşınmıştır.', flag('contra_s3')),
+        because('Satın alınan benzinin büyük kısmı atölyede, jeneratörün yanında bulunmuştur.', flag('contra_s6')),
         because(
-          'Poliçe banka kredisinin şartı olarak yapılmış; teminat artışı acentenin teklifiyle gerçekleşmiş; eşyalar restorasyon sözleşmesi gereği taşınmış; satın alınan benzinin büyük kısmı atölyede bulunmuştur.',
+          'Sanığın yangın gecesi kilitli sanayi sitesindeki atölyesinde bulunduğu, sitenin kapı kaydı ve bekçisinin beyanıyla desteklenmektedir.',
+          flag('alibi_kayit'),
         ),
         because(
           'Sanığın elektrikçinin uyarısı üzerine yenilemeyi takvime koyduğu anlaşıldığından taksirli sorumluluğu da ispatlanamamıştır.',
+          all(flag('taksir_cevap'), not(flag('taksir_dis'))),
+        ),
+        because(
+          'Yangının dağıtım hattındaki nötr kopmasının yarattığı aşırı gerilimle çıktığı kayıtla anlaşıldığından, netice sanığın bir özen eksikliğine bağlanamamış; taksirli sorumluluğu da ispatlanamamıştır.',
+          flag('taksir_dis'),
         ),
         because(
           'Yangının elektrik kaynaklı olması kuvvetle muhtemel olmakla birlikte kesin olarak tespit edilememiş; dolaylı delillerin birlikte değerlendirilmesi sanığın atılı suçları işlediği konusunda şüpheden uzak bir kanaat oluşturmamıştır (Anayasa 38/4).',
+          any(has('ev_ark'), has('ded_notr'), flag('contra_b3')),
+        ),
+        because(
+          'Yangının çıkış sebebi kesin olarak tespit edilememiş; dolaylı delillerin birlikte değerlendirilmesi sanığın atılı suçları işlediği konusunda şüpheden uzak bir kanaat oluşturmamıştır (Anayasa 38/4).',
+          not(any(has('ev_ark'), has('ded_notr'), flag('contra_b3'))),
         ),
       ],
       legalBasis: 'CMK 223/2-e; Anayasa 38/4; CMK 141, 142, 217, 231/3, 273/1',
@@ -259,10 +366,24 @@ export const outcomes: CasePart = {
             n(
               'Zehra atölyeden getirdiği tüpü sandığın yanına koydu. Yanık evin önünde, kaldırımda, üç kişi çay içti. Muradiye’de bir yas böyle biter: bir demlik, bir sandık, bir küslüğün sonu.',
             ),
+          ],
+        },
+        {
+          when: not(flag('suc_duyurusu')),
+          lines: [
             th(
               'Bir halatı çözdük. Ama halatı öreni değil. Eksper hâlâ bir yerde, kusursuz bir kravatla, bir sonraki yangını bekliyor.',
             ),
             th('Bazen adalet bir kapıyı açar, ama ışığı yakmaz. Işığı yakmak, bir sonraki dosyanın işi.'),
+          ],
+        },
+        {
+          when: flag('suc_duyurusu'),
+          lines: [
+            th(
+              'Bir halatı çözdük. Halatı öreni artık savcılık arıyor; bir bekçinin defteri, bir dulun naylon dosyası ve benim dilekçemle.',
+            ),
+            th('Bazen adalet bir kapıyı açar, ama ışığı yakmaz. Bu sefer birinin elinde bir el feneri var.'),
           ],
         },
         {
@@ -281,6 +402,22 @@ export const outcomes: CasePart = {
           ],
         },
         {
+          when: flag('alibi_kayit'),
+          lines: [
+            card('YILDIRIM, ESKİ SANAYİ — ERTESİ SABAH', 'depo'),
+            n(
+              'Ertesi sabah atölyeye uğradım; anahtarı Zehra’ya geri verecektim. Kapıda sanayinin bekçisi, elinde bir tepsi: iki çay.',
+            ),
+            n(
+              'Halil kırkıncı sandalyenin oturağını geriyordu; duruşmadan sonraya bıraktığı son sandalye. Bitirince otele teslim edecekti. Sonra bir ev yapacaktı; önce elektriğiyle.',
+            ),
+            s(
+              'halil',
+              'Kırkıncıyı sana ayırdım, avukat hanım. Bürona. Müşteriler rahat otursun; ben iki ay rahat oturamadım.',
+            ),
+          ],
+        },
+        {
           when: flag('suc_duyurusu'),
           lines: [card('TARIK SÖNMEZ HAKKINDAKİ SORUŞTURMA SÜRÜYOR.', 'siyah')],
         },
@@ -288,8 +425,8 @@ export const outcomes: CasePart = {
     }),
     outcome('TAKSIR', {
       class: 'RECHARACTERIZED',
-      priority: 4,
-      when: all(not(flag('cokus')), ref('hizlandirici_coktu'), finalAtLeast(T_TAKSIR)),
+      priority: 5,
+      when: ref('hizlandirici_coktu'),
       stamp: 'TAKSİR',
       stampTone: 'amber',
       header: 'TÜRK MİLLETİ ADINA',
@@ -304,19 +441,32 @@ export const outcomes: CasePart = {
           'Sanık, tesisatın eski olduğu ve koridor buatının ısındığı konusunda elektrikçi tarafından uyarılmış; tesisatı yenilenene kadar kullanmaya devam etmiştir.',
         ),
         because(
-          'Yangının dış bir etkenden kaynaklandığı ya da sanığın özen yükümlülüğünü yerine getirdiği duruşmada yeterince ortaya konamamıştır.',
+          'Yangının dış bir etkenden kaynaklandığı ya da sanığın özen yükümlülüğünü yerine getirdiği duruşmada ortaya konamamıştır.',
+          not(flag('taksir_cevap')),
+        ),
+        because(
+          'Savunma, uyarı üzerine yenilemenin takvime konduğunu ileri sürmüşse de, sanığın ısınan buata bağlı eski tesisatı enerjili bırakmaya devam ettiği; özen yükümlülüğünün yalnızca bir takvimle yerine getirilmiş sayılamayacağı kanaatine varılmıştır.',
+          all(flag('taksir_cevap'), not(flag('taksir_dis'))),
+        ),
+        because(
+          'Dağıtım hattındaki nötr kopması kayıtla sabit ise de, netice sanığın uyarıya rağmen yenilemediği tesisatın aşırı gerilime dayanamamasıyla birlikte gerçekleşmiştir; üçüncü kişinin kusuru illiyet bağını kesmemiştir.',
+          flag('taksir_dis'),
         ),
         because('Sanığa nitelik değişikliği hatırlatılmış ve ek savunması alınmıştır (CMK 226).'),
         because(
           'Savunma da terditli olarak eylemin en fazla taksirle yangına neden olma olabileceğini ileri sürmüştür.',
           flag('terditli'),
         ),
+        because(
+          'Müdafiin duruşmadaki hatalı delil sunumları kayda geçmiştir; ancak hüküm dosyadaki delillere dayanır ve numune zincirinin kopukluğu bu sunumlarla giderilmiş sayılamaz.',
+          flag('cokus'),
+        ),
         because('Hasar ihbarı gerçek bir hasara dayandığından dolandırıcılık kastı ispatlanamamıştır.'),
       ],
       legalBasis: 'TCK 171/1-a, 22/2, 62/1, 51/1; CMK 226, 231/6, 223/2-e, 273/1',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        'Hızlandırıcı tespitini çürüt ama taksir hatırlatmasına cevap verecek delili (yenileme takvimi ya da 02.08’deki nötr kopması) toplama; ya da dolaylı delillerin halatını çözemeden beraat iste.',
+        'Hızlandırıcı tespitini çürüt (numune zinciri + zemin ya da laboratuvar) ama beraati taşıyacak gerisini kuramadan bitir: taksir hatırlatmasına delille cevap verme, dolaylı delillerin halatını çözme ya da ikinci celsede güvenilirliğini yitir.',
       epilogue: [
         {
           lines: [
@@ -324,6 +474,24 @@ export const outcomes: CasePart = {
             n(
               '“Taksirle… beş ay… ertelenmesine.” Halil kelimeleri tek tek duydu, birleştiremedi. Zehra birleştirdi: kundakçı değil. Ama dikkatsiz.',
             ),
+          ],
+        },
+        {
+          when: flag('cokus'),
+          lines: [
+            n('Salon boşalırken savcı dosyasını topladı. Kapıda durdu, bana döndü.'),
+            s(
+              'savci',
+              'Birinci celsede iyiydiniz, avukat hanım. Numune zincirini siz kurdunuz; o zincir müvekkilinizi kurtardı. Bugün yanlış kâğıtları yanlış tanığa gösterdiniz. O da beraati götürdü.',
+            ),
+            th(
+              'Hâkim kastı benim yüzümden değil, bir bekçinin defteri yüzünden düşürdü. Beraati de benim yüzümden düşürdü. İkisini birden taşımak zor.',
+            ),
+          ],
+        },
+        {
+          when: not(flag('cokus')),
+          lines: [
             card('ADLİYE MERDİVENLERİ — AKŞAMÜSTÜ', 'adliye'),
             s(
               'halil',
@@ -331,6 +499,11 @@ export const outcomes: CasePart = {
               'uzgun',
             ),
             s('zehra', 'Baba, çıktın. Gerisi önemli değil.'),
+          ],
+        },
+        {
+          when: all(not(flag('cokus')), not(has('ev_ariza')), flag('fact_tv')),
+          lines: [
             s(
               'halil',
               'Önemli, kızım. Usta “acil değil” dedi. Ben de inandım. Bir de sokağın teli koptu diyorlar; onu kimse yazmadı.',
@@ -339,30 +512,44 @@ export const outcomes: CasePart = {
             th(
               'Sokağın teli. Bir arıza kaydı. Bir müzekkere. İstesem gelecekti. İstemedim; ya da geç istedim. Hâkimin önüne bir dikkatsizlik bıraktım, bir arızayı değil.',
             ),
-            th('Yedi buçuk yıl yerine beş ay, ertelenmiş. Kazanmak buysa, neden bu kadar ağır?'),
           ],
+        },
+        {
+          when: all(not(flag('cokus')), any(has('ev_ariza'), not(flag('fact_tv')))),
+          lines: [
+            s(
+              'halil',
+              'Önemli, kızım. Usta “acil değil” dedi. Ben de inandım. İnanmak da bir dikkatsizlikmiş.',
+              'uzgun',
+            ),
+            th(
+              'Kâğıtlar dosyadaydı. Hâkimin önüne onları bir kapı gibi değil, bir yığın gibi koydum. İkinci kapı açık kaldı ve Halil oradan geçti.',
+            ),
+          ],
+        },
+        {
+          lines: [th('Yedi buçuk yıl yerine beş ay, ertelenmiş. Kazanmak buysa, neden bu kadar ağır?')],
         },
       ],
     }),
     outcome('MAHKUMIYET', {
       class: 'CONVICTION',
-      priority: 5,
+      priority: 6,
       when: always,
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
       header: 'TÜRK MİLLETİ ADINA',
       sentence: '3 yıl 6 ay hapis · 50.000 TL adli para cezası',
       verdictText:
-        'Sanık Halil Bozkurt’un TCK 170/1-a uyarınca, yangının yan binaya sıçrayarak iki aileyi tehlikeye sokması gözetilerek alt sınırdan uzaklaşılarak 1 yıl 6 ay hapis cezası ile; TCK 158/1-k uyarınca 4 yıl hapis ve 1.000 gün adli para cezası üzerinden, suçun teşebbüs aşamasında kalması nedeniyle TCK 35/2 uyarınca yarı oranında indirilerek 2 yıl hapis ve 500 gün adli para cezası ile CEZALANDIRILMASINA; bir gün karşılığı 100 TL’den 50.000 TL adli para cezasına (TCK 52/2); TCK 53 uyarınca hak yoksunluklarına; tutuklu ise tutukluluk hâlinin devamına, tahliye edilmişse hükümle birlikte değerlendirilmek üzere; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
+        'Sanık Halil Bozkurt’un TCK 170/1-a uyarınca, yangının yan binaya sıçrayarak iki aileyi tehlikeye sokması gözetilerek alt sınırdan uzaklaşılarak 1 yıl 6 ay hapis cezası ile; TCK 158/1-k uyarınca 4 yıl hapis ve 1.000 gün adli para cezası üzerinden, suçun teşebbüs aşamasında kalması nedeniyle TCK 35/2 uyarınca yarı oranında indirilerek 2 yıl hapis ve 500 gün adli para cezası ile CEZALANDIRILMASINA; bir gün karşılığı 100 TL’den 50.000 TL adli para cezasına (TCK 52/2); TCK 53 uyarınca hak yoksunluklarına; tutuklulukta geçen sürenin TCK 63 uyarınca mahsubuna; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
         because(
           'Bilirkişi raporu, poliçenin zamanlaması, teminat artışı, eşyaların taşınması ve benzin alımı birlikte değerlendirildiğinde sanığın evini sigorta bedelini almak amacıyla yaktığı kanaatine varılmıştır.',
         ),
         because(
-          'Savunmanın numune zincirine ilişkin itirazları kayda geçmiş, ancak mahkemenin kanaatini değiştirmeye yetmemiştir.',
-          flag('contra_b2'),
+          'Savunmanın numune zincirine ilişkin itirazları kayda geçmiş, ancak hızlandırıcı tespitini ortadan kaldıracak ölçüde ispatlanamamıştır.',
+          any(flag('contra_b1'), flag('contra_b2'), flag('contra_b4')),
         ),
-        because('Müdafiin duruşmadaki delil sunumları savunmanın güvenilirliğini zedelemiştir.', flag('cokus')),
         because(
           'Yangın yan binaya sıçramış, iki aile tahliye edilmiştir; genel güvenlik bakımından tehlike gerçekleşmiştir.',
         ),
@@ -370,22 +557,31 @@ export const outcomes: CasePart = {
           'Hasar bedeli şirketin şüphesi üzerine ödenmediğinden dolandırıcılık teşebbüs aşamasında kalmıştır (TCK 35).',
         ),
       ],
-      legalBasis: 'TCK 170/1-a, 158/1-k, 35/2, 52, 53; CMK 217, 273/1',
+      legalBasis: 'TCK 170/1-a, 158/1-k, 35/2, 52, 53, 63; CMK 217, 273/1',
       xp: xp(0.6, { ethicsVar: 'ethics' }),
-      howToReach: 'Varsayılan sonuç: hızlandırıcı tespiti ayakta kaldıysa ya da duruşmada güvenilirliğini yitirdiysen.',
+      howToReach:
+        'Varsayılan sonuç: hızlandırıcı tespiti (numune zinciri ve zemin ya da laboratuvar) ayakta kaldıysa. Zincir kurulmadan ikinci celsede güvenilirliğini yitirmek de buraya götürür.',
       epilogue: [
         {
           when: flag('cokus'),
           lines: [
             s('hakim', 'Türk Milleti adına…'),
+            n(
+              '“Üç yıl altı ay.” Halil başını salladı. Bir şey söylemedi. Jandarma koluna girmeden önce bana baktı; suçlamadan, sadece baktı.',
+            ),
             n('Salon boşalırken savcı dosyasını topladı. Kapıda durdu, bana döndü.'),
             s(
               'savci',
-              'Fotoğraflarınız iyiydi, avukat hanım. Çizelgeniz de. Ama yanlış tanığa, yanlış anda gösterdiniz. İyi bir avukat olacaksınız. Bugün değil.',
+              'Elinizde ne vardıysa hepsini gösterdiniz, avukat hanım. Ama yanlış tanığa, yanlış anda. Bir delil ancak yerine oturunca delildir. İyi bir avukat olacaksınız. Bugün değil.',
+            ),
+            card('ADLİYE ARKA KAPISI — AKŞAMÜSTÜ', 'sokak_yagmur'),
+            th(
+              'Her yanlış kâğıt hâkimin önüne bir taş koydu. Numune zincirini kuramadım; kuramadığım yere kâğıt yığdım. Yığın bir duvar oldu, Halil duvarın öbür tarafında kaldı.',
             ),
           ],
         },
         {
+          when: not(flag('cokus')),
           lines: [
             s('hakim', 'Türk Milleti adına…'),
             n(
@@ -395,12 +591,24 @@ export const outcomes: CasePart = {
             n(
               'Ring aracının camı buğuluydu. Halil parmağıyla küçük bir pencere açtı. Zehra elini kaldırdı. Ağlamadı; hemşireler ağlamaz. Araç gidince ağladı.',
             ),
-            th(
-              'Beş litre. Fişteki rakam. Bidon atölyede hâlâ duruyordu, içinde dört litreyle. Ya kimse bakmadı, ya da ben yeterince göstermedim.',
-            ),
+          ],
+        },
+        {
+          when: all(not(flag('cokus')), not(has('clue_bidon'))),
+          lines: [
+            th('Beş litre. Fişteki rakam. Bidon belki hâlâ bir yerde duruyordu. Kimse bakmadı; ben de bakmadım.'),
             th(
               'Bir dosyada en güçlü delil bazen hiç bakılmamış olandır, demişti Leyla. Bu dosyada en güçlü delil, benim bakmadığım bir şeydi.',
             ),
+          ],
+        },
+        {
+          when: all(not(flag('cokus')), has('clue_bidon')),
+          lines: [
+            th(
+              'Bidonu buldum, sandığı buldum, sözleşmeyi buldum. İplikleri tek tek gevşettim. Ama halatın ucundaki rapora dokunamadım; numunelerin kimin elinden geldiğini kürsüde kimseye söyletemedim.',
+            ),
+            th('Bir halat, ucu bağlı kaldıkça halattır. Ben iplikleri saydım; düğüme bakmadım.'),
           ],
         },
         {

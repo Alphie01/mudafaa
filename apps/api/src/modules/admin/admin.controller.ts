@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Put, Query, Req } from '@nestjs/common';
 import type { Request } from 'express';
 import { z } from 'zod';
+import { ALLOWED_MIME } from '../../common/asset-types.js';
 import { RequestId } from '../../common/request-id.js';
 import { ZodValidationPipe } from '../../common/zod.pipe.js';
 import { type AuthUser, CurrentUser, Roles } from '../auth/decorators.js';
@@ -17,12 +18,8 @@ const PatchCase = z.strictObject({
 });
 const VersionRef = z.strictObject({ versionId: z.uuid() });
 const Publish = z.strictObject({ versionId: z.uuid(), legalReviewConfirmed: z.boolean().default(false) });
-const AssetQuery = z.object({
-  mime: z
-    .string()
-    .regex(/^[a-z]+\/[a-z0-9.+-]+$/i, 'geçersiz dosya türü')
-    .default('application/octet-stream'),
-});
+// Yalnızca izinli raster türler; içerik sihirli baytlarla ayrıca doğrulanır (depolanmış XSS'e karşı).
+const AssetQuery = z.object({ mime: z.enum(ALLOWED_MIME) });
 const AuditQuery = z.object({ limit: z.coerce.number().int().min(1).max(500).default(50) });
 const RoleBody = z.strictObject({ role: z.enum(['PLAYER', 'EDITOR', 'ADMIN']) });
 

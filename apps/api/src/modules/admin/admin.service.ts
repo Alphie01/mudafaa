@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import type { StartResponse } from '@mudafaa/case-schema';
 import { ApiError, notFound } from '../../common/api-error.js';
+import { isAllowedMime, sniffMime } from '../../common/asset-types.js';
 import { isUuid } from '../../common/uuid.js';
 import { PrismaService } from '../../database/prisma.service.js';
 import type { CaseVersion } from '../../generated/prisma/client.js';
@@ -210,6 +211,11 @@ export class AdminService {
   async uploadAsset(bytes: Buffer, mime: string, ctx: ActorCtx) {
     if (!Buffer.isBuffer(bytes) || bytes.length === 0) {
       throw new ApiError(400, 'validation_error', 'Boş dosya yüklenemez.');
+    }
+    if (!isAllowedMime(mime) || sniffMime(bytes) !== mime) {
+      throw new ApiError(400, 'validation_error', 'Dosya içeriği bildirilen türle uyuşmuyor.', {
+        errors: [{ path: 'mime', message: `içerik ${sniffMime(bytes) ?? 'tanınmayan tür'}, bildirilen ${mime}` }],
+      });
     }
     const { sha256, size } = await this.assets.put(bytes, mime);
     await this.prisma.$transaction((tx) =>

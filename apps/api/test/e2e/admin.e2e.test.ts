@@ -2,7 +2,7 @@ import { randomBytes } from 'node:crypto';
 import type { CasePackage, StartResponse } from '@mudafaa/case-schema';
 import { canonicalJson } from '@mudafaa/engine';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { setRole as setRoleCli } from '../../src/cli/user-role.js';
+import { applyRole, resolveUser } from '../../src/cli/user-role.js';
 import { AuthCache } from '../../src/modules/auth/auth-cache.js';
 import { bootstrapApp, client, setRole, type Client, type TestApp } from './support/app.js';
 import { TINY_PNG } from './support/cases.js';
@@ -69,11 +69,30 @@ describe('admin API', () => {
     const c = client(t.app, u.idToken);
     await c.get('/me');
     expect((await c.get('/admin/cases')).status).toBe(403);
-    const r = await setRoleCli(t.app, u.email ?? '', 'ADMIN');
+    const r = await resolveUser(t.app, { by: 'uid', value: u.uid });
+    expect(r).toMatchObject({ firebaseUid: u.uid, email: u.email, role: 'PLAYER' });
+    expect((await resolveUser(t.app, { by: 'uid', value: r.id })).firebaseUid).toBe(u.uid); // iç uuid ile de
+    expect((await resolveUser(t.app, { by: 'email', value: u.email ?? '' })).id).toBe(r.id);
+    await applyRole(t.app, r, 'ADMIN');
     t.app.get(AuthCache).evict(r.firebaseUid);
     expect((await c.get('/admin/cases')).status).toBe(200);
     const log = await t.prisma.adminAuditLog.findFirst({ where: { action: 'user.role.cli', targetId: r.id } });
     expect(log?.actorId).toBeNull();
+    expect(log?.payload).toMatchObject({ from: 'PLAYER', to: 'ADMIN' });
+  });
+
+  it('user:role CLI refuses ambiguous e-mail matches', async () => {
+    const email = `dup-${Date.now()}@test.mudafaa`;
+    const a = await emulatorUser({ email });
+    const b = await emulatorUser({ anonymous: true });
+    await client(t.app, a.idToken).get('/me');
+    await client(t.app, b.idToken).get('/me');
+    // İkinci hesaba aynı (doğrulanmamış) e-postayı veritabanında yazarak çakışmayı taklit et.
+    await t.prisma.user.update({ where: { firebaseUid: b.uid }, data: { email } });
+    await expect(resolveUser(t.app, { by: 'email', value: email })).rejects.toMatchObject({ code: 'validation_error' });
+    await expect(resolveUser(t.app, { by: 'uid', value: 'yok-boyle-biri' })).rejects.toMatchObject({
+      code: 'not_found',
+    });
   });
 
   it('import → validate (queue) → publish, with audit rows', async () => {
@@ -169,7 +188,8 @@ describe('admin API', () => {
   });
 
   it('asset upload is served back byte for byte', async () => {
-    const bytes = randomBytes(256);
+    // Geçerli WebP başlığı (RIFF....WEBP) + rastgele gövde.
+    const bytes = Buffer.concat([Buffer.from('RIFF'), randomBytes(4), Buffer.from('WEBP'), randomBytes(244)]);
     const up = await editor.raw('/admin/assets?mime=image/webp', bytes);
     expect(up.status).toBe(201);
     expect(up.body.url).toBe(`/v1/assets/${up.body.sha256}`);
@@ -184,7 +204,27 @@ describe('admin API', () => {
       });
     expect(res.headers['content-type']).toBe('image/webp');
     expect(Buffer.compare(res.body as Buffer, bytes)).toBe(0);
+    expect(res.headers['x-content-type-options']).toBe('nosniff');
+    expect(res.headers['content-security-policy']).toBe("default-src 'none'; sandbox");
     expect((await editor.raw('/admin/assets?mime=nope', bytes)).status).toBe(400);
+  });
+
+  it('asset upload rejects script-capable types and magic-byte mismatches', async () => {
+    const html = Buffer.from('<html><script>alert(1)</script></html>');
+    const svg = Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script></svg>');
+    const jpeg = Buffer.concat([Buffer.from([0xff, 0xd8, 0xff, 0xe0]), randomBytes(32)]);
+    const cases: [string, Buffer][] = [
+      ['text/html', html],
+      ['image/svg+xml', svg],
+      ['image/png', html], // içerik PNG değil
+      ['image/png', jpeg], // içerik JPEG, bildirilen PNG
+    ];
+    for (const [mime, body] of cases) {
+      const res = await editor.raw(`/admin/assets?mime=${encodeURIComponent(mime)}`, body);
+      expect(res.status, mime).toBe(400);
+      expect(res.body.error).toBe('validation_error');
+    }
+    expect((await editor.raw('/admin/assets?mime=image/jpeg', jpeg)).status).toBe(201);
   });
 
   it('PATCH locks the case; DELETE archives it', async () => {

@@ -5,6 +5,7 @@ import type { CasePackage } from '@mudafaa/case-schema';
 import { compile, ENGINE_VERSION } from '@mudafaa/engine';
 import { loadCase } from '@mudafaa/validator';
 import { ApiError, notFound } from '../../common/api-error.js';
+import { sniffMime } from '../../common/asset-types.js';
 import { isUuid } from '../../common/uuid.js';
 import { ENV, type Env } from '../../config/env.js';
 import { PrismaService } from '../../database/prisma.service.js';
@@ -129,7 +130,8 @@ export class ContentService {
           errors.push({ path: `assets[${i}].path`, message: `dosya bulunamadı: ${a.path}` });
           continue;
         }
-        const mime = mimeOf(a.path);
+        // Tür, uzantıdan değil içerikten: tanınmayan dosya octet-stream olarak saklanır (ek olarak iner).
+        const mime = sniffMime(bytes) ?? 'application/octet-stream';
         const { sha256, size } = await this.assets.put(bytes, mime);
         a.sha256 = sha256;
         info[a.id] = { mime, size };

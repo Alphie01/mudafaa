@@ -36,6 +36,18 @@ describe('assets', () => {
     expect(Buffer.compare(res.body as Buffer, bytes)).toBe(0);
   });
 
+  it('non-allowlisted types are served as attachments with nosniff and a sandbox CSP', async () => {
+    const store = t.app.get(AssetStore);
+    // Eski bir depo kaydını taklit eder: yan dosyada text/html yazıyor.
+    const { sha256 } = await store.put(Buffer.from(`<script>alert(${Date.now()})</script>`), 'text/html');
+    const res = await t.http().get(`/v1/assets/${sha256}`);
+    expect(res.status).toBe(200);
+    expect(res.headers['content-type']).toBe('application/octet-stream');
+    expect(res.headers['content-disposition']).toBe(`attachment; filename="${sha256}"`);
+    expect(res.headers['x-content-type-options']).toBe('nosniff');
+    expect(res.headers['content-security-policy']).toBe("default-src 'none'; sandbox");
+  });
+
   it('unknown sha → 404 envelope', async () => {
     const res = await t.http().get(`/v1/assets/${'0'.repeat(64)}`);
     expect(res.status).toBe(404);

@@ -659,7 +659,7 @@ C#buro_gece: GECE 21.30 — ARSLAN HUKUK
 N: Zil çaldı. Kapıda Tarık; elinde bir tepsi börek, üstü alüminyum folyo. Saçları ıslak.
 tarik: Avukat hanım, rahatsız etmiyorum. Yengem gönderdi. Kayhan Böreği; sıcak. Amcam “avukat hanım aç kalmasın” dedi.
 N: Tepsiyi masaya bıraktı. Gitmedi. Masadaki dosyalara baktı; bakmamaya çalışarak.
-tarik: Nasıl gidiyor? Amcam bir şey bulunduysa söylemiyor, kendini kötü hissediyor. Ben de bilmek istiyorum; dükkân benim de evim sayılır.
+tarik: Nasıl gidiyor? Bir şey bulunduysa amcam söylemiyor; kendini kötü hissediyor. Ben de bilmek istiyorum; dükkân benim de evim sayılır.
 T: Sıcak bir börek, ıslak saçlar ve bir soru. Bu dosyanın sırrı benim değil; müvekkilimin.
 tarik: Bir de… mukayese mukayese diyorlar. Bilirkişi neye bakmış? Amcam anlamıyor, ben de anlamıyorum. Bir şey lazımsa ben getiririm; dükkânda her kâğıt var.
 `),

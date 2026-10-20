@@ -31,7 +31,7 @@ import {
   v,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, ChoiceDef, Cond, NodeDef } from '../../../tools/content/src/kit/index.js';
-import { POOL1, firstTime, invDecoys, invRecipes, newDed, wrongPair } from './inv-hub.js';
+import { firstTime, invDecoys, invRecipes, newDed, wrongPair } from './inv-hub.js';
 import { B, O, W } from './lib.js';
 import { ARA, ARA_AP, ARA_DAYS } from './shared.js';
 
@@ -893,8 +893,18 @@ N: Bir sayfa: takvimdeki “mahsup”, piyasanın yarısına satılan ev. Savcı
 
 // --- Tahta ---
 
+// Ara tahtası yalnızca ara evrenin kartlarını ve onlara bağlanan birkaç eski kartı taşır (durum uzayı küçük kalsın).
 const POOL2 = [
-  ...POOL1,
+  'clue_tel_liste',
+  'clue_senet_saat',
+  'clue_iki_el',
+  'clue_doblo',
+  'clue_ruhsat',
+  'clue_sivanma',
+  'clue_sag_el',
+  'clue_mukayese_ozel',
+  'clue_toner_muhur',
+  'clue_noter_arsiv',
   'clue_kargo_saat',
   'clue_kargo_imza',
   'clue_randevu_no',
@@ -914,7 +924,7 @@ T: Pano kalabalıklaştı. İplerin bazıları aynı raptiyeye bağlanmaya başl
 `),
     pool: POOL2,
     recipes: [
-      ...invRecipes('AB'),
+      ...invRecipes('AB').filter((r) => ['AB_SOLAK', 'AB_SURET', 'AB_MUKAYESE'].includes(r.id)),
       recipe('AB_MAZERET', 'clue_kargo_saat', 'clue_senet_saat', {
         effects: firstTime('ded_mazeret'),
         feedback: newDed(
@@ -962,7 +972,7 @@ T: Bir numara bir insan değildir. Ama bir numaranın cebinde taşındığı ins
 T: Bir milyon dört yüz bin. Bir ev, bir borcun karşılığı olmuş. Kimin borcunun?
 `),
       }),
-      ...invDecoys('AB'),
+      ...invDecoys('AB').filter((r) => r.id === 'AB_X_RUHSAT'),
       wrongPair(
         'AB_X_TEYIT',
         'clue_teyit',

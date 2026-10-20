@@ -289,3 +289,19 @@ kaynağı: rapor, irsaliye, noter"; gün 4 "Dilekçe günü: kimi ve neyi istiyo
    1. evrede bulunur, anlamsız görünür.
 4. **Kürsüdeki yeğen (2. celse):** Tarık kovalanmaz, çözülmez; susar. Bu sessizlik, delillerin yerine geçmez;
    BERAAT_B için belgeler ve yeni rapor gerekir.
+
+## 7. Son yapı notu (kod yazıldıktan sonra)
+
+Uygulama bu kitaptan şu noktalarda ayrıldı; ayrıntılar `docs/content/sahte-imza.md`'de:
+
+- **Soruşturma 4 gün × 3 EP** (4 × 4 değil): on beş etkinlikten on ikisi seçilebilir; seçim baskısı oyunun bir parçası.
+  Ara evre 3 gün × 3 EP, yığınsız.
+- **Erken fail ipuçları nötrleştirildi:** ters makas dijital odadan ortak kesim masasına, gece baskısı ortak ve şifresiz
+  bilgisayara taşındı; Emre'nin gizli gece davetiyeleri yazıcı günlüğüne bir çeldirici olarak eklendi. Tarık'ın solaklığı
+  yalnızca `ded_solak` bulunduktan sonra (Emre), Hayriye'nin anısı ve Sevgi'nin bahis sırrı ancak Tarık'a giden somut bir
+  halkadan sonra açılır.
+- **Eklenen sahneler:** şikâyetçinin kürsüde beyanı (C1_03N), adliye çay ocağında Leyla'yla değerlendirme (C1_CAY), ikinci
+  celsede on beş dakikalık ara (C2_TENEFFUS), duruşmadan önceki gece Vedat'ın telefonu (INV_GECE_6).
+- **Sonuçlar:** ETIK (Emre'ye yalan söyletmek → kürsüde çöküş ve azil), COKUS (güvenilirlik 0), BERAAT_B, BERAAT_E, INDIRIM,
+  MAHKUMIYET. Gece matbaada Tarık'la yüzleşmek ayrı bir sonuç değil; Tarık kürsüye hazırlıklı gelir (T3X).
+- **Mahkeme:** Bursa 7. Asliye Ceza, tek hâkim (Selma Akgün); hitap "Sayın Hâkim".

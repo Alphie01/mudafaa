@@ -1,4 +1,4 @@
-import { flag, has, hint, missedEvidence, not } from '../../../tools/content/src/kit/index.js';
+import { all, flag, has, hint, missedEvidence, not, visited } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 
 // 95-report: dava sonu raporunda "kaçırdıkların".
@@ -64,6 +64,12 @@ export const report: CasePart = {
         'h_suc',
         not(flag('suc_duyurusu')),
         'Bulduğun halkaları somut bir suç duyurusuyla savcılığa bildirmedin (CMK 158); savcılık üçüncü kişinin örneklerini Adli Tıp’a gönderebilirdi.',
+        'USUL_BILGISI',
+      ),
+      hint(
+        'h_hak',
+        all(visited('C2_03C'), not(flag('hak_hatirlatildi'))),
+        'Akraba tanığın çekinme hakkının ve kendini suçlayan sorulara cevap vermeme hakkının hatırlatılmasını istemedin (CMK 45, 46, 48).',
         'USUL_BILGISI',
       ),
       hint(

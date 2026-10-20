@@ -16,9 +16,9 @@ import { O, W } from './lib.js';
 
 // 90-outcomes: sonuçlar (öncelik sırasıyla) ve sonuca bağlı epiloglar. Eşikler meta'daki eşik çubuğuyla aynı.
 
-export const T_INDIRIM = 2600;
-export const T_BERAAT = 5200;
-export const T_BERAAT_B = 6400;
+export const T_INDIRIM = 3000;
+export const T_BERAAT = 9500;
+export const T_BERAAT_B = 11000;
 
 const istinaf = 'hükmün tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1)';
 

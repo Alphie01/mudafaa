@@ -1811,28 +1811,15 @@
       ],
       "pool": [
         "clue_tel_liste",
-        "clue_yazici",
-        "clue_takvim",
-        "clue_makas",
-        "clue_kase",
-        "clue_aski",
-        "clue_doblo",
-        "clue_bos_dosya",
-        "clue_ruhsat",
-        "clue_aile_foto",
-        "clue_sivanma",
         "clue_senet_saat",
-        "clue_foto_kapali",
-        "clue_toner_muhur",
-        "clue_kagit",
-        "clue_ekli_satir",
-        "clue_noter_arsiv",
-        "clue_mukayese_ozel",
-        "clue_tutanak_ad",
         "clue_iki_el",
+        "clue_doblo",
+        "clue_ruhsat",
+        "clue_sivanma",
         "clue_sag_el",
-        "clue_ceket",
-        "clue_mesaj",
+        "clue_mukayese_ozel",
+        "clue_toner_muhur",
+        "clue_noter_arsiv",
         "clue_kargo_saat",
         "clue_kargo_imza",
         "clue_randevu_no",
@@ -1906,27 +1893,6 @@
           ]
         },
         {
-          "id": "AB_SURET2",
-          "kind": "COMBINE",
-          "match": { "a": "clue_ekli_satir", "b": "clue_noter_arsiv" },
-          "feedback": {
-            "title": "Asıldan kopyalanmış sahte suret",
-            "text": "Asıl nüshada olmayan satış satırı, surette başka bir yazı tipiyle araya sıkıştırılmış.",
-            "label": "YENİ DELİL · +300 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_suret_sahte" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_suret_sahte" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
           "id": "AB_MUKAYESE",
           "kind": "COMBINE",
           "match": { "a": "clue_mukayese_ozel", "b": "clue_iki_el" },
@@ -1954,112 +1920,6 @@
               "then": [
                 { "type": "DISCOVER", "evidence": "ded_mukayese" },
                 { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "AB_KIMLIK",
-          "kind": "COMBINE",
-          "match": { "a": "clue_ceket", "b": "clue_mesaj" },
-          "feedback": {
-            "title": "O sabah kayıp kimlik",
-            "text": "09.52’de kimlik kayıp; 11.22’de tapuda kullanılıyor; ertesi sabah aynı cepte.",
-            "label": "YENİ DELİL · +300 SKOR",
-            "tone": "success"
-          },
-          "responses": [
-            {
-              "lines": [
-                {
-                  "speaker": "player",
-                  "text": "Bir kimlik bir gece cepten çıktı ve bir gece cebe döndü. Arada bir adam onunla bir ev sattı.",
-                  "style": "thought"
-                }
-              ]
-            }
-          ],
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_kimlik" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_kimlik" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "AB_KURYE",
-          "kind": "COMBINE",
-          "match": { "a": "clue_takvim", "b": "clue_senet_saat" },
-          "feedback": {
-            "title": "Kurye çakışması",
-            "text": "Kurye 11.30’da matbaaya gelecekti; senet 11.24’te imzalandı. Kayıt bulunursa bir mazeret.",
-            "label": "YENİ DELİL · +200 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_kurye" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_kurye" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 200 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "AB_BASKI",
-          "kind": "COMBINE",
-          "match": { "a": "clue_yazici", "b": "clue_toner_muhur" },
-          "feedback": {
-            "title": "Gece basılan suret",
-            "text": "Basılmış mühür, 6 Şubat 02.14’teki iki sayfalık renkli işle örtüşüyor. Suret bu dükkânda basıldı.",
-            "label": "YENİ DELİL · +200 SKOR",
-            "tone": "success"
-          },
-          "responses": [
-            {
-              "lines": [
-                {
-                  "speaker": "player",
-                  "text": "Suret bu dükkânda basıldı. Savcı bunu duysa sevinirdi: bir matbaacı, bir matbaa, bir sahte suret. Ama gece ikide burada kim vardı?",
-                  "style": "thought"
-                }
-              ]
-            }
-          ],
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_baski" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_baski" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 200 }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "AB_BASKI2",
-          "kind": "COMBINE",
-          "match": { "a": "clue_yazici", "b": "clue_kagit" },
-          "feedback": {
-            "title": "Gece basılan suret",
-            "text": "90 gramlık sıradan kâğıt ve gece 02.14’te 90 grama basılmış iki sayfa. Suret bu dükkânda basıldı.",
-            "label": "YENİ DELİL · +200 SKOR",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_baski" } },
-              "then": [
-                { "type": "DISCOVER", "evidence": "ded_baski" },
-                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 200 }
               ]
             }
           ]
@@ -2208,48 +2068,12 @@
           ]
         },
         {
-          "id": "AB_X_DOBLO",
-          "kind": "COMBINE",
-          "match": { "a": "clue_doblo", "b": "clue_aski" },
-          "feedback": {
-            "title": "Yanlış iz",
-            "text": "Beyaz bir araç ve bir askı. Dükkândaki herkes ikisine de yakın. Hiçbir şeyi ayırmıyor.",
-            "label": "BAĞLANTI YOK · −50 SKOR",
-            "tone": "error"
-          },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
-        },
-        {
-          "id": "AB_X_KASE",
-          "kind": "COMBINE",
-          "match": { "a": "clue_kase", "b": "clue_toner_muhur" },
-          "feedback": {
-            "title": "Yanlış iz",
-            "text": "Polimer kaşe ıslak mürekkep basar; suretteki mühür toner. Makine burada masum.",
-            "label": "BAĞLANTI YOK · −50 SKOR",
-            "tone": "error"
-          },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
-        },
-        {
           "id": "AB_X_RUHSAT",
           "kind": "COMBINE",
           "match": { "a": "clue_ruhsat", "b": "clue_senet_saat" },
           "feedback": {
             "title": "Yanlış iz",
             "text": "Alıcının aceleciliği bir sahtecilik delili değil; sadece acelecilik.",
-            "label": "BAĞLANTI YOK · −50 SKOR",
-            "tone": "error"
-          },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
-        },
-        {
-          "id": "AB_X_AILE",
-          "kind": "COMBINE",
-          "match": { "a": "clue_aile_foto", "b": "clue_bos_dosya" },
-          "feedback": {
-            "title": "Yanlış iz",
-            "text": "Bir aile ve boş bir dosya. Duygusal bir çift; mahkemede bir şey söylemez.",
             "label": "BAĞLANTI YOK · −50 SKOR",
             "tone": "error"
           },
@@ -2847,12 +2671,7 @@
     { "evidence": "clue_bahis", "source": { "type": "CHOICE", "id": "VQ_SIR" } },
     { "evidence": "ded_solak", "source": { "type": "RULE", "id": "AB_SOLAK" } },
     { "evidence": "ded_suret_sahte", "source": { "type": "RULE", "id": "AB_SURET" } },
-    { "evidence": "ded_suret_sahte", "source": { "type": "RULE", "id": "AB_SURET2" } },
     { "evidence": "ded_mukayese", "source": { "type": "RULE", "id": "AB_MUKAYESE" } },
-    { "evidence": "ded_kimlik", "source": { "type": "RULE", "id": "AB_KIMLIK" } },
-    { "evidence": "ded_kurye", "source": { "type": "RULE", "id": "AB_KURYE" } },
-    { "evidence": "ded_baski", "source": { "type": "RULE", "id": "AB_BASKI" } },
-    { "evidence": "ded_baski", "source": { "type": "RULE", "id": "AB_BASKI2" } },
     { "evidence": "ded_mazeret", "source": { "type": "RULE", "id": "AB_MAZERET" } },
     { "evidence": "ded_randevu", "source": { "type": "RULE", "id": "AB_RANDEVU" } },
     { "evidence": "ded_randevu", "source": { "type": "RULE", "id": "AB_RANDEVU2" } },

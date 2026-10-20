@@ -1,0 +1,71 @@
+{
+  "court": { "sessions": [] },
+  "nodes": [
+    {
+      "id": "C_00",
+      "type": "COURTROOM",
+      "mode": "STAGE",
+      "title": "Duruşma · 2. Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "chapter": "2. Celse",
+      "hud": ["cred", "pers"],
+      "courtStage": "ACILIS",
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [{ "character": "nevzat", "label": "BAŞKAN", "xFrac": 0.5 }],
+        "counsel": "deniz"
+      },
+      "onFirstEnter": [
+        { "type": "VAR", "var": "in_court", "op": "set", "value": true },
+        { "type": "MEET", "character": "nevzat" },
+        {
+          "type": "IF",
+          "when": { "flag": "selin_pressured" },
+          "then": [{ "type": "VAR", "var": "cred", "op": "dec", "value": 1 }]
+        },
+        { "type": "DISCOVER", "evidence": "ev_ariza_kaydi" },
+        { "type": "DISCOVER", "evidence": "ev_hts" },
+        { "type": "DISCOVER", "evidence": "ev_dna" },
+        { "type": "DISCOVER", "evidence": "ev_kamera" }
+      ],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "nevzat",
+              "text": "Sanık Kerem Aydın bağsız olarak alındı; tanıklar salondan çıkarıldı. Ara karar cevapları okundu."
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "C00_DEVAM", "kind": "CONTINUE", "label": "Devam", "next": "RESULT_STUB" }]
+    },
+    { "id": "RESULT_STUB", "type": "RESULT", "title": "Karar", "choices": [] }
+  ],
+  "discoveryPaths": [
+    {
+      "evidence": "ev_ariza_kaydi",
+      "source": { "type": "NODE", "id": "C_00" },
+      "requires": { "any": [{ "flag": "ariza_avukat" }, { "flag": "ariza_muzekkere" }] },
+      "hint": "Arıza kaydını belediyeden ya da müzekkereyle iste."
+    },
+    {
+      "evidence": "ev_hts",
+      "source": { "type": "NODE", "id": "C_00" },
+      "requires": { "flag": "sucduyurusu_murat" },
+      "hint": "Murat hakkında suç duyurusu ve CMK 135/6 tespit talebi."
+    },
+    {
+      "evidence": "ev_dna",
+      "source": { "type": "NODE", "id": "C_00" },
+      "requires": { "flag": "dna_requested" },
+      "hint": "İzmaritin DNA incelemesini dilekçeyle iste (CMK 78–79)."
+    },
+    {
+      "evidence": "ev_kamera",
+      "source": { "type": "NODE", "id": "C_00" },
+      "requires": { "flag": "kamera_requested" },
+      "hint": "Kamera ve kablo için bilirkişi incelemesi iste."
+    }
+  ]
+}

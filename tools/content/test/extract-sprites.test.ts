@@ -35,14 +35,18 @@ describe('extractSprites', () => {
   });
 
   it('never evaluates code outside the allowed node types', () => {
-    const evil = html.replace("const M = {", "const M = { x: globalThis.process.exit(1), ");
+    const evil = html.replace('const M = {', 'const M = { x: globalThis.process.exit(1), ');
     expect(() => extractSprites(evil)).toThrow(/extractSprites:/);
   });
 
   it('committed sprite files match the design', () => {
     const dir = join(repoRoot, 'content/shared/sprites');
     const files = readdirSync(dir).filter((f) => f.endsWith('.json'));
-    expect(files.sort()).toEqual(Object.keys(sprites).map((id) => `${id}.json`).sort());
+    expect(files.sort()).toEqual(
+      Object.keys(sprites)
+        .map((id) => `${id}.json`)
+        .sort(),
+    );
     for (const file of files) {
       const id = file.replace(/\.json$/, '');
       expect(JSON.parse(readFileSync(join(dir, file), 'utf8'))).toEqual(sprites[id]);

@@ -19,7 +19,10 @@ describe('scene PNGs', () => {
 
   it('scene HTML keeps only decorative layers', () => {
     for (const name of ['olay-yeri-depo', 'depo-sokagi']) {
-      const html = readFileSync(join(repoRoot, `tools/content/scenes/${name}.html`), 'utf8').replace(/<!--[\s\S]*?-->/g, '');
+      const html = readFileSync(join(repoRoot, `tools/content/scenes/${name}.html`), 'utf8').replace(
+        /<!--[\s\S]*?-->/g,
+        '',
+      );
       expect(html).toContain('id="scene"');
       expect(html).not.toMatch(/<button|<script|>42<|incelenmedi|https?:/);
     }

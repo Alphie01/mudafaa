@@ -110,7 +110,8 @@ const evaluate = (node: AstNode, consts: Map<string, AstNode | null>, depth = 0)
 
 /** Nesne literalindeki özelliğin adı (tanımlayıcı ya da metin anahtar). */
 const keyName = (prop: AstNode): string => {
-  if (prop.type !== 'Property' || prop.computed === true) return fail('nesne literalinde yalnızca düz özellikler olmalı');
+  if (prop.type !== 'Property' || prop.computed === true)
+    return fail('nesne literalinde yalnızca düz özellikler olmalı');
   const key = prop.key as AstNode;
   if (key.type === 'Identifier') return key.name as string;
   if (key.type === 'Literal' && typeof key.value === 'string') return key.value;
@@ -137,7 +138,8 @@ const metaOf = (props: AstNode[], who: string): Pick<ExtractedSprite, 'skin' | '
       if (literal.type !== 'Literal' || typeof literal.value !== 'string') return fail(`META.${who}.skin metin değil`);
       meta.skin = literal.value;
     } else if (name === 'noEyes' || name === 'noMouth') {
-      if (literal.type !== 'Literal' || typeof literal.value !== 'boolean') return fail(`META.${who}.${name} bool değil`);
+      if (literal.type !== 'Literal' || typeof literal.value !== 'boolean')
+        return fail(`META.${who}.${name} bool değil`);
       meta[name] = literal.value;
     }
   }

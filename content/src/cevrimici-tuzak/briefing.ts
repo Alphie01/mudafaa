@@ -56,14 +56,14 @@ export const briefing: CasePart = {
         - Ekranın köşesinde iki kelime: "SIM yok."
         - Kız telefonu yastığın altına koydu. Sonra çıkardı. Sonra yine koydu. Yarın bir iş görüşmesi olacaktı; öyle sanıyordu. !fade
       `),
-      choices: [cont('PROLOG_DEVAM', 'Kış geçti', 'PROLOG_2', { role: 'PRIMARY' })],
+      choices: [cont('PROLOG_DEVAM', 'Üç gün sonra', 'PROLOG_2', { role: 'PRIMARY' })],
     }),
     story('PROLOG_2', {
       ...PRO,
-      title: 'Şubat 2026',
+      title: '7 Kasım 2025',
       background: 'sokak_sabah',
       lines: B(S`
-        = 12 ŞUBAT 2026 · 07.10 — YILDIRIM @sokak_sabah
+        = 7 KASIM 2025 · 07.10 — YILDIRIM @sokak_sabah
         - Kapı zili ikinci kez çaldığında Sevim Yalın elinde tavayla açtı. Kapıda iki sivil polis vardı; biri ayakkabılarını paspasa sildi. Kibar bir tutuklama değildi; ifadeye davetti.
         ?POLİS: Ece Yalın burada mı oturuyor? Hanımefendi, kızınızın ifadesine ihtiyaç var. Korkacak bir şey yok.
         - Mutfakta çay demleniyordu. Kimse içmedi.
@@ -77,7 +77,7 @@ export const briefing: CasePart = {
         gokhan: Bir iş başvurusu. Hangi şirket?
         ece: Nova Dijital. Uzaktan müşteri temsilcisi. Ben… yazışmaları sildim. Onlar sil dedi.
         - Gökhan Ateş başını kaldırmadan yazmaya devam etti. Masasında dört yüz dosya vardı; bu, dört yüz birinciydi.
-        - Sekiz ay sonra bir iddianame geldi: nitelikli dolandırıcılık. Bir yıl sonra annesi bir avukat aradı. !fade
+        - Üç ay sonra bir iddianame geldi: nitelikli dolandırıcılık. Bir yıl sonra, ilk duruşmaya on üç gün kala, annesi bir avukat aradı. !fade
       `),
       choices: [cont('PROLOG2_DEVAM', 'Dosyayı aç', 'BR_00', { role: 'PRIMARY' })],
     }),
@@ -141,22 +141,26 @@ export const briefing: CasePart = {
         - Sevim gittikten sonra Leyla kapının pervazından ayrıldı. Ne zamandır orada durduğunu bilmiyordum.
         leyla: Anneler dosyanın ilk sayfasıdır, Deniz. Son sayfası değil.
         - Masama oturdu, iddianameyi çevirdi. Gözlüğünü burnunun ucuna indirdi. Masasında tuşlu telefonu titredi; bakmadı.
-        leyla: Ece Yalın. Yirmi üç yaşında. Hesabına bir emeklinin kaporası gelmiş, on dakika içinde üç yere dağılmış. Asliye cezada. Tutuksuz.
+        leyla: Ece Yalın. Yirmi üç yaşında. Hesabına bir emeklinin kaporası gelmiş, yirmi beş dakika içinde üç yere dağılmış. Asliye cezada. Tutuksuz.
         leyla: Bu dosyalardan Bursa'da ayda yüz tane açılıyor. Kırkı hesap sahibinin cezasıyla biter. Hesap sahiplerinin yarısı paranın yüzünü bile görmemiştir.
         leyla: Önce şunu bil. Neyle karşı karşıyayız? İddianamedeki suçun ceza aralığı ne?
         ~ Leyla soru sorduğunda cevabı bilir. Benim bilip bilmediğimi merak eder.
       `),
       choices: [
-        option('BR01_A', 'Nitelikli dolandırıcılık: 4–10 yıl hapis; adli para cezası menfaatin iki katından az olamaz', {
-          score: { HUKUKI_BILGI: 60 },
-          good: 'TCK 158/1-f: üç yıldan on yıla hapis ve beş bin güne kadar adli para; (f) bendinde hapsin alt sınırı dört yıl, adli para cezası menfaatin iki katından az olamaz (158/1 son cümle).',
-          effects: [raise('br01_dogru')],
-          responses: B(S`
+        option(
+          'BR01_A',
+          'Nitelikli dolandırıcılık: 4–10 yıl hapis; adli para cezası menfaatin iki katından az olamaz',
+          {
+            score: { HUKUKI_BILGI: 60 },
+            good: 'TCK 158/1-f: üç yıldan on yıla hapis ve beş bin güne kadar adli para; (f) bendinde hapsin alt sınırı dört yıl, adli para cezası menfaatin iki katından az olamaz (158/1 son cümle).',
+            effects: [raise('br01_dogru')],
+            responses: B(S`
             leyla/mutlu: Doğru. Ve şunu unutma: adli para cezası, alınan paranın iki katından az olamaz. Yetmiş beş bin liranın iki katı.
             - Leyla gözlüğünü çıkardı, camını kazağının ucuyla sildi.
           `),
-          next: 'BR_01K',
-        }),
+            next: 'BR_01K',
+          },
+        ),
         option('BR01_B', 'Basit dolandırıcılık: 1–5 yıl hapis ve adli para; banka burada yalnızca bir araç', {
           bad: 'TCK 157 basit dolandırıcılıktır; banka ve bilişim sistemi araç olarak kullanıldığında suç TCK 158/1-f’ye girer: 4–10 yıl hapis ve menfaatin iki katından az olmayan adli para.',
           category: 'HUKUKI_BILGI',
@@ -241,7 +245,7 @@ export const briefing: CasePart = {
         {
           type: 'paragraph',
           title: 'OLAY ÖZETİ',
-          text: '4 Kasım 2025’te Nurettin Aksoy, sahte bir araç ilanı için 75.000 TL kaporayı Ece Yalın adına kayıtlı hesaba gönderdi. Para on beş dakika içinde kripto platformuna, bir şahsa ve kartsız ATM çekimine dağıldı. Ece, 1 Kasım’da hesabına gelen 4.500 TL’nin bir iş için “eğitim avansı” olduğunu söylüyor.',
+          text: '4 Kasım 2025’te Nurettin Aksoy, sahte bir araç ilanı için 75.000 TL kaporayı Ece Yalın adına kayıtlı hesaba gönderdi. Para yirmi beş dakika içinde kripto platformuna, bir şahsa ve kartsız ATM çekimine dağıldı. Ece, 1 Kasım’da hesabına gelen 4.500 TL’nin bir iş için “eğitim avansı” olduğunu söylüyor.',
         },
         {
           type: 'strengthList',
@@ -258,16 +262,28 @@ export const briefing: CasePart = {
           title: 'SAVUNMA STRATEJİSİ SEÇ',
           group: 'g_strateji',
           hints: {
-            STR_MASUMIYET: 'Masumiyet: hesabın o gün başkasının elinde olduğunu ve gerçek faili göstermeyi hedeflersin. Uyan esas savunma ×1,5 puan.',
-            STR_USUL: 'Eksik soruşturma: delillerin toplanmadığını, şüphenin sanık lehine olduğunu savunursun. Uyan esas savunma ×1,2 puan.',
+            STR_MASUMIYET:
+              'Masumiyet: hesabın o gün başkasının elinde olduğunu ve gerçek faili göstermeyi hedeflersin. Uyan esas savunma ×1,5 puan.',
+            STR_USUL:
+              'Eksik soruşturma: delillerin toplanmadığını, şüphenin sanık lehine olduğunu savunursun. Uyan esas savunma ×1,2 puan.',
             STR_INDIRIM: 'Terditli: önce beraat; olmazsa 158/4 ve lehe hükümler. Uyan esas savunma ×0,8 puan.',
           },
         },
       ],
       choices: [
-        strategy('STR_MASUMIYET', 'MASUMIYET', 150, 'Cesur. Hesabın o gün kimin elinde olduğunu göstermen gerekecek. Adı da bulursan, daha iyi.'),
+        strategy(
+          'STR_MASUMIYET',
+          'MASUMIYET',
+          150,
+          'Cesur. Hesabın o gün kimin elinde olduğunu göstermen gerekecek. Adı da bulursan, daha iyi.',
+        ),
         strategy('STR_USUL', 'USUL', 120, 'Polis hesabın kimin adına olduğuna bakmış. Sen kimin elinde olduğuna bak.'),
-        strategy('STR_INDIRIM', 'INDIRIM', 80, 'Güvenli. Ama müvekkiline "bir şey yaptın" mı diyeceksin? Kapıyı erken açma.'),
+        strategy(
+          'STR_INDIRIM',
+          'INDIRIM',
+          80,
+          'Güvenli. Ama müvekkiline "bir şey yaptın" mı diyeceksin? Kapıyı erken açma.',
+        ),
       ],
     }),
     story('INV1_SABAH', {

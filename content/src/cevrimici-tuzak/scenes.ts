@@ -62,11 +62,17 @@ export const scenes: CasePart = {
         }),
         sceneObject('ob_cv', 'CV yığını', OB_CV, {
           discovers: 'clue_cv',
-          ...decoy('Otuz kopya CV. Hepsinde aynı vesikalık, aynı “takım çalışmasına yatkın”. Bir umut yığını; delil değil.', 'CV yığını'),
+          ...decoy(
+            'Otuz kopya CV. Hepsinde aynı vesikalık, aynı “takım çalışmasına yatkın”. Bir umut yığını; delil değil.',
+            'CV yığını',
+          ),
         }),
         sceneObject('ob_serit', 'Fotoğraf şeridi', OB_SERIT, {
           discovers: 'clue_vesikalik',
-          ...decoy('Fotoğraf kabininden dört kare. Yanındaki genç adamın olduğu yarısı yırtılmış. Kırgınlık her zaman ipucu değildir.', 'Yırtık şerit'),
+          ...decoy(
+            'Fotoğraf kabininden dört kare. Yanındaki genç adamın olduğu yarısı yırtılmış. Kırgınlık her zaman ipucu değildir.',
+            'Yırtık şerit',
+          ),
         }),
       ],
     }),
@@ -96,10 +102,16 @@ export const scenes: CasePart = {
           short: 'Asansör',
         }),
         sceneObject('ob_tup', 'Yangın tüpü', OB_TUP, {
-          ...decoy('Son kontrol tarihi geçmiş bir yangın tüpü. Binanın bakımı hakkında bir şey söylüyor; davan hakkında değil.', 'Yangın tüpü'),
+          ...decoy(
+            'Son kontrol tarihi geçmiş bir yangın tüpü. Binanın bakımı hakkında bir şey söylüyor; davan hakkında değil.',
+            'Yangın tüpü',
+          ),
         }),
         sceneObject('ob_saksi', 'Saksı', OB_SAKSI, {
-          ...decoy('Plastik bir kauçuk ağacı. Yaprakları tozlu. Toprağında üç izmarit. Kimin olduğu bilinmez; önemi de yok.', 'Saksı'),
+          ...decoy(
+            'Plastik bir kauçuk ağacı. Yaprakları tozlu. Toprağında üç izmarit. Kimin olduğu bilinmez; önemi de yok.',
+            'Saksı',
+          ),
         }),
       ],
     }),
@@ -122,13 +134,23 @@ export const scenes: CasePart = {
           short: 'Kamera',
         }),
         sceneObject('ob_bariyer', 'Bariyer', OB_BARIYER, {
-          ...decoy('Plakayı okuyan bir bariyer. Abonelere açılıyor. Kimin girip çıktığını gösterir; ama bir yıl önceyi değil.', 'Bariyer'),
+          ...decoy(
+            'Plakayı okuyan bir bariyer. Abonelere açılıyor. Kimin girip çıktığını gösterir; ama bir yıl önceyi değil.',
+            'Bariyer',
+          ),
         }),
         sceneObject('ob_birikinti', 'Su birikintisi', OB_BIRIKINTI, {
-          ...decoy('Tavandaki çatlaktan damlayan suyun yaptığı bir birikinti. İçinde kendi yansıman. Başka bir şey yok.', 'Birikinti'),
+          ...decoy(
+            'Tavandaki çatlaktan damlayan suyun yaptığı bir birikinti. İçinde kendi yansıman. Başka bir şey yok.',
+            'Birikinti',
+          ),
         }),
       ],
     }),
   ],
-  assets: [sceneAsset('img_oda', 'ece-oda'), sceneAsset('img_koridor', 'om-koridor'), sceneAsset('img_otopark', 'om-otopark')],
+  assets: [
+    sceneAsset('img_oda', 'ece-oda'),
+    sceneAsset('img_koridor', 'om-koridor'),
+    sceneAsset('img_otopark', 'om-otopark'),
+  ],
 };

@@ -62,7 +62,7 @@ function parseLine(raw: string): Line {
   else {
     const m = /^(\?[^:{/]+|[a-z][a-z0-9_]*)(?:\/([a-z]+))?(?:\{([a-z]+)\})?: (.+)$/.exec(text);
     if (m === null) throw new Error(`DSL: çözülemeyen satır: ${raw}`);
-    const [, who, expr, style, body] = m as unknown as [string, string, string?, string?, string];
+    const [, who = '', expr, style, body = ''] = m as unknown as (string | undefined)[];
     if (expr !== undefined && !EXPRESSIONS.has(expr)) throw new Error(`DSL: bilinmeyen ifade "${expr}": ${raw}`);
     if (style !== undefined && !STYLES.has(style)) throw new Error(`DSL: bilinmeyen biçim "${style}": ${raw}`);
     line = who.startsWith('?')

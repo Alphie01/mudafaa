@@ -76,9 +76,19 @@ export const inv1Ev: CasePart = {
         mood('Utangaç', 'neutral', 'normal'),
       ],
       objectives: [
-        objective('obj_nova', flag('fact_nova'), 'İşveren: “Nova Dijital”, Kaan Bey. Adres bir iş merkezi.', 'Ece kim için çalıştığını sanıyordu?'),
+        objective(
+          'obj_nova',
+          flag('fact_nova'),
+          'İşveren: “Nova Dijital”, Kaan Bey. Adres bir iş merkezi.',
+          'Ece kim için çalıştığını sanıyordu?',
+        ),
         objective('obj_para', flag('fact_avans'), '4.500 TL: “eğitim avansı”.', '4.500 lira neyin parasıydı?'),
-        objective('obj_tel', flag('fact_simyok'), 'Telefon 4 Kasım sabahı sustu; akşam operatöre gitti.', '4 Kasım’da telefonuna ne oldu?'),
+        objective(
+          'obj_tel',
+          flag('fact_simyok'),
+          'Telefon 4 Kasım sabahı sustu; akşam operatöre gitti.',
+          '4 Kasım’da telefonuna ne oldu?',
+        ),
         objective('obj_kod', flag('fact_kod_itiraf'), 'Ece kodu “SGK kodu” sanıp okudu.', 'Ece bir şey saklıyor mu?'),
       ],
       topics: [
@@ -96,7 +106,7 @@ export const inv1Ev: CasePart = {
                 ece: Görüntülü mülakat yaptık. Onun kamerası bozukmuş; ben görünüyordum, o görünmüyordu. "İş merkezindeyiz, kusura bakmayın, gürültülü" dedi.
                 ece: Konuşurken arkadan bir sinyal geldi, sonra bir kadın sesi: "Dördüncü kat." Asansör herhalde. Gülmüştü; "bizim binanın sesi" demişti.
                 ece: Bir de uzaktan bir yazıcı sesi vardı, bir de telefon zili. Gerçek bir ofis gibiydi. O yüzden hiç şüphelenmedim. Gerçek bir ofis gibiydi.
-                ~ Kamerası olmayan bir işveren. Arkasında bir asansör. Kendi yüzünü saklayan, adayın yüzünü kaydeden biri.
+                ~ Kamerası bozuk bir işveren. Arkasında bir asansör. Tuhaf mı, yoksa sadece ucuz bir kamera mı? Henüz bilmiyorum.
               `,
             },
             hard: {
@@ -157,7 +167,7 @@ export const inv1Ev: CasePart = {
                 ece/kizgin: Kapalı değildi, SIM yoktu! Onu on üçte! Ekran görüntüsü var! Ben kapatmadım, kendisi gitti!
                 ece: Annemin telefonundan Kaan Bey'i aradım. "Kurumsal hatta geçiyoruz" dedi. Bir gece önce de yazmıştı zaten, "yarın hattınız kesilebilir" diye.
                 ece/uzgun: Akşam operatöre gittim. Başka bir bayide yeni kart çıkarılmış. Ben çıkarmadım. Bir kâğıt imzaladım. O kâğıt nerede, bilmiyorum.
-                ~ "Yarın hattınız kesilebilir." Kesintiyi bir gün önceden bilen biri. Ya kâhin, ya da kesen.
+                ~ "Yarın hattınız kesilebilir." Kesintiyi bir gün önceden bilen biri. Ya çok düzenli bir İK, ya da bambaşka bir şey.
               `,
             },
           },
@@ -214,7 +224,12 @@ export const inv1Ev: CasePart = {
           visibleWhen: has('clue_tablo'),
           cost: costOf('min', 2),
           score: { ARASTIRMA: 40 },
-          effects: [discover('clue_sgk_mesaj'), discover('clue_kvkk_mesaj'), discover('clue_hr_no'), raise('fact_ekran')],
+          effects: [
+            discover('clue_sgk_mesaj'),
+            discover('clue_kvkk_mesaj'),
+            discover('clue_hr_no'),
+            raise('fact_ekran'),
+          ],
           tones: {
             soft: {
               prompt: 'Tablonda bir sütun var: “Ekran görüntüsü klasörü”. Nova’nın klasörü duruyor mu?',
@@ -310,11 +325,14 @@ export const inv1Ev: CasePart = {
         text: 'Şimdi ne olacak? Mahkemede bunu söylersem… Siz ne derseniz onu yapacağım.',
       },
       choices: [
-        option('TAV_A', 'Doğruyu anlatmanı öneririm. Notu ve mesajı biz sunarız; neyi okuduğunu bilmediğini sen anlatırsın.', {
-          score: { SAVUNMA_STRATEJISI: 100 },
-          effects: [raise('ece_durust'), inc('trust', 4)],
-          good: 'Avukat müvekkile yalan söyletmez; aldatılarak verilen kod kast göstermez (TCK 21/1). Doğrunun erken ve belgeyle anlatılması inkârın çökmesinden iyidir.',
-          responses: B(S`
+        option(
+          'TAV_A',
+          'Doğruyu anlatmanı öneririm. Notu ve mesajı biz sunarız; neyi okuduğunu bilmediğini sen anlatırsın.',
+          {
+            score: { SAVUNMA_STRATEJISI: 100 },
+            effects: [raise('ece_durust'), inc('trust', 4)],
+            good: 'Avukat müvekkile yalan söyletmez; aldatılarak verilen kod kast göstermez (TCK 21/1). Doğrunun erken ve belgeyle anlatılması inkârın çökmesinden iyidir.',
+            responses: B(S`
             ece/uzgun: Herkesin önünde mi? Annemin önünde?
             > Herkesin önünde. Ama yalnız değil. Not ve mesaj seninle aynı anda konuşacak. Kararı sen veriyorsun; ben yalnızca bedelini ve faydasını anlattım.
             - Ece başını salladı. Bir kez. Sonra notu cebimden alıp avucunda tuttu, bir süre öyle baktı.
@@ -322,8 +340,9 @@ export const inv1Ev: CasePart = {
             ece: Şimdi bakınca o gülen yüz bana gülüyor gibi geliyor. Benimle dalga geçer gibi.
             > Mahkemede o gülen yüz senin lehine konuşacak, Ece. Bir dolandırıcı kendi suçunun altına gülen yüz çizmez.
           `),
-          next: 'INV1_ECE',
-        }),
+            next: 'INV1_ECE',
+          },
+        ),
         option('TAV_B', 'Bunu kimse bilmiyor. İfadendeki gibi devam et: kod vermedin.', {
           score: { SAVUNMA_STRATEJISI: -100 },
           effects: [raise('ece_inkar'), inc('ethics')],
@@ -362,7 +381,11 @@ export const inv1Ev: CasePart = {
       costVar: 'taps',
       miss: fallback('FB_ODA', 'TAP', {
         score: { ARASTIRMA: -10 },
-        feedback: { text: 'Burada bir şey yok. Bir duvar, bir halı. (−1 büyüteç)', label: `${minus(10)} SKOR`, tone: 'error' },
+        feedback: {
+          text: 'Burada bir şey yok. Bir duvar, bir halı. (−1 büyüteç)',
+          label: `${minus(10)} SKOR`,
+          tone: 'error',
+        },
       }),
       finish: { id: 'ODA_BITIR', label: 'Odadan çık' },
     }),
@@ -404,7 +427,7 @@ export const inv1Ev: CasePart = {
           score: { SORGULAMA: 10 },
           effects: [raise('fact_sevim_arama')],
           responses: B(S`
-            sevim: Telefonum benden alındı sabah. "Anne, şirketi arayacağım." On bire doğru. Konuştu, güldü. "Hattımı kurumsala taşıyorlarmış" dedi.
+            sevim: O sabah telefonumu benden aldı. "Anne, şirketi arayacağım." On bire doğru. Konuştu, güldü. "Hattımı kurumsala taşıyorlarmış" dedi.
             sevim/uzgun: Kurumsal. Ben o kelimeyi ilk kez kızımın ağzından duydum. Gururlandım. Sonra polis geldi.
             sevim: Akşam yemekte bir şey yemedi. "Anne, yarın her şey düzelir" dedi. Ben de düzelir dedim. Ertesi gün banka hesabını dondurdu. Düzelmedi.
             ~ Annenin telefonu 11.05'te bir numarayı aramış. O numaranın kime ait olduğunu bulmak, bu davadaki her şeyden önemli olabilir.

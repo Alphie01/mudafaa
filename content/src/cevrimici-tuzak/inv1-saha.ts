@@ -63,18 +63,18 @@ export const inv1Saha: CasePart = {
             - Arkasındaki dolaptan bir klasör çıkardı, bir sayfayı fotokopi makinesine koydu. Makine ısınırken bana döndü.
             necdet: Kiracı Arda Kılıç diye bir genç. Kimlik fotokopisi de ekte. Polise verirdim ama isteyen olmadı. Siz alın, belki işinize yarar.
             - Fotokopi makinesi sıcak bir kâğıt verdi. Necdet kâğıdı bana uzatmadan önce bir kez düzeltti, kenarlarını hizaladı. Titiz bir adam.
-            ~ Kendi eliyle verdi. Bir yıl boyunca kimsenin istemediği bir kâğıdı. Bazen yardımseverlik, en hızlı kapı kapama biçimidir. Bazen de sadece yardımseverliktir.
+            ~ Bir yıl boyunca kimsenin istemediği bir kâğıt. Üstünde bir isim var: Arda Kılıç. Bir isim, bir yüz değildir; ama bir başlangıçtır.
           `),
           next: '$stay',
         }),
-option('OM_KIRACI', 'Kattaki kiracılar Nova’dan birini hiç gördü mü?', {
-score: { SORGULAMA: 20 },
-responses: B(S`
+        option('OM_KIRACI', 'Kattaki kiracılar Nova’dan birini hiç gördü mü?', {
+          score: { SORGULAMA: 20 },
+          responses: B(S`
 necdet: Sanal ofis efendim; kimse gelmez ki görsün. Posta gelir, biz alırız, haber veririz. Nova'ya iki zarf geldi galiba, bir de kargo. Sonra o da kesildi.
 necdet: Dördüncü katta altı firma var. Bir muhasebeci, bir mimar, iki yazılımcı, bir sigorta acentesi. Bir de bizim arşiv. Herkes kendi işinde.
 `),
-next: '$stay',
-}),
+          next: '$stay',
+        }),
         option('OM_KAMERA', 'Lobideki kamera geçen yılı hatırlar mı?', {
           score: { ARASTIRMA: 10 },
           responses: B(S`
@@ -94,7 +94,13 @@ next: '$stay',
         }),
         back('OM_GERI', 'Teşekkür et, çık', {
           visibleWhen: { not: { chosen: 'OM_KORIDOR' } },
-          effects: [{ type: 'IF', when: { not: has('clue_kartvizit') }, then: [{ type: 'DISCOVER', evidence: 'clue_kartvizit' }] }],
+          effects: [
+            {
+              type: 'IF',
+              when: { not: has('clue_kartvizit') },
+              then: [{ type: 'DISCOVER', evidence: 'clue_kartvizit' }],
+            },
+          ],
           responses: B(S`
             - Kalkarken kartvizitini uzattı. Kabartma harfler, hafif bir limon kokusu.
             necdet: Bir şey lazım olursa arayın efendim. Cep numaram üstünde.
@@ -335,7 +341,7 @@ next: '$stay',
       hud: ['exam_left'],
       lines: B(S`
         - Banka yazısı tek sayfa: beş satır, beş saat, beş tutar. Para bir nehir gibi girmiş, deltaya varmış gibi dağılmış.
-        - Yetmiş beş bin lira, on beş dakikada üçe bölünmüş. Bir kısmı bir kripto platformuna, bir kısmı bir isme, bir kısmı bir ATM'ye. Para hızlı; iz yavaş.
+        - Yetmiş beş bin lira, yirmi beş dakikada üçe bölünmüş. Bir kısmı bir kripto platformuna, bir kısmı bir isme, bir kısmı bir ATM'ye. Para hızlı; iz yavaş.
         ~ Bir alet seç, sonra satıra dokun. Rakamlar yalan söylemez; ama sorulmadan da bir şey söylemez.
       `),
       header: { left: 'VADESİZ HESAP · ECE YALIN', right: '01.11–04.11.2025' },
@@ -379,7 +385,7 @@ next: '$stay',
           score: { DELIL_ANALIZI: 100 },
           feedback: {
             title: 'YENİ İPUCU',
-            text: 'Kartsız çekim: ATM ekranındaki karekod, mobil şubeye tanımlı bir telefonla okutulur. Yer: Kent Meydanı. Ece o saatte Yıldırım’daydı; telefonunda “SIM yok” yazıyordu.',
+            text: 'Kartsız çekim: ATM ekranındaki karekod, mobil şubeye tanımlı bir telefonla okutulur. Yer: Kent Meydanı, Osmangazi. Ece’nin telefonunda ise o sabahtan beri “SIM yok” yazıyordu.',
             label: '+100 SKOR · Not defterine eklendi',
             tone: 'special',
           },
@@ -456,4 +462,3 @@ next: '$stay',
     }),
   ],
 };
-

@@ -43,11 +43,19 @@ export const illegalPresented = (by: string): Effect[] => [
   raise('illegal_used'),
   score('SORGULAMA', -150, 'hatali'),
   score('USUL_BILGISI', -150),
-  mark('BAD', `Hukuka aykırı yoldan elde edilen kayıt (${by}) hükme esas alınamaz (Anayasa 38/6; CMK 206/2-a, 217/2); yetkisiz erişim TCK 243 ve 136 kapsamındadır.`, 'USUL_BILGISI'),
+  mark(
+    'BAD',
+    `Hukuka aykırı yoldan elde edilen kayıt (${by}) hükme esas alınamaz (Anayasa 38/6; CMK 206/2-a, 217/2); yetkisiz erişim TCK 243 ve 136 kapsamındadır.`,
+    'USUL_BILGISI',
+  ),
 ];
 
 const banka = deliver('H1_KORIDOR', [
-  { evidence: 'ev_banka_log', requires: flag('dl_log'), hint: 'Banka cihaz ve oturum kayıtlarını delil dilekçesiyle iste.' },
+  {
+    evidence: 'ev_banka_log',
+    requires: flag('dl_log'),
+    hint: 'Banka cihaz ve oturum kayıtlarını delil dilekçesiyle iste.',
+  },
 ]);
 
 export const hearing1: CasePart = {
@@ -103,7 +111,20 @@ export const hearing1: CasePart = {
           - Koridorun öbür ucundan Nurettin Aksoy geçti. Ütülü bir ceket, kravat, elinde bir dosya. Ece'ye bakmadı. Bakmamak için çok çaba harcadı.
         `),
       ],
-      choices: [cont('HK2_DEVAM', 'Salona gir', 'H1_00', { role: 'PRIMARY' })],
+      choices: [cont('HK2_DEVAM', 'Salona gir', 'H1_K3', { role: 'PRIMARY' })],
+    }),
+    decisionNode('H1_K3', [{ to: 'H1_00' }], {
+      ...HEAR1,
+      lines: [
+        W(
+          flag('ucret_sonra'),
+          S`- Sevim Hanım beni görünce çantasının fermuarını açtı, zarfın köşesini gösterdi, yeniden kapattı. "Sonra konuşuruz demiştiniz" dedi. "Ben unutmam."`,
+        ),
+        W(
+          flag('deniz_durust'),
+          S`- Sevim Hanım beni görünce başını salladı. "Söz vermemiştiniz" dedi. "Ama okumuşsunuz. Kızım söyledi; her satırı sormuşsunuz."`,
+        ),
+      ],
     }),
     court1.stage('H1_00', {
       title: 'Duruşma · 1. Celse',
@@ -179,11 +200,7 @@ export const hearing1: CasePart = {
     }),
     decisionNode(
       'H1_02R',
-      [
-        { when: flag('ece_durust'), to: 'H1_02D' },
-        { when: flag('ece_sus'), to: 'H1_02S' },
-        { to: 'H1_02I' },
-      ],
+      [{ when: flag('ece_durust'), to: 'H1_02D' }, { when: flag('ece_sus'), to: 'H1_02S' }, { to: 'H1_02I' }],
       { ...HEAR1 },
     ),
     story('H1_02D', {
@@ -284,7 +301,7 @@ export const hearing1: CasePart = {
         - Savcı ayağa kalktı. Bu sefer sesi yumuşaktı; sertlikten daha tehlikeli bir yumuşaklık.
         savci: Sanık, size bir soru. 1 Kasım'da hesabınıza dört bin beş yüz lira geldi; o parayı hesabınızı kullandırmanın karşılığı olarak aldınız, değil mi?
       `,
-      next: 'H1_04',
+      next: 'H1_03R',
       options: [
         option('H103_A', 'İtiraz: soru, cevabını içinde taşıyor; sanığı yönlendiriyor.', {
           score: { USUL_BILGISI: 100 },
@@ -320,6 +337,15 @@ export const hearing1: CasePart = {
             savci: "Hayır" dediniz. Not edelim. Para geldi ve "hayır" dediniz.
           `),
         }),
+      ],
+    }),
+    decisionNode('H1_03R', [{ to: 'H1_04' }], {
+      ...HEAR1,
+      lines: [
+        W(
+          flag('katilma_ok'),
+          S`- Nurettin Aksoy artık katılan sırasında oturuyordu; avukatsız, ama bir sandalyesi vardı. Dosyasını dizlerine koymuş, kalemini hazır tutuyordu.`,
+        ),
       ],
     }),
     story('H1_04', {
@@ -413,7 +439,8 @@ export const hearing1: CasePart = {
         hakim: Tanık beyanını verdi. Müdafi, sorularınız?
         - Gökhan kürsünün kenarını tuttu. Raporunu ezbere biliyordu; ama raporunun neyi içermediğini ilk kez bu salonda düşünecekti.
       `,
-      rulesText: 'Önce bastır, sonra doğru delille vur. Yanlış delil güvenilirliği ve skoru düşürür; kanaate itiraz edilebilir.',
+      rulesText:
+        'Önce bastır, sonra doğru delille vur. Yanlış delil güvenilirliği ve skoru düşürür; kanaate itiraz edilebilir.',
       objectionGrounds: ['g_kanaat', 'g_duyum', 'g_telkin'],
       statements: [
         statement('G1', 1, [
@@ -458,7 +485,10 @@ export const hearing1: CasePart = {
         }),
         presentRule('PS_G_SAVCILIK', undefined, ['ev_siber_rapor', 'ev_ece_ifade', 'ev_sikayet'], {
           maxUses: 3,
-          effects: [...wrongEvidence, mark('BAD', 'İddianın dayanağı olan belgeyi savunma delili gibi sundun.', 'SORGULAMA')],
+          effects: [
+            ...wrongEvidence,
+            mark('BAD', 'İddianın dayanağı olan belgeyi savunma delili gibi sundun.', 'SORGULAMA'),
+          ],
           responses: B(S`
             savci: Sayın Hâkim, müdafi bizim delilimizi sunuyor. Teşekkür ederiz.
             hakim: Müdafi, bu belge tanığın beyanını destekliyor. Ne göstermek istediniz?
@@ -476,7 +506,11 @@ export const hearing1: CasePart = {
         }),
         presentRule('PS_G1', 'G1', ['ev_banka_log'], {
           score: { SORGULAMA: 300 },
-          effects: [inc('pers', 2), raise('contra_g1'), mark('GOOD', 'Banka cihaz kaydı, işlemlerin sanığın telefonundan yapılmadığını gösterdi.', 'SORGULAMA')],
+          effects: [
+            inc('pers', 2),
+            raise('contra_g1'),
+            mark('GOOD', 'Banka cihaz kaydı, işlemlerin sanığın telefonundan yapılmadığını gösterdi.', 'SORGULAMA'),
+          ],
           responses: B(S`
             > Sayın Hâkim, banka cevabı dosyada. 3 Kasım 14.29: mobil şubeye yeni bir cihaz tanımlanmış, Samsung. 4 Kasım işlemlerinin hepsi o cihazdan.
             > Cihaz tanımlaması bir SMS koduyla yapılmış. Kod 14.29'da gelmiş, aynı dakika kullanılmış. Bu kaydı tanığın raporunda bulamazsınız; çünkü istenmemiş.
@@ -501,7 +535,15 @@ export const hearing1: CasePart = {
         }),
         presentRule('PS_G2', 'G2', ['ded_dongu'], {
           score: { SORGULAMA: 300 },
-          effects: [inc('pers', 2), raise('contra_g2'), mark('GOOD', 'Avansı gönderen hesabın kaporadan pay aldığı gösterildi: ödeme, kiralama bedeli değil, tuzağın yemi.', 'SORGULAMA')],
+          effects: [
+            inc('pers', 2),
+            raise('contra_g2'),
+            mark(
+              'GOOD',
+              'Avansı gönderen hesabın kaporadan pay aldığı gösterildi: ödeme, kiralama bedeli değil, tuzağın yemi.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(S`
             > 1 Kasım'daki dört bin beş yüz lirayı gönderen IBAN …0418. 4 Kasım 13.58'de kaporadan on beş bin lira aynı IBAN'a geri gitmiş.
             > Kira bedelini ödeyen, kirayı geri mi alır? Bu bir bedel değil, Sayın Hâkim. Bir yem. Ve oltaya geri sarılmış.
@@ -516,11 +558,35 @@ export const hearing1: CasePart = {
           visibleWhen: has('clue_avans'),
           enabledWhen: has('clue_avans'),
           score: { SORGULAMA: 100 },
-          effects: [inc('pers'), raise('g2_kismi'), mark('GOOD', 'EFT açıklaması “eğitim avansı” diyor; tam çürütme için paranın döngüsünü göstermek gerekirdi.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('g2_kismi'),
+            mark(
+              'GOOD',
+              'EFT açıklaması “eğitim avansı” diyor; tam çürütme için paranın döngüsünü göstermek gerekirdi.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(S`
             > EFT'nin açıklama alanı: "Nova Dijital eğitim avansı." Gönderen ona kira bedeli dememiş.
             gokhan: Açıklama alanına herkes her şeyi yazar.
             ~ Haklı. Bir açıklama, bir iddiadır. Paranın nereye döndüğü ise bir olgu.
+          `),
+        }),
+        presentRule('PS_G2_K', 'G2', ['ded_kaan'], {
+          score: { SORGULAMA: 100 },
+          effects: [
+            inc('pers'),
+            raise('g2_kaan'),
+            mark(
+              'GOOD',
+              'İşveren ile sahte satıcının aynı hat olduğu gösterildi; avansın kaynağını da gösterseydin “kira bedeli” tamamen çökerdi.',
+              'SORGULAMA',
+            ),
+          ],
+          responses: B(S`
+            > Avansı gönderen "işveren" ile katılana araba satan "satıcı" aynı numarayı kullanıyor. İş ilanı, kimlik ve hesap toplamak için kurulmuş bir tuzak.
+            gokhan: Aynı numara mı? Bu… bunu bilmiyordum. Ama yine de para sanığın hesabına girdi.
           `),
         }),
         pressRule('PR_G3', 'G3', {
@@ -535,7 +601,15 @@ export const hearing1: CasePart = {
         }),
         presentRule('PS_G3', 'G3', ['ev_sim_dokum', 'ded_sim', 'ded_kesinti'], {
           score: { SORGULAMA: 300 },
-          effects: [inc('pers', 2), raise('contra_g3'), mark('GOOD', 'Operatör dökümü, hattın 4 Kasım 10.12’de başka bir bayide vekille değiştirildiğini gösterdi.', 'SORGULAMA')],
+          effects: [
+            inc('pers', 2),
+            raise('contra_g3'),
+            mark(
+              'GOOD',
+              'Operatör dökümü, hattın 4 Kasım 10.12’de başka bir bayide vekille değiştirildiğini gösterdi.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(S`
             > Operatör dökümü, Sayın Hâkim. 4 Kasım 10.12: Kent Meydanı'nda bir bayide, vekil aracılığıyla SIM değişikliği. Kaporanın gelişinden üç buçuk saat önce.
             > Aynı akşam 19.20: abonenin kendi itirazı. "İşlemi ben yapmadım." Bir yıl önce, kimse sormadan.
@@ -557,7 +631,12 @@ export const hearing1: CasePart = {
         }),
         objectRule('OB_G4', 'G4', 'g_kanaat', {
           score: { SORGULAMA: 50 },
-          effects: [inc('pers'), inc('legal_hits'), raise('obj_g4'), mark('GOOD', 'İtiraz yerinde: tanık görmediği bir görüntü hakkında kanaat bildiriyor.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            inc('legal_hits'),
+            raise('obj_g4'),
+            mark('GOOD', 'İtiraz yerinde: tanık görmediği bir görüntü hakkında kanaat bildiriyor.', 'SORGULAMA'),
+          ],
           responses: B(S`
             > İtiraz, Sayın Hâkim. Tanık görmediği bir görüntüyü tahminle dolduruyor.
             hakim: Kabul. Tanık, görmediğiniz şeyi anlatmayın. Tutanağa "görüntü dosyada yoktur" diye geçirin.
@@ -574,7 +653,12 @@ export const hearing1: CasePart = {
         }),
         objectRule('OB_G5', 'G5', 'g_kanaat', {
           score: { SORGULAMA: 50 },
-          effects: [inc('pers'), inc('legal_hits'), raise('obj_g5'), mark('GOOD', 'İtiraz yerinde: “o hâlde” bir olgu değil, tanığın çıkarımıdır.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            inc('legal_hits'),
+            raise('obj_g5'),
+            mark('GOOD', 'İtiraz yerinde: “o hâlde” bir olgu değil, tanığın çıkarımıdır.', 'SORGULAMA'),
+          ],
           responses: B(S`
             > İtiraz. "O hâlde" bir olgu değil, tanığın çıkarımı.
             hakim: Kabul. Tanık, tespitlerinizi anlatın; sonuç çıkarmayı mahkemeye bırakın.
@@ -584,7 +668,15 @@ export const hearing1: CasePart = {
           visibleWhen: flag('ece_durust'),
           enabledWhen: flag('ece_durust'),
           score: { SORGULAMA: 300 },
-          effects: [inc('pers', 2), raise('contra_g5'), mark('GOOD', 'Tanığın öncülü (kod paylaşılmadı) sanığın düzelttiği beyan ve notla çöktü; kod aldatılarak okunmuştu.', 'SORGULAMA')],
+          effects: [
+            inc('pers', 2),
+            raise('contra_g5'),
+            mark(
+              'GOOD',
+              'Tanığın öncülü (kod paylaşılmadı) sanığın düzelttiği beyan ve notla çöktü; kod aldatılarak okunmuştu.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(S`
             > Tanığın mantığı bir öncüle dayanıyor: kod paylaşılmadı. Sanık bugün bu öncülü kendisi düzeltti.
             > Kod okundu, evet. Ama "SGK işe giriş kodu" diye istendi. Mesaj 14.26'da geldi; not aynı dakikada yazıldı: "4471 — SGK."
@@ -602,7 +694,11 @@ export const hearing1: CasePart = {
             inc('wrong'),
             raise('kod_ortaya'),
             score('SORGULAMA', -150, 'hatali'),
-            mark('BAD', 'Müvekkilin az önceki “kimseyle kod paylaşmadım” beyanını kendi delilinle yalanladın; savunmanın tutarlılığı çöktü.', 'SAVUNMA_STRATEJISI'),
+            mark(
+              'BAD',
+              'Müvekkilin az önceki “kimseyle kod paylaşmadım” beyanını kendi delilinle yalanladın; savunmanın tutarlılığı çöktü.',
+              'SAVUNMA_STRATEJISI',
+            ),
           ],
           responses: B(S`
             savci: Sayın Hâkim, müdafi sanığın beş dakika önceki beyanını yalanlayan bir not sunuyor. Biz de teşekkür ederiz.
@@ -615,7 +711,15 @@ export const hearing1: CasePart = {
           visibleWhen: flag('ece_sus'),
           enabledWhen: flag('ece_sus'),
           score: { SORGULAMA: 100 },
-          effects: [inc('pers'), raise('kod_ortaya'), mark('NEUTRAL', 'Not, kodun aldatılarak okunduğunu gösteriyor; ama sanığın sessizliği bu açıklamayı onun ağzından almadı.', 'SORGULAMA')],
+          effects: [
+            inc('pers'),
+            raise('kod_ortaya'),
+            mark(
+              'NEUTRAL',
+              'Not, kodun aldatılarak okunduğunu gösteriyor; ama sanığın sessizliği bu açıklamayı onun ağzından almadı.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(S`
             > Sanık susma hakkını kullandı. Ama bu not konuşuyor: "4471 — SGK." Kod SGK diye istendi.
             savci: O hâlde sanık kodu okudu. Susarak değil, notla itiraf etti.
@@ -675,8 +779,22 @@ export const hearing1: CasePart = {
           effects: [
             ifThen(
               atLeast(2, flag('contra_g1'), flag('contra_g2'), flag('contra_g3'), flag('contra_g5')),
-              [raise('yasak_kalkti'), score('USUL_BILGISI', 40), mark('GOOD', 'Adli kontrolün devamı için kuvvetli şüphe zayıfladı (CMK 109, 110); tedbir kaldırıldı.', 'USUL_BILGISI')],
-              [mark('NEUTRAL', 'Delil durumu henüz değişmediği için adli kontrolün devamına karar verildi (CMK 110).', 'USUL_BILGISI')],
+              [
+                raise('yasak_kalkti'),
+                score('USUL_BILGISI', 40),
+                mark(
+                  'GOOD',
+                  'Adli kontrolün devamı için kuvvetli şüphe zayıfladı (CMK 109, 110); tedbir kaldırıldı.',
+                  'USUL_BILGISI',
+                ),
+              ],
+              [
+                mark(
+                  'NEUTRAL',
+                  'Delil durumu henüz değişmediği için adli kontrolün devamına karar verildi (CMK 110).',
+                  'USUL_BILGISI',
+                ),
+              ],
             ),
           ],
           next: '$stay',
@@ -730,6 +848,7 @@ export const hearing1: CasePart = {
           S`
             = ADLİYE MERDİVENLERİ · 12.20 @adliye
             - Ece merdivenin başında durdu. "Yurt dışı yasağı kalktı" dedi, sanki başka bir dil konuşuyormuş gibi. "Hiçbir yere gitmeyeceğim. Ama gidebilirim."
+            - Ece ağlamadı. Bir yıl boyunca ağlamıştı; bugün, salondan çıkarken, yalnızca derin bir nefes aldı. Bir yüzücünün su üstüne ilk çıkışı gibi.
             - Sevim kızının elini tuttu. Nurettin onların yanından geçerken bir an durdu, bir şey söyleyecek gibi oldu; sonra şemsiyesini açtı ve gitti.
             leyla: Bugün bir kapı araladın. Üç hafta var. Kapıyı kimin açık tuttuğunu bul.
             - Merdivenin dibinde Gökhan Ateş bir sigara yakmıştı. Beni görünce söndürdü, sonra yeniden yaktı. Bir şey söylemedi; ama başıyla selam verdi.
@@ -738,6 +857,7 @@ export const hearing1: CasePart = {
         O(S`
           = ADLİYE MERDİVENLERİ · 12.20 @adliye
           - Ece merdivenin başında durdu. Yağmur dinmemişti. Sevim şemsiyeyi ikisinin üstüne tuttu; ikisine de yetmedi.
+          - Ece ağlamadı. Bir yıl boyunca ağlamıştı; bugün, salondan çıkarken, yalnızca derin bir nefes aldı. Bir yüzücünün su üstüne ilk çıkışı gibi.
           - Nurettin onların yanından geçerken bir an durdu, bir şey söyleyecek gibi oldu; sonra şemsiyesini açtı ve gitti.
           leyla: Üç hafta var. Dosyada boşluklar var. Boşluk kimin işine yarıyor, onu bul.
           - Merdivenin dibinde Gökhan Ateş bir sigara yakmıştı. Beni görünce söndürdü. Bir şey söylemedi.
@@ -748,4 +868,3 @@ export const hearing1: CasePart = {
   ],
   discoveryPaths: banka.discoveryPaths,
 };
-

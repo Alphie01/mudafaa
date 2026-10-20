@@ -20,7 +20,8 @@ const initial: EvidenceDef[] = [
     side: 'PROSECUTION',
     strength: 'STRONG',
     tagLabel: 'SAVCILIK',
-    legalNote: 'Kolluk raporu bir değerlendirmedir; banka cihaz ve erişim kayıtları istenmemiştir (CMK 160/2 eksik soruşturma).',
+    legalNote:
+      'Kolluk raporu bir değerlendirmedir; banka cihaz ve erişim kayıtları istenmemiştir (CMK 160/2 eksik soruşturma).',
     initiallyKnown: true,
   }),
   evidence('ev_hesap', {
@@ -102,7 +103,8 @@ const inv1: EvidenceDef[] = [
     type: 'DIJITAL',
     title: 'Ekran görüntüsü: “SIM yok” · 10.13',
     shortText: '4 Kasım 2025, 10.13. Telefon şebekeden düşmüş.',
-    description: 'Ece’nin iPhone 8’inin fotoğraf arşivinde: 4 Kasım 2025, 10.13 tarihli ekran görüntüsü. Sol üstte “SIM yok”.',
+    description:
+      'Ece’nin iPhone 8’inin fotoğraf arşivinde: 4 Kasım 2025, 10.13 tarihli ekran görüntüsü. Sol üstte “SIM yok”.',
     sourceLabel: 'Ece’nin odası',
     icon: 'phone',
     ...cardKey,
@@ -129,7 +131,8 @@ const inv1: EvidenceDef[] = [
     type: 'TANIK_IFADESI',
     title: 'Mülakatın arka planındaki anons',
     shortText: 'Kaan Bey’in arkasından bir sinyal ve “Dördüncü kat”.',
-    description: 'Ece: “Kamerası bozukmuş. Konuşurken arkadan bir ding geldi, bir kadın sesi ‘Dördüncü kat’ dedi. İş merkezindeyiz demişti.”',
+    description:
+      'Ece: “Kamerası bozukmuş. Konuşurken arkadan bir ding geldi, bir kadın sesi ‘Dördüncü kat’ dedi. İş merkezindeyiz demişti.”',
     sourceLabel: 'Ece ile görüşme',
     icon: 'phone',
     ...card,
@@ -158,7 +161,8 @@ const inv1: EvidenceDef[] = [
     type: 'DIJITAL',
     title: 'Nova İK’nın WhatsApp numarası',
     shortText: '“Kaan | Nova İK”: 0532 614 41 07.',
-    description: 'Ekran görüntülerinin üstünde, profil adının altında: 0532 614 41 07. Profil fotoğrafı bir şirket logosu.',
+    description:
+      'Ekran görüntülerinin üstünde, profil adının altında: 0532 614 41 07. Profil fotoğrafı bir şirket logosu.',
     sourceLabel: 'Ece’nin ekran görüntüleri',
     icon: 'phone',
     ...card,
@@ -195,7 +199,8 @@ const inv1: EvidenceDef[] = [
     type: 'BELGE',
     title: 'Kartsız çekim: mobil uygulamayla QR',
     shortText: '14.05, Kent Meydanı ATM’si: kartsız QR çekim.',
-    description: 'Kartsız çekim, ancak mobil şubeye tanımlı bir cihazla QR okutularak yapılabilir. Yer: Kent Meydanı, Osmangazi.',
+    description:
+      'Kartsız çekim, ancak mobil şubeye tanımlı bir cihazla QR okutularak yapılabilir. Yer: Kent Meydanı, Osmangazi.',
     sourceLabel: 'Hesap hareketleri',
     icon: 'magnifier',
     ...card,
@@ -213,7 +218,8 @@ const inv1: EvidenceDef[] = [
     type: 'BELGE',
     title: 'Şikâyetteki anons notu',
     shortText: 'Nurettin: “Satıcının arkasından bir kadın sesi ‘Dördüncü kat’ dedi.”',
-    description: 'Dilekçenin ikinci sayfası, dipnot gibi: “Görüşme sırasında arkadan bir asansör sinyali ve ‘Dördüncü kat’ anonsu duyulmuştur.”',
+    description:
+      'Dilekçenin ikinci sayfası, dipnot gibi: “Görüşme sırasında arkadan bir asansör sinyali ve ‘Dördüncü kat’ anonsu duyulmuştur.”',
     sourceLabel: 'Şikâyet dilekçesi',
     icon: 'document',
     ...card,
@@ -249,7 +255,8 @@ const inv1: EvidenceDef[] = [
     type: 'BELGE',
     title: 'İşletme müdürünün kartviziti',
     shortText: 'Necdet Sarı · OM İş Merkezi · 0533 287 19 90.',
-    description: 'Kabartma baskılı kartvizit: “Necdet Sarı — İşletme Müdürü — OM İş Merkezi — 0533 287 19 90.” Hafif limon kolonyası kokuyor.',
+    description:
+      'Kabartma baskılı kartvizit: “Necdet Sarı — İşletme Müdürü — OM İş Merkezi — 0533 287 19 90.” Hafif limon kolonyası kokuyor.',
     sourceLabel: 'OM İş Merkezi',
     icon: 'document',
     ...card,
@@ -258,7 +265,8 @@ const inv1: EvidenceDef[] = [
     type: 'TANIK_IFADESI',
     title: 'OM asansörünün kayıtlı sesi',
     shortText: 'Bir sinyal, ardından kayıtlı bir kadın sesi: “Dördüncü kat.”',
-    description: 'OM İş Merkezi asansörü her katta bir sinyal verip katı kayıtlı bir kadın sesiyle söylüyor. Necdet’in odası dördüncü katta.',
+    description:
+      'OM İş Merkezi asansörü her katta bir sinyal verip katı kayıtlı bir kadın sesiyle söylüyor. Necdet’in odası dördüncü katta.',
     sourceLabel: 'OM İş Merkezi',
     icon: 'bulb',
     ...card,
@@ -267,7 +275,8 @@ const inv1: EvidenceDef[] = [
     type: 'FOTOGRAF',
     title: 'Etiketin altındaki eski levha',
     shortText: '“NOVA DİJİTAL” etiketinin altından “YÖNETİM ARŞİVİ” yazısı görünüyor.',
-    description: 'Kat 4, 407 numaralı kapı. Yapıştırma bir “NOVA DİJİTAL” etiketi kenarından kalkmış; altındaki pirinç levhada: “YÖNETİM ARŞİVİ”.',
+    description:
+      'Kat 4, 407 numaralı kapı. Yapıştırma bir “NOVA DİJİTAL” etiketi kenarından kalkmış; altındaki pirinç levhada: “YÖNETİM ARŞİVİ”.',
     sourceLabel: 'OM İş Merkezi · 4. kat',
     icon: 'magnifier',
     ...card,
@@ -285,7 +294,8 @@ const inv1: EvidenceDef[] = [
     type: 'TANIK_IFADESI',
     title: 'Bayideki dil sürçmesi',
     shortText: 'Onur: “Vekâletle gelen bir abiydi galiba… yani, çok müşteri var.”',
-    description: 'Onur Demirci, kimlik kontrolünü anlatırken bir an “vekâletle gelen bir abi” dedi, sonra lafı değiştirdi.',
+    description:
+      'Onur Demirci, kimlik kontrolünü anlatırken bir an “vekâletle gelen bir abi” dedi, sonra lafı değiştirdi.',
     sourceLabel: 'Mavi İletişim',
     icon: 'phone',
     combinable: false,
@@ -294,7 +304,8 @@ const inv1: EvidenceDef[] = [
     type: 'BELGE',
     title: 'Tamirci dükkânının POS fişi',
     shortText: '4 Kasım 10.09–10.31: Burak dükkânında üç ekran değişimi.',
-    description: 'Burak’ın dükkânının POS dökümü ve kendi kamerası: 4 Kasım 10.09, 10.20, 10.31’de üç ödeme; kasada kendisi.',
+    description:
+      'Burak’ın dükkânının POS dökümü ve kendi kamerası: 4 Kasım 10.09, 10.20, 10.31’de üç ödeme; kasada kendisi.',
     sourceLabel: 'Burak Toprak',
     icon: 'receipt',
     combinable: false,
@@ -303,7 +314,8 @@ const inv1: EvidenceDef[] = [
     type: 'DIJITAL',
     title: 'Bayi sisteminden alınmış ekran görüntüsü',
     shortText: 'Burak’ın eski bayi şifresiyle çekilmiş SIM değişikliği ekranı.',
-    description: 'Burak’ın artık çalışmadığı bir bayinin giriş bilgisiyle operatör sisteminden alınmış ekran görüntüsü. Ece’nin hattının 4 Kasım işlemleri görünüyor.',
+    description:
+      'Burak’ın artık çalışmadığı bir bayinin giriş bilgisiyle operatör sisteminden alınmış ekran görüntüsü. Ece’nin hattının 4 Kasım işlemleri görünüyor.',
     sourceLabel: 'Burak Toprak',
     icon: 'phone',
     side: 'DEFENSE',
@@ -389,7 +401,8 @@ const ara: EvidenceDef[] = [
     type: 'BELGE',
     title: 'Doğrulama sonucu: “Belge bulunamadı”',
     shortText: 'Vekâletnamenin karekodu ve yevmiye numarası noter kayıtlarında yok.',
-    description: 'Vekâletnamenin karekodu ve yevmiye numarası (18842) noterlik belge doğrulama sisteminde sorgulandı: “Belge bulunamadı.”',
+    description:
+      'Vekâletnamenin karekodu ve yevmiye numarası (18842) noterlik belge doğrulama sisteminde sorgulandı: “Belge bulunamadı.”',
     sourceLabel: 'Belge doğrulama',
     icon: 'check',
     side: 'DEFENSE',
@@ -400,7 +413,8 @@ const ara: EvidenceDef[] = [
     type: 'FOTOGRAF',
     title: 'Fotokopide yıldız ve kırık oje',
     shortText: 'Kimlik fotokopisinin sol üstünde beyaz bir yıldız; köşede bordo ojeli, kırık bir başparmak.',
-    description: 'Bayiye verilen kimlik fotokopisi bir fotoğraftan basılmış: kartın sol üstünde LED parlaması, alt köşede ojesi kırık bir başparmak.',
+    description:
+      'Bayiye verilen kimlik fotokopisi bir fotoğraftan basılmış: kartın sol üstünde LED parlaması, alt köşede ojesi kırık bir başparmak.',
     sourceLabel: 'Bayi işlem dosyası',
     icon: 'magnifier',
     ...card,
@@ -409,7 +423,8 @@ const ara: EvidenceDef[] = [
     type: 'BELGE',
     title: 'Vekâletnamedeki vekil adı',
     shortText: 'Vekil: Arda Kılıç, 19.',
-    description: 'Vekâletnamede vekil olarak Arda Kılıç gösterilmiş; T.C. kimlik numarası ve fotokopisi ekli. Yaşı: 19.',
+    description:
+      'Vekâletnamede vekil olarak Arda Kılıç gösterilmiş; T.C. kimlik numarası ve fotokopisi ekli. Yaşı: 19.',
     sourceLabel: 'Bayi işlem dosyası',
     icon: 'compare',
     ...card,
@@ -418,7 +433,8 @@ const ara: EvidenceDef[] = [
     type: 'TANIK_IFADESI',
     title: 'Kuryenin teslim yeri',
     shortText: 'Arda: “Parayı iş merkezinin otoparkında, köşedeki ayrılmış yerde bekleyen arabaya verdim.”',
-    description: 'Arda Kılıç: “Her seferinde OM’nin otoparkı. En köşe, tabelalı yer. Siyah bir araba. Cam yarım iner, zarfı uzatırım.”',
+    description:
+      'Arda Kılıç: “Her seferinde OM’nin otoparkı. En köşe, tabelalı yer. Siyah bir araba. Cam yarım iner, zarfı uzatırım.”',
     sourceLabel: 'Arda Kılıç',
     icon: 'key',
     ...card,
@@ -427,7 +443,8 @@ const ara: EvidenceDef[] = [
     type: 'FOTOGRAF',
     title: 'Köşedeki tabelalı park yeri',
     shortText: 'Otoparkın en köşesinde tek bir ayrılmış yer: “YÖNETİM”.',
-    description: 'OM İş Merkezi otoparkı, eksi birinci kat. En köşede, kameranın görmediği tek yer; duvarda sarı tabela: “YÖNETİM — 1”.',
+    description:
+      'OM İş Merkezi otoparkı, eksi birinci kat. En köşede, kameranın görmediği tek yer; duvarda sarı tabela: “YÖNETİM — 1”.',
     sourceLabel: 'OM İş Merkezi otoparkı',
     icon: 'key',
     ...card,
@@ -436,7 +453,8 @@ const ara: EvidenceDef[] = [
     type: 'FOTOGRAF',
     title: 'İlan fotoğrafındaki cam cephe',
     shortText: 'Clio’nun fotoğrafı bir iş merkezinin cam cephesi önünde çekilmiş; camda “OM” harfleri.',
-    description: 'Nurettin Aksoy’un sakladığı ilan fotoğrafları. Üçüncü karede arabanın arkasındaki cam cephede ters yansımış iki harf: “OM”.',
+    description:
+      'Nurettin Aksoy’un sakladığı ilan fotoğrafları. Üçüncü karede arabanın arkasındaki cam cephede ters yansımış iki harf: “OM”.',
     sourceLabel: 'Nurettin Aksoy',
     icon: 'camera',
     side: 'DEFENSE',
@@ -446,7 +464,8 @@ const ara: EvidenceDef[] = [
     type: 'TANIK_IFADESI',
     title: 'Kameranın açıldığı iki saniye',
     shortText: 'Ece: “Kamerası bir an açıldı; yüzünü değil, elini gördüm. Eski bir yüzük.”',
-    description: 'Ece, mülakatta Kaan Bey’in kamerasının iki saniyeliğine açıldığını hatırladı: masada bir el, parmağında eski, yassı bir mühür yüzük.',
+    description:
+      'Ece, mülakatta Kaan Bey’in kamerasının iki saniyeliğine açıldığını hatırladı: masada bir el, parmağında eski, yassı bir mühür yüzük.',
     sourceLabel: 'Ece ile ara görüşme',
     icon: 'bulb',
     combinable: false,
@@ -469,7 +488,8 @@ const insights: EvidenceDef[] = [
     type: 'TELEFON_KAYDI',
     title: 'İşveren hattı = satıcı hattı',
     shortText: '“Kaan | Nova İK” ile sahte Clio’nun satıcısı aynı numara: iş ilanı bir tuzaktı.',
-    description: 'Ece’ye iş veren “Kaan Bey” ile Nurettin’e araba satan “Kaan” aynı hattı (0532 614 41 07) kullanıyor. İlan, kimlik ve hesap toplamak için kurulmuş bir tuzak.',
+    description:
+      'Ece’ye iş veren “Kaan Bey” ile Nurettin’e araba satan “Kaan” aynı hattı (0532 614 41 07) kullanıyor. İlan, kimlik ve hesap toplamak için kurulmuş bir tuzak.',
     sourceLabel: 'Çıkarım tahtası',
     icon: 'bulb',
     side: 'DEFENSE',
@@ -480,7 +500,8 @@ const insights: EvidenceDef[] = [
     type: 'BELGE',
     title: 'Avans geri döndü',
     shortText: '“Kira bedeli” denen 4.500 TL’yi gönderen hesap, kaporadan 15.000 TL’yi geri aldı.',
-    description: 'Avansı gönderen MEHMET DEMİR hesabı, 4 Kasım’da kaporanın bir kısmını geri almış. Ödeme bir kiralama bedeli değil, aynı zincirin yemi.',
+    description:
+      'Avansı gönderen MEHMET DEMİR hesabı, 4 Kasım’da kaporanın bir kısmını geri almış. Ödeme bir kiralama bedeli değil, aynı zincirin yemi.',
     sourceLabel: 'Çıkarım tahtası',
     icon: 'bulb',
     side: 'DEFENSE',
@@ -490,7 +511,8 @@ const insights: EvidenceDef[] = [
     type: 'BELGE',
     title: 'Kod, SGK kodu diye istendi',
     shortText: 'Mesaj “SGK kodu” diyor; Ece notuna “SGK” yazmış. Kod, aldatılarak okundu.',
-    description: 'Kaan’ın 14.26 mesajı ile Ece’nin aynı anda yazdığı “4471 — SGK” notu birlikte: Ece bankanın cihaz kodunu okuduğunu bilmiyordu.',
+    description:
+      'Kaan’ın 14.26 mesajı ile Ece’nin aynı anda yazdığı “4471 — SGK” notu birlikte: Ece bankanın cihaz kodunu okuduğunu bilmiyordu.',
     sourceLabel: 'Çıkarım tahtası',
     icon: 'bulb',
     side: 'DEFENSE',
@@ -501,7 +523,8 @@ const insights: EvidenceDef[] = [
     type: 'DIJITAL',
     title: 'Kesinti önceden haber verildi',
     shortText: 'Kaan, hattın kesileceğini akşamdan söyledi; ertesi sabah hat başka bayide kopyalandı.',
-    description: '3 Kasım 21.10 mesajı “hattınız kesilebilir” diyor; 4 Kasım 10.12’de hat başka bir bayide vekille değiştirildi. Kesintiyi bilen, yapan kişiydi.',
+    description:
+      '3 Kasım 21.10 mesajı “hattınız kesilebilir” diyor; 4 Kasım 10.12’de hat başka bir bayide vekille değiştirildi. Kesintiyi bilen, yapan kişiydi.',
     sourceLabel: 'Çıkarım tahtası',
     icon: 'bulb',
     side: 'DEFENSE',
@@ -511,7 +534,8 @@ const insights: EvidenceDef[] = [
     type: 'TANIK_IFADESI',
     title: 'İki görüşme, aynı asansör',
     shortText: 'Hem mülakatta hem satıcı görüşmesinde aynı anons: “Dördüncü kat.”',
-    description: 'Ece’nin mülakatı ve Nurettin’in satıcı görüşmesi aynı kayıtlı asansör sesini taşıyor. “Kaan” iki görüşmede de aynı binadaydı.',
+    description:
+      'Ece’nin mülakatı ve Nurettin’in satıcı görüşmesi aynı kayıtlı asansör sesini taşıyor. “Kaan” iki görüşmede de aynı binadaydı.',
     sourceLabel: 'Çıkarım tahtası',
     icon: 'bulb',
     side: 'DEFENSE',
@@ -521,7 +545,8 @@ const insights: EvidenceDef[] = [
     type: 'TELEFON_KAYDI',
     title: 'Hat, sahibinin elinden alındı',
     shortText: '10.12’de başka bayide kopya SIM; 10.13’te Ece’nin ekranında “SIM yok”.',
-    description: 'Operatör dökümü ile Ece’nin 10.13 ekran görüntüsü birlikte: banka SMS’leri 10.12’den sonra Ece’nin telefonuna değil, kopya SIM’e gitti.',
+    description:
+      'Operatör dökümü ile Ece’nin 10.13 ekran görüntüsü birlikte: banka SMS’leri 10.12’den sonra Ece’nin telefonuna değil, kopya SIM’e gitti.',
     sourceLabel: 'Çıkarım tahtası',
     icon: 'bulb',
     side: 'DEFENSE',
@@ -532,7 +557,8 @@ const insights: EvidenceDef[] = [
     type: 'TELEFON_KAYDI',
     title: 'Kopya SIM başka bir cihazda',
     shortText: 'Ece’nin iPhone’u 35 391508…; kopya SIM’in takıldığı cihaz 35 491207…',
-    description: 'İletişim tespitindeki IMEI ile kutudaki IMEI farklı: 4 Kasım’da banka SMS’lerini alan cihaz Ece’nin telefonu değil.',
+    description:
+      'İletişim tespitindeki IMEI ile kutudaki IMEI farklı: 4 Kasım’da banka SMS’lerini alan cihaz Ece’nin telefonu değil.',
     sourceLabel: 'Çıkarım tahtası',
     icon: 'bulb',
     side: 'DEFENSE',
@@ -542,7 +568,8 @@ const insights: EvidenceDef[] = [
     type: 'FOTOGRAF',
     title: 'Fotokopi, gönderilen fotoğraftan basıldı',
     shortText: 'Fotokopideki LED yıldızı ve kırık oje Ece’nin masasından: kaynak, Nova’ya yollanan fotoğraf.',
-    description: 'Bayiye verilen kimlik “fotokopisi”, Ece’nin 24 Ekim’de Nova’ya gönderdiği fotoğraftan basılmış: aynı lamba parlaması, aynı kırık oje.',
+    description:
+      'Bayiye verilen kimlik “fotokopisi”, Ece’nin 24 Ekim’de Nova’ya gönderdiği fotoğraftan basılmış: aynı lamba parlaması, aynı kırık oje.',
     sourceLabel: 'Çıkarım tahtası',
     icon: 'bulb',
     side: 'DEFENSE',
@@ -562,7 +589,8 @@ const insights: EvidenceDef[] = [
     type: 'TELEFON_KAYDI',
     title: 'Altı dakikalık hata',
     shortText: 'İMEİ raporundaki şirket hattı, kartvizitteki numara: 0533 287 19 90.',
-    description: '2 Kasım 23.48’de “Kaan”ın Samsung’una altı dakikalığına takılan hat, Necdet Sarı’nın kartvizitindeki cep numarası.',
+    description:
+      '2 Kasım 23.48’de “Kaan”ın Samsung’una altı dakikalığına takılan hat, Necdet Sarı’nın kartvizitindeki cep numarası.',
     sourceLabel: 'Çıkarım tahtası',
     icon: 'bulb',
     side: 'DEFENSE',
@@ -573,7 +601,8 @@ const insights: EvidenceDef[] = [
     type: 'BELGE',
     title: 'Bir kimlik, iki sahte belge',
     shortText: 'Arda’nın kimliği hem sanal ofis sözleşmesinde hem vekâletnamede.',
-    description: 'On dokuz yaşındaki bir kuryenin kimliği hem Nova’nın sözleşmesinde hem SIM değişikliğinin vekâletnamesinde kullanılmış.',
+    description:
+      'On dokuz yaşındaki bir kuryenin kimliği hem Nova’nın sözleşmesinde hem SIM değişikliğinin vekâletnamesinde kullanılmış.',
     sourceLabel: 'Çıkarım tahtası',
     icon: 'bulb',
     side: 'DEFENSE',

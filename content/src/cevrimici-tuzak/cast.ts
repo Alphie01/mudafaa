@@ -1,7 +1,8 @@
 import { character, sharedSprite } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
+import { caseSprites } from './sprites.js';
 
-// 10-cast: sprite'lar, karakterler ve ilişkiler. Yeni karakterler content/shared/sprites/cevrimici-tuzak-*.json.
+// 10-cast: sprite'lar, karakterler ve ilişkiler. Davaya özgü sprite'lar sprites.ts'te.
 
 export const cast: CasePart = {
   sprites: [
@@ -12,12 +13,7 @@ export const cast: CasePart = {
     sharedSprite('hakim'),
     sharedSprite('savci'),
     sharedSprite('mubasir'),
-    sharedSprite('cevrimici-tuzak-ece', 'ct_ece'),
-    sharedSprite('cevrimici-tuzak-nurettin', 'ct_nurettin'),
-    sharedSprite('cevrimici-tuzak-onur', 'ct_onur'),
-    sharedSprite('cevrimici-tuzak-arda', 'ct_arda'),
-    sharedSprite('cevrimici-tuzak-necdet', 'ct_necdet'),
-    sharedSprite('cevrimici-tuzak-burak', 'ct_burak'),
+    ...caseSprites,
   ],
   characters: [
     character('deniz', {

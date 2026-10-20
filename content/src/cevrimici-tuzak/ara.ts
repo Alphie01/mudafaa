@@ -58,8 +58,16 @@ const free = (id: string, label: string, to: string, spec: Partial<ChoiceDef> = 
 
 const giris = deliver('ARA_GIRIS_1', [
   { evidence: 'ev_banka_log', requires: flag('rq_log'), hint: 'Banka cihaz kaydını duruşmada da isteyebilirdin.' },
-  { evidence: 'ev_hts', requires: any(flag('dl_hts'), flag('rq_hts')), hint: 'Sanığın hattı için iletişim tespitini iste (CMK 135/6).' },
-  { evidence: 'ev_bayi_belge', requires: any(flag('dl_bayi'), flag('rq_bayi')), hint: 'SIM değişikliği belgelerini operatörden iste.' },
+  {
+    evidence: 'ev_hts',
+    requires: any(flag('dl_hts'), flag('rq_hts')),
+    hint: 'Sanığın hattı için iletişim tespitini iste (CMK 135/6).',
+  },
+  {
+    evidence: 'ev_bayi_belge',
+    requires: any(flag('dl_bayi'), flag('rq_bayi')),
+    hint: 'SIM değişikliği belgelerini operatörden iste.',
+  },
   { evidence: 'ev_atm', requires: any(flag('dl_atm'), flag('rq_atm')), hint: 'ATM kamera görüntülerini iste.' },
 ]);
 
@@ -109,7 +117,9 @@ export const ara: CasePart = {
           has('ev_bayi_belge'),
           S`- Sonra bayinin işlem dosyası: bir vekâletname, bir vekilin kimliği, Ece'nin kimlik fotokopisi. Vekilin adı ilk sayfada büyük harflerle yazıyordu.`,
         ),
-        O(S`- Bayinin o gün hangi belgeyle işlem yaptığını hâlâ bilmiyorum. Onu ancak kürsüdeki genç söyleyebilir; söylerse.`),
+        O(
+          S`- Bayinin o gün hangi belgeyle işlem yaptığını hâlâ bilmiyorum. Onu ancak kürsüdeki genç söyleyebilir; söylerse.`,
+        ),
       ],
     }),
     decisionNode('ARA_GIRIS_3', [{ to: 'ARA_GIRIS' }], {
@@ -119,7 +129,10 @@ export const ara: CasePart = {
           has('ev_atm'),
           S`- Ve ATM'nin üç karesi. Kapüşonlu bir genç, telefonunu ekrana tutuyor. Sırtında sarı harfler: "HIZLI PAKET." Ece değil. Ece'nin hiçbir yakını da değil.`,
         ),
-        W(has('ev_banka_log'), S`- Banka da cihaz kayıtlarını göndermişti. "Samsung SM-A546E." Duruşmada okunmadı; ama bir sonraki celsede okunacak.`),
+        W(
+          has('ev_banka_log'),
+          S`- Banka da cihaz kayıtlarını göndermişti. "Samsung SM-A546E." Duruşmada okunmadı; ama bir sonraki celsede okunacak.`,
+        ),
         O(S`- Dosya hâlâ ince. Ama bazen ince bir dosya, kalın bir yalandan daha çok şey söyler.`),
       ],
     }),
@@ -131,6 +144,7 @@ export const ara: CasePart = {
         - Büro sabahları başka kokar: toner, ıslak palto, Leyla'nın soğuyan çayı. Masamda dosyanın kalınlığı iki katına çıkmıştı; ağırlığı da.
         leyla: İki günün var, Deniz. Gerisi beklemek. Duruşma salonunun dışındaki her konuşma, salonun içinde yeniden yapılır; bunu unutma.
         leyla: Tanıklara dokunma. Şüphelileri kovalama. Gördüğünü bildir, bildirdiğini belgele.
+        leyla: Bir de şu var: bu üç hafta, karşı tarafın da üç haftası. Biri seni izliyorsa, sen de onun izlediğini bil. Ama ona bakma; dosyaya bak.
         leyla: Ve hatırla: bu dosyada bir kurban daha var. Katılan. Onu düşman yapma. Düşman yaparsan, salonda bir ses kaybedersin; kazanabileceğin bir sesi.
         ~ Bir yılda kimsenin sormadığı soruları üç haftada sormam gerekiyor. Ve hiçbirini yanlış kişiye sormamam.
       `),
@@ -141,7 +155,7 @@ export const ara: CasePart = {
       title: 'Ara',
       background: 'buro',
       lines: p2.dayLines([
-        'ARA 1/2 · 2. celseye 13 gün. Kim yaptı? Hesabın kimin elinde olduğunu biliyorsun; telefonun kimin elinde olduğunu bilmiyorsun.',
+        'ARA 1/2 · 2. celseye 13 gün. Telefon o gün Ece’nin elinde değildi. Peki kimin elindeydi?',
         'ARA 2/2 · 2. celseye 6 gün. Yarın akşam dosya kapanıyor.',
       ]),
       tabs: [
@@ -177,8 +191,8 @@ export const ara: CasePart = {
               visibleWhen: any(has('ev_atm'), has('ev_bayi_belge'), has('ev_sozlesme')),
             }),
             act('A2_GOKHAN', 'Kom. Yrd. Gökhan Ateş', 'ARA_GOKHAN', { description: 'Siber Şube · duruşmadan sonra' }),
-            act('A2_NURETTIN', 'Nurettin Aksoy', 'ARA_NURETTIN', { description: 'Adliye kantininde' }),
-            act('A2_ECE', 'Ece', 'ARA_ECE', { description: 'Yıldırım · ikinci celseye hazırlık' }),
+            act('A2_NURETTIN', 'Nurettin Aksoy', 'ARA_NURETTIN_0', { description: 'Adliye kantininde' }),
+            act('A2_ECE', 'Ece', 'ARA_ECE_0', { description: 'Yıldırım · ikinci celseye hazırlık' }),
             act('A2_BURAK', 'Burak ve Sevim Hanım', 'ARA_BURAK', {
               description: 'Bir özür, belki',
               visibleWhen: visited('INV1_BURAK'),
@@ -205,11 +219,10 @@ export const ara: CasePart = {
         }),
       ],
     }),
-    decisionNode(
-      'ARA_DAY_END',
-      [{ when: flag('suc_duyurusu'), to: 'ARA_AKSAM' }, { to: 'ARA_AKSAM2' }],
-      { ...ARA, onEnter: [...imeiDayEnd.effects, ...(dayEnd.node.onEnter ?? [])] },
-    ),
+    decisionNode('ARA_DAY_END', [{ when: flag('suc_duyurusu'), to: 'ARA_AKSAM' }, { to: 'ARA_AKSAM2' }], {
+      ...ARA,
+      onEnter: [...imeiDayEnd.effects, ...(dayEnd.node.onEnter ?? [])],
+    }),
     story('ARA_AKSAM', {
       ...ARA,
       title: 'İsimsiz',
@@ -312,7 +325,11 @@ export const ara: CasePart = {
           row('b4', ['Abone kimliği', 'ECE YALIN · FOTOKOPİ']),
           row('b5', ['İşlemi yapan', 'O. DEMİRCİ · 10.12']),
         ],
-        tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('cmp', 'Karşılaştır', 'compare'), tool('chk', 'Doğrula', 'check')],
+        tools: [
+          tool('mag', 'Büyüteç', 'magnifier'),
+          tool('cmp', 'Karşılaştır', 'compare'),
+          tool('chk', 'Doğrula', 'check'),
+        ],
         costVar: 'exam_b',
         rules: [
           examine('EX_B2', 'chk', 'b2', {
@@ -348,7 +365,12 @@ export const ara: CasePart = {
         ],
         miss: fallback('FB_BELGE', 'EXAMINE', {
           score: { DELIL_ANALIZI: -20 },
-          feedback: { title: 'SONUÇ YOK', text: 'Bu aletle bu satırda yeni bir şey görünmüyor.', label: `${minus(20)} SKOR`, tone: 'error' },
+          feedback: {
+            title: 'SONUÇ YOK',
+            text: 'Bu aletle bu satırda yeni bir şey görünmüyor.',
+            label: `${minus(20)} SKOR`,
+            tone: 'error',
+          },
         }),
         finish: { id: 'BELGE_BITIR' },
       }),
@@ -368,11 +390,31 @@ export const ara: CasePart = {
                 score('USUL_BILGISI', 40),
                 ifThen(
                   has('ev_hts'),
-                  [raise('imei_istendi'), score('USUL_BILGISI', 40), mark('GOOD', 'Somut dayanaklı suç duyurusu (CMK 158) ve şüpheli hat ile IMEI için iletişim tespiti talebi (CMK 135/6). Rapor, hâkim kararıyla gelir.', 'USUL_BILGISI')],
-                  [mark('GOOD', 'Somut dayanaklı suç duyurusu (CMK 158); ama cihazın IMEI’si elinde olmadığından cihaz sorgusu istenemedi.', 'USUL_BILGISI')],
+                  [
+                    raise('imei_istendi'),
+                    score('USUL_BILGISI', 40),
+                    mark(
+                      'GOOD',
+                      'Somut dayanaklı suç duyurusu (CMK 158) ve şüpheli hat ile IMEI için iletişim tespiti talebi (CMK 135/6). Rapor, hâkim kararıyla gelir.',
+                      'USUL_BILGISI',
+                    ),
+                  ],
+                  [
+                    mark(
+                      'GOOD',
+                      'Somut dayanaklı suç duyurusu (CMK 158); ama cihazın IMEI’si elinde olmadığından cihaz sorgusu istenemedi.',
+                      'USUL_BILGISI',
+                    ),
+                  ],
                 ),
               ],
-              [mark('NEUTRAL', 'Dayanaksız bir suç duyurusu kayda girer ama iletişim tespiti istenemez; önce işveren ile satıcının aynı kişi olduğunu göstermelisin.', 'USUL_BILGISI')],
+              [
+                mark(
+                  'NEUTRAL',
+                  'Dayanaksız bir suç duyurusu kayda girer ama iletişim tespiti istenemez; önce işveren ile satıcının aynı kişi olduğunu göstermelisin.',
+                  'USUL_BILGISI',
+                ),
+              ],
             ),
           ],
           responses: [
@@ -381,6 +423,7 @@ export const ara: CasePart = {
               S`
                 - Leyla dilekçeyi okudu; bir kelimeyi değiştirdi. "Kesin" yazdığım yere "muhtemel" yazdı. "Savcıya kesin deme" dedi; "kesin olanı o söylesin."
                 - Dilekçeyi üç sayfada bitirdim. Birinci sayfada iki numara: işverenin ve satıcının, aynı. İkinci sayfada bir IMEI: kopya SIM'in takıldığı cihaz. Üçüncü sayfada bir talep.
+                - IMEI'yi yazarken bir telefonun da bir kimliği olduğunu düşündüm. Kart değişir; telefon değişmez.
                 - Savcılık kalemindeki memur dilekçeyi okudu, kaşlarını kaldırdı. "Bu gerçekten bir harita, avukat hanım" dedi. Numara aldı.
                 ~ Bir cihazın içinde hangi hatların yaşadığını soruyorum. Cevap bir hâkimin imzasından geçecek.
               `,
@@ -562,6 +605,36 @@ export const ara: CasePart = {
         ],
       }),
     ),
+    decisionNode('ARA_NURETTIN_0', [{ to: 'ARA_NURETTIN' }], {
+      ...ARA,
+      lines: [
+        W(
+          flag('nurettin_saygi'),
+          S`- Telefondaki konuşmamızı hatırlıyordu. "Dürüst bir cevap; hoşuma gitmemişti" dedi. "Ama hatırladım."`,
+        ),
+        W(
+          flag('nurettin_soz'),
+          S`- Beni görünce dudaklarını büzdü. "Paramı geri alacak avukat" dedi. Alay etmiyordu; yorgundu.`,
+        ),
+      ],
+    }),
+    decisionNode('ARA_ECE_0', [{ to: 'ARA_ECE' }], {
+      ...ARA,
+      lines: [
+        W(
+          flag('fact_anne'),
+          S`- Kapıyı Sevim Hanım açtı. Parmağında bir yara bandı vardı; Ece'nin anlattığı iğne. "Bir şey yok" dedi, sormadan.`,
+        ),
+        W(
+          flag('fact_ekran'),
+          S`- Ece masada laptopuyla oturuyordu. Ekran görüntüsü klasörünü açmış, tarihe göre sıralamıştı. "Başka bir şey lazım olur diye" dedi.`,
+        ),
+        W(
+          flag('fact_burak_ece'),
+          S`- Masada yırtık fotoğraf şeridinin yarısı duruyordu; bant ile öbür yarısına yapıştırılmıştı. Ece bakışımı yakaladı, şeridi ters çevirdi.`,
+        ),
+      ],
+    }),
     direct(
       conversation('ARA_NURETTIN', {
         ...ARA,
@@ -639,12 +712,12 @@ export const ara: CasePart = {
             score: { SORGULAMA: 40 },
             responses: B(S`
               - Ece gözlerini kapadı. Bir süre öyle kaldı.
-              ece: Bir kere. İki saniye. "Ay pardon" dedi, hemen kapattı. Yüzünü görmedim; masa vardı, bir el. Elinde bir bardak, ince belli. Parmağında… eski bir yüzük. Yassı, mühür gibi.
+              ece: Bir kere. İki saniye. "Ay pardon" dedi, hemen kapattı. Yüzünü görmedim; bir masa, bir el. Parmağında… eski bir yüzük. Yassı, mühür gibi.
               - Odadan dikiş makinesinin sesi geliyordu. Ece bir an onu dinledi, sonra gözlerini açmadan konuşmaya devam etti.
               ece: Neden önemli? Herkesin yüzüğü var.
               - Bir süre sustu. Sonra parmaklarına baktı; kendi parmaklarına, kırık ojesine.
               ece: Ben ona kimliğimi gönderirken başparmağım karedeydi. O da bir an elini göstermiş. Komik. İkimiz de elimizi göstermişiz; ben bilerek, o bilmeden.
-              ~ Herkesin yüzüğü var. Ama herkesin bardağı ince belli değil, herkesin elinde mühür yok.
+              ~ Herkesin yüzüğü var. Bir yüzük kimseyi göstermez. Ama bir gün bir başkasının anlattığını doğrulayabilir.
             `),
             next: '$stay',
           }),
@@ -705,68 +778,120 @@ export const ara: CasePart = {
         option('ABUR_A', 'Burak’a bir şey sor: duruşmaya gelir mi, Ece için?', {
           visibleWhen: flag('fact_burak_temiz'),
           effects: [raise('burak_gelecek')],
-          responses: B(S`
+          responses: [
+            W(
+              flag('burak_red'),
+              S`
+                burak: Duruşmaya mı? Ben tanık değilim ki. Hem o şifreyi kapattım, biliyorsun. Temizim artık.
+                > Tanık olarak değil. Arka sırada bir yüz olarak.
+                burak: …Gelirim. Arka sıra. Ece görmesin ama.
+              `,
+            ),
+            O(S`
             burak: Duruşmaya mı? Ben tanık değilim ki.
             > Tanık olarak değil. Arka sırada bir yüz olarak. Bazen bir salonda kimin oturduğu, kimin konuştuğundan önemlidir.
             burak: …Gelirim. Arka sıra. Ece görmesin ama.
             ~ Görecek. Herkes görür. Ama bazı şeyler görülmek için yapılmaz.
           `),
+          ],
           next: HUB,
         }),
         cont('ARABURAK_GERI', 'Büroya dön', HUB, { role: 'BACK' }),
       ],
     }),
-    direct(deductionBoard('ARA_CIKARIM', {
-      ...ARA,
-      title: 'Çıkarım Tahtası',
-      background: 'buro_gece',
-      lines: B(S`
+    direct(
+      deductionBoard('ARA_CIKARIM', {
+        ...ARA,
+        title: 'Çıkarım Tahtası',
+        background: 'buro_gece',
+        lines: B(S`
         - Pano kalabalıklaşmıştı. Kırmızı ipler birbirinin üstünden geçiyor, bir yerde düğümleniyordu. Leyla geçerken durdu, hiçbir şey söylemeden bir iğneyi düzeltti.
       `),
-      pool: [
-        'clue_hr_no',
-        'clue_satici_no',
-        'clue_avans',
-        'clue_mdemir_cikis',
-        'clue_sgk_mesaj',
-        'ev_not',
-        'clue_kvkk_mesaj',
-        'ev_sim_dokum',
-        'clue_ding_ece',
-        'clue_ding_nurettin',
-        'clue_simyok',
-        'clue_iphone_imei',
-        'ev_hts',
-        'clue_parlama',
-        'clue_lamba',
-        'clue_arda_otopark',
-        'clue_yonetim_park',
-        'ev_imei_rapor',
-        'clue_kartvizit',
-        'clue_vekil_arda',
-        'ev_sozlesme',
-        'clue_qr_atm',
-        'clue_asansor',
-        'clue_levha',
-        'clue_kiraci',
-        'clue_cv',
-        'clue_vesikalik',
-      ],
-      recipes: [
-        fresh('CB_IMEI', 'clue_iphone_imei', 'ev_hts', 'ded_imei', 'İki ayrı cihaz', 'Kutudaki IMEI 35 391508…; kopya SIM’in takıldığı cihaz 35 491207… Banka SMS’lerini alan telefon Ece’nin telefonu değil.'),
-        fresh('CB_KOPYA', 'clue_parlama', 'clue_lamba', 'ded_kopya', 'Aynı lamba, aynı oje', 'Fotokopideki yıldız ve kırık oje Ece’nin masasından. Bayiye verilen kimlik, Ece’nin Nova’ya gönderdiği fotoğraftan basılmış.'),
-        fresh('CB_OTOPARK', 'clue_arda_otopark', 'clue_yonetim_park', 'ded_otopark', 'Tabelalı köşe', 'Arda’nın parayı uzattığı araba, otoparkın kameranın görmediği tek yerinde duruyordu: “YÖNETİM — 1”.'),
-        fresh('CB_NECDET', 'ev_imei_rapor', 'clue_kartvizit', 'ded_necdet', 'Altı dakika', 'Raporun üçüncü satırı: 0533 287 19 90, 2 Kasım 23.48, altı dakika. Kartvizit: Necdet Sarı, 0533 287 19 90. Kaan’ın telefonuna bir gece, kendi hattını takmış.'),
-        fresh('CB_ARDA', 'clue_vekil_arda', 'ev_sozlesme', 'ded_arda_kimlik', 'Bir kimlik, iki kâğıt', 'Arda Kılıç hem sanal ofis sözleşmesinde kiracı hem vekâletnamede vekil. On dokuz yaşında bir kurye, iki sahte belgenin yüzü.'),
-        ...INV1_RECIPES.map(again),
-      ],
-      miss: fallback('FB_ARA_CIKARIM', 'COMBINE', {
-        repeat: 'ONCE_PER_PARAMS',
-        score: { DELIL_ANALIZI: -50 },
-        feedback: { title: 'Bu ikisi birbirini açıklamıyor', text: 'İp gerildi ama bir şey bağlanmadı.', label: `BAĞLANTI YOK · ${minus(50)} SKOR`, tone: 'error' },
+        pool: [
+          'clue_hr_no',
+          'clue_satici_no',
+          'clue_avans',
+          'clue_mdemir_cikis',
+          'clue_sgk_mesaj',
+          'ev_not',
+          'clue_kvkk_mesaj',
+          'ev_sim_dokum',
+          'clue_ding_ece',
+          'clue_ding_nurettin',
+          'clue_simyok',
+          'clue_iphone_imei',
+          'ev_hts',
+          'clue_parlama',
+          'clue_lamba',
+          'clue_arda_otopark',
+          'clue_yonetim_park',
+          'ev_imei_rapor',
+          'clue_kartvizit',
+          'clue_vekil_arda',
+          'ev_sozlesme',
+          'clue_qr_atm',
+          'clue_asansor',
+          'clue_levha',
+          'clue_kiraci',
+          'clue_cv',
+          'clue_vesikalik',
+        ],
+        recipes: [
+          fresh(
+            'CB_IMEI',
+            'clue_iphone_imei',
+            'ev_hts',
+            'ded_imei',
+            'İki ayrı cihaz',
+            'Kutudaki IMEI 35 391508…; kopya SIM’in takıldığı cihaz 35 491207… Banka SMS’lerini alan telefon Ece’nin telefonu değil.',
+          ),
+          fresh(
+            'CB_KOPYA',
+            'clue_parlama',
+            'clue_lamba',
+            'ded_kopya',
+            'Aynı lamba, aynı oje',
+            'Fotokopideki yıldız ve kırık oje Ece’nin masasından. Bayiye verilen kimlik, Ece’nin Nova’ya gönderdiği fotoğraftan basılmış.',
+          ),
+          fresh(
+            'CB_OTOPARK',
+            'clue_arda_otopark',
+            'clue_yonetim_park',
+            'ded_otopark',
+            'Tabelalı köşe',
+            'Arda’nın parayı uzattığı araba, otoparkın kameranın görmediği tek yerinde duruyordu: “YÖNETİM — 1”.',
+          ),
+          fresh(
+            'CB_NECDET',
+            'ev_imei_rapor',
+            'clue_kartvizit',
+            'ded_necdet',
+            'Altı dakika',
+            'Raporun üçüncü satırı: 0533 287 19 90, 2 Kasım 23.48, altı dakika. Kartvizit: Necdet Sarı, 0533 287 19 90. Kaan’ın telefonuna bir gece, kendi hattını takmış.',
+          ),
+          fresh(
+            'CB_ARDA',
+            'clue_vekil_arda',
+            'ev_sozlesme',
+            'ded_arda_kimlik',
+            'Bir kimlik, iki kâğıt',
+            'Arda Kılıç hem sanal ofis sözleşmesinde kiracı hem vekâletnamede vekil. On dokuz yaşında bir kurye, iki sahte belgenin yüzü.',
+          ),
+          ...INV1_RECIPES.map(again),
+        ],
+        miss: fallback('FB_ARA_CIKARIM', 'COMBINE', {
+          repeat: 'ONCE_PER_PARAMS',
+          score: { DELIL_ANALIZI: -50 },
+          feedback: {
+            title: 'Bu ikisi birbirini açıklamıyor',
+            text: 'İp gerildi ama bir şey bağlanmadı.',
+            label: `BAĞLANTI YOK · ${minus(50)} SKOR`,
+            tone: 'error',
+          },
+        }),
+        finish: { id: 'ARA_CIKARIM_BITIR' },
       }),
-      finish: { id: 'ARA_CIKARIM_BITIR' },
-    })),
+    ),
     decisionNode('ARA_SON_1', [{ to: 'ARA_SON_2' }], {
       ...ARA,
       lines: [
@@ -790,14 +915,29 @@ export const ara: CasePart = {
         `),
       ],
     }),
-    decisionNode('ARA_SON_2', [{ to: 'ARA_SON' }], {
+    decisionNode('ARA_SON_2', [{ to: 'ARA_SON_3' }], {
       ...ARA,
       lines: [
         W(
           any(has('ded_kopya'), has('ev_noter_yok')),
           S`- Bayinin dosyası artık bir sahtekârlığın dosyası: hiç düzenlenmemiş bir vekâletname, Ece'nin masasından çalınmış bir fotoğraf.`,
         ),
-        O(S`- Bayideki genç yarın kürsüde ne söyleyecek? "Yüz yüze kontrol ettim" diyecek. Elimde onu durduracak bir kâğıt var mı?`),
+        O(
+          S`- Bayideki genç yarın kürsüde ne söyleyecek? "Yüz yüze kontrol ettim" diyecek. Elimde onu durduracak bir kâğıt var mı?`,
+        ),
+      ],
+    }),
+    decisionNode('ARA_SON_3', [{ to: 'ARA_SON' }], {
+      ...ARA,
+      lines: [
+        W(
+          all(flag('fact_imei_yol'), not(has('ev_imei_rapor'))),
+          S`- Gökhan bir cihazın içinde hangi hatların yaşadığını öğrenmenin yolunu anlatmıştı. O yola girmedim. Yarın, girmediğim yolun ucunda kim durduğunu bilmeden kürsüye çıkacağım.`,
+        ),
+        W(
+          flag('fact_zincir'),
+          S`- Mehmet Demir, Manisa'da yetmiş bir yaşında. Eskişehir'de bir ev hanımı. Arda. Ece. Nurettin. Bir zincirin halkaları; hepsi kurban. Ortadaki el hâlâ eldivenli.`,
+        ),
       ],
     }),
     story('ARA_SON', {
@@ -816,4 +956,3 @@ export const ara: CasePart = {
   triggers: [dayEnd.trigger],
   discoveryPaths: [...giris.discoveryPaths, ...imeiDayEnd.discoveryPaths],
 };
-

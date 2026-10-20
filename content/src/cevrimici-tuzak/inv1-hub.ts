@@ -446,7 +446,8 @@ export const inv1Hub: CasePart = {
         }),
         option('DIL_KESIF', 'Para çekilen ATM’nin bulunduğu yerde keşif', {
           cost: [{ var: 'dil_hak', amount: 1 }],
-          neutral: 'Bir yıl sonra ATM’nin önünde keşif hiçbir şey göstermez; mahkeme talebi reddeder (CMK 177; keşfin konusu kalmamış).',
+          neutral:
+            'Bir yıl sonra ATM’nin önünde keşif hiçbir şey göstermez; mahkeme talebi reddeder (CMK 177; keşfin konusu kalmamış).',
           next: '$stay',
         }),
         option('DIL_NOVA', '“Nova Dijital” yetkilisinin tanık olarak çağrılması', {
@@ -508,23 +509,70 @@ export const inv1Hub: CasePart = {
           any(has('ded_sim'), has('ev_sim_dokum')),
           S`- Operatörün dökümü dosyamda: 4 Kasım 10.12'de hat başka bir bayide, bir vekille değiştirilmiş. Savcının "SMS'ler sanığa gitti" cümlesinin altı oyuk.`,
         ),
-        O(S`- 4 Kasım'da banka SMS'lerinin hangi telefona gittiğini hâlâ kanıtlayamıyorum. Savcı "sanığın hattına" diyecek. Şimdilik haklı görünecek.`),
+        O(
+          S`- 4 Kasım'da banka SMS'lerinin hangi telefona gittiğini hâlâ kanıtlayamıyorum. Savcı "sanığın hattına" diyecek. Şimdilik haklı görünecek.`,
+        ),
       ],
     }),
     decisionNode('INV1_GECE_3', [{ to: 'INV1_GECE_4' }], {
       ...INV1,
       lines: [
-        W(flag('ece_durust'), S`- Ece yarın doğruyu anlatacak: kodu okuduğunu, neyi okuduğunu bilmediğini. Bunu ona ben söyletmedim. Ama söyleyebileceğini ben gösterdim.`),
-        W(flag('ece_inkar'), S`- Ece yarın inkâr edecek. "Kimseyle kod paylaşmadım." Ona bunu ben söyledim. Midemde bir taş var; adı etik.`),
-        W(flag('ece_sus'), S`- Ece yarın kod sorulursa susacak. Hakkı. Ama susmak da bir cevaptır; savcı onu kendi cümlesiyle dolduracak.`),
-        O(S`- Ece bir şey saklıyor. Bunu hissediyorum ama elimde değil. Yarın kürsüde ne söyleyeceğini ben de ilk kez duyacağım.`),
+        W(
+          flag('ece_durust'),
+          S`- Ece yarın doğruyu anlatacak: kodu okuduğunu, neyi okuduğunu bilmediğini. Bunu ona ben söyletmedim. Ama söyleyebileceğini ben gösterdim.`,
+        ),
+        W(
+          flag('ece_inkar'),
+          S`- Ece yarın inkâr edecek. "Kimseyle kod paylaşmadım." Ona bunu ben söyledim. Midemde bir taş var; adı etik.`,
+        ),
+        W(
+          flag('ece_sus'),
+          S`- Ece yarın kod sorulursa susacak. Hakkı. Ama susmak da bir cevaptır; savcı onu kendi cümlesiyle dolduracak.`,
+        ),
+        O(
+          S`- Ece bir şey saklıyor. Bunu hissediyorum ama elimde değil. Yarın kürsüde ne söyleyeceğini ben de ilk kez duyacağım.`,
+        ),
       ],
     }),
-    decisionNode('INV1_GECE_4', [{ to: 'INV1_GECE' }], {
+    decisionNode('INV1_GECE_4', [{ to: 'INV1_GECE_5' }], {
       ...INV1,
       lines: [
-        W(flag('dl_log'), S`- Bankanın cihaz kayıtları yarın açılacak. Ne yazdığını bilmiyorum; ama bir yıl boyunca kimse sormamıştı.`),
+        W(
+          flag('dl_log'),
+          S`- Bankanın cihaz kayıtları yarın açılacak. Ne yazdığını bilmiyorum; ama bir yıl boyunca kimse sormamıştı.`,
+        ),
         O(S`- Bankaya hangi cihazdan girildiğini sormadım. Yarın duruşmada sorarım; ama yarın, dünden pahalıdır.`),
+      ],
+    }),
+    decisionNode('INV1_GECE_5', [{ to: 'INV1_GECE_6' }], {
+      ...INV1,
+      lines: [
+        W(
+          all(flag('fact_polis_eksik'), flag('fact_gokhan_mantik')),
+          S`- Gökhan'ın mantığı sağlam, öncülü çürük: "Kod paylaşılmadıysa cihazı sanık tanımlamıştır." Ve polis cihazı hiç sormamış. Yarın o öncül kürsüye çıkacak.`,
+        ),
+        W(
+          flag('fact_polis_eksik'),
+          S`- Polis bankadan cihaz kaydını hiç istememiş. "Mobil kanal" iki kelime; bir yıl boyunca kimse ikinci kelimeyi sormamış.`,
+        ),
+        W(
+          flag('fact_imei'),
+          S`- Burak'ın cümlesi aklımda: kart değişir, telefon değişmez. Sevim Hanım'ın kutusunda on beş hane. Bir gün işe yarayacak.`,
+        ),
+        W(flag('fact_bayi_yol'), S`- Bayideki genç haklıydı: belgeler operatörde. Tezgâhta değil, mahkeme yazısında.`),
+      ],
+    }),
+    decisionNode('INV1_GECE_6', [{ to: 'INV1_GECE' }], {
+      ...INV1,
+      lines: [
+        W(
+          flag('fact_sevim_arama'),
+          S`- Sevim Hanım'ın telefonu 4 Kasım 11.05'te bir numarayı aramış. Ece'nin ekran görüntüsündeki numara. Kaan, kızın annesinin telefonuna da cevap vermiş; sesi yumuşak, "sistem göçü."`,
+        ),
+        W(
+          flag('br01_dogru'),
+          S`- Leyla ilk gün bir kez "doğru" demişti. Ceza aralığı için. Dört yıl. Yarın o dört yılın altına bir çizgi çekmeye çalışacağım.`,
+        ),
       ],
     }),
     story('INV1_GECE', {
@@ -535,6 +583,7 @@ export const inv1Hub: CasePart = {
         - Pano bitmişti; ya da benim bitirebileceğim kadar bitmişti. Kartlar, iğneler, ipler. Ortada bir boşluk: Kaan. Etrafında Ece, Nurettin, bir bayi, bir iş merkezi.
         - Leyla ceketini giyerken kapıda durdu.
         leyla: Yarın Ece kürsüde ne söylerse, sen onu duy. İstediğini değil.
+        - Büroda tek başıma kaldım. Masada soğumuş bir çay, ekranda bankanın yazısını bekleyen bir UYAP sekmesi, camda yağmur. Bursa'nın gece yarısı sesi: uzaklarda bir siren, yakınlarda bir oluk.
         - Gitti. Saat biri geçerken telefonum titredi. Ece'den bir mesaj.
         ece{phone}: Uyuyamadım. Yarın ne giyeyim? İş görüşmesine gider gibi mi?
         ~ Bir yıl önce bir iş görüşmesine giderken her şeyini kaybetti. Şimdi aynı kıyafeti mahkemeye giymek istiyor.

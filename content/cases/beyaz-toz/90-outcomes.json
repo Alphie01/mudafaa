@@ -30,8 +30,40 @@
           "text": "Ortak alandaki şekerlikte satışa hazır hâlde iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur."
         },
         {
-          "when": { "all": [{ "flag": "contra_s3" }, { "flag": "jar_cleared" }] },
+          "when": {
+            "all": [
+              { "flag": "contra_s3" },
+              { "flag": "jar_cleared" },
+              {
+                "not": {
+                  "any": [
+                    { "flag": "contra_t3" },
+                    { "flag": "contra_t4" },
+                    { "flag": "contra_t5" },
+                    { "flag": "tolga_kirildi" }
+                  ]
+                }
+              }
+            ]
+          },
           "text": "Hüküm, muhbir tanığın 9 Kasım gecesi paketi Daire 7’den sanıktan aldığına ilişkin, duruşmada sorgulanmadan kalan beyanı ile sanığın telefonundaki “2 tane” yazışmasına dayanmaktadır."
+        },
+        {
+          "when": {
+            "all": [
+              { "flag": "contra_s3" },
+              { "flag": "jar_cleared" },
+              {
+                "any": [
+                  { "flag": "contra_t3" },
+                  { "flag": "contra_t4" },
+                  { "flag": "contra_t5" },
+                  { "flag": "tolga_kirildi" }
+                ]
+              }
+            ]
+          },
+          "text": "Muhbir tanığın kask ve saat ayrıntılarındaki çelişkileri kayda geçmiştir; heyet bunları çevresel saymış, satışın Daire 7’de yapıldığı yönündeki çekirdek beyanı sanığın telefonundaki “2 tane” yazışmasıyla birlikte inandırıcı bulmuştur (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir."
         }
       ],
       "legalBasis": "TCK 188/3, 188/4-a, 52, 53, 62/1; CMK 206/2-a, 217, 273/1; Anayasa 38/6; TCK 272, 38; Av.K. 34",

@@ -56,7 +56,11 @@ export const outcomes: CasePart = {
         ),
         because(
           'Hüküm, muhbir tanığın 9 Kasım gecesi paketi Daire 7’den sanıktan aldığına ilişkin, duruşmada sorgulanmadan kalan beyanı ile sanığın telefonundaki “2 tane” yazışmasına dayanmaktadır.',
-          all(flag('contra_s3'), flag('jar_cleared')),
+          all(flag('contra_s3'), flag('jar_cleared'), not(muhbirSarsildi)),
+        ),
+        because(
+          'Muhbir tanığın kask ve saat ayrıntılarındaki çelişkileri kayda geçmiştir; heyet bunları çevresel saymış, satışın Daire 7’de yapıldığı yönündeki çekirdek beyanı sanığın telefonundaki “2 tane” yazışmasıyla birlikte inandırıcı bulmuştur (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir.',
+          all(flag('contra_s3'), flag('jar_cleared'), muhbirSarsildi),
         ),
       ],
       legalBasis: 'TCK 188/3, 188/4-a, 52, 53, 62/1; CMK 206/2-a, 217, 273/1; Anayasa 38/6; TCK 272, 38; Av.K. 34',

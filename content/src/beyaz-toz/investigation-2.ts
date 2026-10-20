@@ -1,6 +1,7 @@
 import {
   all,
   any,
+  chosen,
   cmp,
   conversation,
   cont,
@@ -239,6 +240,11 @@ export const investigation2: CasePart = {
           visibleWhen: cmp(v('leyla_ara'), '<', v('day2')),
           effects: [set('leyla_ara', v('day2'))],
           next: 'ARA_LEYLA',
+        }),
+        rawChoice('NAVIGATE', 'A2_GUN_SONU', 'Günü kapat', {
+          description: 'Bugünün işleri bitti; akşam olsun',
+          visibleWhen: all(cmp(v('day2'), '==', 1), chosen('A2_KAAN'), chosen('A2_DEFNE'), chosen('A2_SUC')),
+          next: 'ARA_DAY_END',
         }),
         nav('GO_T', 'DURUŞMAYA GİT · 2. CELSE', 'ARA_SON_1', {
           role: 'PRIMARY',

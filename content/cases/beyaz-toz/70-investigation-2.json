@@ -295,6 +295,21 @@
           "effects": [{ "type": "VAR", "var": "leyla_ara", "op": "set", "value": { "var": "day2" } }]
         },
         {
+          "id": "A2_GUN_SONU",
+          "kind": "NAVIGATE",
+          "label": "Günü kapat",
+          "description": "Bugünün işleri bitti; akşam olsun",
+          "visibleWhen": {
+            "all": [
+              { "cmp": [{ "var": "day2" }, "==", 1] },
+              { "chosen": "A2_KAAN" },
+              { "chosen": "A2_DEFNE" },
+              { "chosen": "A2_SUC" }
+            ]
+          },
+          "next": "ARA_DAY_END"
+        },
+        {
           "id": "GO_T",
           "kind": "NAVIGATE",
           "label": "DURUŞMAYA GİT · 2. CELSE",

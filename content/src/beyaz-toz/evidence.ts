@@ -255,7 +255,6 @@ export const evidencePart: CasePart = {
       description: 'Bina köşesinde, yağmura rağmen silinmemiş bir yağ lekesi ve demir korkulukta zincir sürtmesi.',
       sourceLabel: 'Bina girişi (bizzat)',
       icon: 'magnifier',
-      combinable: false,
     }),
     // --- Belge ipuçları ---
     clue('clue_kroki', {
@@ -286,7 +285,6 @@ export const evidencePart: CasePart = {
         'Büyüteçle bakınca “arka odada” ile “dolapta” arasına küçük harflerle, farklı bir kalemle “(şüphelinin kullanımındaki)” ibaresi sıkıştırılmış.',
       sourceLabel: 'Arama tutanağı',
       icon: 'magnifier',
-      combinable: false,
     }),
     clue('clue_kapsam', {
       type: 'BELGE',
@@ -336,7 +334,6 @@ export const evidencePart: CasePart = {
         'Terazinin kefesindeki karşılaştırmaya elverişli iz şüpheli Kaan Yıldız’a ait değil; parmak izi sisteminde kaydı bulunamadı.',
       sourceLabel: 'Kriminal rapor',
       icon: 'fingerprint',
-      combinable: false,
     }),
     clue('clue_ayni_parti', {
       type: 'ADLI_RAPOR',

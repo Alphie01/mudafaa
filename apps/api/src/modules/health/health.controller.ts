@@ -1,5 +1,6 @@
 import { CASE_FORMAT } from '@mudafaa/case-schema';
 import { Controller, Get, Inject } from '@nestjs/common';
+import { Public } from '../auth/decorators.js';
 import { Redis } from 'ioredis';
 import { PrismaService } from '../../database/prisma.service.js';
 import { REDIS } from '../../redis/redis.module.js';
@@ -23,6 +24,7 @@ export class HealthController {
     @Inject(REDIS) private readonly redis: Redis,
   ) {}
 
+  @Public()
   @Get()
   async check(): Promise<HealthStatus> {
     const [db, redis] = await Promise.all([

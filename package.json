@@ -25,7 +25,10 @@
     "mobile:test": "cd apps/mobile && fvm flutter test",
     "mobile:analyze": "cd apps/mobile && fvm flutter pub get && fvm dart analyze",
     "db:migrate": "npm run migrate -w @mudafaa/api",
-    "db:migrate:test": "npm run migrate:test -w @mudafaa/api"
+    "db:migrate:test": "npm run migrate:test -w @mudafaa/api",
+    "db:seed": "npm run seed -w @mudafaa/api",
+    "emulators": "firebase emulators:start --only auth --project demo-mudafaa",
+    "dev:api": "npm run start:dev -w @mudafaa/api"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -91,12 +91,29 @@ zinciri), `80-trial` (koridor, üç tanık, kısa ara, ek savunma, mütalaa, sav
 
 | Yol | Sonuç | Final | Sözcük | Aksiyon | Süre |
 |---|---|---|---|---|---|
-| TIPIK | BERAAT_E | (bkz. §9) | | | |
-| G_B | BERAAT_B | | | | |
-| G_GOREV | GOREV | | | | |
-| G_M | MAHKUMIYET | | | | |
-| G_ETIK | ETIK | | | | |
-| W | MAHKUMIYET (çöküş) | | | | |
+| **TIPIK** | BERAAT_E | 11.395 | 13.266 | 204 | **94,1 dk** |
+| G_B | BERAAT_B | 13.045 | 13.875 | 217 | 98,8 dk |
+| G_E2 (kısmi K3, muhbir adı söyler, Sinan çağrılmaz) | BERAAT_E | 11.005 | 13.370 | 205 | 94,8 dk |
+| G_GOREV | GOREV (257/1 + HAGB) | 4.545 | 10.900 | 153 | 75,9 dk |
+| G_M | MAHKUMIYET | 565 | 9.006 | 124 | 62,4 dk |
+| G_ETIK | ETIK | 11.185 | 13.059 | 204 | 92,9 dk |
+| W | MAHKUMIYET (çöküş) | 8.165 | 11.778 | 190 | 84,4 dk |
 
-## 9. Ölçüm çıktısı
-Teslim ölçümleri aşağıya yapıştırılır.
+Paket metni: ~20.800 sözcük ekran metni (satır `text` alanları ~18.700).
+
+**Erken çözüm denetimi:** TIPIK yolundan aksiyon blokları silinerek beraate ulaşan yerel en kısa yol arandı
+(`enumerateActions`/`act` ile oynatma): **168 aksiyon** (tipik yolun %82'si). Beraat; karar belgesinin üç satırı, tutanak,
+ifadeler ve tahtadaki çıkarımlar, CMK 206 itirazı, ara evresinde cihaz raporu ve Bayram'ın kürsüde çözülmesi olmadan
+gelmez (`kayit_disi` ∧ `zarf_suphe` ∧ pers ≥ 5 ∧ final ≥ 10.000).
+
+**Gizem denetimi:** tipik yolun satırları döküldü; Sinan Kaplan'ın fail olduğu ARA_CIKARIM'daki `ded_tek_kisi` /
+`ded_kameradaki` tariflerinden ve çay defterinden önce hiçbir satırda söylenmez. Önceden ekilen zararsız ipuçları: nane
+şekeri (soğuk açılışta koku, komşunun çocuğu, Devir-2 masası), akıllı saat, "arşivdeydim", 214'ün iki kişilik oda olması.
+Seçenek etiketlerinden isim çıkarıldı (BAY_C, MUZ_BASKI).
+
+## 9. Doğrulayıcı
+`npm run case:validate -- zarf --max-ms 3500000`: **PASSED — 0 hata**, 65.176 durum, 400 yürüyüş, bütün sonuçlara ulaşıldı;
+golden path 6/6 (G_E2 sonradan eklendi). Kalan uyarılar: SIMULATION_INCOMPLETE (uzun davada beklenen) ve G_E2 ile kapsanan
+T_02B / PS_K3_P. Not: bu ölçüm, makinede başka iş akışı ajanları çalışırken (yük ortalaması ~25, 8 çekirdek) yapıldı;
+varsayılan 600 sn bütçesi bu yükte aşıldığı için süre bütçesi artırıldı. Durum başına maliyet Dava #02 ile aynı düzeydedir
+(golden path boyunca ölçüm: 204 durum 3,9 sn; #02 200 durum 5,9 sn).

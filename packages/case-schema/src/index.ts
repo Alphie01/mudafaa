@@ -20,3 +20,4 @@ export * from './package.js';
 export * from './merge.js';
 export * from './view.js';
 export * from './json-schema.js';
+export * from './api.js';

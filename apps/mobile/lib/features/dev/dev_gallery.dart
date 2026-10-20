@@ -37,7 +37,7 @@ class DevGalleryScreen extends StatelessWidget {
                 if (!snap.hasData) return const LoadingView(label: 'Örnekler yükleniyor…');
                 final items = ms(jsonDecode(snap.data!));
                 return ListView(padding: const EdgeInsets.fromLTRB(16, 14, 20, 30), children: [
-                  const MotionToggle(),
+                  const Row(children: [Expanded(child: MotionToggle(fontSize: 12)), SizedBox(width: 10), Expanded(child: SoundToggle(fontSize: 12))]),
                   const SizedBox(height: 10),
                   const _SlowMo(),
                   const SizedBox(height: 10),

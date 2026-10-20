@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/app.dart';
 import 'core/config.dart';
+import 'features/play/voice/voice.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,5 +22,7 @@ Future<void> main() async {
     options: const FirebaseOptions(apiKey: 'demo-key', appId: '1:1:web:1', messagingSenderId: '1', projectId: 'demo-mudafaa'),
   );
   if (AppConfig.useEmulator) await FirebaseAuth.instance.useAuthEmulator(AppConfig.emulatorHost, 9099);
+  // Blip sesleri açılışta Dart'ta sentezlenir (ses dosyası yok).
+  AudioBlipSink.instance.warmUp();
   runApp(const ProviderScope(child: MudafaaApp()));
 }

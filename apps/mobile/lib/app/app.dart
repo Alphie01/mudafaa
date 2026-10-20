@@ -13,6 +13,7 @@ import '../features/auth/login_screen.dart';
 import '../features/cases/cases_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/play/play_screen.dart';
+import '../features/play/voice/voice.dart';
 import '../features/result/result_screen.dart';
 
 class _AuthListenable extends ChangeNotifier {
@@ -82,7 +83,15 @@ class MudafaaApp extends StatelessWidget {
           child: Consumer(
             builder: (context, ref, _) => MotionScope(
               motion: ref.watch(retroMotionProvider),
-              child: mq.size.width >= 600 ? framed : (child ?? const SizedBox()),
+              child: VoiceScope(
+                sink: ref.watch(soundProvider) ? AudioBlipSink.instance : null,
+                // Web otomatik oynatma kuralı: ses ilk kullanıcı dokunuşunda açılır.
+                child: Listener(
+                  behavior: HitTestBehavior.translucent,
+                  onPointerDown: (_) => AudioBlipSink.instance.unlock(),
+                  child: mq.size.width >= 600 ? framed : (child ?? const SizedBox()),
+                ),
+              ),
             ),
           ),
         );

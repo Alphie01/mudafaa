@@ -8,6 +8,9 @@ import '../../../design_system/motion/screen_fx.dart';
 import '../../../design_system/tokens/px_colors.dart';
 import '../../../design_system/tokens/px_text.dart';
 import '../../../design_system/widgets/px_box.dart';
+import '../voice/blip_scheduler.dart';
+import '../voice/blip_synth.dart';
+import '../voice/voice.dart';
 import 'line_info.dart';
 import 'portrait.dart';
 
@@ -47,9 +50,35 @@ class _DialoguePlayerState extends State<DialoguePlayer> with TickerProviderStat
   bool _done = false;
   bool _started = false;
 
+  // Konuşma mırıltısı: daktilo ilerledikçe zamanlayıcının seçtiği harflerde blip.
+  BlipSink? _sink;
+  BlipScheduler? _blips;
+  BlipSpec? _voice;
+
+  @override
+  void initState() {
+    super.initState();
+    _type.addListener(_onType);
+  }
+
+  void _onType() {
+    final b = _blips;
+    if (b == null || b.stopped) return;
+    final n = (_type.value * b.length).floor();
+    // Zaman daktilonun kendi ilerlemesinden: testte ve yavaş çekimde tutarlı.
+    final now = Duration(microseconds: ((_type.duration?.inMicroseconds ?? 0) * _type.value).round());
+    if (b.advance(n, now)) _sink?.blip(_voice!);
+  }
+
+  void _stopVoice({bool cut = false}) {
+    _blips?.stop();
+    if (cut) _sink?.stop();
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _sink = VoiceScope.of(context);
     if (!_started) {
       _started = true;
       _startLine();
@@ -58,6 +87,8 @@ class _DialoguePlayerState extends State<DialoguePlayer> with TickerProviderStat
 
   @override
   void dispose() {
+    _stopVoice(cut: true);
+    _type.removeListener(_onType);
     _type.dispose();
     _blink.dispose();
     _focus.dispose();
@@ -73,11 +104,25 @@ class _DialoguePlayerState extends State<DialoguePlayer> with TickerProviderStat
       _finish();
       return;
     }
-    final text = _info.text;
+    final info = _info;
+    final text = displayedText(info);
+    _stopVoice();
+    _blips = null;
     _type.stop();
     if (_instant || text.isEmpty) {
       _type.value = 1;
     } else {
+      final speaker = info.speakerKey;
+      _voice = styledVoice(
+        info.kind == SpeakerKind.narrator || info.kind == SpeakerKind.card ? null : voiceForSpeaker(speaker),
+        style: info.style,
+        narrator: info.kind == SpeakerKind.narrator,
+        card: info.kind == SpeakerKind.card,
+      );
+      if (_voice != null && _sink != null) {
+        _sink!.prepare(_voice!);
+        _blips = BlipScheduler(text, every: 2 + stableHash(speaker) % 2);
+      }
       final cps = _info.style == 'card' ? widget.charsPerSecond * 0.8 : widget.charsPerSecond;
       _type.duration = Duration(milliseconds: math.max(1, (text.characters.length / cps * 1000).round()));
       _type.forward(from: 0);
@@ -96,6 +141,7 @@ class _DialoguePlayerState extends State<DialoguePlayer> with TickerProviderStat
   void _tap() {
     if (_done) return;
     if (_typing) {
+      _stopVoice(cut: true);
       _type.stop();
       _type.value = 1;
       setState(() {});
@@ -125,6 +171,7 @@ class _DialoguePlayerState extends State<DialoguePlayer> with TickerProviderStat
   void _finish() {
     if (_done) return;
     _done = true;
+    _stopVoice(cut: true);
     _type.stop();
     _blink.stop();
     widget.onDone();
@@ -189,6 +236,13 @@ class _DialoguePlayerState extends State<DialoguePlayer> with TickerProviderStat
     );
   }
 }
+
+/// Ekranda yazılan metin (daktilo süresi ve blip zamanlayıcısı bununla hesaplanır).
+String displayedText(LineInfo info) => switch (info) {
+      _ when info.kind == SpeakerKind.card => trUpper(info.text),
+      _ when info.style == 'thought' => '( ${info.text} )',
+      _ => info.text,
+    };
 
 /// Daktilo metni: görünen kısım animasyondan, ekran okuyucuya tam metin üst Semantics'ten gider.
 class _Typed extends StatelessWidget {
@@ -263,7 +317,7 @@ class _SpeechStage extends StatelessWidget {
     };
     var style = PxText.body(whisper ? 19 : 22, color: whisper ? textColor.withValues(alpha: 0.75) : textColor);
     if (thought || kind == SpeakerKind.narrator) style = style.copyWith(fontStyle: FontStyle.italic);
-    final text = thought ? '( ${info.text} )' : info.text;
+    final text = displayedText(info);
 
     final plate = info.name == null || thought
         ? (thought ? _Plate(label: 'İÇ SES', color: PxColors.panel, textColor: PxColors.muted) : null)
@@ -413,7 +467,7 @@ class _CardLine extends StatelessWidget {
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               Container(height: 3, width: 64, color: PxColors.gold),
               const SizedBox(height: 18),
-              _Typed(text: trUpper(info.text), type: type, style: PxText.pixel(22, color: PxColors.parchment, spacing: 2).copyWith(height: 1.35), textAlign: TextAlign.center),
+              _Typed(text: displayedText(info), type: type, style: PxText.pixel(22, color: PxColors.parchment, spacing: 2).copyWith(height: 1.35), textAlign: TextAlign.center),
               const SizedBox(height: 18),
               Container(height: 3, width: 64, color: PxColors.gold),
               const SizedBox(height: 14),

@@ -130,23 +130,23 @@ yazanı/toplayanı adlandırır. Saik (cuma vadeli bahis borcu) ara evresinde Bu
 beraat epiloglarında soğuk açılıştaki telefon sesi ile gizli numaraya bağlanır.
 
 **Erken çözüm denetimi (2026-10-20, inceleme sonrası):** İnceleyicinin yöntemiyle (golden path’ten rastgele sıralı parça silme + takılınca
-ilk seçenekle ilerleme; scratch `minimize3.mjs`, 3 tohum TIPIK + 1 tohum G_B) beraatle biten en kısa yol **148 aksiyon** (TIPIK 215; oran
+ilk seçenekle ilerleme; scratch `minimize3.mjs`, 3 tohum TIPIK + 1 tohum G_B; 2026-10-21 yeniden: parça silme + rastgele 2–3’lü silme, tek süreç, 7 dk bütçe → TIPIK’ten 156, G_B’den 154 aksiyon, oran 0,72–0,73, hepsi müvekkil görüşmesi ve teslim tutanağı incelemesi içerir; G_N’den NITELENDIRME 124 aksiyon / ~60 dk) beraatle biten en kısa yol **148 aksiyon** (TIPIK 215; oran
 **0,69**; ~72,9 dk). Bütün en kısa yollar log + vezne + ev + müvekkil görüşmesi + turnike + **teslim tutanağı incelemesi** + tahtada
 BASKASI/TESLIM/TUTANAK + 1. celse çelişkileri + ara evresinde kasa ve müdürlük turnikesi kayıtlarını içerir. BERAAT_E artık müvekkil
 görüşmesi bulgusu ve teslim tutanağı çıkarımı olmadan erişilemez (koşulda açıkça). NITELENDIRME’nin en kısa yolu **113 aksiyon / ~51 dk**
 (önce 71 aksiyon / 45 dk); ama terminal+turnike, izin ya da tutanak bulgusu ve ara evresi kayıtları olmadan gelmez.
 
 ## 9. Süre ve sözcük ölçümü
-`npm run case:duration -- belediye-kasasi` (2026-10-20, inceleme sonrası):
+`npm run case:duration -- belediye-kasasi` (2026-10-21, son düzeltmeler sonrası; toplam vaka metni ≈22,6 bin sözcük, en uzun satır ≤ 220 karakter):
 
 ```
-  TIPIK          97.6 dk   13700 sözcük   215 aksiyon  BERAAT_E (11480)
-  G_B            98.5 dk   13796 sözcük   219 aksiyon  BERAAT_B (11830)
-  G_N            88.5 dk   12396 sözcük   196 aksiyon  NITELENDIRME (8250)
-  G_M            71.3 dk   10078 sözcük   153 aksiyon  MAHKUMIYET (3140)
-  G_C            67.6 dk    9645 sözcük   140 aksiyon  MAHKUMIYET (2620)
-  G_I            81.9 dk   11488 sözcük   181 aksiyon  IKRAR (8120)
-  ==> TİPİK YOL (TIPIK): 97.6 dk  ✓ süre hedefte
+  TIPIK          97.5 dk   13676 sözcük   215 aksiyon  BERAAT_E (11480)
+  G_B            98.4 dk   13772 sözcük   219 aksiyon  BERAAT_B (11830)
+  G_N            88.4 dk   12379 sözcük   196 aksiyon  NITELENDIRME (8250)
+  G_M            71.2 dk   10065 sözcük   153 aksiyon  MAHKUMIYET (3140)
+  G_C            67.5 dk    9632 sözcük   140 aksiyon  MAHKUMIYET (2620)
+  G_I            81.8 dk   11465 sözcük   181 aksiyon  IKRAR (8120)
+  ==> TİPİK YOL (TIPIK): 97.5 dk  ✓ süre hedefte
 ```
 
 Paket: toplam ekran metni ~30 bin sözcüğün üstünde; en uzun satır ≤ 220 karakter.

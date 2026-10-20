@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/app.dart';
 import 'core/config.dart';
+import 'firebase_options.dart';
 import 'features/play/voice/voice.dart';
 
 Future<void> main() async {
@@ -17,9 +18,12 @@ Future<void> main() async {
       yield LicenseEntryWithLineBreaks([pkg], await rootBundle.loadString('assets/fonts/$file'));
     }
   });
-  // Yerel geliştirme Auth Emulator ile çalışır (proje demo-mudafaa); gerçek proje `flutterfire configure` ile gelir.
+  // Yerel geliştirme Auth Emulator ile çalışır (proje demo-mudafaa, API'nin FIREBASE_PROJECT_ID'si ile aynı);
+  // USE_AUTH_EMULATOR=false derlemeleri gerçek projeye (mudafaa-app, `flutterfire configure`) bağlanır.
   await Firebase.initializeApp(
-    options: const FirebaseOptions(apiKey: 'demo-key', appId: '1:1:web:1', messagingSenderId: '1', projectId: 'demo-mudafaa'),
+    options: AppConfig.useEmulator
+        ? const FirebaseOptions(apiKey: 'demo-key', appId: '1:1:web:1', messagingSenderId: '1', projectId: 'demo-mudafaa')
+        : DefaultFirebaseOptions.currentPlatform,
   );
   if (AppConfig.useEmulator) await FirebaseAuth.instance.useAuthEmulator(AppConfig.emulatorHost, 9099);
   // Blip sesleri açılışta Dart'ta sentezlenir (ses dosyası yok).

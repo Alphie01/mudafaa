@@ -604,6 +604,25 @@ export const hearing1: CasePart = {
             ~ Doğru belge, yanlış yerde, düşmandır. Halil bana baktı; yirmi yedi yıllık bir bakış.
           `),
         }),
+        presentRule('PS_K3_P', 'K3', ['ev_tutanak'], {
+          visibleWhen: has('clue_saat_tutanak'),
+          enabledWhen: has('clue_saat_tutanak'),
+          score: { SORGULAMA: 100 },
+          effects: [
+            inc('pers'),
+            raise('k3_kismi'),
+            mark(
+              'GOOD',
+              'Odanın boş olduğunu gösterdin; kaydın kesildiği dakikayla birleştirseydin tam çürütme olurdu.',
+              'SORGULAMA',
+            ),
+          ],
+          responses: B(S`
+            > Tutanağınız: "10.44, şüpheli odada bulunmamaktadır."
+            komiser: Evet, iki dakika sonra geldi. Ama zarf ondan önce verilmiş olabilir.
+            ~ Olabilir. Zarfın ne zaman girdiğini göstermeden, odanın boş olduğu yarım bir cevap.
+          `),
+        }),
         savcilikDelili('PS_K_SAVCILIK', undefined, ['ev_tutanak', 'ev_dinleme', 'ev_ihbar', 'ev_halil_ifade']),
         pressRule('PR_K1', 'K1', {
           score: { SORGULAMA: 25 },
@@ -690,25 +709,6 @@ export const hearing1: CasePart = {
             komiser: Biz... muhbir zarfı verip çıktı diye değerlendirdik.
             baskan: Tanık, kime verip çıktı? Oda boşmuş.
             komiser/uzgun: Bunu... muhbire sormadık, Sayın Başkan.
-          `),
-        }),
-        presentRule('PS_K3_P', 'K3', ['ev_tutanak'], {
-          visibleWhen: has('clue_saat_tutanak'),
-          enabledWhen: has('clue_saat_tutanak'),
-          score: { SORGULAMA: 100 },
-          effects: [
-            inc('pers'),
-            raise('k3_kismi'),
-            mark(
-              'GOOD',
-              'Odanın boş olduğunu gösterdin; kaydın kesildiği dakikayla birleştirseydin tam çürütme olurdu.',
-              'SORGULAMA',
-            ),
-          ],
-          responses: B(S`
-            > Tutanağınız: "10.44, şüpheli odada bulunmamaktadır."
-            komiser: Evet, iki dakika sonra geldi. Ama zarf ondan önce verilmiş olabilir.
-            ~ Olabilir. Zarfın ne zaman girdiğini göstermeden, odanın boş olduğu yarım bir cevap.
           `),
         }),
         pressRule('PR_K4', 'K4', {

@@ -1279,6 +1279,40 @@
           ]
         },
         {
+          "id": "PS_K3_P",
+          "kind": "PRESENT",
+          "match": { "statement": "K3", "evidence": ["ev_tutanak"] },
+          "visibleWhen": { "hasEvidence": "clue_saat_tutanak" },
+          "enabledWhen": { "hasEvidence": "clue_saat_tutanak" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Tutanağınız: “10.44, şüpheli odada bulunmamaktadır.”" },
+                {
+                  "speaker": "komiser",
+                  "text": "Evet, iki dakika sonra geldi. Ama zarf ondan önce verilmiş olabilir."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Olabilir. Zarfın ne zaman girdiğini göstermeden, odanın boş olduğu yarım bir cevap.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "k3_kismi", "op": "set", "value": true },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Odanın boş olduğunu gösterdin; kaydın kesildiği dakikayla birleştirseydin tam çürütme olurdu.",
+              "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
           "id": "PS_K_SAVCILIK",
           "kind": "PRESENT",
           "match": { "evidence": ["ev_tutanak", "ev_dinleme", "ev_ihbar", "ev_halil_ifade"] },
@@ -1485,40 +1519,6 @@
               "type": "MARK",
               "quality": "GOOD",
               "feedback": "Tutanağın kendi saatleri, zarf çekmeceye girerken sanığın odada olmadığını gösterdi.",
-              "category": "SORGULAMA"
-            }
-          ]
-        },
-        {
-          "id": "PS_K3_P",
-          "kind": "PRESENT",
-          "match": { "statement": "K3", "evidence": ["ev_tutanak"] },
-          "visibleWhen": { "hasEvidence": "clue_saat_tutanak" },
-          "enabledWhen": { "hasEvidence": "clue_saat_tutanak" },
-          "responses": [
-            {
-              "lines": [
-                { "speaker": "player", "text": "Tutanağınız: “10.44, şüpheli odada bulunmamaktadır.”" },
-                {
-                  "speaker": "komiser",
-                  "text": "Evet, iki dakika sonra geldi. Ama zarf ondan önce verilmiş olabilir."
-                },
-                {
-                  "speaker": "player",
-                  "text": "Olabilir. Zarfın ne zaman girdiğini göstermeden, odanın boş olduğu yarım bir cevap.",
-                  "style": "thought"
-                }
-              ]
-            }
-          ],
-          "effects": [
-            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
-            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
-            { "type": "VAR", "var": "k3_kismi", "op": "set", "value": true },
-            {
-              "type": "MARK",
-              "quality": "GOOD",
-              "feedback": "Odanın boş olduğunu gösterdin; kaydın kesildiği dakikayla birleştirseydin tam çürütme olurdu.",
               "category": "SORGULAMA"
             }
           ]

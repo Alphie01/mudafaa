@@ -46,6 +46,28 @@ export function premiumOf(
   };
 }
 
+/**
+ * Sandbox / test verisinin hak verebildiği platformlar: production dışında hepsi; production'da yalnızca
+ * APPLE_ALLOW_SANDBOX (iOS) ve GOOGLE_ALLOW_TEST_PURCHASES (Android) açık olanlar. Satın alma, bildirim, yenileme
+ * ve erişim hesabı aynı kapıyı kullanır.
+ */
+export function sandboxPlatforms(
+  env: Pick<Env, 'NODE_ENV' | 'APPLE_ALLOW_SANDBOX' | 'GOOGLE_ALLOW_TEST_PURCHASES'>,
+): StorePlatform[] {
+  if (env.NODE_ENV !== 'production') return ['ANDROID', 'IOS'];
+  return [
+    ...(env.GOOGLE_ALLOW_TEST_PURCHASES ? ['ANDROID' as const] : []),
+    ...(env.APPLE_ALLOW_SANDBOX ? ['IOS' as const] : []),
+  ];
+}
+
+/** İade edilen dönemin başı bilinmiyorsa: geri alma anından bir fatura ayı (aylık abonelik) öncesi. */
+export function refundedPeriodStart(at: Date): Date {
+  const d = new Date(at);
+  d.setUTCMonth(d.getUTCMonth() - 1);
+  return d;
+}
+
 /** Aktif ya da yenilenecek, geri alınmamış abonelik REFRESH_INTERVAL'den eskiyse mağazaya yeniden sorulur. */
 export function needsRefresh(
   sub: Pick<Subscription, 'expiresAt' | 'autoRenewing' | 'checkedAt' | 'revokedAt'>,
@@ -65,9 +87,8 @@ export function assertEnvironmentAllowed(
   platform: StorePlatform,
   environment: StoreEnvironment,
 ): void {
-  if (env.NODE_ENV !== 'production' || environment === 'PRODUCTION') return;
-  const allowed = platform === 'IOS' ? env.APPLE_ALLOW_SANDBOX : env.GOOGLE_ALLOW_TEST_PURCHASES;
-  if (!allowed) throw new ApiError(400, 'purchase_invalid', 'Test (sandbox) satın alması bu sunucuda kabul edilmez.');
+  if (environment === 'PRODUCTION' || sandboxPlatforms(env).includes(platform)) return;
+  throw new ApiError(400, 'purchase_invalid', 'Test (sandbox) satın alması bu sunucuda kabul edilmez.');
 }
 
 const tokenInUse = (): ApiError =>
@@ -99,9 +120,21 @@ export class EntitlementService {
     if (paid.length === 0) return out;
     const owned = await this.prisma.caseEntitlement.findMany({
       where: { userId, caseId: { in: paid.map((c) => c.id) } },
-      select: { caseId: true },
+      select: {
+        caseId: true,
+        sandbox: true,
+        purchase: { select: { platform: true } },
+        subscription: { select: { platform: true } },
+      },
     });
-    const ownedIds = new Set(owned.map((e) => e.caseId));
+    // Sandbox / test kaynaklı hak, platformunun sandbox kapısı kapalıyken sayılmaz.
+    const allowed = sandboxPlatforms(this.env);
+    const counts = (e: (typeof owned)[number]): boolean => {
+      if (!e.sandbox) return true;
+      const platform = e.purchase?.platform ?? e.subscription?.platform;
+      return platform !== undefined && allowed.includes(platform);
+    };
+    const ownedIds = new Set(owned.filter(counts).map((e) => e.caseId));
     for (const c of paid) out.set(c.id, ownedIds.has(c.id) ? 'OWNED' : 'PAID_LOCKED');
     return out;
   }
@@ -118,8 +151,15 @@ export class EntitlementService {
   }
 
   // ── Premium ──
+  /** Kullanıcının en geç biten aboneliği; sandbox kapısı kapalı platformun sandbox aboneliği sayılmaz. */
   private latestSubscription(userId: string): Promise<Subscription | null> {
-    return this.prisma.subscription.findFirst({ where: { userId }, orderBy: { expiresAt: 'desc' } });
+    return this.prisma.subscription.findFirst({
+      where: {
+        userId,
+        OR: [{ environment: 'PRODUCTION' }, { environment: 'SANDBOX', platform: { in: sandboxPlatforms(this.env) } }],
+      },
+      orderBy: { expiresAt: 'desc' },
+    });
   }
 
   /**
@@ -292,13 +332,25 @@ export class EntitlementService {
     });
   }
 
-  /** Aboneliği geri alır (iade / aile paylaşımı iptali): bitiş = geri alma anı, yenileme kapalı. */
-  async revokeSubscription(platform: StorePlatform, key: string, at: Date): Promise<boolean> {
+  /**
+   * Aboneliği geri alır (iade / geri alma): bitiş = geri alma anı, yenileme kapalı. İade edilen dönemde yapılan
+   * premium seçimleri de geri alınır (seçim `createdAt` ≥ dönem başı; dönem başı bilinmiyorsa geri alma − 1 ay).
+   * Normal süre dolumunda (updateSubscription) seçimler kalıcıdır.
+   */
+  async revokeSubscription(
+    platform: StorePlatform,
+    key: string,
+    at: Date,
+    periodStart: Date = refundedPeriodStart(at),
+  ): Promise<boolean> {
     return this.prisma.$transaction(async (tx) => {
       const sub = await tx.subscription.findFirst({
         where: { platform, OR: [{ originalId: key }, { latestToken: key }] },
       });
       if (sub === null) return false;
+      await tx.caseEntitlement.deleteMany({
+        where: { subscriptionId: sub.id, source: 'PREMIUM_PICK', createdAt: { gte: periodStart } },
+      });
       await tx.subscription.update({
         where: { id: sub.id },
         data: {
@@ -331,6 +383,7 @@ export class EntitlementService {
       where: { platform, OR: [{ originalId: token }, { latestToken: token }] },
     });
     if (sub === null) return false;
+    if (sub.environment === 'SANDBOX' && !sandboxPlatforms(this.env).includes(platform)) return false;
     const v = await this.verifier.for(platform).verifySubscription(productId, token);
     return this.updateSubscription(platform, token, {
       expiresAt: v.expiresAt,

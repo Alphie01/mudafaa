@@ -1,17 +1,23 @@
-import { timingSafeEqual } from 'node:crypto';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { PRODUCT_PREMIUM } from '@mudafaa/case-schema';
 import { z } from 'zod';
 import { ApiError } from '../../common/api-error.js';
 import { ENV, type Env } from '../../config/env.js';
 import { CLOCK, type Clock } from './clock.js';
-import { EntitlementService } from './entitlement.service.js';
+import { EntitlementService, sandboxPlatforms } from './entitlement.service.js';
 import type { AppleNotificationDecoder } from './store/apple.verifier.js';
 import { purchaseInvalid, storeNotConfigured } from './store/verifier.js';
 
 /** App Store bildirim çözücüsünün enjeksiyon token'ı (e2e testleri imzasız sahte çözücüyle değiştirir). */
 export const APPLE_NOTIFICATIONS = Symbol('APPLE_NOTIFICATIONS');
 export type AppleNotifications = Pick<AppleNotificationDecoder, 'decode'>;
+
+/** Pub/Sub push OIDC token doğrulayıcısının enjeksiyon token'ı (e2e testleri sahte doğrulayıcı kullanır). */
+export const GOOGLE_OIDC = Symbol('GOOGLE_OIDC');
+/** İmzası, süresi ve audience'ı doğrulanmış token'ın kimlik alanları; geçersiz token'da hata fırlatır. */
+export interface GoogleOidcVerifier {
+  verify(idToken: string, audience: string): Promise<{ email?: string; emailVerified?: boolean }>;
+}
 
 /** Pub/Sub push gövdesi: `message.data` base64 JSON (DeveloperNotification). */
 export const PubSubPush = z.object({
@@ -46,7 +52,9 @@ export type NotificationResult = { handled: boolean; action: string };
 /**
  * Mağaza sunucu bildirimleri: iade, geri alma, yenileme ve süre dolumu hesaba yansıtılır.
  * - App Store Server Notifications v2: imzalı yük Apple kök sertifikalarıyla doğrulanır.
- * - Google Play RTDN (Pub/Sub push): `?secret=` paylaşılan anahtarla (GOOGLE_RTDN_SECRET) doğrulanır.
+ * - Google Play RTDN (Pub/Sub push): Google imzalı OIDC Bearer token'ı; audience GOOGLE_RTDN_AUDIENCE olmalı,
+ *   GOOGLE_RTDN_SERVICE_ACCOUNT tanımlıysa token o servis hesabına ait olmalı.
+ * Sandbox kapısı kapalıyken (production, APPLE_ALLOW_SANDBOX=false) sandbox bildirimleri hiçbir şey değiştirmez.
  */
 @Injectable()
 export class StoreNotificationsService {
@@ -55,6 +63,7 @@ export class StoreNotificationsService {
   constructor(
     private readonly entitlements: EntitlementService,
     @Inject(APPLE_NOTIFICATIONS) private readonly apple: AppleNotifications,
+    @Inject(GOOGLE_OIDC) private readonly oidc: GoogleOidcVerifier,
     @Inject(ENV) private readonly env: Env,
     @Inject(CLOCK) private readonly now: Clock,
   ) {}
@@ -62,6 +71,10 @@ export class StoreNotificationsService {
   // ── App Store ──
   async handleApple(signedPayload: string): Promise<NotificationResult> {
     const n = await this.apple.decode(signedPayload);
+    if (n.environment === 'SANDBOX' && !sandboxPlatforms(this.env).includes('IOS')) {
+      this.logger.warn(`Sandbox App Store bildirimi yok sayıldı (${n.type}); APPLE_ALLOW_SANDBOX kapalı.`);
+      return { handled: false, action: 'ignored:sandbox' };
+    }
     const tx = n.transaction;
     if (tx === undefined) return { handled: false, action: `ignored:${n.type}` };
     const product = tx.productId;
@@ -70,7 +83,9 @@ export class StoreNotificationsService {
       case 'REFUND':
       case 'REVOKE': {
         if (product === PRODUCT_PREMIUM && tx.originalTransactionId !== undefined) {
-          const sub = await this.entitlements.revokeSubscription('IOS', tx.originalTransactionId, at);
+          // İade edilen dönemin başı işlemin satın alma (yenileme) tarihidir; o tarihten sonraki seçimler geri alınır.
+          const periodStart = tx.purchaseDate === undefined ? undefined : new Date(tx.purchaseDate);
+          const sub = await this.entitlements.revokeSubscription('IOS', tx.originalTransactionId, at, periodStart);
           if (tx.transactionId !== undefined) await this.entitlements.revokePurchase('IOS', tx.transactionId, at);
           return { handled: sub, action: 'subscription_revoked' };
         }
@@ -95,14 +110,24 @@ export class StoreNotificationsService {
   }
 
   // ── Google Play ──
-  /** Paylaşılan anahtar sabit zamanlı karşılaştırılır; tanımsızsa uç kapalıdır (503). */
-  assertGoogleSecret(secret: string | undefined): void {
-    const expected = this.env.GOOGLE_RTDN_SECRET;
-    if (expected === undefined) throw storeNotConfigured('Play bildirimleri yapılandırılmamış.');
-    const a = Buffer.from(secret ?? '');
-    const b = Buffer.from(expected);
-    if (a.length !== b.length || !timingSafeEqual(a, b)) {
-      throw new ApiError(401, 'unauthorized', 'Bildirim anahtarı geçersiz.');
+  /** Pub/Sub push isteğinin `Authorization: Bearer <OIDC>` başlığı; audience tanımsızsa uç kapalıdır (503). */
+  async authenticateGoogle(authorization: string | undefined): Promise<void> {
+    const audience = this.env.GOOGLE_RTDN_AUDIENCE;
+    if (audience === undefined) throw storeNotConfigured('Play bildirimleri yapılandırılmamış.');
+    const m = /^Bearer\s+(\S+)$/i.exec(authorization ?? '');
+    const unauthorized = () => new ApiError(401, 'unauthorized', 'Bildirim kimliği doğrulanamadı.');
+    if (m === null) throw unauthorized();
+    let identity: { email?: string; emailVerified?: boolean };
+    try {
+      identity = await this.oidc.verify(m[1] as string, audience);
+    } catch (e) {
+      this.logger.warn(`Play bildirimi OIDC doğrulaması başarısız: ${(e as Error).message}`);
+      throw unauthorized();
+    }
+    const expected = this.env.GOOGLE_RTDN_SERVICE_ACCOUNT;
+    if (expected !== undefined && (identity.email !== expected || identity.emailVerified !== true)) {
+      this.logger.warn(`Play bildirimi beklenmeyen servis hesabından: ${identity.email ?? '?'}`);
+      throw unauthorized();
     }
   }
 

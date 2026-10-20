@@ -6,6 +6,8 @@ import {
   EntitlementService,
   isFreeCase,
   needsRefresh,
+  refundedPeriodStart,
+  sandboxPlatforms,
   PREMIUM_PICKS_PER_PERIOD,
   premiumOf,
 } from '../../src/modules/purchases/entitlement.service.js';
@@ -20,9 +22,18 @@ const base = {
   FIREBASE_PROJECT_ID: 'demo-mudafaa',
 };
 
-function service(opts: { owned?: string[]; sub?: Record<string, unknown> | null; paywall?: boolean } = {}) {
+function service(
+  opts: {
+    owned?: (string | Record<string, unknown>)[];
+    sub?: Record<string, unknown> | null;
+    paywall?: boolean;
+    env?: Record<string, string>;
+  } = {},
+) {
   const prisma = {
-    caseEntitlement: { findMany: vi.fn(async () => (opts.owned ?? []).map((caseId) => ({ caseId }))) },
+    caseEntitlement: {
+      findMany: vi.fn(async () => (opts.owned ?? []).map((e) => (typeof e === 'string' ? { caseId: e } : e))),
+    },
     subscription: {
       findFirst: vi.fn(async () => opts.sub ?? null),
       update: vi.fn(async ({ data }: { data: Record<string, unknown> }) => ({ ...opts.sub, ...data })),
@@ -30,7 +41,7 @@ function service(opts: { owned?: string[]; sub?: Record<string, unknown> | null;
   };
   const verifySubscription = vi.fn();
   const verifier = { for: () => ({ verifySubscription, verifyProduct: vi.fn() }) };
-  const env = loadEnv({ ...base, ...(opts.paywall === false ? { PAYWALL_ENABLED: 'false' } : {}) });
+  const env = loadEnv({ ...base, ...(opts.paywall === false ? { PAYWALL_ENABLED: 'false' } : {}), ...opts.env });
   const svc = new EntitlementService(
     prisma as unknown as PrismaService,
     verifier as unknown as PurchaseVerifier,
@@ -95,10 +106,9 @@ describe('EntitlementService.accessMap', () => {
     const { svc, prisma } = service({ owned: ['c'] });
     const m = await svc.accessMap('u', cases);
     expect([...m.values()]).toEqual(['FREE', 'FREE', 'OWNED', 'PAID_LOCKED']);
-    expect(prisma.caseEntitlement.findMany).toHaveBeenCalledWith({
-      where: { userId: 'u', caseId: { in: ['c', 'd'] } },
-      select: { caseId: true },
-    });
+    expect(prisma.caseEntitlement.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({ where: { userId: 'u', caseId: { in: ['c', 'd'] } } }),
+    );
   });
 
   it('paywall disabled (non-production only) → everything free without a query', async () => {
@@ -178,5 +188,52 @@ describe('assertEnvironmentAllowed', () => {
 
   it('outside production sandbox purchases are accepted', () => {
     expect(() => assertEnvironmentAllowed(loadEnv(base), 'IOS', 'SANDBOX')).not.toThrow();
+  });
+});
+
+describe('sandbox gate', () => {
+  const cases = [
+    { id: 'ios', number: 10 },
+    { id: 'and', number: 11 },
+    { id: 'real', number: 12 },
+  ];
+  const owned = [
+    { caseId: 'ios', sandbox: true, purchase: { platform: 'IOS' }, subscription: null },
+    { caseId: 'and', sandbox: true, purchase: null, subscription: { platform: 'ANDROID' } },
+    { caseId: 'real', sandbox: false, purchase: { platform: 'IOS' }, subscription: null },
+  ];
+
+  it('sandboxPlatforms: everything outside production, flags in production', () => {
+    expect(sandboxPlatforms(loadEnv(base))).toEqual(['ANDROID', 'IOS']);
+    expect(sandboxPlatforms(loadEnv({ ...base, NODE_ENV: 'production' }))).toEqual([]);
+    expect(sandboxPlatforms(loadEnv({ ...base, NODE_ENV: 'production', APPLE_ALLOW_SANDBOX: 'true' }))).toEqual([
+      'IOS',
+    ]);
+  });
+
+  it('sandbox entitlements stop counting in production while the flag is off', async () => {
+    const off = service({ owned, env: { NODE_ENV: 'production' } });
+    expect([...(await off.svc.accessMap('u', cases)).values()]).toEqual(['PAID_LOCKED', 'PAID_LOCKED', 'OWNED']);
+    const ios = service({ owned, env: { NODE_ENV: 'production', APPLE_ALLOW_SANDBOX: 'true' } });
+    expect([...(await ios.svc.accessMap('u', cases)).values()]).toEqual(['OWNED', 'PAID_LOCKED', 'OWNED']);
+  });
+
+  it('sandbox subscriptions are excluded from premium in production while the flag is off', async () => {
+    const { svc, prisma } = service({ env: { NODE_ENV: 'production' } });
+    await svc.premium('u');
+    expect(prisma.subscription.findFirst).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: {
+          userId: 'u',
+          OR: [{ environment: 'PRODUCTION' }, { environment: 'SANDBOX', platform: { in: [] } }],
+        },
+      }),
+    );
+  });
+});
+
+describe('refundedPeriodStart', () => {
+  it('falls back to one billing month before the revocation', () => {
+    expect(refundedPeriodStart(new Date('2026-10-20T12:00:00.000Z')).toISOString()).toBe('2026-09-20T12:00:00.000Z');
   });
 });

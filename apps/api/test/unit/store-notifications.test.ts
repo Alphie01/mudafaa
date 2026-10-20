@@ -22,13 +22,21 @@ function service(notification?: Partial<AppleNotification>, env: Record<string, 
   const decoder = {
     decode: vi.fn(async () => ({ type: 'TEST', subtype: undefined, environment: 'SANDBOX', ...notification })),
   };
+  // Sahte OIDC: "ok:<e-posta>" geçerli token; audience ayrıca kaydedilir.
+  const oidc = {
+    verify: vi.fn(async (token: string) => {
+      if (!token.startsWith('ok:')) throw new Error('invalid signature');
+      return { email: token.slice(3), emailVerified: true };
+    }),
+  };
   const svc = new StoreNotificationsService(
     entitlements as unknown as EntitlementService,
     decoder as never,
+    oidc,
     loadEnv({ ...base, ...env }),
     () => NOW,
   );
-  return { svc, entitlements };
+  return { svc, entitlements, oidc };
 }
 
 describe('App Store notifications', () => {
@@ -41,13 +49,14 @@ describe('App Store notifications', () => {
     expect(entitlements.revokePurchase).toHaveBeenCalledWith('IOS', '2001', new Date(NOW.getTime() - 5000));
   });
 
-  it('REVOKE of the subscription ends it by originalTransactionId', async () => {
+  it('REVOKE of the subscription ends it by originalTransactionId; the refunded period starts at purchaseDate', async () => {
+    const purchaseDate = NOW.getTime() - 5 * 86_400_000;
     const { svc, entitlements } = service({
       type: 'REVOKE',
-      transaction: { transactionId: '3002', originalTransactionId: '3000', productId: 'premium_aylik' },
+      transaction: { transactionId: '3002', originalTransactionId: '3000', productId: 'premium_aylik', purchaseDate },
     });
     expect((await svc.handleApple('jws')).action).toBe('subscription_revoked');
-    expect(entitlements.revokeSubscription).toHaveBeenCalledWith('IOS', '3000', NOW);
+    expect(entitlements.revokeSubscription).toHaveBeenCalledWith('IOS', '3000', NOW, new Date(purchaseDate));
     expect(entitlements.revokePurchase).toHaveBeenCalledWith('IOS', '3002', NOW);
   });
 
@@ -65,6 +74,17 @@ describe('App Store notifications', () => {
       expiresAt: new Date(NOW.getTime() + 1000),
       autoRenewing: false,
     });
+  });
+
+  it('production ignores SANDBOX notifications unless APPLE_ALLOW_SANDBOX', async () => {
+    const refund = { type: 'REFUND', transaction: { transactionId: '1', productId: 'dava_kilidi' } };
+    const off = service(refund, { NODE_ENV: 'production' });
+    expect(await off.svc.handleApple('jws')).toEqual({ handled: false, action: 'ignored:sandbox' });
+    expect(off.entitlements.revokePurchase).not.toHaveBeenCalled();
+    const on = service(refund, { NODE_ENV: 'production', APPLE_ALLOW_SANDBOX: 'true' });
+    expect((await on.svc.handleApple('jws')).action).toBe('purchase_revoked');
+    const prodNotification = service({ ...refund, environment: 'PRODUCTION' }, { NODE_ENV: 'production' });
+    expect((await prodNotification.svc.handleApple('jws')).action).toBe('purchase_revoked');
   });
 
   it('other notification types are acknowledged without changes', async () => {
@@ -106,15 +126,33 @@ describe('AppleNotificationDecoder', () => {
 describe('Google Play RTDN', () => {
   const push = (data: unknown) => ({ message: { data: Buffer.from(JSON.stringify(data)).toString('base64') } });
 
-  it('requires GOOGLE_RTDN_SECRET and compares it exactly', () => {
-    expect(() => service().svc.assertGoogleSecret('x')).toThrow(
-      expect.objectContaining({ status: 503, code: 'store_not_configured' }),
-    );
-    const { svc } = service(undefined, { GOOGLE_RTDN_SECRET: 'gizli' });
-    expect(() => svc.assertGoogleSecret('gizli')).not.toThrow();
-    for (const bad of [undefined, '', 'gizl', 'gizli2']) {
-      expect(() => svc.assertGoogleSecret(bad)).toThrow(expect.objectContaining({ status: 401 }));
+  const AUD = 'https://mudafaa.sehirkilavuzu.com/v1/store-notifications/google';
+
+  it('push authentication: endpoint closed without GOOGLE_RTDN_AUDIENCE', async () => {
+    await expect(service().svc.authenticateGoogle('Bearer ok:x')).rejects.toMatchObject({
+      status: 503,
+      code: 'store_not_configured',
+    });
+  });
+
+  it('push authentication: verifies the OIDC Bearer token against the audience', async () => {
+    const { svc, oidc } = service(undefined, { GOOGLE_RTDN_AUDIENCE: AUD });
+    await expect(svc.authenticateGoogle('Bearer ok:pubsub@p.iam.gserviceaccount.com')).resolves.toBeUndefined();
+    expect(oidc.verify).toHaveBeenCalledWith('ok:pubsub@p.iam.gserviceaccount.com', AUD);
+    for (const bad of [undefined, '', 'ok:x', 'Basic ok:x', 'Bearer kotu']) {
+      await expect(svc.authenticateGoogle(bad)).rejects.toMatchObject({ status: 401, code: 'unauthorized' });
     }
+  });
+
+  it('push authentication: optional service account e-mail check', async () => {
+    const { svc } = service(undefined, {
+      GOOGLE_RTDN_AUDIENCE: AUD,
+      GOOGLE_RTDN_SERVICE_ACCOUNT: 'pubsub@p.iam.gserviceaccount.com',
+    });
+    await expect(svc.authenticateGoogle('Bearer ok:pubsub@p.iam.gserviceaccount.com')).resolves.toBeUndefined();
+    await expect(svc.authenticateGoogle('Bearer ok:baska@p.iam.gserviceaccount.com')).rejects.toMatchObject({
+      status: 401,
+    });
   });
 
   it('decodes the Pub/Sub message and rejects garbage', () => {

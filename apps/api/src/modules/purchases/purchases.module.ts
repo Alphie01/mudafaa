@@ -7,8 +7,10 @@ import { StoreNotificationsController } from './store-notifications.controller.j
 import {
   APPLE_NOTIFICATIONS,
   type AppleNotifications,
+  GOOGLE_OIDC,
   StoreNotificationsService,
 } from './store-notifications.service.js';
+import { GoogleIdTokenVerifier } from './store/google-oidc.js';
 import { AppleNotificationDecoder } from './store/apple.verifier.js';
 import { PurchaseVerifier } from './store/purchase-verifier.service.js';
 
@@ -22,6 +24,7 @@ const systemClock: Clock = () => new Date();
     EntitlementService,
     StoreNotificationsService,
     { provide: CLOCK, useValue: systemClock },
+    { provide: GOOGLE_OIDC, useClass: GoogleIdTokenVerifier },
     {
       provide: APPLE_NOTIFICATIONS,
       inject: [ENV],

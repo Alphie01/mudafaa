@@ -55,8 +55,10 @@ const EnvSchema = z
       .enum(['true', 'false'])
       .default('false')
       .transform((v) => v === 'true'),
-    // Play gerçek zamanlı geliştirici bildirimleri (Pub/Sub push) için paylaşılan gizli anahtar (`?secret=`).
-    GOOGLE_RTDN_SECRET: optionalText,
+    // Play gerçek zamanlı geliştirici bildirimleri (Pub/Sub push, OIDC kimlik doğrulamalı): push aboneliğinde verilen
+    // audience (tanımsızsa uç kapalı, 503) ve isteğe bağlı olarak token'ı imzalayan servis hesabının e-postası.
+    GOOGLE_RTDN_AUDIENCE: optionalText,
+    GOOGLE_RTDN_SERVICE_ACCOUNT: optionalText,
     APPLE_APP_ID: z.preprocess(blankAsUndefined, z.coerce.number().int().positive().optional()),
   })
   .superRefine((env, ctx) => {

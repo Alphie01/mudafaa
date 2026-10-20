@@ -28,3 +28,4 @@ export { report } from './report.js';
 export { view } from './view/index.js';
 export type { ViewMeta } from './view/index.js';
 export { enumerateActions } from './enumerate.js';
+export { migrateState } from './migrate.js';

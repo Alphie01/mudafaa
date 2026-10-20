@@ -166,7 +166,7 @@ describe('purchases', () => {
 
   it('fake verification mode is rejected in production', () => {
     expect(() =>
-      testEnv({ NODE_ENV: 'production', PAYWALL_ENABLED: 'true', FIREBASE_AUTH_EMULATOR_HOST: undefined }),
+      testEnv({ NODE_ENV: 'production', PURCHASE_VERIFY_MODE: 'fake', FIREBASE_AUTH_EMULATOR_HOST: undefined }),
     ).toThrow(/PURCHASE_VERIFY_MODE/);
   });
 });

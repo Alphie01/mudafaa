@@ -28,8 +28,8 @@ export function testEnv(overrides: Record<string, string | undefined> = {}): Env
     VALIDATOR_MAX_STATES: '1000',
     VALIDATOR_WALKS: '10',
     VALIDATOR_MAX_MS: '60000',
-    PURCHASE_VERIFY_MODE: 'fake',
-    PAYWALL_ENABLED: 'false',
+    // production ortamını deneyen testler (ör. hukuki inceleme) için satın alma varsayılanları gerçek kalır.
+    ...(overrides.NODE_ENV === 'production' ? {} : { PURCHASE_VERIFY_MODE: 'fake', PAYWALL_ENABLED: 'false' }),
     ...overrides,
   });
 }

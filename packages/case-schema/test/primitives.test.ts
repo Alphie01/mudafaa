@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Category, Expression, Hex, Id, Rect, Tone } from '@mudafaa/case-schema';
+import { Category, EvidenceKind, Expression, Hex, Id, Rect, Tone } from '@mudafaa/case-schema';
 
 describe('primitives', () => {
   it('Id rules', () => {
@@ -49,6 +49,12 @@ describe('primitives', () => {
     ]);
     expect(Category.safeParse('HUKUK').success).toBe(false);
     expect(Category.safeParse('hukuki_bilgi').success).toBe(false);
+  });
+
+  it('EvidenceKind is exactly the three evidence kinds', () => {
+    expect(EvidenceKind.options).toEqual(['EVIDENCE', 'CLUE', 'INSIGHT']);
+    expect(EvidenceKind.safeParse('CLUES').success).toBe(false);
+    expect(EvidenceKind.safeParse('clue').success).toBe(false);
   });
 
   it('Expression is exactly the five face expressions', () => {

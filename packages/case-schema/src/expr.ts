@@ -1,12 +1,9 @@
 import { z } from 'zod';
-import { Category, Id } from './primitives.js';
+import { Category, EvidenceKind, Id } from './primitives.js';
 
 // Val ve Cond birbirini çağırır (`if` bir Cond taşır, `cmp` iki Val). Zod bu döngüden tip çıkaramaz; bu yüzden
 // tipler elle yazılır ve şemalar bunlarla işaretlenir (`z.ZodType<Val>`). Şema tipin dışına çıkarsa derleme
 // hata verir; tipte olup şemada olmayan bir biçimi test tabloları (test/expr.test.ts) yakalar.
-
-/** `{count:'evidence'}` süzgeci: EvidenceDef.kind ile aynı değerler. */
-const EvidenceKind = z.enum(['EVIDENCE', 'CLUE', 'INSIGHT']);
 
 const CmpOp = z.enum(['==', '!=', '<', '<=', '>', '>=']);
 

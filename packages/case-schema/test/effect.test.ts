@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Effect } from '@mudafaa/case-schema';
+import { Effect, MarkQuality } from '@mudafaa/case-schema';
 
 // Her etki türünden en az bir örnek var: şemada bir tür eksik kalırsa bu tablo kırılır.
 const validEffects: [name: string, value: unknown][] = [
@@ -82,6 +82,10 @@ describe('Effect', () => {
 
   it('Effect rejects unknown category', () => {
     expect(Effect.safeParse({ type: 'SCORE', category: 'HUKUK', amount: 10 }).success).toBe(false);
+  });
+
+  it('MarkQuality is exactly GOOD, BAD and NEUTRAL', () => {
+    expect(MarkQuality.options).toEqual(['GOOD', 'BAD', 'NEUTRAL']);
   });
 
   it.each(validEffects)('accepts %s unchanged', (_name, value) => {

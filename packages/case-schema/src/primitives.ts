@@ -35,6 +35,10 @@ export type Expression = z.infer<typeof Expression>;
 export const Tone = z.enum(['success', 'error', 'neutral', 'special', 'info']);
 export type Tone = z.infer<typeof Tone>;
 
+/** Delil türü: `EvidenceDef.kind` ile `{count:'evidence', kind}` süzgeci bu şemayı paylaşır. */
+export const EvidenceKind = z.enum(['EVIDENCE', 'CLUE', 'INSIGHT']);
+export type EvidenceKind = z.infer<typeof EvidenceKind>;
+
 /** Sahne birimiyle tamsayı dikdörtgen: başlangıç noktası ≥ 0, boyut > 0. */
 export const Rect = z.strictObject({
   x: z.int().min(0),

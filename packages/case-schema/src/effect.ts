@@ -4,6 +4,10 @@ import { Category, Id } from './primitives.js';
 
 // IF kendi türünden etkiler taşır; Val/Cond'daki gibi tip elle yazılır, şema onunla işaretlenir.
 
+/** Kalite işareti: `MARK` etkisinin `quality` alanı ile seçeneğin `quality.q` alanı bu şemayı paylaşır. */
+export const MarkQuality = z.enum(['GOOD', 'BAD', 'NEUTRAL']);
+export type MarkQuality = z.infer<typeof MarkQuality>;
+
 /** Oyun durumunu değiştiren etki. */
 export type Effect =
   | { type: 'VAR'; var: Id; op: 'set' | 'inc' | 'dec'; value: Val }
@@ -24,7 +28,7 @@ export const Effect: z.ZodType<Effect> = z.lazy(() =>
     z.strictObject({ type: z.literal('MEET'), character: Id }),
     z.strictObject({
       type: z.literal('MARK'),
-      quality: z.enum(['GOOD', 'BAD', 'NEUTRAL']),
+      quality: MarkQuality,
       // Boş metni şema değil doğrulayıcı raporlar (MISSING_TEXT); bu yüzden `.min(1)` yok.
       feedback: z.string(),
       category: Category.optional(),

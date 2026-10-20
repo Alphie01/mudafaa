@@ -212,7 +212,7 @@
           "cost": [{ "var": "ara2_ap", "amount": 1 }],
           "next": "ARA2_BILDIR",
           "maxUses": 1,
-          "description": "CMK 158 · bildiklerini yaz",
+          "description": "Başsavcılığa yaz",
           "visibleWhen": {
             "any": [
               { "hasEvidence": "ded_mektup" },
@@ -312,7 +312,7 @@
         {
           "id": "AR_NOT",
           "kind": "OPTION",
-          "label": "Leyla’nın notlarını fotokopiyle dosyaya koy",
+          "label": "Leyla’nın 2004 notlarını fotokopiyle dilekçeye ekle, dosyaya koy",
           "responses": [
             {
               "lines": [
@@ -367,6 +367,10 @@
             },
             {
               "speaker": "narrator",
+              "text": "Dilekçenin başlığı kısaydı: “Suç duyurusu ve bilgi sunma (CMK 158).” Altında bir dizi ek; her biri bir kayıt."
+            },
+            {
+              "speaker": "narrator",
               "text": "Savcı Selim Karaman’ın odası küçüktü: dosya yığınları, bir saksı, sararmış bir takvim. Dilekçemi okudu. İki kez. Ekleri tek tek çevirdi."
             },
             {
@@ -397,6 +401,7 @@
               "style": "card",
               "bg": "adliye"
             },
+            { "speaker": "narrator", "text": "Dilekçenin başlığı kısaydı: “Suç duyurusu ve bilgi sunma (CMK 158).”" },
             {
               "speaker": "narrator",
               "text": "Savcı Karaman dilekçemi okudu. Bir kasa raporu, bir kamera, bir gömlek; ama bir mektup yok, bir ses yok."

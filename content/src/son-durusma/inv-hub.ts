@@ -171,9 +171,9 @@ leyla: Tanıklar. Bu dosyada iki kişi o koridordaydı: bir bulaşıkçı ve bir
 leyla: İki tanığın anlattığı aynı geceyse, saatleri de aynı olmalı. Değilse biri yanılıyor. Hangisinin yanıldığını onlara değil, saatlere sor.
 leyla: Bir de şunu unutma: tanığa ne diyeceğini söylediğin an o senin tanığın olur. Senin tanığın da kimsenin tanığı değildir.
 leyla: Bulaşıkçı yaşlı bir adammış. Yaşlı insanlar saat sormaz; dolmuş sorar, ezan sorar, bir dizinin başlangıcını sorar. Onun saatini bul.
-leyla: Bir de şu: ölümden sonra ilk ifade önemlidir. Bir buçuk saat sonra alınmış, düzgün cümleli bir ifade gördüğünde kendine sor: bu adam bu cümleleri ne zaman kurdu?
+leyla: Bir de şu: ilk ifadeyi tek başına okuma. Yanına öbür kâğıtları koy; tutanağı, telefon kaydını, olay yeri fotoğraflarını. Kâğıtlar birbirini okur.
 > Leyla bir an pencereye baktı. Yağmur Uludağ’ın yamacından aşağı iniyordu.
-leyla: Şok geçiren insanlar düzgün konuşmaz Deniz. Kekeler, tekrar eder, saatleri karıştırır. Düzgün konuşan, ya çok güçlüdür ya da çok hazırlıklı.
+leyla: Bir saat iki kâğıtta farklı yazıyorsa hangisinin doğru olduğuna sen karar verme. Üçüncü bir kâğıt bul; bir makine, bir fiş, bir sefer çizelgesi.
 `,
     ),
     O(`

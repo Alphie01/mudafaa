@@ -529,7 +529,7 @@
             },
             {
               "speaker": "leyla",
-              "text": "Bir de şu: ölümden sonra ilk ifade önemlidir. Bir buçuk saat sonra alınmış, düzgün cümleli bir ifade gördüğünde kendine sor: bu adam bu cümleleri ne zaman kurdu?"
+              "text": "Bir de şu: ilk ifadeyi tek başına okuma. Yanına öbür kâğıtları koy; tutanağı, telefon kaydını, olay yeri fotoğraflarını. Kâğıtlar birbirini okur."
             },
             {
               "speaker": "narrator",
@@ -537,7 +537,7 @@
             },
             {
               "speaker": "leyla",
-              "text": "Şok geçiren insanlar düzgün konuşmaz Deniz. Kekeler, tekrar eder, saatleri karıştırır. Düzgün konuşan, ya çok güçlüdür ya da çok hazırlıklı."
+              "text": "Bir saat iki kâğıtta farklı yazıyorsa hangisinin doğru olduğuna sen karar verme. Üçüncü bir kâğıt bul; bir makine, bir fiş, bir sefer çizelgesi."
             }
           ]
         },
@@ -796,7 +796,13 @@
           ],
           "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
         },
-        { "id": "NURI_TARIK", "kind": "CONTINUE", "label": "Kapıda biri var", "role": "PRIMARY", "next": "INV_TARIK1" }
+        {
+          "id": "NURI_TARIK",
+          "kind": "CONTINUE",
+          "label": "Salondan biri geliyor",
+          "role": "PRIMARY",
+          "next": "INV_TARIK1"
+        }
       ]
     },
     {
@@ -1959,7 +1965,7 @@
         {
           "id": "SK_ANLAT",
           "kind": "OPTION",
-          "label": "“Ne gördüyseniz, ne duyduysanız; ne eksik, ne fazla.”",
+          "label": "“Ne gördüyseniz, ne duyduysanız; ne eksik, ne fazla. Gerisi mahkemenin işi.”",
           "responses": [
             {
               "lines": [
@@ -2459,7 +2465,7 @@
         {
           "id": "KS_KORU",
           "kind": "OPTION",
-          "label": "“Birlikte bir kez dinleyelim. Sonra silmeyin; bilirkişiye inceletelim.”",
+          "label": "“Silmeyin. Bu kayıt bilirkişiye gidecek.”",
           "responses": [
             {
               "lines": [
@@ -2521,7 +2527,7 @@
         {
           "id": "KS_KOPYA",
           "kind": "OPTION",
-          "label": "“Dinleyelim; ben de telefonuma kaydedeyim, yeter.”",
+          "label": "“Dinleyelim; ben de telefonuma kaydedeyim, dosyaya o kayıt yeter.”",
           "responses": [
             {
               "lines": [
@@ -2569,7 +2575,7 @@
         {
           "id": "KS_SONRA",
           "kind": "OPTION",
-          "label": "“Şimdi değil. Önce dosyayı bitireyim.”",
+          "label": "“Şimdi değil. Önce dosyayı bitireyim, sonra birlikte dinleriz.”",
           "responses": [
             {
               "lines": [
@@ -2607,7 +2613,7 @@
             { "speaker": "narrator", "text": "BÜRO — DOSYANIN ASLI", "style": "card", "bg": "buro" },
             {
               "speaker": "narrator",
-              "text": "İki sayfa. Saat 01.30’da, olaydan bir buçuk saat sonra alınmış; sakin, düzgün, noktalı virgüllü cümleler. Bir tanık ifadesinden çok bir rapor gibi."
+              "text": "İki sayfa. Saat 01.30’da, olaydan bir buçuk saat sonra alınmış. Saatler, adlar, bir kaçış; kolluğun daktilosundan çıkmış her ifade gibi kuru."
             },
             {
               "speaker": "player",
@@ -3175,7 +3181,7 @@
         {
           "id": "DIL_TARIK_HTS",
           "kind": "OPTION",
-          "label": "Baş tanığın HTS kaydı",
+          "label": "Baş tanığın HTS kaydı ve baz istasyonu dökümlerinin getirtilmesi",
           "cost": [{ "var": "slots", "amount": 1 }],
           "maxUses": 1,
           "next": "$stay",
@@ -3192,7 +3198,7 @@
         {
           "id": "DIL_DNA",
           "kind": "OPTION",
-          "label": "Bıçakta DNA incelemesi",
+          "label": "Bıçak sapında DNA ve parmak izi incelemesi",
           "cost": [{ "var": "slots", "amount": 1 }],
           "maxUses": 1,
           "next": "$stay",

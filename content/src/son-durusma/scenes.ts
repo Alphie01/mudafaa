@@ -67,7 +67,7 @@ export const scenes: CasePart = {
         sceneObject('ob_beyaz', 'Şeridin dışı', OB_BEYAZ, {
           discovers: 'clue_beyaz',
           score: { ARASTIRMA: 20 },
-          text: 'Kare 44, saat 00.52. Şeridin dışında işletme ortağı; bir polis memuruyla konuşuyor. Beyaz gömleği ütülü, yakası düzgün. Arka planda bir kare, kimsenin bakmadığı türden.',
+          text: 'Kare 44, saat 00.52. Şeridin dışında işletme ortağı; bir polis memuruyla konuşuyor. Beyaz gömleği ütülü, yakası düzgün.',
           short: 'Beyaz gömlekli ortak',
         }),
         sceneObject('ob_raki', 'Rakı kadehi', OB_RAKI, {

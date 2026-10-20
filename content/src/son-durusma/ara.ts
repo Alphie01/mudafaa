@@ -660,7 +660,7 @@ const cansuKarar = conversation('ARA_CANSU_K', {
 cansu: Mahkemeye mi çağıracaksınız beni? Abla ben bu işi kaybedersem kiramı ödeyemem. Bir de… Tarık abi Mudanya’da herkesi tanır.
 `),
   choices: [
-    option('CK_TANIK', '“Sizi tanık olarak bildireceğim; yalnızca gördüğünüzü anlatırsınız.”', {
+    option('CK_TANIK', '“Tanık olarak bildireceğim. Gördüğünüzü anlatırsınız.”', {
       score: { USUL_BILGISI: 50 },
       effects: [raise('cansu_tanik')],
       good: 'Fotoğrafı çeken ve o geceki değişikliği bilen kişiyi tanık olarak bildirdin; fotoğrafın kaynağı duruşmada sınanabilir (CMK 177–178).',
@@ -671,7 +671,7 @@ cansu: O kadar mı? Peki. Saat, fotoğraf, kasa. Bunları söylerim. Gerisini si
 `),
       next: HUB,
     }),
-    option('CK_IS', '“İşinizi kaybederseniz size iş bulurum; yeter ki gelin.”', {
+    option('CK_IS', '“İşinizi kaybederseniz size iş bulurum; yeter ki mahkemeye gelin.”', {
       effects: [inc('ethics'), raise('cansu_vaat'), raise('cansu_tanik'), score('SAVUNMA_STRATEJISI', -50)],
       bad: 'Tanığa tanıklığı karşılığında menfaat vaat ettin: meslek kurallarına aykırıdır (Av.K. 34) ve tanığı etkileme olarak değerlendirilebilir (TCK 277). Karşı taraf bunu duyarsa tanıklık değersizleşir.',
       category: 'SAVUNMA_STRATEJISI',
@@ -783,7 +783,7 @@ emir: Babam… babam salonun arkasındaydı. Leyla Hanım da. Babam ona bir şey
 `),
   ],
   choices: [
-    option('AE_DOGRU', '“Yapmadıysan yaptım deme. Kimse için.”', {
+    option('AE_DOGRU', '“Yapmadıysan yaptım deme. Ne baban için, ne benim için; kimse için.”', {
       visibleWhen: flag('kemal_teklif'),
       score: { SAVUNMA_STRATEJISI: 100 },
       effects: [raise('emir_kararli'), inc('trust', 10)],
@@ -959,7 +959,7 @@ const dil = story('ARA_DIL', {
       category: 'USUL_BILGISI',
       next: '$stay',
     }),
-    option('AD_DOLAP', 'Baş tanığın iş yerindeki dolabının aranması', {
+    option('AD_DOLAP', 'Baş tanığın meyhanedeki kişisel dolabının mahkemece aranması', {
       cost: slot2,
       maxUses: 1,
       score: { USUL_BILGISI: -30 },
@@ -1140,7 +1140,7 @@ kemal/kizgin: Sen sus! Sen yirmi iki yıl önce konuştun! Bu sefer o konuşacak
 kemal: Söyle ona. Sen söylersen dinler. Bana inanmaz; sana inanır.
 `),
   choices: [
-    option('AKS_RED', '“Hayır. Oğlunuz yapmadığını söylüyor; ona yapmadığı bir şeyi söyletmem.”', {
+    option('AKS_RED', '“Hayır. Yapmadığı bir şeyi ona söyletmem.”', {
       score: { SAVUNMA_STRATEJISI: 100 },
       effects: [raise('teklif_red')],
       good: 'Müvekkilin ailesinin baskısına rağmen masumiyetini söyleyen müvekkile gerçeğe aykırı bir ikrar önermeyi reddettin (Av.K. 34).',
@@ -1155,7 +1155,7 @@ kemal/uzgun: Ne yapacağım o zaman? Ben ne yapacağım?
 `),
       next: HUB,
     }),
-    option('AKS_DUSUN', '“Emir’le konuşurum; seçenekleri anlatırım.”', {
+    option('AKS_DUSUN', '“Emir’le konuşurum; seçenekleri, riskleriyle birlikte tek tek anlatırım.”', {
       effects: [raise('kemal_teklif')],
       neutral:
         'Müvekkile seçenekleri anlatmak avukatın işidir; ama aileden gelen bir “ikrar” planını taşımak, o planı müvekkilin önüne koymaktır.',
@@ -1166,7 +1166,7 @@ kemal: Anlat. Anlat ona. Otuz yıl ile dokuz yıl arasındaki farkı anlat.
 `),
       next: HUB,
     }),
-    option('AKS_EVET', '“Haklısınız; müebbet riski çok büyük.”', {
+    option('AKS_EVET', '“Haklısınız; müebbet riski çok büyük, bunu düşünmek gerek.”', {
       effects: [inc('ethics'), raise('kemal_teklif'), raise('teklif_kabul'), score('SAVUNMA_STRATEJISI', -100)],
       bad: 'Masumiyetini söyleyen müvekkil için ailenin “ikrar” planını onayladın; bu, gerçeğe aykırı bir savunmaya ilk adımdır (Av.K. 34).',
       category: 'SAVUNMA_STRATEJISI',
@@ -1258,7 +1258,7 @@ const sonNodes = [
   }),
   story('ARA_SON_T', {
     ...ARA,
-    title: 'Kapıdaki tanık',
+    title: 'Gece yarısı ziyaret',
     background: 'buro_gece',
     lines: B(`
 > Gece yarısına on dakika kala kapı çalındı. Bu kez gerçekten çalındı; iki kez, nazikçe.
@@ -1270,7 +1270,7 @@ tarik: Bir şey soracaktım ama… Yarın ne soracaksınız bana? Hazırlıklı 
 ~ Gece yarısı, bir tanık, bir fotoğraf ve bir soru. Bir ev sahibi, misafirinin ne yiyeceğini önceden sorar.
 `),
     choices: [
-      option('TS_SUS', '“Mahkemede görüşürüz Tarık Bey. İyi geceler.”', {
+      option('TS_SUS', '“Fotoğrafı Gülay Hanım’a iletirim. Mahkemede görüşürüz Tarık Bey; iyi geceler.”', {
         score: { SORGULAMA: 40 },
         good: 'Tanıkla dosyayı konuşmadın; kürsüdeki sorunu kürsüde sorarsın.',
         category: 'SORGULAMA',

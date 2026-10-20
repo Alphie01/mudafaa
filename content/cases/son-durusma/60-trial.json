@@ -520,7 +520,7 @@
         {
           "id": "H102_A",
           "kind": "OPTION",
-          "label": "“Katılıyoruz; ancak husumet sanığın değil, bilgisi pazartesi başladı.”",
+          "label": "“Katılıyoruz; ama Emir bunu pazartesi öğrendi.”",
           "responses": [
             {
               "lines": [
@@ -1519,7 +1519,7 @@
         {
           "id": "H105_YOK",
           "kind": "OPTION",
-          "label": "Talebimiz yok",
+          "label": "Talebimiz yok; deliller dosyada yeterince toplanmış",
           "responses": [{ "lines": [{ "speaker": "player", "text": "Şimdilik bir talebimiz yok Sayın Başkan." }] }],
           "quality": { "q": "NEUTRAL", "feedback": "Ek talepte bulunmadın." },
           "next": "H1_05B"
@@ -1550,7 +1550,7 @@
         {
           "id": "H105B_A",
           "kind": "OPTION",
-          "label": "Tahliye: tasarlama dayanakları ve tek görgü tanığının anlatımı sarsıldı; adli kontrol yeterli",
+          "label": "Tahliye: tanık sarsıldı; adli kontrol yeterli",
           "responses": [
             {
               "when": { "all": [{ "ref": "tasarlama_sarsildi" }, { "ref": "tanik_celiski" }] },
@@ -1614,14 +1614,17 @@
         {
           "id": "H105B_B",
           "kind": "OPTION",
-          "label": "Tahliye: müvekkil masumdur",
+          "label": "Tahliye: tutuklulukta geçen süre ve sabit adres; adli kontrol yeterli",
           "responses": [
             {
               "lines": [
-                { "speaker": "player", "text": "Müvekkil masumdur Sayın Başkan; tahliyesini istiyoruz." },
+                {
+                  "speaker": "player",
+                  "text": "Sanık üç aydır tutuklu Sayın Başkan. Sabit adresi, ailesi var; kaçma şüphesi yok. Adli kontrol yeterlidir."
+                },
                 {
                   "speaker": "baskan",
-                  "text": "Masumiyet karinesi herkes için geçerli müdafi. Somut bir gerekçe göremedim. Tutukluluğun devamına."
+                  "text": "Suçun niteliği ve mevcut delil durumu karşısında bunlar tek başına yeterli değil müdafi. Tutukluluğun devamına."
                 }
               ]
             }
@@ -1629,7 +1632,7 @@
           "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": -20 }],
           "quality": {
             "q": "NEUTRAL",
-            "feedback": "Tahliye talebi somut bir gerekçe ister; masumiyet karinesi herkes için zaten geçerlidir."
+            "feedback": "Süre ve sabit adres tek başına yetmez; tahliye için kuvvetli suç şüphesini sarsan somut bir bulgu göstermek gerekir."
           },
           "next": "H1_06"
         },

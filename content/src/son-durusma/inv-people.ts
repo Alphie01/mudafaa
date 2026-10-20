@@ -427,7 +427,7 @@ suleyman: Mahkemeye çağıracaklar beni. Savcı çağırdı zaten. Ben ne diyec
 ~ Tarık Sezer bu kahveye de uğramış. Bir tanık, öbür tanığa “gördüğünü söyle” diyor.
 `),
   choices: [
-    option('SK_ANLAT', '“Ne gördüyseniz, ne duyduysanız; ne eksik, ne fazla.”', {
+    option('SK_ANLAT', '“Ne gördüyseniz, ne duyduysanız; ne eksik, ne fazla. Gerisi mahkemenin işi.”', {
       score: { SAVUNMA_STRATEJISI: 50 },
       effects: [raise('suleyman_hazir')],
       good: 'Tanığa ne söyleyeceğini söylemedin; yalnızca kendi algısını anlatmasını istedin (Av.K. 34).',
@@ -643,7 +643,7 @@ export const kemalKararNode = (
 kemal: Dinleyeyim mi? Sen söyle avukat hanım. Yirmi iki yıl önce bir avukat bana ne yapacağımı söyledi. Şimdi sen söyle.
 `),
     choices: [
-      option(`${p}_KORU`, '“Birlikte bir kez dinleyelim. Sonra silmeyin; bilirkişiye inceletelim.”', {
+      option(`${p}_KORU`, '“Silmeyin. Bu kayıt bilirkişiye gidecek.”', {
         discovers: 'clue_sesli',
         score: { USUL_BILGISI: 100 },
         effects: [raise('sesli_korundu'), inc('legal_hits')],
@@ -664,7 +664,7 @@ kemal: Dokunmam. Yirmi iki yıldır hiçbir şeye dokunmadım zaten.
 `),
         next: ret,
       }),
-      option(`${p}_KOPYA`, '“Dinleyelim; ben de telefonuma kaydedeyim, yeter.”', {
+      option(`${p}_KOPYA`, '“Dinleyelim; ben de telefonuma kaydedeyim, dosyaya o kayıt yeter.”', {
         discovers: 'clue_sesli',
         score: { USUL_BILGISI: -30 },
         effects: [raise('sesli_korundu'), raise('sesli_kopya')],
@@ -679,7 +679,7 @@ kemal: Dokunmam. Yirmi iki yıldır hiçbir şeye dokunmadım zaten.
 `),
         next: ret,
       }),
-      option(`${p}_SONRA`, '“Şimdi değil. Önce dosyayı bitireyim.”', {
+      option(`${p}_SONRA`, '“Şimdi değil. Önce dosyayı bitireyim, sonra birlikte dinleriz.”', {
         neutral: 'Bir delili ertelemek bazen gerekir; ama dinlenmemiş bir kayıt, kimsenin bilmediği bir delildir.',
         responses: B(`
 - Şimdi değil Kemal Bey. Önce dosyayı bitireyim, sonra birlikte bakarız.
@@ -738,7 +738,7 @@ nuri: Tarık Bey. Her gece o kapatır. O gece de. Cansu’yu erkenden yolladı; 
 nuri: Arızalıymış. Tarık Bey öyle dedi. Bana sorarsan ışığı yanıyordu; ama ben kameradan ne anlarım, ben levrekten anlarım.
 `),
     }),
-    cont('NURI_TARIK', 'Kapıda biri var', 'INV_TARIK1', { role: 'PRIMARY' }),
+    cont('NURI_TARIK', 'Salondan biri geliyor', 'INV_TARIK1', { role: 'PRIMARY' }),
   ],
 });
 

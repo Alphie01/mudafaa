@@ -7,12 +7,13 @@ import { C1, INV, PRO, p1 } from './shared.js';
 // dosya, dosya ekranı ve strateji, Mudanya’da ilk sabah.
 
 const PR00 = T(`
-# 14 KASIM · GECE 23.35 — MUDANYA İSKELESİ [bg:liman_gece]
+# 14 KASIM · GECE — MUDANYA İSKELESİ [bg:liman_gece]
 > Mudanya’da deniz gece de çalışır. Dalgalar iskelenin ayaklarına vurur, çekilir, yeniden vurur; kıyıya ne getirdiğini sabah görürsün.
 > İskelenin ucundaki lambalardan ikisi yanıyordu. Üçüncüsü rüzgârda sallanıyor, ışığı denize bir düşüp bir kalkıyordu.
 > Balıkçı barınağının yanındaki meyhanenin neonu yağmurda kırmızı titriyordu: TOKER BAL K. I harfi aylardır yanmıyordu. Kimse yaptırmamıştı.
 > Kapının önünde nişan masasından kalmış balonlar, ıslak bir kaldırıma bağlı. Biri patlamış. Ötekiler rüzgârda birbirine sürtünüyor.
 > İçeride son sandalyeler masalara kaldırılmıştı. Mutfakta bulaşık suyu akıyor, bir radyo alçak sesle eski bir şarkı söylüyordu.
+> Bir rafın üstünde küçük bir cihazın kırmızı ışığı yanıyordu; yağmurlu camda ikinci bir kırmızı nokta gibi.
 > Mutfaktan ofise uzanan dar koridorda bir kapı kapalıydı. Kapının altından sarı bir ışık sızıyordu.
 @BİR ADAM: Otur. Lütfen otur. Sana anlatmam gereken bir şey var; yirmi iki yıldır taşıyorum.
 > Bir sessizlik. Bir sandalye çekildi. Radyo şarkıyı bitirdi, reklama geçti.
@@ -26,11 +27,9 @@ const PR00 = T(`
 > Arka kapı. Yağmur. Çöp kovalarının yanında bir sigaranın kor ucu bir an parladı, söndü.
 > Biri iskeleye doğru koşuyordu. Elleri ceplerinde, başı önde; yağmurun içinden bir otobüs durağının ışığına doğru.
 > Mutfakta radyo yine bir şarkıya başladı. Bulaşık suyu aktı, kesildi.
-> Bir rafın üstünde küçük bir cihazın kırmızı ışığı yanıyordu. Birkaç dakika sonra söndü. Kimse fark etmedi; fark edilmesi için kimse bakmıyordu.
 > Koridorun ucundaki kapının altından sızan sarı ışık bir süre daha yandı.
-> Yarım saat sonra biri 112’yi aradı. Sesi sakindi. {fade}
+> Yarım saat sonra biri 112’yi aradı. {fade}
 @BİR ERKEK SESİ: Ortağım… bıçaklandı. Ofiste. Aşçı çocuk… kaçtı. Çabuk gelin. [phone]
-> Sakin seslere hep inanılır.
 `);
 
 const PR01 = T(`
@@ -132,7 +131,7 @@ export const briefing: CasePart = {
   nodes: [
     story('PR_00', {
       ...PRO,
-      title: 'Gece 23.35',
+      title: 'Gece',
       background: 'liman_gece',
       lines: [{ lines: PR00 }],
       choices: [cont('PR00_DEVAM', 'Gece 02.30', 'PR_01', { role: 'PRIMARY' })],
@@ -267,7 +266,12 @@ leyla: Babasına yanlış rakam söyleme. O adam yirmi iki yıl önce bir avukat
         {
           type: 'paragraph',
           title: 'OLAY ÖZETİ',
-          text: '14 Kasım gecesi Mudanya’daki Toker Balık meyhanesinin ofisinde işletme sahibi Ercan Toker (44) göğsüne tek bıçak darbesiyle öldürüldü. Ortağı Tarık Sezer 00.16’da 112’yi aradı ve aşçı yardımcısı Emir Yalçın’ın elinde bıçakla ofisten kaçtığını söyledi. Bıçak Emir’in. Emir o gece ofiste maktulle tartıştığını kabul ediyor; öldürmediğini söylüyor.',
+          text: '14 Kasım gecesi Mudanya’daki Toker Balık meyhanesinin ofisinde işletme sahibi Ercan Toker (44) göğsüne tek bıçak darbesiyle öldürüldü. Bıçak, aşçı yardımcısı Emir Yalçın’ın.',
+        },
+        {
+          type: 'paragraph',
+          title: 'TANIK VE SANIK',
+          text: 'Ortak Tarık Sezer 00.16’da 112’yi aradı; Emir’in elinde bıçakla ofisten kaçtığını söyledi. Emir o gece maktulle tartıştığını kabul ediyor; öldürmediğini söylüyor.',
         },
         {
           type: 'strengthList',

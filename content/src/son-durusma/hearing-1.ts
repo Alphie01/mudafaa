@@ -247,7 +247,7 @@ baskan: Müdafi, talebe diyeceğiniz?
 `),
       next: 'H1_03',
       options: [
-        option('H102_A', '“Katılıyoruz; ancak husumet sanığın değil, bilgisi pazartesi başladı.”', {
+        option('H102_A', '“Katılıyoruz; ama Emir bunu pazartesi öğrendi.”', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), inc('pers')],
           good: 'Delilin toplanmasına katıldın ama anlamını çerçeveledin: yirmi iki yıllık hüküm sanığın değil babasının; sanığın öğrenmesi dört gün önce. Tasarlamanın “makul süre ve sebat” unsurunu baştan daralttın.',
@@ -645,7 +645,7 @@ baskan: Kabul.
 baskan: Sesli mesaj mı? Kabul. Bilirkişi incelemesine.
 `),
         }),
-        option('H105_YOK', 'Talebimiz yok', {
+        option('H105_YOK', 'Talebimiz yok; deliller dosyada yeterince toplanmış', {
           neutral: 'Ek talepte bulunmadın.',
           responses: B(`
 - Şimdilik bir talebimiz yok Sayın Başkan.
@@ -664,7 +664,7 @@ baskan: Müdafi, tutukluluk hâline ilişkin diyeceğiniz?
       options: [
         option(
           'H105B_A',
-          'Tahliye: tasarlama dayanakları ve tek görgü tanığının anlatımı sarsıldı; adli kontrol yeterli',
+          'Tahliye: tanık sarsıldı; adli kontrol yeterli',
           {
             effects: [
               ifThen(
@@ -693,12 +693,13 @@ baskan: Suçun niteliği, mevcut delil durumu ve görgü tanığının henüz di
             ],
           },
         ),
-        option('H105B_B', 'Tahliye: müvekkil masumdur', {
+        option('H105B_B', 'Tahliye: tutuklulukta geçen süre ve sabit adres; adli kontrol yeterli', {
           score: { USUL_BILGISI: -20 },
-          neutral: 'Tahliye talebi somut bir gerekçe ister; masumiyet karinesi herkes için zaten geçerlidir.',
+          neutral:
+            'Süre ve sabit adres tek başına yetmez; tahliye için kuvvetli suç şüphesini sarsan somut bir bulgu göstermek gerekir.',
           responses: B(`
-- Müvekkil masumdur Sayın Başkan; tahliyesini istiyoruz.
-baskan: Masumiyet karinesi herkes için geçerli müdafi. Somut bir gerekçe göremedim. Tutukluluğun devamına.
+- Sanık üç aydır tutuklu Sayın Başkan. Sabit adresi, ailesi var; kaçma şüphesi yok. Adli kontrol yeterlidir.
+baskan: Suçun niteliği ve mevcut delil durumu karşısında bunlar tek başına yeterli değil müdafi. Tutukluluğun devamına.
 `),
         }),
         option('H105B_C', 'Talebimiz yok', {

@@ -122,7 +122,7 @@ const hub = {
   choices: [
     act('B_ARSIV', '2004 dosyası', 'ARA2_ARSIV', { description: 'Bursa 2. Ağır Ceza · 2004/311' }),
     act('B_BILDIR', 'Savcılığa yazılı bildirim', 'ARA2_BILDIR', {
-      description: 'CMK 158 · bildiklerini yaz',
+      description: 'Başsavcılığa yaz',
       visibleWhen: any(has('ded_mektup'), has('ded_gomlek'), has('ded_canli'), has('ded_kasa'), has('ded_kamera')),
     }),
     act('B_YUZLES', 'Toker Balık’a git; Tarık’la konuş', 'ARA2_YUZLES', { description: 'Mudanya · gece' }),
@@ -155,7 +155,7 @@ const arsiv = story('ARA2_ARSIV', {
 `),
       next: HUB,
     }),
-    option('AR_NOT', 'Leyla’nın notlarını fotokopiyle dosyaya koy', {
+    option('AR_NOT', 'Leyla’nın 2004 notlarını fotokopiyle dilekçeye ekle, dosyaya koy', {
       effects: [inc('ethics'), raise('leyla_not'), score('SAVUNMA_STRATEJISI', -60)],
       bad: 'Leyla’nın 2004 notları müvekkil Kemal Yalçın’ın sırrıdır; onun açık rızası olmadan istemek ve kullanmak meslek sırrına aykırıdır (Av.K. 36). Üstelik aynı bilgi arşivde resmî bir tutanak olarak duruyor.',
       category: 'SAVUNMA_STRATEJISI',
@@ -180,6 +180,7 @@ const bildir = story('ARA2_BILDIR', {
       any(has('ded_canli'), has('ded_mektup')),
       `
 # PERŞEMBE 09.30 — BURSA CUMHURİYET BAŞSAVCILIĞI [bg:adliye]
+> Dilekçenin başlığı kısaydı: “Suç duyurusu ve bilgi sunma (CMK 158).” Altında bir dizi ek; her biri bir kayıt.
 > Savcı Selim Karaman’ın odası küçüktü: dosya yığınları, bir saksı, sararmış bir takvim. Dilekçemi okudu. İki kez. Ekleri tek tek çevirdi.
 savci: Sesli mesaj. Bir not bloğunun izi. Bir gömlek. Bir kasa raporu. Ve bir ad; daha doğrusu iki harf.
 savci: Bunu bana getirdiniz. Duruşmada sürpriz yapmak yerine.
@@ -191,6 +192,7 @@ savci: Bir şey daha. İddianameyi yazarken o mesajın devamını okumamıştım
     ),
     O(`
 # PERŞEMBE 09.30 — BURSA CUMHURİYET BAŞSAVCILIĞI [bg:adliye]
+> Dilekçenin başlığı kısaydı: “Suç duyurusu ve bilgi sunma (CMK 158).”
 > Savcı Karaman dilekçemi okudu. Bir kasa raporu, bir kamera, bir gömlek; ama bir mektup yok, bir ses yok.
 savci: Bir tanığın saatleri tutmuyor. Bir tanık gömlek değiştirmiş. Avukat hanım, bunlar bir yalan tanıklığın işaretleri olabilir; bir cinayetin değil.
 - Bir suç duyurusu Sayın Savcım. Araştırılmasını talep ediyorum.

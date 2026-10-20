@@ -55,7 +55,7 @@ export const ifade = documentExam('INV_IFADE', {
   background: 'buro',
   lines: B(`
 # BÜRO — DOSYANIN ASLI [bg:buro]
-> İki sayfa. Saat 01.30’da, olaydan bir buçuk saat sonra alınmış; sakin, düzgün, noktalı virgüllü cümleler. Bir tanık ifadesinden çok bir rapor gibi.
+> İki sayfa. Saat 01.30’da, olaydan bir buçuk saat sonra alınmış. Saatler, adlar, bir kaçış; kolluğun daktilosundan çıkmış her ifade gibi kuru.
 ~ Bir alet seç, sonra belgede şüpheli satıra dokun. Bu dosyanın bütün yükü bu iki sayfanın üstünde.
 `),
   header: { left: 'BURSA EMNİYET · CİNAYET BÜRO · TANIK İFADESİ', right: '15.11 · 01.30' },
@@ -385,7 +385,7 @@ export const dil = story('INV_DIL', {
       category: 'USUL_BILGISI',
       next: '$stay',
     }),
-    option('DIL_TARIK_HTS', 'Baş tanığın HTS kaydı', {
+    option('DIL_TARIK_HTS', 'Baş tanığın HTS kaydı ve baz istasyonu dökümlerinin getirtilmesi', {
       cost: slotCost,
       maxUses: 1,
       score: { USUL_BILGISI: -30 },
@@ -394,7 +394,7 @@ export const dil = story('INV_DIL', {
       category: 'USUL_BILGISI',
       next: '$stay',
     }),
-    option('DIL_DNA', 'Bıçakta DNA incelemesi', {
+    option('DIL_DNA', 'Bıçak sapında DNA ve parmak izi incelemesi', {
       cost: slotCost,
       maxUses: 1,
       score: { USUL_BILGISI: -20 },

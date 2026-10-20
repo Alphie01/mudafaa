@@ -38,6 +38,8 @@ const Map<String, ScenePainter> scenes = {
   'karakol': _karakol,
   'sokak_gece': _sokakGece,
   'sokak_yagmur': _sokakYagmur,
+  'sokak_karanlik': _sokakKaranlik,
+  'sokak_sabah': _sokakSabah,
   'depo': _depo,
   'depo_gece': _depoGece,
   'cay_ocagi': _cayOcagi,
@@ -119,13 +121,17 @@ void blindStripes(PxCanvas p, num x, num y, num w, int n, Color c) {
   }
 }
 
-/// Sokak lambası ve ışık konisi; `flicker` ise ara sıra söner.
-void lampPost(PxCanvas p, num x, num ground, int f, {bool flicker = true, num height = 60}) {
+/// Sokak lambası ve ışık konisi; `flicker` ise ara sıra söner, `dead` ise hiç yanmaz (kararmış ampul).
+void lampPost(PxCanvas p, num x, num ground, int f, {bool flicker = true, bool dead = false, num height = 60}) {
   final top = ground - height;
   p.r(x, top, 2, height, _steel);
   p.r(x, top, 8, 2, _steel);
   p.r(x - 1, ground - 3, 4, 3, _steel);
   p.r(x + 6, top + 2, 4, 2, _steel);
+  if (dead) {
+    p.r(x + 6, top + 4, 4, 1, const Color(0xFF2A2438));
+    return;
+  }
   final off = flicker && ((f % 41) == 3 || (f % 41) == 5 || (f % 67) == 10);
   if (!off) {
     p.r(x + 6, top + 4, 4, 1, _amberHi);
@@ -338,10 +344,10 @@ void _karakol(PxCanvas p, int f) {
   dust(p, f, count: 8, top: 0.06, bottom: 0.55);
 }
 
-void _street(PxCanvas p, int f, {required bool wet}) {
-  p.fill(_sky0);
-  p.r(0, p.h * 0.2, p.w, p.h * 0.25, _sky1);
-  stars(p, f, 0.2);
+void _street(PxCanvas p, int f, {required bool wet, bool deadLamp = false, bool morning = false}) {
+  p.fill(morning ? const Color(0xFF5A5672) : _sky0);
+  p.r(0, p.h * 0.2, p.w, p.h * 0.25, morning ? const Color(0xFF6E6A86) : _sky1);
+  if (!morning) stars(p, f, 0.2);
   final horizon = p.h * 0.5;
   skyline(p, horizon, f);
   p.r(0, horizon, p.w, p.h, _asphalt);
@@ -350,7 +356,7 @@ void _street(PxCanvas p, int f, {required bool wet}) {
   for (var x = 2; x < p.w; x += 16) {
     p.r(x, horizon + p.h * 0.12, 8, 1, const Color(0xFF3A2F66));
   }
-  lampPost(p, p.w * 0.66, horizon + 4, f, height: p.h * 0.32);
+  lampPost(p, p.w * 0.66, horizon + 4, f, height: p.h * 0.32, dead: deadLamp || morning);
   if (wet) {
     wetReflections(p, horizon, f);
     rain(p, f);
@@ -367,6 +373,12 @@ void _street(PxCanvas p, int f, {required bool wet}) {
 
 void _sokakGece(PxCanvas p, int f) => _street(p, f, wet: false);
 void _sokakYagmur(PxCanvas p, int f) => _street(p, f, wet: true);
+
+/// Lambası kararmış, çiseleyen gece sokağı (ışığın olmadığı sahneler).
+void _sokakKaranlik(PxCanvas p, int f) => _street(p, f, wet: true, deadLamp: true);
+
+/// Gri sabah ışığında ıslak sokak; lamba sönük.
+void _sokakSabah(PxCanvas p, int f) => _street(p, f, wet: false, morning: true);
 
 void _warehouseInterior(PxCanvas p, int f, {required bool night}) {
   final wall = night ? const Color(0xFF1A1630) : const Color(0xFF4F5560);

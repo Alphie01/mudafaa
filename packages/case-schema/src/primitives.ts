@@ -45,6 +45,8 @@ export const Backdrop = z.enum([
   'karakol',
   'sokak_gece',
   'sokak_yagmur',
+  'sokak_karanlik',
+  'sokak_sabah',
   'depo',
   'depo_gece',
   'cay_ocagi',

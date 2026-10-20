@@ -7,7 +7,7 @@ import 'px_canvas.dart';
 
 /// Bilinen arka plan adları (şemadaki Backdrop enum'u).
 const backdropNames = <String>[
-  'siyah', 'buro', 'buro_gece', 'gorus_odasi', 'durusma_salonu', 'adliye', 'karakol', 'sokak_gece', 'sokak_yagmur',
+  'siyah', 'buro', 'buro_gece', 'gorus_odasi', 'durusma_salonu', 'adliye', 'karakol', 'sokak_gece', 'sokak_yagmur', 'sokak_karanlik', 'sokak_sabah',
   'depo', 'depo_gece', 'cay_ocagi', 'ev', 'kafe', 'hastane', 'liman_gece', 'arac',
 ];
 

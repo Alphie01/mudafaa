@@ -313,7 +313,7 @@ export const invHub: CasePart = {
         tarik: Özür dilerim. Okulda yine bir şey olmuş. Ne diyeyim ona? Siz söyleyin. Ne diyeyim?
       `),
       choices: [
-        option('AK2_DOGRU', '“Babam yazmadığını söylüyor; avukatı da bunu göstermeye çalışıyor.” Doğruyu söyleyin.', {
+        option('AK2_DOGRU', 'Doğruyu: “Baban yapmadığını söylüyor, avukatı bunu gösterecek.”', {
           effects: [inc('trust', 5)],
           responses: B(`
             tarik: Doğruyu. Peki. Sekiz yaşında olsa yalan söylerdim. Dokuzda… anlıyor artık.
@@ -328,7 +328,7 @@ export const invHub: CasePart = {
           `),
           next: 'INV_HUB',
         }),
-        option('AK2_SOZ', '“Babana hiçbir şey olmayacak.” Bunu söyleyin.', {
+        option('AK2_SOZ', '“Babana hiçbir şey olmayacak, avukatı söz verdi.” Bunu söyleyin; rahatlasın.', {
           effects: [inc('trust', 3), raise('soz_verildi')],
           responses: B(`
             tarik: Olmayacak mı?

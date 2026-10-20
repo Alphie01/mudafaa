@@ -109,7 +109,7 @@ export const briefing: CasePart = {
         tarik: Ücretinizi söyleyin. Ve bana bir şey söyleyin. Bir tek şey. Kazanabilir miyiz?
       `),
       choices: [
-        option('BR00_OKU', 'Önce dosyayı okuyayım. Sonra size dürüst bir cevap veririm.', {
+        option('BR00_OKU', 'Önce dosyayı okuyayım; cevabı sonra veririm.', {
           effects: [{ type: 'VAR', var: 'trust', op: 'inc', value: 4 }],
           responses: B(`
             tarik: Dürüst cevap. Peki. Mimarlıkta da öyledir: önce zemin etüdü, sonra proje.
@@ -117,7 +117,7 @@ export const briefing: CasePart = {
           `),
           next: 'BR_01',
         }),
-        option('BR00_SOZ', 'Merak etmeyin. Beraat ettiririz.', {
+        option('BR00_SOZ', 'Merak etmeyin Tarık Bey. Bu dosyadan beraat çıkar, size söz veriyorum.', {
           effects: [{ type: 'VAR', var: 'trust', op: 'inc', value: 6 }, set('soz_verildi', true)],
           responses: B(`
             tarik/mutlu: Bunu duymak istiyordum.
@@ -167,7 +167,7 @@ export const briefing: CasePart = {
         `),
       ],
       choices: [
-        option('BR01_A', 'Şantaj, zincirleme: 1–3 yıl ve adli para; ifşa: 2–5 yıl. Asliye ceza, tek hâkim.', {
+        option('BR01_A', 'Şantaj (zincirleme) 1–3 yıl; ifşa 2–5 yıl. Asliye ceza.', {
           score: { HUKUKI_BILGI: 50 },
           good: 'Doğru: TCK 107/2 (107/1’in cezası: 1–3 yıl hapis ve 5.000 güne kadar adli para; 43/1 ile zincirleme artırım) ve TCK 134/2 (2–5 yıl). Üst sınırlar 10 yılın altında olduğundan görevli mahkeme asliye ceza (5235 s. Kanun md. 11–12).',
           responses: B(`
@@ -177,7 +177,7 @@ export const briefing: CasePart = {
           `),
           next: 'BR_01B',
         }),
-        option('BR01_B', 'Basit tehdit: altı aydan iki yıla. Sulh ceza.', {
+        option('BR01_B', 'Şantaj değil basit tehdit: altı aydan iki yıla; dosyayı sulh ceza görür.', {
           bad: 'Yarar sağlama amacıyla şeref ve saygınlığa zarar verecek hususların açıklanacağı tehdidi basit tehdit (TCK 106) değil şantajdır (TCK 107/2). Sulh ceza mahkemesi değil, asliye ceza görevlidir.',
           category: 'HUKUKI_BILGI',
           responses: B(`
@@ -186,7 +186,7 @@ export const briefing: CasePart = {
           `),
           next: 'BR_01B',
         }),
-        option('BR01_C', 'Bilişim suçu: sisteme girme ve verileri bozma. Ağır ceza.', {
+        option('BR01_C', 'Bilişim suçu: sisteme girme ve verileri bozma (TCK 243–244). Ağır ceza.', {
           bad: 'İddianamede sanığa bilişim sistemine girme (TCK 243) ya da verileri bozma (TCK 244) isnat edilmiyor; sanığın kendi hesabını kullandığı iddia ediliyor. Suçlar TCK 107/2 ve 134/2; görevli mahkeme asliye ceza.',
           category: 'HUKUKI_BILGI',
           responses: B(`
@@ -212,7 +212,7 @@ export const briefing: CasePart = {
         leyla: Hangisinden başlarsın?
       `),
       choices: [
-        cont('BR01B_TUTANAK', 'Tutanaktan. Telefon karakolda kimin elindeydi, önce onu bilmeliyim.', 'BR_02', {
+        cont('BR01B_TUTANAK', 'Tutanaktan. Telefon karakolda kimin elindeydi?', 'BR_02', {
           responses: B(`
             leyla: Usulden başlayan avukat, esası unutmamalı. Ama başlangıç doğru.
             ~ Bir telefon. Bir zarf. Bir çekmece. Kim, ne zaman?

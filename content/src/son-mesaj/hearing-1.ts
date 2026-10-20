@@ -194,7 +194,7 @@ export const hearing1: CasePart = {
       ],
       next: 'H1_03',
       options: [
-        option('H102S_A', 'İtiraz: soru kanıtlanmamış bir varsayımı cevaba yerleştiriyor.', {
+        option('H102S_A', 'İtiraz: soru, ispatlanmamış bir olguyu varsayıyor.', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), inc('pers')],
           good: 'Soru, tartışmalı bir olguyu (şifrenin paylaşılmadığını) kabul edilmiş gibi sunarak cevabı yönlendiriyor. Hâkim uygun olmayan soruları reddeder (CMK 201); itiraz yerinde.',
@@ -213,7 +213,7 @@ export const hearing1: CasePart = {
             feride: Not edildi. Aleyhe yorumlanmaz Sayın Savcı, biliyorsunuz.
           `),
         }),
-        option('H102S_C', 'Sayın Savcı müvekkilimi suçlu ilan ediyor!', {
+        option('H102S_C', 'İtiraz! Sayın Savcı soruyla müvekkilimi suçlu ilan ediyor; masumiyet karinesi çiğneniyor.', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'İtiraz, bir usul kuralına dayanmalıdır. Savcının soru sorması suçlama değil, görevidir; dayanaksız çıkış güvenilirliği düşürür.',
@@ -222,7 +222,7 @@ export const hearing1: CasePart = {
             > Söyleyemedim. Savcı sorusunu yineledi.
           `),
         }),
-        option('H102S_D', 'Bırak cevaplasın.', {
+        option('H102S_D', 'Bırak cevaplasın; saklayacak bir şeyi yok, kendisi anlatsın.', {
           effects: [ifThen(flag('fact_pay_sert'), [], [dec('pers')])],
           neutral: 'Soru yönlendiriciydi; itiraz edilmedi. Hazırlıklı bir sanık bundan zarar görmeyebilir, hazırlıksız biri görür.',
           responses: [
@@ -259,7 +259,7 @@ export const hearing1: CasePart = {
       `),
       next: 'H1_04',
       options: [
-        option('H103_A', 'Sorum yok. Acısını değil, mesajların kaynağını tartışacağız.', {
+        option('H103_A', 'Sorum yok, Sayın Hâkim.', {
           score: { SAVUNMA_STRATEJISI: 30 },
           good: 'Mağdurun acısını sorgulamak savunmaya bir şey kazandırmaz; uyuşmazlık mesajların kaynağındadır. Ölçülü bir tavır.',
           responses: B(`

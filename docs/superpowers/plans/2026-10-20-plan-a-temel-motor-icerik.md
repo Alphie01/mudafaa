@@ -151,7 +151,7 @@
 - [ ] **Step 4: Failing test** `app_smoke_test.dart`: `pumpWidget(const MudafaaApp())` → `find.text('MÜDAFAA')` findsOneWidget; Scaffold `backgroundColor == const Color(0xFF1D1733)`.
 - [ ] **Step 5:** `fvm flutter test` → FAIL.
 - [ ] **Step 6:** Uygula: Scaffold(bg PxColors.bg) ortasında `Text('MÜDAFAA')` (PixelifySans 700, 62, gold).
-- [ ] **Step 7:** `fvm flutter test && fvm flutter analyze && fvm flutter build web` → hepsi başarılı.
+- [ ] **Step 7:** `fvm flutter test && npm run mobile:analyze && fvm flutter build web` → hepsi başarılı. (`mobile:analyze` = `fvm flutter pub get && fvm dart analyze`; riverpod_lint yalnızca `dart analyze` ile çalışır, `flutter analyze` analiz eklentilerini yüklemez.)
 - [ ] **Step 8:** Commit: `feat(mobile): FVM'li Flutter 3.47.7 iskeleti, fontlar ve tema tabanı`.
 
 ### Task 5: case-schema — ifadeler, etkiler, değişkenler

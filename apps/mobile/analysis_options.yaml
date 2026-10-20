@@ -19,7 +19,8 @@ analyzer:
 # riverpod_lint 3.x bir analysis_server_plugin'dir; analysis_options.yaml üzerinden
 # kurulur. Eklentiyi `dart analyze` ve IDE çalıştırır; `flutter analyze` (3.47.7)
 # analiz eklentilerini yüklemez, bu yüzden kök `mobile:analyze` betiği `dart analyze`
-# kullanır (paketler çözülmüş olmalı: önce `fvm flutter pub get`).
+# kullanır; `dart analyze` paketleri kendisi çözmediği için betik önce
+# `fvm flutter pub get` çalıştırır.
 # Sürüm, pubspec.yaml'daki dev_dependencies kaydıyla aynı tutulur.
 plugins:
   riverpod_lint: ^3.1.9

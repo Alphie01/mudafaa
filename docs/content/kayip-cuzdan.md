@@ -31,10 +31,10 @@ yazar. 7 Mart 08.15'te polis gelir. Kartlar 18.49 / 18.55 / 19.06'da Altıparmak
 |---|---|---|---|---|---|---|
 | 1 | PROLOG, PR_02 | Soğuk açılış | Bulma, büfe, kapı | — | 5 | 750 |
 | 2 | BR_00–BR_02 | Bölüm 1 | Zehra'nın çaresizliği; Leyla'nın devri | seçim, A–D, strateji | 9 | 1 700 |
-| 3 | INV_SABAH, INV_HUB, INV_* | Soruşturma | Arda'nın hikâyesi; kayıt eksik; kartlar başkasında | 3 sahne, 3 belge, görüşme, 3 konuşma, dilekçe, tahta, mentor | 33 | 4 600 |
+| 3 | INV_SABAH, INV_HUB, INV_* (3 gün × 4 EP) | Soruşturma | Arda’nın hikâyesi; kayıt eksik; kartlar başkasında | 3 sahne (+ sahne sonrası anlar), 3 belge, görüşme, 4 konuşma, terminal, dilekçe, tahta, mentor | 35 | 3 500 |
 | 4 | INV_GECE_* | Soruşturma | Pano; Arda'nın mesajı | — | 2 | 350 |
 | 5 | H1_00–H1_08 | 1. celse | Sorgu, müşteki, Hayri'nin çapraz sorgusu, CD, nitelendirme uyarısı | A–D ×5, tanık ifadesi | 17 | 2 400 |
-| 6 | ARA_* | Ara | Tam kayıt: ters köşe; Gülten'in mesajı; büfe | 2 belge, 3 konuşma, suç duyurusu, tahta | 22 | 2 700 |
+| 6 | ARA_* (3 gün × 3 EP) | Ara | Tam kayıt: ters köşe; Gülten’in mesajı; teknisyen, Ozan, Hayri, karakol; büfe | 2 belge, 7 konuşma, suç duyurusu, tahta | 22 | 2 300 |
 | 7 | H2_00–H2_09 | 2. celse | Teknisyen ve şoför çöker; ek savunma; mütalaa | tanık ifadesi ×2, A–D ×5 | 18 | 2 600 |
 | 8 | R_KARAR | Karar | Hüküm + epilog | — | 3 | 500 |
 
@@ -120,7 +120,14 @@ DECISION zincirleriyle (INV_GECE_*, ARA_SON_*, H2_00_*).
 | 4 | NITELENDIRME | RECHARACTERIZED | çöküş yok, `buldu_zemini`, final ≥ eşik N | TCK 160 → adli para cezası; HAGB | 0,85 |
 | 5 | MAHKUMIYET | CONVICTION | varsayılan | 141/1 → 62/1; TCK 51 erteleme | 0,6 |
 
-Eşikler §13 ölçümünden sonra yazılır; eşik çubuğu = sonuç eşikleri.
+Eşikler (meta.ts `THRESHOLDS`, eşik çubuğuyla aynı): **TCK 160: 3.000 · Beraat (2-e): 9.300 · Beraat (2-b): 10.500**;
+`scaleMax` 12.000 (doğrulayıcının ölçtüğü en yüksek final 11.555).
+
+Yüklemler (80-trial): `beraat_zemini` = şu altı bulgudan en az üçü — Hayri’nin teşhisinin çökmesi (`contra_h1` ∨ `contra_h4`),
+kaydın eksikliğinin kürsüde kabulü (`contra_v` ∨ `contra_v2`), şoförün çözülmesi (`contra_r`), `ded_kart_baskasi`, teslim izleri
+(`ded_teslim` ∨ `ded_niyet_tam`), müştekinin beyanı (`gulten_tanik`). `buldu_zemini` = `ded_buldu` ∨ `contra_h4` ∨ `ded_kart_baskasi`
+∨ `contra_v` ∨ `contra_v2`. `sav_b_zemin` = çift yakalandı (`sebeke_yakalandi`: dayanaklı suç duyurusu + `ded_bere_ayni` + Cemil’in
+savcılığa yönlendirilmesi) ∧ `ded_birakan` ∧ `contra_r`.
 
 ## 11. Skor
 Dava #07 ölçeği: sahne nesnesi +40/+60, ıska −10; belge isabeti +100/+150, yanlış alet −20; tarif +300, yanlış çift −50; BASTIR +25;
@@ -128,14 +135,48 @@ doğru sunum +300, kısmi +100/+200, yanlış −150 ve ♥−1; usul itirazı +
 `strategyAmount(200, …)`. Bonus: güvenilirlik × 100.
 
 ## 12. Golden path'ler
-| Ad | Sonuç | Özet |
-|---|---|---|
-| TIPIK | BERAAT_E | Tam soruşturma, tam kayıt; Volkan ve Recep çöker; suç duyurusu yok |
-| G_B | BERAAT_B | TIPIK + dayanaklı suç duyurusu + Cemil + Bşk. Orhan |
-| G_N | NITELENDIRME | Kayıt istenmez; teslim izleri eksik; terditli savunma |
-| G_M | MAHKUMIYET | Yüzeysel soruşturma, yanlış hamleler |
-| G_I | IKRAR | Ek savunmada sahte ikrar |
-| W | MAHKUMIYET (çöküş) | Yanlış sunumlarla ♥0 |
+| Ad | Sonuç | Final | Özet |
+|---|---|---|---|
+| TIPIK | BERAAT_E | 11.395 | Tam soruşturma, tam kayıt; Hayri, Volkan ve Recep çözülür; dayanaklı suç duyurusu var ama Cemil savcılığa yönlendirilmez (çift yakalanmaz) |
+| G_B | BERAAT_B | 11.555 | TIPIK + Cemil’in savcılığa yönlendirilmesi + büfe/bere çıkarımı → çift yakalanır, Bşk. Orhan tanık, 223/2-b |
+| G_N | NITELENDIRME | 3.170 | Kayıt istenmez, teslim izleri birleştirilmez; cüzdanın bulunduğu gösterilir; terditli savunma → TCK 160 + HAGB |
+| G_M | MAHKUMIYET | 370 | Yüzeysel ve hatalı soruşturma (tanığa telkin ve baskı), dayanaksız itirazlar, duygusal savunma |
+| G_I | IKRAR | 9.030 | İyi soruşturma ama arada sahte ikrar telkini (etik ihlal) |
+| G_E2 | BERAAT_E | 9.920 | Alternatif 2-e: bozuk segment bulunmaz, teknisyen duruşmada istenir, şoför hakkında erken suç duyurusu (CMK 48 çekinmesi) |
+| W | MAHKUMIYET (çöküş) | 7.980 | Tam soruşturma; 2. celsede teknisyene beş yanlış delil → ♥0 → çöküş |
+
+**Erken çözüm denetimi.** `enumerateActions`/`act` ile oynatılan golden path’lerden aksiyon blokları atılarak (delta-debugging,
+açgözlü blok silme) aynı sonuca ulaşan en kısa yol arandı: BERAAT_E için en kısa bulunan **137 aksiyon** (tipik 217’nin %63’ü;
+eşik 9.000 iken 128 = %59 bulundu, eşik 9.300’e çekildi), BERAAT_B için **153 aksiyon** (%71). Kısaltılmış yollar bile bütün delil
+zincirini (CD formu, emanet, banka, otobüs, tahta, tam kayıt, Hayri/Volkan/Recep çelişkileri) içeriyor; atlananlar yalnızca isteğe
+bağlı konuşmalar ve okumalar. Tipik yolun satır dökümü taranarak yankesici çiftin ARA’daki tam kayıttan önce adının, rolünün ya da
+varlığının söylenmediği doğrulandı (yalnızca prologdaki ıslak eldiven/bere ve büfe fişindeki not gibi ekili ipuçları var; birinci
+evredeki `ded_bereli` çıkarımı kartları kullananın kim olduğunu bilmediğini söyler ve savcılığın “suç ortağı” okumasıyla uyumludur).
 
 ## 13. Süre ve sözcük ölçümü
-Teslimde `npm run case:duration -- kayip-cuzdan` çıktısı buraya yapıştırılır.
+`npm run case:duration -- kayip-cuzdan` (2026-10-20):
+
+```
+Süre tahmini (dakika = sözcük / 180 + aksiyon × 6 sn / 60):
+  TIPIK          94.2 dk   13051 sözcük   217 aksiyon  BERAAT_E (11395)
+  G_B            93.5 dk   12959 sözcük   215 aksiyon  BERAAT_B (11555)
+  G_N            61.4 dk    8584 sözcük   137 aksiyon  NITELENDIRME (3170)
+  G_M            60.7 dk    8522 sözcük   134 aksiyon  MAHKUMIYET (370)
+  G_I            84.6 dk   11628 sözcük   200 aksiyon  IKRAR (9030)
+  G_E2           87.4 dk   12142 sözcük   199 aksiyon  BERAAT_E (9920)
+  W              79.0 dk   10769 sözcük   192 aksiyon  MAHKUMIYET (7980)
+  ==> TİPİK YOL (TIPIK): 94.2 dk  ✓ süre hedefte
+  ==> KAPI: ✓ GEÇTİ
+```
+
+`node tools/content/word-count.mjs content/cases/kayip-cuzdan --path TIPIK --chapters`: tipik yolda satır sözcüğü 10.474
+(Soğuk açılış 396 · Bölüm 1 665 · Soruşturma 3.445 · 1. celse 1.611 · Ara 2.253 · 2. celse 1.659 · Karar 445). Paket: 1.372 satır,
+17.379 satır sözcüğü; ekran metinleriyle toplam **22.689** sözcük. En uzun satır 213 karakter.
+
+`npm run case:validate -- kayip-cuzdan`: **PASSED — 0 hata, 1 uyarı (SIMULATION_INCOMPLETE)**; kapsam node 112/112, seçenek 234/234,
+kural 72/72, delil 53/53; golden path 7/7; bütün sonuçlara ulaşıldı.
+
+**Sprite notu:** yeni karakterlerin (Arda, Zehra, Gülten, Hayri, Recep, Cemil, Ozan) sprite’ları `content/src/kayip-cuzdan/sprites.ts`
+içinde tanımlıdır. Kılavuz `content/shared/sprites/<slug>-<ad>.json` diyor; ancak `tools/content/test/extract-sprites.test.ts` o
+dizinin yalnızca tasarımdaki 21 ortak sprite’ı içermesini şart koşuyor. Kapıları yeşil tutmak için sprite’lar kaynağa alındı
+(önizleme `case:sprite-preview` ile yapıldı).

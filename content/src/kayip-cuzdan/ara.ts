@@ -1007,7 +1007,7 @@ zehra: Arda, beş yıl diyorlar! Öde, imzala, bitsin. Sicile işlemiyormuş!
         option('IKRAR_ISRAR', '“İnanmam önemli değil. Önemli olan riski küçültmek. Kabul et.”', {
           score: { SAVUNMA_STRATEJISI: -300 },
           effects: [raise('false_confession'), inc('ethics'), dec('trust', 30)],
-          bad: 'İnkâr eden ve suçsuzluğunu söyleyen müvekkili suçu kabule yönlendirmek, avukatın sadakat ve doğruluk yükümlülüğüne aykırıdır (Avukatlık Kanunu md. 34). Gerçeğe aykırı ikrar, yetkili makamları yanıltmaya (TCK 270) kadar varabilir. Etkin pişmanlık (TCK 168) gerçek bir pişmanlık ister.',
+          bad: 'İnkâr eden ve suçsuzluğunu söyleyen müvekkili suçu kabule yönlendirmek, avukatın sadakat ve doğruluk yükümlülüğüne aykırıdır (Avukatlık Kanunu md. 34). Gerçeğe aykırı ikrar, suçu üstlenme (TCK 270) kapsamına girebilir. Etkin pişmanlık (TCK 168) gerçek bir pişmanlık ister.',
           category: 'SAVUNMA_STRATEJISI',
           next: 'ARA_HUB',
           responses: B(`

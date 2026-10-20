@@ -96,17 +96,18 @@ PROLOG  Soğuk açılış (otobüs 18.42 · büfe 18.49 · kapı 08.15; isimsiz)
 BR_00   Bölüm 1 · Zehra büroda (yağmurlu akşam; ücret, korku, "o çocuk bir şey çalmaz")  STORY + seçim
 BR_01   Leyla dosyayı devreder: ceza aralığı sorusu (141/1 · 142/1-c · 142/2-b · 160)    STORY + A–D
 BR_02   Dosya ekranı + strateji                                                       STORY (BRIEFING)
-INV_SABAH → INV_HUB  Bölüm 2 · SORUŞTURMA (3 gün × 3 EP; Leyla'ya danış günde 1, 0 EP)
-  OLAY YERİ: INV_OTOBUS (sahne: Hat 38, 14 numara) · INV_ODA (sahne: öğrenci evi) · INV_BUFE (sahne: Altıparmak büfe)
+INV_SABAH → INV_HUB  Bölüm 2 · SORUŞTURMA (3 gün × 4 EP; Leyla'ya danış günde 1, 0 EP)
+  YERLER:   INV_OTOBUS (+INV_OTOBUS_SON) · INV_ODA (+INV_ODA_SON) · INV_BUFE (+INV_BUFE_SON) · INV_TERMINAL (kayıp eşya bürosu)
   KİŞİLER:  INV_ARDA (görüşme; sahaf; konu kilitleri) · INV_HAYRI (kıraathane) · INV_RECEP (garaj) · INV_ZEHRA (hastane, gece)
-  ARŞİV:    INV_EMANET (belge: el koyma tutanağı + emanet) · INV_KLIP (belge: CD dışa aktarım günlüğü) · INV_BANKA (belge:
+  ARŞİV:    INV_EMANET (+INV_EMANET_SON) (belge: el koyma tutanağı + emanet) · INV_KLIP (belge: CD dışa aktarım günlüğü) · INV_BANKA (belge:
             kart hareketleri) · INV_DIL (CMK 177 dilekçesi, 3 hak) · INV_CIKARIM (tahta) · INV_LEYLA
   Gün sonu: INV_DAY_END (DECISION) → INV_AKSAM1 / INV_AKSAM2
 INV_GECE_* Duruşmadan önceki gece (koşullu hafıza zinciri) → INV_GECE
 H1_00…H1_09  Bölüm 3 · BİRİNCİ CELSE: açılış → Arda'nın sorgusu → müşteki → Hayri (bastır/sun/itiraz) → CD → talepler →
              nitelendirme uyarısı (CMK 226) → ara karar/erteleme
-ARA_GIRIS → ARA_HUB  Bölüm 4 · ARA (2 gün × 3 EP; yığınsız, doğrudan dönüş)
-  ARA_KAYIT (belge: tam sefer kaydı kare dökümü — ters köşe) · ARA_CAGRI (belge: 153 kaydı) · ARA_GULTEN (müşteki ve torunu)
+ARA_GIRIS_0/1 → ARA_GIRIS → ARA_HUB  Bölüm 4 · ARA (3 gün × 3 EP; yığınsız, doğrudan dönüş)
+  ARA_KAYIT (+ARA_KAYIT_SON gece yarısı) (belge: tam kayıt — ters köşe) · ARA_CAGRI (belge: 153 kaydı) · ARA_GULTEN (müşteki ve torunu)
+  ARA_VOLKAN (teknik oda) · ARA_OZAN (tanık, ezber tuzağı) · ARA_HAYRI (büroya gelen tanık) · ARA_KARAKOL (Pol. Mem. Serkan Ulu)
   ARA_CEMIL (büfe, ikinci ziyaret) · ARA_SUC (suç duyurusu) · ARA_ARDA (ek savunma hazırlığı, Zehra) · ARA_CIKARIM · ARA_LEYLA
   ARA_YANLIS (çifti kendin bulmaya gitmek — etik/güvenlik dersi)
 ARA_SON_* → H2_00…H2_12  Bölüm 5 · İKİNCİ CELSE: teknisyen → şoför → müşteki → (Bşk. Orhan) → ek savunma → mütalaa → cevap
@@ -149,7 +150,7 @@ H_COKUS (♥0) → H2_HUKUM
 - Profil kartı, ceza çubuğu, olay özeti, savcılığın elindekiler (CD klibi, tanık Hayri, tutanak, kent kart, banka dökümü).
 - Strateji: Masumiyet (×1,5) · Usul/delil bütünlüğü (×1,2) · Terditli (önce beraat, olmazsa 160 / lehe hükümler; ×0,8).
 
-### Bölüm 2 · SORUŞTURMA (~4.500 sözcük, 3 gün × 3 EP)
+### Bölüm 2 · SORUŞTURMA (~4.500 sözcük, 3 gün × 4 EP)
 - **INV_SABAH** (~200): `card` "14 EKİM · 08.30 — ÇARŞI". Deniz yağmurda Kapalıçarşı'nın arkasındaki sahafa yürür; hedef kutusu.
 - **INV_HUB** gün hedefleri: G1 "Arda o akşam ne yaptı? Kayıt neyi gösteriyor, neyi göstermiyor?" · G2 "Kartlar: kim, nerede,
   ne zaman?" · G3 "Dilekçe son gün. Duruşmada neyi istiyorsun?" `quickTalk`: Arda'nın son cümlesi.
@@ -206,7 +207,7 @@ H_COKUS (♥0) → H2_HUKUM
   "iddianameye bağlısınız" (CMK 225/2 yanlış) · sessiz kal.
 - H1_08 ara karar ve erteleme (17 Kasım). Koridor: Gülten Hanım Deniz'e bakmadan geçer; Arda'nın elleri titrer.
 
-### Bölüm 4 · ARA (~2.600 sözcük, 2 gün × 3 EP)
+### Bölüm 4 · ARA (~2.600 sözcük, 3 gün × 3 EP)
 - **ARA_GIRIS:** Zehra'nın arabası, yağmur, Arda'nın staj okulundan gelen e-posta ("dava sonuçlanana kadar…").
 - **ARA_KAYIT — Tam sefer kaydı (belge, ters köşe):** (istendiyse) Kent Ulaşım'dan gelen dört kanallı kayıt, kare dökümü
   satırlarıyla: 18.31 KAM-3 kalabalık, açık şemsiye, yeşil bere · 18.33 KAM-3 parkalı adamın eli bez çantanın içinde · 18.36 KAM-4
@@ -246,6 +247,17 @@ H_COKUS (♥0) → H2_HUKUM
 - **H2_08 Son söz:** Arda'nın cümlesi (seçilen): "Bir cüzdan buldum. Sahibine ulaştırmak istedim. Becerememişim; ama
   çalmadım." · ağlayarak af · susmak.
 - **H2_HUKUM → R_KARAR.**
+
+### Uygulamada eklenen sahneler (süre ve derinlik için, hikâyeye bağlı)
+- **INV_TERMINAL:** Kent Ulaşım kayıp eşya bürosu (“cumartesi 09.00”) ve hareket memurunun “olay klasörü” — tam kaydın varlığına ikinci
+  bir yol; Recep’in iki tutanağı.
+- **Sahne sonrası anlar:** Görükle’de başka bir şoförün bir şemsiyeyi “yarın kayıp eşyaya” diye kabine atması (kuralın uygulanmayışı,
+  ayna sahne); Ozan’ın mutfakta sabahı anlatması; Melek Hanım’ın “saklamak bizim işimiz”i; Cemil Usta’nın ters ibraz alışkanlığı.
+- **1. celse:** savcının sanığa üç sorusu (kira borcu, çanta, “dokuzu beklemek”), itiraz zamanlaması kararı.
+- **Ara:** tam kaydın gece yarısı Leyla’ya telefonla anlatılması; teknisyenle, Ozan’la ve Görükle karakolunda memurla görüşmeler; büroya
+  habersiz gelen Hayri Bey (“yanlış kapı”); Zehra’nın annesine söylemesi; duruşmadan önceki gece ilk cümle.
+- **2. celse:** kaydın duruşmada seçilerek izletilmesi; şoför çözüldükten sonra koridorda Recep–Arda karşılaşması; ek savunmada
+  142/2-b ile birlikte TCK 160 yönünden de hatırlatma; savcının ek savunmaya sorusu; hüküm öncesi iç ses.
 
 ### Epiloglar (OutcomeDef.epilogue, her biri ~200–350 sözcük)
 - **BERAAT_B:** Adliye merdiveni, yağmur dinmiş. Gülten Hanım Arda'ya fotoğrafı gösterir: "Yerinde. Sen dokunmamışsın."

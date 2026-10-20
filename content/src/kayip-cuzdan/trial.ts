@@ -99,7 +99,8 @@ const RC0_SORU = `
 savci: Tanık, 6 Mart akşamı Görükle’de sanık size hiçbir şey uzatmadı, değil mi?
 `;
 const EK_GIRIS = `
-hakim: Sanık, geçen celse eyleminizin TCK 142/2-b kapsamında değerlendirilebileceği hatırlatıldı. Ek savunmanız?
+hakim: Sanık, geçen celse eyleminizin TCK 142/2-b kapsamında değerlendirilebileceği hatırlatıldı.
+hakim: Toplanan deliller karşısında eylemin TCK 160 kapsamında kalması da mümkün görüldüğünden bu yönden de hatırlatma yapıyorum. Ek savunmanız?
 arda: Ben kimsenin çantasına el sürmedim, Sayın Hâkim. Özel beceri… Benim tek becerim kitap etiketlemek. Cüzdanı koltuğun altında buldum.
 arda: Bildiğimi söyleyeyim, bilmediğimi söylemeyeyim: yanımda kim duruyordu, bilmiyorum. Kalabalıktı. Ama ben teyzeye dokunmadım. Bunu biliyorum.
 `;
@@ -784,7 +785,7 @@ hakim: Tazminat ayrı bir yol, müdafi. Şimdi delili tartışıyoruz.
       background: 'durusma_salonu',
       onFirstEnter: [dec('pers', 2)],
       lines: B(`
-hakim: Sanık, geçen celse eyleminizin TCK 142/2-b kapsamında değerlendirilebileceği hatırlatıldı. Ek savunmanız?
+hakim: Sanık, geçen celse eyleminizin TCK 142/2-b kapsamında değerlendirilebileceği hatırlatıldı; TCK 160 yönünden de hatırlatma yapıyorum. Ek savunmanız?
 Arda ayağa kalktı. Bana baktı. Ben başımı eğdim.
 arda: Suçlamayı… kabul ediyorum. Cüzdanı aldım. Zararı ablam ödedi, makbuzu dosyada. Pişmanım.
 Ön sırada Gülten Hanım başını kaldırdı. Torunu Elif’in elindeki telefon yere düştü.

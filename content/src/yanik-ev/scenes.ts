@@ -68,13 +68,17 @@ export const scenes: CasePart = {
           'ob_dikis',
           'Dikiş masası',
           OB_DIKIS,
-          decoy('Kömürleşmiş bir dikiş masası; demir ayakları eğrilmiş. Bir zamanlar bir kadının akşamları. Dosyaya bir şey söylemiyor.'),
+          decoy(
+            'Kömürleşmiş bir dikiş masası; demir ayakları eğrilmiş. Bir zamanlar bir kadının akşamları. Dosyaya bir şey söylemiyor.',
+          ),
         ),
         sceneObject(
           'ob_cumba',
           'Cumba camı',
           OB_CUMBA,
-          decoy('Cumbanın camları sıcaktan çatlamış, bir örümcek ağı gibi. Ateşin buraya geldiğini söylüyor; nereden geldiğini değil.'),
+          decoy(
+            'Cumbanın camları sıcaktan çatlamış, bir örümcek ağı gibi. Ateşin buraya geldiğini söylüyor; nereden geldiğini değil.',
+          ),
         ),
       ],
     }),
@@ -107,7 +111,9 @@ export const scenes: CasePart = {
           'ob_kalabalik',
           'Kare 34 · sokak',
           OB_KALABALIK,
-          decoy('Kare 34: şeridin arkasında pijamalı komşular, bir çocuk, bir kedi. Herkes bakıyor; kimse bir şey görmüyor.'),
+          decoy(
+            'Kare 34: şeridin arkasında pijamalı komşular, bir çocuk, bir kedi. Herkes bakıyor; kimse bir şey görmüyor.',
+          ),
         ),
       ],
     }),
@@ -140,7 +146,9 @@ export const scenes: CasePart = {
           'ob_kumas',
           'Kumaş topları',
           OB_KUMAS,
-          decoy('Kadife, keten, deri. Bir otelin kırk sandalyesi için kesilmiş parçalar. Halil o gece bunları dikiyormuş; dosya için bir şey değil.'),
+          decoy(
+            'Kadife, keten, deri. Bir otelin kırk sandalyesi için kesilmiş parçalar. Halil o gece bunları dikiyormuş; dosya için bir şey değil.',
+          ),
         ),
         sceneObject(
           'ob_takvim',
@@ -185,7 +193,9 @@ export const scenes: CasePart = {
           'ob_resim',
           'Duvardaki fotoğraf',
           OB_RESIM,
-          decoy('Genç bir Saadet, tütün balyalarının önünde, yanında bıyıklı bir adam. Eski bir hayat; bu dosyanın değil.'),
+          decoy(
+            'Genç bir Saadet, tütün balyalarının önünde, yanında bıyıklı bir adam. Eski bir hayat; bu dosyanın değil.',
+          ),
         ),
       ],
     }),

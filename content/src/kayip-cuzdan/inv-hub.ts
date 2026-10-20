@@ -73,7 +73,9 @@ const tabs = {
     act('H_ZEHRA', 'Zehra’yı nöbetinde ziyaret et', 'INV_ZEHRA', { description: 'Devlet hastanesi · gece' }),
   ],
   arsiv: [
-    act('H_EMANET', 'Emanetteki eşyalara bak', 'INV_EMANET', { description: 'Adliye emaneti · kâtibin önünde · 6 deneme' }),
+    act('H_EMANET', 'Emanetteki eşyalara bak', 'INV_EMANET', {
+      description: 'Adliye emaneti · kâtibin önünde · 6 deneme',
+    }),
     act('H_KLIP', 'CD’yi ve aktarım formunu incele', 'INV_KLIP', { description: 'Savcılık delili · 6 deneme' }),
     free('H_BANKA', 'Banka dökümünü oku', 'INV_BANKA', { description: '0 EP · dosyada · 4 deneme', maxUses: 1 }),
     act('H_DIL', 'Delil dilekçesi (CMK 177)', 'INV_DIL', {
@@ -169,7 +171,11 @@ export const invHub: CasePart = {
         { id: 't_arsiv', label: 'ARŞİV', kind: 'ARCHIVE', choices: tabs.arsiv.map((c) => c.id) },
       ],
       scenePreview: { scene: 'sc_otobus' },
-      quickTalk: { character: 'arda', line: '“Çalmadım hocam. Buldum. Bunu kaç kere söylesem eksik kalıyor.”', choices: ['H_ARDA', 'H_ARDA2'] },
+      quickTalk: {
+        character: 'arda',
+        line: '“Çalmadım hocam. Buldum. Bunu kaç kere söylesem eksik kalıyor.”',
+        choices: ['H_ARDA', 'H_ARDA2'],
+      },
       choices: [
         ...tabs.yer,
         ...tabs.kisi,
@@ -186,11 +192,9 @@ export const invHub: CasePart = {
     },
 
     // Gün sonu: gün + 1, eylem puanı tam; akşam sahnesine yönlendirir.
-    decisionNode(
-      'INV_DAY_END',
-      [{ when: cmp(v('day'), '==', 2), to: 'INV_AKSAM1' }, { to: 'INV_AKSAM2' }],
-      { onEnter: [inc('day', 1), set('ap', INV_AP)] },
-    ),
+    decisionNode('INV_DAY_END', [{ when: cmp(v('day'), '==', 2), to: 'INV_AKSAM1' }, { to: 'INV_AKSAM2' }], {
+      onEnter: [inc('day', 1), set('ap', INV_AP)],
+    }),
 
     story('INV_AKSAM1', {
       ...INV,
@@ -219,6 +223,7 @@ leyla: Yorgunsun. İlk gün hep böyle olur. İnsan her şeye bakmak ister, hiç
           responses: B(`
 P: Kaydın eksik olabileceğini. İki buçuk dakika, tek açı. Ama bir otobüs bir saatte kırk durak geçer.
 leyla: Eksik olabileceğini düşünmek kolay. Eksik olduğunu göstermek iş. Kimin elinde, hangi kâğıtta, nasıl isteyeceksin?
+leyla: Bir de şunu sor kendine: o kaydı kim, hangi saatte, hangi yorgunlukla hazırladı? Kayıtlar insanların elinden geçer. İnsanlar da yorulur.
 `),
           next: 'INV_HUB',
         }),
@@ -419,7 +424,7 @@ Panoya son kartları iğneledim. Yağmur, cama birinin parmak uçlarıyla vuruyo
       ],
     }),
 
-    decisionNode('INV_GECE_5', [{ to: 'INV_GECE' }], {
+    decisionNode('INV_GECE_5', [{ to: 'INV_GECE_6' }], {
       lines: [
         W(
           all(flag('fact_recep_tutanak'), flag('fact_recep_korku')),
@@ -437,6 +442,56 @@ Panoya son kartları iğneledim. Yağmur, cama birinin parmak uçlarıyla vuruyo
           flag('hayri_hayat'),
           `
 > Beş: Hayri Bey’in cümlesi. “Bakınca bir şey görüyorum sanıyorum.” Bir tanığın en dürüst cümlesi, bazen savunmanın en güçlü cümlesidir.
+`,
+        ),
+      ],
+    }),
+    decisionNode('INV_GECE_6', [{ to: 'INV_GECE_7' }], {
+      lines: [
+        W(
+          all(flag('fact_hayri_cd'), flag('fact_hayri_yer')),
+          `
+> Altı: karakolda Hayri Bey’e tek bir görüntü gösterilmiş, “bu mu” diye sorulmuş. Dokuz numaradan, gazetesinin üstünden bakan bir adama.
+`,
+        ),
+        W(
+          any(flag('fact_recep_inkar'), flag('recep_insan')),
+          `
+> Altı: Recep Ateş. Hamitler’de iki çocuklu bir adam. “Kimse getirmedi” derken saatine baktı. Saate bakan adam, zamanın bitmesini bekler.
+`,
+        ),
+        W(
+          any(flag('sofor_gozlem'), flag('sofor_soruldu')),
+          `
+> Altı: son durakta bir şemsiye, bir el, “yarın kayıp eşyaya.” Bir kuralın kapı camında yazması, şoförün onu uygulaması demek değil.
+`,
+        ),
+      ],
+    }),
+    decisionNode('INV_GECE_7', [{ to: 'INV_GECE' }], {
+      lines: [
+        W(
+          all(flag('deniz_durust'), flag('zehra_anlatti')),
+          `
+> Yedi: Zehra’ya “her sayfayı okuyacağım” demiştim. Okudum. O da bana Arda’nın karakol korkusunu anlatmıştı, bir hastane koridorunda.
+`,
+        ),
+        W(
+          any(flag('zehra_anne'), flag('aksam2_durust')),
+          `
+> Yedi: Zehra annesine hâlâ söylemedi. Ona dürüst olacağımı söyledim; iyi haberi de kötü haberi de benden duyacaktı.
+`,
+        ),
+        W(
+          any(flag('fact_arda_gulten'), flag('fact_arda_hayri')),
+          `
+> Yedi: Arda, kendisine hırsız diyen kadına kızmıyor. Kendisini gösteren tanığa da. Kızmayan bir müvekkil, kızgın bir hâkimden daha zor savunulur.
+`,
+        ),
+        W(
+          any(flag('fact_buro_defter'), flag('fact_volkan_adi'), flag('tutanak_ornek'), flag('cemil_tanisti')),
+          `
+> Yedi: defterler, formlar, örnekler, bir büfecinin telefon numarası. Bir dosya, sonunda birilerinin hatırlamaya razı olduğu küçük şeylerden oluşur.
 `,
         ),
       ],

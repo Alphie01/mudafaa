@@ -83,7 +83,7 @@
           { "not": { "flag": "cokus" } },
           { "flag": "sav_b_ok" },
           { "cmp": [{ "var": "pers" }, ">=", 7] },
-          { "cmp": [{ "score": "final" }, ">=", 9500] }
+          { "cmp": [{ "score": "final" }, ">=", 10500] }
         ]
       },
       "stamp": "BERAAT",
@@ -111,6 +111,10 @@
             ]
           },
           "text": "Sanık cüzdanı bulduktan sonra çağrı merkezini aramış ve sahibine mesaj göndermiştir; teslim iradesi açıktır."
+        },
+        {
+          "when": { "flag": "orhan_dinlendi" },
+          "text": "Kolluk tanığı Bşk. Orhan Kılınç, aynı yöntemle işlenmiş altı dosyayı ve şüphelilerin yakalanışını duruşmada anlatmıştır."
         },
         { "text": "Bu deliller birlikte değerlendirildiğinde yüklenen suçun sanık tarafından işlenmediği sabittir." }
       ],
@@ -210,7 +214,7 @@
           { "flag": "beraat_talep" },
           { "ref": "beraat_zemini" },
           { "cmp": [{ "var": "pers" }, ">=", 5] },
-          { "cmp": [{ "score": "final" }, ">=", 7500] }
+          { "cmp": [{ "score": "final" }, ">=", 9300] }
         ]
       },
       "stamp": "BERAAT",
@@ -246,6 +250,14 @@
         {
           "when": { "flag": "gulten_tanik" },
           "text": "Müşteki, sanığın cüzdanını çaldığına artık inanmadığını beyan etmiştir."
+        },
+        {
+          "when": { "flag": "ozan_dinlendi" },
+          "text": "Tanık Ozan Kaplan, sanığın el yazısıyla “Yarın 9 — karakol” notunu olay gecesi gördüğünü beyan etmiştir."
+        },
+        {
+          "when": { "flag": "recep_cekindi" },
+          "text": "Şoför tanık çekinme hakkını kullanmış; ancak ön kameranın kaydı sanığın cüzdanı şoföre uzattığını göstermektedir."
         },
         {
           "text": "Sanığın suçu işlediğine dair her türlü şüpheden uzak, kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2)."
@@ -361,7 +373,7 @@
         "all": [
           { "not": { "flag": "cokus" } },
           { "ref": "buldu_zemini" },
-          { "cmp": [{ "score": "final" }, ">=", 3500] }
+          { "cmp": [{ "score": "final" }, ">=", 3000] }
         ]
       },
       "stamp": "TCK 160 · HAGB",

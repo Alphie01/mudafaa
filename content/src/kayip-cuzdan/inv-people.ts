@@ -80,8 +80,18 @@ export const invPeople: CasePart = {
         mood('Temkinli', 'neutral', 'normal'),
       ],
       objectives: [
-        objective('obj_aksam', flag('fact_aksam'), 'O akşamın saatleri: 18.20 Çarşı, 18.42 koltuk, 19.05 Görükle.', 'O akşam ne oldu, saat saat?'),
-        objective('obj_neden', flag('fact_polis_neden'), 'Neden o gece karakola gitmediğini anlattı.', 'Neden o gece polise gitmedi?'),
+        objective(
+          'obj_aksam',
+          flag('fact_aksam'),
+          'O akşamın saatleri: 18.20 Çarşı, 18.42 koltuk, 19.05 Görükle.',
+          'O akşam ne oldu, saat saat?',
+        ),
+        objective(
+          'obj_neden',
+          flag('fact_polis_neden'),
+          'Neden o gece karakola gitmediğini anlattı.',
+          'Neden o gece polise gitmedi?',
+        ),
         objective(
           'obj_niyet',
           any(flag('fact_153_anlatti'), flag('fact_sofor')),

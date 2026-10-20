@@ -48,12 +48,17 @@ export const scenes: CasePart = {
           text: 'Isıtıcı kapağının yanında bir avuçluk karanlık. Oturunca göremiyorsun; ancak ayağın takılınca anlıyorsun.',
           short: 'Koltuk altı boşluğu',
         }),
-        sceneObject('ob_cikartma', 'Kapı camındaki çıkartma', rect(OB_CIKARTMA.x, OB_CIKARTMA.y, OB_CIKARTMA.w, OB_CIKARTMA.h), {
-          discovers: 'clue_cikartma',
-          score: { ARASTIRMA: 40 },
-          text: '“Araçta bulduğunuz eşyayı sürücüye teslim ediniz.” Kuralı biliyorlar. Peki şoför biliyor mu?',
-          short: 'Buluntu çıkartması',
-        }),
+        sceneObject(
+          'ob_cikartma',
+          'Kapı camındaki çıkartma',
+          rect(OB_CIKARTMA.x, OB_CIKARTMA.y, OB_CIKARTMA.w, OB_CIKARTMA.h),
+          {
+            discovers: 'clue_cikartma',
+            score: { ARASTIRMA: 40 },
+            text: '“Araçta bulduğunuz eşyayı sürücüye teslim ediniz.” Kuralı biliyorlar. Peki şoför biliyor mu?',
+            short: 'Buluntu çıkartması',
+          },
+        ),
         sceneObject('ob_dokuz', 'Arkaya bakan koltuk', rect(OB_DOKUZ.x, OB_DOKUZ.y, OB_DOKUZ.w, OB_DOKUZ.h), {
           discovers: 'clue_dokuz_koltuk',
           score: { ARASTIRMA: 40 },
@@ -72,7 +77,8 @@ export const scenes: CasePart = {
     }),
     sceneDef('sc_oda', {
       title: 'Görükle · öğrenci evi, Arda’nın odası',
-      description: 'Arda ve Ozan’ın rızasıyla, ikisinin gözü önünde. Hiçbir şeye el konmaz; yalnızca bakılır ve fotoğraflanır.',
+      description:
+        'Arda ve Ozan’ın rızasıyla, ikisinin gözü önünde. Hiçbir şeye el konmaz; yalnızca bakılır ve fotoğraflanır.',
       width: 344,
       height: 300,
       image: 'img_oda',
@@ -99,11 +105,16 @@ export const scenes: CasePart = {
           text: 'Masada sarı bir yapışkan not bloğu. En üstteki yaprak eksik; altındakinde bastırılmış kalem izi var. Okunmuyor.',
           short: 'Not bloğu',
         }),
-        sceneObject('ob_buzdolabi', 'Buzdolabı kapağı', rect(OB_BUZDOLABI.x, OB_BUZDOLABI.y, OB_BUZDOLABI.w, OB_BUZDOLABI.h), {
-          discovers: 'clue_kira',
-          text: 'Mıknatısla tutturulmuş bir çıktı: ev sahibinin ikinci uyarısı. İki aylık kira payı. Bunu savcı da görmek isterdi.',
-          short: 'Kira uyarısı',
-        }),
+        sceneObject(
+          'ob_buzdolabi',
+          'Buzdolabı kapağı',
+          rect(OB_BUZDOLABI.x, OB_BUZDOLABI.y, OB_BUZDOLABI.w, OB_BUZDOLABI.h),
+          {
+            discovers: 'clue_kira',
+            text: 'Mıknatısla tutturulmuş bir çıktı: ev sahibinin ikinci uyarısı. İki aylık kira payı. Bunu savcı da görmek isterdi.',
+            short: 'Kira uyarısı',
+          },
+        ),
         sceneObject('ob_kitaplik', 'Kitaplık', rect(OB_KITAPLIK.x, OB_KITAPLIK.y, OB_KITAPLIK.w, OB_KITAPLIK.h), {
           text: 'Pedagoji kitapları, sahaftan alınmış yıpranmış romanlar, bir çocuk kitabı yığını. “Staj okulu için,” diyor Arda.',
           short: 'Kitaplık',
@@ -117,17 +128,27 @@ export const scenes: CasePart = {
       height: 300,
       image: 'img_bufe',
       objects: [
-        sceneObject('ob_fiskutusu', 'Tezgâhın altındaki ayakkabı kutusu', rect(OB_FISKUTUSU.x, OB_FISKUTUSU.y, OB_FISKUTUSU.w, OB_FISKUTUSU.h), {
-          discovers: 'clue_fis_notu',
-          score: { ARASTIRMA: 60 },
-          text: 'Gün sonu fişleri, lastikle bağlanmış, aylara göre. 6 Mart destesinde 18.49’a ait üç fiş. Birinin arkasında kurşun kalemle bir not.',
-          short: 'Fiş kutusu',
-        }),
-        sceneObject('ob_bkamera', 'Tentenin altındaki kamera', rect(OB_BKAMERA.x, OB_BKAMERA.y, OB_BKAMERA.w, OB_BKAMERA.h), {
-          discovers: 'clue_bufe_kamera',
-          text: '“Otuz günde kendi üstüne yazar abla. Mart’ı soruyorsan, mart çoktan gitti.”',
-          short: 'Büfe kamerası',
-        }),
+        sceneObject(
+          'ob_fiskutusu',
+          'Tezgâhın altındaki ayakkabı kutusu',
+          rect(OB_FISKUTUSU.x, OB_FISKUTUSU.y, OB_FISKUTUSU.w, OB_FISKUTUSU.h),
+          {
+            discovers: 'clue_fis_notu',
+            score: { ARASTIRMA: 60 },
+            text: 'Gün sonu fişleri, lastikle bağlanmış, aylara göre. 6 Mart destesinde 18.49’a ait üç fiş. Birinin arkasında kurşun kalemle bir not.',
+            short: 'Fiş kutusu',
+          },
+        ),
+        sceneObject(
+          'ob_bkamera',
+          'Tentenin altındaki kamera',
+          rect(OB_BKAMERA.x, OB_BKAMERA.y, OB_BKAMERA.w, OB_BKAMERA.h),
+          {
+            discovers: 'clue_bufe_kamera',
+            text: '“Otuz günde kendi üstüne yazar abla. Mart’ı soruyorsan, mart çoktan gitti.”',
+            short: 'Büfe kamerası',
+          },
+        ),
         sceneObject('ob_pos', 'POS cihazı', rect(OB_POS.x, OB_POS.y, OB_POS.w, OB_POS.h), {
           text: 'Temassız çıkartması yarı yarıya kazınmış. Şifresiz sınırın altında kalan her çekim, kimin kartı olduğunu sormaz.',
           short: 'POS cihazı',

@@ -43,7 +43,13 @@ const ardaIlk = [
   choose('ARDA_BITIR'),
 ];
 const terminal = chooseAll('H_TERMINAL', 'TR_SAAT', 'TR_KLASOR', 'TR_RECEP', 'TR_ISIM', 'TR_DEFTER', 'TR_BITIR');
-const bufe = [choose('H_BUFE'), tapCenter(OB_FISKUTUSU), tapCenter(OB_DURAK), tapCenter(OB_POS), chooseAll('BUFE_BITIR', 'BFS_ISIM')];
+const bufe = [
+  choose('H_BUFE'),
+  tapCenter(OB_FISKUTUSU),
+  tapCenter(OB_DURAK),
+  tapCenter(OB_POS),
+  chooseAll('BUFE_BITIR', 'BFS_ISIM'),
+];
 const zehra = chooseAll('H_ZEHRA', 'ZH_POLIS', 'ZH_PARA', 'ZH_ANNE', 'ZH_BITIR');
 const leyla = chooseAll('H_LEYLA', 'LEYLA_DON');
 const banka = [choose('H_BANKA'), examine('mag', 'b1'), choose('BANKA_BITIR')];
@@ -157,7 +163,16 @@ const celse1Tam = [
     'H103_A',
   ),
   hayriCapraz,
-  chooseAll('H105_EKSIK', 'H105_SEGMENT', 'H105_BITIR', 'H106_RECEP', 'H106_BITIR', 'H107_SURE', 'H109_DEVAM', 'ARAGIRIS_DEVAM'),
+  chooseAll(
+    'H105_EKSIK',
+    'H105_SEGMENT',
+    'H105_BITIR',
+    'H106_RECEP',
+    'H106_BITIR',
+    'H107_SURE',
+    'H109_DEVAM',
+    'ARAGIRIS_DEVAM',
+  ),
 ];
 
 // --- Ara ---
@@ -171,6 +186,16 @@ const kayit = [
   examine('play', 'f7'),
   choose('KAYIT_BITIR'),
   choose('KS_ARDA'),
+];
+const kayitEksik = [
+  choose('A2_KAYIT'),
+  examine('mag', 'f2'),
+  examine('mag', 'f3'),
+  examine('mag', 'f4'),
+  examine('mag', 'f5'),
+  examine('play', 'f6'),
+  choose('KAYIT_BITIR'),
+  choose('KS_SUS'),
 ];
 const cagri = [choose('A2_CAGRI'), examine('mag', 'c2'), choose('CAGRI_BITIR')];
 const gulten = chooseAll('A2_GULTEN', 'GL_DINLE', 'GL_MAHKEME', 'GL_FOTO', 'GL_BITIR');
@@ -187,6 +212,13 @@ const tahta2 = (extra: Action[] = []) => [
   combine('clue_kare_sofor', 'clue_cikartma'),
   combine('clue_cagri_notu', 'clue_kare_soru'),
   ...extra,
+  choose('ARA_CIKARIM_BITIR'),
+];
+
+const tahta2Eksik = [
+  choose('A2_CIKARIM'),
+  combine('clue_kare_birakma', 'clue_kare_inis'),
+  combine('clue_kare_parka', 'clue_gri_kapuson'),
   choose('ARA_CIKARIM_BITIR'),
 ];
 
@@ -215,7 +247,7 @@ export const tests: CasePart = {
     goldenPaths: [
       goldenPath(
         TYPICAL_PATH,
-        { outcome: 'BERAAT_E' },
+        { outcome: 'BERAAT_E', finalMin: 10825, finalMax: 11965 },
         acilis('STR_USUL'),
         soruskurmaTam,
         celse1Tam,
@@ -235,7 +267,8 @@ export const tests: CasePart = {
         // Ara gün 3
         araLeyla,
         tahta2(),
-        chooseAll('A2_CEMIL', 'CM_FIS', 'CM_BITIR', 'A2_SUC', 'SUC_DAYANAKLI', 'A2_DURUSMA', 'AS_EKSIK'),
+        chooseAll('A2_CEMIL', 'CM_FIS', 'CM_BITIR', 'A2_KARAKOL', 'KR_SABAH', 'KR_CD', 'KR_BITIR'),
+        chooseAll('A2_SUC', 'SUC_DAYANAKLI', 'A2_DURUSMA', 'AS_EKSIK'),
         // 2. celse
         chooseAll('H200_DEVAM', 'IZ_BIRAKMA', 'IZ_SORU', 'IZ_BITIR'),
         volkan,
@@ -244,7 +277,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G_B',
-        { outcome: 'BERAAT_B' },
+        { outcome: 'BERAAT_B', finalMin: 10977, finalMax: 12133 },
         acilis('STR_MASUMIYET', 'BR00_A'),
         soruskurmaTam,
         celse1Tam,
@@ -270,7 +303,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G_N',
-        { outcome: 'NITELENDIRME' },
+        { outcome: 'NITELENDIRME', finalMin: 3011, finalMax: 3329 },
         acilis('STR_INDIRIM', 'BR00_A', 'BR01_B'),
         // Gün 1
         [
@@ -286,19 +319,38 @@ export const tests: CasePart = {
         ],
         banka,
         [choose('H_KLIP'), examine('play', 'k6'), examine('play', 'k5'), examine('lock', 'k2'), choose('KLIP_BITIR')],
-        [choose('H_OTOBUS'), tapCenter(OB_BOSLUK), tapCenter(OB_VALIDATOR), tapCenter(OB_EKRAN), tapCenter(OB_DOKUZ), chooseAll('OTOBUS_BITIR', 'OTS_SOR')],
+        [
+          choose('H_OTOBUS'),
+          tapCenter(OB_BOSLUK),
+          tapCenter(OB_VALIDATOR),
+          tapCenter(OB_EKRAN),
+          tapCenter(OB_DOKUZ),
+          chooseAll('OTOBUS_BITIR', 'OTS_SOR'),
+        ],
         chooseAll('H_TERMINAL', 'TR_SAAT', 'TR_DEFTER', 'TR_BITIR'),
         choose('AK1_ARDA'),
         // Gün 2
         leyla,
         zehra,
         chooseAll('H_HAYRI', 'HY_YER', 'HY_GORDU', 'HY_BITIR'),
-        [choose('H_BUFE'), tapCenter(OB_POS), tapCenter(OB_DURAK), tapCenter(OB_BKAMERA), chooseAll('BUFE_BITIR', 'BFS_GIT')],
+        [
+          choose('H_BUFE'),
+          tapCenter(OB_POS),
+          tapCenter(OB_DURAK),
+          tapCenter(OB_BKAMERA),
+          chooseAll('BUFE_BITIR', 'BFS_GIT'),
+        ],
         [choose('H_EMANET'), examine('mag', 'e2'), examine('uv', 'e3'), chooseAll('EMANET_BITIR', 'EMS_GIT')],
         choose('AK2_RAHAT'),
         // Gün 3
         leyla,
-        [choose('H_ODA'), tapCenter(OB_BUZDOLABI), tapCenter(OB_KITAPLIK), tapCenter(OB_CEKMECE), chooseAll('ODA_BITIR', 'ODS_SUS')],
+        [
+          choose('H_ODA'),
+          tapCenter(OB_BUZDOLABI),
+          tapCenter(OB_KITAPLIK),
+          tapCenter(OB_CEKMECE),
+          chooseAll('ODA_BITIR', 'ODS_SUS'),
+        ],
         chooseAll('H_RECEP', 'RC_SOR', 'RC_DEFTER', 'RC_BITIR'),
         chooseAll('H_DIL', 'DIL_BILIRKISI', 'DIL_BUFE', 'DIL_VER'),
         [choose('H_ARDA2'), soft('TP_HAYRI_TANI'), present('clue_atm_fisi'), choose('ARDA_BITIR')],
@@ -340,7 +392,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G_M',
-        { outcome: 'MAHKUMIYET' },
+        { outcome: 'MAHKUMIYET', finalMin: 351, finalMax: 389 },
         acilis('STR_MASUMIYET', 'BR00_C', 'BR01_D'),
         // Gün 1
         [
@@ -355,14 +407,34 @@ export const tests: CasePart = {
         ],
         chooseAll('H_HAYRI', 'HY_YER', 'HY_TELKIN'),
         chooseAll('H_RECEP', 'RC_SOR', 'RC_BASKI'),
-        chooseAll('H_TERMINAL', 'TR_DEFTER', 'TR_RECEP', 'TR_BITIR'),
+        chooseAll('H_TERMINAL', 'TR_DEFTER', 'TR_RECEP', 'TR_SAAT', 'TR_ISIM', 'TR_BITIR'),
         choose('AK1_KART'),
         // Gün 2
         leyla,
         chooseAll('H_ZEHRA', 'ZH_PARA', 'ZH_ANNE', 'ZH_BITIR'),
-        [choose('H_ODA'), tapCenter(OB_BUZDOLABI), tapCenter(OB_KITAPLIK), tapCenter(OB_NOTBLOK), chooseAll('ODA_BITIR', 'ODS_SUS')],
-        [choose('H_EMANET'), examine('uv', 'e3'), examine('uv', 'e1'), examine('mag', 'e2'), chooseAll('EMANET_BITIR', 'EMS_GIT')],
-        [choose('H_OTOBUS'), tapCenter(OB_VALIDATOR), tapCenter(OB_EKRAN), tapCenter(OB_DOKUZ), chooseAll('OTOBUS_BITIR', 'OTS_SOR')],
+        [
+          choose('H_ODA'),
+          tapCenter(OB_BUZDOLABI),
+          tapCenter(OB_KITAPLIK),
+          tapCenter(OB_NOTBLOK),
+          chooseAll('ODA_BITIR', 'ODS_SUS'),
+        ],
+        [
+          choose('H_EMANET'),
+          examine('uv', 'e3'),
+          examine('uv', 'e1'),
+          examine('mag', 'e2'),
+          chooseAll('EMANET_BITIR', 'EMS_GIT'),
+        ],
+        [
+          choose('H_OTOBUS'),
+          tapCenter(OB_VALIDATOR),
+          tapCenter(OB_EKRAN),
+          tapCenter(OB_DOKUZ),
+          tapCenter(OB_CIKARTMA),
+          tapCenter(OB_KAM),
+          chooseAll('OTOBUS_BITIR', 'OTS_SOR'),
+        ],
         choose('AK2_RAHAT'),
         // Gün 3
         leyla,
@@ -371,7 +443,12 @@ export const tests: CasePart = {
         banka,
         [choose('H_BUFE'), tapCenter(OB_POS), tapCenter(OB_DURAK), chooseAll('BUFE_BITIR', 'BFS_GIT')],
         chooseAll('H_DIL', 'DIL_FB', 'DIL_BUFE', 'DIL_VER'),
-        [choose('H_CIKARIM'), combine('clue_kira', 'clue_zarf'), combine('clue_kira', 'clue_dokuz_koltuk'), choose('CIKARIM_BITIR')],
+        [
+          choose('H_CIKARIM'),
+          combine('clue_kira', 'clue_zarf'),
+          combine('clue_kira', 'clue_dokuz_koltuk'),
+          choose('CIKARIM_BITIR'),
+        ],
         gece,
         // 1. celse
         chooseAll(
@@ -386,23 +463,35 @@ export const tests: CasePart = {
           'H103_B',
         ),
         [press('HS1'), press('HS2'), press('HS3'), choose('H104_BITIR')],
-        chooseAll('H105_BITIR', 'H106_GULTEN_FB', 'H106_BITIR', 'H107_YOK', 'H109_DEVAM', 'ARAGIRIS_DEVAM'),
+        chooseAll(
+          'H105_BITIR',
+          'H106_GULTEN_FB',
+          'H106_RECEP',
+          'H106_BITIR',
+          'H107_YOK',
+          'H109_DEVAM',
+          'ARAGIRIS_DEVAM',
+        ),
         // Ara
         araLeyla,
-        chooseAll('A2_ARDA', 'AA_CERCEVE', 'AA_BITIR', 'A2_CEMIL', 'CM_ACIK', 'CM_BITIR', 'A2_SUC', 'SUC_GENEL', 'AA_KAZAN'),
+        chooseAll('A2_ARDA', 'AA_CERCEVE', 'AA_IKRAR', 'IKRAR_GERI'),
+        chooseAll('A2_CEMIL', 'CM_ACIK', 'CM_BITIR'),
+        chooseAll('A2_KARAKOL', 'KR_SABAH', 'KR_CD', 'KR_SUCLA', 'KR_BITIR', 'AA_KAZAN'),
         araLeyla,
-        chooseAll('A2_DURUSMA', 'AS_MASUM'),
+        chooseAll('A2_SUC', 'SUC_GENEL', 'A2_DURUSMA', 'AS_MASUM'),
         // 2. celse
-        chooseAll('H200_DEVAM', 'EK_YOK', 'HEQ_CEVAP', 'MC_B', 'SAV_D', 'SON_B'),
+        chooseAll('H200_DEVAM', 'HRC0_B'),
+        [press('RS1'), press('RS2'), press('RS3'), choose('H2RC_BITIR')],
+        chooseAll('EK_YOK', 'HEQ_CEVAP', 'MC_B', 'SAV_D', 'SON_B'),
       ),
       goldenPath(
         'G_I',
-        { outcome: 'IKRAR' },
+        { outcome: 'IKRAR', finalMin: 8579, finalMax: 9481 },
         acilis('STR_INDIRIM'),
         soruskurmaTam,
         celse1Tam,
         araLeyla,
-        kayit,
+        kayitEksik,
         cagri,
         chooseAll('A2_ARDA', 'AA_CERCEVE', 'AA_IKRAR', 'IKRAR_ISRAR'),
         gulten,
@@ -413,16 +502,98 @@ export const tests: CasePart = {
         hayriAra,
         choose('AK3_GELMESIN'),
         araLeyla,
-        tahta2(),
+        tahta2Eksik,
         chooseAll('A2_DURUSMA', 'AS_MASUM'),
         chooseAll('H200_DEVAM', 'IZ_BIRAKMA', 'IZ_HEPSI', 'IZ_BITIR'),
         volkan,
-        recepCapraz,
-        chooseAll('KR_ARDA', 'HG_YOK', 'HO_NOT', 'HEKI_DEVAM', 'MC_A', 'SAV_T', 'SON_A'),
+        [choose('HRC0_A'), press('RS1'), present('ev_tam_kayit', 'RS1'), press('RS2'), choose('H2RC_BITIR')],
+        chooseAll('HG_YOK', 'HO_NOT', 'HEKI_DEVAM', 'MC_A', 'SAV_T', 'SON_A'),
+      ),
+      goldenPath(
+        'G_E2',
+        { outcome: 'BERAAT_E', finalMin: 9424, finalMax: 10416 },
+        acilis('STR_USUL'),
+        [
+          ardaIlk,
+          leyla,
+          banka,
+          [choose('H_KLIP'), examine('play', 'k6'), examine('mag', 'k1'), examine('play', 'k5'), choose('KLIP_BITIR')],
+          otobus,
+          terminal,
+          choose('AK1_KAYIT'),
+          leyla,
+          oda,
+          emanet,
+          hayri,
+          bufe,
+          choose('AK2_DURUST'),
+          leyla,
+          ardaIkinci,
+          recep,
+          zehra,
+          dilekce,
+          [
+            choose('H_CIKARIM'),
+            combine('clue_son_kare', 'clue_harcama_saat'),
+            combine('clue_atm_fisi', 'clue_zarf'),
+            combine('clue_sari_not', 'clue_153_arama'),
+            combine('clue_dort_kamera', 'clue_kaynak_dosya'),
+            combine('clue_gozluk', 'clue_dokuz_koltuk'),
+            combine('clue_koltuk_boslugu', 'clue_ilk_kare'),
+            choose('CIKARIM_BITIR'),
+          ],
+          gece,
+        ],
+        chooseAll(
+          'H100_DEVAM',
+          'H101_NIYET',
+          'H101_BITIR',
+          'H101S1_CEVAP',
+          'H101S2_ITIRAZ',
+          'H101S3_ITIRAZ',
+          'H102_FOTO',
+          'H102_BITIR',
+          'H103_A',
+        ),
+        hayriCapraz,
+        chooseAll(
+          'H105_EKSIK',
+          'H105_BITIR',
+          'H106_RECEP',
+          'H106_VOLKAN',
+          'H106_BITIR',
+          'H107_SURE',
+          'H109_DEVAM',
+          'ARAGIRIS_DEVAM',
+        ),
+        araLeyla,
+        kayit,
+        cagri,
+        gulten,
+        ardaAra,
+        choose('AA_DAKIKA'),
+        araLeyla,
+        chooseAll('A2_VOLKAN', 'VK_NASIL', 'VK_BITIR'),
+        ozanAra,
+        hayriAra,
+        choose('AK3_GELSIN'),
+        araLeyla,
+        tahta2(),
+        chooseAll('A2_SUC', 'SUC_SOFOR', 'A2_DURUSMA', 'AS_EKSIK'),
+        chooseAll('H200_DEVAM', 'IZ_BIRAKMA', 'IZ_BITIR', 'HV0_DEVAM'),
+        press('VS1'),
+        present('ded_eksik_kayit', 'VS1B'),
+        press('VS3'),
+        present('ev_aktarim_formu', 'VS3B'),
+        choose('H2V_BITIR'),
+        chooseAll('HRC0_A'),
+        present('ded_sofor_red', 'RS1'),
+        choose('H2RC_BITIR'),
+        chooseAll('HG_YOK', 'HO_NOT', 'EK_HICBIRI', 'HEQ_CEVAP', 'MC_A', 'SAV_E', 'SON_A'),
       ),
       goldenPath(
         'W',
-        { outcome: 'MAHKUMIYET' },
+        { outcome: 'MAHKUMIYET', finalMin: 7581, finalMax: 8379 },
         acilis('STR_USUL'),
         soruskurmaTam,
         celse1Tam,

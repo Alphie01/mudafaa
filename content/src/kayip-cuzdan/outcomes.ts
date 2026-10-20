@@ -1,4 +1,18 @@
-import { all, always, any, because, cmp, finalAtLeast, flag, has, not, outcome, ref, v, xp } from '../../../tools/content/src/kit/index.js';
+import {
+  all,
+  always,
+  any,
+  because,
+  cmp,
+  finalAtLeast,
+  flag,
+  has,
+  not,
+  outcome,
+  ref,
+  v,
+  xp,
+} from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { S } from './dsl.js';
 import { THRESHOLDS } from './meta.js';
@@ -23,7 +37,10 @@ export const outcomes: CasePart = {
         'Sanık Arda Çınar’ın sabit görülen eylemi nedeniyle TCK 141/1 uyarınca takdiren 1 yıl hapis cezası ile cezalandırılmasına; kovuşturma başladıktan sonra ve hüküm verilmeden önce zararın tamamen giderilmesi nedeniyle TCK 168/2 uyarınca cezasından 1/2 oranında indirim yapılarak 6 ay hapis cezası ile cezalandırılmasına; sanığın geçmişi ve duruşmadaki tutumu lehine takdiri indirim nedeni sayılarak TCK 62/1 uyarınca 1/6 oranında indirimle 5 ay hapis cezası ile cezalandırılmasına; zararın giderilmiş olması ve sanığın sabıkasız bulunması karşısında CMK 231/5 uyarınca HÜKMÜN AÇIKLANMASININ GERİ BIRAKILMASINA ve 5 yıl denetim süresine tabi tutulmasına; CMK 231/12 uyarınca istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).',
       reasoning: [
         because('Sanık ek savunmasında atılı suçu kabul etmiş, zarar sanık yakınınca giderilmiştir.'),
-        because('Sanığın ikrarı, kolluk ve ilk celsedeki inkârıyla ve müştekiye gönderdiği mesajla çelişse de mahkeme sanığın son beyanını esas almıştır.', flag('gulten_mesaj')),
+        because(
+          'Sanığın ikrarı, kolluk ve ilk celsedeki inkârıyla ve müştekiye gönderdiği mesajla çelişse de mahkeme sanığın son beyanını esas almıştır.',
+          flag('gulten_mesaj'),
+        ),
         because('Etkin pişmanlık ve takdiri indirim hükümleri uygulanmıştır.'),
       ],
       legalBasis: 'TCK 141/1, 168/2, 62/1; CMK 231/5–12, 273/1 · Avukatlık Kanunu md. 34; TCK 270',
@@ -65,10 +82,24 @@ Leyla’nın odasının ışığı yanıyordu. Kapısı kapalıydı. O gece kap�
       sentence: 'Ceza yok · CMK 223/2-b',
       verdictText: `Sanık Arda Çınar’ın üzerine atılı hırsızlık suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; ${TAZMINAT}; dosyanın bir örneğinin ilgili soruşturmayla irtibatlandırılmak üzere Cumhuriyet Başsavcılığına gönderilmesine; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).`,
       reasoning: [
-        because('Dört kanallı tam sefer kaydında müştekinin cüzdanının 18.33’te başka bir kişi tarafından alındığı, 18.36’da koltuk altına bırakıldığı ve bu kişilerin 18.37’de araçtan indiği görülmüştür.'),
-        because('Müştekinin kartıyla harcama yapan kişi büfe sahibi tanıkça teşhis edilmiş; müştekinin kartı ayrı soruşturmada yakalanan şüphelilerin üzerinde ele geçirilmiştir.'),
-        because('Şoför tanık, sanığın cüzdanı kendisine uzattığını ve geri çevirdiğini duruşmada beyan etmiştir.', flag('contra_r')),
-        because('Sanık cüzdanı bulduktan sonra çağrı merkezini aramış ve sahibine mesaj göndermiştir; teslim iradesi açıktır.', any(has('ded_niyet_tam'), has('ded_teslim'), has('ev_cagri_kaydi'))),
+        because(
+          'Dört kanallı tam sefer kaydında müştekinin cüzdanının 18.33’te başka bir kişi tarafından alındığı, 18.36’da koltuk altına bırakıldığı ve bu kişilerin 18.37’de araçtan indiği görülmüştür.',
+        ),
+        because(
+          'Müştekinin kartıyla harcama yapan kişi büfe sahibi tanıkça teşhis edilmiş; müştekinin kartı ayrı soruşturmada yakalanan şüphelilerin üzerinde ele geçirilmiştir.',
+        ),
+        because(
+          'Şoför tanık, sanığın cüzdanı kendisine uzattığını ve geri çevirdiğini duruşmada beyan etmiştir.',
+          flag('contra_r'),
+        ),
+        because(
+          'Sanık cüzdanı bulduktan sonra çağrı merkezini aramış ve sahibine mesaj göndermiştir; teslim iradesi açıktır.',
+          any(has('ded_niyet_tam'), has('ded_teslim'), has('ev_cagri_kaydi')),
+        ),
+        because(
+          'Kolluk tanığı Bşk. Orhan Kılınç, aynı yöntemle işlenmiş altı dosyayı ve şüphelilerin yakalanışını duruşmada anlatmıştır.',
+          flag('orhan_dinlendi'),
+        ),
         because('Bu deliller birlikte değerlendirildiğinde yüklenen suçun sanık tarafından işlenmediği sabittir.'),
       ],
       legalBasis: 'CMK 223/2-b; CMK 141, 231/3, 273/1',
@@ -112,25 +143,57 @@ Arda Çınar bahar döneminde staj okuluna döndü. Dördüncü sınıflar onu t
     outcome('BERAAT_E', {
       class: 'ACQUITTAL',
       priority: 3,
-      when: all(not(flag('cokus')), flag('beraat_talep'), ref('beraat_zemini'), cmp(v('pers'), '>=', 5), finalAtLeast(THRESHOLDS.BERAAT_E)),
+      when: all(
+        not(flag('cokus')),
+        flag('beraat_talep'),
+        ref('beraat_zemini'),
+        cmp(v('pers'), '>=', 5),
+        finalAtLeast(THRESHOLDS.BERAAT_E),
+      ),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
       sentence: 'Ceza yok · CMK 223/2-e',
       verdictText: `Sanık Arda Çınar’ın üzerine atılı hırsızlık suçunu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; ${TAZMINAT}; kartların kullanılmasına ilişkin soruşturmanın sürdürülmesi için dosyanın bir örneğinin Cumhuriyet Başsavcılığına gönderilmesine; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).`,
       reasoning: [
-        because('Savcılığın dayandığı CD kaydı, dört kanallı ve bir saatlik bir sefer kaydının tek kanalından alınmış 2,5 dakika olup 18.43’e ait bir dakikası eksiktir.', any(flag('contra_v'), flag('contra_v2'))),
-        because('Tanık Hayri Doğan, müştekinin arkasındaki kişinin yüzünü görmediğini, teşhisin karakolda kendisine gösterilen tek görüntüye dayandığını beyan etmiştir.', any(flag('contra_h1'), flag('contra_h4'))),
-        because('Sanığın cüzdanı müştekinin çantasından değil, oturduğu koltuğun altından aldığı kayıtla sabittir.', any(flag('contra_h4'), has('ded_buldu'))),
-        because('Müştekinin kartları sanık otobüsteyken kilometrelerce geride kullanılmış olup kartların sanıkta olduğuna dair bir delil yoktur.', has('ded_kart_baskasi')),
+        because(
+          'Savcılığın dayandığı CD kaydı, dört kanallı ve bir saatlik bir sefer kaydının tek kanalından alınmış 2,5 dakika olup 18.43’e ait bir dakikası eksiktir.',
+          any(flag('contra_v'), flag('contra_v2')),
+        ),
+        because(
+          'Tanık Hayri Doğan, müştekinin arkasındaki kişinin yüzünü görmediğini, teşhisin karakolda kendisine gösterilen tek görüntüye dayandığını beyan etmiştir.',
+          any(flag('contra_h1'), flag('contra_h4')),
+        ),
+        because(
+          'Sanığın cüzdanı müştekinin çantasından değil, oturduğu koltuğun altından aldığı kayıtla sabittir.',
+          any(flag('contra_h4'), has('ded_buldu')),
+        ),
+        because(
+          'Müştekinin kartları sanık otobüsteyken kilometrelerce geride kullanılmış olup kartların sanıkta olduğuna dair bir delil yoktur.',
+          has('ded_kart_baskasi'),
+        ),
         because('Şoför tanık, sanığın cüzdanı kendisine uzattığını duruşmada kabul etmiştir.', flag('contra_r')),
-        because('Sanık olay akşamı çağrı merkezini aramış, sahibine mesaj göndermiş ve ertesi sabah için karakol notu yazmıştır.', any(has('ded_teslim'), has('ded_niyet_tam'))),
+        because(
+          'Sanık olay akşamı çağrı merkezini aramış, sahibine mesaj göndermiş ve ertesi sabah için karakol notu yazmıştır.',
+          any(has('ded_teslim'), has('ded_niyet_tam')),
+        ),
         because('Müşteki, sanığın cüzdanını çaldığına artık inanmadığını beyan etmiştir.', flag('gulten_tanik')),
-        because('Sanığın suçu işlediğine dair her türlü şüpheden uzak, kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2).'),
+        because(
+          'Tanık Ozan Kaplan, sanığın el yazısıyla “Yarın 9 — karakol” notunu olay gecesi gördüğünü beyan etmiştir.',
+          flag('ozan_dinlendi'),
+        ),
+        because(
+          'Şoför tanık çekinme hakkını kullanmış; ancak ön kameranın kaydı sanığın cüzdanı şoföre uzattığını göstermektedir.',
+          flag('recep_cekindi'),
+        ),
+        because(
+          'Sanığın suçu işlediğine dair her türlü şüpheden uzak, kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2).',
+        ),
       ],
       legalBasis: 'CMK 223/2-e; Anayasa 38/4; AİHS 6/2; CMK 141, 231/3, 273/1',
       xp: xp(1, { ethicsVar: 'ethics' }),
-      howToReach: 'Savcılık delillerini en az üç bulguyla sars (kayıt, tanık, kartlar, teslim izleri, şoför, müşteki) ve esas savunmada beraat iste.',
+      howToReach:
+        'Savcılık delillerini en az üç bulguyla sars (kayıt, tanık, kartlar, teslim izleri, şoför, müşteki) ve esas savunmada beraat iste.',
       epilogue: [
         {
           lines: S(`
@@ -192,14 +255,22 @@ leyla.mutlu: Hırsızlık değil. Sahibini beklemek.
       verdictText:
         'Sanığın eyleminin TCK 160 kapsamında kaybolmuş eşya üzerinde tasarruf suçunu oluşturduğu kabul edilerek (CMK 226 uyarınca ek savunma hakkı tanınmıştır), müştekinin uzlaşmayı kabul etmeyeceğini duruşmada açıkça beyan etmesi karşısında, sanığın TCK 160 uyarınca takdiren 60 gün adli para cezası ile cezalandırılmasına; TCK 62/1 uyarınca 1/6 indirimle 50 gün adli para cezasına; günlüğü TCK 52/2 uyarınca 100 TL’den 5.000 TL adli para cezasına; cüzdanın müştekiye zarar görmeden teslim edilmiş olması ve sanığın sabıkasız bulunması karşısında CMK 231/5 uyarınca HÜKMÜN AÇIKLANMASININ GERİ BIRAKILMASINA ve 5 yıl denetim süresine tabi tutulmasına; zarf içindeki 600 TL ile el yazılı notun sanığa iadesine; CMK 231/12 ve 272/3-a gözetilerek kesin olmak üzere.',
       reasoning: [
-        because('Sanığın cüzdanı müştekinin zilyetliğinden aldığı ispatlanamamış; cüzdanın araçta koltuk altında bulunduğu anlaşılmıştır. Bu nedenle hırsızlık suçunun unsurları oluşmamıştır.'),
-        because('Ancak sanığın bulduğu cüzdanı yetkili mercilere teslim etmeyip yaklaşık on beş saat evinde tuttuğu sabittir; teslim girişimlerine dair beyanlar duruşmada yeterince desteklenmemiştir.'),
-        because('Savunma kademeli olarak beraat, olmazsa TCK 160 ve hükmün açıklanmasının geri bırakılmasını talep etmiştir.', flag('terditli')),
+        because(
+          'Sanığın cüzdanı müştekinin zilyetliğinden aldığı ispatlanamamış; cüzdanın araçta koltuk altında bulunduğu anlaşılmıştır. Bu nedenle hırsızlık suçunun unsurları oluşmamıştır.',
+        ),
+        because(
+          'Ancak sanığın bulduğu cüzdanı yetkili mercilere teslim etmeyip yaklaşık on beş saat evinde tuttuğu sabittir; teslim girişimlerine dair beyanlar duruşmada yeterince desteklenmemiştir.',
+        ),
+        because(
+          'Savunma kademeli olarak beraat, olmazsa TCK 160 ve hükmün açıklanmasının geri bırakılmasını talep etmiştir.',
+          flag('terditli'),
+        ),
         because('Müştekinin uğradığı zarar cüzdan yönünden mevcut değildir; sanık sabıkasızdır.'),
       ],
       legalBasis: 'TCK 160, 62/1, 52; CMK 226, 231/5–12, 272/3-a',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
-      howToReach: 'Cüzdanın bulunduğunu göster (CD’nin ilk kareleri, koltuk boşluğu, kartların başkasında olması) ama teslim girişimlerini ve tanık çelişkilerini delille kuramazsan mahkeme TCK 160’ta kalır.',
+      howToReach:
+        'Cüzdanın bulunduğunu göster (CD’nin ilk kareleri, koltuk boşluğu, kartların başkasında olması) ama teslim girişimlerini ve tanık çelişkilerini delille kuramazsan mahkeme TCK 160’ta kalır.',
       epilogue: [
         {
           lines: S(`
@@ -240,7 +311,9 @@ leyla: Bir dahaki dosyada eksik dakikayı daha erken ara. İstemediğin kayıt g
       verdictText:
         'Sanık Arda Çınar’ın üzerine atılı hırsızlık suçunu işlediği sabit olduğundan TCK 141/1 uyarınca takdiren 1 yıl hapis cezası ile cezalandırılmasına; sanığın sabıkasız geçmişi ve cezanın geleceği üzerindeki olası etkileri lehine takdiri indirim nedeni sayılarak TCK 62/1 uyarınca 1/6 indirimle 10 ay hapis cezası ile cezalandırılmasına; zararın giderilmemesi nedeniyle CMK 231/6-c koşulu gerçekleşmediğinden hükmün açıklanmasının geri bırakılmasına yer olmadığına; TCK 51/1 uyarınca cezanın ertelenmesine ve 1 yıl denetim süresi belirlenmesine; kısa süreli hapis cezası ertelendiğinden TCK 53/4 uyarınca TCK 53/1’in uygulanmamasına; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).',
       reasoning: [
-        because('Kamera kaydı, tanık beyanı ve cüzdanın sanığın çantasında bulunması birlikte değerlendirildiğinde sanığın eylemi sabit görülmüştür.'),
+        because(
+          'Kamera kaydı, tanık beyanı ve cüzdanın sanığın çantasında bulunması birlikte değerlendirildiğinde sanığın eylemi sabit görülmüştür.',
+        ),
         because('Sanığın teslim etmek istediğine dair savunması dosya kapsamındaki delillerle desteklenmemiştir.'),
         because('Savunmanın inandırıcılığı duruşmada çöktü; mahkeme iddianamedeki anlatımı esas aldı.', flag('cokus')),
       ],

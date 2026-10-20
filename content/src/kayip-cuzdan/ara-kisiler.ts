@@ -173,6 +173,58 @@ hayri: Yanlış kapı insanın içinde kalır kızım. Bunu da bırakmayayım i�
       ],
     },
 
+    {
+      id: 'ARA_KARAKOL',
+      type: 'DIALOGUE',
+      mode: 'CONVERSATION',
+      ...ARA,
+      title: 'Pol. Mem. Serkan Ulu',
+      background: 'karakol',
+      room: { label: 'GÖRÜKLE POLİS MERKEZİ', character: 'serkan' },
+      lines: B(`
+# karakol | 10.30 — GÖRÜKLE POLİS MERKEZİ
+Durağın tam karşısında. Kapıda bir bariyer, bir nöbetçi kulübesi, ıslak bir Türk bayrağı. Arda’nın o gece kapısına kadar gelip döndüğü yer.
+> Kırk adım. Bir öğrenci için kırk adım, bir ömürlük bir korkunun önünde duran bir duvar olabilir.
+İçeride florasan, kuru kahve kokusu, bir yazıcının hırıltısı. Masada genç bir memur, önünde bir yığın tutanak.
+serkan: Avukat hanım? Serkan Ulu. Cüzdan dosyası, değil mi? Davetiye gelmedi bana, tanık değilim. Ama sorun, bildiğimi söylerim. Beş dakika.
+`),
+      choices: [
+        option('KR_SABAH', '“7 Mart sabahını anlatır mısınız?”', {
+          next: '$stay',
+          score: { SORGULAMA: 30 },
+          effects: [raise('serkan_anlatti')],
+          responses: B(`
+serkan: Gece kaydı izledik, kent kartla adı bulduk, sabah sekiz on beşte kapıdaydık. Çocuk “buldum, bugün teslim edecektim” dedi. Hepsi öyle der.
+serkan: Çantada cüzdan, zarfta para, masada bir not. Hepsini poşetledik. Notu okumadım, itiraf edeyim. Delil poşeti açılmaz, açılırsa tutanak bozulur.
+> Poşet açılmaz. Açılmayan poşetlerde okunmayan notlar. Bir dosya bazen böyle doğar.
+`),
+        }),
+        option('KR_CD', '“CD’ye neden yalnızca orta kamerayı aldınız?”', {
+          next: '$stay',
+          score: { SORGULAMA: 30 },
+          effects: [raise('serkan_cd')],
+          responses: B(`
+serkan: Çocuk orta kamerada, net. Cüzdanı alıyor, çantaya koyuyor. Olay anı belliydi. Bir saat izleyecek vaktim yoktu; o gece üç dosyam vardı.
+serkan: Klasör duruyor, mahkeme isterse gelir. Biz ne gördüysek onu aldık.
+Bir an sustu. Kahvesine baktı.
+serkan: Öncesi var mıydı? Varsa… varsa kötü olmuş.
+`),
+        }),
+        option('KR_SUCLA', '“Eksik soruşturma yaptınız. Bunu mahkemede söyleyeceğim.”', {
+          next: '$stay',
+          score: { SORGULAMA: -30 },
+          effects: [raise('serkan_kizgin')],
+          bad: 'Bilgi almaya gittiğin bir kolluk görevlisini suçlamak hiçbir şey kazandırmaz; eksikliği mahkemede delille göstermek yeter. Gereksiz çatışma kapıları kapatır.',
+          category: 'SORGULAMA',
+          responses: B(`
+serkan.kizgin: Söyleyin. Ben işimi yaptım. Siz de sizinkini yapın. Kapı orada avukat hanım.
+> Kırk adım geri yürüdüm. Arda’nın o gece yürüdüğü kırk adım. Ben kendi elimle kapattım kapıyı.
+`),
+        }),
+        home('KR_BITIR', 'Teşekkür edip çık'),
+      ],
+    },
+
     story('ARA_AKSAM2', {
       ...ARA,
       title: 'Zehra’nın telefonu',
@@ -205,4 +257,3 @@ zehra~phone: Arda’ya mı? Haklısınız. Hep ben karar veriyorum onun yerine. 
     }),
   ],
 };
-

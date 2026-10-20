@@ -53,7 +53,8 @@ export const cast: CasePart = {
       bio: 'Kars Sarıkamışlı. Görükle’de ev arkadaşıyla kalıyor. Sabıkasız.',
       accent: '#7d8590',
       spriteId: 'sp_arda',
-      notes: 'Gerçek: cüzdanı 18.42’de koltuğun altında buldu; 18.43’te yanındakine sordu, 19.05’te şoföre uzattı, 19.18’de 153’ü aradı, 21.14’te Facebook’tan yazdı, 22.30’da not yazdı. Polis korkusu: lisedeki kimlik kontrolü.',
+      notes:
+        'Gerçek: cüzdanı 18.42’de koltuğun altında buldu; 18.43’te yanındakine sordu, 19.05’te şoföre uzattı, 19.18’de 153’ü aradı, 21.14’te Facebook’tan yazdı, 22.30’da not yazdı. Polis korkusu: lisedeki kimlik kontrolü.',
     }),
     character('zehra', {
       name: 'Zehra Çınar',
@@ -96,7 +97,8 @@ export const cast: CasePart = {
       bio: 'Yirmi iki yıllık şoför. Olay akşamı Hat 38’in direksiyonundaydı.',
       accent: '#2c3e66',
       spriteId: 'sp_recep',
-      notes: 'Son disiplin uyarısında. Arda’yı 19.05’te “yarın kayıp eşyaya götür” diye geri çevirdi; polise “kimse getirmedi” dedi.',
+      notes:
+        'Son disiplin uyarısında. Arda’yı 19.05’te “yarın kayıp eşyaya götür” diye geri çevirdi; polise “kimse getirmedi” dedi.',
     }),
     character('volkan', {
       name: 'Volkan Sezer',
@@ -135,6 +137,15 @@ export const cast: CasePart = {
       occupation: 'Asayiş Şube · hırsızlık büro',
       bio: 'Toplu taşımada yankesicilik dosyalarına bakıyor.',
       accent: '#1c2846',
+      spriteId: 'polis',
+    }),
+    character('serkan', {
+      name: 'Pol. Mem. Serkan Ulu',
+      shortLabel: 'Serkan',
+      role: 'POLICE',
+      occupation: 'Görükle Polis Merkezi',
+      bio: 'CD’yi Kent Ulaşım’dan teslim alan ve 7 Mart sabahı aramayı yapan memur.',
+      accent: '#2c3e66',
       spriteId: 'polis',
     }),
     character('hakim', {

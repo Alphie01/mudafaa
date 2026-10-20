@@ -20,7 +20,8 @@ export const evidencePart: CasePart = {
       side: 'PROSECUTION',
       strength: 'STRONG',
       tagLabel: 'SAVCILIK',
-      legalNote: 'Kamera kaydı her türlü delille ispat ilkesine (CMK 217/2) göre delildir; bütünlüğü ve eksiksizliği tartışılabilir.',
+      legalNote:
+        'Kamera kaydı her türlü delille ispat ilkesine (CMK 217/2) göre delildir; bütünlüğü ve eksiksizliği tartışılabilir.',
       initiallyKnown: true,
     }),
     evidence('ev_aktarim_formu', {
@@ -123,7 +124,8 @@ export const evidencePart: CasePart = {
       icon: 'camera',
       side: 'DEFENSE',
       strength: 'STRONG',
-      missedHint: 'CD’deki kaynak dosya ve otobüsteki dört kamera, tam kaydın arşivde olduğunu gösteriyordu; dilekçeyle ya da 1. celsede istenebilirdi.',
+      missedHint:
+        'CD’deki kaynak dosya ve otobüsteki dört kamera, tam kaydın arşivde olduğunu gösteriyordu; dilekçeyle ya da 1. celsede istenebilirdi.',
     }),
     evidence('ev_cagri_kaydi', {
       type: 'BELGE',
@@ -166,7 +168,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Arkaya bakan 9 numaralı koltuk',
       shortText: 'Orta kapıya üç metre; yüzü arka tarafa dönük.',
-      description: 'Hayri Bey’in oturduğu yer. Orta kapıdaki kalabalığı ancak başını kaldırıp üç metre öteye bakarak görebilir.',
+      description:
+        'Hayri Bey’in oturduğu yer. Orta kapıdaki kalabalığı ancak başını kaldırıp üç metre öteye bakarak görebilir.',
       sourceLabel: 'Hat 38 · aynı model araç',
       icon: 'magnifier',
     }),
@@ -199,7 +202,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Ev sahibinin ikinci uyarı mesajı',
       shortText: 'İki aylık kira payı gecikmiş.',
-      description: 'Savcılığın sorabileceği soru: parası olmayan bir öğrenci boş bir cüzdanı neden saklar? Arda için iyi görünmüyor.',
+      description:
+        'Savcılığın sorabileceği soru: parası olmayan bir öğrenci boş bir cüzdanı neden saklar? Arda için iyi görünmüyor.',
       sourceLabel: 'Öğrenci evi · buzdolabı kapağı',
       icon: 'document',
     }),
@@ -283,7 +287,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Hareket memurunun “olay klasörü”',
       shortText: 'Polis kayıt isteyince seferin bir saati, dört kamerasıyla iki yıl saklanan bir klasöre alınır.',
-      description: 'CD’ye yalnızca polisin istediği dakikalar basılır; klasör yerinde kalır. Mahkeme yazı yazarsa gönderilir.',
+      description:
+        'CD’ye yalnızca polisin istediği dakikalar basılır; klasör yerinde kalır. Mahkeme yazı yazarsa gönderilir.',
       sourceLabel: 'Kent Ulaşım terminali · hareket memurluğu',
       icon: 'document',
     }),
@@ -398,8 +403,10 @@ export const evidencePart: CasePart = {
     insight('ded_kart_baskasi', {
       type: 'BELGE',
       title: 'Çıkarım: kartları kullanan Arda değil',
-      shortText: '18.44.30’da Beşevler’e giden otobüsteydi; 18.49’da kartlar kilometrelerce geride, Altıparmak’ta kullanıldı.',
-      description: 'Kartları Arda’nın kendisi kullanmış olamaz. Savcılık “suç ortağı” diyebilir; ama ortağın kim olduğu dosyada yok.',
+      shortText:
+        '18.44.30’da Beşevler’e giden otobüsteydi; 18.49’da kartlar kilometrelerce geride, Altıparmak’ta kullanıldı.',
+      description:
+        'Kartları Arda’nın kendisi kullanmış olamaz. Savcılık “suç ortağı” diyebilir; ama ortağın kim olduğu dosyada yok.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'DEFENSE',
@@ -468,7 +475,8 @@ export const evidencePart: CasePart = {
     insight('ded_birakan', {
       type: 'BELGE',
       title: 'Çıkarım: cüzdanı bırakan Altıparmak’ta indi',
-      shortText: '18.36’da koltuk altına cüzdanı bırakan parkalı adam 18.37’de Altıparmak’ta iniyor; Arda otobüste kalıyor.',
+      shortText:
+        '18.36’da koltuk altına cüzdanı bırakan parkalı adam 18.37’de Altıparmak’ta iniyor; Arda otobüste kalıyor.',
       description: 'Cüzdan Arda’nın eline geçmeden önce başkasının elindeydi.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
@@ -478,7 +486,8 @@ export const evidencePart: CasePart = {
     insight('ded_bere_ayni', {
       type: 'BELGE',
       title: 'Çıkarım: büfedeki bere, otobüsteki bere',
-      shortText: 'Orta kapıdaki yeşil bereli kadın 18.37’de Altıparmak’ta iniyor; 18.49’da büfede yeşil bereli biri kartı üçe bölüyor.',
+      shortText:
+        'Orta kapıdaki yeşil bereli kadın 18.37’de Altıparmak’ta iniyor; 18.49’da büfede yeşil bereli biri kartı üçe bölüyor.',
       description: 'Kartları kullanan ile cüzdanı alan aynı ekibin parçası.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',

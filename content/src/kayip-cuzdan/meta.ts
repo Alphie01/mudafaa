@@ -15,7 +15,7 @@ import { ARA_AP, ARA_DAYS, INV_AP, INV_DAYS } from './shared.js';
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler. Eşikler (THRESHOLDS) sonuç koşullarıyla paylaşılır.
 
 /** Final skor eşikleri: eşik çubuğu ve sonuç koşulları aynı değerleri kullanır (THRESHOLD_MISMATCH). */
-export const THRESHOLDS = { NITELENDIRME: 3500, BERAAT_E: 7500, BERAAT_B: 9500 } as const;
+export const THRESHOLDS = { NITELENDIRME: 3000, BERAAT_E: 9300, BERAAT_B: 10500 } as const;
 
 const pips = (id: string, label: string, initial: number, max: number, min = 0) => ({
   id,
@@ -92,7 +92,7 @@ export const meta: CasePart = {
         { id: 'hatali', label: 'Hatalı delil ({{var.wrong}})' },
       ],
       bonuses: [{ id: 'guven', label: 'Güvenilirlik bonusu', value: { mul: [{ var: 'cred' }, 100] } }],
-      scaleMax: 13000,
+      scaleMax: 12000,
       thresholdBar: thresholdBar([
         ['Mahkûmiyet', 0, 'red'],
         ['TCK 160', THRESHOLDS.NITELENDIRME, 'amber'],
@@ -261,6 +261,9 @@ export const meta: CasePart = {
       'tutanak_ornek',
       'hayri_hayat',
       'recep_insan',
+      'serkan_anlatti',
+      'serkan_cd',
+      'serkan_kizgin',
     ),
   ],
 };

@@ -1,6 +1,46 @@
 {
   "nodes": [
     {
+      "id": "ARA_GIRIS_0",
+      "type": "DECISION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "lines": [
+        {
+          "when": { "flag": "pisman_soruldu" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "O gece büroda tutanağı yeniden okudum: “Sanık pişmanlığını beyan etti.” Altında Arda’nın kendi cümlesi. Bir “pişman mısın” sorusu, bir ömür taşınan bir satıra dönüşebilirdi.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "arda_niyet_mahkemede" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "O gece büroda tutanağı yeniden okudum. Arda’nın cümleleri ilk kez kâğıttaydı: yanındaki yolcu, şoför, belediye, mesaj. Yedi aydır kimsenin yazmadığı cümleler.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "gulten_polis_dedi" }, { "flag": "ek_simdi" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "O gece büroda tutanağı yeniden okudum. Bazı cümleler erken söylenmişti; bazıları başkasının ağzından. Üç hafta, onları yerine oturtmak için var.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_GIRIS_1" }],
+      "choices": []
+    },
+    {
       "id": "ARA_GIRIS_1",
       "type": "DECISION",
       "chapter": "Bölüm 4 · Ara",
@@ -37,6 +77,14 @@
               "speaker": "zehra",
               "expression": "kizgin",
               "text": "Uygun görülmüş! Kim görmüş? Çocuklar seni soruyormuş. Öğretmen arkadaşın söyledi."
+            },
+            {
+              "speaker": "arda",
+              "text": "Bir kız resim göndermiş, öğretmen arkadaş iletti. Bir otobüs çizmiş, içinde bir adam. Altında “Arda Öğretmenim çabuk gel” yazıyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arda telefonu kapattı ve cama yasladı. Cam buğuluydu. Parmağıyla bir şey çizmedi."
             },
             {
               "speaker": "player",
@@ -81,6 +129,14 @@
               "text": "Uygun görülmüş! Kim görmüş? Çocuklar seni soruyormuş. Öğretmen arkadaşın söyledi."
             },
             {
+              "speaker": "arda",
+              "text": "Bir kız resim göndermiş, öğretmen arkadaş iletti. Bir otobüs çizmiş, içinde bir adam. Altında “Arda Öğretmenim çabuk gel” yazıyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arda telefonu kapattı ve cama yasladı. Cam buğuluydu. Parmağıyla bir şey çizmedi."
+            },
+            {
               "speaker": "player",
               "text": "İki hafta önce bir dosyam vardı. Şimdi bir arabanın içinde üç kişiyiz ve dosya aramızda oturuyor. Yağmur bitmiyor.",
               "style": "thought"
@@ -123,6 +179,14 @@
               "text": "Uygun görülmüş! Kim görmüş? Çocuklar seni soruyormuş. Öğretmen arkadaşın söyledi."
             },
             {
+              "speaker": "arda",
+              "text": "Bir kız resim göndermiş, öğretmen arkadaş iletti. Bir otobüs çizmiş, içinde bir adam. Altında “Arda Öğretmenim çabuk gel” yazıyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arda telefonu kapattı ve cama yasladı. Cam buğuluydu. Parmağıyla bir şey çizmedi."
+            },
+            {
               "speaker": "player",
               "text": "İki hafta önce bir dosyam vardı. Şimdi bir arabanın içinde üç kişiyiz ve dosya aramızda oturuyor. Yağmur bitmiyor.",
               "style": "thought"
@@ -162,6 +226,14 @@
               "speaker": "zehra",
               "expression": "kizgin",
               "text": "Uygun görülmüş! Kim görmüş? Çocuklar seni soruyormuş. Öğretmen arkadaşın söyledi."
+            },
+            {
+              "speaker": "arda",
+              "text": "Bir kız resim göndermiş, öğretmen arkadaş iletti. Bir otobüs çizmiş, içinde bir adam. Altında “Arda Öğretmenim çabuk gel” yazıyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arda telefonu kapattı ve cama yasladı. Cam buğuluydu. Parmağıyla bir şey çizmedi."
             },
             {
               "speaker": "player",
@@ -272,7 +344,7 @@
           "id": "t2_kisi",
           "label": "KİŞİLER",
           "kind": "PEOPLE",
-          "choices": ["A2_GULTEN", "A2_CEMIL", "A2_ARDA", "A2_VOLKAN", "A2_OZAN", "A2_HAYRI"]
+          "choices": ["A2_GULTEN", "A2_CEMIL", "A2_ARDA", "A2_VOLKAN", "A2_OZAN", "A2_HAYRI", "A2_KARAKOL"]
         },
         { "id": "t2_adim", "label": "ADIMLAR", "kind": "SCENE", "choices": ["A2_SUC", "A2_YANLIS"] }
       ],
@@ -362,6 +434,15 @@
           "maxUses": 1,
           "description": "Tanık · Görükle",
           "visibleWhen": { "flag": "ozan_istendi" }
+        },
+        {
+          "id": "A2_KARAKOL",
+          "kind": "NAVIGATE",
+          "label": "Görükle Polis Merkezine uğra",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_KARAKOL",
+          "maxUses": 1,
+          "description": "Aramayı yapan memur"
         },
         {
           "id": "A2_HAYRI",
@@ -481,6 +562,10 @@
                   "speaker": "leyla",
                   "expression": "mutlu",
                   "text": "Bunu duruşmada söyleme. Hâkimler bu cümleyi sever ama savcılar sevmez."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Ben bu çekmeceyi otuz yıldır kilitlemiyorum, Deniz. Biri bir gün gelip “benim” der diye. Eksik dakika da böyledir: kapıyı kilitlemezsen bir gün biri getirir."
                 },
                 { "speaker": "narrator", "text": "Çekmeceyi kapattı. Anahtarı çevirmedi." }
               ]
@@ -2211,6 +2296,71 @@
       ]
     },
     {
+      "id": "ARA_SON_4",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "flag": "kayit_arda_haber" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Arda’ya kaydı erken söyledim. O günden beri her mesajının sonunda bir soru işareti var. Umut da bir yük; onu da ben verdim.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "kayit_sakla" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Kaydı Arda’ya söylemedim. Yarın salonda ilk kez görecek. Bir sürprizin iki yüzü vardır: sevindirir ya da sarsar.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "serkan_anlatti" }, { "flag": "serkan_cd" }, { "flag": "serkan_kizgin" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Görükle karakolunun kapısı durağın tam karşısında. Kırk adım. Arda o kırk adımı yürüdü ve döndü. Ben yürüdüm ve içeri girdim. Fark bir korkudan ibaret.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "ozan_hazir" }, { "flag": "ozan_anlatti" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ozan “ölçtüğümü söylerim” dedi. Bir mühendisten iyi bir tanık çıkar; yeter ki ona ne söyleyeceğini kimse ölçmeye kalkmasın.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "any": [
+              { "flag": "volkan_segment" },
+              { "flag": "ek_cerceve" },
+              { "flag": "ara_aksam_dakika" },
+              { "flag": "ara_aksam_ikisi" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Leyla “kazanmayı mı, eksik dakikayı mı” diye sormuştu. Bu gece ikisinin aynı yere çıkıp çıkmayacağını bilmiyorum. Yarın öğreneceğim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_SON" }],
+      "choices": []
+    },
+    {
       "id": "ARA_SON_1",
       "type": "DECISION",
       "chapter": "Bölüm 4 · Ara",
@@ -2369,7 +2519,7 @@
           ]
         }
       ],
-      "routes": [{ "to": "ARA_SON" }],
+      "routes": [{ "to": "ARA_SON_4" }],
       "choices": []
     }
   ],

@@ -25,6 +25,7 @@ export const CAST = new Set([
   'cemil',
   'ozan',
   'orhan',
+  'serkan',
   'hakim',
   'savci',
   'katip',

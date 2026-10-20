@@ -3,7 +3,6 @@ import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { B, S } from './dsl.js';
 import { BRIEF, COLD, INV, INV_AP } from './shared.js';
 
-
 const BR01_VAAT = `
 Zehra gittikten sonra Leyla masamın kenarına oturdu. Paltosunu çıkarmadı.
 leyla: Annelerin, ablaların gözüne bakıp söz verme. Dosyaya bakıp ver. Dosya sana yalan söylemez; sen dosyaya söylersen, o seni bırakmaz.
@@ -262,7 +261,8 @@ leyla: Bir de… çocuğa “neden polise gitmedin” diye sorduğunda cevabı h
           title: 'SAVUNMA STRATEJİSİ SEÇ',
           group: 'g_strateji',
           hints: {
-            STR_MASUMIYET: 'Masumiyet: suçun başkalarınca işlendiğini göstermeyi hedefler; stratejine uyan esas savunma ×1,5 puan.',
+            STR_MASUMIYET:
+              'Masumiyet: suçun başkalarınca işlendiğini göstermeyi hedefler; stratejine uyan esas savunma ×1,5 puan.',
             STR_USUL: 'Delil bütünlüğü: eksik kaydın ve zayıf teşhisin üstüne gidersin; uyan esas savunma ×1,2 puan.',
             STR_INDIRIM: 'Terditli: önce beraat, olmazsa TCK 160 ve lehe hükümler; uyan esas savunma ×0,8 puan.',
           },
@@ -299,7 +299,9 @@ Kapalıçarşı’nın arkasındaki ara sokakta taşlar kaygandı. Esnaf kepenk 
 > Savcılığın hikâyesi şöyle: kalabalıkta kadının arkasında durdu, cüzdanı aldı, kartları birine verdi, boş cüzdanı “buldum” demek için sakladı.
 > Arda’nın hikâyesi şöyle: buldum, teslim edecektim. Bir cümle. Benim işim o cümlenin arkasına bir dünya kurmak. Ya da kuramadığımı kabul etmek.
 Sokağın sonunda, iki han arasında dar bir dükkân: “ESKİ SAYFA — SAHAF”. Vitrinde solmuş Türk klasikleri, bir daktilo, uyuyan bir kedi.
-> Üç günüm var. Her gün üç iş sığar. Hepsini yapamam. Neye bakacağımı seçmek, bakmanın kendisi kadar önemli.
+> Üç günüm var. Her gün dört iş sığar. Hepsini yapamam. Neye bakacağımı seçmek, bakmanın kendisi kadar önemli.
+> Leyla’nın masasındaki not aklımda: önce müvekkil, sonra kâğıt, sonra yer. Ama bazen yer, kâğıdın söylemediğini söyler.
+Sahafın kedisi gözünü açtı, bana baktı, kapattı. Bursa’da kediler avukatlardan daha az şaşırır.
 `),
       choices: [cont('SABAH_DEVAM', 'Soruşturmaya başla', 'INV_HUB', { role: 'PRIMARY' })],
     }),

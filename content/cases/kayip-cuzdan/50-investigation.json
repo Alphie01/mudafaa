@@ -318,6 +318,10 @@
                 {
                   "speaker": "leyla",
                   "text": "Eksik olabileceğini düşünmek kolay. Eksik olduğunu göstermek iş. Kimin elinde, hangi kâğıtta, nasıl isteyeceksin?"
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Bir de şunu sor kendine: o kaydı kim, hangi saatte, hangi yorgunlukla hazırladı? Kayıtlar insanların elinden geçer. İnsanlar da yorulur."
                 }
               ]
             }
@@ -806,6 +810,99 @@
             {
               "speaker": "player",
               "text": "Beş: Hayri Bey’in cümlesi. “Bakınca bir şey görüyorum sanıyorum.” Bir tanığın en dürüst cümlesi, bazen savunmanın en güçlü cümlesidir.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_6" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_6",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "fact_hayri_cd" }, { "flag": "fact_hayri_yer" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Altı: karakolda Hayri Bey’e tek bir görüntü gösterilmiş, “bu mu” diye sorulmuş. Dokuz numaradan, gazetesinin üstünden bakan bir adama.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "fact_recep_inkar" }, { "flag": "recep_insan" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Altı: Recep Ateş. Hamitler’de iki çocuklu bir adam. “Kimse getirmedi” derken saatine baktı. Saate bakan adam, zamanın bitmesini bekler.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "sofor_gozlem" }, { "flag": "sofor_soruldu" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Altı: son durakta bir şemsiye, bir el, “yarın kayıp eşyaya.” Bir kuralın kapı camında yazması, şoförün onu uygulaması demek değil.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GECE_7" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GECE_7",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "deniz_durust" }, { "flag": "zehra_anlatti" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Yedi: Zehra’ya “her sayfayı okuyacağım” demiştim. Okudum. O da bana Arda’nın karakol korkusunu anlatmıştı, bir hastane koridorunda.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "zehra_anne" }, { "flag": "aksam2_durust" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Yedi: Zehra annesine hâlâ söylemedi. Ona dürüst olacağımı söyledim; iyi haberi de kötü haberi de benden duyacaktı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "fact_arda_gulten" }, { "flag": "fact_arda_hayri" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Yedi: Arda, kendisine hırsız diyen kadına kızmıyor. Kendisini gösteren tanığa da. Kızmayan bir müvekkil, kızgın bir hâkimden daha zor savunulur.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "any": [
+              { "flag": "fact_buro_defter" },
+              { "flag": "fact_volkan_adi" },
+              { "flag": "tutanak_ornek" },
+              { "flag": "cemil_tanisti" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Yedi: defterler, formlar, örnekler, bir büfecinin telefon numarası. Bir dosya, sonunda birilerinin hatırlamaya razı olduğu küçük şeylerden oluşur.",
               "style": "thought"
             }
           ]

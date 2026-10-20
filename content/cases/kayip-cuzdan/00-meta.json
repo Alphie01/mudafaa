@@ -90,12 +90,12 @@
         { "id": "hatali", "label": "Hatalı delil ({{var.wrong}})" }
       ],
       "bonuses": [{ "id": "guven", "label": "Güvenilirlik bonusu", "value": { "mul": [{ "var": "cred" }, 100] } }],
-      "scaleMax": 13000,
+      "scaleMax": 12000,
       "thresholdBar": [
         { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
-        { "label": "TCK 160", "from": 3500, "tone": "amber" },
-        { "label": "Beraat", "from": 7500, "tone": "green" },
-        { "label": "Beraat (2-b)", "from": 9500, "tone": "green" }
+        { "label": "TCK 160", "from": 3000, "tone": "amber" },
+        { "label": "Beraat", "from": 9300, "tone": "green" },
+        { "label": "Beraat (2-b)", "from": 10500, "tone": "green" }
       ],
       "displayClampMin": 0
     },
@@ -415,6 +415,9 @@
     { "id": "cemil_tanisti", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "tutanak_ornek", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "hayri_hayat", "type": "bool", "initial": false, "visibility": "HIDDEN" },
-    { "id": "recep_insan", "type": "bool", "initial": false, "visibility": "HIDDEN" }
+    { "id": "recep_insan", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "serkan_anlatti", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "serkan_cd", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "serkan_kizgin", "type": "bool", "initial": false, "visibility": "HIDDEN" }
   ]
 }

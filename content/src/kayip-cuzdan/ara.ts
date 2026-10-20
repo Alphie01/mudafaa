@@ -149,6 +149,8 @@ Zehra beni büronun önünden aldı. Gece nöbetinden çıkmıştı; gözleri k�
 Silecekler gıcırdıyordu. Radyoda trafik haberleri. Arda arka koltukta, telefonuna bakıyordu.
 arda: Staj okulundan e-posta geldi. “Yargılama sonuçlanıncaya kadar uygulama faaliyetlerinize ara verilmesi uygun görülmüştür.” Uygun görülmüş.
 zehra.kizgin: Uygun görülmüş! Kim görmüş? Çocuklar seni soruyormuş. Öğretmen arkadaşın söyledi.
+arda: Bir kız resim göndermiş, öğretmen arkadaş iletti. Bir otobüs çizmiş, içinde bir adam. Altında “Arda Öğretmenim çabuk gel” yazıyor.
+Arda telefonu kapattı ve cama yasladı. Cam buğuluydu. Parmağıyla bir şey çizmedi.
 > İki hafta önce bir dosyam vardı. Şimdi bir arabanın içinde üç kişiyiz ve dosya aramızda oturuyor. Yağmur bitmiyor.
 `;
 
@@ -163,6 +165,29 @@ const KAYIT_SON = `
 `;
 export const ara: CasePart = {
   nodes: [
+    decisionNode('ARA_GIRIS_0', [{ to: 'ARA_GIRIS_1' }], {
+      ...ARA,
+      lines: [
+        W(
+          flag('pisman_soruldu'),
+          `
+> O gece büroda tutanağı yeniden okudum: “Sanık pişmanlığını beyan etti.” Altında Arda’nın kendi cümlesi. Bir “pişman mısın” sorusu, bir ömür taşınan bir satıra dönüşebilirdi.
+`,
+        ),
+        W(
+          flag('arda_niyet_mahkemede'),
+          `
+> O gece büroda tutanağı yeniden okudum. Arda’nın cümleleri ilk kez kâğıttaydı: yanındaki yolcu, şoför, belediye, mesaj. Yedi aydır kimsenin yazmadığı cümleler.
+`,
+        ),
+        W(
+          any(flag('gulten_polis_dedi'), flag('ek_simdi')),
+          `
+> O gece büroda tutanağı yeniden okudum. Bazı cümleler erken söylenmişti; bazıları başkasının ağzından. Üç hafta, onları yerine oturtmak için var.
+`,
+        ),
+      ],
+    }),
     decisionNode('ARA_GIRIS_1', [{ to: 'ARA_GIRIS' }], {
       ...ARA,
       onFirstEnter: [...deliveries.effects, set('ara_day', 1), set('ara_ap', ARA_AP)],
@@ -243,8 +268,18 @@ Hedef: ek savunma. Arda ne söyleyecek? Sen neyi ispat edeceksin? Bulduğun her 
 `),
       ],
       tabs: [
-        { id: 't2_kayit', label: 'KAYITLAR', kind: 'ARCHIVE', choices: ['A2_KAYIT', 'A2_CAGRI', 'A2_CIKARIM', 'A2_LEYLA'] },
-        { id: 't2_kisi', label: 'KİŞİLER', kind: 'PEOPLE', choices: ['A2_GULTEN', 'A2_CEMIL', 'A2_ARDA', 'A2_VOLKAN', 'A2_OZAN', 'A2_HAYRI'] },
+        {
+          id: 't2_kayit',
+          label: 'KAYITLAR',
+          kind: 'ARCHIVE',
+          choices: ['A2_KAYIT', 'A2_CAGRI', 'A2_CIKARIM', 'A2_LEYLA'],
+        },
+        {
+          id: 't2_kisi',
+          label: 'KİŞİLER',
+          kind: 'PEOPLE',
+          choices: ['A2_GULTEN', 'A2_CEMIL', 'A2_ARDA', 'A2_VOLKAN', 'A2_OZAN', 'A2_HAYRI', 'A2_KARAKOL'],
+        },
         { id: 't2_adim', label: 'ADIMLAR', kind: 'SCENE', choices: ['A2_SUC', 'A2_YANLIS'] },
       ],
       choices: [
@@ -280,7 +315,11 @@ Hedef: ek savunma. Arda ne söyleyecek? Sen neyi ispat edeceksin? Bulduğun her 
           description: 'Kent Ulaşım · teknik oda',
           visibleWhen: flag('volkan_cagrildi'),
         }),
-        act('A2_OZAN', 'Ozan’la konuş', 'ARA_OZAN', { description: 'Tanık · Görükle', visibleWhen: flag('ozan_istendi') }),
+        act('A2_OZAN', 'Ozan’la konuş', 'ARA_OZAN', {
+          description: 'Tanık · Görükle',
+          visibleWhen: flag('ozan_istendi'),
+        }),
+        act('A2_KARAKOL', 'Görükle Polis Merkezine uğra', 'ARA_KARAKOL', { description: 'Aramayı yapan memur' }),
         act('A2_HAYRI', 'Bekleme salonunda Hayri Bey', 'ARA_HAYRI', {
           description: 'Habersiz gelmiş',
           visibleWhen: any(flag('contra_h1'), flag('contra_h4')),
@@ -305,7 +344,9 @@ Hedef: ek savunma. Arda ne söyleyecek? Sen neyi ispat edeceksin? Bulduğun her 
       ],
     },
 
-    decisionNode('ARA_DAY_END', [{ when: cmp(v('ara_day'), '==', 2), to: 'ARA_AKSAM' }, { to: 'ARA_AKSAM2' }], { onEnter: [inc('ara_day', 1), set('ara_ap', ARA_AP)] }),
+    decisionNode('ARA_DAY_END', [{ when: cmp(v('ara_day'), '==', 2), to: 'ARA_AKSAM' }, { to: 'ARA_AKSAM2' }], {
+      onEnter: [inc('ara_day', 1), set('ara_ap', ARA_AP)],
+    }),
     story('ARA_AKSAM', {
       ...ARA,
       title: 'Leyla’nın çekmecesi',
@@ -333,6 +374,7 @@ leyla: Dürüst cevap. Bir gün ikisinin aynı yere gitmediği bir dosyan olacak
           responses: B(`
 P: Eksik dakikayı. Kazanmak onun arkasından gelirse gelir.
 leyla.mutlu: Bunu duruşmada söyleme. Hâkimler bu cümleyi sever ama savcılar sevmez.
+leyla: Ben bu çekmeceyi otuz yıldır kilitlemiyorum, Deniz. Biri bir gün gelip “benim” der diye. Eksik dakika da böyledir: kapıyı kilitlemezsen bir gün biri getirir.
 Çekmeceyi kapattı. Anahtarı çevirmedi.
 `),
           next: 'ARA_HUB',
@@ -365,67 +407,120 @@ leyla.mutlu: Bunu duruşmada söyleme. Hâkimler bu cümleyi sever ama savcılar
         rows: [
           row('f1', ['18.12 · KAM-1', 'Heykel: yaşlı kadın biner; ardından yolcular']),
           row('f2', ['18.31 · KAM-3', 'Orta kapı: kalabalık, içeride açık bir şemsiye'], {
-            mag: { cells: ['18.31 · KAM-3', 'Şemsiyeyi tutan: yeşil bereli bir kadın; şemsiye yaşlı kadının çantasıyla kamera arasında'], tone: 'special' },
+            mag: {
+              cells: [
+                '18.31 · KAM-3',
+                'Şemsiyeyi tutan: yeşil bereli bir kadın; şemsiye yaşlı kadının çantasıyla kamera arasında',
+              ],
+              tone: 'special',
+            },
           }),
           row('f3', ['18.33 · KAM-3', 'Yaşlı kadının arkasında gri kapüşonlu biri'], {
-            mag: { cells: ['18.33 · KAM-3', 'Koyu gri parka, kapüşonu başında; eli bez çantanın içinde'], tone: 'special' },
-            cmp: { cells: ['18.33 · KAM-3', 'Arda iki metre solda; açık gri sweatshirt, kapüşonu sırtında, telefona bakıyor'], tone: 'special' },
+            mag: {
+              cells: ['18.33 · KAM-3', 'Koyu gri parka, kapüşonu başında; eli bez çantanın içinde'],
+              tone: 'special',
+            },
+            cmp: {
+              cells: [
+                '18.33 · KAM-3',
+                'Arda iki metre solda; açık gri sweatshirt, kapüşonu sırtında, telefona bakıyor',
+              ],
+              tone: 'special',
+            },
           }),
           row('f4', ['18.36 · KAM-4', 'Arka kapıya ilerleyen yolcular'], {
-            mag: { cells: ['18.36 · KAM-4', 'Parkalı adam eğiliyor; 14 numaranın altına koyu renk bir cisim bırakıyor'], tone: 'special' },
+            mag: {
+              cells: ['18.36 · KAM-4', 'Parkalı adam eğiliyor; 14 numaranın altına koyu renk bir cisim bırakıyor'],
+              tone: 'special',
+            },
           }),
           row('f5', ['18.37 · KAM-1', 'Altıparmak: ön kapıdan inenler'], {
-            mag: { cells: ['18.37 · KAM-1', 'Parkalı adam ve yeşil bereli kadın; arka arkaya, konuşmadan'], tone: 'special' },
+            mag: {
+              cells: ['18.37 · KAM-1', 'Parkalı adam ve yeşil bereli kadın; arka arkaya, konuşmadan'],
+              tone: 'special',
+            },
           }),
           row('f6', ['18.43 · KAM-4', '14 numarada oturan genç, yanındaki yolcuya dönük'], {
-            play: { cells: ['18.43 · KAM-4', 'Cüzdanı açık tutup yanındakine gösteriyor; yolcu başını iki yana sallıyor'], tone: 'special' },
+            play: {
+              cells: ['18.43 · KAM-4', 'Cüzdanı açık tutup yanındakine gösteriyor; yolcu başını iki yana sallıyor'],
+              tone: 'special',
+            },
           }),
           row('f7', ['19.05 · KAM-1', 'Görükle: son durak, inen yolcular'], {
-            play: { cells: ['19.05 · KAM-1', 'Genç şoför kabinine bir cüzdan uzatıyor; şoför elini sallayıp kapıyı gösteriyor (11 sn)'], tone: 'special' },
+            play: {
+              cells: [
+                '19.05 · KAM-1',
+                'Genç şoför kabinine bir cüzdan uzatıyor; şoför elini sallayıp kapıyı gösteriyor (11 sn)',
+              ],
+              tone: 'special',
+            },
           }),
         ],
-        tools: [tool('mag', 'Yakınlaştır', 'magnifier'), tool('play', 'Kareleri oynat', 'camera'), tool('cmp', 'Karşılaştır', 'compare')],
+        tools: [
+          tool('mag', 'Yakınlaştır', 'magnifier'),
+          tool('play', 'Kareleri oynat', 'camera'),
+          tool('cmp', 'Karşılaştır', 'compare'),
+        ],
         costVar: 'kayit_left',
         rules: [
           examine('EX_R_MAG2', 'mag', 'f2', {
             discovers: 'clue_kare_bere',
             score: { DELIL_ANALIZI: 150 },
-            feedback: found('Şemsiyeyi içeride açık tutan yeşil bereli bir kadın. Şemsiye, yaşlı kadının çantasıyla kamera arasında bir perde.'),
+            feedback: found(
+              'Şemsiyeyi içeride açık tutan yeşil bereli bir kadın. Şemsiye, yaşlı kadının çantasıyla kamera arasında bir perde.',
+            ),
           }),
           examine('EX_R_MAG3', 'mag', 'f3', {
             discovers: 'clue_kare_parka',
             score: { DELIL_ANALIZI: 150 },
-            feedback: found('Koyu gri bir parka, kapüşonu başında. Eli bez çantanın içinde. Yüzü kameraya hiç dönmüyor.'),
+            feedback: found(
+              'Koyu gri bir parka, kapüşonu başında. Eli bez çantanın içinde. Yüzü kameraya hiç dönmüyor.',
+            ),
           }),
           examine('EX_R_CMP3', 'cmp', 'f3', {
             discovers: 'clue_kare_parka',
             score: { DELIL_ANALIZI: 150 },
-            feedback: found('Aynı kare: parkalı adam kadının arkasında, kapüşonu başında. Arda iki metre solda, kapüşonu sırtında, telefonuna bakıyor.'),
+            feedback: found(
+              'Aynı kare: parkalı adam kadının arkasında, kapüşonu başında. Arda iki metre solda, kapüşonu sırtında, telefonuna bakıyor.',
+            ),
           }),
           examine('EX_R_MAG4', 'mag', 'f4', {
             discovers: 'clue_kare_birakma',
             score: { DELIL_ANALIZI: 150 },
-            feedback: found('18.36: parkalı adam arka kapıya yürürken eğiliyor ve 14 numaranın altına koyu renk bir cisim bırakıyor.'),
+            feedback: found(
+              '18.36: parkalı adam arka kapıya yürürken eğiliyor ve 14 numaranın altına koyu renk bir cisim bırakıyor.',
+            ),
           }),
           examine('EX_R_MAG5', 'mag', 'f5', {
             discovers: 'clue_kare_inis',
             score: { DELIL_ANALIZI: 150 },
-            feedback: found('18.37, Altıparmak: parkalı adam ve yeşil bereli kadın ön kapıdan arka arkaya iniyor. Otobüste hiç oturmamışlar.'),
+            feedback: found(
+              '18.37, Altıparmak: parkalı adam ve yeşil bereli kadın ön kapıdan arka arkaya iniyor. Otobüste hiç oturmamışlar.',
+            ),
           }),
           examine('EX_R_PLAY6', 'play', 'f6', {
             discovers: 'clue_kare_soru',
             score: { DELIL_ANALIZI: 150 },
-            feedback: found('18.43: CD’ye yazılamayan dakika. Arda cüzdanı açık tutup yanındakine gösteriyor. Yolcu başını sallıyor.'),
+            feedback: found(
+              '18.43: CD’ye yazılamayan dakika. Arda cüzdanı açık tutup yanındakine gösteriyor. Yolcu başını sallıyor.',
+            ),
           }),
           examine('EX_R_PLAY7', 'play', 'f7', {
             discovers: 'clue_kare_sofor',
             score: { DELIL_ANALIZI: 150 },
-            feedback: found('19.05, Görükle: Arda şoför kabinine cüzdanı uzatıyor. Şoför elini sallıyor, kapıyı gösteriyor. On bir saniye.'),
+            feedback: found(
+              '19.05, Görükle: Arda şoför kabinine cüzdanı uzatıyor. Şoför elini sallıyor, kapıyı gösteriyor. On bir saniye.',
+            ),
           }),
         ],
         miss: fallback('FB_KAYIT', 'EXAMINE', {
           score: { DELIL_ANALIZI: -20 },
-          feedback: { title: 'SONUÇ YOK', text: 'Bu karede bu aletle yeni bir şey görünmüyor.', label: '−20 SKOR', tone: 'error' },
+          feedback: {
+            title: 'SONUÇ YOK',
+            text: 'Bu karede bu aletle yeni bir şey görünmüyor.',
+            label: '−20 SKOR',
+            tone: 'error',
+          },
         }),
         finish: { id: 'KAYIT_BITIR', label: 'Diski çıkar' },
       }),
@@ -495,7 +590,14 @@ arda: Yani… biri mi bırakmış? Ben… ben hep öyle düşündüm hocam. Ama 
         rows: [
           row('c1', ['19.12', '0224 *** 18 21', 'Su kesintisi · Nilüfer']),
           row('c2', ['19.18', '05** *** ** 47', 'Ulaşım · kayıp eşya'], {
-            mag: { cells: ['19.18 · 3 dk 12 sn', '05** *** ** 47 (sanık hattı)', '“Hat 38’de bulunan cüzdan. Yolcuya ertesi gün terminal kayıp eşya bürosuna teslim etmesi söylendi.”'], tone: 'special' },
+            mag: {
+              cells: [
+                '19.18 · 3 dk 12 sn',
+                '05** *** ** 47 (sanık hattı)',
+                '“Hat 38’de bulunan cüzdan. Yolcuya ertesi gün terminal kayıp eşya bürosuna teslim etmesi söylendi.”',
+              ],
+              tone: 'special',
+            },
           }),
           row('c3', ['19.24', '05** *** ** 03', 'Ulaşım · otobüs gecikmesi']),
         ],
@@ -505,7 +607,9 @@ arda: Yani… biri mi bırakmış? Ben… ben hep öyle düşündüm hocam. Ama 
           examine('EX_C_MAG2', 'mag', 'c2', {
             discovers: 'clue_cagri_notu',
             score: { DELIL_ANALIZI: 150 },
-            feedback: found('19.18, üç dakika on iki saniye. Operatör notu: “Hat 38’de bulunan cüzdan. Yolcuya ertesi gün terminal kayıp eşya bürosuna teslim etmesi söylendi.”'),
+            feedback: found(
+              '19.18, üç dakika on iki saniye. Operatör notu: “Hat 38’de bulunan cüzdan. Yolcuya ertesi gün terminal kayıp eşya bürosuna teslim etmesi söylendi.”',
+            ),
           }),
         ],
         miss: fallback('FB_CAGRI', 'EXAMINE', {
@@ -530,7 +634,12 @@ Panoya yeni kartlar eklendi. Kırmızı iplikler artık bir otobüsün içinden 
         miss: fallback('FB_ARA_CIKARIM', 'COMBINE', {
           repeat: 'ONCE_PER_PARAMS',
           score: { DELIL_ANALIZI: -50 },
-          feedback: { title: 'Bu ikisi birbirini açıklamıyor', text: 'Başka bir çift dene.', label: 'BAĞLANTI YOK · −50 SKOR', tone: 'error' },
+          feedback: {
+            title: 'Bu ikisi birbirini açıklamıyor',
+            text: 'Başka bir çift dene.',
+            label: 'BAĞLANTI YOK · −50 SKOR',
+            tone: 'error',
+          },
         }),
         finish: { id: 'ARA_CIKARIM_BITIR' },
       }),
@@ -811,7 +920,8 @@ leyla~phone: Avukat kovalamaz. Bildirir. Kâğıdını yaz, savcılığa ver, bi
           role: 'PRIMARY',
           quality: {
             q: 'BAD',
-            feedback: 'Şüphelileri aramak, izlemek ya da yakalamaya çalışmak avukatın görevi değildir ve hem kendini hem soruşturmayı tehlikeye atar. Bilgiyi Cumhuriyet Başsavcılığına iletmek gerekir (CMK 158).',
+            feedback:
+              'Şüphelileri aramak, izlemek ya da yakalamaya çalışmak avukatın görevi değildir ve hem kendini hem soruşturmayı tehlikeye atar. Bilgiyi Cumhuriyet Başsavcılığına iletmek gerekir (CMK 158).',
             category: 'SAVUNMA_STRATEJISI',
           },
         }),
@@ -871,14 +981,18 @@ zehra: Yani… o küçük kapı da kapalı mı?
 P: Kapalı olduğunu göstermemiz lazım. Göstereceğiz.
 `),
         }),
-        option('AA_IKRAR', '“Zehra haklı olabilir. Kabul eder, zararı öder, hükmün açıklanmasının geri bırakılmasını isteriz.”', {
-          next: 'ARA_ARDA_IKRAR',
-          responses: B(`
+        option(
+          'AA_IKRAR',
+          '“Zehra haklı olabilir. Kabul eder, zararı öder, hükmün açıklanmasının geri bırakılmasını isteriz.”',
+          {
+            next: 'ARA_ARDA_IKRAR',
+            responses: B(`
 Odada bir sessizlik oldu. Zehra’nın yüzünde bir rahatlama belirdi; Arda’nın yüzünde başka bir şey.
 arda.saskin: Kabul mü? Neyi kabul edeceğim hocam? Ben almadım ki.
 zehra: Arda, beş yıl diyorlar! Öde, imzala, bitsin. Sicile işlemiyormuş!
 `),
-        }),
+          },
+        ),
         home('AA_BITIR', 'Vedalaş'),
       ],
     },
@@ -948,10 +1062,47 @@ leyla: Masumiyet bir sonuçtur, Deniz. Bir açılış cümlesi değil.
       ],
     }),
 
+    decisionNode('ARA_SON_4', [{ to: 'ARA_SON' }], {
+      lines: [
+        W(
+          flag('kayit_arda_haber'),
+          `
+> Arda’ya kaydı erken söyledim. O günden beri her mesajının sonunda bir soru işareti var. Umut da bir yük; onu da ben verdim.
+`,
+        ),
+        W(
+          flag('kayit_sakla'),
+          `
+> Kaydı Arda’ya söylemedim. Yarın salonda ilk kez görecek. Bir sürprizin iki yüzü vardır: sevindirir ya da sarsar.
+`,
+        ),
+        W(
+          any(flag('serkan_anlatti'), flag('serkan_cd'), flag('serkan_kizgin')),
+          `
+> Görükle karakolunun kapısı durağın tam karşısında. Kırk adım. Arda o kırk adımı yürüdü ve döndü. Ben yürüdüm ve içeri girdim. Fark bir korkudan ibaret.
+`,
+        ),
+        W(
+          any(flag('ozan_hazir'), flag('ozan_anlatti')),
+          `
+> Ozan “ölçtüğümü söylerim” dedi. Bir mühendisten iyi bir tanık çıkar; yeter ki ona ne söyleyeceğini kimse ölçmeye kalkmasın.
+`,
+        ),
+        W(
+          any(flag('volkan_segment'), flag('ek_cerceve'), flag('ara_aksam_dakika'), flag('ara_aksam_ikisi')),
+          `
+> Leyla “kazanmayı mı, eksik dakikayı mı” diye sormuştu. Bu gece ikisinin aynı yere çıkıp çıkmayacağını bilmiyorum. Yarın öğreneceğim.
+`,
+        ),
+      ],
+    }),
+
     // Duruşmadan önce: koşullu hafıza zinciri; suç duyurusunun sonucu burada belirlenir.
     decisionNode('ARA_SON_1', [{ to: 'ARA_SON_2' }], {
       ...ARA,
-      onFirstEnter: [ifThen(all(flag('suc_duyurusu'), has('ded_bere_ayni'), flag('cemil_ifade')), [raise('sebeke_yakalandi')])],
+      onFirstEnter: [
+        ifThen(all(flag('suc_duyurusu'), has('ded_bere_ayni'), flag('cemil_ifade')), [raise('sebeke_yakalandi')]),
+      ],
       lines: [
         W(
           flag('sebeke_yakalandi'),
@@ -997,7 +1148,7 @@ Yarın ikinci celse. Panoya bakıyorum. Kartlar yer değiştirdi; bazıları dü
 `),
       ],
     }),
-    decisionNode('ARA_SON_3', [{ to: 'ARA_SON' }], {
+    decisionNode('ARA_SON_3', [{ to: 'ARA_SON_4' }], {
       lines: [
         W(
           flag('false_confession'),
@@ -1028,4 +1179,3 @@ Yarın ikinci celse. Panoya bakıyorum. Kartlar yer değiştirdi; bazıları dü
   ],
   discoveryPaths: deliveries.discoveryPaths,
 };
-

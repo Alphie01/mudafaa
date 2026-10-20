@@ -1,61 +1,122 @@
 <!doctype html>
 <html lang="tr">
-<head>
-<meta charset="utf-8">
-<title>Sahne · Görükle öğrenci evi, Arda'nın odası</title>
-<!--
+  <head>
+    <meta charset="utf-8" />
+    <title>Sahne · Görükle öğrenci evi, Arda'nın odası</title>
+    <!--
   Dava #01: öğrenci evi. Dokunma alanları SceneDef nesneleridir (30-scenes.json): çekmece (36,200,80,26) · telefon
   (152,168,26,34) · dizüstü (196,134,74,44) · not bloğu (122,186,24,18) · buzdolabı (284,96,52,120) · kitaplık (10,40,90,120).
 -->
-<style>
-body{margin:0;background:#141026}
-#scene{position:relative;width:344px;height:300px;overflow:hidden;background:#141026;font-family:'Pixelify Sans',monospace;color:#efe8ff}
-#scene div{position:absolute;box-sizing:border-box}
-</style>
-</head>
-<body>
-<div id="scene">
-  <div style="left:0;right:0;top:20px;height:210px;background:#2b2350"></div>
-  <div style="left:0;right:0;top:20px;height:6px;background:#3a2f66"></div>
-  <!-- pencere, yağmur -->
-  <div style="left:120px;top:36px;width:110px;height:76px;background:#1d3a66;border:4px solid #120d1c"></div>
-  <div style="left:124px;top:40px;width:102px;height:68px;background:repeating-linear-gradient(100deg,#9cc3e6 0 1px,transparent 1px 10px);opacity:.35"></div>
-  <div style="left:173px;top:36px;width:4px;height:76px;background:#120d1c"></div>
-  <!-- kitaplık -->
-  <div style="left:10px;top:40px;width:90px;height:120px;background:#4a3f7a;border:4px solid #120d1c"></div>
-  <div style="left:14px;top:76px;width:82px;height:4px;background:#120d1c"></div>
-  <div style="left:14px;top:114px;width:82px;height:4px;background:#120d1c"></div>
-  <div style="left:18px;top:50px;width:10px;height:26px;background:#c4413a"></div>
-  <div style="left:30px;top:52px;width:8px;height:24px;background:#e8b13c"></div>
-  <div style="left:40px;top:48px;width:12px;height:28px;background:#3f8a62"></div>
-  <div style="left:56px;top:54px;width:10px;height:22px;background:#9cc3e6"></div>
-  <div style="left:18px;top:88px;width:30px;height:26px;background:#b0496b"></div>
-  <div style="left:52px;top:90px;width:40px;height:24px;background:#cfc9c1"></div>
-  <div style="left:20px;top:126px;width:70px;height:28px;background:#7a4a2a"></div>
-  <!-- masa -->
-  <div style="left:30px;top:180px;width:250px;height:12px;background:#7a4a2a;border:4px solid #120d1c"></div>
-  <div style="left:36px;top:192px;width:80px;height:38px;background:#5a3a22;border:4px solid #120d1c"></div>
-  <div style="left:70px;top:208px;width:12px;height:4px;background:#e8b13c"></div>
-  <div style="left:250px;top:192px;width:8px;height:60px;background:#120d1c"></div>
-  <!-- dizüstü -->
-  <div style="left:200px;top:136px;width:66px;height:40px;background:#25222e;border:3px solid #120d1c"></div>
-  <div style="left:205px;top:141px;width:56px;height:30px;background:#3d5a80"></div>
-  <div style="left:210px;top:148px;width:40px;height:3px;background:#efe8ff;opacity:.7"></div>
-  <div style="left:210px;top:156px;width:30px;height:3px;background:#efe8ff;opacity:.5"></div>
-  <!-- telefon -->
-  <div style="left:154px;top:170px;width:22px;height:12px;background:#120d1c;border:2px solid #4a4656"></div>
-  <!-- not bloğu -->
-  <div style="left:124px;top:170px;width:20px;height:12px;background:#e6c46a;border:2px solid #120d1c"></div>
-  <!-- buzdolabı (kapı aralığından) -->
-  <div style="left:284px;top:96px;width:52px;height:120px;background:#cfc9c1;border:4px solid #120d1c"></div>
-  <div style="left:284px;top:140px;width:52px;height:4px;background:#120d1c"></div>
-  <div style="left:296px;top:110px;width:26px;height:22px;background:#efe8ff;border:2px solid #120d1c"></div>
-  <div style="left:302px;top:106px;width:6px;height:6px;border-radius:50%;background:#c4413a"></div>
-  <!-- zemin -->
-  <div style="left:0;right:0;top:230px;bottom:0;background:#3b3550;border-top:4px solid #120d1c"></div>
-  <div style="left:60px;top:250px;width:120px;height:30px;background:#6a4a9c;border:3px solid #120d1c;opacity:.7"></div>
-  <!-- sırt çantası (boş) -->
-  <div style="left:200px;top:240px;width:36px;height:40px;background:#4f5560;border:3px solid #120d1c;border-radius:8px 8px 2px 2px"></div>
-</div>
-</body>
+    <style>
+      body {
+        margin: 0;
+        background: #141026;
+      }
+      #scene {
+        position: relative;
+        width: 344px;
+        height: 300px;
+        overflow: hidden;
+        background: #141026;
+        font-family: 'Pixelify Sans', monospace;
+        color: #efe8ff;
+      }
+      #scene div {
+        position: absolute;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <div style="left: 0; right: 0; top: 20px; height: 210px; background: #2b2350"></div>
+      <div style="left: 0; right: 0; top: 20px; height: 6px; background: #3a2f66"></div>
+      <!-- pencere, yağmur -->
+      <div
+        style="left: 120px; top: 36px; width: 110px; height: 76px; background: #1d3a66; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="
+          left: 124px;
+          top: 40px;
+          width: 102px;
+          height: 68px;
+          background: repeating-linear-gradient(100deg, #9cc3e6 0 1px, transparent 1px 10px);
+          opacity: 0.35;
+        "
+      ></div>
+      <div style="left: 173px; top: 36px; width: 4px; height: 76px; background: #120d1c"></div>
+      <!-- kitaplık -->
+      <div
+        style="left: 10px; top: 40px; width: 90px; height: 120px; background: #4a3f7a; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 14px; top: 76px; width: 82px; height: 4px; background: #120d1c"></div>
+      <div style="left: 14px; top: 114px; width: 82px; height: 4px; background: #120d1c"></div>
+      <div style="left: 18px; top: 50px; width: 10px; height: 26px; background: #c4413a"></div>
+      <div style="left: 30px; top: 52px; width: 8px; height: 24px; background: #e8b13c"></div>
+      <div style="left: 40px; top: 48px; width: 12px; height: 28px; background: #3f8a62"></div>
+      <div style="left: 56px; top: 54px; width: 10px; height: 22px; background: #9cc3e6"></div>
+      <div style="left: 18px; top: 88px; width: 30px; height: 26px; background: #b0496b"></div>
+      <div style="left: 52px; top: 90px; width: 40px; height: 24px; background: #cfc9c1"></div>
+      <div style="left: 20px; top: 126px; width: 70px; height: 28px; background: #7a4a2a"></div>
+      <!-- masa -->
+      <div
+        style="left: 30px; top: 180px; width: 250px; height: 12px; background: #7a4a2a; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 36px; top: 192px; width: 80px; height: 38px; background: #5a3a22; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 70px; top: 208px; width: 12px; height: 4px; background: #e8b13c"></div>
+      <div style="left: 250px; top: 192px; width: 8px; height: 60px; background: #120d1c"></div>
+      <!-- dizüstü -->
+      <div
+        style="left: 200px; top: 136px; width: 66px; height: 40px; background: #25222e; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 205px; top: 141px; width: 56px; height: 30px; background: #3d5a80"></div>
+      <div style="left: 210px; top: 148px; width: 40px; height: 3px; background: #efe8ff; opacity: 0.7"></div>
+      <div style="left: 210px; top: 156px; width: 30px; height: 3px; background: #efe8ff; opacity: 0.5"></div>
+      <!-- telefon -->
+      <div
+        style="left: 154px; top: 170px; width: 22px; height: 12px; background: #120d1c; border: 2px solid #4a4656"
+      ></div>
+      <!-- not bloğu -->
+      <div
+        style="left: 124px; top: 170px; width: 20px; height: 12px; background: #e6c46a; border: 2px solid #120d1c"
+      ></div>
+      <!-- buzdolabı (kapı aralığından) -->
+      <div
+        style="left: 284px; top: 96px; width: 52px; height: 120px; background: #cfc9c1; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 284px; top: 140px; width: 52px; height: 4px; background: #120d1c"></div>
+      <div
+        style="left: 296px; top: 110px; width: 26px; height: 22px; background: #efe8ff; border: 2px solid #120d1c"
+      ></div>
+      <div style="left: 302px; top: 106px; width: 6px; height: 6px; border-radius: 50%; background: #c4413a"></div>
+      <!-- zemin -->
+      <div style="left: 0; right: 0; top: 230px; bottom: 0; background: #3b3550; border-top: 4px solid #120d1c"></div>
+      <div
+        style="
+          left: 60px;
+          top: 250px;
+          width: 120px;
+          height: 30px;
+          background: #6a4a9c;
+          border: 3px solid #120d1c;
+          opacity: 0.7;
+        "
+      ></div>
+      <!-- sırt çantası (boş) -->
+      <div
+        style="
+          left: 200px;
+          top: 240px;
+          width: 36px;
+          height: 40px;
+          background: #4f5560;
+          border: 3px solid #120d1c;
+          border-radius: 8px 8px 2px 2px;
+        "
+      ></div>
+    </div>
+  </body>
 </html>

@@ -33,7 +33,12 @@ import { HEAR1, court1 } from './shared.js';
 // itiraz + tanık ifadesi) → CD (savcılık delili) → duruşmada delil talepleri (CMK 206) → nitelendirme uyarısı (CMK 226) →
 // ara karar ve erteleme.
 
-const wrong = (amount = -150): ChoiceDef['effects'] => [dec('cred'), dec('pers'), inc('wrong'), score('SORGULAMA', amount, 'hatali')];
+const wrong = (amount = -150): ChoiceDef['effects'] => [
+  dec('cred'),
+  dec('pers'),
+  inc('wrong'),
+  score('SORGULAMA', amount, 'hatali'),
+];
 
 const legal = (amount: number) => [score('USUL_BILGISI', amount), inc('legal_hits')];
 
@@ -213,7 +218,8 @@ Savcı Tolga Uçar gözlüğünü çıkardı, camını kravatının ucuyla sildi
         option('H101S1_CEVAP', 'Arda cevap versin', {
           next: 'H1_01S2',
           effects: [ifThen(any(flag('fact_kira_konustu'), flag('fact_zehra_kira'), flag('fact_staj')), [inc('pers')])],
-          neutral: 'Güdüye dair soru meşrudur; ilgisiz değildir. Müvekkilin dürüst cevabı, hazırlıklıysa savcının elindeki “motivi” zayıflatır.',
+          neutral:
+            'Güdüye dair soru meşrudur; ilgisiz değildir. Müvekkilin dürüst cevabı, hazırlıklıysa savcının elindeki “motivi” zayıflatır.',
           responses: [
             W(
               any(flag('fact_kira_konustu'), flag('fact_zehra_kira'), flag('fact_staj')),
@@ -311,7 +317,8 @@ arda: Sabah erken… Bilmiyorum. Dokuz iyi bir saat gibi geldi.
         option('H101S3_CEVAP', 'Arda cevap versin', {
           next: 'H1_02',
           effects: [dec('pers')],
-          neutral: 'Tartışmacı soru cevaplandı; sanığın “hayır” demesi bile savcının çerçevesini tutanağa geçirdi. Soruya itiraz edilebilirdi (CMK 201/1).',
+          neutral:
+            'Tartışmacı soru cevaplandı; sanığın “hayır” demesi bile savcının çerçevesini tutanağa geçirdi. Soruya itiraz edilebilirdi (CMK 201/1).',
           responses: B(`
 arda.saskin: Saklamak değil… Ben… Hayır. Kabul etmiyorum. Dokuzda gidecektim.
 savci: Sorum bu kadar.
@@ -335,6 +342,7 @@ gulten: Bin iki yüz lira vardı. İlaç parasıydı. Kartlarım… Bir de İsma
 gulten.kizgin: Paranın da kartın da helal olsun dedim karakolda. Fotoğrafımı geri isterim dedim. Bir de… bu çocuk cezasını çeksin.
 gulten.uzgun: Uzlaşma için çağırdılar, gitmedim. Ben terziyim. Söküğü olan işi düzeltirim. Ama sökülen bir şeyi kimse benim yerime dikmez.
 > “Bu çocuk cezasını çeksin.” Sözcükler Arda’ya değil, yedi ay önceki o akşama söyleniyordu. Ama Arda’nın sırtına çarptı.
+Arda başını kaldırıp Gülten Hanım’a baktı. Bir şey söyleyecekti; ağzını açtı, kapattı. Sanığın müştekiye doğrudan konuşma hakkı yoktu. Biliyordu. Sahafta okumuştu.
 `),
       choices: [
         option('H102_FOTO', '“Cüzdanınızı geri aldığınızda fotoğraf yerinde miydi?”', {
@@ -352,7 +360,8 @@ Fotoğrafı yerine koydu. Arda’ya baktı. Yedi aydır ilk kez.
         option('H102_PARA', '“Paranın sanıkta bulunduğunu size kim söyledi?”', {
           next: '$stay',
           effects: [raise('gulten_polis_dedi'), score('SORGULAMA', 30)],
-          neutral: 'Müştekinin bilgisinin kaynağını sormak meşru; ama müşteki kendi gördüğünü değil polisin söylediğini aktarıyor. Bu konuyu el koyma tutanağıyla çözmek daha güçlüdür.',
+          neutral:
+            'Müştekinin bilgisinin kaynağını sormak meşru; ama müşteki kendi gördüğünü değil polisin söylediğini aktarıyor. Bu konuyu el koyma tutanağıyla çözmek daha güçlüdür.',
           responses: B(`
 gulten: Polis söyledi. Çantasında para çıktı dediler. Altı yüz lira mı, ne.
 gulten: Benimki bin iki yüzdü. Gerisini harcamış dediler.
@@ -406,7 +415,8 @@ savci: Tanık, otobüste ne gördünüz?
         }),
         option('H103_B', 'Sessiz kal', {
           effects: [dec('pers')],
-          neutral: 'Telkinli soru cevaplandı; tanığın “evet”i artık onun gözlemi değil, savcının cümlesi oldu. Böyle bir soruya itiraz edilebilirdi (CMK 201/1).',
+          neutral:
+            'Telkinli soru cevaplandı; tanığın “evet”i artık onun gözlemi değil, savcının cümlesi oldu. Böyle bir soruya itiraz edilebilirdi (CMK 201/1).',
           responses: B(`
 hayri: Evet. O çocuktu.
 > Bir “evet” ile tanık, savcının cümlesini kendi cümlesi yaptı. Sustum. Susmak bazen en pahalı cevaptır.
@@ -442,7 +452,8 @@ hakim: Tanığın neyi ne kadar gördüğünü dinledikten sonra değerlendiriri
 hakim: Tanık ifadesini kesintisiz verdi. Müdafi, sorularınız?
 Bir ifadeyi BASTIR: tanık ayrıntı verir, yeni bir satır açılabilir. Çelişkiyi bulunca DELİL SUN. Kanaat ya da duyumsa İTİRAZ et.
 `),
-      rulesText: 'Önce bastır, sonra sun. Yanlış delil güvenilirliği ve skoru düşürür. Dürüst tanığa saldırma; sınırını göster.',
+      rulesText:
+        'Önce bastır, sonra sun. Yanlış delil güvenilirliği ve skoru düşürür. Dürüst tanığa saldırma; sınırını göster.',
       objectionGrounds: ['g_kanaat', 'g_duyum'],
       statements: [
         statement('HS1', 1, [
@@ -461,9 +472,22 @@ Bir ifadeyi BASTIR: tanık ayrıntı verir, yeni bir satır açılabilir. Çeli�
           hl('gri kapüşonlu bir genç', any(flag('press_hs2'), has('clue_gri_kapuson'))),
           ' duruyordu. Sıkışık.',
         ]),
-        statement('HS2B', 4, ['Yüzünü o an görmedim, sırtı bana dönüktü. Ama ', hl('o çocuktu, eminim', always), '.'], flag('press_hs2')),
-        statement('HS3', 5, [hl('Eli teyzenin çantasının hizasındaydı', flag('press_hs3')), '. Kalabalıkta öyle durulmaz.']),
-        statement('HS3B', 6, ['Polis de söyledi; ', hl('kamerada görmüşler', always), ', çantadan almış.'], flag('press_hs3')),
+        statement(
+          'HS2B',
+          4,
+          ['Yüzünü o an görmedim, sırtı bana dönüktü. Ama ', hl('o çocuktu, eminim', always), '.'],
+          flag('press_hs2'),
+        ),
+        statement('HS3', 5, [
+          hl('Eli teyzenin çantasının hizasındaydı', flag('press_hs3')),
+          '. Kalabalıkta öyle durulmaz.',
+        ]),
+        statement(
+          'HS3B',
+          6,
+          ['Polis de söyledi; ', hl('kamerada görmüşler', always), ', çantadan almış.'],
+          flag('press_hs3'),
+        ),
         statement('HS4', 7, [
           'Sonra boşalan koltuğa oturdu ve ',
           hl('cüzdanı çantasına koydu', any(flag('press_hs4'), has('ded_buldu'))),
@@ -479,7 +503,16 @@ hayri: Gazetemi okuyordum. Her akşam okurum, otobüste de okurum.
 `),
         }),
         presentRule('PS_HS1B', 'HS1B', ['ded_hayri_gormedi'], {
-          effects: [score('SORGULAMA', 300), inc('pers', 2), raise('contra_h1'), mark('GOOD', 'Tanığın görme koşulları ortaya kondu: miyop, gözlüksüz okuyor, başını kaldırınca üç metre öteye bakıyor. Tanık dürüst; ama teşhisi zayıf.', 'SORGULAMA')],
+          effects: [
+            score('SORGULAMA', 300),
+            inc('pers', 2),
+            raise('contra_h1'),
+            mark(
+              'GOOD',
+              'Tanığın görme koşulları ortaya kondu: miyop, gözlüksüz okuyor, başını kaldırınca üç metre öteye bakıyor. Tanık dürüst; ama teşhisi zayıf.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
 P: Hayri Bey, geçen hafta kahvede bana miyop olduğunuzu, yakını gözlüksüz gördüğünüzü söylediniz. Gazeteyi gözlüksüz okursunuz.
 P: O akşam da gözlüksüz okuyordunuz. Başınızı kaldırdığınızda gözlüğünüz alnınızdaydı. Orta kapı üç metre ötede. Ne kadar net görüyordunuz?
@@ -514,7 +547,16 @@ hayri: Sırtı bana dönüktü. Ama gri kapüşon… o çocuktu, eminim.
 `),
         }),
         objectRule('OB_HS2B', 'HS2B', 'g_kanaat', {
-          effects: [score('SORGULAMA', 50), inc('pers'), raise('ob_kanaat'), mark('GOOD', 'Tanık yüzü görmediğini söyleyip “eminim” diyor: bu bir gözlem değil, kanaat. Hâkim tanığı kendi gözlemiyle sınırladı.', 'SORGULAMA')],
+          effects: [
+            score('SORGULAMA', 50),
+            inc('pers'),
+            raise('ob_kanaat'),
+            mark(
+              'GOOD',
+              'Tanık yüzü görmediğini söyleyip “eminim” diyor: bu bir gözlem değil, kanaat. Hâkim tanığı kendi gözlemiyle sınırladı.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
 P: İtiraz ediyorum Sayın Hâkim. Tanık yüzü görmediğini söylüyor; “eminim” bir gözlem değil, kanaat.
 hakim: Tanık, yalnızca gördüğünüzü anlatın. “Eminim” kısmı tutanağa tanığın kanaati olarak geçsin.
@@ -528,7 +570,16 @@ hayri: Hizasında. Kalabalıktı, herkesin eli bir yerdeydi. Ama polis de söyle
 `),
         }),
         objectRule('OB_HS3B', 'HS3B', 'g_duyum', {
-          effects: [score('SORGULAMA', 50), inc('pers'), raise('ob_duyum'), mark('GOOD', 'Tanığın “polis söyledi, kamerada görmüşler” cümlesi kendi gözlemi değil, duyum. Hâkim bu kısmı tanığın gözlemi saymadı.', 'SORGULAMA')],
+          effects: [
+            score('SORGULAMA', 50),
+            inc('pers'),
+            raise('ob_duyum'),
+            mark(
+              'GOOD',
+              'Tanığın “polis söyledi, kamerada görmüşler” cümlesi kendi gözlemi değil, duyum. Hâkim bu kısmı tanığın gözlemi saymadı.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
 P: İtiraz ediyorum. Tanık polisten duyduğunu aktarıyor. Kayıt zaten dosyada; tanığın ağzından ikinci kez delil olamaz.
 hakim: Yerinde. Tanığın polisten duyduğu kısım gözlem olarak değerlendirilmez. Tanık, kendi gördüğünüz.
@@ -542,7 +593,16 @@ hayri: Aldı işte… Eğildi, aldı. Çantasına koydu. Ben indim sonra, Beşev
 `),
         }),
         presentRule('PS_HS4', 'HS4', ['ded_buldu'], {
-          effects: [score('SORGULAMA', 300), inc('pers', 2), raise('contra_h4'), mark('GOOD', 'Tanığın da gördüğü “eğilip alma” anı, kayıtta koltuk altındaki boşluktan bir bulma olarak görünüyor. Kayıt bir hırsızlık değil, bir bulma gösteriyor.', 'SORGULAMA')],
+          effects: [
+            score('SORGULAMA', 300),
+            inc('pers', 2),
+            raise('contra_h4'),
+            mark(
+              'GOOD',
+              'Tanığın da gördüğü “eğilip alma” anı, kayıtta koltuk altındaki boşluktan bir bulma olarak görünüyor. Kayıt bir hırsızlık değil, bir bulma gösteriyor.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
 P: “Eğildi, aldı.” Doğru. Savcılığın kendi kaydında 18.42.05’te sanık oturuyor, ayağı bir şeye takılıyor, eğiliyor ve koltuğun altından alıyor.
 P: O koltuğun altında, ısıtıcı kapağının yanında bir avuç genişliğinde bir boşluk var. Oturan biri göremez. Ayağı takılınca anlar.
@@ -551,7 +611,16 @@ hayri.saskin: Eğildi… evet. Yerden aldı. Ben… çantadan aldı sanıyordum.
 `),
         }),
         presentRule('PS_HS4_KLIP', 'HS4', ['ev_klip'], {
-          effects: [score('SORGULAMA', 150), inc('pers'), raise('contra_h4'), mark('GOOD', 'Savcılığın kendi delili, tanığın “çantasına koydu” anlatımının öncesini gösterdi: sanık cüzdanı yerden alıyor.', 'SORGULAMA')],
+          effects: [
+            score('SORGULAMA', 150),
+            inc('pers'),
+            raise('contra_h4'),
+            mark(
+              'GOOD',
+              'Savcılığın kendi delili, tanığın “çantasına koydu” anlatımının öncesini gösterdi: sanık cüzdanı yerden alıyor.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
 P: Sayın Hâkim, savcılığın kaydını tanığa göstermek istiyorum: 18.42.05.
 Ekranda gri kareler. Arda oturuyor, ayağı takılıyor, eğiliyor.
@@ -561,10 +630,26 @@ hayri: Eğiliyor… yerden alıyor. Ben bunu çantadan sanıyordum. Doğru, eği
         presentRule(
           'PS_HAYRI_ILGISIZ',
           undefined,
-          ['ded_zarf', 'ded_teslim', 'ded_eksik_kayit', 'ded_kart_baskasi', 'ded_bereli', 'ev_recep_ifade', 'ev_aktarim_formu'],
+          [
+            'ded_zarf',
+            'ded_teslim',
+            'ded_eksik_kayit',
+            'ded_kart_baskasi',
+            'ded_bereli',
+            'ev_recep_ifade',
+            'ev_aktarim_formu',
+          ],
           {
             maxUses: 4,
-            effects: [inc('wrong'), score('SORGULAMA', -50, 'hatali'), mark('BAD', 'Delil doğru, tanık yanlış. Bu bulgunun Hayri Doğan’ın gözlemiyle ilgisi yok; doğru tanığa ya da esas savunmaya saklanmalıydı.', 'SORGULAMA')],
+            effects: [
+              inc('wrong'),
+              score('SORGULAMA', -50, 'hatali'),
+              mark(
+                'BAD',
+                'Delil doğru, tanık yanlış. Bu bulgunun Hayri Doğan’ın gözlemiyle ilgisi yok; doğru tanığa ya da esas savunmaya saklanmalıydı.',
+                'SORGULAMA',
+              ),
+            ],
             responses: B(`
 hakim: Müdafi, bu belgenin tanığın anlattıklarıyla ilgisini kuramadım. Ayrıca tartışırız.
 > Doğru kâğıt, yanlış an. Kâğıdı dosyaya geri koydum.
@@ -573,14 +658,21 @@ hakim: Müdafi, bu belgenin tanığın anlattıklarıyla ilgisini kuramadım. Ay
         ),
       ],
       presentMiss: fallback('FB_H104_PRESENT', 'PRESENT', {
-        effects: [...(wrong() ?? []), mark('BAD', 'Bu delil tanığın ifadesindeki hiçbir şeyi çürütmüyor.', 'SORGULAMA')],
+        effects: [
+          ...(wrong() ?? []),
+          mark('BAD', 'Bu delil tanığın ifadesindeki hiçbir şeyi çürütmüyor.', 'SORGULAMA'),
+        ],
         responses: B(`
 hakim: Bu delilin tanığın ifadesiyle ilgisi görülmedi, müdafi.
 savci: Sayın Hâkim, savunma dosyada rastgele dolaşıyor.
 `),
       }),
       objectMiss: fallback('FB_H104_OBJECT', 'OBJECT', {
-        effects: [dec('cred'), score('SORGULAMA', -50, 'hatali'), mark('BAD', 'Dayanaksız itiraz: bu ifade kanaat ya da duyum değil.', 'SORGULAMA')],
+        effects: [
+          dec('cred'),
+          score('SORGULAMA', -50, 'hatali'),
+          mark('BAD', 'Dayanaksız itiraz: bu ifade kanaat ya da duyum değil.', 'SORGULAMA'),
+        ],
         responses: B(`
 hakim: İtiraz reddedildi. Tanık kendi gözlemini anlatıyor.
 `),
@@ -612,7 +704,12 @@ savci: Kayıt ortada, Sayın Hâkim. Sanık cüzdanı alıyor ve çantasına koy
       ],
       choices: [
         option('H105_EKSIK', 'Kayıt eksik: Kent Ulaşım’daki dört kanallı tam sefer kaydı getirtilsin (CMK 206/1)', {
-          visibleWhen: any(has('clue_kaynak_dosya'), has('clue_dort_kamera'), has('clue_olay_klasoru'), has('ded_eksik_kayit')),
+          visibleWhen: any(
+            has('clue_kaynak_dosya'),
+            has('clue_dort_kamera'),
+            has('clue_olay_klasoru'),
+            has('ded_eksik_kayit'),
+          ),
           next: '$stay',
           effects: [...legal(100), inc('pers'), raise('kayit_istendi_h1')],
           good: 'Delilin bütünlüğü tartışıldı: CD, dört kanallı ve bir saatlik bir kaynaktan seçilmiş 2,5 dakika. Tam kaydın getirtilmesi ispat edilecek olayla doğrudan ilgili (CMK 206/1); hâkim kararını tam kayıt olmadan veremez (CMK 217/1).',
@@ -739,6 +836,7 @@ savci: Sayın Hâkim, bir hususa dikkat çekmek isterim. Tanık beyanına göre 
 savci: Bu eylem, iddianamedeki basit hırsızlığı aşar. Elde ya da üstte taşınan eşyanın özel beceriyle alınması, TCK 142/2-b’dir. Değerlendirilmesini talep ederim.
 > Leyla’nın sesi: “Biri ‘özel beceri’ derse beş yıldan başlarız.” Biri dedi.
 Arda bana döndü. Rakamı bilmiyordu; ama yüzümden okudu.
+Ön sırada Gülten Hanım’ın torunu Elif telefonuna bir şey yazdı, sonra babaannesinin kulağına eğildi. Gülten Hanım başını salladı. Ne konuştuklarını duymadım.
 hakim: Sanık ve müdafiine, eylemin TCK 142/2-b kapsamında değerlendirilebileceği hatırlatıldı. Müdafi, diyeceğiniz?
 `),
       next: 'H1_08',
@@ -763,7 +861,8 @@ hakim: Mahkeme fiilin nitelendirilmesinde bağlı değildir, müdafi. Hatırlatm
         }),
         option('H107_SIMDI', 'Şimdi kısaca cevap verelim: “özel beceri” yok, alma eylemi yok', {
           effects: [score('HUKUKI_BILGI', 30), raise('ek_simdi')],
-          neutral: 'Hemen cevap vermek mümkündür; ama tam kayıt ve yeni deliller gelmeden yapılan ek savunma eksik kalır. Süre istemek (CMK 226/3) daha güçlü bir zemin bırakırdı.',
+          neutral:
+            'Hemen cevap vermek mümkündür; ama tam kayıt ve yeni deliller gelmeden yapılan ek savunma eksik kalır. Süre istemek (CMK 226/3) daha güçlü bir zemin bırakırdı.',
           responses: B(`
 P: Özel beceri bir yana, ortada bir alma eylemi yok Sayın Hâkim. Sanık cüzdanı kimseden almadı; yerden buldu.
 hakim: Beyanınız tutanağa geçti. Ek savunmanızı genişletmek isterseniz bir sonraki celsede de alınır.
@@ -771,7 +870,8 @@ hakim: Beyanınız tutanağa geçti. Ek savunmanızı genişletmek isterseniz bi
         }),
         option('H107_YOK', 'Diyeceğimiz yok', {
           effects: [dec('pers')],
-          neutral: 'Nitelendirme uyarısı karşılıksız kaldı. Ek savunma hakkı (CMK 226) bir sonraki celsede yine kullanılabilir; ama bugün hâkimin önünde savcının cümlesi tek başına kaldı.',
+          neutral:
+            'Nitelendirme uyarısı karşılıksız kaldı. Ek savunma hakkı (CMK 226) bir sonraki celsede yine kullanılabilir; ama bugün hâkimin önünde savcının cümlesi tek başına kaldı.',
           responses: B(`
 hakim: Peki.
 > Savcının cümlesi salonda tek başına asılı kaldı. Beş yıl, on yıl. Arda’nın kravatı yine fazla sıkıydı.
@@ -837,8 +937,7 @@ Gülten Hanım torunuyla asansöre bindi. Arda’ya bakmadı. Asansörün kapıs
             H109_SON,
         ),
       ],
-      choices: [cont('H109_DEVAM', 'Üç hafta', 'ARA_GIRIS_1', { role: 'PRIMARY' })],
+      choices: [cont('H109_DEVAM', 'Üç hafta', 'ARA_GIRIS_0', { role: 'PRIMARY' })],
     }),
   ],
 };
-

@@ -62,6 +62,34 @@
           ]
         }
       ],
+      "routes": [{ "to": "H2_00D" }],
+      "choices": []
+    },
+    {
+      "id": "H2_00D",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "flag": "ilk_cumle_kayit" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Leyla’ya ilk cümlemi söylemiştim: “Kayıt eksikti. Şimdi tam.” Cebimdeki kâğıtta yazılıydı. Kâğıda ihtiyacım olmayacaktı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "ilk_cumle_masum" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "“Masumiyet bir sonuçtur, açılış cümlesi değil.” Leyla’nın sesi kulağımdaydı. Cebimdeki kâğıdı katladım ve başka bir şey yazmaya karar verdim: saatleri.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
       "routes": [{ "to": "H2_00S" }],
       "choices": []
     },
@@ -624,7 +652,17 @@
                   "speaker": "volkan",
                   "text": "Doğru. Ben isteneni aktardım. Kaynak olay klasöründeydi. Kimse istemedi… ta ki mahkeme isteyene kadar."
                 },
-                { "speaker": "volkan", "text": "Olay anı… olay anını polis belirledi. Ben belirlemedim." }
+                { "speaker": "volkan", "text": "Olay anı… olay anını polis belirledi. Ben belirlemedim." },
+                {
+                  "speaker": "hakim",
+                  "text": "Tanık, olay klasöründeki kayıtta 18.42’den önceki dakikalar da var mı?"
+                },
+                { "speaker": "volkan", "text": "Var Sayın Hâkim. 18.10’dan 19.10’a kadar. Dört kamera. Hepsi." },
+                {
+                  "speaker": "player",
+                  "text": "Hâkimin sorusu bir kapıyı açtı. Volkan yalnızca kapının ardında ne olduğunu söyledi.",
+                  "style": "thought"
+                }
               ]
             }
           ],
@@ -1255,7 +1293,8 @@
               "ev_klip",
               "ded_eksik_kayit",
               "ev_aktarim_formu",
-              "ded_niyet_tam"
+              "ded_niyet_tam",
+              "ev_cagri_kaydi"
             ]
           },
           "maxUses": 4,
@@ -1322,6 +1361,40 @@
       "background": "durusma_salonu",
       "prompt": { "speaker": "hakim", "text": "Müdafi, müştekiye sorunuz var mı?" },
       "lines": [
+        {
+          "when": { "flag": "gulten_foto" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Gülten Hanım kürsüye çıkmadan önce cüzdanından sararmış fotoğrafı çıkardı ve avucunda tuttu. Konuşurken bir an bile bırakmadı."
+            },
+            {
+              "speaker": "gulten",
+              "text": "Sayın Hâkim, ben bir şey söylemek istiyorum. Kimse bana ne söyleyeceğimi söylemedi. Onu da söyleyeyim."
+            },
+            {
+              "speaker": "gulten",
+              "text": "Geçen celse bu çocuk “Facebook’tan yazdım” dedi. Ben Facebook bilmem. Torunum baktı. Yazmış. Olay günü, gece dokuzu çeyrek geçe."
+            },
+            {
+              "speaker": "gulten",
+              "text": "“Cüzdanınızı buldum, size nasıl ulaştırabilirim” diye yazmış. Ben o saatte karakolda “cezasını çeksin” diyordum."
+            },
+            {
+              "speaker": "gulten",
+              "expression": "uzgun",
+              "text": "Fotoğrafa dokunmamış. Kimliğin arkasında, nasıl koyduysam öyle. Hırsız fotoğraf almaz ama atar. Bu atmamış."
+            },
+            {
+              "speaker": "gulten",
+              "text": "Ben şikâyetimi geri alamazmışım, öyle dediler. Ama şunu söyleyebilirim: ben bu çocuğun cüzdanımı çaldığına artık inanmıyorum."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı kalemini bıraktı. Hâkim müştekiye uzun uzun baktı ve kâtibe döndü: “Aynen yazın.”"
+            }
+          ]
+        },
         {
           "lines": [
             {
@@ -1896,7 +1969,11 @@
                   "speaker": "player",
                   "text": "Kaybolmuş eşya suçu da “malik gibi tasarruf” ister: harcamak, saklamak, kullanmak. Sanık yanındakine sordu, şoföre uzattı, belediyeyi aradı, sahibine yazdı, kendine karakol notu yazdı."
                 },
-                { "speaker": "player", "text": "Malik gibi değil; sahibini arayan biri gibi davrandı." }
+                { "speaker": "player", "text": "Malik gibi değil; sahibini arayan biri gibi davrandı." },
+                {
+                  "speaker": "player",
+                  "text": "Sahibine ulaşamadıysa, bunun sebebi bir şoförün yorgunluğu, bir çağrı merkezinin “yarın” demesi ve okunmamış bir mesaj isteğidir. Bunların hiçbiri sanığın kastı değildir."
+                }
               ]
             }
           ],
@@ -2141,7 +2218,9 @@
                 {
                   "speaker": "player",
                   "text": "Eksik dakikalar tamamlanınca geriye bir hırsızlık değil, bir bulma ve dört teslim girişimi kalıyor."
-                }
+                },
+                { "speaker": "savci", "text": "Cevap hakkımı saklı tutuyorum, Sayın Hâkim." },
+                { "speaker": "hakim", "text": "Kayda geçti." }
               ]
             }
           ],
@@ -2463,7 +2542,7 @@
           "id": "SON_A",
           "kind": "OPTION",
           "label": "“Bir cüzdan buldum. Sahibine ulaştırmak istedim. Beceremedim; ama çalmadım.”",
-          "next": "H2_HUKUM",
+          "next": "H2_DUSUNCE",
           "responses": [
             {
               "when": { "flag": "false_confession" },
@@ -2503,7 +2582,7 @@
           "id": "SON_B",
           "kind": "OPTION",
           "label": "Ağlayarak af dilesin",
-          "next": "H2_HUKUM",
+          "next": "H2_DUSUNCE",
           "responses": [
             {
               "lines": [
@@ -2525,7 +2604,7 @@
           "id": "SON_C",
           "kind": "OPTION",
           "label": "“Avukatımın söylediklerine katılıyorum.”",
-          "next": "H2_HUKUM",
+          "next": "H2_DUSUNCE",
           "responses": [
             { "lines": [{ "speaker": "arda", "text": "Avukatımın söylediklerine katılıyorum, Sayın Hâkim." }] }
           ],
@@ -2535,6 +2614,94 @@
           }
         }
       ]
+    },
+    {
+      "id": "H2_DUSUNCE",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "lines": [
+        {
+          "when": { "flag": "arda_recep_affetti" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Koridorda Arda, Recep’e “ikimiz de acele ettik” demişti. Hükmü beklerken o cümleyi düşündüm. Bir öğretmen adayı, kendisini yakan adamı küçültmeden konuşmuştu.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "arda_recep_uzak" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Koridorda Recep’le Arda’yı ayırmıştım. Doğru muydu? Bazı konuşmalar duruşmadan sonraya kalır. Bazıları hiç olmaz.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "izlendi_birakma" }, { "flag": "izlendi_soru" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Perdedeki kareler hâlâ gözümün önündeydi: bir şemsiye, bir bere, koltuğun altına eğilen bir parka. Bir de yanındakine cüzdanı uzatan bir genç.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H2_DUSUNCE2" }],
+      "choices": []
+    },
+    {
+      "id": "H2_DUSUNCE2",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "flag": "ek_guclu" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Üç kapıyı tek tek kapatmıştım: alma yok, beceri yok, malik gibi tasarruf yok. Kapıların arkasında ne kaldığını hâkim söyleyecekti.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "ek_142" }, { "flag": "ek_160_kabul" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ek savunmada bir kapıyı açık bırakmıştım. Açık kapıdan bazen rüzgâr girer, bazen bir hüküm.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "recep_cekindi" }, { "flag": "contra_r_kismi" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Şoförün sesi tam çıkmamıştı. Kayıt konuşmuştu; Recep’in kendisi değil. Hâkim hangisine kulak verecekti?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "ozan_dinlendi" }, { "flag": "orhan_dinlendi" }, { "flag": "ob_vs2" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Tanıklar konuşmuştu. Sırayla, kendi cümleleriyle. Benim işim onların sözlerini birbirine bağlamaktı; gerisi bir kâğıttaki birkaç satırdı.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H2_HUKUM" }],
+      "choices": []
     },
     {
       "id": "H2_HUKUM",

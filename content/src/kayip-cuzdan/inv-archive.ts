@@ -26,7 +26,12 @@ import { INV } from './shared.js';
 const wrongTool = (id: string) =>
   fallback(id, 'EXAMINE', {
     score: { DELIL_ANALIZI: -20 },
-    feedback: { title: 'SONUÇ YOK', text: 'Bu aletle burada dikkat çeken bir şey bulamadın.', label: '−20 SKOR', tone: 'error' },
+    feedback: {
+      title: 'SONUÇ YOK',
+      text: 'Bu aletle burada dikkat çeken bir şey bulamadın.',
+      label: '−20 SKOR',
+      tone: 'error',
+    },
   });
 
 const found = (title: string, text: string, label: string) => ({ title, text, label, tone: 'special' as const });
@@ -65,7 +70,13 @@ export const RECIPES1: [string, string, string, string, string][] = [
     'ded_kart_baskasi',
     '18.44.30’da Arda Beşevler’e giden otobüsteydi. 18.49’da kartlar kilometrelerce geride kullanıldı. O değil.',
   ],
-  ['CB_ZARF', 'clue_atm_fisi', 'clue_zarf', 'ded_zarf', '17.52’de çekilen 600 TL, “ARDA – kira” yazılı banka zarfında. Kadının parası değil.'],
+  [
+    'CB_ZARF',
+    'clue_atm_fisi',
+    'clue_zarf',
+    'ded_zarf',
+    '17.52’de çekilen 600 TL, “ARDA – kira” yazılı banka zarfında. Kadının parası değil.',
+  ],
   [
     'CB_TESLIM',
     'clue_sari_not',
@@ -87,7 +98,13 @@ export const RECIPES1: [string, string, string, string, string][] = [
     'ded_hayri_gormedi',
     'Arkaya bakan koltukta gözlüksüz gazete okuyan miyop biri, başını kaldırınca üç metre ötede bulanık bir kalabalık görür.',
   ],
-  ['CB_BULDU', 'clue_koltuk_boslugu', 'clue_ilk_kare', 'ded_buldu', 'Ayağı takılıyor, eğiliyor, koltuğun altındaki boşluktan alıyor. Bir alma değil, bir bulma.'],
+  [
+    'CB_BULDU',
+    'clue_koltuk_boslugu',
+    'clue_ilk_kare',
+    'ded_buldu',
+    'Ayağı takılıyor, eğiliyor, koltuğun altındaki boşluktan alıyor. Bir alma değil, bir bulma.',
+  ],
   [
     'CB_KLASOR',
     'clue_olay_klasoru',
@@ -111,7 +128,11 @@ const recipeRule = ([id, a, b, ded, text]: [string, string, string, string, stri
     feedback: { title: 'YENİ ÇIKARIM', text, label: 'YENİ DELİL · +300 SKOR', tone: 'success' },
   });
 
-const dil = (id: string, label: string, spec: Partial<ChoiceDef> & { good?: string; bad?: string; neutral?: string }) => {
+const dil = (
+  id: string,
+  label: string,
+  spec: Partial<ChoiceDef> & { good?: string; bad?: string; neutral?: string },
+) => {
   const { good, bad, neutral, effects, ...rest } = spec;
   const quality = good
     ? { q: 'GOOD' as const, feedback: good, category: 'USUL_BILGISI' as const }
@@ -153,12 +174,25 @@ katip: Siz okudunuz. Avukatlar bazen okur. Bazen.
 > “Saklamak bizim işimiz.” Bir emanet bürosu ile bir kayıp eşya bürosu arasında fark var mı? İkisi de sahibini bekleyen şeyleri tutuyor.
 `),
       choices: [
-        { id: 'EMS_ORNEK', kind: 'OPTION', label: '“Tutanağın onaylı örneğini istiyorum.”', effects: [raise('tutanak_ornek')], next: '$return', responses: B(`
+        {
+          id: 'EMS_ORNEK',
+          kind: 'OPTION',
+          label: '“Tutanağın onaylı örneğini istiyorum.”',
+          effects: [raise('tutanak_ornek')],
+          next: '$return',
+          responses: B(`
 katip: Dilekçe verin, harcını yatırın, yarın alırsınız. Dosya inceleme hakkınız var, örnek hakkınız da var. Ama sırası var.
-`) },
-        { id: 'EMS_GIT', kind: 'OPTION', label: 'Teşekkür edip çık', next: '$return', responses: B(`
+`),
+        },
+        {
+          id: 'EMS_GIT',
+          kind: 'OPTION',
+          label: 'Teşekkür edip çık',
+          next: '$return',
+          responses: B(`
 > Bodrumdan çıkarken merdivenlerde bir avukatın kâtibe bağırdığını duydum. Melek Hanım’a bir çikolata almayı not ettim.
-`) },
+`),
+        },
       ],
     },
     documentExam('INV_EMANET', {
@@ -181,7 +215,10 @@ Bir alet seç, sonra şüpheli satıra dokun. Doğru alet ve doğru satır yeni 
       ],
       rows: [
         row('e1', ['1', 'Kahverengi deri kadın cüzdanı', 'İçinde: kimlik, sağlık kartı, eczane fişi, 1 fotoğraf'], {
-          cmp: { cells: ['1', 'Kahverengi deri kadın cüzdanı', 'Müşteki: 1.200 TL + 2 kart · Emanette: YOK'], tone: 'special' },
+          cmp: {
+            cells: ['1', 'Kahverengi deri kadın cüzdanı', 'Müşteki: 1.200 TL + 2 kart · Emanette: YOK'],
+            tone: 'special',
+          },
         }),
         row('e2', ['2', 'Zarf içinde 600 TL', 'Sırt çantasının ön gözünde'], {
           mag: { cells: ['2', 'Banka zarfı, bantlı', 'Üstünde el yazısı: “ARDA – kira”'], tone: 'special' },
@@ -192,7 +229,11 @@ Bir alet seç, sonra şüpheli satıra dokun. Doğru alet ve doğru satır yeni 
         row('e4', ['4', 'Cep telefonu', 'İnceleme sonrası iade edildi']),
         row('e5', ['5', 'Öğrenci kartı (kişiye özel)', 'Fotokopisi alındı, iade edildi']),
       ],
-      tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('cmp', 'Karşılaştır', 'compare'), tool('uv', 'UV ışık', 'uv', 'UV')],
+      tools: [
+        tool('mag', 'Büyüteç', 'magnifier'),
+        tool('cmp', 'Karşılaştır', 'compare'),
+        tool('uv', 'UV ışık', 'uv', 'UV'),
+      ],
       costVar: 'exam_left',
       rules: [
         examine('EX_E_CMP1', 'cmp', 'e1', {
@@ -207,7 +248,11 @@ Bir alet seç, sonra şüpheli satıra dokun. Doğru alet ve doğru satır yeni 
         examine('EX_E_MAG2', 'mag', 'e2', {
           discovers: 'clue_zarf',
           score: { DELIL_ANALIZI: 100 },
-          feedback: found('YENİ İPUCU', 'Bantlı bir banka zarfı. Üstünde Arda’nın el yazısı: “ARDA – kira.” Banknotlar düz, sıralı.', '+100 SKOR · Not defterine eklendi'),
+          feedback: found(
+            'YENİ İPUCU',
+            'Bantlı bir banka zarfı. Üstünde Arda’nın el yazısı: “ARDA – kira.” Banknotlar düz, sıralı.',
+            '+100 SKOR · Not defterine eklendi',
+          ),
         }),
         examine('EX_E_MAG3', 'mag', 'e3', {
           discovers: 'clue_sari_not',
@@ -256,17 +301,27 @@ CD’nin yanında Kent Ulaşım’ın tek sayfalık aktarım formu. Teknisyenin 
         row('k2', ['Aktarılan kanal', 'KAM-2 (orta)']),
         row('k3', ['Aktarılan aralık', '18.42.00–18.44.30']),
         row('k4', ['Aktarım notu', '*1 segment (bkz. dipnot)'], {
-          mag: { cells: ['Aktarım notu', 'Dipnot: 18.43.00–18.43.59 yazma hatası, yeniden denenmedi'], tone: 'special' },
+          mag: {
+            cells: ['Aktarım notu', 'Dipnot: 18.43.00–18.43.59 yazma hatası, yeniden denenmedi'],
+            tone: 'special',
+          },
         }),
         row('k5', ['CD · ilk kareler', '18.42.00–18.42.20'], {
-          play: { cells: ['CD · ilk kareler', '18.42.05 oturur, ayağı takılır, koltuk altından bir cisim alır'], tone: 'special' },
+          play: {
+            cells: ['CD · ilk kareler', '18.42.05 oturur, ayağı takılır, koltuk altından bir cisim alır'],
+            tone: 'special',
+          },
         }),
         row('k6', ['CD · son kare', '18.44.30'], {
           play: { cells: ['CD · son kare', 'Durak ekranı: “SIRADAKİ DURAK: BEŞEVLER”'], tone: 'special' },
         }),
         row('k7', ['Talep eden', 'Pol. Mem. S. Ulu · “olay anı yeterli”']),
       ],
-      tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('play', 'Kareleri izle', 'camera'), tool('lock', 'Bütünlük', 'lock')],
+      tools: [
+        tool('mag', 'Büyüteç', 'magnifier'),
+        tool('play', 'Kareleri izle', 'camera'),
+        tool('lock', 'Bütünlük', 'lock'),
+      ],
       costVar: 'klip_left',
       rules: [
         examine('EX_K_MAG1', 'mag', 'k1', {
@@ -290,12 +345,20 @@ CD’nin yanında Kent Ulaşım’ın tek sayfalık aktarım formu. Teknisyenin 
         examine('EX_K_LOCK4', 'lock', 'k4', {
           discovers: 'clue_bozuk_segment',
           score: { DELIL_ANALIZI: 100 },
-          feedback: found('YENİ İPUCU', 'Zaman damgaları sürekli değil: 18.42.59 → 18.44.00. Bir dakika eksik. Formun dipnotu bunu doğruluyor.', '+100 SKOR · Not defterine eklendi'),
+          feedback: found(
+            'YENİ İPUCU',
+            'Zaman damgaları sürekli değil: 18.42.59 → 18.44.00. Bir dakika eksik. Formun dipnotu bunu doğruluyor.',
+            '+100 SKOR · Not defterine eklendi',
+          ),
         }),
         examine('EX_K_PLAY5', 'play', 'k5', {
           discovers: 'clue_ilk_kare',
           score: { DELIL_ANALIZI: 100 },
-          feedback: found('YENİ İPUCU', '18.42.05: oturuyor, ayağı takılıyor, eğilip koltuğun altından alıyor. Cüzdan çantadan ya da cepten çıkmıyor.', '+100 SKOR · Not defterine eklendi'),
+          feedback: found(
+            'YENİ İPUCU',
+            '18.42.05: oturuyor, ayağı takılıyor, eğilip koltuğun altından alıyor. Cüzdan çantadan ya da cepten çıkmıyor.',
+            '+100 SKOR · Not defterine eklendi',
+          ),
         }),
         examine('EX_K_PLAY6', 'play', 'k6', {
           discovers: 'clue_son_kare',
@@ -350,7 +413,11 @@ Bankanın gönderdiği döküm tek sayfa: saat, işyeri, tutar. Kimin harcadığ
         examine('EX_B_CMP1', 'cmp', 'b1', {
           discovers: 'clue_harcama_saat',
           score: { DELIL_ANALIZI: 100 },
-          feedback: found('YENİ İPUCU', '18.49, Altıparmak. CD’deki saatlerle yan yana koyunca soru kendiliğinden doğuyor: Arda o sırada neredeydi?', '+100 SKOR · Not defterine eklendi'),
+          feedback: found(
+            'YENİ İPUCU',
+            '18.49, Altıparmak. CD’deki saatlerle yan yana koyunca soru kendiliğinden doğuyor: Arda o sırada neredeydi?',
+            '+100 SKOR · Not defterine eklendi',
+          ),
         }),
       ],
       miss: wrongTool('FB_BANKA'),
@@ -390,10 +457,12 @@ Bankanın gönderdiği döküm tek sayfa: saat, işyeri, tutar. Kimin harcadığ
           good: 'Notun ne zaman ve neden yazıldığını gören bir tanık. Doğrudan gözleme dayanır.',
         }),
         dil('DIL_BILIRKISI', 'CD’nin bilirkişiye incelettirilmesi', {
-          neutral: 'Bilirkişi CD’nin oynanıp oynanmadığını söyleyebilir ama eksik kamerayı ve dakikaları tamamlayamaz; asıl delil kaynaktaki tam kayıttır.',
+          neutral:
+            'Bilirkişi CD’nin oynanıp oynanmadığını söyleyebilir ama eksik kamerayı ve dakikaları tamamlayamaz; asıl delil kaynaktaki tam kayıttır.',
         }),
         dil('DIL_BUFE', 'Altıparmak’taki büfenin kamera kaydı', {
-          neutral: 'Kayıt otuz günde silinmiş; istem sonuçsuz kalır. Delilin ispata elverişsiz olduğu talepler CMK 206/2 uyarınca reddedilebilir.',
+          neutral:
+            'Kayıt otuz günde silinmiş; istem sonuçsuz kalır. Delilin ispata elverişsiz olduğu talepler CMK 206/2 uyarınca reddedilebilir.',
         }),
         dil('DIL_FB', 'Müştekinin bütün Facebook yazışmalarının getirtilmesi', {
           bad: 'Ölçüsüz ve özel hayatın gizliliğine dokunan bir talep; ispat edilecek olay için gerekli olanla sınırlı değil. Reddedilir ve mahkemenin gözünde savunmanın ciddiyetini zedeler.',
@@ -420,7 +489,12 @@ Mantar panoya iğnelenmiş kartlar, aralarında kırmızı iplik bekleyen boşlu
       miss: fallback('FB_CIKARIM', 'COMBINE', {
         repeat: 'ONCE_PER_PARAMS',
         score: { DELIL_ANALIZI: -50 },
-        feedback: { title: 'Bu ikisi birbirini açıklamıyor', text: 'Başka bir çift dene.', label: 'BAĞLANTI YOK · −50 SKOR', tone: 'error' },
+        feedback: {
+          title: 'Bu ikisi birbirini açıklamıyor',
+          text: 'Başka bir çift dene.',
+          label: 'BAĞLANTI YOK · −50 SKOR',
+          tone: 'error',
+        },
       }),
       finish: { id: 'CIKARIM_BITIR' },
     }),

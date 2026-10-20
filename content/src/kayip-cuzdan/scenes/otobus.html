@@ -1,69 +1,249 @@
 <!doctype html>
 <html lang="tr">
-<head>
-<meta charset="utf-8">
-<title>Sahne · Hat 38 içi (18.40 seferi)</title>
-<!--
+  <head>
+    <meta charset="utf-8" />
+    <title>Sahne · Hat 38 içi (18.40 seferi)</title>
+    <!--
   Dava #01: Hat 38, aynı model araç, akşam. Dekoratif div'ler; dokunma alanları SceneDef nesneleridir (30-scenes.json):
   kameralar (10,6,324,26) · 14 altı (236,214,50,22) · çıkartma (148,72,34,32) · 9 numara (52,150,56,62) ·
   validatör (122,128,18,30) · durak ekranı (196,40,80,18). Palet: zemin #141026, duvar #2b2350, kenar #120d1c.
 -->
-<style>
-body{margin:0;background:#141026}
-#scene{position:relative;width:344px;height:300px;overflow:hidden;background:#141026;font-family:'Pixelify Sans',monospace;color:#efe8ff}
-#scene div{position:absolute;box-sizing:border-box}
-</style>
-</head>
-<body>
-<div id="scene">
-  <!-- tavan ve duvar -->
-  <div style="left:0;right:0;top:0;height:36px;background:#1d1838;border-bottom:4px solid #120d1c"></div>
-  <div style="left:0;right:0;top:36px;height:170px;background:#2b2350"></div>
-  <!-- tavan lambaları -->
-  <div style="left:40px;top:30px;width:60px;height:6px;background:#f4e7c5;opacity:.8"></div>
-  <div style="left:244px;top:30px;width:60px;height:6px;background:#f4e7c5;opacity:.8"></div>
-  <!-- dört kamera kubbesi -->
-  <div style="left:20px;top:10px;width:18px;height:14px;border-radius:9px 9px 2px 2px;background:#120d1c;border:2px solid #4a4656"></div>
-  <div style="left:120px;top:10px;width:18px;height:14px;border-radius:9px 9px 2px 2px;background:#120d1c;border:2px solid #4a4656"></div>
-  <div style="left:200px;top:10px;width:18px;height:14px;border-radius:9px 9px 2px 2px;background:#120d1c;border:2px solid #4a4656"></div>
-  <div style="left:304px;top:10px;width:18px;height:14px;border-radius:9px 9px 2px 2px;background:#120d1c;border:2px solid #4a4656"></div>
-  <div style="left:308px;top:16px;width:4px;height:4px;background:#c0392b"></div>
-  <!-- buğulu camlar -->
-  <div style="left:10px;top:50px;width:120px;height:70px;background:#3d5a80;border:4px solid #120d1c;opacity:.85"></div>
-  <div style="left:12px;top:60px;width:116px;height:40px;background:repeating-linear-gradient(170deg,#9cc3e6 0 2px,transparent 2px 9px);opacity:.35"></div>
-  <div style="left:214px;top:70px;width:120px;height:60px;background:#3d5a80;border:4px solid #120d1c;opacity:.85"></div>
-  <div style="left:216px;top:76px;width:116px;height:40px;background:repeating-linear-gradient(170deg,#9cc3e6 0 2px,transparent 2px 9px);opacity:.35"></div>
-  <!-- durak ekranı -->
-  <div style="left:196px;top:40px;width:80px;height:18px;background:#120d1c;border:2px solid #4a4656;font-size:7px;color:#c0392b;display:flex;align-items:center;justify-content:center">KÜLTÜRPARK</div>
-  <!-- orta kapı -->
-  <div style="left:140px;top:60px;width:52px;height:150px;background:#4a4656;border:4px solid #120d1c"></div>
-  <div style="left:146px;top:66px;width:40px;height:60px;background:#3d5a80;opacity:.7"></div>
-  <div style="left:150px;top:76px;width:30px;height:26px;background:#f4e7c5;border:2px solid #120d1c;font-size:5px;color:#120d1c;display:flex;align-items:center;justify-content:center;text-align:center;line-height:6px">EŞYA<br>SÜRÜCÜYE</div>
-  <!-- tutunma direkleri -->
-  <div style="left:116px;top:36px;width:4px;height:180px;background:#e8b13c"></div>
-  <div style="left:206px;top:36px;width:4px;height:180px;background:#e8b13c"></div>
-  <div style="left:0;right:0;top:44px;height:3px;background:#e8b13c"></div>
-  <!-- validatör -->
-  <div style="left:122px;top:128px;width:18px;height:30px;background:#2c3e66;border:2px solid #120d1c"></div>
-  <div style="left:126px;top:134px;width:10px;height:6px;background:#3f8a62"></div>
-  <!-- zemin -->
-  <div style="left:0;right:0;top:206px;bottom:0;background:#3b3550;border-top:4px solid #120d1c"></div>
-  <div style="left:0;right:0;top:250px;height:2px;background:#2b2350"></div>
-  <!-- 9 numara: arkaya bakan koltuk -->
-  <div style="left:56px;top:150px;width:48px;height:46px;background:#7a2f45;border:4px solid #120d1c"></div>
-  <div style="left:56px;top:192px;width:48px;height:20px;background:#4a1a2b;border:4px solid #120d1c"></div>
-  <div style="left:70px;top:156px;width:20px;height:10px;background:#f4e7c5;border:2px solid #120d1c;font-size:6px;color:#120d1c;display:flex;align-items:center;justify-content:center">9</div>
-  <!-- 14 numara ve altı -->
-  <div style="left:236px;top:150px;width:50px;height:46px;background:#7a2f45;border:4px solid #120d1c"></div>
-  <div style="left:236px;top:192px;width:50px;height:22px;background:#4a1a2b;border:4px solid #120d1c"></div>
-  <div style="left:252px;top:156px;width:20px;height:10px;background:#f4e7c5;border:2px solid #120d1c;font-size:6px;color:#120d1c;display:flex;align-items:center;justify-content:center">14</div>
-  <div style="left:240px;top:214px;width:42px;height:20px;background:#0b0816"></div>
-  <div style="left:244px;top:226px;width:16px;height:4px;background:#25222e"></div>
-  <!-- ısıtıcı kapağı -->
-  <div style="left:288px;top:214px;width:40px;height:20px;background:#5c5a66;border:2px solid #120d1c;background-image:repeating-linear-gradient(90deg,#4a4656 0 3px,#5c5a66 3px 6px)"></div>
-  <!-- ıslak zemin parıltısı -->
-  <div style="left:120px;top:262px;width:80px;height:6px;background:#9cc3e6;opacity:.25"></div>
-  <div style="left:30px;top:276px;width:50px;height:4px;background:#9cc3e6;opacity:.2"></div>
-</div>
-</body>
+    <style>
+      body {
+        margin: 0;
+        background: #141026;
+      }
+      #scene {
+        position: relative;
+        width: 344px;
+        height: 300px;
+        overflow: hidden;
+        background: #141026;
+        font-family: 'Pixelify Sans', monospace;
+        color: #efe8ff;
+      }
+      #scene div {
+        position: absolute;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <!-- tavan ve duvar -->
+      <div style="left: 0; right: 0; top: 0; height: 36px; background: #1d1838; border-bottom: 4px solid #120d1c"></div>
+      <div style="left: 0; right: 0; top: 36px; height: 170px; background: #2b2350"></div>
+      <!-- tavan lambaları -->
+      <div style="left: 40px; top: 30px; width: 60px; height: 6px; background: #f4e7c5; opacity: 0.8"></div>
+      <div style="left: 244px; top: 30px; width: 60px; height: 6px; background: #f4e7c5; opacity: 0.8"></div>
+      <!-- dört kamera kubbesi -->
+      <div
+        style="
+          left: 20px;
+          top: 10px;
+          width: 18px;
+          height: 14px;
+          border-radius: 9px 9px 2px 2px;
+          background: #120d1c;
+          border: 2px solid #4a4656;
+        "
+      ></div>
+      <div
+        style="
+          left: 120px;
+          top: 10px;
+          width: 18px;
+          height: 14px;
+          border-radius: 9px 9px 2px 2px;
+          background: #120d1c;
+          border: 2px solid #4a4656;
+        "
+      ></div>
+      <div
+        style="
+          left: 200px;
+          top: 10px;
+          width: 18px;
+          height: 14px;
+          border-radius: 9px 9px 2px 2px;
+          background: #120d1c;
+          border: 2px solid #4a4656;
+        "
+      ></div>
+      <div
+        style="
+          left: 304px;
+          top: 10px;
+          width: 18px;
+          height: 14px;
+          border-radius: 9px 9px 2px 2px;
+          background: #120d1c;
+          border: 2px solid #4a4656;
+        "
+      ></div>
+      <div style="left: 308px; top: 16px; width: 4px; height: 4px; background: #c0392b"></div>
+      <!-- buğulu camlar -->
+      <div
+        style="
+          left: 10px;
+          top: 50px;
+          width: 120px;
+          height: 70px;
+          background: #3d5a80;
+          border: 4px solid #120d1c;
+          opacity: 0.85;
+        "
+      ></div>
+      <div
+        style="
+          left: 12px;
+          top: 60px;
+          width: 116px;
+          height: 40px;
+          background: repeating-linear-gradient(170deg, #9cc3e6 0 2px, transparent 2px 9px);
+          opacity: 0.35;
+        "
+      ></div>
+      <div
+        style="
+          left: 214px;
+          top: 70px;
+          width: 120px;
+          height: 60px;
+          background: #3d5a80;
+          border: 4px solid #120d1c;
+          opacity: 0.85;
+        "
+      ></div>
+      <div
+        style="
+          left: 216px;
+          top: 76px;
+          width: 116px;
+          height: 40px;
+          background: repeating-linear-gradient(170deg, #9cc3e6 0 2px, transparent 2px 9px);
+          opacity: 0.35;
+        "
+      ></div>
+      <!-- durak ekranı -->
+      <div
+        style="
+          left: 196px;
+          top: 40px;
+          width: 80px;
+          height: 18px;
+          background: #120d1c;
+          border: 2px solid #4a4656;
+          font-size: 7px;
+          color: #c0392b;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        KÜLTÜRPARK
+      </div>
+      <!-- orta kapı -->
+      <div
+        style="left: 140px; top: 60px; width: 52px; height: 150px; background: #4a4656; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 146px; top: 66px; width: 40px; height: 60px; background: #3d5a80; opacity: 0.7"></div>
+      <div
+        style="
+          left: 150px;
+          top: 76px;
+          width: 30px;
+          height: 26px;
+          background: #f4e7c5;
+          border: 2px solid #120d1c;
+          font-size: 5px;
+          color: #120d1c;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          line-height: 6px;
+        "
+      >
+        EŞYA<br />SÜRÜCÜYE
+      </div>
+      <!-- tutunma direkleri -->
+      <div style="left: 116px; top: 36px; width: 4px; height: 180px; background: #e8b13c"></div>
+      <div style="left: 206px; top: 36px; width: 4px; height: 180px; background: #e8b13c"></div>
+      <div style="left: 0; right: 0; top: 44px; height: 3px; background: #e8b13c"></div>
+      <!-- validatör -->
+      <div
+        style="left: 122px; top: 128px; width: 18px; height: 30px; background: #2c3e66; border: 2px solid #120d1c"
+      ></div>
+      <div style="left: 126px; top: 134px; width: 10px; height: 6px; background: #3f8a62"></div>
+      <!-- zemin -->
+      <div style="left: 0; right: 0; top: 206px; bottom: 0; background: #3b3550; border-top: 4px solid #120d1c"></div>
+      <div style="left: 0; right: 0; top: 250px; height: 2px; background: #2b2350"></div>
+      <!-- 9 numara: arkaya bakan koltuk -->
+      <div
+        style="left: 56px; top: 150px; width: 48px; height: 46px; background: #7a2f45; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 56px; top: 192px; width: 48px; height: 20px; background: #4a1a2b; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="
+          left: 70px;
+          top: 156px;
+          width: 20px;
+          height: 10px;
+          background: #f4e7c5;
+          border: 2px solid #120d1c;
+          font-size: 6px;
+          color: #120d1c;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        9
+      </div>
+      <!-- 14 numara ve altı -->
+      <div
+        style="left: 236px; top: 150px; width: 50px; height: 46px; background: #7a2f45; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 236px; top: 192px; width: 50px; height: 22px; background: #4a1a2b; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="
+          left: 252px;
+          top: 156px;
+          width: 20px;
+          height: 10px;
+          background: #f4e7c5;
+          border: 2px solid #120d1c;
+          font-size: 6px;
+          color: #120d1c;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        14
+      </div>
+      <div style="left: 240px; top: 214px; width: 42px; height: 20px; background: #0b0816"></div>
+      <div style="left: 244px; top: 226px; width: 16px; height: 4px; background: #25222e"></div>
+      <!-- ısıtıcı kapağı -->
+      <div
+        style="
+          left: 288px;
+          top: 214px;
+          width: 40px;
+          height: 20px;
+          background: #5c5a66;
+          border: 2px solid #120d1c;
+          background-image: repeating-linear-gradient(90deg, #4a4656 0 3px, #5c5a66 3px 6px);
+        "
+      ></div>
+      <!-- ıslak zemin parıltısı -->
+      <div style="left: 120px; top: 262px; width: 80px; height: 6px; background: #9cc3e6; opacity: 0.25"></div>
+      <div style="left: 30px; top: 276px; width: 50px; height: 4px; background: #9cc3e6; opacity: 0.2"></div>
+    </div>
+  </body>
 </html>

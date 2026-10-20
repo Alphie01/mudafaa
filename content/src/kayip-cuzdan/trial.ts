@@ -57,13 +57,25 @@ const ILGISIZ = [
 const ilgisiz = (id: string, list: string[], who: string): ChoiceDef =>
   presentRule(id, undefined, list, {
     maxUses: 4,
-    effects: [inc('wrong'), score('SORGULAMA', -50, 'hatali'), mark('BAD', `Delil doğru, tanık yanlış: bu bulgunun ${who} anlattıklarıyla ilgisi yok.`, 'SORGULAMA')],
+    effects: [
+      inc('wrong'),
+      score('SORGULAMA', -50, 'hatali'),
+      mark('BAD', `Delil doğru, tanık yanlış: bu bulgunun ${who} anlattıklarıyla ilgisi yok.`, 'SORGULAMA'),
+    ],
     responses: B(`
 hakim: Müdafi, bu belgenin tanığın anlattıklarıyla ilgisini kuramadım.
 > Doğru kâğıt, yanlış tanık. Kâğıdı geri koydum.
 `),
   });
 
+const GULTEN_BEYAN = `
+gulten: Sayın Hâkim, ben bir şey söylemek istiyorum. Kimse bana ne söyleyeceğimi söylemedi. Onu da söyleyeyim.
+gulten: Geçen celse bu çocuk “Facebook’tan yazdım” dedi. Ben Facebook bilmem. Torunum baktı. Yazmış. Olay günü, gece dokuzu çeyrek geçe.
+gulten: “Cüzdanınızı buldum, size nasıl ulaştırabilirim” diye yazmış. Ben o saatte karakolda “cezasını çeksin” diyordum.
+gulten.uzgun: Fotoğrafa dokunmamış. Kimliğin arkasında, nasıl koyduysam öyle. Hırsız fotoğraf almaz ama atar. Bu atmamış.
+gulten: Ben şikâyetimi geri alamazmışım, öyle dediler. Ama şunu söyleyebilirim: ben bu çocuğun cüzdanımı çaldığına artık inanmıyorum.
+Savcı kalemini bıraktı. Hâkim müştekiye uzun uzun baktı ve kâtibe döndü: “Aynen yazın.”
+`;
 const V0_GIRIS = `
 mubasir: Tanık Volkan Sezer!
 Otuzlarında, sakallı, Kent Ulaşım logolu bir polar. Elinde bir dosya; kürsüye bırakmadı, göğsüne bastırdı.
@@ -126,12 +138,28 @@ Zehra dinleyici sırasındaydı; yanındaki yer boştu. Arda annesine “gelme, 
         ),
       ],
     }),
-    decisionNode('H2_00C', [{ to: 'H2_00S' }], {
+    decisionNode('H2_00C', [{ to: 'H2_00D' }], {
       lines: [
         W(
           any(flag('hayri_ozur'), flag('hayri_tesekkur')),
           `
 Hayri Bey de gelmişti. Tanık olarak değil; dinleyici sırasında, şapkası dizlerinin üstünde. Beni görünce hafifçe başını eğdi.
+`,
+        ),
+      ],
+    }),
+    decisionNode('H2_00D', [{ to: 'H2_00S' }], {
+      lines: [
+        W(
+          flag('ilk_cumle_kayit'),
+          `
+> Leyla’ya ilk cümlemi söylemiştim: “Kayıt eksikti. Şimdi tam.” Cebimdeki kâğıtta yazılıydı. Kâğıda ihtiyacım olmayacaktı.
+`,
+        ),
+        W(
+          flag('ilk_cumle_masum'),
+          `
+> “Masumiyet bir sonuçtur, açılış cümlesi değil.” Leyla’nın sesi kulağımdaydı. Cebimdeki kâğıdı katladım ve başka bir şey yazmaya karar verdim: saatleri.
 `,
         ),
       ],
@@ -215,7 +243,8 @@ Arda bunu kimseye söylemedi aslında; kendine söyledi. Yedi aydır kimsenin in
         option('IZ_HEPSI', 'Bir saatin tamamı baştan sona izlensin', {
           next: '$stay',
           effects: [dec('pers')],
-          neutral: 'Kayıt dosyada ve taraflarca izlendi; hangi dakikanın neyi gösterdiğini seçmek müdafiin işi. Bir saati yeniden izletmek hâkimin sabrını sınar, bir şey eklemez.',
+          neutral:
+            'Kayıt dosyada ve taraflarca izlendi; hangi dakikanın neyi gösterdiğini seçmek müdafiin işi. Bir saati yeniden izletmek hâkimin sabrını sınar, bir şey eklemez.',
           responses: B(`
 hakim: Kayıt zaten taraflarla birlikte izlendi, müdafi. Hangi dakikayı göstermek istediğinizi söyleyin.
 > Hâkimin sabrı da bir kaynak. Onu boşa harcadım.
@@ -304,11 +333,29 @@ hakim: Müdafi, sorularınız?
       rulesText: 'Önce bastır, sonra sun. Teknik tanık dürüst olabilir ama eksik bırakmış olabilir.',
       objectionGrounds: ['g_kanaat', 'g_duyum'],
       statements: [
-        statement('VS1', 1, ['Polisin talep ettiği kaydı ', hl('eksiksiz aktardım', any(flag('press_vs1'), has('ded_eksik_kayit'))), '.']),
-        statement('VS1B', 2, ['Talep edilen aralığı ve talep edilen kamerayı. Memur bey ', hl('“olay anı yeterli”', always), ' dedi.'], flag('press_vs1')),
+        statement('VS1', 1, [
+          'Polisin talep ettiği kaydı ',
+          hl('eksiksiz aktardım', any(flag('press_vs1'), has('ded_eksik_kayit'))),
+          '.',
+        ]),
+        statement(
+          'VS1B',
+          2,
+          ['Talep edilen aralığı ve talep edilen kamerayı. Memur bey ', hl('“olay anı yeterli”', always), ' dedi.'],
+          flag('press_vs1'),
+        ),
         statement('VS2', 3, ['Olay anı 18.42’ydi. ', hl('Öncesi dosyayı ilgilendirmiyordu', always), '.']),
-        statement('VS3', 4, ['CD’deki kayıt bütündür; ', hl('kesinti yoktur', any(flag('press_vs3'), has('clue_bozuk_segment'))), '.']),
-        statement('VS3B', 5, ['Sistem bazen segment atlar ama… ', hl('o kayıtta öyle bir şey hatırlamıyorum', always), '.'], flag('press_vs3')),
+        statement('VS3', 4, [
+          'CD’deki kayıt bütündür; ',
+          hl('kesinti yoktur', any(flag('press_vs3'), has('clue_bozuk_segment'))),
+          '.',
+        ]),
+        statement(
+          'VS3B',
+          5,
+          ['Sistem bazen segment atlar ama… ', hl('o kayıtta öyle bir şey hatırlamıyorum', always), '.'],
+          flag('press_vs3'),
+        ),
       ],
       rules: [
         pressRule('PR_VS1', 'VS1', {
@@ -319,12 +366,24 @@ volkan: KAM-2, orta kamera. 18.42’den itibaren iki buçuk dakika. Memur bey ek
 `),
         }),
         presentRule('PS_VS1B', 'VS1B', ['ded_eksik_kayit', 'ev_tam_kayit'], {
-          effects: [score('SORGULAMA', 300), inc('pers', 2), raise('contra_v'), mark('GOOD', 'Teknisyen, CD’nin bir saatlik dört kanallı kaynağın yalnızca tek kanalı ve 2,5 dakikası olduğunu kabul etti. “Eksiksiz” olan aktarım değil, talepti.', 'SORGULAMA')],
+          effects: [
+            score('SORGULAMA', 300),
+            inc('pers', 2),
+            raise('contra_v'),
+            mark(
+              'GOOD',
+              'Teknisyen, CD’nin bir saatlik dört kanallı kaynağın yalnızca tek kanalı ve 2,5 dakikası olduğunu kabul etti. “Eksiksiz” olan aktarım değil, talepti.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
 P: Aktarım formunuza göre kaynak dosya bir saatlik ve dört kanallı: SEFER_0306_1810-1910. Siz bunun tek kanalını ve iki buçuk dakikasını aktardınız.
 P: Yani eksiksiz olan aktarım değil, talep. Kaydın kendisi, mahkemenin istemesiyle üç hafta önce geldi; dört kamera, bir saat.
 volkan: Doğru. Ben isteneni aktardım. Kaynak olay klasöründeydi. Kimse istemedi… ta ki mahkeme isteyene kadar.
 volkan: Olay anı… olay anını polis belirledi. Ben belirlemedim.
+hakim: Tanık, olay klasöründeki kayıtta 18.42’den önceki dakikalar da var mı?
+volkan: Var Sayın Hâkim. 18.10’dan 19.10’a kadar. Dört kamera. Hepsi.
+> Hâkimin sorusu bir kapıyı açtı. Volkan yalnızca kapının ardında ne olduğunu söyledi.
 `),
         }),
         presentRule('PS_VS1_ERKEN', 'VS1', ['ded_eksik_kayit', 'ev_tam_kayit'], {
@@ -334,7 +393,16 @@ volkan: Olay anı… olay anını polis belirledi. Ben belirlemedim.
 `),
         }),
         objectRule('OB_VS2', 'VS2', 'g_kanaat', {
-          effects: [score('SORGULAMA', 50), inc('pers'), raise('ob_vs2'), mark('GOOD', 'Hangi dakikanın dosyayı ilgilendirdiğine teknisyen değil mahkeme karar verir; tanığın bu cümlesi bir değerlendirme.', 'SORGULAMA')],
+          effects: [
+            score('SORGULAMA', 50),
+            inc('pers'),
+            raise('ob_vs2'),
+            mark(
+              'GOOD',
+              'Hangi dakikanın dosyayı ilgilendirdiğine teknisyen değil mahkeme karar verir; tanığın bu cümlesi bir değerlendirme.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
 P: İtiraz ediyorum. Neyin dosyayı ilgilendirdiği tanığın değil, mahkemenin takdirindedir.
 hakim: Yerinde. Tanık, teknik olarak ne yaptığınızı anlatın.
@@ -349,7 +417,16 @@ volkan: Kesintisiz olması lazım. Sistem bazen segment atlar ama… o kayıtta 
         }),
         presentRule('PS_VS3B', 'VS3B', ['ev_aktarim_formu'], {
           enabledWhen: has('clue_bozuk_segment'),
-          effects: [score('SORGULAMA', 200), inc('pers'), raise('contra_v2'), mark('GOOD', 'Teknisyenin kendi formundaki dipnot, CD’de 18.43’ün tamamının eksik olduğunu gösteriyor. Delilin bütünlüğü çöktü.', 'SORGULAMA')],
+          effects: [
+            score('SORGULAMA', 200),
+            inc('pers'),
+            raise('contra_v2'),
+            mark(
+              'GOOD',
+              'Teknisyenin kendi formundaki dipnot, CD’de 18.43’ün tamamının eksik olduğunu gösteriyor. Delilin bütünlüğü çöktü.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
 P: Sizin imzanızı taşıyan aktarım formu, dipnot: “18.43.00–18.43.59 yazma hatası, yeniden denenmedi.” Siz yazmışsınız.
 Volkan formu aldı. Gözleri dipnotta durdu. Bir an sustu.
@@ -366,7 +443,10 @@ volkan: O dakika olay klasöründeki kayıtta var. CD’de yok. Haklısınız.
         ilgisiz('PS_VOLKAN_ILGISIZ', [...ILGISIZ, 'ded_sofor_red', 'ded_niyet_tam', 'ev_recep_ifade'], 'teknisyenin'),
       ],
       presentMiss: fallback('FB_H2V_PRESENT', 'PRESENT', {
-        effects: [...(wrongPresent ?? []), mark('BAD', 'Bu delil tanığın ifadesindeki hiçbir şeyi çürütmüyor.', 'SORGULAMA')],
+        effects: [
+          ...(wrongPresent ?? []),
+          mark('BAD', 'Bu delil tanığın ifadesindeki hiçbir şeyi çürütmüyor.', 'SORGULAMA'),
+        ],
         responses: B(`
 hakim: Bu delilin tanığın beyanıyla ilgisi görülmedi, müdafi.
 `),
@@ -411,7 +491,8 @@ savci: Tanık, o akşam son durakta ne oldu?
         }),
         option('HRC0_B', 'Sessiz kal', {
           effects: [dec('pers')],
-          neutral: 'Telkinli soru cevaplandı; tanığın “hayır”ı savcının cümlesine yaslandı. İtiraz edilebilirdi (CMK 201/1).',
+          neutral:
+            'Telkinli soru cevaplandı; tanığın “hayır”ı savcının cümlesine yaslandı. İtiraz edilebilirdi (CMK 201/1).',
           responses: B(`
 recep: Hayır. Kimse bir şey uzatmadı.
 `),
@@ -437,8 +518,16 @@ hakim: Müdafi, sorularınız?
       rulesText: 'Korkan tanık yalanını ancak bir kare zorlarsa değiştirir. Tanığı utandırma; kaydı göster.',
       objectionGrounds: ['g_kanaat', 'g_duyum'],
       statements: [
-        statement('RS1', 1, ['O akşam bana ', hl('kimse cüzdan falan getirmedi', any(flag('press_rs1'), has('clue_kare_sofor'), has('ded_sofor_red'))), '.']),
-        statement('RS2', 2, ['Kural belli: bulunan eşyayı alırım, ', hl('buluntu defterine yazarım', flag('press_rs2')), '.']),
+        statement('RS1', 1, [
+          'O akşam bana ',
+          hl('kimse cüzdan falan getirmedi', any(flag('press_rs1'), has('clue_kare_sofor'), has('ded_sofor_red'))),
+          '.',
+        ]),
+        statement('RS2', 2, [
+          'Kural belli: bulunan eşyayı alırım, ',
+          hl('buluntu defterine yazarım', flag('press_rs2')),
+          '.',
+        ]),
         statement('RS2B', 3, ['O gün defter boş. ', hl('Demek ki getiren olmadı', always), '.'], flag('press_rs2')),
         statement('RS3', 4, ['Görükle son durak. Herkes iner. ', hl('Ben kimseye bakmam', flag('press_rs3')), '.']),
       ],
@@ -452,7 +541,16 @@ recep: Hatırlamıyorum. Yani… hayır. Olmadı.
         }),
         presentRule('PS_RS1', 'RS1', ['ded_sofor_red', 'ev_tam_kayit'], {
           enabledWhen: all(any(has('ded_sofor_red'), has('clue_kare_sofor')), not(flag('recep_sucduyurusu'))),
-          effects: [score('SORGULAMA', 300), inc('pers', 2), raise('contra_r'), mark('GOOD', 'Ön kameranın 19.05 karesi, şoförün “kimse getirmedi” beyanını çürüttü: sanık cüzdanı şoföre uzatıyor, şoför geri çeviriyor.', 'SORGULAMA')],
+          effects: [
+            score('SORGULAMA', 300),
+            inc('pers', 2),
+            raise('contra_r'),
+            mark(
+              'GOOD',
+              'Ön kameranın 19.05 karesi, şoförün “kimse getirmedi” beyanını çürüttü: sanık cüzdanı şoföre uzatıyor, şoför geri çeviriyor.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
 P: Sayın Hâkim, tam kaydın ön kamerası, 19.05, Görükle. İzlettirmek istiyorum.
 Ekranda şoför kabini. Bir el kabine uzanıyor; elde kahverengi bir cüzdan. Şoförün eli havada sallanıyor, kapıyı gösteriyor. On bir saniye.
@@ -466,7 +564,16 @@ Arda gözlerini kapadı. Zehra’nın elini sıktığını gördüm; kemikleri b
         }),
         presentRule('PS_RS1_CEKINME', 'RS1', ['ded_sofor_red', 'ev_tam_kayit'], {
           enabledWhen: all(any(has('ded_sofor_red'), has('clue_kare_sofor')), flag('recep_sucduyurusu')),
-          effects: [score('SORGULAMA', 150), inc('pers'), raise('recep_cekindi'), mark('NEUTRAL', 'Kare ortada; ama hakkında suç duyurusu bulunan tanık, kendisini suçlayabilecek soruya cevap vermekten çekindi (CMK 48). Gerçek tanığın ağzından değil, yalnızca kayıttan çıktı.', 'SORGULAMA')],
+          effects: [
+            score('SORGULAMA', 150),
+            inc('pers'),
+            raise('recep_cekindi'),
+            mark(
+              'NEUTRAL',
+              'Kare ortada; ama hakkında suç duyurusu bulunan tanık, kendisini suçlayabilecek soruya cevap vermekten çekindi (CMK 48). Gerçek tanığın ağzından değil, yalnızca kayıttan çıktı.',
+              'SORGULAMA',
+            ),
+          ],
           responses: B(`
 Ekranda şoför kabini, uzanan bir el, sallanan bir el. On bir saniye.
 Recep’in avukatı ayağa kalktı.
@@ -504,10 +611,17 @@ recep: Ben… alışkanlıkla söyledim. Bakmam derken… Son durakta herkes ace
 > Kısmi bir çatlak. Duvar duruyor ama sıvası döküldü.
 `),
         }),
-        ilgisiz('PS_RECEP_ILGISIZ', [...ILGISIZ, 'ded_eksik_kayit', 'ev_aktarim_formu', 'ded_niyet_tam'], 'şoförün'),
+        ilgisiz(
+          'PS_RECEP_ILGISIZ',
+          [...ILGISIZ, 'ded_eksik_kayit', 'ev_aktarim_formu', 'ded_niyet_tam', 'ev_cagri_kaydi'],
+          'şoförün',
+        ),
       ],
       presentMiss: fallback('FB_H2RC_PRESENT', 'PRESENT', {
-        effects: [...(wrongPresent ?? []), mark('BAD', 'Bu delil tanığın ifadesindeki hiçbir şeyi çürütmüyor.', 'SORGULAMA')],
+        effects: [
+          ...(wrongPresent ?? []),
+          mark('BAD', 'Bu delil tanığın ifadesindeki hiçbir şeyi çürütmüyor.', 'SORGULAMA'),
+        ],
         responses: B(`
 hakim: Bu delilin tanığın beyanıyla ilgisi görülmedi, müdafi.
 `),
@@ -528,18 +642,23 @@ hakim: İtiraz reddedildi.
       title: 'Müştekinin beyanı',
       background: 'durusma_salonu',
       prompt: { speaker: 'hakim', text: 'Müdafi, müştekiye sorunuz var mı?' },
-      lines: B(`
-gulten: Sayın Hâkim, ben bir şey söylemek istiyorum. Kimse bana ne söyleyeceğimi söylemedi. Onu da söyleyeyim.
-gulten: Geçen celse bu çocuk “Facebook’tan yazdım” dedi. Ben Facebook bilmem. Torunum baktı. Yazmış. Olay günü, gece dokuzu çeyrek geçe.
-gulten: “Cüzdanınızı buldum, size nasıl ulaştırabilirim” diye yazmış. Ben o saatte karakolda “cezasını çeksin” diyordum.
-gulten.uzgun: Fotoğrafa dokunmamış. Kimliğin arkasında, nasıl koyduysam öyle. Hırsız fotoğraf almaz ama atar. Bu atmamış.
-gulten: Ben şikâyetimi geri alamazmışım, öyle dediler. Ama şunu söyleyebilirim: ben bu çocuğun cüzdanımı çaldığına artık inanmıyorum.
-Savcı kalemini bıraktı. Hâkim müştekiye uzun uzun baktı ve kâtibe döndü: “Aynen yazın.”
-`),
+      lines: [
+        W(
+          flag('gulten_foto'),
+          `
+Gülten Hanım kürsüye çıkmadan önce cüzdanından sararmış fotoğrafı çıkardı ve avucunda tuttu. Konuşurken bir an bile bırakmadı.
+` + GULTEN_BEYAN,
+        ),
+        O(GULTEN_BEYAN),
+      ],
       choices: [
         cont('HG_YOK', 'Sorum yok', 'H2_R4', {
           effects: [inc('pers'), score('SAVUNMA_STRATEJISI', 60)],
-          quality: { q: 'GOOD', feedback: 'Müştekinin kendi cümlesini olduğu gibi bırakmak en güçlü hamleydi; soru onu ancak zayıflatırdı.', category: 'SAVUNMA_STRATEJISI' },
+          quality: {
+            q: 'GOOD',
+            feedback: 'Müştekinin kendi cümlesini olduğu gibi bırakmak en güçlü hamleydi; soru onu ancak zayıflatırdı.',
+            category: 'SAVUNMA_STRATEJISI',
+          },
         }),
         option('HG_MESAJ', '“Mesajı mahkemeye gösterebilir misiniz?”', {
           next: 'H2_R4',
@@ -597,7 +716,8 @@ ozan: Arda’nın el yazısı. Benim alışveriş listemi bile o yazar, benim ya
         option('HO_KARAKTER', '“Arda nasıl biridir?”', {
           next: 'H2_R5',
           effects: [score('SORGULAMA', 10)],
-          neutral: 'Karakter tanıklığı insani ama ispat değeri zayıf; tanığın doğrudan gördüğü notu sormak daha güçlüydü.',
+          neutral:
+            'Karakter tanıklığı insani ama ispat değeri zayıf; tanığın doğrudan gördüğü notu sormak daha güçlüydü.',
           responses: B(`
 ozan: Dürüst biri. Fazla dürüst. Markette fazla verilen para üstünü geri götürür. Ben ona kızarım.
 `),
@@ -624,19 +744,24 @@ hakim: Müdafi?
 `),
       next: 'H2_EK',
       options: [
-        option('HOR_A', '“Aynı cüzdan, aynı akşam, aynı otobüs. Hükme esas alınabilecek her delil duruşmada tartışılmalı (CMK 217/1).”', {
-          effects: [...legal(120), inc('pers', 2), raise('orhan_dinlendi')],
-          good: 'Hâkim kararını duruşmaya getirilmiş ve tartışılmış delillere dayandırır (CMK 217/1); ispat edilmek istenen olayla doğrudan ilgili delil reddedilemez (CMK 206/2-b karşıtı). Başka soruşturmanın konusu olması, bu dosyadaki ispat değerini ortadan kaldırmaz.',
-          category: 'USUL_BILGISI',
-          responses: B(`
+        option(
+          'HOR_A',
+          '“Aynı cüzdan, aynı akşam, aynı otobüs. Hükme esas alınabilecek her delil duruşmada tartışılmalı (CMK 217/1).”',
+          {
+            effects: [...legal(120), inc('pers', 2), raise('orhan_dinlendi')],
+            good: 'Hâkim kararını duruşmaya getirilmiş ve tartışılmış delillere dayandırır (CMK 217/1); ispat edilmek istenen olayla doğrudan ilgili delil reddedilemez (CMK 206/2-b karşıtı). Başka soruşturmanın konusu olması, bu dosyadaki ispat değerini ortadan kaldırmaz.',
+            category: 'USUL_BILGISI',
+            responses: B(`
 P: Sayın Hâkim, müştekinin kartı başka bir dosyadaki iki kişinin üzerinden çıktı. Aynı cüzdan, aynı akşam, aynı hat. Bu, bu dosyanın tam kalbi.
 P: Karar duruşmada tartışılmış delile dayanacaksa, bu delil bu salonda tartışılmalı.
 hakim: Tanığın beyanı ve teşhis tutanağının örneği dosyaya alınsın. Sayın Savcı, değerlendirmenizi mütalaada yaparsınız.
 `),
-        }),
+          },
+        ),
         option('HOR_B', '“Diyeceğimiz yok.”', {
           effects: [raise('orhan_dinlendi')],
-          neutral: 'Beyan dosyaya girdi; ama savcının itirazı karşılıksız kaldı. Delilin bu dosyayla ilgisini göstermek müdafiin işiydi.',
+          neutral:
+            'Beyan dosyaya girdi; ama savcının itirazı karşılıksız kaldı. Delilin bu dosyayla ilgisini göstermek müdafiin işiydi.',
           responses: B(`
 hakim: Tanığın beyanı tutanağa geçti; ilgisi hükümde değerlendirilecek.
 `),
@@ -687,7 +812,13 @@ savci: Bir sorum var, Sayın Hâkim.
       choices: [
         option('HEQ_CEVAP', 'Arda cevap versin', {
           next: 'H2_MUT_1',
-          effects: [ifThen(any(flag('ek_hazir'), flag('arda_utanc_mahkemede'), flag('arda_lise_hazir')), [inc('pers')], [dec('pers')])],
+          effects: [
+            ifThen(
+              any(flag('ek_hazir'), flag('arda_utanc_mahkemede'), flag('arda_lise_hazir')),
+              [inc('pers')],
+              [dec('pers')],
+            ),
+          ],
           neutral: 'Soru meşru; sanığın kendi cümlesiyle verdiği dürüst cevap, ek savunma hazırlığının sınavıdır.',
           responses: [
             W(
@@ -709,7 +840,8 @@ savci: Karakollar gece de açıktır, sanık.
         option('HEQ_ITIRAZ', 'İtiraz: sanık bu soruyu ilk celsede cevapladı', {
           next: 'H2_MUT_1',
           effects: [score('USUL_BILGISI', -30)],
-          neutral: 'Soru yeni bir olguya (durağın karşısındaki karakol) dayanıyordu; itiraz zayıf kaldı ve hâkim soruya izin verdi.',
+          neutral:
+            'Soru yeni bir olguya (durağın karşısındaki karakol) dayanıyordu; itiraz zayıf kaldı ve hâkim soruya izin verdi.',
           responses: B(`
 hakim: Soru yeni bir hususa ilişkin, müdafi. Sanık cevap versin.
 arda: Kapısına kadar gittim. Döndüm. Korktum.
@@ -734,21 +866,42 @@ arda: Korktum. Bu bir suç değil, biliyorum. Ama ayıp. Ayıbımı söyledim. S
       ],
       next: 'H2_EK_Q',
       options: [
-        option('EK_HICBIRI', 'Ne hırsızlık ne kayıp eşya: alma yok, “malik gibi tasarruf” yok, teslim girişimleri var', {
-          effects: [
-            ifThen(
-              any(has('ded_niyet_tam'), has('ded_teslim'), flag('contra_r'), has('ev_cagri_kaydi')),
-              [score('HUKUKI_BILGI', 150), inc('pers'), raise('ek_guclu'), mark('GOOD', 'Ek savunma üç vasfa da cevap verdi: hırsızlık zilyedin elinden almayı ister (TCK 141); kaybolmuş eşya suçu “malik gibi tasarrufu” ister (TCK 160). Teslim girişimleri delille gösterildi.', 'HUKUKI_BILGI')],
-              [score('HUKUKI_BILGI', 50), mark('NEUTRAL', 'Hukuki çerçeve doğru; ama teslim girişimleri delille desteklenmedi. Çerçeve, içi dolunca güçlüdür.', 'HUKUKI_BILGI')],
-            ),
-          ],
-          responses: B(`
+        option(
+          'EK_HICBIRI',
+          'Ne hırsızlık ne kayıp eşya: alma yok, “malik gibi tasarruf” yok, teslim girişimleri var',
+          {
+            effects: [
+              ifThen(
+                any(has('ded_niyet_tam'), has('ded_teslim'), flag('contra_r'), has('ev_cagri_kaydi')),
+                [
+                  score('HUKUKI_BILGI', 150),
+                  inc('pers'),
+                  raise('ek_guclu'),
+                  mark(
+                    'GOOD',
+                    'Ek savunma üç vasfa da cevap verdi: hırsızlık zilyedin elinden almayı ister (TCK 141); kaybolmuş eşya suçu “malik gibi tasarrufu” ister (TCK 160). Teslim girişimleri delille gösterildi.',
+                    'HUKUKI_BILGI',
+                  ),
+                ],
+                [
+                  score('HUKUKI_BILGI', 50),
+                  mark(
+                    'NEUTRAL',
+                    'Hukuki çerçeve doğru; ama teslim girişimleri delille desteklenmedi. Çerçeve, içi dolunca güçlüdür.',
+                    'HUKUKI_BILGI',
+                  ),
+                ],
+              ),
+            ],
+            responses: B(`
 P: Sayın Hâkim, savcılık üç kapıdan söz ediyor. Hiçbirinden girilmedi.
 P: Hırsızlık, birinin zilyetliğinden almayı ister. Sanık kimsenin elinden, kimsenin çantasından almadı; cüzdanı bırakıldığı koltuk altında buldu. Özel beceri ise hiç yok.
 P: Kaybolmuş eşya suçu da “malik gibi tasarruf” ister: harcamak, saklamak, kullanmak. Sanık yanındakine sordu, şoföre uzattı, belediyeyi aradı, sahibine yazdı, kendine karakol notu yazdı.
 P: Malik gibi değil; sahibini arayan biri gibi davrandı.
+P: Sahibine ulaşamadıysa, bunun sebebi bir şoförün yorgunluğu, bir çağrı merkezinin “yarın” demesi ve okunmamış bir mesaj isteğidir. Bunların hiçbiri sanığın kastı değildir.
 `),
-        }),
+          },
+        ),
         option('EK_142', 'Yalnızca “özel beceri” yok: TCK 142/2-b uygulanamaz', {
           effects: [score('HUKUKI_BILGI', 60), raise('ek_142')],
           neutral: 'Doğru ama eksik: 142/2-b’ye karşı çıkmak iddianamedeki 141/1’i ve 160 ihtimalini açık bırakır.',
@@ -760,7 +913,8 @@ P: Esas hakkındaki savunmamızda.
         }),
         option('EK_160', 'En fazla TCK 160: sanık bulduğunu zamanında teslim etmedi', {
           effects: [score('HUKUKI_BILGI', 20), raise('ek_160_kabul')],
-          neutral: 'Kademeli savunmanın ikinci basamağı olabilir; ama tek başına söylenince sanığın “tasarruf” ettiğini kabul gibi okunur.',
+          neutral:
+            'Kademeli savunmanın ikinci basamağı olabilir; ama tek başına söylenince sanığın “tasarruf” ettiğini kabul gibi okunur.',
           responses: B(`
 P: Sayın Hâkim, olsa olsa bulunan eşyanın geç teslimi söz konusu. Bu da en fazla yüz altmıştır.
 Arda bana döndü. “En fazla” sözcüğü ona “demek ki bir şey var” gibi geldi. Yüzünden okudum.
@@ -840,6 +994,8 @@ P: Sayın Hâkim… Mütalaaya karşı söyleyecek bir şey bulamıyorum. Sanı�
             O(`
 P: Sayın Savcının dayandığı üç delil vardı: kayıt, tanık, çanta. Kayıt eksikti; tamamı geldi. Tanık yüzü görmedi. Çantadaki cüzdan, sahibini arayan birinin çantasındaydı.
 P: Eksik dakikalar tamamlanınca geriye bir hırsızlık değil, bir bulma ve dört teslim girişimi kalıyor.
+savci: Cevap hakkımı saklı tutuyorum, Sayın Hâkim.
+hakim: Kayda geçti.
 `),
           ],
         }),
@@ -881,12 +1037,20 @@ hakim: Mütalaa tutanaktan çıkarılmaz, müdafi. Cevap hakkınız var; kullanm
                 score('SAVUNMA_STRATEJISI', strategyAmount(200, 'MASUMIYET')),
                 inc('pers'),
                 raise('sav_b_ok'),
-                mark('GOOD', 'Gerçek failler delillerle gösterildi: tam kayıt, büfe tanığı, yakalanan şüphelilerin üzerindeki kart ve şoförün beyanı. Yüklenen suçun sanık tarafından işlenmediği sabit.', 'SAVUNMA_STRATEJISI'),
+                mark(
+                  'GOOD',
+                  'Gerçek failler delillerle gösterildi: tam kayıt, büfe tanığı, yakalanan şüphelilerin üzerindeki kart ve şoförün beyanı. Yüklenen suçun sanık tarafından işlenmediği sabit.',
+                  'SAVUNMA_STRATEJISI',
+                ),
               ],
               [
                 score('SAVUNMA_STRATEJISI', -100),
                 dec('pers'),
-                mark('BAD', 'Suçun başkalarınca işlendiğini “sabit” kılacak delil zinciri (failler, kart, şoför) duruşmada tamamlanmadı. İddia, ispatından büyük kaldı.', 'SAVUNMA_STRATEJISI'),
+                mark(
+                  'BAD',
+                  'Suçun başkalarınca işlendiğini “sabit” kılacak delil zinciri (failler, kart, şoför) duruşmada tamamlanmadı. İddia, ispatından büyük kaldı.',
+                  'SAVUNMA_STRATEJISI',
+                ),
               ],
             ),
           ],
@@ -917,11 +1081,19 @@ savci: Kim, müdafi? İsim? Kart? Teşhis?
               [
                 score('SAVUNMA_STRATEJISI', strategyAmount(200, 'USUL')),
                 inc('pers'),
-                mark('GOOD', 'Savcılığın dayandığı her delil duruşmada sarsıldı; kalan şüphe sanık lehine. Bu, delille kurulmuş bir şüphe savunması.', 'SAVUNMA_STRATEJISI'),
+                mark(
+                  'GOOD',
+                  'Savcılığın dayandığı her delil duruşmada sarsıldı; kalan şüphe sanık lehine. Bu, delille kurulmuş bir şüphe savunması.',
+                  'SAVUNMA_STRATEJISI',
+                ),
               ],
               [
                 score('SAVUNMA_STRATEJISI', -50),
-                mark('BAD', 'Şüphe savunması için savcılık delillerini sarsan yeterli bulgu ortaya konmadı.', 'SAVUNMA_STRATEJISI'),
+                mark(
+                  'BAD',
+                  'Şüphe savunması için savcılık delillerini sarsan yeterli bulgu ortaya konmadı.',
+                  'SAVUNMA_STRATEJISI',
+                ),
               ],
             ),
           ],
@@ -976,7 +1148,7 @@ savci: Merhamet hükmün değil, cezanın konusudur, müdafi.
       prompt: { speaker: 'hakim', text: 'Sanık, son sözünüz?' },
       choices: [
         option('SON_A', '“Bir cüzdan buldum. Sahibine ulaştırmak istedim. Beceremedim; ama çalmadım.”', {
-          next: 'H2_HUKUM',
+          next: 'H2_DUSUNCE',
           effects: [score('SAVUNMA_STRATEJISI', 40)],
           good: 'Kısa, doğru ve kendi cümlesiyle bir son söz (CMK 216/3).',
           category: 'SAVUNMA_STRATEJISI',
@@ -996,15 +1168,16 @@ arda: Bir de… bir teyzenin kocasının fotoğrafını kimliğinin arkasında t
           ],
         }),
         option('SON_B', 'Ağlayarak af dilesin', {
-          next: 'H2_HUKUM',
-          neutral: 'İçten bir an; ama inkâr eden sanığın “af” dilemesi, hâkime belirsiz bir ikrar gibi gelebilir. Sanığın tutumu tek başına bir indirim ya da ispat nedeni değildir.',
+          next: 'H2_DUSUNCE',
+          neutral:
+            'İçten bir an; ama inkâr eden sanığın “af” dilemesi, hâkime belirsiz bir ikrar gibi gelebilir. Sanığın tutumu tek başına bir indirim ya da ispat nedeni değildir.',
           responses: B(`
 arda.uzgun: Affedin… Herkesten özür dilerim. Teyzeden de. Ben… ben sadece…
 Cümlesini bitiremedi. Zehra arkadan elini omzuna koydu.
 `),
         }),
         option('SON_C', '“Avukatımın söylediklerine katılıyorum.”', {
-          next: 'H2_HUKUM',
+          next: 'H2_DUSUNCE',
           neutral: 'Usule uygun ve güvenli; ama son söz, sanığın kendi sesini hâkime duyurabileceği son andır.',
           responses: B(`
 arda: Avukatımın söylediklerine katılıyorum, Sayın Hâkim.
@@ -1013,6 +1186,57 @@ arda: Avukatımın söylediklerine katılıyorum, Sayın Hâkim.
       ],
     },
 
+    decisionNode('H2_DUSUNCE', [{ to: 'H2_DUSUNCE2' }], {
+      ...TRIAL,
+      lines: [
+        W(
+          flag('arda_recep_affetti'),
+          `
+> Koridorda Arda, Recep’e “ikimiz de acele ettik” demişti. Hükmü beklerken o cümleyi düşündüm. Bir öğretmen adayı, kendisini yakan adamı küçültmeden konuşmuştu.
+`,
+        ),
+        W(
+          flag('arda_recep_uzak'),
+          `
+> Koridorda Recep’le Arda’yı ayırmıştım. Doğru muydu? Bazı konuşmalar duruşmadan sonraya kalır. Bazıları hiç olmaz.
+`,
+        ),
+        W(
+          any(flag('izlendi_birakma'), flag('izlendi_soru')),
+          `
+> Perdedeki kareler hâlâ gözümün önündeydi: bir şemsiye, bir bere, koltuğun altına eğilen bir parka. Bir de yanındakine cüzdanı uzatan bir genç.
+`,
+        ),
+      ],
+    }),
+    decisionNode('H2_DUSUNCE2', [{ to: 'H2_HUKUM' }], {
+      lines: [
+        W(
+          flag('ek_guclu'),
+          `
+> Üç kapıyı tek tek kapatmıştım: alma yok, beceri yok, malik gibi tasarruf yok. Kapıların arkasında ne kaldığını hâkim söyleyecekti.
+`,
+        ),
+        W(
+          any(flag('ek_142'), flag('ek_160_kabul')),
+          `
+> Ek savunmada bir kapıyı açık bırakmıştım. Açık kapıdan bazen rüzgâr girer, bazen bir hüküm.
+`,
+        ),
+        W(
+          any(flag('recep_cekindi'), flag('contra_r_kismi')),
+          `
+> Şoförün sesi tam çıkmamıştı. Kayıt konuşmuştu; Recep’in kendisi değil. Hâkim hangisine kulak verecekti?
+`,
+        ),
+        W(
+          any(flag('ozan_dinlendi'), flag('orhan_dinlendi'), flag('ob_vs2')),
+          `
+> Tanıklar konuşmuştu. Sırayla, kendi cümleleriyle. Benim işim onların sözlerini birbirine bağlamaktı; gerisi bir kâğıttaki birkaç satırdı.
+`,
+        ),
+      ],
+    }),
     decisionNode('H2_HUKUM', [{ to: 'R_KARAR' }], {
       ...VERDICT,
       lines: B(`
@@ -1050,7 +1274,13 @@ hakim: Sanık, son sözünüz?
               { if: { when: { any: [{ flag: 'contra_v' }, { flag: 'contra_v2' }] }, then: 1, else: 0 } },
               { if: { when: { flag: 'contra_r' }, then: 1, else: 0 } },
               { if: { when: { hasEvidence: 'ded_kart_baskasi' }, then: 1, else: 0 } },
-              { if: { when: { any: [{ hasEvidence: 'ded_teslim' }, { hasEvidence: 'ded_niyet_tam' }] }, then: 1, else: 0 } },
+              {
+                if: {
+                  when: { any: [{ hasEvidence: 'ded_teslim' }, { hasEvidence: 'ded_niyet_tam' }] },
+                  then: 1,
+                  else: 0,
+                },
+              },
               { if: { when: { flag: 'gulten_tanik' }, then: 1, else: 0 } },
             ],
           },
@@ -1089,4 +1319,3 @@ hakim: Sanık, son sözünüz?
     },
   ],
 };
-

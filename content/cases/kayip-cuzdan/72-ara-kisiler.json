@@ -370,6 +370,126 @@
       ]
     },
     {
+      "id": "ARA_KARAKOL",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #01 · ARA",
+      "title": "Pol. Mem. Serkan Ulu",
+      "background": "karakol",
+      "room": { "label": "GÖRÜKLE POLİS MERKEZİ", "character": "serkan" },
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "10.30 — GÖRÜKLE POLİS MERKEZİ", "bg": "karakol", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Durağın tam karşısında. Kapıda bir bariyer, bir nöbetçi kulübesi, ıslak bir Türk bayrağı. Arda’nın o gece kapısına kadar gelip döndüğü yer."
+            },
+            {
+              "speaker": "player",
+              "text": "Kırk adım. Bir öğrenci için kırk adım, bir ömürlük bir korkunun önünde duran bir duvar olabilir.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "İçeride florasan, kuru kahve kokusu, bir yazıcının hırıltısı. Masada genç bir memur, önünde bir yığın tutanak."
+            },
+            {
+              "speaker": "serkan",
+              "text": "Avukat hanım? Serkan Ulu. Cüzdan dosyası, değil mi? Davetiye gelmedi bana, tanık değilim. Ama sorun, bildiğimi söylerim. Beş dakika."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "KR_SABAH",
+          "kind": "OPTION",
+          "label": "“7 Mart sabahını anlatır mısınız?”",
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "serkan",
+                  "text": "Gece kaydı izledik, kent kartla adı bulduk, sabah sekiz on beşte kapıdaydık. Çocuk “buldum, bugün teslim edecektim” dedi. Hepsi öyle der."
+                },
+                {
+                  "speaker": "serkan",
+                  "text": "Çantada cüzdan, zarfta para, masada bir not. Hepsini poşetledik. Notu okumadım, itiraf edeyim. Delil poşeti açılmaz, açılırsa tutanak bozulur."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Poşet açılmaz. Açılmayan poşetlerde okunmayan notlar. Bir dosya bazen böyle doğar.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "serkan_anlatti", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "KR_CD",
+          "kind": "OPTION",
+          "label": "“CD’ye neden yalnızca orta kamerayı aldınız?”",
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "serkan",
+                  "text": "Çocuk orta kamerada, net. Cüzdanı alıyor, çantaya koyuyor. Olay anı belliydi. Bir saat izleyecek vaktim yoktu; o gece üç dosyam vardı."
+                },
+                { "speaker": "serkan", "text": "Klasör duruyor, mahkeme isterse gelir. Biz ne gördüysek onu aldık." },
+                { "speaker": "narrator", "text": "Bir an sustu. Kahvesine baktı." },
+                { "speaker": "serkan", "text": "Öncesi var mıydı? Varsa… varsa kötü olmuş." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "serkan_cd", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "KR_SUCLA",
+          "kind": "OPTION",
+          "label": "“Eksik soruşturma yaptınız. Bunu mahkemede söyleyeceğim.”",
+          "next": "$stay",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "serkan",
+                  "expression": "kizgin",
+                  "text": "Söyleyin. Ben işimi yaptım. Siz de sizinkini yapın. Kapı orada avukat hanım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kırk adım geri yürüdüm. Arda’nın o gece yürüdüğü kırk adım. Ben kendi elimle kapattım kapıyı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -30 },
+            { "type": "VAR", "var": "serkan_kizgin", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Bilgi almaya gittiğin bir kolluk görevlisini suçlamak hiçbir şey kazandırmaz; eksikliği mahkemede delille göstermek yeter. Gereksiz çatışma kapıları kapatır.",
+            "category": "SORGULAMA"
+          }
+        },
+        { "id": "KR_BITIR", "kind": "CONTINUE", "label": "Teşekkür edip çık", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
       "id": "ARA_AKSAM2",
       "type": "STORY",
       "chapter": "Bölüm 4 · Ara",

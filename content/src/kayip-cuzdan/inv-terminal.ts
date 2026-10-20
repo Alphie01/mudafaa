@@ -14,7 +14,10 @@ export const invTerminal: CasePart = {
       ...INV,
       title: 'Kent Ulaşım terminali',
       background: 'depo',
-      prompt: { speaker: 'narrator', text: 'Kayıp eşya bürosunun tezgâhı. Arkada hareket memurluğunun camı. Ne soracaksın?' },
+      prompt: {
+        speaker: 'narrator',
+        text: 'Kayıp eşya bürosunun tezgâhı. Arkada hareket memurluğunun camı. Ne soracaksın?',
+      },
       lines: B(`
 # depo | 09.05 — KENT ULAŞIM TERMİNALİ, KAYIP EŞYA BÜROSU
 Terminalin en arka köşesinde, tuvaletlerle kantin arasında küçük bir oda. Kapısında el yazısıyla: “KAYIP EŞYA — 09.00–17.00 (CMT 09.00–13.00)”.

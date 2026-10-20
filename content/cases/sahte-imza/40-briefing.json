@@ -1,0 +1,168 @@
+{
+  "nodes": [
+    {
+      "id": "PROLOG",
+      "type": "STORY",
+      "chapter": "Brifing",
+      "eyebrow": "DAVA #09 · BRİFİNG",
+      "title": "TODO Soğuk açılış",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "TODO Olay gecesi. Mekânın ve havanın kısa tasviri." },
+            { "speaker": "tanik", "text": "TODO tanığın kendi ağzından ilk replik." },
+            {
+              "speaker": "muvekkil",
+              "expression": "saskin",
+              "text": "TODO müvekkilin o anki sözü; sonradan anlam kazanacak bir ayrıntı."
+            },
+            { "speaker": "narrator", "text": "TODO Sahneyi bir soruyla kapat: o gece gerçekte ne oldu?" }
+          ]
+        }
+      ],
+      "choices": [{ "id": "PROLOG_DEVAM", "kind": "CONTINUE", "label": "Devam", "role": "PRIMARY", "next": "BR_01" }]
+    },
+    {
+      "id": "BR_01",
+      "type": "STORY",
+      "chapter": "Brifing",
+      "eyebrow": "DAVA #09 · BRİFİNG",
+      "title": "Dosya devri",
+      "onFirstEnter": [
+        { "type": "MEET", "character": "leyla" },
+        { "type": "MEET", "character": "deniz" }
+      ],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "leyla", "text": "Deniz, TODO dosyası artık senin. UYAP’tan dosyanın tamamını indirdim." },
+            { "speaker": "leyla", "text": "TODO olayın iki cümlelik özeti." },
+            {
+              "speaker": "leyla",
+              "text": "Dosyayı açmadan önce bir soru: iddianamedeki suçun olası ceza aralığı nedir?"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "BR01_A",
+          "kind": "OPTION",
+          "label": "TODO doğru madde ve aralık",
+          "responses": [
+            { "lines": [{ "speaker": "leyla", "expression": "mutlu", "text": "Doğru. TODO kısa açıklama." }] }
+          ],
+          "next": "BR_02",
+          "effects": [{ "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 50 }],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "TODO doğru cevabın gerekçesi (madde ve hesap).",
+            "category": "HUKUKI_BILGI"
+          }
+        },
+        {
+          "id": "BR01_B",
+          "kind": "OPTION",
+          "label": "TODO yanlış madde",
+          "responses": [{ "lines": [{ "speaker": "leyla", "text": "Hayır. TODO doğrusu." }] }],
+          "next": "BR_02",
+          "quality": { "q": "BAD", "feedback": "TODO bu madde neden uymuyor.", "category": "HUKUKI_BILGI" }
+        },
+        {
+          "id": "BR01_C",
+          "kind": "OPTION",
+          "label": "TODO yanlış aralık",
+          "responses": [{ "lines": [{ "speaker": "leyla", "text": "Hayır. TODO doğrusu." }] }],
+          "next": "BR_02",
+          "quality": { "q": "BAD", "feedback": "TODO bu aralık neden yanlış.", "category": "HUKUKI_BILGI" }
+        }
+      ]
+    },
+    {
+      "id": "BR_02",
+      "type": "STORY",
+      "chapter": "Brifing",
+      "eyebrow": "DAVA #09 · BRİFİNG",
+      "phase": "BRIEFING",
+      "title": "TODO Dava başlığı",
+      "onFirstEnter": [{ "type": "MEET", "character": "muvekkil" }],
+      "blocks": [
+        {
+          "type": "profileCard",
+          "character": "muvekkil",
+          "label": "MÜVEKKİL",
+          "lines": ["TODO Ad Soyad, yaş", "TODO meslek · sabıka"],
+          "charge": "TODO suç (TCK md.)",
+          "demand": "İddianame: TODO"
+        },
+        {
+          "type": "sentenceRange",
+          "segments": ["green", "gold", "gold", "red", "red", "red", "darkred", "darkred"],
+          "markerPct": 60,
+          "labels": ["Beraat", "TODO", "TODO", "TODO"],
+          "demandLabel": "İSTEM: TODO"
+        },
+        { "type": "paragraph", "title": "OLAY ÖZETİ", "text": "TODO olay özeti." },
+        {
+          "type": "strengthList",
+          "title": "SAVCILIĞIN ELİNDEKİLER",
+          "items": [
+            { "label": "TODO delil 1", "strength": "STRONG" },
+            { "label": "TODO delil 2", "strength": "MEDIUM" }
+          ]
+        },
+        {
+          "type": "choiceGroup",
+          "title": "SAVUNMA STRATEJİSİ SEÇ",
+          "group": "g_strateji",
+          "hints": {
+            "STR_MASUMIYET": "Masumiyet: beraat hedeflenir; stratejine uyan esas savunma ×1,5 puan.",
+            "STR_USUL": "Usul hatası: hukuka aykırı delilleri dışlatırsın; uyan esas savunma ×1,2 puan.",
+            "STR_INDIRIM": "Terditli savunma: önce beraat, aksi hâlde lehe hükümler; uyan esas savunma ×0,8 puan."
+          }
+        }
+      ],
+      "choices": [
+        {
+          "id": "STR_MASUMIYET",
+          "kind": "OPTION",
+          "label": "Masumiyet",
+          "group": "g_strateji",
+          "next": "INV1_HUB",
+          "effects": [
+            { "type": "VAR", "var": "strategy", "op": "set", "value": "MASUMIYET" },
+            { "type": "VAR", "var": "strategy_pct", "op": "set", "value": 150 },
+            { "type": "VAR", "var": "day", "op": "set", "value": 1 },
+            { "type": "VAR", "var": "ap", "op": "set", "value": 3 }
+          ]
+        },
+        {
+          "id": "STR_USUL",
+          "kind": "OPTION",
+          "label": "Usul hatası",
+          "group": "g_strateji",
+          "next": "INV1_HUB",
+          "effects": [
+            { "type": "VAR", "var": "strategy", "op": "set", "value": "USUL" },
+            { "type": "VAR", "var": "strategy_pct", "op": "set", "value": 120 },
+            { "type": "VAR", "var": "day", "op": "set", "value": 1 },
+            { "type": "VAR", "var": "ap", "op": "set", "value": 3 }
+          ]
+        },
+        {
+          "id": "STR_INDIRIM",
+          "kind": "OPTION",
+          "label": "Terditli savunma",
+          "group": "g_strateji",
+          "next": "INV1_HUB",
+          "effects": [
+            { "type": "VAR", "var": "strategy", "op": "set", "value": "INDIRIM" },
+            { "type": "VAR", "var": "strategy_pct", "op": "set", "value": 80 },
+            { "type": "VAR", "var": "day", "op": "set", "value": 1 },
+            { "type": "VAR", "var": "ap", "op": "set", "value": 3 }
+          ]
+        }
+      ]
+    }
+  ]
+}

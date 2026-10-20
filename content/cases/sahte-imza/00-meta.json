@@ -1,0 +1,208 @@
+{
+  "format": "mudafaa.case/v1",
+  "meta": {
+    "slug": "sahte-imza",
+    "number": 9,
+    "title": "TODO Dava başlığı",
+    "crimeLabel": "TODO Suç adı",
+    "lawRef": "TODO TCK md.",
+    "demandText": "İddianame: TODO (alt–üst sınır)",
+    "possibleSentence": "TODO yıl",
+    "difficulty": 1,
+    "category": "CEZA",
+    "estimatedMinutes": 100,
+    "summary": "TODO Oyuncunun dava kartında gördüğü iki üç cümlelik özet.",
+    "coverCharacter": "muvekkil",
+    "legalReview": { "status": "PENDING" }
+  },
+  "config": {
+    "startNode": "PROLOG",
+    "scoring": {
+      "categories": [
+        {
+          "id": "HUKUKI_BILGI",
+          "label": "Hukuki bilgi",
+          "advice": {
+            "weak": "TODO: suç tipi ve ceza hesabını tekrar et.",
+            "strong": "Vasıf ve ceza hesabında isabetlisin."
+          }
+        },
+        {
+          "id": "DELIL_ANALIZI",
+          "label": "Delil analizi",
+          "advice": { "weak": "TODO: ipuçlarını tahtada birleştir.", "strong": "Delilleri ustaca birbirine bağladın." }
+        },
+        {
+          "id": "ARASTIRMA",
+          "label": "Araştırma",
+          "advice": { "weak": "TODO: olay yerini ve kayıtları sistematik tara.", "strong": "Araştırman eksiksizdi." }
+        },
+        {
+          "id": "SORGULAMA",
+          "label": "Sorgulama",
+          "advice": { "weak": "TODO: önce bastır, sonra sun.", "strong": "Çapraz sorgun tanığı çözdü." }
+        },
+        {
+          "id": "SAVUNMA_STRATEJISI",
+          "label": "Savunma stratejisi",
+          "advice": {
+            "weak": "TODO: delille desteklenen bir esas savunma kur.",
+            "strong": "Stratejin davayı kazandırdı."
+          }
+        },
+        {
+          "id": "USUL_BILGISI",
+          "label": "Usul bilgisi",
+          "advice": { "weak": "TODO: delil yasakları ve itiraz dayanakları.", "strong": "Usul itirazların yerindeydi." }
+        }
+      ],
+      "lines": [
+        { "id": "delil", "label": "Delil toplama", "categories": ["ARASTIRMA", "DELIL_ANALIZI"] },
+        { "id": "capraz", "label": "Çapraz sorgu", "categories": ["SORGULAMA"] },
+        {
+          "id": "itiraz",
+          "label": "İtiraz isabeti ({{var.legal_hits}})",
+          "categories": ["USUL_BILGISI", "HUKUKI_BILGI"]
+        },
+        { "id": "savunma", "label": "Savunma", "categories": ["SAVUNMA_STRATEJISI"] },
+        { "id": "hatali", "label": "Hatalı delil ({{var.wrong}})" }
+      ],
+      "bonuses": [{ "id": "guven", "label": "Güvenilirlik bonusu", "value": { "mul": [{ "var": "cred" }, 100] } }],
+      "scaleMax": 3000,
+      "thresholdBar": [
+        { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
+        { "label": "İndirim", "from": 1000, "tone": "amber" },
+        { "label": "Beraat", "from": 1800, "tone": "green" }
+      ],
+      "displayClampMin": 0
+    },
+    "objectionGrounds": [],
+    "display": { "showRunningScore": true }
+  },
+  "predicates": [
+    {
+      "id": "kart2",
+      "label": "Tahtada en az 2 kart var",
+      "when": { "cmp": [{ "count": "evidence", "tag": "kart" }, ">=", 2] }
+    }
+  ],
+  "variables": [
+    {
+      "id": "strategy",
+      "type": "enum",
+      "initial": "YOK",
+      "enumValues": ["YOK", "MASUMIYET", "USUL", "INDIRIM"],
+      "visibility": "VISIBLE",
+      "display": { "label": "Strateji", "widget": "label" }
+    },
+    { "id": "strategy_pct", "type": "int", "initial": 100, "min": 0, "max": 200, "visibility": "HIDDEN" },
+    {
+      "id": "day",
+      "type": "int",
+      "initial": 1,
+      "min": 1,
+      "max": 2,
+      "visibility": "VISIBLE",
+      "display": { "label": "Gün", "widget": "pips", "max": 2 }
+    },
+    {
+      "id": "ap",
+      "type": "int",
+      "initial": 3,
+      "min": 0,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "display": { "label": "Eylem puanı", "widget": "pips", "max": 3 }
+    },
+    {
+      "id": "day2",
+      "type": "int",
+      "initial": 1,
+      "min": 1,
+      "max": 2,
+      "visibility": "VISIBLE",
+      "display": { "label": "Gün", "widget": "pips", "max": 2 }
+    },
+    {
+      "id": "ap2",
+      "type": "int",
+      "initial": 2,
+      "min": 0,
+      "max": 2,
+      "visibility": "VISIBLE",
+      "display": { "label": "Eylem puanı", "widget": "pips", "max": 2 }
+    },
+    {
+      "id": "trust",
+      "type": "int",
+      "initial": 60,
+      "min": 0,
+      "max": 100,
+      "visibility": "VISIBLE",
+      "display": { "label": "Güven", "widget": "percentBar", "max": 100, "lowAt": 40 }
+    },
+    {
+      "id": "min",
+      "type": "int",
+      "initial": 12,
+      "min": 0,
+      "max": 12,
+      "visibility": "VISIBLE",
+      "display": { "label": "Kalan süre", "widget": "minutes", "max": 12, "lowAt": 4 }
+    },
+    {
+      "id": "taps",
+      "type": "int",
+      "initial": 5,
+      "min": 0,
+      "max": 5,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Büyüteç", "widget": "counter", "max": 5, "lowAt": 1 }
+    },
+    {
+      "id": "exam_left",
+      "type": "int",
+      "initial": 6,
+      "min": 0,
+      "max": 6,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 6, "lowAt": 2 }
+    },
+    {
+      "id": "cred",
+      "type": "int",
+      "initial": 5,
+      "min": 0,
+      "max": 5,
+      "visibility": "VISIBLE",
+      "display": { "label": "Güvenilirlik", "widget": "hearts", "max": 5, "lowAt": 1 }
+    },
+    {
+      "id": "pers",
+      "type": "int",
+      "initial": 2,
+      "min": 0,
+      "max": 10,
+      "visibility": "VISIBLE",
+      "display": { "label": "Heyet iknası", "widget": "meter10", "max": 10 }
+    },
+    { "id": "tone", "type": "enum", "initial": "soft", "enumValues": ["soft", "hard"], "visibility": "HIDDEN" },
+    { "id": "wrong", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
+    { "id": "legal_hits", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
+    { "id": "ethics", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
+    { "id": "in_court", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_gece", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_tanik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "rapor_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "suc_duyurusu", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_s1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_s1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_s2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "key_excluded", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "gercek_fail", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "terditli", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "cokus", "type": "bool", "initial": false, "visibility": "HIDDEN" }
+  ]
+}

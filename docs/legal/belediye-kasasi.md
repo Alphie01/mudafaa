@@ -32,7 +32,7 @@ Metinler aşağıdaki güncel mevzuat metinleriyle karşılaştırılmıştır (
 | CMK 48 | T_03, BERAAT_B gerekçesi, ARA_LEYLA | Tanık, kendisini ceza kovuşturmasına uğratabilecek sorulara cevap vermekten çekinebilir. |
 | CMK 50/1-d | T_03 (suç duyurusu sonrası yeminsiz dinleme) | Kovuşturma konusu suça katılmak veya bu suçla ilgili şüpheli olmak nedeniyle hakkında soruşturma bulunanlar yeminsiz dinlenir. |
 | CMK 63, 67/3 | INV_DIL, H1_02, T_01 (BQ_SUCSUZ), INV_LEYLA gün 2 | Özel/teknik bilgi gerektiren hâllerde bilirkişi; bilirkişi hukuki nitelendirmeye ilişkin açıklama yapamaz. |
-| CMK 116, 119, 134 | ob_cekmece, BK_A/BK_B, AD_YEDEK | Arama ve el koyma yetkili mercilerindir; bilgisayar kayıtlarında el koyma ve kopyalama usulü. |
+| CMK 116, 119, 134 | ob_cekmece, BK_A/BK_B, AD_YEDEK, ARA_ZARF | Arama ve el koyma yetkili mercilerindir; bilgisayar kayıtlarında el koyma ve kopyalama usulü. Emanetteki zarfların UV incelemesi savcılığın istemiyle kriminal laboratuvarca yapılır; müdafi raporu dosyadan inceler (CMK 153). |
 | CMK 147/1-e | H101_C | Susma hakkı. |
 | CMK 158 | AK2_BILDIR, OT_A, ARA_SUC, H105_TUTUKLA, rapor | İhbar ve şikâyet (suç duyurusu) Cumhuriyet başsavcılığına yapılır. |
 | CMK 177, 206 | INV_DIL, H1_05, ARA_DIL | Sanığın delil/tanık talebi duruşmadan en az beş gün önce; red sebepleri: geç, ilgisiz, elde edilemez (206/2). |
@@ -41,8 +41,11 @@ Metinler aşağıdaki güncel mevzuat metinleriyle karşılaştırılmıştır (
 | CMK 210 | MK_B, g_duyum | Delil bir tanığın açıklamasından ibaretse tanık duruşmada dinlenir; yazılı açıklama yerine geçmez (doğrudan doğruyalık). |
 | CMK 217 | Leyla, HQ_KANAAT, g_kanaat, hüküm gerekçeleri | Delillerin vicdani kanaatle serbestçe takdiri. |
 | CMK 223/2-b, e | BERAAT_B, BERAAT_E, mütalaa | Suçun sanık tarafından işlenmediğinin sabit olması / işlendiğinin sabit olmaması. |
-| CMK 226 | T_04, NITELENDIRME | Hukuki nitelik değişirse sanığa önceden bildirilmeden başka kanun hükmüyle mahkûmiyet olmaz; ek savunma ve süre hakkı. |
+| CMK 225/1 | NITELENDIRME, §4 | Hüküm, iddianamede gösterilen fiil ve failin sorumluluğu hakkında verilir; mahkeme fiilin nitelendirilmesinde iddianameye bağlı değildir. |
+| CMK 226 | T_04, NITELENDIRME, BERAAT_E/B gerekçesi (nitel_uyari) | Hukuki nitelik değişirse sanığa önceden bildirilmeden başka kanun hükmüyle mahkûmiyet olmaz; ek savunma ve süre hakkı. |
 | CMK 231/5; TCK 51/1 | MAHKUMIYET, IKRAR | HAGB ve erteleme ≤ 2 yıl ceza ister; uygulanmaz. |
+| CMK 231/6-c | NITELENDIRME hüküm ve gerekçesi | HAGB için suçtan doğan zararın aynen iade, eski hâle getirme veya tazmin yoluyla tamamen giderilmesi gerekir; giderilmeyen kamu zararı HAGB’yi engeller. |
+| CMK 83 | H105_KESIF, H1_ARA, ARA_KESIF, rapor | Keşif hâkim veya mahkemece yapılır; tutanağa bulunan durum ve eksikler yazılır. Müdafi keşfi talep eder, kendisi düzenleyemez. |
 | CMK 273/1 | Bütün hükümler | İstinaf süresi: gerekçeli kararın tebliğinden itibaren iki hafta. |
 | Av.K. 34 | Etik geri bildirimler, IKRAR ethicsCard | Avukatın görevini özen, doğruluk ve onurun gerektirdiği şekilde yürütme yükümlülüğü. |
 | Anayasa 38/4; AİHS 6/2 | BERAAT_E gerekçesi | Masumiyet karinesi; şüpheden sanık yararlanır. |
@@ -54,6 +57,8 @@ Metinler aşağıdaki güncel mevzuat metinleriyle karşılaştırılmıştır (
 - **IKRAR (etik ihlali):** 9 yıl 4 ay 15 gün → TCK 248/3 üçte bir indirim (kovuşturma evresinde gönüllü tam tazmin): 75 ay = 6 yıl 3 ay →
   TCK 62/1: 62,5 ay = **5 yıl 2 ay 15 gün**. TCK 61/5 sırası: zincirleme → etkin pişmanlık → takdiri indirim.
 - **NITELENDIRME:** TCK 257/2 (3 ay–1 yıl) takdiren 6 ay → TCK 62/1: **5 ay** → TCK 51/1 erteleme, denetim süresi 1 yıl (51/3).
+  HAGB, savunmanın talebine rağmen uygulanmaz: kamu zararı (386.400 TL) giderilmemiştir, CMK 231/6-c objektif koşulu yoktur;
+  hüküm bunu açıkça yazar. (Sanık “almadığı parayı” ödemeyi reddeder; bu, ARA_EV’deki seçimin bilinçli bedelidir.)
 - **BERAAT_B / BERAAT_E:** ceza yok; adli kontrol kaldırılır. Sanık tutuklanmadığı için CMK 141 tazminat bildirimi hükme yazılmadı.
 
 ## 3. Usul akışı
@@ -62,7 +67,8 @@ Metinler aşağıdaki güncel mevzuat metinleriyle karşılaştırılmıştır (
 2. 1. celse: açılış ve kimlik (CMK 191), iddianame özeti, hakların hatırlatılması (147), sanığın savunması, müdafiin doğrudan soruları
    (201), teftiş raporunun belge olarak okunması (209) ve bilirkişi talebi (63), savcılık tanığının yeminli dinlenmesi, telkinli soruya
    itiraz, çapraz sorgu, duruşma içi delil talepleri (206), ara karar (bilirkişi, müzekkere, erteleme, adli kontrolün devamı).
-3. Ara: ek delil dilekçesi (177), suç duyurusu (158) ve savcılığın arama/el koyması (116, 119), keşif (bilirkişi eşliğinde).
+3. Ara: ek delil dilekçesi (177), suç duyurusu (158) ve savcılığın arama/el koyması (116, 119) ile kriminal incelemesi, keşif
+   (yalnızca 1. celsede H105_KESIF ile istenip ara kararla kabul edildiyse; mahkeme heyeti, savcı ve bilirkişiyle, CMK 83).
 4. 2. celse: ara karar cevaplarının okunması, bilirkişinin dinlenmesi (67/3 sınırı), tanıkların dinlenmesi; hakkında soruşturma bulunan
    tanığın yeminsiz dinlenmesi (50/1-d) ve çekinmesi (48); nitelendirme uyarısı ve ek savunma (226); mütalaa ve savunma (216);
    son söz; hüküm (223, 231 ve 273/1 bildirimleri).
@@ -83,11 +89,28 @@ Metinler aşağıdaki güncel mevzuat metinleriyle karşılaştırılmıştır (
    oyunda yalnızca "tutanağa geçsin" sonucunu doğurur.
 6. **Tanığın çekinmesi:** Çekinme tek başına delil sayılmaz; BERAAT_B gerekçesi bunu açıkça yazar, sonuç kasa/turnike/destek kayıtlarına dayanır.
 7. **Avukatın delile erişimi:** Kilitli çekmece açılmaz (keşif tutanağına yazdırılır); log yedeği avukata getirilmez, muhafazası mahkemeden istenir.
+   Emanetteki zarflara müdafi dokunmaz; UV bulgusu kriminal raporun fotoğraf ekinden okunur (ARA_ZARF).
+8. **Eylem birliği ve CMK 225/1:** İddianamedeki fiil, 47 makbuzun iptaliyle doğan kamu zararıdır. Şifrenin eylülde zarfla teslimi
+   ayrı bir zaman diliminde gerçekleşmiş bir davranıştır; ama yargılanan tarihî olayın (aynı zararın nasıl doğduğu) parçasıdır. Oyun,
+   Yargıtay’ın “fiil = tarihî olay” yaklaşımını esas alır: mahkeme aynı olay içinde sanığın zarara katkısını CMK 226 uyarısıyla 257/2
+   olarak nitelendirebilir. Karşı görüş (ihmalin ayrı bir fiil olduğu, ek iddianame gerektiği) tartışmalıdır; oyunda uyarı ve ek
+   savunma hakkı verildiği için savunma hakkı korunmuş sayılır.
+9. **257/1 değil 257/2:** Orhan “bile bile verdim” der; ama bildiği ve istediği, şifreyi amirin yazılı talimatıyla teslim etmektir.
+   TCK 257/1 kastının kişilerin mağduriyeti, kamunun zararı veya haksız kazanç neticesini de kapsaması gerekir; sanığın zararı istediğine
+   ya da öngörüp kabullendiğine dair delil yoktur. Neticeye yönelik özen yükümlülüğünün ihlali 257/2’nin “ihmal” unsurudur. Amir
+   talimatı (TCK 24/2) ceza sorumluluğunu kaldırmaz: yönergeye aykırı bir talimatın yerine getirilmesi “görev gereği zorunlu” değildir;
+   heyet bunu indirim gerekçesi olarak tartabilir. Bu bir yorumdur.
+10. **Beraatte nitelendirme uyarısının karşılanması:** CMK 226 uyarısı yapılmış bir dosyada beraat hükmü, yalnızca zimmetten değil
+    uyarıdaki 257/2 nitelendirmesinden de neden mahkûmiyet kurulmadığını gerekçelendirmelidir (CMK 230/1). BERAAT_E ve BERAAT_B,
+    `nitel_uyari` varsa illiyet bağının üçüncü kişinin kasıtlı fiiliyle kesildiğini ayrıca yazar.
+11. **İkrar ve vicdani kanaat:** IKRAR sonucunda mahkeme ikrarı zarar ve iade olgusuyla örtüştüğü ölçüde esas alır; ikrarın bilirkişi,
+    turnike ve izin kayıtlarıyla çeliştiğini gerekçede açıkça yazar (CMK 217). Bu, gerçekçi ama sert bir sonuçtur ve etik dersini taşır.
 
 ## 5. Hassas konu denetimi
 
 Lineup sınırı: cinsel suçlar, çocuklara yönelik suçlar ve terör davaları yok. Bu dava kamu görevlisinin malvarlığı suçudur; çocuk
-(Elif) yalnızca aile bağlamında anılır. Yasa dışı bahis yalnızca epilogda, fail hakkındaki soruşturmanın bir ayrıntısı olarak geçer.
+(Elif) yalnızca aile bağlamında anılır. Yasa dışı bahis, ara evresinde bilgi işlemin güvenlik duvarı kaydı (Burak) ve ön oda takvimiyle bir saik ipucu olarak ortaya çıkar,
+2. celsede tanığa gösterilir ve beraat epiloglarında soruşturmanın bir ayrıntısı olarak çözülür; kumar betimlenmez, özendirilmez.
 
 ## 6. Öz-inceleme kontrol listesi
 

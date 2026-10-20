@@ -71,9 +71,9 @@ Kadroda görünmeyen ama adı geçenler: Müdür Rıfat Yener (ocak–şubatta r
 | Tarih / saat | Olay | Kim biliyor | Oyuncu nasıl öğrenir |
 |---|---|---|---|
 | 2024 sonu | Ercan, ön odadaki ortak bilgisayarın (MHM-PC03) vezne programına da açık olduğunu fark eder: vezne kullanıcıları yalnızca vezne terminalinden değil, müdürlüğün her bilgisayarından girebilmektedir; 10.000 TL altındaki iptaller ikinci onay istemez. | Ercan | Bilirkişi raporu (2. celse), Burak (ara) |
-| Eylül 2025 | Ercan, "devamlılık" gerekçesiyle veznedarlardan şifrelerini mühürlü zarfta ister; el yazısı talimat: "Şifreler zarfta, müdürlükte kalacak. — E.T." Bilgi güvenliği yönergesi şifre paylaşımını yasaklar. | Ercan, Orhan, Melek | Orhan'ın evindeki talimat notu (arama), yönerge (vezne salonu panosu), Melek (ara/2. celse) |
+| Eylül 2025 | Ercan, "devamlılık" gerekçesiyle veznedarlardan şifrelerini mühürlü zarfta ister; el yazısı talimat, imzasız: "Şifreler zarfta, müdürlükte kalacak. — Müdürlük." (O sırada müdür Rıfat Yener de görevdedir; not kendi başına yazanı göstermez.) Bilgi güvenliği yönergesi şifre paylaşımını yasaklar. | Ercan, Orhan, Melek | Orhan'ın evindeki talimat notu (arama), yönerge (vezne salonu panosu), Melek (ara/2. celse) |
 | 3 Kas 2025 – 27 Şub 2026 | 23 günde 47 iptal, toplam 386.400 TL. Her biri 17.38–17.56 arasında, Orhan'ın kullanıcı adıyla (okilic), terminal **MHM-PC03**'ten. | Ercan | İptal kayıtları (belge incelemesi) |
-| Aynı günler 17.00 | Orhan kasayı sayar, defterine günlük toplamı yazar, teslim tutanağını doldurur, karbon kopyasını alır; torbaları Ercan'a verir. Ercan "teslim alan" kısmını "sonra imzalarım" der. | Orhan, Ercan | Orhan'ın defteri ve karbon kopyalar (ev araması) |
+| Aynı günler 17.00 | Orhan kasayı sayar, defterine günlük toplamı yazar, teslim tutanağını doldurur, karbon kopyasını alır; torbaları müdürlükte kim kaldıysa ona verir: kasım–aralıkta kimi akşam müdür Rıfat Bey, kimi akşam Ercan, birkaç kez vezne sorumlusu Selim; ocaktan sonra Selim ya da Ercan. Teslim alan "sonra imzalarım" der; asıllardaki paraf okunaksızdır. Hangi akşam kimin aldığını yalnızca kasa kodu ve müdürlük turnikesi ayırır. | Orhan, Ercan | Orhan'ın defteri ve karbon kopyalar (ev araması) |
 | Aynı günler 17.02–17.09 | Orhan turnikeden çıkar. | PDKS | Orhan'ın PDKS dökümü (ev → belge) |
 | Aynı günler 17.38–17.56 | Ercan PC03'ten iptalleri yapar, gün sonu raporunu yeniden basar (basım saati raporda yazılı), teslim tutanağını Orhan'ın imzasının fotokopisiyle hazırlanmış sahtesiyle değiştirir. | Ercan | Dosyadaki tutanaklar (büyüteç: toner imza; basım saati), bilirkişi |
 | Aynı günler 17.52–17.58 | Kasa odası alarm paneli: kullanıcı kodu **02** (Ercan) ile açılış. | Ercan | Kasa alarm kayıtları (1. celsede/dilekçede istenirse ara evresinde gelir) |
@@ -136,7 +136,7 @@ T_COKUS (güvenilirlik 0) → T_08
   saymayı yarıda bırakıyor.
 - `phone`, BİR SES (erkek, boğuk, arkada televizyon maçı): "Cuma'ya kadar demiştik." — İKİNCİ SES (alçak, düzgün): "Cuma'ya
   kadar. Her zamanki gibi." — BİR SES: "Her zamanki gibi geç." — İKİNCİ SES: "Bu kez değil."
-- Kapıda gece bekçisi (narrator, "BEKÇİ"): "İyi akşamlar." Siluet: "İyi akşamlar efendim." Islak bir şemsiye açılır.
+- Kapıda gece bekçisi (narrator, "BEKÇİ"): "İyi akşamlar." Siluet: "İyi akşamlar." Yaka kaldırılır, siluet otoparkın karanlığına karışır (şemsiye yok; adım ve ses betimlemesi Ercan'ın tanıtımıyla yankılanmaz).
 - narrator: "Ertesi sabah vezne yine açıldı. Para yine sayıldı. Kimse saymadığı parayı aramadı." `fade`.
 
 > İsim, yüz, makam yok. "Efendim" hem Orhan'ın hem Ercan'ın tikidir; oyuncu sesi kimseye bağlayamaz.
@@ -207,7 +207,7 @@ Iska satırları kısa iç ses: "Sıra fişi. 214. Biri bekledi, biri saydı, bi
 **INV_EV_G / INV_EV — Kılıçların evi (~900):** dördüncü kat, merdiven. Nazan dikiş makinesinin başında; Elif'in
 çizimleri duvarda. Orhan'ın çalışma masası (sahne): **defter** (her günün toplamı, kurşun kalemle, 19 yıllık 23 cilt),
 **karbon kopyalar** (sarı, "teslim alan" kısmı boş), **PDKS dökümü** (insan kaynaklarından aldığı), **el yazısı talimat**
-("Şifreler zarfta, müdürlükte kalacak. — E.T."; Orhan bunu bir klasörün arasına sıkıştırmış, unutmuş), tapu satış
+("Şifreler zarfta, müdürlükte kalacak. — Müdürlük"; imzasız; Orhan bunu bir klasörün arasına sıkıştırmış, unutmuş), tapu satış
 belgesi, satranç tahtası (çeldirici), Elif'in hastane randevu kartı (9 Ocak).
 - Talimatı bulmak Orhan'ı utandırır: "Herkes verdi efendim. Ben de verdim. Yönergeyi biliyordum." Bu satır yalnızca not
   bulunduysa gelir (`fact_zarf`).
@@ -392,6 +392,9 @@ Soğuk açılış ~1.200 · Bölüm 1 ~1.900 · Soruşturma ~5.000 · 1. celse ~
   Böylece gerçek failin adı, oyuncu kanıtla kazanmadan bir seçenek etiketinde geçmez.
 - **Burak** 14 Ocak akşamı arayanın adını söylemez (“kibar biriydi, efendim dedi”); adı ancak destek talebi kaydı elde edildiyse kayıttan okur.
 - **Melek** zarfı toplayanın adını kafede söylemez; adı yalnızca ikinci celsede, sorulunca (ya da belgeyle karşılaşınca) söyler.
-- **Ercan, 1. celse E3:** el yazısı not gösterilince yazının kendisine ait olmadığını ve müdürlükte başka bir “E.T.” bulunduğunu söyler; gizem açık kalır.
+- **Ercan, 1. celse E3:** el yazısı not gösterilince yazının kendisine ait olmadığını söyler; üye hâkim talimatı kimin verebileceğini sorunca “müdür ya da müdür yardımcısı; müdürümüz eylülde görevdeydi” der. İki aday kalır; gizem açık.
+- **Teslim alan:** Orhan (TP_TESLIM) ve Ercan (EQ_TESLIM) torbaları “kim müsaitse” onun aldığını söyler (Rıfat, Selim, Ercan). Ara evresindeki kasa kodu (02) ve müdürlük turnikesi (Selim 17.20’den önce, Rıfat ocak–şubat raporlu) ayırt eder.
+- **Saik (ara):** Burak, güvenlik duvarının müdür yardımcılığı bilgisayarından her cuma bahis sitelerine takılan girişleri kaydettiğini söyler (BK_BAHIS); keşifteki takvimde halkalı cumalar vardır. İkisi ded_borc’u kurar; 2. celsede R5 (“borç Orhan Bey’in derdiydi”) bununla çürütülür. Soğuk açılıştaki “Cuma’ya kadar” sesi ve gizli numara beraat epiloglarında bu tahsilat hattına bağlanır.
+- **Keşif:** yalnızca 1. celsede bilirkişiyle birlikte keşif istenirse (H105_KESIF) ara kararla yapılır.
 - **Sonuç sınıfı “Nitelendirme”** (TCK 257/2; CMK 226 uyarısıyla) hikâye kitabındaki NITELENDIRME epilogunu kullanır; IKRAR etik sonudur.
 - Ölçümler ve golden path’ler: `docs/content/belediye-kasasi.md` §8–9.

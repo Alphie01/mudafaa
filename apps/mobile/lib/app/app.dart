@@ -12,6 +12,7 @@ import '../features/dev/dev_gallery.dart';
 import '../features/auth/login_screen.dart';
 import '../features/cases/cases_screen.dart';
 import '../features/home/home_screen.dart';
+import '../features/premium/premium_screen.dart';
 import '../features/play/play_screen.dart';
 import '../features/play/voice/voice.dart';
 import '../features/result/result_screen.dart';
@@ -46,6 +47,7 @@ final router = GoRouter(
     GoRoute(path: '/login', builder: (_, _) => const LoginScreen()),
     GoRoute(path: '/', builder: (_, _) => const HomeScreen()),
     GoRoute(path: '/cases', builder: (_, _) => const CasesScreen()),
+    GoRoute(path: '/premium', builder: (_, _) => const PremiumScreen()),
     GoRoute(path: '/play/:id', builder: (_, s) => PlayScreen(sessionId: s.pathParameters['id']!)),
     GoRoute(path: '/sessions/:id/report', builder: (_, s) => ResultScreen(sessionId: s.pathParameters['id']!)),
     if (kDebugMode) ...[

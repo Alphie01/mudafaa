@@ -1,0 +1,625 @@
+import { clue, evidence, insight } from '../../../tools/content/src/kit/index.js';
+import type { CasePart, EvidenceDef } from '../../../tools/content/src/kit/index.js';
+
+// 20-evidence: deliller (EVIDENCE), ipuçları (CLUE) ve çıkarımlar (INSIGHT). Başlıklar bulunmadan önce hiçbir ekran
+// metninde geçmez (LEAK); bu yüzden başlıklar diyaloglarda kullanılmayan, kendine özgü ifadelerdir.
+// Etiketler: `kart` = çıkarım tahtası havuzu, `key` = karar ekranındaki "Delil toplama" sayacı.
+
+const card = { tags: ['kart'] };
+const cardKey = { tags: ['kart', 'key'] };
+
+const initial: EvidenceDef[] = [
+  evidence('ev_tutanak', {
+    type: 'BELGE',
+    title: 'Yakalama, arama ve el koyma tutanağı (12.03.2027)',
+    shortText: 'Kontrol odası, üçüncü çekmece: kahverengi iç yazışma zarfı, 200 adet 200 TL.',
+    description:
+      'Mali Suçlarla Mücadele Şube ekibinin tutanağı. “Şüphelinin masasının üçüncü çekmecesinde kahverengi, barkodlu iç yazışma zarfı içinde 200 adet 200 TL ele geçirilmiştir. Seri numaraları tutanakla eşleşmiştir.” Saatler, ekip ve tanıklar ayrıca yazılı.',
+    sourceLabel: 'Soruşturma dosyası',
+    icon: 'document',
+    side: 'PROSECUTION',
+    strength: 'STRONG',
+    tagLabel: 'SAVCILIK',
+    initiallyKnown: true,
+  }),
+  evidence('ev_dinleme', {
+    type: 'TELEFON_KAYDI',
+    title: 'İletişimin denetlenmesi: karar ve çözüm tutanakları',
+    shortText: 'Sulh ceza hâkimliği kararı ve üç kaydın çözümü; iddianamenin omurgası.',
+    description:
+      'Bursa Sulh Ceza Hâkimliğinin 4 Ocak 2027 tarihli kararı ve kolluğun hazırladığı çözüm tutanakları. İddianame iki kayda dayanıyor: sanığın “Dosyana bakarım Bayram” dediği görüşme ve “Kontrolcüyü hallettik, zarf yarın masada” cümlesi.',
+    sourceLabel: 'Soruşturma dosyası',
+    icon: 'phone',
+    side: 'PROSECUTION',
+    strength: 'STRONG',
+    tagLabel: 'SAVCILIK',
+    legalNote:
+      'Dinleme yalnızca kararda gösterilen hat, suç ve süre için hukuka uygundur (CMK 135/1, 135/4, 135/8-a-13). Kapsam dışı kayıt hükme esas alınamaz (Anayasa 38/6; CMK 206/2-a, 217/2).',
+    initiallyKnown: true,
+  }),
+  evidence('ev_ihbar', {
+    type: 'TANIK_IFADESI',
+    title: 'Muhbir Bayram Öz’ün ifadeleri',
+    shortText: 'Biri Emniyet’te (11 Mart gece), biri savcılıkta (13 Mart).',
+    description:
+      'İki ifade, iki tutanak. Emniyet’teki ihbar ve savcılıktaki ifade aynı kişiye, aynı zarfa ilişkin. Savcılık, muhbir hakkında “durumu makamlar öğrenmeden önce bildirdiği” gerekçesiyle cezaya hükmolunmayacağını not etmiş.',
+    sourceLabel: 'Soruşturma dosyası',
+    icon: 'document',
+    side: 'PROSECUTION',
+    strength: 'MEDIUM',
+    tagLabel: 'SAVCILIK',
+    initiallyKnown: true,
+  }),
+  evidence('ev_para', {
+    type: 'BELGE',
+    title: 'Seri numarası tespit tutanağı (09.50)',
+    shortText: '200 adet 200 TL’nin seri numaraları; teslimattan önce düzenlenmiş.',
+    description:
+      '12 Mart 2027, 09.50, Emniyet Mali Suçlarla Mücadele Şube. “Emniyetimizce temin edilen 200 adet 200 TL banknotun seri numaraları kayda alınmış, kontrollü teslimat amacıyla ihbarcıya teslim edilmiştir.” Altında Bayram Öz’ün imzası.',
+    sourceLabel: 'Soruşturma dosyası',
+    icon: 'receipt',
+    side: 'PROSECUTION',
+    strength: 'MEDIUM',
+    tagLabel: 'SAVCILIK',
+    legalNote:
+      'Paranın kolluk tarafından temin edilmesi ve teslimatın kolluk planıyla yapılması, kışkırtma (AİHM Ramanauskas/Litvanya) tartışmasının çekirdeğidir.',
+    initiallyKnown: true,
+  }),
+  evidence('ev_halil_ifade', {
+    type: 'TANIK_IFADESI',
+    title: 'Sanığın savcılık ifadesi (13.03.2027)',
+    shortText: '“Bu zarfı ilk kez çekmece açılınca gördüm. Çekmecemi kilitlemem.”',
+    description:
+      '“Bu zarfı ilk kez polis çekmeceyi açınca gördüm. Çekmecemi kilitlemem; içinde gizli bir şey olmaz. O sabah müdür hanımın çağırdığı söylendi, aşağı indim. Bayram Öz’ü tanırım, takipçidir. Kimseden para istemedim.”',
+    sourceLabel: 'Soruşturma dosyası',
+    icon: 'document',
+    side: 'DEFENSE',
+    strength: 'WEAK',
+    initiallyKnown: true,
+  }),
+];
+
+const inv1: EvidenceDef[] = [
+  // Kontrol odası (sahne)
+  clue('clue_takvim_214', {
+    type: 'FIZIKSEL',
+    title: 'Masa takvimi: “10.35 — 214 — Md. Hn.?”',
+    shortText: 'Halil’in el yazısı. Arayan dahili numarayı yazmış, yanına soru işareti koymuş.',
+    description:
+      'Masa takviminin 12 Mart yaprağı. Halil’in dik, kurallı el yazısı: “10.35 — 214 — Md. Hn.?” Arayanın dahili numarasını not etmiş; “Müdür Hanım” kısaltmasının yanına bir soru işareti.',
+    sourceLabel: 'Kontrol odası',
+    icon: 'document',
+    ...cardKey,
+  }),
+  clue('clue_toz_izi', {
+    type: 'FOTOGRAF',
+    title: 'Raftaki tozsuz dikdörtgen',
+    shortText: 'Dosya rafında, bir defter boyutunda temiz bir iz. Bir şey uzun süre orada durmuş.',
+    description:
+      'Raf tozlu; yalnızca bir dikdörtgen temiz. A5 boyutunda, kalın bir defterin izi. İz yeni değil: kenarlarına toz yeniden yürümeye başlamış.',
+    sourceLabel: 'Kontrol odası',
+    icon: 'bulb',
+    combinable: false,
+  }),
+  clue('clue_kilit', {
+    type: 'FIZIKSEL',
+    title: 'Çekmece kilidinin paslı dili',
+    shortText: 'Üçüncü çekmecenin kilidi hiç kullanılmamış; anahtarı yok.',
+    description: 'Kilit dili pastan kımıldamıyor. Bu çekmece yıllardır kilitlenmemiş; kim isterse açabilirdi.',
+    sourceLabel: 'Kontrol odası',
+    icon: 'magnifier',
+    ...card,
+  }),
+  // Koridor (sahne)
+  clue('clue_rehber_214', {
+    type: 'BELGE',
+    title: 'Dahili rehber: 214 — Devir Servisi-2',
+    shortText: '214 iki kişilik bir oda: S. Kaplan, G. Erdem. Müdürlük makamı 201.',
+    description:
+      'Koridordaki camlı panoda dahili telefon listesi: “201 — Müdürlük Makamı (Sekr.)”, “214 — Devir Servisi-2 (S. Kaplan, G. Erdem)”, “231 — Kontrol (H. Ekinci)”.',
+    sourceLabel: '2. kat koridoru',
+    icon: 'phone',
+    ...cardKey,
+  }),
+  clue('clue_kamera_var', {
+    type: 'FIZIKSEL',
+    title: 'Koridorun dom kamerası',
+    shortText: 'Merdivene dönük; koridorun yarısını görüyor. Etiket: “Kayıt süresi 90 gün”.',
+    description:
+      'Tavanda dom kamera. Açısı merdivene dönük; kontrol odasının kapısı kadrajın kenarında. Altındaki etiket: “Kayıt süresi 90 gün.” 12 Mart’ın üstünden yedi hafta geçmiş.',
+    sourceLabel: '2. kat koridoru',
+    icon: 'camera',
+    ...card,
+  }),
+  clue('clue_zarf_stok', {
+    type: 'FIZIKSEL',
+    title: 'Barkodlu kahverengi zarf destesi',
+    shortText: 'Ortak dolapta iç yazışma zarfları; her destenin üstünde bir barkod aralığı.',
+    description:
+      'Koridor dolabında kahverengi iç yazışma zarfları. Desteler lastikle bağlanmış, üstlerinde “0451–0500” gibi aralıklar. Zarflar servislere zimmetle dağıtılıyormuş.',
+    sourceLabel: '2. kat koridoru',
+    icon: 'document',
+    ...card,
+  }),
+  // Dinleme kararı (belge)
+  clue('clue_hedef_hat', {
+    type: 'TELEFON_KAYDI',
+    title: 'Kararın tek hattı: 0532 418 77 20',
+    shortText: 'Karar yalnızca Cengiz Ateşoğlu adına kayıtlı tek bir hattı gösteriyor.',
+    description:
+      'Kararın “tedbir uygulanacak kişi ve iletişim aracı” bölümü: “Cengiz Ateşoğlu — 0532 418 77 20.” Başka hat, başka kişi yok.',
+    sourceLabel: 'Dinleme kararı',
+    icon: 'phone',
+    ...cardKey,
+  }),
+  clue('clue_sure', {
+    type: 'BELGE',
+    title: 'Tedbir süresi: 04.01–04.03.2027',
+    shortText: 'İki ay. Uzatma kararı yok; sonlandırma tutanağı dosyada yok.',
+    description:
+      '“Tedbirin süresi: karar tarihinden itibaren iki ay.” Dosyada uzatma kararı yok. İşlemin bitirildiği tarihi gösteren tutanak da yok.',
+    sourceLabel: 'Dinleme kararı',
+    icon: 'compare',
+    ...cardKey,
+  }),
+  clue('clue_inat', {
+    type: 'TELEFON_KAYDI',
+    title: 'Çözüm tutanağı 6: “Masasından kaldırırız”',
+    shortText: '“Kontrolcü yine imzalamadı. On bir dosya.” — “Masasından kaldırırız.”',
+    description:
+      'Kararın süresi içinde, hedef hatta. Ateşoğlu: “Kontrolcü yine imzalamadı. On bir dosya, inatçı keçi.” Kimliği tespit edilemeyen hat: “Sen merak etme abi. Masasından kaldırırız onu.”',
+    sourceLabel: 'Dinleme kararı',
+    icon: 'phone',
+    ...cardKey,
+  }),
+  clue('clue_kayit9', {
+    type: 'TELEFON_KAYDI',
+    title: 'Kayıt #9 · 08.03 19.20 · hat 0505',
+    shortText: 'Sanığın kendi hattı: “Dosyana bakarım Bayram, ama şerh kalkmadan imza yok.”',
+    description:
+      'Çözüm tutanağında hat: 0505 311 46 08 — Halil Ekinci. Tam metin: “Dosyana bakarım Bayram, ama şerh kalkmadan imza yok.” İddianame cümlenin yalnızca ilk yarısını alıntılamış.',
+    sourceLabel: 'Dinleme kararı',
+    icon: 'phone',
+    ...cardKey,
+  }),
+  clue('clue_kayit14', {
+    type: 'TELEFON_KAYDI',
+    title: 'Çözüm tutanağı 14: süre sonrası bir cümle',
+    shortText: 'Hedef hatta: “Kontrolcüyü hallettik. Zarf yarın masada.”',
+    description:
+      'Hedef hatta, kimliği tespit edilemeyen bir hatla görüşme. 11 Mart 2027, 21.05. İddianamenin anahtar cümlesi buradan.',
+    sourceLabel: 'Dinleme kararı',
+    icon: 'phone',
+    ...cardKey,
+  }),
+  // Tutanak (belge)
+  clue('clue_saat_tutanak', {
+    type: 'BELGE',
+    title: 'Tutanak saatleri: 10.44 ve 10.46',
+    shortText: '“10.44 odaya girildi, şüpheli odada bulunmamaktadır.” “10.46 şüpheli odaya geldi.”',
+    description:
+      'Tutanağın ikinci sayfası: “10.44 — Ekip kontrol odasına girmiş, şüpheli odada bulunmamaktadır. 10.46 — Şüpheli odaya gelmiş, arama onun huzurunda yapılmıştır.”',
+    sourceLabel: 'Yakalama tutanağı',
+    icon: 'compare',
+    ...cardKey,
+  }),
+  clue('clue_kayit_durdu', {
+    type: 'BELGE',
+    title: 'Tutanak notu: kayıt 10.39’da kesildi',
+    shortText: '“İhbarcıya takılan ses kayıt cihazı teknik arıza nedeniyle 10.39’dan itibaren kayıt almamıştır.”',
+    description:
+      'Tutanak dipnotu: “İhbarcıya takılan ses kayıt cihazı teknik arıza nedeniyle 10.39’dan itibaren kayıt almamıştır.” Arızanın nasıl tespit edildiği yazmıyor.',
+    sourceLabel: 'Yakalama tutanağı',
+    icon: 'document',
+    ...cardKey,
+  }),
+  clue('clue_barkod', {
+    type: 'FIZIKSEL',
+    title: 'Zarfın barkodu: 0417',
+    shortText: 'El konulan zarf bir iç yazışma zarfı; barkod etiketi 0417.',
+    description:
+      'Tutanağa eklenen fotoğraf: kahverengi iç yazışma zarfı, sağ üst köşede müdürlüğün barkod etiketi. Numara: 0417.',
+    sourceLabel: 'Yakalama tutanağı',
+    icon: 'magnifier',
+    ...cardKey,
+  }),
+  // Bayram'ın ifadeleri (belge)
+  clue('clue_ihbar_icbar', {
+    type: 'TANIK_IFADESI',
+    title: 'İhbar: “Getirmezsen bu dosya bu masadan çıkmaz”',
+    shortText: 'Emniyet, 11 Mart: memur dosyayı bekletmiş, parayı zorla istemiş.',
+    description:
+      '“Kontrol memuru Halil Ekinci dosyamı bekletiyor. ‘Kırk bin getirmezsen bu dosya bu masadan çıkmaz’ dedi. Babam ölüyor; mecbur kaldım.”',
+    sourceLabel: 'Muhbirin ifadeleri',
+    icon: 'document',
+    ...cardKey,
+  }),
+  clue('clue_savcilik_anlasma', {
+    type: 'TANIK_IFADESI',
+    title: 'Savcılık: “Anlaştık; kendi elimle verdim”',
+    shortText: 'Savcılık, 13 Mart: pazarlık edilmiş, zarf memurun eline verilmiş.',
+    description:
+      '“Halil Bey’le kırk bine anlaştık. Ben teklif etmedim ama kabul ettim. Zarfı kendi elimle masasına koydum; o da çekmeceye koydu.”',
+    sourceLabel: 'Muhbirin ifadeleri',
+    icon: 'document',
+    ...cardKey,
+  }),
+  // Kişiler
+  clue('clue_uyari_notu', {
+    type: 'BELGE',
+    title: 'İmzasız not: “Her dosyayı durduran…”',
+    shortText: 'Şubatta Halil’in kapısına bırakılmış: “Her dosyayı durduran, bir gün kendisi durur.”',
+    description:
+      'Daktilo değil, yazıcı çıktısı. Tek satır: “Her dosyayı durduran, bir gün kendisi durur.” Zehra şubatta babasının ceketinin cebinde bulmuş, saklamış.',
+    sourceLabel: 'Zehra Ekinci',
+    icon: 'document',
+    ...cardKey,
+  }),
+  clue('clue_dosya_devir2', {
+    type: 'BELGE',
+    title: 'TAKBİS: başvuru Devir Servisi-2’de',
+    shortText: 'Bayram Öz’ün başvurusu Devir-2’ye atanmış; kontrol aşamasına hiç gelmemiş.',
+    description:
+      'İş dağıtım ekranı: “Başvuru 2027/3318 — Görükle, 112 ada 7 parsel — Atanan: Devir Servisi-2 — Durum: Beklemede (ihtiyati tedbir şerhi).” Kontrol servisine hiç sevk edilmemiş.',
+    sourceLabel: 'Tapu Müdürü',
+    icon: 'document',
+    ...cardKey,
+  }),
+  evidence('ev_sira_disi', {
+    type: 'BELGE',
+    title: 'Sıra dışı randevu onayı (03.03.2027)',
+    shortText: 'Bayram Öz’e öncelikli randevu; onaylayan: H. Ekinci.',
+    description:
+      'TAKBİS randevu kaydı: “Öncelikli randevu — gerekçe: malikin ağır hastalığı (beyan) — onaylayan: H. Ekinci, 03.03.2027.” Yönetmelik bu yetkiyi müdüre veriyor; kontrol memuruna değil.',
+    sourceLabel: 'Tapu Müdürü',
+    icon: 'document',
+    side: 'PROSECUTION',
+    strength: 'WEAK',
+    legalNote:
+      'Rüşvetin konusu olabilecek bir “iş” gibi okunabilir; ama dosyanın kendisi Halil’in yetkisinde değildi. Yetki aşımı en fazla görevi kötüye kullanma (TCK 257/1) tartışması doğurur.',
+  }),
+  clue('clue_sinan_saat', {
+    type: 'FIZIKSEL',
+    title: 'Yeşil ışıklı akıllı saat',
+    shortText: 'Devir-2 memurunun bileğinde; otoparkta, şemsiyenin altında da yeşil yandı.',
+    description:
+      'Sinan Kaplan’ın sol bileğinde siyah kordonlu bir akıllı saat. Ekranı her bakışında yeşil yanıyor. Devir-2’de de, otoparkta da aynı küçük, dikdörtgen ışık.',
+    sourceLabel: 'Sinan Kaplan',
+    icon: 'magnifier',
+    ...card,
+  }),
+  clue('clue_sinan_arsiv', {
+    type: 'TANIK_IFADESI',
+    title: '“10.30’dan 10.50’ye arşivdeydim”',
+    shortText: 'Sinan: o sabah arşivde, kadastro paftalarının arasındaymış.',
+    description:
+      '“O sabah arşivdeydim abla, 10.30’dan 10.50’ye kadar. Kadastro paftalarının arasındaydım; bir ifraz dosyası için eski bir pafta lazımdı. Gürültüyü duyunca çıktım.”',
+    sourceLabel: 'Sinan Kaplan',
+    icon: 'document',
+    ...card,
+  }),
+];
+
+const deliveries: EvidenceDef[] = [
+  evidence('ev_kamera', {
+    type: 'FOTOGRAF',
+    title: 'Koridor kamerası: 10.30–10.50 görüntü dökümü',
+    shortText: 'Müdürlüğün dom kamerasından kareler; mahkeme yazısıyla geldi.',
+    description:
+      'Tapu Müdürlüğünün 2. kat dom kamerasından 12 Mart 10.30–10.50 arası görüntü. Kadraj merdivene dönük; kontrol odasının kapısı kenarda.',
+    sourceLabel: 'Mahkeme yazısı',
+    icon: 'camera',
+    side: 'NEUTRAL',
+    strength: 'MEDIUM',
+    combinable: false,
+    tags: ['key'],
+  }),
+  evidence('ev_santral', {
+    type: 'TELEFON_KAYDI',
+    title: 'Santral dahili arama dökümü ve izin çizelgesi',
+    shortText: 'Müdürlüğün santral kaydı (12 Mart sabahı) ve personel izin çizelgesi.',
+    description:
+      'Müdürlük santralinin 12 Mart 2027 10.00–11.00 dahili arama dökümü ve aynı haftanın personel izin çizelgesi.',
+    sourceLabel: 'Mahkeme yazısı',
+    icon: 'phone',
+    side: 'NEUTRAL',
+    strength: 'MEDIUM',
+    combinable: false,
+    tags: ['key'],
+  }),
+  evidence('ev_cihaz', {
+    type: 'ADLI_RAPOR',
+    title: 'Ses kayıt cihazı bilirkişi raporu',
+    shortText: 'İhbarcıya takılan cihazın iç günlüğü ve pil durumu.',
+    description: 'Emniyet emanetindeki ses kayıt cihazının bilirkişi incelemesi: iç günlük, pil durumu, tuş kayıtları.',
+    sourceLabel: 'Bilirkişi',
+    icon: 'document',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    combinable: false,
+    tags: ['key'],
+  }),
+  evidence('ev_sonlandirma', {
+    type: 'BELGE',
+    title: 'Tedbir sonlandırma yazısı (12.03.2027)',
+    shortText: 'Kolluğun dinlemeyi sonlandırma talebi: süre bitiminden sekiz gün sonra.',
+    description:
+      'Kolluğun iletişim tespit merkezine yazısı: “4 Ocak 2027 tarihli karar kapsamındaki tedbirin sonlandırılması” — tarih 12 Mart 2027. Kayıt sistemi süre bitiminden sonra sekiz gün daha çalışmış.',
+    sourceLabel: 'Mahkeme yazısı',
+    icon: 'document',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    presentable: false,
+    tags: ['key'],
+    legalNote:
+      'Kararın süresi iki aydır (CMK 135/4); süre bitince tedbir derhâl sona erdirilir ve işlemin bitiş saati tutanağa geçirilir (CMK 137/1). Süre dışı kayıt hukuka aykırıdır.',
+  }),
+];
+
+const ara: EvidenceDef[] = [
+  clue('clue_214_cagri', {
+    type: 'TELEFON_KAYDI',
+    title: 'Santral: 10.35.08 · 214 → 231 · 41 sn',
+    shortText: 'Halil’i arayan dahili 214. Müdürlük makamından (201) o saatte hiç arama yok.',
+    description:
+      'Santral dökümü: “10.35.08 — 214 → 231 — 41 sn.” Aynı saat aralığında 201’den çıkan arama yok; makam hattı 10.00–11.00 arası telekonferansa bağlı.',
+    sourceLabel: 'Santral dökümü',
+    icon: 'phone',
+    ...cardKey,
+  }),
+  clue('clue_izin_gulay', {
+    type: 'BELGE',
+    title: 'İzin çizelgesi: G. Erdem, 08–19 Mart',
+    shortText: 'Devir-2’nin ikinci memuru o hafta yıllık izinde.',
+    description:
+      'Personel izin çizelgesi: “Gülay Erdem — Devir Servisi-2 — yıllık izin — 08.03–19.03.2027.” 12 Mart’ta 214’te tek bir masa doluydu.',
+    sourceLabel: 'İzin çizelgesi',
+    icon: 'document',
+    ...cardKey,
+  }),
+  clue('clue_manuel', {
+    type: 'ADLI_RAPOR',
+    title: 'Cihaz günlüğü: 10.39.12 STOP (tuş)',
+    shortText: 'Kayıt elle, fiziksel tuşla durdurulmuş; pil %68.',
+    description:
+      'Bilirkişi: “Cihazın iç günlüğünde 10.39.12’de ‘STOP — fiziksel tuş’ kaydı vardır. Pil %68’dir. Arıza bulgusu yoktur.”',
+    sourceLabel: 'Bilirkişi raporu',
+    icon: 'document',
+    ...cardKey,
+  }),
+  clue('clue_fisilti', {
+    type: 'ADLI_RAPOR',
+    title: 'Kaydın son otuz saniyesi: bir fısıltı',
+    shortText: '10.38.40: muhbirin yanında ikinci bir ses: “Burada değil. Bana ver. Ben bırakırım.”',
+    description:
+      'Bilirkişi, kolluğun “anlaşılmayan konuşmalar” diye geçtiği son otuz saniyeyi filtreyle açmış: “Burada değil. Bana ver. Ben bırakırım. Üçüncü çekmece…” Ses kimliği tespit edilemedi; erkek sesi.',
+    sourceLabel: 'Bilirkişi raporu',
+    icon: 'phone',
+    ...cardKey,
+  }),
+  clue('clue_kare_saat', {
+    type: 'FOTOGRAF',
+    title: 'Kare 10.41.07: kontrol odasının kapısı',
+    shortText: 'Biri kontrol odasına giriyor; 20 saniye sonra çıkıyor. Halil o sırada aşağıda.',
+    description:
+      'Kamera karesi, zaman damgası 10.41.07: kadrajın kenarında biri kontrol odasının kapısını açıyor. 10.41.27’de çıkıyor. Yüzü merdivene dönük değil; görünmüyor.',
+    sourceLabel: 'Kamera karesi',
+    icon: 'camera',
+    ...cardKey,
+  }),
+  clue('clue_kol_saat', {
+    type: 'FOTOGRAF',
+    title: 'Karedeki bilekte yeşil bir ışık',
+    shortText: 'Kapıyı açan elin bileğinde küçük, yeşil bir ekran parlıyor.',
+    description: 'Kapı koluna uzanan sol elin bileğinde küçük, dikdörtgen, yeşil bir ışık. Bir saat ekranı; dijital.',
+    sourceLabel: 'Kamera karesi',
+    icon: 'camera',
+    ...cardKey,
+  }),
+  clue('clue_kare_zarf', {
+    type: 'FOTOGRAF',
+    title: 'Karede koltuk altında kahverengi bir köşe',
+    shortText: 'Girerken koltuğunun altında kahverengi bir zarf köşesi; çıkarken yok.',
+    description: '10.41.07’de açık renk ceketin koltuğunun altında kahverengi bir köşe. 10.41.27 karesinde yok.',
+    sourceLabel: 'Kamera karesi',
+    icon: 'camera',
+    ...card,
+  }),
+  evidence('ev_kirmizi_defter', {
+    type: 'BELGE',
+    title: 'Halil’in kırmızı kaplı defteri',
+    shortText: 'On bir dosya, on bir şerh, her biri Devir-2 parafıyla. Son satır: “Müdüre yazılacak.”',
+    description:
+      'Kırmızı kaplı A5 defter. Ekim 2026’dan şubata: Ateşoğlu İnşaat’ın on bir dosyası, her birinde şerh ya da eksik evrak, her birinin hazırlık parafı “S.K.” Son sayfa: “Hepsi aynı elden. Kanıt topla. Müdüre yazılacak. — 2 Mart.”',
+    sourceLabel: 'Arşiv',
+    icon: 'document',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    combinable: false,
+    tags: ['key'],
+  }),
+  clue('clue_zimmet', {
+    type: 'BELGE',
+    title: 'Zimmet defteri: 0401–0450 → Devir-2',
+    shortText: 'Barkodlu zarf destesi 0401–0450, 1 Mart’ta Devir Servisi-2’ye teslim edilmiş.',
+    description:
+      'Arşivdeki evrak zimmet defteri: “01.03.2027 — İç yazışma zarfı, barkod 0401–0450 — teslim alan: Devir Servisi-2 — paraf: S.K.”',
+    sourceLabel: 'Arşiv',
+    icon: 'document',
+    ...cardKey,
+  }),
+  clue('clue_cay_defteri', {
+    type: 'BELGE',
+    title: 'Çay ocağı defteri: “10.40 arşiv — 1 çay”',
+    shortText: '10.40’ta arşive bir çay istenmiş; 10.42’de götürüldüğünde arşiv boşmuş.',
+    description:
+      'Muzaffer Usta’nın sipariş defteri, 12 Mart: “10.40 — arşiv — 1 çay (S.)”. Yanında kurşun kalemle: “boş, masaya bıraktım.”',
+    sourceLabel: 'Muzaffer Usta',
+    icon: 'document',
+    ...cardKey,
+  }),
+];
+
+const insights: EvidenceDef[] = [
+  insight('ded_sure_disi', {
+    type: 'TELEFON_KAYDI',
+    title: 'Süresi bitmiş bir kararla kayıt',
+    shortText: 'Kayıt #14, kararın süresi bittikten yedi gün sonra alınmış. Uzatma yok.',
+    description:
+      'Karar 4 Mart’ta sona erdi; uzatılmadı. 11 Mart’taki “zarf yarın masada” kaydı hiçbir kararın kapsamında değil.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    tags: ['key'],
+  }),
+  insight('ded_hat_disi', {
+    type: 'TELEFON_KAYDI',
+    title: 'Kararda olmayan bir hat',
+    shortText: 'Kayıt #9 sanığın kendi hattından; karar yalnızca Ateşoğlu’nun hattını kapsıyor.',
+    description:
+      'Halil’in 0505’li hattı için hiçbir dinleme kararı yok. “Dosyana bakarım” cümlesi kararsız alınmış bir kayıttan.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    tags: ['key'],
+  }),
+  insight('ded_sahte_cagri', {
+    type: 'TELEFON_KAYDI',
+    title: 'Müdürlük makamından gelmeyen çağrı',
+    shortText: '“Müdür Hanım çağırıyor” çağrısı 201’den değil, Devir-2’nin dahilisi 214’ten geldi.',
+    description:
+      'Halil’i odasından indiren çağrı müdürlük makamından (201) değil, Devir Servisi-2’nin 214’ünden geldi. Biri onu odadan uzaklaştırdı.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    tags: ['key'],
+  }),
+  insight('ded_bos_oda', {
+    type: 'BELGE',
+    title: 'Sahibi yokken açılan çekmece',
+    shortText: 'Kayıt 10.39’da kesildi; polis 10.44’te boş odaya girdi. Zarf, Halil yokken çekmeceye girdi.',
+    description:
+      'Muhbirin kaydı tam teslim dakikasından önce kesildi; polis odaya girdiğinde Halil orada değildi. Zarfın çekmeceye girdiği anda odanın sahibi yoktu.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    tags: ['key'],
+  }),
+  insight('ded_yetkisiz', {
+    type: 'BELGE',
+    title: 'Bekletilemeyecek bir dosya',
+    shortText: 'Muhbir “dosyamı bekletiyordu” diyor; dosya Devir-2’de, kontrol servisine hiç gelmemiş.',
+    description:
+      'İrtikap anlatısının çekirdeği, memurun dosyayı bekletme gücü. Oysa başvuru Devir-2’ye atanmıştı; Halil’in masasına hiç gelmemişti.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    tags: ['key'],
+  }),
+  insight('ded_iki_hikaye', {
+    type: 'TANIK_IFADESI',
+    title: 'İki ifade, iki rol',
+    shortText: 'Önce “zorla istedi”, iki gün sonra “anlaştık”. Biri irtikap, öbürü rüşvet anlatısı.',
+    description:
+      '11 Mart’ta memur parayı zorla istemiş; 13 Mart’ta birlikte anlaşmışlar ve zarf memurun eline verilmiş. İki anlatı birbirini dışlıyor.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'MEDIUM',
+  }),
+  insight('ded_hedef', {
+    type: 'BELGE',
+    title: 'Masasından kaldırılacak adam',
+    shortText: 'Şubattaki kayıtta “masasından kaldırırız”; aynı ay kapısına bir tehdit notu.',
+    description:
+      'Halil on bir dosyayı durdurduğu için hedefti. Hem kararın içindeki kayıt hem kapısına bırakılan not, onu “durdurmak” isteyen birini gösteriyor.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'MEDIUM',
+  }),
+  insight('ded_zarf_kaynagi', {
+    type: 'FIZIKSEL',
+    title: 'Zarf Devir-2’nin destesinden',
+    shortText: 'Barkod 0417, Devir-2’ye zimmetlenen 0401–0450 destesinin içinde.',
+    description:
+      'Çekmecedeki zarf, 1 Mart’ta Devir Servisi-2’ye zimmetle verilen desteden. Kontrol servisinin zarfı değil.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    tags: ['key'],
+  }),
+  insight('ded_tek_kisi', {
+    type: 'TELEFON_KAYDI',
+    title: '214’teki tek masa',
+    shortText: 'Gülay Erdem izindeydi. Sahte çağrı 214’ten geldiyse, onu yapan Sinan Kaplan’dı.',
+    description:
+      '12 Mart’ta Devir-2’de tek bir memur vardı: Sinan Kaplan. Halil’i “müdür çağırıyor” diye odasından indiren arama onun masasından yapıldı.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    tags: ['key'],
+  }),
+  insight('ded_kameradaki', {
+    type: 'FOTOGRAF',
+    title: 'Bilekteki yeşil ekran',
+    shortText: 'Karedeki el ile Sinan’ın bileğindeki akıllı saat aynı yeşil ışıkla yanıyor.',
+    description:
+      '10.41’de kontrol odasının kapısını açan elin bileğindeki yeşil ekran, Sinan Kaplan’ın “adım saydığı” saatle aynı.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'MEDIUM',
+  }),
+  insight('ded_alibi', {
+    type: 'TANIK_IFADESI',
+    title: 'Boş arşive giden çay',
+    shortText: '“Arşivdeydim” diyen memurun ısmarladığı çay, 10.42’de boş bir arşive bırakılmış.',
+    description:
+      'Sinan 10.30–10.50 arşivde olduğunu söylüyor. Ama 10.40’ta arşive istediği çay 10.42’de götürüldüğünde arşivde kimse yoktu.',
+    sourceLabel: 'Çıkarım tahtası',
+    icon: 'bulb',
+    side: 'DEFENSE',
+    strength: 'STRONG',
+    tags: ['key'],
+  }),
+];
+
+export const evidencePart: CasePart = {
+  evidence: [...initial, ...inv1, ...deliveries, ...ara, ...insights],
+  evidenceRelations: [
+    { from: 'ded_sure_disi', to: 'clue_sure', type: 'DERIVED_FROM' },
+    { from: 'ded_sure_disi', to: 'clue_kayit14', type: 'DERIVED_FROM' },
+    { from: 'ded_hat_disi', to: 'clue_hedef_hat', type: 'DERIVED_FROM' },
+    { from: 'ded_hat_disi', to: 'clue_kayit9', type: 'DERIVED_FROM' },
+    { from: 'ded_sahte_cagri', to: 'clue_takvim_214', type: 'DERIVED_FROM' },
+    { from: 'ded_sahte_cagri', to: 'clue_rehber_214', type: 'DERIVED_FROM' },
+    { from: 'ded_bos_oda', to: 'clue_saat_tutanak', type: 'DERIVED_FROM' },
+    { from: 'ded_bos_oda', to: 'clue_kayit_durdu', type: 'DERIVED_FROM' },
+    { from: 'ded_yetkisiz', to: 'clue_dosya_devir2', type: 'DERIVED_FROM' },
+    { from: 'ded_yetkisiz', to: 'clue_ihbar_icbar', type: 'DERIVED_FROM' },
+    { from: 'ded_iki_hikaye', to: 'clue_ihbar_icbar', type: 'DERIVED_FROM' },
+    { from: 'ded_iki_hikaye', to: 'clue_savcilik_anlasma', type: 'DERIVED_FROM' },
+    { from: 'ded_hedef', to: 'clue_inat', type: 'DERIVED_FROM' },
+    { from: 'ded_hedef', to: 'clue_uyari_notu', type: 'DERIVED_FROM' },
+    { from: 'ded_zarf_kaynagi', to: 'clue_barkod', type: 'DERIVED_FROM' },
+    { from: 'ded_zarf_kaynagi', to: 'clue_zimmet', type: 'DERIVED_FROM' },
+    { from: 'ded_tek_kisi', to: 'ded_sahte_cagri', type: 'DERIVED_FROM' },
+    { from: 'ded_tek_kisi', to: 'clue_izin_gulay', type: 'DERIVED_FROM' },
+    { from: 'ded_kameradaki', to: 'clue_kol_saat', type: 'DERIVED_FROM' },
+    { from: 'ded_kameradaki', to: 'clue_sinan_saat', type: 'DERIVED_FROM' },
+    { from: 'ded_alibi', to: 'clue_cay_defteri', type: 'DERIVED_FROM' },
+    { from: 'ded_alibi', to: 'clue_sinan_arsiv', type: 'DERIVED_FROM' },
+    { from: 'ded_sure_disi', to: 'ev_dinleme', type: 'REFUTES' },
+    { from: 'ded_bos_oda', to: 'ev_tutanak', type: 'CONTRADICTS' },
+    { from: 'ded_iki_hikaye', to: 'ev_ihbar', type: 'CONTRADICTS' },
+  ],
+  discoveryPaths: [],
+};

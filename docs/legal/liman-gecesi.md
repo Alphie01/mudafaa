@@ -1,6 +1,6 @@
 # Dava #10 "Liman Gecesi" — Hukuki İnceleme Notları
 
-> Durum: **Onaylandı — Claude (iç inceleme), 2026-10-20; inceleme düzeltmeleri 2026-10-21.** `meta.legalReview = { status: 'APPROVED', by: 'Claude (iç
+> Durum: **Onaylandı — Claude (iç inceleme), 2026-10-20; inceleme düzeltmeleri 2026-10-21 (dördüncü tur dahil).** `meta.legalReview = { status: 'APPROVED', by: 'Claude (iç
 > inceleme)', at: '2026-10-20' }`. Lineup kararı gereği hukuki inceleme yazımda yapılır; aşağıdaki yorum kararları
 > bir avukatın ikinci okumasında öncelikle bakılacak noktalardır.
 
@@ -40,9 +40,10 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
 | CMK 177 | INV_DIL | 2026-10-20 | Duruşma hazırlığında sanığın delil toplanmasını istemesi. |
 | CMK 201/1 | H1_03/H1_05/T_01 itiraz gerekçesi, T_03 | 2026-10-20 | Soru yöneltme; telkin edici soru itirazı (yorum kararı #6). |
 | CMK 206, 217 | H104_B, SV_TUTANAK, gerekçeler | 2026-10-20 | Delil talebinin reddi; vicdani kanaat, hukuka uygun delil. |
-| CMK 215, 216 | T_05 (mütalaa ve cevap), son söz | 2026-10-20 | Her delilden sonra diyecek; mütalaa, cevap, son söz. |
+| CMK 215, 216 | T_05 (mütalaa ve cevap), son söz, T_COKUS | 2026-10-20 | Her delilden sonra diyecek; mütalaa, cevap, son söz. Çöküşte de esas savunma ve son söz alınır (yorum kararı #19). |
 | CMK 223/2-b, 2-e, 8, 9 | Sonuçlar | 2026-10-20 | Beraat türleri; düşme; 223/9 derhâl beraat verilebilecek hâlde düşme verilemez. |
-| CMK 226 | T_04 (ek savunma) | 2026-10-20 | Suçun hukuki niteliğinin değişmesinde ek savunma hakkı ve süre. |
+| CMK 226 | T_04 (ek savunma), T_COKUS | 2026-10-20 | Suçun hukuki niteliğinin değişmesinde ek savunma hakkı ve süre; çöküş yolunda da hatırlatılır. |
+| CMK 289/1-h | T_COKUS gerekçesi (yorum kararı #19) | 2026-10-21 | Hükümde savunma hakkının sınırlandırılmış olması mutlak bozma sebebidir. |
 | CMK 231/3, 141/1-e, 142 | Beraat hükümleri | 2026-10-20 | Hükmün açıklanmasında tazminat hakkı bildirimi. |
 | CMK 272, 273/1 | Hüküm metinleri | 2026-10-20 | İstinaf; tebliğden itibaren iki hafta. |
 | Av.K. 34 | Etik geri bildirimleri, ETIK | 2026-10-20 | Avukatın doğruluk ve özen yükümlülüğü. |
@@ -100,20 +101,22 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
 9. **Gerçek failin kovuşturulması.** Avukat şüpheliyi kovalamaz, yüzleşmez; yetkili makama yazılı bildirir (CMK 158).
    Yüzleşme (ARA_KENAN) TCK 277 riski ve delil karartmaya davet olarak cezalandırılır.
 10. **Ölüm saati ve mide içeriği.** Mide boşalma süresi kesin saat vermez; oyunda bilirkişi yalnızca sıralama (“son
-    öğünden sonra, yarım ila bir buçuk saat”) söyler. Bu tıbbi olarak muhafazakâr bir anlatımdır.
+    öğünden sonraki ilk saatler içinde; sindirimden kesin saat çıkmaz; ama sıralama kesindir”) söyler. Dördüncü turda
+    önceki metindeki “yarım ila bir buçuk saat … büyük olasılıkla gece yarısından önce” çelişkisi (23.34 + 30 dk gece
+    yarısını geçer) kaldırıldı; tıbbi olarak muhafazakâr anlatım budur.
 11. **Hüküm olgulara bağlıdır, esas savunmanın adına değil (inceleme blokeri, 2026-10-21).** Mahkeme müdafiin talebinin
     adıyla bağlı değildir (CMK 225: hüküm iddianamedeki fiil hakkında; vasıf mahkemece belirlenir) ve hükmünü yalnızca
     duruşmaya getirilip tartışılan delile dayandırır (CMK 217/1). Bu yüzden: (a) “dönüş yok” olgusu yalnızca kürsüde
-    kayıtla kurulduğunda sayılır (K1: turnike + banka kaydı karşısında teşhis; ya da N1 + N2: büfecinin saatleri kayıtla
-    sabitlenir) — soruşturmada kurulup sunulmayan çıkarım kayda geçmez; (b) “ölüm sonra” olgusu darbe şeklinin düşmeyi
-    dışlaması (B1) ile ölümün sanığın ayrılışından sonra gelmesinin (B2) birlikte bilirkişiye kabul ettirilmesidir.
+    kayıtla kurulduğunda sayılır (dördüncü turda iki ayaklı: #17) — soruşturmada kurulup sunulmayan çıkarım kayda
+    geçmez; (b) “ölüm sonra” olgusu darbe şeklinin düşmeyi dışlaması (B1), ölümün sanığın ayrılışından sonra gelmesi (B2)
+    ve yaranın cesedin bulunduğu yerde açılmasının (B5) birlikte bilirkişiye kabul ettirilmesidir (dördüncü tur: #18).
     Yalnızca B2 kurulursa düşmeye bağlı kafa travmasında bilinç açıklığı döneminden sonra gelen gecikmiş ölüm
     ihtimali (yumruk → düşme → ölüm) kapanmaz; yalnızca B1 kurulursa darbenin kavga sırasında oluştuğu ihtimali
     kapanmaz. İkisi birlikte kurulduğunda ve dönüş yok olgusu kayıttayken esas savunmada “olası kast kabul edilse bile”
     (T06_D) ya da yalnızca merhamet (T06_X) istenmiş olsa da hüküm CMK 223/2-e beraattir (Anayasa 38/4). 87/4 yalnızca
     dönüş yok kayıttayken ölüm sonra kurulamadığında; 81/1 + 21/2 yalnızca dönüş yok kurulamadığında verilir.
     223/2-b (“işlemediği sabit”) ayrıca gerçek fail olgusunu (suç duyurusu, araç/abone/kit kaydı) ister ve bilirkişi
-    olguları (B1 + B2) olmadan verilmez.
+    olguları olmadan verilmez. 223/2-b ile 2-e arasındaki seçim de yalnızca bu olgulara bakar; skor eşiği yoktur (#20).
 12. **Eşin tanıklığı.** İkinci celsede başkan, sanığın eşi Gülay Demirel'e tanıklıktan çekinebileceğini (CMK 45/1-b,
     45/3) ve yeminsiz dinlenmeyi isteyebileceğini (CMK 50–51 çerçevesinde mahkemenin takdiri) hatırlatır; ana yolda bu
     hatırlatma artık atlanmaz.
@@ -130,12 +133,54 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
     aynı saat ve tutar) birlikte gösterildiğinde fiilen imkânsızlaşır. Tek bir kayıt (yalnız turnike: “başka kapıdan
     girmiştir”; yalnız banka: “kartını başkasına vermiştir”; büfecinin soruşturmadaki anlatımı: ilk celsede kayıtta değil)
     kısmi isabet sayılır. N1'de 23.37 ödemenin saatidir, gelişin değil; “on bire doğru, belki daha erken” beyanını 23.18
-    çıkış kaydı düzeltir. Bu, beraat için gereken olgunun içeriğini değiştirmez (K1 ∨ N1 + N2), yalnızca hangi kanıtla
-    kurulduğunu belirler; tam kayıtla mahkûmiyet ya da 87/4 sonucu yoktur.
+    çıkış kaydı düzeltir. Dördüncü turda teşhisin ikinci ayağı eklendi (#17); kayıt bütünlüğü kuralı saat ayağının
+    içeriğidir.
 16. **Bilirkişinin duruşmada dinlenmesi.** CMK 68/1 mahkemeye resen dinleme yetkisi de verir; oyun mahkemenin bu dosyada
     raporu okumakla yetindiğini (CMK 214/1), uzmanı ancak müdafi ilk celsede (TL_ATK) ya da arada ek dilekçeyle (EK_ATK)
     isterse çağırdığını varsayar. Bu bir takdir varsayımıdır; uzman dinlenmezse ölüm sonra kurulamaz ve hüküm dönüş yok
     kayıttaysa 87/4'tür (savunmanın usul eksikliğinin sonucu).
+
+17. **Teşhisin iki ayağı (dördüncü tur, 2026-10-21).** Bir görgü tanığının teşhisi iki şeye dayanır: gördüğü **an** ve
+    gördüğü **yüz**. K1 (turnike 23.18 çıkış + büfe 23.37) tanığın yeminle kesinleştirdiği 23.40'ı imkânsız kılar; ama
+    saatini “belki daha geçti” diye esneten bir tanığın teşhisi, sanığın gece yarısından sonra dönmüş olabileceği bir
+    aralık bıraktığı için ayakta kalabilir (oyunda Kenan bunu kürsüde yapar). Teşhisi düşüren ikinci ayak ya görmenin
+    imkânsızlığıdır (K2: projektörlerin bakımda olduğu, tanığın “gündüz gibiydi” iddiasına karşı; tanık “yürüyüşünden
+    tanırım”a çekilir, bu da saat ayağı çürütülünce değersizleşir) ya da sanığın gece yarısına kadar iskelede olduğunun
+    yeminli tanıkla kayda geçmesidir (N2). **Kural:** donus_yok = (K1 ∨ N1) ∧ (K2 ∨ N2). Her iki ayak kayıttayken 81/1
+    hükmü verilemez; yalnız biri kayıttayken MAHKUMIYET gerekçesi, teşhisin hangi ayakta ayakta kaldığını açıkça yazar
+    (“saat konusunda yanılmış olabileceğini kabul etmiş, ancak yüzünden tanıdığını sürdürmüştür” / “aydınlatma kapalı
+    olsa da yürüyüşünden tanıdığını ve gördüğü saati sürdürmüştür”). Bu bir **yorum kararıdır**: katı bir mahkeme yalnız
+    K1'le de (23.40 imkânsız) teşhisi değersiz bulabilir. Oyun, tanığın saatini esnettiği kürsü anını kayda geçirerek
+    ikinci ayağı zorunlu kılar; K2'nin kaydı (bakım etiketi) dosyadaki olay yeri fotoğrafıdır, tanığın ofisteki sözü
+    (ded_isik) zorunlu değildir — kürsüde önce tanığın ışık iddiası kesinleştirilir (BASTIR), sonra fotoğraf gösterilir.
+18. **Yedek tezin üç adımı ve B5 (dördüncü tur).** Savcılığın 87/4 yedek tezi “yumruk → babaya düşme → birkaç adım
+    (bilinç açıklığı) → ölüm”dür. (i) **B1 iki ayaklıdır:** histopatolojide karşı darbe lezyonunun yokluğu, oturur hâlde
+    kısa mesafeden babanın köşesine çarpmayı tek başına dışlamaz (karşı darbe zayıf kalabilir); babanın gövdesindeki kanın
+    oturma hizasında olması ve tepesinde doku/saç olmaması başın babaya çarpmadığını gösterir. İkisi birlikte düşmeyi
+    dışlar. (ii) **B2** ölümü son öğünden (23.34, kayıtta) sonraya koyar. (iii) **B5:** açık çökme kırığında kafa derisi
+    bol kanar; rıhtımdan B sahasına on dört karede kan olmaması, cesedin yanındaki topuk sürüklenme izi ve çift lastikli
+    bir aracın dönüş izi, yaralının oraya yürümediğini ve yaranın bulunduğu yerde açıldığını gösterir; bilinç açıklığı
+    tezi dayanaksız kalır. Bilirkişi kimin vurduğunu söylemez (“o zaman maktulü oraya biri götürmüştür”). **Kural:**
+    olum_sonra = B1 ∧ B2 ∧ B5. B1 + B2 kurulup B5 kurulamazsa NITELIK gerekçesi “yaralının kavga yerinden bir bilinç
+    açıklığı döneminde yürüdüğü ihtimali kayıtla dışlanmamıştır; kuşku sanık lehine en hafif nitelikte (87/4)” der.
+    Bu da bir yorum kararıdır (tıbbi anlatım muhafazakâr tutuldu: “beklenmez / söz edemem”, kesinlik iddiası yok).
+19. **Çöküş ve savunma hakkı (dördüncü tur).** Eski çöküş düğümü esas hakkında savunmayı atlıyordu; bu CMK 216'ya aykırı
+    ve mutlak bozma sebebidir (savunma hakkının kısıtlanması, CMK 289/1-h). Yeni T_COKUS: heyet ilgisiz sunumlar nedeniyle
+    tanık sorgusunu sona erdirir (sorgu yönetimi başkanın takdirindedir), suçun niteliğinin değişebileceğini hatırlatır
+    (CMK 226), mütalaa alınır, müdafi kısa esas savunmasını yapar ve sanığa son söz verilir (CMK 216/3); hüküm, çöküşten
+    önce duruşmada tartışılmış delillere dayanır (BERAAT_E gerekçesinde ayrı satır). İlk celsede güvenilirlik biterse
+    hüküm kurulmaz: heyet yalnızca o tanığın sorgusunu keser, celse ara kararlar ve tutuklulukla sürer (H1_COKUS).
+    Etik dalı (yalan saat öğüdü) çöküşte de eşin ikinci celsedeki beyanına (T_03E) gider; ETIK sonucu yalnız orada açığa
+    çıkan öğüde dayanır.
+20. **223/2-b ile 2-e arasındaki seçim (dördüncü tur, inceleme blokeri).** Önceki sürüm 223/2-b için `final ≥ 10.000`
+    ve `ikna ≥ 8` istiyordu; gerçek fail olgusu kayıtta ve savcılığa bildirilmiş olsa bile skor düşükse hüküm 2-e
+    oluyordu. Beraatin hukuki dayanağı skora bağlanamaz; eşik kaldırıldı. BERAAT_B = ¬çöküş ∧ gerçek fail ∧ dönüş yok ∧
+    ölüm sonra. Skor yalnızca XP'ye ve nota yansır. G1_AZ golden path'i (final 8.625) bunu doğrular.
+21. **Kenan'ın saati.** Kürsü ve görüşme metinlerinde “on bire yirmi var” (22.40) yazıyordu; kolluk ifadesi, kronoloji ve
+    bütün gerekçeler 23.40 der. “On ikiye yirmi var” olarak düzeltildi (aksi hâlde K1'in kayıtla çelişkisi kurulamazdı:
+    22.40'ta sanık limandaydı).
+22. **Celse günleri.** Birinci celseye soruşturmanın 4. gününün, ikinciye aranın 3. gününün eylem puanları kullanıldıktan
+    sonra gidilir (EP harcanacak yer kalmadıysa hemen). Bu bir oyun zamanı kuralıdır, hükme etkisi yoktur.
 
 ## 5. Hassas konu denetimi
 

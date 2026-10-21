@@ -234,3 +234,11 @@ T_COKUS (♥0) → T_09
   kurulabilir.
 - Akşam sahneleri (INV_AKSAM1–3, ARA_AKSAM1–2) kısa seçimlerle biter; “Devam” düğmesi yerine bir karar.
 - Epiloglar `OutcomeDef.epilogue` olarak yazıldı: ETIK, BERAAT_B, BERAAT_E, NITELIK (87/4 + 29), MAHKUMIYET (çöküş notuyla).
+- **Dördüncü tur (2026-10-21) sahne değişiklikleri.** H1_05: Kenan'ın teşhisi iki ayakla düşer — saati kayıtla
+  çürütülünce “saat yanılır, göz yanılmaz” diye yüze, ışığı çürütülünce “yürüyüşünden tanırım” diye yürüyüşe tutunur;
+  ikisi birlikte “belki yanılmışımdır”. INV_KENAN'da ışık ayrı bir soru (KN_ISIK: direk, yirmi metre, omzu önde bir
+  yürüyüş). T_01: Karaca'nın “düşmeyle de oluşabilir”i iki kâğıtla (karşı darbe yok + babada iz yok) kapanır; savcının
+  yedeği (“kişi bir süre ayakta kalabilir”) yeni B5 ifadesi olur ve rıhtımdan B sahasına kansız on dört kareyle düşer:
+  “Kendi ayağıyla gitmemiştir.” Leyla iki dersi verir (teşhisin iki ayağı; yedek tezin üç adımı), Dr. Beyaz baba ve kan
+  yolunu not ettirir. Çöküş artık savunmayı kesmez, kısaltır: ek savunma hatırlatması, mütalaa, kısa esas savunma, son söz.
+  NITELIK epiloğuna bir ay sonraki cezaevi görüşmesi eklendi (“tutanağa geçmeyeni istinaf göremez”).

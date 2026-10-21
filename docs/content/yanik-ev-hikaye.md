@@ -111,8 +111,13 @@ ARA_GIRIS_1 (tahliye ya da ring aracı) → ARA_GIRIS → ARA_HUB (2 gün × 3 E
 ARA_SON_1…3 → T_00K → T_00 raporlar → T_01 bekçinin dinlenmesi → T_02 itiraz → T_03 Tarık (U1–U5) → T_03K kırılma
   → T_04 kısa ara (cs_3) → T_05 ek savunma (TCK 171'e hatırlatma) → T_05M mütalaa + cevap → T_06P dayanaklar
   → T_06 esas savunma → T_07 son söz → T_08 hüküm → R_KARAR (sonuç başına epilog)
-T_COKUS (güvenilirlik 0) → T_08
+T_COKUS (güvenilirlik 0) → 1. celsede T_08; 2. celsede T_COKUS_D → kalınan aşama (T_04 / T_05M / T_06P / T_06 / T_07)
 ```
+
+Duruşma tarihleri sabittir: 1. celseye hub'dan ancak son günün işleri bitince (eylem puanı kalmadı ya da yapılacak etkinlik
+kalmadı) gidilir; 2. celseye de aranın son günü bitince ve Leyla'yla o gün konuşulduktan sonra. Delil dilekçesi son gün,
+Leyla taslağı okuduktan sonra yazılır. Bekçiye sabah sorusu ancak raporun eki (numune kaynağı) ve sabah fotoğrafı görüldükten
+sonra akla gelir; ilk ziyarette sorulamadıysa bir EP'yle yeniden uğranır (A_CEVDET2).
 
 Celseler: `cs_1` (14 Nisan), `cs_2` (5 Mayıs sabah: raporlar, bekçi, eksper), `cs_3` (5 Mayıs öğleden sonra: ek savunma,
 mütalaa, savunma, son söz, karar). Zorluk 5: son celse iki oturuma bölünmüştür.
@@ -136,13 +141,13 @@ mütalaa, savunma, son söz, karar). Zorluk 5: son celse iki oturuma bölünmü�
 - Bir polis kimlik ister; cüzdandan bir fiş düşer: "12 Ocak, kurşunsuz benzin, 5 litre, bidon." Polis fişi çevirir, bir
   meslektaşına gösterir. Kimse Halil'e bir şey sormaz; sormaya gerek görmezler.
 - Halil: "Jeneratör için…" — cümlesini kimse duymaz.
-- Bulanık bir satır (saat ve kişi yok): "Sabah boyunca şeridin önünden komşular geçti… Bekçi defterine bir şeyler yazdı;
-  bekçiler hep bir şeyler yazar." Eski metin ("dokuzu yirmi geçe… o satırı aylarca kimse okumadı") çözümü işaret ettiği için kaldırıldı.
-  Kimse o satırı aylarca okumadı." (Ekilen ipucu 2; isim yok.)
+- Bulanık bir satır (saat ve kişi yok): "Sabah boyunca şeridin önünden komşular geçti… Bekçi şeridin başında, ellerini koltuk
+  altına sokmuş bekliyordu." Yalnızca atmosfer; defter anılmaz (ikinci inceleme: "bekçiler hep bir şeyler yazar" defteri işaret
+  ediyordu). Eski metin ("dokuzu yirmi geçe… o satırı aylarca kimse okumadı") çözümü işaret ettiği için daha önce kaldırılmıştı.
 - `card`: "YİRMİ GÜN SONRA TUTUKLANDI. İDDİANAME MARTTA GELDİ. BİRİNCİ CELSEYE ON BİR GÜN VAR."
 
 ### BR_00 — Zehra (~750) · bg: buro_gece
-- `card`: "3 NİSAN · PERŞEMBE 22.15 — ARSLAN HUKUK, BURSA". Deniz (thought): "Bursa'da nisan yağmuru iki şey getirir:
+- `card`: "3 NİSAN 2026 · CUMA 22.15 — ARSLAN HUKUK, BURSA". Deniz (thought): "Bursa'da nisan yağmuru iki şey getirir:
   çamur ve gecikmiş vicdanlar."
 - Zehra nöbetten çıkıp gelir; üniforma ceketinin altında, ellerinde dezenfektan kokusu. Önceki avukat "dosya kötü"
   diyerek bırakmış. İddianameyi masaya koyar: poliçe, artış, eşyalar, benzin, borç.
@@ -258,9 +263,11 @@ mütalaa, savunma, son söz, karar). Zorluk 5: son celse iki oturuma bölünmü�
 - **MAHKUMIYET:** Ring aracı; Zehra bir hemşire soğukkanlılığıyla ağlamamaya çalışır. Bidon bulunmadıysa: "Kimse bakmadı; ben
   de bakmadım." Bulunduysa: "İplikleri gevşettim ama halatın ucundaki rapora dokunamadım." Çöküşte ayrı, tek bir blok (tek
   "Türk Milleti adına"): savcının "yanlış tanığa, yanlış anda" cümlesi.
-- **ETIK (iki yüz):** Onur'un eksperi koridorda ifade imzalar; Leyla masaya meslek kuralları kitapçığını bırakır. Mahkeme
-  ısmarlama mütalaayı hükme esas almaz ve Halil'i kalan delillere göre yargılar: numune zinciri kurulmamışsa mahkûmiyet (ETIK),
-  kurulmuşsa taksir (ETIK_T; Halil: "Kundakçı değilmişim. Bunu bir bekçinin defteri söyledi; o satın aldığınız kâğıt değil.").
+- **ETIK (üç yüz):** Onur'un eksperi koridorda ifade imzalar; Leyla masaya meslek kuralları kitapçığını bırakır. Mahkeme
+  ısmarlama mütalaayı hükme esas almaz ve Halil'i yalnızca kalan delillere göre yargılar: numune zinciri kurulmamışsa mahkûmiyet
+  (ETIK); kurulmuş ve kalan kayıt beraati taşıyorsa beraat (ETIK_E; Halil: "Beraat etmişim. Bunu bir bekçinin defteri söyledi,
+  bir ustanın notu söyledi; o satın aldığınız kâğıt değil." Deniz: "Gerçek yetiyordu."); taksir sorusu cevapsız kaldıysa taksir
+  (ETIK_T). Her üçünde müdafi baroya bildirilir; bedeli avukat öder, müvekkil değil.
 
 ## 6. Ters köşeler ve hazırlığı
 

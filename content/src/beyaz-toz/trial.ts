@@ -1508,7 +1508,11 @@ export const trial: CasePart = {
             ),
             s(
               'savci',
-              'Arka oda sanığa bağlanamadığına göre oradaki materyal satıcının kim olduğu hakkında bir şey söylemiyor. Geriye muhbirin beyanı kalıyor: etkin pişmanlık beklentisiyle verilmiş, kimlik yönünden başka bir delille desteklenmeyen tek bir beyan.',
+              'Arka oda sanığa bağlanamadığına göre oradaki materyal satıcının kim olduğu hakkında bir şey söylemiyor.',
+            ),
+            s(
+              'savci',
+              'Geriye muhbirin beyanı kalıyor: etkin pişmanlık beklentisiyle verilmiş, kimlik yönünden başka bir delille desteklenmeyen tek bir beyan.',
             ),
             s(
               'savci',

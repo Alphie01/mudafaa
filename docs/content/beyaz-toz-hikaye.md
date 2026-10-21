@@ -71,7 +71,7 @@
 | 24 ve 28 Eylül | Kaan, Barış'tan iki kez kullanmak için alır ("akşam 2 tane bırakır mısın"). | Mesaj dökümü (iki yüzlü delil), Kaan'ın itirafı (yüksek güven) |
 | 3 Ekim | Kaan bir partide fenalaşır; Defne onu acile götürür. | Defne, hastane epikrizi |
 | 10 Ekim | Kaan AMATEM'de ayaktan tedaviye başlar; 31 Ekim idrar testi negatif. | Randevu kartı (fotoğraf), tedavi kayıtları |
-| 9 Kasım 23.00 | Tolga, binanın önünde Barış'tan bir paket alır; 300 m ötede devriyeye takılır. Kaan o saatte kafede kasa kapatıyordur (Z raporu 23.41). | Tolga'nın ifadesi, Z raporu (ara evre) |
+| 9 Kasım 23.00 | Tolga, binanın önünde Barış'tan bir paket alır; 300 m ötede devriyeye takılır. Kaan o saatte kafede kasa başındadır (Z raporu: 22.44–23.18 arası beş satış, 22.53 ve 23.02 kartlı; kapanış 23.41). | Tolga'nın ifadesi, Z raporu (ara evre) |
 | 10 Kasım 01.30 | Tolga ifadesinde "Daire 7'den, Kaan'dan aldım" der; ama "kapıyı açanın elinde kask vardı" diye bir ayrıntı kaçırır. | Tolga'nın ifadesi (belge incelemesi) |
 | 10 Kasım 14.15 | Sulh ceza hâkimliği arama kararı verir: "şüphelinin kullanımındaki oda, ortak alanlar ve üzeri"; 48 saat. | Arama kararı (belge incelemesi) |
 | 10 Kasım 22.40 | Barış, Kaan'a yazar: "bu gece geç gelirim, odaya girme sakın". | Mesaj dökümü |
@@ -204,7 +204,8 @@ ifadesi (kask, saat).
 - ARA_SELIM (~600, bg: kafe — kurye durağı): Barış'ın gerçek adı soyadı, astarını kendi diktiği çanta, "Tolga diye biri
   sık uğrardı", 12 Kasım sabahı gelen "abi ben bırakıyorum" mesajı.
 - ARA_GPS (belge): Paketçi kayıtları (istenmişse): 07.16 Ihlamur Sok. "teslimat iptal"; ayrılış 12 Kasım; İzmir adresi.
-- ARA_ZRAPOR (belge): Kahve Durağı Z raporu, kasa kapanışı 23.41 — Tolga'nın "23.00, Kaan sattı" anlatısının altı oyulur.
+- ARA_ZRAPOR (belge): Kahve Durağı Z raporu: 22.44–23.18 arası beş satış Kaan'ın koduyla (22.53 ve 23.02 kartlı, banka
+  slipli, garson paraflı), kasa kapanışı 23.41 — kafe kapıya on beş dakika; Tolga'nın "23.00, Kaan sattı" anlatısının altı oyulur.
 - ARA_UZMAN (~450, Uludağ Üniversitesi) ve ARA_MUTALAA (belge, ikinci gün): Deniz kriminal raporun hiç açılmamış
   eklerini Doç. Dr. Aylin Korkmaz'a götürür; ısı çizgisini, baskı numaralarını ve kromatogramları sorar (üçü birden;
   “müvekkilim koymadı diye yazın” isteği reddedilir, CMK 67/3). Ertesi sabah dokuz sayfalık mütalaa: arka oda rulosunda
@@ -287,3 +288,24 @@ Yazım sırasında tempo ve süre bütçesi için hikâyeye şu vuruşlar eklend
 - **ARA_UZMAN / ARA_MUTALAA** (2026-10-21 yeniden dengeleme): şekerliğin “aynı stok” tespiti birinci evrede değil, ara
   evrede savunmanın aldığı bilimsel mütalaayla kurulur; ara evre böylece her beraatin ihtiyaç duyduğu bir bulgu üretir
   (şekerlik ya da muhbirin dönüşü için Z raporu / Selim / iz karşılaştırması).
+
+## Revizyon notu — 2026-10-21 (ikinci şeytanın avukatı incelemesi)
+
+- **Soğuk açılış nötr kaldı:** muhbirin adı söylemeden önceki anlatı artık yalnızca eylemi gösterir: “Siluet yutkundu.
+  Yağmur bir an dindi gibi oldu. Sonra konuştu.” Muhbirin bir isim *seçtiğine* dair her yargı (kolluk ifadesinin “bir
+  isim vermek” geri bildirimi, T_02'deki iç ses) T_03 çelişkilerinden sonraya bırakıldı; T_02'de Deniz yalnızca “o
+  ismin doğru olup olmadığını bugün onun kendi sözleri gösterecek” der.
+- **Mazeret penceresi:** Z raporu satış dökümünü gösterir (yukarıda); 23.00 satışı için kasadan otuz dakika ayrılmak
+  gerekir, kasada dokuz dakikadan uzun boşluk yoktur.
+- **Küsen ev sahibi:** NS_BASKI ile korkutulan Nesrin ara evrede de kapısını çalan Deniz'e zincirin arkasından konuşur
+  (NS2_OZUR / NS2_HABER): bilgi vermez, defteri getirmez; bir özür, bir keski sesi anısı. Tanığı sıkıştırmanın bedeli
+  sahnede görünür.
+- **Okan'ın yeri:** sahte tanık muhbirin doğrudan dinlenmesinden sonra kürsüye çıkar; skandaldan sonra Deniz muhbire
+  soru sormaktan kendisi vazgeçer (“Sorum yok, Sayın Başkan”). Okan'ın salondaki satırları telefon değil, düz konuşmadır.
+- **Zorunlu sahneler:** her celseden önceki akşam Leyla'yla dosyaya son bakış (INV_LEYLA 3. gün, ARA_LEYLA 2. gün); son
+  günler eylem puanı bitene (ya da yapılacak iş kalmayana) kadar sürer; ziyaretler boş geçilmez (belge, sahne ve
+  konuşmalarda en az iki inceleme/soru); çapraz sorgularda her beyan en az bir kez bastırılır. Ayrıntı ve ölçümler:
+  `docs/content/beyaz-toz.md` §12.
+- **Çöküş:** güvenilirliğin tükenmesi duruşmayı kısa keser ama hükmü değiştirmez; kayıt 191'e elverişliyse başkan ek
+  savunma hatırlatmasını kendisi yapar, Kaan “Kullandım. Söyledim. Ama satmadım.” der.
+

@@ -174,7 +174,7 @@ const evGiris = decisionNode('INV_EV_G', [{ to: 'INV_ARAMA2' }], {
   ...INV,
   title: 'Aktaşların evi',
   lines: B(`
-# ÇARŞAMBA 16.30 — NİLÜFER, AKTAŞLARIN EVİ [bg:ev]
+# NİLÜFER, AKTAŞLARIN EVİ · 16.30 [bg:ev]
 > Kapıyı Gül açtı; okul önlüğü hâlâ üstündeydi, cebinde bir tebeşir. İçeriden çizgi film sesi.
 gul: Gelin avukat hanım. Selim pazara çıktı; Defne’yle. İyi oldu, belki. Siz rahat bakarsınız.
 > İki oda bir salon. Duvarda bir düğün fotoğrafı, vitrinde birkaç kupa, salonun köşesinde bir çalışma masası. Masanın ortası boş: dizüstünün yeri.
@@ -206,7 +206,7 @@ const kapiGiris = decisionNode('INV_KAPI_G', [{ to: 'INV_ARAMA3' }], {
   ...INV,
   title: 'Fabrika kapısı',
   lines: B(`
-# SALI 23.20 — ORGANİZE SANAYİ, NİLÜFER ÖRME KAPISI [bg:depo_gece]
+# ORGANİZE SANAYİ, NİLÜFER ÖRME KAPISI · 23.20 [bg:depo_gece]
 > Gece vardiyasının son servisi kapıdan çıktı; arka camında “Allah korusun” yazan bir çıkartma. Sonra sokak boşaldı.
 > Kulübenin ışığı yanıyordu. Yaşar Usta camı araladı; bu kez daha geniş.
 yasar: Geldin mi kızım? Gece gel demiştim, geldin. İçeri alamam; içerisi şirketin. Ama buradan bakabilirsin. Kapı herkesin.
@@ -328,8 +328,8 @@ const log = documentExam('INV_LOG', {
     }),
   ],
   miss: fallback('FB_LOG', 'EXAMINE', {
-    score: { DELIL_ANALIZI: -20 },
-    feedback: { title: 'SONUÇ YOK', text: 'Bu aletle burada bir şey görünmüyor.', label: '−20 SKOR', tone: 'error' },
+    score: { DELIL_ANALIZI: -50 },
+    feedback: { title: 'SONUÇ YOK', text: 'Bu aletle burada bir şey görünmüyor.', label: '−50 SKOR', tone: 'error' },
   }),
   finish: { id: 'LOG_BITIR' },
 });
@@ -422,8 +422,8 @@ const imaj = documentExam('INV_IMAJ', {
     }),
   ],
   miss: fallback('FB_IMAJ', 'EXAMINE', {
-    score: { DELIL_ANALIZI: -20 },
-    feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bu aletle bir şey çıkmadı.', label: '−20 SKOR', tone: 'error' },
+    score: { DELIL_ANALIZI: -50 },
+    feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bu aletle bir şey çıkmadı.', label: '−50 SKOR', tone: 'error' },
   }),
   finish: { id: 'IMAJ_BITIR' },
 });
@@ -500,8 +500,8 @@ const emn = documentExam('INV_EMN', {
     }),
   ],
   miss: fallback('FB_EMN', 'EXAMINE', {
-    score: { DELIL_ANALIZI: -20 },
-    feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bu aletle bir şey çıkmadı.', label: '−20 SKOR', tone: 'error' },
+    score: { DELIL_ANALIZI: -50 },
+    feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bu aletle bir şey çıkmadı.', label: '−50 SKOR', tone: 'error' },
   }),
   finish: { id: 'EMN_BITIR' },
 });
@@ -580,8 +580,8 @@ const devir = documentExam('INV_DEVIR', {
     }),
   ],
   miss: fallback('FB_DEVIR', 'EXAMINE', {
-    score: { DELIL_ANALIZI: -20 },
-    feedback: { title: 'SONUÇ YOK', text: 'Bu maddede bu aletle bir şey çıkmadı.', label: '−20 SKOR', tone: 'error' },
+    score: { DELIL_ANALIZI: -50 },
+    feedback: { title: 'SONUÇ YOK', text: 'Bu maddede bu aletle bir şey çıkmadı.', label: '−50 SKOR', tone: 'error' },
   }),
   finish: { id: 'DEVIR_BITIR' },
 });
@@ -650,8 +650,8 @@ export const tamDoc = (id: string, chapterSpread: typeof INV, returnTo?: string)
         }),
       ],
       miss: fallback(`${id}_FB`, 'EXAMINE', {
-        score: { DELIL_ANALIZI: -20 },
-        feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bu aletle bir şey yok.', label: '−20 SKOR', tone: 'error' },
+        score: { DELIL_ANALIZI: -50 },
+        feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bu aletle bir şey yok.', label: '−50 SKOR', tone: 'error' },
       }),
       finish: { id: `${id}_BITIR` },
     }),
@@ -692,7 +692,7 @@ const dil = story('INV_DIL', {
       category: 'USUL_BILGISI',
       next: '$stay',
     }),
-    option('DIL_BILIRKISI', 'Mahkemece bilirkişi atanması; orijinal disklerin muhafazası', {
+    option('DIL_BILIRKISI', 'Bilirkişi; orijinal diskler mühürlensin', {
       visibleWhen: any(has('clue_hash'), has('clue_kurtarma'), has('clue_hakan'), flag('fact_uzman')),
       cost: slotCost,
       maxUses: 1,
@@ -718,6 +718,15 @@ const dil = story('INV_DIL', {
       score: { USUL_BILGISI: -40 },
       effects: [raise('dil_any')],
       bad: 'Kapsamı belirsiz, olayla ilişkisi gösterilmemiş talep reddedilir; üçüncü kişilerin özel hayatı ve ticari sırlar da gözetilir. Bir talep hakkı boşa gitti.',
+      category: 'USUL_BILGISI',
+      next: '$stay',
+    }),
+    option('DIL_HTS', 'Sanığın son bir yıllık bütün HTS ve baz kayıtlarının operatörden celbi', {
+      cost: slotCost,
+      maxUses: 1,
+      score: { USUL_BILGISI: -40 },
+      effects: [raise('dil_any')],
+      bad: 'Sanığın kendi iletişim kayıtları, silmenin hangi hattan yapıldığını göstermez; bir yıllık geriye dönük iletişim tespiti ölçüsüzdür ve olayla bağı kurulmamıştır. Bir talep hakkı boşa gitti.',
       category: 'USUL_BILGISI',
       next: '$stay',
     }),

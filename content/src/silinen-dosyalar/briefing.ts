@@ -124,7 +124,7 @@ yasar: Hayırdır kızım? Servis mi bekliyon? Bu saatte servis yok, gitti.
 - Servis beklemiyorum amca. Avukatım.
 yasar: Avukat. Hı. Kimin avukatı?
 - Selim Aktaş’ın.
-> Yaşlı adam bir an durdu. Çaydanlığın kapağını kapattı. Gözleri bir an fabrikanın idari binasına, sıra sıra ışıklı pencerelere kaydı; sonra yine çaydanlığa döndü.
+> Yaşlı adam bir an durdu. Çaydanlığın kapağını kapattı. Gözleri bir an kulübenin duvarındaki saate kaydı; sonra yine çaydanlığa döndü.
 yasar: Selim iyi çocuktur. Gece vardiyasında bilgisayar bozulunca gelirdi, bana da simit getirirdi. Ama ben bir şey bilmem kızım. Ben kapıdayım. Kapıda olan bir şey bilmez.
 > Camı kapattı. Sonra yeniden açtı, bir parmak.
 yasar: Çay içersen içer. Sonra. Şimdi müdürler gelecek.

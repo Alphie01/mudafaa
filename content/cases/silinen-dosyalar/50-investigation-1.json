@@ -583,7 +583,7 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "ÇARŞAMBA 16.30 — NİLÜFER, AKTAŞLARIN EVİ", "style": "card", "bg": "ev" },
+            { "speaker": "narrator", "text": "NİLÜFER, AKTAŞLARIN EVİ · 16.30", "style": "card", "bg": "ev" },
             {
               "speaker": "narrator",
               "text": "Kapıyı Gül açtı; okul önlüğü hâlâ üstündeydi, cebinde bir tebeşir. İçeriden çizgi film sesi."
@@ -657,7 +657,7 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "SALI 23.20 — ORGANİZE SANAYİ, NİLÜFER ÖRME KAPISI",
+              "text": "ORGANİZE SANAYİ, NİLÜFER ÖRME KAPISI · 23.20",
               "style": "card",
               "bg": "depo_gece"
             },
@@ -866,10 +866,10 @@
           "feedback": {
             "title": "SONUÇ YOK",
             "text": "Bu aletle burada bir şey görünmüyor.",
-            "label": "−20 SKOR",
+            "label": "−50 SKOR",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
         },
         { "id": "LOG_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
       ]
@@ -1032,10 +1032,10 @@
           "feedback": {
             "title": "SONUÇ YOK",
             "text": "Bu satırda bu aletle bir şey çıkmadı.",
-            "label": "−20 SKOR",
+            "label": "−50 SKOR",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
         },
         { "id": "IMAJ_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
       ]
@@ -1156,10 +1156,10 @@
           "feedback": {
             "title": "SONUÇ YOK",
             "text": "Bu satırda bu aletle bir şey çıkmadı.",
-            "label": "−20 SKOR",
+            "label": "−50 SKOR",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
         },
         { "id": "EMN_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
       ]
@@ -1288,10 +1288,10 @@
           "feedback": {
             "title": "SONUÇ YOK",
             "text": "Bu maddede bu aletle bir şey çıkmadı.",
-            "label": "−20 SKOR",
+            "label": "−50 SKOR",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
         },
         { "id": "DEVIR_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
       ]
@@ -1407,10 +1407,10 @@
           "feedback": {
             "title": "SONUÇ YOK",
             "text": "Bu satırda bu aletle bir şey yok.",
-            "label": "−20 SKOR",
+            "label": "−50 SKOR",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
         },
         { "id": "INV_TAM_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
       ]
@@ -1473,7 +1473,7 @@
         {
           "id": "DIL_BILIRKISI",
           "kind": "OPTION",
-          "label": "Mahkemece bilirkişi atanması; orijinal disklerin muhafazası",
+          "label": "Bilirkişi; orijinal diskler mühürlensin",
           "visibleWhen": {
             "any": [
               { "hasEvidence": "clue_hash" },
@@ -1531,6 +1531,23 @@
           "quality": {
             "q": "BAD",
             "feedback": "Kapsamı belirsiz, olayla ilişkisi gösterilmemiş talep reddedilir; üçüncü kişilerin özel hayatı ve ticari sırlar da gözetilir. Bir talep hakkı boşa gitti.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_HTS",
+          "kind": "OPTION",
+          "label": "Sanığın son bir yıllık bütün HTS ve baz kayıtlarının operatörden celbi",
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "maxUses": 1,
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -40 },
+            { "type": "VAR", "var": "dil_any", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Sanığın kendi iletişim kayıtları, silmenin hangi hattan yapıldığını göstermez; bir yıllık geriye dönük iletişim tespiti ölçüsüzdür ve olayla bağı kurulmamıştır. Bir talep hakkı boşa gitti.",
             "category": "USUL_BILGISI"
           }
         },

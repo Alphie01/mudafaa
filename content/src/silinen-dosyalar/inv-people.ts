@@ -44,7 +44,7 @@ const gorusmeGiris = decisionNode('INV_GORUSME_G_1', [{ to: 'INV_GORUSME' }], {
     W(
       cmp({ visits: 'INV_GORUSME' }, '==', 0),
       `
-# SALI 18.10 — NİLÜFER, AKTAŞLARIN BALKONU [bg:ev]
+# NİLÜFER, AKTAŞLARIN BALKONU · 18.10 [bg:ev]
 > Üçüncü kat. Balkon dar; iki plastik sandalye, bir saksıda kurumuş bir fesleğen, kenarı yanık bir kül tablası.
 > Selim beni balkonda karşıladı. İçeri davet etmedi. “Defne ödev yapıyor” dedi; sanki ödev yapan bir çocuğun yanında bu dosya konuşulamazmış gibi.
 > Otuzlarının ortasında, ince, gözlüklü. Saçları kısa ve düzgün; sakalı üç gündür kesilmemiş. Ellerini nereye koyacağını bilmiyordu; sonunda bir sigara yaktı.
@@ -328,7 +328,7 @@ const tYasar = conversation('INV_T_YASAR', {
   background: 'depo_gece',
   room: { label: 'FABRİKA KAPISI · KULÜBE', character: 'yasar' },
   lines: B(`
-# ÇARŞAMBA 22.40 — NİLÜFER ÖRME, BEKÇİ KULÜBESİ [bg:depo_gece]
+# NİLÜFER ÖRME, BEKÇİ KULÜBESİ · 22.40 [bg:depo_gece]
 > Gece vardiyası. Fabrikanın ışıkları yağmurda bulanık yanıyordu. Kulübede bir elektrikli soba, bir radyo, bir tespih.
 yasar: Gel kızım, gel. Islanma. Gündüz konuşamazdık; müdürler var. Gece kimse yok. Bir ben varım, bir de köpek.
 yasar: Çay. Şekersiz mi? Avukatlar şekersiz içer, bilirim. Selim de şekersiz içerdi; “şeker beyni yavaşlatır Yaşar Usta” derdi.
@@ -440,10 +440,10 @@ const tHakan = conversation('INV_T_HAKAN', {
   room: { label: 'EMNİYET ÖNÜ', character: 'hakan' },
   onFirstEnter: [meet('hakan')],
   lines: B(`
-# PERŞEMBE 12.20 — EMNİYET MÜDÜRLÜĞÜ, SİBER BÜRO ÖNÜ [bg:karakol]
+# EMNİYET MÜDÜRLÜĞÜ, SİBER BÜRO ÖNÜ · 12.20 [bg:karakol]
 > Hakan Ilgaz merdivende bir simit yiyordu; yarısını güvercinlere atıyordu. Beni görünce simidi kâğıda sardı.
 hakan: Avukat hanım. Aktaş dosyası. Öğle arasıyım; on dakika. Mahkemede ne soracaksanız sorun, burada ifade vermem.
-hakan: Size bir rakam vereyim: büroda dört kişiyiz, masamızda üç yüz on iki dosya var. Dolandırıcılık, şantaj, çocuk… Bu dosya bizim için “kolay” dosyaydı. Şirket raporu getirdi, isim belliydi.
+hakan: Size bir rakam vereyim: büroda dört kişiyiz, masamızda üç yüz on iki dosya var. Dolandırıcılık, şantaj, hesap ele geçirme… Bu dosya bizim için “kolay” dosyaydı. Şirket raporu getirdi, isim belliydi.
 hakan: Kolay dosyaları severiz avukat hanım. Zor dosyalara vakit kalsın diye.
 ~ Yorgun bir adam. Kötü değil. Yorgunluk, bir soruyu sormamak için en eski gerekçedir.
 > Merdivenin dibinde bir ekip arabası homurdandı; telsizden bir plaka okundu, sonra bir adres. Hakan başını çevirmedi bile.
@@ -494,7 +494,7 @@ const tBulent = conversation('INV_T_BULENT', {
   room: { label: 'DATAKALE BİLİŞİM', character: 'bulent' },
   onFirstEnter: [meet('bulent')],
   lines: B(`
-# PERŞEMBE 16.00 — DATAKALE BİLİŞİM, FSM BULVARI [bg:buro]
+# DATAKALE BİLİŞİM, FSM BULVARI · 16.00 [bg:buro]
 > Cam bir ofis. Duvarlarda “Siber Güvenlik Uzmanı” sertifikaları, çerçeveli. Köşede bir golf çantası; sopaların başlarına örgü kılıflar geçirilmiş.
 > Bülent Arıkan kırklarının başında, spor ceketli, kulağında kablosuz bir kulaklık. Elimi sıkarken telefonuna baktı.
 bulent: Avukat hanım, hoş geldiniz. Beş dakikam var, sonra bir müşteriye bağlanacağım. Rapor ortada; teknik olarak tartışılacak bir şey yok aslında.
@@ -569,7 +569,7 @@ const tTarik = conversation('INV_T_TARIK', {
     },
   ],
   lines: B(`
-# CUMA 10.30 — NİLÜFER ÖRME, GENEL MÜDÜRLÜK KATI [bg:buro]
+# NİLÜFER ÖRME, GENEL MÜDÜRLÜK KATI · 10.30 [bg:buro]
 > Ceviz bir masa, deri koltuklar, duvarda bir ihracat ödülü ve çerçeveli bir golf turnuvası fotoğrafı. Pencereden dokuma salonunun çatısı.
 > Tarık Sezer kapıda karşıladı, elimi iki eliyle sıktı. Sekreterine çay söyledi; “Avukat hanımınkini ince belli getir” dedi.
 tarik: Evladım, hoş geldiniz. Bu iş beni de çok üzdü, inanın. Selim’i ben işe aldım. Oğlum gibiydi. Oğullar da bazen babalarına kızar, değil mi?

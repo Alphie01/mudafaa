@@ -94,7 +94,7 @@ Yanlış çift −50 (her çift bir kez). Kaçış araması için havuzlar yaln�
 |---|---|---|---|---|---|
 | 1 | TELKIN | CONVICTION + etik kartı | okan_tanik (para karşılığı tanık kürsüye çıktı) | 188/3 + 188/4-a, TCK 62/1: 12 yıl 6 ay, 1.250 gün (125.000 TL); arka oda materyali `contra_s3` varsa dışlanır | 0 |
 | 2 | BERAAT_B | ACQUITTAL (223/2-b) | ¬çöküş ∧ tolga_kirildi ∧ ev_iz_eslesme ∧ gercek_fail ∧ ikna ≥ 8 ∧ final ≥ 11.000 | ceza yok | 1,2 |
-| 3 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ beraat_e (contra_s2 ∧ jar_cleared ∧ (contra_t3 ∨ contra_t4 ∨ contra_t5 ∨ tolga_kirildi ∨ key_excluded)) ∧ final ≥ 7.500 | ceza yok | 1,0 |
+| 3 | BERAAT_E | ACQUITTAL (223/2-e) | ¬çöküş ∧ beraat_e (contra_s2 ∧ jar_cleared ∧ (contra_t3 ∨ contra_t4 ∨ tolga_kirildi ∨ key_excluded)); **puan eşiği yok** | ceza yok | 1,0 |
 | 4 | NITELIK_191 | RECHARACTERIZED | ¬çöküş ∧ ¬jar_cleared ∧ (contra_s2 ∨ terditli) ∧ ek_savunma ∧ (contra_s5 ∨ kaan_durust) ∧ muhbir en az bir kez sorgulandı ∧ final ≥ 5.500 | 191/1: 2 yıl; 191/8 HAGB | 0,85 |
 | 5 | MAHKUMIYET | CONVICTION (varsayılan; çöküş varyantı) | — | 12 yıl 6 ay, 1.250 gün (125.000 TL) | 0,6 |
 
@@ -105,8 +105,10 @@ hukuki notlar §2.
 Gerekçe satırları bayraklara bağlıdır ve duruşmada çürütülmüş bir olguya dayanmaz: MAHKÛMİYET'te arka oda satırı
 yalnızca `¬key_excluded`, şekerlik satırı yalnızca `¬jar_cleared`, “muhbir sarsılmadı” satırı yalnızca muhbir
 sarsılmadıysa okunur; muhbir sarsıldıysa heyetin çelişkileri “çevresel” sayan takdiri, döndüyse iki beyanın da esas
-alınmadığı yazılır. Zincir kurulduğu hâlde puan eşiğin altında kalırsa (`beraat_e` ∧ final < 7.500) epilogda Leyla
-gerekçenin istinafta zor duracağını söyler (bkz. hukuki notlar §4-12).
+alınmadığı yazılır. Zincir kurulduysa hüküm puandan bağımsız olarak beraattir; özensiz oyunda (yanlış delil ≥ 3 ya da
+♥ ≤ 2) beraat kapanışına Deniz'in ve Leyla'nın “kayıt kazandırdı” satırları eklenir, mahkûmiyet kapanışındaki
+“dağınık savunma” satırları da yalnızca gerçek hatalarda okunur (bkz. hukuki notlar §4-12). “2 tane” alım mesajı
+hiçbir mahkûmiyet gerekçesinde satış delili değildir; Z raporu mazereti kendi gerekçe satırını alır.
 
 ## 6. Skor
 - Kategoriler ve döküm satırları kılavuzdaki gibi; güvenilirlik bonusu cred × 100.
@@ -114,8 +116,8 @@ gerekçenin istinafta zor duracağını söyler (bkz. hukuki notlar §4-12).
   −20; tarif +300, yanlış çift −50; BASTIR +25/+50; doğru sunum +300, kısmi +100, yanlış −150 (♥−1); usul itirazı/talebi
   +30…+150, dayanaksız −40/−50 (♥−1); esas savunma +200 (strateji çarpanı yalnızca uyumlu savunmada: 2-b ↔ Masumiyet,
   2-e ↔ Usul, terditli ↔ İndirim); dayanak +40/−40; etik sınır ihlalleri −40…−100.
-- Eşik çubuğu: Mahkûmiyet 0 · Nitelik 5.500 · Beraat 7.500; `scaleMax` 10.000 (tipik final 12.145; çubuk taşar,
-  bilinçli). 223/2-b ayrıca 11.000 ister.
+- Eşik çubuğu: Mahkûmiyet 0 · Nitelik 5.500 · Tam beraat 11.000 (223/2-b eşiği); `scaleMax` 10.000 (tipik final
+  12.145; çubuk taşar, bilinçli). 223/2-e puan eşiği taşımaz.
 
 ## 7. Node grafiği özeti
 `PROLOG → PR_02 → BR_00 → BR_00L → BR_01 → BR_01B → BR_02 → INV_SABAH → INV_HUB` (3 gün × 5 EP; Leyla günde bir, 0 EP).
@@ -133,9 +135,10 @@ T_03 → T_03S → T_04 → T_04R → (T_04B) → T_05 → T_05B/E/N/M → T_06P
 |---|---|---|
 | TIPIK | BERAAT_E | Her mekânı dolaşan, birkaç hata yapan oyuncu: oda varsayımı çöker, şekerlik 2. celsede aklanır, muhbir kask ve saatte çöker ama adı vermez; esas savunma 223/2-e. |
 | G_E2 | BERAAT_E | Muhbir ayakta kalır (sorgu zayıf), ama arka oda materyali dışlanmış ve şekerlik aklanmıştır; geriye desteksiz tek beyan kalır; esas savunma duygusal olsa da zincir beraat getirir. |
+| G_E_DAG | BERAAT_E | Zincir kurulur (oda varsayımı, şekerlik, kapsam dışı arama) ama tahta yarım kalır ve 1. celsede üç savcılık delili “çelişki” diye sunulur (♥ 2); 7.075 puanla beraat, kapanışta Leyla dağınıklığı söyler. |
 | G_B | BERAAT_B | Kimlikle suç duyurusu + gece telefonunun bildirimi + bodrum çantasının usulüne uygun el konulması; Barış yakalanır, iz eşleşir; muhbir çözülür; esas savunma 223/2-b. |
 | G_N | NITELIK_191 | Oda varsayımı çöker, kriminal rapor ve muhbir ifadesi okunmaz; şekerlik ve muhbir ayakta kalır; ek savunma ve terditli savunma. |
-| G_M | MAHKUMIYET | Yönlendirici tanık sorusu, yanlış deliller, dayanaksız itirazlar; oda varsayımı ayakta. |
+| G_M | MAHKUMIYET | Yönlendirici tanık sorusu, yanlış deliller, dayanaksız itirazlar; ön oda kartı arka odada başka birini gösteren bir kart olmadan sunulur (PS_S2_TEK), oda varsayımı ayakta. |
 | G_ETIK | TELKIN | Defne'nin sahte tanık teklifi kabul edilir; tanık kürsüde çöker. |
 | W | MAHKUMIYET (çöküş) | 2. celsede muhbire art arda savcılık delilleri sunulur; güvenilirlik 0. |
 
@@ -146,42 +149,46 @@ T_03 → T_03S → T_04 → T_04R → (T_04B) → T_05 → T_05B/E/N/M → T_06P
   (2-b yolunda) parmak iziyle kurulur. Gece telefonundaki Barış satıcılığı inkâr eder ve Tolga'yı işaret eder (çeldirici).
   Tipik yolun satır dökümü taranarak 4. kattaki “perde” satırı soğuk açılıştan çıkarıldı (Kaan'ın evde olduğunu ima
   ediyordu).
-- **Etiketler:** 2026-10-21 yeniden taraması: TIPIK, G_B, G_N ve G_E2'de 3+ seçenekli kararlarda seçilen seçeneğin en
-  uzun etiket olduğu oran **16/71 (%22,5)**. İncelemede adı geçen setlerin (T_04, T_04B, T_05E, T_00K, T_01Q, T_07,
-  G_RIZA, DN_RED, BD_SAVCI, NS2_DEFTER, KA_RIZA, DIL_KURYE, TL_KURYE) hiçbirinde doğru seçenek en uzun değildir; T_04'teki
-  madde atıfları kaldırıldı, makul yanlış seçenekler (T04_C, T04B_C, T05E_C) gerekçeli usul argümanlarına uzatıldı.
-- **En kısa yol (2026-10-21, yeniden ölçüm):** golden path'lerden açgözlü silme (64→1 eylemlik dilimler; sonucu aynı
-  sınıfta tutan her silme kabul edilir; `act` ile tek süreçte, 9 dk bütçeyle) şu en kısa yolları buldu:
-  BERAAT_E **TIPIK'ten 142 eylem** (73,2 dk; tipik yolun %68,9'u), G_E2'den 144 (73,6 dk), BERAAT_B G_B'den 173
-  (81,1 dk; %84,0). Beraat 60% kuralını (124 eylem) karşılar; 7.500 eşiği ve zincir (contra_s2, jar_cleared, muhbir
-  çelişkisi ya da key_excluded) bağlayıcıdır. Eşiği düşüren ya da zincir için eşiksiz ikinci koşul ekleyen önceki
-  denemeler en kısa beraati 90–115 eyleme indirdiği için 7.500 tek eşik olarak kaldı (hukuki notlar §4-12).
-- **Diğer sonuçlar:** NITELIK_191'e en kısa yol **126 eylem / 67,9 dk** (G_N'den; ara evre etkinlikleri ve muhbir
-  sorgusu gerekir; GO_H1 yalnızca 3. gün, GO_T yalnızca ara evrenin 2. günü görünür). MAHKÛMİYET ve TELKİN kötü
-  sonuçlardır; hız koşusu engellenmez.
+- **Etiketler:** 2026-10-21 üçüncü tarama (TIPIK, G_B, G_E2, G_N, G_M; tek en iyi seçenekli 3+ seçenekli 18 karar
+  seti): en iyi seçenek en uzun etiket **6/18 (%33)**, ikinci en uzun **5/18 (%28)**, en kısa (pas seçenekleri hariç)
+  **4/18 (%22)**; en uzun etiket en kötü seçenek **1/18 (%6)**. Önceki dengelemenin yarattığı ters işaret (en uzun =
+  tuzak %72, ikinci en uzun = doğru %67) giderildi: T04_A ve T07_A gerekçeli cümleye uzatıldı; T04B_C, T05E_C, TK_B,
+  SC_TOLGA, TL_BERAAT, T05N_C, H103_C kısaltıldı; T06_E, T04B_A, TEL_A kısa, T01_A/T02_A/TK_A/TL_KURYE orta uzunlukta.
+- **En kısa yol (2026-10-21, eşiksiz):** golden path'lerden açgözlü silme (24→1 eylemlik dilimler, 5 dk bütçe) ve
+  rastgele sıralı silme (6 deneme) tek süreçte. BERAAT_E: TIPIK'ten **111** (açgözlü), **102** (rastgele) eylem,
+  G_E2'den 108; tipik yolun %50–54'ü, yaklaşık 54 dk. BERAAT_B: G_B'den 168 eylem (%82, ~69 dk). NITELIK_191: G_N'den
+  117 eylem (~57 dk). Önceki sürümde 7.500 eşiği en kısa beraati 131–142 eyleme taşıyordu; eşik, zinciri kuran
+  oyuncuya mahkûmiyet verdiği için (hukuki hata) kaldırıldı ve yerine delil önkoşulları kondu: S2/S3/S6/T3/T4
+  sunumları önce bastırma ister; oda varsayımı arka odada başka birini gösteren bir kart (kurye, numara, Barış,
+  Demirel) ister; T04_A dışlaması kapsamın tanığa okutulmasını (contra_s1) ister; kafe kayıtları Kaan'ın 9 Kasım
+  anlatımından sonra açılır; şekerlik savunması (T04B_A) Kaan'ın şekerlik açıklamasını ister. En kısa yol yine de
+  zincirin üç ayağını delilleriyle kurar (ön oda + kroki + üçüncü kişi kartı → bastır → sun; aynı parti + şekerlik +
+  müvekkil açıklaması; kilit + kapsam → bastır → sun → karar satırı → dışlama); kalan kısalık 3 gün × 5 EP ve 2 gün ×
+  4 EP'lik hub'ın boş ziyaretlerle doldurulabilmesinden gelir. %60 hedefi bu sürümde **karşılanmıyor** (bilinçli; bkz.
+  inceleme notu).
 - **Gizem (yeniden tarama):** Tipik yolun satır dökümü (1.214 satır) yeniden tarandı: “Demirel” soyadı ilk kez mesaj raporunda (eylem 51),
   tam ad ancak ara evrede Paketçi kayıtlarıyla (eylem 141) görünür; satıcının kim olduğu hiçbir yerde muhbirin
   çelişkisinden önce söylenmez. “Barış” yalnızca Kaan'ın savunma iddiası olarak (eylem 1) geçer.
 
 ## 13. Ölçümler
-`npm run case:duration -- beyaz-toz` (2026-10-21):
+`npm run case:duration -- beyaz-toz` (2026-10-21, eşiksiz beraat sürümü):
 
 ```
-TIPIK          95.4 dk   13472 sözcük   206 aksiyon  BERAAT_E (12145)
-G_E2           91.7 dk   12928 sözcük   199 aksiyon  BERAAT_E (10780)
-G_B            93.2 dk   13091 sözcük   205 aksiyon  BERAAT_B (12530)
-G_N            78.3 dk   11270 sözcük   157 aksiyon  NITELIK_191 (6745)
-G_M            64.3 dk    9072 sözcük   139 aksiyon  MAHKUMIYET (855)
-G_ETIK         78.5 dk   11135 sözcük   166 aksiyon  TELKIN (9210)
-W              80.8 dk   11490 sözcük   170 aksiyon  MAHKUMIYET (8360)
-==> TİPİK YOL (TIPIK): 95.4 dk  ✓ süre hedefte
+TIPIK          95.5 dk   13480 sözcük   206 aksiyon  BERAAT_E (12145)
+G_E2           91.7 dk   12921 sözcük   199 aksiyon  BERAAT_E (10780)
+G_E_DAG        82.8 dk   11957 sözcük   164 aksiyon  BERAAT_E (7075)
+G_B            93.3 dk   13096 sözcük   205 aksiyon  BERAAT_B (12530)
+G_N            78.2 dk   11256 sözcük   157 aksiyon  NITELIK_191 (6745)
+G_M            65.3 dk    9170 sözcük   144 aksiyon  MAHKUMIYET (1215)
+G_ETIK         78.5 dk   11148 sözcük   166 aksiyon  TELKIN (9210)
+W              80.9 dk   11495 sözcük   170 aksiyon  MAHKUMIYET (8360)
+==> TİPİK YOL (TIPIK): 95.5 dk  ✓ süre hedefte
 ```
 
-`node tools/content/word-count.mjs content/cases/beyaz-toz`: paket 1.191 satır, 15.697 satır sözcüğü; ekran metinleriyle
-toplam **20.655** sözcük; en uzun satır 218 karakter.
+`node tools/content/word-count.mjs content/cases/beyaz-toz`: paket 1.270 satır, 16.885 satır sözcüğü; ekran metinleriyle
+toplam **22.286** sözcük; en uzun satır 218 karakter.
 
-`npm run case:validate -- beyaz-toz` (2026-10-21): **PASSED — 0 hata**, 22 uyarı (1 SIMULATION_INCOMPLETE, 20
-SOFTLOCK_UNVERIFIED — kaçış araması durum bütçesinde bitmeyen derin durumlar, 1 UNREAD_VARIABLE `beraat_savunma`);
-kapsam node 93/93, seçenek 213/213, kural 67/67, delil 56/56; golden path 7/7; softlock, sızıntı yok. Önceki ölçümde
-ara evrenin 1. gününde koşullu etkinlikler görünmediğinde kalan EP ile gün bitmiyordu (SOFTLOCK); üç temel iş (Kaan,
-Defne, suç duyurusu) yapıldıktan sonra görünen `A2_GUN_SONU` (“Günü kapat”) ile giderildi.
+`npm run case:validate -- beyaz-toz` (2026-10-21): **PASSED — 0 hata**, 21 uyarı (1 SIMULATION_INCOMPLETE, 20
+SOFTLOCK_UNVERIFIED — kaçış araması durum bütçesinde bitmeyen derin durumlar; 20 tanığın hepsi basit bir “bitir”
+politikasıyla 28–58 eylemde dava sonuna ulaşıyor, gerçek kilitlenme değil); kapsam node 93/93, seçenek 214/214, kural
+73/73, delil 56/56; golden path 8/8; softlock, sızıntı yok.

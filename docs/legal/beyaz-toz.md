@@ -90,12 +90,14 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
    çerçevesinde oyunda “itiraz” olarak sunuldu (Dava #07 kararıyla aynı).
 2. **Kapsam dışı arama:** Karar “şüphelinin kullanımındaki oda ve ortak alanlar” ile sınırlıyken üçüncü kişinin kilitli
    odası zorla açıldı. Bu bölümde elde edilen materyalin hukuka aykırı delil sayılması (Anayasa 38/6, CMK 206/2-a,
-   217/2) bir yorumdur; uygulamada kararın kapsamının “adres” mi “kişi” mi olduğu tartışılır. Oyunda dışlama
+   217/2) bir yorumdur. Dışlama itirazı (T04_A) yalnızca kararın kapsamı tanığa okutulup “sandık” dedirtildiyse
+   (`contra_s1`, kilidin kesildiğinin kabulünden sonra) sonuç doğurur: kilidin kırılması tek başına kapsam dışına
+   çıkıldığını göstermez, belirleyici olan odanın kararın kapsadığı “şüphelinin kullanımındaki oda” olmamasıdır; uygulamada kararın kapsamının “adres” mi “kişi” mi olduğu tartışılır. Oyunda dışlama
    (`key_excluded`) şu sonucu doğurur: oda varsayımı çökmüş (`contra_s2`) ve şekerlik aklanmışsa (`jar_cleared`),
    arka oda materyali dışlandığında dosyada yalnızca muhbirin beyanı kalır. Etkin pişmanlık beklentisiyle verilmiş ve
    başka delille desteklenmeyen bir muhbir beyanının tek başına mahkûmiyete yetmeyeceği Yargıtay'ın yerleşik
-   yaklaşımıdır (karar numarası verilmedi; ilke düzeyinde). “2 tane” yazışması iki yüzlüdür (Kaan'ın eylülde aldığı
-   iki paket) ve destek sayılmadı. Bu yüzden `beraat_e` = `contra_s2 ∧ jar_cleared ∧ (muhbir sarsıldı ∨ key_excluded)`;
+   yaklaşımıdır (karar numarası verilmedi; ilke düzeyinde). “2 tane” yazışması (“akşam 2 tane bırakır mısın”, Kaan'dan
+   B.'ye) bir alım talebidir, satış göstermez; hiçbir 188/3 gerekçesinde satış delili olarak kullanılmaz. Bu yüzden `beraat_e` = `contra_s2 ∧ jar_cleared ∧ (muhbir sarsıldı ∨ key_excluded)`;
    mütalaa bu durumda beraat yönündedir (T_05E). Dışlama yoksa ve muhbir ayaktaysa aynı dairede ele geçen ticari
    materyal muhbirin “Daire 7'den aldım” sözünü destekler; savcı 188 ister (T_05M, `contra_s2` varyantı).
 3. **CMK 119/4 (iki komşu) ihlali:** Savcı yokken tek komşu bulundurulmuş, o da kapı açıldıktan sonra çağrılmıştır.
@@ -116,8 +118,9 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
    tasarım gereği bu sonuç önceliklidir. Delil yasağı ise takdire bağlı değildir: kolluk kilidin kesildiğini kabul
    ettiyse (`contra_s3`) arka oda materyali gerekçede açıkça dışlanır (Anayasa 38/6, CMK 206/2-a, 217/2) ve hüküm
    geriye kalanlara dayanır: şekerlik aklanmadıysa iki paket ve muhbir beyanı; aklandıysa muhbirin sorgulanmadan kalan
-   beyanı ve “2 tane” yazışması; muhbir kask/saat çelişkisiyle sarsıldıysa gerekçe bunu kayda geçirir ve çekirdek
-   beyanın inandırıcı bulunmasını istinafta denetlenecek bir delil takdiri olarak açıkça adlandırır. Bu son durum zayıf bir mahkûmiyettir ve bilinçli olarak öyle bırakıldı: yalanın
+   ve savunmanın çöken anlatımı dışında karşılanmamış beyanı; muhbir kask/saat çelişkisiyle sarsıldıysa gerekçe bunu
+   kayda geçirir ve çekirdek beyanın (karşı anlatım para karşılığı bir tanığa dayandığı için) inandırıcı bulunmasını
+   istinafta denetlenecek bir delil takdiri olarak açıkça adlandırır. Epilogda ve hükümde ceza aynıdır: **12 yıl 6 ay**. Bu son durum zayıf bir mahkûmiyettir ve bilinçli olarak öyle bırakıldı: yalanın
    savunmanın gerçeklerini de götürdüğü etik sondur. TCK 62 sanığın kendi davranışına bağlı olmadığı için uygulanır.
    Avukat ve abla hakkında suç duyurusu (TCK 272, 38) ve baroya bildirim hükümde yer alır.
 7. **Tazminat bildirimi dayanağı:** Dava #07'deki ifade korunarak “CMK 141/1 ve 142” gösterildi; bildirimin hüküm
@@ -135,17 +138,19 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
     görüşme hiç sunulmadı.
 11. **Delile el koyma:** Bodrumdaki çantayı avukatın kendisinin alması delil zincirini koparır; mahkeme delili kabul
     etmez (CMK 123, 127, 206/2-a) ve baroya bildirim yapar.
-12. **Hükmün delil zincirine bağlanması:** Beraat (223/2-e) delil zinciri kurulduğunda (`beraat_e`) verilir; esas
-    savunmanın biçimi ve ikna sayacı hükmü değiştirmez. Oyun puanı yalnızca bir “özen” eşiği olarak kalır (7.500):
-    zincir kurulduğu hâlde puan bunun altındaysa (tipik yoldan ~90 yanlış kart çifti kadar bilinçli kayıp) varsayılan
-    mahkûmiyet okunur; gerekçe satırları bu durumda da duruşmada çürütülmüş hiçbir olguya dayanmaz: dışlanan arka oda
-    materyali ve aklanan şekerlik gerekçeye girmez, muhbir sarsıldıysa heyetin çelişkileri “çevresel ayrıntı” sayan
-    takdiri, döndüyse iki beyanından hiçbirinin esas alınmadığı yazılır; geriye kalan dayanak (“2 tane” yazışması ve
-    kavanozdaki iz) açıkça bir delil takdiri olarak, ispat yükü sanığa yüklenmeden ifade edilir. Bu takdir, hukuken
-    istinafta zor ayakta duracak zayıf bir mahkûmiyettir; epilogda Leyla bunu açıkça söyler (kayıt eksiksizdir,
-    gerekçe zayıftır, istinaf yolu açıktır). Puan eşiği bir oyun kısıtıdır (kestirme oyunun beraat almasını
-    engeller), hukuki bir iddia değildir. Eşiği düşüren ya da zincir için eşiksiz ikinci koşul ekleyen denemeler en
-    kısa beraati tipik yolun %60'ının altına indirdiği için (tasarım belgesi §12) tek eşik korundu.
+12. **Hükmün delil zincirine bağlanması:** Beraat (223/2-e) delil zinciri kurulduğunda (`beraat_e`) **her zaman**
+    verilir; puan, esas savunmanın biçimi ve ikna sayacı hükmü değiştirmez. Önceki sürümdeki 7.500 puan eşiği
+    kaldırıldı: zincir kurulmuşken (oda varsayımı çökmüş, şekerlik aklanmış, muhbirin satış anlatımı Z raporu ya da kask
+    çelişkisiyle sarsılmış veya arka oda materyali dışlanmış; savcı da beraat istemiş) 188/3'ten mahkûmiyet, kayıtla
+    çelişen ve hukuken savunulamayan bir hüküm olurdu. Özensiz oyun (yanlış delil ≥ 3 ya da ♥ ≤ 2) yalnızca kapanışı
+    değiştirir: Deniz ve Leyla kaydın kazandırdığını, savunmanın dağınık kaldığını söyler (golden path `G_E_DAG`,
+    7.075 puan). Mahkûmiyet gerekçesi artık yalnızca zincir eksikken okunur ve kayıtla çelişmez: kavanoz izi yalnızca
+    şekerlik aklanmamışsa anılır; şekerlik aklanmış ama oda varsayımı çökmemişse ortak alandaki paketler, arka odanın
+    üçüncü kişiye ait olduğu ispat edilemediği için sanığın zilyetliğinde kabul edilir; Z raporu mazereti (`contra_t4`)
+    kurulduysa heyet muhbirin satış anlatımını esas almaz ve hükmü dairede ele geçen paketlerin ticaret amacıyla
+    bulundurulmasına dayandırır (188/3 “bulundurma” seçimlik hareketi). Zincirin kestirme kurulmasını puan değil delil
+    önkoşulları engeller (tasarım belgesi §12): her çelişki önce bastırma ister; oda varsayımı için arka odada başka
+    birini gösteren bir kart, şekerlik için müvekkilin açıklaması, Z raporu için müvekkilin 9 Kasım anlatımı gerekir.
 13. **Takvim:** 9 Kasım 2025 pazar, 11 Kasım salı, 13 Kasım perşembe (AMATEM randevusu), 14 Ocak 2026 çarşamba (Defne
     büroya gelir), 15–17 Ocak perşembe–cumartesi (soruşturma), 26 Ocak pazartesi (1. celse), 29 Ocak ve 5 Şubat
     perşembe (ara günler), 16 Şubat pazartesi (2. celse). Tedavi 9 Ekim perşembe başlar, test 30 Ekim perşembe.

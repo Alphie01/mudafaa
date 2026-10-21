@@ -269,4 +269,4 @@ Yazım sırasında tempo ve süre bütçesi için hikâyeye şu vuruşlar eklend
 - **Tipik yolun duygusal çizgisi:** 223/2-e beraatte muhbir kask ve saat çelişkisinde çöker ama satıcının adını vermez;
   şekerlik ikinci celsede delil tartışmasında aklanır. Adın söylendiği an (Tolga'nın kırılması) 223/2-b yolunun ve
   ara evrede kurye durağına gidenlerin ödülüdür.
-- **Eşikler:** beraat bandı 10.500 (223/2-b ayrıca 11.000); erken çözüm denetimi için `docs/content/beyaz-toz.md` §12.
+- **Eşikler:** 223/2-e puan eşiği taşımaz (delil zinciri kurulduysa beraat); 223/2-b 11.000 ister; erken çözüm denetimi için `docs/content/beyaz-toz.md` §12.

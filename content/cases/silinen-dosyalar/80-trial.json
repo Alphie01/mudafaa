@@ -1,0 +1,3362 @@
+{
+  "predicates": [
+    {
+      "id": "imaj_coktu",
+      "label": "DataKale imajının güvenilmez olduğu gösterildi",
+      "when": {
+        "any": [
+          { "flag": "contra_b2" },
+          { "flag": "contra_b3" },
+          { "hasEvidence": "ded_zincir" },
+          { "hasEvidence": "ded_ozet" },
+          { "flag": "sema_dinlendi" }
+        ]
+      }
+    },
+    {
+      "id": "baskasi_kanit",
+      "label": "Silmeyi başka birinin yaptığına dair somut delil",
+      "when": {
+        "any": [
+          { "hasEvidence": "ded_gm_cihaz" },
+          { "hasEvidence": "ded_gm_hat" },
+          { "flag": "contra_t_cihaz" },
+          { "flag": "contra_t_hat" }
+        ]
+      }
+    },
+    {
+      "id": "riza_kanit",
+      "label": "21.30 girişinin izinli olduğu gösterildi",
+      "when": { "any": [{ "hasEvidence": "ded_riza" }, { "flag": "h1_riza" }, { "flag": "contra_t_izin" }] }
+    },
+    {
+      "id": "mutalaa_beraat_b",
+      "label": "Savcı gerçek faili işaret edecek kadar güçlü dosya",
+      "when": {
+        "all": [
+          { "flag": "bildirdi" },
+          { "any": [{ "hasEvidence": "ded_gm_cihaz" }, { "hasEvidence": "ded_gm_hat" }] },
+          { "cmp": [{ "var": "pers" }, ">=", 7] }
+        ]
+      }
+    },
+    {
+      "id": "mutalaa_beraat_e",
+      "label": "Savcı şüpheden beraat isteyecek",
+      "when": {
+        "all": [
+          { "any": [{ "flag": "contra_b2" }, { "flag": "contra_b3" }, { "flag": "sema_dinlendi" }] },
+          { "cmp": [{ "var": "pers" }, ">=", 5] }
+        ]
+      }
+    }
+  ],
+  "court": {
+    "sessions": [
+      {
+        "id": "cs_2",
+        "title": "2. Celse",
+        "stages": [
+          { "id": "s2_acilis", "type": "ACILIS", "entryNode": "T_00" },
+          { "id": "s2_delil", "type": "DELIL_TARTISMA", "entryNode": "T_01" },
+          { "id": "s2_tanik", "type": "TANIK_DINLEME", "entryNode": "T_02" },
+          { "id": "s2_mutalaa", "type": "MUTALAA", "entryNode": "T_05" },
+          { "id": "s2_savunma", "type": "SAVUNMA", "entryNode": "T_06P" },
+          { "id": "s2_son_soz", "type": "SON_SOZ", "entryNode": "T_07" },
+          { "id": "s2_karar", "type": "KARAR", "entryNode": "T_08" }
+        ]
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "T_00G_1",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "title": "Koridor",
+      "onEnter": [{ "type": "VAR", "var": "in_court", "op": "set", "value": true }],
+      "lines": [
+        {
+          "when": { "flag": "bilirkisi_atandi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ÜÇ HAFTA SONRA · 30 OCAK 09.15 — BURSA ADLİYESİ",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridor aynıydı; insanlar aynı yorgunlukla farklıydı. Aynı banklar, aynı sigara kokusu, bir başka ağlayan çocuk."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Pencerenin önünde Bülent Arıkan değil; bu kez bir kadın bekliyordu: iş tulumu değil, ütülü bir ceket. Dr. Sema Uçar, mahkemenin bilirkişisi. Elinde ciltli bir rapor."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ÜÇ HAFTA SONRA · 30 OCAK 09.15 — BURSA ADLİYESİ",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridor aynıydı; insanlar aynı yorgunlukla farklıydı. Aynı banklar, aynı sigara kokusu, bir başka ağlayan çocuk."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Pencerenin önünde Bülent Arıkan, şirketin servis raporunu kucağında tutuyordu. Dosyada hâlâ tek uzman görüşü onunkiydi."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_00G_2" }],
+      "choices": []
+    },
+    {
+      "id": "T_00G_2",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "bildirdi" }, { "flag": "fact_gm" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Selim ailesiyle geldi; takım elbise, yine kravatsız. Gül’ün elinde Defne’nin bir resmi daha."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridorun ucunda Tarık Sezer, Ozan Tekin’le başı önde konuşuyordu. İkisinin de yüzü gergindi; savcılığın soruşturması onlara da ulaşmıştı."
+            },
+            {
+              "speaker": "selim",
+              "text": "Avukat hanım… Savcı beni bu sabah tanık değil, “mağdur” diye çağırdı koridorda. Ne oldu?"
+            },
+            { "speaker": "player", "text": "Dosyaya bir şey eklendi. Dinleyin, göreceksiniz." }
+          ]
+        },
+        {
+          "when": { "flag": "tarik_yuzles" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tarık Sezer koridorda bana doğru yürüdü; gülümsüyordu, ama gözleri gülmüyordu."
+            },
+            {
+              "speaker": "tarik",
+              "text": "Evladım, geçen gün ziyaretiniz güzeldi. Ama o dizüstü… ne yazık ki çalındı. Hırsızlık her yerde."
+            },
+            {
+              "speaker": "player",
+              "text": "Uyardığım adam. Cihaz “çalındı.” Elimde bir zimmet kaldı, cihaz yok. Kendi hatam; bir sahne için bir sonucu riske attım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "bilirkisi_atandi" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Selim ailesiyle geldi. Gül bankta oturdu; Defne’nin resmini açıp katladı, açıp katladı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dr. Sema Uçar raporunu dizine koydu, gözlüğünü taktı, bir şey okudu. Tarafsız bir göz; bu dosyada ilk kez."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Selim ailesiyle geldi. Gül bankta oturdu; Defne’nin resmini açıp katladı, açıp katladı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bu dosyada tarafsız bir göz yok. Benim gözüm var, bir de hâkiminki. Yeter mi, bugün göreceğiz.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "T_00" }],
+      "choices": []
+    },
+    {
+      "id": "T_00",
+      "type": "COURTROOM",
+      "mode": "STAGE",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Duruşma · 2. Celse",
+      "courtStage": "ACILIS",
+      "background": "durusma_salonu",
+      "onFirstEnter": [
+        { "type": "IF", "when": { "flag": "bilirkisi_atandi" }, "then": [{ "type": "MEET", "character": "sema" }] }
+      ],
+      "lines": [
+        {
+          "when": { "flag": "selim_giris" },
+          "lines": [
+            { "speaker": "cevdet", "text": "Selim Aktaş dosyası! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE",
+              "style": "card",
+              "bg": "durusma_salonu"
+            },
+            {
+              "speaker": "kemal",
+              "text": "Duruşmaya devam olundu. Söz almadan önce: müdafiin dosyaya sunduğu “sistem kayıtları” hakkında katılan vekilinin bir iddiası var."
+            },
+            {
+              "speaker": "ozan",
+              "text": "Sayın Hâkim, müdafiin sunduğu kayıtlar, sanığın bu hafta şirketin sistemine yeniden izinsiz girerek indirdiği verilerdir. Bu, hem yeni bir suç hem de hukuka aykırı delildir."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Salon buz kesti. Elimdeki dosya birden ağırlaştı. Selim’e bakmadım; bakamadım."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "bildirdi" },
+          "lines": [
+            { "speaker": "cevdet", "text": "Selim Aktaş dosyası! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE",
+              "style": "card",
+              "bg": "durusma_salonu"
+            },
+            {
+              "speaker": "kemal",
+              "text": "Duruşmaya devam olundu. Celse arasında bir gelişme oldu; Cumhuriyet savcısı söz istedi."
+            },
+            {
+              "speaker": "ferda",
+              "text": "Sayın Hâkim, müdafiin suç duyurusu üzerine Başsavcılığımızca bir soruşturma başlatıldı."
+            },
+            {
+              "speaker": "ferda",
+              "text": "Dosyaya gelen kayıtlar birlikte değerlendirildiğinde, silme oturumunun sanığa ait olmayan bir kaynaktan açıldığına dair ciddi emareler görülmektedir."
+            },
+            { "speaker": "ferda", "text": "Bu soruşturma bu dosyayla da ilgilidir. Beyanlarımı mütalaada sunacağım." },
+            {
+              "speaker": "narrator",
+              "text": "Salonun arkasında Tarık Sezer dik oturdu; ama eli, ceketinin iç cebine gitti ve orada kaldı."
+            },
+            {
+              "speaker": "player",
+              "text": "İlk kez savcı benden önce konuştu ve benim söyleyeceğimi söyledi. Bu, üç haftalık bir dilekçenin sesi.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "tarik_yuzles" },
+          "lines": [
+            { "speaker": "cevdet", "text": "Selim Aktaş dosyası! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE",
+              "style": "card",
+              "bg": "durusma_salonu"
+            },
+            {
+              "speaker": "kemal",
+              "text": "Duruşmaya devam olundu. Ara karar gereği istenen cevaplar geldi. Ayrıca katılan şirket, bir dizüstü bilgisayarının çalındığına dair şikâyette bulunmuş; dosyaya eklendi."
+            },
+            {
+              "speaker": "player",
+              "text": "Çalınan dizüstü. NOS-GM-LT. Uyardığım adam, en güçlü delilimi bir hırsızlık dosyasına çevirdi.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [{ "flag": "bilirkisi_atandi" }, { "any": [{ "flag": "contra_b2" }, { "flag": "contra_b3" }] }]
+          },
+          "lines": [
+            { "speaker": "cevdet", "text": "Selim Aktaş dosyası! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE",
+              "style": "card",
+              "bg": "durusma_salonu"
+            },
+            {
+              "speaker": "kemal",
+              "text": "Duruşmaya devam olundu. Ara karar gereği bilirkişi raporu geldi; orijinal disklerden inceleme yapıldı. Bilirkişi Dr. Sema Uçar hazır."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dr. Sema Uçar raporunu önüne koydu. Ozan Tekin arkasına yaslandı; ama rahat değildi. Tarık Sezer gazetesini bu kez hiç çıkarmadı."
+            },
+            {
+              "speaker": "player",
+              "text": "İkinci celse. İlkinde bir uzmanın kibrini çatlattık. Bugün bir mühendisin tarafsızlığıyla başlıyoruz.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "bilirkisi_atandi" },
+          "lines": [
+            { "speaker": "cevdet", "text": "Selim Aktaş dosyası! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE",
+              "style": "card",
+              "bg": "durusma_salonu"
+            },
+            {
+              "speaker": "kemal",
+              "text": "Duruşmaya devam olundu. Ara karar gereği bilirkişi raporu geldi; orijinal disklerden inceleme yapıldı. Bilirkişi Dr. Sema Uçar hazır."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dr. Sema Uçar raporunu önüne koydu. Ozan Tekin arkasına yaslandı; ama rahat değildi. Tarık Sezer gazetesini bu kez hiç çıkarmadı."
+            },
+            {
+              "speaker": "player",
+              "text": "İkinci celse. İlkinde DataKale’nin raporu ayakta kaldı. Bugün bir mühendisin tarafsızlığıyla başlıyoruz.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "contra_b2" }, { "flag": "contra_b3" }] },
+          "lines": [
+            { "speaker": "cevdet", "text": "Selim Aktaş dosyası! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE",
+              "style": "card",
+              "bg": "durusma_salonu"
+            },
+            {
+              "speaker": "kemal",
+              "text": "Duruşmaya devam olundu. Ara karar gereği istenen cevaplar dosyaya girdi. DataKale raporunun değeri hükümle birlikte takdir edilecek."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ozan Tekin arkasına yaslandı; ama rahat değildi. Tarık Sezer gazetesini bu kez hiç çıkarmadı."
+            },
+            {
+              "speaker": "player",
+              "text": "İkinci celse. İlkinde bir uzmanın kibrini çatlattık. Bugün bilirkişisiz, yalnızca o çatlaklarla başlıyoruz.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "cevdet", "text": "Selim Aktaş dosyası! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE",
+              "style": "card",
+              "bg": "durusma_salonu"
+            },
+            {
+              "speaker": "kemal",
+              "text": "Duruşmaya devam olundu. Ara karar gereği istenen cevaplar dosyaya girdi. DataKale raporunun değeri hükümle birlikte takdir edilecek."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ozan Tekin arkasına yaslandı; rahattı. Tarık Sezer gazetesini katladı, dizine koydu."
+            },
+            {
+              "speaker": "player",
+              "text": "İkinci celse. Elimde bir şirketin raporu ve kendi bulduklarım. Bugün bunlarla başlıyoruz.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "T00_ETIK",
+          "kind": "CONTINUE",
+          "label": "Devam",
+          "role": "PRIMARY",
+          "visibleWhen": { "flag": "selim_giris" },
+          "next": "T_ETIK"
+        },
+        {
+          "id": "T00_DEVAM",
+          "kind": "CONTINUE",
+          "label": "Bilirkişi raporu",
+          "role": "PRIMARY",
+          "visibleWhen": { "not": { "flag": "selim_giris" } },
+          "next": "T_01"
+        }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ozan", "label": "KATILAN VEKİLİ", "xFrac": 0.2 },
+          { "character": "kemal", "label": "HÂKİM", "xFrac": 0.5 },
+          { "character": "ferda", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      }
+    },
+    {
+      "id": "T_ETIK",
+      "type": "STORY",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "title": "Hukuka aykırı delil",
+      "background": "durusma_salonu",
+      "hud": ["cred", "pers"],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "kemal", "text": "Müdafi, bu konuda diyeceğiniz?" },
+            {
+              "speaker": "player",
+              "text": "Sayın Hâkim… Kayıtlar gerçeği gösteriyordu. Müvekkilim yalnızca doğruyu ortaya çıkarmak için…"
+            },
+            {
+              "speaker": "kemal",
+              "text": "Gerçeği ortaya çıkarmak için bir sistemi silmekle suçlanan kişiye, aynı sisteme yeniden girdirdiniz. Bu dosyanın başladığı yere döndünüz."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Bu yolla elde edilen hiçbir kayıt hükme esas alınamaz. Ayrıca durumun Cumhuriyet Başsavcılığına ve Bursa Barosuna bildirilmesine. On beş dakika ara."
+            },
+            { "speaker": "narrator", "text": "Koridorda Gül önümü kesti; Selim arkasında, başı önde." },
+            {
+              "speaker": "gul",
+              "text": "Siz ne yaptırdınız ona? O zaten “sisteme girdi” diye yargılanıyordu. Siz bir kere daha mı girdirdiniz?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Selim bir şey söylemedi. Elinde noterden bir kâğıt vardı; bu sabah hazırlanmış. Azilname."
+            },
+            { "speaker": "selim", "text": "Üzgünüm avukat hanım. Gül haklı. Başka bir avukat bulacağız." },
+            {
+              "speaker": "player",
+              "text": "Bir müvekkili suçtan korumak için buradaydım. Onu yeni bir suça ben soktum. Daha iyi bir niyetle; ama niyet, bir kaydı da bir avukatı da temizlemez.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "TETIK_DEVAM", "kind": "CONTINUE", "label": "Kapı", "role": "PRIMARY", "next": "R_KARAR" }]
+    },
+    {
+      "id": "T_01",
+      "type": "CHOICE",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "title": "Bilirkişi raporunun tartışılması",
+      "hud": ["cred", "pers"],
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "when": { "any": [{ "hasEvidence": "ev_sema" }, { "flag": "bilirkisi_atandi" }] },
+          "lines": [
+            {
+              "speaker": "kemal",
+              "text": "Bilirkişi raporu okundu. Orijinal diskten alınan imaj, DataKale raporundaki bazı bulguların kurtarma yazılımının izi olduğunu tespit etmiş."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Rapora göre silme oturumunun cihaz adı da sanığın cihazı değil. Müdafi, diyeceğiniz?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dr. Sema Uçar salonun önündeki sandalyede oturuyordu; dizinde bir dosya, elinde bir kalem. Çağrılmadıkça konuşmayacak bir sabırla."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ozan Tekin bilirkişi raporunu sayfa sayfa çeviriyordu; her sayfada biraz daha yavaş."
+            },
+            {
+              "speaker": "player",
+              "text": "Tarafsız bir rapor. Elimdeki en sağlam kâğıt. Şimdi onu doğru kullanmam lazım.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "İyi bir raporu abartmak, onu zayıflatmanın en kısa yoludur. Raporun söylediğini söyleyeceğim; söylemediğini değil.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "kemal",
+              "text": "Ara kararda istenen bilgiler kısmen geldi. DataKale raporu dosyada; hükümle birlikte takdir edilecek. Müdafi, diyeceğiniz?"
+            },
+            {
+              "speaker": "player",
+              "text": "Bilirkişi isteyemedim. Elimde yalnızca kendi bulduğum çatlaklar var. Onlarla gideceğim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "T01_SEMA",
+          "kind": "OPTION",
+          "label": "Bilirkişinin dinlenmesini ve raporun esas alınmasını iste",
+          "visibleWhen": { "any": [{ "hasEvidence": "ev_sema" }, { "flag": "bilirkisi_atandi" }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, bilirkişinin duruşmada dinlenmesini ve DataKale raporu yerine bilirkişi raporunun esas alınmasını talep ediyoruz."
+                },
+                { "speaker": "kemal", "text": "Bilirkişi kürsüye gelsin." }
+              ]
+            }
+          ],
+          "next": "T_01S",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 80 },
+            { "type": "VAR", "var": "sema_dinlendi", "op": "set", "value": true },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Mahkemenin atadığı bilirkişinin raporu, şikâyetçinin uzman mütalaasının önüne geçer (CMK 63, 67); bulgu ile kanaat ayrımını kürsüde kurdurmak lehe.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "T01_IMAJ",
+          "kind": "OPTION",
+          "label": "DataKale imajının hükme esas alınamayacağını savun",
+          "visibleWhen": {
+            "any": [
+              { "hasEvidence": "ded_zincir" },
+              { "hasEvidence": "ded_ozet" },
+              { "flag": "contra_b2" },
+              { "flag": "contra_b3" }
+            ]
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, DataKale imajı iki gün kurcalanmış bir diskten alınmıştır; iki özet değeri birbirini tutmamaktadır. Bütünlüğü kanıtlanamayan bir imaj, hükme esas alınamaz."
+                },
+                { "speaker": "kemal", "text": "İlk celsede bu hususlar tutanağa geçmişti. Not edildi." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 60 },
+            { "type": "VAR", "var": "imaj_itiraz", "op": "set", "value": true },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Elde etme zinciri ve bütünlüğü kanıtlanamayan imajın değeri yoktur (CMK 134, 217); ilk celsede çatlaklar zaten tutanağa geçti.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "T01_KABUL",
+          "kind": "OPTION",
+          "label": "Rapora bir diyeceğimiz yok",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Rapora bir diyeceğimiz yok Sayın Hâkim." },
+                { "speaker": "kemal", "text": "Peki. Tanığı dinleyelim." },
+                {
+                  "speaker": "player",
+                  "text": "Elimdeki en iyi kâğıdı masada bıraktım. Bazen susmak da bir hatadır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "VAR", "var": "pers", "op": "dec", "value": 1 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Bilirkişinin lehe bulgularını kürsüde kurdurmadın; rapor dosyada kaldı ama vurgulanmadı."
+          }
+        },
+        { "id": "T01_BITIR", "kind": "CONTINUE", "label": "Tanığa geç", "role": "PRIMARY", "next": "T_02" }
+      ]
+    },
+    {
+      "id": "T_01S",
+      "type": "COURTROOM",
+      "mode": "TESTIMONY",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Bilirkişinin dinlenmesi",
+      "courtStage": "DELIL_TARTISMA",
+      "background": "durusma_salonu",
+      "witnessLabel": "BİLİRKİŞİ · DR. SEMA UÇAR",
+      "rulesText": "İpucu: bilirkişi tarafsızdır; bastırmak onu açıklamaya davet eder. Raporunu doğrulayan kâğıdı doğru tespite göster.",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Dr. Sema Uçar kürsüye geldi. Yemin etti; sakin, net. Raporunu açmadı; neyin nerede yazdığını biliyordu."
+            },
+            {
+              "speaker": "sema",
+              "text": "Sayın Hâkim, orijinal diskleri şirketin sunucu odasında, tutanakla teslim aldım. İmajı özet değeriyle aldım; değer tutanakta. Dört tespitim var."
+            },
+            { "speaker": "kemal", "text": "Dinliyoruz." },
+            {
+              "speaker": "player",
+              "text": "Tarafsız bir göz. Onu benim tanığım yapmaya çalışmayacağım; söylediğini netleştireceğim, o kadar. İyi bir bilirkişiyi zorlamak, ona ilk itirazı sen yaptırmaktır.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ozan Tekin kalemini açtı. Tarık Sezer dinleyici sırasında bacak bacak üstüne attı; bu kez gazetesiz."
+            }
+          ]
+        }
+      ],
+      "statements": [
+        {
+          "id": "S1",
+          "order": 1,
+          "segments": [
+            { "text": "DataKale imajı " },
+            {
+              "text": "olaydan iki gün sonra",
+              "highlightWhen": { "any": [{ "flag": "press_s1" }, { "hasEvidence": "clue_imaj_tarih" }] }
+            },
+            { "text": ", üzerinde kurtarma yazılımı çalıştırılmış bir diskten alınmıştır." }
+          ]
+        },
+        {
+          "id": "S2",
+          "order": 2,
+          "segments": [
+            { "text": "O imajdaki bazı “silme izleri”, " },
+            {
+              "text": "kurtarma yazılımının kendi yazma kayıtlarıdır",
+              "highlightWhen": {
+                "any": [
+                  { "flag": "press_s2" },
+                  { "hasEvidence": "clue_sema_yazma" },
+                  { "hasEvidence": "clue_kurtarma" }
+                ]
+              }
+            },
+            { "text": "." }
+          ]
+        },
+        {
+          "id": "S3",
+          "order": 3,
+          "segments": [
+            { "text": "Orijinal diskte silme oturumunun cihaz adı okunmaktadır; " },
+            {
+              "text": "bu ad sanığın el konulan bilgisayarının adı değildir",
+              "highlightWhen": {
+                "any": [
+                  { "flag": "press_s3" },
+                  { "hasEvidence": "clue_sema_cihaz" },
+                  { "hasEvidence": "clue_cihaz_adi" }
+                ]
+              }
+            },
+            { "text": "." }
+          ]
+        },
+        {
+          "id": "S4",
+          "order": 4,
+          "segments": [
+            { "text": "Cihazı o gece " },
+            { "text": "kimin kullandığı konusunda kanaat bildirmem", "highlightWhen": { "flag": "press_s4" } },
+            { "text": "; bu, raporumun konusu dışındadır." }
+          ]
+        }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ozan", "label": "KATILAN VEKİLİ", "xFrac": 0.2 },
+          { "character": "kemal", "label": "HÂKİM", "xFrac": 0.5 },
+          { "character": "ferda", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "sema",
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "PR_S1",
+          "kind": "PRESS",
+          "match": { "statement": "S1" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "İki gün. Bu süre neden önemli, hâkim bey için açar mısınız?" },
+                {
+                  "speaker": "sema",
+                  "text": "Canlı bir sistemde her işlem diske yazar. İki gün boyunca yazılan her şey, olay gecesinin izlerinin üstüne yazılmış olabilir. Bir olay yerini iki gün süpürüp sonra fotoğraflamak gibi."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "press_s1", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PR_S2",
+          "kind": "PRESS",
+          "match": { "statement": "S2" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Hangi izler kurtarma yazılımına ait?" },
+                {
+                  "speaker": "sema",
+                  "text": "DataKale raporunun on birinci sayfasındaki “silme” kayıtlarının bir bölümünün zaman damgası 19 Ekim. Olay gecesi 18 Ekim 02.14. Ertesi günün kayıtları, kurtarma programının kendi çalışma kayıtları."
+                },
+                {
+                  "speaker": "sema",
+                  "text": "Bu, 02.14’te bir silme olmadığı anlamına gelmez. Silme olmuş. Ama o imajdan hangi izin geceye, hangisinin ertesi güne ait olduğu ayırt edilemez."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Dürüst bir cevap. Bize yarayanı da yaramayanı da aynı sesle söyledi. Bu yüzden ağır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "press_s2", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PR_S3",
+          "kind": "PRESS",
+          "match": { "statement": "S3" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Cihaz adı nedir? Sanığın cihazının adıyla birlikte söyler misiniz?" },
+                {
+                  "speaker": "sema",
+                  "text": "Sanığın el konulan bilgisayarının adı SELIM-PC. 17 Ekim 21.30 oturumu o cihazdan. 18 Ekim 02.14 oturumunun cihaz adı ise NOS-GM-LT."
+                },
+                { "speaker": "narrator", "text": "Dinleyici sırasında bir sandalye gıcırdadı. Bakmadım." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "press_s3", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PR_S4",
+          "kind": "PRESS",
+          "match": { "statement": "S4" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Kanaat bildirmiyorsunuz. Ama bir cihaz adının kime ait olduğu, teknik değil idari bir kayıtla belirlenebilir mi?"
+                },
+                {
+                  "speaker": "sema",
+                  "text": "Belirlenebilir. Şirketler demirbaşlarını bir zimmet listesinde tutar. O listeyi okumak benim değil, mahkemenin işidir."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "press_s4", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PS_S3",
+          "kind": "PRESENT",
+          "match": { "statement": "S3", "evidence": ["ev_tam_log", "ded_cihaz"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, şirketin mahkemeye gönderdiği ham VPN kaydı: 21.30 satırında SELIM-PC, 02.14 satırında NOS-GM-LT. Bilirkişi hanım, sizin diskte okuduğunuz adla aynı mı?"
+                },
+                {
+                  "speaker": "sema",
+                  "text": "Aynı. Ben diskten okudum, şirketin güvenlik duvarı kendi kaydına yazmış. İki ayrı kaynak; aynı ad."
+                },
+                { "speaker": "kemal", "text": "Tutanağa geçsin." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "sema_teyit", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Şirketin ham VPN kaydı ile bilirkişinin orijinal diskten okuduğu cihaz adı aynı: iki bağımsız kaynak birbirini doğruluyor.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_S4",
+          "kind": "PRESENT",
+          "match": { "statement": "S4", "evidence": ["ev_turnike", "ded_gm_cihaz"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, şirketin demirbaş zimmet listesi. Bilirkişi hanım, size bir kanaat sormuyorum. Listedeki cihaz adını okur musunuz?"
+                },
+                {
+                  "speaker": "sema",
+                  "text": "NOS-GM-LT. Listede bir isimle eşleşmiş; o eşleşmeyi değerlendirmek mahkemenindir. Ben yalnızca şunu söylerim: listedeki ad, diskte okuduğum adla harfi harfine aynıdır."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Ozan Tekin ayağa kalkmaya davrandı; Kemal Oran eliyle oturmasını işaret etti."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "sema_zimmet", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Bilirkişi kanaat bildirmedi ama tespitini idari kayıtla karşılaştırdı: zimmet listesindeki ad, diskteki adla aynı. Değerlendirme mahkemenin.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "FB_S_PRESENT",
+          "kind": "FALLBACK",
+          "fallbackFor": "PRESENT",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "kemal",
+                  "text": "Bilirkişiye bu belgeyle ne sormak istiyorsunuz müdafi? Raporuyla ilgisini göremedim."
+                },
+                { "speaker": "sema", "text": "Bu belge benim incelememin konusu değil Sayın Hâkim." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -150, "line": "hatali" }
+          ],
+          "quality": { "q": "BAD", "feedback": "Yanlış delil: −1 güvenilirlik, −150 skor.", "category": "SORGULAMA" }
+        },
+        { "id": "T01S_BITIR", "kind": "CONTINUE", "label": "Bilirkişiye sorular bitti", "next": "T_01X" }
+      ]
+    },
+    {
+      "id": "T_01X",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Katılan vekilinin sorusu",
+      "courtStage": "DELIL_TARTISMA",
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "ozan",
+              "text": "Bilirkişi hanım, sanık dokuz yıl bu sistemin yöneticisiydi. Bir cihazın adını değiştirmek onun için zor mu? Yani sanık kendi kullandığı bir cihaza başka bir ad vermiş olamaz mı?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Soru salonda bir an asılı kaldı. Selim yanımda kıpırdandı; ağzını açtı, kapattı."
+            },
+            {
+              "speaker": "player",
+              "text": "İçine bir varsayım gömülmüş bir soru. Ama teknik bir soru da. İtiraz mı edeceğim, yoksa cevabı mı bekleyeceğim?",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ozan", "label": "KATILAN VEKİLİ", "xFrac": 0.2 },
+          { "character": "kemal", "label": "HÂKİM", "xFrac": 0.5 },
+          { "character": "ferda", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "sema",
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "X_S_ITIRAZ",
+          "kind": "OPTION",
+          "label": "İtiraz: soru bir varsayıma dayanıyor",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "İtiraz ediyorum Sayın Hâkim. Soru bir varsayıma dayanıyor." },
+                { "speaker": "kemal", "text": "Reddedildi. Teknik bir olasılık soruluyor; bilirkişi cevaplayabilir." },
+                {
+                  "speaker": "sema",
+                  "text": "Ad değiştirilebilir. Ama VPN bağlantısı yalnızca adı değil, cihazın sertifikasını da kaydeder. 02.14 oturumunun sertifikası sanığın el konulan bilgisayarında yok. Başka bir cihazın sertifikası."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Cevap bizim lehimizeydi. İtirazım ise aleyhime. Hâkim ikisini de not etti.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -30 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Bilirkişiye uzmanlık alanındaki bir teknik olasılığı sormak yerindedir (CMK 63/1, 201/1). İtiraz reddedilir; cevap yine gelir, ama savunma cevaptan korkmuş görünür.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "T_02"
+        },
+        {
+          "id": "X_S_CEVAP",
+          "kind": "OPTION",
+          "label": "İtiraz etme; bilirkişi cevaplasın",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "sema",
+                  "text": "Ad değiştirilebilir; bu kolaydır. Ama VPN bağlantısı yalnızca adı değil, cihazın sertifikasını da kaydeder. Sertifikanın adı yoktur; parmak izi gibidir."
+                },
+                {
+                  "speaker": "sema",
+                  "text": "02.14 oturumunun sertifikası, sanığın el konulan bilgisayarında bulunmuyor. O oturum başka bir cihazdan açılmış. Adı ne olursa olsun."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Ozan Tekin “teşekkür ederim” dedi ve oturdu. Kalemini açmıştı; kapattı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bazen en iyi itiraz, susmaktır. Doğru soruyu karşı taraf sordu; cevabı tarafsız biri verdi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 60 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "sema_sertifika", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Teknik olasılık sorusu bilirkişinin alanındadır (CMK 63/1); tarafsız bir uzmanın cevabı, itirazdan güçlü bir savunmadır.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "T_02"
+        },
+        {
+          "id": "X_S_YETKI",
+          "kind": "OPTION",
+          "label": "İtiraz: katılan vekili bilirkişiye doğrudan soru yöneltemez",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İtiraz ediyorum Sayın Hâkim. Katılan vekili bilirkişiye doğrudan soru soramaz."
+                },
+                {
+                  "speaker": "kemal",
+                  "text": "Sorabilir müdafi. Kanun vekile de doğrudan soru hakkı tanıyor. Bilirkişi, cevaplayın."
+                },
+                {
+                  "speaker": "sema",
+                  "text": "Ad değiştirilebilir. Ama 02.14 oturumunun cihaz sertifikası sanığın bilgisayarında yok."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -40 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Katılan vekili de bilirkişiye doğrudan soru yöneltebilir (CMK 201/1). Dayanaksız itiraz.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "T_02"
+        }
+      ]
+    },
+    {
+      "id": "T_02",
+      "type": "COURTROOM",
+      "mode": "TESTIMONY",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Tarık Sezer’in dinlenmesi",
+      "courtStage": "TANIK_DINLEME",
+      "background": "durusma_salonu",
+      "witnessLabel": "TANIK · TARIK SEZER",
+      "rulesText": "İpucu: önce bastır, sonra doğru delille göster. Yanlış delil güvenilirliği ve skoru düşürür.",
+      "objectionGrounds": ["g_telkin", "g_kanaat", "g_ilgisiz"],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "cevdet", "text": "Tanık Tarık Sezeeer! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "Tarık Sezer kürsüye geldi. Takım elbisesi kusursuzdu; sesi de. Yemin ederken eli hiç titremedi."
+            },
+            {
+              "speaker": "tarik",
+              "text": "Sayın Hâkim, ben otuz yıldır bu şirketi yönetiyorum. Üç yüz işçinin ekmeği bana emanet. Selim’i de ben işe aldım; oğlum gibiydi. Bu yüzden bu olay beni en çok üzen şey oldu."
+            },
+            { "speaker": "kemal", "text": "Müdafi, sorularınız." },
+            {
+              "speaker": "player",
+              "text": "Sıcak, ölçülü, hazırlıklı. Her cümlesini bir iyilikle bitiriyor. Önce konuşsun. Bir tanık hakkında hüküm kurmak benim işim değil; söylediğini kâğıtlarla yan yana koymak benim işim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dinleyici sırasında Selim öne eğilmiş, elleri kenetli. Gül onun koluna dokundu; bırak, der gibi."
+            }
+          ]
+        }
+      ],
+      "statements": [
+        {
+          "id": "T1",
+          "order": 1,
+          "segments": [
+            { "text": "O gece " },
+            {
+              "text": "evimdeydim",
+              "highlightWhen": {
+                "any": [{ "flag": "press_t1" }, { "hasEvidence": "clue_hat_gm" }, { "hasEvidence": "clue_turnike_gm" }]
+              }
+            },
+            { "text": "; teknik işlerden de hiç anlamam." }
+          ]
+        },
+        {
+          "id": "T2",
+          "order": 2,
+          "segments": [
+            { "text": "Şifreleri ben almadım; " },
+            {
+              "text": "o işler Bülent’teydi",
+              "highlightWhen": {
+                "any": [{ "flag": "press_t2" }, { "hasEvidence": "ev_devir" }, { "hasEvidence": "ded_sifre" }]
+              }
+            },
+            { "text": "." }
+          ]
+        },
+        {
+          "id": "T3",
+          "order": 3,
+          "segments": [
+            { "text": "Yedek sistemi " },
+            {
+              "text": "aylardır arızalıydı",
+              "highlightWhen": {
+                "any": [{ "flag": "press_t3" }, { "hasEvidence": "clue_son_yedek" }, { "hasEvidence": "ded_yedek" }]
+              }
+            },
+            { "text": "; Selim ilgilenmemişti." }
+          ]
+        },
+        {
+          "id": "T4",
+          "order": 4,
+          "segments": [
+            { "text": "Sigortamız " },
+            {
+              "text": "yıllardır aynı",
+              "highlightWhen": {
+                "any": [{ "flag": "press_t4" }, { "hasEvidence": "clue_limit" }, { "hasEvidence": "ded_motif" }]
+              }
+            },
+            { "text": "; bu olayla bir ilgisi yok." }
+          ]
+        },
+        {
+          "id": "T5",
+          "order": 5,
+          "visibleWhen": { "flag": "press_t1" },
+          "segments": [
+            { "text": "O silme oturumu sanığın hesabından yapıldı; " },
+            {
+              "text": "başka bir cihaz söz konusu değil",
+              "highlightWhen": {
+                "any": [
+                  { "hasEvidence": "clue_cihaz_adi" },
+                  { "hasEvidence": "clue_sema_cihaz" },
+                  { "hasEvidence": "clue_zimmet" }
+                ]
+              }
+            },
+            { "text": "." }
+          ]
+        }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ozan", "label": "KATILAN VEKİLİ", "xFrac": 0.2 },
+          { "character": "kemal", "label": "HÂKİM", "xFrac": 0.5 },
+          { "character": "ferda", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "tarik",
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "PR_T1",
+          "kind": "PRESS",
+          "match": { "statement": "T1" },
+          "responses": [
+            {
+              "when": { "any": [{ "hasEvidence": "clue_hat_gm" }, { "hasEvidence": "ev_operator" }] },
+              "lines": [
+                { "speaker": "player", "text": "Evinizde derken? Görükle’deki eviniz mi?" },
+                { "speaker": "tarik", "text": "Evet, Görükle. Erken yattım; ertesi gün golf vardı." },
+                { "speaker": "player", "text": "Telefonunuz yanınızda mıydı?" },
+                {
+                  "speaker": "tarik",
+                  "text": "Olur tabii. Herkesin telefonu yanındadır. Ne demek istiyorsunuz evladım?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Yeni bir cümle: “Görükle.” Operatör kaydındaki baz istasyonu da Görükle. Bir not daha.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                { "speaker": "player", "text": "Evinizde derken? Neresi?" },
+                { "speaker": "tarik", "text": "Görükle. Erken yattım; ertesi gün golf vardı." },
+                { "speaker": "player", "text": "Telefonunuz yanınızda mıydı?" },
+                {
+                  "speaker": "tarik",
+                  "text": "Olur tabii. Herkesin telefonu yanındadır. Ne demek istiyorsunuz evladım?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Görükle.” Not ettim; elimde bunu bir şeye bağlayacak kâğıt yok.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_t1", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PR_T2",
+          "kind": "PRESS",
+          "match": { "statement": "T2" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Selim size bir zarf teslim etmedi mi? Şifreler için?" },
+                {
+                  "speaker": "tarik",
+                  "text": "Zarf mı? Hatırlamıyorum. Bir sürü kâğıt imzalarım ben. Devir işlemleri İK’nındır."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Hatırlamıyorum.” Bir tutanağın altında imzası olan bir adam için ilginç bir hafıza.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_t2", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PR_T3",
+          "kind": "PRESS",
+          "match": { "statement": "T3" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Yedek aylardır arızalıysa, 30 Eylül devir tutanağına neden “son yedek başarılı” yazdınız?"
+                },
+                { "speaker": "tarik", "text": "Yazmışsam… bilmem. Teknik detay. Belki o gün çalıştı, sonra bozuldu." },
+                {
+                  "speaker": "player",
+                  "text": "“Belki o gün çalıştı.” Aylardır arızalı bir cihaz, bir günlüğüne iyileşmiş. Mucize ya da yanlış bir cümle.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_t3", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PR_T4",
+          "kind": "PRESS",
+          "match": { "statement": "T4" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Sigortanız yıllardır aynıysa, ağustosta neden zeyilname imzaladınız?" },
+                { "speaker": "tarik", "text": "Her şirket poliçesini günceller. Rutin bir işlem. Mali işler yürütür." },
+                { "speaker": "player", "text": "Limiti on katına çıkarmak rutin mi?" },
+                { "speaker": "tarik", "text": "Enflasyon var evladım. Her şey on katına çıktı." },
+                {
+                  "speaker": "player",
+                  "text": "Enflasyon. Bir teminat cümlesini de enflasyon mu ekletti acaba?",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_t4", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PS_T_HAT",
+          "kind": "PRESENT",
+          "match": { "statement": "T1", "evidence": ["ev_operator", "ded_gm_hat"] },
+          "enabledWhen": { "any": [{ "hasEvidence": "clue_hat_gm" }, { "hasEvidence": "ded_gm_hat" }] },
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_hat_gm" }, { "hasEvidence": "ded_gm_hat" }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, operatörün cevabı: 18 Ekim 02.14’teki silme oturumu, katılan şirketin kurumsal bir hattından açılmış. O hat tanığa, genel müdüre tahsisli. Bağlantı noktası: Görükle."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bay Sezer, az önce o gece Görükle’de, evinizde olduğunuzu söylediniz. Silme de Görükle’den, sizin hattınızdan yapılmış."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "contra_t_hat", "op": "set", "value": true },
+            { "type": "GOTO", "node": "T_02K" }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Silme oturumunun geldiği GSM hattı genel müdüre tahsisli; bağlantı Görükle’den. Tanığın “evimdeydim” beyanı aleyhine döndü.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_T_CIHAZ",
+          "kind": "PRESENT",
+          "match": { "statement": "T5", "evidence": ["ev_turnike", "ded_gm_cihaz"] },
+          "enabledWhen": { "any": [{ "hasEvidence": "clue_zimmet" }, { "hasEvidence": "ded_gm_cihaz" }] },
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_zimmet" }, { "hasEvidence": "ded_gm_cihaz" }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, silme oturumunu açan cihazın adı NOS-GM-LT. Şirketin kendi demirbaş zimmet listesine göre bu cihaz tanığın, genel müdürün zimmetinde."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bay Sezer, “başka bir cihaz söz konusu değil” dediniz. Söz konusu olan cihaz sizin bilgisayarınız."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "contra_t_cihaz", "op": "set", "value": true },
+            { "type": "GOTO", "node": "T_02K" }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Silme oturumunun cihazı NOS-GM-LT, demirbaş listesinde genel müdürün zimmetinde. “Başka cihaz söz konusu değil” beyanı çürütüldü.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_T_ODA",
+          "kind": "PRESENT",
+          "match": { "statement": "T1", "evidence": ["ev_turnike", "ded_gm_oda"] },
+          "enabledWhen": { "any": [{ "hasEvidence": "clue_turnike_gm" }, { "hasEvidence": "ded_gm_oda" }] },
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_turnike_gm" }, { "hasEvidence": "ded_gm_oda" }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, kart geçiş kaydı: 17 Ekim 23.11’de sunucu odasına girilmiş. Kart: Tarık Sezer. Yedek cihazının kablosu o gece elle çekilmiş; bunun için o odada bulunmak gerekir."
+                },
+                { "speaker": "tarik", "text": "Kendi şirketimin odasına girmişim; suç mu bu? Evrak almaya gittim." },
+                { "speaker": "player", "text": "Gece on birde, evrak için, sunucu odasına?" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 200 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_t_oda", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Kart kaydı: cuma 23.11’de sunucu odasına genel müdürün kartıyla girilmiş; yedek o gece o odada devre dışı bırakıldı.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_T_MOTIF",
+          "kind": "PRESENT",
+          "match": { "statement": "T4", "evidence": ["ev_zeyil", "ded_motif"] },
+          "enabledWhen": {
+            "any": [{ "hasEvidence": "clue_limit" }, { "hasEvidence": "clue_teminat" }, { "hasEvidence": "ded_motif" }]
+          },
+          "visibleWhen": {
+            "any": [{ "hasEvidence": "clue_limit" }, { "hasEvidence": "clue_teminat" }, { "hasEvidence": "ded_motif" }]
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, 3 Ağustos tarihli zeyilname: teminat limiti iki milyondan yirmi milyona çıkarılmış; aynı gün poliçeye “eski ya da mevcut çalışanın kasıtlı eylemleri” teminatı eklenmiş. Zarar beyanınız da tam yirmi milyon."
+                },
+                { "speaker": "tarik", "text": "Bu bir tesadüf. İftira ediyorsunuz. Avukatım…" },
+                { "speaker": "kemal", "text": "Tanık, yalnızca soruya cevap verin." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 200 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_t_motif", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Zeyilname: olaydan iki buçuk ay önce limit on katına çıkarılmış ve “çalışan kötü niyeti” teminatı eklenmiş; saik ortaya kondu.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_T_SIFRE",
+          "kind": "PRESENT",
+          "match": { "statement": "T2", "evidence": ["ev_devir", "ded_sifre"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, 30 Eylül tarihli devir-teslim tutanağı, dördüncü madde: “Sunucu, güvenlik duvarı ve VPN yönetici şifreleri kapalı zarf içinde teslim edilmiştir.” Teslim alan: T. Sezer. İmza ve paraf tanığa ait."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bay Sezer, zarfı teslim alan siz. Şifreler 30 Eylül’den beri Bülent Bey’de değil, sizin elinizdeydi."
+                },
+                { "speaker": "tarik", "text": "Zarfı… kasaya koydum. Açmadım. Açtığımı kim söylüyor?" },
+                {
+                  "speaker": "kemal",
+                  "text": "Tanık, yalnızca soruya cevap verin. Tutanağa geçsin: şifre zarfını tanık teslim almış."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Açtığını söylemiyorum. Açabileceğini söylüyorum. Bu dosyada o fark, bir kullanıcı adının ağırlığını sıfırlar.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 200 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_t_sifre", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Devir-teslim tutanağının 4. maddesi: yönetici şifreleri kapalı zarfla teslim edilmiş, teslim alan T. Sezer. “Şifreleri ben almadım” beyanı tanığın kendi imzasıyla çelişiyor; kullanıcı adı tek bir kişiyi göstermez.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_T_IZIN",
+          "kind": "PRESENT",
+          "match": { "statement": "T2", "evidence": ["ev_eposta", "ded_riza"] },
+          "enabledWhen": {
+            "any": [{ "hasEvidence": "ev_eposta" }, { "hasEvidence": "ded_riza" }, { "hasEvidence": "clue_hesap_acik" }]
+          },
+          "visibleWhen": {
+            "any": [{ "hasEvidence": "ev_eposta" }, { "hasEvidence": "ded_riza" }, { "hasEvidence": "clue_hesap_acik" }]
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, 30 Eylül tarihli e-posta ve devir tutanağının altıncı maddesi: hesabı “kişisel dosyalar için 31 Ekim’e kadar açık” bırakan, tanığın kendisi. Parafı var."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bay Sezer, Selim’in 21.30’da kendi klasörüne erişmesine siz izin verdiniz. Bu giriş izinliydi."
+                },
+                { "speaker": "tarik", "text": "Ben iyilik yaptım. İyiliğim başıma kaldı." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 200 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_t_izin", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Hesabı açık bırakan ve kişisel dosyalar için izin veren bizzat genel müdür: 21.30 girişi rızaya dayanıyor (TCK 243/1 unsuru yok).",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_T5_CIHAZ",
+          "kind": "PRESENT",
+          "match": { "statement": "T5", "evidence": ["ded_cihaz", "ev_sema", "ev_tam_log"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, ham kayıt ve bilirkişi raporu: 21.30 oturumu SELIM-PC’den, 02.14 oturumu NOS-GM-LT’den. Bay Sezer, başka bir cihaz söz konusu."
+                },
+                { "speaker": "tarik", "text": "Bir ad. Ben bu adları bilmem. Bir bilgisayarcı ne isterse onu yazar." },
+                {
+                  "speaker": "player",
+                  "text": "Cihaz başka. Kimin olduğunu bu kâğıt söylemiyor; onu başka bir kâğıt söyler.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_t5", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Ham kayıt ve bilirkişi: 02.14 oturumu sanığın cihazından değil, NOS-GM-LT adlı başka bir cihazdan açılmış. “Başka cihaz söz konusu değil” beyanı çürüdü; cihazın kime ait olduğu ayrı bir soru.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_T_YEDEK",
+          "kind": "PRESENT",
+          "match": { "statement": "T3", "evidence": ["ded_yedek"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, şikâyet ekindeki fotoğraflar: yedek cihazının ekranında son başarılı yedek cuma 22.00. Sabah yuvası boş, kablosu sökülmüş. Aylardır arızalı bir cihaz, cuma akşamı yedek almış."
+                },
+                { "speaker": "tarik", "text": "Ben teknik detay bilmem. Bülent bilir." },
+                { "speaker": "player", "text": "Bülent Bey’in raporunda da aynı ekran var. Kendi fotoğrafınız." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 200 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_t_yedek", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Yedek cuma 22.00’de başarılı yedek almış; gece kablosu elle çekilmiş. “Aylardır arızalıydı” beyanı çürüdü.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_T_ONCE",
+          "kind": "PRESENT",
+          "match": { "statement": "T4", "evidence": ["ded_once_sigorta"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bay Sezer, sigortanın bu olayla ilgisi yoksa, eksperiniz cumartesi sabahı 11.20’de neden sunucu odasındaydı? Polis iki gün sonra geldi."
+                },
+                { "speaker": "tarik", "text": "Hasar varsa sigorta çağrılır. Kural bu." },
+                { "speaker": "kemal", "text": "Tutanağa geçsin: eksper incelemesi 18 Ekim, şikâyet 20 Ekim." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_t_motif", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Sigorta eksperi 18 Ekim sabahı odadaydı; şikâyet ve imaj 20 Ekim’de. “Sigortanın olayla ilgisi yok” beyanı tutmuyor.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "OB_T5",
+          "kind": "OBJECT",
+          "match": { "statement": "T5", "ground": "g_kanaat" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İtiraz ediyorum Sayın Hâkim. Hangi cihazın söz konusu olduğu teknik bir tespittir; tanığın kanaati değil. Bunu bilirkişi söyler."
+                },
+                { "speaker": "kemal", "text": "Yerinde. Tanık, teknik değerlendirme yapmayın; gördüklerinizi anlatın." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 50 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "İtiraz yerinde: “başka cihaz söz konusu değil” tanığın değerlendirmesidir, teknik bir bulgu değil; bunu bilirkişi söyler.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_SAVCILIK_T",
+          "kind": "PRESENT",
+          "match": { "evidence": ["ev_sikayet", "ev_log_ozet", "ev_imaj_rapor", "ev_zarar"] },
+          "maxUses": 10,
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "ozan", "text": "Sayın Hâkim, müdafi bizim delilimizi bizim tanığımıza okuyor." },
+                { "speaker": "player", "text": "Kendi kalemime kendim mürekkep döktüm.", "style": "thought" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -150, "line": "hatali" }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "İddianın ya da katılanın kâğıdını katılanın tanığına gösterdin; çelişki doğmadı. −1 güvenilirlik, −150 skor.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "FB_T_PRESENT",
+          "kind": "FALLBACK",
+          "fallbackFor": "PRESENT",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "kemal", "text": "Bu delilin beyanla ilgisini göremedim müdafi." },
+                { "speaker": "player", "text": "Yanlış kapıya vurdum. Ses salonda yankılandı.", "style": "thought" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -150, "line": "hatali" }
+          ],
+          "quality": { "q": "BAD", "feedback": "Yanlış delil: −1 güvenilirlik, −150 skor.", "category": "SORGULAMA" }
+        },
+        {
+          "id": "FB_T_OBJECT",
+          "kind": "FALLBACK",
+          "fallbackFor": "OBJECT",
+          "responses": [{ "lines": [{ "speaker": "kemal", "text": "İtiraz reddedildi. Dayanağı yok." }] }],
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -50, "line": "hatali" }
+          ],
+          "quality": { "q": "BAD", "feedback": "Dayanaksız itiraz.", "category": "SORGULAMA" }
+        },
+        { "id": "T02_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "T_03_G" }
+      ]
+    },
+    {
+      "id": "T_02K",
+      "type": "COURTROOM",
+      "mode": "STAGE",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Çekinme",
+      "courtStage": "TANIK_DINLEME",
+      "background": "durusma_salonu",
+      "onEnter": [{ "type": "VAR", "var": "tarik_coktu", "op": "set", "value": true }],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Salon sustu. Tarık Sezer bir an bana baktı; gülümsemeye çalıştı, beceremedi. Eli yeniden ceketinin iç cebine gitti ve orada kaldı; bir şeyi tutar gibi, ya da bir şeyin hâlâ orada olduğundan emin olmak ister gibi."
+            },
+            {
+              "speaker": "tarik",
+              "text": "Ben… Sayın Hâkim, ben bu teknik şeyleri bilmem. Bir yanlışlık var. Bir hesap, bir cihaz, bir hat…"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kemal Oran gözlüğünün üstünden baktı. Sakin, ama artık başka bir sakinlik."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Tanık Sezer, size bir hatırlatma yapmam gerekiyor. Kendinizi ya da kanunda sayılan yakınlarınızı ceza kovuşturmasına maruz bırakabilecek sorulara cevap vermekten çekinebilirsiniz."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tarık Sezer uzun süre konuştu, aslında hiçbir şey söylemedi. Sonra oturduğu yerde dikleşti; eli hâlâ ceketinin iç cebinde."
+            },
+            { "speaker": "tarik", "text": "O hâlde… avukatımla görüşmeden bu sorulara cevap vermeyeceğim." },
+            {
+              "speaker": "narrator",
+              "text": "Ozan Tekin ayağa kalktı, bir şey söyleyecekti, oturdu. Dinleyici sırasında Selim başını kaldırdı; ilk kez, doğrudan Tarık Sezer’e baktı. Tarık Sezer o bakışı karşılamadı."
+            },
+            { "speaker": "kemal", "text": "Tutanağa geçsin: tanık, bu aşamadan sonra cevap vermekten çekinmiştir." },
+            {
+              "speaker": "player",
+              "text": "Bir adamı yenmedim. Kendi hattını, kendi cihazını, kendi kartını önüne koydum. Gerisini sessizliği söyledi; sessizlik, bu salonda en yüksek ses.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "T02K_DEVAM", "kind": "CONTINUE", "label": "Devam", "role": "PRIMARY", "next": "T_03_G" }],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ozan", "label": "KATILAN VEKİLİ", "xFrac": 0.2 },
+          { "character": "kemal", "label": "HÂKİM", "xFrac": 0.5 },
+          { "character": "ferda", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "tarik",
+        "counsel": "deniz"
+      }
+    },
+    {
+      "id": "T_03_G",
+      "type": "DECISION",
+      "routes": [
+        { "when": { "flag": "yasar_hazir" }, "to": "T_03" },
+        { "when": { "flag": "nalan_tanik" }, "to": "T_04" },
+        { "to": "T_05" }
+      ],
+      "choices": []
+    },
+    {
+      "id": "T_03",
+      "type": "COURTROOM",
+      "mode": "TESTIMONY",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Yaşar Kılıç’ın dinlenmesi",
+      "courtStage": "TANIK_DINLEME",
+      "background": "durusma_salonu",
+      "witnessLabel": "TANIK · YAŞAR KILIÇ",
+      "rulesText": "İpucu: önce bastır, sonra doğru delille göster.",
+      "objectionGrounds": ["g_telkin", "g_kanaat"],
+      "onFirstEnter": [
+        {
+          "type": "IF",
+          "when": { "flag": "yasar_kocluk" },
+          "then": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -1500, "line": "etik" }
+          ]
+        }
+      ],
+      "lines": [
+        {
+          "when": { "flag": "yasar_ezber" },
+          "lines": [
+            { "speaker": "cevdet", "text": "Tanık Yaşar Kılıııç! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "Yaşar Usta kürsüye geldi; ceketini giymiş, kravat takmış, saçını ıslatıp taramıştı. Elinde kurşun kalemle yazılmış defteri. Yemin ederken sesi titredi; sözleri titremedi."
+            },
+            {
+              "speaker": "yasar",
+              "text": "Ben kapıdayım Sayın Hâkim. Otuz yıl. Ne gördüysem deftere yazdım. Defter benim namusum."
+            },
+            { "speaker": "kemal", "text": "Müdafi, sorularınız." },
+            {
+              "speaker": "player",
+              "text": "Bir bekçi, bir defter, bir namus. Kürsüde bundan sağlam bir şey az bulunur.",
+              "style": "thought"
+            },
+            {
+              "speaker": "ozan",
+              "text": "Sayın Hâkim, soruya geçmeden tanığa bir şey sormak istiyorum. Yaşar Bey, duruşmadan önce sanığın avukatıyla görüştünüz mü? Size ne söylemenizi istedi?"
+            },
+            { "speaker": "narrator", "text": "Yaşar Usta bir an bana baktı. Sonra hâkime." },
+            {
+              "speaker": "yasar",
+              "text": "Görüştüm. Yemin ettim, yalan söylemem: “O gece gelen Selim değildi deyin” dedi. Ben “yüzünü görmedim, diyemem” dedim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Salon dondu. Savcı kalemini bıraktı. Kemal Oran gözlüğünü çıkardı, bana baktı; uzun uzun."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Tutanağa geçsin. Müdafi, tanığa ne söyleyeceğini telkin etmenin ne anlama geldiğini bildiğinizi varsayıyorum. Bu beyanı değerlendirirken bunu göz önünde tutacağım."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Tutanak örneğinin Cumhuriyet Başsavcılığına ve Bursa Barosuna gönderilmesine. Devam edin."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir bekçiye namusunu çiğnetmeye çalıştım; reddetti. Şimdi o reddi bütün salona anlattı. Onun namusu temiz çıktı; benimki değil.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "yasar_kocluk" },
+          "lines": [
+            { "speaker": "cevdet", "text": "Tanık Yaşar Kılıııç! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "Yaşar Usta kürsüye geldi; ceketini giymiş, kravat takmış, saçını ıslatıp taramıştı. Elinde kurşun kalemle yazılmış defteri. Yemin ederken sesi titredi; sözleri titremedi."
+            },
+            {
+              "speaker": "yasar",
+              "text": "Ben kapıdayım Sayın Hâkim. Otuz yıl. Ne gördüysem deftere yazdım. Defter benim namusum."
+            },
+            { "speaker": "kemal", "text": "Müdafi, sorularınız." },
+            {
+              "speaker": "player",
+              "text": "Bir bekçi, bir defter, bir namus. Kürsüde bundan sağlam bir şey az bulunur.",
+              "style": "thought"
+            },
+            {
+              "speaker": "ozan",
+              "text": "Sayın Hâkim, tanığa bir sorum var. Yaşar Bey, saati bu kadar kesin söylüyorsunuz. Duruşmadan önce biri size bu saati söyledi mi?"
+            },
+            {
+              "speaker": "yasar",
+              "text": "Avukat hanım “tam 23.05 deyin, şaşmayın” dedi. Ama defterde de öyle yazıyor; ben defterden okurum."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Tutanağa geçsin. Tanığın beyanı bu açıklamayla birlikte değerlendirilecek. Tutanak örneğinin Cumhuriyet Başsavcılığına ve Bursa Barosuna gönderilmesine."
+            },
+            {
+              "speaker": "player",
+              "text": "Defter doğruydu. Ama artık kimse deftere bakmıyor; benim cümleme bakıyorlar.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "cevdet", "text": "Tanık Yaşar Kılıııç! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "Yaşar Usta kürsüye geldi; ceketini giymiş, kravat takmış, saçını ıslatıp taramıştı. Elinde kurşun kalemle yazılmış defteri. Yemin ederken sesi titredi; sözleri titremedi."
+            },
+            {
+              "speaker": "yasar",
+              "text": "Ben kapıdayım Sayın Hâkim. Otuz yıl. Ne gördüysem deftere yazdım. Defter benim namusum."
+            },
+            { "speaker": "kemal", "text": "Müdafi, sorularınız." },
+            {
+              "speaker": "player",
+              "text": "Bir bekçi, bir defter, bir namus. Kürsüde bundan sağlam bir şey az bulunur.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "statements": [
+        {
+          "id": "Y1",
+          "order": 1,
+          "segments": [
+            { "text": "Cuma gecesi kapıya " },
+            {
+              "text": "genel müdürün arabası geldi",
+              "highlightWhen": { "any": [{ "flag": "press_y1" }, { "hasEvidence": "clue_defter" }] }
+            },
+            { "text": "." }
+          ]
+        },
+        {
+          "id": "Y2",
+          "order": 2,
+          "segments": [
+            { "text": "“" },
+            {
+              "text": "Evrak unuttum",
+              "highlightWhen": { "any": [{ "flag": "press_y2" }, { "hasEvidence": "clue_yasar" }] }
+            },
+            { "text": "” dedi, içeri girdi." }
+          ]
+        },
+        {
+          "id": "Y3",
+          "order": 3,
+          "segments": [
+            { "text": "Yarım saat sonra çıktı; " },
+            { "text": "elinde bir şey yoktu", "highlightWhen": { "flag": "press_y2" } },
+            { "text": " ama ben cebine bakmadım." }
+          ]
+        }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ozan", "label": "KATILAN VEKİLİ", "xFrac": 0.2 },
+          { "character": "kemal", "label": "HÂKİM", "xFrac": 0.5 },
+          { "character": "ferda", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "yasar",
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "PR_Y1",
+          "kind": "PRESS",
+          "match": { "statement": "Y1" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Saat kaçtı, defterinizde yazıyor mu?" },
+                {
+                  "speaker": "yasar",
+                  "text": "Yazıyor. 23.05 giriş, 23.34 çıkış. Ben saati sonra uydurmam; o an yazarım. Kurşun kalemle."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_y1", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PR_Y2",
+          "kind": "PRESS",
+          "match": { "statement": "Y2" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "“Evrak unuttum” diyen kişinin sesini tanıdınız mı?" },
+                {
+                  "speaker": "yasar",
+                  "text": "Tanıdım. Genel müdür Tarık Bey. Yirmi yıldır her sabah “Günaydın Yaşar” der; sesini bilmez miyim? Ama yüzünü görmedim; karanlıktı, camı yarım indirdi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Sesi tanıdı; yüzü değil. Dürüst tanık, gördüğüyle duyduğunu ayırır. Savcı bunu zorlayamaz.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_y2", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PS_Y_DEFTER",
+          "kind": "PRESENT",
+          "match": { "statement": "Y1", "evidence": ["ev_turnike"] },
+          "enabledWhen": { "hasEvidence": "clue_turnike_gm" },
+          "visibleWhen": { "hasEvidence": "clue_turnike_gm" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, Yaşar Usta’nın defteri 23.05 kapı girişini gösteriyor. Kart kaydı da 23.11’de sunucu odası girişini: aynı gece, aynı kişi, altı dakika arayla. Bir kalem, bir makine; aynı şeyi söylüyor."
+                },
+                { "speaker": "kemal", "text": "Tutanağa geçsin." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 200 },
+            {
+              "type": "IF",
+              "when": { "not": { "flag": "yasar_kocluk" } },
+              "then": [{ "type": "VAR", "var": "pers", "op": "inc", "value": 1 }]
+            },
+            { "type": "VAR", "var": "contra_y1", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Bekçi defteri ile kart kaydı aynı saati gösteriyor: 23.05 kapı, 23.11 sunucu odası. İki bağımsız kayıt birbirini doğruluyor.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "FB_Y_PRESENT",
+          "kind": "FALLBACK",
+          "fallbackFor": "PRESENT",
+          "responses": [{ "lines": [{ "speaker": "kemal", "text": "Bu delilin beyanla ilgisini göremedim müdafi." }] }],
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -150, "line": "hatali" }
+          ],
+          "quality": { "q": "BAD", "feedback": "Yanlış delil.", "category": "SORGULAMA" }
+        },
+        {
+          "id": "FB_Y_OBJECT",
+          "kind": "FALLBACK",
+          "fallbackFor": "OBJECT",
+          "responses": [{ "lines": [{ "speaker": "kemal", "text": "İtiraz reddedildi." }] }],
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -50, "line": "hatali" }
+          ],
+          "quality": { "q": "BAD", "feedback": "Dayanaksız itiraz.", "category": "SORGULAMA" }
+        },
+        { "id": "T03_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "T_03X" }
+      ]
+    },
+    {
+      "id": "T_03X",
+      "type": "COURTROOM",
+      "mode": "OBJECTION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Katılan vekilinin sorusu",
+      "courtStage": "TANIK_DINLEME",
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "ozan",
+              "text": "Bir sorum var. Yaşar Bey, siz sanık Selim Aktaş’ın arkadaşısınız, değil mi? Size simit getirirdi. Onun için buradasınız; genel müdürü karalamak için uyduruyorsunuz, öyle değil mi?"
+            },
+            {
+              "speaker": "player",
+              "text": "Yönlendirici bir soru. Tanığın cevabını sorunun içine koymuş. İtiraz edebilirim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ozan", "label": "KATILAN VEKİLİ", "xFrac": 0.2 },
+          { "character": "kemal", "label": "HÂKİM", "xFrac": 0.5 },
+          { "character": "ferda", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "yasar",
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "X_ITIRAZ",
+          "kind": "OPTION",
+          "label": "İtiraz: yönlendirici soru",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İtiraz ediyorum Sayın Hâkim. Soru yönlendirici; tanığa cevabını dayatıyor ve onu suçluyor."
+                },
+                { "speaker": "kemal", "text": "Kabul. Vekil bey, tanığa görüşünü değil, bildiğini sorun." },
+                {
+                  "speaker": "yasar",
+                  "text": "İzninizle cevap vereyim Sayın Hâkim. Ben simidi herkese getiririm; müdüre de getirdim. Ben kimsenin arkadaşı değilim; kapının bekçisiyim. Defter ne diyorsa o."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 80 },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Cevabı içine yerleştiren, tanığı suçlayarak baskılayan soru yönlendiricidir (CMK 201/1).",
+            "category": "USUL_BILGISI"
+          },
+          "next": "T_04C_G"
+        },
+        {
+          "id": "X_CEVAP",
+          "kind": "OPTION",
+          "label": "İtiraz etme; tanık kendini savunsun",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "yasar",
+                  "expression": "kizgin",
+                  "text": "Arkadaşı değilim. Ben simidi müdüre de getirdim, size de getiririm. Namusum defterimdedir; arkadaşlık değil."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Yaşar Usta’nın sesi yükseldi. Ozan Tekin geri çekildi; bu kez o küçüldü."
+                }
+              ]
+            }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Yönlendirici soruya izin verdin; tanık güçlü çıktı ama soru da tutanakta kaldı."
+          },
+          "next": "T_04C_G"
+        },
+        {
+          "id": "X_KARSI",
+          "kind": "OPTION",
+          "label": "Vekilin tanığı tehdit ettiğini tutanağa geçirt",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Sayın Hâkim, vekil tanığı tehdit ediyor! Tutanağa geçsin." },
+                {
+                  "speaker": "kemal",
+                  "text": "Soru yerinde değil müdafi, ama tehdit de yok. Tutanağa geçecek bir şey yok. İkiniz de sakin olun."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -40 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Karşı tarafın sorusuna yerinde itiraz yerine onu “tehditle” suçlamak dayanaksız kalır; hâkim reddeder.",
+            "category": "USUL_BILGISI"
+          },
+          "next": "T_04C_G"
+        },
+        {
+          "id": "X_ILGISIZ",
+          "kind": "OPTION",
+          "label": "İtiraz: tanığın sanıkla ilişkisi dava konusu dışındadır, sorulamaz",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İtiraz ediyorum Sayın Hâkim. Tanığın sanıkla ilişkisi dava konusu dışında; sorulamaz."
+                },
+                {
+                  "speaker": "kemal",
+                  "text": "Reddedildi müdafi. Tanığın sanıkla ilişkisi her zaman sorulabilir; kanun bunu tanığa ilk iş sorulacaklar arasında sayar. Tanık, cevap verin."
+                },
+                { "speaker": "yasar", "text": "Arkadaşı değilim. Simidi herkese getiririm. Defter ne diyorsa o." },
+                {
+                  "speaker": "player",
+                  "text": "Doğru yere vurmadım. Soru yönlendiriciydi; ilişki sorusu değil. Hâkim farkı benden önce gördü.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -30 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Tanığın sanıkla ilişkisi beyanın güvenilirliğine ilişkindir ve sorulabilir (CMK 58/1). İtiraz edilecek olan ilişkinin sorulması değil, sorunun cevabı dayatan yönlendirici biçimiydi (CMK 201/1).",
+            "category": "USUL_BILGISI"
+          },
+          "next": "T_04C_G"
+        }
+      ]
+    },
+    {
+      "id": "T_04C_G",
+      "type": "DECISION",
+      "routes": [{ "when": { "flag": "nalan_tanik" }, "to": "T_04" }, { "to": "T_05" }],
+      "choices": []
+    },
+    {
+      "id": "T_04",
+      "type": "COURTROOM",
+      "mode": "TESTIMONY",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Nalan Korkmaz’ın dinlenmesi",
+      "courtStage": "TANIK_DINLEME",
+      "background": "durusma_salonu",
+      "witnessLabel": "TANIK · NALAN KORKMAZ",
+      "rulesText": "İpucu: önce bastır, sonra doğru delille göster.",
+      "objectionGrounds": ["g_kanaat"],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "cevdet", "text": "Tanık Nalan Korkmaaaz! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "Nalan Korkmaz kürsüye geldi; elinde bir ajanda, ceketi ütülü. Genel müdür dinleyici sırasındaydı; ona bakmadı. Yemin etti, sesi düz."
+            },
+            {
+              "speaker": "nalan",
+              "text": "Ben mali işler müdürüyüm Sayın Hâkim. On bir yıldır. Ben rakamlarla konuşurum; bugün de rakamlarla konuşacağım."
+            },
+            { "speaker": "kemal", "text": "Müdafi, sorularınız." }
+          ]
+        }
+      ],
+      "statements": [
+        {
+          "id": "NL1",
+          "order": 1,
+          "segments": [
+            { "text": "Ağustosta " },
+            {
+              "text": "bir zeyilname imzaladım",
+              "highlightWhen": { "any": [{ "flag": "press_nl1" }, { "hasEvidence": "clue_limit" }] }
+            },
+            { "text": "; genel müdür istedi." }
+          ]
+        },
+        {
+          "id": "NL2",
+          "order": 2,
+          "segments": [
+            { "text": "Şirket " },
+            {
+              "text": "temmuzda nakit sıkıntısındaydı",
+              "highlightWhen": { "any": [{ "flag": "press_nl2" }, { "hasEvidence": "clue_nalan" }] }
+            },
+            { "text": "; maaşlar gecikti." }
+          ]
+        },
+        {
+          "id": "NL3",
+          "order": 3,
+          "segments": [
+            { "text": "Zeyilnamenin " },
+            {
+              "text": "gerekçesini bilmiyorum",
+              "highlightWhen": { "any": [{ "flag": "press_nl3" }, { "hasEvidence": "clue_nalan" }] }
+            },
+            { "text": "; sormadım." }
+          ]
+        },
+        {
+          "id": "NL4",
+          "order": 4,
+          "segments": [
+            { "text": "Hasar ihbarını " },
+            {
+              "text": "pazartesi, polisle aynı gün",
+              "highlightWhen": {
+                "any": [
+                  { "flag": "press_nl4" },
+                  { "hasEvidence": "clue_eksper" },
+                  { "hasEvidence": "ded_once_sigorta" }
+                ]
+              }
+            },
+            { "text": " yaptık." }
+          ]
+        }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ozan", "label": "KATILAN VEKİLİ", "xFrac": 0.2 },
+          { "character": "kemal", "label": "HÂKİM", "xFrac": 0.5 },
+          { "character": "ferda", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "witness": "nalan",
+        "counsel": "deniz"
+      },
+      "choices": [
+        {
+          "id": "PR_NL1",
+          "kind": "PRESS",
+          "match": { "statement": "NL1" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "O zeyilname neyi değiştirdi?" },
+                {
+                  "speaker": "nalan",
+                  "text": "Limiti iki milyondan yirmi milyona çıkardı. Bir de bir cümle ekledi: “çalışan kötü niyeti.” Ben sormadan imzaladım; genel müdür “gerekli” dedi."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_nl1", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PR_NL2",
+          "kind": "PRESS",
+          "match": { "statement": "NL2" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Yirmi milyon şirket için ne ifade eder?" },
+                {
+                  "speaker": "nalan",
+                  "text": "Ayakta kalmak. O para gelmezse şirket bir yıl dayanmaz. Ama o para ancak biri suçlanırsa gelir. Poliçeyi öyle yazdık."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir muhasebeci, bir cümlede hem rakamı hem saiki söyledi. Hesap kapandı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_nl2", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PR_NL3",
+          "kind": "PRESS",
+          "match": { "statement": "NL3" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Sormadınız mı, yoksa size bir gerekçe söylendi mi?" },
+                {
+                  "speaker": "nalan",
+                  "text": "Söylendi. Sormadan söylendi. “Bir çalışan sorun çıkarırsa diye” dedi genel müdür. O hafta Selim’le yedekleme tartışması olmuştu."
+                },
+                { "speaker": "narrator", "text": "Ozan Tekin bir şey yazdı; altını iki kez çizdi." },
+                {
+                  "speaker": "player",
+                  "text": "Bir gerekçe; sorulmadan verilmiş. Sorulmadan verilen gerekçe, hazırlanmış gerekçedir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_nl3", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PR_NL4",
+          "kind": "PRESS",
+          "match": { "statement": "NL4" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "İhbarı kim yaptı? Siz mi?" },
+                { "speaker": "nalan", "text": "Evrakı ben imzaladım. Tarihi… bana söylenen tarihi yazdım." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_nl4", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PS_NL_ONCE",
+          "kind": "PRESENT",
+          "match": { "statement": "NL4", "evidence": ["ded_once_sigorta"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, eksper raporunun ilk fotoğrafı: 18 Ekim, 11.20, sunucu odası. Şikâyet 20 Ekim. Nalan Hanım, sigorta cumartesi sabahı oradaydı."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Nalan Korkmaz ajandasını kapattı. Bir an tavana baktı; hesap yapan biri gibi."
+                },
+                {
+                  "speaker": "nalan",
+                  "text": "Haklısınız. Cumartesi sabahı genel müdür eksperi kendisi aradı. Bana pazartesi “ihbar evrakını bugünün tarihiyle hazırla” dedi. Hazırladım."
+                },
+                { "speaker": "kemal", "text": "Tutanağa geçsin." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 200 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_nl_once", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Eksper 18 Ekim sabahı odadaydı; ihbar evrakı sonradan “pazartesi” tarihlenmiş. Sigortaya polisten önce haber verildi.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_NL_GEREKCE",
+          "kind": "PRESENT",
+          "match": { "statement": "NL3", "evidence": ["ev_zeyil", "ded_motif"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Gerekçeyi bilmiyorsunuz. Ama zeyilnamenin kendisi söylüyor: “eski ya da mevcut çalışanın kasıtlı eylemleri.” Bu cümleyi siz mi yazdınız?"
+                },
+                { "speaker": "nalan", "text": "Hayır. Sigortacıya genel müdür yazdırdı. Ben altına imza attım." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_nl", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Gerekçesi “bilinmeyen” zeyilnamenin metni, gerekçeyi kendisi söylüyor: “eski ya da mevcut çalışanın kasıtlı eylemleri.”",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_NL_ZEYIL",
+          "kind": "PRESENT",
+          "match": { "statement": "NL1", "evidence": ["ev_zeyil", "ded_motif"] },
+          "enabledWhen": { "any": [{ "hasEvidence": "clue_limit" }, { "hasEvidence": "ded_motif" }] },
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_limit" }, { "hasEvidence": "ded_motif" }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, tanığın imzaladığı zeyilname: 3 Ağustos, limit yirmi milyon, “çalışan kötü niyeti” teminatı. Olaydan iki buçuk ay önce. Tanığın anlattığı ve belgenin söylediği aynı."
+                },
+                { "speaker": "kemal", "text": "Tutanağa geçsin." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 200 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_nl", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Tanığın beyanı zeyilnameyle birebir örtüşüyor: olaydan önce yazılmış, zarara ölçülmüş bir poliçe.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "FB_NL_PRESENT",
+          "kind": "FALLBACK",
+          "fallbackFor": "PRESENT",
+          "responses": [{ "lines": [{ "speaker": "kemal", "text": "Bu delilin beyanla ilgisini göremedim müdafi." }] }],
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -150, "line": "hatali" }
+          ],
+          "quality": { "q": "BAD", "feedback": "Yanlış delil.", "category": "SORGULAMA" }
+        },
+        {
+          "id": "FB_NL_OBJECT",
+          "kind": "FALLBACK",
+          "fallbackFor": "OBJECT",
+          "responses": [{ "lines": [{ "speaker": "kemal", "text": "İtiraz reddedildi." }] }],
+          "effects": [
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "wrong", "op": "inc", "value": 1 },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -50, "line": "hatali" }
+          ],
+          "quality": { "q": "BAD", "feedback": "Dayanaksız itiraz.", "category": "SORGULAMA" }
+        },
+        { "id": "T04_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "T_05" }
+      ]
+    },
+    {
+      "id": "T_05",
+      "type": "COURTROOM",
+      "mode": "STAGE",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Mütalaa",
+      "courtStage": "MUTALAA",
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "when": { "ref": "mutalaa_beraat_b" },
+          "lines": [
+            { "speaker": "kemal", "text": "Delillerin tartışılması tamamlandı. Esas hakkındaki mütalaa." },
+            {
+              "speaker": "ferda",
+              "text": "Sayın Hâkim, yargılama ve Başsavcılığımızın soruşturması birlikte değerlendirildiğinde: silme oturumu sanığa ait olmayan bir cihaz ve hattan açılmıştır."
+            },
+            { "speaker": "ferda", "text": "Sanığın 21.30’daki erişimi ise işveren iznine dayanmaktadır." },
+            {
+              "speaker": "ferda",
+              "text": "Sanığın üzerine atılı suçları işlemediği sabittir. CMK 223/2-b uyarınca beraatine; fiilin gerçek failine ilişkin soruşturmanın derinleştirilmesine karar verilmesini talep ederim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı oturdu. Dinleyici sırasında Tarık Sezer’in yeri boştu; ara verildiğinde çıkmış, dönmemişti."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir savcının “işlemediği sabittir” demesi bir zafer değil. İşini sonuna kadar yapmasıdır. Bu dosyada ilk kez biri öyle yaptı; ben de ona bir dilekçeyle yardım ettim.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "ref": "mutalaa_beraat_e" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Hâkim saatine baktı; sonra pencereye. Adliyenin camlarında yağmur artık ince bir sis gibiydi. Salonda kimse kıpırdamıyordu."
+            },
+            { "speaker": "kemal", "text": "Delillerin tartışılması tamamlandı. Esas hakkındaki mütalaa." },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Ferda Yalın ayağa kalkmadan önce dosyasının ilk sayfasını kapattı; iddianameyi. Önünde yalnızca bilirkişi raporu kaldı."
+            },
+            {
+              "speaker": "ferda",
+              "text": "Sayın Hâkim, dosyadaki esas delil olan DataKale imajı, elde edilme zinciri ve bütünlüğü bakımından güvenilir bulunmamıştır. Bilirkişi, silme oturumunun sanığın cihazından yapıldığının söylenemeyeceğini tespit etmiştir."
+            },
+            {
+              "speaker": "ferda",
+              "text": "Sanığın suçu işlediği sabit olmadığından CMK 223/2-e uyarınca beraatine; fiili işleyen kişi yönünden soruşturma yapılmasına karar verilmesini talep ederim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Katılan vekili Ozan Tekin kalemini masaya bıraktı; sesi çıkmadı, ama kalem masada iki kez yuvarlandı."
+            },
+            {
+              "speaker": "ozan",
+              "text": "Sayın Hâkim, katılan şirket olarak mütalaaya katılmıyoruz. Zarar ortadadır; zararın bir faili vardır."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Zararın varlığı tartışmalı değil avukat bey. Tartışılan, failin kim olduğu. Not edildi."
+            },
+            {
+              "speaker": "player",
+              "text": "Şüpheden beraat. Bir ismi söylemeden, bir çatlaktan geçerek. Sağlam değil; ama yeter.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Selim yanımda nefesini tuttu. Ona dönüp “henüz değil” demek istedim. Demedim. Hâkimin önünde bir avukatın yüzü de bir beyan sayılır.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "kemal", "text": "Delillerin tartışılması tamamlandı. Esas hakkındaki mütalaa." },
+            {
+              "speaker": "ferda",
+              "text": "Sayın Hâkim, oturum dökümü sanığın kullanıcı adını, emniyet raporu sanığın o akşam sisteme eriştiğini göstermektedir. Sanığın işten çıkarılma saiki de dosyadadır."
+            },
+            {
+              "speaker": "ferda",
+              "text": "Sanığın TCK 244/2 ve 243/1 uyarınca cezalandırılmasına karar verilmesini talep ederim."
+            },
+            {
+              "speaker": "player",
+              "text": "“Kayıt yalan söylemez.” Savcı kaydı okudu. Kaydın yarısını. Ötekini ben açacaktım; açabildim mi, birazdan belli olacak.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "T05_DEVAM", "kind": "CONTINUE", "label": "Esas hakkında savunma", "role": "PRIMARY", "next": "T_06P" }
+      ],
+      "stage": {
+        "banner": "ADALET MÜLKÜN TEMELİDİR",
+        "bench": [
+          { "character": "ozan", "label": "KATILAN VEKİLİ", "xFrac": 0.2 },
+          { "character": "kemal", "label": "HÂKİM", "xFrac": 0.5 },
+          { "character": "ferda", "label": "C. SAVCISI", "xFrac": 0.8 }
+        ],
+        "counsel": "deniz"
+      }
+    },
+    {
+      "id": "T_06P",
+      "type": "CHOICE",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "title": "Dayanaklar",
+      "hud": ["noktalar", "cred", "pers"],
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "kemal", "text": "Müdafi, esas hakkındaki savunmanız." },
+            {
+              "speaker": "narrator",
+              "text": "Ayağa kalktım. Cübbenin kolu masadaki suyu devirecekti; Selim bardağı son anda tuttu. Salonda biri güldü, sonra sustu."
+            },
+            {
+              "speaker": "player",
+              "text": "Haftalardır bu dakikayı düşünüyorum. Bir kâğıda yazdım, sildim, yeniden yazdım. Şimdi kâğıda bakmayacağım.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Üç dayanak. Leyla’nın sesi: “Fazlası gürültüdür.” Her biri dosyada bir kâğıda dayanmalı.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "P_RIZA",
+          "kind": "OPTION",
+          "label": "21.30 girişi izinliydi; “hukuka aykırı giriş” yok",
+          "cost": [{ "var": "noktalar", "amount": 1 }],
+          "maxUses": 1,
+          "responses": [
+            {
+              "when": { "ref": "riza_kanit" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Birincisi: giriş. Sisteme girme suçu, girmenin hukuka aykırı olmasını ister. Müvekkilim 21.30’da kendi kişisel klasörüne, işverenin yazılı izniyle erişti. İzinli bir giriş suç değildir."
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bunu söylemek istedim; ama elimde onu taşıyacak bir kâğıt yoktu. Hâkim bunu benden önce gördü.",
+                  "style": "thought"
+                },
+                { "speaker": "kemal", "text": "Müdafi, bu dayanağı dosyada hangi delil destekliyor?" }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "ref": "riza_kanit" },
+              "then": [
+                { "type": "VAR", "var": "arg_riza", "op": "set", "value": true },
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+              ],
+              "else": [
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
+                { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "P_IMAJ",
+          "kind": "OPTION",
+          "label": "Silmenin esas delili olan imaj güvenilmez",
+          "cost": [{ "var": "noktalar", "amount": 1 }],
+          "maxUses": 1,
+          "responses": [
+            {
+              "when": { "ref": "imaj_coktu" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İkincisi: imaj. Suçlamanın tek somut dayanağı, iki gün kurcalanmış bir diskten alınan, iki özet değeri tutmayan bir imajdı. Bilirkişi onu güvenilmez buldu. Güvenilmez bir imaj, bir mahkûmiyete temel olamaz."
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bunu söylemek istedim; ama elimde onu taşıyacak bir kâğıt yoktu. Hâkim bunu benden önce gördü.",
+                  "style": "thought"
+                },
+                { "speaker": "kemal", "text": "Müdafi, bu dayanağı dosyada hangi delil destekliyor?" }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "ref": "imaj_coktu" },
+              "then": [
+                { "type": "VAR", "var": "arg_imaj", "op": "set", "value": true },
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+              ],
+              "else": [
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
+                { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "P_CIHAZ",
+          "kind": "OPTION",
+          "label": "Silme başka bir cihaz ve hattan yapıldı",
+          "cost": [{ "var": "noktalar", "amount": 1 }],
+          "maxUses": 1,
+          "responses": [
+            {
+              "when": { "ref": "baskasi_kanit" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Üçüncüsü: cihaz. Silme oturumu, kullanıcı adı müvekkilime ait olsa da onun bilgisayarından değil; başka bir cihazdan, başka bir hattan açıldı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kullanıcı adı bir kişi değildir; bir anahtardır. O anahtarın kopyası başkasının elindeydi."
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bunu söylemek istedim; ama elimde onu taşıyacak bir kâğıt yoktu. Hâkim bunu benden önce gördü.",
+                  "style": "thought"
+                },
+                { "speaker": "kemal", "text": "Müdafi, bu dayanağı dosyada hangi delil destekliyor?" }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "ref": "baskasi_kanit" },
+              "then": [
+                { "type": "VAR", "var": "arg_cihaz", "op": "set", "value": true },
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+              ],
+              "else": [
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
+                { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "P_YEDEK",
+          "kind": "OPTION",
+          "label": "Yedek, silmeden önce odada elle devre dışı bırakıldı",
+          "cost": [{ "var": "noktalar", "amount": 1 }],
+          "maxUses": 1,
+          "responses": [
+            {
+              "when": {
+                "any": [
+                  { "hasEvidence": "ded_yedek" },
+                  { "hasEvidence": "ded_gm_oda" },
+                  { "flag": "contra_t_oda" },
+                  { "flag": "contra_t_yedek" }
+                ]
+              },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Yedek sistemi cuma akşamı çalışıyordu; o gece sunucu odasında elle devre dışı bırakıldı. Uzaktan silen biri, odadaki kabloyu çekemez. Bu, planlı ve içeriden bir eylemdir; müvekkilimin kartı ise aylar önce iade edilmişti."
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bunu söylemek istedim; ama elimde onu taşıyacak bir kâğıt yoktu. Hâkim bunu benden önce gördü.",
+                  "style": "thought"
+                },
+                { "speaker": "kemal", "text": "Müdafi, bu dayanağı dosyada hangi delil destekliyor?" }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            {
+              "type": "IF",
+              "when": {
+                "any": [
+                  { "hasEvidence": "ded_yedek" },
+                  { "hasEvidence": "ded_gm_oda" },
+                  { "flag": "contra_t_oda" },
+                  { "flag": "contra_t_yedek" }
+                ]
+              },
+              "then": [
+                { "type": "VAR", "var": "arg_yedek", "op": "set", "value": true },
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+              ],
+              "else": [
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
+                { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "P_MOTIF",
+          "kind": "OPTION",
+          "label": "Zararın dayanağı, olaydan önce büyütülen bir poliçe",
+          "cost": [{ "var": "noktalar", "amount": 1 }],
+          "maxUses": 1,
+          "responses": [
+            {
+              "when": {
+                "any": [
+                  { "hasEvidence": "ded_motif" },
+                  { "flag": "contra_t_motif" },
+                  { "flag": "contra_nl" },
+                  { "flag": "contra_nl_once" }
+                ]
+              },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Beyan edilen yirmi milyonluk zarar, olaydan iki buçuk ay önce tam bu tutara çıkarılan, “çalışan kötü niyeti”ni kapsayan bir sigorta poliçesine dayanıyor. Bir çalışanın suçlanması, bu ödemenin ön şartıydı."
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bunu söylemek istedim; ama elimde onu taşıyacak bir kâğıt yoktu. Hâkim bunu benden önce gördü.",
+                  "style": "thought"
+                },
+                { "speaker": "kemal", "text": "Müdafi, bu dayanağı dosyada hangi delil destekliyor?" }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            {
+              "type": "IF",
+              "when": {
+                "any": [
+                  { "hasEvidence": "ded_motif" },
+                  { "flag": "contra_t_motif" },
+                  { "flag": "contra_nl" },
+                  { "flag": "contra_nl_once" }
+                ]
+              },
+              "then": [
+                { "type": "VAR", "var": "arg_motif", "op": "set", "value": true },
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+              ],
+              "else": [
+                { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
+                { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "P_BITIR",
+          "kind": "CONTINUE",
+          "label": "Esas savunmaya geç",
+          "role": "PRIMARY",
+          "enabledWhen": {
+            "any": [
+              { "cmp": [{ "var": "noktalar" }, "==", 0] },
+              { "flag": "arg_riza" },
+              { "flag": "arg_imaj" },
+              { "flag": "arg_cihaz" }
+            ]
+          },
+          "lockedReason": "En az bir dayanak seç.",
+          "next": "T_06"
+        }
+      ]
+    },
+    {
+      "id": "T_06",
+      "type": "CHOICE",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "title": "Esas savunma",
+      "hud": ["cred", "pers"],
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Hâkim yazıyordu. Kâtibin parmakları klavyede; her dayanaktan sonra bir duraklama, sonra yeniden tıkırtı."
+            },
+            {
+              "speaker": "player",
+              "text": "Dayanaklar söylendi. Şimdi hepsini bir talepte toplamam gerekiyor. Hâkimin kalemine geçecek tek bir cümle.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın dediği gibi: talep, savunmanın imzasıdır. Ne istediğini bilmeyen avukata mahkeme de bir şey veremez.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "S_MASUMIYET",
+          "kind": "OPTION",
+          "label": "Beraat: giriş izinliydi, silmeyi başkası yaptı",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, bu dosyada bir kullanıcı adı vardı; herkes onu bir isim sandı. Oysa o bir anahtardı ve anahtarın kopyası başkasının zarfındaydı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "O gece müvekkilim kendi fotoğraflarını, izinle aldı. Silme ise başka bir cihazdan, başka bir hattan, odadaki yedek elle susturulduktan sonra yapıldı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Müvekkilimin bu suçları işlemediği sabittir; en azından işlediği sabit değildir. Beraatini talep ediyorum."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Hâkim Kemal Oran gözlüğünü çıkardı. Bana değil, dosyaya baktı; uzun uzun."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "closing_masumiyet", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "cmp": [
+                  {
+                    "add": [
+                      { "if": { "when": { "flag": "arg_riza" }, "then": 1, "else": 0 } },
+                      { "if": { "when": { "flag": "arg_imaj" }, "then": 1, "else": 0 } },
+                      { "if": { "when": { "flag": "arg_cihaz" }, "then": 1, "else": 0 } },
+                      { "if": { "when": { "flag": "arg_yedek" }, "then": 1, "else": 0 } },
+                      { "if": { "when": { "flag": "arg_motif" }, "then": 1, "else": 0 } }
+                    ]
+                  },
+                  ">=",
+                  2
+                ]
+              },
+              "then": [
+                {
+                  "type": "SCORE",
+                  "category": "SAVUNMA_STRATEJISI",
+                  "amount": {
+                    "if": {
+                      "when": { "cmp": [{ "var": "strategy" }, "==", "MASUMIYET"] },
+                      "then": { "div": [{ "mul": [200, { "var": "strategy_pct" }] }, 100] },
+                      "else": 200
+                    }
+                  }
+                },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+              ],
+              "else": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 }]
+            }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Delillerle desteklenen beraat talebi: sanığın suçu işlemediği (CMK 223/2-b), olmazsa işlediğinin sabit olmadığı (223/2-e).",
+            "category": "SAVUNMA_STRATEJISI"
+          },
+          "next": "T_07"
+        },
+        {
+          "id": "S_USUL",
+          "kind": "OPTION",
+          "label": "Beraat: esas delil hukuken değersiz, geriye delil kalmıyor",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, bir dijital delilin tek güvencesi bütünlüğüdür: ne zaman, nereden, hangi özet değerle alındığı. Bu dosyadaki esas delil, iki gün kurcalanmış bir diskten, tutmayan özet değerlerle alınmış bir imajdır."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Böyle bir imaj hükme esas alınamaz. O çıkınca geriye yalnızca bir kullanıcı adı kalıyor; o da bir kişiyi göstermiyor."
+                },
+                { "speaker": "player", "text": "Müvekkilimin CMK 223/2-e uyarınca beraatini talep ediyorum." },
+                {
+                  "speaker": "narrator",
+                  "text": "Dr. Sema Uçar dinleyici sırasından başını salladı; bir mühendisin, doğru kurulmuş bir cümleye verdiği onay."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "closing_usul", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": { "any": [{ "flag": "arg_imaj" }, { "flag": "sema_dinlendi" }, { "flag": "contra_b3" }] },
+              "then": [
+                {
+                  "type": "SCORE",
+                  "category": "SAVUNMA_STRATEJISI",
+                  "amount": {
+                    "if": {
+                      "when": { "cmp": [{ "var": "strategy" }, "==", "USUL"] },
+                      "then": { "div": [{ "mul": [200, { "var": "strategy_pct" }] }, 100] },
+                      "else": 200
+                    }
+                  }
+                },
+                { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+              ],
+              "else": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 40 }]
+            }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Elde etme zinciri ve bütünlüğü bozuk dijital delilin hükme esas alınamayacağını savundun (CMK 134, 217).",
+            "category": "SAVUNMA_STRATEJISI"
+          },
+          "next": "T_07"
+        },
+        {
+          "id": "S_TERDIT",
+          "kind": "OPTION",
+          "label": "Önce beraat; olmazsa yalnızca izinli giriş, silme sabit değil",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Sayın Hâkim, öncelikle müvekkilimin beraatini talep ediyorum." },
+                {
+                  "speaker": "player",
+                  "text": "Mahkeme aksi kanaatteyse: verileri yok etme eylemi (TCK 244/2) güvenilir hiçbir delille sanığa bağlanamamıştır."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Geriye yalnızca 21.30’daki erişim kalır; o da işveren iznine dayandığından sisteme hukuka aykırı girme (TCK 243/1) de oluşmaz."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir yandan “yapmadı,” öbür yandan “yaptıysa bile izinliydi.” Hukuk bunu ister. Selim’in gözleri istemiyor.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "closing_terdit", "op": "set", "value": true },
+            {
+              "type": "SCORE",
+              "category": "SAVUNMA_STRATEJISI",
+              "amount": {
+                "if": {
+                  "when": { "cmp": [{ "var": "strategy" }, "==", "INDIRIM"] },
+                  "then": { "div": [{ "mul": [150, { "var": "strategy_pct" }] }, 100] },
+                  "else": 150
+                }
+              }
+            }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Terditli savunma: önce beraat; aksi hâlde 244/2’nin sabit olmadığı, kalsa kalsa izinli olduğu için 243’ün de oluşmadığı.",
+            "category": "SAVUNMA_STRATEJISI"
+          },
+          "next": "T_07"
+        },
+        {
+          "id": "S_DUYGU",
+          "kind": "OPTION",
+          "label": "Bir babanın gözyaşlarına seslen",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, salonda bir baba var. Küçük bir kızı her akşam bir resim çiziyor…"
+                },
+                { "speaker": "kemal", "text": "Müdafi, esas hakkında. Delilleri konuşalım." },
+                {
+                  "speaker": "player",
+                  "text": "Defne’nin resmini de kullandım. Utandım. Hâkim delili bekliyordu; ben duyguyu sundum.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -50 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Esas savunma delil tartışmasıdır; duygusal çağrı tek hâkimi ikna etmez, zayıflık işareti verir.",
+            "category": "SAVUNMA_STRATEJISI"
+          },
+          "next": "T_07"
+        }
+      ]
+    },
+    {
+      "id": "T_07",
+      "type": "CHOICE",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "title": "Son söz",
+      "hud": ["cred", "pers"],
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "kemal", "text": "Sanık, son sözünüz nedir?" },
+            {
+              "speaker": "narrator",
+              "text": "Selim ayağa kalktı. Bana baktı; ne söyleyeceğini bilmiyordum, bilmemem gerekiyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Son söz kanunen sanığındır. Burada benim işim bitiyor. Bundan sonrası bir adamın sesi.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "L_HAFIZA",
+          "kind": "OPTION",
+          "label": "Selim kendi işini anlatsın",
+          "responses": [
+            {
+              "when": { "flag": "selim_hazir" },
+              "lines": [
+                {
+                  "speaker": "selim",
+                  "text": "Ben dokuz yıl o şirketin hafızasıydım Sayın Hâkim. Her gece yedeğini ben aldım. Kimse bir hafızayı silmek için kendi hafızasını vermez."
+                },
+                {
+                  "speaker": "selim",
+                  "text": "Benim adım bir kayıtta kaldı. Ama o kayıt benim değildi; sadece adımı taşıyordu. Ben doğruyu söyledim; kayıt bana yalan söyledi."
+                },
+                { "speaker": "narrator", "text": "Salon sessizdi. Gül, Defne’nin resmini göğsüne bastırdı." }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "selim",
+                  "text": "Ben o şirketin hafızasıydım Sayın Hâkim. Kimse kendi hafızasını silmez. Ben bir şey silmedim; benim adımı sildiler, bir kaydın içine."
+                },
+                { "speaker": "narrator", "text": "Gül başını eğdi. Salonda kimse konuşmadı." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 50 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Sanığın kendi sesiyle, suçlamasız, delil tartışmasını özetleyen bir son söz.",
+            "category": "SAVUNMA_STRATEJISI"
+          },
+          "next": "T_08"
+        },
+        {
+          "id": "L_SUCLA",
+          "kind": "OPTION",
+          "label": "Selim asıl sileni adıyla söylesin",
+          "visibleWhen": {
+            "any": [
+              { "flag": "fact_gm" },
+              { "flag": "contra_t_cihaz" },
+              { "flag": "contra_t_hat" },
+              { "hasEvidence": "clue_turnike_gm" }
+            ]
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "selim",
+                  "expression": "kizgin",
+                  "text": "Asıl silen Tarık Sezer’dir! O yaptı, sigorta parası için!"
+                },
+                {
+                  "speaker": "kemal",
+                  "text": "Sanık, bir başkasını suçlamak son sözün konusu değildir. Kendinizi anlatın."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kayıtların sakin sesini, bir öfke bastırdı. Dayanakları ben kurmuştum; son sözde o dağıttı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -30 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
+            { "type": "VAR", "var": "selim_suclama", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Sanığın son sözde bir kişiyi suçlaması iftira riski taşır ve lehe havayı bozar; faili savcılık soruşturur, sanık değil.",
+            "category": "SAVUNMA_STRATEJISI"
+          },
+          "next": "T_08"
+        },
+        {
+          "id": "L_SESSIZ",
+          "kind": "OPTION",
+          "label": "Söz hakkını kısa kullansın",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "selim", "text": "Söyleyecek bir şeyim yok Sayın Hâkim. Avukatım her şeyi söyledi." }
+              ]
+            }
+          ],
+          "quality": { "q": "NEUTRAL", "feedback": "Susmak da bir haktır; ama son söz sanığa kalan son andır." },
+          "next": "T_08"
+        },
+        {
+          "id": "L_OZUR",
+          "kind": "OPTION",
+          "label": "Şirketten özür dilesin; pişmanlık hâkimi yumuşatır",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "selim",
+                  "text": "Şirketten… özür dilerim Sayın Hâkim. Yaşananlar için. Dokuz yıl çalıştığım yer."
+                },
+                { "speaker": "kemal", "text": "Neyin özrünü diliyorsunuz sanık? Suçlamayı kabul mü ediyorsunuz?" },
+                { "speaker": "selim", "text": "Hayır… Ben… Yani, yaşananlar için." },
+                {
+                  "speaker": "player",
+                  "text": "Bir özür, ne için olduğu söylenmeyince bir itiraf gibi duyulur. Ona bu cümleyi ben önerdim.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Suçlamayı reddeden sanığın son sözde özür dilemesi kabul gibi okunur ve savunmayla çelişir; son söz sanığındır, müdafi ona bir pişmanlık rolü biçmez.",
+            "category": "SAVUNMA_STRATEJISI"
+          },
+          "next": "T_08"
+        }
+      ]
+    },
+    {
+      "id": "T_08",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "title": "Hüküm",
+      "lines": [
+        {
+          "when": { "flag": "closing_terdit" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Hâkim dosyayı topladı. “Karar için saat on dörtte” dedi. Selim bana döndü: “Terditli ne demek avukat hanım? İki ihtimal mi var?” Cevap vermedim; terditli bir savunma, müvekkile iki cevap birden verir, ikisi de ağır."
+            },
+            { "speaker": "cevdet", "text": "Taraflar salona! Hüküm açıklanacak. Hı-hım." }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "closing_masumiyet" }, { "flag": "closing_usul" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Hâkim dosyayı topladı, gözlüğünü çıkardı. “Karar için saat on dörtte.” Koridorda Gül’ün nefesi, Selim’in parmaklarının masaya vuruşu, Defne’nin katlanıp açılan resmi."
+            },
+            { "speaker": "cevdet", "text": "Taraflar salona! Hüküm açıklanacak. Hı-hım." },
+            {
+              "speaker": "player",
+              "text": "Hüküm. Bir dosyanın son satırı; bir ailenin ilk cümlesi.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Hâkim dosyayı topladı. “Karar için saat on dörtte.” Koridorda beklerken Selim bir sigara yaktı, yarısında söndürdü."
+            },
+            { "speaker": "cevdet", "text": "Taraflar salona! Hüküm açıklanacak. Hı-hım." }
+          ]
+        }
+      ],
+      "routes": [{ "to": "R_KARAR" }],
+      "choices": []
+    },
+    {
+      "id": "T_INT_COKUS",
+      "type": "STORY",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "title": "Çöküş",
+      "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Bir yanlış daha. Hâkim Kemal Oran kalemini bıraktı. Gözlüğünün üstünden baktı; kızgın değil, yorgun."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Müdafi, sunduklarınızın beyanlarla ilgisi kalmadı. Mahkeme bu sunumları dikkate almayacak."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Selim ayağa kalktı. Bana değil, hâkime baktı. Sesi titriyordu; sözleri titremiyordu."
+            },
+            {
+              "speaker": "selim",
+              "text": "Sayın Hâkim… Avukatıma güvenim kalmadı. Kendime başka bir avukat tutmak istiyorum. Bana süre verir misiniz?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gül arkada başını önüne eğdi. Ozan Tekin kalemini masaya bıraktı; bu kez yuvarlanmadı."
+            },
+            { "speaker": "kemal", "text": "Sanığın müdafi seçme hakkı vardır. Müdafi, diyeceğiniz?" },
+            { "speaker": "player", "text": "Yok Sayın Hâkim." },
+            {
+              "speaker": "player",
+              "text": "Güvenimi tek tek harcadım. Her yanlış kâğıt bir kalp götürdü. Şimdi elimde bir dosya var; müvekkilim yok.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "COKUS_DEVAM", "kind": "CONTINUE", "label": "Ara karar", "role": "PRIMARY", "next": "R_KARAR" }
+      ]
+    },
+    {
+      "id": "R_KARAR",
+      "type": "RESULT",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "title": "Karar",
+      "background": "durusma_salonu",
+      "choices": []
+    }
+  ]
+}

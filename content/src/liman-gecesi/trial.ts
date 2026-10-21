@@ -44,6 +44,10 @@ const GERCEK_FAIL: Cond = all(
   ref('olum_sonra'),
 );
 const SUPHE: Cond = all(ref('donus_yok'), ref('olum_sonra'));
+/** Raporu düzenleyen uzman yalnızca ilk celsede (TL_ATK) ya da arada ek dilekçeyle (EK_ATK) istendiyse dinlenir. */
+const UZMAN: Cond = any(flag('talep_atk'), flag('ek_atk'));
+/** Son öğün saatinin duruşma kaydındaki dayanağı: kantin kaydı ya da Şükrü Usta’nın ilk celsedeki beyanı (CMK 217/1). */
+const SAAT_KAYIT: Cond = any(has('ev_kantin'), flag('s3_kantin'));
 
 const presentMiss = (id: string) =>
   fallback(id, 'PRESENT', {
@@ -123,8 +127,11 @@ export const trial: CasePart = {
       title: 'Duruşma · 2. Celse',
       courtStage: 'ACILIS',
       background: 'durusma_salonu',
-      onFirstEnter: [meet('karaca')],
-      lines: B(`
+      onFirstEnter: [ifThen(UZMAN, [meet('karaca')])],
+      lines: [
+        W(
+          UZMAN,
+          `
 mubasir: Bursa Altıncı Ağır Ceza! Tarık Demirel dosyası! Taraflar, bilirkişi, tanıklar… salona!
 baskan: Yoklama yapıldı. Ara karar cevapları okundu: Adli Tıp Kurumu’nun nihai raporu ve kurumların cevapları dosyaya girdi.
 baskan: Raporu düzenleyen uzman Doç. Dr. Selma Karaca hazır. Dinleyeceğiz.
@@ -137,8 +144,21 @@ savci: Sayın Başkan, kurumların cevaplarını inceledik. Esasa ilişkin gör�
 tarik: Kâğıtlar ne diyecek abla?
 - Ne olduysa onu. Ne olmadıysa onu.
 > Başını salladı. Galeriye döndü; Gülay ona belli belirsiz bir el işareti yaptı. Sevim ikisini de görmezden geldi; gözleri kürsüdeki rapordaydı.
+`,
+        ),
+        O(`
+mubasir: Bursa Altıncı Ağır Ceza! Tarık Demirel dosyası! Taraflar, tanıklar… salona!
+baskan: Yoklama yapıldı. Ara karar cevapları okundu: Adli Tıp Kurumu’nun nihai raporu ve kurumların cevapları dosyaya girdi.
+baskan: Raporu düzenleyenin dinlenmesi istenmediğinden kurum raporu okunmakla yetinildi. Rapor ölüm zamanını 23.00 ile 01.00 arası gösteriyor.
+savci: Sayın Başkan, rapor kırığın düşmeyle oluşabileceğini dışlamıyor. Görüşümüzü mütalaada bildireceğiz.
+~ Bir rapor soru sorulmadıkça yalnızca kendini tekrar eder. Ona soru sorulmasını istemedim; şimdi kâğıt konuşuyor, ben susuyorum.
+> Tarık sanık sırasında, ellerini dizlerine koymuş, bana baktı. Galeride Gülay, Elif’in resim defterini kucağında sıkıyordu.
 `),
-      choices: [cont('T00_DEVAM', 'Bilirkişi dinlensin', 'T_01')],
+      ],
+      choices: [
+        cont('T00_DEVAM', 'Bilirkişi dinlensin', 'T_01', { visibleWhen: UZMAN }),
+        cont('T00_OKUNDU', 'Tanıkların dinlenmesine geçilsin', 'T_02', { visibleWhen: not(UZMAN) }),
+      ],
     }),
     court2.testimony('T_01', {
       title: 'Bilirkişi',
@@ -229,28 +249,43 @@ karaca: O zaman yorumlardım. Sindirim kişiden kişiye değişir; ama sıralama
 ~ “Bilinmediği için.” Kimse sormadığı için.
 `),
         }),
-        presentRule('PS_B2', 'B2', ['ded_saat', 'ded_canli'], {
+        presentRule('PS_B2', 'B2', ['ded_saat'], {
+          enabledWhen: SAAT_KAYIT,
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_b2')],
-          good: 'Son öğün (23.34) ve son telefon görüşmesi (23.41) ölüm zamanını sanığın limandan çıkışından (23.18) sonraya taşıdı.',
+          good: 'Son öğün (23.34, kayıtta) ve nihai rapordaki mide içeriği ölüm zamanını sanığın limandan çıkışından (23.18) sonraya taşıdı.',
           category: 'SORGULAMA',
-          responses: [
-            W(
-              has('ded_saat'),
-              `
-- Hocam, kantin kaydı: maktul 23.34’te tost ve ayran almış. Midede yarı sindirilmiş ekmek, peynir ve süt ürünü var.
-karaca: Bu bilgi bana verilmedi. Verilseydi… Midede tanınabilir, yarı sindirilmiş içerik varsa ölüm son öğünden kısa süre sonradır; yarım saat ila bir buçuk saat.
+          responses: B(`
+- Hocam, son öğünün saati dosyada: maktul 23.34’te kantinde tost ve ayran almış. Raporunuzda midede yarı sindirilmiş ekmek, peynir ve süt ürünü var.
+karaca: Bu bilgi rapor yazılırken bana verilmedi. Verilseydi… Midede tanınabilir, yarı sindirilmiş içerik varsa ölüm son öğünden kısa süre sonradır; yarım saat ila bir buçuk saat.
 karaca: Son öğün 23.34 ise, ölüm 23.34’ten sonradır. Büyük olasılıkla gece yarısından önce.
 uye: Hocam, sanığın 23.18’de limandan çıktığı kayıtlı. Ölüm o saatte gerçekleşmiş olabilir mi?
 karaca: Mide içeriğine göre, hayır. 23.34’ten önce değil.
-`,
-            ),
-            O(`
-- Hocam, telefon tutanağı: maktul 23.41’de iki dakika yedi saniye bir görüşme yapmış. Sanık 23.18’de limandan çıkmış.
-karaca: Konuşabilen bir insan o anda ölümcül kafa travması geçirmemiştir. Bu travmayla bilinç hızla kaybolur.
-karaca: Kırık, 23.41’den sonra oluşmuştur.
 `),
-          ],
+        }),
+        presentRule('PS_B2_KAYITSIZ', 'B2', ['ded_saat'], {
+          enabledWhen: not(SAAT_KAYIT),
+          score: { SORGULAMA: 100 },
+          effects: [inc('pers')],
+          neutral:
+            'Kısmi isabet: mide içeriği ile son öğün eşleşiyor; ama 23.34 saati duruşmaya getirilmiş bir kayda (kantin dökümü ya da tanık beyanı) dayanmıyordu (CMK 217/1).',
+          responses: B(`
+- Hocam, maktul 23.34’te kantinde tost ve ayran yemiş. Midede yarı sindirilmiş ekmek, peynir, süt ürünü var.
+baskan: Müdafi, 23.34 saati dosyada hangi belgeye dayanıyor? Ne kantin kaydı istendi ne de bu saat bir tanık tarafından burada söylendi.
+karaca: Son öğünün saati belgeli olsaydı yorumlardım. Bir varsayım üzerine ölüm saati daraltamam, Sayın Başkan.
+~ Doğru saat, yanlış yerde. Bir saat ancak duruşmaya getirilmişse saattir.
+`),
+        }),
+        presentRule('PS_B2_TEL', 'B2', ['ded_canli'], {
+          score: { SORGULAMA: 100 },
+          effects: [inc('pers')],
+          neutral:
+            'Kısmi isabet: 23.41 görüşmesi hattın kullanıldığını gösterir; konuşanın maktul olduğu, karşı taraf dinlenmeden tıbben kabul edilmedi.',
+          responses: B(`
+- Hocam, telefon tutanağı: maktulün telefonundan 23.41’de iki dakika yedi saniyelik bir görüşme yapılmış.
+karaca: Bu bir hattın kullanıldığını gösterir, Sayın Başkan. Konuşanın kim olduğunu tutanak söylemez; görüşmenin öbür ucundaki kişi dinlenmeden bunu tıbbi bir saate çeviremem.
+~ Bir telefon bir sesin kaydı değildir. Kimin konuştuğunu ancak dinleyen söyler.
+`),
         }),
         presentRule('PS_B2_KANTIN', 'B2', ['ev_kantin', 'ev_telefon'], {
           score: { SORGULAMA: 100 },
@@ -622,16 +657,29 @@ nail: Kartla. Ben nakit severim ama gençler hep kart. Makineyi o gece iki kere 
 ~ Makine. Bir makine saat tutar; usta tutmaz.
 `),
         }),
-        presentRule('PS_N1', 'N1', ['ev_hesap', 'ded_cikis'], {
+        presentRule('PS_N1', 'N1', ['ded_cikis'], {
           score: { SORGULAMA: 200 },
           effects: [inc('pers'), raise('contra_n1')],
-          good: 'Banka kaydı (23.37) tanığın belirsiz saatini kendi büfesinin makinesiyle sabitledi; dürüst tanığı yalancı çıkarmadan düzelttin.',
+          good: 'Turnike (23.18 çıkış) ve büfenin kendi gün sonu fişi (23.37) tanığın “on bire doğru, belki daha erken” saatini düzeltti: sanık 23.18’e kadar limandaydı; dürüst tanığı yalancı çıkarmadan düzelttin.',
           category: 'SORGULAMA',
           responses: B(`
-- Sayın Başkan, sanığın hesap dökümü: 14 Kasım, 23.37, İskele Büfe Mudanya, iki çay. Kart sanığın.
+- Sayın Başkan, turnike dökümü: sanık limandan 23.18’de çıkmış. Büfeden yirmi dakika uzakta. Ustanın kendi gün sonu fişi: 23.37, kart, iki çay. Bankadaki satır da aynı.
 nail: Demek on biri yarım geçiyordu. Makine benden iyi bilir efendim. On bire doğru değilmiş; ben yanlış söyledim.
 uye: Tanık, 23.37’de sanık büfenizde miydi?
 nail: Kart oradaysa çocuk da oradaydı efendim. Kartını kimseye vermez o; ağabeyinden kalma bir alışkanlık.
+`),
+        }),
+        presentRule('PS_N1_HESAP', 'N1', ['ev_hesap'], {
+          score: { SORGULAMA: 100 },
+          effects: [inc('pers')],
+          neutral:
+            'Kısmi isabet: 23.37 ödemenin saatidir, gelişin değil; sanığın ne zaman geldiğini limandan çıkış saati gösterirdi.',
+          responses: B(`
+- Usta, banka kaydı: çaylar 23.37’de ödenmiş.
+nail: Ödeme öyleyse öyle efendim. Ama çocuk ondan önce gelmiş olabilir; çayı içtikten sonra da öderler.
+savci: Yani tanık, sanığın on bire doğru gelmiş olması hâlâ mümkün.
+nail: Mümkün efendim. Saate bakmam ben.
+~ Ödemenin saati, gelişin saati değil. Ne zaman geldiğini limanın kapısı söyler.
 `),
         }),
         pressRule('PR_N2', 'N2', {
@@ -652,7 +700,7 @@ nail: Açıktı herhalde. Hep açıktır. Ama ne çalıyordu, şimdi hatırlamam
 `),
           ],
         }),
-        presentRule('PS_N2', 'N2', ['ded_buf', 'clue_radyo'], {
+        presentRule('PS_N2', 'N2', ['ded_buf'], {
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_n2')],
           good: 'Radyonun gece yarısı haberleri tanığın kendi saatini geri getirdi: sanık 00.00’a kadar iskelede. Savcının verdiği “on ikiye çeyrek kala” düştü.',

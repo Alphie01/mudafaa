@@ -213,7 +213,7 @@
           "id": "t2_arsiv",
           "label": "ARŞİV",
           "kind": "ARCHIVE",
-          "choices": ["A_KAYIT", "A_DEFTER", "A_TALEP", "A_SUC", "A_CIKARIM", "A_LEYLA"]
+          "choices": ["A_ATK", "A_KAYIT", "A_DEFTER", "A_TALEP", "A_SUC", "A_CIKARIM", "A_LEYLA"]
         }
       ],
       "choices": [
@@ -276,6 +276,16 @@
           "description": "Adliye · savcılık katı"
         },
         {
+          "id": "A_ATK",
+          "kind": "NAVIGATE",
+          "label": "Nihai otopsi raporu",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_ATK",
+          "maxUses": 1,
+          "description": "Adli Tıp Kurumu · mavi kapak",
+          "visibleWhen": { "hasEvidence": "ev_atk" }
+        },
+        {
           "id": "A_KAYIT",
           "kind": "NAVIGATE",
           "label": "Araç takip ve zimmet kaydı",
@@ -306,7 +316,8 @@
           "visibleWhen": {
             "any": [
               { "all": [{ "hasEvidence": "clue_servis_arac" }, { "not": { "flag": "talep_gps" } }] },
-              { "all": [{ "hasEvidence": "clue_arama2341" }, { "not": { "flag": "talep_abone" } }] }
+              { "all": [{ "hasEvidence": "clue_arama2341" }, { "not": { "flag": "talep_abone" } }] },
+              { "all": [{ "hasEvidence": "ev_atk" }, { "not": { "flag": "talep_atk" } }] }
             ]
           }
         },
@@ -773,6 +784,129 @@
       ]
     },
     {
+      "id": "ARA_ATK",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #10 · ARA",
+      "title": "Nihai otopsi raporu",
+      "hud": ["atk_left"],
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Mavi kapaklı, otuz iki sayfa. Ön raporun bıraktığı iki soru burada cevaplanmış olmalı: dipnotun ertelediği karşı darbe ve kimsenin tartmadığı mide."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir raporu okumak, sorusunu bilmekle başlar. Soru bende değilse satırlar yalnızca kelimedir.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kenarlara yapıştırdığım sarı kâğıtlarda Dr. Beyaz’ın sözleri: “Karşı tarafa bak.” “Ne yediği yazar, ne zaman yediği yazmaz.”"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "ADLİ TIP KURUMU · NİHAİ OTOPSİ RAPORU", "right": "E. YAVUZ" },
+      "columns": [
+        { "label": "BÖLÜM", "flex": 1.2 },
+        { "label": "BULGU", "flex": 2.6 }
+      ],
+      "rows": [
+        { "id": "n1", "cells": ["Ölüm sebebi", "Oksipitalde 3,2 cm dairesel çökme kırığı, subdural kanama"] },
+        { "id": "n2", "cells": ["Kırık profili", "İç tablada basamaklı kenar; sınırlı yüzeyli künt cisim"] },
+        { "id": "n3", "cells": ["Histopatoloji · frontal", "Kontüzyon ve kanama odağı izlenmedi"] },
+        {
+          "id": "n4",
+          "cells": [
+            "Mide içeriği",
+            "Yarı sindirilmiş ekmek, peynir, süt ürünü (~250 ml); son öğün saati bilinmediğinden yorumlanmamıştır"
+          ]
+        },
+        { "id": "n5", "cells": ["Ölüm zamanı", "23.00–01.00 arası (rijidite, livor)"] },
+        { "id": "n6", "cells": ["Toksikoloji", "Kanda etil alkol 1,1 promil"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "compare", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "atk_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_N3",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "n3" },
+          "enabledWhen": { "all": [{ "flag": "fact_coup" }, { "flag": "fact_dipnot" }] },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Ön raporun dipnotunun ertelediği cevap: frontal lobda kontüzyon yok. Dr. Beyaz’ın maketi: ensesinden düşen bir başın alnının arkasında da iz olurdu.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kontrkup" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_N3_X",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "n3" },
+          "enabledWhen": { "not": { "all": [{ "flag": "fact_coup" }, { "flag": "fact_dipnot" }] } },
+          "feedback": {
+            "title": "TIBBİ BİR CÜMLE",
+            "text": "“Kontüzyon izlenmedi.” Neyin yokluğu, neden önemli? Ne aradığını bilmeden bu satırı tahtaya koyamam.",
+            "label": "Not alındı",
+            "tone": "info"
+          }
+        },
+        {
+          "id": "EX_N4",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "n4" },
+          "enabledWhen": { "flag": "fact_mide" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Ekmek, peynir, süt ürünü; yarı sindirilmiş. Rapor yorumlamamış, çünkü son öğünün saatini kimse sormamış. Dr. Beyaz: “Sıra çıkar.” Önce yemek, sonra ölüm.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_mide" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_N4_X",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "n4" },
+          "enabledWhen": { "not": { "flag": "fact_mide" } },
+          "feedback": {
+            "title": "YORUMLANMAMIŞ",
+            "text": "Mide içeriği yazılmış, yorumlanmamış. Bir midenin bir saate nasıl bağlandığını bilen birine sormalıydım.",
+            "label": "Not alındı",
+            "tone": "info"
+          }
+        },
+        {
+          "id": "FB_ATK",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu satırda bu aletle dikkat çeken bir şey yok.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "ATK_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
       "id": "ARA_KAYIT",
       "type": "DOCUMENT",
       "chapter": "Bölüm 4 · Ara",
@@ -1198,6 +1332,21 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Geç de olsa maktulün son görüşmesinin muhatabı soruldu (CMK 135/6 çerçevesinde hâkim kararı).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "EK_ATK",
+          "kind": "OPTION",
+          "label": "Nihai raporu düzenleyen uzmanın ikinci celsede dinlenmesi",
+          "visibleWhen": { "all": [{ "hasEvidence": "ev_atk" }, { "not": { "flag": "talep_atk" } }] },
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
+            { "type": "VAR", "var": "ek_atk", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Rapor okunmakla yetinilmesin; ölümün sebebi ve saati için uzmanın sorulara cevap vermesi istendi (CMK 67/4, 211).",
             "category": "USUL_BILGISI"
           }
         },
@@ -1634,6 +1783,9 @@
       ],
       "pool": [
         "clue_desen",
+        "clue_kontrkup",
+        "clue_mide",
+        "clue_kantin",
         "clue_arama2341",
         "clue_servis_arac",
         "clue_pamuk",
@@ -1647,6 +1799,48 @@
         "clue_envanter"
       ],
       "choices": [
+        {
+          "id": "CA_DARBE",
+          "kind": "COMBINE",
+          "match": { "a": "clue_desen", "b": "clue_kontrkup" },
+          "feedback": {
+            "title": "Düşme değil, darbe",
+            "text": "Küçük, dairesel, keskin kenarlı bir çökme; histopatolojide karşı tarafta hiçbir şey. Hareket eden baş değil, hareket eden cisim.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_darbe" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "ded_darbe" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CA_SAAT",
+          "kind": "COMBINE",
+          "match": { "a": "clue_mide", "b": "clue_kantin" },
+          "feedback": {
+            "title": "Ölüm 23.34’ten sonra",
+            "text": "Nihai rapor: midede yarı sindirilmiş ekmek, peynir, süt ürünü. Kantinde 23.34’te tost ve ayran. Ercan yedikten sonra öldü; yemek henüz midesindeydi.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_saat" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "ded_saat" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+              ]
+            }
+          ]
+        },
         {
           "id": "CA_SILAH",
           "kind": "COMBINE",
@@ -2352,11 +2546,15 @@
     { "evidence": "ev_defter", "source": { "type": "CHOICE", "id": "SV_TUTANAK" } },
     { "evidence": "ev_defter", "source": { "type": "CHOICE", "id": "SV_AL" } },
     { "evidence": "clue_tarik_koni", "source": { "type": "CHOICE", "id": "TR_SEMA" } },
+    { "evidence": "clue_kontrkup", "source": { "type": "RULE", "id": "EX_N3" } },
+    { "evidence": "clue_mide", "source": { "type": "RULE", "id": "EX_N4" } },
     { "evidence": "clue_gps", "source": { "type": "RULE", "id": "EX_A2" } },
     { "evidence": "clue_zimmet", "source": { "type": "RULE", "id": "EX_Z1" } },
     { "evidence": "clue_defter_satir", "source": { "type": "RULE", "id": "EX_D4" } },
     { "evidence": "clue_manifesto", "source": { "type": "RULE", "id": "EX_D2" } },
     { "evidence": "clue_envanter", "source": { "type": "CHOICE", "id": "NU_KIT" } },
+    { "evidence": "ded_darbe", "source": { "type": "RULE", "id": "CA_DARBE" } },
+    { "evidence": "ded_saat", "source": { "type": "RULE", "id": "CA_SAAT" } },
     { "evidence": "ded_silah", "source": { "type": "RULE", "id": "CA_SILAH" } },
     { "evidence": "ded_arac", "source": { "type": "RULE", "id": "CA_ARAC" } },
     { "evidence": "ded_motif", "source": { "type": "RULE", "id": "CA_MOTIF" } },

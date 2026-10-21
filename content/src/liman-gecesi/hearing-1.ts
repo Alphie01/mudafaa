@@ -408,14 +408,31 @@ sukru: Ben doktor değilim efendim. Düştü, gördüm.
         }),
         pressRule('PR_S3', 'S3', {
           score: { SORGULAMA: 25 },
-          effects: [raise('press_s3'), ifThen(not(has('clue_kantin')), [discover('clue_kantin')])],
-          responses: B(`
-- Kantinde onu gördünüz mü?
-sukru: Gördüm tabii. On bir buçuk gibi. Burnuna pamuk tıkamış, tost yiyordu, ayran içiyordu. Söyleniyordu: “O Karadenizliyi bitireceğim.”
+          effects: [
+            raise('press_s3'),
+            // Son öğünün önemini bilen müdafi saati ve yemeği sorar; beyan tutanağa geçer (B2'nin kayıt dayanağı).
+            ifThen(flag('fact_mide'), [raise('s3_kantin'), ifThen(not(has('clue_kantin')), [discover('clue_kantin')])]),
+          ],
+          responses: [
+            W(
+              flag('fact_mide'),
+              `
+- Kantinde onu gördünüz mü? Ne yiyordu, saat kaçtı?
+sukru: Gördüm tabii. On bir buçuğu geçiyordu; benim çay saatim. Burnuna pamuk tıkamış, tost yiyordu, ayran içiyordu. Söyleniyordu: “O Karadenizliyi bitireceğim.”
 sukru: Ölü adam tost yemez efendim. O çocuk da oradan çoktan gitmişti.
+baskan: Tutanağa geçsin: tanık, maktulü saat on bir buçuğu geçe kantinde tost yerken gördüğünü beyan etti.
+savci: Tanık, sanığın limandan çıktığını gördünüz mü?
+sukru: Görmedim. Ama o çocuk… o çocuk hırslıdır. Döner, yapar. Bilirim ben.
+`,
+            ),
+            O(`
+- Kantinde onu gördünüz mü?
+sukru: Gördüm tabii. Burnuna pamuk tıkamış, oturuyordu. Söyleniyordu: “O Karadenizliyi bitireceğim.”
+sukru: Ölü adam söylenmez efendim. O çocuk da oradan çoktan gitmişti.
 savci: Tanık, sanığın limandan çıktığını gördünüz mü?
 sukru: Görmedim. Ama o çocuk… o çocuk hırslıdır. Döner, yapar. Bilirim ben.
 `),
+          ],
         }),
         objectRule('OB_S4', 'S4', 'g_kanaat', {
           score: { SORGULAMA: 50 },
@@ -589,32 +606,32 @@ kenan/uzgun: Keşke emin olmasaydım.
 kenan: Aşağı yukarı kızım… Avukat hanım. Defteri yazdım, kalktım, tur attım. On bire yirmi var. Yirmi yıldır her gece aynı saatte tur atarım.
 `),
         }),
-        presentRule('PS_K1', 'K1', ['ded_cikis', 'ev_turnike', 'ev_hesap', 'ded_buf'], {
+        presentRule('PS_K1', 'K1', ['ded_cikis'], {
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_k1')],
-          good: 'Sanığın 23.18’de limandan çıktığı ve 23.37’de iskele büfesinde olduğu kayıtlarla gösterildi: 23.40’taki teşhis mümkün değil.',
+          good: 'Turnike dökümü (23.18 çıkış, sonra giriş yok), büfenin gün sonu fişi ve banka kaydı (23.37) birlikte: 23.40’taki teşhis mümkün değil.',
           category: 'SORGULAMA',
-          responses: [
-            W(
-              any(has('ded_cikis'), has('ev_turnike')),
-              `
+          responses: B(`
 - Sayın Başkan, liman turnike dökümü: sanığın kartı 23.18.42’de 2 numaralı turnikeden çıkış. Sabaha kadar bu kartla başka geçiş yok.
-- Bir de banka kaydı: 23.37, iskele büfesi, sanığın kartı. Büfe personel kapısından yirmi dakika.
+- İskele büfesinin gün sonu fişi: 23.37, kart, iki çay. Bankadaki satır aynı saat, aynı tutar. Büfe personel kapısından yirmi dakika.
 > Kenan bir süre kâğıtlara baktı. Bez parçası yeniden avucundaydı.
 kenan: Başka kapıdan girmiştir. Tel örgü… delik olur bazen.
 baskan: Tanık, limanda tel örgüde bildiğiniz bir delik var mı?
 kenan: Yok efendim. Yani… bilmiyorum.
 ~ İlk çatlak. Bir tanığın kendi limanını bilmediğini söylemesi.
-`,
-            ),
-            O(`
-- Sayın Başkan, sanığın banka kartıyla 23.37’de iskele büfesine ödeme yapılmış. Büfe limanın personel kapısından yirmi dakika.
-kenan: Kartını başkasına vermiştir. Bilemem.
-baskan: Tanık, sanığın kartını başkasına verdiğine dair bir bilginiz var mı?
-kenan: Yok efendim.
-~ Bir çatlak. Kâğıt bir saat söylüyor; tanık bir tahmin.
 `),
-          ],
+        }),
+        presentRule('PS_K1_KISMI', 'K1', ['ev_turnike', 'ev_hesap', 'ded_buf'], {
+          score: { SORGULAMA: 100 },
+          effects: [inc('pers')],
+          neutral:
+            'Kısmi isabet: tek bir kayıt teşhisi çürütmedi. Çıkış saatiyle büfedeki ödemeyi, büfenin kendi kaydıyla birlikte göstermek gerekiyordu.',
+          responses: B(`
+- Sayın Başkan, elimdeki kayda göre sanık o saatte B sahasında olamaz.
+kenan: Kartını başkasına vermiştir. Ya da başka kapıdan girmiştir. Ben gördüğümü söylüyorum.
+baskan: Müdafi, bir kâğıt bir saati gösterir; tanık bir yüz. İkisini birbirine bağlayan kayıtlarınız varsa birlikte sunun.
+~ Tek kâğıt, tek çatlak; duvar duruyor. Çıkış, ödeme ve büfenin kendi fişi: üçü birlikte konuşmalı.
+`),
         }),
         pressRule('PR_K2', 'K2', {
           score: { SORGULAMA: 25 },

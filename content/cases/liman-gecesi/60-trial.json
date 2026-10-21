@@ -859,13 +859,30 @@
           "match": { "statement": "S3" },
           "responses": [
             {
+              "when": { "flag": "fact_mide" },
+              "lines": [
+                { "speaker": "player", "text": "Kantinde onu gördünüz mü? Ne yiyordu, saat kaçtı?" },
+                {
+                  "speaker": "sukru",
+                  "text": "Gördüm tabii. On bir buçuğu geçiyordu; benim çay saatim. Burnuna pamuk tıkamış, tost yiyordu, ayran içiyordu. Söyleniyordu: “O Karadenizliyi bitireceğim.”"
+                },
+                { "speaker": "sukru", "text": "Ölü adam tost yemez efendim. O çocuk da oradan çoktan gitmişti." },
+                {
+                  "speaker": "baskan",
+                  "text": "Tutanağa geçsin: tanık, maktulü saat on bir buçuğu geçe kantinde tost yerken gördüğünü beyan etti."
+                },
+                { "speaker": "savci", "text": "Tanık, sanığın limandan çıktığını gördünüz mü?" },
+                { "speaker": "sukru", "text": "Görmedim. Ama o çocuk… o çocuk hırslıdır. Döner, yapar. Bilirim ben." }
+              ]
+            },
+            {
               "lines": [
                 { "speaker": "player", "text": "Kantinde onu gördünüz mü?" },
                 {
                   "speaker": "sukru",
-                  "text": "Gördüm tabii. On bir buçuk gibi. Burnuna pamuk tıkamış, tost yiyordu, ayran içiyordu. Söyleniyordu: “O Karadenizliyi bitireceğim.”"
+                  "text": "Gördüm tabii. Burnuna pamuk tıkamış, oturuyordu. Söyleniyordu: “O Karadenizliyi bitireceğim.”"
                 },
-                { "speaker": "sukru", "text": "Ölü adam tost yemez efendim. O çocuk da oradan çoktan gitmişti." },
+                { "speaker": "sukru", "text": "Ölü adam söylenmez efendim. O çocuk da oradan çoktan gitmişti." },
                 { "speaker": "savci", "text": "Tanık, sanığın limandan çıktığını gördünüz mü?" },
                 { "speaker": "sukru", "text": "Görmedim. Ama o çocuk… o çocuk hırslıdır. Döner, yapar. Bilirim ben." }
               ]
@@ -876,8 +893,15 @@
             { "type": "VAR", "var": "press_s3", "op": "set", "value": true },
             {
               "type": "IF",
-              "when": { "not": { "hasEvidence": "clue_kantin" } },
-              "then": [{ "type": "DISCOVER", "evidence": "clue_kantin" }]
+              "when": { "flag": "fact_mide" },
+              "then": [
+                { "type": "VAR", "var": "s3_kantin", "op": "set", "value": true },
+                {
+                  "type": "IF",
+                  "when": { "not": { "hasEvidence": "clue_kantin" } },
+                  "then": [{ "type": "DISCOVER", "evidence": "clue_kantin" }]
+                }
+              ]
             }
           ]
         },
@@ -1332,10 +1356,9 @@
         {
           "id": "PS_K1",
           "kind": "PRESENT",
-          "match": { "statement": "K1", "evidence": ["ded_cikis", "ev_turnike", "ev_hesap", "ded_buf"] },
+          "match": { "statement": "K1", "evidence": ["ded_cikis"] },
           "responses": [
             {
-              "when": { "any": [{ "hasEvidence": "ded_cikis" }, { "hasEvidence": "ev_turnike" }] },
               "lines": [
                 {
                   "speaker": "player",
@@ -1343,7 +1366,7 @@
                 },
                 {
                   "speaker": "player",
-                  "text": "Bir de banka kaydı: 23.37, iskele büfesi, sanığın kartı. Büfe personel kapısından yirmi dakika."
+                  "text": "İskele büfesinin gün sonu fişi: 23.37, kart, iki çay. Bankadaki satır aynı saat, aynı tutar. Büfe personel kapısından yirmi dakika."
                 },
                 { "speaker": "narrator", "text": "Kenan bir süre kâğıtlara baktı. Bez parçası yeniden avucundaydı." },
                 { "speaker": "kenan", "text": "Başka kapıdan girmiştir. Tel örgü… delik olur bazen." },
@@ -1352,22 +1375,6 @@
                 {
                   "speaker": "player",
                   "text": "İlk çatlak. Bir tanığın kendi limanını bilmediğini söylemesi.",
-                  "style": "thought"
-                }
-              ]
-            },
-            {
-              "lines": [
-                {
-                  "speaker": "player",
-                  "text": "Sayın Başkan, sanığın banka kartıyla 23.37’de iskele büfesine ödeme yapılmış. Büfe limanın personel kapısından yirmi dakika."
-                },
-                { "speaker": "kenan", "text": "Kartını başkasına vermiştir. Bilemem." },
-                { "speaker": "baskan", "text": "Tanık, sanığın kartını başkasına verdiğine dair bir bilginiz var mı?" },
-                { "speaker": "kenan", "text": "Yok efendim." },
-                {
-                  "speaker": "player",
-                  "text": "Bir çatlak. Kâğıt bir saat söylüyor; tanık bir tahmin.",
                   "style": "thought"
                 }
               ]
@@ -1380,8 +1387,41 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Sanığın 23.18’de limandan çıktığı ve 23.37’de iskele büfesinde olduğu kayıtlarla gösterildi: 23.40’taki teşhis mümkün değil.",
+            "feedback": "Turnike dökümü (23.18 çıkış, sonra giriş yok), büfenin gün sonu fişi ve banka kaydı (23.37) birlikte: 23.40’taki teşhis mümkün değil.",
             "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_K1_KISMI",
+          "kind": "PRESENT",
+          "match": { "statement": "K1", "evidence": ["ev_turnike", "ev_hesap", "ded_buf"] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Sayın Başkan, elimdeki kayda göre sanık o saatte B sahasında olamaz." },
+                {
+                  "speaker": "kenan",
+                  "text": "Kartını başkasına vermiştir. Ya da başka kapıdan girmiştir. Ben gördüğümü söylüyorum."
+                },
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, bir kâğıt bir saati gösterir; tanık bir yüz. İkisini birbirine bağlayan kayıtlarınız varsa birlikte sunun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Tek kâğıt, tek çatlak; duvar duruyor. Çıkış, ödeme ve büfenin kendi fişi: üçü birlikte konuşmalı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kısmi isabet: tek bir kayıt teşhisi çürütmedi. Çıkış saatiyle büfedeki ödemeyi, büfenin kendi kaydıyla birlikte göstermek gerekiyordu."
           }
         },
         {

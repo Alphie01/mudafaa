@@ -247,7 +247,7 @@ export const evidencePart: CasePart = {
       shortText:
         'Oksipital dairesel çökme kırığı; sınırlı yüzeyli künt cisim. Burun ve dudak lezyonları basit tıbbi müdahaleyle giderilebilir.',
       description:
-        'ATK Morg İhtisas Dairesi. Ölüm sebebi: oksipital bölgede 3,2 cm çaplı dairesel çökme kırığı ve altındaki kanama. Ekli şemada kırığın kesiti var. Ölüm saati: “23.00–01.00 arası.”',
+        'ATK Morg İhtisas Dairesi. Ölüm sebebi: oksipital bölgede 3,2 cm çaplı dairesel çökme kırığı ve altındaki kanama. Ekli şemada kırığın kesiti var. Histopatoloji ve mide içeriği ayrı satırlarda; son öğün saati bilinmediği için mide yorumlanmamış. Ölüm saati: “23.00–01.00 arası.”',
       sourceLabel: 'Adli Tıp Kurumu',
       icon: 'receipt',
       side: 'NEUTRAL',
@@ -393,18 +393,18 @@ export const evidencePart: CasePart = {
     ),
     c(
       'clue_kontrkup',
-      'Ön rapor: karşı kutup lezyonu yok',
-      '“Frontal bölgede karşı darbe (contrecoup) lezyonu saptanmadı.”',
-      'Raporun dipnotunda, küçük harflerle.',
-      'Ön otopsi raporu',
+      'Nihai rapor: karşı kutup lezyonu yok',
+      '“Frontal lob histopatolojisinde kontüzyon ve kanama odağı izlenmedi.”',
+      'Ön raporun dipnotu bu değerlendirmeyi nihai rapora bırakmıştı.',
+      'ATK nihai raporu',
       { type: 'ADLI_RAPOR', icon: 'magnifier' },
     ),
     c(
       'clue_mide',
-      'Ön rapor: mide içeriği',
+      'Nihai rapor: mide içeriği',
       '“Yarı sindirilmiş ekmek, peynir parçaları, süt ürünü (~250 ml).”',
-      'Kimse yorumlamamış.',
-      'Ön otopsi raporu',
+      'Son öğün saati bilinmediği için yorumlanmamış.',
+      'ATK nihai raporu',
       { type: 'ADLI_RAPOR', icon: 'magnifier' },
     ),
     c(

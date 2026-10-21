@@ -114,9 +114,16 @@
       "title": "Duruşma · 2. Celse",
       "courtStage": "ACILIS",
       "background": "durusma_salonu",
-      "onFirstEnter": [{ "type": "MEET", "character": "karaca" }],
+      "onFirstEnter": [
+        {
+          "type": "IF",
+          "when": { "any": [{ "flag": "talep_atk" }, { "flag": "ek_atk" }] },
+          "then": [{ "type": "MEET", "character": "karaca" }]
+        }
+      ],
       "lines": [
         {
+          "when": { "any": [{ "flag": "talep_atk" }, { "flag": "ek_atk" }] },
           "lines": [
             {
               "speaker": "mubasir",
@@ -159,9 +166,53 @@
               "text": "Başını salladı. Galeriye döndü; Gülay ona belli belirsiz bir el işareti yaptı. Sevim ikisini de görmezden geldi; gözleri kürsüdeki rapordaydı."
             }
           ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "mubasir",
+              "text": "Bursa Altıncı Ağır Ceza! Tarık Demirel dosyası! Taraflar, tanıklar… salona!"
+            },
+            {
+              "speaker": "baskan",
+              "text": "Yoklama yapıldı. Ara karar cevapları okundu: Adli Tıp Kurumu’nun nihai raporu ve kurumların cevapları dosyaya girdi."
+            },
+            {
+              "speaker": "baskan",
+              "text": "Raporu düzenleyenin dinlenmesi istenmediğinden kurum raporu okunmakla yetinildi. Rapor ölüm zamanını 23.00 ile 01.00 arası gösteriyor."
+            },
+            {
+              "speaker": "savci",
+              "text": "Sayın Başkan, rapor kırığın düşmeyle oluşabileceğini dışlamıyor. Görüşümüzü mütalaada bildireceğiz."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir rapor soru sorulmadıkça yalnızca kendini tekrar eder. Ona soru sorulmasını istemedim; şimdi kâğıt konuşuyor, ben susuyorum.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tarık sanık sırasında, ellerini dizlerine koymuş, bana baktı. Galeride Gülay, Elif’in resim defterini kucağında sıkıyordu."
+            }
+          ]
         }
       ],
-      "choices": [{ "id": "T00_DEVAM", "kind": "CONTINUE", "label": "Bilirkişi dinlensin", "next": "T_01" }],
+      "choices": [
+        {
+          "id": "T00_DEVAM",
+          "kind": "CONTINUE",
+          "label": "Bilirkişi dinlensin",
+          "visibleWhen": { "any": [{ "flag": "talep_atk" }, { "flag": "ek_atk" }] },
+          "next": "T_01"
+        },
+        {
+          "id": "T00_OKUNDU",
+          "kind": "CONTINUE",
+          "label": "Tanıkların dinlenmesine geçilsin",
+          "visibleWhen": { "not": { "any": [{ "flag": "talep_atk" }, { "flag": "ek_atk" }] } },
+          "next": "T_02"
+        }
+      ],
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",
         "bench": [
@@ -403,18 +454,18 @@
         {
           "id": "PS_B2",
           "kind": "PRESENT",
-          "match": { "statement": "B2", "evidence": ["ded_saat", "ded_canli"] },
+          "match": { "statement": "B2", "evidence": ["ded_saat"] },
+          "enabledWhen": { "any": [{ "hasEvidence": "ev_kantin" }, { "flag": "s3_kantin" }] },
           "responses": [
             {
-              "when": { "hasEvidence": "ded_saat" },
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Hocam, kantin kaydı: maktul 23.34’te tost ve ayran almış. Midede yarı sindirilmiş ekmek, peynir ve süt ürünü var."
+                  "text": "Hocam, son öğünün saati dosyada: maktul 23.34’te kantinde tost ve ayran almış. Raporunuzda midede yarı sindirilmiş ekmek, peynir ve süt ürünü var."
                 },
                 {
                   "speaker": "karaca",
-                  "text": "Bu bilgi bana verilmedi. Verilseydi… Midede tanınabilir, yarı sindirilmiş içerik varsa ölüm son öğünden kısa süre sonradır; yarım saat ila bir buçuk saat."
+                  "text": "Bu bilgi rapor yazılırken bana verilmedi. Verilseydi… Midede tanınabilir, yarı sindirilmiş içerik varsa ölüm son öğünden kısa süre sonradır; yarım saat ila bir buçuk saat."
                 },
                 {
                   "speaker": "karaca",
@@ -426,19 +477,6 @@
                 },
                 { "speaker": "karaca", "text": "Mide içeriğine göre, hayır. 23.34’ten önce değil." }
               ]
-            },
-            {
-              "lines": [
-                {
-                  "speaker": "player",
-                  "text": "Hocam, telefon tutanağı: maktul 23.41’de iki dakika yedi saniye bir görüşme yapmış. Sanık 23.18’de limandan çıkmış."
-                },
-                {
-                  "speaker": "karaca",
-                  "text": "Konuşabilen bir insan o anda ölümcül kafa travması geçirmemiştir. Bu travmayla bilinç hızla kaybolur."
-                },
-                { "speaker": "karaca", "text": "Kırık, 23.41’den sonra oluşmuştur." }
-              ]
             }
           ],
           "effects": [
@@ -448,8 +486,77 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Son öğün (23.34) ve son telefon görüşmesi (23.41) ölüm zamanını sanığın limandan çıkışından (23.18) sonraya taşıdı.",
+            "feedback": "Son öğün (23.34, kayıtta) ve nihai rapordaki mide içeriği ölüm zamanını sanığın limandan çıkışından (23.18) sonraya taşıdı.",
             "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_B2_KAYITSIZ",
+          "kind": "PRESENT",
+          "match": { "statement": "B2", "evidence": ["ded_saat"] },
+          "enabledWhen": { "not": { "any": [{ "hasEvidence": "ev_kantin" }, { "flag": "s3_kantin" }] } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Hocam, maktul 23.34’te kantinde tost ve ayran yemiş. Midede yarı sindirilmiş ekmek, peynir, süt ürünü var."
+                },
+                {
+                  "speaker": "baskan",
+                  "text": "Müdafi, 23.34 saati dosyada hangi belgeye dayanıyor? Ne kantin kaydı istendi ne de bu saat bir tanık tarafından burada söylendi."
+                },
+                {
+                  "speaker": "karaca",
+                  "text": "Son öğünün saati belgeli olsaydı yorumlardım. Bir varsayım üzerine ölüm saati daraltamam, Sayın Başkan."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Doğru saat, yanlış yerde. Bir saat ancak duruşmaya getirilmişse saattir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kısmi isabet: mide içeriği ile son öğün eşleşiyor; ama 23.34 saati duruşmaya getirilmiş bir kayda (kantin dökümü ya da tanık beyanı) dayanmıyordu (CMK 217/1)."
+          }
+        },
+        {
+          "id": "PS_B2_TEL",
+          "kind": "PRESENT",
+          "match": { "statement": "B2", "evidence": ["ded_canli"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Hocam, telefon tutanağı: maktulün telefonundan 23.41’de iki dakika yedi saniyelik bir görüşme yapılmış."
+                },
+                {
+                  "speaker": "karaca",
+                  "text": "Bu bir hattın kullanıldığını gösterir, Sayın Başkan. Konuşanın kim olduğunu tutanak söylemez; görüşmenin öbür ucundaki kişi dinlenmeden bunu tıbbi bir saate çeviremem."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir telefon bir sesin kaydı değildir. Kimin konuştuğunu ancak dinleyen söyler.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kısmi isabet: 23.41 görüşmesi hattın kullanıldığını gösterir; konuşanın maktul olduğu, karşı taraf dinlenmeden tıbben kabul edilmedi."
           }
         },
         {
@@ -1440,13 +1547,13 @@
         {
           "id": "PS_N1",
           "kind": "PRESENT",
-          "match": { "statement": "N1", "evidence": ["ev_hesap", "ded_cikis"] },
+          "match": { "statement": "N1", "evidence": ["ded_cikis"] },
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan, sanığın hesap dökümü: 14 Kasım, 23.37, İskele Büfe Mudanya, iki çay. Kart sanığın."
+                  "text": "Sayın Başkan, turnike dökümü: sanık limandan 23.18’de çıkmış. Büfeden yirmi dakika uzakta. Ustanın kendi gün sonu fişi: 23.37, kart, iki çay. Bankadaki satır da aynı."
                 },
                 {
                   "speaker": "nail",
@@ -1467,8 +1574,39 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Banka kaydı (23.37) tanığın belirsiz saatini kendi büfesinin makinesiyle sabitledi; dürüst tanığı yalancı çıkarmadan düzelttin.",
+            "feedback": "Turnike (23.18 çıkış) ve büfenin kendi gün sonu fişi (23.37) tanığın “on bire doğru, belki daha erken” saatini düzeltti: sanık 23.18’e kadar limandaydı; dürüst tanığı yalancı çıkarmadan düzelttin.",
             "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_N1_HESAP",
+          "kind": "PRESENT",
+          "match": { "statement": "N1", "evidence": ["ev_hesap"] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Usta, banka kaydı: çaylar 23.37’de ödenmiş." },
+                {
+                  "speaker": "nail",
+                  "text": "Ödeme öyleyse öyle efendim. Ama çocuk ondan önce gelmiş olabilir; çayı içtikten sonra da öderler."
+                },
+                { "speaker": "savci", "text": "Yani tanık, sanığın on bire doğru gelmiş olması hâlâ mümkün." },
+                { "speaker": "nail", "text": "Mümkün efendim. Saate bakmam ben." },
+                {
+                  "speaker": "player",
+                  "text": "Ödemenin saati, gelişin saati değil. Ne zaman geldiğini limanın kapısı söyler.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kısmi isabet: 23.37 ödemenin saatidir, gelişin değil; sanığın ne zaman geldiğini limandan çıkış saati gösterirdi."
           }
         },
         {
@@ -1502,7 +1640,7 @@
         {
           "id": "PS_N2",
           "kind": "PRESENT",
-          "match": { "statement": "N2", "evidence": ["ded_buf", "clue_radyo"] },
+          "match": { "statement": "N2", "evidence": ["ded_buf"] },
           "responses": [
             {
               "lines": [

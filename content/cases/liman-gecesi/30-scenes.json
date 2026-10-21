@@ -186,12 +186,13 @@
           "name": "Çekmece",
           "marker": "HIDDEN",
           "shapes": [{ "rect": { "x": 204, "y": 150, "w": 56, "h": 32 } }],
+          "activeWhen": { "hasEvidence": "ev_hesap" },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_pos" },
             { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
           ],
           "feedback": {
-            "text": "Nail Usta çekmeceyi açtı: lastikle bağlanmış gün sonu fişleri. 14 Kasım: “23.37 · KART · 2 ÇAY · 30,00.” O saatte tek kartlı satış.",
+            "text": "Bankanın satırını gösterdim: 23.37, otuz lira. Nail Usta lastikli gün sonu fişlerini çözdü. 14 Kasım: “23.37 · KART · 2 ÇAY · 30,00.” Terminal adı: MDN ISKELE GIDA.",
             "short": "Gün sonu fişi"
           }
         },
@@ -200,6 +201,7 @@
           "name": "Yayın akışı",
           "marker": "HIDDEN",
           "shapes": [{ "rect": { "x": 36, "y": 56, "w": 64, "h": 74 } }],
+          "activeWhen": { "chosen": "NL_SAAT" },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_radyo" },
             { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }

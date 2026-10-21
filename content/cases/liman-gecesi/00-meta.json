@@ -259,6 +259,16 @@
       "display": { "label": "Deneme hakkı", "widget": "counter", "max": 4, "lowAt": 1 }
     },
     {
+      "id": "atk_left",
+      "type": "int",
+      "initial": 4,
+      "min": 0,
+      "max": 4,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 4, "lowAt": 1 }
+    },
+    {
       "id": "defter_left",
       "type": "int",
       "initial": 4,
@@ -321,10 +331,15 @@
     { "id": "fact_emre_gulay", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_coup", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_mide", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_dipnot", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "s3_kantin", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ek_atk", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_olcu", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_gece_yukleme", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_ifade_cihaz", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_ifade_saat", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_ifade_tarik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "orhan_ref", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "gulay_durust", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "etik_gulay", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "gulay_kararsiz", "type": "bool", "initial": false, "visibility": "HIDDEN" },

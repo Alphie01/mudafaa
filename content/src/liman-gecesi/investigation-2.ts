@@ -32,7 +32,7 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, ChoiceDef } from '../../../tools/content/src/kit/index.js';
 import { B, O, W, retarget } from './dsl.js';
-import { firstTime } from './investigation-1.js';
+import { firstTime, medRecipes } from './investigation-1.js';
 import { ARA, ARA_AP, ARA_DAYS } from './shared.js';
 
 // 65-ara: 1. ve 2. celse arası (3 gün × 2 EP; yığınsız). Nihai rapor ve mahkemenin müzekkere cevapları gelir; Sevim
@@ -174,6 +174,10 @@ const hubTabs = [
     label: 'ARŞİV',
     kind: 'ARCHIVE' as const,
     choices: [
+      act('A_ATK', 'Nihai otopsi raporu', 'ARA_ATK', {
+        description: 'Adli Tıp Kurumu · mavi kapak',
+        visibleWhen: has('ev_atk'),
+      }),
       act('A_KAYIT', 'Araç takip ve zimmet kaydı', 'ARA_KAYIT', {
         description: 'İşletmenin cevabı',
         visibleWhen: has('ev_gps'),
@@ -187,6 +191,7 @@ const hubTabs = [
         visibleWhen: any(
           all(has('clue_servis_arac'), not(flag('talep_gps'))),
           all(has('clue_arama2341'), not(flag('talep_abone'))),
+          all(has('ev_atk'), not(flag('talep_atk'))),
         ),
       }),
       free('A_SUC', 'Savcılığa suç duyurusu', 'ARA_SUC', {
@@ -486,6 +491,88 @@ const kayit = retarget(
   HUB,
 );
 
+const atkRapor = retarget(
+  documentExam('ARA_ATK', {
+    ...ARA,
+    title: 'Nihai otopsi raporu',
+    hud: ['atk_left'],
+    background: 'buro_gece',
+    lines: B(`
+> Mavi kapaklı, otuz iki sayfa. Ön raporun bıraktığı iki soru burada cevaplanmış olmalı: dipnotun ertelediği karşı darbe ve kimsenin tartmadığı mide.
+~ Bir raporu okumak, sorusunu bilmekle başlar. Soru bende değilse satırlar yalnızca kelimedir.
+> Kenarlara yapıştırdığım sarı kâğıtlarda Dr. Beyaz’ın sözleri: “Karşı tarafa bak.” “Ne yediği yazar, ne zaman yediği yazmaz.”
+`),
+    header: { left: 'ADLİ TIP KURUMU · NİHAİ OTOPSİ RAPORU', right: 'E. YAVUZ' },
+    columns: [
+      { label: 'BÖLÜM', flex: 1.2 },
+      { label: 'BULGU', flex: 2.6 },
+    ],
+    rows: [
+      row('n1', ['Ölüm sebebi', 'Oksipitalde 3,2 cm dairesel çökme kırığı, subdural kanama']),
+      row('n2', ['Kırık profili', 'İç tablada basamaklı kenar; sınırlı yüzeyli künt cisim']),
+      row('n3', ['Histopatoloji · frontal', 'Kontüzyon ve kanama odağı izlenmedi']),
+      row('n4', ['Mide içeriği', 'Yarı sindirilmiş ekmek, peynir, süt ürünü (~250 ml); son öğün saati bilinmediğinden yorumlanmamıştır']),
+      row('n5', ['Ölüm zamanı', '23.00–01.00 arası (rijidite, livor)']),
+      row('n6', ['Toksikoloji', 'Kanda etil alkol 1,1 promil']),
+    ],
+    tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('compare', 'Karşılaştır', 'compare')],
+    costVar: 'atk_left',
+    rules: [
+      examine('EX_N3', 'mag', 'n3', {
+        enabledWhen: all(flag('fact_coup'), flag('fact_dipnot')),
+        discovers: 'clue_kontrkup',
+        score: { DELIL_ANALIZI: 150 },
+        feedback: {
+          title: 'YENİ İPUCU',
+          text: 'Ön raporun dipnotunun ertelediği cevap: frontal lobda kontüzyon yok. Dr. Beyaz’ın maketi: ensesinden düşen bir başın alnının arkasında da iz olurdu.',
+          label: '+150 SKOR · Not defterine eklendi',
+          tone: 'special',
+        },
+      }),
+      examine('EX_N3_X', 'mag', 'n3', {
+        enabledWhen: not(all(flag('fact_coup'), flag('fact_dipnot'))),
+        feedback: {
+          title: 'TIBBİ BİR CÜMLE',
+          text: '“Kontüzyon izlenmedi.” Neyin yokluğu, neden önemli? Ne aradığını bilmeden bu satırı tahtaya koyamam.',
+          label: 'Not alındı',
+          tone: 'info',
+        },
+      }),
+      examine('EX_N4', 'mag', 'n4', {
+        enabledWhen: flag('fact_mide'),
+        discovers: 'clue_mide',
+        score: { DELIL_ANALIZI: 150 },
+        feedback: {
+          title: 'YENİ İPUCU',
+          text: 'Ekmek, peynir, süt ürünü; yarı sindirilmiş. Rapor yorumlamamış, çünkü son öğünün saatini kimse sormamış. Dr. Beyaz: “Sıra çıkar.” Önce yemek, sonra ölüm.',
+          label: '+150 SKOR · Not defterine eklendi',
+          tone: 'special',
+        },
+      }),
+      examine('EX_N4_X', 'mag', 'n4', {
+        enabledWhen: not(flag('fact_mide')),
+        feedback: {
+          title: 'YORUMLANMAMIŞ',
+          text: 'Mide içeriği yazılmış, yorumlanmamış. Bir midenin bir saate nasıl bağlandığını bilen birine sormalıydım.',
+          label: 'Not alındı',
+          tone: 'info',
+        },
+      }),
+    ],
+    miss: fallback('FB_ATK', 'EXAMINE', {
+      score: { DELIL_ANALIZI: -20 },
+      feedback: {
+        title: 'SONUÇ YOK',
+        text: 'Bu satırda bu aletle dikkat çeken bir şey yok.',
+        label: '−20 SKOR',
+        tone: 'error',
+      },
+    }),
+    finish: { id: 'ATK_BITIR' },
+  }),
+  HUB,
+);
+
 const defter = retarget(
   documentExam('ARA_DEFTER', {
     ...ARA,
@@ -654,6 +741,12 @@ const talep = story('ARA_TALEP', {
       effects: [raise('ek_abone')],
       good: 'Geç de olsa maktulün son görüşmesinin muhatabı soruldu (CMK 135/6 çerçevesinde hâkim kararı).',
     }),
+    option('EK_ATK', 'Nihai raporu düzenleyen uzmanın ikinci celsede dinlenmesi', {
+      visibleWhen: all(has('ev_atk'), not(flag('talep_atk'))),
+      score: { USUL_BILGISI: 40 },
+      effects: [raise('ek_atk')],
+      good: 'Rapor okunmakla yetinilmesin; ölümün sebebi ve saati için uzmanın sorulara cevap vermesi istendi (CMK 67/4, 211).',
+    }),
     toHub('EK_GONDER', 'Dilekçeyi gönder'),
   ],
 });
@@ -748,6 +841,9 @@ kenan: Sen kimin avukatısın? O çocuğun. Onu savun. Başkasının kapısını
 
 const ARA_POOL = [
   'clue_desen',
+  'clue_kontrkup',
+  'clue_mide',
+  'clue_kantin',
   'clue_arama2341',
   'clue_servis_arac',
   'clue_pamuk',
@@ -771,6 +867,7 @@ const cikarim = retarget(
 `),
     pool: ARA_POOL,
     recipes: [
+      ...medRecipes('CA'),
       recipe('CA_SILAH', 'clue_koni', 'clue_desen', {
         effects: firstTime('ded_silah'),
         feedback: feedbackNew(
@@ -1145,6 +1242,7 @@ export const ara: CasePart = {
     retarget(sevim, HUB),
     tarikGiris,
     retarget(tarik, HUB),
+    atkRapor,
     kayit,
     defter,
     emanet,

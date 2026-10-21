@@ -34,13 +34,13 @@ export const report: CasePart = {
       missedEvidence(
         'h_darbe',
         'ded_darbe',
-        'Ön rapordaki dairesel çökme kırığını ve karşı darbe lezyonunun yokluğunu birleştirmedin: düşme değil, darbe.',
+        'Ön rapordaki dairesel çökme kırığını, nihai raporun histopatolojisindeki karşı darbe yokluğuyla birleştirmedin; o satırı okumayı Dr. Beyaz öğretirdi: düşme değil, darbe.',
         'DELIL_ANALIZI',
       ),
       missedEvidence(
         'h_saat',
         'ded_saat',
-        'Mide içeriğini kantin kaydıyla birleştirmedin: ölüm 23.34’ten sonraydı.',
+        'Nihai rapordaki mide içeriğini son öğünün saatiyle birleştirmedin; 23.34 ayrıca kantin kaydıyla ya da Şükrü Usta’nın kürsüdeki beyanıyla kayda girmeliydi.',
         'DELIL_ANALIZI',
       ),
       missedEvidence(
@@ -141,8 +141,8 @@ export const report: CasePart = {
       ),
       hint(
         'h_atk',
-        not(flag('talep_atk')),
-        'Raporu düzenleyen uzmanın duruşmada dinlenmesini istemedin (CMK 67/4, 211); mahkeme onu resen çağırdı.',
+        all(not(flag('talep_atk')), not(flag('ek_atk'))),
+        'Raporu düzenleyen uzmanın duruşmada dinlenmesini ne ilk celsede ne de arada istedin (CMK 67/4, 211); rapor okunmakla yetinildi, “oluşabilir” sorgulanmadı.',
         'USUL_BILGISI',
       ),
       hint(

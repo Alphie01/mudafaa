@@ -28,13 +28,13 @@
       {
         "id": "h_darbe",
         "when": { "not": { "hasEvidence": "ded_darbe" } },
-        "text": "Ön rapordaki dairesel çökme kırığını ve karşı darbe lezyonunun yokluğunu birleştirmedin: düşme değil, darbe.",
+        "text": "Ön rapordaki dairesel çökme kırığını, nihai raporun histopatolojisindeki karşı darbe yokluğuyla birleştirmedin; o satırı okumayı Dr. Beyaz öğretirdi: düşme değil, darbe.",
         "category": "DELIL_ANALIZI"
       },
       {
         "id": "h_saat",
         "when": { "not": { "hasEvidence": "ded_saat" } },
-        "text": "Mide içeriğini kantin kaydıyla birleştirmedin: ölüm 23.34’ten sonraydı.",
+        "text": "Nihai rapordaki mide içeriğini son öğünün saatiyle birleştirmedin; 23.34 ayrıca kantin kaydıyla ya da Şükrü Usta’nın kürsüdeki beyanıyla kayda girmeliydi.",
         "category": "DELIL_ANALIZI"
       },
       {
@@ -140,8 +140,8 @@
       },
       {
         "id": "h_atk",
-        "when": { "not": { "flag": "talep_atk" } },
-        "text": "Raporu düzenleyen uzmanın duruşmada dinlenmesini istemedin (CMK 67/4, 211); mahkeme onu resen çağırdı.",
+        "when": { "all": [{ "not": { "flag": "talep_atk" } }, { "not": { "flag": "ek_atk" } }] },
+        "text": "Raporu düzenleyen uzmanın duruşmada dinlenmesini ne ilk celsede ne de arada istedin (CMK 67/4, 211); rapor okunmakla yetinildi, “oluşabilir” sorgulanmadı.",
         "category": "USUL_BILGISI"
       },
       {

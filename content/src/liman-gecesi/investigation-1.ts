@@ -106,20 +106,6 @@ export function invRecipes(pre: string): ChoiceDef[] {
         'Kan babanın gövdesinde, oturma hizasında; rapor burun ve dudağı basit tıbbi müdahalelik sayıyor. Baş babaya çarpmadı; burun kanadı.',
       ),
     }),
-    recipe(`${pre}_DARBE`, 'clue_desen', 'clue_kontrkup', {
-      effects: firstTime('ded_darbe'),
-      feedback: feedbackNew(
-        'Düşme değil, darbe',
-        'Küçük, dairesel, keskin kenarlı bir çökme ve karşı tarafta hiçbir şey. Hareket eden baş değil, hareket eden cisim.',
-      ),
-    }),
-    recipe(`${pre}_SAAT`, 'clue_mide', 'clue_kantin', {
-      effects: firstTime('ded_saat'),
-      feedback: feedbackNew(
-        'Ölüm 23.34’ten sonra',
-        'Midede yarı sindirilmiş ekmek, peynir ve süt ürünü. Kantinde 23.34’te tost ve ayran. Ercan yedikten sonra öldü; yemek henüz midesindeydi.',
-      ),
-    }),
     recipe(`${pre}_CANLI`, 'clue_arama2341', 'clue_cikis', {
       effects: firstTime('ded_canli'),
       feedback: feedbackNew(
@@ -144,15 +130,31 @@ export function invRecipes(pre: string): ChoiceDef[] {
   ];
 }
 
+/** Tıbbi tarifler: kontrkup ve mide nihai ATK raporundan gelir, bu yüzden yalnızca ara tahtasında kurulur. */
+export function medRecipes(pre: string): ChoiceDef[] {
+  return [
+    recipe(`${pre}_DARBE`, 'clue_desen', 'clue_kontrkup', {
+      effects: firstTime('ded_darbe'),
+      feedback: feedbackNew(
+        'Düşme değil, darbe',
+        'Küçük, dairesel, keskin kenarlı bir çökme; histopatolojide karşı tarafta hiçbir şey. Hareket eden baş değil, hareket eden cisim.',
+      ),
+    }),
+    recipe(`${pre}_SAAT`, 'clue_mide', 'clue_kantin', {
+      effects: firstTime('ded_saat'),
+      feedback: feedbackNew(
+        'Ölüm 23.34’ten sonra',
+        'Nihai rapor: midede yarı sindirilmiş ekmek, peynir, süt ürünü. Kantinde 23.34’te tost ve ayran. Ercan yedikten sonra öldü; yemek henüz midesindeydi.',
+      ),
+    }),
+  ];
+}
+
 export const INV_POOL = [
   'clue_baba_kan',
   'clue_basit',
   'clue_projektor',
   'clue_kenan_isik',
-  'clue_desen',
-  'clue_kontrkup',
-  'clue_mide',
-  'clue_kantin',
   'clue_arama2341',
   'clue_cikis',
   'clue_pos',
@@ -182,7 +184,8 @@ const hubChoices = {
     p1.activity('H_BUFE', 'İskele büfesine git', 'INV_BUFE_G', {
       once: true,
       description: 'Mudanya iskelesi · Nail Usta',
-      visibleWhen: any(flag('fact_donus'), has('ev_hesap'), flag('fact_saat_0010')),
+      // Banka satırındaki ad hiçbir tabelaya uymuyor; büfeyi Tarık’ın kendi anlatımı gösterir.
+      visibleWhen: flag('fact_donus'),
     }),
   ],
   cezaevi: [
@@ -209,7 +212,8 @@ const hubChoices = {
     p1.activity('H_ORHAN', 'Dr. Orhan Beyaz', 'INV_ORHAN', {
       once: true,
       description: 'Emekli adli tıpçı · Leyla’nın eski dostu',
-      visibleWhen: any(visited('INV_ONRAPOR'), visited('INV_LEYLA')),
+      // Orhan Hoca’nın kapısını Leyla açar: önce ön raporu onun önüne koymak gerekir.
+      visibleWhen: flag('orhan_ref'),
     }),
   ],
   arsiv: [
@@ -371,14 +375,14 @@ const gorusme = interview('INV_GORUSME', {
             W(
               lowTrust,
               `
-tarik/kizgin: Anlattım. Polise anlattım, savcıya anlattım. Ne değişti? Herkes yazdı, herkes gitti.
-~ Duvar. Duvara vurulmaz; kapısı aranır.
+tarik/kizgin: Anlattım. Polise anlattım, savcıya anlattım. Kavga ettim, kartımı bastım, çıktım. Ne değişti? Herkes yazdı, herkes gitti.
+~ Duvar. Ama duvarın içinde bir kapı var: bir kart, bir turnike. Duvara vurulmaz; kapısı aranır.
 `,
             ),
             O(`
 tarik: Sekizde girdim vardiyaya. Dört numarada gemi vardı, konteyner bağlıyorduk. Yağmur, poyraz. Normal.
 tarik: On bire doğru Ercan geldi. Elinde matara. Hep öyleydi gece vardiyasında, herkes bilir. Sataştı. Ben karışmadım ilk.
-tarik: Sonra… kavga oldu. Kenan abi geldi, ayırdı. “Eve git” dedi. Ben de gittim. Ha, bu kadar.
+tarik: Sonra… kavga oldu. Kenan abi geldi, ayırdı. “Eve git” dedi. Ben de gittim; turnikeye kartımı bastım, çıktım. Ha, bu kadar.
 - Ercan yerdeyken nasıldı?
 tarik: Küfrediyordu. Bağırıyordu. Burnu kanıyordu. Ölen adam öyle bağırmaz abla. Ben onu öyle bıraktım. Bağırırken.
 > Bunu söylerken ellerine baktı. Sonra masanın kenarına.
@@ -739,13 +743,15 @@ gulay/uzgun: Polis sabah sekizde geldi.
 `),
     }),
     option('GL_KART', '“Hesap dökümünüze bakabilir miyiz? Kartını kullandı mı?”', {
+      visibleWhen: chosen('GL_SAAT'),
       discovers: 'ev_hesap',
       score: { ARASTIRMA: 60 },
       responses: B(`
 gulay: Döküm mü? Telefonda var, dur. Ortak hesap, bir kartı onda.
 > Telefonu çevirdi. Kasım. 14. Bir satır.
-gulay/saskin: “23.37 · İSKELE BÜFE MUDANYA · 30,00.” İskele? Büfe? O saatte iskelede ne işi var?
+gulay/saskin: “23.37 · MDN ISKELE GIDA · 30,00.” İskele? O saatte iskelede ne işi var?
 ~ 23.37. Vardiya şefinin onu B sahasında gördüğü saatten üç dakika önce. Limandan yirmi dakika uzakta.
+~ İskelede yedi büfe, iki çay ocağı var. Bankanın yazdığı ad hiçbirinin tabelasında yok. Hangisi olduğunu bir tek o gece orada oturan bilir.
 gulay: Bunu yazdırayım mı? Bankadan çıktısını alırım, kaşeli.
 - Alın. Kaşeli.
 `),
@@ -856,8 +862,9 @@ sukru: Polis sordu, “kim bağırdı” dedi. Ben de… çocuk ayaktaydı, Erca
 ~ Dürüst bir adam, dürüst bir tahmin. Kolluk tutanağında tahmin, kesinlik olarak yazılmış.
 `),
     }),
-    option('SK_KANTIN', '“Ercan sonra nereye gitti?”', {
-      visibleWhen: chosen('SK_GECE'),
+    option('SK_KANTIN', '“Ercan sonra nereye gitti? Bir şey yedi mi?”', {
+      // Son öğünün neden önemli olduğunu Dr. Beyaz anlatır; ondan önce soru aklına gelmez.
+      visibleWhen: all(chosen('SK_GECE'), flag('fact_mide')),
       discovers: 'clue_kantin',
       score: { SORGULAMA: 30 },
       responses: B(`
@@ -1005,7 +1012,9 @@ orhan: Sabit baş, hareketli cisim: darbe neredeyse iz orada kalır. Karşı tar
 > Maketi çevirdi, ensesini gösterdi.
 orhan: Raporunda üç virgül iki santimlik dairesel bir çökme diyorsun. Yuvarlak, keskin kenarlı. Düz bir babaya ya da betona düşen kafa böyle küçük bir delik açmaz; çatlar, yayılır.
 orhan: Karşı tarafa bak. Frontalde bir şey yazıyor mu?
-~ Yazıyor. Dipnotta, küçük harflerle. Okumak için büyüteç gerekmişti.
+- Dipnot: “Karşı darbe değerlendirmesi histopatolojik inceleme sonrası nihai raporda yapılacaktır.”
+orhan: Doğru yazmışlar; çıplak gözle bakılıp geçilmez. Nihai rapor gelince histopatoloji satırını oku. “Frontalde kontüzyon yok” yazıyorsa, o kafa düşmedi.
+~ Cevap bir sonraki kâğıtta. O kâğıt ancak ilk celseden sonra gelecek.
 `,
         ),
         O(`
@@ -1022,6 +1031,7 @@ orhan: Önce raporu oku. Kırığın şekline bak, ölçüsüne bak, karşı tar
 orhan: Kesin saat çıkmaz. Kim sana kesin saat derse yalan söyler. Ama sıra çıkar.
 orhan: Bir öğün midede yarım ila iki saat kalır; yarı sindirilmiş, tanınabilir parçalar varsa ölüm yemekten kısa süre sonradır.
 orhan: Adamın son yemeğini ne zaman yediğini bulursan, ölümün ondan sonra olduğunu bilirsin. İki saatlik aralık daralır. Bir saate, belki yarım saate.
+orhan: Ön rapor mideyi tartmaz; örnek alır, nihai rapora bırakır. Nihai raporda ne yediği yazar, ne zaman yediği yazmaz. Saati sen bulacaksın.
 ~ Son yemek. Kimse sormamış: Ercan son yemeğini ne zaman yedi?
 `),
     }),
@@ -1058,9 +1068,12 @@ const onrapor = documentExam('INV_ONRAPOR', {
     row('o1', ['Dış muayene · yüz', 'Burunda kanama, alt dudakta 1 cm kesi; basit tıbbi müdahale ile giderilebilir']),
     row('o2', ['Kafatası · oksipital', 'Çökme kırığı, ~3 cm, kenarları keskin; altında subdural kanama']),
     row('o3', ['Kafatası · frontal', 'Bkz. dipnot ¹'], {
-      mag: { cells: ['Kafatası · frontal', '¹ Karşı darbe (contrecoup) lezyonu saptanmadı.'], tone: 'special' },
+      mag: {
+        cells: ['Kafatası · frontal', '¹ Karşı darbe değerlendirmesi histopatolojik inceleme sonrası nihai raporda yapılacaktır.'],
+        tone: 'special',
+      },
     }),
-    row('o4', ['Mide içeriği', 'Yarı sindirilmiş ekmek, peynir parçaları, süt ürünü (~250 ml)']),
+    row('o4', ['Mide içeriği', 'Örnek alındı; inceleme sonucu nihai raporda bildirilecektir']),
     row('o5', ['Toksikoloji', 'Kanda etil alkol 1,1 promil']),
     row('o6', ['Ölüm zamanı', '23.00–01.00 arası (rijidite, livor)']),
   ],
@@ -1088,23 +1101,21 @@ const onrapor = documentExam('INV_ONRAPOR', {
       },
     }),
     examine('EX_O3', 'mag', 'o3', {
-      discovers: 'clue_kontrkup',
-      score: { DELIL_ANALIZI: 150 },
+      score: { DELIL_ANALIZI: 60 },
+      effects: [raise('fact_dipnot')],
       feedback: {
-        title: 'YENİ İPUCU',
-        text: 'Sayfanın dibinde, küçük harflerle: “Karşı darbe lezyonu saptanmadı.” Ensesinden düşen bir başın alnının arkasında da kanama olurdu.',
-        label: '+150 SKOR · Not defterine eklendi',
+        title: 'DİPNOT',
+        text: 'Sayfanın dibinde, küçük harflerle: karşı darbe değerlendirmesi nihai rapora bırakılmış. Ensesinden düşen bir başın alnının arkasında da iz olur mu? Cevap başka bir kâğıtta.',
+        label: '+60 SKOR',
         tone: 'special',
       },
     }),
     examine('EX_O4', 'mag', 'o4', {
-      discovers: 'clue_mide',
-      score: { DELIL_ANALIZI: 100 },
       feedback: {
-        title: 'YENİ İPUCU',
-        text: 'Ekmek, peynir, süt ürünü; yarı sindirilmiş. Ercan ölmeden kısa süre önce bir şey yemiş. Ne zaman?',
-        label: '+100 SKOR · Not defterine eklendi',
-        tone: 'special',
+        title: 'NİHAİ RAPORA BIRAKILMIŞ',
+        text: 'Mide içeriği için örnek alınmış; sonuç Adli Tıp’ın nihai raporunda. İlk celseye yetişmeyecek.',
+        label: 'Not alındı',
+        tone: 'info',
       },
     }),
   ],
@@ -1210,13 +1221,24 @@ const turnike = documentExam('INV_TURNIKE', {
   costVar: 'turn_left',
   rules: [
     examine('EX_G2', 'compare', 'g2', {
+      // Karşılaştırılacak beyan: sanığın kolluktaki “on bir buçuk gibi” saati (INV_IFADE, i3).
+      enabledWhen: flag('fact_ifade_tarik'),
       discovers: 'clue_cikis',
       score: { DELIL_ANALIZI: 150 },
       feedback: {
         title: 'YENİ İPUCU',
-        text: 'Tarık’ın kartıyla 23.18.42’de çıkış. Sabaha kadar bu kartla başka hiçbir geçiş yok. Liman tel örgüyle çevrili; içeri turnikesiz girilmez.',
+        text: 'İfadesinde “on bir buçuk gibi”; makinede 23.18.42. Tahmin ettiğinden on iki dakika önce çıkmış ve sabaha kadar bu kartla başka geçiş yok. Liman tel örgülü; içeri turnikesiz girilmez.',
         label: '+150 SKOR · Not defterine eklendi',
         tone: 'special',
+      },
+    }),
+    examine('EX_G2_X', 'compare', 'g2', {
+      enabledWhen: not(flag('fact_ifade_tarik')),
+      feedback: {
+        title: 'NEYLE KARŞILAŞTIRAYIM?',
+        text: '23.18, T. Demirel, çıkış. Bir saat; ama hangi beyana karşı? Önce müvekkilimin kollukta ne dediğini okumalıyım.',
+        label: 'Not alındı',
+        tone: 'info',
       },
     }),
     examine('EX_G4', 'mag', 'g4', {
@@ -1280,6 +1302,16 @@ const ifade = documentExam('INV_IFADE', {
         tone: 'special',
       },
     }),
+    examine('EX_I3', 'mag', 'i3', {
+      score: { DELIL_ANALIZI: 40 },
+      effects: [raise('fact_ifade_tarik')],
+      feedback: {
+        title: 'SANIĞIN SAATİ',
+        text: 'Tarık kollukta “on bir buçuk gibi çıktım” demiş. Tutanağa “23.30” diye geçmiş. Bir tahmin, bir saate dönüşmüş; doğrusunu ancak bir makine söyler.',
+        label: '+40 SKOR',
+        tone: 'special',
+      },
+    }),
     examine('EX_I1', 'compare', 'i1', {
       score: { DELIL_ANALIZI: 60 },
       effects: [raise('fact_ifade_saat')],
@@ -1314,6 +1346,8 @@ const dilekce = story('INV_DIL', {
 `),
   choices: [
     option('DIL_TURNIKE', 'Liman turnike ve araç kapısı kayıtları (14 Kasım 22.00–01.00)', {
+      // Hangi kapının, hangi saatlerin isteneceğini müvekkilin anlatımı söyler (“kartımı bastım, çıktım”).
+      visibleWhen: flag('fact_gece'),
       enabledWhen: cmp(v('dil_n'), '<', 2),
       score: { USUL_BILGISI: 50 },
       effects: [raise('dil_turnike'), inc('dil_n')],
@@ -1383,10 +1417,11 @@ const leyla = story('INV_LEYLA', {
   background: 'buro',
   lines: [
     W(
-      all(cmp(v('day'), '==', 1), has('ded_darbe')),
+      all(cmp(v('day'), '==', 1), has('clue_desen')),
       `
 # LEYLA’NIN ODASI [bg:buro]
-leyla: Düşme değil, darbe. Güzel. Şimdi savcı ne der, biliyor musun? “Darbe olabilir; sanık geri döndü ve vurdu.”
+leyla: Yuvarlak bir çukur. Güzel; ama ön rapor bir başlangıç. Düşme mi darbe mi, nihai rapor söyleyecek; ve onu okumayı birinden öğreneceksin.
+leyla: Darbe çıksa bile savcı ne der, biliyor musun? “Darbe olabilir; sanık geri döndü ve vurdu.”
 leyla: Darbe, ölümün nasıl olduğunu söyler. Kimin vurduğunu söylemez. Senin ikinci sorun saat. Ercan ne zaman öldü?
 leyla: Kural şu: ceza davasında şüphe sanık lehine. Ama hâkim şüpheyi senin yerine kurmaz. Önüne iki saat koy; arasına bir adam sığmasın.
 `,
@@ -1421,7 +1456,7 @@ leyla: Bir de aile. Karısı, annesi, kardeşi seni sever ve sana yardım etmek 
 `,
     ),
     W(
-      all(cmp(v('day'), '==', 3), any(has('ded_saat'), has('ded_canli'))),
+      all(cmp(v('day'), '==', 3), any(has('clue_kantin'), has('ded_canli'))),
       `
 # LEYLA’NIN ODASI [bg:buro]
 leyla: Ercan kavgadan sonra yaşıyordu. Yemek yedi, telefon etti. Bunu gösterebilirsen savcının hikâyesi bir yerinden yırtılır.
@@ -1447,7 +1482,21 @@ leyla: Sorularını kısa tut. Önce bastır, bırak kendisi anlatsın. Kâğıd
 leyla: Bir de ara karar. Celsenin sonunda mahkeme sana “talepleriniz” diyecek. O an, ikinci celsede elinde ne olacağına karar verdiğin andır. Hazırlıksız gitme.
 `),
   ],
-  choices: [back('LEYLA_DON', 'Teşekkür et')],
+  choices: [
+    option('LEYLA_RAPOR', 'Ön raporu Leyla’nın önüne koy', {
+      visibleWhen: all(any(has('clue_desen'), flag('fact_dipnot')), not(flag('orhan_ref'))),
+      score: { SAVUNMA_STRATEJISI: 20 },
+      effects: [raise('orhan_ref')],
+      responses: B(`
+> Raporu masasına koydum. Cetvelle ölçtüğüm çukuru, dipnotu gösterdim. Leyla gözlüğünü taktı; bir süre hiçbir şey söylemedi.
+leyla: Bu raporu bir hukukçu okuyamaz, Deniz. Ben de okuyamam. Otuz yıl önce okumayı bana öğreten adam hâlâ Çekirge’de oturuyor.
+> Telefonu açtı, bir numara çevirdi; ezberden. Sesi değişti; bir öğrencinin sesi.
+leyla: Orhan Hoca… Leyla. Evet. Bir çocuğum var, size gelecek. Bir kırık, bir dipnot. Evet. Teşekkür ederim. [phone]
+~ Leyla’nın masasındaki ters çerçeve aklıma geldi. Sormadım.
+`),
+    }),
+    back('LEYLA_DON', 'Teşekkür et'),
+  ],
 });
 
 // --- Gün sonları ---
@@ -1660,7 +1709,10 @@ const geceNodes = [
   }),
   decisionNode('INV_GECE_4', [{ to: 'INV_GECE_4B' }], {
     lines: [
-      W(has('ded_darbe'), `~ Düşme değil, darbe. Ölüm bir yumruktan değil, küçük, yuvarlak, sert bir şeyden geldi.`),
+      W(
+        flag('fact_dipnot'),
+        `~ Dipnot: karşı darbe değerlendirmesi nihai rapora bırakılmış. Düşme mi darbe mi, cevap bir sonraki kâğıtta.`,
+      ),
       W(has('clue_desen'), `~ 3,2 santim. Yuvarlak bir çukur. Bir beton zemin böyle bir şey bırakmaz.`),
       O(`~ Ön rapor iki ihtimal diyor: düşme ya da darbe. Savcı kendine uygun olanı seçti.`),
     ],
@@ -1668,9 +1720,10 @@ const geceNodes = [
   decisionNode('INV_GECE_5', [{ to: 'INV_GECE_6' }], {
     lines: [
       W(
-        any(has('ded_saat'), has('ded_canli')),
+        all(has('clue_kantin'), has('ded_canli')),
         `~ Ercan kavgadan sonra yaşıyordu: bir tost, bir ayran, bir telefon. Bu üç şey bir ölü adamın yapacağı şeyler değil.`,
       ),
+      W(has('clue_kantin'), `~ 23.34 sularında bir tost, bir ayran. Midede ne kaldığını nihai rapor söyleyecek.`),
       W(has('clue_arama2341'), `~ 23.41, “Kptn”. İki dakika. Ercan’ın son konuşması. Ne konuştu, kiminle?`),
       O(`~ Ölüm saati iki saatlik bir aralık. İki saatin içine bir adam da sığar, iki adam da.`),
     ],
@@ -1753,6 +1806,8 @@ const hub = p1.hub({
   choices: [
     nav('GO_H1', 'DURUŞMAYA GİT · 1. CELSE', 'INV_GECE_1', {
       role: 'PRIMARY',
+      // Duruşma günü bellidir: birinci celseye ancak soruşturmanın son gününde gidilir (ara evresiyle aynı kural).
+      visibleWhen: cmp(v('day'), '>=', 4),
       confirm: 'Duruşmaya gidersen soruşturma biter. Emin misin?',
     }),
   ],

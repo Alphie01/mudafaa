@@ -73,34 +73,16 @@ e mag o4
 c ONRAPOR_BITIR
 c H_CIKARIM
 m clue_baba_kan clue_basit
-m clue_desen clue_kontrkup
 m clue_matara clue_kafes
 c CIKARIM_BITIR
 c H_LEYLA
+c LEYLA_RAPOR
 c LEYLA_DON
 c H_IFADE
 e mag i2
 e compare i1
 e mag i3
 c IFADE_BITIR
-c H_GORUS
-c TP_GECE soft
-c TP_ERCAN hard
-c G_RESIM
-c TP_YUMRUK soft
-c TP_VARDIYA soft
-c TP_EMRE soft
-c G_BITIR
-c AK1_A
-`);
-
-const GUN2 = A(`
-c H_TELEFON
-e mag t3
-e compare t5
-c TELEFON_BITIR
-c H_LEYLA
-c LEYLA_DON
 c H_GULAY
 c GL_SAAT
 c GL_KART
@@ -108,6 +90,24 @@ c GL_EMRE
 c GL_TEKLIF
 c GL_DOGRU
 c GL_BITIR
+c AK1_A
+`);
+
+const GUN2 = A(`
+c H_GORUS
+c TP_GECE soft
+c TP_ERCAN hard
+c G_RESIM
+c TP_YUMRUK soft
+c TP_DONUS soft
+c TP_EMRE soft
+c G_BITIR
+c H_TELEFON
+e mag t3
+e compare t5
+c TELEFON_BITIR
+c H_LEYLA
+c LEYLA_DON
 c H_DIL
 c DIL_TURNIKE
 c DIL_KANTIN
@@ -120,27 +120,31 @@ c H_TURNIKE
 e compare g2
 e mag g4
 c TURNIKE_BITIR
+c H_ORHAN
+c OR_DERS
+c OR_MIDE
+c OR_ALET
+c OR_BITIR
+c H_CIKARIM
+m clue_arama2341 clue_cikis
+c CIKARIM_BITIR
+c H_LEYLA
+c LEYLA_DON
 c H_SUKRU
 c SK_GECE
 c SK_KIM
 c SK_KANTIN
 c SK_EMRE
 c SK_BITIR
-c H_CIKARIM
-m clue_mide clue_kantin
-m clue_arama2341 clue_cikis
-c CIKARIM_BITIR
-c H_LEYLA
-c LEYLA_DON
+c AK3_A
+`);
+
+const GUN4 = A(`
 c H_KENAN
 c KN_GECE
 c KN_ERCAN
 c KN_TARIK
 c KN_BITIR
-c AK3_A
-`);
-
-const GUN4 = A(`
 c H_BUFE
 c NL_GECE
 c NL_SAAT
@@ -164,11 +168,6 @@ m clue_surukleme clue_lastik
 c CIKARIM_BITIR
 c H_LEYLA
 c LEYLA_DON
-c H_ORHAN
-c OR_DERS
-c OR_MIDE
-c OR_ALET
-c OR_BITIR
 c GO_H1
 c GECE_DEVAM
 `);
@@ -217,12 +216,15 @@ c LEYLA2_DON
 c A_TALEP
 c EK_GPS
 c EK_GONDER
-c A_TARIK
-c TR_SEMA
-c TR_SONSOZ
-c TR_GECE
-c TR_BITIR
+c A_ATK
+e mag n3
+e mag n4
+c ATK_BITIR
 c AA1_A
+c A_CIKARIM
+m clue_desen clue_kontrkup
+m clue_mide clue_kantin
+c ARA_CIKARIM_BITIR
 c A_KAYIT
 e mag a2
 e compare z1
@@ -304,20 +306,19 @@ c GO_T2
 c ARA_SON_DEVAM
 `);
 
+// G1 emanet yerine kolluk amirine gider (kitten eksik kilit → K7); TIPIK emanette koniyi ölçer (B3).
 const NURTEN = `
 c A_NURTEN
 c NU_TWIST
 c NU_KIT
 c NU_BITIR
-c A_CIKARIM
-m clue_envanter clue_tarik_koni
-c ARA_CIKARIM_BITIR
 `;
 
-const SAVCI = `
-c A_SAVCI
-c SAV_ATK
-c SAV_BITIR
+const EMANET = `
+c A_EMANET
+t OB_KONI
+t OB_MONT
+c EMANET_BITIR
 `;
 
 const ARA_TAM = (suc: boolean) =>
@@ -325,18 +326,22 @@ const ARA_TAM = (suc: boolean) =>
 c ARA_GIRIS_DEVAM
 c A_LEYLA
 c LEYLA2_DON
+c A_ATK
+e mag n2
+e mag n3
+e mag n4
+c ATK_BITIR
 c A_SEVIM
 c SV_TAZIYE
 c SV_ERCAN
 c SV_HAFTA
 c SV_TUTANAK
 c SV_BITIR
-c A_TARIK
-c TR_SEMA
-c TR_SONSOZ
-c TR_GECE
-c TR_BITIR
 c AA1_A
+c A_CIKARIM
+m clue_desen clue_kontrkup
+m clue_mide clue_kantin
+c ARA_CIKARIM_BITIR
 c A_KAYIT
 e mag a2
 e compare z1
@@ -346,35 +351,36 @@ m clue_gps clue_zimmet
 c ARA_CIKARIM_BITIR
 c A_LEYLA
 c LEYLA2_DON
-c A_EMANET
-t OB_KONI
-t OB_MONT
-c EMANET_BITIR
+c A_TARIK
+c TR_SEMA
+c TR_SONSOZ
+c TR_GECE
+c TR_BITIR
 c AA2_B
+${suc ? NURTEN : EMANET}
 c A_DEFTER
 e mag d4
 e compare d3
 c DEFTER_BITIR
 c A_CIKARIM
-m clue_koni clue_desen
+${suc ? 'm clue_envanter clue_tarik_koni' : 'm clue_koni clue_desen'}
 m clue_defter_satir clue_arama2341
 ${suc ? '' : 'm clue_mont clue_pamuk'}
 c ARA_CIKARIM_BITIR
 ${suc ? 'c A_SUC\nc SUC_A' : ''}
 c A_LEYLA
 c LEYLA2_DON
-${suc ? NURTEN : SAVCI}
 c GO_T2
 c ARA_SON_DEVAM
 `);
 
-const BILIRKISI = `
+const BILIRKISI = (silah: boolean) => `
 p B1
 s ded_darbe B1
 p B2
 s ded_saat B2
 p B3
-s ded_silah B3
+${silah ? 's ded_silah B3' : ''}
 `;
 
 const BILIRKISI_YOK = `
@@ -383,10 +389,10 @@ p B2
 p B3
 `;
 
-const CELSE2 = (esas: string, devam: string, opts: { k7?: boolean; bilirkisi?: boolean } = {}) =>
+const CELSE2 = (esas: string, devam: string, opts: { k7?: boolean; bilirkisi?: boolean; silah?: boolean } = {}) =>
   A(`
 c T00_DEVAM
-${opts.bilirkisi === false ? BILIRKISI_YOK : BILIRKISI}
+${opts.bilirkisi === false ? BILIRKISI_YOK : BILIRKISI(opts.silah !== false)}
 c T01_BITIR
 p K5
 s ded_arac K5
@@ -398,7 +404,7 @@ p K8
 o g_kanaat K8
 c T02_BITIR
 p N1
-s ev_hesap N1
+s ded_cikis N1
 p N2
 s ded_buf N2
 p N3
@@ -422,48 +428,55 @@ t OB_KAFES
 t OB_MARTI
 t OB_KAYNAK
 c RIHTIM_BITIR
-c H_GORUS
-c TP_GECE soft
-c TP_ERCAN hard
-c TP_YUMRUK soft
-c TP_EMRE soft
-c G_BITIR
-c H_KENAN
-c KN_GECE
-c KN_TARIK
-c KN_BITIR
-c AK1_A
 c H_GULAY
 c GL_SAAT
 c GL_KART
 c GL_TEKLIF
 c GL_DOGRU
 c GL_BITIR
+c H_GORUS
+c TP_GECE soft
+c TP_ERCAN hard
+c TP_YUMRUK soft
+c TP_EMRE soft
+c TP_DONUS soft
+c G_BITIR
+c AK1_A
+c H_KENAN
+c KN_GECE
+c KN_TARIK
+c KN_BITIR
+c H_DIL
+c DIL_TURNIKE
+c DIL_KESIF
+c DIL_GONDER
 c H_SUKRU
 c SK_GECE
 c SK_KIM
 c SK_EMRE
 c SK_BITIR
-c H_CIKARIM
-m clue_kenan_isik clue_projektor
-m clue_baba_kan clue_kafes
-c CIKARIM_BITIR
-c H_BUFE
-c NL_GECE
-c NL_SAAT
-c NL_BITIR
 c AK2_B
 c H_LEYLA
 c LEYLA_DON
-c H_BSAHA
-t OB_SURUK
-t OB_KEDI
-t OB_PALET
-c BSAHA_BITIR
-c H_GORUS2
-c TP_DONUS soft
-c TP_KENAN soft
-c G_BITIR
+c H_IFADE
+e mag i3
+e mag i2
+c IFADE_BITIR
+c H_TURNIKE
+e compare g2
+c TURNIKE_BITIR
+c H_BUFE
+c NL_GECE
+c NL_SAAT
+c NL_BAK
+t OB_ZRAPOR
+t OB_AKIS
+c BUFE_BITIR
+c H_CIKARIM
+m clue_cikis clue_pos
+m clue_kenan_isik clue_projektor
+m clue_baba_kan clue_kafes
+c CIKARIM_BITIR
 c H_TELEFON
 e mag t3
 e mag t1
@@ -471,6 +484,11 @@ c TELEFON_BITIR
 c AK3_A
 c H_LEYLA
 c LEYLA_DON
+c H_BSAHA
+t OB_SURUK
+t OB_KEDI
+t OB_PALET
+c BSAHA_BITIR
 c GO_H1
 c GECE_DEVAM
 `);
@@ -490,7 +508,7 @@ c H103_BITIR
 c H104_D
 c H104B_DEVAM
 p K1
-s ev_hesap K1
+s ded_cikis K1
 p K2
 s ded_isik K2
 c H105_BITIR
@@ -612,17 +630,18 @@ c GL_BITIR
 c AK3_A
 c H_LEYLA
 c LEYLA_DON
-c H_BUFE
-c NL_GECE
-c NL_POLIS
-c NL_BITIR
-c H_ORHAN
-c OR_ALET
-c OR_BITIR
 c H_GORUS2
 c TP_YUMRUK hard
 c TP_DONUS soft
 c G_BITIR
+c H_BUFE
+c NL_GECE
+c NL_POLIS
+c NL_BITIR
+c H_IFADE
+e compare i4
+e mag i1
+c IFADE_BITIR
 c GO_H1
 c GECE_DEVAM
 c H100_DEVAM
@@ -720,12 +739,10 @@ c TELEFON_BITIR
 c H_SUKRU
 c SK_GECE
 c SK_KIM
-c SK_KANTIN
+c SK_EMRE
 c SK_BITIR
 c AK2_B
 c H_CIKARIM
-m clue_desen clue_kontrkup
-m clue_mide clue_kantin
 m clue_baba_kan clue_basit
 c CIKARIM_BITIR
 c H_KENAN
@@ -814,9 +831,7 @@ c GO_T2
 c ARA_SON_DEVAM
 c T00_DEVAM
 p B1
-s ded_darbe B1
 p B2
-s ded_saat B2
 p B3
 s ded_silah B3
 c T01_BITIR
@@ -856,7 +871,7 @@ export const tests: CasePart = {
         GUN4,
         CELSE1,
         ARA_TAM(true),
-        CELSE2('T06_B', 'T06SB_DEVAM'),
+        CELSE2('T06_B', 'T06SB_DEVAM', { silah: false }),
       ),
       goldenPath(
         TYPICAL_PATH,
@@ -872,7 +887,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G3',
-        { outcome: 'NITELIK', finalMin: 3804, finalMax: 4206 },
+        { outcome: 'NITELIK', finalMin: 4384, finalMax: 4846 },
         PROLOG('BR00_A', 'BR01_D', 'STR_INDIRIM'),
         G3_SORUSTURMA,
         G3_CELSE1,
@@ -881,13 +896,13 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G4',
-        { outcome: 'MAHKUMIYET', finalMin: 195, finalMax: 215 },
+        { outcome: 'MAHKUMIYET', finalMin: 138, finalMax: 152 },
         PROLOG('BR00_B', 'BR01_B', 'STR_MASUMIYET'),
         G4,
       ),
       goldenPath(
         'G5',
-        { outcome: 'ETIK', finalMin: 7752, finalMax: 8568 },
+        { outcome: 'ETIK', finalMin: 6161, finalMax: 6809 },
         PROLOG('BR00_A', 'BR01_A', 'STR_USUL'),
         G5_SORUSTURMA,
         G5_CELSE1,
@@ -942,6 +957,20 @@ export const tests: CasePart = {
         CELSE1_ARACSIZ,
         ARA_EK,
         CELSE2('T06_E', 'T06SE_DEVAM', { k7: false }),
+      ),
+      // Son öğün saati duruşmaya getirilmezse (kantin kaydı istenmedi, Şükrü Usta'ya kürsüde sorulmadı) bilirkişi
+      // saati daraltmaz: CMK 217/1. Dönüş yok kayıtta olduğundan heyet 87/4'te kalır.
+      goldenPath(
+        'OLGU_KAYIT',
+        { outcome: 'NITELIK' },
+        PROLOG('BR00_C', 'BR01_A', 'STR_USUL'),
+        GUN1,
+        GUN2.filter((a) => !('choiceId' in a && a.choiceId === 'DIL_KANTIN')),
+        GUN3,
+        GUN4,
+        CELSE1.filter((a) => !('statementId' in a && (a.statementId === 'S3' || a.statementId === 'S4'))),
+        ARA_TAM(false),
+        CELSE2('T06_E', 'T06SX_DEVAM', { k7: false }),
       ),
       goldenPath(
         'OLGU_B',

@@ -1,4 +1,4 @@
-import { rect, sceneAsset, sceneDef, sceneObject } from '../../../tools/content/src/kit/index.js';
+import { chosen, has, rect, sceneAsset, sceneDef, sceneObject } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 
 // 30-scenes: dört olay yeri / inceleme sahnesi. Görseller scenes/<ad>.html'den `npm run case:scenes -- liman-gecesi` ile
@@ -140,12 +140,16 @@ export const scenes: CasePart = {
       image: 'img_bufe',
       objects: [
         sceneObject('ob_zrapor', 'Çekmece', OB_ZRAPOR, {
+          // Kırk yıllık fiş yığınında doğru günü ve satırı bulmak için bankanın saati ve tutarı gerekir.
+          activeWhen: has('ev_hesap'),
           discovers: 'clue_pos',
           score: { ARASTIRMA: 60 },
-          text: 'Nail Usta çekmeceyi açtı: lastikle bağlanmış gün sonu fişleri. 14 Kasım: “23.37 · KART · 2 ÇAY · 30,00.” O saatte tek kartlı satış.',
+          text: 'Bankanın satırını gösterdim: 23.37, otuz lira. Nail Usta lastikli gün sonu fişlerini çözdü. 14 Kasım: “23.37 · KART · 2 ÇAY · 30,00.” Terminal adı: MDN ISKELE GIDA.',
           short: 'Gün sonu fişi',
         }),
         sceneObject('ob_akis', 'Yayın akışı', OB_AKIS, {
+          // Akışın anlamı ancak Nail Usta çocuğun ne zaman kalktığını anlattıktan sonra belli olur.
+          activeWhen: chosen('NL_SAAT'),
           discovers: 'clue_radyo',
           score: { ARASTIRMA: 40 },
           text: 'Duvarda raptiyeyle tutturulmuş bir radyonun yayın akışı. “00.00 Gece Haberleri.” Nail Usta parmağıyla vurdu: “Haberler başladı, çocuk hâlâ oradaydı.”',

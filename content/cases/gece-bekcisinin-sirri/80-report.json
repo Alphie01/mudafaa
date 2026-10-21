@@ -2,6 +2,36 @@
   "report": {
     "hints": [
       {
+        "id": "h_isik",
+        "when": {
+          "not": {
+            "ref": "teshis_isik"
+          }
+        },
+        "text": "Işık iki celsede kapanmadı. İkinci celsede tanığı 14 numaralı direğe bağlayıp ampul fotoğrafı ve arıza kaydıyla vurmak, üçüncüde komiserin dayandığı 16’nın yönünü şebeke planıyla göstermek gerekiyordu.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_yer",
+        "when": {
+          "not": {
+            "ref": "teshis_yer"
+          }
+        },
+        "text": "Tanığın yeri iki celsede kapanmadı. İkinci celsede vardiya ve kulübe; tanık olay defterine dayanınca defterin aslını istemek, üçüncüde tur satırlarının sonradan yazıldığını ve kart okuyucunun 23.29’unu göstermek gerekiyordu.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_iz",
+        "when": {
+          "not": {
+            "ref": "iz_aciklandi"
+          }
+        },
+        "text": "Sürgüdeki iz açıklanmadı. Kerem’e sürgünün fotoğrafını göstermek, ikinci celsede ona 19.30’u sormak, defterin yeşil satırını Hüseyin’e tanıtmak ve kürsüde ona anlattırmak gerekiyordu.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
         "id": "h_iz42",
         "when": {
           "not": {
@@ -165,7 +195,7 @@
             "hasEvidence": "ded_arama"
           }
         },
-        "text": "Aramayı kimin yaptığını komiserden öğrenip teslim tutanağıyla birleştirmedin.",
+        "text": "Aramayı kimin yaptığını komiserden öğrenip teslim tutanağıyla birleştirmedin ya da üçüncü celsede kürsüde ona sormadın.",
         "category": "USUL_BILGISI"
       },
       {
@@ -175,8 +205,49 @@
             "hasEvidence": "clue_defter"
           }
         },
-        "text": "Kerem’in masraf defteri olaydan önce yazılmış bir “19.30” kaydı taşıyordu; Saniye Hanım’a sormadın.",
+        "text": "Kerem’in masraf defterinde 19.30 satırı, Hüseyin’in gözü önünde yazılan 22.57 satırının üstündeydi; Saniye Hanım’a defteri sormadın.",
         "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_hus_defter",
+        "when": {
+          "all": [
+            {
+              "hasEvidence": "clue_defter"
+            },
+            {
+              "not": {
+                "hasEvidence": "clue_hus_kalem"
+              }
+            }
+          ]
+        },
+        "text": "Defterdeki yeşil satırı incelemedin, çay ocağının kasasındaki yeşil kalemi görmedin ya da Hüseyin’e sormadın; satırı yazılırken o görmüştü."
+      },
+      {
+        "id": "h_yusuf16",
+        "when": {
+          "not": {
+            "flag": "yusuf_16"
+          }
+        },
+        "text": "Komiserin sokağı neye dayanarak aydınlık saydığını çay bahçesinde öğrenmedin; 16’yı ondan duymadan ekip şefine sorulacak soru yoktu."
+      },
+      {
+        "id": "h_zimmet",
+        "when": {
+          "all": [
+            {
+              "flag": "fact_anahtar_ortak"
+            },
+            {
+              "not": {
+                "flag": "arg_142_2d"
+              }
+            }
+          ]
+        },
+        "text": "Anahtarın işverence verildiğini müvekkilin sözünde bıraktın; bir çalışma arkadaşının anlatımı ve işverenin zimmet kaydı 142/2-d’yi düşürecekti."
       },
       {
         "id": "h_liman",

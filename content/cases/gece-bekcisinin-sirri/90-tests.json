@@ -249,6 +249,16 @@
             "target": "a14b"
           },
           {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "a14a"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "a14c"
+          },
+          {
             "kind": "CHOOSE",
             "choiceId": "INV_ARIZA_BITIR"
           },
@@ -280,11 +290,40 @@
           },
           {
             "kind": "CHOOSE",
+            "choiceId": "G_SURGU"
+          },
+          {
+            "kind": "CHOOSE",
             "choiceId": "G_BITIR"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "DAY_NEXT3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_T_SEL"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "SQ_DVR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TSEL_GORUS"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H_ARAMA4"
+          },
+          {
+            "kind": "TAP",
+            "x": 235,
+            "y": 212
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "INV_ARAMA4_BITIR"
           },
           {
             "kind": "CHOOSE",
@@ -347,6 +386,14 @@
           },
           {
             "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
             "choiceId": "H_DURUSMA"
           },
           {
@@ -395,6 +442,14 @@
           },
           {
             "kind": "PRESS",
+            "statementId": "S4"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "S4"
+          },
+          {
+            "kind": "PRESS",
             "statementId": "S1"
           },
           {
@@ -421,25 +476,12 @@
           },
           {
             "kind": "PRESS",
-            "statementId": "S4"
-          },
-          {
-            "kind": "PRESS",
-            "statementId": "S4"
+            "statementId": "S5"
           },
           {
             "kind": "PRESENT",
             "evidenceId": "ded_kulube",
             "statementId": "S5"
-          },
-          {
-            "kind": "PRESENT",
-            "evidenceId": "ev_hts",
-            "statementId": "S4_EK"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "C06H_A"
           },
           {
             "kind": "CHOOSE",
@@ -448,6 +490,10 @@
           {
             "kind": "CHOOSE",
             "choiceId": "C06R_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CT_OLAY"
           },
           {
             "kind": "CHOOSE",
@@ -483,11 +529,49 @@
           },
           {
             "kind": "CHOOSE",
+            "choiceId": "AYUS_16"
+          },
+          {
+            "kind": "CHOOSE",
             "choiceId": "AYUS_DNA"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "ARA_GUN2"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_EKIP"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AEKIP_16"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AEKIP_KIM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_SANIYE"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ASAN_DEFTER"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d2257"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "d1930"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_DEFTER_BITIR"
           },
           {
             "kind": "CHOOSE",
@@ -499,27 +583,69 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "AHUS_TALEP"
+            "choiceId": "AHUS_DEFTER"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "H2_KEREM"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "AKER_DOGRU"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "H2_SANIYE"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "ASAN_DEFTER"
+            "choiceId": "AHUS_KORUMA"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "ARA_GUN3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KART"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "k_murat"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "k_selin"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_KART_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_PLAN"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d14"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "d16"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_PLAN_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_OLAY"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "o2300"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "o2100"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_OLAY_BITIR"
           },
           {
             "kind": "CHOOSE",
@@ -531,8 +657,31 @@
             "b": "ev_teslim_tutanagi"
           },
           {
+            "kind": "COMBINE",
+            "a": "clue_ariza_onarim",
+            "b": "clue_direk_plan"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_olay_toplu",
+            "b": "clue_kart_selin"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_defter_sira",
+            "b": "clue_hus_kalem"
+          },
+          {
             "kind": "CHOOSE",
             "choiceId": "ARA_CIKARIM_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
           },
           {
             "kind": "CHOOSE",
@@ -549,6 +698,10 @@
           {
             "kind": "CHOOSE",
             "choiceId": "H7_D3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H7_DEFTER"
           },
           {
             "kind": "CHOOSE",
@@ -574,14 +727,27 @@
             "statementId": "Y3"
           },
           {
+            "kind": "PRESS",
+            "statementId": "Y4"
+          },
+          {
             "kind": "PRESENT",
-            "evidenceId": "ded_lamba",
+            "evidenceId": "ded_zifiri",
             "statementId": "Y4"
           },
           {
             "kind": "PRESENT",
             "evidenceId": "ev_dna",
             "statementId": "Y5"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "Y6"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_tur",
+            "statementId": "Y6"
           },
           {
             "kind": "CHOOSE",
@@ -598,6 +764,19 @@
           {
             "kind": "CHOOSE",
             "choiceId": "C10_A"
+          },
+          {
+            "kind": "PRESS",
+            "statementId": "R3"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ev_hts",
+            "statementId": "R3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C10H_A"
           },
           {
             "kind": "CHOOSE",
@@ -630,8 +809,8 @@
         ],
         "expect": {
           "outcome": "BERAAT_B",
-          "finalMin": 9139,
-          "finalMax": 10101
+          "finalMin": 11562,
+          "finalMax": 12779
         }
       },
       {
@@ -643,7 +822,7 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "PR01_DEVAM"
+            "choiceId": "PR01_KAGIT"
           },
           {
             "kind": "CHOOSE",
@@ -682,16 +861,6 @@
           {
             "kind": "CHOOSE",
             "choiceId": "TP_HUSEYIN",
-            "variant": "soft"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "TP_KENDISI",
-            "variant": "soft"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "TP_ANNE",
             "variant": "soft"
           },
           {
@@ -754,11 +923,6 @@
             "target": "kerem"
           },
           {
-            "kind": "EXAMINE",
-            "tool": "dust",
-            "target": "selin"
-          },
-          {
             "kind": "CHOOSE",
             "choiceId": "INCELEME_BITIR"
           },
@@ -806,14 +970,6 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "H_LEYLA"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "LEYLA_DON"
-          },
-          {
-            "kind": "CHOOSE",
             "choiceId": "H_BEL"
           },
           {
@@ -827,10 +983,6 @@
           {
             "kind": "CHOOSE",
             "choiceId": "HQ_GECE"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "HQ_BABA"
           },
           {
             "kind": "CHOOSE",
@@ -893,25 +1045,12 @@
             "target": "d2240"
           },
           {
-            "kind": "EXAMINE",
-            "tool": "uv",
-            "target": "d0600"
-          },
-          {
             "kind": "CHOOSE",
             "choiceId": "INV_DVR_BITIR"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "AK2_UYU"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "H_LEYLA"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "LEYLA_DON"
           },
           {
             "kind": "CHOOSE",
@@ -947,13 +1086,13 @@
           },
           {
             "kind": "EXAMINE",
-            "tool": "compare",
-            "target": "a14c"
+            "tool": "mag",
+            "target": "a14a"
           },
           {
             "kind": "EXAMINE",
-            "tool": "uv",
-            "target": "a16"
+            "tool": "compare",
+            "target": "a14c"
           },
           {
             "kind": "CHOOSE",
@@ -973,31 +1112,23 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "H_T_MUR"
+            "choiceId": "H_T_CEN"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "MQ_SAAT"
+            "choiceId": "CQ_ANAHTAR"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "MQ_ZIYA"
+            "choiceId": "CQ_SIGARA"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "TMUR_AYRIL"
+            "choiceId": "TCEN_AYRIL"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "DAY_NEXT3"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "H_LEYLA"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "LEYLA_DON"
           },
           {
             "kind": "CHOOSE",
@@ -1017,6 +1148,10 @@
             "kind": "CHOOSE",
             "choiceId": "TP_ZIYA",
             "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_SURGU"
           },
           {
             "kind": "CHOOSE",
@@ -1049,14 +1184,6 @@
           {
             "kind": "CHOOSE",
             "choiceId": "INV_ARAMA4_BITIR"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "H_HTS"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "HTS_TANIK"
           },
           {
             "kind": "CHOOSE",
@@ -1099,11 +1226,6 @@
           },
           {
             "kind": "COMBINE",
-            "a": "clue_kerem_depo1",
-            "b": "clue_izmarit"
-          },
-          {
-            "kind": "COMBINE",
             "a": "clue_uv_silinti",
             "b": "clue_dvr_sk"
           },
@@ -1116,6 +1238,11 @@
             "kind": "COMBINE",
             "a": "clue_erteleme",
             "b": "clue_takvim"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_izmarit",
+            "b": "clue_cengiz_sigara"
           },
           {
             "kind": "CHOOSE",
@@ -1204,11 +1331,6 @@
             "statementId": "S3"
           },
           {
-            "kind": "PRESENT",
-            "evidenceId": "ev_anahtar",
-            "statementId": "S3"
-          },
-          {
             "kind": "PRESS",
             "statementId": "S4"
           },
@@ -1233,6 +1355,10 @@
           {
             "kind": "CHOOSE",
             "choiceId": "C06R_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CT_OLAY"
           },
           {
             "kind": "CHOOSE",
@@ -1268,11 +1394,11 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "AYUS_BANT"
+            "choiceId": "AYUS_16"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "AYUS_KART"
+            "choiceId": "AYUS_BANT"
           },
           {
             "kind": "CHOOSE",
@@ -1293,11 +1419,6 @@
             "target": "k_selin"
           },
           {
-            "kind": "EXAMINE",
-            "tool": "mag",
-            "target": "k_kerem"
-          },
-          {
             "kind": "CHOOSE",
             "choiceId": "ARA_KART_BITIR"
           },
@@ -1307,19 +1428,11 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "H2_LEYLA"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "ALEYLA_DON"
-          },
-          {
-            "kind": "CHOOSE",
             "choiceId": "H2_EKIP"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "AEKIP_ARAC"
+            "choiceId": "AEKIP_16"
           },
           {
             "kind": "CHOOSE",
@@ -1331,11 +1444,21 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "ASAN_HAL"
+            "choiceId": "ASAN_DEFTER"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d2257"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "d1930"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "ASAN_DEFTER"
+            "choiceId": "ARA_DEFTER_BITIR"
           },
           {
             "kind": "CHOOSE",
@@ -1352,11 +1475,6 @@
             "b": "clue_isik"
           },
           {
-            "kind": "COMBINE",
-            "a": "clue_defter",
-            "b": "clue_mac"
-          },
-          {
             "kind": "CHOOSE",
             "choiceId": "ARA_CIKARIM_BITIR"
           },
@@ -1370,11 +1488,74 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "AHUS_KORUMA"
+            "choiceId": "AHUS_DEFTER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AHUS_SERBEST"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "ARA_GUN3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_PLAN"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d14"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "d16"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_PLAN_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_OLAY"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "o2300"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "o2100"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_OLAY_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CIKARIM"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_ariza_onarim",
+            "b": "clue_direk_plan"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_olay_toplu",
+            "b": "clue_kart_selin"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_defter_sira",
+            "b": "clue_hus_kalem"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_CIKARIM_BITIR"
           },
           {
             "kind": "CHOOSE",
@@ -1414,7 +1595,7 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "H7_BABA"
+            "choiceId": "H7_DEFTER"
           },
           {
             "kind": "CHOOSE",
@@ -1462,7 +1643,7 @@
           },
           {
             "kind": "PRESENT",
-            "evidenceId": "ded_lamba",
+            "evidenceId": "ded_zifiri",
             "statementId": "Y4"
           },
           {
@@ -1475,12 +1656,25 @@
             "statementId": "Y5"
           },
           {
+            "kind": "PRESS",
+            "statementId": "Y6"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_tur",
+            "statementId": "Y6"
+          },
+          {
             "kind": "CHOOSE",
             "choiceId": "C08T_BITIR"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "C08_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08Z_B"
           },
           {
             "kind": "CHOOSE",
@@ -1521,8 +1715,8 @@
         ],
         "expect": {
           "outcome": "BERAAT_E",
-          "finalMin": 8403,
-          "finalMax": 9287
+          "finalMin": 10802,
+          "finalMax": 11939
         }
       },
       {
@@ -1534,7 +1728,7 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "PR01_DEVAM"
+            "choiceId": "PR01_KALABALIK"
           },
           {
             "kind": "CHOOSE",
@@ -1586,15 +1780,19 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "H_T_MUR"
+            "choiceId": "H_T_CEN"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "MQ_SAAT"
+            "choiceId": "CQ_SOZ"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "TMUR_AYRIL"
+            "choiceId": "CQ_ANAHTAR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "TCEN_AYRIL"
           },
           {
             "kind": "CHOOSE",
@@ -1814,6 +2012,14 @@
           },
           {
             "kind": "CHOOSE",
+            "choiceId": "H_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "LEYLA_DON"
+          },
+          {
+            "kind": "CHOOSE",
             "choiceId": "H_DURUSMA"
           },
           {
@@ -1888,6 +2094,10 @@
           },
           {
             "kind": "CHOOSE",
+            "choiceId": "CT_YOK"
+          },
+          {
+            "kind": "CHOOSE",
             "choiceId": "CARA_YOK"
           },
           {
@@ -1950,7 +2160,7 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "AEKIP_SUCLA"
+            "choiceId": "AEKIP_SUCLA0"
           },
           {
             "kind": "CHOOSE",
@@ -1962,11 +2172,37 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "ASAN_DEFTER"
+            "choiceId": "ASAN_GIT"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "ARA_GUN3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_ZIMMET"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "z_ortak"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "z_imza"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_ZIMMET_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_LEYLA"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ALEYLA_DON"
           },
           {
             "kind": "CHOOSE",
@@ -2003,6 +2239,10 @@
           },
           {
             "kind": "CHOOSE",
+            "choiceId": "C08Z_A"
+          },
+          {
+            "kind": "CHOOSE",
             "choiceId": "C09_A"
           },
           {
@@ -2036,8 +2276,8 @@
         ],
         "expect": {
           "outcome": "INDIRIM",
-          "finalMin": 3173,
-          "finalMax": 3507
+          "finalMin": 3187,
+          "finalMax": 3523
         }
       },
       {
@@ -2049,7 +2289,7 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "PR01_DEVAM"
+            "choiceId": "PR01_KALABALIK"
           },
           {
             "kind": "CHOOSE",
@@ -2380,6 +2620,10 @@
           },
           {
             "kind": "CHOOSE",
+            "choiceId": "CT_YOK"
+          },
+          {
+            "kind": "CHOOSE",
             "choiceId": "CARA_TAHLIYE"
           },
           {
@@ -2412,7 +2656,7 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "AKER_OFKE"
+            "choiceId": "AKER_OFKE0"
           },
           {
             "kind": "CHOOSE",
@@ -2448,6 +2692,10 @@
           },
           {
             "kind": "CHOOSE",
+            "choiceId": "ARA_DEFTER_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
             "choiceId": "H2_KART"
           },
           {
@@ -2471,6 +2719,18 @@
           {
             "kind": "CHOOSE",
             "choiceId": "ARA_CIKARIM_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_TUTANAK"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ATUT_DON"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_GUN3"
           },
           {
             "kind": "CHOOSE",
@@ -2894,17 +3154,16 @@
             "statementId": "S1"
           },
           {
-            "kind": "PRESENT",
-            "evidenceId": "ded_lamba",
-            "statementId": "S2"
-          },
-          {
             "kind": "CHOOSE",
             "choiceId": "C06_BITIR"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "C06R_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CT_YOK"
           },
           {
             "kind": "CHOOSE",
@@ -2984,7 +3243,7 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "ASAN_DEFTER"
+            "choiceId": "ASAN_GIT"
           },
           {
             "kind": "CHOOSE",
@@ -2997,6 +3256,19 @@
           {
             "kind": "CHOOSE",
             "choiceId": "ARA_GUN3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_KART"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "k_kerem"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_KART_BITIR"
           },
           {
             "kind": "CHOOSE",
@@ -3063,8 +3335,8 @@
         ],
         "expect": {
           "outcome": "IKRAR",
-          "finalMin": 4437,
-          "finalMax": 4903
+          "finalMin": 3805,
+          "finalMax": 4205
         }
       },
       {
@@ -3076,7 +3348,7 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "PR01_DEVAM"
+            "choiceId": "PR01_KAGIT"
           },
           {
             "kind": "CHOOSE",
@@ -3290,11 +3562,11 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "H_BEL"
+            "choiceId": "H_HTS"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "BEL_C"
+            "choiceId": "HTS_GERI"
           },
           {
             "kind": "CHOOSE",
@@ -3392,6 +3664,10 @@
           },
           {
             "kind": "CHOOSE",
+            "choiceId": "CT_KESIF"
+          },
+          {
+            "kind": "CHOOSE",
             "choiceId": "CARA_BERAAT"
           },
           {
@@ -3432,7 +3708,7 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "AKER_OFKE"
+            "choiceId": "AKER_OFKE0"
           },
           {
             "kind": "CHOOSE",
@@ -3464,7 +3740,7 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "ASAN_DEFTER"
+            "choiceId": "ASAN_GIT"
           },
           {
             "kind": "CHOOSE",
@@ -3523,7 +3799,7 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "PR01_DEVAM"
+            "choiceId": "PR01_KAGIT"
           },
           {
             "kind": "CHOOSE",
@@ -3562,16 +3838,6 @@
           {
             "kind": "CHOOSE",
             "choiceId": "TP_HUSEYIN",
-            "variant": "soft"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "TP_KENDISI",
-            "variant": "soft"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "TP_ANNE",
             "variant": "soft"
           },
           {
@@ -3634,11 +3900,6 @@
             "target": "kerem"
           },
           {
-            "kind": "EXAMINE",
-            "tool": "dust",
-            "target": "selin"
-          },
-          {
             "kind": "CHOOSE",
             "choiceId": "INCELEME_BITIR"
           },
@@ -3686,14 +3947,6 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "H_LEYLA"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "LEYLA_DON"
-          },
-          {
-            "kind": "CHOOSE",
             "choiceId": "H_BEL"
           },
           {
@@ -3707,10 +3960,6 @@
           {
             "kind": "CHOOSE",
             "choiceId": "HQ_GECE"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "HQ_BABA"
           },
           {
             "kind": "CHOOSE",
@@ -3773,25 +4022,12 @@
             "target": "d2240"
           },
           {
-            "kind": "EXAMINE",
-            "tool": "uv",
-            "target": "d0600"
-          },
-          {
             "kind": "CHOOSE",
             "choiceId": "INV_DVR_BITIR"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "AK2_UYU"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "H_LEYLA"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "LEYLA_DON"
           },
           {
             "kind": "CHOOSE",
@@ -3827,13 +4063,13 @@
           },
           {
             "kind": "EXAMINE",
-            "tool": "compare",
-            "target": "a14c"
+            "tool": "mag",
+            "target": "a14a"
           },
           {
             "kind": "EXAMINE",
-            "tool": "uv",
-            "target": "a16"
+            "tool": "compare",
+            "target": "a14c"
           },
           {
             "kind": "CHOOSE",
@@ -3853,31 +4089,23 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "H_T_MUR"
+            "choiceId": "H_T_CEN"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "MQ_SAAT"
+            "choiceId": "CQ_ANAHTAR"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "MQ_ZIYA"
+            "choiceId": "CQ_SIGARA"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "TMUR_AYRIL"
+            "choiceId": "TCEN_AYRIL"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "DAY_NEXT3"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "H_LEYLA"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "LEYLA_DON"
           },
           {
             "kind": "CHOOSE",
@@ -3897,6 +4125,10 @@
             "kind": "CHOOSE",
             "choiceId": "TP_ZIYA",
             "variant": "soft"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "G_SURGU"
           },
           {
             "kind": "CHOOSE",
@@ -3929,14 +4161,6 @@
           {
             "kind": "CHOOSE",
             "choiceId": "INV_ARAMA4_BITIR"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "H_HTS"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "HTS_TANIK"
           },
           {
             "kind": "CHOOSE",
@@ -3979,11 +4203,6 @@
           },
           {
             "kind": "COMBINE",
-            "a": "clue_kerem_depo1",
-            "b": "clue_izmarit"
-          },
-          {
-            "kind": "COMBINE",
             "a": "clue_uv_silinti",
             "b": "clue_dvr_sk"
           },
@@ -3996,6 +4215,11 @@
             "kind": "COMBINE",
             "a": "clue_erteleme",
             "b": "clue_takvim"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_izmarit",
+            "b": "clue_cengiz_sigara"
           },
           {
             "kind": "CHOOSE",
@@ -4084,11 +4308,6 @@
             "statementId": "S3"
           },
           {
-            "kind": "PRESENT",
-            "evidenceId": "ev_anahtar",
-            "statementId": "S3"
-          },
-          {
             "kind": "PRESS",
             "statementId": "S4"
           },
@@ -4113,6 +4332,10 @@
           {
             "kind": "CHOOSE",
             "choiceId": "C06R_DEVAM"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "CT_OLAY"
           },
           {
             "kind": "CHOOSE",
@@ -4148,11 +4371,11 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "AYUS_BANT"
+            "choiceId": "AYUS_16"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "AYUS_KART"
+            "choiceId": "AYUS_BANT"
           },
           {
             "kind": "CHOOSE",
@@ -4173,11 +4396,6 @@
             "target": "k_selin"
           },
           {
-            "kind": "EXAMINE",
-            "tool": "mag",
-            "target": "k_kerem"
-          },
-          {
             "kind": "CHOOSE",
             "choiceId": "ARA_KART_BITIR"
           },
@@ -4187,19 +4405,11 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "H2_LEYLA"
-          },
-          {
-            "kind": "CHOOSE",
-            "choiceId": "ALEYLA_DON"
-          },
-          {
-            "kind": "CHOOSE",
             "choiceId": "H2_EKIP"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "AEKIP_ARAC"
+            "choiceId": "AEKIP_16"
           },
           {
             "kind": "CHOOSE",
@@ -4211,11 +4421,21 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "ASAN_HAL"
+            "choiceId": "ASAN_DEFTER"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d2257"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "d1930"
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "ASAN_DEFTER"
+            "choiceId": "ARA_DEFTER_BITIR"
           },
           {
             "kind": "CHOOSE",
@@ -4232,11 +4452,6 @@
             "b": "clue_isik"
           },
           {
-            "kind": "COMBINE",
-            "a": "clue_defter",
-            "b": "clue_mac"
-          },
-          {
             "kind": "CHOOSE",
             "choiceId": "ARA_CIKARIM_BITIR"
           },
@@ -4250,11 +4465,74 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "AHUS_KORUMA"
+            "choiceId": "AHUS_DEFTER"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "AHUS_SERBEST"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "ARA_GUN3"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_PLAN"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "d14"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "d16"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_PLAN_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_OLAY"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "mag",
+            "target": "o2300"
+          },
+          {
+            "kind": "EXAMINE",
+            "tool": "compare",
+            "target": "o2100"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_OLAY_BITIR"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "H2_CIKARIM"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_ariza_onarim",
+            "b": "clue_direk_plan"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_olay_toplu",
+            "b": "clue_kart_selin"
+          },
+          {
+            "kind": "COMBINE",
+            "a": "clue_defter_sira",
+            "b": "clue_hus_kalem"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "ARA_CIKARIM_BITIR"
           },
           {
             "kind": "CHOOSE",
@@ -4294,7 +4572,7 @@
           },
           {
             "kind": "CHOOSE",
-            "choiceId": "H7_BABA"
+            "choiceId": "H7_DEFTER"
           },
           {
             "kind": "CHOOSE",
@@ -4342,7 +4620,7 @@
           },
           {
             "kind": "PRESENT",
-            "evidenceId": "ded_lamba",
+            "evidenceId": "ded_zifiri",
             "statementId": "Y4"
           },
           {
@@ -4355,12 +4633,25 @@
             "statementId": "Y5"
           },
           {
+            "kind": "PRESS",
+            "statementId": "Y6"
+          },
+          {
+            "kind": "PRESENT",
+            "evidenceId": "ded_tur",
+            "statementId": "Y6"
+          },
+          {
             "kind": "CHOOSE",
             "choiceId": "C08T_BITIR"
           },
           {
             "kind": "CHOOSE",
             "choiceId": "C08_A"
+          },
+          {
+            "kind": "CHOOSE",
+            "choiceId": "C08Z_B"
           },
           {
             "kind": "CHOOSE",
@@ -4401,8 +4692,8 @@
         ],
         "expect": {
           "outcome": "BERAAT_E",
-          "finalMin": 8403,
-          "finalMax": 9287
+          "finalMin": 10802,
+          "finalMax": 11939
         }
       }
     ]

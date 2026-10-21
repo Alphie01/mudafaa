@@ -1565,7 +1565,7 @@
         {
           "id": "R_OPR",
           "kind": "OPTION",
-          "label": "02.14 oturumunun geldiği GSM hattının abone ve adres atama kaydı",
+          "label": "02.14 oturumunun GSM hattı: abone kaydı",
           "visibleWhen": { "hasEvidence": "clue_gsm" },
           "maxUses": 1,
           "responses": [
@@ -1625,6 +1625,36 @@
           }
         },
         {
+          "id": "R_HTS",
+          "kind": "OPTION",
+          "label": "Sanığın ve bütün bilgi işlem çalışanlarının son bir yıllık HTS ve baz istasyonu kayıtları",
+          "maxUses": 1,
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "ferda",
+                  "text": "Sayın Hâkim, bir yıllık ve bütün çalışanları kapsayan bir iletişim tespiti ölçüsüzdür."
+                },
+                {
+                  "speaker": "kemal",
+                  "text": "Katılıyorum. Bir yıl, bir bölüm dolusu insan. Neyi arıyorsunuz müdafi? Talep reddedildi."
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -40 },
+            { "type": "VAR", "var": "pers", "op": "dec", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Geriye dönük iletişim tespiti somut bir olayla ve ölçülülükle sınırlı olmalıdır; bir yıllık, bütün çalışanlara yayılan talep reddedilir. Doğru talep yalnızca 02.14 oturumunun hattıdır.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
           "id": "R_HEPSI",
           "kind": "OPTION",
           "label": "Şirketin son bir yıllık bütün yazışmaları",
@@ -1663,6 +1693,13 @@
       "title": "Ara karar",
       "courtStage": "TANIK_DINLEME",
       "background": "durusma_salonu",
+      "onEnter": [
+        {
+          "type": "IF",
+          "when": { "flag": "dil_bilirkisi" },
+          "then": [{ "type": "VAR", "var": "bilirkisi_atandi", "op": "set", "value": true }]
+        }
+      ],
       "lines": [
         {
           "when": { "any": [{ "flag": "bilirkisi_atandi" }, { "flag": "dil_bilirkisi" }] },

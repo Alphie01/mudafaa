@@ -1,6 +1,7 @@
 import {
   all,
   any,
+  atLeast,
   cmp,
   conversation,
   cont,
@@ -74,7 +75,7 @@ const girisNodes = [
 > Müzekkerelere cevaplar sırayla geldi. Kurumlar mahkemeye geç kalmayı sevmez; avukatlara geç kalmayı sever.
 `),
   }),
-  decisionNode('ARA_GIRIS_2', [{ to: 'ARA_GIRIS' }], {
+  decisionNode('ARA_GIRIS_2', [{ to: 'ARA_GIRIS_3' }], {
     lines: [
       W(
         flag('bilirkisi_atandi'),
@@ -93,10 +94,7 @@ const girisNodes = [
 `),
     ],
   }),
-  story('ARA_GIRIS', {
-    ...ARA,
-    title: 'Kayıtlar',
-    background: 'buro_gece',
+  decisionNode('ARA_GIRIS_3', [{ to: 'ARA_GIRIS_4' }], {
     lines: B(`
 > Leyla odama girdi. Elinde bir dosya tomarı. Masaya bıraktı; üstüne avucunu koydu, bir an öyle durdu.
 leyla: Müzekkerelerin cevapları. Oku. Ama önce şunu düşün: bu dosyada bir isim arıyorsun. İsmi kayıt verecek, sen değil.
@@ -104,11 +102,38 @@ leyla: Bir de o zarf. İmzasız not. Duruşma sabahı savcılığa tutanakla tes
 - Kimin kâğıdı?
 leyla: Onu savcı bulacak. Bizim işimiz notu ona vermekti; verdik. Kâğıdın sahibini aramaya kalkarsan, notu yazanın istediğini yapmış olursun: dosyadan başını kaldırırsın.
 > Oturdum. İlk sayfa. Sonra ikinci. Sonra geri döndüm, birincisine.
-~ Bir kullanıcı adı, bir cihaz adı, bir hat, bir poliçe. Dört ayrı kurumdan dört ayrı kâğıt. Her biri tek başına bir şey söylemiyor. Yan yana koyunca bir yüz beliriyor; henüz bulanık.
-leyla: Bir yüz görmeye başladın, değil mi? Yüzünden belli.
+`),
+  }),
+  decisionNode('ARA_GIRIS_4', [{ to: 'ARA_GIRIS' }], {
+    lines: [
+      W(
+        atLeast(2, any(has('ev_sema'), has('ev_tam_log')), has('ev_operator'), has('ev_turnike'), has('ev_zeyil')),
+        `
+~ Müzekkerelere birden çok cevap gelmiş; her biri ayrı bir kurumun mührüyle. Henüz hiçbirini okumadım. Tek başına hiçbiri bir şey söylemeyecek; yan yana gelince belki söyler.
+leyla: Bir şey görmeye başladın, değil mi? Yüzünden belli.
 - Belki.
-leyla: “Belki” iyi. Bir yüzü “belki” ile taşı. Kesinlik, kâğıt masaya geldiğinde gelir; bir dakika önce değil.
-leyla: Ve şunu unutma: o yüz kimi gösterirse göstersin, sen onun peşinden koşmayacaksın. Yazacaksın. Savcıya yazacaksın. Biz avukatız; kolluk değil, kahraman hiç değil.
+leyla: “Belki” iyi. Bir şüpheyi “belki” ile taşı. Kesinlik, kâğıt masaya geldiğinde gelir; bir dakika önce değil.
+`,
+      ),
+      W(
+        any(has('ev_sema'), has('ev_tam_log'), has('ev_operator'), has('ev_turnike'), has('ev_zeyil')),
+        `
+~ Müzekkerelere tek bir cevap geldi. Bir kâğıt; bir kurumun mührü. Bir dosyayı tek kâğıtla çevirmek zor. İmkânsız değil.
+leyla: Az kâğıt, dikkatli okunursa çok konuşur. Satır satır oku.
+`,
+      ),
+      O(`
+~ Elimde hâlâ bir kullanıcı adından ve bir şirket raporundan başka bir şey yok. İlk celsede doğru kapıları çalmadım; kapılar da açılmadı.
+leyla: Kâğıt gelmediyse, olanı yeniden oku. Bir raporun en zayıf yeri, en emin göründüğü yerdir.
+`),
+    ],
+  }),
+  story('ARA_GIRIS', {
+    ...ARA,
+    title: 'Kayıtlar',
+    background: 'buro_gece',
+    lines: B(`
+leyla: Ve şunu unutma: kâğıtlar kimi gösterirse göstersin, sen onun peşinden koşmayacaksın. Yazacaksın. Savcıya yazacaksın. Biz avukatız; kolluk değil, kahraman hiç değil.
 > Kapıdan çıkarken durdu.
 leyla: Bir de müvekkilin. Kayıtlar onu akladıkça rahatlayacak. Rahatlayan insan konuşur. Konuştukça da bir şey daha anlatabilir. Dinle.
 > Kapının eşiğinde bir an daha durdu. Masamdaki sigara paketine değil; pencereye baktı.
@@ -117,8 +142,8 @@ leyla: Sonra o adamın masum olduğu çıktı. Çıktığında ben başka bir ş
 - Ne yaptınız?
 leyla: Hiçbir şey. Yapamadım. O yüzden sana söylüyorum: kayda değil, kaydın kenarındaki boşluğa bak. Boşluklar konuşur; makineler sadece tekrar eder.
 > Leyla gitti. Masanın köşesindeki ters çerçeveye baktım; yıllardır orada. Belki o dosyaydı, belki değil. Sormadım.
-> Odada dört kurumun kâğıdı ve ben kaldım. Dışarıda yağmur, her zamanki gibi, herkesin üstüne aynı anda; suçlunun da, suçsuzun da, henüz hangisi olduğu belli olmayanın da.
-~ Dört kâğıt. Bir yüz. Ve bir mentorun dört yıl taşıdığı bir pişmanlık. Bu dosyayı yalnızca ben kazanmayacağım; o da benimle kazanmak istiyor.
+> Odada bir yığın kâğıt ve ben kaldım. Dışarıda yağmur, her zamanki gibi, herkesin üstüne aynı anda; suçlunun da, suçsuzun da, henüz hangisi olduğu belli olmayanın da.
+~ Bir yığın kâğıt. Henüz cevabı olmayan bir soru. Ve bir mentorun dört yıl taşıdığı bir pişmanlık. Bu dosyayı yalnızca ben kazanmayacağım; o da benimle kazanmak istiyor.
 `),
     choices: [cont('ARA_GIRIS_DEVAM', 'Kayıtları aç', HUB, { role: 'PRIMARY' })],
   }),
@@ -337,8 +362,8 @@ const sema = retarget(
       }),
     ],
     miss: fallback('ARA_SEMA_FB', 'EXAMINE', {
-      score: { DELIL_ANALIZI: -20 },
-      feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bir şey yok.', label: '−20 SKOR', tone: 'error' },
+      score: { DELIL_ANALIZI: -50 },
+      feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bir şey yok.', label: '−50 SKOR', tone: 'error' },
     }),
     finish: { id: 'ARA_SEMA_BITIR' },
   }),
@@ -403,8 +428,8 @@ const turnike = retarget(
       }),
     ],
     miss: fallback('ARA_TURN_FB', 'EXAMINE', {
-      score: { DELIL_ANALIZI: -20 },
-      feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bir şey yok.', label: '−20 SKOR', tone: 'error' },
+      score: { DELIL_ANALIZI: -50 },
+      feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bir şey yok.', label: '−50 SKOR', tone: 'error' },
     }),
     finish: { id: 'ARA_TURN_BITIR' },
   }),
@@ -468,8 +493,8 @@ const opr = retarget(
       }),
     ],
     miss: fallback('ARA_OPR_FB', 'EXAMINE', {
-      score: { DELIL_ANALIZI: -20 },
-      feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bir şey yok.', label: '−20 SKOR', tone: 'error' },
+      score: { DELIL_ANALIZI: -50 },
+      feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bir şey yok.', label: '−50 SKOR', tone: 'error' },
     }),
     finish: { id: 'ARA_OPR_BITIR' },
   }),
@@ -534,8 +559,8 @@ const zeyil = retarget(
       }),
     ],
     miss: fallback('ARA_ZEY_FB', 'EXAMINE', {
-      score: { DELIL_ANALIZI: -20 },
-      feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bir şey yok.', label: '−20 SKOR', tone: 'error' },
+      score: { DELIL_ANALIZI: -50 },
+      feedback: { title: 'SONUÇ YOK', text: 'Bu satırda bir şey yok.', label: '−50 SKOR', tone: 'error' },
     }),
     finish: { id: 'ARA_ZEY_BITIR' },
   }),
@@ -580,7 +605,7 @@ const selim2 = conversation('ARA_SELIM', {
     W(
       any(has('ded_cihaz'), has('ded_gm_cihaz'), flag('fact_gm')),
       `
-# PAZAR 15.00 — AKTAŞLARIN BALKONU [bg:ev]
+# AKTAŞLARIN BALKONU · 15.00 [bg:ev]
 > Selim beni bu kez içeri aldı. Defne masada boyama yapıyordu; “Avukat teyze!” deyip bir kalem uzattı, sonra utanıp geri çekti.
 > Mutfakta çay. Selim ilk kez gülümsedi; yorgun, kısa.
 selim: Kayıtlar geldi diye duydum. Gül söyledi. İlk kez bir hafta uyudum avukat hanım.
@@ -679,7 +704,7 @@ const nalan = conversation('ARA_NALAN', {
   room: { label: 'SAHİL · BİR ÇAY BAHÇESİ', character: 'nalan' },
   onFirstEnter: [meet('nalan')],
   lines: B(`
-# CUMA 17.30 — MUDANYA SAHİLİ, BİR ÇAY BAHÇESİ [bg:kafe]
+# MUDANYA SAHİLİ, BİR ÇAY BAHÇESİ · 17.30 [bg:kafe]
 > Sabah aynı gizli numara bir kez çalmıştı. Bir yer, bir saat; başka bir şey değil. “Yalnız gelin.”
 > Beni şehrin dışında, sahilde bir çay bahçesine çağırdı. Masanın en uzak köşesi; denize, kapıya ve girişe aynı anda bakan yer. Bir muhasebeci masa seçer gibi masa seçmiş.
 nalan: Oturun. Çabuk konuşalım. Beni kimse görmesin istedim; onun için buradayız. Deniz kenarında kimse kimseyi tanımaz.
@@ -751,7 +776,7 @@ const yasar2 = conversation('ARA_YASAR', {
     W(
       flag('tarik_ziyaret'),
       `
-# PERŞEMBE 22.00 — NİLÜFER ÖRME, KULÜBE [bg:depo_gece]
+# NİLÜFER ÖRME, KULÜBE · 22.00 [bg:depo_gece]
 > Yaşar Usta’nın yüzü bu kez gergindi. Çayı koymadı; elleri cebindeydi.
 yasar: Kızım, beni gündüz vardiyasına aldılar. “Yaşlandın, gece zor” dediler. Otuz yıl gece bekledim, şimdi yaşlandım.
 yasar: Sen o müdürle konuştuktan sonra oldu bu. Belki tesadüf. Belki değil. Ben bir şey demiyorum; ama defteri de kimse benden isteyemez. Defter mahkemenin.
@@ -759,7 +784,7 @@ yasar: Sen o müdürle konuştuktan sonra oldu bu. Belki tesadüf. Belki değil.
 `,
     ),
     O(`
-# PERŞEMBE 22.00 — NİLÜFER ÖRME, KULÜBE [bg:depo_gece]
+# NİLÜFER ÖRME, KULÜBE · 22.00 [bg:depo_gece]
 > Yaşar Usta çay koydu; eli alışkanlıkla.
 yasar: Mahkeme kâğıdı geldi kızım. Salı günü. Ömrümde ikinci kez mahkemeye gideceğim. İlkinde tarla gitti.
 > Kulübenin içinde küçük bir radyo; türkü kısık sesle çalıyordu. Yaşar Usta radyoyu kapattı, sonra yeniden açtı; sessizlik ona daha ağır geldi.
@@ -804,15 +829,28 @@ const hakan2 = conversation('ARA_HAKAN', {
   title: 'Hakan Ilgaz',
   background: 'karakol',
   room: { label: 'EMNİYET ÖNÜ', character: 'hakan' },
-  lines: B(`
-# ÇARŞAMBA 12.30 — EMNİYET ÖNÜ [bg:karakol]
+  lines: [
+    W(
+      flag('bilirkisi_atandi'),
+      `
+# EMNİYET ÖNÜ · ÖĞLE [bg:karakol]
 > Hakan yine simitle, yine güvercinlerle. Beni görünce başıyla selam verdi.
 hakan: Bilirkişi gitmiş şirkete, duydum. İyi. Biz de isterdik ama bize “acele etmeyin” dediler. Kim dedi, sormayın.
 hakan: Orijinal diskler oradaydı, söylemiştim. Bilirkişi oradan alınca gerçek ortaya çıkar. Benim raporumda bir eksik yok; sadece dosyanın yarısı bana hiç gelmedi.
 ~ Dürüst bir polis, kendi dosyasının yarısının eksik olduğunu söyleyen polistir.
+`,
+    ),
+    O(`
+# EMNİYET ÖNÜ · ÖĞLE [bg:karakol]
+> Hakan yine simitle, yine güvercinlerle. Beni görünce başıyla selam verdi.
+hakan: Mahkeme bilirkişi atamamış, duydum. Yazık. Biz de isterdik ama bize “acele etmeyin” dediler. Kim dedi, sormayın.
+hakan: Orijinal diskler hâlâ şirkette, söylemiştim. Kimse onlara dokunmazsa, gerçek de orada bekler. Benim raporumda bir eksik yok; sadece dosyanın yarısı bana hiç gelmedi.
+~ Dürüst bir polis, kendi dosyasının yarısının eksik olduğunu söyleyen polistir.
 `),
+  ],
   choices: [
     option('HA_DISK', '“Bilirkişi diskte ne buldu, duydunuz mu?”', {
+      visibleWhen: flag('bilirkisi_atandi'),
       score: { SORGULAMA: 20 },
       effects: [raise('fact_disk')],
       responses: B(`
@@ -849,24 +887,24 @@ const kararSec = story('ARA_KARAR_SEC', {
   background: 'buro_gece',
   lines: B(`
 # GECE — ARSLAN HUKUK [bg:buro_gece]
-> Pano önümde. Kırmızı ipler bir yerde düğümleniyor: sunucu odası kartı, zimmet, hat, poliçe. Hepsi aynı adı gösteriyor.
+> Pano önümde. Kırmızı ipler bir yerde düğümleniyor. Kâğıtlar aynı adı gösteriyor.
 ~ Bir isim. Artık “belki” değil. Ama ben bir avukatım. Bir ismi bulmak başka, onunla ne yapacağını bilmek başka.
 leyla: (telefonda) Ne buldun?
 - Bir isim buldum Leyla Hanım. Kayıtlar söylüyor.
 leyla: Peki şimdi ne yapacaksın? Seçeneklerin var. Çoğu yanlış; bazıları doğru gibi görünür.
 `),
   choices: [
-    option('K_BILDIR', 'Dört kaydı bir dilekçeye ekle, savcılığa ver', {
+    option('K_BILDIR', 'Kayıtları bir dilekçeye ekle, savcılığa ver', {
       score: { USUL_BILGISI: 100, SAVUNMA_STRATEJISI: 60 },
       effects: [raise('bildirdi'), inc('legal_hits'), inc('pers')],
       good: 'Başka bir kişinin fail olabileceğini gösteren delilleri savcılığa yazılı olarak bildirmek doğru yoldur (CMK 158, 160); araştırmayı savcı yürütür, avukat kovalamaz.',
       category: 'USUL_BILGISI',
       responses: B(`
-- Savcılığa yazacağım. Bütün delillerle: kart kaydı, zimmet, hat, poliçe. Bir suç duyurusu.
+- Savcılığa yazacağım. Elimdeki bütün kayıtlarla. Bir suç duyurusu.
 leyla: Doğru. Biz bir ismi mahkemede haykırmayız; savcıya yazarız. Savcı soruşturur. Böylece hem müvekkilini kurtarırsın, hem bir iftiracı olmazsın.
 leyla: Bir de şunu kazanırsın: ikinci celsede savcı senin yanında durabilir. Bir savcıyı ikna etmek, bir hâkimi ikna etmenin yarısıdır.
-> Dilekçeyi o gece yazdım. Ekler: dört kurumun kaydı. İmza: ortak avukat sıfatıyla. İlk kez.
-~ Bir ismi bir zarfa koydum, savcılığa. Haykırmadım. Yazdım. Fark buydu işte; dört yılda öğrendiğim fark.
+> Dilekçeyi o gece yazdım. Ekler: mahkemeden gelen kurum kayıtları. İmza: ortak avukat sıfatıyla. İlk kez.
+~ Bir ismi bir zarfa koydum, savcılığa. Haykırmadım. Yazdım. Fark buydu işte; bu meslekte öğrendiğim fark.
 `),
       next: 'ARA_KARAR_BILDIRILDI',
     }),
@@ -938,8 +976,8 @@ const leyla = story('ARA_LEYLA', {
       all(cmp(v('ara_day'), '==', 1), not(flag('fact_gm'))),
       `
 # BÜRO — LEYLA’NIN ODASI [bg:buro]
-leyla: Kayıtlar geldi. Şimdi onları oku; ama ayrı ayrı değil. Yan yana koy. Bir cihaz adı, bir kart kaydı, bir hat, bir poliçe.
-leyla: Her biri tek başına “belki.” Dördü bir araya gelince “kim.” Tahtayı kullan; iki kâğıt bir isim yapar.
+leyla: Kayıtlar geldi. Şimdi onları oku; ama ayrı ayrı değil. Yan yana koy. Bir kayıt, bir tarih, bir saat; neyse elindeki.
+leyla: Her biri tek başına “belki.” Birkaçı bir araya gelince bir cevap olabilir; olmayabilir de. Tahtayı kullan; zorlamadan.
 `,
     ),
     W(
@@ -952,7 +990,7 @@ leyla: Bir avukat bir fail bulduğunda üç şey yapabilir. İkisi kariyer bitir
     ),
     O(`
 # BÜRO — LEYLA’NIN ODASI [bg:buro]
-leyla: İkinci celse yakın. Bir bilirkişin var, bir savcın belki yanında. Esas savunmada üç dayanaktan fazlasını söyleme; fazlası gürültüdür.
+leyla: İkinci celse yakın. Elindeki kâğıtları say; fazlasını değil. Esas savunmada üç dayanaktan fazlasını söyleme; fazlası gürültüdür.
 leyla: Ve müvekkilin. Kürsüde bir isim haykırmasın. “Ben yapmadım” yeter; “o yaptı” değil. İftira, beraati bile kirletir.
 leyla: Bir de kendini hatırla. Bu dosya seni tartıyordu. Terazi şu ana kadar dengede. Son celsede bir kefeye kibir koyma.
 `),
@@ -1230,17 +1268,27 @@ const sonNodes = [
     ...ARA,
     title: 'İkinci celseden önce',
     onEnter: [set('ara_ap', 0)],
-    lines: B(`
+    lines: [
+      W(
+        all(has('ev_zeyil'), flag('fact_gm')),
+        `
 # PAZARTESİ 23.20 — ARSLAN HUKUK [bg:buro_gece]
 > Panoyu söktüm, dosyaya dizdim. Üç haftada pano bir aileden bir şirkete, bir şirketten bir poliçeye uzadı.
+`,
+      ),
+      O(`
+# PAZARTESİ 23.20 — ARSLAN HUKUK [bg:buro_gece]
+> Panoyu söktüm, dosyaya dizdim. Üç haftada pano bir aileden bir şirkete uzadı; iplerin bir kısmı hâlâ boşlukta bitiyor.
 `),
+    ],
   }),
   decisionNode('ARA_SON_2', [{ to: 'ARA_SON_3' }], {
     lines: [
       W(flag('bildirdi'), `~ Savcılığa yazdım. Yarın savcı belki benim yanımda. Bir ismi haykırmadım; bir zarfa koydum.`),
       W(flag('tarik_yuzles'), `~ Cihaz “çalındı.” Uyardığım adam bir adım öne geçti. Yarın elimde bir zimmet var; ama cihaz yok.`),
       W(flag('tarik_bekle'), `~ Hiçbir şey yapmadım; sakladım. Yarın bir sahne kuracağım. Umarım sahneden bir sonuç çıkar.`),
-      O(`~ Üç hafta geçti. Bir isim buldum, bir yol seçtim. Yarın o yolun nereye çıktığını göreceğim.`),
+      W(flag('fact_gm'), `~ Üç hafta geçti. Bir isim buldum, bir yol seçtim. Yarın o yolun nereye çıktığını göreceğim.`),
+      O(`~ Üç hafta geçti. Bir isim bulamadım; elimde birkaç çatlak var, o kadar. Yarın o çatlaklarla gideceğim.`),
     ],
   }),
   decisionNode('ARA_SON_3', [{ to: 'ARA_SON' }], {
@@ -1255,16 +1303,31 @@ const sonNodes = [
     ...ARA,
     title: 'İkinci celseden önce',
     background: 'sokak_yagmur',
-    lines: B(`
+    lines: [
+      W(
+        flag('fact_gm'),
+        `
 # GECE 23.55 — DENİZ’İN EVİ [bg:sokak_yagmur]
 > Cübbem kapının arkasında asılı; Leyla’nın ilk duruşmamda bana verdiği, kolunun dikişi iki kez yenilenmiş cübbe.
 > Masada dosyanın son hâli: renkli ayraçlar, kenar notları, bir çay lekesi. İlk gün altı kâğıttı. Şimdi bir parmak kalınlığında.
 ~ Dosyalar büyüdükçe hafifler. Çünkü her yeni kâğıt bir soruyu cevaplar; sorular kâğıtlardan ağırdır.
 > Telefon titredi. Leyla’dan, gece yarısına beş kala.
 leyla: Yarın bir isim kürsüye oturabilir. Oturursa, ona acımadan, ama insafla davran. İnsaf, avukatın gücüdür; acımasızlık savcının. [phone]
-> Pencereyi açtım. Yağmur organize sanayinin bacalarına, Nilüfer’in balkonlarına, Görükle’nin villalarına, adliyenin taş merdivenlerine aynı anda yağıyordu. {flash}
-~ Bir kullanıcı adı. Bir cihaz. Bir hat. Bir poliçe. Yarın bütün bunları bir cümlede toplayacağım. Ya da dağıtacağım.
+> Pencereyi açtım. Yağmur organize sanayinin bacalarına, Nilüfer’in balkonlarına, adliyenin taş merdivenlerine aynı anda yağıyordu. {flash}
+~ Bir kullanıcı adı ve onu yalanlayan kâğıtlar. Yarın bütün bunları bir cümlede toplayacağım. Ya da dağıtacağım.
+`,
+      ),
+      O(`
+# GECE 23.55 — DENİZ’İN EVİ [bg:sokak_yagmur]
+> Cübbem kapının arkasında asılı; Leyla’nın ilk duruşmamda bana verdiği, kolunun dikişi iki kez yenilenmiş cübbe.
+> Masada dosyanın son hâli: renkli ayraçlar, kenar notları, bir çay lekesi. İlk gün altı kâğıttı. Şimdi bir parmak kalınlığında.
+~ Dosyalar büyüdükçe hafifler. Çünkü her yeni kâğıt bir soruyu cevaplar; sorular kâğıtlardan ağırdır.
+> Telefon titredi. Leyla’dan, gece yarısına beş kala.
+leyla: Yarın kürsüye kim oturursa otursun, ona acımadan, ama insafla davran. İnsaf, avukatın gücüdür; acımasızlık savcının. [phone]
+> Pencereyi açtım. Yağmur organize sanayinin bacalarına, Nilüfer’in balkonlarına, adliyenin taş merdivenlerine aynı anda yağıyordu. {flash}
+~ Bir kullanıcı adı ve birkaç çatlak. Yarın bütün bunları bir cümlede toplayacağım. Ya da dağıtacağım.
 `),
+    ],
     choices: [cont('ARA_SON_DEVAM', 'Adliyeye git', 'T_00G_1', { role: 'PRIMARY' })],
   }),
 ];

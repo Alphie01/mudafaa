@@ -79,6 +79,7 @@
       "onEnter": [{ "type": "VAR", "var": "in_court", "op": "set", "value": true }],
       "lines": [
         {
+          "when": { "flag": "bilirkisi_atandi" },
           "lines": [
             {
               "speaker": "narrator",
@@ -93,6 +94,24 @@
             {
               "speaker": "narrator",
               "text": "Pencerenin önünde Bülent Arıkan değil; bu kez bir kadın bekliyordu: iş tulumu değil, ütülü bir ceket. Dr. Sema Uçar, mahkemenin bilirkişisi. Elinde ciltli bir rapor."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ÜÇ HAFTA SONRA · 30 OCAK 09.15 — BURSA ADLİYESİ",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridor aynıydı; insanlar aynı yorgunlukla farklıydı. Aynı banklar, aynı sigara kokusu, bir başka ağlayan çocuk."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Pencerenin önünde Bülent Arıkan, şirketin servis raporunu kucağında tutuyordu. Dosyada hâlâ tek uzman görüşü onunkiydi."
             }
           ]
         }
@@ -141,6 +160,7 @@
           ]
         },
         {
+          "when": { "flag": "bilirkisi_atandi" },
           "lines": [
             {
               "speaker": "narrator",
@@ -149,6 +169,19 @@
             {
               "speaker": "narrator",
               "text": "Dr. Sema Uçar raporunu dizine koydu, gözlüğünü taktı, bir şey okudu. Tarafsız bir göz; bu dosyada ilk kez."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Selim ailesiyle geldi. Gül bankta oturdu; Defne’nin resmini açıp katladı, açıp katladı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bu dosyada tarafsız bir göz yok. Benim gözüm var, bir de hâkiminki. Yeter mi, bugün göreceğiz.",
+              "style": "thought"
             }
           ]
         }
@@ -166,7 +199,9 @@
       "title": "Duruşma · 2. Celse",
       "courtStage": "ACILIS",
       "background": "durusma_salonu",
-      "onFirstEnter": [{ "type": "MEET", "character": "sema" }],
+      "onFirstEnter": [
+        { "type": "IF", "when": { "flag": "bilirkisi_atandi" }, "then": [{ "type": "MEET", "character": "sema" }] }
+      ],
       "lines": [
         {
           "when": { "flag": "selim_giris" },
@@ -212,7 +247,7 @@
             },
             {
               "speaker": "ferda",
-              "text": "Bilirkişi raporu, kart kayıtları ve operatör cevabı birlikte değerlendirildiğinde, silme oturumunun sanığa ait olmayan bir cihaz ve hattan açıldığı görülmektedir."
+              "text": "Dosyaya gelen kayıtlar birlikte değerlendirildiğinde, silme oturumunun sanığa ait olmayan bir kaynaktan açıldığına dair ciddi emareler görülmektedir."
             },
             { "speaker": "ferda", "text": "Bu soruşturma bu dosyayla da ilgilidir. Beyanlarımı mütalaada sunacağım." },
             {
@@ -238,7 +273,7 @@
             },
             {
               "speaker": "kemal",
-              "text": "Duruşmaya devam olundu. Bilirkişi raporu geldi. Ayrıca katılan şirket, bir dizüstü bilgisayarının çalındığına dair şikâyette bulunmuş; dosyaya eklendi."
+              "text": "Duruşmaya devam olundu. Ara karar gereği istenen cevaplar geldi. Ayrıca katılan şirket, bir dizüstü bilgisayarının çalındığına dair şikâyette bulunmuş; dosyaya eklendi."
             },
             {
               "speaker": "player",
@@ -248,6 +283,9 @@
           ]
         },
         {
+          "when": {
+            "all": [{ "flag": "bilirkisi_atandi" }, { "any": [{ "flag": "contra_b2" }, { "flag": "contra_b3" }] }]
+          },
           "lines": [
             { "speaker": "cevdet", "text": "Selim Aktaş dosyası! Hı-hım." },
             {
@@ -267,6 +305,80 @@
             {
               "speaker": "player",
               "text": "İkinci celse. İlkinde bir uzmanın kibrini çatlattık. Bugün bir mühendisin tarafsızlığıyla başlıyoruz.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "bilirkisi_atandi" },
+          "lines": [
+            { "speaker": "cevdet", "text": "Selim Aktaş dosyası! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE",
+              "style": "card",
+              "bg": "durusma_salonu"
+            },
+            {
+              "speaker": "kemal",
+              "text": "Duruşmaya devam olundu. Ara karar gereği bilirkişi raporu geldi; orijinal disklerden inceleme yapıldı. Bilirkişi Dr. Sema Uçar hazır."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dr. Sema Uçar raporunu önüne koydu. Ozan Tekin arkasına yaslandı; ama rahat değildi. Tarık Sezer gazetesini bu kez hiç çıkarmadı."
+            },
+            {
+              "speaker": "player",
+              "text": "İkinci celse. İlkinde DataKale’nin raporu ayakta kaldı. Bugün bir mühendisin tarafsızlığıyla başlıyoruz.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "flag": "contra_b2" }, { "flag": "contra_b3" }] },
+          "lines": [
+            { "speaker": "cevdet", "text": "Selim Aktaş dosyası! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE",
+              "style": "card",
+              "bg": "durusma_salonu"
+            },
+            {
+              "speaker": "kemal",
+              "text": "Duruşmaya devam olundu. Ara karar gereği istenen cevaplar dosyaya girdi. DataKale raporunun değeri hükümle birlikte takdir edilecek."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ozan Tekin arkasına yaslandı; ama rahat değildi. Tarık Sezer gazetesini bu kez hiç çıkarmadı."
+            },
+            {
+              "speaker": "player",
+              "text": "İkinci celse. İlkinde bir uzmanın kibrini çatlattık. Bugün bilirkişisiz, yalnızca o çatlaklarla başlıyoruz.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "cevdet", "text": "Selim Aktaş dosyası! Hı-hım." },
+            {
+              "speaker": "narrator",
+              "text": "BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE",
+              "style": "card",
+              "bg": "durusma_salonu"
+            },
+            {
+              "speaker": "kemal",
+              "text": "Duruşmaya devam olundu. Ara karar gereği istenen cevaplar dosyaya girdi. DataKale raporunun değeri hükümle birlikte takdir edilecek."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ozan Tekin arkasına yaslandı; rahattı. Tarık Sezer gazetesini katladı, dizine koydu."
+            },
+            {
+              "speaker": "player",
+              "text": "İkinci celse. Elimde bir şirketin raporu ve kendi bulduklarım. Bugün bunlarla başlıyoruz.",
               "style": "thought"
             }
           ]
@@ -1056,6 +1168,7 @@
           "match": { "statement": "T1" },
           "responses": [
             {
+              "when": { "any": [{ "hasEvidence": "clue_hat_gm" }, { "hasEvidence": "ev_operator" }] },
               "lines": [
                 { "speaker": "player", "text": "Evinizde derken? Görükle’deki eviniz mi?" },
                 { "speaker": "tarik", "text": "Evet, Görükle. Erken yattım; ertesi gün golf vardı." },
@@ -1067,6 +1180,22 @@
                 {
                   "speaker": "player",
                   "text": "Yeni bir cümle: “Görükle.” Operatör kaydındaki baz istasyonu da Görükle. Bir not daha.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                { "speaker": "player", "text": "Evinizde derken? Neresi?" },
+                { "speaker": "tarik", "text": "Görükle. Erken yattım; ertesi gün golf vardı." },
+                { "speaker": "player", "text": "Telefonunuz yanınızda mıydı?" },
+                {
+                  "speaker": "tarik",
+                  "text": "Olur tabii. Herkesin telefonu yanındadır. Ne demek istiyorsunuz evladım?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Görükle.” Not ettim; elimde bunu bir şeye bağlayacak kâğıt yok.",
                   "style": "thought"
                 }
               ]
@@ -1274,6 +1403,45 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Zeyilname: olaydan iki buçuk ay önce limit on katına çıkarılmış ve “çalışan kötü niyeti” teminatı eklenmiş; saik ortaya kondu.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_T_SIFRE",
+          "kind": "PRESENT",
+          "match": { "statement": "T2", "evidence": ["ev_devir", "ded_sifre"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Hâkim, 30 Eylül tarihli devir-teslim tutanağı, dördüncü madde: “Sunucu, güvenlik duvarı ve VPN yönetici şifreleri kapalı zarf içinde teslim edilmiştir.” Teslim alan: T. Sezer. İmza ve paraf tanığa ait."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bay Sezer, zarfı teslim alan siz. Şifreler 30 Eylül’den beri Bülent Bey’de değil, sizin elinizdeydi."
+                },
+                { "speaker": "tarik", "text": "Zarfı… kasaya koydum. Açmadım. Açtığımı kim söylüyor?" },
+                {
+                  "speaker": "kemal",
+                  "text": "Tanık, yalnızca soruya cevap verin. Tutanağa geçsin: şifre zarfını tanık teslim almış."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Açtığını söylemiyorum. Açabileceğini söylüyorum. Bu dosyada o fark, bir kullanıcı adının ağırlığını sıfırlar.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 200 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_t_sifre", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Devir-teslim tutanağının 4. maddesi: yönetici şifreleri kapalı zarfla teslim edilmiş, teslim alan T. Sezer. “Şifreleri ben almadım” beyanı tanığın kendi imzasıyla çelişiyor; kullanıcı adı tek bir kişiyi göstermez.",
             "category": "SORGULAMA"
           }
         },
@@ -1575,7 +1743,7 @@
             { "type": "VAR", "var": "cred", "op": "dec", "value": 1 },
             { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
             { "type": "VAR", "var": "pers", "op": "dec", "value": 1 },
-            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -100 }
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -1500, "line": "etik" }
           ]
         }
       ],
@@ -1616,6 +1784,10 @@
               "text": "Tutanağa geçsin. Müdafi, tanığa ne söyleyeceğini telkin etmenin ne anlama geldiğini bildiğinizi varsayıyorum. Bu beyanı değerlendirirken bunu göz önünde tutacağım."
             },
             {
+              "speaker": "kemal",
+              "text": "Tutanak örneğinin Cumhuriyet Başsavcılığına ve Bursa Barosuna gönderilmesine. Devam edin."
+            },
+            {
               "speaker": "player",
               "text": "Bir bekçiye namusunu çiğnetmeye çalıştım; reddetti. Şimdi o reddi bütün salona anlattı. Onun namusu temiz çıktı; benimki değil.",
               "style": "thought"
@@ -1650,7 +1822,7 @@
             },
             {
               "speaker": "kemal",
-              "text": "Tutanağa geçsin. Tanığın beyanı bu açıklamayla birlikte değerlendirilecek."
+              "text": "Tutanağa geçsin. Tanığın beyanı bu açıklamayla birlikte değerlendirilecek. Tutanak örneğinin Cumhuriyet Başsavcılığına ve Bursa Barosuna gönderilmesine."
             },
             {
               "speaker": "player",

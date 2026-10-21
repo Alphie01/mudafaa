@@ -631,7 +631,7 @@ kemal: Not edildi.
 `),
           next: '$stay',
         }),
-        option('R_OPR', '02.14 oturumunun geldiği GSM hattının abone ve adres atama kaydı', {
+        option('R_OPR', '02.14 oturumunun GSM hattı: abone kaydı', {
           visibleWhen: has('clue_gsm'),
           maxUses: 1,
           score: { USUL_BILGISI: 80 },
@@ -659,6 +659,18 @@ kemal: Zararı siz beyan ettiniz vekil bey. Zararın dayanağı ilgilidir. Not e
 `),
           next: '$stay',
         }),
+        option('R_HTS', 'Sanığın ve bütün bilgi işlem çalışanlarının son bir yıllık HTS ve baz istasyonu kayıtları', {
+          maxUses: 1,
+          score: { USUL_BILGISI: -40 },
+          effects: [dec('pers')],
+          bad: 'Geriye dönük iletişim tespiti somut bir olayla ve ölçülülükle sınırlı olmalıdır; bir yıllık, bütün çalışanlara yayılan talep reddedilir. Doğru talep yalnızca 02.14 oturumunun hattıdır.',
+          category: 'USUL_BILGISI',
+          responses: B(`
+ferda: Sayın Hâkim, bir yıllık ve bütün çalışanları kapsayan bir iletişim tespiti ölçüsüzdür.
+kemal: Katılıyorum. Bir yıl, bir bölüm dolusu insan. Neyi arıyorsunuz müdafi? Talep reddedildi.
+`),
+          next: '$stay',
+        }),
         option('R_HEPSI', 'Şirketin son bir yıllık bütün yazışmaları', {
           maxUses: 1,
           score: { USUL_BILGISI: -40 },
@@ -677,6 +689,8 @@ kemal: Bir yıllık bütün yazışmalar mı müdafi? Neyi arıyorsunuz, önce o
       title: 'Ara karar',
       courtStage: 'TANIK_DINLEME',
       background: 'durusma_salonu',
+      // Yazılı dilekçedeki bilirkişi talebi (CMK 63) de kabul edilir: tek bayrak, bilirkisi_atandi.
+      onEnter: [ifThen(flag('dil_bilirkisi'), [raise('bilirkisi_atandi')])],
       lines: [
         W(
           any(flag('bilirkisi_atandi'), flag('dil_bilirkisi')),

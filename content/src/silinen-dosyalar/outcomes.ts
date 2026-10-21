@@ -72,7 +72,7 @@ export const outcomes: CasePart = {
       reasoning: [
         because('Müdafi, suçun konusu eylemi (izinsiz sistem girişi) müvekkiline yeniden yaptırarak delil üretmeye çalışmıştır.'),
         because('Bu yolla elde edilen delil hukuka aykırıdır ve hükme esas alınamaz (CMK 206/2-a, 217/2).'),
-        because('Sanık vekâlet ilişkisini sona erdirmiştir; dosyan burada kapandı.'),
+        because('Sanık vekâlet ilişkisini sona erdirmiş olduğundan yargılamaya yeni müdafi ile devam olunacaktır.'),
       ],
       legalBasis: 'TCK 243, 244; TCK 38; CMK 206/2-a, 217/2; Av.K. 34; TBK 512/1',
       xp: 0,
@@ -92,6 +92,7 @@ gul: Siz onu korumaya gelmiştiniz. Bir kere daha o sisteme soktunuz. Neden?
 > Leyla’nın odasının ışığı yanıyordu, kapısı kapalıydı. Çalmadım.
 ~ Bu dosyanın bütün hikâyesi, bir kullanıcı adının bir kişi sanılmasıydı. Ben o yanılgıyı düzeltmeye gelmiştim.
 ~ Sonunda aynı kapıyı, daha iyi bir niyetle, kendi elimle açtırdım. Niyet bir kaydı temizlemez; bir avukatı da.
+~ Dosyam burada kapandı. Selim’inki başka bir avukatla sürecek.
 `),
       ],
     }),
@@ -180,6 +181,10 @@ leyla: Yarın dosyanın bir örneğini yeni avukata gönder. Notlarını da. Sen
         because(
           'Zarar beyanının dayandığı sigorta poliçesi, olaydan iki buçuk ay önce, çalışan sabotajını kapsayacak biçimde büyütülmüştür.',
           any(flag('contra_t_motif'), flag('contra_nl'), has('ded_motif')),
+        ),
+        because(
+          'Devir-teslim tutanağına göre yönetici şifreleri 30 Eylül’de kapalı zarf içinde tanık Tarık Sezer’e teslim edilmiştir; kayıttaki kullanıcı adı tek başına sanığı göstermez.',
+          flag('contra_t_sifre'),
         ),
         because('Deliller birlikte değerlendirildiğinde verileri yok etme suçunun sanık tarafından işlenmediği sabittir.'),
       ],
@@ -278,9 +283,17 @@ leyla: Bir gün sana bir dosyadan bahsedeceğim Deniz. Bugün değil.
           'Bilirkişi, 02.14 oturumunun cihaz sertifikasının sanığın el konulan bilgisayarında bulunmadığını açıklamıştır.',
           all(flag('sema_sertifika'), not(flag('sema_teyit'))),
         ),
+        because(
+          'Devir-teslim tutanağına göre yönetici şifreleri 30 Eylül’de kapalı zarf içinde tanık Tarık Sezer’e teslim edilmiştir; kayıttaki kullanıcı adı tek başına sanığı göstermez.',
+          flag('contra_t_sifre'),
+        ),
         because('21.30’daki erişim işveren iznine dayandığından sisteme hukuka aykırı girme unsuru oluşmamıştır.'),
         because(
           'Tanık Yaşar Kılıç’ın beyanı, duruşma öncesinde müdafi tarafından yönlendirildiğini kendisinin açıklaması nedeniyle hükme esas alınmamıştır.',
+          flag('yasar_kocluk'),
+        ),
+        because(
+          'Müdafiin tanığı yönlendirme girişimi (TCK 277; Av.K. 34) yönünden, duruşma tutanağı örneğinin Bursa Cumhuriyet Başsavcılığına ve Bursa Barosu Başkanlığına gönderilmesine ayrıca karar verilmiştir.',
           flag('yasar_kocluk'),
         ),
         because('Sanığın verileri yok ettiğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4).'),
@@ -319,28 +332,46 @@ yasar: Kızım, ben orada “avukat hanım bana şunu dedi” dedim. Demek zorun
 > Tarık Sezer’in “çalınan” dizüstüsü hiç bulunamadı. Savcılık bir yakalama değil; bir soru işareti bıraktı dosyada. Benim uyardığım adam, bir adım önde kaldı.
 `,
         ),
-        O(`
+        W(
+          flag('yasar_kocluk'),
+          `
 # ARSLAN HUKUK · GECE [bg:buro_gece]
-> Panodaki kırmızı ipi çözdüm. Cihaz adı, hat, poliçe; hepsi bir kutuya girdi. Ortadaki boşluk, bir ismin boşluğu, hâlâ boştu.
+> Masamda baro başkanlığının mührünü taşıyan bir zarf vardı; hüküm fıkrasından iki saat sonra gelmiş. “Hakkınızda yapılan bildirim üzerine…”
+> Leyla kapıda durdu. İçeri girmedi; paltosunu da çıkarmadı.
+leyla: Müvekkilin beraat etti. Kâğıtların sayesinde. Sen ise bir tanığın ağzına bir cümle koydun ve hâkim bunu savcıya, baroya yazdı.
+- Defterde zaten yazıyordu. Ben sadece…
+leyla: “Sadece” bu meslekte en pahalı kelimedir. Savunmanı yazacaksın. Ben de yanında olacağım; ama senin yerine yazmayacağım. Bir yıl boyunca tanıkla görüşmeye benimle gideceksin.
+~ Selim eve gitti; kâğıtlar onu taşıdı. Beni taşıyacak bir kâğıt yok. Yalnızca bir soruşturma numarası ve Yaşar Usta’nın kürsüdeki bakışı.
+`,
+        ),
+        W(
+          not(flag('yasar_kocluk')),
+          `
+# ARSLAN HUKUK · GECE [bg:buro_gece]
+> Panodaki kırmızı ipi çözdüm. Kayıtlar, tarihler, saatler; hepsi bir kutuya girdi. Ortadaki boşluk, bir ismin boşluğu, hâlâ boştu.
 ~ Bir kullanıcı adını bir kişi olmaktan çıkardık. Yerine bir soru koyduk. Bazen adalet bir kapıyı açar; ama ışığı yakmaz.
 > Kapı aralandı. Leyla, paltosu kolunda, ışığı söndürmeden içeri baktı.
 leyla: Beraat aldın. Ama yüzün bir beraat kazanmış gibi değil.
 - “Sabit değildir” dedi hâkim. “İşlemedi” demedi. Arada bir fark var.
 leyla: Var. O fark, hukukun en dürüst cümlesidir: “bilmiyorum, o yüzden cezalandırmıyorum.” Bir gün o farkı sevmeyi öğrenirsin. Bugün değil.
-`),
+`,
+        ),
         W(
-          flag('bildirdi'),
+          all(flag('bildirdi'), not(flag('yasar_kocluk'))),
           `
 leyla: Savcılığa yazdın; soruşturma senin eklerinle başladı. Ama mahkeme “işlemediği sabit” demedi, çünkü kürsüde o cümleyi kurmadın. Dilekçe dışarıda bir kapıyı açtı; içerideki kapı aralık kaldı.
 - Bir dahaki sefere ikisini birden.
 leyla: İkisini birden. Ortak avukat bunu bir kere öğrenir.
 `,
         ),
-        O(`
-leyla: Mahkeme dosyayı savcılığa gönderdi; hüküm fıkrasının bir satırı olarak. Senin dört kurumun kaydını ekleyeceğin bir dilekçe olarak değil. Fark, soruşturmanın hızıdır: biri bir dosya numarası, öbürü bir harita.
+        W(
+          all(not(flag('bildirdi')), not(flag('yasar_kocluk'))),
+          `
+leyla: Mahkeme dosyayı savcılığa gönderdi; hüküm fıkrasının bir satırı olarak. Senin elindeki kayıtları ekleyeceğin bir dilekçe olarak değil. Fark, soruşturmanın hızıdır: biri bir dosya numarası, öbürü bir harita.
 - Biliyorum. Bir daha olmayacak.
 leyla: Olmayacak. Ortak avukat bunu bir kere öğrenir.
-`),
+`,
+        ),
         O(`
 > Gitti. Masamda Defne’nin resmi duruyordu; “avukat teyzeye” diye çizdiği. Bir masa, bir ekran, bir adam ve odanın içinde bir güneş.
 ~ Selim eve gitti. Bir şirketin hafızası hâlâ bir yerde, bir yedeğin olmadığı bir boşlukta. Ve bir ismin soruşturması, bir karar fıkrasıyla açılmış bir dosyada bekliyor.
@@ -440,16 +471,16 @@ leyla: İste. Ama şunu bil: istinaf, ilk derecede kurulmayan bir cümleyi nadir
       header: 'TÜRK MİLLETİ ADINA',
       sentence: '244/2: 1 yıl 8 ay hapis · 243/1: adli para cezası',
       verdictText:
-        'Sanık Selim Aktaş’ın üzerine atılı verileri yok etme (TCK 244/2) ve bilişim sistemine girme (TCK 243/1) suçlarını işlediği sabit görülerek; verileri yok etme suçundan, suçun işleniş biçimi ve meydana gelen zararın ağırlığı gözetilerek TCK 61 uyarınca 1 YIL 8 AY HAPİS; sisteme girme suçundan seçimlik ceza olarak 100 gün karşılığı 2.000 TL ADLİ PARA CEZASI (TCK 52/2) ile ayrı ayrı cezalandırılmasına; TCK 53 uyarınca belirli hakları kullanmaktan yoksun bırakılmasına; TCK 63 uyarınca gözaltında kaldığı sürenin mahsubuna; sanığın, sorulması üzerine zararı gidermeyi ya da taksitle gidermeyi kabul etmediği anlaşıldığından CMK 231/6-c ve 231/9 koşulları oluşmadığından hükmün açıklanmasının geri bırakılmasına yer olmadığına; suçun yedekleme sistemi devre dışı bırakılarak planlı biçimde işlenmesi ve yargılama sürecinde zararı gidermeye yönelik bir çaba gösterilmemesi karşısında sanığın yeniden suç işlemeyeceği yönünde kanaat oluşmadığından hapis cezasının TCK 51/1 uyarınca ertelenmesine yer olmadığına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).',
+        'Sanık Selim Aktaş’ın üzerine atılı verileri yok etme (TCK 244/2) ve bilişim sistemine girme (TCK 243/1) suçlarını işlediği sabit görülerek; verileri yok etme suçundan, suçun işleniş biçimi ve meydana gelen zararın ağırlığı gözetilerek TCK 61 uyarınca 1 YIL 8 AY HAPİS; sisteme girme suçundan seçimlik ceza olarak 100 gün karşılığı 2.000 TL ADLİ PARA CEZASI (TCK 52/2) ile ayrı ayrı cezalandırılmasına; TCK 53 uyarınca belirli hakları kullanmaktan yoksun bırakılmasına; TCK 63 uyarınca gözaltında kaldığı sürenin mahsubuna; verileri yok etme suçu yönünden, sanığın sorulması üzerine zararı gidermeyi ya da taksitle gidermeyi kabul etmediği anlaşıldığından CMK 231/6-c ve 231/9 koşulları oluşmadığından; her iki suç yönünden ise, suçların yedekleme sistemi devre dışı bırakılarak planlı biçimde ve birbirine bağlı olarak işlenmesi ve yargılama sürecindeki tutum karşısında sanığın yeniden suç işlemeyeceği yönünde kanaat oluşmadığından CMK 231/6-b uyarınca hükmün açıklanmasının geri bırakılmasına yer olmadığına (sisteme girme suçu bakımından giderilecek bir zarar bulunmadığından 231/6-c engeli yoktur; ret yalnızca 231/6-b’ye dayanır); aynı kanaatle hapis cezasının TCK 51/1 uyarınca ertelenmesine yer olmadığına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).',
       reasoning: [
         because('Oturum dökümü ve DataKale raporu silme eyleminin sanığın kullanıcı adıyla yapıldığını göstermektedir.'),
         because('Sanığın aynı akşam 21.30’da, işten çıkarılmasından sonra sisteme bağlandığı sabittir; bu erişime izin verildiğini gösteren bir belge sunulmamıştır.'),
         ...silmeGerekce,
         because(
-          'Zarar giderilmediğinden hükmün açıklanmasının geri bırakılmasına, suçun planlı işlenmesi ve pişmanlık gösterilmemesi nedeniyle ertelemeye yer görülmemiştir (CMK 231/6-c; TCK 51/1).',
+          'Verileri yok etme suçu yönünden zarar giderilmediğinden (CMK 231/6-c, 231/9); her iki suç yönünden ise suçların planlı ve birbirine bağlı işlenmesi nedeniyle sanığın yeniden suç işlemeyeceği kanaati oluşmadığından (CMK 231/6-b) hükmün açıklanmasının geri bırakılmasına yer görülmemiştir. Sisteme girme suçu bakımından giderilecek bir zarar bulunmadığından bu suçta ret yalnızca 231/6-b’ye dayanır. Aynı kanaatle hapis cezası ertelenmemiştir (TCK 51/1).',
         ),
       ],
-      legalBasis: 'TCK 243/1, 244/2, 51/1, 52/2, 53, 61, 63; CMK 231/6-c, 231/9, 273/1',
+      legalBasis: 'TCK 243/1, 244/2, 51/1, 52/2, 53, 61, 63; CMK 231/6-b, 231/6-c, 231/9, 273/1',
       xp: xp(0.6, { ethicsVar: 'ethics' }),
       howToReach:
         'Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir. 21.30’un izinli olduğunu gösteren kâğıdı bul (rıza) ve imajı çürütüp silmenin başka bir cihaz/hattan açıldığını kur.',

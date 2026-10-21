@@ -14,7 +14,7 @@
           "text": "Müdafi, suçun konusu eylemi (izinsiz sistem girişi) müvekkiline yeniden yaptırarak delil üretmeye çalışmıştır."
         },
         { "text": "Bu yolla elde edilen delil hukuka aykırıdır ve hükme esas alınamaz (CMK 206/2-a, 217/2)." },
-        { "text": "Sanık vekâlet ilişkisini sona erdirmiştir; dosyan burada kapandı." }
+        { "text": "Sanık vekâlet ilişkisini sona erdirmiş olduğundan yargılamaya yeni müdafi ile devam olunacaktır." }
       ],
       "legalBasis": "TCK 243, 244; TCK 38; CMK 206/2-a, 217/2; Av.K. 34; TBK 512/1",
       "xp": 0,
@@ -48,6 +48,11 @@
             {
               "speaker": "player",
               "text": "Sonunda aynı kapıyı, daha iyi bir niyetle, kendi elimle açtırdım. Niyet bir kaydı temizlemez; bir avukatı da.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Dosyam burada kapandı. Selim’inki başka bir avukatla sürecek.",
               "style": "thought"
             }
           ]
@@ -184,6 +189,10 @@
         {
           "when": { "any": [{ "flag": "contra_t_motif" }, { "flag": "contra_nl" }, { "hasEvidence": "ded_motif" }] },
           "text": "Zarar beyanının dayandığı sigorta poliçesi, olaydan iki buçuk ay önce, çalışan sabotajını kapsayacak biçimde büyütülmüştür."
+        },
+        {
+          "when": { "flag": "contra_t_sifre" },
+          "text": "Devir-teslim tutanağına göre yönetici şifreleri 30 Eylül’de kapalı zarf içinde tanık Tarık Sezer’e teslim edilmiştir; kayıttaki kullanıcı adı tek başına sanığı göstermez."
         },
         {
           "text": "Deliller birlikte değerlendirildiğinde verileri yok etme suçunun sanık tarafından işlenmediği sabittir."
@@ -392,10 +401,18 @@
           "when": { "all": [{ "flag": "sema_sertifika" }, { "not": { "flag": "sema_teyit" } }] },
           "text": "Bilirkişi, 02.14 oturumunun cihaz sertifikasının sanığın el konulan bilgisayarında bulunmadığını açıklamıştır."
         },
+        {
+          "when": { "flag": "contra_t_sifre" },
+          "text": "Devir-teslim tutanağına göre yönetici şifreleri 30 Eylül’de kapalı zarf içinde tanık Tarık Sezer’e teslim edilmiştir; kayıttaki kullanıcı adı tek başına sanığı göstermez."
+        },
         { "text": "21.30’daki erişim işveren iznine dayandığından sisteme hukuka aykırı girme unsuru oluşmamıştır." },
         {
           "when": { "flag": "yasar_kocluk" },
           "text": "Tanık Yaşar Kılıç’ın beyanı, duruşma öncesinde müdafi tarafından yönlendirildiğini kendisinin açıklaması nedeniyle hükme esas alınmamıştır."
+        },
+        {
+          "when": { "flag": "yasar_kocluk" },
+          "text": "Müdafiin tanığı yönlendirme girişimi (TCK 277; Av.K. 34) yönünden, duruşma tutanağı örneğinin Bursa Cumhuriyet Başsavcılığına ve Bursa Barosu Başkanlığına gönderilmesine ayrıca karar verilmiştir."
         },
         {
           "text": "Sanığın verileri yok ettiğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4)."
@@ -477,11 +494,37 @@
           ]
         },
         {
+          "when": { "flag": "yasar_kocluk" },
           "lines": [
             { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
             {
               "speaker": "narrator",
-              "text": "Panodaki kırmızı ipi çözdüm. Cihaz adı, hat, poliçe; hepsi bir kutuya girdi. Ortadaki boşluk, bir ismin boşluğu, hâlâ boştu."
+              "text": "Masamda baro başkanlığının mührünü taşıyan bir zarf vardı; hüküm fıkrasından iki saat sonra gelmiş. “Hakkınızda yapılan bildirim üzerine…”"
+            },
+            { "speaker": "narrator", "text": "Leyla kapıda durdu. İçeri girmedi; paltosunu da çıkarmadı." },
+            {
+              "speaker": "leyla",
+              "text": "Müvekkilin beraat etti. Kâğıtların sayesinde. Sen ise bir tanığın ağzına bir cümle koydun ve hâkim bunu savcıya, baroya yazdı."
+            },
+            { "speaker": "player", "text": "Defterde zaten yazıyordu. Ben sadece…" },
+            {
+              "speaker": "leyla",
+              "text": "“Sadece” bu meslekte en pahalı kelimedir. Savunmanı yazacaksın. Ben de yanında olacağım; ama senin yerine yazmayacağım. Bir yıl boyunca tanıkla görüşmeye benimle gideceksin."
+            },
+            {
+              "speaker": "player",
+              "text": "Selim eve gitti; kâğıtlar onu taşıdı. Beni taşıyacak bir kâğıt yok. Yalnızca bir soruşturma numarası ve Yaşar Usta’nın kürsüdeki bakışı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "yasar_kocluk" } },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Panodaki kırmızı ipi çözdüm. Kayıtlar, tarihler, saatler; hepsi bir kutuya girdi. Ortadaki boşluk, bir ismin boşluğu, hâlâ boştu."
             },
             {
               "speaker": "player",
@@ -498,7 +541,7 @@
           ]
         },
         {
-          "when": { "flag": "bildirdi" },
+          "when": { "all": [{ "flag": "bildirdi" }, { "not": { "flag": "yasar_kocluk" } }] },
           "lines": [
             {
               "speaker": "leyla",
@@ -509,10 +552,11 @@
           ]
         },
         {
+          "when": { "all": [{ "not": { "flag": "bildirdi" } }, { "not": { "flag": "yasar_kocluk" } }] },
           "lines": [
             {
               "speaker": "leyla",
-              "text": "Mahkeme dosyayı savcılığa gönderdi; hüküm fıkrasının bir satırı olarak. Senin dört kurumun kaydını ekleyeceğin bir dilekçe olarak değil. Fark, soruşturmanın hızıdır: biri bir dosya numarası, öbürü bir harita."
+              "text": "Mahkeme dosyayı savcılığa gönderdi; hüküm fıkrasının bir satırı olarak. Senin elindeki kayıtları ekleyeceğin bir dilekçe olarak değil. Fark, soruşturmanın hızıdır: biri bir dosya numarası, öbürü bir harita."
             },
             { "speaker": "player", "text": "Biliyorum. Bir daha olmayacak." },
             { "speaker": "leyla", "text": "Olmayacak. Ortak avukat bunu bir kere öğrenir." }
@@ -752,7 +796,7 @@
       "stampTone": "red",
       "header": "TÜRK MİLLETİ ADINA",
       "sentence": "244/2: 1 yıl 8 ay hapis · 243/1: adli para cezası",
-      "verdictText": "Sanık Selim Aktaş’ın üzerine atılı verileri yok etme (TCK 244/2) ve bilişim sistemine girme (TCK 243/1) suçlarını işlediği sabit görülerek; verileri yok etme suçundan, suçun işleniş biçimi ve meydana gelen zararın ağırlığı gözetilerek TCK 61 uyarınca 1 YIL 8 AY HAPİS; sisteme girme suçundan seçimlik ceza olarak 100 gün karşılığı 2.000 TL ADLİ PARA CEZASI (TCK 52/2) ile ayrı ayrı cezalandırılmasına; TCK 53 uyarınca belirli hakları kullanmaktan yoksun bırakılmasına; TCK 63 uyarınca gözaltında kaldığı sürenin mahsubuna; sanığın, sorulması üzerine zararı gidermeyi ya da taksitle gidermeyi kabul etmediği anlaşıldığından CMK 231/6-c ve 231/9 koşulları oluşmadığından hükmün açıklanmasının geri bırakılmasına yer olmadığına; suçun yedekleme sistemi devre dışı bırakılarak planlı biçimde işlenmesi ve yargılama sürecinde zararı gidermeye yönelik bir çaba gösterilmemesi karşısında sanığın yeniden suç işlemeyeceği yönünde kanaat oluşmadığından hapis cezasının TCK 51/1 uyarınca ertelenmesine yer olmadığına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).",
+      "verdictText": "Sanık Selim Aktaş’ın üzerine atılı verileri yok etme (TCK 244/2) ve bilişim sistemine girme (TCK 243/1) suçlarını işlediği sabit görülerek; verileri yok etme suçundan, suçun işleniş biçimi ve meydana gelen zararın ağırlığı gözetilerek TCK 61 uyarınca 1 YIL 8 AY HAPİS; sisteme girme suçundan seçimlik ceza olarak 100 gün karşılığı 2.000 TL ADLİ PARA CEZASI (TCK 52/2) ile ayrı ayrı cezalandırılmasına; TCK 53 uyarınca belirli hakları kullanmaktan yoksun bırakılmasına; TCK 63 uyarınca gözaltında kaldığı sürenin mahsubuna; verileri yok etme suçu yönünden, sanığın sorulması üzerine zararı gidermeyi ya da taksitle gidermeyi kabul etmediği anlaşıldığından CMK 231/6-c ve 231/9 koşulları oluşmadığından; her iki suç yönünden ise, suçların yedekleme sistemi devre dışı bırakılarak planlı biçimde ve birbirine bağlı olarak işlenmesi ve yargılama sürecindeki tutum karşısında sanığın yeniden suç işlemeyeceği yönünde kanaat oluşmadığından CMK 231/6-b uyarınca hükmün açıklanmasının geri bırakılmasına yer olmadığına (sisteme girme suçu bakımından giderilecek bir zarar bulunmadığından 231/6-c engeli yoktur; ret yalnızca 231/6-b’ye dayanır); aynı kanaatle hapis cezasının TCK 51/1 uyarınca ertelenmesine yer olmadığına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).",
       "reasoning": [
         {
           "text": "Oturum dökümü ve DataKale raporu silme eyleminin sanığın kullanıcı adıyla yapıldığını göstermektedir."
@@ -783,10 +827,10 @@
           "text": "Savunma, imajın güvenilmezliğini ve silme oturumunun başka bir cihaz ya da hattan açıldığını, sanık aleyhine olan delilleri ortadan kaldıracak somutlukta ortaya koyamamıştır."
         },
         {
-          "text": "Zarar giderilmediğinden hükmün açıklanmasının geri bırakılmasına, suçun planlı işlenmesi ve pişmanlık gösterilmemesi nedeniyle ertelemeye yer görülmemiştir (CMK 231/6-c; TCK 51/1)."
+          "text": "Verileri yok etme suçu yönünden zarar giderilmediğinden (CMK 231/6-c, 231/9); her iki suç yönünden ise suçların planlı ve birbirine bağlı işlenmesi nedeniyle sanığın yeniden suç işlemeyeceği kanaati oluşmadığından (CMK 231/6-b) hükmün açıklanmasının geri bırakılmasına yer görülmemiştir. Sisteme girme suçu bakımından giderilecek bir zarar bulunmadığından bu suçta ret yalnızca 231/6-b’ye dayanır. Aynı kanaatle hapis cezası ertelenmemiştir (TCK 51/1)."
         }
       ],
-      "legalBasis": "TCK 243/1, 244/2, 51/1, 52/2, 53, 61, 63; CMK 231/6-c, 231/9, 273/1",
+      "legalBasis": "TCK 243/1, 244/2, 51/1, 52/2, 53, 61, 63; CMK 231/6-b, 231/6-c, 231/9, 273/1",
       "xp": {
         "if": {
           "when": { "cmp": [{ "var": "ethics" }, ">", 0] },

@@ -98,11 +98,21 @@ export const trial: CasePart = {
       ...H2,
       title: 'Koridor',
       onEnter: [raise('in_court')],
-      lines: B(`
+      lines: [
+        W(
+          flag('bilirkisi_atandi'),
+          `
 # ÜÇ HAFTA SONRA · 30 OCAK 09.15 — BURSA ADLİYESİ [bg:adliye]
 > Koridor aynıydı; insanlar aynı yorgunlukla farklıydı. Aynı banklar, aynı sigara kokusu, bir başka ağlayan çocuk.
 > Pencerenin önünde Bülent Arıkan değil; bu kez bir kadın bekliyordu: iş tulumu değil, ütülü bir ceket. Dr. Sema Uçar, mahkemenin bilirkişisi. Elinde ciltli bir rapor.
+`,
+        ),
+        O(`
+# ÜÇ HAFTA SONRA · 30 OCAK 09.15 — BURSA ADLİYESİ [bg:adliye]
+> Koridor aynıydı; insanlar aynı yorgunlukla farklıydı. Aynı banklar, aynı sigara kokusu, bir başka ağlayan çocuk.
+> Pencerenin önünde Bülent Arıkan, şirketin servis raporunu kucağında tutuyordu. Dosyada hâlâ tek uzman görüşü onunkiydi.
 `),
+      ],
     }),
     decisionNode('T_00G_2', [{ to: 'T_00' }], {
       lines: [
@@ -123,9 +133,16 @@ tarik: Evladım, geçen gün ziyaretiniz güzeldi. Ama o dizüstü… ne yazık 
 ~ Uyardığım adam. Cihaz “çalındı.” Elimde bir zimmet kaldı, cihaz yok. Kendi hatam; bir sahne için bir sonucu riske attım.
 `,
         ),
-        O(`
+        W(
+          flag('bilirkisi_atandi'),
+          `
 > Selim ailesiyle geldi. Gül bankta oturdu; Defne’nin resmini açıp katladı, açıp katladı.
 > Dr. Sema Uçar raporunu dizine koydu, gözlüğünü taktı, bir şey okudu. Tarafsız bir göz; bu dosyada ilk kez.
+`,
+        ),
+        O(`
+> Selim ailesiyle geldi. Gül bankta oturdu; Defne’nin resmini açıp katladı, açıp katladı.
+~ Bu dosyada tarafsız bir göz yok. Benim gözüm var, bir de hâkiminki. Yeter mi, bugün göreceğiz.
 `),
       ],
     }),
@@ -133,7 +150,7 @@ tarik: Evladım, geçen gün ziyaretiniz güzeldi. Ama o dizüstü… ne yazık 
       title: 'Duruşma · 2. Celse',
       courtStage: 'ACILIS',
       background: 'durusma_salonu',
-      onFirstEnter: [meet('sema')],
+      onFirstEnter: [ifThen(flag('bilirkisi_atandi'), [meet('sema')])],
       lines: [
         W(
           flag('selim_giris'),
@@ -152,7 +169,7 @@ cevdet: Selim Aktaş dosyası! Hı-hım.
 # BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE [bg:durusma_salonu]
 kemal: Duruşmaya devam olundu. Celse arasında bir gelişme oldu; Cumhuriyet savcısı söz istedi.
 ferda: Sayın Hâkim, müdafiin suç duyurusu üzerine Başsavcılığımızca bir soruşturma başlatıldı.
-ferda: Bilirkişi raporu, kart kayıtları ve operatör cevabı birlikte değerlendirildiğinde, silme oturumunun sanığa ait olmayan bir cihaz ve hattan açıldığı görülmektedir.
+ferda: Dosyaya gelen kayıtlar birlikte değerlendirildiğinde, silme oturumunun sanığa ait olmayan bir kaynaktan açıldığına dair ciddi emareler görülmektedir.
 ferda: Bu soruşturma bu dosyayla da ilgilidir. Beyanlarımı mütalaada sunacağım.
 > Salonun arkasında Tarık Sezer dik oturdu; ama eli, ceketinin iç cebine gitti ve orada kaldı.
 ~ İlk kez savcı benden önce konuştu ve benim söyleyeceğimi söyledi. Bu, üç haftalık bir dilekçenin sesi.
@@ -163,16 +180,46 @@ ferda: Bu soruşturma bu dosyayla da ilgilidir. Beyanlarımı mütalaada sunaca�
           `
 cevdet: Selim Aktaş dosyası! Hı-hım.
 # BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE [bg:durusma_salonu]
-kemal: Duruşmaya devam olundu. Bilirkişi raporu geldi. Ayrıca katılan şirket, bir dizüstü bilgisayarının çalındığına dair şikâyette bulunmuş; dosyaya eklendi.
+kemal: Duruşmaya devam olundu. Ara karar gereği istenen cevaplar geldi. Ayrıca katılan şirket, bir dizüstü bilgisayarının çalındığına dair şikâyette bulunmuş; dosyaya eklendi.
 ~ Çalınan dizüstü. NOS-GM-LT. Uyardığım adam, en güçlü delilimi bir hırsızlık dosyasına çevirdi.
 `,
         ),
-        O(`
+        W(
+          all(flag('bilirkisi_atandi'), any(flag('contra_b2'), flag('contra_b3'))),
+          `
 cevdet: Selim Aktaş dosyası! Hı-hım.
 # BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE [bg:durusma_salonu]
 kemal: Duruşmaya devam olundu. Ara karar gereği bilirkişi raporu geldi; orijinal disklerden inceleme yapıldı. Bilirkişi Dr. Sema Uçar hazır.
 > Dr. Sema Uçar raporunu önüne koydu. Ozan Tekin arkasına yaslandı; ama rahat değildi. Tarık Sezer gazetesini bu kez hiç çıkarmadı.
 ~ İkinci celse. İlkinde bir uzmanın kibrini çatlattık. Bugün bir mühendisin tarafsızlığıyla başlıyoruz.
+`,
+        ),
+        W(
+          flag('bilirkisi_atandi'),
+          `
+cevdet: Selim Aktaş dosyası! Hı-hım.
+# BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE [bg:durusma_salonu]
+kemal: Duruşmaya devam olundu. Ara karar gereği bilirkişi raporu geldi; orijinal disklerden inceleme yapıldı. Bilirkişi Dr. Sema Uçar hazır.
+> Dr. Sema Uçar raporunu önüne koydu. Ozan Tekin arkasına yaslandı; ama rahat değildi. Tarık Sezer gazetesini bu kez hiç çıkarmadı.
+~ İkinci celse. İlkinde DataKale’nin raporu ayakta kaldı. Bugün bir mühendisin tarafsızlığıyla başlıyoruz.
+`,
+        ),
+        W(
+          any(flag('contra_b2'), flag('contra_b3')),
+          `
+cevdet: Selim Aktaş dosyası! Hı-hım.
+# BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE [bg:durusma_salonu]
+kemal: Duruşmaya devam olundu. Ara karar gereği istenen cevaplar dosyaya girdi. DataKale raporunun değeri hükümle birlikte takdir edilecek.
+> Ozan Tekin arkasına yaslandı; ama rahat değildi. Tarık Sezer gazetesini bu kez hiç çıkarmadı.
+~ İkinci celse. İlkinde bir uzmanın kibrini çatlattık. Bugün bilirkişisiz, yalnızca o çatlaklarla başlıyoruz.
+`,
+        ),
+        O(`
+cevdet: Selim Aktaş dosyası! Hı-hım.
+# BURSA 9. ASLİYE CEZA MAHKEMESİ — 2. CELSE [bg:durusma_salonu]
+kemal: Duruşmaya devam olundu. Ara karar gereği istenen cevaplar dosyaya girdi. DataKale raporunun değeri hükümle birlikte takdir edilecek.
+> Ozan Tekin arkasına yaslandı; rahattı. Tarık Sezer gazetesini katladı, dizine koydu.
+~ İkinci celse. Elimde bir şirketin raporu ve kendi bulduklarım. Bugün bunlarla başlıyoruz.
 `),
       ],
       choices: [
@@ -458,13 +505,25 @@ kemal: Müdafi, sorularınız.
         pressRule('PR_T1', 'T1', {
           score: { SORGULAMA: 25 },
           effects: [raise('press_t1')],
-          responses: B(`
+          responses: [
+            W(
+              any(has('clue_hat_gm'), has('ev_operator')),
+              `
 - Evinizde derken? Görükle’deki eviniz mi?
 tarik: Evet, Görükle. Erken yattım; ertesi gün golf vardı.
 - Telefonunuz yanınızda mıydı?
 tarik: Olur tabii. Herkesin telefonu yanındadır. Ne demek istiyorsunuz evladım?
 ~ Yeni bir cümle: “Görükle.” Operatör kaydındaki baz istasyonu da Görükle. Bir not daha.
+`,
+            ),
+            O(`
+- Evinizde derken? Neresi?
+tarik: Görükle. Erken yattım; ertesi gün golf vardı.
+- Telefonunuz yanınızda mıydı?
+tarik: Olur tabii. Herkesin telefonu yanındadır. Ne demek istiyorsunuz evladım?
+~ “Görükle.” Not ettim; elimde bunu bir şeye bağlayacak kâğıt yok.
 `),
+          ],
         }),
         pressRule('PR_T2', 'T2', {
           score: { SORGULAMA: 25 },
@@ -543,6 +602,19 @@ tarik: Kendi şirketimin odasına girmişim; suç mu bu? Evrak almaya gittim.
 - Sayın Hâkim, 3 Ağustos tarihli zeyilname: teminat limiti iki milyondan yirmi milyona çıkarılmış; aynı gün poliçeye “eski ya da mevcut çalışanın kasıtlı eylemleri” teminatı eklenmiş. Zarar beyanınız da tam yirmi milyon.
 tarik: Bu bir tesadüf. İftira ediyorsunuz. Avukatım…
 kemal: Tanık, yalnızca soruya cevap verin.
+`),
+        }),
+        presentRule('PS_T_SIFRE', 'T2', ['ev_devir', 'ded_sifre'], {
+          score: { SORGULAMA: 200 },
+          effects: [inc('pers'), raise('contra_t_sifre')],
+          good: 'Devir-teslim tutanağının 4. maddesi: yönetici şifreleri kapalı zarfla teslim edilmiş, teslim alan T. Sezer. “Şifreleri ben almadım” beyanı tanığın kendi imzasıyla çelişiyor; kullanıcı adı tek bir kişiyi göstermez.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Sayın Hâkim, 30 Eylül tarihli devir-teslim tutanağı, dördüncü madde: “Sunucu, güvenlik duvarı ve VPN yönetici şifreleri kapalı zarf içinde teslim edilmiştir.” Teslim alan: T. Sezer. İmza ve paraf tanığa ait.
+- Bay Sezer, zarfı teslim alan siz. Şifreler 30 Eylül’den beri Bülent Bey’de değil, sizin elinizdeydi.
+tarik: Zarfı… kasaya koydum. Açmadım. Açtığımı kim söylüyor?
+kemal: Tanık, yalnızca soruya cevap verin. Tutanağa geçsin: şifre zarfını tanık teslim almış.
+~ Açtığını söylemiyorum. Açabileceğini söylüyorum. Bu dosyada o fark, bir kullanıcı adının ağırlığını sıfırlar.
 `),
         }),
         presentRule('PS_T_IZIN', 'T2', ['ev_eposta', 'ded_riza'], {
@@ -661,7 +733,8 @@ kemal: Tutanağa geçsin: tanık, bu aşamadan sonra cevap vermekten çekinmişt
       witnessLabel: 'TANIK · YAŞAR KILIÇ',
       rulesText: 'İpucu: önce bastır, sonra doğru delille göster.',
       objectionGrounds: ['g_telkin', 'g_kanaat'],
-      onFirstEnter: [ifThen(flag('yasar_kocluk'), [dec('cred'), dec('pers'), dec('pers'), score('SAVUNMA_STRATEJISI', -100)])],
+      // Tanığı yönlendirme (TCK 277; Av.K. 34): ağır skor kaybı + XP yarıya (ethics) + hükümde bildirim.
+      onFirstEnter: [ifThen(flag('yasar_kocluk'), [dec('cred'), dec('pers'), dec('pers'), score('SAVUNMA_STRATEJISI', -1500, 'etik')])],
       lines: [
         W(
           flag('yasar_ezber'),
@@ -676,6 +749,7 @@ ozan: Sayın Hâkim, soruya geçmeden tanığa bir şey sormak istiyorum. Yaşar
 yasar: Görüştüm. Yemin ettim, yalan söylemem: “O gece gelen Selim değildi deyin” dedi. Ben “yüzünü görmedim, diyemem” dedim.
 > Salon dondu. Savcı kalemini bıraktı. Kemal Oran gözlüğünü çıkardı, bana baktı; uzun uzun.
 kemal: Tutanağa geçsin. Müdafi, tanığa ne söyleyeceğini telkin etmenin ne anlama geldiğini bildiğinizi varsayıyorum. Bu beyanı değerlendirirken bunu göz önünde tutacağım.
+kemal: Tutanak örneğinin Cumhuriyet Başsavcılığına ve Bursa Barosuna gönderilmesine. Devam edin.
 ~ Bir bekçiye namusunu çiğnetmeye çalıştım; reddetti. Şimdi o reddi bütün salona anlattı. Onun namusu temiz çıktı; benimki değil.
 `,
         ),
@@ -689,7 +763,7 @@ kemal: Müdafi, sorularınız.
 ~ Bir bekçi, bir defter, bir namus. Kürsüde bundan sağlam bir şey az bulunur.
 ozan: Sayın Hâkim, tanığa bir sorum var. Yaşar Bey, saati bu kadar kesin söylüyorsunuz. Duruşmadan önce biri size bu saati söyledi mi?
 yasar: Avukat hanım “tam 23.05 deyin, şaşmayın” dedi. Ama defterde de öyle yazıyor; ben defterden okurum.
-kemal: Tutanağa geçsin. Tanığın beyanı bu açıklamayla birlikte değerlendirilecek.
+kemal: Tutanağa geçsin. Tanığın beyanı bu açıklamayla birlikte değerlendirilecek. Tutanak örneğinin Cumhuriyet Başsavcılığına ve Bursa Barosuna gönderilmesine.
 ~ Defter doğruydu. Ama artık kimse deftere bakmıyor; benim cümleme bakıyorlar.
 `,
         ),

@@ -66,16 +66,12 @@
           ]
         }
       ],
-      "routes": [{ "to": "ARA_GIRIS" }],
+      "routes": [{ "to": "ARA_GIRIS_3" }],
       "choices": []
     },
     {
-      "id": "ARA_GIRIS",
-      "type": "STORY",
-      "chapter": "Bölüm 4 · Ara",
-      "eyebrow": "DAVA #13 · ARA",
-      "title": "Kayıtlar",
-      "background": "buro_gece",
+      "id": "ARA_GIRIS_3",
+      "type": "DECISION",
       "lines": [
         {
           "lines": [
@@ -96,21 +92,101 @@
               "speaker": "leyla",
               "text": "Onu savcı bulacak. Bizim işimiz notu ona vermekti; verdik. Kâğıdın sahibini aramaya kalkarsan, notu yazanın istediğini yapmış olursun: dosyadan başını kaldırırsın."
             },
-            { "speaker": "narrator", "text": "Oturdum. İlk sayfa. Sonra ikinci. Sonra geri döndüm, birincisine." },
+            { "speaker": "narrator", "text": "Oturdum. İlk sayfa. Sonra ikinci. Sonra geri döndüm, birincisine." }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_GIRIS_4" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_GIRIS_4",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": {
+            "cmp": [
+              {
+                "add": [
+                  {
+                    "if": {
+                      "when": { "any": [{ "hasEvidence": "ev_sema" }, { "hasEvidence": "ev_tam_log" }] },
+                      "then": 1,
+                      "else": 0
+                    }
+                  },
+                  { "if": { "when": { "hasEvidence": "ev_operator" }, "then": 1, "else": 0 } },
+                  { "if": { "when": { "hasEvidence": "ev_turnike" }, "then": 1, "else": 0 } },
+                  { "if": { "when": { "hasEvidence": "ev_zeyil" }, "then": 1, "else": 0 } }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lines": [
             {
               "speaker": "player",
-              "text": "Bir kullanıcı adı, bir cihaz adı, bir hat, bir poliçe. Dört ayrı kurumdan dört ayrı kâğıt. Her biri tek başına bir şey söylemiyor. Yan yana koyunca bir yüz beliriyor; henüz bulanık.",
+              "text": "Müzekkerelere birden çok cevap gelmiş; her biri ayrı bir kurumun mührüyle. Henüz hiçbirini okumadım. Tek başına hiçbiri bir şey söylemeyecek; yan yana gelince belki söyler.",
               "style": "thought"
             },
-            { "speaker": "leyla", "text": "Bir yüz görmeye başladın, değil mi? Yüzünden belli." },
+            { "speaker": "leyla", "text": "Bir şey görmeye başladın, değil mi? Yüzünden belli." },
             { "speaker": "player", "text": "Belki." },
             {
               "speaker": "leyla",
-              "text": "“Belki” iyi. Bir yüzü “belki” ile taşı. Kesinlik, kâğıt masaya geldiğinde gelir; bir dakika önce değil."
+              "text": "“Belki” iyi. Bir şüpheyi “belki” ile taşı. Kesinlik, kâğıt masaya geldiğinde gelir; bir dakika önce değil."
+            }
+          ]
+        },
+        {
+          "when": {
+            "any": [
+              { "hasEvidence": "ev_sema" },
+              { "hasEvidence": "ev_tam_log" },
+              { "hasEvidence": "ev_operator" },
+              { "hasEvidence": "ev_turnike" },
+              { "hasEvidence": "ev_zeyil" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Müzekkerelere tek bir cevap geldi. Bir kâğıt; bir kurumun mührü. Bir dosyayı tek kâğıtla çevirmek zor. İmkânsız değil.",
+              "style": "thought"
+            },
+            { "speaker": "leyla", "text": "Az kâğıt, dikkatli okunursa çok konuşur. Satır satır oku." }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Elimde hâlâ bir kullanıcı adından ve bir şirket raporundan başka bir şey yok. İlk celsede doğru kapıları çalmadım; kapılar da açılmadı.",
+              "style": "thought"
             },
             {
               "speaker": "leyla",
-              "text": "Ve şunu unutma: o yüz kimi gösterirse göstersin, sen onun peşinden koşmayacaksın. Yazacaksın. Savcıya yazacaksın. Biz avukatız; kolluk değil, kahraman hiç değil."
+              "text": "Kâğıt gelmediyse, olanı yeniden oku. Bir raporun en zayıf yeri, en emin göründüğü yerdir."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_GIRIS" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_GIRIS",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #13 · ARA",
+      "title": "Kayıtlar",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Ve şunu unutma: kâğıtlar kimi gösterirse göstersin, sen onun peşinden koşmayacaksın. Yazacaksın. Savcıya yazacaksın. Biz avukatız; kolluk değil, kahraman hiç değil."
             },
             { "speaker": "narrator", "text": "Kapıdan çıkarken durdu." },
             {
@@ -140,11 +216,11 @@
             },
             {
               "speaker": "narrator",
-              "text": "Odada dört kurumun kâğıdı ve ben kaldım. Dışarıda yağmur, her zamanki gibi, herkesin üstüne aynı anda; suçlunun da, suçsuzun da, henüz hangisi olduğu belli olmayanın da."
+              "text": "Odada bir yığın kâğıt ve ben kaldım. Dışarıda yağmur, her zamanki gibi, herkesin üstüne aynı anda; suçlunun da, suçsuzun da, henüz hangisi olduğu belli olmayanın da."
             },
             {
               "speaker": "player",
-              "text": "Dört kâğıt. Bir yüz. Ve bir mentorun dört yıl taşıdığı bir pişmanlık. Bu dosyayı yalnızca ben kazanmayacağım; o da benimle kazanmak istiyor.",
+              "text": "Bir yığın kâğıt. Henüz cevabı olmayan bir soru. Ve bir mentorun dört yıl taşıdığı bir pişmanlık. Bu dosyayı yalnızca ben kazanmayacağım; o da benimle kazanmak istiyor.",
               "style": "thought"
             }
           ]
@@ -477,8 +553,8 @@
           "id": "ARA_SEMA_FB",
           "kind": "FALLBACK",
           "fallbackFor": "EXAMINE",
-          "feedback": { "title": "SONUÇ YOK", "text": "Bu satırda bir şey yok.", "label": "−20 SKOR", "tone": "error" },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+          "feedback": { "title": "SONUÇ YOK", "text": "Bu satırda bir şey yok.", "label": "−50 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
         },
         { "id": "ARA_SEMA_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
       ]
@@ -579,8 +655,8 @@
           "id": "ARA_TURN_FB",
           "kind": "FALLBACK",
           "fallbackFor": "EXAMINE",
-          "feedback": { "title": "SONUÇ YOK", "text": "Bu satırda bir şey yok.", "label": "−20 SKOR", "tone": "error" },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+          "feedback": { "title": "SONUÇ YOK", "text": "Bu satırda bir şey yok.", "label": "−50 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
         },
         { "id": "ARA_TURN_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
       ]
@@ -677,8 +753,8 @@
           "id": "ARA_OPR_FB",
           "kind": "FALLBACK",
           "fallbackFor": "EXAMINE",
-          "feedback": { "title": "SONUÇ YOK", "text": "Bu satırda bir şey yok.", "label": "−20 SKOR", "tone": "error" },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+          "feedback": { "title": "SONUÇ YOK", "text": "Bu satırda bir şey yok.", "label": "−50 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
         },
         { "id": "ARA_OPR_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
       ]
@@ -781,8 +857,8 @@
           "id": "ARA_ZEY_FB",
           "kind": "FALLBACK",
           "fallbackFor": "EXAMINE",
-          "feedback": { "title": "SONUÇ YOK", "text": "Bu satırda bir şey yok.", "label": "−20 SKOR", "tone": "error" },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+          "feedback": { "title": "SONUÇ YOK", "text": "Bu satırda bir şey yok.", "label": "−50 SKOR", "tone": "error" },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
         },
         { "id": "ARA_ZEY_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
       ]
@@ -898,10 +974,10 @@
           "feedback": {
             "title": "SONUÇ YOK",
             "text": "Bu satırda bu aletle bir şey yok.",
-            "label": "−20 SKOR",
+            "label": "−50 SKOR",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
         },
         { "id": "ARA_TAM_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
       ]
@@ -968,7 +1044,7 @@
         {
           "when": { "any": [{ "hasEvidence": "ded_cihaz" }, { "hasEvidence": "ded_gm_cihaz" }, { "flag": "fact_gm" }] },
           "lines": [
-            { "speaker": "narrator", "text": "PAZAR 15.00 — AKTAŞLARIN BALKONU", "style": "card", "bg": "ev" },
+            { "speaker": "narrator", "text": "AKTAŞLARIN BALKONU · 15.00", "style": "card", "bg": "ev" },
             {
               "speaker": "narrator",
               "text": "Selim beni bu kez içeri aldı. Defne masada boyama yapıyordu; “Avukat teyze!” deyip bir kalem uzattı, sonra utanıp geri çekti."
@@ -1215,12 +1291,7 @@
       "lines": [
         {
           "lines": [
-            {
-              "speaker": "narrator",
-              "text": "CUMA 17.30 — MUDANYA SAHİLİ, BİR ÇAY BAHÇESİ",
-              "style": "card",
-              "bg": "kafe"
-            },
+            { "speaker": "narrator", "text": "MUDANYA SAHİLİ, BİR ÇAY BAHÇESİ · 17.30", "style": "card", "bg": "kafe" },
             {
               "speaker": "narrator",
               "text": "Sabah aynı gizli numara bir kez çalmıştı. Bir yer, bir saat; başka bir şey değil. “Yalnız gelin.”"
@@ -1413,12 +1484,7 @@
         {
           "when": { "flag": "tarik_ziyaret" },
           "lines": [
-            {
-              "speaker": "narrator",
-              "text": "PERŞEMBE 22.00 — NİLÜFER ÖRME, KULÜBE",
-              "style": "card",
-              "bg": "depo_gece"
-            },
+            { "speaker": "narrator", "text": "NİLÜFER ÖRME, KULÜBE · 22.00", "style": "card", "bg": "depo_gece" },
             { "speaker": "narrator", "text": "Yaşar Usta’nın yüzü bu kez gergindi. Çayı koymadı; elleri cebindeydi." },
             {
               "speaker": "yasar",
@@ -1437,12 +1503,7 @@
         },
         {
           "lines": [
-            {
-              "speaker": "narrator",
-              "text": "PERŞEMBE 22.00 — NİLÜFER ÖRME, KULÜBE",
-              "style": "card",
-              "bg": "depo_gece"
-            },
+            { "speaker": "narrator", "text": "NİLÜFER ÖRME, KULÜBE · 22.00", "style": "card", "bg": "depo_gece" },
             { "speaker": "narrator", "text": "Yaşar Usta çay koydu; eli alışkanlıkla." },
             {
               "speaker": "yasar",
@@ -1549,8 +1610,9 @@
       "room": { "label": "EMNİYET ÖNÜ", "character": "hakan" },
       "lines": [
         {
+          "when": { "flag": "bilirkisi_atandi" },
           "lines": [
-            { "speaker": "narrator", "text": "ÇARŞAMBA 12.30 — EMNİYET ÖNÜ", "style": "card", "bg": "karakol" },
+            { "speaker": "narrator", "text": "EMNİYET ÖNÜ · ÖĞLE", "style": "card", "bg": "karakol" },
             {
               "speaker": "narrator",
               "text": "Hakan yine simitle, yine güvercinlerle. Beni görünce başıyla selam verdi."
@@ -1569,6 +1631,28 @@
               "style": "thought"
             }
           ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "EMNİYET ÖNÜ · ÖĞLE", "style": "card", "bg": "karakol" },
+            {
+              "speaker": "narrator",
+              "text": "Hakan yine simitle, yine güvercinlerle. Beni görünce başıyla selam verdi."
+            },
+            {
+              "speaker": "hakan",
+              "text": "Mahkeme bilirkişi atamamış, duydum. Yazık. Biz de isterdik ama bize “acele etmeyin” dediler. Kim dedi, sormayın."
+            },
+            {
+              "speaker": "hakan",
+              "text": "Orijinal diskler hâlâ şirkette, söylemiştim. Kimse onlara dokunmazsa, gerçek de orada bekler. Benim raporumda bir eksik yok; sadece dosyanın yarısı bana hiç gelmedi."
+            },
+            {
+              "speaker": "player",
+              "text": "Dürüst bir polis, kendi dosyasının yarısının eksik olduğunu söyleyen polistir.",
+              "style": "thought"
+            }
+          ]
         }
       ],
       "choices": [
@@ -1576,6 +1660,7 @@
           "id": "HA_DISK",
           "kind": "OPTION",
           "label": "“Bilirkişi diskte ne buldu, duydunuz mu?”",
+          "visibleWhen": { "flag": "bilirkisi_atandi" },
           "responses": [
             {
               "lines": [
@@ -1631,7 +1716,7 @@
             { "speaker": "narrator", "text": "GECE — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
             {
               "speaker": "narrator",
-              "text": "Pano önümde. Kırmızı ipler bir yerde düğümleniyor: sunucu odası kartı, zimmet, hat, poliçe. Hepsi aynı adı gösteriyor."
+              "text": "Pano önümde. Kırmızı ipler bir yerde düğümleniyor. Kâğıtlar aynı adı gösteriyor."
             },
             {
               "speaker": "player",
@@ -1651,14 +1736,11 @@
         {
           "id": "K_BILDIR",
           "kind": "OPTION",
-          "label": "Dört kaydı bir dilekçeye ekle, savcılığa ver",
+          "label": "Kayıtları bir dilekçeye ekle, savcılığa ver",
           "responses": [
             {
               "lines": [
-                {
-                  "speaker": "player",
-                  "text": "Savcılığa yazacağım. Bütün delillerle: kart kaydı, zimmet, hat, poliçe. Bir suç duyurusu."
-                },
+                { "speaker": "player", "text": "Savcılığa yazacağım. Elimdeki bütün kayıtlarla. Bir suç duyurusu." },
                 {
                   "speaker": "leyla",
                   "text": "Doğru. Biz bir ismi mahkemede haykırmayız; savcıya yazarız. Savcı soruşturur. Böylece hem müvekkilini kurtarırsın, hem bir iftiracı olmazsın."
@@ -1669,11 +1751,11 @@
                 },
                 {
                   "speaker": "narrator",
-                  "text": "Dilekçeyi o gece yazdım. Ekler: dört kurumun kaydı. İmza: ortak avukat sıfatıyla. İlk kez."
+                  "text": "Dilekçeyi o gece yazdım. Ekler: mahkemeden gelen kurum kayıtları. İmza: ortak avukat sıfatıyla. İlk kez."
                 },
                 {
                   "speaker": "player",
-                  "text": "Bir ismi bir zarfa koydum, savcılığa. Haykırmadım. Yazdım. Fark buydu işte; dört yılda öğrendiğim fark.",
+                  "text": "Bir ismi bir zarfa koydum, savcılığa. Haykırmadım. Yazdım. Fark buydu işte; bu meslekte öğrendiğim fark.",
                   "style": "thought"
                 }
               ]
@@ -2659,11 +2741,11 @@
             { "speaker": "narrator", "text": "BÜRO — LEYLA’NIN ODASI", "style": "card", "bg": "buro" },
             {
               "speaker": "leyla",
-              "text": "Kayıtlar geldi. Şimdi onları oku; ama ayrı ayrı değil. Yan yana koy. Bir cihaz adı, bir kart kaydı, bir hat, bir poliçe."
+              "text": "Kayıtlar geldi. Şimdi onları oku; ama ayrı ayrı değil. Yan yana koy. Bir kayıt, bir tarih, bir saat; neyse elindeki."
             },
             {
               "speaker": "leyla",
-              "text": "Her biri tek başına “belki.” Dördü bir araya gelince “kim.” Tahtayı kullan; iki kâğıt bir isim yapar."
+              "text": "Her biri tek başına “belki.” Birkaçı bir araya gelince bir cevap olabilir; olmayabilir de. Tahtayı kullan; zorlamadan."
             }
           ]
         },
@@ -2686,7 +2768,7 @@
             { "speaker": "narrator", "text": "BÜRO — LEYLA’NIN ODASI", "style": "card", "bg": "buro" },
             {
               "speaker": "leyla",
-              "text": "İkinci celse yakın. Bir bilirkişin var, bir savcın belki yanında. Esas savunmada üç dayanaktan fazlasını söyleme; fazlası gürültüdür."
+              "text": "İkinci celse yakın. Elindeki kâğıtları say; fazlasını değil. Esas savunmada üç dayanaktan fazlasını söyleme; fazlası gürültüdür."
             },
             {
               "speaker": "leyla",
@@ -2846,11 +2928,21 @@
       "onEnter": [{ "type": "VAR", "var": "ara_ap", "op": "set", "value": 0 }],
       "lines": [
         {
+          "when": { "all": [{ "hasEvidence": "ev_zeyil" }, { "flag": "fact_gm" }] },
           "lines": [
             { "speaker": "narrator", "text": "PAZARTESİ 23.20 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
             {
               "speaker": "narrator",
               "text": "Panoyu söktüm, dosyaya dizdim. Üç haftada pano bir aileden bir şirkete, bir şirketten bir poliçeye uzadı."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "PAZARTESİ 23.20 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Panoyu söktüm, dosyaya dizdim. Üç haftada pano bir aileden bir şirkete uzadı; iplerin bir kısmı hâlâ boşlukta bitiyor."
             }
           ]
         }
@@ -2893,10 +2985,20 @@
           ]
         },
         {
+          "when": { "flag": "fact_gm" },
           "lines": [
             {
               "speaker": "player",
               "text": "Üç hafta geçti. Bir isim buldum, bir yol seçtim. Yarın o yolun nereye çıktığını göreceğim.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Üç hafta geçti. Bir isim bulamadım; elimde birkaç çatlak var, o kadar. Yarın o çatlaklarla gideceğim.",
               "style": "thought"
             }
           ]
@@ -2961,6 +3063,7 @@
       "background": "sokak_yagmur",
       "lines": [
         {
+          "when": { "flag": "fact_gm" },
           "lines": [
             { "speaker": "narrator", "text": "GECE 23.55 — DENİZ’İN EVİ", "style": "card", "bg": "sokak_yagmur" },
             {
@@ -2984,12 +3087,46 @@
             },
             {
               "speaker": "narrator",
-              "text": "Pencereyi açtım. Yağmur organize sanayinin bacalarına, Nilüfer’in balkonlarına, Görükle’nin villalarına, adliyenin taş merdivenlerine aynı anda yağıyordu.",
+              "text": "Pencereyi açtım. Yağmur organize sanayinin bacalarına, Nilüfer’in balkonlarına, adliyenin taş merdivenlerine aynı anda yağıyordu.",
               "fx": "flash"
             },
             {
               "speaker": "player",
-              "text": "Bir kullanıcı adı. Bir cihaz. Bir hat. Bir poliçe. Yarın bütün bunları bir cümlede toplayacağım. Ya da dağıtacağım.",
+              "text": "Bir kullanıcı adı ve onu yalanlayan kâğıtlar. Yarın bütün bunları bir cümlede toplayacağım. Ya da dağıtacağım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "GECE 23.55 — DENİZ’İN EVİ", "style": "card", "bg": "sokak_yagmur" },
+            {
+              "speaker": "narrator",
+              "text": "Cübbem kapının arkasında asılı; Leyla’nın ilk duruşmamda bana verdiği, kolunun dikişi iki kez yenilenmiş cübbe."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masada dosyanın son hâli: renkli ayraçlar, kenar notları, bir çay lekesi. İlk gün altı kâğıttı. Şimdi bir parmak kalınlığında."
+            },
+            {
+              "speaker": "player",
+              "text": "Dosyalar büyüdükçe hafifler. Çünkü her yeni kâğıt bir soruyu cevaplar; sorular kâğıtlardan ağırdır.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "Telefon titredi. Leyla’dan, gece yarısına beş kala." },
+            {
+              "speaker": "leyla",
+              "text": "Yarın kürsüye kim oturursa otursun, ona acımadan, ama insafla davran. İnsaf, avukatın gücüdür; acımasızlık savcının.",
+              "style": "phone"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Pencereyi açtım. Yağmur organize sanayinin bacalarına, Nilüfer’in balkonlarına, adliyenin taş merdivenlerine aynı anda yağıyordu.",
+              "fx": "flash"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir kullanıcı adı ve birkaç çatlak. Yarın bütün bunları bir cümlede toplayacağım. Ya da dağıtacağım.",
               "style": "thought"
             }
           ]

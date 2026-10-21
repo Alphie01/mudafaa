@@ -229,8 +229,6 @@ const tarikCapraz = [
   choose('T03_BITIR'),
 ];
 /** 223/2-b yolu: U6'ya ark raporu da nötr kopması da ayrı ayrı sunulur. */
-/** Ark raporu yokken U6'ya yalnızca nötr kopması sunulur (223/2-b'nin elektrik bilirkişisi olmadan kurulamadığının testi). */
-const tarikCaprazNotr = [...tarikCapraz.slice(0, -2), present('ded_notr', 'U6'), choose('T03_BITIR')];
 const tarikCaprazB = [...tarikCapraz.slice(0, -1), present('ded_notr', 'U6'), choose('T03_BITIR')];
 
 /** Tipik yol (223/2-e); esas savunma seçeneği parametre. */

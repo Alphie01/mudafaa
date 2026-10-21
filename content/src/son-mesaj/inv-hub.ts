@@ -8,7 +8,6 @@ import {
   deliver,
   flag,
   has,
-  ifThen,
   inc,
   nav,
   not,
@@ -77,8 +76,8 @@ export const invHub: CasePart = {
         set('taps', 7),
         set('taps2', 6),
         set('ex1', 5),
-        set('ex2', 8),
-        set('ex3', 6),
+        set('ex2', 10),
+        set('ex3', 9),
         set('ex4', 4),
         set('min', 15),
       ],
@@ -151,20 +150,20 @@ export const invHub: CasePart = {
             }),
             p1.activity('H_IMAJ', 'Adli kopya raporu ve ekleri', 'INV_IMAJ', {
               once: true,
-              description: '114 sayfa ek · 8 deneme',
+              description: '114 sayfa ek · 10 deneme',
             }),
             p1.activity('H_HESAP_IND', 'Hesap verisini indirt', 'INV_HESAP_IND', {
-              visibleWhen: all(any(flag('fact_hesap_fikri'), has('clue_cihaz3')), not(flag('hesap_istendi'))),
+              visibleWhen: all(flag('fact_hesap_onay'), not(flag('hesap_istendi'))),
               description: 'Tarık ve noter · yarın akşam hazır',
             }),
             p1.activity('H_HESAP', 'Hesap verisi raporu', 'INV_HESAP', {
               once: true,
               visibleWhen: has('ev_hesap'),
-              description: 'Noter tespitli döküm · 6 deneme',
+              description: 'Noter tespitli döküm · 9 deneme',
             }),
             p1.activity('H_HKAYIT', 'Hastane kayıtları', 'INV_HKAYIT_GIRIS', {
               once: true,
-              visibleWhen: flag('fact_hastane'),
+              visibleWhen: flag('fact_onam_saat'),
               description: 'Babasının muvafakatiyle · 4 deneme',
             }),
             p1.activity('H_DIL', 'Delil ve bilirkişi talepleri', 'INV_DIL', {
@@ -194,20 +193,19 @@ export const invHub: CasePart = {
           kind: 'NAVIGATE',
           label: 'Günü kapat',
           description: 'Kalan eylem puanlarını bırak',
-          visibleWhen: all(cmp(v('ap'), '>', 0), cmp(v('day'), '<', 3)),
-          confirm: 'Bugünün kalan eylem puanları yanar. Emin misin?',
+          // Gün boşa geçirilemez: yalnızca yapılacak iş kalmadıysa erken kapatılır (gün, puanlar bitince kendiliğinden kapanır).
+          visibleWhen: all(cmp(v('ap'), '>', 0), cmp(v('day'), '<', 3), ref('inv_bos')),
+          confirm: 'Bugünün kalan eylem puanı yanar. Emin misin?',
           effects: [set('ap', 0)],
           next: '$stay',
         },
         nav('GO_H1', 'DURUŞMADAN ÖNCEKİ GECE', 'INV_GECE_1', {
           role: 'PRIMARY',
           confirm: 'Soruşturma evresi biter. Emin misin?',
-          enabledWhen: any(
-            cmp(v('day'), '==', 3),
-            all(visited('INV_GORUSME'), visited('INV_TUTANAK'), visited('INV_IMAJ'), visited('INV_ARAMA_OFIS')),
-          ),
+          // On iki gün kullanılmadan duruşmaya gidilmez: son günün bütün eylem puanları (yapılacak iş kalmadıysa her zaman).
+          enabledWhen: all(cmp(v('day'), '==', 3), any(cmp(v('ap'), '<=', 0), ref('inv_bos')), visited('INV_LEYLA')),
           lockedReason:
-            'Dilekçe süresi 3. gün doluyor. Erken gitmek için önce müvekkili dinle, tutanağı ve raporu oku, ofisi ara.',
+            'Duruşmaya daha günler var. Dilekçe son gün kapanıyor; o güne kadar her saatini dosyaya ver. Leyla dosyayı görmeden salona girme.',
         }),
       ],
     }),
@@ -233,6 +231,7 @@ export const invHub: CasePart = {
         O(`
           # AKŞAM 21.10 — ARSLAN HUKUK |bg=buro_gece
           > Büro boşalmış. Yağmur yeniden başlamış; oluklardan taşan su kaldırıma vuruyor.
+          > Masamda günün kâğıtları; hiçbiri henüz bir yere iğnelenmemiş. Bir avukatın ilk günü, bir mimarın ilk krokisi gibidir: çizgiler var, bina yok.
           > Leyla’nın odasında ışık yanıyordu. Kapısı aralık.
           leyla: Gel. Bugün ne öğrendin? Bir cümleyle.
         `),
@@ -350,19 +349,19 @@ export const invHub: CasePart = {
       ...C2,
       title: 'Leyla’ya danış',
       background: 'buro',
-      onEnter: [set('leyla_gun', v('day')), ifThen(has('clue_cihaz3'), [raise('fact_hesap_fikri')])],
+      onEnter: [set('leyla_gun', v('day'))],
       lines: [
         W(
           all(has('clue_cihaz3'), not(flag('hesap_istendi'))),
           `
           leyla: Cihaz 3. İyi. Şimdi o cihazın ne olduğunu kimden öğreneceksin? Polisten mi, şirketten mi?
-          leyla: Hesap Tarık’ın. Hesabın sahibi kendi oturum geçmişini isteyebilir. Ama dikkat: elinden çıkan her kâğıt, polisinki kadar sorgulanacak. Noter. Hash.
+          leyla: Hesap Tarık’ın. Hesabın sahibi kendi oturum geçmişini isteyebilir; önce ona sor, o listeyi hiç açmış mı. Ama dikkat: elinden çıkan her kâğıt, polisinki kadar sorgulanacak. Noter. Hash.
         `,
         ),
         W(
           all(flag('fact_hastane'), not(has('ev_hastane'))),
           `
-          leyla: Hastane dedin. Hastanede her şeyin saati yazılır. Babasının muvafakatini al, kayıtları iste.
+          leyla: Hastane dedin. Hastanede her şeyin saati yazılır. Önce o geceyi kendi saatinde gör; kâğıdı kimin, hangi kuralla yazdığını öğren. Sonra babasının muvafakatiyle kayıtları iste.
           leyla: Saat yazan bir hemşire, saatini bilmeyen on tanıktan iyidir.
         `,
         ),
@@ -438,7 +437,10 @@ export const invHub: CasePart = {
       lines: [
         W(
           has('ded_hastane'),
-          `~ 9 Kasım, 02.14. Telefon kilitli, hemşire masasında. Tarık bir form imzalıyor. O gece, o eller değil.`,
+          `
+          ~ 9 Kasım, 02.14. Telefon kilitli, hemşire masasında. Tarık bir form imzalıyor. O gece, o eller değil.
+          ~ Ama bu bir çıkarım; benim panomda duruyor. Salonda onu bir makinenin günlüğü, bir hemşirenin imzası ve bir yaşlı adamın telefonu taşımalı. Üçünü de kürsüye getirmenin yolunu bulmalıyım.
+        `,
         ),
         W(
           any(flag('fact_gulay'), has('clue_onam'), has('clue_sarj')),
@@ -473,6 +475,23 @@ export const invHub: CasePart = {
         `),
       ],
     }),
+    decisionNode('H1_KORIDOR', [{ to: 'H1_00' }], {
+      ...C2,
+      title: 'Duruşma sabahı',
+      lines: B(`
+        # SETBAŞI KÖPRÜSÜ — 08.10 |bg=sokak_sabah
+        > Gök Dere bulanık akıyordu; gece boyu yağan yağmur köprünün taşlarını koyulaştırmıştı. Adliyeye yürüyerek gittim. Çantamda pano yoktu, panonun fotoğrafı vardı; bir de üç sayfalık bir not.
+        > Leyla köprünün başında bekliyordu. Elinde iki kâğıt bardak çay; birini bana uzattı, ötekinin kapağını açmadı bile.
+        leyla: Uyumadın. Belli. Bugün uykusuzluğunu değil, dosyanı göstereceksin.
+        leyla: İlk celse bir dava kazanmaz Deniz. Ama hâkim bugün dosyanın nasıl bir dosya olduğuna karar verir: okunacak bir dosya mı, geçilecek bir dosya mı.
+        P: Okunacak bir dosya. Eklerini okuyacak.
+        leyla: O zaman ona eklerini göster. Polisin sonuç cümlesini değil, kendi tablosunu. Tanığa bir şey söyletmeye çalışma; tanık kendi kâğıdını okusun, gerisini hâkim görür.
+        leyla: Bir de şu: talepler. Bugün salondan çıkarken elinde üç hafta olacak. O üç haftayı neyle dolduracağını bugün ağzından çıkan cümleler belirler. İstemediğin şey gelmez.
+        > Çayından bir yudum aldı, buruştu. Soğumuştu; yine de içti.
+        ~ Bir duruşmanın sabahı, bir şantiyenin sabahına benzer: her şey kâğıtta hazırdır, ama zemin ilk kazmada kendini gösterir.
+        > Adliyenin camları sabah güneşinde griydi. Merdivenlerde Tarık’ı gördüm; kravatsızdı, ama ayakkabılarını boyamıştı. Bir babanın hazırlığı.
+      `),
+    }),
     story('INV_GECE', {
       ...C2,
       title: 'Duruşmadan önceki gece',
@@ -483,7 +502,7 @@ export const invHub: CasePart = {
         > Dışarıda yağmur incelmişti. Tophane’nin saat kulesi on ikiyi vurdu, sesi ıslak sokaklarda uzadı.
         ~ Bir yerde, bir ekran hâlâ yanıyor olabilirdi. Yarın o ekranın kime ait olduğunu bir salon dolusu insana göstereceğim. Yeter ki kâğıtlar beni yarı yolda bırakmasın.
       `),
-      choices: [cont('GECE_DEVAM', 'Duruşmaya git', 'H1_00', { role: 'PRIMARY' })],
+      choices: [cont('GECE_DEVAM', 'Duruşmaya git', 'H1_KORIDOR', { role: 'PRIMARY' })],
     }),
   ],
   triggers: [

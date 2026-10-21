@@ -1,6 +1,7 @@
 import {
   all,
   any,
+  chosen,
   cmp,
   cont,
   courtSession,
@@ -30,13 +31,17 @@ import {
   v,
   choiceNode,
   meet,
+  visited,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
-import { TRIAL, VERDICT, card, court2, me, n, s, th, voice } from './shared.js';
+import { TRIAL, VERDICT, card, court2, me, n, named, s, th, voice } from './shared.js';
 import { wrongEvidence } from './hearing-1.js';
 
 // 80-trial: ikinci celse. Ara karar cevapları ve gecikmeli deliller, (sahte tanık çöküşü), Nesrin, Tolga'nın çapraz
 // sorgusu, delil tartışması (arama, şekerlik), mütalaa ve CMK 226 ek savunma, esas savunma, son söz, hüküm.
+
+/** Muhbirin satış anlatımı esasen çöktü mü (kapıdaki kasklı adam, saat ya da dönüş)? */
+const muhbirCoktu = any(flag('contra_t3'), flag('contra_t4'), flag('tolga_kirildi'));
 
 const teslim = deliver('T_00', [
   {
@@ -46,8 +51,10 @@ const teslim = deliver('T_00', [
   },
   {
     evidence: 'ev_iz_eslesme',
-    requires: all(flag('suc_duyurusu'), flag('tehdit_bildirildi')),
-    hint: 'Kimlikle suç duyurusu ve gece gelen telefonun bildirimi Barış’ın yakalanmasını sağlayabilirdi.',
+    // Yakalanma (kimlikli suç duyurusu + tehdidin bildirimi) tek başına yetmez: terazideki yabancı izin yakalanan
+    // kişiyle karşılaştırılmasını savunmanın istemiş olması gerekir (delil dilekçesi ya da 1. celse talebi).
+    requires: all(flag('suc_duyurusu'), flag('tehdit_bildirildi'), flag('iz_istendi')),
+    hint: 'Kimlikle suç duyurusu, gece gelen telefonun bildirimi ve terazideki izin karşılaştırılması talebi birlikte Barış’ın izini dosyaya getirebilirdi.',
   },
 ]);
 
@@ -105,12 +112,13 @@ export const trial: CasePart = {
         },
       ],
       choices: [
-        option('TK_A', 'Ezberlemeyin. Ne gördüyseniz onu anlatın; hatırlamadığınızı “hatırlamıyorum” deyin.', {
+        option('TK_A', 'Gördüğünüzü anlatın; bilmediğinize bilmiyorum deyin.', {
           score: { SORGULAMA: 50 },
           good: 'Tanığa ne söyleyeceğini söylemedin: tanığın beyanı onun kendi algısı olarak kalmalıdır (TBB Meslek Kuralları; TCK 277’nin koruduğu yargı görevi).',
           responses: [
             {
               lines: [
+                me('Ne gördüyseniz onu anlatın. Hatırlamadığınız yerde “hatırlamıyorum” deyin.'),
                 s('nesrin', 'Hatırlamıyorum demek ayıp değil mi?'),
                 me('Hayır. Uydurmak ayıp. Hatırlamamak insanlık.'),
                 s(
@@ -123,7 +131,7 @@ export const trial: CasePart = {
           ],
           next: 'T_00',
         }),
-        option('TK_B', 'Motoru kullananın Barış olduğunu mutlaka söyleyin; gerisini ben hallederim.', {
+        option('TK_B', 'Barış’ın adını mutlaka söyleyin; gerisi bende.', {
           score: { SORGULAMA: -60 },
           effects: [raise('nesrin_telkin'), inc('ethics')],
           bad: 'Tanığa duruşmadan önce ne söyleyeceğini dikte etmek tanığı etkilemektir; beyanın değerini yok eder ve meslek kurallarına aykırıdır (TCK 277, TBB Meslek Kuralları).',
@@ -141,7 +149,7 @@ export const trial: CasePart = {
           ],
           next: 'T_00',
         }),
-        option('TK_C', 'Ben size bir şey söyleyemem, Nesrin Hanım. Sadece yemin ettiğinizi unutmayın.', {
+        option('TK_C', 'Size bir şey söyleyemem; yemin ettiniz, artık tanıksınız.', {
           neutral:
             'Doğru bir sınır; ama tanığı kaygısıyla yalnız bıraktın. Hatırlamadığını söyleyebileceğini bilmek tanığın hakkıdır.',
           responses: [
@@ -169,14 +177,10 @@ export const trial: CasePart = {
       ],
       lines: [
         {
+          when: flag('kaan_tahliye'),
           lines: [
             card('16 ŞUBAT · PAZARTESİ 10.05 — BURSA 5. AĞIR CEZA MAHKEMESİ', 'durusma_salonu'),
             s('mubasir', 'Kaan Yıldız! Kaan Yıldız! Taraflar salona!'),
-          ],
-        },
-        {
-          when: flag('kaan_tahliye'),
-          lines: [
             n(
               'Dinleyici sırasında Defne, yanında beyaz saçlı bir kadın. Kadın bir tespih çeviriyordu; tespihin her tanesinde bir an duruyor, sonra bırakıyordu.',
             ),
@@ -187,8 +191,10 @@ export const trial: CasePart = {
         },
         {
           lines: [
+            card('16 ŞUBAT · PAZARTESİ 10.05 — BURSA 5. AĞIR CEZA MAHKEMESİ', 'durusma_salonu'),
+            s('mubasir', 'Kaan Yıldız! Kaan Yıldız! Taraflar salona!'),
             n(
-              'Kaan iki jandarmanın arasında girdi. Gözlükteki bant yenilenmişti. Kırk yedi gün; parmaklarıyla saydığını biliyordum.',
+              'Kaan iki jandarmanın arasında girdi. Gözlükteki bant yenilenmişti. Yüz otuz altı gün; parmaklarıyla saydığını biliyordum.',
             ),
           ],
         },
@@ -243,20 +249,28 @@ export const trial: CasePart = {
     }),
     decisionNode(
       'T_00B',
-      [
-        { when: flag('okan_tanik'), to: 'T_OKAN' },
-        { when: all(flag('nesrin_istendi'), not(flag('nesrin_kus'))), to: 'T_01' },
-        { to: 'T_02' },
-      ],
+      [{ when: all(flag('nesrin_istendi'), not(flag('nesrin_kus'))), to: 'T_01' }, { to: 'T_02' }],
       {
         ...court2.base,
         lines: [
+          {
+            when: all(flag('baris_yakalandi'), not(flag('iz_istendi'))),
+            lines: [
+              s(
+                'baskan',
+                'Bursa Cumhuriyet Başsavcılığının yazısı: Barış Demirel adlı şahıs İzmir Karşıyaka’da yakalanmış, ifadesi alınmış; satıcılığı inkâr etmiş.',
+              ),
+              th(
+                'Yakalandı. Ama terazideki izi onun parmağıyla karşılaştırmasını kimse istemedi; ben de istemedim. Bir parmak, sorulmadıkça konuşmaz.',
+              ),
+            ],
+          },
           {
             when: flag('baris_yakalandi'),
             lines: [
               s(
                 'baskan',
-                'Bursa Cumhuriyet Başsavcılığının yazısı: Barış Demirel adlı şahıs İzmir Karşıyaka’da yakalanmış, ifadesi alınmış. Parmak izi karşılaştırma raporu dosyaya girdi.',
+                'Bursa Cumhuriyet Başsavcılığının yazısı: Barış Demirel adlı şahıs İzmir Karşıyaka’da yakalanmış, ifadesi alınmış. Müdafinin talebi üzerine parmak izi karşılaştırma raporu dosyaya girdi.',
               ),
               s(
                 'baskan',
@@ -299,9 +313,9 @@ export const trial: CasePart = {
           lines: [
             s('mubasir', 'Savunma tanığı Okan Er! Okan Er!'),
             n('Okan yeni gömleğiyle kürsüye çıktı. Yemin ederken sesi çatladı; ikinci denemede düzeldi.'),
-            voice('OKAN', 'Barış bana söyledi. “Mallar benimdi, Kaan’ın haberi yok” dedi. Kasımda, bir kafede.'),
+            named('OKAN', 'Barış bana söyledi. “Mallar benimdi, Kaan’ın haberi yok” dedi. Kasımda, bir kafede.'),
             s('savci', 'Hangi kafede, tanık? Hangi gün? Saat kaçta?'),
-            voice('OKAN', 'Bir kafede… Kahve Durağı’nda. Kasımın… ortası. Akşam.'),
+            named('OKAN', 'Bir kafede… Kahve Durağı’nda. Kasımın… ortası. Akşam.'),
             s(
               'savci',
               'Barış Demirel 12 Kasım’da Bursa’dan ayrıldı. Kayıtlar dosyada. Kasımın ortasında kiminle kahve içtiniz?',
@@ -311,7 +325,7 @@ export const trial: CasePart = {
               'savci',
               'Tanık, size bu ifade için bir şey teklif edildi mi? Yemin altındasınız. Yalan tanıklığın cezası size okundu.',
             ),
-            voice(
+            named(
               'OKAN',
               '…Beş bin lira. Abla verdi. Avukat hanım ne diyeceğimi yazdı. Ben… ben bir şey bilmiyorum. Barış bana hiçbir şey söylemedi.',
             ),
@@ -331,6 +345,9 @@ export const trial: CasePart = {
               'savci',
               'Bu hikâyeye hangi ağırlığı vereceğinizi takdirinize bırakıyorum. Esas hakkındaki görüşümüz iddianamedeki gibidir.',
             ),
+            s('baskan', 'Müdafi, muhbir tanığa sorunuz var mı?'),
+            th('Vardı. Kask, saat, bir kin. Ama artık sorduğum her soru bir yalanın gölgesinde sorulacaktı.'),
+            me('Sorum yok, Sayın Başkan.'),
           ],
         },
       ],
@@ -352,7 +369,7 @@ export const trial: CasePart = {
             ),
             s(
               'nesrin',
-              'Sabah altı yirmide kurye oğlanın motoru köşeye geldi, döndü. Altı kırkta beni yukarı çağırdılar; kapı açıktı, kilit yerdeydi.',
+              'Sabah yediyi çeyrek geçe kurye oğlanın motoru köşeye geldi, döndü. Yediyi otuz beş geçe beni yukarı çağırdılar; kapı açıktı, kilit yerdeydi.',
             ),
             s(
               'savci',
@@ -378,11 +395,11 @@ export const trial: CasePart = {
             ),
             s(
               'nesrin',
-              'Sabah altı yirmide kurye oğlanın motoru köşeye geldi. Arabaları gördü, döndü gitti. Hep köşeye park ederdi, zinciri korkuluğa dolardı.',
+              'Sabah yediyi çeyrek geçe kurye oğlanın motoru köşeye geldi. Arabaları gördü, döndü gitti. Hep köşeye park ederdi, zinciri korkuluğa dolardı.',
             ),
             s(
               'nesrin',
-              'Altı kırkta beni yukarı çağırdılar. Arka odanın kapısı açıktı, kilit yerdeydi. İmzala dediler; saati ben yazdım.',
+              'Yediyi otuz beş geçe beni yukarı çağırdılar. Arka odanın kapısı açıktı, kilit yerdeydi. İmzala dediler; saati ben yazdım.',
             ),
             s('uye', 'Saati neden yazdınız, tanık?'),
             s(
@@ -407,7 +424,7 @@ export const trial: CasePart = {
       say: [s('baskan', 'Müdafi, tanığa sorunuz?')],
       next: 'T_02',
       options: [
-        option('T01_A', 'Arka odada kimlerin kaldığını kaydettiniz mi? Defterinizi gösterir misiniz?', {
+        option('T01_A', 'Kiracıları bir deftere yazar mıydınız?', {
           visibleWhen: has('clue_kira_defteri'),
           score: { SORGULAMA: 100 },
           effects: [inc('pers'), raise('defter_sunuldu')],
@@ -440,7 +457,7 @@ export const trial: CasePart = {
             },
           ],
         }),
-        option('T01_C', 'Barış’ın uyuşturucu sattığını biliyor muydunuz?', {
+        option('T01_C', 'Barış satıcı mıydı, biliyor muydunuz?', {
           score: { SORGULAMA: -50 },
           effects: [dec('cred')],
           bad: 'Tanığa bilmediği bir şeyi sormak: savcının itirazı yerinde; tanık gördüğünü anlatır, tahmin etmez.',
@@ -465,6 +482,7 @@ export const trial: CasePart = {
       onFirstEnter: [meet('tolga')],
       lines: [
         {
+          when: visited('T_01'),
           lines: [
             n(
               'Nesrin Hanım kürsüden indi, dinleyici sırasına oturdu, defterini kucağına koydu. Kaan’a gülümsedi; Kaan gözlerini indirdi, sonra kaldırdı, gülümsedi.',
@@ -477,7 +495,27 @@ export const trial: CasePart = {
               'Yirmi dokuz yaşındaydı ama kırkında gibi görünüyordu. Tırnaklarının etleri Kaan’ınkiler gibi yenmişti. İki kullanıcı, aynı salonda, iki ayrı sırada.',
             ),
             th(
-              'Ona öfkelenmem gerekirdi. Öfkelenemedim. Gece yarısı bir karakolda bir isim vermek zorunda kalan bir adam. Ama verdiği isim yanlış isimdi; bunu ona kendi sözleriyle göstereceğim.',
+              'Ona öfkelenmem gerekirdi. Öfkelenemedim. Gece yarısı bir karakolda bir isim vermek zorunda kalan bir adam. O ismin doğru olup olmadığını bugün onun kendi sözleri gösterecek; benim inancım değil.',
+            ),
+            s(
+              'baskan',
+              'Kimliğiniz tespit edildi. Gerçeği söylemekle yükümlüsünüz; yalan tanıklığın cezası size hatırlatıldı. Kendinizi suçlama tehlikesi olan sorulara cevap vermeyebilirsiniz.',
+            ),
+            s('tolga', 'Yemin ederim. Yani… bildiğimi söyleyeceğim.'),
+            s('savci', 'Tanık, 9 Kasım gecesi üzerinizde bulunan paketi sanık Kaan Yıldız’dan aldınız, değil mi?'),
+          ],
+        },
+        {
+          lines: [
+            s('mubasir', 'Tanık Tolga Kaplan! Tanık Tolga Kaplan!'),
+            n(
+              'İki polisin arasında geldi; zorla getirilmişti. Kırmızı bere elinde, saçları dağınık. Kürsüye çıkarken sanık sırasına bakmadı.',
+            ),
+            n(
+              'Yirmi dokuz yaşındaydı ama kırkında gibi görünüyordu. Tırnaklarının etleri Kaan’ınkiler gibi yenmişti. İki kullanıcı, aynı salonda, iki ayrı sırada.',
+            ),
+            th(
+              'Ona öfkelenmem gerekirdi. Öfkelenemedim. Gece yarısı bir karakolda bir isim vermek zorunda kalan bir adam. O ismin doğru olup olmadığını bugün onun kendi sözleri gösterecek; benim inancım değil.',
             ),
             s(
               'baskan',
@@ -488,9 +526,10 @@ export const trial: CasePart = {
           ],
         },
       ],
-      next: 'T_03',
+      // Sahte tanık dinletildiyse savunma tanığı muhbirden sonra kürsüye çıkar (T_OKAN); aksi hâlde çapraz sorgu.
+      next: 'T_02D',
       options: [
-        option('T02_A', 'İtiraz: soru tanığa cevabı veriyor; açık sorulsun', {
+        option('T02_A', 'İtiraz: soru cevabı tanığa veriyor; açık sorulsun', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), inc('pers')],
           good: 'Telkin edici soru (CMK 201/1’in ruhu, CMK 192): muhbirin tek dayanağı onun kendi anlatımıdır; anlatımı savcının cümlesi olmamalı.',
@@ -531,6 +570,7 @@ export const trial: CasePart = {
         }),
       ],
     }),
+    decisionNode('T_02D', [{ when: flag('okan_tanik'), to: 'T_OKAN' }, { to: 'T_03' }], { ...court2.base }),
     court2.testimony('T_03', {
       title: 'Çapraz sorgu · Tolga Kaplan',
       courtStage: 'TANIK_DINLEME',
@@ -603,13 +643,18 @@ export const trial: CasePart = {
             },
           ],
         }),
+        // Çözülme sırası: muhbirin hem kapıdaki adam hem saat anlatımı çöktükten sonra parmak izi raporu ya da Selim'in
+        // anlattığı tanışıklık (saik salonda görünür olduysa) onu döndürür.
         presentRule('PS_T1', 'T1', ['ev_iz_eslesme', 'ded_tolga_baris'], {
-          enabledWhen: any(flag('contra_t3'), flag('contra_t4')),
+          // Muhbir ancak hikâyesinin iki ayağı da (kapıdaki kasklı adam ve saat) çöktükten sonra döner; o noktada ya
+          // elinde bir kâğıt (iz raporu) ya da salonda görünür bir saik (etkin pişmanlık + kin) gerekir.
+          enabledWhen: all(flag('contra_t3'), flag('contra_t4'), any(has('ev_iz_eslesme'), flag('tolga_saik'))),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
             raise('tolga_kirildi'),
-            raise('jar_cleared'),
+            // Muhbir şekerliği ancak savunma şekerliğin yerini kayda geçirdiyse (contra_s6) anlatır.
+            ifThen(flag('contra_s6'), [raise('jar_cleared')]),
             mark(
               'GOOD',
               'Muhbir çözüldü: paketi Barış Demirel’den aldığını ve korkudan ve kinden sanığın adını verdiğini kabul etti. Teşhisin tek dayanağı çöktü.',
@@ -617,6 +662,27 @@ export const trial: CasePart = {
             ),
           ],
           responses: [
+            {
+              when: all(has('ev_iz_eslesme'), flag('contra_s6')),
+              lines: [
+                me('Terazideki iz Barış Demirel’in, tanık. Bu sabah dosyaya girdi. Barış İzmir’de yakalandı.'),
+                n('Tolga bereyi iki eliyle sıktı. Bir süre kimseye bakmadı.', { fx: 'shake' }),
+                s('tolga', 'Yakalandı mı? … Barış’tı. Barış’tan aldım. Hep ondan alırdım. Ekimden beri.', 'uzgun'),
+                s(
+                  'tolga',
+                  '“Beni söylersen biterim seni” dedi. Arkasında İzmir’den adamlar var. Korktum. Kaan’ı söyledim çünkü Kaan beni sokağa atmıştı. Depozitomu kesti.',
+                  'uzgun',
+                ),
+                s(
+                  'tolga',
+                  'O gece kapıyı Barış açtı. Koridordaki şekerlikten iki paket aldı, birini bana verdi. Kask elindeydi; çıkacaktı.',
+                ),
+                n('Salon uğuldadı. Başkan tokmağa vurdu. Kaan ilk kez Tolga’ya baktı; öfkeyle değil, yorgunlukla.', {
+                  fx: 'shake',
+                }),
+                th('Muhbir kendi yalanının altında kaldı. Ve bir cümleyle şekerliği de arka odaya geri taşıdı.'),
+              ],
+            },
             {
               when: has('ev_iz_eslesme'),
               lines: [
@@ -626,6 +692,38 @@ export const trial: CasePart = {
                 s(
                   'tolga',
                   '“Beni söylersen biterim seni” dedi. Arkasında İzmir’den adamlar var. Korktum. Kaan’ı söyledim çünkü Kaan beni sokağa atmıştı. Depozitomu kesti.',
+                  'uzgun',
+                ),
+                s('tolga', 'O gece kapıyı Barış açtı. Paketi o verdi. Kask elindeydi; çıkacaktı.'),
+                n('Salon uğuldadı. Başkan tokmağa vurdu. Kaan ilk kez Tolga’ya baktı; öfkeyle değil, yorgunlukla.', {
+                  fx: 'shake',
+                }),
+                th(
+                  'Muhbir kendi yalanının altında kaldı. Şekerliği sormadım; birinci celsede o rafı kimseye kabul ettirmemiştim.',
+                ),
+              ],
+            },
+            {
+              when: flag('contra_s6'),
+              lines: [
+                me(
+                  'Tanık, ekimden beri Paketçi’nin Görükle durağına gidip Barış’ı soruyordunuz. Köşede konuşuyordunuz. Siz “param yarın gelecek” dediniz; o “yarın yok” dedi.',
+                ),
+                me(
+                  'Ve ifadenizde kapıyı açanın elinde kask vardı. Kask taşıyan, motorlu kurye Barış Demirel’di. Kimden aldınız?',
+                ),
+                n('Tolga bereyi iki eliyle sıktı. Bir süre kimseye bakmadı.', { fx: 'shake' }),
+                s(
+                  'baskan',
+                  'Tanık, size kendinizi suçlama tehlikesi olan sorulara cevap vermeyebileceğinizi hatırlatmıştım. Ama verdiğiniz cevaplar doğru olmak zorunda. Kimden aldınız?',
+                ),
+                n(
+                  'Salonda bir sandalye gıcırdadı. Defne’nin elindeki poşet. Kaan başını kaldırdı ve Tolga’ya baktı; ilk kez, uzun uzun.',
+                ),
+                s('tolga', '…Barış’tı. Barış’tan aldım. Hep ondan alırdım.', 'uzgun'),
+                s(
+                  'tolga',
+                  '“Beni söylersen biterim seni” dedi. Korktum. Kaan’ı söyledim çünkü Kaan beni sokağa atmıştı. Depozitomu kesti.',
                   'uzgun',
                 ),
                 s(
@@ -660,14 +758,13 @@ export const trial: CasePart = {
                   '“Beni söylersen biterim seni” dedi. Korktum. Kaan’ı söyledim çünkü Kaan beni sokağa atmıştı. Depozitomu kesti.',
                   'uzgun',
                 ),
-                s(
-                  'tolga',
-                  'O gece kapıyı Barış açtı. Koridordaki şekerlikten iki paket aldı, birini bana verdi. Kask elindeydi; çıkacaktı.',
-                ),
+                s('tolga', 'O gece kapıyı Barış açtı. Paketi o verdi. Kask elindeydi; çıkacaktı.'),
                 n('Salon uğuldadı. Başkan tokmağa vurdu. Kaan ilk kez Tolga’ya baktı; öfkeyle değil, yorgunlukla.', {
                   fx: 'shake',
                 }),
-                th('Muhbir kendi yalanının altında kaldı. Ve bir cümleyle şekerliği de arka odaya geri taşıdı.'),
+                th(
+                  'Muhbir kendi yalanının altında kaldı. Şekerliği sormadım; birinci celsede o rafı kimseye kabul ettirmemiştim.',
+                ),
               ],
             },
           ],
@@ -688,6 +785,32 @@ export const trial: CasePart = {
             ],
             responses: [
               {
+                when: all(flag('contra_t3'), flag('contra_t4')),
+                lines: [
+                  s(
+                    'tolga',
+                    'Barış’ı tanırım, evet. Durakta görürdüm. Ama ben Kaan’dan aldım. Yani… saat, kask, ne bileyim. Ben Kaan’dan aldım.',
+                    'kizgin',
+                  ),
+                  th(
+                    'İki ayağı da kırıldı; hâlâ bir şeye tutunuyor: korkusuna. Onu döndürecek ya bir kâğıt ya da neden bu ismi verdiğini salona taşıyan bir soru.',
+                  ),
+                ],
+              },
+              {
+                when: any(flag('contra_t3'), flag('contra_t4')),
+                lines: [
+                  s(
+                    'tolga',
+                    'Barış’ı tanırım, evet. Durakta görürdüm. Tanımak satmak mı? Ben Kaan’dan aldım. Yani… bir saatini şaşırdım diye her şey yalan mı oldu?',
+                    'kizgin',
+                  ),
+                  th(
+                    'Bir çatlak var ama tutunacak yeri hâlâ var. Hikâyesinin iki ayağı var: kapıdaki adam ve saat. İkisi de yıkılmadan adı söylemeyecek.',
+                  ),
+                ],
+              },
+              {
                 lines: [
                   s('tolga', 'Barış mı? Kim Barış? Ben Kaan’dan aldım. Yani… o evde kim varsa. Kaan’dı.', 'kizgin'),
                   th('Erken. Önce onun kendi hikâyesini çatlatmam lazım: kask, saat. Sonra adı sor.'),
@@ -698,7 +821,14 @@ export const trial: CasePart = {
         ),
         pressRule('PR_T2', 'T2', {
           score: { SORGULAMA: 25 },
-          effects: [raise('press_t2')],
+          effects: [
+            raise('press_t2'),
+            // Muhbirin saiki (etkin pişmanlık + kin) salonda görünür olunca Selim'in anlattığı tanışıklık onu döndürebilir.
+            ifThen(
+              all(flag('fact_tolga_192'), any(flag('fact_tolga_kin'), flag('fact_tolga_n'), flag('fact_tolga_eski'))),
+              [raise('tolga_saik')],
+            ),
+          ],
           responses: [
             {
               when: all(
@@ -781,7 +911,29 @@ export const trial: CasePart = {
             },
           ],
         }),
+        // Önce tanığı kendi eski ifadesine bağla (T5: “kasksız” ↔ kolluk ifadesi “elinde kask”), sonra kapıyı açanı sor.
+        // Kask ayrıntısını bilmeden (kolluk ifadesi okunmadan) bu yüzleşme kurulamaz; sanığın ehliyetsizliğine dayanan
+        // çıkarım (ded_kask) ise sanığın bunu duruşmada söylemiş olmasını ister.
+        presentRule('PS_T3_EHLIYET', 'T3', ['ded_kask'], {
+          enabledWhen: all(flag('press_t3'), flag('contra_t5'), has('clue_tolga_kask'), not(chosen('Q_EHLIYET'))),
+          responses: [
+            {
+              lines: [
+                me('Kapıyı açanın elinde kask vardı, tanık. Sanığın ise ehliyeti yok.'),
+                s(
+                  'savci',
+                  'Sayın Başkan, sanığın ehliyeti olmadığı bu salonda hiç söylenmedi. Müdafi kendi bilgisini delil diye sunuyor.',
+                ),
+                s('baskan', 'Kabul. Dosyada böyle bir beyan yok, müdafi.'),
+                th(
+                  'Kaan bunu bana görüş odasında söyledi; mahkemeye değil. Sorgusunda bir cümleyle kayda geçirebilirdim.',
+                ),
+              ],
+            },
+          ],
+        }),
         presentRule('PS_T3', 'T3', ['ded_kask', 'ded_kurye', 'ev_kurye'], {
+          enabledWhen: all(flag('press_t3'), flag('contra_t5'), has('clue_tolga_kask')),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -794,9 +946,22 @@ export const trial: CasePart = {
           ],
           responses: [
             {
+              when: not(chosen('Q_EHLIYET')),
               lines: [
                 me(
-                  'Gece 01.30’da verdiğiniz ifade: “Kapıyı açanın elinde kask vardı, aceleyle çıkacaktı.” Sanığın ehliyeti yok, motosikleti yok, kaskı yok. Arka odada ise bir kurye montu, bir zincir kilit, bir kask askısı.',
+                  'Gece 01.30’da verdiğiniz ifade: “Kapıyı açanın elinde kask vardı, aceleyle çıkacaktı.” Arka odada bir kurye montu, bir zincir kilit, bir kask askısı.',
+                ),
+                me('Elinde kaskla kapıyı açan kimdi, tanık?'),
+                s('tolga', 'Ben… kask demiş miyim? Gece yarısıydı. Kafam… yani…', 'saskin'),
+                s('uye', 'Demişsiniz. İmzanız var.'),
+                n('Tolga dudaklarını ısırdı. Elindeki bere bir bez parçası gibi buruşmuştu.'),
+                th('Kendi cümlesi, kendi imzası. Bir yalanın en büyük düşmanı, ilk anlatılışıdır.'),
+              ],
+            },
+            {
+              lines: [
+                me(
+                  'Gece 01.30’da verdiğiniz ifade: “Kapıyı açanın elinde kask vardı, aceleyle çıkacaktı.” Sanık sorgusunda söyledi: ehliyeti yok, motosikleti yok, kaskı yok. Arka odada ise kurye montu, zincir, kask askısı.',
                 ),
                 me('Elinde kaskla kapıyı açan kimdi, tanık?'),
                 s('tolga', 'Ben… kask demiş miyim? Gece yarısıydı. Kafam… yani…', 'saskin'),
@@ -812,7 +977,47 @@ export const trial: CasePart = {
             },
           ],
         }),
+        presentRule('PS_T3_ERKEN', 'T3', ['ded_kask', 'ded_kurye', 'ev_kurye'], {
+          enabledWhen: not(all(flag('press_t3'), flag('contra_t5'), has('clue_tolga_kask'))),
+          responses: [
+            {
+              when: all(flag('press_t3'), not(has('clue_tolga_kask'))),
+              lines: [
+                s('tolga', 'Kask mı? Ne kaskı? Kasksızdı dedim ya.', 'saskin'),
+                th('Onun eski ifadesinde kask var mıydı? Okumadım. Okumadığım bir cümleyle kimseyi yüzleştiremem.'),
+              ],
+            },
+            {
+              when: flag('press_t3'),
+              lines: [
+                s('tolga', 'Kask mı? Ben kasksızdı dedim. Kasksız, terlikli. Ne alakası var?', 'saskin'),
+                th(
+                  'Bugün “kasksız” diyor. Kaskı ona hatırlatmadan önce bugünkü sözünü eski imzasının yanına koymalıyım. Önce iki cümle, sonra kapı.',
+                ),
+              ],
+            },
+            {
+              lines: [
+                s('tolga', 'Ne diyorsunuz anlamadım. Kapıyı o açtı, o kadar.', 'saskin'),
+                th('Önce kapıyı açanı tarif ettirmeliyim. Tarifi olmayan bir yüzü hiçbir delil çürütemez.'),
+              ],
+            },
+          ],
+        }),
+        presentRule('PS_T5_ERKEN', 'T5', ['ev_tolga_ifade'], {
+          enabledWhen: not(has('clue_tolga_kask')),
+          responses: [
+            {
+              lines: [
+                me('Kolluk ifadeniz, tanık…'),
+                s('baskan', 'İfadenin hangi kısmı, müdafi? Tanığın bugünkü sözüyle çelişen satırı gösterin.'),
+                th('İki sayfayı salladım ama satırı bilmiyorum. Kolluk ifadesini satır satır okumadım.'),
+              ],
+            },
+          ],
+        }),
         presentRule('PS_T5', 'T5', ['ev_tolga_ifade'], {
+          enabledWhen: has('clue_tolga_kask'),
           score: { SORGULAMA: 100 },
           effects: [
             inc('pers'),
@@ -861,6 +1066,7 @@ export const trial: CasePart = {
           ],
         }),
         presentRule('PS_T4', 'T4', ['ded_alibi', 'ev_zrapor'], {
+          enabledWhen: flag('press_t4'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -876,7 +1082,7 @@ export const trial: CasePart = {
               when: flag('fact_gps9'),
               lines: [
                 me(
-                  '9 Kasım, Kahve Durağı Z raporu: son satış 23.18, kasa kapanışı 23.41, kullanıcı kodu Kaan. Kafe Ihlamur Sokak’a yürüyerek on beş dakika.',
+                  '9 Kasım, Kahve Durağı Z raporu: 22.53, 23.02 ve 23.11’de Kaan’ın koduyla satış; iki kartlı ödemenin banka slibi var. Kafe Ihlamur Sokak’a yürüyerek on beş dakika.',
                 ),
                 me(
                   'Ve Paketçi’nin GPS kaydı: 22.58 ile 23.04 arasında binanın kapısında, siparişsiz bekleyen bir kurye cihazı. Barış Demirel’in.',
@@ -889,12 +1095,23 @@ export const trial: CasePart = {
             {
               lines: [
                 me(
-                  '9 Kasım, Kahve Durağı Z raporu: son satış 23.18, kasa kapanışı 23.41, kullanıcı kodu Kaan. Kafe Ihlamur Sokak’a yürüyerek on beş dakika.',
+                  '9 Kasım, Kahve Durağı Z raporu: 22.53, 23.02 ve 23.11’de Kaan’ın koduyla satış; iki kartlı ödemenin banka slibi var. Kafe Ihlamur Sokak’a yürüyerek on beş dakika.',
                 ),
                 me('Saat 23.00’te sanık kasa başında kahve satıyordu. Sizin kapınızda kim vardı?'),
                 s('tolga', 'Ben… saat yanlış olabilir. Yani belki on bir buçuk…', 'saskin'),
                 s('uye', 'Devriye sizi 23.09’da yakalamış, tanık. Tutanak var.'),
                 th('Saat, bir yalanın en inatçı tanığıdır. Kimse onu ikna edemez.'),
+              ],
+            },
+          ],
+        }),
+        presentRule('PS_T4_ERKEN', 'T4', ['ded_alibi', 'ev_zrapor'], {
+          enabledWhen: not(flag('press_t4')),
+          responses: [
+            {
+              lines: [
+                s('tolga', 'Saat… on bir gibi dedim. Gibi. Yani tam bilmiyorum ki.'),
+                th('“Gibi.” Kâğıdı şimdi gösterirsem saatini kaydırır. Önce o saate yemin ettirmeliyim.'),
               ],
             },
           ],
@@ -972,79 +1189,120 @@ export const trial: CasePart = {
       ],
       next: 'T_04R',
       options: [
-        option(
-          'T04_A',
-          'Arka oda kararın kapsamı dışında, kilit kırılarak arandı: hükme esas alınamaz (Anayasa 38/6, CMK 206/2-a, 217/2)',
-          {
-            effects: [
-              ifThen(
-                any(flag('contra_s1'), flag('contra_s3')),
-                [
-                  score('USUL_BILGISI', 150),
-                  raise('key_excluded'),
-                  inc('legal_hits'),
-                  inc('pers'),
-                  mark(
-                    'GOOD',
-                    'Arama kararı “şüphelinin kullanımındaki oda ve ortak alanlar” ile sınırlıydı; üçüncü kişinin kilitli odası zorla açıldı (CMK 119/1–2). Kapsam dışı aramayla elde edilen delil hukuka aykırıdır ve hükme esas alınamaz (Anayasa 38/6, CMK 206/2-a, 217/2, 230/1-b).',
-                    'USUL_BILGISI',
-                  ),
-                ],
-                [
-                  score('USUL_BILGISI', -40),
-                  mark(
-                    'BAD',
-                    'Kapsam dışı arama iddiası duruşmada ispatlanmadı: kilidin kırıldığını ve kararın kapsamını tanığa kabul ettirmedin.',
-                    'USUL_BILGISI',
-                  ),
-                ],
-              ),
-            ],
-            responses: [
-              {
-                when: any(flag('contra_s1'), flag('contra_s3')),
-                lines: [
-                  me(
-                    'Sayın Başkan, karar arka odayı kapsamıyordu. Tanık kilidin keskiyle kesildiğini, odanın sanığa ait olduğunu “sandığını” birinci celsede kabul etti.',
-                  ),
-                  me(
-                    'Hâkim, talep yazısında bir ev arkadaşı olduğunu bile bile sınırı çizmişti. Kolluk o sınırı bir keskiyle geçti. Kapsam dışı bir aramanın meyvesi, ne kadar ağır olursa olsun, hükmün kefesine konamaz.',
-                  ),
-                  s('savci', 'Sayın Başkan, kolluğun iyi niyetle hareket ettiği açıktır.'),
-                  me('İyi niyet bir kilidi açmaz, Sayın Savcı. Bir karar açar.'),
-                  s('baskan', 'Kayıtlara geçti. Heyet hükümde değerlendirecek.'),
-                ],
-              },
-              {
-                lines: [
-                  me('Sayın Başkan, arama kapsamı aştı.'),
-                  s('baskan', 'Bunu gösteren bir tespit dosyada yok, müdafi.'),
-                ],
-              },
-            ],
-          },
-        ),
+        option('T04_A', 'Arka oda kararın kapsamı dışındaydı; kilidi keskiyle kırıp girdiler', {
+          effects: [
+            ifThen(
+              all(flag('contra_s1'), flag('contra_s2'), flag('defter_sunuldu')),
+              [
+                score('USUL_BILGISI', 150),
+                raise('key_excluded'),
+                inc('legal_hits'),
+                inc('pers'),
+                mark(
+                  'GOOD',
+                  'Arama kararı “şüphelinin kullanımındaki oda ve ortak alanlar” ile sınırlıydı; üçüncü kişinin kilitli odası zorla açıldı (CMK 119/1–2). Kapsam dışı aramayla elde edilen delil hukuka aykırıdır ve hükme esas alınamaz (Anayasa 38/6, CMK 206/2-a, 217/2, 230/1-b).',
+                  'USUL_BILGISI',
+                ),
+              ],
+              [
+                score('USUL_BILGISI', -40),
+                mark(
+                  'BAD',
+                  'Kapsam dışı arama iddiası duruşmada ispatlanmadı: kilidin kırıldığı, kararın kapsamı, odanın sanığın kullanımında olmadığı ve kime kiralandığı (ev sahibinin defteri) birlikte kayda geçmeliydi.',
+                  'USUL_BILGISI',
+                ),
+              ],
+            ),
+          ],
+          responses: [
+            {
+              when: all(flag('contra_s1'), flag('contra_s2'), not(flag('defter_sunuldu'))),
+              lines: [
+                me(
+                  'Sayın Başkan, kararın kapsamı okundu; kolluk kilidi keskiyle kesti ve odanın sanığa ait olduğunu “varsaydığını” söyledi.',
+                ),
+                s(
+                  'baskan',
+                  'Varsayım çöktü, müdafi; kayda geçti. Ama kapsam dışı aramadan söz edebilmek için o odanın başkasının kullanımında olduğu tespit edilmeli. Odanın kime kiralandığına dair dosyada bir kayıt ya da tanık yok.',
+                ),
+                th(
+                  'Odanın Kaan’ın olmadığını gösterdim; kimin olduğunu göstermedim. Nesrin Hanım’ın defteri, kendi ağzından, bu salonda okunmalıydı.',
+                ),
+              ],
+            },
+            {
+              when: all(flag('contra_s1'), not(flag('contra_s2'))),
+              lines: [
+                me(
+                  'Sayın Başkan, kararın kapsamı okundu: şüphelinin kullanımındaki oda. Kolluk kilidi keskiyle kesti.',
+                ),
+                s(
+                  'baskan',
+                  'Kapsam belli, müdafi. Ama arka odanın sanığın kullanımında olmadığı duruşmada tespit edilmedi; tanık krokisini hâlâ savunuyor. Kararın sınırı odanın kime ait olduğuna bağlı.',
+                ),
+                th(
+                  'Kilidi ve kâğıdı gösterdim; odanın Kaan’ın olmadığını göstermedim. Sınır o odanın sahibinden geçiyordu.',
+                ),
+              ],
+            },
+            {
+              when: flag('contra_s1'),
+              lines: [
+                me(
+                  'Sayın Başkan, karar arka odayı kapsamıyordu. Tanık kilidin keskiyle kesildiğini, odanın sanığa ait olduğunu “sandığını” birinci celsede kabul etti.',
+                ),
+                me(
+                  'Hâkim, talep yazısında bir ev arkadaşı olduğunu bile bile sınırı çizmişti. Kolluk o sınırı bir keskiyle geçti. Anayasa 38/6, CMK 206/2-a ve 217/2: kapsam dışı bir aramanın meyvesi hükmün kefesine konamaz.',
+                ),
+                s('savci', 'Sayın Başkan, kolluğun iyi niyetle hareket ettiği açıktır.'),
+                me('İyi niyet bir kilidi açmaz, Sayın Savcı. Bir karar açar.'),
+                s('baskan', 'Kayıtlara geçti. Heyet hükümde değerlendirecek.'),
+              ],
+            },
+            {
+              when: flag('contra_s3'),
+              lines: [
+                me('Sayın Başkan, tanık arka odanın kilidini keskiyle kestiklerini birinci celsede kabul etti.'),
+                s(
+                  'baskan',
+                  'Kilidin kırılması tek başına kararın dışına çıkıldığını göstermez, müdafi. Kararın neyi kapsadığını tanığa okuttunuz mu?',
+                ),
+                th('Okutmadım. Kilidi gösterdim, sınırı göstermedim. Kapsam satırı dosyada duruyordu.'),
+              ],
+            },
+            {
+              lines: [
+                me('Sayın Başkan, arama kapsamı aştı.'),
+                s('baskan', 'Bunu gösteren bir tespit dosyada yok, müdafi.'),
+              ],
+            },
+          ],
+        }),
         option('T04_B', 'Materyal sanığa ait değil; arka oda üçüncü kişinin zilyetliğindeydi', {
           score: { DELIL_ANALIZI: 75 },
           good: 'Zilyetlik itirazı yerinde ama usul boyutu eksik kaldı: kapsam dışı arama ayrıca ileri sürülmeliydi.',
           responses: [{ lines: [s('baskan', 'Kayda geçti.')] }],
         }),
-        option('T04_C', 'Arama gece vakti yapıldı (CMK 118)', {
+        option('T04_C', 'Arama gece başladı; gece araması için ayrıca gerekçe yok', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
-          bad: 'Gece vakti, güneş batışından bir saat sonra başlayıp doğuşundan bir saat öncesine kadar süren zamandır (TCK 6/1-e). 11 Kasım’da Bursa’da güneş saat yediden sonra doğar; 06.05’te gece sona ermişti. Dayanaksız itiraz.',
+          bad: 'Gece vakti, güneşin batmasından bir saat sonra başlayıp doğmasından bir saat öncesine kadar süren zamandır (TCK 6/1-e; CMK 118). 11 Kasım’da Bursa’da güneş 07.43’te doğar; gece vakti 06.43’te biter. Arama 07.00’de başladı: hava karanlık olsa da gece vakti değildi. Dayanaksız itiraz.',
           responses: [
             {
               lines: [
-                s('savci', 'Saat altıyı geçmişti, güneşin doğuşuna bir saatten az vardı. Gece değil.'),
+                s(
+                  'savci',
+                  'Güneş yediyi kırk üç geçe doğdu, Sayın Başkan. Gece vakti ondan bir saat önce biter. Ekip kapıyı yedide çaldı. Karanlık, gece demek değildir.',
+                ),
                 s('baskan', 'Reddedildi.'),
               ],
             },
           ],
         }),
-        option('T04_D', 'Diyeceğimiz yok', {
-          bad: 'Kapsam dışı aramaya itiraz edilmedi; delil yasağı ileri sürülmedi.',
+        option('T04_D', 'Takdir heyetindir; bir diyeceğimiz yok', {
+          bad: 'Delil yasağı bir takdir meselesi değildir: hukuka aykırı elde edilen delil hükme esas alınamaz ve bunu tartışmanın yeri tam da delillerin tartışılmasıdır (CMK 206/2-a, 217/2). Kapsam dışı arama ileri sürülmedi.',
           category: 'USUL_BILGISI',
+          responses: [{ lines: [s('baskan', 'Peki. Savcılığın delillerine karşı bir beyan yok; kayda geçti.')] }],
         }),
       ],
     }),
@@ -1061,48 +1319,85 @@ export const trial: CasePart = {
       ],
       next: 'T_05',
       options: [
-        option(
-          'T04B_A',
-          'Şekerlik arka oda kapısının dibindeydi; paketler arka odanın stoğundan. Kavanozdaki iz, kavanozu kullananı gösterir',
-          {
-            visibleWhen: has('ded_sekerlik'),
-            score: { DELIL_ANALIZI: 150 },
-            effects: [
-              raise('jar_cleared'),
-              inc('pers'),
-              mark(
-                'GOOD',
-                'Aynı poşet, aynı kesim, aynı gramaj ve şekerliğin arka oda kapısındaki yeri: “ortak alan” tezi düştü. Kavanozdaki iz bir alışkanlığı gösterir, zilyetliği değil.',
-                'DELIL_ANALIZI',
-              ),
-            ],
-            responses: [
-              {
-                when: flag('fact_seker_k'),
-                lines: [
-                  me(
-                    'Fotoğraf albümü, 23 numaralı kare: şekerlik koridordaki rafta, arka oda kapısına iki adım. Sanık şekerliğin mutfaktan oraya kiracı tarafından taşındığını anlattı.',
-                  ),
-                  me(
-                    'Kriminal rapor: iki paket, arka odadaki kırk altı paketle aynı poşet, aynı kesim, aynı gramaj. Paketlerde sanığın izi yok; kavanozda var, çünkü sanık günde beş çay içiyor.',
-                  ),
-                  s('uye', 'Sayın Savcı, paketlerde iz var mı?'),
-                  s('savci', 'Yok, Sayın Hâkim.'),
-                ],
-              },
-              {
-                lines: [
-                  me('Fotoğraf albümü, 23 numaralı kare: şekerlik koridordaki rafta, arka oda kapısına iki adım.'),
-                  me(
-                    'Kriminal rapor: iki paket, arka odadaki kırk altı paketle aynı poşet, aynı kesim, aynı gramaj. Paketlerde sanığın izi yok; kavanozda var, çünkü sanık oradan şeker alıyor.',
-                  ),
-                  s('uye', 'Sayın Savcı, paketlerde iz var mı?'),
-                  s('savci', 'Yok, Sayın Hâkim.'),
-                ],
-              },
-            ],
-          },
-        ),
+        option('T04B_A', 'Paketler arka odanın stoğundan', {
+          visibleWhen: any(has('ded_sekerlik'), has('ded_stok')),
+          effects: [
+            ifThen(
+              // Aynı stok (uzman mütalaası) ve kavanozdaki izin sanığın duruşmadaki açıklaması birlikte.
+              all(has('ded_stok'), chosen('Q_SEKER')),
+              [
+                score('DELIL_ANALIZI', 150),
+                raise('jar_cleared'),
+                inc('pers'),
+                mark(
+                  'GOOD',
+                  'Uzman mütalaası (CMK 67/6): ardışık poşet numaraları, aynı kapatma izi, aynı saflık; şekerlik de arka oda kapısının dibinde. “Ortak alan” tezi düştü. Kavanozdaki iz bir alışkanlığı gösterir, zilyetliği değil.',
+                  'DELIL_ANALIZI',
+                ),
+              ],
+              [
+                score('DELIL_ANALIZI', 30),
+                mark(
+                  'NEUTRAL',
+                  'Doğru yön, eksik dayanak: kriminal rapor yalnızca “aynı tip poşet” diyor. Benzerliği aynı stok tespitine çevirecek bir karşılaştırma (uzman mütalaası) sunmadın; savcının “ortak alan” tezi ayakta kaldı.',
+                  'DELIL_ANALIZI',
+                ),
+              ],
+            ),
+          ],
+          responses: [
+            {
+              when: all(has('ded_stok'), not(chosen('Q_SEKER'))),
+              lines: [
+                me(
+                  'Sayın Başkan, uzman mütalaası: şekerlikteki iki poşet arka odadaki rulonun ardışık numaraları. Aynı makine, aynı saflık.',
+                ),
+                s(
+                  'savci',
+                  'Paketler arka odanın stoğundan olabilir, Sayın Başkan. Ama kavanozun üzerinde sanığın izi var. Sanık o kavanozla ne yaptığını bu salonda bir kez bile anlatmadı.',
+                ),
+                s('baskan', 'Kayda geçti. Sanığın bu konuda bir beyanı yok, müdafi.'),
+                th(
+                  'Rulonun sırasını getirdim; kavanozdaki izin hikâyesini getirmedim. Kaan’a birinci celsede şekerliği sormadım. Bir iz, açıklanmadıkça bir soru olarak kalır.',
+                ),
+              ],
+            },
+            {
+              when: has('ded_stok'),
+              lines: [
+                me(
+                  'Fotoğraf albümü, 23 numaralı kare: şekerlik koridordaki rafta, arka oda kapısına iki adım. Kolluk tanığı birinci celsede bunu kabul etti.',
+                ),
+                me('Sanık da anlattı: şekerliği çay için kullanırdı; ekimde onu kiracı kendi kapısının yanına taşıdı.'),
+                me(
+                  'Ve Doç. Dr. Aylin Korkmaz’ın mütalaası, kriminal raporun kendi ekleri üzerinden: şekerlikteki iki poşetin kenar numaraları arka odadaki rulonun ardışık numaraları. Aynı kapatma makinesi, aynı saflık, aynı kesme maddesi.',
+                ),
+                s('savci', 'Sayın Başkan, bu bir taraf mütalaasıdır. Heyeti bağlamaz.'),
+                me('Bağlamaz, Sayın Savcı. Ama uzman salonda. Dinlenmesini talep ediyoruz.'),
+                s(
+                  'uzman',
+                  'Ölçtüğüm şey poşetlerdir, Sayın Başkan; insanlar değil. Poşetler aynı rulodan, sırayla kesilmiş. Şekerliğe kimin koyduğunu bilmem; bilseydim de söylemek benim işim olmazdı.',
+                ),
+                s('uye', 'Sayın Savcı, paketlerde sanığın izi var mı?'),
+                s('savci', 'Yok, Sayın Hâkim.'),
+                th('Bir kavanozun dışındaki iz ile bir rulonun sırası. Savcının yedek planı da masada kaldı.'),
+              ],
+            },
+            {
+              lines: [
+                me(
+                  'Fotoğraf albümü, 23 numaralı kare: şekerlik arka oda kapısına iki adım. Kriminal rapor: aynı tip poşet, aynı gramaj.',
+                ),
+                s(
+                  'savci',
+                  'Aynı tip poşet her markette satılır, Sayın Başkan. Laboratuvar aynı parti dememiş. Kavanozda sanığın izi var.',
+                ),
+                s('baskan', 'Kayda geçti. Heyet benzerliği tespit saymaz.'),
+                th('Bir benzerlikle bir kavanozu taşımaya çalıştım. Benzerlik bir soru; cevabını getirmedim.'),
+              ],
+            },
+          ],
+        }),
         option('T04B_B', 'Kavanozdaki iz sanığın çay içtiğini gösterir; paketleri koyduğunu değil', {
           score: { DELIL_ANALIZI: 50 },
           good: 'Doğru bir itiraz; ama paketlerin hangi stoktan geldiğini göstermeden “ortak zilyetlik” tezi tamamen düşmez.',
@@ -1117,13 +1412,13 @@ export const trial: CasePart = {
             },
           ],
         }),
-        option('T04B_C', 'Ortak alanda bulunan madde ev sahibine aittir', {
+        option('T04B_C', 'Şekerlik ev sahibinin demirbaşı; zilyet odur', {
           score: { DELIL_ANALIZI: -50 },
           effects: [dec('cred')],
           bad: 'Ortak alandaki eşya kendiliğinden ev sahibine ait sayılmaz; zilyetlik fiilî hâkimiyete bakar. Dayanaksız ve tanığı (ev sahibi) zor durumda bırakan bir iddia.',
           responses: [{ lines: [s('baskan', 'Müdafi, bu iddianın bir dayanağı var mı? Kayda geçmedi.')] }],
         }),
-        option('T04B_D', 'Diyeceğimiz yok', {
+        option('T04B_D', 'Ek beyanımız yok', {
           bad: 'Savcılığın “ortak alan” tezi cevapsız kaldı.',
           category: 'DELIL_ANALIZI',
         }),
@@ -1132,9 +1427,11 @@ export const trial: CasePart = {
     decisionNode(
       'T_05',
       [
-        { when: all(flag('tolga_kirildi'), has('ev_iz_eslesme')), to: 'T_05B' },
+        // Mütalaa kaydı izler: savcı beraat istediyse hüküm beraattir (T_05B / T_05E yalnızca beraat_e tutarken); oda
+        // sanığa bağlanamamış ve muhbirin satış anlatımı çökmüş ama şekerlik aklanmamışsa 191 + CMK 226 hatırlatması.
+        { when: all(flag('tolga_kirildi'), has('ev_iz_eslesme'), ref('beraat_e')), to: 'T_05B' },
         { when: ref('beraat_e'), to: 'T_05E' },
-        { when: flag('contra_s2'), to: 'T_05N' },
+        { when: all(flag('contra_s2'), not(flag('jar_cleared')), muhbirCoktu), to: 'T_05N' },
         { to: 'T_05M' },
       ],
       { ...court2.base },
@@ -1173,31 +1470,68 @@ export const trial: CasePart = {
     court2.objection('T_05E', {
       title: 'Mütalaa',
       courtStage: 'MUTALAA',
-      say: [
-        s(
-          'savci',
-          'Sayın Başkan. Arka odanın sanığın kullanımında olduğu kanıtlanamamıştır; kolluk bunu varsaydığını beyan etmiştir. Şekerlikteki paketlerin de aynı stoktan geldiği anlaşılmaktadır.',
-        ),
-        s(
-          'savci',
-          'Muhbir beyanı çelişkilidir: kask, saat ve tanığın sanıkla olan geçmişi beyanın güvenilirliğini zayıflatmaktadır.',
-        ),
-        s(
-          'savci',
-          'Sanığın madde kullanıcısı olduğu sabittir; ancak kullanım bu davanın konusu değildir. Ticaret kastına dair kesin ve inandırıcı delil yoktur.',
-        ),
-        s(
-          'savci',
-          'Sanığın atılı suçu işlediği sabit olmadığından beraatine; arka odanın kiracısı hakkında suç duyurusunda bulunulmasına karar verilmesini talep ederim.',
-        ),
-        n(
-          'Serap Akın oturdu. Kalemini masanın kenarına paralel bıraktı; her zamanki gibi. Bana bakmadı. Bakmasına gerek yoktu.',
-        ),
-        s('baskan', 'Müdafi, mütalaaya karşı diyeceğiniz?'),
+      lines: [
+        {
+          when: all(
+            flag('contra_s2'),
+            any(flag('contra_t3'), flag('contra_t4'), flag('contra_t5'), flag('tolga_kirildi')),
+          ),
+          lines: [
+            s(
+              'savci',
+              'Sayın Başkan. Arka odanın sanığın kullanımında olduğu kanıtlanamamıştır; kolluk bunu varsaydığını beyan etmiştir. Şekerlikteki paketlerin de aynı stoktan geldiği anlaşılmaktadır.',
+            ),
+            s(
+              'savci',
+              'Muhbir beyanı çelişkilidir: kask, saat ve tanığın sanıkla olan geçmişi beyanın güvenilirliğini zayıflatmaktadır.',
+            ),
+            s(
+              'savci',
+              'Sanığın madde kullanıcısı olduğu sabittir; ancak kullanım bu davanın konusu değildir. Ticaret kastına dair kesin ve inandırıcı delil yoktur.',
+            ),
+            s(
+              'savci',
+              'Sanığın atılı suçu işlediği sabit olmadığından beraatine; arka odanın kiracısı hakkında suç duyurusunda bulunulmasına karar verilmesini talep ederim.',
+            ),
+            n(
+              'Serap Akın oturdu. Kalemini masanın kenarına paralel bıraktı; her zamanki gibi. Bana bakmadı. Bakmasına gerek yoktu.',
+            ),
+            s('baskan', 'Müdafi, mütalaaya karşı diyeceğiniz?'),
+          ],
+        },
+        {
+          when: flag('contra_s2'),
+          lines: [
+            s(
+              'savci',
+              'Sayın Başkan. Arka odanın sanığın kullanımında olduğu kanıtlanamamıştır; kolluk bunu varsaydığını beyan etmiştir. Şekerlikteki paketlerin de aynı stoktan geldiği anlaşılmaktadır.',
+            ),
+            s(
+              'savci',
+              'Arka oda sanığa bağlanamadığına göre oradaki materyal satıcının kim olduğu hakkında bir şey söylemiyor.',
+            ),
+            s(
+              'savci',
+              'Geriye muhbirin beyanı kalıyor: etkin pişmanlık beklentisiyle verilmiş, kimlik yönünden başka bir delille desteklenmeyen tek bir beyan.',
+            ),
+            s(
+              'savci',
+              'Sanığın madde kullanıcısı olduğu sabittir; ancak kullanım bu davanın konusu değildir. Ticaret kastına dair kesin ve inandırıcı delil yoktur.',
+            ),
+            s(
+              'savci',
+              'Sanığın atılı suçu işlediği sabit olmadığından beraatine; arka odanın kiracısı hakkında suç duyurusunda bulunulmasına karar verilmesini talep ederim.',
+            ),
+            n(
+              'Serap Akın oturdu. Kalemini masanın kenarına paralel bıraktı; her zamanki gibi. Bana bakmadı. Bakmasına gerek yoktu.',
+            ),
+            s('baskan', 'Müdafi, mütalaaya karşı diyeceğiniz?'),
+          ],
+        },
       ],
       next: 'T_06P',
       options: [
-        option('T05E_A', 'Mütalaaya katılıyoruz; sanığın kullanıcılığı ticaret kastının kanıtı değildir', {
+        option('T05E_A', 'Katılıyoruz; kullanım ticaret değil', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits')],
           good: 'Cevap hakkı yerinde kullanıldı (CMK 216/2): kullanım ile ticaret ayrımı hükmün gerekçesine taşındı.',
@@ -1214,8 +1548,10 @@ export const trial: CasePart = {
             },
           ],
         }),
-        option('T05E_B', 'Diyeceğimiz yok', { neutral: 'Lehe mütalaa karşısında söz kullanılmadı.' }),
-        option('T05E_C', 'Polis hakkında da suç duyurusu talep ediyoruz', {
+        option('T05E_B', 'Diyeceğimiz yok; takdir yüksek heyetindir', {
+          neutral: 'Lehe mütalaa karşısında söz kullanılmadı.',
+        }),
+        option('T05E_C', 'Polisler için suç duyurusu istiyoruz', {
           score: { USUL_BILGISI: -30 },
           bad: 'Kolluğun kapsam dışı araması delil yasağı doğurur; ama mütalaaya cevap, bir tanık hakkında suç duyurusu talep etmenin yeri değildir.',
         }),
@@ -1224,20 +1560,61 @@ export const trial: CasePart = {
     court2.objection('T_05N', {
       title: 'Mütalaa',
       courtStage: 'MUTALAA',
-      say: [
-        s('savci', 'Sayın Başkan. Arka odanın sanığa ait olduğu tartışmalı hâle gelmiştir; ticaret kastı şüphelidir.'),
-        s(
-          'savci',
-          'Ancak sanığın kullanıcı olduğu saç analiziyle sabittir ve şekerlikteki iki paket ortak alanda, sanığın erişimindedir. Eylemin TCK 191/1 kapsamında kullanmak için bulundurma olarak değerlendirilmesini talep ederim.',
-        ),
-        s(
-          'baskan',
-          'Sanık ve müdafi: eylemin TCK 191/1 kapsamında değerlendirilebileceği hususu ek savunmanız için hatırlatıldı.',
-        ),
+      lines: [
+        {
+          when: flag('contra_t4'),
+          lines: [
+            s(
+              'savci',
+              'Sayın Başkan. Arka odanın sanığa ait olduğu tartışmalı hâle gelmiştir. Muhbirin satış anlatımı da sanığın o saatte işyerinde olduğunu gösteren kasa kaydı karşısında ayakta kalmamıştır; ticaret kastı ispatlanamamıştır.',
+            ),
+            s(
+              'savci',
+              'Ancak sanığın kullanıcı olduğu saç analiziyle sabittir ve şekerlikteki iki paket ortak alanda, sanığın erişimindedir. Eylemin TCK 191/1 kapsamında kullanmak için bulundurma olarak değerlendirilmesini talep ederim.',
+            ),
+            s(
+              'baskan',
+              'Sanık ve müdafi: eylemin TCK 191/1 kapsamında değerlendirilebileceği hususu ek savunmanız için hatırlatıldı.',
+            ),
+          ],
+        },
+        {
+          when: flag('tolga_kirildi'),
+          lines: [
+            s(
+              'savci',
+              'Sayın Başkan. Arka odanın sanığa ait olduğu tartışmalı hâle gelmiştir. Muhbir de bu salonda paketi sanıktan değil, arka odanın kiracısından aldığını söylemiştir; satış sanığa bağlanamamıştır.',
+            ),
+            s(
+              'savci',
+              'Ancak sanığın kullanıcı olduğu saç analiziyle sabittir ve şekerlikteki iki paket ortak alanda, sanığın erişimindedir. Eylemin TCK 191/1 kapsamında kullanmak için bulundurma olarak değerlendirilmesini talep ederim.',
+            ),
+            s(
+              'baskan',
+              'Sanık ve müdafi: eylemin TCK 191/1 kapsamında değerlendirilebileceği hususu ek savunmanız için hatırlatıldı.',
+            ),
+          ],
+        },
+        {
+          lines: [
+            s(
+              'savci',
+              'Sayın Başkan. Arka odanın sanığa ait olduğu tartışmalı hâle gelmiştir. Muhbirin tarif ettiği satıcı kasklı bir kuryedir; sanığın ne kaskı ne ehliyeti var. Satış anlatımı sanığa bağlanamamıştır.',
+            ),
+            s(
+              'savci',
+              'Ancak sanığın kullanıcı olduğu saç analiziyle sabittir ve şekerlikteki iki paket ortak alanda, sanığın erişimindedir. Eylemin TCK 191/1 kapsamında kullanmak için bulundurma olarak değerlendirilmesini talep ederim.',
+            ),
+            s(
+              'baskan',
+              'Sanık ve müdafi: eylemin TCK 191/1 kapsamında değerlendirilebileceği hususu ek savunmanız için hatırlatıldı.',
+            ),
+          ],
+        },
       ],
       next: 'T_06P',
       options: [
-        option('T05N_A', 'Ek savunma için süre talep ediyoruz; şekerliğin kime ait olduğu tartışılmadı', {
+        option('T05N_A', 'Nitelik değişti; ek savunma için süre talep ediyoruz', {
           score: { USUL_BILGISI: 100 },
           effects: [raise('ek_savunma'), inc('legal_hits')],
           good: 'Suçun hukuki niteliğinin değişmesi hâlinde sanığa haber verilir ve istemi üzerine ek savunma süresi tanınır (CMK 226/1, 226/3).',
@@ -1245,12 +1622,12 @@ export const trial: CasePart = {
             { lines: [s('baskan', 'Talep kabul. Kısa bir ara veriliyor; ek savunmanızı aynı celsede alacağız.')] },
           ],
         }),
-        option('T05N_B', 'Ek savunmamız hazır: sanık kullanıcıdır ama o paketler onun değildir', {
+        option('T05N_B', 'Ek savunmamız hazır: paketler onun değil', {
           score: { USUL_BILGISI: 50 },
           effects: [raise('ek_savunma')],
           good: 'Ek savunma yapıldı (CMK 226/1); ama paketlerin hangi stoktan geldiği delille gösterilmedi.',
         }),
-        option('T05N_C', 'Nitelik değişikliğine itiraz ediyoruz: iddianame 188 diyor, mahkeme bununla bağlı', {
+        option('T05N_C', 'İtiraz: mahkeme iddianamedeki nitelikle bağlı', {
           score: { USUL_BILGISI: -50 },
           effects: [raise('ek_savunma'), dec('cred')],
           bad: 'Mahkeme fiilin nitelendirilmesinde iddia ve savunmayla bağlı değildir (CMK 225/2); yalnızca iddianamedeki fiil ve failden ayrılamaz. Doğrusu ek savunma hakkını kullanmaktır (CMK 226).',
@@ -1265,16 +1642,34 @@ export const trial: CasePart = {
     court2.objection('T_05M', {
       title: 'Mütalaa',
       courtStage: 'MUTALAA',
-      say: [
-        s(
-          'savci',
-          'Sayın Başkan. Kira sözleşmesi sanık adına; arka odada ve ortak alanda ele geçen kırk sekiz paket, hassas terazi ve kilitli poşetler ticaret kastını açıkça göstermektedir.',
-        ),
-        s(
-          'savci',
-          'Muhbir beyanı da bu yöndedir. Sanığın TCK 188/3 ve 188/4-a uyarınca cezalandırılmasını, tutukluluğunun devamını talep ederim.',
-        ),
-        s('baskan', 'Müdafi, mütalaaya karşı diyeceğiniz?'),
+      lines: [
+        {
+          when: flag('contra_s2'),
+          lines: [
+            s(
+              'savci',
+              'Sayın Başkan. Arka odanın sanığın kullanımında olduğu kanıtlanamamıştır; bunu kabul ediyorum. Ama muhbir paketi Daire 7’den, sanıktan aldığını söylüyor ve bu salonda da söyledi.',
+            ),
+            s(
+              'savci',
+              'Aynı dairede kırk altı paket, hassas terazi ve kilitli poşetler ele geçti. Muhbirin anlattığı satış bir boşlukta durmuyor. Sanığın TCK 188/3 ve 188/4-a uyarınca cezalandırılmasını talep ederim.',
+            ),
+            s('baskan', 'Müdafi, mütalaaya karşı diyeceğiniz?'),
+          ],
+        },
+        {
+          lines: [
+            s(
+              'savci',
+              'Sayın Başkan. Kira sözleşmesi sanık adına; arka odada ve ortak alanda ele geçen kırk sekiz paket, hassas terazi ve kilitli poşetler ticaret kastını açıkça göstermektedir.',
+            ),
+            s(
+              'savci',
+              'Muhbir beyanı da bu yöndedir. Sanığın TCK 188/3 ve 188/4-a uyarınca cezalandırılmasını, tutukluluğunun devamını talep ederim.',
+            ),
+            s('baskan', 'Müdafi, mütalaaya karşı diyeceğiniz?'),
+          ],
+        },
       ],
       next: 'T_06P',
       options: [
@@ -1423,62 +1818,109 @@ export const trial: CasePart = {
       prompt: s('baskan', 'Müdafi, esas hakkındaki savunmanızı yapın.'),
       next: 'T_07',
       choices: [
-        option(
-          'T06_B',
-          'Yüklenen suç sanık tarafından işlenmemiştir; gerçek fail arka odanın kiracısıdır (CMK 223/2-b)',
-          {
-            effects: [
-              ifThen(
-                all(flag('tolga_kirildi'), has('ev_iz_eslesme')),
-                [
-                  score('SAVUNMA_STRATEJISI', strategyAmount(200, 'MASUMIYET')),
-                  inc('pers'),
-                  raise('gercek_fail'),
-                  raise('beraat_savunma'),
-                  mark(
-                    'GOOD',
-                    'Gerçek fail iddiası delillerle örtüşüyor: terazideki iz, muhbirin dönüşü, kurye kayıtları.',
-                    'SAVUNMA_STRATEJISI',
-                  ),
-                ],
-                [
-                  score('SAVUNMA_STRATEJISI', -100),
-                  dec('pers'),
-                  mark(
-                    'BAD',
-                    'Gerçek fail iddiası duruşmada ispatlanmadı: suçun sanık tarafından işlenmediği “sabit” değil.',
-                    'SAVUNMA_STRATEJISI',
-                  ),
-                ],
-              ),
-            ],
-            responses: [
-              {
-                lines: [
-                  me('Sayın Başkan, Sayın Üye. Bu dosya bir varsayımla başladı: ev onun, oda onun, toz onun.'),
-                  me(
-                    'Bugün o varsayımın yerinde bir parmak izi var. Terazide. Barış Demirel’in. Bir muhbir var; kimden aldığını sonunda söyledi. Bir kurye kaydı var; baskın sabahı köşeden dönen bir motor.',
-                  ),
-                  me(
-                    'Kaan Yıldız kullanıcıydı. Bunu kendi söyledi; kimse ona söyletmedi. Ama kullanan ile satan arasındaki çizgi burada, bu salonda, delillerle çizildi. Kaan o çizginin bu tarafında.',
-                  ),
-                  me('Suç işlenmiştir; ama müvekkilim tarafından değil. Beraatini talep ediyorum.'),
-                ],
-              },
-            ],
-          },
-        ),
-        option('T06_E', 'Suçun sanık tarafından işlendiği sabit değildir; şüpheden sanık yararlanır (CMK 223/2-e)', {
+        option('T06_B', 'Sanık suçu işlemedi; gerçek fail arka odanın kiracısıdır (CMK 223/2-b)', {
           effects: [
             ifThen(
-              all(flag('contra_s2'), any(flag('contra_t3'), flag('contra_t4'), flag('tolga_kirildi'))),
+              all(flag('tolga_kirildi'), has('ev_iz_eslesme')),
+              [
+                score('SAVUNMA_STRATEJISI', strategyAmount(200, 'MASUMIYET')),
+                inc('pers'),
+                raise('gercek_fail'),
+                raise('beraat_savunma'),
+                mark(
+                  'GOOD',
+                  'Gerçek fail iddiası delillerle örtüşüyor: terazideki iz, muhbirin dönüşü, kurye kayıtları.',
+                  'SAVUNMA_STRATEJISI',
+                ),
+              ],
+              [
+                score('SAVUNMA_STRATEJISI', -100),
+                dec('pers'),
+                mark(
+                  'BAD',
+                  'Gerçek fail iddiası duruşmada ispatlanmadı: suçun sanık tarafından işlenmediği “sabit” değil.',
+                  'SAVUNMA_STRATEJISI',
+                ),
+              ],
+            ),
+          ],
+          responses: [
+            {
+              when: all(flag('tolga_kirildi'), has('ev_iz_eslesme')),
+              lines: [
+                me('Sayın Başkan, Sayın Üye. Bu dosya bir varsayımla başladı: ev onun, oda onun, toz onun.'),
+                me(
+                  'Bugün o varsayımın yerinde bir parmak izi var. Terazide. Barış Demirel’in. Bir muhbir var; kimden aldığını sonunda söyledi. Bir kurye kaydı var; baskın sabahı köşeden dönen bir motor.',
+                ),
+                me(
+                  'Kaan Yıldız kullanıcıydı. Bunu kendi söyledi; kimse ona söyletmedi. Ama kullanan ile satan arasındaki çizgi burada, bu salonda, delillerle çizildi. Kaan o çizginin bu tarafında.',
+                ),
+                me('Suç işlenmiştir; ama müvekkilim tarafından değil. Beraatini talep ediyorum.'),
+              ],
+            },
+            {
+              when: flag('tolga_kirildi'),
+              lines: [
+                me('Sayın Başkan, Sayın Üye. Bu dosya bir varsayımla başladı: ev onun, oda onun, toz onun.'),
+                me(
+                  'O arka odada başka biri yaşıyordu. Malı satan, kapıyı kilitleyen, anahtarı cebinde taşıyan oydu. Müvekkilim suçu işlememiştir; gerçek fail arka odanın kiracısıdır.',
+                ),
+                s(
+                  'savci',
+                  'Bir tanık bu salonda bir isim söyledi, Sayın Başkan; ama terazide o ismin izi yok. Bir tanığın dönüşü “sabit” için yetmez.',
+                ),
+                s(
+                  'uye',
+                  'Müdafi, “işlemediği sabit” dediğiniz şeyi tanığın dönüşünden başka hangi delile dayandırıyorsunuz?',
+                ),
+                th('Bir isim, bir dönüş. “İşlemediği sabit” için bir iz lazımdı; terazide o iz yok.'),
+              ],
+            },
+            {
+              when: flag('defter_sunuldu'),
+              lines: [
+                me('Sayın Başkan, Sayın Üye. Bu dosya bir varsayımla başladı: ev onun, oda onun, toz onun.'),
+                me(
+                  'O arka odada başka biri yaşıyordu. Malı satan, kapıyı kilitleyen, anahtarı cebinde taşıyan oydu. Müvekkilim suçu işlememiştir; gerçek fail arka odanın kiracısıdır.',
+                ),
+                s(
+                  'savci',
+                  'Müdafi bir isim söylüyor, Sayın Başkan. Dosyada o isme ait bir iz yok, o ismi söyleyen bir tanık yok. Bir kira defteri bir kiracıyı gösterir; bir faili değil.',
+                ),
+                s('uye', 'Müdafi, “işlemediği sabit” dediğiniz şeyi hangi delile dayandırıyorsunuz?'),
+                th('Hangi delile? Bir kira defteri, bir şüphe. “Sabit” için bunlar yetmez.'),
+              ],
+            },
+            {
+              lines: [
+                me('Sayın Başkan, Sayın Üye. Bu dosya bir varsayımla başladı: ev onun, oda onun, toz onun.'),
+                me(
+                  'O arka odada başka biri yaşıyordu. Malı satan, kapıyı kilitleyen, anahtarı cebinde taşıyan oydu. Müvekkilim suçu işlememiştir; gerçek fail arka odanın kiracısıdır.',
+                ),
+                s(
+                  'savci',
+                  'Müdafi bir isim söylüyor, Sayın Başkan. Dosyada o isme ait bir iz yok, o ismi söyleyen bir tanık yok. Bir isim delil değildir.',
+                ),
+                s('uye', 'Müdafi, “işlemediği sabit” dediğiniz şeyi hangi delile dayandırıyorsunuz?'),
+                th('Hangi delile? Bir şüpheye. “Sabit” için şüphe yetmez.'),
+              ],
+            },
+          ],
+        }),
+        option('T06_E', 'Suçun sanık tarafından işlendiği sabit değil (CMK 223/2-e)', {
+          effects: [
+            ifThen(
+              all(
+                flag('contra_s2'),
+                any(flag('contra_t3'), flag('contra_t4'), flag('tolga_kirildi'), flag('key_excluded')),
+              ),
               [
                 score('SAVUNMA_STRATEJISI', strategyAmount(200, 'USUL')),
                 inc('pers'),
                 raise('beraat_savunma'),
                 mark(
                   'GOOD',
-                  'Odanın sanığa ait olduğu varsayımı çöktü, muhbirin anlatısı çelişkili: kalan şüphe sanık lehine (Anayasa 38/4).',
+                  'Odanın sanığa ait olduğu varsayımı çöktü; muhbirin anlatısı ya çelişkili ya da tek başına kaldı: kalan şüphe sanık lehine (Anayasa 38/4).',
                   'SAVUNMA_STRATEJISI',
                 ),
               ],
@@ -1494,6 +1936,7 @@ export const trial: CasePart = {
           ],
           responses: [
             {
+              when: all(flag('contra_s2'), flag('jar_cleared'), flag('contra_s3'), flag('contra_t3')),
               lines: [
                 me(
                   'Sayın Başkan. Savcılığın bütün hikâyesi tek bir kelimeye dayanıyordu ve o kelimeyi tanık bu salonda söyledi: varsaydım.',
@@ -1512,6 +1955,47 @@ export const trial: CasePart = {
                 ),
                 me(
                   'Sanığın beraatini talep ediyorum. Ve bir şey daha: bu salondan çıktığında perşembe günü bir doktoru var. Onu oraya gönderin; buraya değil.',
+                ),
+              ],
+            },
+            {
+              when: flag('contra_s2'),
+              lines: [
+                me(
+                  'Sayın Başkan. Savcılığın bütün hikâyesi tek bir kelimeye dayanıyordu ve o kelimeyi tanık bu salonda söyledi: varsaydım.',
+                ),
+                me(
+                  'Bir ev, iki oda. Kira sözleşmesi bir evin kime kiralandığını söyler; bir odanın kimin hâkimiyetinde olduğunu söylemez.',
+                ),
+                me(
+                  'Dosyada geriye kalan her şey o varsayımın üstüne kurulmuştu. Varsayım gidince, kalan delil sanığın suçu işlediğini kesin olarak göstermiyor. Kuşku varsa, o kuşku onundur.',
+                ),
+                me(
+                  'Sanığın beraatini talep ediyorum. Ve bir şey daha: bu salondan çıktığında perşembe günü bir doktoru var. Onu oraya gönderin; buraya değil.',
+                ),
+              ],
+            },
+            {
+              when: flag('key_excluded'),
+              lines: [
+                me(
+                  'Sayın Başkan. Arka odadaki her şey, kararın sınırını bir keskiyle geçen bir aramanın ürünüdür; hükme esas alınamaz. Keskiyi tanık kendi ağzıyla anlattı.',
+                ),
+                me(
+                  'O materyal düşünce geriye bir muhbirin sözü kalıyor. Başka hiçbir delille desteklenmeyen, ceza indirimi umuduyla verilmiş tek bir söz.',
+                ),
+                me('Kuşku varsa, o kuşku onundur. Sanığın beraatini talep ediyorum.'),
+              ],
+            },
+            {
+              lines: [
+                me(
+                  'Sayın Başkan. Savcılık bu odanın müvekkilime ait olduğunu ispat etmedi; bir kira sözleşmesi bir odanın kimin hâkimiyetinde olduğunu söylemez.',
+                ),
+                me('Kuşku varsa, o kuşku onundur. Sanığın beraatini talep ediyorum.'),
+                s(
+                  'savci',
+                  'Kolluk tanığı odanın sanığa ait olduğunu söyledi, Sayın Başkan; aksini söyleyen kimse çıkmadı. Kuşku bir iddiayla doğmaz.',
                 ),
               ],
             },
@@ -1563,7 +2047,7 @@ export const trial: CasePart = {
       prompt: s('baskan', 'Sanık, son sözünüz?'),
       next: 'T_08',
       choices: [
-        option('T07_A', '“Kullandım. Satmadım. Perşembe randevum var; gitmek istiyorum.”', {
+        option('T07_A', '“Kullandım. Satmadım. Perşembe günü doktor randevum var.”', {
           score: { SAVUNMA_STRATEJISI: 50 },
           effects: [ifThen(any(flag('kaan_hazir'), flag('kaan_durust')), [inc('pers')])],
           good: 'Kısa, doğru, kendi sesiyle bir son söz (CMK 216/3).',
@@ -1617,7 +2101,50 @@ export const trial: CasePart = {
       ...court2.base,
       title: 'Çöküş',
       background: 'durusma_salonu',
+      // Çöküş savunmanın kalan hamlelerini keser, kaydı değiştirmez: hüküm yine kayda göre kurulur. Kayıt 191'e
+      // elverişliyse heyet nitelik değişikliğini kendisi hatırlatır (CMK 226/1) ve ek savunmayı alır.
+      onEnter: [ifThen(all(flag('contra_s2'), not(flag('jar_cleared')), muhbirCoktu), [raise('ek_savunma')])],
       lines: [
+        {
+          when: ref('beraat_e'),
+          lines: [
+            n(
+              'Başkan gözlüğünü çıkardı ve masaya bıraktı. Bir başkan gözlüğünü çıkardığında, artık okuyacak bir şey kalmamıştır.',
+            ),
+            s(
+              'baskan',
+              'Müdafi, sunduğunuz delillerin hiçbiri iddia ettiğiniz şeyi göstermedi. Heyetin sabrının bir sınırı var. Sanığın son sözünü alıp müzakereye çekileceğiz.',
+            ),
+            th(
+              'Kilidi bulmuştum. Krokiyi bulmuştum. Ama bunları yanlış kapılara taşıdım; her yanlış kapı biraz daha güven götürdü.',
+            ),
+            s(
+              'baskan',
+              'Kayıt kayıttır, müdafi. Bugüne kadar kurulan delilleri heyet değerlendirecek; sizin son sunumlarınızı değil.',
+            ),
+            th('Kayıt. Elimden düşürdüklerimi değil, daha önce yere sağlam koyduklarımı tartacaklar.'),
+          ],
+        },
+        {
+          when: all(flag('contra_s2'), not(flag('jar_cleared')), muhbirCoktu),
+          lines: [
+            n(
+              'Başkan gözlüğünü çıkardı ve masaya bıraktı. Bir başkan gözlüğünü çıkardığında, artık okuyacak bir şey kalmamıştır.',
+            ),
+            s(
+              'baskan',
+              'Müdafi, sunduğunuz delillerin hiçbiri iddia ettiğiniz şeyi göstermedi. Heyetin sabrının bir sınırı var. Sanığın son sözünü alıp müzakereye çekileceğiz.',
+            ),
+            th(
+              'Kilidi bulmuştum. Krokiyi bulmuştum. Ama bunları yanlış kapılara taşıdım; her yanlış kapı biraz daha güven götürdü.',
+            ),
+            s(
+              'baskan',
+              'Sanık ve müdafi: eylemin TCK 191/1 kapsamında kullanmak için bulundurma olarak değerlendirilebileceği hatırlatılır. Sanık, ek savunmanız?',
+            ),
+            s('kaan', 'Kullandım. Söyledim. Ama satmadım. O paketler benim değil.', 'uzgun'),
+          ],
+        },
         {
           lines: [
             n(
@@ -1642,7 +2169,9 @@ export const trial: CasePart = {
       id: 'tg_cokus',
       priority: 0,
       once: true,
-      when: all(flag('in_court'), cmp(v('cred'), '<=', 0)),
+      // Çöküş yalnızca muhbir kürsüye çıktıktan sonra olur: tanık dinlenmeden hüküm kurulmaz (CMK 210). Birinci
+      // celsede tükenen güvenilirlik ikinci celsede çapraz sorgunun başında çöküşe yol açar.
+      when: all(flag('in_court'), cmp(v('cred'), '<=', 0), visited('T_03')),
       effects: [raise('cokus')],
       goto: 'T_COKUS',
     },

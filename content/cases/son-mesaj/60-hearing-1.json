@@ -1279,6 +1279,7 @@
           "id": "PS_S3A",
           "kind": "PRESENT",
           "match": { "statement": "S3", "evidence": ["ded_bagli"] },
+          "enabledWhen": { "flag": "press_s3" },
           "responses": [
             {
               "lines": [
@@ -1318,6 +1319,7 @@
             { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
             { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
             { "type": "VAR", "var": "contra_s3", "op": "set", "value": true },
+            { "type": "VAR", "var": "hesap_sunuldu", "op": "set", "value": true },
             {
               "type": "MARK",
               "quality": "GOOD",
@@ -1360,6 +1362,7 @@
           "id": "PS_S3C",
           "kind": "PRESENT",
           "match": { "statement": "S3", "evidence": ["ded_hastane"] },
+          "enabledWhen": { "flag": "press_s3" },
           "responses": [
             {
               "lines": [
@@ -1372,7 +1375,15 @@
                   "speaker": "feride",
                   "text": "Kilitli bir telefondan, sahibinin eli değmeden bir ses kaydı nasıl iletilir tanık?"
                 },
-                { "speaker": "hakan", "text": "Bilemiyorum Sayın Hâkim." }
+                { "speaker": "hakan", "text": "Bilemiyorum Sayın Hâkim." },
+                {
+                  "speaker": "feride",
+                  "text": "Tutanağa geçirin: kolluk raporunun Ek-2’sine göre telefon 9 Kasım 01.40–06.10 arasında kilitli; savunma, sanığın 02.10’da acil serviste onam formu imzaladığını gösteren kaydı sundu."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Savcı kaşlarını çattı, dosyasında bir sayfayı kıvırdı. Bir sonraki celse için kendine bir not düştü; ben de kendime: o formu yazan eli kürsüye getirmek."
+                }
               ]
             }
           ],
@@ -1386,6 +1397,19 @@
               "quality": "GOOD",
               "feedback": "9 Kasım gecesi telefon kilitli ve şarjdaydı: “onun eliyle” anlatımı en azından bir gece için çöktü.",
               "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "PS_S3E",
+          "kind": "PRESENT",
+          "match": { "statement": "S3", "evidence": ["ded_bagli", "ded_hastane"] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "hakan", "text": "Bu ne avukat hanım? Ben size raporumu anlattım." },
+                { "speaker": "feride", "text": "Müdafi, önce tanığa sorunuzu sorun; neyi kastettiğini ondan duyalım." }
+              ]
             }
           ]
         },
@@ -1607,7 +1631,12 @@
           "id": "T1_BILIRKISI",
           "kind": "OPTION",
           "label": "Bağımsız adli bilişim bilirkişisi ve imajın bir kopyası",
-          "visibleWhen": { "not": { "flag": "bilirkisi_istendi" } },
+          "visibleWhen": {
+            "all": [
+              { "not": { "flag": "bilirkisi_istendi" } },
+              { "any": [{ "hasEvidence": "clue_cihaz3" }, { "flag": "contra_s3" }, { "flag": "partial_s3" }] }
+            ]
+          },
           "cost": [{ "var": "slots2", "amount": 1 }],
           "responses": [
             {
@@ -1634,15 +1663,30 @@
           "id": "T1_ISP",
           "kind": "OPTION",
           "label": "85.105.44.17’nin üç gecedeki abonesinin sağlayıcıdan sorulması",
-          "visibleWhen": { "hasEvidence": "clue_ip_ayni" },
+          "visibleWhen": {
+            "all": [
+              { "hasEvidence": "clue_ip_ayni" },
+              { "hasEvidence": "clue_ofis_hat" },
+              { "flag": "kilit_mahkemede" },
+              { "flag": "contra_s3" }
+            ]
+          },
           "cost": [{ "var": "slots2", "amount": 1 }],
           "responses": [
             {
               "lines": [
+                {
+                  "speaker": "player",
+                  "text": "9 Kasım gecesi müvekkilim acil servisteydi, telefonu kilitliydi; ileti başka bir yerden gitti. Hesap verisine göre üç gecenin oturumu da aynı adresten açılmış."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bu adres ne müvekkilimin evinin hattı ne de ofisin; ofis hattının sağlayıcı etiketi elimizde. O gece cihazın başında kim varsa, bu hattın ucundaydı."
+                },
                 { "speaker": "tolga", "text": "Sayın Hâkim, bu bir balık avı…" },
                 {
                   "speaker": "feride",
-                  "text": "Üç gece, üç saat, bir adres. Balık avı değil Sayın Savcı. Kabul. Sağlayıcıya müzekkere yazılsın."
+                  "text": "Bir gece için sanığın orada olmadığı tutanakta; üç gece, üç saat, bir adres. Balık avı değil Sayın Savcı. Kabul. Sağlayıcıya müzekkere yazılsın."
                 }
               ]
             }
@@ -1662,24 +1706,38 @@
           "id": "T1_ISP_GENEL",
           "kind": "OPTION",
           "label": "Hesaba bağlanan bütün IP adreslerinin araştırılması",
-          "visibleWhen": { "not": { "hasEvidence": "clue_ip_ayni" } },
+          "visibleWhen": {
+            "not": {
+              "all": [
+                { "hasEvidence": "clue_ip_ayni" },
+                { "hasEvidence": "clue_ofis_hat" },
+                { "flag": "kilit_mahkemede" },
+                { "flag": "contra_s3" }
+              ]
+            }
+          },
           "cost": [{ "var": "slots2", "amount": 1 }],
           "responses": [
             {
-              "lines": [{ "speaker": "feride", "text": "Hangi adres müdafi? Hangi saat? Bu hâliyle talep reddedildi." }]
+              "lines": [
+                {
+                  "speaker": "feride",
+                  "text": "Hangi adres müdafi, hangi saat? Ve bu hattın sanığın savunmasıyla bağı ne? Bu hâliyle talep reddedildi."
+                }
+              ]
             }
           ],
           "next": "$stay",
           "quality": {
             "q": "NEUTRAL",
-            "feedback": "Hangi adres, hangi zaman? Belirsiz talepler reddedilir. Hesap verisindeki oturum kayıtları talebi somutlaştırırdı."
+            "feedback": "Talep somut değil: hangi adres, hangi saat ve bu hattın olayla ne ilgisi var? Hesap verisindeki oturumlar, ofis hattı ve sanığın bir gece cihazın başında olamayacağını gösteren kayıt talebi somutlaştırırdı (CMK 206/2)."
           }
         },
         {
           "id": "T1_HAYRI",
           "kind": "OPTION",
           "label": "Hayri Sezer’in tanık olarak dinlenmesi",
-          "visibleWhen": { "not": { "flag": "hayri_istendi" } },
+          "visibleWhen": { "all": [{ "not": { "flag": "hayri_istendi" } }, { "flag": "fact_hayri_saat" }] },
           "cost": [{ "var": "slots2", "amount": 1 }],
           "responses": [
             { "lines": [{ "speaker": "feride", "text": "Kabul. Tanık Hayri Sezer gelecek celsede dinlenecek." }] }
@@ -1696,16 +1754,76 @@
           }
         },
         {
+          "id": "T1_HESAP",
+          "kind": "OPTION",
+          "label": "Noter tespitli hesap verisinin dosyaya alınması",
+          "visibleWhen": { "all": [{ "hasEvidence": "ev_hesap" }, { "not": { "flag": "hesap_sunuldu" } }] },
+          "cost": [{ "var": "slots2", "amount": 1 }],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "feride",
+                  "text": "Hesap verisi, noter tespiti ve hash değeriyle dosyaya alındı. Bilirkişiye de gönderilsin."
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            { "type": "VAR", "var": "hesap_sunuldu", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Savunmanın delili dosyaya girmedikçe bilirkişi de mahkeme de onu tartışamaz; noter tespiti ve hash değeri bütünlüğünü gösterir.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "T1_GULAY",
+          "kind": "OPTION",
+          "label": "Acil servis hemşiresi Gülay Tunç’un tanık olarak dinlenmesi",
+          "visibleWhen": {
+            "all": [
+              { "flag": "fact_gulay" },
+              { "flag": "gulay_hazir" },
+              { "flag": "kilit_mahkemede" },
+              { "not": { "flag": "gulay_istendi" } }
+            ]
+          },
+          "cost": [{ "var": "slots2", "amount": 1 }],
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Onam formunun saatini yazan, telefonu şarj istasyonuna bantlayan hemşire. Bugün tutanağa geçen kilit kaydının öbür yarısı onun elinde."
+                },
+                { "speaker": "tolga", "text": "Bir hemşire, bir gecenin hangi dakikasını hatırlayabilir ki?" },
+                {
+                  "speaker": "feride",
+                  "text": "Hatırlayıp hatırlamadığını kürsüde göreceğiz Sayın Savcı. Kabul. Tanık Gülay Tunç gelecek celsede dinlenecek."
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            { "type": "VAR", "var": "gulay_istendi", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Onam formunun saatini yazan ve telefonu şarj istasyonuna bantlayan kişi, 9 Kasım gecesine doğrudan tanıktır; olayla bağı tutanakta kurulduğu için talep yerindedir (CMK 206/2).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
           "id": "T1_HASTANE",
           "kind": "OPTION",
           "label": "Hastane kayıtlarının resmî yoldan celbi",
-          "visibleWhen": {
-            "all": [
-              { "flag": "fact_hastane" },
-              { "not": { "flag": "hastane_istendi" } },
-              { "not": { "hasEvidence": "ev_hastane" } }
-            ]
-          },
+          "visibleWhen": { "all": [{ "flag": "fact_hastane" }, { "not": { "flag": "hastane_istendi" } }] },
           "cost": [{ "var": "slots2", "amount": 1 }],
           "responses": [{ "lines": [{ "speaker": "feride", "text": "Kabul." }] }],
           "next": "$stay",
@@ -1771,7 +1889,21 @@
       "chapter": "Bölüm 3 · Birinci celse",
       "eyebrow": "DURUŞMA · 1. CELSE",
       "title": "Ara karar",
-      "lines": [{ "lines": [{ "speaker": "feride", "text": "Ara karar. Tarafların talepleri değerlendirildi." }] }],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Hâkim kalemini bıraktı, önündeki notlara bir kez daha baktı. Salonda klavye sesi kesildi; zabıt kâtibi ellerini klavyenin üstünde bekletiyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tarık yanımda nefesini tutmuştu. Arka sırada Melis paltosunu dizine çekti. Savcı dosyasını kapattı; bir celsenin sonu, bir davanın ortasıdır."
+            },
+            { "speaker": "feride", "text": "Ara karar. Tarafların talepleri değerlendirildi." }
+          ]
+        }
+      ],
       "routes": [{ "to": "H1_07_2" }],
       "choices": []
     },
@@ -1832,6 +1964,46 @@
           ]
         }
       ],
+      "routes": [{ "to": "H1_07_4" }],
+      "choices": []
+    },
+    {
+      "id": "H1_07_4",
+      "type": "DECISION",
+      "chapter": "Bölüm 3 · Birinci celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "title": "Ara karar",
+      "lines": [
+        {
+          "when": { "all": [{ "flag": "gulay_istendi" }, { "flag": "hastane_istendi" }] },
+          "lines": [
+            {
+              "speaker": "feride",
+              "text": "Üç: acil servis hemşiresi Gülay Tunç’un tanık olarak dinlenmesine; sanığın babasına ait 9 Kasım tarihli acil servis kayıtlarının, nöbet defteri dâhil, hastaneden celbine."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "gulay_istendi" },
+          "lines": [
+            { "speaker": "feride", "text": "Üç: acil servis hemşiresi Gülay Tunç’un tanık olarak dinlenmesine." }
+          ]
+        },
+        {
+          "when": { "flag": "hastane_istendi" },
+          "lines": [
+            {
+              "speaker": "feride",
+              "text": "Üç: sanığın babasına ait 9 Kasım tarihli acil servis kayıtlarının hastaneden celbine."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "feride", "text": "Üç: başkaca delil talebi bulunmadığından duruşmanın bırakılmasına." }
+          ]
+        }
+      ],
       "routes": [{ "to": "H1_07" }],
       "choices": []
     },
@@ -1873,11 +2045,11 @@
             { "speaker": "tarik", "text": "Zamanla ne yapacağız?" },
             {
               "speaker": "player",
-              "text": "O ekranın kime ait olduğunu bulacağız. Siz değilseniz, biri. Ve o biri artık bir sütunda görünmeye başladı."
+              "text": "O ekranın kime ait olduğunu bulacağız. Siz değilseniz, biri. Kâğıtlar kimi gösteriyorsa, onu."
             },
             {
               "speaker": "player",
-              "text": "Zaman ve bir isim. Ama o ismi ben koymayacağım. Bir dizüstü, bir hat, bir demirbaş listesi koyacak. İsimleri insanlar değil, kâğıtlar söylemeli.",
+              "text": "Zaman ve bir soru. Ama cevabı ben koymayacağım; kâğıtlar koyacak. İsimleri insanlar değil, kâğıtlar söylemeli.",
               "style": "thought",
               "fx": "fade"
             }
@@ -1885,7 +2057,7 @@
         }
       ],
       "choices": [
-        { "id": "H107_DEVAM", "kind": "CONTINUE", "label": "Adliyeden çık", "role": "PRIMARY", "next": "ARA_GIRIS_1" }
+        { "id": "H107_DEVAM", "kind": "CONTINUE", "label": "Adliyeden çık", "role": "PRIMARY", "next": "ARA_GIRIS_0" }
       ],
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",

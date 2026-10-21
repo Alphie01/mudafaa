@@ -561,10 +561,12 @@ export const hearing1: CasePart = {
           `),
         }),
         presentRule('PS_S3A', 'S3', ['ded_bagli'], {
+          enabledWhen: flag('press_s3'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
             raise('contra_s3'),
+            raise('hesap_sunuldu'),
             mark(
               'GOOD',
               'Raporun kendi Ek-3 tablosu ve hesap verisi: tehditler telefondan değil, hesaba bağlı bir masaüstü oturumundan gönderildi.',
@@ -599,6 +601,7 @@ export const hearing1: CasePart = {
           `),
         }),
         presentRule('PS_S3C', 'S3', ['ded_hastane'], {
+          enabledWhen: flag('press_s3'),
           score: { SORGULAMA: 150 },
           effects: [
             inc('pers'),
@@ -615,6 +618,14 @@ export const hearing1: CasePart = {
             hakan: Telefon kilitliyken de… bildirimden… yani…
             feride: Kilitli bir telefondan, sahibinin eli değmeden bir ses kaydı nasıl iletilir tanık?
             hakan: Bilemiyorum Sayın Hâkim.
+            feride: Tutanağa geçirin: kolluk raporunun Ek-2’sine göre telefon 9 Kasım 01.40–06.10 arasında kilitli; savunma, sanığın 02.10’da acil serviste onam formu imzaladığını gösteren kaydı sundu.
+            > Savcı kaşlarını çattı, dosyasında bir sayfayı kıvırdı. Bir sonraki celse için kendine bir not düştü; ben de kendime: o formu yazan eli kürsüye getirmek.
+          `),
+        }),
+        presentRule('PS_S3E', 'S3', ['ded_bagli', 'ded_hastane'], {
+          responses: B(`
+            hakan: Bu ne avukat hanım? Ben size raporumu anlattım.
+            feride: Müdafi, önce tanığa sorunuzu sorun; neyi kastettiğini ondan duyalım.
           `),
         }),
         pressRule('PR_S4', 'S4', {
@@ -715,7 +726,10 @@ export const hearing1: CasePart = {
       say: [{ speaker: 'feride', text: 'Tarafların delil talepleri? Müdafi, sizi dinliyorum.' }],
       options: [
         option('T1_BILIRKISI', 'Bağımsız adli bilişim bilirkişisi ve imajın bir kopyası', {
-          visibleWhen: { not: flag('bilirkisi_istendi') },
+          visibleWhen: all(
+            { not: flag('bilirkisi_istendi') },
+            any(has('clue_cihaz3'), flag('contra_s3'), flag('partial_s3')),
+          ),
           cost: [{ var: 'slots2', amount: 1 }],
           score: { USUL_BILGISI: 30 },
           effects: [raise('bilirkisi_istendi')],
@@ -724,27 +738,33 @@ export const hearing1: CasePart = {
           next: '$stay',
         }),
         option('T1_ISP', '85.105.44.17’nin üç gecedeki abonesinin sağlayıcıdan sorulması', {
-          visibleWhen: has('clue_ip_ayni'),
+          visibleWhen: all(has('clue_ip_ayni'), has('clue_ofis_hat'), flag('kilit_mahkemede'), flag('contra_s3')),
           cost: [{ var: 'slots2', amount: 1 }],
           score: { USUL_BILGISI: 60 },
           effects: [raise('isp_istendi')],
           good: 'Somut bir IP adresi ve üç somut zaman: talep belirli ve olayla bağlantılı. Mahkeme internet servis sağlayıcısından abone bilgisini isteyebilir.',
           responses: B(`
+            P: 9 Kasım gecesi müvekkilim acil servisteydi, telefonu kilitliydi; ileti başka bir yerden gitti. Hesap verisine göre üç gecenin oturumu da aynı adresten açılmış.
+            P: Bu adres ne müvekkilimin evinin hattı ne de ofisin; ofis hattının sağlayıcı etiketi elimizde. O gece cihazın başında kim varsa, bu hattın ucundaydı.
             tolga: Sayın Hâkim, bu bir balık avı…
-            feride: Üç gece, üç saat, bir adres. Balık avı değil Sayın Savcı. Kabul. Sağlayıcıya müzekkere yazılsın.
+            feride: Bir gece için sanığın orada olmadığı tutanakta; üç gece, üç saat, bir adres. Balık avı değil Sayın Savcı. Kabul. Sağlayıcıya müzekkere yazılsın.
           `),
           next: '$stay',
         }),
         option('T1_ISP_GENEL', 'Hesaba bağlanan bütün IP adreslerinin araştırılması', {
-          visibleWhen: { not: has('clue_ip_ayni') },
+          visibleWhen: {
+            not: all(has('clue_ip_ayni'), has('clue_ofis_hat'), flag('kilit_mahkemede'), flag('contra_s3')),
+          },
           cost: [{ var: 'slots2', amount: 1 }],
           neutral:
-            'Hangi adres, hangi zaman? Belirsiz talepler reddedilir. Hesap verisindeki oturum kayıtları talebi somutlaştırırdı.',
-          responses: B(`feride: Hangi adres müdafi? Hangi saat? Bu hâliyle talep reddedildi.`),
+            'Talep somut değil: hangi adres, hangi saat ve bu hattın olayla ne ilgisi var? Hesap verisindeki oturumlar, ofis hattı ve sanığın bir gece cihazın başında olamayacağını gösteren kayıt talebi somutlaştırırdı (CMK 206/2).',
+          responses: B(
+            `feride: Hangi adres müdafi, hangi saat? Ve bu hattın sanığın savunmasıyla bağı ne? Bu hâliyle talep reddedildi.`,
+          ),
           next: '$stay',
         }),
         option('T1_HAYRI', 'Hayri Sezer’in tanık olarak dinlenmesi', {
-          visibleWhen: { not: flag('hayri_istendi') },
+          visibleWhen: all({ not: flag('hayri_istendi') }, flag('fact_hayri_saat')),
           cost: [{ var: 'slots2', amount: 1 }],
           score: { USUL_BILGISI: 20 },
           effects: [raise('hayri_istendi')],
@@ -752,8 +772,35 @@ export const hearing1: CasePart = {
           responses: B(`feride: Kabul. Tanık Hayri Sezer gelecek celsede dinlenecek.`),
           next: '$stay',
         }),
+        option('T1_HESAP', 'Noter tespitli hesap verisinin dosyaya alınması', {
+          visibleWhen: all(has('ev_hesap'), { not: flag('hesap_sunuldu') }),
+          cost: [{ var: 'slots2', amount: 1 }],
+          score: { USUL_BILGISI: 20 },
+          effects: [raise('hesap_sunuldu')],
+          good: 'Savunmanın delili dosyaya girmedikçe bilirkişi de mahkeme de onu tartışamaz; noter tespiti ve hash değeri bütünlüğünü gösterir.',
+          responses: B(
+            `feride: Hesap verisi, noter tespiti ve hash değeriyle dosyaya alındı. Bilirkişiye de gönderilsin.`,
+          ),
+          next: '$stay',
+        }),
+        option('T1_GULAY', 'Acil servis hemşiresi Gülay Tunç’un tanık olarak dinlenmesi', {
+          // Tanığın olayla bağı tutanakta kurulduktan sonra (kilit kaydı ve onam formu Demirci'ye sunuldu) kabul edilir.
+          visibleWhen: all(flag('fact_gulay'), flag('gulay_hazir'), flag('kilit_mahkemede'), {
+            not: flag('gulay_istendi'),
+          }),
+          cost: [{ var: 'slots2', amount: 1 }],
+          score: { USUL_BILGISI: 20 },
+          effects: [raise('gulay_istendi')],
+          good: 'Onam formunun saatini yazan ve telefonu şarj istasyonuna bantlayan kişi, 9 Kasım gecesine doğrudan tanıktır; olayla bağı tutanakta kurulduğu için talep yerindedir (CMK 206/2).',
+          responses: B(`
+            P: Onam formunun saatini yazan, telefonu şarj istasyonuna bantlayan hemşire. Bugün tutanağa geçen kilit kaydının öbür yarısı onun elinde.
+            tolga: Bir hemşire, bir gecenin hangi dakikasını hatırlayabilir ki?
+            feride: Hatırlayıp hatırlamadığını kürsüde göreceğiz Sayın Savcı. Kabul. Tanık Gülay Tunç gelecek celsede dinlenecek.
+          `),
+          next: '$stay',
+        }),
         option('T1_HASTANE', 'Hastane kayıtlarının resmî yoldan celbi', {
-          visibleWhen: all(flag('fact_hastane'), { not: flag('hastane_istendi') }, { not: has('ev_hastane') }),
+          visibleWhen: all(flag('fact_hastane'), { not: flag('hastane_istendi') }),
           cost: [{ var: 'slots2', amount: 1 }],
           score: { USUL_BILGISI: 20 },
           effects: [raise('hastane_istendi')],
@@ -806,6 +853,8 @@ export const hearing1: CasePart = {
       ...C3,
       title: 'Ara karar',
       lines: B(`
+        > Hâkim kalemini bıraktı, önündeki notlara bir kez daha baktı. Salonda klavye sesi kesildi; zabıt kâtibi ellerini klavyenin üstünde bekletiyordu.
+        > Tarık yanımda nefesini tutmuştu. Arka sırada Melis paltosunu dizine çekti. Savcı dosyasını kapattı; bir celsenin sonu, bir davanın ortasıdır.
         feride: Ara karar. Tarafların talepleri değerlendirildi.
       `),
     }),
@@ -820,7 +869,7 @@ export const hearing1: CasePart = {
         O(`feride: Bir: kolluk raporunun dosyada bulunduğu anlaşılmakla ayrıca bilirkişi incelemesine yer olmadığına.`),
       ],
     }),
-    decisionNode('H1_07_3', [{ to: 'H1_07' }], {
+    decisionNode('H1_07_3', [{ to: 'H1_07_4' }], {
       ...C3,
       title: 'Ara karar',
       lines: [
@@ -830,6 +879,22 @@ export const hearing1: CasePart = {
         ),
         W(flag('hayri_istendi'), `feride: İki: tanık Hayri Sezer’in gelecek celsede dinlenmesine.`),
         O(`feride: İki: katılan vekilinin bildirdiği tanık Ozan Tekin’in gelecek celsede dinlenmesine.`),
+      ],
+    }),
+    decisionNode('H1_07_4', [{ to: 'H1_07' }], {
+      ...C3,
+      title: 'Ara karar',
+      lines: [
+        W(
+          all(flag('gulay_istendi'), flag('hastane_istendi')),
+          `feride: Üç: acil servis hemşiresi Gülay Tunç’un tanık olarak dinlenmesine; sanığın babasına ait 9 Kasım tarihli acil servis kayıtlarının, nöbet defteri dâhil, hastaneden celbine.`,
+        ),
+        W(flag('gulay_istendi'), `feride: Üç: acil servis hemşiresi Gülay Tunç’un tanık olarak dinlenmesine.`),
+        W(
+          flag('hastane_istendi'),
+          `feride: Üç: sanığın babasına ait 9 Kasım tarihli acil servis kayıtlarının hastaneden celbine.`,
+        ),
+        O(`feride: Üç: başkaca delil talebi bulunmadığından duruşmanın bırakılmasına.`),
       ],
     }),
     court1.stage('H1_07', {
@@ -844,10 +909,10 @@ export const hearing1: CasePart = {
         tarik: Üç hafta. Perşembe teslim günüydü, geçti. Vakıf ihaleyi askıya almış. Bir mimar için askı demek, projenin havada kalması demek.
         P: Askı geçicidir Tarık Bey. Üç hafta bize zaman veriyor.
         tarik: Zamanla ne yapacağız?
-        P: O ekranın kime ait olduğunu bulacağız. Siz değilseniz, biri. Ve o biri artık bir sütunda görünmeye başladı.
-        ~ Zaman ve bir isim. Ama o ismi ben koymayacağım. Bir dizüstü, bir hat, bir demirbaş listesi koyacak. İsimleri insanlar değil, kâğıtlar söylemeli. |fx=fade
+        P: O ekranın kime ait olduğunu bulacağız. Siz değilseniz, biri. Kâğıtlar kimi gösteriyorsa, onu.
+        ~ Zaman ve bir soru. Ama cevabı ben koymayacağım; kâğıtlar koyacak. İsimleri insanlar değil, kâğıtlar söylemeli. |fx=fade
       `),
-      choices: [cont('H107_DEVAM', 'Adliyeden çık', 'ARA_GIRIS_1', { role: 'PRIMARY' })],
+      choices: [cont('H107_DEVAM', 'Adliyeden çık', 'ARA_GIRIS_0', { role: 'PRIMARY' })],
     }),
   ],
   discoveryPaths: [...h1Delivery.discoveryPaths],

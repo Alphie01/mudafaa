@@ -12,8 +12,8 @@
         { "type": "VAR", "var": "taps", "op": "set", "value": 7 },
         { "type": "VAR", "var": "taps2", "op": "set", "value": 6 },
         { "type": "VAR", "var": "ex1", "op": "set", "value": 5 },
-        { "type": "VAR", "var": "ex2", "op": "set", "value": 8 },
-        { "type": "VAR", "var": "ex3", "op": "set", "value": 6 },
+        { "type": "VAR", "var": "ex2", "op": "set", "value": 10 },
+        { "type": "VAR", "var": "ex3", "op": "set", "value": 9 },
         { "type": "VAR", "var": "ex4", "op": "set", "value": 4 },
         { "type": "VAR", "var": "min", "op": "set", "value": 15 }
       ],
@@ -213,7 +213,7 @@
           "cost": [{ "var": "ap", "amount": 1 }],
           "next": { "push": "INV_IMAJ" },
           "maxUses": 1,
-          "description": "114 sayfa ek · 8 deneme"
+          "description": "114 sayfa ek · 10 deneme"
         },
         {
           "id": "H_HESAP_IND",
@@ -221,12 +221,7 @@
           "label": "Hesap verisini indirt",
           "cost": [{ "var": "ap", "amount": 1 }],
           "next": { "push": "INV_HESAP_IND" },
-          "visibleWhen": {
-            "all": [
-              { "any": [{ "flag": "fact_hesap_fikri" }, { "hasEvidence": "clue_cihaz3" }] },
-              { "not": { "flag": "hesap_istendi" } }
-            ]
-          },
+          "visibleWhen": { "all": [{ "flag": "fact_hesap_onay" }, { "not": { "flag": "hesap_istendi" } }] },
           "description": "Tarık ve noter · yarın akşam hazır"
         },
         {
@@ -237,7 +232,7 @@
           "next": { "push": "INV_HESAP" },
           "maxUses": 1,
           "visibleWhen": { "hasEvidence": "ev_hesap" },
-          "description": "Noter tespitli döküm · 6 deneme"
+          "description": "Noter tespitli döküm · 9 deneme"
         },
         {
           "id": "H_HKAYIT",
@@ -246,7 +241,7 @@
           "cost": [{ "var": "ap", "amount": 1 }],
           "next": { "push": "INV_HKAYIT_GIRIS" },
           "maxUses": 1,
-          "visibleWhen": { "flag": "fact_hastane" },
+          "visibleWhen": { "flag": "fact_onam_saat" },
           "description": "Babasının muvafakatiyle · 4 deneme"
         },
         {
@@ -280,8 +275,10 @@
           "kind": "NAVIGATE",
           "label": "Günü kapat",
           "description": "Kalan eylem puanlarını bırak",
-          "visibleWhen": { "all": [{ "cmp": [{ "var": "ap" }, ">", 0] }, { "cmp": [{ "var": "day" }, "<", 3] }] },
-          "confirm": "Bugünün kalan eylem puanları yanar. Emin misin?",
+          "visibleWhen": {
+            "all": [{ "cmp": [{ "var": "ap" }, ">", 0] }, { "cmp": [{ "var": "day" }, "<", 3] }, { "ref": "inv_bos" }]
+          },
+          "confirm": "Bugünün kalan eylem puanı yanar. Emin misin?",
           "effects": [{ "type": "VAR", "var": "ap", "op": "set", "value": 0 }],
           "next": "$stay"
         },
@@ -292,19 +289,13 @@
           "role": "PRIMARY",
           "confirm": "Soruşturma evresi biter. Emin misin?",
           "enabledWhen": {
-            "any": [
+            "all": [
               { "cmp": [{ "var": "day" }, "==", 3] },
-              {
-                "all": [
-                  { "visited": "INV_GORUSME" },
-                  { "visited": "INV_TUTANAK" },
-                  { "visited": "INV_IMAJ" },
-                  { "visited": "INV_ARAMA_OFIS" }
-                ]
-              }
+              { "any": [{ "cmp": [{ "var": "ap" }, "<=", 0] }, { "ref": "inv_bos" }] },
+              { "visited": "INV_LEYLA" }
             ]
           },
-          "lockedReason": "Dilekçe süresi 3. gün doluyor. Erken gitmek için önce müvekkili dinle, tutanağı ve raporu oku, ofisi ara.",
+          "lockedReason": "Duruşmaya daha günler var. Dilekçe son gün kapanıyor; o güne kadar her saatini dosyaya ver. Leyla dosyayı görmeden salona girme.",
           "next": "INV_GECE_1"
         }
       ]
@@ -348,6 +339,10 @@
             {
               "speaker": "narrator",
               "text": "Büro boşalmış. Yağmur yeniden başlamış; oluklardan taşan su kaldırıma vuruyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masamda günün kâğıtları; hiçbiri henüz bir yere iğnelenmemiş. Bir avukatın ilk günü, bir mimarın ilk krokisi gibidir: çizgiler var, bina yok."
             },
             { "speaker": "narrator", "text": "Leyla’nın odasında ışık yanıyordu. Kapısı aralık." },
             { "speaker": "leyla", "text": "Gel. Bugün ne öğrendin? Bir cümleyle." }
@@ -605,14 +600,7 @@
       "eyebrow": "DAVA #06 · SORUŞTURMA",
       "title": "Leyla’ya danış",
       "background": "buro",
-      "onEnter": [
-        { "type": "VAR", "var": "leyla_gun", "op": "set", "value": { "var": "day" } },
-        {
-          "type": "IF",
-          "when": { "hasEvidence": "clue_cihaz3" },
-          "then": [{ "type": "VAR", "var": "fact_hesap_fikri", "op": "set", "value": true }]
-        }
-      ],
+      "onEnter": [{ "type": "VAR", "var": "leyla_gun", "op": "set", "value": { "var": "day" } }],
       "lines": [
         {
           "when": { "all": [{ "hasEvidence": "clue_cihaz3" }, { "not": { "flag": "hesap_istendi" } }] },
@@ -623,7 +611,7 @@
             },
             {
               "speaker": "leyla",
-              "text": "Hesap Tarık’ın. Hesabın sahibi kendi oturum geçmişini isteyebilir. Ama dikkat: elinden çıkan her kâğıt, polisinki kadar sorgulanacak. Noter. Hash."
+              "text": "Hesap Tarık’ın. Hesabın sahibi kendi oturum geçmişini isteyebilir; önce ona sor, o listeyi hiç açmış mı. Ama dikkat: elinden çıkan her kâğıt, polisinki kadar sorgulanacak. Noter. Hash."
             }
           ]
         },
@@ -632,7 +620,7 @@
           "lines": [
             {
               "speaker": "leyla",
-              "text": "Hastane dedin. Hastanede her şeyin saati yazılır. Babasının muvafakatini al, kayıtları iste."
+              "text": "Hastane dedin. Hastanede her şeyin saati yazılır. Önce o geceyi kendi saatinde gör; kâğıdı kimin, hangi kuralla yazdığını öğren. Sonra babasının muvafakatiyle kayıtları iste."
             },
             { "speaker": "leyla", "text": "Saat yazan bir hemşire, saatini bilmeyen on tanıktan iyidir." }
           ]
@@ -809,6 +797,11 @@
               "speaker": "player",
               "text": "9 Kasım, 02.14. Telefon kilitli, hemşire masasında. Tarık bir form imzalıyor. O gece, o eller değil.",
               "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Ama bu bir çıkarım; benim panomda duruyor. Salonda onu bir makinenin günlüğü, bir hemşirenin imzası ve bir yaşlı adamın telefonu taşımalı. Üçünü de kürsüye getirmenin yolunu bulmalıyım.",
+              "style": "thought"
             }
           ]
         },
@@ -880,6 +873,54 @@
       "choices": []
     },
     {
+      "id": "H1_KORIDOR",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Duruşma sabahı",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "SETBAŞI KÖPRÜSÜ — 08.10", "style": "card", "bg": "sokak_sabah" },
+            {
+              "speaker": "narrator",
+              "text": "Gök Dere bulanık akıyordu; gece boyu yağan yağmur köprünün taşlarını koyulaştırmıştı. Adliyeye yürüyerek gittim. Çantamda pano yoktu, panonun fotoğrafı vardı; bir de üç sayfalık bir not."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla köprünün başında bekliyordu. Elinde iki kâğıt bardak çay; birini bana uzattı, ötekinin kapağını açmadı bile."
+            },
+            { "speaker": "leyla", "text": "Uyumadın. Belli. Bugün uykusuzluğunu değil, dosyanı göstereceksin." },
+            {
+              "speaker": "leyla",
+              "text": "İlk celse bir dava kazanmaz Deniz. Ama hâkim bugün dosyanın nasıl bir dosya olduğuna karar verir: okunacak bir dosya mı, geçilecek bir dosya mı."
+            },
+            { "speaker": "player", "text": "Okunacak bir dosya. Eklerini okuyacak." },
+            {
+              "speaker": "leyla",
+              "text": "O zaman ona eklerini göster. Polisin sonuç cümlesini değil, kendi tablosunu. Tanığa bir şey söyletmeye çalışma; tanık kendi kâğıdını okusun, gerisini hâkim görür."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de şu: talepler. Bugün salondan çıkarken elinde üç hafta olacak. O üç haftayı neyle dolduracağını bugün ağzından çıkan cümleler belirler. İstemediğin şey gelmez."
+            },
+            { "speaker": "narrator", "text": "Çayından bir yudum aldı, buruştu. Soğumuştu; yine de içti." },
+            {
+              "speaker": "player",
+              "text": "Bir duruşmanın sabahı, bir şantiyenin sabahına benzer: her şey kâğıtta hazırdır, ama zemin ilk kazmada kendini gösterir.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Adliyenin camları sabah güneşinde griydi. Merdivenlerde Tarık’ı gördüm; kravatsızdı, ama ayakkabılarını boyamıştı. Bir babanın hazırlığı."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H1_00" }],
+      "choices": []
+    },
+    {
       "id": "INV_GECE",
       "type": "STORY",
       "chapter": "Bölüm 2 · Soruşturma",
@@ -911,7 +952,7 @@
         }
       ],
       "choices": [
-        { "id": "GECE_DEVAM", "kind": "CONTINUE", "label": "Duruşmaya git", "role": "PRIMARY", "next": "H1_00" }
+        { "id": "GECE_DEVAM", "kind": "CONTINUE", "label": "Duruşmaya git", "role": "PRIMARY", "next": "H1_KORIDOR" }
       ]
     }
   ],

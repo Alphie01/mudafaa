@@ -12,7 +12,7 @@ export const evidencePart: CasePart = {
     evidence('ev_tutanak', {
       type: 'BELGE',
       title: 'Arama ve el koyma tutanağı',
-      shortText: '11 Kasım 06.05–07.40 · arka oda, mutfak · kroki ekli.',
+      shortText: '11 Kasım 07.00–08.35 · arka oda, mutfak · kroki ekli.',
       description:
         'Kom. Yrd. Tuncay Sezer imzalı tutanak: “şüphelinin ikametinde, evin arka odasında (şüphelinin kullanımındaki) dolapta 46 paket, hassas terazi, kilitli poşetler, 8.750 TL; mutfakta şekerlikte 2 paket.” Tanık: Nesrin Uysal (komşu). Ekte olay yeri krokisi.',
       sourceLabel: 'Soruşturma dosyası',
@@ -40,7 +40,7 @@ export const evidencePart: CasePart = {
     evidence('ev_kriminal', {
       type: 'ADLI_RAPOR',
       title: 'Kriminal polis laboratuvarı raporu',
-      shortText: '46 paket net 39,8 g + 2 paket 1,7 g kokain · terazide yabancı iz.',
+      shortText: '46 paket net 39,8 g + 2 paket 1,7 g kokain · terazi, kavanoz, para.',
       description:
         'Arka odadaki 46 paket net 39,8 g, şekerlikteki 2 paket net 1,7 g kokain. Terazinin kefesinde kokain bulaşığı ve karşılaştırmaya elverişli bir parmak izi. Şekerlik kavanozunda iz incelemesi.',
       sourceLabel: 'Kriminal Polis Laboratuvarı',
@@ -111,9 +111,9 @@ export const evidencePart: CasePart = {
     evidence('ev_tedavi', {
       type: 'BELGE',
       title: 'Epikriz ve AMATEM kayıtları',
-      shortText: '3 Ekim acil · 10 Ekim’den beri ayaktan tedavi · 31 Ekim test negatif.',
+      shortText: '3 Ekim acil · 9 Ekim’den beri ayaktan tedavi · 30 Ekim test negatif.',
       description:
-        'Kaan’ın yazılı onayıyla Defne’nin getirdiği belgeler: 3 Ekim acil servis epikrizi (taşikardi, madde kullanımı), 10 Ekim’den itibaren AMATEM ayaktan tedavi randevuları, 31 Ekim idrar testi negatif.',
+        'Kaan’ın yazılı onayıyla Defne’nin getirdiği belgeler: 3 Ekim acil servis epikrizi (taşikardi, madde kullanımı), 9 Ekim’den itibaren AMATEM ayaktan tedavi randevuları, 30 Ekim idrar testi negatif.',
       sourceLabel: 'Defne Yıldız (müvekkilin onayıyla)',
       icon: 'receipt',
       side: 'DEFENSE',
@@ -123,7 +123,7 @@ export const evidencePart: CasePart = {
     evidence('ev_kurye', {
       type: 'BELGE',
       title: 'Paketçi personel ve GPS kayıtları',
-      shortText: 'Kurye Barış Demirel · 11 Kasım 06.21 Ihlamur Sok. · 12 Kasım ayrılış.',
+      shortText: 'Kurye Barış Demirel · 11 Kasım 07.16 Ihlamur Sok. · 12 Kasım ayrılış.',
       description:
         'Mahkemenin ara kararıyla Paketçi’den gelen kayıtlar: kurye Barış Demirel’in personel dosyası (İzmir adresli), 10–11 Kasım gece vardiyası GPS dökümü ve 12 Kasım tarihli iş akdi feshi.',
       sourceLabel: 'Paketçi (mahkeme ara kararı)',
@@ -142,6 +142,18 @@ export const evidencePart: CasePart = {
       icon: 'receipt',
       side: 'DEFENSE',
       strength: 'STRONG',
+    }),
+    evidence('ev_mutalaa', {
+      type: 'ADLI_RAPOR',
+      title: 'Uzman mütalaası (karşılaştırmalı inceleme)',
+      shortText: 'Doç. Dr. Aylin Korkmaz · kriminal rapor ekleri üzerinden şekerlik ve arka oda paketleri.',
+      description:
+        'Savunmanın CMK 67/6 uyarınca aldığı bilimsel mütalaa: kriminal raporun ek klasöründeki fotoğraflar, poşet baskı numaraları ve kromatogramlar üzerinden şekerlikteki iki paket ile arka odadaki 46 paketin karşılaştırılması.',
+      sourceLabel: 'Uludağ Üniversitesi · adli kimya',
+      icon: 'document',
+      side: 'DEFENSE',
+      strength: 'STRONG',
+      presentable: false,
     }),
     evidence('ev_canta', {
       type: 'ADLI_RAPOR',
@@ -213,7 +225,7 @@ export const evidencePart: CasePart = {
       title: 'Randevu kartı (AMATEM)',
       shortText: 'AMATEM ayaktan tedavi randevu kartı.',
       description:
-        'Ön odadaki çalışma masasında, bir bardak altlığının yanında AMATEM ayaktan tedavi randevu kartı: 14 Kasım, Perşembe 10.30.',
+        'Ön odadaki çalışma masasında, bir bardak altlığının yanında AMATEM ayaktan tedavi randevu kartı: 13 Kasım, Perşembe 10.30.',
       sourceLabel: 'Olay yeri fotoğrafı (ön oda)',
       icon: 'receipt',
       tags: kart,
@@ -255,7 +267,6 @@ export const evidencePart: CasePart = {
       description: 'Bina köşesinde, yağmura rağmen silinmemiş bir yağ lekesi ve demir korkulukta zincir sürtmesi.',
       sourceLabel: 'Bina girişi (bizzat)',
       icon: 'magnifier',
-      combinable: false,
     }),
     // --- Belge ipuçları ---
     clue('clue_kroki', {
@@ -271,9 +282,9 @@ export const evidencePart: CasePart = {
     clue('clue_tanik_saat', {
       type: 'BELGE',
       title: 'Tanık imzasının saati',
-      shortText: 'Arama 06.05’te başlamış; tanık imzasının yanında 06.40 yazıyor.',
+      shortText: 'Arama 07.00’de başlamış; tanık imzasının yanında 07.35 yazıyor.',
       description:
-        'Tutanağın başında “arama 06.05’te başladı” yazıyor; komşu tanığın imzasının yanında el yazısıyla “06.40”.',
+        'Tutanağın başında “arama 07.00’de başladı” yazıyor; komşu tanığın imzasının yanında el yazısıyla “07.35”.',
       sourceLabel: 'Arama tutanağı',
       icon: 'magnifier',
       combinable: false,
@@ -286,7 +297,6 @@ export const evidencePart: CasePart = {
         'Büyüteçle bakınca “arka odada” ile “dolapta” arasına küçük harflerle, farklı bir kalemle “(şüphelinin kullanımındaki)” ibaresi sıkıştırılmış.',
       sourceLabel: 'Arama tutanağı',
       icon: 'magnifier',
-      combinable: false,
     }),
     clue('clue_kapsam', {
       type: 'BELGE',
@@ -336,14 +346,14 @@ export const evidencePart: CasePart = {
         'Terazinin kefesindeki karşılaştırmaya elverişli iz şüpheli Kaan Yıldız’a ait değil; parmak izi sisteminde kaydı bulunamadı.',
       sourceLabel: 'Kriminal rapor',
       icon: 'fingerprint',
-      combinable: false,
     }),
     clue('clue_ayni_parti', {
       type: 'ADLI_RAPOR',
-      title: 'Aynı poşet, aynı gramaj',
-      shortText: 'Şekerlikteki 2 paket ile arka odadaki 46 paket aynı poşet tipi ve gramajda.',
+      title: 'Benzer poşet, benzer gramaj',
+      shortText:
+        'Şekerlikteki 2 paket ile arka odadaki 46 paket aynı tip poşette, yakın gramajda; karşılaştırma yapılmamış.',
       description:
-        'Şekerlikteki iki paket, arka odadaki paketlerle aynı marka kilitli poşette, aynı kesimle ve aynı ortalama gramajda (0,85 g): aynı stoktan.',
+        'Şekerlikteki iki paket, arka odadaki paketlerle aynı tip kilitli poşette ve yakın ortalama gramajda (0,85–0,87 g). Laboratuvar iki grubu ayrıca karşılaştırmamış: kesim izi, poşet partisi, saflık ölçülmemiş.',
       sourceLabel: 'Kriminal rapor',
       icon: 'compare',
       tags: kart,
@@ -394,7 +404,7 @@ export const evidencePart: CasePart = {
       title: 'Tedavi süreci',
       shortText: 'Acil, AMATEM, negatif test: ekimden beri tedavide.',
       description:
-        'Kaan 3 Ekim’de acile kaldırıldı, 10 Ekim’de AMATEM’de ayaktan tedaviye başladı, 31 Ekim testi negatif.',
+        'Kaan 3 Ekim’de acile kaldırıldı, 9 Ekim’de AMATEM’de ayaktan tedaviye başladı, 30 Ekim testi negatif.',
       sourceLabel: 'Defne / tedavi kayıtları',
       icon: 'receipt',
       tags: kart,
@@ -411,10 +421,10 @@ export const evidencePart: CasePart = {
     }),
     clue('clue_nesrin_moto', {
       type: 'TANIK_IFADESI',
-      title: 'Sabah 06.20’deki motor',
+      title: 'Sabah 07.15’teki motor',
       shortText: 'Nesrin: baskın sırasında kurye oğlan motoruyla köşeye geldi, döndü.',
       description:
-        'Nesrin sabah namazına kalkmış, kedilere mama koyarken pencereden görmüş: 06.20 gibi “kurye oğlan” motoruyla köşeye geldi, polis araçlarını görünce döndü.',
+        'Nesrin sabah namazından sonra uyumamış; kedilere mama koyarken pencereden görmüş: 07.15 gibi “kurye oğlan” motoruyla köşeye geldi, polis araçlarını görünce döndü.',
       sourceLabel: 'Nesrin Uysal',
       icon: 'camera',
       tags: kart,
@@ -432,10 +442,10 @@ export const evidencePart: CasePart = {
     // --- Ara evre ipuçları ---
     clue('clue_gps', {
       type: 'DIJITAL',
-      title: 'GPS dökümündeki 06.21',
-      shortText: '11 Kasım 06.21 · Ihlamur Sok. · 40 sn duruş · “teslimat iptal”.',
+      title: 'GPS dökümündeki 07.16',
+      shortText: '11 Kasım 07.16 · Ihlamur Sok. · 40 sn duruş · “teslimat iptal”.',
       description:
-        'Barış Demirel’in kurye cihazı 11 Kasım 06.21’de Ihlamur Sokak 14 önünde 40 saniye duruyor, ardından ters yöne gidiyor; sistemde “teslimat iptal” kaydı.',
+        'Barış Demirel’in kurye cihazı 11 Kasım 07.16’da Ihlamur Sokak 14 önünde 40 saniye duruyor, ardından ters yöne gidiyor; sistemde “teslimat iptal” kaydı.',
       sourceLabel: 'Paketçi GPS kaydı',
       icon: 'phone',
       tags: ara,
@@ -474,9 +484,19 @@ export const evidencePart: CasePart = {
       title: 'Kasa kapanışı 23.41',
       shortText: '9 Kasım · Kahve Durağı kasası 23.41’de Kaan’ın koduyla kapandı.',
       description:
-        'Z raporuna göre kafe kasası 9 Kasım 23.41’de Kaan’ın kullanıcı koduyla kapatıldı; son satış 23.18. Kafe Ihlamur Sokak’a yürüyerek on beş dakika.',
+        'Z raporuna göre 9 Kasım 22.44–23.18 arasındaki beş satışın hepsi Kaan’ın koduyla (22.53 ve 23.02 kartlı, banka slipli); kasa 23.41’de kapandı. Kafe Ihlamur Sokak’a yürüyerek on beş dakika.',
       sourceLabel: 'Kahve Durağı Z raporu',
       icon: 'receipt',
+      tags: ara,
+    }),
+    clue('clue_ek_stok', {
+      type: 'ADLI_RAPOR',
+      title: 'Ardışık poşetler',
+      shortText: 'Mütalaa: şekerlik paketleri arka odadaki rulodan, aynı makineyle kapatılmış, aynı saflıkta.',
+      description:
+        'Doç. Dr. Aylin Korkmaz’ın bilimsel mütalaası: şekerlikteki iki poşetin kenar baskı numaraları arka odadaki rulonun ardışık numaraları; ısıyla kapatma izi aynı makineden; saflık ve kesme maddesi örtüşüyor. Paketlerde sanığa ait iz yok.',
+      sourceLabel: 'Uzman mütalaası (CMK 67/6)',
+      icon: 'compare',
       tags: ara,
     }),
 
@@ -560,14 +580,26 @@ export const evidencePart: CasePart = {
     }),
     insight('ded_sekerlik', {
       type: 'ADLI_RAPOR',
-      title: 'Şekerlik arka odanın deposu',
-      shortText: 'Şekerlikteki paketler arka odadaki stoktan; şekerlik arka oda kapısının dibinde.',
+      title: 'Şekerlik arka oda kapısında',
+      shortText: 'Şekerlik arka oda kapısının dibinde; içindeki paketler arka odadakilere benziyor.',
       description:
-        'Aynı poşet, aynı kesim, aynı gramaj; şekerlik de mutfakta değil, arka oda kapısının yanındaki rafta. Kavanozdaki iz kavanozu kullananı gösterir, paketi koyanı değil.',
+        'Şekerlik mutfakta değil, arka oda kapısının yanındaki rafta. İçindeki iki paket arka odadakilerle aynı tip poşette, yakın gramajda. Aynı stok olduğu ise henüz bir benzerlik, bir tespit değil.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'compare',
       side: 'DEFENSE',
+      strength: 'MEDIUM',
+    }),
+    insight('ded_stok', {
+      type: 'ADLI_RAPOR',
+      title: 'Şekerlik arka odanın deposu',
+      shortText: 'Uzman mütalaası: şekerlikteki iki paket arka odadaki stoktan ayrılmış; kapıya iki adım.',
+      description:
+        'Aynı rulodan ardışık baskı numaralı poşetler, aynı ısı makinesinin kapatma izi, aynı saflık ve kesme maddesi: iki paket arka odadaki 46 paketle aynı stoktan. Şekerlik de o odanın kapısının dibinde. Kavanozdaki iz kavanozu kullananı gösterir, paketi koyanı değil.',
+      sourceLabel: 'Çıkarım tahtası · uzman mütalaası',
+      icon: 'compare',
+      side: 'DEFENSE',
       strength: 'STRONG',
+      presentable: false,
     }),
     insight('ded_kask', {
       type: 'TANIK_IFADESI',
@@ -594,9 +626,9 @@ export const evidencePart: CasePart = {
     insight('ded_kacis', {
       type: 'DIJITAL',
       title: 'Baskını gören kurye',
-      shortText: 'Barış 06.21’de baskını görüp döndü, ertesi gün işi bıraktı.',
+      shortText: 'Barış 07.16’da baskını görüp döndü, ertesi gün işi bıraktı.',
       description:
-        'GPS 06.21’de Ihlamur Sokak’ta kırk saniyelik bir duruş ve dönüş gösteriyor; Nesrin aynı dakikada motorun döndüğünü gördü. Ertesi gün Barış işi bıraktı.',
+        'GPS 07.16’da Ihlamur Sokak’ta kırk saniyelik bir duruş ve dönüş gösteriyor; Nesrin aynı dakikada motorun döndüğünü gördü. Ertesi gün Barış işi bıraktı.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'phone',
       side: 'DEFENSE',
@@ -618,7 +650,7 @@ export const evidencePart: CasePart = {
       title: 'Satış anında kafede',
       shortText: '9 Kasım 23.00’te Kaan kafede kasa kapatıyordu.',
       description:
-        'Tolga paketi 23.00’te aldığını söylüyor; Kaan 23.18’de son satışı yapmış, kasayı 23.41’de kapatmış. Kafe on beş dakika uzakta.',
+        'Tolga paketi 23.00’te aldığını söylüyor; Kaan 22.53, 23.02 ve 23.11’de kasada satış yapmış, kasayı 23.41’de kapatmış. Kafe on beş dakika uzakta: gidip dönmeye zaman yok.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'receipt',
       side: 'DEFENSE',
@@ -635,6 +667,7 @@ export const evidencePart: CasePart = {
     { from: 'ded_baris', to: 'clue_kira_defteri', type: 'DERIVED_FROM' },
     { from: 'ded_demirel', to: 'clue_hat', type: 'DERIVED_FROM' },
     { from: 'ded_sekerlik', to: 'clue_ayni_parti', type: 'DERIVED_FROM' },
+    { from: 'ded_stok', to: 'clue_ek_stok', type: 'DERIVED_FROM' },
     { from: 'ded_kask', to: 'clue_tolga_kask', type: 'DERIVED_FROM' },
     { from: 'ded_kullanici', to: 'clue_tedavi', type: 'DERIVED_FROM' },
     { from: 'ded_kacis', to: 'clue_gps', type: 'DERIVED_FROM' },

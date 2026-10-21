@@ -1,5 +1,19 @@
-import { examine, fallback, has, ifThen, not, recipe, score } from '../../../tools/content/src/kit/index.js';
+import {
+  all,
+  any,
+  set,
+  examine,
+  fallback,
+  flag,
+  has,
+  ifThen,
+  not,
+  raise,
+  recipe,
+  score,
+} from '../../../tools/content/src/kit/index.js';
 import type { Category, ChoiceDef, NodeDef } from '../../../tools/content/src/kit/index.js';
+import { S } from './dsl.js';
 
 // Davaya özgü küçük yardımcılar.
 
@@ -79,3 +93,65 @@ export const boardMiss = (id: string): ChoiceDef =>
       tone: 'error',
     },
   });
+
+/**
+ * Adımlı belge isabeti: aynı iddiayı taşıyan birkaç satırın hepsi incelenince ipucu doğar ("üç tehdidin üçü de").
+ * Her kural kendi bayrağını kaldırır; grubun bütün bayrakları kalktığında ipucu bulunur ve skor bir kez verilir.
+ * Koşullu DISCOVER olduğundan bulunma yolları `stepPaths` ile elle eklenir.
+ */
+export function stepHit(
+  id: string,
+  toolId: string,
+  target: string,
+  flagId: string,
+  group: readonly string[],
+  clueId: string,
+  amount: number,
+  title: string,
+  text: string,
+  done: string,
+  category: Category = 'DELIL_ANALIZI',
+): ChoiceDef {
+  const complete = all(...group.map((f) => flag(f)));
+  return examine(id, toolId, target, {
+    effects: [
+      raise(flagId),
+      ifThen(all(complete, not(has(clueId))), [score(category, amount), { type: 'DISCOVER', evidence: clueId }]),
+    ],
+    feedback: { title, text, label: 'Satır not edildi', tone: 'info' },
+    responses: [{ when: complete, lines: S(`~ ${done}`) }],
+  });
+}
+
+/** `stepHit` grubunun bulunma yolları: her kural, öbür bayraklar kalkmışsa ipucunu bulur. */
+export const stepPaths = (clueId: string, rules: readonly (readonly [string, string])[]) =>
+  rules.map(([ruleId, flagId]) => ({
+    evidence: clueId,
+    source: { type: 'RULE' as const, id: ruleId },
+    requires: all(...rules.filter(([, f]) => f !== flagId).map(([, f]) => flag(f))),
+  }));
+
+/**
+ * Boş ziyaret yoktur: BACK rolündeki bitiş seçeneği, bu ziyarette node'un başka bir seçeneği ya da kuralı en az bir kez
+ * kullanılınca açılır (`sordu` sayacı her girişte sıfırlanır). Görüşme eylem puanı harcar; boş bir ziyaret soruşturma
+ * sayılmaz. Belgelerde deneme hakkı biterse bitiş her zaman açıktır (softlock olmaz); soruların bedeli yoktur.
+ */
+export function askFirst<T extends NodeDef>(node: T, reason = 'Önce bir şey sor.', costVar?: string): T {
+  const acted = { cmp: [{ var: 'sordu' }, '>=', 1] } as const;
+  const when = costVar === undefined ? acted : any(acted, { cmp: [{ var: costVar }, '<=', 0] });
+  return {
+    ...node,
+    onEnter: [...(node.onEnter ?? []), set('sordu', 0)],
+    choices: node.choices.map((ch: ChoiceDef) =>
+      ch.role === 'BACK'
+        ? { ...ch, enabledWhen: when, lockedReason: reason }
+        : ch.kind === 'FALLBACK'
+          ? ch
+          : { ...ch, effects: [...(ch.effects ?? []), set('sordu', 1)] },
+    ),
+  };
+}
+
+/** Belgeye en az bir kez bakmadan kapatılmaz (deneme hakkı biterse açılır). */
+export const lookFirst = <T extends NodeDef>(node: T, costVar: string): T =>
+  askFirst(node, 'Önce belgeye bir bak.', costVar);

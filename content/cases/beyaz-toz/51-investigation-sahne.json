@@ -45,7 +45,15 @@
           "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
           "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
         },
-        { "id": "ARKA_BITIR", "kind": "CONTINUE", "label": "Aramayı bitir", "role": "BACK", "next": "$return" }
+        {
+          "id": "ARKA_BITIR",
+          "kind": "CONTINUE",
+          "label": "Aramayı bitir",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": { "cmp": [{ "var": "taps_a" }, "<=", 3] },
+          "lockedReason": "Fotoğrafta en az iki yere bak."
+        }
       ]
     },
     {
@@ -93,7 +101,15 @@
           "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
           "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
         },
-        { "id": "ON_BITIR", "kind": "CONTINUE", "label": "Aramayı bitir", "role": "BACK", "next": "$return" }
+        {
+          "id": "ON_BITIR",
+          "kind": "CONTINUE",
+          "label": "Aramayı bitir",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": { "cmp": [{ "var": "taps_o" }, "<=", 4] },
+          "lockedReason": "Fotoğrafta en az iki yere bak."
+        }
       ]
     },
     {
@@ -145,7 +161,15 @@
           "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
           "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
         },
-        { "id": "BINA_BITIR", "kind": "CONTINUE", "label": "Girişten ayrıl", "role": "BACK", "next": "INV_MERDIVEN" }
+        {
+          "id": "BINA_BITIR",
+          "kind": "CONTINUE",
+          "label": "Girişten ayrıl",
+          "role": "BACK",
+          "next": "INV_MERDIVEN",
+          "enabledWhen": { "cmp": [{ "var": "taps_b" }, "<=", 2] },
+          "lockedReason": "Girişte en az iki yere bak."
+        }
       ]
     },
     {

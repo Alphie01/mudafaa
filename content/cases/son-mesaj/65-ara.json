@@ -1,6 +1,44 @@
 {
   "nodes": [
     {
+      "id": "ARA_GIRIS_0",
+      "type": "DECISION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #06 · ARA",
+      "title": "Üç hafta",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE ÇIKIŞI — 12.50", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Kalemin önündeki kuyrukta bekledim; zabıt kâtibi tutanağın bir örneğini verdi. Altı sayfa. Her sayfanın altında hâkimin parafı, köşesinde bir dosya numarası."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridorun penceresinden aşağıya baktım. Avluda şemsiyeler açılıp kapanıyor, bir simitçi tablasını naylonla örtüyordu. Bursa, bir dava daha erteledi; hayat bir dakika bile durmadı."
+            },
+            {
+              "speaker": "player",
+              "text": "Tutanak, salonda söylenenin değil, yazdırılanın kaydıdır. Bugün ne yazdırdım? Sayfaları çevirdim; bazı cümlelerim orada, bazıları havada kalmış.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Üç hafta sonra hâkim bu altı sayfayı yeniden okuyacak. Onun gözünde dava, bu sayfalarda ne varsa odur. Benim panom değil, benim umudum değil.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tutanağı katlamadım. Katlanan kâğıt unutulur. Çantama düz koydum, bir dosyanın arasına; bir mimarın çizimini taşıdığı gibi."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_GIRIS_1" }],
+      "choices": []
+    },
+    {
       "id": "ARA_GIRIS_1",
       "type": "DECISION",
       "chapter": "Bölüm 4 · Ara",
@@ -143,10 +181,11 @@
       "background": "buro",
       "onEnter": [
         { "type": "VAR", "var": "taps3", "op": "set", "value": 6 },
-        { "type": "VAR", "var": "ex3b", "op": "set", "value": 6 },
+        { "type": "VAR", "var": "ex3b", "op": "set", "value": 9 },
         { "type": "VAR", "var": "ex5", "op": "set", "value": 5 },
         { "type": "VAR", "var": "ex6", "op": "set", "value": 5 },
-        { "type": "VAR", "var": "ex7", "op": "set", "value": 4 }
+        { "type": "VAR", "var": "ex7", "op": "set", "value": 4 },
+        { "type": "VAR", "var": "ex8", "op": "set", "value": 4 }
       ],
       "lines": [
         {
@@ -176,7 +215,7 @@
           "id": "ta_arsiv",
           "label": "ARŞİV",
           "kind": "ARCHIVE",
-          "choices": ["A_HESAP", "A_RAPOR", "A_VAKIF", "A_SUC", "A_CIKARIM", "A_LEYLA"]
+          "choices": ["A_HESAP", "A_RAPOR", "A_HRESMI", "A_VAKIF", "A_SUC", "A_CIKARIM", "A_LEYLA"]
         }
       ],
       "choices": [
@@ -221,7 +260,7 @@
           "next": "ARA_HESAP",
           "maxUses": 1,
           "visibleWhen": { "all": [{ "hasEvidence": "ev_hesap" }, { "not": { "visited": "INV_HESAP" } }] },
-          "description": "Noter tespitli döküm · 6 deneme"
+          "description": "Noter tespitli döküm · 9 deneme"
         },
         {
           "id": "A_RAPOR",
@@ -234,13 +273,23 @@
           "description": "Dr. Uçar · imaj incelemesi · 5 deneme"
         },
         {
+          "id": "A_HRESMI",
+          "kind": "NAVIGATE",
+          "label": "Hastanenin resmî yazısı",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_HRESMI_GIRIS",
+          "maxUses": 1,
+          "visibleWhen": { "flag": "hastane_istendi" },
+          "description": "Mahkemenin müzekkeresine cevap · 4 deneme"
+        },
+        {
           "id": "A_VAKIF",
           "kind": "NAVIGATE",
           "label": "Vakfın ihale dosyası",
           "cost": [{ "var": "ara_ap", "amount": 1 }],
           "next": "ARA_VAKIF_GIRIS",
           "maxUses": 1,
-          "visibleWhen": { "visited": "INV_T_HAYRI" },
+          "visibleWhen": { "any": [{ "visited": "INV_T_HAYRI" }, { "flag": "fact_vakif" }] },
           "description": "Hayri Bey’in izniyle · gelen evrak defteri"
         },
         {
@@ -276,16 +325,6 @@
           "visibleWhen": { "cmp": [{ "var": "leyla_ara" }, "<", { "var": "ara_day" }] }
         },
         {
-          "id": "A_BEKLE",
-          "kind": "NAVIGATE",
-          "label": "Haftayı kapat",
-          "description": "Kalan eylem puanlarını bırak",
-          "visibleWhen": { "cmp": [{ "var": "ara_ap" }, ">", 0] },
-          "confirm": "Haftanın kalan eylem puanları yanar. Emin misin?",
-          "effects": [{ "type": "VAR", "var": "ara_ap", "op": "set", "value": 0 }],
-          "next": "$stay"
-        },
-        {
           "id": "GO_T",
           "kind": "NAVIGATE",
           "label": "DURUŞMADAN ÖNCEKİ AKŞAM",
@@ -294,11 +333,31 @@
           "enabledWhen": {
             "all": [
               { "cmp": [{ "var": "ara_day" }, "==", 2] },
-              { "any": [{ "ref": "ara_ilerleme" }, { "cmp": [{ "var": "ara_ap" }, "<=", 0] }] }
+              { "any": [{ "cmp": [{ "var": "ara_ap" }, "<=", 0] }, { "ref": "ara_bos" }] },
+              { "visited": "ARA_LEYLA" }
             ]
           },
-          "lockedReason": "Duruşmaya iki gün var. Önce arayı kullan: en az üç iş ya da bütün eylem puanları.",
-          "next": "ARA_TEKLIF"
+          "lockedReason": "Duruşmaya iki gün var. Bu haftanın her saatini dosyaya ver; Leyla dosyayı görmeden salona girme.",
+          "next": {
+            "routes": [
+              {
+                "when": {
+                  "all": [
+                    { "hasEvidence": "ev_hesap" },
+                    { "flag": "contra_s3" },
+                    { "flag": "kilit_mahkemede" },
+                    { "visited": "ARA_RAPOR" },
+                    { "flag": "suc_duyurusu" },
+                    { "hasEvidence": "ded_uslup_ozan" },
+                    { "hasEvidence": "clue_pay" },
+                    { "hasEvidence": "ded_uslup" }
+                  ]
+                },
+                "to": "ARA_TEKLIF"
+              },
+              { "to": "ARA_SON_1" }
+            ]
+          }
         }
       ]
     },
@@ -324,8 +383,17 @@
               "fx": "flash"
             },
             {
+              "speaker": "narrator",
+              "text": "“85.105.44.17 numaralı sabit IP adresi, sorulan tarih ve saatlerde Tekin Yapı Danışmanlık Ltd. Şti. adına kayıtlı iş hattına atanmıştır. Tesis adresi: Nilüfer.”"
+            },
+            {
               "speaker": "player",
               "text": "85.105.44.17. Üç gece. Bir abone adı. Okudum. Bir daha okudum. Tahtaya iğneledim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir abone adı bir suçlama değildir. Ama bir soruyu bir adrese bağlar; ve o adresin bir kapısı, bir anahtarı, bir sahibi vardır. Bundan sonrasını yine kâğıtlar söyleyecek.",
               "style": "thought"
             }
           ]
@@ -336,11 +404,72 @@
             {
               "speaker": "narrator",
               "text": "Bir hafta geçti. Bilirkişi imajı aldı; rapor yazıyor. Kalemde başka bir şey yok."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Panoya her sabah aynı soruyla baktım: bu kâğıtlardan hangisi salonda konuşacak, hangisi yalnızca benim duvarımda kalacak? Bir kâğıdı delil yapan şey, onu kimin yazdığı ve kimin tanıyacağıdır."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla bir keresinde demişti: “Dosya bir bina gibidir; taşıyıcı duvarı bul, gerisi süs.” Benim taşıyıcı duvarım hâlâ yarım.",
+              "style": "thought"
             }
           ]
         }
       ],
       "routes": [{ "to": "ARA_AKSAM" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_HAFTA2",
+      "type": "DECISION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #06 · ARA",
+      "title": "İkinci hafta",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ARSLAN HUKUK · LEYLA’NIN ODASI — PAZARTESİ 08.30",
+              "style": "card",
+              "bg": "buro"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla’nın odasında radyatör tıkırdıyordu. Masasında dosya yoktu; yalnızca bir fincan, bir kalem ve benim panomun bir fotoğrafı, ters çevrilmiş."
+            },
+            { "speaker": "leyla", "text": "Otur. Sana bir şey anlatacağım; sonra işine dönersin." },
+            {
+              "speaker": "leyla",
+              "text": "Yirmi iki yıl önce ilk ağır ceza dosyamı aldım. Bir hırsızlık. Müvekkil “ben yapmadım” dedi; ben inandım. Bütün dosyayı onun masumiyeti üzerine kurdum."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Duruşmada bir tanık çıktı, müvekkilimi o gece başka bir yerde gördüğünü söyledi. Benim tanığım değildi; savcının tanığıydı. Ben o tanığı hiç aramamıştım, çünkü cevabı bildiğimi sanıyordum."
+            },
+            { "speaker": "player", "text": "Beraat etti mi?" },
+            {
+              "speaker": "leyla",
+              "text": "Etti. Ama o gün öğrendim: inanmak bir avukatın işi değil. Avukatın işi, inandığı şeyin kâğıdını bulmak. Kâğıt yoksa inancın, mahkemede bir sesten ibarettir."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Fotoğrafı çevirdi. Benim panom; iplikler, raptiyeler, ortada bir boşluk."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bu hafta son haftan. Panonda ne eksikse onu bul; bulamadığını da bil. Bilmediğini bilmek, duruşmada en az bildiğin kadar işe yarar."
+            },
+            {
+              "speaker": "player",
+              "text": "Odadan çıkarken kapıda durdum. Leyla yine pencereye dönmüştü; yağmur yine başlamıştı. Bazı insanlar dersini anlatıp gider. Leyla anlatır, sonra kalır.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA_HUB" }],
       "choices": []
     },
     {
@@ -374,6 +503,10 @@
               "speaker": "player",
               "text": "Merak. On yıllık arkadaşının avukatına kestane şekeri getiren bir merak.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kutuyu masanın köşesine bıraktı; kurdelesi özenle bağlanmıştı. Dışarıda yağmur yeniden başlamıştı, cama ince ince vuruyordu. Bir tanığın, bir avukatın bürosunda işi yoktur; bunu ikimiz de biliyorduk."
             }
           ]
         }
@@ -396,7 +529,7 @@
               ]
             }
           ],
-          "next": "ARA_HUB",
+          "next": "ARA_HAFTA2",
           "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 50 }],
           "quality": {
             "q": "GOOD",
@@ -421,7 +554,7 @@
               ]
             }
           ],
-          "next": "ARA_HUB",
+          "next": "ARA_HAFTA2",
           "effects": [
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -80 },
             { "type": "VAR", "var": "ozan_uyarildi", "op": "set", "value": true }
@@ -449,7 +582,7 @@
               ]
             }
           ],
-          "next": "ARA_HUB",
+          "next": "ARA_HAFTA2",
           "effects": [
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -60 },
             { "type": "VAR", "var": "ozan_uyarildi", "op": "set", "value": true }
@@ -542,7 +675,8 @@
           ],
           "effects": [
             { "type": "SCORE", "category": "SORGULAMA", "amount": 50 },
-            { "type": "VAR", "var": "fact_melis_sn", "op": "set", "value": true }
+            { "type": "VAR", "var": "fact_melis_sn", "op": "set", "value": true },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ],
           "quality": {
             "q": "GOOD",
@@ -573,7 +707,10 @@
               ]
             }
           ],
-          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }]
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 40 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
         },
         {
           "id": "MEL_OZUR",
@@ -588,7 +725,10 @@
               ]
             }
           ],
-          "effects": [{ "type": "VAR", "var": "pers", "op": "inc", "value": 1 }],
+          "effects": [
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ],
           "quality": { "q": "GOOD", "feedback": "Hatayı kabul etmek, karşı tarafla iletişimi yeniden kurar." }
         },
         {
@@ -611,7 +751,8 @@
           "next": "ARA_HUB",
           "effects": [
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
-            { "type": "VAR", "var": "melis_kapandi", "op": "set", "value": true }
+            { "type": "VAR", "var": "melis_kapandi", "op": "set", "value": true },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ],
           "quality": {
             "q": "BAD",
@@ -619,8 +760,17 @@
             "category": "SAVUNMA_STRATEJISI"
           }
         },
-        { "id": "MEL_BITIR", "kind": "CONTINUE", "label": "Teşekkür et ve çık", "role": "BACK", "next": "ARA_HUB" }
-      ]
+        {
+          "id": "MEL_BITIR",
+          "kind": "CONTINUE",
+          "label": "Teşekkür et ve çık",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": { "cmp": [{ "var": "sordu" }, ">=", 1] },
+          "lockedReason": "Önce bir şey sor."
+        }
+      ],
+      "onEnter": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 0 }]
     },
     {
       "id": "ARA_NURTEN",
@@ -673,7 +823,10 @@
             { "lines": [{ "speaker": "nurten", "text": "Görürsünüz. Fotokopi yok ama, gözünüzle bakın." }] }
           ],
           "next": "ARA_DEMIRBAS",
-          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 30 }]
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 30 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
         },
         {
           "id": "NUR_LAPTOP",
@@ -704,11 +857,21 @@
           ],
           "effects": [
             { "type": "SCORE", "category": "ARASTIRMA", "amount": 30 },
-            { "type": "DISCOVER", "evidence": "clue_uslup_ozan" }
+            { "type": "DISCOVER", "evidence": "clue_uslup_ozan" },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
-        { "id": "NUR_BITIR", "kind": "CONTINUE", "label": "Teşekkür et", "role": "BACK", "next": "ARA_HUB" }
-      ]
+        {
+          "id": "NUR_BITIR",
+          "kind": "CONTINUE",
+          "label": "Teşekkür et",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": { "cmp": [{ "var": "sordu" }, ">=", 1] },
+          "lockedReason": "Önce bir şey sor."
+        }
+      ],
+      "onEnter": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 0 }]
     },
     {
       "id": "ARA_DEMIRBAS",
@@ -758,7 +921,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_envanter" },
-            { "type": "SCORE", "category": "ARASTIRMA", "amount": 150 }
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 150 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -770,7 +934,8 @@
             "text": "Tablet iade edilmiş, 3 Kasım’da sıfırlanmış. Hesap verisindeki tarihle aynı gün.",
             "label": "NOT ALINDI",
             "tone": "info"
-          }
+          },
+          "effects": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 1 }]
         },
         {
           "id": "EX_D_KOLI",
@@ -781,7 +946,8 @@
             "text": "Anahtarlar ve lazer metre kargoyla iade edilmiş. Koliyle gelenler listede tek tek işaretli. 07 işaretsiz.",
             "label": "NOT ALINDI",
             "tone": "info"
-          }
+          },
+          "effects": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 1 }]
         },
         {
           "id": "FB_DEMIRBAS",
@@ -795,8 +961,17 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "DEMIRBAS_BITIR", "kind": "CONTINUE", "label": "Listeyi kapat", "role": "BACK", "next": "ARA_HUB" }
-      ]
+        {
+          "id": "DEMIRBAS_BITIR",
+          "kind": "CONTINUE",
+          "label": "Listeyi kapat",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": { "any": [{ "cmp": [{ "var": "sordu" }, ">=", 1] }, { "cmp": [{ "var": "ex5" }, "<=", 0] }] },
+          "lockedReason": "Önce belgeye bir bak."
+        }
+      ],
+      "onEnter": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 0 }]
     },
     {
       "id": "ARA_EV_GIRIS",
@@ -829,6 +1004,15 @@
               "speaker": "tarik",
               "text": "Şu koli mart’tan beri orada duruyor. Ozan ayrılırken kargoyla yolladı. Açtım, bir baktım, kapattım. İçine bakmak istemedim; on yıllık bir dostluğun iade edilmiş hâli."
             },
+            {
+              "speaker": "narrator",
+              "text": "Masanın üstünde bir modem, ışıkları yeşil yanıp sönüyor; yanında Ece’nin bir resmi, bantla duvara tutturulmuş. Bir evin bütün hattı bu küçük kutudan geçiyor; kim, ne zaman, nereden bağlandı, hepsi orada yazılı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir ev, bir hat. Polis buraya hiç gelmemiş; çünkü polis bir adresi değil, bir telefonu aramış.",
+              "style": "thought"
+            },
             { "speaker": "narrator", "text": "Sahnede dikkatini çeken yerlere dokun." }
           ]
         }
@@ -855,8 +1039,19 @@
           "feedback": { "text": "Burada dikkat çeken bir şey yok. (−1 büyüteç)", "label": "−10 SKOR", "tone": "error" },
           "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
         },
-        { "id": "EV_BITIR", "kind": "CONTINUE", "label": "Aramayı bitir", "role": "BACK", "next": "ARA_HUB" }
-      ]
+        {
+          "id": "EV_BITIR",
+          "kind": "CONTINUE",
+          "label": "Aramayı bitir",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": {
+            "any": [{ "cmp": [{ "var": "sordu" }, ">=", 1] }, { "cmp": [{ "var": "taps3" }, "<=", 0] }]
+          },
+          "lockedReason": "Önce bir yere dokun."
+        }
+      ],
+      "onEnter": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 0 }]
     },
     {
       "id": "ARA_HESAP",
@@ -925,7 +1120,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_bagli_cihaz" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -940,7 +1136,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_tablet_kapali" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 60 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 60 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -948,14 +1145,39 @@
           "kind": "EXAMINE",
           "match": { "tool": "cmp", "target": "Ah4" },
           "feedback": {
-            "title": "YENİ İPUCU",
-            "text": "Üç gecenin üçünde de cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.",
-            "label": "+150 SKOR · Not defterine eklendi",
-            "tone": "special"
+            "title": "6 KASIM",
+            "text": "İlk tehdit gecesi cihaz 3 çevrimiçi: 85.105.44.17. Bir adres. Öbür gecelerde de aynı mı?",
+            "label": "Satır not edildi",
+            "tone": "info"
           },
+          "responses": [
+            {
+              "when": { "all": [{ "flag": "aip_6" }, { "flag": "aip_9" }, { "flag": "aip_12" }, { "flag": "aip_ev" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Üç gecenin üçünde cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
           "effects": [
-            { "type": "DISCOVER", "evidence": "clue_ip_ayni" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+            { "type": "VAR", "var": "aip_6", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "aip_6" }, { "flag": "aip_9" }, { "flag": "aip_12" }, { "flag": "aip_ev" }] },
+                  { "not": { "hasEvidence": "clue_ip_ayni" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_ip_ayni" }
+              ]
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -963,24 +1185,120 @@
           "kind": "EXAMINE",
           "match": { "tool": "cmp", "target": "Ah5" },
           "feedback": {
-            "title": "AYNI ADRES",
-            "text": "9 Kasım: 85.105.44.17. Yine.",
-            "label": "Not defterinde",
+            "title": "9 KASIM",
+            "text": "Ses kaydı gecesi: 85.105.44.17. Yine.",
+            "label": "Satır not edildi",
             "tone": "info"
           },
-          "effects": [{ "type": "DISCOVER", "evidence": "clue_ip_ayni" }]
+          "responses": [
+            {
+              "when": { "all": [{ "flag": "aip_6" }, { "flag": "aip_9" }, { "flag": "aip_12" }, { "flag": "aip_ev" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Üç gecenin üçünde cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "aip_9", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "aip_6" }, { "flag": "aip_9" }, { "flag": "aip_12" }, { "flag": "aip_ev" }] },
+                  { "not": { "hasEvidence": "clue_ip_ayni" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_ip_ayni" }
+              ]
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
         },
         {
           "id": "AEX_IP3",
           "kind": "EXAMINE",
           "match": { "tool": "cmp", "target": "Ah6" },
           "feedback": {
-            "title": "AYNI ADRES",
-            "text": "12 Kasım: 85.105.44.17. Üçüncü kez.",
-            "label": "Not defterinde",
+            "title": "12 KASIM",
+            "text": "“Son mesajım” gecesi: 85.105.44.17. Üçüncü kez.",
+            "label": "Satır not edildi",
             "tone": "info"
           },
-          "effects": [{ "type": "DISCOVER", "evidence": "clue_ip_ayni" }]
+          "responses": [
+            {
+              "when": { "all": [{ "flag": "aip_6" }, { "flag": "aip_9" }, { "flag": "aip_12" }, { "flag": "aip_ev" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Üç gecenin üçünde cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "aip_12", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "aip_6" }, { "flag": "aip_9" }, { "flag": "aip_12" }, { "flag": "aip_ev" }] },
+                  { "not": { "hasEvidence": "clue_ip_ayni" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_ip_ayni" }
+              ]
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
+        },
+        {
+          "id": "AEX_EV",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "Ah8" },
+          "feedback": {
+            "title": "EV HATTI",
+            "text": "Cihaz 0, Tarık’ın telefonu, evden bağlanıyor: 176.88.12.4. Kendi telefonu. Başka bir hat.",
+            "label": "Satır not edildi",
+            "tone": "info"
+          },
+          "responses": [
+            {
+              "when": { "all": [{ "flag": "aip_6" }, { "flag": "aip_9" }, { "flag": "aip_12" }, { "flag": "aip_ev" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Üç gecenin üçünde cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "aip_ev", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "aip_6" }, { "flag": "aip_9" }, { "flag": "aip_12" }, { "flag": "aip_ev" }] },
+                  { "not": { "hasEvidence": "clue_ip_ayni" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_ip_ayni" }
+              ]
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
         },
         {
           "id": "AEX_ARSIV",
@@ -994,19 +1312,9 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_arsiv" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
-        },
-        {
-          "id": "AEX_EV",
-          "kind": "EXAMINE",
-          "match": { "tool": "cmp", "target": "Ah8" },
-          "feedback": {
-            "title": "EV HATTI",
-            "text": "Cihaz 0, Tarık’ın telefonu, evden bağlanıyor: 176.88.12.4. Kendi telefonu. Kendi evi. Başka bir hat.",
-            "label": "NOT ALINDI",
-            "tone": "info"
-          }
         },
         {
           "id": "AFB_HESAP",
@@ -1020,8 +1328,17 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "AHESAP_BITIR", "kind": "CONTINUE", "label": "Raporu kapat", "role": "BACK", "next": "ARA_HUB" }
-      ]
+        {
+          "id": "AHESAP_BITIR",
+          "kind": "CONTINUE",
+          "label": "Raporu kapat",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": { "any": [{ "cmp": [{ "var": "sordu" }, ">=", 1] }, { "cmp": [{ "var": "ex3b" }, "<=", 0] }] },
+          "lockedReason": "Önce belgeye bir bak."
+        }
+      ],
+      "onEnter": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 0 }]
     },
     {
       "id": "ARA_RAPOR",
@@ -1043,6 +1360,10 @@
             {
               "speaker": "leyla",
               "text": "Bilirkişi senin tanığın değil Deniz. Mahkemenin gözü. Lehine olanı da, aleyhine olanı da aynı soğukkanlılıkla yazar. İkisini de oku."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Duruşmada ona soracağın her soru bu raporun bir satırına dayanmalı. Okumadığın bir rapora soru sorarsan, bilirkişi sana değil, hâkime cevap verir; hâkim de sana bakar."
             },
             {
               "speaker": "player",
@@ -1107,7 +1428,11 @@
             "label": "+80 SKOR · Not defterine eklendi",
             "tone": "special"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 80 }]
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_rapor_cihaz" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 80 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
         },
         {
           "id": "EX_R_KILIT",
@@ -1119,7 +1444,11 @@
             "label": "+80 SKOR · Not defterine eklendi",
             "tone": "special"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 80 }]
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_rapor_kilit" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 80 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
         },
         {
           "id": "EX_R_SS",
@@ -1131,7 +1460,10 @@
             "label": "+100 SKOR · Not defterine eklendi",
             "tone": "special"
           },
-          "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 }]
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
         },
         {
           "id": "EX_R_SINIR",
@@ -1143,7 +1475,11 @@
             "label": "+60 SKOR · Not defterine eklendi",
             "tone": "special"
           },
-          "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 }]
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_rapor_sinir" },
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
         },
         {
           "id": "EX_R_KANAAT",
@@ -1154,7 +1490,8 @@
             "text": "Kanaat cümlesi temkinli: “desteklenmemektedir.” Bilirkişiler “kesinlikle” demez. Ama bu temkinli cümle, polisin kesin cümlesini yerinden söküyor.",
             "label": "NOT ALINDI",
             "tone": "info"
-          }
+          },
+          "effects": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 1 }]
         },
         {
           "id": "FB_RAPOR",
@@ -1168,8 +1505,211 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "RAPOR_BITIR", "kind": "CONTINUE", "label": "Raporu kapat", "role": "BACK", "next": "ARA_HUB" }
-      ]
+        {
+          "id": "RAPOR_BITIR",
+          "kind": "CONTINUE",
+          "label": "Raporu kapat",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": { "any": [{ "cmp": [{ "var": "sordu" }, ">=", 1] }, { "cmp": [{ "var": "ex6" }, "<=", 0] }] },
+          "lockedReason": "Önce belgeye bir bak."
+        }
+      ],
+      "onEnter": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 0 }]
+    },
+    {
+      "id": "ARA_HRESMI_GIRIS",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #06 · ARA",
+      "title": "Hastanenin resmî yazısı",
+      "background": "adliye",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE · KALEM ODASI — 14.20", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Mahkemenin müzekkeresine hastaneden cevap gelmiş: bir üst yazı, “aslı gibidir” damgalı birkaç sayfa. Kâtip dosyayı önüme koydu, kahvesine döndü."
+            },
+            {
+              "speaker": "narrator",
+              "name": "KALEMDEKİ KÂTİP",
+              "text": "Hastane bir de defter sayfası göndermiş avukat hanım. Nöbet defteri. Kim istedi bilmem; siz istediyseniz, işte."
+            },
+            {
+              "speaker": "player",
+              "text": "Babasının muvafakatiyle aldığımız kâğıtlar bir fotokopiydi. Bunlar mahkemenin istediği, hastanenin gönderdiği kâğıtlar. Aynı gece, bu kez resmî ağızdan.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Üst yazının altında başhekim yardımcısının imzası, köşesinde bir evrak numarası. Sayfaların her birinde mavi bir damga: “Aslı gibidir.” Bir fotokopiyle bir belge arasındaki fark, o mavi mürekkepte."
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "HRESMI_BASLA", "kind": "CONTINUE", "label": "Yazıyı incele", "next": "ARA_HRESMI" }]
+    },
+    {
+      "id": "ARA_HRESMI",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #06 · ARA",
+      "title": "Hastanenin resmî yazısı",
+      "hud": ["ex8"],
+      "background": "adliye",
+      "lines": [
+        { "lines": [{ "speaker": "narrator", "text": "Üst yazı ve ekleri. Bir alet seç, sonra satıra dokun." }] }
+      ],
+      "header": { "left": "DEVLET HASTANESİ BAŞHEKİMLİĞİ · MAHKEMEYE CEVAP", "right": "EK: 4 SAYFA" },
+      "columns": [
+        { "label": "EK", "flex": 0.8 },
+        { "label": "KAYIT", "flex": 3 }
+      ],
+      "rows": [
+        {
+          "id": "y1",
+          "cells": [
+            "Üst yazı",
+            "Müzekkerenize istinaden Necati Aksoy’a ait 09.11 acil servis kayıtları ekte sunulmuştur."
+          ]
+        },
+        {
+          "id": "y2",
+          "cells": ["Ek-1", "Epikriz ve girişim onam formu (aslı gibidir) · onam 02.10 · saati yazan: Hmş. G. Tunç"]
+        },
+        {
+          "id": "y3",
+          "cells": [
+            "Ek-2",
+            "Nöbet defteri 09.11 · 01.40 · refakatçi Aksoy · telefon şarj istasyonunda emanet · paraf: G.T."
+          ]
+        },
+        { "id": "y4", "cells": ["Ek-2", "Nöbet defteri 09.11 · 06.05 · emanet telefon sahibine teslim · paraf: G.T."] },
+        { "id": "y5", "cells": ["Ek-3", "Kamera kayıtları: otuz günlük saklama süresi dolduğundan mevcut değildir."] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex8", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_Y_NOBET",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "y3" },
+          "feedback": {
+            "title": "EMANET",
+            "text": "Nöbet defteri: “01.40 · refakatçi Aksoy · telefon şarj istasyonunda emanet.” Hemşire masasındaki bandın defterdeki karşılığı; aynı dakika, aynı paraf. Peki telefon o masadan ne zaman kalktı?",
+            "label": "Satır not edildi",
+            "tone": "info"
+          },
+          "responses": [
+            {
+              "when": { "all": [{ "flag": "nb_emanet" }, { "flag": "nb_teslim" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İki kayıt, aynı paraf: telefon 01.40’ta masaya emanet edilmiş, 06.05’te sahibine teslim edilmiş. Bant atılır, defter kalır. Bu sayfayı kürsüde, onu yazan ele göstermeliyim.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "nb_emanet", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "nb_emanet" }, { "flag": "nb_teslim" }] },
+                  { "not": { "hasEvidence": "clue_nobet" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "ARASTIRMA", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_nobet" }
+              ]
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
+        },
+        {
+          "id": "EX_Y_TESLIM",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "y4" },
+          "feedback": {
+            "title": "TESLİM",
+            "text": "06.05: telefon sahibine teslim. Kilit kaydındaki 06.10 açılışından beş dakika önce. Sahibine döndüğü an, ekran da uyandı.",
+            "label": "Satır not edildi",
+            "tone": "info"
+          },
+          "responses": [
+            {
+              "when": { "all": [{ "flag": "nb_emanet" }, { "flag": "nb_teslim" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İki kayıt, aynı paraf: telefon 01.40’ta masaya emanet edilmiş, 06.05’te sahibine teslim edilmiş. Bant atılır, defter kalır. Bu sayfayı kürsüde, onu yazan ele göstermeliyim.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "nb_teslim", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "nb_emanet" }, { "flag": "nb_teslim" }] },
+                  { "not": { "hasEvidence": "clue_nobet" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "ARASTIRMA", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_nobet" }
+              ]
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
+        },
+        {
+          "id": "EX_Y_KAMERA",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "y5" },
+          "feedback": {
+            "title": "KAMERA",
+            "text": "Kamera yok. Kasım çoktan silinmiş. Görüntü olmayan yerde kâğıt konuşur.",
+            "label": "NOT ALINDI",
+            "tone": "info"
+          },
+          "effects": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 1 }]
+        },
+        {
+          "id": "FB_HRESMI",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle burada dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        {
+          "id": "HRESMI_BITIR",
+          "kind": "CONTINUE",
+          "label": "Yazıyı kapat",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": { "any": [{ "cmp": [{ "var": "sordu" }, ">=", 1] }, { "cmp": [{ "var": "ex8" }, "<=", 0] }] },
+          "lockedReason": "Önce belgeye bir bak."
+        }
+      ],
+      "onEnter": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 0 }]
     },
     {
       "id": "ARA_VAKIF_GIRIS",
@@ -1268,7 +1808,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_vakif_yazi" },
-            { "type": "SCORE", "category": "ARASTIRMA", "amount": 150 }
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 150 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -1281,7 +1822,10 @@
             "label": "+60 SKOR · Not defterine eklendi",
             "tone": "special"
           },
-          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }]
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
         },
         {
           "id": "EX_V_KARAR",
@@ -1292,7 +1836,8 @@
             "text": "Kurul 19 Kasım’da değerlendirmeyi askıya almış; gerekçede “kamuoyuna yansıyan soruşturma” yazıyor. Bir dedikodu bir ihaleyi durdurmuş.",
             "label": "NOT ALINDI",
             "tone": "info"
-          }
+          },
+          "effects": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 1 }]
         },
         {
           "id": "FB_VAKIF",
@@ -1306,8 +1851,17 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "VAKIF_BITIR", "kind": "CONTINUE", "label": "Klasörü kapat", "role": "BACK", "next": "ARA_HUB" }
-      ]
+        {
+          "id": "VAKIF_BITIR",
+          "kind": "CONTINUE",
+          "label": "Klasörü kapat",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": { "any": [{ "cmp": [{ "var": "sordu" }, ">=", 1] }, { "cmp": [{ "var": "ex7" }, "<=", 0] }] },
+          "lockedReason": "Önce belgeye bir bak."
+        }
+      ],
+      "onEnter": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 0 }]
     },
     {
       "id": "ARA_SUC",
@@ -1333,8 +1887,7 @@
           "id": "SUC_OZAN",
           "kind": "OPTION",
           "label": "Ozan Tekin hakkında; 07’nin aranması ve el konulması talebiyle",
-          "enabledWhen": { "ref": "ozan_dayanak" },
-          "lockedReason": "Somut dayanak gerekli: cihaz 3’ün ne olduğu, 07’nin kimde kaldığı ve tehdit hattının kime ait olduğu.",
+          "visibleWhen": { "ref": "ozan_dayanak" },
           "responses": [
             {
               "lines": [
@@ -1438,6 +1991,11 @@
             {
               "speaker": "narrator",
               "text": "İki kart seç. Yeni kartlar tahtada: demirbaş, koli, sağlayıcının yanıtı."
+            },
+            {
+              "speaker": "player",
+              "text": "Üç hafta önce bu pano bir soru işaretiydi. Şimdi iplikler bir yere doğru gerilmeye başladı; ama bir ipliği ben gererim, bir ipliği kâğıt. İkisini karıştırmamalıyım.",
+              "style": "thought"
             }
           ]
         }
@@ -1457,6 +2015,8 @@
         "clue_arsiv",
         "clue_onam",
         "clue_sarj",
+        "ded_sarj",
+        "clue_ofis_hat",
         "clue_kamera_h",
         "clue_dock",
         "ev_not",
@@ -1466,7 +2026,8 @@
         "clue_koli",
         "clue_envanter",
         "ev_isp",
-        "clue_vakif_yazi"
+        "clue_vakif_yazi",
+        "clue_ev_hat"
       ],
       "choices": [
         {
@@ -1527,31 +2088,31 @@
           ]
         },
         {
-          "id": "ACB_HAST1",
-          "kind": "COMBINE",
-          "match": { "a": "clue_kilit", "b": "clue_onam" },
-          "feedback": {
-            "title": "02.14’te acil serviste",
-            "text": "Telefon 01.40’tan 06.10’a kadar kilitli; Tarık 02.10’da onam formu imzalıyor. Ses kaydını o telefondan, o eller iletmedi.",
-            "label": "YENİ DELİL · +300 SKOR (ilk kurulumda)",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_hastane" } },
-              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
-            },
-            { "type": "DISCOVER", "evidence": "ded_hastane" }
-          ]
-        },
-        {
           "id": "ACB_HAST2",
           "kind": "COMBINE",
           "match": { "a": "clue_kilit", "b": "clue_sarj" },
           "feedback": {
             "title": "Şarjdaki telefon",
-            "text": "Kilit kaydı ile hemşire masasındaki bant aynı saati söylüyor: 01.40. Telefon gece boyunca şarjda, kilitli.",
+            "text": "Ek-2’deki kilit olayı ile hemşire masasındaki bant aynı saati söylüyor: 01.40. Telefon gece boyunca şarjda, kilitli. Peki ya Tarık? O saatlerde ne yapıyordu, kim yazdı?",
+            "label": "YENİ DELİL · +150 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_sarj" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_sarj" }
+          ]
+        },
+        {
+          "id": "ACB_HAST1",
+          "kind": "COMBINE",
+          "match": { "a": "ded_sarj", "b": "clue_onam" },
+          "feedback": {
+            "title": "02.14’te acil serviste",
+            "text": "Telefon 01.40’tan 06.10’a kadar kilitli, hemşire masasında; Tarık 02.10’da onam formu imzalıyor, saati hemşire yazmış. Ses kaydını o telefondan, o eller iletmedi.",
             "label": "YENİ DELİL · +300 SKOR (ilk kurulumda)",
             "tone": "success"
           },
@@ -1665,7 +2226,7 @@
           "match": { "a": "ev_isp", "b": "clue_ip_ayni" },
           "feedback": {
             "title": "Tehdit hattının adresi",
-            "text": "Üç gecenin oturumu 85.105.44.17’den. Sağlayıcıya göre o adres Tekin Yapı Danışmanlık’ın iş hattı.",
+            "text": "Üç gecenin oturumu 85.105.44.17’den. Sağlayıcıya göre o adres Tekin Yapı Danışmanlık’ın iş hattı. Müvekkilin evi değil, ofis değil; bir başka firmanın, sabit bir hattı.",
             "label": "YENİ DELİL · +300 SKOR (ilk kurulumda)",
             "tone": "success"
           },
@@ -1803,7 +2364,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Büro boşalmıştı. Yağmur yeniden başlamış, oluklardan taşan su kaldırıma vuruyordu. Panoda üç haftanın bütün kâğıtları: bir demirbaş listesi, bir sağlayıcı yazısı, bir hesap dökümü, bir hastane formu."
+              "text": "Büro boşalmıştı. Yağmur yeniden başlamış, oluklardan taşan su kaldırıma vuruyordu. Panoda üç haftanın kâğıtları; ortada, kırmızı bir raptiyeyle, bir demirbaş listesi."
             },
             {
               "speaker": "narrator",
@@ -1819,11 +2380,11 @@
             },
             {
               "speaker": "tarik",
-              "text": "Birincisi: Ozan’ın e-postası. Ortakken şifresini biliyordum. Hâlâ aynıdır; o hiçbir şeyi değiştirmez. Girer bakarız. Bir dakika."
+              "text": "Birincisi: Ozan’ın e-postası. Üslup tutuyor, ama “tek başına ispat değil” dediniz. Ortakken şifresini biliyordum. Hâlâ aynıdır; o hiçbir şeyi değiştirmez. Girer bakarız. Bir dakika."
             },
             {
               "speaker": "tarik",
-              "text": "İkincisi: bilirkişiye vereceğimiz yedek. 25 Ekim’de Melis’e yazdıklarım orada. Onlar olmasa, savcının elinde saik de kalmaz. Yedekten silerim, kimse bilmez."
+              "text": "İkincisi: noterden aldığımız hesap dökümü. Yarın bir kopyasını daha vereceğiz; 25 Ekim’de Melis’e yazdıklarım orada. Onlar olmasa, savcının elinde saik de kalmaz. Kopyadan silerim, kimse bilmez."
             },
             { "speaker": "narrator", "text": "Kurşun kalem masada. Tıkırdamıyor." },
             {
@@ -1872,17 +2433,21 @@
         {
           "id": "TK_SIL",
           "kind": "OPTION",
-          "label": "25 Ekim mesajlarını yedekten çıkaralım; saik ortadan kalkar, kimse fark etmez.",
+          "label": "25 Ekim mesajlarını kopyadan çıkaralım; saik ortadan kalkar, kimse fark etmez.",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "narrator",
-                  "text": "Tarık birkaç dakika klavyede bir şeyler yaptı. Sonra dizüstüyü bana çevirdi. “Tamam.”"
+                  "text": "Tarık birkaç dakika klavyede bir şeyler yaptı. Ekranda satırlar birer birer kayboldu; 25 Ekim, 23.48, “bu şartlarla devam edemeyiz melis”. Sonra dizüstüyü bana çevirdi. “Tamam.”"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Yeni kopyayı bir flaş belleğe aldım, zarfa koydum, zarfı çantama. Ellerim titremiyordu. Titremesi gerekirdi."
                 },
                 {
                   "speaker": "player",
-                  "text": "Bir şey kırıldı. Sesini duymadım. Sonra duyacağım.",
+                  "text": "Bir şey kırıldı. Sesini duymadım. Sonra duyacağım. Polisin iki gün mühürsüz bıraktığı bir telefonu üç hafta eleştirdim; şimdi kendi elimle bir dökümü değiştirdim.",
                   "style": "thought"
                 }
               ]
@@ -1909,11 +2474,15 @@
               "lines": [
                 {
                   "speaker": "narrator",
-                  "text": "Tarık bir şifre yazdı. Ekran açıldı. Gelen kutusu. Bir sürü “Saygılar.”"
+                  "text": "Tarık bir şifre yazdı. Ekran açıldı. Gelen kutusu: ihale yazışmaları, faturalar, bir sürü resmî selamlama."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Ekranın köşesinde, bağlantının nereden kurulduğunu gösteren küçük bir simge yanıp sönüyordu: bu büronun hattı. Kimse ona bakmadı."
                 },
                 {
                   "speaker": "player",
-                  "text": "Ne bulursak bulalım, artık hiçbiri delil değil. Ve biz, onun yaptığını yaptık.",
+                  "text": "Ne bulursak bulalım, artık hiçbiri delil değil. Ve biz, onun yaptığını yaptık: başkasının kapısını, başkasının anahtarıyla açtık.",
                   "style": "thought"
                 }
               ]
@@ -1950,11 +2519,21 @@
       ],
       "lines": [
         {
+          "when": { "visited": "ARA_TEKLIF" },
           "lines": [
             { "speaker": "narrator", "text": "DURUŞMADAN ÖNCEKİ GECE", "style": "card", "bg": "buro_gece" },
             {
               "speaker": "narrator",
               "text": "Tarık gittikten sonra büroda yalnız kaldım. Panoda üç haftanın kâğıtları."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "DURUŞMADAN ÖNCEKİ GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Büro boşalmıştı. Tarık akşam bir kez aradı, yalnızca “yarın dokuzda kapıdayım” dedi. Panoda üç haftanın kâğıtları."
             }
           ]
         }
@@ -2076,6 +2655,21 @@
           ]
         },
         {
+          "when": { "all": [{ "hasEvidence": "ded_hastane" }, { "flag": "gulay_istendi" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Yarın bir hemşire kürsüye çıkacak. Bir bant, bir saat, bir imza. Bir de bilirkişinin “dokunma olayı yok” satırı. 9 Kasım gecesini kâğıtlar anlatacak; ben yalnızca sırayı tutacağım.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Öbür iki gece? Bir sütun, bir rakam. Kimin elinde olduğunu bilmeden bir rakamla bir insanı aklamak, bir rakamla mahkûm etmek kadar zor.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "when": { "hasEvidence": "ded_bagli" },
           "lines": [
             {
@@ -2122,6 +2716,25 @@
           ]
         },
         {
+          "when": { "not": { "hasEvidence": "ded_ip_tekin" } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Işığı söndürdüm. Panoya son kez baktım: üç haftanın emeği, iplerle birbirine bağlı. Ortada hâlâ bir boşluk vardı; bir iplik, bir yere bağlanmadan sallanıyordu.",
+              "bg": "sokak_yagmur"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Merdivenden indim. Dışarıda yağmur incelmişti; Tophane’nin saat kulesi on biri vurdu, sesi ıslak sokaklarda uzadı."
+            },
+            {
+              "speaker": "player",
+              "text": "Yarın elimdeki kâğıtlar ne kadar ses çıkarırsa, o kadarı salona girecek. Fazlasını ben söyleyemem; söylersem, o artık delil değil, bir avukatın umududur.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "lines": [
             {
               "speaker": "narrator",
@@ -2150,7 +2763,7 @@
         }
       ],
       "choices": [
-        { "id": "ARA_SON_DEVAM", "kind": "CONTINUE", "label": "Duruşmaya git", "role": "PRIMARY", "next": "T_00" }
+        { "id": "ARA_SON_DEVAM", "kind": "CONTINUE", "label": "Duruşmaya git", "role": "PRIMARY", "next": "T_SABAH" }
       ]
     }
   ],
@@ -2159,7 +2772,12 @@
       "id": "tg_ara_day",
       "scope": "ARA_HUB",
       "priority": 1,
-      "when": { "all": [{ "cmp": [{ "var": "ara_ap" }, "<=", 0] }, { "cmp": [{ "var": "ara_day" }, "<", 2] }] },
+      "when": {
+        "all": [
+          { "any": [{ "cmp": [{ "var": "ara_ap" }, "<=", 0] }, { "ref": "ara_bos" }] },
+          { "cmp": [{ "var": "ara_day" }, "<", 2] }
+        ]
+      },
       "goto": "ARA_DAY_END"
     }
   ],
@@ -2182,20 +2800,30 @@
       "requires": { "flag": "isp_istendi" },
       "hint": "IP adresinin abonesini mahkemeden sorgulat."
     },
+    {
+      "evidence": "clue_nobet",
+      "source": { "type": "RULE", "id": "EX_Y_NOBET" },
+      "requires": { "all": [{ "flag": "nb_teslim" }] }
+    },
+    {
+      "evidence": "clue_nobet",
+      "source": { "type": "RULE", "id": "EX_Y_TESLIM" },
+      "requires": { "all": [{ "flag": "nb_emanet" }] }
+    },
     { "evidence": "clue_uslup_ozan", "source": { "type": "CHOICE", "id": "NUR_LAPTOP" } },
     { "evidence": "clue_envanter", "source": { "type": "RULE", "id": "EX_D_07" } },
     { "evidence": "clue_bagli_cihaz", "source": { "type": "RULE", "id": "AEX_C3" } },
     { "evidence": "clue_tablet_kapali", "source": { "type": "RULE", "id": "AEX_C2" } },
-    { "evidence": "clue_ip_ayni", "source": { "type": "RULE", "id": "AEX_IP1" } },
-    { "evidence": "clue_ip_ayni", "source": { "type": "RULE", "id": "AEX_IP2" } },
-    { "evidence": "clue_ip_ayni", "source": { "type": "RULE", "id": "AEX_IP3" } },
     { "evidence": "clue_arsiv", "source": { "type": "RULE", "id": "AEX_ARSIV" } },
+    { "evidence": "clue_rapor_cihaz", "source": { "type": "RULE", "id": "EX_R_CIHAZ" } },
+    { "evidence": "clue_rapor_kilit", "source": { "type": "RULE", "id": "EX_R_KILIT" } },
+    { "evidence": "clue_rapor_sinir", "source": { "type": "RULE", "id": "EX_R_SINIR" } },
     { "evidence": "clue_vakif_yazi", "source": { "type": "RULE", "id": "EX_V_YAZI" } },
     { "evidence": "ded_ss", "source": { "type": "RULE", "id": "ACB_SS" } },
     { "evidence": "ded_zincir", "source": { "type": "RULE", "id": "ACB_ZINCIR" } },
     { "evidence": "ded_bagli", "source": { "type": "RULE", "id": "ACB_BAGLI" } },
+    { "evidence": "ded_sarj", "source": { "type": "RULE", "id": "ACB_HAST2" } },
     { "evidence": "ded_hastane", "source": { "type": "RULE", "id": "ACB_HAST1" } },
-    { "evidence": "ded_hastane", "source": { "type": "RULE", "id": "ACB_HAST2" } },
     { "evidence": "ded_uslup", "source": { "type": "RULE", "id": "ACB_USLUP" } },
     { "evidence": "ded_tablet", "source": { "type": "RULE", "id": "ACB_TABLET" } },
     { "evidence": "ded_arsiv", "source": { "type": "RULE", "id": "ACB_ARSIV" } },

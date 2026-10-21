@@ -70,7 +70,7 @@ export const inv1Kaan: CasePart = {
             n('Hasan Çakır bu sefer başıyla selam verdi. Kaan içeri girerken ilk kez gözlerime baktı.'),
             s('kaan', 'Geldiniz. Gelmezsiniz sandım. İnsanlar bir kere gelir; ikincisinde iş olur.'),
             me('İş olduğu için geldim. Ama ikinci kez geldim.'),
-            s('kaan', 'Kırk dört gün oldu. Temiz. Burada temiz kalmak kolay sanıyorlar. Değil. Neyse. Sorun.'),
+            s('kaan', 'Yüzü geçti. Temiz. Burada temiz kalmak kolay sanıyorlar. Değil. Neyse. Sorun.'),
             n(
               'Masanın üstünde, tükenmezle yazılmış bir kâğıt parçası. Kaan fark etti, kâğıdı ters çevirdi. Gördüğüm tek kelime “perşembe”ydi.',
             ),
@@ -422,7 +422,8 @@ export const inv1Kaan: CasePart = {
           },
         }),
         topic('TP_SEKER', 'Şekerlik', {
-          visibleWhen: any(has('clue_sekerlik'), has('clue_kavanoz_iz')),
+          // Kavanozdaki izi sormak için önce izin varlığını (kriminal rapor) ve şekerliğin yerini (fotoğraf) bilmek gerekir.
+          visibleWhen: all(has('clue_sekerlik'), has('clue_kavanoz_iz')),
           cost: costOf('min', 2),
           score: { SORGULAMA: 20 },
           effects: [raise('fact_seker_k')],
@@ -602,11 +603,11 @@ export const inv1Kaan: CasePart = {
                 s('kaan', 'Ekimde acilde uyandım. Ablam başımdaydı. Ağlamıyordu. Ağlamaması daha kötüydü.', 'uzgun'),
                 s(
                   'kaan',
-                  'Ertesi hafta AMATEM. Her perşembe. Bir doktor, bir psikolog, bir test. Otuz bir ekimde temizdim. Kasımda da temizdim.',
+                  'Ertesi hafta AMATEM. Her perşembe. Bir doktor, bir psikolog, bir test. Otuz ekimde temizdim. Kasımda da temizdim.',
                 ),
                 s(
                   'kaan',
-                  'On dört kasımda randevum vardı. Cezaevindeydim. Kaçırdığım ilk randevu. Doktor “gelmedi” diye yazmıştır. Doğru da yazmıştır.',
+                  'On üç kasımda randevum vardı. Cezaevindeydim. Kaçırdığım ilk randevu. Doktor “gelmedi” diye yazmıştır. Doğru da yazmıştır.',
                   'uzgun',
                 ),
                 th(
@@ -626,33 +627,32 @@ export const inv1Kaan: CasePart = {
         }),
       ],
       choices: [
-        option(
-          'G_RIZA_C',
-          'Bunu mahkemede söylemek senin kararın. Söylersen odanın senin olmadığını anlatmak kolaylaşır; ama karar senin.',
-          {
-            visibleWhen: all(
-              flag('kaan_itiraf'),
-              not(any(flag('kaan_riza'), { chosen: 'G_RIZA_A' }, { chosen: 'G_RIZA_B' })),
-            ),
-            score: { SAVUNMA_STRATEJISI: 50 },
-            effects: [raise('kaan_riza'), inc('trust', 6)],
-            good: 'Müvekkili bilgilendirip kararı ona bıraktın: savunma stratejisi müvekkille birlikte ve onun aydınlatılmış rızasıyla kurulur (Av.K. 34; TBB Meslek Kuralları).',
-            responses: [
-              {
-                lines: [
-                  s('kaan', 'Benim kararım mı? Kimse bana bir şey sormamıştı uzun zamandır.', 'saskin'),
-                  n('Kaan gözlüğünü çıkardı, bandı düzeltti, geri taktı. Ellerini masanın üstüne, düz koydu.'),
-                  s(
-                    'kaan',
-                    'Söyleyeceğim. Kullandım, satmadım. Annemi ben arayacağım, sizden önce. Ablamdan önce. Bu sefer ben.',
-                  ),
-                  th('Kaan bir karar verdi. İlk kez bir başkası onun yerine vermedi.'),
-                ],
-              },
-            ],
-            next: '$stay',
-          },
-        ),
+        option('G_RIZA_C', 'Mahkemede ne söyleyeceğine sen karar vereceksin.', {
+          visibleWhen: all(
+            flag('kaan_itiraf'),
+            not(any(flag('kaan_riza'), { chosen: 'G_RIZA_A' }, { chosen: 'G_RIZA_B' })),
+          ),
+          score: { SAVUNMA_STRATEJISI: 50 },
+          effects: [raise('kaan_riza'), inc('trust', 6)],
+          good: 'Müvekkili bilgilendirip kararı ona bıraktın: savunma stratejisi müvekkille birlikte ve onun aydınlatılmış rızasıyla kurulur (Av.K. 34; TBB Meslek Kuralları).',
+          responses: [
+            {
+              lines: [
+                me(
+                  'Söylersen odanın senin olmadığını anlatmak kolaylaşır. Söylemezsen de seni savunurum. Karar senin.',
+                ),
+                s('kaan', 'Benim kararım mı? Kimse bana bir şey sormamıştı uzun zamandır.', 'saskin'),
+                n('Kaan gözlüğünü çıkardı, bandı düzeltti, geri taktı. Ellerini masanın üstüne, düz koydu.'),
+                s(
+                  'kaan',
+                  'Söyleyeceğim. Kullandım, satmadım. Annemi ben arayacağım, sizden önce. Ablamdan önce. Bu sefer ben.',
+                ),
+                th('Kaan bir karar verdi. İlk kez bir başkası onun yerine vermedi.'),
+              ],
+            },
+          ],
+          next: '$stay',
+        }),
         option('G_RIZA_A', 'Düşün. Acele etme; duruşmadan önce yine konuşuruz.', {
           visibleWhen: all(
             flag('kaan_itiraf'),

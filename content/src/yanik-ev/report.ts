@@ -1,20 +1,290 @@
-import { flag, hint, missedEvidence, not } from '../../../tools/content/src/kit/index.js';
+import { all, any, chosen, flag, has, hint, missedEvidence, not, ref } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 
-// 95-report: dava sonu raporundaki "kaçırdıkların". Her önemli delil ve bilgi için bir ipucu; metin oyuncuya neyi
-// nerede kaçırdığını ve hukuki dayanağını söyler.
+// 95-report: dava sonu raporundaki "kaçırdıkların".
 
 export const report: CasePart = {
   report: {
     hints: [
-      missedEvidence('h_a', 'clue_a', 'TODO: olay yerindeki A bulgusunu kaçırdın.', 'ARASTIRMA'),
-      missedEvidence('h_c', 'clue_c', 'TODO: belgeye UV tutmadın.', 'DELIL_ANALIZI'),
-      missedEvidence('h_ded', 'ded_ab', 'TODO: A ile B’yi tahtada birleştirmedin.', 'DELIL_ANALIZI'),
-      hint(
-        'h_suc',
-        not(flag('suc_duyurusu')),
-        'TODO: gerçek faile giden yol suç duyurusuydu (CMK 158).',
+      missedEvidence(
+        'h_numune',
+        'clue_numune',
+        'Bilirkişi raporunun materyal satırı numuneleri kolluğun değil, katılan eksperinin teslim ettiğini söylüyordu.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_cizelge',
+        'ev_cizelge',
+        'Olay yerini o sabah bekçi muhafaza ediyordu; devriye çizelgesi eksperin 09.20–10.05 arasında tek başına girdiğini gösteriyordu.',
+        'ARASTIRMA',
+      ),
+      missedEvidence(
+        'h_zincir',
+        'ded_zincir',
+        'Numunelerin kaynağı ile bekçi çizelgesi birlikte, kopuk numune zincirini gösterirdi (CMK 217).',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_tavan',
+        'clue_foto_tavan',
+        'Kolluğun 04.30 karesinde salon zemini çökmüş tavanla örtülüydü.',
+        'ARASTIRMA',
+      ),
+      missedEvidence(
+        'h_temiz',
+        'ded_temizlenmis',
+        '04.30 karesi ile eksperin 09.40 fotoğrafı yan yana, “döküntü izi”nin moloz kaldırıldıktan sonra doğduğunu gösterirdi.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_pano',
+        'ded_pano',
+        'Pano emanette kalmış, hiç incelenmemişti: “elektrik izi yok” cümlesinin dayanağı yoktu.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_taze',
+        'ded_taze',
+        'Laboratuvarın dipnotu “düşük buharlaşma” diyordu; saatlerce ateş ve seksen dakika sudan sonra taze benzin beklenmez.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_bidon',
+        'clue_bidon',
+        'Atölyede, jeneratörün yanında dört litre benzinle dolu bidon duruyordu; kolluk hiç bakmamıştı.',
+        'ARASTIRMA',
+      ),
+      missedEvidence(
+        'h_tasima',
+        'ded_tasima',
+        'Restorasyon sözleşmesi odaların 15 Ocak’a kadar boşaltılmasını istiyordu; eşyalar etiketliydi.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_banka',
+        'ded_banka',
+        'Poliçe kredinin şartıydı; dain-i mürtehin kaydı nedeniyle tazminat önce bankaya gidecekti.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_artis',
+        'ded_artis',
+        'Teminat artışını acente kampanya kapsamında teklif etmişti; çağrı kaydı acentenin sisteminde.',
+        'ARASTIRMA',
+      ),
+      missedEvidence(
+        'h_onlem',
+        'ded_onlem',
+        'Elektrikçinin notu ile restorasyon sözleşmesi, uyarı üzerine yenilemenin takvime konduğunu gösterirdi; taksir hatırlatmasına cevap buydu (TCK 22/2).',
+        'HUKUKI_BILGI',
+      ),
+      missedEvidence(
+        'h_ariza',
+        'ev_ariza',
+        'Dağıtım şirketinin arıza kayıtlarını delil dilekçesiyle (CMK 177) ya da duruşmada (CMK 206/1) isteyebilirdin.',
         'USUL_BILGISI',
+      ),
+      missedEvidence(
+        'h_ark',
+        'ev_ark',
+        'Emanetteki panonun elektrik bilirkişisine incelettirilmesini isteyebilirdin (CMK 63, 67/5).',
+        'USUL_BILGISI',
+      ),
+      missedEvidence(
+        'h_lab',
+        'ev_lab',
+        'Laboratuvarın ham verisi numunelerde yanma ürünü olmadığını gösterecekti.',
+        'USUL_BILGISI',
+      ),
+      missedEvidence(
+        'h_notr',
+        'ded_notr',
+        'Arıza kaydındaki 02.08 nötr kopması ile Saadet Hanım’ın yangından önce yanan televizyonu, yangının dış bir etkenle çıktığını gösterirdi.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_tahkim',
+        'ev_tahkim',
+        'Gülsüm Yaşar’ın elindeki tahkim kararı, eksperin aynı türden raporunun daha önce reddedildiğini gösteriyordu.',
+        'ARASTIRMA',
+      ),
+      missedEvidence(
+        'h_kopya',
+        'ded_kopya',
+        'İki rapordaki aynı paragraf ve suiistimal primi, eksperin raporunun bir kalıp olduğunu gösterirdi.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_elkoyma',
+        'ev_elkoyma',
+        'Eksper hakkında savcılığa suç duyurusunda bulunsaydın (CMK 158; TCK 267/2) aracında el koyma yapılabilirdi.',
+        'USUL_BILGISI',
+      ),
+      hint(
+        'h_kendin',
+        flag('eksper_uyarildi'),
+        'Eksperi kendin sıkıştırmaya gittin: uyarılan şüpheli delilleri temizler. Doğru yol savcılığa bildirmekti.',
+        'USUL_BILGISI',
+      ),
+      hint(
+        'h_telkin',
+        flag('saadet_telkin'),
+        'Saadet Hanım’a cevabı sen verdin (“kablo kokusuydu, değil mi?”); duruşmada bu, hem tanığın hem senin güvenilirliğini götürdü.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_cevdet',
+        flag('cevdet_telkin'),
+        'Bekçiye görmediği bir şeyi söylemesini önerdin; tanığa ne söyleyeceği söylenmez (TCK 272, 38; Av.K. 34).',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_taksir',
+        all(flag('contra_b2'), not(ref('taksir_red'))),
+        'Kasıt düşünce hâkim taksiri sordu (CMK 226). Notu yazan elektrikçiyi hazır tanık olarak getirmek ya da dağıtım şirketinin hat kaydını istemek bu kapıyı kapatırdı.',
+        'HUKUKI_BILGI',
+      ),
+      hint(
+        'h_necati_tanik',
+        all(has('ded_onlem'), not(flag('necati_hazir'))),
+        'Elektrikçinin notu bir kâğıttır; yazanı duruşmada doğrulamadıkça takvim savunması kurulamaz. Necati Usta’ya mahkemede anlatıp anlatmayacağını sorabilirdin.',
+        'USUL_BILGISI',
+      ),
+      hint(
+        'h_koken',
+        all(flag('contra_b1'), not(flag('contra_koken')), not(has('ded_koken'))),
+        'Bilirkişinin başlangıç noktası (salon) yalnızca zemin izine dayanıyordu; itfaiyenin tespiti ve V izi birinci celsede bunu tutanağa geçirirdi.',
+        'SORGULAMA',
+      ),
+      // "Elindeydi ama sunmadın": kaydı kuracak delil dosyandaydı, ilgili ifadeye karşı hiç gösterilmedi.
+      hint(
+        'h_sun_zincir',
+        all(has('ded_zincir'), not(flag('contra_b2'))),
+        'Kopuk numune zinciri kartı elindeydi; bilirkişinin “olay yerinden alınan numuneler” cümlesine (B2) karşı hiç sunmadın. Numunelerin kimden geldiği kürsüde söylenmeden zincirin ilk halkası kurulmaz.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_q2',
+        all({ chosen: 'CV_Q1' }, not({ chosen: 'CV_Q2' }), not(flag('contra_u1'))),
+        'Bekçiye muhafazayı sordun ama arada olay yerine kimin girdiğini sormadın; eksperin “polis izniyle girdim” cümlesine de çizelgeyi göstermedin. Eksperin yalnız girdiği kayda geçmedi.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_q3',
+        all(has('clue_teneke'), not(flag('cevdet_dinlendi'))),
+        'Bekçi tenekelerin içeri ağır girdiğini sana anlatmıştı; kürsüde “Elinde ne vardı?” diye sormadın. Gözüyle göreni kürsüye çıkarmadıkça bu bir ayrıntı olarak kalır.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_yanmamis',
+        all(any(has('clue_piroliz'), has('clue_buhar')), not(has('ded_yanmamis'))),
+        'Ham verinin profil satırı (buharlaşmamış benzin) ile matris satırı (yanma ürünü yok) birlikte numunenin yangını hiç görmediğini söylüyordu; tahtada birleştirmedin.',
+        'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_sun_u3',
+        all(has('ded_ekilmis'), not(flag('contra_u3'))),
+        '“Tenekeler önceden doluydu” kartı elindeydi; eksperin “numuneleri o zeminden aldım” cümlesine (U3) karşı, temeli kurulmuş olarak sunulmadı. Kastı düşüren son halka buydu.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_s2',
+        all(has('clue_koku_yok'), not(flag('contra_s2'))),
+        'İtfaiyenin “akaryakıt kokusu alınmamıştır” satırını okumuştun; Saadet Hanım’ın “benzin kokusu” ifadesine (S2) karşı hiç sunmadın. Koku tanığı gerekçede ayakta kaldı.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_s6',
+        all(has('ded_bidon'), not(flag('contra_s6'))),
+        'Atölyedeki dolu bidon kartı elindeydi; “kırmızı bidon” ifadesine (S6) karşı sunmadın. Fişteki benzinin nerede olduğu kayda geçmedi.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_koken',
+        all(has('ded_koken'), not(flag('contra_koken'))),
+        'Başlangıç noktası kartı (V izi + itfaiye) elindeydi; bilirkişinin “salon zemininde başladı” cümlesine (B1) karşı sunmadın.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_zemin',
+        all(has('ded_temizlenmis'), not(flag('contra_b1')), not(flag('contra_u2'))),
+        'Temizlenmiş zemin kartı elindeydi; ne bilirkişinin döküntü izine (B1) ne eksperin “molozun altında ilk ben” cümlesine (U2) karşı sundun.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_pano',
+        all(has('ded_pano'), not(flag('contra_b3'))),
+        'Panonun hiç incelenmediğini gösteren kart elindeydi; bilirkişinin “elektrik izi yoktur” cümlesine (B3) karşı sunmadın.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_buat',
+        all(has('ded_buat'), not(flag('contra_buat'))),
+        'Isınan buat kartı elindeydi; B3’e karşı sunulsaydı ustanın notu tutanağa ilk celsede girerdi.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_taze',
+        all(has('ded_taze'), not(flag('contra_b4'))),
+        'Söndürmeden sağ çıkan benzin kartı elindeydi; bilirkişinin “yoğun ve taze” cümlesine (B4) karşı sunmadın. Tazeliğin “bol dökülmüş” açıklaması kayıtta karşısız kaldı.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_ark',
+        all(has('ev_ark'), not(flag('contra_u6_ark'))),
+        'Mahkemenin elektrik bilirkişisi raporu dosyadaydı; eksperin “elektrik olsaydı görürdüm” cümlesine (U6), linye satırı okunmuş olarak sunulmadı.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_baglan',
+        any(
+          chosen('PS_B1_ERKEN'),
+          chosen('PS_B2_ERKEN'),
+          chosen('PS_B3_ERKEN'),
+          chosen('PS_B4_ERKEN'),
+          chosen('PS_U1_ERKEN'),
+          chosen('PS_U2_ERKEN'),
+          chosen('PS_U3_ERKEN'),
+          chosen('PS_U6_ERKEN'),
+        ),
+        'Çapraz sorguda önce tanığı kendi cümlesine bağla (bastır), sonra belgeyi göster; sorulmadan gösterilen belge tanığa bir açıklama kapısı bırakır.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_muhur',
+        all(chosen('PS_U3_MUHURSUZ'), not(flag('contra_u3'))),
+        'Laboratuvarın kabul satırında tenekelerin eksperin şahsi mührüyle geldiği yazıyordu; “numuneleri o zeminden aldım” cümlesinin son dayanağı buydu.',
+        'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_borc',
+        flag('borc_gizle'),
+        'Müvekkile borcu “geçiştirmesini” söyledin; dosyada olan bir gerçeği geçiştirmek, onu yalan söyleyen biri gibi gösterir.',
+        'SAVUNMA_STRATEJISI',
+      ),
+      hint(
+        'h_eksper_itiraz',
+        not(flag('h1_eksper_itiraz')),
+        'Ekspertiz raporu katılanın uzman görüşüdür; yazarının tanık olarak dinlenmesini isteyebilirdin (CMK 67/6, 210/1).',
+        'USUL_BILGISI',
+      ),
+      hint(
+        'h_onlem_sor',
+        all(flag('q_elektrik'), not(flag('q_onlem'))),
+        'Sanığa tesisatın eski olduğunu sordun ama ardından ne yaptığını sormadın: savcı “biliyordu” cümlesini taksire taşıdı.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sanik_sor',
+        not(any(flag('q_benzin'), flag('q_esya'))),
+        'Birinci celsede sanığa benzinin ve eşyaların hikâyesini sorup hâkime kendi ağzından anlattırabilirdin.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_fener',
+        not(has('ded_fener')),
+        'Saadet Hanım’ın gördüğü el fenerli adam, 01.30’da devriye gezen bekçiydi.',
+        'DELIL_ANALIZI',
       ),
     ],
   },

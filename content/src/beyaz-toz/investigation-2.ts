@@ -1,6 +1,7 @@
 import {
   all,
   any,
+  chosen,
   cmp,
   conversation,
   cont,
@@ -32,7 +33,7 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import type { ChoiceDef, NodeDef } from '@mudafaa/case-schema';
-import { INV2, card, me, n, p2, s, th, voice } from './shared.js';
+import { HEAR1, INV2, card, me, n, p2, s, th, voice } from './shared.js';
 
 // 70-investigation-2: ara evre (2 gün × 3 EP). Yığın kullanılmaz: her etkinlik doğrudan ARA_HUB'a döner (kaçış
 // uzaklığı sınırı). Kurye durağı, GPS kaydı, kafenin kasa kaydı, Kaan'la rıza, Defne'nin sahte tanık teklifi (etik
@@ -77,10 +78,104 @@ const fresh = (id: string, a: string, b: string, out: string, title: string, tex
     feedback: { title, text, label: 'YENİ DELİL · +300 SKOR', tone: 'success' },
   });
 
+/**
+ * Mütalaa satırları birlikte konuşur: kapatma izi, baskı numarası ve kromatogram ayrı ayrı yalnızca bir not bırakır;
+ * üçüncüsü okunduğunda (hangi sırayla olursa olsun) "aynı stok" tespiti ortaya çıkar.
+ */
+const MT: ReadonlyArray<readonly [string, string, string, string, string]> = [
+  [
+    'mt_kesim',
+    'lupe',
+    'fact_mt_kesim',
+    'AYNI MAKİNE',
+    'İki grubun ısı çizgisi de sol uçta aynı 0,4 mm çentiği taşıyor. Aynı kapatma makinesi.',
+  ],
+  [
+    'mt_poset',
+    'kars',
+    'fact_mt_poset',
+    'BOŞLUK',
+    'Arka oda rulosunda 0417 ve 0418 eksik. Şekerlikteki iki poşet tam o iki numara.',
+  ],
+  [
+    'mt_saflik',
+    'kars',
+    'fact_mt_saflik',
+    'AYNI TARİF',
+    'Saflık aynı aralıkta, kesme maddesi aynı: fenasetin. Aynı mutfaktan çıkmış bir stok.',
+  ],
+];
+const mutalaaRules = MT.flatMap(([target, toolId, fact, title, text]) => {
+  const others = MT.filter((m) => m[0] !== target).map((m) => flag(m[2]));
+  return [
+    examine(`EX_${fact.toUpperCase()}_TAM`, toolId, target, {
+      maxUses: 1,
+      enabledWhen: all(not(flag(fact)), ...others),
+      discovers: 'clue_ek_stok',
+      effects: [raise(fact)],
+      score: { DELIL_ANALIZI: 150 },
+      feedback: {
+        title: 'AYNI STOK',
+        text: `${text} Üç bulgu yan yana: şekerlikteki iki paket arka odadaki rulodan, aynı makineyle, aynı tarifle paketlenmiş.`,
+        label: '+150 SKOR · Not defterine eklendi',
+        tone: 'special',
+      },
+    }),
+    examine(`EX_${fact.toUpperCase()}`, toolId, target, {
+      maxUses: 1,
+      enabledWhen: not(flag(fact)),
+      effects: [raise(fact)],
+      score: { DELIL_ANALIZI: 50 },
+      feedback: { title, text, label: '+50 SKOR', tone: 'info' },
+    }),
+  ];
+});
+
+/** Ara evrenin eylem puanlı etkinlikleri (hub sırası). */
+const araActs: ChoiceDef[] = [
+  act('A2_SELIM', 'Paketçi Görükle durağı', 'ARA_SELIM', {
+    description: 'Kurye durağı · sorumlusu Selim Usta',
+    visibleWhen: any(has('ev_kurye'), has('clue_mont'), has('ded_kurye'), has('clue_kira_defteri')),
+  }),
+  act('A2_KAAN', 'Kaan’la konuş', 'ARA_KAAN', { description: 'Rıza, son söz, bir aile' }),
+  act('A2_DEFNE', 'Defne’nin telefonu', 'ARA_DEFNE', { description: 'Abla arıyor; sesi gergin' }),
+  act('A2_BODRUM', 'Nesrin Hanım’ın telefonu', 'ARA_BODRUM', {
+    description: 'Ev sahibi bir şey bulmuş',
+    visibleWhen: all(met('nesrin'), not(flag('nesrin_kus'))),
+  }),
+  act('A2_NESRIN', 'Nesrin Hanım’a uğra', 'ARA_NESRIN', {
+    description: 'Zemin kat · bir teşekkür, bir defter',
+    // Küsen ev sahibinin kapısı da çalınabilir: zincir takılıdır, bilgi gelmez; bir özür ve bir haber.
+    visibleWhen: met('nesrin'),
+  }),
+  act('A2_UZMAN', 'Bir uzmana danış', 'ARA_UZMAN', {
+    description: 'Üniversite · kriminal raporun ekleri',
+    visibleWhen: all(flag('contra_s6'), flag('fact_ekler')),
+  }),
+  act('A2_MUTALAA', 'Uzmanın zarfını aç', 'ARA_MUTALAA', {
+    description: 'Bilimsel mütalaa geldi',
+    visibleWhen: all(flag('uzman_istendi'), cmp(v('day2'), '==', 2)),
+  }),
+  act('A2_GPS', 'Paketçi kayıtlarını incele', 'ARA_GPS', {
+    description: 'Personel dosyası ve GPS dökümü',
+    visibleWhen: has('ev_kurye'),
+  }),
+  act('A2_ZRAPOR', 'Kafenin kasa kayıtları', 'ARA_ZRAPOR', {
+    description: 'Kahve Durağı · 9 Kasım',
+    visibleWhen: all(has('clue_tolga_saat'), flag('fact_pazar')),
+  }),
+  act('A2_SUC', 'Savcılığa suç duyurusu', 'ARA_SUC', { description: 'Arka odanın kiracısı hakkında' }),
+];
+
+/** Bugün yapılabilecek eylem puanlı bir iş kalmadı mı (her etkinlik ya yapıldı ya da görünmüyor)? */
+const araBitti = all(
+  ...araActs.map((c) => (c.visibleWhen === undefined ? chosen(c.id) : any(chosen(c.id), not(c.visibleWhen)))),
+);
+
 export const investigation2: CasePart = {
   nodes: [
-    decisionNode('ARA_GIRIS_1', [{ to: 'ARA_GIRIS' }], {
-      ...INV2,
+    decisionNode('ARA_GIRIS_1', [{ to: 'H1_08' }], {
+      ...HEAR1,
       title: 'Ara',
       lines: [
         {
@@ -88,7 +183,7 @@ export const investigation2: CasePart = {
           lines: [
             card('26 OCAK · 17.30 — ADLİYE MERDİVENLERİ', 'adliye'),
             n(
-              'Kaan cezaevinden eşyalarıyla çıkarıldığında hava kararmıştı. Bir naylon torba: iki kitap, bir eşofman, bir gözlük kılıfı.',
+              'Tahliye müzekkeresi adliyede yazıldı; Kaan serbest bırakıldığında hava kararmıştı. Elinde bir naylon torba: iki kitap, bir eşofman, bir gözlük kılıfı.',
             ),
             n(
               'Defne merdivenlerin başında bekliyordu. Kaan durdu. Defne yürüdü. Bir süre ikisi de bir şey söylemedi; sonra Defne kardeşinin yakasını düzeltti.',
@@ -96,7 +191,7 @@ export const investigation2: CasePart = {
             s('defne', 'Kolları kısa. Söylemiştim.'),
             s('kaan', 'Söylemiştin.', 'mutlu'),
             th('Tahliye bir beraat değil. Ama bir kapı. Kaan o kapıdan geçerken bir kez dönüp adliyeye baktı.'),
-            s('kaan', 'Elli bir gün. Saydım. Şimdi neyi sayacağım?'),
+            s('kaan', 'Yüz on beş gün. Temiz. Saydım. Şimdi neyi sayacağım?'),
             s('defne', 'Perşembeleri. Doktorunu. Bir de bana borcunu.', 'mutlu'),
             n('Kaan güldü. Kısa, şaşkın bir gülüş; uzun zamandır kullanılmamış bir kapının menteşesi gibi.'),
           ],
@@ -119,7 +214,7 @@ export const investigation2: CasePart = {
       ...INV2,
       title: 'Ara',
       background: 'buro_gece',
-      onEnter: [...kurye.effects, ...p2.start()],
+      onEnter: [...kurye.effects, ...p2.start(), set('tahta', 3)],
       lines: [
         {
           when: has('ev_kurye'),
@@ -165,7 +260,7 @@ export const investigation2: CasePart = {
       hud: ['day2', 'ap2'],
       lines: [
         {
-          when: cmp(v('day2'), '==', 1),
+          when: all(cmp(v('ap2'), '==', 4), cmp(v('day2'), '==', 1)),
           lines: [
             card('ARA · GÜN 1/2 · İKİNCİ CELSEYE 18 GÜN', 'buro'),
             n('Hedef: arka odanın kiracısını bir kâğıda, muhbirin hikâyesini bir saate bağla. Kovalamadan.'),
@@ -178,6 +273,18 @@ export const investigation2: CasePart = {
           ],
         },
         {
+          when: all(cmp(v('ap2'), '==', 4), flag('uzman_istendi')),
+          lines: [
+            card('ARA · GÜN 2/2 · İKİNCİ CELSEYE 11 GÜN', 'buro'),
+            n('Hedef: ikinci celseye hangi delille gireceğini seç. Tolga kürsüde olacak.'),
+            n(
+              'Kurye kapının altından bir zarf bırakmış: Uludağ Üniversitesi, adli kimya. Ön yüzünde tükenmez kalemle: “Dokuz sayfa. Okuyun.”',
+            ),
+            th('Son gün. Bir celsede söylenecek her cümle, bugün toplanan bir kâğıda dayanacak.'),
+          ],
+        },
+        {
+          when: cmp(v('ap2'), '==', 4),
           lines: [
             card('ARA · GÜN 2/2 · İKİNCİ CELSEYE 11 GÜN', 'buro'),
             n('Hedef: ikinci celseye hangi delille gireceğini seç. Tolga kürsüde olacak.'),
@@ -192,13 +299,13 @@ export const investigation2: CasePart = {
           id: 't2_kisi',
           label: 'KİŞİLER',
           kind: 'PEOPLE',
-          choices: ['A2_SELIM', 'A2_KAAN', 'A2_DEFNE', 'A2_BODRUM', 'A2_NESRIN'],
+          choices: ['A2_SELIM', 'A2_KAAN', 'A2_DEFNE', 'A2_BODRUM', 'A2_NESRIN', 'A2_UZMAN'],
         },
         {
           id: 't2_arsiv',
           label: 'ARŞİV',
           kind: 'ARCHIVE',
-          choices: ['A2_GPS', 'A2_ZRAPOR', 'A2_SUC', 'A2_CIKARIM', 'A2_LEYLA'],
+          choices: ['A2_GPS', 'A2_ZRAPOR', 'A2_MUTALAA', 'A2_SUC', 'A2_CIKARIM', 'A2_LEYLA'],
         },
       ],
       quickTalk: {
@@ -207,41 +314,32 @@ export const investigation2: CasePart = {
         choices: ['A2_LEYLA'],
       },
       choices: [
-        act('A2_SELIM', 'Paketçi Görükle durağı', 'ARA_SELIM', {
-          description: 'Kurye durağı · sorumlusu Selim Usta',
-          visibleWhen: any(has('ev_kurye'), has('clue_mont'), has('ded_kurye'), has('clue_kira_defteri')),
-        }),
-        act('A2_KAAN', 'Kaan’la konuş', 'ARA_KAAN', { description: 'Rıza, son söz, bir aile' }),
-        act('A2_DEFNE', 'Defne’nin telefonu', 'ARA_DEFNE', { description: 'Abla arıyor; sesi gergin' }),
-        act('A2_BODRUM', 'Nesrin Hanım’ın telefonu', 'ARA_BODRUM', {
-          description: 'Ev sahibi bir şey bulmuş',
-          visibleWhen: all(met('nesrin'), not(flag('nesrin_kus'))),
-        }),
-        act('A2_NESRIN', 'Nesrin Hanım’a uğra', 'ARA_NESRIN', {
-          description: 'Zemin kat · bir teşekkür, bir defter',
-          visibleWhen: all(met('nesrin'), not(flag('nesrin_kus'))),
-        }),
-        act('A2_GPS', 'Paketçi kayıtlarını incele', 'ARA_GPS', {
-          description: 'Personel dosyası ve GPS dökümü',
-          visibleWhen: has('ev_kurye'),
-        }),
-        act('A2_ZRAPOR', 'Kafenin kasa kayıtları', 'ARA_ZRAPOR', {
-          description: 'Kahve Durağı · 9 Kasım',
-          visibleWhen: has('clue_tolga_saat'),
-        }),
-        act('A2_SUC', 'Savcılığa suç duyurusu', 'ARA_SUC', { description: 'Arka odanın kiracısı hakkında' }),
+        ...araActs,
         rawChoice('NAVIGATE', 'A2_CIKARIM', 'Çıkarım tahtası', {
           description: '0 EP · ipuçlarını birleştir',
+          enabledWhen: cmp(v('tahta'), '>', 0),
+          lockedReason: 'Bugün üç yanlış bağlantı kurdun; tahta yarına kadar kapalı.',
           next: 'ARA_CIKARIM',
         }),
         rawChoice('NAVIGATE', 'A2_LEYLA', 'Leyla’ya danış', {
           description: '0 EP · günde bir kez',
           visibleWhen: cmp(v('leyla_ara'), '<', v('day2')),
-          effects: [set('leyla_ara', v('day2'))],
+          // Şekerliğin yeri kabul ettirildiyse Leyla kriminal raporun eklerine dikkat çeker (uzman yolu açılır).
+          effects: [set('leyla_ara', v('day2')), ifThen(flag('contra_s6'), [raise('fact_ekler')])],
           next: 'ARA_LEYLA',
+        }),
+        rawChoice('NAVIGATE', 'A2_GUN_SONU', 'Günü kapat', {
+          description: 'Bugünün işleri bitti; akşam olsun',
+          visibleWhen: all(cmp(v('day2'), '==', 1), chosen('A2_KAAN'), chosen('A2_DEFNE'), chosen('A2_SUC')),
+          next: 'ARA_DAY_END',
         }),
         nav('GO_T', 'DURUŞMAYA GİT · 2. CELSE', 'ARA_SON_1', {
           role: 'PRIMARY',
+          visibleWhen: cmp(v('day2'), '==', 2),
+          // Son gün de bir iş günüdür: eylem puanı harcanır (ya da yapılacak iş kalmamıştır). Defne'nin telefonu bu
+          // işlerden biridir; puanı biten oyuncu kilitlenmez.
+          enabledWhen: all(cmp(v('leyla_ara'), '>=', 2), any(cmp(v('ap2'), '<=', 0), araBitti)),
+          lockedReason: 'Son gün henüz bitmedi: kalan eylem puanını kullan ve Leyla’ya dosyayı bir kez daha göster.',
           confirm: 'Duruşmaya gidersen ara evre biter. Emin misin?',
         }),
       ],
@@ -249,7 +347,7 @@ export const investigation2: CasePart = {
     decisionNode('ARA_DAY_END', [{ to: 'ARA_AKSAM' }], {
       ...INV2,
       title: 'Gün sonu',
-      onEnter: [inc('day2', 1), set('ap2', 4)],
+      onEnter: [inc('day2', 1), set('ap2', 4), set('tahta', 3)],
     }),
     story('ARA_AKSAM', {
       ...INV2,
@@ -285,7 +383,7 @@ export const investigation2: CasePart = {
         },
       ],
       choices: [
-        option('ARAK_A', 'O çocuk şimdi nerede?', {
+        option('ARAK_A', 'O çocuk şimdi nerede, biliyor musunuz?', {
           effects: [inc('trust', 2)],
           responses: [
             {
@@ -300,7 +398,7 @@ export const investigation2: CasePart = {
           ],
           next: 'ARA_TELEFON',
         }),
-        option('ARAK_B', 'Bunu bana neden şimdi anlatıyorsunuz?', {
+        option('ARAK_B', 'Bunu bana neden şimdi, bu gece anlatıyorsunuz?', {
           score: { SAVUNMA_STRATEJISI: 20 },
           responses: [
             {
@@ -411,7 +509,7 @@ export const investigation2: CasePart = {
         },
       ],
       choices: [
-        option('TEL_A', 'Saati ve konuşmayı not et; sabah nöbetçi savcılığa bildir', {
+        option('TEL_A', 'Saati not et; sabah savcılığa bildir', {
           score: { USUL_BILGISI: 50 },
           effects: [raise('tehdit_bildirildi')],
           good: 'Doğru yol: dosyada şüpheli konumundaki bir kişinin temas girişimi ve olası bir tehdit savcılığa bildirilir (CMK 158). Avukat şüpheliyi aramaz, pazarlık etmez; arama kaydının tespiti savcılığın işidir.',
@@ -429,7 +527,7 @@ export const investigation2: CasePart = {
           ],
           next: 'ARA_SABAH',
         }),
-        option('TEL_B', 'Geri ara; teslim olursa Kaan’ın ifadesini yumuşatabileceğini söyle', {
+        option('TEL_B', 'Geri ara; teslim olursa yardım edeceğini söyle', {
           score: { SAVUNMA_STRATEJISI: -60 },
           effects: [inc('ethics')],
           bad: 'Şüpheliyle müvekkilin beyanı üzerinden pazarlık: avukat, müvekkilin beyanını bir üçüncü kişinin teslimine bağlayamaz; bu hem müvekkilin çıkarına hem meslek kurallarına aykırıdır (Av.K. 34, TBB Meslek Kuralları).',
@@ -447,7 +545,7 @@ export const investigation2: CasePart = {
           ],
           next: 'ARA_SABAH',
         }),
-        option('TEL_C', 'Telefonu kapat ve uyumaya çalış', {
+        option('TEL_C', 'Telefonu kapat, ışığı söndür, sabaha kadar uyumaya çalış', {
           neutral:
             'Şüphelinin temasını bildirmemek bir hata değil ama kaçırılmış bir fırsattır: kayıt tespit edilemedi.',
           responses: [
@@ -616,7 +714,7 @@ export const investigation2: CasePart = {
           row('g_9kasim', ['9 Kasım', '22.58–23.04 · Ihlamur Sok. 14 önü · duruş 6 dk · aktif sipariş yok']),
           row('g_11kasim', [
             '11 Kasım',
-            '06.21 · Ihlamur Sok. 14 önü · duruş 40 sn · rota ters yön · “teslimat iptal”',
+            '07.16 · Ihlamur Sok. 14 önü · duruş 40 sn · rota ters yön · “teslimat iptal”',
           ]),
           row('g_fesih', ['Fesih', '12 Kasım 08.10 · çalışan mesajla ayrıldı · çanta ve mont iade edilmedi']),
         ],
@@ -627,8 +725,8 @@ export const investigation2: CasePart = {
             discovers: 'clue_gps',
             score: { DELIL_ANALIZI: 150 },
             feedback: {
-              title: '06.21',
-              text: 'Baskın sabahı 06.21’de Barış’ın cihazı binanın önünde kırk saniye duruyor, sonra ters yöne gidiyor. Polis araçlarını gören biri böyle durur.',
+              title: '07.16',
+              text: 'Baskın sabahı 07.16’da Barış’ın cihazı binanın önünde kırk saniye duruyor, sonra ters yöne gidiyor. Polis araçlarını gören biri böyle durur.',
               label: '+150 SKOR · Not defterine eklendi',
               tone: 'special',
             },
@@ -674,7 +772,6 @@ export const investigation2: CasePart = {
         title: 'Kahve Durağı kasa kayıtları',
         hud: ['ex_z'],
         background: 'kafe',
-        onFirstEnter: [discover('ev_zrapor')],
         lines: [
           {
             when: flag('fact_pazar'),
@@ -703,7 +800,10 @@ export const investigation2: CasePart = {
         ],
         rows: [
           row('z_vardiya', ['Vardiya', 'Kapanış: Kaan Yıldız · 16.00–24.00']),
-          row('z_son', ['Son satış', '23.18 · iki filtre kahve']),
+          row('z_son', [
+            'Satış dökümü',
+            '22.44 çay · 22.53 tost (kart) · 23.02 iki çay, masa 2 (kart) · 23.11 su · 23.18 iki filtre kahve',
+          ]),
           row('z_kapanis', ['Kasa kapanış', '23.41 · kullanıcı kodu: KAAN']),
           row('z_kamera', ['Kamera', 'Kayıt yedi gün saklanır; 9 Kasım kaydı silinmiş']),
         ],
@@ -711,20 +811,32 @@ export const investigation2: CasePart = {
         costVar: 'ex_z',
         rules: [
           examine('EX_Z_KAPANIS', 'lupe', 'z_kapanis', {
-            discovers: 'clue_z_rapor',
+            enabledWhen: flag('fact_z_son'),
+            discovers: ['clue_z_rapor', 'ev_zrapor'],
             score: { DELIL_ANALIZI: 150 },
             feedback: {
               title: '23.41',
-              text: 'Kasa 23.41’de Kaan’ın koduyla kapanmış; son satış 23.18. Muhbire göre satış 23.00’te, on beş dakika uzaklıktaki bir kapıda.',
+              text: 'Kasa 23.41’de Kaan’ın koduyla kapanmış; 22.44 ile 23.18 arasında kasada dokuz dakikadan uzun bir boşluk yok. Muhbire göre satış 23.00’te, on beş dakika uzaklıktaki bir kapıda.',
               label: '+150 SKOR · Not defterine eklendi',
               tone: 'special',
             },
           }),
+          examine('EX_Z_KAPANIS_ERKEN', 'lupe', 'z_kapanis', {
+            enabledWhen: not(flag('fact_z_son')),
+            feedback: {
+              title: 'BİR KOD',
+              text: 'Kasa 23.41’de “KAAN” koduyla kapanmış. Ama bir kodu başkası da girebilir; savcı ilk bunu soracak. Kodun arkasında Kaan’ın kendisi var mı? Satış satırlarına bak.',
+              label: 'Tek başına yetmez',
+              tone: 'info',
+            },
+          }),
           examine('EX_Z_SON', 'kars', 'z_son', {
+            maxUses: 1,
+            effects: [raise('fact_z_son')],
             score: { DELIL_ANALIZI: 50 },
             feedback: {
-              title: '23.18',
-              text: 'Son satışı yapan kasiyer kodu da Kaan’ın. 23.00 ile 23.18 arasında bir kapıya gidip dönmek mümkün değil.',
+              title: '23.02',
+              text: 'Beş satış da Kaan’ın koduyla; 22.53 ve 23.02 kartlı, slipte saat ve garsonun parafı var. Kafe kapıya on beş dakika: 22.45–23.15 arası kasadan ayrılamazdı. Kapanış satırı da artık anlam taşıyor.',
               label: '+50 SKOR',
               tone: 'info',
             },
@@ -732,6 +844,169 @@ export const investigation2: CasePart = {
         ],
         miss: docMiss('FB_Z'),
         finish: { id: 'Z_BITIR' },
+      }),
+    ),
+    toHub(
+      conversation('ARA_UZMAN', {
+        ...INV2,
+        title: 'Uzman mütalaası',
+        background: 'buro',
+        room: { label: 'ULUDAĞ ÜNİVERSİTESİ · ADLİ KİMYA', character: 'uzman' },
+        onFirstEnter: [{ type: 'MEET', character: 'uzman' }],
+        lines: [
+          {
+            lines: [
+              card('ULUDAĞ ÜNİVERSİTESİ — GÖRÜKLE KAMPÜSÜ, 16.10', 'buro'),
+              n(
+                'Üçüncü kat, koridorun sonu. Kapıda bir not: “Numune kabul edilmez.” İçeride iki çalışma masası, bir floresan, bir saksıda ölmekte olan bir fesleğen.',
+              ),
+              s(
+                'uzman',
+                'Avukat hanım. Baştan söyleyeyim: ben poşet okurum, insan okumam. Bana kimin suçlu olduğunu sormayın; kâğıdın ne söylediğini sorun.',
+              ),
+              n(
+                'Kriminal raporun ek klasörünü masaya bıraktım: kırk sekiz fotoğraf, bir baskı numarası listesi, iki kromatogram. Polisin hiç açmadığı sayfalar.',
+              ),
+              th(
+                'Savcı “benzerlik” dedi. Benzerliği tespite çevirecek bir göz arıyorum. Ama ona ne yazacağını ben söyleyemem; ancak neye bakacağını sorabilirim.',
+              ),
+            ],
+          },
+        ],
+        choices: [
+          option('UZ_KESIM', 'Poşetlerin ağzındaki ısı çizgisine bakabilir misiniz? İki grup aynı makineden mi?', {
+            visibleWhen: flag('fact_paket'),
+            maxUses: 1,
+            effects: [raise('uz_kesim')],
+            score: { ARASTIRMA: 40 },
+            responses: [
+              {
+                lines: [
+                  s(
+                    'uzman',
+                    'Isıyla kapatma makineleri parmak izi gibidir; teli eskidikçe bir çentik bırakır. Fotoğraflar yeterince yakın çekilmiş. Bakarım.',
+                  ),
+                ],
+              },
+            ],
+            next: '$stay',
+          }),
+          option('UZ_POSET', 'Poşetlerin kenarında baskı numarası var. Sıraları birbirini tutuyor mu?', {
+            visibleWhen: flag('fact_paket'),
+            maxUses: 1,
+            effects: [raise('uz_poset')],
+            score: { ARASTIRMA: 40 },
+            responses: [
+              {
+                lines: [
+                  s(
+                    'uzman',
+                    'Rulo poşet. Üretici her poşete bir numara basar; kimse okumaz. Laboratuvar listeyi çıkarmış ama yan yana koymamış. Koyarım.',
+                  ),
+                  th('Kimsenin okumadığı bir numara. Bu dosyanın her şeyi zaten öyle.'),
+                ],
+              },
+            ],
+            next: '$stay',
+          }),
+          option('UZ_SAFLIK', 'Kromatogramlar: saflık ve kesme maddesi iki grupta aynı mı?', {
+            maxUses: 1,
+            effects: [raise('uz_saflik')],
+            score: { ARASTIRMA: 40 },
+            responses: [
+              {
+                lines: [
+                  s(
+                    'uzman',
+                    'Satıcılar maddeyi bir şeyle keser; her stoğun kendi tarifi olur. Aynı tarifse aynı mutfak. İki kromatogram var; karşılaştırırım.',
+                  ),
+                ],
+              },
+            ],
+            next: '$stay',
+          }),
+          option('UZ_SONUC', 'Mütalaanıza paketleri müvekkilimin koymadığını da yazabilir misiniz?', {
+            maxUses: 1,
+            score: { SAVUNMA_STRATEJISI: -40 },
+            bad: 'Bilirkişi de uzman da yalnızca uzmanlık gerektiren konularda görüş bildirir; kimin koyduğu gibi hâkimin takdirine ait değerlendirmelere giremez (CMK 67/3, 67/6). Böyle bir cümle mütalaanın tamamını şüpheli kılar.',
+            responses: [
+              {
+                lines: [
+                  s(
+                    'uzman',
+                    'Hayır. Bunu yazarsam hâkim mütalaamın geri kalanını da çöpe atar, haklı olarak. Ben paket okurum. Kimin koyduğu sizin işiniz, avukat hanım; karar da heyetin.',
+                  ),
+                  th(
+                    'Doğru. Bir uzmana cevabı söyletmeye çalışan avukat, ondan bir uzman değil bir tanık ister. İkisi de olmaz.',
+                  ),
+                ],
+              },
+            ],
+            next: '$stay',
+          }),
+          rawChoice('CONTINUE', 'UZ_BITIR', 'Klasörü bırak ve çık', {
+            role: 'BACK',
+            next: '$return',
+            effects: [ifThen(all(flag('uz_kesim'), flag('uz_poset'), flag('uz_saflik')), [raise('uzman_istendi')])],
+          }),
+        ],
+      }),
+    ),
+    toHub(
+      documentExam('ARA_MUTALAA', {
+        ...INV2,
+        title: 'Uzman mütalaası',
+        hud: ['ex_mut'],
+        background: 'buro',
+        onFirstEnter: [discover('ev_mutalaa')],
+        lines: [
+          {
+            lines: [
+              card('ARSLAN HUKUK — 5 ŞUBAT, 09.40', 'buro'),
+              n(
+                'Zarfı sabah kurye kapının altından bırakmıştı. Dokuz sayfa, ıslak imzalı, her sayfanın köşesinde bir parafe. Son sayfada tek bir cümlenin altı çizilmişti: “Kimin koyduğu bilimsel inceleme konusu değildir.”',
+              ),
+              th(
+                'Üç soru sordum; üç cevap gelmiş. Hangisinin ne söylediğini okumak bana kalıyor. Bir satırı tek başına değil, ötekilerle birlikte.',
+              ),
+            ],
+          },
+        ],
+        header: { left: 'BİLİMSEL MÜTALAA · DOÇ. DR. AYLİN KORKMAZ', right: 'CMK 67/6 · 4 Şubat' },
+        columns: [
+          { label: 'İNCELEME', flex: 1 },
+          { label: 'BULGU', flex: 3 },
+        ],
+        rows: [
+          row('mt_kesim', [
+            'Kapatma izi',
+            'Şekerlik: 3 mm ısı çizgisi, sol uçta 0,4 mm çentik · arka oda: 3 mm, aynı çentik',
+          ]),
+          row('mt_poset', ['Baskı no.', 'Şekerlik poşetleri: 0417, 0418 · arka oda rulosu: 0371–0416 ve 0419–0420']),
+          row('mt_saflik', ['Kromatogram', 'Şekerlik %61 · arka oda %60–62 · kesme maddesi fenasetin, iki grupta da']),
+          row('mt_iz', [
+            'İz',
+            'Şekerlik poşetlerinde sanığa ait iz yok; kavanozun dış yüzeyindeki izler ayrı değerlendirilmelidir',
+          ]),
+          row('mt_sonuc', ['Sınır', 'Paketleri şekerliğe kimin koyduğu bilimsel inceleme konusu değildir (CMK 67/3).']),
+        ],
+        tools: [lupe, kars],
+        costVar: 'ex_mut',
+        rules: [
+          ...mutalaaRules,
+          examine('EX_MT_IZ', 'lupe', 'mt_iz', {
+            maxUses: 1,
+            score: { DELIL_ANALIZI: 50 },
+            feedback: {
+              title: 'PAKETTE İZ YOK',
+              text: 'Kavanozda Kaan’ın izi var; poşetlerde yok. Kavanozu açan el ile paketi koyan el ayrı şeylerdir.',
+              label: '+50 SKOR',
+              tone: 'info',
+            },
+          }),
+        ],
+        miss: docMiss('FB_MUTALAA'),
+        finish: { id: 'MUTALAA_BITIR' },
       }),
     ),
     toHub(
@@ -761,7 +1036,7 @@ export const investigation2: CasePart = {
           {
             lines: [
               card('BURSA H TİPİ CEZAEVİ — GÖRÜŞ ODASI', 'gorus_odasi'),
-              n('Hasan Çakır kapıyı açarken başını salladı. “Elli bir gün” dedi, sormadığım hâlde.'),
+              n('Hasan Çakır kapıyı açarken başını salladı. “Hâlâ sayıyor” dedi, sormadığım hâlde.'),
               s(
                 'kaan',
                 'Polis kilidi kestiklerini söylemiş. Ablam anlattı. İlk defa biri bana inandı gibi geldi. Ya da bir kâğıda inandı.',
@@ -770,7 +1045,7 @@ export const investigation2: CasePart = {
           },
         ],
         choices: [
-          option('KA_RIZA', 'Mahkemede kullandığını söylemek ister misin? Karar senin; ne istersen öyle yaparız.', {
+          option('KA_RIZA', 'Mahkemede kullandığını söylemek ister misin? Karar senin.', {
             visibleWhen: all(flag('kaan_itiraf'), not(flag('kaan_riza'))),
             score: { SAVUNMA_STRATEJISI: 50 },
             effects: [raise('kaan_riza')],
@@ -829,6 +1104,23 @@ export const investigation2: CasePart = {
               next: '$stay',
             },
           ),
+          option('KA_PAZAR', '9 Kasım, pazar gecesi saat on bir. Neredeydin?', {
+            visibleWhen: all(has('clue_tolga_saat'), not(flag('fact_pazar'))),
+            effects: [raise('fact_pazar')],
+            score: { SORGULAMA: 20 },
+            responses: [
+              {
+                lines: [
+                  s(
+                    'kaan',
+                    'Pazar mı? Kafede. Pazar kapanış bende. Kasayı kendi kodumla kapatırım, sonra makineleri temizlerim.',
+                  ),
+                  th('Bir kod, bir saat damgası. Bunu ilk görüşmede sormalıydım. Kafenin kayıtlarına ulaşmam lazım.'),
+                ],
+              },
+            ],
+            next: '$stay',
+          }),
           option('KA_TOLGA', 'Tolga ile Barış birbirini tanıyor muydu?', {
             score: { SORGULAMA: 30 },
             responses: [
@@ -900,35 +1192,32 @@ export const investigation2: CasePart = {
           },
         ],
         choices: [
-          option(
-            'DN_RED',
-            'Hayır. Bu yalan tanıklık olur. Okan gerçekten bir şey biliyorsa savcılığa kendisi gitsin; parasız.',
-            {
-              score: { SAVUNMA_STRATEJISI: 60 },
-              effects: [raise('okan_red')],
-              good: 'Para karşılığı tanıklık, yalan tanıklığa azmettirmedir (TCK 272, 38) ve savunmayı bütünüyle çökertir. Gerçek bir bilgi varsa yolu savcılıktır (CMK 158).',
-              responses: [
-                {
-                  lines: [
-                    s('defne', 'Ama o zaman Kaan…', 'uzgun'),
-                    me(
-                      'Kaan’ı yalanla kurtaramayız, Defne Hanım. Yalan, onun doğrusunu da yanında götürür. Okan bir gün kürsüde çözülür ve Kaan’ın her sözü onunla birlikte düşer.',
-                    ),
-                    s('defne', 'Haklısınız. Biliyorum. Bilmek bazen yetmiyor. Gece üçte insan her kapıyı çalıyor.'),
-                    th(
-                      'Gece üçte herkes her kapıyı çalar. Bir avukatın işi, hangi kapının açılmaması gerektiğini bilmektir.',
-                    ),
-                    s(
-                      'defne',
-                      'Zarfı geri koydum. Kaan’ın tedavisine harcarım. Doktor grup terapisi önerdi; ücretli. Bunun için harcarım.',
-                    ),
-                  ],
-                },
-              ],
-              next: '$stay',
-            },
-          ),
-          option('DN_DINLE', 'Önce Okan’ın gerçekten ne bildiğini öğrenelim. Para konuşmadan.', {
+          option('DN_RED', 'Hayır. Bu yalan tanıklık olur; parayla tanık olmaz.', {
+            score: { SAVUNMA_STRATEJISI: 60 },
+            effects: [raise('okan_red')],
+            good: 'Para karşılığı tanıklık, yalan tanıklığa azmettirmedir (TCK 272, 38) ve savunmayı bütünüyle çökertir. Gerçek bir bilgi varsa yolu savcılıktır (CMK 158).',
+            responses: [
+              {
+                lines: [
+                  me('Okan gerçekten bir şey biliyorsa savcılığa kendisi gitsin. Parasız.'),
+                  s('defne', 'Ama o zaman Kaan…', 'uzgun'),
+                  me(
+                    'Kaan’ı yalanla kurtaramayız, Defne Hanım. Yalan, onun doğrusunu da yanında götürür. Okan bir gün kürsüde çözülür ve Kaan’ın her sözü onunla birlikte düşer.',
+                  ),
+                  s('defne', 'Haklısınız. Biliyorum. Bilmek bazen yetmiyor. Gece üçte insan her kapıyı çalıyor.'),
+                  th(
+                    'Gece üçte herkes her kapıyı çalar. Bir avukatın işi, hangi kapının açılmaması gerektiğini bilmektir.',
+                  ),
+                  s(
+                    'defne',
+                    'Zarfı geri koydum. Kaan’ın tedavisine harcarım. Doktor grup terapisi önerdi; ücretli. Bunun için harcarım.',
+                  ),
+                ],
+              },
+            ],
+            next: '$stay',
+          }),
+          option('DN_DINLE', 'Önce Okan ne biliyor, onu öğrenelim. Parasız.', {
             effects: [raise('okan_red')],
             score: { SAVUNMA_STRATEJISI: 20 },
             neutral: 'Bilgi kaynağını dinlemek meşrudur; ama parayla bağlanan bir bilgi tanık değeri taşımaz.',
@@ -981,6 +1270,23 @@ export const investigation2: CasePart = {
         room: { label: 'IHLAMUR SOKAK 14 · DAİRE 1', character: 'nesrin' },
         lines: [
           {
+            when: flag('nesrin_kus'),
+            lines: [
+              card('IHLAMUR SOKAK 14 — DAİRE 1, AKŞAMÜSTÜ', 'ev'),
+              n(
+                'Zil iki kez çaldı. Kapı bir karış aralandı; zincir takılıydı. Aralıktan bir gözlük, bir hırka, bir kedi kuyruğu.',
+              ),
+              s(
+                'nesrin',
+                'Avukat hanım. Geçen sefer beni kapımda sıkıştırdınız. Yaşlıyım ama unutkan değilim.',
+                'kizgin',
+              ),
+              th(
+                'Haklıydı. Bir tanığı sıkıştırmak onu susturur; bunu kâğıt üzerinde biliyordum. Şimdi bir zincirin öbür tarafında öğreniyorum.',
+              ),
+            ],
+          },
+          {
             lines: [
               card('IHLAMUR SOKAK 14 — DAİRE 1, AKŞAMÜSTÜ', 'ev'),
               n(
@@ -1000,32 +1306,29 @@ export const investigation2: CasePart = {
           },
         ],
         choices: [
-          option(
-            'NS2_DEFTER',
-            'Defterinizin o sayfalarının fotokopisini alabilir miyim? Mahkemede aslını da görmek isteyebilirler.',
-            {
-              visibleWhen: has('clue_kira_defteri'),
-              score: { ARASTIRMA: 40 },
-              responses: [
-                {
-                  lines: [
-                    s(
-                      'nesrin',
-                      'Fotokopi mi? Köşedeki kırtasiyeye gidelim. Aslını mahkemeye kendim getiririm; kimseye vermem. Rahmetli “aslı sende kalsın” derdi.',
-                    ),
-                    n(
-                      'Kırtasiyede fotokopi makinesi iki kez sıkıştı. Nesrin Hanım her sayfayı ayrı ayrı düzeltti, parmağıyla bastırdı.',
-                    ),
-                    th(
-                      'Bir defterin iki sayfası. Bir hayaletin kira makbuzu. Ve bir kadın, aslını kimseye vermeyeceğini söyleyen.',
-                    ),
-                  ],
-                },
-              ],
-              next: '$stay',
-            },
-          ),
+          option('NS2_DEFTER', 'Defterin o sayfalarının bir fotokopisini alabilir miyim?', {
+            visibleWhen: all(has('clue_kira_defteri'), not(flag('nesrin_kus'))),
+            score: { ARASTIRMA: 40 },
+            responses: [
+              {
+                lines: [
+                  s(
+                    'nesrin',
+                    'Fotokopi mi? Köşedeki kırtasiyeye gidelim. Aslını mahkemeye kendim getiririm; kimseye vermem. Rahmetli “aslı sende kalsın” derdi.',
+                  ),
+                  n(
+                    'Kırtasiyede fotokopi makinesi iki kez sıkıştı. Nesrin Hanım her sayfayı ayrı ayrı düzeltti, parmağıyla bastırdı.',
+                  ),
+                  th(
+                    'Bir defterin iki sayfası. Bir hayaletin kira makbuzu. Ve bir kadın, aslını kimseye vermeyeceğini söyleyen.',
+                  ),
+                ],
+              },
+            ],
+            next: '$stay',
+          }),
           option('NS2_BARIS', 'Barış hiç misafir getirir miydi? Ya da biri onu sorar mıydı?', {
+            visibleWhen: not(flag('nesrin_kus')),
             score: { SORGULAMA: 30 },
             responses: [
               {
@@ -1041,7 +1344,39 @@ export const investigation2: CasePart = {
             ],
             next: '$stay',
           }),
+          option('NS2_OZUR', 'Geçen sefer sizi sıkıştırdım. Haksızlık ettim; özür dilerim.', {
+            visibleWhen: flag('nesrin_kus'),
+            effects: [inc('trust', 1)],
+            responses: [
+              {
+                lines: [
+                  n('Zincir yerinde kaldı. Ama kapı bir karış daha kapanmadı.'),
+                  s(
+                    'nesrin',
+                    'Özür kolay, evladım. Rahmetli de çok özür dilerdi. Kabul ettim; ama içeri buyur etmiyorum. Bugün değil.',
+                  ),
+                  th('Bir özür bir kapıyı açmaz. Sadece kapanmasını biraz geciktirir.'),
+                ],
+              },
+            ],
+            next: '$stay',
+          }),
+          option('NS2_HABER', 'Mahkemede arka odanın kilidi konuşuldu. Bilmenizi istedim.', {
+            visibleWhen: flag('nesrin_kus'),
+            score: { ARASTIRMA: 10 },
+            responses: [
+              {
+                lines: [
+                  s('nesrin', 'Kilit. Ben o kilidi duydum o sabah. Keski sesi. Kimse sormadı ki.', 'uzgun'),
+                  s('nesrin', 'Kediler aç, evladım. Git artık. Bir dahaki sefere sorarken sesini alçalt.'),
+                  th('Kimse sormadı. Ben de sorarken bağırdım. Bu dosyada bir tanığı ben kaybettim.'),
+                ],
+              },
+            ],
+            next: '$stay',
+          }),
           option('NS2_KEDI', 'Pamuk’a da teşekkür edin benim yerime.', {
+            visibleWhen: not(flag('nesrin_kus')),
             effects: [inc('trust', 2)],
             responses: [
               {
@@ -1068,7 +1403,7 @@ export const investigation2: CasePart = {
       lines: [
         {
           lines: [
-            card('CUMARTESİ 11.20 — TELEFON', 'ev'),
+            card('ÖĞLE 11.20 — TELEFON', 'ev'),
             s(
               'nesrin',
               'Evladım, sen misin? Nesrin. Bodruma kömürlüğe indim, kediler oraya kaçtı. Yedi numaranın kömürlüğü açık.',
@@ -1087,13 +1422,14 @@ export const investigation2: CasePart = {
       ],
       prompt: 'Bodrumdaki çanta: ne yapacaksın?',
       choices: [
-        option('BD_SAVCI', 'Dokunmayın, kimse dokunmasın. Savcılığa hemen bildiriyorum; el koysunlar.', {
+        option('BD_SAVCI', 'Dokunmayın. Savcılığı arıyorum.', {
           score: { USUL_BILGISI: 80 },
           effects: [raise('canta_savci')],
           good: 'Doğru yol: olası delil yerinde korunur, savcılığa bildirilir ve kolluk tutanakla el koyar (CMK 123, 127). Delil zinciri korunur; çanta mahkemede kullanılabilir.',
           responses: [
             {
               lines: [
+                me('Kimse dokunmasın, Nesrin Hanım. Kediler de. Savcılığa bildiriyorum; el koysunlar.'),
                 n(
                   'Bir saat sonra iki kolluk görevlisi bodrumdaydı; eldivenle, poşetle, tutanakla. Nesrin Hanım merdivenin başında, kucağında kedi.',
                 ),
@@ -1107,7 +1443,7 @@ export const investigation2: CasePart = {
           ],
           next: HUB,
         }),
-        option('BD_AL', 'Geliyorum. Çantayı alıp mahkemeye ben götürürüm.', {
+        option('BD_AL', 'Geliyorum. Çantayı mahkemeye ben götürürüm.', {
           score: { USUL_BILGISI: -60 },
           effects: [raise('canta_deniz'), inc('ethics')],
           bad: 'Avukat olası bir delile el koyamaz: delil zinciri kopar, çanta hükme esas alınamaz ve sen de delile müdahale kuşkusunun içine girersin. El koyma kolluk ve savcılığın işidir (CMK 123, 127).',
@@ -1123,7 +1459,7 @@ export const investigation2: CasePart = {
           ],
           next: HUB,
         }),
-        option('BD_FOTO', 'Bir fotoğrafını çekip bana gönderin; sonra bakarız.', {
+        option('BD_FOTO', 'Fotoğrafını çekip bana yollayın; sonra bir bakarız, acelesi yok.', {
           effects: [raise('canta_foto')],
           neutral: 'Fotoğraf bir başlangıçtır ama el koyma değildir: çanta yerinde korunmazsa kaybolabilir.',
           responses: [
@@ -1158,8 +1494,8 @@ export const investigation2: CasePart = {
       ],
       prompt: 'Nöbetçi savcılık. Kim hakkında, hangi somut bilgiyle?',
       choices: [
-        option('SC_KIMLIK', 'Barış Demirel hakkında; kimlik, Bursa adresi ve kurye kayıtlarıyla suç duyurusu', {
-          visibleWhen: any(has('ev_kurye'), flag('fact_soyad'), has('ded_demirel')),
+        option('SC_KIMLIK', 'Barış Demirel hakkında, kurye kayıtlarıyla suç duyurusu', {
+          visibleWhen: has('ev_kurye'),
           score: { USUL_BILGISI: 60 },
           effects: [raise('suc_duyurusu')],
           good: 'Somut kimlik ve delille ihbar (CMK 158): şüpheliyi aramak ve yakalamak kolluğun ve savcılığın işidir. Avukat delili gösterir, kovalamaz.',
@@ -1179,10 +1515,21 @@ export const investigation2: CasePart = {
           ],
           next: HUB,
         }),
-        option('SC_MECHUL', 'Arka odanın kiracısı olan meçhul şahıs hakkında suç duyurusu', {
-          visibleWhen: not(any(has('ev_kurye'), flag('fact_soyad'), has('ded_demirel'))),
-          neutral: 'Kimliği belirsiz kişi hakkında ihbar alınır ama somut bilgi olmadan sonuç doğurmaz.',
+        option('SC_MECHUL', 'Arka odanın kiracısı hakkında, elimdeki bilgilerle suç duyurusu', {
+          visibleWhen: not(has('ev_kurye')),
+          neutral:
+            'Kimliği tam belirlenmemiş kişi hakkında ihbar alınır ama doğum tarihi, adres ya da bir kayıt olmadan yakalama kararına dönüşmez. Kurye şirketinin kayıtları mahkeme kanalıyla istenebilirdi (CMK 177, 206/1).',
           responses: [
+            {
+              when: any(flag('fact_soyad'), has('ded_demirel')),
+              lines: [
+                s(
+                  'savci',
+                  'Barış, soyadı Demirel, İzmirli. Bir isim, bir şehir. Türkiye’de kaç Barış Demirel var, avukat hanım? Bir doğum tarihi, bir adres, bir kayıt getirin.',
+                ),
+                th('Bir soyadı bir kapının önüne kadar götürür; içeri girmek için bir kayıt lazım.'),
+              ],
+            },
             {
               lines: [
                 s(
@@ -1194,7 +1541,7 @@ export const investigation2: CasePart = {
           ],
           next: HUB,
         }),
-        option('SC_TOLGA', 'Tolga Kaplan hakkında iftira suçundan suç duyurusu', {
+        option('SC_TOLGA', 'Tolga Kaplan hakkında iftiradan suç duyurusu', {
           score: { USUL_BILGISI: -40 },
           bad: 'Muhbirin yalan söylediği henüz ispatlanmadı; erken bir iftira isnadı hem tanığı karşı tarafa iter hem de somut dayanak olmadığından geri teper. Çelişki önce duruşmada ortaya konur.',
           responses: [
@@ -1217,7 +1564,16 @@ export const investigation2: CasePart = {
         ...INV2,
         title: 'Çıkarım Tahtası',
         background: 'buro_gece',
-        lines: [{ lines: [n('İki ipucunu seç. Yeni kartlar eskilerle de konuşur.')] }],
+        hud: ['tahta'],
+        lines: [
+          {
+            lines: [
+              n(
+                'İki ipucunu seç. Yeni kartlar eskilerle de konuşur. Yanlış çift bir bağlantı hakkı götürür; üç hak bitince tahta yarına kadar kapanır.',
+              ),
+            ],
+          },
+        ],
         pool: [
           'clue_gps',
           'clue_istifa',
@@ -1228,6 +1584,11 @@ export const investigation2: CasePart = {
           'clue_tolga_kask',
           'clue_tolga_saat',
           'clue_iki_tane',
+          'clue_iz_yabanci',
+          'clue_ekleme',
+          'clue_yag',
+          'clue_ek_stok',
+          'clue_sekerlik',
         ],
         recipes: [
           fresh(
@@ -1236,7 +1597,7 @@ export const investigation2: CasePart = {
             'clue_nesrin_moto',
             'ded_kacis',
             'Baskını gören kurye',
-            'GPS 06.21’de kırk saniyelik bir duruş; Nesrin aynı dakikada dönen motoru gördü. Barış baskını gördü ve gitti.',
+            'GPS 07.16’da kırk saniyelik bir duruş; Nesrin aynı dakikada dönen motoru gördü. Barış baskını gördü ve gitti.',
           ),
           fresh(
             'CB_TOLGA',
@@ -1247,21 +1608,30 @@ export const investigation2: CasePart = {
             'Tolga durağa gelip Barış’ı soruyordu; ifadesinde kapıdaki adamın elinde kask vardı. Muhbir satıcıyı tanıyordu ve adını vermedi.',
           ),
           fresh(
+            'CB_STOK',
+            'clue_ek_stok',
+            'clue_sekerlik',
+            'ded_stok',
+            'Şekerlik arka odanın deposu',
+            'Ardışık numaralar, aynı makine, aynı tarif; şekerlik de o odanın kapısının dibinde. İki paket mutfağın değil, arka odanın stoğundan ayrılmış.',
+          ),
+          fresh(
             'CB_ALIBI',
             'clue_z_rapor',
             'clue_tolga_saat',
             'ded_alibi',
             'Satış anında kafede',
-            'Satış 23.00’te; Kaan 23.18’de satış yapmış, 23.41’de kasayı kapatmış. Kaan o kapıda olamaz.',
+            'Satış 23.00’te; Kaan 22.53, 23.02 ve 23.11’de kasada satış yapmış, 23.41’de kasayı kapatmış. Kaan o kapıda olamaz.',
           ),
         ],
         miss: fallback('FB_ARA_CIKARIM', 'COMBINE', {
           repeat: 'ONCE_PER_PARAMS',
           score: { DELIL_ANALIZI: -50 },
+          effects: [inc('tahta', -1)],
           feedback: {
             title: 'Bu ikisi birbirini açıklamıyor',
             text: 'Başka bir çift dene.',
-            label: 'BAĞLANTI YOK · −50 SKOR',
+            label: 'BAĞLANTI YOK · −50 SKOR · −1 HAK',
             tone: 'error',
           },
         }),
@@ -1282,6 +1652,20 @@ export const investigation2: CasePart = {
               'Bir tanığı hazırlamak ile bir tanığı uydurmak arasındaki çizgiyi biliyorsun, Deniz. O çizgiyi geçersen geri dönemezsin. Müvekkilin de dönemez.',
             ),
             s('leyla', 'Hâlâ vaktin var. Telefonu aç ve iptal et. Ya da etme. Ama sonra bana sorma.'),
+          ],
+        },
+        {
+          when: all(flag('contra_s6'), not(flag('uzman_istendi')), not(has('ded_stok')), not(chosen('A2_UZMAN'))),
+          lines: [
+            n('Leyla kriminal raporun son sayfasını çevirdi: “Ekler: 48 fotoğraf, baskı listesi, kromatogram.”'),
+            s(
+              'leyla',
+              'Savcı “benzerlik” dedi ve haklıydı. Benzerliği tespite çevirmenin yolu bu ekler. CMK 67/6: savunma da bir uzmandan bilimsel mütalaa alabilir.',
+            ),
+            s(
+              'leyla',
+              'Ama uzmana cevabı yazdırma. Ona neye bakacağını sor; neyi bulacağını değil. Kesim, numara, kromatogram. Üçünü birden.',
+            ),
           ],
         },
         {

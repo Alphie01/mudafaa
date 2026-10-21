@@ -1,4 +1,15 @@
-import { documentExam, examine, fallback, raise, row, tool } from '../../../tools/content/src/kit/index.js';
+import {
+  all,
+  documentExam,
+  examine,
+  fallback,
+  flag,
+  has,
+  not,
+  raise,
+  row,
+  tool,
+} from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { INV1, card, n, s, th } from './shared.js';
 
@@ -45,13 +56,13 @@ export const inv1Docs: CasePart = {
           ],
         },
       ],
-      header: { left: 'ARAMA VE EL KOYMA TUTANAĞI', right: '11.11 · 06.05–07.40' },
+      header: { left: 'ARAMA VE EL KOYMA TUTANAĞI', right: '11.11 · 07.00–08.35' },
       columns: [
         { label: 'BÖLÜM', flex: 1 },
         { label: 'KAYIT', flex: 3 },
       ],
       rows: [
-        row('r_bas', ['Başlangıç', '06.05 · Kapı açıldı. Şüpheli ön odada yatağında uyurken bulundu.']),
+        row('r_bas', ['Başlangıç', '07.00 · Kapı açıldı. Şüpheli ön odada yatağında uyurken bulundu.']),
         row('r_kapi', ['Giriş', 'Odaların kapıları olağan şekilde açıldı; zor kullanılmadı.']),
         row(
           'r_arka',
@@ -71,7 +82,7 @@ export const inv1Docs: CasePart = {
         ),
         row('r_mutfak', ['Mutfak', 'Mutfakta şekerlik içinde 2 paket.']),
         row('r_tanik', ['Tanık', 'Arama başında hazır bulundurulan komşu: Nesrin Uysal · imza'], {
-          lupe: { cells: ['Tanık', 'Nesrin Uysal · imzanın yanında el yazısıyla: 06.40'], tone: 'special' },
+          lupe: { cells: ['Tanık', 'Nesrin Uysal · imzanın yanında el yazısıyla: 07.35'], tone: 'special' },
         }),
         row('r_kroki', [
           'Kroki',
@@ -94,18 +105,39 @@ export const inv1Docs: CasePart = {
           discovers: 'clue_tanik_saat',
           score: { DELIL_ANALIZI: 100 },
           feedback: hit(
-            '06.40',
-            'Arama 06.05’te başlamış. Tanık imzasının yanında 06.40 yazıyor. “Arama başında hazır” bulunan tanık, otuz beş dakika sonra gelmiş.',
+            '07.35',
+            'Arama 07.00’de başlamış. Tanık imzasının yanında 07.35 yazıyor. “Arama başında hazır” bulunan tanık, otuz beş dakika sonra gelmiş.',
             100,
           ),
         }),
+        examine('EX_TUT_BAS', 'lupe', 'r_bas', {
+          score: { DELIL_ANALIZI: 50 },
+          effects: [raise('fact_tut_bas')],
+          feedback: {
+            title: 'İLK SATIR',
+            text: '“Şüpheli ön odada yatağında uyurken bulundu.” Tutanağın kendi ilk cümlesi: Kaan’ın yatağı ön odada. Bunu not et; aynı tutanakta başka bir yer bu cümleyle kavga ediyor olabilir.',
+            label: '+50 SKOR',
+            tone: 'info',
+          },
+        }),
         examine('EX_TUT_KROKI', 'kars', 'r_kroki', {
+          enabledWhen: all(flag('fact_tut_bas'), has('clue_on_oda')),
           discovers: 'clue_kroki',
           score: { DELIL_ANALIZI: 150 },
           feedback: hit(
             'KROKİ ÇELİŞKİSİ',
             'Tutanak Kaan’ı ön odada, kendi yatağında uyurken buluyor. Kroki aynı odaya “misafir odası” diyor ve arka odayı ona veriyor. Biri ya yanlış görmüş ya da görmek istediğini çizmiş.',
           ),
+        }),
+        // Kroki ancak iki dayanağı birlikte görülünce çelişki olur: tutanağın ilk satırı ve ön odanın kendisi.
+        examine('EX_TUT_KROKI_ERKEN', 'kars', 'r_kroki', {
+          enabledWhen: not(all(flag('fact_tut_bas'), has('clue_on_oda'))),
+          feedback: {
+            title: 'NEYLE KARŞILAŞTIRACAKSIN?',
+            text: 'Kroki ön odaya “misafir odası”, arka odaya “şüphelinin yatak odası” diyor. Bir çizimi çürütmek için iki şey gerek: polisin Kaan’ı nerede bulduğunu yazdığı satır ve o odanın kendisi.',
+            label: 'Karşılaştırma için dayanak eksik',
+            tone: 'info',
+          },
         }),
       ],
       miss: miss('FB_TUTANAK'),
@@ -141,13 +173,31 @@ export const inv1Docs: CasePart = {
       tools: [lupe, kars],
       costVar: 'ex_kar',
       rules: [
-        examine('EX_KAR_KAPSAM', 'lupe', 'r_k_kapsam', {
+        examine('EX_KAR_KAPSAM', 'kars', 'r_k_kapsam', {
+          enabledWhen: flag('fact_talep'),
           discovers: 'clue_kapsam',
           score: { DELIL_ANALIZI: 150 },
           feedback: hit(
             'KAPSAM',
-            'Karar evin tamamını değil, Kaan’ın kullanımındaki odayı ve ortak alanları kapsıyor. Hâkim bir ev arkadaşı olduğunu biliyordu ve sınırı buna göre çizmiş.',
+            'Talep yazısı ev arkadaşını biliyor; karar da buna göre çizilmiş: evin tamamı değil, Kaan’ın kullanımındaki oda ve ortak alanlar. Hâkim sınırı bilerek dar tutmuş.',
           ),
+        }),
+        examine('EX_KAR_KAPSAM_ERKEN', 'kars', 'r_k_kapsam', {
+          enabledWhen: not(flag('fact_talep')),
+          feedback: {
+            title: 'NEYLE KARŞILAŞTIRACAKSIN?',
+            text: 'Kapsam satırı dar: “şüphelinin kullanımındaki oda ve ortak alanlar”. Hâkimin sınırı neden böyle çizdiğini anlamak için önce kolluğun ona ne yazdığını oku.',
+            label: 'Karşılaştırma için dayanak eksik',
+            tone: 'info',
+          },
+        }),
+        examine('EX_KAR_KAPSAM_LUPE', 'lupe', 'r_k_kapsam', {
+          feedback: {
+            title: 'KAPSAM SATIRI',
+            text: 'Mühürlü, temiz bir satır; yazıda bir oynama yok. Bu satırın ağırlığı yazısında değil, neyle yan yana durduğunda.',
+            label: 'Yazıda iz yok',
+            tone: 'info',
+          },
         }),
         examine('EX_KAR_TALEP', 'lupe', 'r_k_talep', {
           score: { DELIL_ANALIZI: 50 },
@@ -163,7 +213,7 @@ export const inv1Docs: CasePart = {
           score: { DELIL_ANALIZI: 20 },
           feedback: {
             title: 'SÜRE İÇİNDE',
-            text: 'Karar 10 Kasım 14.15’te verilmiş; arama 11 Kasım 06.05’te. 48 saatin içinde. Burada bir hata yok; her kapı kırık değildir.',
+            text: 'Karar 10 Kasım 14.15’te verilmiş; arama 11 Kasım 07.00’de. 48 saatin içinde. Burada bir hata yok; her kapı kırık değildir.',
             label: '+20 SKOR · doğru okuma',
             tone: 'info',
           },
@@ -233,12 +283,23 @@ export const inv1Docs: CasePart = {
           },
         }),
         examine('EX_MES_HAT', 'kars', 'm_hat', {
+          enabledWhen: has('clue_odaya_girme'),
           discovers: 'clue_hat',
           score: { DELIL_ANALIZI: 150 },
           feedback: hit(
             'HAT SAHİBİ',
             'Hat İzmir’de bir Fatma Demirel adına. Kolluk ona ulaşamamış ve orada bırakmış. Bir soyadı, bir şehir: hayaletin ilk adresi.',
           ),
+        }),
+        // B.'nin numarası ancak B.'nin o evde bir odası olduğu anlaşılınca bir anlam taşır.
+        examine('EX_MES_HAT_ERKEN', 'kars', 'm_hat', {
+          enabledWhen: not(has('clue_odaya_girme')),
+          feedback: {
+            title: 'BİR NUMARA',
+            text: '“B.” İzmir’de bir aboneye kayıtlı bir numara. Kolluk “müşteri ya da suç ortağı” deyip geçmiş. B.’nin bu evle ne ilgisi var? Önce B.’nin ne yazdığını oku.',
+            label: 'Karşılaştırma için dayanak eksik',
+            tone: 'info',
+          },
         }),
       ],
       miss: miss('FB_MESAJ'),
@@ -265,12 +326,17 @@ export const inv1Docs: CasePart = {
         { label: 'BULGU', flex: 3 },
       ],
       rows: [
-        row('k_paket', ['46 paket', 'Net 39,8 g kokain; kilitli poşet, ısıyla kapatılmış.']),
+        row('k_paket', ['46 paket', 'Net 39,8 g kokain; kilitli poşet, ısıyla kapatılmış.'], {
+          lupe: {
+            cells: ['46 paket', 'Net 39,8 g · poşet kenarında dört haneli baskı numarası · ağızda ısı çizgisi'],
+            tone: 'special',
+          },
+        }),
         row('k_seker', ['Şekerlik', '2 paket, net 1,7 g kokain.'], {
           kars: {
             cells: [
               'Şekerlik',
-              '2 paket · poşet tipi, kesim ve ortalama gramaj (0,85 g) arka odadaki paketlerle aynı.',
+              '2 paket · poşet tipi arka odadakilerle aynı; ortalama gramaj 0,85 g (arka oda 0,87 g) · gruplar arası karşılaştırma yapılmadı.',
             ],
             tone: 'special',
           },
@@ -278,6 +344,7 @@ export const inv1Docs: CasePart = {
         row('k_terazi', ['Terazi', 'Kefede kokain bulaşığı; karşılaştırmaya elverişli bir parmak izi.']),
         row('k_kavanoz', ['Kavanoz', 'Şekerlik kavanozunun dış yüzeyinde parmak izleri.']),
         row('k_para', ['Para', '8.750 TL; 50 ve 100 liralık banknotlar.']),
+        row('k_ekler', ['Ekler', '48 fotoğraf · poşet baskı listesi · 2 kromatogram (raporda yorumlanmamış)']),
       ],
       tools: [lupe, kars],
       costVar: 'ex_kri',
@@ -286,8 +353,8 @@ export const inv1Docs: CasePart = {
           discovers: 'clue_ayni_parti',
           score: { DELIL_ANALIZI: 150 },
           feedback: hit(
-            'AYNI STOK',
-            'Şekerlikteki iki paket, arka odadakilerle aynı poşette, aynı kesimle, aynı gramajda. İki ayrı satıcı değil; tek bir stok.',
+            'BENZER POŞET',
+            'Şekerlikteki iki paket arka odadakilerle aynı tip poşette, neredeyse aynı gramajda. Ama laboratuvar iki grubu karşılaştırmamış: kesim izi, poşet partisi, saflık. Benzerlik bir soru; cevabı bu sayfada yok.',
           ),
         }),
         examine('EX_KRI_IZ', 'lupe', 'k_terazi', {
@@ -297,6 +364,28 @@ export const inv1Docs: CasePart = {
             'YABANCI İZ',
             'Terazideki iz Kaan Yıldız’ınki değil. Parmak izi sisteminde kaydı yok. Teraziyi tutan el, savcının sanık sandalyesine oturttuğu el değil.',
           ),
+        }),
+        examine('EX_KRI_PAKET', 'lupe', 'k_paket', {
+          maxUses: 1,
+          score: { DELIL_ANALIZI: 50 },
+          effects: [raise('fact_paket')],
+          feedback: {
+            title: 'NUMARALI POŞETLER',
+            text: 'Her poşetin kenarında dört haneli bir baskı numarası, ağzında bir ısı çizgisi. Rulo poşet, ısıyla kapatma makinesi. Laboratuvar tartmış, saymış; numaraları okumamış.',
+            label: '+50 SKOR',
+            tone: 'info',
+          },
+        }),
+        examine('EX_KRI_EKLER', 'lupe', 'k_ekler', {
+          maxUses: 1,
+          score: { DELIL_ANALIZI: 50 },
+          effects: [raise('fact_ekler')],
+          feedback: {
+            title: 'AÇILMAMIŞ EKLER',
+            text: 'Kırk sekiz fotoğraf, bir baskı listesi, iki kromatogram. Raporun gövdesi bunlardan hiç söz etmiyor. Birinin bu sayfaları okuması gerekirdi; okuyacak göz bir kimyacının gözü.',
+            label: '+50 SKOR',
+            tone: 'info',
+          },
         }),
         examine('EX_KRI_KAVANOZ', 'lupe', 'k_kavanoz', {
           discovers: 'clue_kavanoz_iz',
@@ -379,7 +468,7 @@ export const inv1Docs: CasePart = {
           effects: [raise('fact_tolga_192')],
           feedback: {
             title: 'BİR İSİM VERMEK',
-            text: 'Gece yarısı, üzerinde bir paketle yakalanan adama bir kapı gösterilmiş: satıcıyı söylersen cezan düşer ya da azalır. Bir isim vermesi gerekiyordu. Hangi ismi seçeceği ona kalmıştı.',
+            text: 'Gece yarısı, üzerinde bir paketle yakalanan adama bir kapı gösterilmiş: satıcıyı söylersen cezan düşer ya da azalır. Bir isim vermesi gerekiyordu. Ve verdi; ifadenin altına “yararlanmak istiyorum” notu düşülmüş.',
             label: '+100 SKOR',
             tone: 'info',
           },
@@ -398,7 +487,7 @@ export const inv1Docs: CasePart = {
           lines: [
             card('ADLİYE · EMANET BÜROSU', 'adliye'),
             n(
-              'Emanet memuru kalın bir defteri açtı, parmağını satırların üstünde gezdirdi, bir naylon torba çıkardı. Torbanın içinde bir insanın sabah altıda cebinde taşıdığı her şey.',
+              'Emanet memuru kalın bir defteri açtı, parmağını satırların üstünde gezdirdi, bir naylon torba çıkardı. Torbanın içinde bir insanın sabah yedide cebinde taşıdığı her şey.',
             ),
             s('defne', 'Kaan’ın anahtarlığı bu. Liseden kalma bir kartal figürü var ucunda. Hâlâ taşıyormuş.'),
             th(
@@ -407,7 +496,7 @@ export const inv1Docs: CasePart = {
           ],
         },
       ],
-      header: { left: 'EMANET EŞYA TUTANAĞI · KAAN YILDIZ', right: '11.11 · 07.55' },
+      header: { left: 'EMANET EŞYA TUTANAĞI · KAAN YILDIZ', right: '11.11 · 08.50' },
       columns: [
         { label: 'EŞYA', flex: 1 },
         { label: 'AÇIKLAMA', flex: 3 },

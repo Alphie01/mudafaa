@@ -13,13 +13,47 @@
       "verdictText": "Sanık Kerem Aydın’ın ikrarı da dikkate alınarak cezalandırılmasına: TCK 142/2-h uyarınca alt sınırdan 5 YIL; TCK 143 ile 7 YIL 6 AY; TCK 62/1 ile 6 YIL 3 AY HAPİS; zarar giderilmediğinden TCK 168/2 uygulanmasına yer olmadığına; TCK 53; TCK 63 mahsup; tutukluluk hâlinin devamına (2. celsede adli kontrolle tahliye edilmişse, hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf (CMK 273/1).",
       "reasoning": [
         {
-          "text": "Sanık ek savunmasında üzerine atılı suçu ikrar etmiştir; ikrar, dosyadaki mazeret delilleriyle çelişse de hükme esas alınmıştır."
+          "text": "Sanık, müdafii huzurunda yaptığı ek savunmada üzerine atılı eylemi ikrar etmiş, son sözünde de ikrarını sürdürmüştür. İkrarın baskı ya da yasak usullerle alındığına dair bir iddia ve emare yoktur (CMK 148/1)."
+        },
+        {
+          "when": {
+            "not": {
+              "flag": "key_excluded"
+            }
+          },
+          "text": "İkrar; Depo 3’ün arka kapısının iç sürgüsündeki parmak izi ve sanıkta ele geçen depo anahtarıyla örtüşmekte, sanığın olay gecesi aynı tesiste çalıştığı da sabit bulunmaktadır (CMK 217/1)."
+        },
+        {
+          "when": {
+            "flag": "key_excluded"
+          },
+          "text": "Depo anahtarı hukuka aykırı aramayla elde edildiğinden hükme esas alınmamıştır (CMK 217/2). İkrar, sürgüdeki parmak izi ve sanığın olay gecesi aynı tesiste çalıştığının sabit olmasıyla örtüşmektedir (CMK 217/1)."
+        },
+        {
+          "when": {
+            "ref": "alibi"
+          },
+          "text": "Tanık Hüseyin Tan’ın beyanı ve 22.57 tarihli fiş değerlendirilmiştir. Fiş bir ödemenin saatini gösterir; sanığın 22.30–23.15 arasında kesintisiz çay ocağında kaldığını göstermez. Çay ocağının Depo 3 ile aynı tesiste bulunduğu ve tanığın sanığın ailesine yakınlığı gözetilerek bu deliller, sanığın duruşmada sürdürdüğü ikrarı karşısında itibar görmemiştir."
+        },
+        {
+          "when": {
+            "flag": "contra_s2"
+          },
+          "text": "Görgü tanığının teşhisine, beyanındaki çelişkiler nedeniyle itibar edilmemiştir; hüküm teşhise değil, ikrara ve onu destekleyen delillere dayandırılmıştır."
+        },
+        {
+          "when": {
+            "not": {
+              "flag": "contra_s2"
+            }
+          },
+          "text": "Görgü tanığı Selin Kaya’nın teşhisi ikrarla örtüşmektedir."
         },
         {
           "text": "Zarar giderilmediğinden etkin pişmanlık (TCK 168) uygulanmamıştır."
         }
       ],
-      "legalBasis": "TCK 142/2-h, 143, 62/1, 168/2, 53, 63; CMK 273/1",
+      "legalBasis": "TCK 142/2-h, 143, 62/1, 168/2, 53, 63; CMK 148/1, 217, 230/1; CMK 273/1",
       "xp": 0,
       "howToReach": "Terditli savunma (önce beraat, aksi halde lehe hükümler) meşru yoldur; sahte ikrar asla.",
       "ethicsCard": "Masum olduğunu söyleyen müvekkili suçu üstlenmeye yönlendirdin (Av.K. md. 34; TBB Meslek Kuralları). Gerçeğe aykırı ikrar TCK 270 kapsamında ayrı suç olabilir.",
@@ -121,46 +155,29 @@
         "all": [
           {
             "not": {
-              "flag": "cokus"
+              "flag": "illegal_presented"
             }
           },
           {
-            "flag": "contra_s4_hts"
+            "flag": "selin_cozuldu"
+          },
+          {
+            "ref": "teshis_coktu"
+          },
+          {
+            "ref": "iz_aciklandi"
+          },
+          {
+            "ref": "alibi"
+          },
+          {
+            "flag": "contra_y2"
           },
           {
             "hasEvidence": "ded_iz_murat"
           },
           {
             "flag": "murat_theory"
-          },
-          {
-            "ref": "alibi"
-          },
-          {
-            "flag": "contra_s2"
-          },
-          {
-            "not": {
-              "flag": "illegal_presented"
-            }
-          },
-          {
-            "cmp": [
-              {
-                "var": "pers"
-              },
-              ">=",
-              8
-            ]
-          },
-          {
-            "cmp": [
-              {
-                "score": "final"
-              },
-              ">=",
-              8000
-            ]
           }
         ]
       },
@@ -189,7 +206,7 @@
           "when": {
             "flag": "fp_neutralized"
           },
-          "text": "Kapı kolundaki parmak izi, sanığın 19.30’da yaptığı taşıma işiyle açıklanmıştır."
+          "text": "Arka kapının sürgüsündeki parmak izi, sanığın 19.30’da Depo 3 sorumlusunun isteğiyle yaptığı taşıma işiyle açıklanmıştır."
         },
         {
           "text": "Bu deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir."
@@ -235,7 +252,7 @@
           }
         }
       },
-      "howToReach": "Mazeret + çöken teşhis + yasal HTS ile Selin–Murat bağlantısını birleştir; esas savunmada gerçek faili göster.",
+      "howToReach": "Teşhisi iki celsede çökert, sürgüdeki izi açıkla, mazereti duruşmada ispatla, kart kaydıyla Depo 3 sorumlusunun çıkış saatini çürüt; tanık ancak bunlardan sonra döner. Esas savunmada gerçek faili göster.",
       "epilogue": [
         {
           "lines": [
@@ -363,63 +380,10 @@
       "when": {
         "all": [
           {
-            "not": {
-              "flag": "cokus"
-            }
+            "ref": "teshis_coktu"
           },
           {
-            "cmp": [
-              {
-                "var": "pers"
-              },
-              ">=",
-              6
-            ]
-          },
-          {
-            "any": [
-              {
-                "flag": "contra_s2"
-              },
-              {
-                "ref": "alibi"
-              }
-            ]
-          },
-          {
-            "ref": "findings2"
-          },
-          {
-            "any": [
-              {
-                "cmp": [
-                  {
-                    "score": "final"
-                  },
-                  ">=",
-                  7000
-                ]
-              },
-              {
-                "all": [
-                  {
-                    "ref": "alibi"
-                  },
-                  {
-                    "flag": "contra_s2"
-                  },
-                  {
-                    "cmp": [
-                      {
-                        "score": "final"
-                      },
-                      ">=",
-                      5500
-                    ]
-                  }
-                ]
-              }
-            ]
+            "ref": "iz_aciklandi"
           }
         ]
       },
@@ -431,31 +395,21 @@
       "reasoning": [
         {
           "when": {
-            "all": [
-              {
-                "flag": "contra_s2"
-              },
-              {
-                "hasEvidence": "ev_ariza_kaydi"
-              }
-            ]
+            "flag": "selin_cozuldu"
           },
-          "text": "Tanığın teşhisi, olay gecesi sokak lambasının arızalı olduğunu gösteren belediye kaydı karşısında güvenilirliğini yitirmiştir."
+          "text": "Görgü tanığı üçüncü celsede, dosyaya giren iletişim kaydı karşısında yeniden dinlenmiş; teşhisinden dönmüş ve olay gecesi bir başkasının yönlendirmesiyle beyan verdiğini açıklamıştır. Teşhis hükme esas alınamaz."
         },
         {
           "when": {
-            "all": [
-              {
-                "flag": "contra_s2"
-              },
-              {
-                "not": {
-                  "hasEvidence": "ev_ariza_kaydi"
-                }
-              }
-            ]
+            "ref": "teshis_isik"
           },
-          "text": "Tanığın teşhisi, kollukta yüzünü seçemediğini söylediği önceki beyanı karşısında güvenilirliğini yitirmiştir."
+          "text": "Belediye arıza kaydına göre arka sokağı aydınlatan 14 numaralı direk 9–14 Mart arasında yanmamıştır; şebeke planı ve kolluk tanığının beyanı, köşedeki 16 numaralı direğin arka sokağa ışık vermediğini göstermiştir. Tanığın yirmi metreden yüz seçmesi mümkün değildir."
+        },
+        {
+          "when": {
+            "ref": "teshis_yer"
+          },
+          "text": "Tanığın görev yeri ve saati, vardiya çizelgesindeki silinti ve kulübe terminali kaydıyla çürümüştür; olay defterindeki tur satırlarının sonradan yazıldığı, kart okuyucunun tanığı 23.29’da kulübe kapısında gösterdiği anlaşılmıştır. Tanığın olay anında arka sokakta bulunduğu ispatlanamamıştır."
         },
         {
           "when": {
@@ -469,16 +423,16 @@
               "flag": "key_excluded"
             }
           },
-          "text": "Depo anahtarı tüm vardiyaya verilmiş olup tek başına sanıkla irtibat kurmamaktadır."
+          "text": "Sanıkta ele geçen anahtar, sanığın çalıştığı tesisin depolarına ait olup tek başına suçun sanık tarafından işlendiğini göstermemektedir."
         },
         {
           "when": {
             "flag": "key_excluded"
           },
-          "text": "Depo anahtarı tüm vardiyaya verilmiş olup tek başına sanıkla irtibat kurmamaktadır; ayrıca hukuka aykırı aramayla elde edilmiştir (Anayasa 38/6, CMK 206/2-a, 217/2)."
+          "text": "Anahtarın, görev süresi bitmiş özel güvenlik görevlisince rızasız aramayla elde edildiği kolluk tanığının beyanıyla sabit olduğundan hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2)."
         },
         {
-          "text": "Kapı kolundaki parmak izi tek başına sanıkla olay arasında irtibat kurmamaktadır."
+          "text": "Arka kapının sürgüsündeki parmak izinin, sanığın duruşmadaki anlatımı ve tanık Hüseyin Tan’ın gözü önünde 22.57’de yazılan satırın üstünde yer alan 19.30 tarihli defter kaydıyla doğrulanan 19.30’daki taşıma işinde bırakıldığı anlaşılmıştır; izin zamanı belirlenemediğinden iz olay saatine bağlanamamıştır."
         },
         {
           "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2)."
@@ -524,7 +478,7 @@
           }
         }
       },
-      "howToReach": "S2’yi çürüt ya da mazereti duruşmada ispatla; anahtarın hukuka aykırı aramayla elde edildiğini ileri sür.",
+      "howToReach": "Teşhisi iki celsede çökert (ışık: tanık ve komiser; yer: tanık ve tur kaydı) ya da tanığı döndür; sürgüdeki izi sanığın anlatımı, defterin yeşil satırı ve onu yazılırken gören tanıkla açıkla.",
       "epilogue": [
         {
           "lines": [
@@ -683,6 +637,11 @@
             },
             {
               "speaker": "player",
+              "text": "Gerekçenin son satırı: “şüpheden sanık yararlanır.” Anayasa’nın bir cümlesi. Bir çocuğun bir yılı. Bir avukatın bir haftası. Hepsi aynı satıra sığmıştı.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
               "text": "Bazen adalet bir kapıyı açar, ama ışığı yakmaz.",
               "style": "thought"
             }
@@ -695,25 +654,7 @@
       "class": "REDUCED",
       "priority": 4,
       "when": {
-        "all": [
-          {
-            "not": {
-              "flag": "cokus"
-            }
-          },
-          {
-            "flag": "arg_142_2d"
-          },
-          {
-            "cmp": [
-              {
-                "score": "final"
-              },
-              ">=",
-              3000
-            ]
-          }
-        ]
+        "flag": "arg_142_2d"
       },
       "stamp": "İNDİRİM",
       "stampTone": "amber",
@@ -721,10 +662,179 @@
       "verdictText": "Sanık Kerem Aydın’ın cezalandırılmasına: TCK 142/2-h uyarınca takdiren alt sınırdan 5 YIL; gece vakti nedeniyle TCK 143 ile 7 YIL 6 AY; sanığın sabıkasız geçmişi ve cezanın geleceği üzerindeki olası etkileri gözetilerek TCK 62/1 ile 6 YIL 3 AY HAPİS; işverence teslim edilen anahtar ‘haksız yere elde bulundurulan’ nitelikte olmadığından TCK 142/2-d’nin uygulanmasına yer olmadığına; TCK 53; TCK 63; cezanın süresi nedeniyle HAGB (CMK 231/5) ve erteleme (TCK 51/1) koşulları bulunmadığına; tutukluluk hâlinin devamına (2. celsede adli kontrolle tahliye edilmişse, hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
       "reasoning": [
         {
+          "when": {
+            "not": {
+              "any": [
+                {
+                  "flag": "contra_s1"
+                },
+                {
+                  "flag": "contra_s2"
+                },
+                {
+                  "flag": "contra_s5"
+                }
+              ]
+            }
+          },
+          "text": "Görgü tanığı Selin Kaya’nın sanığı teşhis eden beyanı duruşmada çürütülmemiş, hükme esas alınmıştır."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "contra_s2"
+              },
+              {
+                "not": {
+                  "ref": "teshis_isik"
+                }
+              }
+            ]
+          },
+          "text": "Arka sokağın lambasının arızalı olduğu anlaşılmıştır; ancak köşedeki 16 numaralı direğin sokağı aydınlatmadığı gösterilmemiş, kolluk tanığı sokağın tanığın görmesine yetecek kadar aydınlık olduğunu beyan etmiştir. Tanığın tanıdığı bir kişiyi teşhis etmesi mümkün görülmüştür."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "any": [
+                  {
+                    "flag": "contra_s1"
+                  },
+                  {
+                    "flag": "contra_s5"
+                  }
+                ]
+              },
+              {
+                "not": {
+                  "ref": "teshis_yer"
+                }
+              }
+            ]
+          },
+          "text": "Tanığın görev yeri ve saatine ilişkin çelişkiler değerlendirilmiş; ancak olay defterindeki tur kaydı karşısında tanığın olay saatinde arka sokakta bulunmadığı ispatlanamamıştır."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "ref": "teshis_isik"
+              },
+              {
+                "not": {
+                  "ref": "teshis_yer"
+                }
+              }
+            ]
+          },
+          "text": "Arka sokağın karanlık olduğu sabit olmakla birlikte, tanığın devriye sırasında sanığa yakın mesafeden rastladığı yönündeki beyanı çürütülmemiş; tanıdık bir kişiyi yakın mesafeden tanıma ihtimali gözetilmiştir."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "ref": "teshis_yer"
+              },
+              {
+                "not": {
+                  "ref": "teshis_isik"
+                }
+              }
+            ]
+          },
+          "text": "Tanığın görev yerinde bulunmadığı anlaşılmakla birlikte, arka sokağın aydınlık olmadığı gösterilemediğinden tanığın yürürken sanığı görmüş olabileceği ihtimali dışlanamamıştır."
+        },
+        {
+          "when": {
+            "ref": "teshis_coktu"
+          },
+          "text": "Teşhis hükme esas alınmamıştır; hüküm, açıklanamayan parmak izi ve dosyadaki diğer delillere dayanmaktadır."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "ref": "teshis_coktu"
+              },
+              {
+                "ref": "alibi"
+              },
+              {
+                "not": {
+                  "flag": "fp_neutralized"
+                }
+              }
+            ]
+          },
+          "text": "Teşhis hükme esas alınmadığından olay saati, kamera kaydının kesik olduğu 22.40–23.30 aralığından daha dar belirlenememiştir. Tanık Hüseyin Tan’ın beyanı sanığı 23.15’e kadar kapsamaktadır; çay ocağı Depo 3’e birkaç dakikalık mesafededir. Mazeret olay aralığının tamamını kapsamadığından, görev yeri Depo 1 olan sanığın içeriden açılan Depo 3 arka kapısının iç sürgüsündeki ve duruşmada açıklanamayan izini ortadan kaldırmamıştır."
+        },
+        {
+          "when": {
+            "ref": "alibi"
+          },
+          "text": "Mazeret tanığı Hüseyin Tan’ın yeminli beyanı ve 22.57 tarihli fiş değerlendirilmiştir. Fiş bir ödemenin saatini gösterir; çay ocağının Depo 3 ile aynı tesiste olması ve tanığın aileye yakınlığı gözetilerek sanığın 22.30–23.15 arasında kesintisiz orada kaldığı kanaati oluşmamıştır."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "flag": "huseyin_testified"
+              },
+              {
+                "not": {
+                  "ref": "alibi"
+                }
+              }
+            ]
+          },
+          "text": "Mazeret tanığı Hüseyin Tan dinlenmiş; verdiği saat duruşmada bir belgeyle eşleştirilmediğinden ve tanığın sanığın ailesine yakınlığı gözetilerek beyanına itibar edilmemiştir."
+        },
+        {
+          "when": {
+            "not": {
+              "flag": "huseyin_testified"
+            }
+          },
+          "text": "Sanığın olay saatinde çay ocağında bulunduğu savunması, duruşmada dinlenen bir tanık ya da sunulan bir belgeyle desteklenmemiştir."
+        },
+        {
+          "when": {
+            "not": {
+              "flag": "fp_neutralized"
+            }
+          },
+          "text": "Depo 3’ün arka kapısının iç sürgüsündeki parmak izinin olay saatinden önce bırakıldığına dair somut bir açıklama duruşmada ortaya konmamıştır; kapının o gece içeriden açıldığı gözetildiğinde iz, sanıkla olay arasında güçlü bir irtibat kurmaktadır."
+        },
+        {
+          "when": {
+            "flag": "fp_neutralized"
+          },
+          "text": "Parmak izinin daha önceki bir taşıma işinde bırakılmış olabileceği değerlendirilmiş; bu ihtimal diğer delillerle birlikte sanık lehine sonuç doğurmamıştır."
+        },
+        {
+          "when": {
+            "not": {
+              "flag": "key_excluded"
+            }
+          },
+          "text": "Sanıkta ele geçen depo anahtarı destekleyici delil olarak değerlendirilmiştir."
+        },
+        {
+          "when": {
+            "flag": "key_excluded"
+          },
+          "text": "Depo anahtarı hukuka aykırı aramayla elde edildiğinden hükme esas alınmamıştır (CMK 217/2)."
+        },
+        {
+          "text": "Bu deliller birlikte değerlendirildiğinde eylemin sanık tarafından işlendiği kanaatine varılmıştır (CMK 217/1)."
+        },
+        {
           "text": "Eylem bina içinde muhafaza edilen eşyaya yönelik (TCK 142/2-h) ve gece vakti (TCK 143) işlenmiştir."
         },
         {
-          "text": "İşverence teslim edilen anahtar ‘haksız yere elde bulundurulan’ nitelikte olmadığından TCK 142/2-d’nin unsurları oluşmamıştır."
+          "text": "İşverenin anahtar zimmet föyüne göre anahtar sanığa işe girişte imzayla teslim edilmiştir; ‘haksız olarak elde bulundurulan’ nitelikte olmadığından TCK 142/2-d’nin unsurları oluşmamıştır."
         },
         {
           "when": {
@@ -773,7 +883,7 @@
           }
         }
       },
-      "howToReach": "Ek savunmada 142/2-d’nin unsurlarının oluşmadığını savun.",
+      "howToReach": "Anahtarın işverence verildiğini müvekkilinden öğren, bir çalışma arkadaşıyla destekle ve ek savunmada 142/2-d’ye itiraz et; üçüncü celsede işverenin zimmet föyündeki imzayı göster.",
       "epilogue": [
         {
           "lines": [
@@ -884,42 +994,160 @@
       "reasoning": [
         {
           "when": {
-            "any": [
-              {
-                "not": {
-                  "flag": "arg_142_2d"
+            "not": {
+              "any": [
+                {
+                  "flag": "contra_s1"
+                },
+                {
+                  "flag": "contra_s2"
+                },
+                {
+                  "flag": "contra_s5"
                 }
-              },
-              {
-                "flag": "cokus"
-              }
-            ]
+              ]
+            }
           },
-          "text": "142/2-d ve h birlikte, zararın ağırlığı gözetilerek alt sınırdan uzaklaşılarak 6 YIL; TCK 143 ile 9 YIL; TCK 62/1 ile 7 YIL 6 AY HAPİS; TCK 53; TCK 63; istinaf."
+          "text": "Görgü tanığı Selin Kaya’nın sanığı teşhis eden beyanı duruşmada çürütülmemiş, hükme esas alınmıştır."
         },
         {
           "when": {
             "all": [
               {
-                "flag": "arg_142_2d"
+                "flag": "contra_s2"
               },
               {
                 "not": {
-                  "flag": "cokus"
+                  "ref": "teshis_isik"
                 }
               }
             ]
           },
-          "text": "Yalnızca TCK 142/2-h uyarınca, zararın ağırlığı gözetilerek alt sınırdan uzaklaşılarak 6 YIL; TCK 143 ile 9 YIL; TCK 62/1 ile 7 YIL 6 AY HAPİS; işverence teslim edilen anahtar nedeniyle TCK 142/2-d’nin uygulanmasına yer olmadığına; TCK 53; TCK 63; istinaf."
+          "text": "Arka sokağın lambasının arızalı olduğu anlaşılmıştır; ancak köşedeki 16 numaralı direğin sokağı aydınlatmadığı gösterilmemiş, kolluk tanığı sokağın tanığın görmesine yetecek kadar aydınlık olduğunu beyan etmiştir. Tanığın tanıdığı bir kişiyi teşhis etmesi mümkün görülmüştür."
         },
         {
           "when": {
-            "flag": "cokus"
+            "all": [
+              {
+                "any": [
+                  {
+                    "flag": "contra_s1"
+                  },
+                  {
+                    "flag": "contra_s5"
+                  }
+                ]
+              },
+              {
+                "not": {
+                  "ref": "teshis_yer"
+                }
+              }
+            ]
           },
-          "text": "Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı."
+          "text": "Tanığın görev yeri ve saatine ilişkin çelişkiler değerlendirilmiş; ancak olay defterindeki tur kaydı karşısında tanığın olay saatinde arka sokakta bulunmadığı ispatlanamamıştır."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "ref": "teshis_isik"
+              },
+              {
+                "not": {
+                  "ref": "teshis_yer"
+                }
+              }
+            ]
+          },
+          "text": "Arka sokağın karanlık olduğu sabit olmakla birlikte, tanığın devriye sırasında sanığa yakın mesafeden rastladığı yönündeki beyanı çürütülmemiş; tanıdık bir kişiyi yakın mesafeden tanıma ihtimali gözetilmiştir."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "ref": "teshis_yer"
+              },
+              {
+                "not": {
+                  "ref": "teshis_isik"
+                }
+              }
+            ]
+          },
+          "text": "Tanığın görev yerinde bulunmadığı anlaşılmakla birlikte, arka sokağın aydınlık olmadığı gösterilemediğinden tanığın yürürken sanığı görmüş olabileceği ihtimali dışlanamamıştır."
+        },
+        {
+          "when": {
+            "ref": "teshis_coktu"
+          },
+          "text": "Teşhis hükme esas alınmamıştır; hüküm, açıklanamayan parmak izi ve dosyadaki diğer delillere dayanmaktadır."
+        },
+        {
+          "when": {
+            "all": [
+              {
+                "ref": "teshis_coktu"
+              },
+              {
+                "ref": "alibi"
+              },
+              {
+                "not": {
+                  "flag": "fp_neutralized"
+                }
+              }
+            ]
+          },
+          "text": "Teşhis hükme esas alınmadığından olay saati, kamera kaydının kesik olduğu 22.40–23.30 aralığından daha dar belirlenememiştir. Tanık Hüseyin Tan’ın beyanı sanığı 23.15’e kadar kapsamaktadır; çay ocağı Depo 3’e birkaç dakikalık mesafededir. Mazeret olay aralığının tamamını kapsamadığından, görev yeri Depo 1 olan sanığın içeriden açılan Depo 3 arka kapısının iç sürgüsündeki ve duruşmada açıklanamayan izini ortadan kaldırmamıştır."
+        },
+        {
+          "when": {
+            "not": {
+              "flag": "fp_neutralized"
+            }
+          },
+          "text": "Depo 3’ün arka kapısının iç sürgüsündeki parmak izi sanığa aittir; izin olay saatinden önce bırakıldığına dair somut bir açıklama duruşmada ortaya konmamıştır."
+        },
+        {
+          "when": {
+            "flag": "fp_neutralized"
+          },
+          "text": "Parmak izinin daha önce bırakılmış olabileceği değerlendirilmiş; ancak bu ihtimal diğer delillerle birlikte sanık lehine sonuç doğurmamıştır."
+        },
+        {
+          "when": {
+            "not": {
+              "flag": "key_excluded"
+            }
+          },
+          "text": "Sanıkta ele geçen depo anahtarı, teşhis ve parmak iziyle birlikte destekleyici delil olarak değerlendirilmiştir."
+        },
+        {
+          "when": {
+            "flag": "key_excluded"
+          },
+          "text": "Depo anahtarı hukuka aykırı aramayla elde edildiğinden hükme esas alınmamıştır (CMK 217/2)."
+        },
+        {
+          "when": {
+            "not": {
+              "ref": "alibi"
+            }
+          },
+          "text": "Sanığın olay saatinde çay ocağında bulunduğu savunması, duruşmada dinlenen tanık ve sunulan belgelerle ispatlanamamıştır."
+        },
+        {
+          "when": {
+            "ref": "alibi"
+          },
+          "text": "Mazeret tanığının beyanı ve fiş değerlendirilmiş; tanığın sanığın ailesine yakınlığı ve fişin ödemeyi yapanı göstermemesi nedeniyle iddianın diğer delillerini ortadan kaldırmaya yeterli görülmemiştir."
+        },
+        {
+          "text": "142/2-d ve h birlikte, zararın ağırlığı gözetilerek alt sınırdan uzaklaşılarak 6 YIL; TCK 143 ile 9 YIL; TCK 62/1 ile 7 YIL 6 AY HAPİS; TCK 53; TCK 63; istinaf."
         }
       ],
-      "legalBasis": "TCK 142/2-d, h, 143, 62/1, 53, 63; CMK 273/1",
+      "legalBasis": "TCK 142/2-d, h, 143, 62/1, 53, 63; CMK 217, 230/1; CMK 273/1",
       "xp": {
         "if": {
           "when": {
@@ -1098,14 +1326,35 @@
         },
         {
           "when": {
-            "not": {
-              "flag": "murat_caught"
-            }
+            "all": [
+              {
+                "not": {
+                  "flag": "murat_caught"
+                }
+              },
+              {
+                "ref": "murat_iz"
+              }
+            ]
           },
           "lines": [
             {
               "speaker": "player",
               "text": "Murat Koç’un nerede olduğunu kimse bilmiyordu. Bir sigaranın kor ucu, bir yerde, yanıp sönüyordu.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "not": {
+              "ref": "murat_iz"
+            }
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "O gece Depo 3’ün arka kapısından kimin çıktığını bilmiyordum. Dosya da bilmiyordu. Bir yerde biri biliyordu; ve bu gece rahat uyuyacaktı.",
               "style": "thought"
             }
           ]

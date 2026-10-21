@@ -23,6 +23,7 @@ import {
   visited,
   met,
   choiceNode,
+  chosen,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import type { ChoiceDef } from '@mudafaa/case-schema';
@@ -94,8 +95,9 @@ const hubChoices = {
     }),
     p1.free('A_CIKARIM', 'Çıkarım tahtası', 'INV_CIKARIM', {
       description: '0 EP · ipuçlarını birleştir',
-      enabledWhen: ref('kart2'),
-      lockedReason: 'En az 2 ipucu gerekli.',
+      // Yanlış bağlantılar günde üç hakla sınırlı: tahta deneme yanılmayla değil, düşünerek çözülür.
+      enabledWhen: all(ref('kart2'), cmp(v('tahta'), '>', 0)),
+      lockedReason: 'En az 2 ipucu gerekli. (Bugün üç yanlış bağlantı kurduysan tahta yarına kadar kapalı.)',
     }),
     p1.free('A_LEYLA', 'Leyla’ya danış', 'INV_LEYLA', {
       description: '0 EP · günde bir kez',
@@ -105,6 +107,19 @@ const hubChoices = {
   ],
 };
 
+/** Bugün yapılabilecek eylem puanlı bir iş kalmadı mı (her etkinlik ya tükendi ya da görünmüyor)? */
+const isBitti = all(
+  ...Object.values(hubChoices)
+    .flat()
+    .filter((c) => c.cost !== undefined)
+    .map((c) => {
+      const spent = c.maxUses === 1 ? [chosen(c.id)] : [];
+      const hidden = c.visibleWhen === undefined ? [] : [not(c.visibleWhen)];
+      if (spent.length + hidden.length === 0) throw new Error(`${c.id}: sınırsız ve hep görünür etkinlik`);
+      return any(...spent, ...hidden);
+    }),
+);
+
 export const investigation1: CasePart = {
   nodes: [
     p1.hub({
@@ -113,9 +128,9 @@ export const investigation1: CasePart = {
       background: 'buro',
       lines: [
         {
-          when: cmp(v('day'), '==', 1),
+          when: all(cmp(v('ap'), '==', 5), cmp(v('day'), '==', 1)),
           lines: [
-            card('GÜN 1/3 · BİRİNCİ CELSEYE 12 GÜN', 'buro'),
+            card('GÜN 1/3 · BİRİNCİ CELSEYE 11 GÜN', 'buro'),
             n(
               'Masamda savcılık dosyasının fotokopisi: dört yüz on iki sayfa. Bir kahve, bir kalem, bir de bir sürü sarı yapışkan not. Henüz hiçbirine bir şey yazmadım.',
             ),
@@ -126,25 +141,30 @@ export const investigation1: CasePart = {
           ],
         },
         {
-          when: all(cmp(v('day'), '==', 2), any(has('clue_kilit'), has('clue_kira_defteri'), has('clue_odaya_girme'))),
+          when: all(
+            cmp(v('ap'), '==', 5),
+            cmp(v('day'), '==', 2),
+            any(has('clue_kilit'), has('clue_kira_defteri'), has('clue_odaya_girme')),
+          ),
           lines: [
-            card('GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN', 'buro'),
+            card('GÜN 2/3 · BİRİNCİ CELSEYE 10 GÜN', 'buro'),
             th('Dün bir hayaletin peşindeydim. Bugün bir mont, bir zincir, bir mesaj. Hayaletler mont giymez.'),
             n('Hedef: arka odada başka biri yaşıyordu. Kim? Ve polis o odaya nasıl girdi?'),
           ],
         },
         {
-          when: cmp(v('day'), '==', 2),
+          when: all(cmp(v('ap'), '==', 5), cmp(v('day'), '==', 2)),
           lines: [
-            card('GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN', 'buro'),
+            card('GÜN 2/3 · BİRİNCİ CELSEYE 10 GÜN', 'buro'),
             n('Hedef: kâğıtlar ne diyor, fotoğraflar ne gösteriyor? Tutanak ile fotoğraf aynı evi mi anlatıyor?'),
           ],
         },
         {
+          when: cmp(v('ap'), '==', 5),
           lines: [
-            card('GÜN 3/3 · BİRİNCİ CELSEYE 6 GÜN', 'buro'),
+            card('GÜN 3/3 · BİRİNCİ CELSEYE 9 GÜN', 'buro'),
             n(
-              'Sabah erkenden büroya geldiğimde Leyla çoktan oradaydı. Masamın üstüne bir not bırakmıştı: “Beş gün kuralı. Bugün son.” Altına küçük bir çizgi çekmişti.',
+              'Sabah erkenden büroya geldiğimde Leyla çoktan oradaydı. Masamın üstüne bir not bırakmıştı: “Beş gün kuralı. Ama hâkim dosyayı hafta başı okur; bizim için bugün son.” Altına küçük bir çizgi çekmişti.',
             ),
             n('Hedef: delil dilekçesi için son gün. Tahtayı topla; duruşmada kimi dinletmek, neyi okutmak istiyorsun?'),
           ],
@@ -163,8 +183,13 @@ export const investigation1: CasePart = {
         choices: ['A_GORUS', 'A_GORUS2'],
       },
       choices: [
+        // Son gün bitmeden duruşmaya gidilmez: günün eylem puanı harcanır (ya da yapılacak iş kalmamıştır) ve celseden
+        // önceki akşam Leyla'yla dosya bir kez daha konuşulur.
         nav('GO_H1', 'DURUŞMAYA GİT · 1. CELSE', 'INV_GECE_1', {
           role: 'PRIMARY',
+          visibleWhen: cmp(v('day'), '==', 3),
+          enabledWhen: all(cmp(v('leyla_gun'), '>=', 3), any(cmp(v('ap'), '<=', 0), isBitti)),
+          lockedReason: 'Son gün henüz bitmedi: kalan eylem puanını kullan ve celseden önce Leyla’ya danış.',
           confirm: 'Duruşmaya gidersen soruşturma biter. Emin misin?',
         }),
       ],
@@ -172,7 +197,7 @@ export const investigation1: CasePart = {
     decisionNode('INV_DAY_END', [{ when: cmp(v('day'), '==', 2), to: 'INV_AKSAM1' }, { to: 'INV_AKSAM2' }], {
       ...INV1,
       title: 'Gün sonu',
-      onEnter: [inc('day', 1), set('ap', 5)],
+      onEnter: [inc('day', 1), set('ap', 5), set('tahta', 3)],
     }),
     story('INV_AKSAM1', {
       ...INV1,
@@ -181,7 +206,7 @@ export const investigation1: CasePart = {
       lines: [
         {
           lines: [
-            card('CUMA 22.15 — ARSLAN HUKUK', 'buro_gece'),
+            card('PERŞEMBE 22.15 — ARSLAN HUKUK', 'buro_gece'),
             n('Leyla paltosunu giymiş, kapının eşiğinde duruyordu. Gitmek üzereydi; gitmedi.'),
             s('leyla', 'Bugün öğrendiğin en önemli şey neydi, Deniz? Delili değil. Şeyi.'),
             th('Masamda fotokopiler, bir kahve, bir de soru. Leyla’nın soruları hep cevaptan uzundur.'),
@@ -250,11 +275,11 @@ export const investigation1: CasePart = {
       lines: [
         {
           lines: [
-            card('CUMARTESİ 23.05 — ARSLAN HUKUK', 'buro_gece'),
+            card('CUMA 23.05 — ARSLAN HUKUK', 'buro_gece'),
             n('Telefon titredi. Ekranda: Defne Yıldız. Arkasından eczane kapanırken çekilen kepenk sesi geliyordu.'),
             s(
               'defne',
-              'Rahatsız ediyorum, biliyorum. Annem aradı. Kaan’ın sesini duymak istiyormuş. Bir aydır “sınav” diyorum.',
+              'Rahatsız ediyorum, biliyorum. Annem aradı. Kaan’ın sesini duymak istiyormuş. İki aydır “sınav” diyorum.',
               'uzgun',
             ),
             s(
@@ -296,7 +321,7 @@ export const investigation1: CasePart = {
           ],
           next: 'INV_SABAH3',
         }),
-        option('AK2_C', 'Annenize ben anlatayım; daha sakin olur.', {
+        option('AK2_C', 'Annenize ben anlatayım; bir yabancıdan duymak bazen daha kolay olur.', {
           effects: [dec('trust', 5)],
           bad: 'Müvekkilin sağlık bilgisi ve sırrı ona aittir; onun rızası olmadan ailesine bile açıklanamaz (Av.K. 36 sır saklama; KVKK özel nitelikli veri).',
           category: 'SAVUNMA_STRATEJISI',
@@ -319,7 +344,7 @@ export const investigation1: CasePart = {
       lines: [
         {
           lines: [
-            card('PAZAR 08.10 — GÖRÜKLE, KAHVE DURAĞI', 'kafe'),
+            card('CUMARTESİ 08.10 — GÖRÜKLE, KAHVE DURAĞI', 'kafe'),
             n(
               'Kaan’ın çalıştığı kafe. Küçük, sıcak, tavanına çekilmiş sarı ampuller. Kahve makinesi tıslıyordu; tezgâhın arkasında kırklarında, saçını tokayla toplamış bir kadın.',
             ),
@@ -465,7 +490,7 @@ export const investigation1: CasePart = {
       ],
       prompt: 'Mahkemeye delil dilekçesi: duruşmadan en az beş gün önce. Üç talep hakkın var; neyi isteyeceksin?',
       choices: [
-        option('DIL_KURYE', 'Paketçi kurye şirketinden, adresteki kuryenin personel ve GPS kayıtlarının istenmesi', {
+        option('DIL_KURYE', 'Kurye şirketinden personel ve GPS kayıtları', {
           visibleWhen: any(has('clue_mont'), has('ded_kurye'), has('clue_kira_defteri')),
           cost: [{ var: 'dil_hak', amount: 1 }],
           score: { USUL_BILGISI: 50 },
@@ -489,7 +514,7 @@ export const investigation1: CasePart = {
           next: '$stay',
         }),
         option('DIL_IZ', 'Terazideki parmak izinin Demirel soyadlı kiracıyla karşılaştırılması', {
-          visibleWhen: has('ded_demirel'),
+          visibleWhen: all(has('ded_demirel'), has('clue_iz_yabanci')),
           cost: [{ var: 'dil_hak', amount: 1 }],
           score: { USUL_BILGISI: 30 },
           effects: [raise('iz_istendi')],
@@ -533,11 +558,12 @@ export const investigation1: CasePart = {
       ...INV1,
       title: 'Çıkarım Tahtası',
       background: 'buro_gece',
+      hud: ['tahta'],
       lines: [
         {
           lines: [
             n(
-              'İki ipucunu seç. Birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar. Yanlış çift zaman ve puan götürür.',
+              'İki ipucunu seç. Birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar. Yanlış çift puan ve bir bağlantı hakkı götürür; üç hak bitince tahta yarına kadar kapanır.',
             ),
           ],
         },
@@ -618,8 +644,8 @@ export const investigation1: CasePart = {
           'clue_ayni_parti',
           'clue_sekerlik',
           'ded_sekerlik',
-          'Şekerlik arka odanın deposu',
-          'Aynı poşet, aynı gramaj; şekerlik de arka oda kapısının dibinde. O iki paket mutfağın değil, arka odanın stoğundan.',
+          'Şekerlik arka oda kapısında',
+          'Benzer poşet, yakın gramaj; şekerlik de arka oda kapısının dibinde. O iki paket arka odanın stoğu olabilir. “Olabilir” bir mahkemede yetmez; karşılaştırma isteyecekler.',
         ),
         deduce(
           'CB_KASK',
@@ -649,10 +675,11 @@ export const investigation1: CasePart = {
       miss: fallback('FB_CIKARIM', 'COMBINE', {
         repeat: 'ONCE_PER_PARAMS',
         score: { DELIL_ANALIZI: -50 },
+        effects: [dec('tahta')],
         feedback: {
           title: 'Bu ikisi birbirini açıklamıyor',
           text: 'Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Başka bir çift dene.',
-          label: 'BAĞLANTI YOK · −50 SKOR',
+          label: 'BAĞLANTI YOK · −50 SKOR · −1 HAK',
           tone: 'error',
         },
       }),
@@ -694,7 +721,7 @@ export const investigation1: CasePart = {
           when: cmp(v('ders'), '==', 'hikaye'),
           lines: [
             th(
-              '“Tutarlılık bazen tek bir kişinin aceleciliğidir.” Savcının hikâyesini kimin yazdığını düşünüyorum: bir komiser yardımcısı, sabah altıda, bir kroki kalemiyle.',
+              '“Tutarlılık bazen tek bir kişinin aceleciliğidir.” Savcının hikâyesini kimin yazdığını düşünüyorum: bir komiser yardımcısı, sabah yedide, bir kroki kalemiyle.',
             ),
           ],
         },

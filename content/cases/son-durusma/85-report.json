@@ -1,0 +1,163 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_davet",
+        "when": { "not": { "hasEvidence": "clue_davet" } },
+        "text": "Telefon raporunu iddianameyle karşılaştırmadın: 22.47’de maktul sanığı ofise çağırmıştı. Tasarlamanın “bekleyiş” ayağı buna dayanıyordu (TCK 82/1-a).",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_mesaj",
+        "when": { "not": { "hasEvidence": "clue_mesaj_tam" } },
+        "text": "Pazartesi mesajının tamamını okumadın: “Neden yaptığını yüzüne soracağım.” Kesilmiş bir cümle bir kararı, tamamı bir soruyu söylüyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_bileme",
+        "when": { "not": { "hasEvidence": "ded_bileme" } },
+        "text": "Bileği taşının şefin cuma nişanı talimatıyla alındığını göstermedin; mutfak tahtası ve şefin mesajı oradaydı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_suleyman",
+        "when": { "not": { "hasEvidence": "clue_dolmus" } },
+        "text": "Bulaşıkçıya sanığın çıkışını sormadın; dolmuş saatiyle 23.40’ta, elleri boş gördüğünü kimse sormamıştı.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_ifade",
+        "when": { "not": { "hasEvidence": "clue_tarik_bicak" } },
+        "text": "Baş tanığın ifadesini olay yeri tutanağıyla karşılaştırmadın: bıçak ofiste, önlük askıda ve temizdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kent",
+        "when": { "not": { "hasEvidence": "ev_kentkart" } },
+        "text": "Kentkart binişlerini istemedin; sanık 23.52’de İskele’de otobüse binmişti (CMK 177).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_z",
+        "when": { "not": { "hasEvidence": "ev_z" } },
+        "text": "Kasanın Z raporunu istemedin; tanığın “00.15’e kadar sayım” dediği kasa 23.48’de kapanmıştı.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_dvr",
+        "when": { "not": { "hasEvidence": "ev_dvr" } },
+        "text": "“Arızalı” denen kayıt cihazının incelenmesini istemedin; cihaz çalışıyordu ve sanık çıktıktan sonra fişi çekilmişti.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_sonarama",
+        "when": { "not": { "hasEvidence": "clue_son_arama" } },
+        "text": "Maktulün HTS’indeki son aramayı vekâletnamedeki numarayla karşılaştırmadın: 23.58’de sanığın babası aranmıştı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_sesli",
+        "when": { "not": { "hasEvidence": "ev_sesli" } },
+        "text": "Kemal Yalçın’ın telefonundaki sesli mesajı bilirkişiye göndermedin; maktul sanık otobüsteyken konuşuyordu ve kapıda biri vardı (CMK 63, 177).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_gomlek",
+        "when": { "not": { "hasEvidence": "ded_gomlek" } },
+        "text": "Garsonun 23.12 fotoğrafını olay yeri karesi 44 ile karşılaştırmadın: baş tanık o gece gömlek değiştirmişti.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_mektup",
+        "when": { "not": { "hasEvidence": "ded_mektup" } },
+        "text": "Emanetteki not bloğuna yan ışıkla bakmadın; koparılan mektubun izi oradaydı ve eşyalarda mektup yoktu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_emanet",
+        "when": { "all": [{ "hasEvidence": "clue_not_bloku" }, { "not": { "flag": "emanet_izin" } }] },
+        "text": "Emanetteki not bloğunu incelemek için mahkemeden izin istemedin; müdafi muhafaza altındaki delilleri inceleyebilir (CMK 153/4). Leyla yolunu biliyordu.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_arama",
+        "when": {
+          "all": [
+            { "flag": "bildirdi" },
+            { "not": { "flag": "arama_karari" } },
+            { "hasEvidence": "ded_canli" },
+            { "hasEvidence": "ded_mektup" },
+            { "hasEvidence": "ded_gomlek" }
+          ]
+        },
+        "text": "Savcıya yazdın ama dosyan arama kararına yetmedi: zarfı 23.40’ta masada bıraktığını söyleyen sanığın anlatımı ya da tanık için bir sebep (faturalar, hesaplar) eksikti (CMK 116, 119).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_susma",
+        "when": {
+          "all": [
+            { "flag": "contra_r1" },
+            { "flag": "contra_r2" },
+            { "flag": "contra_r3" },
+            { "flag": "contra_r4" },
+            { "not": { "flag": "tarik_ifsa" } }
+          ]
+        },
+        "text": "Son celsede tanığın dört beyanını da kâğıtlarla çürüttün; ama her birinde önce açıklamasını sormadın. Önce bastır, sonra göster.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_arsiv",
+        "when": { "not": { "hasEvidence": "ev_arsiv" } },
+        "text": "2004/311 dosyasının arama tutanağını istemedin; baş tanığın adı ve imzası o gece evde bulunanlar arasındaydı (CMK 206).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_leyla",
+        "when": { "all": [{ "flag": "in_court" }, { "not": { "flag": "leyla_korundu" } }] },
+        "text": "Savcı Leyla’yı tanık olarak istediğinde doğru dayanak meslek sırrıydı: avukat, mesleği sırasında öğrendikleri hakkında tanıklıktan çekinebilir (CMK 46/1-a; Av.K. 36).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_salon",
+        "when": { "not": { "flag": "h104_itiraz" } },
+        "text": "Savcının cevabı içinde taşıyan, tanığı bir kanaate yönlendiren sorusuna itiraz edebilirdin (CMK 201).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_bildir",
+        "when": {
+          "all": [
+            {
+              "any": [{ "hasEvidence": "ded_mektup" }, { "hasEvidence": "ded_canli" }, { "hasEvidence": "ded_gomlek" }]
+            },
+            { "not": { "flag": "bildirdi" } }
+          ]
+        },
+        "text": "Başka bir kişinin fail olabileceğine dair bulgularını savcılığa yazılı olarak bildirmedin (CMK 158, 160). Aramayı ve soruşturmayı ancak savcı yaptırabilir.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_yuzles",
+        "when": { "flag": "tarik_yuzlesme" },
+        "text": "Baş tanığın iş yerine gidip onu suçladın: avukat kovalamaz, bildirir. Yüzleşme şüpheliyi uyardı.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_etik",
+        "when": {
+          "any": [
+            { "flag": "suleyman_kocluk" },
+            { "flag": "cansu_vaat" },
+            { "flag": "ikrar_onerisi" },
+            { "flag": "leyla_not" },
+            { "flag": "teklif_kabul" }
+          ]
+        },
+        "text": "Etik çizgiyi aştın: tanığa nasıl konuşacağını söylemek, tanığa menfaat vaat etmek, müvekkile gerçeğe aykırı ikrar önermek ya da meslek sırrına dokunmak (Av.K. 34, 36; TCK 272, 277).",
+        "category": "SAVUNMA_STRATEJISI"
+      }
+    ]
+  }
+}

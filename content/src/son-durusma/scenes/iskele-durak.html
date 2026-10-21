@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sahne · Mudanya İskele durağı · gece</title>
+    <!--
+  Dava #15: Mudanya İskele durağı · gece. Dokunma alanları SceneDef nesneleridir: tabela (20,80,70,110) · sefer çizelgesi (140,100,80,90) · kamera (260,20,50,40) · bank (110,260,140,40).
+  Palet: zemin #141026, duvar #2b2350, kenar #120d1c.
+-->
+    <style>
+      body {
+        margin: 0;
+        background: #141026;
+      }
+      #scene {
+        position: relative;
+        width: 344px;
+        height: 380px;
+        overflow: hidden;
+        background: #141026;
+        font-family: 'Pixelify Sans', monospace;
+        color: #efe8ff;
+      }
+      #scene div {
+        position: absolute;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <!-- gece göğü, deniz, kaldırım -->
+      <div style="left: 0px; top: 0px; width: 344px; height: 200px; background: #141026"></div>
+      <div style="left: 0px; top: 200px; width: 344px; height: 60px; background: #1d3a66; opacity: 0.8"></div>
+      <div
+        style="left: 0px; top: 256px; width: 344px; height: 124px; background: #4a4656; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="
+          left: 0px;
+          top: 200px;
+          width: 344px;
+          height: 60px;
+          background: repeating-linear-gradient(0deg, rgba(156, 195, 230, 0.15) 0 2px, transparent 2px 12px);
+        "
+      ></div>
+      <!-- iskele lambaları -->
+      <div style="left: 240px; top: 120px; width: 4px; height: 80px; background: #120d1c"></div>
+      <div
+        style="left: 232px; top: 112px; width: 20px; height: 10px; background: #f4d36b; border: 2px solid #120d1c"
+      ></div>
+      <!-- yönlendirme tabelası (20,80,70,110) -->
+      <div style="left: 52px; top: 140px; width: 6px; height: 116px; background: #120d1c"></div>
+      <div
+        style="left: 20px; top: 84px; width: 70px; height: 56px; background: #7c4c2c; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 28px; top: 96px; width: 54px; height: 4px; background: #f4efe6"></div>
+      <div style="left: 28px; top: 108px; width: 40px; height: 4px; background: #f4efe6"></div>
+      <div style="left: 28px; top: 120px; width: 48px; height: 4px; background: #f4efe6"></div>
+      <!-- durak camı ve sefer çizelgesi (140,100,80,90) -->
+      <div
+        style="
+          left: 120px;
+          top: 90px;
+          width: 130px;
+          height: 170px;
+          background: rgba(156, 195, 230, 0.12);
+          border: 3px solid #120d1c;
+        "
+      ></div>
+      <div
+        style="left: 140px; top: 102px; width: 80px; height: 86px; background: #f4efe6; border: 2px solid #120d1c"
+      ></div>
+      <div style="left: 148px; top: 112px; width: 64px; height: 3px; background: #2f5a96"></div>
+      <div style="left: 148px; top: 124px; width: 64px; height: 3px; background: #2f5a96"></div>
+      <div style="left: 148px; top: 136px; width: 64px; height: 3px; background: #2f5a96"></div>
+      <div style="left: 148px; top: 148px; width: 64px; height: 3px; background: #2f5a96"></div>
+      <div style="left: 148px; top: 160px; width: 64px; height: 3px; background: #2f5a96"></div>
+      <div style="left: 148px; top: 172px; width: 64px; height: 4px; background: #c4413a"></div>
+      <!-- kamera direği (260,20,50,40) -->
+      <div style="left: 300px; top: 40px; width: 6px; height: 216px; background: #120d1c"></div>
+      <div
+        style="left: 262px; top: 24px; width: 46px; height: 30px; background: #7d8590; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 270px; top: 34px; width: 8px; height: 8px; background: #c4413a; border-radius: 50%"></div>
+      <!-- bank (110,260,140,40) -->
+      <div
+        style="left: 112px; top: 262px; width: 136px; height: 20px; background: #6e4a32; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 120px; top: 282px; width: 8px; height: 18px; background: #120d1c"></div>
+      <div style="left: 232px; top: 282px; width: 8px; height: 18px; background: #120d1c"></div>
+    </div>
+  </body>
+</html>

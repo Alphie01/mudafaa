@@ -29,10 +29,6 @@ export const briefing: CasePart = {
             n(
               'Kapı kapandı. Merdiven ışığı söndü. Kaldırımdaki siluet ellerini cebine soktu, başını eğdi ve yokuşa yürüdü.',
             ),
-          ],
-        },
-        {
-          lines: [
             card('23.09 — IHLAMUR SOKAK, ÜÇ YÜZ METRE AŞAĞIDA', 'sokak_karanlik'),
             n(
               'Mavi ışık önce camlarda yandı, sonra ıslak asfaltta. Bir devriye aracı kaldırıma yanaştı. Kapılar açıldı.',
@@ -48,7 +44,7 @@ export const briefing: CasePart = {
             ),
             voice('İKİNCİ SES', 'Ihlamur on dört. Daire yedi.'),
             voice('POLİS', 'Adı?'),
-            n('Siluet yutkundu. Bir isim seçti; kimin ismini seçtiğini, neden seçtiğini kimse sormadı.'),
+            n('Siluet yutkundu. Yağmur bir an dindi gibi oldu. Sonra konuştu.'),
             voice('İKİNCİ SES', 'Kaan. Kaan Yıldız.'),
             n('Telsiz cızırdadı. Biri bir not defterine bir isim yazdı. İsim, yağmurdan önce kurudu.', { fx: 'fade' }),
           ],
@@ -58,12 +54,12 @@ export const briefing: CasePart = {
     }),
     story('PR_02', {
       ...PRO,
-      title: '06.05',
+      title: '07.00',
       background: 'ev',
       lines: [
         {
           lines: [
-            card('11 KASIM · 06.05 — IHLAMUR SOKAK 14, DAİRE 7', 'ev'),
+            card('11 KASIM · 07.00 — IHLAMUR SOKAK 14, DAİRE 7', 'ev'),
             n('Kapı üç kez vuruldu. Üçüncüsünde menteşeler bağırdı.', { fx: 'shake' }),
             n(
               'Ön odada, kulaklığı hâlâ boynunda, yarı açık bir iktisat kitabının üstüne uyuyakalmış bir genç doğruldu. Saat kaç, gün ne, kimin kapısı?',
@@ -79,10 +75,6 @@ export const briefing: CasePart = {
             s('tuncay', 'Ev senin üstüne değil mi? Kira sözleşmesi senin adına.'),
             s('kaan', 'Evet ama o oda…'),
             s('tuncay', 'Ev senin üstüneyse oda da senin üstüne kardeşim. Hadi.'),
-          ],
-        },
-        {
-          lines: [
             n(
               'Arka odanın kapısında bir asma kilit vardı. Bir memur aşağı indi, elinde uzun saplı bir keskiyle döndü.',
             ),
@@ -90,7 +82,7 @@ export const briefing: CasePart = {
             n(
               'Bir fotoğraf makinesi patladı. Bir dolap açıldı. Bir ayakkabı kutusu, içinde düzgün sıralanmış küçük beyaz paketler. Bir terazi. Bir paket kilitli poşet.',
             ),
-            n('Mutfakta biri şekerliğin kapağını kaldırdı, içine baktı ve ıslık çaldı.'),
+            n('Biri bir şekerliğin kapağını kaldırdı, içine baktı ve ıslık çaldı.'),
             s('kaan', 'Bunlar benim değil. Barış’a sorun. Barış… Barış nerede?', 'uzgun'),
             s('tuncay', 'Barış kim? Burada senden başka kimse yok.'),
             n(
@@ -115,7 +107,7 @@ export const briefing: CasePart = {
       lines: [
         {
           lines: [
-            card('14 OCAK · PERŞEMBE 21.10 — ARSLAN HUKUK, BURSA', 'buro_gece'),
+            card('14 OCAK · ÇARŞAMBA 21.10 — ARSLAN HUKUK, BURSA', 'buro_gece'),
             th('Bursa’da kış iki şey getirir: lodos ve iddianame. Bu gece ikisi birden geldi.'),
             n(
               'Büronun camında sulu kar eriyordu. Masa lambasının altında bir kahve soğumuştu; kapının zili çaldığında saat dokuzu geçiyordu.',
@@ -379,7 +371,7 @@ export const briefing: CasePart = {
             s('leyla', 'Bu dosyada üçü de savcının elinde. Terazi var, poşet var, mesaj var. Hepsi tek bir odada.'),
             s(
               'leyla',
-              'Kırk altı paket, her biri sıfır virgül seksen beş gram. Bir kullanıcı bu kadar düzgün olmaz; bu, birinin akşamlarını bir terazinin başında geçirdiğini gösterir. Soru şu: kimin akşamlarını?',
+              'Kırk altı paket, her biri bir gramın biraz altında, hepsi neredeyse aynı. Bir kullanıcı bu kadar düzgün olmaz; bu, birinin akşamlarını bir terazinin başında geçirdiğini gösterir. Soru şu: kimin akşamlarını?',
             ),
             n('Dördüncü bir kâğıt aldı ve bu sefer bir şey yazmadan bıraktı.'),
             s(
@@ -420,7 +412,7 @@ export const briefing: CasePart = {
         {
           type: 'paragraph',
           title: 'OLAY ÖZETİ',
-          text: '11 Kasım 06.05’te Görükle Ihlamur Sokak 14/7’de hâkim kararıyla arama yapıldı. Evin arka odasında 46 paket kokain, hassas terazi, kilitli poşetler ve 8.750 TL; mutfaktaki şekerlikte 2 paket bulundu. Kira sözleşmesi Kaan adına. Kaan, arka odanın ev arkadaşı Barış’a ait olduğunu söylüyor; kolluk Barış diye birini tespit edemedi.',
+          text: '11 Kasım 07.00’de Görükle Ihlamur Sokak 14/7’de hâkim kararıyla arama yapıldı. Evin arka odasında 46 paket kokain, hassas terazi, kilitli poşetler ve 8.750 TL; mutfaktaki şekerlikte 2 paket bulundu. Kira sözleşmesi Kaan adına. Kaan, arka odanın ev arkadaşı Barış’a ait olduğunu söylüyor; kolluk Barış diye birini tespit edemedi.',
         },
         {
           type: 'strengthList',
@@ -485,12 +477,12 @@ export const briefing: CasePart = {
       lines: [
         {
           lines: [
-            card('15 OCAK · CUMA 08.20 — GÖRÜKLE, IHLAMUR SOKAK', 'sokak_sabah'),
+            card('15 OCAK · PERŞEMBE 08.20 — GÖRÜKLE, IHLAMUR SOKAK', 'sokak_sabah'),
             n(
               'Görükle sabahları kızarmış ekmek ve ıslak karton kokar. Öğrenciler kapüşonlarını kafalarına geçirmiş, otobüs durağına koşuyordu.',
             ),
             n(
-              'On dört numara dört katlı, sarı boyası dökülmüş bir apartmandı. En üst katın balkonunda, rüzgârın kenara ittiği bir kurye kutusu duruyordu. Logosu yağmurdan silinmişti.',
+              'On dört numara dört katlı, sarı boyası dökülmüş bir apartmandı. Yan cepheden bakınca en üst katın arka penceresi görünüyordu; pervazın dışında, saçağa sıkıştırılmış bir kurye kutusu. Logosu yağmurdan silinmişti.',
             ),
             th('Bir ev. İki oda. Bir kilit. Savcılığa göre bir kişi. Kaan’a göre iki.'),
             n(
@@ -503,7 +495,7 @@ export const briefing: CasePart = {
               'Zemin katın penceresinde bir perde aralandı ve kapandı. Bir kedi pencerenin pervazından bana baktı, esnedi.',
             ),
             th(
-              'On iki gün. Kâğıtları okuyacağım, fotoğraflara bakacağım, Kaan’la konuşacağım. Ve bir hayaletin izini süreceğim.',
+              'On bir gün. Kâğıtları okuyacağım, fotoğraflara bakacağım, Kaan’la konuşacağım. Ve bir hayaletin izini süreceğim.',
             ),
             th('Bir kural koydum kendime: önce bul, sonra inan. Bu sefer tersini yapmayacağım.'),
           ],

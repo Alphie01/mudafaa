@@ -40,7 +40,13 @@
       {
         "id": "h_seker",
         "when": { "not": { "hasEvidence": "ded_sekerlik" } },
-        "text": "Şekerlikteki paketler arka odanın stoğundandı ve şekerlik arka oda kapısının dibindeydi: savcının “ortak alan” tezi buradan düşerdi.",
+        "text": "Şekerlik arka oda kapısının dibindeydi ve paketleri arka odadakilere benziyordu: kolluğa şekerliğin yerini birinci celsede kabul ettirebilirdin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_stok",
+        "when": { "not": { "hasEvidence": "ded_stok" } },
+        "text": "Benzerliği tespite çevirmek bir uzman ister: kriminal raporun ekleri üzerinden alınan bilimsel mütalaa (CMK 67/6) iki paketin arka odadaki stoktan ayrıldığını gösterirdi.",
         "category": "DELIL_ANALIZI"
       },
       {
@@ -71,6 +77,78 @@
         "id": "h_kurye",
         "when": { "not": { "hasEvidence": "ev_kurye" } },
         "text": "Kurye şirketinin kayıtlarını delil dilekçesiyle (CMK 177) ya da duruşmada (CMK 206/1) isteyebilirdin.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_tedavi",
+        "when": { "not": { "hasEvidence": "ev_tedavi" } },
+        "text": "Defne’nin getirdiği epikriz ve AMATEM kayıtları kullanıcı profilini kurardı; Kaan’ın yazılı onayıyla.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_kullanici",
+        "when": { "not": { "hasEvidence": "ded_kullanici" } },
+        "text": "Randevu kartı ile tedavi kayıtları birlikte, odadaki ilaçların bir tedaviye ait olduğunu gösterirdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_odaya_girme",
+        "when": { "not": { "hasEvidence": "clue_odaya_girme" } },
+        "text": "Telefon raporunda B. imzalı “odaya girme sakın” mesajı vardı: arka odanın başka birinin olduğunu Kaan’ın telefonu söylüyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_baris",
+        "when": { "not": { "hasEvidence": "ded_baris" } },
+        "text": "Mesaj ile kira defteri birlikte, arka odada Barış adında bir kiracının yaşadığını gösterirdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_sekerlik_yer",
+        "when": { "not": { "hasEvidence": "clue_sekerlik" } },
+        "text": "Koridor fotoğrafında şekerlik mutfakta değil, arka oda kapısının dibindeki raftaydı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_ayni_parti",
+        "when": { "not": { "hasEvidence": "clue_ayni_parti" } },
+        "text": "Kriminal raporda şekerlikteki iki paketin poşeti ve gramajı arka odadakilere benziyordu; karşılaştırma ise yapılmamıştı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_olcu",
+        "when": { "not": { "hasEvidence": "clue_kaan_olcu" } },
+        "text": "Kaan’a ayakkabı numarasını ve ehliyetini sorabilirdin: 41 numara, ehliyet yok.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_kask_ded",
+        "when": { "not": { "hasEvidence": "ded_kask" } },
+        "text": "Muhbirin “elinde kask vardı” sözü ile Kaan’ın ölçüleri birlikte, kapıyı açanın Kaan olmadığını gösterirdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_gps",
+        "when": { "not": { "hasEvidence": "clue_gps" } },
+        "text": "Kurye şirketinin GPS dökümü baskın sabahı 07.16’da binanın önünde duran ve geri dönen bir motoru gösteriyordu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_kacis",
+        "when": { "not": { "hasEvidence": "ded_kacis" } },
+        "text": "GPS kaydı ile Nesrin Hanım’ın gördüğü motor birlikte, baskını görüp dönen kuryeyi gösterirdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_tanik_saat",
+        "when": { "not": { "flag": "contra_s4" } },
+        "text": "Nesrin Hanım imzasının yanına saati yazmıştı: tanık aramanın başında değil, kapı açıldıktan sonra ve tek başına çağrılmıştı (CMK 119/4).",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_canta_foto",
+        "when": { "flag": "canta_foto" },
+        "text": "Fotoğraf delil değildir ve çantayı yerinde korumaz; el koyma savcılığın ve kolluğun işidir (CMK 123, 127). Çanta kayboldu.",
         "category": "USUL_BILGISI"
       },
       {
@@ -107,6 +185,30 @@
         "id": "h_tel",
         "when": { "all": [{ "flag": "suc_duyurusu" }, { "not": { "flag": "tehdit_bildirildi" } }] },
         "text": "Gece gelen telefonu savcılığa bildirseydin, kayıt Barış’ın yerini gösterebilirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_iz_talep",
+        "when": { "all": [{ "flag": "baris_yakalandi" }, { "not": { "flag": "iz_istendi" } }] },
+        "text": "Barış yakalandı ama terazideki yabancı izin onunla karşılaştırılmasını isteyen olmadı. Delil dilekçesinde ya da birinci celsede somut bir talep yeterdi (CMK 206/1).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_kilit_hazirlik",
+        "when": { "all": [{ "chosen": "Q_KILIT" }, { "not": { "flag": "q_kilit_tam" } }] },
+        "text": "Kaan kürsüde kilidin kimde olduğunu anlatamadı: görüş odasında kilidi onunla hiç konuşmamıştın. Müvekkile bildiğini sormak telkin değildir; hazırlıktır.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_seker_beyan",
+        "when": { "all": [{ "hasEvidence": "ded_stok" }, { "not": { "chosen": "Q_SEKER" } }] },
+        "text": "Uzman mütalaası paketlerin arka odanın stoğundan geldiğini gösterdi; ama kavanozdaki izin açıklamasını Kaan duruşmada hiç yapmadı. Görüşmede öğrendiğin bir olgu, sorguda sorulmadıkça dosyaya girmez.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_defter_kapsam",
+        "when": { "all": [{ "flag": "contra_s1" }, { "flag": "contra_s2" }, { "not": { "flag": "defter_sunuldu" } }] },
+        "text": "Kapsam dışı aramayı kanıtlamak için odanın kime kiralandığı da kayda geçmeliydi: Nesrin Hanım’ın kira defteri, kendi ağzından, ikinci celsede.",
         "category": "USUL_BILGISI"
       },
       {

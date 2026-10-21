@@ -29,13 +29,13 @@
           ]
         }
       ],
-      "header": { "left": "ARAMA VE EL KOYMA TUTANAĞI", "right": "11.11 · 06.05–07.40" },
+      "header": { "left": "ARAMA VE EL KOYMA TUTANAĞI", "right": "11.11 · 07.00–08.35" },
       "columns": [
         { "label": "BÖLÜM", "flex": 1 },
         { "label": "KAYIT", "flex": 3 }
       ],
       "rows": [
-        { "id": "r_bas", "cells": ["Başlangıç", "06.05 · Kapı açıldı. Şüpheli ön odada yatağında uyurken bulundu."] },
+        { "id": "r_bas", "cells": ["Başlangıç", "07.00 · Kapı açıldı. Şüpheli ön odada yatağında uyurken bulundu."] },
         { "id": "r_kapi", "cells": ["Giriş", "Odaların kapıları olağan şekilde açıldı; zor kullanılmadı."] },
         {
           "id": "r_arka",
@@ -58,7 +58,7 @@
           "id": "r_tanik",
           "cells": ["Tanık", "Arama başında hazır bulundurulan komşu: Nesrin Uysal · imza"],
           "lens": {
-            "lupe": { "cells": ["Tanık", "Nesrin Uysal · imzanın yanında el yazısıyla: 06.40"], "tone": "special" }
+            "lupe": { "cells": ["Tanık", "Nesrin Uysal · imzanın yanında el yazısıyla: 07.35"], "tone": "special" }
           }
         },
         {
@@ -92,8 +92,8 @@
           "kind": "EXAMINE",
           "match": { "tool": "lupe", "target": "r_tanik" },
           "feedback": {
-            "title": "06.40",
-            "text": "Arama 06.05’te başlamış. Tanık imzasının yanında 06.40 yazıyor. “Arama başında hazır” bulunan tanık, otuz beş dakika sonra gelmiş.",
+            "title": "07.35",
+            "text": "Arama 07.00’de başlamış. Tanık imzasının yanında 07.35 yazıyor. “Arama başında hazır” bulunan tanık, otuz beş dakika sonra gelmiş.",
             "label": "+100 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -103,9 +103,25 @@
           ]
         },
         {
+          "id": "EX_TUT_BAS",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "r_bas" },
+          "feedback": {
+            "title": "İLK SATIR",
+            "text": "“Şüpheli ön odada yatağında uyurken bulundu.” Tutanağın kendi ilk cümlesi: Kaan’ın yatağı ön odada. Bunu not et; aynı tutanakta başka bir yer bu cümleyle kavga ediyor olabilir.",
+            "label": "+50 SKOR",
+            "tone": "info"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 },
+            { "type": "VAR", "var": "fact_tut_bas", "op": "set", "value": true }
+          ]
+        },
+        {
           "id": "EX_TUT_KROKI",
           "kind": "EXAMINE",
           "match": { "tool": "kars", "target": "r_kroki" },
+          "enabledWhen": { "all": [{ "flag": "fact_tut_bas" }, { "hasEvidence": "clue_on_oda" }] },
           "feedback": {
             "title": "KROKİ ÇELİŞKİSİ",
             "text": "Tutanak Kaan’ı ön odada, kendi yatağında uyurken buluyor. Kroki aynı odaya “misafir odası” diyor ve arka odayı ona veriyor. Biri ya yanlış görmüş ya da görmek istediğini çizmiş.",
@@ -116,6 +132,18 @@
             { "type": "DISCOVER", "evidence": "clue_kroki" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
           ]
+        },
+        {
+          "id": "EX_TUT_KROKI_ERKEN",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "r_kroki" },
+          "enabledWhen": { "not": { "all": [{ "flag": "fact_tut_bas" }, { "hasEvidence": "clue_on_oda" }] } },
+          "feedback": {
+            "title": "NEYLE KARŞILAŞTIRACAKSIN?",
+            "text": "Kroki ön odaya “misafir odası”, arka odaya “şüphelinin yatak odası” diyor. Bir çizimi çürütmek için iki şey gerek: polisin Kaan’ı nerede bulduğunu yazdığı satır ve o odanın kendisi.",
+            "label": "Karşılaştırma için dayanak eksik",
+            "tone": "info"
+          }
         },
         {
           "id": "FB_TUTANAK",
@@ -129,7 +157,30 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "TUTANAK_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+        {
+          "id": "TUTANAK_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_TUT_EKLEME" },
+                  { "uses": "EX_TUT_TANIK" },
+                  { "uses": "EX_TUT_BAS" },
+                  { "uses": "EX_TUT_KROKI" },
+                  { "uses": "EX_TUT_KROKI_ERKEN" },
+                  { "uses": "FB_TUTANAK" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     },
     {
@@ -184,10 +235,11 @@
         {
           "id": "EX_KAR_KAPSAM",
           "kind": "EXAMINE",
-          "match": { "tool": "lupe", "target": "r_k_kapsam" },
+          "match": { "tool": "kars", "target": "r_k_kapsam" },
+          "enabledWhen": { "flag": "fact_talep" },
           "feedback": {
             "title": "KAPSAM",
-            "text": "Karar evin tamamını değil, Kaan’ın kullanımındaki odayı ve ortak alanları kapsıyor. Hâkim bir ev arkadaşı olduğunu biliyordu ve sınırı buna göre çizmiş.",
+            "text": "Talep yazısı ev arkadaşını biliyor; karar da buna göre çizilmiş: evin tamamı değil, Kaan’ın kullanımındaki oda ve ortak alanlar. Hâkim sınırı bilerek dar tutmuş.",
             "label": "+150 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -195,6 +247,29 @@
             { "type": "DISCOVER", "evidence": "clue_kapsam" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
           ]
+        },
+        {
+          "id": "EX_KAR_KAPSAM_ERKEN",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "r_k_kapsam" },
+          "enabledWhen": { "not": { "flag": "fact_talep" } },
+          "feedback": {
+            "title": "NEYLE KARŞILAŞTIRACAKSIN?",
+            "text": "Kapsam satırı dar: “şüphelinin kullanımındaki oda ve ortak alanlar”. Hâkimin sınırı neden böyle çizdiğini anlamak için önce kolluğun ona ne yazdığını oku.",
+            "label": "Karşılaştırma için dayanak eksik",
+            "tone": "info"
+          }
+        },
+        {
+          "id": "EX_KAR_KAPSAM_LUPE",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "r_k_kapsam" },
+          "feedback": {
+            "title": "KAPSAM SATIRI",
+            "text": "Mühürlü, temiz bir satır; yazıda bir oynama yok. Bu satırın ağırlığı yazısında değil, neyle yan yana durduğunda.",
+            "label": "Yazıda iz yok",
+            "tone": "info"
+          }
         },
         {
           "id": "EX_KAR_TALEP",
@@ -217,7 +292,7 @@
           "match": { "tool": "kars", "target": "r_k_sure" },
           "feedback": {
             "title": "SÜRE İÇİNDE",
-            "text": "Karar 10 Kasım 14.15’te verilmiş; arama 11 Kasım 06.05’te. 48 saatin içinde. Burada bir hata yok; her kapı kırık değildir.",
+            "text": "Karar 10 Kasım 14.15’te verilmiş; arama 11 Kasım 07.00’de. 48 saatin içinde. Burada bir hata yok; her kapı kırık değildir.",
             "label": "+20 SKOR · doğru okuma",
             "tone": "info"
           },
@@ -235,7 +310,30 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "KARAR_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+        {
+          "id": "KARAR_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_KAR_KAPSAM" },
+                  { "uses": "EX_KAR_KAPSAM_ERKEN" },
+                  { "uses": "EX_KAR_KAPSAM_LUPE" },
+                  { "uses": "EX_KAR_TALEP" },
+                  { "uses": "EX_KAR_SURE" },
+                  { "uses": "FB_KARAR" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     },
     {
@@ -329,6 +427,7 @@
           "id": "EX_MES_HAT",
           "kind": "EXAMINE",
           "match": { "tool": "kars", "target": "m_hat" },
+          "enabledWhen": { "hasEvidence": "clue_odaya_girme" },
           "feedback": {
             "title": "HAT SAHİBİ",
             "text": "Hat İzmir’de bir Fatma Demirel adına. Kolluk ona ulaşamamış ve orada bırakmış. Bir soyadı, bir şehir: hayaletin ilk adresi.",
@@ -339,6 +438,18 @@
             { "type": "DISCOVER", "evidence": "clue_hat" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
           ]
+        },
+        {
+          "id": "EX_MES_HAT_ERKEN",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "m_hat" },
+          "enabledWhen": { "not": { "hasEvidence": "clue_odaya_girme" } },
+          "feedback": {
+            "title": "BİR NUMARA",
+            "text": "“B.” İzmir’de bir aboneye kayıtlı bir numara. Kolluk “müşteri ya da suç ortağı” deyip geçmiş. B.’nin bu evle ne ilgisi var? Önce B.’nin ne yazdığını oku.",
+            "label": "Karşılaştırma için dayanak eksik",
+            "tone": "info"
+          }
         },
         {
           "id": "FB_MESAJ",
@@ -352,7 +463,30 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "MESAJ_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+        {
+          "id": "MESAJ_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_MES_ODA" },
+                  { "uses": "EX_MES_IKI" },
+                  { "uses": "EX_MES_EKIM" },
+                  { "uses": "EX_MES_HAT" },
+                  { "uses": "EX_MES_HAT_ERKEN" },
+                  { "uses": "FB_MESAJ" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     },
     {
@@ -384,7 +518,16 @@
         { "label": "BULGU", "flex": 3 }
       ],
       "rows": [
-        { "id": "k_paket", "cells": ["46 paket", "Net 39,8 g kokain; kilitli poşet, ısıyla kapatılmış."] },
+        {
+          "id": "k_paket",
+          "cells": ["46 paket", "Net 39,8 g kokain; kilitli poşet, ısıyla kapatılmış."],
+          "lens": {
+            "lupe": {
+              "cells": ["46 paket", "Net 39,8 g · poşet kenarında dört haneli baskı numarası · ağızda ısı çizgisi"],
+              "tone": "special"
+            }
+          }
+        },
         {
           "id": "k_seker",
           "cells": ["Şekerlik", "2 paket, net 1,7 g kokain."],
@@ -392,7 +535,7 @@
             "kars": {
               "cells": [
                 "Şekerlik",
-                "2 paket · poşet tipi, kesim ve ortalama gramaj (0,85 g) arka odadaki paketlerle aynı."
+                "2 paket · poşet tipi arka odadakilerle aynı; ortalama gramaj 0,85 g (arka oda 0,87 g) · gruplar arası karşılaştırma yapılmadı."
               ],
               "tone": "special"
             }
@@ -400,7 +543,11 @@
         },
         { "id": "k_terazi", "cells": ["Terazi", "Kefede kokain bulaşığı; karşılaştırmaya elverişli bir parmak izi."] },
         { "id": "k_kavanoz", "cells": ["Kavanoz", "Şekerlik kavanozunun dış yüzeyinde parmak izleri."] },
-        { "id": "k_para", "cells": ["Para", "8.750 TL; 50 ve 100 liralık banknotlar."] }
+        { "id": "k_para", "cells": ["Para", "8.750 TL; 50 ve 100 liralık banknotlar."] },
+        {
+          "id": "k_ekler",
+          "cells": ["Ekler", "48 fotoğraf · poşet baskı listesi · 2 kromatogram (raporda yorumlanmamış)"]
+        }
       ],
       "tools": [
         { "id": "lupe", "label": "Büyüteç", "icon": "magnifier" },
@@ -413,8 +560,8 @@
           "kind": "EXAMINE",
           "match": { "tool": "kars", "target": "k_seker" },
           "feedback": {
-            "title": "AYNI STOK",
-            "text": "Şekerlikteki iki paket, arka odadakilerle aynı poşette, aynı kesimle, aynı gramajda. İki ayrı satıcı değil; tek bir stok.",
+            "title": "BENZER POŞET",
+            "text": "Şekerlikteki iki paket arka odadakilerle aynı tip poşette, neredeyse aynı gramajda. Ama laboratuvar iki grubu karşılaştırmamış: kesim izi, poşet partisi, saflık. Benzerlik bir soru; cevabı bu sayfada yok.",
             "label": "+150 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -436,6 +583,38 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_iz_yabanci" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_KRI_PAKET",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "k_paket" },
+          "maxUses": 1,
+          "feedback": {
+            "title": "NUMARALI POŞETLER",
+            "text": "Her poşetin kenarında dört haneli bir baskı numarası, ağzında bir ısı çizgisi. Rulo poşet, ısıyla kapatma makinesi. Laboratuvar tartmış, saymış; numaraları okumamış.",
+            "label": "+50 SKOR",
+            "tone": "info"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 },
+            { "type": "VAR", "var": "fact_paket", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_KRI_EKLER",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "k_ekler" },
+          "maxUses": 1,
+          "feedback": {
+            "title": "AÇILMAMIŞ EKLER",
+            "text": "Kırk sekiz fotoğraf, bir baskı listesi, iki kromatogram. Raporun gövdesi bunlardan hiç söz etmiyor. Birinin bu sayfaları okuması gerekirdi; okuyacak göz bir kimyacının gözü.",
+            "label": "+50 SKOR",
+            "tone": "info"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 },
+            { "type": "VAR", "var": "fact_ekler", "op": "set", "value": true }
           ]
         },
         {
@@ -465,7 +644,30 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "KRIMINAL_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+        {
+          "id": "KRIMINAL_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_KRI_PARTI" },
+                  { "uses": "EX_KRI_IZ" },
+                  { "uses": "EX_KRI_PAKET" },
+                  { "uses": "EX_KRI_EKLER" },
+                  { "uses": "EX_KRI_KAVANOZ" },
+                  { "uses": "FB_KRIMINAL" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     },
     {
@@ -573,7 +775,7 @@
           "match": { "tool": "lupe", "target": "t_not" },
           "feedback": {
             "title": "BİR İSİM VERMEK",
-            "text": "Gece yarısı, üzerinde bir paketle yakalanan adama bir kapı gösterilmiş: satıcıyı söylersen cezan düşer ya da azalır. Bir isim vermesi gerekiyordu. Hangi ismi seçeceği ona kalmıştı.",
+            "text": "Gece yarısı, üzerinde bir paketle yakalanan adama bir kapı gösterilmiş: satıcıyı söylersen cezan düşer ya da azalır. Bir isim vermesi gerekiyordu. Ve verdi; ifadenin altına “yararlanmak istiyorum” notu düşülmüş.",
             "label": "+100 SKOR",
             "tone": "info"
           },
@@ -594,7 +796,29 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "TOLGA_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+        {
+          "id": "TOLGA_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_TOL_KASK" },
+                  { "uses": "EX_TOL_SAAT" },
+                  { "uses": "EX_TOL_GECMIS" },
+                  { "uses": "EX_TOL_NOT" },
+                  { "uses": "FB_TOLGA" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     },
     {
@@ -611,7 +835,7 @@
             { "speaker": "narrator", "text": "ADLİYE · EMANET BÜROSU", "style": "card", "bg": "adliye" },
             {
               "speaker": "narrator",
-              "text": "Emanet memuru kalın bir defteri açtı, parmağını satırların üstünde gezdirdi, bir naylon torba çıkardı. Torbanın içinde bir insanın sabah altıda cebinde taşıdığı her şey."
+              "text": "Emanet memuru kalın bir defteri açtı, parmağını satırların üstünde gezdirdi, bir naylon torba çıkardı. Torbanın içinde bir insanın sabah yedide cebinde taşıdığı her şey."
             },
             {
               "speaker": "defne",
@@ -625,7 +849,7 @@
           ]
         }
       ],
-      "header": { "left": "EMANET EŞYA TUTANAĞI · KAAN YILDIZ", "right": "11.11 · 07.55" },
+      "header": { "left": "EMANET EŞYA TUTANAĞI · KAAN YILDIZ", "right": "11.11 · 08.50" },
       "columns": [
         { "label": "EŞYA", "flex": 1 },
         { "label": "AÇIKLAMA", "flex": 3 }
@@ -700,7 +924,28 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "EMANET_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+        {
+          "id": "EMANET_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_EMA_ANAHTAR" },
+                  { "uses": "EX_EMA_CUZDAN" },
+                  { "uses": "EX_EMA_ILAC" },
+                  { "uses": "FB_EMANET" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     }
   ],

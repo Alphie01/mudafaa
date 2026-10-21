@@ -13,7 +13,7 @@
     "estimatedMinutes": 105,
     "summary": "Görükle’de bir öğrenci evine şafak baskını: kilitli arka odadan 46 paket kokain, bir terazi ve poşetler çıktı. Kira sözleşmesi Kaan Yıldız’ın adına. Kaan kullanıcı olduğunu, ama o odanın ev arkadaşı Barış’ın olduğunu söylüyor. Savcılığa göre Barış diye biri yok.",
     "coverCharacter": "kaan",
-    "legalReview": { "status": "APPROVED", "by": "Claude (iç inceleme)", "at": "2026-10-20" }
+    "legalReview": { "status": "APPROVED", "by": "Claude (iç inceleme)", "at": "2026-10-21" }
   },
   "config": {
     "startNode": "PROLOG",
@@ -87,21 +87,17 @@
       ],
       "bonuses": [{ "id": "guven", "label": "Güvenilirlik bonusu", "value": { "mul": [{ "var": "cred" }, 100] } }],
       "scaleMax": 10000,
-      "thresholdBar": [
-        { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
-        { "label": "Nitelik", "from": 3000, "tone": "amber" },
-        { "label": "Beraat", "from": 10500, "tone": "green" }
-      ],
+      "thresholdBar": [{ "label": "Hüküm kayda bağlıdır", "from": 0, "tone": "amber" }],
       "displayClampMin": 0
     },
     "objectionGrounds": [],
     "display": { "showRunningScore": true },
     "chronology": [
       { "id": "kr_eylul", "time": "20 Eylül", "text": "Arka odaya yeni bir kiracı taşınır." },
-      { "id": "kr_ekim", "time": "3–10 Ekim", "text": "Kaan acile kaldırılır; tedaviye başlar." },
+      { "id": "kr_ekim", "time": "3–9 Ekim", "text": "Kaan acile kaldırılır; tedaviye başlar." },
       { "id": "kr_9kasim", "time": "9 Kasım 23.09", "text": "Muhbir üzerinde bir paketle yakalanır." },
       { "id": "kr_10kasim", "time": "10 Kasım 14.15", "text": "Arama kararı verilir." },
-      { "id": "kr_11kasim", "time": "11 Kasım 06.05", "text": "Baskın." }
+      { "id": "kr_11kasim", "time": "11 Kasım 07.00", "text": "Baskın." }
     ]
   },
   "predicates": [
@@ -112,14 +108,8 @@
     },
     {
       "id": "beraat_e",
-      "label": "Oda varsayımı çöktü, şekerlik aklandı, muhbir sarsıldı",
-      "when": {
-        "all": [
-          { "flag": "contra_s2" },
-          { "flag": "jar_cleared" },
-          { "any": [{ "flag": "contra_t3" }, { "flag": "contra_t4" }, { "flag": "tolga_kirildi" }] }
-        ]
-      }
+      "label": "Oda varsayımı çöktü ve şekerlik aklandı",
+      "when": { "all": [{ "flag": "contra_s2" }, { "flag": "jar_cleared" }] }
     }
   ],
   "variables": [
@@ -221,22 +211,22 @@
     {
       "id": "ex_tut",
       "type": "int",
+      "initial": 7,
+      "min": 0,
+      "max": 7,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 7, "lowAt": 1 }
+    },
+    {
+      "id": "ex_kar",
+      "type": "int",
       "initial": 5,
       "min": 0,
       "max": 5,
       "visibility": "VISIBLE",
       "analysis": "resource",
       "display": { "label": "Deneme hakkı", "widget": "counter", "max": 5, "lowAt": 1 }
-    },
-    {
-      "id": "ex_kar",
-      "type": "int",
-      "initial": 3,
-      "min": 0,
-      "max": 3,
-      "visibility": "VISIBLE",
-      "analysis": "resource",
-      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 3, "lowAt": 1 }
     },
     {
       "id": "ex_mes",
@@ -251,12 +241,12 @@
     {
       "id": "ex_kri",
       "type": "int",
-      "initial": 5,
+      "initial": 6,
       "min": 0,
-      "max": 5,
+      "max": 6,
       "visibility": "VISIBLE",
       "analysis": "resource",
-      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 5, "lowAt": 1 }
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 6, "lowAt": 1 }
     },
     {
       "id": "ex_tol",
@@ -281,12 +271,22 @@
     {
       "id": "ex_z",
       "type": "int",
-      "initial": 3,
+      "initial": 4,
       "min": 0,
-      "max": 3,
+      "max": 4,
       "visibility": "VISIBLE",
       "analysis": "resource",
-      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 3, "lowAt": 1 }
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 4, "lowAt": 1 }
+    },
+    {
+      "id": "ex_mut",
+      "type": "int",
+      "initial": 5,
+      "min": 0,
+      "max": 5,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 5, "lowAt": 1 }
     },
     {
       "id": "ex_ema",
@@ -297,6 +297,16 @@
       "visibility": "VISIBLE",
       "analysis": "resource",
       "display": { "label": "Deneme hakkı", "widget": "counter", "max": 4, "lowAt": 1 }
+    },
+    {
+      "id": "tahta",
+      "type": "int",
+      "initial": 3,
+      "min": 0,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Yanlış bağlantı hakkı", "widget": "counter", "max": 3, "lowAt": 1 }
     },
     {
       "id": "dayanak",
@@ -368,6 +378,19 @@
     { "id": "fact_gps9", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_pazar", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_tolga_192", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_tut_bas", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_z_son", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_mt_kesim", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_mt_poset", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_mt_saflik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "uz_kesim", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "uz_poset", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "uz_saflik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "uzman_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_ekler", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_paket", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "q_kilit_tam", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "tolga_saik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "kaan_itiraf", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "kaan_riza", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "kaan_durust", "type": "bool", "initial": false, "visibility": "HIDDEN" },

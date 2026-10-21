@@ -77,7 +77,7 @@
             { "speaker": "player", "text": "İş olduğu için geldim. Ama ikinci kez geldim." },
             {
               "speaker": "kaan",
-              "text": "Kırk dört gün oldu. Temiz. Burada temiz kalmak kolay sanıyorlar. Değil. Neyse. Sorun."
+              "text": "Yüzü geçti. Temiz. Burada temiz kalmak kolay sanıyorlar. Değil. Neyse. Sorun."
             },
             {
               "speaker": "narrator",
@@ -712,7 +712,7 @@
           "id": "TP_SEKER",
           "kind": "TOPIC",
           "label": "Şekerlik",
-          "visibleWhen": { "any": [{ "hasEvidence": "clue_sekerlik" }, { "hasEvidence": "clue_kavanoz_iz" }] },
+          "visibleWhen": { "all": [{ "hasEvidence": "clue_sekerlik" }, { "hasEvidence": "clue_kavanoz_iz" }] },
           "cost": [{ "var": "min", "amount": 2 }],
           "variants": [
             {
@@ -1025,12 +1025,12 @@
                     },
                     {
                       "speaker": "kaan",
-                      "text": "Ertesi hafta AMATEM. Her perşembe. Bir doktor, bir psikolog, bir test. Otuz bir ekimde temizdim. Kasımda da temizdim."
+                      "text": "Ertesi hafta AMATEM. Her perşembe. Bir doktor, bir psikolog, bir test. Otuz ekimde temizdim. Kasımda da temizdim."
                     },
                     {
                       "speaker": "kaan",
                       "expression": "uzgun",
-                      "text": "On dört kasımda randevum vardı. Cezaevindeydim. Kaçırdığım ilk randevu. Doktor “gelmedi” diye yazmıştır. Doğru da yazmıştır."
+                      "text": "On üç kasımda randevum vardı. Cezaevindeydim. Kaçırdığım ilk randevu. Doktor “gelmedi” diye yazmıştır. Doğru da yazmıştır."
                     },
                     {
                       "speaker": "player",
@@ -1080,7 +1080,7 @@
         {
           "id": "G_RIZA_C",
           "kind": "OPTION",
-          "label": "Bunu mahkemede söylemek senin kararın. Söylersen odanın senin olmadığını anlatmak kolaylaşır; ama karar senin.",
+          "label": "Mahkemede ne söyleyeceğine sen karar vereceksin.",
           "visibleWhen": {
             "all": [
               { "flag": "kaan_itiraf" },
@@ -1090,6 +1090,10 @@
           "responses": [
             {
               "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Söylersen odanın senin olmadığını anlatmak kolaylaşır. Söylemezsen de seni savunurum. Karar senin."
+                },
                 {
                   "speaker": "kaan",
                   "expression": "saskin",
@@ -1192,7 +1196,67 @@
             "category": "SAVUNMA_STRATEJISI"
           }
         },
-        { "id": "G_BITIR", "kind": "CONTINUE", "label": "Görüşmeyi bitir", "role": "BACK", "next": "$return" }
+        {
+          "id": "G_BITIR",
+          "kind": "CONTINUE",
+          "label": "Görüşmeyi bitir",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "any": [
+              {
+                "any": [
+                  { "cmp": [{ "var": "min" }, "<=", 10] },
+                  { "all": [{ "cmp": [{ "visits": "INV_GORUSME" }, ">", 1] }, { "cmp": [{ "var": "min" }, "<", 8] }] }
+                ]
+              },
+              {
+                "all": [
+                  { "chosen": "TP_SABAH" },
+                  { "chosen": "TP_ARKA" },
+                  { "chosen": "TP_BARIS" },
+                  { "chosen": "TP_KENDI" },
+                  { "chosen": "TP_DEFNE" },
+                  { "any": [{ "chosen": "TP_PAZAR" }, { "not": { "hasEvidence": "clue_tolga_saat" } }] },
+                  { "any": [{ "chosen": "TP_KILIT" }, { "not": { "hasEvidence": "clue_kilit" } }] },
+                  {
+                    "any": [
+                      { "chosen": "TP_SEKER" },
+                      { "not": { "all": [{ "hasEvidence": "clue_sekerlik" }, { "hasEvidence": "clue_kavanoz_iz" }] } }
+                    ]
+                  },
+                  {
+                    "any": [
+                      { "chosen": "TP_MESAJ" },
+                      { "not": { "any": [{ "hasEvidence": "clue_odaya_girme" }, { "hasEvidence": "clue_iki_tane" }] } }
+                    ]
+                  },
+                  {
+                    "any": [
+                      { "chosen": "TP_TOLGA" },
+                      {
+                        "not": {
+                          "any": [
+                            { "flag": "fact_arka" },
+                            { "visited": "INV_TOLGA" },
+                            { "hasEvidence": "clue_kira_defteri" }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "any": [
+                      { "chosen": "TP_TEDAVI" },
+                      { "not": { "any": [{ "hasEvidence": "clue_randevu" }, { "hasEvidence": "clue_tedavi" }] } }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "lockedReason": "Kaan karşında oturuyor. Bir şey sormadan kalkamazsın."
+        }
       ]
     }
   ],

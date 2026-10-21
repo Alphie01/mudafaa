@@ -1,4 +1,4 @@
-import { all, flag, has, hint, missedEvidence, not } from '../../../tools/content/src/kit/index.js';
+import { all, chosen, flag, has, hint, missedEvidence, not } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 
 // 95-report: dava sonu raporundaki "kaçırdıkların".
@@ -45,7 +45,13 @@ export const report: CasePart = {
       missedEvidence(
         'h_seker',
         'ded_sekerlik',
-        'Şekerlikteki paketler arka odanın stoğundandı ve şekerlik arka oda kapısının dibindeydi: savcının “ortak alan” tezi buradan düşerdi.',
+        'Şekerlik arka oda kapısının dibindeydi ve paketleri arka odadakilere benziyordu: kolluğa şekerliğin yerini birinci celsede kabul ettirebilirdin.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_stok',
+        'ded_stok',
+        'Benzerliği tespite çevirmek bir uzman ister: kriminal raporun ekleri üzerinden alınan bilimsel mütalaa (CMK 67/6) iki paketin arka odadaki stoktan ayrıldığını gösterirdi.',
         'DELIL_ANALIZI',
       ),
       missedEvidence(
@@ -76,6 +82,78 @@ export const report: CasePart = {
         'h_kurye',
         'ev_kurye',
         'Kurye şirketinin kayıtlarını delil dilekçesiyle (CMK 177) ya da duruşmada (CMK 206/1) isteyebilirdin.',
+        'USUL_BILGISI',
+      ),
+      missedEvidence(
+        'h_tedavi',
+        'ev_tedavi',
+        'Defne’nin getirdiği epikriz ve AMATEM kayıtları kullanıcı profilini kurardı; Kaan’ın yazılı onayıyla.',
+        'ARASTIRMA',
+      ),
+      missedEvidence(
+        'h_kullanici',
+        'ded_kullanici',
+        'Randevu kartı ile tedavi kayıtları birlikte, odadaki ilaçların bir tedaviye ait olduğunu gösterirdi.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_odaya_girme',
+        'clue_odaya_girme',
+        'Telefon raporunda B. imzalı “odaya girme sakın” mesajı vardı: arka odanın başka birinin olduğunu Kaan’ın telefonu söylüyordu.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_baris',
+        'ded_baris',
+        'Mesaj ile kira defteri birlikte, arka odada Barış adında bir kiracının yaşadığını gösterirdi.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_sekerlik_yer',
+        'clue_sekerlik',
+        'Koridor fotoğrafında şekerlik mutfakta değil, arka oda kapısının dibindeki raftaydı.',
+        'ARASTIRMA',
+      ),
+      missedEvidence(
+        'h_ayni_parti',
+        'clue_ayni_parti',
+        'Kriminal raporda şekerlikteki iki paketin poşeti ve gramajı arka odadakilere benziyordu; karşılaştırma ise yapılmamıştı.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_olcu',
+        'clue_kaan_olcu',
+        'Kaan’a ayakkabı numarasını ve ehliyetini sorabilirdin: 41 numara, ehliyet yok.',
+        'SORGULAMA',
+      ),
+      missedEvidence(
+        'h_kask_ded',
+        'ded_kask',
+        'Muhbirin “elinde kask vardı” sözü ile Kaan’ın ölçüleri birlikte, kapıyı açanın Kaan olmadığını gösterirdi.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_gps',
+        'clue_gps',
+        'Kurye şirketinin GPS dökümü baskın sabahı 07.16’da binanın önünde duran ve geri dönen bir motoru gösteriyordu.',
+        'ARASTIRMA',
+      ),
+      missedEvidence(
+        'h_kacis',
+        'ded_kacis',
+        'GPS kaydı ile Nesrin Hanım’ın gördüğü motor birlikte, baskını görüp dönen kuryeyi gösterirdi.',
+        'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_tanik_saat',
+        not(flag('contra_s4')),
+        'Nesrin Hanım imzasının yanına saati yazmıştı: tanık aramanın başında değil, kapı açıldıktan sonra ve tek başına çağrılmıştı (CMK 119/4).',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_canta_foto',
+        flag('canta_foto'),
+        'Fotoğraf delil değildir ve çantayı yerinde korumaz; el koyma savcılığın ve kolluğun işidir (CMK 123, 127). Çanta kayboldu.',
         'USUL_BILGISI',
       ),
       hint(
@@ -112,6 +190,30 @@ export const report: CasePart = {
         'h_tel',
         all(flag('suc_duyurusu'), not(flag('tehdit_bildirildi'))),
         'Gece gelen telefonu savcılığa bildirseydin, kayıt Barış’ın yerini gösterebilirdi.',
+        'USUL_BILGISI',
+      ),
+      hint(
+        'h_iz_talep',
+        all(flag('baris_yakalandi'), not(flag('iz_istendi'))),
+        'Barış yakalandı ama terazideki yabancı izin onunla karşılaştırılmasını isteyen olmadı. Delil dilekçesinde ya da birinci celsede somut bir talep yeterdi (CMK 206/1).',
+        'USUL_BILGISI',
+      ),
+      hint(
+        'h_kilit_hazirlik',
+        all(chosen('Q_KILIT'), not(flag('q_kilit_tam'))),
+        'Kaan kürsüde kilidin kimde olduğunu anlatamadı: görüş odasında kilidi onunla hiç konuşmamıştın. Müvekkile bildiğini sormak telkin değildir; hazırlıktır.',
+        'SAVUNMA_STRATEJISI',
+      ),
+      hint(
+        'h_seker_beyan',
+        all(has('ded_stok'), not(chosen('Q_SEKER'))),
+        'Uzman mütalaası paketlerin arka odanın stoğundan geldiğini gösterdi; ama kavanozdaki izin açıklamasını Kaan duruşmada hiç yapmadı. Görüşmede öğrendiğin bir olgu, sorguda sorulmadıkça dosyaya girmez.',
+        'SAVUNMA_STRATEJISI',
+      ),
+      hint(
+        'h_defter_kapsam',
+        all(flag('contra_s1'), flag('contra_s2'), not(flag('defter_sunuldu'))),
+        'Kapsam dışı aramayı kanıtlamak için odanın kime kiralandığı da kayda geçmeliydi: Nesrin Hanım’ın kira defteri, kendi ağzından, ikinci celsede.',
         'USUL_BILGISI',
       ),
       hint(

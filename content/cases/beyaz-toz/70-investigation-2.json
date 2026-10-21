@@ -3,8 +3,8 @@
     {
       "id": "ARA_GIRIS_1",
       "type": "DECISION",
-      "chapter": "Bölüm 4 · Ara",
-      "eyebrow": "DAVA #04 · ARA",
+      "chapter": "Bölüm 3 · Birinci celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
       "title": "Ara",
       "lines": [
         {
@@ -13,7 +13,7 @@
             { "speaker": "narrator", "text": "26 OCAK · 17.30 — ADLİYE MERDİVENLERİ", "style": "card", "bg": "adliye" },
             {
               "speaker": "narrator",
-              "text": "Kaan cezaevinden eşyalarıyla çıkarıldığında hava kararmıştı. Bir naylon torba: iki kitap, bir eşofman, bir gözlük kılıfı."
+              "text": "Tahliye müzekkeresi adliyede yazıldı; Kaan serbest bırakıldığında hava kararmıştı. Elinde bir naylon torba: iki kitap, bir eşofman, bir gözlük kılıfı."
             },
             {
               "speaker": "narrator",
@@ -26,7 +26,7 @@
               "text": "Tahliye bir beraat değil. Ama bir kapı. Kaan o kapıdan geçerken bir kez dönüp adliyeye baktı.",
               "style": "thought"
             },
-            { "speaker": "kaan", "text": "Elli bir gün. Saydım. Şimdi neyi sayacağım?" },
+            { "speaker": "kaan", "text": "Yüz on beş gün. Temiz. Saydım. Şimdi neyi sayacağım?" },
             { "speaker": "defne", "expression": "mutlu", "text": "Perşembeleri. Doktorunu. Bir de bana borcunu." },
             {
               "speaker": "narrator",
@@ -53,7 +53,7 @@
           ]
         }
       ],
-      "routes": [{ "to": "ARA_GIRIS" }],
+      "routes": [{ "to": "H1_08" }],
       "choices": []
     },
     {
@@ -66,7 +66,8 @@
       "onEnter": [
         { "type": "DISCOVER", "evidence": "ev_kurye" },
         { "type": "VAR", "var": "day2", "op": "set", "value": 1 },
-        { "type": "VAR", "var": "ap2", "op": "set", "value": 4 }
+        { "type": "VAR", "var": "ap2", "op": "set", "value": 4 },
+        { "type": "VAR", "var": "tahta", "op": "set", "value": 3 }
       ],
       "lines": [
         {
@@ -141,7 +142,7 @@
       "hud": ["day2", "ap2"],
       "lines": [
         {
-          "when": { "cmp": [{ "var": "day2" }, "==", 1] },
+          "when": { "all": [{ "cmp": [{ "var": "ap2" }, "==", 4] }, { "cmp": [{ "var": "day2" }, "==", 1] }] },
           "lines": [
             { "speaker": "narrator", "text": "ARA · GÜN 1/2 · İKİNCİ CELSEYE 18 GÜN", "style": "card", "bg": "buro" },
             {
@@ -160,6 +161,26 @@
           ]
         },
         {
+          "when": { "all": [{ "cmp": [{ "var": "ap2" }, "==", 4] }, { "flag": "uzman_istendi" }] },
+          "lines": [
+            { "speaker": "narrator", "text": "ARA · GÜN 2/2 · İKİNCİ CELSEYE 11 GÜN", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: ikinci celseye hangi delille gireceğini seç. Tolga kürsüde olacak."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kurye kapının altından bir zarf bırakmış: Uludağ Üniversitesi, adli kimya. Ön yüzünde tükenmez kalemle: “Dokuz sayfa. Okuyun.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Son gün. Bir celsede söylenecek her cümle, bugün toplanan bir kâğıda dayanacak.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "cmp": [{ "var": "ap2" }, "==", 4] },
           "lines": [
             { "speaker": "narrator", "text": "ARA · GÜN 2/2 · İKİNCİ CELSEYE 11 GÜN", "style": "card", "bg": "buro" },
             {
@@ -179,13 +200,13 @@
           "id": "t2_kisi",
           "label": "KİŞİLER",
           "kind": "PEOPLE",
-          "choices": ["A2_SELIM", "A2_KAAN", "A2_DEFNE", "A2_BODRUM", "A2_NESRIN"]
+          "choices": ["A2_SELIM", "A2_KAAN", "A2_DEFNE", "A2_BODRUM", "A2_NESRIN", "A2_UZMAN"]
         },
         {
           "id": "t2_arsiv",
           "label": "ARŞİV",
           "kind": "ARCHIVE",
-          "choices": ["A2_GPS", "A2_ZRAPOR", "A2_SUC", "A2_CIKARIM", "A2_LEYLA"]
+          "choices": ["A2_GPS", "A2_ZRAPOR", "A2_MUTALAA", "A2_SUC", "A2_CIKARIM", "A2_LEYLA"]
         }
       ],
       "quickTalk": {
@@ -247,7 +268,27 @@
           "next": "ARA_NESRIN",
           "maxUses": 1,
           "description": "Zemin kat · bir teşekkür, bir defter",
-          "visibleWhen": { "all": [{ "met": "nesrin" }, { "not": { "flag": "nesrin_kus" } }] }
+          "visibleWhen": { "met": "nesrin" }
+        },
+        {
+          "id": "A2_UZMAN",
+          "kind": "NAVIGATE",
+          "label": "Bir uzmana danış",
+          "cost": [{ "var": "ap2", "amount": 1 }],
+          "next": "ARA_UZMAN",
+          "maxUses": 1,
+          "description": "Üniversite · kriminal raporun ekleri",
+          "visibleWhen": { "all": [{ "flag": "contra_s6" }, { "flag": "fact_ekler" }] }
+        },
+        {
+          "id": "A2_MUTALAA",
+          "kind": "NAVIGATE",
+          "label": "Uzmanın zarfını aç",
+          "cost": [{ "var": "ap2", "amount": 1 }],
+          "next": "ARA_MUTALAA",
+          "maxUses": 1,
+          "description": "Bilimsel mütalaa geldi",
+          "visibleWhen": { "all": [{ "flag": "uzman_istendi" }, { "cmp": [{ "var": "day2" }, "==", 2] }] }
         },
         {
           "id": "A2_GPS",
@@ -267,7 +308,7 @@
           "next": "ARA_ZRAPOR",
           "maxUses": 1,
           "description": "Kahve Durağı · 9 Kasım",
-          "visibleWhen": { "hasEvidence": "clue_tolga_saat" }
+          "visibleWhen": { "all": [{ "hasEvidence": "clue_tolga_saat" }, { "flag": "fact_pazar" }] }
         },
         {
           "id": "A2_SUC",
@@ -283,6 +324,8 @@
           "kind": "NAVIGATE",
           "label": "Çıkarım tahtası",
           "description": "0 EP · ipuçlarını birleştir",
+          "enabledWhen": { "cmp": [{ "var": "tahta" }, ">", 0] },
+          "lockedReason": "Bugün üç yanlış bağlantı kurdun; tahta yarına kadar kapalı.",
           "next": "ARA_CIKARIM"
         },
         {
@@ -292,13 +335,95 @@
           "description": "0 EP · günde bir kez",
           "visibleWhen": { "cmp": [{ "var": "leyla_ara" }, "<", { "var": "day2" }] },
           "next": "ARA_LEYLA",
-          "effects": [{ "type": "VAR", "var": "leyla_ara", "op": "set", "value": { "var": "day2" } }]
+          "effects": [
+            { "type": "VAR", "var": "leyla_ara", "op": "set", "value": { "var": "day2" } },
+            {
+              "type": "IF",
+              "when": { "flag": "contra_s6" },
+              "then": [{ "type": "VAR", "var": "fact_ekler", "op": "set", "value": true }]
+            }
+          ]
+        },
+        {
+          "id": "A2_GUN_SONU",
+          "kind": "NAVIGATE",
+          "label": "Günü kapat",
+          "description": "Bugünün işleri bitti; akşam olsun",
+          "visibleWhen": {
+            "all": [
+              { "cmp": [{ "var": "day2" }, "==", 1] },
+              { "chosen": "A2_KAAN" },
+              { "chosen": "A2_DEFNE" },
+              { "chosen": "A2_SUC" }
+            ]
+          },
+          "next": "ARA_DAY_END"
         },
         {
           "id": "GO_T",
           "kind": "NAVIGATE",
           "label": "DURUŞMAYA GİT · 2. CELSE",
           "role": "PRIMARY",
+          "visibleWhen": { "cmp": [{ "var": "day2" }, "==", 2] },
+          "enabledWhen": {
+            "all": [
+              { "cmp": [{ "var": "leyla_ara" }, ">=", 2] },
+              {
+                "any": [
+                  { "cmp": [{ "var": "ap2" }, "<=", 0] },
+                  {
+                    "all": [
+                      {
+                        "any": [
+                          { "chosen": "A2_SELIM" },
+                          {
+                            "not": {
+                              "any": [
+                                { "hasEvidence": "ev_kurye" },
+                                { "hasEvidence": "clue_mont" },
+                                { "hasEvidence": "ded_kurye" },
+                                { "hasEvidence": "clue_kira_defteri" }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      { "chosen": "A2_KAAN" },
+                      { "chosen": "A2_DEFNE" },
+                      {
+                        "any": [
+                          { "chosen": "A2_BODRUM" },
+                          { "not": { "all": [{ "met": "nesrin" }, { "not": { "flag": "nesrin_kus" } }] } }
+                        ]
+                      },
+                      { "any": [{ "chosen": "A2_NESRIN" }, { "not": { "met": "nesrin" } }] },
+                      {
+                        "any": [
+                          { "chosen": "A2_UZMAN" },
+                          { "not": { "all": [{ "flag": "contra_s6" }, { "flag": "fact_ekler" }] } }
+                        ]
+                      },
+                      {
+                        "any": [
+                          { "chosen": "A2_MUTALAA" },
+                          { "not": { "all": [{ "flag": "uzman_istendi" }, { "cmp": [{ "var": "day2" }, "==", 2] }] } }
+                        ]
+                      },
+                      { "any": [{ "chosen": "A2_GPS" }, { "not": { "hasEvidence": "ev_kurye" } }] },
+                      {
+                        "any": [
+                          { "chosen": "A2_ZRAPOR" },
+                          { "not": { "all": [{ "hasEvidence": "clue_tolga_saat" }, { "flag": "fact_pazar" }] } }
+                        ]
+                      },
+                      { "chosen": "A2_SUC" }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "lockedReason": "Son gün henüz bitmedi: kalan eylem puanını kullan ve Leyla’ya dosyayı bir kez daha göster.",
           "confirm": "Duruşmaya gidersen ara evre biter. Emin misin?",
           "next": "ARA_SON_1"
         }
@@ -312,7 +437,8 @@
       "title": "Gün sonu",
       "onEnter": [
         { "type": "VAR", "var": "day2", "op": "inc", "value": 1 },
-        { "type": "VAR", "var": "ap2", "op": "set", "value": 4 }
+        { "type": "VAR", "var": "ap2", "op": "set", "value": 4 },
+        { "type": "VAR", "var": "tahta", "op": "set", "value": 3 }
       ],
       "routes": [{ "to": "ARA_AKSAM" }],
       "choices": []
@@ -364,7 +490,7 @@
         {
           "id": "ARAK_A",
           "kind": "OPTION",
-          "label": "O çocuk şimdi nerede?",
+          "label": "O çocuk şimdi nerede, biliyor musunuz?",
           "responses": [
             {
               "lines": [
@@ -382,7 +508,7 @@
         {
           "id": "ARAK_B",
           "kind": "OPTION",
-          "label": "Bunu bana neden şimdi anlatıyorsunuz?",
+          "label": "Bunu bana neden şimdi, bu gece anlatıyorsunuz?",
           "responses": [
             {
               "lines": [
@@ -565,7 +691,7 @@
         {
           "id": "TEL_A",
           "kind": "OPTION",
-          "label": "Saati ve konuşmayı not et; sabah nöbetçi savcılığa bildir",
+          "label": "Saati not et; sabah savcılığa bildir",
           "responses": [
             {
               "lines": [
@@ -599,7 +725,7 @@
         {
           "id": "TEL_B",
           "kind": "OPTION",
-          "label": "Geri ara; teslim olursa Kaan’ın ifadesini yumuşatabileceğini söyle",
+          "label": "Geri ara; teslim olursa yardım edeceğini söyle",
           "responses": [
             {
               "lines": [
@@ -629,7 +755,7 @@
         {
           "id": "TEL_C",
           "kind": "OPTION",
-          "label": "Telefonu kapat ve uyumaya çalış",
+          "label": "Telefonu kapat, ışığı söndür, sabaha kadar uyumaya çalış",
           "responses": [
             {
               "lines": [
@@ -822,7 +948,17 @@
           "kind": "CONTINUE",
           "label": "Çay için teşekkür et ve çık",
           "role": "BACK",
-          "next": "ARA_HUB"
+          "next": "ARA_HUB",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [{ "uses": "SL_BARIS" }, { "uses": "SL_CANTA" }, { "uses": "SL_TOLGA" }, { "uses": "SL_ADRES" }]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "En az iki şey sor ya da dinle."
         }
       ]
     },
@@ -865,7 +1001,7 @@
         },
         {
           "id": "g_11kasim",
-          "cells": ["11 Kasım", "06.21 · Ihlamur Sok. 14 önü · duruş 40 sn · rota ters yön · “teslimat iptal”"]
+          "cells": ["11 Kasım", "07.16 · Ihlamur Sok. 14 önü · duruş 40 sn · rota ters yön · “teslimat iptal”"]
         },
         {
           "id": "g_fesih",
@@ -883,8 +1019,8 @@
           "kind": "EXAMINE",
           "match": { "tool": "lupe", "target": "g_11kasim" },
           "feedback": {
-            "title": "06.21",
-            "text": "Baskın sabahı 06.21’de Barış’ın cihazı binanın önünde kırk saniye duruyor, sonra ters yöne gidiyor. Polis araçlarını gören biri böyle durur.",
+            "title": "07.16",
+            "text": "Baskın sabahı 07.16’da Barış’ın cihazı binanın önünde kırk saniye duruyor, sonra ters yöne gidiyor. Polis araçlarını gören biri böyle durur.",
             "label": "+150 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -950,7 +1086,29 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "GPS_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
+        {
+          "id": "GPS_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_GPS_11" },
+                  { "uses": "EX_GPS_9" },
+                  { "uses": "EX_GPS_FESIH" },
+                  { "uses": "EX_GPS_PERS" },
+                  { "uses": "FB_GPS" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     },
     {
@@ -961,7 +1119,6 @@
       "title": "Kahve Durağı kasa kayıtları",
       "hud": ["ex_z"],
       "background": "kafe",
-      "onFirstEnter": [{ "type": "DISCOVER", "evidence": "ev_zrapor" }],
       "lines": [
         {
           "when": { "flag": "fact_pazar" },
@@ -995,7 +1152,13 @@
       ],
       "rows": [
         { "id": "z_vardiya", "cells": ["Vardiya", "Kapanış: Kaan Yıldız · 16.00–24.00"] },
-        { "id": "z_son", "cells": ["Son satış", "23.18 · iki filtre kahve"] },
+        {
+          "id": "z_son",
+          "cells": [
+            "Satış dökümü",
+            "22.44 çay · 22.53 tost (kart) · 23.02 iki çay, masa 2 (kart) · 23.11 su · 23.18 iki filtre kahve"
+          ]
+        },
         { "id": "z_kapanis", "cells": ["Kasa kapanış", "23.41 · kullanıcı kodu: KAAN"] },
         { "id": "z_kamera", "cells": ["Kamera", "Kayıt yedi gün saklanır; 9 Kasım kaydı silinmiş"] }
       ],
@@ -1009,28 +1172,46 @@
           "id": "EX_Z_KAPANIS",
           "kind": "EXAMINE",
           "match": { "tool": "lupe", "target": "z_kapanis" },
+          "enabledWhen": { "flag": "fact_z_son" },
           "feedback": {
             "title": "23.41",
-            "text": "Kasa 23.41’de Kaan’ın koduyla kapanmış; son satış 23.18. Muhbire göre satış 23.00’te, on beş dakika uzaklıktaki bir kapıda.",
+            "text": "Kasa 23.41’de Kaan’ın koduyla kapanmış; 22.44 ile 23.18 arasında kasada dokuz dakikadan uzun bir boşluk yok. Muhbire göre satış 23.00’te, on beş dakika uzaklıktaki bir kapıda.",
             "label": "+150 SKOR · Not defterine eklendi",
             "tone": "special"
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_z_rapor" },
+            { "type": "DISCOVER", "evidence": "ev_zrapor" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
           ]
+        },
+        {
+          "id": "EX_Z_KAPANIS_ERKEN",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "z_kapanis" },
+          "enabledWhen": { "not": { "flag": "fact_z_son" } },
+          "feedback": {
+            "title": "BİR KOD",
+            "text": "Kasa 23.41’de “KAAN” koduyla kapanmış. Ama bir kodu başkası da girebilir; savcı ilk bunu soracak. Kodun arkasında Kaan’ın kendisi var mı? Satış satırlarına bak.",
+            "label": "Tek başına yetmez",
+            "tone": "info"
+          }
         },
         {
           "id": "EX_Z_SON",
           "kind": "EXAMINE",
           "match": { "tool": "kars", "target": "z_son" },
+          "maxUses": 1,
           "feedback": {
-            "title": "23.18",
-            "text": "Son satışı yapan kasiyer kodu da Kaan’ın. 23.00 ile 23.18 arasında bir kapıya gidip dönmek mümkün değil.",
+            "title": "23.02",
+            "text": "Beş satış da Kaan’ın koduyla; 22.53 ve 23.02 kartlı, slipte saat ve garsonun parafı var. Kafe kapıya on beş dakika: 22.45–23.15 arası kasadan ayrılamazdı. Kapanış satırı da artık anlam taşıyor.",
             "label": "+50 SKOR",
             "tone": "info"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 }]
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 },
+            { "type": "VAR", "var": "fact_z_son", "op": "set", "value": true }
+          ]
         },
         {
           "id": "FB_Z",
@@ -1044,7 +1225,416 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "Z_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "ARA_HUB" }
+        {
+          "id": "Z_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_Z_KAPANIS" },
+                  { "uses": "EX_Z_KAPANIS_ERKEN" },
+                  { "uses": "EX_Z_SON" },
+                  { "uses": "FB_Z" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
+      ]
+    },
+    {
+      "id": "ARA_UZMAN",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #04 · ARA",
+      "title": "Uzman mütalaası",
+      "background": "buro",
+      "room": { "label": "ULUDAĞ ÜNİVERSİTESİ · ADLİ KİMYA", "character": "uzman" },
+      "onFirstEnter": [{ "type": "MEET", "character": "uzman" }],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ULUDAĞ ÜNİVERSİTESİ — GÖRÜKLE KAMPÜSÜ, 16.10",
+              "style": "card",
+              "bg": "buro"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Üçüncü kat, koridorun sonu. Kapıda bir not: “Numune kabul edilmez.” İçeride iki çalışma masası, bir floresan, bir saksıda ölmekte olan bir fesleğen."
+            },
+            {
+              "speaker": "uzman",
+              "text": "Avukat hanım. Baştan söyleyeyim: ben poşet okurum, insan okumam. Bana kimin suçlu olduğunu sormayın; kâğıdın ne söylediğini sorun."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kriminal raporun ek klasörünü masaya bıraktım: kırk sekiz fotoğraf, bir baskı numarası listesi, iki kromatogram. Polisin hiç açmadığı sayfalar."
+            },
+            {
+              "speaker": "player",
+              "text": "Savcı “benzerlik” dedi. Benzerliği tespite çevirecek bir göz arıyorum. Ama ona ne yazacağını ben söyleyemem; ancak neye bakacağını sorabilirim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "UZ_KESIM",
+          "kind": "OPTION",
+          "label": "Poşetlerin ağzındaki ısı çizgisine bakabilir misiniz? İki grup aynı makineden mi?",
+          "visibleWhen": { "flag": "fact_paket" },
+          "maxUses": 1,
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "uzman",
+                  "text": "Isıyla kapatma makineleri parmak izi gibidir; teli eskidikçe bir çentik bırakır. Fotoğraflar yeterince yakın çekilmiş. Bakarım."
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "uz_kesim", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "UZ_POSET",
+          "kind": "OPTION",
+          "label": "Poşetlerin kenarında baskı numarası var. Sıraları birbirini tutuyor mu?",
+          "visibleWhen": { "flag": "fact_paket" },
+          "maxUses": 1,
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "uzman",
+                  "text": "Rulo poşet. Üretici her poşete bir numara basar; kimse okumaz. Laboratuvar listeyi çıkarmış ama yan yana koymamış. Koyarım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kimsenin okumadığı bir numara. Bu dosyanın her şeyi zaten öyle.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "uz_poset", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "UZ_SAFLIK",
+          "kind": "OPTION",
+          "label": "Kromatogramlar: saflık ve kesme maddesi iki grupta aynı mı?",
+          "maxUses": 1,
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "uzman",
+                  "text": "Satıcılar maddeyi bir şeyle keser; her stoğun kendi tarifi olur. Aynı tarifse aynı mutfak. İki kromatogram var; karşılaştırırım."
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "uz_saflik", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "UZ_SONUC",
+          "kind": "OPTION",
+          "label": "Mütalaanıza paketleri müvekkilimin koymadığını da yazabilir misiniz?",
+          "maxUses": 1,
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "uzman",
+                  "text": "Hayır. Bunu yazarsam hâkim mütalaamın geri kalanını da çöpe atar, haklı olarak. Ben paket okurum. Kimin koyduğu sizin işiniz, avukat hanım; karar da heyetin."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Doğru. Bir uzmana cevabı söyletmeye çalışan avukat, ondan bir uzman değil bir tanık ister. İkisi de olmaz.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 }],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Bilirkişi de uzman da yalnızca uzmanlık gerektiren konularda görüş bildirir; kimin koyduğu gibi hâkimin takdirine ait değerlendirmelere giremez (CMK 67/3, 67/6). Böyle bir cümle mütalaanın tamamını şüpheli kılar.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        },
+        {
+          "id": "UZ_BITIR",
+          "kind": "CONTINUE",
+          "label": "Klasörü bırak ve çık",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "all": [{ "flag": "uz_kesim" }, { "flag": "uz_poset" }, { "flag": "uz_saflik" }] },
+              "then": [{ "type": "VAR", "var": "uzman_istendi", "op": "set", "value": true }]
+            }
+          ],
+          "enabledWhen": {
+            "any": [
+              { "chosen": "UZ_KESIM" },
+              { "chosen": "UZ_POSET" },
+              { "chosen": "UZ_SAFLIK" },
+              { "chosen": "UZ_SONUC" }
+            ]
+          },
+          "lockedReason": "Önce bir şey sor ya da dinle."
+        }
+      ]
+    },
+    {
+      "id": "ARA_MUTALAA",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #04 · ARA",
+      "title": "Uzman mütalaası",
+      "hud": ["ex_mut"],
+      "background": "buro",
+      "onFirstEnter": [{ "type": "DISCOVER", "evidence": "ev_mutalaa" }],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — 5 ŞUBAT, 09.40", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Zarfı sabah kurye kapının altından bırakmıştı. Dokuz sayfa, ıslak imzalı, her sayfanın köşesinde bir parafe. Son sayfada tek bir cümlenin altı çizilmişti: “Kimin koyduğu bilimsel inceleme konusu değildir.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Üç soru sordum; üç cevap gelmiş. Hangisinin ne söylediğini okumak bana kalıyor. Bir satırı tek başına değil, ötekilerle birlikte.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "BİLİMSEL MÜTALAA · DOÇ. DR. AYLİN KORKMAZ", "right": "CMK 67/6 · 4 Şubat" },
+      "columns": [
+        { "label": "İNCELEME", "flex": 1 },
+        { "label": "BULGU", "flex": 3 }
+      ],
+      "rows": [
+        {
+          "id": "mt_kesim",
+          "cells": ["Kapatma izi", "Şekerlik: 3 mm ısı çizgisi, sol uçta 0,4 mm çentik · arka oda: 3 mm, aynı çentik"]
+        },
+        {
+          "id": "mt_poset",
+          "cells": ["Baskı no.", "Şekerlik poşetleri: 0417, 0418 · arka oda rulosu: 0371–0416 ve 0419–0420"]
+        },
+        {
+          "id": "mt_saflik",
+          "cells": ["Kromatogram", "Şekerlik %61 · arka oda %60–62 · kesme maddesi fenasetin, iki grupta da"]
+        },
+        {
+          "id": "mt_iz",
+          "cells": [
+            "İz",
+            "Şekerlik poşetlerinde sanığa ait iz yok; kavanozun dış yüzeyindeki izler ayrı değerlendirilmelidir"
+          ]
+        },
+        {
+          "id": "mt_sonuc",
+          "cells": ["Sınır", "Paketleri şekerliğe kimin koyduğu bilimsel inceleme konusu değildir (CMK 67/3)."]
+        }
+      ],
+      "tools": [
+        { "id": "lupe", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "kars", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex_mut", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_FACT_MT_KESIM_TAM",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "mt_kesim" },
+          "maxUses": 1,
+          "enabledWhen": {
+            "all": [{ "not": { "flag": "fact_mt_kesim" } }, { "flag": "fact_mt_poset" }, { "flag": "fact_mt_saflik" }]
+          },
+          "feedback": {
+            "title": "AYNI STOK",
+            "text": "İki grubun ısı çizgisi de sol uçta aynı 0,4 mm çentiği taşıyor. Aynı kapatma makinesi. Üç bulgu yan yana: şekerlikteki iki paket arka odadaki rulodan, aynı makineyle, aynı tarifle paketlenmiş.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ek_stok" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+            { "type": "VAR", "var": "fact_mt_kesim", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_FACT_MT_KESIM",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "mt_kesim" },
+          "maxUses": 1,
+          "enabledWhen": { "not": { "flag": "fact_mt_kesim" } },
+          "feedback": {
+            "title": "AYNI MAKİNE",
+            "text": "İki grubun ısı çizgisi de sol uçta aynı 0,4 mm çentiği taşıyor. Aynı kapatma makinesi.",
+            "label": "+50 SKOR",
+            "tone": "info"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 },
+            { "type": "VAR", "var": "fact_mt_kesim", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_FACT_MT_POSET_TAM",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "mt_poset" },
+          "maxUses": 1,
+          "enabledWhen": {
+            "all": [{ "not": { "flag": "fact_mt_poset" } }, { "flag": "fact_mt_kesim" }, { "flag": "fact_mt_saflik" }]
+          },
+          "feedback": {
+            "title": "AYNI STOK",
+            "text": "Arka oda rulosunda 0417 ve 0418 eksik. Şekerlikteki iki poşet tam o iki numara. Üç bulgu yan yana: şekerlikteki iki paket arka odadaki rulodan, aynı makineyle, aynı tarifle paketlenmiş.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ek_stok" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+            { "type": "VAR", "var": "fact_mt_poset", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_FACT_MT_POSET",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "mt_poset" },
+          "maxUses": 1,
+          "enabledWhen": { "not": { "flag": "fact_mt_poset" } },
+          "feedback": {
+            "title": "BOŞLUK",
+            "text": "Arka oda rulosunda 0417 ve 0418 eksik. Şekerlikteki iki poşet tam o iki numara.",
+            "label": "+50 SKOR",
+            "tone": "info"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 },
+            { "type": "VAR", "var": "fact_mt_poset", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_FACT_MT_SAFLIK_TAM",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "mt_saflik" },
+          "maxUses": 1,
+          "enabledWhen": {
+            "all": [{ "not": { "flag": "fact_mt_saflik" } }, { "flag": "fact_mt_kesim" }, { "flag": "fact_mt_poset" }]
+          },
+          "feedback": {
+            "title": "AYNI STOK",
+            "text": "Saflık aynı aralıkta, kesme maddesi aynı: fenasetin. Aynı mutfaktan çıkmış bir stok. Üç bulgu yan yana: şekerlikteki iki paket arka odadaki rulodan, aynı makineyle, aynı tarifle paketlenmiş.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ek_stok" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+            { "type": "VAR", "var": "fact_mt_saflik", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_FACT_MT_SAFLIK",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "mt_saflik" },
+          "maxUses": 1,
+          "enabledWhen": { "not": { "flag": "fact_mt_saflik" } },
+          "feedback": {
+            "title": "AYNI TARİF",
+            "text": "Saflık aynı aralıkta, kesme maddesi aynı: fenasetin. Aynı mutfaktan çıkmış bir stok.",
+            "label": "+50 SKOR",
+            "tone": "info"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 },
+            { "type": "VAR", "var": "fact_mt_saflik", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_MT_IZ",
+          "kind": "EXAMINE",
+          "match": { "tool": "lupe", "target": "mt_iz" },
+          "maxUses": 1,
+          "feedback": {
+            "title": "PAKETTE İZ YOK",
+            "text": "Kavanozda Kaan’ın izi var; poşetlerde yok. Kavanozu açan el ile paketi koyan el ayrı şeylerdir.",
+            "label": "+50 SKOR",
+            "tone": "info"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 }]
+        },
+        {
+          "id": "FB_MUTALAA",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        {
+          "id": "MUTALAA_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_FACT_MT_KESIM_TAM" },
+                  { "uses": "EX_FACT_MT_KESIM" },
+                  { "uses": "EX_FACT_MT_POSET_TAM" },
+                  { "uses": "EX_FACT_MT_POSET" },
+                  { "uses": "EX_FACT_MT_SAFLIK_TAM" },
+                  { "uses": "EX_FACT_MT_SAFLIK" },
+                  { "uses": "EX_MT_IZ" },
+                  { "uses": "FB_MUTALAA" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     },
     {
@@ -1090,7 +1680,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Hasan Çakır kapıyı açarken başını salladı. “Elli bir gün” dedi, sormadığım hâlde."
+              "text": "Hasan Çakır kapıyı açarken başını salladı. “Hâlâ sayıyor” dedi, sormadığım hâlde."
             },
             {
               "speaker": "kaan",
@@ -1103,7 +1693,7 @@
         {
           "id": "KA_RIZA",
           "kind": "OPTION",
-          "label": "Mahkemede kullandığını söylemek ister misin? Karar senin; ne istersen öyle yaparız.",
+          "label": "Mahkemede kullandığını söylemek ister misin? Karar senin.",
           "visibleWhen": { "all": [{ "flag": "kaan_itiraf" }, { "not": { "flag": "kaan_riza" } }] },
           "responses": [
             {
@@ -1200,6 +1790,32 @@
           ]
         },
         {
+          "id": "KA_PAZAR",
+          "kind": "OPTION",
+          "label": "9 Kasım, pazar gecesi saat on bir. Neredeydin?",
+          "visibleWhen": { "all": [{ "hasEvidence": "clue_tolga_saat" }, { "not": { "flag": "fact_pazar" } }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "kaan",
+                  "text": "Pazar mı? Kafede. Pazar kapanış bende. Kasayı kendi kodumla kapatırım, sonra makineleri temizlerim."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir kod, bir saat damgası. Bunu ilk görüşmede sormalıydım. Kafenin kayıtlarına ulaşmam lazım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_pazar", "op": "set", "value": true }
+          ]
+        },
+        {
           "id": "KA_TOLGA",
           "kind": "OPTION",
           "label": "Tolga ile Barış birbirini tanıyor muydu?",
@@ -1257,7 +1873,29 @@
             { "type": "VAR", "var": "kaan_hazir", "op": "set", "value": true }
           ]
         },
-        { "id": "KA_BITIR", "kind": "CONTINUE", "label": "Görüşmeyi bitir", "role": "BACK", "next": "ARA_HUB" }
+        {
+          "id": "KA_BITIR",
+          "kind": "CONTINUE",
+          "label": "Görüşmeyi bitir",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "KA_RIZA" },
+                  { "uses": "KA_ITIRAF" },
+                  { "uses": "KA_PAZAR" },
+                  { "uses": "KA_TOLGA" },
+                  { "uses": "KA_SONSOZ" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "En az iki şey sor ya da dinle."
+        }
       ]
     },
     {
@@ -1294,10 +1932,11 @@
         {
           "id": "DN_RED",
           "kind": "OPTION",
-          "label": "Hayır. Bu yalan tanıklık olur. Okan gerçekten bir şey biliyorsa savcılığa kendisi gitsin; parasız.",
+          "label": "Hayır. Bu yalan tanıklık olur; parayla tanık olmaz.",
           "responses": [
             {
               "lines": [
+                { "speaker": "player", "text": "Okan gerçekten bir şey biliyorsa savcılığa kendisi gitsin. Parasız." },
                 { "speaker": "defne", "expression": "uzgun", "text": "Ama o zaman Kaan…" },
                 {
                   "speaker": "player",
@@ -1333,7 +1972,7 @@
         {
           "id": "DN_DINLE",
           "kind": "OPTION",
-          "label": "Önce Okan’ın gerçekten ne bildiğini öğrenelim. Para konuşmadan.",
+          "label": "Önce Okan ne biliyor, onu öğrenelim. Parasız.",
           "responses": [
             {
               "lines": [
@@ -1399,7 +2038,9 @@
           "label": "Telefonu kapat",
           "role": "BACK",
           "next": "ARA_HUB",
-          "visibleWhen": { "any": [{ "flag": "okan_red" }, { "flag": "okan_tanik" }] }
+          "visibleWhen": { "any": [{ "flag": "okan_red" }, { "flag": "okan_tanik" }] },
+          "enabledWhen": { "any": [{ "chosen": "DN_RED" }, { "chosen": "DN_DINLE" }, { "chosen": "DN_KABUL" }] },
+          "lockedReason": "Defne hatta. Bir cevap bekliyor."
         }
       ]
     },
@@ -1413,6 +2054,26 @@
       "background": "ev",
       "room": { "label": "IHLAMUR SOKAK 14 · DAİRE 1", "character": "nesrin" },
       "lines": [
+        {
+          "when": { "flag": "nesrin_kus" },
+          "lines": [
+            { "speaker": "narrator", "text": "IHLAMUR SOKAK 14 — DAİRE 1, AKŞAMÜSTÜ", "style": "card", "bg": "ev" },
+            {
+              "speaker": "narrator",
+              "text": "Zil iki kez çaldı. Kapı bir karış aralandı; zincir takılıydı. Aralıktan bir gözlük, bir hırka, bir kedi kuyruğu."
+            },
+            {
+              "speaker": "nesrin",
+              "expression": "kizgin",
+              "text": "Avukat hanım. Geçen sefer beni kapımda sıkıştırdınız. Yaşlıyım ama unutkan değilim."
+            },
+            {
+              "speaker": "player",
+              "text": "Haklıydı. Bir tanığı sıkıştırmak onu susturur; bunu kâğıt üzerinde biliyordum. Şimdi bir zincirin öbür tarafında öğreniyorum.",
+              "style": "thought"
+            }
+          ]
+        },
         {
           "lines": [
             { "speaker": "narrator", "text": "IHLAMUR SOKAK 14 — DAİRE 1, AKŞAMÜSTÜ", "style": "card", "bg": "ev" },
@@ -1441,8 +2102,8 @@
         {
           "id": "NS2_DEFTER",
           "kind": "OPTION",
-          "label": "Defterinizin o sayfalarının fotokopisini alabilir miyim? Mahkemede aslını da görmek isteyebilirler.",
-          "visibleWhen": { "hasEvidence": "clue_kira_defteri" },
+          "label": "Defterin o sayfalarının bir fotokopisini alabilir miyim?",
+          "visibleWhen": { "all": [{ "hasEvidence": "clue_kira_defteri" }, { "not": { "flag": "nesrin_kus" } }] },
           "responses": [
             {
               "lines": [
@@ -1469,6 +2130,7 @@
           "id": "NS2_BARIS",
           "kind": "OPTION",
           "label": "Barış hiç misafir getirir miydi? Ya da biri onu sorar mıydı?",
+          "visibleWhen": { "not": { "flag": "nesrin_kus" } },
           "responses": [
             {
               "lines": [
@@ -1492,9 +2154,62 @@
           "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 30 }]
         },
         {
+          "id": "NS2_OZUR",
+          "kind": "OPTION",
+          "label": "Geçen sefer sizi sıkıştırdım. Haksızlık ettim; özür dilerim.",
+          "visibleWhen": { "flag": "nesrin_kus" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "narrator", "text": "Zincir yerinde kaldı. Ama kapı bir karış daha kapanmadı." },
+                {
+                  "speaker": "nesrin",
+                  "text": "Özür kolay, evladım. Rahmetli de çok özür dilerdi. Kabul ettim; ama içeri buyur etmiyorum. Bugün değil."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir özür bir kapıyı açmaz. Sadece kapanmasını biraz geciktirir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 1 }]
+        },
+        {
+          "id": "NS2_HABER",
+          "kind": "OPTION",
+          "label": "Mahkemede arka odanın kilidi konuşuldu. Bilmenizi istedim.",
+          "visibleWhen": { "flag": "nesrin_kus" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "nesrin",
+                  "expression": "uzgun",
+                  "text": "Kilit. Ben o kilidi duydum o sabah. Keski sesi. Kimse sormadı ki."
+                },
+                {
+                  "speaker": "nesrin",
+                  "text": "Kediler aç, evladım. Git artık. Bir dahaki sefere sorarken sesini alçalt."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kimse sormadı. Ben de sorarken bağırdım. Bu dosyada bir tanığı ben kaybettim.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }]
+        },
+        {
           "id": "NS2_KEDI",
           "kind": "OPTION",
           "label": "Pamuk’a da teşekkür edin benim yerime.",
+          "visibleWhen": { "not": { "flag": "nesrin_kus" } },
           "responses": [
             {
               "lines": [
@@ -1514,7 +2229,29 @@
           "next": "$stay",
           "effects": [{ "type": "VAR", "var": "trust", "op": "inc", "value": 2 }]
         },
-        { "id": "NS2_BITIR", "kind": "CONTINUE", "label": "Teşekkür et ve çık", "role": "BACK", "next": "ARA_HUB" }
+        {
+          "id": "NS2_BITIR",
+          "kind": "CONTINUE",
+          "label": "Teşekkür et ve çık",
+          "role": "BACK",
+          "next": "ARA_HUB",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "NS2_DEFTER" },
+                  { "uses": "NS2_BARIS" },
+                  { "uses": "NS2_OZUR" },
+                  { "uses": "NS2_HABER" },
+                  { "uses": "NS2_KEDI" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "En az iki şey sor ya da dinle."
+        }
       ]
     },
     {
@@ -1527,7 +2264,7 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "CUMARTESİ 11.20 — TELEFON", "style": "card", "bg": "ev" },
+            { "speaker": "narrator", "text": "ÖĞLE 11.20 — TELEFON", "style": "card", "bg": "ev" },
             {
               "speaker": "nesrin",
               "text": "Evladım, sen misin? Nesrin. Bodruma kömürlüğe indim, kediler oraya kaçtı. Yedi numaranın kömürlüğü açık."
@@ -1551,10 +2288,14 @@
         {
           "id": "BD_SAVCI",
           "kind": "OPTION",
-          "label": "Dokunmayın, kimse dokunmasın. Savcılığa hemen bildiriyorum; el koysunlar.",
+          "label": "Dokunmayın. Savcılığı arıyorum.",
           "responses": [
             {
               "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Kimse dokunmasın, Nesrin Hanım. Kediler de. Savcılığa bildiriyorum; el koysunlar."
+                },
                 {
                   "speaker": "narrator",
                   "text": "Bir saat sonra iki kolluk görevlisi bodrumdaydı; eldivenle, poşetle, tutanakla. Nesrin Hanım merdivenin başında, kucağında kedi."
@@ -1589,7 +2330,7 @@
         {
           "id": "BD_AL",
           "kind": "OPTION",
-          "label": "Geliyorum. Çantayı alıp mahkemeye ben götürürüm.",
+          "label": "Geliyorum. Çantayı mahkemeye ben götürürüm.",
           "responses": [
             {
               "lines": [
@@ -1620,7 +2361,7 @@
         {
           "id": "BD_FOTO",
           "kind": "OPTION",
-          "label": "Bir fotoğrafını çekip bana gönderin; sonra bakarız.",
+          "label": "Fotoğrafını çekip bana yollayın; sonra bir bakarız, acelesi yok.",
           "responses": [
             {
               "lines": [
@@ -1673,10 +2414,8 @@
         {
           "id": "SC_KIMLIK",
           "kind": "OPTION",
-          "label": "Barış Demirel hakkında; kimlik, Bursa adresi ve kurye kayıtlarıyla suç duyurusu",
-          "visibleWhen": {
-            "any": [{ "hasEvidence": "ev_kurye" }, { "flag": "fact_soyad" }, { "hasEvidence": "ded_demirel" }]
-          },
+          "label": "Barış Demirel hakkında, kurye kayıtlarıyla suç duyurusu",
+          "visibleWhen": { "hasEvidence": "ev_kurye" },
           "responses": [
             {
               "lines": [
@@ -1715,13 +2454,23 @@
         {
           "id": "SC_MECHUL",
           "kind": "OPTION",
-          "label": "Arka odanın kiracısı olan meçhul şahıs hakkında suç duyurusu",
-          "visibleWhen": {
-            "not": {
-              "any": [{ "hasEvidence": "ev_kurye" }, { "flag": "fact_soyad" }, { "hasEvidence": "ded_demirel" }]
-            }
-          },
+          "label": "Arka odanın kiracısı hakkında, elimdeki bilgilerle suç duyurusu",
+          "visibleWhen": { "not": { "hasEvidence": "ev_kurye" } },
           "responses": [
+            {
+              "when": { "any": [{ "flag": "fact_soyad" }, { "hasEvidence": "ded_demirel" }] },
+              "lines": [
+                {
+                  "speaker": "savci",
+                  "text": "Barış, soyadı Demirel, İzmirli. Bir isim, bir şehir. Türkiye’de kaç Barış Demirel var, avukat hanım? Bir doğum tarihi, bir adres, bir kayıt getirin."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir soyadı bir kapının önüne kadar götürür; içeri girmek için bir kayıt lazım.",
+                  "style": "thought"
+                }
+              ]
+            },
             {
               "lines": [
                 {
@@ -1734,13 +2483,13 @@
           "next": "ARA_HUB",
           "quality": {
             "q": "NEUTRAL",
-            "feedback": "Kimliği belirsiz kişi hakkında ihbar alınır ama somut bilgi olmadan sonuç doğurmaz."
+            "feedback": "Kimliği tam belirlenmemiş kişi hakkında ihbar alınır ama doğum tarihi, adres ya da bir kayıt olmadan yakalama kararına dönüşmez. Kurye şirketinin kayıtları mahkeme kanalıyla istenebilirdi (CMK 177, 206/1)."
           }
         },
         {
           "id": "SC_TOLGA",
           "kind": "OPTION",
-          "label": "Tolga Kaplan hakkında iftira suçundan suç duyurusu",
+          "label": "Tolga Kaplan hakkında iftiradan suç duyurusu",
           "responses": [
             {
               "lines": [
@@ -1769,8 +2518,16 @@
       "eyebrow": "DAVA #04 · ARA",
       "title": "Çıkarım Tahtası",
       "background": "buro_gece",
+      "hud": ["tahta"],
       "lines": [
-        { "lines": [{ "speaker": "narrator", "text": "İki ipucunu seç. Yeni kartlar eskilerle de konuşur." }] }
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "İki ipucunu seç. Yeni kartlar eskilerle de konuşur. Yanlış çift bir bağlantı hakkı götürür; üç hak bitince tahta yarına kadar kapanır."
+            }
+          ]
+        }
       ],
       "pool": [
         "clue_gps",
@@ -1781,7 +2538,12 @@
         "clue_nesrin_moto",
         "clue_tolga_kask",
         "clue_tolga_saat",
-        "clue_iki_tane"
+        "clue_iki_tane",
+        "clue_iz_yabanci",
+        "clue_ekleme",
+        "clue_yag",
+        "clue_ek_stok",
+        "clue_sekerlik"
       ],
       "choices": [
         {
@@ -1790,7 +2552,7 @@
           "match": { "a": "clue_gps", "b": "clue_nesrin_moto" },
           "feedback": {
             "title": "Baskını gören kurye",
-            "text": "GPS 06.21’de kırk saniyelik bir duruş; Nesrin aynı dakikada dönen motoru gördü. Barış baskını gördü ve gitti.",
+            "text": "GPS 07.16’da kırk saniyelik bir duruş; Nesrin aynı dakikada dönen motoru gördü. Barış baskını gördü ve gitti.",
             "label": "YENİ DELİL · +300 SKOR",
             "tone": "success"
           },
@@ -1815,12 +2577,27 @@
           ]
         },
         {
+          "id": "CB_STOK",
+          "kind": "COMBINE",
+          "match": { "a": "clue_ek_stok", "b": "clue_sekerlik" },
+          "feedback": {
+            "title": "Şekerlik arka odanın deposu",
+            "text": "Ardışık numaralar, aynı makine, aynı tarif; şekerlik de o odanın kapısının dibinde. İki paket mutfağın değil, arka odanın stoğundan ayrılmış.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_stok" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ]
+        },
+        {
           "id": "CB_ALIBI",
           "kind": "COMBINE",
           "match": { "a": "clue_z_rapor", "b": "clue_tolga_saat" },
           "feedback": {
             "title": "Satış anında kafede",
-            "text": "Satış 23.00’te; Kaan 23.18’de satış yapmış, 23.41’de kasayı kapatmış. Kaan o kapıda olamaz.",
+            "text": "Satış 23.00’te; Kaan 22.53, 23.02 ve 23.11’de kasada satış yapmış, 23.41’de kasayı kapatmış. Kaan o kapıda olamaz.",
             "label": "YENİ DELİL · +300 SKOR",
             "tone": "success"
           },
@@ -1837,10 +2614,13 @@
           "feedback": {
             "title": "Bu ikisi birbirini açıklamıyor",
             "text": "Başka bir çift dene.",
-            "label": "BAĞLANTI YOK · −50 SKOR",
+            "label": "BAĞLANTI YOK · −50 SKOR · −1 HAK",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 },
+            { "type": "VAR", "var": "tahta", "op": "inc", "value": -1 }
+          ]
         },
         { "id": "ARA_CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "ARA_HUB" }
       ]
@@ -1867,6 +2647,30 @@
             {
               "speaker": "leyla",
               "text": "Hâlâ vaktin var. Telefonu aç ve iptal et. Ya da etme. Ama sonra bana sorma."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "flag": "contra_s6" },
+              { "not": { "flag": "uzman_istendi" } },
+              { "not": { "hasEvidence": "ded_stok" } },
+              { "not": { "chosen": "A2_UZMAN" } }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Leyla kriminal raporun son sayfasını çevirdi: “Ekler: 48 fotoğraf, baskı listesi, kromatogram.”"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Savcı “benzerlik” dedi ve haklıydı. Benzerliği tespite çevirmenin yolu bu ekler. CMK 67/6: savunma da bir uzmandan bilimsel mütalaa alabilir."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Ama uzmana cevabı yazdırma. Ona neye bakacağını sor; neyi bulacağını değil. Kesim, numara, kromatogram. Üçünü birden."
             }
           ]
         },
@@ -2046,10 +2850,15 @@
     { "evidence": "clue_selim_tolga", "source": { "type": "CHOICE", "id": "SL_TOLGA" } },
     { "evidence": "clue_gps", "source": { "type": "RULE", "id": "EX_GPS_11" } },
     { "evidence": "clue_istifa", "source": { "type": "RULE", "id": "EX_GPS_FESIH" } },
-    { "evidence": "ev_zrapor", "source": { "type": "NODE", "id": "ARA_ZRAPOR" } },
     { "evidence": "clue_z_rapor", "source": { "type": "RULE", "id": "EX_Z_KAPANIS" } },
+    { "evidence": "ev_zrapor", "source": { "type": "RULE", "id": "EX_Z_KAPANIS" } },
+    { "evidence": "ev_mutalaa", "source": { "type": "NODE", "id": "ARA_MUTALAA" } },
+    { "evidence": "clue_ek_stok", "source": { "type": "RULE", "id": "EX_FACT_MT_KESIM_TAM" } },
+    { "evidence": "clue_ek_stok", "source": { "type": "RULE", "id": "EX_FACT_MT_POSET_TAM" } },
+    { "evidence": "clue_ek_stok", "source": { "type": "RULE", "id": "EX_FACT_MT_SAFLIK_TAM" } },
     { "evidence": "ded_kacis", "source": { "type": "RULE", "id": "CB_KACIS" } },
     { "evidence": "ded_tolga_baris", "source": { "type": "RULE", "id": "CB_TOLGA" } },
+    { "evidence": "ded_stok", "source": { "type": "RULE", "id": "CB_STOK" } },
     { "evidence": "ded_alibi", "source": { "type": "RULE", "id": "CB_ALIBI" } }
   ]
 }

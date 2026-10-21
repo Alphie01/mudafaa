@@ -3,7 +3,6 @@ import {
   always,
   any,
   because,
-  finalAtLeast,
   flag,
   has,
   not,
@@ -17,7 +16,15 @@ import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { card, me, n, s, th, voice } from './shared.js';
 
 // 90-outcomes: beş sonuç. Öncelik sırası: sahte tanık (TELKİN), 223/2-b, 223/2-e, 191'e dönüşüm (HAGB), mahkûmiyet.
-// Eşikler eşik çubuğuyla aynı: 0 / 3.000 / 7.000; 223/2-b ayrıca 8.000.
+// Hiçbir sonuç puan ya da ikna eşiği taşımaz: hüküm yalnızca duruşmada kurulan kayda (bayraklar, sunulan deliller)
+// bağlıdır. Erken çözümü puan değil delil önkoşulları engeller (tasarım belgesi §12). Özensiz oyun yalnızca kapanış
+// sahnesinde Deniz’in ve Leyla’nın sözlerini değiştirir, hükmü değil.
+// Kararın gerekçe satırları duruşmada kurulan bayraklara göre seçilir; hiçbir satır duruşmada çürütülmüş bir olguya dayanmaz.
+
+/** Muhbirin anlatısı duruşmada sarsıldı mı? */
+const muhbirSarsildi = any(flag('contra_t3'), flag('contra_t4'), flag('contra_t5'), flag('tolga_kirildi'));
+/** Muhbirin satış anlatımı esasen çöktü mü (kapıdaki kasklı adam, saat ya da dönüş)? Kask tutarsızlığı (T5) tek başına değil. */
+const muhbirCoktu = any(flag('contra_t3'), flag('contra_t4'), flag('tolga_kirildi'));
 
 export const outcomes: CasePart = {
   outcomes: [
@@ -28,22 +35,33 @@ export const outcomes: CasePart = {
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
       header: 'TÜRK MİLLETİ ADINA',
-      sentence: '15 yıl hapis · 150.000 TL adli para cezası',
+      sentence: '12 yıl 6 ay hapis · 125.000 TL adli para cezası',
       verdictText:
-        'Sanık Kaan Yıldız’ın eylemine uyan TCK 188/3 uyarınca takdiren 10 yıl hapis ve 1.000 gün adli para cezası; maddenin kokain olması nedeniyle TCK 188/4-a uyarınca yarı oranında artırılarak 15 yıl hapis ve 1.500 gün adli para cezası ile CEZALANDIRILMASINA; yargılama sürecindeki davranışlar gözetilerek TCK 62’nin uygulanmasına yer olmadığına; bir gün karşılığı en az 100 TL’den 150.000 TL adli para cezasına (TCK 52/2); TCK 53 uyarınca hak yoksunluklarına; tutukluluk hâlinin devamına (adli kontrolle tahliye edilmişse hükümle birlikte tutuklanmasına); tanık Okan Er ve tanığa ifade yazdıranlar hakkında suç duyurusunda bulunulmasına; müdafi hakkında baroya bildirimde bulunulmasına; tebliğden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
+        'Sanık Kaan Yıldız’ın eylemine uyan TCK 188/3 uyarınca takdiren alt sınırdan 10 yıl hapis ve 1.000 gün adli para cezası; maddenin kokain olması nedeniyle TCK 188/4-a uyarınca yarı oranında artırılarak 15 yıl hapis ve 1.500 gün adli para cezası; sanığın sabıkasız geçmişi gözetilerek TCK 62/1 uyarınca 1/6 oranında indirilerek 12 yıl 6 ay hapis ve 1.250 gün adli para cezası ile CEZALANDIRILMASINA; bir gün karşılığı en az 100 TL’den 125.000 TL adli para cezasına (TCK 52/2); TCK 53 uyarınca hak yoksunluklarına; tutukluluk hâlinin devamına (adli kontrolle tahliye edilmişse hükümle birlikte tutuklanmasına); tanık Okan Er ve tanığa ifade yazdıranlar hakkında suç duyurusunda bulunulmasına; müdafi hakkında baroya bildirimde bulunulmasına; tebliğden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
         because(
           'Savunma tanığı Okan Er, para karşılığı ve kendisine yazdırılan bir beyanla dinlendiğini duruşmada kabul etmiştir.',
         ),
         because(
-          'Savunmanın ev arkadaşına dayanan anlatımı bu tanıkla desteklenmek istendiğinden heyet bu anlatıma itibar etmemiş; iddianamedeki anlatım esas alınmıştır (CMK 217).',
+          'Savunmanın arka odayı bir ev arkadaşına bağlayan anlatımı para karşılığı bir tanıkla desteklenmek istendiğinden heyet, bu anlatıma ve ona dayanan savunma beyanlarına itibar etmemiştir (CMK 217).',
         ),
         because(
-          'Arama tutanağındaki eksiklikler kayda geçmiş, ancak heyetin vicdani kanaatini değiştirmemiştir.',
-          any(flag('contra_s2'), flag('contra_s3')),
+          'Muhbir tanık duruşmada paketi Daire 7’den sanıktan aldığını beyan etmiş; müdafi tanığa soru sormamıştır.',
+        ),
+        because(
+          'Kira sözleşmesi sanık adınadır; arka odada ve ortak alanda ele geçen paketler, hassas terazi ve kilitli poşetler ticaret kastını göstermektedir.',
+          not(flag('contra_s3')),
+        ),
+        because(
+          'Arka odadaki materyal kararın kapsamı dışında, kilit kırılarak elde edildiğinden hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2); bu sonuç tanığın durumundan bağımsızdır.',
+          flag('contra_s3'),
+        ),
+        because(
+          'Ortak alandaki şekerlikte satışa hazır hâlde iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur; heyet bu paketleri, savunmanın çöken anlatımı karşısında sanığın zilyetliğinde kabul etmiştir (CMK 217).',
+          flag('contra_s3'),
         ),
       ],
-      legalBasis: 'TCK 188/3, 188/4-a, 52, 53, 62/2; CMK 217, 273/1; TCK 272, 38; Av.K. 34',
+      legalBasis: 'TCK 188/3, 188/4-a, 52, 53, 62/1; CMK 206/2-a, 217, 273/1; Anayasa 38/6; TCK 272, 38; Av.K. 34',
       xp: xp(0),
       howToReach: 'Para karşılığı bir tanığın beyanını hazırlamak (etik ihlali). Bu sona ulaşmamak gerekir.',
       ethicsCard:
@@ -53,7 +71,7 @@ export const outcomes: CasePart = {
           lines: [
             s('baskan', 'Türk Milleti adına…'),
             n(
-              '“On beş yıl.” Kaan rakamı duydu; anlamını duymadı. Jandarma koluna dokundu. Kaan ablasına bakmadı. Bakamadı.',
+              '“On iki yıl altı ay.” Kaan rakamı duydu; anlamını duymadı. Jandarma koluna dokundu. Kaan ablasına bakmadı. Bakamadı.',
             ),
             card('ADLİYE KORİDORU — AKŞAMÜSTÜ', 'adliye'),
             n(
@@ -79,11 +97,19 @@ export const outcomes: CasePart = {
       priority: 2,
       when: all(
         not(flag('cokus')),
+        // “İşlemediğinin sabit olması” olumlu ispat ister: satışı yapanın Barış olduğu (muhbirin dönüşü + terazideki iz +
+        // 9 Kasım GPS kaydı + sanığın o saatteki mazereti), arka odanın ona kiralandığı (oda varsayımının çöküşü + ev
+        // sahibinin defteri), baskın sabahı kaçışı (GPS 07.16 + Nesrin) ve usulüne uygun el konulan çantası.
         flag('tolga_kirildi'),
+        flag('jar_cleared'),
         has('ev_iz_eslesme'),
+        flag('contra_t4'),
+        flag('fact_gps9'),
+        has('ded_kacis'),
+        flag('contra_s2'),
+        flag('defter_sunuldu'),
+        has('ev_canta'),
         flag('gercek_fail'),
-        cmp(v('pers'), '>=', 8),
-        finalAtLeast(11000),
       ),
       stamp: 'BERAAT',
       stampTone: 'green',
@@ -96,7 +122,13 @@ export const outcomes: CasePart = {
           'Terazideki parmak izi Barış Demirel’e aittir; kurye kayıtları onu baskın sabahı olay yerinde ve muhbirin paketi aldığı saatte binanın kapısında göstermektedir.',
         ),
         because(
-          'Muhbir tanık, paketi Barış Demirel’den aldığını, sanığın adını korku ve kin nedeniyle verdiğini duruşmada beyan etmiştir.',
+          'Muhbir tanık, paketi Barış Demirel’den aldığını, sanığın adını korku ve kin nedeniyle verdiğini duruşmada beyan etmiştir; sanık o saatte işyerinde kasa başındadır (Z raporu).',
+        ),
+        because(
+          'Ev sahibinin kira defteri arka odanın Barış Demirel’e kiralandığını göstermektedir; Demirel baskın sabahı binanın önünden dönmüş, ertesi gün işi bırakmıştır.',
+        ),
+        because(
+          'Savcılıkça usulüne uygun el konulan kurye çantasının astarındaki gizli bölmede kokain bulaşığı ve kilitli poşet artıkları bulunmuştur (CMK 123, 127).',
         ),
         because(
           'Arka odanın sanığa ait olduğu kolluk tarafından varsayılmıştır; oda üçüncü kişinin kilitli odasıdır.',
@@ -150,6 +182,7 @@ export const outcomes: CasePart = {
             ),
             card('ARSLAN HUKUK — O GECE', 'buro_gece'),
             n('Leyla masasındaki ters çerçeveyi çevirdi; bir an, yalnızca bir an. Sonra yeniden ters koydu.'),
+            th('Ece’yi düşündüm. “Sadece hafta sonları” derdi. Kaan’ın hafta sonları artık bir deftere yazılıyor.'),
             s(
               'leyla',
               'Bir müvekkilin sırrını mahkemede o kendisi söyledi, Deniz. Sen sadece kapıyı açık tuttun. Bunu unutma. Bir gün bunu konuşacağız.',
@@ -164,13 +197,9 @@ export const outcomes: CasePart = {
     outcome('BERAAT_E', {
       class: 'ACQUITTAL',
       priority: 3,
-      when: all(
-        not(flag('cokus')),
-        ref('beraat_e'),
-        any(flag('beraat_savunma'), flag('terditli')),
-        cmp(v('pers'), '>=', 6),
-        finalAtLeast(10500),
-      ),
+      // Delil zinciri (beraat_e) kurulduysa heyet beraat eder; puan, esas savunmanın biçimi ve ikna sayacı hükmü
+      // değiştirmez. Kayıt sanık lehineyken mahkûmiyet hukuken savunulamaz; özensiz oyun yalnızca kapanışı değiştirir.
+      when: ref('beraat_e'),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -180,6 +209,7 @@ export const outcomes: CasePart = {
       reasoning: [
         because(
           'Arka odanın sanığın kullanımında olduğu tespit edilmemiş, kolluk tarafından varsayılmıştır; sanık ön odada yaşamakta ve orada uyurken bulunmuştur.',
+          flag('contra_s2'),
         ),
         because(
           'Arka oda üçüncü kişiye ait kilitli bir odadır; kilit kararın kapsamı dışında kırılarak açılmıştır (CMK 119/1–2).',
@@ -189,13 +219,40 @@ export const outcomes: CasePart = {
           'Kapsam dışı aramayla elde edilen materyal hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2, 230/1-b).',
           flag('key_excluded'),
         ),
-        because('Şekerlikteki paketler arka odadaki stokla aynıdır ve sanığın zilyetliğinde olduğu gösterilememiştir.'),
         because(
-          'Muhbir tanığın anlatımı kendi kolluk ifadesiyle ve sanığın satış saatinde işyerinde olduğunu gösteren kayıtlarla çelişmektedir.',
-          any(flag('contra_t3'), flag('contra_t4'), flag('contra_t5')),
+          'Terazideki parmak izi Barış Demirel’e aittir; muhbir tanık paketi ondan aldığını ve sanığın adını korkudan verdiğini duruşmada beyan etmiştir.',
+          all(flag('tolga_kirildi'), has('ev_iz_eslesme')),
         ),
         because(
-          'Arama tanığı, aramanın başında değil kilitli kapı açıldıktan sonra çağrılmıştır (CMK 119/4).',
+          'Savunmanın sunduğu uzman mütalaasına göre şekerlikteki iki paket arka odadaki stoktan ayrılmıştır (ardışık poşet numaraları, aynı kapatma izi, aynı saflık); paketlerde sanığın izi yoktur ve sanığın zilyetliğinde oldukları gösterilememiştir (CMK 67/6, 217).',
+          all(flag('jar_cleared'), has('ded_stok')),
+        ),
+        because(
+          'Muhbir tanık, şekerlikteki paketleri arka odanın kiracısının aldığını duruşmada anlatmıştır; paketlerin sanığın zilyetliğinde olduğu gösterilememiştir.',
+          all(flag('jar_cleared'), not(has('ded_stok'))),
+        ),
+        because(
+          'Muhbir tanığın anlatımı kendi kolluk ifadesiyle çelişmektedir; tarif ettiği satıcı kasklıdır, sanığın ne kaskı ne ehliyeti vardır.',
+          any(flag('contra_t3'), flag('contra_t5')),
+        ),
+        because(
+          'Sanık, muhbirin paketi aldığını söylediği saatte işyerinde kasa başındadır (Z raporu).',
+          flag('contra_t4'),
+        ),
+        because(
+          'Arka odadaki materyal üçüncü kişinin kilitli odasında ele geçmiştir; dairede madde bulunduğunu gösterse de muhbirin satıcının kimliğine ilişkin anlatımını doğrulamaz.',
+          all(not(muhbirSarsildi), not(flag('key_excluded'))),
+        ),
+        because(
+          'Geriye kalan muhbir beyanı, etkin pişmanlık beklentisiyle verilmiş ve kimlik yönünden başka bir delille desteklenmeyen tek beyandır; tek başına hükme esas alınamaz.',
+          not(muhbirSarsildi),
+        ),
+        because(
+          'Müdafiin duruşma sonundaki ilgisiz sunumları kayıttaki delilleri değiştirmez; heyet hükmü duruşmada kurulan kayda dayandırmıştır.',
+          flag('cokus'),
+        ),
+        because(
+          'Savcı bulunmaksızın yapılan aramada iki yerine tek tanık bulundurulmuş; o tanık da aramanın başında değil, kilitli kapı açıldıktan sonra çağrılmıştır (CMK 119/4).',
           flag('contra_s4'),
         ),
         because(
@@ -214,6 +271,10 @@ export const outcomes: CasePart = {
           'Sanığın madde kullanıcısı olması tek başına ticaret kastını göstermez; kullanım iddianamedeki fiil değildir (CMK 225/1).',
         ),
         because(
+          'Müdafi esas hakkındaki savunmasında kuşkunun sanık lehine değerlendirilmesini istemiştir; heyet bu talebi kayıtla uyumlu bulmuştur.',
+          flag('beraat_savunma'),
+        ),
+        because(
           'Sanığın suçu işlediğine dair kesin ve inandırıcı delil yoktur; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2).',
         ),
       ],
@@ -226,7 +287,7 @@ export const outcomes: CasePart = {
           lines: [
             s('baskan', 'Türk Milleti adına…'),
             n(
-              '“Sabit olmadığından… beraatine.” Kaan kelimeleri tek tek duydu; sonuncusunda nefesini verdi. Uzun, sessiz, bir yıl birikmiş bir nefes.',
+              '“Sabit olmadığından… beraatine.” Kaan kelimeleri tek tek duydu; sonuncusunda nefesini verdi. Uzun, sessiz, üç ay birikmiş bir nefes.',
             ),
             card('ADLİYE KORİDORU — ÖĞLEDEN SONRA', 'adliye'),
             n(
@@ -236,11 +297,7 @@ export const outcomes: CasePart = {
             n(
               'Kaan duydu. Durdu. Sonra yürümeye devam etti. Defne kolunu kardeşinin koluna geçirdi; bir eczacının ilaç tartarken kullandığı dikkatle.',
             ),
-            s(
-              'kaan',
-              'Şüpheden yararlandım. Bir yıl boyunca şüpheden zarar gördüm; bir kere de yararlanayım.',
-              'mutlu',
-            ),
+            s('kaan', 'Şüpheden yararlandım. Üç ay boyunca şüpheden zarar gördüm; bir kere de yararlanayım.', 'mutlu'),
             card('ADLİYE MERDİVENLERİ — AKŞAMÜSTÜ', 'adliye'),
             n(
               'Dışarıda ayaz vardı ve güneş batıyordu. Merdivenlerin dibinde Nesrin Hanım, kareli defterini kucağına bastırmış, bir taksi bekliyordu.',
@@ -254,9 +311,26 @@ export const outcomes: CasePart = {
             n(
               'İkisi de güldü. Defne bir an onlara baktı, sonra başını öbür tarafa çevirdi; ağlamamak için değil, ağladığı görülmesin diye.',
             ),
+          ],
+        },
+        {
+          when: not(any(flag('kaan_riza'), flag('anne_kaan'))),
+          lines: [
             n(
               'Kaan merdivenlerin başında durdu, cebinden telefonunu çıkardı, bir numara çevirdi. “Anne. Bitti. Hayır, sınav değildi. Eve geliyorum.” Sesi titremedi.',
             ),
+          ],
+        },
+        {
+          when: any(flag('kaan_riza'), flag('anne_kaan')),
+          lines: [
+            n(
+              'Merdivenlerin dibinde beyaz saçlı bir kadın bekliyordu; tespihi elinde, bu sefer çevirmeden. Kaan iki basamak birden indi. “Anne. Bitti. Eve gidiyoruz.” Sesi titremedi.',
+            ),
+          ],
+        },
+        {
+          lines: [
             n(
               'Defne bana döndü. Elini uzattı; eczacı eli, sabit, soğuk, kesin. Sonra vazgeçti ve bana sarıldı. Kısa, sert, bir kere.',
             ),
@@ -287,6 +361,14 @@ export const outcomes: CasePart = {
           ],
         },
         {
+          when: any(cmp(v('wrong'), '>=', 3), cmp(v('cred'), '<=', 2)),
+          lines: [
+            th(
+              'Merdivenlerden inerken tutanağın kopyası koltuğumun altındaydı. Yanlış sunduğum kartlar da oradaydı, boşa giden itirazlar da. Kayıt kazandırdı; ben değil.',
+            ),
+          ],
+        },
+        {
           lines: [
             card('ARSLAN HUKUK — O GECE', 'buro_gece'),
             n(
@@ -302,6 +384,19 @@ export const outcomes: CasePart = {
             ),
             me('Nesrin Hanım da öyle diyor. “Kayıt insandan uzun yaşar.”'),
             s('leyla', 'Akıllı kadın. Bir gün bize çaya çağır onu. Kedileriyle birlikte.', 'mutlu'),
+          ],
+        },
+        {
+          when: any(cmp(v('wrong'), '>=', 3), cmp(v('cred'), '<=', 2)),
+          lines: [
+            s(
+              'leyla',
+              'Bir şey daha. Bugün kayıt seni taşıdı. Yanlış kartlar, boş itirazlar; bir heyet bunları da yazar. Bir dahaki sefere kayıt bu kadar sağlam olmayabilir.',
+            ),
+          ],
+        },
+        {
+          lines: [
             s(
               'leyla',
               'Beraat iki türlüdür, demiştim. Bugün “yapmadı” diyemedin; “yaptığı ispatlanamadı” dedin. Bu da bir beraattir. Bazen yeterlidir.',
@@ -314,6 +409,9 @@ export const outcomes: CasePart = {
             ),
             s('leyla', 'Bunu kaldırma. Bir sonraki dosyada da lazım olacak.'),
             th('Kaldırmadım. Hâlâ orada. Masamın köşesinde, ters çevrilmiş bir çerçeve olmadan.'),
+            th(
+              'Gece eve dönerken rehberde Ece’nin numarasını buldum. Yıllardır aramadığım, silemediğim numara. Onun dosyasını kimse okumamıştı. Kaan’ınkini okudum. Bu da bir şeydi.',
+            ),
           ],
         },
       ],
@@ -321,7 +419,15 @@ export const outcomes: CasePart = {
     outcome('NITELIK_191', {
       class: 'RECHARACTERIZED',
       priority: 4,
-      when: all(not(flag('cokus')), any(flag('contra_s2'), flag('terditli')), flag('ek_savunma'), finalAtLeast(3000)),
+      when: all(
+        not(flag('jar_cleared')),
+        // 191 kaydın kendisinden doğar: arka oda sanığa bağlanamadı (oda varsayımı çöktü), muhbirin satış anlatımı zaman
+        // bakımından çöktü (Z raporu) ve şekerlik aklanmadı; geriye bir kullanıcının (saç analizi) ortak alandaki iki
+        // paketi kalır. Bu kayıtta mütalaa T_05N'ye gider ve CMK 226 hatırlatması (ek savunma) her durumda yapılır.
+        flag('contra_s2'),
+        muhbirCoktu,
+        flag('ek_savunma'),
+      ),
       stamp: 'NİTELİK DEĞİŞTİ',
       stampTone: 'amber',
       sentence: '2 yıl hapis · hükmün açıklanması geri bırakıldı',
@@ -330,8 +436,26 @@ export const outcomes: CasePart = {
       reasoning: [
         because('Arka odanın sanığa ait olduğu ispat edilememiştir; ticaret kastı sabit değildir.', flag('contra_s2')),
         because(
-          'Şekerlikteki iki paketin sanığın erişiminde olduğu ve sanığın kullanıcı olduğu kabul edilmiştir; paketlerin başka bir stoktan geldiği duruşmada ortaya konmamıştır.',
+          'Sanığın 9 Kasım gecesi işyerinde kasa başında olduğu Z raporuyla sabittir; muhbirin satış anlatımı hükme esas alınmamıştır. Satış ya da satışa arz fiili ispatlanamamıştır.',
+          flag('contra_t4'),
         ),
+        because(
+          'Muhbir tanık duruşmada paketi sanıktan değil arka odanın kiracısından aldığını beyan etmiştir; satış ya da satışa arz fiili sanık yönünden ispatlanamamıştır.',
+          all(flag('tolga_kirildi'), not(flag('contra_t4'))),
+        ),
+        because(
+          'Muhbir tanığın tarif ettiği satıcı kasklı bir kuryedir; sanığın ne kaskı ne ehliyeti vardır. Satış anlatımı sanığa bağlanamamış, hükme esas alınmamıştır.',
+          all(flag('contra_t3'), not(flag('contra_t4')), not(flag('tolga_kirildi'))),
+        ),
+        because(
+          'Duruşma müdafiin ilgisiz sunumları üzerine kısa kesilmiş; heyet nitelik değişikliğini sanığa hatırlatarak ek savunmasını almıştır (CMK 226/1).',
+          flag('cokus'),
+        ),
+        because(
+          'Ortak alandaki şekerlikte iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur; sanığın kullanıcı olduğu saç analiziyle sabittir. Bu olgular kullanmak için bulundurmayla uyumludur.',
+        ),
+        because('Sanığın tedavi kayıtları kullanıcı profilini ayrıca doğrulamaktadır.', flag('contra_s5')),
+        because('Sanık duruşmada madde kullandığını kendisi açıklamıştır.', flag('kaan_durust')),
         because(
           'Sanık terditli savunmasında eylemin en fazla kullanmak için bulundurma olduğunu ileri sürmüştür.',
           flag('terditli'),
@@ -343,7 +467,7 @@ export const outcomes: CasePart = {
       legalBasis: 'TCK 191/1, 191/3, 191/8; CMK 225/2, 226, 231/8, 231/12; TCK 54',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        'Odanın sanığa ait olmadığını göster ama şekerliği arka odanın stoğuna bağlayamazsan ya da terditli savunmayı seçersen; ek savunma hakkını kullan.',
+        'Odanın sanığa ait olmadığını göster, muhbirin satış anlatımını (kask, saat ya da dönüş) çürüt, ama şekerliği arka odanın stoğuna bağlayamazsan; ek savunma hakkını kullan.',
       epilogue: [
         {
           lines: [
@@ -368,6 +492,9 @@ export const outcomes: CasePart = {
               'leyla',
               'Kaan bu gece evinde uyuyacak. Bunu küçümseme. Ama bir dahaki sefere savcının yedek planına da bak. Hep bir “ortak alan” vardır.',
             ),
+            th(
+              'Ece’ye kimse bir doktor, bir takvim vermemişti. Kaan’a bir mahkeme verdi. Yanlış kapıdan da olsa, bir kapı.',
+            ),
           ],
         },
       ],
@@ -382,16 +509,54 @@ export const outcomes: CasePart = {
       sentence: '12 yıl 6 ay hapis · 125.000 TL adli para cezası',
       verdictText:
         'Sanık Kaan Yıldız’ın eylemine uyan TCK 188/3 uyarınca takdiren alt sınırdan 10 yıl hapis ve 1.000 gün adli para cezası; maddenin kokain olması nedeniyle TCK 188/4-a uyarınca yarı oranında artırılarak 15 yıl hapis ve 1.500 gün adli para cezası; sabıkasız geçmişi ve cezanın geleceği üzerindeki olası etkileri gözetilerek TCK 62/1 uyarınca 1/6 oranında indirilerek 12 yıl 6 ay hapis ve 1.250 gün adli para cezası ile CEZALANDIRILMASINA; bir gün karşılığı en az 100 TL’den 125.000 TL adli para cezasına (TCK 52/2); TCK 53 uyarınca hak yoksunluklarına; ele geçen maddenin müsaderesine (TCK 54); tutukluluk hâlinin devamına (adli kontrolle tahliye edilmişse hükümle birlikte tutuklanmasına); tebliğden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
+      // Bu sonuca düşen kayıtlar: oda sanığa bağlı kaldı (contra_s2 yok) ya da oda bağlanamadı ama şekerlik aklanmadı
+      // ve muhbirin satış anlatımı çökmedi. Oda bağlanamamış + şekerlik aklanmış kayıt beraattir; oda bağlanamamış +
+      // anlatı çökmüş kayıt 191'dir (T_05N ya da çöküşte heyetin CMK 226 hatırlatması).
       reasoning: [
         because(
-          'Kira sözleşmesi sanık adınadır; arka odada ve ortak alanda ele geçen paketler, hassas terazi ve kilitli poşetler ticaret kastını göstermektedir.',
+          'Kira sözleşmesi sanık adınadır; arka odanın sanığın kullanımında olmadığı gösterilememiştir. Arka odada ve ortak alanda ele geçen paketler, hassas terazi ve kilitli poşetler ticaret kastını göstermektedir.',
+          all(not(flag('contra_s2')), not(flag('jar_cleared'))),
         ),
-        because('Muhbir tanığın beyanı sanığı göstermektedir.'),
         because(
-          'Arama tutanağındaki eksiklikler kayda geçmiş, ancak materyalin sanığa aidiyetini ortadan kaldıracak bir delil sunulmamıştır.',
+          'Kira sözleşmesi sanık adınadır; arka odanın sanığın kullanımında olmadığı gösterilememiştir. Orada ele geçen kırk altı paket, hassas terazi ve kilitli poşetler ticaret kastını göstermektedir; şekerlikteki iki paket hükme esas alınmamıştır.',
+          all(not(flag('contra_s2')), flag('jar_cleared')),
+        ),
+        because(
+          'Arka odanın kilidinin kırılarak açıldığı kayda geçmiştir; ancak odanın sanığın kullanımında olduğu çürütülemediğinden heyet aramayı kararın kapsamında saymıştır (CMK 119/1).',
+          all(not(flag('contra_s2')), flag('contra_s3')),
+        ),
+        because(
+          'Muhbir tanığın anlatımındaki çelişkiler kayda geçmiştir; hüküm muhbir beyanına değil, sanığın kullanımında kabul edilen arka odada ele geçen materyale dayanmaktadır.',
+          all(not(flag('contra_s2')), muhbirSarsildi),
+        ),
+        because(
+          'Muhbir tanığın paketi Daire 7’den sanıktan aldığına ilişkin beyanı da bu yöndedir.',
+          all(not(flag('contra_s2')), not(muhbirSarsildi)),
+        ),
+        because(
+          'Arka odanın sanığın kullanımında olduğu kanıtlanamamıştır; arka odadaki materyal sanığın zilyetliğine bağlanmamıştır.',
           flag('contra_s2'),
         ),
-        because('Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı.', flag('cokus')),
+        because(
+          'Arka odadaki materyal ayrıca kapsam dışı aramayla elde edildiğinden hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2).',
+          flag('key_excluded'),
+        ),
+        because(
+          'Muhbir tanığın 9 Kasım gecesi paketi Daire 7’den sanıktan aldığına ilişkin beyanı duruşmada çürütülmemiş; ortak alandaki şekerlikte satışa hazır hâlde ele geçen iki paket ve kavanozdaki sanığın iziyle desteklenmiştir. Hüküm bu satışa ve şekerlikteki paketlere dayanmaktadır (CMK 217).',
+          flag('contra_s2'),
+        ),
+        because(
+          'Muhbir tanığın kask ayrıntısındaki tutarsızlığı kayda geçmiştir; heyet bunu gece yarısı alınan ifadenin çevresel ayrıntısı saymıştır. Bu, istinafta denetlenecek bir delil takdiridir.',
+          all(flag('contra_s2'), flag('contra_t5')),
+        ),
+        because(
+          'Savunmanın duruşmada sunduğu belgeler ileri sürdüğü çelişkileri göstermemiş; heyet delilleri iddianamedeki anlatım doğrultusunda değerlendirmiştir (CMK 217).',
+          all(flag('cokus'), not(flag('contra_s2'))),
+        ),
+        because(
+          'Savunma, duruşmanın sonunda tanığa ilgisiz belgeler sunarak çapraz sorgu imkânını kendisi tüketmiştir; muhbirin anlatımı bu nedenle sınanamamıştır.',
+          all(flag('cokus'), flag('contra_s2')),
+        ),
       ],
       legalBasis: 'TCK 188/3, 188/4-a, 52, 53, 54, 62/1; CMK 273/1',
       xp: xp(0.6, { ethicsVar: 'ethics' }),
@@ -413,13 +578,25 @@ export const outcomes: CasePart = {
             card('ADLİYE ARKA KAPISI — AKŞAMÜSTÜ', 'adliye'),
             n('Ring aracının arka camı buğuluydu. Kaan parmağıyla bir pencere açmadı bu sefer. Araç hareket etti.'),
             n(
-              'Defne kaldırımda kaldı. Elinde eczane poşeti; içinde, aylardır taşıdığı bir randevu kartı. 14 Kasım, Perşembe, 10.30.',
+              'Defne kaldırımda kaldı. Elinde eczane poşeti; içinde, aylardır taşıdığı bir randevu kartı. 13 Kasım, Perşembe, 10.30.',
             ),
             th(
               'On iki buçuk yıl. Bir oda yüzünden. Bir kilit, bir kroki, bir şekerlik. Hepsi oradaydı; ben hepsini aynı cümlede kuramadım.',
             ),
             card('ARSLAN HUKUK — O GECE', 'buro_gece'),
             s('leyla', 'İstinaf var. İki hafta. Bu gece ağla, yarın yaz. Dosya bitmedi; sadece bir celse bitti.'),
+          ],
+        },
+        {
+          when: all(not(flag('cokus')), any(cmp(v('wrong'), '>=', 3), cmp(v('cred'), '<=', 2))),
+          lines: [
+            s(
+              'leyla',
+              'Tutanağı oku, Deniz. Yanlış kapılar, boş itirazlar, savrulan kartlar; heyet hepsini yazmış. Dağınık bir savunma, elindeki doğruyu bile bulanıklaştırır.',
+            ),
+            th(
+              'Elimdeki parçaları bir hikâyeye değil, bir yığına çevirdim. İstinaf dilekçesinin ilk cümlesi belli: kayıt.',
+            ),
           ],
         },
       ],

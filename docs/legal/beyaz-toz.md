@@ -1,7 +1,7 @@
 # Dava #04 — Beyaz Toz · Hukuki İnceleme Notları
 
-> Durum: **Onaylandı — Claude (iç inceleme), 2026-10-20.** `meta.legalReview = { status: 'APPROVED', by: 'Claude (iç
-> inceleme)', at: '2026-10-20' }`. Dava #07'deki gibi, iç incelemenin bıraktığı yorum soruları §4'te açık tutulur;
+> Durum: **Onaylandı — Claude (iç inceleme), 2026-10-21** (delil zinciri yeniden dengelemesinden sonra yeniden
+> okundu). `meta.legalReview = { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-21' }`. Dava #07'deki gibi, iç incelemenin bıraktığı yorum soruları §4'te açık tutulur;
 > üretimde bir avukatın ikinci okuması önerilir.
 
 Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (erişim: 2026-10-20; metinler `pdftotext` ile okundu):
@@ -19,30 +19,34 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
 | TCK 188/4-a | iddianame, BR_01, hükümler | Madde eroin, **kokain**, morfin, bazmorfin, sentetik kannabinoid/katinon/opioid, amfetamin ve türevleriyse ceza **yarı oranında artırılır** (7445 sayılı Kanunla genişletilmiş liste). |
 | TCK 49/1, 61/7 | BR_01 (üst sınır) | Süreli hapis kanunda aksi yoksa en çok 20 yıl; artırımlarla sonuç ceza 30 yılı geçemez → 188/3 + 188/4-a: **15–30 yıl**. |
 | TCK 52/2 | MAHKÛMİYET, TELKİN | Bir gün karşılığı APC **en az 100, en fazla 500 TL** → 1.250 gün × 100 TL = 125.000 TL; 1.500 gün × 100 TL = 150.000 TL. |
-| TCK 62/1–2 | MAHKÛMİYET (indirim), TELKİN (uygulanmadı), T07_B | Takdiri indirim 1/6; yargılama sürecindeki davranışlar değerlendirilebilir; şeklî tutum tek başına neden değildir. |
+| TCK 62/1–2 | MAHKÛMİYET ve TELKİN (indirim), T07_B | Takdiri indirim 1/6; failin geçmişi ve yargılama sürecindeki **kendi** davranışları değerlendirilir; şeklî tutum tek başına neden değildir. Üçüncü kişilerin (abla, müdafi) davranışı indirimi reddetme gerekçesi yapılmadı. |
 | TCK 53, 54 | hükümler | Hak yoksunlukları; suçta kullanılan/suç teşkil eden eşyanın müsaderesi (beraatte de madde müsadere edilir). |
 | TCK 191/1 | NİTELİK_191, BR01_C, T06_T | Kullanmak için satın alan, kabul eden, bulunduran ya da kullanan: **2–5 yıl** hapis. |
 | TCK 191/8–9 | NİTELİK_191 | 188 kovuşturmasında suçun **münhasıran 191 kapsamına girdiği** anlaşılırsa bu madde çerçevesinde **HAGB**; aksine hüküm yoksa CMK 231. |
 | TCK 191/3 | NİTELİK_191 (denetimli serbestlik, tedavi) | Erteleme süresinde en az bir yıl denetimli serbestlik; gerekirse tedavi (7445 değişikliği). HAGB denetim süresi CMK 231/8 ile beş yıldır. |
 | TCK 192/2–3 | INV_TOLGA (t_not), PR_T2 | Kullanıcı, resmî makamlar haber almadan önce kimden aldığını bildirirse ceza verilmez; haber alındıktan sonraki gönüllü yardım ¼–½ indirim → muhbirin “bir isim verme” saiki. |
-| TCK 6/1-e | T04_C | Gece vakti: güneş batışından bir saat sonra başlar, doğuşundan bir saat önce biter. 11 Kasım Bursa'da gün doğumu ~07.05 → 06.05 gündüzdür; CMK 118 itirazı dayanaksızdır. |
+| TCK 6/1-e | T04_C | Gece vakti: güneşin batmasından bir saat sonra başlar, doğmasından bir saat önce biter. 11 Kasım 2025 Bursa gün doğumu **07.43 TSİ** (bkz. §4-9) → gece vakti 06.43'te biter; baskın **07.00**'de başladı; CMK 118 itirazı dayanaksızdır. |
 | TCK 272, 38 | TELKİN, DN_KABUL | Yalan tanıklık; tanığa para karşılığı beyan yazdırmak azmettirme. |
 | TCK 277 | TK_B, NS_BASKI (anlatı) | Tanığı hukuka aykırı biçimde etkileme teşebbüsü (duruşma öncesi dikte). |
 | CMK 119/1–2 | INV_KARAR, ded_kapsam, PS_S1/S3, T04_A | Konutta arama hâkim kararı ya da gecikmesinde sakınca varsa savcının yazılı emriyle; kararda **fiil, aranacak kişi/yer/eşya ve süre açıkça gösterilir**. |
 | CMK 119/4 | clue_tanik_saat, PR_S4_A | Savcı yokken konut aramasında ihtiyar heyetinden ya da komşulardan **iki kişi** bulundurulur. |
 | CMK 118 | T04_C | Konutta gece vaktinde arama yapılamaz (istisnalar 118/2). |
 | CMK 120 | (anlatı) | Aranacak yerin sahibi/zilyedi hazır bulunabilir; avukatın aramada bulunmasına engel olunamaz. |
-| CMK 123, 127 | ARA_BODRUM, T_00A | El koyma hâkim kararı / gecikmesinde sakınca varsa savcı, ulaşılamazsa kolluk amiri emriyle; avukat delile el koyamaz. |
+| CMK 123, 127 | ARA_BODRUM, T_00A, BERAAT_B | El koyma hâkim kararı / gecikmesinde sakınca varsa savcı, ulaşılamazsa kolluk amiri emriyle; avukat delile el koyamaz. |
+| CMK 63/1, 67/3 | UZ_SONUC, mütalaanın “sınır” satırı | Bilirkişi (ve uzman) yalnızca uzmanlık gerektiren konularda açıklama yapar; hâkime ait hukuki nitelendirme ve değerlendirmede bulunamaz (2026-10-21 PDF'ten okundu). |
+| CMK 67/6 | ARA_UZMAN, ARA_MUTALAA, ev_mutalaa, T04B_A | Savcı, sanık, müdafi … yargılama konusu olayla ilgili olarak uzmanından **bilimsel mütalaa** alabilir; yalnızca bu nedenle ayrıca süre istenemez. |
+| CMK 68/1, 68/3 | T04B_A (uzman salonda) | Mahkeme bilirkişiyi her zaman, ilgilinin istemiyle de duruşmada dinleyebilir; bilimsel mütalaa hazırlayan uzmanın duruşmada dinlenmesine de aynı hükümler uygulanır. |
 | CMK 134 | ev_mesaj | Şüphelinin bilgisayar/cihazında arama ve kopyalama hâkim (gecikmede savcı) kararıyla. |
 | CMK 141/1-e, 142 | beraat hükümleri | Tutuklanıp beraat eden kişinin tazminat hakkı ve istem süresi; hükümde bildirilir (CMK 231/3; bkz. §4-7). |
 | CMK 147/1-e; Anayasa 38/5 | G_RIZA_B | Kimse kendini suçlayan beyana zorlanamaz. |
 | CMK 158 | ARA_SUC, TEL_A | Suç ihbarı/şikâyeti; avukat şüpheliyi kovalamaz, savcılığa bildirir. |
-| CMK 177 | INV_DIL | Delil dilekçesi duruşmadan **en az beş gün önce**; takvim: 3. gün = celseye 6 gün. |
+| CMK 177 | INV_DIL | Delil dilekçesi duruşmadan **en az beş gün önce**; takvim: 3. gün (17 Ocak) = celseye 9 gün. |
 | CMK 48 | T_02 | Tanık kendini suçlama tehlikesi olan sorulara cevap vermeyebilir. |
 | CMK 44 | NS_BASKI geri bildirimi | Zorla getirme kurumu (tanığa tehdit olarak kullanılamaz). |
 | CMK 108/3, 100, 109 | H1_06 | Duruşmada tutukluluk her oturumda incelenir; kuvvetli şüphe zayıfladıysa adli kontrol. |
 | CMK 192, 201/1 | H1_03, T_02 itirazları | Başkanın duruşmayı yönetmesi; doğrudan soru hakkı. “Telkin edici soru” Türk usulünde ayrıca adlandırılmış bir itiraz kurumu değildir (bkz. §4-1). |
-| CMK 206/1–2-a | TL_*, T04_A | Duruşmada delil istemi; **kanuna aykırı elde edilen delil reddolunur**. |
+| CMK 206/1–2-a | TL_* (TL_IZ dahil), T04_A | Duruşmada delil istemi; **kanuna aykırı elde edilen delil reddolunur**. |
+| CMK 191, 147 | H1_02Q (Q_ODA, Q_KILIT, Q_SEKER, Q_EHLIYET) | Duruşmada sanığın sorgusu; sanığın beyanı duruşmada alınır, görüş odasında avukata anlatılan olgu ancak sorguda söylenince hükme esas alınabilecek kayda girer (CMK 217/1). |
 | CMK 210, 217 | g_duyum, g_kanaat | Doğrudan doğruyalık; hâkim yalnızca duruşmada tartışılan, hukuka uygun delillere dayanır ve vicdani kanaatiyle takdir eder. |
 | CMK 216/2–3 | T_05*, T_07 | Mütalaaya cevap; son söz sanığındır. |
 | CMK 223/2-b, 223/2-e | BERAAT_B, BERAAT_E | Yüklenen suçun sanık tarafından **işlenmediğinin sabit olması** / **işlendiğinin sabit olmaması**. |
@@ -60,8 +64,9 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
   TCK 62/1 1/6 indirim: **12 yıl 6 ay** + **1.250 gün**; gün karşılığı en az 100 TL (TCK 52/2) = **125.000 TL**. TCK 53,
   54; tutukluluğun devamı (2. celsede tahliye edilmişse hükümle birlikte tutuklama); istinaf iki hafta (CMK 273/1).
   Sıra TCK 61'e uygundur (temel ceza → artırım → takdiri indirim); 61/7 tavanı (30 yıl) aşılmaz.
-- **TELKİN:** aynı temel ve artırım; sahte tanık nedeniyle **TCK 62 uygulanmadı** (62/2: yargılama sürecindeki
-  davranışlar): **15 yıl** + **1.500 gün** × 100 TL = **150.000 TL**.
+- **TELKİN:** aynı temel, artırım ve TCK 62/1 indirimi: **12 yıl 6 ay** + **1.250 gün** × 100 TL = **125.000 TL**.
+  Sahte tanığı ayarlayan abla ve müdafidir; sanığın kendi davranışı değildir, bu yüzden TCK 62 reddedilmedi (§4-6).
+  Etik sonucu ceza miktarı değil, savunmanın çöküşü, suç duyurusu ve baroya bildirim taşır.
 - **NİTELİK_191:** TCK 191/1 alt sınır **2 yıl** hapis; TCK 191/8 uyarınca **HAGB**; beş yıl denetim süresi
   (CMK 231/8), denetimli serbestlik ve gerekirse tedavi (TCK 191/3). Ek savunma verilmiştir (CMK 226/1, 226/3).
 - **BERAAT_B / BERAAT_E:** ceza yok; tahliye (adli kontrol varsa kaldırılması), tazminat hakkı bildirimi (CMK 141/1-e,
@@ -89,32 +94,153 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
    çerçevesinde oyunda “itiraz” olarak sunuldu (Dava #07 kararıyla aynı).
 2. **Kapsam dışı arama:** Karar “şüphelinin kullanımındaki oda ve ortak alanlar” ile sınırlıyken üçüncü kişinin kilitli
    odası zorla açıldı. Bu bölümde elde edilen materyalin hukuka aykırı delil sayılması (Anayasa 38/6, CMK 206/2-a,
-   217/2) bir yorumdur; uygulamada kararın kapsamının “adres” mi “kişi” mi olduğu tartışılır. Oyunda 223/2-e beraati
-   bu yoruma **bağlı değildir**: odanın sanığa aidiyeti zaten ispatlanamamıştır; `key_excluded` yalnızca gerekçeye ve
-   puana yansır.
-3. **CMK 119/4 (iki komşu) ihlali:** Tek komşunun sonradan çağrılması tek başına delili her zaman hükümsüz kılmaz;
-   güvenilirliği zayıflatan bir usul aykırılığı olarak işlendi (gerekçe parçası, tek başına sonuç doğurmaz).
+   217/2) bir yorumdur. Dışlama itirazı (T04_A) yalnızca kararın kapsamı tanığa okutulup “sandık” dedirtildiyse
+   (`contra_s1`, kilidin kesildiğinin kabulünden sonra) sonuç doğurur: kilidin kırılması tek başına kapsam dışına
+   çıkıldığını göstermez, belirleyici olan odanın kararın kapsadığı “şüphelinin kullanımındaki oda” olmamasıdır; uygulamada kararın kapsamının “adres” mi “kişi” mi olduğu tartışılır. Oyunda dışlama
+   (`key_excluded`) şu sonucu doğurur: oda varsayımı çökmüş (`contra_s2`) ve şekerlik aklanmışsa (`jar_cleared`),
+   arka oda materyali dışlandığında dosyada yalnızca muhbirin beyanı kalır. Etkin pişmanlık beklentisiyle verilmiş ve
+   başka delille desteklenmeyen bir muhbir beyanının tek başına mahkûmiyete yetmeyeceği Yargıtay'ın yerleşik
+   yaklaşımıdır (karar numarası verilmedi; ilke düzeyinde). “2 tane” yazışması (“akşam 2 tane bırakır mısın”, Kaan'dan
+   B.'ye) bir alım talebidir, satış göstermez; hiçbir 188/3 gerekçesinde satış delili olarak kullanılmaz.
+   **2026-10-21 (ikinci inceleme sonrası) yorumu: `beraat_e` = `contra_s2 ∧ jar_cleared`.** Oda varsayımı çökmüş ve
+   şekerlik aklanmışsa dosyada sanığı satıcı olarak gösteren tek delil muhbirin beyanıdır. Arka odadaki materyal —
+   dışlansın ya da dışlanmasın — üçüncü kişinin kilitli odasında, savcılığın da artık sanığa ait olduğunu iddia
+   edemediği bir odada ele geçmiştir: dairede madde bulunduğunu gösterir, ama muhbirin anlatımının **kimlik** kısmını
+   (“satan Kaan'dı”) doğrulamaz; bir dairede uyuşturucu bulunması, o dairede oturan herkesi satıcı yapmaz. Muhbirin
+   beyanı etkin pişmanlık beklentisiyle verilmiştir (kolluk ifadesindeki not dosyadadır; mahkeme bunu re'sen görür) ve
+   kimlik yönünden başka bir delille desteklenmeyen böyle bir beyan tek başına mahkûmiyete yetmez. Bu yüzden
+   muhbirin duruşmada ayrıca çelişkiye düşürülmüş olması ya da materyalin dışlanması beraatin koşulu değildir; bunlar
+   yalnızca gerekçeyi zenginleştirir. (Önceki sürümdeki `∧ (muhbir sarsıldı ∨ key_excluded)` şartı, muhbir çapraz
+   sorguya hiç alınmamış ama oda ve şekerlik çökmüş bir kayıtta 188/3 mahkûmiyetine yol açıyordu; inceleme bunu
+   kayıtla çelişen hüküm olarak işaretledi ve şart kaldırıldı.) Mütalaa bu kayıtta beraat yönündedir (T_05E; iz ve
+   dönüş varsa T_05B). Dışlama (`key_excluded`) artık `contra_s1 ∧ contra_s2 ∧ defter_sunuldu` ister: kolluğun
+   “varsaydım” demesi odanın sanığa ait olduğunun ispat edilemediğini gösterir; kapsam dışı aramanın tespiti ise
+   odanın fiilen başkasının kullanımında olduğunun olumlu olarak kayda geçmesini gerektirir (usule ilişkin olgularda
+   şüpheden sanığın yararlanıp yararlanmayacağı öğretide tartışmalıdır; oyun ihtiyatlı yolu seçti). Bu dayanak ev
+   sahibinin duruşmadaki kira defteri tanıklığıdır (T01_A).
+3. **CMK 119/4 (iki komşu) ihlali:** Savcı yokken tek komşu bulundurulmuş, o da kapı açıldıktan sonra çağrılmıştır.
+   PR_S4_A bastırmasında Deniz ikinci tanığın yokluğunu da sorar; gerekçede iki eksiklik birlikte yer alır. Tek başına
+   delili her zaman hükümsüz kılmaz; güvenilirliği zayıflatan bir usul aykırılığı olarak işlendi (sonuç doğurmaz).
 4. **Şekerlikteki iki paket (ortak alan):** Savcılığın “ortak alanda ortak zilyetlik” yedek tezi, aynı stoktan gelme ve
-   konum delilleriyle çürütülmezse mahkeme eylemi TCK 191 kapsamında kabul edebilir (CMK 225/2, 226). Kullanımın
+   konum delilleriyle çürütülmezse mahkeme eylemi TCK 191 kapsamında kabul edebilir (CMK 225/2, 226). **2026-10-21:**
+   kriminal rapor gruplar arası karşılaştırma yapmadığından (“aynı tip poşet, yakın gramaj”) bir benzerliktir;
+   savcının “aynı tip poşet her markette satılır” itirazı karşısında aynı stok tespiti savunmanın aldığı bilimsel
+   mütalaayla (CMK 67/6: raporun eklerindeki baskı numaraları, ısı çizgisi, kromatogram) kurulur. Şekerliğin aklanması
+   ayrıca kavanozdaki izin masum açıklamasının sanığın duruşmadaki beyanıyla (Q_SEKER) kayda geçmesini ister: iz,
+   savcılığın kendi delilidir ve açıklanmadıkça içindeki paketlerden haberdar olmayı gösteren bir karine olarak kalır.
+   Mütalaa bir taraf görüşüdür, heyeti bağlamaz (savcının itirazı metinde yer alır); uzmanın duruşmada dinlenmesi
+   CMK 68/3'e dayanır. Muhbirin dönüşündeki “Barış şekerlikten aldı” anlatımı şekerliği ancak şekerliğin yeri birinci
+   celsede kolluğa kabul ettirildiyse (`contra_s6`) aklar; aksi hâlde muhbir şekerliğe değinmez. Kullanımın
    kendisi (saç analizi) iddianamedeki fiil olmadığından 191'e dönüşüm yalnızca bu iki paket üzerinden kurgulandı
-   (CMK 225/1).
+   (CMK 225/1). Bu yüzden NİTELİK_191 `¬jar_cleared` ister: şekerlik aklanmışsa ve arka oda sanığa bağlanamıyorsa
+   191'in dayanacağı bir zilyetlik kalmaz. 191 kararı ayrıca arka odanın sanığa bağlanamamasını
+   ve muhbirin satış anlatımının çökmesini (Z raporu, kapıdaki kasklı adam ya da dönüş) ister (§4-15); T_05N savcı
+   satırları yalnızca bu kayıtta okunur.
 5. **Müvekkilin kullanıcı olduğunu açıklaması:** Avukat müvekkilin rızası olmadan bu bilgiyi kullanamaz (Av.K. 36 sır
    saklama; aydınlatılmış rıza). Oyunda rıza yoksa soru Kaan'ı inkâra iter ve güvenilirlik düşer; rıza varsa beyan
    “kullanıcı ama satıcı değil” ayrımını güçlendirir.
 6. **Sahte tanığın sonucu (TELKİN):** Savunma tanığının para karşılığı ifade verdiğinin anlaşılması halinde heyetin
-   savunma anlatımına itibar etmemesi CMK 217 takdiri içinde dramatik bir yorumdur; tasarım gereği bu sonuç önceliklidir.
-   Avukat ve abla hakkında suç duyurusu (TCK 272, 38) ve baroya bildirim hükümde yer alır.
+   savunmanın “ev arkadaşı” anlatımına ve ona dayanan beyanlara itibar etmemesi CMK 217 takdiri içinde bir yorumdur;
+   tasarım gereği bu sonuç önceliklidir. **2026-10-21:** sahte tanık artık muhbirden sonra kürsüye çıkar (T_02 → T_02D →
+   T_OKAN): muhbir doğrudan dinlenmiş (CMK 210 ihlali yok), skandalın ardından müdafi tanığa soru sormaktan kendisi
+   vazgeçer (“Sorum yok”). Bu yolda ikinci celsenin hiçbir çelişkisi kurulmaz; şekerlik aklanamaz (aklanma yalnızca
+   T_03 ve T_04B'de olur). Önceki sürümün şekerliğin aklandığı ve muhbirin sarsıldığı TELKİN gerekçe dalları bu yüzden
+   hiç okunamıyordu; kaldırıldı. Kalan gerekçe: delil yasağı takdire bağlı değildir, kolluk kilidin kesildiğini kabul
+   ettiyse (`contra_s3`) arka oda materyali açıkça dışlanır (Anayasa 38/6, CMK 206/2-a, 217/2); hüküm şekerlikteki
+   iki paket, kavanozdaki iz ve muhbirin sorgulanmadan kalan beyanına dayanır. Bu zayıf bir mahkûmiyettir ve bilinçli
+   olarak öyle bırakıldı: yalanın savunmanın gerçeklerini de götürdüğü etik sondur. Ceza **12 yıl 6 ay**; TCK 62
+   sanığın kendi davranışına bağlı olmadığı için uygulanır. Avukat ve abla hakkında suç duyurusu (TCK 272, 38) ve baroya
+   bildirim hükümde yer alır.
 7. **Tazminat bildirimi dayanağı:** Dava #07'deki ifade korunarak “CMK 141/1 ve 142” gösterildi; bildirimin hüküm
    fıkrasında yer alması uygulamaya uygundur.
 8. **Muhbirin etkin pişmanlık saiki:** TCK 192/3'ün (haber alındıktan sonra yardım) beyanın değerini kendiliğinden
    düşürmediği savcının ağzından ayrıca söylenir; heyet beyanın neden verildiğini CMK 217 çerçevesinde değerlendirir.
-9. **Gece vakti:** 11 Kasım Bursa gün doğumu yaklaşık 07.05 kabul edildi (astronomik tablo); gece vakti 06.05'te
-   bitmiştir. Yaklaşık bir değerdir; itiraz yine de dayanaksızdır çünkü baskın gün doğumuna bir saatten az kala başladı.
+9. **Gece vakti:** 11 Kasım 2025 Bursa (40,18° K, 29,07° D) gün doğumu NOAA güneş konumu algoritmasıyla (NOAA Global
+   Monitoring Laboratory, “Solar Calculation Details”; standart kırılma −0,833°) **07.43 TSİ** hesaplandı (Türkiye
+   2016'dan beri yıl boyu UTC+3). Gece vakti 06.43'te biter. İlk taslaktaki 06.05 baskın saati gece vaktine düşüyordu;
+   baskın **07.00**'ye alındı ve bağlı saatler kaydırıldı: motorun dönüşü 07.15 (Nesrin), GPS 07.16, tanığın imzası
+   07.35 (otuz beş dakika farkı korunur), arama bitişi 08.35, emanet tutanağı 08.50. 17 dakikalık pay, birkaç dakikalık
+   hesap hatasına dayanıklıdır; hava hâlâ karanlıktır (sivil alacakaranlık ~07.15), itirazın çekiciliği bundandır.
 10. **Avukatın tanıkla görüşmesi:** Ev sahibi ve kurye durağı sorumlusuyla görüşme serbesttir; yönlendirici soru
     (`nesrin_telkin`), duruşma öncesi dikte (TK_B) ve korkutma (NS_BASKI) cezalıdır. Muhbirle (karşı tarafın tanığı)
     görüşme hiç sunulmadı.
 11. **Delile el koyma:** Bodrumdaki çantayı avukatın kendisinin alması delil zincirini koparır; mahkeme delili kabul
     etmez (CMK 123, 127, 206/2-a) ve baroya bildirim yapar.
+12. **Hükmün delil zincirine bağlanması:** Beraat (223/2-e) delil zinciri kurulduğunda (`beraat_e`) **her zaman**
+    verilir; puan, esas savunmanın biçimi ve ikna sayacı hükmü değiştirmez. **2026-10-21:** aynı ilke 223/2-b ve 191'e de
+    uygulandı; hiçbir sonuç puan ya da ikna eşiği taşımaz (önceki 11.000 / ikna ≥ 8 ve 5.500 eşikleri kaldırıldı,
+    eşik çubuğu tek banda indirildi). Önceki sürümdeki 7.500 puan eşiği
+    kaldırıldı: zincir kurulmuşken (oda varsayımı çökmüş, şekerlik aklanmış, muhbirin satış anlatımı Z raporu ya da kask
+    çelişkisiyle sarsılmış veya arka oda materyali dışlanmış; savcı da beraat istemiş) 188/3'ten mahkûmiyet, kayıtla
+    çelişen ve hukuken savunulamayan bir hüküm olurdu. Özensiz oyun (yanlış delil ≥ 3 ya da ♥ ≤ 2) yalnızca kapanışı
+    değiştirir: Deniz ve Leyla kaydın kazandırdığını, savunmanın dağınık kaldığını söyler (golden path `G_E_DAG`,
+    8.310 puan). **2026-10-21 kayıt tablosu** (mütalaa ve hüküm birlikte; `T_05` yönlendirmesi ile sonuç koşulları
+    T_04'ten her bayrak bileşimiyle denetlendi, 560 bileşim, uyumsuzluk yok):
+
+    | Kayıt | Mütalaa | Hüküm |
+    |---|---|---|
+    | oda bağlanamadı ∧ şekerlik aklandı | beraat (T_05B iz + dönüş varsa, yoksa T_05E) | BERAAT_B (olumlu ispat tamsa) / BERAAT_E |
+    | oda bağlanamadı ∧ şekerlik aklanmadı ∧ satış anlatımı çöktü (kask, saat ya da dönüş) | 191 + CMK 226 (T_05N) | NİTELİK_191 |
+    | oda bağlanamadı ∧ şekerlik aklanmadı ∧ muhbir ayakta (en çok kask tutarsızlığı) | 188 (T_05M) | MAHKÛMİYET: muhbirin çürütülmemiş satış beyanı + şekerlikteki iki paket ve kavanozdaki iz |
+    | oda sanığa bağlı (varsayım çökmedi) | 188 (T_05M) | MAHKÛMİYET: arka oda materyali |
+
+    Savcı beraat istediğinde mahkûmiyet çıkamaz (önceki sürümde muhbir dönmüş ama şekerlik aklanmamışken T_05B beraat
+    mütalaasından sonra 188/3 çıkabiliyordu; düzeltildi). Mahkûmiyet gerekçesi yalnızca bu iki kayıtta okunur ve
+    kayıtla çelişmez: kavanoz izi yalnızca şekerlik aklanmamışsa anılır; “aynı dairede ele geçen paketler dairede
+    ticaret yapıldığını gösterir” satırı kaldırıldı. Zincirin kestirme kurulmasını puan değil delil önkoşulları ve
+    oyun yapısı engeller (tasarım belgesi §12).
+13. **Takvim:** 9 Kasım 2025 pazar, 11 Kasım salı, 13 Kasım perşembe (AMATEM randevusu), 14 Ocak 2026 çarşamba (Defne
+    büroya gelir), 15–17 Ocak perşembe–cumartesi (soruşturma), 26 Ocak pazartesi (1. celse), 29 Ocak ve 5 Şubat
+    perşembe (ara günler), 16 Şubat pazartesi (2. celse). Tedavi 9 Ekim perşembe başlar, test 30 Ekim perşembe.
+    Kaan'ın “temiz gün” sayısı 3 Ekim'den sayılır (26 Ocak'ta 115, 16 Şubat'ta 136); tutukluluk 11 Kasım–26 Ocak
+    arası 76 gündür.
+
+14. **223/2-b ile 223/2-e ayrımı:** “işlemediğinin sabit olması” olumlu ispat ister. Oyunda 2-b şu kayıtla kurulur:
+    muhbir duruşmada Barış'tan aldığını söyler ve şekerliği anlatır (`tolga_kirildi ∧ jar_cleared`), terazideki iz
+    Barış'ındır (karşılaştırma talep edilmiş, `ev_iz_eslesme`), sanık satış anında kasa başındadır (`contra_t4`), Barış'ın
+    cihazı 9 Kasım'da kapıdadır (`fact_gps9`) ve baskın sabahı döner (`ded_kacis`), arka oda varsayımı çökmüş ve
+    odanın ona kiralandığı defterle sabittir (`contra_s2 ∧ defter_sunuldu`), çantası usulüne uygun el konulmuştur
+    (`ev_canta`); müdafi bu talebi ileri sürmüştür (`gercek_fail`). Biri eksik ama 2-e zinciri kuruluysa hüküm 2-e'dir:
+    sınıf hataları beraati mahkûmiyete çevirmez. Gerekçe satırları bu olguların her birini anar.
+15. **191'e dönüşümün koşulları:** 191, arka oda sanığa bağlanamadığında (`contra_s2`), muhbirin satış anlatımı
+    çöktüğünde ve şekerlik aklanmadığında kurulur. Satış anlatımının çökmesi üç yoldan biridir: Z raporu (satış anında
+    kasa başında, `contra_t4`), kapıdaki kasklı adam (muhbirin kendi kolluk ifadesi + sanığın ehliyetsizliği,
+    `contra_t3`) ya da muhbirin dönüşü (`tolga_kirildi`; şekerliğin yeri birinci celsede kabul ettirilmemişse muhbir
+    şekerliği anlatmaz). Önceki sürüm yalnızca Z raporunu sayıyordu; kask çelişkisi de satıcının tarifini sanıktan
+    ayırdığından aynı sonucu doğurur. Muhbir ayaktaysa (en çok kask tutarsızlığı, T5) satış beyanı ve şekerlikteki
+    “satışa hazır” paketler 188'i taşıyabilir; savcı 188 ister (T_05M). Kullanıcı olduğu savcılığın kendi saç
+    analiziyle sabittir; tedavi kayıtları ve sanığın beyanı gerekçede ayrıca anılır. Terditli savunma tek başına 191
+    vermez. CMK 226 hatırlatması T_05N'de her durumda yapılır; çöküşte (§4-20) heyet hatırlatmayı kendisi yapar.
+16. **Görüşmede öğrenilen olgunun kayda geçmesi:** Kaan'ın görüş odasında anlattıkları (nerede uyuduğu, kilidin kimde
+    olduğu, şekerliği ne için kullandığı, ehliyeti olmadığı) hükme ancak duruşmada, sorguda söylenince esas alınabilir
+    (CMK 191, 217/1). Müdafiin müvekkiline olguları önceden sorması hazırlıktır, telkin değildir (Av.K. 34; TBB Meslek
+    Kuralları müvekkilin kendi bilgisini anlatmasını yasaklamaz, uydurulmuş anlatı dikte etmeyi yasaklar); hazırlanmamış
+    sanığın kürsüde ayrıntıyı hatırlayamaması (Q_KILIT) bir oyun yorumudur.
+17. **Uzman mütalaası ve sınırı:** Uzmana “müvekkilim koymadı diye yazın” istemi cezalıdır (CMK 67/3: hâkime ait
+    değerlendirme). Uzman numune almaz; kriminal raporun dosyadaki ekleri (fotoğraflar, baskı listesi, kromatogram)
+    üzerinden görüş bildirir. Bu, delile dokunmayan ve zinciri bozmayan bir yoldur (çantaya el koymanın aksine).
+18. **Parmak izi karşılaştırması ve kimlikli suç duyurusu:** Barış'ın yakalanması (kurye kayıtlarıyla kimlikli suç
+    duyurusu + tehdit telefonunun bildirimi) iz karşılaştırmasını kendiliğinden getirmez; terazideki yabancı izin
+    yakalanan kişiyle karşılaştırılmasını savunma somut olarak istemelidir (delil dilekçesi DIL_IZ ya da 1. celse TL_IZ,
+    CMK 177, 206/1). Soyadı ve şehirle (posta kutusu, hat) yapılan duyuru alınır ama yakalama kararına dönüşmez;
+    personel kaydı (doğum tarihi, adres) mahkeme kanalıyla istenen kurye şirketi kayıtlarından gelir.
+
+19. **Z raporu mazeretinin zaman penceresi:** Kafe Ihlamur Sokak'a yürüyerek on beş dakikadır; muhbir satışı
+    23.00'e, devriye yakalamayı 23.09'a koyar. Önceki sürümde ilk kanıtlı kasa hareketi 23.18'di; sanık 22.45'te çıkıp
+    23.15'te dönebilirdi (inceleme bulgusu). Z raporu artık 22.44–23.18 arasındaki beş satışın hepsini sanığın kasiyer
+    koduyla gösterir; 22.53 ve 23.02 satışları kartlıdır ve banka slibinde saat ile garsonun parafı vardır. Kasada dokuz
+    dakikadan uzun boşluk yoktur; on beş dakikalık yolun gidiş-dönüşü (en az otuz dakika) sığmaz. Kasiyer kodu tek
+    başına yetmez (kodu başkası girebilir; oyunda bu uyarı ayrıca verilir); kart slipleri ve garsonun parafı kodun
+    arkasında sanığın bulunduğunu destekler. Gerekçedeki “sanık o saatte işyerinde kasa başındadır” cümlesi bu
+    kayıtla doğrudur.
+20. **Çöküş (♥ 0) hükmü değiştirmez:** Müdafiin yanlış sunumları heyetin sabrını tüketip duruşmayı kısa kesebilir
+    (T_COKUS: savunmanın kalan hamleleri — dışlama itirazı, şekerlik tartışması, esas savunma — yapılamaz), ama kayıttaki
+    delilleri değiştirmez. Bu yüzden hiçbir sonuç `¬cokus` şartı taşımaz: oda bağlanamamış ve şekerlik aklanmışsa hüküm
+    yine beraattir (2-b'nin müdafi talebi `gercek_fail` çöküşte kurulamadığından 2-e); oda bağlanamamış, şekerlik
+    aklanmamış ve satış anlatımı çökmüşse heyet nitelik değişikliğini CMK 226/1 uyarınca kendisi hatırlatır, sanığın ek
+    savunmasını alır ve 191 kurar. Çöküş ancak muhbir kürsüye çıktıktan sonra olur (`visited T_03`): tanık dinlenmeden
+    hüküm kurulmaz (CMK 210); birinci celsede tükenen güvenilirlik ikinci celsede çapraz sorgunun başında çöküşe yol
+    açar.
 
 ## 5. Hassas konu denetimi
 
@@ -124,8 +250,11 @@ ve tedavinin cesaret olarak çerçevelenmesi öne çıkar. TCK 188/3'ün çocuğ
 
 ## 6. Öz-inceleme kontrol listesi
 
-- [x] Bütün madde atıfları güncel metinle doğrulandı (TCK 188, 191, 192, 49, 52, 61/7, 62, 6/1-e; CMK 44, 48, 118, 119,
-      123, 127, 134, 177, 206, 217, 223, 225, 226, 273).
+- [x] Bütün madde atıfları güncel metinle doğrulandı (TCK 188, 191, 192, 49, 52, 61/7, 62, 6/1-e; CMK 44, 48, 63, 67,
+      68, 118, 119, 123, 127, 134, 177, 178, 206, 217, 223, 225, 226, 273). CMK 67 ve 68 metinleri 2026-10-21'de
+      mevzuat.gov.tr PDF'inden (`pdftotext -layout`) yeniden okundu.
+- [x] Hiçbir sonuç puan ya da ikna eşiğine bağlı değil; sanık lehine kayıt (oda varsayımı çöktü ve şekerlik aklandı)
+      çöküş dahil her zaman beraatle biter; savcı beraat istediğinde mahkûmiyet çıkmaz (§4-12 tablosu, 560 bileşim).
 - [x] Ceza hesapları alt/üst sınırlar içinde ve aritmetik doğru (TCK 52/2'deki güncel 100 TL alt sınırı uygulandı).
 - [x] Mahkemeye hitap “Sayın Başkan”; ağır ceza görevli.
 - [x] Mahkûmiyet hükümlerinde istinaf süresi (CMK 273/1); HAGB'de itiraz (CMK 231/12); beraatte tazminat bildirimi.

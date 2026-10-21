@@ -193,20 +193,19 @@ export const invHub: CasePart = {
           kind: 'NAVIGATE',
           label: 'Günü kapat',
           description: 'Kalan eylem puanlarını bırak',
-          visibleWhen: all(cmp(v('ap'), '>', 0), cmp(v('day'), '<', 3)),
-          confirm: 'Bugünün kalan eylem puanları yanar. Emin misin?',
+          // Gün boşa geçirilemez: yalnızca yapılacak iş kalmadıysa erken kapatılır (gün, puanlar bitince kendiliğinden kapanır).
+          visibleWhen: all(cmp(v('ap'), '>', 0), cmp(v('day'), '<', 3), ref('inv_bos')),
+          confirm: 'Bugünün kalan eylem puanı yanar. Emin misin?',
           effects: [set('ap', 0)],
           next: '$stay',
         },
         nav('GO_H1', 'DURUŞMADAN ÖNCEKİ GECE', 'INV_GECE_1', {
           role: 'PRIMARY',
           confirm: 'Soruşturma evresi biter. Emin misin?',
-          enabledWhen: any(
-            cmp(v('day'), '==', 3),
-            all(visited('INV_GORUSME'), visited('INV_TUTANAK'), visited('INV_IMAJ'), visited('INV_ARAMA_OFIS')),
-          ),
+          // On iki gün kullanılmadan duruşmaya gidilmez: son günün bütün eylem puanları (yapılacak iş kalmadıysa her zaman).
+          enabledWhen: all(cmp(v('day'), '==', 3), any(cmp(v('ap'), '<=', 0), ref('inv_bos')), visited('INV_LEYLA')),
           lockedReason:
-            'Dilekçe süresi 3. gün doluyor. Erken gitmek için önce müvekkili dinle, tutanağı ve raporu oku, ofisi ara.',
+            'Duruşmaya daha günler var. Dilekçe son gün kapanıyor; o güne kadar her saatini dosyaya ver. Leyla dosyayı görmeden salona girme.',
         }),
       ],
     }),
@@ -476,6 +475,23 @@ export const invHub: CasePart = {
         `),
       ],
     }),
+    decisionNode('H1_KORIDOR', [{ to: 'H1_00' }], {
+      ...C2,
+      title: 'Duruşma sabahı',
+      lines: B(`
+        # SETBAŞI KÖPRÜSÜ — 08.10 |bg=sokak_sabah
+        > Gök Dere bulanık akıyordu; gece boyu yağan yağmur köprünün taşlarını koyulaştırmıştı. Adliyeye yürüyerek gittim. Çantamda pano yoktu, panonun fotoğrafı vardı; bir de üç sayfalık bir not.
+        > Leyla köprünün başında bekliyordu. Elinde iki kâğıt bardak çay; birini bana uzattı, ötekinin kapağını açmadı bile.
+        leyla: Uyumadın. Belli. Bugün uykusuzluğunu değil, dosyanı göstereceksin.
+        leyla: İlk celse bir dava kazanmaz Deniz. Ama hâkim bugün dosyanın nasıl bir dosya olduğuna karar verir: okunacak bir dosya mı, geçilecek bir dosya mı.
+        P: Okunacak bir dosya. Eklerini okuyacak.
+        leyla: O zaman ona eklerini göster. Polisin sonuç cümlesini değil, kendi tablosunu. Tanığa bir şey söyletmeye çalışma; tanık kendi kâğıdını okusun, gerisini hâkim görür.
+        leyla: Bir de şu: talepler. Bugün salondan çıkarken elinde üç hafta olacak. O üç haftayı neyle dolduracağını bugün ağzından çıkan cümleler belirler. İstemediğin şey gelmez.
+        > Çayından bir yudum aldı, buruştu. Soğumuştu; yine de içti.
+        ~ Bir duruşmanın sabahı, bir şantiyenin sabahına benzer: her şey kâğıtta hazırdır, ama zemin ilk kazmada kendini gösterir.
+        > Adliyenin camları sabah güneşinde griydi. Merdivenlerde Tarık’ı gördüm; kravatsızdı, ama ayakkabılarını boyamıştı. Bir babanın hazırlığı.
+      `),
+    }),
     story('INV_GECE', {
       ...C2,
       title: 'Duruşmadan önceki gece',
@@ -486,7 +502,7 @@ export const invHub: CasePart = {
         > Dışarıda yağmur incelmişti. Tophane’nin saat kulesi on ikiyi vurdu, sesi ıslak sokaklarda uzadı.
         ~ Bir yerde, bir ekran hâlâ yanıyor olabilirdi. Yarın o ekranın kime ait olduğunu bir salon dolusu insana göstereceğim. Yeter ki kâğıtlar beni yarı yolda bırakmasın.
       `),
-      choices: [cont('GECE_DEVAM', 'Duruşmaya git', 'H1_00', { role: 'PRIMARY' })],
+      choices: [cont('GECE_DEVAM', 'Duruşmaya git', 'H1_KORIDOR', { role: 'PRIMARY' })],
     }),
   ],
   triggers: [

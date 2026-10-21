@@ -88,13 +88,13 @@
       {
         "id": "h_nobet",
         "when": { "not": { "hasEvidence": "clue_nobet" } },
-        "text": "Hastane kayıtlarını mahkemeden resmî yoldan isteseydin, arada nöbet defterinin 01.40 emanet kaydı gelirdi; bandın kâğıttaki karşılığını hemşireye tanıtabilirdin.",
+        "text": "Hastane kayıtlarını mahkemeden resmî yoldan isteseydin, arada nöbet defterinin 01.40 emanet ve 06.05 teslim kayıtları gelirdi; ikisini birlikte okuyup bandın kâğıttaki karşılığını hemşireye tanıtabilirdin.",
         "category": "ARASTIRMA"
       },
       {
         "id": "h_ev_hat",
         "when": { "not": { "hasEvidence": "clue_ev_hat" } },
-        "text": "Tarık’ın evindeki modem, hattın abonesini ve adresini gösteriyordu; bilirkişinin “sanığın kendisi de olabilir” cümlesini ancak sanığın kendi hattıyla karşılaştırarak daraltabilirdin.",
+        "text": "Tarık’ın evindeki modem, hattın abonesini ve adresini gösteriyordu; bilirkişinin “sanığın kendisi de olabilir” cümlesini ancak sanığın kendi hattı, demirbaş listesindeki zimmet ve bilirkişinin Bulgu 1’iyle birlikte daraltabilirdin.",
         "category": "ARASTIRMA"
       },
       {
@@ -114,6 +114,24 @@
         "when": { "all": [{ "flag": "hesap_istendi" }, { "not": { "flag": "hesap_sunuldu" } }] },
         "text": "Noter tespitli hesap dökümünü dosyaya sunmadın; dosyada olmayan bir kâğıtla ne tanık ne bilirkişi sorgulanır.",
         "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_b4_zimmet",
+        "when": { "all": [{ "flag": "press_b4" }, { "not": { "flag": "bilirkisi_hat" } }] },
+        "text": "Bilirkişinin “sanığın kendisi de olabilir” cümlesi için üç kâğıt gerekiyordu: cihaz 3’ün ne olduğunu ona önce teyit ettirmek (Bulgu 1), sanığın kendi hattı ve 07’nin kimin zimmetinde kaldığı.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_o3_sira",
+        "when": { "all": [{ "flag": "press_o3" }, { "not": { "flag": "contra_o3" } }] },
+        "text": "Hattın abonesi tek başına o hatta kimin oturduğunu göstermez; önce tanığın “her şeyi teslim ettim” anlatımını 07’nin iadesizliğiyle çürütmen gerekiyordu.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_pisman",
+        "when": { "flag": "pisman_savunma" },
+        "text": "“Yapmadım” diyen müvekkil adına pişmanlık bildirdin; müdafi, müvekkilinin iradesine ve yararına aykırı beyanda bulunamaz.",
+        "category": "SAVUNMA_STRATEJISI"
       },
       {
         "id": "h_iftira",

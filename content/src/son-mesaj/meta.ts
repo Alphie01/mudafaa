@@ -118,37 +118,83 @@ export const meta: CasePart = {
     },
     {
       id: 'hat_kayit',
-      label: 'Tutanakta: tehdit oturumlarının hattı sanığın değil, tanığın firmasının',
-      when: { all: [{ flag: 'bilirkisi_hat' }, { flag: 'contra_o3' }] },
+      label:
+        'Tutanakta: tehdit oturumlarının hattı ve cihazı sanığın değil, tanığın (bilirkişi daraltması ya da el konulan dizüstü, tanığa sunulan sağlayıcı yanıtı)',
+      when: { all: [{ any: [{ flag: 'bilirkisi_hat' }, { flag: 'laptop_imaj' }] }, { flag: 'contra_o3' }] },
+    },
+    {
+      id: 'el_daraldi',
+      label:
+        'Tutanakta: cihaz 3’ü sanık dışında birinin kullandığı (hat, tanık, el konulan dizüstü ya da 9 Kasım mazereti)',
+      when: {
+        any: [
+          { flag: 'bilirkisi_hat' },
+          { flag: 'contra_o3' },
+          // El konulan dizüstü, ancak tanığın “her şeyi teslim ettim” anlatımı karşısında konuştuğunda eli gösterir.
+          { all: [{ flag: 'laptop_imaj' }, { flag: 'contra_o2' }] },
+          { ref: 'alibi_kayit' },
+        ],
+      },
+    },
+    {
+      id: 'beraat_kaydi',
+      label: 'Tutanak beraat gerektiriyor: kaynak, bilirkişi teyidi ve elin daraltılması',
+      when: {
+        all: [{ ref: 'kaynak_suphesi' }, { ref: 'bilirkisi_teyit' }, { ref: 'el_daraldi' }],
+      },
     },
     {
       id: 'ozan_dayanak',
       label: 'Eski ortak hakkında somut dayanak var: cihaz, zimmet ve hat',
       when: {
+        all: [{ hasEvidence: 'ded_bagli' }, { hasEvidence: 'ded_laptop_ozan' }, { hasEvidence: 'ded_ip_tekin' }],
+      },
+    },
+    {
+      // Soruşturmada eylem puanı harcanacak iş kalmadı (gün kapatma ve duruşmaya geçişin kaçış koşulu).
+      id: 'inv_bos',
+      label: 'Soruşturmada yapılacak iş kalmadı',
+      when: {
         all: [
-          { hasEvidence: 'ded_bagli' },
-          { any: [{ hasEvidence: 'ded_laptop_ozan' }, { hasEvidence: 'clue_envanter' }] },
-          { any: [{ hasEvidence: 'ev_isp' }, { hasEvidence: 'ded_ip_tekin' }] },
+          { chosen: 'H_OFIS' },
+          { chosen: 'H_GORUS2' },
+          { chosen: 'H_HAYRI' },
+          { chosen: 'H_SINAN' },
+          { chosen: 'H_KUBRA' },
+          { chosen: 'H_OZAN' },
+          { chosen: 'H_TUTANAK' },
+          { chosen: 'H_IMAJ' },
+          { chosen: 'H_DIL' },
+          { any: [{ not: { flag: 'fact_hastane' } }, { chosen: 'H_HASTANE' }] },
+          { any: [{ not: { visited: 'INV_ARAMA_HASTANE' } }, { chosen: 'H_GULAY' }] },
+          { any: [{ not: { flag: 'fact_hesap_onay' } }, { flag: 'hesap_istendi' }] },
+          { any: [{ not: { hasEvidence: 'ev_hesap' } }, { chosen: 'H_HESAP' }] },
+          { any: [{ not: { flag: 'fact_onam_saat' } }, { chosen: 'H_HKAYIT' }] },
         ],
       },
     },
     {
-      id: 'ara_ilerleme',
-      label: 'Arada en az üç iş tamamlandı',
+      // Arada eylem puanı harcanacak iş kalmadı.
+      id: 'ara_bos',
+      label: 'Arada yapılacak iş kalmadı',
       when: {
-        cmp: [
+        all: [
+          { chosen: 'A_NURTEN' },
+          { chosen: 'A_EV' },
           {
-            add: [
-              { if: { when: { visited: 'ARA_DEMIRBAS' }, then: 1, else: 0 } },
-              { if: { when: { visited: 'ARA_ARAMA_EV' }, then: 1, else: 0 } },
-              { if: { when: { visited: 'ARA_VAKIF' }, then: 1, else: 0 } },
-              { if: { when: { visited: 'ARA_MELIS' }, then: 1, else: 0 } },
-              { if: { when: { visited: 'ARA_RAPOR' }, then: 1, else: 0 } },
-              { if: { when: { any: [{ flag: 'suc_duyurusu' }, { flag: 'suc_mechul' }] }, then: 1, else: 0 } },
+            any: [
+              { chosen: 'A_MELIS' },
+              { not: { any: [{ flag: 'fact_sinan_kapi' }, { flag: 'contra_s3' }] } },
+              { flag: 'melis_dogrudan' },
             ],
           },
-          '>=',
-          3,
+          { any: [{ chosen: 'A_HESAP' }, { not: { hasEvidence: 'ev_hesap' } }, { visited: 'INV_HESAP' }] },
+          {
+            any: [{ chosen: 'A_RAPOR' }, { not: { flag: 'bilirkisi_istendi' } }, { cmp: [{ var: 'ara_day' }, '<', 2] }],
+          },
+          { any: [{ chosen: 'A_HRESMI' }, { not: { flag: 'hastane_istendi' } }] },
+          { any: [{ chosen: 'A_VAKIF' }, { not: { any: [{ visited: 'INV_T_HAYRI' }, { flag: 'fact_vakif' }] } }] },
+          { any: [{ not: { hasEvidence: 'ded_bagli' } }, { flag: 'suc_duyurusu' }, { flag: 'suc_mechul' }] },
         ],
       },
     },
@@ -183,6 +229,7 @@ export const meta: CasePart = {
     counter('legal_hits'),
     counter('ethics'),
     hiddenInt('leyla_gun', 0, 0, 9),
+    hiddenInt('sordu', 0, 0, 1),
     hiddenInt('leyla_ara', 0, 0, 9),
     hiddenEnum('aksam1', ['YOK', 'SUTUN', 'TUTANAK', 'HASTANE', 'HIC']),
     ...flags(
@@ -198,6 +245,8 @@ export const meta: CasePart = {
       'fact_hayri_saat',
       'fact_sinan_kapi',
       'fact_melis_sn',
+      'fact_ozan_laptop',
+      'fact_vakif',
       'hesap_istendi',
       'hastane_istendi',
       'bilirkisi_istendi',
@@ -243,6 +292,8 @@ export const meta: CasePart = {
       'hesap_sunuldu',
       'gulay_hazir',
       'fact_onam_saat',
+      'nb_emanet',
+      'nb_teslim',
       'ek3_c5',
       'ek3_c6',
       'ek3_c7',
@@ -279,6 +330,8 @@ export const meta: CasePart = {
       'supheden',
       'terditli',
       'iftira_savunma',
+      'pisman_savunma',
+      'dayanaksiz_isim',
       'cokus',
     ),
   ],

@@ -152,7 +152,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_bagli_cihaz" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -167,7 +168,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_tablet_kapali" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 60 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 60 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -206,7 +208,8 @@
                 { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
                 { "type": "DISCOVER", "evidence": "clue_ip_ayni" }
               ]
-            }
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -245,7 +248,8 @@
                 { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
                 { "type": "DISCOVER", "evidence": "clue_ip_ayni" }
               ]
-            }
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -284,7 +288,8 @@
                 { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
                 { "type": "DISCOVER", "evidence": "clue_ip_ayni" }
               ]
-            }
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -323,7 +328,8 @@
                 { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
                 { "type": "DISCOVER", "evidence": "clue_ip_ayni" }
               ]
-            }
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -338,7 +344,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_arsiv" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -353,8 +360,17 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "HESAP_BITIR", "kind": "CONTINUE", "label": "Raporu kapat", "role": "BACK", "next": "$return" }
-      ]
+        {
+          "id": "HESAP_BITIR",
+          "kind": "CONTINUE",
+          "label": "Raporu kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": { "any": [{ "cmp": [{ "var": "sordu" }, ">=", 1] }, { "cmp": [{ "var": "ex3" }, "<=", 0] }] },
+          "lockedReason": "Önce belgeye bir bak."
+        }
+      ],
+      "onEnter": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 0 }]
     },
     {
       "id": "INV_TUTANAK",
@@ -435,7 +451,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_imza_yok" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -450,7 +467,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_muhur_yok" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -465,7 +483,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_ss_karar" },
-            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 150 }
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 150 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -478,7 +497,10 @@
             "label": "Not defterinde",
             "tone": "info"
           },
-          "effects": [{ "type": "DISCOVER", "evidence": "clue_ss_karar" }]
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ss_karar" },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
         },
         {
           "id": "EX_T_KAPAT",
@@ -489,7 +511,8 @@
             "text": "15.52’de kapatıldı. Zarfa konuldu. Nerede, kimin yanında, kaç gün? Bu satır söylemiyor.",
             "label": "NOT ALINDI",
             "tone": "info"
-          }
+          },
+          "effects": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 1 }]
         },
         {
           "id": "FB_TUTANAK",
@@ -503,8 +526,17 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "TUTANAK_BITIR", "kind": "CONTINUE", "label": "Tutanağı kapat", "role": "BACK", "next": "$return" }
-      ]
+        {
+          "id": "TUTANAK_BITIR",
+          "kind": "CONTINUE",
+          "label": "Tutanağı kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": { "any": [{ "cmp": [{ "var": "sordu" }, ">=", 1] }, { "cmp": [{ "var": "ex1" }, "<=", 0] }] },
+          "lockedReason": "Önce belgeye bir bak."
+        }
+      ],
+      "onEnter": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 0 }]
     },
     {
       "id": "INV_IMAJ",
@@ -607,7 +639,10 @@
             "label": "+50 SKOR · Not defterine eklendi",
             "tone": "special"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 }]
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 50 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
         },
         {
           "id": "EX_I_HASH1",
@@ -618,7 +653,8 @@
             "text": "Hash, imajın alındığı anın parmak izi. Daha önceki bir anın değil.",
             "label": "NOT ALINDI",
             "tone": "info"
-          }
+          },
+          "effects": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 1 }]
         },
         {
           "id": "EX_I_SON",
@@ -632,7 +668,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_son_erisim" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -647,7 +684,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_kilit" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -688,7 +726,8 @@
                 { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
                 { "type": "DISCOVER", "evidence": "clue_cihaz3" }
               ]
-            }
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -729,7 +768,8 @@
                 { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
                 { "type": "DISCOVER", "evidence": "clue_cihaz3" }
               ]
-            }
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -770,7 +810,8 @@
                 { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
                 { "type": "DISCOVER", "evidence": "clue_cihaz3" }
               ]
-            }
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -811,7 +852,8 @@
                 { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
                 { "type": "DISCOVER", "evidence": "clue_cihaz3" }
               ]
-            }
+            },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -826,7 +868,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_uslup_tehdit" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -841,7 +884,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_uslup_tarik" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -853,7 +897,8 @@
             "text": "Sonuç cümlesi hiçbir eke atıf yapmıyor. “Cihazdaki hesap.” Cihaz ile hesap aynı şey mi?",
             "label": "NOT ALINDI",
             "tone": "info"
-          }
+          },
+          "effects": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 1 }]
         },
         {
           "id": "FB_IMAJ",
@@ -867,8 +912,17 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "IMAJ_BITIR", "kind": "CONTINUE", "label": "Raporu kapat", "role": "BACK", "next": "$return" }
-      ]
+        {
+          "id": "IMAJ_BITIR",
+          "kind": "CONTINUE",
+          "label": "Raporu kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": { "any": [{ "cmp": [{ "var": "sordu" }, ">=", 1] }, { "cmp": [{ "var": "ex2" }, "<=", 0] }] },
+          "lockedReason": "Önce belgeye bir bak."
+        }
+      ],
+      "onEnter": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 0 }]
     },
     {
       "id": "INV_HESAP_IND",
@@ -1041,7 +1095,8 @@
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "clue_onam" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
           ]
         },
         {
@@ -1054,7 +1109,10 @@
             "label": "Not defterinde",
             "tone": "info"
           },
-          "effects": [{ "type": "DISCOVER", "evidence": "clue_onam" }]
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_onam" },
+            { "type": "VAR", "var": "sordu", "op": "set", "value": 1 }
+          ]
         },
         {
           "id": "EX_K_KABUL",
@@ -1065,7 +1123,8 @@
             "text": "Refakatçi: oğlu. 01.20’den itibaren buradaydı.",
             "label": "NOT ALINDI",
             "tone": "info"
-          }
+          },
+          "effects": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 1 }]
         },
         {
           "id": "FB_HKAYIT",
@@ -1079,8 +1138,17 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "HKAYIT_BITIR", "kind": "CONTINUE", "label": "Kayıtları kapat", "role": "BACK", "next": "$return" }
-      ]
+        {
+          "id": "HKAYIT_BITIR",
+          "kind": "CONTINUE",
+          "label": "Kayıtları kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": { "any": [{ "cmp": [{ "var": "sordu" }, ">=", 1] }, { "cmp": [{ "var": "ex4" }, "<=", 0] }] },
+          "lockedReason": "Önce belgeye bir bak."
+        }
+      ],
+      "onEnter": [{ "type": "VAR", "var": "sordu", "op": "set", "value": 0 }]
     },
     {
       "id": "INV_DIL",

@@ -109,8 +109,7 @@
           { "ref": "kaynak_suphesi" },
           { "ref": "bilirkisi_teyit" },
           { "ref": "alibi_kayit" },
-          { "ref": "hat_kayit" },
-          { "any": [{ "flag": "contra_o2" }, { "flag": "laptop_imaj" }] }
+          { "ref": "hat_kayit" }
         ]
       },
       "stamp": "BERAAT",
@@ -196,6 +195,33 @@
           ]
         },
         {
+          "when": { "flag": "pisman_savunma" },
+          "lines": [
+            { "speaker": "narrator", "text": "Adliyenin önünde Tarık beni bekledi. Teşekkür etmedi." },
+            {
+              "speaker": "tarik",
+              "text": "Salonda benim adıma “pişman” dediniz. Hüküm ne olursa olsun, o kelime tutanakta duruyor; benim ağzımdan değil, avukatımın ağzından."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Müvekkilin “yapmadım” dediği yerde onun adına pişmanlık söyleyemezsin Deniz. Bu bir taktik değil, bir meslek ihlali. Baroya bir yazı gelirse şaşırma."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "dayanaksiz_isim" },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Esas savunmada “gerçek fail ortada” dedin, ama zinciri tamamlamadan. Hâkim bunu duymazdan geldi; sen geldin diye değil, kâğıtlar konuştuğu için."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir ismi salonda kâğıtsız anarsan, o isim bir gün sana dava olarak döner. Bir dahakine önce zincir, sonra cümle."
+            }
+          ]
+        },
+        {
           "when": { "flag": "soz_verildi" },
           "lines": [
             {
@@ -211,14 +237,7 @@
       "id": "BERAAT_E",
       "class": "ACQUITTAL",
       "priority": 3,
-      "when": {
-        "all": [
-          { "not": { "flag": "cokus" } },
-          { "ref": "kaynak_suphesi" },
-          { "ref": "bilirkisi_teyit" },
-          { "flag": "bilirkisi_hat" }
-        ]
-      },
+      "when": { "all": [{ "not": { "flag": "cokus" } }, { "ref": "beraat_kaydi" }] },
       "stamp": "BERAAT",
       "stampTone": "green",
       "header": "TÜRK MİLLETİ ADINA",
@@ -235,7 +254,26 @@
         },
         {
           "when": { "flag": "bilirkisi_hat" },
-          "text": "Bilirkişi, cihaz 3’ün o gecelerde sanığın ev hattından değil, tanığın firmasına ait bir iş hattından bağlandığını kabul etmiştir."
+          "text": "Bilirkişi, cihaz 3’ün o gecelerde sanığın ev hattından değil, tanığın firmasına ait bir iş hattından bağlandığını, cihazın zimmetinin de sanıkta olmadığını kabul etmiştir."
+        },
+        {
+          "when": { "flag": "contra_o3" },
+          "text": "Sağlayıcının mahkemeye yanıtına göre tehdit oturumlarının adresi tanık Ozan Tekin’in firmasının iş hattıdır; tanık bu konudaki sorulara cevap vermemiştir."
+        },
+        {
+          "when": { "flag": "laptop_imaj" },
+          "text": "Eski ortağın işyerinde, mesajlaşma uygulaması açık hâlde bulunan OFIS-LAPTOP-07 el konularak imajı alınmıştır."
+        },
+        {
+          "when": {
+            "all": [
+              { "ref": "alibi_kayit" },
+              { "not": { "flag": "bilirkisi_hat" } },
+              { "not": { "flag": "contra_o3" } },
+              { "not": { "flag": "laptop_imaj" } }
+            ]
+          },
+          "text": "Üç mesaj da aynı cihazdan gönderildiğinden ve bu cihaz 9 Kasım gecesi sanık acil servisteyken kullanıldığından, cihazı sanığın kullandığı kabul edilememiştir."
         },
         {
           "when": { "ref": "alibi_kayit" },
@@ -354,6 +392,33 @@
           ]
         },
         {
+          "when": { "flag": "pisman_savunma" },
+          "lines": [
+            { "speaker": "narrator", "text": "Adliyenin önünde Tarık beni bekledi. Teşekkür etmedi." },
+            {
+              "speaker": "tarik",
+              "text": "Salonda benim adıma “pişman” dediniz. Hüküm ne olursa olsun, o kelime tutanakta duruyor; benim ağzımdan değil, avukatımın ağzından."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Müvekkilin “yapmadım” dediği yerde onun adına pişmanlık söyleyemezsin Deniz. Bu bir taktik değil, bir meslek ihlali. Baroya bir yazı gelirse şaşırma."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "dayanaksiz_isim" },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Esas savunmada “gerçek fail ortada” dedin, ama zinciri tamamlamadan. Hâkim bunu duymazdan geldi; sen geldin diye değil, kâğıtlar konuştuğu için."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir ismi salonda kâğıtsız anarsan, o isim bir gün sana dava olarak döner. Bir dahakine önce zincir, sonra cümle."
+            }
+          ]
+        },
+        {
           "when": { "flag": "soz_verildi" },
           "lines": [
             {
@@ -369,7 +434,9 @@
       "id": "KISMI",
       "class": "REDUCED",
       "priority": 4,
-      "when": { "all": [{ "not": { "flag": "cokus" } }, { "ref": "alibi_kayit" }] },
+      "when": {
+        "all": [{ "not": { "flag": "cokus" } }, { "ref": "alibi_kayit" }, { "not": { "ref": "kaynak_suphesi" } }]
+      },
       "stamp": "KISMEN",
       "stampTone": "amber",
       "header": "TÜRK MİLLETİ ADINA",
@@ -389,7 +456,7 @@
           "text": "Bu gece yönünden bilirkişinin kilit bulgusu, saati yazan hemşirenin beyanı ve tanık Hayri Sezer’in telefonundaki bildirim saati birbirini doğrulamış; savunmanın sunduğu hastane kaydı, onu yazan tanık tarafından tanınmıştır."
         },
         {
-          "text": "6 ve 12 Kasım geceleri için mesajların başka bir cihazdan çıktığı ileri sürülmüş, ancak bilirkişinin “sanığın kendisi de olabilir” değerlendirmesi o geceler için delille daraltılamamış; o cihazı sanık dışında birinin kullandığı somut olarak gösterilememiştir."
+          "text": "6 ve 12 Kasım geceleri için ise mesajların sanığın hesabından gönderildiği tartışmasızdır; savunma, bu mesajların sanığın telefonundan ya da sanığın elinden çıkmadığına dair bir delil ortaya koymamış, mesajların kaynağına itiraz etmemiştir."
         }
       ],
       "legalBasis": "TCK 107/2, 43/1, 62; TCK 134/2 (beraat); CMK 231",
@@ -463,7 +530,7 @@
             },
             {
               "speaker": "player",
-              "text": "Bir gece kâğıtla kanıtlandı: kilitli bir ekran, bir bant, bir imza, bir yaşlı adamın telefonundaki saat. Öbür iki gece için elimde bir sütun vardı; o sütunun ucundaki makineyi, hattı, eli salona taşıyamadım.",
+              "text": "Bir gece kâğıtla kanıtlandı: kilitli bir ekran, bir bant, bir imza, bir yaşlı adamın telefonundaki saat. Öbür iki gece için mesajların nereden çıktığını hiç sordurmadım; kimse de sormadı.",
               "style": "thought"
             },
             { "speaker": "narrator", "text": "ARSLAN HUKUK — GECE", "style": "card", "bg": "buro_gece" },
@@ -482,6 +549,33 @@
             {
               "speaker": "narrator",
               "text": "Dosyayı kapatmadım. Kapatmadığım dosyalar, uykumda açılır. O gece de açıldı: bir tablo, en sağda bir rakam, “3”."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "pisman_savunma" },
+          "lines": [
+            { "speaker": "narrator", "text": "Adliyenin önünde Tarık beni bekledi. Teşekkür etmedi." },
+            {
+              "speaker": "tarik",
+              "text": "Salonda benim adıma “pişman” dediniz. Hüküm ne olursa olsun, o kelime tutanakta duruyor; benim ağzımdan değil, avukatımın ağzından."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Müvekkilin “yapmadım” dediği yerde onun adına pişmanlık söyleyemezsin Deniz. Bu bir taktik değil, bir meslek ihlali. Baroya bir yazı gelirse şaşırma."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "dayanaksiz_isim" },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Esas savunmada “gerçek fail ortada” dedin, ama zinciri tamamlamadan. Hâkim bunu duymazdan geldi; sen geldin diye değil, kâğıtlar konuştuğu için."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir ismi salonda kâğıtsız anarsan, o isim bir gün sana dava olarak döner. Bir dahakine önce zincir, sonra cümle."
             }
           ]
         },
@@ -509,7 +603,25 @@
       "verdictText": "Sanığın özel hayatın gizliliğini ihlalden (TCK 134/2) 2 yıl 6 ay, şantajdan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, TCK 53’ün uygulanmasına; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).",
       "reasoning": [
         {
-          "text": "Mesajlar ve iletilen ses kaydı sanığa ait hesapta, sanığın telefonunda tespit edilmiş; aksi yönde yeterli delil ortaya konmamıştır."
+          "when": { "not": { "ref": "kaynak_suphesi" } },
+          "text": "Mesajlar ve iletilen ses kaydı sanığa ait hesapta, sanığın telefonunda tespit edilmiş; savunma, mesajların başka bir cihazdan gönderildiğine dair bir delil ortaya koymamıştır."
+        },
+        {
+          "when": { "all": [{ "ref": "kaynak_suphesi" }, { "not": { "ref": "bilirkisi_teyit" } }] },
+          "text": "Savunma, mesajların hesaba bağlı başka bir cihazdan gönderildiğini ileri sürmüş; ancak bu iddia bilirkişi incelemesiyle doğrulanmamıştır."
+        },
+        {
+          "when": { "all": [{ "ref": "kaynak_suphesi" }, { "ref": "bilirkisi_teyit" }] },
+          "text": "Mesajların hesaba bağlı, sanığın işyerine ait bir masaüstü oturumundan gönderildiği anlaşılmış ise de, bilirkişi bu oturumu kullananın sanık olabileceğini dışlamamış; oturumu sanık dışında birinin kullandığını gösteren bir delil (hat, cihazın zimmeti, tanık) tutanağa geçmemiştir."
+        },
+        {
+          "when": {
+            "all": [
+              { "any": [{ "flag": "kilit_mahkemede" }, { "flag": "bilirkisi_kilit" }, { "flag": "gulay_teyit" }] },
+              { "not": { "ref": "alibi_kayit" } }
+            ]
+          },
+          "text": "9 Kasım gecesine ilişkin savunma, saati yazan tanık, bağımsız saat kaydı ve bilirkişi incelemesiyle birlikte doğrulanmamıştır."
         },
         {
           "when": { "flag": "cokus" },
@@ -532,6 +644,23 @@
             {
               "speaker": "narrator",
               "text": "Hâkim cezayı okudu. Rakamlar salonun içinde soğuk soğuk yankılandı. Tarık ayağa kalkmıştı; oturmayı unuttu, mübaşir koluna girdi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Hâkim hükmün sonunu okudu: istinaf yolu açık, süre iki hafta. Kâtip son satırı yazdı, yazıcı bir kez öttü. Bir hayatın yönü, bir yazıcının sesiyle değişti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Melis katılan sırasından kalktı. Tarık’a bakmadı; bana da bakmadı. Sinan dosyasını kapattı, bir an durdu, bir şey söyleyecek gibi oldu; söylemedi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı cübbesini kolunun üstüne aldı. Kapıya yürürken başını iki yana salladı; kime, neye, bilmiyorum. Belki bir dosyaya, belki bir mesleğe."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir salon boşalırken kimse acele etmez. İnsanlar ağır ağır çıkar; sanki bir şeyi unutmuşlar da hatırlamaya çalışıyorlar gibi. Ben de ağır ağır çıktım. Unuttuğum şeyi biliyordum.",
+              "style": "thought"
             }
           ]
         },
@@ -566,11 +695,21 @@
           ]
         },
         {
-          "when": { "hasEvidence": "clue_cihaz3" },
+          "when": { "all": [{ "hasEvidence": "clue_cihaz3" }, { "not": { "ref": "kaynak_suphesi" } }] },
           "lines": [
             {
               "speaker": "player",
               "text": "Sütunu görmüştüm. Cihaz 3. Ama gördüğümü salona taşıyamadım; bir sütun, okunmadıkça yalnızca bir sütundur.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "ref": "kaynak_suphesi" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Sütunu salona taşıdım. Cihaz 3, bir masaüstü oturumu. Ama o oturumun başındaki eli gösteren kâğıdı getiremedim; bir sütun, eli olmadan yalnızca bir makinedir.",
               "style": "thought"
             }
           ]
@@ -585,6 +724,203 @@
             {
               "speaker": "narrator",
               "text": "Cümlem yoktu. Yağmur yeniden başlamıştı; camdan, bir çocuğun sorusuna benzeyen bir ses geliyordu."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — AYNI GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Büroya döndüğümde ışıklar sönmüştü; yalnızca Leyla’nın odasında masa lambası yanıyordu. Kapısı aralıktı. İçeri girmedim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kendi masama oturdum, gerekçeli kararın gelmesini beklemeden istinaf dilekçesinin ilk satırını yazdım: “Yerel mahkeme kararına karşı süresi içinde…”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sonra durdum. Bir istinaf dilekçesi, bir dosyada olmayanı oraya koyamaz; yalnızca olanın yanlış okunduğunu söyler. Benim dosyamda ne vardı? Tutanağın örneğini masaya serdim, satır satır okudum."
+            },
+            {
+              "speaker": "leyla",
+              "text": "İstinaf bir ikinci şans değildir Deniz. Bölge adliye mahkemesi delil toplayabilir, tanık dinleyebilir; ama ona neyi neden toplaması gerektiğini senin dilekçen söyler. Boş bir dilekçe, boş bir duruşma getirir."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kapının eşiğinde durmuştu; paltosu kolunda. Ne zaman geldiğini duymamıştım."
+            },
+            {
+              "speaker": "leyla",
+              "text": "İki haftan var. Gerekçeli karar gelince süre işler. O iki haftada şunu yazacaksın: hangi delil eksik toplandı, hangi talep reddedildi, hangi tanık dinlenmedi. Duygularını değil, eksikleri."
+            },
+            { "speaker": "player", "text": "Eksikleri biliyorum." },
+            {
+              "speaker": "leyla",
+              "text": "Biliyorsan yaz. Bilmek yetmez; tutanakta olmayan bilgi, avukatın kafasında kalmış bir umuttur. Bunu bugün öğrendin, pahalı bir dersti. Bedelini sen değil, o adam ödüyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gitti. Merdivenlerde ayak sesleri, sonra sokak kapısı. Pencerenin camında yağmur, camın arkasında Tophane’nin saat kulesi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "BURSA 7. ASLİYE CEZA · KALEM — ON GÜN SONRA",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gerekçeli karar on gün sonra UYAP’a düştü. On iki sayfa. Kalemde çıktısını aldım; kâtip zımbalayıp uzattı, kahvesine döndü."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gerekçeyi kalemin önündeki tahta sırada okudum. Hâkim dürüst yazmıştı: dosyada ne varsa onu tartmış, olmayanı aramamıştı. Arama görevi onun değil, benimdi."
+            },
+            {
+              "speaker": "player",
+              "text": "Her paragrafın sonunda aynı cümlenin bir başka hâli duruyordu: “aksi yönde bir delil sunulmamıştır”, “savunma bu yönde bir talepte bulunmamıştır”. Bir gerekçe, bazen bir avukatın karnesidir.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kâğıtları çantama koydum, merdivenlerden indim. Avluda simitçi aynı yerdeydi; naylonun altında aynı tabla. Bir dava bitmemişti; yalnızca bir mahkeme onunla işini bitirmişti."
+            },
+            {
+              "speaker": "player",
+              "text": "İstinaf dilekçesine gerekçenin her “sunulmamıştır” cümlesini tek tek yazacaktım; yanına da neden sunulması gerektiğini. Geç kalmış bir avukatın yapabileceği tek dürüst şey buydu.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "not": { "hasEvidence": "clue_cihaz3" } },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Dilekçenin ikinci sayfasına geldiğimde kalemim durdu. Polisin raporunu yeniden açtım; bu kez sonuç cümlesini değil, ekleri. Ek-3. Kısaltılmış bir sütun başlığı: “GND. C.” Hücrelerde “bkz. ham veri”.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "On iki gün bu dosyayla yaşamıştım ve bu sütunu bir kez bile açmamıştım. Bir istinaf dilekçesine yeni bir teori yazılabilir; ama o teoriyi ilk derecede bir kez bile sormadıysan, kimse sana neden şimdi sorduğunu affetmez.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "clue_cihaz3" }, { "not": { "ref": "kaynak_suphesi" } }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Dilekçenin ikinci sayfasına “cihaz 3” yazdım. Sonra baktım: bu kelime tutanağın hiçbir satırında yoktu. Gördüğüm bir sütunu salonda bir kez bile sordurmamıştım.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Bölge adliye mahkemesi bana “bunu neden ilk derecede söylemediniz” diye soracaktı; cevabım bir avukatın değil, bir öğrencinin cevabı olacaktı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "ref": "kaynak_suphesi" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Dilekçenin ikinci sayfasına tutanaktan bir satır taşıdım: mesajlar telefondan değil, başka bir cihazdan. Bu satır oradaydı, ben koydurmuştum.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Ama hemen altında bilirkişinin ya da hâkimin sorusu duruyordu: o cihazın başında kim vardı? O sorunun cevabı bir hattın, bir zimmetin, bir saatin içindeydi; hiçbirini salona getirmemiştim.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Gece yarısına doğru Tarık aradı. Açtım. Bir süre konuşmadı; arkada bir televizyon, kısık sesle bir haber bülteni."
+            },
+            {
+              "speaker": "tarik",
+              "text": "Ece uyudu. Ona “babanın işi uzadı” dedim. Yalan değil, değil mi? İş uzadı."
+            },
+            {
+              "speaker": "player",
+              "text": "Uzadı Tarık Bey. Bitmedi. İstinafa gideceğiz; bu kez neyi neden istediğimizi kâğıtla anlatacağız."
+            },
+            {
+              "speaker": "tarik",
+              "text": "Siz bana bir kere “kâğıtlar konuşur” demiştiniz. Benim kâğıtlarım neden konuşmadı?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Cevap vermedim. Doğru cevap, “ben onlara söz vermedim” idi; bunu bir müvekkile gece yarısı söyleyemezsin. Sabah söylersin, bir dilekçenin içinde, bir avukatın imzasıyla."
+            },
+            {
+              "speaker": "tarik",
+              "text": "İyi geceler avukat hanım. Siz de uyuyun biraz. Ben uyuyamıyorum; biri uyusun bari."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Saat ikiyi geçerken dilekçenin taslağını bitirdim. Dört sayfa. Okudum. Bir daha okudum. İyi yazılmış bir metindi; ama iyi yazılmış metinler, bu davada bana en çok güvenmemeyi öğretmişti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Taslağı kaydettim, bilgisayarı kapattım. Ekran karardı. Bir an, karanlık camda kendi yüzümü gördüm; bir an da o üç gecenin, saat ikiyi geçerken, bir başka karanlık ekranda kimin yüzünü yansıttığını düşündüm."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir mesajın altında bir isim yazar. Mesajı kimin yazdığını yazmaz. Bunu bugün bir mahkeme salonunda, bir babanın yüzünde öğrendim.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "HÜDAVENDİGAR — İKİ GÜN SONRA", "style": "card", "bg": "sokak_yagmur" },
+            {
+              "speaker": "narrator",
+              "text": "Tarık’ın apartmanının önünde durdum. Yukarı çıkmadım. Üçüncü kattaki pencerede bir çocuk masası, masada boya kalemleri; perdenin arkasında iki gölge."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonum titredi. Tarık’tan bir mesaj: “ece soruyor avukat teyze ne zaman gelecek”. Küçük harf. Nokta yok."
+            },
+            {
+              "speaker": "player",
+              "text": "Cevap yazdım, sildim, yeniden yazdım. Sonunda tek bir cümle gönderdim: “İstinaf dilekçesini verdim; bitmedi.”",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yağmur dinmemişti. Kaldırımda su birikintileri sokak lambalarını titreterek yansıtıyordu. Bir yerde, bir ekran hâlâ yanıyor olabilirdi; bu kez onu bulmak için iki haftam vardı, ve ilk kez neyi arayacağımı biliyordum."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "pisman_savunma" },
+          "lines": [
+            { "speaker": "narrator", "text": "Adliyenin önünde Tarık beni bekledi. Teşekkür etmedi." },
+            {
+              "speaker": "tarik",
+              "text": "Salonda benim adıma “pişman” dediniz. Hüküm ne olursa olsun, o kelime tutanakta duruyor; benim ağzımdan değil, avukatımın ağzından."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Müvekkilin “yapmadım” dediği yerde onun adına pişmanlık söyleyemezsin Deniz. Bu bir taktik değil, bir meslek ihlali. Baroya bir yazı gelirse şaşırma."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "dayanaksiz_isim" },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Esas savunmada “gerçek fail ortada” dedin, ama zinciri tamamlamadan. Hâkim bunu duymazdan geldi; sen geldin diye değil, kâğıtlar konuştuğu için."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir ismi salonda kâğıtsız anarsan, o isim bir gün sana dava olarak döner. Bir dahakine önce zincir, sonra cümle."
             }
           ]
         },

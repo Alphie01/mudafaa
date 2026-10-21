@@ -738,7 +738,7 @@ export const hearing1: CasePart = {
           next: '$stay',
         }),
         option('T1_ISP', '85.105.44.17’nin üç gecedeki abonesinin sağlayıcıdan sorulması', {
-          visibleWhen: all(has('clue_ip_ayni'), has('clue_ofis_hat'), flag('kilit_mahkemede'), flag('hesap_sunuldu')),
+          visibleWhen: all(has('clue_ip_ayni'), has('clue_ofis_hat'), flag('kilit_mahkemede'), flag('contra_s3')),
           cost: [{ var: 'slots2', amount: 1 }],
           score: { USUL_BILGISI: 60 },
           effects: [raise('isp_istendi')],
@@ -753,7 +753,7 @@ export const hearing1: CasePart = {
         }),
         option('T1_ISP_GENEL', 'Hesaba bağlanan bütün IP adreslerinin araştırılması', {
           visibleWhen: {
-            not: all(has('clue_ip_ayni'), has('clue_ofis_hat'), flag('kilit_mahkemede'), flag('hesap_sunuldu')),
+            not: all(has('clue_ip_ayni'), has('clue_ofis_hat'), flag('kilit_mahkemede'), flag('contra_s3')),
           },
           cost: [{ var: 'slots2', amount: 1 }],
           neutral:
@@ -853,6 +853,8 @@ export const hearing1: CasePart = {
       ...C3,
       title: 'Ara karar',
       lines: B(`
+        > Hâkim kalemini bıraktı, önündeki notlara bir kez daha baktı. Salonda klavye sesi kesildi; zabıt kâtibi ellerini klavyenin üstünde bekletiyordu.
+        > Tarık yanımda nefesini tutmuştu. Arka sırada Melis paltosunu dizine çekti. Savcı dosyasını kapattı; bir celsenin sonu, bir davanın ortasıdır.
         feride: Ara karar. Tarafların talepleri değerlendirildi.
       `),
     }),
@@ -910,7 +912,7 @@ export const hearing1: CasePart = {
         P: O ekranın kime ait olduğunu bulacağız. Siz değilseniz, biri. Kâğıtlar kimi gösteriyorsa, onu.
         ~ Zaman ve bir soru. Ama cevabı ben koymayacağım; kâğıtlar koyacak. İsimleri insanlar değil, kâğıtlar söylemeli. |fx=fade
       `),
-      choices: [cont('H107_DEVAM', 'Adliyeden çık', 'ARA_GIRIS_1', { role: 'PRIMARY' })],
+      choices: [cont('H107_DEVAM', 'Adliyeden çık', 'ARA_GIRIS_0', { role: 'PRIMARY' })],
     }),
   ],
   discoveryPaths: [...h1Delivery.discoveryPaths],

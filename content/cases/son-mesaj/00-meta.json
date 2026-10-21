@@ -138,43 +138,85 @@
     },
     {
       "id": "hat_kayit",
-      "label": "Tutanakta: tehdit oturumlarının hattı sanığın değil, tanığın firmasının",
-      "when": { "all": [{ "flag": "bilirkisi_hat" }, { "flag": "contra_o3" }] }
+      "label": "Tutanakta: tehdit oturumlarının hattı ve cihazı sanığın değil, tanığın (bilirkişi daraltması ya da el konulan dizüstü, tanığa sunulan sağlayıcı yanıtı)",
+      "when": { "all": [{ "any": [{ "flag": "bilirkisi_hat" }, { "flag": "laptop_imaj" }] }, { "flag": "contra_o3" }] }
+    },
+    {
+      "id": "el_daraldi",
+      "label": "Tutanakta: cihaz 3’ü sanık dışında birinin kullandığı (hat, tanık, el konulan dizüstü ya da 9 Kasım mazereti)",
+      "when": {
+        "any": [
+          { "flag": "bilirkisi_hat" },
+          { "flag": "contra_o3" },
+          { "all": [{ "flag": "laptop_imaj" }, { "flag": "contra_o2" }] },
+          { "ref": "alibi_kayit" }
+        ]
+      }
+    },
+    {
+      "id": "beraat_kaydi",
+      "label": "Tutanak beraat gerektiriyor: kaynak, bilirkişi teyidi ve elin daraltılması",
+      "when": { "all": [{ "ref": "kaynak_suphesi" }, { "ref": "bilirkisi_teyit" }, { "ref": "el_daraldi" }] }
     },
     {
       "id": "ozan_dayanak",
       "label": "Eski ortak hakkında somut dayanak var: cihaz, zimmet ve hat",
       "when": {
+        "all": [{ "hasEvidence": "ded_bagli" }, { "hasEvidence": "ded_laptop_ozan" }, { "hasEvidence": "ded_ip_tekin" }]
+      }
+    },
+    {
+      "id": "inv_bos",
+      "label": "Soruşturmada yapılacak iş kalmadı",
+      "when": {
         "all": [
-          { "hasEvidence": "ded_bagli" },
-          { "any": [{ "hasEvidence": "ded_laptop_ozan" }, { "hasEvidence": "clue_envanter" }] },
-          { "any": [{ "hasEvidence": "ev_isp" }, { "hasEvidence": "ded_ip_tekin" }] }
+          { "chosen": "H_OFIS" },
+          { "chosen": "H_GORUS2" },
+          { "chosen": "H_HAYRI" },
+          { "chosen": "H_SINAN" },
+          { "chosen": "H_KUBRA" },
+          { "chosen": "H_OZAN" },
+          { "chosen": "H_TUTANAK" },
+          { "chosen": "H_IMAJ" },
+          { "chosen": "H_DIL" },
+          { "any": [{ "not": { "flag": "fact_hastane" } }, { "chosen": "H_HASTANE" }] },
+          { "any": [{ "not": { "visited": "INV_ARAMA_HASTANE" } }, { "chosen": "H_GULAY" }] },
+          { "any": [{ "not": { "flag": "fact_hesap_onay" } }, { "flag": "hesap_istendi" }] },
+          { "any": [{ "not": { "hasEvidence": "ev_hesap" } }, { "chosen": "H_HESAP" }] },
+          { "any": [{ "not": { "flag": "fact_onam_saat" } }, { "chosen": "H_HKAYIT" }] }
         ]
       }
     },
     {
-      "id": "ara_ilerleme",
-      "label": "Arada en az üç iş tamamlandı",
+      "id": "ara_bos",
+      "label": "Arada yapılacak iş kalmadı",
       "when": {
-        "cmp": [
+        "all": [
+          { "chosen": "A_NURTEN" },
+          { "chosen": "A_EV" },
           {
-            "add": [
-              { "if": { "when": { "visited": "ARA_DEMIRBAS" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "visited": "ARA_ARAMA_EV" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "visited": "ARA_VAKIF" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "visited": "ARA_MELIS" }, "then": 1, "else": 0 } },
-              { "if": { "when": { "visited": "ARA_RAPOR" }, "then": 1, "else": 0 } },
-              {
-                "if": {
-                  "when": { "any": [{ "flag": "suc_duyurusu" }, { "flag": "suc_mechul" }] },
-                  "then": 1,
-                  "else": 0
-                }
-              }
+            "any": [
+              { "chosen": "A_MELIS" },
+              { "not": { "any": [{ "flag": "fact_sinan_kapi" }, { "flag": "contra_s3" }] } },
+              { "flag": "melis_dogrudan" }
             ]
           },
-          ">=",
-          3
+          { "any": [{ "chosen": "A_HESAP" }, { "not": { "hasEvidence": "ev_hesap" } }, { "visited": "INV_HESAP" }] },
+          {
+            "any": [
+              { "chosen": "A_RAPOR" },
+              { "not": { "flag": "bilirkisi_istendi" } },
+              { "cmp": [{ "var": "ara_day" }, "<", 2] }
+            ]
+          },
+          { "any": [{ "chosen": "A_HRESMI" }, { "not": { "flag": "hastane_istendi" } }] },
+          {
+            "any": [
+              { "chosen": "A_VAKIF" },
+              { "not": { "any": [{ "visited": "INV_T_HAYRI" }, { "flag": "fact_vakif" }] } }
+            ]
+          },
+          { "any": [{ "not": { "hasEvidence": "ded_bagli" } }, { "flag": "suc_duyurusu" }, { "flag": "suc_mechul" }] }
         ]
       }
     }
@@ -422,6 +464,7 @@
     { "id": "legal_hits", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
     { "id": "ethics", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
     { "id": "leyla_gun", "type": "int", "initial": 0, "min": 0, "max": 9, "visibility": "HIDDEN" },
+    { "id": "sordu", "type": "int", "initial": 0, "min": 0, "max": 1, "visibility": "HIDDEN" },
     { "id": "leyla_ara", "type": "int", "initial": 0, "min": 0, "max": 9, "visibility": "HIDDEN" },
     {
       "id": "aksam1",
@@ -441,6 +484,8 @@
     { "id": "fact_hayri_saat", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_sinan_kapi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_melis_sn", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_ozan_laptop", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_vakif", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "hesap_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "hastane_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "bilirkisi_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
@@ -483,6 +528,8 @@
     { "id": "hesap_sunuldu", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "gulay_hazir", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_onam_saat", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "nb_emanet", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "nb_teslim", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "ek3_c5", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "ek3_c6", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "ek3_c7", "type": "bool", "initial": false, "visibility": "HIDDEN" },
@@ -519,6 +566,8 @@
     { "id": "supheden", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "terditli", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "iftira_savunma", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "pisman_savunma", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "dayanaksiz_isim", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "cokus", "type": "bool", "initial": false, "visibility": "HIDDEN" }
   ]
 }

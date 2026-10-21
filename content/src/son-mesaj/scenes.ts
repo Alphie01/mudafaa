@@ -1,4 +1,4 @@
-import { rect, sceneAsset, sceneDef, sceneObject } from '../../../tools/content/src/kit/index.js';
+import { rect, sceneAsset, sceneDef, sceneObject as baseObject, set } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 
 // 30-scenes: üç aranabilir sahne. Görseller scenes/<ad>.html'den `npm run case:scenes -- son-mesaj` ile üretilir.
@@ -23,6 +23,10 @@ export const OB_TABLET = rect(150, 172, 64, 40);
 export const OB_CIZIM = rect(160, 48, 72, 62);
 
 const miss = { score: { ARASTIRMA: -10 } } as const;
+
+/** Her nesne dokunuşu bu ziyaretin sayacını kaldırır (aramadan dokunmadan çıkılmaz; bkz. helpers.askFirst). */
+const sceneObject: typeof baseObject = (id, name, shapes, spec) =>
+  baseObject(id, name, shapes, { ...spec, effects: [...(spec.effects ?? []), set('sordu', 1)] });
 
 export const scenes: CasePart = {
   scenes: [
@@ -89,6 +93,7 @@ export const scenes: CasePart = {
           short: 'Kamera',
         }),
         sceneObject('ob_onam', 'Onam formları', OB_ONAM, {
+          discovers: 'clue_onam_pano',
           score: { ARASTIRMA: 20 },
           text: 'Duvarda boş onam formları. Her formun altında iki satır: “Tarih/saat” ve “Saati yazan sağlık personeli”. Burada saatler elle, imzayla yazılıyor.',
           short: 'Onam panosu',

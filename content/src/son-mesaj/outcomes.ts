@@ -11,6 +11,25 @@ const sozHatirlat = W(
   `~ “Beraat ettiririz” demiştim. Bir çocuk, babasının ağzından o sözü duymuştu. Sözlerin bir ağırlığı var; bugün onu taşıdım.`,
 );
 
+// Esas savunmadaki hatalar hükmü değiştirmez (hâkim savunmanın talebiyle bağlı değildir), ama bedeli kalır.
+const kotuKapanis = [
+  W(
+    flag('pisman_savunma'),
+    `
+    > Adliyenin önünde Tarık beni bekledi. Teşekkür etmedi.
+    tarik: Salonda benim adıma “pişman” dediniz. Hüküm ne olursa olsun, o kelime tutanakta duruyor; benim ağzımdan değil, avukatımın ağzından.
+    leyla: Müvekkilin “yapmadım” dediği yerde onun adına pişmanlık söyleyemezsin Deniz. Bu bir taktik değil, bir meslek ihlali. Baroya bir yazı gelirse şaşırma.
+  `,
+  ),
+  W(
+    flag('dayanaksiz_isim'),
+    `
+    leyla: Esas savunmada “gerçek fail ortada” dedin, ama zinciri tamamlamadan. Hâkim bunu duymazdan geldi; sen geldin diye değil, kâğıtlar konuştuğu için.
+    leyla: Bir ismi salonda kâğıtsız anarsan, o isim bir gün sana dava olarak döner. Bir dahakine önce zincir, sonra cümle.
+  `,
+  ),
+];
+
 export const outcomes: CasePart = {
   outcomes: [
     outcome('ETIK', {
@@ -68,8 +87,8 @@ export const outcomes: CasePart = {
         ref('kaynak_suphesi'),
         ref('bilirkisi_teyit'),
         ref('alibi_kayit'),
+        // Hat ve cihaz tanığa bağlandı: bilirkişi daraltması ya da el konulan dizüstü, tanığa sunulan sağlayıcı yanıtı.
         ref('hat_kayit'),
-        any(flag('contra_o2'), flag('laptop_imaj')),
       ),
       stamp: 'BERAAT',
       stampTone: 'green',
@@ -136,6 +155,7 @@ export const outcomes: CasePart = {
             { speaker: 'player', text: 'Ekran karardı. Bu kez kimse yazmıyordu.', style: 'thought' },
           ],
         },
+        ...kotuKapanis,
         sozHatirlat,
       ],
     }),
@@ -144,11 +164,9 @@ export const outcomes: CasePart = {
       priority: 3,
       when: all(
         not(flag('cokus')),
-        ref('kaynak_suphesi'),
-        ref('bilirkisi_teyit'),
-        // Bilirkişinin “teknik olarak sanığın kendisi de olabilir” cümlesi üç gece için delille daraltılmış olmalı:
-        // cihaz 3 sanığın ev hattından değil, başka bir firmanın iş hattından bağlanmış (tek gecelik mazeret yetmez).
-        flag('bilirkisi_hat'),
+        // Kaynak tutanakta, bilirkişi teyit etti ve cihaz 3’ü sanık dışında birinin kullandığı tutanakta (hat ve zimmet,
+        // tanığa sunulan sağlayıcı yanıtı, el konulan dizüstü ya da cihaz 3’ün sanık acil servisteyken kullanılması).
+        ref('beraat_kaydi'),
       ),
       stamp: 'BERAAT',
       stampTone: 'green',
@@ -166,8 +184,20 @@ export const outcomes: CasePart = {
           any(flag('bilirkisi_kilit'), flag('kilit_mahkemede')),
         ),
         because(
-          'Bilirkişi, cihaz 3’ün o gecelerde sanığın ev hattından değil, tanığın firmasına ait bir iş hattından bağlandığını kabul etmiştir.',
+          'Bilirkişi, cihaz 3’ün o gecelerde sanığın ev hattından değil, tanığın firmasına ait bir iş hattından bağlandığını, cihazın zimmetinin de sanıkta olmadığını kabul etmiştir.',
           flag('bilirkisi_hat'),
+        ),
+        because(
+          'Sağlayıcının mahkemeye yanıtına göre tehdit oturumlarının adresi tanık Ozan Tekin’in firmasının iş hattıdır; tanık bu konudaki sorulara cevap vermemiştir.',
+          flag('contra_o3'),
+        ),
+        because(
+          'Eski ortağın işyerinde, mesajlaşma uygulaması açık hâlde bulunan OFIS-LAPTOP-07 el konularak imajı alınmıştır.',
+          flag('laptop_imaj'),
+        ),
+        because(
+          'Üç mesaj da aynı cihazdan gönderildiğinden ve bu cihaz 9 Kasım gecesi sanık acil servisteyken kullanıldığından, cihazı sanığın kullandığı kabul edilememiştir.',
+          all(ref('alibi_kayit'), not(flag('bilirkisi_hat')), not(flag('contra_o3')), not(flag('laptop_imaj'))),
         ),
         because(
           'Hemşire Gülay Tunç, telefonun gece boyunca kilitli ve şarjda durduğunu, onam formunun saatini kendisinin yazdığını anlatmış; tanık Hayri Sezer’in telefonundaki bildirim saati bu kayıtlarla örtüşmüştür.',
@@ -233,6 +263,7 @@ export const outcomes: CasePart = {
           > Ekranı açtı. Bir süre baktı. Sonra kızına yazdı; küçük harfle, noktasız: “bugün erken alıyorum seni”. Gönder tuşuna basmadan önce bana gösterdi, sanki bir onay bekliyormuş gibi.
           ~ Bir mesajın altında bir isim yazar. Mesajı kimin yazdığını yazmaz. Ama bu mesajı kimin yazdığını, ben de, o da, bir çocuk da biliyor.
         `)[0]!,
+        ...kotuKapanis,
         sozHatirlat,
       ],
     }),
@@ -243,6 +274,8 @@ export const outcomes: CasePart = {
         not(flag('cokus')),
         // 9 Kasım mazereti tutanakta: bilirkişi kilidi, bağımsız saat (Hayri'nin telefonu) ve saati yazan hemşire.
         ref('alibi_kayit'),
+        // Mesajların kaynağı tutanakta tartışılmadı (tartışıldıysa tek cihaz ve mazeret birlikte BERAAT_E’dir).
+        not(ref('kaynak_suphesi')),
       ),
       stamp: 'KISMEN',
       stampTone: 'amber',
@@ -264,7 +297,7 @@ export const outcomes: CasePart = {
           'Bu gece yönünden bilirkişinin kilit bulgusu, saati yazan hemşirenin beyanı ve tanık Hayri Sezer’in telefonundaki bildirim saati birbirini doğrulamış; savunmanın sunduğu hastane kaydı, onu yazan tanık tarafından tanınmıştır.',
         ),
         because(
-          '6 ve 12 Kasım geceleri için mesajların başka bir cihazdan çıktığı ileri sürülmüş, ancak bilirkişinin “sanığın kendisi de olabilir” değerlendirmesi o geceler için delille daraltılamamış; o cihazı sanık dışında birinin kullandığı somut olarak gösterilememiştir.',
+          '6 ve 12 Kasım geceleri için ise mesajların sanığın hesabından gönderildiği tartışmasızdır; savunma, bu mesajların sanığın telefonundan ya da sanığın elinden çıkmadığına dair bir delil ortaya koymamış, mesajların kaynağına itiraz etmemiştir.',
         ),
       ],
       legalBasis: 'TCK 107/2, 43/1, 62; TCK 134/2 (beraat); CMK 231',
@@ -311,13 +344,14 @@ export const outcomes: CasePart = {
           tarik: Ece’yi arayacağım. Ne diyeceğim? “Babanın bir gecesi temize çıktı, iki gecesi hâlâ şüpheli” mi?
           > Telefonu açtı, kapattı, yeniden açtı. Sonunda kısa bir mesaj yazdı; küçük harfle, noktasız: “bugün erken alıyorum seni”. Gösterdi bana. Bir mimarın, bir babanın, bir sanığın bütün cümlesi buydu.
           ~ Onun dili bu. Tehditlerin dili değil. Bunu üç haftadır biliyordum; mahkeme ise yalnızca bir gecesini bildi.
-          ~ Bir gece kâğıtla kanıtlandı: kilitli bir ekran, bir bant, bir imza, bir yaşlı adamın telefonundaki saat. Öbür iki gece için elimde bir sütun vardı; o sütunun ucundaki makineyi, hattı, eli salona taşıyamadım.
+          ~ Bir gece kâğıtla kanıtlandı: kilitli bir ekran, bir bant, bir imza, bir yaşlı adamın telefonundaki saat. Öbür iki gece için mesajların nereden çıktığını hiç sordurmadım; kimse de sormadı.
           # ARSLAN HUKUK — GECE |bg=buro_gece
           leyla: Geri bırakma kararına itiraz edeceğiz; savcı beraati istinafa taşırsa orada da savunuruz. Ama itiraz, yeni bir delil değildir Deniz. Yeni delil, o cihaz kimin elindeyse oradadır; o da savcılığın işi.
           leyla: Bir dosyayı kapatırken kendine bir şey sor: hangi kâğıdı okumadım? Cevap çoğu zaman bir ekin, bir sütunun, bir dökümün içindedir.
           leyla: Bugün bir gece kurtardın; çünkü o geceyi kâğıtla anlatan herkesi salona getirdin. Bilirkişiyi, Hayri Bey’i, Gülay Hanım’ı. Öbür geceler için de aynısını yapacaktın.
           > Dosyayı kapatmadım. Kapatmadığım dosyalar, uykumda açılır. O gece de açıldı: bir tablo, en sağda bir rakam, “3”.
         `)[0]!,
+        ...kotuKapanis,
         sozHatirlat,
       ],
     }),
@@ -333,7 +367,20 @@ export const outcomes: CasePart = {
         'Sanığın özel hayatın gizliliğini ihlalden (TCK 134/2) 2 yıl 6 ay, şantajdan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, TCK 53’ün uygulanmasına; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).',
       reasoning: [
         because(
-          'Mesajlar ve iletilen ses kaydı sanığa ait hesapta, sanığın telefonunda tespit edilmiş; aksi yönde yeterli delil ortaya konmamıştır.',
+          'Mesajlar ve iletilen ses kaydı sanığa ait hesapta, sanığın telefonunda tespit edilmiş; savunma, mesajların başka bir cihazdan gönderildiğine dair bir delil ortaya koymamıştır.',
+          not(ref('kaynak_suphesi')),
+        ),
+        because(
+          'Savunma, mesajların hesaba bağlı başka bir cihazdan gönderildiğini ileri sürmüş; ancak bu iddia bilirkişi incelemesiyle doğrulanmamıştır.',
+          all(ref('kaynak_suphesi'), not(ref('bilirkisi_teyit'))),
+        ),
+        because(
+          'Mesajların hesaba bağlı, sanığın işyerine ait bir masaüstü oturumundan gönderildiği anlaşılmış ise de, bilirkişi bu oturumu kullananın sanık olabileceğini dışlamamış; oturumu sanık dışında birinin kullandığını gösteren bir delil (hat, cihazın zimmeti, tanık) tutanağa geçmemiştir.',
+          all(ref('kaynak_suphesi'), ref('bilirkisi_teyit')),
+        ),
+        because(
+          '9 Kasım gecesine ilişkin savunma, saati yazan tanık, bağımsız saat kaydı ve bilirkişi incelemesiyle birlikte doğrulanmamıştır.',
+          all(any(flag('kilit_mahkemede'), flag('bilirkisi_kilit'), flag('gulay_teyit')), not(ref('alibi_kayit'))),
         ),
         because(
           'Savunmanın duruşmadaki inandırıcılığı yitirilmiş; heyet iddianamedeki anlatımı esas almıştır.',
@@ -347,6 +394,10 @@ export const outcomes: CasePart = {
         B(`
           # TÜRK MİLLETİ ADINA |bg=durusma_salonu
           > Hâkim cezayı okudu. Rakamlar salonun içinde soğuk soğuk yankılandı. Tarık ayağa kalkmıştı; oturmayı unuttu, mübaşir koluna girdi.
+          > Hâkim hükmün sonunu okudu: istinaf yolu açık, süre iki hafta. Kâtip son satırı yazdı, yazıcı bir kez öttü. Bir hayatın yönü, bir yazıcının sesiyle değişti.
+          > Melis katılan sırasından kalktı. Tarık’a bakmadı; bana da bakmadı. Sinan dosyasını kapattı, bir an durdu, bir şey söyleyecek gibi oldu; söylemedi.
+          > Savcı cübbesini kolunun üstüne aldı. Kapıya yürürken başını iki yana salladı; kime, neye, bilmiyorum. Belki bir dosyaya, belki bir mesleğe.
+          ~ Bir salon boşalırken kimse acele etmez. İnsanlar ağır ağır çıkar; sanki bir şeyi unutmuşlar da hatırlamaya çalışıyorlar gibi. Ben de ağır ağır çıktım. Unuttuğum şeyi biliyordum.
         `)[0]!,
         W(
           flag('cokus'),
@@ -364,13 +415,73 @@ export const outcomes: CasePart = {
           `~ Bir sütun vardı. Raporun ekinde, kimsenin bakmadığı son sütun. Gönderen cihaz. Ben de bakmadım. Bir insanın hayatı o sütundaydı.`,
         ),
         W(
-          has('clue_cihaz3'),
+          all(has('clue_cihaz3'), not(ref('kaynak_suphesi'))),
           `~ Sütunu görmüştüm. Cihaz 3. Ama gördüğümü salona taşıyamadım; bir sütun, okunmadıkça yalnızca bir sütundur.`,
+        ),
+        W(
+          ref('kaynak_suphesi'),
+          `~ Sütunu salona taşıdım. Cihaz 3, bir masaüstü oturumu. Ama o oturumun başındaki eli gösteren kâğıdı getiremedim; bir sütun, eli olmadan yalnızca bir makinedir.`,
         ),
         B(`
           tarik/uzgun: Ece’ye ne diyeceğim avukat hanım? Bana bir cümle verin. Bir tek cümle.
           > Cümlem yoktu. Yağmur yeniden başlamıştı; camdan, bir çocuğun sorusuna benzeyen bir ses geliyordu.
         `)[0]!,
+        B(`
+          # ARSLAN HUKUK — AYNI GECE |bg=buro_gece
+          > Büroya döndüğümde ışıklar sönmüştü; yalnızca Leyla’nın odasında masa lambası yanıyordu. Kapısı aralıktı. İçeri girmedim.
+          > Kendi masama oturdum, gerekçeli kararın gelmesini beklemeden istinaf dilekçesinin ilk satırını yazdım: “Yerel mahkeme kararına karşı süresi içinde…”
+          > Sonra durdum. Bir istinaf dilekçesi, bir dosyada olmayanı oraya koyamaz; yalnızca olanın yanlış okunduğunu söyler. Benim dosyamda ne vardı? Tutanağın örneğini masaya serdim, satır satır okudum.
+          leyla: İstinaf bir ikinci şans değildir Deniz. Bölge adliye mahkemesi delil toplayabilir, tanık dinleyebilir; ama ona neyi neden toplaması gerektiğini senin dilekçen söyler. Boş bir dilekçe, boş bir duruşma getirir.
+          > Kapının eşiğinde durmuştu; paltosu kolunda. Ne zaman geldiğini duymamıştım.
+          leyla: İki haftan var. Gerekçeli karar gelince süre işler. O iki haftada şunu yazacaksın: hangi delil eksik toplandı, hangi talep reddedildi, hangi tanık dinlenmedi. Duygularını değil, eksikleri.
+          P: Eksikleri biliyorum.
+          leyla: Biliyorsan yaz. Bilmek yetmez; tutanakta olmayan bilgi, avukatın kafasında kalmış bir umuttur. Bunu bugün öğrendin, pahalı bir dersti. Bedelini sen değil, o adam ödüyor.
+          > Gitti. Merdivenlerde ayak sesleri, sonra sokak kapısı. Pencerenin camında yağmur, camın arkasında Tophane’nin saat kulesi.
+          # BURSA 7. ASLİYE CEZA · KALEM — ON GÜN SONRA |bg=adliye
+          > Gerekçeli karar on gün sonra UYAP’a düştü. On iki sayfa. Kalemde çıktısını aldım; kâtip zımbalayıp uzattı, kahvesine döndü.
+          > Gerekçeyi kalemin önündeki tahta sırada okudum. Hâkim dürüst yazmıştı: dosyada ne varsa onu tartmış, olmayanı aramamıştı. Arama görevi onun değil, benimdi.
+          ~ Her paragrafın sonunda aynı cümlenin bir başka hâli duruyordu: “aksi yönde bir delil sunulmamıştır”, “savunma bu yönde bir talepte bulunmamıştır”. Bir gerekçe, bazen bir avukatın karnesidir.
+          > Kâğıtları çantama koydum, merdivenlerden indim. Avluda simitçi aynı yerdeydi; naylonun altında aynı tabla. Bir dava bitmemişti; yalnızca bir mahkeme onunla işini bitirmişti.
+          ~ İstinaf dilekçesine gerekçenin her “sunulmamıştır” cümlesini tek tek yazacaktım; yanına da neden sunulması gerektiğini. Geç kalmış bir avukatın yapabileceği tek dürüst şey buydu.
+        `)[0]!,
+        W(
+          not(has('clue_cihaz3')),
+          `
+          ~ Dilekçenin ikinci sayfasına geldiğimde kalemim durdu. Polisin raporunu yeniden açtım; bu kez sonuç cümlesini değil, ekleri. Ek-3. Kısaltılmış bir sütun başlığı: “GND. C.” Hücrelerde “bkz. ham veri”.
+          ~ On iki gün bu dosyayla yaşamıştım ve bu sütunu bir kez bile açmamıştım. Bir istinaf dilekçesine yeni bir teori yazılabilir; ama o teoriyi ilk derecede bir kez bile sormadıysan, kimse sana neden şimdi sorduğunu affetmez.
+        `,
+        ),
+        W(
+          all(has('clue_cihaz3'), not(ref('kaynak_suphesi'))),
+          `
+          ~ Dilekçenin ikinci sayfasına “cihaz 3” yazdım. Sonra baktım: bu kelime tutanağın hiçbir satırında yoktu. Gördüğüm bir sütunu salonda bir kez bile sordurmamıştım.
+          ~ Bölge adliye mahkemesi bana “bunu neden ilk derecede söylemediniz” diye soracaktı; cevabım bir avukatın değil, bir öğrencinin cevabı olacaktı.
+        `,
+        ),
+        W(
+          ref('kaynak_suphesi'),
+          `
+          ~ Dilekçenin ikinci sayfasına tutanaktan bir satır taşıdım: mesajlar telefondan değil, başka bir cihazdan. Bu satır oradaydı, ben koydurmuştum.
+          ~ Ama hemen altında bilirkişinin ya da hâkimin sorusu duruyordu: o cihazın başında kim vardı? O sorunun cevabı bir hattın, bir zimmetin, bir saatin içindeydi; hiçbirini salona getirmemiştim.
+        `,
+        ),
+        B(`
+          > Gece yarısına doğru Tarık aradı. Açtım. Bir süre konuşmadı; arkada bir televizyon, kısık sesle bir haber bülteni.
+          tarik: Ece uyudu. Ona “babanın işi uzadı” dedim. Yalan değil, değil mi? İş uzadı.
+          P: Uzadı Tarık Bey. Bitmedi. İstinafa gideceğiz; bu kez neyi neden istediğimizi kâğıtla anlatacağız.
+          tarik: Siz bana bir kere “kâğıtlar konuşur” demiştiniz. Benim kâğıtlarım neden konuşmadı?
+          > Cevap vermedim. Doğru cevap, “ben onlara söz vermedim” idi; bunu bir müvekkile gece yarısı söyleyemezsin. Sabah söylersin, bir dilekçenin içinde, bir avukatın imzasıyla.
+          tarik: İyi geceler avukat hanım. Siz de uyuyun biraz. Ben uyuyamıyorum; biri uyusun bari.
+          > Saat ikiyi geçerken dilekçenin taslağını bitirdim. Dört sayfa. Okudum. Bir daha okudum. İyi yazılmış bir metindi; ama iyi yazılmış metinler, bu davada bana en çok güvenmemeyi öğretmişti.
+          > Taslağı kaydettim, bilgisayarı kapattım. Ekran karardı. Bir an, karanlık camda kendi yüzümü gördüm; bir an da o üç gecenin, saat ikiyi geçerken, bir başka karanlık ekranda kimin yüzünü yansıttığını düşündüm.
+          ~ Bir mesajın altında bir isim yazar. Mesajı kimin yazdığını yazmaz. Bunu bugün bir mahkeme salonunda, bir babanın yüzünde öğrendim.
+          # HÜDAVENDİGAR — İKİ GÜN SONRA |bg=sokak_yagmur
+          > Tarık’ın apartmanının önünde durdum. Yukarı çıkmadım. Üçüncü kattaki pencerede bir çocuk masası, masada boya kalemleri; perdenin arkasında iki gölge.
+          > Telefonum titredi. Tarık’tan bir mesaj: “ece soruyor avukat teyze ne zaman gelecek”. Küçük harf. Nokta yok.
+          ~ Cevap yazdım, sildim, yeniden yazdım. Sonunda tek bir cümle gönderdim: “İstinaf dilekçesini verdim; bitmedi.”
+          > Yağmur dinmemişti. Kaldırımda su birikintileri sokak lambalarını titreterek yansıtıyordu. Bir yerde, bir ekran hâlâ yanıyor olabilirdi; bu kez onu bulmak için iki haftam vardı, ve ilk kez neyi arayacağımı biliyordum.
+        `)[0]!,
+        ...kotuKapanis,
         sozHatirlat,
       ],
     }),

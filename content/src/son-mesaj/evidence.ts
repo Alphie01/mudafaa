@@ -197,6 +197,15 @@ export const evidencePart: CasePart = {
       icon: 'document',
       tags: K,
     }),
+    clue('clue_onam_pano', {
+      type: 'FOTOGRAF',
+      title: 'Onam panosu',
+      shortText: 'Acil serviste her onam formunun altında “saati yazan sağlık personeli” satırı var.',
+      description:
+        'Burada saatleri hasta yakını değil, hemşire yazıyor ve imzalıyor. Formun saatini kimin yazdığını sormak gerekecek.',
+      sourceLabel: 'Acil servis',
+      icon: 'camera',
+    }),
     clue('clue_onam', {
       type: 'BELGE',
       title: 'Onam formu 02.10',
@@ -257,6 +266,15 @@ export const evidencePart: CasePart = {
       title: 'Bilirkişi raporu [Bulgu 2]',
       shortText: '9 Kasım 01.40–06.10: telefonda kilit açma ya da dokunma olayı yok.',
       description: 'Dr. Uçar’ın raporu: imajdaki cihaz günlüğü, ekranın gece boyunca kilitli kaldığını gösteriyor.',
+      sourceLabel: 'Bilirkişi raporu',
+      icon: 'document',
+    }),
+    clue('clue_rapor_sinir', {
+      type: 'ADLI_RAPOR',
+      title: 'Bilirkişi raporu [Sınır]',
+      shortText: 'Cihaz 3’ün kendisi incelenmedi; onu kullanan kişi imajdan belirlenemez.',
+      description:
+        'Dr. Uçar’ın raporunun sınır bölümü. Duruşmada “sanığın kendisi de olabilir” sorusu buradan doğacak; cevabı imajın dışındaki kâğıtlarda.',
       sourceLabel: 'Bilirkişi raporu',
       icon: 'document',
     }),

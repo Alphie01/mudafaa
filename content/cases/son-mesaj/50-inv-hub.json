@@ -275,8 +275,10 @@
           "kind": "NAVIGATE",
           "label": "Günü kapat",
           "description": "Kalan eylem puanlarını bırak",
-          "visibleWhen": { "all": [{ "cmp": [{ "var": "ap" }, ">", 0] }, { "cmp": [{ "var": "day" }, "<", 3] }] },
-          "confirm": "Bugünün kalan eylem puanları yanar. Emin misin?",
+          "visibleWhen": {
+            "all": [{ "cmp": [{ "var": "ap" }, ">", 0] }, { "cmp": [{ "var": "day" }, "<", 3] }, { "ref": "inv_bos" }]
+          },
+          "confirm": "Bugünün kalan eylem puanı yanar. Emin misin?",
           "effects": [{ "type": "VAR", "var": "ap", "op": "set", "value": 0 }],
           "next": "$stay"
         },
@@ -287,19 +289,13 @@
           "role": "PRIMARY",
           "confirm": "Soruşturma evresi biter. Emin misin?",
           "enabledWhen": {
-            "any": [
+            "all": [
               { "cmp": [{ "var": "day" }, "==", 3] },
-              {
-                "all": [
-                  { "visited": "INV_GORUSME" },
-                  { "visited": "INV_TUTANAK" },
-                  { "visited": "INV_IMAJ" },
-                  { "visited": "INV_ARAMA_OFIS" }
-                ]
-              }
+              { "any": [{ "cmp": [{ "var": "ap" }, "<=", 0] }, { "ref": "inv_bos" }] },
+              { "visited": "INV_LEYLA" }
             ]
           },
-          "lockedReason": "Dilekçe süresi 3. gün doluyor. Erken gitmek için önce müvekkili dinle, tutanağı ve raporu oku, ofisi ara.",
+          "lockedReason": "Duruşmaya daha günler var. Dilekçe son gün kapanıyor; o güne kadar her saatini dosyaya ver. Leyla dosyayı görmeden salona girme.",
           "next": "INV_GECE_1"
         }
       ]
@@ -877,6 +873,54 @@
       "choices": []
     },
     {
+      "id": "H1_KORIDOR",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #06 · SORUŞTURMA",
+      "title": "Duruşma sabahı",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "SETBAŞI KÖPRÜSÜ — 08.10", "style": "card", "bg": "sokak_sabah" },
+            {
+              "speaker": "narrator",
+              "text": "Gök Dere bulanık akıyordu; gece boyu yağan yağmur köprünün taşlarını koyulaştırmıştı. Adliyeye yürüyerek gittim. Çantamda pano yoktu, panonun fotoğrafı vardı; bir de üç sayfalık bir not."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla köprünün başında bekliyordu. Elinde iki kâğıt bardak çay; birini bana uzattı, ötekinin kapağını açmadı bile."
+            },
+            { "speaker": "leyla", "text": "Uyumadın. Belli. Bugün uykusuzluğunu değil, dosyanı göstereceksin." },
+            {
+              "speaker": "leyla",
+              "text": "İlk celse bir dava kazanmaz Deniz. Ama hâkim bugün dosyanın nasıl bir dosya olduğuna karar verir: okunacak bir dosya mı, geçilecek bir dosya mı."
+            },
+            { "speaker": "player", "text": "Okunacak bir dosya. Eklerini okuyacak." },
+            {
+              "speaker": "leyla",
+              "text": "O zaman ona eklerini göster. Polisin sonuç cümlesini değil, kendi tablosunu. Tanığa bir şey söyletmeye çalışma; tanık kendi kâğıdını okusun, gerisini hâkim görür."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de şu: talepler. Bugün salondan çıkarken elinde üç hafta olacak. O üç haftayı neyle dolduracağını bugün ağzından çıkan cümleler belirler. İstemediğin şey gelmez."
+            },
+            { "speaker": "narrator", "text": "Çayından bir yudum aldı, buruştu. Soğumuştu; yine de içti." },
+            {
+              "speaker": "player",
+              "text": "Bir duruşmanın sabahı, bir şantiyenin sabahına benzer: her şey kâğıtta hazırdır, ama zemin ilk kazmada kendini gösterir.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Adliyenin camları sabah güneşinde griydi. Merdivenlerde Tarık’ı gördüm; kravatsızdı, ama ayakkabılarını boyamıştı. Bir babanın hazırlığı."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "H1_00" }],
+      "choices": []
+    },
+    {
       "id": "INV_GECE",
       "type": "STORY",
       "chapter": "Bölüm 2 · Soruşturma",
@@ -908,7 +952,7 @@
         }
       ],
       "choices": [
-        { "id": "GECE_DEVAM", "kind": "CONTINUE", "label": "Duruşmaya git", "role": "PRIMARY", "next": "H1_00" }
+        { "id": "GECE_DEVAM", "kind": "CONTINUE", "label": "Duruşmaya git", "role": "PRIMARY", "next": "H1_KORIDOR" }
       ]
     }
   ],

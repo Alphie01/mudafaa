@@ -1668,7 +1668,7 @@
               { "hasEvidence": "clue_ip_ayni" },
               { "hasEvidence": "clue_ofis_hat" },
               { "flag": "kilit_mahkemede" },
-              { "flag": "hesap_sunuldu" }
+              { "flag": "contra_s3" }
             ]
           },
           "cost": [{ "var": "slots2", "amount": 1 }],
@@ -1712,7 +1712,7 @@
                 { "hasEvidence": "clue_ip_ayni" },
                 { "hasEvidence": "clue_ofis_hat" },
                 { "flag": "kilit_mahkemede" },
-                { "flag": "hesap_sunuldu" }
+                { "flag": "contra_s3" }
               ]
             }
           },
@@ -1889,7 +1889,21 @@
       "chapter": "Bölüm 3 · Birinci celse",
       "eyebrow": "DURUŞMA · 1. CELSE",
       "title": "Ara karar",
-      "lines": [{ "lines": [{ "speaker": "feride", "text": "Ara karar. Tarafların talepleri değerlendirildi." }] }],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Hâkim kalemini bıraktı, önündeki notlara bir kez daha baktı. Salonda klavye sesi kesildi; zabıt kâtibi ellerini klavyenin üstünde bekletiyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tarık yanımda nefesini tutmuştu. Arka sırada Melis paltosunu dizine çekti. Savcı dosyasını kapattı; bir celsenin sonu, bir davanın ortasıdır."
+            },
+            { "speaker": "feride", "text": "Ara karar. Tarafların talepleri değerlendirildi." }
+          ]
+        }
+      ],
       "routes": [{ "to": "H1_07_2" }],
       "choices": []
     },
@@ -2043,7 +2057,7 @@
         }
       ],
       "choices": [
-        { "id": "H107_DEVAM", "kind": "CONTINUE", "label": "Adliyeden çık", "role": "PRIMARY", "next": "ARA_GIRIS_1" }
+        { "id": "H107_DEVAM", "kind": "CONTINUE", "label": "Adliyeden çık", "role": "PRIMARY", "next": "ARA_GIRIS_0" }
       ],
       "stage": {
         "banner": "ADALET MÜLKÜN TEMELİDİR",

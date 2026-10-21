@@ -78,7 +78,7 @@
         {
           "id": "TK_A",
           "kind": "OPTION",
-          "label": "Ezberlenecek bir şey yok. Gördüğünüzü anlatın.",
+          "label": "Gördüğünüzü anlatın; bilmediğinize bilmiyorum deyin.",
           "responses": [
             {
               "lines": [
@@ -107,7 +107,7 @@
         {
           "id": "TK_B",
           "kind": "OPTION",
-          "label": "Motoru kullananın Barış olduğunu mutlaka söyleyin; gerisini ben hallederim.",
+          "label": "Barış’ın adını mutlaka söyleyin; gerisi bende.",
           "responses": [
             {
               "lines": [
@@ -139,7 +139,7 @@
         {
           "id": "TK_C",
           "kind": "OPTION",
-          "label": "Size bir şey söyleyemem; yemin ettiniz.",
+          "label": "Size bir şey söyleyemem; yemin ettiniz, artık tanıksınız.",
           "responses": [
             {
               "lines": [
@@ -537,7 +537,7 @@
         {
           "id": "T01_A",
           "kind": "OPTION",
-          "label": "Arka odanın kiracılarını bir yere yazar mıydınız?",
+          "label": "Kiracıları bir deftere yazar mıydınız?",
           "visibleWhen": { "hasEvidence": "clue_kira_defteri" },
           "responses": [
             {
@@ -591,7 +591,7 @@
         {
           "id": "T01_C",
           "kind": "OPTION",
-          "label": "Barış’ın uyuşturucu sattığını biliyor muydunuz?",
+          "label": "Barış satıcı mıydı, biliyor muydunuz?",
           "responses": [
             {
               "lines": [
@@ -679,7 +679,7 @@
         {
           "id": "T02_A",
           "kind": "OPTION",
-          "label": "İtiraz: soru tanığa cevabı veriyor; açık sorulsun",
+          "label": "İtiraz: soru cevabı tanığa veriyor; açık sorulsun",
           "responses": [
             {
               "lines": [
@@ -1156,6 +1156,7 @@
           "id": "PS_T3",
           "kind": "PRESENT",
           "match": { "statement": "T3", "evidence": ["ded_kask", "ded_kurye", "ev_kurye"] },
+          "enabledWhen": { "flag": "press_t3" },
           "responses": [
             {
               "lines": [
@@ -1199,6 +1200,28 @@
               "quality": "GOOD",
               "feedback": "Muhbirin kendi ifadesindeki kask ayrıntısı, ehliyeti ve motosikleti olmayan sanıkla bağdaşmıyor; kapıyı açan, arka odadaki motorlu kuryeydi.",
               "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "PS_T3_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "T3", "evidence": ["ded_kask", "ded_kurye", "ev_kurye"] },
+          "enabledWhen": { "not": { "flag": "press_t3" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tolga",
+                  "expression": "saskin",
+                  "text": "Ne diyorsunuz anlamadım. Kapıyı o açtı, o kadar."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Önce kapıyı açanı tarif ettirmeliyim. Tarifi olmayan bir yüzü hiçbir delil çürütemez.",
+                  "style": "thought"
+                }
+              ]
             }
           ]
         },
@@ -1275,6 +1298,7 @@
           "id": "PS_T4",
           "kind": "PRESENT",
           "match": { "statement": "T4", "evidence": ["ded_alibi", "ev_zrapor"] },
+          "enabledWhen": { "flag": "press_t4" },
           "responses": [
             {
               "when": { "flag": "fact_gps9" },
@@ -1333,6 +1357,24 @@
               "quality": "GOOD",
               "feedback": "Kafenin kasa kaydı sanığı satış saatinde on beş dakika uzakta, kasa başında gösteriyor: muhbirin anlatısı zaman bakımından imkânsız.",
               "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "PS_T4_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "T4", "evidence": ["ded_alibi", "ev_zrapor"] },
+          "enabledWhen": { "not": { "flag": "press_t4" } },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "tolga", "text": "Saat… on bir gibi dedim. Gibi. Yani tam bilmiyorum ki." },
+                {
+                  "speaker": "player",
+                  "text": "“Gibi.” Kâğıdı şimdi gösterirsem saatini kaydırır. Önce o saate yemin ettirmeliyim.",
+                  "style": "thought"
+                }
+              ]
             }
           ]
         },
@@ -1466,10 +1508,10 @@
         {
           "id": "T04_A",
           "kind": "OPTION",
-          "label": "Arka oda kararın dışında kaldı; kilit kırıldı",
+          "label": "Arka oda kararın kapsamı dışındaydı; kilidi keskiyle kırıp girdiler",
           "responses": [
             {
-              "when": { "any": [{ "flag": "contra_s1" }, { "flag": "contra_s3" }] },
+              "when": { "flag": "contra_s1" },
               "lines": [
                 {
                   "speaker": "player",
@@ -1485,6 +1527,24 @@
               ]
             },
             {
+              "when": { "flag": "contra_s3" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, tanık arka odanın kilidini keskiyle kestiklerini birinci celsede kabul etti."
+                },
+                {
+                  "speaker": "baskan",
+                  "text": "Kilidin kırılması tek başına kararın dışına çıkıldığını göstermez, müdafi. Kararın neyi kapsadığını tanığa okuttunuz mu?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Okutmadım. Kilidi gösterdim, sınırı göstermedim. Kapsam satırı dosyada duruyordu.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
               "lines": [
                 { "speaker": "player", "text": "Sayın Başkan, arama kapsamı aştı." },
                 { "speaker": "baskan", "text": "Bunu gösteren bir tespit dosyada yok, müdafi." }
@@ -1494,7 +1554,7 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "any": [{ "flag": "contra_s1" }, { "flag": "contra_s3" }] },
+              "when": { "flag": "contra_s1" },
               "then": [
                 { "type": "SCORE", "category": "USUL_BILGISI", "amount": 150 },
                 { "type": "VAR", "var": "key_excluded", "op": "set", "value": true },
@@ -1536,7 +1596,7 @@
         {
           "id": "T04_C",
           "kind": "OPTION",
-          "label": "Arama karanlıkta, gece vakti başladı; gece araması için ayrıca gerekçe yok",
+          "label": "Arama gece başladı; gece araması için ayrıca gerekçe yok",
           "responses": [
             {
               "lines": [
@@ -1621,11 +1681,10 @@
         {
           "id": "T04B_A",
           "kind": "OPTION",
-          "label": "Şekerlik arka odanın kapısındaydı; paketler oradan",
-          "visibleWhen": { "hasEvidence": "ded_sekerlik" },
+          "label": "Paketler arka odanın stoğundan",
+          "visibleWhen": { "all": [{ "hasEvidence": "ded_sekerlik" }, { "flag": "fact_seker_k" }] },
           "responses": [
             {
-              "when": { "flag": "fact_seker_k" },
               "lines": [
                 {
                   "speaker": "player",
@@ -1634,20 +1693,6 @@
                 {
                   "speaker": "player",
                   "text": "Kriminal rapor: iki paket, arka odadaki kırk altı paketle aynı poşet, aynı kesim, aynı gramaj. Paketlerde sanığın izi yok; kavanozda var, çünkü sanık günde beş çay içiyor."
-                },
-                { "speaker": "uye", "text": "Sayın Savcı, paketlerde iz var mı?" },
-                { "speaker": "savci", "text": "Yok, Sayın Hâkim." }
-              ]
-            },
-            {
-              "lines": [
-                {
-                  "speaker": "player",
-                  "text": "Fotoğraf albümü, 23 numaralı kare: şekerlik koridordaki rafta, arka oda kapısına iki adım."
-                },
-                {
-                  "speaker": "player",
-                  "text": "Kriminal rapor: iki paket, arka odadaki kırk altı paketle aynı poşet, aynı kesim, aynı gramaj. Paketlerde sanığın izi yok; kavanozda var, çünkü sanık oradan şeker alıyor."
                 },
                 { "speaker": "uye", "text": "Sayın Savcı, paketlerde iz var mı?" },
                 { "speaker": "savci", "text": "Yok, Sayın Hâkim." }
@@ -1692,7 +1737,7 @@
         {
           "id": "T04B_C",
           "kind": "OPTION",
-          "label": "Şekerlik ev sahibinin demirbaşıdır; ortak alandaki eşya kiraya verenin zilyetliğinde sayılır",
+          "label": "Şekerlik ev sahibinin demirbaşı; zilyet odur",
           "responses": [
             { "lines": [{ "speaker": "baskan", "text": "Müdafi, bu iddianın bir dayanağı var mı? Kayda geçmedi." }] }
           ],
@@ -1887,7 +1932,7 @@
         {
           "id": "T05E_A",
           "kind": "OPTION",
-          "label": "Katılıyoruz; kullanım ticaretin kanıtı değildir",
+          "label": "Katılıyoruz; kullanım ticaret değil",
           "responses": [
             {
               "lines": [
@@ -1916,14 +1961,14 @@
         {
           "id": "T05E_B",
           "kind": "OPTION",
-          "label": "Diyeceğimiz yok",
+          "label": "Diyeceğimiz yok; takdir yüksek heyetindir",
           "quality": { "q": "NEUTRAL", "feedback": "Lehe mütalaa karşısında söz kullanılmadı." },
           "next": "T_06P"
         },
         {
           "id": "T05E_C",
           "kind": "OPTION",
-          "label": "Arama hukuka aykırıydı; kolluk görevlileri hakkında da suç duyurusunda bulunulmasını talep ediyoruz",
+          "label": "Polisler için suç duyurusu istiyoruz",
           "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": -30 }],
           "quality": {
             "q": "BAD",
@@ -2015,7 +2060,7 @@
         {
           "id": "T05N_C",
           "kind": "OPTION",
-          "label": "Nitelik değişikliğine itiraz ediyoruz: iddianame 188 diyor, mahkeme bununla bağlı",
+          "label": "İtiraz: mahkeme iddianamedeki nitelikle bağlı",
           "responses": [
             {
               "lines": [
@@ -2391,7 +2436,7 @@
         {
           "id": "T06_B",
           "kind": "OPTION",
-          "label": "Yüklenen suç sanık tarafından işlenmemiştir; gerçek fail arka odanın kiracısıdır (CMK 223/2-b)",
+          "label": "Sanık suçu işlemedi; gerçek fail arka odanın kiracısıdır (CMK 223/2-b)",
           "responses": [
             {
               "when": { "all": [{ "flag": "tolga_kirildi" }, { "hasEvidence": "ev_iz_eslesme" }] },
@@ -2415,6 +2460,58 @@
               ]
             },
             {
+              "when": { "flag": "tolga_kirildi" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, Sayın Üye. Bu dosya bir varsayımla başladı: ev onun, oda onun, toz onun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "O arka odada başka biri yaşıyordu. Malı satan, kapıyı kilitleyen, anahtarı cebinde taşıyan oydu. Müvekkilim suçu işlememiştir; gerçek fail arka odanın kiracısıdır."
+                },
+                {
+                  "speaker": "savci",
+                  "text": "Bir tanık bu salonda bir isim söyledi, Sayın Başkan; ama terazide o ismin izi yok. Bir tanığın dönüşü “sabit” için yetmez."
+                },
+                {
+                  "speaker": "uye",
+                  "text": "Müdafi, “işlemediği sabit” dediğiniz şeyi tanığın dönüşünden başka hangi delile dayandırıyorsunuz?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir isim, bir dönüş. “İşlemediği sabit” için bir iz lazımdı; terazide o iz yok.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "when": { "flag": "defter_sunuldu" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, Sayın Üye. Bu dosya bir varsayımla başladı: ev onun, oda onun, toz onun."
+                },
+                {
+                  "speaker": "player",
+                  "text": "O arka odada başka biri yaşıyordu. Malı satan, kapıyı kilitleyen, anahtarı cebinde taşıyan oydu. Müvekkilim suçu işlememiştir; gerçek fail arka odanın kiracısıdır."
+                },
+                {
+                  "speaker": "savci",
+                  "text": "Müdafi bir isim söylüyor, Sayın Başkan. Dosyada o isme ait bir iz yok, o ismi söyleyen bir tanık yok. Bir kira defteri bir kiracıyı gösterir; bir faili değil."
+                },
+                {
+                  "speaker": "uye",
+                  "text": "Müdafi, “işlemediği sabit” dediğiniz şeyi hangi delile dayandırıyorsunuz?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Hangi delile? Bir kira defteri, bir şüphe. “Sabit” için bunlar yetmez.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
               "lines": [
                 {
                   "speaker": "player",
@@ -2434,7 +2531,7 @@
                 },
                 {
                   "speaker": "player",
-                  "text": "Hangi delile? Bir kira defteri, bir posta kutusu, bir şüphe. “Sabit” için bunlar yetmez.",
+                  "text": "Hangi delile? Bir şüpheye. “Sabit” için şüphe yetmez.",
                   "style": "thought"
                 }
               ]
@@ -2483,7 +2580,7 @@
         {
           "id": "T06_E",
           "kind": "OPTION",
-          "label": "Suçun sanık tarafından işlendiği sabit değildir; şüpheden sanık yararlanır (CMK 223/2-e)",
+          "label": "Suçun sanık tarafından işlendiği sabit değil (CMK 223/2-e)",
           "responses": [
             {
               "when": {
@@ -2706,7 +2803,7 @@
         {
           "id": "T07_A",
           "kind": "OPTION",
-          "label": "“Kullandım. Satmadım. Perşembe randevum var.”",
+          "label": "“Kullandım. Satmadım. Perşembe günü doktor randevum var.”",
           "responses": [
             {
               "lines": [

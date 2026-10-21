@@ -82,7 +82,7 @@ export const meta: CasePart = {
       thresholdBar: thresholdBar([
         ['Mahkûmiyet', 0, 'red'],
         ['Nitelik', 5500, 'amber'],
-        ['Beraat', 7500, 'green'],
+        ['Tam beraat', 11000, 'green'],
       ]),
       displayClampMin: 0,
     },

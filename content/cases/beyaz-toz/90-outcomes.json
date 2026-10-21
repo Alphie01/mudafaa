@@ -46,7 +46,7 @@
               }
             ]
           },
-          "text": "Hüküm, muhbir tanığın 9 Kasım gecesi paketi Daire 7’den sanıktan aldığına ilişkin, duruşmada sorgulanmadan kalan beyanı ile sanığın telefonundaki “2 tane” yazışmasına dayanmaktadır."
+          "text": "Hüküm, muhbir tanığın 9 Kasım gecesi paketi Daire 7’den sanıktan aldığına ilişkin, duruşmada sorgulanmadan kalan ve savunmanın çöken anlatımı dışında hiçbir delille karşılanmamış beyanına dayanmaktadır (CMK 217)."
         },
         {
           "when": {
@@ -63,7 +63,7 @@
               }
             ]
           },
-          "text": "Muhbir tanığın kask ve saat ayrıntılarındaki çelişkileri kayda geçmiştir; heyet bunları çevresel saymış, satışın Daire 7’de yapıldığı yönündeki çekirdek beyanı sanığın telefonundaki “2 tane” yazışmasıyla birlikte inandırıcı bulmuştur (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir."
+          "text": "Muhbir tanığın kask ve saat ayrıntılarındaki çelişkileri kayda geçmiştir; heyet bunları çevresel saymış; savunmanın karşı anlatımı para karşılığı bir tanığa dayandığından, satışın Daire 7’de yapıldığı yönündeki çekirdek beyanı inandırıcı bulmuştur (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir."
         }
       ],
       "legalBasis": "TCK 188/3, 188/4-a, 52, 53, 62/1; CMK 206/2-a, 217, 273/1; Anayasa 38/6; TCK 272, 38; Av.K. 34",
@@ -76,7 +76,7 @@
             { "speaker": "baskan", "text": "Türk Milleti adına…" },
             {
               "speaker": "narrator",
-              "text": "“On beş yıl.” Kaan rakamı duydu; anlamını duymadı. Jandarma koluna dokundu. Kaan ablasına bakmadı. Bakamadı."
+              "text": "“On iki yıl altı ay.” Kaan rakamı duydu; anlamını duymadı. Jandarma koluna dokundu. Kaan ablasına bakmadı. Bakamadı."
             },
             { "speaker": "narrator", "text": "ADLİYE KORİDORU — AKŞAMÜSTÜ", "style": "card", "bg": "adliye" },
             {
@@ -226,9 +226,7 @@
       "id": "BERAAT_E",
       "class": "ACQUITTAL",
       "priority": 3,
-      "when": {
-        "all": [{ "not": { "flag": "cokus" } }, { "ref": "beraat_e" }, { "cmp": [{ "score": "final" }, ">=", 7500] }]
-      },
+      "when": { "all": [{ "not": { "flag": "cokus" } }, { "ref": "beraat_e" }] },
       "stamp": "BERAAT",
       "stampTone": "green",
       "header": "TÜRK MİLLETİ ADINA",
@@ -289,6 +287,10 @@
         },
         {
           "text": "Sanığın madde kullanıcısı olması tek başına ticaret kastını göstermez; kullanım iddianamedeki fiil değildir (CMK 225/1)."
+        },
+        {
+          "when": { "flag": "beraat_savunma" },
+          "text": "Müdafi esas hakkındaki savunmasında kuşkunun sanık lehine değerlendirilmesini istemiştir; heyet bu talebi kayıtla uyumlu bulmuştur."
         },
         {
           "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil yoktur; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2)."
@@ -400,6 +402,16 @@
           ]
         },
         {
+          "when": { "any": [{ "cmp": [{ "var": "wrong" }, ">=", 3] }, { "cmp": [{ "var": "cred" }, "<=", 2] }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Merdivenlerden inerken tutanağın kopyası koltuğumun altındaydı. Yanlış sunduğum kartlar da oradaydı, boşa giden itirazlar da. Kayıt kazandırdı; ben değil.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "lines": [
             { "speaker": "narrator", "text": "ARSLAN HUKUK — O GECE", "style": "card", "bg": "buro_gece" },
             {
@@ -419,7 +431,20 @@
               "speaker": "leyla",
               "expression": "mutlu",
               "text": "Akıllı kadın. Bir gün bize çaya çağır onu. Kedileriyle birlikte."
-            },
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "cmp": [{ "var": "wrong" }, ">=", 3] }, { "cmp": [{ "var": "cred" }, "<=", 2] }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bir şey daha. Bugün kayıt seni taşıdı. Yanlış kartlar, boş itirazlar; bir heyet bunları da yazar. Bir dahaki sefere kayıt bu kadar sağlam olmayabilir."
+            }
+          ]
+        },
+        {
+          "lines": [
             {
               "speaker": "leyla",
               "text": "Beraat iki türlüdür, demiştim. Bugün “yapmadı” diyemedin; “yaptığı ispatlanamadı” dedin. Bu da bir beraattir. Bazen yeterlidir."
@@ -597,19 +622,44 @@
                     { "flag": "tolga_kirildi" }
                   ]
                 }
-              }
+              },
+              { "not": { "flag": "jar_cleared" } }
             ]
           },
-          "text": "Arka oda materyali hükme esas alınmamış olsa da, muhbir tanığın sanıktan paket aldığına ilişkin beyanı, heyetçe sanığın telefonundaki “2 tane” yazışmasıyla desteklenmiş sayılmıştır."
+          "text": "Arka oda materyali hükme esas alınmamış olsa da, muhbir tanığın sanıktan paket aldığına ilişkin beyanı, ortak alandaki şekerlikte ele geçen paketler ve kavanozdaki izle desteklenmiş sayılmıştır."
         },
         {
           "when": {
             "all": [
-              { "any": [{ "flag": "contra_t3" }, { "flag": "contra_t4" }, { "flag": "contra_t5" }] },
+              { "flag": "key_excluded" },
+              {
+                "not": {
+                  "any": [
+                    { "flag": "contra_t3" },
+                    { "flag": "contra_t4" },
+                    { "flag": "contra_t5" },
+                    { "flag": "tolga_kirildi" }
+                  ]
+                }
+              },
+              { "flag": "jar_cleared" }
+            ]
+          },
+          "text": "Arka oda materyali hükme esas alınmamıştır; ancak odanın üçüncü kişiye ait olduğu ispat edilemediğinden heyet, kira sözleşmesi sanık adına olan dairenin ortak alanında ele geçen paketleri muhbir beyanıyla birlikte sanığın zilyetliğinde kabul etmiştir (CMK 217)."
+        },
+        {
+          "when": {
+            "all": [
+              { "any": [{ "flag": "contra_t3" }, { "flag": "contra_t5" }] },
+              { "not": { "flag": "contra_t4" } },
               { "not": { "flag": "tolga_kirildi" } }
             ]
           },
-          "text": "Muhbir tanığın kask ve saat ayrıntılarındaki çelişkileri kayda geçmiştir. Heyet bunları gece yarısı alınan ifadenin çevresel ayrıntıları saymış, tanığın satışın Daire 7’de yapıldığı yönündeki çekirdek beyanını inandırıcı bulmuştur (CMK 217)."
+          "text": "Muhbir tanığın kask ayrıntısındaki çelişkisi kayda geçmiştir. Heyet bunu gece yarısı alınan ifadenin çevresel ayrıntısı saymış, tanığın satışın Daire 7’de yapıldığı yönündeki çekirdek beyanını inandırıcı bulmuştur (CMK 217)."
+        },
+        {
+          "when": { "all": [{ "flag": "contra_t4" }, { "not": { "flag": "tolga_kirildi" } }] },
+          "text": "Sanığın 9 Kasım gecesi işyerinde kasa başında olduğu Z raporuyla sabittir; heyet muhbirin satış anlatımını hükme esas almamış, hükmü dairede ele geçen ve sanığın zilyetliğinde kabul edilen paketlerin ticaret amacıyla bulundurulmasına dayandırmıştır (TCK 188/3)."
         },
         {
           "when": { "flag": "tolga_kirildi" },
@@ -626,10 +676,28 @@
                   { "flag": "contra_t5" },
                   { "flag": "tolga_kirildi" }
                 ]
-              }
+              },
+              { "not": { "flag": "jar_cleared" } }
             ]
           },
-          "text": "Heyet, sanığın “2 tane” yazışmasını ve kavanozdaki izini dairedeki madde trafiğine katıldığının göstergesi saymış; savunmanın bu iki delile ilişkin açıklamasını yeterli bulmamıştır (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir."
+          "text": "Heyet, kavanozdaki izi ve ortak alandaki paketleri sanığın dairedeki madde trafiğine katıldığının göstergesi saymış; savunmanın bu delillere ilişkin açıklamasını yeterli bulmamıştır (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir."
+        },
+        {
+          "when": {
+            "all": [
+              { "flag": "key_excluded" },
+              {
+                "any": [
+                  { "flag": "contra_t3" },
+                  { "flag": "contra_t4" },
+                  { "flag": "contra_t5" },
+                  { "flag": "tolga_kirildi" }
+                ]
+              },
+              { "flag": "jar_cleared" }
+            ]
+          },
+          "text": "Arka odanın üçüncü kişiye ait olduğu ispat edilemediğinden heyet, kira sözleşmesi sanık adına olan dairenin ortak alanında ele geçen paketleri sanığın zilyetliğinde kabul etmiştir (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir."
         },
         {
           "when": { "flag": "contra_s2" },
@@ -693,19 +761,20 @@
           ]
         },
         {
-          "when": { "all": [{ "not": { "flag": "cokus" } }, { "ref": "beraat_e" }] },
+          "when": {
+            "all": [
+              { "not": { "flag": "cokus" } },
+              { "any": [{ "cmp": [{ "var": "wrong" }, ">=", 3] }, { "cmp": [{ "var": "cred" }, "<=", 2] }] }
+            ]
+          },
           "lines": [
             {
               "speaker": "leyla",
-              "text": "Tutanağı oku, Deniz. Kilit orada, kroki orada, şekerlik orada, muhbirin çelişkisi orada. Heyet hepsini yazmış; sonra “takdiren” deyip üstünden geçmiş."
-            },
-            {
-              "speaker": "leyla",
-              "text": "Böyle bir gerekçe istinafta zor ayakta durur. Ama sen de dağınıktın: yanlış kapılar, boş itirazlar, savrulan kartlar. Dağınık bir savunma, sağlam bir kaydı bile bulanıklaştırır."
+              "text": "Tutanağı oku, Deniz. Yanlış kapılar, boş itirazlar, savrulan kartlar; heyet hepsini yazmış. Dağınık bir savunma, elindeki doğruyu bile bulanıklaştırır."
             },
             {
               "speaker": "player",
-              "text": "Bütün parçalar elimdeydi. Onları bir hikâyeye değil, bir yığına çevirdim. İstinaf dilekçesinin ilk cümlesi belli: kayıt.",
+              "text": "Elimdeki parçaları bir hikâyeye değil, bir yığına çevirdim. İstinaf dilekçesinin ilk cümlesi belli: kayıt.",
               "style": "thought"
             }
           ]

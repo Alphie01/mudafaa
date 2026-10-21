@@ -17,7 +17,8 @@ import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { card, me, n, s, th, voice } from './shared.js';
 
 // 90-outcomes: beş sonuç. Öncelik sırası: sahte tanık (TELKİN), 223/2-b, 223/2-e, 191'e dönüşüm (HAGB), mahkûmiyet.
-// Eşikler: 191 için 5.500, 223/2-e için 7.500 (delil zinciriyle birlikte), 223/2-b için 11.000.
+// Eşikler: 191 için 5.500, 223/2-b için 11.000. 223/2-e puan eşiği taşımaz: delil zinciri (beraat_e) kurulduysa
+// hüküm beraattir; özensiz oyun yalnızca kapanış sahnesinde Leyla’nın sözlerini değiştirir, hükmü değil.
 // Kararın gerekçe satırları duruşmada kurulan bayraklara göre seçilir; hiçbir satır duruşmada çürütülmüş bir olguya dayanmaz.
 
 /** Muhbirin anlatısı duruşmada sarsıldı mı? */
@@ -55,11 +56,11 @@ export const outcomes: CasePart = {
           all(flag('contra_s3'), not(flag('jar_cleared'))),
         ),
         because(
-          'Hüküm, muhbir tanığın 9 Kasım gecesi paketi Daire 7’den sanıktan aldığına ilişkin, duruşmada sorgulanmadan kalan beyanı ile sanığın telefonundaki “2 tane” yazışmasına dayanmaktadır.',
+          'Hüküm, muhbir tanığın 9 Kasım gecesi paketi Daire 7’den sanıktan aldığına ilişkin, duruşmada sorgulanmadan kalan ve savunmanın çöken anlatımı dışında hiçbir delille karşılanmamış beyanına dayanmaktadır (CMK 217).',
           all(flag('contra_s3'), flag('jar_cleared'), not(muhbirSarsildi)),
         ),
         because(
-          'Muhbir tanığın kask ve saat ayrıntılarındaki çelişkileri kayda geçmiştir; heyet bunları çevresel saymış, satışın Daire 7’de yapıldığı yönündeki çekirdek beyanı sanığın telefonundaki “2 tane” yazışmasıyla birlikte inandırıcı bulmuştur (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir.',
+          'Muhbir tanığın kask ve saat ayrıntılarındaki çelişkileri kayda geçmiştir; heyet bunları çevresel saymış; savunmanın karşı anlatımı para karşılığı bir tanığa dayandığından, satışın Daire 7’de yapıldığı yönündeki çekirdek beyanı inandırıcı bulmuştur (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir.',
           all(flag('contra_s3'), flag('jar_cleared'), muhbirSarsildi),
         ),
       ],
@@ -73,7 +74,7 @@ export const outcomes: CasePart = {
           lines: [
             s('baskan', 'Türk Milleti adına…'),
             n(
-              '“On beş yıl.” Kaan rakamı duydu; anlamını duymadı. Jandarma koluna dokundu. Kaan ablasına bakmadı. Bakamadı.',
+              '“On iki yıl altı ay.” Kaan rakamı duydu; anlamını duymadı. Jandarma koluna dokundu. Kaan ablasına bakmadı. Bakamadı.',
             ),
             card('ADLİYE KORİDORU — AKŞAMÜSTÜ', 'adliye'),
             n(
@@ -185,9 +186,9 @@ export const outcomes: CasePart = {
     outcome('BERAAT_E', {
       class: 'ACQUITTAL',
       priority: 3,
-      // Delil zinciri (beraat_e) kurulduysa heyet beraat eder; esas savunmanın biçimi ve ikna sayacı hükmü
-      // değiştirmez. Puan eşiği yalnızca zincirin özensiz, kestirme bir oyunla kurulmasını engeller.
-      when: all(not(flag('cokus')), ref('beraat_e'), finalAtLeast(7500)),
+      // Delil zinciri (beraat_e) kurulduysa heyet beraat eder; puan, esas savunmanın biçimi ve ikna sayacı hükmü
+      // değiştirmez. Kayıt sanık lehineyken mahkûmiyet hukuken savunulamaz; özensiz oyun yalnızca kapanışı değiştirir.
+      when: all(not(flag('cokus')), ref('beraat_e')),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -238,6 +239,10 @@ export const outcomes: CasePart = {
         ),
         because(
           'Sanığın madde kullanıcısı olması tek başına ticaret kastını göstermez; kullanım iddianamedeki fiil değildir (CMK 225/1).',
+        ),
+        because(
+          'Müdafi esas hakkındaki savunmasında kuşkunun sanık lehine değerlendirilmesini istemiştir; heyet bu talebi kayıtla uyumlu bulmuştur.',
+          flag('beraat_savunma'),
         ),
         because(
           'Sanığın suçu işlediğine dair kesin ve inandırıcı delil yoktur; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2).',
@@ -326,6 +331,14 @@ export const outcomes: CasePart = {
           ],
         },
         {
+          when: any(cmp(v('wrong'), '>=', 3), cmp(v('cred'), '<=', 2)),
+          lines: [
+            th(
+              'Merdivenlerden inerken tutanağın kopyası koltuğumun altındaydı. Yanlış sunduğum kartlar da oradaydı, boşa giden itirazlar da. Kayıt kazandırdı; ben değil.',
+            ),
+          ],
+        },
+        {
           lines: [
             card('ARSLAN HUKUK — O GECE', 'buro_gece'),
             n(
@@ -341,6 +354,19 @@ export const outcomes: CasePart = {
             ),
             me('Nesrin Hanım da öyle diyor. “Kayıt insandan uzun yaşar.”'),
             s('leyla', 'Akıllı kadın. Bir gün bize çaya çağır onu. Kedileriyle birlikte.', 'mutlu'),
+          ],
+        },
+        {
+          when: any(cmp(v('wrong'), '>=', 3), cmp(v('cred'), '<=', 2)),
+          lines: [
+            s(
+              'leyla',
+              'Bir şey daha. Bugün kayıt seni taşıdı. Yanlış kartlar, boş itirazlar; bir heyet bunları da yazar. Bir dahaki sefere kayıt bu kadar sağlam olmayabilir.',
+            ),
+          ],
+        },
+        {
+          lines: [
             s(
               'leyla',
               'Beraat iki türlüdür, demiştim. Bugün “yapmadı” diyemedin; “yaptığı ispatlanamadı” dedin. Bu da bir beraattir. Bazen yeterlidir.',
@@ -458,20 +484,32 @@ export const outcomes: CasePart = {
           not(muhbirSarsildi),
         ),
         because(
-          'Arka oda materyali hükme esas alınmamış olsa da, muhbir tanığın sanıktan paket aldığına ilişkin beyanı, heyetçe sanığın telefonundaki “2 tane” yazışmasıyla desteklenmiş sayılmıştır.',
-          all(flag('key_excluded'), not(muhbirSarsildi)),
+          'Arka oda materyali hükme esas alınmamış olsa da, muhbir tanığın sanıktan paket aldığına ilişkin beyanı, ortak alandaki şekerlikte ele geçen paketler ve kavanozdaki izle desteklenmiş sayılmıştır.',
+          all(flag('key_excluded'), not(muhbirSarsildi), not(flag('jar_cleared'))),
         ),
         because(
-          'Muhbir tanığın kask ve saat ayrıntılarındaki çelişkileri kayda geçmiştir. Heyet bunları gece yarısı alınan ifadenin çevresel ayrıntıları saymış, tanığın satışın Daire 7’de yapıldığı yönündeki çekirdek beyanını inandırıcı bulmuştur (CMK 217).',
-          all(any(flag('contra_t3'), flag('contra_t4'), flag('contra_t5')), not(flag('tolga_kirildi'))),
+          'Arka oda materyali hükme esas alınmamıştır; ancak odanın üçüncü kişiye ait olduğu ispat edilemediğinden heyet, kira sözleşmesi sanık adına olan dairenin ortak alanında ele geçen paketleri muhbir beyanıyla birlikte sanığın zilyetliğinde kabul etmiştir (CMK 217).',
+          all(flag('key_excluded'), not(muhbirSarsildi), flag('jar_cleared')),
+        ),
+        because(
+          'Muhbir tanığın kask ayrıntısındaki çelişkisi kayda geçmiştir. Heyet bunu gece yarısı alınan ifadenin çevresel ayrıntısı saymış, tanığın satışın Daire 7’de yapıldığı yönündeki çekirdek beyanını inandırıcı bulmuştur (CMK 217).',
+          all(any(flag('contra_t3'), flag('contra_t5')), not(flag('contra_t4')), not(flag('tolga_kirildi'))),
+        ),
+        because(
+          'Sanığın 9 Kasım gecesi işyerinde kasa başında olduğu Z raporuyla sabittir; heyet muhbirin satış anlatımını hükme esas almamış, hükmü dairede ele geçen ve sanığın zilyetliğinde kabul edilen paketlerin ticaret amacıyla bulundurulmasına dayandırmıştır (TCK 188/3).',
+          all(flag('contra_t4'), not(flag('tolga_kirildi'))),
         ),
         because(
           'Muhbir tanık duruşmada önceki beyanından dönmüştür; heyet, aynı tanığın birbiriyle çelişen iki beyanından hiçbirini tek başına hükme esas almamıştır.',
           flag('tolga_kirildi'),
         ),
         because(
-          'Heyet, sanığın “2 tane” yazışmasını ve kavanozdaki izini dairedeki madde trafiğine katıldığının göstergesi saymış; savunmanın bu iki delile ilişkin açıklamasını yeterli bulmamıştır (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir.',
-          all(flag('key_excluded'), muhbirSarsildi),
+          'Heyet, kavanozdaki izi ve ortak alandaki paketleri sanığın dairedeki madde trafiğine katıldığının göstergesi saymış; savunmanın bu delillere ilişkin açıklamasını yeterli bulmamıştır (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir.',
+          all(flag('key_excluded'), muhbirSarsildi, not(flag('jar_cleared'))),
+        ),
+        because(
+          'Arka odanın üçüncü kişiye ait olduğu ispat edilemediğinden heyet, kira sözleşmesi sanık adına olan dairenin ortak alanında ele geçen paketleri sanığın zilyetliğinde kabul etmiştir (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir.',
+          all(flag('key_excluded'), muhbirSarsildi, flag('jar_cleared')),
         ),
         because(
           'Arama tutanağındaki eksiklikler kayda geçmiştir; deliller bir bütün olarak değerlendirildiğinde heyet, ticaret fiilinin sanık tarafından işlendiği kanaatine varmıştır (CMK 217).',
@@ -516,18 +554,14 @@ export const outcomes: CasePart = {
           ],
         },
         {
-          when: all(not(flag('cokus')), ref('beraat_e')),
+          when: all(not(flag('cokus')), any(cmp(v('wrong'), '>=', 3), cmp(v('cred'), '<=', 2))),
           lines: [
             s(
               'leyla',
-              'Tutanağı oku, Deniz. Kilit orada, kroki orada, şekerlik orada, muhbirin çelişkisi orada. Heyet hepsini yazmış; sonra “takdiren” deyip üstünden geçmiş.',
-            ),
-            s(
-              'leyla',
-              'Böyle bir gerekçe istinafta zor ayakta durur. Ama sen de dağınıktın: yanlış kapılar, boş itirazlar, savrulan kartlar. Dağınık bir savunma, sağlam bir kaydı bile bulanıklaştırır.',
+              'Tutanağı oku, Deniz. Yanlış kapılar, boş itirazlar, savrulan kartlar; heyet hepsini yazmış. Dağınık bir savunma, elindeki doğruyu bile bulanıklaştırır.',
             ),
             th(
-              'Bütün parçalar elimdeydi. Onları bir hikâyeye değil, bir yığına çevirdim. İstinaf dilekçesinin ilk cümlesi belli: kayıt.',
+              'Elimdeki parçaları bir hikâyeye değil, bir yığına çevirdim. İstinaf dilekçesinin ilk cümlesi belli: kayıt.',
             ),
           ],
         },

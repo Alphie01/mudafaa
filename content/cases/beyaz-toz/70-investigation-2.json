@@ -13,7 +13,7 @@
             { "speaker": "narrator", "text": "26 OCAK · 17.30 — ADLİYE MERDİVENLERİ", "style": "card", "bg": "adliye" },
             {
               "speaker": "narrator",
-              "text": "Kaan cezaevinden eşyalarıyla çıkarıldığında hava kararmıştı. Bir naylon torba: iki kitap, bir eşofman, bir gözlük kılıfı."
+              "text": "Tahliye müzekkeresi adliyede yazıldı; Kaan serbest bırakıldığında hava kararmıştı. Elinde bir naylon torba: iki kitap, bir eşofman, bir gözlük kılıfı."
             },
             {
               "speaker": "narrator",
@@ -267,7 +267,7 @@
           "next": "ARA_ZRAPOR",
           "maxUses": 1,
           "description": "Kahve Durağı · 9 Kasım",
-          "visibleWhen": { "hasEvidence": "clue_tolga_saat" }
+          "visibleWhen": { "all": [{ "hasEvidence": "clue_tolga_saat" }, { "flag": "fact_pazar" }] }
         },
         {
           "id": "A2_SUC",
@@ -398,7 +398,7 @@
         {
           "id": "ARAK_B",
           "kind": "OPTION",
-          "label": "Bunu bana neden şimdi anlatıyorsunuz?",
+          "label": "Bunu bana neden şimdi, bu gece anlatıyorsunuz?",
           "responses": [
             {
               "lines": [
@@ -581,7 +581,7 @@
         {
           "id": "TEL_A",
           "kind": "OPTION",
-          "label": "Saati ve konuşmayı not et; sabah nöbetçi savcılığa bildir",
+          "label": "Saati not et; sabah savcılığa bildir",
           "responses": [
             {
               "lines": [
@@ -615,7 +615,7 @@
         {
           "id": "TEL_B",
           "kind": "OPTION",
-          "label": "Geri ara; teslim olursa Kaan’ın ifadesini yumuşatabileceğini söyle",
+          "label": "Geri ara; teslim olursa yardım edeceğini söyle",
           "responses": [
             {
               "lines": [
@@ -645,7 +645,7 @@
         {
           "id": "TEL_C",
           "kind": "OPTION",
-          "label": "Telefonu kapat ve uyumaya çalış",
+          "label": "Telefonu kapat, ışığı söndür, sabaha kadar uyumaya çalış",
           "responses": [
             {
               "lines": [
@@ -1216,6 +1216,32 @@
           ]
         },
         {
+          "id": "KA_PAZAR",
+          "kind": "OPTION",
+          "label": "9 Kasım, pazar gecesi saat on bir. Neredeydin?",
+          "visibleWhen": { "all": [{ "hasEvidence": "clue_tolga_saat" }, { "not": { "flag": "fact_pazar" } }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "kaan",
+                  "text": "Pazar mı? Kafede. Pazar kapanış bende. Kasayı kendi kodumla kapatırım, sonra makineleri temizlerim."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir kod, bir saat damgası. Bunu ilk görüşmede sormalıydım. Kafenin kayıtlarına ulaşmam lazım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_pazar", "op": "set", "value": true }
+          ]
+        },
+        {
           "id": "KA_TOLGA",
           "kind": "OPTION",
           "label": "Tolga ile Barış birbirini tanıyor muydu?",
@@ -1610,7 +1636,7 @@
         {
           "id": "BD_AL",
           "kind": "OPTION",
-          "label": "Geliyorum. Çantayı alıp mahkemeye ben götürürüm.",
+          "label": "Geliyorum. Çantayı mahkemeye ben götürürüm.",
           "responses": [
             {
               "lines": [
@@ -1641,7 +1667,7 @@
         {
           "id": "BD_FOTO",
           "kind": "OPTION",
-          "label": "Fotoğrafını çekip yollayın; sonra bakarız.",
+          "label": "Fotoğrafını çekip bana yollayın; sonra bir bakarız, acelesi yok.",
           "responses": [
             {
               "lines": [
@@ -1761,7 +1787,7 @@
         {
           "id": "SC_TOLGA",
           "kind": "OPTION",
-          "label": "Tolga Kaplan hakkında, Kaan’ı bile bile suçladığı için iftiradan suç duyurusu",
+          "label": "Tolga Kaplan hakkında iftiradan suç duyurusu",
           "responses": [
             {
               "lines": [

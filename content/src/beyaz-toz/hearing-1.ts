@@ -28,6 +28,9 @@ import {
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { HEAR1, card, court1, me, n, s, th } from './shared.js';
 
+/** Arka odada sanıktan başka birinin yaşadığını gösteren bir kart (oda varsayımının çökmesi için gerekir). */
+const baskaBiri = any(has('ded_kurye'), has('ded_numara'), has('ded_baris'), has('ded_demirel'));
+
 // 60-hearing-1: birinci celse. Açılış, iddianame, Kaan'ın savunması ve müdafiin soruları, savcının polise sorusu
 // (itiraz), Kom. Yrd. Tuncay Sezer'in çapraz sorgusu, CMK 206/1 talepleri ve ara karar (tutukluluk incelemesi).
 
@@ -430,7 +433,7 @@ export const hearing1: CasePart = {
           neutral: 'Telkin edici soru cevaplandı; tanığın ağzına savcının cümlesi girdi.',
           responses: [{ lines: [s('tuncay', 'Evet. Ev onun adınaydı; oda da onun kullanımındaydı.')] }],
         }),
-        option('H103_C', 'İtiraz: tanık aramayı yapan kişidir, taraflıdır; beyanı dinlenemez (CMK 217)', {
+        option('H103_C', 'İtiraz: tanık aramayı yapan polis; taraflıdır (CMK 217)', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Kolluk görevlisi tanık olarak dinlenebilir; beyanının ağırlığı hükümde takdir edilir (CMK 217). Bu bir itiraz konusu değildir; güvenilirlik çapraz sorguda delille sarsılır.',
@@ -651,6 +654,7 @@ export const hearing1: CasePart = {
           ],
         }),
         presentRule('PS_S2', 'S2', ['ded_oda'], {
+          enabledWhen: all(flag('press_s2'), baskaBiri),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -679,6 +683,36 @@ export const hearing1: CasePart = {
                 th('Bir kelime. Varsaydım. Savcının bütün hikâyesi bu kelimenin üstünde duruyordu.'),
                 n(
                   'Kaan sanık sırasında doğruldu. Bir şey söylemek istedi; Defne arkadan, sessizce, başını iki yana salladı. Kaan oturdu.',
+                ),
+              ],
+            },
+          ],
+        }),
+        presentRule('PS_S2_TEK', 'S2', ['ded_oda'], {
+          enabledWhen: all(flag('press_s2'), not(baskaBiri)),
+          responses: [
+            {
+              lines: [
+                s(
+                  'tuncay',
+                  'Ön odada uyuyordu, evet. Kroki aceleyle çizildi, kabul. Ama ev onun adına; arka odada başka biri yaşadığını gösteren bir şey yok.',
+                ),
+                s('uye', 'Müdafi, arka odanın başka birine ait olduğunu gösteren bir deliliniz var mı?'),
+                th(
+                  'Yok. Kaan’ın nerede uyuduğunu gösterdim; arka odada kimin yaşadığını değil. Bir mont, bir ayakkabı, bir defter: o odanın sahibine dair tek bir kart.',
+                ),
+              ],
+            },
+          ],
+        }),
+        presentRule('PS_S2_ERKEN', 'S2', ['ded_oda'], {
+          enabledWhen: not(flag('press_s2')),
+          responses: [
+            {
+              lines: [
+                s('tuncay', 'Kroki benim çizimim, avukat hanım. Arka oda onundu; krokide de öyle.'),
+                th(
+                  'Erken. Krokiyi savunuyor; sanığı nerede bulduğunu söylemedi. Önce onu kendi cümlesine bağlamalıyım.',
                 ),
               ],
             },
@@ -734,6 +768,7 @@ export const hearing1: CasePart = {
           ],
         }),
         presentRule('PS_S3', 'S3', ['ded_kapsam', 'ded_anahtar'], {
+          enabledWhen: flag('press_s3'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -759,6 +794,19 @@ export const hearing1: CasePart = {
                 s('uye', 'Tanık, kilidi keskiyle açtığınızı tutanağa neden yazmadınız?'),
                 s('tuncay', 'Önemli görmedim, Sayın Hâkim. Kapı açılmıştı; materyal oradaydı.', 'uzgun'),
                 s('uye', 'Bir kapının nasıl açıldığı, ardında ne bulunduğu kadar önemlidir.'),
+              ],
+            },
+          ],
+        }),
+        presentRule('PS_S3_ERKEN', 'S3', ['ded_kapsam', 'ded_anahtar'], {
+          enabledWhen: not(flag('press_s3')),
+          responses: [
+            {
+              lines: [
+                s('tuncay', 'Kapılar açıldı, avukat hanım. Tutanakta yazıyor.'),
+                th(
+                  'Fotoğrafı göstermeden önce “nasıl açıldı” sorusunu sormalıyım. Kendi kelimesini seçsin; sonra kilidi görsün.',
+                ),
               ],
             },
           ],
@@ -866,6 +914,7 @@ export const hearing1: CasePart = {
           ],
         }),
         presentRule('PS_S6', 'S6', ['ded_sekerlik'], {
+          enabledWhen: flag('press_s6'),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -890,6 +939,17 @@ export const hearing1: CasePart = {
                 s('uye', 'Paketlerin üzerinde sanığın izi var mı, tanık?'),
                 s('tuncay', 'Paketlerde elverişli iz yok, Sayın Hâkim. Kavanozun dışında var.'),
                 th('Kavanozu açan el ile paketi koyan el aynı el değil. Savcının yedek planı da masada kaldı.'),
+              ],
+            },
+          ],
+        }),
+        presentRule('PS_S6_ERKEN', 'S6', ['ded_sekerlik'], {
+          enabledWhen: not(flag('press_s6')),
+          responses: [
+            {
+              lines: [
+                s('tuncay', 'Şekerlik şekerliktir. Nerede durduğunu tutanakta yazdım.'),
+                th('Fotoğrafı göstermeden önce yerini onun ağzından duymalıyım. “Tutanakta yazdım” bir cevap değil.'),
               ],
             },
           ],
@@ -941,7 +1001,7 @@ export const hearing1: CasePart = {
         },
       ],
       choices: [
-        option('TL_KURYE', 'Kurye şirketinden personel ve GPS kayıtlarının istenmesi', {
+        option('TL_KURYE', 'Kurye şirketinden GPS kayıtlarının istenmesi', {
           visibleWhen: all(
             not(flag('kurye_istendi')),
             any(has('clue_mont'), has('ded_kurye'), has('clue_kira_defteri')),
@@ -967,7 +1027,7 @@ export const hearing1: CasePart = {
           responses: [{ lines: [s('baskan', 'Tutukluluk hâli ara kararda değerlendirilecek.')] }],
           next: '$stay',
         }),
-        option('TL_BERAAT', 'Delil yetersizliğinden sanığın bu celsede hemen beraatine karar verilmesi', {
+        option('TL_BERAAT', 'Delil yetersizliğinden derhâl beraat', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred')],
           bad: 'Deliller toplanmadan ve mütalaa alınmadan esas hakkında hüküm kurulmaz (CMK 216). Talep ciddiyetini zedeledi.',
@@ -1163,9 +1223,19 @@ export const hearing1: CasePart = {
           ],
           next: 'ARA_GIRIS',
         }),
-        option('H108_B', 'Defne’ye kısa ve dürüst bir cevap yaz', {
+        option('H108_B', 'Defne’ye kısa ve dürüst bir cevap ver', {
           effects: [inc('trust', 3)],
           responses: [
+            {
+              when: flag('kaan_tahliye'),
+              lines: [
+                me('Üç haftamız var. Bir isim arayacağım. Kovalamadan; kâğıtla.'),
+                s('defne', 'Tamam.', 'uzgun'),
+                th(
+                  'Bir kalp değil, bir “tamam”. Bir eczacının kalbi. Kapıda Kaan’ın ayakkabılarını hizaya çektiğini gördüm; kimse ona söylememişti.',
+                ),
+              ],
+            },
             {
               lines: [
                 th(

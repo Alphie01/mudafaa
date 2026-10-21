@@ -89,7 +89,7 @@ export const investigation2: CasePart = {
           lines: [
             card('26 OCAK · 17.30 — ADLİYE MERDİVENLERİ', 'adliye'),
             n(
-              'Kaan cezaevinden eşyalarıyla çıkarıldığında hava kararmıştı. Bir naylon torba: iki kitap, bir eşofman, bir gözlük kılıfı.',
+              'Tahliye müzekkeresi adliyede yazıldı; Kaan serbest bırakıldığında hava kararmıştı. Elinde bir naylon torba: iki kitap, bir eşofman, bir gözlük kılıfı.',
             ),
             n(
               'Defne merdivenlerin başında bekliyordu. Kaan durdu. Defne yürüdü. Bir süre ikisi de bir şey söylemedi; sonra Defne kardeşinin yakasını düzeltti.',
@@ -228,7 +228,7 @@ export const investigation2: CasePart = {
         }),
         act('A2_ZRAPOR', 'Kafenin kasa kayıtları', 'ARA_ZRAPOR', {
           description: 'Kahve Durağı · 9 Kasım',
-          visibleWhen: has('clue_tolga_saat'),
+          visibleWhen: all(has('clue_tolga_saat'), flag('fact_pazar')),
         }),
         act('A2_SUC', 'Savcılığa suç duyurusu', 'ARA_SUC', { description: 'Arka odanın kiracısı hakkında' }),
         rawChoice('NAVIGATE', 'A2_CIKARIM', 'Çıkarım tahtası', {
@@ -307,7 +307,7 @@ export const investigation2: CasePart = {
           ],
           next: 'ARA_TELEFON',
         }),
-        option('ARAK_B', 'Bunu bana neden şimdi anlatıyorsunuz?', {
+        option('ARAK_B', 'Bunu bana neden şimdi, bu gece anlatıyorsunuz?', {
           score: { SAVUNMA_STRATEJISI: 20 },
           responses: [
             {
@@ -418,7 +418,7 @@ export const investigation2: CasePart = {
         },
       ],
       choices: [
-        option('TEL_A', 'Saati ve konuşmayı not et; sabah nöbetçi savcılığa bildir', {
+        option('TEL_A', 'Saati not et; sabah savcılığa bildir', {
           score: { USUL_BILGISI: 50 },
           effects: [raise('tehdit_bildirildi')],
           good: 'Doğru yol: dosyada şüpheli konumundaki bir kişinin temas girişimi ve olası bir tehdit savcılığa bildirilir (CMK 158). Avukat şüpheliyi aramaz, pazarlık etmez; arama kaydının tespiti savcılığın işidir.',
@@ -436,7 +436,7 @@ export const investigation2: CasePart = {
           ],
           next: 'ARA_SABAH',
         }),
-        option('TEL_B', 'Geri ara; teslim olursa Kaan’ın ifadesini yumuşatabileceğini söyle', {
+        option('TEL_B', 'Geri ara; teslim olursa yardım edeceğini söyle', {
           score: { SAVUNMA_STRATEJISI: -60 },
           effects: [inc('ethics')],
           bad: 'Şüpheliyle müvekkilin beyanı üzerinden pazarlık: avukat, müvekkilin beyanını bir üçüncü kişinin teslimine bağlayamaz; bu hem müvekkilin çıkarına hem meslek kurallarına aykırıdır (Av.K. 34, TBB Meslek Kuralları).',
@@ -454,7 +454,7 @@ export const investigation2: CasePart = {
           ],
           next: 'ARA_SABAH',
         }),
-        option('TEL_C', 'Telefonu kapat ve uyumaya çalış', {
+        option('TEL_C', 'Telefonu kapat, ışığı söndür, sabaha kadar uyumaya çalış', {
           neutral:
             'Şüphelinin temasını bildirmemek bir hata değil ama kaçırılmış bir fırsattır: kayıt tespit edilemedi.',
           responses: [
@@ -836,6 +836,23 @@ export const investigation2: CasePart = {
               next: '$stay',
             },
           ),
+          option('KA_PAZAR', '9 Kasım, pazar gecesi saat on bir. Neredeydin?', {
+            visibleWhen: all(has('clue_tolga_saat'), not(flag('fact_pazar'))),
+            effects: [raise('fact_pazar')],
+            score: { SORGULAMA: 20 },
+            responses: [
+              {
+                lines: [
+                  s(
+                    'kaan',
+                    'Pazar mı? Kafede. Pazar kapanış bende. Kasayı kendi kodumla kapatırım, sonra makineleri temizlerim.',
+                  ),
+                  th('Bir kod, bir saat damgası. Bunu ilk görüşmede sormalıydım. Kafenin kayıtlarına ulaşmam lazım.'),
+                ],
+              },
+            ],
+            next: '$stay',
+          }),
           option('KA_TOLGA', 'Tolga ile Barış birbirini tanıyor muydu?', {
             score: { SORGULAMA: 30 },
             responses: [
@@ -1108,7 +1125,7 @@ export const investigation2: CasePart = {
           ],
           next: HUB,
         }),
-        option('BD_AL', 'Geliyorum. Çantayı alıp mahkemeye ben götürürüm.', {
+        option('BD_AL', 'Geliyorum. Çantayı mahkemeye ben götürürüm.', {
           score: { USUL_BILGISI: -60 },
           effects: [raise('canta_deniz'), inc('ethics')],
           bad: 'Avukat olası bir delile el koyamaz: delil zinciri kopar, çanta hükme esas alınamaz ve sen de delile müdahale kuşkusunun içine girersin. El koyma kolluk ve savcılığın işidir (CMK 123, 127).',
@@ -1124,7 +1141,7 @@ export const investigation2: CasePart = {
           ],
           next: HUB,
         }),
-        option('BD_FOTO', 'Fotoğrafını çekip yollayın; sonra bakarız.', {
+        option('BD_FOTO', 'Fotoğrafını çekip bana yollayın; sonra bir bakarız, acelesi yok.', {
           effects: [raise('canta_foto')],
           neutral: 'Fotoğraf bir başlangıçtır ama el koyma değildir: çanta yerinde korunmazsa kaybolabilir.',
           responses: [
@@ -1195,7 +1212,7 @@ export const investigation2: CasePart = {
           ],
           next: HUB,
         }),
-        option('SC_TOLGA', 'Tolga Kaplan hakkında, Kaan’ı bile bile suçladığı için iftiradan suç duyurusu', {
+        option('SC_TOLGA', 'Tolga Kaplan hakkında iftiradan suç duyurusu', {
           score: { USUL_BILGISI: -40 },
           bad: 'Muhbirin yalan söylediği henüz ispatlanmadı; erken bir iftira isnadı hem tanığı karşı tarafa iter hem de somut dayanak olmadığından geri teper. Çelişki önce duruşmada ortaya konur.',
           responses: [

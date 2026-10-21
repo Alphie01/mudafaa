@@ -684,7 +684,7 @@
         {
           "id": "H103_C",
           "kind": "OPTION",
-          "label": "İtiraz: tanık aramayı yapan kişidir, taraflıdır; beyanı dinlenemez (CMK 217)",
+          "label": "İtiraz: tanık aramayı yapan polis; taraflıdır (CMK 217)",
           "responses": [
             {
               "lines": [
@@ -1033,6 +1033,19 @@
           "id": "PS_S2",
           "kind": "PRESENT",
           "match": { "statement": "S2", "evidence": ["ded_oda"] },
+          "enabledWhen": {
+            "all": [
+              { "flag": "press_s2" },
+              {
+                "any": [
+                  { "hasEvidence": "ded_kurye" },
+                  { "hasEvidence": "ded_numara" },
+                  { "hasEvidence": "ded_baris" },
+                  { "hasEvidence": "ded_demirel" }
+                ]
+              }
+            ]
+          },
           "responses": [
             {
               "lines": [
@@ -1073,6 +1086,63 @@
               "quality": "GOOD",
               "feedback": "Tutanak sanığı ön odada, kendi yatağında buluyor; kroki aynı odaya “misafir odası” diyor. Arka odanın sanığa ait olduğu bir tespit değil, bir varsayım.",
               "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "PS_S2_TEK",
+          "kind": "PRESENT",
+          "match": { "statement": "S2", "evidence": ["ded_oda"] },
+          "enabledWhen": {
+            "all": [
+              { "flag": "press_s2" },
+              {
+                "not": {
+                  "any": [
+                    { "hasEvidence": "ded_kurye" },
+                    { "hasEvidence": "ded_numara" },
+                    { "hasEvidence": "ded_baris" },
+                    { "hasEvidence": "ded_demirel" }
+                  ]
+                }
+              }
+            ]
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tuncay",
+                  "text": "Ön odada uyuyordu, evet. Kroki aceleyle çizildi, kabul. Ama ev onun adına; arka odada başka biri yaşadığını gösteren bir şey yok."
+                },
+                {
+                  "speaker": "uye",
+                  "text": "Müdafi, arka odanın başka birine ait olduğunu gösteren bir deliliniz var mı?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Yok. Kaan’ın nerede uyuduğunu gösterdim; arka odada kimin yaşadığını değil. Bir mont, bir ayakkabı, bir defter: o odanın sahibine dair tek bir kart.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PS_S2_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "S2", "evidence": ["ded_oda"] },
+          "enabledWhen": { "not": { "flag": "press_s2" } },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "tuncay", "text": "Kroki benim çizimim, avukat hanım. Arka oda onundu; krokide de öyle." },
+                {
+                  "speaker": "player",
+                  "text": "Erken. Krokiyi savunuyor; sanığı nerede bulduğunu söylemedi. Önce onu kendi cümlesine bağlamalıyım.",
+                  "style": "thought"
+                }
+              ]
             }
           ]
         },
@@ -1141,6 +1211,7 @@
           "id": "PS_S3",
           "kind": "PRESENT",
           "match": { "statement": "S3", "evidence": ["ded_kapsam", "ded_anahtar"] },
+          "enabledWhen": { "flag": "press_s3" },
           "responses": [
             {
               "lines": [
@@ -1185,6 +1256,24 @@
               "quality": "GOOD",
               "feedback": "Olay yeri fotoğrafındaki kesik asma kilit, tutanaktaki “olağan şekilde açıldı” beyanını çürüttü. Kilitli oda, kararın kapsamı dışında zorla açıldı.",
               "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "PS_S3_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "S3", "evidence": ["ded_kapsam", "ded_anahtar"] },
+          "enabledWhen": { "not": { "flag": "press_s3" } },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "tuncay", "text": "Kapılar açıldı, avukat hanım. Tutanakta yazıyor." },
+                {
+                  "speaker": "player",
+                  "text": "Fotoğrafı göstermeden önce “nasıl açıldı” sorusunu sormalıyım. Kendi kelimesini seçsin; sonra kilidi görsün.",
+                  "style": "thought"
+                }
+              ]
             }
           ]
         },
@@ -1343,6 +1432,7 @@
           "id": "PS_S6",
           "kind": "PRESENT",
           "match": { "statement": "S6", "evidence": ["ded_sekerlik"] },
+          "enabledWhen": { "flag": "press_s6" },
           "responses": [
             {
               "lines": [
@@ -1379,6 +1469,24 @@
               "quality": "GOOD",
               "feedback": "Şekerlik mutfakta değil arka oda kapısının yanındaki raftaydı; içindeki iki paket arka odadaki stokla aynı. “Ortak alan, ortak zilyetlik” tezi düştü.",
               "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "PS_S6_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "S6", "evidence": ["ded_sekerlik"] },
+          "enabledWhen": { "not": { "flag": "press_s6" } },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "tuncay", "text": "Şekerlik şekerliktir. Nerede durduğunu tutanakta yazdım." },
+                {
+                  "speaker": "player",
+                  "text": "Fotoğrafı göstermeden önce yerini onun ağzından duymalıyım. “Tutanakta yazdım” bir cevap değil.",
+                  "style": "thought"
+                }
+              ]
             }
           ]
         },
@@ -1464,7 +1572,7 @@
         {
           "id": "TL_KURYE",
           "kind": "OPTION",
-          "label": "Kurye şirketinden personel ve GPS kayıtlarının istenmesi",
+          "label": "Kurye şirketinden GPS kayıtlarının istenmesi",
           "visibleWhen": {
             "all": [
               { "not": { "flag": "kurye_istendi" } },
@@ -1531,7 +1639,7 @@
         {
           "id": "TL_BERAAT",
           "kind": "OPTION",
-          "label": "Delil yetersizliğinden sanığın bu celsede hemen beraatine karar verilmesi",
+          "label": "Delil yetersizliğinden derhâl beraat",
           "responses": [
             {
               "lines": [
@@ -1853,8 +1961,20 @@
         {
           "id": "H108_B",
           "kind": "OPTION",
-          "label": "Defne’ye kısa ve dürüst bir cevap yaz",
+          "label": "Defne’ye kısa ve dürüst bir cevap ver",
           "responses": [
+            {
+              "when": { "flag": "kaan_tahliye" },
+              "lines": [
+                { "speaker": "player", "text": "Üç haftamız var. Bir isim arayacağım. Kovalamadan; kâğıtla." },
+                { "speaker": "defne", "expression": "uzgun", "text": "Tamam." },
+                {
+                  "speaker": "player",
+                  "text": "Bir kalp değil, bir “tamam”. Bir eczacının kalbi. Kapıda Kaan’ın ayakkabılarını hizaya çektiğini gördüm; kimse ona söylememişti.",
+                  "style": "thought"
+                }
+              ]
+            },
             {
               "lines": [
                 {

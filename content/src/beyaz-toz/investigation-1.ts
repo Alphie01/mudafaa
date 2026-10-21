@@ -144,7 +144,7 @@ export const investigation1: CasePart = {
           lines: [
             card('GÜN 3/3 · BİRİNCİ CELSEYE 9 GÜN', 'buro'),
             n(
-              'Sabah erkenden büroya geldiğimde Leyla çoktan oradaydı. Masamın üstüne bir not bırakmıştı: “Beş gün kuralı. Bugün son.” Altına küçük bir çizgi çekmişti.',
+              'Sabah erkenden büroya geldiğimde Leyla çoktan oradaydı. Masamın üstüne bir not bırakmıştı: “Beş gün kuralı. Ama hâkim dosyayı hafta başı okur; bizim için bugün son.” Altına küçük bir çizgi çekmişti.',
             ),
             n('Hedef: delil dilekçesi için son gün. Tahtayı topla; duruşmada kimi dinletmek, neyi okutmak istiyorsun?'),
           ],

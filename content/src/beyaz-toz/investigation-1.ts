@@ -490,7 +490,7 @@ export const investigation1: CasePart = {
           next: '$stay',
         }),
         option('DIL_IZ', 'Terazideki parmak izinin Demirel soyadlı kiracıyla karşılaştırılması', {
-          visibleWhen: has('ded_demirel'),
+          visibleWhen: all(has('ded_demirel'), has('clue_iz_yabanci')),
           cost: [{ var: 'dil_hak', amount: 1 }],
           score: { USUL_BILGISI: 30 },
           effects: [raise('iz_istendi')],
@@ -619,8 +619,8 @@ export const investigation1: CasePart = {
           'clue_ayni_parti',
           'clue_sekerlik',
           'ded_sekerlik',
-          'Şekerlik arka odanın deposu',
-          'Aynı poşet, aynı gramaj; şekerlik de arka oda kapısının dibinde. O iki paket mutfağın değil, arka odanın stoğundan.',
+          'Şekerlik arka oda kapısında',
+          'Benzer poşet, yakın gramaj; şekerlik de arka oda kapısının dibinde. O iki paket arka odanın stoğu olabilir. “Olabilir” bir mahkemede yetmez; karşılaştırma isteyecekler.',
         ),
         deduce(
           'CB_KASK',

@@ -114,10 +114,15 @@
         "all": [
           { "not": { "flag": "cokus" } },
           { "flag": "tolga_kirildi" },
+          { "flag": "jar_cleared" },
           { "hasEvidence": "ev_iz_eslesme" },
-          { "flag": "gercek_fail" },
-          { "cmp": [{ "var": "pers" }, ">=", 8] },
-          { "cmp": [{ "score": "final" }, ">=", 11000] }
+          { "flag": "contra_t4" },
+          { "flag": "fact_gps9" },
+          { "hasEvidence": "ded_kacis" },
+          { "flag": "contra_s2" },
+          { "flag": "defter_sunuldu" },
+          { "hasEvidence": "ev_canta" },
+          { "flag": "gercek_fail" }
         ]
       },
       "stamp": "BERAAT",
@@ -130,7 +135,13 @@
           "text": "Terazideki parmak izi Barış Demirel’e aittir; kurye kayıtları onu baskın sabahı olay yerinde ve muhbirin paketi aldığı saatte binanın kapısında göstermektedir."
         },
         {
-          "text": "Muhbir tanık, paketi Barış Demirel’den aldığını, sanığın adını korku ve kin nedeniyle verdiğini duruşmada beyan etmiştir."
+          "text": "Muhbir tanık, paketi Barış Demirel’den aldığını, sanığın adını korku ve kin nedeniyle verdiğini duruşmada beyan etmiştir; sanık o saatte işyerinde kasa başındadır (Z raporu)."
+        },
+        {
+          "text": "Ev sahibinin kira defteri arka odanın Barış Demirel’e kiralandığını göstermektedir; Demirel baskın sabahı binanın önünden dönmüş, ertesi gün işi bırakmıştır."
+        },
+        {
+          "text": "Savcılıkça usulüne uygun el konulan kurye çantasının astarındaki gizli bölmede kokain bulaşığı ve kilitli poşet artıkları bulunmuştur (CMK 123, 127)."
         },
         {
           "when": { "flag": "contra_s2" },
@@ -246,7 +257,16 @@
           "text": "Kapsam dışı aramayla elde edilen materyal hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2, 230/1-b)."
         },
         {
-          "text": "Şekerlikteki paketler arka odadaki stokla aynıdır ve sanığın zilyetliğinde olduğu gösterilememiştir."
+          "when": { "all": [{ "flag": "tolga_kirildi" }, { "hasEvidence": "ev_iz_eslesme" }] },
+          "text": "Terazideki parmak izi Barış Demirel’e aittir; muhbir tanık paketi ondan aldığını ve sanığın adını korkudan verdiğini duruşmada beyan etmiştir."
+        },
+        {
+          "when": { "all": [{ "flag": "jar_cleared" }, { "hasEvidence": "ded_stok" }] },
+          "text": "Savunmanın sunduğu uzman mütalaasına göre şekerlikteki iki paket arka odadaki stoktan ayrılmıştır (ardışık poşet numaraları, aynı kapatma izi, aynı saflık); paketlerde sanığın izi yoktur ve sanığın zilyetliğinde oldukları gösterilememiştir (CMK 67/6, 217)."
+        },
+        {
+          "when": { "all": [{ "flag": "jar_cleared" }, { "not": { "hasEvidence": "ded_stok" } }] },
+          "text": "Muhbir tanık, şekerlikteki paketleri arka odanın kiracısının aldığını duruşmada anlatmıştır; paketlerin sanığın zilyetliğinde olduğu gösterilememiştir."
         },
         {
           "when": { "any": [{ "flag": "contra_t3" }, { "flag": "contra_t5" }] },
@@ -481,25 +501,9 @@
         "all": [
           { "not": { "flag": "cokus" } },
           { "not": { "flag": "jar_cleared" } },
-          { "any": [{ "flag": "contra_s2" }, { "flag": "terditli" }] },
-          { "flag": "ek_savunma" },
-          { "any": [{ "flag": "contra_s5" }, { "flag": "kaan_durust" }] },
-          {
-            "any": [
-              { "flag": "press_t2" },
-              { "flag": "press_t3" },
-              { "flag": "press_t4" },
-              {
-                "any": [
-                  { "flag": "contra_t3" },
-                  { "flag": "contra_t4" },
-                  { "flag": "contra_t5" },
-                  { "flag": "tolga_kirildi" }
-                ]
-              }
-            ]
-          },
-          { "cmp": [{ "score": "final" }, ">=", 5500] }
+          { "flag": "contra_s2" },
+          { "flag": "contra_t4" },
+          { "flag": "ek_savunma" }
         ]
       },
       "stamp": "NİTELİK DEĞİŞTİ",
@@ -512,9 +516,16 @@
           "text": "Arka odanın sanığa ait olduğu ispat edilememiştir; ticaret kastı sabit değildir."
         },
         {
-          "when": { "not": { "flag": "jar_cleared" } },
-          "text": "Ortak alandaki şekerlikte iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur; sanığın kullanıcı olduğu saç analizi, tedavi kayıtları ve kendi beyanıyla sabittir. Bu olgular kullanmak için bulundurmayla uyumludur."
+          "text": "Sanığın 9 Kasım gecesi işyerinde kasa başında olduğu Z raporuyla sabittir; muhbirin satış anlatımı hükme esas alınmamıştır. Satış ya da satışa arz fiili ispatlanamamıştır."
         },
+        {
+          "text": "Ortak alandaki şekerlikte iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur; sanığın kullanıcı olduğu saç analiziyle sabittir. Bu olgular kullanmak için bulundurmayla uyumludur."
+        },
+        {
+          "when": { "flag": "contra_s5" },
+          "text": "Sanığın tedavi kayıtları kullanıcı profilini ayrıca doğrulamaktadır."
+        },
+        { "when": { "flag": "kaan_durust" }, "text": "Sanık duruşmada madde kullandığını kendisi açıklamıştır." },
         {
           "when": { "flag": "terditli" },
           "text": "Sanık terditli savunmasında eylemin en fazla kullanmak için bulundurma olduğunu ileri sürmüştür."
@@ -531,7 +542,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "Odanın sanığa ait olmadığını göster ama şekerliği arka odanın stoğuna bağlayamazsan ya da terditli savunmayı seçersen; ek savunma hakkını kullan.",
+      "howToReach": "Odanın sanığa ait olmadığını göster, muhbirin saatini Z raporuyla çürüt, ama şekerliği arka odanın stoğuna bağlayamazsan; ek savunma hakkını kullan.",
       "epilogue": [
         {
           "lines": [

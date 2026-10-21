@@ -398,22 +398,28 @@
               "lines": [
                 {
                   "speaker": "kaan",
-                  "text": "Asma kilit vardı. Barış taktı, eylülde. Anahtarı boynunda bir ipte taşırdı."
+                  "expression": "saskin",
+                  "text": "Kilit… vardı. Asma kilit. Ben o odaya karışmazdım. Kimin taktığını… bilmiyorum, sanırım."
                 },
-                {
-                  "speaker": "kaan",
-                  "text": "Benim anahtarlığım emanette. Üç anahtar var: kapı, bina, posta kutusu. Dördüncüsü yok."
-                },
+                { "speaker": "savci", "text": "Bilmiyor musunuz, sanık? Kendi evinizde, kendi koridorunuzda?" },
+                { "speaker": "kaan", "expression": "uzgun", "text": "Ben… kapıya bakmazdım. Yani…" },
                 {
                   "speaker": "player",
-                  "text": "Savcı bir şey not aldı. Emanet tutanağını çıkarıp baktı. Sonra not aldığı şeyin üstünü çizdi.",
+                  "text": "Kürsüde insanın aklı boşalır. Bu kilidi onunla bir kez bile konuşmadım; şimdi sorduğum soruya bir yabancı gibi cevap veriyor.",
                   "style": "thought"
                 }
               ]
             }
           ],
           "next": "$stay",
-          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 40 },
+            {
+              "type": "IF",
+              "when": { "flag": "fact_kilit_k" },
+              "then": [{ "type": "VAR", "var": "q_kilit_tam", "op": "set", "value": true }]
+            }
+          ],
           "quality": {
             "q": "GOOD",
             "feedback": "Kilitli odanın zilyetliği: anahtarı taşıyan, odanın hâkimiyetine sahip olandır. Soru, savunmanın eksenini sanığın ağzından kurdu.",
@@ -519,6 +525,64 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Kullanım ile ticaret ayrımında sanığın kendi tedavi süreci, açık uçlu bir soruyla mahkemeye taşındı.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "Q_SEKER",
+          "kind": "OPTION",
+          "label": "Koridordaki şekerliği kim, ne için kullanırdı?",
+          "visibleWhen": { "flag": "fact_seker_k" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "kaan",
+                  "text": "Ben. Çay için. Günde beş çay içerim; şekeri oradan alırdım. Önce mutfaktaydı; ekimde Barış “mutfakta yer açayım” deyip koridordaki rafa, kendi kapısının yanına taşıdı."
+                },
+                { "speaker": "uye", "text": "Kavanozun içinde paket olduğunu biliyor muydunuz?" },
+                {
+                  "speaker": "kaan",
+                  "text": "Hayır, Sayın Hâkim. Kapağını açar, kaşığı daldırırdım. İçine bakmazdım. Şeker şekerdir."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Savcı kavanozdaki izi not defterinde daire içine almıştı. Şimdi o dairenin yanına bir soru işareti koydu.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Savcılığın yedek delili kavanozdaki izdir; izin masum açıklaması sanığın kendi ağzından, duruşmada kayda geçti (CMK 191, 217).",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "Q_EHLIYET",
+          "kind": "OPTION",
+          "label": "Ehliyetin, motosikletin ya da kaskın var mı?",
+          "visibleWhen": { "hasEvidence": "clue_kaan_olcu" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "kaan",
+                  "text": "Yok. Ehliyetim hiç olmadı. Motosiklet de yok, kask da. Bisiklete bile binemem; babam öğretecekti, olmadı."
+                },
+                { "speaker": "uye", "text": "Not edildi. Sürücü belgesi sorgusu dosyaya eklensin." },
+                { "speaker": "player", "text": "Üye hâkim soruyu neden sorduğumu bilmiyor. Henüz.", "style": "thought" }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 30 }],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Sanığın kendisine ilişkin doğrulanabilir bir olgu (ehliyet, araç) duruşmada kendi ağzından kayda geçti; ileride bir tanık anlatımıyla karşılaştırılabilir.",
             "category": "SORGULAMA"
           }
         },
@@ -903,7 +967,7 @@
           "id": "PS_S1",
           "kind": "PRESENT",
           "match": { "statement": "S1", "evidence": ["ev_karar"] },
-          "enabledWhen": { "flag": "contra_s3" },
+          "enabledWhen": { "all": [{ "flag": "contra_s3" }, { "hasEvidence": "clue_kapsam" }] },
           "responses": [
             {
               "when": { "flag": "fact_talep" },
@@ -977,6 +1041,26 @@
           ]
         },
         {
+          "id": "PS_S1_SATIR",
+          "kind": "PRESENT",
+          "match": { "statement": "S1", "evidence": ["ev_karar"] },
+          "enabledWhen": { "all": [{ "flag": "contra_s3" }, { "not": { "hasEvidence": "clue_kapsam" } }] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Arama kararı, tanık. Bu kararla mı girdiniz?" },
+                { "speaker": "tuncay", "text": "Bu kararla girdik. Mühürlü, imzalı. Hâkim imzalamış." },
+                { "speaker": "uye", "text": "Müdafi, kararın hangi kısmına dikkat çekiyorsunuz?" },
+                {
+                  "speaker": "player",
+                  "text": "Kâğıdı salladım ama hangi satırı okutacağımı bilmiyorum. Kararı talep yazısıyla yan yana koyup sınırın nereden geçtiğini hiç okumadım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_S1_ERKEN",
           "kind": "PRESENT",
           "match": { "statement": "S1", "evidence": ["ev_karar", "ded_kapsam"] },
@@ -1036,14 +1120,8 @@
           "enabledWhen": {
             "all": [
               { "flag": "press_s2" },
-              {
-                "any": [
-                  { "hasEvidence": "ded_kurye" },
-                  { "hasEvidence": "ded_numara" },
-                  { "hasEvidence": "ded_baris" },
-                  { "hasEvidence": "ded_demirel" }
-                ]
-              }
+              { "any": [{ "hasEvidence": "ded_baris" }, { "hasEvidence": "ded_demirel" }] },
+              { "all": [{ "hasEvidence": "ded_anahtar" }, { "chosen": "Q_ODA" }, { "flag": "q_kilit_tam" }] }
             ]
           },
           "responses": [
@@ -1052,6 +1130,10 @@
                 {
                   "speaker": "player",
                   "text": "Tutanağınızın ilk satırı: “Şüpheli ön odada yatağında uyurken bulundu.” Krokiniz: ön oda “misafir odası”. Fotoğrafınızda o odada sanığın kitabı, gözlüğü, öğrenci kartı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Sanık bu sabah anlattı: arka odanın kapısında asma kilit vardı, anahtarı başkasındaydı. Emanet tutanağınız: sanığın anahtarlığında üç anahtar. Kapı, bina, posta kutusu. Asma kilidin anahtarı yok."
                 },
                 { "speaker": "player", "text": "Hangisi doğru, tanık? Tutanağınız mı, krokiniz mi?" },
                 {
@@ -1090,22 +1172,56 @@
           ]
         },
         {
+          "id": "PS_S2_EKSIK",
+          "kind": "PRESENT",
+          "match": { "statement": "S2", "evidence": ["ded_oda"] },
+          "enabledWhen": {
+            "all": [
+              { "flag": "press_s2" },
+              { "any": [{ "hasEvidence": "ded_baris" }, { "hasEvidence": "ded_demirel" }] },
+              { "not": { "all": [{ "hasEvidence": "ded_anahtar" }, { "chosen": "Q_ODA" }, { "flag": "q_kilit_tam" }] } }
+            ]
+          },
+          "responses": [
+            {
+              "when": { "not": { "hasEvidence": "ded_anahtar" } },
+              "lines": [
+                {
+                  "speaker": "tuncay",
+                  "text": "Ön odada uyuyordu, kabul. Arka odada başka eşyalar da vardı, kabul. Ama kilitli bir odanın anahtarı evin kiracısında olur. Ev onun adına."
+                },
+                { "speaker": "uye", "text": "Müdafi, sanığın o kilide erişimi olmadığını gösteren bir şey var mı?" },
+                {
+                  "speaker": "player",
+                  "text": "Emanetteki anahtarlık. Üç anahtar, dördüncüsü yok. Ve kesik bir asma kilit. İkisini tahtada yan yana koymadım; şimdi elimde değil.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "tuncay",
+                  "text": "Sanık nerede yattığını, o kilidin anahtarının kimde olduğunu burada söylemedi ki. Ben gördüğümü yazdım."
+                },
+                { "speaker": "uye", "text": "Sanığın bu konudaki beyanı tutanakta yok, müdafi." },
+                {
+                  "speaker": "player",
+                  "text": "Kaan’ın odasını Kaan’ın sesi olmadan savunuyorum. Sorgusunda ona nerede uyuduğunu ve kilidin kimde olduğunu sormadım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "id": "PS_S2_TEK",
           "kind": "PRESENT",
           "match": { "statement": "S2", "evidence": ["ded_oda"] },
           "enabledWhen": {
             "all": [
               { "flag": "press_s2" },
-              {
-                "not": {
-                  "any": [
-                    { "hasEvidence": "ded_kurye" },
-                    { "hasEvidence": "ded_numara" },
-                    { "hasEvidence": "ded_baris" },
-                    { "hasEvidence": "ded_demirel" }
-                  ]
-                }
-              }
+              { "not": { "any": [{ "hasEvidence": "ded_baris" }, { "hasEvidence": "ded_demirel" }] } }
             ]
           },
           "responses": [
@@ -1113,15 +1229,15 @@
               "lines": [
                 {
                   "speaker": "tuncay",
-                  "text": "Ön odada uyuyordu, evet. Kroki aceleyle çizildi, kabul. Ama ev onun adına; arka odada başka biri yaşadığını gösteren bir şey yok."
+                  "text": "Ön odada uyuyordu, evet. Kroki aceleyle çizildi, kabul. Ama ev onun adına. Arka odada bir mont, bir ayakkabı varsa misafir de bırakır."
                 },
                 {
                   "speaker": "uye",
-                  "text": "Müdafi, arka odanın başka birine ait olduğunu gösteren bir deliliniz var mı?"
+                  "text": "Müdafi, arka odanın başka birine kiralandığını gösteren bir deliliniz var mı?"
                 },
                 {
                   "speaker": "player",
-                  "text": "Yok. Kaan’ın nerede uyuduğunu gösterdim; arka odada kimin yaşadığını değil. Bir mont, bir ayakkabı, bir defter: o odanın sahibine dair tek bir kart.",
+                  "text": "Kaan’ın nerede uyuduğunu gösterdim; arka odada kimin oturduğunu değil. Bir eşya bir misafir olabilir. Bir isim, bir kira kaydı, bir posta kutusu: o odanın sahibine dair bir kâğıt.",
                   "style": "thought"
                 }
               ]
@@ -1442,7 +1558,7 @@
                 },
                 {
                   "speaker": "player",
-                  "text": "Kriminal rapor: şekerlikteki iki paket, arka odadaki 46 paketle aynı poşet, aynı kesim, aynı gramaj. Aynı stok."
+                  "text": "Kriminal rapor: şekerlikteki iki paket, arka odadaki 46 paketle aynı tip poşette, aynı gramajda."
                 },
                 {
                   "speaker": "tuncay",
@@ -1452,8 +1568,16 @@
                 { "speaker": "uye", "text": "Paketlerin üzerinde sanığın izi var mı, tanık?" },
                 { "speaker": "tuncay", "text": "Paketlerde elverişli iz yok, Sayın Hâkim. Kavanozun dışında var." },
                 {
+                  "speaker": "savci",
+                  "text": "Sayın Başkan, aynı tip poşet her markette satılır. Laboratuvar “aynı tip” demiş, “aynı parti” dememiş. Paketlerin arka odadan geldiği müdafiin yorumudur."
+                },
+                {
+                  "speaker": "baskan",
+                  "text": "Not edildi. Heyet benzerliği tespit saymaz; taraflar delillerini sunar."
+                },
+                {
                   "speaker": "player",
-                  "text": "Kavanozu açan el ile paketi koyan el aynı el değil. Savcının yedek planı da masada kaldı.",
+                  "text": "Haklı. Benzerlik bir soru. Cevabı belki kriminal raporun eklerinde duruyor: fotoğraflar, baskı numaraları, kromatogramlar. Onları okuyacak bir göz lazım.",
                   "style": "thought"
                 }
               ]
@@ -1463,11 +1587,10 @@
             { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
             { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
             { "type": "VAR", "var": "contra_s6", "op": "set", "value": true },
-            { "type": "VAR", "var": "jar_cleared", "op": "set", "value": true },
             {
               "type": "MARK",
               "quality": "GOOD",
-              "feedback": "Şekerlik mutfakta değil arka oda kapısının yanındaki raftaydı; içindeki iki paket arka odadaki stokla aynı. “Ortak alan, ortak zilyetlik” tezi düştü.",
+              "feedback": "Kolluk tanığı şekerliğin mutfakta değil arka oda kapısının yanındaki rafta durduğunu ve paketlerde sanığın izi bulunmadığını kabul etti. Paketlerin arka odanın stoğundan geldiği ise henüz bir benzerlik: savcı karşılaştırma istiyor.",
               "category": "SORGULAMA"
             }
           ]
@@ -1615,6 +1738,35 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Arama tanığı ve ev sahibi: doğrudan bilgi sahibi tanığın duruşmada dinlenmesi (CMK 206/1, 210).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "TL_IZ",
+          "kind": "OPTION",
+          "label": "Terazideki yabancı izin Demirel soyadlı kiracının iziyle karşılaştırılması",
+          "visibleWhen": {
+            "all": [
+              { "hasEvidence": "ded_demirel" },
+              { "hasEvidence": "clue_iz_yabanci" },
+              { "not": { "flag": "iz_istendi" } }
+            ]
+          },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "baskan", "text": "Kabul. Kolluğa yazı yazılsın; şahıs bulunursa karşılaştırma yapılsın." }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 30 },
+            { "type": "VAR", "var": "iz_istendi", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Somut delil istemi (CMK 206/1): terazideki iz sanığa ait değil; karşılaştırma, kişi bulunup izi alındığında yapılır.",
             "category": "USUL_BILGISI"
           }
         },

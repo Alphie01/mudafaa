@@ -3,7 +3,6 @@ import {
   always,
   any,
   because,
-  finalAtLeast,
   flag,
   has,
   not,
@@ -17,8 +16,9 @@ import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { card, me, n, s, th, voice } from './shared.js';
 
 // 90-outcomes: beş sonuç. Öncelik sırası: sahte tanık (TELKİN), 223/2-b, 223/2-e, 191'e dönüşüm (HAGB), mahkûmiyet.
-// Eşikler: 191 için 5.500, 223/2-b için 11.000. 223/2-e puan eşiği taşımaz: delil zinciri (beraat_e) kurulduysa
-// hüküm beraattir; özensiz oyun yalnızca kapanış sahnesinde Leyla’nın sözlerini değiştirir, hükmü değil.
+// Hiçbir sonuç puan ya da ikna eşiği taşımaz: hüküm yalnızca duruşmada kurulan kayda (bayraklar, sunulan deliller)
+// bağlıdır. Erken çözümü puan değil delil önkoşulları engeller (tasarım belgesi §12). Özensiz oyun yalnızca kapanış
+// sahnesinde Deniz’in ve Leyla’nın sözlerini değiştirir, hükmü değil.
 // Kararın gerekçe satırları duruşmada kurulan bayraklara göre seçilir; hiçbir satır duruşmada çürütülmüş bir olguya dayanmaz.
 
 /** Muhbirin anlatısı duruşmada sarsıldı mı? */
@@ -100,11 +100,19 @@ export const outcomes: CasePart = {
       priority: 2,
       when: all(
         not(flag('cokus')),
+        // “İşlemediğinin sabit olması” olumlu ispat ister: satışı yapanın Barış olduğu (muhbirin dönüşü + terazideki iz +
+        // 9 Kasım GPS kaydı + sanığın o saatteki mazereti), arka odanın ona kiralandığı (oda varsayımının çöküşü + ev
+        // sahibinin defteri), baskın sabahı kaçışı (GPS 07.16 + Nesrin) ve usulüne uygun el konulan çantası.
         flag('tolga_kirildi'),
+        flag('jar_cleared'),
         has('ev_iz_eslesme'),
+        flag('contra_t4'),
+        flag('fact_gps9'),
+        has('ded_kacis'),
+        flag('contra_s2'),
+        flag('defter_sunuldu'),
+        has('ev_canta'),
         flag('gercek_fail'),
-        cmp(v('pers'), '>=', 8),
-        finalAtLeast(11000),
       ),
       stamp: 'BERAAT',
       stampTone: 'green',
@@ -117,7 +125,13 @@ export const outcomes: CasePart = {
           'Terazideki parmak izi Barış Demirel’e aittir; kurye kayıtları onu baskın sabahı olay yerinde ve muhbirin paketi aldığı saatte binanın kapısında göstermektedir.',
         ),
         because(
-          'Muhbir tanık, paketi Barış Demirel’den aldığını, sanığın adını korku ve kin nedeniyle verdiğini duruşmada beyan etmiştir.',
+          'Muhbir tanık, paketi Barış Demirel’den aldığını, sanığın adını korku ve kin nedeniyle verdiğini duruşmada beyan etmiştir; sanık o saatte işyerinde kasa başındadır (Z raporu).',
+        ),
+        because(
+          'Ev sahibinin kira defteri arka odanın Barış Demirel’e kiralandığını göstermektedir; Demirel baskın sabahı binanın önünden dönmüş, ertesi gün işi bırakmıştır.',
+        ),
+        because(
+          'Savcılıkça usulüne uygun el konulan kurye çantasının astarındaki gizli bölmede kokain bulaşığı ve kilitli poşet artıkları bulunmuştur (CMK 123, 127).',
         ),
         because(
           'Arka odanın sanığa ait olduğu kolluk tarafından varsayılmıştır; oda üçüncü kişinin kilitli odasıdır.',
@@ -208,7 +222,18 @@ export const outcomes: CasePart = {
           'Kapsam dışı aramayla elde edilen materyal hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2, 230/1-b).',
           flag('key_excluded'),
         ),
-        because('Şekerlikteki paketler arka odadaki stokla aynıdır ve sanığın zilyetliğinde olduğu gösterilememiştir.'),
+        because(
+          'Terazideki parmak izi Barış Demirel’e aittir; muhbir tanık paketi ondan aldığını ve sanığın adını korkudan verdiğini duruşmada beyan etmiştir.',
+          all(flag('tolga_kirildi'), has('ev_iz_eslesme')),
+        ),
+        because(
+          'Savunmanın sunduğu uzman mütalaasına göre şekerlikteki iki paket arka odadaki stoktan ayrılmıştır (ardışık poşet numaraları, aynı kapatma izi, aynı saflık); paketlerde sanığın izi yoktur ve sanığın zilyetliğinde oldukları gösterilememiştir (CMK 67/6, 217).',
+          all(flag('jar_cleared'), has('ded_stok')),
+        ),
+        because(
+          'Muhbir tanık, şekerlikteki paketleri arka odanın kiracısının aldığını duruşmada anlatmıştır; paketlerin sanığın zilyetliğinde olduğu gösterilememiştir.',
+          all(flag('jar_cleared'), not(has('ded_stok'))),
+        ),
         because(
           'Muhbir tanığın anlatımı kendi kolluk ifadesiyle çelişmektedir; tarif ettiği satıcı kasklıdır, sanığın ne kaskı ne ehliyeti vardır.',
           any(flag('contra_t3'), flag('contra_t5')),
@@ -392,11 +417,12 @@ export const outcomes: CasePart = {
       when: all(
         not(flag('cokus')),
         not(flag('jar_cleared')),
-        any(flag('contra_s2'), flag('terditli')),
+        // 191 kaydın kendisinden doğar: arka oda sanığa bağlanamadı (oda varsayımı çöktü), muhbirin satış anlatımı zaman
+        // bakımından çöktü (Z raporu) ve şekerlik aklanmadı; geriye bir kullanıcının (saç analizi) ortak alandaki iki
+        // paketi kalır. Bu kayıtta mütalaa T_05N'ye gider ve CMK 226 hatırlatması (ek savunma) her durumda yapılır.
+        flag('contra_s2'),
+        flag('contra_t4'),
         flag('ek_savunma'),
-        any(flag('contra_s5'), flag('kaan_durust')),
-        any(flag('press_t2'), flag('press_t3'), flag('press_t4'), muhbirSarsildi),
-        finalAtLeast(5500),
       ),
       stamp: 'NİTELİK DEĞİŞTİ',
       stampTone: 'amber',
@@ -406,9 +432,13 @@ export const outcomes: CasePart = {
       reasoning: [
         because('Arka odanın sanığa ait olduğu ispat edilememiştir; ticaret kastı sabit değildir.', flag('contra_s2')),
         because(
-          'Ortak alandaki şekerlikte iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur; sanığın kullanıcı olduğu saç analizi, tedavi kayıtları ve kendi beyanıyla sabittir. Bu olgular kullanmak için bulundurmayla uyumludur.',
-          not(flag('jar_cleared')),
+          'Sanığın 9 Kasım gecesi işyerinde kasa başında olduğu Z raporuyla sabittir; muhbirin satış anlatımı hükme esas alınmamıştır. Satış ya da satışa arz fiili ispatlanamamıştır.',
         ),
+        because(
+          'Ortak alandaki şekerlikte iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur; sanığın kullanıcı olduğu saç analiziyle sabittir. Bu olgular kullanmak için bulundurmayla uyumludur.',
+        ),
+        because('Sanığın tedavi kayıtları kullanıcı profilini ayrıca doğrulamaktadır.', flag('contra_s5')),
+        because('Sanık duruşmada madde kullandığını kendisi açıklamıştır.', flag('kaan_durust')),
         because(
           'Sanık terditli savunmasında eylemin en fazla kullanmak için bulundurma olduğunu ileri sürmüştür.',
           flag('terditli'),
@@ -420,7 +450,7 @@ export const outcomes: CasePart = {
       legalBasis: 'TCK 191/1, 191/3, 191/8; CMK 225/2, 226, 231/8, 231/12; TCK 54',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        'Odanın sanığa ait olmadığını göster ama şekerliği arka odanın stoğuna bağlayamazsan ya da terditli savunmayı seçersen; ek savunma hakkını kullan.',
+        'Odanın sanığa ait olmadığını göster, muhbirin saatini Z raporuyla çürüt, ama şekerliği arka odanın stoğuna bağlayamazsan; ek savunma hakkını kullan.',
       epilogue: [
         {
           lines: [

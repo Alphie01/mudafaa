@@ -422,7 +422,8 @@ export const inv1Kaan: CasePart = {
           },
         }),
         topic('TP_SEKER', 'Şekerlik', {
-          visibleWhen: any(has('clue_sekerlik'), has('clue_kavanoz_iz')),
+          // Kavanozdaki izi sormak için önce izin varlığını (kriminal rapor) ve şekerliğin yerini (fotoğraf) bilmek gerekir.
+          visibleWhen: all(has('clue_sekerlik'), has('clue_kavanoz_iz')),
           cost: costOf('min', 2),
           score: { SORGULAMA: 20 },
           effects: [raise('fact_seker_k')],

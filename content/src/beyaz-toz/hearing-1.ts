@@ -23,13 +23,22 @@ import {
   statement,
   story,
   choiceNode,
+  chosen,
   met,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { HEAR1, card, court1, me, n, s, th } from './shared.js';
 
-/** Arka odada sanıktan başka birinin yaşadığını gösteren bir kart (oda varsayımının çökmesi için gerekir). */
-const baskaBiri = any(has('ded_kurye'), has('ded_numara'), has('ded_baris'), has('ded_demirel'));
+/**
+ * Arka odanın başka birine kiralandığını gösteren bir kart: bir isim (kira defteri + “odaya girme”) ya da bir soyadı
+ * (hat + posta kutusu). Mont ya da ayakkabı yetmez; kolluk “misafir bırakmıştır” der (PS_S2_TEK, PS_S2_KISMI).
+ */
+const baskaBiri = any(has('ded_baris'), has('ded_demirel'));
+/**
+ * Oda varsayımının öteki dayanakları: sanığın duruşmadaki kendi anlatımı (nerede uyuduğu, kilidin kimde olduğu) ve
+ * emanetteki anahtarlığın asma kilidin anahtarını taşımadığı (anahtarsız kiracı çıkarımı).
+ */
+const odaTemeli = all(has('ded_anahtar'), chosen('Q_ODA'), flag('q_kilit_tam'));
 
 // 60-hearing-1: birinci celse. Açılış, iddianame, Kaan'ın savunması ve müdafiin soruları, savcının polise sorusu
 // (itiraz), Kom. Yrd. Tuncay Sezer'in çapraz sorgusu, CMK 206/1 talepleri ve ara karar (tutukluluk incelemesi).
@@ -269,6 +278,8 @@ export const hearing1: CasePart = {
         option('Q_KILIT', 'Arka odanın kapısında kilit var mıydı? Anahtarı kimdeydi?', {
           visibleWhen: any(flag('fact_arka'), has('clue_kilit')),
           score: { SORGULAMA: 40 },
+          // Görüşmede kilidi konuşmuş (TP_KILIT) bir sanık kürsüde de ayrıntıyı hatırlar; hazırlıksız olan dağılır.
+          effects: [ifThen(flag('fact_kilit_k'), [raise('q_kilit_tam')])],
           good: 'Kilitli odanın zilyetliği: anahtarı taşıyan, odanın hâkimiyetine sahip olandır. Soru, savunmanın eksenini sanığın ağzından kurdu.',
           responses: [
             {
@@ -284,9 +295,12 @@ export const hearing1: CasePart = {
             },
             {
               lines: [
-                s('kaan', 'Asma kilit vardı. Barış taktı, eylülde. Anahtarı boynunda bir ipte taşırdı.'),
-                s('kaan', 'Benim anahtarlığım emanette. Üç anahtar var: kapı, bina, posta kutusu. Dördüncüsü yok.'),
-                th('Savcı bir şey not aldı. Emanet tutanağını çıkarıp baktı. Sonra not aldığı şeyin üstünü çizdi.'),
+                s('kaan', 'Kilit… vardı. Asma kilit. Ben o odaya karışmazdım. Kimin taktığını… bilmiyorum, sanırım.', 'saskin'),
+                s('savci', 'Bilmiyor musunuz, sanık? Kendi evinizde, kendi koridorunuzda?'),
+                s('kaan', 'Ben… kapıya bakmazdım. Yani…', 'uzgun'),
+                th(
+                  'Kürsüde insanın aklı boşalır. Bu kilidi onunla bir kez bile konuşmadım; şimdi sorduğum soruya bir yabancı gibi cevap veriyor.',
+                ),
               ],
             },
           ],
@@ -355,6 +369,40 @@ export const hearing1: CasePart = {
                 th(
                   'Merve Tan bir şey yazdı. Bir insan kendi isteğiyle tedaviye gidiyorsa, o kişinin dünyası terazi ve poşetle değil, bir randevu kartıyla ölçülür.',
                 ),
+              ],
+            },
+          ],
+          next: '$stay',
+        }),
+        option('Q_SEKER', 'Koridordaki şekerliği kim, ne için kullanırdı?', {
+          visibleWhen: flag('fact_seker_k'),
+          score: { SORGULAMA: 40 },
+          good: 'Savcılığın yedek delili kavanozdaki izdir; izin masum açıklaması sanığın kendi ağzından, duruşmada kayda geçti (CMK 191, 217).',
+          responses: [
+            {
+              lines: [
+                s(
+                  'kaan',
+                  'Ben. Çay için. Günde beş çay içerim; şekeri oradan alırdım. Önce mutfaktaydı; ekimde Barış “mutfakta yer açayım” deyip koridordaki rafa, kendi kapısının yanına taşıdı.',
+                ),
+                s('uye', 'Kavanozun içinde paket olduğunu biliyor muydunuz?'),
+                s('kaan', 'Hayır, Sayın Hâkim. Kapağını açar, kaşığı daldırırdım. İçine bakmazdım. Şeker şekerdir.'),
+                th('Savcı kavanozdaki izi not defterinde daire içine almıştı. Şimdi o dairenin yanına bir soru işareti koydu.'),
+              ],
+            },
+          ],
+          next: '$stay',
+        }),
+        option('Q_EHLIYET', 'Ehliyetin, motosikletin ya da kaskın var mı?', {
+          visibleWhen: has('clue_kaan_olcu'),
+          score: { SORGULAMA: 30 },
+          good: 'Sanığın kendisine ilişkin doğrulanabilir bir olgu (ehliyet, araç) duruşmada kendi ağzından kayda geçti; ileride bir tanık anlatımıyla karşılaştırılabilir.',
+          responses: [
+            {
+              lines: [
+                s('kaan', 'Yok. Ehliyetim hiç olmadı. Motosiklet de yok, kask da. Bisiklete bile binemem; babam öğretecekti, olmadı.'),
+                s('uye', 'Not edildi. Sürücü belgesi sorgusu dosyaya eklensin.'),
+                th('Üye hâkim soruyu neden sorduğumu bilmiyor. Henüz.'),
               ],
             },
           ],
@@ -558,7 +606,7 @@ export const hearing1: CasePart = {
           ],
         }),
         presentRule('PS_S1', 'S1', ['ev_karar'], {
-          enabledWhen: flag('contra_s3'),
+          enabledWhen: all(flag('contra_s3'), has('clue_kapsam')),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -616,6 +664,21 @@ export const hearing1: CasePart = {
             },
           ],
         }),
+        presentRule('PS_S1_SATIR', 'S1', ['ev_karar'], {
+          enabledWhen: all(flag('contra_s3'), not(has('clue_kapsam'))),
+          responses: [
+            {
+              lines: [
+                me('Arama kararı, tanık. Bu kararla mı girdiniz?'),
+                s('tuncay', 'Bu kararla girdik. Mühürlü, imzalı. Hâkim imzalamış.'),
+                s('uye', 'Müdafi, kararın hangi kısmına dikkat çekiyorsunuz?'),
+                th(
+                  'Kâğıdı salladım ama hangi satırı okutacağımı bilmiyorum. Kararı talep yazısıyla yan yana koyup sınırın nereden geçtiğini hiç okumadım.',
+                ),
+              ],
+            },
+          ],
+        }),
         presentRule('PS_S1_ERKEN', 'S1', ['ev_karar', 'ded_kapsam'], {
           enabledWhen: not(flag('contra_s3')),
           score: { SORGULAMA: 100 },
@@ -654,7 +717,7 @@ export const hearing1: CasePart = {
           ],
         }),
         presentRule('PS_S2', 'S2', ['ded_oda'], {
-          enabledWhen: all(flag('press_s2'), baskaBiri),
+          enabledWhen: all(flag('press_s2'), baskaBiri, odaTemeli),
           score: { SORGULAMA: 300 },
           effects: [
             inc('pers', 2),
@@ -670,6 +733,9 @@ export const hearing1: CasePart = {
               lines: [
                 me(
                   'Tutanağınızın ilk satırı: “Şüpheli ön odada yatağında uyurken bulundu.” Krokiniz: ön oda “misafir odası”. Fotoğrafınızda o odada sanığın kitabı, gözlüğü, öğrenci kartı.',
+                ),
+                me(
+                  'Sanık bu sabah anlattı: arka odanın kapısında asma kilit vardı, anahtarı başkasındaydı. Emanet tutanağınız: sanığın anahtarlığında üç anahtar. Kapı, bina, posta kutusu. Asma kilidin anahtarı yok.',
                 ),
                 me('Hangisi doğru, tanık? Tutanağınız mı, krokiniz mi?'),
                 n('Tuncay Sezer tutanağın fotokopisine baktı. Sonra krokiye. Sonra bir süre hiçbir şeye.'),
@@ -688,6 +754,36 @@ export const hearing1: CasePart = {
             },
           ],
         }),
+        presentRule('PS_S2_EKSIK', 'S2', ['ded_oda'], {
+          enabledWhen: all(flag('press_s2'), baskaBiri, not(odaTemeli)),
+          responses: [
+            {
+              when: not(has('ded_anahtar')),
+              lines: [
+                s(
+                  'tuncay',
+                  'Ön odada uyuyordu, kabul. Arka odada başka eşyalar da vardı, kabul. Ama kilitli bir odanın anahtarı evin kiracısında olur. Ev onun adına.',
+                ),
+                s('uye', 'Müdafi, sanığın o kilide erişimi olmadığını gösteren bir şey var mı?'),
+                th(
+                  'Emanetteki anahtarlık. Üç anahtar, dördüncüsü yok. Ve kesik bir asma kilit. İkisini tahtada yan yana koymadım; şimdi elimde değil.',
+                ),
+              ],
+            },
+            {
+              lines: [
+                s(
+                  'tuncay',
+                  'Sanık nerede yattığını, o kilidin anahtarının kimde olduğunu burada söylemedi ki. Ben gördüğümü yazdım.',
+                ),
+                s('uye', 'Sanığın bu konudaki beyanı tutanakta yok, müdafi.'),
+                th(
+                  'Kaan’ın odasını Kaan’ın sesi olmadan savunuyorum. Sorgusunda ona nerede uyuduğunu ve kilidin kimde olduğunu sormadım.',
+                ),
+              ],
+            },
+          ],
+        }),
         presentRule('PS_S2_TEK', 'S2', ['ded_oda'], {
           enabledWhen: all(flag('press_s2'), not(baskaBiri)),
           responses: [
@@ -695,11 +791,11 @@ export const hearing1: CasePart = {
               lines: [
                 s(
                   'tuncay',
-                  'Ön odada uyuyordu, evet. Kroki aceleyle çizildi, kabul. Ama ev onun adına; arka odada başka biri yaşadığını gösteren bir şey yok.',
+                  'Ön odada uyuyordu, evet. Kroki aceleyle çizildi, kabul. Ama ev onun adına. Arka odada bir mont, bir ayakkabı varsa misafir de bırakır.',
                 ),
-                s('uye', 'Müdafi, arka odanın başka birine ait olduğunu gösteren bir deliliniz var mı?'),
+                s('uye', 'Müdafi, arka odanın başka birine kiralandığını gösteren bir deliliniz var mı?'),
                 th(
-                  'Yok. Kaan’ın nerede uyuduğunu gösterdim; arka odada kimin yaşadığını değil. Bir mont, bir ayakkabı, bir defter: o odanın sahibine dair tek bir kart.',
+                  'Kaan’ın nerede uyuduğunu gösterdim; arka odada kimin oturduğunu değil. Bir eşya bir misafir olabilir. Bir isim, bir kira kaydı, bir posta kutusu: o odanın sahibine dair bir kâğıt.',
                 ),
               ],
             },
@@ -919,10 +1015,9 @@ export const hearing1: CasePart = {
           effects: [
             inc('pers', 2),
             raise('contra_s6'),
-            raise('jar_cleared'),
             mark(
               'GOOD',
-              'Şekerlik mutfakta değil arka oda kapısının yanındaki raftaydı; içindeki iki paket arka odadaki stokla aynı. “Ortak alan, ortak zilyetlik” tezi düştü.',
+              'Kolluk tanığı şekerliğin mutfakta değil arka oda kapısının yanındaki rafta durduğunu ve paketlerde sanığın izi bulunmadığını kabul etti. Paketlerin arka odanın stoğundan geldiği ise henüz bir benzerlik: savcı karşılaştırma istiyor.',
               'SORGULAMA',
             ),
           ],
@@ -933,12 +1028,19 @@ export const hearing1: CasePart = {
                   'Fotoğraf albümü, 23 numaralı kare. Şekerlik mutfakta değil, koridordaki rafta: arka oda kapısına iki adım.',
                 ),
                 me(
-                  'Kriminal rapor: şekerlikteki iki paket, arka odadaki 46 paketle aynı poşet, aynı kesim, aynı gramaj. Aynı stok.',
+                  'Kriminal rapor: şekerlikteki iki paket, arka odadaki 46 paketle aynı tip poşette, aynı gramajda.',
                 ),
                 s('tuncay', 'Raf… evet, koridordaydı. Ben mutfak yazdım çünkü şekerlik mutfak eşyasıdır.', 'saskin'),
                 s('uye', 'Paketlerin üzerinde sanığın izi var mı, tanık?'),
                 s('tuncay', 'Paketlerde elverişli iz yok, Sayın Hâkim. Kavanozun dışında var.'),
-                th('Kavanozu açan el ile paketi koyan el aynı el değil. Savcının yedek planı da masada kaldı.'),
+                s(
+                  'savci',
+                  'Sayın Başkan, aynı tip poşet her markette satılır. Laboratuvar “aynı tip” demiş, “aynı parti” dememiş. Paketlerin arka odadan geldiği müdafiin yorumudur.',
+                ),
+                s('baskan', 'Not edildi. Heyet benzerliği tespit saymaz; taraflar delillerini sunar.'),
+                th(
+                  'Haklı. Benzerlik bir soru. Cevabı belki kriminal raporun eklerinde duruyor: fotoğraflar, baskı numaraları, kromatogramlar. Onları okuyacak bir göz lazım.',
+                ),
               ],
             },
           ],
@@ -1018,6 +1120,14 @@ export const hearing1: CasePart = {
           effects: [raise('nesrin_istendi')],
           good: 'Arama tanığı ve ev sahibi: doğrudan bilgi sahibi tanığın duruşmada dinlenmesi (CMK 206/1, 210).',
           responses: [{ lines: [s('baskan', 'Kabul. Tanık Nesrin Uysal bir sonraki celsede dinlenecek.')] }],
+          next: '$stay',
+        }),
+        option('TL_IZ', 'Terazideki yabancı izin Demirel soyadlı kiracının iziyle karşılaştırılması', {
+          visibleWhen: all(has('ded_demirel'), has('clue_iz_yabanci'), not(flag('iz_istendi'))),
+          score: { USUL_BILGISI: 30 },
+          effects: [raise('iz_istendi')],
+          good: 'Somut delil istemi (CMK 206/1): terazideki iz sanığa ait değil; karşılaştırma, kişi bulunup izi alındığında yapılır.',
+          responses: [{ lines: [s('baskan', 'Kabul. Kolluğa yazı yazılsın; şahıs bulunursa karşılaştırma yapılsın.')] }],
           next: '$stay',
         }),
         option('TL_TAHLIYE', 'Tutukluluğun incelenmesi ve adli kontrolle tahliye', {

@@ -38,7 +38,7 @@ const gorus1 = [
   choose('TP_KENDI', 'soft'),
   choose('TP_DEFNE', 'soft'),
   choose('TP_KILIT', 'soft'),
-  choose('TP_SEKER', 'soft'),
+  choose('TP_TOLGA', 'soft'),
   choose('G_BITIR'),
 ];
 const tutanak = [
@@ -46,13 +46,14 @@ const tutanak = [
   examine('lupe', 'r_arka'),
   examine('lupe', 'r_tanik'),
   examine('lupe', 'r_mutfak'),
+  examine('lupe', 'r_bas'),
   examine('kars', 'r_kroki'),
   choose('TUTANAK_BITIR'),
 ];
 const karar = [
   choose('A_KARAR'),
-  examine('lupe', 'r_k_kapsam'),
   examine('lupe', 'r_k_talep'),
+  examine('kars', 'r_k_kapsam'),
   examine('kars', 'r_k_sure'),
   choose('KARAR_BITIR'),
 ];
@@ -66,9 +67,11 @@ const mesaj = [
 ];
 const kriminal = [
   choose('A_KRIMINAL'),
+  examine('lupe', 'k_paket'),
   examine('kars', 'k_seker'),
   examine('lupe', 'k_terazi'),
   examine('lupe', 'k_kavanoz'),
+  examine('lupe', 'k_ekler'),
   choose('KRIMINAL_BITIR'),
 ];
 const bina = [choose('A_BINA'), tapCenter(OB_POSTA), tapCenter(OB_YAG), choose('BINA_BITIR'), choose('MERDIVEN_BITIR')];
@@ -85,8 +88,8 @@ const gorus2 = [
   choose('A_GORUS2'),
   choose('TP_MESAJ', 'soft'),
   choose('G_RIZA_C'),
-  choose('TP_TOLGA', 'soft'),
   choose('TP_PAZAR', 'soft'),
+  choose('TP_SEKER', 'soft'),
   choose('G_BITIR'),
 ];
 const emanet = [
@@ -123,6 +126,8 @@ const celse1Acilis = chooseAll(
   'H102_DEVAM',
   'Q_ODA',
   'Q_KILIT',
+  'Q_SEKER',
+  'Q_EHLIYET',
   'Q_KULLANIM',
   'Q_TEDAVI',
   'Q_BITIR',
@@ -153,9 +158,53 @@ const araGun1 = [
   choose('GPS_BITIR'),
   ...chooseAll('A2_SELIM', 'SL_BARIS', 'SL_CANTA', 'SL_TOLGA', 'SL_BITIR'),
   choose('A2_ZRAPOR'),
+  examine('kars', 'z_son'),
+  examine('lupe', 'z_kapanis'),
+  choose('Z_BITIR'),
+];
+/** Ara evre, tipik: kurye kayıtları, kafe, uzman (Selim Usta ve bodrum tipik oyuncunun dışında kalır). */
+const araGun1Tipik = [
+  choose('A2_GPS'),
+  examine('lupe', 'g_11kasim'),
+  examine('kars', 'g_9kasim'),
+  examine('lupe', 'g_fesih'),
+  choose('GPS_BITIR'),
+  choose('A2_ZRAPOR'),
   examine('lupe', 'z_kapanis'),
   examine('kars', 'z_son'),
+  examine('lupe', 'z_kapanis'),
   choose('Z_BITIR'),
+  ...chooseAll('A2_UZMAN', 'UZ_KESIM', 'UZ_POSET', 'UZ_SAFLIK', 'UZ_BITIR'),
+];
+const mutalaa = [
+  choose('A2_MUTALAA'),
+  examine('lupe', 'mt_kesim'),
+  examine('kars', 'mt_poset'),
+  examine('lupe', 'mt_iz'),
+  examine('kars', 'mt_saflik'),
+  choose('MUTALAA_BITIR'),
+];
+/** Mütalaa satırları başka sırayla (her satırın “üçüncü okuma” kuralı bir golden path’te denensin). */
+const mutalaaKesimSon = [
+  choose('A2_MUTALAA'),
+  examine('kars', 'mt_saflik'),
+  examine('kars', 'mt_poset'),
+  examine('lupe', 'mt_kesim'),
+  choose('MUTALAA_BITIR'),
+];
+const mutalaaPosetSon = [
+  choose('A2_MUTALAA'),
+  examine('lupe', 'mt_kesim'),
+  examine('kars', 'mt_saflik'),
+  examine('kars', 'mt_poset'),
+  choose('MUTALAA_BITIR'),
+];
+const araTahtaTipik = [
+  choose('A2_CIKARIM'),
+  combine('clue_gps', 'clue_nesrin_moto'),
+  combine('clue_ek_stok', 'clue_sekerlik'),
+  combine('clue_z_rapor', 'clue_tolga_saat'),
+  choose('ARA_CIKARIM_BITIR'),
 ];
 const araTahta = [
   choose('A2_CIKARIM'),
@@ -165,7 +214,10 @@ const araTahta = [
   choose('ARA_CIKARIM_BITIR'),
 ];
 
-/** Tipik yol: şekerlik 1. celsede sunulmaz (2. celsede delil tartışmasında aklanır). */
+/**
+ * Tipik yol: şekerliğin yeri 1. celsede kolluğa kabul ettirilir; paketlerin arka odanın stoğundan geldiği ara evredeki
+ * uzman mütalaasıyla kurulur ve 2. celsede delil tartışmasında aklanır.
+ */
 const tuncayTipik = [
   press('S1'),
   press('S2'),
@@ -177,6 +229,7 @@ const tuncayTipik = [
   object('g_kanaat', 'S5'),
   present('ded_kullanici', 'S5'),
   press('S6'),
+  present('ded_sekerlik', 'S6'),
   choose('H104_BITIR'),
 ];
 
@@ -186,9 +239,9 @@ const tolgaSorguTipik = [
   press('T2'),
   object('g_duyum', 'T2'),
   press('T3'),
-  present('ded_kask', 'T3'),
   press('T5'),
   present('ev_tolga_ifade', 'T5'),
+  present('ded_kask', 'T3'),
   press('T4'),
   present('ded_alibi', 'T4'),
   choose('T03_BITIR'),
@@ -199,7 +252,7 @@ export const tests: CasePart = {
     goldenPaths: [
       goldenPath(
         TYPICAL_PATH,
-        { outcome: 'BERAAT_E', finalMin: 11538, finalMax: 12752 },
+        { outcome: 'BERAAT_E', finalMin: 12165, finalMax: 13445 },
         brifing('STR_USUL'),
         arka,
         on,
@@ -226,7 +279,7 @@ export const tests: CasePart = {
         celse1Acilis,
         tuncayTipik,
         celse1Son,
-        araGun1,
+        araGun1Tipik,
         chooseAll(
           'A2_LEYLA',
           'ARA_LEYLA_BITIR',
@@ -238,20 +291,10 @@ export const tests: CasePart = {
           'TEL_C',
           'ARA_SABAH_DEVAM',
         ),
+        mutalaa,
         chooseAll('A2_DEFNE', 'DN_RED', 'DN_BITIR', 'A2_LEYLA', 'ARA_LEYLA_BITIR'),
-        araTahta,
-        chooseAll(
-          'A2_SUC',
-          'SC_KIMLIK',
-          'A2_BODRUM',
-          'BD_SAVCI',
-          'A2_NESRIN',
-          'NS2_DEFTER',
-          'NS2_BARIS',
-          'NS2_BITIR',
-          'GO_T',
-          'TK_A',
-        ),
+        araTahtaTipik,
+        chooseAll('A2_SUC', 'SC_KIMLIK', 'A2_NESRIN', 'NS2_DEFTER', 'NS2_BARIS', 'NS2_BITIR', 'GO_T', 'TK_A'),
         chooseAll('T01_DEVAM', 'T01_A', 'T02_A'),
         tolgaSorguTipik,
         chooseAll('T04_A', 'T04B_A', 'T05E_A', 'D_ODA', 'D_MUHBIR', 'D_SEKER', 'D_BITIR', 'T06_E', 'T07_A'),
@@ -260,7 +303,7 @@ export const tests: CasePart = {
       // kalır. Esas savunma duygusal ve zayıf olsa da heyet delil zinciri üzerinden beraat eder (mütalaa da beraat).
       goldenPath(
         'G_E2',
-        { outcome: 'BERAAT_E', finalMin: 10241, finalMax: 11319 },
+        { outcome: 'BERAAT_E', finalMin: 10820, finalMax: 11960 },
         brifing('STR_USUL'),
         arka,
         on,
@@ -287,7 +330,7 @@ export const tests: CasePart = {
         celse1Acilis,
         tuncayTipik,
         celse1Son,
-        araGun1,
+        araGun1Tipik,
         chooseAll(
           'A2_LEYLA',
           'ARA_LEYLA_BITIR',
@@ -299,20 +342,10 @@ export const tests: CasePart = {
           'TEL_C',
           'ARA_SABAH_DEVAM',
         ),
+        mutalaaKesimSon,
         chooseAll('A2_DEFNE', 'DN_RED', 'DN_BITIR', 'A2_LEYLA', 'ARA_LEYLA_BITIR'),
-        araTahta,
-        chooseAll(
-          'A2_SUC',
-          'SC_KIMLIK',
-          'A2_BODRUM',
-          'BD_SAVCI',
-          'A2_NESRIN',
-          'NS2_DEFTER',
-          'NS2_BARIS',
-          'NS2_BITIR',
-          'GO_T',
-          'TK_A',
-        ),
+        araTahtaTipik,
+        chooseAll('A2_SUC', 'SC_KIMLIK', 'A2_NESRIN', 'NS2_DEFTER', 'NS2_BARIS', 'NS2_BITIR', 'GO_T', 'TK_A'),
         chooseAll('T01_DEVAM', 'T01_A', 'T02_B'),
         [press('T1'), press('T3'), choose('T03_BITIR')],
         chooseAll('T04_A', 'T04B_A', 'T05E_B', 'D_ODA', 'D_KILIT', 'D_SEKER', 'D_BITIR', 'T06_D', 'T07_B'),
@@ -322,7 +355,7 @@ export const tests: CasePart = {
       // kayıt sanık lehine olduğundan hüküm beraattir; kapanışta Leyla dağınıklığı ayrıca söyler.
       goldenPath(
         'G_E_DAG',
-        { outcome: 'BERAAT_E', finalMin: 6721, finalMax: 7429 },
+        { outcome: 'BERAAT_E', finalMin: 7894, finalMax: 8726 },
         brifing('STR_USUL'),
         arka,
         on,
@@ -330,7 +363,7 @@ export const tests: CasePart = {
           choose('A_GORUS'),
           choose('TP_SABAH', 'soft'),
           choose('TP_ARKA', 'soft'),
-          choose('TP_SEKER', 'soft'),
+          choose('TP_KILIT', 'soft'),
           choose('G_BITIR'),
         ],
         tutanak,
@@ -353,6 +386,7 @@ export const tests: CasePart = {
           combine('clue_mont', 'clue_zincir'),
           combine('clue_hat', 'clue_posta'),
           combine('clue_ayni_parti', 'clue_sekerlik'),
+          combine('clue_anahtarlik', 'clue_kilit'),
           choose('CIKARIM_BITIR'),
         ],
         dilekce,
@@ -367,13 +401,17 @@ export const tests: CasePart = {
           present('ded_kapsam', 'S3'),
           present('ev_karar', 'S1'),
           present('ev_sac', 'S5'),
+          press('S6'),
+          present('ded_sekerlik', 'S6'),
           choose('H104_BITIR'),
         ],
         celse1Son,
-        araGun1,
+        araGun1Tipik,
         chooseAll('A2_KAAN', 'KA_BITIR', 'ARAK_B', 'TEL_C', 'ARA_SABAH_DEVAM'),
+        mutalaaPosetSon,
         chooseAll('A2_DEFNE', 'DN_RED', 'DN_BITIR'),
-        chooseAll('A2_SUC', 'SC_KIMLIK', 'A2_BODRUM', 'BD_SAVCI', 'A2_NESRIN', 'NS2_BITIR', 'GO_T', 'TK_A'),
+        [choose('A2_CIKARIM'), combine('clue_ek_stok', 'clue_sekerlik'), choose('ARA_CIKARIM_BITIR')],
+        chooseAll('A2_SUC', 'SC_KIMLIK', 'A2_NESRIN', 'NS2_BITIR', 'GO_T', 'TK_A'),
         chooseAll('T01_DEVAM', 'T01_A', 'T02_B'),
         [press('T1'), choose('T03_BITIR')],
         chooseAll('T04_A', 'T04B_A', 'T05E_B', 'D_BITIR', 'T06_D', 'T07_B'),
@@ -381,7 +419,7 @@ export const tests: CasePart = {
       // 223/2-b: Barış’ın kimliğiyle suç duyurusu + gece telefonunun bildirimi → yakalanır, iz eşleşir; esas savunmada gerçek fail.
       goldenPath(
         'G_B',
-        { outcome: 'BERAAT_B', finalMin: 11904, finalMax: 13156 },
+        { outcome: 'BERAAT_B', finalMin: 12208, finalMax: 13492 },
         brifing('STR_MASUMIYET'),
         arka,
         on,
@@ -440,6 +478,7 @@ export const tests: CasePart = {
           press('T2'),
           object('g_duyum', 'T2'),
           press('T3'),
+          present('ev_tolga_ifade', 'T5'),
           present('ded_kask', 'T3'),
           press('T4'),
           present('ded_alibi', 'T4'),
@@ -448,10 +487,11 @@ export const tests: CasePart = {
         ],
         chooseAll('T04_A', 'T05B_A', 'D_GERCEK', 'D_ODA', 'D_MUHBIR', 'D_BITIR', 'T06_B', 'T07_A'),
       ),
-      // 191’e dönüşüm: oda varsayımı çöker ama şekerlik ve muhbir ayakta kalır; ek savunma ve terditli savunma.
+      // 191’e dönüşüm: oda varsayımı çöker, muhbirin saati Z raporuyla çöker; şekerlik arka odanın stoğuna bağlanamaz
+      // (uzman yok). Mütalaa 191, ek savunma ve terditli savunma.
       goldenPath(
         'G_N',
-        { outcome: 'NITELIK_191', finalMin: 6408, finalMax: 7082 },
+        { outcome: 'NITELIK_191', finalMin: 7154, finalMax: 7906 },
         brifing('STR_INDIRIM', 'BR00_B', 'BR01_B'),
         arka,
         [choose('A_ON'), tapCenter(OB_YATAK), tapCenter(OB_RANDEVU), tapCenter(OB_AYAKKABI), choose('ON_BITIR')],
@@ -483,6 +523,7 @@ export const tests: CasePart = {
           choose('TP_MESAJ', 'soft'),
           choose('G_RIZA_A'),
           choose('TP_TOLGA', 'soft'),
+          choose('TP_PAZAR', 'soft'),
           choose('G_BITIR'),
         ],
         [
@@ -492,6 +533,7 @@ export const tests: CasePart = {
           combine('clue_mont', 'clue_zincir'),
           combine('clue_odaya_girme', 'clue_kira_defteri'),
           combine('clue_iki_tane', 'clue_mont'),
+          combine('clue_anahtarlik', 'clue_kilit'),
           choose('CIKARIM_BITIR'),
         ],
         chooseAll('A_DIL', 'DIL_NESRIN', 'DIL_KESIF', 'DIL_VER', 'GO_H1'),
@@ -507,8 +549,9 @@ export const tests: CasePart = {
           choose('H104_BITIR'),
         ],
         chooseAll('TL_TAHLIYE', 'TL_BITIR', 'H107_DEVAM', 'H108_A', 'ARA_GIRIS_DEVAM'),
-        chooseAll('A2_SELIM', 'SL_BARIS', 'SL_CANTA', 'SL_BITIR', 'A2_KAAN', 'KA_SONSOZ', 'KA_BITIR'),
-        chooseAll('A2_DEFNE', 'DN_DINLE', 'DN_BITIR', 'A2_SUC', 'SC_KIMLIK', 'ARAK_A', 'TEL_C', 'ARA_SABAH_DEVAM'),
+        [choose('A2_ZRAPOR'), examine('kars', 'z_son'), examine('lupe', 'z_kapanis'), choose('Z_BITIR')],
+        chooseAll('A2_KAAN', 'KA_SONSOZ', 'KA_BITIR'),
+        chooseAll('A2_DEFNE', 'DN_DINLE', 'DN_BITIR', 'A2_SUC', 'SC_MECHUL', 'ARAK_A', 'TEL_C', 'ARA_SABAH_DEVAM'),
         chooseAll(
           'A2_NESRIN',
           'NS2_DEFTER',
@@ -518,17 +561,25 @@ export const tests: CasePart = {
           'BD_FOTO',
           'A2_LEYLA',
           'ARA_LEYLA_BITIR',
-          'GO_T',
-          'TK_A',
         ),
+        [choose('A2_CIKARIM'), combine('clue_z_rapor', 'clue_tolga_saat'), choose('ARA_CIKARIM_BITIR')],
+        chooseAll('GO_T', 'TK_A'),
         chooseAll('T01_DEVAM', 'T01_B', 'T02_A'),
-        [press('T1'), press('T2'), object('g_duyum', 'T2'), press('T3'), choose('T03_BITIR')],
+        [
+          press('T1'),
+          press('T2'),
+          object('g_duyum', 'T2'),
+          press('T3'),
+          press('T4'),
+          present('ded_alibi', 'T4'),
+          choose('T03_BITIR'),
+        ],
         chooseAll('T04_A', 'T04B_B', 'T05N_A', 'D_ODA', 'D_KILIT', 'D_BITIR', 'T06_T', 'T07_A'),
       ),
       // Mahkûmiyet: oda varsayımı ayakta, terditli savunma yok; yanlış deliller ve dayanaksız itirazlar.
       goldenPath(
         'G_M',
-        { outcome: 'MAHKUMIYET', finalMin: 1154, finalMax: 1276 },
+        { outcome: 'MAHKUMIYET', finalMin: 1249, finalMax: 1381 },
         brifing('STR_MASUMIYET', 'BR00_C', 'BR01_C'),
         [choose('A_ARKA'), tap(5, 5), tap(10, 290), tapCenter(OB_MONT), choose('ARKA_BITIR')],
         [
@@ -564,11 +615,6 @@ export const tests: CasePart = {
         ],
         leyla,
         chooseAll('A_DIL', 'DIL_SAC', 'DIL_KESIF', 'DIL_VER'),
-        tutanak,
-        choose('AK2_C'),
-        choose('SABAH3_DEVAM'),
-        chooseAll('A_NESRIN', 'NS_YONLENDIR', 'NS_DEFTER', 'NS_BITIR'),
-        [choose('A_EMANET'), examine('kars', 'e_telefon'), examine('lupe', 'e_cuzdan'), choose('EMANET_BITIR')],
         [
           choose('A_ON'),
           tapCenter(OB_GITAR),
@@ -577,8 +623,13 @@ export const tests: CasePart = {
           tapCenter(OB_YATAK),
           choose('ON_BITIR'),
         ],
+        choose('AK2_C'),
+        choose('SABAH3_DEVAM'),
+        chooseAll('A_NESRIN', 'NS_YONLENDIR', 'NS_DEFTER', 'NS_BITIR'),
+        [choose('A_EMANET'), examine('kars', 'e_telefon'), examine('lupe', 'e_cuzdan'), choose('EMANET_BITIR')],
+        tutanak,
         [choose('A_CIKARIM'), combine('clue_on_oda', 'clue_kroki'), choose('CIKARIM_BITIR')],
-        [choose('A_GORUS2'), choose('TP_MESAJ', 'hard'), choose('TP_SEKER', 'hard'), choose('G_BITIR')],
+        [choose('A_GORUS2'), choose('TP_MESAJ', 'hard'), choose('G_BITIR')],
         leyla,
         choose('GO_H1'),
         chooseAll(
@@ -605,13 +656,13 @@ export const tests: CasePart = {
         chooseAll('A2_DEFNE', 'DN_DINLE', 'DN_BITIR', 'A2_SUC', 'SC_TOLGA', 'ARAK_C', 'TEL_C', 'ARA_SABAH_DEVAM'),
         chooseAll('A2_NESRIN', 'NS2_BARIS', 'NS2_BITIR', 'A2_BODRUM', 'BD_FOTO', 'GO_T', 'TK_C'),
         chooseAll('T02_B'),
-        [press('T1'), press('T3'), choose('T03_BITIR')],
+        [press('T1'), press('T3'), present('ev_tolga_ifade', 'T5'), choose('T03_BITIR')],
         chooseAll('T04_D', 'T04B_D', 'T05M_B', 'D_GERCEK', 'D_SEKER', 'D_BITIR', 'T06_D', 'T07_B'),
       ),
       // Etik ihlali: para karşılığı tanık hazırlamak (TELKİN sonu).
       goldenPath(
         'G_ETIK',
-        { outcome: 'TELKIN', finalMin: 8750, finalMax: 9670 },
+        { outcome: 'TELKIN', finalMin: 8056, finalMax: 8904 },
         brifing('STR_MASUMIYET', 'BR00_C'),
         arka,
         on,
@@ -619,7 +670,7 @@ export const tests: CasePart = {
         tutanak,
         emanet,
         choose('AK1_A'),
-        karar,
+        [choose('A_KARAR'), examine('lupe', 'r_k_talep'), examine('kars', 'r_k_sure'), choose('KARAR_BITIR')],
         mesaj,
         kriminal,
         bina,
@@ -629,11 +680,21 @@ export const tests: CasePart = {
         nesrin,
         tolgaIfade,
         gorus2,
-        tahta,
+        tahta.filter((a) => !(a.kind === 'COMBINE' && a.a === 'clue_kilit' && a.b === 'clue_kapsam')),
         dilekce,
         choose('GO_H1'),
         celse1Acilis,
-        tuncay,
+        [
+          press('S1'),
+          press('S2'),
+          present('ded_oda', 'S2'),
+          press('S3'),
+          present('ded_anahtar', 'S3'),
+          present('ev_karar', 'S1'),
+          press('S6'),
+          present('ded_sekerlik', 'S6'),
+          choose('H104_BITIR'),
+        ],
         celse1Son,
         araGun1,
         chooseAll('A2_KAAN', 'KA_SONSOZ', 'KA_BITIR', 'ARAK_B', 'TEL_C', 'ARA_SABAH_DEVAM'),
@@ -653,7 +714,7 @@ export const tests: CasePart = {
       // Çöküş: ikinci celsede muhbire art arda yanlış deliller → güvenilirlik 0 → mahkûmiyet.
       goldenPath(
         'W',
-        { outcome: 'MAHKUMIYET', finalMin: 7942, finalMax: 8778 },
+        { outcome: 'MAHKUMIYET', finalMin: 7823, finalMax: 8647 },
         brifing('STR_USUL'),
         arka,
         on,
@@ -674,14 +735,21 @@ export const tests: CasePart = {
         tahta,
         dilekce,
         choose('GO_H1'),
-        celse1Acilis,
+        chooseAll('GECE_B', 'K_C', 'H100_DEVAM', 'H101_DEVAM', 'H102_DEVAM', 'Q_ODA', 'Q_SEKER', 'Q_BITIR', 'H103_A'),
         tuncay,
         celse1Son,
         araGun1,
         chooseAll('A2_KAAN', 'KA_TOLGA', 'KA_BITIR', 'ARAK_C', 'TEL_C', 'ARA_SABAH_DEVAM'),
         chooseAll('A2_DEFNE', 'DN_RED', 'DN_BITIR', 'A2_SUC', 'SC_KIMLIK', 'GO_T', 'TK_C'),
         chooseAll('T01_DEVAM', 'T01_C', 'T02_C'),
-        [present('ev_kira', 'T1'), present('ev_sac', 'T2'), present('ev_mesaj', 'T3')],
+        [
+          press('T3'),
+          present('ev_tolga_ifade', 'T5'),
+          present('ded_kask', 'T3'),
+          present('ev_kira', 'T1'),
+          present('ev_sac', 'T2'),
+          present('ev_mesaj', 'T3'),
+        ],
         choose('COKUS_SON'),
       ),
     ],

@@ -143,6 +143,18 @@ export const evidencePart: CasePart = {
       side: 'DEFENSE',
       strength: 'STRONG',
     }),
+    evidence('ev_mutalaa', {
+      type: 'ADLI_RAPOR',
+      title: 'Uzman mütalaası (karşılaştırmalı inceleme)',
+      shortText: 'Doç. Dr. Aylin Korkmaz · kriminal rapor ekleri üzerinden şekerlik ve arka oda paketleri.',
+      description:
+        'Savunmanın CMK 67/6 uyarınca aldığı bilimsel mütalaa: kriminal raporun ek klasöründeki fotoğraflar, poşet baskı numaraları ve kromatogramlar üzerinden şekerlikteki iki paket ile arka odadaki 46 paketin karşılaştırılması.',
+      sourceLabel: 'Uludağ Üniversitesi · adli kimya',
+      icon: 'document',
+      side: 'DEFENSE',
+      strength: 'STRONG',
+      presentable: false,
+    }),
     evidence('ev_canta', {
       type: 'ADLI_RAPOR',
       title: 'El konulan kurye çantası',
@@ -337,10 +349,10 @@ export const evidencePart: CasePart = {
     }),
     clue('clue_ayni_parti', {
       type: 'ADLI_RAPOR',
-      title: 'Aynı poşet, aynı gramaj',
-      shortText: 'Şekerlikteki 2 paket ile arka odadaki 46 paket aynı poşet tipi ve gramajda.',
+      title: 'Benzer poşet, benzer gramaj',
+      shortText: 'Şekerlikteki 2 paket ile arka odadaki 46 paket aynı tip poşette, yakın gramajda; karşılaştırma yapılmamış.',
       description:
-        'Şekerlikteki iki paket, arka odadaki paketlerle aynı marka kilitli poşette, aynı kesimle ve aynı ortalama gramajda (0,85–0,87 g): aynı stoktan.',
+        'Şekerlikteki iki paket, arka odadaki paketlerle aynı tip kilitli poşette ve yakın ortalama gramajda (0,85–0,87 g). Laboratuvar iki grubu ayrıca karşılaştırmamış: kesim izi, poşet partisi, saflık ölçülmemiş.',
       sourceLabel: 'Kriminal rapor',
       icon: 'compare',
       tags: kart,
@@ -476,6 +488,16 @@ export const evidencePart: CasePart = {
       icon: 'receipt',
       tags: ara,
     }),
+    clue('clue_ek_stok', {
+      type: 'ADLI_RAPOR',
+      title: 'Ardışık poşetler',
+      shortText: 'Mütalaa: şekerlik paketleri arka odadaki rulodan, aynı makineyle kapatılmış, aynı saflıkta.',
+      description:
+        'Doç. Dr. Aylin Korkmaz’ın bilimsel mütalaası: şekerlikteki iki poşetin kenar baskı numaraları arka odadaki rulonun ardışık numaraları; ısıyla kapatma izi aynı makineden; saflık ve kesme maddesi örtüşüyor. Paketlerde sanığa ait iz yok.',
+      sourceLabel: 'Uzman mütalaası (CMK 67/6)',
+      icon: 'compare',
+      tags: ara,
+    }),
 
     // --- Çıkarımlar ---
     insight('ded_kapsam', {
@@ -557,14 +579,26 @@ export const evidencePart: CasePart = {
     }),
     insight('ded_sekerlik', {
       type: 'ADLI_RAPOR',
-      title: 'Şekerlik arka odanın deposu',
-      shortText: 'Şekerlikteki paketler arka odadaki stoktan; şekerlik arka oda kapısının dibinde.',
+      title: 'Şekerlik arka oda kapısında',
+      shortText: 'Şekerlik arka oda kapısının dibinde; içindeki paketler arka odadakilere benziyor.',
       description:
-        'Aynı poşet, aynı kesim, aynı gramaj; şekerlik de mutfakta değil, arka oda kapısının yanındaki rafta. Kavanozdaki iz kavanozu kullananı gösterir, paketi koyanı değil.',
+        'Şekerlik mutfakta değil, arka oda kapısının yanındaki rafta. İçindeki iki paket arka odadakilerle aynı tip poşette, yakın gramajda. Aynı stok olduğu ise henüz bir benzerlik, bir tespit değil.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'compare',
       side: 'DEFENSE',
+      strength: 'MEDIUM',
+    }),
+    insight('ded_stok', {
+      type: 'ADLI_RAPOR',
+      title: 'Şekerlik arka odanın deposu',
+      shortText: 'Uzman mütalaası: şekerlikteki iki paket arka odadaki stoktan ayrılmış; kapıya iki adım.',
+      description:
+        'Aynı rulodan ardışık baskı numaralı poşetler, aynı ısı makinesinin kapatma izi, aynı saflık ve kesme maddesi: iki paket arka odadaki 46 paketle aynı stoktan. Şekerlik de o odanın kapısının dibinde. Kavanozdaki iz kavanozu kullananı gösterir, paketi koyanı değil.',
+      sourceLabel: 'Çıkarım tahtası · uzman mütalaası',
+      icon: 'compare',
+      side: 'DEFENSE',
       strength: 'STRONG',
+      presentable: false,
     }),
     insight('ded_kask', {
       type: 'TANIK_IFADESI',
@@ -632,6 +666,7 @@ export const evidencePart: CasePart = {
     { from: 'ded_baris', to: 'clue_kira_defteri', type: 'DERIVED_FROM' },
     { from: 'ded_demirel', to: 'clue_hat', type: 'DERIVED_FROM' },
     { from: 'ded_sekerlik', to: 'clue_ayni_parti', type: 'DERIVED_FROM' },
+    { from: 'ded_stok', to: 'clue_ek_stok', type: 'DERIVED_FROM' },
     { from: 'ded_kask', to: 'clue_tolga_kask', type: 'DERIVED_FROM' },
     { from: 'ded_kullanici', to: 'clue_tedavi', type: 'DERIVED_FROM' },
     { from: 'ded_kacis', to: 'clue_gps', type: 'DERIVED_FROM' },

@@ -87,11 +87,7 @@
       ],
       "bonuses": [{ "id": "guven", "label": "Güvenilirlik bonusu", "value": { "mul": [{ "var": "cred" }, 100] } }],
       "scaleMax": 10000,
-      "thresholdBar": [
-        { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
-        { "label": "Nitelik", "from": 5500, "tone": "amber" },
-        { "label": "Tam beraat", "from": 11000, "tone": "green" }
-      ],
+      "thresholdBar": [{ "label": "Hüküm kayda bağlıdır", "from": 0, "tone": "amber" }],
       "displayClampMin": 0
     },
     "objectionGrounds": [],
@@ -228,22 +224,22 @@
     {
       "id": "ex_tut",
       "type": "int",
+      "initial": 7,
+      "min": 0,
+      "max": 7,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 7, "lowAt": 1 }
+    },
+    {
+      "id": "ex_kar",
+      "type": "int",
       "initial": 5,
       "min": 0,
       "max": 5,
       "visibility": "VISIBLE",
       "analysis": "resource",
       "display": { "label": "Deneme hakkı", "widget": "counter", "max": 5, "lowAt": 1 }
-    },
-    {
-      "id": "ex_kar",
-      "type": "int",
-      "initial": 3,
-      "min": 0,
-      "max": 3,
-      "visibility": "VISIBLE",
-      "analysis": "resource",
-      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 3, "lowAt": 1 }
     },
     {
       "id": "ex_mes",
@@ -258,12 +254,12 @@
     {
       "id": "ex_kri",
       "type": "int",
-      "initial": 5,
+      "initial": 6,
       "min": 0,
-      "max": 5,
+      "max": 6,
       "visibility": "VISIBLE",
       "analysis": "resource",
-      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 5, "lowAt": 1 }
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 6, "lowAt": 1 }
     },
     {
       "id": "ex_tol",
@@ -288,12 +284,22 @@
     {
       "id": "ex_z",
       "type": "int",
-      "initial": 3,
+      "initial": 4,
       "min": 0,
-      "max": 3,
+      "max": 4,
       "visibility": "VISIBLE",
       "analysis": "resource",
-      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 3, "lowAt": 1 }
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 4, "lowAt": 1 }
+    },
+    {
+      "id": "ex_mut",
+      "type": "int",
+      "initial": 5,
+      "min": 0,
+      "max": 5,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 5, "lowAt": 1 }
     },
     {
       "id": "ex_ema",
@@ -375,6 +381,19 @@
     { "id": "fact_gps9", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_pazar", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_tolga_192", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_tut_bas", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_z_son", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_mt_kesim", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_mt_poset", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_mt_saflik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "uz_kesim", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "uz_poset", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "uz_saflik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "uzman_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_ekler", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_paket", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "q_kilit_tam", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "tolga_saik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "kaan_itiraf", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "kaan_riza", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "kaan_durust", "type": "bool", "initial": false, "visibility": "HIDDEN" },

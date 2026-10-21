@@ -712,7 +712,7 @@
           "id": "TP_SEKER",
           "kind": "TOPIC",
           "label": "Şekerlik",
-          "visibleWhen": { "any": [{ "hasEvidence": "clue_sekerlik" }, { "hasEvidence": "clue_kavanoz_iz" }] },
+          "visibleWhen": { "all": [{ "hasEvidence": "clue_sekerlik" }, { "hasEvidence": "clue_kavanoz_iz" }] },
           "cost": [{ "var": "min", "amount": 2 }],
           "variants": [
             {

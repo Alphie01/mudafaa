@@ -64,15 +64,15 @@
 | 23.04 | Tarık bir yumruk atar. Ercan 7 no'lu babanın dibine oturur; burnu ve dudağı kanar. "Seni gebertirim lan!" diye bağıran Ercan'dır. | Tarık, Şükrü (yanlış duyar), Kenan | Şükrü görüşmesi (cihaz), 1. celse Şükrü'nün kırılması |
 | 23.08 | Kenan gelir, ayırır; Tarık'ı eve, Ercan'ı kantine yollar. | Kenan, Şükrü | Kenan'ın ifadesi, Şükrü |
 | 23.18 | Tarık 2 no'lu personel turnikesinden çıkar; bir daha girmez. | Kayıt | Turnike dökümü (dilekçe → 1. celse) |
-| 23.34 | Ercan kantinde personel kartıyla tost ve ayran alır; burnunda pamuk. | Şükrü, kantin kaydı | Şükrü görüşmesi (kantin), otopsi: mide içeriği |
-| 23.37 | Tarık iskele büfesinde kartla iki çay öder; Nail Usta elindeki kanlı peçeteyi görür. | Tarık (saklıyor), Nail | Gülay'ın hesap dökümü, Nail Usta |
+| 23.34 | Ercan kantinde personel kartıyla tost ve ayran alır; burnunda pamuk. | Şükrü, kantin kaydı | Şükrü görüşmesi (kantin; Dr. Beyaz'ın mide dersinden sonra açılır) ya da 1. celsede Şükrü'nün kürsü beyanı, kantin kaydı (dilekçe); ATK nihai raporu: mide içeriği (ara) |
+| 23.37 | Tarık iskele büfesinde kartla iki çay öder; Nail Usta elindeki kanlı peçeteyi görür. | Tarık (saklıyor), Nail | Gülay'ın hesap dökümü (adı tabelaya uymayan terminal), Tarık'ın eve dönüş anlatımı (hangi büfe), Nail Usta ve gün sonu fişi |
 | 23.41 | Ercan, rehberde "Kptn" diye kayıtlı numarayı arar (2 dk 07 sn): "Gel beni al… ya da yarın her şeyi anlatırım." İçerik bilinmez, yalnızca kayıt. | Kenan | Maktulün telefon inceleme tutanağı (belge; rehber kısaltması "Kptn"), BTK abone cevabı (ara karar), "Kaptan" lakabı (yalnızca Sevim Yavuz, ARA_SEVIM) |
 | 23.52–00.06 | Kenan'ın servis kamyoneti B sahasında durur. Kenan, kamyonetteki laşing kitinden aldığı twistlock'la Ercan'ın başının arkasına vurur; onu iki konteynerin arasına sürükler. | Kenan | Araç takip kaydı (ara karar), lastik izi ve sürüklenme izi (B sahası), otopsi (desenli kırık, karşı kutup yok) |
 | 00.10 | Tarık eve döner; Gülay saati bilir. | Gülay | Gülay görüşmesi |
 | 00.14 | Kenan'ın kamyoneti araç kapısından çıkar. | Kayıt | Turnike/araç kapısı dökümü |
 | 06.10 | Sabah vardiyası cesedi B sahasında bulur. | — | Soğuk açılış |
 | 08.00 | Kenan kolluğa: "23.40'ta B sahasının ağzında Tarık'ı gördüm, elinde demir gibi bir şey vardı; projektörler yanıyordu." Twistlock, rıhtım 4'teki kafeste bulunur; üstünde Tarık'ın kısmi izi, kan yok. | Kolluk | Dosya |
-| 15 Kasım | Ön otopsi raporu: "künt kafa travması; düşme ya da künt cisim"; mide içeriği yazılı ama yorumlanmamış. B sahası projektörleri 23.00–02.00 bakımda. Kenan'ın kitindeki eksik twistlock "kayıp" diye tamamlanır. | — | Ön rapor (belge), projektör etiketi (olay yeri), envanter (ara) |
+| 15 Kasım | Ön otopsi raporu: "künt kafa travması; düşme ya da künt cisim"; karşı darbe değerlendirmesi histopatolojiye, mide içeriği nihai rapora bırakılmış (dipnot). Nihai rapor ilk celseden sonra gelir: frontalde kontüzyon yok; mide yazılı ama son öğün saati bilinmediği için yorumlanmamış. B sahası projektörleri 23.00–02.00 bakımda. Kenan'ın kitindeki eksik twistlock "kayıp" diye tamamlanır. | — | Ön rapor (belge), projektör etiketi (olay yeri), envanter (ara) |
 | Sonra | Tarık tutuklanır; iddianame TCK 81/1 ile Bursa 6. Ağır Ceza'ya. Baro görevlendirmesiyle tutulan avukat bir kez gelir. Gülay, 1. celseden 16 gün önce Deniz'i arar. | | Bölüm 1 |
 
 **Savcılığın teorisi:** kavgadan sonra Tarık geri döndü ve Ercan'ı twistlock'la öldürdü (doğrudan kast; TCK 81/1).
@@ -80,7 +80,8 @@ Teori çökerse savcının yedeği: yumruk Ercan'ı babaya düşürdü, kafatas�
 (olası kast; 81/1 + 21/2). Savunmanın katmanları:
 1. **Dönüş yok** (turnike + büfe + Nail + Kenan'ın ifadesinin çökmesi) → savcı olası kasta geriler; kast yokluğu savunması
    yapılırsa **87/4** (yaralama sonucu ölüm), Emre'ye hakaret ve itme ispatlanırsa **+ haksız tahrik (29)**.
-2. **Düşme değil, darbe; saat sonra** (desenli kırık + karşı kutup lezyonu yok + mide içeriği/kantin + 23.41 araması) →
+2. **Düşme değil, darbe; saat sonra** (desenli kırık + nihai rapordaki karşı kutup yokluğu + nihai rapordaki mide içeriği +
+   kayda geçmiş son öğün saati; 23.41 araması tek başına konuşanı göstermez) →
    ölüm Tarık'ın eylemiyle bağlantılı değil: **223/2-e** (şüphe) ya da kanıt eksiksizse **223/2-b**.
 3. **Gerçek fail** (Kaptan araması + araç takip + lastik izi + eksik twistlock + manifestoya girmeyen konteynerler) ve
    savcılığa suç duyurusu → **223/2-b** ve dosyanın Başsavcılığa gönderilmesi. Yumruk her beraat sonucunda TCK 86/2
@@ -168,14 +169,21 @@ T_COKUS (♥0) → T_09
   Telefon kaydı bulunduysa "Ercan seni aramış mı?" sorusu açılır: sormak **Kenan'ı uyarır** (`kenan_uyarildi`; arada
   envanter düzeltilir, bir delil kaybolur).
 - **INV_NAIL — İskele büfesi (~500):** radyo, buğulu cam; "Çocuk ağlıyordu. Erkek adam öyle ağlamaz, ağladı." (açılır: hesap
-  dökümü ya da eve dönüş konusu).
+  döküm satırındaki terminal adı hiçbir tabelaya uymaz; büfeyi Tarık'ın eve dönüş anlatımı gösterir. Gün sonu fişi banka
+  satırıyla bulunur, yayın akışı Nail Usta çocuğun ne zaman kalktığını anlattıktan sonra anlam kazanır).
 - **INV_ORHAN — Emekli adli tıpçı (~600):** coup / contrecoup dersi: "Hareketli baş, sabit zemin: karşı tarafta da yara.
-  Sabit baş, hareketli cisim: yalnız vurulan yerde." (açılır: ön rapordaki desen ya da karşı kutup satırı).
+  Sabit baş, hareketli cisim: yalnız vurulan yerde." Kapısını Leyla açar (ön raporu onun önüne koymak gerekir:
+  otuz yıl önceki hocası). Dersleri nihai raporu okumanın anahtarıdır: histopatoloji satırı ve "ne yediği yazar, ne zaman
+  yediği yazmaz".
 - **INV_RIHTIM / INV_BSAHA (sahneler):** baba 7'deki kan oturma hizasında; projektör direğinde bakım etiketi; laşing kafesi;
   B sahasında topuk sürüklenme izleri, taze çift lastik izi, rıhtımdan B'ye kan izi yok. Çeldiriciler: rakı matarası, martı
   tüyü, eski kaynak lekeleri.
-- **INV_TELEFON / INV_ONRAPOR (belgeler):** "Kptn 23.41 · 2 dk 07 sn"; "3,2 cm dairesel çökme kırığı", "karşı kutup
-  lezyonu saptanmadı" (küçük not), "mide: yarı sindirilmiş ekmek, peynir, süt ürünü", "burun/dudak: basit tıbbi müdahale".
+- **INV_TELEFON / INV_ONRAPOR (belgeler):** "Kptn 23.41 · 2 dk 07 sn"; "3,2 cm dairesel çökme kırığı", dipnot "karşı darbe
+  değerlendirmesi nihai raporda yapılacaktır", "mide: örnek alındı, sonuç nihai raporda", "burun/dudak: basit tıbbi
+  müdahale". Turnike dökümündeki çıkış satırı, sanığın kolluktaki "on bir buçuk gibi" saatiyle karşılaştırılarak okunur.
+- **ARA_ATK — Nihai otopsi raporu (ara evresi, belge):** histopatoloji "frontalde kontüzyon izlenmedi" (Dr. Beyaz'ın dersi ve
+  ön rapor dipnotu okunmuşsa ipucu olur) ve mide içeriği (mide dersi gerekir). Ara tahtasında desen + karşı kutup →
+  darbe; mide + kantin → saat.
 - **INV_AKSAM (gün sonları):** Leyla ile kısa sahne; Gülay'ın telefonu (Elif'in sorusu); Kenan uyarıldıysa babacan bir
   arama: "Evlat, kendini yorma."
 - **INV_GECE (~400):** pano, poyraz, Leyla: "Yarın birinin elinde bir yumruk var, birinin elinde bir ölüm. Karıştırma."
@@ -186,9 +194,14 @@ T_COKUS (♥0) → T_09
   susma. Dürüst savunma tahrikin ve kast yokluğunun temeli; inkâr Şükrü karşısında çöker.
 - Şükrü: "Ha?" — bastırınca pil; doğru zamanda "Bilmiyorum, sesi babanın oradan geldi" der.
 - Kenan: sakin, babacan; bastırma ve delil sunumuyla ifadesi çatlar (projektör, turnike). Asla "katil" sözcüğü geçmez.
-- Ara karar: ATK'dan nihai rapor ve bilirkişinin dinlenmesi, araç takip ve kantin kayıtları (dayanağı varsa), tutukluluk.
+- Şükrü bastırılınca, müdafi son öğünün önemini biliyorsa (Dr. Beyaz) saati ve yemeği sorar: "On bir buçuğu geçiyordu,
+  tost yiyordu." Başkan tutanağa geçirir; ikinci celsede ölüm saatinin kayıt dayanağı budur (ya da kantin kaydı).
+- Kenan'ın K1'i tek bir kâğıtla değil, turnike çıkışı + büfenin gün sonu fişi + banka satırıyla birlikte çöker.
+- Ara karar: ATK'dan nihai rapor ve bilirkişinin dinlenmesi (istenmezse ikinci celsede rapor yalnızca okunur; arada ek
+  dilekçeyle istenebilir), araç takip ve kantin kayıtları (dayanağı varsa), tutukluluk.
 
 ### Bölüm 4 · ARA (ARA_HUB, 3 gün × 2 EP), ~3.000
+- **ARA_ATK:** nihai rapor; karşı darbe ve mide burada cevaplanır (beraatin iki olgusundan biri ara evresinde kurulur).
 - **ARA_SEVIM:** kapı aralığından öfke → defter: "Ercan bunu buzdolabının üstünde saklardı."
 - **ARA_TARIK:** otopsi şemasını görür: "Bu… bunu bilirim. Twistlock'un konisi."
 - **ARA_GPS / ARA_DEFTER (belgeler):** araç takip satırı 23.52–00.06 B sahası; defterdeki üç konteyner manifestoda yok.

@@ -30,7 +30,8 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
 | TCK 277 | SK_TELKIN, KY_SOR, rapor ipuçları | 2026-10-20 | Yargı görevini yapanı / bilirkişi ya da tanığı etkilemeye teşebbüs. |
 | TCK 125, 267 | SUC_C | 2026-10-20 | Hakaret, iftira (basına isim verme). |
 | CMK 48 | T_02 (Kenan susar), ARA_LEYLA | 2026-10-20 | Tanığın kendisini suçlayacak sorulara cevap vermeme hakkı. |
-| CMK 63, 67/4, 211 | TL_ATK | 2026-10-20 | Bilirkişi atanması, raporun tartışılması, bilirkişinin duruşmada dinlenmesi. |
+| CMK 63, 68/1, 214/1 | TL_ATK, EK_ATK, T_00, h_atk | 2026-10-21 | 68/1: mahkeme bilirkişinin duruşmada dinlenmesine her zaman karar verebilir, ilgililerden birinin istemi üzerine de çağırabilir. 214/1: doktor raporları okunur, gerekli görülürse imzası bulunan açıklama için çağrılır. (Önceki “67/4, 211” atfı yanlıştı: 67/4 rapor örneklerinin verilmesi, 211 tanık tutanaklarının okunmasıdır; düzeltildi.) |
+| CMK 209/1, 217/1 | PS_B2 / PS_B2_KAYITSIZ, PR_S3 | 2026-10-21 | 209/1: delil olarak kullanılacak belgeler duruşmada anlatılır; 217/1: hüküm yalnız duruşmaya getirilip huzurda tartışılan delile dayanır. |
 | CMK 100, 101, 109 | H1_07 | 2026-10-20 | Tutuklama şartları, adli kontrol. |
 | CMK 134 | ev_telefon legalNote | 2026-10-20 | Bilgisayar ve kayıt ortamlarında inceleme (imaj). |
 | CMK 135/6 | TL_ABONE, ev_abone | 2026-10-20 | İletişimin tespiti; hâkim kararı. (Yorum kararı #4.) |
@@ -64,7 +65,7 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
    (CMK 191, 147), savcının sanığa soruları (CMK 201) ve masumiyet karinesi itirazı, görgü tanığı (yeminli), savcılık
    delilinin tartışılması (CMK 215), vardiya şefi (yeminli), ara karar talepleri (CMK 177/ 206 değerlendirmesi), tutukluluk
    incelemesi (CMK 100, 108, 109), erteleme.
-2. Celse: ara karar cevaplarının okunması, bilirkişinin dinlenmesi (CMK 67/4, 211), vardiya şefinin yeniden dinlenmesi ve
+2. Celse: ara karar cevaplarının okunması, bilirkişinin dinlenmesi (CMK 68/1; istenmemişse rapor okunur, CMK 214/1), vardiya şefinin yeniden dinlenmesi ve
    CMK 48 hatırlatması, büfe sahibi ve sanığın eşi (çekinme hakkı CMK 45), ek savunma (CMK 226), mütalaa ve cevap
    (CMK 216/1–2), esas savunma, son söz (CMK 216/3), hüküm (CMK 223, 231/4: ayakta dinleme).
 
@@ -116,6 +117,25 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
 12. **Eşin tanıklığı.** İkinci celsede başkan, sanığın eşi Gülay Demirel'e tanıklıktan çekinebileceğini (CMK 45/1-b,
     45/3) ve yeminsiz dinlenmeyi isteyebileceğini (CMK 50–51 çerçevesinde mahkemenin takdiri) hatırlatır; ana yolda bu
     hatırlatma artık atlanmaz.
+
+13. **Ölüm saatinin kayıt dayanağı (üçüncü tur, 2026-10-21).** Bilirkişi ölüm saatini son öğüne göre ancak öğünün saati
+    duruşmaya getirilmişse daraltır: kantin kart okuyucu kaydı (dilekçe ya da ara karar ile dosyada; CMK 209/1) ya da
+    Şükrü Usta'nın ilk celsede tutanağa geçen beyanı. Müdafiin soruşturmada duyduğu saat tek başına kayıt değildir
+    (CMK 217/1); bu durumda B2 kısmi kalır (OLGU_KAYIT → 87/4, yalnızca B1 kayıtta: “saat dışlanamadı”).
+14. **23.41 araması ve ölüm saati.** Telefon tutanağı hattın kullanıldığını gösterir; konuşanın maktul olduğu, görüşmenin öbür
+    ucu dinlenmeden ispatlanmış sayılmaz. Bilirkişi bu kaydı tek başına tıbbi saate çevirmez (B2 kısmi). Bu bir yorum
+    kararıdır: uygulamada mahkeme ek delille (abone, karşı tarafın beyanı) bu bağlantıyı kurabilir; oyunda bu bağlantı 2-b
+    zincirine (abone kaydı, K6) bırakıldı.
+15. **Teşhisin çürütülmesi için kayıt bütünlüğü.** K1'deki teşhis, turnike çıkışı + büfenin kendi gün sonu fişi (banka satırı
+    aynı saat ve tutar) birlikte gösterildiğinde fiilen imkânsızlaşır. Tek bir kayıt (yalnız turnike: “başka kapıdan
+    girmiştir”; yalnız banka: “kartını başkasına vermiştir”; büfecinin soruşturmadaki anlatımı: ilk celsede kayıtta değil)
+    kısmi isabet sayılır. N1'de 23.37 ödemenin saatidir, gelişin değil; “on bire doğru, belki daha erken” beyanını 23.18
+    çıkış kaydı düzeltir. Bu, beraat için gereken olgunun içeriğini değiştirmez (K1 ∨ N1 + N2), yalnızca hangi kanıtla
+    kurulduğunu belirler; tam kayıtla mahkûmiyet ya da 87/4 sonucu yoktur.
+16. **Bilirkişinin duruşmada dinlenmesi.** CMK 68/1 mahkemeye resen dinleme yetkisi de verir; oyun mahkemenin bu dosyada
+    raporu okumakla yetindiğini (CMK 214/1), uzmanı ancak müdafi ilk celsede (TL_ATK) ya da arada ek dilekçeyle (EK_ATK)
+    isterse çağırdığını varsayar. Bu bir takdir varsayımıdır; uzman dinlenmezse ölüm sonra kurulamaz ve hüküm dönüş yok
+    kayıttaysa 87/4'tür (savunmanın usul eksikliğinin sonucu).
 
 ## 5. Hassas konu denetimi
 

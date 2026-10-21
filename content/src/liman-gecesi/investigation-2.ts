@@ -745,7 +745,7 @@ const talep = story('ARA_TALEP', {
       visibleWhen: all(has('ev_atk'), not(flag('talep_atk'))),
       score: { USUL_BILGISI: 40 },
       effects: [raise('ek_atk')],
-      good: 'Rapor okunmakla yetinilmesin; ölümün sebebi ve saati için uzmanın sorulara cevap vermesi istendi (CMK 67/4, 211).',
+      good: 'Rapor okunmakla yetinilmesin; ölümün sebebi ve saati için uzmanın sorulara cevap vermesi istendi (CMK 68/1, 214/1).',
     }),
     toHub('EK_GONDER', 'Dilekçeyi gönder'),
   ],

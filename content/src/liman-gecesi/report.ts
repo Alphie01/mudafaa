@@ -142,7 +142,7 @@ export const report: CasePart = {
       hint(
         'h_atk',
         all(not(flag('talep_atk')), not(flag('ek_atk'))),
-        'Raporu düzenleyen uzmanın duruşmada dinlenmesini ne ilk celsede ne de arada istedin (CMK 67/4, 211); rapor okunmakla yetinildi, “oluşabilir” sorgulanmadı.',
+        'Raporu düzenleyen uzmanın duruşmada dinlenmesini ne ilk celsede ne de arada istedin (CMK 68/1, 214/1); rapor okunmakla yetinildi, “oluşabilir” sorgulanmadı.',
         'USUL_BILGISI',
       ),
       hint(

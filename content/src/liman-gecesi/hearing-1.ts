@@ -748,7 +748,7 @@ baskan: Taraflar, eksik hususlar ve delil talepleri? Önce müdafi.
           enabledWhen: cmp(v('talep_n'), '<', 3),
           score: { USUL_BILGISI: 50 },
           effects: [raise('talep_atk'), inc('talep_n')],
-          good: 'Ölümün sebebi ve zamanı için uzman beyanı; bilirkişinin duruşmada dinlenmesi istenebilir (CMK 63, 67/4, 211).',
+          good: 'Ölümün sebebi ve zamanı için uzman beyanı; bilirkişinin duruşmada dinlenmesi istenebilir (CMK 63, 68/1, 214/1).',
           responses: B(`baskan: Kabul. Kurumun nihai raporu beklenecek, raporu düzenleyen uzman dinlenecek.`),
         }),
         option('TL_GPS', 'Servis kamyoneti 16 LMN 07’nin araç takip ve zimmet kayıtları', {

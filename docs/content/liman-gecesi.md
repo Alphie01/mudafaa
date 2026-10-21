@@ -24,10 +24,10 @@ Ayrıntılı tablo hikâye kitabının §3'ündedir. Oyuncunun öğrenme sıras�
 | Tarık bir kez vurdu, utandığı için “ittim” dedi | INV_GORUSME (TP_YUMRUK; güven ya da olay yeri bulgusu gerekir) |
 | Yumruk başı vurdurmadı (kan oturma hizasında; burun-dudak basit) | INV_RIHTIM (ob_baba) + INV_ONRAPOR (o1) → ded_kan |
 | “Seni gebertirim”i kimin söylediği görülmedi | INV_SUKRU (SK_KIM → clue_pil); INV_IFADE kenar notu |
-| Tarık 23.18'de çıktı, 23.37'de büfede, 00.00'a kadar iskelede | INV_GULAY (ev_hesap), INV_TURNIKE (clue_cikis), INV_BUFE (clue_pos, clue_radyo), INV_NAIL |
+| Tarık 23.18'de çıktı, 23.37'de büfede, 00.00'a kadar iskelede | INV_GULAY (GL_SAAT → GL_KART: ev_hesap) → INV_GORUSME (TP_DONUS: hangi büfe) → INV_BUFE (banka satırıyla clue_pos; NL_SAAT'ten sonra clue_radyo), INV_NAIL; INV_GORUSME (TP_GECE) → INV_DIL → INV_TURNIKE (INV_IFADE i3 ile karşılaştırma: clue_cikis) |
 | B sahası projektörleri 23.00–02.00 bakımdaydı | INV_RIHTIM (ob_proj) + INV_KENAN (clue_kenan_isik) → ded_isik |
-| Düşme değil, darbe | INV_ONRAPOR (o2 cetvel, o3 büyüteç) → ded_darbe; INV_ORHAN dersi |
-| Ercan 23.34'te yedi, 23.41'de telefonda konuştu | INV_SUKRU / H1_03 (clue_kantin), INV_ONRAPOR (o4), INV_TELEFON (t3) → ded_saat, ded_canli |
+| Düşme değil, darbe | INV_ONRAPOR (o2 cetvel: desen; o3 dipnot: değerlendirme nihai rapora bırakılmış) → INV_LEYLA (LEYLA_RAPOR: Orhan Hoca'yı arar) → INV_ORHAN (OR_DERS) → **ARA_ATK** (n3 histopatoloji: clue_kontrkup) → ara tahtası ded_darbe |
+| Ercan 23.34'te yedi, 23.41'de telefonda konuştu | INV_ORHAN (OR_MIDE) açar: INV_SUKRU SK_KANTIN ya da H1_03 S3 bastırma (clue_kantin; kürsü beyanı s3_kantin) · INV_DIL / TL_KANTIN (ev_kantin) · **ARA_ATK** (n4: clue_mide) → ara tahtası ded_saat; INV_TELEFON (t3) → ded_canli (B2'de kısmi) |
 | Ercan B sahasına taşındı; çift lastik izi | INV_BSAHA → ded_tasima |
 | 23.49–00.14 bir servis kamyoneti girdi çıktı | INV_TURNIKE (g4 → clue_servis_arac) |
 | 23.41 hattının abonesi Kenan Aksoy (**ters köşe**) | H1_06 TL_ABONE → ARA_GIRIS (ev_abone) |
@@ -58,31 +58,31 @@ muvekkil (Tarık), bora (Şükrü), huseyin (Nail), anne (Sevim), bilirkisi (Dr.
 |---|---|---|---|---|---|
 | ev_twistlock | Emanet No. 2024/318: twistlock | EVIDENCE (savcılık) | baştan | H1_04 itirazı; yanlış sunum cezası | ✓ |
 | ev_kenan_ifade, ev_sukru_ifade, ev_tarik_ifade | Kolluk beyanları | EVIDENCE (savcılık) | baştan | yanlış sunum cezası | ✓ |
-| ev_onrapor | Ön otopsi raporu | EVIDENCE | baştan | INV_ONRAPOR belgesi; S2 kısmi | ✓ |
+| ev_onrapor | Ön otopsi raporu | EVIDENCE | baştan | INV_ONRAPOR belgesi (desen; dipnot ve mide nihai rapora bırakılmış); S2 kısmi | ✓ |
 | ev_telefon | Telefon inceleme tutanağı | EVIDENCE | baştan | INV_TELEFON belgesi | ✓ |
 | ev_hesap | Hesap dökümü 23.37 | EVIDENCE | INV_GULAY (GL_KART) | K1 | ✓ |
 | ev_turnike | Turnike ve araç kapısı dökümü | EVIDENCE | INV_DIL → gün sonu / duruşma gecesi | INV_TURNIKE belgesi; K1 | ✓ |
 | ev_kantin | Kantin kaydı | EVIDENCE | INV_DIL / TL_KANTIN | B2 kısmi | ✓ |
-| ev_atk | ATK nihai raporu | EVIDENCE | ARA_GIRIS (her zaman) | B1 kısmi; ARA_TARIK şeması | ✓ |
+| ev_atk | ATK nihai raporu | EVIDENCE | ARA_GIRIS (her zaman) | **ARA_ATK belgesi** (clue_kontrkup, clue_mide); B1 kısmi; ARA_TARIK şeması | ✓ |
 | ev_gps | Araç takip ve zimmet | EVIDENCE | TL_GPS / EK_GPS | ARA_KAYIT belgesi; K5 | ✓ |
 | ev_abone | BTK abone bilgisi | EVIDENCE | TL_ABONE / EK_ABONE | K6 | ✓ |
 | ev_defter | Ercan'ın defteri | EVIDENCE | ARA_SEVIM | ARA_DEFTER belgesi | ✓ |
 | clue_* | 37 ipucu | CLUE | sahne / belge / konuşma | tahtaya; clue_pil, clue_projektor, clue_servis_arac, clue_envanter sunulabilir | kısmen |
-| ded_cikis | Tarık geri dönmedi | INSIGHT | cikis + pos | K1 | ✓ |
+| ded_cikis | Tarık geri dönmedi | INSIGHT | cikis + pos | K1, N1 (tek kayıt — ev_turnike, ev_hesap, ded_buf — kısmi) | ✓ |
 | ded_buf | Gece yarısına kadar iskelede | INSIGHT | nail + radyo | K1; donus_yok | ✓ |
 | ded_isik | Projektörler sönüktü | INSIGHT | kenan_isik + projektor | K2 | ✓ |
 | ded_kan | Yumruk başı vurdurmadı | INSIGHT | baba_kan + basit | S2 | ✓ |
-| ded_darbe | Düşme değil, darbe | INSIGHT | desen + kontrkup | B1 | ✓ |
-| ded_saat | Ölüm 23.34'ten sonra | INSIGHT | mide + kantin | B2 | ✓ |
-| ded_canli | 23.41'de yaşıyordu | INSIGHT | arama2341 + cikis | B2 | ✓ |
+| ded_darbe | Düşme değil, darbe | INSIGHT | desen + kontrkup (yalnız ara tahtası) | B1 | ✓ |
+| ded_saat | Ölüm 23.34'ten sonra | INSIGHT | mide + kantin (yalnız ara tahtası) | B2 (son öğün saati kayıtta: ev_kantin ∨ s3_kantin; değilse kısmi) | ✓ |
+| ded_canli | 23.41'de yaşıyordu | INSIGHT | arama2341 + cikis | B2 kısmi (hattın kullanıldığını gösterir, konuşanı değil) | ✓ |
 | ded_tasima | Araçla gelen biri onu taşıdı | INSIGHT | surukleme + lastik (ya da kan_yolu + lastik) | anlatı / tahta | — (sunum kuralı yok; uyarı) |
 | ded_silah | Emanetteki kilit yarayı açamaz | INSIGHT | koni + desen | B3 | ✓ |
 | ded_arac | Kamyonet ölüm saatinde B sahasında | INSIGHT | gps + zimmet | K5 | ✓ |
 | ded_motif | 23.41'deki konuşmanın sebebi | INSIGHT | defter_satir/manifesto + arama2341 | K6 | ✓ |
 | ded_eksik | Kitten eksik eski tip kilit | INSIGHT | envanter + tarik_koni | K7 | ✓ |
 
-Tahta: soruşturma tahtası (20 kart) 9 tarif (8 çıkarım, 1 alternatif); ara tahtası (12 kart) 5 tarif (4 çıkarım, 1 alternatif)
-— toplam 14 tarif, 12 çıkarım. Çeldirici kartlar: matara, kafes, pamuk, kan yolu (tek başına), mont, servis aracı (tek
+Tahta: soruşturma tahtası (16 kart) 7 tarif (6 çıkarım, 1 alternatif); ara tahtası (15 kart) 7 tarif (6 çıkarım, 1 alternatif)
+— toplam 14 tarif, 12 çıkarım. Tıbbi tarifler (darbe, saat) nihai rapor kartlarına bağlı olduğu için yalnızca ara tahtasındadır. Çeldirici kartlar: matara, kafes, pamuk, kan yolu (tek başına), mont, servis aracı (tek
 başına); yanlış çift −50. Havuzlar simülasyon dallanmasını sınırlamak için yalnızca tarife giren kartlar ve birkaç çeldiriciyle tutuldu.
 
 ## 5. Çelişkiler
@@ -90,11 +90,12 @@ başına); yanlış çift −50. Havuzlar simülasyon dallanmasını sınırlama
 **Şükrü Balcı (1. celse, yeminli):** S1 “Tarık bağırdı” (bastır; clue_pil → contra_s1, kırılma “Bilmiyorum”) · S2 “kafası
 babaya çarptı” (ded_kan → contra_s2; ev_onrapor kısmi) · S3 “söverek kantine yürüdü” (bastır → clue_kantin ve S4) ·
 S4 “hırslıdır, döner” (itiraz g_kanaat).
-**Kenan Aksoy (1. celse):** K1 “B sahasının ağzında gördüm” (ded_cikis / ev_turnike / ev_hesap / ded_buf → contra_k1) ·
+**Kenan Aksoy (1. celse):** K1 “B sahasının ağzında gördüm” (yalnız ded_cikis → contra_k1; ev_turnike / ev_hesap / ded_buf tek başına kısmi: “kartını başkasına vermiştir”, büfecinin anlatımı kayıtta değil) ·
 K2 “gündüz gibiydi” (ded_isik / clue_projektor → contra_k2) · K3 kanaat (itiraz) · K4 “sabaha kadar ofisteydim”
 (clue_servis_arac kısmi). İkisi birden → “belki yanılmışımdır”.
-**Doç. Dr. Karaca (2. celse):** B1 düşmeyle oluşabilir (ded_darbe; ev_atk kısmi; telkin itirazı) · B2 23.00–01.00
-(ded_saat / ded_canli; ev_kantin kısmi) · B3 dosyadaki kilit (ded_silah) · B4 (bastırınca) eski tip kilit.
+**Doç. Dr. Karaca (2. celse; yalnız TL_ATK ya da EK_ATK ile dinlenir, yoksa rapor okunur ve T_02'ye geçilir):** B1 düşmeyle
+oluşabilir (ded_darbe; ev_atk kısmi; telkin itirazı) · B2 23.00–01.00 (ded_saat + son öğün saati kayıtta; kayıtsız ded_saat,
+ded_canli, ev_kantin, ev_telefon kısmi) · B3 dosyadaki kilit (ded_silah) · B4 (bastırınca) eski tip kilit.
 **Kenan Aksoy (2. celse, CMK 48):** K5 kamyonet (ded_arac / ev_gps) · K6 arama (ev_abone / ded_motif) · K7 kit (ded_eksik /
 clue_envanter) · K8 kanaat (itiraz). Her çelişkide tanık cevap vermemeyi seçer.
 
@@ -117,10 +118,13 @@ metnini ve epilog tonunu değiştirir; beraati değil. Skor yalnızca XP'yi, not
 | 5 | MAHKUMIYET | CONVICTION | varsayılan (= ¬donus_yok) | 81/1 + 21/2 + 62/1: 16 yıl 8 ay | 0,6 (çöküş 0,3) |
 
 - **donus_yok:** contra_k1 ∨ (contra_n1 ∧ contra_n2). Yalnızca kürsüde sunulan kayıt sayılır: soruşturmadaki
-  ded_cikis/ded_buf çıkarımları sunulmadıkça kayda geçmez.
+  ded_cikis/ded_buf çıkarımları sunulmadıkça kayda geçmez. K1 ve N1 yalnızca ded_cikis ile (turnike çıkışı + büfenin
+  gün sonu fişi; banka satırı aynı) çöker; tek bir kayıt kısmi isabettir.
 - **olum_sonra:** contra_b1 ∧ contra_b2. Darbe şekli düşme mekanizmasını (ve yumruk → düşme → bilinç açıklığı sonrası
   gecikmiş ölüm ihtimalini) dışlar; saat ölümü sanığın ayrılışından sonraya koyar. contra_b3 (kilit ölçüsü) gerekçeye
-  ve puana girer, tek başına bunların yerini tutmaz.
+  ve puana girer, tek başına bunların yerini tutmaz. Her ikisi de ikinci celsede, uzman dinlenirse kurulur; ikisinin
+  kartları (karşı kutup, mide) ancak ara evresinde nihai raporla gelir. B2 ayrıca son öğün saatinin duruşma kaydında
+  olmasını ister (kantin kaydı ya da Şükrü Usta'nın ilk celsedeki kürsü beyanı; CMK 217/1).
 - **gercek_fail** (T06_B ile): suç duyurusu ∧ contra_k5 ∧ (contra_k6 ∨ contra_k7) ∧ donus_yok ∧ olum_sonra.
 - **supheli** (T06_E/T ile): donus_yok ∧ olum_sonra; yalnızca kapanış metnini seçer.
 - 87/4 gerekçesi kısmi bilirkişi bulgusuna göre üç ayrı satırla yazılır (B1 ve B2 yok; yalnızca B2 → bilinç açıklığı;
@@ -141,7 +145,7 @@ metnini ve epilog tonunu değiştirir; beraati değil. Skor yalnızca XP'yi, not
 
 Bkz. hikâye kitabı §4. Uygulamadaki ek node'lar: INV_GORUSME_G, INV_BUFE_G, INV_GULAY_G, INV_IFADE (0 EP belge),
 INV_GECE_1…6 + 3B (koşullu hafıza zinciri), H1_00G, H1_02Q/H102Q_SON, H1_04B (kısa ara), H1_05K, ARA_GIRIS_1/2,
-ARA_SEVIM_G, ARA_TARIK_G, ARA_TALEP, ARA_SON_1…3, T_00G, T_01K, T_02K, T_03E (etik), T_03G, T_06S, T_COKUS. Soruşturma
+ARA_SEVIM_G, ARA_TARIK_G, ARA_TALEP (EK_ATK dahil), **ARA_ATK** (nihai rapor belgesi), ARA_SON_1…3, T_00G, T_01K, T_02K, T_03E (etik), T_03G, T_06S, T_COKUS. Soruşturma
 hub'ı push/`$return`; ara hub'ı yığınsız (`retarget`). Motor sınırları: koşullu parçalar DECISION zincirleriyle;
 tekrar eden ceza kuralları `maxUses: 3`; tahta tarifleri `IF ¬hasEvidence` ile yalnızca ilk kurulumda puanlı.
 
@@ -149,7 +153,7 @@ tekrar eden ceza kuralları `maxUses: 3`; tahta tarifleri `IF ¬hasEvidence` ile
 
 | Ad | Sonuç | Özet |
 |---|---|---|
-| G1 | BERAAT_B | Masumiyet; tam soruşturma; ara evresinde savcılığa suç duyurusu; esas savunma 223/2-b |
+| G1 | BERAAT_B | Masumiyet; tam soruşturma; arada nihai rapor, kolluk amiri (K7) ve savcılığa suç duyurusu; esas savunma 223/2-b |
 | TIPIK | BERAAT_E | İspat stratejisi; tam soruşturma; suç duyurusu yok; esas savunma 223/2-e |
 | G3 | NITELIK | Terditli; ölüm saati ve darbe kanıtlanmaz; dönüş yok K1 ile; ek savunmada süre; terditli savunma |
 | G4 | MAHKUMIYET | Dağınık soruşturma, telkin, inkâr, dayanaksız talepler, olası kastın kabulü |
@@ -158,12 +162,15 @@ tekrar eden ceza kuralları `maxUses: 3`; tahta tarifleri `IF ¬hasEvidence` ile
 | OLGU_T | BERAAT_E | TIPIK + terditli esas savunma (T06_T) |
 | OLGU_X | BERAAT_E | TIPIK + yalnızca merhamet isteyen esas savunma (T06_X) |
 | OLGU_EK | BERAAT_E | Araç kaydı ilk celsede değil, ara evresinde ek talep dilekçesiyle (EK_GPS) |
+| OLGU_KAYIT | NITELIK | TIPIK, ama kantin kaydı istenmez ve Şükrü'ye kürsüde son öğün sorulmaz: ded_saat elde olsa da 23.34 kayıtta değil, B2 kısmi kalır (CMK 217/1) |
 | OLGU_B | NITELIK | Yüzleşme tuzağı (KY_SOR), savcıya asılların sunulması (SAV_ASIL), bilirkişiye kâğıt gösterilmez: gerçek fail savunması 223/2-b'ye ulaşamaz |
 | W | NITELIK (çöküş) | G3 benzeri yol; ikinci celsede bilirkişiye art arda yanlış delil, ♥0; dönüş yok ilk celsede kayıtta |
 
 ## 10. Erken çözüm denetimi
 
-Tipik yol yeniden döküldü (/tmp dökümü, 1.334 satır) ve ara evresine kadar olan bölüm tarandı. Kaldırılanlar: soğuk
+Tipik yol yeniden döküldü (/tmp/lg10/tipik-dump.txt, 1.353 satır; üçüncü turda yeniden tarandı: yeni satırlar — Leyla'nın
+Orhan Hoca'yı araması, dipnot, nihai rapor, büfe terminali, Şükrü'nün kürsüde son öğünü — Kenan'a işaret etmez) ve ara
+evresine kadar olan bölüm tarandı. Kaldırılanlar: soğuk
 açılışta “Fener bir süre olduğu yerde kaldı”; gün 1'deki “Vardiya şefinin HTS kayıtları” seçeneği (yerine olay yeri
 tutanağını okumadan kamera kaydı isteme hatası); telefon tutanağındaki “Kptn kim?” kenar notu; vardiya ofisindeki
 römorkör fotoğrafı (ARA_KENAN'a taşındı); Tarık'ın kamyonet cümlesi (ARA_TARIK, TR_GECE'ye taşındı); “Ya biliyorsa?”;
@@ -173,32 +180,60 @@ giriş), rehber kısaltması “Kptn”. Kenan'ın fail olduğu hiçbir satırda
 bulup talep eden oyuncuya ara evresinde gelir. Mahkeme seçeneklerinde doğru cevabın konumu ve uzunluğu değişkendir
 (BR_01 3., H1_02 2., H1_02Q 1., H1_04 3., H1_07 2., ARA_SUC 3., ARA_SAVCI 1., T_04 2., T_05 1., T_06 2./5., T_07 2.).
 
-## 11. Erken çözüm ölçümü
+## 11. Olgu kapıları ve erken çözüm ölçümü
 
-`/tmp/lg9/probe.mts` (tek süreç, bütçeli: golden path'ten hoşgörülü blok silme + her konumda `enumerateActions`
-alternatifleriyle takas), 2026-10-21:
+Skor eşiği yoktur; beraat olgulara bağlıdır. Erken çözümü kapatmak için olguların **kartları** birbirine bağlandı
+(2026-10-21, üçüncü tur):
 
-- **BERAAT_B:** G1'den 223 → **154 aksiyon (0,69 / tipik 217)**. Ara evresi zorunludur (abone/defter/araç kaydı, suç
-  duyurusu), ayrıca bilirkişiye B1 + B2.
-- **BERAAT_E:** TIPIK'ten 217 → **94 aksiyon (0,43)**, final 4.205. En kısa yol yine bütün olgu zincirini ister:
-  ön otopsi (desen + karşı darbe yok → ded_darbe), Şükrü'den kantin saati + otopsiden mide (ded_saat), turnike
-  dilekçesi ve dökümü + Gülay'ın hesap dökümü (ded_cikis), Nail + radyo (ded_buf); ilk celsede K1'e kayıt, ikinci
-  celsede B1 ve B2'ye kâğıt. Atlanan her şey isteğe bağlı keşif, puan ve epilog dallarıdır.
-- Önceki ölçüm (148/214, 142/214) skor eşiğinin (9.000) dolgusuyla elde ediliyordu; inceleme bu eşiği hukuka aykırı
-  sonuçlar ürettiği için kaldırttı (tam olgularla mahkûmiyet / 87/4). Olgu kapıları sıkılaştırılarak denendi
-  (dönüş yok = K1 ∧ K2 ∧ N2, ölüm sonra = B1 ∧ B2 ∧ B3): en fazla 106/217 (0,49). Bu kapılar B1 ∧ B2 kayıttayken
-  87/4'e düşüren aynı hukuka aykırılığı yeniden doğurduğundan tutulmadı. **0,60 hedefi BERAAT_E için karşılanmıyor;**
-  bilinçli bir ödünleşimdir ve raporlandı.
-- Mahkemeye gün 1'de gitmek MAHKUMIYET verir (kayıtta dönüş yok olgusu yoktur); ara evresini atlamak 223/2-e'yi
-  engellemez (olgular soruşturmada bulunabilir) ama 223/2-b'yi engeller.
+| Kapı | Ne ister | Gerekçe |
+|---|---|---|
+| Büfe (H_BUFE) | `fact_donus` (Tarık'ın TP_DONUS anlatımı) | Banka satırındaki terminal adı (“MDN ISKELE GIDA”) hiçbir tabelaya uymaz; hangi büfe olduğunu o gece orada oturan söyler. |
+| TP_DONUS → GL_KART → GL_SAAT | ev_hesap; GL_KART yalnızca “kaçta geldi” sorusundan sonra | Bir saatlik boşluk önce eşin ağzından duyulur. |
+| Gün sonu fişi (ob_zrapor) | ev_hesap | Kırk yıllık fiş yığınında satırı saat ve tutar bulur. |
+| Yayın akışı (ob_akis) | NL_SAAT | Akış, Nail Usta çocuğun ne zaman kalktığını anlatınca anlam kazanır. |
+| Turnike dilekçesi (DIL_TURNIKE) | `fact_gece` (TP_GECE: “kartımı bastım, çıktım”) | Hangi kapı, hangi saatler: müvekkilin anlatımı. |
+| Turnike karşılaştırması (EX_G2) | `fact_ifade_tarik` (INV_IFADE i3) | “Karşılaştır” aleti bir beyana karşı okunur: “on bir buçuk gibi” ↔ 23.18.42. |
+| Orhan Hoca (H_ORHAN) | `orhan_ref` (INV_LEYLA → LEYLA_RAPOR; desen ya da dipnot gerekir) | Kapıyı Leyla açar (Orhan'ın açılış satırı: “Leyla aradı”). |
+| Karşı kutup (ARA_ATK n3) | `fact_coup` + `fact_dipnot` | Ön rapor değerlendirmeyi histopatolojiye bırakır; satırı okumayı uzman öğretir (uzman okuması). |
+| Mide (ARA_ATK n4) | `fact_mide` | Nihai rapor mideyi yazar, yorumlamaz. |
+| Kantin (SK_KANTIN; H1 PR_S3) | `fact_mide` | Son öğünün neden önemli olduğunu bilen müdafi sorar; kürsü beyanı `s3_kantin` olarak kayda geçer. |
+| ded_darbe, ded_saat | yalnız ara tahtası | Kartların biri ön rapordan/tanıktan, öbürü nihai rapordan: farklı gün ve yerlerden. |
+| B2 (PS_B2) | ded_saat ∧ (ev_kantin ∨ s3_kantin) | CMK 217/1: son öğünün saati duruşmaya getirilmiş olmalı; değilse kısmi (PS_B2_KAYITSIZ). |
+| B2, ded_canli | kısmi | Tutanak hattın kullanıldığını gösterir; konuşanı göstermez. |
+| K1, N1 | yalnız ded_cikis | Tek kayıt teşhisi çürütmez (“kartını başkasına vermiştir”; 23.37 ödemenin saatidir, gelişin değil). |
+| Uzman (T_01) | TL_ATK ∨ EK_ATK | İstenmezse rapor okunur (CMK 214/1; dinleme CMK 68/1); “oluşabilir” sorgulanmaz. |
+| GO_H1 | gün 4 | Ara evresindeki GO_T2 kuralıyla aynı: duruşma günü bellidir. |
+
+Böylece ara evresi beraatin iki olgusunun kartlarını (karşı kutup, mide) üretir, ikinci celse iki zorunlu çelişkiyi (B1,
+B2) verir; birinci celse K1'i (ya da ikinci celse N1+N2'yi) ancak üç ayrı yerden toplanmış kayıtla kurar.
+
+**Ölçüm** (`/tmp/lg10/probe.mts`: tek süreç, iş başına ~45 sn blok silme + ~60 sn `enumerateActions` takası ve kısa
+silme; golden path'ten ya da elle kurulmuş tohumdan başlar; 2026-10-21, load ≈ 3). Tipik yol 222 aksiyon.
+
+| Sonuç | Başlangıç | En kısa bulunan | Tipik yola oranı | Süre (case:duration formülü) |
+|---|---|---|---|---|
+| BERAAT_E | TIPIK ve K1 tohumu | **102** (önce 94) | **0,46** (önce 0,43) | 64,5 dk |
+| BERAAT_B | G1 | **171** | 0,77 | 86,5 dk |
+| NITELIK | G3 | **87** | 0,39 | 57,2 dk |
+| ETIK | G5 | **69** | 0,31 | 48,2 dk |
+| MAHKUMIYET (varsayılan) | G4 | 68 | 0,31 | 47,9 dk |
+
+BERAAT_E'nin en kısa yolu artık şunları ister: ön rapor (desen + dipnot), Leyla'ya rapor ve Orhan Hoca'nın iki dersi,
+kolluk ifadesi (i3), Gülay (saat → döküm), Tarık (o gece + eve dönüş), turnike dilekçesi ve karşılaştırma, büfe (Nail, fiş),
+tahtada çıkış; ilk celsede S3'te son öğün sorusu ve K1; TL_ATK; arada nihai rapor (iki satır) ve ara tahtasında darbe +
+saat; ikinci celsede B1 ve B2. Atlananlar: rıhtım ve B sahası aramaları, Kenan görüşmesi, telefon tutanağı, 2-b zinciri
+(abone, araç, defter, emanet, suç duyurusu), tanık çelişkilerinin kayıt dışı kalanları, epilog dalları. Bunların hiçbiri
+223/2-e için hukuken gerekli değildir: kayıtla çöken teşhis + darbe şekli + ölüm saati beraati zorunlu kılar (CMK 223/2-e,
+şüpheden sanık yararlanır); bunları zorunlu kılmak ya puan dolgusu (yasak) ya da beraat gerektiren kayıtla mahkûmiyet
+(hukuka aykırı) olurdu. **0,60 hedefi BERAAT_E, NITELIK ve ETIK için karşılanmıyor;** kalan açık rapora yazıldı.
+ETIK bir çöküş sonucudur (Gülay'a yalan öğütleyip ikinci celseye gitmek yeter); NITELIK yalnızca dönüş yok zincirini ister.
 
 ## 12. Doğrulayıcı
 
 Son koşu (`npm run case:validate -- liman-gecesi`, varsayılan bütçe, 2026-10-21, load ≈ 3): **PASSED — 0 hata,
-1 uyarı** (SIMULATION_INCOMPLETE, uzun davada beklenen). Simülasyon ≈ 50.000 durum, ≈ 363.000 geçiş, 400 yürüyüş;
-bütün sonuçlara ulaşıldı (ETIK, BERAAT_B, BERAAT_E, NITELIK, MAHKUMIYET); kapsam node 108/108, seçenek 201/201,
-kural 72/72, delil 56/56; golden path 11/11; softlock / çıkmaz / sızıntı yok. Süre 42 sn. Önceki koşulardaki
-SIMULATION_ABORTED ve vitest zaman aşımları makine yüküne (load ≈ 20) bağlıydı; sakin makinede tekrarlanmadı.
+1 uyarı** (SIMULATION_INCOMPLETE, uzun davada beklenen). Simülasyon ≈ 90.500 durum, ≈ 409.000 geçiş, 400 yürüyüş;
+bütün sonuçlara ulaşıldı (ETIK, BERAAT_B, BERAAT_E, NITELIK, MAHKUMIYET); kapsam node 109/109, seçenek 206/206,
+kural 82/82, delil 56/56; golden path 12/12; softlock / çıkmaz / sızıntı yok. Süre 56 sn.
 `npx vitest run --project content-tools --project case-schema --project engine --project validator --maxWorkers=2`:
 37 dosya, 1.885 test geçti. `npm run lint` ve `npm run build` temiz.
 
@@ -207,22 +242,23 @@ SIMULATION_ABORTED ve vitest zaman aşımları makine yüküne (load ≈ 20) ba�
 `npm run case:duration -- liman-gecesi` (2026-10-21):
 
 ```
-  G1            103.3 dk   14577 sözcük   223 aksiyon  BERAAT_B (12945)
-  TIPIK         102.4 dk   14524 sözcük   217 aksiyon  BERAAT_E (11950)
-  G3             73.2 dk   10705 sözcük   137 aksiyon  NITELIK (4180)
-  G4             67.2 dk    9659 sözcük   135 aksiyon  MAHKUMIYET (205)
-  G5             72.9 dk   10623 sözcük   139 aksiyon  ETIK (8160)
-  OLGU_D        101.4 dk   14347 sözcük   217 aksiyon  BERAAT_E (11630)
-  OLGU_T        101.5 dk   14360 sözcük   217 aksiyon  BERAAT_E (11830)
-  OLGU_X        101.3 dk   14320 sözcük   217 aksiyon  BERAAT_E (11660)
-  OLGU_EK       101.3 dk   14345 sözcük   216 aksiyon  BERAAT_E (11890)
-  OLGU_B         97.4 dk   13740 sözcük   211 aksiyon  NITELIK (10175)
-  W              65.2 dk    9481 sözcük   125 aksiyon  NITELIK (2105)
-  ==> TİPİK YOL (TIPIK): 102.4 dk  ✓ süre hedefte
+  G1            104.5 dk   14788 sözcük   223 aksiyon  BERAAT_B (12425)
+  TIPIK         104.2 dk   14756 sözcük   222 aksiyon  BERAAT_E (12110)
+  G3             76.3 dk   11052 sözcük   149 aksiyon  NITELIK (4765)
+  G4             66.7 dk    9562 sözcük   136 aksiyon  MAHKUMIYET (145)
+  G5             69.9 dk   10146 sözcük   135 aksiyon  ETIK (6485)
+  OLGU_D        103.2 dk   14579 sözcük   222 aksiyon  BERAAT_E (11790)
+  OLGU_T        103.3 dk   14592 sözcük   222 aksiyon  BERAAT_E (11990)
+  OLGU_X        103.0 dk   14552 sözcük   222 aksiyon  BERAAT_E (11820)
+  OLGU_EK       101.8 dk   14398 sözcük   218 aksiyon  BERAAT_E (11955)
+  OLGU_KAYIT    101.1 dk   14255 sözcük   219 aksiyon  NITELIK (11295)
+  OLGU_B         98.7 dk   13979 sözcük   210 aksiyon  NITELIK (9475)
+  W              68.4 dk    9842 sözcük   137 aksiyon  NITELIK (2790)
+  ==> TİPİK YOL (TIPIK): 104.2 dk  ✓ süre hedefte
   ==> KAPI: ✓ GEÇTİ
 ```
 
-Paket (`node tools/content/word-count.mjs content/cases/liman-gecesi`): 1.497 satır, 18.354 satır sözcüğü; ekran
-metinleriyle toplam **22.817** sözcük; en uzun satır 212 karakter. İkinci celse artık büfeci Nail'in press/present
+Paket (`node tools/content/word-count.mjs content/cases/liman-gecesi`): 1.531 satır, 18.899 satır sözcüğü; ekran
+metinleriyle toplam **23.646** sözcük; en uzun satır 212 karakter. İkinci celse artık büfeci Nail'in press/present
 tanıklığını (N1–N4), Kenan'ın K5–K8 karşılıklarını, eşin CMK 45/51 hatırlatmasıyla dinlenmesini ve kayıtlı saatlerle
 genişleyen esas savunmayı içerir; ara evresine savcılık ziyareti (ARA_SAVCI) eklendi.

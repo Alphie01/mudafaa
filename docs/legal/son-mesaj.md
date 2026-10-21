@@ -4,7 +4,7 @@
 > Üretim yayını öncesinde bir avukatın dış incelemesi önerilir (§4'teki yorum noktaları).
 
 Metinler aşağıdaki güncel mevzuat metinleri esas alınarak yazılmış ve denetlenmiştir (erişim/kontrol: 2026-10-20;
-dengeleme turu 2026-10-21):
+dengeleme turu 2026-10-21; ikinci dengeleme turu 2026-10-21):
 
 - TCK 5237 — https://www.mevzuat.gov.tr/MevzuatMetin/1.5.5237.pdf
 - CMK 5271 — https://www.mevzuat.gov.tr/MevzuatMetin/1.5.5271.pdf
@@ -110,8 +110,11 @@ mütalaa ve cevap (CMK 216/1–2), esas hakkında savunma, son söz (CMK 216/3),
 
 11. **KISMI'nin olgusal ayrımı.** Önceki sürüm 134'ten "iletenin sanık olduğu ispatlanamadı" diye beraat verip aynı
     dakikadaki 9 Kasım tehdidini zincirleme şantajın içinde tutuyordu. Karar: 9 Kasım'ın iki işlemi birlikte hükümden
-    çıkarıldı; şantaj 6 ve 12 Kasım mesajlarına, iki fiilli zincirlemeye dayandırıldı. Bu iki gece için başka cihaz
-    ileri sürülmüş ama o cihazı sanık dışında birinin kullandığı somut olarak gösterilememiştir (vicdani kanaat, CMK 217/1).
+    çıkarıldı; şantaj 6 ve 12 Kasım mesajlarına, iki fiilli zincirlemeye dayandırıldı. İkinci dengeleme turunda KISMI
+    yalnızca mesajların kaynağı tutanakta hiç tartışılmadığında verilir (`¬kaynak_suphesi`): bu iki gece için savunma
+    mesajların telefondan ya da sanığın elinden çıkmadığına dair bir delil ortaya koymamıştır (gerekçe bunu söyler).
+    Kaynak tutanaktaysa (üç mesaj da aynı cihaz 3'ten) ve o cihaz 9 Kasım gecesi sanık acil servisteyken kullanılmışsa,
+    cihazı sanığın kullandığı kabul edilemez; bu tutanak üç gece için birlikte şüphe doğurur ve BERAAT_E'dir (§4/14).
 12. **Bilirkişinin sınırı.** 2. celsede bilirkişi önce "cihaz 3'ü sanığın kendisi de kullanmış olabilir" ve "hash
     bütünlüğü tamdır" der; savunma bunları sağlayıcı yanıtı/hat bilgisi ve mühürsüz iki günle daraltır. Bilirkişi
     hukuki değerlendirme yapamaz (CMK 67/1); burada yalnızca teknik kanaatini delile göre düzeltir. Hash'in yalnızca
@@ -123,16 +126,22 @@ mütalaa ve cevap (CMK 216/1–2), esas hakkında savunma, son söz (CMK 216/3),
     (Anayasa 38/4, AİHS 6/2). Koşullar, oyuncunun not defterindeki çıkarımlara değil, tanık/bilirkişi beyanlarına ve
     sunulan belgelere (bayraklar) bağlandı. Savcının mütalaası da aynı ayrıma göre dört varyanta bölündü; savcının
     beraat istediği bir tutanakla mahkûmiyet kurulmaz.
-14. **2-e beraatinin asgari tutanağı.** Mesajların telefondan çıkmadığı (Demirci'nin kabulü ya da bilirkişinin raporuna
-    dayalı teyidi) ve bilirkişinin "teknik olarak sanığın kendisi de olabilir" cümlesinin üç gece için delille
-    daraltılması (cihaz 3 sanığın ev hattından değil, başka bir firmanın sabit iş hattından bağlanmış: sağlayıcı yanıtı,
-    hesap verisi, ev modemi/abone kaydı). Yorum: tek gecelik mazeret (9 Kasım) bu cümleyi yalnızca o gece için daraltır;
-    öbür iki gece için cihazı sanığın kendisinin kullanmış olabileceği tutanakta açık kaldığından mahkeme o iki gece
-    yönünden vicdani kanaatle mahkûmiyet kurabilir (KISMI). Hat bilgisi ise üç geceyi birlikte kapsadığından makul
-    şüpheyi bütün fiiller için doğurur. Bu, dış incelemede ayrıca bakılması gereken bir takdir noktasıdır.
+14. **2-e beraatinin asgari tutanağı (ikinci dengeleme turu).** Üç halka birlikte (`beraat_kaydi`): (a) mesajların
+    telefondan çıkmadığı (Demirci'nin kabulü ya da bilirkişinin teyidi, `kaynak_suphesi`); (b) bilirkişinin raporuna dayalı
+    bir teyidi (`bilirkisi_teyit`: Bulgu 1 ya da Bulgu 2); (c) cihaz 3'ü sanık dışında birinin kullandığının tutanakta
+    olması (`el_daraldi`). (c) dört yoldan biriyle kurulur: bilirkişinin daraltması (Bulgu 1 teyit edilmiş, rapor "Sınır"
+    okunmuş, sanığın ev hattı ve 07'nin eski ortağın zimmetinde iadesiz kaldığı gösterilmiş, sağlayıcı yanıtı sunulmuş);
+    sağlayıcı yanıtının tanığa sunulması (önce 07'nin iadesizliğiyle "her şeyi teslim ettim" çürütülmüşken); eski ortağın
+    işyerinde el konulan dizüstünün imajı ve tanığın O2 anlatımının bu dizüstüyle çürütülmesi; ya da 9 Kasım mazeretinin
+    bütün halkalarıyla tutanakta olması (üç mesaj tek cihazdan, cihaz o gece sanık acil servisteyken çalışıyor). Önceki
+    sürüm (c) için yalnızca bilirkişinin hat daraltmasını kabul ediyordu; inceleme, sağlayıcı yanıtı tanığa sunulmuş,
+    dizüstü tanığın işyerinde bulunmuş ve tanık CMK 48 ile susmuşken mahkûmiyete gidilebildiğini gösterdi (tutanak beraat
+    gerektirirken mahkûmiyet). Yorum: abone bilgisi ya da el konulan cihaz tek başına "kimin oturduğunu" göstermez; bu
+    yüzden her yolda bir temel istenir (zimmet, tanığın çürütülen anlatımı, bilirkişinin cihaz kimliği). Hâkim takdiri
+    farklı olabilir; dış incelemede bakılmalıdır.
 15. **Taleplerin kabulü.** Hâkim, delil talebini ispatlanmak istenen olayla bağı gösterildiğinde kabul eder (CMK 206/2-c).
-    Bu nedenle sağlayıcı müzekkeresi (T1_ISP), sanığın 9 Kasım gecesi cihazın başında olamayacağı Demirci'ye sunulup
-    tutanağa geçtikten ve hesap dökümü dosyaya girdikten sonra; hemşirenin tanıklığı (T1_GULAY) da aynı kayıttan sonra
+    Bu nedenle sağlayıcı müzekkeresi (T1_ISP), mesajların cihaz 3'ten çıktığı (contra_s3) ve sanığın 9 Kasım gecesi
+    cihazın başında olamayacağı Demirci'ye sunulup tutanağa geçtikten sonra; hemşirenin tanıklığı (T1_GULAY) da aynı kayıttan sonra
     kabul edilir. Hayri Sezer'in tanıklığı, savunma onun telefonundaki bildirimin saatini öğrendikten sonra istenebilir.
     Ayrıntılı bir "ilgililik" değerlendirmesidir; hâkim takdiriyle farklı karar verebilir.
 16. **Savunma delilinin dosyaya girmesi.** Noter tespitli hesap dökümü, dilekçeye eklenmedikçe ya da duruşmada
@@ -144,9 +153,25 @@ mütalaa ve cevap (CMK 216/1–2), esas hakkında savunma, son söz (CMK 216/3),
     belgeyle karşılaştırmadır (CMK 201, 212'nin amacına uygun); tanığa önceden ne söyleyeceğini söyleyen seçenekler
     (GUL_YONLENDIR) etik ihlal olarak kalır.
 18. **Karartmanın ortaya çıkması.** Etik tuzak yalnızca dava güçlüyken gelir (sütun ve 9 Kasım salonda kurulmuş, rapor
-    okunmuş, somut dayanaklı suç duyurusu verilmiş). TK_SIL'de değiştirilen döküm kopyası noter hash'iyle karşılaştırılıp
+    okunmuş, somut dayanaklı suç duyurusu verilmiş, 25 Ekim yazışması müvekkilden öğrenilmiş ve iki üslup karşılaştırması
+    tahtada). TK_SIL'de değiştirilen döküm kopyası noter hash'iyle karşılaştırılıp
     dışlanır; TK_GIRIS'te tanığın e-posta hesabına müdafiin bürosunun hattından girildiği sağlayıcı kaydıyla dosyaya
     girer. ETİK hüküm metni ("delil üzerinde oynandığı yönünde emareler") bu kayda dayanır (TCK 243, 281; Av.K. 34).
+
+19. **Mahkûmiyet gerekçesi tutanaktaki eksiğe göre.** "Aksi yönde yeterli delil yoktur" kalıbı kaldırıldı. Kaynak
+    hiç tartışılmadıysa gerekçe bunu söyler; kaynak ileri sürülüp bilirkişiyle doğrulanmadıysa ya da bilirkişi cihaz 3'ün
+    sanığın işyerinin bir oturumu olduğunu teyit edip eli daraltacak bir kayıt (hat, zimmet, tanık) gelmediyse ayrı
+    cümleler kurulur; 9 Kasım mazereti kısmen kurulmuşsa (kilit kaydı var, saati yazan tanık/bağımsız saat yok) bu da
+    belirtilir. Epilog ve esas savunma cümleleri ("salona tek bir kâğıt koymadım") aynı koşullara bağlandı.
+20. **Esas savunmadaki hatalar hükmü değiştirmez.** Hâkim savunmanın talebiyle bağlı değildir (CMK 225, 217); bu yüzden
+    kötü bir kapanış tutanağın gerektirdiği beraati düşürmez. Ama bedeli vardır: "yapmadım" diyen müvekkil adına
+    pişmanlık bildirmek (T08_D) müdafiin müvekkilin iradesine ve yararına aykırı beyanı olarak meslek ihlali sayılır
+    (Av.K. 34, TBB Meslek Kuralları), `ethics` sayacını artırır (XP düşer) ve epilogda Leyla'nın uyarısıyla görünür;
+    zinciri tamamlanmamış 2-b talebi (T08_A) ayrıca epilogda karşılık bulur.
+21. **Bölüm 1, Leyla'nın ceza sınırı cümlesi (BR01_A).** Önceki metin "iki yıldan başlıyor; ertelemenin, geri bırakmanın
+    sınırını aşıyor" diyordu; TCK 134/2'nin alt sınırı 2 yıl, TCK 51/1 ve CMK 231/5 sınırı "iki yıl veya daha az"
+    olduğundan alt sınır bu sınırın içindedir (TCK 62 ile 1 yıl 8 ay). Metin "alt sınırı iki yıl; ertelemenin ve geri
+    bırakmanın tam sınırında; üstüne çıkan her ay o kapıyı kapatır" olarak düzeltildi.
 
 ## 5. Hassas konu denetimi
 Lineup sınırı: cinsel suçlar, çocuklara yönelik suçlar ve terör davaları yok. Bu davada özel hayat içeriği cinsel

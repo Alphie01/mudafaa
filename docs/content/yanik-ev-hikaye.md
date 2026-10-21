@@ -219,18 +219,23 @@ mütalaa, savunma, son söz, karar). Zorluk 5: son celse iki oturuma bölünmü�
 - **ARA_GIRIS_1**: tahliye edildiyse Halil'in atölyeye dönüşü (sandığın başında); değilse ring aracının camı.
 - **ARA_GIRIS**: adliye koridorunda Tarık Deniz'e kartvizitini uzatır: "Objektif olmak zor iştir. Kolay gelsin." (Tehdit
   değil; tehdit kadar soğuk.)
-- **ARA_LAB (belge, talep edildiyse)**: kromatogram; "buharlaşma yok", "piroliz ürünü yok" (`clue_piroliz`).
-- **ARA_GULSUM**: Gülsüm Yaşar büroya gelir (Zehra'nın hastanesinden duymuş): tahkim kararı (`ev_tahkim`) ve şirket
-  yazısı (`clue_prim`). **ARA_TAHKIM (belge)**: aynı paragraf (`clue_ayni`).
+- **ARA_LAB (belge, talep edildiyse)**: kromatogram; profil satırı "hafif bileşenler korunmuş" (`clue_buhar`), matris satırı
+  "piroliz ürünü yok" (`clue_piroliz`), kabul satırı (eksperin şahsi mührü), not satırı (tutanak yok). Tahtada iki adım:
+  buhar + piroliz = "numune yangını görmedi"; o da bekçinin tenekeleriyle "tenekeler önceden doluydu".
+- **ARA_GULSUM**: Gülsüm Yaşar büroya gelir (Zehra'nın hastanesinden duymuş); naylon dosyayı açmadan masaya bırakır: tahkim
+  kararı (`ev_tahkim`) kendiliğinden gelir, hikâyesi sorulunca anlatılır. **ARA_TAHKIM (belge)**: aynı paragraf (`clue_ayni`),
+  şirket yazısı (`clue_prim`).
 - **ARA_SAADET (sahne)**: yanmış televizyon, modem, kombi kartı; Saadet "televizyon yangından önce gitti" (`clue_tv`).
 - **ARA_ARIZA (belge, talep edildiyse)**: nötr kopukluğu 02.08 (`clue_notr`).
 - **ARA_ARK (belge, talep edildiyse)**: koridor buat hattında birincil ark boncuğu (`clue_ark`).
-- **ARA_CEVDET**: tenekeleri ve spor çantayı anlatır; tanıklığa razı olur (yönlendirme yok).
+- **ARA_CEVDET**: tenekeleri ve spor çantayı anlatır (soru, Saadet'in "iki teneke"si tutanakta ya da kayıtta ise açılır; yoksa
+  Deniz neyi soracağını bilmez); tanıklığa razı olur (yönlendirme yok).
 - **ARA_HALIL**: gerçeği konuşmak; ek savunmaya hazırlık (doğruyu söylemesini tavsiye etmek).
 - **ARA_ONUR (etik tuzak)**: para karşılığı karşı rapor. Reddet (doğru) · "Düşüneyim" (iz bırakır) · Kabul et (`sahte_rapor`
   → ETİK sonu).
-- **ARA_SUC**: eksper hakkında suç duyurusu (savcılığa; TCK 267/2) — ya da onu kendin sıkıştırmak (yanlış; Leyla'nın dersi).
-  Suç duyurusu → savcılığın el koyması (`ev_elkoyma`: aracındaki benzin bidonu ve boş tenekeler) ikinci celsede gelir.
+- **ARA_SUC (karar anı, celseden önce zorunlu)**: eksper hakkında suç duyurusu (savcılığa; TCK 267/2) — ya da onu kendin
+  sıkıştırmak (yanlış; Leyla'nın dersi), basın (yanlış) ya da "şimdilik bir şey yapma, kürsüde kullan" (meşru ama kimse arama
+  yapmaz). Suç duyurusu → savcılığın el koyması (`ev_elkoyma`: aracındaki benzin bidonu ve boş tenekeler) ikinci celsede gelir.
 - **ARA_CIKARIM**, **ARA_LEYLA**.
 - **ARA_AKSAM**: Tarık büronun kapısında, yağmurda: "Bazen yangın sadece yangındır." Seçim: konuşmayı kayda geçir ve
   savcılığa bildir · tehdit et · kapıyı kapat.
@@ -276,7 +281,9 @@ mütalaa, savunma, son söz, karar). Zorluk 5: son celse iki oturuma bölünmü�
 
 1. **Numuneler eksperindi (1. celse doruğu).** Ekilen ipuçları: prologdaki bekçi defteri (saatsiz), bilirkişi raporundaki numune
    kaynağı satırı, bekçi çizelgesi, Saadet'in "şık bir adam, iki teneke" yan cümlesi (yalnızca numune satırı ya da eksperin
-   fotoğrafı bulunduktan sonra söylenir; önce sorulursa Saadet yalnızca kamyoneti ve bidonu anlatır).
+   fotoğrafı bulunduktan sonra söylenir; önce sorulursa Saadet yalnızca kamyoneti ve bidonu anlatır; birinci celsede S1
+   bastırılırken de söyler). Bekçinin sabahını sormak için iki fotoğrafın yan yana konması gerekir (04.30'da örtülü, 09.40'ta açık
+   zemin: "arada biri girdi").
 2. **Yangın elektrikle çıktı (ara evresi).** Ekilen ipuçları: Saadet'in "televizyonum pat dedi", buattaki eriyik bakır, V izi,
    itfaiyenin "mutfak–koridor" tespiti, Necati'nin keşif notu. Leyla'nın 1996 hikâyesi genel bir derstir (fotoğraftan rapor
    yazan bir bilirkişi); çözüm şablonu (ark) değildir. Kahvehanedeki çaycı sigortacıdan söz etmez.

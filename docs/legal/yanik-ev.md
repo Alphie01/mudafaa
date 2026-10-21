@@ -5,7 +5,9 @@
 > şeytanın avukatı incelemesinden sonra hüküm koşulları (CMK 223 dayanak seçimi, ısmarlama raporda kalan kayıt), takvim (TCK 7)
 > ve çöküş sonrası usul (CMK 216) yeniden gözden geçirildi; bkz. §4.8, §4.13–4.15. 2026-10-21 (yeniden dengeleme): hüküm
 > bütünüyle kayda bağlandı, hiçbir sonuç skor eşiği istemiyor; taksir yalnızca kayıtta karşılığı yoksa kurulur; bkz. §4.9,
-> §4.13, §4.16–4.19.
+> §4.13, §4.16–4.19. 2026-10-21 (üçüncü inceleme): kast çekirdeğe bağlandı (`kast_coktu`), çekirdek kayıttaysa hiçbir yolda kasten
+> mahkûmiyet yok; mahkûmiyet gerekçeleri kayıttaki usulsüzlüğü tanır; taksir gerekçesi olumlu tespitlere dayanır ve panodaki
+> aşırı gerilim izini tartışır; delil zinciri kapıları ve dayanakları; bkz. §4.9, §4.20–4.23.
 
 ## 1. Kullanılan maddeler ve doğrulama
 
@@ -24,6 +26,9 @@
 | TCK 267/1–2 | ARA_SUC, epilog kartları | aynı | 2026-10-20 | İftira; fiilin maddi eser ve delillerini uydurarak iftirada ceza yarı oranında artırılır. |
 | TCK 281/1 | ARA_SUC | aynı | 2026-10-20 | Gerçeğin ortaya çıkmasını engellemek amacıyla delilleri yok eden, değiştiren… |
 | TCK 272, 38 | Etik geri bildirimler (Cevdet'e telkin, ısmarlama rapor), ETIK sonu | aynı | 2026-10-20 | Yalan tanıklık; azmettirme. |
+| CMK 43–44 | DIL_CEVDET / T1_CEVDET kapısı (§4.22) | aynı | 2026-10-21* | Tanıklar çağrı kâğıdıyla çağrılır; usulüne uygun çağrıldığı hâlde gelmeyen tanık zorla getirilir. |
+| CMK 108/3 | T1_TAKDIR / T1_BITIR (§4.22) | aynı | 2026-10-21* | Hâkim veya mahkeme, süreler beklenmeksizin her oturumda tutukluluğun devamının gerekip gerekmediğine karar verir. |
+| CMK 206/2 | DIL_LAB / T1_LAB kapısı (§4.22) | aynı | 2026-10-21* | Delil ikamesi istemi; delil hukuka aykırıysa, ispatı istenen olay önemsizse ya da sırf uzatma amacıyla ileri sürülmüşse reddedilir. |
 | CMK 48 | T_03K | mevzuat.gov.tr/MevzuatMetin/1.5.5271.pdf | 2026-10-20 | Tanık, kendisini ceza soruşturmasına uğratabilecek sorulara cevap vermekten çekinebilir; hatırlatılır. |
 | CMK 54 | T_02-C geri bildirimi | aynı | 2026-10-20 | Yeminsiz dinlenecekler sınırlı sayılı; taraf ile iş ilişkisi bunlardan değil. |
 | CMK 63, 67/3, 67/5, 67/6, 68/3, 69/1 | Belgeler, H1_03, H1_05, H1_06 (B5), DIL, ARA_AKSAM | aynı | 2026-10-20 | Bilirkişi ataması; bilirkişinin hukuki değerlendirme yapamaması (67/3); yeni inceleme istemi (67/5); tarafların bilimsel mütalaası (67/6) ve uzmanın dinlenmesi (68/3); bilirkişinin reddi hâkimin reddi sebeplerine bağlı (69/1). |
@@ -43,6 +48,8 @@
 | Anayasa 38/4–5 | Gerekçe, K_SUS | — | 2026-10-20 | Suçluluk hükmen sabit oluncaya kadar masumiyet; kimse kendini suçlayan beyana zorlanamaz. |
 | Av.K. 34, TBB Meslek Kuralları | Etik geri bildirimler | — | 2026-10-20 | Avukatın doğruluk ve mesleğin onuruna uygun davranma yükümlülüğü. |
 | 5684 s. Sigortacılık Kanunu md. 22, 30 | Arka plan (eksperlik, Sigorta Tahkim Komisyonu) | — | — | Metinde madde numarasıyla anılmaz; yalnızca kurumlar (eksper, tahkim komisyonu) adıyla geçer. |
+
+\* Üçüncü incelemede eklenen satırlar madde metninin bilinen hâline göre yazıldı; bu turda PDF yeniden indirilmedi.
 
 ## 2. Ceza hesabı
 
@@ -118,10 +125,12 @@
    sanığın özen eksikliğine şüpheden uzak biçimde bağlanamaz ve hüküm beraattir. Önceki sürümde aynı dış etken cevabı TAKSIR'de
    "ortak illiyet" gerekçesiyle mahkûmiyete, BERAAT_E'de beraate götürüyordu; fark kayıtta değil skorda ve dolaylı delillerdeydi.
    Bu tutarsızlık giderildi: TAKSIR ve ETIK_T gerekçelerinden takvim ve dış etken cümleleri kaldırıldı (bu sonlara artık o
-   kayıtla ulaşılamaz), yerine "dosyada dağıtım hattına ilişkin bir kayıt yoktur, uyarıyı yapan elektrikçi de dinlenmemiştir"
-   cümlesi geldi. Uyarının kendisi kayda sanığın ek savunmasıyla ve savunmanın birinci celsede buat için sunduğu notla girer
-   (PS_B3_BUAT; Leyla'nın "iki yöne keser" uyarısı).
-   "Çöktü" sayılmak için hızlandırıcı iddiasının bütün ayaklarının birlikte kurulması aranır (`hizlandirici_coktu`): numunelerin
+   kayıtla ulaşılamaz). Üçüncü incelemede bu yolların taksir gerekçesi olumlu tespitlerle yeniden yazıldı (§4.21); "uyarıyı yapan
+   elektrikçi de dinlenmemiştir" cümlesi ispat yükünü savunmaya yüklediği ve mahkemenin kendi eksik araştırmasını kayda geçirdiği
+   için kaldırıldı. Uyarının kendisi kayda sanığın ek savunmasıyla (her iki varyantta da uyarıyı kabul eder) ve savunmanın birinci
+   celsede buat için sunduğu notla girer (PS_B3_BUAT; Leyla'nın "iki yöne keser" uyarısı).
+   **Önceki sürüm (üçüncü incelemede değişti, §4.20):** "Çöktü" sayılmak için hızlandırıcı iddiasının bütün ayaklarının birlikte
+   kurulması aranıyordu (`hizlandirici_coktu`): numunelerin
    elde ediliş zinciri (bilirkişinin kabulü B2; yeminli bekçi: muhafaza CV_Q1, refakatsiz giriş CV_Q2, dolu tenekeler CV_Q3;
    eksperin "polis izni" iddiasının çizelgeyle çürümesi U1); zemin izi (B1 ve eksperin kendi kabulü U2); koku tanığının "benzin"
    kelimesinin kolluğun sorusundan geldiği (S2); satın alınan benzinin atölyede durduğu (S6, kolluk tespiti); başlangıç
@@ -180,6 +189,57 @@
 19. **Önce bastır, sonra sun.** Çapraz sorgudaki çelişkiler (B1–B4, S2, S6, U1–U3, U6) tanık önce kendi cümlesine bağlanmadan
    (ifade bastırılmadan) belge sunulursa kayda geçmez; ceza yoktur, tanık bir açıklama kapısı bulur (`erkenSunum`). Bu, CMK 201
    çerçevesindeki çapraz sorgu tekniğinin oyunlaştırılmasıdır; hukuki bir şart değildir.
+
+20. **Kast çekirdeğe bağlıdır; diğer ayaklar gerekçedir (üçüncü inceleme).** Önceki 14 ayaklı yüklem, tek bir ayak eksik
+   kaldığında kayıt numunelerin ekildiğini gösterdiği hâlde kasten mahkûmiyete düşüyordu (in dubio pro reo'ya aykırı uçurum).
+   Artık kast iddiası şu çekirdek kayıttaysa düşer (`kast_coktu`): numuneleri kolluk değil katılan eksperi teslim etti (bilirkişinin
+   birinci celsedeki kabulü, B2); eksper muhafaza altındaki olay yerine refakatsiz girdi (yeminli bekçi CV_Q2 ya da eksperin
+   "polis izni" iddiasının çizelgeyle çürümesi U1); bekçi tenekelerin içeri dolu girdiğini gördü (CV_Q3); ve eksper "numuneleri o
+   zeminden aldım" cümlesiyle ham veri, şahsi mühür ve tutanak yokluğu üzerinden yüzleştirildi (U3). Çekirdek kayıttaysa hiçbir
+   yolda kasten mahkûmiyet yoktur (TAKSİR, BERAAT_E, BERAAT_B ya da ısmarlama raporla ETIK_E/ETIK_T). Zemin, koku, satın alınan
+   benzin, başlangıç noktası, pano/buat, ark ve taze benzin ayakları hükmü değil gerekçe cümlelerini değiştirir; her biri için
+   "elinde tuttuğun ama sunmadığın" rapor ipucu vardır.
+   U3'ün tam çelişkisi kendi temelini ister (`u3Temel`): bilirkişinin kabulü, refakatsiz giriş, bekçinin tenekeleri ve
+   laboratuvarın kabul (şahsi mühür) ve not (tutanak yok) satırları. Gerekçe: ham veri hâkimin kendiliğinden okuyacağı bir bulgu
+   değil, bir yorumdur; "numune getirildi" sonucu, numuneyi kimin getirdiği, ne zaman yalnız girdiği ve içeri ne taşıdığı kayda
+   geçmeden kurulamaz. Bu sayede `contra_u3` kayıtta ise çekirdek de kayıttadır. Temel eksikken U3'e sunulan kart kısmi kalır;
+   tanık hangi halka açıksa oradan kaçar (PS_U3_MUHURSUZ).
+   **Yorum tercihi (kısmi zincir).** Çekirdeğin bir kısmı kayıtta (örneğin eksperin teslimi ve refakatsiz girişi) ama numunenin
+   olay yerine getirildiği duruşmada ileri sürülüp kurulmamışsa oyun kasten mahkûmiyet verir; gerekçe usulsüzlüğü açıkça tanır
+   ("bu usulsüzlükler numunelerin değerlendirilmesinde gözetilmiştir"), laboratuvar bulgusunun neden yine de esas alındığını söyler
+   ve mahkemenin elektrik bilirkişisinin raporu dosyadaysa onu tartışır ("birincil arkla uyumlu" bir değerlendirme kesin bir tespit
+   değildir). Gerçek bir mahkeme bu kayıtta numunelerin güvenilirliğinden kuşku duyup ek bilirkişi incelemesine gidebilirdi; oyun,
+   ham verinin anlamı kürsüde kurulmadıkça mahkemenin onu kendiliğinden yorumlamadığını varsayar (CMK 63: özel bilgi gerektiren
+   konu). Bu bilinçli bir sadeleştirmedir; mahkûmiyet gerekçesi kayıttaki hiçbir olguyu inkâr etmez.
+21. **Taksir gerekçesi olumlu tespitlere dayanır.** TAKSİR ve ETIK_T artık "savunma özen yükümlülüğünü yerine getirdiğini ispat
+   edemedi" demez. Tespitler: sanığın ek savunmasında Aralık'ta elektrikçinin tesisatın eski olduğunu ve koridor buatının ısındığını
+   söylediğini kabul etmesi; uyarıdan sonra beş hafta tesisatın enerjili kalması ve ev 9 Ocak'ta boşaltıldıktan sonra ana sigortanın
+   indirilmemesi (ısınan bir bağlantı noktası yük azaltılsa da enerjili kaldıkça tehlikelidir; netice öngörülebilir ve
+   önlenebilirdir, TCK 22/2); başlangıç bölgesinin itfaiye raporuna göre uyarının konusu olan koridor hattı olması (ark raporu
+   dosyadaysa birincil ark). Mahkemenin elektrik bilirkişisi raporu dosyadaysa panodaki aşırı gerilim izi açıkça tartışılır:
+   kaynağına ilişkin dosyada bir bulgu yoktur ve iz, korumasız eski bir tesisatta yangının kendisiyle de oluşabilir; tek başına bir
+   dış etkeni göstermez. Dağıtım kaydı dosyaya gelirse (nötr kopması) bu değerlendirme değişir ve hüküm beraattir (§4.17). Sanığın
+   "ağır yük çekmedim, restorasyona koyduk" anlatımı değerlendirilir; uzmanın kendisi "acil değil, normal kullanımda yıllarca gider"
+   diye yeminle beyan etmedikçe (T05_A) bu anlatım öngörülebilirliği ortadan kaldırmaz.
+22. **Delil zinciri kapıları ve dayanakları.** Kapılar oyun tasarımıdır; her birinin bir usul karşılığı vardır:
+   (a) Ham veri ve numune kabul tutanağı talebi (DIL_LAB, T1_LAB) bir dayanak ister: söndürmeden sağ çıkan taze benzin çıkarımı
+   ya da bilirkişinin kürsüdeki kabulü. Delil isteminin ispat edilecek olayla ilgisi gösterilmelidir (CMK 177/1, 206/2-b).
+   (b) Bekçinin sabahı (eksperin girişi) ancak temizlenmiş zemin çıkarımı ve raporun eki birlikte elde olduğunda sorulur: "arada
+   biri girdi" sonucuna varılmadan sorunun zemini yoktur. Bekçi, mahkemede anlatıp anlatmayacağı sorulduktan sonra tanık gösterilir
+   (tanık davete uymakla yükümlüdür, CMK 43–44; avukat tanığını tanımadan göstermez). Bekçiye tenekelerin sorulması, komşunun
+   "iki teneke" anlatımına bağlıdır (ilk görüşmede ya da birinci celsede S1'in bastırılmasıyla tutanağa geçer).
+   (c) Arada ham verinin iki satırı (profil: buharlaşmamış benzin; matris: piroliz ürünü yok) birleşerek "numune yangını görmedi"
+   çıkarımını, o da bekçinin tenekeleriyle "numune getirildi" çıkarımını verir.
+   (d) Tutuklu sanık için mahkeme her celsede tutukluluğu inceler ve müdafiin beyanını alır (CMK 108/3); talepler bu beyan
+   alınmadan kapanmaz (T1_TAHLIYE ya da T1_TAKDIR).
+   (e) Eksper hakkında ne yapılacağına ikinci celseden önce karar verilir: savcılığa suç duyurusu (CMK 158; doğru yol), eksperin
+   bürosuna gitmek (şüpheliyi uyarır), basın (yargılamayı etkileme) ya da "şimdilik bir şey yapma" (SC_BEKLE; meşru ama el
+   konulabilecek delil kaybolur). Suç duyurusu avukat için bir yükümlülük değil, bir imkândır.
+   (f) Gülsüm Hanım tahkim kararını yanında getirir (aranın kendiliğinden gelen gelişmesi); acente poliçeden, Necati Usta
+   müvekkilin ilk görüşmede andığı restorasyon ekibinden bilinir.
+23. **Tahtada rastgele denemenin bedeli (oyun kuralı).** Her çıkarım tahtasında günde üç yanlış bağlantı hakkı vardır; hak bitince
+   tahta o gün için kapanır ve doğru çift de kurulamaz. Son günde kilitlenen tahta, celseye eksik delille gitmek demektir. Skor
+   cezası (−50) XP için korunur. Hukuki bir dayanağı yoktur; "yanlış hamlenin bir bedeli olsun" kuralının uygulamasıdır.
 
 ## 5. Hassas konu denetimi
 

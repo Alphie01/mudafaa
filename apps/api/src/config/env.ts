@@ -19,6 +19,9 @@ const EnvSchema = z
     VALIDATOR_MAX_MS: z.coerce.number().int().positive().default(300_000),
     VALIDATOR_MAX_STATES: z.coerce.number().int().positive().default(20_000),
     VALIDATOR_WALKS: z.coerce.number().int().positive().default(400),
+    // Katı kip: doğrulanamayan softlock (SOFTLOCK_UNVERIFIED) hata sayılır. Boşsa production'da açık. Arama bütçesi büyük
+    // davalarda bu uyarıyı üretir; içerik tanık yollarıyla elle doğrulandıysa false yapılabilir.
+    VALIDATOR_STRICT: z.enum(['true', 'false']).optional(),
     DATABASE_URL: z.url(),
     REDIS_URL: z.url(),
     FIREBASE_PROJECT_ID: z.string().min(1),

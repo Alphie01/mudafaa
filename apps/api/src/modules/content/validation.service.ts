@@ -50,7 +50,7 @@ export class ValidationService {
       data: {
         caseVersionId: versionId,
         status: 'QUEUED',
-        strict: this.env.NODE_ENV === 'production',
+        strict: this.env.VALIDATOR_STRICT === undefined ? this.env.NODE_ENV === 'production' : this.env.VALIDATOR_STRICT === 'true',
         requestedById: actor?.id ?? null,
       },
     });

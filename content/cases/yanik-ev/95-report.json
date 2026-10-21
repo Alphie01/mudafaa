@@ -135,9 +135,44 @@
       },
       {
         "id": "h_taksir",
-        "when": { "all": [{ "flag": "contra_b2" }, { "not": { "flag": "taksir_cevap" } }] },
-        "text": "Kasıt düşünce hâkim taksiri sordu (CMK 226); yenileme takvimi ya da nötr kopması bu kapıyı kapatırdı.",
+        "when": { "all": [{ "flag": "contra_b2" }, { "not": { "ref": "taksir_red" } }] },
+        "text": "Kasıt düşünce hâkim taksiri sordu (CMK 226). Notu yazan elektrikçiyi hazır tanık olarak getirmek ya da dağıtım şirketinin hat kaydını istemek bu kapıyı kapatırdı.",
         "category": "HUKUKI_BILGI"
+      },
+      {
+        "id": "h_necati_tanik",
+        "when": { "all": [{ "hasEvidence": "ded_onlem" }, { "not": { "flag": "necati_hazir" } }] },
+        "text": "Elektrikçinin notu bir kâğıttır; yazanı duruşmada doğrulamadıkça takvim savunması kurulamaz. Necati Usta’ya mahkemede anlatıp anlatmayacağını sorabilirdin.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_koken",
+        "when": { "all": [{ "flag": "contra_b1" }, { "not": { "flag": "contra_koken" } }] },
+        "text": "Bilirkişinin başlangıç noktası (salon) yalnızca zemin izine dayanıyordu; itfaiyenin tespiti ve V izi birinci celsede bunu tutanağa geçirirdi.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_baglan",
+        "when": {
+          "any": [
+            { "chosen": "PS_B1_ERKEN" },
+            { "chosen": "PS_B2_ERKEN" },
+            { "chosen": "PS_B3_ERKEN" },
+            { "chosen": "PS_B4_ERKEN" },
+            { "chosen": "PS_U1_ERKEN" },
+            { "chosen": "PS_U2_ERKEN" },
+            { "chosen": "PS_U3_ERKEN" },
+            { "chosen": "PS_U6_ERKEN" }
+          ]
+        },
+        "text": "Çapraz sorguda önce tanığı kendi cümlesine bağla (bastır), sonra belgeyi göster; sorulmadan gösterilen belge tanığa bir açıklama kapısı bırakır.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_muhur",
+        "when": { "all": [{ "chosen": "PS_U3_MUHURSUZ" }, { "not": { "flag": "contra_u3" } }] },
+        "text": "Laboratuvarın kabul satırında tenekelerin eksperin şahsi mührüyle geldiği yazıyordu; “numuneleri o zeminden aldım” cümlesinin son dayanağı buydu.",
+        "category": "DELIL_ANALIZI"
       },
       {
         "id": "h_borc",

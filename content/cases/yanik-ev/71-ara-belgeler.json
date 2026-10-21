@@ -104,7 +104,10 @@
             "label": "+40 SKOR",
             "tone": "info"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 40 }]
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 40 },
+            { "type": "VAR", "var": "fact_tutanak", "op": "set", "value": true }
+          ]
         },
         {
           "id": "FB_LAB",

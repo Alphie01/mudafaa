@@ -83,10 +83,8 @@ export const meta: CasePart = {
       ],
       bonuses: [{ id: 'guven', label: 'Güvenilirlik bonusu', value: { mul: [{ var: 'cred' }, 100] } }],
       scaleMax: 14800,
-      thresholdBar: thresholdBar([
-        ['Mahkûmiyet', 0, 'red'],
-        ['Beraat', 12500, 'green'],
-      ]),
+      // Hüküm skora değil kayda bağlıdır (CMK 217, 223); çubuk yalnızca savunmanın performansını gösterir.
+      thresholdBar: thresholdBar([['Hüküm kayda göre', 0, 'amber']]),
       displayClampMin: 0,
     },
     objectionGrounds: [],
@@ -111,16 +109,39 @@ export const meta: CasePart = {
     {
       id: 'hizlandirici_coktu',
       label:
-        'Numune zinciri koptu (bilirkişi + yeminli bekçi); zemin izi çürüdü; laboratuvar bulgusu önce birinci celsede (taze benzin), sonra ham veriyle çöktü',
+        'Hızlandırıcı iddiasının her ayağı kayıtla çöktü: numune zinciri (bilirkişi + yeminli bekçi + eksperin kendi girişi), zemin izi (iki celsede), koku tanığı, satın alınan benzin, başlangıç noktası, elektrik dışlaması (pano, buat, mahkemenin ark raporu) ve laboratuvar bulgusu (taze benzin + ham veri, mühür, tutanak yokluğu)',
       when: all(
+        // Numune zinciri: bilirkişinin kabulü, yeminli bekçi (muhafaza, refakatsiz giriş, dolu tenekeler), eksperin "polis izni".
         flag('contra_b2'),
-        // Yeminli bekçi: eksper muhafazadaki olay yerine refakatsiz girdi (CV_Q2) ve içeri dolu tenekelerle girdi (CV_Q3).
         { chosen: 'CV_Q2' },
         flag('cevdet_dinlendi'),
-        any(flag('contra_b1'), flag('contra_u2')),
+        flag('contra_u1'),
+        // Zemin izi: kolluk karesiyle bilirkişi önünde, eksperin kendi kabulüyle ikinci celsede.
+        flag('contra_b1'),
+        flag('contra_u2'),
+        // Koku tanığı: "benzin" kelimesi kolluğun sorusundan; itfaiye akaryakıt kokusu almadı.
+        flag('contra_s2'),
+        // Satın alınan benzin: kırmızı bidon atölyede, dört litre dolu (kolluk tespiti).
+        flag('contra_s6'),
+        // Başlangıç noktası salon değil, mutfak–koridor duvarı (V izi + itfaiye).
+        flag('contra_koken'),
+        // Elektrik dışlaması: bilirkişi panoya ve ısınmış buata bakmadı; mahkemenin elektrik bilirkişisi koridor hattında
+        // birincil ark buldu.
+        flag('contra_b3'),
+        flag('contra_buat'),
+        flag('contra_u6_ark'),
+        // Laboratuvar: birinci celsede taze benzin, aradaki ham veriyle (piroliz yok, şahsi mühür) ikinci celsede ekilmiş numune.
         flag('contra_b4'),
         flag('contra_u3'),
       ),
+    },
+    {
+      id: 'taksir_red',
+      label:
+        'Taksir kayıtla karşılandı: yenileme takvimi notun yazarıyla doğrulandı ya da dağıtım hattındaki nötr kopması (mahkemenin getirttiği kayıt) dosyada',
+      // Dağıtım kaydı mahkemenin müzekkeresiyle gelir ve ikinci celsede okunur: savunma onu tartışmasa da kayıttadır ve
+      // neticenin sanığın özen eksikliğine bağlanmasında şüphe doğurur (Anayasa 38/4).
+      when: any(flag('taksir_cevap'), flag('contra_u6_notr'), has('ev_ariza')),
     },
     {
       id: 'motif_coktu',
@@ -129,8 +150,13 @@ export const meta: CasePart = {
     },
     {
       id: 'elektrik_ispat',
-      label: 'Elektrik bilirkişisi raporu (birincil ark) ve dağıtım kaydındaki nötr kopması birlikte elde',
-      when: all(any(has('ev_ark'), has('ded_elektrik')), has('ded_notr')),
+      label:
+        'Elektrik kaynağı duruşmada sabit: mahkemenin ark raporu ve dağıtım kaydı dosyada, nötr kopmasının bu yangınla bağı çapraz sorguda ya da ek savunmada kuruldu',
+      when: all(
+        any(has('ev_ark'), has('ded_elektrik')),
+        has('ev_ariza'),
+        any(flag('contra_u6_notr'), flag('taksir_dis')),
+      ),
     },
   ],
   variables: [
@@ -189,7 +215,6 @@ export const meta: CasePart = {
       'cevdet_istendi',
       'tarik_istendi',
       'basin',
-      'beraat_talep',
       'savunma_b',
       'borc_gizle',
       'cevdet_dinlendi',
@@ -211,6 +236,10 @@ export const meta: CasePart = {
       'contra_u6',
       'contra_u6_ark',
       'contra_u6_notr',
+      'contra_koken',
+      'contra_buat',
+      'fact_tutanak',
+      'necati_hazir',
       'fact_alibi',
       'alibi_kayit',
       'deniz_tehdit',

@@ -711,7 +711,8 @@ export const invPeople: CasePart = {
           next: '$stay',
         }),
         option('CV_SABAH', 'Sabah olay yerini siz beklemişsiniz. Kim girdi, kim çıktı?', {
-          visibleWhen: sabahKapisi,
+          // Önce bekçinin kendi gecesi: defterini açması için önce onu dinlemek gerekir.
+          visibleWhen: all(sabahKapisi, chosen('CV_GECE')),
           discovers: ['clue_eksper_giris', 'ev_cizelge'],
           score: { ARASTIRMA: 60 },
           responses: [
@@ -797,6 +798,15 @@ export const invPeople: CasePart = {
       onFirstEnter: [meet('necati')],
       lines: [
         {
+          when: chosen('A_NECATI2'),
+          lines: [
+            card('SETBAŞI — NECATİ ELEKTRİK, 18.10', 'depo'),
+            n('Kepenk yarıya inmişti. Necati Usta altından eğilip çıktı, beni görünce kepengi yeniden kaldırdı.'),
+            s('necati', 'Yine mi siz, kızım? Notu verdim ya. Başka ne lazım?'),
+            th('Not elimde. Notun sahibi burada. Mahkeme ikisinden birine kâğıt, ötekine tanık der.'),
+          ],
+        },
+        {
           lines: [
             card('SETBAŞI — NECATİ ELEKTRİK, 11.30', 'depo'),
             n(
@@ -860,6 +870,7 @@ export const invPeople: CasePart = {
           next: '$stay',
         }),
         option('NC_SUC', 'Halil Bey’e “acil değil” dediğiniz için kendinizi sorumlu hissediyor musunuz?', {
+          visibleWhen: chosen('NC_ACIL'),
           responses: [
             {
               lines: [
@@ -872,19 +883,39 @@ export const invPeople: CasePart = {
                   'necati',
                   'Bak kızım, ben çırakken ustam bir şey derdi: “Kablo yalan söylemez, ama kimse onu dinlemez.” Yangından sonra kimse bana gelmedi. Ne polis, ne bilirkişi. Notum dosyada duruyormuş; okuyan olmamış.',
                 ),
+                th('Suçluluk dürüst insanları ya susturur ya fazla konuşturur.'),
+              ],
+            },
+          ],
+          next: '$stay',
+        }),
+        option('NC_TANIK', 'Notunuzu mahkemede siz anlatır mısınız? Ne gördüyseniz, o kadar.', {
+          visibleWhen: chosen('NC_KESIF'),
+          score: { USUL_BILGISI: 30 },
+          effects: [raise('necati_hazir')],
+          good: 'Bir belgenin değeri, yazanın onu duruşmada doğrulamasıyla artar. Tanığa ne söyleyeceğini değil, yalnızca gelip gördüğünü anlatmasını istedin.',
+          responses: [
+            {
+              lines: [
                 s(
                   'necati',
-                  'Mahkeme çağırırsa gelirim. Ne gördüysem onu söylerim. “Eskiydi” derim, “ılıktı” derim, “acil değildi” derim. Üçü de doğru.',
+                  'Mahkeme çağırırsa gelirim. Çağırmasa da ikinci celsede koridorda olurum; siz söyleyin yeter. Ne gördüysem onu söylerim.',
                 ),
+                s('necati', '“Eskiydi” derim, “ılıktı” derim, “acil değildi” derim. Üçü de doğru.'),
                 th(
-                  'Suçluluk dürüst insanları ya susturur ya fazla konuşturur. Necati Usta’yı tanıklığa hazırlarsam, bu ikisinin arasında yürümesi gerekecek.',
+                  'Bir not bir kâğıttır; yazanı kürsüde dururken bir tanıklık. Necati Usta’yı hazırlamayacağım; yalnızca gelmesini isteyeceğim.',
                 ),
               ],
             },
           ],
           next: '$stay',
         }),
-        option('NC_BITIR', 'Teşekkür et ve çık', { next: '$return' }),
+        option('NC_BITIR', 'Teşekkür et ve çık', { next: '$return', visibleWhen: not(chosen('A_NECATI2')) }),
+        option('NC_BITIR2', 'Kepengi indirmesine yardım et ve çık', {
+          next: '$return',
+          visibleWhen: chosen('A_NECATI2'),
+          score: { ARASTIRMA: 10 },
+        }),
       ],
     }),
     conversation('INV_KADER', {

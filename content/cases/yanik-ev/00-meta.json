@@ -88,10 +88,7 @@
       ],
       "bonuses": [{ "id": "guven", "label": "Güvenilirlik bonusu", "value": { "mul": [{ "var": "cred" }, 100] } }],
       "scaleMax": 14800,
-      "thresholdBar": [
-        { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
-        { "label": "Beraat", "from": 12500, "tone": "green" }
-      ],
+      "thresholdBar": [{ "label": "Hüküm kayda göre", "from": 0, "tone": "amber" }],
       "displayClampMin": 0
     },
     "objectionGrounds": [],
@@ -119,17 +116,30 @@
     },
     {
       "id": "hizlandirici_coktu",
-      "label": "Numune zinciri koptu (bilirkişi + yeminli bekçi); zemin izi çürüdü; laboratuvar bulgusu önce birinci celsede (taze benzin), sonra ham veriyle çöktü",
+      "label": "Hızlandırıcı iddiasının her ayağı kayıtla çöktü: numune zinciri (bilirkişi + yeminli bekçi + eksperin kendi girişi), zemin izi (iki celsede), koku tanığı, satın alınan benzin, başlangıç noktası, elektrik dışlaması (pano, buat, mahkemenin ark raporu) ve laboratuvar bulgusu (taze benzin + ham veri, mühür, tutanak yokluğu)",
       "when": {
         "all": [
           { "flag": "contra_b2" },
           { "chosen": "CV_Q2" },
           { "flag": "cevdet_dinlendi" },
-          { "any": [{ "flag": "contra_b1" }, { "flag": "contra_u2" }] },
+          { "flag": "contra_u1" },
+          { "flag": "contra_b1" },
+          { "flag": "contra_u2" },
+          { "flag": "contra_s2" },
+          { "flag": "contra_s6" },
+          { "flag": "contra_koken" },
+          { "flag": "contra_b3" },
+          { "flag": "contra_buat" },
+          { "flag": "contra_u6_ark" },
           { "flag": "contra_b4" },
           { "flag": "contra_u3" }
         ]
       }
+    },
+    {
+      "id": "taksir_red",
+      "label": "Taksir kayıtla karşılandı: yenileme takvimi notun yazarıyla doğrulandı ya da dağıtım hattındaki nötr kopması (mahkemenin getirttiği kayıt) dosyada",
+      "when": { "any": [{ "flag": "taksir_cevap" }, { "flag": "contra_u6_notr" }, { "hasEvidence": "ev_ariza" }] }
     },
     {
       "id": "motif_coktu",
@@ -151,11 +161,12 @@
     },
     {
       "id": "elektrik_ispat",
-      "label": "Elektrik bilirkişisi raporu (birincil ark) ve dağıtım kaydındaki nötr kopması birlikte elde",
+      "label": "Elektrik kaynağı duruşmada sabit: mahkemenin ark raporu ve dağıtım kaydı dosyada, nötr kopmasının bu yangınla bağı çapraz sorguda ya da ek savunmada kuruldu",
       "when": {
         "all": [
           { "any": [{ "hasEvidence": "ev_ark" }, { "hasEvidence": "ded_elektrik" }] },
-          { "hasEvidence": "ded_notr" }
+          { "hasEvidence": "ev_ariza" },
+          { "any": [{ "flag": "contra_u6_notr" }, { "flag": "taksir_dis" }] }
         ]
       }
     }
@@ -414,7 +425,6 @@
     { "id": "cevdet_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "tarik_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "basin", "type": "bool", "initial": false, "visibility": "HIDDEN" },
-    { "id": "beraat_talep", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "savunma_b", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "borc_gizle", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "cevdet_dinlendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
@@ -436,6 +446,10 @@
     { "id": "contra_u6", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "contra_u6_ark", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "contra_u6_notr", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_koken", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_buat", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_tutanak", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "necati_hazir", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "fact_alibi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "alibi_kayit", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "deniz_tehdit", "type": "bool", "initial": false, "visibility": "HIDDEN" },

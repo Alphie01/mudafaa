@@ -1,4 +1,4 @@
-import { all, any, flag, has, hint, missedEvidence, not } from '../../../tools/content/src/kit/index.js';
+import { all, any, chosen, flag, has, hint, missedEvidence, not, ref } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 
 // 95-report: dava sonu raporundaki "kaçırdıkların".
@@ -140,9 +140,42 @@ export const report: CasePart = {
       ),
       hint(
         'h_taksir',
-        all(flag('contra_b2'), not(flag('taksir_cevap'))),
-        'Kasıt düşünce hâkim taksiri sordu (CMK 226); yenileme takvimi ya da nötr kopması bu kapıyı kapatırdı.',
+        all(flag('contra_b2'), not(ref('taksir_red'))),
+        'Kasıt düşünce hâkim taksiri sordu (CMK 226). Notu yazan elektrikçiyi hazır tanık olarak getirmek ya da dağıtım şirketinin hat kaydını istemek bu kapıyı kapatırdı.',
         'HUKUKI_BILGI',
+      ),
+      hint(
+        'h_necati_tanik',
+        all(has('ded_onlem'), not(flag('necati_hazir'))),
+        'Elektrikçinin notu bir kâğıttır; yazanı duruşmada doğrulamadıkça takvim savunması kurulamaz. Necati Usta’ya mahkemede anlatıp anlatmayacağını sorabilirdin.',
+        'USUL_BILGISI',
+      ),
+      hint(
+        'h_koken',
+        all(flag('contra_b1'), not(flag('contra_koken'))),
+        'Bilirkişinin başlangıç noktası (salon) yalnızca zemin izine dayanıyordu; itfaiyenin tespiti ve V izi birinci celsede bunu tutanağa geçirirdi.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_baglan',
+        any(
+          chosen('PS_B1_ERKEN'),
+          chosen('PS_B2_ERKEN'),
+          chosen('PS_B3_ERKEN'),
+          chosen('PS_B4_ERKEN'),
+          chosen('PS_U1_ERKEN'),
+          chosen('PS_U2_ERKEN'),
+          chosen('PS_U3_ERKEN'),
+          chosen('PS_U6_ERKEN'),
+        ),
+        'Çapraz sorguda önce tanığı kendi cümlesine bağla (bastır), sonra belgeyi göster; sorulmadan gösterilen belge tanığa bir açıklama kapısı bırakır.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_muhur',
+        all(chosen('PS_U3_MUHURSUZ'), not(flag('contra_u3'))),
+        'Laboratuvarın kabul satırında tenekelerin eksperin şahsi mührüyle geldiği yazıyordu; “numuneleri o zeminden aldım” cümlesinin son dayanağı buydu.',
+        'DELIL_ANALIZI',
       ),
       hint(
         'h_borc',

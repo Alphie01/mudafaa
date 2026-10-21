@@ -71,6 +71,7 @@ export const araDocs: CasePart = {
           }),
           examine('EX_LAB_NOT', 'lupe', 'l_not', {
             score: { DELIL_ANALIZI: 40 },
+            effects: [raise('fact_tutanak')],
             feedback: {
               title: 'TUTANAK YOK',
               text: '“Numune alma tutanağı ibraz edilmemiştir.” Bir numunenin doğum belgesi yok.',

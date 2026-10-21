@@ -26,7 +26,7 @@ import {
   choiceNode,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
-import { HEAR1, card, court1, me, n, s, th, wrongEvidence } from './shared.js';
+import { HEAR1, card, court1, erkenSunum, me, n, s, th, wrongEvidence } from './shared.js';
 
 // 60-hearing-1: birinci celse. Koridor, açılış, iddianame, Halil'in savunması ve müdafiin soruları, ekspertiz raporunun
 // okunmasına itiraz, Saadet Koru'nun çapraz sorgusu, bilirkişiye telkin edici soru, Dr. Tezel'in çapraz sorgusu, CMK 206/1
@@ -861,6 +861,7 @@ export const hearing1: CasePart = {
           ],
         }),
         presentRule('PS_S6', 'S6', ['ded_bidon'], {
+          enabledWhen: flag('press_s6'),
           score: { SORGULAMA: 300 },
           effects: [inc('pers'), raise('contra_s6')],
           quality: {
@@ -883,6 +884,13 @@ export const hearing1: CasePart = {
             },
           ],
         }),
+        erkenSunum(
+          'PS_S6_ERKEN',
+          'S6',
+          ['ded_bidon'],
+          'press_s6',
+          s('saadet', 'Ben ne gördüysem onu söyledim, kızım. Kırmızı bir bidon. Fotoğraf neyi değiştirir?', 'kizgin'),
+        ),
       ],
       presentMiss: presentMiss('FB_H104_PRESENT'),
       objectMiss: objectMiss('FB_H104_OBJECT'),
@@ -1074,6 +1082,7 @@ export const hearing1: CasePart = {
           ],
         }),
         presentRule('PS_B1', 'B1', ['ded_temizlenmis'], {
+          enabledWhen: flag('press_b1'),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_b1')],
           quality: {
@@ -1103,26 +1112,43 @@ export const hearing1: CasePart = {
           ],
         }),
         presentRule('PS_B1_K', 'B1', ['ded_koken'], {
-          score: { SORGULAMA: 100 },
-          effects: [inc('pers')],
+          enabledWhen: flag('press_b1'),
+          score: { SORGULAMA: 200 },
+          effects: [inc('pers'), raise('contra_koken')],
           quality: {
             q: 'GOOD',
             feedback:
-              'İtfaiye ve V izi başlangıcı mutfak–koridor duvarına koyuyor; ama bilirkişinin “zemin izi” dayanağı fotoğrafın kendisi.',
+              'İtfaiyenin ilk tespiti ve evdeki V izi başlangıcı mutfak–koridor duvarına koyuyor. Bilirkişi salonu yalnızca zemindeki “döküntü izi”ne dayandırdığını kabul etti: başlangıç noktası, o izin kaderine bağlandı.',
             category: 'SORGULAMA',
           },
           responses: [
             {
               lines: [
+                me(
+                  'İtfaiyenin raporu: “yangının mutfak ile koridor arasındaki bölgede başladığı değerlendirilmiştir.” Lambrideki V izinin tabanı koridorda. İkisi de salonu göstermiyor.',
+                ),
                 s(
                   'tezel',
-                  'İtfaiyenin ilk değerlendirmesini okudum. Ama zemindeki iz, başlangıcı salona koyuyor. Fotoğraf ortada.',
+                  'İtfaiyenin değerlendirmesini okudum. Salonu zemindeki iz yüzünden seçtim. O iz olmasa… yanma deseni koridoru gösterir. Bunu kabul ederim.',
+                  'saskin',
                 ),
-                th('Başlangıcı gösterdim; ama onun dayanağı bir fotoğraf. Fotoğrafı sorgulamalıyım.'),
+                s('hakim', 'Bilirkişinin bu beyanı aynen tutanağa geçsin.'),
+                th('Başlangıç noktası artık bir fotoğrafa asılı. Şimdi o fotoğrafın kendisini sorgulamalıyım.'),
               ],
             },
           ],
         }),
+        erkenSunum(
+          'PS_B1_ERKEN',
+          'B1',
+          ['ded_temizlenmis', 'ded_koken'],
+          'press_b1',
+          s(
+            'tezel',
+            'Raporumda başlangıç bölgesini ve dayanağını açıkça yazdım, müdafi. Bu belge onu değiştirmez.',
+            'saskin',
+          ),
+        ),
         pressRule('PR_B2', 'B2', {
           score: { SORGULAMA: 25 },
           effects: [raise('press_b2')],
@@ -1138,6 +1164,7 @@ export const hearing1: CasePart = {
           ],
         }),
         presentRule('PS_B2', 'B2', ['ded_zincir'], {
+          enabledWhen: flag('press_b2'),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_b2'), inc('legal_hits')],
           quality: {
@@ -1173,6 +1200,13 @@ export const hearing1: CasePart = {
             },
           ],
         }),
+        erkenSunum(
+          'PS_B2_ERKEN',
+          'B2',
+          ['ded_zincir'],
+          'press_b2',
+          s('tezel', 'Numuneler bana savcılık kanalıyla, mühürlü geldi. Gerisi beni ilgilendirmez.', 'saskin'),
+        ),
         presentRule('PS_B2_K', 'B2', ['ev_cizelge'], {
           score: { SORGULAMA: 100 },
           effects: [inc('pers')],
@@ -1209,6 +1243,7 @@ export const hearing1: CasePart = {
           ],
         }),
         presentRule('PS_B3', 'B3', ['ded_pano'], {
+          enabledWhen: flag('press_b3'),
           score: { SORGULAMA: 300 },
           effects: [inc('pers'), raise('contra_b3')],
           quality: {
@@ -1230,23 +1265,56 @@ export const hearing1: CasePart = {
             },
           ],
         }),
-        presentRule('PS_B3_K', 'B3', ['ded_buat', 'ded_koken'], {
-          score: { SORGULAMA: 100 },
-          effects: [inc('pers')],
+        erkenSunum(
+          'PS_B3_ERKEN',
+          'B3',
+          ['ded_pano', 'ded_buat'],
+          'press_b3',
+          s('tezel', 'Olay yerinde elektrik kaynaklı bir iz görmedim. Gördüğümü yazdım.', 'saskin'),
+        ),
+        presentRule('PS_B3_BUAT', 'B3', ['ded_buat'], {
+          enabledWhen: flag('press_b3'),
+          score: { SORGULAMA: 200 },
+          effects: [inc('pers'), raise('contra_buat')],
           quality: {
             q: 'GOOD',
             feedback:
-              'Başlangıç bölgesini ve ısınan buatı gösterdin; ama bilirkişinin cümlesinin zayıflığı, panoya hiç bakmamış olmasıdır.',
+              'Koridor buatında eriyik bakır ve kararmış porselen var; elektrikçi aynı buatı yangından bir ay önce ısınmış bulmuş. Bilirkişi raporunda bu buatın adı bile geçmiyor: alternatif sebep hiç incelenmemiş.',
             category: 'SORGULAMA',
           },
           responses: [
             {
               lines: [
+                me(
+                  'Koridordaki buat, Sayın Hâkim: eriyik bakır, kararmış porselen. Aynı buatı elektrikçi Necati Usta aralıkta ısınmış bulmuş; notu burada. Raporunuzda bu buat var mı?',
+                ),
                 s(
                   'tezel',
-                  'Eriyik bakır yangının sonucu da olabilir. Birincil mi ikincil mi, ayrıca incelenmesi gerekir.',
+                  'Yok. Buatı incelemedim. Eriyik bakır yangının sonucu da olabilir, sebebi de; ayırmak için ayrı bir inceleme gerekir.',
+                  'uzgun',
                 ),
-                th('“Ayrıca incelenmesi gerekir.” Kendi ağzıyla. Bunu birazdan bir talebe çevireceğim.'),
+                s('hakim', 'Bilirkişinin bu beyanı aynen tutanağa geçsin.'),
+                th(
+                  '“Ayrı bir inceleme gerekir.” Kendi ağzıyla. Bunu birazdan bir talebe çevireceğim. Ama ustanın notu artık tutanakta; kasıt düşerse hâkimin önünde ikinci bir kapı açılır.',
+                ),
+              ],
+            },
+          ],
+        }),
+        presentRule('PS_B3_K', 'B3', ['ded_koken'], {
+          score: { SORGULAMA: 100 },
+          effects: [inc('pers')],
+          quality: {
+            q: 'GOOD',
+            feedback:
+              'Başlangıç bölgesini gösterdin; ama bu ifadenin zayıflığı bilirkişinin panoya ve buata hiç bakmamış olmasıdır.',
+            category: 'SORGULAMA',
+          },
+          responses: [
+            {
+              lines: [
+                s('tezel', 'Başlangıç bölgesi ayrı bir konu. Ben elektrik kaynaklı bir iz görmedim diyorum.'),
+                th('Yanlış ifadeye doğru kâğıt. Burada sorulacak olan, neye bakmadığı.'),
               ],
             },
           ],
@@ -1266,6 +1334,7 @@ export const hearing1: CasePart = {
           ],
         }),
         presentRule('PS_B4', 'B4', ['ded_taze'], {
+          enabledWhen: flag('press_b4'),
           score: { SORGULAMA: 300 },
           effects: [inc('pers'), raise('contra_b4')],
           quality: {
@@ -1292,6 +1361,13 @@ export const hearing1: CasePart = {
             },
           ],
         }),
+        erkenSunum(
+          'PS_B4_ERKEN',
+          'B4',
+          ['ded_taze'],
+          'press_b4',
+          s('tezel', 'Benzin çok dökülmüşse kalıntı taze kalır. Bu bilinen bir şeydir.', 'saskin'),
+        ),
         objectRule('OB_B5', 'B5', 'g_uzmanlik', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), inc('pers')],
@@ -1399,7 +1475,7 @@ export const hearing1: CasePart = {
           next: '$stay',
         }),
         option('T1_CEVDET', 'Bekçi Cevdet Alkan’ın tanık olarak dinlenmesi', {
-          visibleWhen: all(met('cevdet'), not(flag('cevdet_istendi'))),
+          visibleWhen: all(met('cevdet'), has('ev_cizelge'), not(flag('cevdet_istendi'))),
           cost: [{ var: 'h1_hak', amount: 1 }],
           score: { USUL_BILGISI: 40 },
           effects: [raise('cevdet_istendi')],

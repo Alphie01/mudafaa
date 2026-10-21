@@ -28,11 +28,12 @@ import {
   story,
   strategyAmount,
   choiceNode,
+  chosen,
   v,
   visited,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
-import { TRIAL, VERDICT, card, court2, me, n, s, th, wrongEvidence } from './shared.js';
+import { TRIAL, VERDICT, card, court2, erkenSunum, me, n, s, th, wrongEvidence } from './shared.js';
 
 // 80-trial: ikinci celse (cs_2: gelen raporlar, bekçi, eksperin çapraz sorgusu ve kırılması) ve üçüncü oturum (cs_3: ek
 // savunma hatırlatması, mütalaa ve cevap, esas savunmanın dayanakları, esas savunma, son söz, hüküm). Çöküş kesintisi.
@@ -391,6 +392,8 @@ export const trial: CasePart = {
           next: '$stay',
         }),
         option('CV_Q2', 'Arada olay yerine giren oldu mu?', {
+          // Doğrudan soruda önce muhafaza: kimin beklediği kayda geçmeden "arada giren" sorusunun zemini yoktur.
+          visibleWhen: chosen('CV_Q1'),
           score: { SORGULAMA: 50 },
           responses: [
             {
@@ -643,6 +646,7 @@ export const trial: CasePart = {
           ],
         }),
         presentRule('PS_U1', 'U1', ['ev_cizelge'], {
+          enabledWhen: flag('press_u1'),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_u1')],
           quality: {
@@ -664,6 +668,13 @@ export const trial: CasePart = {
             },
           ],
         }),
+        erkenSunum(
+          'PS_U1_ERKEN',
+          'U1',
+          ['ev_cizelge'],
+          'press_u1',
+          s('tarik', 'Bekçi de bir görevlidir, avukat hanım. Girişimi kayda geçirmiş; ben de izin aldım demiştim.'),
+        ),
         pressRule('PR_U2', 'U2', {
           score: { SORGULAMA: 25 },
           effects: [raise('press_u2')],
@@ -679,6 +690,7 @@ export const trial: CasePart = {
           ],
         }),
         presentRule('PS_U2', 'U2', ['ded_temizlenmis'], {
+          enabledWhen: flag('press_u2'),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_u2')],
           quality: {
@@ -701,6 +713,13 @@ export const trial: CasePart = {
             },
           ],
         }),
+        erkenSunum(
+          'PS_U2_ERKEN',
+          'U2',
+          ['ded_temizlenmis'],
+          'press_u2',
+          s('tarik', 'İki fotoğraf, iki saat. Bir olay yeri saatler içinde değişir. Bunu herkes bilir.'),
+        ),
         pressRule('PR_U3', 'U3', {
           score: { SORGULAMA: 25 },
           effects: [raise('press_u3')],
@@ -725,7 +744,8 @@ export const trial: CasePart = {
             },
           ],
         }),
-        presentRule('PS_U3', 'U3', ['ded_ekilmis', 'ev_elkoyma'], {
+        presentRule('PS_U3', 'U3', ['ded_ekilmis'], {
+          enabledWhen: all(flag('press_u3'), flag('fact_muhur'), flag('fact_tutanak')),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_u3')],
           quality: {
@@ -760,6 +780,61 @@ export const trial: CasePart = {
             },
           ],
         }),
+        presentRule('PS_U3_MUHURSUZ', 'U3', ['ded_ekilmis'], {
+          enabledWhen: all(flag('press_u3'), not(all(flag('fact_muhur'), flag('fact_tutanak')))),
+          score: { SORGULAMA: 100 },
+          effects: [inc('pers')],
+          quality: {
+            q: 'NEUTRAL',
+            feedback:
+              'Ham veri ve bekçinin gözlemi güçlü; ama numunenin “o zeminden” alındığı iddiasının dayanağı tenekelerin mührü ve numune alma tutanağıdır. Laboratuvarın kabul ve not satırlarını okumadan zincirin son halkası açık kalır.',
+            category: 'SORGULAMA',
+          },
+          responses: [
+            {
+              lines: [
+                s(
+                  'tarik',
+                  'Numuneleri usulüne uygun aldım, mühürledim, teslim ettim. Laboratuvarın yorumu benim alanım değil; teslim kaydı ortada.',
+                ),
+                th(
+                  '“Teslim kaydı ortada.” Ortada ama ben okumadım. Tenekeleri kim mühürledi, numune alma tutanağı var mı? Laboratuvarın kayıtlarını bilmeden bu cümleyi kıramam.',
+                ),
+              ],
+            },
+          ],
+        }),
+        presentRule('PS_U3_E', 'U3', ['ev_elkoyma'], {
+          score: { SORGULAMA: 100 },
+          effects: [inc('pers')],
+          quality: {
+            q: 'NEUTRAL',
+            feedback:
+              'Bagajdaki benzin ve boş tenekeler bir şüphedir; numunenin o yangını hiç görmediğini gösteren laboratuvar kaydı ve tenekelerin içeri dolu girdiğini gören tanık olmadan, bir eksperin bagajındaki teneke “mesleğin gereği” diye açıklanabilir.',
+            category: 'SORGULAMA',
+          },
+          responses: [
+            {
+              lines: [
+                s(
+                  'tarik',
+                  'Bagajımda numune kabı bulunması mesleğimin gereği, avukat hanım. Benzin de aracın yedeği. Bunlar bir şey kanıtlamaz.',
+                  'kizgin',
+                ),
+                th(
+                  'Bir bagaj bir şüphe. Numunenin o zemini hiç görmediğini gösteren kayıt ve tenekeyi dolu gören bir göz: şüpheyi ancak ikisi birlikte kanıta çevirir.',
+                ),
+              ],
+            },
+          ],
+        }),
+        erkenSunum(
+          'PS_U3_ERKEN',
+          'U3',
+          ['ded_ekilmis'],
+          'press_u3',
+          s('tarik', 'Numuneleri o zeminden aldım ve mühürledim. Laboratuvarın yorumunu bana sormayın.'),
+        ),
         presentRule('PS_U3_K', 'U3', ['ev_lab', 'ded_taze'], {
           score: { SORGULAMA: 100 },
           effects: [inc('pers')],
@@ -866,6 +941,8 @@ export const trial: CasePart = {
           ],
         }),
         presentRule('PS_U6_ARK', 'U6', ['ev_ark', 'ded_elektrik'], {
+          // Mahkemenin elektrik bilirkişisi raporu okunmadan (birincil ark satırı) eksperin gözlemi kırılamaz.
+          enabledWhen: all(flag('press_u6'), has('clue_ark')),
           score: { SORGULAMA: 250 },
           effects: [inc('pers'), raise('contra_u6'), raise('contra_u6_ark')],
           quality: {
@@ -887,6 +964,36 @@ export const trial: CasePart = {
             },
           ],
         }),
+        presentRule('PS_U6_OKUNMAMIS', 'U6', ['ev_ark'], {
+          enabledWhen: all(flag('press_u6'), not(has('clue_ark'))),
+          score: { SORGULAMA: 60 },
+          quality: {
+            q: 'NEUTRAL',
+            feedback:
+              'Raporu sundun ama içini okumadın: eksperin “gözlemini” kıran şey, raporun koridor linyesindeki birincil ark satırıdır. Bir belgeyi, hangi satırına dayandığını bilmeden sunma.',
+            category: 'SORGULAMA',
+          },
+          responses: [
+            {
+              lines: [
+                s('tarik', 'Elektrik bilirkişisi ne bulmuş, avukat hanım? Okuyun da hep birlikte duyalım.'),
+                th(
+                  'Okuyamadım. Raporu dosyaya koydum ama satırını bilmiyorum. Bir kâğıdı bilmeden sunmak, onu karşı tarafa okutmaktır.',
+                ),
+              ],
+            },
+          ],
+        }),
+        erkenSunum(
+          'PS_U6_ERKEN',
+          'U6',
+          ['ev_ark', 'ded_elektrik'],
+          'press_u6',
+          s(
+            'tarik',
+            'Ben olay yerinde gözlem yaptım; elektrik bilirkişisi aylar sonra bir panoya baktı. İkisi aynı şey değil.',
+          ),
+        ),
         presentRule('PS_U6_NOTR', 'U6', ['ev_ariza', 'ded_notr'], {
           score: { SORGULAMA: 250 },
           effects: [inc('pers'), raise('contra_u6'), raise('contra_u6_notr')],
@@ -1132,13 +1239,14 @@ export const trial: CasePart = {
       next: 'T_05M',
       options: [
         option('T05_A', 'Uyarı alındı, yenileme takvime kondu; özen yükümlülüğü yerine getirildi', {
-          visibleWhen: has('ded_onlem'),
+          // Takvim savunması notun yazarıyla kurulur: Necati Usta hazır tanık olarak notunu ve “acil değil” değerlendirmesini
+          // doğrular. Delil sunumu kapandıysa (çöküş) yeni tanık dinlenemez.
+          visibleWhen: all(has('ded_onlem'), flag('fact_acil_degil'), flag('necati_hazir'), not(flag('cokus'))),
           score: { HUKUKI_BILGI: 100, SAVUNMA_STRATEJISI: 60 },
           effects: [raise('taksir_cevap'), inc('pers'), inc('legal_hits')],
           good: 'Taksir, dikkat ve özen yükümlülüğüne aykırılıkla öngörülebilir neticenin gerçekleşmesidir (TCK 22/2). Uzmanın “acil değil, restorasyonla yenileyin” dediği tesisatta yenilemeyi takvime koyan ve yükü azaltan kişi özen yükümlülüğünü yerine getirmiştir. Duruşmada hazır edilen tanık, delil ikamesi talebiyle dinlenebilir (CMK 178, 206).',
           responses: [
             {
-              when: flag('fact_acil_degil'),
               lines: [
                 me(
                   'Sayın Hâkim, elektrikçinin notu: “acil değil, yenileme restorasyonun ilk haftası, ağır yük çekmeyin.” Sözleşme: 19 Ocak, ilk iş tesisat.',
@@ -1170,21 +1278,11 @@ export const trial: CasePart = {
                 s('hakim', 'Kayda geçsin.'),
               ],
             },
-            {
-              lines: [
-                me(
-                  'Sayın Hâkim, elektrikçinin notu: “acil değil, yenileme restorasyonun ilk haftası, ağır yük çekmeyin.” Sözleşme: 19 Ocak, ilk iş tesisat.',
-                ),
-                me(
-                  'Müvekkilim uyarıyı duydu, ustanın dediğini yaptı, yükü kaldırdı, evden çıktı. Bir uzmanın “acil değil” dediği yerde, uzmandan daha dikkatli olması beklenemez.',
-                ),
-                s('hakim', 'Kayda geçsin.'),
-              ],
-            },
           ],
         }),
         option('T05_B', 'Yangını 02.08’deki nötr kopması çıkardı; netice sanığın kusuruna bağlanamaz', {
-          visibleWhen: has('ded_notr'),
+          // Dış etken iki kayıtla kurulur: dağıtım kaydı (nötr kopması) ve mahkemenin elektrik bilirkişisinin hattaki birincil arkı.
+          visibleWhen: all(has('ded_notr'), any(has('ev_ark'), has('ded_elektrik'))),
           score: { HUKUKI_BILGI: 120, SAVUNMA_STRATEJISI: 60 },
           effects: [raise('taksir_cevap'), raise('taksir_dis'), inc('pers', 2), inc('legal_hits')],
           good: 'Taksirli sorumluluk için netice failin özen yükümlülüğüne aykırılığına bağlanabilmelidir. Dağıtım hattındaki nötr kopmasının yarattığı aşırı gerilim, normal kullanımda yıllarca dayanacak bir tesisatı yakmıştır: netice, sanığın değil üçüncü kişinin alanındaki bir arızaya bağlıdır.',
@@ -1471,7 +1569,7 @@ export const trial: CasePart = {
         dayanak(
           'D_TAKSIR',
           'Dikkatsizlik de yok: uyarı alındı, önlem takvime kondu ya da sebep dış etkendi',
-          flag('taksir_cevap'),
+          ref('taksir_red'),
           'Hâkimin ikinci kapısı da kapandı. Kayıtla.',
           'Taksire cevabım kayıtta değil. Bu dayanak, açık bir kapıyı gösteriyor.',
         ),
@@ -1490,10 +1588,9 @@ export const trial: CasePart = {
           'Suç işlenmemiştir: yangın elektrik arızasıyla çıkmış, hızlandırıcı izi sonradan getirilmiştir (CMK 223/2-b)',
           {
             effects: [
-              raise('beraat_talep'),
               raise('savunma_b'),
               ifThen(
-                all(ref('hizlandirici_coktu'), flag('eksper_kirildi'), ref('elektrik_ispat'), flag('taksir_cevap')),
+                all(ref('hizlandirici_coktu'), flag('eksper_kirildi'), ref('elektrik_ispat'), ref('taksir_red')),
                 [
                   score('SAVUNMA_STRATEJISI', strategyAmount(200, 'MASUMIYET')),
                   inc('pers'),
@@ -1566,7 +1663,6 @@ export const trial: CasePart = {
           'Kasıtla yangın çıkarıldığı ve sigortacının aldatıldığı sabit değildir; şüphe sanık lehinedir (CMK 223/2-e)',
           {
             effects: [
-              raise('beraat_talep'),
               ifThen(
                 all(ref('hizlandirici_coktu'), ref('motif_coktu')),
                 [
@@ -1642,7 +1738,7 @@ export const trial: CasePart = {
         ),
         option('T06_T', 'Öncelikle beraat; aksi hâlde eylem olsa olsa taksirle yangına neden olmadır (TCK 171/1-a)', {
           score: { SAVUNMA_STRATEJISI: strategyAmount(150, 'INDIRIM') },
-          effects: [raise('beraat_talep'), raise('terditli')],
+          effects: [raise('terditli')],
           good: 'Terditli savunma meşrudur: önce beraat, olmazsa daha hafif nitelendirme. Ama kasıt düşmüşken taksiri kendin önermek, hâkime ikinci kapıyı gösterir.',
           responses: [
             {

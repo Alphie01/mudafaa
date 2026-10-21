@@ -73,18 +73,7 @@
       "class": "OTHER",
       "priority": 2,
       "when": {
-        "all": [
-          { "flag": "sahte_rapor" },
-          {
-            "all": [
-              { "not": { "flag": "cokus" } },
-              { "ref": "hizlandirici_coktu" },
-              { "ref": "motif_coktu" },
-              { "flag": "taksir_cevap" },
-              { "flag": "beraat_talep" }
-            ]
-          }
-        ]
+        "all": [{ "flag": "sahte_rapor" }, { "all": [{ "ref": "hizlandirici_coktu" }, { "ref": "taksir_red" }] }]
       },
       "stamp": "BERAAT",
       "stampTone": "amber",
@@ -106,16 +95,21 @@
           "text": "Mahkemenin elektrik bilirkişisinin koridor hattında tespit ettiği birincil ark, yangının elektrik kaynaklı olduğunu göstermektedir."
         },
         {
-          "when": { "all": [{ "flag": "fact_acil_degil" }, { "not": { "flag": "taksir_dis" } }] },
+          "when": {
+            "all": [
+              { "flag": "taksir_cevap" },
+              {
+                "not": {
+                  "any": [{ "hasEvidence": "ev_ariza" }, { "flag": "taksir_dis" }, { "flag": "contra_u6_notr" }]
+                }
+              }
+            ]
+          },
           "text": "Elektrikçi tanığın yeminli beyanı ve yazılı notuna göre sanık uyarı üzerine yenilemeyi takvime koymuş ve yükü azaltmıştır; taksirli sorumluluğu da ispatlanamamıştır."
         },
         {
-          "when": { "all": [{ "not": { "flag": "fact_acil_degil" } }, { "not": { "flag": "taksir_dis" } }] },
-          "text": "Elektrikçinin yazılı notu ve restorasyon sözleşmesine göre sanık uyarı üzerine yenilemeyi takvime koymuştur; taksirli sorumluluğu da ispatlanamamıştır."
-        },
-        {
-          "when": { "flag": "taksir_dis" },
-          "text": "Yangının dağıtım hattındaki nötr kopmasının yarattığı aşırı gerilimle çıktığı kayıtla anlaşıldığından, netice sanığın bir özen eksikliğine bağlanamamıştır."
+          "when": { "any": [{ "hasEvidence": "ev_ariza" }, { "flag": "taksir_dis" }, { "flag": "contra_u6_notr" }] },
+          "text": "Dağıtım şirketinin kaydına göre yangından dakikalar önce sokak hattında nötr iletken kopmuş ve aşırı gerilim oluşmuştur; neticenin sanığın bir özen eksikliğine bağlandığı şüpheden uzak biçimde ispatlanamamıştır."
         },
         {
           "text": "Dolaylı delillerin (poliçe, teminat artışı, eşyaların taşınması, benzin alımı) belgeli açıklamaları karşısında sanığın atılı suçları işlediği konusunda şüpheden uzak bir kanaat oluşmamıştır (Anayasa 38/4)."
@@ -123,7 +117,7 @@
       ],
       "legalBasis": "CMK 223/2-e; Anayasa 38/4; CMK 141, 142, 217, 231/3, 273/1; TCK 272, 38; Av.K. 34",
       "xp": 0,
-      "howToReach": "Numune zincirini kurup savunmanın gerisini de delille taşıdıktan sonra para karşılığı bir karşı rapor ısmarlamak (etik ihlali). Halil kalan delillerle beraat eder; sen baroya bildirilirsin. Bu sona ulaşmamak gerekir.",
+      "howToReach": "Bilirkişi raporunun bütün ayaklarını kayıtla çürütüp taksire de kayıtla cevap verdikten sonra para karşılığı bir karşı rapor ısmarlamak (etik ihlali). Halil kalan delillerle beraat eder; sen baroya bildirilirsin. Bu sona ulaşmamak gerekir.",
       "ethicsCard": "Gerçeğe aykırı içerikte bir uzman raporunu para karşılığı ısmarlayıp mahkemeye sunmak yalan tanıklığa azmettirme ve delil uydurmadır (TCK 272, 38) ve avukat için meslekten çıkarmaya varan bir disiplin ihlalidir (Av.K. 34; TBB Meslek Kuralları). Mahkeme ısmarlama mütalaayı hükme esas almaz ve kararını kalan delillere göre verir: sahte bir rapor müvekkili kurtarmaz, yalnızca savunmanın sesini kısar.",
       "epilogue": [
         {
@@ -191,23 +185,14 @@
           "text": "Sanık, tesisatın eski olduğu ve koridor buatının ısındığı konusunda elektrikçi tarafından uyarılmış, tesisatı kullanmaya devam etmiştir."
         },
         {
-          "when": { "not": { "flag": "taksir_cevap" } },
-          "text": "Yangının dış bir etkenden kaynaklandığı ya da sanığın özen yükümlülüğünü yerine getirdiği, hükme esas alınabilecek delillerle duruşmada ortaya konamamıştır; dışlanan mütalaa bu boşluğu doldurmaz."
-        },
-        {
-          "when": { "all": [{ "flag": "taksir_cevap" }, { "not": { "flag": "taksir_dis" } }] },
-          "text": "Savunma, uyarı üzerine yenilemenin takvime konduğunu ileri sürmüşse de, sanığın ısınan buata bağlı eski tesisatı enerjili bırakmaya devam ettiği; özen yükümlülüğünün yalnızca bir takvimle yerine getirilmiş sayılamayacağı kanaatine varılmıştır."
-        },
-        {
-          "when": { "flag": "taksir_dis" },
-          "text": "Savunmanın dağıtım hattındaki nötr kopmasına ilişkin beyanı kayıtla doğrulanmıştır; ancak mahkeme aşırı gerilimin neticenin tek ve öngörülemez sebebi olduğu kanaatine varmamıştır: elektrikçinin uyarısına rağmen koruma düzeneği olmadan kullanılmaya devam edilen tesisat neticeye katkıda bulunmuştur."
+          "text": "Yangının dış bir etkenden kaynaklandığı ya da sanığın özen yükümlülüğünü yerine getirdiği, hükme esas alınabilecek delillerle duruşmada ortaya konamamıştır: dosyada dağıtım hattına ilişkin bir kayıt yoktur, uyarıyı yapan elektrikçi de dinlenmemiştir. Dışlanan mütalaa bu boşluğu doldurmaz."
         },
         { "text": "Sanığa nitelik değişikliği hatırlatılmış ve ek savunması alınmıştır (CMK 226)." },
         { "text": "Hasar ihbarı gerçek bir hasara dayandığından dolandırıcılık kastı ispatlanamamıştır." }
       ],
       "legalBasis": "TCK 171/1-a, 22/2, 62/1, 51/1; CMK 217, 223/2-e, 226, 273/1; Anayasa 38/4; TCK 272, 38; Av.K. 34",
       "xp": 0,
-      "howToReach": "Numune zincirini kurup hızlandırıcı tespitini çürüttükten sonra para karşılığı bir karşı rapor ısmarlamak (etik ihlali), kalan delillerle beraati taşıyamadan (ör. taksir sorusuna delille cevap vermeden). Halil kasıttan kurtulur, taksirden kurtulamaz. Bu sona ulaşmamak gerekir.",
+      "howToReach": "Hızlandırıcı tespitini çürüttükten sonra para karşılığı bir karşı rapor ısmarlamak (etik ihlali), taksire kayıtla bir karşılık bulmadan (ne notun yazarı dinlendi ne de dağıtım kaydı getirtildi). Halil kasıttan kurtulur, taksirden kurtulamaz. Bu sona ulaşmamak gerekir.",
       "ethicsCard": "Gerçeğe aykırı içerikte bir uzman raporunu para karşılığı ısmarlayıp mahkemeye sunmak yalan tanıklığa azmettirme ve delil uydurmadır (TCK 272, 38) ve avukat için meslekten çıkarmaya varan bir disiplin ihlalidir (Av.K. 34; TBB Meslek Kuralları). Mahkeme ısmarlama mütalaayı hükme esas almaz ve kararını kalan delillere göre verir: sahte bir rapor müvekkili kurtarmaz, yalnızca savunmanın sesini kısar.",
       "epilogue": [
         {
@@ -256,14 +241,10 @@
       "priority": 4,
       "when": {
         "all": [
-          { "not": { "flag": "cokus" } },
           { "ref": "hizlandirici_coktu" },
           { "flag": "eksper_kirildi" },
           { "ref": "elektrik_ispat" },
-          { "flag": "taksir_cevap" },
-          { "flag": "gercek" },
-          { "cmp": [{ "var": "pers" }, ">=", 8] },
-          { "cmp": [{ "score": "final" }, ">=", 13500] }
+          { "ref": "taksir_red" }
         ]
       },
       "stamp": "BERAAT",
@@ -307,12 +288,15 @@
           "text": "Eksperin aracında yarım bidon benzin ve numune tenekeleriyle aynı tip boş tenekeler ele geçirilmiştir."
         },
         {
-          "when": { "not": { "flag": "taksir_dis" } },
-          "text": "Sanığın elektrikçinin uyarısı üzerine yenilemeyi takvime koyduğu anlaşıldığından taksirli sorumluluğu da bulunmamaktadır."
+          "when": { "flag": "taksir_cevap" },
+          "text": "Sanık elektrikçinin uyarısı üzerine yenilemeyi takvime koymuş ve yükü azaltmıştır; bu da elektrikçinin yeminli beyanıyla doğrulanmıştır."
         },
         {
-          "when": { "flag": "taksir_dis" },
           "text": "Yangın, üçüncü kişinin alanındaki bir arızadan (dağıtım hattındaki nötr kopması) kaynaklandığından netice sanığın bir özen eksikliğine bağlanamaz; taksirli sorumluluğu da bulunmamaktadır."
+        },
+        {
+          "when": { "not": { "flag": "savunma_b" } },
+          "text": "Savunma beraatin dayanağını 223/2-e olarak göstermiş ya da esas hakkında beraat istememişse de, mahkeme beraatin dayanağını kayda göre kendisi belirler (CMK 223/2)."
         },
         {
           "text": "Yangın sanığın bir eylemiyle çıkmamış, hasar ihbarı gerçek bir hasara dayanmıştır; atılı suçların sanık tarafından işlenmediği sabittir."
@@ -326,7 +310,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 120] }, 1000] }
         }
       },
-      "howToReach": "Numune zincirini ve temizlenmiş zemini birinci celsede kur; panonun incelenmesini ve arıza kayıtlarını iste; arada ark raporu ile nötr kopmasını birleştir, tahkim kararını ve primi bul; eksperi çapraz sorguda çöz; taksire dış etkenle ya da takvimle cevap ver ve 2-b savunması yap.",
+      "howToReach": "Bilirkişi raporunun her ayağını kayıtla çürüt (zincir, zemin, koku, başlangıç, elektrik dışlaması, laboratuvar); panonun incelenmesini ve arıza kayıtlarını iste; arada ark raporu ile nötr kopmasını birleştir; eksperi çapraz sorguda çöz ve nötr kopmasının bu yangınla bağını duruşmada kur. Dayanağı mahkeme seçer.",
       "epilogue": [
         {
           "lines": [
@@ -405,20 +389,7 @@
       "id": "BERAAT_E",
       "class": "ACQUITTAL",
       "priority": 5,
-      "when": {
-        "all": [
-          {
-            "all": [
-              { "not": { "flag": "cokus" } },
-              { "ref": "hizlandirici_coktu" },
-              { "ref": "motif_coktu" },
-              { "flag": "taksir_cevap" },
-              { "flag": "beraat_talep" }
-            ]
-          },
-          { "cmp": [{ "score": "final" }, ">=", 12500] }
-        ]
-      },
+      "when": { "all": [{ "ref": "hizlandirici_coktu" }, { "ref": "taksir_red" }] },
       "stamp": "BERAAT",
       "stampTone": "green",
       "header": "TÜRK MİLLETİ ADINA",
@@ -451,12 +422,25 @@
           "text": "Sanığın yangın gecesi kilitli sanayi sitesindeki atölyesinde bulunduğu, sitenin kapı kaydı ve bekçisinin beyanıyla desteklenmektedir."
         },
         {
-          "when": { "all": [{ "flag": "taksir_cevap" }, { "not": { "flag": "taksir_dis" } }] },
-          "text": "Sanığın elektrikçinin uyarısı üzerine yenilemeyi takvime koyduğu anlaşıldığından taksirli sorumluluğu da ispatlanamamıştır."
+          "when": {
+            "all": [
+              { "flag": "taksir_cevap" },
+              {
+                "not": {
+                  "any": [{ "hasEvidence": "ev_ariza" }, { "flag": "taksir_dis" }, { "flag": "contra_u6_notr" }]
+                }
+              }
+            ]
+          },
+          "text": "Sanığın elektrikçinin uyarısı üzerine yenilemeyi takvime koyduğu, notu yazan elektrikçinin yeminli beyanıyla anlaşıldığından taksirli sorumluluğu da ispatlanamamıştır."
         },
         {
-          "when": { "flag": "taksir_dis" },
-          "text": "Yangının dağıtım hattındaki nötr kopmasının yarattığı aşırı gerilimle çıktığı kayıtla anlaşıldığından, netice sanığın bir özen eksikliğine bağlanamamış; taksirli sorumluluğu da ispatlanamamıştır."
+          "when": { "any": [{ "hasEvidence": "ev_ariza" }, { "flag": "taksir_dis" }, { "flag": "contra_u6_notr" }] },
+          "text": "Dağıtım şirketinin kaydına göre yangından dakikalar önce sokak hattında nötr iletken kopmuş ve aşırı gerilim oluşmuştur; neticenin sanığın bir özen eksikliğine bağlandığı şüpheden uzak biçimde ispatlanamadığından taksirli sorumluluğu da ispatlanamamıştır."
+        },
+        {
+          "when": { "chosen": "T06_D" },
+          "text": "Müdafi esas hakkında beraat istememişse de mahkeme delilleri kendiliğinden değerlendirir; kayıt beraati gerektirmektedir (CMK 217, 223)."
         },
         {
           "when": { "all": [{ "flag": "savunma_b" }, { "not": { "flag": "gercek" } }] },
@@ -467,23 +451,7 @@
           "text": "Savunmanın öncelikli talebi beraat olduğundan ve bu talep kabul edildiğinden, terditli olarak ileri sürülen taksir nitelendirmesinin incelenmesine yer olmamıştır."
         },
         {
-          "when": {
-            "all": [
-              { "any": [{ "hasEvidence": "ev_ark" }, { "hasEvidence": "ded_notr" }, { "flag": "contra_b3" }] },
-              { "not": { "flag": "taksir_dis" } }
-            ]
-          },
           "text": "Yangının elektrik kaynaklı olması kuvvetle muhtemel olmakla birlikte kesin olarak tespit edilememiş; dolaylı delillerin birlikte değerlendirilmesi sanığın atılı suçları işlediği konusunda şüpheden uzak bir kanaat oluşturmamıştır (Anayasa 38/4)."
-        },
-        {
-          "when": { "flag": "taksir_dis" },
-          "text": "Dosyadaki deliller birlikte değerlendirildiğinde sanığın atılı suçları işlediği sabit olmamıştır (Anayasa 38/4)."
-        },
-        {
-          "when": {
-            "not": { "any": [{ "hasEvidence": "ev_ark" }, { "hasEvidence": "ded_notr" }, { "flag": "contra_b3" }] }
-          },
-          "text": "Yangının çıkış sebebi kesin olarak tespit edilememiş; dolaylı delillerin birlikte değerlendirilmesi sanığın atılı suçları işlediği konusunda şüpheden uzak bir kanaat oluşturmamıştır (Anayasa 38/4)."
         }
       ],
       "legalBasis": "CMK 223/2-e; Anayasa 38/4; CMK 141, 142, 217, 231/3, 273/1",
@@ -494,7 +462,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
         }
       },
-      "howToReach": "Numune zincirini, zemini ve laboratuvar bulgusunu çürüt; dolaylı delillerin en az ikisini belgeyle çöz (eşyalar, bidon, banka, artış); taksire yenileme takvimiyle cevap ver ve beraat iste (dayanağı mahkeme seçer). Taksire nötr kopmasıyla da cevap verilebilir.",
+      "howToReach": "Bilirkişi raporunun her ayağını kayıtla çürüt: numune zinciri (bilirkişi, yeminli bekçi, eksperin girişi), zemin izi, koku tanığı, başlangıç noktası, elektrik dışlaması (pano incelemesi) ve laboratuvar bulgusu (ham veri, mühür). Taksire kayıtla karşılık bul: notu yazan elektrikçiyi hazır et ya da dağıtım kaydını getirt.",
       "epilogue": [
         {
           "lines": [
@@ -642,16 +610,10 @@
           "text": "Sanık, tesisatın eski olduğu ve koridor buatının ısındığı konusunda elektrikçi tarafından uyarılmış; tesisatı yenilenene kadar kullanmaya devam etmiştir."
         },
         {
-          "when": { "not": { "flag": "taksir_cevap" } },
-          "text": "Yangının dış bir etkenden kaynaklandığı ya da sanığın özen yükümlülüğünü yerine getirdiği duruşmada ortaya konamamıştır."
+          "text": "Yangının başlangıç noktasının koridor buatı hattı olduğu ve bu hatta birincil ark oluştuğu, savunmanın da dayandığı itfaiye raporu ve mahkemenin elektrik bilirkişisi raporuyla sabittir."
         },
         {
-          "when": { "all": [{ "flag": "taksir_cevap" }, { "not": { "flag": "taksir_dis" } }] },
-          "text": "Savunma, uyarı üzerine yenilemenin takvime konduğunu ileri sürmüşse de, sanığın ısınan buata bağlı eski tesisatı enerjili bırakmaya devam ettiği; özen yükümlülüğünün yalnızca bir takvimle yerine getirilmiş sayılamayacağı kanaatine varılmıştır."
-        },
-        {
-          "when": { "flag": "taksir_dis" },
-          "text": "Savunmanın dağıtım hattındaki nötr kopmasına ilişkin beyanı kayıtla doğrulanmıştır; ancak mahkeme aşırı gerilimin neticenin tek ve öngörülemez sebebi olduğu kanaatine varmamıştır: elektrikçinin uyarısına rağmen koruma düzeneği olmadan kullanılmaya devam edilen tesisat neticeye katkıda bulunmuştur."
+          "text": "Yangının dış bir etkenden kaynaklandığı ya da sanığın özen yükümlülüğünü yerine getirdiği duruşmada ortaya konamamıştır: dosyada dağıtım hattına ilişkin bir kayıt yoktur, uyarıyı yapan elektrikçi de dinlenmemiştir."
         },
         { "text": "Sanığa nitelik değişikliği hatırlatılmış ve ek savunması alınmıştır (CMK 226)." },
         {
@@ -672,7 +634,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "Hızlandırıcı tespitini çürüt (numune zinciri + zemin ya da laboratuvar) ama beraati taşıyacak gerisini kuramadan bitir: taksir hatırlatmasına delille cevap verme, dolaylı delillerin halatını çözme ya da ikinci celsede güvenilirliğini yitir.",
+      "howToReach": "Bilirkişi raporunun bütün ayaklarını kayıtla çürüt, ama taksire kayıtla bir karşılık bulmadan bitir: notu yazan elektrikçiyi hazır etme, dağıtım şirketinin kaydını getirtme.",
       "epilogue": [
         {
           "lines": [

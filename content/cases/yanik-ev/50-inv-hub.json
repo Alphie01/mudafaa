@@ -92,7 +92,7 @@
           "id": "t_kisi",
           "label": "KİŞİLER",
           "kind": "PEOPLE",
-          "choices": ["A_SAADET", "A_CEVDET", "A_CEVDET2", "A_NECATI", "A_KADER"]
+          "choices": ["A_SAADET", "A_CEVDET", "A_CEVDET2", "A_NECATI", "A_NECATI2", "A_KADER"]
         },
         { "id": "t_arsiv", "label": "ARŞİV", "kind": "ARCHIVE", "choices": ["A_BILIRKISI", "A_ITFAIYE", "A_POLICE"] }
       ],
@@ -239,6 +239,18 @@
           }
         },
         {
+          "id": "A_NECATI2",
+          "kind": "NAVIGATE",
+          "label": "Necati Usta’ya yeniden uğra",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_NECATI" },
+          "maxUses": 1,
+          "description": "Setbaşı · notu ve tanıklığı sor",
+          "visibleWhen": {
+            "all": [{ "visited": "INV_NECATI" }, { "hasEvidence": "ded_onlem" }, { "not": { "flag": "necati_hazir" } }]
+          }
+        },
+        {
           "id": "A_KADER",
           "kind": "NAVIGATE",
           "label": "Sigorta acentesi",
@@ -336,6 +348,20 @@
                             { "hasEvidence": "clue_restorasyon" },
                             { "hasEvidence": "clue_buat" },
                             { "flag": "fact_elektrikci" }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "any": [
+                      { "chosen": "A_NECATI2" },
+                      {
+                        "not": {
+                          "all": [
+                            { "visited": "INV_NECATI" },
+                            { "hasEvidence": "ded_onlem" },
+                            { "not": { "flag": "necati_hazir" } }
                           ]
                         }
                       }
@@ -822,6 +848,23 @@
           ]
         },
         {
+          "when": { "all": [{ "hasEvidence": "ded_onlem" }, { "not": { "flag": "necati_hazir" } }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Leyla takvimli notu sözleşmenin yanına koydu, ikisini aynı ataşla tutturdu, sonra ataşı geri çıkardı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir not, bir sözleşme. İkisi de kâğıt. Hâkim kâğıda kâğıt kadar inanır; yazanı kürsüde dururken başka türlü inanır."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Ustaya sor: gelip kendi notunu anlatır mı? Ne diyeceğini sen söyleme. Yalnızca gelip gelmeyeceğini sor."
+            }
+          ]
+        },
+        {
           "when": { "all": [{ "hasEvidence": "clue_bidon" }, { "not": { "hasEvidence": "ded_bidon" } }] },
           "lines": [
             { "speaker": "narrator", "text": "Leyla fişin fotokopisini kalemiyle iki kez tıklattı." },
@@ -950,7 +993,7 @@
           "id": "DIL_CEVDET",
           "kind": "OPTION",
           "label": "Bekçi Cevdet Alkan’ın tanık olarak dinlenmesi",
-          "visibleWhen": { "met": "cevdet" },
+          "visibleWhen": { "all": [{ "met": "cevdet" }, { "hasEvidence": "ev_cizelge" }] },
           "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [

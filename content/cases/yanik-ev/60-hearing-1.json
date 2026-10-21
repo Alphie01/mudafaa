@@ -1330,6 +1330,7 @@
           "id": "PS_S6",
           "kind": "PRESENT",
           "match": { "statement": "S6", "evidence": ["ded_bidon"] },
+          "enabledWhen": { "flag": "press_s6" },
           "responses": [
             {
               "lines": [
@@ -1356,6 +1357,34 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Fişteki beş litrenin dört litresi atölyede, jeneratörün yanında. Bidon evin yolunu hiç tutmamış.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_S6_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "S6", "evidence": ["ded_bidon"] },
+          "enabledWhen": { "not": { "flag": "press_s6" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "saadet",
+                  "expression": "kizgin",
+                  "text": "Ben ne gördüysem onu söyledim, kızım. Kırmızı bir bidon. Fotoğraf neyi değiştirir?"
+                },
+                {
+                  "speaker": "player",
+                  "style": "thought",
+                  "text": "Kâğıt doğruydu, an yanlış. Önce ona kendi cümlesini sormalıydım; neye karşı gösterdiğimi bilmeyen tanık kâğıdın etrafından dolaşır."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Doğru belge, erken an. Önce tanığı kendi cümlesine bağla: ifadeyi bastır, cevabını al; sonra belgeyi göster. Sorulmadan gösterilen belge, tanığa bir açıklama kapısı bırakır.",
             "category": "SORGULAMA"
           }
         },
@@ -1757,6 +1786,7 @@
           "id": "PS_B1",
           "kind": "PRESENT",
           "match": { "statement": "B1", "evidence": ["ded_temizlenmis"] },
+          "enabledWhen": { "flag": "press_b1" },
           "responses": [
             {
               "lines": [
@@ -1799,28 +1829,64 @@
           "id": "PS_B1_K",
           "kind": "PRESENT",
           "match": { "statement": "B1", "evidence": ["ded_koken"] },
+          "enabledWhen": { "flag": "press_b1" },
           "responses": [
             {
               "lines": [
                 {
-                  "speaker": "tezel",
-                  "text": "İtfaiyenin ilk değerlendirmesini okudum. Ama zemindeki iz, başlangıcı salona koyuyor. Fotoğraf ortada."
+                  "speaker": "player",
+                  "text": "İtfaiyenin raporu: “yangının mutfak ile koridor arasındaki bölgede başladığı değerlendirilmiştir.” Lambrideki V izinin tabanı koridorda. İkisi de salonu göstermiyor."
                 },
                 {
+                  "speaker": "tezel",
+                  "expression": "saskin",
+                  "text": "İtfaiyenin değerlendirmesini okudum. Salonu zemindeki iz yüzünden seçtim. O iz olmasa… yanma deseni koridoru gösterir. Bunu kabul ederim."
+                },
+                { "speaker": "hakim", "text": "Bilirkişinin bu beyanı aynen tutanağa geçsin." },
+                {
                   "speaker": "player",
-                  "text": "Başlangıcı gösterdim; ama onun dayanağı bir fotoğraf. Fotoğrafı sorgulamalıyım.",
+                  "text": "Başlangıç noktası artık bir fotoğrafa asılı. Şimdi o fotoğrafın kendisini sorgulamalıyım.",
                   "style": "thought"
                 }
               ]
             }
           ],
           "effects": [
-            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
-            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 200 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_koken", "op": "set", "value": true }
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "İtfaiye ve V izi başlangıcı mutfak–koridor duvarına koyuyor; ama bilirkişinin “zemin izi” dayanağı fotoğrafın kendisi.",
+            "feedback": "İtfaiyenin ilk tespiti ve evdeki V izi başlangıcı mutfak–koridor duvarına koyuyor. Bilirkişi salonu yalnızca zemindeki “döküntü izi”ne dayandırdığını kabul etti: başlangıç noktası, o izin kaderine bağlandı.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_B1_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "B1", "evidence": ["ded_temizlenmis", "ded_koken"] },
+          "enabledWhen": { "not": { "flag": "press_b1" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tezel",
+                  "expression": "saskin",
+                  "text": "Raporumda başlangıç bölgesini ve dayanağını açıkça yazdım, müdafi. Bu belge onu değiştirmez."
+                },
+                {
+                  "speaker": "player",
+                  "style": "thought",
+                  "text": "Kâğıt doğruydu, an yanlış. Önce ona kendi cümlesini sormalıydım; neye karşı gösterdiğimi bilmeyen tanık kâğıdın etrafından dolaşır."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Doğru belge, erken an. Önce tanığı kendi cümlesine bağla: ifadeyi bastır, cevabını al; sonra belgeyi göster. Sorulmadan gösterilen belge, tanığa bir açıklama kapısı bırakır.",
             "category": "SORGULAMA"
           }
         },
@@ -1850,6 +1916,7 @@
           "id": "PS_B2",
           "kind": "PRESENT",
           "match": { "statement": "B2", "evidence": ["ded_zincir"] },
+          "enabledWhen": { "flag": "press_b2" },
           "responses": [
             {
               "lines": [
@@ -1898,6 +1965,34 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Numuneleri kolluk değil, muhafaza altındaki olay yerine 09.20–10.05 arasında refakatsiz giren eksper getirdi; elde edilişine dair resmî tutanak yok. Delilin güvenilirliği zincirine bağlıdır (CMK 217).",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_B2_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "B2", "evidence": ["ded_zincir"] },
+          "enabledWhen": { "not": { "flag": "press_b2" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tezel",
+                  "expression": "saskin",
+                  "text": "Numuneler bana savcılık kanalıyla, mühürlü geldi. Gerisi beni ilgilendirmez."
+                },
+                {
+                  "speaker": "player",
+                  "style": "thought",
+                  "text": "Kâğıt doğruydu, an yanlış. Önce ona kendi cümlesini sormalıydım; neye karşı gösterdiğimi bilmeyen tanık kâğıdın etrafından dolaşır."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Doğru belge, erken an. Önce tanığı kendi cümlesine bağla: ifadeyi bastır, cevabını al; sonra belgeyi göster. Sorulmadan gösterilen belge, tanığa bir açıklama kapısı bırakır.",
             "category": "SORGULAMA"
           }
         },
@@ -1963,6 +2058,7 @@
           "id": "PS_B3",
           "kind": "PRESENT",
           "match": { "statement": "B3", "evidence": ["ded_pano"] },
+          "enabledWhen": { "flag": "press_b3" },
           "responses": [
             {
               "lines": [
@@ -1991,19 +2087,84 @@
           }
         },
         {
-          "id": "PS_B3_K",
+          "id": "PS_B3_ERKEN",
           "kind": "PRESENT",
-          "match": { "statement": "B3", "evidence": ["ded_buat", "ded_koken"] },
+          "match": { "statement": "B3", "evidence": ["ded_pano", "ded_buat"] },
+          "enabledWhen": { "not": { "flag": "press_b3" } },
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "tezel",
-                  "text": "Eriyik bakır yangının sonucu da olabilir. Birincil mi ikincil mi, ayrıca incelenmesi gerekir."
+                  "expression": "saskin",
+                  "text": "Olay yerinde elektrik kaynaklı bir iz görmedim. Gördüğümü yazdım."
                 },
                 {
                   "speaker": "player",
-                  "text": "“Ayrıca incelenmesi gerekir.” Kendi ağzıyla. Bunu birazdan bir talebe çevireceğim.",
+                  "style": "thought",
+                  "text": "Kâğıt doğruydu, an yanlış. Önce ona kendi cümlesini sormalıydım; neye karşı gösterdiğimi bilmeyen tanık kâğıdın etrafından dolaşır."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Doğru belge, erken an. Önce tanığı kendi cümlesine bağla: ifadeyi bastır, cevabını al; sonra belgeyi göster. Sorulmadan gösterilen belge, tanığa bir açıklama kapısı bırakır.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_B3_BUAT",
+          "kind": "PRESENT",
+          "match": { "statement": "B3", "evidence": ["ded_buat"] },
+          "enabledWhen": { "flag": "press_b3" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Koridordaki buat, Sayın Hâkim: eriyik bakır, kararmış porselen. Aynı buatı elektrikçi Necati Usta aralıkta ısınmış bulmuş; notu burada. Raporunuzda bu buat var mı?"
+                },
+                {
+                  "speaker": "tezel",
+                  "expression": "uzgun",
+                  "text": "Yok. Buatı incelemedim. Eriyik bakır yangının sonucu da olabilir, sebebi de; ayırmak için ayrı bir inceleme gerekir."
+                },
+                { "speaker": "hakim", "text": "Bilirkişinin bu beyanı aynen tutanağa geçsin." },
+                {
+                  "speaker": "player",
+                  "text": "“Ayrı bir inceleme gerekir.” Kendi ağzıyla. Bunu birazdan bir talebe çevireceğim. Ama ustanın notu artık tutanakta; kasıt düşerse hâkimin önünde ikinci bir kapı açılır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 200 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "contra_buat", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Koridor buatında eriyik bakır ve kararmış porselen var; elektrikçi aynı buatı yangından bir ay önce ısınmış bulmuş. Bilirkişi raporunda bu buatın adı bile geçmiyor: alternatif sebep hiç incelenmemiş.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_B3_K",
+          "kind": "PRESENT",
+          "match": { "statement": "B3", "evidence": ["ded_koken"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tezel",
+                  "text": "Başlangıç bölgesi ayrı bir konu. Ben elektrik kaynaklı bir iz görmedim diyorum."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Yanlış ifadeye doğru kâğıt. Burada sorulacak olan, neye bakmadığı.",
                   "style": "thought"
                 }
               ]
@@ -2015,7 +2176,7 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Başlangıç bölgesini ve ısınan buatı gösterdin; ama bilirkişinin cümlesinin zayıflığı, panoya hiç bakmamış olmasıdır.",
+            "feedback": "Başlangıç bölgesini gösterdin; ama bu ifadenin zayıflığı bilirkişinin panoya ve buata hiç bakmamış olmasıdır.",
             "category": "SORGULAMA"
           }
         },
@@ -2042,6 +2203,7 @@
           "id": "PS_B4",
           "kind": "PRESENT",
           "match": { "statement": "B4", "evidence": ["ded_taze"] },
+          "enabledWhen": { "flag": "press_b4" },
           "responses": [
             {
               "lines": [
@@ -2069,6 +2231,34 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Laboratuvarın kendi dipnotu: “düşük buharlaşma derecesi.” Saatlerce ateş ve seksen dakika sudan sonra neredeyse taze benzin, numunenin yangından sonra kirlendiği ihtimalini doğurur.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_B4_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "B4", "evidence": ["ded_taze"] },
+          "enabledWhen": { "not": { "flag": "press_b4" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tezel",
+                  "expression": "saskin",
+                  "text": "Benzin çok dökülmüşse kalıntı taze kalır. Bu bilinen bir şeydir."
+                },
+                {
+                  "speaker": "player",
+                  "style": "thought",
+                  "text": "Kâğıt doğruydu, an yanlış. Önce ona kendi cümlesini sormalıydım; neye karşı gösterdiğimi bilmeyen tanık kâğıdın etrafından dolaşır."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Doğru belge, erken an. Önce tanığı kendi cümlesine bağla: ifadeyi bastır, cevabını al; sonra belgeyi göster. Sorulmadan gösterilen belge, tanığa bir açıklama kapısı bırakır.",
             "category": "SORGULAMA"
           }
         },
@@ -2287,7 +2477,9 @@
           "id": "T1_CEVDET",
           "kind": "OPTION",
           "label": "Bekçi Cevdet Alkan’ın tanık olarak dinlenmesi",
-          "visibleWhen": { "all": [{ "met": "cevdet" }, { "not": { "flag": "cevdet_istendi" } }] },
+          "visibleWhen": {
+            "all": [{ "met": "cevdet" }, { "hasEvidence": "ev_cizelge" }, { "not": { "flag": "cevdet_istendi" } }]
+          },
           "cost": [{ "var": "h1_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [

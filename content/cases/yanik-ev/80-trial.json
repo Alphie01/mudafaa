@@ -467,6 +467,7 @@
           "id": "CV_Q2",
           "kind": "OPTION",
           "label": "Arada olay yerine giren oldu mu?",
+          "visibleWhen": { "chosen": "CV_Q1" },
           "responses": [
             {
               "lines": [
@@ -876,6 +877,7 @@
           "id": "PS_U1",
           "kind": "PRESENT",
           "match": { "statement": "U1", "evidence": ["ev_cizelge"] },
+          "enabledWhen": { "flag": "press_u1" },
           "responses": [
             {
               "lines": [
@@ -904,6 +906,33 @@
           }
         },
         {
+          "id": "PS_U1_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "U1", "evidence": ["ev_cizelge"] },
+          "enabledWhen": { "not": { "flag": "press_u1" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Bekçi de bir görevlidir, avukat hanım. Girişimi kayda geçirmiş; ben de izin aldım demiştim."
+                },
+                {
+                  "speaker": "player",
+                  "style": "thought",
+                  "text": "Kâğıt doğruydu, an yanlış. Önce ona kendi cümlesini sormalıydım; neye karşı gösterdiğimi bilmeyen tanık kâğıdın etrafından dolaşır."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Doğru belge, erken an. Önce tanığı kendi cümlesine bağla: ifadeyi bastır, cevabını al; sonra belgeyi göster. Sorulmadan gösterilen belge, tanığa bir açıklama kapısı bırakır.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
           "id": "PR_U2",
           "kind": "PRESS",
           "match": { "statement": "U2" },
@@ -926,6 +955,7 @@
           "id": "PS_U2",
           "kind": "PRESENT",
           "match": { "statement": "U2", "evidence": ["ded_temizlenmis"] },
+          "enabledWhen": { "flag": "press_u2" },
           "responses": [
             {
               "lines": [
@@ -954,6 +984,33 @@
           "quality": {
             "q": "GOOD",
             "feedback": "04.30’da zemin örtülü, 09.40’ta temizlenmiş ve ıslak: zemini açan da, “izi” fotoğraflayan da eksper; bunu kimse görmedi.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_U2_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "U2", "evidence": ["ded_temizlenmis"] },
+          "enabledWhen": { "not": { "flag": "press_u2" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "İki fotoğraf, iki saat. Bir olay yeri saatler içinde değişir. Bunu herkes bilir."
+                },
+                {
+                  "speaker": "player",
+                  "style": "thought",
+                  "text": "Kâğıt doğruydu, an yanlış. Önce ona kendi cümlesini sormalıydım; neye karşı gösterdiğimi bilmeyen tanık kâğıdın etrafından dolaşır."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Doğru belge, erken an. Önce tanığı kendi cümlesine bağla: ifadeyi bastır, cevabını al; sonra belgeyi göster. Sorulmadan gösterilen belge, tanığa bir açıklama kapısı bırakır.",
             "category": "SORGULAMA"
           }
         },
@@ -990,7 +1047,8 @@
         {
           "id": "PS_U3",
           "kind": "PRESENT",
-          "match": { "statement": "U3", "evidence": ["ded_ekilmis", "ev_elkoyma"] },
+          "match": { "statement": "U3", "evidence": ["ded_ekilmis"] },
+          "enabledWhen": { "all": [{ "flag": "press_u3" }, { "flag": "fact_muhur" }, { "flag": "fact_tutanak" }] },
           "responses": [
             {
               "when": { "hasEvidence": "ev_elkoyma" },
@@ -1035,6 +1093,98 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Numunede yanma ürünü yok, benzin taze, tenekeler içeri ağır girdi; aracında aynı tip tenekeler ve benzin. Numune olay yerinden alınmamış, getirilmiş.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_U3_MUHURSUZ",
+          "kind": "PRESENT",
+          "match": { "statement": "U3", "evidence": ["ded_ekilmis"] },
+          "enabledWhen": {
+            "all": [
+              { "flag": "press_u3" },
+              { "not": { "all": [{ "flag": "fact_muhur" }, { "flag": "fact_tutanak" }] } }
+            ]
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Numuneleri usulüne uygun aldım, mühürledim, teslim ettim. Laboratuvarın yorumu benim alanım değil; teslim kaydı ortada."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Teslim kaydı ortada.” Ortada ama ben okumadım. Tenekeleri kim mühürledi, numune alma tutanağı var mı? Laboratuvarın kayıtlarını bilmeden bu cümleyi kıramam.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Ham veri ve bekçinin gözlemi güçlü; ama numunenin “o zeminden” alındığı iddiasının dayanağı tenekelerin mührü ve numune alma tutanağıdır. Laboratuvarın kabul ve not satırlarını okumadan zincirin son halkası açık kalır.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_U3_E",
+          "kind": "PRESENT",
+          "match": { "statement": "U3", "evidence": ["ev_elkoyma"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "expression": "kizgin",
+                  "text": "Bagajımda numune kabı bulunması mesleğimin gereği, avukat hanım. Benzin de aracın yedeği. Bunlar bir şey kanıtlamaz."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir bagaj bir şüphe. Numunenin o zemini hiç görmediğini gösteren kayıt ve tenekeyi dolu gören bir göz: şüpheyi ancak ikisi birlikte kanıta çevirir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Bagajdaki benzin ve boş tenekeler bir şüphedir; numunenin o yangını hiç görmediğini gösteren laboratuvar kaydı ve tenekelerin içeri dolu girdiğini gören tanık olmadan, bir eksperin bagajındaki teneke “mesleğin gereği” diye açıklanabilir.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_U3_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "U3", "evidence": ["ded_ekilmis"] },
+          "enabledWhen": { "not": { "flag": "press_u3" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Numuneleri o zeminden aldım ve mühürledim. Laboratuvarın yorumunu bana sormayın."
+                },
+                {
+                  "speaker": "player",
+                  "style": "thought",
+                  "text": "Kâğıt doğruydu, an yanlış. Önce ona kendi cümlesini sormalıydım; neye karşı gösterdiğimi bilmeyen tanık kâğıdın etrafından dolaşır."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Doğru belge, erken an. Önce tanığı kendi cümlesine bağla: ifadeyi bastır, cevabını al; sonra belgeyi göster. Sorulmadan gösterilen belge, tanığa bir açıklama kapısı bırakır.",
             "category": "SORGULAMA"
           }
         },
@@ -1203,6 +1353,7 @@
           "id": "PS_U6_ARK",
           "kind": "PRESENT",
           "match": { "statement": "U6", "evidence": ["ev_ark", "ded_elektrik"] },
+          "enabledWhen": { "all": [{ "flag": "press_u6" }, { "hasEvidence": "clue_ark" }] },
           "responses": [
             {
               "lines": [
@@ -1232,6 +1383,60 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Pano o sabah emanetteydi; eksper ona bakamazdı. Mahkemenin elektrik bilirkişisi koridor hattında birincil ark buldu: “ben görürdüm” dediği iz, bakmadığı yerdeydi.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_U6_OKUNMAMIS",
+          "kind": "PRESENT",
+          "match": { "statement": "U6", "evidence": ["ev_ark"] },
+          "enabledWhen": { "all": [{ "flag": "press_u6" }, { "not": { "hasEvidence": "clue_ark" } }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Elektrik bilirkişisi ne bulmuş, avukat hanım? Okuyun da hep birlikte duyalım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Okuyamadım. Raporu dosyaya koydum ama satırını bilmiyorum. Bir kâğıdı bilmeden sunmak, onu karşı tarafa okutmaktır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 60 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Raporu sundun ama içini okumadın: eksperin “gözlemini” kıran şey, raporun koridor linyesindeki birincil ark satırıdır. Bir belgeyi, hangi satırına dayandığını bilmeden sunma.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_U6_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "U6", "evidence": ["ev_ark", "ded_elektrik"] },
+          "enabledWhen": { "not": { "flag": "press_u6" } },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Ben olay yerinde gözlem yaptım; elektrik bilirkişisi aylar sonra bir panoya baktı. İkisi aynı şey değil."
+                },
+                {
+                  "speaker": "player",
+                  "style": "thought",
+                  "text": "Kâğıt doğruydu, an yanlış. Önce ona kendi cümlesini sormalıydım; neye karşı gösterdiğimi bilmeyen tanık kâğıdın etrafından dolaşır."
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 40 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Doğru belge, erken an. Önce tanığı kendi cümlesine bağla: ifadeyi bastır, cevabını al; sonra belgeyi göster. Sorulmadan gösterilen belge, tanığa bir açıklama kapısı bırakır.",
             "category": "SORGULAMA"
           }
         },
@@ -1644,10 +1849,16 @@
           "id": "T05_A",
           "kind": "OPTION",
           "label": "Uyarı alındı, yenileme takvime kondu; özen yükümlülüğü yerine getirildi",
-          "visibleWhen": { "hasEvidence": "ded_onlem" },
+          "visibleWhen": {
+            "all": [
+              { "hasEvidence": "ded_onlem" },
+              { "flag": "fact_acil_degil" },
+              { "flag": "necati_hazir" },
+              { "not": { "flag": "cokus" } }
+            ]
+          },
           "responses": [
             {
-              "when": { "flag": "fact_acil_degil" },
               "lines": [
                 {
                   "speaker": "player",
@@ -1685,19 +1896,6 @@
                 },
                 { "speaker": "hakim", "text": "Kayda geçsin." }
               ]
-            },
-            {
-              "lines": [
-                {
-                  "speaker": "player",
-                  "text": "Sayın Hâkim, elektrikçinin notu: “acil değil, yenileme restorasyonun ilk haftası, ağır yük çekmeyin.” Sözleşme: 19 Ocak, ilk iş tesisat."
-                },
-                {
-                  "speaker": "player",
-                  "text": "Müvekkilim uyarıyı duydu, ustanın dediğini yaptı, yükü kaldırdı, evden çıktı. Bir uzmanın “acil değil” dediği yerde, uzmandan daha dikkatli olması beklenemez."
-                },
-                { "speaker": "hakim", "text": "Kayda geçsin." }
-              ]
             }
           ],
           "effects": [
@@ -1718,7 +1916,12 @@
           "id": "T05_B",
           "kind": "OPTION",
           "label": "Yangını 02.08’deki nötr kopması çıkardı; netice sanığın kusuruna bağlanamaz",
-          "visibleWhen": { "hasEvidence": "ded_notr" },
+          "visibleWhen": {
+            "all": [
+              { "hasEvidence": "ded_notr" },
+              { "any": [{ "hasEvidence": "ev_ark" }, { "hasEvidence": "ded_elektrik" }] }
+            ]
+          },
           "responses": [
             {
               "lines": [
@@ -2328,7 +2531,7 @@
           "cost": [{ "var": "dayanak", "amount": 1 }],
           "responses": [
             {
-              "when": { "flag": "taksir_cevap" },
+              "when": { "ref": "taksir_red" },
               "lines": [
                 { "speaker": "player", "text": "Hâkimin ikinci kapısı da kapandı. Kayıtla.", "style": "thought" }
               ]
@@ -2347,7 +2550,7 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "flag": "taksir_cevap" },
+              "when": { "ref": "taksir_red" },
               "then": [
                 { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 40 },
                 { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
@@ -2433,7 +2636,6 @@
             }
           ],
           "effects": [
-            { "type": "VAR", "var": "beraat_talep", "op": "set", "value": true },
             { "type": "VAR", "var": "savunma_b", "op": "set", "value": true },
             {
               "type": "IF",
@@ -2442,7 +2644,7 @@
                   { "ref": "hizlandirici_coktu" },
                   { "flag": "eksper_kirildi" },
                   { "ref": "elektrik_ispat" },
-                  { "flag": "taksir_cevap" }
+                  { "ref": "taksir_red" }
                 ]
               },
               "then": [
@@ -2550,7 +2752,6 @@
             }
           ],
           "effects": [
-            { "type": "VAR", "var": "beraat_talep", "op": "set", "value": true },
             {
               "type": "IF",
               "when": { "all": [{ "ref": "hizlandirici_coktu" }, { "ref": "motif_coktu" }] },
@@ -2617,7 +2818,6 @@
                 }
               }
             },
-            { "type": "VAR", "var": "beraat_talep", "op": "set", "value": true },
             { "type": "VAR", "var": "terditli", "op": "set", "value": true }
           ],
           "quality": {

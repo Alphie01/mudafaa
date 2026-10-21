@@ -1,4 +1,4 @@
-import { chapter, court, dec, inc, phase } from '../../../tools/content/src/kit/index.js';
+import { chapter, court, dec, flag, inc, not, phase, presentRule } from '../../../tools/content/src/kit/index.js';
 import type { Backdrop, Expression, Line, LineFx } from '@mudafaa/case-schema';
 
 // Dava genelinde paylaşılan tanımlar: bölüm etiketleri, soruşturma evreleri, duruşma salonları ve satır kısaltmaları.
@@ -82,3 +82,38 @@ export const voice = (name: string, text: string, style: 'phone' | 'whisper' = '
   text,
   style,
 });
+
+/**
+ * Çapraz sorguda "önce tanığı beyanına bağla, sonra çeliştir": çelişkiyi kuran belge, ifade bastırılmadan (tanık kendi
+ * cümlesini açmadan) sunulursa tanık kaçacak bir kapı bulur; çelişki kayda geçmez ama ceza da yoktur. Tam kural aynı
+ * ifade ve delil için önce gelir ve `pressFlag` ister.
+ */
+export const erkenSunum = (
+  id: string,
+  statementId: string,
+  evidence: readonly string[],
+  pressFlag: string,
+  witnessLine: Line,
+) =>
+  presentRule(id, statementId, evidence, {
+    enabledWhen: not(flag(pressFlag)),
+    score: { SORGULAMA: 40 },
+    quality: {
+      q: 'NEUTRAL',
+      feedback:
+        'Doğru belge, erken an. Önce tanığı kendi cümlesine bağla: ifadeyi bastır, cevabını al; sonra belgeyi göster. Sorulmadan gösterilen belge, tanığa bir açıklama kapısı bırakır.',
+      category: 'SORGULAMA',
+    },
+    responses: [
+      {
+        lines: [
+          witnessLine,
+          {
+            speaker: 'player',
+            style: 'thought',
+            text: 'Kâğıt doğruydu, an yanlış. Önce ona kendi cümlesini sormalıydım; neye karşı gösterdiğimi bilmeyen tanık kâğıdın etrafından dolaşır.',
+          },
+        ],
+      },
+    ],
+  });

@@ -1152,8 +1152,13 @@
           "label": "Sabah olay yerini siz beklemişsiniz. Kim girdi, kim çıktı?",
           "visibleWhen": {
             "all": [
-              { "hasEvidence": "clue_numune" },
-              { "any": [{ "visited": "INV_FOTO" }, { "hasEvidence": "clue_eksper_foto" }] }
+              {
+                "all": [
+                  { "hasEvidence": "clue_numune" },
+                  { "any": [{ "visited": "INV_FOTO" }, { "hasEvidence": "clue_eksper_foto" }] }
+                ]
+              },
+              { "chosen": "CV_GECE" }
             ]
           },
           "responses": [
@@ -1285,6 +1290,22 @@
       "onFirstEnter": [{ "type": "MEET", "character": "necati" }],
       "lines": [
         {
+          "when": { "chosen": "A_NECATI2" },
+          "lines": [
+            { "speaker": "narrator", "text": "SETBAŞI — NECATİ ELEKTRİK, 18.10", "style": "card", "bg": "depo" },
+            {
+              "speaker": "narrator",
+              "text": "Kepenk yarıya inmişti. Necati Usta altından eğilip çıktı, beni görünce kepengi yeniden kaldırdı."
+            },
+            { "speaker": "necati", "text": "Yine mi siz, kızım? Notu verdim ya. Başka ne lazım?" },
+            {
+              "speaker": "player",
+              "text": "Not elimde. Notun sahibi burada. Mahkeme ikisinden birine kâğıt, ötekine tanık der.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "lines": [
             { "speaker": "narrator", "text": "SETBAŞI — NECATİ ELEKTRİK, 11.30", "style": "card", "bg": "depo" },
             {
@@ -1374,6 +1395,7 @@
           "id": "NC_SUC",
           "kind": "OPTION",
           "label": "Halil Bey’e “acil değil” dediğiniz için kendinizi sorumlu hissediyor musunuz?",
+          "visibleWhen": { "chosen": "NC_ACIL" },
           "responses": [
             {
               "lines": [
@@ -1391,12 +1413,8 @@
                   "text": "Bak kızım, ben çırakken ustam bir şey derdi: “Kablo yalan söylemez, ama kimse onu dinlemez.” Yangından sonra kimse bana gelmedi. Ne polis, ne bilirkişi. Notum dosyada duruyormuş; okuyan olmamış."
                 },
                 {
-                  "speaker": "necati",
-                  "text": "Mahkeme çağırırsa gelirim. Ne gördüysem onu söylerim. “Eskiydi” derim, “ılıktı” derim, “acil değildi” derim. Üçü de doğru."
-                },
-                {
                   "speaker": "player",
-                  "text": "Suçluluk dürüst insanları ya susturur ya fazla konuşturur. Necati Usta’yı tanıklığa hazırlarsam, bu ikisinin arasında yürümesi gerekecek.",
+                  "text": "Suçluluk dürüst insanları ya susturur ya fazla konuşturur.",
                   "style": "thought"
                 }
               ]
@@ -1404,7 +1422,53 @@
           ],
           "next": "$stay"
         },
-        { "id": "NC_BITIR", "kind": "OPTION", "label": "Teşekkür et ve çık", "next": "$return" }
+        {
+          "id": "NC_TANIK",
+          "kind": "OPTION",
+          "label": "Notunuzu mahkemede siz anlatır mısınız? Ne gördüyseniz, o kadar.",
+          "visibleWhen": { "chosen": "NC_KESIF" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "necati",
+                  "text": "Mahkeme çağırırsa gelirim. Çağırmasa da ikinci celsede koridorda olurum; siz söyleyin yeter. Ne gördüysem onu söylerim."
+                },
+                { "speaker": "necati", "text": "“Eskiydi” derim, “ılıktı” derim, “acil değildi” derim. Üçü de doğru." },
+                {
+                  "speaker": "player",
+                  "text": "Bir not bir kâğıttır; yazanı kürsüde dururken bir tanıklık. Necati Usta’yı hazırlamayacağım; yalnızca gelmesini isteyeceğim.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 30 },
+            { "type": "VAR", "var": "necati_hazir", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Bir belgenin değeri, yazanın onu duruşmada doğrulamasıyla artar. Tanığa ne söyleyeceğini değil, yalnızca gelip gördüğünü anlatmasını istedin.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "NC_BITIR",
+          "kind": "OPTION",
+          "label": "Teşekkür et ve çık",
+          "next": "$return",
+          "visibleWhen": { "not": { "chosen": "A_NECATI2" } }
+        },
+        {
+          "id": "NC_BITIR2",
+          "kind": "OPTION",
+          "label": "Kepengi indirmesine yardım et ve çık",
+          "next": "$return",
+          "visibleWhen": { "chosen": "A_NECATI2" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }]
+        }
       ]
     },
     {

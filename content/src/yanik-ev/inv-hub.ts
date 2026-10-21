@@ -31,6 +31,8 @@ import { sabahKapisi } from './inv-people.js';
 
 /** Bekçiye ikinci ziyaret: ilk ziyarette sabah sorulamadıysa (zincirdeki boşluk henüz görülmemişse), bir EP daha. */
 const cevdet2Gorunur = all(visited('INV_CEVDET'), not(chosen('CV_SABAH')), sabahKapisi);
+/** Elektrikçiye ikinci ziyaret: takvim kartı kurulduysa ama usta tanıklığa davet edilmediyse, bir EP daha. */
+const necati2Gorunur = all(visited('INV_NECATI'), has('ded_onlem'), not(flag('necati_hazir')));
 
 // 50-inv-hub: 1. evre hub'ı (3 gün × 4 EP), gün sonu ve akşam sahneleri, Leyla'ya danış, delil dilekçesi (CMK 177),
 // çıkarım tahtası ve duruşmadan önceki gece.
@@ -110,6 +112,11 @@ const hubChoices = {
       description: 'Restorasyon ekibi · tesisat keşfi',
       visibleWhen: any(has('clue_restorasyon'), has('clue_buat'), flag('fact_elektrikci')),
     }),
+    p1.activity('A_NECATI2', 'Necati Usta’ya yeniden uğra', 'INV_NECATI', {
+      once: true,
+      description: 'Setbaşı · notu ve tanıklığı sor',
+      visibleWhen: necati2Gorunur,
+    }),
     p1.activity('A_KADER', 'Sigorta acentesi', 'INV_KADER', {
       once: true,
       description: 'Poliçeyi düzenleyen acente',
@@ -149,6 +156,7 @@ const sonGunBitti = any(
     any(chosen('A_CEVDET'), not(any(visited('INV_SAADET'), has('clue_numune'), visited('INV_EV')))),
     any(chosen('A_CEVDET2'), not(cevdet2Gorunur)),
     any(chosen('A_NECATI'), not(any(has('clue_restorasyon'), has('clue_buat'), flag('fact_elektrikci')))),
+    any(chosen('A_NECATI2'), not(necati2Gorunur)),
     any(chosen('A_KADER'), not(any(has('clue_kampanya'), flag('fact_artis')))),
   ),
 );
@@ -531,6 +539,20 @@ export const invHub: CasePart = {
           ],
         },
         {
+          when: all(has('ded_onlem'), not(flag('necati_hazir'))),
+          lines: [
+            n('Leyla takvimli notu sözleşmenin yanına koydu, ikisini aynı ataşla tutturdu, sonra ataşı geri çıkardı.'),
+            s(
+              'leyla',
+              'Bir not, bir sözleşme. İkisi de kâğıt. Hâkim kâğıda kâğıt kadar inanır; yazanı kürsüde dururken başka türlü inanır.',
+            ),
+            s(
+              'leyla',
+              'Ustaya sor: gelip kendi notunu anlatır mı? Ne diyeceğini sen söyleme. Yalnızca gelip gelmeyeceğini sor.',
+            ),
+          ],
+        },
+        {
           when: all(has('clue_bidon'), not(has('ded_bidon'))),
           lines: [
             n('Leyla fişin fotokopisini kalemiyle iki kez tıklattı.'),
@@ -605,7 +627,8 @@ export const invHub: CasePart = {
           next: '$stay',
         }),
         option('DIL_CEVDET', 'Bekçi Cevdet Alkan’ın tanık olarak dinlenmesi', {
-          visibleWhen: met('cevdet'),
+          // Tanık, dayanağı olan kayıt (devriye çizelgesi) elde edildikten sonra gösterilir.
+          visibleWhen: all(met('cevdet'), has('ev_cizelge')),
           cost: [{ var: 'dil_hak', amount: 1 }],
           score: { USUL_BILGISI: 40 },
           effects: [raise('cevdet_istendi')],

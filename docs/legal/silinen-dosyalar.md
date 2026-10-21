@@ -50,7 +50,7 @@ Metinler güncel mevzuat PDF'leriyle karşılaştırılmıştır (erişim: 2026-
 | Av.K. 34 | Etik geri bildirimleri | Avukat görevini özen, doğruluk ve onur içinde yapar; tanığı yönlendiremez. |
 | TBB Mesl. K. 38 | INV_T_TARIK ziyareti (etik ceza) | Karşı tarafla ancak vekili aracılığıyla görüşülür. |
 | TCK 272, 38 | Tanığa söz ezberletme (geri bildirim) | Yalan tanıklık; azmettirme. |
-| TCK 277 | Mağdura/tanığa müdahale (geri bildirim) | Yargı görevi yapanı/bilirkişiyi/tanığı hukuka aykırı etkileme. |
+| TCK 277 | Mağdura/tanığa müdahale (geri bildirim; YD_SAAT / YA_EZBER sonrası hâkimin bildirim kararı) | Yargı görevi yapanı/bilirkişiyi/tanığı hukuka aykırı etkileme. Tanık yönlendirildiyse hâkim tutanak örneğinin Cumhuriyet Başsavcılığına ve baroya gönderilmesine karar verir (CMK 158/1 ihbar; Av.K. 34 disiplin). Yorum kararı: müvekkilin beraati delille kurulmuşsa korunur; yaptırım avukata yöneliktir (skor −1.500, XP yarıya, BERAAT_B kapanır). |
 | TBK 512/1 | ETIK, COKUS (azil) | Vekâlet her zaman tek taraflı sona erdirilebilir. |
 | Anayasa 38/4 | BERAAT_E gerekçesi | Suçluluğu sabit olana kadar masumiyet; şüpheden sanık yararlanır. |
 
@@ -64,7 +64,7 @@ hüküm kurulur; ayrı ayrı belirlenen cezalar hükümde toplanmaz (toplama inf
 | BERAAT_E | 223/2-a beraat | **223/2-e** beraat (imaj güvenilmez, silme sanığın cihazından değil) | rıza + imaj çöktü + cihaz bulgusu + ara evresi bulgusu (bilirkişi/zimmet/hat/kart) + ikna/skor |
 | NITELENDIRME | **adli para** 100 gün × 20 TL = 2.000 TL (TCK 52/2); **HAGB** (231/5–6), 5 yıl denetim | 223/2-e beraat | rıza KURULAMADI + silme sanıktan koptu |
 | KISMI | 223/2-a beraat | **1 yıl 3 ay** hapis (TCK 61); HAGB yok (231/6-c, 231/9: sanık zararı gidermeyi kabul etmedi); **erteleme** (TCK 51/1), 1 yıl 3 ay denetim | rıza kuruldu, silme koparılamadı |
-| MAHKUMIYET | adli para 2.000 TL | **1 yıl 8 ay** hapis; HAGB yok (231/6-c, 231/9); erteleme yok (TCK 51/1: planlı işleniş, yargılamada zararı gidermeye yönelik çaba/pişmanlık yok) | varsayılan |
+| MAHKUMIYET | adli para 2.000 TL; HAGB yok **yalnızca 231/6-b** (olumsuz kanaat; zarar yok, 231/6-c engeli yok) | **1 yıl 8 ay** hapis; HAGB yok (231/6-c, 231/9 ve 231/6-b); erteleme yok (TCK 51/1: planlı işleniş, yargılamada zararı gidermeye yönelik çaba/pişmanlık yok) | varsayılan |
 | COKUS | — | — | ♥0: ara karar; sanık vekâleti sona erdirir, yeni müdafi için erteleme (CMK 149/1) |
 | ETIK | — | — | müvekkile izinsiz giriş yaptırıldı: delil dışlanır, bildirim, azil |
 
@@ -76,6 +76,11 @@ hüküm kurulur; ayrı ayrı belirlenen cezalar hükümde toplanmaz (toplama inf
 - 243/1'de seçimlik adli para tercih edildi: kişisel klasörle sınırlı erişim, zarar yok. Kısa süreli hapis ve TCK 50
   tartışması bu nedenle doğmaz. 243/1 eylemi nedeniyle giderilecek bir zarar olmadığından NITELENDIRME'de 231/6-c engeli
   yoktur.
+- MAHKUMIYET'te HAGB her suç için ayrı gerekçelendirilir: 244/2 için 231/6-c ve 231/9 (sanık zararı gidermeyi kabul
+  etmedi) **ve** 231/6-b; 243/1 için zarar olmadığından 231/6-c dayanak olamaz, ret yalnızca 231/6-b'ye (iki eylemin
+  planlı ve birbirine bağlı işlendiği kabulüyle olumsuz kanaat; erteleme reddiyle tutarlı) dayanır. Yorum kararı: aynı
+  olumsuz kanaatin her iki suçta HAGB'yi ve 244/2'de ertelemeyi engellemesi; mahkeme 243/1'de HAGB verebilirdi, ama
+  mahkûmiyet yolunun kurgusu (planlı işleniş kabulü) ile çelişirdi.
 - TCK 53 (hak yoksunlukları) yalnızca 244/2 hapis cezası bulunan hükümlerde; TCK 63 mahsup: sanık bir gün gözaltında
   kaldı (adli kontrol mahsuba konu değildir).
 
@@ -126,7 +131,7 @@ sigorta sahtekârlığı bağlamı; çocuk karakter Defne yalnızca duygusal ça
 - [x] Bütün madde atıfları güncel metinle doğrulandı (tablo dolu).
 - [x] Ceza hesapları alt/üst sınırlar içinde; görevli mahkeme (asliye ceza, tek hâkim) doğru.
 - [x] Beraat bentleri fiile göre ayrı: 243/1 → 223/2-a; 244/2 → 223/2-b ya da 2-e. Ayrı cezalar hükümde toplanmaz.
-- [x] HAGB/erteleme reddi somut gerekçeli (231/6-c, 231/9; TCK 51/1), "cezanın miktarı" gerekçesi yok.
+- [x] HAGB/erteleme reddi somut gerekçeli ve suç bazında ayrı (244/2: 231/6-c, 231/9, 231/6-b; 243/1: yalnızca 231/6-b; TCK 51/1), "cezanın miktarı" gerekçesi yok.
 - [x] Hiçbir sonuç müdafiin güvenilirliğine dayanmaz; çöküş ara karardır.
 - [x] Mahkemeye hitap "Sayın Hâkim"; savcıya "Sayın Savcı".
 - [x] Hüküm metinlerinde istinaf süresi (CMK 273/1) ve tazminat bildirimi (CMK 231/3) var.

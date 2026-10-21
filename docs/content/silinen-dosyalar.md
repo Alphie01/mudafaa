@@ -62,11 +62,15 @@ hakan+kisisel, eksper+yedek, hash+hat…).
   alanında; cevap: sertifika değişmez); "varsayım" ve "vekil soru soramaz" itirazları yanlış.
 - **2. celse — Tarık (T1–T5):** "evimdeydim (Görükle)" ↔ operatör (02.14 Görükle, GM hattı) ya da kart kaydı; "şifre
   bende değil" ↔ e-posta/devir; "yedek aylardır arızalı" ↔ `ded_yedek` (cuma 22.00 başarılı yedek, kablo sökülmüş);
+  "şifre bende değil" ayrıca ↔ devir tutanağı/`ded_sifre` (PS_T_SIFRE: 4. madde, zarfı teslim alan T. Sezer →
+  `contra_t_sifre`, hüküm gerekçesinde bir cümle);
   "sigorta yıllardır aynı" ↔ zeyilname ya da `ded_once_sigorta` (eksper polisten önce); "başka cihaz söz konusu değil" ↔
   zimmet (NOS-GM-LT → T_02K, CMK 48 çekinme) ya da ham kayıt/bilirkişi/`ded_cihaz` (başka cihaz; kime ait olduğu ayrı).
 - **2. celse — Yaşar (Y1–Y3):** defter 23.05 ↔ kart kaydı 23.11. Tanık yönlendirildiyse (YD_SAAT ya da YA_EZBER) Ozan
-  sorar, Yaşar dürüstçe anlatır: ♥−1, ikna −2, −100 skor, defter sunumu ikna vermez, 2-b beraati kapanır, hüküm
-  gerekçesi ve epilog bunu anar. Ozan'ın yönlendirici sorusu → itiraz (CMK 201/1); "ilişki sorulamaz" itirazı yanlış
+  sorar, Yaşar dürüstçe anlatır: ♥−1, ikna −2, **−1.500 skor** ("Etik ihlali" satırı), XP yarıya (ethics), defter sunumu
+  ikna vermez, 2-b beraati kapanır; hâkim tutanak örneğinin Cumhuriyet Başsavcılığına ve Bursa Barosuna gönderilmesine
+  karar verir, BERAAT_E gerekçesi bildirimi anar, epilogda Leyla'nın baro zarfı sahnesi normal kapanışın yerini alır.
+  Ölçüm: TIPIK'te YA_EZBER ya da YD_SAAT → BERAAT_E 11.530 (−1.700), XP 1.323 → 576; G1'de → BERAAT_E 11.770, XP 1.616 → 588. Ozan'ın yönlendirici sorusu → itiraz (CMK 201/1); "ilişki sorulamaz" itirazı yanlış
   (CMK 58/1).
 - **2. celse — Nalan (NL1–NL4):** zeyilname, nakit sıkıntısı; "gerekçesini bilmiyorum" (bastır: "bir çalışan sorun
   çıkarırsa diye"; zeyilname metni çürütür); "ihbar pazartesi" ↔ `ded_once_sigorta` (Tarık cumartesi sabahı eksperi
@@ -98,6 +102,7 @@ bloğu; mahkûmiyet gerekçelerinde 244/2 cümlesi dosyaya giren lehe bulguya (z
   9500'de bırakıldı (§10).
 - `scaleMax` 13000; ölçülen final aralığı tavanı ~13470 (G1). Güvenilirlik bonusu cred×100.
 - Çıkarım tahtalarında yanlış eşleşme: her yeni çift −50; 6. ve 12. yanlış çiftte −1 güvenilirlik ve Leyla'nın uyarısı.
+- Belge incelemesinde yanlış alet/hedef: −50 (DELIL_ANALIZI). Tanık yönlendirme: −1.500 ("Etik ihlali" satırı).
 
 ## 8. Node grafiği
 Hikâye kitabı §3'teki harita kaynağa birebir uygulandı. Parçalar: 40-briefing, 50-investigation-1, 52-inv-people,
@@ -112,7 +117,7 @@ Savcılığa bildirim (K_BILDIR) ertesi sabah başsavcılık bürosundaki kısa 
 | G1 | BERAAT_B | 13470 | Tam soruşturma; savcılığa bildirim; bilirkişi, Tarık, Yaşar, Nalan; masumiyet savunması |
 | TIPIK | BERAAT_E | 13230 | Aynı soruşturma; bildirmez (bekler); usul savunması |
 | G3 | NITELENDIRME | 6810 | E-posta bulunmaz, hesap-açık maddesi okunmaz (rıza yok); imaj çürütülür, bilirkişi dinlenir; terditli savunma |
-| G5 | KISMI | 6120 | Rıza kurulur; imajın çatlakları birleştirilmez, bilirkişi istenmez, cihaz/hat kurulmaz |
+| G5 | KISMI | 6120 | Rıza kurulur; imajın çatlakları birleştirilmez; bilirkişi yalnızca dilekçede istenir (ara kararla atanır, rapor gelir) ama dinlenmez; cihaz/hat kurulmaz |
 | G4 | MAHKUMIYET | 1415 | Dağınık soruşturma: e-posta yok, genel müdür vekilsiz ziyaret edilir, uzman raporu kabul edilir; duygusal savunma |
 | ETIK | ETIK | 8760 | Ara evresinde müvekkile izinsiz giriş yaptırılır |
 | W | COKUS | 9100 | Tipik soruşturma ve ara evresi; bilirkişi dinlenir; Tarık'a art arda ilgisiz belge, ♥0 → azil, erteleme |
@@ -131,6 +136,24 @@ Savcılığa bildirim (K_BILDIR) ertesi sabah başsavcılık bürosundaki kısa 
   T_02K'deki iç cep jesti artık bir kurulumla eşleşmiyor. Soğuk açılıştaki "doktor" ve imzasız notun krem kâğıdı ancak
   ara evresinde, poliçe sorusundan sonra Nalan'ın cümleleriyle karşılık bulur ve Deniz "benzerlik delil değildir" der.
   Genel müdürü adıyla hedef alan seçenekler önceki turdaki gibi delile bağlı.
+
+- **Şeytanın avukatı turu (2026-10-21, ikinci):** delta küçültme fixpoint'e kadar (6 geçiş) yeniden koşuldu:
+  TIPIK'ten en kısa beraat **155**, G1'den **153** aksiyon (tipik 233 → %66); BERAAT_B için **163** (%70). Hepsi %60
+  sınırının üstünde ve rıza + imaj çöküşü + cihaz + ara evresi bulgusu zincirini kuruyor.
+- **Kazanılmamış bilgi denetimi (aynı tur):** her golden path'in satır dökümü, oyuncunun elindeki delile karşı tarandı.
+  Düzeltilenler: PR_T1'deki "Operatör kaydındaki baz istasyonu da Görükle" yalnızca `clue_hat_gm`/`ev_operator` varken
+  (yoksa "Not ettim; elimde bunu bir şeye bağlayacak kâğıt yok"); ARA_GIRIS "bir kullanıcı adı, bir cihaz, bir hat, bir
+  poliçe… bir yüz" yerine gelen müzekkere cevabı sayısına göre üç varyant (ARA_GIRIS_3/4 DECISION zinciri); ARA_SON_1
+  poliçe yalnızca `ev_zeyil` + `fact_gm`; ARA_SON_2 "bir isim buldum" yalnızca `fact_gm`; ARA_SON'da Leyla'nın "yarın bir
+  isim kürsüye oturabilir"i `fact_gm`'e bağlı, Görükle villaları ve dörtlü liste kaldırıldı; ARA_LEYLA ve ARA_KARAR_SEC /
+  K_BILDIR'deki "kart, zimmet, hat, poliçe" listeleri genelleştirildi. Bilirkişi süreklilik: dilekçedeki bilirkişi
+  talebi (DIL_BILIRKISI) H1_05B'de `bilirkisi_atandi`yı da kaldırır (tek bayrak); T_00G_*, T_00, ARA_HAKAN (HA_DISK
+  dahil) ve ARA_LEYLA'daki Sema/rapor satırları bilirkişi yoksa başka varyanta düşer; "kibrini çatlattık" yalnızca
+  `contra_b2`/`contra_b3` ile. G4 dökümünde artık hiçbir kazanılmamış iddia yok.
+- **Diğer:** INV_DIL'e DIL_HTS, H1_05'e R_HTS uzun ve hukuki görünen tuzak talepleri eklendi; DIL_BILIRKISI ve R_OPR
+  etiketleri kısaltıldı. Belge incelemesinde yanlış alet −20 → **−50**. Soruşturma ve ara evresi yer kartlarından gün
+  adları kaldırıldı (sahne sırası serbest). INV_SABAH'ta Yaşar'ın bakışı idari binadan kulübe saatine çevrildi; araba
+  kaldı, iki ipucunu bağlayan kesme yok. Hakan'ın dosya listesinde "çocuk" yerine "hesap ele geçirme".
 
 ## 11. Süre ve sözcük ölçümü
 `npm run case:duration -- silinen-dosyalar` (2026-10-21):

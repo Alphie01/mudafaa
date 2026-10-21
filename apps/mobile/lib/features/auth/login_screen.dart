@@ -5,7 +5,7 @@ import '../../design_system/tokens/px_colors.dart';
 import '../../design_system/tokens/px_text.dart';
 import '../../design_system/widgets/px_box.dart';
 
-/// Giriş: e-posta/şifre (kayıt, şifre sıfırlama) ve misafir olarak oyna.
+/// Giriş: e-posta/şifre (kayıt, şifre sıfırlama), Google, Apple (Apple platformları) ve misafir olarak oyna.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
   @override
@@ -79,6 +79,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ]),
             const SizedBox(height: 18),
+            PxButton(label: 'Google ile devam et', tone: PxTone.blue, onTap: _busy ? null : () => _run(AuthActions.google)),
+            if (AuthActions.appleAvailable) ...[
+              const SizedBox(height: 12),
+              PxButton(label: 'Apple ile devam et', tone: PxTone.secondary, onTap: _busy ? null : () => _run(AuthActions.apple)),
+            ],
+            const SizedBox(height: 12),
             PxButton(label: 'Misafir olarak oyna', tone: PxTone.secondary, onTap: _busy ? null : () => _run(AuthActions.guest)),
             if (_error != null) Padding(padding: const EdgeInsets.only(top: 16), child: Text(_error!, textAlign: TextAlign.center, style: PxText.body(20, color: PxColors.coral))),
             if (_info != null) Padding(padding: const EdgeInsets.only(top: 16), child: Text(_info!, textAlign: TextAlign.center, style: PxText.body(20, color: PxColors.greenHi))),

@@ -9,6 +9,7 @@ import '../../design_system/motion/motion_toggle.dart';
 import '../../design_system/tokens/px_colors.dart';
 import '../../design_system/tokens/px_text.dart';
 import '../../design_system/widgets/px_box.dart';
+import '../../design_system/widgets/sprite.dart';
 import '../../design_system/widgets/states.dart';
 
 /// Ana menü: başlık, adliye illüstrasyonu, DEVAM ET, DAVA DOSYALARI, profil ve sonuç sayıları.
@@ -126,7 +127,33 @@ class _Count extends StatelessWidget {
   Widget build(BuildContext context) => Row(mainAxisSize: MainAxisSize.min, children: [Container(width: 10, height: 10, color: color), const SizedBox(width: 6), Text(label, style: PxText.body(19))]);
 }
 
-/// Adliye illüstrasyonu (gece gökyüzü + sütunlu bina + konuşma balonu), piksel bloklarla.
+/// Oyuncunun sabit sprite'ı (Av. Deniz Arslan; content/shared/sprites/avukat.json ile aynı).
+const _playerSprite = <String, dynamic>{
+  'rows': [
+    '....kkkkkkkk....',
+    '...khhhhhhhhk...',
+    '...khhhhhhhhk...',
+    '...khsssssshk...',
+    '...kssssssssk...',
+    '...ksessssesk...',
+    '...kssssssssk...',
+    '...ksssSSsssk...',
+    '....kssssssk....',
+    '.....kkSSkk.....',
+    '...kkbwrrwbkk...',
+    '..kbbbwrrwbbbk..',
+    '..kbbbbrrbbbbk..',
+    '..kbBbbrrbbBbk..',
+    '..kbBbbbrbbBbk..',
+    '..kSbbbbbbbbSk..',
+    '...kBBBBBBBBk...',
+    '...kBBBkkBBBk...',
+    '...kBBBkkBBBk...',
+    '..kkkkk..kkkkk..',
+  ],
+};
+
+/// Adliye illüstrasyonu (gece gökyüzü + sütunlu bina), önünde avukat ve konuşma balonu, piksel bloklarla.
 class _Courthouse extends StatelessWidget {
   const _Courthouse();
   @override
@@ -142,7 +169,11 @@ class _Courthouse extends StatelessWidget {
           Expanded(child: Container(margin: const EdgeInsets.symmetric(horizontal: 70), color: PxColors.parchment, child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: List.generate(5, (_) => Container(width: 12, color: PxColors.parchmentDk))))),
           Container(height: 10, color: PxColors.parchmentDk),
         ])),
-        Positioned(right: 16, top: 20, child: PxBox(color: PxColors.white, padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), child: Text('Müvekkilim masum, Sayın Hâkim!', style: PxText.body(16, color: PxColors.ink)))),
+        // Avukat adliyenin merdiveninde; balon onun sözü.
+        const Positioned(left: 26, bottom: 2, child: PixelSprite(sprite: _playerSprite, px: 3.5)),
+        Positioned(left: 70, top: 22, child: PxBox(color: PxColors.white, padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), child: Text('Müvekkilim masum, Sayın Hâkim!', style: PxText.body(16, color: PxColors.ink)))),
+        Positioned(left: 74, top: 50, child: Container(width: 8, height: 8, color: PxColors.white)),
+        Positioned(left: 66, top: 58, child: Container(width: 6, height: 6, color: PxColors.white)),
       ]),
     );
   }

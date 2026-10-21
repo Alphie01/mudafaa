@@ -253,7 +253,7 @@ export const inv1Hub: CasePart = {
         ~ Karşı taraf. Avukatı yok. Öfkesi haklı, hedefi yanlış olabilir. Ve ne söylersem söyleyeyim, duruşmada yeniden duyacağım.
       `),
       choices: [
-        option('AK1_A', 'Dinlerim. Ama dosyayı sizinle konuşamam; söyleyecekleriniz mahkemede.', {
+        option('AK1_A', 'Dinlerim; ama dosyayı mahkemede konuşuruz.', {
           good: 'Avukatı olmayan karşı tarafla nazik ama mesafeli konuşmak doğrudur: yanıltmadan, söz vermeden, mahkemeyi göstererek (TBB Meslek Kuralları).',
           category: 'USUL_BILGISI',
           score: { USUL_BILGISI: 20 },
@@ -306,7 +306,7 @@ export const inv1Hub: CasePart = {
         ~ Bugün sahaya çıktım; birilerinin kapısını çaldım. Ve bu akşam biri, kızın kapısını çaldı. Kim olduğunu bilmiyorum. Ama biri tedirgin.
       `),
       choices: [
-        option('AK2_A', 'Mesajın ekran görüntüsünü alalım; savcılığa bildirelim.', {
+        option('AK2_A', 'Ekran görüntüsünü alalım, savcılığa bildirelim.', {
           good: 'Müvekkile yönelik tehdit belgelenir ve savcılığa bildirilir (TCK 106; CMK 158). Avukat faili kendisi aramaz.',
           category: 'USUL_BILGISI',
           score: { USUL_BILGISI: 30 },
@@ -319,7 +319,7 @@ export const inv1Hub: CasePart = {
           `),
           next: 'INV1_HUB',
         }),
-        option('AK2_B', 'Ciddiye almayın; böyle mesajlar çok gelir.', {
+        option('AK2_B', 'Ciddiye almayın; bu dosyada böyle mesajlar çok gelir.', {
           neutral: 'Tehdit belgelenmezse sonradan delil olarak kullanılamaz.',
           responses: B(S`
             sevim: Siz ciddiye almayın. Ben annesiyim, ben alırım.
@@ -402,6 +402,11 @@ export const inv1Hub: CasePart = {
           leyla: Avukat müvekkiline yalan söyletmez. Susma hakkını hatırlatır; doğrunun bedelini anlatır. Gerisi onun.
           leyla: Ve dilekçeni bugün ver. Beş gün kuralı, beş gün değil; senin unutkanlığına verilmiş son şanstır.
           - Leyla çekmecesinden eski bir dosya çıkardı, kapağına bakmadan geri koydu. Bazı dosyalar açılmak için değil, orada durduklarını bilmek için saklanır.
+          > O dosya ne?
+          leyla: Bir hata. Benim. Otuz yıl önce bir genci savundum; masumdu, ben öyle biliyordum. Kâğıtları toplamadım; inancımı topladım. Hâkim inancımı okumadı.
+          leyla: O gün bir şey öğrendim, Deniz: bir avukatın inancı, dosyaya girmeyen tek delildir. Yarın, öbür gün, ne hissedersen hisset; dilekçeye yalnızca isteyebildiğin kâğıtları yaz.
+          - Çayından bir yudum aldı; soğumuştu, memnun oldu. Pencerenin dışında yağmur, kaldırımdaki bir kartonu yavaşça eritiyordu.
+          leyla: Ve Ece'ye kızma. Bir kodu okudu diye kendini aptal sanıyor. Aptal değil; yalnız. Dolandırıcılar aptalları değil, yalnızları bulur.
         `),
       ],
       choices: [
@@ -413,10 +418,12 @@ export const inv1Hub: CasePart = {
     choiceNode('INV1_DIL', {
       ...INV1,
       title: 'Delil dilekçesi (CMK 177)',
-      prompt: 'Mahkemeye delil dilekçesi. Üç talep hakkın var; her birini dikkatle seç. Seçtiğin talep geri alınmaz.',
+      prompt:
+        'Mahkemeye delil dilekçesi. Üç talep hakkın var ve duruşmadaki taleplerin de bu haktan düşer. Yalnızca araştırmanın dayanak gösterdiği kayıtları isteyebilirsin.',
       hud: ['dil_hak'],
       choices: [
         option('DIL_LOG', 'Bankadan mobil şubeye tanımlı cihazlar ve oturum kayıtları', {
+          visibleWhen: flag('fact_polis_eksik'),
           cost: [{ var: 'dil_hak', amount: 1 }],
           score: { USUL_BILGISI: 30 },
           effects: [raise('dl_log')],
@@ -424,6 +431,7 @@ export const inv1Hub: CasePart = {
           next: '$stay',
         }),
         option('DIL_HTS', 'Müvekkilin hattı için 3–5 Kasım iletişim tespiti, IMEI dahil', {
+          visibleWhen: any(has('clue_simyok'), has('clue_iphone_imei')),
           cost: [{ var: 'dil_hak', amount: 1 }],
           score: { USUL_BILGISI: 30 },
           effects: [raise('dl_hts')],
@@ -431,6 +439,7 @@ export const inv1Hub: CasePart = {
           next: '$stay',
         }),
         option('DIL_BAYI', 'Operatörden SIM değişikliğinde kullanılan belgeler', {
+          visibleWhen: has('ev_sim_dokum'),
           cost: [{ var: 'dil_hak', amount: 1 }],
           score: { USUL_BILGISI: 30 },
           effects: [raise('dl_bayi')],
@@ -438,6 +447,7 @@ export const inv1Hub: CasePart = {
           next: '$stay',
         }),
         option('DIL_ATM', 'Bankadan ATM kamera görüntüleri', {
+          visibleWhen: has('clue_qr_atm'),
           cost: [{ var: 'dil_hak', amount: 1 }],
           score: { USUL_BILGISI: 20 },
           effects: [raise('dl_atm')],
@@ -471,6 +481,8 @@ export const inv1Hub: CasePart = {
       lines: B(S`
         - Mantar panoya iğneler, iğnelere kırmızı ip. Leyla bunu "çocuk oyuncağı" diye küçümser, sonra geçerken bir ipi düzeltir.
         ~ İki kartı yan yana koy. Birbirini açıklıyorsa, duruşmada kullanabileceğim bir şey doğar. Açıklamıyorsa, kendimi kandırıyorumdur.
+        - Panonun ortasında boş bir alan bıraktım. Kaan için. Bir isim yok, bir yüz yok; yalnızca iki numara, bir ses ve bir asansör. Boşluğun da bir şekli var.
+        ~ Leyla'nın sözü: "İpi gerdiğin her yer bir iddiadır. İddianın altına kâğıt koyamıyorsan, ipi gevşet."
       `),
       pool: POOL_INV1,
       recipes: INV1_RECIPES.map(([id, a, b, ded, title, text]) => deduce(id, a, b, ded, title, text)),
@@ -580,10 +592,10 @@ export const inv1Hub: CasePart = {
       title: 'Gece yarısı',
       background: 'buro_gece',
       lines: B(S`
-        - Pano bitmişti; ya da benim bitirebileceğim kadar bitmişti. Kartlar, iğneler, ipler. Ortada bir boşluk: Kaan. Etrafında Ece, Nurettin, bir bayi, bir iş merkezi.
+        - Pano bitmişti; ya da benim bitirebileceğim kadar bitmişti. Kartlar, iğneler, ipler. Ortada bir boşluk: Kaan. Etrafında bir kız, bir öğretmen ve bir yıl.
         - Leyla ceketini giyerken kapıda durdu.
         leyla: Yarın Ece kürsüde ne söylerse, sen onu duy. İstediğini değil.
-        - Büroda tek başıma kaldım. Masada soğumuş bir çay, ekranda bankanın yazısını bekleyen bir UYAP sekmesi, camda yağmur. Bursa'nın gece yarısı sesi: uzaklarda bir siren, yakınlarda bir oluk.
+        - Büroda tek başıma kaldım. Masada soğumuş bir çay, ekranda açık bir UYAP sekmesi, camda yağmur. Bursa'nın gece yarısı sesi: uzaklarda bir siren, yakınlarda bir oluk.
         - Gitti. Saat biri geçerken telefonum titredi. Ece'den bir mesaj.
         ece{phone}: Uyuyamadım. Yarın ne giyeyim? İş görüşmesine gider gibi mi?
         ~ Bir yıl önce bir iş görüşmesine giderken her şeyini kaybetti. Şimdi aynı kıyafeti mahkemeye giymek istiyor.

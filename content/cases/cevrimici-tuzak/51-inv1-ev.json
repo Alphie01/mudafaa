@@ -762,7 +762,7 @@
         {
           "id": "TAV_A",
           "kind": "OPTION",
-          "label": "Doğruyu anlatmanı öneririm. Notu ve mesajı biz sunarız; neyi okuduğunu bilmediğini sen anlatırsın.",
+          "label": "Doğruyu anlat; notu ve mesajı biz sunarız, yalnız kalmayacaksın.",
           "responses": [
             {
               "lines": [
@@ -805,7 +805,7 @@
         {
           "id": "TAV_B",
           "kind": "OPTION",
-          "label": "Bunu kimse bilmiyor. İfadendeki gibi devam et: kod vermedin.",
+          "label": "Bunu kimse bilmiyor. İfadendeki gibi devam et: kod vermedin, bir şey okumadın.",
           "responses": [
             {
               "lines": [
@@ -823,7 +823,8 @@
           "effects": [
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -100 },
             { "type": "VAR", "var": "ece_inkar", "op": "set", "value": true },
-            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 }
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "cred", "op": "dec", "value": 1 }
           ],
           "quality": {
             "q": "BAD",
@@ -834,7 +835,7 @@
         {
           "id": "TAV_C",
           "kind": "OPTION",
-          "label": "Bu konuda susma hakkın var. Sorulursa cevap vermeyebilirsin.",
+          "label": "Susma hakkın var; sorulursa cevap vermeyebilirsin.",
           "responses": [
             {
               "lines": [
@@ -881,6 +882,10 @@
               "speaker": "player",
               "text": "Odalar yalan söylemez. Sadece sorulmayan soruları cevaplamaz.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masanın kenarında bir fincan, dibinde bir yıllık bir kahve izi. Ece onu yıkamamıştı; ya da yıkamaya elleri varmamıştı. Bir odanın zamanı bazen bir fincanda durur."
             }
           ]
         }
@@ -1038,7 +1043,7 @@
       "chapter": "Bölüm 2 · Soruşturma",
       "eyebrow": "DAVA #02 · SORUŞTURMA",
       "title": "Operatör mağazası",
-      "background": "sokak_gece",
+      "background": "sokak_yagmur",
       "lines": [
         {
           "lines": [
@@ -1046,7 +1051,7 @@
               "speaker": "narrator",
               "text": "YILDIRIM · OPERATÖR MAĞAZASI · 17.40",
               "style": "card",
-              "bg": "sokak_gece"
+              "bg": "sokak_yagmur"
             },
             {
               "speaker": "narrator",

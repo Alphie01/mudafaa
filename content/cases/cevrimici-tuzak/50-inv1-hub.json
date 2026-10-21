@@ -271,7 +271,7 @@
         {
           "id": "AK1_A",
           "kind": "OPTION",
-          "label": "Dinlerim. Ama dosyayı sizinle konuşamam; söyleyecekleriniz mahkemede.",
+          "label": "Dinlerim; ama dosyayı mahkemede konuşuruz.",
           "responses": [
             {
               "lines": [
@@ -430,7 +430,7 @@
         {
           "id": "AK2_A",
           "kind": "OPTION",
-          "label": "Mesajın ekran görüntüsünü alalım; savcılığa bildirelim.",
+          "label": "Ekran görüntüsünü alalım, savcılığa bildirelim.",
           "responses": [
             {
               "lines": [
@@ -464,7 +464,7 @@
         {
           "id": "AK2_B",
           "kind": "OPTION",
-          "label": "Ciddiye almayın; böyle mesajlar çok gelir.",
+          "label": "Ciddiye almayın; bu dosyada böyle mesajlar çok gelir.",
           "responses": [
             {
               "lines": [
@@ -655,6 +655,23 @@
             {
               "speaker": "narrator",
               "text": "Leyla çekmecesinden eski bir dosya çıkardı, kapağına bakmadan geri koydu. Bazı dosyalar açılmak için değil, orada durduklarını bilmek için saklanır."
+            },
+            { "speaker": "player", "text": "O dosya ne?" },
+            {
+              "speaker": "leyla",
+              "text": "Bir hata. Benim. Otuz yıl önce bir genci savundum; masumdu, ben öyle biliyordum. Kâğıtları toplamadım; inancımı topladım. Hâkim inancımı okumadı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "O gün bir şey öğrendim, Deniz: bir avukatın inancı, dosyaya girmeyen tek delildir. Yarın, öbür gün, ne hissedersen hisset; dilekçeye yalnızca isteyebildiğin kâğıtları yaz."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Çayından bir yudum aldı; soğumuştu, memnun oldu. Pencerenin dışında yağmur, kaldırımdaki bir kartonu yavaşça eritiyordu."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Ve Ece’ye kızma. Bir kodu okudu diye kendini aptal sanıyor. Aptal değil; yalnız. Dolandırıcılar aptalları değil, yalnızları bulur."
             }
           ]
         }
@@ -685,13 +702,14 @@
       "hud": ["dil_hak"],
       "prompt": {
         "speaker": "narrator",
-        "text": "Mahkemeye delil dilekçesi. Üç talep hakkın var; her birini dikkatle seç. Seçtiğin talep geri alınmaz."
+        "text": "Mahkemeye delil dilekçesi. Üç talep hakkın var ve duruşmadaki taleplerin de bu haktan düşer. Yalnızca araştırmanın dayanak gösterdiği kayıtları isteyebilirsin."
       },
       "choices": [
         {
           "id": "DIL_LOG",
           "kind": "OPTION",
           "label": "Bankadan mobil şubeye tanımlı cihazlar ve oturum kayıtları",
+          "visibleWhen": { "flag": "fact_polis_eksik" },
           "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [
@@ -708,6 +726,7 @@
           "id": "DIL_HTS",
           "kind": "OPTION",
           "label": "Müvekkilin hattı için 3–5 Kasım iletişim tespiti, IMEI dahil",
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_simyok" }, { "hasEvidence": "clue_iphone_imei" }] },
           "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [
@@ -724,6 +743,7 @@
           "id": "DIL_BAYI",
           "kind": "OPTION",
           "label": "Operatörden SIM değişikliğinde kullanılan belgeler",
+          "visibleWhen": { "hasEvidence": "ev_sim_dokum" },
           "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [
@@ -740,6 +760,7 @@
           "id": "DIL_ATM",
           "kind": "OPTION",
           "label": "Bankadan ATM kamera görüntüleri",
+          "visibleWhen": { "hasEvidence": "clue_qr_atm" },
           "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [
@@ -804,6 +825,15 @@
             {
               "speaker": "player",
               "text": "İki kartı yan yana koy. Birbirini açıklıyorsa, duruşmada kullanabileceğim bir şey doğar. Açıklamıyorsa, kendimi kandırıyorumdur.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Panonun ortasında boş bir alan bıraktım. Kaan için. Bir isim yok, bir yüz yok; yalnızca iki numara, bir ses ve bir asansör. Boşluğun da bir şekli var."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın sözü: “İpi gerdiğin her yer bir iddiadır. İddianın altına kâğıt koyamıyorsan, ipi gevşet.”",
               "style": "thought"
             }
           ]
@@ -1163,13 +1193,13 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "Pano bitmişti; ya da benim bitirebileceğim kadar bitmişti. Kartlar, iğneler, ipler. Ortada bir boşluk: Kaan. Etrafında Ece, Nurettin, bir bayi, bir iş merkezi."
+              "text": "Pano bitmişti; ya da benim bitirebileceğim kadar bitmişti. Kartlar, iğneler, ipler. Ortada bir boşluk: Kaan. Etrafında bir kız, bir öğretmen ve bir yıl."
             },
             { "speaker": "narrator", "text": "Leyla ceketini giyerken kapıda durdu." },
             { "speaker": "leyla", "text": "Yarın Ece kürsüde ne söylerse, sen onu duy. İstediğini değil." },
             {
               "speaker": "narrator",
-              "text": "Büroda tek başıma kaldım. Masada soğumuş bir çay, ekranda bankanın yazısını bekleyen bir UYAP sekmesi, camda yağmur. Bursa’nın gece yarısı sesi: uzaklarda bir siren, yakınlarda bir oluk."
+              "text": "Büroda tek başıma kaldım. Masada soğumuş bir çay, ekranda açık bir UYAP sekmesi, camda yağmur. Bursa’nın gece yarısı sesi: uzaklarda bir siren, yakınlarda bir oluk."
             },
             { "speaker": "narrator", "text": "Gitti. Saat biri geçerken telefonum titredi. Ece’den bir mesaj." },
             {

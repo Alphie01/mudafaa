@@ -1,0 +1,424 @@
+import {
+  cont,
+  inc,
+  meet,
+  option,
+  raise,
+  says,
+  set,
+  story,
+  when,
+  otherwise,
+  flag,
+} from '../../../tools/content/src/kit/index.js';
+import type { CasePart } from '../../../tools/content/src/kit/index.js';
+import { BRIEF, D, Nx, PRO, S, T, card, p1, voice } from './shared.js';
+
+// 40-briefing: soğuk açılış (PR_00), karakol (PR_01), Bora büroda (BR_00), ceza aralığı (BR_01), devir (BR_01B),
+// dosya ekranı + strateji (BR_02). Kimin önce saldırdığı soğuk açılışta görünmez.
+
+export const briefing: CasePart = {
+  nodes: [
+    story('PR_00', {
+      ...PRO,
+      title: 'Gece 01.39',
+      background: 'sokak_karanlik',
+      lines: says(
+        card('3 KASIM · GECE 01.39 — SETBAŞI, BURSA', 'sokak_karanlik'),
+        Nx(
+          'Gökdere üç gündür taşkındı. Köprünün altındaki sarı lamba, suyun üstünde titreyen bir yara gibi yanıyordu.',
+        ),
+        Nx('Gölge’nin tabelasındaki G harfi üç aydır yanmıyordu. Dışarıdan bakan, “ölge” okurdu. Kimse düzeltmemişti.'),
+        Nx(
+          'İçeride on bir müşteri, bir garson, bir barmen vardı. Saat ikiye yaklaşıyordu; rakı şişeleri boşalmış, sesler yükselmişti.',
+        ),
+        Nx(
+          'Koyu ahşap bir tezgâh, pirinç bir ayak demiri, duvarda solmuş bir fotoğraf. Tavanda ağır ağır dönen bir vantilatör; kasımda bile dönerdi, dumanı dağıtmak için.',
+        ),
+        Nx(
+          'Masaların birinde bir doğum günü pastası, üstünde eğri bir mum. Bir başkasında iki ceket, bir sandalyenin arkasına asılmış. Kolonun gölgesinde biri kahkaha atıyordu.',
+        ),
+        voice('BİR MASADAN', 'Bir duble daha! Bugün benim günüm, kardeşim, benim günüm!'),
+        voice('BAŞKA BİR MASADAN', 'Yeter artık, kalkalım. Yağmur dinmeyecek.'),
+        Nx('Tezgâhın arkasında biri bardak siliyordu. Bardak çoktan temizdi.'),
+        Nx('Saat 01.00’de tezgâhın altında bir şey tık etti. Kimse duymadı. Kimse duymaması gereken bir sesti.'),
+        Nx('Sonra, içeriden bakan biri için bile her şey bir anda karardı.', { bg: 'siyah' }),
+        voice('BİR SES', 'Bırak.'),
+        voice('İKİNCİ SES', 'Sen kim oluyorsun be? Sen kim oluyorsun?'),
+        voice('KADIN SESİ', 'Tamam, tamam, bir şey yok—'),
+        voice('BİR SES', 'Çık.'),
+        voice('İKİNCİ SES', 'Bana bak. Bana bak dedim.'),
+        Nx('Bir camın tahtaya çarpıp kırılma sesi. İnce, temiz, bir zil gibi.', { fx: 'flash' }),
+        Nx('Bir tabure devrildi. Biri bağırdı. Kimin kimi tuttuğunu karanlık söylemedi.', { fx: 'shake' }),
+        voice('KADIN SESİ', 'Kan! Kan var—'),
+        Nx(
+          'Yere düşen bir gövdenin boğuk sesi. Sonra, kısa bir sessizlik. Barlarda kavgadan sonraki sessizlik, öncekinden daha gürültülüdür.',
+        ),
+        voice('ÜÇÜNCÜ SES', 'Bırak onu! Bırak dedim!'),
+        Nx('Cam kırıklarının üstünde bir ayakkabı. Bir şey kayarak uzaklaştı; masa ayağına çarpıp durdu.'),
+        voice('BİR SES', 'Arka kapı. Git. Seni burada görmedim.', 'whisper'),
+        voice('KADIN SESİ', 'Ama abi—', 'whisper'),
+        voice('BİR SES', 'Git.', 'whisper'),
+        Nx('Mutfak kapısı açıldı, kapandı. Yağmur içeri bir an girdi, çıktı.'),
+        Nx('Sonraki on saniyeyi dört kişi dört ayrı biçimde anlatacaktı. Biri hiç anlatmayacaktı.'),
+        Nx('Saat 01.50’de biri 112’yi aradı. Sesi alçak ve sakindi. Arayan, sonradan sanık olacak adamdı.', {
+          fx: 'fade',
+        }),
+      ),
+      choices: [cont('PR00_DEVAM', 'Devam', 'PR_01', { role: 'PRIMARY' })],
+    }),
+    story('PR_01', {
+      ...PRO,
+      title: 'Karakol 03.30',
+      background: 'karakol',
+      lines: says(
+        card('KARAKOL · 03.30', 'karakol'),
+        Nx('Florasan vızıldıyordu. Bir masada iki sandalye, iki ayrı saatte iki ayrı adam.'),
+        voice('TANIK', 'Açıkçası bara tek başıma gitmiştim. Müştekiyi tanımam. Net olarak gördüm, her şeyi.'),
+        voice('POLİS', 'Ne gördünüz?'),
+        voice(
+          'TANIK',
+          'Barmen kadehi kırdı, yüzüne vurdu. Adam yere düştü, tezgâhtan çıktı, tekmeledi. Ben ayırmaya çalıştım.',
+        ),
+        voice('POLİS', 'Müştekiyle bir bağınız var mı? Akraba, arkadaş, iş?'),
+        voice('TANIK', 'Hayır. Hiç. Barda gördüm, o kadar.'),
+        Nx('Tanık kol saatini düzeltti. İfadesini imzalarken bir kez bile duraksamadı.'),
+        Nx('Yarım saat sonra aynı sandalyeye kırk yedi yaşında, sol kolu sargılı, iri bir adam oturdu.'),
+        voice('POLİS', 'Anlat bakalım. Ne oldu?'),
+        S('bora', 'Saldırdı. Vurdum. Bir kere.'),
+        voice('POLİS', 'Kolunuz?'),
+        S('bora', 'Bir şey değil.'),
+        voice('POLİS', 'Avukat istiyor musunuz?'),
+        S('bora', 'Gerek yok.'),
+        Nx('Polis memuru tutanağa “sanığın sol önkolunda kesik” yazdı. Bir satır. Altına çizgi çekmedi.'),
+        Nx(
+          'Komiser yardımcısı kahvesini bitirdi, saatine baktı. Sabahın dördüne çeyrek vardı. Bir kavga, iki ifade, bir kırık burun. Haftanın dördüncüsü.',
+        ),
+        Nx('Dosya o sabah kapandı sayıldı: bar sahibi, eski boksör, kırık bir burun, kırık bir kadeh.'),
+        Nx('İki ay sonra iddianame geldi. Bir hafta sonra tensip. Duruşmaya on gün kala, sanık bir avukat aradı.', {
+          fx: 'fade',
+        }),
+      ),
+      choices: [cont('PR01_DEVAM', 'Dosyayı aç', 'BR_00', { role: 'PRIMARY' })],
+    }),
+    story('BR_00', {
+      ...BRIEF,
+      title: 'Gölge’nin sahibi',
+      background: 'buro_gece',
+      onFirstEnter: [meet('deniz'), meet('bora')],
+      lines: says(
+        card('PERŞEMBE 22.10 — ARSLAN HUKUK, BURSA', 'buro_gece'),
+        T('Bursa’da kış iki şeyi getirir: yağmuru ve gece yarısı çalan kapıyı.'),
+        Nx(
+          'Kapı çalmadı. Açıldı. İri bir adam, ıslak bir kasket, sol kolunda kirli bir sargı. Eşikte durdu, içeri girmek için izin bekledi.',
+        ),
+        S('bora', 'Deniz Arslan?'),
+        D('Benim. Buyurun, oturun. Islanmışsınız.'),
+        S('bora', 'Bora. Yalçın.'),
+        Nx(
+          'Oturmadı. Cebinden bir anahtar çıkardı, masaya koydu. Zarf değil, para değil. Ağır, eski bir kapı anahtarı.',
+        ),
+        S('bora', 'Gölge’nin anahtarı. Barı kapattım. Açarsam herkes bakıyor. Kapalı da bakıyorlar.'),
+        T(
+          'Eski boksör, bar sahibi, kırık bir burun. Dosyanın yarısını kapıdan girerken okudum. Yanlış okumuş olabilir miyim?',
+        ),
+        D('İddianameyi getirdiniz mi?'),
+        S('bora', 'Getirdim. Okumadım. Okuyunca kızıyorum.'),
+        Nx(
+          'Katlanmış kâğıtları uzattı. Elleri kalın, eklemleri yamuk; yıllarca bir şeye vurmuş eller. Ama kâğıtları buruşturmadan tutuyordu.',
+        ),
+        D('Duruşma on gün sonra. Neden şimdi geldiniz?'),
+        S('bora', 'Kendim hallederim sandım. Doğruyu söylersem biter sandım.'),
+        S('bora', 'Bitmedi.'),
+      ),
+      choices: [
+        option('BR00_A', '“Önce kolunuzu göreyim.”', {
+          effects: [inc('trust', 8), raise('kol_goruldu')],
+          responses: says(
+            Nx(
+              'Bora bir an duraksadı. Sonra sargıyı yavaşça çözdü. Önkolun dış kenarında, dirsekten bileğe doğru, dikişli bir çizgi.',
+            ),
+            S('bora', 'Altı dikiş. Hemşire kız “şanslısın” dedi. Bilmem.'),
+            T(
+              'Kolun dış kenarı. İnsan yüzüne gelen bir şeye kolunu böyle kaldırır. Not aldım; henüz bir şey ifade etmiyor.',
+            ),
+            S('bora', 'Kimse sormamıştı kolu. Polis bile.'),
+          ),
+          next: 'BR00_B2',
+        }),
+        option('BR00_B', '“Ücret ve vekâletnameyi konuşalım.”', {
+          responses: says(
+            S('bora', 'Ne kadar?'),
+            D('Tarife belli. Duruşma başına, artı masraflar. Taksit yaparız.'),
+            S('bora', 'Taksit gerekmez. Bar kapalı ama param var. Şimdilik.'),
+            T('“Şimdilik.” Kapalı bir bar, her ay biraz daha az para demek.'),
+          ),
+          next: 'BR00_B2',
+        }),
+        option('BR00_C', '“Vurduğunuzu kabul ediyorsunuz, değil mi?”', {
+          effects: [inc('trust', -6), raise('deniz_sert')],
+          responses: says(
+            S('bora', 'Ettim. Bir kere.', 'kizgin'),
+            S('bora', 'Herkes bunu soruyor. Kimse neden diye sormuyor.'),
+            T('Haklı. İlk sorum yanlış soruydu.'),
+          ),
+          next: 'BR00_B2',
+        }),
+      ],
+    }),
+    story('BR00_B2', {
+      ...BRIEF,
+      title: 'Gölge’nin sahibi',
+      background: 'buro_gece',
+      onFirstEnter: [meet('leyla')],
+      lines: [
+        when(
+          flag('kol_goruldu'),
+          S(
+            'bora',
+            'Adam kadehi kırdı. Kolumu kaldırdım. Sonra vurdum. Bir kere. Yere düştü. Gerisini anlatmayacağım, saçma.',
+          ),
+          D('Saçma olan ne?'),
+          S('bora', 'Onlar ne diyorsa. Tekmeymiş. Ben yerde yatana vurmam. Ringde bile.'),
+          Nx(
+            'Leyla, kapının pervazına yaslanmıştı. Ne zamandan beri orada olduğunu bilmiyordum. Elinde bir dosya, bakışı adamın kolunda.',
+          ),
+          S('leyla', 'İyi akşamlar Bora Bey. Ben Leyla Erdem. Deniz dosyanızı alacak. İyi ellerdesiniz.'),
+          S('bora', 'Göreceğiz.'),
+          Nx(
+            'Kasketini taktı, anahtarı masada bıraktı ve çıktı. Kapıyı arkasından sessizce kapattı; iri adamlar kapıyı hep sessiz kapatır.',
+          ),
+          S('leyla', 'Az konuşan müvekkil iki şey saklar, Deniz. Ya utancını ya da birini.'),
+        ),
+        otherwise(
+          S('bora', 'Adam kadehi kırdı. Ben vurdum. Bir kere. Yere düştü. Gerisini anlatmayacağım, saçma.'),
+          D('Saçma olan ne?'),
+          S('bora', 'Onlar ne diyorsa. Tekmeymiş. Ben yerde yatana vurmam.'),
+          Nx('Leyla, kapının pervazına yaslanmıştı. Ne zamandan beri orada olduğunu bilmiyordum.'),
+          S('leyla', 'İyi akşamlar Bora Bey. Ben Leyla Erdem. Deniz dosyanızı alacak.'),
+          S('bora', 'Göreceğiz.'),
+          Nx('Kasketini taktı, anahtarı masada bıraktı ve çıktı. Kapıyı arkasından sessizce kapattı.'),
+          S('leyla', 'Az konuşan müvekkil iki şey saklar, Deniz. Ya utancını ya da birini.'),
+        ),
+      ],
+      choices: [cont('BR00B2_DEVAM', 'Leyla’nın odasına geç', 'BR_01', { role: 'PRIMARY' })],
+    }),
+    story('BR_01', {
+      ...BRIEF,
+      title: 'Ceza aralığı',
+      background: 'buro_gece',
+      lines: says(
+        Nx('Leyla’nın odası. Masada ters çevrilmiş bir çerçeve, açılmamış bir sigara paketi, soğumuş bir çay.'),
+        S(
+          'leyla',
+          'İddianame: kasten yaralama. Temel hâl, silahla işleme ve kemik kırığı. Kırık kadeh silah sayılmış.',
+        ),
+        S('leyla', 'Müşteki katılan oldu. Vekili Tolga Şen.'),
+        T('Tolga Şen. Adliye koridorlarında adı geçince insanlar dosyalarını göğüslerine bastırır.'),
+        S('leyla', 'Dosyayı açmadan önce bir şey bil: neyle karşı karşıyayız? Aralığı ve mahkemeyi söyle.'),
+      ),
+      choices: [
+        option('BR01_A', '86/1 + 86/3-e + 87/3: üst sınır 6 yıl 9 ay; asliye ceza', {
+          score: { HUKUKI_BILGI: 100 },
+          good: 'Doğru. TCK 86/1 (7550 sayılı Kanun’la 1 yıl 6 ay–3 yıl), 86/3-e yarı oranında artırım (2 yıl 3 ay–4 yıl 6 ay), 87/3 kırığın hayat fonksiyonlarına etkisine göre yarısına kadar artırım: üst sınır 6 yıl 9 ay. On yılı aşmadığı için asliye ceza görevli (5235 md. 12).',
+          responses: says(
+            S(
+              'leyla',
+              'Doğru. Alt sınır iki yıl üç ayın biraz üstünde başlar; kırığın derecesi ne kadar ağırsa o kadar yukarı.',
+              'mutlu',
+            ),
+            Nx('Sigara paketini çevirdi. Yakmadı. Yıllardır yakmıyor; yalnızca çeviriyor.'),
+            S(
+              'leyla',
+              'İki yılın üstü demek, hükmün açıklanmasının geri bırakılması da erteleme de yok demek. Bunu Bora’ya sen söyleyeceksin.',
+            ),
+          ),
+          next: 'BR_01B',
+        }),
+        option('BR01_B', 'Kırık cezayı iki katına kadar artırır: üst sınır 13 yıl 6 ay; ağır ceza', {
+          score: { HUKUKI_BILGI: -30 },
+          bad: '87/3 2006’dan beri (5560 sayılı Kanun) cezayı “yarısına kadar” artırır; “iki katına kadar” eski metin. Üst sınır 6 yıl 9 ay, görevli mahkeme asliye ceza.',
+          category: 'HUKUKI_BILGI',
+          responses: says(
+            S(
+              'leyla',
+              'Eski metni okuyorsun. 2006’dan beri kırık cezayı yarısına kadar artırır. Ağır cezaya gitmeyiz; asliye ceza.',
+              'kizgin',
+            ),
+            S(
+              'leyla',
+              'Bir de şu: temel hâlin alt sınırı geçen yıl değişti. Bir yıl altı ay. Kanunu her dosyada yeniden aç.',
+            ),
+          ),
+          next: 'BR_01B',
+        }),
+        option('BR01_C', 'Silahla işleme artırımıyla 2 yıl 3 ay–4 yıl 6 ay; asliye ceza', {
+          score: { HUKUKI_BILGI: -30 },
+          bad: 'Kemik kırığı (TCK 87/3) unutuldu. Silahla işleme artırımından sonra kırığın etkisine göre ceza yarısına kadar daha artar: üst sınır 6 yıl 9 ay.',
+          category: 'HUKUKI_BILGI',
+          responses: says(
+            S('leyla', 'Kırığı unuttun. Bu dosyanın yarısı o kırıkta. Derecesi ne olacak, kim belirleyecek?'),
+            S('leyla', 'Silahtan sonra kırık gelir; yarısına kadar artırım. Üst sınır altı yıl dokuz ay.'),
+          ),
+          next: 'BR_01B',
+        }),
+        option('BR01_D', 'Basit yaralama (86/2): şikâyete bağlı, önce uzlaştırma', {
+          score: { HUKUKI_BILGI: -50 },
+          bad: 'Basit tıbbi müdahaleyle giderilebilecek yaralama (86/2) kırıkta uygulanmaz. Silahla işlenen yaralama (86/3) şikâyet aranmaksızın kovuşturulur; şikâyetten vazgeçme davayı düşürmez.',
+          category: 'HUKUKI_BILGI',
+          responses: says(
+            S(
+              'leyla',
+              'Kırık bir burun basit tıbbi müdahale değildir. Ve silah iddiası varken şikâyete bağlılık yoktur.',
+              'kizgin',
+            ),
+            S('leyla', 'Bunu iyi öğren. Biri sana yakında para karşılığı “şikâyetten vazgeçeriz” diyecek.'),
+          ),
+          next: 'BR_01B',
+        }),
+      ],
+    }),
+    story('BR_01B', {
+      ...BRIEF,
+      title: 'Devir',
+      background: 'buro_gece',
+      lines: says(
+        S('leyla', 'Bora “meşru müdafaa” diyecek. Herkes der. Bir cümleyle kazanılmaz.'),
+        S(
+          'leyla',
+          'Dört şey ispatlayacaksın: haksız bir saldırı, o anda, saldırıyla orantılı bir karşılık, ve başka türlü korunma imkânının olmaması.',
+        ),
+        S(
+          'leyla',
+          'Biri eksikse sınırın aşılmasına düşersin. Hepsi eksikse tahrik indirimiyle yetinirsin. Hiçbiri yoksa, iki yıl on bir ay civarı.',
+        ),
+        D('Tanık “yerdeyken tekmeledi” diyor.'),
+        S(
+          'leyla',
+          'O cümle doğruysa meşru müdafaa biter. Yanlışsa tanık biter. Hangisi olduğunu kâğıtlar söyler, insanlar değil.',
+        ),
+        D('Bora “bir kere vurdum” diyor. Başka bir şey söylemiyor.'),
+        S(
+          'leyla',
+          'Az konuşan adamın tek cümlesi, çok konuşanın yüz cümlesinden ağırdır. Ama mahkeme tek cümleyle karar vermez. O cümlenin etrafını sen dolduracaksın: kâğıtla, fotoğrafla, tanıkla.',
+        ),
+        S(
+          'leyla',
+          'Ve bir şey daha: Bora sana her şeyi anlatmayacak. Anlatmadığını bul. Ama bulduğunda onu ona karşı kullanma; onun için kullan.',
+        ),
+        Nx('Ters çerçeveye bir an baktı. Ben de baktım. Hiç sormadım. Sormamam gerektiğini biliyordum.'),
+        S('leyla', 'Git dosyayı aç. Sabaha karşı ararsan açmam.'),
+        T('Açar. Hep açar. Ama aramayacağım.'),
+      ),
+      choices: [cont('BR01B_DEVAM', 'Dosyayı aç', 'BR_02', { role: 'PRIMARY' })],
+    }),
+    story('BR_02', {
+      ...BRIEF,
+      phase: 'BRIEFING',
+      title: 'Kırık Kadeh',
+      onFirstEnter: [meet('serkan'), meet('onur'), meet('tolga')],
+      blocks: [
+        {
+          type: 'profileCard',
+          character: 'bora',
+          label: 'MÜVEKKİL',
+          lines: ['Bora Yalçın, 47', 'Gölge bar’ın sahibi · sabıkasız · tutuksuz'],
+          charge: 'Kasten yaralama (TCK 86/1, 86/3-e, 87/3)',
+          demand: 'İddianame: 86/1, 86/3-e, 87/3 (üst sınır 6 yıl 9 ay)',
+        },
+        {
+          type: 'sentenceRange',
+          segments: ['green', 'green', 'gold', 'gold', 'red', 'red', 'darkred', 'darkred'],
+          markerPct: 55,
+          labels: ['Beraat', 'Tahrik · HAGB', '2 yıl 11 ay', '6 yıl 9 ay'],
+          demandLabel: 'İSTEM: 86/1 + 86/3-e + 87/3',
+        },
+        {
+          type: 'paragraph',
+          title: 'OLAY ÖZETİ',
+          text: '3 Kasım gecesi 01.40’ta, Setbaşı’ndaki Gölge bar’da sanık Bora Yalçın ile müşteri Serkan Aydemir arasında kavga çıktı. Müşteki burun kemiği kırığı ve elinde kesiyle hastaneye kaldırıldı. Tanık Onur Kılıç, sanığın kadehi kırıp müştekinin yüzüne vurduğunu ve yerde tekmelediğini söylüyor. Sanık saldırıya uğradığını ve bir kez vurduğunu söylüyor. Kayıt cihazında o saate ait görüntü yok.',
+        },
+        {
+          type: 'strengthList',
+          title: 'SAVCILIĞIN ELİNDEKİLER',
+          items: [
+            { label: 'Görgü tanığının kolluk ifadesi', strength: 'STRONG' },
+            { label: 'Geçici adli rapor: burun kırığı', strength: 'STRONG' },
+            { label: 'Emanetteki kırık kadeh', strength: 'MEDIUM' },
+            { label: 'Olay yeri tutanağı', strength: 'MEDIUM' },
+            { label: 'Sanığın kısa ifadesi', strength: 'WEAK' },
+          ],
+        },
+        {
+          type: 'choiceGroup',
+          title: 'SAVUNMA STRATEJİSİ SEÇ',
+          group: 'g_strateji',
+          hints: {
+            STR_MASUMIYET: 'Meşru müdafaa: fiil hukuka uygun; beraat hedeflenir. Uyan esas savunma ×1,5 puan.',
+            STR_USUL: 'Delilin değerlendirilmesi: tutanağı, raporu ve tanığı çürütürsün. Uyan esas savunma ×1,2 puan.',
+            STR_INDIRIM:
+              'Terditli: önce beraat; olmazsa tahrik ve kırığın derecesiyle indirim. Uyan esas savunma ×0,8 puan.',
+          },
+        },
+      ],
+      choices: [
+        option('STR_MASUMIYET', 'Meşru müdafaa', {
+          group: 'g_strateji',
+          effects: [set('strategy', 'MASUMIYET'), set('strategy_pct', 150), ...p1.start()],
+          responses: says(S('leyla', 'Cesur. Saldırıyı ondan önce kanıtlaman gerekecek. Bora’nın sözü yetmez.')),
+          next: 'BR_03',
+        }),
+        option('STR_USUL', 'Delilin değerlendirilmesi', {
+          group: 'g_strateji',
+          effects: [set('strategy', 'USUL'), set('strategy_pct', 120), ...p1.start()],
+          responses: says(
+            S('leyla', 'Tutanak gece ikide yazılmış. Acele, savunmanın en iyi tanığıdır.'),
+            S(
+              'leyla',
+              'Ama dikkat: çürütmek yetmez gibi gelebilir. Bir tanığı çökertirsin, mahkeme “emin değiliz” der. Beraat beraattir; ama Bora “emin değiliz” cümlesiyle bar açacak.',
+            ),
+            T('Önce çürüt. Sonra ne kaldığına bak. Bazen geriye kalan, aradığın şeyin kendisidir.'),
+          ),
+          next: 'BR_03',
+        }),
+        option('STR_INDIRIM', 'Terditli savunma', {
+          group: 'g_strateji',
+          effects: [set('strategy', 'INDIRIM'), set('strategy_pct', 80), ...p1.start()],
+          responses: says(S('leyla', 'Güvenli. Ama Bora’ya “haklıydın, yine de ceza alacaksın” diyebilecek misin?')),
+          next: 'BR_03',
+        }),
+      ],
+    }),
+    story('BR_03', {
+      ...BRIEF,
+      title: 'Dosya gecesi',
+      background: 'buro_gece',
+      lines: says(
+        card('PERŞEMBE 23.40 — ARSLAN HUKUK, DENİZ’İN ODASI', 'buro_gece'),
+        Nx(
+          'Büro boşalmıştı. Leyla’nın odasının ışığı yanıyordu ama kapısı kapalıydı. Yağmur pencereye vuruyor, sokak lambası camda titriyordu.',
+        ),
+        Nx(
+          'Dosyayı masaya yaydım. İnce bir dosya: bir tutanak, iki ifade, bir geçici rapor, bir emanet makbuzu. Bir adamın iki yılı, belki üç yılı, kırk sayfa bile değil.',
+        ),
+        T(
+          'İnce dosyalar tehlikelidir. Kalın dosyada herkes bir şey arar; ince dosyada herkes her şeyi bulduğunu sanır.',
+        ),
+        Nx(
+          'Tutanak: 02.10. “Kırık kadeh tezgâh önünde.” Fotoğraf numarası yok. Sanığın polisi kendisinin aradığı yazıyor; tek bir satırla, sanki önemsizmiş gibi.',
+        ),
+        Nx(
+          'Onur Kılıç’ın ifadesi: altı cümle, yirmi iki dakika. Her cümle bir kapı gibi kapanıyor: tanımam, gördüm, kırdı, vurdu, tekmeledi, ayırdım.',
+        ),
+        Nx('Bora’nın ifadesi: üç kelime. “Saldırdı. Vurdum. Bir kere.” Müdafisiz. Altında titrek bir imza.'),
+        T('Altı cümleye karşı üç kelime. Savcı altı cümleyi seçmiş. Ben olsam ben de seçerdim. Ama ben savcı değilim.'),
+        Nx(
+          'Dosyanın en sonunda, zımbası açılmamış bir ek klasörü. Üstünde “hastane evrakı” yazıyor. Kimse açmamış; zımbanın teli hâlâ parlak.',
+        ),
+        T('Yarın. Önce yere bakacağım, Leyla öyle diyor. Sonra kimsenin açmadığı her şeyi açacağım.'),
+        Nx('Lambayı söndürdüm. Masada Bora’nın anahtarı kaldı; karanlıkta bile parlıyordu.'),
+      ),
+      choices: [cont('BR03_DEVAM', 'Sabah', 'INV_SABAH', { role: 'PRIMARY' })],
+    }),
+  ],
+};

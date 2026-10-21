@@ -204,7 +204,9 @@ katip: Dilekçe verin, harcını yatırın, yarın alırsınız. Dosya inceleme 
 # adliye | 10.00 — BURSA ADLİYESİ, EMANET BÜROSU
 Bodrum kat. Metal raflar, numaralı poşetler, nem. Masada bir kayıt defteri ve soğumuş bir simit.
 katip: Melek Şen, kâtip. Dosya numarası? Tamam. Dokunmak yok, bakmak serbest. Eldiven şurada. Yarım saat.
-Masaya beş poşet dizildi. Her biri tutanaktaki bir satır. Bir hayatın yedi ay önceki sabahı, şeffaf naylonun içinde.
+Masaya dört poşet ve bir tutanak fotokopisi dizildi. Cüzdanın kendisi burada değildi; soruşturmada yediemin olarak sahibine verilmişti.
+katip: Cüzdanı savcılık müştekiye bıraktı, yediemin. Fotoğrafı varmış içinde, kadın ağlamış. Teslim tutanağı dosyada; içindekiler tek tek yazılı.
+> Her poşet tutanaktaki bir satır. Bir hayatın yedi ay önceki sabahı, şeffaf naylonun içinde.
 Bir alet seç, sonra şüpheli satıra dokun. Doğru alet ve doğru satır yeni bir ipucu verir; boş deneme bir hak götürür.
 `),
       header: { left: 'EMANET 2026/1184 · EL KOYMA TUTANAĞI', right: '7 MART · 08.15' },
@@ -214,12 +216,20 @@ Bir alet seç, sonra şüpheli satıra dokun. Doğru alet ve doğru satır yeni 
         { label: 'AÇIKLAMA', flex: 2 },
       ],
       rows: [
-        row('e1', ['1', 'Kahverengi deri kadın cüzdanı', 'İçinde: kimlik, sağlık kartı, eczane fişi, 1 fotoğraf'], {
-          cmp: {
-            cells: ['1', 'Kahverengi deri kadın cüzdanı', 'Müşteki: 1.200 TL + 2 kart · Emanette: YOK'],
-            tone: 'special',
+        row(
+          'e1',
+          [
+            '1',
+            'Kahverengi deri kadın cüzdanı',
+            'Yediemin olarak müştekiye teslim edildi; fotoğraf ve kimlik müştekide',
+          ],
+          {
+            cmp: {
+              cells: ['1', 'Kahverengi deri kadın cüzdanı', 'Müşteki: 1.200 TL + 2 kart · Teslim dökümünde: YOK'],
+              tone: 'special',
+            },
           },
-        }),
+        ),
         row('e2', ['2', 'Zarf içinde 600 TL', 'Sırt çantasının ön gözünde'], {
           mag: { cells: ['2', 'Banka zarfı, bantlı', 'Üstünde el yazısı: “ARDA – kira”'], tone: 'special' },
         }),
@@ -241,7 +251,7 @@ Bir alet seç, sonra şüpheli satıra dokun. Doğru alet ve doğru satır yeni 
           score: { DELIL_ANALIZI: 150 },
           feedback: found(
             'YENİ İPUCU',
-            'Müşteki 1.200 TL ve iki kart diyor. Emanetteki cüzdanda ikisi de yok; Arda’nın üstünden ve evinden de çıkmamış.',
+            'Müşteki 1.200 TL ve iki kart diyor. Teslim tutanağındaki cüzdan dökümünde ikisi de yok; Arda’nın üstünden ve evinden de çıkmamış.',
             '+150 SKOR · Not defterine eklendi',
           ),
         }),
@@ -285,7 +295,7 @@ Bir alet seç, sonra şüpheli satıra dokun. Doğru alet ve doğru satır yeni 
       lines: B(`
 # buro | ARSLAN HUKUK · TOPLANTI ODASI
 CD’nin örneğini dizüstüne taktım. Ekranda gri, gürültülü bir görüntü belirdi. Köşede saat: 18.42.00. Ses yok.
-Arda oturuyor. Eğiliyor. Bir şey alıyor. Açıyor. Kapatıyor. Çantasına koyuyor. Görüntü 18.44.30’da kararıyor.
+Arda oturuyor. Elinde bir cüzdan. Açıyor. Kapatıyor. Çantasına koyuyor. Görüntü 18.44.30’da kararıyor.
 > İki buçuk dakika. Savcılığın en güçlü delili. Bir kez izledim, iki kez, beş kez. Altıncıda görüntüye değil, köşedeki rakamlara bakmaya başladım.
 CD’nin yanında Kent Ulaşım’ın tek sayfalık aktarım formu. Teknisyenin imzası, bir kaşe, bir dipnot.
 `),

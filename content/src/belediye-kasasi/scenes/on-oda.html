@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sahne · Ön oda</title>
+    <!--
+  Dava #11: Mali Hizmetler Müdürlüğü ön oda; bilirkişiyle keşif.
+  Dokunma alanları SceneDef nesneleridir: PC03 (120,120,100,70) · iç tuş takımı (290,110,40,60) · takvim (20,40,70,80) · yazıcı (20,210,80,60) · dolap (230,230,90,50) · çöp (150,300,50,50).
+  Palet: zemin #141026, duvar #2b2350, kenar #120d1c.
+-->
+    <style>
+      body {
+        margin: 0;
+        background: #141026;
+      }
+      #scene {
+        position: relative;
+        width: 344px;
+        height: 380px;
+        overflow: hidden;
+        background: #141026;
+        font-family: 'Pixelify Sans', monospace;
+        color: #efe8ff;
+      }
+      #scene div {
+        position: absolute;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <!-- duvar, zemin -->
+      <div style="left: 0; right: 0; top: 0; height: 270px; background: #2b2350"></div>
+      <div style="left: 0; right: 0; top: 266px; bottom: 0; background: #4f5560; border-top: 4px solid #120d1c"></div>
+      <div
+        style="
+          left: 0;
+          right: 0;
+          top: 270px;
+          bottom: 0;
+          background: repeating-linear-gradient(90deg, rgba(18, 13, 28, 0.2) 0 2px, transparent 2px 40px);
+        "
+      ></div>
+      <!-- florasan -->
+      <div
+        style="left: 130px; top: 10px; width: 90px; height: 6px; background: #f4efe6; border: 2px solid #120d1c"
+      ></div>
+      <!-- takvim (20,40,70,80) -->
+      <div
+        style="left: 22px; top: 40px; width: 66px; height: 80px; background: #f4efe6; border: 3px solid #120d1c"
+      ></div>
+      <div
+        style="left: 22px; top: 40px; width: 66px; height: 18px; background: #c0392b; border-bottom: 2px solid #120d1c"
+      ></div>
+      <div
+        style="
+          left: 26px;
+          top: 62px;
+          width: 58px;
+          height: 52px;
+          background:
+            repeating-linear-gradient(90deg, rgba(18, 13, 28, 0.35) 0 1px, transparent 1px 8px),
+            repeating-linear-gradient(0deg, rgba(18, 13, 28, 0.35) 0 1px, transparent 1px 10px);
+        "
+      ></div>
+      <div
+        style="
+          left: 66px;
+          top: 72px;
+          width: 10px;
+          height: 10px;
+          background: transparent;
+          border: 2px solid #4a4656;
+          border-radius: 50%;
+        "
+      ></div>
+      <div
+        style="
+          left: 66px;
+          top: 92px;
+          width: 10px;
+          height: 10px;
+          background: transparent;
+          border: 2px solid #4a4656;
+          border-radius: 50%;
+        "
+      ></div>
+      <!-- masa ve ortak bilgisayar MHM-PC03 (120,120,100,70) -->
+      <div
+        style="left: 100px; top: 190px; width: 150px; height: 16px; background: #6e4a32; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 110px; top: 206px; width: 10px; height: 60px; background: #4a3a2e; border: 3px solid #120d1c"
+      ></div>
+      <div
+        style="left: 230px; top: 206px; width: 10px; height: 60px; background: #4a3a2e; border: 3px solid #120d1c"
+      ></div>
+      <div
+        style="left: 128px; top: 124px; width: 84px; height: 58px; background: #25222e; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 134px; top: 130px; width: 72px; height: 44px; background: #2f6dbb"></div>
+      <div style="left: 140px; top: 138px; width: 20px; height: 16px; background: #9cc3e6"></div>
+      <div style="left: 164px; top: 140px; width: 34px; height: 4px; background: #f4efe6"></div>
+      <div style="left: 164px; top: 148px; width: 26px; height: 4px; background: #f4efe6"></div>
+      <div style="left: 162px; top: 182px; width: 16px; height: 8px; background: #4a4656"></div>
+      <div
+        style="left: 222px; top: 170px; width: 22px; height: 20px; background: #4a4656; border: 2px solid #120d1c"
+      ></div>
+      <div style="left: 226px; top: 174px; width: 14px; height: 4px; background: #f4efe6"></div>
+      <!-- kasa odası iç kapısı ve tuş takımı (290,110,40,60) -->
+      <div
+        style="left: 284px; top: 40px; width: 56px; height: 226px; background: #4f5560; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 292px; top: 112px; width: 36px; height: 56px; background: #25222e; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 298px; top: 118px; width: 24px; height: 8px; background: #3f8a62"></div>
+      <div style="left: 298px; top: 132px; width: 8px; height: 6px; background: #cfc9c1"></div>
+      <div style="left: 310px; top: 132px; width: 8px; height: 6px; background: #7d8590"></div>
+      <div style="left: 298px; top: 142px; width: 8px; height: 6px; background: #7d8590"></div>
+      <div style="left: 310px; top: 142px; width: 8px; height: 6px; background: #cfc9c1"></div>
+      <div style="left: 298px; top: 152px; width: 8px; height: 6px; background: #7d8590"></div>
+      <div style="left: 310px; top: 152px; width: 8px; height: 6px; background: #7d8590"></div>
+      <!-- yazıcı (20,210,80,60) -->
+      <div
+        style="left: 18px; top: 236px; width: 84px; height: 34px; background: #cfc9c1; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 28px; top: 222px; width: 64px; height: 16px; background: #efe8ff; border: 2px solid #120d1c"
+      ></div>
+      <div style="left: 34px; top: 226px; width: 40px; height: 3px; background: #120d1c"></div>
+      <div style="left: 86px; top: 244px; width: 8px; height: 6px; background: #3f8a62"></div>
+      <!-- kilitli çekmeceli dolap (230,230,90,50) -->
+      <div
+        style="left: 228px; top: 218px; width: 94px; height: 48px; background: #6e4a32; border: 4px solid #120d1c"
+      ></div>
+      <div style="left: 228px; top: 240px; width: 94px; height: 4px; background: #120d1c"></div>
+      <div style="left: 270px; top: 228px; width: 10px; height: 6px; background: #e6c46a"></div>
+      <div style="left: 270px; top: 250px; width: 10px; height: 6px; background: #e6c46a"></div>
+      <div style="left: 274px; top: 224px; width: 4px; height: 4px; background: #120d1c"></div>
+      <!-- çöp kutusu (150,300,50,50) -->
+      <div
+        style="left: 156px; top: 306px; width: 38px; height: 44px; background: #4a4656; border: 3px solid #120d1c"
+      ></div>
+      <div
+        style="
+          left: 160px;
+          top: 300px;
+          width: 22px;
+          height: 10px;
+          background: #f4efe6;
+          border: 1px solid #120d1c;
+          transform: rotate(-12deg);
+        "
+      ></div>
+      <!-- müdür yardımcılığı kapısı -->
+      <div
+        style="left: 240px; top: 40px; width: 40px; height: 170px; background: #4a3a2e; border: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 248px; top: 56px; width: 24px; height: 14px; background: #e8b13c; border: 2px solid #120d1c"
+      ></div>
+    </div>
+  </body>
+</html>

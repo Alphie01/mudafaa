@@ -124,9 +124,9 @@ export const evidencePart: CasePart = {
     evidence('ev_atk', {
       type: 'ADLI_RAPOR',
       title: 'Adli Tıp kesin raporu',
-      shortText: 'Deplasmansız burun kırığı: hayat fonksiyonlarına etkisi hafif (1). Sağ el bileğinde bası izi.',
+      shortText: 'Burundaki kırığın hayat fonksiyonlarına etkisi hafif (1). Ayrıntılar inceleme ekranında.',
       description:
-        'Adli Tıp Kurumu Bursa Grup Başkanlığı: burun kemiğinde deplasmansız kırık, hayat fonksiyonlarına etkisi hafif (1. derece). Sağ el ayasında transvers kesi. Sağ el bilek dorsalinde bası/ezilme ile uyumlu ekimoz; bilekte kırık yok.',
+        'Adli Tıp Kurumu Bursa Grup Başkanlığı kesin raporu: kırığın derecesi, eldeki kesi, bilek ve gövde muayenesi. Satırlar inceleme ekranında.',
       sourceLabel: 'Adli Tıp Kurumu',
       icon: 'receipt',
       side: 'NEUTRAL',
@@ -155,7 +155,8 @@ export const evidencePart: CasePart = {
       side: 'PROSECUTION',
       strength: 'WEAK',
       tagLabel: 'KATILAN',
-      legalNote: 'Taraflarca alınan rapor uzman mütalaası niteliğindedir (CMK 67/6); resmî bilirkişi raporu yerine geçmez.',
+      legalNote:
+        'Taraflarca alınan rapor uzman mütalaası niteliğindedir (CMK 67/6); resmî bilirkişi raporu yerine geçmez.',
     }),
 
     // --- İpuçları: bar (sahne) ---
@@ -163,7 +164,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Zaman ayarlı priz',
       shortText: 'Kamera kaydedicisi bir zaman ayarlı prize bağlı: her gece 01.00’de kesiyor, 09.00’da açıyor.',
-      description: 'Kayıt cihazının fişi, tezgâhın altındaki mekanik zaman ayarlı prizde. Ayar elle değiştirilmemiş, tozlu.',
+      description:
+        'Kayıt cihazının fişi, tezgâhın altındaki mekanik zaman ayarlı prizde. Ayar elle değiştirilmemiş, tozlu.',
       sourceLabel: 'Gölge · tezgâh altı',
       icon: 'lock',
       tags: card,
@@ -172,7 +174,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'İsim kartlı önlük',
       shortText: 'Askıda siyah bir garson önlüğü; iğneli kartta “ECE” yazıyor.',
-      description: 'Dosyada bir garsondan hiç söz edilmiyor. Önlüğün cebinde bir adisyon kalemi ve bir öğrenci kartı yırtığı.',
+      description:
+        'Dosyada bir garsondan hiç söz edilmiyor. Önlüğün cebinde bir adisyon kalemi ve bir öğrenci kartı yırtığı.',
       sourceLabel: 'Gölge · mutfak kapısı',
       icon: 'magnifier',
       tags: card,
@@ -219,7 +222,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Fotoğraf 7: yerdeki sap',
       shortText: 'Kırık sap yerde, tezgâhtan bir metre uzakta; yanında yerde yatan birinin sağ eli.',
-      description: 'Fotoğraf 7, müşteki sedyeye alınmadan önce çekilmiş. Sap, elin hemen yanında; kan izi elden sapa uzanıyor.',
+      description:
+        'Fotoğraf 7, müşteki sedyeye alınmadan önce çekilmiş. Sap, elin hemen yanında; kan izi elden sapa uzanıyor.',
       sourceLabel: 'Kolluk fotoğrafları',
       icon: 'camera',
       tags: card,
@@ -228,7 +232,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Tezgâhın iç kenarındaki kan',
       shortText: 'Kan damlaları tezgâhın içinde, bar tarafında; müşteri tarafında yok.',
-      description: 'Fotoğraf 3: damlalar tezgâhın iç kenarından lavaboya doğru. İlk kanayan kişi tezgâhın arkasındaydı.',
+      description:
+        'Fotoğraf 3: damlalar tezgâhın iç kenarından lavaboya doğru. İlk kanayan kişi tezgâhın arkasındaydı.',
       sourceLabel: 'Kolluk fotoğrafları',
       icon: 'camera',
       tags: card,
@@ -322,7 +327,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Sol önkol ulnar yüzde kesi',
       shortText: 'Bora’nın kesisi sol önkolun dış kenarında (ulnar yüz), dirsekten bileğe doğru.',
-      description: 'Kolunu yüzüne siper eden birinin açıkta kalan kenarı. Adli tıp kitaplarında “savunma yarası” diye geçer.',
+      description:
+        'Kolunu yüzüne siper eden birinin açıkta kalan kenarı. Adli tıp kitaplarında “savunma yarası” diye geçer.',
       sourceLabel: 'Darp raporu',
       icon: 'magnifier',
       tags: card,
@@ -398,7 +404,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Onur ile Serkan birlikte gelmiş',
       shortText: 'Tek hesap, iki kişi, Onur’un kartı: “tanımam” diyen tanık müştekiyle aynı masadaydı.',
-      description: 'Adisyon (masa 4, 2 kişi, O. KILIÇ’ın kartı) ile kolluk ifadesindeki “müştekiyi tanımam” sözü bağdaşmıyor.',
+      description:
+        'Adisyon (masa 4, 2 kişi, O. KILIÇ’ın kartı) ile kolluk ifadesindeki “müştekiyi tanımam” sözü bağdaşmıyor.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'DEFENSE',
@@ -417,7 +424,8 @@ export const evidencePart: CasePart = {
     insight('ded_savunma', {
       type: 'BELGE',
       title: 'Bora tezgâhın arkasında kesildi',
-      shortText: 'Savunma yarası tipindeki kesi ve tezgâhın iç tarafındaki kan: ilk kesilen, kaçacak yeri olmayan Bora’ydı.',
+      shortText:
+        'Savunma yarası tipindeki kesi ve tezgâhın iç tarafındaki kan: ilk kesilen, kaçacak yeri olmayan Bora’ydı.',
       description: 'Ulnar yüzdeki kesi kolu siper etmeyle uyumlu; kan tezgâhın içinde başlıyor.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
@@ -464,12 +472,14 @@ export const evidencePart: CasePart = {
       icon: 'bulb',
       side: 'DEFENSE',
       strength: 'MEDIUM',
+      presentable: false,
     }),
     insight('ded_bilek', {
       type: 'BELGE',
       title: '“Tekme” bileğe basmaktı',
       shortText: 'Gövdede tekme izi yok; bilekte üstten bası izi: yerdeki hareket, sapı tutan eli etkisiz kılmaktı.',
-      description: 'Onur’un “yerdeyken tekmeledi” dediği an, Adli Tıp’ın bulgusuyla sapı bıraktırma hareketine dönüşüyor.',
+      description:
+        'Onur’un “yerdeyken tekmeledi” dediği an, Adli Tıp’ın bulgusuyla sapı bıraktırma hareketine dönüşüyor.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'DEFENSE',
@@ -478,6 +488,7 @@ export const evidencePart: CasePart = {
     insight('ded_video', {
       type: 'BELGE',
       title: 'Masa 7’de bir kayıt var',
+      presentable: false,
       shortText: 'Masa 7 tezgâhın karşısında; kavgadan iki dakika sonra hesabı ödeyen D. Yurt hikâye çekiyordu.',
       description: 'Kameralar kapalıydı; ama o gece en az bir telefon tezgâha bakıyordu.',
       sourceLabel: 'Çıkarım tahtası',

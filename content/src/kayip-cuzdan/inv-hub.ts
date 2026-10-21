@@ -150,7 +150,7 @@ P: Tak. Ama Ozan’ınki değil, kendi gömleğinle git. Ne yaşadıysan onu anl
 `;
 const GECE_SON = `
 Kapıda Leyla belirdi. Bu saatte burada ne aradığını sormadım; ben de buradaydım.
-leyla: Yarın kimseyi ikna etmeye çalışma. Eksik dakikayı göster. İkna, hâkimin işi.
+leyla: Yarın kimseyi ikna etmeye çalışma. Eksik olanı göster. İkna, hâkimin işi.
 leyla: Bir de… tanık kürsüdeyken onun gözünden bak. O ne gördüyse, önce onu gör. Sonra neyi göremediğini.
 > Işıkları kapattım. Panoda kartlar karanlıkta kaldı. Yarın her biri ya bir kanıt olacak ya bir kâğıt parçası.
 `;
@@ -334,7 +334,7 @@ leyla: Görüşmede sorunu sor, sonra sus. Susmayı beceremeyen avukat, müvekki
             `
 leyla: Elindekileri say. Her biri neyi gösteriyor, neyi göstermiyor? İkinci sütun birinciden önemli.
 leyla: Bir de şunu unutma: duruşmada sunduğun her şey, senin dürüstlüğünü de sunar. Yanlış kâğıdı kaldırırsan, doğru kâğıdın da ağırlığı azalır.
-leyla: Kayıp eşya suçu, yüz altmış, “malik gibi tasarruf” ister. Saklamak, harcamak, kullanmak. Arda’nın o gece ne yaptığını say. Malik gibi mi, sahibini arayan biri gibi mi?
+leyla: Kayıp eşya suçu, yüz altmış, “malik gibi tasarruf” ister: gizlemek, harcamak, kullanmak, elden çıkarmak. Arda’nın o gece ne yaptığını say. Malik gibi mi, sahibini arayan biri gibi mi?
 `,
         ),
       ],

@@ -68,6 +68,42 @@
         "category": "DELIL_ANALIZI"
       },
       {
+        "id": "h_sozlesme",
+        "when": { "not": { "hasEvidence": "ev_sozlesme" } },
+        "text": "İlandaki adresteki iş merkezine gidip yönetimden Nova’nın sözleşmesini istemedin. Kiracı olarak gösterilen kişinin adı oradaydı; işletme müdürü bir kartvizit de bırakırdı.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_iphone",
+        "when": { "not": { "hasEvidence": "clue_iphone_imei" } },
+        "text": "Ece’nin telefonunun kutusu Sevim Hanım’da duruyordu; altındaki etikette telefonun kendi kimlik numarası yazar. Kayıtlardaki cihazla karşılaştırmanın tek yolu buydu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_ded_imei",
+        "when": { "not": { "hasEvidence": "ded_imei" } },
+        "text": "Kutudaki numarayı iletişim tespitindeki cihaz numarasıyla tahtada birleştirseydin, banka SMS’lerinin Ece’nin telefonuna gitmediğini gösterebilirdin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_noter",
+        "when": { "not": { "hasEvidence": "ev_noter_yok" } },
+        "text": "Bayi işlem dosyasındaki vekâletnamenin karekodunu “Doğrula” aletiyle sorgulamadın. Belgenin hiç düzenlenmediği ortaya çıkardı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_otopark",
+        "when": { "not": { "hasEvidence": "ded_otopark" } },
+        "text": "Kuryenin tarif ettiği teslim yerini otoparkta bulup onun anlatımıyla tahtada birleştirmedin; paranın nereye gittiği bir park yerinin tabelasında yazıyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_arda_kimlik",
+        "when": { "not": { "hasEvidence": "ded_arda_kimlik" } },
+        "text": "Vekâletnamedeki vekilin adı, sanal ofis sözleşmesindeki kiracının adıyla aynıydı. İki belgeyi tahtada yan yana koymak, bir kimliğin iki sahte belgede kullanıldığını gösterirdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
         "id": "h_inkar",
         "when": { "flag": "ece_inkar" },
         "text": "Müvekkile inkâr tavsiye etmek meslek kurallarına aykırıdır (Av.K. 34) ve banka kaydı karşısında savunmayı çökertir. Doğru yol, aldatmayı belgeleriyle anlatmaktı.",

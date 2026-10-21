@@ -327,7 +327,7 @@ export const inv1Ev: CasePart = {
       choices: [
         option(
           'TAV_A',
-          'Doğruyu anlatmanı öneririm. Notu ve mesajı biz sunarız; neyi okuduğunu bilmediğini sen anlatırsın.',
+          'Doğruyu anlat; notu ve mesajı biz sunarız, yalnız kalmayacaksın.',
           {
             score: { SAVUNMA_STRATEJISI: 100 },
             effects: [raise('ece_durust'), inc('trust', 4)],
@@ -343,9 +343,9 @@ export const inv1Ev: CasePart = {
             next: 'INV1_ECE',
           },
         ),
-        option('TAV_B', 'Bunu kimse bilmiyor. İfadendeki gibi devam et: kod vermedin.', {
+        option('TAV_B', 'Bunu kimse bilmiyor. İfadendeki gibi devam et: kod vermedin, bir şey okumadın.', {
           score: { SAVUNMA_STRATEJISI: -100 },
-          effects: [raise('ece_inkar'), inc('ethics')],
+          effects: [raise('ece_inkar'), inc('ethics'), dec('cred')],
           bad: 'Avukat müvekkiline gerçeğe aykırı beyanda bulunmasını öğütleyemez (Av.K. 34; TBB Meslek Kuralları). Banka kaydı ortaya çıkınca inkâr, savunmanın en büyük yükü olur.',
           responses: B(S`
             ece: Emin misiniz? Yani… peki. Siz avukatsınız.
@@ -354,7 +354,7 @@ export const inv1Ev: CasePart = {
           `),
           next: 'INV1_ECE',
         }),
-        option('TAV_C', 'Bu konuda susma hakkın var. Sorulursa cevap vermeyebilirsin.', {
+        option('TAV_C', 'Susma hakkın var; sorulursa cevap vermeyebilirsin.', {
           neutral: 'Susma hakkı meşrudur (CMK 147/1-e); ama sessizlik, savcının anlatısına boşluk bırakır.',
           effects: [raise('ece_sus')],
           responses: B(S`
@@ -376,6 +376,7 @@ export const inv1Ev: CasePart = {
         - Ece kapının eşiğinde durdu, içeri girmedi. "Dağınık" dedi yine. Dağınık değildi; bir işe hazırlanan birinin odasıydı: masa, lamba, şarjda eski bir telefon.
         - Duvarda bir pano: kesilmiş iş ilanları, renkli raptiyeler, bir köşede bir slogan: "Bir gün evet diyecekler." Pencerenin dışında yağmur, iplere asılı çamaşırları ağırlaştırıyordu.
         ~ Odalar yalan söylemez. Sadece sorulmayan soruları cevaplamaz.
+        - Masanın kenarında bir fincan, dibinde bir yıllık bir kahve izi. Ece onu yıkamamıştı; ya da yıkamaya elleri varmamıştı. Bir odanın zamanı bazen bir fincanda durur.
       `),
       instruction: 'Dikkat çeken yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.',
       costVar: 'taps',
@@ -440,9 +441,9 @@ export const inv1Ev: CasePart = {
     story('INV1_OPERATOR', {
       ...INV1,
       title: 'Operatör mağazası',
-      background: 'sokak_gece',
+      background: 'sokak_yagmur',
       lines: B(S`
-        = YILDIRIM · OPERATÖR MAĞAZASI · 17.40 @sokak_gece
+        = YILDIRIM · OPERATÖR MAĞAZASI · 17.40 @sokak_yagmur
         - Mağaza bir akvaryum gibiydi: mavi ışık, cam, sessizce yüzen insanlar. Ece bir yıl önce aynı kapıdan, aynı saatte, ağlayarak girmişti.
         - Duvarda dev bir ekran, ekranda gülümseyen bir aile: "Hattınız, güvenliğiniz." Ece reklama bakmadı. Bir yıl önce de bakmamıştı herhalde.
         - Sıra numarası: 47. Ekranda 39 yazıyordu. Ece numarayı iki eliyle tutuyordu, sanki kaybolacakmış gibi.

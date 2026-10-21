@@ -1,41 +1,357 @@
 {
   "scenes": [
     {
-      "id": "sc_olay",
-      "title": "TODO Olay yeri · fotoğraflar",
-      "description": "TODO",
+      "id": "sc_oda",
+      "title": "Kontrol odası",
+      "description": "İkinci kat, 231. Halil Ekinci’nin yirmi yıllık masası; eşyaları koliye konmuş, masa hâlâ yerinde.",
       "width": 344,
       "height": 300,
-      "image": "img_olay",
+      "image": "img_oda",
       "objects": [
         {
-          "id": "ob_a",
-          "name": "TODO nesne A",
+          "id": "ob_takvim",
+          "name": "Masa takvimi",
           "marker": "HIDDEN",
-          "shapes": [{ "rect": { "x": 40, "y": 150, "w": 60, "h": 50 } }],
+          "shapes": [{ "rect": { "x": 196, "y": 120, "w": 40, "h": 26 } }],
           "effects": [
-            { "type": "DISCOVER", "evidence": "clue_a" },
-            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
-          ],
-          "feedback": { "text": "TODO bulunca gösterilen metin.", "short": "TODO kısa etiket A" }
-        },
-        {
-          "id": "ob_b",
-          "name": "TODO nesne B",
-          "marker": "HIDDEN",
-          "shapes": [{ "rect": { "x": 230, "y": 60, "w": 60, "h": 60 } }],
-          "effects": [
-            { "type": "DISCOVER", "evidence": "clue_b" },
+            { "type": "DISCOVER", "evidence": "clue_takvim_214" },
             { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
           ],
-          "feedback": { "text": "TODO bulunca gösterilen metin.", "short": "TODO kısa etiket B" }
+          "feedback": {
+            "text": "Masa takvimi 12 Mart’ta kalmış. Dik, kurallı bir el yazısı: “10.35 — 214 — Md. Hn.?” Arayanın dahili numarası ve bir soru işareti.",
+            "short": "Takvim"
+          }
+        },
+        {
+          "id": "ob_raf",
+          "name": "Dosya rafı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 24, "y": 40, "w": 80, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_toz_izi" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Raf tozlu; bir tek dikdörtgen temiz. Defter boyutunda. Bir şey burada yıllarca durmuş, sonra kaldırılmış.",
+            "short": "Toz izi"
+          }
+        },
+        {
+          "id": "ob_cekmece",
+          "name": "Üçüncü çekmece",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 168, "w": 50, "h": 22 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kilit" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Üçüncü çekmece. Kilidinin dili pastan kımıldamıyor; anahtarı hiç olmamış gibi. Bu çekmeceyi isteyen herkes açabilirdi.",
+            "short": "Çekmece"
+          }
+        },
+        {
+          "id": "ob_dahili",
+          "name": "Dahili telefon",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 120, "y": 120, "w": 34, "h": 24 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }],
+          "feedback": {
+            "text": "Krem rengi, ekranlı bir dahili telefon. Arayanın numarasını gösteriyor ama hafızası her gece siliniyor. Yedi hafta önceki bir sabahı hatırlamaz.",
+            "short": "Dahili"
+          }
+        },
+        {
+          "id": "ob_bardak",
+          "name": "Çay bardağı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 122, "w": 16, "h": 22 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "İnce belli bir bardak, dibinde yedi haftalık kurumuş çay. Kimse yıkamamış. Bir alışkanlığın fosili; delil değil.",
+            "short": "Bardak"
+          }
+        },
+        {
+          "id": "ob_saksi",
+          "name": "Sardunya",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 290, "y": 70, "w": 34, "h": 50 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Kurumuş bir sardunya. Toprağı çatlamış. Halil her sabah sularmış; yedi haftadır kimse sulamamış.",
+            "short": "Saksı"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_koridor",
+      "title": "İkinci kat koridoru",
+      "description": "Florasan, linolyum, sıra fişi makinesinin uzaktan gelen sesi. Bir pano, bir dolap, bir çay ocağı.",
+      "width": 344,
+      "height": 300,
+      "image": "img_koridor",
+      "objects": [
+        {
+          "id": "ob_rehber",
+          "name": "Dahili rehber panosu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 30, "y": 70, "w": 50, "h": 60 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_rehber_214" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Camlı panoda dahili liste. “201 — Müdürlük Makamı (Sekr.)”. “214 — Devir Servisi-2 (S. Kaplan, G. Erdem)”. “231 — Kontrol (H. Ekinci)”.",
+            "short": "Rehber"
+          }
+        },
+        {
+          "id": "ob_kamera",
+          "name": "Dom kamera",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 160, "y": 14, "w": 30, "h": 20 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kamera_var" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Tavanda bir dom kamera; merdivene dönük, kontrol odasının kapısı kadrajın kenarında. Etiket: “Kayıt süresi 90 gün.” Saat işliyor.",
+            "short": "Kamera"
+          }
+        },
+        {
+          "id": "ob_dolap",
+          "name": "Evrak dolabı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 100, "y": 100, "w": 50, "h": 100 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_zarf_stok" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Kahverengi iç yazışma zarfları, lastiklerle bağlı desteler. Her destenin üstünde bir barkod aralığı: “0451–0500”. Zarflar servislere zimmetle veriliyormuş.",
+            "short": "Zarflar"
+          }
+        },
+        {
+          "id": "ob_ocak",
+          "name": "Çay ocağı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 270, "y": 80, "w": 60, "h": 120 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }],
+          "feedback": {
+            "text": "Çay ocağının kapısı aralık; demlik buharı, bir radyo. İçeride yaşlı bir çaycı, bir deftere bir şey yazıyor. Seni görünce defteri kapatıyor.",
+            "short": "Çay ocağı"
+          }
+        },
+        {
+          "id": "ob_yangin",
+          "name": "Yangın dolabı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 210, "y": 140, "w": 24, "h": 40 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Kırmızı bir yangın dolabı; camında “Acil durumda kırınız.” Bu dosyada acil olan başka şeyler var.",
+            "short": "Yangın dolabı"
+          }
+        },
+        {
+          "id": "ob_sebil",
+          "name": "Su sebili",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 176, "y": 150, "w": 24, "h": 50 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Bir su sebili, boş damacana, plastik bardaklar. Herkes buradan geçer; kimse bir şey bırakmaz.",
+            "short": "Sebil"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_kamera",
+      "title": "Kamera karesi · 10.41.07",
+      "description": "Koridor kamerasının dondurulmuş karesi: grenli, mavi, merdivene dönük.",
+      "width": 344,
+      "height": 300,
+      "image": "img_kamera",
+      "objects": [
+        {
+          "id": "ob_damga",
+          "name": "Zaman damgası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 220, "y": 10, "w": 110, "h": 18 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kare_saat" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "“12.03.2027 10:41:07.” Kadrajın kenarında kontrol odasının kapısı açılıyor. Bir sonraki karede, 10:41:27, aynı kişi çıkıyor. Halil o sırada aşağıda bekliyordu.",
+            "short": "Zaman damgası"
+          }
+        },
+        {
+          "id": "ob_bilek",
+          "name": "Kapı koluna uzanan el",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 150, "w": 26, "h": 18 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kol_saat" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 },
+            {
+              "type": "IF",
+              "when": { "visited": "ARA_AKSAM" },
+              "then": [{ "type": "DISCOVER", "evidence": "clue_sinan_saat" }]
+            }
+          ],
+          "feedback": {
+            "text": "Kapı koluna uzanan sol el. Bileğinde küçük, dikdörtgen, yeşil bir ışık: dijital bir saat ekranı. Gren bile o yeşili yutamamış.",
+            "short": "Bilek"
+          }
+        },
+        {
+          "id": "ob_koltuk",
+          "name": "Koltuk altı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 112, "y": 120, "w": 34, "h": 30 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kare_zarf" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Açık renk bir ceket. Koltuğunun altında kahverengi bir köşe; bir zarfın köşesi. Çıkış karesinde o köşe yok.",
+            "short": "Ceket"
+          }
+        },
+        {
+          "id": "ob_merdiven",
+          "name": "Merdiven",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 100, "w": 70, "h": 150 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Merdivende bulanık iki takipçi; ellerinde dosyalar. Biri telefonla konuşuyor. Her sabah oradalar; bu sabah da oradaydılar.",
+            "short": "Merdiven"
+          }
+        },
+        {
+          "id": "ob_pencere",
+          "name": "Koridor penceresi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 60, "w": 70, "h": 60 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Pencerede yağmur, gren, bir ışık patlaması. Dışarıdaki bir şey değil; kameranın kendi gürültüsü.",
+            "short": "Pencere"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_arsiv",
+      "title": "Arşiv",
+      "description": "Bodrum kokulu, dar bir oda: ciltler, raflar, bir masa, tek bir pencere.",
+      "width": 344,
+      "height": 300,
+      "image": "img_arsiv",
+      "objects": [
+        {
+          "id": "ob_ciltler_defter",
+          "name": "1987 ciltleri",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 30, "y": 50, "w": 110, "h": 90 } }],
+          "activeWhen": { "flag": "fact_defter_yeri" },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_kirmizi_defter" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 80 }
+          ],
+          "feedback": {
+            "text": "1987 ciltlerinin arkasında, duvarla raf arasında: kırmızı kaplı bir defter. Ciltler yerinden oynatılmış ama kimse en arkaya uzanmamış.",
+            "short": "Defter"
+          }
+        },
+        {
+          "id": "ob_ciltler",
+          "name": "1987 ciltleri",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 30, "y": 50, "w": 110, "h": 90 } }],
+          "activeWhen": { "not": { "flag": "fact_defter_yeri" } },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }],
+          "feedback": {
+            "text": "1987 ciltleri yerinden oynatılmış; biri sırtlarını tek tek çekip bakmış. Ne aradığını bilmeden aramak, uzun sürer.",
+            "short": "Ciltler"
+          }
+        },
+        {
+          "id": "ob_zimmet",
+          "name": "Zimmet defteri",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 200, "y": 150, "w": 60, "h": 24 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_zimmet" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Evrak zimmet defteri. 1 Mart satırı: “İç yazışma zarfı, barkod 0401–0450 — teslim alan: Devir Servisi-2 — paraf: S.K.”",
+            "short": "Zimmet"
+          }
+        },
+        {
+          "id": "ob_masa",
+          "name": "Arşiv masası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 180, "y": 180, "w": 120, "h": 40 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Çizik bir masa, bir büyüteç, bir kutu ataç. Arşivciler gibi sabırlı bir masa. Söyleyecek bir şeyi yok.",
+            "short": "Masa"
+          }
+        },
+        {
+          "id": "ob_pencere_a",
+          "name": "Tek pencere",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 30, "w": 70, "h": 60 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Avluya bakan tek pencere; parmaklıklı. Yağmur damlaları demirde birikip düşüyor.",
+            "short": "Pencere"
+          }
+        },
+        {
+          "id": "ob_kutu",
+          "name": "İmha kutusu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 200, "w": 70, "h": 50 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "“İMHA — 2019” yazılı bir koli. İçinde sararmış dilekçeler. Zamanında bekletilmiş başka işler.",
+            "short": "Koli"
+          }
         }
       ]
     }
   ],
-  "assets": [{ "id": "img_olay", "kind": "IMAGE", "path": "assets/scenes/olay-yeri@4x.png" }],
+  "assets": [
+    { "id": "img_oda", "kind": "IMAGE", "path": "assets/scenes/kontrol-odasi@4x.png" },
+    { "id": "img_koridor", "kind": "IMAGE", "path": "assets/scenes/koridor@4x.png" },
+    { "id": "img_kamera", "kind": "IMAGE", "path": "assets/scenes/kamera-karesi@4x.png" },
+    { "id": "img_arsiv", "kind": "IMAGE", "path": "assets/scenes/arsiv@4x.png" }
+  ],
   "discoveryPaths": [
-    { "evidence": "clue_a", "source": { "type": "OBJECT", "id": "ob_a" } },
-    { "evidence": "clue_b", "source": { "type": "OBJECT", "id": "ob_b" } }
+    { "evidence": "clue_takvim_214", "source": { "type": "OBJECT", "id": "ob_takvim" } },
+    { "evidence": "clue_toz_izi", "source": { "type": "OBJECT", "id": "ob_raf" } },
+    { "evidence": "clue_kilit", "source": { "type": "OBJECT", "id": "ob_cekmece" } },
+    { "evidence": "clue_rehber_214", "source": { "type": "OBJECT", "id": "ob_rehber" } },
+    { "evidence": "clue_kamera_var", "source": { "type": "OBJECT", "id": "ob_kamera" } },
+    { "evidence": "clue_zarf_stok", "source": { "type": "OBJECT", "id": "ob_dolap" } },
+    { "evidence": "clue_kare_saat", "source": { "type": "OBJECT", "id": "ob_damga" } },
+    { "evidence": "clue_kol_saat", "source": { "type": "OBJECT", "id": "ob_bilek" } },
+    { "evidence": "clue_sinan_saat", "source": { "type": "OBJECT", "id": "ob_bilek" } },
+    { "evidence": "clue_kare_zarf", "source": { "type": "OBJECT", "id": "ob_koltuk" } },
+    { "evidence": "ev_kirmizi_defter", "source": { "type": "OBJECT", "id": "ob_ciltler_defter" } },
+    { "evidence": "clue_zimmet", "source": { "type": "OBJECT", "id": "ob_zimmet" } }
   ]
 }

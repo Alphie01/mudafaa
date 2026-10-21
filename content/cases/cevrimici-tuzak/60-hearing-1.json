@@ -45,6 +45,10 @@
               "speaker": "player",
               "text": "Bir yıl boyunca kimse bu satırı sormamış. Bugün bu salonda bir kez okunacak; yeter de artar da.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonu cebime koydum, sonra yeniden çıkardım, satırı bir daha okudum. Samsung. Değişmemişti. Bazı kelimeler ikinci okumada da aynı kalır; insan yine de kontrol eder."
             }
           ]
         },
@@ -83,6 +87,10 @@
             {
               "speaker": "narrator",
               "text": "Sevim Hanım sabah beşte kalkıp kızının ceketini ütülemişti; kumaşın üstünde ütünün izi, bir yıl önceki iş görüşmesinin izi gibi duruyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ece beni görünce ayağa kalktı, sonra ne yapacağını bilemeden yeniden oturdu. “Kendim gibi geldim” diye tekrarladı. “Ama kendim gibi olmak bu kadar zor muydu?”"
             },
             {
               "speaker": "narrator",
@@ -188,6 +196,10 @@
             {
               "speaker": "narrator",
               "text": "Arka sırada Sevim Hanım plastik dosyasını dizlerine bastırdı. Nurettin Aksoy öbür uçta, kollarını kavuşturmuş, tavana bakıyordu. İkisi arasında üç sıra boşluk vardı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kâtip ekranına eğildi; klavyesinin sesi, yağmurun sesine karıştı. Duvardaki saat on biri iki geçiyordu ve iki dakika ileriydi; bu salonda zaman bile biraz acele ediyordu."
             }
           ]
         }
@@ -238,7 +250,7 @@
         {
           "id": "H101_A",
           "kind": "OPTION",
-          "label": "Suçtan doğrudan zarar gördüğü için katılmasına itirazımız yok.",
+          "label": "Doğrudan zarar gören odur; katılmasına itirazımız yok.",
           "responses": [
             {
               "lines": [
@@ -314,7 +326,7 @@
         {
           "id": "H101_D",
           "kind": "OPTION",
-          "label": "Takdir mahkemenizdedir.",
+          "label": "Takdir mahkemenizdedir; ayrıca diyeceğimiz yok.",
           "responses": [{ "lines": [{ "speaker": "hakim", "text": "Katılan olarak kabulüne." }] }],
           "quality": {
             "q": "NEUTRAL",
@@ -642,7 +654,7 @@
         {
           "id": "H103_A",
           "kind": "OPTION",
-          "label": "İtiraz: soru, cevabını içinde taşıyor; sanığı yönlendiriyor.",
+          "label": "İtiraz: soru yönlendirici, cevabı içinde taşıyor.",
           "responses": [
             {
               "lines": [
@@ -654,8 +666,7 @@
           ],
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },
-            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
-            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 }
           ],
           "quality": {
             "q": "GOOD",
@@ -667,7 +678,7 @@
         {
           "id": "H103_B",
           "kind": "OPTION",
-          "label": "İtiraz: savcı sanığa soru soramaz.",
+          "label": "İtiraz: sanığa soruyu ancak mahkeme aracılığıyla savcı yöneltebilir.",
           "responses": [
             {
               "lines": [
@@ -825,7 +836,7 @@
               "lines": [
                 {
                   "speaker": "nurettin",
-                  "text": "Erkekti. Kırkını geçmiş, kibar bir ses. Kendini Kaan diye tanıttı. Kadın değildi; bundan eminim."
+                  "text": "Erkekti. Genç mi yaşlı mı, telefonda kestiremedim. Kendini Kaan diye tanıttı. Kadın değildi; bundan eminim."
                 },
                 {
                   "speaker": "nurettin",
@@ -887,7 +898,7 @@
         {
           "id": "H104Q_C",
           "kind": "OPTION",
-          "label": "Parayı tanımadığınız bir hesaba neden gönderdiniz?",
+          "label": "Hiç görmediğiniz bir satıcıya, tanımadığınız bir hesaba parayı neden gönderdiniz?",
           "responses": [
             {
               "lines": [
@@ -944,6 +955,15 @@
             {
               "speaker": "gokhan",
               "text": "Bu tür dosyalarda hesap sahipleri genelde ya hesabını kiraya verir ya da bizzat işlem yapar. İkisinin de cezası var."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı başıyla onayladı. Hâkim not aldı. Gökhan’ın sesi, aynı cümleyi dört yüz kez kurmuş birinin sesiydi; düz, yorgun, ama kendinden emin."
+            },
+            {
+              "speaker": "player",
+              "text": "“Genelde.” Bu dosyada bir yıldır hiçbir şey genel değil. Her şey tek bir telefona, tek bir sabaha, tek bir koda dayanıyor.",
+              "style": "thought"
             }
           ]
         }
@@ -1143,6 +1163,7 @@
           "id": "PS_G1",
           "kind": "PRESENT",
           "match": { "statement": "G1", "evidence": ["ev_banka_log"] },
+          "enabledWhen": { "flag": "press_g1" },
           "responses": [
             {
               "lines": [
@@ -1217,6 +1238,7 @@
           "id": "PS_G2",
           "kind": "PRESENT",
           "match": { "statement": "G2", "evidence": ["ded_dongu"] },
+          "enabledWhen": { "flag": "press_g2" },
           "responses": [
             {
               "lines": [
@@ -1259,7 +1281,7 @@
           "kind": "PRESENT",
           "match": { "statement": "G2", "evidence": ["ev_hesap"] },
           "visibleWhen": { "hasEvidence": "clue_avans" },
-          "enabledWhen": { "hasEvidence": "clue_avans" },
+          "enabledWhen": { "all": [{ "hasEvidence": "clue_avans" }, { "flag": "press_g2" }] },
           "responses": [
             {
               "lines": [
@@ -1292,6 +1314,7 @@
           "id": "PS_G2_K",
           "kind": "PRESENT",
           "match": { "statement": "G2", "evidence": ["ded_kaan"] },
+          "enabledWhen": { "flag": "press_g2" },
           "responses": [
             {
               "lines": [
@@ -1344,6 +1367,7 @@
           "id": "PS_G3",
           "kind": "PRESENT",
           "match": { "statement": "G3", "evidence": ["ev_sim_dokum", "ded_sim", "ded_kesinti"] },
+          "enabledWhen": { "flag": "press_g3" },
           "responses": [
             {
               "lines": [
@@ -1417,7 +1441,6 @@
           ],
           "effects": [
             { "type": "SCORE", "category": "SORGULAMA", "amount": 50 },
-            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
             { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
             { "type": "VAR", "var": "obj_g4", "op": "set", "value": true },
             {
@@ -1466,7 +1489,6 @@
           ],
           "effects": [
             { "type": "SCORE", "category": "SORGULAMA", "amount": 50 },
-            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
             { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
             { "type": "VAR", "var": "obj_g5", "op": "set", "value": true },
             {
@@ -1474,6 +1496,72 @@
               "quality": "GOOD",
               "feedback": "İtiraz yerinde: “o hâlde” bir olgu değil, tanığın çıkarımıdır.",
               "category": "SORGULAMA"
+            }
+          ]
+        },
+        {
+          "id": "PS_G1_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "G1", "evidence": ["ev_banka_log"] },
+          "enabledWhen": { "not": { "flag": "press_g1" } },
+          "maxUses": 3,
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "hakim",
+                  "text": "Müdafi, belgeyi sunmadan önce tanığa sorun. Neyin çeliştiğini önce tanığın ağzından duyalım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Önce soru, sonra kâğıt. Belge bir cevabı çürütür; henüz sorulmamış bir cevabı değil.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PS_G2_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "G2", "evidence": ["ded_dongu", "ded_kaan", "ev_hesap"] },
+          "enabledWhen": { "not": { "flag": "press_g2" } },
+          "maxUses": 3,
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "hakim",
+                  "text": "Müdafi, belgeyi sunmadan önce tanığa sorun. Neyin çeliştiğini önce tanığın ağzından duyalım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Önce soru, sonra kâğıt. Belge bir cevabı çürütür; henüz sorulmamış bir cevabı değil.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PS_G3_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "G3", "evidence": ["ev_sim_dokum", "ded_sim", "ded_kesinti"] },
+          "enabledWhen": { "not": { "flag": "press_g3" } },
+          "maxUses": 3,
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "hakim",
+                  "text": "Müdafi, belgeyi sunmadan önce tanığa sorun. Neyin çeliştiğini önce tanığın ağzından duyalım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Önce soru, sonra kâğıt. Belge bir cevabı çürütür; henüz sorulmamış bir cevabı değil.",
+                  "style": "thought"
+                }
+              ]
             }
           ]
         },
@@ -1635,16 +1723,28 @@
       "type": "CHOICE",
       "chapter": "Bölüm 3 · Birinci Celse",
       "eyebrow": "DURUŞMA · 1. CELSE",
-      "hud": ["cred", "pers"],
+      "hud": ["dil_hak"],
       "title": "Talepler",
       "background": "durusma_salonu",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Hâkim her talebi dinler; ama dayanağı olmayan talep, dosyanın eksiğini değil, avukatın eksiğini gösterir. Yalnızca araştırmamın gösterdiği eksikleri isteyebilirim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
       "prompt": { "speaker": "hakim", "text": "Müdafi, delillere ve dosyanın eksiklerine ilişkin talepleriniz?" },
       "choices": [
         {
           "id": "RQ_LOG",
           "kind": "OPTION",
           "label": "Bankadan mobil şube cihaz ve oturum kayıtlarının istenmesi",
-          "visibleWhen": { "not": { "flag": "dl_log" } },
+          "visibleWhen": { "all": [{ "not": { "flag": "dl_log" } }, { "flag": "fact_polis_eksik" }] },
+          "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 30 },
@@ -1660,7 +1760,13 @@
           "id": "RQ_HTS",
           "kind": "OPTION",
           "label": "Sanığın hattı için 3–5 Kasım 2025 iletişim tespiti (IMEI dahil)",
-          "visibleWhen": { "not": { "flag": "dl_hts" } },
+          "visibleWhen": {
+            "all": [
+              { "not": { "flag": "dl_hts" } },
+              { "any": [{ "hasEvidence": "clue_simyok" }, { "hasEvidence": "clue_iphone_imei" }] }
+            ]
+          },
+          "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 30 },
@@ -1676,7 +1782,8 @@
           "id": "RQ_BAYI",
           "kind": "OPTION",
           "label": "Operatörden SIM değişikliği işlem belgelerinin istenmesi",
-          "visibleWhen": { "not": { "flag": "dl_bayi" } },
+          "visibleWhen": { "all": [{ "not": { "flag": "dl_bayi" } }, { "hasEvidence": "ev_sim_dokum" }] },
+          "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 30 },
@@ -1692,7 +1799,8 @@
           "id": "RQ_ATM",
           "kind": "OPTION",
           "label": "ATM kamera görüntülerinin istenmesi",
-          "visibleWhen": { "not": { "flag": "dl_atm" } },
+          "visibleWhen": { "all": [{ "not": { "flag": "dl_atm" } }, { "hasEvidence": "clue_qr_atm" }] },
+          "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
@@ -1750,7 +1858,7 @@
         {
           "id": "RQ_BERAAT",
           "kind": "OPTION",
-          "label": "Sanığın hemen bugün beraatine karar verilmesi",
+          "label": "Delil yetersizliğinden sanığın bu celsede, hemen bugün beraatine karar verilmesi",
           "responses": [
             { "lines": [{ "speaker": "hakim", "text": "Müdafi, daha talepleri konuşuyoruz. Hükmü sonra konuşuruz." }] }
           ],
@@ -1815,6 +1923,10 @@
               "speaker": "player",
               "text": "İki tanık daha. Bayideki genç ve iş merkezinin müdürü. Kimin ne söyleyeceğini kimse bilmiyor; ben de.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı dosyasını kapattı, bana doğru yarım bir baş selamı verdi. İlk celsede vermemişti. Kâtip ara kararı yazarken ekrana bakan Ece, her kelimeyi dudaklarıyla tekrarlıyordu."
             }
           ]
         },
@@ -1881,6 +1993,10 @@
             { "speaker": "leyla", "text": "Bugün bir kapı araladın. Üç hafta var. Kapıyı kimin açık tuttuğunu bul." },
             {
               "speaker": "narrator",
+              "text": "Leyla bunu söyleyip merdivenlerden inmeye başladı; iki basamak sonra durdu, dönmeden ekledi: “Ve kimin kapatmaya çalışacağını.” Sonra yürüdü."
+            },
+            {
+              "speaker": "narrator",
               "text": "Merdivenin dibinde Gökhan Ateş bir sigara yakmıştı. Beni görünce söndürdü, sonra yeniden yaktı. Bir şey söylemedi; ama başıyla selam verdi."
             }
           ]
@@ -1909,7 +2025,120 @@
         }
       ],
       "choices": [
-        { "id": "H108_DEVAM", "kind": "CONTINUE", "label": "Üç hafta", "role": "PRIMARY", "next": "ARA_GIRIS_1" }
+        { "id": "H108_DEVAM", "kind": "CONTINUE", "label": "Merdivenleri in", "role": "PRIMARY", "next": "H1_09" }
+      ]
+    },
+    {
+      "id": "H1_09",
+      "type": "STORY",
+      "chapter": "Bölüm 3 · Birinci Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "title": "Sigara",
+      "background": "sokak_yagmur",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE ÖNÜ · 12.35", "style": "card", "bg": "sokak_yagmur" },
+            {
+              "speaker": "narrator",
+              "text": "Adliyenin önü şemsiyelerle doluydu; kimse kimsenin yüzünü görmüyordu. Gökhan Ateş merdivenin dibinde, saçağın altında duruyordu. Sigarası ıslanmış, sönmüştü; yine de dudağındaydı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Beni görünce sigarayı paketine geri koydu. Kibrit kutusunu iki parmağının arasında çevirdi, bir şey söylemek ister gibi."
+            },
+            {
+              "speaker": "gokhan",
+              "text": "Avukat hanım. Bir dakika. Mahkemede söyleyemediğim bir şey var. Kayıt dışı. Bir kahve içelim mi? Karşıda bir yer var; kimse bizi görmez."
+            },
+            {
+              "speaker": "player",
+              "text": "Tanık. İfadesi bitti ama dosya bitmedi; ikinci celsede yeniden çağrılabilir. “Kayıt dışı” bir avukatın en sevdiği, en tehlikeli iki kelime.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "H109_A",
+          "kind": "OPTION",
+          "label": "Ne varsa savcıya ya da mahkemeye söyleyin.",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "gokhan", "text": "Savcıya. Haklısınız. Öyle yaparım." },
+                {
+                  "speaker": "narrator",
+                  "text": "Kibrit kutusunu cebine koydu. Yağmura doğru bir adım attı, sonra döndü."
+                },
+                {
+                  "speaker": "gokhan",
+                  "text": "Bankaya bir yazı daha yazacağım. Bu sefer cihazı soracağım. Sizin için değil. Kendim için."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir polis, bir yıl sonra, kendi raporunun eksik sayfasını yazmaya gidiyor. Ben ona bir kahve ısmarlasaydım, o sayfa benim olurdu; şimdi onun.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "ARA_GIRIS_1",
+          "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": 30 }],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Dinlenmiş ve yeniden çağrılabilecek kolluk tanığıyla kayıt dışı görüşmek, beyanını etkileme şüphesi doğurur; bilgi resmî yoldan, savcılık ya da mahkeme aracılığıyla gelmelidir (TBB Meslek Kuralları).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "H109_B",
+          "kind": "OPTION",
+          "label": "Peki, bir kahve. Ama beş dakika.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Karşıdaki kahvecinin camı buğuluydu. Gökhan bir şey söyleyecekti; ağzını açtı, sonra kapının açıldığını gördü. İçeri savcılık kaleminden iki memur girdi, bize baktı."
+                },
+                { "speaker": "gokhan", "text": "Neyse. Başka zaman. Bu… doğru olmaz." },
+                {
+                  "speaker": "narrator",
+                  "text": "Kahvesini bitirmeden kalktı, parasını masaya bıraktı. Bir şey öğrenmedim. Ama iki memur, bir müdafiyle bir tanığı aynı masada gördü."
+                }
+              ]
+            }
+          ],
+          "next": "ARA_GIRIS_1",
+          "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": -30 }],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Dinlenmiş bir tanıkla kayıt dışı görüşmek, söyledikleri ne olursa olsun, ikinci celsede savunmanın aleyhine okunur; bilgi resmî yoldan istenir.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "H109_C",
+          "kind": "OPTION",
+          "label": "Başınla selam ver, hiçbir şey söylemeden yürü.",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Başımla selam verip geçtim. Arkamda kibrit sesi duydum; bu sefer yandı."
+                }
+              ]
+            }
+          ],
+          "next": "ARA_GIRIS_1",
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Konuşmamak doğrudur; ama tanığa bilgisini resmî yoldan iletebileceğini söylemek kapıyı açık tutardı."
+          }
+        }
       ]
     }
   ],

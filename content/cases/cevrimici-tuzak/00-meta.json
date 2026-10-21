@@ -96,7 +96,7 @@
       "thresholdBar": [
         { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
         { "label": "İndirim", "from": 3000, "tone": "amber" },
-        { "label": "Beraat", "from": 6500, "tone": "green" }
+        { "label": "Beraat (2-b)", "from": 8000, "tone": "green" }
       ],
       "displayClampMin": 0
     },
@@ -127,14 +127,116 @@
       "when": { "cmp": [{ "count": "evidence", "tag": "kart" }, ">=", 2] }
     },
     {
-      "id": "sim_proven",
-      "label": "Hattın sanığın elinden alındığı duruşmada gösterildi",
+      "id": "sim_kismen",
+      "label": "Hattın 4 Kasım’da değiştirildiği duruşmada gösterildi",
       "when": { "any": [{ "flag": "contra_g3" }, { "flag": "contra_o1" }, { "flag": "contra_o2" }] }
     },
     {
-      "id": "cihaz_proven",
-      "label": "İşlemlerin başka bir cihazdan yapıldığı duruşmada gösterildi",
+      "id": "sim_proven",
+      "label": "Hattın sanığın bilgisi dışında, sahte vekâlet ve Nova’ya gönderilen fotoğraftan basılmış fotokopiyle başka biri tarafından alındığı gösterildi",
+      "when": {
+        "all": [
+          { "flag": "contra_g3" },
+          { "flag": "contra_o1" },
+          { "flag": "contra_o2" },
+          { "flag": "contra_o3" },
+          { "hasEvidence": "ded_kopya" },
+          { "any": [{ "hasEvidence": "ded_sim" }, { "hasEvidence": "ded_kesinti" }] }
+        ]
+      }
+    },
+    {
+      "id": "cihaz_kismen",
+      "label": "İşlemlerin başka bir cihazdan yapıldığı duruşmada tartışıldı",
       "when": { "any": [{ "flag": "contra_g1" }, { "flag": "cihaz_t04" }] }
+    },
+    {
+      "id": "cihaz_proven",
+      "label": "İşlemlerin ve banka SMS’lerinin sanığın telefonu olmayan bir cihazda olduğu belgelendi",
+      "when": { "all": [{ "flag": "contra_g1" }, { "hasEvidence": "ded_imei" }, { "hasEvidence": "ded_cihaz" }] }
+    },
+    {
+      "id": "kast_yok",
+      "label": "Kodun bir tuzakla, aldatılarak okunduğu duruşmada gösterildi",
+      "when": {
+        "all": [
+          { "any": [{ "flag": "istirak_cevap" }, { "flag": "contra_g5" }, { "flag": "necdet_ifsa" }] },
+          { "hasEvidence": "ded_kaan" },
+          { "hasEvidence": "ded_aldatma" },
+          { "flag": "fact_itiraz_tutanak" },
+          { "flag": "fact_kaan_erkek" },
+          { "any": [{ "flag": "arda_teslim" }, { "flag": "necdet_ifsa" }] }
+        ]
+      }
+    },
+    {
+      "id": "nova_sahte",
+      "label": "Nova Dijital’in kâğıt üstünde bir işveren olduğu ve işin iş merkezinin içinden yürütüldüğü (sözleşme, kat, otopark) iş merkezi müdürünün çapraz sorgusunda gösterildi",
+      "when": {
+        "any": [
+          { "all": [{ "flag": "contra_n1" }, { "flag": "contra_n2" }, { "flag": "contra_n4" }] },
+          { "flag": "necdet_ifsa" }
+        ]
+      }
+    },
+    {
+      "id": "kira_yok",
+      "label": "4.500 TL’nin hesap kiralama bedeli olmadığı duruşmada gösterildi",
+      "when": { "any": [{ "flag": "contra_g2" }, { "flag": "g2_kaan" }] }
+    },
+    {
+      "id": "savunma_tam",
+      "label": "Hat, cihaz, kast ve kira iddiası hukuka uygun delillerle çürütüldü",
+      "when": {
+        "all": [
+          { "ref": "sim_proven" },
+          { "ref": "cihaz_proven" },
+          { "ref": "kast_yok" },
+          { "ref": "kira_yok" },
+          { "ref": "nova_sahte" }
+        ]
+      }
+    },
+    {
+      "id": "savunma_arda_disi",
+      "label": "Yönlendirilen kuryenin beyanı dışlandığında kalan hukuka uygun delil beraate yetiyor",
+      "when": {
+        "all": [
+          { "flag": "contra_g3" },
+          { "flag": "contra_o1" },
+          { "flag": "contra_o2" },
+          { "hasEvidence": "ded_kopya" },
+          { "ref": "cihaz_proven" },
+          { "ref": "kira_yok" },
+          { "hasEvidence": "ded_kaan" },
+          { "hasEvidence": "ded_aldatma" },
+          { "any": [{ "flag": "contra_g5" }, { "flag": "istirak_cevap" }] }
+        ]
+      }
+    },
+    {
+      "id": "delil_beraat",
+      "label": "Hukuka uygun delil beraate yetiyor (tam savunma ya da gerçek failin ortaya çıkması + aldatma + kira iddiasının çürümesi)",
+      "when": {
+        "any": [
+          {
+            "all": [
+              { "not": { "all": [{ "flag": "arda_etkileme" }, { "flag": "arda_cagrildi" }] } },
+              { "ref": "savunma_tam" }
+            ]
+          },
+          { "all": [{ "flag": "arda_etkileme" }, { "flag": "arda_cagrildi" }, { "ref": "savunma_arda_disi" }] },
+          {
+            "all": [
+              { "flag": "necdet_ifsa" },
+              { "ref": "sim_proven" },
+              { "ref": "cihaz_proven" },
+              { "ref": "kast_yok" },
+              { "ref": "kira_yok" }
+            ]
+          }
+        ]
+      }
     }
   ],
   "variables": [
@@ -399,6 +501,11 @@
     { "id": "istirak_cevap", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "terditli", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "terditli_erken", "type": "bool", "initial": false, "visibility": "HIDDEN" },
-    { "id": "gercek_fail", "type": "bool", "initial": false, "visibility": "HIDDEN" }
+    { "id": "gercek_fail", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "kor_mesafe", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "mola_ece", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "mola_leyla", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "arda_etkileme", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "onur_para", "type": "bool", "initial": false, "visibility": "HIDDEN" }
   ]
 }

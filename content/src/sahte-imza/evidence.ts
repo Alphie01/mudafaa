@@ -81,9 +81,9 @@ export const evidencePart: CasePart = {
     k('clue_yazici', {
       type: 'DIJITAL',
       title: 'Lazer yazıcı iş günlüğü (06.02 02.14)',
-      shortText: '6 Şubat 02.14: 90 gr kâğıda 2 sayfa renkli baskı; kullanıcı DIJITAL-PC.',
+      shortText: '6 Şubat 02.14: 90 gr kâğıda 2 sayfa renkli baskı; kullanıcı MATBAA-PC.',
       description:
-        'Renkli lazer yazıcının ekranındaki son altı ayın iş günlüğü. Gece yarısından sonra tek iş var: 06.02.2026 02.14, 2 sayfa, 90 gr, renkli. Gönderen bilgisayar: DIJITAL-PC.',
+        'Renkli lazer yazıcının ekranındaki son altı ayın iş günlüğü. Gece yarısından sonra tek iş var: 06.02.2026 02.14, 2 sayfa, 90 gr, renkli. Gönderen bilgisayar: MATBAA-PC; dükkânın ortak bilgisayarı, şifresi yok.',
       sourceLabel: 'Matbaa araması',
       icon: 'document',
     }),
@@ -98,9 +98,9 @@ export const evidencePart: CasePart = {
     k('clue_makas', {
       type: 'FOTOGRAF',
       title: 'Ters takılı kâğıt makası',
-      shortText: 'Dijital odadaki giyotin makasının kolu sol tarafa çevrilmiş.',
+      shortText: 'Kesim masasındaki küçük giyotin makasının kolu sol tarafa çevrilmiş.',
       description:
-        'Dijital baskı odasındaki küçük giyotin makasının kolu sökülüp sol tarafa takılmış. Solak biri için ayarlanmış. Odayı kimin kullandığı belli değil.',
+        'Ortak kesim masasındaki küçük giyotin makasının kolu sökülüp sol tarafa takılmış. Solak biri için ayarlanmış. Masayı dükkândaki herkes kullanıyor; müşteriler bile.',
       sourceLabel: 'Matbaa araması',
       icon: 'magnifier',
     }),
@@ -108,7 +108,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Kaşe makinesi ve kalıplar',
       shortText: 'Matbaa polimer kaşe yapıyor; çekmecede şirket kaşesi kalıpları.',
-      description: 'Polimer kaşe pozlama makinesi. Çekmecede esnaf kaşesi kalıpları var; noter mührüne benzeyen bir kalıp yok.',
+      description:
+        'Polimer kaşe pozlama makinesi. Çekmecede esnaf kaşesi kalıpları var; noter mührüne benzeyen bir kalıp yok.',
       sourceLabel: 'Matbaa araması',
       icon: 'lock',
     }),
@@ -116,7 +117,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Kapı arkasındaki ceket askısı',
       shortText: 'Vedat’ın ceketi gün boyu kapının arkasında asılı; önlüğü giyince çıkarıyor.',
-      description: 'Kapı arkasında tek bir askı. Vedat sabah önlüğünü giyince ceketini buraya asıyor. Dükkâna giren herkes önünden geçiyor.',
+      description:
+        'Kapı arkasında tek bir askı. Vedat sabah önlüğünü giyince ceketini buraya asıyor. Dükkâna giren herkes önünden geçiyor.',
       sourceLabel: 'Matbaa araması',
       icon: 'magnifier',
     }),
@@ -124,7 +126,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Komşunun gördüğü araç',
       shortText: 'Fikriye Hanım: Şubat’ta eve beyaz bir Doblo geldi; Vedat’ın arabası değildi.',
-      description: 'Hisar’daki komşu, Şubat ortasında evin önünde beyaz bir Doblo gördüğünü söylüyor. Matbaanın Doblo’sunu dükkândaki herkes kullanıyor.',
+      description:
+        'Hisar’daki komşu, Şubat ortasında evin önünde beyaz bir Doblo gördüğünü söylüyor. Matbaanın Doblo’sunu dükkândaki herkes kullanıyor.',
       sourceLabel: 'Hisar · komşu',
       icon: 'camera',
     }),
@@ -132,7 +135,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Boş “VEKÂLET” dosyası',
       shortText: 'Hisar evindeki çekmecede üzerinde VEKÂLET yazan boş bir karton dosya.',
-      description: 'Hayriye Hanım’ın yazı masasının çekmecesi. Elle “VEKÂLET” yazılmış karton dosya boş. Asıl vekâletname Vedat’ta.',
+      description:
+        'Hayriye Hanım’ın yazı masasının çekmecesi. Elle “VEKÂLET” yazılmış karton dosya boş. Asıl vekâletname Vedat’ta.',
       sourceLabel: 'Hisar evi araması',
       icon: 'document',
     }),
@@ -148,7 +152,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Çerçeveli aile fotoğrafı (1992)',
       shortText: 'Hayriye, oğulları Halit ve Vedat, kızı Nermin ve küçük bir çocuk.',
-      description: 'Bahçede çekilmiş bir aile fotoğrafı. Arkasında Hayriye’nin el yazısı: “Bayram 1992”. Ön sırada ağabeyin oğlu, yedi yaşlarında.',
+      description:
+        'Bahçede çekilmiş bir aile fotoğrafı. Arkasında Hayriye’nin el yazısı: “Bayram 1992”. Ön sırada ağabeyin oğlu, yedi yaşlarında.',
       sourceLabel: 'Hisar evi araması',
       icon: 'camera',
     }),
@@ -173,7 +178,8 @@ export const evidencePart: CasePart = {
       type: 'FOTOGRAF',
       title: 'Kep ve gözlükle örtülü yüz',
       shortText: 'Senet fotoğrafında yüzün üst yarısı kep siperi ve koyu gözlükle örtülü; boyunda atkı.',
-      description: 'Senet fotoğrafı düşük çözünürlüklü. Kepin siperi alnı, koyu camlı gözlük gözleri, gri atkı çeneyi örtüyor. Görünen: burun ve ağız.',
+      description:
+        'Senet fotoğrafı düşük çözünürlüklü. Kepin siperi alnı, koyu camlı gözlük gözleri, gri atkı çeneyi örtüyor. Görünen: burun ve ağız.',
       sourceLabel: 'Tapu senedi incelemesi',
       icon: 'camera',
     }),
@@ -181,7 +187,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Toner noktalı noter mührü',
       shortText: 'Suretteki mühür ıslak mürekkep değil; toner noktalarından oluşuyor.',
-      description: 'Büyüteç altında suretteki noter mührü ve imza, lazer yazıcının toner noktalarından oluşuyor. Islak mühür değil, basılmış mühür.',
+      description:
+        'Büyüteç altında suretteki noter mührü ve imza, lazer yazıcının toner noktalarından oluşuyor. Islak mühür değil, basılmış mühür.',
       sourceLabel: 'Suret incelemesi',
       icon: 'magnifier',
     }),
@@ -189,7 +196,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Güvenlik izi olmayan kâğıt',
       shortText: 'Suret UV ışıkta sönük; noter suretlerindeki güvenlik lifleri yok.',
-      description: 'UV ışıkta kâğıt düz ve sönük. Noter suretlerinin basıldığı güvenlikli kâğıttaki parlayan lifler ve filigran yok.',
+      description:
+        'UV ışıkta kâğıt düz ve sönük. Noter suretlerinin basıldığı güvenlikli kâğıttaki parlayan lifler ve filigran yok.',
       sourceLabel: 'Suret incelemesi',
       icon: 'uv',
     }),
@@ -197,7 +205,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Farklı yazı tipindeki satış satırı',
       shortText: 'Satış yetkisi satırının harf aralığı ve yazı tipi diğer satırlardan farklı.',
-      description: 'Karşılaştırınca “Osmangazi Hisar Mah. 412 ada 9 parseldeki taşınmazı satmaya…” satırı biraz daha sıkışık ve farklı bir yazı tipiyle yazılmış.',
+      description:
+        'Karşılaştırınca “Osmangazi Hisar Mah. 412 ada 9 parseldeki taşınmazı satmaya…” satırı biraz daha sıkışık ve farklı bir yazı tipiyle yazılmış.',
       sourceLabel: 'Suret incelemesi',
       icon: 'compare',
     }),
@@ -213,7 +222,8 @@ export const evidencePart: CasePart = {
     k('clue_mukayese_ozel', {
       type: 'ADLI_RAPOR',
       title: 'Mukayese belgelerinin listesi',
-      shortText: 'Raporun dayandığı 20 belgenin hepsi özel belge: irsaliye ve kargo fişi; hiçbiri resmî makam önünde atılmamış.',
+      shortText:
+        'Raporun dayandığı 20 belgenin hepsi özel belge: irsaliye ve kargo fişi; hiçbiri resmî makam önünde atılmamış.',
       description:
         'Rapor eki: 14 sevk irsaliyesi, 6 kargo fişi. Hiçbiri noter, banka ya da nüfus gibi resmî bir makam önünde atılmış imza değil; sanık bu imzaları kabul etmiş de değil.',
       sourceLabel: 'Rapor incelemesi',
@@ -223,7 +233,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Okunmayan teslim eden adı',
       shortText: 'Mukayese belgelerinin teslim tutanağı faks kopyası; “teslim eden” satırı okunmuyor.',
-      description: 'Rapora eklenen teslim tutanağı fakstan çıkmış bir kopya. “Teslim eden” satırında yalnızca bir imza ve “… Ateş” okunuyor.',
+      description:
+        'Rapora eklenen teslim tutanağı fakstan çıkmış bir kopya. “Teslim eden” satırında yalnızca bir imza ve “… Ateş” okunuyor.',
       sourceLabel: 'Rapor incelemesi',
       icon: 'magnifier',
     }),
@@ -248,7 +259,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Kimliğin durduğu yer (ceket iç cebi)',
       shortText: 'Vedat kimliğini cüzdanda değil, ceketinin iç cebinde taşır; 19 Şubat sabahı orada buldu.',
-      description: 'Vedat: “Kimliği cüzdana koymam, ceketin iç cebi. 18’inde sabah yoktu. 19’unda sabah aynı cepteydi.”',
+      description:
+        'Vedat: “Kimliği cüzdana koymam, ceketin iç cebi. 18’inde sabah yoktu. 19’unda sabah aynı cepteydi.”',
       sourceLabel: 'Müvekkil görüşmesi',
       icon: 'key',
     }),
@@ -264,7 +276,7 @@ export const evidencePart: CasePart = {
     // --- Ara evre ipuçları ---
     k('clue_randevu_no', {
       type: 'TELEFON_KAYDI',
-      title: 'Randevuyu alan numara',
+      title: 'Randevu kaydındaki arayan hat',
       shortText: 'Tapu randevusu 10 Şubat 10.12’de 0532 418 77 47’den alındı.',
       description: 'Randevu kaydı: “Arayan: 0532 418 77 47 · 10.02.2026 10.12 · Satış · 412/9 · 18.02 11.15.”',
       sourceLabel: 'Tapu randevu kaydı',
@@ -282,7 +294,8 @@ export const evidencePart: CasePart = {
       type: 'DIJITAL',
       title: 'Kurye terminali saatleri (11.19–11.37)',
       shortText: 'Kurye 11.19’da matbaaya vardı, gönderi 11.37’de teslim alındı; GPS matbaanın önü.',
-      description: 'El terminali: varış 11.19.40 (Kayhan, Ateş Matbaası önü), teslim imzası 11.37.05. Arada terminal yerinden kıpırdamamış.',
+      description:
+        'El terminali: varış 11.19.40 (Kayhan, Ateş Matbaası önü), teslim imzası 11.37.05. Arada terminal yerinden kıpırdamamış.',
       sourceLabel: 'Kargo kaydı',
       icon: 'receipt',
     }),
@@ -306,7 +319,8 @@ export const evidencePart: CasePart = {
       type: 'TANIK_IFADESI',
       title: 'Sevgi’nin gördüğü mesajlar',
       shortText: 'Sevgi, Ocak’ta bir aile yemeğinde Tarık’ın telefonunda bahis sitesi borç mesajları görmüş.',
-      description: 'Sevgi: “Ocak’ta yemekte telefonu masadaydı. ‘Vadesi geçen bakiyeniz…’ diye mesajlar. Bahis. Vedat’a söylemedim.”',
+      description:
+        'Sevgi: “Ocak’ta yemekte telefonu masadaydı. ‘Vadesi geçen bakiyeniz…’ diye mesajlar. Bahis. Vedat’a söylemedim.”',
       sourceLabel: 'Sevgi Ateş',
       icon: 'phone',
     }),
@@ -316,7 +330,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Kurye çakışması',
       shortText: 'Takvime göre 11.30’da matbaaya kurye gelecekti; senet 11.24’te imzalandı.',
-      description: 'Kargo randevusu senedin imza saatiyle çakışıyor. Kurye o sabah Vedat’ı matbaada gördüyse, Vedat tapuda olamaz.',
+      description:
+        'Kargo randevusu senedin imza saatiyle çakışıyor. Kurye o sabah Vedat’ı matbaada gördüyse, Vedat tapuda olamaz.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'DEFENSE',
@@ -336,7 +351,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Asıldan kopyalanmış sahte suret',
       shortText: 'Suret noterin asıl nüshasından kopyalanmış; satış yetkisi sonradan eklenmiş ve basılmış.',
-      description: 'Noterdeki asıl nüshada satış yetkisi yok; suretteki mühür basılmış. Tapu yalnızca yevmiye numarasını sorgulamış: numara gerçek, metin değil.',
+      description:
+        'Noterdeki asıl nüshada satış yetkisi yok; suretteki mühür basılmış. Tapu yalnızca yevmiye numarasını sorgulamış: numara gerçek, metin değil.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'DEFENSE',
@@ -346,7 +362,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Kirli mukayese malzemesi',
       shortText: 'Bilirkişinin “Vedat’ın imzası” saydığı irsaliyelerin çoğunu başka bir el imzalamış.',
-      description: 'Mukayese belgeleri özel belge ve iki farklı el içeriyor. Rapor senedi Vedat’ın eliyle değil, irsaliyeleri imzalayan elle karşılaştırmış.',
+      description:
+        'Mukayese belgeleri özel belge ve iki farklı el içeriyor. Rapor senedi Vedat’ın eliyle değil, irsaliyeleri imzalayan elle karşılaştırmış.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'DEFENSE',
@@ -356,7 +373,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'O sabah kayıp kimlik',
       shortText: '18 Şubat sabahı Vedat’ın kimliği ceketinde değildi; ertesi sabah aynı cebe dönmüştü.',
-      description: 'Vedat 09.52’de kimliğini bulamadığını yazmış. Tapuda 11.22’de kimlik kullanılmış. 19’unda sabah kimlik yerindeydi: biri aldı ve geri koydu.',
+      description:
+        'Vedat 09.52’de kimliğini bulamadığını yazmış. Tapuda 11.22’de kimlik kullanılmış. 19’unda sabah kimlik yerindeydi: biri aldı ve geri koydu.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'DEFENSE',
@@ -365,8 +383,9 @@ export const evidencePart: CasePart = {
     insight('ded_baski', {
       type: 'BELGE',
       title: 'Gece basılan suret',
-      shortText: 'Suret 6 Şubat 02.14’te matbaanın lazer yazıcısında, DIJITAL-PC’den basıldı.',
-      description: 'Toner mühür, matbaanın renkli lazerinden çıkmış. Günlükteki tek gece işi 2 sayfa, 90 gr. Gece matbaada biri vardı.',
+      shortText: 'Suret 6 Şubat 02.14’te matbaanın lazer yazıcısında, MATBAA-PC’den basıldı.',
+      description:
+        'Toner mühür, matbaanın renkli lazerinden çıkmış. Günlükteki tek gece işi 2 sayfa, 90 gr. Gece matbaada biri vardı.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'NEUTRAL',
@@ -376,7 +395,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Kurye saatiyle mazeret',
       shortText: '11.19–11.37 arası Vedat matbaadaydı; senet 11.24’te tapuda imzalandı.',
-      description: 'Kurye terminalinin GPS ve imza saatleri, senedin imza saatini içine alıyor. Vedat aynı anda iki yerde olamaz.',
+      description:
+        'Kurye terminalinin GPS ve imza saatleri, senedin imza saatini içine alıyor. Vedat aynı anda iki yerde olamaz.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'DEFENSE',
@@ -386,7 +406,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Randevu numarasının sahibi',
       shortText: 'Tapu randevusunu alan ve teyit aramasını yanıtlayan numara matbaanın çizelgesinde Tarık’ın.',
-      description: 'Randevu kaydındaki 0532 418 77 47, duvardaki çizelgede Tarık Ateş’in numarası. Teyit araması 11.06’da bu numaradan yanıtlandı.',
+      description:
+        'Randevu kaydındaki 0532 418 77 47, duvardaki çizelgede Tarık Ateş’in numarası. Teyit araması 11.06’da bu numaradan yanıtlandı.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'DEFENSE',
@@ -396,7 +417,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Gerçek imza başka el',
       shortText: 'Kurye terminalindeki imza irsaliyelerdeki akıcı gruba benziyor, sola yatık gruba değil.',
-      description: 'Vedat’ın 18 Şubat 11.37’de attığı imza akıcı ve sağa yatık. Senedi ve irsaliyelerin çoğunu imzalayan el bu değil.',
+      description:
+        'Vedat’ın 18 Şubat 11.37’de attığı imza akıcı ve sağa yatık. Senedi ve irsaliyelerin çoğunu imzalayan el bu değil.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'DEFENSE',
@@ -406,7 +428,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Borca mahsup edilen ev',
       shortText: 'Erol’un takvimindeki “T. · mahsup 1.400” ile Tarık’ın bahis borcu örtüşüyor.',
-      description: 'Ev nakit satılmamış: bedelin büyük kısmı “T.”nin borcuna mahsup edilmiş. Tarık’ın bahis borcu bu takvim notunu açıklıyor.',
+      description:
+        'Ev nakit satılmamış: bedelin büyük kısmı “T.”nin borcuna mahsup edilmiş. Tarık’ın bahis borcu bu takvim notunu açıklıyor.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'bulb',
       side: 'DEFENSE',
@@ -423,13 +446,15 @@ export const evidencePart: CasePart = {
       icon: 'receipt',
       side: 'DEFENSE',
       strength: 'STRONG',
-      missedHint: 'Takvimdeki “kargo 11.30” notu bir mazeretin ucuydu: kargo kaydını dilekçeyle ya da duruşmada isteyebilirdin.',
+      missedHint:
+        'Takvimdeki “kargo 11.30” notu bir mazeretin ucuydu: kargo kaydını dilekçeyle ya da duruşmada isteyebilirdin.',
     }),
     evidence('ev_randevu', {
       type: 'TELEFON_KAYDI',
       title: 'Tapu randevu ve teyit kaydı',
       shortText: 'Randevuyu alan numara ve 18 Şubat 11.06’daki teyit araması.',
-      description: 'Tapu çağrı merkezinin kaydı: randevu 10.02 10.12’de alındı; 18.02 11.06’da teyit edildi. Arayan ve aranan aynı GSM numarası.',
+      description:
+        'Tapu çağrı merkezinin kaydı: randevu 10.02 10.12’de alındı; 18.02 11.06’da teyit edildi. Arayan ve aranan aynı GSM numarası.',
       sourceLabel: 'Tapu müdürlüğü · mahkeme yazısıyla',
       icon: 'phone',
       side: 'DEFENSE',
@@ -440,7 +465,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       title: 'Mukayese teslim tutanağı (asıl)',
       shortText: '20.03.2026: mukayese belgelerini kolluğa teslim eden Tarık Ateş.',
-      description: 'Kolluğun asıl tutanağı: “Şüphelinin imzasını taşıyan 14 irsaliye ve 6 kargo fişi, işyerinde çalışan yeğeni Tarık Ateş tarafından teslim edilmiştir. Şüpheli hastanede.”',
+      description:
+        'Kolluğun asıl tutanağı: “Şüphelinin imzasını taşıyan 14 irsaliye ve 6 kargo fişi, işyerinde çalışan yeğeni Tarık Ateş tarafından teslim edilmiştir. Şüpheli hastanede.”',
       sourceLabel: 'Kolluk · mahkeme yazısıyla',
       icon: 'document',
       side: 'DEFENSE',
@@ -450,26 +476,44 @@ export const evidencePart: CasePart = {
     evidence('ev_rapor2', {
       type: 'ADLI_RAPOR',
       title: 'Adli Tıp imza raporu (resmî mukayese)',
-      shortText: 'Senet ve makbuzdaki imzalar sanığın resmî mukayese imzalarıyla uyumsuz; irsaliyelerin 11’iyle aynı el; yazan büyük olasılıkla solak.',
+      shortText:
+        'Senet ve makbuzdaki imzalar sanığın resmî mukayese imzalarıyla uyumsuz; irsaliyelerin 11’iyle aynı el; yazan büyük olasılıkla solak.',
       description:
         'Adli Tıp Kurumu Fizik İhtisas Dairesi raporu. Mukayese: sanığın noter imza beyannamesi (2021), banka imza kartonu (2022), nüfus başvuru formu (2019). Sonuç: senetteki ve makbuzdaki imzalar sanığın el ürünü değildir; 14 irsaliyenin 11’indeki imzalarla aynı elin ürünüdür; hareket özellikleri sol el kullanımıyla uyumludur.',
       sourceLabel: 'Adli Tıp Kurumu',
       icon: 'compare',
       side: 'DEFENSE',
       strength: 'STRONG',
-      missedHint: 'Raporun mukayese belgeleri özel belgelerdi; resmî belgelerdeki imzalarla yeni bilirkişi incelemesi istemek gerekiyordu (CMK 63, 67/5).',
+      missedHint:
+        'Raporun mukayese belgeleri özel belgelerdi; resmî belgelerdeki imzalarla yeni bilirkişi incelemesi istemek gerekiyordu (CMK 63, 67/5).',
+    }),
+    evidence('ev_rapor2_belirsiz', {
+      type: 'ADLI_RAPOR',
+      title: 'Adli Tıp imza raporu (yetersiz mukayese)',
+      shortText:
+        'Tek resmî mukayese imzası (nüfus, 2019) sayıca yetersiz; imzanın sanığa ait olup olmadığı yönünde kesin kanaat bildirilemedi.',
+      description:
+        'Adli Tıp Kurumu raporu. Mahkemece gönderilen tek tartışmasız mukayese imzası nüfus başvuru formundaki 2019 tarihli imza. Sonuç: senetteki imzada sanığın bu imzasından farklı hareket özellikleri gözlenmekle birlikte, sayıca yeterli ve çağdaş mukayese imzası bulunmadığından kesin kanaate varılamamıştır; ek mukayese örneği gerekir.',
+      sourceLabel: 'Adli Tıp Kurumu',
+      icon: 'compare',
+      side: 'NEUTRAL',
+      strength: 'WEAK',
+      missedHint:
+        'Yeni bilirkişi talebini gerekçelendirmek gerekiyordu: irsaliyelerdeki iki ayrı eli göstermek ve noter, banka, nüfus imzalarını tek tek istemek.',
     }),
     evidence('ev_rapor2_ek', {
       type: 'ADLI_RAPOR',
       title: 'Ek rapor: üçüncü kişinin yazı örnekleri',
-      shortText: 'Savcılığın gönderdiği Tarık Ateş’in resmî imza ve yazı örnekleri, senetteki imzanın hareket özellikleriyle uyumlu.',
+      shortText:
+        'Savcılığın gönderdiği Tarık Ateş’in resmî imza ve yazı örnekleri, senetteki imzanın hareket özellikleriyle uyumlu.',
       description:
         'Suç duyurusu üzerine savcılığın ayrı soruşturmada gönderdiği Tarık Ateş’e ait noter, banka ve vergi dairesi imzaları ile yazı örnekleri incelenmiş: senet ve makbuzdaki “Vedat Ateş” imzalarının yazılış hızı, basınç ve bağlantı özellikleri bu örneklerle uyumlu bulunmuştur.',
       sourceLabel: 'Adli Tıp Kurumu',
       icon: 'compare',
       side: 'DEFENSE',
       strength: 'STRONG',
-      missedHint: 'Somut dayanaklı bir suç duyurusu, savcılığın üçüncü kişinin örneklerini de Adli Tıp’a göndermesini sağlardı.',
+      missedHint:
+        'Somut dayanaklı bir suç duyurusu, savcılığın üçüncü kişinin örneklerini de Adli Tıp’a göndermesini sağlardı.',
     }),
   ],
   evidenceRelations: [

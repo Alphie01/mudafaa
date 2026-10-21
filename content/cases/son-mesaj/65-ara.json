@@ -141,6 +141,13 @@
       "eyebrow": "DAVA #06 · ARA",
       "title": "Ara",
       "background": "buro",
+      "onEnter": [
+        { "type": "VAR", "var": "taps3", "op": "set", "value": 6 },
+        { "type": "VAR", "var": "ex3b", "op": "set", "value": 6 },
+        { "type": "VAR", "var": "ex5", "op": "set", "value": 5 },
+        { "type": "VAR", "var": "ex6", "op": "set", "value": 5 },
+        { "type": "VAR", "var": "ex7", "op": "set", "value": 4 }
+      ],
       "lines": [
         {
           "when": { "cmp": [{ "var": "ara_day" }, "==", 1] },
@@ -169,7 +176,7 @@
           "id": "ta_arsiv",
           "label": "ARŞİV",
           "kind": "ARCHIVE",
-          "choices": ["A_HESAP", "A_SUC", "A_CIKARIM", "A_LEYLA"]
+          "choices": ["A_HESAP", "A_RAPOR", "A_VAKIF", "A_SUC", "A_CIKARIM", "A_LEYLA"]
         }
       ],
       "choices": [
@@ -217,12 +224,38 @@
           "description": "Noter tespitli döküm · 6 deneme"
         },
         {
+          "id": "A_RAPOR",
+          "kind": "NAVIGATE",
+          "label": "Bilirkişi raporu",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_RAPOR",
+          "maxUses": 1,
+          "visibleWhen": { "all": [{ "flag": "bilirkisi_istendi" }, { "cmp": [{ "var": "ara_day" }, "==", 2] }] },
+          "description": "Dr. Uçar · imaj incelemesi · 5 deneme"
+        },
+        {
+          "id": "A_VAKIF",
+          "kind": "NAVIGATE",
+          "label": "Vakfın ihale dosyası",
+          "cost": [{ "var": "ara_ap", "amount": 1 }],
+          "next": "ARA_VAKIF_GIRIS",
+          "maxUses": 1,
+          "visibleWhen": { "visited": "INV_T_HAYRI" },
+          "description": "Hayri Bey’in izniyle · gelen evrak defteri"
+        },
+        {
           "id": "A_SUC",
           "kind": "NAVIGATE",
           "label": "Savcılığa suç duyurusu",
           "cost": [{ "var": "ara_ap", "amount": 1 }],
           "next": "ARA_SUC",
-          "visibleWhen": { "hasEvidence": "ded_bagli" },
+          "visibleWhen": {
+            "all": [
+              { "hasEvidence": "ded_bagli" },
+              { "not": { "flag": "suc_duyurusu" } },
+              { "not": { "flag": "suc_mechul" } }
+            ]
+          },
           "description": "Kimin hakkında, hangi dayanakla?"
         },
         {
@@ -243,11 +276,28 @@
           "visibleWhen": { "cmp": [{ "var": "leyla_ara" }, "<", { "var": "ara_day" }] }
         },
         {
+          "id": "A_BEKLE",
+          "kind": "NAVIGATE",
+          "label": "Haftayı kapat",
+          "description": "Kalan eylem puanlarını bırak",
+          "visibleWhen": { "cmp": [{ "var": "ara_ap" }, ">", 0] },
+          "confirm": "Haftanın kalan eylem puanları yanar. Emin misin?",
+          "effects": [{ "type": "VAR", "var": "ara_ap", "op": "set", "value": 0 }],
+          "next": "$stay"
+        },
+        {
           "id": "GO_T",
           "kind": "NAVIGATE",
           "label": "DURUŞMADAN ÖNCEKİ AKŞAM",
           "role": "PRIMARY",
           "confirm": "Ara evresi biter. Emin misin?",
+          "enabledWhen": {
+            "all": [
+              { "cmp": [{ "var": "ara_day" }, "==", 2] },
+              { "any": [{ "ref": "ara_ilerleme" }, { "cmp": [{ "var": "ara_ap" }, "<=", 0] }] }
+            ]
+          },
+          "lockedReason": "Duruşmaya iki gün var. Önce arayı kullan: en az üç iş ya da bütün eylem puanları.",
           "next": "ARA_TEKLIF"
         }
       ]
@@ -342,7 +392,7 @@
                 },
                 { "speaker": "ozan", "text": "Tabii, tabii. Haklısınız üstat. Usul. Ben de öyle derim hep." },
                 { "speaker": "narrator", "text": "Kalktı. Kapıda durdu, döndü, gülümsedi." },
-                { "speaker": "ozan", "text": "Saygılar." }
+                { "speaker": "ozan", "text": "Kestaneyi soğutmayın ama. Hayırlı akşamlar." }
               ]
             }
           ],
@@ -395,7 +445,7 @@
                 },
                 { "speaker": "ozan", "text": "Neden sordunuz?" },
                 { "speaker": "player", "text": "Merak ettim." },
-                { "speaker": "ozan", "text": "Merak iyidir. Saygılar.", "expression": "mutlu" }
+                { "speaker": "ozan", "text": "Merak iyidir üstat. Hayırlı akşamlar.", "expression": "mutlu" }
               ]
             }
           ],
@@ -513,7 +563,7 @@
                 },
                 {
                   "speaker": "melis",
-                  "text": "Eylülde ben de oradan bir iki kere yazmıştım. Sonra o dizüstü yoktu. Ortak gidince gitti sandım."
+                  "text": "Ortaklığa başlamadan önce, geçen kış ofise gittiğimde ben de oradan bir iki kere yazmıştım. Mart’tan sonra o dizüstü yoktu. Ortak gidince gitti sandım."
                 },
                 {
                   "speaker": "player",
@@ -559,7 +609,10 @@
             }
           ],
           "next": "ARA_HUB",
-          "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 }],
+          "effects": [
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
+            { "type": "VAR", "var": "melis_kapandi", "op": "set", "value": true }
+          ],
           "quality": {
             "q": "BAD",
             "feedback": "Görüşmenin amacı anlamaktı; vazgeçme talebi katılanı baskı altında hissettirir ve görüşmeyi bitirir. Üstelik şantaj suçu şikâyete bağlı değildir.",
@@ -598,7 +651,7 @@
             },
             {
               "speaker": "nurten",
-              "text": "Aksoy Tekin. Üç yıl defterlerini ben tuttum. Demirbaş numaralarını ezbere bilirim kızım: plotter 01, ofis tableti 03, Tarık Bey’in dizüstüsü 05, Ozan Bey’inki 07. Çift sayılar Ozan’ın, tek sayılar ortak."
+              "text": "Aksoy Tekin. Üç yıl defterlerini ben tuttum. Demirbaş numaralarını ezbere bilirim kızım: plotter 01, ofis tableti 03, Tarık Bey’in dizüstüsü 05, Ozan Bey’inki 07. Yedi ve sonrası Ozan Bey’in zimmetindeydi."
             },
             {
               "speaker": "nurten",
@@ -631,16 +684,28 @@
               "lines": [
                 {
                   "speaker": "nurten",
-                  "text": "“Bozuldu, attım” dedi. Ben “Tutanak tutalım, demirbaştan düşelim” dedim. “Gerek yok Nurten Hanım” dedi."
+                  "text": "“Bozuldu, attım” dedi. Ben “Tutanak tutalım, demirbaştan düşelim” dedim. “Gerek yok Nurten Hanım” diye bir e-posta yazdı."
                 },
                 {
                   "speaker": "nurten",
-                  "text": "Kırk yıllık muhasebeciyim. “Gerek yok” denen yere not düşerim. Düştüm."
+                  "text": "Kırk yıllık muhasebeciyim. “Gerek yok” denen yere not düşerim. Düştüm; e-postayı da bastım, protokolün arkasına zımbaladım."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Çıktıyı önüme koydu. Gönderen: o.tekin. “Sn. Sarı, 07 için tutanağa gerek görmüyorum... Saygılar.”"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Büyük harf, üç nokta, noktalı bir “Saygılar.” Bir e-posta. Panoya iğnelenecek bir kâğıt daha; neyle yan yana duracağına tahta karar verecek.",
+                  "style": "thought"
                 }
               ]
             }
           ],
-          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 30 }]
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 30 },
+            { "type": "DISCOVER", "evidence": "clue_uslup_ozan" }
+          ]
         },
         { "id": "NUR_BITIR", "kind": "CONTINUE", "label": "Teşekkür et", "role": "BACK", "next": "ARA_HUB" }
       ]
@@ -687,7 +752,7 @@
           "match": { "tool": "mag", "target": "d4" },
           "feedback": {
             "title": "YENİ İPUCU",
-            "text": "Büyüteci 07 numaralı satıra tuttum. “Dizüstü + dok istasyonu. Zimmet: O. Tekin.” İade hanesi bomboş. Kenarda Nurten Hanım’ın kırk yıllık muhasebeci el yazısı: “O.T. bozuldu dedi.” Diğer bütün demirbaşların iadesi işaretli; yalnız 07 boşta. Dok ofiste, tozlu yuvasında kaldı; ama dizüstü, “bozuldu” denip tutanaksız, demirbaştan düşülmeden kayıplara karıştı.",
+            "text": "“07 · Dizüstü + dok · Zimmet: O. Tekin.” İade hanesi boş; kenarda “O.T. bozuldu dedi.” Bütün demirbaşların iadesi işaretli, yalnız 07 değil. Dok ofiste kaldı; dizüstü tutanaksız kayboldu.",
             "label": "+150 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -854,7 +919,7 @@
           "match": { "tool": "mag", "target": "Ah3" },
           "feedback": {
             "title": "YENİ İPUCU",
-            "text": "Büyüteci cihaz 3 satırına tuttum. “OFIS-LAPTOP-07 · PUSULA Masaüstü (Windows).” 14 Şubat’ta hesaba bağlanmış ve o günden beri hiç kapatılmamış bir masaüstü oturumu. Son etkin olduğu an: 12 Kasım 02.21; yani son tehdit mesajından tam iki dakika sonra. Bir telefon değil bu; ofiste bir yerde duran, hesabın sahibinin bile unuttuğu bir bilgisayar.",
+            "text": "Cihaz 3: “OFIS-LAPTOP-07 · PUSULA Masaüstü (Windows).” 14 Şubat’tan beri hiç kapatılmamış bir oturum. Son etkinlik 12 Kasım 02.21, son tehditten iki dakika sonra. Telefon değil; bir bilgisayar.",
             "label": "+150 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -884,7 +949,7 @@
           "match": { "tool": "cmp", "target": "Ah4" },
           "feedback": {
             "title": "YENİ İPUCU",
-            "text": "Karşılaştır aletini üç oturum satırına sırayla tuttum. 6 Kasım, 9 Kasım, 12 Kasım; üçünde de cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Oysa Tarık’ın kendi telefonu, cihaz 0, ev hattından bağlanıyor: 176.88.12.4. Üç tehdit gecesinin adresi, Tarık’ın evi değil. Başka bir yer; sabit, tekrar eden, bir iş adresi gibi.",
+            "text": "Üç gecenin üçünde de cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.",
             "label": "+150 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -923,7 +988,7 @@
           "match": { "tool": "mag", "target": "Ah7" },
           "feedback": {
             "title": "YENİ İPUCU",
-            "text": "6 Kasım 02.13. İlk tehdit mesajından tam iki dakika sonra, Melis’le olan sohbet arşivlenmiş. Hem de cihaz 3’ten. Arşivlemek, bir sohbeti ana listeden gizlemektir. Tarık’ın telefonunda bu yüzden hiçbir şey görünmedi; birisi mesajı gönderip hemen gizlemiş. Hesabın sahibi kendi yazdığı mesajı neden gizlesin? Gizleyen, hesabı kullanan biri; sahibi fark etmesin diye.",
+            "text": "6 Kasım 02.13: ilk tehditten iki dakika sonra sohbet arşivlenmiş, cihaz 3’ten. Arşiv, sohbeti listeden gizler. Sahibi kendi mesajını neden gizlesin? Gizleyen, hesabı kullanan biri.",
             "label": "+100 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -959,6 +1024,292 @@
       ]
     },
     {
+      "id": "ARA_RAPOR",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #06 · ARA",
+      "title": "Bilirkişi raporu",
+      "hud": ["ex6"],
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · ARŞİV MASASI — 09.40", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Kalemden UYAP’a düşen rapor: on bir sayfa, iki ek. Dr. Nazlı Uçar’ın imzası her sayfanın altında, aynı açıyla, aynı mürekkeple."
+            },
+            { "speaker": "narrator", "text": "Leyla raporu masama bıraktı ama elini üstünden çekmedi." },
+            {
+              "speaker": "leyla",
+              "text": "Bilirkişi senin tanığın değil Deniz. Mahkemenin gözü. Lehine olanı da, aleyhine olanı da aynı soğukkanlılıkla yazar. İkisini de oku."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir rapor, bir sonuç cümlesi ve onu taşıyan satırlar. Polisin raporunda satırlar sonuçla kavga ediyordu. Bakalım bu kez nasıl.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "Bir alet seç, sonra satıra dokun." }
+          ]
+        }
+      ],
+      "header": { "left": "ADLİ BİLİŞİM BİLİRKİŞİ RAPORU · DR. N. UÇAR", "right": "İMAJ: 9f3a…c41e" },
+      "columns": [
+        { "label": "BAŞLIK", "flex": 0.8 },
+        { "label": "TESPİT", "flex": 3 }
+      ],
+      "rows": [
+        {
+          "id": "r1",
+          "cells": ["Yöntem", "İmaj hash’i yeniden hesaplandı: SHA-256 9f3a…c41e · 14.11 değeriyle eşleşti"]
+        },
+        {
+          "id": "r2",
+          "cells": [
+            "Bulgu 1",
+            "Ek-3 sender_device = 3 → bağlı cihaz kaydı: “OFIS-LAPTOP-07 · PUSULA Masaüstü (Windows)”"
+          ]
+        },
+        { "id": "r3", "cells": ["Bulgu 2", "09.11 01.40–06.10: ekran kilitli; kilit açma ya da dokunma olayı yok"] },
+        {
+          "id": "r4",
+          "cells": [
+            "Bulgu 3",
+            "12.11 15.40–15.52: kilit açma, uygulama gezinmesi; cihazda 14 yeni ekran görüntüsü dosyası"
+          ]
+        },
+        { "id": "r5", "cells": ["Bulgu 4", "06.11 02.13 sohbet arşivleme olayı · kaynak cihaz: 3"] },
+        {
+          "id": "r6",
+          "cells": ["Sınır", "Cihaz 3’ün kendisi incelenmemiştir; onu kullanan kişi bu imajdan belirlenemez."]
+        },
+        {
+          "id": "r7",
+          "cells": [
+            "Kanaat",
+            "Mesajların telefondan gönderildiği yönündeki kolluk değerlendirmesi teknik verilerle desteklenmemektedir."
+          ]
+        }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex6", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_R_CIHAZ",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "r2" },
+          "feedback": {
+            "title": "BULGU 1",
+            "text": "Büyüteci ilk bulguya tuttum. Bilirkişi aynı sonuca hiçbir dış kayda bakmadan, imajın kendisinden varmış. Gönderen cihaz 3, bir masaüstü uygulaması, bir Windows makinesi. İki ayrı yol, aynı kapıya çıkıyor.",
+            "label": "+80 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 80 }]
+        },
+        {
+          "id": "EX_R_KILIT",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "r3" },
+          "feedback": {
+            "title": "BULGU 2",
+            "text": "9 Kasım gecesi dört buçuk saat telefona tek parmak değmemiş: “dokunma olayı yok.” Hemşirenin bandı, onam formu, şimdi de makinenin günlüğü. Üç tanık; hiçbiri yalan söylemeyi bilmiyor.",
+            "label": "+80 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 80 }]
+        },
+        {
+          "id": "EX_R_SS",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "r4" },
+          "feedback": {
+            "title": "BULGU 3 · DELİLİN İÇİNE YAZILAN",
+            "text": "Bulgu 3 ile Yöntem yan yana: on dört ekran görüntüsü telefonun hafızasına yazılmış, imaj iki gün sonra alınmış. Delil, kopyası alınmadan değiştirilmiş. Hash 14 Kasım’ı korur; 12’sini değil.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 }]
+        },
+        {
+          "id": "EX_R_SINIR",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "r6" },
+          "feedback": {
+            "title": "SINIR",
+            "text": "İyi bilirkişi bilmediğini de yazar: imaj, cihaz 3’ün başında kimin oturduğunu söyleyemez. Duruşmada bunu soracaklar. Cevap bir dizüstünde, bir hatta, bir demirbaş listesinde.",
+            "label": "+60 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [{ "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 60 }]
+        },
+        {
+          "id": "EX_R_KANAAT",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "r7" },
+          "feedback": {
+            "title": "KANAAT",
+            "text": "Kanaat cümlesi temkinli: “desteklenmemektedir.” Bilirkişiler “kesinlikle” demez. Ama bu temkinli cümle, polisin kesin cümlesini yerinden söküyor.",
+            "label": "NOT ALINDI",
+            "tone": "info"
+          }
+        },
+        {
+          "id": "FB_RAPOR",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle burada dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "RAPOR_BITIR", "kind": "CONTINUE", "label": "Raporu kapat", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
+      "id": "ARA_VAKIF_GIRIS",
+      "type": "STORY",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #06 · ARA",
+      "title": "Vakıf odası",
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "KOZA HAN · VAKIF ODASI — 15.00", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Koza Han’ın avlusunda şadırvan yine kurumuş, ipek tezgâhları yağmura karşı naylonla örtülmüş. Vakıf odasında aynı kitap kokusu, aynı ince belli bardaklar."
+            },
+            {
+              "speaker": "hayri",
+              "text": "Gene geldin evladım. Duruşmayı duydum; bir sütunmuş, bir cihazmış. Ben anlamam. Ama bir şey anladım: sen dosyanın kenarını okuyorsun."
+            },
+            {
+              "speaker": "player",
+              "text": "İhale dosyasını görmem mümkün mü Hayri Bey? Gelen evrakı, teklifleri. Bir şey almayacağım; yalnızca bakacağım."
+            },
+            {
+              "speaker": "hayri",
+              "text": "Dosya vakfındır, sana veremem. Mahkeme isterse gönderirim, kanun neyse o. Ama gözünle bakmana kimse bir şey demez. Ben de buradayım zaten."
+            },
+            {
+              "speaker": "hayri",
+              "text": "Gelen evrakı sekreterlik kaydeder; ben imzalarım, okumam. Yaşlandıkça insan imzayı okumaktan daha kolay bulur. Kötü bir alışkanlık."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Önüme kalın, sırtı yıpranmış bir klasör koydu. Üstünde mürekkeple: “Eski Pirinç Han Restorasyonu · 2. kısım.”"
+            }
+          ]
+        }
+      ],
+      "choices": [{ "id": "VAKIF_BASLA", "kind": "CONTINUE", "label": "Klasörü aç", "next": "ARA_VAKIF" }]
+    },
+    {
+      "id": "ARA_VAKIF",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #06 · ARA",
+      "title": "İhale dosyası",
+      "hud": ["ex7"],
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Gelen evrak defterinin ihaleyle ilgili sayfası. Bir alet seç, sonra satıra dokun."
+            }
+          ]
+        }
+      ],
+      "header": { "left": "BURSA KÜLTÜR VAKFI · GELEN EVRAK", "right": "ESKİ PİRİNÇ HAN" },
+      "columns": [
+        { "label": "TARİH", "flex": 0.9 },
+        { "label": "TÜR", "flex": 0.9 },
+        { "label": "KONU", "flex": 2.6 }
+      ],
+      "rows": [
+        { "id": "v1", "cells": ["02.10", "İlan", "Eski Pirinç Han restorasyonu · son teklif 30.10"] },
+        { "id": "v2", "cells": ["28.10", "Teklif", "Aksoy–Karaca Ortak Girişimi · restorasyon belgesi: M. Karaca"] },
+        { "id": "v3", "cells": ["29.10", "Teklif", "Tekin Yapı Danışmanlık Ltd. Şti."] },
+        { "id": "v4", "cells": ["30.10", "Teklif", "Marmara Restorasyon A.Ş."] },
+        {
+          "id": "v5",
+          "cells": [
+            "10.11 · 09.12",
+            "E-posta",
+            "Tekin Yapı: “Sn. Kurul, ortak girişimin bir üyesine ilişkin özel kayıtların dolaşımda olduğu... Saygılar.”"
+          ]
+        },
+        { "id": "v6", "cells": ["19.11", "Kurul kararı", "Değerlendirme askıya alındı"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex7", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_V_YAZI",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "v5" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "10 Kasım 09.12. Ses kaydı yedi saat önce gitmiş; Hayri Bey kimseye söylememiş, dedikodu ertesi hafta yayılmış. Ama bu e-posta kaydı şimdiden biliyor. “Sn.” ile açılıyor, “Saygılar.” ile kapanıyor.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_vakif_yazi" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_V_TEKLIF",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "v3" },
+          "feedback": {
+            "title": "ÜÇ TEKLİF",
+            "text": "Ortak girişimin teklifi Melis’in belgesine yaslanıyor; o çekilirse teklif düşer, geriye büyük bir şirket ve Tekin Yapı kalır. Kimin işine yarar? Bu bir delil değil; bir soru. Ama doğru soru.",
+            "label": "+60 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }]
+        },
+        {
+          "id": "EX_V_KARAR",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "v6" },
+          "feedback": {
+            "title": "KURUL KARARI",
+            "text": "Kurul 19 Kasım’da değerlendirmeyi askıya almış; gerekçede “kamuoyuna yansıyan soruşturma” yazıyor. Bir dedikodu bir ihaleyi durdurmuş.",
+            "label": "NOT ALINDI",
+            "tone": "info"
+          }
+        },
+        {
+          "id": "FB_VAKIF",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle burada dikkat çeken bir şey bulamadın.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "VAKIF_BITIR", "kind": "CONTINUE", "label": "Klasörü kapat", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
       "id": "ARA_SUC",
       "type": "CHOICE",
       "chapter": "Bölüm 4 · Ara",
@@ -981,15 +1332,15 @@
         {
           "id": "SUC_OZAN",
           "kind": "OPTION",
-          "label": "Ozan Tekin hakkında: hesabın 07’den kullanılması; dizüstünün aranması ve el konulması talebiyle",
+          "label": "Ozan Tekin hakkında; 07’nin aranması ve el konulması talebiyle",
           "enabledWhen": { "ref": "ozan_dayanak" },
-          "lockedReason": "Somut dayanak gerekli: cihaz 3’ün ne olduğu ve 07’nin kimde kaldığı.",
+          "lockedReason": "Somut dayanak gerekli: cihaz 3’ün ne olduğu, 07’nin kimde kaldığı ve tehdit hattının kime ait olduğu.",
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "narrator",
-                  "text": "Dilekçeyi dört sayfada yazdım. Ekleri kalınca: noter tespitli hesap verisi, demirbaş listesi, sağlayıcının yazısı, Ek-3’ün bir kopyası."
+                  "text": "Dilekçeyi dört sayfada yazdım. Ekleri kalınca: Ek-3’ün bir kopyası, demirbaş listesi, sağlayıcının mahkemeye yazısı."
                 },
                 {
                   "speaker": "narrator",
@@ -1025,7 +1376,7 @@
         {
           "id": "SUC_MECHUL",
           "kind": "OPTION",
-          "label": "Kimliği belirsiz kişi(ler) hakkında: hesabın başka bir cihazdan kullanılması",
+          "label": "Kimliği belirsiz kişiler hakkında; hesabın başka cihazdan kullanılması",
           "enabledWhen": { "hasEvidence": "ded_bagli" },
           "lockedReason": "Önce mesajların başka bir cihazdan çıktığını göstermelisin.",
           "responses": [
@@ -1051,7 +1402,7 @@
         {
           "id": "SUC_MELIS",
           "kind": "OPTION",
-          "label": "Katılan hakkında: suç uydurma",
+          "label": "Katılan hakkında; mesajları kendisinin kurguladığı iddiasıyla suç uydurma",
           "responses": [
             {
               "lines": [
@@ -1067,7 +1418,7 @@
           "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": -80 }],
           "quality": {
             "q": "BAD",
-            "feedback": "Hiçbir dayanağı olmayan bir suç duyurusu iftira (TCK 267) riski taşır ve duruşmada savunmanın güvenilirliğini düşürür.",
+            "feedback": "Suç uydurma (TCK 271) iddiasının hiçbir dayanağı yok; dayanaksız bir suç duyurusu iftira (TCK 267) riski taşır ve savunmanın güvenilirliğini düşürür.",
             "category": "USUL_BILGISI"
           }
         },
@@ -1114,7 +1465,8 @@
         "clue_melis_teori",
         "clue_koli",
         "clue_envanter",
-        "ev_isp"
+        "ev_isp",
+        "clue_vakif_yazi"
       ],
       "choices": [
         {
@@ -1346,6 +1698,25 @@
           ]
         },
         {
+          "id": "CB_A_VAKIF",
+          "kind": "COMBINE",
+          "match": { "a": "clue_vakif_yazi", "b": "clue_uslup_tehdit" },
+          "feedback": {
+            "title": "Aynı imza, aynı sabah",
+            "text": "Vakfa giden yazı “Sn. Kurul” diye açılıyor, üç noktayla duruyor, “Saygılar.” ile kapanıyor. Tehditlerle aynı el. Ve bu el, kaydın varlığını herkesten bir hafta önce biliyordu.",
+            "label": "YENİ DELİL · +200 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_uslup_ozan" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 200 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_uslup_ozan" }
+          ]
+        },
+        {
           "id": "FB_A_CIKARIM",
           "kind": "FALLBACK",
           "fallbackFor": "COMBINE",
@@ -1467,7 +1838,7 @@
         {
           "id": "TK_RED",
           "kind": "OPTION",
-          "label": "Hayır. İkisini de yapmayacağız. Ne biliyorsak, kâğıda ve savcılığa.",
+          "label": "Hayır. İkisini de yapmayacağız.",
           "responses": [
             {
               "lines": [
@@ -1501,7 +1872,7 @@
         {
           "id": "TK_SIL",
           "kind": "OPTION",
-          "label": "25 Ekim mesajlarını yedekten silelim. Kimse fark etmez.",
+          "label": "25 Ekim mesajlarını yedekten çıkaralım; saik ortadan kalkar, kimse fark etmez.",
           "responses": [
             {
               "lines": [
@@ -1532,7 +1903,7 @@
         {
           "id": "TK_GIRIS",
           "kind": "OPTION",
-          "label": "Eski ortağın e-postasına girip bir bakalım. Bir dakika.",
+          "label": "E-postasına bir bakalım; bir şey bulursak doğrudan savcılığa iletiriz.",
           "responses": [
             {
               "lines": [
@@ -1619,11 +1990,11 @@
             { "speaker": "player", "text": "Teşekkür ederim. Gerçekten teşekkür ederim." },
             {
               "speaker": "narrator",
-              "text": "Telefonu kapattım. Bir süre karanlıkta oturdum. Kalbim, o kadının altı ay önceki kalbi gibi çarpıyordu."
+              "text": "Telefonu kapattım. Bir süre karanlıkta oturdum. Kalbim, o kadının kasımdaki kalbi gibi çarpıyordu."
             },
             {
               "speaker": "player",
-              "text": "Açıkmış. Altı aydır açık bir ekran. Kimse kapatmamış; belki kapatmaya gerek görmemiş, belki unutmuş. O açık ekran, üç gece bir kadının hayatını yaktı. Ve yarın, o ekran konuşacak.",
+              "text": "Açıkmış. Aylardır açık bir ekran. Kimse kapatmamış; belki kapatmaya gerek görmemiş, belki unutmuş. O açık ekran, üç gece bir kadının hayatını yaktı. Ve yarın, o ekran konuşacak.",
               "style": "thought"
             }
           ]
@@ -1684,7 +2055,7 @@
             },
             {
               "speaker": "player",
-              "text": "Ve yarın o adresin sahibi, o dizüstünün zimmetlisi, tanık kürsüsünde yemin edecek. “Bildiğimi dosdoğru söyleyeceğime” diyecek. Bakalım söyleyebilecek mi.",
+              "text": "Ve yarın o adresin sahibi, o dizüstünün zimmetlisi, tanık kürsüsüne çıkacak. Bildiğini dosdoğru söyleyecek mi, göreceğiz.",
               "style": "thought"
             },
             {
@@ -1811,6 +2182,7 @@
       "requires": { "flag": "isp_istendi" },
       "hint": "IP adresinin abonesini mahkemeden sorgulat."
     },
+    { "evidence": "clue_uslup_ozan", "source": { "type": "CHOICE", "id": "NUR_LAPTOP" } },
     { "evidence": "clue_envanter", "source": { "type": "RULE", "id": "EX_D_07" } },
     { "evidence": "clue_bagli_cihaz", "source": { "type": "RULE", "id": "AEX_C3" } },
     { "evidence": "clue_tablet_kapali", "source": { "type": "RULE", "id": "AEX_C2" } },
@@ -1818,6 +2190,7 @@
     { "evidence": "clue_ip_ayni", "source": { "type": "RULE", "id": "AEX_IP2" } },
     { "evidence": "clue_ip_ayni", "source": { "type": "RULE", "id": "AEX_IP3" } },
     { "evidence": "clue_arsiv", "source": { "type": "RULE", "id": "AEX_ARSIV" } },
+    { "evidence": "clue_vakif_yazi", "source": { "type": "RULE", "id": "EX_V_YAZI" } },
     { "evidence": "ded_ss", "source": { "type": "RULE", "id": "ACB_SS" } },
     { "evidence": "ded_zincir", "source": { "type": "RULE", "id": "ACB_ZINCIR" } },
     { "evidence": "ded_bagli", "source": { "type": "RULE", "id": "ACB_BAGLI" } },
@@ -1829,6 +2202,7 @@
     { "evidence": "ded_laptop_ozan", "source": { "type": "RULE", "id": "CB_A_LAP1" } },
     { "evidence": "ded_laptop_ozan", "source": { "type": "RULE", "id": "CB_A_LAP2" } },
     { "evidence": "ded_ip_tekin", "source": { "type": "RULE", "id": "CB_A_IP" } },
-    { "evidence": "ded_uslup_ozan", "source": { "type": "RULE", "id": "CB_A_USLUP" } }
+    { "evidence": "ded_uslup_ozan", "source": { "type": "RULE", "id": "CB_A_USLUP" } },
+    { "evidence": "ded_uslup_ozan", "source": { "type": "RULE", "id": "CB_A_VAKIF" } }
   ]
 }

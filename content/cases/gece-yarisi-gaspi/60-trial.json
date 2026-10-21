@@ -111,15 +111,18 @@
         {
           "when": { "flag": "zarf_aldi" },
           "lines": [
-            { "speaker": "derya", "text": "Tolga gelmedi. Söz vermişti. Telefonu da kapalı. Bu çocuk da…" },
-            { "speaker": "player", "text": "Masamda onun zarfı duruyor. Derya’nın haberi yok.", "style": "thought" }
+            {
+              "speaker": "derya",
+              "text": "Annem sabah ezanından beri burada. Ben salonu kapattım, kepenge “Duruşma” yazdım."
+            },
+            { "speaker": "player", "text": "Masamda kuzenin zarfı duruyor. Derya’nın haberi yok.", "style": "thought" }
           ]
         },
         {
           "lines": [
             {
               "speaker": "derya",
-              "text": "Tolga da gelecekti, “işim var” dedi. Bu ailede herkesin bir işi var, bir tek Barış’ın yok."
+              "text": "Salonu kapattım canım. Kepenge “Duruşma” yazdım. Bu ailede herkes bir kapısını kapattı; Barış’ınki zaten kapalı."
             }
           ]
         }
@@ -536,7 +539,7 @@
         {
           "id": "H102_A",
           "kind": "OPTION",
-          "label": "“Katılıyoruz; giriş cihazı ve kimlik doğrulama kayıtları da istensin.”",
+          "label": "“Katılıyoruz; cihaz ve doğrulama kaydı da gelsin.”",
           "responses": [
             {
               "lines": [
@@ -568,13 +571,20 @@
         {
           "id": "H102_B",
           "kind": "OPTION",
-          "label": "“Katılıyoruz.”",
+          "label": "“Katılıyoruz; kayıtlar müvekkilin evde olduğunu gösterir.”",
           "responses": [
             {
               "lines": [
-                { "speaker": "player", "text": "Talebe katılıyoruz Sayın Başkan. Saklayacak bir şeyimiz yok." },
+                {
+                  "speaker": "player",
+                  "text": "Talebe katılıyoruz Sayın Başkan. Kayıtlar müvekkilin o gece evde olduğunu gösterecektir."
+                },
                 { "speaker": "rahmi", "text": "Kabul." },
-                { "speaker": "player", "text": "Saklayacak bir şeyimiz yok. Umarım.", "style": "thought" }
+                {
+                  "speaker": "player",
+                  "text": "Gösterecektir. Bir kaydın ne göstereceğini, onu okumadan söyledim. Umarım.",
+                  "style": "thought"
+                }
               ]
             }
           ],
@@ -584,7 +594,7 @@
         {
           "id": "H102_C",
           "kind": "OPTION",
-          "label": "“Karşı çıkıyoruz; kayıtlar ilgisiz.”",
+          "label": "“Karşı çıkıyoruz; kayıtlar ilgisiz ve talep çok geniş.”",
           "responses": [
             {
               "lines": [
@@ -1347,7 +1357,7 @@
         {
           "id": "H104_A",
           "kind": "OPTION",
-          "label": "İtiraz: sanık sandalyesindeki tek kişiyi göstermek telkindir",
+          "label": "İtiraz: soru telkinli, salonda başka genç yok",
           "responses": [
             {
               "lines": [
@@ -1389,7 +1399,7 @@
                 { "speaker": "nermin", "text": "Bilmiyorum… Galiba. O fotoğraftaki… Galiba bu." },
                 {
                   "speaker": "player",
-                  "text": "“Galiba.” Acilde de böyle demişti. Bu kelime bu dosyada ikinci kez bir kaderi değiştiriyor.",
+                  "text": "“Galiba.” Bir kelime. Bu dosyada bir kaderi değiştirecek kadar ağır.",
                   "style": "thought"
                 }
               ]
@@ -1405,7 +1415,7 @@
         {
           "id": "H104_C",
           "kind": "OPTION",
-          "label": "İtiraz: tanık yorgun, ara verilsin",
+          "label": "İtiraz: tanık yorgun, beyanı artık güvenilmez",
           "responses": [
             {
               "lines": [
@@ -1427,7 +1437,7 @@
         {
           "id": "H104_D",
           "kind": "OPTION",
-          "label": "İtiraz: bu soru iddianamede yok",
+          "label": "İtiraz: soru iddianamenin kapsamı dışında",
           "responses": [
             {
               "lines": [
@@ -1581,12 +1591,95 @@
           "label": "Tahliye: teşhis sarsıldı, adli kontrol yeterli",
           "responses": [
             {
+              "when": { "all": [{ "flag": "contra_n3" }, { "flag": "contra_n5" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, mağdur bugün, karakoldaki teşhisten önce acil serviste kendisine telefondan tek bir fotoğraf gösterildiğini söyledi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Mağdurun kirlenmeden önceki ilk tarifi, 112 çağrısında, sol kulakta bir halkadan söz ediyor; sanığın kulakları delinmemiş."
+                },
+                { "speaker": "player", "text": "Kuvvetli suç şüphesi sarsılmıştır." },
+                {
+                  "speaker": "player",
+                  "text": "Sanığın sabit adresi var, kaçma şüphesi yok. Adli kontrol yeterlidir."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Heyet kısa bir müzakere için ayağa kalktı. Dört dakika. Sevim Hanım’ın tespihi bu dört dakikayı saydı."
+                },
+                {
+                  "speaker": "rahmi",
+                  "text": "Sanığın imza yükümlülüğü ve yurt dışına çıkış yasağı şeklinde adli kontrol tedbiri uygulanarak tahliyesine; başka suçtan tutuklu değilse derhâl salıverilmesine."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Barış başını iki elinin arasına aldı. Jandarma, kelepçeyi taşıdığı eli bir an havada tuttu; sonra cebine koydu."
+                }
+              ]
+            },
+            {
+              "when": { "flag": "contra_n3" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, mağdur bugün, karakoldaki teşhisten önce acil serviste kendisine telefondan tek bir fotoğraf gösterildiğini söyledi."
+                },
+                { "speaker": "player", "text": "Kuvvetli suç şüphesi sarsılmıştır." },
+                {
+                  "speaker": "player",
+                  "text": "Sanığın sabit adresi var, kaçma şüphesi yok. Adli kontrol yeterlidir."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Heyet kısa bir müzakere için ayağa kalktı. Dört dakika. Sevim Hanım’ın tespihi bu dört dakikayı saydı."
+                },
+                {
+                  "speaker": "rahmi",
+                  "text": "Sanığın imza yükümlülüğü ve yurt dışına çıkış yasağı şeklinde adli kontrol tedbiri uygulanarak tahliyesine; başka suçtan tutuklu değilse derhâl salıverilmesine."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Barış başını iki elinin arasına aldı. Jandarma, kelepçeyi taşıdığı eli bir an havada tuttu; sonra cebine koydu."
+                }
+              ]
+            },
+            {
+              "when": { "flag": "contra_n5" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, mağdurun kirlenmeden önceki ilk tarifi, 112 çağrısında, sol kulakta bir halkadan söz ediyor; sanığın kulakları delinmemiş."
+                },
+                { "speaker": "player", "text": "Kuvvetli suç şüphesi sarsılmıştır." },
+                {
+                  "speaker": "player",
+                  "text": "Sanığın sabit adresi var, kaçma şüphesi yok. Adli kontrol yeterlidir."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Heyet kısa bir müzakere için ayağa kalktı. Dört dakika. Sevim Hanım’ın tespihi bu dört dakikayı saydı."
+                },
+                {
+                  "speaker": "rahmi",
+                  "text": "Sanığın imza yükümlülüğü ve yurt dışına çıkış yasağı şeklinde adli kontrol tedbiri uygulanarak tahliyesine; başka suçtan tutuklu değilse derhâl salıverilmesine."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Barış başını iki elinin arasına aldı. Jandarma, kelepçeyi taşıdığı eli bir an havada tuttu; sonra cebine koydu."
+                }
+              ]
+            },
+            {
               "when": { "ref": "tahliye_dayanak" },
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan, bugün mağdurun teşhisinden önce acilde tek fotoğraf gösterildiği ya da ilk tarifinin sanığa uymadığı ortaya çıktı. Kuvvetli suç şüphesi sarsılmıştır."
+                  "text": "Sayın Başkan, bıçak ilk çağrıda yok; teşhisteki altı fotoğraftan yalnızca sanığınki renkli ve ötekilerden büyük."
                 },
+                { "speaker": "player", "text": "Kuvvetli suç şüphesi sarsılmıştır." },
                 {
                   "speaker": "player",
                   "text": "Sanığın sabit adresi var, kaçma şüphesi yok. Adli kontrol yeterlidir."

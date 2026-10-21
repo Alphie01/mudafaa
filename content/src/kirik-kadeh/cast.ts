@@ -1,8 +1,9 @@
 import { character, sharedSprite } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
+import { caseSprites } from './sprites.js';
 
 // 10-cast: sprite'lar, karakterler ve ilişkiler. Bora ve Tolga Şen tasarımdaki ortak sprite'larla (bora, rakip);
-// Serkan, Onur ve Ece için yeni sprite'lar content/shared/sprites/kirik-kadeh-*.json.
+// Serkan, Onur ve Ece için yeni sprite'lar sprites.ts'te (satır içi).
 
 export const cast: CasePart = {
   sprites: [
@@ -13,11 +14,10 @@ export const cast: CasePart = {
     sharedSprite('hakim'),
     sharedSprite('savci'),
     sharedSprite('mubasir'),
+    sharedSprite('katip'),
     sharedSprite('polis'),
     sharedSprite('tanik'),
-    sharedSprite('kirik-kadeh-serkan', 'kk_serkan'),
-    sharedSprite('kirik-kadeh-onur', 'kk_onur'),
-    sharedSprite('kirik-kadeh-ece', 'kk_ece'),
+    ...caseSprites,
   ],
   characters: [
     character('deniz', {
@@ -110,6 +110,13 @@ export const cast: CasePart = {
       occupation: 'Cumhuriyet savcısı',
       accent: '#c0392b',
       spriteId: 'savci',
+    }),
+    character('katip', {
+      name: 'Zabıt kâtibi',
+      shortLabel: 'Kâtip',
+      role: 'CLERK',
+      accent: '#5c5a66',
+      spriteId: 'katip',
     }),
     character('mubasir', {
       name: 'Mübaşir Rıza Bey',

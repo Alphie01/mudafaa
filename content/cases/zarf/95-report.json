@@ -2,28 +2,135 @@
   "report": {
     "hints": [
       {
-        "id": "h_a",
-        "when": { "not": { "hasEvidence": "clue_a" } },
-        "text": "TODO: olay yerindeki A bulgusunu kaçırdın.",
+        "id": "h_sure",
+        "when": { "not": { "hasEvidence": "ded_sure_disi" } },
+        "text": "Dinleme kararı iki aylıktı ve uzatılmamıştı; “zarf yarın masada” kaydı süre bittikten sonra alınmıştı (CMK 135/4, 137/1). Kararın süresini kayıt #14’ün tarihiyle tahtada birleştirmek gerekiyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_hat",
+        "when": { "not": { "hasEvidence": "ded_hat_disi" } },
+        "text": "Kayıt #9 sanığın kendi hattındandı; karar yalnızca müteahhidin hattını gösteriyordu. Savcılık talimatı hâkim kararının yerini tutmaz (CMK 135/1, 135/9).",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_cagri",
+        "when": { "not": { "hasEvidence": "ded_sahte_cagri" } },
+        "text": "Halil takvimine arayan dahiliyi yazmıştı: 214. Koridordaki rehber, makamın 201 olduğunu gösteriyordu. Biri onu odasından uzaklaştırdı.",
         "category": "ARASTIRMA"
       },
       {
-        "id": "h_c",
-        "when": { "not": { "hasEvidence": "clue_c" } },
-        "text": "TODO: belgeye UV tutmadın.",
+        "id": "h_bos",
+        "when": { "not": { "hasEvidence": "ded_bos_oda" } },
+        "text": "Tutanağın kendi saatleri: kayıt 10.39’da kesildi, polis 10.44’te boş odaya girdi. Zarf çekmeceye sanık yokken girdi.",
         "category": "DELIL_ANALIZI"
       },
       {
-        "id": "h_ded",
-        "when": { "not": { "hasEvidence": "ded_ab" } },
-        "text": "TODO: A ile B’yi tahtada birleştirmedin.",
+        "id": "h_yetki",
+        "when": { "not": { "hasEvidence": "ded_yetkisiz" } },
+        "text": "Muhbirin “dosyamı bekletiyordu” anlatısı, dosyanın Devir-2’de olduğunu gösteren iş dağıtım kaydıyla çökerdi; irtikabın nüfuz unsuru yoktu (TCK 250/1).",
         "category": "DELIL_ANALIZI"
       },
       {
-        "id": "h_suc",
-        "when": { "not": { "flag": "suc_duyurusu" } },
-        "text": "TODO: gerçek faile giden yol suç duyurusuydu (CMK 158).",
+        "id": "h_iki",
+        "when": { "not": { "hasEvidence": "ded_iki_hikaye" } },
+        "text": "Muhbir 11 Mart’ta “zorla istedi”, 13 Mart’ta “anlaştık” dedi. İki ifadeyi karşılaştırmak, irtikap–rüşvet ayrımını ve beyanın güvenilirliğini tartıştırırdı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_kamera",
+        "when": { "not": { "hasEvidence": "ev_kamera" } },
+        "text": "Koridor kamerası doksan gün saklanıyordu; CMK 177 dilekçesiyle ya da duruşmada istenebilirdi. 10.41’de odaya giren kişi orada görünüyordu.",
         "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_cihaz",
+        "when": { "not": { "hasEvidence": "ev_cihaz" } },
+        "text": "“Teknik arıza” denen kayıt cihazı bilirkişiye incelettirilebilirdi (CMK 63). Günlük, kaydın elle durdurulduğunu ve son saniyelerde ikinci bir sesi gösteriyordu.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_santral",
+        "when": { "not": { "hasEvidence": "ev_santral" } },
+        "text": "Santral dökümü ve izin çizelgesi, sahte çağrının o sabah tek kişinin oturduğu bir odadan geldiğini gösterirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_zarf",
+        "when": { "not": { "hasEvidence": "ded_zarf_kaynagi" } },
+        "text": "Zarfın barkodu 0417, arşivdeki zimmet defterinde Devir-2’ye verilen 0401–0450 destesindeydi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_defter",
+        "when": { "not": { "hasEvidence": "ev_kirmizi_defter" } },
+        "text": "Halil’in kırmızı defteri arşivde, 1987 ciltlerinin arkasındaydı. Güven kazanarak yerini öğrenebilir, tanığın çıkarını gösterebilirdin.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_alibi",
+        "when": { "not": { "hasEvidence": "ded_alibi" } },
+        "text": "Çay ocağının defteri, “arşivdeydim” diyen memurun ısmarladığı çayın boş bir arşive götürüldüğünü gösteriyordu.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_red",
+        "when": { "all": [{ "not": { "flag": "red_14" } }, { "not": { "flag": "contra_k1" } }] },
+        "text": "Hukuka aykırı delile, ortaya konulduğu anda itiraz edilir (CMK 206/2-a). Kayıtlar okunmadan önce kalkmak gerekiyordu.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_kiskirtma",
+        "when": { "not": { "flag": "contra_k2" } },
+        "text": "Seri numarası tutanağı paranın Emniyet’ten çıktığını gösteriyordu: muhbir kolluğun talimatıyla hareket eden bir ajandı. Kışkırtma tartışması (AİHS 6) bu belgeyle açılırdı.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_inkar",
+        "when": { "flag": "halil_inkar" },
+        "text": "Müvekkile inkâr, hele bir başkasını işaret ederek, tavsiye etmek meslek kurallarına aykırıdır (Av.K. 34). Doğru yol, öncelikli randevuyu gerekçesiyle ve karşılık alınmadığını göstererek anlatmaktı.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_tanik",
+        "when": { "flag": "tanik_etkileme" },
+        "text": "Tanığa ne söyleyeceğini dikte etmek tanığı etkilemedir (TCK 277). Muhbiri kendi avukatına, çaycıyı mahkemeye yönlendirmek gerekirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_bayram",
+        "when": { "all": [{ "flag": "bayram_yazdirildi" }, { "not": { "flag": "bayram_avukat" } }] },
+        "text": "Kendisi de şüpheli olabilecek muhbirden yazılı beyan almak meslek kurallarına aykırıdır; onu adli yardıma yönlendirip mahkemede dinletmek gerekirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_sinan_cagri",
+        "when": {
+          "all": [
+            { "any": [{ "hasEvidence": "ded_sahte_cagri" }, { "hasEvidence": "ded_tek_kisi" }] },
+            { "not": { "flag": "sinan_cagrildi" } }
+          ]
+        },
+        "text": "Sahte çağrının geldiği dahilinin kullanıcısını tanık olarak çağırtmadın; kürsüde sınanmayan bir alibi, hükümde de sınanmaz.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_tehdit",
+        "when": {
+          "all": [
+            { "any": [{ "visited": "INV1_AKSAM2" }, { "visited": "ARA_AKSAM" }] },
+            { "not": { "flag": "tehdit_bildirildi" } },
+            { "not": { "flag": "sinan_bildirildi" } }
+          ]
+        },
+        "text": "Sana yönelik örtülü tehditler ve tanığın kendiliğinden yaklaşması belgelenip savcılığa bildirilmeliydi (TCK 106; CMK 158).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_ek",
+        "when": { "not": { "any": [{ "flag": "ek_savunma_tam" }, { "flag": "ek_sure" }] } },
+        "text": "Vasıf değişikliği bildiriminde ek savunma ya hazırlıkla verilir ya da süre istenir (CMK 226/1, 226/3). İrtikabın icbar ve nüfuz unsurlarının yokluğu belgeyle gösterilebilirdi.",
+        "category": "HUKUKI_BILGI"
       }
     ]
   }

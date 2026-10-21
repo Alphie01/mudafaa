@@ -78,6 +78,30 @@ export const report: CasePart = {
         'Aracın multimedya ekranı görüşmenin eller serbest yapıldığını gösteriyordu.',
         'ARASTIRMA',
       ),
+      missedEvidence(
+        'h_boya',
+        'ev_boya',
+        'Maktulün montundaki boya parçasının kriminal incelemesini dilekçeyle istemedin (CMK 177); boya, ilk çarpan aracın rengini ve türünü gösterirdi.',
+        'USUL_BILGISI',
+      ),
+      missedEvidence(
+        'h_arac',
+        'ded_arac',
+        'Boya raporu ile tek yanan stop lambasını tahtada birleştirmedin: kaçan aracın tarifi ancak bu ikisiyle kurulurdu.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_sesli',
+        'ev_sesli',
+        'Hatice Hanım’ın o gece oğluna bıraktığı sesli mesaj dosyaya girmedi. Serkan’a saygıyla yaklaşıp annesini dinlemek, onun kendi kararıyla mesajı savcılığa vermesinin yolunu açardı.',
+        'SORGULAMA',
+      ),
+      missedEvidence(
+        'h_savcilik',
+        'ev_savcilik',
+        'Savcılığın panelvanı ve sürücüsünü tespit eden yazısı dosyaya hiç girmedi; aracın tarifine dayanan somut bir suç duyurusu (CMK 158) bunu sağlardı.',
+        'USUL_BILGISI',
+      ),
       hint(
         'h_itiraz',
         not(flag('h1_itiraz')),

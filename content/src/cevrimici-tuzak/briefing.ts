@@ -39,7 +39,7 @@ export const briefing: CasePart = {
         - 13.40. Banka gişesinin camında adamın yüzü bulanık bir yansıma oldu. Yetmiş beş bin lira. Dekontu dört kez katladı, cüzdanına koydu.
         - Gişedeki genç memur bir an duraksadı. "Tanıdığınız birine mi gönderiyorsunuz, amca?" diye sordu; prosedür. Adam "kardeşi" dedi, sonra düzeltti: "Satıcının kardeşi."
         - Memur omuz silkti. Prosedür, bir soruyla biter; cevabın doğru olup olmadığına bakmaz.
-        = 14.05 — KENT MEYDANI, BİR ATM @sokak_gece
+        = 14.05 — KENT MEYDANI, BİR ATM @sokak_yagmur
         - Kapüşonlu bir genç ATM'nin önünde durdu. Kart takmadı. Telefonunun ekranını makineye tuttu; makine düşündü, bipledi, hışırdadı.
         - Sırtındaki montun sarı harfleri yağmurda parlıyordu. Parayı saymadan cebine soktu. Telefonu kulağına götürdü.
         ?KAPÜŞONLU{phone}: Abi tamam, çektim. Yirmi. Nereye getireyim?
@@ -149,7 +149,7 @@ export const briefing: CasePart = {
       choices: [
         option(
           'BR01_A',
-          'Nitelikli dolandırıcılık: 4–10 yıl hapis; adli para cezası menfaatin iki katından az olamaz',
+          'Nitelikli dolandırıcılık: 4–10 yıl hapis; adli para en az menfaatin iki katı',
           {
             score: { HUKUKI_BILGI: 60 },
             good: 'TCK 158/1-f: üç yıldan on yıla hapis ve beş bin güne kadar adli para; (f) bendinde hapsin alt sınırı dört yıl, adli para cezası menfaatin iki katından az olamaz (158/1 son cümle).',
@@ -177,7 +177,7 @@ export const briefing: CasePart = {
           `),
           next: 'BR_01K',
         }),
-        option('BR01_D', 'Banka veya kredi kartlarının kötüye kullanılması: 3–6 yıl hapis ve adli para cezası', {
+        option('BR01_D', 'Banka veya kredi kartlarının kötüye kullanılması: 3–6 yıl hapis', {
           bad: 'TCK 245 kartın ya da kart bilgilerinin kötüye kullanılmasıdır; burada kart değil, aldatmayla gönderilen para ve banka aracılığı vardır: TCK 158/1-f.',
           category: 'HUKUKI_BILGI',
           responses: B(S`

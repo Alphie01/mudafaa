@@ -1,0 +1,948 @@
+{
+  "outcomes": [
+    {
+      "id": "ETIK",
+      "class": "OTHER",
+      "priority": 1,
+      "when": { "flag": "selim_giris" },
+      "stamp": "AZİL",
+      "stampTone": "red",
+      "sentence": "Vekâlet sona erdi · dava sürüyor",
+      "verdictText": "Mahkemece, müdafiin dosyaya sunduğu dijital kayıtların, sanığa katılan şirketin sistemine yeniden izinsiz girdirilmesi suretiyle elde edildiğinin anlaşılması üzerine; bu kayıtların hükme esas alınamayacağına (CMK 206/2-a, 217/2); durumun Bursa Cumhuriyet Başsavcılığına ve Bursa Barosu Başkanlığına bildirilmesine; sanığın müdafiini azletmesi nedeniyle yargılamanın yeni müdafiin katılımıyla devamına karar verildi.",
+      "reasoning": [
+        {
+          "text": "Müdafi, suçun konusu eylemi (izinsiz sistem girişi) müvekkiline yeniden yaptırarak delil üretmeye çalışmıştır."
+        },
+        { "text": "Bu yolla elde edilen delil hukuka aykırıdır ve hükme esas alınamaz (CMK 206/2-a, 217/2)." },
+        { "text": "Sanık vekâlet ilişkisini sona erdirmiş olduğundan yargılamaya yeni müdafi ile devam olunacaktır." }
+      ],
+      "legalBasis": "TCK 243, 244; TCK 38; CMK 206/2-a, 217/2; Av.K. 34; TBK 512/1",
+      "xp": 0,
+      "howToReach": "Müvekkiline hiçbir koşulda izinsiz sistem girişi yaptırma; gereken kaydı mahkeme kanalıyla iste (CMK 332).",
+      "ethicsCard": "Suçlandığı eylemi müvekkiline yeniden yaptırdın. Bu, hem yeni bir suça azmettirme (TCK 243, 244; TCK 38) hem de hukuka aykırı delil üretmedir (CMK 206/2-a, 217/2) ve avukatın doğruluk yükümlülüğüne aykırıdır (Av.K. 34). Gerçeği, onu kirleten yöntemle aramak gerçeği de müvekkili de kurtarmaz.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN ÖNCE", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Azilnameyi katlayıp çantama koydum. Bir makbuz gibi; yanlış bir işin makbuzu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gül, Selim’in koluna girmişti. Defne’nin resmi Gül’ün elinde buruşmuştu."
+            },
+            { "speaker": "gul", "text": "Siz onu korumaya gelmiştiniz. Bir kere daha o sisteme soktunuz. Neden?" },
+            { "speaker": "narrator", "text": "Cevap vermedim. Vermeye hakkım yoktu." },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · AKŞAM", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda ince bir kitapçık: “Avukatlık Meslek Kuralları.” Leyla bırakmıştı. Not yoktu; not gerekmiyordu."
+            },
+            { "speaker": "narrator", "text": "Leyla’nın odasının ışığı yanıyordu, kapısı kapalıydı. Çalmadım." },
+            {
+              "speaker": "player",
+              "text": "Bu dosyanın bütün hikâyesi, bir kullanıcı adının bir kişi sanılmasıydı. Ben o yanılgıyı düzeltmeye gelmiştim.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Sonunda aynı kapıyı, daha iyi bir niyetle, kendi elimle açtırdım. Niyet bir kaydı temizlemez; bir avukatı da.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Dosyam burada kapandı. Selim’inki başka bir avukatla sürecek.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "COKUS",
+      "class": "OTHER",
+      "priority": 2,
+      "when": { "flag": "cokus" },
+      "stamp": "AZİL",
+      "stampTone": "red",
+      "header": "ARA KARAR",
+      "sentence": "Vekâlet sona erdi · duruşma ertelendi",
+      "verdictText": "Sanığın, duruşmada müdafiine güveninin kalmadığını beyan ederek vekâlet ilişkisini sona erdirmesi ve yeni bir müdafi seçmek için süre istemesi üzerine; sanığa savunmasını seçeceği yeni müdafi aracılığıyla yapma hakkı hatırlatılarak (CMK 149/1) yeni müdafiin dosyayı inceleyebilmesi için duruşmanın ertelenmesine; dosyadaki delillerin hüküm aşamasında değerlendirilmesine karar verildi.",
+      "reasoning": [
+        {
+          "text": "Müdafi, tanık beyanlarıyla ilgisi bulunmayan belgeleri art arda sunmuş; mahkeme bu sunumları dikkate almamıştır."
+        },
+        {
+          "text": "Sanık, müdafiine güveninin kalmadığını beyan ederek vekâleti sona erdirmiştir (TBK 512/1); savunma hakkı gereği yeni müdafie süre verilmiştir."
+        },
+        { "text": "Dosyadaki deliller henüz değerlendirilmemiştir; hüküm, yeni müdafiin katılımıyla kurulacaktır." }
+      ],
+      "legalBasis": "CMK 149/1; TBK 512/1; Av.K. 34",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 30] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 30] }, 1000] }
+        }
+      },
+      "howToReach": "Yanlış delil ve dayanaksız itiraz güvenilirliği eritir; ♥ sıfıra inerse müvekkil seni azleder. Önce bastır, sonra yalnızca ifadeyle çelişen kâğıdı göster.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "SALON · ARA KARARDAN SONRA", "style": "card", "bg": "durusma_salonu" },
+            {
+              "speaker": "narrator",
+              "text": "“Yeni müdafi için süre verilmesine.” Hâkim kalemini bıraktı. Ertelenen bir duruşmanın sesi yoktur; yalnızca sandalyeler gıcırdar."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Selim azilnameyi daha salondayken imzalamıştı. Kâtip kâğıdı dosyaya koydu; benim imzamın hemen üstüne."
+            },
+            { "speaker": "narrator", "text": "Savcı Ferda Yalın dosyasını topladı. Kapıya giderken durdu." },
+            {
+              "speaker": "ferda",
+              "text": "Kayıt vardı bu dosyada avukat hanım. Ham kayıt, kart kaydı, bir poliçe. Kâğıtla gelmeliydiniz; hararetle değil."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU", "style": "card", "bg": "adliye" },
+            { "speaker": "narrator", "text": "Gül yanımdan geçerken durmadı. Selim durdu; bir an." },
+            {
+              "speaker": "selim",
+              "text": "Size kızgın değilim avukat hanım. Sadece… artık kendi sesimi duyamıyorum orada. Sizin kâğıtlarınızdan."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gittiler. Koridorun ucunda Ozan Tekin telefonla konuşuyordu; gülmüyordu. Kazanmamıştı; yalnızca ben kaybetmiştim."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "sema_dinlendi" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Bilirkişinin raporu dosyada duruyor. Cihaz adı, özet değerler, kurtarma izleri. Yeni avukat onu okuyacak ve benim kuramadığım cümleyi kuracak.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Delil kaybolmadı. Yalnızca onu taşıyan el değişti. Bazen bir avukatın müvekkiline yapabileceği en iyi şey, ona yeni bir el bırakmaktır.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            { "speaker": "narrator", "text": "Leyla kapıda durdu. İçeri girmedi." },
+            { "speaker": "leyla", "text": "Her yanlış kâğıt bir kalp götürür demiştim. Saymadın." },
+            { "speaker": "player", "text": "Saydım. Geç saydım." },
+            {
+              "speaker": "leyla",
+              "text": "Yarın dosyanın bir örneğini yeni avukata gönder. Notlarını da. Senin bulduğun her şey onun olsun; bu da bir savunmadır."
+            },
+            {
+              "speaker": "player",
+              "text": "Defne’nin resmi masamda kaldı. Bir masa, bir ekran, bir adam ve odanın içinde bir güneş. Bu kez onu kimseye vermeyecektim; geri götürecektim.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BERAAT_B",
+      "class": "ACQUITTAL",
+      "priority": 3,
+      "when": {
+        "all": [
+          { "not": { "flag": "selim_giris" } },
+          { "not": { "flag": "yasar_kocluk" } },
+          { "flag": "closing_masumiyet" },
+          { "ref": "baskasi_kanit" },
+          { "ref": "riza_kanit" },
+          { "any": [{ "flag": "contra_t_hat" }, { "flag": "contra_t_cihaz" }, { "flag": "tarik_coktu" }] },
+          { "cmp": [{ "var": "pers" }, ">=", 8] },
+          { "cmp": [{ "score": "final" }, ">=", 10500] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok · Beraat",
+      "verdictText": "Sanık Selim Aktaş’ın üzerine atılı verileri yok etme suçunu (TCK 244/2) işlemediği sabit olduğundan CMK 223/2-b uyarınca; bilişim sistemine girme suçu (TCK 243/1) yönünden ise 17 Ekim saat 21.30’daki erişim işverenin yazılı izniyle gerçekleştiğinden hukuka aykırılık unsuru ve dolayısıyla suçun yasal unsurları oluşmadığından CMK 223/2-a uyarınca ayrı ayrı BERAATİNE; adli kontrol tedbirinin kaldırılmasına; CMK 141 ve 142 uyarınca tazminat isteme hakkının bulunduğunun bildirilmesine (CMK 231/3); karar ve dosya örneklerinin, fiilin gerçek failinin araştırılması için Bursa Cumhuriyet Başsavcılığına gönderilmesine (CMK 158); istinaf yolu açık olmak üzere karar verildi.",
+      "reasoning": [
+        {
+          "text": "17 Ekim saat 21.30’daki erişim, işverenin yazılı izniyle ve yalnızca sanığın kişisel klasörüne yönelik olduğundan hukuka aykırı giriş unsuru (TCK 243/1) oluşmamıştır."
+        },
+        {
+          "text": "Verilerin silindiği 02.14 oturumu, sanığın kullanıcı adıyla açılmış olmakla birlikte, sanığa ait olmayan bir cihaz (NOS-GM-LT) ve genel müdüre tahsisli bir hat üzerinden gerçekleştirilmiştir."
+        },
+        {
+          "when": { "flag": "sema_zimmet" },
+          "text": "Bilirkişinin orijinal diskten okuduğu cihaz adı, katılan şirketin demirbaş zimmet listesinde genel müdüre kayıtlı cihazın adıyla harfi harfine aynıdır."
+        },
+        {
+          "when": { "any": [{ "flag": "contra_t_oda" }, { "hasEvidence": "ded_gm_oda" }, { "flag": "contra_y1" }] },
+          "text": "Yedekleme sistemi olay gecesi fiziksel olarak devre dışı bırakılmış olup, o saatte sunucu odasına giren tek kişi genel müdürdür; sanığın kartı ise aylar önce iade edilmiştir."
+        },
+        {
+          "when": { "any": [{ "flag": "contra_t_motif" }, { "flag": "contra_nl" }, { "hasEvidence": "ded_motif" }] },
+          "text": "Zarar beyanının dayandığı sigorta poliçesi, olaydan iki buçuk ay önce, çalışan sabotajını kapsayacak biçimde büyütülmüştür."
+        },
+        {
+          "when": { "flag": "contra_t_sifre" },
+          "text": "Devir-teslim tutanağına göre yönetici şifreleri 30 Eylül’de kapalı zarf içinde tanık Tarık Sezer’e teslim edilmiştir; kayıttaki kullanıcı adı tek başına sanığı göstermez."
+        },
+        {
+          "text": "Deliller birlikte değerlendirildiğinde verileri yok etme suçunun sanık tarafından işlenmediği sabittir."
+        }
+      ],
+      "legalBasis": "CMK 223/2-b (TCK 244/2); CMK 223/2-a (TCK 243/1); CMK 134, 141–142, 158, 231/3",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 120] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 120] }, 1000] }
+        }
+      },
+      "howToReach": "Rızayı ve silmenin başka bir cihaz/hattan, genel müdürden çıktığını kürsüde kanıtla; tanığı yönlendirme ve esas savunmada beraat (masumiyet) iste.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "kemal", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“İşlemediği sabit olduğundan… beraatine.” Selim kelimeleri duydu; bir an anlamadı. Sonra masanın kenarına tutundu ve başını önüne eğdi; ağlamadı, sadece nefes aldı. Uzun uzun."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gül iki elini yüzüne kapadı. Defne’nin resmi dizinden yere düştü; eğilip aldı, göğsüne bastırdı."
+            },
+            { "speaker": "narrator", "text": "ADLİYE ÖNÜ · ÖĞLEDEN SONRA", "style": "card", "bg": "sokak_sabah" },
+            {
+              "speaker": "narrator",
+              "text": "Dışarıda yağmur dinmişti; ilk kez. Organize sanayinin bacaları temiz bir gökyüzüne duman salıyordu."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "nalan_tanik" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Merdivenin başında Nalan Korkmaz bekliyordu; elinde çantası, omzunda bir yük inmiş gibi."
+            },
+            {
+              "speaker": "nalan",
+              "text": "Kızıma “doğruyu söyledim” diyebileceğim artık. Bir imzanın altında kalmaktansa, bir kürsüde durmak. Haklıymışsınız."
+            },
+            { "speaker": "player", "text": "Siz haklıydınız Nalan Hanım. Gelmeyi siz seçtiniz." }
+          ]
+        },
+        {
+          "when": { "flag": "bildirdi" },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · AKŞAM", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla kapımda durdu. Elinde iki bardak çay; birini masama bıraktı. Bunu hiç yapmazdı."
+            },
+            { "speaker": "leyla", "text": "Bugün kimseyi yenmedin." },
+            { "speaker": "player", "text": "Yenmedim. Bir ismi savcıya yazdım, o kadar." },
+            { "speaker": "leyla", "text": "İşte bu yüzden ortak oldun." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · AKŞAM", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla kapımda durdu. Elinde iki bardak çay; birini masama bıraktı. Bunu hiç yapmazdı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bugün kimseyi yenmedin. Hâkim yendi; kayıtları okudu, kararı yazdı, dosyayı savcıya gönderdi."
+            },
+            { "speaker": "player", "text": "Ben de yazmalıydım. Üç hafta önce." },
+            {
+              "speaker": "leyla",
+              "text": "Yazmalıydın. Mahkemenin gönderdiği bir dosya örneği, senin eklerini koyduğun bir dilekçe değildir. Ama bugün bir adam eve gitti. Yarın yaz; geç kalmış bir dilekçe, hiç yazılmamış olandan iyidir."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Odasına döndü. Masasının köşesindeki ters çerçeveye bir an baktı; elini uzattı, sonra çekti."
+            },
+            { "speaker": "leyla", "text": "Bir gün sana bir dosyadan bahsedeceğim Deniz. Bugün değil." }
+          ]
+        },
+        {
+          "when": { "flag": "bildirdi" },
+          "lines": [
+            { "speaker": "narrator", "text": "SON", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Tarık Sezer hakkında verileri yok etme ve nitelikli dolandırıcılık (sigorta) suçlarından soruşturma derinleştirildi; sigorta ödemesi durduruldu. Selim’in rücu davası düştü."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Delil bir isim değildi. Bir cihaz adı, bir hat, bir kart ve bir poliçeydi. Ve bir muhasebecinin, bir bekçinin sesi."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "SON", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Mahkemenin gönderdiği dosya örneğiyle Tarık Sezer hakkında soruşturma açıldı; ama üç haftalık bir boşluktan sonra. Sigorta ödemesi askıya alındı. Selim’in rücu davası düştü."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Delil bir isim değildi. Bir cihaz adı, bir hat, bir kart ve bir poliçeydi. Ve bir muhasebecinin, bir bekçinin sesi."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BERAAT_E",
+      "class": "ACQUITTAL",
+      "priority": 4,
+      "when": {
+        "all": [
+          { "not": { "flag": "selim_giris" } },
+          { "ref": "riza_kanit" },
+          {
+            "all": [
+              { "ref": "imaj_coktu" },
+              {
+                "any": [
+                  {
+                    "any": [
+                      { "hasEvidence": "ded_dizustu" },
+                      { "hasEvidence": "ded_cihaz" },
+                      { "hasEvidence": "ded_gm_cihaz" },
+                      { "hasEvidence": "ded_gm_hat" },
+                      { "flag": "contra_b5" },
+                      { "flag": "contra_t5" },
+                      { "flag": "contra_t_cihaz" },
+                      { "flag": "contra_t_hat" }
+                    ]
+                  },
+                  { "flag": "sema_dinlendi" }
+                ]
+              }
+            ]
+          },
+          {
+            "any": [
+              { "hasEvidence": "ded_dizustu" },
+              { "hasEvidence": "ded_cihaz" },
+              { "hasEvidence": "ded_gm_cihaz" },
+              { "hasEvidence": "ded_gm_hat" },
+              { "flag": "contra_b5" },
+              { "flag": "contra_t5" },
+              { "flag": "contra_t_cihaz" },
+              { "flag": "contra_t_hat" }
+            ]
+          },
+          {
+            "any": [
+              { "flag": "sema_dinlendi" },
+              { "hasEvidence": "clue_sema_cihaz" },
+              { "hasEvidence": "ded_gm_cihaz" },
+              { "hasEvidence": "ded_gm_hat" },
+              { "flag": "contra_t_oda" },
+              { "flag": "contra_t_cihaz" },
+              { "flag": "contra_t_hat" }
+            ]
+          },
+          { "cmp": [{ "var": "pers" }, ">=", 6] },
+          { "cmp": [{ "score": "final" }, ">=", 9500] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok · Beraat",
+      "verdictText": "Sanık Selim Aktaş’ın üzerine atılı verileri yok etme suçunu (TCK 244/2) işlediği sabit olmadığından CMK 223/2-e uyarınca; bilişim sistemine girme suçu (TCK 243/1) yönünden 17 Ekim saat 21.30’daki erişim işverenin izniyle gerçekleştiğinden hukuka aykırılık unsuru ve dolayısıyla suçun yasal unsurları oluşmadığından CMK 223/2-a uyarınca ayrı ayrı BERAATİNE; adli kontrol tedbirinin kaldırılmasına; CMK 141 ve 142 uyarınca tazminat isteme hakkının bulunduğunun bildirilmesine (CMK 231/3); silme oturumunu gerçekleştiren kişinin araştırılması için dosya örneğinin Cumhuriyet Başsavcılığına gönderilmesine (CMK 158); istinaf yolu açık olmak üzere karar verildi.",
+      "reasoning": [
+        {
+          "when": { "any": [{ "flag": "contra_b2" }, { "flag": "contra_b3" }, { "flag": "sema_dinlendi" }] },
+          "text": "Suçlamanın esas delili olan DataKale imajı, olaydan iki gün sonra, üzerinde kurtarma yazılımı çalıştırılmış bir diskten ve özet değerleri birbirini tutmayacak biçimde alındığından güvenilir bulunmamıştır (CMK 134, 217)."
+        },
+        {
+          "when": { "flag": "sema_dinlendi" },
+          "text": "Mahkeme bilirkişisi, silme oturumunun sanığın cihazından yapıldığının söylenemeyeceğini tespit etmiştir."
+        },
+        {
+          "when": {
+            "any": [
+              { "hasEvidence": "ded_cihaz" },
+              { "hasEvidence": "ded_gm_cihaz" },
+              { "hasEvidence": "ded_gm_hat" },
+              { "flag": "contra_t_cihaz" },
+              { "flag": "contra_t_hat" },
+              { "flag": "contra_t5" }
+            ]
+          },
+          "text": "Silme oturumu sanığa ait olmayan bir cihaz ve hattan açılmıştır; kullanıcı adının kayıtta görünmesi, eylemin sanık tarafından gerçekleştirildiğini tek başına ispatlamaz."
+        },
+        {
+          "when": { "all": [{ "flag": "sema_sertifika" }, { "flag": "sema_teyit" }] },
+          "text": "Bilirkişi, 02.14 oturumunun cihaz sertifikasının sanığın el konulan bilgisayarında bulunmadığını açıklamış; şirketin ham kaydındaki cihaz adı da bilirkişinin orijinal diskten okuduğu adla örtüşmüştür."
+        },
+        {
+          "when": { "all": [{ "flag": "sema_sertifika" }, { "not": { "flag": "sema_teyit" } }] },
+          "text": "Bilirkişi, 02.14 oturumunun cihaz sertifikasının sanığın el konulan bilgisayarında bulunmadığını açıklamıştır."
+        },
+        {
+          "when": { "flag": "contra_t_sifre" },
+          "text": "Devir-teslim tutanağına göre yönetici şifreleri 30 Eylül’de kapalı zarf içinde tanık Tarık Sezer’e teslim edilmiştir; kayıttaki kullanıcı adı tek başına sanığı göstermez."
+        },
+        { "text": "21.30’daki erişim işveren iznine dayandığından sisteme hukuka aykırı girme unsuru oluşmamıştır." },
+        {
+          "when": { "flag": "yasar_kocluk" },
+          "text": "Tanık Yaşar Kılıç’ın beyanı, duruşma öncesinde müdafi tarafından yönlendirildiğini kendisinin açıklaması nedeniyle hükme esas alınmamıştır."
+        },
+        {
+          "when": { "flag": "yasar_kocluk" },
+          "text": "Müdafiin tanığı yönlendirme girişimi (TCK 277; Av.K. 34) yönünden, duruşma tutanağı örneğinin Bursa Cumhuriyet Başsavcılığına ve Bursa Barosu Başkanlığına gönderilmesine ayrıca karar verilmiştir."
+        },
+        {
+          "text": "Sanığın verileri yok ettiğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4)."
+        }
+      ],
+      "legalBasis": "CMK 223/2-e (TCK 244/2); CMK 223/2-a (TCK 243/1); CMK 134, 158, 217, 231/3; Anayasa 38/4",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 100] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
+        }
+      },
+      "howToReach": "İmajın hükme esas alınamayacağını göster; 21.30’un izinli olduğunu ve silmenin başka bir cihaz/hattan açıldığını kur; ara evresinde mahkeme kanalından bir bulgu (bilirkişi, zimmet, hat) getir.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "kemal", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“Sabit olmadığından… beraatine.” Selim kelimeleri tek tek duydu, bir yabancı dilden çeviriyormuş gibi. Sonra anladı; başını masaya koydu, bir an öyle kaldı."
+            },
+            { "speaker": "narrator", "text": "Gül’ün omuzları sarsıldı; sesi çıkmadı." },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN SONRA", "style": "card", "bg": "adliye" },
+            { "speaker": "narrator", "text": "Koridorda Ozan Tekin yanımdan geçerken durdu." },
+            {
+              "speaker": "ozan",
+              "text": "İyi iş çıkardınız meslektaşım. İstinafta görüşürüz; müvekkilim rücu davasından henüz vazgeçmedi."
+            },
+            { "speaker": "player", "text": "Vazgeçmeyebilir. Ama artık karşısında bir “şüpheli” değil, bir soru var." },
+            {
+              "speaker": "narrator",
+              "text": "Gittiler. Selim pencerenin önünde durdu; aşağıda otopark, çıkan siyah bir araba. Plakasına bu kez bakmadı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gül yanıma geldi. Elinde, sabahtan beri katlayıp açtığı resim. Bana uzatmadı; göğsüne bastırdı."
+            },
+            {
+              "speaker": "gul",
+              "text": "Defne’ye ne diyeceğim avukat hanım? “Baban suçsuz” mu, “suçlu olduğu kanıtlanamadı” mı?"
+            },
+            {
+              "speaker": "player",
+              "text": "“Baban eve geliyor” deyin. Gerisini o büyüyünce siz anlatırsınız. Belki o zamana kadar ikinci cümle birinciye dönüşür."
+            },
+            { "speaker": "gul", "text": "Öğretmenler cümle düzeltmeyi bilir. Bunu da düzeltiriz." },
+            {
+              "speaker": "narrator",
+              "text": "Selim adliyenin merdivenlerinden inerken telefonunu çıkardı; bir fotoğrafa baktı. Defne’nin doğduğu gün. O cuma akşamı kopyaladığı klasörden."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "yasar_kocluk" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Merdivenin dibinde Yaşar Usta bekliyordu; ceketi ilikli, kravatı gevşemiş. Yanından geçerken başını çevirdi."
+            },
+            {
+              "speaker": "yasar",
+              "text": "Kızım, ben orada “avukat hanım bana şunu dedi” dedim. Demek zorundaydım; yemin ettim. Defterim yine de doğruydu; ama kimse artık deftere bakmadı, bana baktı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir bekçinin namusunu bir cümleyle gölgeledim. Hüküm onun sözünü saymadı; benim yüzümden.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "tarik_yuzles" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tarık Sezer’in “çalınan” dizüstüsü hiç bulunamadı. Savcılık bir yakalama değil; bir soru işareti bıraktı dosyada. Benim uyardığım adam, bir adım önde kaldı."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "yasar_kocluk" },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda baro başkanlığının mührünü taşıyan bir zarf vardı; hüküm fıkrasından iki saat sonra gelmiş. “Hakkınızda yapılan bildirim üzerine…”"
+            },
+            { "speaker": "narrator", "text": "Leyla kapıda durdu. İçeri girmedi; paltosunu da çıkarmadı." },
+            {
+              "speaker": "leyla",
+              "text": "Müvekkilin beraat etti. Kâğıtların sayesinde. Sen ise bir tanığın ağzına bir cümle koydun ve hâkim bunu savcıya, baroya yazdı."
+            },
+            { "speaker": "player", "text": "Defterde zaten yazıyordu. Ben sadece…" },
+            {
+              "speaker": "leyla",
+              "text": "“Sadece” bu meslekte en pahalı kelimedir. Savunmanı yazacaksın. Ben de yanında olacağım; ama senin yerine yazmayacağım. Bir yıl boyunca tanıkla görüşmeye benimle gideceksin."
+            },
+            {
+              "speaker": "player",
+              "text": "Selim eve gitti; kâğıtlar onu taşıdı. Beni taşıyacak bir kâğıt yok. Yalnızca bir soruşturma numarası ve Yaşar Usta’nın kürsüdeki bakışı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "yasar_kocluk" } },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Panodaki kırmızı ipi çözdüm. Kayıtlar, tarihler, saatler; hepsi bir kutuya girdi. Ortadaki boşluk, bir ismin boşluğu, hâlâ boştu."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir kullanıcı adını bir kişi olmaktan çıkardık. Yerine bir soru koyduk. Bazen adalet bir kapıyı açar; ama ışığı yakmaz.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "Kapı aralandı. Leyla, paltosu kolunda, ışığı söndürmeden içeri baktı." },
+            { "speaker": "leyla", "text": "Beraat aldın. Ama yüzün bir beraat kazanmış gibi değil." },
+            { "speaker": "player", "text": "“Sabit değildir” dedi hâkim. “İşlemedi” demedi. Arada bir fark var." },
+            {
+              "speaker": "leyla",
+              "text": "Var. O fark, hukukun en dürüst cümlesidir: “bilmiyorum, o yüzden cezalandırmıyorum.” Bir gün o farkı sevmeyi öğrenirsin. Bugün değil."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "flag": "bildirdi" }, { "not": { "flag": "yasar_kocluk" } }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Savcılığa yazdın; soruşturma senin eklerinle başladı. Ama mahkeme “işlemediği sabit” demedi, çünkü kürsüde o cümleyi kurmadın. Dilekçe dışarıda bir kapıyı açtı; içerideki kapı aralık kaldı."
+            },
+            { "speaker": "player", "text": "Bir dahaki sefere ikisini birden." },
+            { "speaker": "leyla", "text": "İkisini birden. Ortak avukat bunu bir kere öğrenir." }
+          ]
+        },
+        {
+          "when": { "all": [{ "not": { "flag": "bildirdi" } }, { "not": { "flag": "yasar_kocluk" } }] },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Mahkeme dosyayı savcılığa gönderdi; hüküm fıkrasının bir satırı olarak. Senin elindeki kayıtları ekleyeceğin bir dilekçe olarak değil. Fark, soruşturmanın hızıdır: biri bir dosya numarası, öbürü bir harita."
+            },
+            { "speaker": "player", "text": "Biliyorum. Bir daha olmayacak." },
+            { "speaker": "leyla", "text": "Olmayacak. Ortak avukat bunu bir kere öğrenir." }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Gitti. Masamda Defne’nin resmi duruyordu; “avukat teyzeye” diye çizdiği. Bir masa, bir ekran, bir adam ve odanın içinde bir güneş."
+            },
+            {
+              "speaker": "player",
+              "text": "Selim eve gitti. Bir şirketin hafızası hâlâ bir yerde, bir yedeğin olmadığı bir boşlukta. Ve bir ismin soruşturması, bir karar fıkrasıyla açılmış bir dosyada bekliyor.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Kazandım. Ama kazanmakla doğruyu bulmak arasındaki farkı, bu gece bir kez daha öğrendim. Bunu bilmek, bana kalan.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "NITELENDIRME",
+      "class": "RECHARACTERIZED",
+      "priority": 5,
+      "when": {
+        "all": [
+          { "not": { "flag": "selim_giris" } },
+          { "not": { "ref": "riza_kanit" } },
+          {
+            "all": [
+              { "ref": "imaj_coktu" },
+              {
+                "any": [
+                  {
+                    "any": [
+                      { "hasEvidence": "ded_dizustu" },
+                      { "hasEvidence": "ded_cihaz" },
+                      { "hasEvidence": "ded_gm_cihaz" },
+                      { "hasEvidence": "ded_gm_hat" },
+                      { "flag": "contra_b5" },
+                      { "flag": "contra_t5" },
+                      { "flag": "contra_t_cihaz" },
+                      { "flag": "contra_t_hat" }
+                    ]
+                  },
+                  { "flag": "sema_dinlendi" }
+                ]
+              }
+            ]
+          },
+          { "cmp": [{ "score": "final" }, ">=", 2800] }
+        ]
+      },
+      "stamp": "YENİ VASIF",
+      "stampTone": "amber",
+      "sentence": "244/2’den beraat · 243/1’den adli para cezası, HAGB",
+      "verdictText": "Sanık Selim Aktaş’ın verileri yok etme suçunu (TCK 244/2) işlediği sabit olmadığından bu suçtan CMK 223/2-e uyarınca BERAATİNE; sanığın işten çıkarılmasından sonra, 17 Ekim saat 21.30’da işverenin izni bulunduğu ispatlanamayan bir erişimle sisteme girdiği sabit görüldüğünden TCK 243/1 uyarınca, erişimin kişisel klasörle sınırlı kalması ve sanığın kişiliği gözetilerek seçimlik ceza olarak 100 gün karşılığı 2.000 TL ADLİ PARA CEZASI ile cezalandırılmasına (TCK 52/2); bu eylem nedeniyle giderilmesi gereken bir zarar bulunmadığı ve sanığın yeniden suç işlemeyeceği yönünde kanaat oluştuğundan hükmün açıklanmasının geri bırakılmasına (CMK 231/5–6); beş yıl denetim süresine; istinaf yolu açık olmak üzere karar verildi.",
+      "reasoning": [
+        {
+          "text": "Silme eylemi (TCK 244/2) güvenilir delille sanığa bağlanamamıştır; bu suçtan şüpheden sanık yararlanır."
+        },
+        {
+          "text": "Sanık 17 Ekim 21.30’da, işten çıkarılmasından sonra sisteme bağlandığını kabul etmiştir; bu erişime işverenin izin verdiğini gösteren bir belge dosyaya sunulmamıştır."
+        },
+        {
+          "text": "Erişim kişisel klasörle sınırlı kaldığından ve bir zarar doğmadığından seçimlik adli para cezası belirlenmiş; koşulları oluştuğundan hükmün açıklanması geri bırakılmıştır (CMK 231/5–6)."
+        }
+      ],
+      "legalBasis": "TCK 244/2 (CMK 223/2-e beraat); TCK 243/1, 52/2, 61; CMK 231/5–6",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 85] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
+        }
+      },
+      "howToReach": "Silmeyi sanıktan koparabildin ama 21.30 girişinin izinli olduğunu gösteren kâğıdı (e-posta, devir tutanağı) kuramadın; silme suçundan beraat, giriş adli para cezası ve HAGB.",
+      "epilogue": [
+        {
+          "lines": [
+            {
+              "speaker": "kemal",
+              "text": "Sanığın verileri yok etme suçundan beraatine; sisteme girme suçundan adli para cezasına ve hükmün açıklanmasının geri bırakılmasına…"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Selim rakamları duydu, bana döndü. “Yani hapis yok mu?” Başımı salladım. “Ama bir ceza var” dedi. “Küçük bir ceza. Kendi fotoğraflarımı almaktan.”"
+            },
+            { "speaker": "narrator", "text": "ADLİYE ÖNÜ", "style": "card", "bg": "adliye" },
+            { "speaker": "narrator", "text": "Gül, Selim’in elini tuttu. Rahatlama ve kırgınlık; ikisi aynı yüzde." },
+            { "speaker": "gul", "text": "Hapis yok. Ama kaydında bir şey kaldı, değil mi?" },
+            { "speaker": "player", "text": "Beş yıl temiz kalırsa o da silinecek. Bu kez usulünce." },
+            {
+              "speaker": "gul",
+              "text": "Bir e-posta vardı. Selim “Tarık Bey izin verdi” diyordu hep. Bir yerde yazılıdır dedi. Ben hiç sormadım nerede diye."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir yerde yazılıydı. Bir çekmecede, bir çıktıda, bir tutanağın altıncı maddesinde. Ben o kâğıdı bulamadım; mahkeme de onu görmedi.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Silme suçundan kurtardım; ama o e-postayı bulsaydım, giriş de kalmazdı. Bir kâğıt eksik, bir adli para cezası fazla.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "selim_suclama" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Selim son sözde bir isim haykırmıştı. Hâkim o ismi tutanağa almadı; ama salonda herkes duydu. Bazen bir öfke, bir dosyanın havasını hükümden önce bozar."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "KISMI",
+      "class": "CONVICTION",
+      "priority": 6,
+      "when": { "ref": "riza_kanit" },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "243/1’den beraat · 244/2’den 1 yıl 3 ay hapis, ertelendi",
+      "verdictText": "Sanık Selim Aktaş hakkında bilişim sistemine girme suçu (TCK 243/1) yönünden 17 Ekim saat 21.30’daki erişim işverenin izniyle gerçekleştiğinden suçun yasal unsurları oluşmadığından CMK 223/2-a uyarınca BERAATİNE; verileri yok etme suçunu (TCK 244/2) işlediği sabit görüldüğünden, meydana gelen zararın ağırlığı gözetilerek TCK 61 uyarınca 1 YIL 3 AY HAPİS cezası ile cezalandırılmasına; TCK 53 uyarınca belirli hakları kullanmaktan yoksun bırakılmasına; sanığın, sorulması üzerine zararı gidermeyi ya da taksitle gidermeyi kabul etmediği anlaşıldığından CMK 231/6-c ve 231/9 koşulları oluşmadığından hükmün açıklanmasının geri bırakılmasına yer olmadığına; sanığın sabıkasız geçmişi ve sosyal ilişkileri gözetilerek yeniden suç işlemeyeceği kanaatiyle cezanın TCK 51/1 uyarınca ertelenmesine, 1 yıl 3 ay denetim süresi belirlenmesine; istinaf yolu açık olmak üzere karar verildi (CMK 273/1).",
+      "reasoning": [
+        {
+          "text": "21.30’daki erişim işverenin izniyle ve kişisel klasörle sınırlı olduğundan hukuka aykırı giriş unsuru oluşmamıştır."
+        },
+        {
+          "text": "Oturum dökümü ve DataKale raporu 02.14’teki silme oturumunun sanığın kullanıcı adıyla açıldığını göstermektedir."
+        },
+        {
+          "when": { "any": [{ "flag": "contra_t_cihaz" }, { "flag": "contra_t_hat" }] },
+          "text": "Silme oturumunun cihazının ve hattının sanığa ait olmadığına ilişkin belgeler dosyaya girmişse de, sanığın yönetici yetkisiyle bu cihaz ya da hatta erişimi bulunmadığı ve imajın bütünlüğüne ilişkin itirazlar, bütün delillerle birlikte değerlendirildiğinde mahkemede sanık lehine bir kanaat oluşturacak ölçüde tartışılamamıştır."
+        },
+        {
+          "when": {
+            "all": [
+              { "flag": "sema_dinlendi" },
+              { "not": { "any": [{ "flag": "contra_t_cihaz" }, { "flag": "contra_t_hat" }] } }
+            ]
+          },
+          "text": "Bilirkişi, silme oturumunun cihaz adının sanığın el konulan bilgisayarından farklı olduğunu tespit etmiştir; ancak sanığın yönetici yetkisiyle başka bir cihazdan bağlanma imkânı bulunduğu ve o cihazın başka birine ait olduğunun dosyaya kazandırılamadığı gözetilerek bu tespit tek başına yeterli görülmemiştir."
+        },
+        {
+          "when": {
+            "all": [
+              { "not": { "flag": "sema_dinlendi" } },
+              { "not": { "any": [{ "flag": "contra_t_cihaz" }, { "flag": "contra_t_hat" }] } }
+            ]
+          },
+          "text": "Savunma, imajın güvenilmezliğini ve silme oturumunun başka bir cihaz ya da hattan açıldığını, sanık aleyhine olan delilleri ortadan kaldıracak somutlukta ortaya koyamamıştır."
+        },
+        {
+          "text": "Zarar giderilmediğinden hükmün açıklanması geri bırakılmamış; sanığın geçmişi gözetilerek ceza ertelenmiştir (CMK 231/6-c; TCK 51/1)."
+        }
+      ],
+      "legalBasis": "CMK 223/2-a (TCK 243/1); TCK 244/2, 61, 53, 51/1; CMK 231/6-c, 231/9, 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 70] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 70] }, 1000] }
+        }
+      },
+      "howToReach": "Rızayı kurdun; giriş suçu düştü. Ama silmeyi sanıktan koparamadın: imajın çatlaklarını kürsüde göster ve 02.14’ün başka bir cihaz/hattan açıldığını kur.",
+      "epilogue": [
+        {
+          "lines": [
+            {
+              "speaker": "kemal",
+              "text": "Sanığın sisteme girme suçundan beraatine; verileri yok etme suçundan bir yıl üç ay hapis cezasıyla cezalandırılmasına, cezanın ertelenmesine…"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Selim ilk cümlede başını kaldırdı, ikincide indirdi. “Ertelenmesine” kelimesini duyduğunda bana baktı; ne olduğunu sormadı. Gül sordu."
+            },
+            { "speaker": "gul", "text": "Ertelenmek ne demek avukat hanım? Gidiyor mu, gitmiyor mu?" },
+            {
+              "speaker": "player",
+              "text": "Gitmiyor. Bir yıl üç ay boyunca yeni bir suç işlemezse ceza infaz edilmeyecek. Ama hüküm kayıtta. Bir mahkûmiyet."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN SONRA", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Selim pencerenin önünde durdu. Aşağıda otopark; arabalar sırayla çıkıyordu. Hiçbirine bakmadı."
+            },
+            {
+              "speaker": "selim",
+              "text": "Fotoğraflarım için beraat. Hiç dokunmadığım şey için ceza. Hâkim bey kapıdan girdiğime inanmadı; içeride yaktığıma inandı. Yarısı doğru, yarısı benim değil."
+            },
+            {
+              "speaker": "player",
+              "text": "İstinaf var Selim. İki hafta. Silme oturumunun cihazı, hattı; onları bu sefer dosyaya koyacağız."
+            },
+            { "speaker": "selim", "text": "Bu sefer. Siz hep “bu sefer” diyorsunuz avukat hanım." },
+            {
+              "speaker": "narrator",
+              "text": "Söylemiyordum aslında. Ama haklıydı; bir ilk celse, bir ara, bir ikinci celse. Üç fırsat. İkisini doğru kullandım."
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            { "speaker": "narrator", "text": "Leyla’nın odasının ışığı yanıyordu. Kapıyı çaldım; “gel” dedi." },
+            {
+              "speaker": "leyla",
+              "text": "İzni kurdun. İyi. Kimse kurmamıştı. Ama yangını kapıdan ayıramadın; hâkim ikisini aynı ele verdi, sonra elin birini serbest bıraktı."
+            },
+            { "speaker": "player", "text": "İstinafta cihaz adını isteyeceğim. Ham kaydı. Hattı." },
+            {
+              "speaker": "leyla",
+              "text": "İste. Ama şunu bil: istinaf, ilk derecede kurulmayan bir cümleyi nadiren kurar. Bir dahaki dosyada o cümleyi ilk celsede kur."
+            },
+            {
+              "speaker": "player",
+              "text": "Defne’nin resmi masamdaydı. Bir masa, bir ekran, bir adam. Güneş hâlâ odanın içinde; ama ekranın başındaki adamın yüzü, bu kez, kâğıtta biraz daha silikti.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MAHKUMIYET",
+      "class": "CONVICTION",
+      "priority": 7,
+      "when": { "all": [] },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "244/2: 1 yıl 8 ay hapis · 243/1: adli para cezası",
+      "verdictText": "Sanık Selim Aktaş’ın üzerine atılı verileri yok etme (TCK 244/2) ve bilişim sistemine girme (TCK 243/1) suçlarını işlediği sabit görülerek; verileri yok etme suçundan, suçun işleniş biçimi ve meydana gelen zararın ağırlığı gözetilerek TCK 61 uyarınca 1 YIL 8 AY HAPİS; sisteme girme suçundan seçimlik ceza olarak 100 gün karşılığı 2.000 TL ADLİ PARA CEZASI (TCK 52/2) ile ayrı ayrı cezalandırılmasına; TCK 53 uyarınca belirli hakları kullanmaktan yoksun bırakılmasına; TCK 63 uyarınca gözaltında kaldığı sürenin mahsubuna; verileri yok etme suçu yönünden, sanığın sorulması üzerine zararı gidermeyi ya da taksitle gidermeyi kabul etmediği anlaşıldığından CMK 231/6-c ve 231/9 koşulları oluşmadığından; her iki suç yönünden ise, suçların yedekleme sistemi devre dışı bırakılarak planlı biçimde ve birbirine bağlı olarak işlenmesi ve yargılama sürecindeki tutum karşısında sanığın yeniden suç işlemeyeceği yönünde kanaat oluşmadığından CMK 231/6-b uyarınca hükmün açıklanmasının geri bırakılmasına yer olmadığına (sisteme girme suçu bakımından giderilecek bir zarar bulunmadığından 231/6-c engeli yoktur; ret yalnızca 231/6-b’ye dayanır); aynı kanaatle hapis cezasının TCK 51/1 uyarınca ertelenmesine yer olmadığına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).",
+      "reasoning": [
+        {
+          "text": "Oturum dökümü ve DataKale raporu silme eyleminin sanığın kullanıcı adıyla yapıldığını göstermektedir."
+        },
+        {
+          "text": "Sanığın aynı akşam 21.30’da, işten çıkarılmasından sonra sisteme bağlandığı sabittir; bu erişime izin verildiğini gösteren bir belge sunulmamıştır."
+        },
+        {
+          "when": { "any": [{ "flag": "contra_t_cihaz" }, { "flag": "contra_t_hat" }] },
+          "text": "Silme oturumunun cihazının ve hattının sanığa ait olmadığına ilişkin belgeler dosyaya girmişse de, sanığın yönetici yetkisiyle bu cihaz ya da hatta erişimi bulunmadığı ve imajın bütünlüğüne ilişkin itirazlar, bütün delillerle birlikte değerlendirildiğinde mahkemede sanık lehine bir kanaat oluşturacak ölçüde tartışılamamıştır."
+        },
+        {
+          "when": {
+            "all": [
+              { "flag": "sema_dinlendi" },
+              { "not": { "any": [{ "flag": "contra_t_cihaz" }, { "flag": "contra_t_hat" }] } }
+            ]
+          },
+          "text": "Bilirkişi, silme oturumunun cihaz adının sanığın el konulan bilgisayarından farklı olduğunu tespit etmiştir; ancak sanığın yönetici yetkisiyle başka bir cihazdan bağlanma imkânı bulunduğu ve o cihazın başka birine ait olduğunun dosyaya kazandırılamadığı gözetilerek bu tespit tek başına yeterli görülmemiştir."
+        },
+        {
+          "when": {
+            "all": [
+              { "not": { "flag": "sema_dinlendi" } },
+              { "not": { "any": [{ "flag": "contra_t_cihaz" }, { "flag": "contra_t_hat" }] } }
+            ]
+          },
+          "text": "Savunma, imajın güvenilmezliğini ve silme oturumunun başka bir cihaz ya da hattan açıldığını, sanık aleyhine olan delilleri ortadan kaldıracak somutlukta ortaya koyamamıştır."
+        },
+        {
+          "text": "Verileri yok etme suçu yönünden zarar giderilmediğinden (CMK 231/6-c, 231/9); her iki suç yönünden ise suçların planlı ve birbirine bağlı işlenmesi nedeniyle sanığın yeniden suç işlemeyeceği kanaati oluşmadığından (CMK 231/6-b) hükmün açıklanmasının geri bırakılmasına yer görülmemiştir. Sisteme girme suçu bakımından giderilecek bir zarar bulunmadığından bu suçta ret yalnızca 231/6-b’ye dayanır. Aynı kanaatle hapis cezası ertelenmemiştir (TCK 51/1)."
+        }
+      ],
+      "legalBasis": "TCK 243/1, 244/2, 51/1, 52/2, 53, 61, 63; CMK 231/6-b, 231/6-c, 231/9, 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 60] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 60] }, 1000] }
+        }
+      },
+      "howToReach": "Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir. 21.30’un izinli olduğunu gösteren kâğıdı bul (rıza) ve imajı çürütüp silmenin başka bir cihaz/hattan açıldığını kur.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · HÜKÜMDEN SONRA", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "“Bir yıl sekiz ay.” Kelime koridora benden önce çıktı. Gül, Defne’nin resmini çantasına koydu; katlayarak, dikkatle, bir daha açmamak ister gibi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Selim pencerenin önünde durdu. Aşağıda otopark; siyah, uzun bir araba çıkıyordu. Uzun uzun baktı. Bu kez plakayı o okudu."
+            },
+            {
+              "speaker": "selim",
+              "text": "Ne erteleme ne geri bırakma, diyorlar. Bir yıl sekiz ay. Komşular, Defne’nin öğretmeni, bakkal. Hepsi “o adam” diyecek."
+            },
+            {
+              "speaker": "player",
+              "text": "İstinaf var Selim. İki hafta içinde. Hüküm kesinleşmeden kimse seni bir yere götüremez."
+            },
+            {
+              "speaker": "gul",
+              "text": "İki hafta. Defne’nin doğum günü on gün sonra. Pasta mı alayım, dilekçe mi yazayım avukat hanım?"
+            },
+            { "speaker": "player", "text": "İkisini de. Pastayı siz alın. Dilekçeyi ben yazarım." },
+            {
+              "speaker": "narrator",
+              "text": "Gül güldü; ağlamaya benzeyen bir gülüş. Selim’in elini tuttu, bıraktı, yeniden tuttu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridorun ucunda Ozan Tekin cübbesini katlıyordu. Bize bakmadı. Kazananlar koridorlarda kimseye bakmaz; kaybedenler herkese bakar."
+            },
+            {
+              "speaker": "selim",
+              "text": "Hâkim bey “zararı giderir misiniz” diye sordu. Ne diyecektim? Silmediğim bir şeyin parasını mı ödeyecektim? Yirmi milyon. Evet desem suçu kabul etmiş olurum, hayır desem…"
+            },
+            {
+              "speaker": "player",
+              "text": "Hayır dedin. Doğrusunu söyledin. Kanun o cevabı geri bırakmanın şartına bağlamış; bu senin değil, kanunun sorusu."
+            },
+            { "speaker": "selim", "text": "Kanunun sorusu. Benim cevabım. Sonuç benim." },
+            {
+              "speaker": "player",
+              "text": "İstinaf. Ama elimde kalan kâğıtları bir celse önce doğru yerde açamadım. İstinaf, geç kalmış bir cümlenin ikinci şansıdır.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "ADLİYE ÖNÜ · AKŞAM ÜSTÜ", "style": "card", "bg": "sokak_yagmur" },
+            {
+              "speaker": "narrator",
+              "text": "Merdivenlerde Gül durdu, çantasını açtı, resmi çıkardı. Bir masa, bir ekran, bir adam ve odanın içinde bir güneş. Uzun uzun baktı."
+            },
+            {
+              "speaker": "gul",
+              "text": "Defne bu akşam soracak: “Babam ne zaman işe gidecek?” Ne diyeyim avukat hanım?"
+            },
+            {
+              "speaker": "player",
+              "text": "“Babam bir kâğıdı düzeltmeye gidiyor” deyin. Doğru bir cümle. Yarısı benim işim."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gül resmi yeniden katladı; bu kez çantaya değil, ceketinin cebine koydu. Yağmur başladı; organize sanayinin bacalarına, adliyenin taş merdivenlerine, hepimizin üstüne aynı anda."
+            }
+          ]
+        },
+        {
+          "when": {
+            "any": [{ "hasEvidence": "ded_gm_cihaz" }, { "hasEvidence": "ded_gm_hat" }, { "flag": "fact_gm" }]
+          },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Panoda bir isim vardı; onu kürsüde kurmaya yetmedim. Bir suç duyurusu yazacağım; bu kez geç. Bir istinaf dilekçesine ek olarak."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir cihaz adı buldum, bir hat, bir kart. Hepsi doğruydu. Ama doğru delili yanlış sırayla, yanlış sesle sundum. Hüküm, bir sesin tonuyla da yazılır.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            { "speaker": "narrator", "text": "Leyla masamın karşısına oturdu. Bunu hiç yapmazdı; hep kapıda dururdu." },
+            { "speaker": "leyla", "text": "Neyi kaçırdın?" },
+            {
+              "speaker": "player",
+              "text": "Bir e-postayı. Bir tarihi. Bir özet değeri. Belki bir cihaz adını. Hepsini değil; ama yetecek kadarını."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Yetecek kadarını. Bir dosya hep yetecek kadar kaçırılır. Yarın istinaf dilekçesine başla. Kaçırdığın her kâğıdı bir başlık yap; mahkeme bu kez hepsini birlikte görsün."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir kâğıt, bir başlık. Bir adamın bir yıl sekiz ayı. Hesabı Leyla değil, ben tutacaktım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

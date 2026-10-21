@@ -1,5 +1,5 @@
-import { chapter, court, phase, rawChoice } from '../../../tools/content/src/kit/index.js';
-import type { Backdrop, ChoiceDef, Expression, Line, LineFx } from '@mudafaa/case-schema';
+import { any, chapter, court, flag, phase, rawChoice } from '../../../tools/content/src/kit/index.js';
+import type { Backdrop, ChoiceDef, Cond, Effect, Expression, Line, LineFx } from '@mudafaa/case-schema';
 import type { OptionSpec } from '../../../tools/content/src/kit/index.js';
 
 // Dava #08 genelinde paylaşılan tanımlar: bölüm etiketleri, soruşturma evreleri, duruşma salonu ve satır kısaltmaları.
@@ -23,7 +23,7 @@ export const p1 = phase({
   ap: 4,
 });
 
-/** Ara evresi: 2 gün × 3 eylem puanı; etkinlikler yığınsız, doğrudan ARA_HUB'a döner (motor sınırı, Dava #07 notu 2). */
+/** Ara evresi: 2 gün × 4 eylem puanı; etkinlikler yığınsız, doğrudan ARA_HUB'a döner (motor sınırı, Dava #07 notu 2). */
 export const p2 = phase({
   hub: 'ARA_HUB',
   dayEnd: 'ARA_DAY_END',
@@ -31,16 +31,16 @@ export const p2 = phase({
   dayVar: 'ara_day',
   apVar: 'ara_ap',
   days: 2,
-  ap: 3,
+  ap: 4,
 });
 
 /** Ara evresi etkinliği: NAVIGATE + maliyet, doğrudan hedefe (push yok), bir kez. */
 export const araAct = (id: string, label: string, to: string, opts: OptionSpec = {}): ChoiceDef =>
   rawChoice('NAVIGATE', id, label, { cost: [{ var: 'ara_ap', amount: 1 }], next: to, maxUses: 1, ...opts });
 
-/** Asliye ceza: tek hâkim; katılan vekili ve savcı kürsüde. */
+/** Asliye ceza: tek hâkim; zabıt kâtibi ve savcı kürsüde (katılan vekili salonda konuşur). */
 const bench = [
-  ['tolga', 'KATILAN VEKİLİ', 0.15],
+  ['katip', 'ZABIT KÂTİBİ', 0.15],
   ['hakim', 'HÂKİM', 0.5],
   ['savci', 'C. SAVCISI', 0.85],
 ] as const;
@@ -93,3 +93,16 @@ export const voice = (name: string, text: string, style?: 'whisper' | 'phone', e
 });
 /** Telefon sesi (bilinen karakter). */
 export const ph = (speaker: string, text: string): Line => ({ speaker, text, style: 'phone' });
+
+/** Satıra efekt ekler. */
+export const fx = (line: Line, effect: LineFx): Line => ({ ...line, fx: effect });
+
+/** Yanlış delil sunumunun ortak bedeli (güvenilirlik, ikna, sayaç). */
+export const wrongEvidence: Effect[] = [
+  { type: 'VAR', var: 'cred', op: 'dec', value: 1 },
+  { type: 'VAR', var: 'wrong', op: 'inc', value: 1 },
+];
+
+/** Ara dönemde gelen zarflar: istenen inceleme sonucu büroya ulaştı (delil kartı ancak belge okununca deftere girer). */
+export const kriminalZarf: Cond = any(flag('req_kriminal'), flag('h1_kriminal'));
+export const eczaneZarf: Cond = any(flag('req_eczane'), flag('h1_eczane'));

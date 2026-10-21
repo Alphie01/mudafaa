@@ -414,7 +414,11 @@
                   "expression": "saskin",
                   "text": "Evet… rapor… kırmızı yokmuş. Avukat hanım öyle dedi."
                 },
-                { "speaker": "savci", "text": "Avukat hanım öyle demiş. Tutanağa geçsin." }
+                { "speaker": "savci", "text": "Avukat hanım öyle demiş. Tutanağa geçsin." },
+                {
+                  "speaker": "narrator",
+                  "text": "Volkan bana döndü; gözlerinde bir soru. Ben başımı eğdim. Hâkim kalemini bıraktı, bir şey not etmedi; bu daha kötüydü."
+                }
               ]
             }
           ],
@@ -512,7 +516,7 @@
         {
           "id": "O2_TELKIN",
           "kind": "OPTION",
-          "label": "İtiraz: soru tanığa bir sonucu onaylatıyor; telkin edici (CMK 201/1).",
+          "label": "İtiraz: soru, sonucu tanığa hazır veriyor; telkin edici soru.",
           "responses": [
             {
               "lines": [
@@ -556,7 +560,7 @@
         {
           "id": "O2_SALDIR",
           "kind": "OPTION",
-          "label": "Sayın savcı tanığı yönlendiriyor; belediye bir şeyleri örtüyor!",
+          "label": "İtiraz: belediye bir şeyleri örtüyor; tutanağa geçsin!",
           "responses": [
             { "lines": [{ "speaker": "hakim", "text": "Müdafi! Salonda suçlama yok, itiraz var. Uyarıyorum." }] }
           ],
@@ -566,7 +570,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Kurum ve savcı hakkında dayanaksız suçlama itiraz değildir; dayanak bir usul kuralı olmalı.",
+            "feedback": "Kurum hakkında dayanaksız suçlama itiraz değildir; itirazın dayanağı somut bir usul kuralı olmalı (burada telkin edici soru, CMK 201/1).",
             "category": "USUL_BILGISI"
           },
           "next": "T_03"
@@ -1699,6 +1703,10 @@
                 {
                   "speaker": "nalan",
                   "text": "Yaralanma mekanizması Adli Tıp’ın alanı. Biz yalnızca şunu söyleyebiliriz: sanığın aracındaki hasarın yüksekliği ve konumu, ayaktaki bir yetişkine önden çarpmayla uyumlu değil."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Savcı kalemini bıraktı ve heyet başkanına baktı. Uzun bir bakış. Sonra önündeki Adli Tıp raporunun sayfasını çevirdi; ilk kez okuyormuş gibi."
                 }
               ]
             }
@@ -1756,7 +1764,16 @@
                   "text": "Fotoğrafladım, tutanağa yazdım. Emanete alınmadı. Bir parçasını ben sakladım ve geçen hafta tutanakla savcılığa teslim ettim. Saklamam usule uygun değildi; teslimim uygundu."
                 },
                 { "speaker": "hakim", "text": "Neden sakladınız?" },
-                { "speaker": "ayten", "text": "Biri sorar diye efendim. Sordular." }
+                { "speaker": "ayten", "text": "Biri sorar diye efendim. Sordular." },
+                {
+                  "speaker": "narrator",
+                  "text": "Hâkim bir süre Ayten’e baktı. Sonra kâtibe döndü: “Tanığın beyanını aynen yazın; ‘biri sorar diye’ kısmı dahil.” Kâtip yazdı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir polisin üç ay dolapta sakladığı vicdanı, bir tutanağın içine aynen girdi. Bazen adalet, bir kâtibin klavyesinde başlar.",
+                  "style": "thought"
+                }
               ]
             },
             {
@@ -1827,7 +1844,11 @@
             {
               "lines": [
                 { "speaker": "ayten", "text": "Amirim hakkında bir şey söylemem doğru olmaz. Tutanağım ortada." },
-                { "speaker": "hakim", "text": "Müdafi, tanığa olay hakkında soru sorun." }
+                { "speaker": "hakim", "text": "Müdafi, tanığa olay hakkında soru sorun." },
+                {
+                  "speaker": "narrator",
+                  "text": "Ayten kürsünün kenarını tuttu. Az önce bana bakan gözler şimdi kâtibin ekranına kilitlenmişti. Kapıyı kendi elimle kapatmıştım."
+                }
               ]
             }
           ],
@@ -1857,9 +1878,9 @@
         {
           "id": "ARG_EDR",
           "kind": "OPTION",
-          "label": "EDR: 38 km/s, fren 1,2 sn önce, ABS aktif. Hız ve özensizlik iddiası çürük; bilinçli taksirin öngörü unsuru yok.",
-          "enabledWhen": { "hasEvidence": "ev_edr" },
-          "lockedReason": "EDR raporu dosyada yok.",
+          "label": "EDR: 38 km/s, fren 1,2 sn önce, ABS aktif. Öngörü unsuru yok.",
+          "enabledWhen": { "any": [{ "flag": "edr_hiz" }, { "flag": "edr_dv" }] },
+          "lockedReason": "EDR dökümü okunmadı.",
           "responses": [
             {
               "lines": [
@@ -1914,7 +1935,7 @@
         {
           "id": "ARG_ATK",
           "kind": "OPTION",
-          "label": "ATK: ölüme yol açan travma birincil çarpmada; sanığın teması ikincil. İlliyet bağı kurulamıyor.",
+          "label": "ATK: ölümcül travma birincil çarpmada; sanığın teması ikincil.",
           "enabledWhen": { "hasEvidence": "ev_atk" },
           "lockedReason": "ATK raporu dosyada yok.",
           "responses": [
@@ -2027,7 +2048,7 @@
         {
           "id": "ARG_DUYGU",
           "kind": "OPTION",
-          "label": "Sanık iyi bir insan; bir haftalık bir kızı var.",
+          "label": "Sanığın kişisel durumu da tartılmalı: sabıkasız, yeni baba.",
           "responses": [
             {
               "lines": [
@@ -2265,7 +2286,7 @@
         {
           "id": "M_CIKAR",
           "kind": "OPTION",
-          "label": "Mütalaa tutanaktan çıkarılsın.",
+          "label": "Mütalaa dayanaksız; tutanaktan çıkarılsın.",
           "responses": [
             { "lines": [{ "speaker": "hakim", "text": "Böyle bir usul yok müdafi. Cevabınız varsa verin." }] }
           ],
@@ -2342,7 +2363,7 @@
           "cost": [{ "var": "noktalar", "amount": 1 }],
           "responses": [
             {
-              "when": { "hasEvidence": "ev_edr" },
+              "when": { "any": [{ "flag": "edr_hiz" }, { "flag": "edr_dv" }] },
               "lines": [
                 {
                   "speaker": "player",
@@ -2355,7 +2376,7 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "hasEvidence": "ev_edr" },
+              "when": { "any": [{ "flag": "edr_hiz" }, { "flag": "edr_dv" }] },
               "then": [
                 { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 40, "line": "savunma" },
                 {
@@ -2788,7 +2809,7 @@
         {
           "id": "T09_D",
           "kind": "OPTION",
-          "label": "Bir kadın öldü, ama müvekkilim de bu gecenin kurbanı.",
+          "label": "Vicdanınıza sesleniyorum: bir babayı hapse göndermeyin.",
           "responses": [
             {
               "lines": [
@@ -2857,6 +2878,15 @@
             {
               "speaker": "narrator",
               "text": "Oturdu. Vekili ona döndü, bir şey fısıldadı; Serkan başını iki yana salladı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Volkan başını kaldırdı. İlk kez Serkan’la göz göze geldiler. Kimse bir şey söylemedi. Salonun saati tik tak ediyordu; zabıt kâtibi bile yazmayı bıraktı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir oğul ile bir sanık arasında bir bakış. Hiçbir tutanak bunu yazmaz. Ama ikisi de bu bakışla yaşayacak.",
+              "style": "thought"
             }
           ]
         },
@@ -2871,7 +2901,16 @@
             },
             { "speaker": "hakim", "text": "Katılan, sizin bir diyeceğiniz var mı?" },
             { "speaker": "serkan", "text": "Annem yeşilde geçti. Başka bir şey demeyeceğim." },
-            { "speaker": "narrator", "text": "Oturdu. Çerçeveyi dizlerine koydu, annesinin yüzünü salona çevirdi." }
+            { "speaker": "narrator", "text": "Oturdu. Çerçeveyi dizlerine koydu, annesinin yüzünü salona çevirdi." },
+            {
+              "speaker": "narrator",
+              "text": "Çerçevedeki kadın gülümsüyordu; bir doğum günü pastasının mumlarına üflemeden hemen önce. Salonda herkes ona baktı, ben de."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir fotoğraf, bir dosyadan daha yüksek sesle konuşur. Elimdeki dayanaklar o sesi bastırmaya yetecek mi?",
+              "style": "thought"
+            }
           ]
         }
       ],
@@ -2890,7 +2929,7 @@
         {
           "id": "SS_DOGRU",
           "kind": "OPTION",
-          "label": "“Hatice Hanım’ın oğlundan özür dilerim. Ben yeşilde geçtim. Bildiğim bu, bilmediğim de bu.”",
+          "label": "“Hatice Hanım’ın oğlundan özür dilerim. Yeşilde geçtim. Bildiğim bu.”",
           "responses": [
             {
               "when": { "any": [{ "flag": "volkan_dogru" }, { "flag": "volkan_hazir" }] },
@@ -2954,6 +2993,15 @@
                 {
                   "speaker": "narrator",
                   "text": "Gül taşıyıcıyı göğsüne bastırdı. Bebek ağlamaya başladı. Mübaşir kapıyı açtı; Gül çıktı."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Serkan’ın vekili not aldı. Serkan almadı. Volkan’a baktı; uzun uzun. Kazanan birinin bakışı değildi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Hissettim.” Üç aydır bu kelimeyle boğuşuyorduk. Son sözde kelime kazandı.",
+                  "style": "thought"
                 }
               ]
             }

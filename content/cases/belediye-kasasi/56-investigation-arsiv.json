@@ -1,0 +1,1073 @@
+{
+  "variables": [
+    { "id": "fact_9ocak_log", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_10bin", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_12subat", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "bilirkisi_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "dil_kasa", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "dil_pdks", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "dil_ticket", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "dil_any", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "dil_verildi", "type": "bool", "initial": false, "visibility": "HIDDEN" }
+  ],
+  "nodes": [
+    {
+      "id": "INV_LOG",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "İptal kayıtları",
+      "hud": ["ex_log"],
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Döküm otuz bir sayfa. Teftiş raporu bunu iki sütuna indirmiş: kullanıcı ve tutar. Ben altı sütunun hepsini açtım."
+            },
+            {
+              "speaker": "player",
+              "text": "Rakamlardan korkarım. Leyla bilir; o yüzden bu dosyayı bana verdi. Korktuğun şeye bakmanın tek yolu, satır satır bakmaktır.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir alet seç, sonra şüpheli satıra dokun. Doğru alet, doğru yer: yeni bir ipucu.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "VEZNE PROGRAMI · İŞLEM GÜNLÜĞÜ · İPTALLER", "right": "03.11.2025 – 27.02.2026" },
+      "columns": [
+        { "label": "TARİH", "flex": 0.9 },
+        { "label": "SAAT", "flex": 0.7 },
+        { "label": "KULLANICI", "flex": 0.9 },
+        { "label": "TERMİNAL", "flex": 1 },
+        { "label": "TUTAR", "flex": 0.8 },
+        { "label": "AÇIKLAMA", "flex": 1.3 }
+      ],
+      "rows": [
+        { "id": "r03", "cells": ["03.11", "17.41", "okilic", "MHM-PC03", "8.400", "mükerrer tahsilat"] },
+        { "id": "r21", "cells": ["21.11", "17.52", "okilic", "MHM-PC03", "9.950", "mükerrer tahsilat"] },
+        { "id": "r09", "cells": ["09.01", "17.46", "okilic", "MHM-PC03", "9.150", "mükerrer tahsilat"] },
+        { "id": "r14", "cells": ["14.01", "17.44", "okilic", "MHM-PC03", "7.900", "mükerrer tahsilat"] },
+        { "id": "r12", "cells": ["12.02", "17.47", "okilic", "MHM-PC03", "6.850", "mükerrer tahsilat"] },
+        { "id": "r27", "cells": ["27.02", "17.56", "okilic", "MHM-PC03", "9.700", "mükerrer tahsilat"] },
+        { "id": "rtop", "cells": ["TOPLAM", "23 gün", "47 iptal", "—", "386.400", "—"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "vz", "label": "Vezne terminalleriyle karşılaştır", "icon": "compare" },
+        { "id": "mesai", "label": "Mesai saatiyle karşılaştır", "icon": "check" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex_log", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_LOG_TERM",
+          "kind": "EXAMINE",
+          "match": { "tool": "vz", "target": "r21" },
+          "feedback": {
+            "title": "YENİ İPUCU · TERMİNAL",
+            "text": "Kırk yedi satırın kırk yedisinde terminal aynı: MHM-PC03. Orhan’ın veznesindeki bilgisayar VZ-02. İptallerin hiçbiri vezne camının arkasından yapılmamış.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "clue_terminal" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "clue_terminal" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EX_LOG_TERM2",
+          "kind": "EXAMINE",
+          "match": { "tool": "vz", "target": "r03" },
+          "feedback": {
+            "title": "YENİ İPUCU · TERMİNAL",
+            "text": "Kırk yedi satırın kırk yedisinde terminal aynı: MHM-PC03. Orhan’ın veznesindeki bilgisayar VZ-02. İptallerin hiçbiri vezne camının arkasından yapılmamış.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "clue_terminal" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "clue_terminal" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EX_LOG_SAAT",
+          "kind": "EXAMINE",
+          "match": { "tool": "mesai", "target": "r27" },
+          "feedback": {
+            "title": "YENİ İPUCU · SAAT",
+            "text": "Vezne 17.00’de kapanıyor. İptallerin en erkeni 17.38, en geçi 17.56. Hiçbiri mesai içinde değil.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "clue_saat" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "clue_saat" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EX_LOG_SAAT2",
+          "kind": "EXAMINE",
+          "match": { "tool": "mesai", "target": "r03" },
+          "feedback": {
+            "title": "YENİ İPUCU · SAAT",
+            "text": "Vezne 17.00’de kapanıyor. İptallerin en erkeni 17.38, en geçi 17.56. Hiçbiri mesai içinde değil.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "clue_saat" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "clue_saat" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EX_LOG_9",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "r09" },
+          "feedback": {
+            "title": "9 OCAK, CUMA",
+            "text": "Bir cuma akşamı, 17.46’da iki iptal; toplam 18.300 TL. Satırın yanında kimse bir not düşmemiş.",
+            "label": "+40 SKOR",
+            "tone": "neutral"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 40 },
+            { "type": "VAR", "var": "fact_9ocak_log", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_LOG_TOP",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "rtop" },
+          "feedback": {
+            "title": "HEPSİ 10.000 TL ALTINDA",
+            "text": "Kırk yedi iptalin hiçbiri on bin lirayı geçmiyor. En büyüğü 9.950. Biri bir sınırı biliyor; o sınırın altında kalıyor.",
+            "label": "+40 SKOR",
+            "tone": "neutral"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 40 },
+            { "type": "VAR", "var": "fact_10bin", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_LOG_12",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "r12" },
+          "feedback": {
+            "title": "MAKBUZ 0027719",
+            "text": "12 Şubat, 17.47. Altı bin sekiz yüz elli lira: Hayri Bey’in makbuzu. İki dakika sonra 1.550 liralık bir iptal daha. Bu dosyayı açan akşam.",
+            "label": "+20 SKOR",
+            "tone": "neutral"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 20 }]
+        },
+        {
+          "id": "EX_LOG_ACIK",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "r21" },
+          "feedback": {
+            "title": "“MÜKERRER TAHSİLAT”",
+            "text": "Her iptalin açıklaması aynı. Savcılık buna “hileli davranış” diyor: iptali gerekçeli göstermek. Kimin yazdığını söylemiyor.",
+            "label": "+10 SKOR",
+            "tone": "neutral"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 10 }]
+        },
+        {
+          "id": "FB_LOG",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda bir şey görünmüyor.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "LOG_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_PDKS",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "Orhan’ın turnike dökümü",
+      "hud": ["ex_pdks"],
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "İnsan kaynaklarının çıktısı: bir sütunda giriş, bir sütunda çıkış. Orhan her satırın yanına kurşun kalemle küçük bir tik atmış; kendi dökümünü bile denetlemiş."
+            }
+          ]
+        }
+      ],
+      "header": { "left": "PDKS · PERSONEL DEVAM KONTROL · O. KILIÇ", "right": "KASIM 2025 – ŞUBAT 2026" },
+      "columns": [
+        { "label": "TARİH", "flex": 1 },
+        { "label": "GİRİŞ", "flex": 0.8 },
+        { "label": "ÇIKIŞ", "flex": 0.8 },
+        { "label": "NOT", "flex": 1.4 }
+      ],
+      "rows": [
+        { "id": "p03", "cells": ["03.11 Pzt", "08.21", "17.04", "—"] },
+        { "id": "p21", "cells": ["21.11 Cum", "08.18", "17.07", "—"] },
+        { "id": "p09", "cells": ["09.01 Cum", "—", "—", "YILLIK İZİN (1 gün)"] },
+        { "id": "p14", "cells": ["14.01 Çar", "08.33", "17.06", "—"] },
+        { "id": "p12", "cells": ["12.02 Per", "08.19", "17.03", "—"] },
+        { "id": "p27", "cells": ["27.02 Cum", "08.24", "17.09", "—"] },
+        { "id": "pozet", "cells": ["İptal günleri (23)", "en erken 08.12", "en geç 17.09", "izin: 1 gün"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "log", "label": "İptal saatleriyle karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex_pdks", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_PDKS_CIKIS",
+          "kind": "EXAMINE",
+          "match": { "tool": "log", "target": "pozet" },
+          "feedback": {
+            "title": "YENİ İPUCU · ÇIKIŞ",
+            "text": "İptal günlerinin yirmi üçünde de Orhan turnikeden en geç 17.09’da çıkmış. En erken iptal 17.38’de. Arada en az yirmi dokuz dakika ve bir turnike var.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_cikis" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_PDKS_IZIN",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "p09" },
+          "feedback": {
+            "title": "YENİ İPUCU · İZİN",
+            "text": "9 Ocak: giriş yok, çıkış yok. “Yıllık izin.” Orhan o gün belediyeye hiç girmemiş.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_izin" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_PDKS_IZIN2",
+          "kind": "EXAMINE",
+          "match": { "tool": "log", "target": "p09" },
+          "feedback": {
+            "title": "İZİNLİ GÜN",
+            "text": "9 Ocak’ta Orhan izinli. İptal kayıtlarında aynı akşam 17.46’da onun kullanıcısıyla iki iptal var.",
+            "label": "Not defterine eklendi",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "clue_izin" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "clue_izin" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EX_PDKS_12",
+          "kind": "EXAMINE",
+          "match": { "tool": "log", "target": "p12" },
+          "feedback": {
+            "title": "12 ŞUBAT",
+            "text": "16.40’ta Hayri Bey’in parasını iki kez saydı. 17.03’te turnikeden çıktı. 17.47’de makbuz iptal edildi.",
+            "label": "+40 SKOR",
+            "tone": "neutral"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 40 },
+            { "type": "VAR", "var": "fact_12subat", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "FB_PDKS",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda bir şey görünmüyor.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "PDKS_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_TUTANAK",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "Teslim tutanakları",
+      "hud": ["ex_tut"],
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Dosyadaki beyaz asılları bir yana, Orhan’ın sarı karbonlarını öbür yana dizdim. Yirmi üç gün, iki yığın. İkisinin aynı olması gerekiyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Önce 12 Şubat. Hayri Bey’in günü. Bir tarih seçince ötekiler de konuşmaya başlar.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "KASA TESLİM TUTANAĞI · 12.02.2026", "right": "ASIL ↔ KARBON" },
+      "columns": [
+        { "label": "SATIR", "flex": 1.1 },
+        { "label": "DOSYADAKİ ASIL", "flex": 1.3 },
+        { "label": "KARBON KOPYA", "flex": 1.3 }
+      ],
+      "rows": [
+        { "id": "t_tutar", "cells": ["Teslim edilen tutar", "32.850,00 TL", "41.250,00 TL"] },
+        { "id": "t_rapor", "cells": ["Ekli gün sonu raporu", "basım saati 17.56", "basım saati 16.58"] },
+        {
+          "id": "t_eden",
+          "cells": ["Teslim eden", "O. Kılıç (imza)", "O. Kılıç (imza)"],
+          "lens": {
+            "uv": { "cells": ["Teslim eden", "toner · kabartı yok", "mürekkep · kalem izi var"], "tone": "special" }
+          }
+        },
+        { "id": "t_alan", "cells": ["Teslim alan", "okunaksız paraf", "— boş —"] },
+        { "id": "t_torba", "cells": ["Torba sayısı", "3 mühürlü", "3 mühürlü"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "compare", "label": "Nüshaları karşılaştır", "icon": "compare" },
+        { "id": "uv", "label": "Eğik ışık", "icon": "uv", "visualMode": "UV" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex_tut", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_TUT_TUTAR",
+          "kind": "EXAMINE",
+          "match": { "tool": "compare", "target": "t_tutar" },
+          "feedback": {
+            "title": "YENİ İPUCU · TUTAR",
+            "text": "Aynı tutanağın iki nüshası. Karbonda 41.250 TL, asılda 32.850 TL. Fark 8.400 TL: o akşam iptal edilen iki makbuzun toplamı. Asıl, iptallerden sonra yeniden düzenlenmiş.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_tutar_fark" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_TUT_RAPOR",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "t_rapor" },
+          "feedback": {
+            "title": "YENİ İPUCU · BASIM SAATİ",
+            "text": "Gün sonu raporlarının altındaki küçük satır: “Basım: 16.58” (Orhan’ın nüshası) ve “Basım: 17.56” (dosyadaki). Rapor, kasa teslim edildikten bir saat sonra yeniden basılmış.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_basim" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_TUT_IMZA",
+          "kind": "EXAMINE",
+          "match": { "tool": "uv", "target": "t_eden" },
+          "feedback": {
+            "title": "YENİ İPUCU · İMZA",
+            "text": "Eğik ışıkta karbondaki imzanın altında kalemin bastırdığı oluk görünüyor. Asıldaki imzada oluk yok; çizgiler parlak ve düz. Mürekkep değil, toner. İmza yazılmamış, basılmış.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_imza_kopya" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_TUT_ALAN",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "t_alan" },
+          "feedback": {
+            "title": "TESLİM ALAN",
+            "text": "Asılda teslim alan hanesinde adsız, okunaksız bir paraf var; Orhan’ın nüshasında hane boş. Teslim anında imzalanmamış. Ne zaman, kim paraf attı?",
+            "label": "+40 SKOR",
+            "tone": "neutral"
+          },
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 40 },
+            { "type": "VAR", "var": "fact_imza_bos", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EX_TUT_TORBA",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "t_torba" },
+          "feedback": {
+            "title": "ÜÇ TORBA",
+            "text": "Torba sayısı iki nüshada da aynı. Mühürlü torba açılmaz; ama torbanın içine ne konduğunu tutanak söyler.",
+            "label": "−10 SKOR",
+            "tone": "neutral"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -10 }]
+        },
+        {
+          "id": "FB_TUT",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda bir şey görünmüyor.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "TUT_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_BANKA",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "Banka dökümü",
+      "hud": ["ex_banka"],
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "MASAK yazısının eki: Orhan Kılıç’ın maaş hesabının altı aylık dökümü. Savcılık bir satırı sarıyla boyamış. Ben bütün satırları okudum."
+            }
+          ]
+        }
+      ],
+      "header": { "left": "BANKA HESAP DÖKÜMÜ · O. KILIÇ", "right": "TEMMUZ – ARALIK 2025" },
+      "columns": [
+        { "label": "TARİH", "flex": 0.9 },
+        { "label": "AÇIKLAMA", "flex": 2 },
+        { "label": "TUTAR", "flex": 0.9 }
+      ],
+      "rows": [
+        { "id": "b_maas", "cells": ["15.11", "Maaş · Hisarönü Belediyesi", "+38.400"] },
+        { "id": "b_kart", "cells": ["Kasım–Aralık", "Kart: market, eczane, servis", "−21.300"] },
+        { "id": "b_havale", "cells": ["18.12 09.12", "Gelen havale · İnegöl Noterliği emanet", "+215.000"] },
+        { "id": "b_kredi", "cells": ["18.12 11.40", "İhtiyaç kredisi erken kapama", "−212.000"] },
+        { "id": "b_eczane", "cells": ["20.12", "Eczane · kardiyoloji ilacı", "−2.140"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "tapu", "label": "Tapu senediyle karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "ex_banka", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_BNK_KREDI",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "b_kredi" },
+          "feedback": {
+            "title": "YENİ İPUCU · KREDİ",
+            "text": "Savcılığın sarıyla boyadığı satır: 212.000 TL, tek ödeme, 18 Aralık 11.40. Bir satır yukarısına kimse bakmamış.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kredi" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_BNK_TAPU",
+          "kind": "EXAMINE",
+          "match": { "tool": "tapu", "target": "b_havale" },
+          "enabledWhen": { "hasEvidence": "ev_tapu" },
+          "feedback": {
+            "title": "YENİ İPUCU · TAPU",
+            "text": "Tapu senedi: 17 Aralık, 215.000 TL. Ertesi sabah 09.12’de noter emanetinden aynı tutar hesaba girmiş; iki buçuk saat sonra kredi kapanmış.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_tapu" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_BNK_TAPU_YOK",
+          "kind": "EXAMINE",
+          "match": { "tool": "tapu", "target": "b_havale" },
+          "feedback": {
+            "title": "ELİNDE SENET YOK",
+            "text": "Noter emanetinden gelen bir havale. Neyin bedeli olduğunu gösterecek belge elinde değil; Orhan’ın evrakına bakmalısın.",
+            "label": "Bilgi",
+            "tone": "neutral"
+          },
+          "maxUses": 3
+        },
+        {
+          "id": "EX_BNK_ECZ",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "b_eczane" },
+          "feedback": {
+            "title": "İLAÇ",
+            "text": "Kardiyoloji ilacı, her ay aynı gün. Bir babanın düzeni.",
+            "label": "+10 SKOR",
+            "tone": "neutral"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 10 }]
+        },
+        {
+          "id": "FB_BANKA",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda bir şey görünmüyor.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "BANKA_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_DIL",
+      "type": "STORY",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "Delil dilekçesi",
+      "hud": ["slots"],
+      "background": "buro",
+      "lines": [
+        {
+          "when": { "not": { "flag": "dil_any" } },
+          "lines": [
+            { "speaker": "narrator", "text": "BÜRO — DİLEKÇE", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Boş bir sayfa: “Bursa 6. Ağır Ceza Mahkemesi Başkanlığı’na.” İmleç yanıp sönüyor."
+            },
+            {
+              "speaker": "player",
+              "text": "Üç talep. Mahkeme gereksiz talebi reddeder; her gereksiz talep, gerçek talebin ağırlığını eksiltir. Neyi ispat edeceğini yazamadığın şeyi isteme.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Dilekçe uzuyor. Her talebin altına “ispat edilecek husus” satırını yazıyorum."
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "DIL_BILIRKISI",
+          "kind": "OPTION",
+          "label": "Bilişim bilirkişisi: yetkiler, terminal, kimlik doğrulama",
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "maxUses": 1,
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 60 },
+            { "type": "VAR", "var": "bilirkisi_istendi", "op": "set", "value": true },
+            { "type": "VAR", "var": "dil_any", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Log kayıtlarının, terminal yetkilerinin ve kimlik doğrulamanın incelenmesi özel ve teknik bilgi gerektirir; bilişim bilirkişisi istenir (CMK 63, 177).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_KASA",
+          "kind": "OPTION",
+          "label": "Güvenlik firmasından kasa odası alarm kayıtları",
+          "visibleWhen": { "flag": "fact_kasa_kod" },
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "maxUses": 1,
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 60 },
+            { "type": "VAR", "var": "dil_kasa", "op": "set", "value": true },
+            { "type": "VAR", "var": "dil_any", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Paranın kasadan ne zaman, hangi kodla alındığını gösterecek kayıt; ispat edilecek husus açık (CMK 177).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_PDKS",
+          "kind": "OPTION",
+          "label": "Müdürlük personelinin iptal günlerindeki turnike kayıtları",
+          "visibleWhen": { "any": [{ "flag": "fact_turnike" }, { "hasEvidence": "clue_cikis" }] },
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "maxUses": 1,
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 60 },
+            { "type": "VAR", "var": "dil_pdks", "op": "set", "value": true },
+            { "type": "VAR", "var": "dil_any", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "İptal saatlerinde binada kimin bulunduğu; sanığın çıkışını başkalarınınkiyle karşılaştırma imkânı (CMK 177).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_TICKET",
+          "kind": "OPTION",
+          "label": "Bilgi işlemden Ocak ayı şifre sıfırlama talepleri",
+          "visibleWhen": { "flag": "fact_14ocak" },
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "maxUses": 1,
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 60 },
+            { "type": "VAR", "var": "dil_ticket", "op": "set", "value": true },
+            { "type": "VAR", "var": "dil_any", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Sanığın şifresinin kimin talebiyle sıfırlandığını gösterecek kayıt (CMK 177).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_MELEK",
+          "kind": "OPTION",
+          "label": "Melek Yavuz’un banka hesap hareketleri",
+          "visibleWhen": { "hasEvidence": "clue_araba" },
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "maxUses": 1,
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -40 },
+            { "type": "VAR", "var": "dil_any", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Hakkında hiçbir somut bulgu olmayan bir tanığın hesapları istenmez; talep ilgisiz bulunarak reddedilir (CMK 206/2-b) ve özel hayata müdahale sayılır.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_KAMERA",
+          "kind": "OPTION",
+          "label": "Vezne salonu kamera kayıtları",
+          "visibleWhen": { "hasEvidence": "clue_kamera" },
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "maxUses": 1,
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": -20 },
+            { "type": "VAR", "var": "dil_any", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Kayıtlar otuz gün sonra üzerine yazılıyor; aylar sonra istenen delil elde edilemez (CMK 206/2-c). Kamera ekranları da görmüyordu.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_MUFETTIS",
+          "kind": "OPTION",
+          "label": "Müfettişin tanık olarak dinlenmesi",
+          "cost": [{ "var": "slots", "amount": 1 }],
+          "maxUses": 1,
+          "next": "$stay",
+          "effects": [{ "type": "VAR", "var": "dil_any", "op": "set", "value": true }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Müfettiş raporunu anlatır; raporda olmayan sütunları anlatamaz. Bir talep hakkı ağır bir sonuç getirmedi."
+          }
+        },
+        {
+          "id": "DIL_VER",
+          "kind": "CONTINUE",
+          "label": "Dilekçeyi ver",
+          "role": "PRIMARY",
+          "enabledWhen": { "flag": "dil_any" },
+          "next": "$return",
+          "effects": [{ "type": "VAR", "var": "dil_verildi", "op": "set", "value": true }]
+        },
+        { "id": "DIL_GERI", "kind": "CONTINUE", "label": "Sonra yazarım", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_CIKARIM",
+      "type": "DEDUCTION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "Çıkarım tahtası",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "İki ipucunu seç. Birbirini tamamlıyorsa duruşmada kullanabileceğin bir delil doğar."
+            },
+            {
+              "speaker": "player",
+              "text": "Pano, raptiyeler, kırmızı ip. Leyla bununla dalga geçer. Sonra gelip uzun uzun bakar.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "pool": [
+        "clue_terminal",
+        "clue_saat",
+        "clue_cikis",
+        "clue_izin",
+        "clue_yonerge",
+        "ev_talimat",
+        "clue_defter",
+        "clue_tutar_fark",
+        "clue_basim",
+        "clue_imza_kopya",
+        "clue_kredi",
+        "clue_tapu",
+        "clue_postit",
+        "clue_kamera",
+        "clue_araba",
+        "clue_satranc"
+      ],
+      "choices": [
+        {
+          "id": "CB_BASKASI",
+          "kind": "COMBINE",
+          "match": { "a": "clue_terminal", "b": "clue_cikis" },
+          "feedback": {
+            "title": "İptaller Orhan çıktıktan sonra, başka bir bilgisayardan",
+            "text": "Orhan turnikeden en geç 17.09’da çıkmış. İptaller 17.38’den sonra, ön odadaki MHM-PC03’ten.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Kayıtlar bir isim yazıyor. O ismin sahibi o saatte serviste, eve giden yolda. Klavyede başka bir el vardı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_baskasi" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "ded_baskasi" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CB_IZIN",
+          "kind": "COMBINE",
+          "match": { "a": "clue_saat", "b": "clue_izin" },
+          "feedback": {
+            "title": "İzinli gününde bile kullanıcı adı çalışmış",
+            "text": "9 Ocak’ta Orhan izinli; aynı akşam 17.46’da onun kullanıcısıyla iki iptal.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bir adam hastane koridorunda, kızının elini tutuyor. Aynı saatte onun adı, boş bir odada, bir ekranda “Evet”e basıyor.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_izin" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "ded_izin" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CB_ZARF",
+          "kind": "COMBINE",
+          "match": { "a": "clue_yonerge", "b": "ev_talimat" },
+          "feedback": {
+            "title": "Şifre kişiye özel değildi",
+            "text": "Yönerge zarfı yasaklıyor; müdürlükten gelen el yazısı not zarfı istiyor.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Bir kural ve o kuralı çiğneten bir not. İkisi de aynı müdürlüğün kâğıdı. Kullanıcı adı artık bir kişi değil; bir zarfın içindeki bir satır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_zarf" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "ded_zarf" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CB_TESLIM",
+          "kind": "COMBINE",
+          "match": { "a": "clue_defter", "b": "clue_tutar_fark" },
+          "feedback": {
+            "title": "Para Orhan’ın elinden tam çıktı",
+            "text": "Defter ve karbon kopya aynı tutarı söylüyor; dosyadaki tutanak daha az. Eksilme teslimden sonra.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Saat beşte kasa tamdı. Orhan saydı, yazdı, teslim etti. Para o andan sonra başka birinin koruması altındaydı. Leyla’nın kelimesi: zilyetlik.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_teslim" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "ded_teslim" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CB_TUTANAK",
+          "kind": "COMBINE",
+          "match": { "a": "clue_imza_kopya", "b": "clue_basim" },
+          "feedback": {
+            "title": "Tutanaklar sonradan değiştirilmiş",
+            "text": "Rapor 17.56’da yeniden basılmış; tutanaktaki Orhan imzası toner. Asıl, Orhan çıktıktan sonra hazırlanmış.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Biri Orhan’ın imzasını bir fotokopi makinesinden geçirmiş. Bir imza bir insanın en küçük parçasıdır; onu çoğaltan, insanı da çoğaltmış olur.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_sahte_tutanak" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "ded_sahte_tutanak" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CB_KREDI",
+          "kind": "COMBINE",
+          "match": { "a": "clue_kredi", "b": "clue_tapu" },
+          "feedback": {
+            "title": "Kredi, tarlanın parasıyla kapandı",
+            "text": "Satış 17 Aralık, havale 18 Aralık 09.12, kapanış 11.40. Kaynak belli.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Savcılığın “sebep” dediği şey, bir ölünün tarlası ve bir kızın kalbi. Kasadan tek kuruş değil.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_kredi" } },
+              "then": [
+                { "type": "DISCOVER", "evidence": "ded_kredi" },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "CB_X_POSTIT",
+          "kind": "COMBINE",
+          "match": { "a": "clue_postit", "b": "clue_yonerge" },
+          "feedback": {
+            "title": "Yanlış iz",
+            "text": "Bir not kâğıdı şifre olabilir; ama Melek’in kullanıcısıyla tek bir iptal yok. Bu iki kart birbirini açıklamıyor.",
+            "label": "BAĞLANTI YOK · −50 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+        },
+        {
+          "id": "CB_X_ARABA",
+          "kind": "COMBINE",
+          "match": { "a": "clue_araba", "b": "clue_kredi" },
+          "feedback": {
+            "title": "Yanlış iz",
+            "text": "İki kredi, iki insan. Biri araba, biri ameliyat. Birinin borcu ötekinin suçunu göstermez.",
+            "label": "BAĞLANTI YOK · −50 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+        },
+        {
+          "id": "CB_X_KAMERA",
+          "kind": "COMBINE",
+          "match": { "a": "clue_kamera", "b": "clue_terminal" },
+          "feedback": {
+            "title": "Yanlış iz",
+            "text": "Kamera sıraya bakıyor; ön oda kör noktada ve kayıtlar silinmiş. Bu bağlantı mahkemede bir şey göstermez.",
+            "label": "BAĞLANTI YOK · −50 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+        },
+        {
+          "id": "CB_X_SATRANC",
+          "kind": "COMBINE",
+          "match": { "a": "clue_satranc", "b": "clue_defter" },
+          "feedback": {
+            "title": "Yanlış iz",
+            "text": "Düzenli bir adamın iki alışkanlığı. Karakter anlatır, olay anlatmaz.",
+            "label": "BAĞLANTI YOK · −50 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+        },
+        {
+          "id": "FB_CIKARIM",
+          "kind": "FALLBACK",
+          "fallbackFor": "COMBINE",
+          "repeat": "ONCE_PER_PARAMS",
+          "feedback": {
+            "title": "Bu ikisi birbirini açıklamıyor",
+            "text": "Başka bir ipucu dene.",
+            "label": "BAĞLANTI YOK · −50 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+        },
+        { "id": "CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_terminal", "source": { "type": "RULE", "id": "EX_LOG_TERM" } },
+    { "evidence": "clue_terminal", "source": { "type": "RULE", "id": "EX_LOG_TERM2" } },
+    { "evidence": "clue_saat", "source": { "type": "RULE", "id": "EX_LOG_SAAT" } },
+    { "evidence": "clue_saat", "source": { "type": "RULE", "id": "EX_LOG_SAAT2" } },
+    { "evidence": "clue_cikis", "source": { "type": "RULE", "id": "EX_PDKS_CIKIS" } },
+    { "evidence": "clue_izin", "source": { "type": "RULE", "id": "EX_PDKS_IZIN" } },
+    { "evidence": "clue_izin", "source": { "type": "RULE", "id": "EX_PDKS_IZIN2" } },
+    { "evidence": "clue_tutar_fark", "source": { "type": "RULE", "id": "EX_TUT_TUTAR" } },
+    { "evidence": "clue_basim", "source": { "type": "RULE", "id": "EX_TUT_RAPOR" } },
+    { "evidence": "clue_imza_kopya", "source": { "type": "RULE", "id": "EX_TUT_IMZA" } },
+    { "evidence": "clue_kredi", "source": { "type": "RULE", "id": "EX_BNK_KREDI" } },
+    { "evidence": "clue_tapu", "source": { "type": "RULE", "id": "EX_BNK_TAPU" } },
+    { "evidence": "ded_baskasi", "source": { "type": "RULE", "id": "CB_BASKASI" } },
+    { "evidence": "ded_izin", "source": { "type": "RULE", "id": "CB_IZIN" } },
+    { "evidence": "ded_zarf", "source": { "type": "RULE", "id": "CB_ZARF" } },
+    { "evidence": "ded_teslim", "source": { "type": "RULE", "id": "CB_TESLIM" } },
+    { "evidence": "ded_sahte_tutanak", "source": { "type": "RULE", "id": "CB_TUTANAK" } },
+    { "evidence": "ded_kredi", "source": { "type": "RULE", "id": "CB_KREDI" } }
+  ]
+}

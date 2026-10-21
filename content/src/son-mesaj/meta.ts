@@ -101,10 +101,7 @@ export const meta: CasePart = {
       id: 'kaynak_suphesi',
       label: 'Mesajların telefondan çıkmadığı gösterildi',
       when: {
-        any: [
-          { flag: 'contra_s3' },
-          { all: [{ flag: 'bilirkisi_cihaz' }, { hasEvidence: 'ded_bagli' }] },
-        ],
+        any: [{ flag: 'contra_s3' }, { all: [{ flag: 'bilirkisi_cihaz' }, { hasEvidence: 'ded_bagli' }] }],
       },
     },
     {
@@ -115,10 +112,29 @@ export const meta: CasePart = {
           {
             add: [
               { if: { when: { any: [{ flag: 'ss_excluded' }, { flag: 'bilirkisi_ss' }] }, then: 1, else: 0 } },
-              { if: { when: { any: [{ flag: 'contra_s2' }, { flag: 'contra_s4' }] }, then: 1, else: 0 } },
-              { if: { when: { any: [{ flag: 'hayri_saat' }, { flag: 'fact_hayri_saat' }, { flag: 'bilirkisi_kilit' }, { flag: 'kilit_mahkemede' }] }, then: 1, else: 0 } },
+              {
+                if: {
+                  when: { any: [{ flag: 'contra_s2' }, { flag: 'contra_s4' }, { flag: 'bilirkisi_zincir' }] },
+                  then: 1,
+                  else: 0,
+                },
+              },
+              {
+                if: {
+                  when: {
+                    any: [
+                      { flag: 'hayri_saat' },
+                      { flag: 'fact_hayri_saat' },
+                      { flag: 'bilirkisi_kilit' },
+                      { flag: 'kilit_mahkemede' },
+                    ],
+                  },
+                  then: 1,
+                  else: 0,
+                },
+              },
               { if: { when: { flag: 'pay_cevap' }, then: 1, else: 0 } },
-              { if: { when: { flag: 'contra_s1' }, then: 1, else: 0 } },
+              { if: { when: { any: [{ flag: 'contra_s1' }, { flag: 'bilirkisi_el' }] }, then: 1, else: 0 } },
             ],
           },
           '>=',
@@ -128,11 +144,37 @@ export const meta: CasePart = {
     },
     {
       id: 'ozan_dayanak',
-      label: 'Eski ortak hakkında somut dayanak var',
+      label: 'Eski ortak hakkında somut dayanak var: cihaz, zimmet ve hat',
       when: {
         all: [
           { hasEvidence: 'ded_bagli' },
-          { any: [{ hasEvidence: 'ded_laptop_ozan' }, { hasEvidence: 'ded_ip_tekin' }, { hasEvidence: 'clue_envanter' }, { hasEvidence: 'clue_dock' }] },
+          { any: [{ hasEvidence: 'ded_laptop_ozan' }, { hasEvidence: 'clue_envanter' }] },
+          { any: [{ hasEvidence: 'ev_isp' }, { hasEvidence: 'ded_ip_tekin' }] },
+        ],
+      },
+    },
+    {
+      id: 'bilirkisi_teyit',
+      label: 'Bilirkişi, raporunu okuyan savunmanın sorusuyla bulguyu teyit etti',
+      when: { any: [{ flag: 'bilirkisi_cihaz' }, { flag: 'bilirkisi_kilit' }] },
+    },
+    {
+      id: 'ara_ilerleme',
+      label: 'Arada en az üç iş tamamlandı',
+      when: {
+        cmp: [
+          {
+            add: [
+              { if: { when: { visited: 'ARA_DEMIRBAS' }, then: 1, else: 0 } },
+              { if: { when: { visited: 'ARA_ARAMA_EV' }, then: 1, else: 0 } },
+              { if: { when: { visited: 'ARA_VAKIF' }, then: 1, else: 0 } },
+              { if: { when: { visited: 'ARA_MELIS' }, then: 1, else: 0 } },
+              { if: { when: { visited: 'ARA_RAPOR' }, then: 1, else: 0 } },
+              { if: { when: { any: [{ flag: 'suc_duyurusu' }, { flag: 'suc_mechul' }] }, then: 1, else: 0 } },
+            ],
+          },
+          '>=',
+          3,
         ],
       },
     },
@@ -154,6 +196,8 @@ export const meta: CasePart = {
     meter('ex3b', 'Deneme hakkı', 'counter', 6, 6, { lowAt: 2, resource: true }),
     meter('ex4', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('ex5', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 2, resource: true }),
+    meter('ex6', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 2, resource: true }),
+    meter('ex7', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('slots', 'Talep hakkı', 'counter', 3, 3),
     meter('slots2', 'Talep hakkı', 'counter', 3, 3),
     meter('noktalar', 'Dayanak', 'counter', 3, 3),
@@ -209,10 +253,14 @@ export const meta: CasePart = {
       'karartma',
       'tarik_red',
       'laptop_kayip',
+      'laptop_imaj',
+      'melis_kapandi',
       // ikinci celse
       'bilirkisi_cihaz',
       'bilirkisi_kilit',
       'bilirkisi_ss',
+      'bilirkisi_zincir',
+      'bilirkisi_el',
       'hayri_saat',
       'hayri_dinlendi',
       'press_o1',

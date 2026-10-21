@@ -303,7 +303,8 @@
           "cost": [{ "var": "ara_ap", "amount": 1 }],
           "next": "ARA_KEBAP_G",
           "maxUses": 1,
-          "description": "23.31 siparişi · arka kapı"
+          "description": "23.31 siparişi · arka kapı",
+          "visibleWhen": { "visited": "ARA_GPS" }
         },
         {
           "id": "A_KARAR",
@@ -545,7 +546,7 @@
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Tolga. Kapımda bereli, ıslak duran genç. “Benden daha iyi bir çocuktur o.”",
+                  "text": "Tolga. Bir gece kapımda sırılsıklam duran, zarf uzatan genç. Haftalığını bir avukata bırakan kuzen.",
                   "style": "thought"
                 },
                 {
@@ -1272,18 +1273,34 @@
                   "text": "Kolay mı canım? Annesiz büyümüş bir çocuğa “git hapse gir” mi diyeyim?"
                 },
                 { "speaker": "narrator", "text": "Sustu. Makası yeniden eline aldı. Tık." },
-                { "speaker": "derya", "text": "Konuşurum. Ama ne diyeceğime ben karar veririm." }
+                { "speaker": "derya", "text": "Konuşurum. Ama ne diyeceğime ben karar veririm." },
+                {
+                  "speaker": "narrator",
+                  "text": "Salondan çıkarken telefonum titredi. Leyla. Derya’nın sesinden anlamış; Derya önce onu aramış."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Bir aileye kimi teslim edeceğini söyleyemezsin Deniz. Sen bildiğini savcıya yazarsın; kim ne yapacak, kendisi karar verir.",
+                  "style": "phone"
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Yoksa yarın o çocuk “avukat beni ailemle sıkıştırdı” der ve haklı olur.",
+                  "style": "phone"
+                }
               ]
             }
           ],
           "next": "ARA_HUB",
           "effects": [
-            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 10 },
-            { "type": "VAR", "var": "derya_konustu", "op": "set", "value": true }
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -40 },
+            { "type": "VAR", "var": "derya_konustu", "op": "set", "value": true },
+            { "type": "VAR", "var": "trust", "op": "dec", "value": 10 }
           ],
           "quality": {
-            "q": "NEUTRAL",
-            "feedback": "Amacın meşru; ama müvekkilin avukatı olarak üçüncü kişinin ailesine ne yapması gerektiğini söylemek, sınırda bir yönlendirmedir."
+            "q": "BAD",
+            "feedback": "Amacın meşru; ama müvekkilin avukatı olarak üçüncü kişinin ailesine ne yapması gerektiğini söylemek bir yönlendirmedir. Bilgiyi savcılığa sen bildirirsin (CMK 158); aile kendi kararını verir.",
+            "category": "SAVUNMA_STRATEJISI"
           }
         },
         {
@@ -1580,14 +1597,21 @@
         {
           "id": "K_BILDIR",
           "kind": "OPTION",
-          "label": "Savcılığa yazılı bildir: kayıtlar ve usulüne uygun teşhis talebi",
+          "label": "Bildiklerini savcıya yaz",
           "next": "ARA_BILDIR",
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": 50 },
             { "type": "VAR", "var": "bildirdi", "op": "set", "value": true },
             { "type": "VAR", "var": "karar_verildi", "op": "set", "value": true },
-            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 }
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 },
+            {
+              "type": "IF",
+              "when": {
+                "all": [{ "hasEvidence": "ded_baskasi" }, { "hasEvidence": "ded_hesap" }, { "ref": "dosya_butun" }]
+              },
+              "then": [{ "type": "VAR", "var": "bildirim_guclu", "op": "set", "value": true }]
+            }
           ],
           "quality": {
             "q": "GOOD",
@@ -1598,7 +1622,7 @@
         {
           "id": "K_YUZLES",
           "kind": "OPTION",
-          "label": "Tolga’yı bul ve yüzleş",
+          "label": "Tolga’yı bul, onunla konuş",
           "next": "ARA_YUZLES",
           "effects": [
             { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -80 },
@@ -1614,7 +1638,7 @@
         {
           "id": "K_NERMIN",
           "kind": "OPTION",
-          "label": "Nermin Hanım’a özçekimi göster; o tanısın",
+          "label": "Özçekimi Nermin Hanım’a göster",
           "visibleWhen": { "hasEvidence": "ev_selfie" },
           "next": "ARA_NERMIN",
           "effects": [
@@ -1629,7 +1653,13 @@
             "category": "SAVUNMA_STRATEJISI"
           }
         },
-        { "id": "K_BEKLE", "kind": "CONTINUE", "label": "Şimdilik bekle", "role": "BACK", "next": "ARA_HUB" }
+        {
+          "id": "K_BEKLE",
+          "kind": "CONTINUE",
+          "label": "Şimdilik bekle, kayıt topla",
+          "role": "BACK",
+          "next": "ARA_HUB"
+        }
       ]
     },
     {
@@ -1642,9 +1672,7 @@
       "onFirstEnter": [{ "type": "MEET", "character": "orhan" }],
       "lines": [
         {
-          "when": {
-            "any": [{ "hasEvidence": "ded_baskasi" }, { "hasEvidence": "ded_hesap" }, { "hasEvidence": "clue_selfie" }]
-          },
+          "when": { "flag": "bildirim_guclu" },
           "lines": [
             {
               "speaker": "narrator",
@@ -1658,7 +1686,7 @@
             },
             {
               "speaker": "orhan",
-              "text": "Giriş cihazı farklı. Özçekimde bir halka. Telefonunda bir mesaj. Hesabı başkası kullanıyormuş."
+              "text": "Kayıtlar, saatler, ekler. Oturum başka bir telefondan açılmış. Hesabı o gece başkası kullanıyormuş."
             },
             { "speaker": "orhan", "text": "Bunu bana getirdiniz. Mahkemede sürpriz yapmak yerine." },
             {
@@ -1755,7 +1783,12 @@
             },
             {
               "speaker": "leyla",
-              "text": "Biz kolluk değiliz Deniz. Bildiğini savcıya yazarsın; arayan o olur, bulan o olur. Şimdi bulunacak bir adam yok.",
+              "text": "Kovalamak avukatın işi değildir Deniz. Biz kolluk değiliz. Bildiğini savcıya yazarsın; arayan o olur, bulan o olur.",
+              "style": "phone"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Şimdi bulunacak bir adam yok. Bir de “avukat beni uyardı” diyecek bir adam var. Yarın sabah dilekçeni yine yazacaksın; bu sefer geç.",
               "style": "phone"
             },
             {
@@ -1909,10 +1942,28 @@
       "background": "buro",
       "lines": [
         {
+          "when": { "cmp": [{ "var": "ara_day" }, "==", 1] },
           "lines": [
             {
               "speaker": "narrator",
-              "text": "Duruşmaya iki haftadan fazla var. Dilekçe en geç beş gün önce mahkemede olmalı."
+              "text": "Duruşmaya on dokuz gün var. Mahkemenin cevapları istemesi için zaman yeter; dilekçe erken giderse."
+            }
+          ]
+        },
+        {
+          "when": { "cmp": [{ "var": "ara_day" }, "==", 2] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Duruşmaya on iki gün var. Müzekkere bugün çıkarsa cevap yetişir; yarın çıkarsa belki."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Duruşmaya beş gün var. Müzekkere bugün çıkarsa cevap duruşma sabahı gelir; ancak yetişir."
             }
           ]
         }
@@ -2759,7 +2810,12 @@
         {
           "type": "IF",
           "when": {
-            "all": [{ "flag": "bildirdi" }, { "flag": "derya_konustu" }, { "not": { "flag": "tolga_kacti" } }]
+            "all": [
+              { "flag": "bildirim_guclu" },
+              { "flag": "derya_konustu" },
+              { "not": { "flag": "tolga_kacti" } },
+              { "cmp": [{ "score": "raw" }, ">=", 6500] }
+            ]
           },
           "then": [{ "type": "VAR", "var": "tolga_teslim", "op": "set", "value": true }]
         }

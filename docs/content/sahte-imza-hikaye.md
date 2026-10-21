@@ -45,13 +45,13 @@
 | Kimlik | Kim | Ses (nasıl konuşur) | Sır / istek | Yay |
 |---|---|---|---|---|
 | **deniz** (oyuncu) | 31, büroda üçüncü yıl. | İçeride alaycı ve keskin, dışarıda nazik ve inatçı. | Geçen yıl kaybettiği dosyanın yükü (Dava #07 ile ortak). | "Kâğıdın ne dediği" ile "insanın ne yaptığı" arasındaki farkı öğrenir. |
-| **leyla** (mentor) | 58, büronun kurucusu. | Az konuşur, her cümle bir ders; kalemini çevirir. | Masasındaki ters çerçeve (Dava #15 tohumu; yalnızca bir kez ima). | Deniz'i izler, kurtarmaz. Etik çizgide sert. |
+| **leyla** (mentor) | 58, büronun kurucusu. | Az konuşur, her cümle bir ders; kalemini çevirir. | Masasındaki ters çerçeve (Dava #15 tohumu; dört kez ima — BR_01, ARA_AKSAM2, ARA_SON, BERAAT_B epilogu; bu davada çözülmez). | Deniz'i izler, kurtarmaz. Etik çizgide sert. |
 | **vedat** (müvekkil) | 49, Ateş Matbaası'nın sahibi; babasından kalma kurşun dizgi makinesini hâlâ çalıştırır. Adli kontrolle serbest. | Usta ağzı; kâğıt ve mürekkep benzetmeleri ("Her kâğıdın bir sesi vardır"). Kısa, gururlu; suçlanınca parlar, sonra utanır. **Sağlak.** | 2024 bayramında annesinden evi satmasını istemiş, kavga çıkmıştı (savcılığın sebep teorisi). Bunu ilk görüşmede saklar. İrsaliyeleri çoğunlukla başkalarının imzaladığını söylemek istemez: "Dükkândakiler benim çocuklarım." | İnkâr → öfke → ihanetin farkına varış. Son sözde "imza" ile "isim" arasındaki farkı söyler. |
 | **sevgi** (eş) | 46, ilkokul öğretmeni. Dosyayı büroya o getirir. | Düzenli, pratik, hep "biz" der; sınıfta konuşur gibi madde madde anlatır. | Bir aile yemeğinde Tarık'ın telefonuna gelen bahis sitesi mesajlarını görmüş, Vedat'a söylememiş. Yalnızca oyuncu somut bir halka bulduktan sonra (ara evre) anlatır. | Sabır → kırılma → suçluluk ("Söyleseydim…"). |
-| **tarik** (yeğen, gerçek fail) | 41, Vedat'ın rahmetli ağabeyi Halit'in oğlu; on dört yıldır matbaada, dijital baskı odasının sorumlusu. **Solak.** | Alçak sesli, kibar, yardımsever; kısa cümleler; çay ikram eder; "amcam" der, gözünü kaçırır. Fazla yardımcı olur: "Ne lazımsa." | Çevrimiçi bahis borcu (Erol'un çevresine ~1,4 milyon TL). Hayriye'nin vekâletnamesini 2023'te "saklamak için" taramıştı; sahte sureti gece matbaada bastı, amcasının kimliğini ceketinden aldı, kep ve gözlükle tapuya girdi, amcasının imzasını yıllardır irsaliyelerde attığı gibi attı. Kolluğa "mukayese için amcamın imzaları" diye kendi attığı irsaliyeleri teslim etti. | Sevilen yeğen → (oyuncu kazanırsa) kürsüde susan adam. Kovalanmaz; çözülmez; sadece susar. Son cümlesi: "Sen hep kâğıda inandın amca." |
+| **tarik** (yeğen, gerçek fail) | 41, Vedat'ın rahmetli ağabeyi Halit'in oğlu; on dört yıldır matbaada, dijital baskı odasının sorumlusu. **Solak.** | Alçak sesli, kibar, yardımsever; kısa cümleler; çay ikram eder; "amcam" der, gözünü kaçırır. Yardımsever: "Ne lazımsa." (Aynı cümleyi Emre de kurar; anlatı bu yardımseverliği hiçbir yerde şüpheli diye işaretlemez.) | Çevrimiçi bahis borcu (Erol'un çevresine ~1,4 milyon TL). Hayriye'nin vekâletnamesini 2023'te "saklamak için" taramıştı; sahte sureti gece matbaada bastı, amcasının kimliğini ceketinden aldı, kep ve gözlükle tapuya girdi, amcasının imzasını yıllardır irsaliyelerde attığı gibi attı. Kolluğa "mukayese için amcamın imzaları" diye kendi attığı irsaliyeleri teslim etti. | Sevilen yeğen → (oyuncu kazanırsa) kürsüde susan adam. Kovalanmaz; çözülmez; sadece susar. Son cümlesi: "Sen hep kâğıda inandın amca." |
 | **emre** (çırak) | 19, meslek lisesi son sınıf, öğleden sonra matbaada. | Argo, hızlı, kaygılı; "abi", "valla", "yani şey". | Geceleri patrondan habersiz düğün davetiyesi basıp para kazanıyor; bu yüzden gece erişimi hakkında yalan söyler (kırmızı ringa). 18 Şubat sabahı okuldaydı. | Korku → güven. Güvendiğinde "dükkânda solak kim" sorusunu yanıtlayan kişidir. |
 | **hayriye** (mağdur) | 82, evin sahibi; orta evre Alzheimer, Çekirge'de huzurevinde. | Eski Bursa ağzı; geçmişle bugünü karıştırır; Deniz'e "kızım" der; aklı berrak anlarında keskin. | Berrak bir anında "Halit'in oğlu kâğıtlarımın resmini çekerdi, bankaya diye" der; bu satır ancak oyuncu Tarık'a giden bir halka bulduktan sonra açılır. | Davanın sessiz merkezi: evini kaybettiğini bilmez. |
-| **nermin** (kız kardeş, vasi, şikâyetçi) | 54, Mudanya'da eczacı; annesinin vasisi. | Keskin, alaycı, yorgun; "kardeşim" sözcüğünü bıçak gibi kullanır. | Erol Kasım 2025'te evi 2,1 milyona ona teklif etmişti; reddetti. Huzurevi masrafının çoğunu o ödüyor; evin satılmasını o da istiyordu ama "doğru fiyata". | Düşmanlık → kuşku → (BERAAT_B'de) yıkım: Tarık'ı Halit ölünce o da büyütmüştü. |
+| **nermin** (kız kardeş, vasi, şikâyetçi) | 54, Mudanya'da eczacı; annesinin vasisi. | Keskin, alaycı, yorgun; "kardeşim" sözcüğünü bıçak gibi kullanır. | Erol Kasım 2025'te evi 2,1 milyona ona teklif etmişti; reddetti. Huzurevi masrafının çoğunu o ödüyor; evin satılmasını o da istiyordu ama "doğru fiyata". | Düşmanlık → kuşku → (BERAAT_B'de) yıkım: Tarık'ı küçükken o da büyütmüştü (Halit 14 yıl önce öldüğünde Tarık 27 yaşındaydı). |
 | **erol** (alıcı, savcılık tanığı) | 58, Kılınç Gayrimenkul; tefecilik yapar. | Pürüzsüz, "hacı", "abi", para atasözleri; altın zincir, cilalı ayakkabı. | Tarık'ın alacaklısıdır; evi borca mahsupla ucuza aldı. Tapudaki adamın Vedat olmadığını sezdi ama sormadı. | Kayıtsızlık → kaçamak → kürsüde mahsup itirafı. |
 | **gulten** (tapu memuru, savcılık tanığı) | 44, Osmangazi Tapu. | Bürokratik, savunmacı; "Sistem onay verdi" der. | Günde altmış işlem; kepli adamın kalemi sol eline aldığını hatırlar ama kimse sormamıştır. | Prosedürün arkasına saklanan dürüst bir memur. |
 | **sinan** (kurye, mazeret tanığı) | 31, kargo kuryesi. | Geveze, sıcak; insanları paketlerinden hatırlar ("Ben insanı koliden tanırım"). | Yok. Kimse ona sormamıştır. | Ara evrede bulunursa ikinci celsede mazereti taşır. |
@@ -70,7 +70,7 @@
 | 2025 | Hayriye'ye Alzheimer tanısı; eylülde huzurevine taşınır; Hisar evi boş. | Aile | Brifing, huzurevi |
 | Kasım 2025 | Erol evi Nermin'e 2,1 milyona teklif eder; Nermin reddeder (piyasa ~3,5 milyon). | Nermin, Erol | Nermin (ara evre) |
 | Ocak 2026 | Tarık'ın bahis borcu Erol'un çevresine 1,4 milyonu bulur; Erol'a "evi ucuza alırsın, amcamın vekâleti var" der. | Tarık, Erol | Ara evre: Erol'un mahsup itirafı, Sevgi |
-| 06.02.2026 02.14 | Matbaanın renkli lazer yazıcısında 90 gr kâğıda 2 sayfalık iş, kullanıcı **DIJITAL-PC**. Sahte "aslı gibidir" suret. Noter mührü toner baskısı. | Tarık | Matbaa araması (yazıcı günlüğü), suret incelemesi (toner mühür) |
+| 06.02.2026 02.14 | Matbaanın renkli lazer yazıcısında 90 gr kâğıda 2 sayfalık iş, kullanıcı **MATBAA-PC**. Sahte "aslı gibidir" suret. Noter mührü toner baskısı. | Tarık | Matbaa araması (yazıcı günlüğü), suret incelemesi (toner mühür) |
 | 09.02.2026 | Erol'un bürosunda "Hayriye Ateş vekili Vedat Ateş" adına 50.000 TL **kapora makbuzu** imzalanır (özel belge). | Tarık, Erol | Dosyada var; Erol'un ifadesi |
 | 10.02.2026 10.12 | ALO 181'den tapu randevusu: 18 Şubat 11.15, satış; arayan numara 0532 418 77 47 (**Tarık'ın**). | Tarık | Ara evre: randevu kaydı (delil talebiyle) + matbaa telefon listesi → tahta |
 | 17.02.2026 akşam | Vedat'ın kimliği askıdaki ceketinin iç cebinden alınır. | Tarık | Vedat görüşmesi; matbaa (askı) |
@@ -123,8 +123,8 @@ delil tartışması, mütalaa, savunma, son söz, karar). Mahkeme asliye cezadı
   "Vedat Ateş." Kimlik kartı tezgâha kayar. Bir suret: "Aslı gibidir."
 - GİŞE ekranda yevmiye numarasını sorgular: "Kayıt mevcut. İptal yok." Sureti okumaz; okumaya vakti yoktur.
 - "Fotoğraf için kepinizi alır mısınız?" — "Soğuk aldım, başım üşüyor." Flaş (`fx: flash`). Kep kalır.
-- Kalemlik gişenin sağındadır. Adam kalemi alır, bir an durur, kalemi öbür eline geçirir. (Hangi el olduğu
-  söylenmez.) İmza. Islak mürekkep.
+- Kalemlik gişenin sağındadır. Adam kalemi alır, bir an durur; "Zincir gerildi." (El değişimi gösterilmez; zincirin
+  neden gerildiği ancak Gülten'in G3 bastırmasında anlaşılır.) İmza. Islak mürekkep.
 - ALICI (pürüzsüz erkek sesi): "Hayırlı olsun." Dışarıda yağmur. ALICI: "Hesap kapandı. Bir daha karşıma çıkma."
   KEPLİ ADAM: "Çıkmam." Sonra yalnızca yağmur.
 - narrator: "Senette bir isim vardı. İsim doğruydu. İmza, kâğıda düştüğü anda birinin elinden çıkmıştı. Kimin
@@ -144,7 +144,8 @@ delil tartışması, mütalaa, savunma, son söz, karar). Mahkeme asliye cezadı
 - card: "22 EYLÜL · 21.10 — ARSLAN HUKUK, BURSA". Yağmur camda.
 - Deniz (thought): "Bursa'da sonbahar iki şey getirir: yaprak ve dosya. Yaprağı süpürürsün."
 - Sevgi ıslak bir karton klasörle girer: iddianame fotokopisi, bilirkişi raporu, bir matbaa kartviziti. Aşağıda
-  arabada biri onu bekliyor (yalnızca bir far ışığı; kim olduğu sonra söylenir: "Yeğenimiz getirdi.").
+  arabada biri onu bekliyor (bir korna, yanıp sönen farlar; "Yeğenimiz getirdi."). Deniz'in iç sesi arabayı dosyanın
+  unsurları arasında saymaz; yeğen sıradan bir yardımsever akrabadır.
 - Duygusal çekirdek: "Kocam ömrü boyunca kâğıt bastı avukat hanım. Şimdi bir kâğıt onu basıyor."
 - Seçim (puan yok, ilişki etkisi): "Önce Vedat Bey'i dinlemem lazım" (dürüst, güven +) · "Kazanırız, merak etmeyin"
   (söz; Leyla uyarır; koridorda ve epilogda hatırlanır) · "Ücreti ve süreci anlatayım" (nötr).
@@ -182,7 +183,7 @@ kaynağı: rapor, irsaliye, noter"; gün 4 "Dilekçe günü: kimi ve neyi istiyo
   bulunduysa: "Termal broşür… kurye geldi, evet!"), *Yazıcı günlüğü* (gece işi bulunduysa: "Gece kimse kalmaz…").
   İkinci görüşme: Sevgi'nin mesaj ekran görüntüsü (18 Şubat 09.52).
 - **INV_ARAMA_M — matbaa araması:** telefon listesi (altı numara, kimseyi öne çıkarmadan), askı (ceket), yazıcı
-  günlüğü (06 Şubat 02.14, DIJITAL-PC), duvar takvimi (18 Şubat "Termal broşür · kargo 11.30"), ters takılı makas
+  günlüğü (06 Şubat 02.14, MATBAA-PC), duvar takvimi (18 Şubat "Termal broşür · kargo 11.30"), ters takılı makas
   (solak biri için; kimin olduğu söylenmez), kaşe makinesi (kırmızı ringa: savcının "araç" teorisi), irsaliye klasörü.
 - **INV_HISAR + INV_ARAMA_H — Hisar evi (~500):** komşu Fikriye: "Vedat'ın arabası değildi; beyaz bir Doblo"
   (matbaanın Doblo'sunu herkes kullanır). Arama: boş "VEKÂLET" dosyası (asıl vekâletname yok), yeni kilit, Erol'un
@@ -215,7 +216,7 @@ kaynağı: rapor, irsaliye, noter"; gün 4 "Dilekçe günü: kimi ve neyi istiyo
   ruhsatı, kaşe makinesi, aile fotoğrafı.
 - **Akşamlar:** 1. gün Leyla ("Kâğıt yalan söylemez. Kâğıdı tutan el söyler."); 2. gün Erol ziyaret edildiyse gizli
   numara: "Bazı evler satılınca satılmış kalır avukat hanım." değilse Sevgi'nin telefonu; 3. gün Tarık büroya börekle
-  gelir: "Nasıl gidiyor?" — dosyayı anlatmak sır saklama yükümlülüğünü ihlal eder (Av.K. 36), ikinci celsede Tarık
+  gelir: "Nasıl gidiyor? Duruşma ne zaman?" (genel bir soru; mukayeseyi sormaz, eşikte duraksamaz) — dosyayı anlatmak sır saklama yükümlülüğünü ihlal eder (Av.K. 36), ikinci celsede Tarık
   hazırlıklı gelir.
 - **INV_GECE (~400):** pano; kapının altından değil, telefonda bir mesaj: Sevgi'den "Vedat uyuyamıyor." Leyla:
   "Yarın tanık ne hatırlıyorsa onu sor. Ne hatırlamasını istediğini değil."
@@ -265,7 +266,7 @@ kaynağı: rapor, irsaliye, noter"; gün 4 "Dilekçe günü: kimi ve neyi istiyo
 
 ### Epiloglar (her biri ~300–450 sözcük; `OutcomeDef.epilogue`)
 - **BERAAT_B:** "Türk Milleti adına…" Yağmur dinmiştir. Vedat matbaanın kepengini kaldırır; Tarık'ın dijital
-  odası boş, ters makas masada. Nermin kapıda: "Halit ölünce onu ben de büyüttüm." Leyla: "Bazı davaları kazanırsın,
+  odası boş, ters makas masada. Nermin kapıda: "O çocuğu küçükken ben de büyüttüm." Leyla: "Bazı davaları kazanırsın,
   bazılarını kazandığın için kaybedersin." Son kart: "Tarık Ateş hakkında soruşturma başlatıldı. Hayriye Ateş'in
   evi için tapu iptal davası açıldı."
 - **BERAAT_E:** Beraat, ama koridorda bir fısıltı: "Sahtekâr ama kurtuldu." Kimin imzası olduğu belirsiz kalır.
@@ -280,7 +281,7 @@ kaynağı: rapor, irsaliye, noter"; gün 4 "Dilekçe günü: kimi ve neyi istiyo
 
 ## 6. Ters köşeler ve ekilen ipuçları
 
-1. **Soğuk açılış ve imza (1. celse):** İmzayı atan solaktır. Ekilen: prolog ("öbür el"), senette sıvanma,
+1. **Soğuk açılış ve imza (1. celse):** İmzayı atan solaktır. Ekilen: prolog ("zincir gerildi"), senette sıvanma,
    matbaada ters makas, Vedat'ın sağ eliyle kalem tutması (INV_SABAH ve görüşme). Kapanış: Gülten'in G3 bastırması.
 2. **Bilirkişi raporu doğru ama yanlış şeyi kanıtlıyor:** Senetteki imza ile mukayese belgeleri gerçekten "aynı
    el"dir; çünkü o belgeleri de fail imzalamıştır. Ekilen: BR_01B (resmî/özel ayrımı), Vedat'ın "kim dükkândaysa o
@@ -289,3 +290,20 @@ kaynağı: rapor, irsaliye, noter"; gün 4 "Dilekçe günü: kimi ve neyi istiyo
    1. evrede bulunur, anlamsız görünür.
 4. **Kürsüdeki yeğen (2. celse):** Tarık kovalanmaz, çözülmez; susar. Bu sessizlik, delillerin yerine geçmez;
    BERAAT_B için belgeler ve yeni rapor gerekir.
+
+## 7. Son yapı notu (kod yazıldıktan sonra)
+
+Uygulama bu kitaptan şu noktalarda ayrıldı; ayrıntılar `docs/content/sahte-imza.md`'de:
+
+- **Soruşturma 4 gün × 3 EP** (4 × 4 değil): on beş etkinlikten on ikisi seçilebilir; seçim baskısı oyunun bir parçası.
+  Ara evre 3 gün × 3 EP, yığınsız.
+- **Erken fail ipuçları nötrleştirildi:** ters makas dijital odadan ortak kesim masasına, gece baskısı ortak ve şifresiz
+  bilgisayara taşındı; Emre'nin gizli gece davetiyeleri yazıcı günlüğüne bir çeldirici olarak eklendi. Tarık'ın solaklığı
+  yalnızca `ded_solak` bulunduktan sonra (Emre), Hayriye'nin anısı ve Sevgi'nin bahis sırrı ancak Tarık'a giden somut bir
+  halkadan sonra açılır.
+- **Eklenen sahneler:** şikâyetçinin kürsüde beyanı (C1_03N), adliye çay ocağında Leyla'yla değerlendirme (C1_CAY), ikinci
+  celsede on beş dakikalık ara (C2_TENEFFUS), duruşmadan önceki gece Vedat'ın telefonu (INV_GECE_6).
+- **Sonuçlar:** ETIK (Emre'ye yalan söyletmek → kürsüde çöküş ve azil), COKUS (güvenilirlik 0, kesin Adli Tıp raporu
+  yokken), BERAAT_B, BERAAT_E, UST_KURUL (kesin Adli Tıp raporu var ama savunma onu kürsüde öteki delillere bağlayamadı →
+  çelişki için Adli Tıp kuruluna gönderme), INDIRIM, MAHKUMIYET. Gece matbaada Tarık'la yüzleşmek ayrı bir sonuç değil; Tarık kürsüye hazırlıklı gelir (T3X).
+- **Mahkeme:** Bursa 7. Asliye Ceza, tek hâkim (Selma Akgün); hitap "Sayın Hâkim".

@@ -1,0 +1,364 @@
+{
+  "scenes": [
+    {
+      "id": "sc_vezne",
+      "title": "Hisarönü Belediyesi · vezne salonu",
+      "description": "Zemin kat; iki vezne camı, pano, turnike, ön odanın buzlu camlı kapısı.",
+      "width": 344,
+      "height": 380,
+      "image": "img_vezne",
+      "objects": [
+        {
+          "id": "ob_yonerge",
+          "name": "Duyuru panosu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 18, "y": 40, "w": 70, "h": 84 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_yonerge" },
+            { "type": "DISCOVER", "evidence": "clue_yonerge" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Raptiyelerin arasında sararmış bir yönerge. Madde 7, kalın harflerle: “Şifreler hiçbir koşulda paylaşılmaz, yazılmaz, zarfa konmaz.” Zarf kelimesinin altını biri tükenmez kalemle çizmiş.",
+            "short": "Yönerge: zarf yasak"
+          }
+        },
+        {
+          "id": "ob_vz02",
+          "name": "Vezne 2 terminali",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 196, "y": 168, "w": 60, "h": 40 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_vz02", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Orhan’ın camının arkasındaki bilgisayar. Kasasının üstünde bir etiket: VZ-02. Ekranın kenarında, kuruşu kuruşuna yazılmış eski bir hesap pusulası hâlâ yapışık.",
+            "short": "Etiket: VZ-02"
+          }
+        },
+        {
+          "id": "ob_postit",
+          "name": "Vezne 1 monitörü",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 112, "y": 168, "w": 50, "h": 36 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_postit" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }
+          ],
+          "feedback": {
+            "text": "Melek’in monitörünün kenarında sarı bir not kâğıdı: “M. y. 1989.” Bir şifre olabilir. Bir doğum yılı da. Bir şeyin ilk harfleri de.",
+            "short": "“M. y. 1989”"
+          }
+        },
+        {
+          "id": "ob_kamera",
+          "name": "Tavan kamerası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 6, "w": 44, "h": 30 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kamera" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }
+          ],
+          "feedback": {
+            "text": "Tavanda tek bir kubbe kamera. Açısı sıraya, bekleyenlerin başlarına dönük. Vezne camlarının arkası, ekranlar, ön odanın kapısı kör noktada. Güvenlikçi: “Otuz gün tutar, sonra üstüne yazar.”",
+            "short": "Kamera sıraya bakıyor"
+          }
+        },
+        {
+          "id": "ob_onoda",
+          "name": "Buzlu camlı kapı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 270, "y": 60, "w": 64, "h": 150 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_onoda", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Veznelerin arkasında, müdürlüğe açılan bir kapı. Buzlu camın ardında bir monitörün mavi ışığı. Kapıda yazı: “ÖN ODA — Personel dışında girilmez.” Kapı kilitli değil.",
+            "short": "Ön odada bir bilgisayar"
+          }
+        },
+        {
+          "id": "ob_tustakimi",
+          "name": "Kasa odası kapısı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 104, "y": 70, "w": 40, "h": 54 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_kasa_kod", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Çelik kapının yanında bir tuş takımı ve küçük bir ekran: “KULLANICI KODU + ŞİFRE.” Altında güvenlik firmasının etiketi ve bir telefon numarası. Her açılış kayda geçiyor olmalı.",
+            "short": "Kasa odası kodlu"
+          }
+        },
+        {
+          "id": "ob_turnike",
+          "name": "Personel turnikesi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 300, "w": 90, "h": 60 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_turnike", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Personel girişindeki turnike; kart okutmadan geçilmiyor. Görevli: “Herkes okutur abla, müdür de okutur. İnsan kaynakları her ay döker.”",
+            "short": "Herkesin giriş-çıkışı kayıtlı"
+          }
+        },
+        {
+          "id": "ob_sira",
+          "name": "Sıra fişi makinesi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 230, "y": 300, "w": 70, "h": 60 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 },
+            {
+              "type": "MARK",
+              "quality": "NEUTRAL",
+              "feedback": "Sıra makinesi kimin para yatırdığını söyler, kimin iptal ettiğini değil."
+            }
+          ],
+          "feedback": {
+            "text": "Ekranda “SON NUMARA 214” yazıyor. Biri bekledi, biri saydı, biri unuttu. Makine yalnızca sırayı hatırlar.",
+            "short": "Sıra makinesi"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_calisma",
+      "title": "Kılıçların evi · Orhan’ın çalışma masası",
+      "description": "Yıldırım’da dördüncü kat; salonun köşesine sıkıştırılmış bir masa ve iki raf klasör.",
+      "width": 344,
+      "height": 380,
+      "image": "img_calisma",
+      "objects": [
+        {
+          "id": "ob_defter",
+          "name": "Kasa defteri",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 200, "w": 80, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_defter" },
+            { "type": "DISCOVER", "evidence": "clue_defter" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Yirmi üçüncü cilt. Her sayfada bir gün, kurşun kalemle, kuruşu kuruşuna: “12.02 — 41.250,00.” Orhan kasayı saydıktan sonra kendi defterine de yazmış. On dokuz yıl, her akşam.",
+            "short": "Günlük kasa toplamları"
+          }
+        },
+        {
+          "id": "ob_karbon",
+          "name": "Sarı kopyalar",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 140, "y": 210, "w": 70, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_karbon" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Lastikle bağlanmış bir deste sarı kâğıt: teslim tutanaklarının karbon nüshaları. “Teslim eden: O. Kılıç” imzalı. “Teslim alan” kutusu her birinde boş.",
+            "short": "Karbon tutanaklar"
+          }
+        },
+        {
+          "id": "ob_pdks",
+          "name": "İnsan kaynakları zarfı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 230, "y": 200, "w": 80, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_pdks" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Açılmış bir resmî zarf. İçinde Orhan’ın kendi turnike dökümü; görevden uzaklaştırılmadan bir hafta önce istemiş. Kenarında Nazan’ın el yazısı: “Avukata göster.”",
+            "short": "Turnike dökümü"
+          }
+        },
+        {
+          "id": "ob_klasor",
+          "name": "Mavi klasörler",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 30, "y": 60, "w": 90, "h": 100 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_talimat" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 },
+            { "type": "VAR", "var": "fact_talimat", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "“Maaş bordroları 2025” klasörünün arasından katlanmış bir kareli kâğıt kaydı. El yazısı, eğik ve düzgün: “Şifreler zarfta, müdürlükte kalacak. Devamlılık için. — Müdürlük.” İmza yok. Tarih: Eylül 2025.",
+            "short": "El yazısı not: Müdürlük"
+          }
+        },
+        {
+          "id": "ob_tapu",
+          "name": "Tapu dosyası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 90, "w": 70, "h": 60 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_tapu" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Şeffaf bir dosyada tapu satış senedi: İnegöl, Tahtaköprü, 4 dönüm tarla. 17 Aralık. Satıcı Orhan Kılıç, “intikal”. Bedel: 215.000 TL.",
+            "short": "Tarla satış senedi"
+          }
+        },
+        {
+          "id": "ob_satranc",
+          "name": "Satranç tahtası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 140, "y": 290, "w": 70, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_satranc" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }
+          ],
+          "feedback": {
+            "text": "Yarım kalmış bir oyun. Beyazlar saldırmış, siyahların hamlesi. Taşların üstünde ince bir toz. Orhan kendi kendine oynuyor; hamle sırası aylardır aynı yerde.",
+            "short": "Bekleyen bir oyun"
+          }
+        },
+        {
+          "id": "ob_randevu",
+          "name": "Panodaki kart",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 70, "w": 60, "h": 50 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_9ocak", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Mantar panoda bir hastane randevu kartı: “Uludağ Ünv. Çocuk Kardiyoloji — Elif Kılıç — 9 Ocak 10.30.” Yanında Elif’in çizdiği bir kalp; içinde “babam” yazıyor.",
+            "short": "9 Ocak hastane"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_onoda",
+      "title": "Mali Hizmetler · ön oda (keşif)",
+      "description": "Veznelerin arkasındaki ortak oda: bir bilgisayar, bir yazıcı, bir takvim, müdür yardımcılığına açılan kapı.",
+      "width": 344,
+      "height": 380,
+      "image": "img_onoda",
+      "objects": [
+        {
+          "id": "ob_pc03",
+          "name": "Ortak bilgisayar",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 120, "y": 120, "w": 100, "h": 70 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 },
+            { "type": "VAR", "var": "fact_pc03", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Kasasında bir etiket: MHM-PC03. Bilirkişi oturumu açtırdı; vezne programı simgesi masaüstünde. Kullanıcı adı kutusu boş, imleç yanıp sönüyor. Seda Karaca tek kelime söyledi: “Kısıt yok.”",
+            "short": "MHM-PC03"
+          }
+        },
+        {
+          "id": "ob_tus",
+          "name": "Kasa odası tuş takımı (iç)",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 290, "y": 110, "w": 40, "h": 60 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_tus02", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Ön odadan kasa odasına açılan ikinci kapı. Tuş takımında iki tuşun boyası aşınmış: 0 ve 2. Diğerleri yeni gibi. Bilirkişi fotoğrafladı, tutanağa yazdırdı.",
+            "short": "Aşınmış 0 ve 2"
+          }
+        },
+        {
+          "id": "ob_takvim",
+          "name": "Duvar takvimi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 40, "w": 70, "h": 80 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_cuma" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_cuma", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Bir bankanın promosyon takvimi. Kasım’dan Şubat’a bazı cumalar kurşun kalemle halkalanmış; 13 Şubat da. Rakam yok, isim yok. Bilirkişi iptal listesini yanına tuttu: her halkadan önceki iki iş gününde iptal var.",
+            "short": "İşaretli cumalar"
+          }
+        },
+        {
+          "id": "ob_yazici",
+          "name": "Yazıcı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 210, "w": 80, "h": 60 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_yazici", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Bilirkişi yazıcının iş günlüğünü bastırdı: iptal günlerinin her birinde 17.50 ile 17.58 arasında iki sayfalık bir “gün sonu raporu”, kullanıcı “okilic”. Aynı gün 16.58’de de bir tane.",
+            "short": "Gün sonu raporu iki kez"
+          }
+        },
+        {
+          "id": "ob_cekmece",
+          "name": "Kilitli çekmece",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 230, "y": 230, "w": 90, "h": 50 } }],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Kilitli çekmeceyi açmaya kalkmadın; keşif tutanağına yazdırdın. Arama, savcılığın işidir (CMK 116, 119).",
+              "category": "USUL_BILGISI"
+            }
+          ],
+          "feedback": {
+            "text": "Müdür yardımcılığı odasının kapısının yanında, ön odaya taşınmış eski bir dolap. Üst çekmece kilitli. Açmak benim işim değil. Keşif tutanağına “kilitli çekmece mevcut” diye yazdırdım.",
+            "short": "Kilitli; tutanağa yazıldı"
+          }
+        },
+        {
+          "id": "ob_cop",
+          "name": "Çöp kutusu",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 300, "w": 50, "h": 50 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 },
+            {
+              "type": "MARK",
+              "quality": "NEUTRAL",
+              "feedback": "Yırtık bir zarf kanıt değildir; kimin olduğu, ne zaman atıldığı belli değil."
+            }
+          ],
+          "feedback": {
+            "text": "Çöpte yırtılmış boş bir mektup zarfı. Belediye logolu; içi boş. Herhangi bir zarf. Bu odada her gün yüz zarf açılır.",
+            "short": "Boş bir zarf"
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "id": "img_vezne", "kind": "IMAGE", "path": "assets/scenes/vezne-salonu@4x.png" },
+    { "id": "img_calisma", "kind": "IMAGE", "path": "assets/scenes/calisma-masasi@4x.png" },
+    { "id": "img_onoda", "kind": "IMAGE", "path": "assets/scenes/on-oda@4x.png" }
+  ],
+  "discoveryPaths": [
+    { "evidence": "ev_yonerge", "source": { "type": "OBJECT", "id": "ob_yonerge" } },
+    { "evidence": "clue_yonerge", "source": { "type": "OBJECT", "id": "ob_yonerge" } },
+    { "evidence": "clue_postit", "source": { "type": "OBJECT", "id": "ob_postit" } },
+    { "evidence": "clue_kamera", "source": { "type": "OBJECT", "id": "ob_kamera" } },
+    { "evidence": "ev_defter", "source": { "type": "OBJECT", "id": "ob_defter" } },
+    { "evidence": "clue_defter", "source": { "type": "OBJECT", "id": "ob_defter" } },
+    { "evidence": "ev_karbon", "source": { "type": "OBJECT", "id": "ob_karbon" } },
+    { "evidence": "ev_pdks", "source": { "type": "OBJECT", "id": "ob_pdks" } },
+    { "evidence": "ev_talimat", "source": { "type": "OBJECT", "id": "ob_klasor" } },
+    { "evidence": "ev_tapu", "source": { "type": "OBJECT", "id": "ob_tapu" } },
+    { "evidence": "clue_satranc", "source": { "type": "OBJECT", "id": "ob_satranc" } },
+    { "evidence": "clue_cuma", "source": { "type": "OBJECT", "id": "ob_takvim" } }
+  ]
+}

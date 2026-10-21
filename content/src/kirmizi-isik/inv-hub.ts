@@ -12,6 +12,7 @@ import {
   flag,
   has,
   inc,
+  met,
   nav,
   not,
   option,
@@ -67,7 +68,7 @@ const hubLines: ResponseBlock[] = [
     card('GÜN 2/4 · İKİNCİ CELSEYE 12 GÜN'),
     N('Hedef: ışık. Taksici durduğu yerden neyi görebilirdi? Kavşakla ilgili kim, hangi kaydı tutuyor?'),
     N(
-      'Gece rüyamda bir trafik lambası gördüm; üç rengi aynı anda yanıyordu. Uyandığımda saçma geldi. Sonra o kadar saçma gelmedi.',
+      'Gece rüyamda yine o kavşaktaydım. Yağmur, ıslak asfalt, karşıda Necati’nin kırmızısı. Uyandığımda saat dördü geçiyordu; bir daha uyuyamadım.',
     ),
   ),
   when(
@@ -349,6 +350,13 @@ export const invHub: CasePart = {
           'leyla',
           'Bütünü gören tanık olmaz Deniz. Bütünü sen kurarsın, hâkim de senin kurduğunu sınar. Bir parça eksikse o parçayı şüphe doldurur.',
         ),
+        N(
+          'Leyla gözlüğünü masaya bıraktı. Pencerenin camında yağmur, camın arkasında Uludağ’ın karanlık sırtı. Masasındaki ters çerçeveye dokundu; çevirmedi.',
+        ),
+        L(
+          'leyla',
+          'Bir parçayı fazla parlatma. Taksicinin yanlışını bulunca sevinirsin; hâkim ise kendine sorar: bu avukat bütünü mü kuruyor, yoksa yalnızca bir tanığı mı yıkıyor?',
+        ),
         L(
           'leyla',
           'Şüphe sanık lehinedir. Ama şüpheyi “olabilir” diye değil, “olmadığı gösterilemedi” diye kurarsın. İkisi aynı cümle değil.',
@@ -386,7 +394,13 @@ export const invHub: CasePart = {
             'Fotoğraf yalan söylememiş. Buradan Gökdere’nin rengi görülmüyor. Görülen tek renk, insanın kendi önündeki renk.',
           ),
           N(
-            'Gökdere’den bir kamyonet geçti, sonra bir otomobil. Saydım: aralarında altı saniye. Kimse kimseye bakmadı.',
+            'Bir taksi yanaştı, şoför camı indirdi: “Bir yere mi abla?” Hayır dedim. Baktı, anlamadı, gitti. Gece yarısı bir kavşakta duran bir kadın; herkes bir hikâye uydurur.',
+          ),
+          T(
+            'Necati de o gece burada durdu. Kendi lambasının kırmızısına baktı. Sonra bir gümbürtü duydu ve kırmızıyı karşı yöne taşıdı. Kötü niyetle değil; insan beyni boşlukları sever.',
+          ),
+          N(
+            'Gökdere’den arada bir araç geçiyordu. Islak asfaltta lastik sesi, sonra uzun bir sessizlik. Kimse kimseye bakmadı.',
           ),
         ),
         otherwise(
@@ -394,7 +408,7 @@ export const invHub: CasePart = {
           N(
             'Gece yarısından sonra kavşağa geri döndüm. Aynı saat, aynı yağmur. Köşede durup ışıkların değişmesini izledim. Yeşil, sarı, kırmızı. Kusursuz.',
           ),
-          N('Gökdere’den bir kamyonet geçti, sonra bir otomobil. Kimse kimseye bakmadı.'),
+          N('Gökdere’den arada bir araç geçiyordu. Kimse kimseye bakmadı.'),
           T(
             'Bu kavşakta o gece biri bir şey gördü, biri bir şey duydu, biri bir şey hissetti. Ben hâlâ hiçbirini tam bilmiyorum.',
           ),
@@ -450,6 +464,17 @@ export const invHub: CasePart = {
           L(
             'leyla',
             'Raporun her cümlesinin altında bir varsayım var. Varsayımları say: ışık, iz, çarpma. Hangisini ölçmüş, hangisini sanmış?',
+          ),
+          L(
+            'leyla',
+            'Ben ilk yıllarımda raporları sondan başa okurdum. Önce sonucu, sonra gerekçeyi. Yanlış. Bilirkişi de öyle yazar; sonucu bilir, gerekçeyi sonradan döşer.',
+          ),
+          L(
+            'leyla',
+            'Sen baştan oku. Her cümlenin yanına bir soru işareti koy. Cevabı raporun içinde olmayan soru işaretleri, itirazının iskeletidir.',
+          ),
+          T(
+            'Soru işaretleri. Leyla’nın masasında kırmızı kalemle çizilmiş soru işaretleriyle dolu bir dosya gördüm bir kez; kazanılmış bir dosyaydı.',
           ),
         ),
         when(
@@ -511,6 +536,13 @@ export const invHub: CasePart = {
             'leyla',
             'Tanığın nerede durduğunu biliyorsun. Şimdi oradan ne görüldüğünü düşün. Dürüst tanık, gördüğünü sandığını da anlatır.',
           ),
+          L(
+            'leyla',
+            'Tanığı yalancı ilan etmek kolaydır, hâkim de sevmez. Tanığın neyi görebileceğini göster; gerisini hâkim kendisi düşünür. Kimseyi küçük düşürmeden.',
+          ),
+          T(
+            'Necati yalan söylemiyor. Kırk yıllık bir şoför, kendi önündeki kırmızıya bakıyor. Bunu ona ben değil, durduğu yer söyleyecek.',
+          ),
         ),
         when(
           all(has('clue_kirik56'), not(has('ded_yukseklik'))),
@@ -527,7 +559,7 @@ export const invHub: CasePart = {
           ),
           L(
             'leyla',
-            'Bir de illiyet. Bir sonuç için ceza vermek, o sonuca senin davranışının yol açtığını göstermeyi gerektirir. Orada olmak yetmez.',
+            'Bir de illiyet. Bir sonuç için ceza vermek, davranış ile sonuç arasındaki bağı göstermeyi gerektirir. O bağı ispat yükü iddiadadır.',
           ),
         ),
       ],
@@ -561,12 +593,7 @@ export const invHub: CasePart = {
     decisionNode('INV_GECE_2', [{ to: 'INV_GECE_3' }], {
       ...INV,
       lines: [
-        when(
-          atLeastOf(2, ['ded_fren', 'ded_cam', 'ded_yukseklik', 'ded_saat']),
-          T(
-            'Fren izi, camlar, kırığın yüksekliği. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?',
-          ),
-        ),
+        ...ikinciAracSatirlari(),
         when(
           any(has('ded_fren'), has('ded_cam'), has('ded_yukseklik'), has('ded_saat')),
           T('Bir çatlak buldum. Raporda, tutanakta, bir yerde. Bir çatlak duvarı yıkmaz; ama içeri ışık sızdırır.'),
@@ -588,9 +615,15 @@ export const invHub: CasePart = {
       ...INV,
       lines: [
         when(
-          any(has('ded_ariza'), has('ev_sinyal_log')),
+          all(any(has('ded_ariza'), has('ev_sinyal_log')), met('hamdi')),
           T(
             'Ve makine. Kavşağın makinesi o gece doğruyu göstermiyordu. Bunu bir teknisyen biliyordu, bir iş emri biliyordu. Bilirkişi bilmiyordu.',
+          ),
+        ),
+        when(
+          any(has('ded_ariza'), has('ev_sinyal_log')),
+          T(
+            'Ve makine. Kavşağın makinesi o gece doğruyu göstermiyor olabilir. Bir kayıt bunu fısıldıyor. Bilirkişi o kaydı hiç istememiş.',
           ),
         ),
         when(
@@ -625,6 +658,18 @@ export const invHub: CasePart = {
           flag('fact_tek_lamba'),
           T(
             'Volkan’ın uzakta gördüğü tek kırmızı lamba. Bir hayal mi, bir hatıra mı? Hatıralar delil değildir; ama bazen delile giden yolu gösterir.',
+          ),
+          N(
+            'Telefonuma Gül’den bir fotoğraf düştü: masada iki çay bardağı, birinin yanında Volkan’ın eli. Altında yazı yok. Gerek de yoktu.',
+          ),
+          T(
+            'Yarın sabah bir adam bir salona girecek ve oradan ya hafiflemiş ya ağırlaşmış çıkacak. Bu gece ikisinin arasındaki fark bu panodaki kâğıtlar.',
+          ),
+          N(
+            'Saat bire geliyordu. Yağmur camlara vurdu, sonra durdu. Panonun önünde, ayakta, kâğıtları bir kez daha sıraladım: rapor, tutanak, otopsi, kayıtlar.',
+          ),
+          T(
+            'Yarın bir hâkime bir hikâye anlatmayacağım. Bir raporun dayanaklarını tek tek göstereceğim. Hikâyeyi hâkim kendisi kurar; ben yalnızca tuğlaları getiririm.',
           ),
         ),
         when(flag('serkan_saygi'), T('Serkan’a verdiğim söz aklımda. Hatice. Adını düzgün söyleyeceğim.')),
@@ -708,6 +753,29 @@ export const invHub: CasePart = {
 };
 
 /** En az n delil bulunmuş mu. */
+/** INV_GECE_2: tahtada gerçekten kurulan ikinci araç çıkarımlarını sayar (en geniş alt küme önce eşleşir). */
+function ikinciAracSatirlari(): ResponseBlock[] {
+  const ad: Record<string, string> = {
+    ded_fren: 'fren izi',
+    ded_cam: 'camlar',
+    ded_yukseklik: 'kırığın yüksekliği',
+    ded_saat: 'kameradaki yedi saniye',
+  };
+  const ids = Object.keys(ad);
+  const subsets: string[][] = [];
+  for (let mask = 1; mask < 1 << ids.length; mask++) {
+    const sub = ids.filter((_, i) => mask & (1 << i));
+    if (sub.length >= 2) subsets.push(sub);
+  }
+  subsets.sort((a, b) => b.length - a.length);
+  return subsets.map((sub) => {
+    const names = sub.map((id) => ad[id]!);
+    const list = names.slice(0, -1).join(', ') + ' ve ' + names[names.length - 1];
+    const text = `${list.charAt(0).toLocaleUpperCase('tr')}${list.slice(1)}. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?`;
+    return when(all(...sub.map((id) => has(id))), T(text));
+  });
+}
+
 function atLeastOf(n: number, ids: string[]) {
   return cmp({ add: ids.map((id) => ({ if: { when: has(id), then: 1, else: 0 } })) }, '>=', n);
 }

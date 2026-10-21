@@ -72,6 +72,42 @@ export const report: CasePart = {
         'İMEİ raporundaki şirket hattı, OM İş Merkezi müdürünün sana verdiği kartvizitteki numaraydı.',
         'DELIL_ANALIZI',
       ),
+      missedEvidence(
+        'h_sozlesme',
+        'ev_sozlesme',
+        'İlandaki adresteki iş merkezine gidip yönetimden Nova’nın sözleşmesini istemedin. Kiracı olarak gösterilen kişinin adı oradaydı; işletme müdürü bir kartvizit de bırakırdı.',
+        'ARASTIRMA',
+      ),
+      missedEvidence(
+        'h_iphone',
+        'clue_iphone_imei',
+        'Ece’nin telefonunun kutusu Sevim Hanım’da duruyordu; altındaki etikette telefonun kendi kimlik numarası yazar. Kayıtlardaki cihazla karşılaştırmanın tek yolu buydu.',
+        'ARASTIRMA',
+      ),
+      missedEvidence(
+        'h_ded_imei',
+        'ded_imei',
+        'Kutudaki numarayı iletişim tespitindeki cihaz numarasıyla tahtada birleştirseydin, banka SMS’lerinin Ece’nin telefonuna gitmediğini gösterebilirdin.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_noter',
+        'ev_noter_yok',
+        'Bayi işlem dosyasındaki vekâletnamenin karekodunu “Doğrula” aletiyle sorgulamadın. Belgenin hiç düzenlenmediği ortaya çıkardı.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_otopark',
+        'ded_otopark',
+        'Kuryenin tarif ettiği teslim yerini otoparkta bulup onun anlatımıyla tahtada birleştirmedin; paranın nereye gittiği bir park yerinin tabelasında yazıyordu.',
+        'DELIL_ANALIZI',
+      ),
+      missedEvidence(
+        'h_arda_kimlik',
+        'ded_arda_kimlik',
+        'Vekâletnamedeki vekilin adı, sanal ofis sözleşmesindeki kiracının adıyla aynıydı. İki belgeyi tahtada yan yana koymak, bir kimliğin iki sahte belgede kullanıldığını gösterirdi.',
+        'DELIL_ANALIZI',
+      ),
       hint(
         'h_inkar',
         flag('ece_inkar'),

@@ -1,0 +1,786 @@
+{
+  "nodes": [
+    {
+      "id": "ARA2_G0",
+      "type": "DECISION",
+      "chapter": "Bölüm 6 · Çerçeve",
+      "eyebrow": "DAVA #15 · İKİNCİ ARA",
+      "title": "Çerçeve",
+      "onEnter": [
+        { "type": "VAR", "var": "in_court", "op": "set", "value": false },
+        { "type": "VAR", "var": "ara2_ap", "op": "set", "value": 2 },
+        { "type": "DISCOVER", "evidence": "ev_sesli" }
+      ],
+      "lines": [
+        {
+          "when": { "flag": "sahte_ikrar" },
+          "lines": [
+            { "speaker": "narrator", "text": "GECE 23.30 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Büroda bir tek Leyla’nın ışığı yanıyordu. Kapısı açıktı; beni bekliyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masasının köşesindeki çerçeve düz duruyordu. İlk kez. Leyla onu bana çevirmedi; kendine çevirmişti. Bakıyordu."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Gel. Otur. Bugün bir çocuk salonda “yaptım” dedi. Ben çıktım. Dinleyemedim."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "GECE 23.30 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Büroda bir tek Leyla’nın ışığı yanıyordu. Kapısı açıktı; beni bekliyordu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masasının köşesindeki çerçeve düz duruyordu. İlk kez. Leyla onu bana çevirmedi; kendine çevirmişti. Bakıyordu."
+            },
+            { "speaker": "leyla", "text": "Gel. Otur. Bugün iyi iş çıkardın. Bunu söylemek için çağırmadım ama." }
+          ]
+        }
+      ],
+      "routes": [{ "to": "ARA2_GIRIS" }],
+      "choices": []
+    },
+    {
+      "id": "ARA2_GIRIS",
+      "type": "STORY",
+      "chapter": "Bölüm 6 · Çerçeve",
+      "eyebrow": "DAVA #15 · İKİNCİ ARA",
+      "title": "Çerçeve",
+      "background": "buro_gece",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Çerçeveyi kaldırdı, masanın üstünden bana doğru itti. Eski, renkleri solmuş bir fotoğraf."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bir cezaevi kapısı. Demir, gri, bir gardiyan kulübesi. Kapının önünde yirmi beş yaşlarında, saçları kısacık kesilmiş bir adam. Kucağında üç dört yaşlarında bir çocuk; çocuğun elinde bir oyuncak kepçe."
+            },
+            { "speaker": "narrator", "text": "Adam gülmüyordu. Çocuk gülüyordu." },
+            { "speaker": "leyla", "text": "2008. Tahliye günü. Kemal ve oğlu. Emir. Fotoğrafı ben çektim." },
+            {
+              "speaker": "leyla",
+              "text": "Meral çocuğu getirmişti. Kemal kapıdan çıktı, çocuğu kucağına aldı ve bana baktı. “Bir fotoğraf çekin avukat hanım” dedi. “İçeride kaybettiğim dört yılın ilk günü.”"
+            },
+            {
+              "speaker": "player",
+              "text": "On dört dava boyunca o masanın köşesinde ters duran şey buymuş. Bir çocuk ve bir kepçe. Bir çocuk ki şimdi bir cinayetle yargılanıyor; bir kepçe ki şimdi bir bıçak.",
+              "style": "thought"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir yıl sonra terazinin Ercan’ın olduğunu öğrendim. Kemal’e söyledim. Bana baktı ve “fotoğrafı sakla” dedi. “Her gün bak ona.”"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Baktım. On yedi yıl. Sonra bakamadım; ters çevirdim. Ters çevirince de baktım aslında."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sigara paketini aldı. Bu kez açtı. İçinden bir sigara çıkardı, parmaklarının arasında tuttu. Yakmadı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir şey daha var Deniz. Bugün o adam kürsüde “Gemlik” dedi. Kemal’in yüzünü gördüm."
+            },
+            {
+              "speaker": "leyla",
+              "text": "2004’te arama tutanağında üç ad vardı. Evde o gece üç kişi bulunmuş. Ben ikisini okudum: müvekkilimi ve teraziyi saklayanı. Üçüncüsünü okumadım. Bir “misafir.” Önemsiz bir ad."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Dosya Bursa 2. Ağır Ceza’nın arşivinde. 2004/311 Esas. Kendi notlarım bende; ama o notlar Kemal’in sırrıdır, benim değil."
+            },
+            {
+              "speaker": "player",
+              "text": "Yirmi iki yıl önce okunmamış bir ad. Bu dosyada herkes bir satırı atlamış: polis, savcı, Leyla. Belki ben de.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "CR_NEDEN",
+          "kind": "OPTION",
+          "label": "“Bunu bana neden şimdi anlatıyorsunuz?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Çünkü yarın son duruşma. Ve yarın biri sana kolay bir yol gösterecek; ya bir ikrar, ya bir öfke, ya bir yarım kâğıt."
+                },
+                { "speaker": "leyla", "text": "Ben yorgunken kolay yolu seçtim. Sen yorgunsun. Bunu bilmeni istedim." }
+              ]
+            }
+          ],
+          "next": "ARA2_HUB",
+          "effects": [{ "type": "VAR", "var": "leyla_acik", "op": "set", "value": true }]
+        },
+        {
+          "id": "CR_KEMAL",
+          "kind": "OPTION",
+          "label": "“Kemal Bey’e bu fotoğrafı göstermeli misiniz?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "leyla",
+                  "text": "Kemal bu fotoğrafı ezbere bilir. Ona gösterilecek bir fotoğraf değil, söylenecek bir cümle borçluyum."
+                },
+                { "speaker": "leyla", "text": "O cümleyi yarından sonra söyleyeceğim. Kazansak da, kaybetsek de." }
+              ]
+            }
+          ],
+          "next": "ARA2_HUB",
+          "effects": [{ "type": "VAR", "var": "leyla_kemal", "op": "set", "value": true }]
+        },
+        {
+          "id": "CR_SUS",
+          "kind": "OPTION",
+          "label": "Fotoğrafa bak, bir şey söyleme",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Bir şey söylemedim. Fotoğrafı elime aldım; çocuğun kepçesine, adamın gülmeyen yüzüne baktım. Leyla da bir şey söylemedi."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Radyatör tıkırdadı. Dışarıda yağmur. Bir süre sonra Leyla çerçeveyi geri aldı; ters çevirmedi. Masanın köşesine düz koydu."
+                }
+              ]
+            }
+          ],
+          "next": "ARA2_HUB"
+        }
+      ]
+    },
+    {
+      "id": "ARA2_HUB",
+      "type": "INVESTIGATION",
+      "chapter": "Bölüm 6 · Çerçeve",
+      "eyebrow": "DAVA #15 · İKİNCİ ARA",
+      "title": "Son duruşmaya üç hafta",
+      "background": "buro",
+      "hud": ["ara2_ap"],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "İKİNCİ ARA · SON DURUŞMAYA 18 GÜN", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Hedef: iki eylem puanı, üç hafta. Bir arşiv, bir savcı, bir baba. Neye harcayacaksın?"
+            }
+          ]
+        }
+      ],
+      "tabs": [
+        {
+          "id": "t_ara2",
+          "label": "KARARLAR",
+          "kind": "ARCHIVE",
+          "choices": ["B_ARSIV", "B_BILDIR", "B_YUZLES", "B_AILE"]
+        }
+      ],
+      "choices": [
+        {
+          "id": "B_ARSIV",
+          "kind": "NAVIGATE",
+          "label": "2004 dosyası",
+          "cost": [{ "var": "ara2_ap", "amount": 1 }],
+          "next": "ARA2_ARSIV",
+          "maxUses": 1,
+          "description": "Bursa 2. Ağır Ceza · 2004/311"
+        },
+        {
+          "id": "B_BILDIR",
+          "kind": "NAVIGATE",
+          "label": "Savcılığa yazılı bildirim",
+          "cost": [{ "var": "ara2_ap", "amount": 1 }],
+          "next": "ARA2_BILDIR",
+          "maxUses": 1,
+          "description": "Başsavcılığa yaz",
+          "visibleWhen": {
+            "any": [
+              { "hasEvidence": "ded_mektup" },
+              { "hasEvidence": "ded_gomlek" },
+              { "hasEvidence": "ded_canli" },
+              { "hasEvidence": "ded_kasa" },
+              { "hasEvidence": "ded_kamera" }
+            ]
+          }
+        },
+        {
+          "id": "B_YUZLES",
+          "kind": "NAVIGATE",
+          "label": "Toker Balık’a git; Tarık’la konuş",
+          "cost": [{ "var": "ara2_ap", "amount": 1 }],
+          "next": "ARA2_YUZLES",
+          "maxUses": 1,
+          "description": "Mudanya · gece"
+        },
+        {
+          "id": "B_AILE",
+          "kind": "NAVIGATE",
+          "label": "Kemal ile Emir",
+          "cost": [{ "var": "ara2_ap", "amount": 1 }],
+          "next": "ARA2_AILE",
+          "maxUses": 1,
+          "description": "Baba ile oğul"
+        },
+        {
+          "id": "B_DURUSMA",
+          "kind": "NAVIGATE",
+          "label": "DURUŞMAYA GİT · SON CELSE",
+          "role": "PRIMARY",
+          "confirm": "Son duruşmaya gidiyorsun. Emin misin?",
+          "next": "ARA2_SON"
+        }
+      ]
+    },
+    {
+      "id": "ARA2_ARSIV",
+      "type": "STORY",
+      "chapter": "Bölüm 6 · Çerçeve",
+      "eyebrow": "DAVA #15 · İKİNCİ ARA",
+      "title": "2004/311",
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Yirmi iki yıllık bir dosya. Bir arşivin bodrumunda, bir rafta, toz ve ip arasında. İki yol var."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla’nın çekmecesindeki notlar bir kat yukarıda. Arşivdeki dosya bir mahkeme yazısı uzaklıkta.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "AR_MAHKEME",
+          "kind": "OPTION",
+          "label": "Mahkemeden 2004/311 dosyasının getirtilmesini iste",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Dilekçe kısa: “Bursa 2. Ağır Ceza Mahkemesi’nin 2004/311 Esas sayılı dosyasındaki arama ve el koyma tutanağının getirtilmesi.” Gerekçe: baş tanığın kürsüdeki beyanı."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kâtip dilekçeyi aldı, mühürledi. “Arşiv iki hafta sürer” dedi. “Ama sürer.”"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Yirmi iki yıllık bir ad, iki haftalık bir yolculuğa çıktı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "ARA2_HUB",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },
+            { "type": "VAR", "var": "arsiv_talep", "op": "set", "value": true },
+            { "type": "VAR", "var": "legal_hits", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Kesinleşmiş bir dosyanın arama tutanağı resmî belgedir; mahkeme kanalıyla getirtilir (CMK 206, 209). Avukatın müvekkil notlarına dokunmadan aynı bilgiye ulaştın.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "AR_NOT",
+          "kind": "OPTION",
+          "label": "Leyla’nın 2004 notlarını fotokopiyle dilekçeye ekle, dosyaya koy",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "narrator", "text": "Leyla’nın odasına girdim. Çekmeceyi açmasını istedim." },
+                {
+                  "speaker": "leyla",
+                  "text": "Hayır. Bu notlar Kemal’in. Kemal’in avukatıyla konuşmalarının notları. Ben bile onlara dokunamam; sen hiç dokunamazsın."
+                },
+                {
+                  "speaker": "leyla",
+                  "text": "Arşive yaz. Aynı ad orada resmî bir tutanakta duruyor. Sır değil; kimse okumamış, o kadar."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir kolay yol vardı; Leyla onu bir çekmeceyle kapattı. Bir dilekçe yazmam gerekiyor.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "ARA2_ARSIV",
+          "effects": [
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "leyla_not", "op": "set", "value": true },
+            { "type": "SCORE", "category": "SAVUNMA_STRATEJISI", "amount": -60 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Leyla’nın 2004 notları müvekkil Kemal Yalçın’ın sırrıdır; onun açık rızası olmadan istemek ve kullanmak meslek sırrına aykırıdır (Av.K. 36). Üstelik aynı bilgi arşivde resmî bir tutanak olarak duruyor.",
+            "category": "SAVUNMA_STRATEJISI"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ARA2_BILDIR",
+      "type": "STORY",
+      "chapter": "Bölüm 6 · Çerçeve",
+      "eyebrow": "DAVA #15 · İKİNCİ ARA",
+      "title": "Savcılık",
+      "background": "adliye",
+      "onEnter": [
+        { "type": "VAR", "var": "bildirdi", "op": "set", "value": true },
+        {
+          "type": "IF",
+          "when": {
+            "all": [
+              { "hasEvidence": "ded_canli" },
+              { "hasEvidence": "ded_mektup" },
+              { "hasEvidence": "ded_gomlek" },
+              { "ref": "tarik_sarsildi" },
+              { "flag": "fact_mektup_emir" },
+              { "any": [{ "flag": "fact_fatura" }, { "flag": "fact_hesaplar" }] }
+            ]
+          },
+          "then": [{ "type": "VAR", "var": "arama_karari", "op": "set", "value": true }]
+        }
+      ],
+      "lines": [
+        {
+          "when": {
+            "all": [
+              { "hasEvidence": "ded_canli" },
+              { "hasEvidence": "ded_mektup" },
+              { "hasEvidence": "ded_gomlek" },
+              { "ref": "tarik_sarsildi" },
+              { "flag": "fact_mektup_emir" },
+              { "any": [{ "flag": "fact_fatura" }, { "flag": "fact_hesaplar" }] }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 09.30 — BURSA CUMHURİYET BAŞSAVCILIĞI",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dilekçenin başlığı kısaydı: “Suç duyurusu ve bilgi sunma (CMK 158).” Altında bir dizi ek; her biri bir kayıt."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Selim Karaman’ın odası küçüktü: dosya yığınları, bir saksı, sararmış bir takvim. Dilekçemi okudu. İki kez. Ekleri tek tek çevirdi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "En son ikinci celsenin tutanağını açtı. Kendi duruşmasıydı; yine de kalemle, satır satır okudu. Tanığın her saati, her “sarsıntı”sı orada."
+            },
+            {
+              "speaker": "savci",
+              "text": "Bunları kürsüde ben de dinledim. Bir tanık bir kez yanılır. Bu tanık her soruda başka bir saate taşındı."
+            },
+            {
+              "speaker": "savci",
+              "text": "Sesli mesaj: “Mektup masamda.” Sanık zarfı 23.40’ta o masada bıraktığını söylüyor; olay yerinde masada kâğıt yok. Bir not bloğunun izi. Bir gömlek. Bir de faturalar."
+            },
+            { "speaker": "savci", "text": "Ve bir ad; daha doğrusu iki harf." },
+            { "speaker": "savci", "text": "Bunu bana getirdiniz. Duruşmada sürpriz yapmak yerine." },
+            {
+              "speaker": "player",
+              "text": "Bu bir sürpriz değil Sayın Savcım. Bir suç duyurusu. Birini bulmak benim işim değil."
+            },
+            { "speaker": "narrator", "text": "Savcı gözlüğünü çıkardı. İlk kez gülümsediğini gördüm; yorgun, kısa." },
+            {
+              "speaker": "savci",
+              "text": "Değil. Benim işim. Kayıtları ben isterim, aramayı hâkim kararıyla ben yaptırırım. Siz müvekkilinizi savunun avukat hanım; ben de gerçeği. Bazen aynı yere çıkar bu iki yol."
+            },
+            {
+              "speaker": "savci",
+              "text": "Bir şey daha. İddianameyi yazarken o mesajın devamını okumamıştım. Bir polis “tasarlama açık” dedi, ben de yazdım. Bunu size söylememem gerekir; söylüyorum."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "hasEvidence": "ded_canli" },
+              { "hasEvidence": "ded_mektup" },
+              { "hasEvidence": "ded_gomlek" },
+              { "ref": "tarik_sarsildi" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 09.30 — BURSA CUMHURİYET BAŞSAVCILIĞI",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dilekçenin başlığı kısaydı: “Suç duyurusu ve bilgi sunma (CMK 158).” Altında ekler: bir ses, bir iz, bir gömlek, ikinci celsenin tutanağı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Karaman dilekçemi iki kez okudu. Tutanağın kenarına kalemle bir şey yazdı; sonra sildi."
+            },
+            {
+              "speaker": "savci",
+              "text": "Bir ölünün sesi, bir not bloğunun izi, bir gömlek. Tanığınız kürsüde her soruda başka bir saate taşındı. Hepsini görüyorum."
+            },
+            {
+              "speaker": "savci",
+              "text": "Ama hâkim bana iki soru soracak. Bir: o mektup o gece gerçekten o masada mıydı; masayı son gören kim? İki: bu adam neden?"
+            },
+            {
+              "speaker": "savci",
+              "text": "Bu iki sorunun cevabı dilekçenizde yok. Bir dosya açarım, araştırırım. Arama kararı için bugün hâkimin kapısını çalamam."
+            },
+            { "speaker": "player", "text": "Bir suç duyurusu Sayın Savcım. Araştırılmasını talep ediyorum." },
+            {
+              "speaker": "player",
+              "text": "Bir kapının önüne kadar gelmiştim. Anahtarın iki dişi eksikti: bir masa ve bir sebep.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "any": [{ "hasEvidence": "ded_canli" }, { "hasEvidence": "ded_mektup" }] },
+              { "ref": "tarik_sarsildi" }
+            ]
+          },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 09.30 — BURSA CUMHURİYET BAŞSAVCILIĞI",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dilekçenin başlığı kısaydı: “Suç duyurusu ve bilgi sunma (CMK 158).” Altında ekler; bir ses ya da bir iz, birkaç kayıt."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Karaman dilekçemi okudu. Sonra ikinci celsenin tutanağını açtı; kalemiyle birkaç satırın altını çizdi."
+            },
+            {
+              "speaker": "savci",
+              "text": "Tanığınız kürsüde her soruda başka bir saate taşındı. Bunu ben de dinledim; tutanakta duruyor."
+            },
+            {
+              "speaker": "savci",
+              "text": "Ama hâkimden arama kararı isterken neyi, nerede arayacağımı yazmam gerekir. Bir mektup mu, bir gömlek mi? Elinizdeki kâğıtlar bir şüphe anlatıyor; aranacak bir şey göstermiyor."
+            },
+            { "speaker": "player", "text": "Bir suç duyurusu Sayın Savcım. Araştırılmasını talep ediyorum." },
+            { "speaker": "savci", "text": "Araştırırım. Bir dosya açılır. Ama bu kâğıtla bir kapı açılmaz." },
+            {
+              "speaker": "player",
+              "text": "Bir yalanın şeklini çizmiştim. İçine koyacak eşyayı bulamamıştım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "hasEvidence": "ded_canli" }, { "hasEvidence": "ded_mektup" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 09.30 — BURSA CUMHURİYET BAŞSAVCILIĞI",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dilekçenin başlığı kısaydı: “Suç duyurusu ve bilgi sunma (CMK 158).” Altında ekler; bir ses, bir iz, birkaç kayıt."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Karaman dilekçemi okudu. Sonra ikinci celsenin tutanağını açtı ve aradığını bulamadı."
+            },
+            {
+              "speaker": "savci",
+              "text": "Bir ölünün son sesi. Ağır bir şey avukat hanım. Ama tanığınız ikinci celsede kürsüde dimdik durdu; tutanakta onu sarsan bir satır yok."
+            },
+            {
+              "speaker": "savci",
+              "text": "Bir insanın evini aratmak için hâkime “şüphe” götürürüm, “his” götüremem. Araştırırım; ama bu kâğıtla arama kararı çıkmaz."
+            },
+            { "speaker": "player", "text": "Bir suç duyurusu Sayın Savcım. Araştırılmasını talep ediyorum." },
+            {
+              "speaker": "player",
+              "text": "Kürsüde soramadığım sorular, şimdi bir savcının masasında eksik duruyordu.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "PERŞEMBE 09.30 — BURSA CUMHURİYET BAŞSAVCILIĞI",
+              "style": "card",
+              "bg": "adliye"
+            },
+            { "speaker": "narrator", "text": "Dilekçenin başlığı kısaydı: “Suç duyurusu ve bilgi sunma (CMK 158).”" },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Karaman dilekçemi okudu. Bir kasa raporu, bir kamera, bir gömlek; ama bir mektup yok, bir ses yok."
+            },
+            {
+              "speaker": "savci",
+              "text": "Bir tanığın saatleri tutmuyor. Bir tanık gömlek değiştirmiş. Avukat hanım, bunlar bir yalan tanıklığın işaretleri olabilir; bir cinayetin değil."
+            },
+            { "speaker": "player", "text": "Bir suç duyurusu Sayın Savcım. Araştırılmasını talep ediyorum." },
+            { "speaker": "savci", "text": "Araştırırım. Ama mahkemede bana bundan fazlasını getirmeniz gerekecek." }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "BILDIR_DON", "kind": "CONTINUE", "label": "Büroya dön", "role": "PRIMARY", "next": "ARA2_HUB" }
+      ]
+    },
+    {
+      "id": "ARA2_YUZLES",
+      "type": "STORY",
+      "chapter": "Bölüm 6 · Çerçeve",
+      "eyebrow": "DAVA #15 · İKİNCİ ARA",
+      "title": "Mudanya",
+      "background": "kafe",
+      "onEnter": [{ "type": "VAR", "var": "tarik_yuzlesme", "op": "set", "value": true }],
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "CUMA 23.10 — TOKER BALIK", "style": "card", "bg": "kafe" },
+            {
+              "speaker": "narrator",
+              "text": "Meyhane kapanmak üzereydi. Neonun I’sı yine yanmıyordu. Tarık Sezer kasanın başındaydı; beni görünce gülümsedi, bir bardak çay koydu."
+            },
+            { "speaker": "tarik", "text": "Avukat hanım. Hoş geldiniz. Bir şey mi lazım?" },
+            { "speaker": "player", "text": "Lacivert gömleğiniz nerede Tarık Bey?" },
+            { "speaker": "narrator", "text": "Gülümseme yerinde kaldı; gözleri değil. Çayı tezgâha koydu." },
+            {
+              "speaker": "tarik",
+              "text": "Gömlek mi? Ben… avukat hanım, siz beni mi suçluyorsunuz? Bir tanığı? İş yerinde, gece yarısı?"
+            },
+            {
+              "speaker": "tarik",
+              "text": "Yarın sabah Baro’ya yazarım. Savcıya da yazarım. Siz de o zaman anlatırsınız, gece yarısı neden bir tanığın kapısına geldiğinizi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kasayı kapattı. Z raporu tıkırdayarak çıktı; saatine bakmadım bile. Kapıyı arkamdan kilitledi.",
+              "fx": "shake"
+            },
+            {
+              "speaker": "player",
+              "text": "Avukat kovalamaz. Bunu Leyla yüz kere söyledi. Bir adamı bir soruyla uyardım; şimdi o soru ona bir gece kazandırdı. O gece ne yapacağını bilmiyorum.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "YUZLES_DON", "kind": "CONTINUE", "label": "Büroya dön", "role": "PRIMARY", "next": "ARA2_HUB" }
+      ]
+    },
+    {
+      "id": "ARA2_AILE",
+      "type": "STORY",
+      "chapter": "Bölüm 6 · Çerçeve",
+      "eyebrow": "DAVA #15 · İKİNCİ ARA",
+      "title": "Baba ile oğul",
+      "background": "gorus_odasi",
+      "onEnter": [
+        { "type": "VAR", "var": "aile_baris", "op": "set", "value": true },
+        { "type": "VAR", "var": "trust", "op": "inc", "value": 10 }
+      ],
+      "lines": [
+        {
+          "when": { "flag": "released" },
+          "lines": [
+            { "speaker": "narrator", "text": "CUMARTESİ 17.00 — HAMİTLER", "style": "card", "bg": "ev" },
+            {
+              "speaker": "narrator",
+              "text": "Mutfak masası. Emir bir yanda, Kemal öbür yanda; aralarında bir demlik. Meral salonda dikiş dikiyordu; makinenin sesi yavaşladı, durdu."
+            },
+            { "speaker": "player", "text": "Kemal Bey, Emir sizden bir şey duymak istiyor. Benden değil." },
+            {
+              "speaker": "narrator",
+              "text": "Kemal ellerine baktı. Sonra konuştu; yirmi iki yıl sonra, ilk kez, baştan sona."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Bir bodrum katı vardı. Üç yatak. Bir dolap. Bir gece kapı kırıldı. Dolapta bir terazi."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Benim değildi. Avukatım bana inanmadı. “İkrar et” dedi. Ettim. Sen doğdun; ben içerideydim. İlk adımını bir görüş odasında attın. Ben camın bir tarafındaydım, sen öbür tarafında. Şimdi aramızda bir demlik var; o kadar."
+            },
+            { "speaker": "emir", "expression": "uzgun", "text": "Neden anlatmadın baba? Yirmi iki yıl…" },
+            {
+              "speaker": "kemal",
+              "text": "Utandım. Yapmadığım bir şeyi yaptım dedim. Bunu sana nasıl anlatırdım? “Baban bir yalan söyledi ve dört yıl ona yattı” mı?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Emir elini masanın üstünde, demliğin yanında açık bıraktı. Kemal bir süre baktı; sonra kendi elini oğlunun elinin üstüne koydu. Arada cam yoktu."
+            },
+            { "speaker": "emir", "text": "Ben yapmadım baba." },
+            { "speaker": "kemal", "text": "Biliyorum. Yaptım deme. Ne olursa olsun deme." },
+            {
+              "speaker": "narrator",
+              "text": "Salonda dikiş makinesi yeniden çalışmaya başladı; yavaş, sonra her zamanki hızında."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir baba yirmi iki yıl sonra oğluna bir cümle söyledi. Leyla’nın o gün söylemediği cümle.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "CUMARTESİ 10.00 — CEZAEVİ GÖRÜŞ SALONU",
+              "style": "card",
+              "bg": "gorus_odasi"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kemal’i görüşe ben getirdim. Camın bir tarafında baba, öbür tarafında oğul. Telefon ahizeleri."
+            },
+            { "speaker": "player", "text": "Kemal Bey, Emir sizden bir şey duymak istiyor. Benden değil." },
+            {
+              "speaker": "narrator",
+              "text": "Kemal ahizeyi kulağına götürdü. Bir süre konuşmadı. Sonra konuştu; yirmi iki yıl sonra, ilk kez, baştan sona."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Bir bodrum katı vardı. Üç yatak. Bir dolap. Bir gece kapı kırıldı. Dolapta bir terazi."
+            },
+            {
+              "speaker": "kemal",
+              "text": "Benim değildi. Avukatım bana inanmadı. “İkrar et” dedi. Ettim. Sen doğdun; ben içerideydim. İlk adımını bir görüş odasında attın. Bunun gibi bir odada."
+            },
+            { "speaker": "emir", "expression": "uzgun", "text": "Neden anlatmadın baba? Yirmi iki yıl…" },
+            {
+              "speaker": "kemal",
+              "text": "Utandım. Yapmadığım bir şeyi yaptım dedim. Bunu sana nasıl anlatırdım? “Baban bir yalan söyledi ve dört yıl ona yattı” mı?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Emir elini cama koydu. Kemal bir süre baktı; sonra kendi elini camın öbür tarafına, aynı yere koydu."
+            },
+            { "speaker": "emir", "text": "Ben yapmadım baba." },
+            { "speaker": "kemal", "text": "Biliyorum. Yaptım deme. Ne olursa olsun deme." },
+            {
+              "speaker": "player",
+              "text": "Bir baba yirmi iki yıl sonra oğluna bir cümle söyledi. Leyla’nın o gün söylemediği cümle.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "AILE_DON", "kind": "CONTINUE", "label": "Büroya dön", "role": "PRIMARY", "next": "ARA2_HUB" }
+      ]
+    },
+    {
+      "id": "ARA2_SON",
+      "type": "STORY",
+      "chapter": "Bölüm 6 · Çerçeve",
+      "eyebrow": "DAVA #15 · İKİNCİ ARA",
+      "title": "Son gece",
+      "background": "sokak_yagmur",
+      "lines": [
+        {
+          "when": { "flag": "tarik_yuzlesme" },
+          "lines": [
+            { "speaker": "narrator", "text": "PAZARTESİ 23.50 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Baro’dan bir yazı geldi: “Hakkınızda yapılan şikâyet hakkında savunmanız.” Tarık Sezer yazmış. Masamın köşesine koydum."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Yarın son duruşma. Benim için değil; onun için. Bir de: yarın bir adam kürsüde sana bakacak. Ona bir kez baktığın için seni şikâyet etti. İkinci kez bakma; kâğıtlarını göster.",
+              "style": "phone"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Pencereyi açtım. Yağmur dinmek üzereydi. Uludağ’ın üstünde bulutlar yırtılmış, arasından bir yıldız görünüyordu. Bursa’da nadir bir şey.",
+              "fx": "flash"
+            },
+            {
+              "speaker": "player",
+              "text": "On beş dava. Hepsinde bir kapı çalındı. Yarın son kez bir salonun kapısı açılacak; arkasında bir çocuk, bir baba, bir kadın ve bir fotoğraf.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "PAZARTESİ 23.50 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Panoyu son kez topladım. Raptiyeleri tek tek çıkardım, kırmızı ipi sardım. Ortadaki boşluğa bir şey yazmadım."
+            },
+            { "speaker": "leyla", "text": "Yarın son duruşma. Benim için değil; onun için. Uyu.", "style": "phone" },
+            {
+              "speaker": "narrator",
+              "text": "Pencereyi açtım. Yağmur dinmek üzereydi. Uludağ’ın üstünde bulutlar yırtılmış, arasından bir yıldız görünüyordu. Bursa’da nadir bir şey.",
+              "fx": "flash"
+            },
+            {
+              "speaker": "player",
+              "text": "On beş dava. Hepsinde bir kapı çalındı. Yarın son kez bir salonun kapısı açılacak; arkasında bir çocuk, bir baba, bir kadın ve bir fotoğraf.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        { "id": "ARA2_SON_DEVAM", "kind": "CONTINUE", "label": "Adliyeye git", "role": "PRIMARY", "next": "T3_00G_1" }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    {
+      "evidence": "ev_sesli",
+      "source": { "type": "NODE", "id": "ARA2_G0" },
+      "requires": { "flag": "ara_dil_sesli" },
+      "hint": "Sesli mesajın bilirkişi incelemesini iste."
+    }
+  ]
+}

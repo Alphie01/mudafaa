@@ -120,11 +120,13 @@ H_COKUS (♥0) → H2_HUKUM
 
 ### PROLOG — Soğuk açılış (~750 sözcük, 5 dk) · bg: arac → sokak_yagmur → sokak_sabah
 - `card` "6 MART · 18.42 — HAT 38, HEYKEL–GÖRÜKLE". Buğulu camlar, validatör bip sesi, kalabalığın seyrelmesi.
-- Gri kapüşonlu bir genç boşalan koltuğa oturur. Ayağı bir şeye takılır. Kahverengi, eski, deri bir cüzdan. Açar. Bir kimlik,
-  bir fotoğraf, bir eczane fişi. Para yok, kart yok. Etrafına bakar. Kırmızı kayıt lambası. *Kimse bakmıyor. Kamera bakıyor.*
-- `card` "18.49 — ALTIPARMAK". Bir büfe. İsimsiz sesler: TEZGÂHTAKİ SES "Toplam yedi yüz kırk, abla." BİR SES "Üçe böl.
-  Ayrı ayrı." "Zengin misin abla, üç ayrı çekiyorsun?" "Şifremi unuttum." Kartın üç kez bip'i. Islak bir eldiven. (Kimin
-  kartı, kimin eli söylenmez.)
+- Gri kapüşonlu bir genç boşalan koltuğa oturur. Camdaki yansımada yalnızca bir siluet: eğilir, doğrulduğunda avucunda koyu renk
+  bir şey vardır. Nereden aldığı, içinde ne olduğu söylenmez. Kırmızı kayıt lambası. *Kimse bakmıyor. Kamera bakıyor.* Bir fermuar
+  sesi; sırt çantası kapanır. (İnceleme sonrası: cüzdanın boş kart yuvaları ve “koltuğun altından” ayrıntısı prologdan çıkarıldı;
+  bulma/çalma ayrımı oyuncunun klip ve otobüs sahnesiyle kazanacağı bilgidir.)
+- `card` "18.49 — ALTIPARMAK". Bir büfe. İsimsiz sesler: TEZGÂHTAKİ SES "Toplam yedi yüz kırk." BİR SES "Üçe böl.
+  Ayrı ayrı." "Zengin misin, üç ayrı çekiyorsun?" "Şifremi unuttum." Kartın üç kez bip'i. Islak bir eldiven. Cinsiyet, bere ve
+  büfecinin fişe not düşmesi gösterilmez; bere ilk kez fiş notunda (clue_fis_notu) ve ARA'daki tam kayıtta görünür.
 - `card` "7 MART · 08.15 — GÖRÜKLE, BİR ÖĞRENCİ EVİ". Kapı çalınır (`shake`). Polis. Sırt çantası açılır; kahverengi cüzdan.
   Genç: "Buldum… bugün teslim edecektim." Polis: "Hepsi öyle der." Masada sarı bir kâğıt kıpırdar; kimse bakmaz (`fade`).
 - Kural: "kartları kullanan başkası" ihtimali kurulur ama savcılığın "suç ortağı" okumasıyla da uyumludur.
@@ -144,7 +146,8 @@ H_COKUS (♥0) → H2_HUKUM
   seçenekler: 142/1-c (toplu taşımada bulunan eşya, 3–7 yıl), 142/2-b (özel beceri, 5–10 yıl), 160 (bir yıla kadar, şikâyete bağlı).
   Doğru cevapta Leyla ekler: "Savcı bu sınırda durmayabilir. Kalabalıkta, çantadan… 'özel beceri' derse beş yıldan başlarız."
   (2. celsedeki nitelendirme uyarısının tohumu.)
-- Leyla'nın kuralı: "Kayıt eksikse hüküm de eksiktir. Eksik dakikayı bul."
+- Leyla'nın yöntem ipucu (BR_01B "İki buçuk dakika"): "Kaydın öncesine, sonrasına ve köşedeki rakamlara bak. Ne gösterdiğini
+  değil, neyi göstermediğini say." "Eksik dakika" sözü ilk kez oyuncu aktarım formundaki dipnotu bulduktan sonra geçer.
 
 ### BR_02 — Dosya ekranı + strateji (~250 sözcük)
 - Profil kartı, ceza çubuğu, olay özeti, savcılığın elindekiler (CD klibi, tanık Hayri, tutanak, kent kart, banka dökümü).
@@ -186,13 +189,16 @@ H_COKUS (♥0) → H2_HUKUM
 - **Akşamlar (~250/gün):** G1 büroda Leyla ve soğuk çay ("Bugün ne öğrendin?" seçimi iç sese yansır) · G2 Zehra'nın telefonu
   (annelerine söylememiş) ya da Arda'nın mesajı.
 - **INV_GECE (~350):** Pano; bulunanlar koşullu satırlarla sayılır. Arda'dan mesaj: "Yarın kravat takayım mı hocam?" Leyla:
-  "Yarın kimseyi ikna etmeye çalışma. Eksik dakikayı göster."
+  "Yarın kimseyi ikna etmeye çalışma. Eksik olanı göster."
 
 ### Bölüm 3 · BİRİNCİ CELSE (~2.400 sözcük) · bg: durusma_salonu
 - `card` "27 EKİM · 10.40 — BURSA 9. ASLİYE CEZA MAHKEMESİ". Mübaşir: "Arda Çınar!"
 - H1_00 açılış (kimlik, iddianame özeti, haklar). Gülten Hanım dinleyici sırasının önünde, çantasını kucağına bastırmış.
 - H1_01 Arda'nın sorgusu: oyuncu yönlendirir — "her şeyi, 153 dahil anlat" · "susma hakkını kullan" · "cüzdanı açmadığını
   söyle" (yalan; Gülten'in fişleri, kayıt; kötü) · "pişmanım de" (belirsiz ikrar tehlikesi).
+- H1_01S1–S3 savcının soruları: kira borcu; **S1B** "zarftaki 600 TL nereden?" ← ATM fişi + zarf (`ded_zarf`: savcının "yarısı
+  sanıkta, yarısı ortakta" köprüsü çöker); S3 tartışmacı soru. Duruşma seçeneklerinde madde numarası yazmaz; çeldiriciler bir hukuk
+  öğrencisinin yapabileceği hatalardır (kolluk beyanı yeter, tanık tarafsız değil, "cevaplandı" itirazı).
 - H1_02 müşteki Gülten: öfkeli ve kırgın; "İsmail'imin fotoğrafı…" Deniz'in sorusu: saldırmak (kötü) / tek soru: "Cüzdanı
   geri aldığınızda fotoğraf yerinde miydi?" (evet → Arda dokunmamış; iyi).
 - H1_03 savcının Hayri'ye telkinli sorusu → itiraz (CMK 201).
@@ -235,17 +241,25 @@ H_COKUS (♥0) → H2_HUKUM
 - **H2_02 Recep (şoför) ifadesi:** R1 "kimse bana bir şey getirmedi" · R2 "kurala göre eşyayı alır deftere yazarım" · R3 "o gün
   defterde bir şey yok çünkü getiren olmadı" · R4 (bastırınca) "yorgundum…". Sunum: KAM-1 19.05 karesi (ya da sürücü reddi
   çıkarımı) R1'e → çözülme: "Yarın götür dedim. Defter… başım derde girer diye." `fx: shake`. Savcının itirazı/hâkimin CMK 48 uyarısı.
+- **H2_TALEP → H2_HY Hayri Doğan yeniden (tam kayıt geldiyse):** Hayri dinleyici sırasındadır; müdafi kayıt karşısında yeniden
+  dinlenmesini ister (CMK 206/1). HR1 "gri bir kapüşon gördüm" → bastır → HR1B "parlıyordu, yağmurluk gibi" ← `ded_kapuson`:
+  parlak naylon parka, Arda'nınki pamuklu. HR2 "Heykel'den beri arkasındaydı" ← `ev_kentkart`: Arda 18.20'de Çarşı'dan bindi.
+- **H2_01 Volkan'a V4:** "başka kayıt olduğunu kimse sormadı" ← `clue_olay_klasoru` (hareket memurunun prosedürü); bastırınca
+  "klasör mahkemeyi ilgilendirmez" (kanaat itirazı).
 - **H2_03 Müşteki Gülten (Facebook mesajı bulunduysa ve etik yol izlendiyse):** "O çocuk bana yazmış." Kendi cümlesi.
+- **H2_OZ Ozan (tanık ifadesi):** savcı "not sonradan yazılmış olabilir, kâğıtta saat yok" der. OS2 "ben gördüğümde yazılmıştı"
+  ← teslim çıkarımı/çağrı kaydı (19.18, 21.14, 23.00 sırası); OS3 "polis gelince not masadaydı" ← el koyma tutanağı (`ev_tutanak`).
 - **H2_04 Bşk. Orhan (yalnızca suç duyurusu yapıldıysa):** altı dosya, aynı yöntem; çift yakalandı, kartlar bende; Gülten Hanım'ın
   kartı da aralarında. Savcının itirazı: "bu dosya ayrı" → müdafiin cevabı (CMK 217/1; 206/2-b'ye girmez).
 - **H2_05 Ek savunma (CMK 226):** 142/2-b'ye karşı: özel beceri yok, alma eylemi yok; 160'a karşı: "malik gibi tasarruf" yok,
-  bildirme girişimleri var.
+  bildirme girişimleri var. Ardından savcının iki sorusu: karakol (H2_EK_Q) ve "kartları bir arkadaşına vermediğini nasıl
+  gösterirsin" (H2_EK_Q2): ispat yükü itirazı (Anayasa 38/4) ve `ded_bere_ayni` (bere 18.37'de indi, Arda cüzdanı 18.42'de buldu).
 - **H2_06 Mütalaa** (varyantlar: mahkûmiyet 141/1 · 160'a nitelendirme · beraat 223/2-e · beraat 223/2-b ve dosyanın ayrı
   soruşturmayla birleştirilmesi) + cevap (CMK 216/2).
 - **H2_07 Esas savunma:** Deniz'in konuşması 3–5 satır; seçenek: 223/2-b · 223/2-e · terditli (önce beraat, olmazsa 160 ve HAGB) ·
   duygusal.
-- **H2_08 Son söz:** Arda'nın cümlesi (seçilen): "Bir cüzdan buldum. Sahibine ulaştırmak istedim. Becerememişim; ama
-  çalmadım." · ağlayarak af · susmak.
+- **H2_08 Son söz:** seçenekler aynı biçimde yazılır (kendi cümlesi · özür · avukatına katılmak); doğru seçenek etiketten
+  okunmaz, Arda'nın cümlesi yanıtta duyulur.
 - **H2_HUKUM → R_KARAR.**
 
 ### Uygulamada eklenen sahneler (süre ve derinlik için, hikâyeye bağlı)

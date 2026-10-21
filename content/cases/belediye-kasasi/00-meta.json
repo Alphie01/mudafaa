@@ -1,0 +1,359 @@
+{
+  "format": "mudafaa.case/v1",
+  "meta": {
+    "slug": "belediye-kasasi",
+    "number": 11,
+    "title": "Belediye Kasası",
+    "crimeLabel": "Zimmet",
+    "lawRef": "TCK 247/1-2, 43",
+    "demandText": "İddianame: 247/1-2, 43 (7 yıl 6 ay–18 yıl, zincirleme artırımı)",
+    "possibleSentence": "9 yıl 4 ay 15 gün – 31 yıl 6 ay",
+    "difficulty": 4,
+    "category": "CEZA",
+    "estimatedMinutes": 105,
+    "summary": "On dokuz yıldır bir kuruşu eksik çıkmamış bir veznedarın kullanıcı adıyla kırk yedi makbuz iptal edildi; kasada 386.400 lira açık var. Sistemde onun adı, tutanakta onun imzası. Orhan Kılıç “ben yapmadım” diyor; ama şifresini kime bıraktığını söylemeye utanıyor. Karısı evi satıp “ödeyip bitirmek” istiyor.",
+    "coverCharacter": "orhan",
+    "legalReview": { "status": "APPROVED", "by": "Claude (iç inceleme)", "at": "2026-10-20" }
+  },
+  "config": {
+    "startNode": "PR_00",
+    "scoring": {
+      "categories": [
+        {
+          "id": "HUKUKI_BILGI",
+          "label": "Hukuki bilgi",
+          "advice": {
+            "weak": "Zimmetin unsurlarını (TCK 247/1-2), zincirlemeyi (43), etkin pişmanlığı (248) ve ihmali görevi kötüye kullanmayı (257/2) tekrar et.",
+            "medium": "Suç vasfını biliyorsun; zilyetlik ve ceza hesabının adımlarını pekiştir.",
+            "strong": "Vasıf, zilyetlik ve ceza aralığında isabetlisin."
+          }
+        },
+        {
+          "id": "DELIL_ANALIZI",
+          "label": "Delil analizi",
+          "advice": {
+            "weak": "Kayıtların bütün sütunlarını oku; bir kâğıdın ikinci nüshasını ilkinin yanına koy.",
+            "medium": "Çatlakları buluyorsun; onları tahtada birbirine bağlamayı dene.",
+            "strong": "Bir kullanıcı adının arkasındaki eli saatle, kapıyla, imzayla gösterdin."
+          }
+        },
+        {
+          "id": "ARASTIRMA",
+          "label": "Araştırma",
+          "advice": {
+            "weak": "Panoya, klasörlerin arasına, bir kapının tuş takımına bak; dosyanın dışında da kâğıt vardır.",
+            "medium": "Mekânları taradın; birkaç önemli ayrıntı kaçtı.",
+            "strong": "Araştırman eksiksizdi."
+          }
+        },
+        {
+          "id": "SORGULAMA",
+          "label": "Sorgulama",
+          "advice": {
+            "weak": "Önce bastır, sonra doğru delille göster; yanlış delil güvenilirliği eritir.",
+            "medium": "Çapraz sorgun etkiliydi; birkaç çelişki açıkta kaldı.",
+            "strong": "Kibar bir tanığı kırmadan, kendi kâğıtlarıyla susturdun."
+          }
+        },
+        {
+          "id": "SAVUNMA_STRATEJISI",
+          "label": "Savunma stratejisi",
+          "advice": {
+            "weak": "Esas savunmayı delillerle kur; tanığa ve müvekkile ne söyleyeceğini söyleme.",
+            "medium": "Stratejin tutarlıydı; dayanaklarını kâğıtlara bağla.",
+            "strong": "Stratejin ve etik duruşun davayı taşıdı."
+          }
+        },
+        {
+          "id": "USUL_BILGISI",
+          "label": "Usul bilgisi",
+          "advice": {
+            "weak": "Bilirkişi (CMK 63, 67/3), delil talepleri (CMK 177, 206), nitelendirme uyarısı (CMK 226) ve suç duyurusunu (CMK 158) çalış.",
+            "medium": "Usul hamlelerin çoğunlukla yerindeydi.",
+            "strong": "Usul itirazların ve taleplerin yerindeydi."
+          }
+        }
+      ],
+      "lines": [
+        {
+          "id": "delil",
+          "label": "Delil toplama ({{count.evidence:key}}/26)",
+          "categories": ["ARASTIRMA", "DELIL_ANALIZI"]
+        },
+        { "id": "capraz", "label": "Çapraz sorgu", "categories": ["SORGULAMA"] },
+        {
+          "id": "itiraz",
+          "label": "İtiraz isabeti ({{var.legal_hits}})",
+          "categories": ["USUL_BILGISI", "HUKUKI_BILGI"]
+        },
+        { "id": "savunma", "label": "Savunma", "categories": ["SAVUNMA_STRATEJISI"] },
+        { "id": "hatali", "label": "Hatalı delil ({{var.wrong}})" }
+      ],
+      "bonuses": [
+        { "id": "guven", "label": "Güvenilirlik bonusu ({{var.cred}}♥)", "value": { "mul": [{ "var": "cred" }, 100] } }
+      ],
+      "scaleMax": 12000,
+      "thresholdBar": [
+        { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
+        { "label": "Nitelendirme", "from": 5000, "tone": "amber" },
+        { "label": "Beraat", "from": 9000, "tone": "green" }
+      ],
+      "displayClampMin": 0
+    },
+    "objectionGrounds": [],
+    "display": { "showRunningScore": true },
+    "chronology": [
+      {
+        "id": "k1",
+        "time": "Eylül 2025",
+        "text": "Veznedarlardan şifrelerini mühürlü zarfta müdürlüğe bırakmaları istendi."
+      },
+      { "id": "k2", "time": "3.11.2025", "text": "İlk iptal: 17.41, kullanıcı okilic." },
+      { "id": "k3", "time": "9.01.2026", "text": "Orhan Kılıç yıllık izinde; akşam iki iptal." },
+      { "id": "k4", "time": "14–15.01.2026", "text": "okilic şifresi iki kez sıfırlandı." },
+      {
+        "id": "k5",
+        "time": "12.02.2026 16.40",
+        "text": "Hayri Özdemir emlak vergisini ödedi; makbuz 17.47’de iptal edildi."
+      },
+      { "id": "k6", "time": "27.02.2026", "text": "Son iptal: 17.56." },
+      { "id": "k7", "time": "4.03.2026", "text": "Açık ortaya çıktı." },
+      { "id": "k8", "time": "Temmuz 2026", "text": "İddianame; adli kontrol." },
+      { "id": "k9", "time": "9.12.2026", "text": "Birinci celse." }
+    ]
+  },
+  "predicates": [
+    {
+      "id": "kart2",
+      "label": "Tahtada en az 2 kart var",
+      "when": { "cmp": [{ "count": "evidence", "tag": "kart" }, ">=", 2] }
+    }
+  ],
+  "variables": [
+    {
+      "id": "strategy",
+      "type": "enum",
+      "initial": "YOK",
+      "enumValues": ["YOK", "MASUMIYET", "USUL", "INDIRIM"],
+      "visibility": "VISIBLE",
+      "display": { "label": "Strateji", "widget": "label" }
+    },
+    { "id": "strategy_pct", "type": "int", "initial": 100, "min": 0, "max": 200, "visibility": "HIDDEN" },
+    {
+      "id": "day",
+      "type": "int",
+      "initial": 1,
+      "min": 1,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "display": { "label": "Gün", "widget": "pips", "max": 3 }
+    },
+    {
+      "id": "ap",
+      "type": "int",
+      "initial": 4,
+      "min": 0,
+      "max": 4,
+      "visibility": "VISIBLE",
+      "display": { "label": "Eylem puanı", "widget": "pips", "max": 4 }
+    },
+    {
+      "id": "ara_day",
+      "type": "int",
+      "initial": 1,
+      "min": 1,
+      "max": 2,
+      "visibility": "VISIBLE",
+      "display": { "label": "Ara günü", "widget": "pips", "max": 2 }
+    },
+    {
+      "id": "ara_ap",
+      "type": "int",
+      "initial": 4,
+      "min": 0,
+      "max": 4,
+      "visibility": "VISIBLE",
+      "display": { "label": "Eylem puanı", "widget": "pips", "max": 4 }
+    },
+    {
+      "id": "trust",
+      "type": "int",
+      "initial": 60,
+      "min": 0,
+      "max": 100,
+      "visibility": "VISIBLE",
+      "display": { "label": "Güven", "widget": "percentBar", "max": 100, "lowAt": 40 }
+    },
+    {
+      "id": "min",
+      "type": "int",
+      "initial": 14,
+      "min": 0,
+      "max": 14,
+      "visibility": "VISIBLE",
+      "display": { "label": "Kalan süre", "widget": "minutes", "max": 14, "lowAt": 4 }
+    },
+    { "id": "tone", "type": "enum", "initial": "soft", "enumValues": ["soft", "hard"], "visibility": "HIDDEN" },
+    {
+      "id": "taps_v",
+      "type": "int",
+      "initial": 7,
+      "min": 0,
+      "max": 7,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Büyüteç", "widget": "counter", "max": 7, "lowAt": 1 }
+    },
+    {
+      "id": "taps_e",
+      "type": "int",
+      "initial": 7,
+      "min": 0,
+      "max": 7,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Büyüteç", "widget": "counter", "max": 7, "lowAt": 1 }
+    },
+    {
+      "id": "taps_o",
+      "type": "int",
+      "initial": 6,
+      "min": 0,
+      "max": 6,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Büyüteç", "widget": "counter", "max": 6, "lowAt": 1 }
+    },
+    {
+      "id": "ex_log",
+      "type": "int",
+      "initial": 8,
+      "min": 0,
+      "max": 8,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 8, "lowAt": 2 }
+    },
+    {
+      "id": "ex_pdks",
+      "type": "int",
+      "initial": 5,
+      "min": 0,
+      "max": 5,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 5, "lowAt": 1 }
+    },
+    {
+      "id": "ex_tut",
+      "type": "int",
+      "initial": 6,
+      "min": 0,
+      "max": 6,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 6, "lowAt": 2 }
+    },
+    {
+      "id": "ex_banka",
+      "type": "int",
+      "initial": 4,
+      "min": 0,
+      "max": 4,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 4, "lowAt": 1 }
+    },
+    {
+      "id": "ex_kasa",
+      "type": "int",
+      "initial": 5,
+      "min": 0,
+      "max": 5,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 5, "lowAt": 1 }
+    },
+    {
+      "id": "ex_pdks2",
+      "type": "int",
+      "initial": 5,
+      "min": 0,
+      "max": 5,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 5, "lowAt": 1 }
+    },
+    {
+      "id": "ex_ticket",
+      "type": "int",
+      "initial": 4,
+      "min": 0,
+      "max": 4,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 4, "lowAt": 1 }
+    },
+    {
+      "id": "ex_zarf",
+      "type": "int",
+      "initial": 4,
+      "min": 0,
+      "max": 4,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 4, "lowAt": 1 }
+    },
+    {
+      "id": "slots",
+      "type": "int",
+      "initial": 3,
+      "min": 0,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Talep hakkı", "widget": "counter", "max": 3 }
+    },
+    {
+      "id": "slots2",
+      "type": "int",
+      "initial": 2,
+      "min": 0,
+      "max": 2,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Talep hakkı", "widget": "counter", "max": 2 }
+    },
+    {
+      "id": "noktalar",
+      "type": "int",
+      "initial": 3,
+      "min": 0,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Dayanak", "widget": "counter", "max": 3 }
+    },
+    {
+      "id": "cred",
+      "type": "int",
+      "initial": 5,
+      "min": 0,
+      "max": 5,
+      "visibility": "VISIBLE",
+      "display": { "label": "Güvenilirlik", "widget": "hearts", "max": 5, "lowAt": 1 }
+    },
+    {
+      "id": "pers",
+      "type": "int",
+      "initial": 2,
+      "min": 0,
+      "max": 10,
+      "visibility": "VISIBLE",
+      "display": { "label": "Heyet iknası", "widget": "meter10", "max": 10 }
+    },
+    { "id": "wrong", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
+    { "id": "legal_hits", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
+    { "id": "ethics", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" }
+  ]
+}

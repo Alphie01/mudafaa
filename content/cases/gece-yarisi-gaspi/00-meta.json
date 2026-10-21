@@ -13,7 +13,7 @@
     "estimatedMinutes": 105,
     "summary": "Tophane’nin merdivenli sokaklarında, gece yarısına on sekiz kala, bir hasta bakıcının çantası kapıldı. Ertesi sabah kadın, karakolda altı fotoğraf arasından genç bir motokuryeyi gösterdi. Kurye o gece ateşler içinde evde yattığını söylüyor. Ablası salonunun kira birikimini masana koyuyor: sen.",
     "coverCharacter": "baris",
-    "legalReview": { "status": "APPROVED", "by": "Claude (iç inceleme)", "at": "2026-10-20" }
+    "legalReview": { "status": "APPROVED", "by": "Claude (iç inceleme)", "at": "2026-10-21" }
   },
   "config": {
     "startNode": "PR_00",
@@ -95,8 +95,7 @@
       "scaleMax": 12000,
       "thresholdBar": [
         { "label": "Mahkûmiyet", "from": 0, "tone": "red" },
-        { "label": "İndirim", "from": 3000, "tone": "amber" },
-        { "label": "Beraat", "from": 9000, "tone": "green" }
+        { "label": "İndirim", "from": 3000, "tone": "amber" }
       ],
       "displayClampMin": 0
     },
@@ -395,6 +394,7 @@
     { "id": "derya_sus", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "karar_verildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "bildirdi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "bildirim_guclu", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "tolga_kacti", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "tolga_teslim", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "etik_kirlik", "type": "bool", "initial": false, "visibility": "HIDDEN" },
@@ -413,6 +413,12 @@
     { "id": "contra_f4", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "contra_f5", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "contra_f6", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_f7", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_f7", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "mutalaa_b", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "kadir_215", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ali_ifsa", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "kadir_ifsa", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "arg_kirlenme", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "arg_halka", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "arg_mazeret", "type": "bool", "initial": false, "visibility": "HIDDEN" },

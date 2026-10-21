@@ -128,5 +128,9 @@ export const scenes: CasePart = {
       ],
     }),
   ],
-  assets: [sceneAsset('img_bar', 'golge-ic'), sceneAsset('img_foto', 'kolluk-foto'), sceneAsset('img_sokak', 'gokdere-sokak')],
+  assets: [
+    sceneAsset('img_bar', 'golge-ic'),
+    sceneAsset('img_foto', 'kolluk-foto'),
+    sceneAsset('img_sokak', 'gokdere-sokak'),
+  ],
 };

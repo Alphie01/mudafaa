@@ -6,6 +6,7 @@ import {
   conversation,
   decisionNode,
   deductionBoard,
+  dec,
   deliver,
   discover,
   documentExam,
@@ -102,6 +103,7 @@ export const ara: CasePart = {
           S`
             = 12 KASIM 2026 · 09.00 — ARSLAN HUKUK @buro
             - Bir hafta sonra ara karar cevapları birer birer dosyaya düştü. İlki operatörden: Ece'nin hattının 3–5 Kasım kayıtları. 4 Kasım 10.12'de bir satır: "IMEI değişikliği."
+            - Satırın yanında on beş haneli bir numara: kopya SIM'in takıldığı cihazın kimliği. 35 491207 ile başlıyor. Bir telefonun parmak izi, bir yıl sonra bir kâğıtta.
           `,
         ),
         O(S`
@@ -146,6 +148,8 @@ export const ara: CasePart = {
         leyla: Tanıklara dokunma. Şüphelileri kovalama. Gördüğünü bildir, bildirdiğini belgele.
         leyla: Bir de şu var: bu üç hafta, karşı tarafın da üç haftası. Biri seni izliyorsa, sen de onun izlediğini bil. Ama ona bakma; dosyaya bak.
         leyla: Ve hatırla: bu dosyada bir kurban daha var. Katılan. Onu düşman yapma. Düşman yaparsan, salonda bir ses kaybedersin; kazanabileceğin bir sesi.
+        - Masamın köşesinde Ece'nin sarı notunun fotokopisi duruyordu; aslı dosyadaydı artık, mahkemenin. Fotokopide gülen yüz biraz silikti, ama oradaydı.
+        - Telefonuma Ece'den bir mesaj düşmüştü: "Annem bugün ilk kez atölyeye geç gitti. Benimle kahvaltı etti. Bir yıl sonra ilk kez." Altında hiçbir şey yoktu; ne teşekkür, ne soru.
         ~ Bir yılda kimsenin sormadığı soruları üç haftada sormam gerekiyor. Ve hiçbirini yanlış kişiye sormamam.
       `),
       choices: [cont('ARA_GIRIS_DEVAM', 'Ara evresine başla', HUB, { role: 'PRIMARY' })],
@@ -232,18 +236,20 @@ export const ara: CasePart = {
           has('ev_imei_rapor'),
           S`
             = ARA 1. GÜNÜN AKŞAMI · 21.30 — ARSLAN HUKUK @buro_gece
-            - Savcılıktan bir yazı gelmişti; hâkim kararı çıkmış, İMEİ sorgusunun cevabı dönmüştü. Üç hat, tek bir cihaz. Bir satırda bir şirket adı. Tanıdık bir ad.
+            - Savcılıktan bir yazı gelmişti; hâkim kararı çıkmış, İMEİ sorgusunun cevabı dönmüştü. Üç hat, tek bir cihaz. Üçüncü satırda kurumsal bir hat; abonesi ayrıca sorulmuş, cevap yok.
             - Saat dokuz buçukta büronun sabit telefonu çaldı. Numara gizliydi.
-            ?BİR SES{phone}: Avukat hanım, iyi akşamlar efendim. Bazı dosyalar uzarsa, insanın işi de uzar. Size iyi geceler dilerim.
-            - Hat kapandı. Kibar, acelesiz bir ses. Kızgın değildi; kızgın olmasından daha kötüydü. !shake
+            ?BİR SES{phone}: Avukat hanım. Bazı dosyalar uzarsa, insanın işi de uzar. İyi geceler.
+            - Hat kapandı. Bir fısıltı; kadın mı erkek mi, genç mi yaşlı mı, söyleyemezdim. Kızgın değildi; kızgın olmasından daha kötüydü. !shake
             ~ Biri, savcılığa ne yazdığımı biliyor. Ya da tahmin ediyor. İkisi de iyi değil.
+            - Büronun ışıklarını söndürmedim. Pencereden sokağa baktım: ıslak asfalt, bir taksi, bir kedi. Kimse yoktu. Kimse olmadığını bilmek, birinin olduğunu bilmekten daha az rahatlatıcıydı.
+            ~ Leyla "ona bakma, dosyaya bak" demişti. Dosyaya baktım. Üç hat, bir cihaz. Telefon bir daha çalmadı.
           `,
         ),
         O(S`
           = ARA 1. GÜNÜN AKŞAMI · 21.30 — ARSLAN HUKUK @buro_gece
           - Saat dokuz buçukta büronun sabit telefonu çaldı. Numara gizliydi.
-          ?BİR SES{phone}: Avukat hanım, iyi akşamlar efendim. Bazı dosyalar uzarsa, insanın işi de uzar. Size iyi geceler dilerim.
-          - Hat kapandı. Kibar, acelesiz bir ses. Kızgın değildi; kızgın olmasından daha kötüydü. !shake
+          ?BİR SES{phone}: Avukat hanım. Bazı dosyalar uzarsa, insanın işi de uzar. İyi geceler.
+          - Hat kapandı. Bir fısıltı; kadın mı erkek mi, genç mi yaşlı mı, söyleyemezdim. Kızgın değildi; kızgın olmasından daha kötüydü. !shake
           ~ Suç duyurusu bugün verildi. Ve bu akşam biri aradı. Tesadüf, bu meslekte en pahalı kelimedir.
         `),
       ],
@@ -258,10 +264,10 @@ export const ara: CasePart = {
           `),
           next: HUB,
         }),
-        option('ARAK_B', 'Numarayı geri aramayı dene.', {
-          neutral: 'Gizli numara geri aranamaz; fail ararken iz bırakmaz, avukat ararken iz kaybeder.',
+        option('ARAK_B', 'Gizli numarayı operatörden öğrenip geri ara.', {
+          neutral: 'Operatör gizli numarayı avukata vermez; arayanın kimliği ancak savcılığın talebi ve hâkim kararıyla öğrenilir (CMK 135/6). Faili avukat aramaz.',
           responses: B(S`
-            - Gizli numara. Geri arayacak bir şey yoktu. Ahizeyi yerine koydum, sonra kaldırıp sinyalini dinledim. Hiçbir şey.
+            - Operatörün çağrı merkezi beni on iki dakika beklettikten sonra kibarca reddetti: "Gizli numara bilgisi yalnızca resmî yazıyla verilir." Ahizeyi yerine koydum. Hiçbir şey.
           `),
           next: HUB,
         }),
@@ -298,6 +304,10 @@ export const ara: CasePart = {
           leyla: Mahkemede herkes bir şey anlatır. Tanık hatırladığını, savcı düzeni anlatır. Sen yalnızca belgeyi anlat.
           leyla: Kürsüye çıkan kim olursa olsun, sözünü bir belgenin yanına koy. Söz belgeyle çelişiyorsa, sözü bırak, belgeye bak.
           leyla: Ve esas savunmanda, kanıtlayamadığın bir şeyi iddia etme. Gerçek faili göstereceksen, parmağını değil, kâğıdı göster.
+          - Bir süre ikimiz de sustuk. Koridordan stajyerlerin sesi geldi; biri bir dilekçenin son sayfasını arıyordu, öbürü fotokopi makinesine sövüyordu.
+          leyla: Bir şey daha. Yarından sonra bu dosya bitecek. Ne olursa olsun, Ece'nin hayatı yeniden başlayacak; seninki bir sonraki dosyayla devam edecek.
+          leyla: Sakın bu davayı kendi hikâyen yapma. Onun hikâyesi. Sen yalnızca sayfaları doğru sıraya koyan kişisin.
+          ~ Leyla bunu söylerken ters çerçeveye bakmadı. Bakmamak için uğraştığını gördüm.
         `),
       ],
       choices: [cont('ARALEYLA_GERI', 'Masana dön', HUB, { role: 'BACK' })],
@@ -312,6 +322,7 @@ export const ara: CasePart = {
           - Beş sayfa. Bir vekâletname, bir vekilin kimliği, bir abone kimliği "fotokopisi", bir işlem formu. Hepsi taranmış, hepsi biraz eğri.
           - Leyla omzumun üstünden baktı. "Noterler karekod basar" dedi, "sahteciler de basar. Ama sahtecinin karekodu bir yere gitmez." Gitti.
           ~ Bir sahte belge, ilk bakışta değil, ikinci ışıkta ele verir kendini.
+          - Sayfaların kenarında bayinin damgası, damganın üstünde bir kahve halkası. Biri bu dosyayı aceleyle taramış; ya da aceleyle taranmasını istemiş.
         `),
         header: { left: 'MAVİ İLETİŞİM · SIM DEĞİŞİKLİĞİ', right: '04.11.2025 10.12' },
         columns: [
@@ -381,7 +392,7 @@ export const ara: CasePart = {
       background: 'buro',
       prompt: 'Bursa Cumhuriyet Başsavcılığına. Kimin hakkında, hangi somut dayanakla, ne isteyerek?',
       choices: [
-        option('SUC_A', 'Failleri belirsiz: “Nova İK” hattı ve hattın kullanıldığı cihaz için soruşturma', {
+        option('SUC_A', 'Failleri belirsiz: Nova İK hattı ve cihazı için soruşturma', {
           effects: [
             ifThen(
               has('ded_kaan'),
@@ -442,7 +453,7 @@ export const ara: CasePart = {
           ],
           next: '$stay',
         }),
-        option('SUC_B', 'Burak Toprak hakkında: şifreyi biliyordu, tehdit mesajı attı', {
+        option('SUC_B', 'Burak Toprak hakkında: şifreyi biliyordu, ayrılıktan sonra tehdit mesajı attı (TCK 106)', {
           score: { USUL_BILGISI: -40 },
           effects: [raise('suc_burak')],
           bad: 'Somut delile dayanmayan suçlama iftira riskidir (TCK 267); üstelik Burak’ın 4 Kasım sabahı dükkânında olduğu belgeliydi.',
@@ -497,6 +508,7 @@ export const ara: CasePart = {
               arda: Parayı hep aynı yere götürdüm. OM'nin otoparkı. En köşedeki tabelalı yer. Siyah bir araba. Cam yarım iner, zarfı uzatırım. Yüzünü hiç görmedim.
               ~ OM İş Merkezi. Nova'nın adresi. Bir kâğıt üstündeki adresin bodrumunda, gerçek bir araba.
               arda: Bir de… bir kere parayı geç getirdim, yağmur vardı. Telefonda çok kızdı. Ama kibar kızdı. "Arda kardeşim, zaman paradır" dedi. Kibar kızan insandan korkarım ben.
+              - Kaskını takmadan merdivenleri indi. Pencereden baktım: motoruna binmedi, bir süre yanında durdu, sonra iterek yürüdü. Bir kurye, ilk kez acelesi yokmuş gibi.
             `),
           }),
           option('AR_B', 'Otur. Anlat; ben yazayım, sen imzala. Mahkemeye ben sunarım.', {
@@ -512,7 +524,7 @@ export const ara: CasePart = {
           }),
           option('AR_C', 'Mahkemede yalnızca şunu söyle: Ece’yi tanımazsın, her şeyi Kaan yaptı. Fazlasını söyleme.', {
             score: { USUL_BILGISI: -150 },
-            effects: [inc('ethics', 2), raise('tanik_etkileme')],
+            effects: [inc('ethics', 2), dec('cred'), raise('tanik_etkileme'), raise('arda_etkileme')],
             next: HUB,
             bad: 'Tanığa ne söyleyeceğini dikte etmek tanığı etkilemedir (TCK 277) ve ağır meslek ihlalidir (Av.K. 34).',
             responses: B(S`
@@ -538,6 +550,7 @@ export const ara: CasePart = {
           ~ Arda her seferinde buraya gelmiş. Kimseyi görmemiş, bir camın yarısını görmüş. Camın arkasını göremiyorum; ama camın durduğu yeri görebilirim.
           - Köşeye yaklaştıkça ışık azaldı. Kameranın kırmızı noktası arkamda kaldı. Burada, bu köşede, bir araba kimseye görünmeden bekleyebilirdi.
           - Bir arabanın alarmı çaldı, sonra sustu. Duvarlarda boya kokusu, köşelerde örümcek ağları. Kapalı otoparklar bir şehrin bilinçaltıdır; herkes kullanır, kimse bakmaz.
+          ~ Burada kimseyi beklemiyorum, kimseyi takip etmiyorum. Yalnızca bir kuryenin anlattığı yere bakıyorum. Gördüğümü yazacağım; gerisini mahkeme soracak.
         `),
         instruction: 'Dikkat çeken yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.',
         costVar: 'taps_o',
@@ -561,6 +574,7 @@ export const ara: CasePart = {
               = EMNİYET · SİBER ŞUBE · 10.30 @karakol
               - Gökhan beni görünce ekranı kapattı. Bu sefer kapattı.
               gokhan: Avukat hanım. Duruşmadan sonra bankanın cihaz kaydını kendim istedim. Samsung. Haklıydınız. Dört yüz dosya, bir tanesi yanlış. Belki daha fazlası.
+              - Masasındaki ölü sukulentin yerinde yeni bir saksı vardı; küçük, yeşil, kendinden emin. "Kızım getirdi" dedi, sormadan. "Bunu da öldürürsem bir daha getirmeyecekmiş."
             `,
           ),
           O(S`
@@ -589,6 +603,20 @@ export const ara: CasePart = {
               gokhan: IMEI sorgusu. Cihazın kimliğiyle operatörlere sorulur; o cihaza hangi kartlar takılmış, söyler. Ama bu bir iletişim tespiti; hâkim kararı ister.
               gokhan: Sanığın hattı değil artık, bilinmeyen birinin cihazı. Yani bir soruşturma lazım. Suç duyurusu verin; IMEI'yi yazın. Gerisini savcı ister, hâkim verir.
               gokhan: Bir cihaz bir insan gibidir avukat hanım. Adını değiştirebilirsin, kartını değiştirebilirsin. Parmak izini değiştiremezsin. IMEI onun parmak izi.
+            `),
+            next: '$stay',
+          }),
+          option('GK2_KAYIT', 'Bankanın cihaz kaydına bakınca ne gördünüz?', {
+            visibleWhen: any(flag('contra_g1'), has('ev_banka_log')),
+            score: { SORGULAMA: 30 },
+            responses: B(S`
+              - Gökhan ekranını bana çevirdi. Bir tablo: tarih, saat, cihaz modeli. Kırmızıyla işaretlenmiş tek bir satır.
+              gokhan: Samsung, orta segment. Bu tür işlerde hep aynı model çıkıyor; ucuz, kutusu atılır, kimseye sorulmaz. Bir haftalığına alınır.
+              gokhan: Cihazı tanımladıkları an 14.29. Kod 14.26'da gelmiş. Üç dakika. Sanığın kodu okumasıyla cihazın tanımlanması arasında üç dakika var, avukat hanım.
+              gokhan: Ben o üç dakikayı bir yıl önce görseydim, sanığa "kimle konuştun" diye sorardım. "Kod verdin mi" diye değil.
+              - Sesi alçaldı. Bardağı aldı; bu sefer içinde kahve vardı.
+              gokhan: Dört yüz dosya dedim size. Bu hafta otuzunu açtım. Üçünde aynı model, aynı saat aralığı. Bir şey var. Ne olduğunu bilmiyorum.
+              ~ Yorgun bir polis, uyanınca tehlikeli olur. Dolandırıcılar için.
             `),
             next: '$stay',
           }),
@@ -647,9 +675,11 @@ export const ara: CasePart = {
           nurettin: Oturun. Avukatım yok; bilmediğim bir şeyi bilmem gerekiyorsa, söyleyin. Bilmemem gerekiyorsa da söyleyin.
           > Ben sanığın avukatıyım, Nurettin Bey. Sizin değil. Bunu bilerek konuşun.
           nurettin: Biliyorum. Kırk yıl öğretmenlik yaptım; kimin hangi sırada oturduğunu bilirim.
+          - Simidinin susamlarını parmağıyla masanın kenarına topluyordu; bir sınıfın tebeşir tozunu toplar gibi. Kantinin televizyonunda hava durumu: Bursa, yağmurlu, haftanın geri kalanı da.
+          nurettin: Duruşmadan sonra eve gidip eşime anlattım. "Avukatı bana kapıyı açtı" dedim. "Katılmama itiraz etmedi." Eşim "o kız masumsa?" dedi. Ben cevap veremedim.
         `),
         choices: [
-          option('NU_FOTO', 'İlanın fotoğrafları sizde duruyor mu? Mahkemeye sunmanız işe yarayabilir.', {
+          option('NU_FOTO', 'İlanın fotoğrafları sizde duruyor mu?', {
             discovers: 'ev_ilan_foto',
             score: { ARASTIRMA: 50 },
             responses: B(S`
@@ -661,7 +691,7 @@ export const ara: CasePart = {
             `),
             next: '$stay',
           }),
-          option('NU_ES', 'Eşiniz nasıl?', {
+          option('NU_ES', 'Eşiniz nasıl? Diyaliz günleri hâlâ aynı mı?', {
             effects: [raise('nurettin_yumusadi')],
             responses: B(S`
               nurettin/uzgun: Salı, perşembe, cumartesi. Belediyenin servisiyle gidiyor şimdi. Ben yanında oturuyorum. Arabam olsaydı, dönüşte simit alırdık. Ufak bir şey.
@@ -673,7 +703,7 @@ export const ara: CasePart = {
           }),
           option('NU_VAZGEC', 'Şikâyetinizden vazgeçerseniz Ece’nin işi kolaylaşır.', {
             score: { USUL_BILGISI: -60 },
-            effects: [inc('ethics'), raise('nurettin_baski')],
+            effects: [inc('ethics'), dec('cred'), raise('nurettin_baski')],
             bad: 'Nitelikli dolandırıcılık şikâyete bağlı değildir; vazgeçme davayı düşürmez. Üstelik katılanı yönlendirmeye çalışmak meslek kurallarına aykırıdır.',
             responses: B(S`
               nurettin/kizgin: Vazgeçmek mi? Siz bana bunu söylemek için mi oturdunuz? Ben bu sandalyeyi size boşuna itmişim.
@@ -698,6 +728,7 @@ export const ara: CasePart = {
               = YILDIRIM · YALINLARIN SALONU · 18.20 @ev
               - Ece'nin pasaportu sehpanın üstündeydi; hiç kullanılmamış, yeni. "Çıkarttım" dedi. "Gitmek için değil. Gidebilmek için."
               ece/uzgun: Bir bankadan iş teklifi gelmişti, biliyor musunuz? Geçen ay. Adli sicil kaydı sordular. "Dava sürüyor" dedim. "Sonra görüşelim" dediler.
+              - Pasaportun kapağını açtı, kapattı. Fotoğrafta saçları kısaydı; bir yıl önce, her şeyden önce çekilmiş. "Bu kızı tanımıyorum artık" dedi. "Ama ona borçluyum. Onu geri getireceğim."
             `,
           ),
           O(S`
@@ -712,7 +743,7 @@ export const ara: CasePart = {
             score: { SORGULAMA: 40 },
             responses: B(S`
               - Ece gözlerini kapadı. Bir süre öyle kaldı.
-              ece: Bir kere. İki saniye. "Ay pardon" dedi, hemen kapattı. Yüzünü görmedim; bir masa, bir el. Parmağında… eski bir yüzük. Yassı, mühür gibi.
+              ece: Bir kere. İki saniye. "Ay pardon" dedi, hemen kapattı. Yüzünü görmedim; bir masa, bir el. Parmağında bir yüzük vardı galiba; ışıkta bir an parladı. O kadar.
               - Odadan dikiş makinesinin sesi geliyordu. Ece bir an onu dinledi, sonra gözlerini açmadan konuşmaya devam etti.
               ece: Neden önemli? Herkesin yüzüğü var.
               - Bir süre sustu. Sonra parmaklarına baktı; kendi parmaklarına, kırık ojesine.
@@ -721,7 +752,20 @@ export const ara: CasePart = {
             `),
             next: '$stay',
           }),
-          option('EC_HAZIR', 'İkinci celsede sana yeniden soru sorabilirler. Ezber yapma; hatırladığını söyle.', {
+          option('EC_SALON', 'Nurettin Bey de salonda olacak. Onu görünce ne hissediyorsun?', {
+            score: { SAVUNMA_STRATEJISI: 20 },
+            responses: B(S`
+              - Ece bir süre cevap vermedi. Sehpanın üstündeki çay bardağını çevirdi; bir tur, bir tur daha.
+              ece: Utanıyorum. Benim hesabıma girdi o para. Benim adım onun cüzdanında bir yıl durdu. Ben görmedim bile o parayı, ama adım gördü.
+              ece/uzgun: İlk celsede bana hiç bakmadı. Bakmasın diye uğraştı; ben de gördüm uğraştığını. İnsan birine bakmamak için de yorulurmuş.
+              > Ona bir şey söylemek zorunda değilsin. Salonda kimse kimseden özür dilemek zorunda değil.
+              ece: Biliyorum. Ama dilemek istersem? Son sözde?
+              > Son söz senin. Ne söyleyeceğini ben yazmam. Sadece şunu bil: orada söylediğin her şey tutanağa geçer.
+              - Ece başını salladı. Mutfaktan Sevim'in sesi geldi: "Çaylar soğudu." Kimse kalkmadı.
+            `),
+            next: '$stay',
+          }),
+          option('EC_HAZIR', 'Ezber yapma; sorarlarsa hatırladığını söyle.', {
             score: { SAVUNMA_STRATEJISI: 40 },
             effects: [raise('ece_hazir')],
             good: 'Avukat müvekkili hazırlar ama cümle yazdırmaz; hatırladığını, hatırladığı kadar söylemesini öğütler.',
@@ -806,6 +850,8 @@ export const ara: CasePart = {
         background: 'buro_gece',
         lines: B(S`
         - Pano kalabalıklaşmıştı. Kırmızı ipler birbirinin üstünden geçiyor, bir yerde düğümleniyordu. Leyla geçerken durdu, hiçbir şey söylemeden bir iğneyi düzeltti.
+        - Yeni kartlar eskilerin arasına sıkışmıştı: bir rapor, bir fotokopi, bir otopark köşesi. Bir yıl önce bu panoda tek bir kart olurdu: "Hesap sanığın." Şimdi o kart bir köşede, iğnesi gevşemiş.
+        ~ Her yeni kâğıt bir soruyu kapatıyor, bir başkasını açıyor. Doğru iki kartı yan yana koyabilirsem, yarın salonda bir kapı daha kapanır; ya da açılır.
       `),
         pool: [
           'clue_hr_no',
@@ -820,6 +866,7 @@ export const ara: CasePart = {
           'clue_ding_nurettin',
           'clue_simyok',
           'clue_iphone_imei',
+          'ev_banka_log',
           'ev_hts',
           'clue_parlama',
           'clue_lamba',
@@ -844,6 +891,14 @@ export const ara: CasePart = {
             'ded_imei',
             'İki ayrı cihaz',
             'Kutudaki IMEI 35 391508…; kopya SIM’in takıldığı cihaz 35 491207… Banka SMS’lerini alan telefon Ece’nin telefonu değil.',
+          ),
+          fresh(
+            'CB_CIHAZ',
+            'ev_banka_log',
+            'clue_iphone_imei',
+            'ded_cihaz',
+            'Samsung, iPhone değil',
+            'Bankaya 3 Kasım 14.29’da tanımlanan cihaz bir Samsung; Ece’nin kutusundaki telefon bir iPhone 8. Hesaba o gün giren el, Ece’nin eli değildi.',
           ),
           fresh(
             'CB_KOPYA',
@@ -906,7 +961,7 @@ export const ara: CasePart = {
           has('ev_imei_rapor'),
           S`
             = 24 KASIM 2026 · 23.30 — ARSLAN HUKUK @buro_gece
-            - Duruşmadan önceki gece. İMEİ raporu masamda. Üç hat. Üçüncüsü bir şirket hattı; şirketin adı tanıdık. Numarayı bir yerde gördüm. Nerede?
+            - Duruşmadan önceki gece. İMEİ raporu masamda. Üç hat. Üçüncüsü kurumsal bir hat, abonesi yazmıyor. On haneli bir numara; bir isim değil.
           `,
         ),
         O(S`
@@ -948,9 +1003,12 @@ export const ara: CasePart = {
         - Leyla kapıda durdu, ceketi kolunda. Yağmur dinmişti; ilk kez üç haftadır.
         - Ece akşam bir mesaj atmıştı: "Yarın kendim gibi geleceğim. Bu sefer kim olduğumu biliyorum." Bir gülen yüz yoktu bu sefer. Gerek de yoktu.
         leyla: Yarın herkes sana bir hikâye anlatacak. Hikâyeyi dinle. Sonra kâğıda bak; kâğıt hikâye anlatmaz.
-        - Gitti. Panoya son bir kez baktım. Kırmızı ipler, iğneler, kartlar. Ortada bir boşluk ya da bir isim; hangisi olduğuna yarın salon karar verecek.
+        - Kapıyı kapatmadan durdu, bir şey unutmuş gibi. Geri dönüp masamdaki kalemi aldı, kapağını taktı, bıraktı.
+        leyla: Yarın kalemin ucunu açık bırakma. Kurur. Ben otuz yıldır her duruşmada bir kalem kaybederim; ucu açık olanları.
+        - Gitti. Merdivenlerde ayak sesleri, sonra sokak kapısı, sonra yalnızca yağmurun dinmiş olmasının sesi: bir oluktan son damlalar.
+        - Panoya son bir kez baktım. Kırmızı ipler, iğneler, kartlar. Ortada bir boşluk ya da bir isim; hangisi olduğuna yarın salon karar verecek.
       `),
-      choices: [cont('ARASON_DEVAM', 'Sabah', 'T_00', { role: 'PRIMARY' })],
+      choices: [cont('ARASON_DEVAM', 'Sabah', 'T_KORIDOR', { role: 'PRIMARY' })],
     }),
   ],
   triggers: [dayEnd.trigger],

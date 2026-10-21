@@ -1,6 +1,6 @@
-import { back, option, raise } from '../../../tools/content/src/kit/index.js';
+import { back, has, option, raise } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
-import { B } from './dsl.js';
+import { B, O, W } from './dsl.js';
 import { INV } from './shared.js';
 
 // 58-investigation-terminal: Kent Ulaşım terminali, kayıp eşya bürosu ve hareket memurluğu. Kadroda olmayan memurlar
@@ -32,11 +32,21 @@ P: Ne kayıp ne buluntu. Bir dava. Avukatım.
           next: '$stay',
           effects: [raise('fact_buro_dokuz')],
           score: { ARASTIRMA: 20 },
-          responses: B(`
+          responses: [
+            W(
+              has('clue_sari_not'),
+              `
 @BÜRO MEMURU: Dokuzda. Cumartesi de dokuzda, öğlene kadar. Kapıda yazıyor ama kimse okumaz.
 @BÜRO MEMURU: Cuma akşamı bulan cumartesi dokuzda gelir, öyle bir alışkanlık var. Polise götüren de olur, buraya getiren de. İkisi de olur.
 > Dokuz. “Yarın 9 — karakol.” Arda o saati bir yerden duymuştu. Ya da öyle bir saat, bir öğretmen adayına doğru gelmişti.
+`,
+            ),
+            O(`
+@BÜRO MEMURU: Dokuzda. Cumartesi de dokuzda, öğlene kadar. Kapıda yazıyor ama kimse okumaz.
+@BÜRO MEMURU: Cuma akşamı bulan cumartesi dokuzda gelir, öyle bir alışkanlık var. Polise götüren de olur, buraya getiren de. İkisi de olur.
+> Dokuz. Cumartesi sabahı, kapının açıldığı saat. Bir cüzdan bulan bir öğretmen adayı için de doğru bir saat olabilirdi. Not defterime yazdım.
 `),
+          ],
         }),
         option('TR_DEFTER', '“7 Mart’ta Hat 38’den bir cüzdan teslim edildi mi?”', {
           next: '$stay',

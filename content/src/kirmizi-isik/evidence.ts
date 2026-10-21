@@ -123,7 +123,7 @@ export const evidencePart: CasePart = {
       type: 'ADLI_RAPOR',
       title: 'Otopsi: topuktan 56 cm’de tibia kırığı',
       shortText: 'Sağ alt bacakta, ayakta duran bir yayada tampon çarpmasıyla oluşan tipte kırık.',
-      description: 'Kırık yüksekliği, ilk çarpan aracın ön tamponunun yerden yüksekliğine yaklaşık karşılık gelir.',
+      description: 'Bu tip kırıklarda kırık yüksekliği, çarpan tamponun yerden yüksekliğine yaklaşık karşılık gelir.',
       sourceLabel: 'Otopsi ön raporu',
       icon: 'document',
       tags: kart,
@@ -140,9 +140,8 @@ export const evidencePart: CasePart = {
     clue('clue_sirt', {
       type: 'ADLI_RAPOR',
       title: 'Otopsi: sırtta kanaması az sıyrıklar',
-      shortText: 'Sırt ve sol omuzda, yerde sürüklenmeyle uyumlu, kanaması az sıyrıklar.',
-      description:
-        'Az kanama, sıyrıkların dolaşım zayıflamışken oluştuğunu düşündürebilir; ön rapor bunu yorumlamamış.',
+      shortText: 'Sırt ve sol omuzda, kanaması az sıyrıklar.',
+      description: 'Sıyrıkların zamanı ve ölüme etkisi ön raporda değerlendirilmemiş.',
       sourceLabel: 'Otopsi ön raporu',
       icon: 'document',
       tags: kart,

@@ -1,4 +1,12 @@
-import type { Backdrop, Cond, Expression, Line, LineFx, LineStyle, ResponseBlock } from '../../../tools/content/src/kit/index.js';
+import type {
+  Backdrop,
+  Cond,
+  Expression,
+  Line,
+  LineFx,
+  LineStyle,
+  ResponseBlock,
+} from '../../../tools/content/src/kit/index.js';
 
 // Dava #09'a özgü kısa satır yazımı. Her satır `baş: metin` biçimindedir. Baş:
 //   konuşmacı[.ifade][@biçim][#arkaplan][!efekt]

@@ -1,0 +1,567 @@
+{
+  "outcomes": [
+    {
+      "id": "IKRAR",
+      "class": "OTHER",
+      "priority": 1,
+      "when": { "flag": "ikrar_yolu" },
+      "stamp": "ETİK İHLALİ",
+      "stampTone": "red",
+      "sentence": "5 yıl 2 ay 15 gün hapis",
+      "verdictText": "Sanık Orhan Kılıç’ın, ikrarı ve zararın hükümden önce tamamen giderilmesi gözetilerek, zimmet suçundan TCK 247/1 uyarınca 5 YIL; hileli davranışla işlenmesi nedeniyle 247/2 ile yarı oranında artırılarak 7 YIL 6 AY; zincirleme suç nedeniyle TCK 43/1 ile dörtte bir oranında artırılarak 9 YIL 4 AY 15 GÜN; zararın kovuşturma evresinde gönüllü olarak giderilmesi nedeniyle TCK 248/3 ile üçte bir oranında indirilerek 6 YIL 3 AY; TCK 62/1 ile 5 YIL 2 AY 15 GÜN HAPİS cezası ile cezalandırılmasına; TCK 53; cezanın süresi nedeniyle CMK 231/5 ve TCK 51/1 koşulları bulunmadığına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1) karar verildi.",
+      "reasoning": [
+        { "text": "Sanık, ikinci celsede atılı suçu kabul etmiş ve kamu zararını hükümden önce tamamen gidermiştir." },
+        {
+          "text": "Sanığın ikrarı, kamu zararının varlığı ve miktarı yönünden dosyadaki kayıtlarla örtüşmektedir; zarar da hükümden önce sanık tarafından giderilmiştir."
+        },
+        {
+          "text": "Sanığın ikrarı iptallerin bilgisayar ve saat kayıtlarıyla çelişmekte, sanık bu soruları cevapsız bırakmıştır. Çelişki tutanağa geçirilmiş, ikrar zarar ve iade olgusuyla birlikte değerlendirilmiştir (CMK 217)."
+        },
+        { "text": "Etkin pişmanlık (TCK 248/3) ve takdiri indirim (TCK 62/1) uygulanmıştır." }
+      ],
+      "legalBasis": "TCK 247/1-2, 43/1, 248/3, 61, 62/1, 53; CMK 231/5; TCK 51/1; CMK 273/1; Av.K. 34",
+      "xp": 0,
+      "howToReach": "Etkin pişmanlık yolunu müvekkile dürüstçe anlat; kararı ona bırak. Masum olduğunu söyleyen birine işlemediği bir suçu kabul ettirme.",
+      "ethicsCard": "Masum olduğunu söyleyen müvekkiline, işlemediği bir suçu kabul etmesini önerdin. Etkin pişmanlık (TCK 248) ikrar istemez; sen istedin. Avukat müvekkilini bilgilendirir, seçenekleri ve sonuçlarını dürüstçe anlatır; ama gerçeğe aykırı bir ikrarın yolunu açamaz (Av.K. 34; Avukatlık Meslek Kuralları md. 3–4). Güvenli görünen yol, bir insanın on dokuz yılına mal oldu.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“Beş yıl iki ay on beş gün.” Orhan rakamları duydu. Rakamları ilk kez saymadı."
+            },
+            { "speaker": "narrator", "text": "ADLİYE ARKA KAPISI · ÖĞLEDEN SONRA", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Ring aracı geldi. Orhan arka kapıya yürürken durdu; gözlüğünü çıkardı, mendiliyle sildi, yeniden taktı. Sonra bindi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Nazan arabanın camına elini koydu. Kalabalığın içinde Elif yoktu. Okulda değildi; evde de değildi. Bir arkadaşının evindeydi, telefonunu kapatmıştı."
+            },
+            { "speaker": "narrator", "text": "YILDIRIM · BİR HAFTA SONRA", "style": "card", "bg": "ev" },
+            {
+              "speaker": "narrator",
+              "text": "Daire boşaltılmıştı. Yeni sahipleri cuma taşınacaktı. Nazan son kutuyu bağlarken bana bir defter uzattı: yirmi üçüncü cilt."
+            },
+            { "speaker": "nazan", "text": "Orhan size versin istedi. Son sayfayı okuyun dedi." },
+            {
+              "speaker": "narrator",
+              "text": "Son sayfada, kurşun kalemle, Orhan’ın düzgün el yazısı: “Bugün ilk kez yanlış saydım.”"
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Masamda ince bir kitapçık: “Avukatlık Meslek Kuralları.” Leyla bırakmıştı. Not yoktu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla’nın odasının ışığı yanıyordu. Kapıyı çalmadım. Masasındaki sigara paketini görebiliyordum; ilk kez açılmıştı."
+            },
+            { "speaker": "player", "text": "Güvenli yolu seçtim. Güvenli olan benim içindi.", "style": "thought" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BERAAT_B",
+      "class": "ACQUITTAL",
+      "priority": 2,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "flag": "ercan_sustu" },
+          { "hasEvidence": "ded_kasa" },
+          { "hasEvidence": "ded_sifre" },
+          { "ref": "baskasi" },
+          { "cmp": [{ "var": "pers" }, ">=", 8] },
+          { "cmp": [{ "score": "final" }, ">=", 10000] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok · Adli kontrol kaldırıldı",
+      "verdictText": "Sanık Orhan Kılıç’ın üzerine atılı zimmet suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; hakkındaki adli kontrol tedbirinin kaldırılmasına; duruşma tutanaklarının ve karar örneğinin Ercan Tunalı hakkında zimmet ve resmî belgede sahtecilik suçlarından yürütülen soruşturmaya eklenmek üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1) karar verildi.",
+      "reasoning": [
+        {
+          "text": "Kırk yedi iptalin tamamı, sanık turnikeden çıktıktan sonra, vezne terminalinden değil, ön odadaki ortak bilgisayardan yapılmıştır (bilirkişi raporu; turnike kayıtları)."
+        },
+        {
+          "text": "İptallerin her birinden dakikalar sonra kasa odası, sanığa ait olmayan ve o saatte binada bulunan müdür yardımcılığına tanımlı 02 koduyla açılmıştır."
+        },
+        {
+          "text": "Sanığın şifresi 14 Ocak’ta müdür yardımcılığı kullanıcısının talebiyle sıfırlanmış; şifre zarfı açılıp kapatılmış ve müdür yardımcılığı odasındaki kilitli çekmecede bulunmuştur."
+        },
+        {
+          "when": { "hasEvidence": "ded_sahte_tutanak" },
+          "text": "Teslim tutanaklarının asılları iptallerden sonra yeniden basılan raporlarla ve sanığın fotokopi imzasıyla düzenlenmiştir; sanık parayı eksiksiz teslim etmiş, para teslimden sonra sanığın zilyetliğinde değildir."
+        },
+        {
+          "text": "Tanık Ercan Tunalı kendisini suçlayabilecek sorulara cevap vermekten çekinmiştir (CMK 48); bu çekinme tek başına delil sayılmamış, diğer delillerle birlikte değerlendirilmiştir."
+        },
+        {
+          "when": { "flag": "nitel_uyari" },
+          "text": "Ek savunma gözetildiğinde, şifrenin amirin yazılı talimatıyla teslimi ile zarar arasındaki illiyet bağı üçüncü kişinin kasıtlı fiiliyle kesildiğinden TCK 257/2 suçunun unsurları da oluşmamıştır."
+        },
+        {
+          "when": { "flag": "contra_r5" },
+          "text": "İlk celsede sanığa yüklenen borç saiki dayanaksız kalmış; iptallerin yoğunlaştığı günler başka bir kişinin cuma günleri ödenen borçlarına işaret etmiştir."
+        },
+        { "text": "Deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir." }
+      ],
+      "legalBasis": "CMK 223/2-b, 226; TCK 247, 257/2; CMK 48, 50/1-d, 63, 67/3, 158, 217, 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 120] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 120] }, 1000] }
+        }
+      },
+      "howToReach": "Kullanıcı adının arkasındaki eli göster (terminal + turnike), parayı teslimden sonra kimin tuttuğunu kanıtla (kasa kodu + müdürlük turnikesi, sıfırlama talebi + zarf) ve bilgiyi suç duyurusuyla savcılığa taşı.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“İşlemediği sabit olduğundan… beraatine.” Orhan kelimeleri duydu. Gözlüğünü çıkardı, mendiliyle sildi, yeniden taktı. Sonra bir daha çıkardı; bu kez gözlerini sildi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Nazan dinleyici sırasında ayağa kalktı. İğneler yakasındaydı; hiçbiri düşmedi."
+            },
+            { "speaker": "narrator", "text": "ADLİYE ÖNÜ · ÖĞLEDEN SONRA", "style": "card", "bg": "sokak_sabah" },
+            {
+              "speaker": "narrator",
+              "text": "Dışarıda yağmur dinmişti. İlk kez. Adliyenin merdivenleri ıslak parlıyordu; Uludağ’ın üstünde bulutlar yırtılmış, arasından soluk bir güneş."
+            },
+            { "speaker": "nazan", "text": "Rakam söyle bakalım Orhan." },
+            { "speaker": "orhan", "text": "Sıfır." },
+            { "speaker": "nazan", "text": "Sıfır ne?" },
+            { "speaker": "orhan", "text": "Sıfır makbuz. Sıfır lira. Sıfır gün." },
+            { "speaker": "narrator", "text": "Nazan güldü. Ağzında iğne yoktu; ilk kez iki eliyle güldü." },
+            {
+              "speaker": "narrator",
+              "text": "Hayri Bey merdivenin başında bekliyordu. Ayakkabı kutusunu bana uzattı."
+            },
+            {
+              "speaker": "hayri",
+              "text": "Bunu saklayın avukat hanım. Tarih, makbuzu saklayanlarındır. Siz de bir makbuz sakladınız; sarı, karbonlu."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "melek_hazir" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Melek merdivenlerin dibinde, bir sigarayı yakmadan parmaklarında çeviriyordu. Yanıma geldi."
+            },
+            {
+              "speaker": "melek",
+              "text": "Selim abiyle Orhan abiye çay ısmarlayacağız. Çay ocağında, Rıza abinin semaverinden. Sen de gel canım. Demim acıdır, biliyorsun."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · AKŞAM", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "narrator",
+              "text": "Leyla kapımda durdu. Elinde iki bardak çay. Birini masama bıraktı; bunu hiç yapmazdı."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bugün bir adam şifresini verdiğini söyledi ve kurtuldu. Bunu unutma. Hatasını söyleyen insan suçlu değildir; hatasını saklayan, birilerinin suçuna kapı aralar."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Odasına döndü. Masasının köşesindeki açılmamış sigara paketine bir an baktı; elini uzattı, sonra çekti."
+            },
+            { "speaker": "leyla", "text": "Bir gün sana o eski dosyadan bahsedeceğim Deniz. Tamamını. Bugün değil." },
+            { "speaker": "narrator", "text": "SON", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Ercan Tunalı hakkında zimmet ve resmî belgede sahtecilik suçlarından dava açıldı. Görevden uzaklaştırıldı. Soruşturma dosyasında yasa dışı bahis borçlarına ilişkin kayıtlar da yer aldı: her cuma, bir tahsilatçıya, nakit."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tahsilatçının telefon kaydı da dosyaya girdi. Cuma akşamları maç olan bir kahvehanenin hattı. Gizli numaradan aranan bir avukatın arama kaydıyla aynı hat."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Orhan Kılıç göreve iade edildi. Vezne 2’nin camındaki “KAPALI” yazısı söküldü. İlk akşam kasayı iki kez saydı; tutanağı, teslim alanın önünde, teslim alana imzalattı."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BERAAT_E",
+      "class": "ACQUITTAL",
+      "priority": 3,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "ref": "baskasi" },
+          { "ref": "lehe2" },
+          { "any": [{ "hasEvidence": "ded_teslim" }, { "hasEvidence": "ded_sahte_tutanak" }] },
+          {
+            "any": [
+              { "flag": "fact_aksam" },
+              { "flag": "fact_zarf" },
+              { "flag": "fact_9ocak_orhan" },
+              { "flag": "fact_kredi" }
+            ]
+          },
+          { "cmp": [{ "var": "pers" }, ">=", 6] },
+          { "cmp": [{ "score": "final" }, ">=", 9000] }
+        ]
+      },
+      "stamp": "BERAAT",
+      "stampTone": "green",
+      "header": "TÜRK MİLLETİ ADINA",
+      "sentence": "Ceza yok · Adli kontrol kaldırıldı",
+      "verdictText": "Sanık Orhan Kılıç’ın üzerine atılı zimmet suçunu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; hakkındaki adli kontrol tedbirinin kaldırılmasına; iptalleri gerçekleştiren kişi ya da kişiler yönünden Bursa Cumhuriyet Başsavcılığına suç duyurusunda bulunulmasına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1) karar verildi.",
+      "reasoning": [
+        {
+          "text": "İptallerin tamamı sanık binadan çıktıktan sonra ve sanığın vezne terminalinden değil, ortak kullanımdaki bir bilgisayardan yapılmıştır."
+        },
+        {
+          "when": { "hasEvidence": "ev_bilirkisi" },
+          "text": "Vezne programında terminal kısıtlaması ve küçük tutarlı iptaller için ikinci onay bulunmadığı bilirkişi raporuyla anlaşılmıştır."
+        },
+        {
+          "when": { "hasEvidence": "ded_izin" },
+          "text": "Sanık 9 Ocak’ta yıllık izinde olduğu hâlde aynı akşam onun kullanıcısıyla iptal yapılmıştır."
+        },
+        {
+          "when": { "any": [{ "hasEvidence": "ded_teslim" }, { "hasEvidence": "ded_sahte_tutanak" }] },
+          "text": "Sanığın kasayı eksiksiz teslim ettiği defter ve karbon nüshalarla, dosyadaki tutanakların ise sonradan düzenlendiği bulgularla desteklenmiştir."
+        },
+        {
+          "when": { "any": [{ "hasEvidence": "ded_zarf" }, { "flag": "contra_m2" }, { "flag": "contra_e3" }] },
+          "text": "Veznedar şifrelerinin müdürlükte zarflarda toplandığı anlaşılmıştır; kullanıcı adı tek başına sanığı göstermemektedir."
+        },
+        {
+          "when": { "any": [{ "hasEvidence": "ded_kasa" }, { "flag": "contra_r2" }] },
+          "text": "İptal akşamlarında kasa odasının sanığa ait olmayan bir kodla açıldığı görülmüştür."
+        },
+        {
+          "when": { "flag": "bq_onay" },
+          "text": "Bilirkişi, on bin liranın altındaki iptallerin onay gerektirmediğini ve bu sınırın veznedar ekranında görünmediğini açıklamıştır."
+        },
+        {
+          "when": { "any": [{ "flag": "bq_pc03" }, { "flag": "bq_terminal" }] },
+          "text": "İptallerin yapıldığı bilgisayarın vezne camının arkasından görülemeyen ortak bir odada bulunduğu keşifle tespit edilmiştir."
+        },
+        {
+          "when": { "any": [{ "flag": "arg_kredi" }, { "hasEvidence": "ded_kredi" }] },
+          "text": "Kredinin kaynağı miras tarlanın satış bedeli olup savcılığın ileri sürdüğü saik dayanaktan yoksundur."
+        },
+        {
+          "when": { "flag": "nitel_uyari" },
+          "text": "Ek savunma gözetildiğinde, şifrenin amirin yazılı talimatıyla teslimi ile zarar arasındaki illiyet bağı üçüncü kişinin kasıtlı fiiliyle kesildiğinden TCK 257/2 suçunun unsurları da oluşmamıştır."
+        },
+        {
+          "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2)."
+        }
+      ],
+      "legalBasis": "CMK 223/2-e, 226; TCK 247, 257/2; CMK 63, 67/3, 217, 273/1; Anayasa 38/4; AİHS 6/2",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 100] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
+        }
+      },
+      "howToReach": "Müvekkilini dinle; iptallerin sanık binadan çıktıktan sonra başka bir bilgisayardan yapıldığını göster; teslim tutanaklarını karbonla karşılaştır ve en az iki bağımsız lehe bulgu ekle (izin günü, teslim tutanakları, kasa kodu, zarflar).",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "Türk Milleti adına…" },
+            {
+              "speaker": "narrator",
+              "text": "“Sabit olmadığından… beraatine.” Orhan kelimeleri tek tek duydu; bir yabancı dilden çeviriyormuş gibi. Sonra anladı ve oturdu. Ayakta dinlemesi gerekiyordu; kimse bir şey demedi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Nazan iki elini yüzüne kapadı. Sesi çıkmadı; omuzları sarsıldı, o kadar."
+            },
+            {
+              "speaker": "narrator",
+              "text": "HİSARÖNÜ BELEDİYESİ · BİR HAFTA SONRA",
+              "style": "card",
+              "bg": "sokak_sabah"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Orhan göreve iade dilekçesini yazdı. Kuruşu kuruşuna: maaş farkları, kesintiler, faiz. Dilekçeyi iki kez okudu, imzaladı, imzasının altına tarih ve saat yazdı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Belediye koridorunda iki memur fısıldaştı. Duydum: “Şüpheden yararlandı.” Orhan da duydu. Durmadı."
+            }
+          ]
+        },
+        {
+          "when": { "flag": "suc_duyurusu" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Başsavcılıktaki soruşturma sürüyordu. Zarflar emanette, kodlar bir dosyada, bir isim bir numaranın arkasında. Kimse acele etmiyordu."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "suc_duyurusu" } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Mahkemenin suç duyurusu Başsavcılığa gitti; “kişi ya da kişiler” hakkında. Bir isim yoktu. İsimsiz bir dosya, bir rafta, bir sıra numarasıyla."
+            }
+          ]
+        },
+        {
+          "when": { "hasEvidence": "ded_borc" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Savcı Gökhan Ersoy güvenlik duvarı kayıtlarını istemiş. Bir hafta sonra kısa bir telefon: cuma akşamları bir kahvehaneden yürütülen bir bahis tahsilatı, müdürlükten bir isim, bir de maç olan akşamlar aranan bir hat."
+            },
+            { "speaker": "narrator", "text": "Gizli numaralar da bir kayıttır. Onları da biri okuyor artık." }
+          ]
+        },
+        {
+          "when": { "not": { "hasEvidence": "ded_borc" } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Halkalı cumalar, maç sesli telefonlar, bir “her zamanki gibi.” Kimse onları bir dosyada yan yana koymadı. Belki bir gün biri koyar; ben koymadım."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            { "speaker": "narrator", "text": "Panodaki kırmızı ipi çözdüm. Ortadaki boşluk hâlâ boştu." },
+            {
+              "speaker": "narrator",
+              "text": "Telefon titredi. Hayri Bey’den bir mesaj; noktalama işaretleri eksiksiz: “Avukat hanım, bugün yeni bir kutu açtım. Etiketi: 2026. İlk makbuz sizin dosyanızın tutanağı. Saygılarımla.”"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Bir mesaj daha. Melek: “Orhan abi çay ocağına geldi bugün. Rıza abi semaveri yaktı. Kimse bir şey demedi. İyi ki kimse bir şey demedi canım.”"
+            },
+            { "speaker": "player", "text": "Kayıtlar bir adı sildi. Eli hâlâ göstermediler.", "style": "thought" },
+            { "speaker": "narrator", "text": "Leyla kapıdan uğradı. Paltosu kolunda." },
+            {
+              "speaker": "leyla",
+              "text": "Şüpheden yararlanmak bir eksiklik değildir Deniz. Kanun onu, eksik bırakılan kâğıtlar için yazdı. Eksik bırakan sen değilsin; ama tamamlayan da sen olmadın."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Başsavcılık o dosyayı ya açar ya rafta bırakır. Senin elindeki her kâğıt, o dosyanın kapağını biraz daha kaldırır. Kâğıtlarını sakla."
+            },
+            {
+              "speaker": "player",
+              "text": "Orhan’ın yarın sabah kartını turnikeye okutacağını düşündüm. Kapı açılacak. Ve ön odada, buzlu camın ardında, bir monitörün mavi ışığı yine yanacak.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "NITELENDIRME",
+      "class": "RECHARACTERIZED",
+      "priority": 4,
+      "when": {
+        "all": [
+          { "not": { "flag": "cokus" } },
+          { "flag": "nitel_uyari" },
+          { "ref": "baskasi" },
+          {
+            "any": [
+              { "hasEvidence": "ded_teslim" },
+              { "hasEvidence": "ded_sahte_tutanak" },
+              { "hasEvidence": "ded_izin" }
+            ]
+          },
+          { "cmp": [{ "score": "final" }, ">=", 5000] }
+        ]
+      },
+      "stamp": "NİTELENDİRME",
+      "stampTone": "amber",
+      "sentence": "5 ay hapis · ertelendi",
+      "verdictText": "Sanık Orhan Kılıç’ın üzerine atılı zimmet suçunun unsurları oluşmadığından, CMK 226 uyarınca yapılan ek savunma hakkı hatırlatması doğrultusunda eyleminin ihmal suretiyle görevi kötüye kullanma suçunu oluşturduğu kabul edilerek TCK 257/2 uyarınca takdiren 6 AY; TCK 62/1 ile 5 AY HAPİS cezası ile cezalandırılmasına; sanığın geçmişi ve suç işleme eğilimi gözetilerek cezanın TCK 51/1 uyarınca ERTELENMESİNE, denetim süresinin 1 yıl olarak belirlenmesine (TCK 51/3); kamu zararı giderilmediğinden CMK 231/6-c koşulu bulunmadığından hükmün açıklanmasının geri bırakılmasına yer olmadığına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1) karar verildi.",
+      "reasoning": [
+        {
+          "text": "İptallerin sanık tarafından yapıldığı ve paranın sanık tarafından zimmete geçirildiği sabit olmamıştır; zimmet suçunun unsurları oluşmamıştır."
+        },
+        {
+          "text": "Sanık, kurum yönergesine aykırı olarak şifresini zarf içinde müdürlüğe teslim etmiş ve kamu zararının doğmasına imkân vermiştir."
+        },
+        {
+          "text": "Eylem TCK 257/2 kapsamında değerlendirilmiş; sanığa CMK 226 uyarınca ek savunma hakkı tanınmıştır."
+        },
+        {
+          "when": { "flag": "ihmal_kabul" },
+          "text": "Sanık ek savunmada şifresini vermekle ihmal gösterdiğini kabul etmiştir."
+        },
+        {
+          "text": "Kamu zararı giderilmediğinden hükmün açıklanmasının geri bırakılması koşulları oluşmamıştır (CMK 231/6-c); sanığın sabıkasız geçmişi gözetilerek takdiri indirim ve erteleme uygulanmıştır."
+        }
+      ],
+      "legalBasis": "TCK 257/2, 61, 62/1, 51/1, 51/3; CMK 225, 226, 231/6-c, 273/1",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 85] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
+        }
+      },
+      "howToReach": "Zarf gerçeğini ortaya çıkar (nitelendirme uyarısı gelir); iptallerin sanık binadan çıktıktan sonra başka bir bilgisayardan yapıldığını göster ve en az bir kayıt bulgusu ekle (teslim tutanakları ya da izin günü).",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "baskan", "text": "Sanığın cezalandırılmasına…" },
+            {
+              "speaker": "narrator",
+              "text": "“Beş ay. Ertelendi.” Orhan rakamı duydu ve bana döndü. Gözlüğünün arkasından, bir hesap sorar gibi değil; bir hesap verir gibi baktı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "ADLİYE MERDİVENLERİ · ÖĞLEDEN SONRA",
+              "style": "card",
+              "bg": "sokak_yagmur"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yağmur hafiflemişti. Nazan şemsiyeyi açtı, Orhan’ın başına tuttu; kendisi ıslandı."
+            },
+            { "speaker": "orhan", "text": "Hesabını vereceğim dediğim buydu efendim. Az değil. Doğru." },
+            { "speaker": "nazan", "text": "Doğru mu? Beş ay doğru mu?" },
+            { "speaker": "orhan", "text": "Bir zarfın bedeli Nazan. Kırk yedi makbuzun değil. Bir zarfın." },
+            {
+              "speaker": "player",
+              "text": "Zimmet değil, ihmal. Bir zarfın bedeli. Hukuken bir kazanım; bir adamın sicilinde, yine de bir satır.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "suc_duyurusu" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Başsavcılıktaki soruşturma sürüyordu. Zarflar emanette. Orhan’ın “ihmali” bir mahkûmiyet kararında; başkasının kastı bir soruşturma dosyasında. İki kâğıt, iki ayrı rafta."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            { "speaker": "narrator", "text": "Leyla dosyayı okudu, kapattı." },
+            {
+              "speaker": "leyla",
+              "text": "Terazinin bir kefesine “yapmadı”, öbürüne “yaptıysa da ihmal” koydun. Heyet ikinci kefeyi tuttu. Bazen adalet, ağır olanı değil, tutulabileni seçer."
+            },
+            {
+              "speaker": "player",
+              "text": "İstinaf var. Orhan istemiyor. “Hesabını verdim efendim” diyor. Belki haklı. Belki de bu, on dokuz yıllık bir alışkanlığın son cümlesi.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MAHKUMIYET",
+      "class": "CONVICTION",
+      "priority": 5,
+      "when": { "all": [] },
+      "stamp": "MAHKÛMİYET",
+      "stampTone": "red",
+      "sentence": "7 yıl 9 ay 22 gün hapis",
+      "verdictText": "Sanık Orhan Kılıç’ın zimmet suçundan TCK 247/1 uyarınca 5 YIL; hileli davranışla işlenmesi nedeniyle 247/2 ile yarı oranında artırılarak 7 YIL 6 AY; zincirleme suç nedeniyle TCK 43/1 ile dörtte bir oranında artırılarak 9 YIL 4 AY 15 GÜN; TCK 62/1 ile 7 YIL 9 AY 22 GÜN HAPİS cezası ile cezalandırılmasına; TCK 53; kamu zararının tahsili için katılan kurumun hukuk yoluna başvurma hakkının saklı tutulmasına; cezanın süresi nedeniyle CMK 231/5 ve TCK 51/1 koşulları bulunmadığına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1) karar verildi.",
+      "reasoning": [
+        { "text": "İptaller sanığın kullanıcı adıyla yapılmış; teslim tutanakları sanığın imzasını taşımaktadır." },
+        {
+          "when": { "not": { "flag": "cokus" } },
+          "text": "Savunmanın kayıtlara yönelik itirazları somut delillerle desteklenmemiştir."
+        },
+        {
+          "when": { "flag": "cokus" },
+          "text": "Savunmanın inandırıcılığı duruşmada çökmüş; heyet iddianamedeki anlatımı esas almıştır."
+        }
+      ],
+      "legalBasis": "TCK 247/1-2, 43/1, 61, 62/1, 53; CMK 231/5; TCK 51/1; CMK 273/1",
+      "xp": {
+        "if": {
+          "when": { "flag": "cokus" },
+          "then": {
+            "if": {
+              "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+              "then": { "div": [{ "mul": [{ "score": "final" }, 30] }, 2000] },
+              "else": { "div": [{ "mul": [{ "score": "final" }, 30] }, 1000] }
+            }
+          },
+          "else": {
+            "if": {
+              "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+              "then": { "div": [{ "mul": [{ "score": "final" }, 60] }, 2000] },
+              "else": { "div": [{ "mul": [{ "score": "final" }, 60] }, 1000] }
+            }
+          }
+        }
+      },
+      "howToReach": "Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir. Kayıtların bütün sütunlarını okumadan, teslim tutanaklarını karbonla karşılaştırmadan ve tanıkları kendi kâğıtlarıyla sınamadan beraat gelmez.",
+      "epilogue": [
+        {
+          "when": { "flag": "cokus" },
+          "lines": [
+            { "speaker": "narrator", "text": "SALON · HÜKÜMDEN SONRA", "style": "card", "bg": "durusma_salonu" },
+            {
+              "speaker": "narrator",
+              "text": "Salon boşaldı. Orhan’ı adli kontrol kâğıdıyla birlikte koridora çıkardılar; tutuklanmadı, istinafı dışarıda bekleyecekti."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Gökhan Ersoy dosyasını topladı. Kapıya giderken durdu, bana döndü."
+            },
+            {
+              "speaker": "savci",
+              "text": "Rakamlarla kazanılmaz avukat hanım. Ama rakamsız da kazanılmaz. Bu dosyada rakamlar vardı."
+            },
+            { "speaker": "narrator", "text": "Kapı arkasından kapandı. Kalorifer peteği tıkırdadı. Başka ses yoktu." }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · HÜKÜMDEN SONRA", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "“Yedi yıl dokuz ay yirmi iki gün.” Rakam koridora benden önce çıktı. Orhan rakamı tekrarlamadı. İlk kez bir rakamı tekrarlamadı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Nazan telefonunu çıkardı, bir numara aradı. Emlakçı. Sesini alçaltmadı."
+            },
+            { "speaker": "nazan", "text": "Satılık. Evet. Ne kadar çabuk olursa." },
+            { "speaker": "narrator", "text": "Orhan karısının elinden telefonu almadı. Gözlüğünü çıkardı; silmedi." },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "style": "card", "bg": "buro_gece" },
+            { "speaker": "player", "text": "Kırk yedi satır. Birini bile çeviremedim.", "style": "thought" },
+            {
+              "speaker": "player",
+              "text": "İstinaf var. Her zaman bir sonraki kapı vardır. Ama bu gece bütün kapılar kapalı; bir tek ön odanın buzlu camlı kapısı hariç. O kapının ardında hâlâ bir monitör yanıyor.",
+              "style": "thought"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

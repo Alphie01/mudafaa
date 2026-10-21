@@ -27,7 +27,9 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
 | TCK 270 | IKRAR etik kartı, ARA_ARDA_IKRAR | 2026-10-20 | Suçu üstlenme: yetkili makamlara gerçeğe aykırı olarak suçu işlediğini bildirmek. |
 | TCK 277 | INV_RECEP (baskı seçeneği), rapor | 2026-10-20 | Tanığı hukuka aykırı olarak etkilemeye teşebbüs. |
 | CMK 48 | H2_RC (şoför), SUC_SOFOR geri bildirimi | 2026-10-20 | Tanığın kendisini kovuşturmaya uğratabilecek sorulara cevap vermekten çekinmesi. |
-| CMK 53, 54, 55, 59 | Tanık dinleme | 2026-10-20 | Tanığa görevinin önemi, yemin biçimi, ifadenin kesintisiz alınması. |
+| CMK 53, 54, 55, 59 | Tanık dinleme; H2_RC0 (59/1) | 2026-10-20 | Tanığa görevinin önemi, yemin biçimi, ifadenin kesintisiz alınması. |
+| CMK 212 | H2_RC0 | 2026-10-20 | Tanığın önceki ifadesi, hatırlamadığını söylerse ya da duruşmadaki beyanıyla çelişirse okunabilir; savcının önce kolluk ifadesini okuyup “aynen tekrar ediyor musunuz” demesine itiraz bu yüzden yerindedir. |
+| Anayasa 38/4 | H2_EK_Q2 (EQ2_ITIRAZ), BERAAT_E | 2026-10-20 | Suçluluğu hükmen sabit oluncaya kadar kimse suçlu sayılamaz; sanık suçsuzluğunu ispatla yükümlü değildir. |
 | CMK 141, 231/3 | BERAAT hükümleri | 2026-10-20 | Tazminat hakkının bildirilmesi. |
 | CMK 147 | H1_00 | 2026-10-20 | Susma hakkının hatırlatılması. |
 | CMK 158 | ARA_SUC, ARA_YANLIS, Leyla | 2026-10-20 | İhbar ve şikâyet Cumhuriyet Başsavcılığına yapılır. |
@@ -35,26 +37,28 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
 | CMK 201/1 | H1_03, H1_01S3, H2_RC0 | 2026-10-20 | Doğrudan soru; soruya itirazda başkan/hâkim karar verir. |
 | CMK 206/1–2, 207 | H1_05, H1_06, H2_ORHAN, INV_DIL | 2026-10-20 | Delil talebi ve ret sebepleri; geç bildirim ret sebebi değildir. |
 | CMK 210 | H1_06, rapor | 2026-10-20 | Doğrudan doğruyalık; tanığın duruşmada dinlenmesi. |
-| CMK 216/2–3 | H2_MUT, H2_SON | 2026-10-20 | Mütalaaya cevap hakkı; son söz. |
+| CMK 216/1–3 | H2_MUT (MC_C çeldiricisi 216/1), H2_SON | 2026-10-20 | Ortaya konan delillerin tartışılmasında söz sırası (savcının esas hakkındaki mütalaası bu aşamadadır); mütalaaya cevap hakkı; son söz. |
 | CMK 217/1–2 | H1_05, H2_ORHAN | 2026-10-20 | Hüküm duruşmada tartışılan delillere dayanır; her türlü hukuka uygun delil. |
 | CMK 223/2-b, 2-e | BERAAT_B, BERAAT_E | 2026-10-20 | Yüklenen suçun sanık tarafından işlenmediğinin sabit olması / işlendiğinin sabit olmaması. |
 | CMK 225/2 | H107_BAGLI | 2026-10-20 | Mahkeme nitelendirmede iddia ve savunmayla bağlı değildir. |
 | CMK 226/1, 226/3 | H1_07, H2_EK_S | 2026-10-20 | Hukuki niteliğin değişmesinde ek savunma; istem üzerine süre. |
-| CMK 231/5–12 | IKRAR, NITELENDIRME, MAHKUMIYET | 2026-10-20 | HAGB: ≤2 yıl hapis veya adli para cezası; kasıtlı suçtan mahkûmiyet yok, zarar giderilmiş; 5 yıl denetim; istinaf (272/3 saklı). |
+| CMK 231/3, 231/5–12 | BERAAT (231/3: tazminat bildirimi), IKRAR, NITELENDIRME, MAHKUMIYET (231/6-c, 231/9) | 2026-10-20 | 231/3: beraat eden sanığa tazminat hâli bildirilir. HAGB: ≤2 yıl hapis veya adli para cezası; kasıtlı suçtan mahkûmiyet yok, zarar giderilmiş (6-c); 6-c derhal karşılanamazsa zarar denetim süresince aylık taksitlerle giderilmek koşuluyla da HAGB verilebilir (9); 5 yıl denetim; istinaf (272/3 saklı). Metin 7589 sayılı Kanunla değişik hâliyle mevzuat.gov.tr PDF'inden (pdftotext) satır satır okundu. |
 | CMK 253/1, 254/1 | H1_02 (Gülten: "uzlaşmaya gitmedim"), NITELENDIRME | 2026-10-20 | Hırsızlık (141) ve şikâyete bağlı suçlar uzlaştırma kapsamında; kovuşturmada kapsam anlaşılırsa uzlaştırma bürosuna gönderilir. |
 | CMK 272/3-a, 273/1 | Hükümler | 2026-10-20 | 15.000 TL dahil adli para cezası mahkûmiyetleri istinafa kapalı; istinaf süresi gerekçeli hükmün tebliğinden itibaren iki hafta. |
 | Av.K. 34 | IKRAR, tanık temasları | 2026-10-20 | Avukatın doğruluk ve özen yükümlülüğü. |
 
 ## 2. Ceza hesabı
 
-- **BERAAT_B / BERAAT_E:** ceza yok. Tazminat bildirimi (CMK 141, 231/3); emanetteki cüzdanın müştekiye, 600 TL ile notun sanığa
-  iadesi. Sanık 7 Mart'ta gözaltına alınıp ifadesi gece alınmıştır (TP_ILK_AVUKAT); bu nedenle tazminat bildirimi yerindedir.
+- **BERAAT_B / BERAAT_E:** ceza yok. Tazminat bildirimi (CMK 141, 231/3); soruşturmada yediemin sıfatıyla müştekiye teslim edilen
+  cüzdanın müştekide bırakılması, adliye emanetindeki 600 TL ile notun sanığa iadesi (bkz. §4.13). Sanık 7 Mart'ta gözaltına alınıp ifadesi gece alınmıştır (TP_ILK_AVUKAT); bu nedenle tazminat bildirimi yerindedir.
 - **NITELENDIRME (TCK 160):** seçimlik cezadan adli para cezası seçilir: 60 gün → TCK 62/1 ile 50 gün → günlüğü 100 TL (TCK 52/2
   alt sınır) → 5.000 TL. Cüzdan zarar görmeden teslim edildiğinden zarar yoktur; sabıka yoktur → HAGB (CMK 231/5), 5 yıl denetim.
   CMK 272/3-a uyarınca 15.000 TL dahil adli para cezası mahkûmiyeti istinafa kapalı olduğundan ve 231/12 "272/3 saklı" dediğinden
   hüküm "kesin" yazılmıştır.
-- **MAHKUMIYET (TCK 141/1):** temel ceza alt sınır 1 yıl → TCK 62/1 ile 10 ay. Zarar (nakit + kart harcamaları) giderilmediği için
-  HAGB koşulu (231/6-c) yoktur. TCK 51/1 ile erteleme, denetim süresi 1 yıl (51/3: cezadan az olamaz; 10 ay < 1 yıl). Kısa süreli
+- **MAHKUMIYET (TCK 141/1):** temel ceza alt sınır 1 yıl → TCK 62/1 ile 10 ay. Zarar yalnızca atılı eylemle sınırlıdır: cüzdandaki
+  1.200 TL nakit (kartların kötüye kullanılması, TCK 245, sanığa yüklenmemiştir; o harcamalar bu hükümde zarar sayılmaz). Zarar
+  giderilmediği ve sanığın zararı denetim süresince aylık taksitlerle giderme yönünde bir beyanı da bulunmadığı (231/9) için HAGB
+  koşulu (231/6-c) yoktur. TCK 51/1 ile erteleme, denetim süresi 1 yıl (51/3: cezadan az olamaz; 10 ay < 1 yıl). Kısa süreli
   ertelenmiş hapiste TCK 53/1 uygulanmaz (53/4). İstinaf: CMK 273/1.
 - **IKRAR:** 141/1 → 1 yıl → TCK 168/2 (kovuşturma başladıktan sonra tam tazmin) 1/2 → 6 ay → TCK 62/1 → 5 ay. Zarar giderildi,
   sabıka yok → HAGB, 5 yıl denetim; istinaf açık (231/12; hapis cezası 272/3-a dışında).
@@ -108,15 +112,35 @@ Metinler aşağıdaki güncel mevzuat PDF'leriyle karşılaştırılmıştır (e
 11. **Asliye ceza ve hitap:** Tek hâkimli mahkemede hitap "Sayın Hâkim"dir (kılavuzdaki "Sayın Başkan" heyetli mahkemeler içindir).
 12. **Kişisel veriler ve kurumlar:** Kent Ulaşım A.Ş., Altıparmak Tekel Büfe ve kişiler kurgusaldır; 153 Çözüm Merkezi genel bir belediye
     hattı olarak anılır.
+13. **Cüzdanın akıbeti (yediemin).** Cüzdan soruşturmada yediemin sıfatıyla müştekiye teslim edilmiştir (INV_EMANET e1 satırı, el
+    koyma tutanağı açıklaması); bu yüzden müşteki 1. celsede cüzdanı kendi çantasından çıkarır (H102_FOTO) ve ARA'da evinde gösterir
+    (GL_FOTO). Beraat hükümleri “yediemin sıfatıyla müştekiye teslim edilen cüzdanın müştekide bırakılmasına” der; adliye emanetinde
+    yalnızca zarf (600 TL) ve not kalır, bunlar sanığa iade edilir. NITELENDIRME de aynı formülü kullanır.
+14. **“Malik gibi tasarruf” (TCK 160).** Kanun “iade etmeksizin veya yetkili mercileri durumdan haberdar etmeksizin, malik gibi
+    tasarrufta bulunan” der. Malik gibi tasarruf; eşyayı gizlemek, harcamak, kullanmak, elden çıkarmak gibi malikin yetkilerini
+    kullanma görünümündeki davranışlardır. Bulunan eşyayı iade/ihbar etmeden yalnızca bir gece elde tutmanın tek başına tasarruf
+    sayılıp sayılmayacağı tartışmalıdır. İçerik şu kararı verir: savunma ve Leyla “gizlemek, harcamak, kullanmak, elden çıkarmak”
+    tanımını kullanır (“saklamak” tanımdan çıkarıldı; çünkü Arda'nın yaptığı tam da bir gece saklamaktı ve savunma kendi aleyhine
+    konuşuyordu). NITELENDIRME hükmü ise, teslim girişimleri ispatlanamadığında, sanığın eşyayı iade ve ihbar yükümlülüğünü yerine
+    getirmeksizin kendi sırt çantasında ve evinde tasarruf alanında tutmasını mahkemenin takdiren malik gibi tasarruf saydığını
+    açıkça gerekçelendirir; aynı hüküm, tam kayıt incelenmediğinden hırsızlığın ispatlanamadığını ve cüzdanın bulan bakımından
+    kaybedilmiş eşya hükmünde sayıldığını da yazar (§4.1). Bu, bir insan avukatın ikinci incelemesi için işaretli yorumdur.
+15. **Kolluk ifadesinin okunması (H2_RC0).** CMK 59/1 tanığın önce kesintisiz anlatmasını, CMK 212 önceki ifadenin ancak hatırlamama
+    ya da çelişki hâlinde okunmasını öngörür. Savcının ifadeyi baştan okuyup “aynen tekrar ediyor musunuz” demesine itiraz doğru
+    hamle; “ifade müdafisiz alındı” (müdafi hakkı tanığa değil şüpheliye aittir) ve “işveren ilişkisi” (çekinme/yasak sebebi değil)
+    çeldiricidir.
 
 ## 5. Hassas konu denetimi
-Lineup sınırı: cinsel suçlar, çocuklara yönelik suçlar ve terör yok. Bu davada: yok. Mağdur yaşlı bir kadındır; özel beceri
-(yaşlıya karşı) artırımı (142/2 son cümle) uygulanmadı, yalnızca nitelendirme tartışmasının arka planıdır.
+Lineup sınırı: cinsel suçlar, çocuklara yönelik suçlar ve terör yok. Bu davada: yok. Mağdur yaşlı bir kadındır. 142/2 son cümlesindeki
+artırım (suçun (b) bendindeki surette “beden veya ruh bakımından kendisini savunamayacak durumda olan kimseye karşı” işlenmesi)
+uygulanmadı; yaş tek başına bu durumu göstermez ve hiçbir sonuç 142/2-b ile hüküm kurmaz.
 
 ## 6. Öz-inceleme kontrol listesi
 - [x] Bütün madde atıfları güncel metinle doğrulandı (tablo dolu).
 - [x] Ceza hesapları alt/üst sınırlar içinde ve aritmetik doğru.
 - [x] Asliye cezada tek hâkim; hitap "Sayın Hâkim"; görevli mahkeme doğru.
 - [x] Hüküm metinlerinde istinaf (CMK 273/1) ya da kesinlik (272/3-a) ve tazminat bildirimi (231/3) var.
+- [x] Cüzdanın akıbeti bütün metinlerde tutarlı (yediemin; §4.13); MAHKUMIYET'te zarar 1.200 TL ile sınırlı, 231/9 tartışıldı.
+- [x] Duruşma seçenek etiketlerinde madde numarası yok; madde, hâkimin cevabında ve geri bildirimde.
 - [x] Etik ihlal seçenekleri doğru maddeye bağlı (Av.K. 34, TCK 270, 277, meslek kuralları).
 - [x] Madde atıfları gündelik konuşmada değil; Leyla'nın açıklamalarında, geri bildirimde, rapor ve hükümde, resmî duruşma dilinde.

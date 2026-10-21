@@ -70,7 +70,7 @@
             },
             {
               "speaker": "narrator",
-              "text": "Gece rüyamda bir trafik lambası gördüm; üç rengi aynı anda yanıyordu. Uyandığımda saçma geldi. Sonra o kadar saçma gelmedi."
+              "text": "Gece rüyamda yine o kavşaktaydım. Yağmur, ıslak asfalt, karşıda Necati’nin kırmızısı. Uyandığımda saat dördü geçiyordu; bir daha uyuyamadım."
             }
           ]
         },
@@ -545,6 +545,14 @@
               "text": "Bütünü gören tanık olmaz Deniz. Bütünü sen kurarsın, hâkim de senin kurduğunu sınar. Bir parça eksikse o parçayı şüphe doldurur."
             },
             {
+              "speaker": "narrator",
+              "text": "Leyla gözlüğünü masaya bıraktı. Pencerenin camında yağmur, camın arkasında Uludağ’ın karanlık sırtı. Masasındaki ters çerçeveye dokundu; çevirmedi."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir parçayı fazla parlatma. Taksicinin yanlışını bulunca sevinirsin; hâkim ise kendine sorar: bu avukat bütünü mü kuruyor, yoksa yalnızca bir tanığı mı yıkıyor?"
+            },
+            {
               "speaker": "leyla",
               "text": "Şüphe sanık lehinedir. Ama şüpheyi “olabilir” diye değil, “olmadığı gösterilemedi” diye kurarsın. İkisi aynı cümle değil."
             },
@@ -598,7 +606,16 @@
             },
             {
               "speaker": "narrator",
-              "text": "Gökdere’den bir kamyonet geçti, sonra bir otomobil. Saydım: aralarında altı saniye. Kimse kimseye bakmadı."
+              "text": "Bir taksi yanaştı, şoför camı indirdi: “Bir yere mi abla?” Hayır dedim. Baktı, anlamadı, gitti. Gece yarısı bir kavşakta duran bir kadın; herkes bir hikâye uydurur."
+            },
+            {
+              "speaker": "player",
+              "text": "Necati de o gece burada durdu. Kendi lambasının kırmızısına baktı. Sonra bir gümbürtü duydu ve kırmızıyı karşı yöne taşıdı. Kötü niyetle değil; insan beyni boşlukları sever.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Gökdere’den arada bir araç geçiyordu. Islak asfaltta lastik sesi, sonra uzun bir sessizlik. Kimse kimseye bakmadı."
             }
           ]
         },
@@ -614,10 +631,7 @@
               "speaker": "narrator",
               "text": "Gece yarısından sonra kavşağa geri döndüm. Aynı saat, aynı yağmur. Köşede durup ışıkların değişmesini izledim. Yeşil, sarı, kırmızı. Kusursuz."
             },
-            {
-              "speaker": "narrator",
-              "text": "Gökdere’den bir kamyonet geçti, sonra bir otomobil. Kimse kimseye bakmadı."
-            },
+            { "speaker": "narrator", "text": "Gökdere’den arada bir araç geçiyordu. Kimse kimseye bakmadı." },
             {
               "speaker": "player",
               "text": "Bu kavşakta o gece biri bir şey gördü, biri bir şey duydu, biri bir şey hissetti. Ben hâlâ hiçbirini tam bilmiyorum.",
@@ -715,6 +729,19 @@
             {
               "speaker": "leyla",
               "text": "Raporun her cümlesinin altında bir varsayım var. Varsayımları say: ışık, iz, çarpma. Hangisini ölçmüş, hangisini sanmış?"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Ben ilk yıllarımda raporları sondan başa okurdum. Önce sonucu, sonra gerekçeyi. Yanlış. Bilirkişi de öyle yazar; sonucu bilir, gerekçeyi sonradan döşer."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Sen baştan oku. Her cümlenin yanına bir soru işareti koy. Cevabı raporun içinde olmayan soru işaretleri, itirazının iskeletidir."
+            },
+            {
+              "speaker": "player",
+              "text": "Soru işaretleri. Leyla’nın masasında kırmızı kalemle çizilmiş soru işaretleriyle dolu bir dosya gördüm bir kez; kazanılmış bir dosyaydı.",
+              "style": "thought"
             }
           ]
         },
@@ -796,6 +823,15 @@
             {
               "speaker": "leyla",
               "text": "Tanığın nerede durduğunu biliyorsun. Şimdi oradan ne görüldüğünü düşün. Dürüst tanık, gördüğünü sandığını da anlatır."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Tanığı yalancı ilan etmek kolaydır, hâkim de sevmez. Tanığın neyi görebileceğini göster; gerisini hâkim kendisi düşünür. Kimseyi küçük düşürmeden."
+            },
+            {
+              "speaker": "player",
+              "text": "Necati yalan söylemiyor. Kırk yıllık bir şoför, kendi önündeki kırmızıya bakıyor. Bunu ona ben değil, durduğu yer söyleyecek.",
+              "style": "thought"
             }
           ]
         },
@@ -820,7 +856,7 @@
             },
             {
               "speaker": "leyla",
-              "text": "Bir de illiyet. Bir sonuç için ceza vermek, o sonuca senin davranışının yol açtığını göstermeyi gerektirir. Orada olmak yetmez."
+              "text": "Bir de illiyet. Bir sonuç için ceza vermek, davranış ile sonuç arasındaki bağı göstermeyi gerektirir. O bağı ispat yükü iddiadadır."
             }
           ]
         }
@@ -893,23 +929,125 @@
       "lines": [
         {
           "when": {
-            "cmp": [
-              {
-                "add": [
-                  { "if": { "when": { "hasEvidence": "ded_fren" }, "then": 1, "else": 0 } },
-                  { "if": { "when": { "hasEvidence": "ded_cam" }, "then": 1, "else": 0 } },
-                  { "if": { "when": { "hasEvidence": "ded_yukseklik" }, "then": 1, "else": 0 } },
-                  { "if": { "when": { "hasEvidence": "ded_saat" }, "then": 1, "else": 0 } }
-                ]
-              },
-              ">=",
-              2
+            "all": [
+              { "hasEvidence": "ded_fren" },
+              { "hasEvidence": "ded_cam" },
+              { "hasEvidence": "ded_yukseklik" },
+              { "hasEvidence": "ded_saat" }
             ]
           },
           "lines": [
             {
               "speaker": "player",
-              "text": "Fren izi, camlar, kırığın yüksekliği. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "text": "Fren izi, camlar, kırığın yüksekliği ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [{ "hasEvidence": "ded_fren" }, { "hasEvidence": "ded_cam" }, { "hasEvidence": "ded_yukseklik" }]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Fren izi, camlar ve kırığın yüksekliği. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [{ "hasEvidence": "ded_fren" }, { "hasEvidence": "ded_cam" }, { "hasEvidence": "ded_saat" }]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Fren izi, camlar ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [{ "hasEvidence": "ded_fren" }, { "hasEvidence": "ded_yukseklik" }, { "hasEvidence": "ded_saat" }]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Fren izi, kırığın yüksekliği ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [{ "hasEvidence": "ded_cam" }, { "hasEvidence": "ded_yukseklik" }, { "hasEvidence": "ded_saat" }]
+          },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Camlar, kırığın yüksekliği ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_fren" }, { "hasEvidence": "ded_cam" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Fren izi ve camlar. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_fren" }, { "hasEvidence": "ded_yukseklik" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Fren izi ve kırığın yüksekliği. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_cam" }, { "hasEvidence": "ded_yukseklik" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Camlar ve kırığın yüksekliği. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_fren" }, { "hasEvidence": "ded_saat" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Fren izi ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_cam" }, { "hasEvidence": "ded_saat" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Camlar ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_yukseklik" }, { "hasEvidence": "ded_saat" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Kırığın yüksekliği ve kameradaki yedi saniye. Ayrı ayrı her biri bir tesadüf. Birlikte bir soru: o gece kavşakta Volkan’dan başka kim vardı?",
               "style": "thought"
             }
           ]
@@ -961,11 +1099,23 @@
       "eyebrow": "DAVA #03 · SORUŞTURMA",
       "lines": [
         {
-          "when": { "any": [{ "hasEvidence": "ded_ariza" }, { "hasEvidence": "ev_sinyal_log" }] },
+          "when": {
+            "all": [{ "any": [{ "hasEvidence": "ded_ariza" }, { "hasEvidence": "ev_sinyal_log" }] }, { "met": "hamdi" }]
+          },
           "lines": [
             {
               "speaker": "player",
               "text": "Ve makine. Kavşağın makinesi o gece doğruyu göstermiyordu. Bunu bir teknisyen biliyordu, bir iş emri biliyordu. Bilirkişi bilmiyordu.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "any": [{ "hasEvidence": "ded_ariza" }, { "hasEvidence": "ev_sinyal_log" }] },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Ve makine. Kavşağın makinesi o gece doğruyu göstermiyor olabilir. Bir kayıt bunu fısıldıyor. Bilirkişi o kaydı hiç istememiş.",
               "style": "thought"
             }
           ]
@@ -1046,6 +1196,24 @@
             {
               "speaker": "player",
               "text": "Volkan’ın uzakta gördüğü tek kırmızı lamba. Bir hayal mi, bir hatıra mı? Hatıralar delil değildir; ama bazen delile giden yolu gösterir.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonuma Gül’den bir fotoğraf düştü: masada iki çay bardağı, birinin yanında Volkan’ın eli. Altında yazı yok. Gerek de yoktu."
+            },
+            {
+              "speaker": "player",
+              "text": "Yarın sabah bir adam bir salona girecek ve oradan ya hafiflemiş ya ağırlaşmış çıkacak. Bu gece ikisinin arasındaki fark bu panodaki kâğıtlar.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Saat bire geliyordu. Yağmur camlara vurdu, sonra durdu. Panonun önünde, ayakta, kâğıtları bir kez daha sıraladım: rapor, tutanak, otopsi, kayıtlar."
+            },
+            {
+              "speaker": "player",
+              "text": "Yarın bir hâkime bir hikâye anlatmayacağım. Bir raporun dayanaklarını tek tek göstereceğim. Hikâyeyi hâkim kendisi kurar; ben yalnızca tuğlaları getiririm.",
               "style": "thought"
             }
           ]

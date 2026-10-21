@@ -142,26 +142,26 @@ const hubLines = [
   W(
     cmp(v('day'), '==', 1),
     `
-# GÜN 1/3 · BİRİNCİ CELSEYE 12 GÜN
+# GÜN 1/3 · BİRİNCİ CELSEYE 8 GÜN
 > Hedef: teşhisin nasıl yapıldığını ve mağdurun o gece ilk ne dediğini bul.
 `,
   ),
   W(
     all(cmp(v('day'), '==', 2), any(has('clue_halka'), has('clue_foto_farkli'), has('clue_gamze_beyan'))),
     `
-# GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN
+# GÜN 2/3 · BİRİNCİ CELSEYE 6 GÜN
 > Hedef: kâğıtlarda bir çatlak var. Şimdi Barış’ın o saatte nerede olduğunu kim gördü, ne kanıtlar?
 `,
   ),
   W(
     cmp(v('day'), '==', 2),
     `
-# GÜN 2/3 · BİRİNCİ CELSEYE 9 GÜN
+# GÜN 2/3 · BİRİNCİ CELSEYE 6 GÜN
 > Hedef: Barış o saatte neredeydi? Kim gördü, ne kanıtlar? Kâğıtları da unutma.
 `,
   ),
   O(`
-# GÜN 3/3 · BİRİNCİ CELSEYE 6 GÜN
+# GÜN 3/3 · BİRİNCİ CELSEYE 4 GÜN
 > Hedef: dilekçe ve tahta. Kürsüde o kadına ne soracaksın; neyi göstereceksin?
 `),
 ];
@@ -329,7 +329,7 @@ baris: Derya ablam… o bizim babamız gibi. Salonu açtığından beri evi o ç
 baris: Amcamın oğlu Tolga da var; kardeş gibi büyüdük. O gelemiyor görüşe; inşaatta çalışıyor, gündüz izin vermiyorlar.
 ~ Bir aile. Herkesin bir yeri, herkesin bir yükü.
 baris: Ben kurye oldum, Tolga inşaata gitti. Ben gece, o gündüz. Bayramlarda bile zor görüşüyoruz artık. Eskiden aynı mahallede top oynardık.
-~ Bir anne, bir abla, bir kuzen. Herkes birini koruyor bu ailede. Barış’ı kim koruyacak?
+~ Görüş listesinde iki isim, bir de gelemeyen bir kuzen. Camın arkasında bir çocuk; camın önünde, artık, ben.
 `),
         },
         hard: {
@@ -878,13 +878,15 @@ ferhat: Yumruk, bıçak… Kavgacı bir çocuk avukat hanım. Bunu ben uydurmad�
     }),
     back('FERHAT_BITIR', 'Teşekkür et, ayrıl'),
     option('FQ_TEHDIT', '“Sizi Başsavcılığa şikâyet edeceğim.”', {
-      score: { SORGULAMA: -30 },
-      bad: 'Tanık olacak kolluk görevlisini sokakta tehdit etmek ondan bilgi almaz; duruşmada sana karşı daha da kapanır.',
+      score: { SORGULAMA: -80 },
+      bad: 'Tanık olacak kolluk görevlisini sokakta tehditle sıkıştırmak ondan bilgi almaz; duruşmada sana karşı kapanır. Usulsüzlük varsa yolu tehdit değil, yazılı suç duyurusudur (CMK 158).',
       category: 'SORGULAMA',
       responses: B(`
 ferhat/kizgin: Edin. Bir dilekçe daha, bir soruşturma daha. Ben o dört kadının yüzüne bakıyorum her gün. Siz kime bakıyorsunuz?
 > Sigarayı yere attı, ezmedi bile. İçeri girdi. Kapı arkasından sertçe kapandı. {shake}
 ~ Kazanamayacağım bir kavgaya girdim. Hem de kürsüye çıkacak bir tanıkla.
+> Arabaya binmeden telefon titredi. Leyla; karakoldan biri büroyu aramış.
+leyla: Bir polisin kapısında “şikâyet ederim” diye bağıran avukat, o polisi kürsüde kaybeder. Şikâyetin varsa yazarsın Deniz. Bağırmazsın. [phone]
 `),
       next: '$return',
     }),
@@ -1534,17 +1536,17 @@ const aksam2 = story('INV_AKSAM2', {
   onFirstEnter: [meet('tolga')],
   lines: B(`
 # GECE 21.30 — ARSLAN HUKUK [bg:buro_gece]
-> Tam ışıkları kapatıyordum ki zil çaldı. Kapıda yirmi beş yaşlarında bir genç; sırılsıklam, beresi kulaklarının üstüne kadar inmiş, montunun yakası kalkık.
+> Tam ışıkları kapatıyordum ki zil çaldı. Kapıda yirmi beş yaşlarında bir genç; sırılsıklam, iş botları çamurlu, montunun cebinden bir baret çıkartması sarkıyor.
 tolga: Abla… kusura bakmayın. Tolga. Barış’ın amcasının oğluyum. Bir dakika. İçeri girmem, ıslağım.
 > Kapının eşiğinde durdu. Ellerini cebinden çıkarıp yeniden soktu. Soğuktan mı titriyordu, bilmiyorum.
 tolga: Derya abla avukat tuttu, biliyorum. Salonun parası. Ben… bu da benden. Ücrete katkı.
 > Bir zarf uzattı. İnce, buruşuk, kenarı ıslanmış. Bir inşaat işçisinin haftalığı kadar.
 tolga: Ablaya söylemeyin. Kızar. “Senin paran mı var” der. Var. Biriktirdim. Barış için.
 - Barış’ı görmeye gidiyor musun? Cezaevine?
-tolga: Gidemiyorum abla. İş… gündüz izin yok. Bir de… cezaevine girince insanın içi daralıyor. Ben o kapıdan giremem.
-> Beresinin ucunu çekiştirdi. Gözleri bir an benim gözlerimle buluştu, sonra merdivene kaydı.
-tolga: O kimseye bir şey yapmaz abla. Biz beraber büyüdük. Benden daha iyi bir çocuktur o. Her şeyden.
-~ Bir kuzen, bir zarf ve bir cümle: “Benden daha iyi.” İnsanlar neden kendilerini birileriyle kıyaslar, gece yarısı, bir avukatın kapısında?
+tolga: Gidemiyorum abla. Şantiye sabah altıda başlıyor, akşam yedide bitiyor. Görüş günleri hep mesaiye denk geliyor.
+> Zarfın ıslak kenarını parmağıyla düzeltti. Kalfa elleri; tırnak diplerinde çimento.
+tolga: O kimseye bir şey yapmaz abla. Biz beraber büyüdük. Bayram sabahları aynı motora binerdik.
+~ Bir kuzen ve bir zarf. Bu dosyada herkes Barış için bir şey veriyor: bir abla kirasını, bir anne uykusunu, bir kuzen haftalığını.
 > Merdiven boşluğunun lambası söndü; otomatik. Karanlıkta bir süre ikimiz de kıpırdamadık. Sonra düğmeye bastım; lamba yeniden yandı. Tolga hâlâ oradaydı, aynı yerde, aynı duruşla.
 `),
   choices: [
@@ -1577,8 +1579,8 @@ tolga/uzgun: Giderim. Gideceğim. Sağ olun.
 - Derya Hanım’ı arayalım, birlikte konuşalım. Ücret konusunu o yürütüyor.
 > Tolga’nın yüzünden bir şey geçti. Utanç mı, korku mu, bilmiyorum.
 tolga: Yok abla, yok. Rahatsız etmeyin. Ben… ben giderim. İyi geceler.
-> Zarfı cebine tıkıştırdı ve merdivenleri ikişer ikişer indi. Sokak kapısı arkasından çarptı. {shake}
-~ İkişer ikişer. Tuhaf. Neden aklımda kaldı bilmiyorum.
+> Zarfı cebine tıkıştırdı ve merdivenleri indi. Sokak kapısı arkasından çarptı. {shake}
+~ Bir ailede para konuşulunca herkes biraz utanır. Tolga biraz fazla utandı; ya da ben biraz fazla yorgundum.
 `),
       next: 'INV_HUB',
     }),
@@ -1642,11 +1644,11 @@ const gece = [
       W(flag('nermin_baski'), `~ Nermin Hanım’ın kapısı. Zincir. İki kilit. Yarın o kadın bana nasıl bakacak?`),
       W(
         flag('zarf_aldi'),
-        `~ Masamda bir zarf var; ıslak lekesi kurudu ama izi kaldı. Tolga’nın haftalığı. Neden bu kadar ağır?`,
+        `~ Masamda bir zarf var; ıslak lekesi kurudu ama izi kaldı. Bir kuzenin haftalığı. Makbuzunu bile almadı.`,
       ),
       W(
         flag('tolga_derya'),
-        `~ “Derya Hanım’la birlikte konuşalım” dediğimde merdivenleri ikişer ikişer inen bir genç. Bir kuzenin utancı mı, başka bir şey mi?`,
+        `~ Ücret konusunu Derya’yla konuşalım dedim; kuzen zarfını alıp gitti. Bu ailede para konuşmak, bir yarayı konuşmak gibi.`,
       ),
       W(
         cmp(v('aksam1'), '==', 'NERMIN'),

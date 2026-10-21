@@ -28,7 +28,12 @@ export function hit(
     feedback: {
       title,
       text,
-      label: amount === 0 ? (clueId === undefined ? 'NOT ALINDI' : 'Not defterinde') : `+${amount} SKOR · Not defterine eklendi`,
+      label:
+        amount === 0
+          ? clueId === undefined
+            ? 'NOT ALINDI'
+            : 'Not defterinde'
+          : `+${amount} SKOR · Not defterine eklendi`,
       tone: amount === 0 ? 'info' : 'special',
     },
   });
@@ -57,10 +62,7 @@ export function rec(
   text: string,
 ): ChoiceDef {
   return recipe(id, a, b, {
-    effects: [
-      ifThen(not(has(ded)), [score('DELIL_ANALIZI', amount)]),
-      { type: 'DISCOVER', evidence: ded },
-    ],
+    effects: [ifThen(not(has(ded)), [score('DELIL_ANALIZI', amount)]), { type: 'DISCOVER', evidence: ded }],
     feedback: { title, text, label: `YENİ DELİL · +${amount} SKOR (ilk kurulumda)`, tone: 'success' },
   });
 }

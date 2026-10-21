@@ -113,14 +113,13 @@ export const ara: CasePart = {
           > Tarık başını kaldırdı. Leyla’nın ne demek istediğini anlamıştı; ikisi de anlamıştı. Ben de.
         `),
       ],
-      choices: [
-        cont('ARA_BASLA', 'Arayı planla', HUB, { role: 'PRIMARY', effects: [...p2.start()] }),
-      ],
+      choices: [cont('ARA_BASLA', 'Arayı planla', HUB, { role: 'PRIMARY', effects: [...p2.start()] })],
     }),
     p2.hub({
       ...C4,
       title: 'Ara',
       background: 'buro',
+      onEnter: [set('taps3', 6), set('ex3b', 6), set('ex5', 5), set('ex6', 5), set('ex7', 4)],
       lines: [
         W(
           cmp(v('ara_day'), '==', 1),
@@ -176,9 +175,21 @@ export const ara: CasePart = {
               visibleWhen: all(has('ev_hesap'), not(visited('INV_HESAP'))),
               description: 'Noter tespitli döküm · 6 deneme',
             }),
+            p2.activity('A_RAPOR', 'Bilirkişi raporu', 'ARA_RAPOR', {
+              once: true,
+              next: 'ARA_RAPOR',
+              visibleWhen: all(flag('bilirkisi_istendi'), cmp(v('ara_day'), '==', 2)),
+              description: 'Dr. Uçar · imaj incelemesi · 5 deneme',
+            }),
+            p2.activity('A_VAKIF', 'Vakfın ihale dosyası', 'ARA_VAKIF_GIRIS', {
+              once: true,
+              next: 'ARA_VAKIF_GIRIS',
+              visibleWhen: visited('INV_T_HAYRI'),
+              description: 'Hayri Bey’in izniyle · gelen evrak defteri',
+            }),
             p2.activity('A_SUC', 'Savcılığa suç duyurusu', 'ARA_SUC', {
               next: 'ARA_SUC',
-              visibleWhen: has('ded_bagli'),
+              visibleWhen: all(has('ded_bagli'), not(flag('suc_duyurusu')), not(flag('suc_mechul'))),
               description: 'Kimin hakkında, hangi dayanakla?',
             }),
             p2.free('A_CIKARIM', 'Çıkarım tahtası', 'ARA_CIKARIM', {
@@ -196,9 +207,21 @@ export const ara: CasePart = {
         },
       ],
       choices: [
+        {
+          id: 'A_BEKLE',
+          kind: 'NAVIGATE',
+          label: 'Haftayı kapat',
+          description: 'Kalan eylem puanlarını bırak',
+          visibleWhen: cmp(v('ara_ap'), '>', 0),
+          confirm: 'Haftanın kalan eylem puanları yanar. Emin misin?',
+          effects: [set('ara_ap', 0)],
+          next: '$stay',
+        },
         nav('GO_T', 'DURUŞMADAN ÖNCEKİ AKŞAM', 'ARA_TEKLIF', {
           role: 'PRIMARY',
           confirm: 'Ara evresi biter. Emin misin?',
+          enabledWhen: all(cmp(v('ara_day'), '==', 2), any(ref('ara_ilerleme'), cmp(v('ara_ap'), '<=', 0))),
+          lockedReason: 'Duruşmaya iki gün var. Önce arayı kullan: en az üç iş ya da bütün eylem puanları.',
         }),
       ],
     }),
@@ -240,7 +263,7 @@ export const ara: CasePart = {
             P: Teşekkür ederim Ozan Bey. Siz dosyanın tanığısınız. Bilirkişiyi de, dosyayı da duruşmada konuşalım.
             ozan: Tabii, tabii. Haklısınız üstat. Usul. Ben de öyle derim hep.
             > Kalktı. Kapıda durdu, döndü, gülümsedi.
-            ozan: Saygılar.
+            ozan: Kestaneyi soğutmayın ama. Hayırlı akşamlar.
           `),
           next: HUB,
         }),
@@ -264,7 +287,7 @@ export const ara: CasePart = {
             ozan: 07 mi? Ofisin eski laptopu mu? Bozuldu üstat, söyledim ya herkese. Ekranı gitmişti. Attım.
             ozan: Neden sordunuz?
             P: Merak ettim.
-            ozan/mutlu: Merak iyidir. Saygılar.
+            ozan/mutlu: Merak iyidir üstat. Hayırlı akşamlar.
           `),
           next: HUB,
         }),
@@ -303,7 +326,7 @@ export const ara: CasePart = {
           score: { SORGULAMA: 40 },
           responses: B(`
             melis: Ofiste, eski ortağın masasındaki dizüstüde PUSULA hep açık dururdu. Tarık’ın hesabı. Müşteriler oradan yazılırdı, herkes bakardı.
-            melis: Eylülde ben de oradan bir iki kere yazmıştım. Sonra o dizüstü yoktu. Ortak gidince gitti sandım.
+            melis: Ortaklığa başlamadan önce, geçen kış ofise gittiğimde ben de oradan bir iki kere yazmıştım. Mart’tan sonra o dizüstü yoktu. Ortak gidince gitti sandım.
             ~ Hep açık duran bir hesap. Bir masadan kalkıp giden bir dizüstü.
           `),
         }),
@@ -318,6 +341,7 @@ export const ara: CasePart = {
         }),
         option('MEL_VAZGEC', 'Şikâyetinizden vazgeçmeyi düşünür müsünüz?', {
           score: { SAVUNMA_STRATEJISI: -40 },
+          effects: [raise('melis_kapandi')],
           bad: 'Görüşmenin amacı anlamaktı; vazgeçme talebi katılanı baskı altında hissettirir ve görüşmeyi bitirir. Üstelik şantaj suçu şikâyete bağlı değildir.',
           responses: B(`
             sinan: Görüşme burada bitti meslektaşım.
@@ -339,7 +363,7 @@ export const ara: CasePart = {
         # ALTIPARMAK · SARI MALİ MÜŞAVİRLİK — 10.30 |bg=buro
         > Altıparmak’ta eski bir iş hanı. Dosya dolapları tavana kadar, hesap makinesinin kâğıt şeridi yere sarkıyor.
         > Duvarda geçen yıldan kalma bir takvim. Nurten Hanım gözlüğünün üstünden, bir öğretmen edasıyla baktı.
-        nurten: Aksoy Tekin. Üç yıl defterlerini ben tuttum. Demirbaş numaralarını ezbere bilirim kızım: plotter 01, ofis tableti 03, Tarık Bey’in dizüstüsü 05, Ozan Bey’inki 07. Çift sayılar Ozan’ın, tek sayılar ortak.
+        nurten: Aksoy Tekin. Üç yıl defterlerini ben tuttum. Demirbaş numaralarını ezbere bilirim kızım: plotter 01, ofis tableti 03, Tarık Bey’in dizüstüsü 05, Ozan Bey’inki 07. Yedi ve sonrası Ozan Bey’in zimmetindeydi.
         nurten: Ayrılık kolay olmadı. İki inatçı adam, bir avukat, bir de ben. Bir protokol yaptık, ekinde demirbaş listesi; kim neyi aldı, kim neyi iade etti, hepsi yazılı.
         nurten: Benim mesleğimde bir kural var: “gerek yok” denen yere not düşersin. Çünkü “gerek yok” denen şeyler, bir gün mahkemede gerek olur. Ne istiyorsunuz kızım?
       `),
@@ -351,70 +375,76 @@ export const ara: CasePart = {
         }),
         option('NUR_LAPTOP', '07 numaralı dizüstü için Ozan Bey ne dedi?', {
           score: { ARASTIRMA: 30 },
+          effects: [{ type: 'DISCOVER', evidence: 'clue_uslup_ozan' }],
           responses: B(`
-            nurten: “Bozuldu, attım” dedi. Ben “Tutanak tutalım, demirbaştan düşelim” dedim. “Gerek yok Nurten Hanım” dedi.
-            nurten: Kırk yıllık muhasebeciyim. “Gerek yok” denen yere not düşerim. Düştüm.
+            nurten: “Bozuldu, attım” dedi. Ben “Tutanak tutalım, demirbaştan düşelim” dedim. “Gerek yok Nurten Hanım” diye bir e-posta yazdı.
+            nurten: Kırk yıllık muhasebeciyim. “Gerek yok” denen yere not düşerim. Düştüm; e-postayı da bastım, protokolün arkasına zımbaladım.
+            > Çıktıyı önüme koydu. Gönderen: o.tekin. “Sn. Sarı, 07 için tutanağa gerek görmüyorum... Saygılar.”
+            ~ Büyük harf, üç nokta, noktalı bir “Saygılar.” Bir e-posta. Panoya iğnelenecek bir kâğıt daha; neyle yan yana duracağına tahta karar verecek.
           `),
         }),
         { id: 'NUR_BITIR', kind: 'CONTINUE', label: 'Teşekkür et', role: 'BACK', next: HUB },
       ],
     }),
-    toHub(documentExam('ARA_DEMIRBAS', {
-      ...C4,
-      title: 'Demirbaş listesi',
-      hud: ['ex5'],
-      background: 'buro',
-      lines: B(`> Ayrılık protokolünün ekindeki liste. Bir alet seç, sonra satıra dokun.`),
-      header: { left: 'AKSOY TEKİN MİMARLIK · DEMİRBAŞ LİSTESİ (PROTOKOL EKİ)', right: '15.03' },
-      columns: [
-        { label: 'NO', flex: 0.5 },
-        { label: 'DEMİRBAŞ', flex: 1.4 },
-        { label: 'ZİMMET', flex: 1 },
-        { label: 'İADE', flex: 1.6 },
-      ],
-      rows: [
-        row('d1', ['01', 'Plotter', 'Ofis', 'ofiste']),
-        row('d2', ['03', 'Tablet', 'Stajyer', 'iade · sıfırlandı (03.11)']),
-        row('d3', ['05', 'Dizüstü', 'T. Aksoy', 'ofiste']),
-        row('d4', ['07', 'Dizüstü + dok', 'O. Tekin', '— · not: “O.T. bozuldu dedi”']),
-        row('d5', ['09', 'Lazer metre', 'O. Tekin', 'iade (koli)']),
-        row('d6', ['11', 'Ofis anahtarları (2)', 'O. Tekin', 'iade (koli)']),
-      ],
-      tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('cmp', 'Karşılaştır', 'compare')],
-      costVar: 'ex5',
-      rules: [
-        hit(
-          'EX_D_07',
-          'mag',
-          'd4',
-          'clue_envanter',
-          150,
-          'YENİ İPUCU',
-          'Büyüteci 07 numaralı satıra tuttum. “Dizüstü + dok istasyonu. Zimmet: O. Tekin.” İade hanesi bomboş. Kenarda Nurten Hanım’ın kırk yıllık muhasebeci el yazısı: “O.T. bozuldu dedi.” Diğer bütün demirbaşların iadesi işaretli; yalnız 07 boşta. Dok ofiste, tozlu yuvasında kaldı; ama dizüstü, “bozuldu” denip tutanaksız, demirbaştan düşülmeden kayıplara karıştı.',
-          'ARASTIRMA',
-        ),
-        hit(
-          'EX_D_03',
-          'mag',
-          'd2',
-          undefined,
-          0,
-          'TABLET',
-          'Tablet iade edilmiş, 3 Kasım’da sıfırlanmış. Hesap verisindeki tarihle aynı gün.',
-        ),
-        hit(
-          'EX_D_KOLI',
-          'cmp',
-          'd6',
-          undefined,
-          0,
-          'KOLİ',
-          'Anahtarlar ve lazer metre kargoyla iade edilmiş. Koliyle gelenler listede tek tek işaretli. 07 işaretsiz.',
-        ),
-      ],
-      miss: docMiss('FB_DEMIRBAS'),
-      finish: { id: 'DEMIRBAS_BITIR', label: 'Listeyi kapat' },
-    }), HUB),
+    toHub(
+      documentExam('ARA_DEMIRBAS', {
+        ...C4,
+        title: 'Demirbaş listesi',
+        hud: ['ex5'],
+        background: 'buro',
+        lines: B(`> Ayrılık protokolünün ekindeki liste. Bir alet seç, sonra satıra dokun.`),
+        header: { left: 'AKSOY TEKİN MİMARLIK · DEMİRBAŞ LİSTESİ (PROTOKOL EKİ)', right: '15.03' },
+        columns: [
+          { label: 'NO', flex: 0.5 },
+          { label: 'DEMİRBAŞ', flex: 1.4 },
+          { label: 'ZİMMET', flex: 1 },
+          { label: 'İADE', flex: 1.6 },
+        ],
+        rows: [
+          row('d1', ['01', 'Plotter', 'Ofis', 'ofiste']),
+          row('d2', ['03', 'Tablet', 'Stajyer', 'iade · sıfırlandı (03.11)']),
+          row('d3', ['05', 'Dizüstü', 'T. Aksoy', 'ofiste']),
+          row('d4', ['07', 'Dizüstü + dok', 'O. Tekin', '— · not: “O.T. bozuldu dedi”']),
+          row('d5', ['09', 'Lazer metre', 'O. Tekin', 'iade (koli)']),
+          row('d6', ['11', 'Ofis anahtarları (2)', 'O. Tekin', 'iade (koli)']),
+        ],
+        tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('cmp', 'Karşılaştır', 'compare')],
+        costVar: 'ex5',
+        rules: [
+          hit(
+            'EX_D_07',
+            'mag',
+            'd4',
+            'clue_envanter',
+            150,
+            'YENİ İPUCU',
+            '“07 · Dizüstü + dok · Zimmet: O. Tekin.” İade hanesi boş; kenarda “O.T. bozuldu dedi.” Bütün demirbaşların iadesi işaretli, yalnız 07 değil. Dok ofiste kaldı; dizüstü tutanaksız kayboldu.',
+            'ARASTIRMA',
+          ),
+          hit(
+            'EX_D_03',
+            'mag',
+            'd2',
+            undefined,
+            0,
+            'TABLET',
+            'Tablet iade edilmiş, 3 Kasım’da sıfırlanmış. Hesap verisindeki tarihle aynı gün.',
+          ),
+          hit(
+            'EX_D_KOLI',
+            'cmp',
+            'd6',
+            undefined,
+            0,
+            'KOLİ',
+            'Anahtarlar ve lazer metre kargoyla iade edilmiş. Koliyle gelenler listede tek tek işaretli. 07 işaretsiz.',
+          ),
+        ],
+        miss: docMiss('FB_DEMIRBAS'),
+        finish: { id: 'DEMIRBAS_BITIR', label: 'Listeyi kapat' },
+      }),
+      HUB,
+    ),
     story('ARA_EV_GIRIS', {
       ...C4,
       title: 'Tarık’ın evi',
@@ -446,6 +476,177 @@ export const ara: CasePart = {
       HUB,
     ),
     toHub(hesapDoc('ARA_HESAP', 'A', 'ex3b', C4), HUB),
+    toHub(
+      documentExam('ARA_RAPOR', {
+        ...C4,
+        title: 'Bilirkişi raporu',
+        hud: ['ex6'],
+        background: 'buro',
+        lines: B(`
+        # ARSLAN HUKUK · ARŞİV MASASI — 09.40 |bg=buro
+        > Kalemden UYAP’a düşen rapor: on bir sayfa, iki ek. Dr. Nazlı Uçar’ın imzası her sayfanın altında, aynı açıyla, aynı mürekkeple.
+        > Leyla raporu masama bıraktı ama elini üstünden çekmedi.
+        leyla: Bilirkişi senin tanığın değil Deniz. Mahkemenin gözü. Lehine olanı da, aleyhine olanı da aynı soğukkanlılıkla yazar. İkisini de oku.
+        ~ Bir rapor, bir sonuç cümlesi ve onu taşıyan satırlar. Polisin raporunda satırlar sonuçla kavga ediyordu. Bakalım bu kez nasıl.
+        > Bir alet seç, sonra satıra dokun.
+      `),
+        header: { left: 'ADLİ BİLİŞİM BİLİRKİŞİ RAPORU · DR. N. UÇAR', right: 'İMAJ: 9f3a…c41e' },
+        columns: [
+          { label: 'BAŞLIK', flex: 0.8 },
+          { label: 'TESPİT', flex: 3 },
+        ],
+        rows: [
+          row('r1', ['Yöntem', 'İmaj hash’i yeniden hesaplandı: SHA-256 9f3a…c41e · 14.11 değeriyle eşleşti']),
+          row('r2', [
+            'Bulgu 1',
+            'Ek-3 sender_device = 3 → bağlı cihaz kaydı: “OFIS-LAPTOP-07 · PUSULA Masaüstü (Windows)”',
+          ]),
+          row('r3', ['Bulgu 2', '09.11 01.40–06.10: ekran kilitli; kilit açma ya da dokunma olayı yok']),
+          row('r4', [
+            'Bulgu 3',
+            '12.11 15.40–15.52: kilit açma, uygulama gezinmesi; cihazda 14 yeni ekran görüntüsü dosyası',
+          ]),
+          row('r5', ['Bulgu 4', '06.11 02.13 sohbet arşivleme olayı · kaynak cihaz: 3']),
+          row('r6', ['Sınır', 'Cihaz 3’ün kendisi incelenmemiştir; onu kullanan kişi bu imajdan belirlenemez.']),
+          row('r7', [
+            'Kanaat',
+            'Mesajların telefondan gönderildiği yönündeki kolluk değerlendirmesi teknik verilerle desteklenmemektedir.',
+          ]),
+        ],
+        tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('cmp', 'Karşılaştır', 'compare')],
+        costVar: 'ex6',
+        rules: [
+          hit(
+            'EX_R_CIHAZ',
+            'mag',
+            'r2',
+            undefined,
+            80,
+            'BULGU 1',
+            'Büyüteci ilk bulguya tuttum. Bilirkişi aynı sonuca hiçbir dış kayda bakmadan, imajın kendisinden varmış. Gönderen cihaz 3, bir masaüstü uygulaması, bir Windows makinesi. İki ayrı yol, aynı kapıya çıkıyor.',
+          ),
+          hit(
+            'EX_R_KILIT',
+            'mag',
+            'r3',
+            undefined,
+            80,
+            'BULGU 2',
+            '9 Kasım gecesi dört buçuk saat telefona tek parmak değmemiş: “dokunma olayı yok.” Hemşirenin bandı, onam formu, şimdi de makinenin günlüğü. Üç tanık; hiçbiri yalan söylemeyi bilmiyor.',
+          ),
+          hit(
+            'EX_R_SS',
+            'cmp',
+            'r4',
+            undefined,
+            100,
+            'BULGU 3 · DELİLİN İÇİNE YAZILAN',
+            'Bulgu 3 ile Yöntem yan yana: on dört ekran görüntüsü telefonun hafızasına yazılmış, imaj iki gün sonra alınmış. Delil, kopyası alınmadan değiştirilmiş. Hash 14 Kasım’ı korur; 12’sini değil.',
+            'USUL_BILGISI',
+          ),
+          hit(
+            'EX_R_SINIR',
+            'mag',
+            'r6',
+            undefined,
+            60,
+            'SINIR',
+            'İyi bilirkişi bilmediğini de yazar: imaj, cihaz 3’ün başında kimin oturduğunu söyleyemez. Duruşmada bunu soracaklar. Cevap bir dizüstünde, bir hatta, bir demirbaş listesinde.',
+            'SAVUNMA_STRATEJISI',
+          ),
+          hit(
+            'EX_R_KANAAT',
+            'mag',
+            'r7',
+            undefined,
+            0,
+            'KANAAT',
+            'Kanaat cümlesi temkinli: “desteklenmemektedir.” Bilirkişiler “kesinlikle” demez. Ama bu temkinli cümle, polisin kesin cümlesini yerinden söküyor.',
+          ),
+        ],
+        miss: docMiss('FB_RAPOR'),
+        finish: { id: 'RAPOR_BITIR', label: 'Raporu kapat' },
+      }),
+      HUB,
+    ),
+    story('ARA_VAKIF_GIRIS', {
+      ...C4,
+      title: 'Vakıf odası',
+      background: 'buro',
+      lines: B(`
+        # KOZA HAN · VAKIF ODASI — 15.00 |bg=buro
+        > Koza Han’ın avlusunda şadırvan yine kurumuş, ipek tezgâhları yağmura karşı naylonla örtülmüş. Vakıf odasında aynı kitap kokusu, aynı ince belli bardaklar.
+        hayri: Gene geldin evladım. Duruşmayı duydum; bir sütunmuş, bir cihazmış. Ben anlamam. Ama bir şey anladım: sen dosyanın kenarını okuyorsun.
+        P: İhale dosyasını görmem mümkün mü Hayri Bey? Gelen evrakı, teklifleri. Bir şey almayacağım; yalnızca bakacağım.
+        hayri: Dosya vakfındır, sana veremem. Mahkeme isterse gönderirim, kanun neyse o. Ama gözünle bakmana kimse bir şey demez. Ben de buradayım zaten.
+        hayri: Gelen evrakı sekreterlik kaydeder; ben imzalarım, okumam. Yaşlandıkça insan imzayı okumaktan daha kolay bulur. Kötü bir alışkanlık.
+        > Önüme kalın, sırtı yıpranmış bir klasör koydu. Üstünde mürekkeple: “Eski Pirinç Han Restorasyonu · 2. kısım.”
+      `),
+      choices: [{ id: 'VAKIF_BASLA', kind: 'CONTINUE', label: 'Klasörü aç', next: 'ARA_VAKIF' }],
+    }),
+    toHub(
+      documentExam('ARA_VAKIF', {
+        ...C4,
+        title: 'İhale dosyası',
+        hud: ['ex7'],
+        background: 'buro',
+        lines: B(`> Gelen evrak defterinin ihaleyle ilgili sayfası. Bir alet seç, sonra satıra dokun.`),
+        header: { left: 'BURSA KÜLTÜR VAKFI · GELEN EVRAK', right: 'ESKİ PİRİNÇ HAN' },
+        columns: [
+          { label: 'TARİH', flex: 0.9 },
+          { label: 'TÜR', flex: 0.9 },
+          { label: 'KONU', flex: 2.6 },
+        ],
+        rows: [
+          row('v1', ['02.10', 'İlan', 'Eski Pirinç Han restorasyonu · son teklif 30.10']),
+          row('v2', ['28.10', 'Teklif', 'Aksoy–Karaca Ortak Girişimi · restorasyon belgesi: M. Karaca']),
+          row('v3', ['29.10', 'Teklif', 'Tekin Yapı Danışmanlık Ltd. Şti.']),
+          row('v4', ['30.10', 'Teklif', 'Marmara Restorasyon A.Ş.']),
+          row('v5', [
+            '10.11 · 09.12',
+            'E-posta',
+            'Tekin Yapı: “Sn. Kurul, ortak girişimin bir üyesine ilişkin özel kayıtların dolaşımda olduğu... Saygılar.”',
+          ]),
+          row('v6', ['19.11', 'Kurul kararı', 'Değerlendirme askıya alındı']),
+        ],
+        tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('cmp', 'Karşılaştır', 'compare')],
+        costVar: 'ex7',
+        rules: [
+          hit(
+            'EX_V_YAZI',
+            'mag',
+            'v5',
+            'clue_vakif_yazi',
+            150,
+            'YENİ İPUCU',
+            '10 Kasım 09.12. Ses kaydı yedi saat önce gitmiş; Hayri Bey kimseye söylememiş, dedikodu ertesi hafta yayılmış. Ama bu e-posta kaydı şimdiden biliyor. “Sn.” ile açılıyor, “Saygılar.” ile kapanıyor.',
+            'ARASTIRMA',
+          ),
+          hit(
+            'EX_V_TEKLIF',
+            'cmp',
+            'v3',
+            undefined,
+            60,
+            'ÜÇ TEKLİF',
+            'Ortak girişimin teklifi Melis’in belgesine yaslanıyor; o çekilirse teklif düşer, geriye büyük bir şirket ve Tekin Yapı kalır. Kimin işine yarar? Bu bir delil değil; bir soru. Ama doğru soru.',
+            'ARASTIRMA',
+          ),
+          hit(
+            'EX_V_KARAR',
+            'mag',
+            'v6',
+            undefined,
+            0,
+            'KURUL KARARI',
+            'Kurul 19 Kasım’da değerlendirmeyi askıya almış; gerekçede “kamuoyuna yansıyan soruşturma” yazıyor. Bir dedikodu bir ihaleyi durdurmuş.',
+          ),
+        ],
+        miss: docMiss('FB_VAKIF'),
+        finish: { id: 'VAKIF_BITIR', label: 'Klasörü kapat' },
+      }),
+      HUB,
+    ),
     choiceNodeSuc(),
     toHub(
       deductionBoard('ARA_CIKARIM', {
@@ -453,7 +654,7 @@ export const ara: CasePart = {
         title: 'Çıkarım tahtası',
         background: 'buro_gece',
         lines: B(`> İki kart seç. Yeni kartlar tahtada: demirbaş, koli, sağlayıcının yanıtı.`),
-        pool: [...BOARD_POOL, 'clue_koli', 'clue_envanter', 'ev_isp'],
+        pool: [...BOARD_POOL, 'clue_koli', 'clue_envanter', 'ev_isp', 'clue_vakif_yazi'],
         recipes: [
           ...baseRecipes('A'),
           rec(
@@ -491,6 +692,15 @@ export const ara: CasePart = {
             200,
             'Aynı imza',
             '“Sn.”, üç nokta, “Saygılar.” Eski ortağın e-postası ile tehditler aynı elden çıkmış gibi. Tek başına ispat değil; ama artık yalnız değil.',
+          ),
+          rec(
+            'CB_A_VAKIF',
+            'clue_vakif_yazi',
+            'clue_uslup_tehdit',
+            'ded_uslup_ozan',
+            200,
+            'Aynı imza, aynı sabah',
+            'Vakfa giden yazı “Sn. Kurul” diye açılıyor, üç noktayla duruyor, “Saygılar.” ile kapanıyor. Tehditlerle aynı el. Ve bu el, kaydın varlığını herkesten bir hafta önce biliyordu.',
           ),
         ],
         miss: boardMiss('FB_A_CIKARIM'),
@@ -547,7 +757,7 @@ export const ara: CasePart = {
         ~ İki kapı. İkisi de açık. İkisi de bir uçuruma açılıyor.
       `),
       choices: [
-        option('TK_RED', 'Hayır. İkisini de yapmayacağız. Ne biliyorsak, kâğıda ve savcılığa.', {
+        option('TK_RED', 'Hayır. İkisini de yapmayacağız.', {
           score: { SAVUNMA_STRATEJISI: 50 },
           effects: [raise('tarik_red')],
           good: 'Başkasının hesabına izinsiz girmek suçtur (TCK 243); dosyaya sunulacak veriyi ayıklamak delil karartmadır (TCK 281) ve avukatı da sorumlu kılar (Av.K. 34). Doğru cevap.',
@@ -559,7 +769,7 @@ export const ara: CasePart = {
           `),
           next: 'ARA_SON_1',
         }),
-        option('TK_SIL', '25 Ekim mesajlarını yedekten silelim. Kimse fark etmez.', {
+        option('TK_SIL', '25 Ekim mesajlarını yedekten çıkaralım; saik ortadan kalkar, kimse fark etmez.', {
           score: { SAVUNMA_STRATEJISI: -200 },
           effects: [inc('ethics'), raise('karartma')],
           bad: 'Mahkemeye sunulacak dijital veriyi ayıklamak delil karartmadır (TCK 281); avukatın buna katılması meslekten çıkarmayı gerektirebilecek bir ihlaldir (Av.K. 34). Üstelik hash değeri değişir; fark edilir.',
@@ -569,7 +779,7 @@ export const ara: CasePart = {
           `),
           next: 'ARA_SON_1',
         }),
-        option('TK_GIRIS', 'Eski ortağın e-postasına girip bir bakalım. Bir dakika.', {
+        option('TK_GIRIS', 'E-postasına bir bakalım; bir şey bulursak doğrudan savcılığa iletiriz.', {
           score: { SAVUNMA_STRATEJISI: -200 },
           effects: [inc('ethics'), raise('karartma')],
           bad: 'Başkasının hesabına izinsiz girmek bilişim sistemine girme suçudur (TCK 243); bu yolla elde edilen hiçbir şey delil olamaz (CMK 206/2-a) ve avukat suça iştirak etmiş olur (Av.K. 34).',
@@ -604,8 +814,8 @@ export const ara: CasePart = {
           ?NÖBETÇİ KÂTİP: Avukat hanım, suç duyurunuz üzerine bugün Tekin Yapı Danışmanlık’ta arama yapıldı. Arşiv dolabında bir dizüstü bulundu. Arkasında bir etiket var: “Aksoy Tekin Demirbaş 07.”
           ?NÖBETÇİ KÂTİP: Açıkmış. Ekranda bir mesajlaşma uygulaması açık duruyormuş; bir hesap oturumu. El konuldu, mühürlendi. Yarın duruşmada Savcı Bey bilgi verecek.
           P: Teşekkür ederim. Gerçekten teşekkür ederim.
-          > Telefonu kapattım. Bir süre karanlıkta oturdum. Kalbim, o kadının altı ay önceki kalbi gibi çarpıyordu.
-          ~ Açıkmış. Altı aydır açık bir ekran. Kimse kapatmamış; belki kapatmaya gerek görmemiş, belki unutmuş. O açık ekran, üç gece bir kadının hayatını yaktı. Ve yarın, o ekran konuşacak.
+          > Telefonu kapattım. Bir süre karanlıkta oturdum. Kalbim, o kadının kasımdaki kalbi gibi çarpıyordu.
+          ~ Açıkmış. Aylardır açık bir ekran. Kimse kapatmamış; belki kapatmaya gerek görmemiş, belki unutmuş. O açık ekran, üç gece bir kadının hayatını yaktı. Ve yarın, o ekran konuşacak.
         `,
         ),
         W(
@@ -631,14 +841,11 @@ export const ara: CasePart = {
           has('ded_ip_tekin'),
           `
           ~ Panoda üç iplik artık tek bir yere bağlanıyor. Bir dizüstü: ofise dönmeyen 07. Bir hat: 85.105.44.17, Tekin Yapı Danışmanlık. Bir üslup: “Sn.”, üç nokta, “Saygılar.”
-          ~ Ve yarın o adresin sahibi, o dizüstünün zimmetlisi, tanık kürsüsünde yemin edecek. “Bildiğimi dosdoğru söyleyeceğime” diyecek. Bakalım söyleyebilecek mi.
+          ~ Ve yarın o adresin sahibi, o dizüstünün zimmetlisi, tanık kürsüsüne çıkacak. Bildiğini dosdoğru söyleyecek mi, göreceğiz.
           ~ İsmi ben koymadım. Bir zimmet listesi, bir sağlayıcı yazısı ve bir e-posta çıktısı koydu. Ben yalnızca onları aynı masaya dizdim.
         `,
         ),
-        W(
-          has('ded_laptop_ozan'),
-          `~ 07 ofise dönmedi. Bunu biliyorum. O gecelerde nerede olduğunu bilmiyorum.`,
-        ),
+        W(has('ded_laptop_ozan'), `~ 07 ofise dönmedi. Bunu biliyorum. O gecelerde nerede olduğunu bilmiyorum.`),
         W(has('ded_bagli'), `~ Cihaz 3. Bir dizüstü. Kimin elinde? Hâlâ bilmiyorum. Belki bilmem gerekmiyor.`),
         O(`~ Bir sütun, bir şüphe. Yarın bunun yetip yetmediğini göreceğim.`),
       ],
@@ -691,14 +898,15 @@ function choiceNodeSuc() {
     `),
     prompt: { speaker: 'narrator' as const, text: 'Dilekçeye ne yazacaksın?' },
     choices: [
-      option('SUC_OZAN', 'Ozan Tekin hakkında: hesabın 07’den kullanılması; dizüstünün aranması ve el konulması talebiyle', {
+      option('SUC_OZAN', 'Ozan Tekin hakkında; 07’nin aranması ve el konulması talebiyle', {
         enabledWhen: ref('ozan_dayanak'),
-        lockedReason: 'Somut dayanak gerekli: cihaz 3’ün ne olduğu ve 07’nin kimde kaldığı.',
+        lockedReason:
+          'Somut dayanak gerekli: cihaz 3’ün ne olduğu, 07’nin kimde kaldığı ve tehdit hattının kime ait olduğu.',
         score: { USUL_BILGISI: 80 },
         effects: [raise('suc_duyurusu')],
         good: 'Somut dayanaklı suç duyurusu (CMK 158): cihaz 3 = OFIS-LAPTOP-07, 07’nin zimmeti ve iadesizliği. Arama ve el koyma savcılığın ve hâkimin işidir (CMK 116 vd., 127); avukat kendisi kovalamaz.',
         responses: B(`
-          > Dilekçeyi dört sayfada yazdım. Ekleri kalınca: noter tespitli hesap verisi, demirbaş listesi, sağlayıcının yazısı, Ek-3’ün bir kopyası.
+          > Dilekçeyi dört sayfada yazdım. Ekleri kalınca: Ek-3’ün bir kopyası, demirbaş listesi, sağlayıcının mahkemeye yazısı.
           > Sonuna somut bir talep koydum: “07 numaralı dizüstünün bulunması, aranması ve el konulması; hesabı ele geçiren kişi hakkında soruşturma açılması.”
           leyla: Avukat dedektif değildir Deniz. Biz kovalamayız, savcılığa yazarız. Arama kararı hâkimin, infaz savcınındır. Bizim işimiz dayanağı kusursuz koymak.
           P: Dayanak kusursuz. Bir zimmet, bir hat, bir oturum. İsmi ben koymuyorum; kâğıtlar koyuyor.
@@ -706,18 +914,19 @@ function choiceNodeSuc() {
         `),
         next: HUB,
       }),
-      option('SUC_MECHUL', 'Kimliği belirsiz kişi(ler) hakkında: hesabın başka bir cihazdan kullanılması', {
+      option('SUC_MECHUL', 'Kimliği belirsiz kişiler hakkında; hesabın başka cihazdan kullanılması', {
         enabledWhen: has('ded_bagli'),
         lockedReason: 'Önce mesajların başka bir cihazdan çıktığını göstermelisin.',
         score: { USUL_BILGISI: 40 },
         effects: [raise('suc_mechul')],
-        neutral: 'Hukuken doğru ama genel bir suç duyurusu; savcılık soruşturma açar, ama kimseyi aramak için somut bir dayanak yoktur.',
+        neutral:
+          'Hukuken doğru ama genel bir suç duyurusu; savcılık soruşturma açar, ama kimseyi aramak için somut bir dayanak yoktur.',
         responses: B(`> Dilekçe iki sayfa. Kimseyi göstermiyor. Yalnızca bir kapının açık kaldığını.`),
         next: HUB,
       }),
-      option('SUC_MELIS', 'Katılan hakkında: suç uydurma', {
+      option('SUC_MELIS', 'Katılan hakkında; mesajları kendisinin kurguladığı iddiasıyla suç uydurma', {
         score: { USUL_BILGISI: -80 },
-        bad: 'Hiçbir dayanağı olmayan bir suç duyurusu iftira (TCK 267) riski taşır ve duruşmada savunmanın güvenilirliğini düşürür.',
+        bad: 'Suç uydurma (TCK 271) iddiasının hiçbir dayanağı yok; dayanaksız bir suç duyurusu iftira (TCK 267) riski taşır ve savunmanın güvenilirliğini düşürür.',
         responses: B(`
           leyla: Dur. Elinde ne var? Bir müvekkilin öfkesi mi? Bunu gönderirsen ben imzalamam.
           ~ Göndermedim. Ama yazdığım için bile utandım.

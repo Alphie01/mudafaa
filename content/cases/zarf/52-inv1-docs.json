@@ -1,0 +1,459 @@
+{
+  "nodes": [
+    {
+      "id": "INV1_ODA",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #12 · SORUŞTURMA",
+      "title": "Kontrol odası",
+      "background": "buro",
+      "hud": ["taps"],
+      "exposeCounts": true,
+      "scene": "sc_oda",
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "NİLÜFER TAPU MÜDÜRLÜĞÜ · 231 · KONTROL", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Genç bir memur kapıyı açtı, eşikte durdu. “Müdür Hanım’ın talimatı; ben burada bekleyeceğim.” Elinde bir tutanak defteri."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Oda küçüktü: bir masa, bir dosya rafı, pencerenin önünde kurumuş bir sardunya. Eşyalar kolilere konmuştu ama masa olduğu gibi duruyordu. Takvim bile."
+            },
+            {
+              "speaker": "player",
+              "text": "Yedi hafta. Bir odanın hafızası bundan uzun sürer; yeter ki kimse silmemiş olsun.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "instruction": "Dikkat çeken yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "actionCosts": { "TAP": [{ "var": "taps", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_ODA",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": {
+            "text": "Burada bir şey yok. Linolyum, duvar, toz. (−1 büyüteç)",
+            "label": "−10 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "ODA_BITIR", "kind": "CONTINUE", "label": "Odadan çık", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_KORIDOR",
+      "type": "SCENE",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #12 · SORUŞTURMA",
+      "title": "İkinci kat koridoru",
+      "background": "adliye",
+      "hud": ["taps_k"],
+      "exposeCounts": true,
+      "scene": "sc_koridor",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "NİLÜFER TAPU MÜDÜRLÜĞÜ · 2. KAT KORİDORU",
+              "style": "card",
+              "bg": "adliye"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Koridor, soğuk açılıştaki sabahın aynısıydı; yalnızca yağmur yoktu. Florasan hâlâ titriyordu. Çay ocağından demlik buharı, uzaktan bir radyo."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Takipçiler merdivende dosyalarını sallıyordu. Biri beni görünce “abla, sıra fişi aşağıda” dedi; avukat olduğumu anlayınca sustu."
+            },
+            {
+              "speaker": "player",
+              "text": "Halil bu koridordan 10.36’da merdivene yürüdü. 10.46’da döndü. Arada on dakika. Bu koridor o on dakikayı gördü.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "instruction": "Dikkat çeken yere dokun. Boş yere dokunmak bir büyüteç hakkı yer.",
+      "actionCosts": { "TAP": [{ "var": "taps_k", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "FB_KORIDOR",
+          "kind": "FALLBACK",
+          "fallbackFor": "TAP",
+          "feedback": {
+            "text": "Burada bir şey yok. Linolyum, duvar, toz. (−1 büyüteç)",
+            "label": "−10 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }]
+        },
+        { "id": "KORIDOR_BITIR", "kind": "CONTINUE", "label": "Koridordan çık", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_KARAR",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #12 · SORUŞTURMA",
+      "title": "Dinleme kararı",
+      "background": "buro",
+      "hud": ["exam_left"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Kararın kendisi bir sayfa; ekleri on dört. Hâkimliğin mührü, bir imza, bir hat numarası, bir süre. Sonra kolluğun çözüm tutanakları: konuşmaların yazıya geçmiş hâli."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Leyla’nın sesi kafamda: hangi hat, kimin adına, hangi suç için, hangi tarihten hangi tarihe."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir alet seç, sonra satıra dokun. Bir karar, ne yazdığından çok neyi yazmadığıyla konuşur.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "BURSA SULH CEZA HÂKİMLİĞİ · İLETİŞİMİN DENETLENMESİ", "right": "04.01.2027" },
+      "columns": [
+        { "label": "KALEM", "flex": 1.1 },
+        { "label": "İÇERİK", "flex": 2.4 }
+      ],
+      "rows": [
+        { "id": "k1", "cells": ["Suç", "Rüşvet (TCK 252)"] },
+        { "id": "k2", "cells": ["Tedbir uygulanacak hat", "0532 418 77 20 · C. Ateşoğlu"] },
+        { "id": "k3", "cells": ["Süre", "İki ay"] },
+        { "id": "k4", "cells": ["Kayıt #6 · 19.02 14.12", "Hedef hat ↔ tespit edilemeyen hat"] },
+        { "id": "k5", "cells": ["Kayıt #9 · 08.03 19.20", "Hat 0505 311 46 08 ↔ B. Öz"] },
+        { "id": "k6", "cells": ["Kayıt #14 · 11.03 21.05", "Hedef hat ↔ tespit edilemeyen hat"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" },
+        { "id": "chk", "label": "Doğrula", "icon": "check" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "exam_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_K2",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "k2" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Kararın “tedbir uygulanacak kişi ve iletişim aracı” bölümünde tek bir satır var: Cengiz Ateşoğlu, 0532 418 77 20. Başka hat yok. Halil’in adı hiç geçmiyor.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_hedef_hat" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_K3",
+          "kind": "EXAMINE",
+          "match": { "tool": "chk", "target": "k3" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "İki ay: 4 Ocak’tan 4 Mart’a. Eklerde uzatma kararı yok. Tedbirin bitirildiği tarihi ve saati gösteren tutanak da yok; olması gerekirdi.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_sure" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_K4",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "k4" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "19 Şubat, süre içinde. Ateşoğlu: “Kontrolcü yine imzalamadı. On bir dosya, inatçı keçi.” Öbür ses: “Sen merak etme abi. Masasından kaldırırız onu.” Bu kaydı iddianame hiç anmamış.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_inat" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_K5",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "k5" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Hat 0505 311 46 08: Halil Ekinci. Tam metin: “Dosyana bakarım Bayram, ama şerh kalkmadan imza yok.” İddianame yalnızca ilk yarısını almış.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kayit9" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_K6",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "k6" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "11 Mart, 21.05. Hedef hatta: “Kontrolcüyü hallettik. Zarf yarın masada.” İddianamenin anahtar cümlesi. Tarihe bir kez daha bak.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kayit14" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "FB_KARAR",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda yeni bir şey görünmüyor.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "KARAR_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_TUTANAK",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #12 · SORUŞTURMA",
+      "title": "Yakalama tutanağı",
+      "background": "buro",
+      "hud": ["exam_t"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Üç sayfa, altı imza, iki fotoğraf. Tutanaklar her şeyi yazar; yalnızca neyi yazdıklarını yüksek sesle söylemezler."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Fotoğraflardan birinde kahverengi bir zarf, bir cetvelin yanında. Öbüründe açık bir çekmece; mühür yastığı, ataşlar, bir paket bisküvi."
+            },
+            {
+              "speaker": "player",
+              "text": "Saatleri oku. Tutanakta saatler, tanıkların en sessizidir.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "MALİ ŞUBE · YAKALAMA, ARAMA VE EL KOYMA", "right": "12.03.2027" },
+      "columns": [
+        { "label": "SAAT", "flex": 0.8 },
+        { "label": "TESPİT", "flex": 2.6 }
+      ],
+      "rows": [
+        { "id": "t1", "cells": ["10.31", "İhbarcı binaya giriş yaptı (sıra fişi 147)"] },
+        { "id": "t2", "cells": ["10.39", "Ses kaydı alınamadı (teknik arıza)"] },
+        { "id": "t3", "cells": ["10.43", "İhbarcıdan “TAMAM” mesajı"] },
+        { "id": "t4", "cells": ["10.44 · 10.46", "Kontrol odasına giriş · şüphelinin gelişi"] },
+        { "id": "t5", "cells": ["10.47", "Üçüncü çekmece: barkodlu iç yazışma zarfı"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "exam_t", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_T2",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "t2" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Dipnot: “İhbarcıya takılan ses kayıt cihazı teknik arıza nedeniyle 10.39’dan itibaren kayıt almamıştır.” Arızayı kim, nasıl tespit etmiş? Yazmıyor.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kayit_durdu" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_T4",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "t4" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "“10.44 — Ekip kontrol odasına girmiş, şüpheli odada bulunmamaktadır.” “10.46 — Şüpheli odaya gelmiş.” İki satır, iki dakika. Muhbirin “kendi elimle verdim”i bu iki dakikanın neresine sığıyor?",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_saat_tutanak" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_T5",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "t5" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Fotoğrafta zarfın sağ üst köşesi: müdürlüğün barkod etiketi, 0417. Bir iç yazışma zarfı. Kimin masasından çıkmış bir zarf?",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_barkod" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "FB_TUTANAK",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda yeni bir şey görünmüyor.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "TUTANAK_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV1_IFADE",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #12 · SORUŞTURMA",
+      "title": "Muhbirin ifadeleri",
+      "background": "buro",
+      "hud": ["exam_i"],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "İki tutanak, iki gün arayla. Birinin başlığında “İhbar”, öbüründe “Tanık sıfatıyla ifade”. İkisinin altında da aynı imza: titrek, büyük harflerle “BAYRAM”."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Biri Emniyet’te gece yarısına doğru alınmış; öbürü savcılıkta, sabah. Arada bir operasyon, bir tutuklama, iki gün."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir insan iki gün içinde aynı şeyi iki kez anlatıyorsa, ikinci anlatı birincinin provasıdır. Değilse, iki ayrı hikâyedir.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "header": { "left": "BAYRAM ÖZ · İHBAR VE İFADE", "right": "11.03 · 13.03.2027" },
+      "columns": [
+        { "label": "TARİH", "flex": 0.9 },
+        { "label": "BEYAN", "flex": 2.6 }
+      ],
+      "rows": [
+        { "id": "i1", "cells": ["11.03 22.30", "Memur dosyamı bekletiyordu"] },
+        { "id": "i2", "cells": ["11.03 22.30", "Kırk bin istedi, yarın getir dedi"] },
+        { "id": "i3", "cells": ["13.03 09.15", "Halil Bey’le kırk bine anlaştık"] },
+        { "id": "i4", "cells": ["13.03 09.15", "Zarfı kendi elimle verdim"] },
+        { "id": "i5", "cells": ["13.03 09.15", "Hakkımda etkin pişmanlık uygulanmasını isterim"] }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "cmp", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "exam_i", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_I1",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "i1" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "“Kontrol memuru dosyamı bekletiyor. ‘Kırk bin getirmezsen bu dosya bu masadan çıkmaz’ dedi. Babam ölüyor; mecbur kaldım.” Zorla istenen bir para: mağdur bir muhbir.",
+            "label": "+100 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ihbar_icbar" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
+          "id": "EX_I3",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "i3" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "“Halil Bey’le kırk bine anlaştık. Ben teklif etmedim ama kabul ettim. Zarfı kendi elimle masasına koydum; o da çekmeceye koydu.” Artık zorlanmış değil, anlaşmış. Ve zarf onun elinden geçmiş.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_savcilik_anlasma" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+          ]
+        },
+        {
+          "id": "EX_I5",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "i5" },
+          "feedback": {
+            "title": "NOT",
+            "text": "Rüşvet veren, durum makamlarca öğrenilmeden önce bildirirse cezaya hükmolunmaz. Bu cümle muhbiri “anlaşan” rolünde korur; “zorlanan” rolünde buna hiç ihtiyacı olmazdı.",
+            "label": "+30 SKOR",
+            "tone": "info"
+          },
+          "effects": [{ "type": "SCORE", "category": "HUKUKI_BILGI", "amount": 30 }]
+        },
+        {
+          "id": "FB_IFADE",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu aletle bu satırda yeni bir şey görünmüyor.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "IFADE_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_hedef_hat", "source": { "type": "RULE", "id": "EX_K2" } },
+    { "evidence": "clue_sure", "source": { "type": "RULE", "id": "EX_K3" } },
+    { "evidence": "clue_inat", "source": { "type": "RULE", "id": "EX_K4" } },
+    { "evidence": "clue_kayit9", "source": { "type": "RULE", "id": "EX_K5" } },
+    { "evidence": "clue_kayit14", "source": { "type": "RULE", "id": "EX_K6" } },
+    { "evidence": "clue_kayit_durdu", "source": { "type": "RULE", "id": "EX_T2" } },
+    { "evidence": "clue_saat_tutanak", "source": { "type": "RULE", "id": "EX_T4" } },
+    { "evidence": "clue_barkod", "source": { "type": "RULE", "id": "EX_T5" } },
+    { "evidence": "clue_ihbar_icbar", "source": { "type": "RULE", "id": "EX_I1" } },
+    { "evidence": "clue_savcilik_anlasma", "source": { "type": "RULE", "id": "EX_I3" } }
+  ]
+}

@@ -17,19 +17,98 @@ import { card, n, s, th } from './shared.js';
 // 90-outcomes: yedi sonuç. Hüküm skora değil kayda bağlıdır (CMK 217, 223; Anayasa 38/4): hiçbir sonuç eşik skoru
 // istemez. Öncelik: ısmarlama rapor (ETİK: mahkeme mütalaayı dışlar, kalan kayda göre mahkûmiyet / beraat / taksir),
 // 223/2-b, 223/2-e, taksire dönüşüm (TCK 171/1-a), mahkûmiyet.
-// Kast: hızlandırıcı tespitinin bütün ayakları kayıtla çökmedikçe (`hizlandirici_coktu`) iddia ayakta kalır; çöktüyse hiçbir
-// yolda kasten mahkûmiyet yoktur. Taksir: çöküşten sonra taksir mahkûmiyeti ancak taksire kayıtla bir karşılık yoksa kurulur
-// (`taksir_red`: notun yazarıyla doğrulanan yenileme takvimi ya da dosyadaki nötr kopması kaydı); karşılık varsa beraat.
+// Kast: çekirdek (`kast_coktu`: numuneyi eksper getirdi, içeri yalnız girdi, tenekeler doluydu, numune yangını görmedi)
+// kayıtta ise hiçbir yolda kasten mahkûmiyet yoktur. Diğer ayaklar (zemin, koku, bidon, başlangıç, pano/buat, ark, taze benzin)
+// hükmü değil gerekçe cümlelerini değiştirir. Taksir: kast düştükten sonra taksir mahkûmiyeti ancak taksire kayıtla bir
+// karşılık yoksa kurulur (`taksir_red`: notun yazarıyla doğrulanan yenileme takvimi ya da dosyadaki nötr kopması kaydı).
 // Beraatin dayanağını mahkeme seçer: elektrik kaynağı duruşmada sabitse 2-b, değilse 2-e; savunmanın istediği dayanak ya da
 // esas savunmanın biçimi (terditli, duygusal) yalnızca skoru ve gerekçedeki bir cümleyi değiştirir.
+// Mahkûmiyet gerekçeleri kayıtla çelişmez: zincirdeki usulsüzlük kayda geçtiyse gerekçe onu tanır ve neden yetmediğini söyler.
 
 /** Kalan delillerin beraati taşıdığı kayıt (mütalaa ve skor hariç): kasıt çöktü ve taksir kayıtla karşılandı. */
-const kayitBeraat = all(ref('hizlandirici_coktu'), ref('taksir_red'));
+const kayitBeraat = all(ref('kast_coktu'), ref('taksir_red'));
 
 /** Dış etken kayıtta: dağıtım kaydı dosyada ya da nötr kopması duruşmada kuruldu. */
 const disEtken = any(has('ev_ariza'), flag('taksir_dis'), flag('contra_u6_notr'));
 /** Takvim savunması notun yazarıyla kuruldu ve dış etken kayıtta değil. */
 const takvim = all(flag('taksir_cevap'), not(disEtken));
+/** Numune zincirindeki usulsüzlük kayıtta: eksperin teslimi ya da refakatsiz girişi. */
+const zincirKayitta = any(flag('contra_b2'), flag('contra_u1'), chosen('CV_Q2'));
+
+/** Kastın düştüğü kayıt (çekirdek): ETİK_E, ETİK_T, BERAAT_E ve TAKSİR gerekçelerinin ortak cümleleri. */
+const cekirdekGerekce = [
+  because(
+    'Hızlandırıcı tespitinin dayanağı olan numuneler kolluk tarafından değil, olay yerine muhafaza altındayken refakatsiz giren katılan eksperi tarafından teslim edilmiştir; numune alma tutanağı yoktur ve tenekeler eksperin şahsi mührünü taşımaktadır.',
+  ),
+  because(
+    'Laboratuvarın ham verisine göre numunelerde yanmış ahşabın piroliz ürünleri bulunmamakta, benzin buharlaşmamış görünmektedir; bekçi tenekelerin içeri dolu girdiğini anlatmıştır. Numunelerin yangından geçmiş bir zeminden alındığı şüpheden uzak değildir; yangının kasten çıkarıldığı ispatlanamamıştır (Anayasa 38/4; CMK 217).',
+  ),
+];
+
+/**
+ * Taksir mahkûmiyetinin olumlu tespitleri (TAKSİR, ETİK_T): uyarı, devam eden kullanım, başlangıç hattı; panodaki aşırı
+ * gerilim izi açıkça tartışılır. Dağıtım kaydı ya da notun yazarı kayıtta olsaydı bu sonuca varılmazdı (`taksir_red`).
+ */
+const taksirGerekce = [
+  because(
+    'Sanık ek savunmasında, Aralık ayında elektrikçinin tesisatın eski olduğunu ve koridor buatının ısındığını kendisine söylediğini kabul etmiştir.',
+  ),
+  because(
+    'Uyarıdan sonra beş hafta boyunca tesisat enerjili olarak kullanılmış; ev 9 Ocak’ta boşaltıldıktan sonra da ana sigorta indirilmemiştir. Isındığı bilinen bir bağlantı noktası, yük azaltılsa da enerjili kaldıkça tehlike oluşturmaya devam eder; netice sanık bakımından öngörülebilir ve önlenebilirdir (TCK 22/2).',
+  ),
+  because(
+    'Yangının başlangıç bölgesi itfaiye raporuna göre mutfak ile koridor arası, yani uyarının konusu olan koridor hattıdır; kast ispatlanamadığından ve evde başka bir ateş kaynağı tespit edilmediğinden yangın bu hattaki elektrik arızasına bağlanmıştır.',
+    not(has('ev_ark')),
+  ),
+  because(
+    'Yangının başlangıç noktasının koridor buatı hattı olduğu ve bu hatta yangından önce oluşmuş birincil ark bulunduğu, itfaiye raporu ve mahkemenin elektrik bilirkişisi raporuyla sabittir.',
+    has('ev_ark'),
+  ),
+  because(
+    'Elektrik bilirkişisinin panoda tespit ettiği aşırı gerilim izinin kaynağına ilişkin dosyada bir bulgu bulunmamaktadır; korumasız ve eski bir tesisatta yangının kendisiyle de oluşabilen bu iz, tek başına dış bir etkeni göstermez.',
+    has('ev_ark'),
+  ),
+  because(
+    'Sanığın, yenilemenin restorasyonla birlikte yapılmasının önerildiği ve ağır yük çekmediği yönündeki anlatımı değerlendirilmiştir; ancak uyarının konusu ısınan bir bağlantı noktası olduğundan, yükün azaltılması enerjinin kesilmesinin yerini tutmaz.',
+    flag('halil_ek_hazir'),
+  ),
+  because('Sanığa nitelik değişikliği hatırlatılmış ve ek savunması alınmıştır (CMK 226).'),
+];
+
+/** Kasten mahkûmiyet gerekçesi (ETİK ve MAHKÛMİYET): kayıtta ne varsa onu tanır; çekirdek kayıtta değildir. */
+const kastGerekce = [
+  because(
+    'Bilirkişi raporundaki hızlandırıcı tespiti ve laboratuvar bulgusu duruşmada çürütülememiştir; numunelerin elde edilişine ilişkin bir aykırılık kayda geçmemiştir (CMK 217).',
+    not(zincirKayitta),
+  ),
+  because(
+    'Numunelerin olay yerinden kolluk yerine katılan eksperince teslim edildiği kayda geçmiştir.',
+    flag('contra_b2'),
+  ),
+  because(
+    'Eksperin muhafaza altındaki olay yerine kolluk refakati olmadan girdiği anlaşılmıştır.',
+    any(flag('contra_u1'), chosen('CV_Q2')),
+  ),
+  because(
+    'Bekçi, eksperin içeri iki teneke ile girdiğini anlatmış; tenekelerin içeriğini görmediğini de açıkça belirtmiştir.',
+    flag('cevdet_dinlendi'),
+  ),
+  because(
+    'Bu usulsüzlükler numunelerin değerlendirilmesinde gözetilmiştir. Ancak numunelerin yangından geçmiş bir zeminden alınmadığı, yani olay yerine sonradan getirildiği duruşmada ileri sürülüp ortaya konmamıştır; laboratuvar bulgusu bu nedenle hükme esas alınmıştır (CMK 217).',
+    zincirKayitta,
+  ),
+  because(
+    'Mahkemenin elektrik bilirkişisinin raporu koridor hattındaki ark izinin birincil arkla uyumlu olduğunu belirtmekle birlikte kesin bir tespit içermemektedir; laboratuvar bulgusuyla desteklenen hızlandırıcı tespiti karşısında yangının elektrik kaynaklı çıktığı sonucuna varılmamıştır.',
+    has('ev_ark'),
+  ),
+  because(
+    'Savunmanın dolaylı delillere ilişkin açıklamaları (poliçe, teminat artışı, eşyaların taşınması, benzin alımı) kayda geçmiştir; bu açıklamalar laboratuvar bulgusu ayakta kaldıkça kastı ortadan kaldırmaz.',
+    any(ref('motif_coktu'), flag('contra_s6'), flag('contra_s3')),
+  ),
+  because(
+    'Laboratuvar bulgusu, bilirkişinin olay yeri gözlemleri ve dosyadaki dolaylı deliller birlikte değerlendirildiğinde sanığın evini sigorta bedelini almak amacıyla yaktığı kanaatine varılmıştır.',
+  ),
+];
 
 const ETIK_KART =
   'Gerçeğe aykırı içerikte bir uzman raporunu para karşılığı ısmarlayıp mahkemeye sunmak yalan tanıklığa azmettirme ve delil uydurmadır (TCK 272, 38) ve avukat için meslekten çıkarmaya varan bir disiplin ihlalidir (Av.K. 34; TBB Meslek Kuralları). Mahkeme ısmarlama mütalaayı hükme esas almaz ve kararını kalan delillere göre verir: sahte bir rapor müvekkili kurtarmaz, yalnızca savunmanın sesini kısar.';
@@ -49,7 +128,7 @@ export const outcomes: CasePart = {
     outcome('ETIK', {
       class: 'CONVICTION',
       priority: 1,
-      when: all(flag('sahte_rapor'), not(ref('hizlandirici_coktu'))),
+      when: all(flag('sahte_rapor'), not(ref('kast_coktu'))),
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
       header: 'TÜRK MİLLETİ ADINA',
@@ -60,16 +139,8 @@ export const outcomes: CasePart = {
         because(
           'Savunmanın sunduğu uzman mütalaasının para karşılığı ve önceden belirlenmiş bir sonuca göre yazıldığı, düzenleyenin yazılı beyanıyla anlaşılmıştır; bu mütalaa hükme esas alınmamıştır.',
         ),
-        because(
-          'Mütalaa dışlandıktan sonra dosyadaki diğer deliller değerlendirilmiştir. Bilirkişi raporundaki hızlandırıcı tespiti ve laboratuvar bulgusu, duruşmada çürütülememiştir (CMK 217).',
-        ),
-        because(
-          'Numune zincirine ilişkin itirazlar kayda geçmiş, ancak hızlandırıcı tespitini ortadan kaldıracak ölçüde ispatlanamamıştır.',
-          any(flag('contra_b1'), flag('contra_b2'), flag('contra_b4')),
-        ),
-        because(
-          'Bilirkişi raporu, poliçenin zamanlaması, teminat artışı, eşyaların taşınması ve benzin alımı birlikte değerlendirildiğinde sanığın evini sigorta bedelini almak amacıyla yaktığı kanaatine varılmıştır.',
-        ),
+        because('Mütalaa dışlandıktan sonra dosyadaki diğer deliller değerlendirilmiştir.'),
+        ...kastGerekce,
         because(
           'Hasar bedeli şirketin şüphesi üzerine ödenmediğinden dolandırıcılık teşebbüs aşamasında kalmıştır (TCK 35).',
         ),
@@ -77,7 +148,7 @@ export const outcomes: CasePart = {
       legalBasis: 'TCK 170/1-a, 158/1-k, 35/2, 52, 53, 63; CMK 217, 273/1; TCK 272, 38; Av.K. 34',
       xp: xp(0),
       howToReach:
-        'Para karşılığı, sonucu önceden belirlenmiş bir karşı rapor ısmarlamak (etik ihlali), numune zinciri de birinci celsede kurulamamışsa. Bu sona ulaşmamak gerekir.',
+        'Para karşılığı, sonucu önceden belirlenmiş bir karşı rapor ısmarlamak (etik ihlali), numunelerin olay yerine getirildiği de kayıtla kurulamamışsa. Bu sona ulaşmamak gerekir.',
       ethicsCard: ETIK_KART,
       epilogue: [
         {
@@ -94,8 +165,18 @@ export const outcomes: CasePart = {
             th(
               'Kurtarmak istedik. Bir yalanla. Gerçeğin kanıtını bulamadığım yerde bir yalan satın aldım; yalan da kendi faturasını kesti.',
             ),
-            ...ETIK_BURO,
           ],
+        },
+        {
+          when: zincirKayitta,
+          lines: [
+            th(
+              'Zincirdeki boşluğu kürsüde göstermiştim. Son halkayı ham veride aramak yerine bir kâğıt satın aldım. Hâkim o kâğıdı attı; boş kalan yeri kimse doldurmadı.',
+            ),
+          ],
+        },
+        {
+          lines: [...ETIK_BURO],
         },
       ],
     }),
@@ -117,9 +198,7 @@ export const outcomes: CasePart = {
         because(
           'Mütalaa dışlandıktan sonra dosyadaki diğer deliller değerlendirilmiştir. Müdafiin usulsüz davranışı sanığın aleyhine delil oluşturmaz; hüküm yalnızca hukuka uygun delillere dayanır (CMK 217).',
         ),
-        because(
-          'Hızlandırıcı tespitinin dayanağı olan numuneler olay yerine refakatsiz giren katılan eksperi tarafından teslim edilmiş; elde ediliş zinciri güvenilir değildir.',
-        ),
+        ...cekirdekGerekce,
         because(
           'Mahkemenin elektrik bilirkişisinin koridor hattında tespit ettiği birincil ark, yangının elektrik kaynaklı olduğunu göstermektedir.',
           has('ev_ark'),
@@ -139,7 +218,7 @@ export const outcomes: CasePart = {
       legalBasis: 'CMK 223/2-e; Anayasa 38/4; CMK 141, 142, 217, 231/3, 273/1; TCK 272, 38; Av.K. 34',
       xp: xp(0),
       howToReach:
-        'Bilirkişi raporunun bütün ayaklarını kayıtla çürütüp taksire de kayıtla cevap verdikten sonra para karşılığı bir karşı rapor ısmarlamak (etik ihlali). Halil kalan delillerle beraat eder; sen baroya bildirilirsin. Bu sona ulaşmamak gerekir.',
+        'Numunelerin olay yerine getirildiğini kayıtla kurup taksire de kayıtla cevap verdikten sonra para karşılığı bir karşı rapor ısmarlamak (etik ihlali). Halil kalan delillerle beraat eder; sen baroya bildirilirsin. Bu sona ulaşmamak gerekir.',
       ethicsCard: ETIK_KART,
       epilogue: [
         {
@@ -169,7 +248,7 @@ export const outcomes: CasePart = {
     outcome('ETIK_T', {
       class: 'RECHARACTERIZED',
       priority: 3,
-      when: all(flag('sahte_rapor'), ref('hizlandirici_coktu')),
+      when: all(flag('sahte_rapor'), ref('kast_coktu')),
       stamp: 'TAKSİR',
       stampTone: 'amber',
       header: 'TÜRK MİLLETİ ADINA',
@@ -180,26 +259,15 @@ export const outcomes: CasePart = {
         because(
           'Savunmanın sunduğu uzman mütalaasının para karşılığı ve önceden belirlenmiş bir sonuca göre yazıldığı, düzenleyenin yazılı beyanıyla anlaşılmıştır; bu mütalaa hükme esas alınmamıştır.',
         ),
-        because(
-          'Mütalaanın dışlanması iddianın ispat yükünü ortadan kaldırmaz: hızlandırıcı tespitinin dayanağı olan numunelerin elde ediliş zinciri güvenilir olmadığından yangının kasten çıkarıldığı ispatlanamamıştır (Anayasa 38/4; CMK 217).',
-        ),
-        because(
-          'Mahkemenin elektrik bilirkişisinin koridor hattında tespit ettiği birincil ark, yangının elektrik kaynaklı olduğunu göstermektedir.',
-          has('ev_ark'),
-        ),
-        because(
-          'Sanık, tesisatın eski olduğu ve koridor buatının ısındığı konusunda elektrikçi tarafından uyarılmış, tesisatı kullanmaya devam etmiştir.',
-        ),
-        because(
-          'Yangının dış bir etkenden kaynaklandığı ya da sanığın özen yükümlülüğünü yerine getirdiği, hükme esas alınabilecek delillerle duruşmada ortaya konamamıştır: dosyada dağıtım hattına ilişkin bir kayıt yoktur, uyarıyı yapan elektrikçi de dinlenmemiştir. Dışlanan mütalaa bu boşluğu doldurmaz.',
-        ),
-        because('Sanığa nitelik değişikliği hatırlatılmış ve ek savunması alınmıştır (CMK 226).'),
+        because('Mütalaanın dışlanması iddianın ispat yükünü ortadan kaldırmaz; kalan deliller değerlendirilmiştir.'),
+        ...cekirdekGerekce,
+        ...taksirGerekce,
         because('Hasar ihbarı gerçek bir hasara dayandığından dolandırıcılık kastı ispatlanamamıştır.'),
       ],
       legalBasis: 'TCK 171/1-a, 22/2, 62/1, 51/1; CMK 217, 223/2-e, 226, 273/1; Anayasa 38/4; TCK 272, 38; Av.K. 34',
       xp: xp(0),
       howToReach:
-        'Hızlandırıcı tespitini çürüttükten sonra para karşılığı bir karşı rapor ısmarlamak (etik ihlali), taksire kayıtla bir karşılık bulmadan (ne notun yazarı dinlendi ne de dağıtım kaydı getirtildi). Halil kasıttan kurtulur, taksirden kurtulamaz. Bu sona ulaşmamak gerekir.',
+        'Numunelerin olay yerine getirildiğini kayıtla kurduktan sonra para karşılığı bir karşı rapor ısmarlamak (etik ihlali), taksire kayıtla bir karşılık bulmadan (ne notun yazarı dinlendi ne de dağıtım kaydı getirtildi). Halil kasıttan kurtulur, taksirden kurtulamaz. Bu sona ulaşmamak gerekir.',
       ethicsCard: ETIK_KART,
       epilogue: [
         {
@@ -231,7 +299,7 @@ export const outcomes: CasePart = {
       priority: 4,
       // Kayıt suçun işlenmediğini gösteriyor: kasıt çöktü, eksper kırıldı, elektrik kaynağı (ark + nötr) duruşmada sabit.
       // Elektrik kaynağı sabitse dağıtım kaydı dosyadadır; taksir de bu kayıtla karşılanmış olur.
-      when: all(ref('hizlandirici_coktu'), flag('eksper_kirildi'), ref('elektrik_ispat'), ref('taksir_red')),
+      when: all(ref('kast_coktu'), flag('eksper_kirildi'), ref('elektrik_ispat'), ref('taksir_red')),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -291,7 +359,7 @@ export const outcomes: CasePart = {
       legalBasis: 'CMK 223/2-b; CMK 141, 142, 231/3; CMK 48, 217, 273/1; TCK 22/2, 170/1-a, 171/1-a, 158/1-k',
       xp: xp(1.2, { ethicsVar: 'ethics' }),
       howToReach:
-        'Bilirkişi raporunun her ayağını kayıtla çürüt (zincir, zemin, koku, başlangıç, elektrik dışlaması, laboratuvar); panonun incelenmesini ve arıza kayıtlarını iste; arada ark raporu ile nötr kopmasını birleştir; eksperi çapraz sorguda çöz ve nötr kopmasının bu yangınla bağını duruşmada kur. Dayanağı mahkeme seçer.',
+        'Numunelerin olay yerine getirildiğini kayıtla kur; panonun incelenmesini ve arıza kayıtlarını iste; arada ark raporu ile nötr kopmasını birleştir; eksperi çapraz sorguda çöz ve nötr kopmasının bu yangınla bağını duruşmada kur. Dayanağı mahkeme seçer.',
       epilogue: [
         {
           lines: [
@@ -356,14 +424,32 @@ export const outcomes: CasePart = {
       verdictText:
         'Sanık Halil Bozkurt’un üzerine atılı genel güvenliği kasten tehlikeye sokma ve nitelikli dolandırıcılığa teşebbüs suçlarını işlediği sabit olmadığından, ayrı ayrı CMK 223/2-e uyarınca BERAATİNE; tutuklu ise derhal tahliyesine, adli kontrol altında ise adli kontrolün kaldırılmasına; CMK 141/1 uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142 uyarınca yapılabileceğinin bildirilmesine (CMK 231/3); gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
-        because(
-          'Hızlandırıcı tespitinin dayanağı olan numuneler olay yerine refakatsiz giren katılan eksperi tarafından teslim edilmiş; elde ediliş zinciri güvenilir değildir.',
-        ),
+        ...cekirdekGerekce,
         because(
           'Kolluğun ilk fotoğraflarında zeminin örtülü olduğu, “döküntü izi”nin moloz kaldırıldıktan sonra fotoğraflandığı anlaşılmıştır.',
           any(flag('contra_b1'), flag('contra_u2')),
         ),
+        because(
+          'Bilirkişi, salonu başlangıç noktası olarak yalnızca zemindeki ize dayanarak seçtiğini kabul etmiş; itfaiye başlangıcı mutfak ile koridor arasına koymuştur.',
+          flag('contra_koken'),
+        ),
+        because(
+          'Benzin kokusu tanığının “benzin” kelimesini kolluğun sorusundan aldığı, olay gecesi yangına müdahale eden itfaiye ekibinin akaryakıt kokusu almadığı anlaşılmıştır.',
+          flag('contra_s2'),
+        ),
+        because(
+          'Bilirkişi, söndürme suyundan sonra benzinin bu denli taze kalmasının olağan olmadığını kabul etmiştir.',
+          flag('contra_b4'),
+        ),
         because('Bilirkişi, elektrik tesisatını ve sigorta panosunu incelemediğini kabul etmiştir.', flag('contra_b3')),
+        because(
+          'Bilirkişi, elektrikçinin bir ay önce ısındığını not ettiği koridor buatını incelemediğini kabul etmiştir.',
+          flag('contra_buat'),
+        ),
+        because(
+          'Mahkemenin elektrik bilirkişisi koridor hattında yangından önce oluşmuş birincil ark tespit etmiş; eksper bu konuda bir açıklama yapamamıştır.',
+          flag('contra_u6_ark'),
+        ),
         because('Poliçe, banka kredisinin kullandırım şartı olarak yapılmıştır.', flag('motif_banka')),
         because('Teminat artışı acentenin kampanya teklifiyle gerçekleşmiştir.', flag('motif_artis')),
         because('Eşyalar restorasyon sözleşmesi gereği, etiketlenerek taşınmıştır.', flag('contra_s3')),
@@ -399,7 +485,7 @@ export const outcomes: CasePart = {
       legalBasis: 'CMK 223/2-e; Anayasa 38/4; CMK 141, 142, 217, 231/3, 273/1',
       xp: xp(1, { ethicsVar: 'ethics' }),
       howToReach:
-        'Bilirkişi raporunun her ayağını kayıtla çürüt: numune zinciri (bilirkişi, yeminli bekçi, eksperin girişi), zemin izi, koku tanığı, başlangıç noktası, elektrik dışlaması (pano incelemesi) ve laboratuvar bulgusu (ham veri, mühür). Taksire kayıtla karşılık bul: notu yazan elektrikçiyi hazır et ya da dağıtım kaydını getirt.',
+        'Numunelerin olay yerine getirildiğini kayıtla kur: bilirkişiye numunelerin kimden geldiğini söylet, bekçiyi dinlet (kim girdi, elinde ne vardı), ham veriyi oku ve eksperi “o zeminden aldım” cümlesiyle yüzleştir. Taksire kayıtla karşılık bul: notu yazan elektrikçiyi hazır et ya da dağıtım kaydını getirt. Zemin, koku, bidon, başlangıç ve elektrik ayakları gerekçeyi güçlendirir.',
       epilogue: [
         {
           lines: [
@@ -495,7 +581,7 @@ export const outcomes: CasePart = {
     outcome('TAKSIR', {
       class: 'RECHARACTERIZED',
       priority: 6,
-      when: ref('hizlandirici_coktu'),
+      when: ref('kast_coktu'),
       stamp: 'TAKSİR',
       stampTone: 'amber',
       header: 'TÜRK MİLLETİ ADINA',
@@ -503,25 +589,14 @@ export const outcomes: CasePart = {
       verdictText:
         'Sanık Halil Bozkurt’un eylemine uyan TCK 171/1-a uyarınca takdiren 6 ay hapis cezası ile cezalandırılmasına, TCK 62/1 uyarınca 1/6 oranında indirilerek 5 ay hapis cezası ile CEZALANDIRILMASINA; yan binada oluşan zarar giderilmediğinden hükmün açıklanmasının geri bırakılması koşulları (CMK 231/6-c) oluşmadığından, sanığın sabıkasız olması ve yeniden suç işlemeyeceği kanaatiyle cezanın TCK 51/1 uyarınca ERTELENMESİNE, denetim süresinin 1 yıl olarak belirlenmesine; nitelikli dolandırıcılığa teşebbüs suçundan atılı suçu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; tutuklu ise tahliyesine; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
-        because(
-          'Hızlandırıcı tespitinin dayanağı olan numunelerin elde ediliş zinciri güvenilir olmadığından yangının kasten çıkarıldığı ispatlanamamıştır.',
-        ),
-        because(
-          'Sanık, tesisatın eski olduğu ve koridor buatının ısındığı konusunda elektrikçi tarafından uyarılmış; tesisatı yenilenene kadar kullanmaya devam etmiştir.',
-        ),
-        because(
-          'Yangının başlangıç noktasının koridor buatı hattı olduğu ve bu hatta birincil ark oluştuğu, savunmanın da dayandığı itfaiye raporu ve mahkemenin elektrik bilirkişisi raporuyla sabittir.',
-        ),
-        because(
-          'Yangının dış bir etkenden kaynaklandığı ya da sanığın özen yükümlülüğünü yerine getirdiği duruşmada ortaya konamamıştır: dosyada dağıtım hattına ilişkin bir kayıt yoktur, uyarıyı yapan elektrikçi de dinlenmemiştir.',
-        ),
-        because('Sanığa nitelik değişikliği hatırlatılmış ve ek savunması alınmıştır (CMK 226).'),
+        ...cekirdekGerekce,
+        ...taksirGerekce,
         because(
           'Savunma da terditli olarak eylemin en fazla taksirle yangına neden olma olabileceğini ileri sürmüştür.',
           flag('terditli'),
         ),
         because(
-          'Müdafiin duruşmadaki hatalı delil sunumları kayda geçmiştir; ancak hüküm dosyadaki delillere dayanır ve numune zincirinin kopukluğu bu sunumlarla giderilmiş sayılamaz.',
+          'Müdafiin duruşmadaki hatalı delil sunumları kayda geçmiştir; hüküm bu sunumlara değil dosyadaki delillere dayanır.',
           flag('cokus'),
         ),
         because('Hasar ihbarı gerçek bir hasara dayandığından dolandırıcılık kastı ispatlanamamıştır.'),
@@ -529,7 +604,7 @@ export const outcomes: CasePart = {
       legalBasis: 'TCK 171/1-a, 22/2, 62/1, 51/1; CMK 226, 231/6, 223/2-e, 273/1',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        'Bilirkişi raporunun bütün ayaklarını kayıtla çürüt, ama taksire kayıtla bir karşılık bulmadan bitir: notu yazan elektrikçiyi hazır etme, dağıtım şirketinin kaydını getirtme.',
+        'Numunelerin olay yerine getirildiğini kayıtla kur (eksperin teslimi, refakatsiz giriş, dolu tenekeler, ham veri), ama taksire kayıtla bir karşılık bulmadan bitir: notu yazan elektrikçiyi hazır etme, dağıtım şirketinin kaydını getirtme.',
       epilogue: [
         {
           lines: [
@@ -565,7 +640,7 @@ export const outcomes: CasePart = {
           ],
         },
         {
-          when: all(not(flag('cokus')), not(has('ev_ariza')), flag('fact_tv')),
+          when: all(not(flag('cokus')), flag('fact_tv')),
           lines: [
             s(
               'halil',
@@ -578,7 +653,7 @@ export const outcomes: CasePart = {
           ],
         },
         {
-          when: all(not(flag('cokus')), any(has('ev_ariza'), not(flag('fact_tv')))),
+          when: all(not(flag('cokus')), not(flag('fact_tv'))),
           lines: [
             s(
               'halil',
@@ -586,8 +661,9 @@ export const outcomes: CasePart = {
               'uzgun',
             ),
             th(
-              'Kâğıtlar dosyadaydı. Hâkimin önüne onları bir kapı gibi değil, bir yığın gibi koydum. İkinci kapı açık kaldı ve Halil oradan geçti.',
+              '“Acil değil.” O cümleyi Necati Usta söylemişti, Halil değil. Ustayı kürsüye çağırmadım; takvimi hâkimin önüne koymadım. Hâkim cümleyi sanığın ağzından duydu ve bir mazeret saydı.',
             ),
+            th('Usta “çağrılırsam gelirim” demişti. Bir telefon. İkinci kapı açık kaldı ve Halil oradan geçti.'),
           ],
         },
         {
@@ -606,13 +682,7 @@ export const outcomes: CasePart = {
       verdictText:
         'Sanık Halil Bozkurt’un TCK 170/1-a uyarınca, yangının yan binaya sıçrayarak iki aileyi tehlikeye sokması gözetilerek alt sınırdan uzaklaşılarak 1 yıl 6 ay hapis cezası ile; TCK 158/1-k uyarınca 4 yıl hapis ve 1.000 gün adli para cezası üzerinden, suçun teşebbüs aşamasında kalması nedeniyle TCK 35/2 uyarınca yarı oranında indirilerek 2 yıl hapis ve 500 gün adli para cezası ile CEZALANDIRILMASINA; bir gün karşılığı 100 TL’den 50.000 TL adli para cezasına (TCK 52/2); TCK 53 uyarınca hak yoksunluklarına; tutuklulukta geçen sürenin TCK 63 uyarınca mahsubuna; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
       reasoning: [
-        because(
-          'Bilirkişi raporu, poliçenin zamanlaması, teminat artışı, eşyaların taşınması ve benzin alımı birlikte değerlendirildiğinde sanığın evini sigorta bedelini almak amacıyla yaktığı kanaatine varılmıştır.',
-        ),
-        because(
-          'Savunmanın numune zincirine ilişkin itirazları kayda geçmiş, ancak hızlandırıcı tespitini ortadan kaldıracak ölçüde ispatlanamamıştır.',
-          any(flag('contra_b1'), flag('contra_b2'), flag('contra_b4')),
-        ),
+        ...kastGerekce,
         because(
           'Yangın yan binaya sıçramış, iki aile tahliye edilmiştir; genel güvenlik bakımından tehlike gerçekleşmiştir.',
         ),
@@ -623,7 +693,7 @@ export const outcomes: CasePart = {
       legalBasis: 'TCK 170/1-a, 158/1-k, 35/2, 52, 53, 63; CMK 217, 273/1',
       xp: xp(0.6, { ethicsVar: 'ethics' }),
       howToReach:
-        'Varsayılan sonuç: hızlandırıcı tespiti (numune zinciri ve zemin ya da laboratuvar) ayakta kaldıysa. Zincir kurulmadan ikinci celsede güvenilirliğini yitirmek de buraya götürür.',
+        'Varsayılan sonuç: numunelerin olay yerine getirildiği kayıtla kurulamadıysa (eksperin teslimi, refakatsiz giriş, dolu tenekeler, ham veri ve “o zeminden aldım” cümlesiyle yüzleşme). Zincir kurulmadan ikinci celsede güvenilirliğini yitirmek de buraya götürür.',
       epilogue: [
         {
           when: flag('cokus'),
@@ -639,7 +709,7 @@ export const outcomes: CasePart = {
             ),
             card('ADLİYE ARKA KAPISI — AKŞAMÜSTÜ', 'sokak_yagmur'),
             th(
-              'Her yanlış kâğıt hâkimin önüne bir taş koydu. Numune zincirini kuramadım; kuramadığım yere kâğıt yığdım. Yığın bir duvar oldu, Halil duvarın öbür tarafında kaldı.',
+              'Her yanlış kâğıt hâkimin önüne bir taş koydu. Numunelerin nereden geldiğini sonuna kadar götüremedim; götüremediğim yere kâğıt yığdım. Yığın bir duvar oldu, Halil duvarın öbür tarafında kaldı.',
             ),
           ],
         },
@@ -666,12 +736,23 @@ export const outcomes: CasePart = {
           ],
         },
         {
-          when: all(not(flag('cokus')), has('clue_bidon')),
+          when: all(not(flag('cokus')), has('clue_bidon'), not(zincirKayitta)),
           lines: [
             th(
               'Bidonu buldum, sandığı buldum, sözleşmeyi buldum. İplikleri tek tek gevşettim. Ama halatın ucundaki rapora dokunamadım; numunelerin kimin elinden geldiğini kürsüde kimseye söyletemedim.',
             ),
             th('Bir halat, ucu bağlı kaldıkça halattır. Ben iplikleri saydım; düğüme bakmadım.'),
+          ],
+        },
+        {
+          when: all(not(flag('cokus')), zincirKayitta),
+          lines: [
+            th(
+              'Zincirdeki boşluğu kürsüde gösterdim; numunelerin nasıl geldiği tutanağa geçti. Ama o tenekelerin o yangını hiç görmediğini kürsüde kimsenin yüzüne söylemedim.',
+            ),
+            th(
+              'Hâkim usulsüzlüğü yazdı, sonra laboratuvara güvendi. Zincirin son halkası ham veride, eksperin mührünün altındaydı; ben o halkayı masamda bıraktım.',
+            ),
           ],
         },
         {

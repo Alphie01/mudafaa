@@ -112,18 +112,18 @@
           "kind": "NAVIGATE",
           "label": "Yangın tahtası: nerede, neyle",
           "next": { "push": "INV_CIKARIM" },
-          "description": "0 EP · ipuçlarını birleştir",
-          "enabledWhen": { "ref": "kart2" },
-          "lockedReason": "En az 2 ipucu gerekli."
+          "description": "0 EP · ipuçlarını birleştir · günde 3 yanlış hakkı",
+          "enabledWhen": { "all": [{ "ref": "kart2" }, { "cmp": [{ "var": "tah_yangin" }, ">", 0] }] },
+          "lockedReason": "En az 2 ipucu gerekli. Bugün yanlış bağlantı hakkın bittiyse tahta yarın açılır."
         },
         {
           "id": "A_IPLIK",
           "kind": "NAVIGATE",
           "label": "İplik tahtası: dolaylı deliller",
           "next": { "push": "INV_IPLIK" },
-          "description": "0 EP · ipuçlarını birleştir",
-          "enabledWhen": { "ref": "kart2" },
-          "lockedReason": "En az 2 ipucu gerekli."
+          "description": "0 EP · ipuçlarını birleştir · günde 3 yanlış hakkı",
+          "enabledWhen": { "all": [{ "ref": "kart2" }, { "cmp": [{ "var": "tah_iplik" }, ">", 0] }] },
+          "lockedReason": "En az 2 ipucu gerekli. Bugün yanlış bağlantı hakkın bittiyse tahta yarın açılır."
         },
         {
           "id": "A_LEYLA",
@@ -196,7 +196,7 @@
           "cost": [{ "var": "ap", "amount": 1 }],
           "next": { "push": "INV_CEVDET" },
           "maxUses": 1,
-          "description": "Bekçi kulübesi · olay yerini o bekledi",
+          "description": "Bekçi kulübesi · Muradiye meydanı",
           "visibleWhen": {
             "any": [{ "visited": "INV_SAADET" }, { "hasEvidence": "clue_numune" }, { "visited": "INV_EV" }]
           }
@@ -208,15 +208,19 @@
           "cost": [{ "var": "ap", "amount": 1 }],
           "next": { "push": "INV_CEVDET" },
           "maxUses": 1,
-          "description": "Bekçi kulübesi · sabahı sor",
+          "description": "Bekçi kulübesi · yeniden uğra",
           "visibleWhen": {
             "all": [
               { "visited": "INV_CEVDET" },
-              { "not": { "chosen": "CV_SABAH" } },
               {
-                "all": [
-                  { "hasEvidence": "clue_numune" },
-                  { "any": [{ "visited": "INV_FOTO" }, { "hasEvidence": "clue_eksper_foto" }] }
+                "any": [
+                  {
+                    "all": [
+                      { "not": { "chosen": "CV_SABAH" } },
+                      { "all": [{ "hasEvidence": "clue_numune" }, { "hasEvidence": "ded_temizlenmis" }] }
+                    ]
+                  },
+                  { "all": [{ "chosen": "CV_SABAH" }, { "not": { "chosen": "CV_TANIK" } }] }
                 ]
               }
             ]
@@ -234,7 +238,8 @@
             "any": [
               { "hasEvidence": "clue_restorasyon" },
               { "hasEvidence": "clue_buat" },
-              { "flag": "fact_elektrikci" }
+              { "flag": "fact_elektrikci" },
+              { "visited": "INV_GORUSME" }
             ]
           }
         },
@@ -258,7 +263,9 @@
           "next": { "push": "INV_KADER" },
           "maxUses": 1,
           "description": "Poliçeyi düzenleyen acente",
-          "visibleWhen": { "any": [{ "hasEvidence": "clue_kampanya" }, { "flag": "fact_artis" }] }
+          "visibleWhen": {
+            "any": [{ "hasEvidence": "clue_kampanya" }, { "flag": "fact_artis" }, { "visited": "INV_POLICE" }]
+          }
         },
         {
           "id": "A_BILIRKISI",
@@ -327,11 +334,15 @@
                         "not": {
                           "all": [
                             { "visited": "INV_CEVDET" },
-                            { "not": { "chosen": "CV_SABAH" } },
                             {
-                              "all": [
-                                { "hasEvidence": "clue_numune" },
-                                { "any": [{ "visited": "INV_FOTO" }, { "hasEvidence": "clue_eksper_foto" }] }
+                              "any": [
+                                {
+                                  "all": [
+                                    { "not": { "chosen": "CV_SABAH" } },
+                                    { "all": [{ "hasEvidence": "clue_numune" }, { "hasEvidence": "ded_temizlenmis" }] }
+                                  ]
+                                },
+                                { "all": [{ "chosen": "CV_SABAH" }, { "not": { "chosen": "CV_TANIK" } }] }
                               ]
                             }
                           ]
@@ -347,7 +358,8 @@
                           "any": [
                             { "hasEvidence": "clue_restorasyon" },
                             { "hasEvidence": "clue_buat" },
-                            { "flag": "fact_elektrikci" }
+                            { "flag": "fact_elektrikci" },
+                            { "visited": "INV_GORUSME" }
                           ]
                         }
                       }
@@ -370,7 +382,15 @@
                   {
                     "any": [
                       { "chosen": "A_KADER" },
-                      { "not": { "any": [{ "hasEvidence": "clue_kampanya" }, { "flag": "fact_artis" }] } }
+                      {
+                        "not": {
+                          "any": [
+                            { "hasEvidence": "clue_kampanya" },
+                            { "flag": "fact_artis" },
+                            { "visited": "INV_POLICE" }
+                          ]
+                        }
+                      }
                     ]
                   }
                 ]
@@ -391,7 +411,9 @@
       "title": "Gün sonu",
       "onEnter": [
         { "type": "VAR", "var": "day", "op": "inc", "value": 1 },
-        { "type": "VAR", "var": "ap", "op": "set", "value": 4 }
+        { "type": "VAR", "var": "ap", "op": "set", "value": 4 },
+        { "type": "VAR", "var": "tah_yangin", "op": "set", "value": 3 },
+        { "type": "VAR", "var": "tah_iplik", "op": "set", "value": 3 }
       ],
       "routes": [{ "when": { "cmp": [{ "var": "day" }, "==", 2] }, "to": "INV_AKSAM1" }, { "to": "INV_AKSAM2" }],
       "choices": []
@@ -976,7 +998,7 @@
           "id": "DIL_LAB",
           "kind": "OPTION",
           "label": "Laboratuvarın ham verilerinin ve numune kabul tutanağının istenmesi",
-          "visibleWhen": { "hasEvidence": "clue_taze" },
+          "visibleWhen": { "hasEvidence": "ded_taze" },
           "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [
@@ -993,7 +1015,7 @@
           "id": "DIL_CEVDET",
           "kind": "OPTION",
           "label": "Bekçi Cevdet Alkan’ın tanık olarak dinlenmesi",
-          "visibleWhen": { "all": [{ "met": "cevdet" }, { "hasEvidence": "ev_cizelge" }] },
+          "visibleWhen": { "all": [{ "met": "cevdet" }, { "hasEvidence": "ev_cizelge" }, { "chosen": "CV_TANIK" }] },
           "cost": [{ "var": "dil_hak", "amount": 1 }],
           "next": "$stay",
           "effects": [
@@ -1095,7 +1117,11 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "Yangın tahtası: nerede başladı, neyle başladı? İki ipucunu seç; birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar. Yanlış çift puan götürür."
+              "text": "Yangın tahtası: nerede başladı, neyle başladı? İki ipucunu seç; birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yanlış çift puan ve günlük bağlantı hakkı götürür; günde üç yanlıştan sonra tahta ertesi güne kadar kapanır."
             }
           ]
         }
@@ -1116,6 +1142,7 @@
         "clue_moloz",
         "clue_gec"
       ],
+      "hud": ["tah_yangin"],
       "choices": [
         {
           "id": "CB_TEMIZ",
@@ -1130,7 +1157,8 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_temizlenmis" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_yangin" }, ">", 0] }
         },
         {
           "id": "CB_ZINCIR",
@@ -1145,7 +1173,8 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_zincir" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_yangin" }, ">", 0] }
         },
         {
           "id": "CB_PANO",
@@ -1160,7 +1189,8 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_pano" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_yangin" }, ">", 0] }
         },
         {
           "id": "CB_KOKEN",
@@ -1175,7 +1205,8 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_koken" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_yangin" }, ">", 0] }
         },
         {
           "id": "CB_BUAT",
@@ -1190,7 +1221,8 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_buat" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_yangin" }, ">", 0] }
         },
         {
           "id": "CB_TAZE",
@@ -1205,20 +1237,42 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_taze" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_yangin" }, ">", 0] }
         },
         {
           "id": "FB_CIKARIM",
           "kind": "FALLBACK",
           "fallbackFor": "COMBINE",
           "repeat": "ONCE_PER_PARAMS",
+          "responses": [
+            {
+              "when": { "cmp": [{ "var": "tah_yangin" }, "<=", 0] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "style": "thought",
+                  "text": "Kartlar birbirine karıştı. Bugün bu tahtadan bir şey çıkmaz; yarın taze bir gözle bakmalıyım."
+                }
+              ]
+            }
+          ],
           "feedback": {
             "title": "Bu ikisi birbirini açıklamıyor",
-            "text": "Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Başka bir çift dene.",
-            "label": "BAĞLANTI YOK · −50 SKOR",
+            "text": "Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Her yanlış çift günlük bağlantı hakkından birini götürür; hak bitince tahta ertesi güne kadar kapanır.",
+            "label": "BAĞLANTI YOK · −50 SKOR · −1 HAK",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "cmp": [{ "var": "tah_yangin" }, ">", 0] },
+              "then": [
+                { "type": "VAR", "var": "tah_yangin", "op": "dec", "value": 1 },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }
+              ]
+            }
+          ]
         },
         { "id": "CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "$return" }
       ]
@@ -1235,7 +1289,11 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "İplik tahtası: savcının halatını oluşturan dolaylı deliller. Her ipliğin masum ve belgeli bir açıklaması var mı? Yanlış çift puan götürür."
+              "text": "İplik tahtası: savcının halatını oluşturan dolaylı deliller. Her ipliğin masum ve belgeli bir açıklaması var mı?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Yanlış çift puan ve günlük bağlantı hakkı götürür; günde üç yanlıştan sonra tahta ertesi güne kadar kapanır."
             }
           ]
         }
@@ -1255,6 +1313,7 @@
         "clue_borc",
         "clue_yan_ev"
       ],
+      "hud": ["tah_iplik"],
       "choices": [
         {
           "id": "CB_TASIMA",
@@ -1269,7 +1328,8 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_tasima" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_iplik" }, ">", 0] }
         },
         {
           "id": "CB_BIDON",
@@ -1284,7 +1344,8 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_bidon" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_iplik" }, ">", 0] }
         },
         {
           "id": "CB_BANKA",
@@ -1299,7 +1360,8 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_banka" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_iplik" }, ">", 0] }
         },
         {
           "id": "CB_ARTIS",
@@ -1314,7 +1376,8 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_artis" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_iplik" }, ">", 0] }
         },
         {
           "id": "CB_ONLEM",
@@ -1329,7 +1392,8 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_onlem" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_iplik" }, ">", 0] }
         },
         {
           "id": "CB_FENER",
@@ -1344,20 +1408,42 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_fener" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_iplik" }, ">", 0] }
         },
         {
           "id": "FB_IPLIK",
           "kind": "FALLBACK",
           "fallbackFor": "COMBINE",
           "repeat": "ONCE_PER_PARAMS",
+          "responses": [
+            {
+              "when": { "cmp": [{ "var": "tah_iplik" }, "<=", 0] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "style": "thought",
+                  "text": "Kartlar birbirine karıştı. Bugün bu tahtadan bir şey çıkmaz; yarın taze bir gözle bakmalıyım."
+                }
+              ]
+            }
+          ],
           "feedback": {
             "title": "Bu ikisi birbirini açıklamıyor",
-            "text": "Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Başka bir çift dene.",
-            "label": "BAĞLANTI YOK · −50 SKOR",
+            "text": "Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Her yanlış çift günlük bağlantı hakkından birini götürür; hak bitince tahta ertesi güne kadar kapanır.",
+            "label": "BAĞLANTI YOK · −50 SKOR · −1 HAK",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "cmp": [{ "var": "tah_iplik" }, ">", 0] },
+              "then": [
+                { "type": "VAR", "var": "tah_iplik", "op": "dec", "value": 1 },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }
+              ]
+            }
+          ]
         },
         { "id": "IPLIK_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "$return" }
       ]

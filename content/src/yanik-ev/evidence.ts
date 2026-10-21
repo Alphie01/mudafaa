@@ -487,12 +487,22 @@ export const evidencePart: CasePart = {
     }),
 
     // --- İpuçları: ara ---
+    clue('clue_buhar', {
+      type: 'ADLI_RAPOR',
+      title: 'Buharlaşmamış benzin',
+      shortText: 'Kromatogramda benzinin hafif bileşenleri yerinde; ağırlaşma yok.',
+      description:
+        'Ham verinin profil satırı: kurşunsuz benzin, en uçucu bileşenleri korunmuş. Ateş ve söndürme suyu görmüş bir benzinde önce bunlar kaybolur.',
+      sourceLabel: 'Laboratuvar ham verisi',
+      icon: 'magnifier',
+      tags: ara,
+    }),
     clue('clue_piroliz', {
       type: 'ADLI_RAPOR',
       title: 'Yanma ürünü yok',
-      shortText: 'Kromatogramda benzin var, ama yanmış ahşabın piroliz ürünleri yok.',
+      shortText: 'Numune matrisinde yanmış ahşabın piroliz ürünleri yok.',
       description:
-        'Ham veride iki teneke numunede de buharlaşmamış benzin profili; yanmış ahşap ve vernikten beklenen piroliz ürünleri ise hiç yok. Numune, yangından geçmiş bir zeminden gelmiş gibi durmuyor.',
+        'Ham verinin matris satırı: ahşap talaşı ve kül; yanmış ahşap ve vernikten beklenen piroliz ürünleri ise hiç yok. Numune, yangından geçmiş bir zeminden gelmiş gibi durmuyor.',
       sourceLabel: 'Laboratuvar ham verisi',
       icon: 'magnifier',
       tags: ara,
@@ -697,6 +707,20 @@ export const evidencePart: CasePart = {
     }),
 
     // --- Çıkarımlar (2. tahta) ---
+    insight('ded_yanmamis', {
+      type: 'ADLI_RAPOR',
+      title: 'Numune yangını görmedi',
+      shortText: 'Taze benzin, yanma ürünü yok: talaş ne ateşi gördü ne suyu.',
+      description:
+        'Bilirkişinin “taze benzin” dediği numunede yanmış ahşabın, verniğin, plastiğin piroliz ürünleri hiç yok. Bir buçuk saat yanan, seksen dakika su yiyen bir zeminden alınmış bir talaş böyle olmaz.',
+      sourceLabel: 'Çıkarım tahtası',
+      icon: 'magnifier',
+      side: 'DEFENSE',
+      strength: 'STRONG',
+      combinable: true,
+      presentable: false,
+      tags: ara,
+    }),
     insight('ded_ekilmis', {
       type: 'ADLI_RAPOR',
       title: 'Tenekeler önceden doluydu',

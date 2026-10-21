@@ -6,7 +6,6 @@ import {
   cont,
   decisionNode,
   deductionBoard,
-  fallback,
   flag,
   has,
   inc,
@@ -26,11 +25,17 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import type { ChoiceDef } from '@mudafaa/case-schema';
-import { INV1, card, n, named, p1, s, th } from './shared.js';
+import { INV1, TAHTA_HAK, card, n, named, p1, s, tahtaIska, tahtaKilit, th } from './shared.js';
 import { sabahKapisi } from './inv-people.js';
 
-/** Bekçiye ikinci ziyaret: ilk ziyarette sabah sorulamadıysa (zincirdeki boşluk henüz görülmemişse), bir EP daha. */
-const cevdet2Gorunur = all(visited('INV_CEVDET'), not(chosen('CV_SABAH')), sabahKapisi);
+/**
+ * Bekçiye ikinci ziyaret (bir EP): ilk ziyarette sabah sorulamadıysa (zincirdeki boşluk henüz görülmemişse) ya da sabah
+ * sorulduğu hâlde mahkemeye gelip gelmeyeceği sorulmadıysa.
+ */
+const cevdet2Gorunur = all(
+  visited('INV_CEVDET'),
+  any(all(not(chosen('CV_SABAH')), sabahKapisi), all(chosen('CV_SABAH'), not(chosen('CV_TANIK')))),
+);
 /** Elektrikçiye ikinci ziyaret: takvim kartı kurulduysa ama usta tanıklığa davet edilmediyse, bir EP daha. */
 const necati2Gorunur = all(visited('INV_NECATI'), has('ded_onlem'), not(flag('necati_hazir')));
 
@@ -55,14 +60,14 @@ const hubChoices = {
       lockedReason: 'Dilekçe son gün yazılır; taslağı önce Leyla okur.',
     }),
     p1.free('A_CIKARIM', 'Yangın tahtası: nerede, neyle', 'INV_CIKARIM', {
-      description: '0 EP · ipuçlarını birleştir',
-      enabledWhen: ref('kart2'),
-      lockedReason: 'En az 2 ipucu gerekli.',
+      description: '0 EP · ipuçlarını birleştir · günde 3 yanlış hakkı',
+      enabledWhen: all(ref('kart2'), cmp(v('tah_yangin'), '>', 0)),
+      lockedReason: 'En az 2 ipucu gerekli. Bugün yanlış bağlantı hakkın bittiyse tahta yarın açılır.',
     }),
     p1.free('A_IPLIK', 'İplik tahtası: dolaylı deliller', 'INV_IPLIK', {
-      description: '0 EP · ipuçlarını birleştir',
-      enabledWhen: ref('kart2'),
-      lockedReason: 'En az 2 ipucu gerekli.',
+      description: '0 EP · ipuçlarını birleştir · günde 3 yanlış hakkı',
+      enabledWhen: all(ref('kart2'), cmp(v('tah_iplik'), '>', 0)),
+      lockedReason: 'En az 2 ipucu gerekli. Bugün yanlış bağlantı hakkın bittiyse tahta yarın açılır.',
     }),
     p1.free('A_LEYLA', 'Leyla’ya danış', 'INV_LEYLA', {
       description: '0 EP · günde bir kez',
@@ -99,18 +104,19 @@ const hubChoices = {
     }),
     p1.activity('A_CEVDET', 'Mahallenin bekçisi', 'INV_CEVDET', {
       once: true,
-      description: 'Bekçi kulübesi · olay yerini o bekledi',
+      description: 'Bekçi kulübesi · Muradiye meydanı',
       visibleWhen: any(visited('INV_SAADET'), has('clue_numune'), visited('INV_EV')),
     }),
     p1.activity('A_CEVDET2', 'Bekçiye yeniden uğra', 'INV_CEVDET', {
       once: true,
-      description: 'Bekçi kulübesi · sabahı sor',
+      description: 'Bekçi kulübesi · yeniden uğra',
       visibleWhen: cevdet2Gorunur,
     }),
     p1.activity('A_NECATI', 'Elektrikçi Necati Usta', 'INV_NECATI', {
       once: true,
       description: 'Restorasyon ekibi · tesisat keşfi',
-      visibleWhen: any(has('clue_restorasyon'), has('clue_buat'), flag('fact_elektrikci')),
+      // Halil ilk görüşmede restorasyon ekibini anar; ekibin elektrikçisine gitmek için konunun ayrıntısı gerekmez.
+      visibleWhen: any(has('clue_restorasyon'), has('clue_buat'), flag('fact_elektrikci'), visited('INV_GORUSME')),
     }),
     p1.activity('A_NECATI2', 'Necati Usta’ya yeniden uğra', 'INV_NECATI', {
       once: true,
@@ -120,7 +126,8 @@ const hubChoices = {
     p1.activity('A_KADER', 'Sigorta acentesi', 'INV_KADER', {
       once: true,
       description: 'Poliçeyi düzenleyen acente',
-      visibleWhen: any(has('clue_kampanya'), flag('fact_artis')),
+      // Poliçede acentenin adı yazar: poliçeyi okuyan, onu düzenleyene de gidebilir.
+      visibleWhen: any(has('clue_kampanya'), flag('fact_artis'), visited('INV_POLICE')),
     }),
   ],
   arsiv: [
@@ -155,9 +162,12 @@ const sonGunBitti = any(
     chosen('A_POLICE'),
     any(chosen('A_CEVDET'), not(any(visited('INV_SAADET'), has('clue_numune'), visited('INV_EV')))),
     any(chosen('A_CEVDET2'), not(cevdet2Gorunur)),
-    any(chosen('A_NECATI'), not(any(has('clue_restorasyon'), has('clue_buat'), flag('fact_elektrikci')))),
+    any(
+      chosen('A_NECATI'),
+      not(any(has('clue_restorasyon'), has('clue_buat'), flag('fact_elektrikci'), visited('INV_GORUSME'))),
+    ),
     any(chosen('A_NECATI2'), not(necati2Gorunur)),
-    any(chosen('A_KADER'), not(any(has('clue_kampanya'), flag('fact_artis')))),
+    any(chosen('A_KADER'), not(any(has('clue_kampanya'), flag('fact_artis'), visited('INV_POLICE')))),
   ),
 );
 
@@ -229,7 +239,7 @@ export const invHub: CasePart = {
     decisionNode('INV_DAY_END', [{ when: cmp(v('day'), '==', 2), to: 'INV_AKSAM1' }, { to: 'INV_AKSAM2' }], {
       ...INV1,
       title: 'Gün sonu',
-      onEnter: [inc('day', 1), set('ap', 4)],
+      onEnter: [inc('day', 1), set('ap', 4), set('tah_yangin', TAHTA_HAK), set('tah_iplik', TAHTA_HAK)],
     }),
     story('INV_AKSAM1', {
       ...INV1,
@@ -619,7 +629,8 @@ export const invHub: CasePart = {
           next: '$stay',
         }),
         option('DIL_LAB', 'Laboratuvarın ham verilerinin ve numune kabul tutanağının istenmesi', {
-          visibleWhen: has('clue_taze'),
+          // Talebin dayanağı: söndürmeden sağ çıkan taze benzin (çıkarım). Gerekçesiz ham veri talebi kabul görmez (CMK 206/2).
+          visibleWhen: has('ded_taze'),
           cost: [{ var: 'dil_hak', amount: 1 }],
           score: { USUL_BILGISI: 40 },
           effects: [raise('lab_istendi')],
@@ -627,8 +638,9 @@ export const invHub: CasePart = {
           next: '$stay',
         }),
         option('DIL_CEVDET', 'Bekçi Cevdet Alkan’ın tanık olarak dinlenmesi', {
-          // Tanık, dayanağı olan kayıt (devriye çizelgesi) elde edildikten sonra gösterilir.
-          visibleWhen: all(met('cevdet'), has('ev_cizelge')),
+          // Tanık, dayanağı olan kayıt (devriye çizelgesi) elde edildikten ve tanığa mahkemede anlatıp anlatmayacağı
+          // sorulduktan sonra gösterilir (tanık davete uymakla yükümlüdür, CMK 44; avukat tanığını tanımadan göstermez).
+          visibleWhen: all(met('cevdet'), has('ev_cizelge'), chosen('CV_TANIK')),
           cost: [{ var: 'dil_hak', amount: 1 }],
           score: { USUL_BILGISI: 40 },
           effects: [raise('cevdet_istendi')],
@@ -684,7 +696,10 @@ export const invHub: CasePart = {
         {
           lines: [
             n(
-              'Yangın tahtası: nerede başladı, neyle başladı? İki ipucunu seç; birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar. Yanlış çift puan götürür.',
+              'Yangın tahtası: nerede başladı, neyle başladı? İki ipucunu seç; birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar.',
+            ),
+            n(
+              'Yanlış çift puan ve günlük bağlantı hakkı götürür; günde üç yanlıştan sonra tahta ertesi güne kadar kapanır.',
             ),
           ],
         },
@@ -705,7 +720,8 @@ export const invHub: CasePart = {
         'clue_moloz',
         'clue_gec',
       ],
-      recipes: [
+      hud: ['tah_yangin'],
+      recipes: tahtaKilit('tah_yangin', [
         deduce(
           'CB_TEMIZ',
           'clue_foto_tavan',
@@ -754,17 +770,8 @@ export const invHub: CasePart = {
           'Söndürmeden sağ çıkan benzin',
           'Saatlerce ateş, seksen dakika su. Böyle bir zeminden neredeyse taze bir benzin çıkması beklenmez. Benzin yangından sonra gelmiş olabilir.',
         ),
-      ],
-      miss: fallback('FB_CIKARIM', 'COMBINE', {
-        repeat: 'ONCE_PER_PARAMS',
-        score: { DELIL_ANALIZI: -50 },
-        feedback: {
-          title: 'Bu ikisi birbirini açıklamıyor',
-          text: 'Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Başka bir çift dene.',
-          label: 'BAĞLANTI YOK · −50 SKOR',
-          tone: 'error',
-        },
-      }),
+      ]),
+      miss: tahtaIska('FB_CIKARIM', 'tah_yangin'),
       finish: { id: 'CIKARIM_BITIR' },
     }),
     deductionBoard('INV_IPLIK', {
@@ -775,7 +782,10 @@ export const invHub: CasePart = {
         {
           lines: [
             n(
-              'İplik tahtası: savcının halatını oluşturan dolaylı deliller. Her ipliğin masum ve belgeli bir açıklaması var mı? Yanlış çift puan götürür.',
+              'İplik tahtası: savcının halatını oluşturan dolaylı deliller. Her ipliğin masum ve belgeli bir açıklaması var mı?',
+            ),
+            n(
+              'Yanlış çift puan ve günlük bağlantı hakkı götürür; günde üç yanlıştan sonra tahta ertesi güne kadar kapanır.',
             ),
           ],
         },
@@ -795,7 +805,8 @@ export const invHub: CasePart = {
         'clue_borc',
         'clue_yan_ev',
       ],
-      recipes: [
+      hud: ['tah_iplik'],
+      recipes: tahtaKilit('tah_iplik', [
         deduce(
           'CB_TASIMA',
           'clue_esyalar',
@@ -844,17 +855,8 @@ export const invHub: CasePart = {
           'El fenerli adam bekçiydi',
           'Saadet Hanım’ın gece bir sularında gördüğü el fenerli adam, çizelgesine 01.30 kapı kontrolü yazan bekçi.',
         ),
-      ],
-      miss: fallback('FB_IPLIK', 'COMBINE', {
-        repeat: 'ONCE_PER_PARAMS',
-        score: { DELIL_ANALIZI: -50 },
-        feedback: {
-          title: 'Bu ikisi birbirini açıklamıyor',
-          text: 'Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Başka bir çift dene.',
-          label: 'BAĞLANTI YOK · −50 SKOR',
-          tone: 'error',
-        },
-      }),
+      ]),
+      miss: tahtaIska('FB_IPLIK', 'tah_iplik'),
       finish: { id: 'IPLIK_BITIR' },
     }),
     // --- Duruşmadan önceki gece: koşullu hafıza zinciri ---

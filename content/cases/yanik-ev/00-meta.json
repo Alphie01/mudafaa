@@ -115,24 +115,14 @@
       "when": { "cmp": [{ "count": "evidence", "tag": "ara" }, ">=", 2] }
     },
     {
-      "id": "hizlandirici_coktu",
-      "label": "Hızlandırıcı iddiasının her ayağı kayıtla çöktü: numune zinciri (bilirkişi + yeminli bekçi + eksperin kendi girişi), zemin izi (iki celsede), koku tanığı, satın alınan benzin, başlangıç noktası, elektrik dışlaması (pano, buat, mahkemenin ark raporu) ve laboratuvar bulgusu (taze benzin + ham veri, mühür, tutanak yokluğu)",
+      "id": "kast_coktu",
+      "label": "Kast iddiası kayıtla çöktü: numuneleri kolluk değil eksper getirdi (bilirkişinin kabulü), eksper muhafaza altındaki olay yerine refakatsiz girdi (yeminli bekçi ya da kendi beyanı), içeri dolu tenekelerle girdi (bekçi) ve numuneler o yangını hiç görmedi (ham veri, şahsi mühür, tutanak yokluğu)",
       "when": {
         "all": [
           { "flag": "contra_b2" },
-          { "chosen": "CV_Q2" },
-          { "flag": "cevdet_dinlendi" },
-          { "flag": "contra_u1" },
-          { "flag": "contra_b1" },
-          { "flag": "contra_u2" },
-          { "flag": "contra_s2" },
-          { "flag": "contra_s6" },
-          { "flag": "contra_koken" },
-          { "flag": "contra_b3" },
-          { "flag": "contra_buat" },
-          { "flag": "contra_u6_ark" },
-          { "flag": "contra_b4" },
-          { "flag": "contra_u3" }
+          { "flag": "contra_u3" },
+          { "any": [{ "flag": "contra_u1" }, { "chosen": "CV_Q2" }] },
+          { "flag": "cevdet_dinlendi" }
         ]
       }
     },
@@ -346,6 +336,36 @@
       "visibility": "VISIBLE",
       "analysis": "resource",
       "display": { "label": "Deneme hakkı", "widget": "counter", "max": 3, "lowAt": 1 }
+    },
+    {
+      "id": "tah_yangin",
+      "type": "int",
+      "initial": 3,
+      "min": 0,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Bağlantı hakkı", "widget": "counter", "max": 3, "lowAt": 1 }
+    },
+    {
+      "id": "tah_iplik",
+      "type": "int",
+      "initial": 3,
+      "min": 0,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Bağlantı hakkı", "widget": "counter", "max": 3, "lowAt": 1 }
+    },
+    {
+      "id": "tah_ara",
+      "type": "int",
+      "initial": 3,
+      "min": 0,
+      "max": 3,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Bağlantı hakkı", "widget": "counter", "max": 3, "lowAt": 1 }
     },
     {
       "id": "dil_hak",

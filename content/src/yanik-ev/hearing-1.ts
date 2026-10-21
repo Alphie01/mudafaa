@@ -634,8 +634,25 @@ export const hearing1: CasePart = {
         savcilikDelili('PS_SAV_S'),
         pressRule('PR_S1', 'S1', {
           score: { SORGULAMA: 25 },
-          effects: [raise('press_s1')],
+          // Raporun ekini okumuş müdafi sabahı da sorar: komşunun gördüğü “iki teneke” tutanağa girer (bekçiye sorulacak soru).
+          effects: [
+            raise('press_s1'),
+            ifThen(any(has('clue_numune'), has('clue_eksper_foto')), [raise('fact_teneke_saadet')]),
+          ],
           responses: [
+            {
+              when: any(has('clue_numune'), has('clue_eksper_foto')),
+              lines: [
+                me('Adamın yüzünü gördünüz mü, Saadet Hanım?'),
+                s('saadet', 'Yok. Yağmur, karanlık. Feneri vardı. Kapıyı yokladı, gitti. Boyu posu Halil gibiydi.'),
+                me('Kapıyı yokladı ve gitti. Peki sabah? Polisler gittikten sonra şeridin içine giren oldu mu?'),
+                s(
+                  'saadet',
+                  'Oldu. Dokuz gibi. Takım elbiseli, şık bir adam. Elinde iki teneke, omzunda bir çanta. Girdi, bir saat kadar kaldı, çıktı.',
+                ),
+                n('Katılan vekili kalemini bıraktı. Hâkim kâtibe bir şey söyledi; kâtip yazdı.'),
+              ],
+            },
             {
               lines: [
                 me('Adamın yüzünü gördünüz mü, Saadet Hanım?'),
@@ -1437,6 +1454,7 @@ export const hearing1: CasePart = {
           lines: [
             s('hakim', 'Taraflar, delil talepleriniz? Müdafi.'),
             th('Bu celse bitmeden mahkemeye neyi getirtmesini istiyorum? Üç talep; hâkimin sabrı da bir kaynak.'),
+            s('hakim', 'Sanık tutuklu. Tutukluluk hakkındaki beyanınızı da alacağım.'),
           ],
         },
       ],
@@ -1459,7 +1477,8 @@ export const hearing1: CasePart = {
           next: '$stay',
         }),
         option('T1_LAB', 'Laboratuvarın ham verilerinin ve numune kabul tutanağının getirtilmesi', {
-          visibleWhen: all(any(has('clue_taze'), flag('contra_b4'), flag('contra_b2')), not(flag('lab_istendi'))),
+          // Dayanak: taze benzin çıkarımı ya da bilirkişinin kürsüdeki kabulü (CMK 206/2: talebin delille ilgisi gösterilmeli).
+          visibleWhen: all(any(has('ded_taze'), flag('contra_b4')), not(flag('lab_istendi'))),
           cost: [{ var: 'h1_hak', amount: 1 }],
           score: { USUL_BILGISI: 40 },
           effects: [raise('lab_istendi')],
@@ -1475,7 +1494,7 @@ export const hearing1: CasePart = {
           next: '$stay',
         }),
         option('T1_CEVDET', 'Bekçi Cevdet Alkan’ın tanık olarak dinlenmesi', {
-          visibleWhen: all(met('cevdet'), has('ev_cizelge'), not(flag('cevdet_istendi'))),
+          visibleWhen: all(met('cevdet'), has('ev_cizelge'), { chosen: 'CV_TANIK' }, not(flag('cevdet_istendi'))),
           cost: [{ var: 'h1_hak', amount: 1 }],
           score: { USUL_BILGISI: 40 },
           effects: [raise('cevdet_istendi')],
@@ -1511,7 +1530,21 @@ export const hearing1: CasePart = {
           ],
           next: '$stay',
         }),
-        option('T1_BITIR', 'Taleplerimiz bu kadar', { next: 'H1_08' }),
+        option('T1_TAKDIR', 'Tutukluluk konusunda takdiri mahkemeye bırakıyoruz', {
+          visibleWhen: all(not(flag('tahliye_istendi')), not({ chosen: 'T1_TAKDIR' })),
+          neutral:
+            'Mahkeme her celsede tutukluluğu kendiliğinden inceler (CMK 108/3); müdafi talepte bulunmak zorunda değildir. Ama tutuklamanın dayanağı sarsıldıysa susmak, en ucuz talebi harcamamaktır.',
+          responses: [{ lines: [s('hakim', 'Tutukluluk durumu ara kararda değerlendirilecek.')] }],
+          next: '$stay',
+        }),
+        option('T1_BITIR', 'Taleplerimiz bu kadar', {
+          // Tutuklu sanık: mahkeme her celsede tutukluluğu inceler ve müdafiin beyanını sorar (CMK 108/3). Müdafi tahliye
+          // isteyebilir ya da takdiri mahkemeye bırakır; beyan alınmadan talepler kapanmaz.
+          enabledWhen: any(flag('tahliye_istendi'), { chosen: 'T1_TAKDIR' }),
+          lockedReason:
+            'Hâkim tutukluluk hakkındaki beyanını bekliyor: tahliye mi istiyorsun, takdire mi bırakıyorsun?',
+          next: 'H1_08',
+        }),
       ],
     }),
     story('H1_08', {

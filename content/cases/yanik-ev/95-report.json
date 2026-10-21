@@ -147,8 +147,105 @@
       },
       {
         "id": "h_koken",
-        "when": { "all": [{ "flag": "contra_b1" }, { "not": { "flag": "contra_koken" } }] },
+        "when": {
+          "all": [
+            { "flag": "contra_b1" },
+            { "not": { "flag": "contra_koken" } },
+            { "not": { "hasEvidence": "ded_koken" } }
+          ]
+        },
         "text": "Bilirkişinin başlangıç noktası (salon) yalnızca zemin izine dayanıyordu; itfaiyenin tespiti ve V izi birinci celsede bunu tutanağa geçirirdi.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_sun_zincir",
+        "when": { "all": [{ "hasEvidence": "ded_zincir" }, { "not": { "flag": "contra_b2" } }] },
+        "text": "Kopuk numune zinciri kartı elindeydi; bilirkişinin “olay yerinden alınan numuneler” cümlesine (B2) karşı hiç sunmadın. Numunelerin kimden geldiği kürsüde söylenmeden zincirin ilk halkası kurulmaz.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_sun_q2",
+        "when": {
+          "all": [{ "chosen": "CV_Q1" }, { "not": { "chosen": "CV_Q2" } }, { "not": { "flag": "contra_u1" } }]
+        },
+        "text": "Bekçiye muhafazayı sordun ama arada olay yerine kimin girdiğini sormadın; eksperin “polis izniyle girdim” cümlesine de çizelgeyi göstermedin. Eksperin yalnız girdiği kayda geçmedi.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_sun_q3",
+        "when": { "all": [{ "hasEvidence": "clue_teneke" }, { "not": { "flag": "cevdet_dinlendi" } }] },
+        "text": "Bekçi tenekelerin içeri ağır girdiğini sana anlatmıştı; kürsüde “Elinde ne vardı?” diye sormadın. Gözüyle göreni kürsüye çıkarmadıkça bu bir ayrıntı olarak kalır.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_yanmamis",
+        "when": {
+          "all": [
+            { "any": [{ "hasEvidence": "clue_piroliz" }, { "hasEvidence": "clue_buhar" }] },
+            { "not": { "hasEvidence": "ded_yanmamis" } }
+          ]
+        },
+        "text": "Ham verinin profil satırı (buharlaşmamış benzin) ile matris satırı (yanma ürünü yok) birlikte numunenin yangını hiç görmediğini söylüyordu; tahtada birleştirmedin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_sun_u3",
+        "when": { "all": [{ "hasEvidence": "ded_ekilmis" }, { "not": { "flag": "contra_u3" } }] },
+        "text": "“Tenekeler önceden doluydu” kartı elindeydi; eksperin “numuneleri o zeminden aldım” cümlesine (U3) karşı, temeli kurulmuş olarak sunulmadı. Kastı düşüren son halka buydu.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_sun_s2",
+        "when": { "all": [{ "hasEvidence": "clue_koku_yok" }, { "not": { "flag": "contra_s2" } }] },
+        "text": "İtfaiyenin “akaryakıt kokusu alınmamıştır” satırını okumuştun; Saadet Hanım’ın “benzin kokusu” ifadesine (S2) karşı hiç sunmadın. Koku tanığı gerekçede ayakta kaldı.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_sun_s6",
+        "when": { "all": [{ "hasEvidence": "ded_bidon" }, { "not": { "flag": "contra_s6" } }] },
+        "text": "Atölyedeki dolu bidon kartı elindeydi; “kırmızı bidon” ifadesine (S6) karşı sunmadın. Fişteki benzinin nerede olduğu kayda geçmedi.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_sun_koken",
+        "when": { "all": [{ "hasEvidence": "ded_koken" }, { "not": { "flag": "contra_koken" } }] },
+        "text": "Başlangıç noktası kartı (V izi + itfaiye) elindeydi; bilirkişinin “salon zemininde başladı” cümlesine (B1) karşı sunmadın.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_sun_zemin",
+        "when": {
+          "all": [
+            { "hasEvidence": "ded_temizlenmis" },
+            { "not": { "flag": "contra_b1" } },
+            { "not": { "flag": "contra_u2" } }
+          ]
+        },
+        "text": "Temizlenmiş zemin kartı elindeydi; ne bilirkişinin döküntü izine (B1) ne eksperin “molozun altında ilk ben” cümlesine (U2) karşı sundun.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_sun_pano",
+        "when": { "all": [{ "hasEvidence": "ded_pano" }, { "not": { "flag": "contra_b3" } }] },
+        "text": "Panonun hiç incelenmediğini gösteren kart elindeydi; bilirkişinin “elektrik izi yoktur” cümlesine (B3) karşı sunmadın.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_sun_buat",
+        "when": { "all": [{ "hasEvidence": "ded_buat" }, { "not": { "flag": "contra_buat" } }] },
+        "text": "Isınan buat kartı elindeydi; B3’e karşı sunulsaydı ustanın notu tutanağa ilk celsede girerdi.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_sun_taze",
+        "when": { "all": [{ "hasEvidence": "ded_taze" }, { "not": { "flag": "contra_b4" } }] },
+        "text": "Söndürmeden sağ çıkan benzin kartı elindeydi; bilirkişinin “yoğun ve taze” cümlesine (B4) karşı sunmadın. Tazeliğin “bol dökülmüş” açıklaması kayıtta karşısız kaldı.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_sun_ark",
+        "when": { "all": [{ "hasEvidence": "ev_ark" }, { "not": { "flag": "contra_u6_ark" } }] },
+        "text": "Mahkemenin elektrik bilirkişisi raporu dosyadaydı; eksperin “elektrik olsaydı görürdüm” cümlesine (U6), linye satırı okunmuş olarak sunulmadı.",
         "category": "SORGULAMA"
       },
       {

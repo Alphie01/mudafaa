@@ -987,6 +987,28 @@
           "match": { "statement": "S1" },
           "responses": [
             {
+              "when": { "any": [{ "hasEvidence": "clue_numune" }, { "hasEvidence": "clue_eksper_foto" }] },
+              "lines": [
+                { "speaker": "player", "text": "Adamın yüzünü gördünüz mü, Saadet Hanım?" },
+                {
+                  "speaker": "saadet",
+                  "text": "Yok. Yağmur, karanlık. Feneri vardı. Kapıyı yokladı, gitti. Boyu posu Halil gibiydi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kapıyı yokladı ve gitti. Peki sabah? Polisler gittikten sonra şeridin içine giren oldu mu?"
+                },
+                {
+                  "speaker": "saadet",
+                  "text": "Oldu. Dokuz gibi. Takım elbiseli, şık bir adam. Elinde iki teneke, omzunda bir çanta. Girdi, bir saat kadar kaldı, çıktı."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Katılan vekili kalemini bıraktı. Hâkim kâtibe bir şey söyledi; kâtip yazdı."
+                }
+              ]
+            },
+            {
               "lines": [
                 { "speaker": "player", "text": "Adamın yüzünü gördünüz mü, Saadet Hanım?" },
                 {
@@ -1003,7 +1025,12 @@
           ],
           "effects": [
             { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
-            { "type": "VAR", "var": "press_s1", "op": "set", "value": true }
+            { "type": "VAR", "var": "press_s1", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": { "any": [{ "hasEvidence": "clue_numune" }, { "hasEvidence": "clue_eksper_foto" }] },
+              "then": [{ "type": "VAR", "var": "fact_teneke_saadet", "op": "set", "value": true }]
+            }
           ]
         },
         {
@@ -2391,7 +2418,8 @@
               "speaker": "player",
               "text": "Bu celse bitmeden mahkemeye neyi getirtmesini istiyorum? Üç talep; hâkimin sabrı da bir kaynak.",
               "style": "thought"
-            }
+            },
+            { "speaker": "hakim", "text": "Sanık tutuklu. Tutukluluk hakkındaki beyanınızı da alacağım." }
           ]
         }
       ],
@@ -2440,7 +2468,7 @@
           "label": "Laboratuvarın ham verilerinin ve numune kabul tutanağının getirtilmesi",
           "visibleWhen": {
             "all": [
-              { "any": [{ "hasEvidence": "clue_taze" }, { "flag": "contra_b4" }, { "flag": "contra_b2" }] },
+              { "any": [{ "hasEvidence": "ded_taze" }, { "flag": "contra_b4" }] },
               { "not": { "flag": "lab_istendi" } }
             ]
           },
@@ -2478,7 +2506,12 @@
           "kind": "OPTION",
           "label": "Bekçi Cevdet Alkan’ın tanık olarak dinlenmesi",
           "visibleWhen": {
-            "all": [{ "met": "cevdet" }, { "hasEvidence": "ev_cizelge" }, { "not": { "flag": "cevdet_istendi" } }]
+            "all": [
+              { "met": "cevdet" },
+              { "hasEvidence": "ev_cizelge" },
+              { "chosen": "CV_TANIK" },
+              { "not": { "flag": "cevdet_istendi" } }
+            ]
           },
           "cost": [{ "var": "h1_hak", "amount": 1 }],
           "next": "$stay",
@@ -2541,7 +2574,28 @@
           "next": "$stay",
           "effects": [{ "type": "VAR", "var": "tahliye_istendi", "op": "set", "value": true }]
         },
-        { "id": "T1_BITIR", "kind": "OPTION", "label": "Taleplerimiz bu kadar", "next": "H1_08" }
+        {
+          "id": "T1_TAKDIR",
+          "kind": "OPTION",
+          "label": "Tutukluluk konusunda takdiri mahkemeye bırakıyoruz",
+          "visibleWhen": { "all": [{ "not": { "flag": "tahliye_istendi" } }, { "not": { "chosen": "T1_TAKDIR" } }] },
+          "responses": [
+            { "lines": [{ "speaker": "hakim", "text": "Tutukluluk durumu ara kararda değerlendirilecek." }] }
+          ],
+          "next": "$stay",
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Mahkeme her celsede tutukluluğu kendiliğinden inceler (CMK 108/3); müdafi talepte bulunmak zorunda değildir. Ama tutuklamanın dayanağı sarsıldıysa susmak, en ucuz talebi harcamamaktır."
+          }
+        },
+        {
+          "id": "T1_BITIR",
+          "kind": "OPTION",
+          "label": "Taleplerimiz bu kadar",
+          "enabledWhen": { "any": [{ "flag": "tahliye_istendi" }, { "chosen": "T1_TAKDIR" }] },
+          "lockedReason": "Hâkim tutukluluk hakkındaki beyanını bekliyor: tahliye mi istiyorsun, takdire mi bırakıyorsun?",
+          "next": "H1_08"
+        }
       ]
     },
     {

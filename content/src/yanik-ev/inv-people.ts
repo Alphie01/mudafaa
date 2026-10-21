@@ -31,7 +31,11 @@ import { INV1, card, me, n, s, th } from './shared.js';
  * Bekçiye sabahı sormanın kapısı: numunelerin kolluktan değil eksperden geldiği raporun ekinde, sabahki fotoğrafın
  * eksperce çekildiği de albümde ya da raporda görülmüş olmalı. Sorunun kendisi ancak zincirdeki boşluk görülünce akla gelir.
  */
-export const sabahKapisi = all(has('clue_numune'), any(visited('INV_FOTO'), has('clue_eksper_foto')));
+/**
+ * Bekçinin sabahı: numunelerin teslim tutanağı (raporun eki) ve zeminin 04.30 ile 09.40 arasında açıldığı (temizlenmiş zemin
+ * çıkarımı) birlikte elde olmalı. "Arada biri girdi" sonucuna varmadan, kapıyı bekleyene kimin girdiğini sormanın zemini yok.
+ */
+export const sabahKapisi = all(has('clue_numune'), has('ded_temizlenmis'));
 
 // 52-inv-kisiler: cezaevinde müvekkil görüşmesi (konular başka yerlerde öğrenilenlerle açılır), komşu Saadet, bekçi
 // Cevdet, elektrikçi Necati, acente Kader.
@@ -67,6 +71,10 @@ export const invPeople: CasePart = {
             s(
               'halil',
               'Sorun. Ben kumaşçıyım. Bir şeyin iyi mi kötü mü olduğunu ters yüzünden anlarım. Sorularınızın da ters yüzüne bakarım.',
+            ),
+            s(
+              'halil',
+              'Yalnız şunu bilin: o evi yakmak değil, yapmak için kredi çektim. Ocakta restorasyon başlayacaktı. Ustalar hazırdı, elektrikçisi bile; Necati Usta.',
             ),
           ],
         },
@@ -663,6 +671,17 @@ export const invPeople: CasePart = {
       onFirstEnter: [meet('cevdet')],
       lines: [
         {
+          when: all(chosen('A_CEVDET2'), chosen('CV_SABAH')),
+          lines: [
+            card('MURADİYE MEYDANI — BEKÇİ KULÜBESİ, 21.40', 'sokak_karanlik'),
+            n('Kulübenin camı yine buğuluydu. Cevdet beni görünce termosun kapağını kapattı.'),
+            s('cevdet', 'Yine siz. Defter burada, avukat hanım. Bir şey mi eksik kaldı?'),
+            th(
+              'Defterin o satırını okumuştum. Ama ona en basit soruyu sormamıştım: bunu bir hâkimin önünde de söyler mi? Bir tanığı, gelip gelmeyeceğini bilmeden mahkemeye bildirmem.',
+            ),
+          ],
+        },
+        {
           when: chosen('A_CEVDET2'),
           lines: [
             card('MURADİYE MEYDANI — BEKÇİ KULÜBESİ, 21.40', 'sokak_karanlik'),
@@ -670,7 +689,9 @@ export const invPeople: CasePart = {
               'Kulübenin camı yine buğuluydu. Cevdet beni görünce termosun kapağını kapattı; bu sefer defteri göğsüne bastırmadı.',
             ),
             s('cevdet', 'Yine siz. Bir şey unuttunuz galiba, avukat hanım. Sorun. Defter burada.'),
-            th('Unutmadım. O gün sormayı bilmiyordum. Raporun ekini okuyana kadar sorulacak soru yoktu.'),
+            th(
+              'Unutmadım. O gün sormayı bilmiyordum. Raporun ekindeki teslim tutanağını ve iki fotoğrafı yan yana koyana kadar sorulacak soru yoktu: 04.30’da örtülü bir zemin, 09.40’ta açık bir zemin. Arada biri o kapıdan geçti.',
+            ),
           ],
         },
         {
@@ -718,6 +739,9 @@ export const invPeople: CasePart = {
           responses: [
             {
               lines: [
+                th(
+                  'Zemin 04.30’da tavan tahtalarının altındaydı, 09.40’ta çıplaktı. Numuneleri getiren de bir eksperdi. Arada kapıda kim duruyorsa, o beş saati o bilir.',
+                ),
                 s(
                   'cevdet',
                   'Beşte polis şeridi çekti, “Cevdet sen bekle” dedi. Bekledim. Onda polis geldi, teslim ettim.',
@@ -742,6 +766,7 @@ export const invPeople: CasePart = {
           next: '$stay',
         }),
         option('CV_TANIK', 'Bunu mahkemede anlatır mısınız?', {
+          visibleWhen: chosen('CV_SABAH'),
           responses: [
             {
               lines: [

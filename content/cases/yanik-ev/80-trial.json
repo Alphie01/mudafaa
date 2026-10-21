@@ -490,7 +490,7 @@
           "id": "CV_Q3",
           "kind": "OPTION",
           "label": "Elinde ne vardı?",
-          "visibleWhen": { "hasEvidence": "clue_teneke" },
+          "visibleWhen": { "all": [{ "hasEvidence": "clue_teneke" }, { "chosen": "CV_Q2" }] },
           "responses": [
             {
               "lines": [
@@ -1048,7 +1048,20 @@
           "id": "PS_U3",
           "kind": "PRESENT",
           "match": { "statement": "U3", "evidence": ["ded_ekilmis"] },
-          "enabledWhen": { "all": [{ "flag": "press_u3" }, { "flag": "fact_muhur" }, { "flag": "fact_tutanak" }] },
+          "enabledWhen": {
+            "all": [
+              { "flag": "press_u3" },
+              {
+                "all": [
+                  { "flag": "fact_muhur" },
+                  { "flag": "fact_tutanak" },
+                  { "flag": "contra_b2" },
+                  { "flag": "cevdet_dinlendi" },
+                  { "any": [{ "flag": "contra_u1" }, { "chosen": "CV_Q2" }] }
+                ]
+              }
+            ]
+          },
           "responses": [
             {
               "when": { "hasEvidence": "ev_elkoyma" },
@@ -1103,11 +1116,22 @@
           "enabledWhen": {
             "all": [
               { "flag": "press_u3" },
-              { "not": { "all": [{ "flag": "fact_muhur" }, { "flag": "fact_tutanak" }] } }
+              {
+                "not": {
+                  "all": [
+                    { "flag": "fact_muhur" },
+                    { "flag": "fact_tutanak" },
+                    { "flag": "contra_b2" },
+                    { "flag": "cevdet_dinlendi" },
+                    { "any": [{ "flag": "contra_u1" }, { "chosen": "CV_Q2" }] }
+                  ]
+                }
+              }
             ]
           },
           "responses": [
             {
+              "when": { "not": { "all": [{ "flag": "fact_muhur" }, { "flag": "fact_tutanak" }] } },
               "lines": [
                 {
                   "speaker": "tarik",
@@ -1119,6 +1143,48 @@
                   "style": "thought"
                 }
               ]
+            },
+            {
+              "when": { "not": { "flag": "contra_b2" } },
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Numuneler savcılık kanalıyla, mühürlü olarak bilirkişiye gitti. Bilirkişi de ilk celsede bir itiraz duymadı. Bunu bana değil ona sormalıydınız."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Haklı olduğu tek yer. Bilirkişiye numunelerin kimden geldiğini ilk celsede kürsüde söyletmedim; şimdi zincirin ilk halkası bir eksperin sözüne kaldı.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "when": { "not": { "flag": "cevdet_dinlendi" } },
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Ham veri bir yorumdur, avukat hanım. Tenekelerin dolu girdiğini söyleyen biri var mı bu salonda? Yok."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Yok. Kapıdaki bekçi tenekeleri gördü; ama ona tenekeleri ben sormadım, o da kürsüde anlatmadı. Bir gözün tanıklığı bir kromatogramdan ağır basardı.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "when": { "not": { "any": [{ "flag": "contra_u1" }, { "chosen": "CV_Q2" }] } },
+              "lines": [
+                {
+                  "speaker": "tarik",
+                  "text": "Olay yerine izinle girdim; yanımda görevli vardı. Numuneyi herkesin gözü önünde aldım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Herkesin gözü önünde.” Bekçinin defteri başka şey söylüyor; ama defteri ne bekçiye okuttum ne de ona gösterdim. Yalnız olduğu kayıtta değil.",
+                  "style": "thought"
+                }
+              ]
             }
           ],
           "effects": [
@@ -1127,7 +1193,7 @@
           ],
           "quality": {
             "q": "NEUTRAL",
-            "feedback": "Ham veri ve bekçinin gözlemi güçlü; ama numunenin “o zeminden” alındığı iddiasının dayanağı tenekelerin mührü ve numune alma tutanağıdır. Laboratuvarın kabul ve not satırlarını okumadan zincirin son halkası açık kalır.",
+            "feedback": "“Numune getirildi” bir zincirle kurulur: kimin getirdiği (bilirkişinin kabulü), içeri yalnız girdiği (bekçi ya da kendi beyanı), tenekelerin dolu girdiği (bekçinin yeminli beyanı), zemini kimin açtığı ve laboratuvarın kabul ve not satırları. Bir halka açıkken ham veri bir yorum olarak kalır.",
             "category": "SORGULAMA"
           }
         },
@@ -1831,7 +1897,7 @@
             {
               "speaker": "halil",
               "expression": "uzgun",
-              "text": "Ben… ben evi yakmadım, hâkim hanım. Dikkatsiz miydim? Bilmiyorum. Usta ne dediyse yaptım."
+              "text": "Aralıkta elektrikçi baktı, hâkim hanım. Tesisat eski dedi, koridordaki buat ısınıyor dedi. Ben… ben evi yakmadım. Dikkatsiz miydim? Bilmiyorum. Usta ne dediyse yaptım."
             }
           ]
         }
@@ -2010,12 +2076,10 @@
       "hud": ["cred", "pers"],
       "routes": [
         {
-          "when": {
-            "all": [{ "ref": "hizlandirici_coktu" }, { "flag": "eksper_kirildi" }, { "ref": "elektrik_ispat" }]
-          },
+          "when": { "all": [{ "ref": "kast_coktu" }, { "flag": "eksper_kirildi" }, { "ref": "elektrik_ispat" }] },
           "to": "T_05B"
         },
-        { "when": { "ref": "hizlandirici_coktu" }, "to": "T_05E" },
+        { "when": { "ref": "kast_coktu" }, "to": "T_05E" },
         { "to": "T_05N" }
       ],
       "choices": []
@@ -2641,7 +2705,7 @@
               "type": "IF",
               "when": {
                 "all": [
-                  { "ref": "hizlandirici_coktu" },
+                  { "ref": "kast_coktu" },
                   { "flag": "eksper_kirildi" },
                   { "ref": "elektrik_ispat" },
                   { "ref": "taksir_red" }
@@ -2688,7 +2752,7 @@
           "label": "Kasıtla yangın çıkarıldığı ve sigortacının aldatıldığı sabit değildir; şüphe sanık lehinedir (CMK 223/2-e)",
           "responses": [
             {
-              "when": { "all": [{ "ref": "hizlandirici_coktu" }, { "ref": "motif_coktu" }, { "flag": "alibi_kayit" }] },
+              "when": { "all": [{ "ref": "kast_coktu" }, { "ref": "motif_coktu" }, { "flag": "alibi_kayit" }] },
               "lines": [
                 {
                   "speaker": "player",
@@ -2713,7 +2777,7 @@
               ]
             },
             {
-              "when": { "all": [{ "ref": "hizlandirici_coktu" }, { "ref": "motif_coktu" }] },
+              "when": { "all": [{ "ref": "kast_coktu" }, { "ref": "motif_coktu" }] },
               "lines": [
                 {
                   "speaker": "player",
@@ -2754,7 +2818,7 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "all": [{ "ref": "hizlandirici_coktu" }, { "ref": "motif_coktu" }] },
+              "when": { "all": [{ "ref": "kast_coktu" }, { "ref": "motif_coktu" }] },
               "then": [
                 {
                   "type": "SCORE",

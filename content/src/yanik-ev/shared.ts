@@ -1,5 +1,19 @@
-import { chapter, court, dec, flag, inc, not, phase, presentRule } from '../../../tools/content/src/kit/index.js';
-import type { Backdrop, Expression, Line, LineFx } from '@mudafaa/case-schema';
+import {
+  chapter,
+  cmp,
+  court,
+  dec,
+  fallback,
+  flag,
+  ifThen,
+  inc,
+  not,
+  phase,
+  presentRule,
+  score,
+  v,
+} from '../../../tools/content/src/kit/index.js';
+import type { Backdrop, ChoiceDef, Expression, Line, LineFx } from '@mudafaa/case-schema';
 
 // Dava genelinde paylaşılan tanımlar: bölüm etiketleri, soruşturma evreleri, duruşma salonları ve satır kısaltmaları.
 
@@ -117,3 +131,39 @@ export const erkenSunum = (
       },
     ],
   });
+
+/** Tahtanın günlük yanlış bağlantı hakkı (her tahta için ayrı; gün sonunda yenilenir). */
+export const TAHTA_HAK = 3;
+
+/**
+ * Çıkarım tahtasında yanlış çift: −50 skor ve günlük hakkından bir eksilme. Hak bitince tahta o gün için bulanıklaşır:
+ * tarifler kilitlenir (`tahtaKilit`), yeni çiftler bir şey söylemez, hub kartı ertesi güne kadar kapanır. Rastgele denemenin
+ * bedeli böylece skordan oyuna geçer: son günde kilitlenen tahta, celseye eksik delille gitmek demektir.
+ */
+export const tahtaIska = (id: string, hak: string): ChoiceDef =>
+  fallback(id, 'COMBINE', {
+    repeat: 'ONCE_PER_PARAMS',
+    effects: [ifThen(cmp(v(hak), '>', 0), [dec(hak), score('DELIL_ANALIZI', -50)])],
+    responses: [
+      {
+        when: cmp(v(hak), '<=', 0),
+        lines: [
+          {
+            speaker: 'player',
+            style: 'thought',
+            text: 'Kartlar birbirine karıştı. Bugün bu tahtadan bir şey çıkmaz; yarın taze bir gözle bakmalıyım.',
+          },
+        ],
+      },
+    ],
+    feedback: {
+      title: 'Bu ikisi birbirini açıklamıyor',
+      text: 'Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Her yanlış çift günlük bağlantı hakkından birini götürür; hak bitince tahta ertesi güne kadar kapanır.',
+      label: 'BAĞLANTI YOK · −50 SKOR · −1 HAK',
+      tone: 'error',
+    },
+  });
+
+/** Tarifleri günlük hakka bağlar: hak bitince doğru çift de o gün kurulamaz. */
+export const tahtaKilit = (hak: string, recipes: readonly ChoiceDef[]): ChoiceDef[] =>
+  recipes.map((r) => ({ ...r, enabledWhen: cmp(v(hak), '>', 0) }));

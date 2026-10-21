@@ -46,6 +46,20 @@ const elkoyma = deliver('T_00', [
   },
 ]);
 
+/**
+ * "Numune getirildi" çelişkisinin (PS_U3) temeli: kimin getirdiği (bilirkişinin 1. celsedeki kabulü), refakatsiz giriş (eksperin
+ * kendi beyanı ya da yeminli bekçi), dolu tenekeler (bekçinin yeminli beyanı) ve laboratuvarın kabul (şahsi mühür) ve not
+ * (tutanak yok) satırları. Ham veri tek başına bir yorumdur; halkalar onu kanıta çevirir. Zemin, koku, bidon, başlangıç ve
+ * taze benzin bu çelişkinin temeli değildir: hükmün gerekçesini güçlendirir, kastın düşmesini koşullamaz.
+ */
+const u3Temel = all(
+  flag('fact_muhur'),
+  flag('fact_tutanak'),
+  flag('contra_b2'),
+  flag('cevdet_dinlendi'),
+  any(flag('contra_u1'), chosen('CV_Q2')),
+);
+
 const contraU = [
   flag('contra_u1'),
   flag('contra_u2'),
@@ -413,7 +427,8 @@ export const trial: CasePart = {
           next: '$stay',
         }),
         option('CV_Q3', 'Elinde ne vardı?', {
-          visibleWhen: has('clue_teneke'),
+          // Önce kimin girdiği (CV_Q2), sonra elinde ne olduğu: soru zemini olmadan sorulmaz.
+          visibleWhen: all(has('clue_teneke'), chosen('CV_Q2')),
           score: { SORGULAMA: 60 },
           effects: [raise('cevdet_dinlendi')],
           responses: [
@@ -745,7 +760,7 @@ export const trial: CasePart = {
           ],
         }),
         presentRule('PS_U3', 'U3', ['ded_ekilmis'], {
-          enabledWhen: all(flag('press_u3'), flag('fact_muhur'), flag('fact_tutanak')),
+          enabledWhen: all(flag('press_u3'), u3Temel),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_u3')],
           quality: {
@@ -781,17 +796,20 @@ export const trial: CasePart = {
           ],
         }),
         presentRule('PS_U3_MUHURSUZ', 'U3', ['ded_ekilmis'], {
-          enabledWhen: all(flag('press_u3'), not(all(flag('fact_muhur'), flag('fact_tutanak')))),
+          // Temel eksik: "numune getirildi" çelişkisi halkalarından biri kayıtta yok. Tarık açık halkadan kaçar; Deniz'in iç sesi
+          // hangi halkanın açık kaldığını söyler (ilk eksik halka).
+          enabledWhen: all(flag('press_u3'), not(u3Temel)),
           score: { SORGULAMA: 100 },
           effects: [inc('pers')],
           quality: {
             q: 'NEUTRAL',
             feedback:
-              'Ham veri ve bekçinin gözlemi güçlü; ama numunenin “o zeminden” alındığı iddiasının dayanağı tenekelerin mührü ve numune alma tutanağıdır. Laboratuvarın kabul ve not satırlarını okumadan zincirin son halkası açık kalır.',
+              '“Numune getirildi” bir zincirle kurulur: kimin getirdiği (bilirkişinin kabulü), içeri yalnız girdiği (bekçi ya da kendi beyanı), tenekelerin dolu girdiği (bekçinin yeminli beyanı), zemini kimin açtığı ve laboratuvarın kabul ve not satırları. Bir halka açıkken ham veri bir yorum olarak kalır.',
             category: 'SORGULAMA',
           },
           responses: [
             {
+              when: not(all(flag('fact_muhur'), flag('fact_tutanak'))),
               lines: [
                 s(
                   'tarik',
@@ -799,6 +817,39 @@ export const trial: CasePart = {
                 ),
                 th(
                   '“Teslim kaydı ortada.” Ortada ama ben okumadım. Tenekeleri kim mühürledi, numune alma tutanağı var mı? Laboratuvarın kayıtlarını bilmeden bu cümleyi kıramam.',
+                ),
+              ],
+            },
+            {
+              when: not(flag('contra_b2')),
+              lines: [
+                s(
+                  'tarik',
+                  'Numuneler savcılık kanalıyla, mühürlü olarak bilirkişiye gitti. Bilirkişi de ilk celsede bir itiraz duymadı. Bunu bana değil ona sormalıydınız.',
+                ),
+                th(
+                  'Haklı olduğu tek yer. Bilirkişiye numunelerin kimden geldiğini ilk celsede kürsüde söyletmedim; şimdi zincirin ilk halkası bir eksperin sözüne kaldı.',
+                ),
+              ],
+            },
+            {
+              when: not(flag('cevdet_dinlendi')),
+              lines: [
+                s(
+                  'tarik',
+                  'Ham veri bir yorumdur, avukat hanım. Tenekelerin dolu girdiğini söyleyen biri var mı bu salonda? Yok.',
+                ),
+                th(
+                  'Yok. Kapıdaki bekçi tenekeleri gördü; ama ona tenekeleri ben sormadım, o da kürsüde anlatmadı. Bir gözün tanıklığı bir kromatogramdan ağır basardı.',
+                ),
+              ],
+            },
+            {
+              when: not(any(flag('contra_u1'), chosen('CV_Q2'))),
+              lines: [
+                s('tarik', 'Olay yerine izinle girdim; yanımda görevli vardı. Numuneyi herkesin gözü önünde aldım.'),
+                th(
+                  '“Herkesin gözü önünde.” Bekçinin defteri başka şey söylüyor; ama defteri ne bekçiye okuttum ne de ona gösterdim. Yalnız olduğu kayıtta değil.',
                 ),
               ],
             },
@@ -1230,7 +1281,7 @@ export const trial: CasePart = {
             ),
             s(
               'halil',
-              'Ben… ben evi yakmadım, hâkim hanım. Dikkatsiz miydim? Bilmiyorum. Usta ne dediyse yaptım.',
+              'Aralıkta elektrikçi baktı, hâkim hanım. Tesisat eski dedi, koridordaki buat ısınıyor dedi. Ben… ben evi yakmadım. Dikkatsiz miydim? Bilmiyorum. Usta ne dediyse yaptım.',
               'uzgun',
             ),
           ],
@@ -1331,8 +1382,8 @@ export const trial: CasePart = {
     decisionNode(
       'T_05M',
       [
-        { when: all(ref('hizlandirici_coktu'), flag('eksper_kirildi'), ref('elektrik_ispat')), to: 'T_05B' },
-        { when: ref('hizlandirici_coktu'), to: 'T_05E' },
+        { when: all(ref('kast_coktu'), flag('eksper_kirildi'), ref('elektrik_ispat')), to: 'T_05B' },
+        { when: ref('kast_coktu'), to: 'T_05E' },
         { to: 'T_05N' },
       ],
       { ...court2.base },
@@ -1590,7 +1641,7 @@ export const trial: CasePart = {
             effects: [
               raise('savunma_b'),
               ifThen(
-                all(ref('hizlandirici_coktu'), flag('eksper_kirildi'), ref('elektrik_ispat'), ref('taksir_red')),
+                all(ref('kast_coktu'), flag('eksper_kirildi'), ref('elektrik_ispat'), ref('taksir_red')),
                 [
                   score('SAVUNMA_STRATEJISI', strategyAmount(200, 'MASUMIYET')),
                   inc('pers'),
@@ -1664,7 +1715,7 @@ export const trial: CasePart = {
           {
             effects: [
               ifThen(
-                all(ref('hizlandirici_coktu'), ref('motif_coktu')),
+                all(ref('kast_coktu'), ref('motif_coktu')),
                 [
                   score('SAVUNMA_STRATEJISI', strategyAmount(200, 'USUL')),
                   inc('pers'),
@@ -1686,7 +1737,7 @@ export const trial: CasePart = {
             ],
             responses: [
               {
-                when: all(ref('hizlandirici_coktu'), ref('motif_coktu'), flag('alibi_kayit')),
+                when: all(ref('kast_coktu'), ref('motif_coktu'), flag('alibi_kayit')),
                 lines: [
                   me(
                     'Sayın Hâkim. Savcılık bir halat ördü: poliçe, artış, eşyalar, benzin, borç. Ve ucunu bir rapora bağladı.',
@@ -1706,7 +1757,7 @@ export const trial: CasePart = {
                 ],
               },
               {
-                when: all(ref('hizlandirici_coktu'), ref('motif_coktu')),
+                when: all(ref('kast_coktu'), ref('motif_coktu')),
                 lines: [
                   me(
                     'Sayın Hâkim. Savcılık bir halat ördü: poliçe, artış, eşyalar, benzin, borç. Ve ucunu bir rapora bağladı.',

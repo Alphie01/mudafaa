@@ -65,12 +65,27 @@
       "actionCosts": { "EXAMINE": [{ "var": "ex_lab", "amount": 1 }] },
       "choices": [
         {
+          "id": "EX_LAB_PROFIL",
+          "kind": "EXAMINE",
+          "match": { "tool": "kars", "target": "l_profil" },
+          "feedback": {
+            "title": "HAFİF BİLEŞENLER",
+            "text": "Benzinin en uçucu bileşenleri yerinde; ağırlaşma yok. Bir buçuk saat ateş ve seksen dakika su görmüş bir benzin önce hafif bileşenlerini kaybeder. Bu benzin hiçbir şey kaybetmemiş.",
+            "label": "+150 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_buhar" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
+          ]
+        },
+        {
           "id": "EX_LAB_PIROLIZ",
           "kind": "EXAMINE",
           "match": { "tool": "lupe", "target": "l_piroliz" },
           "feedback": {
             "title": "BOŞ SATIR",
-            "text": "Yanmış ahşaptan, verniğinden, plastiğinden beklenen yanma ürünleri hiç yok. Bu talaş ve kül yangından geçmemiş gibi. Benzin ise taze.",
+            "text": "Yanmış ahşaptan, verniğinden, plastiğinden beklenen yanma ürünleri hiç yok. Bu talaş ve kül yangından geçmemiş gibi.",
             "label": "+150 SKOR · Not defterine eklendi",
             "tone": "special"
           },
@@ -430,6 +445,7 @@
     }
   ],
   "discoveryPaths": [
+    { "evidence": "clue_buhar", "source": { "type": "RULE", "id": "EX_LAB_PROFIL" } },
     { "evidence": "clue_piroliz", "source": { "type": "RULE", "id": "EX_LAB_PIROLIZ" } },
     { "evidence": "clue_ayni", "source": { "type": "RULE", "id": "EX_TAH_EK" } },
     { "evidence": "clue_prim", "source": { "type": "RULE", "id": "EX_TAH_YAZI" } },

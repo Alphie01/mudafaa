@@ -7,6 +7,7 @@ import {
   decisionNode,
   deductionBoard,
   deliver,
+  discover,
   fallback,
   flag,
   has,
@@ -28,7 +29,7 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import type { ChoiceDef, NodeDef } from '@mudafaa/case-schema';
-import { INV2, card, me, n, named, p2, s, th } from './shared.js';
+import { INV2, TAHTA_HAK, card, me, n, named, p2, s, tahtaIska, tahtaKilit, th } from './shared.js';
 
 // 70-ara: ara evre (2 gün × 4 EP). Yığın kullanılmaz: her etkinlik doğrudan ARA_HUB'a döner (kaçış uzaklığı sınırı).
 // Gelen raporlar, Gülsüm Yaşar ve tahkim kararı, Saadet'in televizyonu, bekçinin tenekeleri, Halil'le ek savunma
@@ -66,6 +67,10 @@ const araBitti = any(
     any(chosen('A2_SAADET'), not(flag('fact_tv'))),
   ),
 );
+
+/** Eksper kararı: zincir ya da tahkim kararı eldeyse eksper hakkında ne yapılacağı ikinci celseden önce kararlaştırılır. */
+const sucGorunur = any(flag('contra_b2'), has('ded_zincir'), has('ev_tahkim'));
+const sucKarar = any(chosen('SC_DUYURU'), chosen('SC_KENDIN'), chosen('SC_BASIN'), chosen('SC_BEKLE'));
 
 const fresh = (id: string, a: string, b: string, out: string, title: string, text: string) =>
   recipe(id, a, b, {
@@ -230,14 +235,14 @@ export const ara: CasePart = {
           description: 'Yaşar dosyası',
         }),
         free('A2_SUC', 'Eksper hakkında ne yapacaksın?', 'ARA_SUC', {
-          visibleWhen: any(flag('contra_b2'), has('ded_zincir'), has('ev_tahkim')),
-          maxUses: 1,
-          description: '0 EP · savcılık',
+          // Karar anı: verilene kadar açık kalır ("sonra karar veririm" hakkı yakmaz); ikinci celseden önce verilmelidir.
+          visibleWhen: all(sucGorunur, not(sucKarar)),
+          description: '0 EP · savcılık · celseden önce karar ver',
         }),
         free('A2_CIKARIM', 'Çıkarım tahtası', 'ARA_CIKARIM', {
-          description: '0 EP · yeni kartlar',
-          enabledWhen: ref('kart_ara'),
-          lockedReason: 'En az 2 yeni ipucu gerekli.',
+          description: '0 EP · yeni kartlar · günde 3 yanlış hakkı',
+          enabledWhen: all(ref('kart_ara'), cmp(v('tah_ara'), '>', 0)),
+          lockedReason: 'En az 2 yeni ipucu gerekli. Bugün yanlış bağlantı hakkın bittiyse tahta yarın açılır.',
         }),
         free('A2_LEYLA', 'Leyla’ya danış', 'ARA_LEYLA', {
           description: '0 EP · günde bir kez',
@@ -256,9 +261,9 @@ export const ara: CasePart = {
         }),
         nav('GO_T', 'DURUŞMAYA GİT · 2. CELSE', 'ARA_KAPI', {
           role: 'PRIMARY',
-          enabledWhen: all(araBitti, cmp(v('leyla_ara'), '>=', v('day2'))),
+          enabledWhen: all(araBitti, cmp(v('leyla_ara'), '>=', v('day2')), any(not(sucGorunur), sucKarar)),
           lockedReason:
-            'İkinci celse 5 Mayıs’ta. Aranın son gününü bitir; kürsüden önce dosyayı Leyla’yla bir kez daha konuş.',
+            'İkinci celse 5 Mayıs’ta. Aranın son gününü bitir; kürsüden önce dosyayı Leyla’yla bir kez daha konuş ve eksper hakkında kararını ver.',
           confirm: 'Duruşmaya gidersen ara evresi biter. Emin misin?',
         }),
       ],
@@ -266,7 +271,7 @@ export const ara: CasePart = {
     decisionNode('ARA_DAY_END', [{ to: 'ARA_AKSAM' }], {
       ...INV2,
       title: 'Gün sonu',
-      onEnter: [inc('day2', 1), set('ap2', 4)],
+      onEnter: [inc('day2', 1), set('ap2', 4), set('tah_ara', TAHTA_HAK)],
     }),
     story('ARA_AKSAM', {
       ...INV2,
@@ -432,6 +437,8 @@ export const ara: CasePart = {
       ...INV2,
       title: 'Gülsüm Yaşar',
       background: 'buro',
+      // Gülsüm Hanım kararı yanında getirir: eksperin geçmişi aranın kendiliğinden gelen gelişmesidir; okumak bir EP ister.
+      onEnter: [discover('ev_tahkim')],
       lines: [
         {
           lines: [
@@ -452,13 +459,15 @@ export const ara: CasePart = {
               'O adam geldi, baktı, “burada benzin dökülmüş” dedi. Kocam ölmüştü, ben yalnızdım. Benzini ben nereden bulayım?',
             ),
             th('İki yıl önce, başka bir ev, aynı adam, aynı kelime. Bir tesadüf. Ya da bir yöntem.'),
+            n(
+              'Naylon dosyayı masama bıraktı; açmadan, iki eliyle, bir emanet teslim eder gibi. İçinde kenarları yıpranmış bir hakem kararı.',
+            ),
           ],
         },
       ],
       prompt: 'Gülsüm Hanım’a ne soracaksın?',
       choices: [
         option('GL_SONUC', 'Sonra ne oldu? Dosyanız nasıl bitti?', {
-          discovers: 'ev_tahkim',
           score: { ARASTIRMA: 80 },
           responses: [
             {
@@ -469,10 +478,10 @@ export const ara: CasePart = {
                 ),
                 named(
                   'GÜLSÜM YAŞAR',
-                  'Hakemler o adamın raporuna “bilimsel dayanağı yok” dediler. Şirketi ödemeye mahkûm ettiler. Kararı getirdim, al kızım.',
+                  'Hakemler o adamın raporuna “bilimsel dayanağı yok” dediler. Şirketi ödemeye mahkûm ettiler. Kararı getirdim; o dosyada, al kızım.',
                 ),
                 n(
-                  'Naylon dosyadan kenarları yıpranmış bir karar çıkardı. Ekinde eski bir ekspertiz raporu ve bir şirket yazısı.',
+                  'Kararın ekinde eski bir ekspertiz raporu ve bir şirket yazısı. Kâğıtlar iki yıldır aynı naylonun içinde.',
                 ),
                 th(
                   'Bir karar. Bir ek. Bir yazı. Gülsüm Hanım iki yıldır bu dosyayı taşıyor; bir gün birine lazım olacak diye.',
@@ -593,11 +602,16 @@ export const ara: CasePart = {
                 'Avukat hanım. Mahkemeden davetiye geldi. Amirime söyledim. Kızdı, sonra “git, doğruyu söyle” dedi.',
               ),
               n('Termostan iki bardak çay doldurdu; birini bana uzattı. Bu sefer defteri göğsüne bastırmadı.'),
+              th(
+                'Defterdeki satırı biliyordum: dokuz yirmi, on sıfır beş. Ama o kırk beş dakikanın içini kimse anlatmamıştı; eksperin içeri ne taşıdığını soracak bir dayanağım yoktu.',
+              ),
             ],
           },
         ],
         choices: [
           option('CV2_CANTA', 'O sabah eksperin elinde ne vardı? Gördüğünüz kadarını anlatın.', {
+            // Sorunun zemini: komşunun “iki teneke”si (ilk görüşmede ya da birinci celsede tutanağa geçen anlatımı).
+            visibleWhen: flag('fact_teneke_saadet'),
             discovers: 'clue_teneke',
             score: { SORGULAMA: 60 },
             responses: [
@@ -842,6 +856,22 @@ export const ara: CasePart = {
           ],
           next: HUB,
         }),
+        option('SC_BEKLE', 'Şimdilik bir şey yapma; elindekini kürsüde, tanığın yüzüne karşı kullan', {
+          score: { USUL_BILGISI: 10 },
+          neutral:
+            'Suç duyurusu avukat için bir yükümlülük değil, bir imkândır; delili kürsüde tartışmak da meşrudur. Ama savcılığa bildirilmeyen bir şüphe için kimse arama yapmaz; el konulabilecek bir delil kaybolabilir (CMK 158, 160).',
+          responses: [
+            {
+              lines: [
+                n('Dilekçe taslağını kapattım. Çizelgeyi, iki fotoğrafı ve kartviziti duruşma klasörüne koydum.'),
+                th(
+                  'Kürsüde soracağım. Ama bir sorunun cevabı kürsüde gelir; bir aramanın sonucu ise ancak birinin araması hâlinde. Kimse aramayacak.',
+                ),
+              ],
+            },
+          ],
+          next: HUB,
+        }),
         back('SC_GERI', 'Sonra karar veririm'),
       ],
     }),
@@ -850,9 +880,20 @@ export const ara: CasePart = {
         ...INV2,
         title: 'Çıkarım Tahtası · Ara',
         background: 'buro_gece',
-        lines: [{ lines: [n('Yeni kartlar eskilerin yanında. İki ipucunu birleştir; yanlış çift puan götürür.')] }],
+        lines: [
+          {
+            lines: [
+              n(
+                'Yeni kartlar eskilerin yanında. İki ipucunu birleştir; bir çıkarım da yeni bir kartla birleşebilir. Yanlış çift puan götürür; günde üç yanlıştan sonra tahta bulanıklaşır.',
+              ),
+            ],
+          },
+        ],
+        hud: ['tah_ara'],
         pool: [
           'clue_piroliz',
+          'clue_buhar',
+          'ded_yanmamis',
           'clue_teneke',
           'clue_ayni',
           'clue_prim',
@@ -866,14 +907,22 @@ export const ara: CasePart = {
           'clue_yan_ev',
           'clue_borc',
         ],
-        recipes: [
+        recipes: tahtaKilit('tah_ara', [
+          fresh(
+            'CB2_YANMAMIS',
+            'clue_piroliz',
+            'clue_buhar',
+            'ded_yanmamis',
+            'Numune yangını görmedi',
+            'Benzin hafif bileşenlerini kaybetmemiş; talaşta yanmış ahşabın tek bir izi yok. Bu numune ne bir buçuk saatlik ateşi gördü ne seksen dakikalık suyu.',
+          ),
           fresh(
             'CB2_EKILMIS',
-            'clue_piroliz',
+            'ded_yanmamis',
             'clue_teneke',
             'ded_ekilmis',
             'Tenekeler önceden doluydu',
-            'Numunede yanmış ahşabın izi yok, benzin neredeyse taze; bekçiye göre tenekeler içeri girerken ağırmış. Numune olay yerinden alınmamış; olay yerine getirilmiş.',
+            'Numune yangını hiç görmedi; bekçiye göre tenekeler içeri girerken ağırmış. Numune olay yerinden alınmamış; olay yerine dolu tenekelerle getirilmiş.',
           ),
           fresh(
             'CB2_NOTR',
@@ -899,17 +948,8 @@ export const ara: CasePart = {
             'Eksperin kalıbı',
             'Aynı paragraf iki ayrı yangında; her reddedilen dosyaya bir prim. Rapor bir gözlem değil, bir kalıp.',
           ),
-        ],
-        miss: fallback('FB_CIKARIM2', 'COMBINE', {
-          repeat: 'ONCE_PER_PARAMS',
-          score: { DELIL_ANALIZI: -50 },
-          feedback: {
-            title: 'Bu ikisi birbirini açıklamıyor',
-            text: 'Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Başka bir çift dene.',
-            label: 'BAĞLANTI YOK · −50 SKOR',
-            tone: 'error',
-          },
-        }),
+        ]),
+        miss: tahtaIska('FB_CIKARIM2', 'tah_ara'),
         finish: { id: 'CIKARIM2_BITIR' },
       }),
     ),
@@ -949,6 +989,16 @@ export const ara: CasePart = {
             s(
               'leyla',
               'İki raporu yan yana okudun mu? Kelime kelime? İnsanlar yalan söylerken yaratıcı olmaz, Deniz. Kendilerini tekrar ederler.',
+            ),
+          ],
+        },
+        {
+          when: all(any(has('clue_piroliz'), has('clue_buhar')), not(has('ded_yanmamis'))),
+          lines: [
+            n('Leyla kromatogramın boş satırına kalemiyle bir halka çizdi.'),
+            s(
+              'leyla',
+              'Ham verinin iki satırı iki şey söyler, Deniz. Profil benzinin neyi kaybetmediğini; matris talaşın neyi hiç görmediğini. İkisini yan yana koy; bilirkişinin “taze benzin”inin nedeni orada.',
             ),
           ],
         },

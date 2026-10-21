@@ -51,12 +51,20 @@ export const araDocs: CasePart = {
         tools: [lupe, kars],
         costVar: 'ex_lab',
         rules: [
+          examine('EX_LAB_PROFIL', 'kars', 'l_profil', {
+            discovers: 'clue_buhar',
+            score: { DELIL_ANALIZI: 100 },
+            feedback: hit(
+              'HAFİF BİLEŞENLER',
+              'Benzinin en uçucu bileşenleri yerinde; ağırlaşma yok. Bir buçuk saat ateş ve seksen dakika su görmüş bir benzin önce hafif bileşenlerini kaybeder. Bu benzin hiçbir şey kaybetmemiş.',
+            ),
+          }),
           examine('EX_LAB_PIROLIZ', 'lupe', 'l_piroliz', {
             discovers: 'clue_piroliz',
             score: { DELIL_ANALIZI: 150 },
             feedback: hit(
               'BOŞ SATIR',
-              'Yanmış ahşaptan, verniğinden, plastiğinden beklenen yanma ürünleri hiç yok. Bu talaş ve kül yangından geçmemiş gibi. Benzin ise taze.',
+              'Yanmış ahşaptan, verniğinden, plastiğinden beklenen yanma ürünleri hiç yok. Bu talaş ve kül yangından geçmemiş gibi.',
             ),
           }),
           examine('EX_LAB_KABUL', 'kars', 'l_kabul', {

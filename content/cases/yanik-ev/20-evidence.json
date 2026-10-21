@@ -724,6 +724,22 @@
       "tags": ["kart"]
     },
     {
+      "id": "clue_buhar",
+      "kind": "CLUE",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "legalValidity": "VALID",
+      "type": "ADLI_RAPOR",
+      "title": "Buharlaşmamış benzin",
+      "shortText": "Kromatogramda benzinin hafif bileşenleri yerinde; ağırlaşma yok.",
+      "description": "Ham verinin profil satırı: kurşunsuz benzin, en uçucu bileşenleri korunmuş. Ateş ve söndürme suyu görmüş bir benzinde önce bunlar kaybolur.",
+      "sourceLabel": "Laboratuvar ham verisi",
+      "icon": "magnifier",
+      "tags": ["kart", "ara"]
+    },
+    {
       "id": "clue_piroliz",
       "kind": "CLUE",
       "presentable": false,
@@ -733,8 +749,8 @@
       "legalValidity": "VALID",
       "type": "ADLI_RAPOR",
       "title": "Yanma ürünü yok",
-      "shortText": "Kromatogramda benzin var, ama yanmış ahşabın piroliz ürünleri yok.",
-      "description": "Ham veride iki teneke numunede de buharlaşmamış benzin profili; yanmış ahşap ve vernikten beklenen piroliz ürünleri ise hiç yok. Numune, yangından geçmiş bir zeminden gelmiş gibi durmuyor.",
+      "shortText": "Numune matrisinde yanmış ahşabın piroliz ürünleri yok.",
+      "description": "Ham verinin matris satırı: ahşap talaşı ve kül; yanmış ahşap ve vernikten beklenen piroliz ürünleri ise hiç yok. Numune, yangından geçmiş bir zeminden gelmiş gibi durmuyor.",
       "sourceLabel": "Laboratuvar ham verisi",
       "icon": "magnifier",
       "tags": ["kart", "ara"]
@@ -1039,6 +1055,24 @@
       "icon": "bulb",
       "side": "DEFENSE",
       "strength": "MEDIUM"
+    },
+    {
+      "id": "ded_yanmamis",
+      "kind": "INSIGHT",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": true,
+      "initiallyKnown": false,
+      "legalValidity": "VALID",
+      "type": "ADLI_RAPOR",
+      "title": "Numune yangını görmedi",
+      "shortText": "Taze benzin, yanma ürünü yok: talaş ne ateşi gördü ne suyu.",
+      "description": "Bilirkişinin “taze benzin” dediği numunede yanmış ahşabın, verniğin, plastiğin piroliz ürünleri hiç yok. Bir buçuk saat yanan, seksen dakika su yiyen bir zeminden alınmış bir talaş böyle olmaz.",
+      "sourceLabel": "Çıkarım tahtası",
+      "icon": "magnifier",
+      "side": "DEFENSE",
+      "strength": "STRONG",
+      "tags": ["kart", "ara"]
     },
     {
       "id": "ded_ekilmis",

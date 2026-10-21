@@ -259,19 +259,30 @@
           "label": "Eksper hakkında ne yapacaksın?",
           "next": "ARA_SUC",
           "visibleWhen": {
-            "any": [{ "flag": "contra_b2" }, { "hasEvidence": "ded_zincir" }, { "hasEvidence": "ev_tahkim" }]
+            "all": [
+              { "any": [{ "flag": "contra_b2" }, { "hasEvidence": "ded_zincir" }, { "hasEvidence": "ev_tahkim" }] },
+              {
+                "not": {
+                  "any": [
+                    { "chosen": "SC_DUYURU" },
+                    { "chosen": "SC_KENDIN" },
+                    { "chosen": "SC_BASIN" },
+                    { "chosen": "SC_BEKLE" }
+                  ]
+                }
+              }
+            ]
           },
-          "maxUses": 1,
-          "description": "0 EP · savcılık"
+          "description": "0 EP · savcılık · celseden önce karar ver"
         },
         {
           "id": "A2_CIKARIM",
           "kind": "NAVIGATE",
           "label": "Çıkarım tahtası",
           "next": "ARA_CIKARIM",
-          "description": "0 EP · yeni kartlar",
-          "enabledWhen": { "ref": "kart_ara" },
-          "lockedReason": "En az 2 yeni ipucu gerekli."
+          "description": "0 EP · yeni kartlar · günde 3 yanlış hakkı",
+          "enabledWhen": { "all": [{ "ref": "kart_ara" }, { "cmp": [{ "var": "tah_ara" }, ">", 0] }] },
+          "lockedReason": "En az 2 yeni ipucu gerekli. Bugün yanlış bağlantı hakkın bittiyse tahta yarın açılır."
         },
         {
           "id": "A2_LEYLA",
@@ -344,10 +355,27 @@
                   }
                 ]
               },
-              { "cmp": [{ "var": "leyla_ara" }, ">=", { "var": "day2" }] }
+              { "cmp": [{ "var": "leyla_ara" }, ">=", { "var": "day2" }] },
+              {
+                "any": [
+                  {
+                    "not": {
+                      "any": [{ "flag": "contra_b2" }, { "hasEvidence": "ded_zincir" }, { "hasEvidence": "ev_tahkim" }]
+                    }
+                  },
+                  {
+                    "any": [
+                      { "chosen": "SC_DUYURU" },
+                      { "chosen": "SC_KENDIN" },
+                      { "chosen": "SC_BASIN" },
+                      { "chosen": "SC_BEKLE" }
+                    ]
+                  }
+                ]
+              }
             ]
           },
-          "lockedReason": "İkinci celse 5 Mayıs’ta. Aranın son gününü bitir; kürsüden önce dosyayı Leyla’yla bir kez daha konuş.",
+          "lockedReason": "İkinci celse 5 Mayıs’ta. Aranın son gününü bitir; kürsüden önce dosyayı Leyla’yla bir kez daha konuş ve eksper hakkında kararını ver.",
           "confirm": "Duruşmaya gidersen ara evresi biter. Emin misin?",
           "next": "ARA_KAPI"
         }
@@ -361,7 +389,8 @@
       "title": "Gün sonu",
       "onEnter": [
         { "type": "VAR", "var": "day2", "op": "inc", "value": 1 },
-        { "type": "VAR", "var": "ap2", "op": "set", "value": 4 }
+        { "type": "VAR", "var": "ap2", "op": "set", "value": 4 },
+        { "type": "VAR", "var": "tah_ara", "op": "set", "value": 3 }
       ],
       "routes": [{ "to": "ARA_AKSAM" }],
       "choices": []
@@ -633,6 +662,7 @@
       "eyebrow": "DAVA #14 · ARA",
       "title": "Gülsüm Yaşar",
       "background": "buro",
+      "onEnter": [{ "type": "DISCOVER", "evidence": "ev_tahkim" }],
       "lines": [
         {
           "lines": [
@@ -659,6 +689,10 @@
               "speaker": "player",
               "text": "İki yıl önce, başka bir ev, aynı adam, aynı kelime. Bir tesadüf. Ya da bir yöntem.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Naylon dosyayı masama bıraktı; açmadan, iki eliyle, bir emanet teslim eder gibi. İçinde kenarları yıpranmış bir hakem kararı."
             }
           ]
         }
@@ -680,11 +714,11 @@
                 {
                   "speaker": "narrator",
                   "name": "GÜLSÜM YAŞAR",
-                  "text": "Hakemler o adamın raporuna “bilimsel dayanağı yok” dediler. Şirketi ödemeye mahkûm ettiler. Kararı getirdim, al kızım."
+                  "text": "Hakemler o adamın raporuna “bilimsel dayanağı yok” dediler. Şirketi ödemeye mahkûm ettiler. Kararı getirdim; o dosyada, al kızım."
                 },
                 {
                   "speaker": "narrator",
-                  "text": "Naylon dosyadan kenarları yıpranmış bir karar çıkardı. Ekinde eski bir ekspertiz raporu ve bir şirket yazısı."
+                  "text": "Kararın ekinde eski bir ekspertiz raporu ve bir şirket yazısı. Kâğıtlar iki yıldır aynı naylonun içinde."
                 },
                 {
                   "speaker": "player",
@@ -705,10 +739,7 @@
             }
           ],
           "next": "$stay",
-          "effects": [
-            { "type": "DISCOVER", "evidence": "ev_tahkim" },
-            { "type": "SCORE", "category": "ARASTIRMA", "amount": 80 }
-          ]
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 80 }]
         },
         {
           "id": "GL_NEDEN",
@@ -853,6 +884,11 @@
             {
               "speaker": "narrator",
               "text": "Termostan iki bardak çay doldurdu; birini bana uzattı. Bu sefer defteri göğsüne bastırmadı."
+            },
+            {
+              "speaker": "player",
+              "text": "Defterdeki satırı biliyordum: dokuz yirmi, on sıfır beş. Ama o kırk beş dakikanın içini kimse anlatmamıştı; eksperin içeri ne taşıdığını soracak bir dayanağım yoktu.",
+              "style": "thought"
             }
           ]
         }
@@ -862,6 +898,7 @@
           "id": "CV2_CANTA",
           "kind": "OPTION",
           "label": "O sabah eksperin elinde ne vardı? Gördüğünüz kadarını anlatın.",
+          "visibleWhen": { "flag": "fact_teneke_saadet" },
           "responses": [
             {
               "lines": [
@@ -1223,6 +1260,32 @@
             "category": "USUL_BILGISI"
           }
         },
+        {
+          "id": "SC_BEKLE",
+          "kind": "OPTION",
+          "label": "Şimdilik bir şey yapma; elindekini kürsüde, tanığın yüzüne karşı kullan",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Dilekçe taslağını kapattım. Çizelgeyi, iki fotoğrafı ve kartviziti duruşma klasörüne koydum."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kürsüde soracağım. Ama bir sorunun cevabı kürsüde gelir; bir aramanın sonucu ise ancak birinin araması hâlinde. Kimse aramayacak.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "ARA_HUB",
+          "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": 10 }],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Suç duyurusu avukat için bir yükümlülük değil, bir imkândır; delili kürsüde tartışmak da meşrudur. Ama savcılığa bildirilmeyen bir şüphe için kimse arama yapmaz; el konulabilecek bir delil kaybolabilir (CMK 158, 160)."
+          }
+        },
         { "id": "SC_GERI", "kind": "CONTINUE", "label": "Sonra karar veririm", "role": "BACK", "next": "ARA_HUB" }
       ]
     },
@@ -1238,13 +1301,16 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "Yeni kartlar eskilerin yanında. İki ipucunu birleştir; yanlış çift puan götürür."
+              "text": "Yeni kartlar eskilerin yanında. İki ipucunu birleştir; bir çıkarım da yeni bir kartla birleşebilir. Yanlış çift puan götürür; günde üç yanlıştan sonra tahta bulanıklaşır."
             }
           ]
         }
       ],
+      "hud": ["tah_ara"],
       "pool": [
         "clue_piroliz",
+        "clue_buhar",
+        "ded_yanmamis",
         "clue_teneke",
         "clue_ayni",
         "clue_prim",
@@ -1260,19 +1326,36 @@
       ],
       "choices": [
         {
+          "id": "CB2_YANMAMIS",
+          "kind": "COMBINE",
+          "match": { "a": "clue_piroliz", "b": "clue_buhar" },
+          "feedback": {
+            "title": "Numune yangını görmedi",
+            "text": "Benzin hafif bileşenlerini kaybetmemiş; talaşta yanmış ahşabın tek bir izi yok. Bu numune ne bir buçuk saatlik ateşi gördü ne seksen dakikalık suyu.",
+            "label": "YENİ DELİL · +300 SKOR",
+            "tone": "success"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ded_yanmamis" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_ara" }, ">", 0] }
+        },
+        {
           "id": "CB2_EKILMIS",
           "kind": "COMBINE",
-          "match": { "a": "clue_piroliz", "b": "clue_teneke" },
+          "match": { "a": "ded_yanmamis", "b": "clue_teneke" },
           "feedback": {
             "title": "Tenekeler önceden doluydu",
-            "text": "Numunede yanmış ahşabın izi yok, benzin neredeyse taze; bekçiye göre tenekeler içeri girerken ağırmış. Numune olay yerinden alınmamış; olay yerine getirilmiş.",
+            "text": "Numune yangını hiç görmedi; bekçiye göre tenekeler içeri girerken ağırmış. Numune olay yerinden alınmamış; olay yerine dolu tenekelerle getirilmiş.",
             "label": "YENİ DELİL · +300 SKOR",
             "tone": "success"
           },
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_ekilmis" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_ara" }, ">", 0] }
         },
         {
           "id": "CB2_NOTR",
@@ -1287,7 +1370,8 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_notr" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_ara" }, ">", 0] }
         },
         {
           "id": "CB2_ELEKTRIK",
@@ -1302,7 +1386,8 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_elektrik" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_ara" }, ">", 0] }
         },
         {
           "id": "CB2_KOPYA",
@@ -1317,20 +1402,42 @@
           "effects": [
             { "type": "DISCOVER", "evidence": "ded_kopya" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }
-          ]
+          ],
+          "enabledWhen": { "cmp": [{ "var": "tah_ara" }, ">", 0] }
         },
         {
           "id": "FB_CIKARIM2",
           "kind": "FALLBACK",
           "fallbackFor": "COMBINE",
           "repeat": "ONCE_PER_PARAMS",
+          "responses": [
+            {
+              "when": { "cmp": [{ "var": "tah_ara" }, "<=", 0] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "style": "thought",
+                  "text": "Kartlar birbirine karıştı. Bugün bu tahtadan bir şey çıkmaz; yarın taze bir gözle bakmalıyım."
+                }
+              ]
+            }
+          ],
           "feedback": {
             "title": "Bu ikisi birbirini açıklamıyor",
-            "text": "Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Başka bir çift dene.",
-            "label": "BAĞLANTI YOK · −50 SKOR",
+            "text": "Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Her yanlış çift günlük bağlantı hakkından birini götürür; hak bitince tahta ertesi güne kadar kapanır.",
+            "label": "BAĞLANTI YOK · −50 SKOR · −1 HAK",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "cmp": [{ "var": "tah_ara" }, ">", 0] },
+              "then": [
+                { "type": "VAR", "var": "tah_ara", "op": "dec", "value": 1 },
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }
+              ]
+            }
+          ]
         },
         { "id": "CIKARIM2_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "ARA_HUB" }
       ]
@@ -1387,6 +1494,21 @@
             {
               "speaker": "leyla",
               "text": "İki raporu yan yana okudun mu? Kelime kelime? İnsanlar yalan söylerken yaratıcı olmaz, Deniz. Kendilerini tekrar ederler."
+            }
+          ]
+        },
+        {
+          "when": {
+            "all": [
+              { "any": [{ "hasEvidence": "clue_piroliz" }, { "hasEvidence": "clue_buhar" }] },
+              { "not": { "hasEvidence": "ded_yanmamis" } }
+            ]
+          },
+          "lines": [
+            { "speaker": "narrator", "text": "Leyla kromatogramın boş satırına kalemiyle bir halka çizdi." },
+            {
+              "speaker": "leyla",
+              "text": "Ham verinin iki satırı iki şey söyler, Deniz. Profil benzinin neyi kaybetmediğini; matris talaşın neyi hiç görmediğini. İkisini yan yana koy; bilirkişinin “taze benzin”inin nedeni orada."
             }
           ]
         },
@@ -1699,8 +1821,9 @@
       "requires": { "flag": "pano_istendi" },
       "hint": "Panonun elektrik bilirkişisine incelenmesini isteyebilirdin."
     },
-    { "evidence": "ev_tahkim", "source": { "type": "CHOICE", "id": "GL_SONUC" } },
+    { "evidence": "ev_tahkim", "source": { "type": "NODE", "id": "ARA_GULSUM" } },
     { "evidence": "clue_teneke", "source": { "type": "CHOICE", "id": "CV2_CANTA" } },
+    { "evidence": "ded_yanmamis", "source": { "type": "RULE", "id": "CB2_YANMAMIS" } },
     { "evidence": "ded_ekilmis", "source": { "type": "RULE", "id": "CB2_EKILMIS" } },
     { "evidence": "ded_notr", "source": { "type": "RULE", "id": "CB2_NOTR" } },
     { "evidence": "ded_elektrik", "source": { "type": "RULE", "id": "CB2_ELEKTRIK" } },

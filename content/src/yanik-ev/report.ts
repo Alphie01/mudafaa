@@ -152,8 +152,87 @@ export const report: CasePart = {
       ),
       hint(
         'h_koken',
-        all(flag('contra_b1'), not(flag('contra_koken'))),
+        all(flag('contra_b1'), not(flag('contra_koken')), not(has('ded_koken'))),
         'Bilirkişinin başlangıç noktası (salon) yalnızca zemin izine dayanıyordu; itfaiyenin tespiti ve V izi birinci celsede bunu tutanağa geçirirdi.',
+        'SORGULAMA',
+      ),
+      // "Elindeydi ama sunmadın": kaydı kuracak delil dosyandaydı, ilgili ifadeye karşı hiç gösterilmedi.
+      hint(
+        'h_sun_zincir',
+        all(has('ded_zincir'), not(flag('contra_b2'))),
+        'Kopuk numune zinciri kartı elindeydi; bilirkişinin “olay yerinden alınan numuneler” cümlesine (B2) karşı hiç sunmadın. Numunelerin kimden geldiği kürsüde söylenmeden zincirin ilk halkası kurulmaz.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_q2',
+        all({ chosen: 'CV_Q1' }, not({ chosen: 'CV_Q2' }), not(flag('contra_u1'))),
+        'Bekçiye muhafazayı sordun ama arada olay yerine kimin girdiğini sormadın; eksperin “polis izniyle girdim” cümlesine de çizelgeyi göstermedin. Eksperin yalnız girdiği kayda geçmedi.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_q3',
+        all(has('clue_teneke'), not(flag('cevdet_dinlendi'))),
+        'Bekçi tenekelerin içeri ağır girdiğini sana anlatmıştı; kürsüde “Elinde ne vardı?” diye sormadın. Gözüyle göreni kürsüye çıkarmadıkça bu bir ayrıntı olarak kalır.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_yanmamis',
+        all(any(has('clue_piroliz'), has('clue_buhar')), not(has('ded_yanmamis'))),
+        'Ham verinin profil satırı (buharlaşmamış benzin) ile matris satırı (yanma ürünü yok) birlikte numunenin yangını hiç görmediğini söylüyordu; tahtada birleştirmedin.',
+        'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_sun_u3',
+        all(has('ded_ekilmis'), not(flag('contra_u3'))),
+        '“Tenekeler önceden doluydu” kartı elindeydi; eksperin “numuneleri o zeminden aldım” cümlesine (U3) karşı, temeli kurulmuş olarak sunulmadı. Kastı düşüren son halka buydu.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_s2',
+        all(has('clue_koku_yok'), not(flag('contra_s2'))),
+        'İtfaiyenin “akaryakıt kokusu alınmamıştır” satırını okumuştun; Saadet Hanım’ın “benzin kokusu” ifadesine (S2) karşı hiç sunmadın. Koku tanığı gerekçede ayakta kaldı.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_s6',
+        all(has('ded_bidon'), not(flag('contra_s6'))),
+        'Atölyedeki dolu bidon kartı elindeydi; “kırmızı bidon” ifadesine (S6) karşı sunmadın. Fişteki benzinin nerede olduğu kayda geçmedi.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_koken',
+        all(has('ded_koken'), not(flag('contra_koken'))),
+        'Başlangıç noktası kartı (V izi + itfaiye) elindeydi; bilirkişinin “salon zemininde başladı” cümlesine (B1) karşı sunmadın.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_zemin',
+        all(has('ded_temizlenmis'), not(flag('contra_b1')), not(flag('contra_u2'))),
+        'Temizlenmiş zemin kartı elindeydi; ne bilirkişinin döküntü izine (B1) ne eksperin “molozun altında ilk ben” cümlesine (U2) karşı sundun.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_pano',
+        all(has('ded_pano'), not(flag('contra_b3'))),
+        'Panonun hiç incelenmediğini gösteren kart elindeydi; bilirkişinin “elektrik izi yoktur” cümlesine (B3) karşı sunmadın.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_buat',
+        all(has('ded_buat'), not(flag('contra_buat'))),
+        'Isınan buat kartı elindeydi; B3’e karşı sunulsaydı ustanın notu tutanağa ilk celsede girerdi.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_taze',
+        all(has('ded_taze'), not(flag('contra_b4'))),
+        'Söndürmeden sağ çıkan benzin kartı elindeydi; bilirkişinin “yoğun ve taze” cümlesine (B4) karşı sunmadın. Tazeliğin “bol dökülmüş” açıklaması kayıtta karşısız kaldı.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_sun_ark',
+        all(has('ev_ark'), not(flag('contra_u6_ark'))),
+        'Mahkemenin elektrik bilirkişisi raporu dosyadaydı; eksperin “elektrik olsaydı görürdüm” cümlesine (U6), linye satırı okunmuş olarak sunulmadı.',
         'SORGULAMA',
       ),
       hint(

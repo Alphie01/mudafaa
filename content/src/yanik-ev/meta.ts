@@ -107,32 +107,18 @@ export const meta: CasePart = {
       when: { cmp: [{ count: 'evidence', tag: 'ara' }, '>=', 2] },
     },
     {
-      id: 'hizlandirici_coktu',
+      id: 'kast_coktu',
       label:
-        'Hızlandırıcı iddiasının her ayağı kayıtla çöktü: numune zinciri (bilirkişi + yeminli bekçi + eksperin kendi girişi), zemin izi (iki celsede), koku tanığı, satın alınan benzin, başlangıç noktası, elektrik dışlaması (pano, buat, mahkemenin ark raporu) ve laboratuvar bulgusu (taze benzin + ham veri, mühür, tutanak yokluğu)',
+        'Kast iddiası kayıtla çöktü: numuneleri kolluk değil eksper getirdi (bilirkişinin kabulü), eksper muhafaza altındaki olay yerine refakatsiz girdi (yeminli bekçi ya da kendi beyanı), içeri dolu tenekelerle girdi (bekçi) ve numuneler o yangını hiç görmedi (ham veri, şahsi mühür, tutanak yokluğu)',
+      // Çekirdek: dördü de ikinci celseye ya da araya bağlıdır. Çekirdek kurulduktan sonra hiçbir yolda kasten mahkûmiyet yoktur;
+      // kalan ayaklar (koku, bidon, başlangıç, pano/buat, ark, taze benzin) yalnızca gerekçe cümlelerini ve skoru değiştirir.
+      // PS_U3 (numune getirildi) kendi temelini ister: bilirkişinin kabulü, refakatsiz giriş, bekçinin tenekeleri, zemini kimin
+      // açtığı ve laboratuvarın kabul/not satırları (trial.ts `u3Temel`). Bu yüzden contra_u3 kayıtta ise çekirdek de kayıttadır.
       when: all(
-        // Numune zinciri: bilirkişinin kabulü, yeminli bekçi (muhafaza, refakatsiz giriş, dolu tenekeler), eksperin "polis izni".
         flag('contra_b2'),
-        { chosen: 'CV_Q2' },
-        flag('cevdet_dinlendi'),
-        flag('contra_u1'),
-        // Zemin izi: kolluk karesiyle bilirkişi önünde, eksperin kendi kabulüyle ikinci celsede.
-        flag('contra_b1'),
-        flag('contra_u2'),
-        // Koku tanığı: "benzin" kelimesi kolluğun sorusundan; itfaiye akaryakıt kokusu almadı.
-        flag('contra_s2'),
-        // Satın alınan benzin: kırmızı bidon atölyede, dört litre dolu (kolluk tespiti).
-        flag('contra_s6'),
-        // Başlangıç noktası salon değil, mutfak–koridor duvarı (V izi + itfaiye).
-        flag('contra_koken'),
-        // Elektrik dışlaması: bilirkişi panoya ve ısınmış buata bakmadı; mahkemenin elektrik bilirkişisi koridor hattında
-        // birincil ark buldu.
-        flag('contra_b3'),
-        flag('contra_buat'),
-        flag('contra_u6_ark'),
-        // Laboratuvar: birinci celsede taze benzin, aradaki ham veriyle (piroliz yok, şahsi mühür) ikinci celsede ekilmiş numune.
-        flag('contra_b4'),
         flag('contra_u3'),
+        any(flag('contra_u1'), { chosen: 'CV_Q2' }),
+        flag('cevdet_dinlendi'),
       ),
     },
     {
@@ -179,6 +165,9 @@ export const meta: CasePart = {
     meter('ex_tah', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('ex_ariza', 'Deneme hakkı', 'counter', 3, 3, { lowAt: 1, resource: true }),
     meter('ex_ark', 'Deneme hakkı', 'counter', 3, 3, { lowAt: 1, resource: true }),
+    meter('tah_yangin', 'Bağlantı hakkı', 'counter', 3, 3, { lowAt: 1, resource: true }),
+    meter('tah_iplik', 'Bağlantı hakkı', 'counter', 3, 3, { lowAt: 1, resource: true }),
+    meter('tah_ara', 'Bağlantı hakkı', 'counter', 3, 3, { lowAt: 1, resource: true }),
     meter('dil_hak', 'Talep hakkı', 'counter', 3, 3, { lowAt: 1, resource: true }),
     meter('h1_hak', 'Talep hakkı', 'counter', 3, 3, { lowAt: 1, resource: true }),
     meter('dayanak', 'Dayanak', 'counter', 3, 3, { lowAt: 1, resource: true }),

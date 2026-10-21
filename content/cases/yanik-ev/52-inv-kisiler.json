@@ -48,6 +48,10 @@
             {
               "speaker": "halil",
               "text": "Sorun. Ben kumaşçıyım. Bir şeyin iyi mi kötü mü olduğunu ters yüzünden anlarım. Sorularınızın da ters yüzüne bakarım."
+            },
+            {
+              "speaker": "halil",
+              "text": "Yalnız şunu bilin: o evi yakmak değil, yapmak için kredi çektim. Ocakta restorasyon başlayacaktı. Ustalar hazırdı, elektrikçisi bile; Necati Usta."
             }
           ]
         },
@@ -1076,6 +1080,27 @@
       "onFirstEnter": [{ "type": "MEET", "character": "cevdet" }],
       "lines": [
         {
+          "when": { "all": [{ "chosen": "A_CEVDET2" }, { "chosen": "CV_SABAH" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "MURADİYE MEYDANI — BEKÇİ KULÜBESİ, 21.40",
+              "style": "card",
+              "bg": "sokak_karanlik"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kulübenin camı yine buğuluydu. Cevdet beni görünce termosun kapağını kapattı."
+            },
+            { "speaker": "cevdet", "text": "Yine siz. Defter burada, avukat hanım. Bir şey mi eksik kaldı?" },
+            {
+              "speaker": "player",
+              "text": "Defterin o satırını okumuştum. Ama ona en basit soruyu sormamıştım: bunu bir hâkimin önünde de söyler mi? Bir tanığı, gelip gelmeyeceğini bilmeden mahkemeye bildirmem.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "when": { "chosen": "A_CEVDET2" },
           "lines": [
             {
@@ -1091,7 +1116,7 @@
             { "speaker": "cevdet", "text": "Yine siz. Bir şey unuttunuz galiba, avukat hanım. Sorun. Defter burada." },
             {
               "speaker": "player",
-              "text": "Unutmadım. O gün sormayı bilmiyordum. Raporun ekini okuyana kadar sorulacak soru yoktu.",
+              "text": "Unutmadım. O gün sormayı bilmiyordum. Raporun ekindeki teslim tutanağını ve iki fotoğrafı yan yana koyana kadar sorulacak soru yoktu: 04.30’da örtülü bir zemin, 09.40’ta açık bir zemin. Arada biri o kapıdan geçti.",
               "style": "thought"
             }
           ]
@@ -1152,18 +1177,18 @@
           "label": "Sabah olay yerini siz beklemişsiniz. Kim girdi, kim çıktı?",
           "visibleWhen": {
             "all": [
-              {
-                "all": [
-                  { "hasEvidence": "clue_numune" },
-                  { "any": [{ "visited": "INV_FOTO" }, { "hasEvidence": "clue_eksper_foto" }] }
-                ]
-              },
+              { "all": [{ "hasEvidence": "clue_numune" }, { "hasEvidence": "ded_temizlenmis" }] },
               { "chosen": "CV_GECE" }
             ]
           },
           "responses": [
             {
               "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Zemin 04.30’da tavan tahtalarının altındaydı, 09.40’ta çıplaktı. Numuneleri getiren de bir eksperdi. Arada kapıda kim duruyorsa, o beş saati o bilir.",
+                  "style": "thought"
+                },
                 {
                   "speaker": "cevdet",
                   "text": "Beşte polis şeridi çekti, “Cevdet sen bekle” dedi. Bekledim. Onda polis geldi, teslim ettim."
@@ -1205,6 +1230,7 @@
           "id": "CV_TANIK",
           "kind": "OPTION",
           "label": "Bunu mahkemede anlatır mısınız?",
+          "visibleWhen": { "chosen": "CV_SABAH" },
           "responses": [
             {
               "lines": [

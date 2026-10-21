@@ -1,0 +1,102 @@
+{
+  "report": {
+    "hints": [
+      {
+        "id": "h_ded_ss",
+        "when": { "not": { "hasEvidence": "ded_ss" } },
+        "text": "Ekran görüntüleri karardan önce, imzasız bir rızayla alınmıştı; bunu tahtada birleştirip hükme esas alınmasını engelleyebilirdin (CMK 134/1, 217/2).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_ded_bagli",
+        "when": { "not": { "hasEvidence": "ded_bagli" } },
+        "text": "Ek-3’teki “gönderen cihaz” sütunu ile hesaptaki bağlı cihaz: tehditler telefondan değil, bir masaüstü oturumundan çıkmıştı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_ded_hastane",
+        "when": { "not": { "hasEvidence": "ded_hastane" } },
+        "text": "9 Kasım gecesi telefon kilitli ve şarjdaydı; onam formunun saati mazereti kâğıda döküyordu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_ev_hesap",
+        "when": { "not": { "hasEvidence": "ev_hesap" } },
+        "text": "Hesap sahibi kendi oturum geçmişini indirebilir; noter ve hash ile bu veriyi savunman için koruyabilirdin.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_ev_isp",
+        "when": { "not": { "hasEvidence": "ev_isp" } },
+        "text": "Üç gecenin IP adresinin abonesini mahkemeden sorgulatabilir, tehdit hattının sahibini gösterebilirdin.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_ded_laptop",
+        "when": { "not": { "hasEvidence": "ded_laptop_ozan" } },
+        "text": "Demirbaş listesi ve koli: 07 numaralı dizüstünün ofise hiç dönmediğini gösteriyordu.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_ev_laptop",
+        "when": { "not": { "hasEvidence": "ev_laptop" } },
+        "text": "Somut dayanaklı bir suç duyurusu, savcılığın 07 numaralı dizüstüyü bulup el koymasını sağlayabilirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_ded_zincir",
+        "when": { "not": { "hasEvidence": "ded_zincir" } },
+        "text": "Telefon mühürsüz bir zarfta iki gün durdu, hash ancak 14 Kasım’da alındı; bu boşluğu tahtada kurup kolluğa ve bilirkişiye sorabilirdin (CMK 134).",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_ded_ip",
+        "when": { "not": { "hasEvidence": "ded_ip_tekin" } },
+        "text": "Sağlayıcının yanıtını hesap verisindeki IP ile birleştirseydin, tehdit hattının kime ait olduğu tahtada belirirdi.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_vakif",
+        "when": { "not": { "hasEvidence": "clue_vakif_yazi" } },
+        "text": "Vakfın gelen evrak defterinde, ses kaydından yedi saat sonra kaydın varlığını bilen bir e-posta duruyordu; ihale dosyasına bakabilirdin.",
+        "category": "ARASTIRMA"
+      },
+      {
+        "id": "h_uslup_ozan",
+        "when": { "not": { "hasEvidence": "ded_uslup_ozan" } },
+        "text": "Tehditlerin “Sn.” ve “Saygılar.” imzası, mali müşavirin sakladığı e-postada ve vakfa giden yazıda da vardı; tahtada yan yana koyabilirdin.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_bilirkisi",
+        "when": { "not": { "flag": "bilirkisi_istendi" } },
+        "text": "Bağımsız bir adli bilişim bilirkişisi istemedin; avukatın teorisi, bilirkişinin ağzından delile dönüşür (CMK 63 vd.).",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_rapor",
+        "when": { "all": [{ "flag": "bilirkisi_istendi" }, { "not": { "visited": "ARA_RAPOR" } }] },
+        "text": "Bilirkişi raporu arada dosyaya girdi ama okumadın; Bulgu 3 ve “Sınır” satırı ikinci celsede bilirkişiyi daraltmanın anahtarıydı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_suc",
+        "when": { "all": [{ "not": { "flag": "suc_duyurusu" } }, { "not": { "flag": "karartma" } }] },
+        "text": "Gerçek faile giden yol suç duyurusuydu (CMK 158): avukat şüpheliyi kovalamaz, delili savcılığa taşır.",
+        "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_iftira",
+        "when": { "flag": "iftira_savunma" },
+        "text": "Dayanaksız bir iftirayı savunmaya dayanak yapmak heyeti soğutur; elindeki somut delillere güven.",
+        "category": "SAVUNMA_STRATEJISI"
+      },
+      {
+        "id": "h_uslup",
+        "when": { "not": { "flag": "fact_melis_sn" } },
+        "text": "Katılan, mesajların Tarık’ın diline benzemediğini ilk günden sezmişti; bunu kürsüde ortaya çıkarabilirdin.",
+        "category": "SORGULAMA"
+      }
+    ]
+  }
+}

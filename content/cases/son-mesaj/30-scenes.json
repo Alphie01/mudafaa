@@ -1,0 +1,227 @@
+{
+  "scenes": [
+    {
+      "id": "sc_ofis",
+      "title": "Aksoy Mimarlık · Eski Pirinç Han",
+      "description": "Tophane, hanın üst katı. Kemerlerin altında iki çizim masası; biri on bir aydır boş.",
+      "width": 344,
+      "height": 300,
+      "image": "img_ofis",
+      "objects": [
+        {
+          "id": "ob_dock",
+          "name": "Boş masa",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 36, "y": 150, "w": 76, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_dock" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Eski ortağın masasında bir dok istasyonu; kablosu hâlâ prizde. Kenarında demirbaş etiketi: “07”. Yuva boş. Tozda dikdörtgen, temiz bir iz: bir şeyin aylarca durup alındığı yer.",
+            "short": "Boş dok “07”"
+          }
+        },
+        {
+          "id": "ob_not",
+          "name": "Klavye",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 122, "y": 196, "w": 56, "h": 22 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_not" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Klavyenin altında sararmış bir not: “WIFI: Ece2016!...” Kızının adı ve doğum yılı. Büyük harf, üç nokta; Tarık böyle yazmaz. Başka bir el, “herkes kullansın” diye yazmış.",
+            "short": "Yapışkan not"
+          }
+        },
+        {
+          "id": "ob_klasor",
+          "name": "Yazışmalar klasörü",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 252, "y": 64, "w": 62, "h": 84 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }],
+          "feedback": {
+            "text": "Raftaki “Yazışmalar” klasörü. Çoğu sıradan ihale yazışması. En arkada ayrılık protokolünün kapak yazısı: “Ek: demirbaş listesi.” Ek yok. Kenarda kurşun kalemle bir not: “Asıl liste N. Sarı’da.”",
+            "short": "Protokol kapağı"
+          }
+        },
+        {
+          "id": "ob_foto",
+          "name": "Çerçeveli fotoğraf",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 56, "w": 62, "h": 46 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Açılış günü. İki adam bir kurdeleyi birlikte kesiyor; biri gülüyor, öbürü kameraya bakıyor. Bir anı. Delil değil. (−10)",
+            "short": "Açılış fotoğrafı"
+          }
+        },
+        {
+          "id": "ob_plan",
+          "name": "Restorasyon planı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 196, "y": 176, "w": 96, "h": 50 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Eski Pirinç Han’ın rölövesi. Kurşun kalemle düzeltilmiş kemer açıklıkları. Güzel bir iş. Bu davayla ilgisi yok. (−10)",
+            "short": "Han planı"
+          }
+        },
+        {
+          "id": "ob_modem",
+          "name": "Modem",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 62, "w": 44, "h": 28 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }],
+          "feedback": {
+            "text": "Ofisin modemi. Altındaki şifre etiketi tırnakla kazınmış. Kimse şifreyi etikete bakarak öğrenmesin diye. Ama şifre zaten herkesin dilinde.",
+            "short": "Ofis modemi"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_hastane",
+      "title": "Devlet hastanesi · acil servis",
+      "description": "Çekirge. Gece yarısından sonra bekleyenler, florasan ışık, hemşire masası.",
+      "width": 344,
+      "height": 300,
+      "image": "img_hastane",
+      "unlockWhen": { "flag": "fact_hastane" },
+      "objects": [
+        {
+          "id": "ob_sarj",
+          "name": "Hemşire masası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 28, "y": 150, "w": 96, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_sarj" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Hemşire masasında altı ağızlı bir şarj istasyonu; her kabloda isim ve saat yazılı bir bant. Duvarda kural: “Emanet telefona isim ve saat yazılır.” İnsanlar unutur, bantlar unutmaz.",
+            "short": "Şarj istasyonu"
+          }
+        },
+        {
+          "id": "ob_kamera",
+          "name": "Koridor kamerası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 268, "y": 18, "w": 44, "h": 30 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kamera_h" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }
+          ],
+          "feedback": {
+            "text": "Tavanda bir kamera. Güvenlik görevlisi omuz silkiyor: “Otuz gün tutuyoruz abla. Kasım mı? Kasım çoktan gitti.”",
+            "short": "Kamera"
+          }
+        },
+        {
+          "id": "ob_onam",
+          "name": "Onam formları",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 86, "w": 64, "h": 74 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }],
+          "feedback": {
+            "text": "Duvarda boş onam formları. Her formun altında iki satır: “Tarih/saat” ve “Saati yazan sağlık personeli”. Burada saatler elle, imzayla yazılıyor.",
+            "short": "Onam panosu"
+          }
+        },
+        {
+          "id": "ob_saat",
+          "name": "Duvar saati",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 160, "y": 18, "w": 40, "h": 40 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Saat doğru. Burada her şey saatle yazılıyor; saatin kendisi bir şey söylemiyor. (−10)",
+            "short": "Duvar saati"
+          }
+        },
+        {
+          "id": "ob_otomat",
+          "name": "Otomat",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 120, "w": 72, "h": 120 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "Çay, kahve, çorba. Bir düğmenin üstünde “ARIZALI” yazıyor. Gece nöbetinin bütün edebiyatı bu kadar. (−10)",
+            "short": "Otomat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_ev",
+      "title": "Tarık’ın evi · çalışma odası",
+      "description": "Hüdavendigar’da eski bir apartman. Kitaplık, bir çizim masası, köşede kapağı açık bir koli.",
+      "width": 344,
+      "height": 300,
+      "image": "img_ev",
+      "objects": [
+        {
+          "id": "ob_koli",
+          "name": "Koli",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 28, "y": 190, "w": 96, "h": 62 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_koli" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Mart kolisi: anahtarlar, iki cetvel, lazer metre, bir dizüstü şarj aleti. Dizüstünün kendisi yok. Şarj aleti saklanır da makine atılır mı? Kapakta: “Gerisi sende... Saygılar.”",
+            "short": "Mart kolisi"
+          }
+        },
+        {
+          "id": "ob_evmodem",
+          "name": "Ev modemi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 60, "w": 54, "h": 30 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }],
+          "feedback": {
+            "text": "Evin modemi. Yönetim ekranında hattın adresi: 176.88.12.4. Tarık’ın evi. Kasım gecelerinin adresi bu değildi; olsaydı savcı çoktan sorardı.",
+            "short": "Ev modemi"
+          }
+        },
+        {
+          "id": "ob_tablet",
+          "name": "Eski tablet",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 172, "w": 64, "h": 40 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }],
+          "feedback": {
+            "text": "Kızının oyun tableti. Çizgi film, boyama, bir hafıza oyunu. Mesajlaşma uygulaması hiç kurulmamış.",
+            "short": "Ece’nin tableti"
+          }
+        },
+        {
+          "id": "ob_cizim",
+          "name": "Çocuk çizimi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 160, "y": 48, "w": 72, "h": 62 } }],
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -10 }],
+          "feedback": {
+            "text": "“Babamın ofisi.” Kemerler, iki masa, iki adam. Birinin üstü karalanmış. Çocuklar her şeyi görür. Ama bu bir delil değil. (−10)",
+            "short": "Ece’nin çizimi"
+          }
+        }
+      ]
+    }
+  ],
+  "assets": [
+    { "id": "img_ofis", "kind": "IMAGE", "path": "assets/scenes/ofis@4x.png" },
+    { "id": "img_hastane", "kind": "IMAGE", "path": "assets/scenes/hastane@4x.png" },
+    { "id": "img_ev", "kind": "IMAGE", "path": "assets/scenes/ev@4x.png" }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_dock", "source": { "type": "OBJECT", "id": "ob_dock" } },
+    { "evidence": "ev_not", "source": { "type": "OBJECT", "id": "ob_not" } },
+    { "evidence": "clue_sarj", "source": { "type": "OBJECT", "id": "ob_sarj" } },
+    { "evidence": "clue_kamera_h", "source": { "type": "OBJECT", "id": "ob_kamera" } },
+    { "evidence": "clue_koli", "source": { "type": "OBJECT", "id": "ob_koli" } }
+  ]
+}

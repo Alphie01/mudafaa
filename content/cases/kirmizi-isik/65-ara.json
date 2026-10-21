@@ -138,6 +138,19 @@
             },
             {
               "speaker": "narrator",
+              "text": "Leyla gitmeden önce kapının pervazına yaslandı. Fincan hâlâ elindeydi; kahve soğumuş, üstünde ince bir zar."
+            },
+            {
+              "speaker": "leyla",
+              "text": "İlk ağır dosyamda bir tanığın kapısını çaldım. Gece yarısı. Haklıydım da. Ertesi gün tanık ifadesini değiştirdi; “avukat evime geldi” dedi. Haklı olmak yetmedi."
+            },
+            {
+              "speaker": "player",
+              "text": "Leyla geçmişini anlatmaz. Anlattığında bir şey öğretmek içindir; ya da bir şeyi unutmamak için.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
               "text": "Masamda üç rapor için üç boş dosya açtım: EDR, heyet, Adli Tıp. Sırtlarına el yazısıyla etiket yazdım; Gül’den öğrendiğim bir alışkanlık."
             }
           ]
@@ -315,7 +328,7 @@
           "label": "Kestel sanayi sitesi",
           "cost": [{ "var": "ara_ap", "amount": 1 }],
           "next": "ARA_SANAYI",
-          "description": "Koyu yeşil bir hafif ticari, sağ ön köşe",
+          "description": "Yedek parçacı · tampon ölçüsü",
           "visibleWhen": { "hasEvidence": "ded_arac" },
           "maxUses": 1
         },
@@ -361,6 +374,10 @@
             {
               "speaker": "narrator",
               "text": "Raporun ekinde kavşağın bir planı: yaya geçidi, iki sinyal başlığı, okla gösterilmiş bir “çatışma bölgesi.” Kırmızı kalemle taranmış bir dikdörtgen; Hatice Hanım’ın son adımları o dikdörtgenin içinde."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sonuç paragrafını yüksek sesle okudum; boş büroda sesim yankılandı. Sonra bir daha okudum, bu sefer içimden. İkisinde de aynı şeyi söylüyordu."
             },
             {
               "speaker": "player",
@@ -411,10 +428,24 @@
               ]
             },
             {
+              "when": { "cmp": [{ "var": "aksam1" }, "==", "BEKLE"] },
               "lines": [
                 {
                   "speaker": "gul",
                   "text": "Adını henüz koymadık. Yüzüne bakıp karar vereceğiz demiştiniz. Bakıyoruz."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir dosyanın içinden bir yüz. Şimdilik bu kadar. Yeter.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "gul",
+                  "text": "Adını henüz koymadık. Volkan bir şey diyor, ben bir şey. Bebek bir şey demiyor; uyuyor."
                 },
                 {
                   "speaker": "player",
@@ -454,6 +485,10 @@
               "speaker": "player",
               "text": "Volkan “kırk kadar” demişti. Rapor “altmış sekiz” diyor. Arada yirmi sekiz kilometre ve bir adamın üç yılı var.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Tablonun altında bilirkişinin notu: “Veri, aracın hava yastığı kontrol ünitesinden, üreticinin okuma yazılımıyla, mühür altında alınmıştır.” Mühür altında. Sevdim bunu."
             }
           ]
         }
@@ -559,6 +594,15 @@
             {
               "speaker": "narrator",
               "text": "Dördüncü sayfanın kenarına biri kurşun kalemle küçük bir işaret koymuş. Kim koyduysa, benim de bakmamı istemiş gibi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "İlk üç sayfa bir ders kitabı gibiydi: kavşağın krokisi, sinyal fazlarının tablosu, ıslak asfaltta sürtünme katsayısı. Her rakamın yanında bir kaynak."
+            },
+            {
+              "speaker": "player",
+              "text": "Cengiz Ateş’in raporu dört sayfaydı ve hiç kaynak göstermiyordu. Bu rapor otuz bir sayfa ve her cümlesinin bir annesi var. Ama bir cümle öksüz.",
+              "style": "thought"
             }
           ]
         }
@@ -682,6 +726,23 @@
               "speaker": "player",
               "text": "Bir delil, yanlış dolapta üç ay. Şimdi doğru yere gitmesi gerek. Ve o doğru yer ben değilim.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Çayını karıştırdı. Kaşık bardağa iki kez çarptı, sonra durdu. Kantinci sandalyeleri masalara ters çeviriyordu; ayakları havada, ölü böcekler gibi."
+            },
+            {
+              "speaker": "ayten",
+              "text": "Polis okulunda bize ilk gün şunu öğrettiler: olay yerinde gördüğünü yaz, düşündüğünü değil. Ben o gece gördüğümü yazdım. Amirim düşündüğünü yazdırdı."
+            },
+            {
+              "speaker": "ayten",
+              "text": "Tutanakta “eski kaza” yazıyor. Benim el yazımla. Altında benim imzam. Bunu her gece hatırlıyorum."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir imza, bir el yazısı, bir amir. Bir polisin vicdanı bazen bir tutanağın kenarına sığmaz; bir mendile sarılıp dolaba girer.",
+              "style": "thought"
             }
           ]
         }
@@ -690,7 +751,7 @@
         {
           "id": "AY_SAVCI",
           "kind": "OPTION",
-          "label": "“O parçayı bana değil, tutanakla savcılığa teslim edin. Nerede, nasıl bulduğunuzu da yazın.”",
+          "label": "“Parçayı tutanakla savcılığa teslim edin; nerede bulduğunuzu da yazın.”",
           "responses": [
             {
               "lines": [
@@ -701,7 +762,16 @@
                 },
                 { "speaker": "ayten", "text": "Tamam. Yarın sabah savcılığa. Tutanakla." },
                 { "speaker": "narrator", "text": "Çayını bitirmeden kalktı. Kapıda döndü." },
-                { "speaker": "ayten", "text": "Teşekkür ederim. Bana “ver bana” demediğiniz için." }
+                { "speaker": "ayten", "text": "Teşekkür ederim. Bana “ver bana” demediğiniz için." },
+                {
+                  "speaker": "narrator",
+                  "text": "Kantinin camından onu izledim. Yağmurun altında bir süre durdu, şemsiyesini açmadı. Sonra telefonunu çıkardı, birini aradı; kısa bir konuşma."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Belki amirini aradı, belki annesini. Belki yalnızca saatin kaç olduğunu soran bir kayıt. Yarın sabah bir dosya kalınlaşacak; benim elim değmeden.",
+                  "style": "thought"
+                }
               ]
             }
           ],
@@ -719,7 +789,7 @@
         {
           "id": "AY_BANA",
           "kind": "OPTION",
-          "label": "“Bana verin, ben mahkemeye sunarım. Daha hızlı olur.”",
+          "label": "“Bana verin, dilekçeme ekleyip mahkemeye ben sunarım. Savcılığın sırasını beklemekten hızlı olur.”",
           "responses": [
             {
               "lines": [
@@ -838,12 +908,25 @@
               "lines": [
                 { "speaker": "serkan", "text": "Annemin sesi bir dosyada. Hm." },
                 {
+                  "speaker": "narrator",
+                  "text": "Bir süre telefonun ekranına baktı. Ekran karardı. Parmağıyla dokundu, yeniden aydınlandı. Bir daha karardı."
+                },
+                {
+                  "speaker": "serkan",
+                  "text": "Üç aydır bu mesajı dinlemedim. Biliyor musunuz neden? Dinlersem biter sandım. Son kelimesi bu olacak. “Hadi.” Bir simit, bir “hadi”."
+                },
+                {
                   "speaker": "serkan",
                   "text": "Götürürüm. Yarın. Ama bilin: ben yine ceza istiyorum. Kime verilecekse ona."
                 },
                 {
                   "speaker": "player",
                   "text": "“Kime verilecekse.” Üç hafta önce bu cümlede bir isim vardı.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir oğul annesinin son sözünü bir savcıya götürecek. Ben onu götürmesini istemedim; götürebileceğini söyledim. Bu ikisi arasındaki fark bir meslek kadar geniş.",
                   "style": "thought"
                 },
                 {
@@ -925,7 +1008,7 @@
         {
           "id": "HA_BILGI",
           "kind": "OPTION",
-          "label": "“Mahkeme sizi çağırdı. Ne gördüyseniz onu anlatın. Ne söyleyeceğinizi ne ben söylerim ne müdürünüz.”",
+          "label": "“Ne gördüyseniz onu anlatın. Ne söyleyeceğinizi kimse size söyleyemez; ben de.”",
           "responses": [
             {
               "lines": [
@@ -935,8 +1018,22 @@
                 },
                 { "speaker": "hamdi", "text": "Müdür bey kızar. Emekliliğe iki yıl. … Kızsın." },
                 {
+                  "speaker": "hamdi",
+                  "text": "Otuz yıl o lambaları yaktım söndürdüm abla. Bir gece bile kırmızıyla yeşili karıştırmadım. O kart karıştırdı. Kartı ben değiştirdim, ertesi gün. Geç kaldım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Geç kaldım.” Bir teknisyenin itirafı, bir raporun dipnotundan daha ağır.",
+                  "style": "thought"
+                },
+                {
                   "speaker": "narrator",
                   "text": "Hamdi sökülmüş eski lambanın camını tırnağıyla tıklattı. Kırmızı, sarı, yeşil. Sonra kapıyı açtı, içeri girdi, döndü."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Hamdi bir lamba sakladı, Ayten bir cam parçası, Sevim bir kayıt. Bu dosyada herkes bir şey saklamış; kimse bir şey gizlememiş. Fark küçük ama hukuk bu farkın üstünde durur.",
+                  "style": "thought"
                 },
                 {
                   "speaker": "hamdi",
@@ -959,7 +1056,7 @@
         {
           "id": "HA_PROVA",
           "kind": "OPTION",
-          "label": "“Kürsüde size şunları soracağım; cevaplarınızı birlikte hazırlayalım.”",
+          "label": "“Kürsüde soracaklarımı şimdi birlikte prova edelim.”",
           "responses": [
             {
               "lines": [
@@ -1032,12 +1129,20 @@
         {
           "id": "VO_DOGRU",
           "kind": "OPTION",
-          "label": "“Bildiğinizi söyleyin, bilmediğinize bilmiyorum deyin. Hatice Hanım’ın oğluna söyleyecekseniz, ona gerçekten söyleyin.”",
+          "label": "“Bildiğinizi söyleyin; bilmediğinize ‘bilmiyorum’ deyin. Kendi sözcüklerinizle.”",
           "responses": [
             {
               "lines": [
                 { "speaker": "volkan", "text": "Bilmediğime bilmiyorum. Bildiğime… biliyorum. Tamam." },
                 { "speaker": "gul", "text": "Bunu her sabah tekrar ettireceğim ona. Bebek bezi değiştirirken." },
+                {
+                  "speaker": "volkan",
+                  "text": "Hatice Hanım’ın oğlunu duruşmada gördüm. Bana hiç bakmadı. Bakmasını istiyorum. Bakarsa bir şey söyleyebilirim belki. Bakmazsa ne söylesem duvara."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Ona ne söyleyeceğinizi ben bilemem. Ama ne söylerseniz doğru olsun. O zaman duvara da söyleseniz bir şey olur."
+                },
                 {
                   "speaker": "narrator",
                   "text": "Volkan camın öbür yanındaki bebeğe döndü. Elini cama koydu; bebek uyuyordu. Bir hemşire gülümsedi, perdeyi biraz araladı."
@@ -1073,7 +1178,7 @@
         {
           "id": "VO_EZBER",
           "kind": "OPTION",
-          "label": "“Size bir son söz metni yazayım; onu ezberleyin.”",
+          "label": "“Size son söz için bir metin yazayım; hâkimin duymak istediklerini sırayla, ezbere söyleyin.”",
           "responses": [
             {
               "lines": [
@@ -1130,7 +1235,7 @@
         {
           "id": "NE_DINLE",
           "kind": "OPTION",
-          "label": "Dinle; mahkemede ne gördüyse onu söylemeye devam etmesini, gerekirse mahkemeye kendisinin başvurabileceğini söyle.",
+          "label": "Dinle. Bir şey eklemek isterse bunu bana değil, mahkemeye kendisinin yazabileceğini hatırlat.",
           "responses": [
             {
               "lines": [
@@ -1143,6 +1248,14 @@
                   "text": "Başka bir şey hatırlarsanız, mahkemeye kendiniz söylersiniz. Bana değil. Ben karşı tarafın avukatı sayılırım."
                 },
                 { "speaker": "necati", "text": "Karşı taraf. Hm. Ben hep sizin karşınızda mıydım?" },
+                {
+                  "speaker": "narrator",
+                  "text": "Termosunun kapağını açtı, kapattı. Kahve kokusu odaya yayıldı; kakule ve yanık şeker. Bekleme salonunun saatine baktı."
+                },
+                {
+                  "speaker": "necati",
+                  "text": "Kırk yıldır gece çalışırım. Gece şoförleri bilir: gece her şey kırmızıdır. Stop lambaları, tabelalar, sigaraların ucu. Ben de kırmızı görmüşüm. Herkes gibi."
+                },
                 {
                   "speaker": "necati",
                   "text": "Bir şey daha: o gümbürtüden önce bir fren duydum. Uzun bir fren. Lastik bağırıyordu. Sonra gümbürtü. Sonra bir fren daha, kısa. Tıkır tıkır."
@@ -1232,7 +1345,7 @@
         {
           "id": "NA_RED",
           "kind": "OPTION",
-          "label": "“Teşekkür ederim. Sorularımı duruşmada, mahkeme huzurunda soracağım.”",
+          "label": "“Teşekkürler. Sorularımı duruşmada soracağım.”",
           "responses": [
             {
               "lines": [
@@ -1245,6 +1358,15 @@
                 {
                   "speaker": "player",
                   "text": "Bir sınav. Heyet başkanı, avukatın kahve içip içmeyeceğini merak etmiş. İçmedim.",
+                  "style": "thought"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Telefonu kapattım. Masamdaki heyet raporunun dördüncü sayfası açıktı; kurşun kalemle konmuş o küçük işaret hâlâ oradaydı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Belki o işareti heyet başkanı koymuştu, belki bir kâtip. Soru aynı kalıyor ve onu duruşmada, herkesin önünde soracağım.",
                   "style": "thought"
                 },
                 {
@@ -1303,34 +1425,37 @@
       "eyebrow": "DAVA #03 · ARA",
       "title": "Kestel sanayi sitesi",
       "background": "depo",
-      "room": { "label": "KAPORTA-BOYA · 3. BLOK", "character": "rustem" },
+      "room": { "label": "KESTEL SANAYİ · 3. BLOK", "character": "rustem" },
       "onFirstEnter": [{ "type": "MEET", "character": "rustem" }],
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "KESTEL SANAYİ SİTESİ · 3. BLOK — 15.00", "style": "card", "bg": "depo" },
+            { "speaker": "narrator", "text": "KESTEL SANAYİ SİTESİ — 15.00", "style": "card", "bg": "depo" },
             {
               "speaker": "narrator",
-              "text": "Taşlama sesi, tiner kokusu, bir radyoda arabesk. Sıra sıra kaporta dükkânları. “Rüstem Kaporta-Boya” yazan tabelanın altında yağlı tulumlu bir adam."
+              "text": "Bir yedek parçacının kataloğuna bakmaya gelmiştim: 2005–2010 model hafif ticarilerin ön tampon ölçüsü. Kataloğa göre yerden altmış santim kadar."
             },
             {
               "speaker": "player",
-              "text": "Kriminal raporu bir rengi söyledi; kamera bir kırık stopu. Böyle bir hasar faturasız onarılacaksa, bu sitede onarılır. On iki kaportacıya sordum; on biri “bilmem” dedi. Biri başını çevirdi.",
+              "text": "Bilirkişiye soracağım bir soru için bir rakam. Kimseyi aramaya gelmedim. Rakamı defterime yazdım, dükkândan çıktım.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dönüş yolu kaporta dükkânlarının önünden geçiyordu. Taşlama sesi, tiner kokusu, bir radyoda arabesk. Kaldırımdan yürüdüm."
+            },
+            {
+              "speaker": "narrator",
+              "text": "“Rüstem Kaporta-Boya” tabelasının altında, açık kepengin önünde, kompresörün dibinde koyu yeşil boya tozu. Kapının yanında yeni bir sağ stop lambasının boş kutusu."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Arka garajın kapısı aralık; içeride örtülü bir şeyin hatları. Yağlı tulumlu bir adam başını kaldırdı."
             },
             { "speaker": "rustem", "text": "Ne lazım abla? Boya mı, kaporta mı? Sigorta işi yapmam, peşin çalışırım." },
             {
               "speaker": "player",
-              "text": "Kasımın ortasında koyu yeşil bir hafif ticari gelmiş olabilir mi? Sağ ön köşesi, sağ stopu."
-            },
-            { "speaker": "rustem", "text": "Ne bileyim abla, günde on araba girer çıkar. Hatırlamam." },
-            {
-              "speaker": "narrator",
-              "text": "Yerde, kompresörün dibinde koyu yeşil boya tozu. Bir köşede yeni bir sağ stop lambasının kutusu. Arka garajın kapısı aralık; içeride örtülü bir şeyin hatları."
-            },
-            {
-              "speaker": "player",
-              "text": "Gördüğümü gördüm. Şimdi ne yapacağım, beni bu dosyadan daha uzun süre takip edecek.",
+              "text": "Bir renk, bir kutu, bir örtü. Bunların hiçbiri benim delilim değil. Şimdi ne yapacağım, beni bu dosyadan daha uzun süre takip edecek.",
               "style": "thought"
             }
           ]
@@ -1340,18 +1465,18 @@
         {
           "id": "SA_NOT",
           "kind": "OPTION",
-          "label": "Gördüklerini not al, fotoğrafını dükkânın önünden, kamuya açık yerden çek; tek kelime etmeden çık ve savcılığa bildir.",
+          "label": "“Bir şey lazım değil, sağ ol usta.” Yürü; köşede not al.",
           "responses": [
             {
               "lines": [
-                { "speaker": "player", "text": "Teşekkür ederim usta. Kolay gelsin." },
+                { "speaker": "player", "text": "Bir şey lazım değil, sağ ol usta. Kolay gelsin." },
                 {
                   "speaker": "narrator",
-                  "text": "Tabelanın, kompresörün ve yerdeki tozun fotoğrafını kaldırımdan çektim. Rüstem arkamdan baktı, taşlamayı açmadı."
+                  "text": "Köşeyi dönünce durdum. Saati, blok numarasını, tabelayı, gördüklerimi defterime yazdım. Fotoğraf çekmedim; kimsenin kapısına bakmadım."
                 },
                 {
                   "speaker": "player",
-                  "text": "Kovalamak, yakalamak, itiraf ettirmek: dizilerdeki avukat. Ben bir dilekçe yazacağım. Dilekçeler daha az heyecanlı ama daha çok kişiyi yakalar.",
+                  "text": "Kovalamak, yakalamak, itiraf ettirmek: dizilerdeki avukat. Ben bir dilekçeye bir satır ekleyeceğim. Gerisini yetkisi olan yapar.",
                   "style": "thought"
                 }
               ]
@@ -1364,14 +1489,45 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Avukat şüpheliyi kovalamaz, işyerine girmez; kamuya açık yerden gördüğünü not alır ve somut bilgiyi savcılığa bildirir (CMK 158).",
+            "feedback": "Avukat şüpheliyi aramaz, sorgulamaz, işyerine girmez. Kamuya açık yerden gördüğünü not alır, somut bilgiyi savcılığa bildirir (CMK 158); araştırmayı savcılık yapar (CMK 160).",
+            "category": "ARASTIRMA"
+          }
+        },
+        {
+          "id": "SA_SOR",
+          "kind": "OPTION",
+          "label": "“Usta, kasımda koyu yeşil, sağ önü vuruk bir panelvan geldi mi buraya?” diye sor.",
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "rustem", "text": "Ne bileyim abla, günde on araba girer çıkar. Polis misin sen?" },
+                {
+                  "speaker": "narrator",
+                  "text": "Taşlamayı açtı. Konuşma bitti. Birkaç dakika sonra arka garajın kapısı içeriden kapandı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir soru sordum ve bir kapı kapandı. Belki savcının açacağı bir kapıydı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "ARA_HUB",
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -40 },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Kaçan sürücüyle bağlantısı olabilecek birini sorgulamak avukatın işi değil; soruşturmayı savcılık yürütür (CMK 160). Soru yalnızca uyarı olur: ilgili kişiler delili ortadan kaldırabilir.",
             "category": "ARASTIRMA"
           }
         },
         {
           "id": "SA_GARAJ",
           "kind": "OPTION",
-          "label": "Rüstem içeri girdiğinde aralık garaj kapısından süzül; örtüyü kaldırıp fotoğraf çek.",
+          "label": "Rüstem içeri girince aralık kapıdan garaja gir; örtüyü kaldırıp çek.",
           "responses": [
             {
               "lines": [
@@ -1409,30 +1565,6 @@
             "feedback": "Kapalı bir işyerine rızaya aykırı girmek suçtur (TCK 116/2) ve bu yolla elde edilen fotoğraf hükme esas alınamaz (Anayasa 38/6, CMK 206/2-a, 217/2). Avukatlık meslek kurallarına da açıkça aykırı (Av.K. md. 34).",
             "category": "ARASTIRMA"
           }
-        },
-        {
-          "id": "SA_TEHDIT",
-          "kind": "OPTION",
-          "label": "“Usta, bunu savcıya söylersem sen de yanarsın. Şimdi anlatırsan iyi olur.”",
-          "responses": [
-            {
-              "lines": [
-                {
-                  "speaker": "rustem",
-                  "expression": "kizgin",
-                  "text": "Beni mi korkutuyorsun abla? Sanayide büyüdüm ben."
-                },
-                { "speaker": "narrator", "text": "Taşlamayı açtı. Konuşma bitti. Garajın kapısı kapandı." }
-              ]
-            }
-          ],
-          "next": "ARA_HUB",
-          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": -40 }],
-          "quality": {
-            "q": "BAD",
-            "feedback": "Tanık olabilecek birini korkutmak bilgi getirmez, uyarı getirir; ilgili kişiler delili ortadan kaldırabilir.",
-            "category": "ARASTIRMA"
-          }
         }
       ]
     },
@@ -1451,16 +1583,35 @@
         {
           "id": "SU_DAYANAKLI",
           "kind": "OPTION",
-          "label": "Kaçan araç sürücüsü hakkında (TCK 85, 98): boya raporu, saati düzeltilmiş kamera kaydı ve sanayideki onarım bilgisiyle.",
+          "label": "Kaçan aracın sürücüsü hakkında; renk, model ve saatle somut bir tarif.",
           "enabledWhen": { "hasEvidence": "ded_arac" },
           "lockedReason": "Kaçan aracı tarif edecek somut bir çıkarım gerekli.",
           "responses": [
             {
+              "when": { "flag": "sanayi_not" },
               "lines": [
                 {
                   "speaker": "narrator",
-                  "text": "Dilekçe dört sayfa oldu. Renk, model aralığı, kırık stop, saat, sanayinin adresi. İsim yok; isim savcılığın işi."
+                  "text": "Dilekçe dört sayfa oldu. Renk, model aralığı, kırık stop, düzeltilmiş saat. Son paragrafa bir satır: Kestel sanayi sitesinde kaldırımdan gördüklerim, blok numarasıyla."
                 },
+                {
+                  "speaker": "narrator",
+                  "text": "“Bölgedeki kaporta ve boya işyerlerinin araştırılmasını talep ederim.” İsim yok; isim savcılığın işi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kimseye bir şey sormadım. Bir zarf gönderdim. Zarflar bazen kovalamaktan hızlıdır.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "narrator",
+                  "text": "Dilekçe üç sayfa oldu. Renk, model aralığı, kırık stop, düzeltilmiş saat. “Kazanın ertesi günlerinde bu tarife uyan bir aracın onarıldığı kaporta işyerlerinin araştırılmasını talep ederim.”"
+                },
+                { "speaker": "narrator", "text": "İsim yok; isim savcılığın işi." },
                 {
                   "speaker": "player",
                   "text": "Kimseyi kovalamadım. Bir zarf gönderdim. Zarflar bazen kovalamaktan hızlıdır.",
@@ -1481,7 +1632,7 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Somut olgulara dayanan bir ihbar savcılığın soruşturma yükümlülüğünü doğurur (CMK 158, 160). Kaçan sürücü için taksirle öldürmenin yanında yardım etmeme (TCK 98) de gündeme gelir.",
+            "feedback": "Somut bir ihbar savcılığın soruşturma yükümlülüğünü doğurur (CMK 158, 160); kaportacıları savcılık araştırır. Kaçan sürücü için taksirle öldürmenin yanında TCK 98 de gündeme gelir.",
             "category": "USUL_BILGISI"
           }
         },
@@ -1753,6 +1904,10 @@
             {
               "speaker": "leyla",
               "text": "İlliyet bağı kurulmadıysa, müvekkilin oradaydı ama ölüme yol açmadı demektir. Bu “şüphe” değil, başka bir şeydir. Ne olduğunu sen söyle."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bunu karıştırma: şüphe, hâkimin içinde kalan bir boşluktur. Bu ise dosyanın kendisinde yazan bir cümle olabilir. Raporu kartlarınla yan yana koy."
             }
           ]
         },
@@ -1832,6 +1987,15 @@
             {
               "speaker": "narrator",
               "text": "Pano yine dolmuştu. Bu sefer raptiyeler yetmedi; kâğıtları bantla yapıştırdım."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masamda üç rapor yan yana: EDR’nin sayıları, heyetin otuz bir sayfası, Adli Tıp’ın mühürlü iki sayfası. Üçü de aynı geceyi başka bir dille anlatıyordu."
+            },
+            {
+              "speaker": "player",
+              "text": "Sayılar hız diyor. Heyet ışık diyor. Adli Tıp beden diyor. Yarın bu üç dili tek bir cümleye çevirmem gerekecek; hâkimin anlayacağı bir cümleye.",
+              "style": "thought"
             }
           ]
         }

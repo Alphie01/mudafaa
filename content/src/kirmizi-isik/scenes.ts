@@ -45,7 +45,7 @@ export const scenes: CasePart = {
         sceneObject('ob_cam', 'Sol şeritteki parıltı', OB_CAM, {
           discovers: 'clue_cam',
           score: { ARASTIRMA: 60 },
-          text: 'Geçidin dokuz metre ilerisinde, sol şeritte saçılmış far camı ve koyu plastik parçalar. Tutanağa göre ilk temasın olduğu yaya geçidinin hemen ötesi. Parçaların bazıları yeşilimsi, bazıları şeffaf. Fotoğrafın köşesinde bir polis eldiveni, yerdeki bir parçayı işaret ediyor.',
+          text: 'Geçidin dokuz metre ilerisinde, sol şeritte far camı ve koyu plastik parçalar; tutanağa göre ilk temasın hemen ötesi. Bazıları yeşilimsi, bazıları şeffaf. Köşede bir polis eldiveni bir parçayı işaret ediyor.',
           short: 'Far camı kırıkları',
         }),
         sceneObject('ob_arka', 'Direkteki siyah kutu', OB_ARKA, {
@@ -116,7 +116,7 @@ export const scenes: CasePart = {
         sceneObject('ob_tampon', 'Sol ön tampon', OB_TAMPON, {
           discovers: 'clue_tampon44',
           score: { ARASTIRMA: 60 },
-          text: 'Sürtünme izi tamponun alt kenarında. Metreyi tuttum: yerden 44 santim. İzler yatay, aşağıya doğru. Bir insanın bacağına çarpan bir tampon bu kadar alçakta iz bırakmaz; ama yerde yatan birine sürtünen bir tampon bırakır.',
+          text: 'Sürtünme izi tamponun alt kenarında. Metreyi tuttum: yerden 44 santim. İzler yatay, aşağıya doğru. Plastik ezilmemiş; boyası sıyrılmış, o kadar.',
           short: 'Tampon 44 cm',
         }),
         sceneObject('ob_far', 'Sol far', OB_FAR, {

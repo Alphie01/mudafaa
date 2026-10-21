@@ -380,6 +380,9 @@ export const invWork: CasePart = {
         ),
         N('Hatice Durmaz, 54. Durmadım.'),
         N(
+          'Ölüm saati: 01.40, hastanede. Olay yeri ile acil servis arasında yirmi dokuz dakika. Bir ambulansın sireni, bir sedyenin tekerleği, bir doktorun saat okuması.',
+        ),
+        N(
           'Raporun ekinde fotoğraflar. Bej bir mont, bir ayakkabı, bir hastane kartı: “H. DURMAZ · TEMİZLİK · KAT 3.” Kartın kenarı kırılmış.',
         ),
         T(
@@ -506,6 +509,9 @@ export const invWork: CasePart = {
           'Belediyenin cevabı: bir üst yazı, iki sayfa makine dökümü, bir Beyaz Masa çıktısı. Üst yazıda “herhangi bir arızaya rastlanmamıştır” yazıyor.',
         ),
         T('Üst yazılar özettir. Özetler, yazanın görmek istediğini özetler.'),
+        N(
+          'Üst yazının altında bir müdürün imzası. İmza okunaksız ama mühür net: “Ulaşım Dairesi Başkanlığı · Sinyalizasyon Şube Müdürü.” Bir mühür, bir cümle, bir sorumluluk.',
+        ),
         N(
           'Döküm bir makinenin dilinde: saatler, kodlar, büyük harfler. Kodların anlamı ekteki bir tabloda; tablo, kimse okumasın diye en sona konmuş gibi.',
         ),

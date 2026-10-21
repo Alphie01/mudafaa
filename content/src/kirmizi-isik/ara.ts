@@ -162,6 +162,14 @@ export const ara: CasePart = {
         ),
         T('İki gün. Dörder işlik iki gün. Bir yenidoğanın uyku düzeni kadar kısa.'),
         N(
+          'Leyla gitmeden önce kapının pervazına yaslandı. Fincan hâlâ elindeydi; kahve soğumuş, üstünde ince bir zar.',
+        ),
+        L(
+          'leyla',
+          'İlk ağır dosyamda bir tanığın kapısını çaldım. Gece yarısı. Haklıydım da. Ertesi gün tanık ifadesini değiştirdi; “avukat evime geldi” dedi. Haklı olmak yetmedi.',
+        ),
+        T('Leyla geçmişini anlatmaz. Anlattığında bir şey öğretmek içindir; ya da bir şeyi unutmamak için.'),
+        N(
           'Masamda üç rapor için üç boş dosya açtım: EDR, heyet, Adli Tıp. Sırtlarına el yazısıyla etiket yazdım; Gül’den öğrendiğim bir alışkanlık.',
         ),
       ),
@@ -252,7 +260,7 @@ export const ara: CasePart = {
               visibleWhen: all(flag('h1_itiraz'), cmp(v('ara_day'), '==', 2)),
             }),
             araAct('A_SANAYI', 'Kestel sanayi sitesi', 'ARA_SANAYI', {
-              description: 'Koyu yeşil bir hafif ticari, sağ ön köşe',
+              description: 'Yedek parçacı · tampon ölçüsü',
               visibleWhen: has('ded_arac'),
             }),
           ],
@@ -283,6 +291,9 @@ export const ara: CasePart = {
           N(
             'Raporun ekinde kavşağın bir planı: yaya geçidi, iki sinyal başlığı, okla gösterilmiş bir “çatışma bölgesi.” Kırmızı kalemle taranmış bir dikdörtgen; Hatice Hanım’ın son adımları o dikdörtgenin içinde.',
           ),
+          N(
+            'Sonuç paragrafını yüksek sesle okudum; boş büroda sesim yankılandı. Sonra bir daha okudum, bu sefer içimden. İkisinde de aynı şeyi söylüyordu.',
+          ),
           T(
             '“Sanığa kırmızı ışık ihlali atfedilemez.” Bir cümle. Üç aydır bir adamın üstünde duran bir kaya, bir cümleyle kalktı. Ama otuz bir sayfa var.',
           ),
@@ -307,8 +318,13 @@ export const ara: CasePart = {
               L('gul', 'Adını Ela koyduk. Sizin dediğiniz. Volkan “aydınlık olsun” dedi. Siz de öyle demiştiniz.'),
               T('Bir dosyanın içinden aydınlık bir şey. Şimdilik sadece bir isim. Yeter.'),
             ),
-            otherwise(
+            when(
+              cmp(v('aksam1'), '==', 'BEKLE'),
               L('gul', 'Adını henüz koymadık. Yüzüne bakıp karar vereceğiz demiştiniz. Bakıyoruz.'),
+              T('Bir dosyanın içinden bir yüz. Şimdilik bu kadar. Yeter.'),
+            ),
+            otherwise(
+              L('gul', 'Adını henüz koymadık. Volkan bir şey diyor, ben bir şey. Bebek bir şey demiyor; uyuyor.'),
               T('Bir dosyanın içinden bir yüz. Şimdilik bu kadar. Yeter.'),
             ),
           ],
@@ -329,6 +345,9 @@ export const ara: CasePart = {
           ),
           T(
             'Volkan “kırk kadar” demişti. Rapor “altmış sekiz” diyor. Arada yirmi sekiz kilometre ve bir adamın üç yılı var.',
+          ),
+          N(
+            'Tablonun altında bilirkişinin notu: “Veri, aracın hava yastığı kontrol ünitesinden, üreticinin okuma yazılımıyla, mühür altında alınmıştır.” Mühür altında. Sevdim bunu.',
           ),
         ),
         header: { left: 'OLAY VERİ KAYDEDİCİSİ · 16 AVE 712', right: 'BİLİRKİŞİ DÖKÜMÜ' },
@@ -396,6 +415,12 @@ export const ara: CasePart = {
           ),
           N(
             'Dördüncü sayfanın kenarına biri kurşun kalemle küçük bir işaret koymuş. Kim koyduysa, benim de bakmamı istemiş gibi.',
+          ),
+          N(
+            'İlk üç sayfa bir ders kitabı gibiydi: kavşağın krokisi, sinyal fazlarının tablosu, ıslak asfaltta sürtünme katsayısı. Her rakamın yanında bir kaynak.',
+          ),
+          T(
+            'Cengiz Ateş’in raporu dört sayfaydı ve hiç kaynak göstermiyordu. Bu rapor otuz bir sayfa ve her cümlesinin bir annesi var. Ama bir cümle öksüz.',
           ),
         ),
         header: { left: 'BİLİRKİŞİ HEYETİ RAPORU', right: 'DOÇ. DR. N. GÜNEŞ VE İKİ ÜYE' },
@@ -472,40 +497,57 @@ export const ara: CasePart = {
         ),
         L('ayten', 'Neden aldığımı bilmiyorum. Belki bir gün biri sorar diye. Kimse sormadı. Siz sordunuz.'),
         T('Bir delil, yanlış dolapta üç ay. Şimdi doğru yere gitmesi gerek. Ve o doğru yer ben değilim.'),
+        N(
+          'Çayını karıştırdı. Kaşık bardağa iki kez çarptı, sonra durdu. Kantinci sandalyeleri masalara ters çeviriyordu; ayakları havada, ölü böcekler gibi.',
+        ),
+        L(
+          'ayten',
+          'Polis okulunda bize ilk gün şunu öğrettiler: olay yerinde gördüğünü yaz, düşündüğünü değil. Ben o gece gördüğümü yazdım. Amirim düşündüğünü yazdırdı.',
+        ),
+        L('ayten', 'Tutanakta “eski kaza” yazıyor. Benim el yazımla. Altında benim imzam. Bunu her gece hatırlıyorum.'),
+        T(
+          'Bir imza, bir el yazısı, bir amir. Bir polisin vicdanı bazen bir tutanağın kenarına sığmaz; bir mendile sarılıp dolaba girer.',
+        ),
       ),
       choices: [
+        option('AY_SAVCI', '“Parçayı tutanakla savcılığa teslim edin; nerede bulduğunuzu da yazın.”', {
+          score: { USUL_BILGISI: 60 },
+          effects: [raise('ayten_teslim')],
+          good: 'Delilin zinciri korunur: kolluk görevlisi, elindeki eşyayı tutanakla adli makama teslim eder; avukat delili kendi eline almaz.',
+          category: 'USUL_BILGISI',
+          responses: says(
+            L('ayten', 'Amirim kızacak.'),
+            P(
+              'Amiriniz kızar. Ama yarın birisi o parçanın nereden geldiğini sorarsa cevabı sizin imzanız olur. Benim değil.',
+            ),
+            L('ayten', 'Tamam. Yarın sabah savcılığa. Tutanakla.'),
+            N('Çayını bitirmeden kalktı. Kapıda döndü.'),
+            L('ayten', 'Teşekkür ederim. Bana “ver bana” demediğiniz için.'),
+            N(
+              'Kantinin camından onu izledim. Yağmurun altında bir süre durdu, şemsiyesini açmadı. Sonra telefonunu çıkardı, birini aradı; kısa bir konuşma.',
+            ),
+            T(
+              'Belki amirini aradı, belki annesini. Belki yalnızca saatin kaç olduğunu soran bir kayıt. Yarın sabah bir dosya kalınlaşacak; benim elim değmeden.',
+            ),
+          ),
+          next: HUB,
+        }),
         option(
-          'AY_SAVCI',
-          '“O parçayı bana değil, tutanakla savcılığa teslim edin. Nerede, nasıl bulduğunuzu da yazın.”',
+          'AY_BANA',
+          '“Bana verin, dilekçeme ekleyip mahkemeye ben sunarım. Savcılığın sırasını beklemekten hızlı olur.”',
           {
-            score: { USUL_BILGISI: 60 },
-            effects: [raise('ayten_teslim')],
-            good: 'Delilin zinciri korunur: kolluk görevlisi, elindeki eşyayı tutanakla adli makama teslim eder; avukat delili kendi eline almaz.',
+            score: { USUL_BILGISI: -40 },
+            effects: [raise('ayten_kayip')],
+            bad: 'Avukatın, kolluktaki bir delili kendi eline alması zinciri koparır; delilin kaynağı ve bütünlüğü tartışmalı hâle gelir.',
             category: 'USUL_BILGISI',
             responses: says(
-              L('ayten', 'Amirim kızacak.'),
-              P(
-                'Amiriniz kızar. Ama yarın birisi o parçanın nereden geldiğini sorarsa cevabı sizin imzanız olur. Benim değil.',
-              ),
-              L('ayten', 'Tamam. Yarın sabah savcılığa. Tutanakla.'),
-              N('Çayını bitirmeden kalktı. Kapıda döndü.'),
-              L('ayten', 'Teşekkür ederim. Bana “ver bana” demediğiniz için.'),
+              N('Ayten bir an elini çantasına götürdü. Sonra durdu.'),
+              L('ayten', 'Hayır. Böyle olmaz. Bunu… bilmiyorum. Düşüneyim.', 'saskin'),
+              T('Düşünecek. Ve düşünürken o parça bir dolabın dibinde kalacak. Benim yüzümden.'),
             ),
             next: HUB,
           },
         ),
-        option('AY_BANA', '“Bana verin, ben mahkemeye sunarım. Daha hızlı olur.”', {
-          score: { USUL_BILGISI: -40 },
-          effects: [raise('ayten_kayip')],
-          bad: 'Avukatın, kolluktaki bir delili kendi eline alması zinciri koparır; delilin kaynağı ve bütünlüğü tartışmalı hâle gelir.',
-          category: 'USUL_BILGISI',
-          responses: says(
-            N('Ayten bir an elini çantasına götürdü. Sonra durdu.'),
-            L('ayten', 'Hayır. Böyle olmaz. Bunu… bilmiyorum. Düşüneyim.', 'saskin'),
-            T('Düşünecek. Ve düşünürken o parça bir dolabın dibinde kalacak. Benim yüzümden.'),
-          ),
-          next: HUB,
-        }),
         option('AY_SAKLA', '“Şimdilik kimseye söylemeyin. Kürsüde sürpriz olsun.”', {
           score: { USUL_BILGISI: -30 },
           effects: [raise('ayten_kayip')],
@@ -561,8 +603,18 @@ export const ara: CasePart = {
           category: 'USUL_BILGISI',
           responses: says(
             L('serkan', 'Annemin sesi bir dosyada. Hm.'),
+            N(
+              'Bir süre telefonun ekranına baktı. Ekran karardı. Parmağıyla dokundu, yeniden aydınlandı. Bir daha karardı.',
+            ),
+            L(
+              'serkan',
+              'Üç aydır bu mesajı dinlemedim. Biliyor musunuz neden? Dinlersem biter sandım. Son kelimesi bu olacak. “Hadi.” Bir simit, bir “hadi”.',
+            ),
             L('serkan', 'Götürürüm. Yarın. Ama bilin: ben yine ceza istiyorum. Kime verilecekse ona.'),
             T('“Kime verilecekse.” Üç hafta önce bu cümlede bir isim vardı.'),
+            T(
+              'Bir oğul annesinin son sözünü bir savcıya götürecek. Ben onu götürmesini istemedim; götürebileceğini söyledim. Bu ikisi arasındaki fark bir meslek kadar geniş.',
+            ),
             N(
               'Serkan telefonu cebine koydu, selvinin dibinde bir süre durdu. Sonra, bana bakmadan: “Annem sizi severdi. Kimseyi suçlamadan konuşan insanları severdi.”',
             ),
@@ -604,39 +656,47 @@ export const ara: CasePart = {
         ),
       ),
       choices: [
+        option('HA_BILGI', '“Ne gördüyseniz onu anlatın. Ne söyleyeceğinizi kimse size söyleyemez; ben de.”', {
+          score: { USUL_BILGISI: 40 },
+          effects: [raise('hamdi_cagrildi')],
+          good: 'Tanığa doğruyu söyleme yükümlülüğünü hatırlatmak (CMK 58) ve içeriğe karışmamak: meslek kuralının ta kendisi.',
+          category: 'USUL_BILGISI',
+          responses: says(
+            L('hamdi', 'Ne gördüysem. Hm. Yemin edeceğim değil mi? Yemin ederim. Babam yemin etmeyi bilen adamdı.'),
+            L('hamdi', 'Müdür bey kızar. Emekliliğe iki yıl. … Kızsın.'),
+            L(
+              'hamdi',
+              'Otuz yıl o lambaları yaktım söndürdüm abla. Bir gece bile kırmızıyla yeşili karıştırmadım. O kart karıştırdı. Kartı ben değiştirdim, ertesi gün. Geç kaldım.',
+            ),
+            T('“Geç kaldım.” Bir teknisyenin itirafı, bir raporun dipnotundan daha ağır.'),
+            N(
+              'Hamdi sökülmüş eski lambanın camını tırnağıyla tıklattı. Kırmızı, sarı, yeşil. Sonra kapıyı açtı, içeri girdi, döndü.',
+            ),
+            T(
+              'Hamdi bir lamba sakladı, Ayten bir cam parçası, Sevim bir kayıt. Bu dosyada herkes bir şey saklamış; kimse bir şey gizlememiş. Fark küçük ama hukuk bu farkın üstünde durur.',
+            ),
+            L(
+              'hamdi',
+              'Bir şey daha: o gece kayıt cihazının dökümünü ben almadım, merkez aldı. Döküm sizin elinizdeyse, benim söyleyeceğimi zaten biliyorsunuz.',
+            ),
+          ),
+          next: HUB,
+        }),
         option(
-          'HA_BILGI',
-          '“Mahkeme sizi çağırdı. Ne gördüyseniz onu anlatın. Ne söyleyeceğinizi ne ben söylerim ne müdürünüz.”',
+          'HA_PROVA',
+          '“Kürsüde soracaklarımı şimdi birlikte prova edelim.”',
           {
-            score: { USUL_BILGISI: 40 },
-            effects: [raise('hamdi_cagrildi')],
-            good: 'Tanığa doğruyu söyleme yükümlülüğünü hatırlatmak (CMK 58) ve içeriğe karışmamak: meslek kuralının ta kendisi.',
+            score: { USUL_BILGISI: -60 },
+            effects: [inc('ethics', 1)],
+            bad: 'Tanığın cevaplarını birlikte “hazırlamak” beyanı etkilemektir (TCK 277; Av.K. md. 34). Tanık kendi bildiğini anlatmalı.',
             category: 'USUL_BILGISI',
             responses: says(
-              L('hamdi', 'Ne gördüysem. Hm. Yemin edeceğim değil mi? Yemin ederim. Babam yemin etmeyi bilen adamdı.'),
-              L('hamdi', 'Müdür bey kızar. Emekliliğe iki yıl. … Kızsın.'),
-              N(
-                'Hamdi sökülmüş eski lambanın camını tırnağıyla tıklattı. Kırmızı, sarı, yeşil. Sonra kapıyı açtı, içeri girdi, döndü.',
-              ),
-              L(
-                'hamdi',
-                'Bir şey daha: o gece kayıt cihazının dökümünü ben almadım, merkez aldı. Döküm sizin elinizdeyse, benim söyleyeceğimi zaten biliyorsunuz.',
-              ),
+              L('hamdi', 'Hazırlamak mı? Siz de mi müdür gibisiniz abla?', 'kizgin'),
+              T('Aynı cümleyi başka bir ağızdan duymak. En kötüsü bu.'),
             ),
             next: HUB,
           },
         ),
-        option('HA_PROVA', '“Kürsüde size şunları soracağım; cevaplarınızı birlikte hazırlayalım.”', {
-          score: { USUL_BILGISI: -60 },
-          effects: [inc('ethics', 1)],
-          bad: 'Tanığın cevaplarını birlikte “hazırlamak” beyanı etkilemektir (TCK 277; Av.K. md. 34). Tanık kendi bildiğini anlatmalı.',
-          category: 'USUL_BILGISI',
-          responses: says(
-            L('hamdi', 'Hazırlamak mı? Siz de mi müdür gibisiniz abla?', 'kizgin'),
-            T('Aynı cümleyi başka bir ağızdan duymak. En kötüsü bu.'),
-          ),
-          next: HUB,
-        }),
       ],
     }),
     conversation('ARA_VOLKAN', {
@@ -664,37 +724,44 @@ export const ara: CasePart = {
         ),
       ),
       choices: [
+        option('VO_DOGRU', '“Bildiğinizi söyleyin; bilmediğinize ‘bilmiyorum’ deyin. Kendi sözcüklerinizle.”', {
+          score: { SAVUNMA_STRATEJISI: 40 },
+          effects: [raise('volkan_dogru'), inc('trust', 6), ifThen(flag('fact_gul'), [inc('trust', 2)])],
+          good: 'Müvekkili kendi anlatımına güvendirmek; metin ezberletmeden, doğruyu söylemeye teşvik etmek.',
+          responses: says(
+            L('volkan', 'Bilmediğime bilmiyorum. Bildiğime… biliyorum. Tamam.'),
+            L('gul', 'Bunu her sabah tekrar ettireceğim ona. Bebek bezi değiştirirken.'),
+            L(
+              'volkan',
+              'Hatice Hanım’ın oğlunu duruşmada gördüm. Bana hiç bakmadı. Bakmasını istiyorum. Bakarsa bir şey söyleyebilirim belki. Bakmazsa ne söylesem duvara.',
+            ),
+            P(
+              'Ona ne söyleyeceğinizi ben bilemem. Ama ne söylerseniz doğru olsun. O zaman duvara da söyleseniz bir şey olur.',
+            ),
+            N(
+              'Volkan camın öbür yanındaki bebeğe döndü. Elini cama koydu; bebek uyuyordu. Bir hemşire gülümsedi, perdeyi biraz araladı.',
+            ),
+            L(
+              'volkan',
+              'Avukat hanım. Ne olursa olsun, ona bu gecenin doğrusunu anlatacağım. Siz de bana doğrusunu söylediniz. Bunu unutmayacağım.',
+            ),
+            N('Gül tekerlekli sandalyede, kapının eşiğindeydi. Yorgun, solgun, gülümsüyordu.'),
+          ),
+          next: HUB,
+        }),
         option(
-          'VO_DOGRU',
-          '“Bildiğinizi söyleyin, bilmediğinize bilmiyorum deyin. Hatice Hanım’ın oğluna söyleyecekseniz, ona gerçekten söyleyin.”',
+          'VO_EZBER',
+          '“Size son söz için bir metin yazayım; hâkimin duymak istediklerini sırayla, ezbere söyleyin.”',
           {
-            score: { SAVUNMA_STRATEJISI: 40 },
-            effects: [raise('volkan_dogru'), inc('trust', 6), ifThen(flag('fact_gul'), [inc('trust', 2)])],
-            good: 'Müvekkili kendi anlatımına güvendirmek; metin ezberletmeden, doğruyu söylemeye teşvik etmek.',
+            score: { SAVUNMA_STRATEJISI: -30 },
+            bad: 'Ezber son söz hâkime ezber gibi gelir; sanığın kendi sesi, kendi sözcükleriyle duyulmalı.',
             responses: says(
-              L('volkan', 'Bilmediğime bilmiyorum. Bildiğime… biliyorum. Tamam.'),
-              L('gul', 'Bunu her sabah tekrar ettireceğim ona. Bebek bezi değiştirirken.'),
-              N(
-                'Volkan camın öbür yanındaki bebeğe döndü. Elini cama koydu; bebek uyuyordu. Bir hemşire gülümsedi, perdeyi biraz araladı.',
-              ),
-              L(
-                'volkan',
-                'Avukat hanım. Ne olursa olsun, ona bu gecenin doğrusunu anlatacağım. Siz de bana doğrusunu söylediniz. Bunu unutmayacağım.',
-              ),
-              N('Gül tekerlekli sandalyede, kapının eşiğindeydi. Yorgun, solgun, gülümsüyordu.'),
+              L('volkan', 'Ezber… Ben okulda da ezberleyemezdim. Ama siz diyorsanız.'),
+              T('Kâğıda yazılan pişmanlık, kâğıt kokar.'),
             ),
             next: HUB,
           },
         ),
-        option('VO_EZBER', '“Size bir son söz metni yazayım; onu ezberleyin.”', {
-          score: { SAVUNMA_STRATEJISI: -30 },
-          bad: 'Ezber son söz hâkime ezber gibi gelir; sanığın kendi sesi, kendi sözcükleriyle duyulmalı.',
-          responses: says(
-            L('volkan', 'Ezber… Ben okulda da ezberleyemezdim. Ama siz diyorsanız.'),
-            T('Kâğıda yazılan pişmanlık, kâğıt kokar.'),
-          ),
-          next: HUB,
-        }),
       ],
     }),
     conversation('ARA_NECATI', {
@@ -721,7 +788,7 @@ export const ara: CasePart = {
       choices: [
         option(
           'NE_DINLE',
-          'Dinle; mahkemede ne gördüyse onu söylemeye devam etmesini, gerekirse mahkemeye kendisinin başvurabileceğini söyle.',
+          'Dinle. Bir şey eklemek isterse bunu bana değil, mahkemeye kendisinin yazabileceğini hatırlat.',
           {
             score: { USUL_BILGISI: 40 },
             good: 'Tanıkla görüşmede çizgi: dinlemek, yönlendirmemek; beyanını düzeltmek isterse bunu mahkemeye kendisinin yapabileceğini hatırlatmak.',
@@ -732,6 +799,13 @@ export const ara: CasePart = {
                 'Başka bir şey hatırlarsanız, mahkemeye kendiniz söylersiniz. Bana değil. Ben karşı tarafın avukatı sayılırım.',
               ),
               L('necati', 'Karşı taraf. Hm. Ben hep sizin karşınızda mıydım?'),
+              N(
+                'Termosunun kapağını açtı, kapattı. Kahve kokusu odaya yayıldı; kakule ve yanık şeker. Bekleme salonunun saatine baktı.',
+              ),
+              L(
+                'necati',
+                'Kırk yıldır gece çalışırım. Gece şoförleri bilir: gece her şey kırmızıdır. Stop lambaları, tabelalar, sigaraların ucu. Ben de kırmızı görmüşüm. Herkes gibi.',
+              ),
               L(
                 'necati',
                 'Bir şey daha: o gümbürtüden önce bir fren duydum. Uzun bir fren. Lastik bağırıyordu. Sonra gümbürtü. Sonra bir fren daha, kısa. Tıkır tıkır.',
@@ -782,7 +856,7 @@ export const ara: CasePart = {
         ),
       ),
       choices: [
-        option('NA_RED', '“Teşekkür ederim. Sorularımı duruşmada, mahkeme huzurunda soracağım.”', {
+        option('NA_RED', '“Teşekkürler. Sorularımı duruşmada soracağım.”', {
           score: { USUL_BILGISI: 50 },
           good: 'Bilirkişiyle taraflardan biri arasında mahkeme dışı görüşme tarafsızlığı tartışmalı kılar; bilirkişiye soru duruşmada sorulur (CMK 68), gerekirse ret yolu işletilir (CMK 69).',
           category: 'USUL_BILGISI',
@@ -794,6 +868,12 @@ export const ara: CasePart = {
               style: 'phone',
             },
             T('Bir sınav. Heyet başkanı, avukatın kahve içip içmeyeceğini merak etmiş. İçmedim.'),
+            N(
+              'Telefonu kapattım. Masamdaki heyet raporunun dördüncü sayfası açıktı; kurşun kalemle konmuş o küçük işaret hâlâ oradaydı.',
+            ),
+            T(
+              'Belki o işareti heyet başkanı koymuştu, belki bir kâtip. Soru aynı kalıyor ve onu duruşmada, herkesin önünde soracağım.',
+            ),
             L(
               'leyla',
               'Kahveyi reddettin mi? İyi. Bilirkişilerle kahve içilmez, Deniz. Bir kere içersen, raporu okuyan herkes o kahveyi de okur.',
@@ -820,46 +900,58 @@ export const ara: CasePart = {
       ...ARA,
       title: 'Kestel sanayi sitesi',
       background: 'depo',
-      room: { label: 'KAPORTA-BOYA · 3. BLOK', character: 'rustem' },
+      room: { label: 'KESTEL SANAYİ · 3. BLOK', character: 'rustem' },
       onFirstEnter: [{ type: 'MEET', character: 'rustem' }],
       lines: says(
-        card('KESTEL SANAYİ SİTESİ · 3. BLOK — 15.00', 'depo'),
+        card('KESTEL SANAYİ SİTESİ — 15.00', 'depo'),
         N(
-          'Taşlama sesi, tiner kokusu, bir radyoda arabesk. Sıra sıra kaporta dükkânları. “Rüstem Kaporta-Boya” yazan tabelanın altında yağlı tulumlu bir adam.',
+          'Bir yedek parçacının kataloğuna bakmaya gelmiştim: 2005–2010 model hafif ticarilerin ön tampon ölçüsü. Kataloğa göre yerden altmış santim kadar.',
         ),
         T(
-          'Kriminal raporu bir rengi söyledi; kamera bir kırık stopu. Böyle bir hasar faturasız onarılacaksa, bu sitede onarılır. On iki kaportacıya sordum; on biri “bilmem” dedi. Biri başını çevirdi.',
+          'Bilirkişiye soracağım bir soru için bir rakam. Kimseyi aramaya gelmedim. Rakamı defterime yazdım, dükkândan çıktım.',
         ),
-        L('rustem', 'Ne lazım abla? Boya mı, kaporta mı? Sigorta işi yapmam, peşin çalışırım.'),
-        P('Kasımın ortasında koyu yeşil bir hafif ticari gelmiş olabilir mi? Sağ ön köşesi, sağ stopu.'),
-        L('rustem', 'Ne bileyim abla, günde on araba girer çıkar. Hatırlamam.'),
         N(
-          'Yerde, kompresörün dibinde koyu yeşil boya tozu. Bir köşede yeni bir sağ stop lambasının kutusu. Arka garajın kapısı aralık; içeride örtülü bir şeyin hatları.',
+          'Dönüş yolu kaporta dükkânlarının önünden geçiyordu. Taşlama sesi, tiner kokusu, bir radyoda arabesk. Kaldırımdan yürüdüm.',
         ),
-        T('Gördüğümü gördüm. Şimdi ne yapacağım, beni bu dosyadan daha uzun süre takip edecek.'),
+        N(
+          '“Rüstem Kaporta-Boya” tabelasının altında, açık kepengin önünde, kompresörün dibinde koyu yeşil boya tozu. Kapının yanında yeni bir sağ stop lambasının boş kutusu.',
+        ),
+        N('Arka garajın kapısı aralık; içeride örtülü bir şeyin hatları. Yağlı tulumlu bir adam başını kaldırdı.'),
+        L('rustem', 'Ne lazım abla? Boya mı, kaporta mı? Sigorta işi yapmam, peşin çalışırım.'),
+        T(
+          'Bir renk, bir kutu, bir örtü. Bunların hiçbiri benim delilim değil. Şimdi ne yapacağım, beni bu dosyadan daha uzun süre takip edecek.',
+        ),
       ),
       choices: [
-        option(
-          'SA_NOT',
-          'Gördüklerini not al, fotoğrafını dükkânın önünden, kamuya açık yerden çek; tek kelime etmeden çık ve savcılığa bildir.',
-          {
-            score: { ARASTIRMA: 60 },
-            effects: [raise('sanayi_not')],
-            good: 'Avukat şüpheliyi kovalamaz, işyerine girmez; kamuya açık yerden gördüğünü not alır ve somut bilgiyi savcılığa bildirir (CMK 158).',
-            category: 'ARASTIRMA',
-            responses: says(
-              P('Teşekkür ederim usta. Kolay gelsin.'),
-              N(
-                'Tabelanın, kompresörün ve yerdeki tozun fotoğrafını kaldırımdan çektim. Rüstem arkamdan baktı, taşlamayı açmadı.',
-              ),
-              T(
-                'Kovalamak, yakalamak, itiraf ettirmek: dizilerdeki avukat. Ben bir dilekçe yazacağım. Dilekçeler daha az heyecanlı ama daha çok kişiyi yakalar.',
-              ),
+        option('SA_NOT', '“Bir şey lazım değil, sağ ol usta.” Yürü; köşede not al.', {
+          score: { ARASTIRMA: 60 },
+          effects: [raise('sanayi_not')],
+          good: 'Avukat şüpheliyi aramaz, sorgulamaz, işyerine girmez. Kamuya açık yerden gördüğünü not alır, somut bilgiyi savcılığa bildirir (CMK 158); araştırmayı savcılık yapar (CMK 160).',
+          category: 'ARASTIRMA',
+          responses: says(
+            P('Bir şey lazım değil, sağ ol usta. Kolay gelsin.'),
+            N(
+              'Köşeyi dönünce durdum. Saati, blok numarasını, tabelayı, gördüklerimi defterime yazdım. Fotoğraf çekmedim; kimsenin kapısına bakmadım.',
             ),
-            next: HUB,
-          },
-        ),
-        option('SA_GARAJ', 'Rüstem içeri girdiğinde aralık garaj kapısından süzül; örtüyü kaldırıp fotoğraf çek.', {
+            T(
+              'Kovalamak, yakalamak, itiraf ettirmek: dizilerdeki avukat. Ben bir dilekçeye bir satır ekleyeceğim. Gerisini yetkisi olan yapar.',
+            ),
+          ),
+          next: HUB,
+        }),
+        option('SA_SOR', '“Usta, kasımda koyu yeşil, sağ önü vuruk bir panelvan geldi mi buraya?” diye sor.', {
+          score: { ARASTIRMA: -40 },
+          effects: [inc('ethics', 1)],
+          bad: 'Kaçan sürücüyle bağlantısı olabilecek birini sorgulamak avukatın işi değil; soruşturmayı savcılık yürütür (CMK 160). Soru yalnızca uyarı olur: ilgili kişiler delili ortadan kaldırabilir.',
+          category: 'ARASTIRMA',
+          responses: says(
+            L('rustem', 'Ne bileyim abla, günde on araba girer çıkar. Polis misin sen?'),
+            N('Taşlamayı açtı. Konuşma bitti. Birkaç dakika sonra arka garajın kapısı içeriden kapandı.'),
+            T('Bir soru sordum ve bir kapı kapandı. Belki savcının açacağı bir kapıydı.'),
+          ),
+          next: HUB,
+        }),
+        option('SA_GARAJ', 'Rüstem içeri girince aralık kapıdan garaja gir; örtüyü kaldırıp çek.', {
           score: { ARASTIRMA: -100 },
           effects: [raise('etik_garaj'), inc('ethics', 1), discover('ev_garaj')],
           bad: 'Kapalı bir işyerine rızaya aykırı girmek suçtur (TCK 116/2) ve bu yolla elde edilen fotoğraf hükme esas alınamaz (Anayasa 38/6, CMK 206/2-a, 217/2). Avukatlık meslek kurallarına da açıkça aykırı (Av.K. md. 34).',
@@ -871,16 +963,6 @@ export const ara: CasePart = {
             fx(N('Arkamda bir ses: “Ne yapıyorsun sen orada?” Rüstem kapıdaydı, elinde bir anahtar.'), 'flash'),
             L('rustem', 'Polis çağırıyorum! İzinsiz girdin! Hırsız mısın, nesin?', 'kizgin'),
             T('Elimde bir fotoğraf var. Ve bir suç. İkisi de benim.'),
-          ),
-          next: HUB,
-        }),
-        option('SA_TEHDIT', '“Usta, bunu savcıya söylersem sen de yanarsın. Şimdi anlatırsan iyi olur.”', {
-          score: { ARASTIRMA: -40 },
-          bad: 'Tanık olabilecek birini korkutmak bilgi getirmez, uyarı getirir; ilgili kişiler delili ortadan kaldırabilir.',
-          category: 'ARASTIRMA',
-          responses: says(
-            L('rustem', 'Beni mi korkutuyorsun abla? Sanayide büyüdüm ben.', 'kizgin'),
-            N('Taşlamayı açtı. Konuşma bitti. Garajın kapısı kapandı.'),
           ),
           next: HUB,
         }),
@@ -897,27 +979,36 @@ export const ara: CasePart = {
         text: 'Bursa Cumhuriyet Başsavcılığına bir dilekçe. Kimin hakkında, hangi somut bilgiye dayanarak?',
       },
       choices: [
-        option(
-          'SU_DAYANAKLI',
-          'Kaçan araç sürücüsü hakkında (TCK 85, 98): boya raporu, saati düzeltilmiş kamera kaydı ve sanayideki onarım bilgisiyle.',
-          {
-            enabledWhen: has('ded_arac'),
-            lockedReason: 'Kaçan aracı tarif edecek somut bir çıkarım gerekli.',
-            score: { USUL_BILGISI: 80 },
-            effects: [
-              raise('suc_dayanakli'),
-              ifThen(flag('sanayi_not'), [{ type: 'SCORE', category: 'USUL_BILGISI', amount: 40 }]),
-            ],
-            good: 'Somut olgulara dayanan bir ihbar savcılığın soruşturma yükümlülüğünü doğurur (CMK 158, 160). Kaçan sürücü için taksirle öldürmenin yanında yardım etmeme (TCK 98) de gündeme gelir.',
-            responses: says(
+        option('SU_DAYANAKLI', 'Kaçan aracın sürücüsü hakkında; renk, model ve saatle somut bir tarif.', {
+          enabledWhen: has('ded_arac'),
+          lockedReason: 'Kaçan aracı tarif edecek somut bir çıkarım gerekli.',
+          score: { USUL_BILGISI: 80 },
+          effects: [
+            raise('suc_dayanakli'),
+            ifThen(flag('sanayi_not'), [{ type: 'SCORE', category: 'USUL_BILGISI', amount: 40 }]),
+          ],
+          good: 'Somut bir ihbar savcılığın soruşturma yükümlülüğünü doğurur (CMK 158, 160); kaportacıları savcılık araştırır. Kaçan sürücü için taksirle öldürmenin yanında TCK 98 de gündeme gelir.',
+          responses: [
+            when(
+              flag('sanayi_not'),
               N(
-                'Dilekçe dört sayfa oldu. Renk, model aralığı, kırık stop, saat, sanayinin adresi. İsim yok; isim savcılığın işi.',
+                'Dilekçe dört sayfa oldu. Renk, model aralığı, kırık stop, düzeltilmiş saat. Son paragrafa bir satır: Kestel sanayi sitesinde kaldırımdan gördüklerim, blok numarasıyla.',
               ),
+              N(
+                '“Bölgedeki kaporta ve boya işyerlerinin araştırılmasını talep ederim.” İsim yok; isim savcılığın işi.',
+              ),
+              T('Kimseye bir şey sormadım. Bir zarf gönderdim. Zarflar bazen kovalamaktan hızlıdır.'),
+            ),
+            otherwise(
+              N(
+                'Dilekçe üç sayfa oldu. Renk, model aralığı, kırık stop, düzeltilmiş saat. “Kazanın ertesi günlerinde bu tarife uyan bir aracın onarıldığı kaporta işyerlerinin araştırılmasını talep ederim.”',
+              ),
+              N('İsim yok; isim savcılığın işi.'),
               T('Kimseyi kovalamadım. Bir zarf gönderdim. Zarflar bazen kovalamaktan hızlıdır.'),
             ),
-            next: HUB,
-          },
-        ),
+          ],
+          next: HUB,
+        }),
         option('SU_GENEL', 'Faili meçhul: “Olay yerinde başka bir araç olmalı; araştırılsın.”', {
           score: { USUL_BILGISI: 10 },
           effects: [raise('suc_bos')],
@@ -986,6 +1077,10 @@ export const ara: CasePart = {
             'leyla',
             'İlliyet bağı kurulmadıysa, müvekkilin oradaydı ama ölüme yol açmadı demektir. Bu “şüphe” değil, başka bir şeydir. Ne olduğunu sen söyle.',
           ),
+          L(
+            'leyla',
+            'Bunu karıştırma: şüphe, hâkimin içinde kalan bir boşluktur. Bu ise dosyanın kendisinde yazan bir cümle olabilir. Raporu kartlarınla yan yana koy.',
+          ),
         ),
         when(
           all(has('ev_boya'), not(has('ded_arac'))),
@@ -1040,6 +1135,12 @@ export const ara: CasePart = {
         otherwise(
           card('PAZAR 23.50 — ARSLAN HUKUK', 'buro_gece'),
           N('Pano yine dolmuştu. Bu sefer raptiyeler yetmedi; kâğıtları bantla yapıştırdım.'),
+          N(
+            'Masamda üç rapor yan yana: EDR’nin sayıları, heyetin otuz bir sayfası, Adli Tıp’ın mühürlü iki sayfası. Üçü de aynı geceyi başka bir dille anlatıyordu.',
+          ),
+          T(
+            'Sayılar hız diyor. Heyet ışık diyor. Adli Tıp beden diyor. Yarın bu üç dili tek bir cümleye çevirmem gerekecek; hâkimin anlayacağı bir cümleye.',
+          ),
         ),
       ],
     }),

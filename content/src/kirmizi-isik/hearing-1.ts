@@ -5,9 +5,9 @@ import {
   all,
   any,
   choiceNode,
-  cmp,
   cont,
   courtSession,
+  decisionNode,
   dec,
   fallback,
   flag,
@@ -95,32 +95,32 @@ export const hearing1: CasePart = {
         ),
       ],
       choices: [
+        option('K_DOGRU', '“Ne gördüyseniz onu anlatın; bilmediğinize ‘bilmiyorum’ deyin. Kabul kararı sizin.”', {
+          effects: [raise('volkan_hazir'), inc('trust', 4)],
+          good: 'Müvekkili doğruyu anlatmaya teşvik etmek ve kararını bilgilendirerek ona bırakmak: savunmanın ve meslek ahlakının doğrusu.',
+          category: 'SAVUNMA_STRATEJISI',
+          responses: says(
+            L('volkan', 'Bilmiyorum demek… hâkimin önünde ayıp olmaz mı?'),
+            P('Ayıp olan, bilmediğinizi biliyormuş gibi söylemek. Bilmiyorum, en dürüst cevaptır.'),
+            N('Volkan başını salladı. Gül elini tuttu. Mübaşirin sesi koridorda yankılandı.'),
+          ),
+          next: 'H1_00',
+        }),
         option(
-          'K_DOGRU',
-          '“İçeride ne gördüyseniz onu anlatın. Bilmediğinize ‘bilmiyorum’ deyin. Kabul kararı sizin; ama bilmeden vermeyin.”',
+          'K_SUS',
+          '“Bugün susma hakkınızı kullanın. Kimse bunu aleyhinize yorumlayamaz; konuşmayı ben yaparım.”',
           {
-            effects: [raise('volkan_hazir'), inc('trust', 4)],
-            good: 'Müvekkili doğruyu anlatmaya teşvik etmek ve kararını bilgilendirerek ona bırakmak: savunmanın ve meslek ahlakının doğrusu.',
-            category: 'SAVUNMA_STRATEJISI',
+            effects: [raise('susma')],
+            neutral:
+              'Susma hakkı meşrudur (CMK 147/1-e) ve aleyhe yorumlanamaz; ama hâkim sanığın kendi anlatımını hiç duymamış olur.',
             responses: says(
-              L('volkan', 'Bilmiyorum demek… hâkimin önünde ayıp olmaz mı?'),
-              P('Ayıp olan, bilmediğinizi biliyormuş gibi söylemek. Bilmiyorum, en dürüst cevaptır.'),
-              N('Volkan başını salladı. Gül elini tuttu. Mübaşirin sesi koridorda yankılandı.'),
+              L('volkan', 'Susmak mı? Kadının oğlunun önünde susmak mı?'),
+              P('Sizi korumak için. Konuşacağınız gün gelecek.'),
+              L('volkan', '…Peki.'),
             ),
             next: 'H1_00',
           },
         ),
-        option('K_SUS', '“Bugün susma hakkınızı kullanın. Konuşmayı ben yaparım.”', {
-          effects: [raise('susma')],
-          neutral:
-            'Susma hakkı meşrudur (CMK 147/1-e) ve aleyhe yorumlanamaz; ama hâkim sanığın kendi anlatımını hiç duymamış olur.',
-          responses: says(
-            L('volkan', 'Susmak mı? Kadının oğlunun önünde susmak mı?'),
-            P('Sizi korumak için. Konuşacağınız gün gelecek.'),
-            L('volkan', '…Peki.'),
-          ),
-          next: 'H1_00',
-        }),
         option('K_KABUL', '“Madem kararlısınız, kabul edin. İndirimi konuşuruz.”', {
           effects: [raise('kabul_tavsiye'), dec('trust', 4)],
           bad: 'Delil henüz tartışılmadan müvekkili kusuru kabule yönlendirmek: savunma görevini terk etmek. Karar onun olsa da avukat onu bilgisiz bırakmamalı.',
@@ -128,6 +128,12 @@ export const hearing1: CasePart = {
           responses: says(
             L('volkan', 'Tamam. Teşekkür ederim. Bunu duymaya ihtiyacım vardı.'),
             N('Gül bana baktı. Bir şey demedi. O bakış sonra uzun süre aklımdan çıkmadı.'),
+            N(
+              'Volkan’ın omuzları indi. Rahatlamış bir adamın değil, bir yükü yere bırakıp yeniden kaldırmayı bekleyen bir hamalın omuzları.',
+            ),
+            T(
+              '“İndirimi konuşuruz.” Bir dosyayı bir pazarlığa çevirdim. Daha deliller okunmadan, daha taksici kürsüye çıkmadan.',
+            ),
           ),
           next: 'H1_00',
         }),
@@ -329,6 +335,10 @@ export const hearing1: CasePart = {
           responses: says(
             L('volkan', 'Her gece. Her sabah. Bir kadın öldü ve ben oradaydım.', 'uzgun'),
             L('vekil', 'Sayın Başkan, sanık kendi ağzıyla söylüyor. Tutanağa geçmesini talep ederim.'),
+            N(
+              'Kâtip yazdı. Klavyenin sesi salonda bir yağmur gibi. Volkan’ın cümlesi tutanağa, benim sorumla birlikte, kelimesi kelimesine geçti.',
+            ),
+            T('Bir soru, bir cümle, bir tutanak. Kendi müvekkilimin aleyhine en iyi delili ben ürettim.'),
           ),
         }),
         option('Q_ALKOL', '“O gece alkol aldınız mı?”', {
@@ -360,7 +370,7 @@ export const hearing1: CasePart = {
       ],
       next: 'H1_04',
       options: [
-        option('O_TELKIN', 'İtiraz: soru cevabını içinde taşıyor, telkin edici (CMK 201/1).', {
+        option('O_TELKIN', 'İtiraz: soru cevabını içinde taşıyor (CMK 201/1).', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), inc('pers', 1)],
           good: 'Yöneltilen soruya itiraz edilince sorunun gerekip gerekmediğine başkan karar verir (CMK 201/1); dört varsayımı tek “değil mi”ye sıkıştıran soru telkin edicidir.',
@@ -370,7 +380,7 @@ export const hearing1: CasePart = {
             L('volkan', 'Yola. Işığa. Bir saniye ekrana; kapatmak için.'),
           ),
         }),
-        option('O_SUS', 'Sanık bu soruya cevap vermek istemiyor; susma hakkını kullanıyor.', {
+        option('O_SUS', 'Sanık bu soruya cevap vermeyecek; susma hakkını kullanıyor (CMK 147/1-e).', {
           score: { USUL_BILGISI: 30 },
           neutral: 'Susma hakkı her soru için kullanılabilir (CMK 147/1-e); ama telkinli soru hâlâ tutanakta duruyor.',
           responses: says(
@@ -416,7 +426,7 @@ export const hearing1: CasePart = {
         N('Oturdu. Elleri titriyordu. Volkan başını öne eğdi. Bir an Gül’ün yanından bir hıçkırık geldi; bastırıldı.'),
       ),
       choices: [
-        option('S4_SAYGI', 'Söz alma; yalnızca kısa bir başsağlığı ve “Hatice Hanım” adıyla anılmasına dikkat et.', {
+        option('S4_SAYGI', 'Söz alma. Kısa bir başsağlığı; adını “Hatice Hanım” diye an.', {
           score: { SAVUNMA_STRATEJISI: 30 },
           effects: [ifThen(flag('serkan_saygi'), [inc('pers', 1)])],
           good: 'Katılanın acısına saygı, savunmanın gücünü azaltmaz; hâkim kimin kime nasıl davrandığını görür.',
@@ -898,71 +908,55 @@ export const hearing1: CasePart = {
       ],
       next: 'H1_07',
       options: [
-        option(
-          'R_ITIRAZ',
-          'Rapora itiraz (CMK 67/5): ışık ölçülmemiş, iz araca bağlanmamış, camlar yok sayılmış. Yeni heyet, ATK ve EDR incelemesi talep ediyoruz.',
-          {
-            score: { USUL_BILGISI: 120 },
-            effects: [
-              raise('h1_itiraz'),
-              inc('legal_hits'),
-              inc('pers', 1),
-              ifThen(has('clue_boya'), [raise('h1_boya')]),
-              ifThen(
-                cmp(
-                  {
-                    add: ['rapor_plan', 'rapor_iz', 'rapor_kopya', 'rapor_cam', 'rapor_yorum'].map((f) => ({
-                      if: { when: flag(f), then: 1, else: 0 },
-                    })),
-                  },
-                  '>=',
-                  3,
+        option('R_ITIRAZ', 'Rapora itiraz ediyoruz; yeni bir inceleme istiyoruz.', {
+          next: 'H1_06T',
+          effects: [
+            ifThen(
+              ref('itiraz_dayanak'),
+              [
+                score('USUL_BILGISI', 120),
+                raise('h1_itiraz'),
+                inc('legal_hits'),
+                inc('pers', 1),
+                ifThen(has('clue_boya'), [raise('h1_boya')]),
+                ifThen(ref('itiraz_guclu'), [score('DELIL_ANALIZI', 150), inc('pers', 1)]),
+                mark(
+                  'GOOD',
+                  'Rapor tamamlandığında taraflar itiraz ve yeni bilirkişi incelemesi isteyebilir; ret gerekçeli olmalıdır (CMK 67/5). Somut eksikleri saymak talebi “davayı uzatma” olmaktan çıkarır (CMK 206/2-c).',
+                  'USUL_BILGISI',
                 ),
-                [score('DELIL_ANALIZI', 150), inc('pers', 1)],
+              ],
+              [
+                score('USUL_BILGISI', -40),
+                dec('cred'),
+                mark(
+                  'BAD',
+                  'CMK 67/5 itirazı raporun hangi tespitine, hangi somut gerekçeyle yöneldiğini göstermeli. Raporu ve olay yerini incelemeden yapılan soyut itiraz gerekçeyle reddedilir; yeni inceleme gelmez.',
+                  'USUL_BILGISI',
+                ),
+              ],
+            ),
+          ],
+          responses: [
+            when(
+              ref('itiraz_dayanak'),
+              P('Sayın Başkan, rapora CMK 67/5 uyarınca itiraz ediyoruz. Eksikleri tek tek sayacağım.'),
+            ),
+            otherwise(
+              P(
+                'Sayın Başkan, rapor sanığı haksız yere tam kusurlu bulmaktadır. Yeni bir bilirkişi heyeti, Adli Tıp raporu ve araç verisinin okunmasını talep ediyoruz.',
               ),
-            ],
-            good: 'Rapor tamamlandığında taraflar itiraz ve yeni bilirkişi incelemesi isteyebilir; ret gerekçeli olmalıdır (CMK 67/5). Somut eksikleri saymak talebi “davayı uzatma” olmaktan çıkarır (CMK 206/2-c).',
-            responses: [
-              when(
-                cmp(
-                  {
-                    add: ['rapor_plan', 'rapor_iz', 'rapor_kopya', 'rapor_cam', 'rapor_yorum'].map((f) => ({
-                      if: { when: flag(f), then: 1, else: 0 },
-                    })),
-                  },
-                  '>=',
-                  3,
-                ),
-                P(
-                  'Sayın Başkan, rapor ışığın o gece ne yaktığını ölçmemiş, kâğıttaki sinyal planını yazmış. Fren izini sanığın aracına bağlamış ama hangi araca ait olduğunu tespit etmemiş.',
-                ),
-                P(
-                  'Sanığın aracındaki hasar sol önde; rapor “sağ ön köşe” diyor. Tutanaktaki far camı kırıklarından hiç söz etmemiş. Ve “bilinçli taksir” bir mühendisin değil, mahkemenin nitelendirmesidir (CMK 67/3).',
-                ),
-                P(
-                  'Üç kişilik bir bilirkişi heyeti, Adli Tıp Kurumu Trafik İhtisas Dairesinden yaralanma mekanizması raporu ve aracın olay veri kaydedicisinin okunmasını talep ediyoruz.',
-                ),
-                L(
-                  'savci',
-                  'Sayın Başkan… “sağ ön köşe” konusunda müdafi haklı görünüyor. Talebe katılmıyoruz ama karşı da değiliz.',
-                ),
-                T('Savcı “karşı değiliz” dedi. Bir savcıdan duyabileceğin en sıcak cümle.'),
-                N(
-                  'Katılan vekili ayağa kalktı, “süreci uzatma çabası” dedi; hâkim eliyle oturmasını işaret etti. Serkan, vekilinin koluna dokundu; bu sefer onu durduran oydu.',
-                ),
+              L('hakim', 'Hangi tespitine itiraz ediyorsunuz müdafi? Rapordaki hangi hesap, hangi eksik?'),
+              P('…Raporun bütününe, Sayın Başkan.'),
+              L(
+                'hakim',
+                'Ara karar: Müdafiin itirazı raporun hangi tespitine yöneldiği somut olarak gösterilmeden yapıldığından, CMK 67/5 uyarınca gerekçesiz bir talep niteliğinde görülerek reddine.',
               ),
-              otherwise(
-                P(
-                  'Sayın Başkan, rapor olay yeri incelemesi yapılmadan, yalnızca dosya üzerinden hazırlanmıştır. Işığın gerçek durumu ve fren izinin aidiyeti tespit edilmemiştir.',
-                ),
-                P(
-                  'Üç kişilik bir bilirkişi heyeti, Adli Tıp Kurumu Trafik İhtisas Dairesinden yaralanma mekanizması raporu ve aracın olay veri kaydedicisinin okunmasını talep ediyoruz.',
-                ),
-                L('savci', 'Takdir mahkemenindir.'),
-              ),
-            ],
-          },
-        ),
+              L('savci', 'Takdir mahkemenindir.'),
+              T('Bir itiraz, bir kâğıt değil; bir liste. Benim listem boştu.'),
+            ),
+          ],
+        }),
         option('R_DINLE', 'Bilirkişinin duruşmada dinlenmesini talep ediyoruz (CMK 68).', {
           score: { USUL_BILGISI: 50 },
           good: 'Bilirkişinin duruşmada açıklama yapması istenebilir (CMK 68/1); ama rapordaki eksikler yeni bir inceleme olmadan giderilmez.',
@@ -973,20 +967,113 @@ export const hearing1: CasePart = {
             T('Şimdilik. Bu kelime bazen bir kapıyı aralık bırakır, bazen kapatır.'),
           ),
         }),
-        option('R_CIKAR', 'Rapor hukuka aykırıdır, dosyadan çıkarılmalıdır.', {
-          score: { USUL_BILGISI: -50 },
-          effects: [dec('cred')],
-          bad: 'Eksik ya da hatalı bir rapor hukuka aykırı delil değildir; çare itiraz ve yeni incelemedir (CMK 67/5), dosyadan çıkarma değil.',
-          responses: says(
-            L('hakim', 'Rapor hukuka aykırı yoldan elde edilmemiştir müdafi. İtirazınızı somutlaştırın ya da geçelim.'),
-          ),
-        }),
+        option(
+          'R_CIKAR',
+          'Rapor CMK 206/2-a ve 217/2 uyarınca hukuka aykırı delildir; dosyadan çıkarılmasını talep ediyoruz.',
+          {
+            score: { USUL_BILGISI: -50 },
+            effects: [dec('cred')],
+            bad: 'Eksik ya da hatalı bir rapor hukuka aykırı delil değildir; çare itiraz ve yeni incelemedir (CMK 67/5), dosyadan çıkarma değil.',
+            responses: says(
+              L(
+                'hakim',
+                'Rapor hukuka aykırı yoldan elde edilmemiştir müdafi. İtirazınızı somutlaştırın ya da geçelim.',
+              ),
+            ),
+          },
+        ),
         option('R_BOS', 'Diyeceğimiz yok.', {
           effects: [dec('pers', 1)],
           bad: 'Rapora itiraz edilmedi; mahkeme raporu tartışılmamış bir zemin olarak kullanabilir.',
           category: 'USUL_BILGISI',
           responses: says(N('Savcı başını kaldırıp bana baktı. Şaşırmış gibiydi. Sonra not aldı.')),
         }),
+      ],
+    }),
+    decisionNode('H1_06T', [{ to: 'H1_06T2' }], {
+      ...court1.base,
+      title: 'İtirazın gerekçesi',
+      lines: [
+        when(
+          all(ref('itiraz_dayanak'), flag('rapor_plan')),
+          P(
+            'Rapor ışığın o gece ne yaktığını ölçmemiş, kâğıttaki sinyal planını yazmıştır. Denetleyicinin kaydına bakılmamıştır.',
+          ),
+        ),
+      ],
+    }),
+    decisionNode('H1_06T2', [{ to: 'H1_06T3' }], {
+      ...court1.base,
+      title: 'İtirazın gerekçesi',
+      lines: [
+        when(
+          all(ref('itiraz_dayanak'), has('ded_fren')),
+          P(
+            'Rapor on sekiz metrelik fren izini sanığın aracına bağlamış; oysa sanığın aracında ABS vardır ve kesintisiz kilit izi bırakmaz. İzin hangi araca ait olduğu tespit edilmemiştir.',
+          ),
+        ),
+        when(
+          all(ref('itiraz_dayanak'), flag('rapor_iz')),
+          P(
+            'Rapor on sekiz metrelik fren izini sanığın aracına bağlamış; izin hangi araca ait olduğu hiçbir yerde tespit edilmemiştir.',
+          ),
+        ),
+      ],
+    }),
+    decisionNode('H1_06T3', [{ to: 'H1_06T4' }], {
+      ...court1.base,
+      title: 'İtirazın gerekçesi',
+      lines: [
+        when(
+          all(ref('itiraz_dayanak'), flag('rapor_kopya')),
+          P('Sanığın aracındaki hasar tutanağa göre sol öndedir; rapor “sağ ön köşe” demektedir.'),
+          L('savci', 'Sayın Başkan… “sağ ön köşe” konusunda müdafi haklı görünüyor.'),
+        ),
+      ],
+    }),
+    decisionNode('H1_06T4', [{ to: 'H1_06T5' }], {
+      ...court1.base,
+      title: 'İtirazın gerekçesi',
+      lines: [
+        when(
+          all(ref('itiraz_dayanak'), has('ded_cam')),
+          P(
+            'Tutanakta olay yerinde far camı kırıkları vardır; sanığın farları sağlamdır. Rapor bu kırıklardan ve ait oldukları araçtan hiç söz etmemiştir.',
+          ),
+        ),
+        when(
+          all(ref('itiraz_dayanak'), flag('rapor_cam')),
+          P(
+            'Rapor “başka araca ait iz yoktur” demektedir; oysa tutanakta olay yerinde cam kırıkları vardır. Rapor bunları hiç değerlendirmemiştir.',
+          ),
+        ),
+      ],
+    }),
+    decisionNode('H1_06T5', [{ to: 'H1_06T6' }], {
+      ...court1.base,
+      title: 'İtirazın gerekçesi',
+      lines: [
+        when(
+          all(ref('itiraz_dayanak'), flag('rapor_yorum')),
+          P('Ve “bilinçli taksir” bir mühendisin değil, mahkemenin nitelendirmesidir (CMK 67/3).'),
+        ),
+      ],
+    }),
+    decisionNode('H1_06T6', [{ to: 'H1_07' }], {
+      ...court1.base,
+      title: 'İtirazın gerekçesi',
+      lines: [
+        when(
+          ref('itiraz_dayanak'),
+          P(
+            'Üç kişilik bir bilirkişi heyeti, Adli Tıp Kurumu Trafik İhtisas Dairesinden yaralanma mekanizması raporu ve aracın olay veri kaydedicisinin okunmasını talep ediyoruz.',
+          ),
+          L('savci', 'Talebe katılmıyoruz Sayın Başkan. Ama karşı da değiliz.'),
+          T('Savcı “karşı değiliz” dedi. Bir savcıdan duyabileceğin en sıcak cümle.'),
+          N(
+            'Katılan vekili ayağa kalktı, “süreci uzatma çabası” dedi; hâkim eliyle oturmasını işaret etti. Serkan, vekilinin koluna dokundu; bu sefer onu durduran oydu.',
+          ),
+        ),
       ],
     }),
     court1.stage('H1_07', {
@@ -1023,7 +1110,7 @@ export const hearing1: CasePart = {
         ),
       ],
       choices: [
-        option('AK_IZIN', 'Adli kontrolde taşıt yasağına, işe gidiş için izin talep ediyoruz (CMK 109/5).', {
+        option('AK_IZIN', 'Taşıt yasağında işe gidiş için izin istiyoruz (CMK 109/5).', {
           score: { USUL_BILGISI: 40 },
           effects: [inc('legal_hits'), ifThen(ref('tahliye_dayanak'), [raise('ehliyet_izin'), inc('trust', 6)])],
           good: 'Hâkim taşıt yasağında, şüphelinin mesleki uğraşları için araç kullanmasına izin verebilir (CMK 109/5); talep somut ve ölçülüydü.',
@@ -1043,12 +1130,16 @@ export const hearing1: CasePart = {
           ],
           next: 'H1_08',
         }),
-        option('AK_BERAAT', 'Adli kontrolün kaldırılmasını ve sanığın hemen beraatini talep ediyoruz.', {
-          score: { USUL_BILGISI: -30 },
-          bad: 'Delil toplanırken “hemen beraat” talebi erken ve dayanaksızdır; mahkeme bunu ciddiye almaz.',
-          responses: says(L('hakim', 'Delil toplanıyor müdafi. Talebiniz reddedildi.')),
-          next: 'H1_08',
-        }),
+        option(
+          'AK_BERAAT',
+          'Delil beklenmeden sanığın beraatini istiyoruz.',
+          {
+            score: { USUL_BILGISI: -30 },
+            bad: 'Delil toplanırken “hemen beraat” talebi erken ve dayanaksızdır; mahkeme bunu ciddiye almaz.',
+            responses: says(L('hakim', 'Delil toplanıyor müdafi. Talebiniz reddedildi.')),
+            next: 'H1_08',
+          },
+        ),
         option('AK_YOK', 'Talebimiz yok.', {
           neutral: 'Adli kontrol aynen devam ediyor.',
           responses: says(L('hakim', 'Celse kapandı.')),

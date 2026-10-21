@@ -21,7 +21,7 @@ import { THRESHOLDS } from './meta.js';
 // Epilog: karar ekranında hükümden sonra oynatılır; `when`'i tutan bütün bloklar sırayla birleşir.
 
 const TAZMINAT =
-  'CMK 141 ve devamı maddeleri uyarınca tazminat isteme hakkının bulunduğunun bildirilmesine (CMK 231/3); emanetteki cüzdanın müştekiye, zarf içindeki 600 TL ile el yazılı notun sanığa iadesine';
+  'CMK 141 ve devamı maddeleri uyarınca tazminat isteme hakkının bulunduğunun bildirilmesine (CMK 231/3); yediemin sıfatıyla müştekiye teslim edilen cüzdanın müştekide bırakılmasına, zarf içindeki 600 TL ile el yazılı notun sanığa iadesine';
 
 export const outcomes: CasePart = {
   outcomes: [
@@ -121,7 +121,7 @@ orhan~phone: Avukat hanım, altı dosyanın altısı da kapandı. Hat 19’daki 
 # buro_gece | AYNI AKŞAM — ARSLAN HUKUK
 Leyla alt çekmecesini açmıştı. Bu kez beni çağırdı.
 leyla: Bak. Bir eldiven, bir tespih, bir çocuk çorabı, bir çakmak. Otuz yıl. Sahipleri dönmedi. Ama dönebilirlerdi.
-leyla: Kayıp eşyayı saklayan kişi hırsız değildir, Deniz. Sahibini bekleyendir. Bugün bunu bir mahkemeye gösterdin.
+leyla: Kayıp eşyayı emanet tutan kişi hırsız değildir, Deniz. Sahibini bekleyendir. Bugün bunu bir mahkemeye gösterdin.
 > Çekmeceyi kapatmadı. Anahtarı da çevirmedi. Bir dosya kapandı. Bir kapı açık kaldı.
 `),
         },
@@ -147,6 +147,7 @@ Arda Çınar bahar döneminde staj okuluna döndü. Dördüncü sınıflar onu t
         not(flag('cokus')),
         flag('beraat_talep'),
         ref('beraat_zemini'),
+        any(flag('contra_h1'), flag('contra_h4')),
         cmp(v('pers'), '>=', 5),
         finalAtLeast(THRESHOLDS.BERAAT_E),
       ),
@@ -158,7 +159,27 @@ Arda Çınar bahar döneminde staj okuluna döndü. Dördüncü sınıflar onu t
       reasoning: [
         because(
           'Savcılığın dayandığı CD kaydı, dört kanallı ve bir saatlik bir sefer kaydının tek kanalından alınmış 2,5 dakika olup 18.43’e ait bir dakikası eksiktir.',
-          any(flag('contra_v'), flag('contra_v2')),
+          any(flag('contra_v'), flag('contra_v2'), flag('contra_v3')),
+        ),
+        because(
+          'Kişiye özel kent kart kaydına göre sanık araca müştekiden sekiz dakika sonra Çarşı durağından binmiştir; tanığın “Heykel’den beri arkasındaydı” anlatımı bu kayıtla çelişmektedir.',
+          flag('hayri_kentkart'),
+        ),
+        because(
+          'Tanık Hayri Doğan, tam kayıt karşısında gördüğü parlak kapüşonun sanığa değil müştekinin arkasındaki parkalı kişiye ait olduğunu beyan etmiştir.',
+          flag('hayri_kapuson'),
+        ),
+        because(
+          'Sanığın çantasındaki 600 TL’nin, olaydan önce sanığın kendi hesabından çekildiği ATM fişiyle sabittir.',
+          flag('zarf_mahkemede'),
+        ),
+        because(
+          'Müştekinin kartlarını kullanan kişinin, sanık cüzdanı bulmadan önce araçtan indiği kayıt ve büfe tanığının notuyla anlaşılmaktadır; kartların sanık tarafından bir başkasına verildiği iddiası dayanaksızdır.',
+          flag('ortak_curudu'),
+        ),
+        because(
+          'Kolluğun el koyma tutanağına göre “Yarın 9 — karakol” notu, kolluk eve geldiğinde masanın üzerinde bulunmaktadır.',
+          flag('ozan_tutanak'),
         ),
         because(
           'Tanık Hayri Doğan, müştekinin arkasındaki kişinin yüzünü görmediğini, teşhisin karakolda kendisine gösterilen tek görüntüye dayandığını beyan etmiştir.',
@@ -183,6 +204,10 @@ Arda Çınar bahar döneminde staj okuluna döndü. Dördüncü sınıflar onu t
           flag('ozan_dinlendi'),
         ),
         because(
+          'Notun yazıldığı saat, aynı geceye ait çağrı kaydı ve gönderilmiş mesajla birlikte değerlendirildiğinde kolluğun eve gelmesinden saatler öncesine denk gelmektedir.',
+          flag('ozan_saat'),
+        ),
+        because(
           'Şoför tanık çekinme hakkını kullanmış; ancak ön kameranın kaydı sanığın cüzdanı şoföre uzattığını göstermektedir.',
           flag('recep_cekindi'),
         ),
@@ -193,7 +218,7 @@ Arda Çınar bahar döneminde staj okuluna döndü. Dördüncü sınıflar onu t
       legalBasis: 'CMK 223/2-e; Anayasa 38/4; AİHS 6/2; CMK 141, 231/3, 273/1',
       xp: xp(1, { ethicsVar: 'ethics' }),
       howToReach:
-        'Savcılık delillerini en az üç bulguyla sars (kayıt, tanık, kartlar, teslim izleri, şoför, müşteki) ve esas savunmada beraat iste.',
+        'Tanık Hayri Doğan’ın teşhisini delille sars; savcılık delillerini en az üç bulguyla çürüt (kayıt, tanık, kartlar, teslim izleri, şoför, müşteki) ve esas savunmada beraat iste.',
       epilogue: [
         {
           lines: S(`
@@ -253,13 +278,19 @@ leyla.mutlu: Hırsızlık değil. Sahibini beklemek.
       header: 'TÜRK MİLLETİ ADINA',
       sentence: '50 gün adli para cezası (5.000 TL) · hükmün açıklanması geri bırakıldı',
       verdictText:
-        'Sanığın eyleminin TCK 160 kapsamında kaybolmuş eşya üzerinde tasarruf suçunu oluşturduğu kabul edilerek (CMK 226 uyarınca bu yönden de ek savunma hakkı tanınmıştır), suç vasfı şikâyete bağlı bir suça dönüştüğünden CMK 254/1 uyarınca yapılan uzlaştırma girişiminin müştekinin kabul etmemesi nedeniyle sonuçsuz kaldığı anlaşılmakla, sanığın TCK 160 uyarınca takdiren 60 gün adli para cezası ile cezalandırılmasına; TCK 62/1 uyarınca 1/6 indirimle 50 gün adli para cezasına; günlüğü TCK 52/2 uyarınca 100 TL’den 5.000 TL adli para cezasına; cüzdanın müştekiye zarar görmeden teslim edilmiş olması ve sanığın sabıkasız bulunması karşısında CMK 231/5 uyarınca HÜKMÜN AÇIKLANMASININ GERİ BIRAKILMASINA ve 5 yıl denetim süresine tabi tutulmasına; zarf içindeki 600 TL ile el yazılı notun sanığa iadesine; CMK 231/12 ve 272/3-a gözetilerek kesin olmak üzere.',
+        'Sanığın eyleminin TCK 160 kapsamında kaybolmuş eşya üzerinde tasarruf suçunu oluşturduğu kabul edilerek (CMK 226 uyarınca bu yönden de ek savunma hakkı tanınmıştır), suç vasfı şikâyete bağlı bir suça dönüştüğünden CMK 254/1 uyarınca yapılan uzlaştırma girişiminin müştekinin kabul etmemesi nedeniyle sonuçsuz kaldığı anlaşılmakla, sanığın TCK 160 uyarınca takdiren 60 gün adli para cezası ile cezalandırılmasına; TCK 62/1 uyarınca 1/6 indirimle 50 gün adli para cezasına; günlüğü TCK 52/2 uyarınca 100 TL’den 5.000 TL adli para cezasına; cüzdanın soruşturmada yediemin sıfatıyla müştekiye zarar görmeden teslim edilmiş olması ve sanığın sabıkasız bulunması karşısında CMK 231/5 uyarınca HÜKMÜN AÇIKLANMASININ GERİ BIRAKILMASINA ve 5 yıl denetim süresine tabi tutulmasına; yediemin sıfatıyla müştekiye teslim edilen cüzdanın müştekide bırakılmasına, zarf içindeki 600 TL ile el yazılı notun sanığa iadesine; CMK 231/12 ve 272/3-a gözetilerek kesin olmak üzere.',
       reasoning: [
         because(
           'Sanığın cüzdanı müştekinin zilyetliğinden aldığı ispatlanamamış; cüzdanın araçta koltuk altında bulunduğu anlaşılmıştır. Bu nedenle hırsızlık suçunun unsurları oluşmamıştır.',
         ),
         because(
-          'Ancak sanığın bulduğu cüzdanı yetkili mercilere teslim etmeyip yaklaşık on beş saat evinde tuttuğu sabittir; teslim girişimlerine dair beyanlar duruşmada yeterince desteklenmemiştir.',
+          'Cüzdanın müştekinin elinden başka kişilerce alındığı iddiası, tam sefer kaydı incelenmediğinden ispatlanamamıştır; bu durumda cüzdan, sanık bakımından araçta kaybedilmiş ve malikinin zilyetliğinden çıkmış eşya hükmündedir.',
+        ),
+        because(
+          'Sanık bulduğu cüzdanı ne malike iade etmiş ne de yetkili mercilere haber vermiştir; cüzdanı kendi sırt çantasına koyup yaklaşık on beş saat evinde tutmuş, iddia ettiği teslim girişimleri duruşmada ispatlanamamıştır.',
+        ),
+        because(
+          'Eşyayı iade ve ihbar yükümlülüğünü yerine getirmeksizin kendi zilyetliğinde ve tasarruf alanında tutmak, mahkemece TCK 160 anlamında malik gibi tasarruf olarak değerlendirilmiştir.',
         ),
         because(
           'Savunma kademeli olarak beraat, olmazsa TCK 160 ve hükmün açıklanmasının geri bırakılmasını talep etmiştir.',
@@ -309,7 +340,7 @@ leyla: Bir dahaki dosyada eksik dakikayı daha erken ara. İstemediğin kayıt g
       header: 'TÜRK MİLLETİ ADINA',
       sentence: '10 ay hapis · ertelendi',
       verdictText:
-        'Sanık Arda Çınar’ın üzerine atılı hırsızlık suçunu işlediği sabit olduğundan TCK 141/1 uyarınca takdiren 1 yıl hapis cezası ile cezalandırılmasına; sanığın sabıkasız geçmişi ve cezanın geleceği üzerindeki olası etkileri lehine takdiri indirim nedeni sayılarak TCK 62/1 uyarınca 1/6 indirimle 10 ay hapis cezası ile cezalandırılmasına; zararın giderilmemesi nedeniyle CMK 231/6-c koşulu gerçekleşmediğinden hükmün açıklanmasının geri bırakılmasına yer olmadığına; TCK 51/1 uyarınca cezanın ertelenmesine ve 1 yıl denetim süresi belirlenmesine; kısa süreli hapis cezası ertelendiğinden TCK 53/4 uyarınca TCK 53/1’in uygulanmamasına; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).',
+        'Sanık Arda Çınar’ın üzerine atılı hırsızlık suçunu işlediği sabit olduğundan TCK 141/1 uyarınca takdiren 1 yıl hapis cezası ile cezalandırılmasına; sanığın sabıkasız geçmişi ve cezanın geleceği üzerindeki olası etkileri lehine takdiri indirim nedeni sayılarak TCK 62/1 uyarınca 1/6 indirimle 10 ay hapis cezası ile cezalandırılmasına; atılı eylemle müştekinin uğradığı 1.200 TL nakit zararın giderilmemesi ve sanığın bu zararı denetim süresince aylık taksitlerle giderme yönünde bir beyanı da bulunmaması (CMK 231/9) nedeniyle CMK 231/6-c koşulu gerçekleşmediğinden hükmün açıklanmasının geri bırakılmasına yer olmadığına; TCK 51/1 uyarınca cezanın ertelenmesine ve 1 yıl denetim süresi belirlenmesine; kısa süreli hapis cezası ertelendiğinden TCK 53/4 uyarınca TCK 53/1’in uygulanmamasına; istinaf yolu açık olmak üzere (CMK 273/1, tebliğden itibaren iki hafta).',
       reasoning: [
         because(
           'Kamera kaydı, tanık beyanı ve cüzdanın sanığın çantasında bulunması birlikte değerlendirildiğinde sanığın eylemi sabit görülmüştür.',
@@ -317,7 +348,7 @@ leyla: Bir dahaki dosyada eksik dakikayı daha erken ara. İstemediğin kayıt g
         because('Sanığın teslim etmek istediğine dair savunması dosya kapsamındaki delillerle desteklenmemiştir.'),
         because('Savunmanın inandırıcılığı duruşmada çöktü; mahkeme iddianamedeki anlatımı esas aldı.', flag('cokus')),
       ],
-      legalBasis: 'TCK 141/1, 62/1, 51/1, 53/4; CMK 231/6-c, 273/1',
+      legalBasis: 'TCK 141/1, 62/1, 51/1, 53/4; CMK 231/6-c, 231/9, 273/1',
       xp: xp(0.6, { ethicsVar: 'ethics' }),
       howToReach: 'Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir.',
       epilogue: [

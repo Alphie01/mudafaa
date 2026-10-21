@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sahne · B sahası</title>
+    <!--
+  Statik, betiksiz sahne. #scene: 344 × 300 sahne birimi (SceneDef width × height ile aynı).
+  Yalnızca dekoratif div'ler; dokunma alanları ve rozetler SceneDef nesnelerinde.
+  Renkler tasarımın paletinden: zemin #141026, duvar #2b2350, kenar #120d1c.
+-->
+    <style>
+      body {
+        margin: 0;
+        background: #141026;
+      }
+      #scene {
+        position: relative;
+        width: 344px;
+        height: 300px;
+        overflow: hidden;
+        background: #141026;
+      }
+      #scene div {
+        position: absolute;
+        pointer-events: none;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <div style="left: 0px; top: 0px; width: 344px; height: 300px; background: #141026"></div>
+      <div
+        style="left: 0px; top: 20px; width: 140px; height: 180px; background: #c4413a; border: 3px solid #120d1c"
+      ></div>
+      <div
+        style="left: 204px; top: 20px; width: 140px; height: 180px; background: #c4413a; border: 3px solid #120d1c"
+      ></div>
+      <div
+        style="left: 0px; top: 196px; width: 344px; height: 104px; background: #3b3550; border-top: 4px solid #120d1c"
+      ></div>
+      <div style="left: 156px; top: 200px; width: 8px; height: 40px; background: #25222e"></div>
+      <div style="left: 196px; top: 200px; width: 8px; height: 40px; background: #25222e"></div>
+      <div style="left: 34px; top: 244px; width: 88px; height: 10px; background: #25222e; border-radius: 4px"></div>
+      <div style="left: 34px; top: 262px; width: 88px; height: 10px; background: #25222e; border-radius: 4px"></div>
+      <div
+        style="
+          left: 230px;
+          top: 216px;
+          width: 20px;
+          height: 16px;
+          background: #f4efe6;
+          border: 2px solid #c0392b;
+          border-radius: 4px;
+        "
+      ></div>
+      <div
+        style="left: 262px; top: 108px; width: 72px; height: 36px; background: #2b2350; border: 2px dashed #9cc3e6"
+      ></div>
+      <div
+        style="left: 302px; top: 252px; width: 26px; height: 22px; background: #e2802f; border-radius: 40% 40% 10% 10%"
+      ></div>
+      <div
+        style="left: 16px; top: 124px; width: 60px; height: 32px; background: #7c4c2c; border: 2px solid #120d1c"
+      ></div>
+    </div>
+  </body>
+</html>

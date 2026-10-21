@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sahne · 4 no’lu rıhtım</title>
+    <!--
+  Statik, betiksiz sahne. #scene: 344 × 300 sahne birimi (SceneDef width × height ile aynı).
+  Yalnızca dekoratif div'ler; dokunma alanları ve rozetler SceneDef nesnelerinde.
+  Renkler tasarımın paletinden: zemin #141026, duvar #2b2350, kenar #120d1c.
+-->
+    <style>
+      body {
+        margin: 0;
+        background: #141026;
+      }
+      #scene {
+        position: relative;
+        width: 344px;
+        height: 300px;
+        overflow: hidden;
+        background: #141026;
+      }
+      #scene div {
+        position: absolute;
+        pointer-events: none;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scene">
+      <div style="left: 0px; top: 0px; width: 344px; height: 140px; background: #1b1636"></div>
+      <div
+        style="left: 0px; top: 140px; width: 344px; height: 160px; background: #3b3550; border-top: 4px solid #120d1c"
+      ></div>
+      <div
+        style="left: 0px; top: 30px; width: 90px; height: 110px; background: #7a2f45; border: 3px solid #120d1c"
+      ></div>
+      <div
+        style="left: 96px; top: 40px; width: 90px; height: 100px; background: #2c3e66; border: 3px solid #120d1c"
+      ></div>
+      <div style="left: 272px; top: 20px; width: 8px; height: 104px; background: #5c5a66"></div>
+      <div
+        style="left: 256px; top: 24px; width: 40px; height: 22px; background: #e6c46a; border: 2px solid #120d1c"
+      ></div>
+      <div style="left: 266px; top: 52px; width: 20px; height: 12px; background: #e8b13c"></div>
+      <div
+        style="
+          left: 52px;
+          top: 176px;
+          width: 30px;
+          height: 54px;
+          background: #4f5560;
+          border: 3px solid #120d1c;
+          border-radius: 6px 6px 0 0;
+        "
+      ></div>
+      <div style="left: 60px; top: 200px; width: 6px; height: 10px; background: #c0392b"></div>
+      <div
+        style="
+          left: 150px;
+          top: 150px;
+          width: 84px;
+          height: 60px;
+          background: repeating-linear-gradient(90deg, #6a8a3e 0 4px, transparent 4px 10px);
+          border: 3px solid #120d1c;
+        "
+      ></div>
+      <div style="left: 162px; top: 184px; width: 60px; height: 20px; background: #e6c46a"></div>
+      <div
+        style="
+          left: 102px;
+          top: 218px;
+          width: 18px;
+          height: 20px;
+          background: #b08463;
+          border: 2px solid #120d1c;
+          border-radius: 4px;
+        "
+      ></div>
+      <div style="left: 200px; top: 62px; width: 26px; height: 10px; background: #f4efe6; border-radius: 50%"></div>
+      <div style="left: 10px; top: 256px; width: 58px; height: 26px; background: #a8521b; opacity: 0.6"></div>
+    </div>
+  </body>
+</html>

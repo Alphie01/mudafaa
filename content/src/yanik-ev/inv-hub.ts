@@ -21,11 +21,16 @@ import {
   story,
   v,
   visited,
+  chosen,
   choiceNode,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import type { ChoiceDef } from '@mudafaa/case-schema';
 import { INV1, card, n, named, p1, s, th } from './shared.js';
+import { sabahKapisi } from './inv-people.js';
+
+/** Bekçiye ikinci ziyaret: ilk ziyarette sabah sorulamadıysa (zincirdeki boşluk henüz görülmemişse), bir EP daha. */
+const cevdet2Gorunur = all(visited('INV_CEVDET'), not(chosen('CV_SABAH')), sabahKapisi);
 
 // 50-inv-hub: 1. evre hub'ı (3 gün × 4 EP), gün sonu ve akşam sahneleri, Leyla'ya danış, delil dilekçesi (CMK 177),
 // çıkarım tahtası ve duruşmadan önceki gece.
@@ -38,6 +43,31 @@ const deduce = (id: string, a: string, b: string, out: string, title: string, te
   });
 
 const hubChoices = {
+  // Büro sekmesi ilk sırada: ücretsiz seçenekler (Leyla, tahtalar, dilekçe). Etkinlikler sonra gelir; böylece doğrulayıcının
+  // kaçış araması da hub'da önce eylem puanı harcayan bir etkinliği dener (kova içinde son eklenen önce).
+  buro: [
+    p1.free('A_DIL', 'Delil dilekçesi (CMK 177)', 'INV_DIL', {
+      description: '0 EP · üç talep hakkı · son gün, Leyla okuduktan sonra',
+      visibleWhen: not(any({ chosen: 'DIL_VER' }, { chosen: 'DIL_VAZGEC' })),
+      enabledWhen: cmp(v('leyla_gun'), '>=', 3),
+      lockedReason: 'Dilekçe son gün yazılır; taslağı önce Leyla okur.',
+    }),
+    p1.free('A_CIKARIM', 'Yangın tahtası: nerede, neyle', 'INV_CIKARIM', {
+      description: '0 EP · ipuçlarını birleştir',
+      enabledWhen: ref('kart2'),
+      lockedReason: 'En az 2 ipucu gerekli.',
+    }),
+    p1.free('A_IPLIK', 'İplik tahtası: dolaylı deliller', 'INV_IPLIK', {
+      description: '0 EP · ipuçlarını birleştir',
+      enabledWhen: ref('kart2'),
+      lockedReason: 'En az 2 ipucu gerekli.',
+    }),
+    p1.free('A_LEYLA', 'Leyla’ya danış', 'INV_LEYLA', {
+      description: '0 EP · günde bir kez',
+      visibleWhen: cmp(v('leyla_gun'), '<', v('day')),
+      effects: [set('leyla_gun', v('day'))],
+    }),
+  ],
   olay: [
     p1.activity('A_EV', 'Yanık evi ara', 'INV_EV', { once: true, description: 'Kalem Sokak 9 · büyüteç 6' }),
     p1.activity('A_FOTO', 'Olay yeri albümünü ara (04.30)', 'INV_FOTO', {
@@ -70,6 +100,11 @@ const hubChoices = {
       description: 'Bekçi kulübesi · olay yerini o bekledi',
       visibleWhen: any(visited('INV_SAADET'), has('clue_numune'), visited('INV_EV')),
     }),
+    p1.activity('A_CEVDET2', 'Bekçiye yeniden uğra', 'INV_CEVDET', {
+      once: true,
+      description: 'Bekçi kulübesi · sabahı sor',
+      visibleWhen: cevdet2Gorunur,
+    }),
     p1.activity('A_NECATI', 'Elektrikçi Necati Usta', 'INV_NECATI', {
       once: true,
       description: 'Restorasyon ekibi · tesisat keşfi',
@@ -91,27 +126,32 @@ const hubChoices = {
       once: true,
       description: 'Kalkan Sigorta · ekler',
     }),
-    p1.free('A_DIL', 'Delil dilekçesi (CMK 177)', 'INV_DIL', {
-      description: '0 EP · üç talep hakkı',
-      visibleWhen: not(any({ chosen: 'DIL_VER' }, { chosen: 'DIL_VAZGEC' })),
-    }),
-    p1.free('A_CIKARIM', 'Yangın tahtası: nerede, neyle', 'INV_CIKARIM', {
-      description: '0 EP · ipuçlarını birleştir',
-      enabledWhen: ref('kart2'),
-      lockedReason: 'En az 2 ipucu gerekli.',
-    }),
-    p1.free('A_IPLIK', 'İplik tahtası: dolaylı deliller', 'INV_IPLIK', {
-      description: '0 EP · ipuçlarını birleştir',
-      enabledWhen: ref('kart2'),
-      lockedReason: 'En az 2 ipucu gerekli.',
-    }),
-    p1.free('A_LEYLA', 'Leyla’ya danış', 'INV_LEYLA', {
-      description: '0 EP · günde bir kez',
-      visibleWhen: cmp(v('leyla_gun'), '<', v('day')),
-      effects: [set('leyla_gun', v('day'))],
-    }),
   ],
 };
+
+/**
+ * Son günün işleri bitti: eylem puanı kalmadı ya da harcanacak etkinlik kalmadı (her etkinlik ya yapıldı ya görünmüyor).
+ * Duruşma tarihi sabittir (14 Nisan); hub'dan duruşmaya ancak son günün sonunda gidilir.
+ */
+const sonGunBitti = any(
+  all(cmp(v('day'), '==', 3), cmp(v('ap'), '<=', 0)),
+  // Harcanacak etkinlik kalmadıysa gün beklemeden duruşmaya gidilir; aksi hâlde hub kilitlenirdi.
+  all(
+    chosen('A_EV'),
+    chosen('A_FOTO'),
+    chosen('A_ATOLYE'),
+    chosen('A_GORUS'),
+    chosen('A_GORUS2'),
+    chosen('A_SAADET'),
+    chosen('A_BILIRKISI'),
+    chosen('A_ITFAIYE'),
+    chosen('A_POLICE'),
+    any(chosen('A_CEVDET'), not(any(visited('INV_SAADET'), has('clue_numune'), visited('INV_EV')))),
+    any(chosen('A_CEVDET2'), not(cevdet2Gorunur)),
+    any(chosen('A_NECATI'), not(any(has('clue_restorasyon'), has('clue_buat'), flag('fact_elektrikci')))),
+    any(chosen('A_KADER'), not(any(has('clue_kampanya'), flag('fact_artis')))),
+  ),
+);
 
 export const invHub: CasePart = {
   nodes: [
@@ -158,6 +198,7 @@ export const invHub: CasePart = {
       ],
       scenePreview: { scene: 'sc_ev' },
       tabs: [
+        { id: 't_buro', label: 'BÜRO', kind: 'ARCHIVE', choices: hubChoices.buro },
         { id: 't_olay', label: 'OLAY YERİ', kind: 'SCENE', choices: hubChoices.olay },
         { id: 't_cezaevi', label: 'CEZAEVİ', kind: 'PEOPLE', choices: hubChoices.cezaevi },
         { id: 't_kisi', label: 'KİŞİLER', kind: 'PEOPLE', choices: hubChoices.kisi },
@@ -171,6 +212,8 @@ export const invHub: CasePart = {
       choices: [
         nav('GO_H1', 'DURUŞMAYA GİT · 1. CELSE', 'INV_GECE_1', {
           role: 'PRIMARY',
+          enabledWhen: sonGunBitti,
+          lockedReason: 'Duruşma 14 Nisan’da. Önce son günün işlerini bitir.',
           confirm: 'Duruşmaya gidersen soruşturma biter. Emin misin?',
         }),
       ],
@@ -187,7 +230,7 @@ export const invHub: CasePart = {
       lines: [
         {
           lines: [
-            card('CUMA 23.40 — ARSLAN HUKUK', 'buro_gece'),
+            card('CUMARTESİ 23.40 — ARSLAN HUKUK', 'buro_gece'),
             n(
               'Telefon titredi. Zehra. Arkasında bir hastane koridorunun sesleri: tekerlekli bir sedye, bir anons, bir monitörün bip’i.',
             ),
@@ -264,7 +307,7 @@ export const invHub: CasePart = {
       lines: [
         {
           lines: [
-            card('CUMARTESİ 18.05 — ARSLAN HUKUK', 'buro_gece'),
+            card('PAZAR 18.05 — ARSLAN HUKUK', 'buro_gece'),
             n('Bilinmeyen bir numara. Açtım. Bir kayıt anonsu: “Bu görüşme bir ceza infaz kurumundan yapılmaktadır.”'),
             s('halil', 'Avukat hanım? Halil. On dakikam var. Kusura bakmayın, haftada bir hakkım var, sizi aradım.'),
             s(
@@ -338,7 +381,7 @@ export const invHub: CasePart = {
       lines: [
         {
           lines: [
-            card('CUMARTESİ 08.30 — MURADİYE, ÇINARALTI KAHVESİ', 'kafe'),
+            card('PAZAR 08.30 — MURADİYE, ÇINARALTI KAHVESİ', 'kafe'),
             n(
               'Kahvehane, Kalem Sokak’ın yokuşunun dibinde, bir çınarın altındaydı. İçeride sobanın üstünde bir çaydanlık, duvarda eski bir Bursaspor takvimi, köşede tavla şakırtısı.',
             ),
@@ -376,9 +419,9 @@ export const invHub: CasePart = {
       lines: [
         {
           lines: [
-            card('PAZAR 08.00 — ARSLAN HUKUK', 'buro'),
+            card('PAZARTESİ 07.40 — ARSLAN HUKUK', 'buro'),
             n(
-              'Pazar sabahı büroda Leyla’dan başka kimse yoktu. Masasında eski, sararmış bir dosya; kapağında el yazısıyla bir yıl: 1996.',
+              'Pazartesi, mesai başlamadan; büroda Leyla’dan başka kimse yoktu. Masasında eski, sararmış bir dosya; kapağında el yazısıyla bir yıl: 1996.',
             ),
             s('leyla', 'Otur. Sana bir yangın anlatacağım. Benim ilk yangınım. Gemlik’te bir tekstil deposu.'),
             s(
@@ -430,7 +473,7 @@ export const invHub: CasePart = {
           when: all(cmp(v('day'), '==', 3), has('clue_numune')),
           lines: [
             n(
-              'Pazar öğlesi. Leyla dilekçe taslağımı kırmızı kalemle okuyordu; kırmızı kalemi yalnızca önemli dosyalarda kullanırdı.',
+              'Pazartesi öğlesi. Leyla dilekçe taslağımı kırmızı kalemle okuyordu; kırmızı kalemi yalnızca önemli dosyalarda kullanırdı.',
             ),
             s(
               'leyla',
@@ -534,7 +577,8 @@ export const invHub: CasePart = {
           ],
         },
       ],
-      prompt: 'Mahkemeye delil dilekçesi: duruşmadan en az beş gün önce. Üç talep hakkın var; neyi isteyeceksin?',
+      prompt:
+        'Mahkemeye delil dilekçesi (CMK 177). Müzekkereye, davetiyeye gün lazım; dilekçe bugün verilmeli. Üç talep hakkın var; neyi isteyeceksin?',
       choices: [
         option('DIL_PANO', 'Emanetteki sigorta panosu ve koridor hattının elektrik bilirkişisince incelenmesi', {
           visibleWhen: any(has('clue_pano'), has('clue_pano_yok'), has('clue_baslangic')),
@@ -797,7 +841,7 @@ export const invHub: CasePart = {
       lines: [
         {
           lines: [
-            card('13 NİSAN · PAZAR 23.30 — ARSLAN HUKUK', 'buro_gece'),
+            card('13 NİSAN · PAZARTESİ 23.30 — ARSLAN HUKUK', 'buro_gece'),
             n(
               'Panoya iğnelediğim fotoğraflar masa lambasının ışığında birer pencere gibiydi. Hepsi aynı eve açılıyordu; hiçbiri aynı saati göstermiyordu.',
             ),

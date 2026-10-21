@@ -86,7 +86,7 @@ export const trial: CasePart = {
       lines: [
         {
           lines: [
-            card('5 MAYIS · PAZARTESİ 09.10 — BURSA ADLİYESİ, KORİDOR', 'adliye'),
+            card('5 MAYIS · SALI 09.10 — BURSA ADLİYESİ, KORİDOR', 'adliye'),
             n(
               'Yağmur dinmişti ama koridor hâlâ ıslak şemsiye kokuyordu. Yedinci Asliye Ceza’nın kapısında aynı liste, aynı çaycı, farklı bir sabah.',
             ),
@@ -412,6 +412,7 @@ export const trial: CasePart = {
         option('CV_Q3', 'Elinde ne vardı?', {
           visibleWhen: has('clue_teneke'),
           score: { SORGULAMA: 60 },
+          effects: [raise('cevdet_dinlendi')],
           responses: [
             {
               lines: [
@@ -1489,13 +1490,14 @@ export const trial: CasePart = {
           'Suç işlenmemiştir: yangın elektrik arızasıyla çıkmış, hızlandırıcı izi sonradan getirilmiştir (CMK 223/2-b)',
           {
             effects: [
+              raise('beraat_talep'),
+              raise('savunma_b'),
               ifThen(
                 all(ref('hizlandirici_coktu'), flag('eksper_kirildi'), ref('elektrik_ispat'), flag('taksir_cevap')),
                 [
                   score('SAVUNMA_STRATEJISI', strategyAmount(200, 'MASUMIYET')),
                   inc('pers'),
                   raise('gercek'),
-                  raise('beraat_savunma'),
                   mark(
                     'GOOD',
                     'Savunma delillerle örtüşüyor: elektrik kaynağı raporla ve kayıtla, hızlandırıcının kaynağı numune zinciri ve eksperin susuşuyla ortaya kondu.',
@@ -1564,12 +1566,12 @@ export const trial: CasePart = {
           'Kasıtla yangın çıkarıldığı ve sigortacının aldatıldığı sabit değildir; şüphe sanık lehinedir (CMK 223/2-e)',
           {
             effects: [
+              raise('beraat_talep'),
               ifThen(
                 all(ref('hizlandirici_coktu'), ref('motif_coktu')),
                 [
                   score('SAVUNMA_STRATEJISI', strategyAmount(200, 'USUL')),
                   inc('pers'),
-                  raise('beraat_savunma'),
                   mark(
                     'GOOD',
                     'Hızlandırıcı tespiti dayanaksız kaldı, dolaylı delillerin iplikleri belgeli açıklamalarla çözüldü: kalan şüphe sanık lehine (Anayasa 38/4).',
@@ -1640,7 +1642,7 @@ export const trial: CasePart = {
         ),
         option('T06_T', 'Öncelikle beraat; aksi hâlde eylem olsa olsa taksirle yangına neden olmadır (TCK 171/1-a)', {
           score: { SAVUNMA_STRATEJISI: strategyAmount(150, 'INDIRIM') },
-          effects: [raise('terditli')],
+          effects: [raise('beraat_talep'), raise('terditli')],
           good: 'Terditli savunma meşrudur: önce beraat, olmazsa daha hafif nitelendirme. Ama kasıt düşmüşken taksiri kendin önermek, hâkime ikinci kapıyı gösterir.',
           responses: [
             {
@@ -1771,6 +1773,22 @@ export const trial: CasePart = {
       background: 'durusma_salonu',
       lines: [
         {
+          // İkinci celse: güven bitse de yargılama CMK 216'ya göre sürer; mütalaa, esas savunma ve son söz alınır.
+          when: visited('ARA_GIRIS'),
+          lines: [
+            n(
+              'Hâkim gözlüğünü çıkardı ve masaya bıraktı. Bir hâkim gözlüğünü çıkardığında, artık okuyacak bir şey kalmamıştır.',
+            ),
+            s(
+              'hakim',
+              'Müdafi, son sunduğunuz belgelerin hiçbiri ileri sürdüğünüz şeyi göstermedi. Sabrın bir sınırı var. Delil sunumunu kapatıyorum; dosyada ne varsa onunla devam edeceğiz.',
+            ),
+            th(
+              'Fotoğrafları buldum, çizelgeyi buldum, tenekeleri buldum. Sonra yanlış kapılara kâğıt taşıdım. Kayıt duruyor; benim sesim artık daha az duyuluyor.',
+            ),
+          ],
+        },
+        {
           lines: [
             n(
               'Hâkim gözlüğünü çıkardı ve masaya bıraktı. Bir hâkim gözlüğünü çıkardığında, artık okuyacak bir şey kalmamıştır.',
@@ -1785,8 +1803,22 @@ export const trial: CasePart = {
           ],
         },
       ],
-      choices: [cont('COKUS_SON', 'Son söz: “Ben yakmadım.”', 'T_08')],
+      choices: [
+        cont('COKUS_SON', 'Son söz: “Ben yakmadım.”', 'T_08', { visibleWhen: not(visited('ARA_GIRIS')) }),
+        cont('COKUS_DEVAM', 'Devam', 'T_COKUS_D', { visibleWhen: visited('ARA_GIRIS') }),
+      ],
     }),
+    decisionNode(
+      'T_COKUS_D',
+      [
+        { when: visited('T_06'), to: 'T_07' },
+        { when: visited('T_06P'), to: 'T_06' },
+        { when: visited('T_05R'), to: 'T_06P' },
+        { when: visited('T_05'), to: 'T_05M' },
+        { to: 'T_04' },
+      ],
+      { ...court2.base },
+    ),
     resultNode('R_KARAR', { ...VERDICT, title: 'Karar' }),
   ],
   triggers: [

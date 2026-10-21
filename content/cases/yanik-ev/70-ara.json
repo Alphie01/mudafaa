@@ -325,6 +325,29 @@
           "kind": "NAVIGATE",
           "label": "DURUŞMAYA GİT · 2. CELSE",
           "role": "PRIMARY",
+          "enabledWhen": {
+            "all": [
+              {
+                "any": [
+                  { "all": [{ "cmp": [{ "var": "day2" }, "==", 2] }, { "cmp": [{ "var": "ap2" }, "<=", 0] }] },
+                  {
+                    "all": [
+                      { "chosen": "A2_GULSUM" },
+                      { "chosen": "A2_HALIL" },
+                      { "any": [{ "chosen": "A2_LAB" }, { "not": { "hasEvidence": "ev_lab" } }] },
+                      { "any": [{ "chosen": "A2_ARIZA" }, { "not": { "hasEvidence": "ev_ariza" } }] },
+                      { "any": [{ "chosen": "A2_ARK" }, { "not": { "hasEvidence": "ev_ark" } }] },
+                      { "any": [{ "chosen": "A2_TAHKIM" }, { "not": { "hasEvidence": "ev_tahkim" } }] },
+                      { "any": [{ "chosen": "A2_CEVDET" }, { "not": { "met": "cevdet" } }] },
+                      { "any": [{ "chosen": "A2_SAADET" }, { "not": { "flag": "fact_tv" } }] }
+                    ]
+                  }
+                ]
+              },
+              { "cmp": [{ "var": "leyla_ara" }, ">=", { "var": "day2" }] }
+            ]
+          },
+          "lockedReason": "İkinci celse 5 Mayıs’ta. Aranın son gününü bitir; kürsüden önce dosyayı Leyla’yla bir kez daha konuş.",
           "confirm": "Duruşmaya gidersen ara evresi biter. Emin misin?",
           "next": "ARA_KAPI"
         }
@@ -355,7 +378,7 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "22 NİSAN · SALI 21.30 — ARSLAN HUKUK",
+              "text": "22 NİSAN · ÇARŞAMBA 21.30 — ARSLAN HUKUK",
               "style": "card",
               "bg": "buro_gece"
             },
@@ -1426,7 +1449,7 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "4 MAYIS · PAZAR 22.50 — ARSLAN HUKUK, KAPI",
+              "text": "4 MAYIS · PAZARTESİ 22.50 — ARSLAN HUKUK, KAPI",
               "style": "card",
               "bg": "sokak_yagmur"
             },

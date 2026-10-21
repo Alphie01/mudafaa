@@ -36,7 +36,7 @@ export const meta: CasePart = {
     summary:
       'Muradiye’de yüz yıllık ahşap bir ev gece yandı. Ev sahibi döşemeci Halil Bozkurt, evi sigorta parası için benzinle yakmakla suçlanıyor: poliçe kırk yedi gün önce yapılmış, teminat on iki gün önce artırılmış, eşyalar bir hafta önce taşınmış, cüzdanında bir benzin fişi var. Bilirkişiye göre yangın salonda, hızlandırıcıyla çıktı.',
     coverCharacter: 'halil',
-    legalReview: { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-20' },
+    legalReview: { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-21' },
   },
   config: {
     startNode: 'PROLOG',
@@ -110,11 +110,16 @@ export const meta: CasePart = {
     },
     {
       id: 'hizlandirici_coktu',
-      label: 'Numune zinciri koptu; zemin izi ve laboratuvar bulgusu çürüdü',
+      label:
+        'Numune zinciri koptu (bilirkişi + yeminli bekçi); zemin izi çürüdü; laboratuvar bulgusu önce birinci celsede (taze benzin), sonra ham veriyle çöktü',
       when: all(
         flag('contra_b2'),
+        // Yeminli bekçi: eksper muhafazadaki olay yerine refakatsiz girdi (CV_Q2) ve içeri dolu tenekelerle girdi (CV_Q3).
+        { chosen: 'CV_Q2' },
+        flag('cevdet_dinlendi'),
         any(flag('contra_b1'), flag('contra_u2')),
-        any(flag('contra_b4'), flag('contra_u3')),
+        flag('contra_b4'),
+        flag('contra_u3'),
       ),
     },
     {
@@ -184,7 +189,8 @@ export const meta: CasePart = {
       'cevdet_istendi',
       'tarik_istendi',
       'basin',
-      'beraat_savunma',
+      'beraat_talep',
+      'savunma_b',
       'borc_gizle',
       'cevdet_dinlendi',
       'cevdet_hazir',

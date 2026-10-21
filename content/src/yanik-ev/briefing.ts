@@ -84,7 +84,7 @@ export const briefing: CasePart = {
               'Polis fişi çevirdi, meslektaşına gösterdi. Biri bir şey not etti. Kimse Halil’e bir şey sormadı. Sormaya gerek görmediler.',
             ),
             n(
-              'Sabah boyunca şeridin önünden komşular geçti, bir belediye kamyoneti geçti, işe geç kalanlar geçti. Bekçi defterine bir şeyler yazdı; bekçiler hep bir şeyler yazar.',
+              'Sabah boyunca şeridin önünden komşular geçti, bir belediye kamyoneti geçti, işe geç kalanlar geçti. Bekçi şeridin başında, ellerini koltuk altına sokmuş bekliyordu.',
             ),
             n(
               'Öğleden sonra bir hasar ihbarı yapıldı. Üç gün sonra bir rapor yazıldı. Bir ay sonra bir bilirkişi, bir laboratuvar, bir kelime: hızlandırıcı.',
@@ -107,7 +107,7 @@ export const briefing: CasePart = {
       lines: [
         {
           lines: [
-            card('3 NİSAN · PERŞEMBE 22.15 — ARSLAN HUKUK, BURSA', 'buro_gece'),
+            card('3 NİSAN 2026 · CUMA 22.15 — ARSLAN HUKUK, BURSA', 'buro_gece'),
             th('Bursa’da nisan yağmuru iki şey getirir: çamur ve geç kalmış vicdanlar. Bu gece kapıyı ikincisi çaldı.'),
             n(
               'Büronun camında yağmur. Masa lambasının altında soğumuş bir çay, ortaklık sözleşmemin hâlâ çerçevelenmemiş bir kopyası. Zil çaldığında saat onu geçiyordu.',
@@ -469,7 +469,7 @@ export const briefing: CasePart = {
       lines: [
         {
           lines: [
-            card('4 NİSAN · CUMA 08.10 — MURADİYE, KALEM SOKAK', 'sokak_sabah'),
+            card('4 NİSAN · CUMARTESİ 08.10 — MURADİYE, KALEM SOKAK', 'sokak_sabah'),
             n(
               'Muradiye sabahları ıslak taş ve simit kokar. Dar sokaklarda emekliler kahvehanelere, çocuklar okula yürüyordu; kimse dokuz numaraya bakmıyordu.',
             ),

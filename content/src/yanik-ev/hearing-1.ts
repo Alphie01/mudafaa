@@ -102,7 +102,7 @@ export const hearing1: CasePart = {
       lines: [
         {
           lines: [
-            card('14 NİSAN · PAZARTESİ 09.05 — BURSA ADLİYESİ, KORİDOR', 'adliye'),
+            card('14 NİSAN · SALI 09.05 — BURSA ADLİYESİ, KORİDOR', 'adliye'),
             n(
               'Koridor ıslak şemsiyeler, telaşlı cübbeler ve bir çaycının tepsisiyle doluydu. Yedinci Asliye Ceza’nın kapısında bir liste: dokuz dosya, bizimki dördüncü.',
             ),

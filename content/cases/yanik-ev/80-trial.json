@@ -36,7 +36,7 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "5 MAYIS · PAZARTESİ 09.10 — BURSA ADLİYESİ, KORİDOR",
+              "text": "5 MAYIS · SALI 09.10 — BURSA ADLİYESİ, KORİDOR",
               "style": "card",
               "bg": "adliye"
             },
@@ -510,7 +510,10 @@
             }
           ],
           "next": "$stay",
-          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 60 }]
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 60 },
+            { "type": "VAR", "var": "cevdet_dinlendi", "op": "set", "value": true }
+          ]
         },
         {
           "id": "CV_QBITIR",
@@ -2430,6 +2433,8 @@
             }
           ],
           "effects": [
+            { "type": "VAR", "var": "beraat_talep", "op": "set", "value": true },
+            { "type": "VAR", "var": "savunma_b", "op": "set", "value": true },
             {
               "type": "IF",
               "when": {
@@ -2454,7 +2459,6 @@
                 },
                 { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
                 { "type": "VAR", "var": "gercek", "op": "set", "value": true },
-                { "type": "VAR", "var": "beraat_savunma", "op": "set", "value": true },
                 {
                   "type": "MARK",
                   "quality": "GOOD",
@@ -2546,6 +2550,7 @@
             }
           ],
           "effects": [
+            { "type": "VAR", "var": "beraat_talep", "op": "set", "value": true },
             {
               "type": "IF",
               "when": { "all": [{ "ref": "hizlandirici_coktu" }, { "ref": "motif_coktu" }] },
@@ -2562,7 +2567,6 @@
                   }
                 },
                 { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
-                { "type": "VAR", "var": "beraat_savunma", "op": "set", "value": true },
                 {
                   "type": "MARK",
                   "quality": "GOOD",
@@ -2613,6 +2617,7 @@
                 }
               }
             },
+            { "type": "VAR", "var": "beraat_talep", "op": "set", "value": true },
             { "type": "VAR", "var": "terditli", "op": "set", "value": true }
           ],
           "quality": {
@@ -2831,6 +2836,24 @@
       "background": "durusma_salonu",
       "lines": [
         {
+          "when": { "visited": "ARA_GIRIS" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Hâkim gözlüğünü çıkardı ve masaya bıraktı. Bir hâkim gözlüğünü çıkardığında, artık okuyacak bir şey kalmamıştır."
+            },
+            {
+              "speaker": "hakim",
+              "text": "Müdafi, son sunduğunuz belgelerin hiçbiri ileri sürdüğünüz şeyi göstermedi. Sabrın bir sınırı var. Delil sunumunu kapatıyorum; dosyada ne varsa onunla devam edeceğiz."
+            },
+            {
+              "speaker": "player",
+              "text": "Fotoğrafları buldum, çizelgeyi buldum, tenekeleri buldum. Sonra yanlış kapılara kâğıt taşıdım. Kayıt duruyor; benim sesim artık daha az duyuluyor.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "lines": [
             {
               "speaker": "narrator",
@@ -2848,7 +2871,37 @@
           ]
         }
       ],
-      "choices": [{ "id": "COKUS_SON", "kind": "CONTINUE", "label": "Son söz: “Ben yakmadım.”", "next": "T_08" }]
+      "choices": [
+        {
+          "id": "COKUS_SON",
+          "kind": "CONTINUE",
+          "label": "Son söz: “Ben yakmadım.”",
+          "visibleWhen": { "not": { "visited": "ARA_GIRIS" } },
+          "next": "T_08"
+        },
+        {
+          "id": "COKUS_DEVAM",
+          "kind": "CONTINUE",
+          "label": "Devam",
+          "visibleWhen": { "visited": "ARA_GIRIS" },
+          "next": "T_COKUS_D"
+        }
+      ]
+    },
+    {
+      "id": "T_COKUS_D",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "routes": [
+        { "when": { "visited": "T_06" }, "to": "T_07" },
+        { "when": { "visited": "T_06P" }, "to": "T_06" },
+        { "when": { "visited": "T_05R" }, "to": "T_06P" },
+        { "when": { "visited": "T_05" }, "to": "T_05M" },
+        { "to": "T_04" }
+      ],
+      "choices": []
     },
     {
       "id": "R_KARAR",

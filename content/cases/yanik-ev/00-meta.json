@@ -14,7 +14,7 @@
     "requiredRank": "ORTAK",
     "summary": "Muradiye’de yüz yıllık ahşap bir ev gece yandı. Ev sahibi döşemeci Halil Bozkurt, evi sigorta parası için benzinle yakmakla suçlanıyor: poliçe kırk yedi gün önce yapılmış, teminat on iki gün önce artırılmış, eşyalar bir hafta önce taşınmış, cüzdanında bir benzin fişi var. Bilirkişiye göre yangın salonda, hızlandırıcıyla çıktı.",
     "coverCharacter": "halil",
-    "legalReview": { "status": "APPROVED", "by": "Claude (iç inceleme)", "at": "2026-10-20" }
+    "legalReview": { "status": "APPROVED", "by": "Claude (iç inceleme)", "at": "2026-10-21" }
   },
   "config": {
     "startNode": "PROLOG",
@@ -119,12 +119,15 @@
     },
     {
       "id": "hizlandirici_coktu",
-      "label": "Numune zinciri koptu; zemin izi ve laboratuvar bulgusu çürüdü",
+      "label": "Numune zinciri koptu (bilirkişi + yeminli bekçi); zemin izi çürüdü; laboratuvar bulgusu önce birinci celsede (taze benzin), sonra ham veriyle çöktü",
       "when": {
         "all": [
           { "flag": "contra_b2" },
+          { "chosen": "CV_Q2" },
+          { "flag": "cevdet_dinlendi" },
           { "any": [{ "flag": "contra_b1" }, { "flag": "contra_u2" }] },
-          { "any": [{ "flag": "contra_b4" }, { "flag": "contra_u3" }] }
+          { "flag": "contra_b4" },
+          { "flag": "contra_u3" }
         ]
       }
     },
@@ -411,7 +414,8 @@
     { "id": "cevdet_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "tarik_istendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "basin", "type": "bool", "initial": false, "visibility": "HIDDEN" },
-    { "id": "beraat_savunma", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "beraat_talep", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "savunma_b", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "borc_gizle", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "cevdet_dinlendi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "cevdet_hazir", "type": "bool", "initial": false, "visibility": "HIDDEN" },

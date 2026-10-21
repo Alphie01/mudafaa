@@ -24,6 +24,7 @@ import {
   story,
   v,
   choiceNode,
+  chosen,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import type { ChoiceDef, NodeDef } from '@mudafaa/case-schema';
@@ -46,6 +47,25 @@ const act = (id: string, label: string, to: string, extra: Partial<ChoiceDef> = 
 
 const free = (id: string, label: string, to: string, extra: Partial<ChoiceDef> = {}): ChoiceDef =>
   rawChoice('NAVIGATE', id, label, { next: to, ...extra });
+
+/**
+ * Aranın son günü bitti: eylem puanı kalmadı ya da harcanacak etkinlik kalmadı. İkinci celsenin tarihi sabittir (5 Mayıs);
+ * hub'dan duruşmaya ancak aranın sonunda gidilir.
+ */
+const araBitti = any(
+  all(cmp(v('day2'), '==', 2), cmp(v('ap2'), '<=', 0)),
+  // Harcanacak etkinlik kalmadıysa (az teslimatla) gün beklemeden duruşmaya gidilir; aksi hâlde hub kilitlenirdi.
+  all(
+    chosen('A2_GULSUM'),
+    chosen('A2_HALIL'),
+    any(chosen('A2_LAB'), not(has('ev_lab'))),
+    any(chosen('A2_ARIZA'), not(has('ev_ariza'))),
+    any(chosen('A2_ARK'), not(has('ev_ark'))),
+    any(chosen('A2_TAHKIM'), not(has('ev_tahkim'))),
+    any(chosen('A2_CEVDET'), not(met('cevdet'))),
+    any(chosen('A2_SAADET'), not(flag('fact_tv'))),
+  ),
+);
 
 const fresh = (id: string, a: string, b: string, out: string, title: string, text: string) =>
   recipe(id, a, b, {
@@ -236,6 +256,9 @@ export const ara: CasePart = {
         }),
         nav('GO_T', 'DURUŞMAYA GİT · 2. CELSE', 'ARA_KAPI', {
           role: 'PRIMARY',
+          enabledWhen: all(araBitti, cmp(v('leyla_ara'), '>=', v('day2'))),
+          lockedReason:
+            'İkinci celse 5 Mayıs’ta. Aranın son gününü bitir; kürsüden önce dosyayı Leyla’yla bir kez daha konuş.',
           confirm: 'Duruşmaya gidersen ara evresi biter. Emin misin?',
         }),
       ],
@@ -252,7 +275,7 @@ export const ara: CasePart = {
       lines: [
         {
           lines: [
-            card('22 NİSAN · SALI 21.30 — ARSLAN HUKUK', 'buro_gece'),
+            card('22 NİSAN · ÇARŞAMBA 21.30 — ARSLAN HUKUK', 'buro_gece'),
             n(
               'Zehra yalnız gelmedi. Yanında otuzlarında, kısa sakallı, inşaat botlu bir adam: nişanlısı Onur. Elinde bir dosya, yüzünde bir “çözüm.”',
             ),
@@ -976,7 +999,7 @@ export const ara: CasePart = {
       lines: [
         {
           lines: [
-            card('4 MAYIS · PAZAR 22.50 — ARSLAN HUKUK, KAPI', 'sokak_yagmur'),
+            card('4 MAYIS · PAZARTESİ 22.50 — ARSLAN HUKUK, KAPI', 'sokak_yagmur'),
             n(
               'Büroyu kilitlerken sokak lambasının altında bir şemsiye gördüm. Altında kusursuz bir takım, kusursuz bir sabır.',
             ),

@@ -1,5 +1,7 @@
 import {
+  all,
   any,
+  chosen,
   cmp,
   conversation,
   costOf,
@@ -13,6 +15,7 @@ import {
   interview,
   meet,
   mood,
+  not,
   objective,
   option,
   raise,
@@ -23,6 +26,12 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { INV1, card, me, n, s, th } from './shared.js';
+
+/**
+ * Bekçiye sabahı sormanın kapısı: numunelerin kolluktan değil eksperden geldiği raporun ekinde, sabahki fotoğrafın
+ * eksperce çekildiği de albümde ya da raporda görülmüş olmalı. Sorunun kendisi ancak zincirdeki boşluk görülünce akla gelir.
+ */
+export const sabahKapisi = all(has('clue_numune'), any(visited('INV_FOTO'), has('clue_eksper_foto')));
 
 // 52-inv-kisiler: cezaevinde müvekkil görüşmesi (konular başka yerlerde öğrenilenlerle açılır), komşu Saadet, bekçi
 // Cevdet, elektrikçi Necati, acente Kader.
@@ -349,22 +358,41 @@ export const invPeople: CasePart = {
           tones: {
             soft: {
               prompt: 'Koridordaki buat. Evin elektriğiyle ilgili bir sorun var mıydı?',
-              says: [
-                s(
-                  'halil',
-                  'Koridordaki kutu ısınırdı. Kışın sobanın yanında televizyon, su ısıtıcısı bir arada olunca sigorta atardı.',
-                ),
-                s(
-                  'halil',
-                  'Necati Usta baktı, “ağır yük çekme, ocakta hepsini yeniliyoruz” dedi. Ben de çekmedim. Zaten evde değildim ki son hafta.',
-                ),
-                s(
-                  'halil',
-                  'Bir şey daha… O gece sokağın lambaları gidip geldi diyorlar. Saadet Hanım’ın televizyonu yanmış. Zehra söyledi.',
-                ),
-                th(
-                  'Sokak lambaları gidip gelmiş. Bir televizyon yanmış. Bunlar bir rapor değil; dedikodu. Ama dedikodunun da bir kaydı olur.',
-                ),
+              responses: [
+                {
+                  when: flag('fact_tv'),
+                  lines: [
+                    s(
+                      'halil',
+                      'Koridordaki kutu ısınırdı. Kışın sobanın yanında televizyon, su ısıtıcısı bir arada olunca sigorta atardı.',
+                    ),
+                    s(
+                      'halil',
+                      'Necati Usta baktı, “ağır yük çekme, ocakta hepsini yeniliyoruz” dedi. Ben de çekmedim. Zaten evde değildim ki son hafta.',
+                    ),
+                    me('Saadet Hanım o gece televizyonunun “pat” diye söndüğünü söyledi.'),
+                    s(
+                      'halil',
+                      'Saadet’in mi? Zehra da bir şey demişti, lambalar gidip geldi diye. Ben içerideydim, bilmem.',
+                    ),
+                    th('Bir televizyon, bir lamba. Halil bilmiyor. Bilmemesi, uydurmadığını gösteriyor.'),
+                  ],
+                },
+                {
+                  lines: [
+                    s(
+                      'halil',
+                      'Koridordaki kutu ısınırdı. Kışın sobanın yanında televizyon, su ısıtıcısı bir arada olunca sigorta atardı.',
+                    ),
+                    s(
+                      'halil',
+                      'Necati Usta baktı, “ağır yük çekme, ocakta hepsini yeniliyoruz” dedi. Ben de çekmedim. Zaten evde değildim ki son hafta.',
+                    ),
+                    th(
+                      'Isınan bir kutu, bir ustanın uyarısı. Savcı buna “bildiği hâlde” diyecek; ben “önlem aldı” diyeceğim.',
+                    ),
+                  ],
+                },
               ],
             },
             hard: {
@@ -635,6 +663,17 @@ export const invPeople: CasePart = {
       onFirstEnter: [meet('cevdet')],
       lines: [
         {
+          when: chosen('A_CEVDET2'),
+          lines: [
+            card('MURADİYE MEYDANI — BEKÇİ KULÜBESİ, 21.40', 'sokak_karanlik'),
+            n(
+              'Kulübenin camı yine buğuluydu. Cevdet beni görünce termosun kapağını kapattı; bu sefer defteri göğsüne bastırmadı.',
+            ),
+            s('cevdet', 'Yine siz. Bir şey unuttunuz galiba, avukat hanım. Sorun. Defter burada.'),
+            th('Unutmadım. O gün sormayı bilmiyordum. Raporun ekini okuyana kadar sorulacak soru yoktu.'),
+          ],
+        },
+        {
           lines: [
             card('MURADİYE MEYDANI — BEKÇİ KULÜBESİ, 20.10', 'sokak_karanlik'),
             n(
@@ -672,6 +711,7 @@ export const invPeople: CasePart = {
           next: '$stay',
         }),
         option('CV_SABAH', 'Sabah olay yerini siz beklemişsiniz. Kim girdi, kim çıktı?', {
+          visibleWhen: sabahKapisi,
           discovers: ['clue_eksper_giris', 'ev_cizelge'],
           score: { ARASTIRMA: 60 },
           responses: [
@@ -741,7 +781,12 @@ export const invPeople: CasePart = {
             next: '$stay',
           },
         ),
-        option('CV_BITIR', 'Teşekkür et ve çık', { next: '$return' }),
+        option('CV_BITIR', 'Teşekkür et ve çık', { next: '$return', visibleWhen: not(chosen('A_CEVDET2')) }),
+        option('CV_BITIR2', 'Defteri ona geri ver ve çık', {
+          next: '$return',
+          visibleWhen: chosen('A_CEVDET2'),
+          score: { ARASTIRMA: 10 },
+        }),
       ],
     }),
     conversation('INV_NECATI', {
@@ -807,7 +852,7 @@ export const invPeople: CasePart = {
                   'uzgun',
                 ),
                 th(
-                  '“Dışarıdan bir şey gelirse.” Bir elektrikçinin varsayımı. Ama bir varsayım, bir kayıtla buluşursa delil olur.',
+                  '“Dışarıdan bir şey gelirse.” Bir elektrikçinin varsayımı. Not defterine yazdım; varsayımı delil saymadan.',
                 ),
               ],
             },

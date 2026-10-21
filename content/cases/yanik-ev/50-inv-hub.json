@@ -85,22 +85,55 @@
         "choices": ["A_GORUS", "A_GORUS2"]
       },
       "tabs": [
+        { "id": "t_buro", "label": "BÜRO", "kind": "ARCHIVE", "choices": ["A_DIL", "A_CIKARIM", "A_IPLIK", "A_LEYLA"] },
         { "id": "t_olay", "label": "OLAY YERİ", "kind": "SCENE", "choices": ["A_EV", "A_FOTO", "A_ATOLYE"] },
         { "id": "t_cezaevi", "label": "CEZAEVİ", "kind": "PEOPLE", "choices": ["A_GORUS", "A_GORUS2"] },
         {
           "id": "t_kisi",
           "label": "KİŞİLER",
           "kind": "PEOPLE",
-          "choices": ["A_SAADET", "A_CEVDET", "A_NECATI", "A_KADER"]
+          "choices": ["A_SAADET", "A_CEVDET", "A_CEVDET2", "A_NECATI", "A_KADER"]
         },
-        {
-          "id": "t_arsiv",
-          "label": "ARŞİV",
-          "kind": "ARCHIVE",
-          "choices": ["A_BILIRKISI", "A_ITFAIYE", "A_POLICE", "A_DIL", "A_CIKARIM", "A_IPLIK", "A_LEYLA"]
-        }
+        { "id": "t_arsiv", "label": "ARŞİV", "kind": "ARCHIVE", "choices": ["A_BILIRKISI", "A_ITFAIYE", "A_POLICE"] }
       ],
       "choices": [
+        {
+          "id": "A_DIL",
+          "kind": "NAVIGATE",
+          "label": "Delil dilekçesi (CMK 177)",
+          "next": { "push": "INV_DIL" },
+          "description": "0 EP · üç talep hakkı · son gün, Leyla okuduktan sonra",
+          "visibleWhen": { "not": { "any": [{ "chosen": "DIL_VER" }, { "chosen": "DIL_VAZGEC" }] } },
+          "enabledWhen": { "cmp": [{ "var": "leyla_gun" }, ">=", 3] },
+          "lockedReason": "Dilekçe son gün yazılır; taslağı önce Leyla okur."
+        },
+        {
+          "id": "A_CIKARIM",
+          "kind": "NAVIGATE",
+          "label": "Yangın tahtası: nerede, neyle",
+          "next": { "push": "INV_CIKARIM" },
+          "description": "0 EP · ipuçlarını birleştir",
+          "enabledWhen": { "ref": "kart2" },
+          "lockedReason": "En az 2 ipucu gerekli."
+        },
+        {
+          "id": "A_IPLIK",
+          "kind": "NAVIGATE",
+          "label": "İplik tahtası: dolaylı deliller",
+          "next": { "push": "INV_IPLIK" },
+          "description": "0 EP · ipuçlarını birleştir",
+          "enabledWhen": { "ref": "kart2" },
+          "lockedReason": "En az 2 ipucu gerekli."
+        },
+        {
+          "id": "A_LEYLA",
+          "kind": "NAVIGATE",
+          "label": "Leyla’ya danış",
+          "next": { "push": "INV_LEYLA" },
+          "description": "0 EP · günde bir kez",
+          "visibleWhen": { "cmp": [{ "var": "leyla_gun" }, "<", { "var": "day" }] },
+          "effects": [{ "type": "VAR", "var": "leyla_gun", "op": "set", "value": { "var": "day" } }]
+        },
         {
           "id": "A_EV",
           "kind": "NAVIGATE",
@@ -169,6 +202,27 @@
           }
         },
         {
+          "id": "A_CEVDET2",
+          "kind": "NAVIGATE",
+          "label": "Bekçiye yeniden uğra",
+          "cost": [{ "var": "ap", "amount": 1 }],
+          "next": { "push": "INV_CEVDET" },
+          "maxUses": 1,
+          "description": "Bekçi kulübesi · sabahı sor",
+          "visibleWhen": {
+            "all": [
+              { "visited": "INV_CEVDET" },
+              { "not": { "chosen": "CV_SABAH" } },
+              {
+                "all": [
+                  { "hasEvidence": "clue_numune" },
+                  { "any": [{ "visited": "INV_FOTO" }, { "hasEvidence": "clue_eksper_foto" }] }
+                ]
+              }
+            ]
+          }
+        },
+        {
           "id": "A_NECATI",
           "kind": "NAVIGATE",
           "label": "Elektrikçi Necati Usta",
@@ -222,45 +276,82 @@
           "description": "Kalkan Sigorta · ekler"
         },
         {
-          "id": "A_DIL",
-          "kind": "NAVIGATE",
-          "label": "Delil dilekçesi (CMK 177)",
-          "next": { "push": "INV_DIL" },
-          "description": "0 EP · üç talep hakkı",
-          "visibleWhen": { "not": { "any": [{ "chosen": "DIL_VER" }, { "chosen": "DIL_VAZGEC" }] } }
-        },
-        {
-          "id": "A_CIKARIM",
-          "kind": "NAVIGATE",
-          "label": "Yangın tahtası: nerede, neyle",
-          "next": { "push": "INV_CIKARIM" },
-          "description": "0 EP · ipuçlarını birleştir",
-          "enabledWhen": { "ref": "kart2" },
-          "lockedReason": "En az 2 ipucu gerekli."
-        },
-        {
-          "id": "A_IPLIK",
-          "kind": "NAVIGATE",
-          "label": "İplik tahtası: dolaylı deliller",
-          "next": { "push": "INV_IPLIK" },
-          "description": "0 EP · ipuçlarını birleştir",
-          "enabledWhen": { "ref": "kart2" },
-          "lockedReason": "En az 2 ipucu gerekli."
-        },
-        {
-          "id": "A_LEYLA",
-          "kind": "NAVIGATE",
-          "label": "Leyla’ya danış",
-          "next": { "push": "INV_LEYLA" },
-          "description": "0 EP · günde bir kez",
-          "visibleWhen": { "cmp": [{ "var": "leyla_gun" }, "<", { "var": "day" }] },
-          "effects": [{ "type": "VAR", "var": "leyla_gun", "op": "set", "value": { "var": "day" } }]
-        },
-        {
           "id": "GO_H1",
           "kind": "NAVIGATE",
           "label": "DURUŞMAYA GİT · 1. CELSE",
           "role": "PRIMARY",
+          "enabledWhen": {
+            "any": [
+              { "all": [{ "cmp": [{ "var": "day" }, "==", 3] }, { "cmp": [{ "var": "ap" }, "<=", 0] }] },
+              {
+                "all": [
+                  { "chosen": "A_EV" },
+                  { "chosen": "A_FOTO" },
+                  { "chosen": "A_ATOLYE" },
+                  { "chosen": "A_GORUS" },
+                  { "chosen": "A_GORUS2" },
+                  { "chosen": "A_SAADET" },
+                  { "chosen": "A_BILIRKISI" },
+                  { "chosen": "A_ITFAIYE" },
+                  { "chosen": "A_POLICE" },
+                  {
+                    "any": [
+                      { "chosen": "A_CEVDET" },
+                      {
+                        "not": {
+                          "any": [
+                            { "visited": "INV_SAADET" },
+                            { "hasEvidence": "clue_numune" },
+                            { "visited": "INV_EV" }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "any": [
+                      { "chosen": "A_CEVDET2" },
+                      {
+                        "not": {
+                          "all": [
+                            { "visited": "INV_CEVDET" },
+                            { "not": { "chosen": "CV_SABAH" } },
+                            {
+                              "all": [
+                                { "hasEvidence": "clue_numune" },
+                                { "any": [{ "visited": "INV_FOTO" }, { "hasEvidence": "clue_eksper_foto" }] }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "any": [
+                      { "chosen": "A_NECATI" },
+                      {
+                        "not": {
+                          "any": [
+                            { "hasEvidence": "clue_restorasyon" },
+                            { "hasEvidence": "clue_buat" },
+                            { "flag": "fact_elektrikci" }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "any": [
+                      { "chosen": "A_KADER" },
+                      { "not": { "any": [{ "hasEvidence": "clue_kampanya" }, { "flag": "fact_artis" }] } }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "lockedReason": "Duruşma 14 Nisan’da. Önce son günün işlerini bitir.",
           "confirm": "Duruşmaya gidersen soruşturma biter. Emin misin?",
           "next": "INV_GECE_1"
         }
@@ -289,7 +380,7 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "CUMA 23.40 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            { "speaker": "narrator", "text": "CUMARTESİ 23.40 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
             {
               "speaker": "narrator",
               "text": "Telefon titredi. Zehra. Arkasında bir hastane koridorunun sesleri: tekerlekli bir sedye, bir anons, bir monitörün bip’i."
@@ -409,7 +500,7 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "CUMARTESİ 18.05 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
+            { "speaker": "narrator", "text": "PAZAR 18.05 — ARSLAN HUKUK", "style": "card", "bg": "buro_gece" },
             {
               "speaker": "narrator",
               "text": "Bilinmeyen bir numara. Açtım. Bir kayıt anonsu: “Bu görüşme bir ceza infaz kurumundan yapılmaktadır.”"
@@ -518,7 +609,7 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "CUMARTESİ 08.30 — MURADİYE, ÇINARALTI KAHVESİ",
+              "text": "PAZAR 08.30 — MURADİYE, ÇINARALTI KAHVESİ",
               "style": "card",
               "bg": "kafe"
             },
@@ -589,10 +680,10 @@
       "lines": [
         {
           "lines": [
-            { "speaker": "narrator", "text": "PAZAR 08.00 — ARSLAN HUKUK", "style": "card", "bg": "buro" },
+            { "speaker": "narrator", "text": "PAZARTESİ 07.40 — ARSLAN HUKUK", "style": "card", "bg": "buro" },
             {
               "speaker": "narrator",
-              "text": "Pazar sabahı büroda Leyla’dan başka kimse yoktu. Masasında eski, sararmış bir dosya; kapağında el yazısıyla bir yıl: 1996."
+              "text": "Pazartesi, mesai başlamadan; büroda Leyla’dan başka kimse yoktu. Masasında eski, sararmış bir dosya; kapağında el yazısıyla bir yıl: 1996."
             },
             {
               "speaker": "leyla",
@@ -660,7 +751,7 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "Pazar öğlesi. Leyla dilekçe taslağımı kırmızı kalemle okuyordu; kırmızı kalemi yalnızca önemli dosyalarda kullanırdı."
+              "text": "Pazartesi öğlesi. Leyla dilekçe taslağımı kırmızı kalemle okuyordu; kırmızı kalemi yalnızca önemli dosyalarda kullanırdı."
             },
             {
               "speaker": "leyla",
@@ -795,7 +886,7 @@
       ],
       "prompt": {
         "speaker": "narrator",
-        "text": "Mahkemeye delil dilekçesi: duruşmadan en az beş gün önce. Üç talep hakkın var; neyi isteyeceksin?"
+        "text": "Mahkemeye delil dilekçesi (CMK 177). Müzekkereye, davetiyeye gün lazım; dilekçe bugün verilmeli. Üç talep hakkın var; neyi isteyeceksin?"
       },
       "choices": [
         {
@@ -1239,7 +1330,7 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "13 NİSAN · PAZAR 23.30 — ARSLAN HUKUK",
+              "text": "13 NİSAN · PAZARTESİ 23.30 — ARSLAN HUKUK",
               "style": "card",
               "bg": "buro_gece"
             },

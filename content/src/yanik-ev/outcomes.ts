@@ -16,14 +16,25 @@ import {
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { card, n, s, th } from './shared.js';
 
-// 90-outcomes: altı sonuç. Öncelik sırası: ısmarlama rapor (ETİK: hızlandırıcı tespiti ayaktaysa mahkûmiyet, çöktüyse
-// taksir), 223/2-b, 223/2-e, taksire dönüşüm (TCK 171/1-a), mahkûmiyet. Hızlandırıcı tespiti çöktüyse sonuç hiçbir yolda
-// kasten mahkûmiyete düşmez (çöküş kesintisi ve düşük skor dahil): kastın tek dayanağı numune zinciriydi (zincir + zemin +
-// laboratuvar bulgusu). Eşikler: beraat 12.500, 223/2-b ayrıca 13.500. Taksiri skor değil numune zinciri belirlediği için
-// eşik çubuğunda taksir bandı yoktur.
+// 90-outcomes: yedi sonuç. Öncelik sırası: ısmarlama rapor (ETİK: kalan delillere göre mahkûmiyet / beraat / taksir),
+// 223/2-b, 223/2-e, taksire dönüşüm (TCK 171/1-a), mahkûmiyet. Hızlandırıcı tespiti çöktüyse sonuç hiçbir yolda kasten
+// mahkûmiyete düşmez (çöküş kesintisi ve düşük skor dahil): kastın tek dayanağı numune zinciriydi (zincir + zemin +
+// laboratuvar bulgusu). Beraatin dayanağını mahkeme kendisi seçer (CMK 223): 2-b talebi tutmazsa hüküm 2-e beraattir,
+// taksir mahkûmiyeti değil; savunmanın seçtiği yanlış dayanak (2-b, terditli) yalnızca skoru ve hâkimin kanaatini düşürür.
+// Ismarlama rapor müvekkili cezalandırmaz: mahkeme mütalaayı dışlar ve kalan delillere göre karar verir (ETIK_E / ETIK_T).
+// Eşikler: beraat 12.500, 223/2-b ayrıca 13.500.
 
 export const T_BERAAT = 12500;
 export const T_BERAAT_B = 13500;
+
+/** Kalan delillerin 223/2-e beraati taşıdığı kayıt (mütalaa ve skor hariç): kasıt, dolaylı deliller ve taksir cevabı. */
+const kayitBeraat = all(
+  not(flag('cokus')),
+  ref('hizlandirici_coktu'),
+  ref('motif_coktu'),
+  flag('taksir_cevap'),
+  flag('beraat_talep'),
+);
 
 const ETIK_KART =
   'Gerçeğe aykırı içerikte bir uzman raporunu para karşılığı ısmarlayıp mahkemeye sunmak yalan tanıklığa azmettirme ve delil uydurmadır (TCK 272, 38) ve avukat için meslekten çıkarmaya varan bir disiplin ihlalidir (Av.K. 34; TBB Meslek Kuralları). Mahkeme ısmarlama mütalaayı hükme esas almaz ve kararını kalan delillere göre verir: sahte bir rapor müvekkili kurtarmaz, yalnızca savunmanın sesini kısar.';
@@ -93,9 +104,80 @@ export const outcomes: CasePart = {
         },
       ],
     }),
+    outcome('ETIK_E', {
+      // Müvekkil beraat eder; ama bu bir etik sonudur (XP 0, baroya bildirim): oyuncu istatistiğinde beraat sayılmaz.
+      class: 'OTHER',
+      priority: 2,
+      when: all(flag('sahte_rapor'), kayitBeraat),
+      stamp: 'BERAAT',
+      stampTone: 'amber',
+      header: 'TÜRK MİLLETİ ADINA',
+      sentence: 'Ceza yok · Beraat · müdafi baroya bildirildi',
+      verdictText:
+        'Sanık Halil Bozkurt’un üzerine atılı genel güvenliği kasten tehlikeye sokma ve nitelikli dolandırıcılığa teşebbüs suçlarını işlediği sabit olmadığından, ayrı ayrı CMK 223/2-e uyarınca BERAATİNE; tutuklu ise derhal tahliyesine; CMK 141/1 uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142 uyarınca yapılabileceğinin bildirilmesine (CMK 231/3); savunmanın sunduğu uzman mütalaasını düzenleyen kişi ve mütalaayı ısmarlayanlar hakkında suç duyurusunda bulunulmasına; müdafi hakkında baroya bildirimde bulunulmasına; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
+      reasoning: [
+        because(
+          'Savunmanın sunduğu uzman mütalaasının para karşılığı ve önceden belirlenmiş bir sonuca göre yazıldığı, düzenleyenin yazılı beyanıyla anlaşılmıştır; bu mütalaa hükme esas alınmamıştır.',
+        ),
+        because(
+          'Mütalaa dışlandıktan sonra dosyadaki diğer deliller değerlendirilmiştir. Müdafiin usulsüz davranışı sanığın aleyhine delil oluşturmaz; hüküm yalnızca hukuka uygun delillere dayanır (CMK 217).',
+        ),
+        because(
+          'Hızlandırıcı tespitinin dayanağı olan numuneler olay yerine refakatsiz giren katılan eksperi tarafından teslim edilmiş; elde ediliş zinciri güvenilir değildir.',
+        ),
+        because(
+          'Mahkemenin elektrik bilirkişisinin koridor hattında tespit ettiği birincil ark, yangının elektrik kaynaklı olduğunu göstermektedir.',
+          has('ev_ark'),
+        ),
+        because(
+          'Elektrikçi tanığın yeminli beyanı ve yazılı notuna göre sanık uyarı üzerine yenilemeyi takvime koymuş ve yükü azaltmıştır; taksirli sorumluluğu da ispatlanamamıştır.',
+          all(flag('fact_acil_degil'), not(flag('taksir_dis'))),
+        ),
+        because(
+          'Elektrikçinin yazılı notu ve restorasyon sözleşmesine göre sanık uyarı üzerine yenilemeyi takvime koymuştur; taksirli sorumluluğu da ispatlanamamıştır.',
+          all(not(flag('fact_acil_degil')), not(flag('taksir_dis'))),
+        ),
+        because(
+          'Yangının dağıtım hattındaki nötr kopmasının yarattığı aşırı gerilimle çıktığı kayıtla anlaşıldığından, netice sanığın bir özen eksikliğine bağlanamamıştır.',
+          flag('taksir_dis'),
+        ),
+        because(
+          'Dolaylı delillerin (poliçe, teminat artışı, eşyaların taşınması, benzin alımı) belgeli açıklamaları karşısında sanığın atılı suçları işlediği konusunda şüpheden uzak bir kanaat oluşmamıştır (Anayasa 38/4).',
+        ),
+      ],
+      legalBasis: 'CMK 223/2-e; Anayasa 38/4; CMK 141, 142, 217, 231/3, 273/1; TCK 272, 38; Av.K. 34',
+      xp: xp(0),
+      howToReach:
+        'Numune zincirini kurup savunmanın gerisini de delille taşıdıktan sonra para karşılığı bir karşı rapor ısmarlamak (etik ihlali). Halil kalan delillerle beraat eder; sen baroya bildirilirsin. Bu sona ulaşmamak gerekir.',
+      ethicsCard: ETIK_KART,
+      epilogue: [
+        {
+          lines: [
+            s('hakim', 'Türk Milleti adına…'),
+            n(
+              '“…sabit olmadığından… beraatine… müdafi hakkında baroya bildirimde bulunulmasına.” Salon ilk kelimede nefes aldı, son cümlede bana döndü. Halil dönmedi.',
+            ),
+            card('ADLİYE KORİDORU — AKŞAMÜSTÜ', 'adliye'),
+            n(
+              'Onur’un tanıdığı eksper koridorda iki polisin yanında bir ifade tutanağı imzalıyordu. Zehra bir bankta oturuyordu; elleri dizlerinin üstünde, avuçları yukarı, babası gibi.',
+            ),
+            s(
+              'halil',
+              'Beraat etmişim, avukat hanım. Bunu bir bekçinin defteri söyledi, bir ustanın notu söyledi. O satın aldığınız kâğıt değil.',
+              'uzgun',
+            ),
+            s('zehra', 'Ben istemedim. Ama sustum. Hepimiz onu kurtarmak istedik. Kurtulacakmış zaten.', 'uzgun'),
+            th(
+              'Gerçek yetiyordu. Defter, fotoğraflar, tenekeler, bir ustanın notu. Ben gerçeğin yetmeyeceğinden korktum ve yanına bir yalan koydum. Hâkim ikisini ayırdı; yalanı da sahibini de.',
+            ),
+            ...ETIK_BURO,
+          ],
+        },
+      ],
+    }),
     outcome('ETIK_T', {
       class: 'RECHARACTERIZED',
-      priority: 2,
+      priority: 3,
       when: all(flag('sahte_rapor'), ref('hizlandirici_coktu')),
       stamp: 'TAKSİR',
       stampTone: 'amber',
@@ -118,7 +200,16 @@ export const outcomes: CasePart = {
           'Sanık, tesisatın eski olduğu ve koridor buatının ısındığı konusunda elektrikçi tarafından uyarılmış, tesisatı kullanmaya devam etmiştir.',
         ),
         because(
-          'Özen yükümlülüğünün yerine getirildiğine ilişkin savunma büyük ölçüde hükme esas alınmayan mütalaaya dayandırıldığından, bu yönde vicdani kanaat oluşmamıştır.',
+          'Yangının dış bir etkenden kaynaklandığı ya da sanığın özen yükümlülüğünü yerine getirdiği, hükme esas alınabilecek delillerle duruşmada ortaya konamamıştır; dışlanan mütalaa bu boşluğu doldurmaz.',
+          not(flag('taksir_cevap')),
+        ),
+        because(
+          'Savunma, uyarı üzerine yenilemenin takvime konduğunu ileri sürmüşse de, sanığın ısınan buata bağlı eski tesisatı enerjili bırakmaya devam ettiği; özen yükümlülüğünün yalnızca bir takvimle yerine getirilmiş sayılamayacağı kanaatine varılmıştır.',
+          all(flag('taksir_cevap'), not(flag('taksir_dis'))),
+        ),
+        because(
+          'Savunmanın dağıtım hattındaki nötr kopmasına ilişkin beyanı kayıtla doğrulanmıştır; ancak mahkeme aşırı gerilimin neticenin tek ve öngörülemez sebebi olduğu kanaatine varmamıştır: elektrikçinin uyarısına rağmen koruma düzeneği olmadan kullanılmaya devam edilen tesisat neticeye katkıda bulunmuştur.',
+          flag('taksir_dis'),
         ),
         because('Sanığa nitelik değişikliği hatırlatılmış ve ek savunması alınmıştır (CMK 226).'),
         because('Hasar ihbarı gerçek bir hasara dayandığından dolandırıcılık kastı ispatlanamamıştır.'),
@@ -126,7 +217,7 @@ export const outcomes: CasePart = {
       legalBasis: 'TCK 171/1-a, 22/2, 62/1, 51/1; CMK 217, 223/2-e, 226, 273/1; Anayasa 38/4; TCK 272, 38; Av.K. 34',
       xp: xp(0),
       howToReach:
-        'Numune zincirini kurup hızlandırıcı tespitini çürüttükten sonra para karşılığı bir karşı rapor ısmarlamak (etik ihlali). Halil kasıttan kurtulur; savunması senin yalanının gölgesinde kalır. Bu sona ulaşmamak gerekir.',
+        'Numune zincirini kurup hızlandırıcı tespitini çürüttükten sonra para karşılığı bir karşı rapor ısmarlamak (etik ihlali), kalan delillerle beraati taşıyamadan (ör. taksir sorusuna delille cevap vermeden). Halil kasıttan kurtulur, taksirden kurtulamaz. Bu sona ulaşmamak gerekir.',
       ethicsCard: ETIK_KART,
       epilogue: [
         {
@@ -155,7 +246,7 @@ export const outcomes: CasePart = {
     }),
     outcome('BERAAT_B', {
       class: 'ACQUITTAL',
-      priority: 3,
+      priority: 4,
       when: all(
         not(flag('cokus')),
         ref('hizlandirici_coktu'),
@@ -278,15 +369,8 @@ export const outcomes: CasePart = {
     }),
     outcome('BERAAT_E', {
       class: 'ACQUITTAL',
-      priority: 4,
-      when: all(
-        not(flag('cokus')),
-        ref('hizlandirici_coktu'),
-        ref('motif_coktu'),
-        flag('taksir_cevap'),
-        flag('beraat_savunma'),
-        finalAtLeast(T_BERAAT),
-      ),
+      priority: 5,
+      when: all(kayitBeraat, finalAtLeast(T_BERAAT)),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -319,8 +403,20 @@ export const outcomes: CasePart = {
           flag('taksir_dis'),
         ),
         because(
+          'Savunmanın suçun işlenmediğinin sabit olduğu yönündeki talebi kabul görmemiştir; ancak mahkeme beraatin dayanağını kendisi belirler ve atılı suçların işlendiği de sabit değildir (CMK 223/2-e).',
+          all(flag('savunma_b'), not(flag('gercek'))),
+        ),
+        because(
+          'Savunmanın öncelikli talebi beraat olduğundan ve bu talep kabul edildiğinden, terditli olarak ileri sürülen taksir nitelendirmesinin incelenmesine yer olmamıştır.',
+          flag('terditli'),
+        ),
+        because(
           'Yangının elektrik kaynaklı olması kuvvetle muhtemel olmakla birlikte kesin olarak tespit edilememiş; dolaylı delillerin birlikte değerlendirilmesi sanığın atılı suçları işlediği konusunda şüpheden uzak bir kanaat oluşturmamıştır (Anayasa 38/4).',
-          any(has('ev_ark'), has('ded_notr'), flag('contra_b3')),
+          all(any(has('ev_ark'), has('ded_notr'), flag('contra_b3')), not(flag('taksir_dis'))),
+        ),
+        because(
+          'Dosyadaki deliller birlikte değerlendirildiğinde sanığın atılı suçları işlediği sabit olmamıştır (Anayasa 38/4).',
+          flag('taksir_dis'),
         ),
         because(
           'Yangının çıkış sebebi kesin olarak tespit edilememiş; dolaylı delillerin birlikte değerlendirilmesi sanığın atılı suçları işlediği konusunda şüpheden uzak bir kanaat oluşturmamıştır (Anayasa 38/4).',
@@ -330,7 +426,7 @@ export const outcomes: CasePart = {
       legalBasis: 'CMK 223/2-e; Anayasa 38/4; CMK 141, 142, 217, 231/3, 273/1',
       xp: xp(1, { ethicsVar: 'ethics' }),
       howToReach:
-        'Birinci celsede numune zincirini (bilirkişi raporu + bekçi çizelgesi) ve temizlenmiş zemini kur; dolaylı delillerin en az ikisini belgeyle çöz (eşyalar, bidon, banka, artış); taksire yenileme takvimiyle cevap ver; 2-e savunması yap.',
+        'Numune zincirini, zemini ve laboratuvar bulgusunu çürüt; dolaylı delillerin en az ikisini belgeyle çöz (eşyalar, bidon, banka, artış); taksire yenileme takvimiyle cevap ver ve beraat iste (dayanağı mahkeme seçer). Taksire nötr kopmasıyla da cevap verilebilir.',
       epilogue: [
         {
           lines: [
@@ -425,7 +521,7 @@ export const outcomes: CasePart = {
     }),
     outcome('TAKSIR', {
       class: 'RECHARACTERIZED',
-      priority: 5,
+      priority: 6,
       when: ref('hizlandirici_coktu'),
       stamp: 'TAKSİR',
       stampTone: 'amber',
@@ -449,7 +545,7 @@ export const outcomes: CasePart = {
           all(flag('taksir_cevap'), not(flag('taksir_dis'))),
         ),
         because(
-          'Dağıtım hattındaki nötr kopması kayıtla sabit ise de, netice sanığın uyarıya rağmen yenilemediği tesisatın aşırı gerilime dayanamamasıyla birlikte gerçekleşmiştir; üçüncü kişinin kusuru illiyet bağını kesmemiştir.',
+          'Savunmanın dağıtım hattındaki nötr kopmasına ilişkin beyanı kayıtla doğrulanmıştır; ancak mahkeme aşırı gerilimin neticenin tek ve öngörülemez sebebi olduğu kanaatine varmamıştır: elektrikçinin uyarısına rağmen koruma düzeneği olmadan kullanılmaya devam edilen tesisat neticeye katkıda bulunmuştur.',
           flag('taksir_dis'),
         ),
         because('Sanığa nitelik değişikliği hatırlatılmış ve ek savunması alınmıştır (CMK 226).'),
@@ -482,10 +578,10 @@ export const outcomes: CasePart = {
             n('Salon boşalırken savcı dosyasını topladı. Kapıda durdu, bana döndü.'),
             s(
               'savci',
-              'Birinci celsede iyiydiniz, avukat hanım. Numune zincirini siz kurdunuz; o zincir müvekkilinizi kurtardı. Bugün yanlış kâğıtları yanlış tanığa gösterdiniz. O da beraati götürdü.',
+              'İyi başladınız, avukat hanım. Numune zincirini siz kurdunuz; o zincir müvekkilinizi kurtardı. Bugün yanlış kâğıtları yanlış tanığa gösterdiniz. O da beraati götürdü.',
             ),
             th(
-              'Hâkim kastı benim yüzümden değil, bir bekçinin defteri yüzünden düşürdü. Beraati de benim yüzümden düşürdü. İkisini birden taşımak zor.',
+              'Hâkim kastı benim sesim yüzünden değil, bir bekçinin defteri yüzünden düşürdü. Beraati de benim yüzümden düşürdü. İkisini birden taşımak zor.',
             ),
           ],
         },
@@ -534,7 +630,7 @@ export const outcomes: CasePart = {
     }),
     outcome('MAHKUMIYET', {
       class: 'CONVICTION',
-      priority: 6,
+      priority: 7,
       when: always,
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',

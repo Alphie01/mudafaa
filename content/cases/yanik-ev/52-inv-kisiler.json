@@ -606,6 +606,29 @@
               "prompt": "Koridordaki buat. Evin elektriğiyle ilgili bir sorun var mıydı?",
               "responses": [
                 {
+                  "when": { "flag": "fact_tv" },
+                  "lines": [
+                    {
+                      "speaker": "halil",
+                      "text": "Koridordaki kutu ısınırdı. Kışın sobanın yanında televizyon, su ısıtıcısı bir arada olunca sigorta atardı."
+                    },
+                    {
+                      "speaker": "halil",
+                      "text": "Necati Usta baktı, “ağır yük çekme, ocakta hepsini yeniliyoruz” dedi. Ben de çekmedim. Zaten evde değildim ki son hafta."
+                    },
+                    { "speaker": "player", "text": "Saadet Hanım o gece televizyonunun “pat” diye söndüğünü söyledi." },
+                    {
+                      "speaker": "halil",
+                      "text": "Saadet’in mi? Zehra da bir şey demişti, lambalar gidip geldi diye. Ben içerideydim, bilmem."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir televizyon, bir lamba. Halil bilmiyor. Bilmemesi, uydurmadığını gösteriyor.",
+                      "style": "thought"
+                    }
+                  ]
+                },
+                {
                   "lines": [
                     {
                       "speaker": "halil",
@@ -616,12 +639,8 @@
                       "text": "Necati Usta baktı, “ağır yük çekme, ocakta hepsini yeniliyoruz” dedi. Ben de çekmedim. Zaten evde değildim ki son hafta."
                     },
                     {
-                      "speaker": "halil",
-                      "text": "Bir şey daha… O gece sokağın lambaları gidip geldi diyorlar. Saadet Hanım’ın televizyonu yanmış. Zehra söyledi."
-                    },
-                    {
                       "speaker": "player",
-                      "text": "Sokak lambaları gidip gelmiş. Bir televizyon yanmış. Bunlar bir rapor değil; dedikodu. Ama dedikodunun da bir kaydı olur.",
+                      "text": "Isınan bir kutu, bir ustanın uyarısı. Savcı buna “bildiği hâlde” diyecek; ben “önlem aldı” diyeceğim.",
                       "style": "thought"
                     }
                   ]
@@ -1057,6 +1076,27 @@
       "onFirstEnter": [{ "type": "MEET", "character": "cevdet" }],
       "lines": [
         {
+          "when": { "chosen": "A_CEVDET2" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "MURADİYE MEYDANI — BEKÇİ KULÜBESİ, 21.40",
+              "style": "card",
+              "bg": "sokak_karanlik"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kulübenin camı yine buğuluydu. Cevdet beni görünce termosun kapağını kapattı; bu sefer defteri göğsüne bastırmadı."
+            },
+            { "speaker": "cevdet", "text": "Yine siz. Bir şey unuttunuz galiba, avukat hanım. Sorun. Defter burada." },
+            {
+              "speaker": "player",
+              "text": "Unutmadım. O gün sormayı bilmiyordum. Raporun ekini okuyana kadar sorulacak soru yoktu.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "lines": [
             {
               "speaker": "narrator",
@@ -1110,6 +1150,12 @@
           "id": "CV_SABAH",
           "kind": "OPTION",
           "label": "Sabah olay yerini siz beklemişsiniz. Kim girdi, kim çıktı?",
+          "visibleWhen": {
+            "all": [
+              { "hasEvidence": "clue_numune" },
+              { "any": [{ "visited": "INV_FOTO" }, { "hasEvidence": "clue_eksper_foto" }] }
+            ]
+          },
           "responses": [
             {
               "lines": [
@@ -1210,7 +1256,21 @@
             "category": "SORGULAMA"
           }
         },
-        { "id": "CV_BITIR", "kind": "OPTION", "label": "Teşekkür et ve çık", "next": "$return" }
+        {
+          "id": "CV_BITIR",
+          "kind": "OPTION",
+          "label": "Teşekkür et ve çık",
+          "next": "$return",
+          "visibleWhen": { "not": { "chosen": "A_CEVDET2" } }
+        },
+        {
+          "id": "CV_BITIR2",
+          "kind": "OPTION",
+          "label": "Defteri ona geri ver ve çık",
+          "next": "$return",
+          "visibleWhen": { "chosen": "A_CEVDET2" },
+          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }]
+        }
       ]
     },
     {
@@ -1298,7 +1358,7 @@
                 },
                 {
                   "speaker": "player",
-                  "text": "“Dışarıdan bir şey gelirse.” Bir elektrikçinin varsayımı. Ama bir varsayım, bir kayıtla buluşursa delil olur.",
+                  "text": "“Dışarıdan bir şey gelirse.” Bir elektrikçinin varsayımı. Not defterine yazdım; varsayımı delil saymadan.",
                   "style": "thought"
                 }
               ]

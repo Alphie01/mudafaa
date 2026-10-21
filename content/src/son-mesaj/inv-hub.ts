@@ -8,7 +8,6 @@ import {
   deliver,
   flag,
   has,
-  ifThen,
   inc,
   nav,
   not,

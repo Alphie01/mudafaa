@@ -666,7 +666,9 @@ export const invArsiv: CasePart = {
           score: { USUL_BILGISI: 20 },
           effects: [raise('hesap_sunuldu')],
           good: 'Savunmanın elde ettiği delil dosyaya sunulmadıkça tartışılamaz; noter tespiti ve hash değeriyle sunulan döküm, bilirkişinin de önüne gider (CMK 206, 178).',
-          responses: B(`~ Noterin mühürlü zarfı, hash değeriyle birlikte dilekçenin ekine. Artık bu döküm yalnızca benim panomda değil, dosyada.`),
+          responses: B(
+            `~ Noterin mühürlü zarfı, hash değeriyle birlikte dilekçenin ekine. Artık bu döküm yalnızca benim panomda değil, dosyada.`,
+          ),
           next: '$stay',
         }),
         option('DIL_KATILAN', 'Katılanın telefonunun da incelenmesi', {

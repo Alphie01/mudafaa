@@ -726,7 +726,10 @@ export const hearing1: CasePart = {
       say: [{ speaker: 'feride', text: 'Tarafların delil talepleri? Müdafi, sizi dinliyorum.' }],
       options: [
         option('T1_BILIRKISI', 'Bağımsız adli bilişim bilirkişisi ve imajın bir kopyası', {
-          visibleWhen: all({ not: flag('bilirkisi_istendi') }, any(has('clue_cihaz3'), flag('contra_s3'), flag('partial_s3'))),
+          visibleWhen: all(
+            { not: flag('bilirkisi_istendi') },
+            any(has('clue_cihaz3'), flag('contra_s3'), flag('partial_s3')),
+          ),
           cost: [{ var: 'slots2', amount: 1 }],
           score: { USUL_BILGISI: 30 },
           effects: [raise('bilirkisi_istendi')],
@@ -749,11 +752,15 @@ export const hearing1: CasePart = {
           next: '$stay',
         }),
         option('T1_ISP_GENEL', 'Hesaba bağlanan bütün IP adreslerinin araştırılması', {
-          visibleWhen: { not: all(has('clue_ip_ayni'), has('clue_ofis_hat'), flag('kilit_mahkemede'), flag('hesap_sunuldu')) },
+          visibleWhen: {
+            not: all(has('clue_ip_ayni'), has('clue_ofis_hat'), flag('kilit_mahkemede'), flag('hesap_sunuldu')),
+          },
           cost: [{ var: 'slots2', amount: 1 }],
           neutral:
             'Talep somut değil: hangi adres, hangi saat ve bu hattın olayla ne ilgisi var? Hesap verisindeki oturumlar, ofis hattı ve sanığın bir gece cihazın başında olamayacağını gösteren kayıt talebi somutlaştırırdı (CMK 206/2).',
-          responses: B(`feride: Hangi adres müdafi, hangi saat? Ve bu hattın sanığın savunmasıyla bağı ne? Bu hâliyle talep reddedildi.`),
+          responses: B(
+            `feride: Hangi adres müdafi, hangi saat? Ve bu hattın sanığın savunmasıyla bağı ne? Bu hâliyle talep reddedildi.`,
+          ),
           next: '$stay',
         }),
         option('T1_HAYRI', 'Hayri Sezer’in tanık olarak dinlenmesi', {
@@ -771,12 +778,16 @@ export const hearing1: CasePart = {
           score: { USUL_BILGISI: 20 },
           effects: [raise('hesap_sunuldu')],
           good: 'Savunmanın delili dosyaya girmedikçe bilirkişi de mahkeme de onu tartışamaz; noter tespiti ve hash değeri bütünlüğünü gösterir.',
-          responses: B(`feride: Hesap verisi, noter tespiti ve hash değeriyle dosyaya alındı. Bilirkişiye de gönderilsin.`),
+          responses: B(
+            `feride: Hesap verisi, noter tespiti ve hash değeriyle dosyaya alındı. Bilirkişiye de gönderilsin.`,
+          ),
           next: '$stay',
         }),
         option('T1_GULAY', 'Acil servis hemşiresi Gülay Tunç’un tanık olarak dinlenmesi', {
           // Tanığın olayla bağı tutanakta kurulduktan sonra (kilit kaydı ve onam formu Demirci'ye sunuldu) kabul edilir.
-          visibleWhen: all(flag('fact_gulay'), flag('gulay_hazir'), flag('kilit_mahkemede'), { not: flag('gulay_istendi') }),
+          visibleWhen: all(flag('fact_gulay'), flag('gulay_hazir'), flag('kilit_mahkemede'), {
+            not: flag('gulay_istendi'),
+          }),
           cost: [{ var: 'slots2', amount: 1 }],
           score: { USUL_BILGISI: 20 },
           effects: [raise('gulay_istendi')],

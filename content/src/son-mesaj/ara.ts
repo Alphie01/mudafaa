@@ -225,29 +225,34 @@ export const ara: CasePart = {
           effects: [set('ara_ap', 0)],
           next: '$stay',
         },
-        nav('GO_T', 'DURUŞMADAN ÖNCEKİ AKŞAM', {
-          routes: [
-            // Tarık'ın teklifi ancak dava güçlendiğinde gelir: sütun ve 9 Kasım salonda kurulmuş, bilirkişi raporu
-            // okunmuş, hesap dökümü elde, 07'nin izi sürülmüş. Saik olarak elde kalan tek kâğıt 25 Ekim mesajlarıdır.
-            {
-              when: all(
-                has('ev_hesap'),
-                flag('contra_s3'),
-                flag('kilit_mahkemede'),
-                visited('ARA_RAPOR'),
-                // Somut dayanaklı suç duyurusu verilmiş: Tarık, savcılığın yavaşlığına kendi yoluyla karşılık vermek ister.
-                flag('suc_duyurusu'),
-              ),
-              to: 'ARA_TEKLIF',
-            },
-            { to: 'ARA_SON_1' },
-          ],
-        }, {
-          role: 'PRIMARY',
-          confirm: 'Ara evresi biter. Emin misin?',
-          enabledWhen: all(cmp(v('ara_day'), '==', 2), any(ref('ara_ilerleme'), cmp(v('ara_ap'), '<=', 0))),
-          lockedReason: 'Duruşmaya iki gün var. Önce arayı kullan: en az üç iş ya da bütün eylem puanları.',
-        }),
+        nav(
+          'GO_T',
+          'DURUŞMADAN ÖNCEKİ AKŞAM',
+          {
+            routes: [
+              // Tarık'ın teklifi ancak dava güçlendiğinde gelir: sütun ve 9 Kasım salonda kurulmuş, bilirkişi raporu
+              // okunmuş, hesap dökümü elde, 07'nin izi sürülmüş. Saik olarak elde kalan tek kâğıt 25 Ekim mesajlarıdır.
+              {
+                when: all(
+                  has('ev_hesap'),
+                  flag('contra_s3'),
+                  flag('kilit_mahkemede'),
+                  visited('ARA_RAPOR'),
+                  // Somut dayanaklı suç duyurusu verilmiş: Tarık, savcılığın yavaşlığına kendi yoluyla karşılık vermek ister.
+                  flag('suc_duyurusu'),
+                ),
+                to: 'ARA_TEKLIF',
+              },
+              { to: 'ARA_SON_1' },
+            ],
+          },
+          {
+            role: 'PRIMARY',
+            confirm: 'Ara evresi biter. Emin misin?',
+            enabledWhen: all(cmp(v('ara_day'), '==', 2), any(ref('ara_ilerleme'), cmp(v('ara_ap'), '<=', 0))),
+            lockedReason: 'Duruşmaya iki gün var. Önce arayı kullan: en az üç iş ya da bütün eylem puanları.',
+          },
+        ),
       ],
     }),
     decisionNode('ARA_DAY_END', [{ to: 'ARA_AKSAM' }], {
@@ -628,9 +633,15 @@ export const ara: CasePart = {
           { label: 'KAYIT', flex: 3 },
         ],
         rows: [
-          row('y1', ['Üst yazı', 'Müzekkerenize istinaden Necati Aksoy’a ait 09.11 acil servis kayıtları ekte sunulmuştur.']),
+          row('y1', [
+            'Üst yazı',
+            'Müzekkerenize istinaden Necati Aksoy’a ait 09.11 acil servis kayıtları ekte sunulmuştur.',
+          ]),
           row('y2', ['Ek-1', 'Epikriz ve girişim onam formu (aslı gibidir) · onam 02.10 · saati yazan: Hmş. G. Tunç']),
-          row('y3', ['Ek-2', 'Nöbet defteri 09.11 · 01.40 · refakatçi Aksoy · telefon şarj istasyonunda emanet · paraf: G.T.']),
+          row('y3', [
+            'Ek-2',
+            'Nöbet defteri 09.11 · 01.40 · refakatçi Aksoy · telefon şarj istasyonunda emanet · paraf: G.T.',
+          ]),
           row('y4', ['Ek-2', 'Nöbet defteri 09.11 · 06.05 · emanet telefon sahibine teslim · paraf: G.T.']),
           row('y5', ['Ek-3', 'Kamera kayıtları: otuz günlük saklama süresi dolduğundan mevcut değildir.']),
         ],

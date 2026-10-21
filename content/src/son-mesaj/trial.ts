@@ -76,11 +76,7 @@ export const trial: CasePart = {
           kind: 'CONTINUE',
           label: 'Devam',
           next: {
-            routes: [
-              { when: flag('karartma'), to: 'T_00K' },
-              { when: has('ev_laptop'), to: 'T_00L' },
-              { to: 'T_01' },
-            ],
+            routes: [{ when: flag('karartma'), to: 'T_00K' }, { when: has('ev_laptop'), to: 'T_00L' }, { to: 'T_01' }],
           },
         },
       ],
@@ -1514,7 +1510,9 @@ export const trial: CasePart = {
           flag('partial_s3'),
           `~ Kaynak: Ek-3’teki rakamı salonda gösterdim; ama o rakamın hangi makineye ait olduğunu bir kâğıtla bağlayamadım.`,
         ),
-        O(`~ Kaynak: kimse mesajların nereden çıktığını sormadı; ben de sordurmadım. Tutanakta bir telefon, bir hesap, bir isim var.`),
+        O(
+          `~ Kaynak: kimse mesajların nereden çıktığını sormadı; ben de sordurmadım. Tutanakta bir telefon, bir hesap, bir isim var.`,
+        ),
       ],
     }),
     decisionNode('T_10B', [{ to: 'T_10C' }], {
@@ -1546,14 +1544,19 @@ export const trial: CasePart = {
           flag('bilirkisi_gece'),
           `~ El: bilirkişi bir gece için cümlesini geri aldı. Öbür iki gece için “sanığın kendisi de olabilir” hâlâ tutanakta duruyor.`,
         ),
-        O(`~ El: “Teknik olarak sanığın kendisi de olabilir.” Bilirkişinin bu cümlesi tutanakta olduğu gibi duruyor; kimse onu daraltmadı.`),
+        O(
+          `~ El: “Teknik olarak sanığın kendisi de olabilir.” Bilirkişinin bu cümlesi tutanakta olduğu gibi duruyor; kimse onu daraltmadı.`,
+        ),
       ],
     }),
     decisionNode('T_10D', [{ to: 'T_10E' }], {
       ...CV,
       lines: [
         W(
-          all(any(flag('ss_excluded'), flag('bilirkisi_ss')), any(flag('contra_s2'), flag('contra_s4'), flag('bilirkisi_zincir'))),
+          all(
+            any(flag('ss_excluded'), flag('bilirkisi_ss')),
+            any(flag('contra_s2'), flag('contra_s4'), flag('bilirkisi_zincir')),
+          ),
           `~ Usul: ekran görüntüleri dışarıda, telefonun iki günü belgesiz. Savcının en parlak kâğıtları en zayıf halkaları çıktı. Ama usul bir kapı açar; içerideki odayı deliller doldurur.`,
         ),
         W(
@@ -1578,12 +1581,17 @@ export const trial: CasePart = {
           all(flag('supheden'), flag('pay_cevap')),
           `~ Savunma: şüphe istedim ve savcının saik dediği 25 Ekim mesajlarını sahiplendim; öfke ile tehdit aynı şey değil. Kesin olmayanla kimse mahkûm edilmez.`,
         ),
-        W(flag('supheden'), `~ Savunma: şüphe istedim. Kesin olmayanla kimse mahkûm edilmez; yeter ki şüphenin kendisi kâğıtta olsun.`),
+        W(
+          flag('supheden'),
+          `~ Savunma: şüphe istedim. Kesin olmayanla kimse mahkûm edilmez; yeter ki şüphenin kendisi kâğıtta olsun.`,
+        ),
         W(
           flag('terditli'),
           `~ Savunma: önce beraat, olmazsa hiç değilse o gecenin dışarıda kalması. İki kapı açık bıraktım; ikisinin de anahtarı kâğıtlarda olmalıydı.`,
         ),
-        O(`~ Savunma: esas hakkında söylediklerim salonda yankılandı mı, bilmiyorum. Yankılanmayan söz, tutanağa da geçmez.`),
+        O(
+          `~ Savunma: esas hakkında söylediklerim salonda yankılandı mı, bilmiyorum. Yankılanmayan söz, tutanağa da geçmez.`,
+        ),
       ],
     }),
     decisionNode('T_10Z', [{ to: 'R_KARAR' }], {

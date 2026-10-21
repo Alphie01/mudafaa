@@ -1,4 +1,15 @@
-import { all, examine, fallback, flag, has, ifThen, not, raise, recipe, score } from '../../../tools/content/src/kit/index.js';
+import {
+  all,
+  examine,
+  fallback,
+  flag,
+  has,
+  ifThen,
+  not,
+  raise,
+  recipe,
+  score,
+} from '../../../tools/content/src/kit/index.js';
 import type { Category, ChoiceDef, NodeDef } from '../../../tools/content/src/kit/index.js';
 import { S } from './dsl.js';
 

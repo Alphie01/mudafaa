@@ -81,13 +81,43 @@ export const report: CasePart = {
       hint(
         'h_rapor',
         all(flag('bilirkisi_istendi'), not(visited('ARA_RAPOR'))),
-        'Bilirkişi raporu arada dosyaya girdi ama okumadın; Bulgu 3 ve “Sınır” satırı ikinci celsede bilirkişiyi daraltmanın anahtarıydı.',
+        'Bilirkişi raporu arada dosyaya girdi ama okumadın; Bulgu 1 (cihaz) ve Bulgu 2 (kilit) okunmadan bilirkişiye teyit ettirilemezdi, “Sınır” satırı da onu daraltmanın anahtarıydı.',
         'DELIL_ANALIZI',
       ),
       hint(
         'h_suc',
         all(not(flag('suc_duyurusu')), not(flag('karartma'))),
         'Gerçek faile giden yol suç duyurusuydu (CMK 158): avukat şüpheliyi kovalamaz, delili savcılığa taşır.',
+        'USUL_BILGISI',
+      ),
+      missedEvidence(
+        'h_nobet',
+        'clue_nobet',
+        'Hastane kayıtlarını mahkemeden resmî yoldan isteseydin, arada nöbet defterinin 01.40 emanet kaydı gelirdi; bandın kâğıttaki karşılığını hemşireye tanıtabilirdin.',
+        'ARASTIRMA',
+      ),
+      missedEvidence(
+        'h_ev_hat',
+        'clue_ev_hat',
+        'Tarık’ın evindeki modem, hattın abonesini ve adresini gösteriyordu; bilirkişinin “sanığın kendisi de olabilir” cümlesini ancak sanığın kendi hattıyla karşılaştırarak daraltabilirdin.',
+        'ARASTIRMA',
+      ),
+      missedEvidence(
+        'h_ofis_hat',
+        'clue_ofis_hat',
+        'Ofis modemindeki sağlayıcı etiketi, tehdit adresinin ofisin hattı olmadığını gösteriyordu; sağlayıcı sorgusu ancak böyle somutlaşırdı.',
+        'ARASTIRMA',
+      ),
+      hint(
+        'h_gulay',
+        all(flag('fact_gulay'), not(flag('gulay_istendi'))),
+        'Onam formunun saatini yazan hemşireyi tanık olarak dinletmedin; kâğıdı yazan el kürsüde o kâğıdı tanımadıkça, savunmanın getirdiği fotokopi yarım konuşur (CMK 206).',
+        'USUL_BILGISI',
+      ),
+      hint(
+        'h_hesap_sun',
+        all(flag('hesap_istendi'), not(flag('hesap_sunuldu'))),
+        'Noter tespitli hesap dökümünü dosyaya sunmadın; dosyada olmayan bir kâğıtla ne tanık ne bilirkişi sorgulanır.',
         'USUL_BILGISI',
       ),
       hint(

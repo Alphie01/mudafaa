@@ -1,17 +1,4 @@
-import {
-  all,
-  always,
-  any,
-  because,
-  cmp,
-  flag,
-  has,
-  not,
-  outcome,
-  ref,
-  v,
-  xp,
-} from '../../../tools/content/src/kit/index.js';
+import { all, always, any, because, flag, has, not, outcome, ref, xp } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { B, W } from './dsl.js';
 

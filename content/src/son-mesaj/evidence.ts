@@ -237,7 +237,8 @@ export const evidencePart: CasePart = {
       type: 'BELGE',
       presentable: true,
       title: 'Nöbet defteri [01.40 · emanet]',
-      shortText: 'Acil servisin nöbet defteri: 9 Kasım 01.40, refakatçinin telefonu şarj istasyonunda emanet; 06.05 sahibine teslim.',
+      shortText:
+        'Acil servisin nöbet defteri: 9 Kasım 01.40, refakatçinin telefonu şarj istasyonunda emanet; 06.05 sahibine teslim.',
       description: 'Hastanenin mahkemeye gönderdiği resmî yazının eki; kayıt Hmş. G.T. parafıyla.',
       sourceLabel: 'Hastanenin resmî yazısı',
       icon: 'document',
@@ -245,7 +246,8 @@ export const evidencePart: CasePart = {
     clue('clue_rapor_cihaz', {
       type: 'ADLI_RAPOR',
       title: 'Bilirkişi raporu [Bulgu 1]',
-      shortText: 'Bilirkişi, gönderen cihaz 3’ün bağlı cihaz kaydındaki masaüstü oturumu olduğunu imajdan tespit etmiş.',
+      shortText:
+        'Bilirkişi, gönderen cihaz 3’ün bağlı cihaz kaydındaki masaüstü oturumu olduğunu imajdan tespit etmiş.',
       description: 'Dr. Uçar’ın raporu: Ek-3 sender_device = 3 → OFIS-LAPTOP-07 · PUSULA Masaüstü (Windows).',
       sourceLabel: 'Bilirkişi raporu',
       icon: 'document',

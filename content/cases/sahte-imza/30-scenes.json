@@ -1,0 +1,339 @@
+{
+  "assets": [
+    { "id": "img_matbaa", "kind": "IMAGE", "path": "assets/scenes/matbaa@4x.png" },
+    { "id": "img_hisar", "kind": "IMAGE", "path": "assets/scenes/hisar-evi@4x.png" },
+    { "id": "img_emlak", "kind": "IMAGE", "path": "assets/scenes/emlak-burosu@4x.png" }
+  ],
+  "scenes": [
+    {
+      "id": "sc_matbaa",
+      "title": "Ateş Matbaası · Kayhan",
+      "description": "Kurşun dizgi makinesi, lazer yazıcı, kesim masası ve kapının arkasındaki askı.",
+      "width": 344,
+      "height": 380,
+      "image": "img_matbaa",
+      "objects": [
+        {
+          "id": "ob_liste",
+          "name": "Numara çizelgesi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 18, "y": 70, "w": 46, "h": 60 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_tel_liste" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Kapının yanına raptiyelenmiş yağlı bir kâğıt: dükkânın altı numarası. Vedat, Sevgi, Tarık, Emre, kâğıtçı, kargo. Vedat’ın el yazısı; bir numaranın üstü iki kez düzeltilmiş.",
+            "short": "Numara çizelgesi"
+          }
+        },
+        {
+          "id": "ob_yazici",
+          "name": "Lazer yazıcı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 230, "y": 150, "w": 90, "h": 60 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_yazici" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Renkli lazer yazıcının ekranında iş günlüğü. Altı ayda gece yarısından sonra tek bir iş: 6 Şubat, 02.14, iki sayfa, 90 gram, renkli. Gönderen: MATBAA-PC.",
+            "short": "Gece 02.14 baskısı"
+          }
+        },
+        {
+          "id": "ob_takvim",
+          "name": "Duvar takvimi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 90, "y": 40, "w": 60, "h": 60 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_takvim" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
+          "feedback": {
+            "text": "Bir kâğıtçının promosyon takvimi. Şubat sayfası hâlâ duruyor; kimse çevirmemiş. 18 Şubat kutusunda kurşun kalemle: “Termal broşür · kargo 11.30”.",
+            "short": "Kargo 11.30"
+          }
+        },
+        {
+          "id": "ob_makas",
+          "name": "Kesim masası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 150, "y": 250, "w": 60, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_makas" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Ortak kesim masasındaki küçük giyotin makasının kolu sökülüp sol tarafa takılmış. Vidaların yanında taze çizikler. Dükkânda herkes bu masayı kullanıyor.",
+            "short": "Kolu solda bir makas"
+          }
+        },
+        {
+          "id": "ob_kase",
+          "name": "Kaşe makinesi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 260, "w": 70, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kase" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }
+          ],
+          "feedback": {
+            "text": "Polimer kaşe pozlama makinesi. Çekmecede esnaf kaşeleri: “Kayhan Börek”, “Nilüfer Kırtasiye”. Noter mührüne benzeyen bir kalıp yok. Savcının seveceği bir makine.",
+            "short": "Kaşe makinesi"
+          }
+        },
+        {
+          "id": "ob_aski",
+          "name": "Kapı arkası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 170, "w": 40, "h": 90 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_aski" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Kapının arkasında tek bir askı. Vedat’ın ceketi orada, iç cebi şişkin. Dükkâna giren herkes bu askının önünden geçiyor; ceketin cebi bir kol boyu uzakta.",
+            "short": "Ceket askısı"
+          }
+        },
+        {
+          "id": "ob_klasor",
+          "name": "İrsaliye klasörü",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 170, "y": 40, "w": 50, "h": 70 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_irsaliye", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Rafta “İRSALİYE 2026” yazılı bir klasör. Karbon nüshalar duruyor; polisin götürdüklerinin kopyaları da. Yakından incelenmeye değer. (Arşiv sekmesine eklendi.)",
+            "short": "İrsaliye klasörü"
+          }
+        },
+        {
+          "id": "ob_dizgi",
+          "name": "Kurşun dizgi makinesi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 70, "y": 280, "w": 70, "h": 80 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 },
+            {
+              "type": "MARK",
+              "quality": "NEUTRAL",
+              "feedback": "Elli yıllık bir makine; davayla ilgisi yok. Ama güzel."
+            }
+          ],
+          "feedback": {
+            "text": "1971 yapımı bir Heidelberg. Kurşun harfler, tıkırtı, yağ kokusu. Davayla ilgisi yok; ama Vedat’ın bütün hayatı bu makinenin sesinde.",
+            "short": "Dizgi makinesi"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_hisar",
+      "title": "Hisar · Hayriye Ateş’in evi",
+      "description": "Cumbalı, ahşap ev; şubattan beri boş.",
+      "width": 344,
+      "height": 380,
+      "image": "img_hisar",
+      "objects": [
+        {
+          "id": "ob_dosya",
+          "name": "Yazı masası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 230, "y": 230, "w": 80, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_bos_dosya" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
+          "feedback": {
+            "text": "Yazı masasının çekmecesinde elle “VEKÂLET” yazılmış bir karton dosya. Boş. Yanında banka dekontları, elektrik faturaları, bir 2023 noter makbuzu.",
+            "short": "Boş vekâlet dosyası"
+          }
+        },
+        {
+          "id": "ob_ruhsat",
+          "name": "Kapıdaki kâğıt",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 60, "w": 50, "h": 70 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ruhsat" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }
+          ],
+          "feedback": {
+            "text": "Kapının içine bantlanmış belediye tadilat izni: malik Erol Kılınç, 25 Şubat. Satıştan bir hafta sonra. Alıcı acele etmiş.",
+            "short": "Tadilat izni"
+          }
+        },
+        {
+          "id": "ob_aile",
+          "name": "Çerçeveli fotoğraf",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 140, "y": 60, "w": 60, "h": 50 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_aile_foto" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }
+          ],
+          "feedback": {
+            "text": "Bahçede bir aile: genç bir Hayriye, iki oğlu, bir kızı ve ön sırada yedi yaşlarında bir çocuk. Arkasında el yazısı: “Bayram 1992”. Herkes gülüyor; çocuk hariç.",
+            "short": "Aile fotoğrafı"
+          }
+        },
+        {
+          "id": "ob_defter",
+          "name": "Terzi defteri",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 120, "y": 250, "w": 70, "h": 50 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 20 },
+            {
+              "type": "MARK",
+              "quality": "NEUTRAL",
+              "feedback": "Hayriye Hanım’ın imzası özenli ve düzgün; ama bu dosyada tartışılan onun imzası değil."
+            }
+          ],
+          "feedback": {
+            "text": "Hayriye Hanım’ın ölçü defteri: kırk yılın müşterileri, boy, bel, kol. Son sayfalarda titreyen bir el, aynı adı tekrar tekrar yazmış: “Hayriye. Hayriye. Hayriye.”",
+            "short": "Ölçü defteri"
+          }
+        },
+        {
+          "id": "ob_kilit",
+          "name": "Yeni kilit",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 30, "y": 200, "w": 30, "h": 40 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 },
+            { "type": "MARK", "quality": "NEUTRAL", "feedback": "Kilidi alıcı değiştirmiş; zaten bilinen bir şey." }
+          ],
+          "feedback": {
+            "text": "Parlak, yeni bir kilit. İçeriden bakınca vidaları aceleyle sıkılmış. Alıcı değiştirmiş; Nermin Hanım da bundan anlamış satışı.",
+            "short": "Yeni kilit"
+          }
+        },
+        {
+          "id": "ob_cumba",
+          "name": "Cumba",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 40, "w": 80, "h": 120 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 },
+            {
+              "type": "MARK",
+              "quality": "NEUTRAL",
+              "feedback": "Bir dikiş makinesi ve bir perde. Hatıra, delil değil."
+            }
+          ],
+          "feedback": {
+            "text": "Cumbada üstü örtülü bir dikiş makinesi. Perde yarı açık; aşağıda Hisar’ın yokuşu. Hayriye Hanım kırk yıl buradan dünyayı izlemiş.",
+            "short": "Dikiş makinesi"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sc_emlak",
+      "title": "Kılınç Gayrimenkul · Setbaşı",
+      "description": "Erol Kılınç’ın bürosu; o telefondayken masasının üstü.",
+      "width": 344,
+      "height": 380,
+      "image": "img_emlak",
+      "objects": [
+        {
+          "id": "ob_masatakvim",
+          "name": "Masa takvimi",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 140, "y": 210, "w": 60, "h": 40 } }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_mahsup" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 },
+            { "type": "VAR", "var": "fact_mahsup", "op": "set", "value": true }
+          ],
+          "feedback": {
+            "text": "Masanın üstünde açık bir masa takvimi, şubat. 18 Şubat: “Hisar tapu 11.15 · T. · mahsup 1.400”. Mürekkep, sanki aceleyle yazılmış gibi bastırılmış.",
+            "short": "“T. · mahsup 1.400”"
+          }
+        },
+        {
+          "id": "ob_karbon",
+          "name": "Makbuz koçanı",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 220, "y": 220, "w": 70, "h": 40 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 },
+            {
+              "type": "MARK",
+              "quality": "GOOD",
+              "feedback": "Kapora makbuzunun karbonunda da aynı yavaş, sola yatık imza var.",
+              "category": "ARASTIRMA"
+            }
+          ],
+          "feedback": {
+            "text": "Kapora makbuzlarının koçanı. 9 Şubat’taki karbon nüshada “V. Ateş” imzası: yavaş, kalın, harfleri sola yatık. Bu imzayı irsaliyelerde de görmüştüm.",
+            "short": "Makbuz karbonu"
+          }
+        },
+        {
+          "id": "ob_senetler",
+          "name": "Senet dosyası",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 40, "y": 260, "w": 80, "h": 50 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 },
+            {
+              "type": "MARK",
+              "quality": "NEUTRAL",
+              "feedback": "Erol’un başka borçluları; bu dosyanın değil, belki başka bir dosyanın konusu."
+            }
+          ],
+          "feedback": {
+            "text": "Yarı açık bir dosyada bonolar: isimler, tarihler, faiz yazmayan tutarlar. Erol’un “emlakçılığı” geniş bir iş. Ama bu dosyanın sorusu bu değil.",
+            "short": "Bonolar"
+          }
+        },
+        {
+          "id": "ob_akvaryum",
+          "name": "Akvaryum",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 20, "y": 100, "w": 100, "h": 80 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 },
+            { "type": "MARK", "quality": "NEUTRAL", "feedback": "Bir balık. İfade vermiyor." }
+          ],
+          "feedback": {
+            "text": "Tek bir turuncu balık, büyük ve yavaş. Erol gibi; camın arkasından her şeyi izliyor ve hiçbir şey söylemiyor.",
+            "short": "Akvaryum"
+          }
+        },
+        {
+          "id": "ob_kasa",
+          "name": "Çelik kasa",
+          "marker": "HIDDEN",
+          "shapes": [{ "rect": { "x": 250, "y": 60, "w": 70, "h": 90 } }],
+          "effects": [
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": -10 },
+            { "type": "MARK", "quality": "NEUTRAL", "feedback": "Kilitli bir kasa. Açmak senin işin değil." }
+          ],
+          "feedback": {
+            "text": "Duvara gömülü çelik bir kasa. Kilitli. Avukatın elinin değmemesi gereken bir şey varsa, odur.",
+            "short": "Kasa"
+          }
+        }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "clue_tel_liste", "source": { "type": "OBJECT", "id": "ob_liste" } },
+    { "evidence": "clue_yazici", "source": { "type": "OBJECT", "id": "ob_yazici" } },
+    { "evidence": "clue_takvim", "source": { "type": "OBJECT", "id": "ob_takvim" } },
+    { "evidence": "clue_makas", "source": { "type": "OBJECT", "id": "ob_makas" } },
+    { "evidence": "clue_kase", "source": { "type": "OBJECT", "id": "ob_kase" } },
+    { "evidence": "clue_aski", "source": { "type": "OBJECT", "id": "ob_aski" } },
+    { "evidence": "clue_bos_dosya", "source": { "type": "OBJECT", "id": "ob_dosya" } },
+    { "evidence": "clue_ruhsat", "source": { "type": "OBJECT", "id": "ob_ruhsat" } },
+    { "evidence": "clue_aile_foto", "source": { "type": "OBJECT", "id": "ob_aile" } },
+    { "evidence": "clue_mahsup", "source": { "type": "OBJECT", "id": "ob_masatakvim" } }
+  ]
+}

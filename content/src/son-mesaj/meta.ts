@@ -11,7 +11,6 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { p1, p2 } from './shared.js';
-import { T_BERAAT, T_INDIRIM } from './thresholds.js';
 
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler.
 
@@ -77,11 +76,8 @@ export const meta: CasePart = {
       ],
       bonuses: [{ id: 'guven', label: 'Güvenilirlik bonusu ({{var.cred}})', value: { mul: [{ var: 'cred' }, 100] } }],
       scaleMax: 10000,
-      thresholdBar: thresholdBar([
-        ['Mahkûmiyet', 0, 'red'],
-        ['Kısmi', T_INDIRIM, 'amber'],
-        ['Beraat', T_BERAAT, 'green'],
-      ]),
+      // Hüküm skora bağlı değildir (sonuçlar tutanaktaki bulgulara bağlı); çubuk yalnızca savunma puanını gösterir.
+      thresholdBar: thresholdBar([['Savunma puanı', 0, 'amber']]),
       displayClampMin: 0,
     },
     objectionGrounds: [],
@@ -99,48 +95,31 @@ export const meta: CasePart = {
     { id: 'kart2', label: 'Tahtada en az 2 kart var', when: { cmp: [{ count: 'evidence', tag: 'kart' }, '>=', 2] } },
     {
       id: 'kaynak_suphesi',
-      label: 'Mesajların telefondan çıkmadığı gösterildi',
+      label: 'Tutanakta: mesajların telefondan çıkmadığı (tanık ya da bilirkişi ağzından)',
+      when: { any: [{ flag: 'contra_s3' }, { flag: 'bilirkisi_cihaz' }] },
+    },
+    {
+      id: 'bilirkisi_teyit',
+      label: 'Bilirkişi, raporunu okuyan savunmanın sorusuyla bulguyu teyit etti',
+      when: { any: [{ flag: 'bilirkisi_cihaz' }, { flag: 'bilirkisi_kilit' }] },
+    },
+    {
+      id: 'alibi_kayit',
+      label: 'Tutanakta: 9 Kasım gecesi telefon kilitli, sanık acil serviste (bilirkişi, bağımsız saat ve hemşire)',
       when: {
-        any: [{ flag: 'contra_s3' }, { all: [{ flag: 'bilirkisi_cihaz' }, { hasEvidence: 'ded_bagli' }] }],
+        all: [
+          { flag: 'bilirkisi_kilit' },
+          { flag: 'hayri_saat' },
+          { flag: 'gulay_teyit' },
+          { flag: 'onam_teyit' },
+          { flag: 'bant_teyit' },
+        ],
       },
     },
     {
-      id: 'ek_supheler',
-      label: 'Destekleyen şüpheler (en az 2)',
-      when: {
-        cmp: [
-          {
-            add: [
-              { if: { when: { any: [{ flag: 'ss_excluded' }, { flag: 'bilirkisi_ss' }] }, then: 1, else: 0 } },
-              {
-                if: {
-                  when: { any: [{ flag: 'contra_s2' }, { flag: 'contra_s4' }, { flag: 'bilirkisi_zincir' }] },
-                  then: 1,
-                  else: 0,
-                },
-              },
-              {
-                if: {
-                  when: {
-                    any: [
-                      { flag: 'hayri_saat' },
-                      { flag: 'fact_hayri_saat' },
-                      { flag: 'bilirkisi_kilit' },
-                      { flag: 'kilit_mahkemede' },
-                    ],
-                  },
-                  then: 1,
-                  else: 0,
-                },
-              },
-              { if: { when: { flag: 'pay_cevap' }, then: 1, else: 0 } },
-              { if: { when: { any: [{ flag: 'contra_s1' }, { flag: 'bilirkisi_el' }] }, then: 1, else: 0 } },
-            ],
-          },
-          '>=',
-          2,
-        ],
-      },
+      id: 'hat_kayit',
+      label: 'Tutanakta: tehdit oturumlarının hattı sanığın değil, tanığın firmasının',
+      when: { all: [{ flag: 'bilirkisi_hat' }, { flag: 'contra_o3' }] },
     },
     {
       id: 'ozan_dayanak',
@@ -152,11 +131,6 @@ export const meta: CasePart = {
           { any: [{ hasEvidence: 'ev_isp' }, { hasEvidence: 'ded_ip_tekin' }] },
         ],
       },
-    },
-    {
-      id: 'bilirkisi_teyit',
-      label: 'Bilirkişi, raporunu okuyan savunmanın sorusuyla bulguyu teyit etti',
-      when: { any: [{ flag: 'bilirkisi_cihaz' }, { flag: 'bilirkisi_kilit' }] },
     },
     {
       id: 'ara_ilerleme',
@@ -191,13 +165,14 @@ export const meta: CasePart = {
     meter('taps2', 'Büyüteç', 'counter', 6, 6, { lowAt: 1, resource: true }),
     meter('taps3', 'Büyüteç', 'counter', 6, 6, { lowAt: 1, resource: true }),
     meter('ex1', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 2, resource: true }),
-    meter('ex2', 'Deneme hakkı', 'counter', 8, 8, { lowAt: 2, resource: true }),
-    meter('ex3', 'Deneme hakkı', 'counter', 6, 6, { lowAt: 2, resource: true }),
-    meter('ex3b', 'Deneme hakkı', 'counter', 6, 6, { lowAt: 2, resource: true }),
+    meter('ex2', 'Deneme hakkı', 'counter', 10, 10, { lowAt: 2, resource: true }),
+    meter('ex3', 'Deneme hakkı', 'counter', 9, 9, { lowAt: 2, resource: true }),
+    meter('ex3b', 'Deneme hakkı', 'counter', 9, 9, { lowAt: 2, resource: true }),
     meter('ex4', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('ex5', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 2, resource: true }),
     meter('ex6', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 2, resource: true }),
     meter('ex7', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
+    meter('ex8', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('slots', 'Talep hakkı', 'counter', 3, 3),
     meter('slots2', 'Talep hakkı', 'counter', 3, 3),
     meter('noktalar', 'Dayanak', 'counter', 3, 3),
@@ -218,7 +193,6 @@ export const meta: CasePart = {
       'fact_rizasiz',
       'fact_sifre',
       'fact_pay_sert',
-      'fact_hesap_fikri',
       'fact_ece',
       'fact_gulay',
       'fact_hayri_saat',
@@ -261,6 +235,31 @@ export const meta: CasePart = {
       'bilirkisi_ss',
       'bilirkisi_zincir',
       'bilirkisi_el',
+      'bilirkisi_hat',
+      'gulay_teyit',
+      'bant_teyit',
+      'onam_teyit',
+      'bilirkisi_gece',
+      'hesap_sunuldu',
+      'gulay_hazir',
+      'fact_onam_saat',
+      'ek3_c5',
+      'ek3_c6',
+      'ek3_c7',
+      'ek3_c8',
+      'ip_6',
+      'ip_9',
+      'ip_12',
+      'ip_ev',
+      'aip_6',
+      'aip_9',
+      'aip_12',
+      'aip_ev',
+      'press_g2',
+      'press_b4',
+      'press_g3',
+      'gulay_istendi',
+      'fact_hesap_onay',
       'hayri_saat',
       'hayri_dinlendi',
       'press_o1',

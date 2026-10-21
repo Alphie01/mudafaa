@@ -1,24 +1,54 @@
 import {
+  all,
   back,
   choiceNode,
   cmp,
   deductionBoard,
   documentExam,
   flag,
+  has,
   option,
   raise,
   row,
   story,
   tool,
   v,
+  visited,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, ChoiceDef, NodeDef } from '../../../tools/content/src/kit/index.js';
 import { B } from './dsl.js';
-import { boardMiss, docMiss, hit, rec } from './helpers.js';
+import { boardMiss, docMiss, hit, rec, stepHit, stepPaths } from './helpers.js';
 import { C2 } from './shared.js';
 
 // 54-inv-arsiv: dosyanın kâğıtları. Ön inceleme tutanağı, adli kopya raporu (Ek-3), hesap verisi (indir → ertesi gün),
 // hastane kayıtları, talepler ve çıkarım tahtası.
+
+const EK3 = ['ek3_c5', 'ek3_c6', 'ek3_c7', 'ek3_c8'];
+const EK3_DONE =
+  'Dört satır yan yana: Tarık’ın kendi mesajı cihaz 0; üç tehdit ve iletilen ses kaydı cihaz 3. Aynı hesap, başka bir cihaz. Bütün dava bu tek rakamda saklıymış.';
+const ipGroup = (p: string) => {
+  const f = p.toLowerCase();
+  return [`${f}ip_6`, `${f}ip_9`, `${f}ip_12`, `${f}ip_ev`];
+};
+const IP_DONE =
+  'Üç gecenin üçünde cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.';
+/** Adımlı ipuçlarının bulunma yolları (koşullu DISCOVER). */
+export const stepDiscoveryPaths = [
+  ...stepPaths('clue_cihaz3', [
+    ['EX_I_C5', 'ek3_c5'],
+    ['EX_I_C6', 'ek3_c6'],
+    ['EX_I_C7', 'ek3_c7'],
+    ['EX_I_C8', 'ek3_c8'],
+  ]),
+  ...['', 'A'].flatMap((p) =>
+    stepPaths('clue_ip_ayni', [
+      [`${p}EX_IP1`, `${p.toLowerCase()}ip_6`],
+      [`${p}EX_IP2`, `${p.toLowerCase()}ip_9`],
+      [`${p}EX_IP3`, `${p.toLowerCase()}ip_12`],
+      [`${p}EX_EV`, `${p.toLowerCase()}ip_ev`],
+    ]),
+  ),
+];
 
 const MAG = tool('mag', 'Büyüteç', 'magnifier');
 const CMP = tool('cmp', 'Karşılaştır', 'compare');
@@ -75,24 +105,53 @@ export function hesapDoc(id: string, prefix: string, costVar: string, chapterSpr
         'YENİ İPUCU',
         'Cihaz 2, ofisin tableti. Oturum 3 Kasım 18.02’de kapanmış. İlk mesajdan üç gün önce. Bu tablet o gecelerde hiçbir şey göndermedi.',
       ),
-      hit(
+      stepHit(
         `${prefix}EX_IP1`,
         'cmp',
         `${prefix}h4`,
+        `${prefix.toLowerCase()}ip_6`,
+        ipGroup(prefix),
         'clue_ip_ayni',
         150,
-        'YENİ İPUCU',
-        'Üç gecenin üçünde de cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.',
+        '6 KASIM',
+        'İlk tehdit gecesi cihaz 3 çevrimiçi: 85.105.44.17. Bir adres. Öbür gecelerde de aynı mı?',
+        IP_DONE,
       ),
-      hit(`${prefix}EX_IP2`, 'cmp', `${prefix}h5`, 'clue_ip_ayni', 0, 'AYNI ADRES', '9 Kasım: 85.105.44.17. Yine.'),
-      hit(
+      stepHit(
+        `${prefix}EX_IP2`,
+        'cmp',
+        `${prefix}h5`,
+        `${prefix.toLowerCase()}ip_9`,
+        ipGroup(prefix),
+        'clue_ip_ayni',
+        150,
+        '9 KASIM',
+        'Ses kaydı gecesi: 85.105.44.17. Yine.',
+        IP_DONE,
+      ),
+      stepHit(
         `${prefix}EX_IP3`,
         'cmp',
         `${prefix}h6`,
+        `${prefix.toLowerCase()}ip_12`,
+        ipGroup(prefix),
         'clue_ip_ayni',
-        0,
-        'AYNI ADRES',
-        '12 Kasım: 85.105.44.17. Üçüncü kez.',
+        150,
+        '12 KASIM',
+        '“Son mesajım” gecesi: 85.105.44.17. Üçüncü kez.',
+        IP_DONE,
+      ),
+      stepHit(
+        `${prefix}EX_EV`,
+        'cmp',
+        `${prefix}h8`,
+        `${prefix.toLowerCase()}ip_ev`,
+        ipGroup(prefix),
+        'clue_ip_ayni',
+        150,
+        'EV HATTI',
+        'Cihaz 0, Tarık’ın telefonu, evden bağlanıyor: 176.88.12.4. Kendi telefonu. Başka bir hat.',
+        IP_DONE,
       ),
       hit(
         `${prefix}EX_ARSIV`,
@@ -102,15 +161,6 @@ export function hesapDoc(id: string, prefix: string, costVar: string, chapterSpr
         100,
         'YENİ İPUCU',
         '6 Kasım 02.13: ilk tehditten iki dakika sonra sohbet arşivlenmiş, cihaz 3’ten. Arşiv, sohbeti listeden gizler. Sahibi kendi mesajını neden gizlesin? Gizleyen, hesabı kullanan biri.',
-      ),
-      hit(
-        `${prefix}EX_EV`,
-        'cmp',
-        `${prefix}h8`,
-        undefined,
-        0,
-        'EV HATTI',
-        'Cihaz 0, Tarık’ın telefonu, evden bağlanıyor: 176.88.12.4. Kendi telefonu. Kendi evi. Başka bir hat.',
       ),
     ],
     miss: docMiss(`${prefix}FB_HESAP`),
@@ -149,22 +199,22 @@ export function baseRecipes(prefix: string): ChoiceDef[] {
       'Ek-3’teki “cihaz 3”, hesaba bağlı OFIS-LAPTOP-07. Tehditler ve iletilen ses kaydı telefondan değil, o masaüstü oturumundan çıktı.',
     ),
     rec(
-      `${prefix}CB_HAST1`,
+      `${prefix}CB_HAST2`,
       'clue_kilit',
+      'clue_sarj',
+      'ded_sarj',
+      150,
+      'Şarjdaki telefon',
+      'Ek-2’deki kilit olayı ile hemşire masasındaki bant aynı saati söylüyor: 01.40. Telefon gece boyunca şarjda, kilitli. Peki ya Tarık? O saatlerde ne yapıyordu, kim yazdı?',
+    ),
+    rec(
+      `${prefix}CB_HAST1`,
+      'ded_sarj',
       'clue_onam',
       'ded_hastane',
       300,
       '02.14’te acil serviste',
-      'Telefon 01.40’tan 06.10’a kadar kilitli; Tarık 02.10’da onam formu imzalıyor. Ses kaydını o telefondan, o eller iletmedi.',
-    ),
-    rec(
-      `${prefix}CB_HAST2`,
-      'clue_kilit',
-      'clue_sarj',
-      'ded_hastane',
-      300,
-      'Şarjdaki telefon',
-      'Kilit kaydı ile hemşire masasındaki bant aynı saati söylüyor: 01.40. Telefon gece boyunca şarjda, kilitli.',
+      'Telefon 01.40’tan 06.10’a kadar kilitli, hemşire masasında; Tarık 02.10’da onam formu imzalıyor, saati hemşire yazmış. Ses kaydını o telefondan, o eller iletmedi.',
     ),
     rec(
       `${prefix}CB_USLUP`,
@@ -211,6 +261,8 @@ const POOL = [
   'clue_arsiv',
   'clue_onam',
   'clue_sarj',
+  'ded_sarj',
+  'clue_ofis_hat',
   'clue_kamera_h',
   'clue_dock',
   'ev_not',
@@ -221,6 +273,7 @@ const POOL = [
 export const BOARD_POOL = POOL;
 
 export const invArsiv: CasePart = {
+  discoveryPaths: stepDiscoveryPaths,
   nodes: [
     hesapDoc('INV_HESAP', '', 'ex3', C2),
     documentExam('INV_TUTANAK', {
@@ -393,41 +446,53 @@ export const invArsiv: CasePart = {
           'YENİ İPUCU',
           '9 Kasım: telefon 01.40’ta kilitlenmiş, 06.10’a kadar hiç açılmamış. Oysa 02.14’te bu hesaptan Hayri Sezer’e ses kaydı gitmiş. Kilitli telefondan ileti çıkmaz; başka bir cihazdan çıkar.',
         ),
-        hit(
-          'EX_I_C6',
-          'cmp',
-          'i6',
-          'clue_cihaz3',
-          150,
-          'YENİ İPUCU',
-          '“bkz.” yazan hücre açıldı, ham veri döküldü: sender_device = 3. Tarık’ın 25 Ekim’deki kendi mesajında bu değer 0. Aynı hesap, farklı cihaz. Bütün dava bu tek rakamda saklıymış.',
-        ),
-        hit(
-          'EX_I_C7',
-          'cmp',
-          'i7',
-          'clue_cihaz3',
-          0,
-          'CİHAZ 3',
-          'İletilen ses kaydı da cihaz 3’ten çıkmış. Tarık’ın telefonu değil; başka bir cihaz, aynı hesaba bağlı.',
-        ),
-        hit(
-          'EX_I_C8',
-          'cmp',
-          'i8',
-          'clue_cihaz3',
-          0,
-          'CİHAZ 3',
-          '“Son mesajım.” Yine cihaz 3. Üç tehdidin üçü de aynı yerden: bir masaüstü oturumundan, bir telefondan değil.',
-        ),
-        hit(
+        stepHit(
           'EX_I_C5',
           'cmp',
           'i5',
-          undefined,
-          0,
+          'ek3_c5',
+          EK3,
+          'clue_cihaz3',
+          150,
           'CİHAZ 0',
-          'Tarık’ın 25 Ekim mesajları: cihaz 0. Telefonun kendisi. Sert sözler, ama kendi elinden.',
+          '“bkz.” yazan hücre açıldı: Tarık’ın 25 Ekim mesajı, sender_device = 0. Telefonun kendisi. Sert sözler, ama kendi elinden. Ölçü bu; tehditler aynı ölçüyü tutuyor mu?',
+          EK3_DONE,
+        ),
+        stepHit(
+          'EX_I_C6',
+          'cmp',
+          'i6',
+          'ek3_c6',
+          EK3,
+          'clue_cihaz3',
+          150,
+          'İLK TEHDİT',
+          '6 Kasım 02.11: ham veri döküldü, sender_device = 3. Aynı hesap, başka bir rakam. Tek bir satır bir tesadüf olabilir; öbür tehditlere de bak.',
+          EK3_DONE,
+        ),
+        stepHit(
+          'EX_I_C7',
+          'cmp',
+          'i7',
+          'ek3_c7',
+          EK3,
+          'clue_cihaz3',
+          150,
+          'SES KAYDI',
+          '9 Kasım 02.14: iletilen ses kaydı. sender_device = 3. Telefon numarası değil, bir cihaz sırası.',
+          EK3_DONE,
+        ),
+        stepHit(
+          'EX_I_C8',
+          'cmp',
+          'i8',
+          'ek3_c8',
+          EK3,
+          'clue_cihaz3',
+          150,
+          'SON MESAJ',
+          '12 Kasım 02.19, “Son mesajım.” sender_device = 3.',
+          EK3_DONE,
         ),
         hit(
           'EX_I_U6',
@@ -506,6 +571,9 @@ export const invArsiv: CasePart = {
         # DEVLET HASTANESİ · HASTA HAKLARI BİRİMİ — 11.40 |bg=hastane
         > Necati Aksoy koroner yoğun bakımdan çıkalı iki ay olmuş. Titrek bir imzayla muvafakatname verdi; Tarık evrakı kendisi aldı.
         tarik: Babam “Ne istiyorlarsa verin, oğlum o gece buradaydı” dedi. Hemşireye de selam söyledi.
+        > Birimdeki memur dosyayı arşivden getirdi, her sayfayı tek tek damgaladı: “Aslı gibidir.” Tarık, babasının adının yazdığı kapağa uzun uzun baktı.
+        tarik: O gece bu kâğıtların hiçbirini okumadım. İmzala dediler, imzaladım. Bir onam, bir ilaç, bir yatış. Babam yaşasın diye.
+        ~ Bir hasta yakınının en dalgın imzası, bir avukatın en sağlam saati olabilir. Yeter ki saati yazan el, kâğıdın altında dursun.
         > Bir epikriz, bir müdahale çizelgesi, bir onam formu. Hepsinin altında saat.
       `),
       choices: [{ id: 'HKG_DEVAM', kind: 'CONTINUE', label: 'Kayıtları incele', next: 'INV_HKAYIT' }],
@@ -562,11 +630,13 @@ export const invArsiv: CasePart = {
       lines: B(`
         > Duruşmadan önce mahkemeye bir dilekçe. Delil ve bilirkişi talepleri; üç başlık, fazlası okunmaz.
         leyla: Hâkim her talebe “neden?” diye bakar Deniz. “Neden”i olmayan talep, olanı da gölgeler.
+        leyla: Bir de şunu unutma: senin panonda duran kâğıt, dosyaya girmedikçe yoktur. Elindekini ekle; bilirkişi de hâkim de yalnızca dosyayı okur.
       `),
       prompt: 'Dilekçeye ne yazacaksın?',
       choices: [
         option('DIL_BILIRKISI', 'Bağımsız adli bilişim bilirkişisi; imajın bir kopyasının bize verilmesi', {
           cost: [{ var: 'slots', amount: 1 }],
+          visibleWhen: has('clue_cihaz3'),
           score: { USUL_BILGISI: 30 },
           effects: [raise('bilirkisi_istendi')],
           good: 'Yerinde: kolluk raporunun ekleri yorumlanmamış; teknik konularda mahkeme bilirkişi atar (CMK 63/1), taraflar da inceleme isteyebilir. Yedekten bir kopya şüpheliye veya vekiline verilir (CMK 134/5).',
@@ -584,10 +654,19 @@ export const invArsiv: CasePart = {
         }),
         option('DIL_HAYRI', 'Hayri Sezer’in tanık olarak dinlenmesi', {
           cost: [{ var: 'slots', amount: 1 }],
+          visibleWhen: flag('fact_hayri_saat'),
           score: { USUL_BILGISI: 20 },
           effects: [raise('hayri_istendi')],
           good: 'Ses kaydının alıcısı olay saatine dair doğrudan bilgi sahibidir; tanık olarak dinlenmesi istenebilir.',
           responses: B(`~ Hayri Bey. Telefonunda bir bildirim. Bir saat.`),
+          next: '$stay',
+        }),
+        option('DIL_HESAP', 'Ek: noter tespitli hesap verisi ve hash değeri', {
+          visibleWhen: all(has('ev_hesap'), visited('INV_HESAP')),
+          score: { USUL_BILGISI: 20 },
+          effects: [raise('hesap_sunuldu')],
+          good: 'Savunmanın elde ettiği delil dosyaya sunulmadıkça tartışılamaz; noter tespiti ve hash değeriyle sunulan döküm, bilirkişinin de önüne gider (CMK 206, 178).',
+          responses: B(`~ Noterin mühürlü zarfı, hash değeriyle birlikte dilekçenin ekine. Artık bu döküm yalnızca benim panomda değil, dosyada.`),
           next: '$stay',
         }),
         option('DIL_KATILAN', 'Katılanın telefonunun da incelenmesi', {
@@ -601,7 +680,6 @@ export const invArsiv: CasePart = {
         }),
         option('DIL_PLATFORM', 'Uygulama şirketinden yazışma ve oturum kayıtları', {
           cost: [{ var: 'slots', amount: 1 }],
-          effects: [raise('fact_hesap_fikri')],
           neutral:
             'Yurt dışındaki bir şirketten kayıt istemek uluslararası adli yardım ister; aylar sürer. Oysa hesap sahibi kendi oturum geçmişini kendisi indirebilir.',
           responses: B(`leyla: Aylar. Duruşmaya on iki gün var. Hesap kimin Deniz? Sahibi istese?`),

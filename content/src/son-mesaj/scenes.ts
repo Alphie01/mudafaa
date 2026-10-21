@@ -61,8 +61,9 @@ export const scenes: CasePart = {
           short: 'Han planı',
         }),
         sceneObject('ob_modem', 'Modem', OB_MODEM, {
-          score: { ARASTIRMA: 10 },
-          text: 'Ofisin modemi. Altındaki şifre etiketi tırnakla kazınmış. Kimse şifreyi etikete bakarak öğrenmesin diye. Ama şifre zaten herkesin dilinde.',
+          discovers: 'clue_ofis_hat',
+          score: { ARASTIRMA: 40 },
+          text: 'Ofisin modemi. Şifre etiketi tırnakla kazınmış, ama yanındaki sağlayıcı etiketi duruyor: “Aksoy Tekin Mimarlık · sabit adres 78.186.20.9”. Bir hattın da bir adresi vardır; bu, hanın adresi.',
           short: 'Ofis modemi',
         }),
       ],
@@ -78,7 +79,7 @@ export const scenes: CasePart = {
         sceneObject('ob_sarj', 'Hemşire masası', OB_SARJ, {
           discovers: 'clue_sarj',
           score: { ARASTIRMA: 60 },
-          text: 'Hemşire masasında altı ağızlı bir şarj istasyonu; her kabloda isim ve saat yazılı bir bant. Duvarda kural: “Emanet telefona isim ve saat yazılır.” İnsanlar unutur, bantlar unutmaz.',
+          text: 'Hemşire masasında altı ağızlı bir şarj istasyonu; her kabloda isim ve saat yazılı bir bant. Duvarda kural: “Emanet telefona isim ve saat yazılır; deftere işlenir.” İnsanlar unutur, bantlar unutmaz; defterler hiç.',
           short: 'Şarj istasyonu',
         }),
         sceneObject('ob_kamera', 'Koridor kamerası', OB_KAMERA, {
@@ -118,8 +119,9 @@ export const scenes: CasePart = {
           short: 'Mart kolisi',
         }),
         sceneObject('ob_evmodem', 'Ev modemi', OB_EVMODEM, {
-          score: { ARASTIRMA: 20 },
-          text: 'Evin modemi. Yönetim ekranında hattın adresi: 176.88.12.4. Tarık’ın evi. Kasım gecelerinin adresi bu değildi; olsaydı savcı çoktan sorardı.',
+          discovers: 'clue_ev_hat',
+          score: { ARASTIRMA: 60 },
+          text: 'Evin modemi. Yönetim ekranında abone adı “T. Aksoy” ve hattın adresi: 176.88.12.4. Tarık’ın telefonu evde bu hattan bağlanır. Bir adresin sahibini sözleşme söyler, tahmin değil.',
           short: 'Ev modemi',
         }),
         sceneObject('ob_tablet', 'Eski tablet', OB_TABLET, {

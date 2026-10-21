@@ -223,7 +223,7 @@ export const invInsanlar: CasePart = {
           visibleWhen: has('clue_cihaz3'),
           cost: costOf('min', 3),
           score: { SORGULAMA: 30 },
-          effects: [raise('fact_hesap_fikri')],
+          effects: [raise('fact_hesap_onay')],
           tones: {
             soft: {
               prompt: 'Raporun ekinde “cihaz 3” diye bir kayıt var. Ne olabilir?',
@@ -395,6 +395,7 @@ export const invInsanlar: CasePart = {
         > Florasan ışık her şeyi aynı solgun renge boyuyor: sedyeleri, duvarları, bekleyenlerin yüzlerini. Bir kokteyl: dezenfektan, soğuk çay, yorgunluk.
         ~ Tarık bir kasım gecesi tam burada oturdu. Babası arkadaki perdenin ardında, monitöre bağlı. O önünde, bir plastik sandalyede, sabahı bekliyordu.
         ~ Soru basit: o beklerken telefonu neredeydi? Cebinde mi, elinde mi, yoksa başka bir yerde mi? Bu hastane her şeyin saatini yazar; belki bunun da yazmıştır.
+        > Hemşire masasının arkasında bir pano: nöbet listesi, bir ilaç çizelgesi, kenarına raptiyeyle tutturulmuş bir kural kâğıdı. Her şey yazılı. Burada hiçbir şey hafızaya bırakılmıyor.
         > Sahnede dikkatini çeken yerlere dokun.
       `),
       choices: [{ id: 'HAST_BASLA', kind: 'CONTINUE', label: 'Acil servise bak', next: 'INV_ARAMA_HASTANE' }],
@@ -423,6 +424,8 @@ export const invInsanlar: CasePart = {
         gulay: Avukat mısınız? Gece üçte avukat. Hayırdır. Kim öldü?
         P: Kimse. Kasımda bir gece, bir hastanın oğlu. Tarık Aksoy. Necati Aksoy’un oğlu.
         gulay: Necati Bey. Ritim. Hatırlıyorum, kalp hastası unutulmaz. Oğlu da… mimar mıydı neydi.
+        > Masanın kenarında, kabloların arasında, yeni bantlar kesilmeyi bekliyordu. Her birinin üstüne bir isim, bir saat yazılacaktı; bu gece de, her gece olduğu gibi.
+        ~ Bir hemşire tanığa benzemez. Bir tanık hatırlar; bir hemşire yazar. Benim aradığım, hatırlanan değil, yazılan.
       `),
       choices: [
         option('GUL_TEL', 'O gece telefonunu nerede bıraktığını hatırlıyor musunuz?', {
@@ -436,16 +439,20 @@ export const invInsanlar: CasePart = {
         }),
         option('GUL_ONAM', 'Onam formunun saatini kim yazar?', {
           score: { SORGULAMA: 20 },
+          effects: [raise('fact_onam_saat')],
           responses: B(`
             gulay: Biz yazarız. Hasta yakını imzalar, saati biz yazarız, altına bir de biz imza atarız. Mahkemelik olur diye.
-            gulay: Bakın, mahkemelik oldu işte.
+            gulay: Bakın, mahkemelik oldu işte. Kâğıt isterseniz hasta hakları birimi verir; babası izin yazarsa. O geceki formun saatini de ben yazdım.
+            ~ Bir bant, bir saat, bir imza. Kayıtları istemenin vakti geldi; bir kez babasının izniyle, bir kez de mahkemenin eliyle. Aynı kâğıt iki ayrı yoldan gelince, kimse onu “savunmanın kâğıdı” diye kenara itemez.
           `),
         }),
         option('GUL_TANIK', 'Gerekirse mahkemede bunu anlatır mısınız?', {
+          effects: [raise('gulay_hazir')],
           neutral:
             'Tanığa ne söyleyeceğini değil, ne gördüğünü sormak doğru yoldur; çağrılırsa tanık kendi bildiğini anlatır.',
           responses: B(`
             gulay: Çağırırlarsa gelirim. Nöbetim yoksa. Gördüğümü söylerim, gördüğümden fazlasını değil.
+            gulay: Yirmi iki yıldır bu masadayım. Kaç kere mahkemeye çağrıldım, biliyor musunuz? İki. İkisinde de bana sorulan bir saatti. İkisinde de saat bendeydi; kâğıtta.
             gulay: Ama bakın: o bandı da, o saati de ben yazdım, imzam altında. Mahkeme kayıtları isterse, benim sözüm zaten o kâğıtta.
             ~ İyi. Gördüğünden fazlasını söyleyen tanık, gördüğünü de yaktırır. Ve imzalı bir kâğıt, tanık kürsüsüne çıkmadan da konuşur.
           `),
@@ -483,6 +490,7 @@ export const invInsanlar: CasePart = {
             > Cebinden eski bir telefon çıkardı, gözlüğünü alnından burnuna indirdi, ekranı bana çevirdi.
             hayri: Bakın. 9 Kasım. 02.14. Uyuyordum, sesine uyandım. Bizim yaşta gece gelen mesaj kötü haberdir; açtım.
             hayri: Silmedim bildirimi. Savcılık sordu, gösterdim. Saati yazdılar mı bilmem.
+            ~ Bir telefonun saati, başka bir telefonun içinde. Tarık’ın telefonu bir çekmecede, imajı bir raporda; ama bu saat, kimsenin dokunmadığı yaşlı bir adamın cebinde duruyor.
           `),
         }),
         option('HAY_DINLEDI', 'Kaydı dinlediniz mi?', {

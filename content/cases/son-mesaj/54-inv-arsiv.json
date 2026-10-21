@@ -1,4 +1,89 @@
 {
+  "discoveryPaths": [
+    {
+      "evidence": "clue_cihaz3",
+      "source": { "type": "RULE", "id": "EX_I_C5" },
+      "requires": { "all": [{ "flag": "ek3_c6" }, { "flag": "ek3_c7" }, { "flag": "ek3_c8" }] }
+    },
+    {
+      "evidence": "clue_cihaz3",
+      "source": { "type": "RULE", "id": "EX_I_C6" },
+      "requires": { "all": [{ "flag": "ek3_c5" }, { "flag": "ek3_c7" }, { "flag": "ek3_c8" }] }
+    },
+    {
+      "evidence": "clue_cihaz3",
+      "source": { "type": "RULE", "id": "EX_I_C7" },
+      "requires": { "all": [{ "flag": "ek3_c5" }, { "flag": "ek3_c6" }, { "flag": "ek3_c8" }] }
+    },
+    {
+      "evidence": "clue_cihaz3",
+      "source": { "type": "RULE", "id": "EX_I_C8" },
+      "requires": { "all": [{ "flag": "ek3_c5" }, { "flag": "ek3_c6" }, { "flag": "ek3_c7" }] }
+    },
+    {
+      "evidence": "clue_ip_ayni",
+      "source": { "type": "RULE", "id": "EX_IP1" },
+      "requires": { "all": [{ "flag": "ip_9" }, { "flag": "ip_12" }, { "flag": "ip_ev" }] }
+    },
+    {
+      "evidence": "clue_ip_ayni",
+      "source": { "type": "RULE", "id": "EX_IP2" },
+      "requires": { "all": [{ "flag": "ip_6" }, { "flag": "ip_12" }, { "flag": "ip_ev" }] }
+    },
+    {
+      "evidence": "clue_ip_ayni",
+      "source": { "type": "RULE", "id": "EX_IP3" },
+      "requires": { "all": [{ "flag": "ip_6" }, { "flag": "ip_9" }, { "flag": "ip_ev" }] }
+    },
+    {
+      "evidence": "clue_ip_ayni",
+      "source": { "type": "RULE", "id": "EX_EV" },
+      "requires": { "all": [{ "flag": "ip_6" }, { "flag": "ip_9" }, { "flag": "ip_12" }] }
+    },
+    {
+      "evidence": "clue_ip_ayni",
+      "source": { "type": "RULE", "id": "AEX_IP1" },
+      "requires": { "all": [{ "flag": "aip_9" }, { "flag": "aip_12" }, { "flag": "aip_ev" }] }
+    },
+    {
+      "evidence": "clue_ip_ayni",
+      "source": { "type": "RULE", "id": "AEX_IP2" },
+      "requires": { "all": [{ "flag": "aip_6" }, { "flag": "aip_12" }, { "flag": "aip_ev" }] }
+    },
+    {
+      "evidence": "clue_ip_ayni",
+      "source": { "type": "RULE", "id": "AEX_IP3" },
+      "requires": { "all": [{ "flag": "aip_6" }, { "flag": "aip_9" }, { "flag": "aip_ev" }] }
+    },
+    {
+      "evidence": "clue_ip_ayni",
+      "source": { "type": "RULE", "id": "AEX_EV" },
+      "requires": { "all": [{ "flag": "aip_6" }, { "flag": "aip_9" }, { "flag": "aip_12" }] }
+    },
+    { "evidence": "clue_bagli_cihaz", "source": { "type": "RULE", "id": "EX_C3" } },
+    { "evidence": "clue_tablet_kapali", "source": { "type": "RULE", "id": "EX_C2" } },
+    { "evidence": "clue_arsiv", "source": { "type": "RULE", "id": "EX_ARSIV" } },
+    { "evidence": "clue_imza_yok", "source": { "type": "RULE", "id": "EX_T_IMZA" } },
+    { "evidence": "clue_muhur_yok", "source": { "type": "RULE", "id": "EX_T_MUHUR" } },
+    { "evidence": "clue_ss_karar", "source": { "type": "RULE", "id": "EX_T_SAAT" } },
+    { "evidence": "clue_ss_karar", "source": { "type": "RULE", "id": "EX_T_SAAT2" } },
+    { "evidence": "clue_son_erisim", "source": { "type": "RULE", "id": "EX_I_SON" } },
+    { "evidence": "clue_kilit", "source": { "type": "RULE", "id": "EX_I_KILIT" } },
+    { "evidence": "clue_uslup_tehdit", "source": { "type": "RULE", "id": "EX_I_U6" } },
+    { "evidence": "clue_uslup_tarik", "source": { "type": "RULE", "id": "EX_I_U5" } },
+    { "evidence": "ev_hesap", "source": { "type": "CHOICE", "id": "HI_NOTER" } },
+    { "evidence": "ev_hastane", "source": { "type": "NODE", "id": "INV_HKAYIT_GIRIS" } },
+    { "evidence": "clue_onam", "source": { "type": "RULE", "id": "EX_K_ONAM" } },
+    { "evidence": "clue_onam", "source": { "type": "RULE", "id": "EX_K_ONAM2" } },
+    { "evidence": "ded_ss", "source": { "type": "RULE", "id": "CB_SS" } },
+    { "evidence": "ded_zincir", "source": { "type": "RULE", "id": "CB_ZINCIR" } },
+    { "evidence": "ded_bagli", "source": { "type": "RULE", "id": "CB_BAGLI" } },
+    { "evidence": "ded_sarj", "source": { "type": "RULE", "id": "CB_HAST2" } },
+    { "evidence": "ded_hastane", "source": { "type": "RULE", "id": "CB_HAST1" } },
+    { "evidence": "ded_uslup", "source": { "type": "RULE", "id": "CB_USLUP" } },
+    { "evidence": "ded_tablet", "source": { "type": "RULE", "id": "CB_TABLET" } },
+    { "evidence": "ded_arsiv", "source": { "type": "RULE", "id": "CB_ARSIV" } }
+  ],
   "nodes": [
     {
       "id": "INV_HESAP",
@@ -90,14 +175,38 @@
           "kind": "EXAMINE",
           "match": { "tool": "cmp", "target": "h4" },
           "feedback": {
-            "title": "YENİ İPUCU",
-            "text": "Üç gecenin üçünde de cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.",
-            "label": "+150 SKOR · Not defterine eklendi",
-            "tone": "special"
+            "title": "6 KASIM",
+            "text": "İlk tehdit gecesi cihaz 3 çevrimiçi: 85.105.44.17. Bir adres. Öbür gecelerde de aynı mı?",
+            "label": "Satır not edildi",
+            "tone": "info"
           },
+          "responses": [
+            {
+              "when": { "all": [{ "flag": "ip_6" }, { "flag": "ip_9" }, { "flag": "ip_12" }, { "flag": "ip_ev" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Üç gecenin üçünde cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
           "effects": [
-            { "type": "DISCOVER", "evidence": "clue_ip_ayni" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+            { "type": "VAR", "var": "ip_6", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "ip_6" }, { "flag": "ip_9" }, { "flag": "ip_12" }, { "flag": "ip_ev" }] },
+                  { "not": { "hasEvidence": "clue_ip_ayni" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_ip_ayni" }
+              ]
+            }
           ]
         },
         {
@@ -105,24 +214,117 @@
           "kind": "EXAMINE",
           "match": { "tool": "cmp", "target": "h5" },
           "feedback": {
-            "title": "AYNI ADRES",
-            "text": "9 Kasım: 85.105.44.17. Yine.",
-            "label": "Not defterinde",
+            "title": "9 KASIM",
+            "text": "Ses kaydı gecesi: 85.105.44.17. Yine.",
+            "label": "Satır not edildi",
             "tone": "info"
           },
-          "effects": [{ "type": "DISCOVER", "evidence": "clue_ip_ayni" }]
+          "responses": [
+            {
+              "when": { "all": [{ "flag": "ip_6" }, { "flag": "ip_9" }, { "flag": "ip_12" }, { "flag": "ip_ev" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Üç gecenin üçünde cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "ip_9", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "ip_6" }, { "flag": "ip_9" }, { "flag": "ip_12" }, { "flag": "ip_ev" }] },
+                  { "not": { "hasEvidence": "clue_ip_ayni" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_ip_ayni" }
+              ]
+            }
+          ]
         },
         {
           "id": "EX_IP3",
           "kind": "EXAMINE",
           "match": { "tool": "cmp", "target": "h6" },
           "feedback": {
-            "title": "AYNI ADRES",
-            "text": "12 Kasım: 85.105.44.17. Üçüncü kez.",
-            "label": "Not defterinde",
+            "title": "12 KASIM",
+            "text": "“Son mesajım” gecesi: 85.105.44.17. Üçüncü kez.",
+            "label": "Satır not edildi",
             "tone": "info"
           },
-          "effects": [{ "type": "DISCOVER", "evidence": "clue_ip_ayni" }]
+          "responses": [
+            {
+              "when": { "all": [{ "flag": "ip_6" }, { "flag": "ip_9" }, { "flag": "ip_12" }, { "flag": "ip_ev" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Üç gecenin üçünde cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "ip_12", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "ip_6" }, { "flag": "ip_9" }, { "flag": "ip_12" }, { "flag": "ip_ev" }] },
+                  { "not": { "hasEvidence": "clue_ip_ayni" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_ip_ayni" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "EX_EV",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "h8" },
+          "feedback": {
+            "title": "EV HATTI",
+            "text": "Cihaz 0, Tarık’ın telefonu, evden bağlanıyor: 176.88.12.4. Kendi telefonu. Başka bir hat.",
+            "label": "Satır not edildi",
+            "tone": "info"
+          },
+          "responses": [
+            {
+              "when": { "all": [{ "flag": "ip_6" }, { "flag": "ip_9" }, { "flag": "ip_12" }, { "flag": "ip_ev" }] },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Üç gecenin üçünde cihaz 3 aynı adresten bağlanmış: 85.105.44.17. Tarık’ın telefonu ise ev hattından: 176.88.12.4. Tehdit gecelerinin adresi onun evi değil; sabit, bir iş adresi gibi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "ip_ev", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "ip_6" }, { "flag": "ip_9" }, { "flag": "ip_12" }, { "flag": "ip_ev" }] },
+                  { "not": { "hasEvidence": "clue_ip_ayni" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_ip_ayni" }
+              ]
+            }
+          ]
         },
         {
           "id": "EX_ARSIV",
@@ -138,17 +340,6 @@
             { "type": "DISCOVER", "evidence": "clue_arsiv" },
             { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 100 }
           ]
-        },
-        {
-          "id": "EX_EV",
-          "kind": "EXAMINE",
-          "match": { "tool": "cmp", "target": "h8" },
-          "feedback": {
-            "title": "EV HATTI",
-            "text": "Cihaz 0, Tarık’ın telefonu, evden bağlanıyor: 176.88.12.4. Kendi telefonu. Kendi evi. Başka bir hat.",
-            "label": "NOT ALINDI",
-            "tone": "info"
-          }
         },
         {
           "id": "FB_HESAP",
@@ -460,18 +651,85 @@
           ]
         },
         {
+          "id": "EX_I_C5",
+          "kind": "EXAMINE",
+          "match": { "tool": "cmp", "target": "i5" },
+          "feedback": {
+            "title": "CİHAZ 0",
+            "text": "“bkz.” yazan hücre açıldı: Tarık’ın 25 Ekim mesajı, sender_device = 0. Telefonun kendisi. Sert sözler, ama kendi elinden. Ölçü bu; tehditler aynı ölçüyü tutuyor mu?",
+            "label": "Satır not edildi",
+            "tone": "info"
+          },
+          "responses": [
+            {
+              "when": {
+                "all": [{ "flag": "ek3_c5" }, { "flag": "ek3_c6" }, { "flag": "ek3_c7" }, { "flag": "ek3_c8" }]
+              },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Dört satır yan yana: Tarık’ın kendi mesajı cihaz 0; üç tehdit ve iletilen ses kaydı cihaz 3. Aynı hesap, başka bir cihaz. Bütün dava bu tek rakamda saklıymış.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "ek3_c5", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "ek3_c5" }, { "flag": "ek3_c6" }, { "flag": "ek3_c7" }, { "flag": "ek3_c8" }] },
+                  { "not": { "hasEvidence": "clue_cihaz3" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_cihaz3" }
+              ]
+            }
+          ]
+        },
+        {
           "id": "EX_I_C6",
           "kind": "EXAMINE",
           "match": { "tool": "cmp", "target": "i6" },
           "feedback": {
-            "title": "YENİ İPUCU",
-            "text": "“bkz.” yazan hücre açıldı, ham veri döküldü: sender_device = 3. Tarık’ın 25 Ekim’deki kendi mesajında bu değer 0. Aynı hesap, farklı cihaz. Bütün dava bu tek rakamda saklıymış.",
-            "label": "+150 SKOR · Not defterine eklendi",
-            "tone": "special"
+            "title": "İLK TEHDİT",
+            "text": "6 Kasım 02.11: ham veri döküldü, sender_device = 3. Aynı hesap, başka bir rakam. Tek bir satır bir tesadüf olabilir; öbür tehditlere de bak.",
+            "label": "Satır not edildi",
+            "tone": "info"
           },
+          "responses": [
+            {
+              "when": {
+                "all": [{ "flag": "ek3_c5" }, { "flag": "ek3_c6" }, { "flag": "ek3_c7" }, { "flag": "ek3_c8" }]
+              },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Dört satır yan yana: Tarık’ın kendi mesajı cihaz 0; üç tehdit ve iletilen ses kaydı cihaz 3. Aynı hesap, başka bir cihaz. Bütün dava bu tek rakamda saklıymış.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
           "effects": [
-            { "type": "DISCOVER", "evidence": "clue_cihaz3" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+            { "type": "VAR", "var": "ek3_c6", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "ek3_c5" }, { "flag": "ek3_c6" }, { "flag": "ek3_c7" }, { "flag": "ek3_c8" }] },
+                  { "not": { "hasEvidence": "clue_cihaz3" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_cihaz3" }
+              ]
+            }
           ]
         },
         {
@@ -479,35 +737,82 @@
           "kind": "EXAMINE",
           "match": { "tool": "cmp", "target": "i7" },
           "feedback": {
-            "title": "CİHAZ 3",
-            "text": "İletilen ses kaydı da cihaz 3’ten çıkmış. Tarık’ın telefonu değil; başka bir cihaz, aynı hesaba bağlı.",
-            "label": "Not defterinde",
+            "title": "SES KAYDI",
+            "text": "9 Kasım 02.14: iletilen ses kaydı. sender_device = 3. Telefon numarası değil, bir cihaz sırası.",
+            "label": "Satır not edildi",
             "tone": "info"
           },
-          "effects": [{ "type": "DISCOVER", "evidence": "clue_cihaz3" }]
+          "responses": [
+            {
+              "when": {
+                "all": [{ "flag": "ek3_c5" }, { "flag": "ek3_c6" }, { "flag": "ek3_c7" }, { "flag": "ek3_c8" }]
+              },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Dört satır yan yana: Tarık’ın kendi mesajı cihaz 0; üç tehdit ve iletilen ses kaydı cihaz 3. Aynı hesap, başka bir cihaz. Bütün dava bu tek rakamda saklıymış.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "ek3_c7", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "ek3_c5" }, { "flag": "ek3_c6" }, { "flag": "ek3_c7" }, { "flag": "ek3_c8" }] },
+                  { "not": { "hasEvidence": "clue_cihaz3" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_cihaz3" }
+              ]
+            }
+          ]
         },
         {
           "id": "EX_I_C8",
           "kind": "EXAMINE",
           "match": { "tool": "cmp", "target": "i8" },
           "feedback": {
-            "title": "CİHAZ 3",
-            "text": "“Son mesajım.” Yine cihaz 3. Üç tehdidin üçü de aynı yerden: bir masaüstü oturumundan, bir telefondan değil.",
-            "label": "Not defterinde",
+            "title": "SON MESAJ",
+            "text": "12 Kasım 02.19, “Son mesajım.” sender_device = 3.",
+            "label": "Satır not edildi",
             "tone": "info"
           },
-          "effects": [{ "type": "DISCOVER", "evidence": "clue_cihaz3" }]
-        },
-        {
-          "id": "EX_I_C5",
-          "kind": "EXAMINE",
-          "match": { "tool": "cmp", "target": "i5" },
-          "feedback": {
-            "title": "CİHAZ 0",
-            "text": "Tarık’ın 25 Ekim mesajları: cihaz 0. Telefonun kendisi. Sert sözler, ama kendi elinden.",
-            "label": "NOT ALINDI",
-            "tone": "info"
-          }
+          "responses": [
+            {
+              "when": {
+                "all": [{ "flag": "ek3_c5" }, { "flag": "ek3_c6" }, { "flag": "ek3_c7" }, { "flag": "ek3_c8" }]
+              },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Dört satır yan yana: Tarık’ın kendi mesajı cihaz 0; üç tehdit ve iletilen ses kaydı cihaz 3. Aynı hesap, başka bir cihaz. Bütün dava bu tek rakamda saklıymış.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "VAR", "var": "ek3_c8", "op": "set", "value": true },
+            {
+              "type": "IF",
+              "when": {
+                "all": [
+                  { "all": [{ "flag": "ek3_c5" }, { "flag": "ek3_c6" }, { "flag": "ek3_c7" }, { "flag": "ek3_c8" }] },
+                  { "not": { "hasEvidence": "clue_cihaz3" } }
+                ]
+              },
+              "then": [
+                { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 },
+                { "type": "DISCOVER", "evidence": "clue_cihaz3" }
+              ]
+            }
+          ]
         },
         {
           "id": "EX_I_U6",
@@ -674,6 +979,19 @@
             },
             {
               "speaker": "narrator",
+              "text": "Birimdeki memur dosyayı arşivden getirdi, her sayfayı tek tek damgaladı: “Aslı gibidir.” Tarık, babasının adının yazdığı kapağa uzun uzun baktı."
+            },
+            {
+              "speaker": "tarik",
+              "text": "O gece bu kâğıtların hiçbirini okumadım. İmzala dediler, imzaladım. Bir onam, bir ilaç, bir yatış. Babam yaşasın diye."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir hasta yakınının en dalgın imzası, bir avukatın en sağlam saati olabilir. Yeter ki saati yazan el, kâğıdın altında dursun.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
               "text": "Bir epikriz, bir müdahale çizelgesi, bir onam formu. Hepsinin altında saat."
             }
           ]
@@ -782,6 +1100,10 @@
             {
               "speaker": "leyla",
               "text": "Hâkim her talebe “neden?” diye bakar Deniz. “Neden”i olmayan talep, olanı da gölgeler."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir de şunu unutma: senin panonda duran kâğıt, dosyaya girmedikçe yoktur. Elindekini ekle; bilirkişi de hâkim de yalnızca dosyayı okur."
             }
           ]
         }
@@ -793,6 +1115,7 @@
           "kind": "OPTION",
           "label": "Bağımsız adli bilişim bilirkişisi; imajın bir kopyasının bize verilmesi",
           "cost": [{ "var": "slots", "amount": 1 }],
+          "visibleWhen": { "hasEvidence": "clue_cihaz3" },
           "responses": [
             {
               "lines": [
@@ -848,6 +1171,7 @@
           "kind": "OPTION",
           "label": "Hayri Sezer’in tanık olarak dinlenmesi",
           "cost": [{ "var": "slots", "amount": 1 }],
+          "visibleWhen": { "flag": "fact_hayri_saat" },
           "responses": [
             {
               "lines": [
@@ -863,6 +1187,33 @@
           "quality": {
             "q": "GOOD",
             "feedback": "Ses kaydının alıcısı olay saatine dair doğrudan bilgi sahibidir; tanık olarak dinlenmesi istenebilir.",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
+          "id": "DIL_HESAP",
+          "kind": "OPTION",
+          "label": "Ek: noter tespitli hesap verisi ve hash değeri",
+          "visibleWhen": { "all": [{ "hasEvidence": "ev_hesap" }, { "visited": "INV_HESAP" }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Noterin mühürlü zarfı, hash değeriyle birlikte dilekçenin ekine. Artık bu döküm yalnızca benim panomda değil, dosyada.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$stay",
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 },
+            { "type": "VAR", "var": "hesap_sunuldu", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Savunmanın elde ettiği delil dosyaya sunulmadıkça tartışılamaz; noter tespiti ve hash değeriyle sunulan döküm, bilirkişinin de önüne gider (CMK 206, 178).",
             "category": "USUL_BILGISI"
           }
         },
@@ -900,7 +1251,6 @@
             }
           ],
           "next": "$stay",
-          "effects": [{ "type": "VAR", "var": "fact_hesap_fikri", "op": "set", "value": true }],
           "quality": {
             "q": "NEUTRAL",
             "feedback": "Yurt dışındaki bir şirketten kayıt istemek uluslararası adli yardım ister; aylar sürer. Oysa hesap sahibi kendi oturum geçmişini kendisi indirebilir."
@@ -977,6 +1327,8 @@
         "clue_arsiv",
         "clue_onam",
         "clue_sarj",
+        "ded_sarj",
+        "clue_ofis_hat",
         "clue_kamera_h",
         "clue_dock",
         "ev_not",
@@ -1043,31 +1395,31 @@
           ]
         },
         {
-          "id": "CB_HAST1",
-          "kind": "COMBINE",
-          "match": { "a": "clue_kilit", "b": "clue_onam" },
-          "feedback": {
-            "title": "02.14’te acil serviste",
-            "text": "Telefon 01.40’tan 06.10’a kadar kilitli; Tarık 02.10’da onam formu imzalıyor. Ses kaydını o telefondan, o eller iletmedi.",
-            "label": "YENİ DELİL · +300 SKOR (ilk kurulumda)",
-            "tone": "success"
-          },
-          "effects": [
-            {
-              "type": "IF",
-              "when": { "not": { "hasEvidence": "ded_hastane" } },
-              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 300 }]
-            },
-            { "type": "DISCOVER", "evidence": "ded_hastane" }
-          ]
-        },
-        {
           "id": "CB_HAST2",
           "kind": "COMBINE",
           "match": { "a": "clue_kilit", "b": "clue_sarj" },
           "feedback": {
             "title": "Şarjdaki telefon",
-            "text": "Kilit kaydı ile hemşire masasındaki bant aynı saati söylüyor: 01.40. Telefon gece boyunca şarjda, kilitli.",
+            "text": "Ek-2’deki kilit olayı ile hemşire masasındaki bant aynı saati söylüyor: 01.40. Telefon gece boyunca şarjda, kilitli. Peki ya Tarık? O saatlerde ne yapıyordu, kim yazdı?",
+            "label": "YENİ DELİL · +150 SKOR (ilk kurulumda)",
+            "tone": "success"
+          },
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "hasEvidence": "ded_sarj" } },
+              "then": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }]
+            },
+            { "type": "DISCOVER", "evidence": "ded_sarj" }
+          ]
+        },
+        {
+          "id": "CB_HAST1",
+          "kind": "COMBINE",
+          "match": { "a": "ded_sarj", "b": "clue_onam" },
+          "feedback": {
+            "title": "02.14’te acil serviste",
+            "text": "Telefon 01.40’tan 06.10’a kadar kilitli, hemşire masasında; Tarık 02.10’da onam formu imzalıyor, saati hemşire yazmış. Ses kaydını o telefondan, o eller iletmedi.",
             "label": "YENİ DELİL · +300 SKOR (ilk kurulumda)",
             "tone": "success"
           },
@@ -1153,36 +1505,5 @@
         { "id": "CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "$return" }
       ]
     }
-  ],
-  "discoveryPaths": [
-    { "evidence": "clue_bagli_cihaz", "source": { "type": "RULE", "id": "EX_C3" } },
-    { "evidence": "clue_tablet_kapali", "source": { "type": "RULE", "id": "EX_C2" } },
-    { "evidence": "clue_ip_ayni", "source": { "type": "RULE", "id": "EX_IP1" } },
-    { "evidence": "clue_ip_ayni", "source": { "type": "RULE", "id": "EX_IP2" } },
-    { "evidence": "clue_ip_ayni", "source": { "type": "RULE", "id": "EX_IP3" } },
-    { "evidence": "clue_arsiv", "source": { "type": "RULE", "id": "EX_ARSIV" } },
-    { "evidence": "clue_imza_yok", "source": { "type": "RULE", "id": "EX_T_IMZA" } },
-    { "evidence": "clue_muhur_yok", "source": { "type": "RULE", "id": "EX_T_MUHUR" } },
-    { "evidence": "clue_ss_karar", "source": { "type": "RULE", "id": "EX_T_SAAT" } },
-    { "evidence": "clue_ss_karar", "source": { "type": "RULE", "id": "EX_T_SAAT2" } },
-    { "evidence": "clue_son_erisim", "source": { "type": "RULE", "id": "EX_I_SON" } },
-    { "evidence": "clue_kilit", "source": { "type": "RULE", "id": "EX_I_KILIT" } },
-    { "evidence": "clue_cihaz3", "source": { "type": "RULE", "id": "EX_I_C6" } },
-    { "evidence": "clue_cihaz3", "source": { "type": "RULE", "id": "EX_I_C7" } },
-    { "evidence": "clue_cihaz3", "source": { "type": "RULE", "id": "EX_I_C8" } },
-    { "evidence": "clue_uslup_tehdit", "source": { "type": "RULE", "id": "EX_I_U6" } },
-    { "evidence": "clue_uslup_tarik", "source": { "type": "RULE", "id": "EX_I_U5" } },
-    { "evidence": "ev_hesap", "source": { "type": "CHOICE", "id": "HI_NOTER" } },
-    { "evidence": "ev_hastane", "source": { "type": "NODE", "id": "INV_HKAYIT_GIRIS" } },
-    { "evidence": "clue_onam", "source": { "type": "RULE", "id": "EX_K_ONAM" } },
-    { "evidence": "clue_onam", "source": { "type": "RULE", "id": "EX_K_ONAM2" } },
-    { "evidence": "ded_ss", "source": { "type": "RULE", "id": "CB_SS" } },
-    { "evidence": "ded_zincir", "source": { "type": "RULE", "id": "CB_ZINCIR" } },
-    { "evidence": "ded_bagli", "source": { "type": "RULE", "id": "CB_BAGLI" } },
-    { "evidence": "ded_hastane", "source": { "type": "RULE", "id": "CB_HAST1" } },
-    { "evidence": "ded_hastane", "source": { "type": "RULE", "id": "CB_HAST2" } },
-    { "evidence": "ded_uslup", "source": { "type": "RULE", "id": "CB_USLUP" } },
-    { "evidence": "ded_tablet", "source": { "type": "RULE", "id": "CB_TABLET" } },
-    { "evidence": "ded_arsiv", "source": { "type": "RULE", "id": "CB_ARSIV" } }
   ]
 }

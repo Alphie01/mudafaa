@@ -535,7 +535,7 @@
           ],
           "effects": [
             { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
-            { "type": "VAR", "var": "fact_hesap_fikri", "op": "set", "value": true }
+            { "type": "VAR", "var": "fact_hesap_onay", "op": "set", "value": true }
           ]
         },
         {
@@ -950,6 +950,10 @@
               "text": "Soru basit: o beklerken telefonu neredeydi? Cebinde mi, elinde mi, yoksa başka bir yerde mi? Bu hastane her şeyin saatini yazar; belki bunun da yazmıştır.",
               "style": "thought"
             },
+            {
+              "speaker": "narrator",
+              "text": "Hemşire masasının arkasında bir pano: nöbet listesi, bir ilaç çizelgesi, kenarına raptiyeyle tutturulmuş bir kural kâğıdı. Her şey yazılı. Burada hiçbir şey hafızaya bırakılmıyor."
+            },
             { "speaker": "narrator", "text": "Sahnede dikkatini çeken yerlere dokun." }
           ]
         }
@@ -1005,6 +1009,15 @@
             {
               "speaker": "gulay",
               "text": "Necati Bey. Ritim. Hatırlıyorum, kalp hastası unutulmaz. Oğlu da… mimar mıydı neydi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masanın kenarında, kabloların arasında, yeni bantlar kesilmeyi bekliyordu. Her birinin üstüne bir isim, bir saat yazılacaktı; bu gece de, her gece olduğu gibi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir hemşire tanığa benzemez. Bir tanık hatırlar; bir hemşire yazar. Benim aradığım, hatırlanan değil, yazılan.",
+              "style": "thought"
             }
           ]
         }
@@ -1048,11 +1061,22 @@
                   "speaker": "gulay",
                   "text": "Biz yazarız. Hasta yakını imzalar, saati biz yazarız, altına bir de biz imza atarız. Mahkemelik olur diye."
                 },
-                { "speaker": "gulay", "text": "Bakın, mahkemelik oldu işte." }
+                {
+                  "speaker": "gulay",
+                  "text": "Bakın, mahkemelik oldu işte. Kâğıt isterseniz hasta hakları birimi verir; babası izin yazarsa. O geceki formun saatini de ben yazdım."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir bant, bir saat, bir imza. Kayıtları istemenin vakti geldi; bir kez babasının izniyle, bir kez de mahkemenin eliyle. Aynı kâğıt iki ayrı yoldan gelince, kimse onu “savunmanın kâğıdı” diye kenara itemez.",
+                  "style": "thought"
+                }
               ]
             }
           ],
-          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_onam_saat", "op": "set", "value": true }
+          ]
         },
         {
           "id": "GUL_TANIK",
@@ -1067,6 +1091,10 @@
                 },
                 {
                   "speaker": "gulay",
+                  "text": "Yirmi iki yıldır bu masadayım. Kaç kere mahkemeye çağrıldım, biliyor musunuz? İki. İkisinde de bana sorulan bir saatti. İkisinde de saat bendeydi; kâğıtta."
+                },
+                {
+                  "speaker": "gulay",
                   "text": "Ama bakın: o bandı da, o saati de ben yazdım, imzam altında. Mahkeme kayıtları isterse, benim sözüm zaten o kâğıtta."
                 },
                 {
@@ -1077,6 +1105,7 @@
               ]
             }
           ],
+          "effects": [{ "type": "VAR", "var": "gulay_hazir", "op": "set", "value": true }],
           "quality": {
             "q": "NEUTRAL",
             "feedback": "Tanığa ne söyleyeceğini değil, ne gördüğünü sormak doğru yoldur; çağrılırsa tanık kendi bildiğini anlatır."
@@ -1160,6 +1189,11 @@
                 {
                   "speaker": "hayri",
                   "text": "Silmedim bildirimi. Savcılık sordu, gösterdim. Saati yazdılar mı bilmem."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir telefonun saati, başka bir telefonun içinde. Tarık’ın telefonu bir çekmecede, imajı bir raporda; ama bu saat, kimsenin dokunmadığı yaşlı bir adamın cebinde duruyor.",
+                  "style": "thought"
                 }
               ]
             }

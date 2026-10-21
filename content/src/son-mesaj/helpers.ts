@@ -1,5 +1,6 @@
-import { examine, fallback, has, ifThen, not, recipe, score } from '../../../tools/content/src/kit/index.js';
+import { all, examine, fallback, flag, has, ifThen, not, raise, recipe, score } from '../../../tools/content/src/kit/index.js';
 import type { Category, ChoiceDef, NodeDef } from '../../../tools/content/src/kit/index.js';
+import { S } from './dsl.js';
 
 // Davaya özgü küçük yardımcılar.
 
@@ -79,3 +80,40 @@ export const boardMiss = (id: string): ChoiceDef =>
       tone: 'error',
     },
   });
+
+/**
+ * Adımlı belge isabeti: aynı iddiayı taşıyan birkaç satırın hepsi incelenince ipucu doğar ("üç tehdidin üçü de").
+ * Her kural kendi bayrağını kaldırır; grubun bütün bayrakları kalktığında ipucu bulunur ve skor bir kez verilir.
+ * Koşullu DISCOVER olduğundan bulunma yolları `stepPaths` ile elle eklenir.
+ */
+export function stepHit(
+  id: string,
+  toolId: string,
+  target: string,
+  flagId: string,
+  group: readonly string[],
+  clueId: string,
+  amount: number,
+  title: string,
+  text: string,
+  done: string,
+  category: Category = 'DELIL_ANALIZI',
+): ChoiceDef {
+  const complete = all(...group.map((f) => flag(f)));
+  return examine(id, toolId, target, {
+    effects: [
+      raise(flagId),
+      ifThen(all(complete, not(has(clueId))), [score(category, amount), { type: 'DISCOVER', evidence: clueId }]),
+    ],
+    feedback: { title, text, label: 'Satır not edildi', tone: 'info' },
+    responses: [{ when: complete, lines: S(`~ ${done}`) }],
+  });
+}
+
+/** `stepHit` grubunun bulunma yolları: her kural, öbür bayraklar kalkmışsa ipucunu bulur. */
+export const stepPaths = (clueId: string, rules: readonly (readonly [string, string])[]) =>
+  rules.map(([ruleId, flagId]) => ({
+    evidence: clueId,
+    source: { type: 'RULE' as const, id: ruleId },
+    requires: all(...rules.filter(([, f]) => f !== flagId).map(([, f]) => flag(f))),
+  }));

@@ -70,6 +70,25 @@
               "speaker": "narrator",
               "text": "Tarık’ın kurşun kalemi masada unutulmuştu. Tıkırdamıyordu. Bir daha da tıkırdamadı."
             },
+            { "speaker": "narrator", "text": "BURSA BAROSU — ÜÇ HAFTA SONRA", "style": "card", "bg": "adliye" },
+            {
+              "speaker": "narrator",
+              "text": "Disiplin kurulunun odası küçüktü; masada bir sürahi su, üç bardak, bir dosya. Dosyanın kapağında benim adım yazıyordu, bir müvekkilin değil."
+            },
+            {
+              "speaker": "narrator",
+              "name": "KURUL BAŞKANI",
+              "text": "Müvekkiliniz masum olabilir meslektaşım. Bu kurulun konusu o değil. Konu, sizin o gece ne yaptığınız."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savunmamı okudum. Kısa tuttum; uzun savunma, kısa bir gerçeği gizlemeye çalışır."
+            },
+            {
+              "speaker": "player",
+              "text": "Biri Tarık’ın hesabına girdi ve bir kadının hayatını yaktı. Ben de bir kapıyı açtım; içeride kimin yanacağını düşünmeden. Tarık’ın davası hâlâ sürüyor; artık başka bir avukatın elinde, benim bıraktığım lekeyle.",
+              "style": "thought"
+            },
             {
               "speaker": "player",
               "text": "Biri Tarık’a tek bir anahtar vermişti ve bütün kapıları açmıştı. Ben de bir anahtar aldım elime. Fark etmeliydim.",
@@ -87,11 +106,11 @@
         "all": [
           { "not": { "flag": "cokus" } },
           { "flag": "gercek_fail" },
-          { "flag": "contra_o3" },
-          { "any": [{ "hasEvidence": "ded_hastane" }, { "flag": "bilirkisi_kilit" }] },
-          { "any": [{ "hasEvidence": "ded_laptop_ozan" }, { "hasEvidence": "ev_laptop" }] },
-          { "cmp": [{ "var": "pers" }, ">=", 7] },
-          { "cmp": [{ "score": "final" }, ">=", 8000] }
+          { "ref": "kaynak_suphesi" },
+          { "ref": "bilirkisi_teyit" },
+          { "ref": "alibi_kayit" },
+          { "ref": "hat_kayit" },
+          { "any": [{ "flag": "contra_o2" }, { "flag": "laptop_imaj" }] }
         ]
       },
       "stamp": "BERAAT",
@@ -130,7 +149,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 120] }, 1000] }
         }
       },
-      "howToReach": "Cihazı, hattı, 9 Kasım mazeretini ve dizüstüyü delillerle göster; somut dayanaklı suç duyurusu ver; esas savunmada gerçek faili ortaya koy.",
+      "howToReach": "Cihaz sütununu tanığa ve bilirkişiye kabul ettir; 9 Kasım mazeretini bilirkişi, bağımsız saat ve hemşireyle tutanağa geçir; hattı ve dizüstüyü eski ortağın çapraz sorgusunda göster; somut dayanaklı suç duyurusu ver; esas savunmada gerçek faili ortaya koy.",
       "epilogue": [
         {
           "lines": [
@@ -196,10 +215,8 @@
         "all": [
           { "not": { "flag": "cokus" } },
           { "ref": "kaynak_suphesi" },
-          { "ref": "ek_supheler" },
           { "ref": "bilirkisi_teyit" },
-          { "hasEvidence": "ded_hastane" },
-          { "cmp": [{ "score": "final" }, ">=", 7000] }
+          { "flag": "bilirkisi_hat" }
         ]
       },
       "stamp": "BERAAT",
@@ -217,8 +234,12 @@
           "text": "9 Kasım gecesi telefonun kilitli olduğu, iletinin başka bir oturumdan çıktığı görülmüştür."
         },
         {
-          "when": { "flag": "bilirkisi_el" },
-          "text": "Bilirkişi, cihaz 3’ün o gecelerde sanığın hattından bağlanmadığını kabul etmiştir."
+          "when": { "flag": "bilirkisi_hat" },
+          "text": "Bilirkişi, cihaz 3’ün o gecelerde sanığın ev hattından değil, tanığın firmasına ait bir iş hattından bağlandığını kabul etmiştir."
+        },
+        {
+          "when": { "ref": "alibi_kayit" },
+          "text": "Hemşire Gülay Tunç, telefonun gece boyunca kilitli ve şarjda durduğunu, onam formunun saatini kendisinin yazdığını anlatmış; tanık Hayri Sezer’in telefonundaki bildirim saati bu kayıtlarla örtüşmüştür."
         },
         {
           "text": "Sanığın fail olduğuna dair kesin kanaate ulaşılamamıştır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2)."
@@ -236,7 +257,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
         }
       },
-      "howToReach": "Mesajların telefondan çıkmadığını göster, bilirkişi raporunu okuyup bulguyu bilirkişiye teyit ettir, 9 Kasım mazeretini (kilit + hastane) kur ve en az iki destekleyici şüphe ortaya koy.",
+      "howToReach": "Mesajların telefondan çıkmadığını tutanağa geçir, bilirkişi raporunu okuyup bulguyu bilirkişiye teyit ettir; ardından ya 9 Kasım mazeretini (bilirkişi, Hayri’nin telefonu, hemşire) ya da tehdit hattının sanığın olmadığını (bilirkişi ve tanığın çapraz sorgusu) tutanakta kur.",
       "epilogue": [
         {
           "lines": [
@@ -307,6 +328,32 @@
           ]
         },
         {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE ÖNÜ — 17.40", "style": "card", "bg": "sokak_sabah" },
+            {
+              "speaker": "narrator",
+              "text": "Yağmur dinmişti. Adliyenin merdivenlerinde Tarık telefonunu emanetten almış, avucunda çeviriyordu; üç aydır ilk kez kendi telefonunu tutuyordu."
+            },
+            {
+              "speaker": "tarik",
+              "text": "Açmaya korkuyorum. İçinde hâlâ o sohbet var. Arşivde, gizli; benim hiç görmediğim bir sohbet."
+            },
+            {
+              "speaker": "player",
+              "text": "Açın Tarık Bey. Artık o sohbetin kimin elinden çıktığı sizin telefonunuzda değil, mahkemenin tutanağında yazıyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ekranı açtı. Bir süre baktı. Sonra kızına yazdı; küçük harfle, noktasız: “bugün erken alıyorum seni”. Gönder tuşuna basmadan önce bana gösterdi, sanki bir onay bekliyormuş gibi."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir mesajın altında bir isim yazar. Mesajı kimin yazdığını yazmaz. Ama bu mesajı kimin yazdığını, ben de, o da, bir çocuk da biliyor.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
           "when": { "flag": "soz_verildi" },
           "lines": [
             {
@@ -322,38 +369,12 @@
       "id": "KISMI",
       "class": "REDUCED",
       "priority": 4,
-      "when": {
-        "all": [
-          { "not": { "flag": "cokus" } },
-          { "any": [{ "flag": "terditli" }, { "flag": "supheden" }, { "flag": "ss_excluded" }] },
-          { "any": [{ "flag": "kilit_mahkemede" }, { "flag": "bilirkisi_kilit" }] },
-          {
-            "any": [
-              { "flag": "contra_s1" },
-              { "flag": "contra_s2" },
-              { "flag": "contra_s4" },
-              { "flag": "ss_excluded" },
-              { "flag": "bilirkisi_zincir" }
-            ]
-          },
-          {
-            "any": [
-              { "flag": "contra_o2" },
-              { "flag": "contra_o3" },
-              { "flag": "contra_o4" },
-              { "flag": "contra_o5" },
-              { "flag": "bilirkisi_kilit" },
-              { "flag": "bilirkisi_zincir" }
-            ]
-          },
-          { "cmp": [{ "score": "final" }, ">=", 3000] }
-        ]
-      },
+      "when": { "all": [{ "not": { "flag": "cokus" } }, { "ref": "alibi_kayit" }] },
       "stamp": "KISMEN",
       "stampTone": "amber",
       "header": "TÜRK MİLLETİ ADINA",
       "sentence": "134’ten beraat · 107/2’den HAGB",
-      "verdictText": "Özel hayatın gizliliğini ihlal (TCK 134/2) suçunun sanık tarafından işlendiği sabit olmadığından bu suçtan BERAATİNE; 6 ve 12 Kasım tarihli mesajlar yönünden şantaj suçundan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, takdiri indirimle (TCK 62) 1 yıl 15 güne indirilmesine, hükmün açıklanmasının geri bırakılmasına (CMK 231); istinaf yolu açık olmak üzere.",
+      "verdictText": "Özel hayatın gizliliğini ihlal (TCK 134/2) suçunun sanık tarafından işlendiği sabit olmadığından bu suçtan BERAATİNE; 6 ve 12 Kasım tarihli mesajlar yönünden şantaj suçundan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, takdiri indirimle (TCK 62) 1 yıl 15 güne indirilmesine, hükmün açıklanmasının geri bırakılmasına ve sanığın beş yıl denetim süresine tabi tutulmasına (CMK 231/5, 8); beraat hükmüne karşı istinaf, geri bırakma kararına karşı itiraz yolu açık olmak üzere (CMK 272, 231/12).",
       "reasoning": [
         {
           "text": "9 Kasım gecesi sanığın telefonu kilitli ve sanık acil servisteydi; o geceye ait iki işlem, “Hatırlatma” mesajı ve ses kaydının iletilmesi, sanığa yüklenememiş ve hükümden çıkarılmıştır."
@@ -365,7 +386,10 @@
           "text": "Şantaj suçu 6 ve 12 Kasım mesajlarına dayanır; aynı kararla iki kez işlendiğinden zincirleme hüküm (TCK 43/1) uygulanmış, takdiri indirimle ceza iki yılın altında kaldığından hükmün açıklanması geri bırakılmıştır."
         },
         {
-          "text": "Bu iki gece için mesajların başka bir cihazdan çıktığı ileri sürülmüş, ancak o cihazı sanık dışında birinin kullandığı somut olarak gösterilememiştir."
+          "text": "Bu gece yönünden bilirkişinin kilit bulgusu, saati yazan hemşirenin beyanı ve tanık Hayri Sezer’in telefonundaki bildirim saati birbirini doğrulamış; savunmanın sunduğu hastane kaydı, onu yazan tanık tarafından tanınmıştır."
+        },
+        {
+          "text": "6 ve 12 Kasım geceleri için mesajların başka bir cihazdan çıktığı ileri sürülmüş, ancak bilirkişinin “sanığın kendisi de olabilir” değerlendirmesi o geceler için delille daraltılamamış; o cihazı sanık dışında birinin kullandığı somut olarak gösterilememiştir."
         }
       ],
       "legalBasis": "TCK 107/2, 43/1, 62; TCK 134/2 (beraat); CMK 231",
@@ -376,7 +400,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "9 Kasım mazeretini duruşmada kur (kilit kaydı ve hastane), kolluğun anlatımında bir çatlak aç, ikinci celsede tanığın ya da bilirkişinin anlatımını delille sars ve ekran görüntülerini düşür ya da terditli savun; tam beraat için delil zincirini tamamla.",
+      "howToReach": "9 Kasım mazeretini ikinci celsede tutanağa geçir: bilirkişiye raporundaki kilit bulgusunu teyit ettir, Hayri Bey’in telefonundaki saati okut, hemşire Gülay Tunç’u dinlet. Tam beraat için mesajların kaynağını da tutanakta kur.",
       "epilogue": [
         {
           "lines": [
@@ -387,7 +411,7 @@
             },
             {
               "speaker": "tarik",
-              "text": "Yani sabıkam olmayacak. Ama bir yıl, denetim altında, başımın üstünde duracak. Bir hata yaparsam açılacak.",
+              "text": "Yani sabıkam olmayacak. Ama beş yıl denetim altında; başımın üstünde duracak. Bir hata yaparsam açılacak.",
               "expression": "uzgun"
             },
             {
@@ -406,6 +430,58 @@
             {
               "speaker": "leyla",
               "text": "Yarım da olsa bir sonuç Deniz. Ama senin yüzünden anlıyorum: bu çocuğa tam masumiyeti borçluydun. Bir dahakine, sütunu gördüğünde, elini de bul."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ADLİYE MERDİVENLERİ — 17.20", "style": "card", "bg": "sokak_yagmur" },
+            {
+              "speaker": "narrator",
+              "text": "Merdivenlerde Gülay Hanım’ı gördüm; montunun yakasını kaldırmış, nöbete yetişmeye çalışıyordu. Durmadı. Yalnızca başını salladı: bir bant, bir saat, bir imza; o kadar."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Hayri Bey bastonuna yaslanmış, saçağın altında yağmurun dinmesini bekliyordu."
+            },
+            {
+              "speaker": "hayri",
+              "text": "Bir gece kurtardın evladım. Üç gecenin biri. Ötekiler hâlâ birinin cebinde duruyor."
+            },
+            {
+              "speaker": "tarik",
+              "text": "Ece’yi arayacağım. Ne diyeceğim? “Babanın bir gecesi temize çıktı, iki gecesi hâlâ şüpheli” mi?"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Telefonu açtı, kapattı, yeniden açtı. Sonunda kısa bir mesaj yazdı; küçük harfle, noktasız: “bugün erken alıyorum seni”. Gösterdi bana. Bir mimarın, bir babanın, bir sanığın bütün cümlesi buydu."
+            },
+            {
+              "speaker": "player",
+              "text": "Onun dili bu. Tehditlerin dili değil. Bunu üç haftadır biliyordum; mahkeme ise yalnızca bir gecesini bildi.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Bir gece kâğıtla kanıtlandı: kilitli bir ekran, bir bant, bir imza, bir yaşlı adamın telefonundaki saat. Öbür iki gece için elimde bir sütun vardı; o sütunun ucundaki makineyi, hattı, eli salona taşıyamadım.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — GECE", "style": "card", "bg": "buro_gece" },
+            {
+              "speaker": "leyla",
+              "text": "Geri bırakma kararına itiraz edeceğiz; savcı beraati istinafa taşırsa orada da savunuruz. Ama itiraz, yeni bir delil değildir Deniz. Yeni delil, o cihaz kimin elindeyse oradadır; o da savcılığın işi."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir dosyayı kapatırken kendine bir şey sor: hangi kâğıdı okumadım? Cevap çoğu zaman bir ekin, bir sütunun, bir dökümün içindedir."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bugün bir gece kurtardın; çünkü o geceyi kâğıtla anlatan herkesi salona getirdin. Bilirkişiyi, Hayri Bey’i, Gülay Hanım’ı. Öbür geceler için de aynısını yapacaktın."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dosyayı kapatmadım. Kapatmadığım dosyalar, uykumda açılır. O gece de açıldı: bir tablo, en sağda bir rakam, “3”."
             }
           ]
         },

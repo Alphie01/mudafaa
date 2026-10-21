@@ -74,9 +74,12 @@
           "name": "Modem",
           "marker": "HIDDEN",
           "shapes": [{ "rect": { "x": 20, "y": 62, "w": 44, "h": 28 } }],
-          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ofis_hat" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ],
           "feedback": {
-            "text": "Ofisin modemi. Altındaki şifre etiketi tırnakla kazınmış. Kimse şifreyi etikete bakarak öğrenmesin diye. Ama şifre zaten herkesin dilinde.",
+            "text": "Ofisin modemi. Şifre etiketi tırnakla kazınmış, ama yanındaki sağlayıcı etiketi duruyor: “Aksoy Tekin Mimarlık · sabit adres 78.186.20.9”. Bir hattın da bir adresi vardır; bu, hanın adresi.",
             "short": "Ofis modemi"
           }
         }
@@ -101,7 +104,7 @@
             { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
           ],
           "feedback": {
-            "text": "Hemşire masasında altı ağızlı bir şarj istasyonu; her kabloda isim ve saat yazılı bir bant. Duvarda kural: “Emanet telefona isim ve saat yazılır.” İnsanlar unutur, bantlar unutmaz.",
+            "text": "Hemşire masasında altı ağızlı bir şarj istasyonu; her kabloda isim ve saat yazılı bir bant. Duvarda kural: “Emanet telefona isim ve saat yazılır; deftere işlenir.” İnsanlar unutur, bantlar unutmaz; defterler hiç.",
             "short": "Şarj istasyonu"
           }
         },
@@ -181,9 +184,12 @@
           "name": "Ev modemi",
           "marker": "HIDDEN",
           "shapes": [{ "rect": { "x": 250, "y": 60, "w": 54, "h": 30 } }],
-          "effects": [{ "type": "SCORE", "category": "ARASTIRMA", "amount": 20 }],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_ev_hat" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ],
           "feedback": {
-            "text": "Evin modemi. Yönetim ekranında hattın adresi: 176.88.12.4. Tarık’ın evi. Kasım gecelerinin adresi bu değildi; olsaydı savcı çoktan sorardı.",
+            "text": "Evin modemi. Yönetim ekranında abone adı “T. Aksoy” ve hattın adresi: 176.88.12.4. Tarık’ın telefonu evde bu hattan bağlanır. Bir adresin sahibini sözleşme söyler, tahmin değil.",
             "short": "Ev modemi"
           }
         },
@@ -220,8 +226,10 @@
   "discoveryPaths": [
     { "evidence": "clue_dock", "source": { "type": "OBJECT", "id": "ob_dock" } },
     { "evidence": "ev_not", "source": { "type": "OBJECT", "id": "ob_not" } },
+    { "evidence": "clue_ofis_hat", "source": { "type": "OBJECT", "id": "ob_modem" } },
     { "evidence": "clue_sarj", "source": { "type": "OBJECT", "id": "ob_sarj" } },
     { "evidence": "clue_kamera_h", "source": { "type": "OBJECT", "id": "ob_kamera" } },
-    { "evidence": "clue_koli", "source": { "type": "OBJECT", "id": "ob_koli" } }
+    { "evidence": "clue_koli", "source": { "type": "OBJECT", "id": "ob_koli" } },
+    { "evidence": "clue_ev_hat", "source": { "type": "OBJECT", "id": "ob_evmodem" } }
   ]
 }

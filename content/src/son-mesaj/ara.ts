@@ -119,7 +119,7 @@ export const ara: CasePart = {
       ...C4,
       title: 'Ara',
       background: 'buro',
-      onEnter: [set('taps3', 6), set('ex3b', 6), set('ex5', 5), set('ex6', 5), set('ex7', 4)],
+      onEnter: [set('taps3', 6), set('ex3b', 9), set('ex5', 5), set('ex6', 5), set('ex7', 4), set('ex8', 4)],
       lines: [
         W(
           cmp(v('ara_day'), '==', 1),
@@ -173,13 +173,19 @@ export const ara: CasePart = {
               once: true,
               next: 'ARA_HESAP',
               visibleWhen: all(has('ev_hesap'), not(visited('INV_HESAP'))),
-              description: 'Noter tespitli döküm · 6 deneme',
+              description: 'Noter tespitli döküm · 9 deneme',
             }),
             p2.activity('A_RAPOR', 'Bilirkişi raporu', 'ARA_RAPOR', {
               once: true,
               next: 'ARA_RAPOR',
               visibleWhen: all(flag('bilirkisi_istendi'), cmp(v('ara_day'), '==', 2)),
               description: 'Dr. Uçar · imaj incelemesi · 5 deneme',
+            }),
+            p2.activity('A_HRESMI', 'Hastanenin resmî yazısı', 'ARA_HRESMI_GIRIS', {
+              once: true,
+              next: 'ARA_HRESMI_GIRIS',
+              visibleWhen: flag('hastane_istendi'),
+              description: 'Mahkemenin müzekkeresine cevap · 4 deneme',
             }),
             p2.activity('A_VAKIF', 'Vakfın ihale dosyası', 'ARA_VAKIF_GIRIS', {
               once: true,
@@ -212,12 +218,31 @@ export const ara: CasePart = {
           kind: 'NAVIGATE',
           label: 'Haftayı kapat',
           description: 'Kalan eylem puanlarını bırak',
-          visibleWhen: cmp(v('ara_ap'), '>', 0),
+          // İlk hafta en az iki iş yapılmadan kapatılamaz (ara boş geçirilemez; Nurten ve ev her zaman açıktır).
+          // İkinci hafta her zaman kapatılabilir: duruşma günü gelir.
+          visibleWhen: all(cmp(v('ara_ap'), '>', 0), any(cmp(v('ara_ap'), '<=', 1), cmp(v('ara_day'), '==', 2))),
           confirm: 'Haftanın kalan eylem puanları yanar. Emin misin?',
           effects: [set('ara_ap', 0)],
           next: '$stay',
         },
-        nav('GO_T', 'DURUŞMADAN ÖNCEKİ AKŞAM', 'ARA_TEKLIF', {
+        nav('GO_T', 'DURUŞMADAN ÖNCEKİ AKŞAM', {
+          routes: [
+            // Tarık'ın teklifi ancak dava güçlendiğinde gelir: sütun ve 9 Kasım salonda kurulmuş, bilirkişi raporu
+            // okunmuş, hesap dökümü elde, 07'nin izi sürülmüş. Saik olarak elde kalan tek kâğıt 25 Ekim mesajlarıdır.
+            {
+              when: all(
+                has('ev_hesap'),
+                flag('contra_s3'),
+                flag('kilit_mahkemede'),
+                visited('ARA_RAPOR'),
+                // Somut dayanaklı suç duyurusu verilmiş: Tarık, savcılığın yavaşlığına kendi yoluyla karşılık vermek ister.
+                flag('suc_duyurusu'),
+              ),
+              to: 'ARA_TEKLIF',
+            },
+            { to: 'ARA_SON_1' },
+          ],
+        }, {
           role: 'PRIMARY',
           confirm: 'Ara evresi biter. Emin misin?',
           enabledWhen: all(cmp(v('ara_day'), '==', 2), any(ref('ara_ilerleme'), cmp(v('ara_ap'), '<=', 0))),
@@ -235,12 +260,16 @@ export const ara: CasePart = {
           `
           # İKİNCİ HAFTA — ARSLAN HUKUK |bg=buro_gece
           > Kalemden bir zarf geldi: mahkemenin müzekkeresine internet servis sağlayıcısının yanıtı. Tek sayfa. Tek satır. |fx=flash
+          > “85.105.44.17 numaralı sabit IP adresi, sorulan tarih ve saatlerde Tekin Yapı Danışmanlık Ltd. Şti. adına kayıtlı iş hattına atanmıştır. Tesis adresi: Nilüfer.”
           ~ 85.105.44.17. Üç gece. Bir abone adı. Okudum. Bir daha okudum. Tahtaya iğneledim.
+          ~ Bir abone adı bir suçlama değildir. Ama bir soruyu bir adrese bağlar; ve o adresin bir kapısı, bir anahtarı, bir sahibi vardır. Bundan sonrasını yine kâğıtlar söyleyecek.
         `,
         ),
         O(`
           # İKİNCİ HAFTA — ARSLAN HUKUK |bg=buro_gece
           > Bir hafta geçti. Bilirkişi imajı aldı; rapor yazıyor. Kalemde başka bir şey yok.
+          > Panoya her sabah aynı soruyla baktım: bu kâğıtlardan hangisi salonda konuşacak, hangisi yalnızca benim duvarımda kalacak? Bir kâğıdı delil yapan şey, onu kimin yazdığı ve kimin tanıyacağıdır.
+          ~ Leyla bir keresinde demişti: “Dosya bir bina gibidir; taşıyıcı duvarı bul, gerisi süs.” Benim taşıyıcı duvarım hâlâ yarım.
         `),
       ],
     }),
@@ -254,6 +283,7 @@ export const ara: CasePart = {
         > Oturdu. Ceketini çıkarmadı. Büroya bir kez baktı; panoya, iğnelenmiş kâğıtlara. Ben panonun önüne geçtim.
         ozan: Duruşmayı duydum. Bir bilirkişi atanmış. Şu telefon işleri. Valla ben anlamam o işlerden. Bilirkişi ne diyecek sizce? Merak ettim, Tarık için.
         ~ Merak. On yıllık arkadaşının avukatına kestane şekeri getiren bir merak.
+        > Kutuyu masanın köşesine bıraktı; kurdelesi özenle bağlanmıştı. Dışarıda yağmur yeniden başlamıştı, cama ince ince vuruyordu. Bir tanığın, bir avukatın bürosunda işi yoktur; bunu ikimiz de biliyorduk.
       `),
       choices: [
         option('ARA_OZ_KAPA', 'Teşekkür et; dosyayı tanıkla konuşmayacağını kibarca söyle.', {
@@ -456,6 +486,8 @@ export const ara: CasePart = {
         tarik: Çalışma odam şurası. Geceleri orada çalışırım, Ece uyurken. Artık geceleri çalışmıyorum; geceler bu dava yüzünden lekelendi.
         > Çalışma odasının kapısını açtı. İçerisi çizimlerle, maketlerle dolu. Köşede, kapağı açık bir kargo kolisi.
         tarik: Şu koli mart’tan beri orada duruyor. Ozan ayrılırken kargoyla yolladı. Açtım, bir baktım, kapattım. İçine bakmak istemedim; on yıllık bir dostluğun iade edilmiş hâli.
+        > Masanın üstünde bir modem, ışıkları yeşil yanıp sönüyor; yanında Ece’nin bir resmi, bantla duvara tutturulmuş. Bir evin bütün hattı bu küçük kutudan geçiyor; kim, ne zaman, nereden bağlandı, hepsi orada yazılı.
+        ~ Bir ev, bir hat. Polis buraya hiç gelmemiş; çünkü polis bir adresi değil, bir telefonu aramış.
         > Sahnede dikkatini çeken yerlere dokun.
       `),
       choices: [{ id: 'EV_BASLA', kind: 'CONTINUE', label: 'Odaya bak', next: 'ARA_ARAMA_EV' }],
@@ -487,6 +519,7 @@ export const ara: CasePart = {
         > Kalemden UYAP’a düşen rapor: on bir sayfa, iki ek. Dr. Nazlı Uçar’ın imzası her sayfanın altında, aynı açıyla, aynı mürekkeple.
         > Leyla raporu masama bıraktı ama elini üstünden çekmedi.
         leyla: Bilirkişi senin tanığın değil Deniz. Mahkemenin gözü. Lehine olanı da, aleyhine olanı da aynı soğukkanlılıkla yazar. İkisini de oku.
+        leyla: Duruşmada ona soracağın her soru bu raporun bir satırına dayanmalı. Okumadığın bir rapora soru sorarsan, bilirkişi sana değil, hâkime cevap verir; hâkim de sana bakar.
         ~ Bir rapor, bir sonuç cümlesi ve onu taşıyan satırlar. Polisin raporunda satırlar sonuçla kavga ediyordu. Bakalım bu kez nasıl.
         > Bir alet seç, sonra satıra dokun.
       `),
@@ -520,7 +553,7 @@ export const ara: CasePart = {
             'EX_R_CIHAZ',
             'mag',
             'r2',
-            undefined,
+            'clue_rapor_cihaz',
             80,
             'BULGU 1',
             'Büyüteci ilk bulguya tuttum. Bilirkişi aynı sonuca hiçbir dış kayda bakmadan, imajın kendisinden varmış. Gönderen cihaz 3, bir masaüstü uygulaması, bir Windows makinesi. İki ayrı yol, aynı kapıya çıkıyor.',
@@ -529,7 +562,7 @@ export const ara: CasePart = {
             'EX_R_KILIT',
             'mag',
             'r3',
-            undefined,
+            'clue_rapor_kilit',
             80,
             'BULGU 2',
             '9 Kasım gecesi dört buçuk saat telefona tek parmak değmemiş: “dokunma olayı yok.” Hemşirenin bandı, onam formu, şimdi de makinenin günlüğü. Üç tanık; hiçbiri yalan söylemeyi bilmiyor.',
@@ -566,6 +599,76 @@ export const ara: CasePart = {
         ],
         miss: docMiss('FB_RAPOR'),
         finish: { id: 'RAPOR_BITIR', label: 'Raporu kapat' },
+      }),
+      HUB,
+    ),
+    story('ARA_HRESMI_GIRIS', {
+      ...C4,
+      title: 'Hastanenin resmî yazısı',
+      background: 'adliye',
+      lines: B(`
+        # ADLİYE · KALEM ODASI — 14.20 |bg=adliye
+        > Mahkemenin müzekkeresine hastaneden cevap gelmiş: bir üst yazı, “aslı gibidir” damgalı birkaç sayfa. Kâtip dosyayı önüme koydu, kahvesine döndü.
+        ?KALEMDEKİ KÂTİP: Hastane bir de defter sayfası göndermiş avukat hanım. Nöbet defteri. Kim istedi bilmem; siz istediyseniz, işte.
+        ~ Babasının muvafakatiyle aldığımız kâğıtlar bir fotokopiydi. Bunlar mahkemenin istediği, hastanenin gönderdiği kâğıtlar. Aynı gece, bu kez resmî ağızdan.
+        > Üst yazının altında başhekim yardımcısının imzası, köşesinde bir evrak numarası. Sayfaların her birinde mavi bir damga: “Aslı gibidir.” Bir fotokopiyle bir belge arasındaki fark, o mavi mürekkepte.
+      `),
+      choices: [{ id: 'HRESMI_BASLA', kind: 'CONTINUE', label: 'Yazıyı incele', next: 'ARA_HRESMI' }],
+    }),
+    toHub(
+      documentExam('ARA_HRESMI', {
+        ...C4,
+        title: 'Hastanenin resmî yazısı',
+        hud: ['ex8'],
+        background: 'adliye',
+        lines: B(`> Üst yazı ve ekleri. Bir alet seç, sonra satıra dokun.`),
+        header: { left: 'DEVLET HASTANESİ BAŞHEKİMLİĞİ · MAHKEMEYE CEVAP', right: 'EK: 4 SAYFA' },
+        columns: [
+          { label: 'EK', flex: 0.8 },
+          { label: 'KAYIT', flex: 3 },
+        ],
+        rows: [
+          row('y1', ['Üst yazı', 'Müzekkerenize istinaden Necati Aksoy’a ait 09.11 acil servis kayıtları ekte sunulmuştur.']),
+          row('y2', ['Ek-1', 'Epikriz ve girişim onam formu (aslı gibidir) · onam 02.10 · saati yazan: Hmş. G. Tunç']),
+          row('y3', ['Ek-2', 'Nöbet defteri 09.11 · 01.40 · refakatçi Aksoy · telefon şarj istasyonunda emanet · paraf: G.T.']),
+          row('y4', ['Ek-2', 'Nöbet defteri 09.11 · 06.05 · emanet telefon sahibine teslim · paraf: G.T.']),
+          row('y5', ['Ek-3', 'Kamera kayıtları: otuz günlük saklama süresi dolduğundan mevcut değildir.']),
+        ],
+        tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('cmp', 'Karşılaştır', 'compare')],
+        costVar: 'ex8',
+        rules: [
+          hit(
+            'EX_Y_NOBET',
+            'mag',
+            'y3',
+            'clue_nobet',
+            150,
+            'YENİ İPUCU',
+            'Nöbet defteri: “01.40 · refakatçi Aksoy · telefon şarj istasyonunda emanet.” Hemşire masasındaki bandın defterdeki karşılığı; aynı dakika, aynı paraf. Bant atılır, defter kalır. Bu sayfayı kürsüde, onu yazan ele göstermeliyim.',
+            'ARASTIRMA',
+          ),
+          hit(
+            'EX_Y_TESLIM',
+            'cmp',
+            'y4',
+            undefined,
+            40,
+            'TESLİM',
+            '06.05: telefon sahibine teslim. Kilit kaydındaki 06.10 açılışından beş dakika önce. Telefon dört buçuk saat bir hemşire masasındaydı; sahibine döndüğü an, ekran da uyandı.',
+            'ARASTIRMA',
+          ),
+          hit(
+            'EX_Y_KAMERA',
+            'mag',
+            'y5',
+            undefined,
+            0,
+            'KAMERA',
+            'Kamera yok. Kasım çoktan silinmiş. Görüntü olmayan yerde kâğıt konuşur.',
+          ),
+        ],
+        miss: docMiss('FB_HRESMI'),
+        finish: { id: 'HRESMI_BITIR', label: 'Yazıyı kapat' },
       }),
       HUB,
     ),
@@ -653,8 +756,11 @@ export const ara: CasePart = {
         ...C4,
         title: 'Çıkarım tahtası',
         background: 'buro_gece',
-        lines: B(`> İki kart seç. Yeni kartlar tahtada: demirbaş, koli, sağlayıcının yanıtı.`),
-        pool: [...BOARD_POOL, 'clue_koli', 'clue_envanter', 'ev_isp', 'clue_vakif_yazi'],
+        lines: B(`
+          > İki kart seç. Yeni kartlar tahtada: demirbaş, koli, sağlayıcının yanıtı.
+          ~ Üç hafta önce bu pano bir soru işaretiydi. Şimdi iplikler bir yere doğru gerilmeye başladı; ama bir ipliği ben gererim, bir ipliği kâğıt. İkisini karıştırmamalıyım.
+        `),
+        pool: [...BOARD_POOL, 'clue_koli', 'clue_envanter', 'ev_isp', 'clue_vakif_yazi', 'clue_ev_hat'],
         recipes: [
           ...baseRecipes('A'),
           rec(
@@ -682,7 +788,7 @@ export const ara: CasePart = {
             'ded_ip_tekin',
             300,
             'Tehdit hattının adresi',
-            'Üç gecenin oturumu 85.105.44.17’den. Sağlayıcıya göre o adres Tekin Yapı Danışmanlık’ın iş hattı.',
+            'Üç gecenin oturumu 85.105.44.17’den. Sağlayıcıya göre o adres Tekin Yapı Danışmanlık’ın iş hattı. Müvekkilin evi değil, ofis değil; bir başka firmanın, sabit bir hattı.',
           ),
           rec(
             'CB_A_USLUP',
@@ -747,12 +853,12 @@ export const ara: CasePart = {
       background: 'buro_gece',
       lines: B(`
         # DURUŞMADAN ÖNCEKİ AKŞAM — ARSLAN HUKUK |bg=buro_gece
-        > Büro boşalmıştı. Yağmur yeniden başlamış, oluklardan taşan su kaldırıma vuruyordu. Panoda üç haftanın bütün kâğıtları: bir demirbaş listesi, bir sağlayıcı yazısı, bir hesap dökümü, bir hastane formu.
+        > Büro boşalmıştı. Yağmur yeniden başlamış, oluklardan taşan su kaldırıma vuruyordu. Panoda üç haftanın kâğıtları; ortada, kırmızı bir raptiyeyle, bir demirbaş listesi.
         > Tarık geç saatte geldi, ıslanmıştı. Elinde kendi dizüstüsü. Masanın üstüne koydu, kapağını açtı; ekranın ışığı yüzüne vurdu.
         tarik: Bir şey düşündüm. İki şey. Üç haftadır uyumuyorum, kafam çalışıyor. Dinleyin önce, sonra beni durdurun; durdurmanız için anlatıyorum zaten.
         tarik: Çünkü tek başıma kalınca bu iki şey bana çok mantıklı geliyor. Ve mantıklı gelmesi beni korkutuyor.
         tarik: Birincisi: Ozan’ın e-postası. Ortakken şifresini biliyordum. Hâlâ aynıdır; o hiçbir şeyi değiştirmez. Girer bakarız. Bir dakika.
-        tarik: İkincisi: bilirkişiye vereceğimiz yedek. 25 Ekim’de Melis’e yazdıklarım orada. Onlar olmasa, savcının elinde saik de kalmaz. Yedekten silerim, kimse bilmez.
+        tarik: İkincisi: noterden aldığımız hesap dökümü. Yarın bir kopyasını daha vereceğiz; 25 Ekim’de Melis’e yazdıklarım orada. Onlar olmasa, savcının elinde saik de kalmaz. Kopyadan silerim, kimse bilmez.
         > Kurşun kalem masada. Tıkırdamıyor.
         ~ İki kapı. İkisi de açık. İkisi de bir uçuruma açılıyor.
       `),
@@ -769,13 +875,14 @@ export const ara: CasePart = {
           `),
           next: 'ARA_SON_1',
         }),
-        option('TK_SIL', '25 Ekim mesajlarını yedekten çıkaralım; saik ortadan kalkar, kimse fark etmez.', {
+        option('TK_SIL', '25 Ekim mesajlarını kopyadan çıkaralım; saik ortadan kalkar, kimse fark etmez.', {
           score: { SAVUNMA_STRATEJISI: -200 },
           effects: [inc('ethics'), raise('karartma')],
           bad: 'Mahkemeye sunulacak dijital veriyi ayıklamak delil karartmadır (TCK 281); avukatın buna katılması meslekten çıkarmayı gerektirebilecek bir ihlaldir (Av.K. 34). Üstelik hash değeri değişir; fark edilir.',
           responses: B(`
-            > Tarık birkaç dakika klavyede bir şeyler yaptı. Sonra dizüstüyü bana çevirdi. “Tamam.”
-            ~ Bir şey kırıldı. Sesini duymadım. Sonra duyacağım.
+            > Tarık birkaç dakika klavyede bir şeyler yaptı. Ekranda satırlar birer birer kayboldu; 25 Ekim, 23.48, “bu şartlarla devam edemeyiz melis”. Sonra dizüstüyü bana çevirdi. “Tamam.”
+            > Yeni kopyayı bir flaş belleğe aldım, zarfa koydum, zarfı çantama. Ellerim titremiyordu. Titremesi gerekirdi.
+            ~ Bir şey kırıldı. Sesini duymadım. Sonra duyacağım. Polisin iki gün mühürsüz bıraktığı bir telefonu üç hafta eleştirdim; şimdi kendi elimle bir dökümü değiştirdim.
           `),
           next: 'ARA_SON_1',
         }),
@@ -784,8 +891,9 @@ export const ara: CasePart = {
           effects: [inc('ethics'), raise('karartma')],
           bad: 'Başkasının hesabına izinsiz girmek bilişim sistemine girme suçudur (TCK 243); bu yolla elde edilen hiçbir şey delil olamaz (CMK 206/2-a) ve avukat suça iştirak etmiş olur (Av.K. 34).',
           responses: B(`
-            > Tarık bir şifre yazdı. Ekran açıldı. Gelen kutusu. Bir sürü “Saygılar.”
-            ~ Ne bulursak bulalım, artık hiçbiri delil değil. Ve biz, onun yaptığını yaptık.
+            > Tarık bir şifre yazdı. Ekran açıldı. Gelen kutusu: ihale yazışmaları, faturalar, bir sürü resmî selamlama.
+            > Ekranın köşesinde, bağlantının nereden kurulduğunu gösteren küçük bir simge yanıp sönüyordu: bu büronun hattı. Kimse ona bakmadı.
+            ~ Ne bulursak bulalım, artık hiçbiri delil değil. Ve biz, onun yaptığını yaptık: başkasının kapısını, başkasının anahtarıyla açtık.
           `),
           next: 'ARA_SON_1',
         }),
@@ -798,10 +906,19 @@ export const ara: CasePart = {
         ...araSonDelivery.effects,
         { type: 'IF', when: all(flag('suc_duyurusu'), flag('ozan_uyarildi')), then: [raise('laptop_kayip')] },
       ],
-      lines: B(`
-        # DURUŞMADAN ÖNCEKİ GECE |bg=buro_gece
-        > Tarık gittikten sonra büroda yalnız kaldım. Panoda üç haftanın kâğıtları.
-      `),
+      lines: [
+        W(
+          visited('ARA_TEKLIF'),
+          `
+          # DURUŞMADAN ÖNCEKİ GECE |bg=buro_gece
+          > Tarık gittikten sonra büroda yalnız kaldım. Panoda üç haftanın kâğıtları.
+        `,
+        ),
+        O(`
+          # DURUŞMADAN ÖNCEKİ GECE |bg=buro_gece
+          > Büro boşalmıştı. Tarık akşam bir kez aradı, yalnızca “yarın dokuzda kapıdayım” dedi. Panoda üç haftanın kâğıtları.
+        `),
+      ],
     }),
     decisionNode('ARA_SON_2', [{ to: 'ARA_SON_3' }], {
       ...C4,
@@ -846,6 +963,13 @@ export const ara: CasePart = {
         `,
         ),
         W(has('ded_laptop_ozan'), `~ 07 ofise dönmedi. Bunu biliyorum. O gecelerde nerede olduğunu bilmiyorum.`),
+        W(
+          all(has('ded_hastane'), flag('gulay_istendi')),
+          `
+          ~ Yarın bir hemşire kürsüye çıkacak. Bir bant, bir saat, bir imza. Bir de bilirkişinin “dokunma olayı yok” satırı. 9 Kasım gecesini kâğıtlar anlatacak; ben yalnızca sırayı tutacağım.
+          ~ Öbür iki gece? Bir sütun, bir rakam. Kimin elinde olduğunu bilmeden bir rakamla bir insanı aklamak, bir rakamla mahkûm etmek kadar zor.
+        `,
+        ),
         W(has('ded_bagli'), `~ Cihaz 3. Bir dizüstü. Kimin elinde? Hâlâ bilmiyorum. Belki bilmem gerekmiyor.`),
         O(`~ Bir sütun, bir şüphe. Yarın bunun yetip yetmediğini göreceğim.`),
       ],
@@ -860,6 +984,14 @@ export const ara: CasePart = {
           `
           > Işığı söndürdüm. Merdivenden inerken elim tırabzana yapıştı. |bg=sokak_yagmur
           ~ Yarın bir salona gireceğim. İçimde bir şey, o salona ait değil.
+        `,
+        ),
+        W(
+          not(has('ded_ip_tekin')),
+          `
+          > Işığı söndürdüm. Panoya son kez baktım: üç haftanın emeği, iplerle birbirine bağlı. Ortada hâlâ bir boşluk vardı; bir iplik, bir yere bağlanmadan sallanıyordu. |bg=sokak_yagmur
+          > Merdivenden indim. Dışarıda yağmur incelmişti; Tophane’nin saat kulesi on biri vurdu, sesi ıslak sokaklarda uzadı.
+          ~ Yarın elimdeki kâğıtlar ne kadar ses çıkarırsa, o kadarı salona girecek. Fazlasını ben söyleyemem; söylersem, o artık delil değil, bir avukatın umududur.
         `,
         ),
         O(`

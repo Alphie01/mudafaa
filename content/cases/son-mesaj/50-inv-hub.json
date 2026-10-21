@@ -12,8 +12,8 @@
         { "type": "VAR", "var": "taps", "op": "set", "value": 7 },
         { "type": "VAR", "var": "taps2", "op": "set", "value": 6 },
         { "type": "VAR", "var": "ex1", "op": "set", "value": 5 },
-        { "type": "VAR", "var": "ex2", "op": "set", "value": 8 },
-        { "type": "VAR", "var": "ex3", "op": "set", "value": 6 },
+        { "type": "VAR", "var": "ex2", "op": "set", "value": 10 },
+        { "type": "VAR", "var": "ex3", "op": "set", "value": 9 },
         { "type": "VAR", "var": "ex4", "op": "set", "value": 4 },
         { "type": "VAR", "var": "min", "op": "set", "value": 15 }
       ],
@@ -213,7 +213,7 @@
           "cost": [{ "var": "ap", "amount": 1 }],
           "next": { "push": "INV_IMAJ" },
           "maxUses": 1,
-          "description": "114 sayfa ek · 8 deneme"
+          "description": "114 sayfa ek · 10 deneme"
         },
         {
           "id": "H_HESAP_IND",
@@ -221,12 +221,7 @@
           "label": "Hesap verisini indirt",
           "cost": [{ "var": "ap", "amount": 1 }],
           "next": { "push": "INV_HESAP_IND" },
-          "visibleWhen": {
-            "all": [
-              { "any": [{ "flag": "fact_hesap_fikri" }, { "hasEvidence": "clue_cihaz3" }] },
-              { "not": { "flag": "hesap_istendi" } }
-            ]
-          },
+          "visibleWhen": { "all": [{ "flag": "fact_hesap_onay" }, { "not": { "flag": "hesap_istendi" } }] },
           "description": "Tarık ve noter · yarın akşam hazır"
         },
         {
@@ -237,7 +232,7 @@
           "next": { "push": "INV_HESAP" },
           "maxUses": 1,
           "visibleWhen": { "hasEvidence": "ev_hesap" },
-          "description": "Noter tespitli döküm · 6 deneme"
+          "description": "Noter tespitli döküm · 9 deneme"
         },
         {
           "id": "H_HKAYIT",
@@ -246,7 +241,7 @@
           "cost": [{ "var": "ap", "amount": 1 }],
           "next": { "push": "INV_HKAYIT_GIRIS" },
           "maxUses": 1,
-          "visibleWhen": { "flag": "fact_hastane" },
+          "visibleWhen": { "flag": "fact_onam_saat" },
           "description": "Babasının muvafakatiyle · 4 deneme"
         },
         {
@@ -348,6 +343,10 @@
             {
               "speaker": "narrator",
               "text": "Büro boşalmış. Yağmur yeniden başlamış; oluklardan taşan su kaldırıma vuruyor."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masamda günün kâğıtları; hiçbiri henüz bir yere iğnelenmemiş. Bir avukatın ilk günü, bir mimarın ilk krokisi gibidir: çizgiler var, bina yok."
             },
             { "speaker": "narrator", "text": "Leyla’nın odasında ışık yanıyordu. Kapısı aralık." },
             { "speaker": "leyla", "text": "Gel. Bugün ne öğrendin? Bir cümleyle." }
@@ -605,14 +604,7 @@
       "eyebrow": "DAVA #06 · SORUŞTURMA",
       "title": "Leyla’ya danış",
       "background": "buro",
-      "onEnter": [
-        { "type": "VAR", "var": "leyla_gun", "op": "set", "value": { "var": "day" } },
-        {
-          "type": "IF",
-          "when": { "hasEvidence": "clue_cihaz3" },
-          "then": [{ "type": "VAR", "var": "fact_hesap_fikri", "op": "set", "value": true }]
-        }
-      ],
+      "onEnter": [{ "type": "VAR", "var": "leyla_gun", "op": "set", "value": { "var": "day" } }],
       "lines": [
         {
           "when": { "all": [{ "hasEvidence": "clue_cihaz3" }, { "not": { "flag": "hesap_istendi" } }] },
@@ -623,7 +615,7 @@
             },
             {
               "speaker": "leyla",
-              "text": "Hesap Tarık’ın. Hesabın sahibi kendi oturum geçmişini isteyebilir. Ama dikkat: elinden çıkan her kâğıt, polisinki kadar sorgulanacak. Noter. Hash."
+              "text": "Hesap Tarık’ın. Hesabın sahibi kendi oturum geçmişini isteyebilir; önce ona sor, o listeyi hiç açmış mı. Ama dikkat: elinden çıkan her kâğıt, polisinki kadar sorgulanacak. Noter. Hash."
             }
           ]
         },
@@ -632,7 +624,7 @@
           "lines": [
             {
               "speaker": "leyla",
-              "text": "Hastane dedin. Hastanede her şeyin saati yazılır. Babasının muvafakatini al, kayıtları iste."
+              "text": "Hastane dedin. Hastanede her şeyin saati yazılır. Önce o geceyi kendi saatinde gör; kâğıdı kimin, hangi kuralla yazdığını öğren. Sonra babasının muvafakatiyle kayıtları iste."
             },
             { "speaker": "leyla", "text": "Saat yazan bir hemşire, saatini bilmeyen on tanıktan iyidir." }
           ]
@@ -808,6 +800,11 @@
             {
               "speaker": "player",
               "text": "9 Kasım, 02.14. Telefon kilitli, hemşire masasında. Tarık bir form imzalıyor. O gece, o eller değil.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Ama bu bir çıkarım; benim panomda duruyor. Salonda onu bir makinenin günlüğü, bir hemşirenin imzası ve bir yaşlı adamın telefonu taşımalı. Üçünü de kürsüye getirmenin yolunu bulmalıyım.",
               "style": "thought"
             }
           ]

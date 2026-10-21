@@ -4,7 +4,6 @@ import {
   any,
   because,
   cmp,
-  finalAtLeast,
   flag,
   has,
   not,
@@ -15,10 +14,10 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { B, W } from './dsl.js';
-import { T_BERAAT, T_BERAAT_B, T_INDIRIM } from './thresholds.js';
 
 // 90-outcomes: beş sonuç sınıfı. Öncelik: ETİK (karartma) > BERAAT_B > BERAAT_E > KISMI > MAHKUMIYET (varsayılan).
-// Çöküş, mahkûmiyetin bir varyantıdır (epilog koşuluyla ayrılır). Final eşikleri eşik çubuğuyla aynı.
+// Çöküş, mahkûmiyetin bir varyantıdır (epilog koşuluyla ayrılır). Hüküm skora bağlı değildir: her sonuç yalnızca
+// duruşma tutanağına geçen bulgulara (tanık ve bilirkişi beyanları, sunulan deliller) dayanır (CMK 217/1, 223).
 
 const sozHatirlat = W(
   flag('soz_verildi'),
@@ -65,6 +64,11 @@ export const outcomes: CasePart = {
         leyla: Yirmi yıldır bu kapıdan bir tek şeyi içeri sokmadım Deniz: “bir kerelik” diye başlayan cümleleri.
         > Kapıyı kapattı. Yavaşça; bir dersin sonu gibi.
         > Tarık’ın kurşun kalemi masada unutulmuştu. Tıkırdamıyordu. Bir daha da tıkırdamadı.
+        # BURSA BAROSU — ÜÇ HAFTA SONRA |bg=adliye
+        > Disiplin kurulunun odası küçüktü; masada bir sürahi su, üç bardak, bir dosya. Dosyanın kapağında benim adım yazıyordu, bir müvekkilin değil.
+        ?KURUL BAŞKANI: Müvekkiliniz masum olabilir meslektaşım. Bu kurulun konusu o değil. Konu, sizin o gece ne yaptığınız.
+        > Savunmamı okudum. Kısa tuttum; uzun savunma, kısa bir gerçeği gizlemeye çalışır.
+        ~ Biri Tarık’ın hesabına girdi ve bir kadının hayatını yaktı. Ben de bir kapıyı açtım; içeride kimin yanacağını düşünmeden. Tarık’ın davası hâlâ sürüyor; artık başka bir avukatın elinde, benim bıraktığım lekeyle.
         ~ Biri Tarık’a tek bir anahtar vermişti ve bütün kapıları açmıştı. Ben de bir anahtar aldım elime. Fark etmeliydim.
       `),
     }),
@@ -74,11 +78,11 @@ export const outcomes: CasePart = {
       when: all(
         not(flag('cokus')),
         flag('gercek_fail'),
-        flag('contra_o3'),
-        any(has('ded_hastane'), flag('bilirkisi_kilit')),
-        any(has('ded_laptop_ozan'), has('ev_laptop')),
-        cmp(v('pers'), '>=', 7),
-        finalAtLeast(T_BERAAT_B),
+        ref('kaynak_suphesi'),
+        ref('bilirkisi_teyit'),
+        ref('alibi_kayit'),
+        ref('hat_kayit'),
+        any(flag('contra_o2'), flag('laptop_imaj')),
       ),
       stamp: 'BERAAT',
       stampTone: 'green',
@@ -109,7 +113,7 @@ export const outcomes: CasePart = {
       legalBasis: 'CMK 223/2-b; CMK 141–142; TCK 107/2, 134/2 (beraat)',
       xp: xp(1.2, { ethicsVar: 'ethics' }),
       howToReach:
-        'Cihazı, hattı, 9 Kasım mazeretini ve dizüstüyü delillerle göster; somut dayanaklı suç duyurusu ver; esas savunmada gerçek faili ortaya koy.',
+        'Cihaz sütununu tanığa ve bilirkişiye kabul ettir; 9 Kasım mazeretini bilirkişi, bağımsız saat ve hemşireyle tutanağa geçir; hattı ve dizüstüyü eski ortağın çapraz sorgusunda göster; somut dayanaklı suç duyurusu ver; esas savunmada gerçek faili ortaya koy.',
       epilogue: [
         {
           lines: [
@@ -154,10 +158,10 @@ export const outcomes: CasePart = {
       when: all(
         not(flag('cokus')),
         ref('kaynak_suphesi'),
-        ref('ek_supheler'),
         ref('bilirkisi_teyit'),
-        has('ded_hastane'),
-        finalAtLeast(T_BERAAT),
+        // Bilirkişinin “teknik olarak sanığın kendisi de olabilir” cümlesi üç gece için delille daraltılmış olmalı:
+        // cihaz 3 sanığın ev hattından değil, başka bir firmanın iş hattından bağlanmış (tek gecelik mazeret yetmez).
+        flag('bilirkisi_hat'),
       ),
       stamp: 'BERAAT',
       stampTone: 'green',
@@ -175,8 +179,12 @@ export const outcomes: CasePart = {
           any(flag('bilirkisi_kilit'), flag('kilit_mahkemede')),
         ),
         because(
-          'Bilirkişi, cihaz 3’ün o gecelerde sanığın hattından bağlanmadığını kabul etmiştir.',
-          flag('bilirkisi_el'),
+          'Bilirkişi, cihaz 3’ün o gecelerde sanığın ev hattından değil, tanığın firmasına ait bir iş hattından bağlandığını kabul etmiştir.',
+          flag('bilirkisi_hat'),
+        ),
+        because(
+          'Hemşire Gülay Tunç, telefonun gece boyunca kilitli ve şarjda durduğunu, onam formunun saatini kendisinin yazdığını anlatmış; tanık Hayri Sezer’in telefonundaki bildirim saati bu kayıtlarla örtüşmüştür.',
+          ref('alibi_kayit'),
         ),
         because(
           'Sanığın fail olduğuna dair kesin kanaate ulaşılamamıştır; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2).',
@@ -189,7 +197,7 @@ export const outcomes: CasePart = {
       legalBasis: 'CMK 223/2-e; Anayasa 38/4; AİHS 6/2',
       xp: xp(1, { ethicsVar: 'ethics' }),
       howToReach:
-        'Mesajların telefondan çıkmadığını göster, bilirkişi raporunu okuyup bulguyu bilirkişiye teyit ettir, 9 Kasım mazeretini (kilit + hastane) kur ve en az iki destekleyici şüphe ortaya koy.',
+        'Mesajların telefondan çıkmadığını tutanağa geçir, bilirkişi raporunu okuyup bulguyu bilirkişiye teyit ettir; ardından ya 9 Kasım mazeretini (bilirkişi, Hayri’nin telefonu, hemşire) ya da tehdit hattının sanığın olmadığını (bilirkişi ve tanığın çapraz sorgusu) tutanakta kur.',
       epilogue: [
         {
           lines: [
@@ -230,6 +238,14 @@ export const outcomes: CasePart = {
           leyla: Beraat beraattir Deniz. Ama senin yüzünden anlıyorum: bu kez “yapmadı” diyemedin, “yapamadılar” dedin. Aradaki farkı hiç unutma.
         `,
         ),
+        B(`
+          # ADLİYE ÖNÜ — 17.40 |bg=sokak_sabah
+          > Yağmur dinmişti. Adliyenin merdivenlerinde Tarık telefonunu emanetten almış, avucunda çeviriyordu; üç aydır ilk kez kendi telefonunu tutuyordu.
+          tarik: Açmaya korkuyorum. İçinde hâlâ o sohbet var. Arşivde, gizli; benim hiç görmediğim bir sohbet.
+          P: Açın Tarık Bey. Artık o sohbetin kimin elinden çıktığı sizin telefonunuzda değil, mahkemenin tutanağında yazıyor.
+          > Ekranı açtı. Bir süre baktı. Sonra kızına yazdı; küçük harfle, noktasız: “bugün erken alıyorum seni”. Gönder tuşuna basmadan önce bana gösterdi, sanki bir onay bekliyormuş gibi.
+          ~ Bir mesajın altında bir isim yazar. Mesajı kimin yazdığını yazmaz. Ama bu mesajı kimin yazdığını, ben de, o da, bir çocuk da biliyor.
+        `)[0]!,
         sozHatirlat,
       ],
     }),
@@ -238,26 +254,15 @@ export const outcomes: CasePart = {
       priority: 4,
       when: all(
         not(flag('cokus')),
-        any(flag('terditli'), flag('supheden'), flag('ss_excluded')),
-        any(flag('kilit_mahkemede'), flag('bilirkisi_kilit')),
-        any(flag('contra_s1'), flag('contra_s2'), flag('contra_s4'), flag('ss_excluded'), flag('bilirkisi_zincir')),
-        // İkinci celsede de bir şey kanıtlanmış olmalı: tanığın anlatımında delille açılan bir çatlak ya da bilirkişi teyidi.
-        any(
-          flag('contra_o2'),
-          flag('contra_o3'),
-          flag('contra_o4'),
-          flag('contra_o5'),
-          flag('bilirkisi_kilit'),
-          flag('bilirkisi_zincir'),
-        ),
-        finalAtLeast(T_INDIRIM),
+        // 9 Kasım mazereti tutanakta: bilirkişi kilidi, bağımsız saat (Hayri'nin telefonu) ve saati yazan hemşire.
+        ref('alibi_kayit'),
       ),
       stamp: 'KISMEN',
       stampTone: 'amber',
       header: 'TÜRK MİLLETİ ADINA',
       sentence: '134’ten beraat · 107/2’den HAGB',
       verdictText:
-        'Özel hayatın gizliliğini ihlal (TCK 134/2) suçunun sanık tarafından işlendiği sabit olmadığından bu suçtan BERAATİNE; 6 ve 12 Kasım tarihli mesajlar yönünden şantaj suçundan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, takdiri indirimle (TCK 62) 1 yıl 15 güne indirilmesine, hükmün açıklanmasının geri bırakılmasına (CMK 231); istinaf yolu açık olmak üzere.',
+        'Özel hayatın gizliliğini ihlal (TCK 134/2) suçunun sanık tarafından işlendiği sabit olmadığından bu suçtan BERAATİNE; 6 ve 12 Kasım tarihli mesajlar yönünden şantaj suçundan (TCK 107/2, 43/1) 1 yıl 3 ay hapis ve adli para cezasıyla cezalandırılmasına, takdiri indirimle (TCK 62) 1 yıl 15 güne indirilmesine, hükmün açıklanmasının geri bırakılmasına ve sanığın beş yıl denetim süresine tabi tutulmasına (CMK 231/5, 8); beraat hükmüne karşı istinaf, geri bırakma kararına karşı itiraz yolu açık olmak üzere (CMK 272, 231/12).',
       reasoning: [
         because(
           '9 Kasım gecesi sanığın telefonu kilitli ve sanık acil servisteydi; o geceye ait iki işlem, “Hatırlatma” mesajı ve ses kaydının iletilmesi, sanığa yüklenememiş ve hükümden çıkarılmıştır.',
@@ -269,13 +274,16 @@ export const outcomes: CasePart = {
           'Şantaj suçu 6 ve 12 Kasım mesajlarına dayanır; aynı kararla iki kez işlendiğinden zincirleme hüküm (TCK 43/1) uygulanmış, takdiri indirimle ceza iki yılın altında kaldığından hükmün açıklanması geri bırakılmıştır.',
         ),
         because(
-          'Bu iki gece için mesajların başka bir cihazdan çıktığı ileri sürülmüş, ancak o cihazı sanık dışında birinin kullandığı somut olarak gösterilememiştir.',
+          'Bu gece yönünden bilirkişinin kilit bulgusu, saati yazan hemşirenin beyanı ve tanık Hayri Sezer’in telefonundaki bildirim saati birbirini doğrulamış; savunmanın sunduğu hastane kaydı, onu yazan tanık tarafından tanınmıştır.',
+        ),
+        because(
+          '6 ve 12 Kasım geceleri için mesajların başka bir cihazdan çıktığı ileri sürülmüş, ancak bilirkişinin “sanığın kendisi de olabilir” değerlendirmesi o geceler için delille daraltılamamış; o cihazı sanık dışında birinin kullandığı somut olarak gösterilememiştir.',
         ),
       ],
       legalBasis: 'TCK 107/2, 43/1, 62; TCK 134/2 (beraat); CMK 231',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        '9 Kasım mazeretini duruşmada kur (kilit kaydı ve hastane), kolluğun anlatımında bir çatlak aç, ikinci celsede tanığın ya da bilirkişinin anlatımını delille sars ve ekran görüntülerini düşür ya da terditli savun; tam beraat için delil zincirini tamamla.',
+        '9 Kasım mazeretini ikinci celsede tutanağa geçir: bilirkişiye raporundaki kilit bulgusunu teyit ettir, Hayri Bey’in telefonundaki saati okut, hemşire Gülay Tunç’u dinlet. Tam beraat için mesajların kaynağını da tutanakta kur.',
       epilogue: [
         {
           lines: [
@@ -286,7 +294,7 @@ export const outcomes: CasePart = {
             },
             {
               speaker: 'tarik',
-              text: 'Yani sabıkam olmayacak. Ama bir yıl, denetim altında, başımın üstünde duracak. Bir hata yaparsam açılacak.',
+              text: 'Yani sabıkam olmayacak. Ama beş yıl denetim altında; başımın üstünde duracak. Bir hata yaparsam açılacak.',
               expression: 'uzgun',
             },
             {
@@ -308,6 +316,21 @@ export const outcomes: CasePart = {
             },
           ],
         },
+        B(`
+          # ADLİYE MERDİVENLERİ — 17.20 |bg=sokak_yagmur
+          > Merdivenlerde Gülay Hanım’ı gördüm; montunun yakasını kaldırmış, nöbete yetişmeye çalışıyordu. Durmadı. Yalnızca başını salladı: bir bant, bir saat, bir imza; o kadar.
+          > Hayri Bey bastonuna yaslanmış, saçağın altında yağmurun dinmesini bekliyordu.
+          hayri: Bir gece kurtardın evladım. Üç gecenin biri. Ötekiler hâlâ birinin cebinde duruyor.
+          tarik: Ece’yi arayacağım. Ne diyeceğim? “Babanın bir gecesi temize çıktı, iki gecesi hâlâ şüpheli” mi?
+          > Telefonu açtı, kapattı, yeniden açtı. Sonunda kısa bir mesaj yazdı; küçük harfle, noktasız: “bugün erken alıyorum seni”. Gösterdi bana. Bir mimarın, bir babanın, bir sanığın bütün cümlesi buydu.
+          ~ Onun dili bu. Tehditlerin dili değil. Bunu üç haftadır biliyordum; mahkeme ise yalnızca bir gecesini bildi.
+          ~ Bir gece kâğıtla kanıtlandı: kilitli bir ekran, bir bant, bir imza, bir yaşlı adamın telefonundaki saat. Öbür iki gece için elimde bir sütun vardı; o sütunun ucundaki makineyi, hattı, eli salona taşıyamadım.
+          # ARSLAN HUKUK — GECE |bg=buro_gece
+          leyla: Geri bırakma kararına itiraz edeceğiz; savcı beraati istinafa taşırsa orada da savunuruz. Ama itiraz, yeni bir delil değildir Deniz. Yeni delil, o cihaz kimin elindeyse oradadır; o da savcılığın işi.
+          leyla: Bir dosyayı kapatırken kendine bir şey sor: hangi kâğıdı okumadım? Cevap çoğu zaman bir ekin, bir sütunun, bir dökümün içindedir.
+          leyla: Bugün bir gece kurtardın; çünkü o geceyi kâğıtla anlatan herkesi salona getirdin. Bilirkişiyi, Hayri Bey’i, Gülay Hanım’ı. Öbür geceler için de aynısını yapacaktın.
+          > Dosyayı kapatmadım. Kapatmadığım dosyalar, uykumda açılır. O gece de açıldı: bir tablo, en sağda bir rakam, “3”.
+        `)[0]!,
         sozHatirlat,
       ],
     }),

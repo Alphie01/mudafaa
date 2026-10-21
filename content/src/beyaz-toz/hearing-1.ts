@@ -295,7 +295,11 @@ export const hearing1: CasePart = {
             },
             {
               lines: [
-                s('kaan', 'Kilit… vardı. Asma kilit. Ben o odaya karışmazdım. Kimin taktığını… bilmiyorum, sanırım.', 'saskin'),
+                s(
+                  'kaan',
+                  'Kilit… vardı. Asma kilit. Ben o odaya karışmazdım. Kimin taktığını… bilmiyorum, sanırım.',
+                  'saskin',
+                ),
                 s('savci', 'Bilmiyor musunuz, sanık? Kendi evinizde, kendi koridorunuzda?'),
                 s('kaan', 'Ben… kapıya bakmazdım. Yani…', 'uzgun'),
                 th(
@@ -387,7 +391,9 @@ export const hearing1: CasePart = {
                 ),
                 s('uye', 'Kavanozun içinde paket olduğunu biliyor muydunuz?'),
                 s('kaan', 'Hayır, Sayın Hâkim. Kapağını açar, kaşığı daldırırdım. İçine bakmazdım. Şeker şekerdir.'),
-                th('Savcı kavanozdaki izi not defterinde daire içine almıştı. Şimdi o dairenin yanına bir soru işareti koydu.'),
+                th(
+                  'Savcı kavanozdaki izi not defterinde daire içine almıştı. Şimdi o dairenin yanına bir soru işareti koydu.',
+                ),
               ],
             },
           ],
@@ -400,7 +406,10 @@ export const hearing1: CasePart = {
           responses: [
             {
               lines: [
-                s('kaan', 'Yok. Ehliyetim hiç olmadı. Motosiklet de yok, kask da. Bisiklete bile binemem; babam öğretecekti, olmadı.'),
+                s(
+                  'kaan',
+                  'Yok. Ehliyetim hiç olmadı. Motosiklet de yok, kask da. Bisiklete bile binemem; babam öğretecekti, olmadı.',
+                ),
                 s('uye', 'Not edildi. Sürücü belgesi sorgusu dosyaya eklensin.'),
                 th('Üye hâkim soruyu neden sorduğumu bilmiyor. Henüz.'),
               ],
@@ -950,6 +959,18 @@ export const hearing1: CasePart = {
             },
           ],
         }),
+        pressRule('PR_S5', 'S5', {
+          score: { SORGULAMA: 25 },
+          responses: [
+            {
+              lines: [
+                me('İlaç kutularının üzerinde ne yazıyordu, tanık? Kimin adına, kimin reçetesiyle?'),
+                s('tuncay', 'Okumadım. Kutu kutudur. Bu işlerde hep olur, onu söylüyorum.'),
+                th('Okumamış. Bir kutuyu okumadan profil çıkarmış. Kutunun üstünde bir hastane adı vardı; ben okudum.'),
+              ],
+            },
+          ],
+        }),
         presentRule('PS_S5', 'S5', ['ev_tedavi', 'ded_kullanici'], {
           score: { SORGULAMA: 100 },
           effects: [
@@ -1027,9 +1048,7 @@ export const hearing1: CasePart = {
                 me(
                   'Fotoğraf albümü, 23 numaralı kare. Şekerlik mutfakta değil, koridordaki rafta: arka oda kapısına iki adım.',
                 ),
-                me(
-                  'Kriminal rapor: şekerlikteki iki paket, arka odadaki 46 paketle aynı tip poşette, aynı gramajda.',
-                ),
+                me('Kriminal rapor: şekerlikteki iki paket, arka odadaki 46 paketle aynı tip poşette, aynı gramajda.'),
                 s('tuncay', 'Raf… evet, koridordaydı. Ben mutfak yazdım çünkü şekerlik mutfak eşyasıdır.', 'saskin'),
                 s('uye', 'Paketlerin üzerinde sanığın izi var mı, tanık?'),
                 s('tuncay', 'Paketlerde elverişli iz yok, Sayın Hâkim. Kavanozun dışında var.'),
@@ -1127,7 +1146,9 @@ export const hearing1: CasePart = {
           score: { USUL_BILGISI: 30 },
           effects: [raise('iz_istendi')],
           good: 'Somut delil istemi (CMK 206/1): terazideki iz sanığa ait değil; karşılaştırma, kişi bulunup izi alındığında yapılır.',
-          responses: [{ lines: [s('baskan', 'Kabul. Kolluğa yazı yazılsın; şahıs bulunursa karşılaştırma yapılsın.')] }],
+          responses: [
+            { lines: [s('baskan', 'Kabul. Kolluğa yazı yazılsın; şahıs bulunursa karşılaştırma yapılsın.')] },
+          ],
           next: '$stay',
         }),
         option('TL_TAHLIYE', 'Tutukluluğun incelenmesi ve adli kontrolle tahliye', {

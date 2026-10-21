@@ -23,6 +23,8 @@ import { card, me, n, s, th, voice } from './shared.js';
 
 /** Muhbirin anlatısı duruşmada sarsıldı mı? */
 const muhbirSarsildi = any(flag('contra_t3'), flag('contra_t4'), flag('contra_t5'), flag('tolga_kirildi'));
+/** Muhbirin satış anlatımı esasen çöktü mü (kapıdaki kasklı adam, saat ya da dönüş)? Kask tutarsızlığı (T5) tek başına değil. */
+const muhbirCoktu = any(flag('contra_t3'), flag('contra_t4'), flag('tolga_kirildi'));
 
 export const outcomes: CasePart = {
   outcomes: [
@@ -44,6 +46,9 @@ export const outcomes: CasePart = {
           'Savunmanın arka odayı bir ev arkadaşına bağlayan anlatımı para karşılığı bir tanıkla desteklenmek istendiğinden heyet, bu anlatıma ve ona dayanan savunma beyanlarına itibar etmemiştir (CMK 217).',
         ),
         because(
+          'Muhbir tanık duruşmada paketi Daire 7’den sanıktan aldığını beyan etmiş; müdafi tanığa soru sormamıştır.',
+        ),
+        because(
           'Kira sözleşmesi sanık adınadır; arka odada ve ortak alanda ele geçen paketler, hassas terazi ve kilitli poşetler ticaret kastını göstermektedir.',
           not(flag('contra_s3')),
         ),
@@ -52,16 +57,8 @@ export const outcomes: CasePart = {
           flag('contra_s3'),
         ),
         because(
-          'Ortak alandaki şekerlikte satışa hazır hâlde iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur.',
-          all(flag('contra_s3'), not(flag('jar_cleared'))),
-        ),
-        because(
-          'Hüküm, muhbir tanığın 9 Kasım gecesi paketi Daire 7’den sanıktan aldığına ilişkin, duruşmada sorgulanmadan kalan ve savunmanın çöken anlatımı dışında hiçbir delille karşılanmamış beyanına dayanmaktadır (CMK 217).',
-          all(flag('contra_s3'), flag('jar_cleared'), not(muhbirSarsildi)),
-        ),
-        because(
-          'Muhbir tanığın kask ve saat ayrıntılarındaki çelişkileri kayda geçmiştir; heyet bunları çevresel saymış; savunmanın karşı anlatımı para karşılığı bir tanığa dayandığından, satışın Daire 7’de yapıldığı yönündeki çekirdek beyanı inandırıcı bulmuştur (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir.',
-          all(flag('contra_s3'), flag('jar_cleared'), muhbirSarsildi),
+          'Ortak alandaki şekerlikte satışa hazır hâlde iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur; heyet bu paketleri, savunmanın çöken anlatımı karşısında sanığın zilyetliğinde kabul etmiştir (CMK 217).',
+          flag('contra_s3'),
         ),
       ],
       legalBasis: 'TCK 188/3, 188/4-a, 52, 53, 62/1; CMK 206/2-a, 217, 273/1; Anayasa 38/6; TCK 272, 38; Av.K. 34',
@@ -202,7 +199,7 @@ export const outcomes: CasePart = {
       priority: 3,
       // Delil zinciri (beraat_e) kurulduysa heyet beraat eder; puan, esas savunmanın biçimi ve ikna sayacı hükmü
       // değiştirmez. Kayıt sanık lehineyken mahkûmiyet hukuken savunulamaz; özensiz oyun yalnızca kapanışı değiştirir.
-      when: all(not(flag('cokus')), ref('beraat_e')),
+      when: ref('beraat_e'),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -243,8 +240,16 @@ export const outcomes: CasePart = {
           flag('contra_t4'),
         ),
         because(
-          'Geriye kalan muhbir beyanı, etkin pişmanlık beklentisiyle verilmiş ve başka bir delille desteklenmeyen tek beyandır; tek başına hükme esas alınamaz.',
+          'Arka odadaki materyal üçüncü kişinin kilitli odasında ele geçmiştir; dairede madde bulunduğunu gösterse de muhbirin satıcının kimliğine ilişkin anlatımını doğrulamaz.',
+          all(not(muhbirSarsildi), not(flag('key_excluded'))),
+        ),
+        because(
+          'Geriye kalan muhbir beyanı, etkin pişmanlık beklentisiyle verilmiş ve kimlik yönünden başka bir delille desteklenmeyen tek beyandır; tek başına hükme esas alınamaz.',
           not(muhbirSarsildi),
+        ),
+        because(
+          'Müdafiin duruşma sonundaki ilgisiz sunumları kayıttaki delilleri değiştirmez; heyet hükmü duruşmada kurulan kayda dayandırmıştır.',
+          flag('cokus'),
         ),
         because(
           'Savcı bulunmaksızın yapılan aramada iki yerine tek tanık bulundurulmuş; o tanık da aramanın başında değil, kilitli kapı açıldıktan sonra çağrılmıştır (CMK 119/4).',
@@ -415,13 +420,12 @@ export const outcomes: CasePart = {
       class: 'RECHARACTERIZED',
       priority: 4,
       when: all(
-        not(flag('cokus')),
         not(flag('jar_cleared')),
         // 191 kaydın kendisinden doğar: arka oda sanığa bağlanamadı (oda varsayımı çöktü), muhbirin satış anlatımı zaman
         // bakımından çöktü (Z raporu) ve şekerlik aklanmadı; geriye bir kullanıcının (saç analizi) ortak alandaki iki
         // paketi kalır. Bu kayıtta mütalaa T_05N'ye gider ve CMK 226 hatırlatması (ek savunma) her durumda yapılır.
         flag('contra_s2'),
-        flag('contra_t4'),
+        muhbirCoktu,
         flag('ek_savunma'),
       ),
       stamp: 'NİTELİK DEĞİŞTİ',
@@ -433,6 +437,19 @@ export const outcomes: CasePart = {
         because('Arka odanın sanığa ait olduğu ispat edilememiştir; ticaret kastı sabit değildir.', flag('contra_s2')),
         because(
           'Sanığın 9 Kasım gecesi işyerinde kasa başında olduğu Z raporuyla sabittir; muhbirin satış anlatımı hükme esas alınmamıştır. Satış ya da satışa arz fiili ispatlanamamıştır.',
+          flag('contra_t4'),
+        ),
+        because(
+          'Muhbir tanık duruşmada paketi sanıktan değil arka odanın kiracısından aldığını beyan etmiştir; satış ya da satışa arz fiili sanık yönünden ispatlanamamıştır.',
+          all(flag('tolga_kirildi'), not(flag('contra_t4'))),
+        ),
+        because(
+          'Muhbir tanığın tarif ettiği satıcı kasklı bir kuryedir; sanığın ne kaskı ne ehliyeti vardır. Satış anlatımı sanığa bağlanamamış, hükme esas alınmamıştır.',
+          all(flag('contra_t3'), not(flag('contra_t4')), not(flag('tolga_kirildi'))),
+        ),
+        because(
+          'Duruşma müdafiin ilgisiz sunumları üzerine kısa kesilmiş; heyet nitelik değişikliğini sanığa hatırlatarak ek savunmasını almıştır (CMK 226/1).',
+          flag('cokus'),
         ),
         because(
           'Ortak alandaki şekerlikte iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur; sanığın kullanıcı olduğu saç analiziyle sabittir. Bu olgular kullanmak için bulundurmayla uyumludur.',
@@ -450,7 +467,7 @@ export const outcomes: CasePart = {
       legalBasis: 'TCK 191/1, 191/3, 191/8; CMK 225/2, 226, 231/8, 231/12; TCK 54',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        'Odanın sanığa ait olmadığını göster, muhbirin saatini Z raporuyla çürüt, ama şekerliği arka odanın stoğuna bağlayamazsan; ek savunma hakkını kullan.',
+        'Odanın sanığa ait olmadığını göster, muhbirin satış anlatımını (kask, saat ya da dönüş) çürüt, ama şekerliği arka odanın stoğuna bağlayamazsan; ek savunma hakkını kullan.',
       epilogue: [
         {
           lines: [
@@ -492,65 +509,52 @@ export const outcomes: CasePart = {
       sentence: '12 yıl 6 ay hapis · 125.000 TL adli para cezası',
       verdictText:
         'Sanık Kaan Yıldız’ın eylemine uyan TCK 188/3 uyarınca takdiren alt sınırdan 10 yıl hapis ve 1.000 gün adli para cezası; maddenin kokain olması nedeniyle TCK 188/4-a uyarınca yarı oranında artırılarak 15 yıl hapis ve 1.500 gün adli para cezası; sabıkasız geçmişi ve cezanın geleceği üzerindeki olası etkileri gözetilerek TCK 62/1 uyarınca 1/6 oranında indirilerek 12 yıl 6 ay hapis ve 1.250 gün adli para cezası ile CEZALANDIRILMASINA; bir gün karşılığı en az 100 TL’den 125.000 TL adli para cezasına (TCK 52/2); TCK 53 uyarınca hak yoksunluklarına; ele geçen maddenin müsaderesine (TCK 54); tutukluluk hâlinin devamına (adli kontrolle tahliye edilmişse hükümle birlikte tutuklanmasına); tebliğden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).',
+      // Bu sonuca düşen kayıtlar: oda sanığa bağlı kaldı (contra_s2 yok) ya da oda bağlanamadı ama şekerlik aklanmadı
+      // ve muhbirin satış anlatımı çökmedi. Oda bağlanamamış + şekerlik aklanmış kayıt beraattir; oda bağlanamamış +
+      // anlatı çökmüş kayıt 191'dir (T_05N ya da çöküşte heyetin CMK 226 hatırlatması).
       reasoning: [
         because(
-          'Kira sözleşmesi sanık adınadır; arka odada ve ortak alanda ele geçen paketler, hassas terazi ve kilitli poşetler ticaret kastını göstermektedir.',
-          all(not(flag('contra_s2')), not(flag('key_excluded'))),
+          'Kira sözleşmesi sanık adınadır; arka odanın sanığın kullanımında olmadığı gösterilememiştir. Arka odada ve ortak alanda ele geçen paketler, hassas terazi ve kilitli poşetler ticaret kastını göstermektedir.',
+          all(not(flag('contra_s2')), not(flag('jar_cleared'))),
         ),
         because(
-          'Arka odanın sanığın kullanımında olduğu kanıtlanamamışsa da, aynı dairede ele geçen paketler, hassas terazi ve kilitli poşetler dairede ticaret yapıldığını göstermektedir.',
-          all(flag('contra_s2'), not(flag('key_excluded'))),
+          'Kira sözleşmesi sanık adınadır; arka odanın sanığın kullanımında olmadığı gösterilememiştir. Orada ele geçen kırk altı paket, hassas terazi ve kilitli poşetler ticaret kastını göstermektedir; şekerlikteki iki paket hükme esas alınmamıştır.',
+          all(not(flag('contra_s2')), flag('jar_cleared')),
         ),
         because(
-          'Arka odadaki materyal kapsam dışı aramayla elde edildiğinden hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2).',
+          'Arka odanın kilidinin kırılarak açıldığı kayda geçmiştir; ancak odanın sanığın kullanımında olduğu çürütülemediğinden heyet aramayı kararın kapsamında saymıştır (CMK 119/1).',
+          all(not(flag('contra_s2')), flag('contra_s3')),
+        ),
+        because(
+          'Muhbir tanığın anlatımındaki çelişkiler kayda geçmiştir; hüküm muhbir beyanına değil, sanığın kullanımında kabul edilen arka odada ele geçen materyale dayanmaktadır.',
+          all(not(flag('contra_s2')), muhbirSarsildi),
+        ),
+        because(
+          'Muhbir tanığın paketi Daire 7’den sanıktan aldığına ilişkin beyanı da bu yöndedir.',
+          all(not(flag('contra_s2')), not(muhbirSarsildi)),
+        ),
+        because(
+          'Arka odanın sanığın kullanımında olduğu kanıtlanamamıştır; arka odadaki materyal sanığın zilyetliğine bağlanmamıştır.',
+          flag('contra_s2'),
+        ),
+        because(
+          'Arka odadaki materyal ayrıca kapsam dışı aramayla elde edildiğinden hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2).',
           flag('key_excluded'),
         ),
         because(
-          'Ortak alandaki şekerlikte satışa hazır hâlde iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur.',
-          not(flag('jar_cleared')),
-        ),
-        because(
-          'Muhbir tanığın paketi Daire 7’den sanıktan aldığına ilişkin beyanı çelişkiyle sarsılmamıştır.',
-          not(muhbirSarsildi),
-        ),
-        because(
-          'Arka oda materyali hükme esas alınmamış olsa da, muhbir tanığın sanıktan paket aldığına ilişkin beyanı, ortak alandaki şekerlikte ele geçen paketler ve kavanozdaki izle desteklenmiş sayılmıştır.',
-          all(flag('key_excluded'), not(muhbirSarsildi), not(flag('jar_cleared'))),
-        ),
-        because(
-          'Arka oda materyali hükme esas alınmamıştır; ancak odanın üçüncü kişiye ait olduğu ispat edilemediğinden heyet, kira sözleşmesi sanık adına olan dairenin ortak alanında ele geçen paketleri muhbir beyanıyla birlikte sanığın zilyetliğinde kabul etmiştir (CMK 217).',
-          all(flag('key_excluded'), not(muhbirSarsildi), flag('jar_cleared')),
-        ),
-        because(
-          'Muhbir tanığın kask ayrıntısındaki çelişkisi kayda geçmiştir. Heyet bunu gece yarısı alınan ifadenin çevresel ayrıntısı saymış, tanığın satışın Daire 7’de yapıldığı yönündeki çekirdek beyanını inandırıcı bulmuştur (CMK 217).',
-          all(any(flag('contra_t3'), flag('contra_t5')), not(flag('contra_t4')), not(flag('tolga_kirildi'))),
-        ),
-        because(
-          'Sanığın 9 Kasım gecesi işyerinde kasa başında olduğu Z raporuyla sabittir; heyet muhbirin satış anlatımını hükme esas almamış, hükmü dairede ele geçen ve sanığın zilyetliğinde kabul edilen paketlerin ticaret amacıyla bulundurulmasına dayandırmıştır (TCK 188/3).',
-          all(flag('contra_t4'), not(flag('tolga_kirildi'))),
-        ),
-        because(
-          'Muhbir tanık duruşmada önceki beyanından dönmüştür; heyet, aynı tanığın birbiriyle çelişen iki beyanından hiçbirini tek başına hükme esas almamıştır.',
-          flag('tolga_kirildi'),
-        ),
-        because(
-          'Heyet, kavanozdaki izi ve ortak alandaki paketleri sanığın dairedeki madde trafiğine katıldığının göstergesi saymış; savunmanın bu delillere ilişkin açıklamasını yeterli bulmamıştır (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir.',
-          all(flag('key_excluded'), muhbirSarsildi, not(flag('jar_cleared'))),
-        ),
-        because(
-          'Arka odanın üçüncü kişiye ait olduğu ispat edilemediğinden heyet, kira sözleşmesi sanık adına olan dairenin ortak alanında ele geçen paketleri sanığın zilyetliğinde kabul etmiştir (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir.',
-          all(flag('key_excluded'), muhbirSarsildi, flag('jar_cleared')),
-        ),
-        because(
-          'Arama tutanağındaki eksiklikler kayda geçmiştir; deliller bir bütün olarak değerlendirildiğinde heyet, ticaret fiilinin sanık tarafından işlendiği kanaatine varmıştır (CMK 217).',
+          'Muhbir tanığın 9 Kasım gecesi paketi Daire 7’den sanıktan aldığına ilişkin beyanı duruşmada çürütülmemiş; ortak alandaki şekerlikte satışa hazır hâlde ele geçen iki paket ve kavanozdaki sanığın iziyle desteklenmiştir. Hüküm bu satışa ve şekerlikteki paketlere dayanmaktadır (CMK 217).',
           flag('contra_s2'),
+        ),
+        because(
+          'Muhbir tanığın kask ayrıntısındaki tutarsızlığı kayda geçmiştir; heyet bunu gece yarısı alınan ifadenin çevresel ayrıntısı saymıştır. Bu, istinafta denetlenecek bir delil takdiridir.',
+          all(flag('contra_s2'), flag('contra_t5')),
         ),
         because(
           'Savunmanın duruşmada sunduğu belgeler ileri sürdüğü çelişkileri göstermemiş; heyet delilleri iddianamedeki anlatım doğrultusunda değerlendirmiştir (CMK 217).',
           all(flag('cokus'), not(flag('contra_s2'))),
         ),
         because(
-          'Savunma, duruşmanın sonunda tanığa ilgisiz belgeler sunarak kendi anlatımını zayıflatmıştır; heyet savunmanın dayanaksız kalan iddialarına itibar etmemiştir.',
+          'Savunma, duruşmanın sonunda tanığa ilgisiz belgeler sunarak çapraz sorgu imkânını kendisi tüketmiştir; muhbirin anlatımı bu nedenle sınanamamıştır.',
           all(flag('cokus'), flag('contra_s2')),
         ),
       ],

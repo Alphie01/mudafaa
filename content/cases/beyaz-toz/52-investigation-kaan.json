@@ -1196,7 +1196,67 @@
             "category": "SAVUNMA_STRATEJISI"
           }
         },
-        { "id": "G_BITIR", "kind": "CONTINUE", "label": "Görüşmeyi bitir", "role": "BACK", "next": "$return" }
+        {
+          "id": "G_BITIR",
+          "kind": "CONTINUE",
+          "label": "Görüşmeyi bitir",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "any": [
+              {
+                "any": [
+                  { "cmp": [{ "var": "min" }, "<=", 10] },
+                  { "all": [{ "cmp": [{ "visits": "INV_GORUSME" }, ">", 1] }, { "cmp": [{ "var": "min" }, "<", 8] }] }
+                ]
+              },
+              {
+                "all": [
+                  { "chosen": "TP_SABAH" },
+                  { "chosen": "TP_ARKA" },
+                  { "chosen": "TP_BARIS" },
+                  { "chosen": "TP_KENDI" },
+                  { "chosen": "TP_DEFNE" },
+                  { "any": [{ "chosen": "TP_PAZAR" }, { "not": { "hasEvidence": "clue_tolga_saat" } }] },
+                  { "any": [{ "chosen": "TP_KILIT" }, { "not": { "hasEvidence": "clue_kilit" } }] },
+                  {
+                    "any": [
+                      { "chosen": "TP_SEKER" },
+                      { "not": { "all": [{ "hasEvidence": "clue_sekerlik" }, { "hasEvidence": "clue_kavanoz_iz" }] } }
+                    ]
+                  },
+                  {
+                    "any": [
+                      { "chosen": "TP_MESAJ" },
+                      { "not": { "any": [{ "hasEvidence": "clue_odaya_girme" }, { "hasEvidence": "clue_iki_tane" }] } }
+                    ]
+                  },
+                  {
+                    "any": [
+                      { "chosen": "TP_TOLGA" },
+                      {
+                        "not": {
+                          "any": [
+                            { "flag": "fact_arka" },
+                            { "visited": "INV_TOLGA" },
+                            { "hasEvidence": "clue_kira_defteri" }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "any": [
+                      { "chosen": "TP_TEDAVI" },
+                      { "not": { "any": [{ "hasEvidence": "clue_randevu" }, { "hasEvidence": "clue_tedavi" }] } }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "lockedReason": "Kaan karşında oturuyor. Bir şey sormadan kalkamazsın."
+        }
       ]
     }
   ],

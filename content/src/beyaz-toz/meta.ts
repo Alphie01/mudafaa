@@ -1,6 +1,5 @@
 import {
   all,
-  any,
   categories,
   CASE_FORMAT_ID,
   counter,
@@ -99,12 +98,10 @@ export const meta: CasePart = {
     { id: 'kart2', label: 'Tahtada en az 2 kart var', when: { cmp: [{ count: 'evidence', tag: 'kart' }, '>=', 2] } },
     {
       id: 'beraat_e',
-      label: 'Oda varsayımı çöktü, şekerlik aklandı; muhbir sarsıldı ya da arka oda materyali dışlandı',
-      when: all(
-        flag('contra_s2'),
-        flag('jar_cleared'),
-        any(flag('contra_t3'), flag('contra_t4'), flag('tolga_kirildi'), flag('key_excluded')),
-      ),
+      // Oda sanığa bağlanamadı ve şekerlik aklandı: geriye etkin pişmanlık beklentisiyle verilmiş, kimlik yönünden
+      // desteksiz muhbir beyanı kalır; tek başına hükme esas alınamaz (hukuki notlar §4-2).
+      label: 'Oda varsayımı çöktü ve şekerlik aklandı',
+      when: all(flag('contra_s2'), flag('jar_cleared')),
     },
   ],
   variables: [
@@ -128,6 +125,7 @@ export const meta: CasePart = {
     meter('ex_z', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('ex_mut', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 1, resource: true }),
     meter('ex_ema', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
+    meter('tahta', 'Yanlış bağlantı hakkı', 'counter', 3, 3, { lowAt: 1, resource: true }),
     meter('dayanak', 'Dayanak', 'counter', 3, 3, { lowAt: 1, resource: true }),
     meter('dil_hak', 'Talep hakkı', 'counter', 3, 3, { lowAt: 1, resource: true }),
     meter('cred', 'Güvenilirlik', 'hearts', 5, 5, { lowAt: 1 }),

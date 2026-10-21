@@ -157,7 +157,30 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "TUTANAK_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+        {
+          "id": "TUTANAK_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_TUT_EKLEME" },
+                  { "uses": "EX_TUT_TANIK" },
+                  { "uses": "EX_TUT_BAS" },
+                  { "uses": "EX_TUT_KROKI" },
+                  { "uses": "EX_TUT_KROKI_ERKEN" },
+                  { "uses": "FB_TUTANAK" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     },
     {
@@ -287,7 +310,30 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "KARAR_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+        {
+          "id": "KARAR_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_KAR_KAPSAM" },
+                  { "uses": "EX_KAR_KAPSAM_ERKEN" },
+                  { "uses": "EX_KAR_KAPSAM_LUPE" },
+                  { "uses": "EX_KAR_TALEP" },
+                  { "uses": "EX_KAR_SURE" },
+                  { "uses": "FB_KARAR" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     },
     {
@@ -417,7 +463,30 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "MESAJ_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+        {
+          "id": "MESAJ_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_MES_ODA" },
+                  { "uses": "EX_MES_IKI" },
+                  { "uses": "EX_MES_EKIM" },
+                  { "uses": "EX_MES_HAT" },
+                  { "uses": "EX_MES_HAT_ERKEN" },
+                  { "uses": "FB_MESAJ" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     },
     {
@@ -575,7 +644,30 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "KRIMINAL_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+        {
+          "id": "KRIMINAL_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_KRI_PARTI" },
+                  { "uses": "EX_KRI_IZ" },
+                  { "uses": "EX_KRI_PAKET" },
+                  { "uses": "EX_KRI_EKLER" },
+                  { "uses": "EX_KRI_KAVANOZ" },
+                  { "uses": "FB_KRIMINAL" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     },
     {
@@ -683,7 +775,7 @@
           "match": { "tool": "lupe", "target": "t_not" },
           "feedback": {
             "title": "BİR İSİM VERMEK",
-            "text": "Gece yarısı, üzerinde bir paketle yakalanan adama bir kapı gösterilmiş: satıcıyı söylersen cezan düşer ya da azalır. Bir isim vermesi gerekiyordu. Hangi ismi seçeceği ona kalmıştı.",
+            "text": "Gece yarısı, üzerinde bir paketle yakalanan adama bir kapı gösterilmiş: satıcıyı söylersen cezan düşer ya da azalır. Bir isim vermesi gerekiyordu. Ve verdi; ifadenin altına “yararlanmak istiyorum” notu düşülmüş.",
             "label": "+100 SKOR",
             "tone": "info"
           },
@@ -704,7 +796,29 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "TOLGA_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+        {
+          "id": "TOLGA_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_TOL_KASK" },
+                  { "uses": "EX_TOL_SAAT" },
+                  { "uses": "EX_TOL_GECMIS" },
+                  { "uses": "EX_TOL_NOT" },
+                  { "uses": "FB_TOLGA" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     },
     {
@@ -810,7 +924,28 @@
           },
           "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
         },
-        { "id": "EMANET_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+        {
+          "id": "EMANET_BITIR",
+          "kind": "CONTINUE",
+          "label": "Belgeyi kapat",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "EX_EMA_ANAHTAR" },
+                  { "uses": "EX_EMA_CUZDAN" },
+                  { "uses": "EX_EMA_ILAC" },
+                  { "uses": "FB_EMANET" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "Belgeye en az iki kez bak (inceleme ya da karşılaştırma); tek bakışla dosya kapanmaz."
+        }
       ]
     }
   ],

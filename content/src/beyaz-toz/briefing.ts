@@ -44,7 +44,7 @@ export const briefing: CasePart = {
             ),
             voice('İKİNCİ SES', 'Ihlamur on dört. Daire yedi.'),
             voice('POLİS', 'Adı?'),
-            n('Siluet yutkundu. Bir isim seçti; kimin ismini seçtiğini, neden seçtiğini kimse sormadı.'),
+            n('Siluet yutkundu. Yağmur bir an dindi gibi oldu. Sonra konuştu.'),
             voice('İKİNCİ SES', 'Kaan. Kaan Yıldız.'),
             n('Telsiz cızırdadı. Biri bir not defterine bir isim yazdı. İsim, yağmurdan önce kurudu.', { fx: 'fade' }),
           ],

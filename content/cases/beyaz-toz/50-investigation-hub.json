@@ -10,7 +10,7 @@
       "background": "buro",
       "lines": [
         {
-          "when": { "cmp": [{ "var": "day" }, "==", 1] },
+          "when": { "all": [{ "cmp": [{ "var": "ap" }, "==", 5] }, { "cmp": [{ "var": "day" }, "==", 1] }] },
           "lines": [
             { "speaker": "narrator", "text": "GÜN 1/3 · BİRİNCİ CELSEYE 11 GÜN", "style": "card", "bg": "buro" },
             {
@@ -28,6 +28,7 @@
         {
           "when": {
             "all": [
+              { "cmp": [{ "var": "ap" }, "==", 5] },
               { "cmp": [{ "var": "day" }, "==", 2] },
               {
                 "any": [
@@ -52,7 +53,7 @@
           ]
         },
         {
-          "when": { "cmp": [{ "var": "day" }, "==", 2] },
+          "when": { "all": [{ "cmp": [{ "var": "ap" }, "==", 5] }, { "cmp": [{ "var": "day" }, "==", 2] }] },
           "lines": [
             { "speaker": "narrator", "text": "GÜN 2/3 · BİRİNCİ CELSEYE 10 GÜN", "style": "card", "bg": "buro" },
             {
@@ -62,6 +63,7 @@
           ]
         },
         {
+          "when": { "cmp": [{ "var": "ap" }, "==", 5] },
           "lines": [
             { "speaker": "narrator", "text": "GÜN 3/3 · BİRİNCİ CELSEYE 9 GÜN", "style": "card", "bg": "buro" },
             {
@@ -237,8 +239,8 @@
           "label": "Çıkarım tahtası",
           "next": { "push": "INV_CIKARIM" },
           "description": "0 EP · ipuçlarını birleştir",
-          "enabledWhen": { "ref": "kart2" },
-          "lockedReason": "En az 2 ipucu gerekli."
+          "enabledWhen": { "all": [{ "ref": "kart2" }, { "cmp": [{ "var": "tahta" }, ">", 0] }] },
+          "lockedReason": "En az 2 ipucu gerekli. (Bugün üç yanlış bağlantı kurduysan tahta yarına kadar kapalı.)"
         },
         {
           "id": "A_LEYLA",
@@ -255,6 +257,42 @@
           "label": "DURUŞMAYA GİT · 1. CELSE",
           "role": "PRIMARY",
           "visibleWhen": { "cmp": [{ "var": "day" }, "==", 3] },
+          "enabledWhen": {
+            "all": [
+              { "cmp": [{ "var": "leyla_gun" }, ">=", 3] },
+              {
+                "any": [
+                  { "cmp": [{ "var": "ap" }, "<=", 0] },
+                  {
+                    "all": [
+                      { "any": [{ "chosen": "A_ARKA" }] },
+                      { "any": [{ "chosen": "A_ON" }] },
+                      { "any": [{ "chosen": "A_BINA" }] },
+                      { "any": [{ "not": { "not": { "visited": "INV_GORUSME" } } }] },
+                      { "any": [{ "chosen": "A_GORUS2" }, { "not": { "visited": "INV_GORUSME" } }] },
+                      { "any": [{ "chosen": "A_DEFNE" }] },
+                      {
+                        "any": [
+                          { "chosen": "A_NESRIN" },
+                          { "not": { "any": [{ "visited": "INV_BINA" }, { "visited": "INV_TUTANAK" }] } }
+                        ]
+                      },
+                      { "any": [{ "chosen": "A_TUTANAK" }] },
+                      { "any": [{ "chosen": "A_KARAR" }] },
+                      { "any": [{ "chosen": "A_MESAJ" }] },
+                      { "any": [{ "chosen": "A_KRIMINAL" }] },
+                      { "any": [{ "chosen": "A_TOLGA" }] },
+                      { "any": [{ "chosen": "A_EMANET" }] },
+                      {
+                        "any": [{ "not": { "not": { "any": [{ "chosen": "DIL_VER" }, { "chosen": "DIL_VAZGEC" }] } } }]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "lockedReason": "Son gün henüz bitmedi: kalan eylem puanını kullan ve celseden önce Leyla’ya danış.",
           "confirm": "Duruşmaya gidersen soruşturma biter. Emin misin?",
           "next": "INV_GECE_1"
         }
@@ -268,7 +306,8 @@
       "title": "Gün sonu",
       "onEnter": [
         { "type": "VAR", "var": "day", "op": "inc", "value": 1 },
-        { "type": "VAR", "var": "ap", "op": "set", "value": 5 }
+        { "type": "VAR", "var": "ap", "op": "set", "value": 5 },
+        { "type": "VAR", "var": "tahta", "op": "set", "value": 3 }
       ],
       "routes": [{ "when": { "cmp": [{ "var": "day" }, "==", 2] }, "to": "INV_AKSAM1" }, { "to": "INV_AKSAM2" }],
       "choices": []
@@ -839,12 +878,13 @@
       "eyebrow": "DAVA #04 · SORUŞTURMA",
       "title": "Çıkarım Tahtası",
       "background": "buro_gece",
+      "hud": ["tahta"],
       "lines": [
         {
           "lines": [
             {
               "speaker": "narrator",
-              "text": "İki ipucunu seç. Birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar. Yanlış çift zaman ve puan götürür."
+              "text": "İki ipucunu seç. Birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar. Yanlış çift puan ve bir bağlantı hakkı götürür; üç hak bitince tahta yarına kadar kapanır."
             }
           ]
         }
@@ -1030,10 +1070,13 @@
           "feedback": {
             "title": "Bu ikisi birbirini açıklamıyor",
             "text": "Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Başka bir çift dene.",
-            "label": "BAĞLANTI YOK · −50 SKOR",
+            "label": "BAĞLANTI YOK · −50 SKOR · −1 HAK",
             "tone": "error"
           },
-          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 }]
+          "effects": [
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -50 },
+            { "type": "VAR", "var": "tahta", "op": "dec", "value": 1 }
+          ]
         },
         { "id": "CIKARIM_BITIR", "kind": "CONTINUE", "label": "Tahtadan ayrıl", "role": "BACK", "next": "$return" }
       ]

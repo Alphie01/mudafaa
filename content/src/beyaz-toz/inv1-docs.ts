@@ -1,4 +1,15 @@
-import { all, documentExam, examine, fallback, flag, has, not, raise, row, tool } from '../../../tools/content/src/kit/index.js';
+import {
+  all,
+  documentExam,
+  examine,
+  fallback,
+  flag,
+  has,
+  not,
+  raise,
+  row,
+  tool,
+} from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { INV1, card, n, s, th } from './shared.js';
 
@@ -457,7 +468,7 @@ export const inv1Docs: CasePart = {
           effects: [raise('fact_tolga_192')],
           feedback: {
             title: 'BİR İSİM VERMEK',
-            text: 'Gece yarısı, üzerinde bir paketle yakalanan adama bir kapı gösterilmiş: satıcıyı söylersen cezan düşer ya da azalır. Bir isim vermesi gerekiyordu. Hangi ismi seçeceği ona kalmıştı.',
+            text: 'Gece yarısı, üzerinde bir paketle yakalanan adama bir kapı gösterilmiş: satıcıyı söylersen cezan düşer ya da azalır. Bir isim vermesi gerekiyordu. Ve verdi; ifadenin altına “yararlanmak istiyorum” notu düşülmüş.',
             label: '+100 SKOR',
             tone: 'info',
           },

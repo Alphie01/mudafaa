@@ -18,6 +18,9 @@
           "text": "Savunmanın arka odayı bir ev arkadaşına bağlayan anlatımı para karşılığı bir tanıkla desteklenmek istendiğinden heyet, bu anlatıma ve ona dayanan savunma beyanlarına itibar etmemiştir (CMK 217)."
         },
         {
+          "text": "Muhbir tanık duruşmada paketi Daire 7’den sanıktan aldığını beyan etmiş; müdafi tanığa soru sormamıştır."
+        },
+        {
           "when": { "not": { "flag": "contra_s3" } },
           "text": "Kira sözleşmesi sanık adınadır; arka odada ve ortak alanda ele geçen paketler, hassas terazi ve kilitli poşetler ticaret kastını göstermektedir."
         },
@@ -26,44 +29,8 @@
           "text": "Arka odadaki materyal kararın kapsamı dışında, kilit kırılarak elde edildiğinden hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2); bu sonuç tanığın durumundan bağımsızdır."
         },
         {
-          "when": { "all": [{ "flag": "contra_s3" }, { "not": { "flag": "jar_cleared" } }] },
-          "text": "Ortak alandaki şekerlikte satışa hazır hâlde iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur."
-        },
-        {
-          "when": {
-            "all": [
-              { "flag": "contra_s3" },
-              { "flag": "jar_cleared" },
-              {
-                "not": {
-                  "any": [
-                    { "flag": "contra_t3" },
-                    { "flag": "contra_t4" },
-                    { "flag": "contra_t5" },
-                    { "flag": "tolga_kirildi" }
-                  ]
-                }
-              }
-            ]
-          },
-          "text": "Hüküm, muhbir tanığın 9 Kasım gecesi paketi Daire 7’den sanıktan aldığına ilişkin, duruşmada sorgulanmadan kalan ve savunmanın çöken anlatımı dışında hiçbir delille karşılanmamış beyanına dayanmaktadır (CMK 217)."
-        },
-        {
-          "when": {
-            "all": [
-              { "flag": "contra_s3" },
-              { "flag": "jar_cleared" },
-              {
-                "any": [
-                  { "flag": "contra_t3" },
-                  { "flag": "contra_t4" },
-                  { "flag": "contra_t5" },
-                  { "flag": "tolga_kirildi" }
-                ]
-              }
-            ]
-          },
-          "text": "Muhbir tanığın kask ve saat ayrıntılarındaki çelişkileri kayda geçmiştir; heyet bunları çevresel saymış; savunmanın karşı anlatımı para karşılığı bir tanığa dayandığından, satışın Daire 7’de yapıldığı yönündeki çekirdek beyanı inandırıcı bulmuştur (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir."
+          "when": { "flag": "contra_s3" },
+          "text": "Ortak alandaki şekerlikte satışa hazır hâlde iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur; heyet bu paketleri, savunmanın çöken anlatımı karşısında sanığın zilyetliğinde kabul etmiştir (CMK 217)."
         }
       ],
       "legalBasis": "TCK 188/3, 188/4-a, 52, 53, 62/1; CMK 206/2-a, 217, 273/1; Anayasa 38/6; TCK 272, 38; Av.K. 34",
@@ -237,7 +204,7 @@
       "id": "BERAAT_E",
       "class": "ACQUITTAL",
       "priority": 3,
-      "when": { "all": [{ "not": { "flag": "cokus" } }, { "ref": "beraat_e" }] },
+      "when": { "ref": "beraat_e" },
       "stamp": "BERAAT",
       "stampTone": "green",
       "header": "TÜRK MİLLETİ ADINA",
@@ -278,6 +245,24 @@
         },
         {
           "when": {
+            "all": [
+              {
+                "not": {
+                  "any": [
+                    { "flag": "contra_t3" },
+                    { "flag": "contra_t4" },
+                    { "flag": "contra_t5" },
+                    { "flag": "tolga_kirildi" }
+                  ]
+                }
+              },
+              { "not": { "flag": "key_excluded" } }
+            ]
+          },
+          "text": "Arka odadaki materyal üçüncü kişinin kilitli odasında ele geçmiştir; dairede madde bulunduğunu gösterse de muhbirin satıcının kimliğine ilişkin anlatımını doğrulamaz."
+        },
+        {
+          "when": {
             "not": {
               "any": [
                 { "flag": "contra_t3" },
@@ -287,7 +272,11 @@
               ]
             }
           },
-          "text": "Geriye kalan muhbir beyanı, etkin pişmanlık beklentisiyle verilmiş ve başka bir delille desteklenmeyen tek beyandır; tek başına hükme esas alınamaz."
+          "text": "Geriye kalan muhbir beyanı, etkin pişmanlık beklentisiyle verilmiş ve kimlik yönünden başka bir delille desteklenmeyen tek beyandır; tek başına hükme esas alınamaz."
+        },
+        {
+          "when": { "flag": "cokus" },
+          "text": "Müdafiin duruşma sonundaki ilgisiz sunumları kayıttaki delilleri değiştirmez; heyet hükmü duruşmada kurulan kayda dayandırmıştır."
         },
         {
           "when": { "flag": "contra_s4" },
@@ -499,10 +488,9 @@
       "priority": 4,
       "when": {
         "all": [
-          { "not": { "flag": "cokus" } },
           { "not": { "flag": "jar_cleared" } },
           { "flag": "contra_s2" },
-          { "flag": "contra_t4" },
+          { "any": [{ "flag": "contra_t3" }, { "flag": "contra_t4" }, { "flag": "tolga_kirildi" }] },
           { "flag": "ek_savunma" }
         ]
       },
@@ -516,7 +504,22 @@
           "text": "Arka odanın sanığa ait olduğu ispat edilememiştir; ticaret kastı sabit değildir."
         },
         {
+          "when": { "flag": "contra_t4" },
           "text": "Sanığın 9 Kasım gecesi işyerinde kasa başında olduğu Z raporuyla sabittir; muhbirin satış anlatımı hükme esas alınmamıştır. Satış ya da satışa arz fiili ispatlanamamıştır."
+        },
+        {
+          "when": { "all": [{ "flag": "tolga_kirildi" }, { "not": { "flag": "contra_t4" } }] },
+          "text": "Muhbir tanık duruşmada paketi sanıktan değil arka odanın kiracısından aldığını beyan etmiştir; satış ya da satışa arz fiili sanık yönünden ispatlanamamıştır."
+        },
+        {
+          "when": {
+            "all": [{ "flag": "contra_t3" }, { "not": { "flag": "contra_t4" } }, { "not": { "flag": "tolga_kirildi" } }]
+          },
+          "text": "Muhbir tanığın tarif ettiği satıcı kasklı bir kuryedir; sanığın ne kaskı ne ehliyeti vardır. Satış anlatımı sanığa bağlanamamış, hükme esas alınmamıştır."
+        },
+        {
+          "when": { "flag": "cokus" },
+          "text": "Duruşma müdafiin ilgisiz sunumları üzerine kısa kesilmiş; heyet nitelik değişikliğini sanığa hatırlatarak ek savunmasını almıştır (CMK 226/1)."
         },
         {
           "text": "Ortak alandaki şekerlikte iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur; sanığın kullanıcı olduğu saç analiziyle sabittir. Bu olgular kullanmak için bulundurmayla uyumludur."
@@ -542,7 +545,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "Odanın sanığa ait olmadığını göster, muhbirin saatini Z raporuyla çürüt, ama şekerliği arka odanın stoğuna bağlayamazsan; ek savunma hakkını kullan.",
+      "howToReach": "Odanın sanığa ait olmadığını göster, muhbirin satış anlatımını (kask, saat ya da dönüş) çürüt, ama şekerliği arka odanın stoğuna bağlayamazsan; ek savunma hakkını kullan.",
       "epilogue": [
         {
           "lines": [
@@ -592,38 +595,37 @@
       "verdictText": "Sanık Kaan Yıldız’ın eylemine uyan TCK 188/3 uyarınca takdiren alt sınırdan 10 yıl hapis ve 1.000 gün adli para cezası; maddenin kokain olması nedeniyle TCK 188/4-a uyarınca yarı oranında artırılarak 15 yıl hapis ve 1.500 gün adli para cezası; sabıkasız geçmişi ve cezanın geleceği üzerindeki olası etkileri gözetilerek TCK 62/1 uyarınca 1/6 oranında indirilerek 12 yıl 6 ay hapis ve 1.250 gün adli para cezası ile CEZALANDIRILMASINA; bir gün karşılığı en az 100 TL’den 125.000 TL adli para cezasına (TCK 52/2); TCK 53 uyarınca hak yoksunluklarına; ele geçen maddenin müsaderesine (TCK 54); tutukluluk hâlinin devamına (adli kontrolle tahliye edilmişse hükümle birlikte tutuklanmasına); tebliğden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 273/1).",
       "reasoning": [
         {
-          "when": { "all": [{ "not": { "flag": "contra_s2" } }, { "not": { "flag": "key_excluded" } }] },
-          "text": "Kira sözleşmesi sanık adınadır; arka odada ve ortak alanda ele geçen paketler, hassas terazi ve kilitli poşetler ticaret kastını göstermektedir."
+          "when": { "all": [{ "not": { "flag": "contra_s2" } }, { "not": { "flag": "jar_cleared" } }] },
+          "text": "Kira sözleşmesi sanık adınadır; arka odanın sanığın kullanımında olmadığı gösterilememiştir. Arka odada ve ortak alanda ele geçen paketler, hassas terazi ve kilitli poşetler ticaret kastını göstermektedir."
         },
         {
-          "when": { "all": [{ "flag": "contra_s2" }, { "not": { "flag": "key_excluded" } }] },
-          "text": "Arka odanın sanığın kullanımında olduğu kanıtlanamamışsa da, aynı dairede ele geçen paketler, hassas terazi ve kilitli poşetler dairede ticaret yapıldığını göstermektedir."
+          "when": { "all": [{ "not": { "flag": "contra_s2" } }, { "flag": "jar_cleared" }] },
+          "text": "Kira sözleşmesi sanık adınadır; arka odanın sanığın kullanımında olmadığı gösterilememiştir. Orada ele geçen kırk altı paket, hassas terazi ve kilitli poşetler ticaret kastını göstermektedir; şekerlikteki iki paket hükme esas alınmamıştır."
         },
         {
-          "when": { "flag": "key_excluded" },
-          "text": "Arka odadaki materyal kapsam dışı aramayla elde edildiğinden hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2)."
-        },
-        {
-          "when": { "not": { "flag": "jar_cleared" } },
-          "text": "Ortak alandaki şekerlikte satışa hazır hâlde iki paket ele geçmiş, kavanozda sanığın izi bulunmuştur."
-        },
-        {
-          "when": {
-            "not": {
-              "any": [
-                { "flag": "contra_t3" },
-                { "flag": "contra_t4" },
-                { "flag": "contra_t5" },
-                { "flag": "tolga_kirildi" }
-              ]
-            }
-          },
-          "text": "Muhbir tanığın paketi Daire 7’den sanıktan aldığına ilişkin beyanı çelişkiyle sarsılmamıştır."
+          "when": { "all": [{ "not": { "flag": "contra_s2" } }, { "flag": "contra_s3" }] },
+          "text": "Arka odanın kilidinin kırılarak açıldığı kayda geçmiştir; ancak odanın sanığın kullanımında olduğu çürütülemediğinden heyet aramayı kararın kapsamında saymıştır (CMK 119/1)."
         },
         {
           "when": {
             "all": [
-              { "flag": "key_excluded" },
+              { "not": { "flag": "contra_s2" } },
+              {
+                "any": [
+                  { "flag": "contra_t3" },
+                  { "flag": "contra_t4" },
+                  { "flag": "contra_t5" },
+                  { "flag": "tolga_kirildi" }
+                ]
+              }
+            ]
+          },
+          "text": "Muhbir tanığın anlatımındaki çelişkiler kayda geçmiştir; hüküm muhbir beyanına değil, sanığın kullanımında kabul edilen arka odada ele geçen materyale dayanmaktadır."
+        },
+        {
+          "when": {
+            "all": [
+              { "not": { "flag": "contra_s2" } },
               {
                 "not": {
                   "any": [
@@ -633,86 +635,26 @@
                     { "flag": "tolga_kirildi" }
                   ]
                 }
-              },
-              { "not": { "flag": "jar_cleared" } }
+              }
             ]
           },
-          "text": "Arka oda materyali hükme esas alınmamış olsa da, muhbir tanığın sanıktan paket aldığına ilişkin beyanı, ortak alandaki şekerlikte ele geçen paketler ve kavanozdaki izle desteklenmiş sayılmıştır."
-        },
-        {
-          "when": {
-            "all": [
-              { "flag": "key_excluded" },
-              {
-                "not": {
-                  "any": [
-                    { "flag": "contra_t3" },
-                    { "flag": "contra_t4" },
-                    { "flag": "contra_t5" },
-                    { "flag": "tolga_kirildi" }
-                  ]
-                }
-              },
-              { "flag": "jar_cleared" }
-            ]
-          },
-          "text": "Arka oda materyali hükme esas alınmamıştır; ancak odanın üçüncü kişiye ait olduğu ispat edilemediğinden heyet, kira sözleşmesi sanık adına olan dairenin ortak alanında ele geçen paketleri muhbir beyanıyla birlikte sanığın zilyetliğinde kabul etmiştir (CMK 217)."
-        },
-        {
-          "when": {
-            "all": [
-              { "any": [{ "flag": "contra_t3" }, { "flag": "contra_t5" }] },
-              { "not": { "flag": "contra_t4" } },
-              { "not": { "flag": "tolga_kirildi" } }
-            ]
-          },
-          "text": "Muhbir tanığın kask ayrıntısındaki çelişkisi kayda geçmiştir. Heyet bunu gece yarısı alınan ifadenin çevresel ayrıntısı saymış, tanığın satışın Daire 7’de yapıldığı yönündeki çekirdek beyanını inandırıcı bulmuştur (CMK 217)."
-        },
-        {
-          "when": { "all": [{ "flag": "contra_t4" }, { "not": { "flag": "tolga_kirildi" } }] },
-          "text": "Sanığın 9 Kasım gecesi işyerinde kasa başında olduğu Z raporuyla sabittir; heyet muhbirin satış anlatımını hükme esas almamış, hükmü dairede ele geçen ve sanığın zilyetliğinde kabul edilen paketlerin ticaret amacıyla bulundurulmasına dayandırmıştır (TCK 188/3)."
-        },
-        {
-          "when": { "flag": "tolga_kirildi" },
-          "text": "Muhbir tanık duruşmada önceki beyanından dönmüştür; heyet, aynı tanığın birbiriyle çelişen iki beyanından hiçbirini tek başına hükme esas almamıştır."
-        },
-        {
-          "when": {
-            "all": [
-              { "flag": "key_excluded" },
-              {
-                "any": [
-                  { "flag": "contra_t3" },
-                  { "flag": "contra_t4" },
-                  { "flag": "contra_t5" },
-                  { "flag": "tolga_kirildi" }
-                ]
-              },
-              { "not": { "flag": "jar_cleared" } }
-            ]
-          },
-          "text": "Heyet, kavanozdaki izi ve ortak alandaki paketleri sanığın dairedeki madde trafiğine katıldığının göstergesi saymış; savunmanın bu delillere ilişkin açıklamasını yeterli bulmamıştır (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir."
-        },
-        {
-          "when": {
-            "all": [
-              { "flag": "key_excluded" },
-              {
-                "any": [
-                  { "flag": "contra_t3" },
-                  { "flag": "contra_t4" },
-                  { "flag": "contra_t5" },
-                  { "flag": "tolga_kirildi" }
-                ]
-              },
-              { "flag": "jar_cleared" }
-            ]
-          },
-          "text": "Arka odanın üçüncü kişiye ait olduğu ispat edilemediğinden heyet, kira sözleşmesi sanık adına olan dairenin ortak alanında ele geçen paketleri sanığın zilyetliğinde kabul etmiştir (CMK 217). Bu, istinafta denetlenecek bir delil takdiridir."
+          "text": "Muhbir tanığın paketi Daire 7’den sanıktan aldığına ilişkin beyanı da bu yöndedir."
         },
         {
           "when": { "flag": "contra_s2" },
-          "text": "Arama tutanağındaki eksiklikler kayda geçmiştir; deliller bir bütün olarak değerlendirildiğinde heyet, ticaret fiilinin sanık tarafından işlendiği kanaatine varmıştır (CMK 217)."
+          "text": "Arka odanın sanığın kullanımında olduğu kanıtlanamamıştır; arka odadaki materyal sanığın zilyetliğine bağlanmamıştır."
+        },
+        {
+          "when": { "flag": "key_excluded" },
+          "text": "Arka odadaki materyal ayrıca kapsam dışı aramayla elde edildiğinden hükme esas alınmamıştır (Anayasa 38/6, CMK 206/2-a, 217/2)."
+        },
+        {
+          "when": { "flag": "contra_s2" },
+          "text": "Muhbir tanığın 9 Kasım gecesi paketi Daire 7’den sanıktan aldığına ilişkin beyanı duruşmada çürütülmemiş; ortak alandaki şekerlikte satışa hazır hâlde ele geçen iki paket ve kavanozdaki sanığın iziyle desteklenmiştir. Hüküm bu satışa ve şekerlikteki paketlere dayanmaktadır (CMK 217)."
+        },
+        {
+          "when": { "all": [{ "flag": "contra_s2" }, { "flag": "contra_t5" }] },
+          "text": "Muhbir tanığın kask ayrıntısındaki tutarsızlığı kayda geçmiştir; heyet bunu gece yarısı alınan ifadenin çevresel ayrıntısı saymıştır. Bu, istinafta denetlenecek bir delil takdiridir."
         },
         {
           "when": { "all": [{ "flag": "cokus" }, { "not": { "flag": "contra_s2" } }] },
@@ -720,7 +662,7 @@
         },
         {
           "when": { "all": [{ "flag": "cokus" }, { "flag": "contra_s2" }] },
-          "text": "Savunma, duruşmanın sonunda tanığa ilgisiz belgeler sunarak kendi anlatımını zayıflatmıştır; heyet savunmanın dayanaksız kalan iddialarına itibar etmemiştir."
+          "text": "Savunma, duruşmanın sonunda tanığa ilgisiz belgeler sunarak çapraz sorgu imkânını kendisi tüketmiştir; muhbirin anlatımı bu nedenle sınanamamıştır."
         }
       ],
       "legalBasis": "TCK 188/3, 188/4-a, 52, 53, 54, 62/1; CMK 273/1",

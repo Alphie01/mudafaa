@@ -23,6 +23,7 @@ import {
   visited,
   met,
   choiceNode,
+  chosen,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import type { ChoiceDef } from '@mudafaa/case-schema';
@@ -94,8 +95,9 @@ const hubChoices = {
     }),
     p1.free('A_CIKARIM', 'Çıkarım tahtası', 'INV_CIKARIM', {
       description: '0 EP · ipuçlarını birleştir',
-      enabledWhen: ref('kart2'),
-      lockedReason: 'En az 2 ipucu gerekli.',
+      // Yanlış bağlantılar günde üç hakla sınırlı: tahta deneme yanılmayla değil, düşünerek çözülür.
+      enabledWhen: all(ref('kart2'), cmp(v('tahta'), '>', 0)),
+      lockedReason: 'En az 2 ipucu gerekli. (Bugün üç yanlış bağlantı kurduysan tahta yarına kadar kapalı.)',
     }),
     p1.free('A_LEYLA', 'Leyla’ya danış', 'INV_LEYLA', {
       description: '0 EP · günde bir kez',
@@ -105,6 +107,19 @@ const hubChoices = {
   ],
 };
 
+/** Bugün yapılabilecek eylem puanlı bir iş kalmadı mı (her etkinlik ya tükendi ya da görünmüyor)? */
+const isBitti = all(
+  ...Object.values(hubChoices)
+    .flat()
+    .filter((c) => c.cost !== undefined)
+    .map((c) => {
+      const spent = c.maxUses === 1 ? [chosen(c.id)] : [];
+      const hidden = c.visibleWhen === undefined ? [] : [not(c.visibleWhen)];
+      if (spent.length + hidden.length === 0) throw new Error(`${c.id}: sınırsız ve hep görünür etkinlik`);
+      return any(...spent, ...hidden);
+    }),
+);
+
 export const investigation1: CasePart = {
   nodes: [
     p1.hub({
@@ -113,7 +128,7 @@ export const investigation1: CasePart = {
       background: 'buro',
       lines: [
         {
-          when: cmp(v('day'), '==', 1),
+          when: all(cmp(v('ap'), '==', 5), cmp(v('day'), '==', 1)),
           lines: [
             card('GÜN 1/3 · BİRİNCİ CELSEYE 11 GÜN', 'buro'),
             n(
@@ -126,7 +141,11 @@ export const investigation1: CasePart = {
           ],
         },
         {
-          when: all(cmp(v('day'), '==', 2), any(has('clue_kilit'), has('clue_kira_defteri'), has('clue_odaya_girme'))),
+          when: all(
+            cmp(v('ap'), '==', 5),
+            cmp(v('day'), '==', 2),
+            any(has('clue_kilit'), has('clue_kira_defteri'), has('clue_odaya_girme')),
+          ),
           lines: [
             card('GÜN 2/3 · BİRİNCİ CELSEYE 10 GÜN', 'buro'),
             th('Dün bir hayaletin peşindeydim. Bugün bir mont, bir zincir, bir mesaj. Hayaletler mont giymez.'),
@@ -134,13 +153,14 @@ export const investigation1: CasePart = {
           ],
         },
         {
-          when: cmp(v('day'), '==', 2),
+          when: all(cmp(v('ap'), '==', 5), cmp(v('day'), '==', 2)),
           lines: [
             card('GÜN 2/3 · BİRİNCİ CELSEYE 10 GÜN', 'buro'),
             n('Hedef: kâğıtlar ne diyor, fotoğraflar ne gösteriyor? Tutanak ile fotoğraf aynı evi mi anlatıyor?'),
           ],
         },
         {
+          when: cmp(v('ap'), '==', 5),
           lines: [
             card('GÜN 3/3 · BİRİNCİ CELSEYE 9 GÜN', 'buro'),
             n(
@@ -163,9 +183,13 @@ export const investigation1: CasePart = {
         choices: ['A_GORUS', 'A_GORUS2'],
       },
       choices: [
+        // Son gün bitmeden duruşmaya gidilmez: günün eylem puanı harcanır (ya da yapılacak iş kalmamıştır) ve celseden
+        // önceki akşam Leyla'yla dosya bir kez daha konuşulur.
         nav('GO_H1', 'DURUŞMAYA GİT · 1. CELSE', 'INV_GECE_1', {
           role: 'PRIMARY',
           visibleWhen: cmp(v('day'), '==', 3),
+          enabledWhen: all(cmp(v('leyla_gun'), '>=', 3), any(cmp(v('ap'), '<=', 0), isBitti)),
+          lockedReason: 'Son gün henüz bitmedi: kalan eylem puanını kullan ve celseden önce Leyla’ya danış.',
           confirm: 'Duruşmaya gidersen soruşturma biter. Emin misin?',
         }),
       ],
@@ -173,7 +197,7 @@ export const investigation1: CasePart = {
     decisionNode('INV_DAY_END', [{ when: cmp(v('day'), '==', 2), to: 'INV_AKSAM1' }, { to: 'INV_AKSAM2' }], {
       ...INV1,
       title: 'Gün sonu',
-      onEnter: [inc('day', 1), set('ap', 5)],
+      onEnter: [inc('day', 1), set('ap', 5), set('tahta', 3)],
     }),
     story('INV_AKSAM1', {
       ...INV1,
@@ -534,11 +558,12 @@ export const investigation1: CasePart = {
       ...INV1,
       title: 'Çıkarım Tahtası',
       background: 'buro_gece',
+      hud: ['tahta'],
       lines: [
         {
           lines: [
             n(
-              'İki ipucunu seç. Birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar. Yanlış çift zaman ve puan götürür.',
+              'İki ipucunu seç. Birbirini tamamlıyorsa duruşmada kullanabileceğin bir DELİL doğar. Yanlış çift puan ve bir bağlantı hakkı götürür; üç hak bitince tahta yarına kadar kapanır.',
             ),
           ],
         },
@@ -650,10 +675,11 @@ export const investigation1: CasePart = {
       miss: fallback('FB_CIKARIM', 'COMBINE', {
         repeat: 'ONCE_PER_PARAMS',
         score: { DELIL_ANALIZI: -50 },
+        effects: [dec('tahta')],
         feedback: {
           title: 'Bu ikisi birbirini açıklamıyor',
           text: 'Yan yana duruyorlar ama aynı cümleyi kurmuyorlar. Başka bir çift dene.',
-          label: 'BAĞLANTI YOK · −50 SKOR',
+          label: 'BAĞLANTI YOK · −50 SKOR · −1 HAK',
           tone: 'error',
         },
       }),

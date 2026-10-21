@@ -350,7 +350,8 @@ export const evidencePart: CasePart = {
     clue('clue_ayni_parti', {
       type: 'ADLI_RAPOR',
       title: 'Benzer poşet, benzer gramaj',
-      shortText: 'Şekerlikteki 2 paket ile arka odadaki 46 paket aynı tip poşette, yakın gramajda; karşılaştırma yapılmamış.',
+      shortText:
+        'Şekerlikteki 2 paket ile arka odadaki 46 paket aynı tip poşette, yakın gramajda; karşılaştırma yapılmamış.',
       description:
         'Şekerlikteki iki paket, arka odadaki paketlerle aynı tip kilitli poşette ve yakın ortalama gramajda (0,85–0,87 g). Laboratuvar iki grubu ayrıca karşılaştırmamış: kesim izi, poşet partisi, saflık ölçülmemiş.',
       sourceLabel: 'Kriminal rapor',
@@ -483,7 +484,7 @@ export const evidencePart: CasePart = {
       title: 'Kasa kapanışı 23.41',
       shortText: '9 Kasım · Kahve Durağı kasası 23.41’de Kaan’ın koduyla kapandı.',
       description:
-        'Z raporuna göre kafe kasası 9 Kasım 23.41’de Kaan’ın kullanıcı koduyla kapatıldı; son satış 23.18. Kafe Ihlamur Sokak’a yürüyerek on beş dakika.',
+        'Z raporuna göre 9 Kasım 22.44–23.18 arasındaki beş satışın hepsi Kaan’ın koduyla (22.53 ve 23.02 kartlı, banka slipli); kasa 23.41’de kapandı. Kafe Ihlamur Sokak’a yürüyerek on beş dakika.',
       sourceLabel: 'Kahve Durağı Z raporu',
       icon: 'receipt',
       tags: ara,
@@ -649,7 +650,7 @@ export const evidencePart: CasePart = {
       title: 'Satış anında kafede',
       shortText: '9 Kasım 23.00’te Kaan kafede kasa kapatıyordu.',
       description:
-        'Tolga paketi 23.00’te aldığını söylüyor; Kaan 23.18’de son satışı yapmış, kasayı 23.41’de kapatmış. Kafe on beş dakika uzakta.',
+        'Tolga paketi 23.00’te aldığını söylüyor; Kaan 22.53, 23.02 ve 23.11’de kasada satış yapmış, kasayı 23.41’de kapatmış. Kafe on beş dakika uzakta: gidip dönmeye zaman yok.',
       sourceLabel: 'Çıkarım tahtası',
       icon: 'receipt',
       side: 'DEFENSE',

@@ -194,7 +194,29 @@
             "feedback": "Bu soru Defne’nin değil, Kaan’ın kararıdır; yine de ailenin kaygısını bilmek savunmayı hazırlarken işe yarar."
           }
         },
-        { "id": "DF_BITIR", "kind": "CONTINUE", "label": "Teşekkür et ve çık", "role": "BACK", "next": "$return" }
+        {
+          "id": "DF_BITIR",
+          "kind": "CONTINUE",
+          "label": "Teşekkür et ve çık",
+          "role": "BACK",
+          "next": "$return",
+          "enabledWhen": {
+            "cmp": [
+              {
+                "add": [
+                  { "uses": "DF_TEDAVI" },
+                  { "uses": "DF_GUNLUK" },
+                  { "uses": "DF_PARA" },
+                  { "uses": "DF_BARIS" },
+                  { "uses": "DF_HAKIM" }
+                ]
+              },
+              ">=",
+              2
+            ]
+          },
+          "lockedReason": "En az iki şey sor ya da dinle."
+        }
       ]
     },
     {
@@ -485,7 +507,18 @@
           "kind": "CONTINUE",
           "label": "Çay için teşekkür et ve çık",
           "role": "BACK",
-          "next": "$return"
+          "next": "$return",
+          "enabledWhen": {
+            "any": [
+              { "chosen": "NS_ACIK" },
+              { "chosen": "NS_YONLENDIR" },
+              { "chosen": "NS_DEFTER" },
+              { "chosen": "NS_TOLGA" },
+              { "chosen": "NS_TANIK" },
+              { "chosen": "NS_BASKI" }
+            ]
+          },
+          "lockedReason": "Önce bir şey sor ya da dinle."
         }
       ]
     }

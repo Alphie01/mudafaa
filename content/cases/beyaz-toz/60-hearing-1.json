@@ -1468,6 +1468,28 @@
           ]
         },
         {
+          "id": "PR_S5",
+          "kind": "PRESS",
+          "match": { "statement": "S5" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "İlaç kutularının üzerinde ne yazıyordu, tanık? Kimin adına, kimin reçetesiyle?"
+                },
+                { "speaker": "tuncay", "text": "Okumadım. Kutu kutudur. Bu işlerde hep olur, onu söylüyorum." },
+                {
+                  "speaker": "player",
+                  "text": "Okumamış. Bir kutuyu okumadan profil çıkarmış. Kutunun üstünde bir hastane adı vardı; ben okudum.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 25 }]
+        },
+        {
           "id": "PS_S5",
           "kind": "PRESENT",
           "match": { "statement": "S5", "evidence": ["ev_tedavi", "ded_kullanici"] },
@@ -1664,7 +1686,23 @@
             { "type": "MARK", "quality": "BAD", "feedback": "Dayanaksız itiraz.", "category": "SORGULAMA" }
           ]
         },
-        { "id": "H104_BITIR", "kind": "CONTINUE", "label": "Çapraz sorguyu bitir", "next": "H1_05" }
+        {
+          "id": "H104_BITIR",
+          "kind": "CONTINUE",
+          "label": "Çapraz sorguyu bitir",
+          "next": "H1_05",
+          "enabledWhen": {
+            "all": [
+              { "chosen": "PR_S1" },
+              { "chosen": "PR_S2" },
+              { "chosen": "PR_S3" },
+              { "any": [{ "chosen": "PR_S4_A" }, { "chosen": "PR_S4_B" }] },
+              { "chosen": "PR_S5" },
+              { "chosen": "PR_S6" }
+            ]
+          },
+          "lockedReason": "Tanığın her beyanını en az bir kez sor (BASTIR); sonra çapraz sorguyu bitirebilirsin."
+        }
       ]
     },
     {

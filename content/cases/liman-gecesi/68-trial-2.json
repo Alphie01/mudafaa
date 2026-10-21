@@ -902,7 +902,12 @@
                   "text": "Olabilir, Sayın Savcı. Ama o zaman maktulü oraya biri götürmüştür. Kendi ayağıyla gitmemiştir."
                 },
                 { "speaker": "narrator", "text": "Mübaşirin kalemi bir an durdu. Başkan başını kaldırdı." },
-                { "speaker": "baskan", "text": "Tutanağa geçsin." }
+                { "speaker": "baskan", "text": "Tutanağa geçsin." },
+                {
+                  "speaker": "player",
+                  "text": "“Biri götürmüştür.” Bilirkişi bir isim söylemedi; söylememeliydi de. Ama savcının yedeğindeki o birkaç adım, on dört boş fotoğraf karesinde kayboldu.",
+                  "style": "thought"
+                }
               ]
             }
           ],
@@ -1056,7 +1061,7 @@
             { "speaker": "baskan", "text": "Turnike ve araç kapısı dökümü dosyada, okundu. Hocam, teşekkür ederiz." },
             {
               "speaker": "player",
-              "text": "Darbe, düşme değil. Saat, kavgadan sonra. Bir uzman bunları kendi ağzıyla söyledi. Şimdi ikinci soru: kim?",
+              "text": "Darbe, düşme değil. Saat, kavgadan sonra. Yer, cesedin bulunduğu yer. Bir uzman bunları kendi ağzıyla söyledi. Şimdi ikinci soru: kim?",
               "style": "thought"
             },
             {
@@ -2168,6 +2173,15 @@
               "speaker": "player",
               "text": "Bir dürüst tanık, kendi radyosuyla. Savcının on beş dakikası bir jenerikte kayboldu.",
               "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı Bora Kılınç dosyasının bir sayfasını çevirdi, bir satırın üstünü çizdi. Üye hâkim Alkan kâtibe döndü: “Saat on iki. Gece haberleri.” Kâtip yazdı."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir saat ancak tutanağa geçince saattir. Bu gece yarısı artık bir büfecinin hatırası değil; bir dosyanın satırı.",
+              "style": "thought"
             }
           ]
         },
@@ -2336,6 +2350,44 @@
           "kind": "OPTION",
           "label": "Ölüm yumruktan doğmadı; ne öldürme ne yaralama sonucu ölüm oluşur",
           "responses": [
+            {
+              "when": { "ref": "olum_sonra" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, ek savunmamız şudur: yumruk maktulün burnunu kanattı; ölüm o yumruktan gelmedi. Darbe, sanığın limandan çıkmasından sonra ve başka bir cisimle vuruldu."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Yaralama sonucu ölümden sorumluluk için ölümün o yaralamadan doğması gerekir. Burada doğmamıştır."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bilirkişi bu salonda üç şey söyledi: kırık düşmeden değil, ölüm kavgadan sonra, yara cesedin bulunduğu yerde. Üçü de tutanakta. Ek savunmamız bu üç satırdır."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Savcı başını kaldırdı, bir şey söyleyecek gibi oldu, sonra notlarına döndü. Üye hâkim Alkan bir sayfayı işaretledi."
+                },
+                { "speaker": "baskan", "text": "Ek savunma tutanağa geçti. Sanık, katılıyor musunuz?" },
+                { "speaker": "tarik", "text": "Katılıyorum efendim. Ben bir kere vurdum. Sonrasını ben yapmadım." },
+                {
+                  "speaker": "uye",
+                  "text": "Müdafi, sanığın yumruğunun maktulün düşmesine yol açtığını kabul ediyor musunuz?"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Yumruğu kabul ediyoruz, Sayın Üye. Maktul babanın dibine oturdu, kalktı, yürüdü. Ölümcül kırık o oturuştan değil."
+                },
+                { "speaker": "narrator", "text": "Üye hâkim başını salladı; bir sayfayı daha işaretledi." },
+                { "speaker": "savci", "text": "Sayın Başkan, müdafi bilirkişinin sözlerini kendi lehine özetliyor." },
+                {
+                  "speaker": "player",
+                  "text": "Özetlemiyorum, Sayın Savcı. Tutanaktan okuyorum: “düşmeyi dışlıyorum”, “23.34’ten önce değil”, “kendi ayağıyla gitmemiştir.” Üç cümle, üç sayfa."
+                },
+                { "speaker": "baskan", "text": "Tutanak heyetin önünde. Devam edelim." }
+              ]
+            },
             {
               "lines": [
                 {
@@ -2832,7 +2884,7 @@
             },
             {
               "speaker": "player",
-              "text": "Ercan’ı öldüren darbe, bilirkişinin bu salonda daralttığı biçimde, yumruk ve düşme değildir; kavgadan sonra gelmiştir."
+              "text": "Ercan’ı öldüren darbe, bilirkişinin bu salonda daralttığı biçimde, yumruk ve düşme değildir; kavgadan sonra ve cesedin bulunduğu yerde gelmiştir. Ercan oraya yürümedi; götürüldü."
             },
             {
               "speaker": "player",
@@ -2884,11 +2936,15 @@
             },
             {
               "speaker": "player",
-              "text": "Bilirkişi mide içeriğini son öğünün saatiyle yorumladı: ölüm 23.34’ten sonra. Kırık 3,2 santim, dairesel; karşı tarafta darbe izi yok."
+              "text": "Bilirkişi mide içeriğini son öğünün saatiyle yorumladı: ölüm 23.34’ten sonra. Kırık 3,2 santim, dairesel; karşı tarafta darbe izi yok; babanın üstünde ne kan ne doku."
             },
             {
               "speaker": "player",
               "text": "Düşen bir baş böyle kırılmaz. Sabit duran bir başa küçük, sert bir cisim böyle vurur."
+            },
+            {
+              "speaker": "player",
+              "text": "Ve o darbe rıhtımda vurulmadı. Rıhtımdan B sahasına on dört karede tek damla kan yok. Kanayan bir yara üç yüz metre yürümez; yara, cesedin bulunduğu yerde açıldı."
             },
             {
               "speaker": "player",
@@ -3251,24 +3307,32 @@
               "speaker": "baskan",
               "text": "Müdafi, heyetin sabrını yeterince denediniz. Tanıklara yönelik sorularınız tamamlanmış sayılacak; ilgisiz sunumlar tutanağa geçmeyecek."
             },
-            { "speaker": "narrator", "text": "Savcı dosyasını toplarken bana döndü. Sesinde ne zafer vardı ne alay." },
+            {
+              "speaker": "baskan",
+              "text": "Eylemin kasten yaralama sonucu ölüm olarak da değerlendirilebileceği hatırlatılır; ek savunmanız ve esas hakkındaki savunmanız alınacak."
+            },
+            {
+              "speaker": "savci",
+              "text": "Mütalaamız dosyadadır Sayın Başkan: sanığın cezalandırılmasını talep ediyoruz."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ayağa kalktım. Elimde kâğıtlar vardı; ama heyet artık kâğıtlarıma değil saate bakıyordu. Kısa konuştum: öncelikle beraat, olmazsa tahrik. Kimse not almadı."
+            },
             {
               "speaker": "savci",
               "text": "Bir yumruğu savunmak zordur avukat hanım. Bir cinayeti savunmaktan zor. Çünkü yarısını kabul ederek başlarsınız."
             },
-            {
-              "speaker": "baskan",
-              "text": "Esas hakkındaki savunmanızı ve sanığın son sözünü yine alacağız; bu sizin değil, sanığın hakkı."
-            },
+            { "speaker": "baskan", "text": "Sanık, son sözünüz?" },
             {
               "speaker": "player",
-              "text": "Kürsüdeki sorularımı bitirdiler. Savunmanın kendisini bitiremezler. Elimde kalan tek şey, tutanağa önceden geçmiş olanlar.",
+              "text": "Kürsüdeki sorularımı bitirdiler; savunmanın kendisini bitiremezler. Elimde kalan tek şey, tutanağa önceden geçmiş olanlar.",
               "style": "thought"
             }
           ]
         }
       ],
-      "choices": [{ "id": "COKUS_SON", "kind": "CONTINUE", "label": "Duruşmaya devam", "next": "T_COKUS_K" }]
+      "choices": [{ "id": "COKUS_SON", "kind": "CONTINUE", "label": "Son söz: “Ben öldürmedim.”", "next": "T_COKUS_K" }]
     },
     {
       "id": "T_COKUS_K",
@@ -3277,7 +3341,7 @@
       "eyebrow": "DURUŞMA · 2. CELSE",
       "hud": ["cred", "pers"],
       "title": "Çöküş",
-      "routes": [{ "when": { "flag": "etik_gulay" }, "to": "T_03E" }, { "to": "T_04" }],
+      "routes": [{ "when": { "flag": "etik_gulay" }, "to": "T_03E" }, { "to": "T_08" }],
       "choices": []
     },
     {

@@ -142,6 +142,7 @@ c AK3_A
 const GUN4 = A(`
 c H_KENAN
 c KN_GECE
+c KN_ISIK
 c KN_ERCAN
 c KN_TARIK
 c KN_BITIR
@@ -459,6 +460,7 @@ c G_BITIR
 c AK1_A
 c H_KENAN
 c KN_GECE
+c KN_ISIK
 c KN_TARIK
 c KN_BITIR
 c H_DIL
@@ -773,6 +775,7 @@ m clue_baba_kan clue_basit
 c CIKARIM_BITIR
 c H_KENAN
 c KN_GECE
+c KN_ISIK
 c KN_BITIR
 c H_BUFE
 c NL_GECE
@@ -1180,14 +1183,7 @@ export const tests: CasePart = {
         { outcome: 'NITELIK' },
         PROLOG('BR00_B', 'BR01_C', 'STR_MASUMIYET'),
         W_YOL,
-        A(`
-c COKUS_SON
-c T04_B
-c T05_B
-c T06_T
-c T06ST_DEVAM
-c T07_A
-`),
+        A('c COKUS_SON'),
       ),
     ],
   },

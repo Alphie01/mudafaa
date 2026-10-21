@@ -420,6 +420,7 @@ savci: Hocam, sürüklenme ölümden sonra da olabilir.
 karaca: Olabilir, Sayın Savcı. Ama o zaman maktulü oraya biri götürmüştür. Kendi ayağıyla gitmemiştir.
 > Mübaşirin kalemi bir an durdu. Başkan başını kaldırdı.
 baskan: Tutanağa geçsin.
+~ “Biri götürmüştür.” Bilirkişi bir isim söylemedi; söylememeliydi de. Ama savcının yedeğindeki o birkaç adım, on dört boş fotoğraf karesinde kayboldu.
 `),
         }),
         presentRule('PS_B5_ERKEN', 'B5', ['ded_tasima'], {
@@ -469,7 +470,7 @@ karaca: Sınırlı yüzeyli, sert bir cisimle. Düşme ihtimalini dışlamıyoru
 savci: Hocam, son bir soru. Darbe sanığın limandan çıkışından sonra geldiyse, sanığın başka bir yoldan dönmüş olması tıbben dışlanabilir mi?
 karaca: O tıbbi bir soru değil, Sayın Savcı. Ben size kırığın ne zaman ve neyle oluştuğunu söylerim. Kimin vurduğunu söyleyemem; söylememeliyim de.
 baskan: Turnike ve araç kapısı dökümü dosyada, okundu. Hocam, teşekkür ederiz.
-~ Darbe, düşme değil. Saat, kavgadan sonra. Bir uzman bunları kendi ağzıyla söyledi. Şimdi ikinci soru: kim?
+~ Darbe, düşme değil. Saat, kavgadan sonra. Yer, cesedin bulunduğu yer. Bir uzman bunları kendi ağzıyla söyledi. Şimdi ikinci soru: kim?
 > Savcı kısa bir not aldı; sonra kalemini yavaşça masaya bıraktı. Gülay galeride Sevim’e baktı. Sevim bu kez başını çevirmedi.
 `,
         ),
@@ -888,6 +889,8 @@ nail: Bir saat söylemem efendim. Ama çocuk oturdu. Uzun oturdu. Ben kepenk ind
 > Nail Usta kürsüden indi. Sanık sırasının önünden geçerken durdu, Tarık’ın omzuna elini koydu; bir an, bir babanın eli gibi.
 > Jandarma bir adım attı; başkan eliyle durdurdu.
 ~ Bir dürüst tanık, kendi radyosuyla. Savcının on beş dakikası bir jenerikte kayboldu.
+> Savcı Bora Kılınç dosyasının bir sayfasını çevirdi, bir satırın üstünü çizdi. Üye hâkim Alkan kâtibe döndü: “Saat on iki. Gece haberleri.” Kâtip yazdı.
+~ Bir saat ancak tutanağa geçince saattir. Bu gece yarısı artık bir büfecinin hatırası değil; bir dosyanın satırı.
 `,
         ),
         W(
@@ -977,7 +980,25 @@ baskan: Sanık ve müdafii, dikkat edin. Yapılan yargılama sonucunda, eylemin 
               ],
             ),
           ],
-          responses: B(`
+          responses: [
+            W(
+              ref('olum_sonra'),
+              `
+- Sayın Başkan, ek savunmamız şudur: yumruk maktulün burnunu kanattı; ölüm o yumruktan gelmedi. Darbe, sanığın limandan çıkmasından sonra ve başka bir cisimle vuruldu.
+- Yaralama sonucu ölümden sorumluluk için ölümün o yaralamadan doğması gerekir. Burada doğmamıştır.
+- Bilirkişi bu salonda üç şey söyledi: kırık düşmeden değil, ölüm kavgadan sonra, yara cesedin bulunduğu yerde. Üçü de tutanakta. Ek savunmamız bu üç satırdır.
+> Savcı başını kaldırdı, bir şey söyleyecek gibi oldu, sonra notlarına döndü. Üye hâkim Alkan bir sayfayı işaretledi.
+baskan: Ek savunma tutanağa geçti. Sanık, katılıyor musunuz?
+tarik: Katılıyorum efendim. Ben bir kere vurdum. Sonrasını ben yapmadım.
+uye: Müdafi, sanığın yumruğunun maktulün düşmesine yol açtığını kabul ediyor musunuz?
+- Yumruğu kabul ediyoruz, Sayın Üye. Maktul babanın dibine oturdu, kalktı, yürüdü. Ölümcül kırık o oturuştan değil.
+> Üye hâkim başını salladı; bir sayfayı daha işaretledi.
+savci: Sayın Başkan, müdafi bilirkişinin sözlerini kendi lehine özetliyor.
+- Özetlemiyorum, Sayın Savcı. Tutanaktan okuyorum: “düşmeyi dışlıyorum”, “23.34’ten önce değil”, “kendi ayağıyla gitmemiştir.” Üç cümle, üç sayfa.
+baskan: Tutanak heyetin önünde. Devam edelim.
+`,
+            ),
+            O(`
 - Sayın Başkan, ek savunmamız şudur: yumruk maktulün burnunu kanattı; ölüm o yumruktan gelmedi. Darbe, sanığın limandan çıkmasından sonra ve başka bir cisimle vuruldu.
 - Yaralama sonucu ölümden sorumluluk için ölümün o yaralamadan doğması gerekir. Burada doğmamıştır.
 > Savcı başını kaldırdı, bir şey söyleyecek gibi oldu, sonra notlarına döndü. Üye hâkim Alkan bir sayfayı işaretledi.
@@ -987,6 +1008,7 @@ uye: Müdafi, sanığın yumruğunun maktulün düşmesine yol açtığını kab
 - Yumruğu kabul ediyoruz, Sayın Üye. Maktul babanın dibine oturdu, kalktı, yürüdü. Ölümcül kırık o oturuştan değil.
 > Üye hâkim başını salladı; bir sayfayı daha işaretledi.
 `),
+          ],
         }),
         option('T04_B', 'Nitelik değişti; ek savunmaya hazırlanmak için süre isteriz', {
           neutral:
@@ -1189,7 +1211,7 @@ baskan: Müdafi, esas hakkındaki savunmanızı yapın.
 - Sayın Başkan, sayın üye, Tarık Demirel o gece bir yumruk attı. Bunu kendisi söyledi; biz de söylüyoruz.
 - Yumruk Ercan Yavuz’un burnunu kanattı. Ercan kalktı, kendi ayağıyla kantine yürüdü. Bu salonda kimse aksini söylemedi.
 - Tarık 23.18’de limandan çıktı ve bir daha girmedi. Turnike bunu söylüyor; büfe ve banka kaydı da.
-- Ercan’ı öldüren darbe, bilirkişinin bu salonda daralttığı biçimde, yumruk ve düşme değildir; kavgadan sonra gelmiştir.
+- Ercan’ı öldüren darbe, bilirkişinin bu salonda daralttığı biçimde, yumruk ve düşme değildir; kavgadan sonra ve cesedin bulunduğu yerde gelmiştir. Ercan oraya yürümedi; götürüldü.
 - O saatte B sahasında duran tek araç tanığın zimmetindeydi. Tanık bu sorulara cevap vermedi. Hakkında soruşturma başladı; bu bizim değil, savcılığın işi.
 - Müvekkilim bu suçu işlemedi. Bu bir şüphe değil, kayıtlarla sabit bir gerçektir. Beraatini talep ediyoruz.
 `),
@@ -1206,8 +1228,9 @@ baskan: Müdafi, esas hakkındaki savunmanızı yapın.
 - Savcılığın tanığı o saatte o yerde sanığı göremezdi. Savcılığın anlatımı, maktulün kendi son saatleriyle çelişiyor.
 - Saatleri bu salonda birlikte okuduk. 23.18: sanığın kartı turnikeden çıkıyor ve bir daha girmiyor. 23.34: maktul kantinde tost ve ayran alıyor.
 - 23.37: sanığın kartı iskele büfesinde iki çay ödüyor. 23.41: maktul iki dakika yedi saniye telefonda konuşuyor; sanık o dakikada limanın dışında.
-- Bilirkişi mide içeriğini son öğünün saatiyle yorumladı: ölüm 23.34’ten sonra. Kırık 3,2 santim, dairesel; karşı tarafta darbe izi yok.
+- Bilirkişi mide içeriğini son öğünün saatiyle yorumladı: ölüm 23.34’ten sonra. Kırık 3,2 santim, dairesel; karşı tarafta darbe izi yok; babanın üstünde ne kan ne doku.
 - Düşen bir baş böyle kırılmaz. Sabit duran bir başa küçük, sert bir cisim böyle vurur.
+- Ve o darbe rıhtımda vurulmadı. Rıhtımdan B sahasına on dört karede tek damla kan yok. Kanayan bir yara üç yüz metre yürümez; yara, cesedin bulunduğu yerde açıldı.
 - Bu kâğıtların hiçbiri savunmanın kanaati değildir. Hepsi dosyada, hepsi bu duruşmada okundu ve tartışıldı. Mahkemeniz hükmünü yalnızca bunlara dayandırabilir.
 > Savcı kalemini bir kez masaya vurdu; itiraz etmedi. Kâtibin parmakları klavyede saatleri yazıyordu, birer birer.
 - Geriye ne kalıyor? Bir kavga. Bir yumruk. Bir ağabeyin adı ve bir tükürük. Bunlar bir ölümü açıklamaz.
@@ -1348,21 +1371,24 @@ baskan: Hüküm fıkrası ayakta dinlenir.
 `),
       ],
     }),
+    // Çöküş tanık sorgusunu bitirir; ek savunma hakkı, mütalaa, esas hakkında savunma ve son söz kısaltılmış da olsa
+    // atlanmaz (CMK 216, 226).
     story('T_COKUS', {
       ...court2.base,
       title: 'Çöküş',
       background: 'durusma_salonu',
       lines: B(`
 baskan: Müdafi, heyetin sabrını yeterince denediniz. Tanıklara yönelik sorularınız tamamlanmış sayılacak; ilgisiz sunumlar tutanağa geçmeyecek.
-> Savcı dosyasını toplarken bana döndü. Sesinde ne zafer vardı ne alay.
+baskan: Eylemin kasten yaralama sonucu ölüm olarak da değerlendirilebileceği hatırlatılır; ek savunmanız ve esas hakkındaki savunmanız alınacak.
+savci: Mütalaamız dosyadadır Sayın Başkan: sanığın cezalandırılmasını talep ediyoruz.
+> Ayağa kalktım. Elimde kâğıtlar vardı; ama heyet artık kâğıtlarıma değil saate bakıyordu. Kısa konuştum: öncelikle beraat, olmazsa tahrik. Kimse not almadı.
 savci: Bir yumruğu savunmak zordur avukat hanım. Bir cinayeti savunmaktan zor. Çünkü yarısını kabul ederek başlarsınız.
-baskan: Esas hakkındaki savunmanızı ve sanığın son sözünü yine alacağız; bu sizin değil, sanığın hakkı.
-~ Kürsüdeki sorularımı bitirdiler. Savunmanın kendisini bitiremezler. Elimde kalan tek şey, tutanağa önceden geçmiş olanlar.
+baskan: Sanık, son sözünüz?
+~ Kürsüdeki sorularımı bitirdiler; savunmanın kendisini bitiremezler. Elimde kalan tek şey, tutanağa önceden geçmiş olanlar.
 `),
-      choices: [cont('COKUS_SON', 'Duruşmaya devam', 'T_COKUS_K')],
+      choices: [cont('COKUS_SON', 'Son söz: “Ben öldürmedim.”', 'T_COKUS_K')],
     }),
-    // Çöküş tanık sorgusunu bitirir; ek savunma, mütalaa, esas savunma ve son söz atlanamaz (CMK 216, 226).
-    decisionNode('T_COKUS_K', [{ when: flag('etik_gulay'), to: 'T_03E' }, { to: 'T_04' }], {
+    decisionNode('T_COKUS_K', [{ when: flag('etik_gulay'), to: 'T_03E' }, { to: 'T_08' }], {
       ...court2.base,
       title: 'Çöküş',
     }),

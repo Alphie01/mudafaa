@@ -1425,6 +1425,10 @@
             },
             {
               "speaker": "narrator",
+              "text": "Başın altındaki betonda koyu bir leke, yağmurun dağıtamadığı. Yaralı bir kafa çok kanar; Orhan Hoca’nın sesi değil bu, bir fotoğrafçının kurşun kalemle düştüğü not: “bol kan, yalnız burada.”"
+            },
+            {
+              "speaker": "narrator",
               "text": "Fotoğrafçı her şeyi çekmiş; kimse fotoğraflara dönüp bakmamış. Dosyada tek satır: “Olay yerinde dikkat çeken başka bulguya rastlanmadı.”"
             },
             {
@@ -2197,14 +2201,40 @@
                   "expression": "uzgun",
                   "text": "Elinde bir şey vardı, demir gibi. Seslenmedim. Keşke seslenseydim. Belki o zaman…"
                 },
-                { "speaker": "player", "text": "Gece, yağmurda, yüzünü nasıl seçtiniz?" },
+                {
+                  "speaker": "player",
+                  "text": "Bir saat, bir yer, bir demir. Kolluk ifadesiyle kelimesi kelimesine aynı. Ezberlenmiş bir anlatım mı, yoksa yalnızca yirmi yıllık bir alışkanlık mı?",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 30 }]
+        },
+        {
+          "id": "KN_ISIK",
+          "kind": "OPTION",
+          "label": "“Gece, yağmurda, yüzünü nasıl seçtiniz?”",
+          "visibleWhen": { "chosen": "KN_GECE" },
+          "responses": [
+            {
+              "lines": [
                 {
                   "speaker": "kenan",
-                  "text": "Projektörler yanıyordu kızım. Gündüz gibiydi. Yirmi yıldır bu limandayım; her işçiyi yürüyüşünden tanırım."
+                  "text": "Projektörler yanıyordu kızım. Gündüz gibiydi. B sahasının ağzındaki direğin altındaydı; ben yirmi metre gerideydim."
+                },
+                {
+                  "speaker": "kenan",
+                  "text": "Yirmi yıldır bu limandayım. Her işçiyi yürüyüşünden tanırım. O çocuğun yürüyüşü ağabeyinin yürüyüşü; omzu biraz önde."
+                },
+                { "speaker": "player", "text": "Projektör hangi direkteydi?" },
+                {
+                  "speaker": "kenan",
+                  "text": "Ağızdaki. Sahanın girişindeki büyük direk. Gece de o yanar, gündüz de; liman uyumaz."
                 },
                 {
                   "speaker": "player",
-                  "text": "“Gündüz gibiydi.” Kesin bir adam, kesin bir ışık. Kesinliğin bir faturası olur; kim ödeyecek?",
+                  "text": "“Gündüz gibiydi.” Kesin bir adam, kesin bir ışık, kesin bir direk. Kesinliğin bir faturası olur; kim ödeyecek?",
                   "style": "thought"
                 }
               ]
@@ -2407,6 +2437,14 @@
                 {
                   "speaker": "orhan",
                   "text": "Doğru yazmışlar; çıplak gözle bakılıp geçilmez. Nihai rapor gelince histopatoloji satırını oku. “Frontalde kontüzyon yok” yazıyorsa, o kafa düşmedi."
+                },
+                {
+                  "speaker": "orhan",
+                  "text": "Ama bir bilirkişi “karşı darbe her düşmede olmaz” diyebilir; kısa mesafeden, oturur hâlde çarpmada zayıf kalır. O zaman ona çarpılan yüzeyi sor. Kafa derisi kanar, doku bırakır. Çarptığı yerde iz yoksa çarpmamıştır."
+                },
+                {
+                  "speaker": "orhan",
+                  "text": "Bir de şunu bil: böyle açık bir kırık kanar, hem de çok. Kanayan adam yürürse arkasında yol bırakır. Yol yoksa ya yürümemiştir ya da yara sonra açılmıştır."
                 },
                 {
                   "speaker": "player",
@@ -3412,12 +3450,20 @@
             { "speaker": "narrator", "text": "LEYLA’NIN ODASI", "style": "card", "bg": "buro" },
             {
               "speaker": "leyla",
-              "text": "Son gün. Yarından sonra kürsüye iki adam çıkacak: biri dürüst ve yanılan, biri babacan ve kesin. Hangisi daha tehlikeli?"
+              "text": "Son gün. Yarından sonra kürsüye iki tanık çıkacak. Biri yanılabileceğini bilen, biri yanılabileceğini hiç düşünmeyen. Hangisi daha tehlikeli?"
             },
-            { "speaker": "player", "text": "Kesin olan." },
+            { "speaker": "player", "text": "İkincisi." },
             {
               "speaker": "leyla",
               "text": "Evet. Kesinlik kürsüde bulaşıcıdır. Heyet kesin bir tanığa inanmak ister; çünkü inanmak, düşünmekten kolaydır."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir teşhisin iki ayağı vardır, Deniz: saat ve göz. Saati çürütürsen tanık saatini esnetir: “Belki daha geçti.” Gözü çürütürsen yürüyüşe sığınır: “Yürüyüşünden tanırım.”"
+            },
+            {
+              "speaker": "leyla",
+              "text": "İkisini birden kâğıtla kapatmadan bir teşhis düşmez. Hangi kâğıdın hangi ayağı kestiğini bil; sırası önemli değil, ikisi de kürsüye çıkmalı."
             },
             {
               "speaker": "leyla",
@@ -3927,7 +3973,7 @@
     { "evidence": "ev_hesap", "source": { "type": "CHOICE", "id": "GL_KART" } },
     { "evidence": "clue_pil", "source": { "type": "CHOICE", "id": "SK_KIM" } },
     { "evidence": "clue_kantin", "source": { "type": "CHOICE", "id": "SK_KANTIN" } },
-    { "evidence": "clue_kenan_isik", "source": { "type": "CHOICE", "id": "KN_GECE" } },
+    { "evidence": "clue_kenan_isik", "source": { "type": "CHOICE", "id": "KN_ISIK" } },
     { "evidence": "clue_basit", "source": { "type": "RULE", "id": "EX_O1" } },
     { "evidence": "clue_desen", "source": { "type": "RULE", "id": "EX_O2" } },
     { "evidence": "clue_arama2341", "source": { "type": "RULE", "id": "EX_T3" } },

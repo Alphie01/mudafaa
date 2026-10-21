@@ -298,6 +298,15 @@ leyla: İstinaf dosyaya bakar, senin vicdanına değil. Kâğıtları topla. İk
 > İstinaf dilekçesinin son sayfasını yazarken masama bir zarf bırakıldı. İçinde Elif’in yeni bir resmi: mavi bir gemi, bu kez güvertede üç kişi.
 > Birinin elinde bir çanta vardı. Gülay arkasına kurşun kalemle yazmıştı: “Avukat abla. Elif öyle istedi.”
 ~ Bir resim bir dilekçe değildir. Ama dilekçeyi bitirene kadar masamdan kaldırmadım.
+# BİR AY SONRA · BURSA H TİPİ CEZAEVİ, AVUKAT GÖRÜŞ ODASI [bg:gorus_odasi]
+> Tarık zayıflamıştı. Ellerini masaya koydu; sağ elinin boğumlarındaki iz tamamen geçmişti.
+tarik: İstinaf ne der abla?
+- Dosyaya bakar. Gerekçeye bakar. Tutanakta ne varsa ona bakar; tutanağa geçmeyeni göremez.
+tarik: Geçmeyen ne?
+- Bir kırığın şekli. Bir saatin kâğıdı. Bir yolun fotoğrafı. Bazılarını buldum, bazılarını kürsüye götüremedim.
+> Tarık uzun süre sustu. Sonra başını kaldırdı.
+tarik: Ağabeyim de böyleydi. Bir kutuyu yanlış bağladılar, o ödedi. Ben bir yumruk attım; bir ölümü ödüyorum. Ama sen bunu bana dürüst söylüyorsun. Onu kimse söylememişti.
+~ Bir yumruğun bedeli ile bir ölümün bedeli arasındaki fark altı yıldı. O farkı ben açamadım; istinaf açarsa, kâğıtla açacak.
 `),
       ],
     }),

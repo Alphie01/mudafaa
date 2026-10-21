@@ -645,6 +645,7 @@ const bsaha = sceneSearch('INV_BSAHA', {
   lines: B(`
 # ARŞİV · 15 KASIM 06.55 — B SAHASI FOTOĞRAFLARI [bg:depo_gece]
 > İki kırmızı konteynerin arasında bir dar koridor. Ceset yüzüstü, başı içeri doğru. Turuncu yelek ıslak ve kararmış.
+> Başın altındaki betonda koyu bir leke, yağmurun dağıtamadığı. Yaralı bir kafa çok kanar; Orhan Hoca’nın sesi değil bu, bir fotoğrafçının kurşun kalemle düştüğü not: “bol kan, yalnız burada.”
 > Fotoğrafçı her şeyi çekmiş; kimse fotoğraflara dönüp bakmamış. Dosyada tek satır: “Olay yerinde dikkat çeken başka bulguya rastlanmadı.”
 ~ “Dikkat çeken.” Kimin dikkatini? Dikkati çekilmek istenmeyen biri için çok rahat bir cümle.
 > Cesedin yeri rıhtımdan üç yüz metre. Arada iki sıra konteyner, bir forklift yolu, bir drenaj kanalı. Kolluğa göre Ercan bu yolu kendi yürümüş.
@@ -942,15 +943,25 @@ kenan: Yirmi yıldır bu limandayım. Kutuları sayarız, adamları sayarız, ge
 `),
   choices: [
     option('KN_GECE', '“O gece neler gördünüz?”', {
-      discovers: 'clue_kenan_isik',
       score: { SORGULAMA: 30 },
       responses: B(`
 kenan: Kavgayı ben ayırdım. Fenerle geldim, ikisini ayırdım. Tarık’a “eve git evlat” dedim, Ercan’ı kantine yolladım.
 kenan: Sonra ofise döndüm, defter yazdım. On ikiye yirmi var gibi, bir tur attım. B sahasının ağzında Tarık’ı gördüm.
 kenan/uzgun: Elinde bir şey vardı, demir gibi. Seslenmedim. Keşke seslenseydim. Belki o zaman…
-- Gece, yağmurda, yüzünü nasıl seçtiniz?
-kenan: Projektörler yanıyordu kızım. Gündüz gibiydi. Yirmi yıldır bu limandayım; her işçiyi yürüyüşünden tanırım.
-~ “Gündüz gibiydi.” Kesin bir adam, kesin bir ışık. Kesinliğin bir faturası olur; kim ödeyecek?
+~ Bir saat, bir yer, bir demir. Kolluk ifadesiyle kelimesi kelimesine aynı. Ezberlenmiş bir anlatım mı, yoksa yalnızca yirmi yıllık bir alışkanlık mı?
+`),
+    }),
+    // Işık sorusu, tanığın kendi anlatımından açılır: nerede durdu, neyle gördü.
+    option('KN_ISIK', '“Gece, yağmurda, yüzünü nasıl seçtiniz?”', {
+      visibleWhen: chosen('KN_GECE'),
+      discovers: 'clue_kenan_isik',
+      score: { SORGULAMA: 30 },
+      responses: B(`
+kenan: Projektörler yanıyordu kızım. Gündüz gibiydi. B sahasının ağzındaki direğin altındaydı; ben yirmi metre gerideydim.
+kenan: Yirmi yıldır bu limandayım. Her işçiyi yürüyüşünden tanırım. O çocuğun yürüyüşü ağabeyinin yürüyüşü; omzu biraz önde.
+- Projektör hangi direkteydi?
+kenan: Ağızdaki. Sahanın girişindeki büyük direk. Gece de o yanar, gündüz de; liman uyumaz.
+~ “Gündüz gibiydi.” Kesin bir adam, kesin bir ışık, kesin bir direk. Kesinliğin bir faturası olur; kim ödeyecek?
 `),
     }),
     option('KN_ERCAN', '“Ercan nasıl biriydi?”', {
@@ -1031,6 +1042,8 @@ orhan: Raporunda üç virgül iki santimlik dairesel bir çökme diyorsun. Yuvar
 orhan: Karşı tarafa bak. Frontalde bir şey yazıyor mu?
 - Dipnot: “Karşı darbe değerlendirmesi histopatolojik inceleme sonrası nihai raporda yapılacaktır.”
 orhan: Doğru yazmışlar; çıplak gözle bakılıp geçilmez. Nihai rapor gelince histopatoloji satırını oku. “Frontalde kontüzyon yok” yazıyorsa, o kafa düşmedi.
+orhan: Ama bir bilirkişi “karşı darbe her düşmede olmaz” diyebilir; kısa mesafeden, oturur hâlde çarpmada zayıf kalır. O zaman ona çarpılan yüzeyi sor. Kafa derisi kanar, doku bırakır. Çarptığı yerde iz yoksa çarpmamıştır.
+orhan: Bir de şunu bil: böyle açık bir kırık kanar, hem de çok. Kanayan adam yürürse arkasında yol bırakır. Yol yoksa ya yürümemiştir ya da yara sonra açılmıştır.
 ~ Cevap bir sonraki kâğıtta. O kâğıt ancak ilk celseden sonra gelecek.
 `,
         ),
@@ -1492,9 +1505,11 @@ leyla: İki anlatım arasındaki fark bir çelişkidir. Ama çelişkiyi kürsüd
     ),
     O(`
 # LEYLA’NIN ODASI [bg:buro]
-leyla: Son gün. Yarından sonra kürsüye iki adam çıkacak: biri dürüst ve yanılan, biri babacan ve kesin. Hangisi daha tehlikeli?
-- Kesin olan.
+leyla: Son gün. Yarından sonra kürsüye iki tanık çıkacak. Biri yanılabileceğini bilen, biri yanılabileceğini hiç düşünmeyen. Hangisi daha tehlikeli?
+- İkincisi.
 leyla: Evet. Kesinlik kürsüde bulaşıcıdır. Heyet kesin bir tanığa inanmak ister; çünkü inanmak, düşünmekten kolaydır.
+leyla: Bir teşhisin iki ayağı vardır, Deniz: saat ve göz. Saati çürütürsen tanık saatini esnetir: “Belki daha geçti.” Gözü çürütürsen yürüyüşe sığınır: “Yürüyüşünden tanırım.”
+leyla: İkisini birden kâğıtla kapatmadan bir teşhis düşmez. Hangi kâğıdın hangi ayağı kestiğini bil; sırası önemli değil, ikisi de kürsüye çıkmalı.
 leyla: Sorularını kısa tut. Önce bastır, bırak kendisi anlatsın. Kâğıdı en son göster. Tanığa soru sorma hakkın var, CMK 201; tanığı tartışmaya açma hakkın da var, CMK 215. İkisini karıştırma.
 leyla: Bir de ara karar. Celsenin sonunda mahkeme sana “talepleriniz” diyecek. O an, ikinci celsede elinde ne olacağına karar verdiğin andır. Hazırlıksız gitme.
 `),

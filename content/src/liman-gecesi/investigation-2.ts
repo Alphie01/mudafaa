@@ -525,6 +525,8 @@ const atkRapor = retarget(
 > Mavi kapaklı, otuz iki sayfa. Ön raporun bıraktığı iki soru burada cevaplanmış olmalı: dipnotun ertelediği karşı darbe ve kimsenin tartmadığı mide.
 ~ Bir raporu okumak, sorusunu bilmekle başlar. Soru bende değilse satırlar yalnızca kelimedir.
 > Kenarlara yapıştırdığım sarı kâğıtlarda Dr. Beyaz’ın sözleri: “Karşı tarafa bak.” “Ne yediği yazar, ne zaman yediği yazmaz.”
+> Üçüncü bir sarı kâğıt daha ekledim, kendi el yazımla: “Kan nerede?” Raporun ekindeki olay yeri listesini rıhtım ve B sahası fotoğraflarının numaralarıyla yan yana koydum.
+~ Bir rapor tek başına okunmaz. Fotoğrafla, kayıtla, bir tanığın cümlesiyle birlikte okunur. Uzman da kürsüde böyle okuyacak; ona hangi sayfayı göstereceğimi şimdiden bilmeliyim.
 `),
     header: { left: 'ADLİ TIP KURUMU · NİHAİ OTOPSİ RAPORU', right: 'E. YAVUZ' },
     columns: [
@@ -1061,6 +1063,8 @@ leyla: Yumruğa sarılırsa mahkeme suçun vasfının değişebileceğini söyle
 leyla: Bilirkişiyi kürsüde zorlamayacaksın. Ona soracaksın: “olabilir” mi, “uyumlu” mu? Bir bilirkişi ikisinin farkını bilir; sen de bil.
 leyla: “Olabilir” bir kapıyı açık bırakır. “Uyumlu” bir kapıyı gösterir. “Uyumlu değil” bir kapıyı kapatır. Savcı birinciyle yetinir; sen üçüncüyü ararsın.
 leyla: Bir de şunu unutma: bilirkişi hukuki değerlendirme yapmaz, yalnızca teknik görüş verir. “Sanık öldürdü mü” diye sorma; “bu yara bu aletle açılır mı” diye sor.
+leyla: Savcının yedeği üç adımlı bir hikâye: yumruk, düşme, birkaç adım, ölüm. Her adımın bir kâğıdı var. Kırığın şekli ve babadaki kan düşmeyi; son öğünün saati zamanı; yoldaki fotoğraflar o birkaç adımı.
+leyla: Bir adımı açık bırakırsan heyet hikâyeyi oradan yeniden kurar. Kuşku sanık lehinedir; ama kuşkunun nerede durduğunu heyete sen göstereceksin.
 `,
     ),
     O(`
@@ -1251,6 +1255,8 @@ leyla: Uyu. Yarın uyanık olman gerek. Bir de: o adama bakarken öfkeyle bakma.
 > Masamda dosya, dosyanın üstünde Elif’in gemi resmi. Kapağını kapattım.
 ~ Yarın bir uzman yemin edecek. Bir babacan adam ikinci kez kürsüye çıkacak. Bir savcı mütalaasını okuyacak.
 ~ Bir yumruk ve bir ölüm. Üç ay boyunca herkes ikisini aynı cümlede söyledi. Yarın onları ayıracağım.
+> Defterimin son sayfasına üç satır yazdım, Leyla’nın üç adımına karşılık. Kırık ve baba. Mide ve saat. Yol ve kan.
+~ Her satırın yanında bir fotoğraf numarası, bir rapor sayfası. Bir bilirkişiye kanaat götürülmez; sayfa götürülür. Yarın ona sayfa numarasıyla soracağım.
 > Lambayı söndürmeden önce panoya son bir kez baktım. Kırmızı iplikler, toplu iğneler, bir gemi resmi. Bir haritaya benziyordu; ama bir limanın değil, bir gecenin haritasına.
 ~ Haritada her yer işaretliydi. Bir tek B sahasının üçüncü sırası boştu. Oraya iğne batırmak benim işim değildi.
 `),

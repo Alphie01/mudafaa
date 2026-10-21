@@ -944,6 +944,10 @@ tarik: Abla… Bitti mi?
 - Bitmedi. Daha bir celse var. Ama bu akşam Elif’i öpebilirsin.
 > Merdivenin dibinde, siyahlar içinde Sevim Yavuz duruyordu. Tarık onu görünce durdu. Sevim ona bakmadı; yağmura bakıyordu.
 ~ Kocasının katili diye bildiği adama bakmayan bir dul. Öfkeden mi, yorgunluktan mı, bilmiyordum. Not aldım.
+> Telefonum titredi. Leyla. [phone]
+leyla: Teşhis iki ayağından düştü; saat de göz de. Bu bir yarım zafer. Öbür yarısı ölüm: savcı şimdi yumruğa sarılacak. [phone]
+- Biliyorum. Yumruk, düşme, birkaç adım.
+leyla: O zaman üç haftan var. Her adım için bir kâğıt bul. Bilirkişi “olabilir” diyecek; senin işin ona sayfa göstermek. [phone]
 `,
         ),
         O(`

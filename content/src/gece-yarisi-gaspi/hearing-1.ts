@@ -91,12 +91,12 @@ export const hearing1: CasePart = {
         W(
           flag('zarf_aldi'),
           `
-derya: Tolga gelmedi. Söz vermişti. Telefonu da kapalı. Bu çocuk da…
-~ Masamda onun zarfı duruyor. Derya’nın haberi yok.
+derya: Annem sabah ezanından beri burada. Ben salonu kapattım, kepenge “Duruşma” yazdım.
+~ Masamda kuzenin zarfı duruyor. Derya’nın haberi yok.
 `,
         ),
         O(`
-derya: Tolga da gelecekti, “işim var” dedi. Bu ailede herkesin bir işi var, bir tek Barış’ın yok.
+derya: Salonu kapattım canım. Kepenge “Duruşma” yazdım. Bu ailede herkes bir kapısını kapattı; Barış’ınki zaten kapalı.
 `),
       ],
     }),
@@ -253,7 +253,7 @@ rahmi: Müdafi, talebe diyeceğiniz?
 `),
       next: 'H1_03',
       options: [
-        option('H102_A', '“Katılıyoruz; giriş cihazı ve kimlik doğrulama kayıtları da istensin.”', {
+        option('H102_A', '“Katılıyoruz; cihaz ve doğrulama kaydı da gelsin.”', {
           score: { USUL_BILGISI: 100 },
           effects: [raise('selfie_istendi'), inc('legal_hits'), inc('pers')],
           good: 'Kayıtların bütünüyle (giriş cihazı, kimlik doğrulama özçekimi) istenmesi, hesabı kimin kullandığı sorusunu baştan açar (CMK 177, 332).',
@@ -264,15 +264,15 @@ rahmi: Müdafi, talebe diyeceğiniz?
 > Başkan savcıya baktı. Savcı omuz silkti: itirazı yoktu. Elif Karaca “özçekim” kelimesinin altını çizdi.
 `),
         }),
-        option('H102_B', '“Katılıyoruz.”', {
+        option('H102_B', '“Katılıyoruz; kayıtlar müvekkilin evde olduğunu gösterir.”', {
           neutral: 'Talebe katıldın; ama kaydın kapsamını genişletmedin.',
           responses: B(`
-- Talebe katılıyoruz Sayın Başkan. Saklayacak bir şeyimiz yok.
+- Talebe katılıyoruz Sayın Başkan. Kayıtlar müvekkilin o gece evde olduğunu gösterecektir.
 rahmi: Kabul.
-~ Saklayacak bir şeyimiz yok. Umarım.
+~ Gösterecektir. Bir kaydın ne göstereceğini, onu okumadan söyledim. Umarım.
 `),
         }),
-        option('H102_C', '“Karşı çıkıyoruz; kayıtlar ilgisiz.”', {
+        option('H102_C', '“Karşı çıkıyoruz; kayıtlar ilgisiz ve talep çok geniş.”', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred'), dec('pers')],
           bad: 'Maddi gerçeğe ilişkin delilin toplanmasına gerekçesiz karşı çıkmak “saklanacak bir şey var” izlenimi verir; mahkeme yine de toplar.',
@@ -567,7 +567,7 @@ orhan: Sayın Başkan, bir sorum var. Mağdur hanım, salonda bulunan sanığa b
       ],
       next: 'H1_04B',
       options: [
-        option('H104_A', 'İtiraz: sanık sandalyesindeki tek kişiyi göstermek telkindir', {
+        option('H104_A', 'İtiraz: soru telkinli, salonda başka genç yok', {
           score: { USUL_BILGISI: 100 },
           effects: [inc('legal_hits'), inc('pers'), raise('h104_itiraz')],
           good: 'Salonda, sanık sandalyesindeki tek kişiye yöneltilen teşhis sorusu telkindir (CMK 201/1); bu “teşhis” PVSK ek md. 6 güvencelerinin hiçbirini taşımaz.',
@@ -583,10 +583,10 @@ rahmi: Kabul. Soru yöneltilmeyecek. Mahkeme salonda yapılan teşhise ayrıca d
           neutral: 'Telkinli bir salon teşhisine izin verdin; mağdur, sandalyedeki tek gence baktı.',
           responses: B(`
 nermin: Bilmiyorum… Galiba. O fotoğraftaki… Galiba bu.
-~ “Galiba.” Acilde de böyle demişti. Bu kelime bu dosyada ikinci kez bir kaderi değiştiriyor.
+~ “Galiba.” Bir kelime. Bu dosyada bir kaderi değiştirecek kadar ağır.
 `),
         }),
-        option('H104_C', 'İtiraz: tanık yorgun, ara verilsin', {
+        option('H104_C', 'İtiraz: tanık yorgun, beyanı artık güvenilmez', {
           score: { USUL_BILGISI: -20 },
           neutral: 'Tanığın yorgunluğu bir dayanaktır ama sorunun kendisine itiraz etmedin.',
           responses: B(`
@@ -594,7 +594,7 @@ rahmi: On dakika ara verilmeyecek; mağdur hanım oturarak cevap verebilir. Soru
 nermin: Galiba… Bu.
 `),
         }),
-        option('H104_D', 'İtiraz: bu soru iddianamede yok', {
+        option('H104_D', 'İtiraz: soru iddianamenin kapsamı dışında', {
           score: { USUL_BILGISI: -50 },
           effects: [dec('cred'), dec('pers')],
           bad: 'Savcı CMK 201/1 uyarınca tanığa soru yöneltebilir; “iddianamede yok” bir itiraz dayanağı değildir.',
@@ -672,9 +672,44 @@ rahmi: Müdafi, tutukluluk hâline ilişkin diyeceğiniz?
           category: 'USUL_BILGISI',
           responses: [
             W(
+              all(flag('contra_n3'), flag('contra_n5')),
+              `
+- Sayın Başkan, mağdur bugün, karakoldaki teşhisten önce acil serviste kendisine telefondan tek bir fotoğraf gösterildiğini söyledi.
+- Mağdurun kirlenmeden önceki ilk tarifi, 112 çağrısında, sol kulakta bir halkadan söz ediyor; sanığın kulakları delinmemiş.
+- Kuvvetli suç şüphesi sarsılmıştır.
+- Sanığın sabit adresi var, kaçma şüphesi yok. Adli kontrol yeterlidir.
+> Heyet kısa bir müzakere için ayağa kalktı. Dört dakika. Sevim Hanım’ın tespihi bu dört dakikayı saydı.
+rahmi: Sanığın imza yükümlülüğü ve yurt dışına çıkış yasağı şeklinde adli kontrol tedbiri uygulanarak tahliyesine; başka suçtan tutuklu değilse derhâl salıverilmesine.
+> Barış başını iki elinin arasına aldı. Jandarma, kelepçeyi taşıdığı eli bir an havada tuttu; sonra cebine koydu.
+`,
+            ),
+            W(
+              flag('contra_n3'),
+              `
+- Sayın Başkan, mağdur bugün, karakoldaki teşhisten önce acil serviste kendisine telefondan tek bir fotoğraf gösterildiğini söyledi.
+- Kuvvetli suç şüphesi sarsılmıştır.
+- Sanığın sabit adresi var, kaçma şüphesi yok. Adli kontrol yeterlidir.
+> Heyet kısa bir müzakere için ayağa kalktı. Dört dakika. Sevim Hanım’ın tespihi bu dört dakikayı saydı.
+rahmi: Sanığın imza yükümlülüğü ve yurt dışına çıkış yasağı şeklinde adli kontrol tedbiri uygulanarak tahliyesine; başka suçtan tutuklu değilse derhâl salıverilmesine.
+> Barış başını iki elinin arasına aldı. Jandarma, kelepçeyi taşıdığı eli bir an havada tuttu; sonra cebine koydu.
+`,
+            ),
+            W(
+              flag('contra_n5'),
+              `
+- Sayın Başkan, mağdurun kirlenmeden önceki ilk tarifi, 112 çağrısında, sol kulakta bir halkadan söz ediyor; sanığın kulakları delinmemiş.
+- Kuvvetli suç şüphesi sarsılmıştır.
+- Sanığın sabit adresi var, kaçma şüphesi yok. Adli kontrol yeterlidir.
+> Heyet kısa bir müzakere için ayağa kalktı. Dört dakika. Sevim Hanım’ın tespihi bu dört dakikayı saydı.
+rahmi: Sanığın imza yükümlülüğü ve yurt dışına çıkış yasağı şeklinde adli kontrol tedbiri uygulanarak tahliyesine; başka suçtan tutuklu değilse derhâl salıverilmesine.
+> Barış başını iki elinin arasına aldı. Jandarma, kelepçeyi taşıdığı eli bir an havada tuttu; sonra cebine koydu.
+`,
+            ),
+            W(
               ref('tahliye_dayanak'),
               `
-- Sayın Başkan, bugün mağdurun teşhisinden önce acilde tek fotoğraf gösterildiği ya da ilk tarifinin sanığa uymadığı ortaya çıktı. Kuvvetli suç şüphesi sarsılmıştır.
+- Sayın Başkan, bıçak ilk çağrıda yok; teşhisteki altı fotoğraftan yalnızca sanığınki renkli ve ötekilerden büyük.
+- Kuvvetli suç şüphesi sarsılmıştır.
 - Sanığın sabit adresi var, kaçma şüphesi yok. Adli kontrol yeterlidir.
 > Heyet kısa bir müzakere için ayağa kalktı. Dört dakika. Sevim Hanım’ın tespihi bu dört dakikayı saydı.
 rahmi: Sanığın imza yükümlülüğü ve yurt dışına çıkış yasağı şeklinde adli kontrol tedbiri uygulanarak tahliyesine; başka suçtan tutuklu değilse derhâl salıverilmesine.

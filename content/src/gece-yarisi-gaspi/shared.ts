@@ -35,5 +35,10 @@ const bench = [
 export const court1 = court({ bench, counsel: 'deniz', hud: ['cred', 'pers'], ...H1 });
 export const court2 = court({ bench, counsel: 'deniz', hud: ['cred', 'pers'], ...H2 });
 
+/** Delil zinciri tamken savcının beraat istemesi ve heyetin hükme geçmesi için gereken ham skor ("derin tartışma"). */
+export const T_DERIN = 7500;
+/** Kayıtlara bağlı bildirimden sonra savcının ikinci celseden önce harekete geçmesi için ara sonunda gereken ham skor. */
+export const T_TESLIM = 6500;
+
 /** Yanlış sunum / dayanaksız itiraz ortak etkileri. */
 export const wrongMove: Effect[] = [dec('cred'), dec('pers'), inc('wrong')];

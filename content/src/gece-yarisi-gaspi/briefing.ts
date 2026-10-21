@@ -32,23 +32,17 @@ const PR00 = T(`
 @KADIN: Kurye gibiydi… sırtında sarı kutu vardı. Genç. İnce. Kulağında… kulağında bir şey parladı… [phone]
 > Kadın ağlamıyordu. Henüz değil. Ağlamak, insanın aklına bir şey geldiğinde başlar; o an aklında hiçbir şey yoktu.
 > Kurtarılamayan bir saat vardı. Ve bir yüz. Sadece bir an görülmüş, yağmurla yarı silinmiş bir yüz.
-> Ertesi sabah o yüzü ona başka biri hatırlatacaktı. {fade}
+> Bakkal kepengi sonuna kadar kaldırdı, kadını içeri, sıcağa aldı. Radyoyu kapattı. Merdivende yalnızca yağmur kaldı. {fade}
 `);
 
 const PR01 = T(`
 # 19 OCAK · 00.40 — DEVLET HASTANESİ, ACİL SERVİS [bg:hastane]
 > Yeşil alanın florasanı vızıldıyordu. Bir monitör bipliyordu; kimse ona bakmıyordu.
 > Kadın sedyenin kenarında oturuyordu. Sol avucunda iki dikiş, gazlı bez, bir bandaj. Hemşire sargıyı sararken kadın gözlerini duvardaki saate dikmişti.
-> Kapı açıldı. Islak montlu, kırk yaşlarında bir adam girdi. Saçından su damlıyordu; yürürken bir yandan telefonuna bakıyordu.
-@BİR POLİS: Teyze, geçmiş olsun. İki dakika. Çok yorulmayacaksın.
-> Sedyenin yanına çöktü. Hemşire bir şey söyleyecek oldu; adam elini kaldırdı, “iki dakika” dedi. Perde yarıya kadar çekildi.
-> Perdenin arkasından sesler geldi. Kelimeler monitörün bipine karışıyordu.
-@BİR POLİS: …iyice… acele etme… kaydı var… bıçak…
-@KADIN: …karanlıktı… kapüşonu vardı… bilmiyorum…
-> Bir sessizlik. Monitör üç kez öttü. Sonra kadının sesi, daha ince, daha uzaktan.
-@KADIN: Galiba… Evet. Galiba.
-> Sonra ağlamaya başladı. Hemşire perdeyi açtı ve adamı kolundan tutup kapıya kadar götürdü. Masasına döndü, bir forma bir şey yazdı.
-> Kimse ne yazdığını sormadı. Kimse perdenin arkasında ne olduğunu da sormadı.
+@KADIN: Saatim çantadaydı kızım. Eşimin saati. Köstekli. On iki yıldır cebimde.
+@HEMŞİRE: Polis bulur teyze. Sen şimdi elini kıpırdatma.
+> Kadın başını salladı. İnanmadı. Saatin yelkovanı bir çentik ilerledi; kimsenin aklında bir şey kalmayacak kadar küçük bir çentik.
+> Dışarıda bir ambulans sireni yükseldi, sonra kesildi. Gece, acil servisin cam kapısından içeri yağmur kokusuyla girdi ve oturacak yer aradı.
 # 19 OCAK · SABAH 08.10 — YILDIRIM, MİMAR SİNAN MAHALLESİ [bg:sokak_sabah]
 > Sıra apartmanların arasında bir ekip aracı. Üçüncü katta bir kapı çalındı. Sonra bir kez daha, daha sert.
 > Kapıyı ateşten kızarmış yüzlü bir genç açtı. Üstünde eşofman, boynunda bir havlu. Sesi kısıktı.
@@ -59,7 +53,7 @@ const PR01 = T(`
 > Kimse yazmadı. Gencin telefonu şeffaf bir poşete girdi. Merdivenlerde kelepçe şıkırdadı. {shake}
 > Üst kattaki balkonda yaşlı bir adam, gözlüğünü burnuna itti ve aşağı baktı. Bir şey söyleyecek gibi oldu. Sonra perdeyi çekti.
 > İki gün sonra genç tutuklandı. İki ay sonra iddianame geldi: nitelikli yağma, Ağır Ceza.
-> Birinci celseye on iki gün kala, ablası bir avukat aradı.
+> Birinci celseye on bir gün kala, ablası bir avukat aradı.
 `);
 
 const BR00 = T(`
@@ -104,13 +98,13 @@ leyla: Ağlayan bir ablaya söz verme Deniz. Okunmamış bir dosyaya hiç verme.
 - Duydunuz mu?
 leyla: Bu binada duvarlar incedir. Ben de inceyimdir.
 > Masama bir klasör bıraktı. Kenarları yıpranmış, kapağında kırmızı kalemle bir dosya numarası. UYAP çıktıları, iddianame, tutanaklar.
-leyla: Barış Kılınç artık senin. Dosyanın tamamını indirdim. On iki gün sonra birinci celse. Mağdur kürsüye gelecek.
+leyla: Barış Kılınç artık senin. Dosyanın tamamını indirdim. On bir gün sonra birinci celse. Mağdur kürsüye gelecek.
 leyla: Kadın yalan söylemiyor. Bunu baştan bil. Bu dosyada senin düşmanın bir yalancı değil.
 - O zaman ne?
 leyla: Bir hafıza.
 > Karşıma oturdu. Masasından getirdiği sigara paketini önüne koydu. Bırakalı dört yıl oldu. Paket hâlâ dolu.
 leyla: Dosyayı açmadan önce bir şey bil. Neyle karşı karşıyayız? İddianamedeki suçun cezası ne?
-~ Klasörün kapağında “yağma” yazıyordu. Altında iki küçük harf: a ve h. Gerisi bendeydi.
+~ Klasörün kapağında “yağma” yazıyordu, altında bir madde numarası. Gerisi bendeydi.
 `);
 
 const BR01B = T(`
@@ -141,7 +135,7 @@ ali: O zaman öbürü. Hayırdır?
 - Ocak’ta burada bir kadın soyuldu.
 ali: Nermin abla. Bilmez miyim. Benim telefonumdan aradı polisi. Sonra gel, çay koyarım; şimdi ekmekçi gelecek.
 > Kepengin gıcırtısı merdivenler boyunca yukarı tırmandı. Bir martı, Bursa’nın denize uzak göğünde neden olduğunu bilmeden çığlık attı.
-~ Bir dosya, bir şehir ve on iki gün. Nereden başlayacağımı biliyordum: kimsenin okumadığı kâğıttan.
+~ Bir dosya, bir şehir ve sekiz gün. Nereden başlayacağımı biliyordum: kimsenin okumadığı kâğıttan.
 `);
 
 export const briefing: CasePart = {
@@ -241,7 +235,7 @@ leyla: Ama düşünmen iyi. Fiilin adı bazen davanın kendisidir. Aklında tut.
 `),
           next: 'BR_01B',
         }),
-        option('BR01_D', '149/1 + gece vakti için ayrıca yarı artırım', {
+        option('BR01_D', '149/1-h, gece için ayrıca 143 artırımı', {
           bad: 'Gece vakti artırımı (TCK 143) hırsızlığa özgüdür; yağmada gece vakti zaten nitelikli hâldir (149/1-h). Aralık 10–15 yıl.',
           category: 'HUKUKI_BILGI',
           responses: B(`

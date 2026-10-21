@@ -12,17 +12,136 @@ import {
   v,
   xp,
 } from '../../../tools/content/src/kit/index.js';
-import type { CasePart } from '../../../tools/content/src/kit/index.js';
+import type { CasePart, Cond, ResponseBlock } from '../../../tools/content/src/kit/index.js';
 import { O, W } from './dsl.js';
 
-// 70-outcomes: sonuçlar (öncelik sırasıyla) ve sonuca bağlı epiloglar. Eşikler meta’daki eşik çubuğuyla aynı.
+// 70-outcomes: sonuçlar (öncelik sırasıyla) ve sonuca bağlı epiloglar.
+// Hüküm delile bağlıdır, skora değil: gerçek failin ikrarı ve saatin ele geçirilmesi (tolga_teslim; kayıtlara
+// bağlı bildirim + ailenin kendi kararı) 223/2-b'ye; tam delil zinciri (teşhis çöktü + konum kaydı cevaplandı +
+// bağımsız mazeret) ile savcının beraat mütalaası ya da heyetin ikna düzeyi 223/2-e'ye götürür. Skor yalnızca XP'yi
+// ve indirim sınırını belirler. Silah unsuru duruşmada çürütüldüyse mahkûmiyet yalnızca 149/1-h üzerinden kurulur.
 
 export const T_INDIRIM = 3000;
-export const T_BERAAT = 9000;
-export const T_BERAAT_B = 10000;
+// Beraat için skor eşiği yoktur: beraat delille gelir (eşik çubuğunda bu yüzden yalnızca indirim sınırı var).
+
+/** Silah unsurunun duruşmada çürütüldüğü (kayda geçtiği) durum. */
+const silahDustu: Cond = any(flag('contra_n2'), flag('contra_f4'), flag('arg_silah'));
+/**
+ * 223/2-e: delil zinciri tam (teşhis çöktü + konum kaydı cevaplandı + bağımsız mazeret) ve ya savcı mütalaada
+ * beraat istedi (mutalaa_b, T_05'te kaydedilir) ya da esas savunmadan sonra heyetin ikna düzeyi en az 6.
+ * Savcının beraat istediği dosyada mahkûmiyet/indirim kurulmaz.
+ */
+const beraatDosyasi: Cond = all(
+  not(flag('cokus')),
+  any(flag('mutalaa_b'), all(ref('beraat_delil'), cmp(v('pers'), '>=', 6), ref('derin'))),
+);
+/** Delil zinciri tam ama kayıtlar duruşmada derinlemesine tartışılmadı: mahkûmiyet değil, bilirkişi ve erteleme. */
+const ertelemeDosyasi: Cond = all(
+  not(flag('cokus')),
+  not(flag('tolga_teslim')),
+  not(beraatDosyasi),
+  ref('beraat_delil'),
+  cmp(v('pers'), '>=', 6),
+);
+/** Tanık yönlendirme (Kadir Usta ya da bakkal). */
+const kocluk: Cond = any(flag('kadir_kocluk'), flag('ali_kocluk'));
 
 const tutukluluk =
   'tutukluluk hâlinin devamına (ikinci celseden önce adli kontrolle tahliye edilmişse, hükmolunan cezanın miktarı gözetilerek hükümle birlikte tutuklanmasına, CMK 100–101)';
+
+/** Tanık yönlendirmenin beraat epiloglarındaki izi. */
+const koclukEpilog: ResponseBlock = W(
+  kocluk,
+  `
+> Kapıdan çıkarken Leyla döndü. Sesi alçaktı; koridorda kimse duymasın diye değil, ben unutmayayım diye.
+leyla: Bir şey daha. Bir tanığa söyleyeceği cümleyi verdin. Bugün beraat geldi; o cümle gelmedi diye değil, gelmesine rağmen.
+leyla: Savcı Başsavcılığa bir yazı yazacak. Cevabını sen yazacaksın; ben okumayacağım. Okumam gerekmesin diye.
+~ Bir beraat, bir avukatın yaptığı her şeyi temize çıkarmaz. Heyet Barış’ı aklar; beni aklayacak bir heyet yok.
+`,
+);
+
+/** Mahkûmiyet epilogu: hükmün süresi çağrıda verilir. */
+const mahkumiyetEpilog = (sure: string, sureKucuk: string): ResponseBlock[] => [
+  W(
+    flag('cokus'),
+    `
+# SALON · HÜKÜMDEN SONRA [bg:durusma_salonu]
+> Salon boşaldı. Jandarma Barış’ı götürdü. Sevim Hanım’ı biri koluna girip dışarı çıkardı.
+> Masamda oturuyordum. Notlarım önümde. Hiçbirine bakmamıştım; hiçbiri işe yaramamıştı.
+> Savcı Orhan Bayar dosyasını topladı. Kapıya giderken durdu, bana döndü.
+orhan: Hafızayla değil, kâğıtla gelmeliydiniz avukat hanım. Bu dosyada kâğıtlar vardı.
+> Kapı arkasından kapandı. Radyatör tıkırdadı. Başka ses yoktu.
+`,
+  ),
+  O(`
+# ADLİYE KORİDORU · HÜKÜMDEN SONRA [bg:adliye]
+> “${sure}.” Kelime koridora benden önce çıktı. Sevim Hanım’ın tespihi koptu; taneler mermer zeminde yuvarlandı, bankların altına, kapıların eşiğine.
+> Eğildim. Topladım. Bir, iki, otuz üç. Birini bulamadım.
+> Derya annesinin koluna girmişti. Bana bakmadı. Merdivenin başında durdu; geri döndü.
+derya: Salonun kirası. İki koltuk. Bir de kardeşim. Hepsi gitti canım.
+> Nermin Hanım öbür uçta, kızının yanında oturuyordu. Kalkmadı. Sevinmiyordu. Saatini kimse geri getirmemişti.
+`),
+  W(
+    all(flag('fact_tolga'), not(flag('bildirdi'))),
+    `
+> Tolga hakkında bir dilekçe yazacağım. Savcılığa. Bunu ikinci celseden önce yapmalıydım. Şimdi bir istinaf dilekçesine bir ek olacak.
+`,
+  ),
+  W(
+    all(flag('bildirdi'), not(flag('tolga_kacti'))),
+    `
+> Tolga hakkındaki bildirimim savcının masasında; bir dosya numarası aldı, bir ifade tarihi almadı. Kâğıt yolunu yürüyor. Barış o yolun sonunu cezaevinden bekleyecek.
+`,
+  ),
+  W(
+    flag('tolga_kacti'),
+    `
+> Tolga’nın odası hâlâ boş. Benim çaldığım kapıdan çıkan adam, artık bir yakalama kararının adı.
+`,
+  ),
+  O(`
+# ARSLAN HUKUK · GECE [bg:buro_gece]
+> Avucumda bir tespih tanesi. Otuz üçüncüsü yoktu; bu otuz dördüncüydü belki, ya da birinciydi. Masama koydum.
+~ Bir fotoğraf bir hafızayı kirletti. Ben o kiri temizleyemedim. Kimse “yalan” demedi; herkes “eminim” dedi.
+~ İstinaf var. Her zaman bir sonraki kapı vardır. Ama bu gece kapıların hepsi kapalı. ${sureKucuk}; bir takvimin bütün sayfaları.
+`),
+];
+
+const mahkumiyetGerekce = [
+  because(
+    'Mağdurun teşhisi, sanık adına açılmış hesabın konum kaydı ve sanığın bölgede kurye olarak çalışması birlikte değerlendirilmiştir.',
+    not(ref('teshis_coktu')),
+  ),
+  because(
+    'Teşhis işlemindeki usulsüzlük nedeniyle mağdurun teşhisi hükme esas alınmamıştır; ancak sanık adına açılmış kurye hesabının olay anında olay yerinde bulunduğuna ilişkin konum kaydı duruşmada cevapsız kalmıştır.',
+    all(ref('teshis_coktu'), not(ref('hesap_kayitta'))),
+  ),
+  because(
+    'Teşhis hükme esas alınmamış, hesabın o gece başka bir cihazdan açıldığı duruşmada ortaya konmuştur; ancak sanığın olay saatinde başka bir yerde bulunduğu kayıtla gösterilmemiş, sanığın hesabını kullandıran kişiyle birlikte hareket ettiği ihtimali giderilememiştir.',
+    all(ref('teshis_coktu'), ref('hesap_kayitta'), not(ref('mazeret_kayitta'))),
+  ),
+  because(
+    'Savunma, hesabın olay gecesi başka bir kişi ya da cihaz tarafından kullanıldığını duruşmada delille ortaya koymamıştır.',
+    all(not(flag('cokus')), not(ref('hesap_kayitta'))),
+  ),
+  because(
+    'Sanığın olay saatinde evinde olduğuna ilişkin savunması, duruşmada aile beyanı dışında bağımsız bir kayıtla desteklenmemiştir.',
+    all(not(flag('cokus')), not(ref('mazeret_kayitta'))),
+  ),
+  because(
+    'Savunmanın duruşmada ortaya koyduğu bulgular, iddianamedeki anlatımı bütünüyle sarsacak kapsamda değildir; dosyadaki diğer çelişkiler tartışılmamıştır.',
+    all(not(flag('cokus')), ref('teshis_coktu'), ref('hesap_kayitta'), ref('mazeret_kayitta')),
+  ),
+  because(
+    'Yakın komşu tanığın saate ilişkin beyanı, müdafiin tanığa saat söylediğinin anlaşılması nedeniyle hükme esas alınmamıştır.',
+    flag('kadir_ifsa'),
+  ),
+  because(
+    'Olay yeri tanığı bakkalın müdafi tarafından yönlendirildiğine ilişkin beyanı tutanağa geçmiş ve Başsavcılığa bildirilmiştir.',
+    flag('ali_ifsa'),
+  ),
+  because('Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı.', flag('cokus')),
+];
 
 export const outcomes: CasePart = {
   outcomes: [
@@ -34,10 +153,11 @@ export const outcomes: CasePart = {
       stampTone: 'red',
       sentence: 'Vekâlet sona erdi · dava sürüyor',
       verdictText:
-        'Mahkemece, sanık müdafiinin duruşma dışında mağdura fotoğraf göstererek teşhis yaptırmaya çalıştığının anlaşılması üzerine durumun Bursa Barosu Başkanlığına ve Bursa Cumhuriyet Başsavcılığına bildirilmesine; mağdurun bundan sonraki teşhise ilişkin beyanlarının değerlendirmede dikkate alınmamasına; sanığın müdafiini azletmesi nedeniyle duruşmanın yeni müdafiin katılımıyla devamına karar verildi.',
+        'Mahkemece, sanık müdafiinin duruşma dışında mağdura fotoğraf göstererek teşhis yaptırmaya çalıştığının anlaşılması üzerine durumun tutanağa geçirilmesine ve Bursa Barosu Başkanlığı ile Bursa Cumhuriyet Başsavcılığına bildirilmesine; sanığın müdafiini azletmesi nedeniyle duruşmanın yeni müdafiin katılımıyla devamına karar verildi.',
       reasoning: [
         because('Müdafi, kolluğun teşhisi kirleten tek fotoğraf gösterimini savunma eliyle tekrarlamıştır.'),
         because('Sanık, vekâlet ilişkisini tek taraflı olarak sona erdirmiştir (TBK 512/1).'),
+        because('Mağdurun beyanlarının ne ölçüde değerlendirileceği hükümde, delillerin bütünü içinde takdir edilecektir (CMK 217).'),
         because('Dava, başka bir müdafiin katılımıyla devam edecektir; senin dosyan burada kapandı.'),
       ],
       legalBasis: 'Av.K. 34; TCK 277; TBK 512/1; PVSK ek md. 6; CMK 217',
@@ -71,15 +191,7 @@ nermin: Neden herkes bana bir fotoğraf gösteriyor evladım? Sen de mi?
     outcome('BERAAT_B', {
       class: 'ACQUITTAL',
       priority: 2,
-      when: all(
-        not(flag('cokus')),
-        flag('tolga_teslim'),
-        ref('teshis_coktu'),
-        any(has('ded_baskasi'), has('ded_hesap')),
-        any(has('ded_mazeret'), has('ded_evde')),
-        cmp(v('pers'), '>=', 8),
-        finalAtLeast(T_BERAAT_B),
-      ),
+      when: flag('tolga_teslim'),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -88,21 +200,33 @@ nermin: Neden herkes bana bir fotoğraf gösteriyor evladım? Sen de mi?
         'Sanık Barış Kılınç’ın üzerine atılı nitelikli yağma suçunu işlemediği sabit olduğundan CMK 223/2-b uyarınca BERAATİNE; başka suçtan tutuklu değilse derhâl TAHLİYESİNE, hakkındaki adli kontrol tedbirinin kaldırılmasına; CMK 141/1-e uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142 ile 6384 sayılı Kanuna göre yapılabileceğinin bildirilmesine (CMK 231/3); mağdura ait köstekli saatin mağdura iadesine; karar ve dosya örneklerinin Tolga Kılınç hakkındaki soruşturmaya ve teşhis işlemine ilişkin suç duyurusuna eklenmek üzere Bursa Cumhuriyet Başsavcılığına gönderilmesine; istinaf yolu açık olmak üzere karar verildi.',
       reasoning: [
         because(
+          'Tolga Kılınç, Başsavcılıkta müdafii huzurunda olayı ikrar etmiş; mağdura ait köstekli saat onun odasında ele geçirilmiştir.',
+        ),
+        because(
+          'Tolga Kılınç, sanık adına açılmış kurye hesabını olay gecesi kendi telefonundan kendisinin kullandığını beyan etmiştir; konum kaydı bu kullanımı gösterir.',
+        ),
+        because(
+          'Hesabın o gece başka bir cihazdan açıldığı ve doğrulama özçekimindeki kişinin sol kulağında halka bulunduğu, ikrardan bağımsız olarak dosyaya girmiştir.',
+          ref('hesap_curudu'),
+        ),
+        because(
           'Mağdurun teşhisi, kolluk görevlisinin teşhisten önce acil serviste tek fotoğraf göstermesi nedeniyle kanuni güvencelerden yoksundur ve hükme esas alınamaz (PVSK ek md. 6; CMK 217).',
+          ref('teshis_coktu'),
         ),
         because(
-          'Sanık, olay saatinde Yıldırım’daki evindedir; bu husus bağımsız tanık beyanı, kesinti kaydı ve telefon kaydıyla doğrulanmıştır.',
+          'Sanığın olay saatinde Yıldırım’daki evinde olduğu bağımsız kayıtlarla da doğrulanmıştır.',
+          ref('mazeret_var'),
         ),
         because(
-          'Sanık adına açılmış kurye hesabı olay gecesi başka bir cihazdan, sol kulağında halka bulunan bir kişi tarafından kullanılmıştır; bu tarif mağdurun ilk beyanıyla örtüşmektedir.',
+          'Müdafiin duruşmadaki dağınık sunumları, Başsavcılıkça toplanan delillerin açıklığını değiştirmemiştir.',
+          flag('cokus'),
         ),
-        because('Tolga Kılınç olayı ikrar etmiş; mağdura ait köstekli saat onun odasında ele geçirilmiştir.'),
         because('Deliller birlikte değerlendirildiğinde suçun sanık tarafından işlenmediği sabittir.'),
       ],
       legalBasis: 'CMK 223/2-b; CMK 141/1-e, 142, 231/3; PVSK ek md. 6; CMK 217',
       xp: xp(1.2, { ethicsVar: 'ethics' }),
       howToReach:
-        'Teşhisin kirlendiğini kanıtla, mazereti kayda bağla, hesabı kimin taşıdığını göster ve bilgiyi savcılığa yaz; aileye ne yapacağını değil, ne yapabileceğini söyle.',
+        'Hesabı kimin taşıdığını kayıtlarla göster ve bunu savcılığa yaz (CMK 158); aileye ne yapacağını değil, ne yapabileceğini söyle. Kovalamak avukatın işi değildir.',
       epilogue: [
         O(`
 rahmi: Türk Milleti adına…
@@ -130,6 +254,9 @@ derya: Bir aileyi kurtarmak için öbürünü yakmamak… Olmadı canım. Bir ai
 leyla: Bugün kimseyi yenmedin.
 - Yenmedim.
 leyla: İyi.
+`),
+        koclukEpilog,
+        O(`
 > Odasına döndü. Masasının köşesindeki ters çerçeveye bir an baktı; elini uzattı, sonra çekti.
 leyla: Bir gün sana bir dosyadan bahsedeceğim Deniz. Bugün değil.
 # SON
@@ -141,7 +268,7 @@ leyla: Bir gün sana bir dosyadan bahsedeceğim Deniz. Bugün değil.
     outcome('BERAAT_E', {
       class: 'ACQUITTAL',
       priority: 3,
-      when: all(not(flag('cokus')), cmp(v('pers'), '>=', 6), ref('teshis_coktu'), ref('lehe2'), finalAtLeast(T_BERAAT)),
+      when: beraatDosyasi,
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -154,20 +281,36 @@ leyla: Bir gün sana bir dosyadan bahsedeceğim Deniz. Bugün değil.
           any(flag('contra_n3'), flag('contra_f2')),
         ),
         because(
+          'Teşhis tutanağı, tarifin teşhisten sonra alındığını ve sanığın fotoğrafının diğerlerinden farklı olduğunu göstermektedir; teşhis kanuni güvencelerden yoksundur (PVSK ek md. 6).',
+          all(not(flag('contra_n3')), not(flag('contra_f2'))),
+        ),
+        because(
+          'Sanık adına açılmış kurye hesabı olay gecesi sanığa ait olmayan bir cihazdan açılmıştır; konum kaydı hesabın yerini gösterir, sanığın yerini göstermez.',
+          ref('hesap_curudu'),
+        ),
+        because(
           'Mağdurun kirlenmeden önceki ilk tarifinde failin sol kulağında halka bulunduğu belirtilmiş; sanığın kulaklarında delik ya da iz bulunmamaktadır.',
-          any(has('ded_halka'), flag('contra_n5')),
+          ref('halka_var'),
         ),
         because(
           'Sanığın olay saatinde evinde olduğu tanık beyanı ve kesinti kaydıyla desteklenmiştir.',
-          has('ded_mazeret'),
+          all(has('ded_mazeret'), not(flag('kadir_kocluk'))),
         ),
         because(
           'Sanığın telefonu olay saatinden iki dakika önce evinin bulunduğu bölgeden elektrik arıza hattını aramıştır.',
           has('ded_evde'),
         ),
         because(
-          'Sanık adına açılmış kurye hesabı olay gecesi sanığa ait olmayan bir cihazdan açılmıştır; konum kaydı hesabın yerini gösterir, sanığın yerini göstermez.',
-          any(has('ded_hesap'), has('ded_baskasi')),
+          'Kolluk görevlisi, sanığın mazeretine ilişkin hiçbir araştırma yapılmadığını duruşmada kabul etmiştir.',
+          flag('contra_f6'),
+        ),
+        because(
+          'Yakın komşu tanığın saate ilişkin beyanı, müdafiin tanığa saat söylediğinin anlaşılması nedeniyle hükme esas alınmamıştır.',
+          flag('kadir_ifsa'),
+        ),
+        because(
+          'Olay yeri tanığı bakkalın müdafi tarafından yönlendirildiğine ilişkin beyanı tutanağa geçmiş ve Başsavcılığa bildirilmiştir; bu tanığın bıçağa ilişkin anlatımı değerlendirmeye alınmamıştır.',
+          flag('ali_ifsa'),
         ),
         because(
           'İddia edilen bıçak bulunamamış, mağdurun ilk beyanında yer almamıştır.',
@@ -178,13 +321,21 @@ leyla: Bir gün sana bir dosyadan bahsedeceğim Deniz. Bugün değil.
           flag('gamze_dinlendi'),
         ),
         because(
+          'Cumhuriyet savcısı da esas hakkındaki mütalaasında sanığın beraatini talep etmiştir.',
+          flag('mutalaa_b'),
+        ),
+        because(
+          'Kolluk tanığı, “onaylı” denen kimlik doğrulama özçekimine ve oturumun açıldığı cihaza hiç bakmadığını duruşmada kabul etmiştir.',
+          flag('contra_f7'),
+        ),
+        because(
           'Sanığın suçu işlediğine dair kesin ve inandırıcı delil bulunmamaktadır; şüpheden sanık yararlanır (Anayasa 38/4; AİHS 6/2).',
         ),
       ],
       legalBasis: 'CMK 223/2-e; CMK 141/1-e, 142, 231/3; PVSK ek md. 6; CMK 217; Anayasa 38/4; AİHS 6/2',
       xp: xp(1, { ethicsVar: 'ethics' }),
       howToReach:
-        'Teşhisin kirlendiğini göster; mazeret ya da hesabın başkasınca kullanıldığı gibi en az iki bağımsız lehe bulgu kur.',
+        'Delil zincirini tamamla: teşhisin kirlendiğini göster, savcının konum kaydını kayıtlarla cevapla (hesap o gece başka bir telefonda ya da başka bir yüzdeydi) ve mazereti bağımsız bir kayda bağla. Duruşmada heyeti ikna et (en az 6).',
       epilogue: [
         O(`
 rahmi: Türk Milleti adına…
@@ -195,7 +346,7 @@ rahmi: Türk Milleti adına…
         W(
           flag('released'),
           `
-> Barış iki haftadır dışarıdaydı ama bugün başka türlü çıktı. İmza defteri yok, karakol yok. Kapıdan geçerken omuzlarını düzeltti.
+> Barış üç haftadır dışarıdaydı ama bugün başka türlü çıktı. İmza defteri yok, karakol yok. Kapıdan geçerken omuzlarını düzeltti.
 `,
         ),
         W(
@@ -208,7 +359,29 @@ rahmi: Türk Milleti adına…
 > Koridorda iki avukat konuşuyordu; biri ötekine bir şey fısıldadı. Duydum: “Şüpheden yararlandı.”
 > Nermin Hanım kızıyla çıkışa yürüdü. Yanımdan geçerken durdu. Bana bakmadı; konuştu.
 nermin: Saatimi kim aldı o zaman evladım?
-> Cevabını biliyordum. Kanıtlayamamıştım. Bu ikisi aynı şey değil.
+`),
+        W(
+          flag('bildirdi'),
+          `
+> Cevabını biliyordum; savcının masasında, ekleriyle, bir dilekçede yazıyordu. Ama bir dilekçe bir kadına saatini geri vermez.
+- Savcılık araştırıyor Nermin Hanım. Bu sefer usulüyle.
+> Başını salladı. İnanmak istiyordu; inanmaya artık o kadar hevesli değildi.
+`,
+        ),
+        W(
+          all(flag('fact_tolga'), not(flag('bildirdi'))),
+          `
+> Cevabını biliyordum. Kanıtlayamamıştım. Kimseye de yazmamıştım. Bu üçü aynı şey değil.
+`,
+        ),
+        W(
+          not(flag('fact_tolga')),
+          `
+> Cevabını bilmiyordum. Hesabın o gece başka bir telefonda olduğunu biliyordum; o telefonun kimin cebinde olduğunu değil.
+- Bilmiyorum Nermin Hanım. Savcılık hesabı kullananı arayacak.
+`,
+        ),
+        O(`
 > Kızı annesini kolundan çekti. Nermin Hanım yürüdü; merdivenin başında durdu, aşağı baktı. Adliyenin merdivenleri de taştı, ıslaktı. Basamakları saymadı. Biliyordum; çünkü ben saydım: yirmi iki.
 ~ Bir kadın bir yüzü geri verdi. Karşılığında hiçbir şey almadı; saatini de, gerçeği de. Bu beraat onun değil.
 `),
@@ -224,6 +397,7 @@ nermin: Saatimi kim aldı o zaman evladım?
 > Tolga’nın telefonu kapalıydı. Derya, “Gelecek” diyor. “Bir gün kendisi gelecek.” Belki.
 `,
         ),
+        koclukEpilog,
         O(`
 # ARSLAN HUKUK · GECE [bg:buro_gece]
 > Fişleri, dökümleri, tutanakları dosyaya kaldırdım. Panodaki kırmızı ipi çözdüm. Ortadaki boşluk hâlâ boştu.
@@ -232,10 +406,71 @@ nermin: Saatimi kim aldı o zaman evladım?
 `),
       ],
     }),
+    outcome('ERTELEME', {
+      class: 'OTHER',
+      priority: 4,
+      when: ertelemeDosyasi,
+      stamp: 'ERTELEME',
+      stampTone: 'amber',
+      sentence: 'Hüküm yok · Bilirkişi incelemesi',
+      verdictText:
+        'Mahkemece; HızlıPaket hesap ve konum kayıtları, telefon inceleme raporu ve UEDAŞ kesinti kaydı üzerinde, kayıtların hangi cihaz ve kişiyle ilişkili olduğu ile olay saatine göre birbirleriyle uyumu konusunda bilirkişi incelemesi yaptırılmasına (CMK 63, 67); delil durumu ve tutuklulukta geçen süre gözetilerek sanığın imza yükümlülüğü şeklinde adli kontrol tedbiri uygulanarak tahliyesine (CMK 109); esas hakkındaki mütalaa için dosyanın Cumhuriyet savcılığına tevdiine ve duruşmanın ertelenmesine karar verildi.',
+      reasoning: [
+        because('Mağdurun teşhisi, kanuni güvencelerden yoksun yapıldığı duruşmada ortaya konduğundan hükme esas alınamayacak durumdadır (PVSK ek md. 6; CMK 217).'),
+        because('Savunma, sanık adına açılmış hesabın olay gecesi başka bir cihazdan ya da başka bir kişi tarafından kullanıldığını ve sanığın olay saatinde evinde olduğunu gösteren kayıtlar sunmuştur.'),
+        because('Ancak bu teknik kayıtların birbiriyle ve olay saatiyle ilişkisi duruşmada yeterince tartışılmamış; heyet hükümden önce bilirkişi görüşü alınmasını gerekli görmüştür (CMK 216, 63).'),
+        because('Dava sürmektedir. Beraat yakın; ama bugün gelmedi.'),
+      ],
+      legalBasis: 'CMK 63, 67, 109, 216, 217; PVSK ek md. 6',
+      xp: xp(0.5, { ethicsVar: 'ethics' }),
+      howToReach:
+        'Delil zincirini kurarsın ama kayıtları duruşmada derinlemesine tartışmazsın: belgeleri incele, tanıkları bastır, doğru delili doğru beyana göster. Kâğıt dosyada durmakla konuşmaz.',
+      epilogue: [
+        O(`
+rahmi: Duruşma ertelenmiştir.
+> Tokmak bir kez vurdu. Kimse ayağa kalkmadı; ayağa kalkacak bir hüküm yoktu.
+> Barış bana döndü. “Abla, bitti mi?” diye sormadı. Gözleri sordu.
+# ADLİYE KORİDORU · ÖĞLEDEN SONRA [bg:adliye]
+> Derya bankta oturuyordu; elinde bir sigara, yakmadan. Sevim Hanım tespihini çekiyordu, ama sayısını tutmadan.
+derya: Bilirkişi ne demek canım? Bir ay mı, üç ay mı?
+- Bir kişi kayıtları okuyacak. Bizim okuduğumuzu, bir kez daha, mühürle.
+derya: Sen okumadın mı?
+- Okudum. Mahkemede yeterince okutamadım.
+`),
+        W(
+          not(flag('released')),
+          `
+> Barış akşam yedide cezaevinin kapısından çıktı; adli kontrolle. Bir imza defteri, bir karakol, bir bekleyiş. Ama dışarıda.
+`,
+        ),
+        W(
+          flag('released'),
+          `
+> Barış eve gitti; imza defteri cebinde. Üç haftadır her sabah karakola gidiyordu. Bir süre daha gidecek.
+`,
+        ),
+        koclukEpilog,
+        O(`
+# ARSLAN HUKUK · GECE [bg:buro_gece]
+> Leyla dosyayı masama bıraktı. Kenarına kurşun kalemle tek bir kelime yazmıştı: “Tartış.”
+leyla: Kâğıtları topladın Deniz. Hepsini. Sonra masaya koydun ve heyetin kendi kendine okumasını bekledin.
+leyla: Mahkeme okur; ama ona neyi, hangi sırayla, neden okuması gerektiğini sen söylersin. Duruşma bunun için var.
+~ Bir dosya kazanılmadan kaybedilmez. Ama kazanılmadan da beklenebilir; aylarca. Barış bekleyecek. Ben de.
+`),
+      ],
+    }),
     outcome('INDIRIM', {
       class: 'REDUCED',
-      priority: 4,
-      when: all(not(flag('cokus')), flag('closing_terdit'), flag('arg_silah'), finalAtLeast(T_INDIRIM)),
+      priority: 5,
+      when: all(
+        not(flag('cokus')),
+        not(flag('tolga_teslim')),
+        not(beraatDosyasi),
+        not(ertelemeDosyasi),
+        flag('closing_terdit'),
+        flag('arg_silah'),
+        finalAtLeast(T_INDIRIM),
+      ),
       stamp: 'İNDİRİM',
       stampTone: 'amber',
       sentence: '8 yıl 4 ay hapis',
@@ -250,6 +485,11 @@ nermin: Saatimi kim aldı o zaman evladım?
         ),
         because(
           'Mağdurun teşhisi ve sanık adına açılmış hesabın konum kaydı birlikte değerlendirilmiştir; savunmanın teşhise yönelik itirazları heyeti beraate götürecek ölçüde güçlü bulunmamıştır.',
+          not(ref('teshis_coktu')),
+        ),
+        because(
+          'Teşhis hükme esas alınmamıştır; ancak sanık adına açılmış hesabın olay anında olay yerinde bulunduğuna ilişkin konum kaydı cevapsız kalmıştır.',
+          ref('teshis_coktu'),
         ),
       ],
       legalBasis: 'TCK 149/1-h, 61, 62/1, 53, 63; CMK 231/5; TCK 51/1; CMK 273/1',
@@ -270,9 +510,15 @@ derya: İstinaf var, değil mi canım? Bir yol daha var, değil mi?
 ~ Var. İstinaf bir yoldur. Ama bir yolun sonunda ne olduğunu bilmeden ona “yol” demek, bir umut vermektir.
 `),
         W(
-          flag('fact_tolga'),
+          all(flag('fact_tolga'), not(flag('bildirdi'))),
           `
 > Derya, Tolga’dan söz etmedi. Ben de etmedim. İkimiz de bir ismin, bir arabanın camına çarpıp geri döndüğünü biliyorduk.
+`,
+        ),
+        W(
+          flag('bildirdi'),
+          `
+> Derya, Tolga’dan söz etmedi. Savcıya yazdığım dilekçe bir dosya numarası almıştı; bir ifade tarihi almamıştı. İstinafa bir ek daha.
 `,
         ),
         O(`
@@ -282,23 +528,45 @@ derya: İstinaf var, değil mi canım? Bir yol daha var, değil mi?
 `),
       ],
     }),
+    outcome('MAHKUMIYET_H', {
+      class: 'CONVICTION',
+      priority: 6,
+      when: all(not(flag('tolga_teslim')), not(beraatDosyasi), not(ertelemeDosyasi), silahDustu),
+      stamp: 'MAHKÛMİYET',
+      stampTone: 'red',
+      sentence: '9 yıl 2 ay hapis',
+      verdictText: `Sanık Barış Kılınç’ın cezalandırılmasına: duruşmada silah unsuru ispatlanamadığından TCK 149/1-a’nın uygulanmasına yer olmadığına; eylemin gece vaktinde işlenmesi nedeniyle TCK 149/1-h uyarınca, mağdurun yaşı ve uğradığı yaralanma gözetilerek (TCK 61/1) alt sınırdan uzaklaşılarak 11 YIL; TCK 62/1 ile 9 YIL 2 AY HAPİS cezası ile cezalandırılmasına; TCK 53; TCK 63 mahsup; ${tutukluluk}; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).`,
+      reasoning: [
+        ...mahkumiyetGerekce,
+        because(
+          'Mağdurun ilk beyanında bıçak bulunmadığı ve bıçağın ele geçirilmediği duruşmada ortaya konduğundan silah unsuru uygulanmamıştır; mahkeme suçun hukuki nitelendirmesini resen yapar (CMK 225/2).',
+        ),
+      ],
+      legalBasis: 'TCK 149/1-h, 61/1, 62/1, 53, 63; CMK 225/2, 273/1',
+      xp: {
+        if: {
+          when: flag('cokus'),
+          then: xp(0.3, { ethicsVar: 'ethics' }),
+          else: xp(0.6, { ethicsVar: 'ethics' }),
+        },
+      },
+      howToReach:
+        'Silah unsurunu duruşmada çürütürsün ama teşhisi ve konum kaydını cevapsız bırakırsın; terditli talepte de bulunmazsan heyet temel cezayı alt sınırdan belirlemez.',
+      epilogue: mahkumiyetEpilog('Dokuz yıl iki ay', 'Dokuz yıl iki ay'),
+    }),
     outcome('MAHKUMIYET', {
       class: 'CONVICTION',
-      priority: 5,
+      priority: 7,
+      // Varsayılan (doğrulayıcı son sonucun koşulsuz olmasını ister). Öncelik sırası nedeniyle yalnızca
+      // not(tolga_teslim) ∧ not(beraatDosyasi) ∧ not(ertelemeDosyasi) ∧ not(silahDustu) durumunda seçilir.
       when: { all: [] },
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
       sentence: '10 yıl hapis',
       verdictText: `Sanık Barış Kılınç’ın üzerine atılı nitelikli yağma suçundan, eylemin silahla ve gece vaktinde işlendiği kabul edilerek TCK 149/1-a, h uyarınca iki nitelikli hâlin birlikte gerçekleşmesi gözetilerek alt sınırdan uzaklaşılarak 12 YIL; TCK 62/1 ile 10 YIL HAPİS cezası ile cezalandırılmasına; TCK 53; TCK 63 mahsup; ${tutukluluk}; gerekçeli kararın tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere karar verildi (CMK 273/1).`,
       reasoning: [
-        because(
-          'Mağdurun teşhisi, sanık adına açılmış hesabın konum kaydı ve sanığın bölgede kurye olarak çalışması birlikte değerlendirilmiştir.',
-        ),
-        because(
-          'Savunmanın teşhise ve kayıtlara yönelik itirazları somut delillerle desteklenmemiştir.',
-          not(flag('cokus')),
-        ),
-        because('Savunmanın inandırıcılığı duruşmada çöktü; heyet iddianamedeki anlatımı esas aldı.', flag('cokus')),
+        ...mahkumiyetGerekce,
+        because('Mağdurun kolluk ifadesindeki bıçak beyanı duruşmada çürütülmemiştir.'),
       ],
       legalBasis: 'TCK 149/1-a, h, 61, 62/1, 53, 63; CMK 273/1',
       xp: {
@@ -309,40 +577,8 @@ derya: İstinaf var, değil mi canım? Bir yol daha var, değil mi?
         },
       },
       howToReach:
-        'Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir. Yanlış delil ve dayanaksız itiraz güvenilirliği eritir; teşhisi çürütmeden ve mazereti kayda bağlamadan beraat gelmez.',
-      epilogue: [
-        W(
-          flag('cokus'),
-          `
-# SALON · HÜKÜMDEN SONRA [bg:durusma_salonu]
-> Salon boşaldı. Jandarma Barış’ı götürdü. Sevim Hanım’ı biri koluna girip dışarı çıkardı.
-> Masamda oturuyordum. Notlarım önümde. Hiçbirine bakmamıştım; hiçbiri işe yaramamıştı.
-> Savcı Orhan Bayar dosyasını topladı. Kapıya giderken durdu, bana döndü.
-orhan: Hafızayla değil, kâğıtla gelmeliydiniz avukat hanım. Bu dosyada kâğıtlar vardı.
-> Kapı arkasından kapandı. Radyatör tıkırdadı. Başka ses yoktu.
-`,
-        ),
-        O(`
-# ADLİYE KORİDORU · HÜKÜMDEN SONRA [bg:adliye]
-> “On yıl.” Kelime koridora benden önce çıktı. Sevim Hanım’ın tespihi koptu; taneler mermer zeminde yuvarlandı, banklarının altına, kapıların eşiğine.
-> Eğildim. Topladım. Bir, iki, otuz üç. Birini bulamadım.
-> Derya annesinin koluna girmişti. Bana bakmadı. Merdivenin başında durdu; geri döndü.
-derya: Salonun kirası. İki koltuk. Bir de kardeşim. Hepsi gitti canım.
-> Nermin Hanım öbür uçta, kızının yanında oturuyordu. Kalkmadı. Sevinmiyordu. Saatini kimse geri getirmemişti.
-`),
-        W(
-          flag('fact_tolga'),
-          `
-> Tolga hakkında bir dilekçe yazacağım. Savcılığa. Bunu ikinci celseden önce yapmalıydım. Şimdi bir istinaf dilekçesine bir ek olacak.
-`,
-        ),
-        O(`
-# ARSLAN HUKUK · GECE [bg:buro_gece]
-> Avucumda bir tespih tanesi. Otuz üçüncüsü yoktu; bu otuz dördüncüydü belki, ya da birinciydi. Masama koydum.
-~ Bir fotoğraf bir hafızayı kirletti. Ben o kiri temizleyemedim. Kimse “yalan” demedi; herkes “eminim” dedi.
-~ İstinaf var. Her zaman bir sonraki kapı vardır. Ama bu gece kapıların hepsi kapalı.
-`),
-      ],
+        'Varsayılan sonuç: diğer sonuçların koşulları sağlanmazsa verilir. Yanlış delil ve dayanaksız itiraz güvenilirliği eritir; teşhisi çürütmeden ve konum kaydını cevaplamadan beraat gelmez.',
+      epilogue: mahkumiyetEpilog('On yıl', 'On yıl'),
     }),
   ],
 };

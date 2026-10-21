@@ -1,0 +1,1415 @@
+{
+  "variables": [
+    { "id": "fact_aksam", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_kredi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_borc_soylenti", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_zarf", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_9ocak_orhan", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_imza_bos", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_14ocak", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_hayri_dosya", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "melek_zarf_inkar", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_melek_korku", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "melek_kirgin", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ercan_ziyaret", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ercan_sistem", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_ercan_teslim", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "ercan_zarf_inkar", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_melek_orhan", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "fact_yonerge_orhan", "type": "bool", "initial": false, "visibility": "HIDDEN" }
+  ],
+  "nodes": [
+    {
+      "id": "INV_GORUSME_G",
+      "type": "DECISION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "Müvekkil görüşmesi",
+      "lines": [
+        {
+          "when": { "cmp": [{ "visits": "INV_GORUSME" }, "==", 0] },
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — TOPLANTI ODASI", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Orhan randevu saatinden yirmi dakika önce gelmiş, merdivenin başında beklemişti. Asistanın uzattığı çayı “zahmet olmasın” diye geri çevirmiş, sonra ayıp olmasın diye almıştı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Masanın üstünde bir dosya açtı: kendi hazırladığı, sekmeli, renkli. “Belgeler 1–14.” Her sayfa naylon poşette."
+            },
+            {
+              "speaker": "orhan",
+              "text": "Ne lazımsa efendim. Hepsini sırayla getirdim. Bir tek… bir tek bazı şeyler evde kaldı."
+            },
+            {
+              "speaker": "player",
+              "text": "“Bazı şeyler.” Hangileri, diye sormadım. Orhan Kılıç’a soru sormanın bir sırası var; o sırayı bulmam lazım.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ARSLAN HUKUK — TOPLANTI ODASI", "style": "card", "bg": "buro" },
+            {
+              "speaker": "narrator",
+              "text": "Orhan aynı sandalyenin aynı kenarına oturdu. Dosyası yine yanında, bu kez bir sayfa fazla."
+            },
+            {
+              "speaker": "orhan",
+              "text": "Bir şey mi buldunuz efendim? Nazan “avukat bir şey bulmuş” dedi; yüzünüzden anlamış, kapıda."
+            }
+          ]
+        }
+      ],
+      "routes": [{ "to": "INV_GORUSME" }],
+      "choices": []
+    },
+    {
+      "id": "INV_GORUSME",
+      "type": "DIALOGUE",
+      "mode": "INTERVIEW",
+      "tones": [
+        { "id": "soft", "label": "Yumuşak", "hint": "+4 güven" },
+        { "id": "hard", "label": "Sert", "hint": "−8 güven · daha kısa, daha keskin" }
+      ],
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #11 · SORUŞTURMA",
+      "title": "Müvekkil görüşmesi",
+      "hud": ["min", "trust"],
+      "background": "buro",
+      "room": { "label": "ARSLAN HUKUK · TOPLANTI ODASI", "character": "orhan" },
+      "onEnter": [
+        {
+          "type": "IF",
+          "when": { "cmp": [{ "visits": "INV_GORUSME" }, ">", 1] },
+          "then": [{ "type": "VAR", "var": "min", "op": "set", "value": 8 }]
+        }
+      ],
+      "lines": [
+        {
+          "when": { "cmp": [{ "visits": "INV_GORUSME" }, "==", 1] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Leyla’nın bir sonraki randevusuna on dört dakika var. Orhan masanın kenarına oturdu; sandalyenin tamamına oturmak bir hak iddia etmekmiş gibi."
+            }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Leyla’nın randevusuna sekiz dakika var. Orhan bu kez hırkasının düğmelerini iliklemişti; hepsini, en üsttekine kadar."
+            }
+          ]
+        }
+      ],
+      "moodRules": [
+        { "when": { "flag": "fact_zarf" }, "label": "Utanıyor", "tone": "neutral", "expression": "uzgun" },
+        {
+          "when": { "cmp": [{ "var": "trust" }, "<", 40] },
+          "label": "Kapanmış",
+          "tone": "error",
+          "expression": "kizgin"
+        },
+        {
+          "when": { "cmp": [{ "var": "tone" }, "==", "hard"] },
+          "label": "Gergin",
+          "tone": "neutral",
+          "expression": "kizgin"
+        },
+        { "label": "Resmî", "tone": "neutral", "expression": "normal" }
+      ],
+      "objectives": [
+        {
+          "id": "obj_aksam",
+          "when": { "flag": "fact_aksam" },
+          "known": "17.00’de kasayı sayıp teslim ediyor, 17.10’da çıkıyordu.",
+          "unknown": "O akşamlar ne yapıyordu?"
+        },
+        {
+          "id": "obj_sifre",
+          "when": { "flag": "fact_zarf" },
+          "known": "Şifresini mühürlü zarfa koyup müdürlüğe verdi.",
+          "unknown": "Şifresini başka biri biliyor muydu?"
+        },
+        {
+          "id": "obj_teslim",
+          "when": { "flag": "fact_imza_bos" },
+          "known": "“Teslim alan” kısmı sonradan imzalanıyordu.",
+          "unknown": "Para kimin eline geçiyordu?"
+        },
+        {
+          "id": "obj_kredi",
+          "when": { "flag": "fact_kredi" },
+          "known": "Kredi, tarlanın satışıyla kapandı.",
+          "unknown": "Kredi nasıl kapandı?"
+        }
+      ],
+      "choices": [
+        {
+          "id": "TP_AKSAM",
+          "kind": "TOPIC",
+          "label": "O akşamlar",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Bir iptal gününü baştan anlatır mısınız? Vezne kapandıktan sonra ne olurdu?",
+              "responses": [
+                {
+                  "when": { "cmp": [{ "var": "trust" }, "<", 40] },
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "expression": "kizgin",
+                      "text": "Anlattım efendim. Müfettişe anlattım, savcıya anlattım. Kimse yazmadı. Siz de yazmayacaksınız."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kapı kapalı. Kapalı kapılar kırılmaz; anahtarı aranır.",
+                      "style": "thought"
+                    }
+                  ]
+                },
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "text": "Saat beşte kapı kapanır efendim. Son mükellefi çıkarırım, kasayı sayarım. Banknotları cinsine göre, bozuklukları rulo rulo. Gün sonu raporunu bastırırım."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Rapordaki rakamla saydığım rakam tutarsa tutanağı doldururum. Torbaları mühürlerim. Bir nüshası bende kalır; karbonlu kâğıt, sarı."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Sonra deftere yazarım. Kendi defterime. On dokuz yıldır. Nazan güler, “devlet sana yetmiyor mu” der. Yetmiyor efendim. Devletin kâğıdı kaybolur."
+                    },
+                    { "speaker": "player", "text": "Torbaları kime teslim ederdiniz?" },
+                    {
+                      "speaker": "orhan",
+                      "text": "Müdürlükten kim kaldıysa ona efendim. Bazen Rıfat Bey, bazen müdür yardımcımız, bazen vezne sorumlusu Selim Bey. Rıfat Bey ocakta rahatsızlandı, raporlu."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Beşi on geçe turnikeden çıkarım. Servis beş on beşte kalkar. Kaçırırsam bir saat beklerim; Elif’in ilacı var, beklemem."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir adamın akşamı, dakikası dakikasına. Bu kadar düzenli bir hayatın içinde kırk yedi delik var.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Saat saat. Beşten sonra neredeydiniz?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "expression": "kizgin",
+                      "text": "Beşte kasa. Beşi on geçe turnike. Beş on beşte servis. Altıda ev. Saat saat istediniz, saat saat söyledim."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Her akşam aynı efendim. Bir akşam bile değişmedi. Belki de suçum bu; o kadar aynıydım ki, kimse bakmadı."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Cevap tam ama kısa. Kasanın kime teslim edildiğini söylemedi; ben de sormadım. Sert sorunun bedeli, sorulmayan ikinci soru.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_aksam", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_KREDI",
+          "kind": "TOPIC",
+          "label": "Kredi",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Savcı krediyi “sebep” sayıyor. Kredinin hikâyesini anlatır mısınız?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "expression": "uzgun",
+                      "text": "Elif’in kalbi efendim. Doğuştan bir delik. On altı yaşına kadar ilaçla idare ettik, geçen yıl baharda ameliyat dediler. Özel hastane; devletin sırası altı ay."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "İki yüz on iki bin lira çektim. Altmış ay vade. Her ay faizini hesapladım; çıkmıyordu, ama çıkacaktı."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Aralıkta babamdan kalan tarlayı sattım. İnegöl’de, Tahtaköprü’de. Dört dönüm. Kardeşlerim payını bana bıraktı, “Elif için” dediler."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Parası ertesi gün hesaba geçti, krediyi kapattım. Faiz yemek günahtır efendim; vermek de."
+                    },
+                    { "speaker": "player", "text": "Tapu belgesi duruyor mu?" },
+                    {
+                      "speaker": "orhan",
+                      "text": "Evde efendim. Çalışma masamda, şeffaf dosyada. Nazan her kâğıdı saklar, ben her kâğıdı dosyalarım. İkimiz bir arşiviz."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Savcılığın “kaynağı belirsiz” dediği para, bir tarlanın dört dönümü. Bir belge kadar uzakta.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Borcunuz vardı, krediyi bir anda kapattınız. Para nereden?",
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" },
+                { "type": "VAR", "var": "fact_borc_soylenti", "op": "set", "value": true }
+              ],
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "expression": "kizgin",
+                      "text": "Babamın tarlasından efendim! Rahmetlinin alın terinden! Siz de mi savcı gibi soruyorsunuz?"
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Belediyede herkes biliyordu kredimi. Ben kimseye söylemedim; ama herkes biliyordu. Kim yaydıysa, o da bilsin: borcumu tarlayla ödedim."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Sert soru, sert cevap. Ama içinden bir kırıntı düştü: kimseye söylemediği bir borcu herkes biliyormuş.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_kredi", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_ERCAN",
+          "kind": "TOPIC",
+          "label": "Müdür yardımcısı",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Ercan Bey nasıl bir amirdir?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "text": "İyi adamdır efendim. Kibar adamdır. Babası da maliyeciymiş, rahmetli; her fırsatta söyler. Odasında fotoğrafı asılı."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Bayramlarda veznedarlara çikolata dağıtır. Elif ameliyat olunca hastaneye çiçek gönderdi. Kart da yazdı: “Geçmiş olsun, kızımız.”"
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Görevden uzaklaştırma yazısını da o verdi. İki eliyle. Üzgündü. Ben de ona üzüldüm, böyle bir yazıyı vermek zordur."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kendi uzaklaştırma yazısını verene üzülen bir adam. Ya çok iyi bir insan, ya da üzülmeyi kendine yasak saymış biri.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Amirinizle aranızda bir sorun var mıydı?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "expression": "kizgin",
+                      "text": "Amirim hakkında konuşmam efendim. On dokuz yılda bir amirim hakkında konuşmadım; şimdi de konuşmam."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Sadakat mı, korku mu, alışkanlık mı? Orhan’da üçü aynı yüzle duruyor.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 10 }]
+        },
+        {
+          "id": "TP_MELEK",
+          "kind": "TOPIC",
+          "label": "Yan vezne",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Vezne 1’deki Melek Hanım’ı anlatır mısınız?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "text": "Melek Hanım on bir yıldır yanımdadır. İyi kızdır efendim. Ağzı biraz bozuktur, mükellefle kavga eder, sonra ona çay ısmarlar."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Geçen kış araba aldı, beyaz. Kredisiyle; kendi söyledi. Şimdi herkes ona bakıyor, biliyorum. Bana bakıldığı gibi."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Savcılıkta “bir şey bilmiyorum” demiş. Haklı. Ne bilecek? Ben bilmiyorum, o mu bilecek?"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Orhan, kendisine yöneltilen şüphenin bir başkasına kaymasını istemiyor. Bu da bir bilgi.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Melek Hanım’ın kullanıcı adıyla da iptal yapılmış olabilir mi?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "expression": "kizgin",
+                      "text": "Onun kullanıcısıyla iptal yok efendim. Kırk yedisi benimkiyle. Kızcağızı bu işe karıştırmayın."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Hızlı bir savunma. Birini korumak için mi, yoksa hepsini?",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 10 },
+            { "type": "VAR", "var": "fact_melek_orhan", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_SIFRE",
+          "kind": "TOPIC",
+          "label": "Şifre",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "visibleWhen": { "hasEvidence": "ev_talimat" },
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "İlk gece “şifre kişiye özeldir” dediniz. Bana yönetmeliği değil, ne olduğunu anlatın.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "narrator",
+                      "text": "Kareli kâğıdı masaya koydum. Orhan ona uzun uzun baktı. Sonra gözlüğünü çıkardı ve bu kez silmedi; masanın üstüne, kâğıdın yanına bıraktı."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "expression": "uzgun",
+                      "text": "Bunu nerede buldunuz efendim? Ben… ben bunu bordroların arasına koymuştum. Unutmuşum. Unutmak istemişim."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Eylülde bir sabah geldi bu not. Masamızın üstüne, her birimize bir tane. “Devamlılık için.” Biri hastalanırsa, izne çıkarsa kasa kilitli kalmasın diye."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Herkes verdi efendim. Ben de verdim. Şifremi bir kâğıda yazdım, zarfa koydum, mühürledim, imzaladım. Müdürlüğe bıraktım."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Yönergeyi biliyordum. Panoda asılı; her sabah önünden geçiyordum. Bile bile verdim. Amirim istedi, verdim. On dokuz yılda bir amirime hayır demedim."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "“Utanıyorum” dediği şey buydu. Kırk yedi iptal değil. Bir zarf.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Şifrenizi kime verdiniz? Bu sefer yönetmelik okumayın.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "expression": "kizgin",
+                      "text": "Verdim! Herkes verdi! Zarfa koyduk, müdürlüğe bıraktık! Not geldi, “devamlılık için” dediler!"
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Yönergeyi biliyordum, evet. Bile bile verdim. Şimdi bunu da mı mahkemede söyleyeceğim? Bir de bu mu yazılacak hakkımda?"
+                    },
+                    { "speaker": "narrator", "text": "Sesi kırıldı. Elleri masanın altına indi." },
+                    {
+                      "speaker": "player",
+                      "text": "Bilgiyi aldım. Bedelini de ödedim: bu adam bundan sonra bana bir şey anlatırken önce sesimi tartacak.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 40 },
+            { "type": "VAR", "var": "fact_zarf", "op": "set", "value": true },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 60 }
+          ]
+        },
+        {
+          "id": "TP_YONERGE",
+          "kind": "TOPIC",
+          "label": "Panodaki yönerge",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "visibleWhen": { "all": [{ "hasEvidence": "clue_yonerge" }, { "not": { "hasEvidence": "ev_talimat" } }] },
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Panodaki yönergede bir kelimenin altı çizili. Kim çizmiş olabilir?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "narrator",
+                      "text": "Yönergenin fotoğrafını telefonumdan gösterdim. Orhan ekrana baktı; sonra pencereye."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Bilmem efendim. Panoya herkes bakar, kimse okumaz. Belki bir müfettiş, belki bir stajyer."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Yönergeyi biliriz efendim. Şifre kişiye özeldir. Her sabah önünden geçerdim."
+                    },
+                    {
+                      "speaker": "narrator",
+                      "text": "Gözlüğünü çıkardı. Silmedi; yalnızca elinde tuttu, ilk geceki gibi."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Aynı cümle, aynı gözlük. Altı çizili kelimeyi söylemedi; ben de söylemedim. Bu evde ya da o belediyede bir kâğıt olmalı.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Yönergeyi çiğneyen biri var mıydı müdürlükte?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "expression": "kizgin",
+                      "text": "Ben kimseyi şikâyet etmem efendim. Yönerge panoda; herkes okur."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kimseyi şikâyet etmem. Bir soruya cevap değil; bir kapının kapanma sesi.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 10 },
+            { "type": "VAR", "var": "fact_yonerge_orhan", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_9OCAK",
+          "kind": "TOPIC",
+          "label": "9 Ocak",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "visibleWhen": { "any": [{ "hasEvidence": "clue_izin" }, { "flag": "fact_9ocak" }] },
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "9 Ocak’ta neredeydiniz?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "text": "Hastanede efendim. Elif’in kontrolü vardı, Uludağ’da, çocuk kardiyolojide. Bir gün izin aldım; yıllık izinden düşüldü."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Sabah onda girdik, akşam beşte çıktık. Ekokardiyografi, kan, bir de profesör bey geç geldi. Elif sıkıldı, kantinde tost yedik."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "O akşam belediyenin yanından bile geçmedim. Eve gittik, Nazan mantı yapmıştı. Elif “artık koşabilir miyim” diye sordu. Doktor “koşabilirsin” demiş."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "O akşam saat 17.46’da Orhan’ın kullanıcı adı ön odadaki bilgisayarda çalışıyordu. Orhan bir mantı tabağının başındaydı.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "9 Ocak akşamı kullanıcınızla iki iptal var. İzindeydiniz. Açıklayın.",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "expression": "saskin",
+                      "text": "İki iptal mi? O gün mü? Ben hastanedeydim efendim! Elif’in kontrolü!"
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Ben o gün belediyeye girmedim bile. Kartım bende, turnikeye bakın. Bakmamışlar mı? Kimse bakmamış mı?"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Kimse bakmamış. Bu dosyanın en sık tekrarlanan cümlesi bu olacak.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_9ocak_orhan", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "TP_TESLIM",
+          "kind": "TOPIC",
+          "label": "Teslim alan",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "visibleWhen": { "hasEvidence": "ev_karbon" },
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Karbon kopyalarda “teslim alan” kısmı boş. Neden?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "text": "Teslim alan sonra imzalardı efendim. Torbaları alır, “siz gidin Orhan Bey, servisi kaçırmayın, ben sonra imzalarım” derdi."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Ben de giderdim. Sarı nüshayı alır, çantama koyardım. Ertesi sabah asıl tutanak dosyada imzalı dururdu."
+                    },
+                    { "speaker": "player", "text": "Torbaları alan kimdi?" },
+                    {
+                      "speaker": "orhan",
+                      "text": "Kim müsaitse efendim. Kasımda, aralıkta bazı akşamlar Rıfat Bey alırdı, müdürümüz; bazı akşamlar Ercan Bey. Bir iki kez de Selim Bey, vezne sorumlusu; kasanın sabah kodu ondadır."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Ocakta Rıfat Bey raporlu olunca ya Selim Bey ya Ercan Bey. Hangi akşam kim aldı, deftere yazmadım. Tutarı yazdım; ismi yazmadım. Ayıp bende."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "“Sonra imzalarım” derlerdi. İyilik yapıyorlardı; servisi kaçırmayayım diye. Elif’in ilacı var, biliyorlardı."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Üç isim, bir kasa, imzasız bir dakika. Hangi akşam kimin elinde olduğunu bir insanın hafızası değil, bir kayıt söyleyecek.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "İmzasız bir teslim, teslim değildir. Neden kimseye imzalatmadınız?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "expression": "kizgin",
+                      "text": "Amirime “imzala” mı diyecektim efendim? Torbayı elinden çekip “önce imza” mı diyecektim?"
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "“Sonra imzalarım” derlerdi. Ben de gittim. Her akşam. Servisi kaçırmamak için. Şimdi bu da mı benim suçum?"
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Belki değil. Ama heyet bunu soracak. Cevabı şimdiden bilmem gerek.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_imza_bos", "op": "set", "value": true },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 40 }
+          ]
+        },
+        {
+          "id": "TP_14OCAK",
+          "kind": "TOPIC",
+          "label": "14 Ocak sabahı",
+          "cost": [{ "var": "min", "amount": 2 }],
+          "visibleWhen": { "flag": "fact_zarf" },
+          "variants": [
+            {
+              "id": "soft",
+              "label": "Yumuşak",
+              "prompt": "Zarftan sonra şifrenizle ilgili tuhaf bir şey oldu mu?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "text": "Bir sabah… evet. Ocakta. 15’iydi galiba. Sabah girdim, şifrem çalışmadı. “Hatalı” dedi. Üç kere denedim, kilitlendi."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Bilgi işleme telefon ettim. Burak Bey geldi, genç bir çocuk, enerji içeceğiyle. Sıfırladı. “Dün akşam da sıfırlamıştık abi” dedi. Ben anlamadım."
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "Öğleden sonra yeni şifreyi yine zarfa koydum. “Zarfı yenile” dediler. Yeniledim. Yine bile bile."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Bir şifre bir akşam sıfırlanıyor, ertesi sabah sahibi kapıda kalıyor. Arada bir gece var. O gecenin kaydı bir yerde olmalı.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "inc", "value": 4 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "soft" }
+              ]
+            },
+            {
+              "id": "hard",
+              "label": "Sert",
+              "prompt": "Şifreniz hiç sıfırlandı mı? Ne zaman, kim yaptı?",
+              "responses": [
+                {
+                  "lines": [
+                    {
+                      "speaker": "orhan",
+                      "expression": "kizgin",
+                      "text": "Sıfırlandı. Ocakta. Bilgi işlemden Burak Bey yaptı. Ben istedim, çünkü çalışmıyordu. Ne var bunda?"
+                    },
+                    {
+                      "speaker": "orhan",
+                      "text": "“Dün akşam da sıfırlamıştık” dedi. Kim istediyse onu sorun. Ben istemedim."
+                    },
+                    {
+                      "speaker": "player",
+                      "text": "Sert ton, aynı kırıntı: biri, sahibinden önce, bir akşam o şifreyi sıfırlatmış.",
+                      "style": "thought"
+                    }
+                  ]
+                }
+              ],
+              "effects": [
+                { "type": "VAR", "var": "trust", "op": "dec", "value": 8 },
+                { "type": "VAR", "var": "tone", "op": "set", "value": "hard" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_14ocak", "op": "set", "value": true }
+          ]
+        },
+        { "id": "G_BITIR", "kind": "CONTINUE", "label": "Görüşmeyi bitir", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_T_HAYRI",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "TANIKLAR",
+      "title": "Hayri Özdemir",
+      "background": "ev",
+      "room": { "label": "SETBAŞI · HAYRİ BEY’İN SALONU", "character": "hayri" },
+      "lines": [
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "15.30 — SETBAŞI, HAYRİ ÖZDEMİR’İN EVİ", "style": "card", "bg": "ev" },
+            {
+              "speaker": "narrator",
+              "text": "Salonun duvarları kitapla örülmüştü; kitaplar duvar değil, duvar kitap gibiydi. Pencerenin önünde bir Osmanlı haritası, köşede üst üste on iki ayakkabı kutusu."
+            },
+            { "speaker": "narrator", "text": "Hayri Bey kapıyı kravatla açtı. Evinde. Sıradan bir öğleden sonra." },
+            {
+              "speaker": "hayri",
+              "text": "Avukat hanım. Buyurun. Ayakkabılarınızı çıkarmayın, halı Türk malı değil, İran. Dayanıklıdır."
+            },
+            {
+              "speaker": "hayri",
+              "text": "Önce bir şey söyleyeyim, sonra sorun. Ben bu adamı suçlamak için gelmedim. Hesabımı sormaya geldim. Bu ikisi aynı şey değildir; Türkçede de değildir, hukukta da."
+            },
+            {
+              "speaker": "hayri",
+              "text": "Kırk yıl tarih öğrettim. Tarih nedir? Makbuzu saklayanların yazdığı şeydir. Ben makbuzumu sakladım; tarih benim lehime."
+            },
+            {
+              "speaker": "player",
+              "text": "Ukala, titiz, sevimli. Böyle tanıklar kürsüde ya altın olur ya baş ağrısı.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "HQ_ODEME",
+          "kind": "OPTION",
+          "label": "“12 Şubat’ı anlatır mısınız?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "hayri",
+                  "text": "Saat 16.40. Biliyorum, çünkü vezneye girerken saatime baktım; kapanmadan yetişeyim diye. Emlak vergisi, ikinci taksit. Altı bin sekiz yüz elli lira."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kutulardan birini açtı. Makbuzlar tarih sırasıyla, lastikle gruplanmış. Birini, bir kâğıt para gibi iki parmağıyla çekti."
+                },
+                {
+                  "speaker": "hayri",
+                  "text": "Buyurun. Sıfır sıfır iki yedi yedi bir dokuz. Vezne 2. Kaşe, imza, saat. Bu devirde makbuz basan makine bile saat yazıyor; insanlar yazmıyor."
+                },
+                {
+                  "speaker": "player",
+                  "text": "16.40’ta ödeme. 17.47’de iptal. Arada bir saat yedi dakika ve bir kapanmış vezne.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "ev_makbuz" },
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 }
+          ]
+        },
+        {
+          "id": "HQ_VEZNEDAR",
+          "kind": "OPTION",
+          "label": "“Veznedar parayı nasıl aldı?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "hayri",
+                  "text": "İki kez saydı. Önce eliyle, sonra makineyle. Sonra bana “bir de siz sayın efendim” dedi. Bu devirde iki kez sayan adam az."
+                },
+                {
+                  "speaker": "hayri",
+                  "text": "Bir de makbuzu verirken kalktı. Ayağa. Bir memur ayağa kalktı, yetmiş bir yaşında bir adama makbuz verirken. Bunu unutmam."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Hırsızlar genellikle parayı iki kez saymaz. Ama bu bir delil değil; bir karakter tanıklığı. Heyet ikisini ayırır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+        },
+        {
+          "id": "HQ_ERTESI",
+          "kind": "OPTION",
+          "label": "“4 Mart’ta, itirazınızdan sonra ne oldu?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "hayri",
+                  "text": "Müdür yardımcısı bey çok kibardı. Çay söyledi, odasına aldı. Dosyamı kendisi aldı, fotokopimi kendisi çekti. “Siz yorulmayın” dedi."
+                },
+                {
+                  "speaker": "hayri",
+                  "text": "Ertesi gün aradılar, “haklısınız Hayri Bey, sistem hatası” dediler. Bir hafta sonra gazetede okudum: zimmet, veznedar, gözaltı."
+                },
+                {
+                  "speaker": "hayri",
+                  "text": "Sistem hatası mı, zimmet mi? İkisi aynı anda olamaz. Ya biri yanlış söyledi ya ikisi. Tarihte böyle anlar çoktur; herkes doğruyu söyler, sonuç yanlış çıkar."
+                },
+                {
+                  "speaker": "player",
+                  "text": "İlk gün “sistem hatası”, bir hafta sonra “zimmet”. Bir dosyanın adı bir haftada değişmiş.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "fact_hayri_dosya", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "HQ_KANAAT",
+          "kind": "OPTION",
+          "label": "“Sizce Orhan Bey suçlu mu?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "hayri",
+                  "text": "Hanımefendi, siz avukatsınız. Ben tanığım. Bana kanaat sormayın; bana saat sorun, para sorun, makbuz sorun."
+                },
+                {
+                  "speaker": "hayri",
+                  "text": "Kanaat sorarsanız, size bir kanaat söylerim, ertesi gün başka bir kanaat söylerim. Tarih böyle bozulur. Belge sorun."
+                },
+                { "speaker": "player", "text": "Bir emekli öğretmenden ders yedim. Hak ettim.", "style": "thought" }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": -20 }],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Tanığa kanaatini sordun; tanık gördüğünü anlatır, hüküm kurmaz. Bu cevap mahkemede bir şey ifade etmez (CMK 217 takdiri heyetindir).",
+            "category": "SORGULAMA"
+          }
+        },
+        { "id": "HAYRI_BITIR", "kind": "CONTINUE", "label": "Teşekkür et, ayrıl", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
+      "id": "INV_T_MELEK",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "TANIKLAR",
+      "title": "Melek Yavuz",
+      "background": "cay_ocagi",
+      "room": { "label": "BELEDİYE · ÇAY OCAĞI", "character": "melek" },
+      "onFirstEnter": [{ "type": "MEET", "character": "melek" }],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "ÖĞLE ARASI 12.15 — HİSARÖNÜ BELEDİYESİ, ÇAY OCAĞI",
+              "style": "card",
+              "bg": "cay_ocagi"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Çay ocağı merdiven altına sıkıştırılmış bir oda: iki tüp, bir semaver, duvarda bir takvim, bir de tuzluk gibi duran küçük bir televizyon."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Melek Yavuz sakız çiğneyerek telefonuna bakıyordu. Beni görünce telefonu kapatmadı; ekranı aşağı çevirdi."
+            },
+            {
+              "speaker": "melek",
+              "text": "Avukat mısın canım? Orhan abinin? Ben savcılığa her şeyi söyledim. Yani hiçbir şeyi; çünkü bir şey bilmiyorum."
+            },
+            { "speaker": "melek", "text": "Çay? Ocakçı Rıza abi yok, ben demlerim. Demim acıdır, ona göre." },
+            {
+              "speaker": "narrator",
+              "text": "Çayı iki bardağa doldurdu, birini bana itti, ötekini avucunun içinde tuttu; içmedi."
+            },
+            {
+              "speaker": "player",
+              "text": "Her soruya soruyla cevap verecek. Böylelerine cevaptan çok, soruları dinlemek gerekir.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "MQ_ORHAN",
+          "kind": "OPTION",
+          "label": "“Orhan Bey’le on bir yıl yan yana çalıştınız.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "melek",
+                  "text": "On bir buçuk. Ne olmuş? Orhan abi iyi adam. Herkes biliyor. Bir kuruş eksik vermez, bir kuruş fazla almaz. Sıkıcı derecede dürüst."
+                },
+                {
+                  "speaker": "melek",
+                  "text": "Bir keresinde bir mükellef ona yüz lira bahşiş bıraktı; adamın peşinden otobüs durağına kadar koştu. Rezil oldu mahalleye."
+                },
+                {
+                  "speaker": "melek",
+                  "text": "Şimdi herkes “ne kadar da sessizdi, belli değil miydi” diyor. Sessizdi çünkü sessiz. Ne belli olacak?"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "SORGULAMA", "amount": 20 }]
+        },
+        {
+          "id": "MQ_ZARF",
+          "kind": "OPTION",
+          "label": "“Müdürlükte şifreler zarfta mı duruyordu?”",
+          "visibleWhen": { "any": [{ "hasEvidence": "ev_talimat" }, { "flag": "fact_zarf" }] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "narrator", "text": "Sakız durdu. Bir saniye. Sonra yeniden başladı; biraz daha hızlı." },
+                {
+                  "speaker": "melek",
+                  "text": "Ne zarfı canım? Biz düğün mü yapıyoruz, zarf zarf? Şifre kişiye özeldir. Panoda yazıyor, okumadın mı?"
+                },
+                {
+                  "speaker": "melek",
+                  "text": "Bak, ben kimsenin şifresini bilmem. Benimkini de kimse bilmez. Bu kadar."
+                },
+                { "speaker": "narrator", "text": "Bardağı tezgâha bıraktı. Bırakırken çay taştı; silmedi." },
+                {
+                  "speaker": "player",
+                  "text": "Çok hızlı bir “hayır”. Hızlı “hayır”lar genellikle uzun bir “evet”in üstüne örtülmüş bir çarşaftır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "melek_zarf_inkar", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "MQ_AMIR",
+          "kind": "OPTION",
+          "label": "“Fazla mesainizi kim onaylıyor?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "melek",
+                  "text": "Ne alaka? Müdür yardımcısı. Ercan Bey. Müdür raporlu, her şeyi o imzalıyor. Mesaiyi, izni, görev yerini."
+                },
+                {
+                  "speaker": "melek",
+                  "text": "Geçen yıl arşive bir kızı sürdüler, bodruma. Rutubetten astım oldu. Bir imzayla olur o iş canım."
+                },
+                { "speaker": "narrator", "text": "Bunu söylerken kapıya baktı. Kapı kapalıydı." },
+                {
+                  "speaker": "player",
+                  "text": "Bir imzayla bodruma. Melek’in korkusunun bir adresi var; adresi söylemedi, kapıya baktı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_melek_korku", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "MQ_BASKI",
+          "kind": "OPTION",
+          "label": "“Doğruyu söylemezseniz siz de içeri girersiniz.”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Doğruyu söylemezseniz siz de içeri girersiniz Melek Hanım. Bu dosyada sizin de adınız var."
+                },
+                {
+                  "speaker": "melek",
+                  "expression": "kizgin",
+                  "text": "Beni mi tehdit ediyorsun? Sen kimsin? Savcı mısın? Avukat değil misin sen?"
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Çay bardağını lavaboya bıraktı; bardak kırılmadı ama ses çıkardı.",
+                  "fx": "shake"
+                },
+                {
+                  "speaker": "melek",
+                  "text": "Bir daha gelirsen güvenlik çağırırım. Bir de savcılığa yazarım, avukat beni tehdit etti diye. Yazarım canım, bilirim yazmayı."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Bir tanığı kapıdan kovdurmanın en kısa yolu. Ve bir dilekçenin konusu olmanın.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": -40 },
+            { "type": "VAR", "var": "ethics", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "melek_kirgin", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "BAD",
+            "feedback": "Tanık olacak birini tehdit ettin: tanığı etkileme girişimi (TCK 277) ve meslek kurallarına aykırılık (Av.K. 34). Melek bundan sonra sana kapalı.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "MQ_BITIR",
+          "kind": "OPTION",
+          "label": "Kartını bırak, ayrıl",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Kartımı bırakıyorum Melek Hanım. Bir şey hatırlarsanız, ya da konuşmak isterseniz."
+                },
+                { "speaker": "melek", "text": "Hatırlayacak bir şey yok canım. Ama bırak, dursun." },
+                {
+                  "speaker": "narrator",
+                  "text": "Merdivenlerden birlikte çıktık. Otoparkta Melek anahtarını çıkardı; beyaz, yeni, kapı kenarlarındaki naylonları bile sökülmemiş bir araba iki kez öttü."
+                },
+                {
+                  "speaker": "melek",
+                  "text": "Kredisiyle aldım, merak ettiysen. Altmış ay. Herkes merak ediyor, sen de et."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kimse sormadan cevap veriyor. Bu dosyada herkes, sorulmayan bir soruya cevap hazırlamış.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "next": "$return",
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_araba" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "INV_T_ERCAN",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "TANIKLAR",
+      "title": "Ercan Tunalı",
+      "background": "siyah",
+      "room": { "label": "MALİ HİZMETLER · MÜDÜR YARDIMCILIĞI", "character": "ercan" },
+      "onFirstEnter": [
+        { "type": "MEET", "character": "ercan" },
+        { "type": "VAR", "var": "ercan_ziyaret", "op": "set", "value": true }
+      ],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "10.00 — MALİ HİZMETLER MÜDÜR YARDIMCILIĞI",
+              "style": "card",
+              "bg": "siyah"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Oda dar ama düzenliydi: dosyalar renk sırasıyla, masada bir dolma kalem, bir ince belli bardak, bir de çerçeve. Çerçevede siyah-beyaz, kravatlı, ciddi bir adam."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Ercan Tunalı ayağa kalktı, elimi iki eliyle sıktı. Avucu kuru ve sıcaktı."
+            },
+            {
+              "speaker": "ercan",
+              "text": "Avukat hanım, hoş geldiniz efendim. Buyurun. Çay? Bizim ocağın çayı iyidir; Rize’den bir arkadaş gönderiyor."
+            },
+            {
+              "speaker": "ercan",
+              "text": "Orhan Bey için ne lazımsa efendim. On dokuz yıldır tanırım. Kızının ameliyatında hastaneye çiçek göndermiştim. Bu iş beni de yıktı, inanın."
+            },
+            { "speaker": "narrator", "text": "Çerçeveye baktığımı fark etti." },
+            {
+              "speaker": "ercan",
+              "text": "Rahmetli babam. O da maliyeciydi; kırk yıl. Bana bir şey öğretti: “Kâğıt neyse, odur.” Ben de öyle çalışırım efendim. Mevzuat ne diyorsa."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Dolma kalemini parmaklarının arasında çevirdi; kapağını açıp kapattı. Tık. Tık."
+            },
+            {
+              "speaker": "player",
+              "text": "Kusursuz bir nezaket. Bu odada bir tek o kalem sabırsız.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "EQ_SISTEM",
+          "kind": "OPTION",
+          "label": "“Vezne programına nereden girilebiliyor?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "ercan",
+                  "text": "Yalnızca vezne terminalinden efendim. Her veznedarın kendi terminali, kendi kullanıcı adı, kendi şifresi. Sistem böyle kurulu."
+                },
+                {
+                  "speaker": "ercan",
+                  "text": "Bilgi işlem böyle söyledi bize, mevzuat da böyle. Başka türlüsü güvenlik açığı olurdu; biz de açığa izin vermeyiz."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kendinden emin. Bunu bir uzman da söylese daha rahat ederdim; bir müdür yardımcısı söyleyince bir not düşüyorum.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "ercan_sistem", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EQ_TESLIM",
+          "kind": "OPTION",
+          "label": "“Akşamları kasayı kim teslim alıyordu?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "ercan",
+                  "text": "Kim müsaitse efendim. Müdürümüz Rıfat Bey, vezne sorumlumuz Selim Bey, bazen ben. Müdürümüz ocakta raporlu olunca Selim Bey’le ben paylaştık."
+                },
+                {
+                  "speaker": "ercan",
+                  "text": "Veznedar sayar, torbaları mühürler, teslim eder; teslim alan kasa odasına koyar. Tutanaklar dosyada efendim, hepsi imzalı. Kâğıt neyse odur. Bir eksik olsa ben fark ederdim; mühürlü torba açılmaz."
+                },
+                { "speaker": "player", "text": "Teslim alan, tutanağı teslim anında mı imzalıyordu?" },
+                { "speaker": "ercan", "text": "Elbette efendim. Usul böyle." },
+                { "speaker": "narrator", "text": "Kalem bir kez tıkladı. Sonra durdu." },
+                {
+                  "speaker": "player",
+                  "text": "“Elbette.” Bir kelimenin içine ne kadar kesinlik sığarsa, o kadar dikkat ister.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 30 },
+            { "type": "VAR", "var": "fact_ercan_teslim", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EQ_ZARF",
+          "kind": "OPTION",
+          "label": "“Şifrelerin zarflarda toplandığını duydum.”",
+          "visibleWhen": { "any": [{ "hasEvidence": "ev_talimat" }, { "flag": "fact_zarf" }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "ercan",
+                  "text": "Zarf mı efendim? Öyle bir uygulama bizde olmaz. Yönerge ortada; panoda asılı. Şifre kişiye özeldir, paylaşılmaz."
+                },
+                {
+                  "speaker": "ercan",
+                  "text": "Biri size yanlış bilgi vermiş. Belki iyi niyetle. İnsanlar böyle zamanlarda bir şeyler hatırladığını sanır."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Gülümsedi. Kibar, sabırlı, bir öğretmenin yanlış cevap veren öğrenciye gülümsemesi gibi."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Cebimde katlanmış bir kâğıt var. Henüz çıkarmadım. Kâğıt, kürsüde daha ağır çeker.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 20 },
+            { "type": "VAR", "var": "ercan_zarf_inkar", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "EQ_ORHAN",
+          "kind": "OPTION",
+          "label": "“Orhan Bey’in son aylarda bir sıkıntısı var mıydı?”",
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "ercan",
+                  "text": "Söylemek istemezdim efendim. Kredisi vardı; kızının ameliyatı. Biliyorsunuz. Bir anda kapattı, ben de şaşırdım. Ama ben kimsenin cebine bakmam."
+                },
+                {
+                  "speaker": "ercan",
+                  "text": "Herkesin bir derdi var efendim. Melek Hanım da yeni araba aldı; söylemek istemezdim, öyle bir ima da yapmam. Ama siz sordunuz, ben de söylüyorum."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Söylemek istemediği iki şeyi, sormadığım hâlde söyledi. Nezaket bazen bir işaret parmağı taşır.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 10 },
+            { "type": "DISCOVER", "evidence": "clue_araba" },
+            { "type": "SCORE", "category": "ARASTIRMA", "amount": 10 }
+          ]
+        },
+        { "id": "ERCAN_BITIR", "kind": "CONTINUE", "label": "Teşekkür et, ayrıl", "role": "BACK", "next": "$return" }
+      ]
+    }
+  ],
+  "discoveryPaths": [
+    { "evidence": "ev_makbuz", "source": { "type": "CHOICE", "id": "HQ_ODEME" } },
+    { "evidence": "clue_araba", "source": { "type": "CHOICE", "id": "MQ_BITIR" } },
+    { "evidence": "clue_araba", "source": { "type": "CHOICE", "id": "EQ_ORHAN" } }
+  ]
+}

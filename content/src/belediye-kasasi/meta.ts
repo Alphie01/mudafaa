@@ -1,0 +1,160 @@
+import {
+  CASE_FORMAT_ID,
+  categories,
+  counter,
+  hiddenEnum,
+  hiddenInt,
+  labelEnum,
+  meter,
+  thresholdBar,
+} from '../../../tools/content/src/kit/index.js';
+import type { CasePart } from '../../../tools/content/src/kit/index.js';
+import { T_BERAAT, T_NITEL } from './outcomes.js';
+import { ARA_AP, ARA_DAYS, p1 } from './shared.js';
+
+// 00-meta: künye, skor yapılandırması, yüklemler ve ortak değişkenler. Bölümlere özgü bayraklar kendi parçalarında.
+
+export const meta: CasePart = {
+  format: CASE_FORMAT_ID,
+  meta: {
+    slug: 'belediye-kasasi',
+    number: 11,
+    title: 'Belediye Kasası',
+    crimeLabel: 'Zimmet',
+    lawRef: 'TCK 247/1-2, 43',
+    demandText: 'İddianame: 247/1-2, 43 (7 yıl 6 ay–18 yıl, zincirleme artırımı)',
+    possibleSentence: '9 yıl 4 ay 15 gün – 31 yıl 6 ay',
+    difficulty: 4,
+    category: 'CEZA',
+    estimatedMinutes: 105,
+    summary:
+      'On dokuz yıldır bir kuruşu eksik çıkmamış bir veznedarın kullanıcı adıyla kırk yedi makbuz iptal edildi; kasada 386.400 lira açık var. Sistemde onun adı, tutanakta onun imzası. Orhan Kılıç “ben yapmadım” diyor; ama şifresini kime bıraktığını söylemeye utanıyor. Karısı evi satıp “ödeyip bitirmek” istiyor.',
+    coverCharacter: 'orhan',
+    legalReview: { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-20' },
+  },
+  config: {
+    startNode: 'PR_00',
+    scoring: {
+      categories: categories({
+        HUKUKI_BILGI: {
+          weak: 'Zimmetin unsurlarını (TCK 247/1-2), zincirlemeyi (43), etkin pişmanlığı (248) ve ihmali görevi kötüye kullanmayı (257/2) tekrar et.',
+          medium: 'Suç vasfını biliyorsun; zilyetlik ve ceza hesabının adımlarını pekiştir.',
+          strong: 'Vasıf, zilyetlik ve ceza aralığında isabetlisin.',
+        },
+        DELIL_ANALIZI: {
+          weak: 'Kayıtların bütün sütunlarını oku; bir kâğıdın ikinci nüshasını ilkinin yanına koy.',
+          medium: 'Çatlakları buluyorsun; onları tahtada birbirine bağlamayı dene.',
+          strong: 'Bir kullanıcı adının arkasındaki eli saatle, kapıyla, imzayla gösterdin.',
+        },
+        ARASTIRMA: {
+          weak: 'Panoya, klasörlerin arasına, bir kapının tuş takımına bak; dosyanın dışında da kâğıt vardır.',
+          medium: 'Mekânları taradın; birkaç önemli ayrıntı kaçtı.',
+          strong: 'Araştırman eksiksizdi.',
+        },
+        SORGULAMA: {
+          weak: 'Önce bastır, sonra doğru delille göster; yanlış delil güvenilirliği eritir.',
+          medium: 'Çapraz sorgun etkiliydi; birkaç çelişki açıkta kaldı.',
+          strong: 'Kibar bir tanığı kırmadan, kendi kâğıtlarıyla susturdun.',
+        },
+        SAVUNMA_STRATEJISI: {
+          weak: 'Esas savunmayı delillerle kur; tanığa ve müvekkile ne söyleyeceğini söyleme.',
+          medium: 'Stratejin tutarlıydı; dayanaklarını kâğıtlara bağla.',
+          strong: 'Stratejin ve etik duruşun davayı taşıdı.',
+        },
+        USUL_BILGISI: {
+          weak: 'Bilirkişi (CMK 63, 67/3), delil talepleri (CMK 177, 206), nitelendirme uyarısı (CMK 226) ve suç duyurusunu (CMK 158) çalış.',
+          medium: 'Usul hamlelerin çoğunlukla yerindeydi.',
+          strong: 'Usul itirazların ve taleplerin yerindeydi.',
+        },
+      }),
+      lines: [
+        { id: 'delil', label: 'Delil toplama ({{count.evidence:key}}/26)', categories: ['ARASTIRMA', 'DELIL_ANALIZI'] },
+        { id: 'capraz', label: 'Çapraz sorgu', categories: ['SORGULAMA'] },
+        { id: 'itiraz', label: 'İtiraz isabeti ({{var.legal_hits}})', categories: ['USUL_BILGISI', 'HUKUKI_BILGI'] },
+        { id: 'savunma', label: 'Savunma', categories: ['SAVUNMA_STRATEJISI'] },
+        { id: 'hatali', label: 'Hatalı delil ({{var.wrong}})' },
+      ],
+      bonuses: [{ id: 'guven', label: 'Güvenilirlik bonusu ({{var.cred}}♥)', value: { mul: [{ var: 'cred' }, 100] } }],
+      scaleMax: 12000,
+      thresholdBar: thresholdBar([
+        ['Mahkûmiyet', 0, 'red'],
+        ['Nitelendirme', T_NITEL, 'amber'],
+        ['Beraat', T_BERAAT, 'green'],
+      ]),
+      displayClampMin: 0,
+    },
+    objectionGrounds: [],
+    display: { showRunningScore: true },
+    chronology: [
+      {
+        id: 'k1',
+        time: 'Eylül 2025',
+        text: 'Veznedarlardan şifrelerini mühürlü zarfta müdürlüğe bırakmaları istendi.',
+      },
+      { id: 'k2', time: '3.11.2025', text: 'İlk iptal: 17.41, kullanıcı okilic.' },
+      { id: 'k3', time: '9.01.2026', text: 'Orhan Kılıç yıllık izinde; akşam iki iptal.' },
+      { id: 'k4', time: '14–15.01.2026', text: 'okilic şifresi iki kez sıfırlandı.' },
+      {
+        id: 'k5',
+        time: '12.02.2026 16.40',
+        text: 'Hayri Özdemir emlak vergisini ödedi; makbuz 17.47’de iptal edildi.',
+      },
+      { id: 'k6', time: '27.02.2026', text: 'Son iptal: 17.56.' },
+      { id: 'k7', time: '4.03.2026', text: 'Açık ortaya çıktı.' },
+      { id: 'k8', time: 'Temmuz 2026', text: 'İddianame; adli kontrol.' },
+      { id: 'k9', time: '9.12.2026', text: 'Birinci celse.' },
+    ],
+  },
+  predicates: [
+    {
+      id: 'kart2',
+      label: 'Tahtada en az 2 kart var',
+      when: { cmp: [{ count: 'evidence', tag: 'kart' }, '>=', 2] },
+    },
+  ],
+  variables: [
+    labelEnum('strategy', 'Strateji', ['YOK', 'MASUMIYET', 'USUL', 'INDIRIM']),
+    hiddenInt('strategy_pct', 100, 0, 200),
+    ...p1.variables(),
+    {
+      id: 'ara_day',
+      type: 'int',
+      initial: 1,
+      min: 1,
+      max: ARA_DAYS,
+      visibility: 'VISIBLE',
+      display: { label: 'Ara günü', widget: 'pips', max: ARA_DAYS },
+    },
+    {
+      id: 'ara_ap',
+      type: 'int',
+      initial: ARA_AP,
+      min: 0,
+      max: ARA_AP,
+      visibility: 'VISIBLE',
+      display: { label: 'Eylem puanı', widget: 'pips', max: ARA_AP },
+    },
+    meter('trust', 'Güven', 'percentBar', 60, 100, { lowAt: 40 }),
+    meter('min', 'Kalan süre', 'minutes', 14, 14, { lowAt: 4 }),
+    hiddenEnum('tone', ['soft', 'hard']),
+    meter('taps_v', 'Büyüteç', 'counter', 7, 7, { lowAt: 1, resource: true }),
+    meter('taps_e', 'Büyüteç', 'counter', 7, 7, { lowAt: 1, resource: true }),
+    meter('taps_o', 'Büyüteç', 'counter', 6, 6, { lowAt: 1, resource: true }),
+    meter('ex_log', 'Deneme hakkı', 'counter', 8, 8, { lowAt: 2, resource: true }),
+    meter('ex_pdks', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 1, resource: true }),
+    meter('ex_tut', 'Deneme hakkı', 'counter', 6, 6, { lowAt: 2, resource: true }),
+    meter('ex_banka', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
+    meter('ex_kasa', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 1, resource: true }),
+    meter('ex_pdks2', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 1, resource: true }),
+    meter('ex_ticket', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
+    meter('ex_zarf', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
+    meter('slots', 'Talep hakkı', 'counter', 3, 3, { resource: true }),
+    meter('slots2', 'Talep hakkı', 'counter', 2, 2, { resource: true }),
+    meter('noktalar', 'Dayanak', 'counter', 3, 3, { resource: true }),
+    meter('cred', 'Güvenilirlik', 'hearts', 5, 5, { lowAt: 1 }),
+    meter('pers', 'Heyet iknası', 'meter10', 2, 10),
+    counter('wrong'),
+    counter('legal_hits'),
+    counter('ethics'),
+  ],
+};

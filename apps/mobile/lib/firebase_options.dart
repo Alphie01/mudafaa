@@ -62,13 +62,14 @@ class DefaultFirebaseOptions {
     projectId: 'mudafaa-app',
     storageBucket: 'mudafaa-app.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyA9tyrUl2Pxqy_l6POLSHGafxQpJfOVuus',
     appId: '1:600031550882:ios:bd5cc394ae97d37df566fb',
     messagingSenderId: '600031550882',
     projectId: 'mudafaa-app',
     storageBucket: 'mudafaa-app.firebasestorage.app',
+    androidClientId: '600031550882-dqn2ibhsv6h70qd46atjvb65mq03rl3u.apps.googleusercontent.com',
+    iosClientId: '600031550882-ps1fg8tbm8rifbjmmqpco0p22dv4fgk3.apps.googleusercontent.com',
     iosBundleId: 'com.monolithyazilim.mudafaa',
   );
 }

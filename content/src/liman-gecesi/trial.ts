@@ -22,6 +22,7 @@ import {
   ref,
   resultNode,
   score,
+  set,
   statement,
   story,
   strategyAmount,
@@ -29,7 +30,7 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, Cond } from '../../../tools/content/src/kit/index.js';
 import { B, O, T, W } from './dsl.js';
-import { savcilikRule } from './hearing-1.js';
+import { savcilikRule, tekrar } from './hearing-1.js';
 import { H2, court2, wrongMove } from './shared.js';
 
 // 68-trial-2: 2. celse. Koridor, açılış; ATK bilirkişisi (B1–B4), vardiya şefi yeniden (K5–K8; CMK 48), büfe ve eş
@@ -67,6 +68,15 @@ const objectMiss = (id: string) =>
     responses: B(`baskan: İtiraz yerinde görülmedi.`),
   });
 
+/** B1'in iki ayağı için bilirkişi cevapları (iki sırada da aynı metin). */
+const DARBE = `
+- Hocam, kırık 3,2 santim, dairesel, kenarları keskin. Nihai raporun histopatolojisinde frontalde karşı darbe lezyonu yok. Bir düşmede bu tablo beklenir mi?
+> Karaca raporunu açtı, bir sayfayı çevirdi, gözlüğünü düzeltti.
+karaca: Hareketli başın geniş bir zemine çarptığı düşmelerde karşı kutupta da lezyon görürüz; burada yok. Kırığın şekli de geniş bir zemini değil, sınırlı yüzeyli bir cismi düşündürür.`;
+const KAN = `
+- Hocam, olay yeri fotoğrafı 9: babanın gövdesinde kan, yerden kırk santim yukarıda, damla damla aşağı doğru. Tepesinde ne kan ne saç ne doku. Ön rapor burun ve dudağı basit tıbbi müdahalelik sayıyor.
+karaca: Kafa derisi yarası bol kanar ve çarptığı yüzeyde doku bırakır. Babada iz yoksa baş babaya çarpmamıştır; o kan oturan birinin burnundan akmış.`;
+
 export const trial: CasePart = {
   court: {
     sessions: [
@@ -89,7 +99,7 @@ export const trial: CasePart = {
     decisionNode('T_00G', [{ to: 'T_00' }], {
       ...H2,
       title: 'Adliye koridoru',
-      onEnter: [raise('in_court')],
+      onEnter: [raise('in_court'), raise('in_t2')],
       lines: [
         W(
           all(flag('suc_duyurusu'), flag('savci_asil')),
@@ -201,6 +211,16 @@ baskan: Müdafi, sorularınız.
           ],
           flag('press_b3'),
         ),
+        statement(
+          'B5',
+          5,
+          [
+            'Kırık ile ölüm aynı an değildir; ',
+            hl('yaralı bir süre yürümüş, sonra yığılmış olabilir', any(flag('press_b5'), has('ded_tasima'))),
+            '.',
+          ],
+          flag('press_b1'),
+        ),
       ],
       rules: [
         savcilikRule('PS_SAV_B', 'bilirkişinin'),
@@ -210,22 +230,58 @@ baskan: Müdafi, sorularınız.
           responses: B(`
 - Hocam, “oluşabilir” mi, “uyumludur” mu?
 karaca: Düşmeyle oluşması mümkündür. Uyumlu demedim. Raporda da “düşme ile uyumlu” ifadesi yoktur.
+savci: Hocam, bir ekleme: kafa travmalarında kişi bir süre ayakta kalabilir, değil mi?
+karaca: Kalabilir. Buna bilinç açıklığı denir. Kırık anı ile ölüm anı her zaman aynı değildir.
+~ Savcının yedeği masaya kondu: yumruk, düşme, birkaç adım, ölüm. Bu tezi de kâğıtla karşılamam gerekecek.
 `),
         }),
+        tekrar('PS_B1_TEKRAR', 'B1', ['ded_darbe', 'ded_kan'], 'contra_b1'),
+        // B1 iki ayaklıdır: kırığın şekli (karşı darbe yok: hareketli cisim) ve olay yeri (baba gövdesinde oturma
+        // hizasında kan: baş babaya çarpmadı). Biri tek başına “düşme”yi dışlamaz; ikisi birlikte dışlar.
         presentRule('PS_B1', 'B1', ['ded_darbe'], {
+          enabledWhen: flag('b1_kan'),
           score: { SORGULAMA: 300 },
-          effects: [inc('pers', 2), raise('contra_b1')],
-          good: 'Küçük dairesel çökme ve karşı darbe lezyonunun yokluğu: düşme değil, sabit başa hareketli cisimle darbe; bilirkişi raporunu daralttı.',
+          effects: [inc('pers', 2), raise('b1_darbe'), raise('contra_b1')],
+          good: 'Küçük dairesel çökme, karşı darbe lezyonunun yokluğu ve babada iz olmaması: düşme değil, sabit başa hareketli cisimle darbe; bilirkişi raporunu daralttı.',
           category: 'SORGULAMA',
-          responses: B(`
-- Hocam, kırık 3,2 santim, dairesel, kenarları keskin. Ön raporun dipnotunda frontalde karşı darbe lezyonu saptanmadığı yazıyor. Bir düşmede bu tablo beklenir mi?
-> Karaca raporunu açtı, bir sayfayı çevirdi, gözlüğünü düzeltti.
-karaca: Beklenmez. Hareketli başın sabit zemine çarptığı düşmelerde karşı kutupta da lezyon görürüz; burada yok. Kırığın şekli de geniş bir zemini değil, sınırlı yüzeyli bir cismi düşündürür.
-karaca: Düzeltiyorum: tablo, sabit duran başa hareketli bir cisimle vurulmasıyla daha uyumludur.
-uye: Hocam, “daha uyumlu” mu, yoksa düşme dışlanıyor mu?
-karaca: Tıpta kesinlik nadirdir, Sayın Üye. Ama bu tabloyu bir düşmeyle açıklamam için karşı darbe lezyonu görmem gerekirdi. Görmüyorum.
+          responses: B(`${DARBE}
+karaca: Babada da iz yoktu; az önce gösterdiniz. Düzeltiyorum: tablo, sabit duran başa hareketli bir cisimle vurulmasıyla uyumludur; düşmeyi dışlıyorum.
+uye: Hocam, “uyumlu” mu, yoksa düşme dışlanıyor mu?
+karaca: Tıpta kesinlik nadirdir, Sayın Üye. Ama bu tabloyu bir düşmeyle açıklamam için karşı darbe lezyonu ya da çarpma izi görmem gerekirdi. İkisini de görmüyorum.
 baskan: Tutanağa geçsin.
 > Savcı kalemini bıraktı. Bir “oluşabilir” kaybetmişti.
+`),
+        }),
+        presentRule('PS_B1_DARBE', 'B1', ['ded_darbe'], {
+          score: { SORGULAMA: 150 },
+          effects: [inc('pers'), raise('b1_darbe')],
+          neutral:
+            'Kısmi isabet: karşı darbe yokluğu bilirkişiyi “cisim” ihtimaline yaklaştırdı; ama başın babanın köşesine çarpması ihtimali olay yeriyle kapatılmadı.',
+          responses: B(`${DARBE}
+savci: Hocam, babanın demir köşesi de sınırlı yüzeyli bir çıkıntıdır. Başı oraya çarpmış olamaz mı?
+karaca: Oturur hâlde, kısa mesafeden geriye çarpmada karşı darbe zayıf kalabilir. Baş babaya çarptıysa bunu dışlayamam.
+~ Bir ayak kuruldu. Öbür ayak olay yerinde: baba.
+`),
+        }),
+        presentRule('PS_B1_KAN', 'B1', ['ded_kan'], {
+          enabledWhen: flag('b1_darbe'),
+          score: { SORGULAMA: 300 },
+          effects: [inc('pers', 2), raise('b1_kan'), raise('contra_b1')],
+          good: 'Babada oturma hizasında kan, tepesinde doku yok: baş babaya çarpmadı. Karşı darbe yokluğuyla birlikte bilirkişi düşmeyi dışladı.',
+          category: 'SORGULAMA',
+          responses: B(`${KAN}
+karaca: O hâlde kırık babada da oluşmamıştır. Karşı darbe yok, çarpma izi yok. Düzeltiyorum: tablo, sabit duran başa hareketli bir cisimle vurulmasıyla uyumludur; düşmeyi dışlıyorum.
+baskan: Tutanağa geçsin.
+> Savcı kalemini bıraktı. Bir “oluşabilir” kaybetmişti.
+`),
+        }),
+        presentRule('PS_B1_KAN_ONCE', 'B1', ['ded_kan'], {
+          score: { SORGULAMA: 150 },
+          effects: [inc('pers'), raise('b1_kan')],
+          neutral:
+            'Kısmi isabet: baba temiz; ama kırığın şekli (karşı darbe) gösterilmeden bilirkişi başka bir zemine düşmeyi dışlamadı.',
+          responses: B(`${KAN}
+karaca: Babada çarpma olmamış. Ama yere, rıhtımın betonuna düşmüş olabilir. Kırığın şeklini tartışmadan bir şey diyemem.
 `),
         }),
         presentRule('PS_B1_ATK', 'B1', ['ev_atk'], {
@@ -249,22 +305,24 @@ karaca: O zaman yorumlardım. Sindirim kişiden kişiye değişir; ama sıralama
 ~ “Bilinmediği için.” Kimse sormadığı için.
 `),
         }),
+        tekrar('PS_B2_TEKRAR', 'B2', ['ded_saat'], 'contra_b2'),
+        // Önce bilirkişinin mideyi neden yorumlamadığı kürsüde söyletilir (BASTIR), sonra son öğünün kayıtlı saati verilir.
         presentRule('PS_B2', 'B2', ['ded_saat'], {
-          enabledWhen: SAAT_KAYIT,
+          enabledWhen: all(SAAT_KAYIT, flag('press_b2')),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_b2')],
           good: 'Son öğün (23.34, kayıtta) ve nihai rapordaki mide içeriği ölüm zamanını sanığın limandan çıkışından (23.18) sonraya taşıdı.',
           category: 'SORGULAMA',
           responses: B(`
 - Hocam, son öğünün saati dosyada: maktul 23.34’te kantinde tost ve ayran almış. Raporunuzda midede yarı sindirilmiş ekmek, peynir ve süt ürünü var.
-karaca: Bu bilgi rapor yazılırken bana verilmedi. Verilseydi… Midede tanınabilir, yarı sindirilmiş içerik varsa ölüm son öğünden kısa süre sonradır; yarım saat ila bir buçuk saat.
-karaca: Son öğün 23.34 ise, ölüm 23.34’ten sonradır. Büyük olasılıkla gece yarısından önce.
+karaca: Bu bilgi rapor yazılırken bana verilmedi. Verilseydi… Midede tanınabilir, yarı sindirilmiş içerik varsa ölüm son öğünden sonraki ilk saatler içindedir. Sindirimden kesin bir saat çıkmaz.
+karaca: Ama sıralama kesindir: son öğün 23.34 ise, ölüm 23.34’ten sonradır.
 uye: Hocam, sanığın 23.18’de limandan çıktığı kayıtlı. Ölüm o saatte gerçekleşmiş olabilir mi?
 karaca: Mide içeriğine göre, hayır. 23.34’ten önce değil.
 `),
         }),
         presentRule('PS_B2_KAYITSIZ', 'B2', ['ded_saat'], {
-          enabledWhen: not(SAAT_KAYIT),
+          enabledWhen: all(not(SAAT_KAYIT), flag('press_b2')),
           score: { SORGULAMA: 100 },
           effects: [inc('pers')],
           neutral:
@@ -274,6 +332,13 @@ karaca: Mide içeriğine göre, hayır. 23.34’ten önce değil.
 baskan: Müdafi, 23.34 saati dosyada hangi belgeye dayanıyor? Ne kantin kaydı istendi ne de bu saat bir tanık tarafından burada söylendi.
 karaca: Son öğünün saati belgeli olsaydı yorumlardım. Bir varsayım üzerine ölüm saati daraltamam, Sayın Başkan.
 ~ Doğru saat, yanlış yerde. Bir saat ancak duruşmaya getirilmişse saattir.
+`),
+        }),
+        presentRule('PS_B2_ERKEN', 'B2', ['ded_saat'], {
+          responses: B(`
+- Hocam, maktul 23.34’te kantinde tost ve ayran yemiş.
+karaca: Bunu neden bana soruyorsunuz, müdafi? Raporda ölüm zamanını hangi bulgulara dayandırdığımı sormadınız.
+~ Cevabı soru sormadan verdim; bilirkişi soruyu bilmeden cevabı tartamadı. Önce raporun neyi yorumlamadığını kendi ağzından duymalıydım.
 `),
         }),
         presentRule('PS_B2_TEL', 'B2', ['ded_canli'], {
@@ -328,6 +393,47 @@ karaca: Dosyadaki kilit bu yarayı açmış olamaz.
 savci: Hocam, kilit yarayı açmasa bile maktulün yere düşerken bir başka çıkıntıya çarpması?
 karaca: Sınırlı yüzeyli bir çıkıntı olabilir, evet. Ama o zaman karşı tarafta da lezyon beklerim, Sayın Savcı. Az önce söyledim.
 > Mübaşir poşetteki sarı kilidi kürsüden kaldırıp masaya geri götürdü. Savcı ona bakmadı.
+`),
+        }),
+        pressRule('PR_B5', 'B5', {
+          score: { SORGULAMA: 25 },
+          effects: [raise('press_b5')],
+          responses: B(`
+- Hocam, böyle bir kırıkla yaralı ne kadar yürür? Yürürken kanar mı?
+karaca: Açık bir çökme kırığında kafa derisi bol kanar. Yürüyen biri arkasında iz bırakır. Ne kadar yürüyeceği kişiye göre değişir.
+~ Kanayan bir adam iz bırakır. İz bırakmayan bir adam ya yürümemiştir ya da kanamıyordur.
+`),
+        }),
+        tekrar('PS_B5_TEKRAR', 'B5', ['ded_tasima'], 'contra_b5'),
+        presentRule('PS_B5', 'B5', ['ded_tasima'], {
+          enabledWhen: flag('press_b5'),
+          score: { SORGULAMA: 300 },
+          effects: [inc('pers', 2), raise('contra_b5')],
+          good: 'Rıhtımdan B sahasına on dört karede tek damla kan yok; cesedin yanında topuk sürüklenme izi ve çift lastikli bir aracın dönüş izi: yaralı oraya yürümedi, yara bulunduğu yerde açıldı. Bilinç açıklığı tezi düştü.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Sayın Başkan, olay yeri ekibi rıhtım 4’ten B sahasına kadar her metreyi fotoğraflamış: on dört kare, tek damla kan yok. Kantinde de kan yok; maktul orada burnunda pamukla tost yemiş.
+- Cesedin yanında iki paralel topuk izi, konteynerlerin arasına doğru; hemen yanında taze, çift tekerli bir dönüş izi. Forkliftin tek lastiği var.
+karaca: Açık çökme kırığı olan biri üç yüz metre yürüse arkasında kan bırakırdı. Kan yoksa o yara yürüdüğü yolda açık değildi.
+karaca: Tıbben söyleyebileceğim şu: yara, cesedin bulunduğu yerde ya da çok yakınında açılmıştır. Bu tabloda bir bilinç açıklığı döneminden söz edemem.
+savci: Hocam, sürüklenme ölümden sonra da olabilir.
+karaca: Olabilir, Sayın Savcı. Ama o zaman maktulü oraya biri götürmüştür. Kendi ayağıyla gitmemiştir.
+> Mübaşirin kalemi bir an durdu. Başkan başını kaldırdı.
+baskan: Tutanağa geçsin.
+`),
+        }),
+        presentRule('PS_B5_ERKEN', 'B5', ['ded_tasima'], {
+          responses: B(`
+- Hocam, rıhtımdan B sahasına kadar yolda kan yok.
+karaca: Olabilir, müdafi. Yağmur yağıyordu. Sorunuz nedir?
+~ Kâğıdı soru sormadan uzattım; bilirkişi yağmura sığındı. Önce böyle bir yaranın kanayıp kanamayacağını kendi ağzından söyletmeliydim.
+`),
+        }),
+        presentRule('PS_B5_TEL', 'B5', ['ded_canli'], {
+          responses: B(`
+- Hocam, maktul 23.41’de iki dakika telefonda konuşmuş.
+karaca: Bu, savcılığın sorusunu destekler, müdafi. Konuşabilen biri bilinçlidir; bilinç açıklığı tam da budur.
+~ Yanlış kâğıt. Yaşadığını gösteren bir kayıt, nerede ve nasıl yaralandığını göstermez. Yürüdü mü, taşındı mı: soru oydu.
 `),
         }),
         objectRule('OB_B1', 'B1', 'g_telkin', {
@@ -658,6 +764,7 @@ nail: Kartla. Ben nakit severim ama gençler hep kart. Makineyi o gece iki kere 
 `),
         }),
         presentRule('PS_N1', 'N1', ['ded_cikis'], {
+          enabledWhen: flag('press_n1'),
           score: { SORGULAMA: 200 },
           effects: [inc('pers'), raise('contra_n1')],
           good: 'Turnike (23.18 çıkış) ve büfenin kendi gün sonu fişi (23.37) tanığın “on bire doğru, belki daha erken” saatini düzeltti: sanık 23.18’e kadar limandaydı; dürüst tanığı yalancı çıkarmadan düzelttin.',
@@ -667,6 +774,13 @@ nail: Kartla. Ben nakit severim ama gençler hep kart. Makineyi o gece iki kere 
 nail: Demek on biri yarım geçiyordu. Makine benden iyi bilir efendim. On bire doğru değilmiş; ben yanlış söyledim.
 uye: Tanık, 23.37’de sanık büfenizde miydi?
 nail: Kart oradaysa çocuk da oradaydı efendim. Kartını kimseye vermez o; ağabeyinden kalma bir alışkanlık.
+`),
+        }),
+        presentRule('PS_N1_ERKEN', 'N1', ['ded_cikis'], {
+          responses: B(`
+- Usta, turnike dökümüne göre çocuk limandan 23.18’de çıkmış.
+nail: Limanı bilmem ben avukat hanım. Büfeme ne zaman geldi, onu soruyorsunuz; ben de saate bakmam.
+~ Limanın saatini ustanın büfesine bağlayan şey makineydi. Önce ona nasıl ödendiğini sormalıydım.
 `),
         }),
         presentRule('PS_N1_HESAP', 'N1', ['ev_hesap'], {
@@ -700,7 +814,9 @@ nail: Açıktı herhalde. Hep açıktır. Ama ne çalıyordu, şimdi hatırlamam
 `),
           ],
         }),
+        // Önce radyo sorulur (BASTIR: tanığın kendi saati), sonra kayıtla bağlanır.
         presentRule('PS_N2', 'N2', ['ded_buf'], {
+          enabledWhen: flag('press_n2'),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_n2')],
           good: 'Radyonun gece yarısı haberleri tanığın kendi saatini geri getirdi: sanık 00.00’a kadar iskelede. Savcının verdiği “on ikiye çeyrek kala” düştü.',
@@ -712,6 +828,13 @@ nail: Haberler başlayınca. Jenerik çaldı, çocuk peçeteyi cebine koydu, kal
 nail: On ikide efendim. Kırk yıldır on ikide. Radyom yalan söylemez; ben yaşlıyım, o değil.
 > Savcı kalemini masaya bıraktı. On beş dakikası radyonun jeneriğinde kaybolmuştu.
 baskan: Tutanağa geçsin: tanık, sanığın gece haberlerinin başlamasıyla, saat on ikide büfeden kalktığını beyan etti.
+`),
+        }),
+        presentRule('PS_N2_ERKEN', 'N2', ['ded_buf'], {
+          responses: B(`
+- Usta, çocuk gece yarısına kadar büfenizdeydi.
+nail: Öyle mi dedim avukat hanım? Ben saate bakmam ki. Savcı bey on ikiye çeyrek dedi; olabilir.
+~ Ustaya onun saatini ben söyledim; savcının saatinden farkı kalmadı. Saati ona kendi hatırlatmalıydı: radyosu, jeneriği.
 `),
         }),
         pressRule('PR_N3', 'N3', {
@@ -1230,12 +1353,18 @@ baskan: Hüküm fıkrası ayakta dinlenir.
       title: 'Çöküş',
       background: 'durusma_salonu',
       lines: B(`
-baskan: Müdafi, heyetin sabrını yeterince denediniz. Savunmanızı tamamlanmış kabul ediyoruz.
+baskan: Müdafi, heyetin sabrını yeterince denediniz. Tanıklara yönelik sorularınız tamamlanmış sayılacak; ilgisiz sunumlar tutanağa geçmeyecek.
 > Savcı dosyasını toplarken bana döndü. Sesinde ne zafer vardı ne alay.
 savci: Bir yumruğu savunmak zordur avukat hanım. Bir cinayeti savunmaktan zor. Çünkü yarısını kabul ederek başlarsınız.
-baskan: Sanık, kısaca son sözünüz?
+baskan: Esas hakkındaki savunmanızı ve sanığın son sözünü yine alacağız; bu sizin değil, sanığın hakkı.
+~ Kürsüdeki sorularımı bitirdiler. Savunmanın kendisini bitiremezler. Elimde kalan tek şey, tutanağa önceden geçmiş olanlar.
 `),
-      choices: [cont('COKUS_SON', 'Son söz: “Ben öldürmedim.”', 'T_08')],
+      choices: [cont('COKUS_SON', 'Duruşmaya devam', 'T_COKUS_K')],
+    }),
+    // Çöküş tanık sorgusunu bitirir; ek savunma, mütalaa, esas savunma ve son söz atlanamaz (CMK 216, 226).
+    decisionNode('T_COKUS_K', [{ when: flag('etik_gulay'), to: 'T_03E' }, { to: 'T_04' }], {
+      ...court2.base,
+      title: 'Çöküş',
     }),
     resultNode('R_KARAR', { ...H2, title: 'Karar Açıklandı' }),
   ],
@@ -1244,9 +1373,18 @@ baskan: Sanık, kısaca son sözünüz?
       id: 'tg_cokus',
       priority: 0,
       once: true,
-      when: all(flag('in_court'), cmp(v('cred'), '<=', 0)),
+      when: all(flag('in_t2'), cmp(v('cred'), '<=', 0)),
       effects: [raise('cokus')],
       goto: 'T_COKUS',
+    },
+    {
+      // İlk celsede güvenilirlik biterse heyet o tanığın sorgusunu keser; celse kendi akışıyla sürer.
+      id: 'tg_cokus1',
+      priority: 0,
+      once: true,
+      when: all(flag('in_court'), not(flag('in_t2')), cmp(v('cred'), '<=', 0)),
+      effects: [raise('cokus1'), set('cred', 2)],
+      goto: 'H1_COKUS',
     },
   ],
 };

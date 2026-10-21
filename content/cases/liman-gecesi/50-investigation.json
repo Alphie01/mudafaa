@@ -236,7 +236,33 @@
           "kind": "NAVIGATE",
           "label": "DURUŞMAYA GİT · 1. CELSE",
           "role": "PRIMARY",
-          "visibleWhen": { "cmp": [{ "var": "day" }, ">=", 4] },
+          "visibleWhen": {
+            "all": [
+              { "cmp": [{ "var": "day" }, ">=", 4] },
+              {
+                "any": [
+                  { "cmp": [{ "var": "ap" }, "<=", 0] },
+                  {
+                    "all": [
+                      { "chosen": "H_RIHTIM" },
+                      { "chosen": "H_BSAHA" },
+                      { "any": [{ "chosen": "H_BUFE" }, { "not": { "flag": "fact_donus" } }] },
+                      { "visited": "INV_GORUSME" },
+                      { "chosen": "H_GORUS2" },
+                      { "chosen": "H_GULAY" },
+                      { "chosen": "H_SUKRU" },
+                      { "chosen": "H_KENAN" },
+                      { "any": [{ "chosen": "H_ORHAN" }, { "not": { "flag": "orhan_ref" } }] },
+                      { "chosen": "H_ONRAPOR" },
+                      { "chosen": "H_TELEFON" },
+                      { "any": [{ "chosen": "H_TURNIKE" }, { "not": { "hasEvidence": "ev_turnike" } }] },
+                      { "chosen": "H_DIL" }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
           "confirm": "Duruşmaya gidersen soruşturma biter. Emin misin?",
           "next": "INV_GECE_1"
         }
@@ -2164,7 +2190,7 @@
                 },
                 {
                   "speaker": "kenan",
-                  "text": "Sonra ofise döndüm, defter yazdım. On bire yirmi var gibi, bir tur attım. B sahasının ağzında Tarık’ı gördüm."
+                  "text": "Sonra ofise döndüm, defter yazdım. On ikiye yirmi var gibi, bir tur attım. B sahasının ağzında Tarık’ı gördüm."
                 },
                 {
                   "speaker": "kenan",
@@ -3833,7 +3859,7 @@
             { "speaker": "narrator", "text": "Paketi çevirdi. Bir tur. Durdu." },
             {
               "speaker": "leyla",
-              "text": "Bir de vardiya şefine dikkat et. İyi bir adam gibi görünüyor, iyi bir adam gibi konuşuyor. İyi adamlar kürsüde en tehlikeli tanıklardır; çünkü onlara inanılır."
+              "text": "Bir de şunu unutma: emin tanık, dürüst tanıktan tehlikelidir; çünkü yanılsa da emin konuşur. Ona “yalan söylüyorsun” deme. Neyi, nereden, hangi ışıkta gördüğünü sor."
             },
             {
               "speaker": "leyla",

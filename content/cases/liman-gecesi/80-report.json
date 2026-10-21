@@ -111,8 +111,55 @@
       {
         "id": "h_olum",
         "when": { "all": [{ "ref": "donus_yok" }, { "not": { "ref": "olum_sonra" } }] },
-        "text": "Dönüşün olmadığını kanıtladın ama ölümün sonradan geldiğini kanıtlamadın; mahkeme ölümü yumruğa bağladı (TCK 87/4).",
+        "text": "Teşhisi çürüttün ama savcılığın yedek tezini (yumruk → düşme → birkaç adım → ölüm) üç ayağından kürsüde düşürmedin; mahkeme ölümü yumruğa bağladı (TCK 87/4).",
         "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_tesis",
+        "when": {
+          "all": [{ "any": [{ "flag": "contra_k1" }, { "flag": "contra_n1" }] }, { "not": { "ref": "donus_yok" } }]
+        },
+        "text": "Tanığın saatini kayıtla çürüttün ama yüzü görüp göremeyeceğini (bakım etiketi) ya da sanığın gece yarısına kadar nerede olduğunu (büfecinin radyosu) kürsüye getirmedin; tanık saatini esnetip teşhise tutundu.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_isik",
+        "when": {
+          "all": [{ "any": [{ "flag": "contra_k2" }, { "flag": "contra_n2" }] }, { "not": { "ref": "donus_yok" } }]
+        },
+        "text": "Teşhisin ışığını ya da gece yarısını çürüttün ama tanığın kesinleştirdiği 23.40’ı turnike ve büfe kaydıyla birlikte göstermedin.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_b1",
+        "when": {
+          "all": [{ "any": [{ "flag": "b1_darbe" }, { "flag": "b1_kan" }] }, { "not": { "flag": "contra_b1" } }]
+        },
+        "text": "Bilirkişiye “düşme değil” demek için iki ayak gerekiyordu: kırığın şekli (karşı darbe yok) ve babadaki kan (baş çarpmadı). Birini gösterdin.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_b5",
+        "when": { "all": [{ "flag": "contra_b1" }, { "flag": "contra_b2" }, { "not": { "flag": "contra_b5" } }] },
+        "text": "Bilirkişinin “yaralı bir süre yürümüş olabilir” cevabına B sahası fotoğraflarını (yolda kan yok, sürüklenme ve araç izi) göstermedin; bilinç açıklığı ihtimali açık kaldı.",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_bastir",
+        "when": {
+          "any": [
+            {
+              "all": [
+                { "hasEvidence": "ded_cikis" },
+                { "not": { "flag": "press_k1" } },
+                { "not": { "flag": "contra_n1" } }
+              ]
+            },
+            { "all": [{ "hasEvidence": "ded_saat" }, { "not": { "flag": "press_b2" } }] }
+          ]
+        },
+        "text": "Kâğıdı göstermeden önce tanığın ya da bilirkişinin iddiasını kendi ağzıyla kesinleştirmedin (BASTIR); “gibi” diyen tanık kâğıdın etrafından dolaşır.",
+        "category": "SORGULAMA"
       },
       {
         "id": "h_sukru",
@@ -143,6 +190,12 @@
         "when": { "all": [{ "not": { "flag": "talep_atk" } }, { "not": { "flag": "ek_atk" } }] },
         "text": "Raporu düzenleyen uzmanın duruşmada dinlenmesini ne ilk celsede ne de arada istedin (CMK 68/1, 214/1); rapor okunmakla yetinildi, “oluşabilir” sorgulanmadı.",
         "category": "USUL_BILGISI"
+      },
+      {
+        "id": "h_cokus1",
+        "when": { "flag": "cokus1" },
+        "text": "İlk celsede ilgisiz belgeler sundun; güvenilirliğin tükenince heyet tanık sorgunu kesti. Bir belgeyi ancak bir beyanla bağını kurabildiğinde sun.",
+        "category": "SORGULAMA"
       },
       {
         "id": "h_b",

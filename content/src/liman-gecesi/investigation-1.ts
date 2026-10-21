@@ -150,6 +150,23 @@ export function medRecipes(pre: string): ChoiceDef[] {
   ];
 }
 
+/** Soruşturmada EP harcanacak yer kalmadı (yumuşak kilit önlemi). */
+const INV_TUKENDI: Cond = all(
+  chosen('H_RIHTIM'),
+  chosen('H_BSAHA'),
+  any(chosen('H_BUFE'), not(flag('fact_donus'))),
+  visited('INV_GORUSME'),
+  chosen('H_GORUS2'),
+  chosen('H_GULAY'),
+  chosen('H_SUKRU'),
+  chosen('H_KENAN'),
+  any(chosen('H_ORHAN'), not(flag('orhan_ref'))),
+  chosen('H_ONRAPOR'),
+  chosen('H_TELEFON'),
+  any(chosen('H_TURNIKE'), not(has('ev_turnike'))),
+  chosen('H_DIL'),
+);
+
 export const INV_POOL = [
   'clue_baba_kan',
   'clue_basit',
@@ -929,7 +946,7 @@ kenan: Yirmi yıldır bu limandayım. Kutuları sayarız, adamları sayarız, ge
       score: { SORGULAMA: 30 },
       responses: B(`
 kenan: Kavgayı ben ayırdım. Fenerle geldim, ikisini ayırdım. Tarık’a “eve git evlat” dedim, Ercan’ı kantine yolladım.
-kenan: Sonra ofise döndüm, defter yazdım. On bire yirmi var gibi, bir tur attım. B sahasının ağzında Tarık’ı gördüm.
+kenan: Sonra ofise döndüm, defter yazdım. On ikiye yirmi var gibi, bir tur attım. B sahasının ağzında Tarık’ı gördüm.
 kenan/uzgun: Elinde bir şey vardı, demir gibi. Seslenmedim. Keşke seslenseydim. Belki o zaman…
 - Gece, yağmurda, yüzünü nasıl seçtiniz?
 kenan: Projektörler yanıyordu kızım. Gündüz gibiydi. Yirmi yıldır bu limandayım; her işçiyi yürüyüşünden tanırım.
@@ -1773,7 +1790,7 @@ const geceNodes = [
 leyla: Yarın birinin elinde bir yumruk var, birinin elinde bir ölüm. Karıştırma.
 leyla: Savcı ikisini aynı cümlede söyleyecek: “kavga etti, döndü, öldürdü.” Senin işin o cümleyi üçe bölmek.
 > Paketi çevirdi. Bir tur. Durdu.
-leyla: Bir de vardiya şefine dikkat et. İyi bir adam gibi görünüyor, iyi bir adam gibi konuşuyor. İyi adamlar kürsüde en tehlikeli tanıklardır; çünkü onlara inanılır.
+leyla: Bir de şunu unutma: emin tanık, dürüst tanıktan tehlikelidir; çünkü yanılsa da emin konuşur. Ona “yalan söylüyorsun” deme. Neyi, nereden, hangi ışıkta gördüğünü sor.
 leyla: İnanılan bir tanığı yalancı çıkarmaya çalışma. Yanıldığını göster. Kâğıtla.
 - Ya yanılmıyorsa?
 leyla: O zaman da aynı. Kürsüde “yalancı” diyen avukat salonu kaybeder. “Kâğıt başka bir saat söylüyor” diyen avukat salonu kazanır. Gerisini heyet düşünür.
@@ -1806,8 +1823,9 @@ const hub = p1.hub({
   choices: [
     nav('GO_H1', 'DURUŞMAYA GİT · 1. CELSE', 'INV_GECE_1', {
       role: 'PRIMARY',
-      // Duruşma günü bellidir: birinci celseye ancak soruşturmanın son gününde gidilir (ara evresiyle aynı kural).
-      visibleWhen: cmp(v('day'), '>=', 4),
+      // Duruşma günü bellidir: birinci celseye son günün eylem puanları kullanıldıktan sonra gidilir (gidilecek yer
+      // kalmadıysa hemen). Ara evresiyle aynı kural.
+      visibleWhen: all(cmp(v('day'), '>=', 4), any(cmp(v('ap'), '<=', 0), INV_TUKENDI)),
       confirm: 'Duruşmaya gidersen soruşturma biter. Emin misin?',
     }),
   ],

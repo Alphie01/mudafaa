@@ -172,7 +172,13 @@ c GO_H1
 c GECE_DEVAM
 `);
 
-const CELSE1 = A(`
+// Ters sıra: önce ışık (K2), sonra saat (K1); bilirkişide önce olay yeri (kan), sonra kırığın şekli (darbe).
+const swapPair = (src: string, a: string, b: string): string => {
+  const [x, y] = [src.indexOf(a), src.indexOf(b)];
+  return src.slice(0, x) + b + src.slice(x + a.length, y) + a + src.slice(y + b.length);
+};
+
+const CELSE1_SRC = `
 c H100_DEVAM
 c H101_DEVAM
 c H102_A
@@ -203,7 +209,9 @@ c TL_ABONE
 c TL_BITIR
 c H107_A
 c H108_DEVAM
-`);
+`;
+const CELSE1 = A(CELSE1_SRC);
+const CELSE1_TERS = A(swapPair(CELSE1_SRC, 'p K1\ns ded_cikis K1', 'p K2\ns ded_isik K2'));
 
 // İlk celsede araç kaydı istenmez; ara evresinde ek talep dilekçesiyle istenir (EK_GPS).
 const CELSE1_ARACSIZ = CELSE1.filter((a) => !('choiceId' in a && a.choiceId === 'TL_GPS'));
@@ -377,6 +385,9 @@ c ARA_SON_DEVAM
 const BILIRKISI = (silah: boolean) => `
 p B1
 s ded_darbe B1
+s ded_kan B1
+p B5
+s ded_tasima B5
 p B2
 s ded_saat B2
 p B3
@@ -389,10 +400,14 @@ p B2
 p B3
 `;
 
-const CELSE2 = (esas: string, devam: string, opts: { k7?: boolean; bilirkisi?: boolean; silah?: boolean } = {}) =>
+const CELSE2 = (
+  esas: string,
+  devam: string,
+  opts: { k7?: boolean; bilirkisi?: boolean; silah?: boolean; ters?: boolean } = {},
+) =>
   A(`
 c T00_DEVAM
-${opts.bilirkisi === false ? BILIRKISI_YOK : BILIRKISI(opts.silah !== false)}
+${opts.bilirkisi === false ? BILIRKISI_YOK : opts.ters === true ? swapPair(BILIRKISI(opts.silah !== false), 's ded_darbe B1', 's ded_kan B1') : BILIRKISI(opts.silah !== false)}
 c T01_BITIR
 p K5
 s ded_arac K5
@@ -489,6 +504,13 @@ t OB_SURUK
 t OB_KEDI
 t OB_PALET
 c BSAHA_BITIR
+c H_ONRAPOR
+e mag o1
+e mag o4
+c ONRAPOR_BITIR
+c H_GORUS2
+c TP_VARDIYA soft
+c G_BITIR
 c GO_H1
 c GECE_DEVAM
 `);
@@ -546,6 +568,8 @@ c AA2_B
 c A_TALEP
 c EK_ABONE
 c EK_GONDER
+c A_SAVCI
+c SAV_BITIR
 c GO_T2
 c ARA_SON_DEVAM
 `);
@@ -685,6 +709,8 @@ c A_SAVCI
 c SAV_PAZAR
 c SAV_BITIR
 c AA2_A
+c A_ATK
+c ATK_BITIR
 c GO_T2
 c ARA_SON_DEVAM
 c T00_DEVAM
@@ -771,6 +797,12 @@ m clue_nail clue_radyo
 m clue_kenan_isik clue_projektor
 m clue_surukleme clue_lastik
 c CIKARIM_BITIR
+c H_TURNIKE
+e compare g2
+c TURNIKE_BITIR
+c H_GORUS2
+c TP_VARDIYA soft
+c G_BITIR
 c GO_H1
 c GECE_DEVAM
 `);
@@ -827,6 +859,10 @@ m clue_defter_satir clue_arama2341
 c ARA_CIKARIM_BITIR
 c A_LEYLA
 c LEYLA2_DON
+c A_ATK
+c ATK_BITIR
+c A_SAVCI
+c SAV_BITIR
 c GO_T2
 c ARA_SON_DEVAM
 c T00_DEVAM
@@ -858,6 +894,159 @@ s ev_hesap B2
 `),
 ];
 
+// --- Düşük skorlu gerçek fail (G1_AZ): olgular kayıtta, skor eski 10.000 eşiğinin altında; hüküm yine 223/2-b ---
+// (skor hiçbir hükmü seçmez). Kısaltma sondasından (shrink) alınmış en kısa 223/2-b yolu.
+const G1_AZ = A(`
+c PR00_DEVAM
+c PR01_DEVAM
+c PR02_DEVAM
+c BR00_C
+c BR01_A
+c BR01B_DEVAM
+c STR_MASUMIYET
+c SABAH_DEVAM
+c H_RIHTIM
+t OB_BABA
+c RIHTIM_BITIR
+c H_ONRAPOR
+e mag o1
+e ruler o2
+e mag o3
+c ONRAPOR_BITIR
+c H_CIKARIM
+m clue_baba_kan clue_basit
+c CIKARIM_BITIR
+c H_LEYLA
+c LEYLA_RAPOR
+c LEYLA_DON
+c H_IFADE
+e mag i3
+c IFADE_BITIR
+c H_GULAY
+c GL_SAAT
+c GL_KART
+c GL_BITIR
+c AK1_A
+c H_GORUS
+c TP_GECE soft
+c TP_DONUS soft
+c G_BITIR
+c H_TELEFON
+e mag t3
+c TELEFON_BITIR
+c H_DIL
+c DIL_TURNIKE
+c DIL_GONDER
+c AK2_B
+c H_TURNIKE
+e compare g2
+e mag g4
+c TURNIKE_BITIR
+c H_ORHAN
+c OR_DERS
+c OR_MIDE
+c OR_BITIR
+c H_SUKRU
+c SK_BITIR
+c AK3_A
+c H_KENAN
+c KN_BITIR
+c H_BUFE
+c NL_GECE
+c NL_SAAT
+c NL_BAK
+t OB_ZRAPOR
+t OB_AKIS
+c BUFE_BITIR
+c H_BSAHA
+t OB_SURUK
+t OB_LASTIK
+c BSAHA_BITIR
+c H_CIKARIM
+m clue_cikis clue_pos
+m clue_nail clue_radyo
+m clue_surukleme clue_lastik
+c CIKARIM_BITIR
+c GO_H1
+c GECE_DEVAM
+c H100_DEVAM
+c H101_DEVAM
+c H102_A
+c H102S_DEVAM
+c H102Q_A
+c H102Q_DEVAM
+p S3
+c H103_BITIR
+c H104_A
+c H104B_DEVAM
+c H105_BITIR
+c TL_ATK
+c TL_GPS
+c TL_BITIR
+c H107_A
+c H108_DEVAM
+c ARA_GIRIS_DEVAM
+c A_ATK
+e mag n3
+e mag n4
+c ATK_BITIR
+c A_SEVIM
+c SV_TAZIYE
+c SV_HAFTA
+c SV_TUTANAK
+c SV_BITIR
+c AA1_A
+c A_CIKARIM
+m clue_desen clue_kontrkup
+m clue_mide clue_kantin
+c ARA_CIKARIM_BITIR
+c A_KAYIT
+e mag a2
+e compare z1
+c KAYIT_BITIR
+c A_CIKARIM
+m clue_gps clue_zimmet
+c ARA_CIKARIM_BITIR
+c A_TARIK
+c TR_BITIR
+c AA2_B
+c A_NURTEN
+c NU_BITIR
+c A_DEFTER
+e mag d4
+c DEFTER_BITIR
+c A_CIKARIM
+m clue_defter_satir clue_arama2341
+c ARA_CIKARIM_BITIR
+c A_SUC
+c SUC_A
+c GO_T2
+c ARA_SON_DEVAM
+c T00_DEVAM
+p B1
+s ded_darbe B1
+s ded_kan B1
+p B5
+s ded_tasima B5
+p B2
+s ded_saat B2
+c T01_BITIR
+s ded_arac K5
+s ded_motif K6
+c T02_BITIR
+p N1
+s ded_cikis N1
+p N2
+s ded_buf N2
+c T03_BITIR
+c T03G_DEVAM
+c T04_A
+c T05_A
+c T06_B
+c T06SB_DEVAM
+c T07_A
+`);
+
 export const tests: CasePart = {
   tests: {
     goldenPaths: [
@@ -873,6 +1062,7 @@ export const tests: CasePart = {
         ARA_TAM(true),
         CELSE2('T06_B', 'T06SB_DEVAM', { silah: false }),
       ),
+      goldenPath('G1_AZ', { outcome: 'BERAAT_B', finalMax: 9500 }, G1_AZ),
       goldenPath(
         TYPICAL_PATH,
         { outcome: 'BERAAT_E', finalMin: 11509, finalMax: 12721 },
@@ -887,7 +1077,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G3',
-        { outcome: 'NITELIK', finalMin: 4384, finalMax: 4846 },
+        { outcome: 'NITELIK', finalMin: 4636, finalMax: 5124 },
         PROLOG('BR00_A', 'BR01_D', 'STR_INDIRIM'),
         G3_SORUSTURMA,
         G3_CELSE1,
@@ -930,9 +1120,9 @@ export const tests: CasePart = {
         GUN2,
         GUN3,
         GUN4,
-        CELSE1,
+        CELSE1_TERS,
         ARA_TAM(false),
-        CELSE2('T06_T', 'T06ST_DEVAM', { k7: false }),
+        CELSE2('T06_T', 'T06ST_DEVAM', { k7: false, ters: true }),
       ),
       goldenPath(
         'OLGU_X',
@@ -990,7 +1180,14 @@ export const tests: CasePart = {
         { outcome: 'NITELIK' },
         PROLOG('BR00_B', 'BR01_C', 'STR_MASUMIYET'),
         W_YOL,
-        A('c COKUS_SON'),
+        A(`
+c COKUS_SON
+c T04_B
+c T05_B
+c T06_T
+c T06ST_DEVAM
+c T07_A
+`),
       ),
     ],
   },

@@ -1247,7 +1247,7 @@
           "id": "K1",
           "order": 1,
           "segments": [
-            { "text": "On bire yirmi var gibi tur attım. " },
+            { "text": "On ikiye yirmi var gibi tur attım. " },
             {
               "text": "B sahasının ağzında Tarık’ı gördüm",
               "highlightWhen": {
@@ -1343,7 +1343,7 @@
                 { "speaker": "player", "text": "Saatten emin misiniz?" },
                 {
                   "speaker": "kenan",
-                  "text": "Aşağı yukarı kızım… Avukat hanım. Defteri yazdım, kalktım, tur attım. On bire yirmi var. Yirmi yıldır her gece aynı saatte tur atarım."
+                  "text": "Aşağı yukarı kızım… Avukat hanım. Defteri yazdım, kalktım, tur attım. On ikiye yirmi var. Yirmi yıldır her gece aynı saatte tur atarım."
                 }
               ]
             }
@@ -1354,9 +1354,18 @@
           ]
         },
         {
+          "id": "PS_K1_TEKRAR",
+          "kind": "PRESENT",
+          "match": { "statement": "K1", "evidence": ["ded_cikis"] },
+          "enabledWhen": { "flag": "contra_k1" },
+          "maxUses": 99,
+          "responses": [{ "lines": [{ "speaker": "baskan", "text": "Bu husus tutanağa geçti, müdafi. Devam edin." }] }]
+        },
+        {
           "id": "PS_K1",
           "kind": "PRESENT",
           "match": { "statement": "K1", "evidence": ["ded_cikis"] },
+          "enabledWhen": { "all": [{ "flag": "press_k1" }, { "flag": "contra_k2" }] },
           "responses": [
             {
               "lines": [
@@ -1387,9 +1396,79 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Turnike dökümü (23.18 çıkış, sonra giriş yok), büfenin gün sonu fişi ve banka kaydı (23.37) birlikte: 23.40’taki teşhis mümkün değil.",
+            "feedback": "Turnike dökümü (23.18 çıkış, sonra giriş yok), büfenin gün sonu fişi ve banka kaydı (23.37) birlikte: tanığın kesinleştirdiği 23.40’taki teşhis mümkün değil.",
             "category": "SORGULAMA"
           }
+        },
+        {
+          "id": "PS_K1_SAAT",
+          "kind": "PRESENT",
+          "match": { "statement": "K1", "evidence": ["ded_cikis"] },
+          "enabledWhen": { "flag": "press_k1" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, liman turnike dökümü: sanığın kartı 23.18.42’de 2 numaralı turnikeden çıkış. Sabaha kadar bu kartla başka geçiş yok."
+                },
+                {
+                  "speaker": "player",
+                  "text": "İskele büfesinin gün sonu fişi: 23.37, kart, iki çay. Bankadaki satır aynı saat, aynı tutar. Büfe personel kapısından yirmi dakika."
+                },
+                {
+                  "speaker": "narrator",
+                  "text": "Kenan kâğıtlara baktı. Uzun uzun. Sonra başını kaldırdı; sesi yumuşaktı, neredeyse özür diler gibi."
+                },
+                {
+                  "speaker": "kenan",
+                  "text": "Saati yanlış biliyorum demek. Yaşlandım efendim. Belki daha geçti; on ikiye doğru. Belki daha erkendi, ben ayırdıktan hemen sonra."
+                },
+                {
+                  "speaker": "kenan",
+                  "text": "Ama gördüm. Saat yanılır; göz yanılmaz. Projektörün altındaydı. Yüzünü gördüm."
+                },
+                { "speaker": "baskan", "text": "Tanık, saatten emin değilsiniz ama kişiden eminsiniz, öyle mi?" },
+                { "speaker": "kenan", "expression": "uzgun", "text": "Eminim efendim. Keşke olmasaydım." },
+                {
+                  "speaker": "player",
+                  "text": "Saati düşürdüm, yüzü düşüremedim. Saat esneyen bir şeydir; tanık onu istediği yere çeker. Bir yüzü görmek içinse ışık gerekir.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "contra_k1", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Turnike ve büfe kayıtları tanığın yeminle kesinleştirdiği saati çürüttü: 23.40’ta sanık iskeledeydi (CMK 217). Teşhisin kendisi ise henüz ayakta.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_K1_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "K1", "evidence": ["ded_cikis"] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Sayın Başkan, turnike dökümüne göre sanık 23.18’de limandan çıkmış." },
+                {
+                  "speaker": "kenan",
+                  "text": "“On ikiye yirmi var gibi” dedim avukat hanım. “Gibi.” Saat tutmadım ki. Belki daha önceydi, belki sonra."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Saatini bağlamadan kâğıdı gösterdim; tanık kâğıdın etrafından dolaştı. Önce saati kendi ağzıyla kesinleştirmeliydi.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "PS_K1_KISMI",
@@ -1442,9 +1521,18 @@
           ]
         },
         {
+          "id": "PS_K2_TEKRAR",
+          "kind": "PRESENT",
+          "match": { "statement": "K2", "evidence": ["ded_isik", "clue_projektor"] },
+          "enabledWhen": { "flag": "contra_k2" },
+          "maxUses": 99,
+          "responses": [{ "lines": [{ "speaker": "baskan", "text": "Bu husus tutanağa geçti, müdafi. Devam edin." }] }]
+        },
+        {
           "id": "PS_K2",
           "kind": "PRESENT",
           "match": { "statement": "K2", "evidence": ["ded_isik", "clue_projektor"] },
+          "enabledWhen": { "all": [{ "flag": "press_k2" }, { "flag": "contra_k1" }] },
           "responses": [
             {
               "lines": [
@@ -1477,6 +1565,72 @@
             "feedback": "Projektör direğindeki bakım etiketi: 23.00–02.00 enerji yok. “Gündüz gibi” ışık yoktu; teşhisin dayanağı düştü.",
             "category": "SORGULAMA"
           }
+        },
+        {
+          "id": "PS_K2_YURUYUS",
+          "kind": "PRESENT",
+          "match": { "statement": "K2", "evidence": ["ded_isik", "clue_projektor"] },
+          "enabledWhen": { "flag": "press_k2" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, olay yeri fotoğrafı 17. B sahasının projektör direği. Etiket: “14/11 · 23.00–02.00 · bakım · enerji yok.”"
+                },
+                { "speaker": "narrator", "text": "Kenan fotoğrafa baktı. Uzun uzun. Sonra gözlerini kapadı, açtı." },
+                {
+                  "speaker": "kenan",
+                  "text": "Bakım… Evet. Bakım vardı o gece. Unutmuşum. Rıhtımın ışığı vardı ama. Uzaktan…"
+                },
+                { "speaker": "uye", "text": "Rıhtımın ışığı B sahasının ağzına ne kadar uzakta, tanık?" },
+                { "speaker": "kenan", "text": "Üç yüz metre efendim." },
+                {
+                  "speaker": "kenan",
+                  "text": "Ama ben o çocuğu yürüyüşünden tanırım efendim. Yirmi yıldır her işçiyi yürüyüşünden tanırım. Saati de biliyorum: on ikiye yirmi var."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Üç yüz metre, gece, yağmur, sönük projektörler. “Gündüz gibi” değil. Ama bir yürüyüş ve bir saat hâlâ kürsüde; saati de kâğıtla bağlamak gerekiyor.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "contra_k2", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Projektör direğindeki bakım etiketi: 23.00–02.00 enerji yok. “Gündüz gibi” ışık yoktu; yüz teşhisinin dayanağı düştü (tanık saatine ve yürüyüşe tutunuyor).",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_K2_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "K2", "evidence": ["ded_isik", "clue_projektor"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, olay yeri fotoğrafı 17: projektör direğinde bir bakım etiketi."
+                },
+                {
+                  "speaker": "kenan",
+                  "text": "Hangi direk o avukat hanım? Limanda yüz direk var. Ben gördüğümü söyledim."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Tanığın hangi ışığı kastettiğini önce onun ağzından duymadan fotoğrafı gösterdim; o da fotoğrafın yanından geçti.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "PR_K3",
@@ -1694,6 +1848,49 @@
       "choices": []
     },
     {
+      "id": "H1_COKUS",
+      "type": "DECISION",
+      "chapter": "Bölüm 3 · Birinci Celse",
+      "eyebrow": "DURUŞMA · 1. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Heyetin sabrı",
+      "onEnter": [
+        { "type": "VAR", "var": "pers", "op": "dec", "value": 2 },
+        {
+          "type": "MARK",
+          "quality": "BAD",
+          "feedback": "İlk celsede güvenilirliğin tükendi; heyet tanık sorgunu kesti.",
+          "category": "SORGULAMA"
+        }
+      ],
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "baskan",
+              "text": "Müdafi, tanığa ilgisiz belgeler sunmaya devam ediyorsunuz. Bu tanığa yönelik sorularınız tamamlanmış sayılacak."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Savcı başını kaldırmadı bile. Üye hâkim önündeki kâğıda bir şey yazdı; kısa, tek kelime."
+            },
+            { "speaker": "baskan", "text": "Tutanağa geçsin: müdafiin tanığa sorusu kalmamıştır. Devam ediyoruz." },
+            {
+              "speaker": "player",
+              "text": "Bir celsede bir kez düşersin; ikinci celsede heyet bunu hatırlar. Kâğıtlarımı bundan sonra yalnızca doğru yere koyacağım.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "routes": [
+        { "when": { "visited": "H1_07" }, "to": "H1_08" },
+        { "when": { "visited": "H1_06" }, "to": "H1_07" },
+        { "to": "H1_06" }
+      ],
+      "choices": []
+    },
+    {
       "id": "H1_06",
       "type": "STORY",
       "chapter": "Bölüm 3 · Birinci Celse",
@@ -1893,7 +2090,7 @@
           "label": "Adli kontrolle tahliye: dönüş kayıtla çürüdü, kuvvetli şüphe kalmadı",
           "responses": [
             {
-              "when": { "flag": "contra_k1" },
+              "when": { "all": [{ "flag": "contra_k1" }, { "flag": "contra_k2" }] },
               "lines": [
                 {
                   "speaker": "player",
@@ -1924,7 +2121,7 @@
           "effects": [
             {
               "type": "IF",
-              "when": { "flag": "contra_k1" },
+              "when": { "all": [{ "flag": "contra_k1" }, { "flag": "contra_k2" }] },
               "then": [
                 { "type": "VAR", "var": "released", "op": "set", "value": true },
                 { "type": "SCORE", "category": "USUL_BILGISI", "amount": 100 },

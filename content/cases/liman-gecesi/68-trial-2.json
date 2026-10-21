@@ -23,7 +23,10 @@
       "chapter": "Bölüm 5 · İkinci Celse",
       "eyebrow": "DURUŞMA · 2. CELSE",
       "title": "Adliye koridoru",
-      "onEnter": [{ "type": "VAR", "var": "in_court", "op": "set", "value": true }],
+      "onEnter": [
+        { "type": "VAR", "var": "in_court", "op": "set", "value": true },
+        { "type": "VAR", "var": "in_t2", "op": "set", "value": true }
+      ],
       "lines": [
         {
           "when": { "all": [{ "flag": "suc_duyurusu" }, { "flag": "savci_asil" }] },
@@ -298,6 +301,19 @@
             { "text": "kalın konili, eski tip bir kilit", "highlightWhen": { "hasEvidence": "clue_tarik_koni" } },
             { "text": " bu yarayla uyumlu olur." }
           ]
+        },
+        {
+          "id": "B5",
+          "order": 5,
+          "visibleWhen": { "flag": "press_b1" },
+          "segments": [
+            { "text": "Kırık ile ölüm aynı an değildir; " },
+            {
+              "text": "yaralı bir süre yürümüş, sonra yığılmış olabilir",
+              "highlightWhen": { "any": [{ "flag": "press_b5" }, { "hasEvidence": "ded_tasima" }] }
+            },
+            { "text": "." }
+          ]
         }
       ],
       "stage": {
@@ -351,6 +367,19 @@
                 {
                   "speaker": "karaca",
                   "text": "Düşmeyle oluşması mümkündür. Uyumlu demedim. Raporda da “düşme ile uyumlu” ifadesi yoktur."
+                },
+                {
+                  "speaker": "savci",
+                  "text": "Hocam, bir ekleme: kafa travmalarında kişi bir süre ayakta kalabilir, değil mi?"
+                },
+                {
+                  "speaker": "karaca",
+                  "text": "Kalabilir. Buna bilinç açıklığı denir. Kırık anı ile ölüm anı her zaman aynı değildir."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Savcının yedeği masaya kondu: yumruk, düşme, birkaç adım, ölüm. Bu tezi de kâğıtla karşılamam gerekecek.",
+                  "style": "thought"
                 }
               ]
             }
@@ -361,29 +390,38 @@
           ]
         },
         {
+          "id": "PS_B1_TEKRAR",
+          "kind": "PRESENT",
+          "match": { "statement": "B1", "evidence": ["ded_darbe", "ded_kan"] },
+          "enabledWhen": { "flag": "contra_b1" },
+          "maxUses": 99,
+          "responses": [{ "lines": [{ "speaker": "baskan", "text": "Bu husus tutanağa geçti, müdafi. Devam edin." }] }]
+        },
+        {
           "id": "PS_B1",
           "kind": "PRESENT",
           "match": { "statement": "B1", "evidence": ["ded_darbe"] },
+          "enabledWhen": { "flag": "b1_kan" },
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Hocam, kırık 3,2 santim, dairesel, kenarları keskin. Ön raporun dipnotunda frontalde karşı darbe lezyonu saptanmadığı yazıyor. Bir düşmede bu tablo beklenir mi?"
+                  "text": "Hocam, kırık 3,2 santim, dairesel, kenarları keskin. Nihai raporun histopatolojisinde frontalde karşı darbe lezyonu yok. Bir düşmede bu tablo beklenir mi?"
                 },
                 { "speaker": "narrator", "text": "Karaca raporunu açtı, bir sayfayı çevirdi, gözlüğünü düzeltti." },
                 {
                   "speaker": "karaca",
-                  "text": "Beklenmez. Hareketli başın sabit zemine çarptığı düşmelerde karşı kutupta da lezyon görürüz; burada yok. Kırığın şekli de geniş bir zemini değil, sınırlı yüzeyli bir cismi düşündürür."
+                  "text": "Hareketli başın geniş bir zemine çarptığı düşmelerde karşı kutupta da lezyon görürüz; burada yok. Kırığın şekli de geniş bir zemini değil, sınırlı yüzeyli bir cismi düşündürür."
                 },
                 {
                   "speaker": "karaca",
-                  "text": "Düzeltiyorum: tablo, sabit duran başa hareketli bir cisimle vurulmasıyla daha uyumludur."
+                  "text": "Babada da iz yoktu; az önce gösterdiniz. Düzeltiyorum: tablo, sabit duran başa hareketli bir cisimle vurulmasıyla uyumludur; düşmeyi dışlıyorum."
                 },
-                { "speaker": "uye", "text": "Hocam, “daha uyumlu” mu, yoksa düşme dışlanıyor mu?" },
+                { "speaker": "uye", "text": "Hocam, “uyumlu” mu, yoksa düşme dışlanıyor mu?" },
                 {
                   "speaker": "karaca",
-                  "text": "Tıpta kesinlik nadirdir, Sayın Üye. Ama bu tabloyu bir düşmeyle açıklamam için karşı darbe lezyonu görmem gerekirdi. Görmüyorum."
+                  "text": "Tıpta kesinlik nadirdir, Sayın Üye. Ama bu tabloyu bir düşmeyle açıklamam için karşı darbe lezyonu ya da çarpma izi görmem gerekirdi. İkisini de görmüyorum."
                 },
                 { "speaker": "baskan", "text": "Tutanağa geçsin." },
                 { "speaker": "narrator", "text": "Savcı kalemini bıraktı. Bir “oluşabilir” kaybetmişti." }
@@ -393,12 +431,120 @@
           "effects": [
             { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
             { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "b1_darbe", "op": "set", "value": true },
             { "type": "VAR", "var": "contra_b1", "op": "set", "value": true }
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Küçük dairesel çökme ve karşı darbe lezyonunun yokluğu: düşme değil, sabit başa hareketli cisimle darbe; bilirkişi raporunu daralttı.",
+            "feedback": "Küçük dairesel çökme, karşı darbe lezyonunun yokluğu ve babada iz olmaması: düşme değil, sabit başa hareketli cisimle darbe; bilirkişi raporunu daralttı.",
             "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_B1_DARBE",
+          "kind": "PRESENT",
+          "match": { "statement": "B1", "evidence": ["ded_darbe"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Hocam, kırık 3,2 santim, dairesel, kenarları keskin. Nihai raporun histopatolojisinde frontalde karşı darbe lezyonu yok. Bir düşmede bu tablo beklenir mi?"
+                },
+                { "speaker": "narrator", "text": "Karaca raporunu açtı, bir sayfayı çevirdi, gözlüğünü düzeltti." },
+                {
+                  "speaker": "karaca",
+                  "text": "Hareketli başın geniş bir zemine çarptığı düşmelerde karşı kutupta da lezyon görürüz; burada yok. Kırığın şekli de geniş bir zemini değil, sınırlı yüzeyli bir cismi düşündürür."
+                },
+                {
+                  "speaker": "savci",
+                  "text": "Hocam, babanın demir köşesi de sınırlı yüzeyli bir çıkıntıdır. Başı oraya çarpmış olamaz mı?"
+                },
+                {
+                  "speaker": "karaca",
+                  "text": "Oturur hâlde, kısa mesafeden geriye çarpmada karşı darbe zayıf kalabilir. Baş babaya çarptıysa bunu dışlayamam."
+                },
+                { "speaker": "player", "text": "Bir ayak kuruldu. Öbür ayak olay yerinde: baba.", "style": "thought" }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "b1_darbe", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kısmi isabet: karşı darbe yokluğu bilirkişiyi “cisim” ihtimaline yaklaştırdı; ama başın babanın köşesine çarpması ihtimali olay yeriyle kapatılmadı."
+          }
+        },
+        {
+          "id": "PS_B1_KAN",
+          "kind": "PRESENT",
+          "match": { "statement": "B1", "evidence": ["ded_kan"] },
+          "enabledWhen": { "flag": "b1_darbe" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Hocam, olay yeri fotoğrafı 9: babanın gövdesinde kan, yerden kırk santim yukarıda, damla damla aşağı doğru. Tepesinde ne kan ne saç ne doku. Ön rapor burun ve dudağı basit tıbbi müdahalelik sayıyor."
+                },
+                {
+                  "speaker": "karaca",
+                  "text": "Kafa derisi yarası bol kanar ve çarptığı yüzeyde doku bırakır. Babada iz yoksa baş babaya çarpmamıştır; o kan oturan birinin burnundan akmış."
+                },
+                {
+                  "speaker": "karaca",
+                  "text": "O hâlde kırık babada da oluşmamıştır. Karşı darbe yok, çarpma izi yok. Düzeltiyorum: tablo, sabit duran başa hareketli bir cisimle vurulmasıyla uyumludur; düşmeyi dışlıyorum."
+                },
+                { "speaker": "baskan", "text": "Tutanağa geçsin." },
+                { "speaker": "narrator", "text": "Savcı kalemini bıraktı. Bir “oluşabilir” kaybetmişti." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "b1_kan", "op": "set", "value": true },
+            { "type": "VAR", "var": "contra_b1", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Babada oturma hizasında kan, tepesinde doku yok: baş babaya çarpmadı. Karşı darbe yokluğuyla birlikte bilirkişi düşmeyi dışladı.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_B1_KAN_ONCE",
+          "kind": "PRESENT",
+          "match": { "statement": "B1", "evidence": ["ded_kan"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Hocam, olay yeri fotoğrafı 9: babanın gövdesinde kan, yerden kırk santim yukarıda, damla damla aşağı doğru. Tepesinde ne kan ne saç ne doku. Ön rapor burun ve dudağı basit tıbbi müdahalelik sayıyor."
+                },
+                {
+                  "speaker": "karaca",
+                  "text": "Kafa derisi yarası bol kanar ve çarptığı yüzeyde doku bırakır. Babada iz yoksa baş babaya çarpmamıştır; o kan oturan birinin burnundan akmış."
+                },
+                {
+                  "speaker": "karaca",
+                  "text": "Babada çarpma olmamış. Ama yere, rıhtımın betonuna düşmüş olabilir. Kırığın şeklini tartışmadan bir şey diyemem."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 150 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 },
+            { "type": "VAR", "var": "b1_kan", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kısmi isabet: baba temiz; ama kırığın şekli (karşı darbe) gösterilmeden bilirkişi başka bir zemine düşmeyi dışlamadı."
           }
         },
         {
@@ -452,10 +598,20 @@
           ]
         },
         {
+          "id": "PS_B2_TEKRAR",
+          "kind": "PRESENT",
+          "match": { "statement": "B2", "evidence": ["ded_saat"] },
+          "enabledWhen": { "flag": "contra_b2" },
+          "maxUses": 99,
+          "responses": [{ "lines": [{ "speaker": "baskan", "text": "Bu husus tutanağa geçti, müdafi. Devam edin." }] }]
+        },
+        {
           "id": "PS_B2",
           "kind": "PRESENT",
           "match": { "statement": "B2", "evidence": ["ded_saat"] },
-          "enabledWhen": { "any": [{ "hasEvidence": "ev_kantin" }, { "flag": "s3_kantin" }] },
+          "enabledWhen": {
+            "all": [{ "any": [{ "hasEvidence": "ev_kantin" }, { "flag": "s3_kantin" }] }, { "flag": "press_b2" }]
+          },
           "responses": [
             {
               "lines": [
@@ -465,12 +621,9 @@
                 },
                 {
                   "speaker": "karaca",
-                  "text": "Bu bilgi rapor yazılırken bana verilmedi. Verilseydi… Midede tanınabilir, yarı sindirilmiş içerik varsa ölüm son öğünden kısa süre sonradır; yarım saat ila bir buçuk saat."
+                  "text": "Bu bilgi rapor yazılırken bana verilmedi. Verilseydi… Midede tanınabilir, yarı sindirilmiş içerik varsa ölüm son öğünden sonraki ilk saatler içindedir. Sindirimden kesin bir saat çıkmaz."
                 },
-                {
-                  "speaker": "karaca",
-                  "text": "Son öğün 23.34 ise, ölüm 23.34’ten sonradır. Büyük olasılıkla gece yarısından önce."
-                },
+                { "speaker": "karaca", "text": "Ama sıralama kesindir: son öğün 23.34 ise, ölüm 23.34’ten sonradır." },
                 {
                   "speaker": "uye",
                   "text": "Hocam, sanığın 23.18’de limandan çıktığı kayıtlı. Ölüm o saatte gerçekleşmiş olabilir mi?"
@@ -494,7 +647,12 @@
           "id": "PS_B2_KAYITSIZ",
           "kind": "PRESENT",
           "match": { "statement": "B2", "evidence": ["ded_saat"] },
-          "enabledWhen": { "not": { "any": [{ "hasEvidence": "ev_kantin" }, { "flag": "s3_kantin" }] } },
+          "enabledWhen": {
+            "all": [
+              { "not": { "any": [{ "hasEvidence": "ev_kantin" }, { "flag": "s3_kantin" }] } },
+              { "flag": "press_b2" }
+            ]
+          },
           "responses": [
             {
               "lines": [
@@ -526,6 +684,27 @@
             "q": "NEUTRAL",
             "feedback": "Kısmi isabet: mide içeriği ile son öğün eşleşiyor; ama 23.34 saati duruşmaya getirilmiş bir kayda (kantin dökümü ya da tanık beyanı) dayanmıyordu (CMK 217/1)."
           }
+        },
+        {
+          "id": "PS_B2_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "B2", "evidence": ["ded_saat"] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Hocam, maktul 23.34’te kantinde tost ve ayran yemiş." },
+                {
+                  "speaker": "karaca",
+                  "text": "Bunu neden bana soruyorsunuz, müdafi? Raporda ölüm zamanını hangi bulgulara dayandırdığımı sormadınız."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Cevabı soru sormadan verdim; bilirkişi soruyu bilmeden cevabı tartamadı. Önce raporun neyi yorumlamadığını kendi ağzından duymalıydım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "PS_B2_TEL",
@@ -659,6 +838,123 @@
             "feedback": "Emanetteki SA-2 kilidinin konisi 2,6 cm; kırık 3,2 cm. Savcılığın aleti yarayla uyumlu değil.",
             "category": "SORGULAMA"
           }
+        },
+        {
+          "id": "PR_B5",
+          "kind": "PRESS",
+          "match": { "statement": "B5" },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Hocam, böyle bir kırıkla yaralı ne kadar yürür? Yürürken kanar mı?" },
+                {
+                  "speaker": "karaca",
+                  "text": "Açık bir çökme kırığında kafa derisi bol kanar. Yürüyen biri arkasında iz bırakır. Ne kadar yürüyeceği kişiye göre değişir."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Kanayan bir adam iz bırakır. İz bırakmayan bir adam ya yürümemiştir ya da kanamıyordur.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 25 },
+            { "type": "VAR", "var": "press_b5", "op": "set", "value": true }
+          ]
+        },
+        {
+          "id": "PS_B5_TEKRAR",
+          "kind": "PRESENT",
+          "match": { "statement": "B5", "evidence": ["ded_tasima"] },
+          "enabledWhen": { "flag": "contra_b5" },
+          "maxUses": 99,
+          "responses": [{ "lines": [{ "speaker": "baskan", "text": "Bu husus tutanağa geçti, müdafi. Devam edin." }] }]
+        },
+        {
+          "id": "PS_B5",
+          "kind": "PRESENT",
+          "match": { "statement": "B5", "evidence": ["ded_tasima"] },
+          "enabledWhen": { "flag": "press_b5" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, olay yeri ekibi rıhtım 4’ten B sahasına kadar her metreyi fotoğraflamış: on dört kare, tek damla kan yok. Kantinde de kan yok; maktul orada burnunda pamukla tost yemiş."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Cesedin yanında iki paralel topuk izi, konteynerlerin arasına doğru; hemen yanında taze, çift tekerli bir dönüş izi. Forkliftin tek lastiği var."
+                },
+                {
+                  "speaker": "karaca",
+                  "text": "Açık çökme kırığı olan biri üç yüz metre yürüse arkasında kan bırakırdı. Kan yoksa o yara yürüdüğü yolda açık değildi."
+                },
+                {
+                  "speaker": "karaca",
+                  "text": "Tıbben söyleyebileceğim şu: yara, cesedin bulunduğu yerde ya da çok yakınında açılmıştır. Bu tabloda bir bilinç açıklığı döneminden söz edemem."
+                },
+                { "speaker": "savci", "text": "Hocam, sürüklenme ölümden sonra da olabilir." },
+                {
+                  "speaker": "karaca",
+                  "text": "Olabilir, Sayın Savcı. Ama o zaman maktulü oraya biri götürmüştür. Kendi ayağıyla gitmemiştir."
+                },
+                { "speaker": "narrator", "text": "Mübaşirin kalemi bir an durdu. Başkan başını kaldırdı." },
+                { "speaker": "baskan", "text": "Tutanağa geçsin." }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 300 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 2 },
+            { "type": "VAR", "var": "contra_b5", "op": "set", "value": true }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Rıhtımdan B sahasına on dört karede tek damla kan yok; cesedin yanında topuk sürüklenme izi ve çift lastikli bir aracın dönüş izi: yaralı oraya yürümedi, yara bulunduğu yerde açıldı. Bilinç açıklığı tezi düştü.",
+            "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_B5_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "B5", "evidence": ["ded_tasima"] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Hocam, rıhtımdan B sahasına kadar yolda kan yok." },
+                { "speaker": "karaca", "text": "Olabilir, müdafi. Yağmur yağıyordu. Sorunuz nedir?" },
+                {
+                  "speaker": "player",
+                  "text": "Kâğıdı soru sormadan uzattım; bilirkişi yağmura sığındı. Önce böyle bir yaranın kanayıp kanamayacağını kendi ağzından söyletmeliydim.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "PS_B5_TEL",
+          "kind": "PRESENT",
+          "match": { "statement": "B5", "evidence": ["ded_canli"] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Hocam, maktul 23.41’de iki dakika telefonda konuşmuş." },
+                {
+                  "speaker": "karaca",
+                  "text": "Bu, savcılığın sorusunu destekler, müdafi. Konuşabilen biri bilinçlidir; bilinç açıklığı tam da budur."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Yanlış kâğıt. Yaşadığını gösteren bir kayıt, nerede ve nasıl yaralandığını göstermez. Yürüdü mü, taşındı mı: soru oydu.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "OB_B1",
@@ -1548,6 +1844,7 @@
           "id": "PS_N1",
           "kind": "PRESENT",
           "match": { "statement": "N1", "evidence": ["ded_cikis"] },
+          "enabledWhen": { "flag": "press_n1" },
           "responses": [
             {
               "lines": [
@@ -1577,6 +1874,27 @@
             "feedback": "Turnike (23.18 çıkış) ve büfenin kendi gün sonu fişi (23.37) tanığın “on bire doğru, belki daha erken” saatini düzeltti: sanık 23.18’e kadar limandaydı; dürüst tanığı yalancı çıkarmadan düzelttin.",
             "category": "SORGULAMA"
           }
+        },
+        {
+          "id": "PS_N1_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "N1", "evidence": ["ded_cikis"] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Usta, turnike dökümüne göre çocuk limandan 23.18’de çıkmış." },
+                {
+                  "speaker": "nail",
+                  "text": "Limanı bilmem ben avukat hanım. Büfeme ne zaman geldi, onu soruyorsunuz; ben de saate bakmam."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Limanın saatini ustanın büfesine bağlayan şey makineydi. Önce ona nasıl ödendiğini sormalıydım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "PS_N1_HESAP",
@@ -1641,6 +1959,7 @@
           "id": "PS_N2",
           "kind": "PRESENT",
           "match": { "statement": "N2", "evidence": ["ded_buf"] },
+          "enabledWhen": { "flag": "press_n2" },
           "responses": [
             {
               "lines": [
@@ -1678,6 +1997,27 @@
             "feedback": "Radyonun gece yarısı haberleri tanığın kendi saatini geri getirdi: sanık 00.00’a kadar iskelede. Savcının verdiği “on ikiye çeyrek kala” düştü.",
             "category": "SORGULAMA"
           }
+        },
+        {
+          "id": "PS_N2_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "N2", "evidence": ["ded_buf"] },
+          "responses": [
+            {
+              "lines": [
+                { "speaker": "player", "text": "Usta, çocuk gece yarısına kadar büfenizdeydi." },
+                {
+                  "speaker": "nail",
+                  "text": "Öyle mi dedim avukat hanım? Ben saate bakmam ki. Savcı bey on ikiye çeyrek dedi; olabilir."
+                },
+                {
+                  "speaker": "player",
+                  "text": "Ustaya onun saatini ben söyledim; savcının saatinden farkı kalmadı. Saati ona kendi hatırlatmalıydı: radyosu, jeneriği.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "PR_N3",
@@ -2909,18 +3249,36 @@
           "lines": [
             {
               "speaker": "baskan",
-              "text": "Müdafi, heyetin sabrını yeterince denediniz. Savunmanızı tamamlanmış kabul ediyoruz."
+              "text": "Müdafi, heyetin sabrını yeterince denediniz. Tanıklara yönelik sorularınız tamamlanmış sayılacak; ilgisiz sunumlar tutanağa geçmeyecek."
             },
             { "speaker": "narrator", "text": "Savcı dosyasını toplarken bana döndü. Sesinde ne zafer vardı ne alay." },
             {
               "speaker": "savci",
               "text": "Bir yumruğu savunmak zordur avukat hanım. Bir cinayeti savunmaktan zor. Çünkü yarısını kabul ederek başlarsınız."
             },
-            { "speaker": "baskan", "text": "Sanık, kısaca son sözünüz?" }
+            {
+              "speaker": "baskan",
+              "text": "Esas hakkındaki savunmanızı ve sanığın son sözünü yine alacağız; bu sizin değil, sanığın hakkı."
+            },
+            {
+              "speaker": "player",
+              "text": "Kürsüdeki sorularımı bitirdiler. Savunmanın kendisini bitiremezler. Elimde kalan tek şey, tutanağa önceden geçmiş olanlar.",
+              "style": "thought"
+            }
           ]
         }
       ],
-      "choices": [{ "id": "COKUS_SON", "kind": "CONTINUE", "label": "Son söz: “Ben öldürmedim.”", "next": "T_08" }]
+      "choices": [{ "id": "COKUS_SON", "kind": "CONTINUE", "label": "Duruşmaya devam", "next": "T_COKUS_K" }]
+    },
+    {
+      "id": "T_COKUS_K",
+      "type": "DECISION",
+      "chapter": "Bölüm 5 · İkinci Celse",
+      "eyebrow": "DURUŞMA · 2. CELSE",
+      "hud": ["cred", "pers"],
+      "title": "Çöküş",
+      "routes": [{ "when": { "flag": "etik_gulay" }, "to": "T_03E" }, { "to": "T_04" }],
+      "choices": []
     },
     {
       "id": "R_KARAR",
@@ -2936,9 +3294,22 @@
       "id": "tg_cokus",
       "priority": 0,
       "once": true,
-      "when": { "all": [{ "flag": "in_court" }, { "cmp": [{ "var": "cred" }, "<=", 0] }] },
+      "when": { "all": [{ "flag": "in_t2" }, { "cmp": [{ "var": "cred" }, "<=", 0] }] },
       "effects": [{ "type": "VAR", "var": "cokus", "op": "set", "value": true }],
       "goto": "T_COKUS"
+    },
+    {
+      "id": "tg_cokus1",
+      "priority": 0,
+      "once": true,
+      "when": {
+        "all": [{ "flag": "in_court" }, { "not": { "flag": "in_t2" } }, { "cmp": [{ "var": "cred" }, "<=", 0] }]
+      },
+      "effects": [
+        { "type": "VAR", "var": "cokus1", "op": "set", "value": true },
+        { "type": "VAR", "var": "cred", "op": "set", "value": 2 }
+      ],
+      "goto": "H1_COKUS"
     }
   ]
 }

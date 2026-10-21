@@ -13,11 +13,10 @@ import {
   thresholdBar,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, VariableDef } from '../../../tools/content/src/kit/index.js';
-import { T_BERAAT_B } from './outcomes.js';
 import { ARA_AP, ARA_DAYS, p1 } from './shared.js';
 
-// 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler. Sonuçlar olgulara bağlı; eşik çubuğunda yalnızca
-// 223/2-b'nin skor eşiği var (THRESHOLD_MISMATCH).
+// 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler. Sonuçlar yalnızca duruşma kaydındaki olgulara bağlı;
+// hiçbir sonuç skor eşiğine bakmaz, eşik çubuğunda tek bant var (THRESHOLD_MISMATCH).
 
 const pips = (id: string, label: string, initial: number, max: number): VariableDef => ({
   id,
@@ -92,10 +91,8 @@ export const meta: CasePart = {
       ],
       bonuses: [{ id: 'guven', label: 'Güvenilirlik bonusu', value: { mul: [{ var: 'cred' }, 100] } }],
       scaleMax: 11800,
-      thresholdBar: thresholdBar([
-        ['Savunma puanı', 0, 'amber'],
-        ['223/2-b eşiği', T_BERAAT_B, 'green'],
-      ]),
+      // Skor kararı belirlemez (CMK 217/1, 223): yalnızca XP'yi ve notu etkiler.
+      thresholdBar: thresholdBar([['Savunma puanı · karar olgulara bağlı', 0, 'amber']]),
       displayClampMin: 0,
     },
     objectionGrounds: [],
@@ -105,18 +102,22 @@ export const meta: CasePart = {
     { id: 'kart2', label: 'Tahtada en az 2 kart var', when: { cmp: [{ count: 'evidence', tag: 'kart' }, '>=', 2] } },
     {
       id: 'donus_yok',
-      // CMK 217/1: hüküm yalnızca duruşmada tartışılmış delile dayanır. Soruşturmada kurulan çıkarımlar (ded_cikis,
-      // ded_buf) kürsüde sunulmadıkça kayda geçmez: ya teşhis kayıtla çürütülür (K1) ya da büfeci ikinci celsede
-      // saatleri kayıtla sabitler (N1 + N2).
-      label: 'Sanığın olay yerine dönmediği duruşmada kayıtla gösterildi',
-      when: any(flag('contra_k1'), all(flag('contra_n1'), flag('contra_n2'))),
+      // CMK 217/1: hüküm yalnızca duruşmada tartışılmış delile dayanır. Teşhis iki ayakla düşer: (1) saat — tanığın
+      // kürsüde kesinleştirdiği 23.40 kayıtla çürütülür (K1: turnike + büfe fişi; ya da büfecinin ikinci celsedeki
+      // beyanı N1); (2) teşhisin kendisi — ışık yoktu (K2: projektör bakım etiketi) ya da sanık gece yarısına kadar
+      // iskeledeydi (N2: büfecinin radyosu). Yalnız saat çürürse tanık saatini esnetir ve yüze tutunur; yalnız ışık
+      // düşerse yürüyüşe ve saate tutunur.
+      label: 'Sanığın olay yerine döndüğünü söyleyen teşhis duruşmada kayıtla çürütüldü',
+      when: all(any(flag('contra_k1'), flag('contra_n1')), any(flag('contra_k2'), flag('contra_n2'))),
     },
     {
       id: 'olum_sonra',
-      // Düşme mekanizmasını (ve yumruk → düşme → gecikmiş ölüm ihtimalini) dışlayan darbe şekli (B1) ile ölümün sanığın
-      // ayrılışından sonra geldiğini gösteren saat (B2) birlikte gerekir; kilit ölçüsü (B3) tek başına bunların yerini tutmaz.
-      label: 'Ölümün düşmeden değil, sanığın ayrılışından sonra bir cisimle geldiği gösterildi',
-      when: all(flag('contra_b1'), flag('contra_b2')),
+      // Savcılığın 87/4 yedek tezi “yumruk → babaya düşme → birkaç adım → ölüm”dür. Üç ayağı da bilirkişi kürsüde
+      // düzeltmelidir: B1 darbe şekli + olay yeri (karşı darbe yok ve babada iz yok: düşme değil), B2 saat (son öğün
+      // kayıtta: ölüm 23.34'ten, yani sanığın çıkışından sonra), B5 yer (yolda kan yok, sürüklenme + araç izi: yaralı
+      // yürümedi, bilinç açıklığı yok). Kilit ölçüsü (B3) gerekçeye girer, bunların yerini tutmaz.
+      label: 'Ölümün düşmeden değil, sanığın ayrılışından sonra ve bulunduğu yerde bir cisimle geldiği gösterildi',
+      when: all(flag('contra_b1'), flag('contra_b2'), flag('contra_b5')),
     },
   ],
   variables: [
@@ -222,6 +223,12 @@ export const meta: CasePart = {
       'contra_b1',
       'contra_b2',
       'contra_b3',
+      'b1_darbe',
+      'b1_kan',
+      'press_b5',
+      'contra_b5',
+      'cokus1',
+      'in_t2',
       'press_k5',
       'press_k6',
       'press_k7',

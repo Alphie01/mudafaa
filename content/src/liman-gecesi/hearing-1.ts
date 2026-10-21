@@ -25,6 +25,7 @@ import {
   statement,
   story,
   v,
+  visited,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart, ChoiceDef } from '../../../tools/content/src/kit/index.js';
 import { B, O, T, W } from './dsl.js';
@@ -51,6 +52,14 @@ export const savcilikRule = (id: string, who: string): ChoiceDef =>
 savci: Sayın Başkan, müdafi bizim delilimizi sunuyor. Teşekkür ederiz.
 baskan: Müdafi, ${who} beyanıyla bu belgenin ilgisini açıklayın. … Açıklamıyorsunuz. Devam edin.
 `),
+  });
+
+/** Çelişki kurulduktan sonra aynı delilin yeniden sunulması: ceza yok, puan yok (sıra: önce bu kural). */
+export const tekrar = (id: string, statementId: string, evidence: readonly string[], done: string): ChoiceDef =>
+  presentRule(id, statementId, evidence, {
+    enabledWhen: flag(done),
+    maxUses: 99,
+    responses: B(`baskan: Bu husus tutanağa geçti, müdafi. Devam edin.`),
   });
 
 const presentMiss = (id: string) =>
@@ -577,7 +586,7 @@ kenan/uzgun: Keşke emin olmasaydım.
 `),
       statements: [
         statement('K1', 1, [
-          'On bire yirmi var gibi tur attım. ',
+          'On ikiye yirmi var gibi tur attım. ',
           hl('B sahasının ağzında Tarık’ı gördüm', any(flag('press_k1'), has('ded_cikis'), has('ev_hesap'))),
           '.',
         ]),
@@ -603,13 +612,17 @@ kenan/uzgun: Keşke emin olmasaydım.
           effects: [raise('press_k1')],
           responses: B(`
 - Saatten emin misiniz?
-kenan: Aşağı yukarı kızım… Avukat hanım. Defteri yazdım, kalktım, tur attım. On bire yirmi var. Yirmi yıldır her gece aynı saatte tur atarım.
+kenan: Aşağı yukarı kızım… Avukat hanım. Defteri yazdım, kalktım, tur attım. On ikiye yirmi var. Yirmi yıldır her gece aynı saatte tur atarım.
 `),
         }),
+        tekrar('PS_K1_TEKRAR', 'K1', ['ded_cikis'], 'contra_k1'),
+        // K1: önce tanığın saati kürsüde kesinleştirilir (BASTIR), sonra kayıt gösterilir. Kayıt saati çürütür; ışık
+        // (K2) ya da büfecinin gece yarısı beyanı (N2) da kayıttaysa teşhis düşer, değilse tanık saatini esnetir.
         presentRule('PS_K1', 'K1', ['ded_cikis'], {
+          enabledWhen: all(flag('press_k1'), flag('contra_k2')),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_k1')],
-          good: 'Turnike dökümü (23.18 çıkış, sonra giriş yok), büfenin gün sonu fişi ve banka kaydı (23.37) birlikte: 23.40’taki teşhis mümkün değil.',
+          good: 'Turnike dökümü (23.18 çıkış, sonra giriş yok), büfenin gün sonu fişi ve banka kaydı (23.37) birlikte: tanığın kesinleştirdiği 23.40’taki teşhis mümkün değil.',
           category: 'SORGULAMA',
           responses: B(`
 - Sayın Başkan, liman turnike dökümü: sanığın kartı 23.18.42’de 2 numaralı turnikeden çıkış. Sabaha kadar bu kartla başka geçiş yok.
@@ -619,6 +632,30 @@ kenan: Başka kapıdan girmiştir. Tel örgü… delik olur bazen.
 baskan: Tanık, limanda tel örgüde bildiğiniz bir delik var mı?
 kenan: Yok efendim. Yani… bilmiyorum.
 ~ İlk çatlak. Bir tanığın kendi limanını bilmediğini söylemesi.
+`),
+        }),
+        presentRule('PS_K1_SAAT', 'K1', ['ded_cikis'], {
+          enabledWhen: flag('press_k1'),
+          score: { SORGULAMA: 300 },
+          effects: [inc('pers', 2), raise('contra_k1')],
+          good: 'Turnike ve büfe kayıtları tanığın yeminle kesinleştirdiği saati çürüttü: 23.40’ta sanık iskeledeydi (CMK 217). Teşhisin kendisi ise henüz ayakta.',
+          category: 'SORGULAMA',
+          responses: B(`
+- Sayın Başkan, liman turnike dökümü: sanığın kartı 23.18.42’de 2 numaralı turnikeden çıkış. Sabaha kadar bu kartla başka geçiş yok.
+- İskele büfesinin gün sonu fişi: 23.37, kart, iki çay. Bankadaki satır aynı saat, aynı tutar. Büfe personel kapısından yirmi dakika.
+> Kenan kâğıtlara baktı. Uzun uzun. Sonra başını kaldırdı; sesi yumuşaktı, neredeyse özür diler gibi.
+kenan: Saati yanlış biliyorum demek. Yaşlandım efendim. Belki daha geçti; on ikiye doğru. Belki daha erkendi, ben ayırdıktan hemen sonra.
+kenan: Ama gördüm. Saat yanılır; göz yanılmaz. Projektörün altındaydı. Yüzünü gördüm.
+baskan: Tanık, saatten emin değilsiniz ama kişiden eminsiniz, öyle mi?
+kenan/uzgun: Eminim efendim. Keşke olmasaydım.
+~ Saati düşürdüm, yüzü düşüremedim. Saat esneyen bir şeydir; tanık onu istediği yere çeker. Bir yüzü görmek içinse ışık gerekir.
+`),
+        }),
+        presentRule('PS_K1_ERKEN', 'K1', ['ded_cikis'], {
+          responses: B(`
+- Sayın Başkan, turnike dökümüne göre sanık 23.18’de limandan çıkmış.
+kenan: “On ikiye yirmi var gibi” dedim avukat hanım. “Gibi.” Saat tutmadım ki. Belki daha önceydi, belki sonra.
+~ Saatini bağlamadan kâğıdı gösterdim; tanık kâğıdın etrafından dolaştı. Önce saati kendi ağzıyla kesinleştirmeliydi.
 `),
         }),
         presentRule('PS_K1_KISMI', 'K1', ['ev_turnike', 'ev_hesap', 'ded_buf'], {
@@ -641,7 +678,10 @@ baskan: Müdafi, bir kâğıt bir saati gösterir; tanık bir yüz. İkisini bir
 kenan: Yanıyordu tabii. Liman gece yanar. Gündüz gibiydi.
 `),
         }),
+        tekrar('PS_K2_TEKRAR', 'K2', ['ded_isik', 'clue_projektor'], 'contra_k2'),
+        // K2: önce tanığın ışık iddiası kürsüde kesinleştirilir (BASTIR), sonra direkteki bakım etiketi gösterilir.
         presentRule('PS_K2', 'K2', ['ded_isik', 'clue_projektor'], {
+          enabledWhen: all(flag('press_k2'), flag('contra_k1')),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_k2')],
           good: 'Projektör direğindeki bakım etiketi: 23.00–02.00 enerji yok. “Gündüz gibi” ışık yoktu; teşhisin dayanağı düştü.',
@@ -653,6 +693,29 @@ kenan: Bakım… Evet. Bakım vardı o gece. Unutmuşum. Rıhtımın ışığı 
 uye: Rıhtımın ışığı B sahasının ağzına ne kadar uzakta, tanık?
 kenan: Üç yüz metre efendim.
 ~ Üç yüz metre, gece, yağmur, sönük projektörler. “Gündüz gibi” değil.
+`),
+        }),
+        presentRule('PS_K2_YURUYUS', 'K2', ['ded_isik', 'clue_projektor'], {
+          enabledWhen: flag('press_k2'),
+          score: { SORGULAMA: 300 },
+          effects: [inc('pers', 2), raise('contra_k2')],
+          good: 'Projektör direğindeki bakım etiketi: 23.00–02.00 enerji yok. “Gündüz gibi” ışık yoktu; yüz teşhisinin dayanağı düştü (tanık saatine ve yürüyüşe tutunuyor).',
+          category: 'SORGULAMA',
+          responses: B(`
+- Sayın Başkan, olay yeri fotoğrafı 17. B sahasının projektör direği. Etiket: “14/11 · 23.00–02.00 · bakım · enerji yok.”
+> Kenan fotoğrafa baktı. Uzun uzun. Sonra gözlerini kapadı, açtı.
+kenan: Bakım… Evet. Bakım vardı o gece. Unutmuşum. Rıhtımın ışığı vardı ama. Uzaktan…
+uye: Rıhtımın ışığı B sahasının ağzına ne kadar uzakta, tanık?
+kenan: Üç yüz metre efendim.
+kenan: Ama ben o çocuğu yürüyüşünden tanırım efendim. Yirmi yıldır her işçiyi yürüyüşünden tanırım. Saati de biliyorum: on ikiye yirmi var.
+~ Üç yüz metre, gece, yağmur, sönük projektörler. “Gündüz gibi” değil. Ama bir yürüyüş ve bir saat hâlâ kürsüde; saati de kâğıtla bağlamak gerekiyor.
+`),
+        }),
+        presentRule('PS_K2_ERKEN', 'K2', ['ded_isik', 'clue_projektor'], {
+          responses: B(`
+- Sayın Başkan, olay yeri fotoğrafı 17: projektör direğinde bir bakım etiketi.
+kenan: Hangi direk o avukat hanım? Limanda yüz direk var. Ben gördüğümü söyledim.
+~ Tanığın hangi ışığı kastettiğini önce onun ağzından duymadan fotoğrafı gösterdim; o da fotoğrafın yanından geçti.
 `),
         }),
         pressRule('PR_K3', 'K3', {
@@ -733,6 +796,22 @@ tarik: Abi… ben orada değildim.
 `),
       ],
     }),
+    // İlk celsede güvenilirlik biterse (tg_cokus1) heyet o tanığın sorgusunu keser; celse talepler ve tutuklulukla sürer.
+    decisionNode(
+      'H1_COKUS',
+      [{ when: visited('H1_07'), to: 'H1_08' }, { when: visited('H1_06'), to: 'H1_07' }, { to: 'H1_06' }],
+      {
+        ...court1.base,
+        title: 'Heyetin sabrı',
+        onEnter: [dec('pers', 2), mark('BAD', 'İlk celsede güvenilirliğin tükendi; heyet tanık sorgunu kesti.', 'SORGULAMA')],
+        lines: B(`
+baskan: Müdafi, tanığa ilgisiz belgeler sunmaya devam ediyorsunuz. Bu tanığa yönelik sorularınız tamamlanmış sayılacak.
+> Savcı başını kaldırmadı bile. Üye hâkim önündeki kâğıda bir şey yazdı; kısa, tek kelime.
+baskan: Tutanağa geçsin: müdafiin tanığa sorusu kalmamıştır. Devam ediyoruz.
+~ Bir celsede bir kez düşersin; ikinci celsede heyet bunu hatırlar. Kâğıtlarımı bundan sonra yalnızca doğru yere koyacağım.
+`),
+      },
+    ),
     story('H1_06', {
       ...court1.base,
       title: 'Ara karar talepleri',
@@ -812,7 +891,7 @@ baskan: Müdafi?
         option('H107_A', 'Adli kontrolle tahliye: dönüş kayıtla çürüdü, kuvvetli şüphe kalmadı', {
           effects: [
             ifThen(
-              flag('contra_k1'),
+              all(flag('contra_k1'), flag('contra_k2')),
               [
                 raise('released'),
                 score('USUL_BILGISI', 100),
@@ -827,7 +906,7 @@ baskan: Müdafi?
           ],
           responses: [
             W(
-              flag('contra_k1'),
+              all(flag('contra_k1'), flag('contra_k2')),
               `
 - Sayın Başkan, sanığın 23.18’de limandan çıktığı kayıtla sabit. Teşhis eden tanık emin olmadığını söyledi. Kuvvetli suç şüphesi kalmamıştır; adli kontrol yeterlidir.
 > Heyet kısa bir müzakere için başlarını yaklaştırdı.

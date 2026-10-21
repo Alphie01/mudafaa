@@ -88,10 +88,7 @@
       ],
       "bonuses": [{ "id": "guven", "label": "Güvenilirlik bonusu", "value": { "mul": [{ "var": "cred" }, 100] } }],
       "scaleMax": 11800,
-      "thresholdBar": [
-        { "label": "Savunma puanı", "from": 0, "tone": "amber" },
-        { "label": "223/2-b eşiği", "from": 10000, "tone": "green" }
-      ],
+      "thresholdBar": [{ "label": "Savunma puanı · karar olgulara bağlı", "from": 0, "tone": "amber" }],
       "displayClampMin": 0
     },
     "objectionGrounds": [],
@@ -105,13 +102,18 @@
     },
     {
       "id": "donus_yok",
-      "label": "Sanığın olay yerine dönmediği duruşmada kayıtla gösterildi",
-      "when": { "any": [{ "flag": "contra_k1" }, { "all": [{ "flag": "contra_n1" }, { "flag": "contra_n2" }] }] }
+      "label": "Sanığın olay yerine döndüğünü söyleyen teşhis duruşmada kayıtla çürütüldü",
+      "when": {
+        "all": [
+          { "any": [{ "flag": "contra_k1" }, { "flag": "contra_n1" }] },
+          { "any": [{ "flag": "contra_k2" }, { "flag": "contra_n2" }] }
+        ]
+      }
     },
     {
       "id": "olum_sonra",
-      "label": "Ölümün düşmeden değil, sanığın ayrılışından sonra bir cisimle geldiği gösterildi",
-      "when": { "all": [{ "flag": "contra_b1" }, { "flag": "contra_b2" }] }
+      "label": "Ölümün düşmeden değil, sanığın ayrılışından sonra ve bulunduğu yerde bir cisimle geldiği gösterildi",
+      "when": { "all": [{ "flag": "contra_b1" }, { "flag": "contra_b2" }, { "flag": "contra_b5" }] }
     }
   ],
   "variables": [
@@ -387,6 +389,12 @@
     { "id": "contra_b1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "contra_b2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "contra_b3", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "b1_darbe", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "b1_kan", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "press_b5", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "contra_b5", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "cokus1", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "in_t2", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "press_k5", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "press_k6", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "press_k7", "type": "bool", "initial": false, "visibility": "HIDDEN" },

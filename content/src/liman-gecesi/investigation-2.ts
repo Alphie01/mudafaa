@@ -209,6 +209,29 @@ const hubTabs = [
   },
 ];
 
+/** Arada EP harcanacak yer kalmadı (yumuşak kilit önlemi). */
+const ARA_TUKENDI = all(
+  chosen('A_SEVIM'),
+  chosen('A_TARIK'),
+  any(chosen('A_NURTEN'), not(any(has('ev_gps'), has('ev_abone'), has('ded_tasima')))),
+  any(chosen('A_KENAN'), not(any(has('ev_abone'), has('ev_gps')))),
+  chosen('A_EMANET'),
+  chosen('A_SAVCI'),
+  any(chosen('A_ATK'), not(has('ev_atk'))),
+  any(chosen('A_KAYIT'), not(has('ev_gps'))),
+  any(chosen('A_DEFTER'), not(has('ev_defter'))),
+  any(
+    chosen('A_TALEP'),
+    not(
+      any(
+        all(has('clue_servis_arac'), not(flag('talep_gps'))),
+        all(has('clue_arama2341'), not(flag('talep_abone'))),
+        all(has('ev_atk'), not(flag('talep_atk'))),
+      ),
+    ),
+  ),
+);
+
 const hub = {
   id: HUB,
   type: 'INVESTIGATION' as const,
@@ -246,8 +269,9 @@ const hub = {
     ...hubTabs.flatMap((t) => t.choices),
     rawChoice('NAVIGATE', 'GO_T2', 'DURUŞMAYA GİT · 2. CELSE', {
       role: 'PRIMARY',
-      // Duruşma günü bellidir: ikinci celseye ancak aranın son gününde gidilir.
-      visibleWhen: cmp(v('ara_day'), '>=', ARA_DAYS),
+      // Duruşma günü bellidir: ikinci celseye aranın son gününün eylem puanları kullanıldıktan sonra gidilir (gidilecek
+      // yer kalmadıysa hemen).
+      visibleWhen: all(cmp(v('ara_day'), '>=', ARA_DAYS), any(cmp(v('ara_ap'), '<=', 0), ARA_TUKENDI)),
       confirm: 'Duruşmaya gidersen ara biter. Emin misin?',
       next: 'ARA_SON_1',
     }),

@@ -1,23 +1,21 @@
 import {
   all,
+  any,
   because,
-  cmp,
-  finalAtLeast,
   flag,
   not,
   outcome,
   ref,
-  v,
   xp,
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { O, W } from './dsl.js';
 
-// 70-outcomes: sonuçlar (öncelik sırasıyla) ve sonuca bağlı epiloglar. Eşikler meta'daki eşik çubuğuyla aynı.
+// 70-outcomes: sonuçlar (öncelik sırasıyla) ve sonuca bağlı epiloglar. Hiçbir sonuç skor eşiğine bakmaz.
 
-// Sonuçlar kayıttaki olgulara bağlıdır (dönüş yok + ölüm sonra → beraat; yalnızca dönüş yok → 87/4; ikisi de yoksa
-// 81/1 + 21/2). Skor yalnızca XP'yi, notu ve 223/2-b ile 2-e arasındaki ayrımı (gerçek fail olgusu üstüne) etkiler.
-export const T_BERAAT_B = 10000;
+// Sonuçlar yalnızca duruşma kaydındaki olgulara bağlıdır (CMK 217/1): dönüş yok + ölüm sonra → beraat (gerçek fail
+// kayıtta ve savcılığa bildirilmişse 223/2-b, değilse 223/2-e); yalnızca dönüş yok → 87/4; teşhis ayaktaysa 81/1 + 21/2.
+// Skor hiçbir hükmü seçmez; yalnızca XP'yi ve notu etkiler.
 
 const tahliye =
   'tutuklu ise derhâl TAHLİYESİNE, adli kontrol altındaysa tedbirin kaldırılmasına; CMK 141/1-e uyarınca tazminat hakkının bulunduğunun ve istemin CMK 142 ile 6384 sayılı Kanuna göre yapılabileceğinin bildirilmesine (CMK 231/3)';
@@ -76,14 +74,7 @@ leyla: Genç bir kadın. İyi. Turnike kaydını ilk gün istemiş. Sevim Yavuz�
     outcome('BERAAT_B', {
       class: 'ACQUITTAL',
       priority: 2,
-      when: all(
-        not(flag('cokus')),
-        flag('gercek_fail'),
-        ref('donus_yok'),
-        ref('olum_sonra'),
-        cmp(v('pers'), '>=', 8),
-        finalAtLeast(T_BERAAT_B),
-      ),
+      when: all(not(flag('cokus')), flag('gercek_fail'), ref('donus_yok'), ref('olum_sonra')),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -96,8 +87,12 @@ leyla: Genç bir kadın. İyi. Turnike kaydını ilk gün istemiş. Sevim Yavuz�
           flag('contra_b2'),
         ),
         because(
-          'Kırık, yumrukla düşmeden değil, sabit duran başa sınırlı yüzeyli bir cisimle vurulmasından oluşmuştur.',
+          'Kırık, yumrukla düşmeden değil, sabit duran başa sınırlı yüzeyli bir cisimle vurulmasından oluşmuştur; babada çarpma izi yoktur.',
           flag('contra_b1'),
+        ),
+        because(
+          'Yaralı olay yerine yürümemiştir: yolda kan yoktur, yara cesedin bulunduğu yerde açılmıştır; bilinç açıklığı tezi dayanaksızdır.',
+          flag('contra_b5'),
         ),
         because('Emanetteki kilit yaranın ölçüsüne uymamaktadır; savcılığın gösterdiği alet ölümle bağlantılı değildir.', flag('contra_b3')),
         because(
@@ -111,7 +106,7 @@ leyla: Genç bir kadın. İyi. Turnike kaydını ilk gün istemiş. Sevim Yavuz�
       legalBasis: 'CMK 223/2-b, 223/8; TCK 86/2, 73; CMK 141/1-e, 142, 231/3',
       xp: xp(1.2, { ethicsVar: 'ethics' }),
       howToReach:
-        'Dönüşün olmadığını ve ölümün sonradan geldiğini kanıtla; abone, araç ve zimmet kayıtlarını savcılığa yazılı bildir; ikinci celsede vardiya şefinin beyanlarını kayıtla çürüt ve esas savunmada gerçek faili göster.',
+        'Teşhisi ve savcılığın yedek tezini kayıtla çürüt; abone, araç ve zimmet kayıtlarını savcılığa yazılı bildir; ikinci celsede vardiya şefinin beyanlarını kayıtla çürüt ve esas savunmada gerçek faili göster. Skor bu hükmü belirlemez.',
       epilogue: [
         O(`
 baskan: Türk Milleti adına…
@@ -159,24 +154,38 @@ tarik: Ağabey… ayağına bakmazdın derler. Ben baktım. Bir kere yine de tö
       verdictText: `Sanık Tarık Demirel’in üzerine atılı kasten öldürme suçunu işlediği sabit olmadığından CMK 223/2-e uyarınca BERAATİNE; ${dusme}; ${tahliye}; ${istinaf}`,
       reasoning: [
         because(
-          'Sanığı olay yerine dönerken gördüğünü söyleyen tanığın teşhisi, sanığın 23.18’de limandan çıktığını gösteren kayıtlar ve aydınlatmanın kapalı olduğu karşısında güvenilirliğini yitirmiştir.',
+          'Tanığın yeminle kesinleştirdiği 23.40, sanığın 23.18’de limandan çıktığını ve 23.37’de iskele büfesinde ödeme yaptığını gösteren kayıtlarla çürümüştür.',
           flag('contra_k1'),
         ),
         because(
-          'Sanığın 23.18’de limandan çıktığı ve 23.37’de iskele büfesinde bulunduğu kayıtlarla anlaşılmıştır; olay yerine döndüğü ispatlanamamıştır.',
-          not(flag('contra_k1')),
+          'Sanığın 23.18’de limandan çıktığı ve 23.37’de iskele büfesinde bulunduğu kayıtlar ve büfe sahibinin beyanıyla anlaşılmıştır.',
+          all(flag('contra_n1'), not(flag('contra_k1'))),
         ),
+        because(
+          'Projektörlerin bakım nedeniyle kapalı olduğu bir sahada tanığın yüz seçmesi mümkün değildir; teşhisin dayanağı yoktur.',
+          flag('contra_k2'),
+        ),
+        because(
+          'Büfe sahibi, sanığın gece haberleri başlayana, saat on ikiye kadar büfede oturduğunu yeminle beyan etmiştir.',
+          flag('contra_n2'),
+        ),
+        because('Sanığın olay yerine döndüğü ispatlanamamıştır.'),
         because('Ölüme yol açan kırık, düşmeyle değil sınırlı yüzeyli bir cisimle oluşmuştur.', flag('contra_b1')),
         because('Maktulün 23.34’ten sonra yaşadığı mide içeriği ve kayıtlarla anlaşılmıştır.', flag('contra_b2')),
+        because('Yara cesedin bulunduğu yerde açılmıştır; maktul oraya yaralı olarak yürümemiştir.', flag('contra_b5')),
         because('Emanetteki kilit yaranın ölçüsüne uymamaktadır.', flag('contra_b3')),
         because(
           'Sanığın suçu işlediğine dair kesin ve inandırıcı delil yoktur; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2).',
+        ),
+        because(
+          'Müdafiin ikinci celsedeki ilgisiz delil sunumları tutanağa geçmemiş; hüküm, ondan önce duruşmada tartışılmış delillere dayanmıştır.',
+          flag('cokus'),
         ),
       ],
       legalBasis: 'CMK 223/2-e, 223/8; TCK 86/2; Anayasa 38/4; AİHS 6/2; CMK 141/1-e, 142, 231/3',
       xp: xp(1, { ethicsVar: 'ethics' }),
       howToReach:
-        'Sanığın dönmediğini kürsüde kayıtla göster (teşhisi çürüt ya da büfecinin saatlerini kayıtla sabitle); ikinci celsede bilirkişiye darbe şeklini ve ölüm saatini kâğıtla göster. Karar duruşmada tartışılan bu olgulara bakar (CMK 217/1); esas savunmanın adı puanı ve notu belirler.',
+        'Teşhisi iki ayağından çürüt: saati kayıtla (turnike + büfe fişi), yüzü ışıkla (bakım etiketi) ya da büfecinin gece yarısı beyanıyla. İkinci celsede bilirkişiye darbe şeklini ve olay yerini, ölüm saatini ve yolda kan olmadığını kâğıtla göster. Karar duruşmada tartışılan bu olgulara bakar (CMK 217/1).',
       epilogue: [
         O(`
 baskan: Türk Milleti adına…
@@ -246,12 +255,16 @@ leyla: Kantinleri biz düzeltemeyiz. Duyurunu yazdın; gerisi savcılığın. Be
           all(not(flag('contra_b1')), not(flag('contra_b2'))),
         ),
         because(
-          'Maktulün 23.41’den sonra yaşadığı anlaşılmışsa da düşmeye bağlı kafa travmalarında ölüm bir bilinç açıklığı döneminden sonra gelebilir; darbe şeklini düşmeden ayıran bir bulgu kürsüde ortaya konmadığından yumruk ile ölüm arasındaki bağ kopmamıştır.',
+          'Maktulün 23.34’ten sonra yaşadığı anlaşılmışsa da düşmeye bağlı kafa travmalarında ölüm bir bilinç açıklığı döneminden sonra gelebilir; darbe şeklini düşmeden ayıran bir bulgu kürsüde ortaya konmadığından yumruk ile ölüm arasındaki bağ kopmamıştır.',
           all(flag('contra_b2'), not(flag('contra_b1'))),
         ),
         because(
-          'Bilirkişi kırığın sınırlı yüzeyli bir cisimle oluşabileceğini söylemişse de ölümün sanığın limandan ayrılmasından sonra geldiği ortaya konmamıştır; heyet darbenin kavga sırasında oluştuğu ihtimalini dışlayamamış, kuşkuyu sanık lehine en hafif nitelikte değerlendirmiştir.',
+          'Bilirkişi kırığın sınırlı yüzeyli bir cisimle oluştuğunu söylemişse de ölümün sanığın limandan ayrılmasından sonra geldiği ortaya konmamıştır; heyet darbenin kavga sırasında oluştuğu ihtimalini dışlayamamış, kuşkuyu sanık lehine en hafif nitelikte değerlendirmiştir.',
           all(flag('contra_b1'), not(flag('contra_b2'))),
+        ),
+        because(
+          'Bilirkişi darbenin bir cisimle vurulduğunu ve ölümün 23.34’ten sonra geldiğini söylemişse de yaralının kavga yerinden bir bilinç açıklığı döneminde yürüdüğü ihtimali kürsüde kayıtla dışlanmamıştır; heyet darbenin kavga sırasında oluştuğu ihtimalini dışlayamamış, kuşkuyu sanık lehine en hafif nitelikte değerlendirmiştir.',
+          all(flag('contra_b1'), flag('contra_b2'), not(flag('contra_b5'))),
         ),
         because(
           'Maktulün sanığın ölen ağabeyiyle alay etmesi, yüzüne tükürmesi ve onu itmesi haksız fiildir (TCK 29).',
@@ -261,7 +274,7 @@ leyla: Kantinleri biz düzeltemeyiz. Duyurunu yazdın; gerisi savcılığın. Be
       legalBasis: 'TCK 87/4, 86/1–2, 29, 62/1, 53, 63; CMK 226, 273/1',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        'Dönüşün olmadığını kürsüde kanıtla ama bilirkişiye hem darbe şeklini hem ölüm saatini kâğıtla göstermezsen mahkeme savcılığın yedek tezini (yumruk → düşme → ölüm, TCK 87/4) benimser.',
+        'Teşhisi çürütürsün ama bilirkişiye darbe şeklini (karşı darbe + babadaki kan), ölüm saatini ve yolda kan olmadığını kâğıtla göstermezsen mahkeme savcılığın yedek tezini (yumruk → düşme → birkaç adım → ölüm, TCK 87/4) benimser.',
       epilogue: [
         O(`
 baskan: Türk Milleti adına… altı yıl üç ay hapis cezasıyla…
@@ -300,7 +313,15 @@ leyla: İstinaf dosyaya bakar, senin vicdanına değil. Kâğıtları topla. İk
       reasoning: [
         because(
           'Tanık beyanları ve kavga sonrası teşhis, sanığın olay yerine döndüğü yönündeki iddiayı desteklemiştir.',
-          not(flag('contra_k1')),
+          all(not(flag('contra_k1')), not(flag('contra_n1')), not(flag('contra_k2')), not(flag('contra_n2'))),
+        ),
+        because(
+          'Tanık saat konusunda yanılmış olabileceğini kabul etmiş, ancak sanığı yüzünden tanıdığını sürdürmüştür; teşhisin dayanağı olan aydınlatma ve sanığın gece yarısına kadar nerede olduğu kürsüde kayıtla tartışılmamıştır.',
+          all(any(flag('contra_k1'), flag('contra_n1')), not(flag('contra_k2')), not(flag('contra_n2'))),
+        ),
+        because(
+          'Aydınlatmanın kapalı olduğu anlaşılmışsa da tanık sanığı yürüyüşünden tanıdığını ve gördüğü saati sürdürmüştür; sanığın o saatte başka yerde olduğu kürsüde kayıtla gösterilmemiştir.',
+          all(any(flag('contra_k2'), flag('contra_n2')), not(flag('contra_k1')), not(flag('contra_n1'))),
         ),
         because(
           'Başın arkasına sert bir cisimle vurulan darbede ölüm neticesinin öngörüldüğü kabul edilmiştir (TCK 21/2).',
@@ -316,7 +337,7 @@ leyla: İstinaf dosyaya bakar, senin vicdanına değil. Kâğıtları topla. İk
         if: { when: flag('cokus'), then: xp(0.3, { ethicsVar: 'ethics' }), else: xp(0.6, { ethicsVar: 'ethics' }) },
       },
       howToReach:
-        'Varsayılan sonuç: sanığın olay yerine dönmediğini kayıtla gösteremezsen teşhis ayakta kalır ve heyet iddianamedeki anlatımı esas alır.',
+        'Varsayılan sonuç: teşhisi iki ayağından (saat ve yüz) kayıtla çürütemezsen teşhis ayakta kalır ve heyet iddianamedeki anlatımı esas alır.',
       epilogue: [
         O(`
 baskan: Türk Milleti adına… on altı yıl sekiz ay hapis cezasıyla…

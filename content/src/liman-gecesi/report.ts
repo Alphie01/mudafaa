@@ -112,8 +112,41 @@ export const report: CasePart = {
       hint(
         'h_olum',
         all(ref('donus_yok'), not(ref('olum_sonra'))),
-        'Dönüşün olmadığını kanıtladın ama ölümün sonradan geldiğini kanıtlamadın; mahkeme ölümü yumruğa bağladı (TCK 87/4).',
+        'Teşhisi çürüttün ama savcılığın yedek tezini (yumruk → düşme → birkaç adım → ölüm) üç ayağından kürsüde düşürmedin; mahkeme ölümü yumruğa bağladı (TCK 87/4).',
         'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_tesis',
+        all(any(flag('contra_k1'), flag('contra_n1')), not(ref('donus_yok'))),
+        'Tanığın saatini kayıtla çürüttün ama yüzü görüp göremeyeceğini (bakım etiketi) ya da sanığın gece yarısına kadar nerede olduğunu (büfecinin radyosu) kürsüye getirmedin; tanık saatini esnetip teşhise tutundu.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_isik',
+        all(any(flag('contra_k2'), flag('contra_n2')), not(ref('donus_yok'))),
+        'Teşhisin ışığını ya da gece yarısını çürüttün ama tanığın kesinleştirdiği 23.40’ı turnike ve büfe kaydıyla birlikte göstermedin.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_b1',
+        all(any(flag('b1_darbe'), flag('b1_kan')), not(flag('contra_b1'))),
+        'Bilirkişiye “düşme değil” demek için iki ayak gerekiyordu: kırığın şekli (karşı darbe yok) ve babadaki kan (baş çarpmadı). Birini gösterdin.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_b5',
+        all(flag('contra_b1'), flag('contra_b2'), not(flag('contra_b5'))),
+        'Bilirkişinin “yaralı bir süre yürümüş olabilir” cevabına B sahası fotoğraflarını (yolda kan yok, sürüklenme ve araç izi) göstermedin; bilinç açıklığı ihtimali açık kaldı.',
+        'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_bastir',
+        any(
+          all(has('ded_cikis'), not(flag('press_k1')), not(flag('contra_n1'))),
+          all(has('ded_saat'), not(flag('press_b2'))),
+        ),
+        'Kâğıdı göstermeden önce tanığın ya da bilirkişinin iddiasını kendi ağzıyla kesinleştirmedin (BASTIR); “gibi” diyen tanık kâğıdın etrafından dolaşır.',
+        'SORGULAMA',
       ),
       hint(
         'h_sukru',
@@ -144,6 +177,12 @@ export const report: CasePart = {
         all(not(flag('talep_atk')), not(flag('ek_atk'))),
         'Raporu düzenleyen uzmanın duruşmada dinlenmesini ne ilk celsede ne de arada istedin (CMK 68/1, 214/1); rapor okunmakla yetinildi, “oluşabilir” sorgulanmadı.',
         'USUL_BILGISI',
+      ),
+      hint(
+        'h_cokus1',
+        flag('cokus1'),
+        'İlk celsede ilgisiz belgeler sundun; güvenilirliğin tükenince heyet tanık sorgunu kesti. Bir belgeyi ancak bir beyanla bağını kurabildiğinde sun.',
+        'SORGULAMA',
       ),
       hint(
         'h_b',

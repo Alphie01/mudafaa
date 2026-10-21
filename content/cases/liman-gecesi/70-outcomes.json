@@ -88,9 +88,7 @@
           { "not": { "flag": "cokus" } },
           { "flag": "gercek_fail" },
           { "ref": "donus_yok" },
-          { "ref": "olum_sonra" },
-          { "cmp": [{ "var": "pers" }, ">=", 8] },
-          { "cmp": [{ "score": "final" }, ">=", 10000] }
+          { "ref": "olum_sonra" }
         ]
       },
       "stamp": "BERAAT",
@@ -108,7 +106,11 @@
         },
         {
           "when": { "flag": "contra_b1" },
-          "text": "Kırık, yumrukla düşmeden değil, sabit duran başa sınırlı yüzeyli bir cisimle vurulmasından oluşmuştur."
+          "text": "Kırık, yumrukla düşmeden değil, sabit duran başa sınırlı yüzeyli bir cisimle vurulmasından oluşmuştur; babada çarpma izi yoktur."
+        },
+        {
+          "when": { "flag": "contra_b5" },
+          "text": "Yaralı olay yerine yürümemiştir: yolda kan yoktur, yara cesedin bulunduğu yerde açılmıştır; bilinç açıklığı tezi dayanaksızdır."
         },
         {
           "when": { "flag": "contra_b3" },
@@ -130,7 +132,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 120] }, 1000] }
         }
       },
-      "howToReach": "Dönüşün olmadığını ve ölümün sonradan geldiğini kanıtla; abone, araç ve zimmet kayıtlarını savcılığa yazılı bildir; ikinci celsede vardiya şefinin beyanlarını kayıtla çürüt ve esas savunmada gerçek faili göster.",
+      "howToReach": "Teşhisi ve savcılığın yedek tezini kayıtla çürüt; abone, araç ve zimmet kayıtlarını savcılığa yazılı bildir; ikinci celsede vardiya şefinin beyanlarını kayıtla çürüt ve esas savunmada gerçek faili göster. Skor bu hükmü belirlemez.",
       "epilogue": [
         {
           "lines": [
@@ -224,12 +226,21 @@
       "reasoning": [
         {
           "when": { "flag": "contra_k1" },
-          "text": "Sanığı olay yerine dönerken gördüğünü söyleyen tanığın teşhisi, sanığın 23.18’de limandan çıktığını gösteren kayıtlar ve aydınlatmanın kapalı olduğu karşısında güvenilirliğini yitirmiştir."
+          "text": "Tanığın yeminle kesinleştirdiği 23.40, sanığın 23.18’de limandan çıktığını ve 23.37’de iskele büfesinde ödeme yaptığını gösteren kayıtlarla çürümüştür."
         },
         {
-          "when": { "not": { "flag": "contra_k1" } },
-          "text": "Sanığın 23.18’de limandan çıktığı ve 23.37’de iskele büfesinde bulunduğu kayıtlarla anlaşılmıştır; olay yerine döndüğü ispatlanamamıştır."
+          "when": { "all": [{ "flag": "contra_n1" }, { "not": { "flag": "contra_k1" } }] },
+          "text": "Sanığın 23.18’de limandan çıktığı ve 23.37’de iskele büfesinde bulunduğu kayıtlar ve büfe sahibinin beyanıyla anlaşılmıştır."
         },
+        {
+          "when": { "flag": "contra_k2" },
+          "text": "Projektörlerin bakım nedeniyle kapalı olduğu bir sahada tanığın yüz seçmesi mümkün değildir; teşhisin dayanağı yoktur."
+        },
+        {
+          "when": { "flag": "contra_n2" },
+          "text": "Büfe sahibi, sanığın gece haberleri başlayana, saat on ikiye kadar büfede oturduğunu yeminle beyan etmiştir."
+        },
+        { "text": "Sanığın olay yerine döndüğü ispatlanamamıştır." },
         {
           "when": { "flag": "contra_b1" },
           "text": "Ölüme yol açan kırık, düşmeyle değil sınırlı yüzeyli bir cisimle oluşmuştur."
@@ -238,9 +249,17 @@
           "when": { "flag": "contra_b2" },
           "text": "Maktulün 23.34’ten sonra yaşadığı mide içeriği ve kayıtlarla anlaşılmıştır."
         },
+        {
+          "when": { "flag": "contra_b5" },
+          "text": "Yara cesedin bulunduğu yerde açılmıştır; maktul oraya yaralı olarak yürümemiştir."
+        },
         { "when": { "flag": "contra_b3" }, "text": "Emanetteki kilit yaranın ölçüsüne uymamaktadır." },
         {
           "text": "Sanığın suçu işlediğine dair kesin ve inandırıcı delil yoktur; şüpheden sanık yararlanır (Anayasa 38/4, AİHS 6/2)."
+        },
+        {
+          "when": { "flag": "cokus" },
+          "text": "Müdafiin ikinci celsedeki ilgisiz delil sunumları tutanağa geçmemiş; hüküm, ondan önce duruşmada tartışılmış delillere dayanmıştır."
         }
       ],
       "legalBasis": "CMK 223/2-e, 223/8; TCK 86/2; Anayasa 38/4; AİHS 6/2; CMK 141/1-e, 142, 231/3",
@@ -251,7 +270,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 100] }, 1000] }
         }
       },
-      "howToReach": "Sanığın dönmediğini kürsüde kayıtla göster (teşhisi çürüt ya da büfecinin saatlerini kayıtla sabitle); ikinci celsede bilirkişiye darbe şeklini ve ölüm saatini kâğıtla göster. Karar duruşmada tartışılan bu olgulara bakar (CMK 217/1); esas savunmanın adı puanı ve notu belirler.",
+      "howToReach": "Teşhisi iki ayağından çürüt: saati kayıtla (turnike + büfe fişi), yüzü ışıkla (bakım etiketi) ya da büfecinin gece yarısı beyanıyla. İkinci celsede bilirkişiye darbe şeklini ve olay yerini, ölüm saatini ve yolda kan olmadığını kâğıtla göster. Karar duruşmada tartışılan bu olgulara bakar (CMK 217/1).",
       "epilogue": [
         {
           "lines": [
@@ -402,11 +421,15 @@
         },
         {
           "when": { "all": [{ "flag": "contra_b2" }, { "not": { "flag": "contra_b1" } }] },
-          "text": "Maktulün 23.41’den sonra yaşadığı anlaşılmışsa da düşmeye bağlı kafa travmalarında ölüm bir bilinç açıklığı döneminden sonra gelebilir; darbe şeklini düşmeden ayıran bir bulgu kürsüde ortaya konmadığından yumruk ile ölüm arasındaki bağ kopmamıştır."
+          "text": "Maktulün 23.34’ten sonra yaşadığı anlaşılmışsa da düşmeye bağlı kafa travmalarında ölüm bir bilinç açıklığı döneminden sonra gelebilir; darbe şeklini düşmeden ayıran bir bulgu kürsüde ortaya konmadığından yumruk ile ölüm arasındaki bağ kopmamıştır."
         },
         {
           "when": { "all": [{ "flag": "contra_b1" }, { "not": { "flag": "contra_b2" } }] },
-          "text": "Bilirkişi kırığın sınırlı yüzeyli bir cisimle oluşabileceğini söylemişse de ölümün sanığın limandan ayrılmasından sonra geldiği ortaya konmamıştır; heyet darbenin kavga sırasında oluştuğu ihtimalini dışlayamamış, kuşkuyu sanık lehine en hafif nitelikte değerlendirmiştir."
+          "text": "Bilirkişi kırığın sınırlı yüzeyli bir cisimle oluştuğunu söylemişse de ölümün sanığın limandan ayrılmasından sonra geldiği ortaya konmamıştır; heyet darbenin kavga sırasında oluştuğu ihtimalini dışlayamamış, kuşkuyu sanık lehine en hafif nitelikte değerlendirmiştir."
+        },
+        {
+          "when": { "all": [{ "flag": "contra_b1" }, { "flag": "contra_b2" }, { "not": { "flag": "contra_b5" } }] },
+          "text": "Bilirkişi darbenin bir cisimle vurulduğunu ve ölümün 23.34’ten sonra geldiğini söylemişse de yaralının kavga yerinden bir bilinç açıklığı döneminde yürüdüğü ihtimali kürsüde kayıtla dışlanmamıştır; heyet darbenin kavga sırasında oluştuğu ihtimalini dışlayamamış, kuşkuyu sanık lehine en hafif nitelikte değerlendirmiştir."
         },
         {
           "text": "Maktulün sanığın ölen ağabeyiyle alay etmesi, yüzüne tükürmesi ve onu itmesi haksız fiildir (TCK 29)."
@@ -421,7 +444,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "Dönüşün olmadığını kürsüde kanıtla ama bilirkişiye hem darbe şeklini hem ölüm saatini kâğıtla göstermezsen mahkeme savcılığın yedek tezini (yumruk → düşme → ölüm, TCK 87/4) benimser.",
+      "howToReach": "Teşhisi çürütürsün ama bilirkişiye darbe şeklini (karşı darbe + babadaki kan), ölüm saatini ve yolda kan olmadığını kâğıtla göstermezsen mahkeme savcılığın yedek tezini (yumruk → düşme → birkaç adım → ölüm, TCK 87/4) benimser.",
       "epilogue": [
         {
           "lines": [
@@ -502,8 +525,35 @@
       "verdictText": "Sanığın maktulü olası kastla öldürdüğü kabul edilerek TCK 81/1 ve 21/2 uyarınca müebbet hapis yerine alt sınırdan 20 yıl hapis; TCK 62/1 uyarınca altıda bir oranında indirimle sonuç olarak 16 YIL 8 AY HAPİS cezasıyla cezalandırılmasına; TCK 53’teki hak yoksunluklarına; tutukluluk hâlinin devamına (ikinci celseden önce adli kontrolle tahliye edilmişse hükümle birlikte tutuklanmasına, CMK 100–101); tutuklulukta geçen sürenin cezadan mahsubuna (TCK 63); tebliğden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1) karar verildi.",
       "reasoning": [
         {
-          "when": { "not": { "flag": "contra_k1" } },
+          "when": {
+            "all": [
+              { "not": { "flag": "contra_k1" } },
+              { "not": { "flag": "contra_n1" } },
+              { "not": { "flag": "contra_k2" } },
+              { "not": { "flag": "contra_n2" } }
+            ]
+          },
           "text": "Tanık beyanları ve kavga sonrası teşhis, sanığın olay yerine döndüğü yönündeki iddiayı desteklemiştir."
+        },
+        {
+          "when": {
+            "all": [
+              { "any": [{ "flag": "contra_k1" }, { "flag": "contra_n1" }] },
+              { "not": { "flag": "contra_k2" } },
+              { "not": { "flag": "contra_n2" } }
+            ]
+          },
+          "text": "Tanık saat konusunda yanılmış olabileceğini kabul etmiş, ancak sanığı yüzünden tanıdığını sürdürmüştür; teşhisin dayanağı olan aydınlatma ve sanığın gece yarısına kadar nerede olduğu kürsüde kayıtla tartışılmamıştır."
+        },
+        {
+          "when": {
+            "all": [
+              { "any": [{ "flag": "contra_k2" }, { "flag": "contra_n2" }] },
+              { "not": { "flag": "contra_k1" } },
+              { "not": { "flag": "contra_n1" } }
+            ]
+          },
+          "text": "Aydınlatmanın kapalı olduğu anlaşılmışsa da tanık sanığı yürüyüşünden tanıdığını ve gördüğü saati sürdürmüştür; sanığın o saatte başka yerde olduğu kürsüde kayıtla gösterilmemiştir."
         },
         {
           "text": "Başın arkasına sert bir cisimle vurulan darbede ölüm neticesinin öngörüldüğü kabul edilmiştir (TCK 21/2)."
@@ -537,7 +587,7 @@
           }
         }
       },
-      "howToReach": "Varsayılan sonuç: sanığın olay yerine dönmediğini kayıtla gösteremezsen teşhis ayakta kalır ve heyet iddianamedeki anlatımı esas alır.",
+      "howToReach": "Varsayılan sonuç: teşhisi iki ayağından (saat ve yüz) kayıtla çürütemezsen teşhis ayakta kalır ve heyet iddianamedeki anlatımı esas alır.",
       "epilogue": [
         {
           "lines": [

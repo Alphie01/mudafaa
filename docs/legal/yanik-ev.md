@@ -3,7 +3,9 @@
 > Durum: **Onaylandı** — `meta.legalReview = { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-21' }` (Dava #07 ile
 > aynı biçim). Maddeler mevzuat.gov.tr'deki güncel metinlerden (PDF → metin) okunarak kontrol edildi. 2026-10-21: ikinci
 > şeytanın avukatı incelemesinden sonra hüküm koşulları (CMK 223 dayanak seçimi, ısmarlama raporda kalan kayıt), takvim (TCK 7)
-> ve çöküş sonrası usul (CMK 216) yeniden gözden geçirildi; bkz. §4.8, §4.13–4.15.
+> ve çöküş sonrası usul (CMK 216) yeniden gözden geçirildi; bkz. §4.8, §4.13–4.15. 2026-10-21 (yeniden dengeleme): hüküm
+> bütünüyle kayda bağlandı, hiçbir sonuç skor eşiği istemiyor; taksir yalnızca kayıtta karşılığı yoksa kurulur; bkz. §4.9,
+> §4.13, §4.16–4.19.
 
 ## 1. Kullanılan maddeler ve doğrulama
 
@@ -99,46 +101,55 @@
 8. **Ismarlama mütalaa ve hüküm (ETIK, ETIK_E, ETIK_T).** Para karşılığı, sonucu önceden belirlenmiş bir uzman mütalaası (CMK
    67/6 kılıfında) hükme esas alınmaz; ancak savunmanın sahte delil sunması iddianın ispat yükünü kaldırmaz, çürümüş iddia
    delillerini canlandırmaz ve sanığın aleyhine delil de oluşturmaz (Anayasa 38/4; CMK 217). Mahkeme mütalaayı dışlar ve kalan
-   kayda göre karar verir: numune zinciri ayaktaysa kasten mahkûmiyet (ETIK); zincir çökmüş ve kalan kayıt beraati taşıyorsa
-   (dolaylı delillerin iplikleri çözülmüş, taksire hazır tanık Necati'nin yeminli beyanı ve yazılı notuyla cevap verilmiş,
-   beraat istenmiş) **223/2-e beraat (ETIK_E)**; zincir çökmüş ama taksir sorusu kalan delillerle cevapsız ya da iplikler
-   ayaktaysa taksirden hüküm (ETIK_T; savcının T_05E mütalaasıyla aynı yönde, talebi aşmaz). ETIK_T gerekçesi artık özen
+   kayda göre karar verir: hızlandırıcı iddiası ayaktaysa kasten mahkûmiyet (ETIK); iddia çökmüş ve taksir kayıtla karşılanmışsa
+   (hazır tanık Necati'nin yeminli beyanı ve notu ya da dosyadaki dağıtım kaydı) **223/2-e beraat (ETIK_E)**; iddia çökmüş ama
+   taksire kayıtta bir karşılık yoksa taksirden hüküm (ETIK_T; savcının T_05E mütalaasıyla aynı yönde, talebi aşmaz). ETIK_T gerekçesi artık özen
    savunmasının reddini dışlanan mütalaaya bağlamaz: "taksir sorusu hükme esas alınabilecek delillerle cevaplanmamıştır; dışlanan
    mütalaa bu boşluğu doldurmaz." Üç sonda da müdafi hakkında baroya bildirim ve suç duyurusu (TCK 272, 38; Av.K. 34), XP 0 ve
    etik kartı. ETIK_E bir etik sonu olduğundan oyuncu istatistiğinde beraat sayılmaz (sınıf OTHER); müvekkilin hükmü beraattir.
    İkinci incelemenin bulgusu: ETIK_T, kalan kayıt beraati taşırken de taksir veriyordu ve gerekçesi bu yolda olgusal olarak
    yanlıştı (taksir cevabı Necati'nin beyanına dayanıyordu, mütalaaya değil); düzeltildi.
-9. **Çöküş ve tavan.** Hızlandırıcı tespiti çöktükten sonra müdafiin hatalı sunumları mahkûmiyet gerekçesi olamaz; bir sanığın
-   hukuki durumu avukatının duruşma performansıyla ağırlaşmaz. Zincir çöktüyse en ağır sonuç TCK 171/1-a'dır (TAKSIR). TAKSIR
-   gerekçesinde savunma taksire cevap vermişse, mahkemenin bunu neden yeterli bulmadığı ayrıca yazılır: takvim cevabında
-   "ısınan buata bağlı tesisatın enerjili bırakılması"; dış etken cevabında "aşırı gerilim neticenin tek ve öngörülemez sebebi
-   değildir; uyarıya rağmen koruma düzeneği olmadan kullanılan tesisat neticeye katkıda bulunmuştur" (ortak illiyet). TAKSIR'e
-   dış etken cevabıyla ancak beraatin öteki koşulları eksikken (dolaylı delillerin halatı ayakta, beraat istenmemiş ya da skor
-   eşiğin altında) düşülür; BERAAT_E aynı cevapta "netice özen eksikliğine bağlanamamıştır" der. İki sonuç farklı kayıtlara
-   (dolaylı delillerin durumu, savunmanın ikna gücü) dayanır; ortak illiyet değerlendirmesi bir takdir/yorum kararıdır ve ikinci
-   incelemenin önerdiği çözümdür (TAKSIR'deki "illiyet bağını kesmemiştir" cümlesi kaldırıldı, yerine kayda bağlı bu cümle geldi).
-   "Çöktü" sayılmak için bütün ayakların birlikte kurulması aranır (`hizlandirici_coktu`): numunelerin elde ediliş zinciri
-   (bilirkişinin kabulü, B2) ve bunun yeminli tanıkla doğrulanması (bekçi: eksper muhafazadaki olay yerine refakatsiz girdi,
-   CV_Q2; içeri dolu tenekelerle girdi, CV_Q3); zemin izinin moloz kaldırıldıktan sonra ortaya çıkması (B1/U2); laboratuvar
-   bulgusunun birinci celsede "taze benzin" çelişkisiyle sarsılması (B4) ve aradaki ham veriyle (piroliz ürünü yok, tenekeler
-   eksperin aracındakilerle aynı) çökmesi (U3). Bir fotokopi defter sayfası ya da bir şüphe, numunedeki benzin bulgusunu tek
-   başına ortadan kaldırmaz; mahkeme bu durumda bulguyu diğer delillerle birlikte tartabilir. Hepsi birlikte kurulduğunda ise
-   kastın dayanağı kalmaz. Bu bir yorum tercihidir (CMK 217 vicdani delil serbestisi).
+9. **Çöküş, tavan ve taksir (yeniden dengeleme sonrası).** Hızlandırıcı tespiti çöktükten sonra müdafiin hatalı sunumları
+   mahkûmiyet gerekçesi olamaz; bir sanığın hukuki durumu avukatının duruşma performansıyla ağırlaşmaz. Zincir çöktüyse en ağır
+   sonuç TCK 171/1-a'dır. Taksir mahkûmiyeti ise yalnızca kayıtta taksire bir karşılık **yoksa** kurulur (`taksir_red` yüklemi):
+   (a) yenileme takviminin, notu yazan elektrikçinin hazır tanık olarak yeminli beyanıyla doğrulanması (T05_A; §4.16) ya da
+   (b) dağıtım şirketinin nötr kopması kaydının dosyada bulunması (mahkemenin müzekkeresiyle gelir, ikinci celsede okunur; savunma
+   onu tartışmasa da kayıttadır, §4.17) ya da (c) nötr kopmasının eksperin çapraz sorgusunda kurulması. Bunlardan biri varsa netice
+   sanığın özen eksikliğine şüpheden uzak biçimde bağlanamaz ve hüküm beraattir. Önceki sürümde aynı dış etken cevabı TAKSIR'de
+   "ortak illiyet" gerekçesiyle mahkûmiyete, BERAAT_E'de beraate götürüyordu; fark kayıtta değil skorda ve dolaylı delillerdeydi.
+   Bu tutarsızlık giderildi: TAKSIR ve ETIK_T gerekçelerinden takvim ve dış etken cümleleri kaldırıldı (bu sonlara artık o
+   kayıtla ulaşılamaz), yerine "dosyada dağıtım hattına ilişkin bir kayıt yoktur, uyarıyı yapan elektrikçi de dinlenmemiştir"
+   cümlesi geldi. Uyarının kendisi kayda sanığın ek savunmasıyla ve savunmanın birinci celsede buat için sunduğu notla girer
+   (PS_B3_BUAT; Leyla'nın "iki yöne keser" uyarısı).
+   "Çöktü" sayılmak için hızlandırıcı iddiasının bütün ayaklarının birlikte kurulması aranır (`hizlandirici_coktu`): numunelerin
+   elde ediliş zinciri (bilirkişinin kabulü B2; yeminli bekçi: muhafaza CV_Q1, refakatsiz giriş CV_Q2, dolu tenekeler CV_Q3;
+   eksperin "polis izni" iddiasının çizelgeyle çürümesi U1); zemin izi (B1 ve eksperin kendi kabulü U2); koku tanığının "benzin"
+   kelimesinin kolluğun sorusundan geldiği (S2); satın alınan benzinin atölyede durduğu (S6, kolluk tespiti); başlangıç
+   noktasının salon değil mutfak–koridor olduğu (bilirkişinin kabulü, PS_B1_K); elektrik dışlamasının dayanaksızlığı (pano B3,
+   buat PS_B3_BUAT, mahkemenin elektrik bilirkişisinin birincil ark bulgusu U6); laboratuvar bulgusunun birinci celsede "taze
+   benzin" çelişkisiyle sarsılması (B4) ve aradaki ham veriyle (piroliz ürünü yok, eksperin şahsi mührü, numune alma tutanağı
+   yok) çökmesi (U3). Bir fotokopi defter sayfası ya da bir şüphe numunedeki benzin bulgusunu tek başına ortadan kaldırmaz; el
+   koyma tutanağı da tek başına "ekilmiş numune" sonucunu taşımaz (PS_U3_E): bagajdaki teneke bir şüphedir, numunenin o yangını
+   görmediğini gösteren ham veri ve tenekeyi dolu gören tanıkla birlikte kanıta dönüşür. Hepsi birlikte kurulduğunda kastın
+   dayanağı kalmaz. Bu bir yorum tercihidir (CMK 217 vicdani delil serbestisi).
 10. **Tezel'in koridor konuşması.** Mahkemenin bilirkişisiyle müdafiin dosya hakkında salon dışında konuşması uygun değildir;
    H1_09 ve ikinci celse öncesinde Deniz konuşmayı keser, bilirkişiyi mahkemeye yazmaya yönlendirir. Bilirkişinin kendiliğinden
    sunduğu ek rapor (T_00T) ikinci celsede okunur.
 11. **Hazır tanık.** Necati Usta ve atölye bekçisinin defteri: duruşmada hazır edilen tanık ve belge, delil ikamesi talebiyle
    dinlenir/dosyaya konur (CMK 178, 206/1).
 12. **Dağıtım şirketi.** Gerçek bir kuruluş adı kullanılmadı ("dağıtım şirketi"). Sigorta şirketi (Kalkan Sigorta) kurgusaldır.
-13. **Beraatin dayanağını mahkeme seçer (CMK 223).** Savunmanın esas hakkındaki talebi (2-b, 2-e ya da terditli "öncelikle
-   beraat, olmazsa taksir") hükmün bendini belirlemez. Önceki sürümde 2-b ya da terditli talep, aynı kayıtta beraat yerine taksir
-   mahkûmiyetine yol açıyordu; bu hukuka aykırıydı. Artık üç beraat talebi de ortak `beraat_talep` bayrağını kaldırır; BERAAT_E
-   kayda bağlıdır (zincir çöktü ∧ iplikler çözüldü ∧ taksire cevap ∧ beraat talebi ∧ final ≥ 12.500). Yanlış dayanak yalnızca skor
-   ve hâkimin kanaatinde bedel öder; gerekçeye "savunmanın suçun işlenmediğinin sabit olduğu yönündeki talebi kabul görmemiş;
-   ancak mahkeme beraatin dayanağını kendisi belirler" ya da "terditli talebin incelenmesine yer olmamıştır" cümlesi eklenir.
-   Negatif testler: N_TIPIK_2B, N_TIPIK_TERDIT (TIPIK kaydında 2-b / terditli talep → BERAAT_E) ve N_B_ARKSIZ (ark raporu yok,
-   2-b ispatsız → BERAAT_E). Duygusal savunma (T06_D) beraat istemediğinden beraat koşulunu karşılamaz; bu, oyunun "esas savunma
-   delillerin tartışmasıdır" dersi için bilinçli bir sadeleştirmedir (gerçekte mahkeme talep olmasa da beraat verebilir).
+13. **Beraatin dayanağını mahkeme seçer (CMK 223); hüküm skora bağlı değildir.** Savunmanın esas hakkındaki talebi (2-b, 2-e,
+   terditli ya da hiç beraat istememek) hükmün bendini de sonucunu da belirlemez. Yeniden dengelemede bütün skor eşikleri
+   kaldırıldı (eski: BERAAT_E final ≥ 12.500, BERAAT_B final ≥ 13.500 ve hâkimin kanaati ≥ 8); eşik çubuğu tek bantlıdır ("Hüküm
+   kayda göre"). BERAAT_E = hızlandırıcı iddiası çöktü ∧ taksir kayıtla karşılandı; BERAAT_B = buna ek olarak elektrik kaynağı
+   (ark raporu + dağıtım kaydı + nötr kopmasının bu yangınla bağının duruşmada kurulması) sabit ve eksper kırıldı (§4.18). Eski
+   koşuldaki `beraat_talep` ve dolaylı delillerin halatı (`motif_coktu`) kaldırıldı: kast dayanaksız kaldıktan sonra poliçe,
+   artış, eşya ve fiş ne kastı ne dolandırıcılığı tek başına ispatlar (tavan kuralı); bu iplikler artık yalnızca gerekçe
+   cümlelerini, esas savunmanın skorunu ve dayanak seçimini etkiler. Duygusal savunma (T06_D) beraat istemese de kayıt beraati
+   gerektiriyorsa hüküm beraattir; gerekçeye "müdafi beraat istememişse de mahkeme delilleri kendiliğinden değerlendirir" cümlesi
+   eklenir (önceki bilinçli sadeleştirme kaldırıldı). Negatif testler: N_TIPIK_2B, N_TIPIK_TERDIT (TIPIK kaydında 2-b / terditli
+   talep → BERAAT_E) ve N_KAYIT_ARIZA (dağıtım kaydı dosyada, savunma taksir hatırlatmasına yanlış cevap verir (T05_C) ve 2-b
+   ister; nötr bağı duruşmada kurulmadığından → BERAAT_E).
 14. **Zaman bakımından uygulama (TCK 7).** Oyun takvimi 2026'dır (künyedeki ilk kart "3 NİSAN 2026 · CUMA"; bütün gün adları 2026
    takvimine göre: 4 Nisan Cumartesi, 13 Nisan Pazartesi, 14 Nisan Salı, 22 Nisan Çarşamba, 4 Mayıs Pazartesi, 5 Mayıs Salı).
    Yangın 15.01.2026'da çıkmıştır; 7571 sayılı Kanun (RG 25.12.2025) bu tarihten önce yürürlüğe girdiğinden TCK 170/1'in yeni
@@ -148,6 +159,27 @@
    duruşmanın yönetimi), ama mütalaa, esas hakkında savunma ve son söz atlanamaz. İkinci celsedeki çöküş artık T_COKUS_D ile
    kaldığı aşamaya (CMK 226 ve ek savunma, mütalaa, esas savunma, son söz) döner. Birinci celsedeki çöküşte dava hükme hazır
    kabul edilir (önceki davranış korunmuştur; oyun içinde bu yol ısmarlama rapor ve yüzeysel soruşturma sonlarına aittir).
+
+16. **Takvim savunmasının dayanağı: notun yazarı.** Elektrikçinin notu özel bir belgedir; değerlendirilmesi serbesttir (CMK 217),
+   ama yazarı dinlenmeden "uzman acil değil dedi, sanık takvime koydu" olgusu mahkemenin önüne bir kâğıt kadar gelir. Oyun takvim
+   cevabını (T05_A) notun yazarının duruşmada hazır tanık olarak dinlenmesine bağlar (CMK 178, 206/1): Necati Usta'ya mahkemede
+   anlatıp anlatmayacağı sorulmuş olmalıdır (NC_TANIK; ilk ziyarette sorulmadıysa ikinci ziyaret A_NECATI2). Tanığa ne
+   söyleyeceği söylenmez; yalnızca gelip gelmeyeceği sorulur. Çöküşten sonra delil sunumu kapandığından yeni tanık dinlenemez
+   (T05_A görünmez). Bu bir yorum/sadeleştirme kararıdır: ispat yükü iddiadadır; ama oyun, savunmanın şüpheyi kuracak kaydı
+   mahkemenin önüne getirmesini ister. Kayıtta bir karşılık yoksa sanığın kendi ek savunması (Halil'in "takvime koyduk" sözü)
+   tek başına yeterli sayılmamıştır.
+17. **Dağıtım kaydı mahkemenin kaydıdır.** Arıza kaydı savunmanın talebiyle ama mahkemenin müzekkeresiyle gelir ve ikinci
+   celsenin açılışında okunur (T_00A). Savunma onu taksire karşı ileri sürmese de mahkeme dosyadaki bütün delilleri değerlendirmek
+   zorundadır; sokak hattında yangından altı dakika önce kopan nötr ve koridor hattındaki birincil ark karşısında neticenin
+   sanığın özen eksikliğine bağlandığı şüpheden uzak değildir (Anayasa 38/4). Bu yüzden `taksir_red` dağıtım kaydının dosyada
+   bulunmasıyla da gerçekleşir.
+18. **2-b için elektrik kaynağının duruşmada sabit olması.** 223/2-b, suçun sanık tarafından işlenmediğinin sabit olmasını ister.
+   Oyun bunu üç koşula bağlar: mahkemenin ark raporu (birincil ark), dağıtım kaydı ve nötr kopmasının bu yangınla bağının
+   duruşmada çekişmeli olarak kurulması (eksperin çapraz sorgusu U6 ya da ek savunmada T05_B). Kayıt dosyada olduğu hâlde bağ
+   tartışılmadıysa mahkeme şüpheden (2-e) beraat eder (N_KAYIT_ARIZA). Bentler arasındaki bu çizgi bir yorum tercihidir (§4.1).
+19. **Önce bastır, sonra sun.** Çapraz sorgudaki çelişkiler (B1–B4, S2, S6, U1–U3, U6) tanık önce kendi cümlesine bağlanmadan
+   (ifade bastırılmadan) belge sunulursa kayda geçmez; ceza yoktur, tanık bir açıklama kapısı bulur (`erkenSunum`). Bu, CMK 201
+   çerçevesindeki çapraz sorgu tekniğinin oyunlaştırılmasıdır; hukuki bir şart değildir.
 
 ## 5. Hassas konu denetimi
 

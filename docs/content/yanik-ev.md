@@ -28,7 +28,7 @@
 | Teminat artışı | Zeyilname | Acentenin kampanya araması | ded_artis, ev_cagri |
 | Benzin kokusu | Saadet | İtfaiye: akaryakıt kokusu alınmadı; polis "benzin gibi mi" diye sormuş | ev_itfaiye |
 | El fenerli adam | Saadet | 01.30 bekçi devriyesi | ded_fener, ev_cizelge |
-| Taksir (TCK 171) alternatifi | Necati'nin keşfi | Yenileme takvimdeydi; yangının sebebi dış etken (nötr kopukluğu) | ded_onlem, ded_notr |
+| Taksir (TCK 171) alternatifi | Necati'nin keşfi (buat notu kayda savunmayla girer) | Yenileme takvimdeydi ve notu yazan usta hazır tanık; ya da dosyada nötr kopması kaydı | ded_onlem + NC_ACIL + NC_TANIK, ev_ariza / ded_notr |
 | Eksperin güvenilirliği | Ekspertiz raporu | Tahkim kararı, aynı paragraf, suiistimal primi | ev_tahkim, ded_kopya |
 
 ## 3. Delil listesi
@@ -57,66 +57,75 @@ pano incelemesi talebi → ARA_GIRIS), `ev_elkoyma` (savcılığın eksperin ara
 
 ## 4. Çapraz sorgu
 
-**Saadet Koru (1. celse):** S1 el fenerli adam → ded_fener / ev_cizelge; S2 benzin kokusu → BASTIR (polisin sorusu), ev_itfaiye;
-S3 eşyalar → ded_tasima; S4 televizyon → BASTIR (yangından önce; `fact_tv`); S5 "borçlu adam" → İTİRAZ (kanaat); S6 kırmızı
-bidon → ded_bidon. Savcılık delilleri (fiş, icra, ekspertiz) cezalı.
+Genel kural (yeniden dengeleme): çelişkiyi kuran belge, ifade önce **bastırılmadan** sunulursa çelişki kayda geçmez; ceza yok,
+tanık bir açıklama kapısı bulur (`erkenSunum`, `*_ERKEN` kuralları; rapor ipucu `h_baglan`). Saadet'in S2'si bu kalıbı zaten
+kullanıyordu; B1–B4, S6, U1–U3 ve U6'ya genişletildi.
 
-**Dr. Orhan Tezel (1. celse):** B1 salon zemininde döküntü izi → ded_temizlenmis (tam), ded_koken (kısmi); B2 numunelerde benzin
-→ ded_zincir (tam), ev_cizelge (kısmi); B3 elektrik izi yok → BASTIR, ded_pano (tam), ded_buat (kısmi); B4 yoğun benzin →
-ded_taze; B5 poliçe ve borç → İTİRAZ (uzmanlık dışı, CMK 67/3).
+**Saadet Koru (1. celse):** S1 el fenerli adam → ded_fener / ev_cizelge; S2 benzin kokusu → BASTIR, ev_itfaiye (`contra_s2`);
+S3 eşyalar → ded_tasima; S4 televizyon → BASTIR (`fact_tv`); S5 "borçlu adam" → İTİRAZ (kanaat); S6 kırmızı bidon → BASTIR,
+ded_bidon (`contra_s6`; hâkim kolluk tespiti ister). Savcılık delilleri (fiş, icra, ekspertiz) cezalı.
 
-**Tarık Sönmez (2. celse):** U1 polis izni → ev_cizelge; U2 molozun altında iz → ded_temizlenmis; U3 numune zeminden →
-ded_ekilmis / ev_elkoyma (tam), ev_lab / ded_taze (kısmi); U4 raporlarım doğrulandı → ev_tahkim; U5 beklentim yok → ded_kopya;
-U6 elektrik olsaydı görürdüm → iki ayrı kural: ark (ev_ark / ded_elektrik → `contra_u6_ark`) ve nötr kopması (ev_ariza /
-ded_notr → `contra_u6_notr`); her yanıt yalnızca sunulan kaydı söyler. Üç çelişkiden sonra kırılma (CMK 48 uyarısı, susma).
+**Dr. Orhan Tezel (1. celse):** B1 başlangıç ve döküntü izi → BASTIR; ded_koken (`contra_koken`: "salonu zemindeki iz yüzünden
+seçtim; o iz olmasa desen koridoru gösterir") ve ded_temizlenmis (`contra_b1`); B2 numunelerde benzin → BASTIR, ded_zincir
+(`contra_b2`), ev_cizelge (kısmi); B3 elektrik izi yok → BASTIR, ded_pano (`contra_b3`) ve ded_buat (`contra_buat`: buat incelenmedi;
+ustanın notu tutanağa girer), ded_koken (kısmi); B4 yoğun benzin → BASTIR, ded_taze (`contra_b4`); B5 poliçe ve borç → İTİRAZ
+(uzmanlık dışı, CMK 67/3).
+
+**Cevdet Alkan (2. celse, doğrudan soru):** CV_Q1 muhafaza → CV_Q2 arada giren (Q1'den sonra) → CV_Q3 eldeki tenekeler
+(`cevdet_dinlendi`; ara evresinde CV2_CANTA gerekir). Bekçi ancak çizelge elde edildikten sonra tanık gösterilebilir (DIL_CEVDET,
+T1_CEVDET).
+
+**Tarık Sönmez (2. celse):** U1 polis izni → BASTIR, ev_cizelge (`contra_u1`); U2 molozun altında iz → BASTIR, ded_temizlenmis
+(`contra_u2`); U3 numune zeminden → BASTIR, ded_ekilmis **ve** laboratuvarın kabul satırı (şahsi mühür) ile not satırı (tutanak
+yok) okunmuşsa `contra_u3`; okunmamışsa kısmi (PS_U3_MUHURSUZ); el koyma tutanağı tek başına kısmi (PS_U3_E); U4 raporlarım
+doğrulandı → ev_tahkim; U5 beklentim yok → ded_kopya; U6 elektrik olsaydı görürdüm → BASTIR; ark raporu (`contra_u6_ark`, raporun
+linye satırı okunmuş olmalı; okunmamışsa PS_U6_OKUNMAMIS) ve nötr kopması (`contra_u6_notr`) ayrı kurallar. Üç çelişkiden sonra
+kırılma (CMK 48 uyarısı, susma).
+
+**Ek savunma (T_05):** T05_A takvim — ded_onlem ∧ "acil değil" (NC_ACIL) ∧ ustanın tanıklığa gelmeyi kabul etmesi (NC_TANIK) ∧
+çöküş yok; Necati hazır tanık olarak dinlenir. T05_B dış etken — ded_notr ∧ mahkemenin ark raporu. T05_C/T05_D yanlış.
 
 ## 5. Sonuçlar
 
-| Öncelik | Kimlik | Sınıf | Koşul (özet) | Hüküm |
+| Öncelik | Kimlik | Sınıf | Koşul | Hüküm |
 |---|---|---|---|---|
-| 1 | ETIK | CONVICTION | Ismarlama rapor ∧ hızlandırıcı tespiti ayakta | 170/1-a + 158/1-k, 35; mütalaa hükme esas alınmaz; suç duyurusu, baroya bildirim; etik kartı |
-| 2 | ETIK_E | OTHER | Ismarlama rapor ∧ kalan kayıt beraati taşıyor (`kayitBeraat`) | Her iki suçtan 223/2-e beraat; suç duyurusu, baroya bildirim; etik kartı; XP 0 |
-| 3 | ETIK_T | RECHARACTERIZED | Ismarlama rapor ∧ hızlandırıcı tespiti çöktü (kalan kayıt beraati taşımıyor) | TCK 171/1-a 5 ay, erteleme; 158/1-k’den 2-e beraat; suç duyurusu, baroya bildirim; etik kartı |
-| 4 | BERAAT_B | ACQUITTAL (223/2-b) | Hızlandırıcı çöktü + eksper kırıldı + `elektrik_ispat` + taksire cevap + 2-b savunması kayıtla örtüşüyor (`gercek`) + ikna ≥ 8 + final ≥ 13.500 | Beraat, tahliye, eksper hakkında suç duyurusu |
-| 5 | BERAAT_E | ACQUITTAL (223/2-e) | `kayitBeraat` ∧ final ≥ 12.500 | Beraat |
-| 6 | TAKSIR | RECHARACTERIZED | Hızlandırıcı çöktü (skor ve çöküşten bağımsız) | TCK 171/1-a: 6 ay → TCK 62 ile 5 ay; HAGB yok, TCK 51 erteleme; 158/1-k’den beraat |
-| 7 | MAHKUMIYET | CONVICTION | Varsayılan: hızlandırıcı tespiti ayakta | 170/1-a 1 yıl 6 ay + 158/1-k, 35/2: 2 yıl ve 500 gün; TCK 63 mahsup |
+| 1 | ETIK | CONVICTION | Ismarlama rapor ∧ ¬`hizlandirici_coktu` | 170/1-a + 158/1-k, 35; mütalaa dışlanır; suç duyurusu, baroya bildirim; etik kartı |
+| 2 | ETIK_E | OTHER | Ismarlama rapor ∧ `kayitBeraat` | Her iki suçtan 223/2-e beraat; suç duyurusu, baroya bildirim; etik kartı; XP 0 |
+| 3 | ETIK_T | RECHARACTERIZED | Ismarlama rapor ∧ `hizlandirici_coktu` (taksire kayıtta karşılık yok) | TCK 171/1-a 5 ay, erteleme; 158/1-k'den 2-e beraat; suç duyurusu, baroya bildirim |
+| 4 | BERAAT_B | ACQUITTAL (223/2-b) | `kayitBeraat` ∧ eksper kırıldı ∧ `elektrik_ispat` | Beraat, tahliye, tutanak başsavcılığa |
+| 5 | BERAAT_E | ACQUITTAL (223/2-e) | `kayitBeraat` | Beraat |
+| 6 | TAKSIR | RECHARACTERIZED | `hizlandirici_coktu` (taksire kayıtta karşılık yok) | TCK 171/1-a: 6 ay → TCK 62 ile 5 ay; TCK 51 erteleme; 158/1-k'den beraat |
+| 7 | MAHKUMIYET | CONVICTION | Varsayılan: hızlandırıcı iddiası ayakta | 170/1-a 1 yıl 6 ay + 158/1-k, 35/2: 2 yıl ve 500 gün; TCK 63 mahsup |
 
-`kayitBeraat` = ¬çöküş ∧ `hizlandirici_coktu` ∧ `motif_coktu` ∧ `taksir_cevap` ∧ `beraat_talep`. **Beraatin dayanağını mahkeme
-seçer (CMK 223):** T06_B (2-b), T06_E (2-e) ve T06_T (öncelikle beraat, terditli taksir) üçü de `beraat_talep`'i kaldırır; 2-b
-talebi kayıtla örtüşmezse (`gercek` yok) ya da terditli talep seçilirse hüküm yine 2-e beraattir, yanlış dayanak yalnızca skor ve
-`pers` kaybettirir ve gerekçeye bir cümle ekler ("talebi kabul görmemiş; ancak mahkeme beraatin dayanağını kendisi belirler" /
-"terditli talebin incelenmesine yer olmamıştır"). T06_D (duygusal savunma) beraat istemez; beraate ulaşmaz (bilinçli
-sadeleştirme, hukuki notlar §4.13). **Ismarlama rapor müvekkili cezalandırmaz:** mahkeme mütalaayı dışlar, kalan kayıt beraati
-taşıyorsa ETIK_E (skor eşiği aranmaz: müdafiin ihlalinin skor bedeli müvekkilin hükmüne yansımaz), taşımıyorsa ETIK_T/ETIK.
+**Hüküm skora bağlı değildir.** Hiçbir sonuç eşik skoru istemez (eski 12.500 / 13.500 ve hâkimin kanaati ≥ 8 kaldırıldı); eşik
+çubuğu tek bantlıdır ("Hüküm kayda göre"). Skor yalnızca savunmanın performansını ve XP'yi ölçer.
 
-Eşikler (eşik çubuğuyla aynı): Mahkûmiyet 0 · Beraat 12.500; 223/2-b ayrıca 13.500 ve `pers` ≥ 8. `scaleMax` 14.800. Hukuki
-tavan kuralı: kastın tek dayanağı numune zinciridir; zincir çöktüyse (`hizlandirici_coktu`) kötü savunma, düşük skor ya da
-çöküş sonucu kasten mahkûmiyete indiremez, en kötü sonuç taksirdir; bu yüzden eşik çubuğunda taksir bandı yoktur. İkinci
-celsedeki çöküş (`cred` 0) yargılamayı bitirmez: hâkim delil sunumunu kapatır, yargılama CMK 226, mütalaa, esas savunma ve son
-sözle sürer (T_COKUS_D); çöküşte beraat yoktur (`kayitBeraat` ¬çöküş ister). XP: 223/2-b 1,2 · 223/2-e 1,0 · taksir 0,85 ·
-mahkûmiyet 0,6 · etik 0 (etik ihlalinde yarı). ETIK_E, müvekkil beraat etse de bir etik sonu olduğundan sınıfı OTHER'dır
-(istatistikte beraat sayılmaz).
+- `hizlandirici_coktu` = contra_b2 ∧ CV_Q2 ∧ cevdet_dinlendi ∧ contra_u1 ∧ contra_b1 ∧ contra_u2 ∧ contra_s2 ∧ contra_s6 ∧
+  contra_koken ∧ contra_b3 ∧ contra_buat ∧ contra_u6_ark ∧ contra_b4 ∧ contra_u3. Bilirkişi raporunun her ayağı (zincir, zemin,
+  koku, satın alınan benzin, başlangıç, elektrik dışlaması, laboratuvar) kayıtla çöker.
+- `taksir_red` = taksir_cevap (T05_A ya da T05_B) ∨ contra_u6_notr ∨ dosyada ev_ariza. Mahkemenin getirttiği dağıtım kaydı,
+  savunma tartışmasa da taksiri karşılar (hukuki notlar §4.17).
+- `kayitBeraat` = `hizlandirici_coktu` ∧ `taksir_red`.
+- `elektrik_ispat` = (ev_ark ∨ ded_elektrik) ∧ ev_ariza ∧ (contra_u6_notr ∨ taksir_dis): nötr kopmasının bu yangınla bağı duruşmada
+  kuruldu.
 
-Gerekçe parçaları kayda bağlıdır: BERAAT_B'de ark cümlesi `ev_ark`, nötr cümlesi `ded_notr`/`ev_ariza`, zemin ve piroliz
-cümleleri ilgili çelişkilere; BERAAT_E'de banka, artış, eşya, benzin cümleleri sırasıyla `motif_banka`, `motif_artis`,
-`contra_s3`, `contra_s6`'ya; takvim cümlesi takvim cevabına, dış etken cümlesi `taksir_dis`'e. TAKSIR ve ETIK_T'de dış etken
-cevabı varsa ortak illiyet cümlesi (aşırı gerilim tek ve öngörülemez sebep değil), takvim cevabı varsa "takvim yetmez" cümlesi;
-TAKSIR'deki eski "üçüncü kişinin kusuru illiyet bağını kesmemiştir" cümlesi kaldırıldı. ETIK_T'nin özen cümlesi artık dışlanan
-mütalaaya dayanmaz.
+Beraatin dayanağını mahkeme seçer: 2-b talebi kayıtla örtüşmezse 2-e beraat; 2-e talebi varken kayıt 2-b'yi taşıyorsa 2-b beraat;
+terditli talep ya da duygusal savunma (T06_D) yalnızca skoru ve gerekçedeki bir cümleyi değiştirir. Dolaylı delillerin iplikleri
+(`motif_coktu`: eşya, bidon, banka, artış) hükmü değil, gerekçe cümlelerini, esas savunmanın skorunu ve D_IPLIK dayanağını
+etkiler (kast çöktükten sonra iplikler tek başına kastı ispatlamaz). Ismarlama rapor müvekkili cezalandırmaz: mahkeme mütalaayı
+dışlar ve aynı kayıt kurallarıyla karar verir. Çöküş (`cred` 0) yargılamayı bitirmez; ikinci celsede delil sunumu kapanır
+(T05_A görünmez), mütalaa, esas savunma ve son söz alınır. XP: 223/2-b 1,2 · 223/2-e 1,0 · taksir 0,85 · mahkûmiyet 0,6 · etik 0.
 
-Ek koşul yüklemleri (`meta.predicates`): `hizlandirici_coktu` = contra_b2 ∧ CV_Q2 ∧ `cevdet_dinlendi` (CV_Q3) ∧ (contra_b1 ∨
-contra_u2) ∧ contra_b4 ∧ contra_u3 — bilirkişinin "numuneleri ben almadım" kabulü, bunu yeminle doğrulayan bekçi (eksper
-muhafazadaki olay yerine refakatsiz ve dolu tenekelerle girdi), zemin izi, birinci celsedeki "taze benzin" çelişkisi ve aradaki
-ham veri (piroliz yok, tenekeler aynı). Eski tanım (zincir ∧ zemin ∧ (b4 ∨ u3)) taksiri 75 aksiyonda veriyordu; `motif_coktu` = en
-az ikisi: contra_s3, contra_s6, motif_banka, motif_artis; `elektrik_ispat` = (ev_ark ∨ ded_elektrik) ∧ ded_notr.
+**Tutarlılık düzeltmesi (bu tur):** önceki sürümde nötr kopması cevabı TAKSIR/ETIK_T'de "ortak illiyet" gerekçesiyle taksir
+mahkûmiyetine, BERAAT_E'de beraate götürüyordu. Artık dış etken kayıtta ise sonuç her yolda beraattir; TAKSIR ve ETIK_T
+gerekçeleri "dosyada dağıtım hattına ilişkin bir kayıt yoktur, uyarıyı yapan elektrikçi de dinlenmemiştir" der.
 
-Erken çözüm kapıları (ikinci inceleme, blocker 3): 1. celseye (GO_H1) yalnızca son gün, eylem puanı bitince ya da yapılacak
-etkinlik kalmayınca gidilir (duruşma tarihi sabit, 14 Nisan); 2. celseye (GO_T) aranın son günü bitince (ya da etkinlik
-kalmayınca) ve Leyla'yla o gün konuşulduktan sonra; delil dilekçesi son gün Leyla taslağı okuduktan sonra yazılır; bekçinin
-sabah sorusu (CV_SABAH: eksper girişi, çizelge) `clue_numune` ∧ (INV_FOTO ∨ `clue_eksper_foto`) ister, ilk ziyarette sorulamadıysa
-A_CEVDET2 (1 EP) açılır. Etkinlik tükenmesi koşulları gün beklemeden de geçerlidir; aksi hâlde az teslimatlı arada hub
-kilitleniyordu (kendi kaçış betiğimle bulundu, düzeltildi).
+Gün sonu kapıları (önceki turdan, değişmedi): 1. celseye (GO_H1) yalnızca son gün, eylem puanı bitince ya da yapılacak etkinlik
+kalmayınca gidilir (duruşma tarihi sabit, 14 Nisan); 2. celseye (GO_T) aranın son günü bitince (ya da etkinlik kalmayınca) ve
+Leyla'yla o gün konuşulduktan sonra; delil dilekçesi son gün Leyla taslağı okuduktan sonra yazılır. Bekçinin sabah sorusu
+(CV_SABAH: eksper girişi, çizelge) `clue_numune` ∧ (INV_FOTO ∨ `clue_eksper_foto`) ∧ önce gece devriyesinin sorulmasını (CV_GECE)
+ister; ilk ziyarette sorulamadıysa A_CEVDET2 (1 EP) açılır. Necati'ye tanıklık sorulmadan takvim kartı kurulduysa A_NECATI2
+(1 EP) açılır; Leyla bunu söyler.
 
 ## 6. Node grafiği
 
@@ -125,69 +134,75 @@ her etkinlik doğrudan döner (kaçış uzaklığı sınırı, Dava #07 raporu �
 
 ## 7. Golden path'ler
 
-| Ad | Sonuç | Özet |
-|---|---|---|
-| TIPIK | BERAAT_E | Bütün soruşturma; 1. celsede numune zinciri, temizlenmiş zemin, taze benzin ve atölye kapı defteri (Q_GECE); pano, lab ve bekçi talebi; arada tahkim ve lab; suç duyurusu; bekçi Q1–Q3; Necati hazır tanık; 2-e savunması |
-| N_TIPIK_2B | BERAAT_E | Negatif test: TIPIK kaydında 2-b talebi (ispatsız dayanak) → yine 2-e beraat, yalnızca skor düşer |
-| N_TIPIK_TERDIT | BERAAT_E | Negatif test: TIPIK kaydında terditli talep → yine 2-e beraat |
-| G_B | BERAAT_B | Ayrıca arıza kaydı + ark raporu + nötr; U6'ya ark ve nötr ayrı ayrı; eksper kırılır; 2-b savunması |
-| N_B_ARKSIZ | BERAAT_E | Negatif test: pano incelemesi hiç istenmez, U6'ya yalnızca nötr; 2-b ispatsız → BERAAT_B değil, 2-e beraat |
-| G_T | TAKSIR | Hızlandırıcı çöker; elektrikçiye uğranır ama bir şey sorulmaz, önlem kartı kurulmaz; taksire cevap verilemez |
-| G_M | MAHKUMIYET | Yüzeysel soruşturma, çelişkiler kurulamaz |
-| G_ETIK_M | ETIK | G_M + ısmarlama rapor; ikinci celsede güven biter, yargılama mütalaa ve son sözle sürer |
-| G_ETIK | ETIK_E | Tam soruşturma + ısmarlama rapor; kalan kayıt (bekçi, fotoğraflar, tenekeler, Necati) beraati taşır |
-| G_ETIK_T | ETIK_T | G_ETIK ama taksir sorusuna cevap yok (T05_C): kalan kayıt beraati taşımaz |
-| W | TAKSIR (çöküş) | Zincir kurulur (U3 dahil), ikinci celsede yanlış delil sunumlarıyla güven 0; yargılama sürer, tavan kuralı gereği taksir |
+| Ad | Sonuç | Aksiyon | Özet |
+|---|---|---|---|
+| TIPIK | BERAAT_E | 242 | Bütün soruşturma; Necati'ye keşif, "acil miydi" ve tanıklık sorulur; 1. celsede başlangıç, zemin, zincir, pano, buat, taze benzin, koku ve bidon; pano, lab ve bekçi talebi; arada lab (üç satır), ark raporu, tahkim; suç duyurusu; bekçi Q1–Q3; U1, U2, U3, U6 (ark); Necati hazır tanık (T05_A); 2-e savunması |
+| N_TIPIK_2B | BERAAT_E | 242 | Negatif: TIPIK kaydında 2-b talebi (ispatsız dayanak) → 2-e beraat, yalnızca skor düşer |
+| N_TIPIK_TERDIT | BERAAT_E | 242 | Negatif: TIPIK kaydında terditli talep → 2-e beraat |
+| G_B | BERAAT_B | 249 | Ayrıca arıza kaydı + ark raporu + nötr; U6'ya ark ve nötr ayrı ayrı; T05_B; 2-b savunması |
+| N_KAYIT_ARIZA | BERAAT_E | 248 | Negatif (kayıt hükmü): dağıtım kaydı dosyada ama savunma taksire yanlış cevap verir (T05_C) ve nötr bağını kurmaz; 2-b ister → yine beraat, dayanak 2-e |
+| G_T | TAKSIR | 226 | Hızlandırıcı iddiası bütünüyle çöker; elektrikçiye yalnızca keşif sorulur (tanıklık yok, takvim kartı yok); arıza kaydı istenmez: taksire kayıtta karşılık yok |
+| G_M | MAHKUMIYET | 204 | Yüzeysel soruşturma; ark raporu gelir ama satırı okunmaz (PS_U6_OKUNMAMIS), laboratuvarın mühür satırı okunmaz (PS_U3_MUHURSUZ), T1_TARIK |
+| G_ETIK_M | ETIK | 182 | G_M + ısmarlama rapor; ikinci celsede güven biter, yargılama mütalaa ve son sözle sürer |
+| G_ETIK | ETIK_E | 239 | Tam soruşturma + ısmarlama rapor; Necati hazır tanık: kalan kayıt beraati taşır |
+| G_ETIK_T | ETIK_T | 239 | G_ETIK ama taksire yanlış cevap (T05_C), dosyada arıza kaydı yok |
+| W | TAKSIR (çöküş) | 234 | Bütün ayaklar kurulur (U1, U2, U3, U6 dahil), sonra beş yanlış sunumla güven 0; delil sunumu kapanır, T05_A görünmez; taksir |
 
-## 8. Ölçümler (2026-10-21, ikinci inceleme düzeltmelerinden sonra)
+## 8. Ölçümler (2026-10-21, yeniden dengeleme sonrası)
 
 `npm run case:duration -- yanik-ev`:
 
 ```
-  TIPIK         107.3 dk   15014 sözcük   239 aksiyon  BERAAT_E (14865)
-  N_TIPIK_2B    107.2 dk   14992 sözcük   239 aksiyon  BERAAT_E (14525)
-  N_TIPIK_TERDIT  107.0 dk   14965 sözcük   239 aksiyon  BERAAT_E (14775)
-  G_B           107.9 dk   14986 sözcük   246 aksiyon  BERAAT_B (15825)
-  N_B_ARKSIZ    106.6 dk   14877 sözcük   239 aksiyon  BERAAT_E (14605)
-  G_T            97.3 dk   13452 sözcük   226 aksiyon  TAKSIR (12535)
-  G_M            85.4 dk   11910 sözcük   192 aksiyon  MAHKUMIYET (6445)
-  G_ETIK_M       82.5 dk   11599 sözcük   181 aksiyon  ETIK (5485)
-  G_ETIK        105.2 dk   14690 sözcük   236 aksiyon  ETIK_E (14225)
-  G_ETIK_T      104.4 dk   14541 sözcük   236 aksiyon  ETIK_T (14015)
-  W              97.6 dk   13524 sözcük   225 aksiyon  TAKSIR (11170)
-  ==> TİPİK YOL (TIPIK): 107.3 dk  ✓ süre hedefte
-  ==> SÖZCÜK BÜTÇESİ: ✓ 15014 sözcük: hedefte (15–25 bin)
+  TIPIK         108.4 dk   15155 sözcük   242 aksiyon  BERAAT_E (15295)
+  N_TIPIK_2B    108.3 dk   15133 sözcük   242 aksiyon  BERAAT_E (14955)
+  N_TIPIK_TERDIT  108.1 dk   15106 sözcük   242 aksiyon  BERAAT_E (15205)
+  G_B           109.0 dk   15138 sözcük   249 aksiyon  BERAAT_B (16255)
+  N_KAYIT_ARIZA  108.9 dk   15142 sözcük   248 aksiyon  BERAAT_E (15315)
+  G_T            98.0 dk   13575 sözcük   226 aksiyon  TAKSIR (13325)
+  G_M            88.3 dk   12215 sözcük   204 aksiyon  MAHKUMIYET (7105)
+  G_ETIK_M       82.7 dk   11608 sözcük   182 aksiyon  ETIK (5515)
+  G_ETIK        106.3 dk   14826 sözcük   239 aksiyon  ETIK_E (14655)
+  G_ETIK_T      105.5 dk   14689 sözcük   239 aksiyon  ETIK_T (14445)
+  W             100.8 dk   13927 sözcük   234 aksiyon  TAKSIR (12525)
+  ==> TİPİK YOL (TIPIK): 108.4 dk  ✓ süre hedefte
 ```
 
-`node tools/content/word-count.mjs content/cases/yanik-ev`: TIPIK'te görülen satırlar 12.008 sözcük; paket 1.322 satır,
-17.360 satır sözcüğü; ekran metinleriyle toplam 23.860. En uzun satır 216 karakter.
+`node tools/content/word-count.mjs content/cases/yanik-ev`: paket 1.358 satır, 17.879 satır sözcüğü; ekran metinleriyle toplam
+24.696. En uzun satır 216 karakter.
 
-`npm run case:validate -- yanik-ev`: **PASSED — 0 hata**, 21 uyarı (1 SIMULATION_INCOMPLETE, 20 SOFTLOCK_UNVERIFIED); 861.438
-durum, 400 yürüyüş; yedi sonucun hepsine ulaşıldı; kapsam node 111/111, seçenek 216/216, kural 80/80, delil 66/66; golden path
-11/11; süre 399 sn (yük ortalaması ~3). SOFTLOCK_UNVERIFIED uyarıları yeni gün sonu kapılarından gelir: doğrulayıcının kaçış
-araması (4.000 durum bütçesi) hub'da eylem puanı harcamadan tahtalar arasında dolaşıyor. Bütün 20 tanık durumu, eylem puanını
-etkinliklere harcayan ve duruşmalara giden betikli bir kaçış politikasıyla sona ulaştı (20/20); 1.000 rastgele önek + aynı politika:
-1.000/1.000 tamamlandı, takılan yok. Bu betik, ilk denemede gerçek bir kilitlenmeyi de buldu (arada az teslimatla eylem puanı
-kalırken etkinliğin tükenmesi); tükenme koşulu güne bağlı olmaktan çıkarılarak düzeltildi. Etkinlikler hub'da ücretsiz
-seçeneklerden sonra gelir (BÜRO sekmesi ilk sırada), böylece arama önce eylem puanı harcamayı dener.
+`npm run case:validate -- yanik-ev`: **PASSED — 0 hata**; 853.946 durum, 400 yürüyüş; yedi sonucun hepsine ulaşıldı; kapsam node
+111/111, seçenek 219/219, kural 93/93, delil 66/66; golden path 11/11; süre ~500 sn (yük ortalaması ~4). Uyarılar:
+SIMULATION_INCOMPLETE (BFS bütçesi) ve 20 SOFTLOCK_UNVERIFIED. Bütün 20 tanık durumu, eylem puanını etkinliklere harcayan ve
+duruşmalara giden betikli bir kaçış politikasıyla dava sonuna ulaştı (20/20); 1.000 rastgele önek + aynı politika: 1.000/1.000
+tamamlandı, takılan yok. Uyarılar doğrulayıcının kaçış aramasının (4.000 durum) hub'da eylem puanı harcamadan tahtalar arasında
+dolaşmasından gelir; gerçek kilitlenme yok. (Bu tur ilk çalıştırmada Necati'nin ikinci ziyaretinde gerçek bir DEAD_END çıktı:
+çıkış seçeneği ilk ziyarette harcanmıştı; NC_BITIR2 eklenerek düzeltildi.)
 
-Erken çözüm denetimi (golden path'ten aksiyon silerek, reddedilen aksiyonları atlayan yeniden oynatmayla yerel en kısa yol;
-taksir için ayrıca elle küçültülmüş ara tohumu ve çöküş tohumu):
+### Erken çözüm denetimi (her sonuç)
 
-| Hedef | Tohum | En kısa | Süre | Oran |
+Sınırlı, tek süreçli arama: her golden path tohumundan delta-küçültme (48→1 boyutlu parça silme, ileri ve geri tarama, reddedilen
+aksiyonları atlayan yeniden oynatma, tohum başına ≤ 60 sn), ardından ara evresinde etkinlik sırasını değiştiren bir yeniden
+sıralama (tahkim etkinliğini düşürüp bekçiyi ilk güne alarak etkinlik tükenmesiyle erken çıkış) ve yeniden küçültme. Süreler
+`estimateActions` ile.
+
+| Hedef | En kısa yol | Süre | Golden path | Oran |
 |---|---|---|---|---|
-| BERAAT_E | N_TIPIK_2B, TIPIK, N_TIPIK_TERDIT, N_B_ARKSIZ | 190 aksiyon (final 12.515) | 90,4 dk | TIPIK'in %79'u |
-| BERAAT_B | G_B | 204 aksiyon (final 13.505) | 94,1 dk | G_B'nin %83'ü |
-| TAKSIR | elle küçültülmüş ara (4 etkinlik), G_T, W, çöküş | 106 aksiyon (G_T'den 113, W'den 122) | 60,6 dk | G_T'nin %47'si |
-| ETIK_E (OTHER) | G_ETIK | 129 aksiyon | 70,5 dk | etik sonu, skor eşiği yok |
-| ETIK_T | G_ETIK_T | 113 aksiyon | 64,8 dk | — |
-| MAHKUMIYET | G_M | varsayılan sonuç | — | — |
+| BERAAT_E | 153 aksiyon | 78,7 dk | TIPIK 242 | %63 |
+| BERAAT_B | 158 aksiyon | 79,2 dk | G_B 249 (TIPIK 242) | %63 (%65) |
+| TAKSIR | 149 aksiyon | 74,3 dk | G_T 226 | %66 |
+| ETIK_E | 153 aksiyon | 78,4 dk | G_ETIK 239 (TIPIK 242) | %64 (%63) |
+| ETIK_T | 149 aksiyon | 76,1 dk | G_ETIK_T 239 | %62 |
+| ETIK | 79 aksiyon | 50,2 dk | G_ETIK_M 182 | %43 |
+| MAHKUMIYET | 75 aksiyon | 47,8 dk | G_M 204 | varsayılan sonuç |
 
-Önceki ölçüm (ilk düzeltme): taksir 75 aksiyon / 46,3 dk (G_T'nin %35'i), beraat 172. Taksir artık bilirkişinin kabulünü,
-yeminli bekçiyi (refakatsiz giriş + dolu tenekeler), zemini, birinci celsedeki taze benzin çelişkisini, aradaki ham veriyi ve
-iki duruşmaya kadar bütün günleri ister; 60 dk tabanını geçer. Aksiyon oranı (%47) incelemenin önerdiği %60'ın altında kalır:
-G_T'nin ek aksiyonları isteğe bağlı derinliktir (konular, büyüteç dokunuşları, Saadet'in tam çapraz sorgusu); bunları zorunlu
-kılmak ya da taksiri skora bağlamak hukuki tavanı bozardı (zincir çöktüyse kasten mahkûmiyet olamaz).
+Önceki tur: TAKSIR 106 aksiyon / 60,6 dk (G_T'nin %47'si), ETIK_E 129 (%54), BERAAT_E 190 (skor eşiğiyle). Skor eşikleri
+kaldırıldığı hâlde beraat artık daha uzun bir zincir ister, çünkü kayıt zincirin kendisini ister: başlangıç noktası (V izi +
+itfaiye), buat (ev + Necati'nin keşfi), koku (itfaiye), satın alınan benzin (atölye + Halil), mahkemenin ark raporu (1. celse
+talebi + aradaki okuma), laboratuvarın mühür ve tutanak satırları (ara), eksperin girişi (çizelge, 2. celse) ve her çelişkide
+önce bastırma. Taksire kayıtla karşılık da bir temel ister: notun yazarının tanıklığı ya da mahkemenin getirttiği dağıtım kaydı.
+
+ETIK (ısmarlama raporla kasten mahkûmiyet) %60'ın altında kalır: bu bir çözüm değil, aranın ilk akşamında her oyuncuya gelen
+teklifi kabul etmenin bedelidir; en kısa yolu oyunun yapısal tabanıdır (MAHKUMIYET 75 + bir seçim). Golden path'i 82,7 dk.
 
 Tahtalar: birinci evrede iki tahta (yangın: 14 kart, 6 tarif + 2 çeldirici; iplikler: 13 kart, 6 tarif + 2 çeldirici), arada
-bir tahta (13 kart, 4 tarif); tek havuzlu 28 kartlık tahta simülasyonu patlattığı için bölündü.
+bir tahta (13 kart, 4 tarif).

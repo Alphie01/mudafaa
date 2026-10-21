@@ -246,7 +246,9 @@ mütalaa, savunma, son söz, karar). Zorluk 5: son celse iki oturuma bölünmü�
 - T_03K: Hâkim, eksperi CMK 48 hakkı konusunda uyarır; Tarık: "Bu soruya cevap vermeyeceğim." Hâkim suç duyurusu için
   tutanağın savcılığa verilmesine karar verir. Sessizlik.
 - T_04 `card`: "13.40 — İKİNCİ OTURUM". T_05: Hâkim, eylemin TCK 171 (taksir) kapsamında değerlendirilebileceğini hatırlatır
-  (CMK 226). Ek savunma: restorasyon takvimi / nötr kopukluğu / "ihmal yok" (dayanaksız) / susmak.
+  (CMK 226). Ek savunma: restorasyon takvimi (yalnızca Necati Usta tanıklığa gelmeyi kabul ettiyse; kürsüde bayramlık ceketiyle
+  "acil değildi" der) / nötr kopukluğu (ark raporu ve arıza kaydıyla) / "ihmal yok" (dayanaksız) / süre istemek. Leyla'nın
+  "bu not iki yöne keser" uyarısı burada gerçekleşir: buatı kasıtla savaşırken tutanağa sokan savunma, taksir kapısını da açmıştır.
 - T_05M: mütalaa (beraat talebi, taksir talebi ya da mahkûmiyet) + cevap.
 - T_06P: üç dayanak; T_06: esas savunma 3–5 satırlık konuşma; T_07: Halil'in son sözü (Nermin'in evi).
 - T_08: hüküm.
@@ -258,16 +260,17 @@ mütalaa, savunma, son söz, karar). Zorluk 5: son celse iki oturuma bölünmü�
 - **BERAAT_E:** Serbest ama yarım: "şüpheden yararlandı." Kalem Sokak'ta kömür tahtalar; Halil çeyiz sandığını yanık evin
   önüne koyar, açar. Deniz (thought): "Bir halatı çözdük. Halatı öreni değil."
 - **TAKSIR:** "Taksirle… beş ay… ertelenmesine." Halil: "Kundakçı değilmişim; dikkatsizmişim. Nermin buna da kızardı." Kuru,
-  acı. Çöküşle gelinen taksirde (hızlandırıcı tespiti birinci celsede çökmüş, ikinci celsede güven bitmiş) savcının cümlesi:
+  acı. Bu sona yalnızca taksire kayıtta bir karşılık yoksa gelinir: usta kürsüye çağrılmamış, sokağın arıza kaydı istenmemiştir.
+  Çöküşle gelinen taksirde (bütün ayaklar kurulmuş, ikinci celsede güven bitmiş, delil sunumu kapanmış) savcının cümlesi:
   "Numune zincirini siz kurdunuz; o zincir müvekkilinizi kurtardı. Bugün yanlış kâğıtlar beraati götürdü."
 - **MAHKUMIYET:** Ring aracı; Zehra bir hemşire soğukkanlılığıyla ağlamamaya çalışır. Bidon bulunmadıysa: "Kimse bakmadı; ben
   de bakmadım." Bulunduysa: "İplikleri gevşettim ama halatın ucundaki rapora dokunamadım." Çöküşte ayrı, tek bir blok (tek
   "Türk Milleti adına"): savcının "yanlış tanığa, yanlış anda" cümlesi.
 - **ETIK (üç yüz):** Onur'un eksperi koridorda ifade imzalar; Leyla masaya meslek kuralları kitapçığını bırakır. Mahkeme
-  ısmarlama mütalaayı hükme esas almaz ve Halil'i yalnızca kalan delillere göre yargılar: numune zinciri kurulmamışsa mahkûmiyet
-  (ETIK); kurulmuş ve kalan kayıt beraati taşıyorsa beraat (ETIK_E; Halil: "Beraat etmişim. Bunu bir bekçinin defteri söyledi,
-  bir ustanın notu söyledi; o satın aldığınız kâğıt değil." Deniz: "Gerçek yetiyordu."); taksir sorusu cevapsız kaldıysa taksir
-  (ETIK_T). Her üçünde müdafi baroya bildirilir; bedeli avukat öder, müvekkil değil.
+  ısmarlama mütalaayı hükme esas almaz ve Halil'i yalnızca kalan delillere göre yargılar: hızlandırıcı iddiası çökmemişse
+  mahkûmiyet (ETIK); çökmüş ve taksir kayıtla karşılanmışsa beraat (ETIK_E; Halil: "Beraat etmişim. Bunu bir bekçinin defteri söyledi,
+  bir ustanın notu söyledi; o satın aldığınız kâğıt değil." Deniz: "Gerçek yetiyordu."); taksire kayıtta karşılık yoksa taksir
+  (ETIK_T). Hiçbir sonda hüküm skora bağlı değildir. Her üçünde müdafi baroya bildirilir; bedeli avukat öder, müvekkil değil.
 
 ## 6. Ters köşeler ve hazırlığı
 

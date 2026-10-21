@@ -53,6 +53,11 @@ const dayDeliveries = deliver('INV_DAY_END', [
     hint: 'Turnike ve araç kapısı kayıtlarını dilekçeyle iste (CMK 177).',
   },
   { evidence: 'ev_kantin', requires: flag('dil_kantin'), hint: 'Kantinin kart okuyucu kaydını dilekçeyle iste.' },
+  {
+    evidence: 'ev_bakim',
+    requires: flag('dil_bakim'),
+    hint: 'Direkteki etiketin iş emri kaydını (enerji kesme saatleri) dilekçeyle iste.',
+  },
 ]);
 const nightDeliveries = deliver('INV_GECE_1', [
   {
@@ -61,6 +66,11 @@ const nightDeliveries = deliver('INV_GECE_1', [
     hint: 'Turnike ve araç kapısı kayıtlarını dilekçeyle iste (CMK 177).',
   },
   { evidence: 'ev_kantin', requires: flag('dil_kantin'), hint: 'Kantinin kart okuyucu kaydını dilekçeyle iste.' },
+  {
+    evidence: 'ev_bakim',
+    requires: flag('dil_bakim'),
+    hint: 'Direkteki etiketin iş emri kaydını (enerji kesme saatleri) dilekçeyle iste.',
+  },
 ]);
 
 /** Tahtada bir çıkarımı yalnızca ilk kurulumda ödüllendirir (alternatif tarifler ve ara tahtası için). */
@@ -92,11 +102,11 @@ export function invRecipes(pre: string): ChoiceDef[] {
         'Nail Usta onu ağlarken gördü; gece haberleri başladığında hâlâ taburedeydi. 23.37’den 00.00’a kadar iskele.',
       ),
     }),
-    recipe(`${pre}_ISIK`, 'clue_kenan_isik', 'clue_projektor', {
+    recipe(`${pre}_ISIK`, 'clue_kenan_isik', 'clue_enerji', {
       effects: firstTime('ded_isik'),
       feedback: feedbackNew(
         'Projektörler sönüktü',
-        '“Gündüz gibiydi” diyor. Etikete göre B sahasının projektörleri 23.00–02.00 bakımdaydı. Gece, sisli, ışıksız bir sahada yirmi metreden yüz.',
+        '“Girişteki büyük direk, gündüz gibiydi” diyor. İş emri: hat A, giriş direkleri, enerji 23.02’de kesilmiş, 01.56’da verilmiş. Onun direği o hatta. Işıksız bir sahada yirmi metreden yüz.',
       ),
     }),
     recipe(`${pre}_KAN`, 'clue_baba_kan', 'clue_basit', {
@@ -172,6 +182,7 @@ export const INV_POOL = [
   'clue_basit',
   'clue_projektor',
   'clue_kenan_isik',
+  'clue_enerji',
   'clue_arama2341',
   'clue_cikis',
   'clue_pos',
@@ -251,7 +262,12 @@ const hubChoices = {
       once: true,
       description: '0 EP · üç ifade, bir daktilo',
     }),
-    p1.activity('H_DIL', 'Delil dilekçesi (CMK 177)', 'INV_DIL', { once: true, description: '2 talep hakkı' }),
+    p1.free('H_BAKIM', 'İş emri kaydını incele', 'INV_BAKIM', {
+      once: true,
+      description: '0 EP · elektrik yüklenicisinin cevabı',
+      visibleWhen: has('ev_bakim'),
+    }),
+    p1.activity('H_DIL', 'Delil dilekçesi (CMK 177)', 'INV_DIL', { once: true, description: '3 talep hakkı' }),
     p1.free('H_CIKARIM', 'Çıkarım tahtası', 'INV_CIKARIM', {
       description: '0 EP · ipuçlarını birleştir',
       enabledWhen: ref('kart2'),
@@ -1364,6 +1380,54 @@ const ifade = documentExam('INV_IFADE', {
   }),
   finish: { id: 'IFADE_BITIR' },
 });
+const bakim = documentExam('INV_BAKIM', {
+  ...INV,
+  title: 'İş emri 4471',
+  hud: ['bakim_left'],
+  background: 'buro',
+  lines: B(`
+> Elektrik yüklenicisinin cevabı: tek sayfa iş emri, bir teknisyen imzası, kenarında yağlı bir parmak izi. “Mahkemenizin müzekkeresi üzerine…”
+~ Etiket bir niyet. İş emri bir yapılmış iş. Bir mahkeme niyete değil yapılmış işe bakar.
+> Sayfanın altında el çizimi bir hat şeması: B sahası, dört sıra, giriş direkleri. Rıhtım 4 şemanın kenarında, ayrı bir kutuda.
+`),
+  header: { left: 'MUDANYA ELEKTRİK · İŞ EMRİ 4471', right: '14–15.11' },
+  columns: [
+    { label: 'SATIR', flex: 0.8 },
+    { label: 'KAYIT', flex: 2.6 },
+    { label: 'İMZA', flex: 1 },
+  ],
+  rows: [
+    row('b1', ['İş', 'B sahası aydınlatma panosu bakımı · planlı · 23.00–02.00', 'şef']),
+    row('b2', ['Hat A', 'B sahası giriş direkleri ve 1–4. sıra · enerji kesme 23.02 · verme 01.56', 'İ. KAYA']),
+    row('b3', ['Hat B', 'B sahası arka çit hattı · kesinti yok', 'İ. KAYA']),
+    row('b4', ['Not', 'Rıhtım 4 ve rıhtım yolu aydınlatması ayrı hattan beslenir; kesinti yapılmadı', '—']),
+  ],
+  tools: [tool('mag', 'Büyüteç', 'magnifier'), tool('compare', 'Karşılaştır', 'compare')],
+  costVar: 'bakim_left',
+  rules: [
+    examine('EX_B2', 'mag', 'b2', {
+      discovers: 'clue_enerji',
+      score: { DELIL_ANALIZI: 120 },
+      feedback: {
+        title: 'YENİ İPUCU',
+        text: 'Hat A: B sahasının giriş direkleri ve ilk dört sıra. Enerji 23.02’de kesilmiş, 01.56’da verilmiş; teknisyen imzalı. Etiketteki plan o gece uygulanmış.',
+        label: '+120 SKOR · Not defterine eklendi',
+        tone: 'special',
+      },
+    }),
+  ],
+  miss: fallback('FB_BAKIM', 'EXAMINE', {
+    score: { DELIL_ANALIZI: -20 },
+    feedback: {
+      title: 'SONUÇ YOK',
+      text: 'Bu satırda bu aletle dikkat çeken bir şey yok.',
+      label: '−20 SKOR',
+      tone: 'error',
+    },
+  }),
+  finish: { id: 'BAKIM_BITIR' },
+});
+
 // --- Dilekçe ---
 
 const dilekce = story('INV_DIL', {
@@ -1371,14 +1435,14 @@ const dilekce = story('INV_DIL', {
   title: 'Delil dilekçesi (CMK 177)',
   background: 'buro',
   lines: B(`
-> Duruşmadan önce mahkemeden delil toplanmasını isteyebilirdim. Ama mahkeme her talebi okumaz; iki talep, gerekçesiyle, yeter.
+> Duruşmadan önce mahkemeden delil toplanmasını isteyebilirdim. Ama mahkeme her talebi okumaz; üç talep, gerekçesiyle, yeter.
 ~ Bir dilekçe bir kapıyı açmaz. Kapıyı açacak kişiye anahtarın nerede olduğunu söyler.
 `),
   choices: [
     option('DIL_TURNIKE', 'Liman turnike ve araç kapısı kayıtları (14 Kasım 22.00–01.00)', {
       // Hangi kapının, hangi saatlerin isteneceğini müvekkilin anlatımı söyler (“kartımı bastım, çıktım”).
       visibleWhen: flag('fact_gece'),
-      enabledWhen: cmp(v('dil_n'), '<', 2),
+      enabledWhen: cmp(v('dil_n'), '<', 3),
       score: { USUL_BILGISI: 50 },
       effects: [raise('dil_turnike'), inc('dil_n')],
       good: 'Sanığın çıkış saatini ve limana giren araçları gösterecek kayıt; somut, ilgili ve elde edilebilir (CMK 177, 332).',
@@ -1387,7 +1451,7 @@ const dilekce = story('INV_DIL', {
       ),
     }),
     option('DIL_KANTIN', 'Kantinin kart okuyucu kayıtları (14 Kasım 23.00–00.00)', {
-      enabledWhen: cmp(v('dil_n'), '<', 2),
+      enabledWhen: cmp(v('dil_n'), '<', 3),
       score: { USUL_BILGISI: 40 },
       effects: [raise('dil_kantin'), inc('dil_n')],
       good: 'Maktulün kavgadan sonra yaşadığını ve ne zaman yemek yediğini gösterecek kayıt (CMK 177, 332).',
@@ -1395,15 +1459,26 @@ const dilekce = story('INV_DIL', {
         `- Maktulün kavgadan sonra kantinde olup olmadığı. Kart okuyucu saat tutar; ölüm saatini daraltmak için gerekli.`,
       ),
     }),
+    option('DIL_BAKIM', 'Elektrik yüklenicisinin iş emri 4471 kaydı (B sahası aydınlatması, 14 Kasım)', {
+      // Etiketin kendisi bir plan; planın uygulandığını iş emrinin enerji kesme kaydı gösterir.
+      visibleWhen: has('clue_projektor'),
+      enabledWhen: cmp(v('dil_n'), '<', 3),
+      score: { USUL_BILGISI: 50 },
+      effects: [raise('dil_bakim'), inc('dil_n')],
+      good: 'Etiket bir bakım planıdır; o gece enerjinin gerçekten kesildiğini gösterecek kayıt somut, ilgili ve elde edilebilir (CMK 177, 332).',
+      responses: B(
+        `- Olay gecesi B sahası aydınlatmasında enerjinin kesilip kesilmediği. Direkteki etiket iş emri numarası taşıyor; kesme ve verme saatleri yüklenicinin kaydında.`,
+      ),
+    }),
     option('DIL_KESIF', 'Olay yerinde keşif', {
-      enabledWhen: cmp(v('dil_n'), '<', 2),
+      enabledWhen: cmp(v('dil_n'), '<', 3),
       effects: [inc('dil_n')],
       neutral:
         'Üç ay sonra yapılacak keşif izleri göstermez; fotoğraflar zaten dosyada. Talep hakkını başka bir kayda harcayabilirdin.',
       responses: B(`- Olay yerinde keşif. Mesafeleri ve aydınlatmayı görmek için.`),
     }),
     option('DIL_HTS', 'Liman güvenlik kamerası kayıtları (B sahası ve rıhtımlar)', {
-      enabledWhen: cmp(v('dil_n'), '<', 2),
+      enabledWhen: cmp(v('dil_n'), '<', 3),
       score: { USUL_BILGISI: -40 },
       effects: [inc('dil_n')],
       bad: 'Kolluğun olay yeri tutanağı B sahasında ve 4 no’lu rıhtımda kamera bulunmadığını yazıyordu; dosyayı okumadan istenen kayıt bir talep hakkını boşa harcar (CMK 177).',
@@ -1719,7 +1794,7 @@ const geceNodes = [
     lines: [
       W(
         any(has('ded_isik'), has('clue_projektor')),
-        `~ “Gündüz gibiydi.” Bir etiket: enerji yok. Yarın bir adam yemin edip ışıktan söz edecek.`,
+        `~ “Gündüz gibiydi.” Bir etiket, bir iş emri: enerji yok. Yarın bir adam yemin edip ışıktan söz edecek.`,
       ),
       O(`~ Vardiya şefi yarın yemin edecek. Bir adamı yürüyüşünden tanıdığını söyleyecek. Neye bakarak?`),
     ],
@@ -1869,6 +1944,7 @@ export const investigation: CasePart = {
     telefon,
     turnike,
     ifade,
+    bakim,
     dilekce,
     cikarim,
     leyla,

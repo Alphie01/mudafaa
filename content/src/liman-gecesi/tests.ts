@@ -111,6 +111,7 @@ c LEYLA_DON
 c H_DIL
 c DIL_TURNIKE
 c DIL_KANTIN
+c DIL_BAKIM
 c DIL_GONDER
 c AK2_B
 `);
@@ -120,6 +121,9 @@ c H_TURNIKE
 e compare g2
 e mag g4
 c TURNIKE_BITIR
+c H_BAKIM
+e mag b2
+c BAKIM_BITIR
 c H_ORHAN
 c OR_DERS
 c OR_MIDE
@@ -164,7 +168,7 @@ c BSAHA_BITIR
 c H_CIKARIM
 m clue_cikis clue_pos
 m clue_nail clue_radyo
-m clue_kenan_isik clue_projektor
+m clue_kenan_isik clue_enerji
 m clue_surukleme clue_lastik
 c CIKARIM_BITIR
 c H_LEYLA
@@ -230,6 +234,11 @@ e mag n3
 e mag n4
 c ATK_BITIR
 c AA1_A
+c A_ORHAN
+c OT_KONTR
+c OT_MIDE
+c OT_KAYIT
+c OT_BITIR
 c A_CIKARIM
 m clue_desen clue_kontrkup
 m clue_mide clue_kantin
@@ -340,6 +349,11 @@ e mag n2
 e mag n3
 e mag n4
 c ATK_BITIR
+c A_ORHAN
+c OT_KONTR
+c OT_MIDE
+c OT_KAYIT
+c OT_BITIR
 c A_SEVIM
 c SV_TAZIYE
 c SV_ERCAN
@@ -465,6 +479,7 @@ c KN_TARIK
 c KN_BITIR
 c H_DIL
 c DIL_TURNIKE
+c DIL_BAKIM
 c DIL_KESIF
 c DIL_GONDER
 c H_SUKRU
@@ -479,8 +494,13 @@ c H_IFADE
 e mag i3
 e mag i2
 c IFADE_BITIR
+c H_BAKIM
+e mag b1
+e mag b2
+c BAKIM_BITIR
 c H_TURNIKE
 e compare g2
+e mag g4
 c TURNIKE_BITIR
 c H_BUFE
 c NL_GECE
@@ -491,7 +511,7 @@ t OB_AKIS
 c BUFE_BITIR
 c H_CIKARIM
 m clue_cikis clue_pos
-m clue_kenan_isik clue_projektor
+m clue_kenan_isik clue_enerji
 m clue_baba_kan clue_kafes
 c CIKARIM_BITIR
 c H_TELEFON
@@ -503,6 +523,7 @@ c H_LEYLA
 c LEYLA_DON
 c H_BSAHA
 t OB_SURUK
+t OB_LASTIK
 t OB_KEDI
 t OB_PALET
 c BSAHA_BITIR
@@ -538,6 +559,7 @@ s ded_isik K2
 c H105_BITIR
 c TL_ATK
 c TL_KANTIN
+c TL_GPS
 c TL_BITIR
 c H107_A
 c H108_DEVAM
@@ -562,11 +584,15 @@ t OB_MONT
 t OB_ETIKET
 t OB_ELDIVEN
 c EMANET_BITIR
-c A_DEFTER
-e compare d1
-e mag d4
-c DEFTER_BITIR
+c A_KAYIT
+e compare a1
+e mag a2
+e compare z1
+c KAYIT_BITIR
 c AA2_B
+c A_CIKARIM
+m clue_gps clue_zimmet
+c ARA_CIKARIM_BITIR
 c A_TALEP
 c EK_ABONE
 c EK_GONDER
@@ -585,6 +611,7 @@ s ev_kantin B2
 p B3
 c T01_BITIR
 p K5
+s ded_arac K5
 p K6
 c T02_BITIR
 p N1
@@ -797,7 +824,6 @@ t OB_LASTIK
 c BSAHA_BITIR
 c H_CIKARIM
 m clue_nail clue_radyo
-m clue_kenan_isik clue_projektor
 m clue_surukleme clue_lastik
 c CIKARIM_BITIR
 c H_TURNIKE
@@ -827,7 +853,7 @@ c H104B_DEVAM
 p K1
 s ev_hesap K1
 p K2
-s ded_isik K2
+s clue_projektor K2
 c H105_BITIR
 c TL_ATK
 c TL_ABONE
@@ -891,9 +917,12 @@ c T00_DEVAM
 s ev_twistlock B1
 s ev_kenan_ifade B2
 p B1
-s ev_tarik_ifade B3
-s clue_pil B1
-s ev_hesap B2
+c T01_BITIR
+p K5
+s ded_arac K5
+s ev_tarik_ifade K6
+s clue_pil K6
+s ev_hesap K7
 `),
 ];
 
@@ -910,6 +939,7 @@ c STR_MASUMIYET
 c SABAH_DEVAM
 c H_RIHTIM
 t OB_BABA
+t OB_PROJ
 c RIHTIM_BITIR
 c H_ONRAPOR
 e mag o1
@@ -939,12 +969,16 @@ e mag t3
 c TELEFON_BITIR
 c H_DIL
 c DIL_TURNIKE
+c DIL_BAKIM
 c DIL_GONDER
 c AK2_B
 c H_TURNIKE
 e compare g2
 e mag g4
 c TURNIKE_BITIR
+c H_BAKIM
+e mag b2
+c BAKIM_BITIR
 c H_ORHAN
 c OR_DERS
 c OR_MIDE
@@ -953,6 +987,8 @@ c H_SUKRU
 c SK_BITIR
 c AK3_A
 c H_KENAN
+c KN_GECE
+c KN_ISIK
 c KN_BITIR
 c H_BUFE
 c NL_GECE
@@ -969,6 +1005,7 @@ c H_CIKARIM
 m clue_cikis clue_pos
 m clue_nail clue_radyo
 m clue_surukleme clue_lastik
+m clue_kenan_isik clue_enerji
 c CIKARIM_BITIR
 c GO_H1
 c GECE_DEVAM
@@ -982,6 +1019,10 @@ p S3
 c H103_BITIR
 c H104_A
 c H104B_DEVAM
+s ev_tarik_ifade K1
+s ev_sukru_ifade K4
+p K2
+s ded_isik K2
 c H105_BITIR
 c TL_ATK
 c TL_GPS
@@ -993,6 +1034,10 @@ c A_ATK
 e mag n3
 e mag n4
 c ATK_BITIR
+c A_ORHAN
+c OT_KONTR
+c OT_MIDE
+c OT_BITIR
 c A_SEVIM
 c SV_TAZIYE
 c SV_HAFTA
@@ -1013,12 +1058,14 @@ c ARA_CIKARIM_BITIR
 c A_TARIK
 c TR_BITIR
 c AA2_B
-c A_NURTEN
-c NU_BITIR
+c A_EMANET
+t OB_KONI
+c EMANET_BITIR
 c A_DEFTER
 e mag d4
 c DEFTER_BITIR
 c A_CIKARIM
+m clue_koni clue_desen
 m clue_defter_satir clue_arama2341
 c ARA_CIKARIM_BITIR
 c A_SUC
@@ -1033,7 +1080,10 @@ p B5
 s ded_tasima B5
 p B2
 s ded_saat B2
+p B3
+s ded_silah B3
 c T01_BITIR
+p K5
 s ded_arac K5
 s ded_motif K6
 c T02_BITIR
@@ -1055,7 +1105,7 @@ export const tests: CasePart = {
     goldenPaths: [
       goldenPath(
         'G1',
-        { outcome: 'BERAAT_B', finalMin: 11780, finalMax: 13020 },
+        { outcome: 'BERAAT_B', finalMin: 12490, finalMax: 13810 },
         PROLOG('BR00_C', 'BR01_A', 'STR_MASUMIYET'),
         GUN1,
         GUN2,
@@ -1065,10 +1115,10 @@ export const tests: CasePart = {
         ARA_TAM(true),
         CELSE2('T06_B', 'T06SB_DEVAM', { silah: false }),
       ),
-      goldenPath('G1_AZ', { outcome: 'BERAAT_B', finalMax: 9500 }, G1_AZ),
+      goldenPath('G1_AZ', { outcome: 'BERAAT_B', finalMax: 9990 }, G1_AZ),
       goldenPath(
         TYPICAL_PATH,
-        { outcome: 'BERAAT_E', finalMin: 11509, finalMax: 12721 },
+        { outcome: 'BERAAT_E', finalMin: 12190, finalMax: 13480 },
         PROLOG('BR00_C', 'BR01_A', 'STR_USUL'),
         GUN1,
         GUN2,
@@ -1080,7 +1130,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G3',
-        { outcome: 'NITELIK', finalMin: 4636, finalMax: 5124 },
+        { outcome: 'NITELIK', finalMin: 5795, finalMax: 6405 },
         PROLOG('BR00_A', 'BR01_D', 'STR_INDIRIM'),
         G3_SORUSTURMA,
         G3_CELSE1,
@@ -1095,7 +1145,7 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'G5',
-        { outcome: 'ETIK', finalMin: 6161, finalMax: 6809 },
+        { outcome: 'ETIK', finalMin: 5730, finalMax: 6330 },
         PROLOG('BR00_A', 'BR01_A', 'STR_USUL'),
         G5_SORUSTURMA,
         G5_CELSE1,

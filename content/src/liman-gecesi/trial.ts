@@ -37,13 +37,7 @@ import { H2, court2, wrongMove } from './shared.js';
 // tanıklığı (etik dalı), ek savunma (CMK 226), mütalaa ve cevap, esas savunma, son söz, hüküm; çöküş kesintisi.
 // Karar olgulara bakar (70-outcomes): esas savunmanın adı skoru, iknayı ve kapanış metnini değiştirir, beraati değil.
 
-const GERCEK_FAIL: Cond = all(
-  flag('suc_duyurusu'),
-  flag('contra_k5'),
-  any(flag('contra_k6'), flag('contra_k7')),
-  ref('donus_yok'),
-  ref('olum_sonra'),
-);
+const GERCEK_FAIL: Cond = all(ref('fail_kayit'), ref('donus_yok'), ref('olum_sonra'));
 const SUPHE: Cond = all(ref('donus_yok'), ref('olum_sonra'));
 /** Raporu düzenleyen uzman yalnızca ilk celsede (TL_ATK) ya da arada ek dilekçeyle (EK_ATK) istendiyse dinlenir. */
 const UZMAN: Cond = any(flag('talep_atk'), flag('ek_atk'));
@@ -502,8 +496,8 @@ kenan: Biliyorum efendim. Söyleyeceğim bir şey yok aslında. Geçen sefer yan
       statements: [
         statement('K5', 1, [
           'O gece ',
-          hl('kamyonete binmedim; ofisteydim', any(flag('press_k5'), has('ded_arac'), has('ev_gps'))),
-          '.',
+          hl('kamyonete binmedim; turumu yürüyerek attım', any(flag('press_k5'), has('ded_arac'), has('ev_gps'))),
+          '. Onu da yürürken gördüm.',
         ]),
         statement('K6', 2, [
           hl('Ercan beni o gece aramadı', any(flag('press_k6'), has('ev_abone'), has('ded_motif'))),
@@ -526,7 +520,23 @@ kenan: Biliyorum efendim. Söyleyeceğim bir şey yok aslında. Geçen sefer yan
         pressRule('PR_K5', 'K5', {
           score: { SORGULAMA: 25 },
           effects: [raise('press_k5')],
-          responses: B(`
+          responses: [
+            W(
+              any(flag('contra_k1'), flag('contra_k2')),
+              `
+savci: Tanık, ek ifadenizi okuyorum: “On ikiyi on geçe, yürüyerek tur atarken, rıhtım yolunda, lambanın altında gördüm.” Bunun arkasında mısınız?
+kenan: Arkasındayım efendim. Geçen sefer saati şaşırdım; adamı şaşırmadım.
+- Kenan Bey, o turu yürüyerek mi attınız?
+kenan: Yürüyerek. Yirmi yıldır yürürüm. Liman yürünerek bilinir.
+- Servis kamyoneti o gece kimdeydi?
+kenan: Kimde olacak, ofisin önünde. Anahtarı panoda. Herkes alır.
+- Zimmet defteri tutulur mu?
+kenan: Tutulur. Kâğıt işte. Gece kimin eli boşsa o kullanır.
+> Kenan avukatına baktı. Avukat başını hafifçe iki yana salladı.
+~ Yeni hikâyenin taşıyıcı duvarı tek bir kelime: yürüyerek. Kelimeyi kendi ağzıyla yeniden kurdu. Şimdi kâğıt.
+`,
+            ),
+            O(`
 - Servis kamyoneti o gece kimdeydi?
 kenan: Kimde olacak, ofisin önünde. Anahtarı panoda. Herkes alır.
 - Zimmet defteri tutulur mu, Kenan Bey?
@@ -535,21 +545,46 @@ kenan: Tutulur. Kâğıt işte. Kim imzalarsa imzalar; gece kimin eli boşsa o k
 > Kenan avukatına baktı. Avukat başını hafifçe iki yana salladı.
 kenan: Hatırlamıyorum. Yirmi yıldır her gece bir imza atıyorum.
 `),
+          ],
         }),
-        presentRule('PS_K5', 'K5', ['ded_arac', 'ev_gps'], {
+        tekrar('PS_K5_TEKRAR', 'K5', ['ded_arac', 'ev_gps'], 'contra_k5'),
+        // K5: önce tanığın “yürüyerek” anlatımı kürsüde kesinleştirilir (BASTIR); araç takip satırı tek başına aracın yerini
+        // gösterir, kimin kullandığını değil: zimmet satırıyla birleşmiş çıkarım (ded_arac) gerekir.
+        presentRule('PS_K5', 'K5', ['ded_arac'], {
+          enabledWhen: flag('press_k5'),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_k5')],
           good: 'Zimmet ve araç takip kaydı: tanığın zimmetindeki kamyonet ölüm saatinde B sahasında on dört dakika durdu.',
           category: 'SORGULAMA',
           responses: B(`
-- Sayın Başkan, işletmenin zimmet defteri: 16 LMN 07, 14 Kasım 22.00, teslim alan K. Aksoy. Araç takip kaydı: 23.52’den 00.06’ya kadar B sahası, üçüncü sıra, motor çalışır.
-- Ceset B sahasının üçüncü sırasında bulundu.
+- Sayın Başkan, işletmenin zimmet defteri: 16 LMN 07, 14 Kasım 22.00, teslim alan K. Aksoy. Araç takip kaydı: 23.52’den 00.06’ya kadar B sahası, üçüncü sıra, motor çalışır; 00.14’te araç kapısından çıkış.
+- Tanık on ikiyi on geçe rıhtım yolunda yürüdüğünü söylüyor. O dakikada kendi zimmetindeki kamyonet B sahasından araç kapısına gidiyordu. Ceset B sahasının üçüncü sırasında bulundu.
 > Kenan’ın avukatı eğilip bir şey fısıldadı. Kenan başını salladı.
 kenan: Bu soruya cevap vermeyeceğim efendim.
 baskan: Tutanağa geçsin: tanık, kendisini suçlayabilecek soruya cevap vermeyeceğini bildirdi.
 uye: Tanık, ilk celsede “sabaha kadar ofisteydim” demiştiniz. Bu beyanınızın arkasında mısınız?
 kenan: … Ona da cevap vermeyeceğim efendim.
 > Salonda bir uğultu. Sevim Yavuz galeride ayağa kalktı, sonra yavaşça oturdu.
+`),
+        }),
+        presentRule('PS_K5_KISMI', 'K5', ['ev_gps'], {
+          enabledWhen: flag('press_k5'),
+          score: { SORGULAMA: 100 },
+          effects: [inc('pers')],
+          neutral:
+            'Kısmi isabet: araç takip satırı kamyonetin yerini gösterir, kimin kullandığını değil. Zimmet satırıyla birleştirip sunmak gerekiyordu.',
+          responses: B(`
+- Sayın Başkan, araç takip kaydı: 16 LMN 07, 23.52’den 00.06’ya kadar B sahasında.
+kenan: Gördünüz mü? Kamyonet oradaymış. Ben yürüyordum. Anahtar panoda; kim aldıysa o.
+uye: Müdafi, aracı o gece kimin kullandığına ilişkin kayıt var mı?
+~ Bir makine bir aracın yerini söyledi; bir imza o aracın elini söyleyecekti. İmzayı bağlamadan kâğıdı uzattım.
+`),
+        }),
+        presentRule('PS_K5_ERKEN', 'K5', ['ded_arac'], {
+          responses: B(`
+- Sayın Başkan, zimmet ve araç takip kaydı: kamyonet o gece B sahasındaydı.
+kenan: Kamyonetle ne ilgim var avukat hanım? Ben size ne dedim ki?
+~ Tanığın “yürüyerek”ini kendi ağzından yeniden kurdurmadan kâğıdı gösterdim; o da kâğıdın etrafından dolaştı.
 `),
         }),
         pressRule('PR_K6', 'K6', {

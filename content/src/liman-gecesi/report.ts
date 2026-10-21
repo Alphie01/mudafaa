@@ -26,6 +26,12 @@ export const report: CasePart = {
         'ARASTIRMA',
       ),
       missedEvidence(
+        'h_bakim_kayit',
+        'ev_bakim',
+        'Direkteki etiketin iş emri kaydını dilekçeyle istemedin (CMK 177): etiket bir plandı, kayıt planın o gece uygulandığını gösterirdi.',
+        'USUL_BILGISI',
+      ),
+      missedEvidence(
         'h_pil',
         'clue_pil',
         'Şükrü Usta’ya bağıranın ağzını görüp görmediğini sormadın; işitme cihazının pili bitikti.',
@@ -118,13 +124,31 @@ export const report: CasePart = {
       hint(
         'h_tesis',
         all(any(flag('contra_k1'), flag('contra_n1')), not(ref('donus_yok'))),
-        'Tanığın saatini kayıtla çürüttün ama yüzü görüp göremeyeceğini (bakım etiketi) ya da sanığın gece yarısına kadar nerede olduğunu (büfecinin radyosu) kürsüye getirmedin; tanık saatini esnetip teşhise tutundu.',
+        'Tanığın saatini kayıtla çürüttün ama yüzü görüp göremeyeceğini kürsüye getirmedin: etiket bir plandır, iş emri kaydı ise planın o gece uygulandığını ve tanığın direğinin o hatta olduğunu gösterirdi. Tanık saatini esnetip teşhise tutundu.',
         'SORGULAMA',
       ),
       hint(
+        'h_k5',
+        all(any(flag('contra_k1'), flag('contra_n1')), flag('contra_k2'), not(flag('contra_k5'))),
+        'İlk teşhisi düşürdün; ama tanık arada yeni bir anlatım kurdu: “yürüyerek tur, 00.10, rıhtım yolu.” Önce “yürüyerek”i kürsüde kesinleştirip sonra zimmet + araç takip çıkarımını göstermedin; ikinci anlatım ayakta kaldı.',
+        'SORGULAMA',
+      ),
+      hint(
+        'h_bakim',
+        all(has('clue_projektor'), not(has('ded_isik'))),
+        'Direkteki etiketin iş emri numarasını gördün ama ışığın gerçekten kesildiğini gösteren kaydı tanığın kendi direğine bağlamadın (dilekçe → iş emri → vardiya şefinin “girişteki büyük direk” cümlesi).',
+        'DELIL_ANALIZI',
+      ),
+      hint(
+        'h_okuma',
+        any(all(flag('mide_ham'), not(has('clue_mide'))), all(flag('kontr_ham'), not(has('clue_kontrkup')))),
+        'Nihai raporun ham satırını okudun ama bir uzmana okutmadın. “Yarı sindirilmiş” ya da “izlenmedi” kendi başına bir saat ya da bir mekanizma değildir; Dr. Beyaz’ı arayabilirdin.',
+        'DELIL_ANALIZI',
+      ),
+      hint(
         'h_isik',
-        all(any(flag('contra_k2'), flag('contra_n2')), not(ref('donus_yok'))),
-        'Teşhisin ışığını ya da gece yarısını çürüttün ama tanığın kesinleştirdiği 23.40’ı turnike ve büfe kaydıyla birlikte göstermedin.',
+        all(flag('contra_k2'), not(ref('donus_yok')), not(any(flag('contra_k1'), flag('contra_n1')))),
+        'Teşhisin ışığını çürüttün ama tanığın kesinleştirdiği 23.40’ı turnike ve büfe kaydıyla birlikte göstermedin.',
         'SORGULAMA',
       ),
       hint(

@@ -1523,7 +1523,7 @@
         {
           "id": "PS_K2_TEKRAR",
           "kind": "PRESENT",
-          "match": { "statement": "K2", "evidence": ["ded_isik", "clue_projektor"] },
+          "match": { "statement": "K2", "evidence": ["ded_isik", "clue_projektor", "ev_bakim"] },
           "enabledWhen": { "flag": "contra_k2" },
           "maxUses": 99,
           "responses": [{ "lines": [{ "speaker": "baskan", "text": "Bu husus tutanağa geçti, müdafi. Devam edin." }] }]
@@ -1531,16 +1531,16 @@
         {
           "id": "PS_K2",
           "kind": "PRESENT",
-          "match": { "statement": "K2", "evidence": ["ded_isik", "clue_projektor"] },
+          "match": { "statement": "K2", "evidence": ["ded_isik"] },
           "enabledWhen": { "all": [{ "flag": "press_k2" }, { "flag": "contra_k1" }] },
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan, olay yeri fotoğrafı 17. B sahasının projektör direği. Etiket: “14/11 · 23.00–02.00 · bakım · enerji yok.”"
+                  "text": "Sayın Başkan, olay yeri fotoğrafı 17: giriş direği, etiket “23.00–02.00 · bakım · enerji yok · iş emri 4471.” Ve yüklenicinin iş emri kaydı: hat A, giriş direkleri, enerji 23.02’de kesilmiş, 01.56’da verilmiş."
                 },
-                { "speaker": "narrator", "text": "Kenan fotoğrafa baktı. Uzun uzun. Sonra gözlerini kapadı, açtı." },
+                { "speaker": "narrator", "text": "Kenan kâğıda baktı. Uzun uzun. Sonra gözlerini kapadı, açtı." },
                 {
                   "speaker": "kenan",
                   "text": "Bakım… Evet. Bakım vardı o gece. Unutmuşum. Rıhtımın ışığı vardı ama. Uzaktan…"
@@ -1562,23 +1562,23 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Projektör direğindeki bakım etiketi: 23.00–02.00 enerji yok. “Gündüz gibi” ışık yoktu; teşhisin dayanağı düştü.",
+            "feedback": "İş emri 4471: B sahası giriş direklerinin hattında enerji 23.02–01.56 kesik; tanığın gösterdiği direk o hatta. “Gündüz gibi” ışık yoktu; teşhisin dayanağı düştü.",
             "category": "SORGULAMA"
           }
         },
         {
           "id": "PS_K2_YURUYUS",
           "kind": "PRESENT",
-          "match": { "statement": "K2", "evidence": ["ded_isik", "clue_projektor"] },
+          "match": { "statement": "K2", "evidence": ["ded_isik"] },
           "enabledWhen": { "flag": "press_k2" },
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan, olay yeri fotoğrafı 17. B sahasının projektör direği. Etiket: “14/11 · 23.00–02.00 · bakım · enerji yok.”"
+                  "text": "Sayın Başkan, olay yeri fotoğrafı 17: B sahasının giriş direği, etiket “iş emri 4471.” Yüklenicinin kaydı: hat A, giriş direkleri, enerji 23.02’de kesilmiş, 01.56’da verilmiş."
                 },
-                { "speaker": "narrator", "text": "Kenan fotoğrafa baktı. Uzun uzun. Sonra gözlerini kapadı, açtı." },
+                { "speaker": "narrator", "text": "Kenan kâğıda baktı. Uzun uzun. Sonra gözlerini kapadı, açtı." },
                 {
                   "speaker": "kenan",
                   "text": "Bakım… Evet. Bakım vardı o gece. Unutmuşum. Rıhtımın ışığı vardı ama. Uzaktan…"
@@ -1604,14 +1604,67 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Projektör direğindeki bakım etiketi: 23.00–02.00 enerji yok. “Gündüz gibi” ışık yoktu; yüz teşhisinin dayanağı düştü (tanık saatine ve yürüyüşe tutunuyor).",
+            "feedback": "İş emri kaydı: giriş direklerinin hattında enerji 23.02–01.56 kesik. “Gündüz gibi” ışık yoktu; yüz teşhisinin dayanağı düştü (tanık saatine ve yürüyüşe tutunuyor).",
             "category": "SORGULAMA"
+          }
+        },
+        {
+          "id": "PS_K2_ETIKET",
+          "kind": "PRESENT",
+          "match": { "statement": "K2", "evidence": ["clue_projektor", "ev_bakim"] },
+          "enabledWhen": { "flag": "press_k2" },
+          "responses": [
+            {
+              "when": { "hasEvidence": "ev_bakim" },
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, elektrik yüklenicisinin iş emri kaydı: o gece B sahasında bakım yapılmış."
+                },
+                {
+                  "speaker": "kenan",
+                  "text": "Hangi hatta efendim? Sahada üç hat var. Ben girişteki büyük direği söyledim; kâğıtta hangi direk yazıyor?"
+                },
+                { "speaker": "baskan", "text": "Müdafi, kayıttaki hangi satır tanığın gösterdiği direğe ilişkin?" },
+                {
+                  "speaker": "player",
+                  "text": "Kâğıdın tamamını uzattım; tanık satırların arasından yürüdü gitti. Onun direğini o satıra bağlamalıydım.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, olay yeri fotoğrafı 17: projektör direğinde bir bakım etiketi. “23.00–02.00 · enerji yok.”"
+                },
+                {
+                  "speaker": "kenan",
+                  "text": "Etiket haftalardır orada avukat hanım. Bakım çok ertelenir. O gece yanıyordu; ben gördüm."
+                },
+                { "speaker": "uye", "text": "Müdafi, bakımın o gece yapıldığını gösteren bir kayıt var mı?" },
+                {
+                  "speaker": "player",
+                  "text": "Bir etiket bir niyettir. Niyetin yapıldığını gösteren kâğıdı istemem gerekiyordu.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kısmi isabet: etiket bir plandır, iş emrinin tamamı da birçok hat sayar. Tanığın gösterdiği direği enerji kesme satırına bağlamak gerekiyordu."
           }
         },
         {
           "id": "PS_K2_ERKEN",
           "kind": "PRESENT",
-          "match": { "statement": "K2", "evidence": ["ded_isik", "clue_projektor"] },
+          "match": { "statement": "K2", "evidence": ["ded_isik", "clue_projektor", "ev_bakim"] },
           "responses": [
             {
               "lines": [
@@ -1950,7 +2003,12 @@
           "id": "TL_GPS",
           "kind": "OPTION",
           "label": "Servis kamyoneti 16 LMN 07’nin araç takip ve zimmet kayıtları",
-          "visibleWhen": { "any": [{ "hasEvidence": "clue_servis_arac" }, { "flag": "k4_arac" }] },
+          "visibleWhen": {
+            "all": [
+              { "any": [{ "hasEvidence": "clue_servis_arac" }, { "flag": "k4_arac" }] },
+              { "hasEvidence": "clue_lastik" }
+            ]
+          },
           "enabledWhen": { "cmp": [{ "var": "talep_n" }, "<", 3] },
           "responses": [
             {
@@ -1967,7 +2025,7 @@
           ],
           "quality": {
             "q": "GOOD",
-            "feedback": "Olay saatinde limana giren tek aracın konumu ve kullanıcısı; somut, ilgili ve elde edilebilir (CMK 332).",
+            "feedback": "Olay saatinde limana giren tek araç ve cesedin yanındaki taze çift lastik izi: aracın konumu ve kullanıcısı somut, ilgili ve elde edilebilir (CMK 332).",
             "category": "USUL_BILGISI"
           }
         },

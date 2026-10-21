@@ -106,7 +106,20 @@
       "when": {
         "all": [
           { "any": [{ "flag": "contra_k1" }, { "flag": "contra_n1" }] },
-          { "any": [{ "flag": "contra_k2" }, { "flag": "contra_n2" }] }
+          { "flag": "contra_k2" },
+          { "flag": "contra_k5" }
+        ]
+      }
+    },
+    {
+      "id": "fail_kayit",
+      "label": "Gerçek fail olgusu kayıtta, alet dışlandı ve savcılığa bildirildi",
+      "when": {
+        "all": [
+          { "flag": "suc_duyurusu" },
+          { "flag": "contra_k5" },
+          { "any": [{ "flag": "contra_k6" }, { "flag": "contra_k7" }] },
+          { "any": [{ "flag": "contra_b3" }, { "flag": "contra_k7" }] }
         ]
       }
     },
@@ -291,6 +304,16 @@
       "display": { "label": "Deneme hakkı", "widget": "counter", "max": 4, "lowAt": 1 }
     },
     {
+      "id": "bakim_left",
+      "type": "int",
+      "initial": 4,
+      "min": 0,
+      "max": 4,
+      "visibility": "VISIBLE",
+      "analysis": "resource",
+      "display": { "label": "Deneme hakkı", "widget": "counter", "max": 4, "lowAt": 1 }
+    },
+    {
       "id": "cred",
       "type": "int",
       "initial": 5,
@@ -312,7 +335,7 @@
     { "id": "wrong", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
     { "id": "legal_hits", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
     { "id": "ethics", "type": "int", "initial": 0, "min": 0, "visibility": "HIDDEN", "analysis": "counter" },
-    { "id": "dil_n", "type": "int", "initial": 0, "min": 0, "max": 4, "visibility": "HIDDEN" },
+    { "id": "dil_n", "type": "int", "initial": 0, "min": 0, "max": 5, "visibility": "HIDDEN" },
     { "id": "talep_n", "type": "int", "initial": 0, "min": 0, "max": 5, "visibility": "HIDDEN" },
     { "id": "leyla_gun", "type": "int", "initial": 0, "min": 0, "max": 4, "visibility": "HIDDEN" },
     { "id": "leyla_ara", "type": "int", "initial": 0, "min": 0, "max": 3, "visibility": "HIDDEN" },
@@ -349,6 +372,9 @@
     { "id": "kenan_uyarildi", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "dil_turnike", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "dil_kantin", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "dil_bakim", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "mide_ham", "type": "bool", "initial": false, "visibility": "HIDDEN" },
+    { "id": "kontr_ham", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "durust_savunma", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "inkar", "type": "bool", "initial": false, "visibility": "HIDDEN" },
     { "id": "sustu", "type": "bool", "initial": false, "visibility": "HIDDEN" },

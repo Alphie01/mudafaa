@@ -56,6 +56,64 @@
           ]
         }
       ],
+      "routes": [{ "to": "ARA_GIRIS_3" }],
+      "choices": []
+    },
+    {
+      "id": "ARA_GIRIS_3",
+      "type": "DECISION",
+      "lines": [
+        {
+          "when": { "any": [{ "flag": "contra_k1" }, { "flag": "contra_k2" }] },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Zarfların en incesi savcılıktandı: tutukluluk incelemesine ilişkin bir yazı ve ekinde iki sayfalık bir tutanak. “Tanık Kenan Aksoy’un ek ifadesi.”"
+            },
+            { "speaker": "narrator", "text": "Kenan, celseden dört gün sonra kendiliğinden savcılığa gitmişti." },
+            {
+              "speaker": "narrator",
+              "name": "EK İFADE",
+              "text": "Saati yanlış söylemişim. On ikiyi on geçiyordu. Turumu yürüyerek atıyordum; rıhtım yolunda, lambanın altında gördüm onu. Araç kapısının yanındaki yaya geçidinden girmiş olmalı."
+            },
+            {
+              "speaker": "narrator",
+              "name": "EK İFADE",
+              "text": "Projektörler sönüktü, doğru. Ama rıhtım yolunun lambası yanıyordu. Yüzünü orada gördüm."
+            },
+            {
+              "speaker": "player",
+              "text": "Yeni bir saat, yeni bir yer, yeni bir ışık. Eski teşhis kürsüde düştü; tanık ona yeni bir zemin bulmuş. Rıhtım yolu başka bir hattan beslenir; o lamba gerçekten yanıyordu.",
+              "style": "thought"
+            },
+            {
+              "speaker": "player",
+              "text": "Ve bir cümle, ilk kez: “yürüyerek.” Birinci celsede kimse sormamıştı; o da söylememişti.",
+              "style": "thought"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Savcı bununla tahliyeye itiraz etti; mahkeme ikinci celseyi beklemeyi seçti. Bu ifade ikinci celsede kürsüye taşınacak.",
+              "style": "phone"
+            },
+            {
+              "speaker": "leyla",
+              "text": "Bir tanık hikâyesini değiştirdiğinde kızma. Değişen yere bak: yeni hikâyenin ayakta durması için neyin doğru olması gerekiyor?",
+              "style": "phone"
+            },
+            { "speaker": "player", "text": "Turun yürüyerek atılmış olması." },
+            { "speaker": "leyla", "text": "O zaman onu kâğıtla sına. Tanığa değil; kâğıda.", "style": "phone" }
+          ]
+        },
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Savcılıktan gelen zarfta yalnızca bir üst yazı vardı: “Tanıkların yeniden dinlenmesine gerek görülmemiştir.”"
+            }
+          ]
+        }
+      ],
       "routes": [{ "to": "ARA_GIRIS" }],
       "choices": []
     },
@@ -213,7 +271,7 @@
           "id": "t2_arsiv",
           "label": "ARŞİV",
           "kind": "ARCHIVE",
-          "choices": ["A_ATK", "A_KAYIT", "A_DEFTER", "A_TALEP", "A_SUC", "A_CIKARIM", "A_LEYLA"]
+          "choices": ["A_ATK", "A_KAYIT", "A_DEFTER", "A_TALEP", "A_SUC", "A_ORHAN", "A_CIKARIM", "A_LEYLA"]
         }
       ],
       "choices": [
@@ -315,7 +373,13 @@
           "description": "Mahkemeye yazılı talep",
           "visibleWhen": {
             "any": [
-              { "all": [{ "hasEvidence": "clue_servis_arac" }, { "not": { "flag": "talep_gps" } }] },
+              {
+                "all": [
+                  { "hasEvidence": "clue_servis_arac" },
+                  { "hasEvidence": "clue_lastik" },
+                  { "not": { "flag": "talep_gps" } }
+                ]
+              },
               { "all": [{ "hasEvidence": "clue_arama2341" }, { "not": { "flag": "talep_abone" } }] },
               { "all": [{ "hasEvidence": "ev_atk" }, { "not": { "flag": "talep_atk" } }] }
             ]
@@ -329,6 +393,15 @@
           "description": "0 EP · yazılı, ekleriyle",
           "maxUses": 1,
           "visibleWhen": { "any": [{ "hasEvidence": "ev_abone" }, { "hasEvidence": "ev_gps" }] }
+        },
+        {
+          "id": "A_ORHAN",
+          "kind": "NAVIGATE",
+          "label": "Dr. Beyaz’ı ara",
+          "next": "ARA_ORHAN",
+          "description": "0 EP · nihai rapordaki iki satır",
+          "maxUses": 1,
+          "visibleWhen": { "any": [{ "flag": "mide_ham" }, { "flag": "kontr_ham" }] }
         },
         {
           "id": "A_CIKARIM",
@@ -392,7 +465,13 @@
                           {
                             "not": {
                               "any": [
-                                { "all": [{ "hasEvidence": "clue_servis_arac" }, { "not": { "flag": "talep_gps" } }] },
+                                {
+                                  "all": [
+                                    { "hasEvidence": "clue_servis_arac" },
+                                    { "hasEvidence": "clue_lastik" },
+                                    { "not": { "flag": "talep_gps" } }
+                                  ]
+                                },
                                 { "all": [{ "hasEvidence": "clue_arama2341" }, { "not": { "flag": "talep_abone" } }] },
                                 { "all": [{ "hasEvidence": "ev_atk" }, { "not": { "flag": "talep_atk" } }] }
                               ]
@@ -904,14 +983,14 @@
           "match": { "tool": "mag", "target": "n3" },
           "enabledWhen": { "all": [{ "flag": "fact_coup" }, { "flag": "fact_dipnot" }] },
           "feedback": {
-            "title": "YENİ İPUCU",
-            "text": "Ön raporun dipnotunun ertelediği cevap: frontal lobda kontüzyon yok. Dr. Beyaz’ın maketi: ensesinden düşen bir başın alnının arkasında da iz olurdu.",
-            "label": "+150 SKOR · Not defterine eklendi",
+            "title": "HAM VERİ",
+            "text": "Ön raporun dipnotunun ertelediği satır: “Frontal lob histopatolojisinde kontüzyon ve kanama odağı izlenmedi.” Bir yokluk. Bu yokluğun düşmeyi dışlayıp dışlamadığını raporu okuyabilen birine sormalıyım.",
+            "label": "+60 SKOR · Not alındı",
             "tone": "special"
           },
           "effects": [
-            { "type": "DISCOVER", "evidence": "clue_kontrkup" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 60 },
+            { "type": "VAR", "var": "kontr_ham", "op": "set", "value": true }
           ]
         },
         {
@@ -932,14 +1011,14 @@
           "match": { "tool": "mag", "target": "n4" },
           "enabledWhen": { "flag": "fact_mide" },
           "feedback": {
-            "title": "YENİ İPUCU",
-            "text": "Ekmek, peynir, süt ürünü; yarı sindirilmiş. Rapor yorumlamamış, çünkü son öğünün saatini kimse sormamış. Dr. Beyaz: “Sıra çıkar.” Önce yemek, sonra ölüm.",
-            "label": "+150 SKOR · Not defterine eklendi",
+            "title": "HAM VERİ",
+            "text": "Ekmek, peynir, süt ürünü; yarı sindirilmiş, yaklaşık 250 ml. Rapor yorumlamamış. “Yarı sindirilmiş” bir saat değil; bir uzmanın okuması gerekir. Dr. Beyaz’ı aramalıyım.",
+            "label": "+60 SKOR · Not alındı",
             "tone": "special"
           },
           "effects": [
-            { "type": "DISCOVER", "evidence": "clue_mide" },
-            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 150 }
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 60 },
+            { "type": "VAR", "var": "mide_ham", "op": "set", "value": true }
           ]
         },
         {
@@ -1351,6 +1430,130 @@
       ]
     },
     {
+      "id": "ARA_ORHAN",
+      "type": "DIALOGUE",
+      "mode": "CONVERSATION",
+      "chapter": "Bölüm 4 · Ara",
+      "eyebrow": "DAVA #10 · ARA",
+      "title": "Dr. Orhan Beyaz · telefon",
+      "background": "buro_gece",
+      "room": { "label": "ARSLAN HUKUK · TELEFON", "character": "orhan" },
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Akşam dokuz. Numarayı Leyla’nın eski ajandasından buldum. Üçüncü çalışta açtı; arkada bir radyo, bir çay kaşığı."
+            },
+            {
+              "speaker": "orhan",
+              "text": "Leyla’nın çocuğu. Rapor geldi demek. Oku bakalım; ben dinlerim, sen okursun. Gözüm eskisi gibi değil.",
+              "style": "phone"
+            },
+            {
+              "speaker": "player",
+              "text": "Raporun iki satırını sarı kâğıtlara yazmıştım. Yazılmış ama okunmamış iki satır.",
+              "style": "thought"
+            }
+          ]
+        }
+      ],
+      "choices": [
+        {
+          "id": "OT_KONTR",
+          "kind": "OPTION",
+          "label": "“Histopatoloji: frontalde kontüzyon ve kanama odağı izlenmedi.”",
+          "visibleWhen": { "flag": "kontr_ham" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "orhan",
+                  "text": "İzlenmedi. Mikroskopla bakmışlar, çıplak gözle değil. İyi. Bu bir yokluk ama boş bir yokluk değil.",
+                  "style": "phone"
+                },
+                {
+                  "speaker": "orhan",
+                  "text": "Ensesinden düşen bir başın alnının arkasında bir şey olurdu; olmamış. Hareket eden baş değil, hareket eden cisim.",
+                  "style": "phone"
+                },
+                {
+                  "speaker": "orhan",
+                  "text": "Yalnız sana geçen sefer söylediğimi unutma: oturur hâlde, kısa mesafeden bir çarpmada karşı darbe zayıf kalabilir. Bu satır tek başına o kapıyı kapatmaz; çarptığı yerin fotoğrafını da götür.",
+                  "style": "phone"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_kontrkup" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 120 }
+          ]
+        },
+        {
+          "id": "OT_MIDE",
+          "kind": "OPTION",
+          "label": "“Mide: yarı sindirilmiş ekmek, peynir, süt ürünü, 250 ml. Ne söyler?”",
+          "visibleWhen": { "flag": "mide_ham" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "orhan",
+                  "text": "Yarı sindirilmiş. Ekmek tanınıyor, peynir tanınıyor. Mide boşalmaya başlamış ama bitmemiş. Bu bir saatlik bir yemek değil; ilk saatlerin yemeği.",
+                  "style": "phone"
+                },
+                {
+                  "speaker": "orhan",
+                  "text": "Kesin saat sorma bana; kimse veremez. Alkol boşalmayı yavaşlatır, korku hızlandırır. Ama sırayı veririm: önce bu yemek, sonra ölüm. Ve arası uzun değil.",
+                  "style": "phone"
+                },
+                { "speaker": "player", "text": "Yemeğin saati kayıttaysa?" },
+                {
+                  "speaker": "orhan",
+                  "text": "O zaman ölüm o saatten sonradır. Bunu Karaca Hanım da söyler; ona sorulursa. Raporuna yazmamış çünkü kimse sormamış. Sen sor.",
+                  "style": "phone"
+                },
+                {
+                  "speaker": "player",
+                  "text": "Ham bir satır, bir uzmanın ağzında bir sıraya döndü. Bir sıra, bir kayıtla birleşince bir saat olur.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_mide" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 120 }
+          ]
+        },
+        {
+          "id": "OT_KAYIT",
+          "kind": "OPTION",
+          "label": "“Bunu kürsüde siz söyleyebilir misiniz?”",
+          "visibleWhen": { "any": [{ "chosen": "OT_MIDE" }, { "chosen": "OT_KONTR" }] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "orhan",
+                  "text": "Ben emekliyim kızım; raporun sahibi değilim. Mahkeme raporu yazanı dinler. Benim işim sana soruyu öğretmek.",
+                  "style": "phone"
+                },
+                {
+                  "speaker": "orhan",
+                  "text": "Kürsüde ona benim sözlerimi okuma. Kendi raporunu göster, kendi satırını. “Hocam, bu satır sırayı söylemez mi?” Kendi satırına kimse itiraz etmez.",
+                  "style": "phone"
+                }
+              ]
+            }
+          ],
+          "effects": [{ "type": "SCORE", "category": "USUL_BILGISI", "amount": 20 }]
+        },
+        { "id": "OT_BITIR", "kind": "CONTINUE", "label": "Teşekkür et, kapat", "role": "BACK", "next": "ARA_HUB" }
+      ]
+    },
+    {
       "id": "ARA_TALEP",
       "type": "STORY",
       "chapter": "Bölüm 4 · Ara",
@@ -1372,7 +1575,13 @@
           "id": "EK_GPS",
           "kind": "OPTION",
           "label": "Servis kamyonetinin araç takip ve zimmet kaydı",
-          "visibleWhen": { "all": [{ "hasEvidence": "clue_servis_arac" }, { "not": { "flag": "talep_gps" } }] },
+          "visibleWhen": {
+            "all": [
+              { "hasEvidence": "clue_servis_arac" },
+              { "hasEvidence": "clue_lastik" },
+              { "not": { "flag": "talep_gps" } }
+            ]
+          },
           "effects": [
             { "type": "SCORE", "category": "USUL_BILGISI", "amount": 40 },
             { "type": "VAR", "var": "ek_gps", "op": "set", "value": true }
@@ -2626,13 +2835,13 @@
     { "evidence": "ev_defter", "source": { "type": "CHOICE", "id": "SV_TUTANAK" } },
     { "evidence": "ev_defter", "source": { "type": "CHOICE", "id": "SV_AL" } },
     { "evidence": "clue_tarik_koni", "source": { "type": "CHOICE", "id": "TR_SEMA" } },
-    { "evidence": "clue_kontrkup", "source": { "type": "RULE", "id": "EX_N3" } },
-    { "evidence": "clue_mide", "source": { "type": "RULE", "id": "EX_N4" } },
     { "evidence": "clue_gps", "source": { "type": "RULE", "id": "EX_A2" } },
     { "evidence": "clue_zimmet", "source": { "type": "RULE", "id": "EX_Z1" } },
     { "evidence": "clue_defter_satir", "source": { "type": "RULE", "id": "EX_D4" } },
     { "evidence": "clue_manifesto", "source": { "type": "RULE", "id": "EX_D2" } },
     { "evidence": "clue_envanter", "source": { "type": "CHOICE", "id": "NU_KIT" } },
+    { "evidence": "clue_kontrkup", "source": { "type": "CHOICE", "id": "OT_KONTR" } },
+    { "evidence": "clue_mide", "source": { "type": "CHOICE", "id": "OT_MIDE" } },
     { "evidence": "ded_darbe", "source": { "type": "RULE", "id": "CA_DARBE" } },
     { "evidence": "ded_saat", "source": { "type": "RULE", "id": "CA_SAAT" } },
     { "evidence": "ded_silah", "source": { "type": "RULE", "id": "CA_SILAH" } },

@@ -102,13 +102,29 @@ export const meta: CasePart = {
     { id: 'kart2', label: 'Tahtada en az 2 kart var', when: { cmp: [{ count: 'evidence', tag: 'kart' }, '>=', 2] } },
     {
       id: 'donus_yok',
-      // CMK 217/1: hüküm yalnızca duruşmada tartışılmış delile dayanır. Teşhis iki ayakla düşer: (1) saat — tanığın
+      // CMK 217/1: hüküm yalnızca duruşmada tartışılmış delile dayanır. Teşhis üç ayakla düşer: (1) saat — tanığın
       // kürsüde kesinleştirdiği 23.40 kayıtla çürütülür (K1: turnike + büfe fişi; ya da büfecinin ikinci celsedeki
       // beyanı N1); (2) teşhisin kendisi — ışık yoktu (K2: projektör bakım etiketi) ya da sanık gece yarısına kadar
       // iskeledeydi (N2: büfecinin radyosu). Yalnız saat çürürse tanık saatini esnetir ve yüze tutunur; yalnız ışık
       // düşerse yürüyüşe ve saate tutunur.
       label: 'Sanığın olay yerine döndüğünü söyleyen teşhis duruşmada kayıtla çürütüldü',
-      when: all(any(flag('contra_k1'), flag('contra_n1')), any(flag('contra_k2'), flag('contra_n2'))),
+      // Beşinci tur: (2) ışık ayağı yalnızca iş emri kaydına dayanan K2 ile düşer (etiket bir plandır; N2 gece yarısından
+      // sonrasını kapsamaz, tanık saatini esnetti); (3) tanığın aradaki ikinci anlatımı (“turumu yürüyerek attım, on ikiyi
+      // on geçe rıhtım yolunda gördüm”) ikinci celsede araç takip + zimmet kaydıyla çürütülmelidir (K5).
+      when: all(any(flag('contra_k1'), flag('contra_n1')), flag('contra_k2'), flag('contra_k5')),
+    },
+    {
+      id: 'fail_kayit',
+      // 223/2-b (“işlemediği sabit”) yalnızca kayda dayanır, esas savunmanın adına değil (CMK 225): başka bir kişinin ölüm
+      // saatinde olay yerinde olduğu (K5) ve maktulle bağı (K6 abone/defter ya da K7 kit) kürsüde kurulmuş, savcılığa
+      // yazılı bildirilmiş (CMK 158) ve savcılığın gösterdiği alet dışlanmış olmalı (B3 kilit ölçüsü ya da K7 eksik kilit).
+      label: 'Gerçek fail olgusu kayıtta, alet dışlandı ve savcılığa bildirildi',
+      when: all(
+        flag('suc_duyurusu'),
+        flag('contra_k5'),
+        any(flag('contra_k6'), flag('contra_k7')),
+        any(flag('contra_b3'), flag('contra_k7')),
+      ),
     },
     {
       id: 'olum_sonra',
@@ -139,13 +155,14 @@ export const meta: CasePart = {
     meter('atk_left', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('defter_left', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('ifade_left', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
+    meter('bakim_left', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('cred', 'Güvenilirlik', 'hearts', 5, 5, { lowAt: 1 }),
     meter('pers', 'Heyet iknası', 'meter10', 2, 10),
     hiddenEnum('tone', ['soft', 'hard']),
     counter('wrong'),
     counter('legal_hits'),
     counter('ethics'),
-    hiddenInt('dil_n', 0, 0, 4),
+    hiddenInt('dil_n', 0, 0, 5),
     hiddenInt('talep_n', 0, 0, 5),
     hiddenInt('leyla_gun', 0, 0, 4),
     hiddenInt('leyla_ara', 0, 0, 3),
@@ -183,6 +200,9 @@ export const meta: CasePart = {
       'kenan_uyarildi',
       'dil_turnike',
       'dil_kantin',
+      'dil_bakim',
+      'mide_ham',
+      'kontr_ham',
       'durust_savunma',
       'inkar',
       'sustu',

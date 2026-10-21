@@ -20,6 +20,12 @@
         "category": "ARASTIRMA"
       },
       {
+        "id": "h_bakim_kayit",
+        "when": { "not": { "hasEvidence": "ev_bakim" } },
+        "text": "Direkteki etiketin iş emri kaydını dilekçeyle istemedin (CMK 177): etiket bir plandı, kayıt planın o gece uygulandığını gösterirdi.",
+        "category": "USUL_BILGISI"
+      },
+      {
         "id": "h_pil",
         "when": { "not": { "hasEvidence": "clue_pil" } },
         "text": "Şükrü Usta’ya bağıranın ağzını görüp görmediğini sormadın; işitme cihazının pili bitikti.",
@@ -119,15 +125,48 @@
         "when": {
           "all": [{ "any": [{ "flag": "contra_k1" }, { "flag": "contra_n1" }] }, { "not": { "ref": "donus_yok" } }]
         },
-        "text": "Tanığın saatini kayıtla çürüttün ama yüzü görüp göremeyeceğini (bakım etiketi) ya da sanığın gece yarısına kadar nerede olduğunu (büfecinin radyosu) kürsüye getirmedin; tanık saatini esnetip teşhise tutundu.",
+        "text": "Tanığın saatini kayıtla çürüttün ama yüzü görüp göremeyeceğini kürsüye getirmedin: etiket bir plandır, iş emri kaydı ise planın o gece uygulandığını ve tanığın direğinin o hatta olduğunu gösterirdi. Tanık saatini esnetip teşhise tutundu.",
         "category": "SORGULAMA"
+      },
+      {
+        "id": "h_k5",
+        "when": {
+          "all": [
+            { "any": [{ "flag": "contra_k1" }, { "flag": "contra_n1" }] },
+            { "flag": "contra_k2" },
+            { "not": { "flag": "contra_k5" } }
+          ]
+        },
+        "text": "İlk teşhisi düşürdün; ama tanık arada yeni bir anlatım kurdu: “yürüyerek tur, 00.10, rıhtım yolu.” Önce “yürüyerek”i kürsüde kesinleştirip sonra zimmet + araç takip çıkarımını göstermedin; ikinci anlatım ayakta kaldı.",
+        "category": "SORGULAMA"
+      },
+      {
+        "id": "h_bakim",
+        "when": { "all": [{ "hasEvidence": "clue_projektor" }, { "not": { "hasEvidence": "ded_isik" } }] },
+        "text": "Direkteki etiketin iş emri numarasını gördün ama ışığın gerçekten kesildiğini gösteren kaydı tanığın kendi direğine bağlamadın (dilekçe → iş emri → vardiya şefinin “girişteki büyük direk” cümlesi).",
+        "category": "DELIL_ANALIZI"
+      },
+      {
+        "id": "h_okuma",
+        "when": {
+          "any": [
+            { "all": [{ "flag": "mide_ham" }, { "not": { "hasEvidence": "clue_mide" } }] },
+            { "all": [{ "flag": "kontr_ham" }, { "not": { "hasEvidence": "clue_kontrkup" } }] }
+          ]
+        },
+        "text": "Nihai raporun ham satırını okudun ama bir uzmana okutmadın. “Yarı sindirilmiş” ya da “izlenmedi” kendi başına bir saat ya da bir mekanizma değildir; Dr. Beyaz’ı arayabilirdin.",
+        "category": "DELIL_ANALIZI"
       },
       {
         "id": "h_isik",
         "when": {
-          "all": [{ "any": [{ "flag": "contra_k2" }, { "flag": "contra_n2" }] }, { "not": { "ref": "donus_yok" } }]
+          "all": [
+            { "flag": "contra_k2" },
+            { "not": { "ref": "donus_yok" } },
+            { "not": { "any": [{ "flag": "contra_k1" }, { "flag": "contra_n1" }] } }
+          ]
         },
-        "text": "Teşhisin ışığını ya da gece yarısını çürüttün ama tanığın kesinleştirdiği 23.40’ı turnike ve büfe kaydıyla birlikte göstermedin.",
+        "text": "Teşhisin ışığını çürüttün ama tanığın kesinleştirdiği 23.40’ı turnike ve büfe kaydıyla birlikte göstermedin.",
         "category": "SORGULAMA"
       },
       {

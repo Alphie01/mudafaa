@@ -97,13 +97,35 @@ const girisNodes = [
 > Mahkemenin müzekkerelerine cevaplar birer birer geldi. Kurumlar mahkemeye geç kalmayı sevmez; avukata geç kalmayı sever.
 `),
   }),
-  decisionNode('ARA_GIRIS_2', [{ to: 'ARA_GIRIS' }], {
+  decisionNode('ARA_GIRIS_2', [{ to: 'ARA_GIRIS_3' }], {
     lines: [
       W(
         flag('released'),
         `> Tarık on gündür evdeydi. Haftada iki gün karakola imzaya gidiyor, kalan günlerde balkonda oturup denize bakıyormuş. Gülay söyledi: “Konuşmuyor. Ama uyuyor.”`,
       ),
       O(`> Tarık hâlâ içerideydi. Gülay her akşam arıyordu; ben her akşam aynı şeyi söylüyordum: “Cevaplar geliyor.”`),
+    ],
+  }),
+  // Beşinci tur: ilk celsede teşhisi sarsılan tanık, savcılığa ek ifade verir (yeni bir saat, yeni bir yer, yaya tur).
+  // Bu ikinci anlatım ikinci celsede kayıtla (araç takip + zimmet, K5) çürütülmedikçe dönüş iddiası ayakta kalır.
+  decisionNode('ARA_GIRIS_3', [{ to: 'ARA_GIRIS' }], {
+    lines: [
+      W(
+        any(flag('contra_k1'), flag('contra_k2')),
+        `
+> Zarfların en incesi savcılıktandı: tutukluluk incelemesine ilişkin bir yazı ve ekinde iki sayfalık bir tutanak. “Tanık Kenan Aksoy’un ek ifadesi.”
+> Kenan, celseden dört gün sonra kendiliğinden savcılığa gitmişti.
+@EK İFADE: Saati yanlış söylemişim. On ikiyi on geçiyordu. Turumu yürüyerek atıyordum; rıhtım yolunda, lambanın altında gördüm onu. Araç kapısının yanındaki yaya geçidinden girmiş olmalı.
+@EK İFADE: Projektörler sönüktü, doğru. Ama rıhtım yolunun lambası yanıyordu. Yüzünü orada gördüm.
+~ Yeni bir saat, yeni bir yer, yeni bir ışık. Eski teşhis kürsüde düştü; tanık ona yeni bir zemin bulmuş. Rıhtım yolu başka bir hattan beslenir; o lamba gerçekten yanıyordu.
+~ Ve bir cümle, ilk kez: “yürüyerek.” Birinci celsede kimse sormamıştı; o da söylememişti.
+leyla: Savcı bununla tahliyeye itiraz etti; mahkeme ikinci celseyi beklemeyi seçti. Bu ifade ikinci celsede kürsüye taşınacak. [phone]
+leyla: Bir tanık hikâyesini değiştirdiğinde kızma. Değişen yere bak: yeni hikâyenin ayakta durması için neyin doğru olması gerekiyor? [phone]
+- Turun yürüyerek atılmış olması.
+leyla: O zaman onu kâğıtla sına. Tanığa değil; kâğıda. [phone]
+`,
+      ),
+      O(`> Savcılıktan gelen zarfta yalnızca bir üst yazı vardı: “Tanıkların yeniden dinlenmesine gerek görülmemiştir.”`),
     ],
   }),
   story('ARA_GIRIS', {
@@ -189,7 +211,7 @@ const hubTabs = [
       act('A_TALEP', 'Ek delil talebi', 'ARA_TALEP', {
         description: 'Mahkemeye yazılı talep',
         visibleWhen: any(
-          all(has('clue_servis_arac'), not(flag('talep_gps'))),
+          all(has('clue_servis_arac'), has('clue_lastik'), not(flag('talep_gps'))),
           all(has('clue_arama2341'), not(flag('talep_abone'))),
           all(has('ev_atk'), not(flag('talep_atk'))),
         ),
@@ -198,6 +220,11 @@ const hubTabs = [
         description: '0 EP · yazılı, ekleriyle',
         maxUses: 1,
         visibleWhen: any(has('ev_abone'), has('ev_gps')),
+      }),
+      free('A_ORHAN', 'Dr. Beyaz’ı ara', 'ARA_ORHAN', {
+        description: '0 EP · nihai rapordaki iki satır',
+        maxUses: 1,
+        visibleWhen: any(flag('mide_ham'), flag('kontr_ham')),
       }),
       free('A_CIKARIM', 'Çıkarım tahtası', 'ARA_CIKARIM', { description: '0 EP · yeni ipuçlarını birleştir' }),
       free('A_LEYLA', 'Leyla’ya danış', 'ARA_LEYLA', {
@@ -224,7 +251,7 @@ const ARA_TUKENDI = all(
     chosen('A_TALEP'),
     not(
       any(
-        all(has('clue_servis_arac'), not(flag('talep_gps'))),
+        all(has('clue_servis_arac'), has('clue_lastik'), not(flag('talep_gps'))),
         all(has('clue_arama2341'), not(flag('talep_abone'))),
         all(has('ev_atk'), not(flag('talep_atk'))),
       ),
@@ -546,12 +573,12 @@ const atkRapor = retarget(
     rules: [
       examine('EX_N3', 'mag', 'n3', {
         enabledWhen: all(flag('fact_coup'), flag('fact_dipnot')),
-        discovers: 'clue_kontrkup',
-        score: { DELIL_ANALIZI: 150 },
+        score: { DELIL_ANALIZI: 60 },
+        effects: [raise('kontr_ham')],
         feedback: {
-          title: 'YENİ İPUCU',
-          text: 'Ön raporun dipnotunun ertelediği cevap: frontal lobda kontüzyon yok. Dr. Beyaz’ın maketi: ensesinden düşen bir başın alnının arkasında da iz olurdu.',
-          label: '+150 SKOR · Not defterine eklendi',
+          title: 'HAM VERİ',
+          text: 'Ön raporun dipnotunun ertelediği satır: “Frontal lob histopatolojisinde kontüzyon ve kanama odağı izlenmedi.” Bir yokluk. Bu yokluğun düşmeyi dışlayıp dışlamadığını raporu okuyabilen birine sormalıyım.',
+          label: '+60 SKOR · Not alındı',
           tone: 'special',
         },
       }),
@@ -566,12 +593,12 @@ const atkRapor = retarget(
       }),
       examine('EX_N4', 'mag', 'n4', {
         enabledWhen: flag('fact_mide'),
-        discovers: 'clue_mide',
-        score: { DELIL_ANALIZI: 150 },
+        score: { DELIL_ANALIZI: 60 },
+        effects: [raise('mide_ham')],
         feedback: {
-          title: 'YENİ İPUCU',
-          text: 'Ekmek, peynir, süt ürünü; yarı sindirilmiş. Rapor yorumlamamış, çünkü son öğünün saatini kimse sormamış. Dr. Beyaz: “Sıra çıkar.” Önce yemek, sonra ölüm.',
-          label: '+150 SKOR · Not defterine eklendi',
+          title: 'HAM VERİ',
+          text: 'Ekmek, peynir, süt ürünü; yarı sindirilmiş, yaklaşık 250 ml. Rapor yorumlamamış. “Yarı sindirilmiş” bir saat değil; bir uzmanın okuması gerekir. Dr. Beyaz’ı aramalıyım.',
+          label: '+60 SKOR · Not alındı',
           tone: 'special',
         },
       }),
@@ -756,7 +783,7 @@ const talep = story('ARA_TALEP', {
 `),
   choices: [
     option('EK_GPS', 'Servis kamyonetinin araç takip ve zimmet kaydı', {
-      visibleWhen: all(has('clue_servis_arac'), not(flag('talep_gps'))),
+      visibleWhen: all(has('clue_servis_arac'), has('clue_lastik'), not(flag('talep_gps'))),
       score: { USUL_BILGISI: 40 },
       effects: [raise('ek_gps')],
       good: 'Geç de olsa somut ve ilgili kayıt istendi (CMK 177, 332).',
@@ -860,6 +887,53 @@ kenan: Sen kimin avukatısın? O çocuğun. Onu savun. Başkasının kapısını
 `),
       next: HUB,
     }),
+  ],
+});
+
+// --- Dr. Beyaz (telefon): ham veriyi okuyan uzman ---
+
+const orhanTel = conversation('ARA_ORHAN', {
+  ...ARA,
+  title: 'Dr. Orhan Beyaz · telefon',
+  background: 'buro_gece',
+  room: { label: 'ARSLAN HUKUK · TELEFON', character: 'orhan' },
+  lines: B(`
+> Akşam dokuz. Numarayı Leyla’nın eski ajandasından buldum. Üçüncü çalışta açtı; arkada bir radyo, bir çay kaşığı.
+orhan: Leyla’nın çocuğu. Rapor geldi demek. Oku bakalım; ben dinlerim, sen okursun. Gözüm eskisi gibi değil. [phone]
+~ Raporun iki satırını sarı kâğıtlara yazmıştım. Yazılmış ama okunmamış iki satır.
+`),
+  choices: [
+    option('OT_KONTR', '“Histopatoloji: frontalde kontüzyon ve kanama odağı izlenmedi.”', {
+      visibleWhen: flag('kontr_ham'),
+      discovers: 'clue_kontrkup',
+      score: { DELIL_ANALIZI: 120 },
+      responses: B(`
+orhan: İzlenmedi. Mikroskopla bakmışlar, çıplak gözle değil. İyi. Bu bir yokluk ama boş bir yokluk değil. [phone]
+orhan: Ensesinden düşen bir başın alnının arkasında bir şey olurdu; olmamış. Hareket eden baş değil, hareket eden cisim. [phone]
+orhan: Yalnız sana geçen sefer söylediğimi unutma: oturur hâlde, kısa mesafeden bir çarpmada karşı darbe zayıf kalabilir. Bu satır tek başına o kapıyı kapatmaz; çarptığı yerin fotoğrafını da götür. [phone]
+`),
+    }),
+    option('OT_MIDE', '“Mide: yarı sindirilmiş ekmek, peynir, süt ürünü, 250 ml. Ne söyler?”', {
+      visibleWhen: flag('mide_ham'),
+      discovers: 'clue_mide',
+      score: { DELIL_ANALIZI: 120 },
+      responses: B(`
+orhan: Yarı sindirilmiş. Ekmek tanınıyor, peynir tanınıyor. Mide boşalmaya başlamış ama bitmemiş. Bu bir saatlik bir yemek değil; ilk saatlerin yemeği. [phone]
+orhan: Kesin saat sorma bana; kimse veremez. Alkol boşalmayı yavaşlatır, korku hızlandırır. Ama sırayı veririm: önce bu yemek, sonra ölüm. Ve arası uzun değil. [phone]
+- Yemeğin saati kayıttaysa?
+orhan: O zaman ölüm o saatten sonradır. Bunu Karaca Hanım da söyler; ona sorulursa. Raporuna yazmamış çünkü kimse sormamış. Sen sor. [phone]
+~ Ham bir satır, bir uzmanın ağzında bir sıraya döndü. Bir sıra, bir kayıtla birleşince bir saat olur.
+`),
+    }),
+    option('OT_KAYIT', '“Bunu kürsüde siz söyleyebilir misiniz?”', {
+      visibleWhen: any(chosen('OT_MIDE'), chosen('OT_KONTR')),
+      score: { USUL_BILGISI: 20 },
+      responses: B(`
+orhan: Ben emekliyim kızım; raporun sahibi değilim. Mahkeme raporu yazanı dinler. Benim işim sana soruyu öğretmek. [phone]
+orhan: Kürsüde ona benim sözlerimi okuma. Kendi raporunu göster, kendi satırını. “Hocam, bu satır sırayı söylemez mi?” Kendi satırına kimse itiraz etmez. [phone]
+`),
+    }),
+    toHub('OT_BITIR', 'Teşekkür et, kapat'),
   ],
 });
 
@@ -1277,6 +1351,7 @@ export const ara: CasePart = {
     defter,
     emanet,
     retarget(nurten, HUB),
+    retarget(orhanTel, HUB),
     talep,
     suc,
     savci,

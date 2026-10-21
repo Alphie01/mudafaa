@@ -1139,12 +1139,12 @@
           "segments": [
             { "text": "O gece " },
             {
-              "text": "kamyonete binmedim; ofisteydim",
+              "text": "kamyonete binmedim; turumu yürüyerek attım",
               "highlightWhen": {
                 "any": [{ "flag": "press_k5" }, { "hasEvidence": "ded_arac" }, { "hasEvidence": "ev_gps" }]
               }
             },
-            { "text": "." }
+            { "text": ". Onu da yürürken gördüm." }
           ]
         },
         {
@@ -1231,6 +1231,28 @@
           "match": { "statement": "K5" },
           "responses": [
             {
+              "when": { "any": [{ "flag": "contra_k1" }, { "flag": "contra_k2" }] },
+              "lines": [
+                {
+                  "speaker": "savci",
+                  "text": "Tanık, ek ifadenizi okuyorum: “On ikiyi on geçe, yürüyerek tur atarken, rıhtım yolunda, lambanın altında gördüm.” Bunun arkasında mısınız?"
+                },
+                { "speaker": "kenan", "text": "Arkasındayım efendim. Geçen sefer saati şaşırdım; adamı şaşırmadım." },
+                { "speaker": "player", "text": "Kenan Bey, o turu yürüyerek mi attınız?" },
+                { "speaker": "kenan", "text": "Yürüyerek. Yirmi yıldır yürürüm. Liman yürünerek bilinir." },
+                { "speaker": "player", "text": "Servis kamyoneti o gece kimdeydi?" },
+                { "speaker": "kenan", "text": "Kimde olacak, ofisin önünde. Anahtarı panoda. Herkes alır." },
+                { "speaker": "player", "text": "Zimmet defteri tutulur mu?" },
+                { "speaker": "kenan", "text": "Tutulur. Kâğıt işte. Gece kimin eli boşsa o kullanır." },
+                { "speaker": "narrator", "text": "Kenan avukatına baktı. Avukat başını hafifçe iki yana salladı." },
+                {
+                  "speaker": "player",
+                  "text": "Yeni hikâyenin taşıyıcı duvarı tek bir kelime: yürüyerek. Kelimeyi kendi ağzıyla yeniden kurdu. Şimdi kâğıt.",
+                  "style": "thought"
+                }
+              ]
+            },
+            {
               "lines": [
                 { "speaker": "player", "text": "Servis kamyoneti o gece kimdeydi?" },
                 { "speaker": "kenan", "text": "Kimde olacak, ofisin önünde. Anahtarı panoda. Herkes alır." },
@@ -1251,17 +1273,29 @@
           ]
         },
         {
-          "id": "PS_K5",
+          "id": "PS_K5_TEKRAR",
           "kind": "PRESENT",
           "match": { "statement": "K5", "evidence": ["ded_arac", "ev_gps"] },
+          "enabledWhen": { "flag": "contra_k5" },
+          "maxUses": 99,
+          "responses": [{ "lines": [{ "speaker": "baskan", "text": "Bu husus tutanağa geçti, müdafi. Devam edin." }] }]
+        },
+        {
+          "id": "PS_K5",
+          "kind": "PRESENT",
+          "match": { "statement": "K5", "evidence": ["ded_arac"] },
+          "enabledWhen": { "flag": "press_k5" },
           "responses": [
             {
               "lines": [
                 {
                   "speaker": "player",
-                  "text": "Sayın Başkan, işletmenin zimmet defteri: 16 LMN 07, 14 Kasım 22.00, teslim alan K. Aksoy. Araç takip kaydı: 23.52’den 00.06’ya kadar B sahası, üçüncü sıra, motor çalışır."
+                  "text": "Sayın Başkan, işletmenin zimmet defteri: 16 LMN 07, 14 Kasım 22.00, teslim alan K. Aksoy. Araç takip kaydı: 23.52’den 00.06’ya kadar B sahası, üçüncü sıra, motor çalışır; 00.14’te araç kapısından çıkış."
                 },
-                { "speaker": "player", "text": "Ceset B sahasının üçüncü sırasında bulundu." },
+                {
+                  "speaker": "player",
+                  "text": "Tanık on ikiyi on geçe rıhtım yolunda yürüdüğünü söylüyor. O dakikada kendi zimmetindeki kamyonet B sahasından araç kapısına gidiyordu. Ceset B sahasının üçüncü sırasında bulundu."
+                },
                 { "speaker": "narrator", "text": "Kenan’ın avukatı eğilip bir şey fısıldadı. Kenan başını salladı." },
                 { "speaker": "kenan", "text": "Bu soruya cevap vermeyeceğim efendim." },
                 {
@@ -1290,6 +1324,61 @@
             "feedback": "Zimmet ve araç takip kaydı: tanığın zimmetindeki kamyonet ölüm saatinde B sahasında on dört dakika durdu.",
             "category": "SORGULAMA"
           }
+        },
+        {
+          "id": "PS_K5_KISMI",
+          "kind": "PRESENT",
+          "match": { "statement": "K5", "evidence": ["ev_gps"] },
+          "enabledWhen": { "flag": "press_k5" },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, araç takip kaydı: 16 LMN 07, 23.52’den 00.06’ya kadar B sahasında."
+                },
+                {
+                  "speaker": "kenan",
+                  "text": "Gördünüz mü? Kamyonet oradaymış. Ben yürüyordum. Anahtar panoda; kim aldıysa o."
+                },
+                { "speaker": "uye", "text": "Müdafi, aracı o gece kimin kullandığına ilişkin kayıt var mı?" },
+                {
+                  "speaker": "player",
+                  "text": "Bir makine bir aracın yerini söyledi; bir imza o aracın elini söyleyecekti. İmzayı bağlamadan kâğıdı uzattım.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "SORGULAMA", "amount": 100 },
+            { "type": "VAR", "var": "pers", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kısmi isabet: araç takip satırı kamyonetin yerini gösterir, kimin kullandığını değil. Zimmet satırıyla birleştirip sunmak gerekiyordu."
+          }
+        },
+        {
+          "id": "PS_K5_ERKEN",
+          "kind": "PRESENT",
+          "match": { "statement": "K5", "evidence": ["ded_arac"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Sayın Başkan, zimmet ve araç takip kaydı: kamyonet o gece B sahasındaydı."
+                },
+                { "speaker": "kenan", "text": "Kamyonetle ne ilgim var avukat hanım? Ben size ne dedim ki?" },
+                {
+                  "speaker": "player",
+                  "text": "Tanığın “yürüyerek”ini kendi ağzından yeniden kurdurmadan kâğıdı gösterdim; o da kâğıdın etrafından dolaştı.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ]
         },
         {
           "id": "PR_K6",
@@ -2478,15 +2567,7 @@
       "background": "durusma_salonu",
       "lines": [
         {
-          "when": {
-            "all": [
-              { "flag": "suc_duyurusu" },
-              { "flag": "contra_k5" },
-              { "any": [{ "flag": "contra_k6" }, { "flag": "contra_k7" }] },
-              { "ref": "donus_yok" },
-              { "ref": "olum_sonra" }
-            ]
-          },
+          "when": { "all": [{ "ref": "fail_kayit" }, { "ref": "donus_yok" }, { "ref": "olum_sonra" }] },
           "lines": [
             {
               "speaker": "savci",
@@ -2771,15 +2852,7 @@
           "effects": [
             {
               "type": "IF",
-              "when": {
-                "all": [
-                  { "flag": "suc_duyurusu" },
-                  { "flag": "contra_k5" },
-                  { "any": [{ "flag": "contra_k6" }, { "flag": "contra_k7" }] },
-                  { "ref": "donus_yok" },
-                  { "ref": "olum_sonra" }
-                ]
-              },
+              "when": { "all": [{ "ref": "fail_kayit" }, { "ref": "donus_yok" }, { "ref": "olum_sonra" }] },
               "then": [
                 {
                   "type": "SCORE",

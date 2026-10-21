@@ -52,7 +52,7 @@ export const scenes: CasePart = {
         sceneObject('ob_proj', 'Projektör direği', OB_PROJ, {
           discovers: 'clue_projektor',
           score: { ARASTIRMA: 60 },
-          text: 'Direğin dibinde sarı bir etiket, flaşta parlıyor: “14/11 · 23.00–02.00 · BAKIM · ENERJİ YOK.” O gece B sahasının ışıkları sönüktü.',
+          text: 'Direğin dibinde sarı bir etiket, flaşta parlıyor: “14/11 · 23.00–02.00 · BAKIM · ENERJİ YOK · İş emri 4471.” Bir plan. Uygulandı mı, iş emrinin kaydı söyler.',
           short: 'Bakım etiketi',
         }),
         sceneObject('ob_kafes', 'Laşing kafesi', OB_KAFES, {

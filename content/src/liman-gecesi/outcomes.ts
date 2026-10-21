@@ -74,7 +74,7 @@ leyla: Genç bir kadın. İyi. Turnike kaydını ilk gün istemiş. Sevim Yavuz�
     outcome('BERAAT_B', {
       class: 'ACQUITTAL',
       priority: 2,
-      when: all(not(flag('cokus')), flag('gercek_fail'), ref('donus_yok'), ref('olum_sonra')),
+      when: all(not(flag('cokus')), ref('fail_kayit'), ref('donus_yok'), ref('olum_sonra')),
       stamp: 'BERAAT',
       stampTone: 'green',
       header: 'TÜRK MİLLETİ ADINA',
@@ -96,6 +96,13 @@ leyla: Genç bir kadın. İyi. Turnike kaydını ilk gün istemiş. Sevim Yavuz�
         ),
         because('Emanetteki kilit yaranın ölçüsüne uymamaktadır; savcılığın gösterdiği alet ölümle bağlantılı değildir.', flag('contra_b3')),
         because(
+          'Aracın kitindeki eski tip kilitlerden biri ölümün ertesi sabahı “kayıp” yazılmıştır; yarayla uyumlu alet o kitteydi.',
+          flag('contra_k7'),
+        ),
+        because(
+          'Teşhis eden tanığın aradaki ek ifadesi (yaya tur, gece yarısından sonra rıhtım yolu), kendi zimmetindeki aracın o dakikalarda B sahasından araç kapısına gittiğini gösteren kayıtla çürümüştür.',
+        ),
+        because(
           'Ölüm saatinde olay yerinde bulunan tek araç başka bir kişinin zimmetindedir; bu kişi kendisini suçlayabilecek sorulara cevap vermemiş, hakkında soruşturma başlatılmıştır.',
         ),
         because(
@@ -106,7 +113,7 @@ leyla: Genç bir kadın. İyi. Turnike kaydını ilk gün istemiş. Sevim Yavuz�
       legalBasis: 'CMK 223/2-b, 223/8; TCK 86/2, 73; CMK 141/1-e, 142, 231/3',
       xp: xp(1.2, { ethicsVar: 'ethics' }),
       howToReach:
-        'Teşhisi ve savcılığın yedek tezini kayıtla çürüt; abone, araç ve zimmet kayıtlarını savcılığa yazılı bildir; ikinci celsede vardiya şefinin beyanlarını kayıtla çürüt ve esas savunmada gerçek faili göster. Skor bu hükmü belirlemez.',
+        'Teşhisi ve savcılığın yedek tezini kayıtla çürüt; abone, araç ve zimmet kayıtlarını savcılığa yazılı bildir; ikinci celsede vardiya şefinin beyanlarını kayıtla çürüt ve savcılığın aletini dışla (kilit ölçüsü ya da kitten eksik kilit). Hüküm kayda bakar, esas savunmanın adına ya da skora değil.',
       epilogue: [
         O(`
 baskan: Türk Milleti adına…
@@ -162,8 +169,12 @@ tarik: Ağabey… ayağına bakmazdın derler. Ben baktım. Bir kere yine de tö
           all(flag('contra_n1'), not(flag('contra_k1'))),
         ),
         because(
-          'Projektörlerin bakım nedeniyle kapalı olduğu bir sahada tanığın yüz seçmesi mümkün değildir; teşhisin dayanağı yoktur.',
+          'İş emri kaydına göre tanığın gösterdiği direğin hattında enerji 23.02–01.56 arasında kesiktir; ışıksız bir sahada tanığın yüz seçmesi mümkün değildir.',
           flag('contra_k2'),
+        ),
+        because(
+          'Tanığın ek ifadesindeki ikinci anlatım (yürüyerek tur, 00.10, rıhtım yolu), kendi zimmetindeki kamyonetin o saatte B sahasından araç kapısına gittiğini gösteren araç takip ve zimmet kaydıyla çürümüş; tanık bu konuda cevap vermemiştir (CMK 48).',
+          flag('contra_k5'),
         ),
         because(
           'Büfe sahibi, sanığın gece haberleri başlayana, saat on ikiye kadar büfede oturduğunu yeminle beyan etmiştir.',
@@ -185,7 +196,7 @@ tarik: Ağabey… ayağına bakmazdın derler. Ben baktım. Bir kere yine de tö
       legalBasis: 'CMK 223/2-e, 223/8; TCK 86/2; Anayasa 38/4; AİHS 6/2; CMK 141/1-e, 142, 231/3',
       xp: xp(1, { ethicsVar: 'ethics' }),
       howToReach:
-        'Teşhisi iki ayağından çürüt: saati kayıtla (turnike + büfe fişi), yüzü ışıkla (bakım etiketi) ya da büfecinin gece yarısı beyanıyla. İkinci celsede bilirkişiye darbe şeklini ve olay yerini, ölüm saatini ve yolda kan olmadığını kâğıtla göster. Karar duruşmada tartışılan bu olgulara bakar (CMK 217/1).',
+        'Teşhisi çürüt: saati kayıtla (turnike + büfe fişi), ışığı iş emri kaydıyla (etiket bir plandır); tanığın aradaki ikinci anlatımını ikinci celsede araç takip ve zimmet kaydıyla. Bilirkişiye darbe şeklini ve olay yerini, ölüm saatini (ham rapor satırı + Dr. Beyaz’ın okuması + kayıttaki son öğün) ve yolda kan olmadığını kâğıtla göster. Karar duruşmada tartışılan bu olgulara bakar (CMK 217/1).',
       epilogue: [
         O(`
 baskan: Türk Milleti adına…
@@ -322,15 +333,19 @@ tarik: Ağabeyim de böyleydi. Bir kutuyu yanlış bağladılar, o ödedi. Ben b
       reasoning: [
         because(
           'Tanık beyanları ve kavga sonrası teşhis, sanığın olay yerine döndüğü yönündeki iddiayı desteklemiştir.',
-          all(not(flag('contra_k1')), not(flag('contra_n1')), not(flag('contra_k2')), not(flag('contra_n2'))),
+          all(not(flag('contra_k1')), not(flag('contra_n1')), not(flag('contra_k2'))),
         ),
         because(
-          'Tanık saat konusunda yanılmış olabileceğini kabul etmiş, ancak sanığı yüzünden tanıdığını sürdürmüştür; teşhisin dayanağı olan aydınlatma ve sanığın gece yarısına kadar nerede olduğu kürsüde kayıtla tartışılmamıştır.',
-          all(any(flag('contra_k1'), flag('contra_n1')), not(flag('contra_k2')), not(flag('contra_n2'))),
+          'Tanık saat konusunda yanılmış olabileceğini kabul etmiş, ancak sanığı yüzünden tanıdığını sürdürmüştür; teşhisin dayanağı olan aydınlatmanın o gece gerçekten kesildiği kürsüde kayıtla (iş emri) gösterilmemiştir. Direkteki etiket bir bakım planıdır.',
+          all(any(flag('contra_k1'), flag('contra_n1')), not(flag('contra_k2'))),
         ),
         because(
           'Aydınlatmanın kapalı olduğu anlaşılmışsa da tanık sanığı yürüyüşünden tanıdığını ve gördüğü saati sürdürmüştür; sanığın o saatte başka yerde olduğu kürsüde kayıtla gösterilmemiştir.',
-          all(any(flag('contra_k2'), flag('contra_n2')), not(flag('contra_k1')), not(flag('contra_n1'))),
+          all(flag('contra_k2'), not(flag('contra_k1')), not(flag('contra_n1'))),
+        ),
+        because(
+          'İlk teşhis kürsüde çökmüşse de tanık ek ifadesinde sanığı gece yarısından sonra rıhtım yolunda, yanan bir lambanın altında gördüğünü beyan etmiş ve bunu ikinci celsede sürdürmüştür; bu ikinci anlatım kayıtla çürütülmemiştir.',
+          all(any(flag('contra_k1'), flag('contra_n1')), flag('contra_k2'), not(flag('contra_k5'))),
         ),
         because(
           'Başın arkasına sert bir cisimle vurulan darbede ölüm neticesinin öngörüldüğü kabul edilmiştir (TCK 21/2).',
@@ -346,7 +361,7 @@ tarik: Ağabeyim de böyleydi. Bir kutuyu yanlış bağladılar, o ödedi. Ben b
         if: { when: flag('cokus'), then: xp(0.3, { ethicsVar: 'ethics' }), else: xp(0.6, { ethicsVar: 'ethics' }) },
       },
       howToReach:
-        'Varsayılan sonuç: teşhisi iki ayağından (saat ve yüz) kayıtla çürütemezsen teşhis ayakta kalır ve heyet iddianamedeki anlatımı esas alır.',
+        'Varsayılan sonuç: teşhisi saatinden ve ışığından (iş emri kaydı) kayıtla çürütemezsen ya da tanığın aradaki ikinci anlatımını (yaya tur, 00.10) ikinci celsede araç ve zimmet kaydıyla düşüremezsen teşhis ayakta kalır ve heyet iddianamedeki anlatımı esas alır.',
       epilogue: [
         O(`
 baskan: Türk Milleti adına… on altı yıl sekiz ay hapis cezasıyla…

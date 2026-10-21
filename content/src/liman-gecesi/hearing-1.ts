@@ -678,32 +678,33 @@ baskan: Müdafi, bir kâğıt bir saati gösterir; tanık bir yüz. İkisini bir
 kenan: Yanıyordu tabii. Liman gece yanar. Gündüz gibiydi.
 `),
         }),
-        tekrar('PS_K2_TEKRAR', 'K2', ['ded_isik', 'clue_projektor'], 'contra_k2'),
-        // K2: önce tanığın ışık iddiası kürsüde kesinleştirilir (BASTIR), sonra direkteki bakım etiketi gösterilir.
-        presentRule('PS_K2', 'K2', ['ded_isik', 'clue_projektor'], {
+        tekrar('PS_K2_TEKRAR', 'K2', ['ded_isik', 'clue_projektor', 'ev_bakim'], 'contra_k2'),
+        // K2: önce tanığın ışık iddiası kürsüde kesinleştirilir (BASTIR), sonra iş emri kaydı gösterilir. Etiket bir plandır
+        // (kısmi); planın uygulandığını ve tanığın gösterdiği direğin o hatta olduğunu ded_isik (iş emri + beyan) kurar.
+        presentRule('PS_K2', 'K2', ['ded_isik'], {
           enabledWhen: all(flag('press_k2'), flag('contra_k1')),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_k2')],
-          good: 'Projektör direğindeki bakım etiketi: 23.00–02.00 enerji yok. “Gündüz gibi” ışık yoktu; teşhisin dayanağı düştü.',
+          good: 'İş emri 4471: B sahası giriş direklerinin hattında enerji 23.02–01.56 kesik; tanığın gösterdiği direk o hatta. “Gündüz gibi” ışık yoktu; teşhisin dayanağı düştü.',
           category: 'SORGULAMA',
           responses: B(`
-- Sayın Başkan, olay yeri fotoğrafı 17. B sahasının projektör direği. Etiket: “14/11 · 23.00–02.00 · bakım · enerji yok.”
-> Kenan fotoğrafa baktı. Uzun uzun. Sonra gözlerini kapadı, açtı.
+- Sayın Başkan, olay yeri fotoğrafı 17: giriş direği, etiket “23.00–02.00 · bakım · enerji yok · iş emri 4471.” Ve yüklenicinin iş emri kaydı: hat A, giriş direkleri, enerji 23.02’de kesilmiş, 01.56’da verilmiş.
+> Kenan kâğıda baktı. Uzun uzun. Sonra gözlerini kapadı, açtı.
 kenan: Bakım… Evet. Bakım vardı o gece. Unutmuşum. Rıhtımın ışığı vardı ama. Uzaktan…
 uye: Rıhtımın ışığı B sahasının ağzına ne kadar uzakta, tanık?
 kenan: Üç yüz metre efendim.
 ~ Üç yüz metre, gece, yağmur, sönük projektörler. “Gündüz gibi” değil.
 `),
         }),
-        presentRule('PS_K2_YURUYUS', 'K2', ['ded_isik', 'clue_projektor'], {
+        presentRule('PS_K2_YURUYUS', 'K2', ['ded_isik'], {
           enabledWhen: flag('press_k2'),
           score: { SORGULAMA: 300 },
           effects: [inc('pers', 2), raise('contra_k2')],
-          good: 'Projektör direğindeki bakım etiketi: 23.00–02.00 enerji yok. “Gündüz gibi” ışık yoktu; yüz teşhisinin dayanağı düştü (tanık saatine ve yürüyüşe tutunuyor).',
+          good: 'İş emri kaydı: giriş direklerinin hattında enerji 23.02–01.56 kesik. “Gündüz gibi” ışık yoktu; yüz teşhisinin dayanağı düştü (tanık saatine ve yürüyüşe tutunuyor).',
           category: 'SORGULAMA',
           responses: B(`
-- Sayın Başkan, olay yeri fotoğrafı 17. B sahasının projektör direği. Etiket: “14/11 · 23.00–02.00 · bakım · enerji yok.”
-> Kenan fotoğrafa baktı. Uzun uzun. Sonra gözlerini kapadı, açtı.
+- Sayın Başkan, olay yeri fotoğrafı 17: B sahasının giriş direği, etiket “iş emri 4471.” Yüklenicinin kaydı: hat A, giriş direkleri, enerji 23.02’de kesilmiş, 01.56’da verilmiş.
+> Kenan kâğıda baktı. Uzun uzun. Sonra gözlerini kapadı, açtı.
 kenan: Bakım… Evet. Bakım vardı o gece. Unutmuşum. Rıhtımın ışığı vardı ama. Uzaktan…
 uye: Rıhtımın ışığı B sahasının ağzına ne kadar uzakta, tanık?
 kenan: Üç yüz metre efendim.
@@ -711,7 +712,31 @@ kenan: Ama ben o çocuğu yürüyüşünden tanırım efendim. Yirmi yıldır he
 ~ Üç yüz metre, gece, yağmur, sönük projektörler. “Gündüz gibi” değil. Ama bir yürüyüş ve bir saat hâlâ kürsüde; saati de kâğıtla bağlamak gerekiyor.
 `),
         }),
-        presentRule('PS_K2_ERKEN', 'K2', ['ded_isik', 'clue_projektor'], {
+        presentRule('PS_K2_ETIKET', 'K2', ['clue_projektor', 'ev_bakim'], {
+          enabledWhen: flag('press_k2'),
+          score: { SORGULAMA: 100 },
+          effects: [inc('pers')],
+          neutral:
+            'Kısmi isabet: etiket bir plandır, iş emrinin tamamı da birçok hat sayar. Tanığın gösterdiği direği enerji kesme satırına bağlamak gerekiyordu.',
+          responses: [
+            W(
+              has('ev_bakim'),
+              `
+- Sayın Başkan, elektrik yüklenicisinin iş emri kaydı: o gece B sahasında bakım yapılmış.
+kenan: Hangi hatta efendim? Sahada üç hat var. Ben girişteki büyük direği söyledim; kâğıtta hangi direk yazıyor?
+baskan: Müdafi, kayıttaki hangi satır tanığın gösterdiği direğe ilişkin?
+~ Kâğıdın tamamını uzattım; tanık satırların arasından yürüdü gitti. Onun direğini o satıra bağlamalıydım.
+`,
+            ),
+            O(`
+- Sayın Başkan, olay yeri fotoğrafı 17: projektör direğinde bir bakım etiketi. “23.00–02.00 · enerji yok.”
+kenan: Etiket haftalardır orada avukat hanım. Bakım çok ertelenir. O gece yanıyordu; ben gördüm.
+uye: Müdafi, bakımın o gece yapıldığını gösteren bir kayıt var mı?
+~ Bir etiket bir niyettir. Niyetin yapıldığını gösteren kâğıdı istemem gerekiyordu.
+`),
+          ],
+        }),
+        presentRule('PS_K2_ERKEN', 'K2', ['ded_isik', 'clue_projektor', 'ev_bakim'], {
           responses: B(`
 - Sayın Başkan, olay yeri fotoğrafı 17: projektör direğinde bir bakım etiketi.
 kenan: Hangi direk o avukat hanım? Limanda yüz direk var. Ben gördüğümü söyledim.
@@ -831,11 +856,12 @@ baskan: Taraflar, eksik hususlar ve delil talepleri? Önce müdafi.
           responses: B(`baskan: Kabul. Kurumun nihai raporu beklenecek, raporu düzenleyen uzman dinlenecek.`),
         }),
         option('TL_GPS', 'Servis kamyoneti 16 LMN 07’nin araç takip ve zimmet kayıtları', {
-          visibleWhen: any(has('clue_servis_arac'), flag('k4_arac')),
+          // Talebin somut dayanağı: o saatte giren tek araç (döküm) ve cesedin yanındaki taze çift lastik izi (fotoğraf).
+          visibleWhen: all(any(has('clue_servis_arac'), flag('k4_arac')), has('clue_lastik')),
           enabledWhen: cmp(v('talep_n'), '<', 3),
           score: { USUL_BILGISI: 80 },
           effects: [raise('talep_gps'), inc('talep_n')],
-          good: 'Olay saatinde limana giren tek aracın konumu ve kullanıcısı; somut, ilgili ve elde edilebilir (CMK 332).',
+          good: 'Olay saatinde limana giren tek araç ve cesedin yanındaki taze çift lastik izi: aracın konumu ve kullanıcısı somut, ilgili ve elde edilebilir (CMK 332).',
           responses: B(`
 savci: İtirazımız yok Sayın Başkan.
 baskan: Kabul. İşletmeye müzekkere yazılsın.

@@ -80,7 +80,7 @@
           "id": "t_arsiv",
           "label": "ARŞİV",
           "kind": "ARCHIVE",
-          "choices": ["H_ONRAPOR", "H_TELEFON", "H_TURNIKE", "H_IFADE", "H_DIL", "H_CIKARIM", "H_LEYLA"]
+          "choices": ["H_ONRAPOR", "H_TELEFON", "H_TURNIKE", "H_IFADE", "H_BAKIM", "H_DIL", "H_CIKARIM", "H_LEYLA"]
         }
       ],
       "choices": [
@@ -205,13 +205,22 @@
           "description": "0 EP · üç ifade, bir daktilo"
         },
         {
+          "id": "H_BAKIM",
+          "kind": "NAVIGATE",
+          "label": "İş emri kaydını incele",
+          "next": { "push": "INV_BAKIM" },
+          "maxUses": 1,
+          "description": "0 EP · elektrik yüklenicisinin cevabı",
+          "visibleWhen": { "hasEvidence": "ev_bakim" }
+        },
+        {
           "id": "H_DIL",
           "kind": "NAVIGATE",
           "label": "Delil dilekçesi (CMK 177)",
           "cost": [{ "var": "ap", "amount": 1 }],
           "next": { "push": "INV_DIL" },
           "maxUses": 1,
-          "description": "2 talep hakkı"
+          "description": "3 talep hakkı"
         },
         {
           "id": "H_CIKARIM",
@@ -277,6 +286,7 @@
       "onEnter": [
         { "type": "DISCOVER", "evidence": "ev_turnike" },
         { "type": "DISCOVER", "evidence": "ev_kantin" },
+        { "type": "DISCOVER", "evidence": "ev_bakim" },
         { "type": "VAR", "var": "day", "op": "inc", "value": 1 },
         { "type": "VAR", "var": "ap", "op": "set", "value": 3 }
       ],
@@ -2990,6 +3000,87 @@
       ]
     },
     {
+      "id": "INV_BAKIM",
+      "type": "DOCUMENT",
+      "chapter": "Bölüm 2 · Soruşturma",
+      "eyebrow": "DAVA #10 · SORUŞTURMA",
+      "title": "İş emri 4471",
+      "hud": ["bakim_left"],
+      "background": "buro",
+      "lines": [
+        {
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Elektrik yüklenicisinin cevabı: tek sayfa iş emri, bir teknisyen imzası, kenarında yağlı bir parmak izi. “Mahkemenizin müzekkeresi üzerine…”"
+            },
+            {
+              "speaker": "player",
+              "text": "Etiket bir niyet. İş emri bir yapılmış iş. Bir mahkeme niyete değil yapılmış işe bakar.",
+              "style": "thought"
+            },
+            {
+              "speaker": "narrator",
+              "text": "Sayfanın altında el çizimi bir hat şeması: B sahası, dört sıra, giriş direkleri. Rıhtım 4 şemanın kenarında, ayrı bir kutuda."
+            }
+          ]
+        }
+      ],
+      "header": { "left": "MUDANYA ELEKTRİK · İŞ EMRİ 4471", "right": "14–15.11" },
+      "columns": [
+        { "label": "SATIR", "flex": 0.8 },
+        { "label": "KAYIT", "flex": 2.6 },
+        { "label": "İMZA", "flex": 1 }
+      ],
+      "rows": [
+        { "id": "b1", "cells": ["İş", "B sahası aydınlatma panosu bakımı · planlı · 23.00–02.00", "şef"] },
+        {
+          "id": "b2",
+          "cells": ["Hat A", "B sahası giriş direkleri ve 1–4. sıra · enerji kesme 23.02 · verme 01.56", "İ. KAYA"]
+        },
+        { "id": "b3", "cells": ["Hat B", "B sahası arka çit hattı · kesinti yok", "İ. KAYA"] },
+        {
+          "id": "b4",
+          "cells": ["Not", "Rıhtım 4 ve rıhtım yolu aydınlatması ayrı hattan beslenir; kesinti yapılmadı", "—"]
+        }
+      ],
+      "tools": [
+        { "id": "mag", "label": "Büyüteç", "icon": "magnifier" },
+        { "id": "compare", "label": "Karşılaştır", "icon": "compare" }
+      ],
+      "actionCosts": { "EXAMINE": [{ "var": "bakim_left", "amount": 1 }] },
+      "choices": [
+        {
+          "id": "EX_B2",
+          "kind": "EXAMINE",
+          "match": { "tool": "mag", "target": "b2" },
+          "feedback": {
+            "title": "YENİ İPUCU",
+            "text": "Hat A: B sahasının giriş direkleri ve ilk dört sıra. Enerji 23.02’de kesilmiş, 01.56’da verilmiş; teknisyen imzalı. Etiketteki plan o gece uygulanmış.",
+            "label": "+120 SKOR · Not defterine eklendi",
+            "tone": "special"
+          },
+          "effects": [
+            { "type": "DISCOVER", "evidence": "clue_enerji" },
+            { "type": "SCORE", "category": "DELIL_ANALIZI", "amount": 120 }
+          ]
+        },
+        {
+          "id": "FB_BAKIM",
+          "kind": "FALLBACK",
+          "fallbackFor": "EXAMINE",
+          "feedback": {
+            "title": "SONUÇ YOK",
+            "text": "Bu satırda bu aletle dikkat çeken bir şey yok.",
+            "label": "−20 SKOR",
+            "tone": "error"
+          },
+          "effects": [{ "type": "SCORE", "category": "DELIL_ANALIZI", "amount": -20 }]
+        },
+        { "id": "BAKIM_BITIR", "kind": "CONTINUE", "label": "Belgeyi kapat", "role": "BACK", "next": "$return" }
+      ]
+    },
+    {
       "id": "INV_DIL",
       "type": "STORY",
       "chapter": "Bölüm 2 · Soruşturma",
@@ -3001,7 +3092,7 @@
           "lines": [
             {
               "speaker": "narrator",
-              "text": "Duruşmadan önce mahkemeden delil toplanmasını isteyebilirdim. Ama mahkeme her talebi okumaz; iki talep, gerekçesiyle, yeter."
+              "text": "Duruşmadan önce mahkemeden delil toplanmasını isteyebilirdim. Ama mahkeme her talebi okumaz; üç talep, gerekçesiyle, yeter."
             },
             {
               "speaker": "player",
@@ -3017,7 +3108,7 @@
           "kind": "OPTION",
           "label": "Liman turnike ve araç kapısı kayıtları (14 Kasım 22.00–01.00)",
           "visibleWhen": { "flag": "fact_gece" },
-          "enabledWhen": { "cmp": [{ "var": "dil_n" }, "<", 2] },
+          "enabledWhen": { "cmp": [{ "var": "dil_n" }, "<", 3] },
           "responses": [
             {
               "lines": [
@@ -3043,7 +3134,7 @@
           "id": "DIL_KANTIN",
           "kind": "OPTION",
           "label": "Kantinin kart okuyucu kayıtları (14 Kasım 23.00–00.00)",
-          "enabledWhen": { "cmp": [{ "var": "dil_n" }, "<", 2] },
+          "enabledWhen": { "cmp": [{ "var": "dil_n" }, "<", 3] },
           "responses": [
             {
               "lines": [
@@ -3066,10 +3157,37 @@
           }
         },
         {
+          "id": "DIL_BAKIM",
+          "kind": "OPTION",
+          "label": "Elektrik yüklenicisinin iş emri 4471 kaydı (B sahası aydınlatması, 14 Kasım)",
+          "visibleWhen": { "hasEvidence": "clue_projektor" },
+          "enabledWhen": { "cmp": [{ "var": "dil_n" }, "<", 3] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "player",
+                  "text": "Olay gecesi B sahası aydınlatmasında enerjinin kesilip kesilmediği. Direkteki etiket iş emri numarası taşıyor; kesme ve verme saatleri yüklenicinin kaydında."
+                }
+              ]
+            }
+          ],
+          "effects": [
+            { "type": "SCORE", "category": "USUL_BILGISI", "amount": 50 },
+            { "type": "VAR", "var": "dil_bakim", "op": "set", "value": true },
+            { "type": "VAR", "var": "dil_n", "op": "inc", "value": 1 }
+          ],
+          "quality": {
+            "q": "GOOD",
+            "feedback": "Etiket bir bakım planıdır; o gece enerjinin gerçekten kesildiğini gösterecek kayıt somut, ilgili ve elde edilebilir (CMK 177, 332).",
+            "category": "USUL_BILGISI"
+          }
+        },
+        {
           "id": "DIL_KESIF",
           "kind": "OPTION",
           "label": "Olay yerinde keşif",
-          "enabledWhen": { "cmp": [{ "var": "dil_n" }, "<", 2] },
+          "enabledWhen": { "cmp": [{ "var": "dil_n" }, "<", 3] },
           "responses": [
             {
               "lines": [{ "speaker": "player", "text": "Olay yerinde keşif. Mesafeleri ve aydınlatmayı görmek için." }]
@@ -3085,7 +3203,7 @@
           "id": "DIL_HTS",
           "kind": "OPTION",
           "label": "Liman güvenlik kamerası kayıtları (B sahası ve rıhtımlar)",
-          "enabledWhen": { "cmp": [{ "var": "dil_n" }, "<", 2] },
+          "enabledWhen": { "cmp": [{ "var": "dil_n" }, "<", 3] },
           "responses": [
             {
               "lines": [
@@ -3138,6 +3256,7 @@
         "clue_basit",
         "clue_projektor",
         "clue_kenan_isik",
+        "clue_enerji",
         "clue_arama2341",
         "clue_cikis",
         "clue_pos",
@@ -3197,10 +3316,10 @@
         {
           "id": "CB_ISIK",
           "kind": "COMBINE",
-          "match": { "a": "clue_kenan_isik", "b": "clue_projektor" },
+          "match": { "a": "clue_kenan_isik", "b": "clue_enerji" },
           "feedback": {
             "title": "Projektörler sönüktü",
-            "text": "“Gündüz gibiydi” diyor. Etikete göre B sahasının projektörleri 23.00–02.00 bakımdaydı. Gece, sisli, ışıksız bir sahada yirmi metreden yüz.",
+            "text": "“Girişteki büyük direk, gündüz gibiydi” diyor. İş emri: hat A, giriş direkleri, enerji 23.02’de kesilmiş, 01.56’da verilmiş. Onun direği o hatta. Işıksız bir sahada yirmi metreden yüz.",
             "label": "YENİ DELİL · +300 SKOR",
             "tone": "success"
           },
@@ -3531,7 +3650,8 @@
       "title": "Duruşmadan önceki gece",
       "onEnter": [
         { "type": "DISCOVER", "evidence": "ev_turnike" },
-        { "type": "DISCOVER", "evidence": "ev_kantin" }
+        { "type": "DISCOVER", "evidence": "ev_kantin" },
+        { "type": "DISCOVER", "evidence": "ev_bakim" }
       ],
       "lines": [
         {
@@ -3620,7 +3740,7 @@
           "lines": [
             {
               "speaker": "player",
-              "text": "“Gündüz gibiydi.” Bir etiket: enerji yok. Yarın bir adam yemin edip ışıktan söz edecek.",
+              "text": "“Gündüz gibiydi.” Bir etiket, bir iş emri: enerji yok. Yarın bir adam yemin edip ışıktan söz edecek.",
               "style": "thought"
             }
           ]
@@ -3956,6 +4076,12 @@
       "hint": "Kantinin kart okuyucu kaydını dilekçeyle iste."
     },
     {
+      "evidence": "ev_bakim",
+      "source": { "type": "NODE", "id": "INV_DAY_END" },
+      "requires": { "flag": "dil_bakim" },
+      "hint": "Direkteki etiketin iş emri kaydını (enerji kesme saatleri) dilekçeyle iste."
+    },
+    {
       "evidence": "ev_turnike",
       "source": { "type": "NODE", "id": "INV_GECE_1" },
       "requires": { "flag": "dil_turnike" },
@@ -3966,6 +4092,12 @@
       "source": { "type": "NODE", "id": "INV_GECE_1" },
       "requires": { "flag": "dil_kantin" },
       "hint": "Kantinin kart okuyucu kaydını dilekçeyle iste."
+    },
+    {
+      "evidence": "ev_bakim",
+      "source": { "type": "NODE", "id": "INV_GECE_1" },
+      "requires": { "flag": "dil_bakim" },
+      "hint": "Direkteki etiketin iş emri kaydını (enerji kesme saatleri) dilekçeyle iste."
     },
     { "evidence": "clue_kardes", "source": { "type": "CHOICE", "id": "TP_ERCAN" } },
     { "evidence": "clue_kardes", "source": { "type": "CHOICE", "id": "TP_EMRE" } },
@@ -3980,6 +4112,7 @@
     { "evidence": "clue_cevapsiz", "source": { "type": "RULE", "id": "EX_T5" } },
     { "evidence": "clue_cikis", "source": { "type": "RULE", "id": "EX_G2" } },
     { "evidence": "clue_servis_arac", "source": { "type": "RULE", "id": "EX_G4" } },
+    { "evidence": "clue_enerji", "source": { "type": "RULE", "id": "EX_B2" } },
     { "evidence": "ded_cikis", "source": { "type": "RULE", "id": "CB_CIKIS" } },
     { "evidence": "ded_buf", "source": { "type": "RULE", "id": "CB_BUF" } },
     { "evidence": "ded_isik", "source": { "type": "RULE", "id": "CB_ISIK" } },

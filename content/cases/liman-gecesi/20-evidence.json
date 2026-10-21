@@ -161,6 +161,25 @@
       "missedHint": "Kantin kaydı, Ercan’ın kavgadan sonra yaşadığını ve yemek yediğini belgelerdi."
     },
     {
+      "id": "ev_bakim",
+      "kind": "EVIDENCE",
+      "presentable": true,
+      "combinable": false,
+      "countsInBag": true,
+      "initiallyKnown": false,
+      "legalValidity": "VALID",
+      "type": "BELGE",
+      "title": "İş emri 4471: aydınlatma bakım ve enerji kesme kaydı",
+      "shortText": "14 Kasım gecesi B sahası aydınlatma hatları: enerji kesme ve verme saatleri, teknisyen imzası.",
+      "description": "Liman işletmesinin elektrik yüklenicisinin iş emri kaydı. Mahkemenin müzekkeresiyle, delil dilekçen üzerine gönderildi.",
+      "sourceLabel": "Liman işletmesi · elektrik yüklenicisi",
+      "icon": "document",
+      "side": "DEFENSE",
+      "strength": "STRONG",
+      "tags": ["key"],
+      "missedHint": "Direkteki etiket bir plandı; planın uygulandığını gösteren iş emri kaydını delil dilekçesiyle isteyebilirdin (CMK 177)."
+    },
+    {
       "id": "ev_atk",
       "kind": "EVIDENCE",
       "presentable": true,
@@ -263,8 +282,8 @@
       "type": "FOTOGRAF",
       "icon": "camera",
       "title": "B sahası projektörü: bakım etiketi",
-      "shortText": "“14/11 · 23.00–02.00 · BAKIM · ENERJİ YOK.”",
-      "description": "Projektör direğindeki sarı etiket. Kavganın ve sonrasının olduğu saatlerde B sahası karanlıktı.",
+      "shortText": "“14/11 · 23.00–02.00 · BAKIM · ENERJİ YOK · İş emri 4471.”",
+      "description": "Projektör direğindeki sarı etiket. Bir bakım planı; planın o gece uygulanıp uygulanmadığını etiket değil, iş emrinin kaydı söyler.",
       "sourceLabel": "Olay yeri fotoğrafı",
       "tags": ["kart", "key"]
     },
@@ -440,7 +459,7 @@
       "icon": "magnifier",
       "title": "Nihai rapor: karşı kutup lezyonu yok",
       "shortText": "“Frontal lob histopatolojisinde kontüzyon ve kanama odağı izlenmedi.”",
-      "description": "Ön raporun dipnotu bu değerlendirmeyi nihai rapora bırakmıştı.",
+      "description": "Ön raporun dipnotu bu değerlendirmeyi nihai rapora bırakmıştı. Dr. Beyaz: “Hareket eden baş değil, hareket eden cisim; ama oturur hâlde çarpmayı tek başına kapatmaz.”",
       "sourceLabel": "ATK nihai raporu",
       "tags": ["kart"]
     },
@@ -454,9 +473,9 @@
       "legalValidity": "VALID",
       "type": "ADLI_RAPOR",
       "icon": "magnifier",
-      "title": "Nihai rapor: mide içeriği",
-      "shortText": "“Yarı sindirilmiş ekmek, peynir parçaları, süt ürünü (~250 ml).”",
-      "description": "Son öğün saati bilinmediği için yorumlanmamış.",
+      "title": "Nihai rapor: mide içeriği (Dr. Beyaz’ın okuması)",
+      "shortText": "“Yarı sindirilmiş ekmek, peynir, süt ürünü (~250 ml).” Dr. Beyaz: sindirimin ilk evresi; sıra kesin.",
+      "description": "Rapor yorumlamamış; Dr. Beyaz okudu: kesin saat çıkmaz, ama ölüm bu öğünden sonra ve öğünün ilk saatleri içinde.",
       "sourceLabel": "ATK nihai raporu",
       "tags": ["kart"]
     },
@@ -586,6 +605,22 @@
       "shortText": "Kenan Aksoy: “Projektörler yanıyordu; yüzünü gördüm.”",
       "description": "Teşhisini ışığa dayandırıyor.",
       "sourceLabel": "Kenan Aksoy",
+      "tags": ["kart"]
+    },
+    {
+      "id": "clue_enerji",
+      "kind": "CLUE",
+      "presentable": false,
+      "combinable": true,
+      "countsInBag": false,
+      "initiallyKnown": false,
+      "legalValidity": "VALID",
+      "type": "BELGE",
+      "icon": "document",
+      "title": "İş emri 4471: hat A enerji kesik",
+      "shortText": "“Hat A (B sahası giriş direkleri, 1–4. sıra): enerji kesme 23.02, verme 01.56.”",
+      "description": "Etiketteki plan uygulanmış; teknisyen imzalı. Rıhtım 4 aydınlatması ayrı hat, kesinti yok.",
+      "sourceLabel": "Bakım kaydı",
       "tags": ["kart"]
     },
     {
@@ -781,9 +816,9 @@
       "side": "DEFENSE",
       "strength": "STRONG",
       "title": "Çıkarım: projektörler sönüktü",
-      "shortText": "Bakım etiketine göre 23.00–02.00 enerji yok. “Gündüz gibi” bir ışık yoktu.",
-      "description": "Vardiya şefinin teşhisi ışığa dayanıyor; ışık yoktu.",
-      "sourceLabel": "Çıkarım tahtası · Etiket + Beyan",
+      "shortText": "Bakım kaydına göre B sahası giriş hattında enerji 23.02–01.56 kesik. Tanığın gösterdiği direk o hatta.",
+      "description": "Vardiya şefinin teşhisi girişteki büyük direğin ışığına dayanıyor; o direğin hattına o gece enerji verilmemişti.",
+      "sourceLabel": "Çıkarım tahtası · Bakım kaydı + Beyan",
       "tags": ["key"]
     },
     {

@@ -395,6 +395,14 @@ P: Önünüzde imzalayan adam Vedat Ateş değilse, kimdi?
 erol: Kepliydi. Ben… Bilmiyorum Sayın Hâkim. Vallahi bilmiyorum.
 `),
         }),
+        presentRule('PS_E2_BELIRSIZ', 'E2', ['ev_rapor2_belirsiz'], {
+          effects: once('press_e2b', 'SORGULAMA', 50),
+          neutral: 'Kısmi: kesin olmayan rapor imzanın sanığa ait olduğunu söylemiyor; ama başkasını da göstermiyor.',
+          responses: B(`
+erol: Kesin değil diyor avukat hanım. Ben de kesin bir şey demiyorum; adam önümde imzaladı, o kadar.
+T: “Bilinmiyor” diyen bir kâğıt, kimsenin elini göstermez. Bu salonda bir el göstermem gerekiyordu.
+`),
+        }),
         presentRule('PS_E3', 'E3', ['ded_borc'], {
           maxUses: 1,
           score: { SORGULAMA: 300 },
@@ -403,7 +411,7 @@ erol: Kepliydi. Ben… Bilmiyorum Sayın Hâkim. Vallahi bilmiyorum.
           category: 'SORGULAMA',
           responses: B(`
 P: Sayın Hâkim, tanığın bürosunda açıkta duran masa takviminin fotoğrafı. 18 Şubat: “Hisar tapu 11.15 · T. · mahsup 1.400.”
-P: Ve tanığın adının geçtiği bahis borcu mesajları. Tanık bey, bir milyon altı yüz binin ne kadarı nakit, ne kadarı mahsup?
+P: Sanığın eşinin gördüğü, tanığın adının geçtiği bahis borcu mesajları da var; eş tanık olarak dinlenebilir. Tanık bey, bir milyon altı yüz binin ne kadarı nakit, ne kadarı mahsup?
 `),
         }),
         presentRule('PS_E4', 'E4', ['ded_mazeret', 'ev_kargo'], {

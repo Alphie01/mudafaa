@@ -647,19 +647,15 @@
               "lines": [
                 {
                   "speaker": "narrator",
-                  "text": "Anlattım. İmzayı, mürekkebi, raporu, irsaliyeleri. Tarık dinledi; çok iyi dinledi. Arada bir “hı” dedi, bir kere “vay” dedi."
-                },
-                {
-                  "speaker": "tarik",
-                  "text": "Demek mürekkebe bakıyorsunuz. Hiç aklıma gelmezdi. Siz çok iyi avukatsınız."
+                  "text": "Anlattım. İmzayı, raporu, irsaliyeleri. Tarık başını salladı, börek tepsisini bıraktı, gitti."
                 },
                 {
                   "speaker": "narrator",
-                  "text": "Gitti. Börek soğudu. Ben tepsinin başında, ne kadar çok şey anlattığımı fark ederek oturdum."
+                  "text": "Börek soğudu. Ben tepsinin başında, ne kadar çok şey anlattığımı fark ederek oturdum."
                 },
                 {
                   "speaker": "player",
-                  "text": "Bir avukatın en tehlikeli hâli, dinlendiğini sandığı andır.",
+                  "text": "Bu dosya bir ailenin içinde. Anlattığım her şey, bu akşam o ailenin sofrasına gidecek; müvekkilime sormadan.",
                   "style": "thought"
                 }
               ]
@@ -673,7 +669,7 @@
           ],
           "quality": {
             "q": "BAD",
-            "feedback": "Dosyanın ayrıntılarını müvekkilin izni olmadan üçüncü bir kişiye anlattın: sır saklama yükümlülüğünün ihlali (Av.K. 36). Üstelik o kişinin dosyadaki yerini bilmiyordun.",
+            "feedback": "Dosyanın ayrıntılarını müvekkilin izni olmadan üçüncü bir kişiye anlattın: sır saklama yükümlülüğünün ihlali (Av.K. 36); dosya ayrıntıları aile içinde dolaşacak.",
             "category": "SAVUNMA_STRATEJISI"
           }
         }
@@ -3256,7 +3252,7 @@
         {
           "id": "DIL_BILIRKISI",
           "kind": "OPTION",
-          "label": "Resmî mukayese imzalarıyla Adli Tıp’tan yeni imza incelemesi",
+          "label": "Adli Tıp’tan resmî imzalarla yeni inceleme",
           "visibleWhen": { "hasEvidence": "clue_mukayese_ozel" },
           "cost": [{ "var": "slots", "amount": 1 }],
           "maxUses": 1,
@@ -3365,7 +3361,7 @@
         {
           "id": "DIL_TUTANAK",
           "kind": "OPTION",
-          "label": "Mukayese belgelerinin asıl teslim tutanağı",
+          "label": "Mukayese için teslim edilen belgelerin asıl tutanağı",
           "visibleWhen": { "hasEvidence": "clue_tutanak_ad" },
           "cost": [{ "var": "slots", "amount": 1 }],
           "maxUses": 1,
@@ -3400,7 +3396,7 @@
         {
           "id": "DIL_HTS",
           "kind": "OPTION",
-          "label": "Nermin Kurt’un telefon kayıtları",
+          "label": "Nermin Kurt’un şubat ayı HTS ve baz kayıtları",
           "cost": [{ "var": "slots", "amount": 1 }],
           "maxUses": 1,
           "next": "$stay",
@@ -3417,7 +3413,7 @@
         {
           "id": "DIL_HAYRIYE",
           "kind": "OPTION",
-          "label": "Hayriye Ateş’in tanık olarak dinlenmesi",
+          "label": "Hayriye Ateş’in huzurevinde tanık olarak dinlenmesi",
           "cost": [{ "var": "slots", "amount": 1 }],
           "maxUses": 1,
           "next": "$stay",
@@ -3434,7 +3430,7 @@
         {
           "id": "DIL_BANKA",
           "kind": "OPTION",
-          "label": "Erol Kılınç’ın banka hesap hareketleri",
+          "label": "Erol Kılınç’ın banka hesap hareketleri ve satış bedelinin izi",
           "cost": [{ "var": "slots", "amount": 1 }],
           "maxUses": 1,
           "next": "$stay",
@@ -4097,7 +4093,7 @@
           "lines": [
             {
               "speaker": "player",
-              "text": "Bir tepsi börek. Her şeyi anlattım. Tarık iyi dinledi. Neden içim rahat değil?",
+              "text": "Bir tepsi börek. Her şeyi anlattım. Müvekkilime sormadan.",
               "style": "thought"
             }
           ]

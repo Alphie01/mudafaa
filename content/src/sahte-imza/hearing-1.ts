@@ -785,7 +785,7 @@ leyla: İnsanlara git; ama onlara bir şey söyletmek için değil, ne bildikler
           `
 N: Koridorda Vedat duvara yaslandı ve sağ elini havaya kaldırdı, bir öğrencinin parmak kaldırması gibi.
 vedat: Sol el. Sol el! Ben sol elimle çatal tutamam avukat hanım. Duydunuz mu? Zincir gerilmiş.
-N: Sevgi onun elini indirdi, avucunun içinde tuttu. Tarık koridorun ucunda, telefonuna bakıyordu. Bir an başını kaldırdı, sonra yeniden telefona eğildi.
+N: Sevgi onun elini indirdi, avucunun içinde tuttu. Nermin pencerenin önünde kardeşine baktı; bir şey diyecek oldu, demedi, çantasının sapını iki eliyle sıktı. Tarık her zamanki gibi herkese su getirdi.
 T: Bir salon, bir zincir, bir sol el. Bugün bir şey değişti. Ne değiştiğini henüz kimse tam bilmiyor; ben de.
 `,
         ),

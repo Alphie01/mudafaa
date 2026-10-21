@@ -226,6 +226,7 @@ export const meta: CasePart = {
       'ob_g5',
       'press_e1',
       'press_e1k',
+      'press_e2b',
       'press_e2',
       'press_e3',
       'press_e4',

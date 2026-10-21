@@ -469,7 +469,7 @@ c CE_DEVAM
 
 const CELSE2_COKUS = A(`
 c C200_DEVAM
-c C201_A
+c C201_B
 p E1
 s ded_kimlik E1
 s ded_kimlik E2
@@ -479,7 +479,9 @@ s ded_kurye E2
 c COKUS_DEVAM
 `);
 
-// İndirim: rapor ve irsaliye okunmadan, bilirkişi talebi olmadan; tapu memurunun sol el beyanı ve kurye kaydı var.
+// Şüpheli beraat / indirim: rapor ve irsaliye okunmadan, bilirkişi talebi olmadan; tapu memurunun sol el beyanı ve
+// kurye kaydı var. Sol el beyanının yanına mazeret (kuryenin açık uçlu tanıklığı + E4'te kargo kaydı) girerse
+// makul şüphe çekirdeği oluşur; mahkûmiyet kurulamaz, mahkeme re’sen Adli Tıp raporu ister (RESEN_RAPOR); tek halka (yalnızca sol el) indirimde kalır.
 const IND_INV = A(`
 c H_SENET
 e mag imza
@@ -624,7 +626,7 @@ c A_DURUSMA
 c ARA_SON_DEVAM
 `);
 
-const IND_C2 = A(`
+const IND_C2_SUPHE = A(`
 c C200_DEVAM
 c C201_A
 p E1
@@ -636,6 +638,25 @@ c C203_BITIR
 c TENEFFUS_DEVAM
 c C204B_B
 c C205B_DEVAM
+c ARG_SOLAK
+c ARG_MAZERET
+c ARG_IYI
+c ARG_TAMAM
+c C206_T
+c C207_B
+`);
+
+const IND_C2 = A(`
+c C200_DEVAM
+c C201_B
+p E1
+c C202_BITIR
+c C203C_B
+s ded_randevu T3X
+c C203_BITIR
+c TENEFFUS_DEVAM
+c C204B_B
+c C205C_DEVAM
 c ARG_SOLAK
 c ARG_MAZERET
 c ARG_IYI
@@ -936,6 +957,7 @@ c C200_DEVAM
 p E1
 p E1B
 p E2
+s ev_rapor2_belirsiz E2
 p E3
 p E4
 p E5
@@ -981,12 +1003,21 @@ export const tests: CasePart = {
       ),
       goldenPath(
         'INDIRIM',
-        { outcome: 'INDIRIM', finalMin: 4265, finalMax: 4714 },
+        { outcome: 'INDIRIM', finalMin: 3838, finalMax: 4242 },
         PROLOG('BR00_UCRET', 'STR_INDIRIM'),
         IND_INV,
         IND_C1,
         IND_ARA,
         IND_C2,
+      ),
+      goldenPath(
+        'RESEN_RAPOR',
+        { outcome: 'RESEN_RAPOR', finalMin: 4265, finalMax: 4714 },
+        PROLOG('BR00_UCRET', 'STR_INDIRIM'),
+        IND_INV,
+        IND_C1,
+        IND_ARA,
+        IND_C2_SUPHE,
       ),
       goldenPath(
         'MAHKUMIYET',
@@ -1020,7 +1051,7 @@ c SABAH_DEVAM
       ),
       goldenPath(
         'COKUS',
-        { outcome: 'COKUS', finalMin: 6427, finalMax: 7103 },
+        { outcome: 'COKUS', finalMin: 6284, finalMax: 6946 },
         PROLOG('BR00_DINLE', 'STR_MASUMIYET'),
         GUN1,
         GUN2,

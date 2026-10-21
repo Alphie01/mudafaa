@@ -1,6 +1,7 @@
 import {
   all,
   any,
+  atLeast,
   because,
   cmp,
   finalAtLeast,
@@ -19,6 +20,14 @@ import { O, W } from './lib.js';
 export const T_INDIRIM = 3000;
 export const T_BERAAT = 9500;
 export const T_BERAAT_B = 11000;
+
+/**
+ * Makul şüphe çekirdeği: tapu memurunun sol el beyanı, kargo kaydının kürsüde tanığa sunulması ve kuryenin açık
+ * uçlu tanıklığı. Bunlardan ikisi dosyadaysa hiçbir mahkûmiyet sonucu seçilemez (CMK 223/2-e; şüpheden sanık
+ * yararlanır). Tam beraatin koşulları (BERAAT_B/E) yoksa mahkeme çelişkiyi araştırarak giderir: Adli Tıp raporu varsa
+ * UST_KURUL, yoksa RESEN_RAPOR (CMK 63, 67, 217). Şüphe ilkesi araştırma imkânları tükenince uygulanır.
+ */
+export const makulSuphe = atLeast(2, flag('contra_g3'), flag('contra_e4'), flag('mazeret_tanik'));
 
 const istinaf = 'hükmün tebliğinden itibaren iki hafta içinde istinaf yolu açık olmak üzere (CMK 272, 273/1)';
 
@@ -67,7 +76,7 @@ T: Sonunda bir çocuğun ağzına, onun olmayan bir cümle koydum. Daha iyi bir 
     outcome('COKUS', {
       class: 'CONVICTION',
       priority: 2,
-      when: all(flag('cokus'), not(has('ev_rapor2'))),
+      when: all(flag('cokus'), not(has('ev_rapor2')), not(makulSuphe)),
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
       header: 'TÜRK MİLLETİ ADINA',
@@ -215,6 +224,10 @@ N: Hayriye Hanım her pazar Halit’e çorba koymaya devam ediyor. Evinin yerind
           any(has('ded_mazeret'), flag('contra_e4')),
         ),
         because(
+          'Tapu memurunun sol el beyanı ve mukayese malzemesinin belirsizliği karşısında yeni bir imza incelemesi, şüpheyi gidermeye elverişli görülmediğinden ayrıca rapor alınmasına gerek görülmemiştir.',
+          not(has('ev_rapor2')),
+        ),
+        because(
           'Sahte sureti kimin düzenlediği ve tapuda kimin bulunduğu kesin olarak belirlenememiştir; şüpheden sanık yararlanır.',
         ),
       ],
@@ -241,26 +254,65 @@ N: Adliyenin önünde bir simitçi tezgâhını açıyordu. Vedat iki simit ald�
 vedat: Beş aydır boğazımdan bir şey geçmiyor. Yarın geçer belki. Yarın dükkânda, makinenin başında.
 `),
         W(
-          has('ded_randevu'),
+          flag('tarik_sustu'),
+          `
+N: Tarık duruşmadan sonra kimseye görünmedi. Arka kapıdan çıkmıştı; Doblo otoparkta değildi. Sevgi telefonunu iki kez aradı, açılmadı.
+N: Vedat merdivenlerin başında bir an durdu, arkasına baktı. Kimseyi beklemiyordu; yine de baktı. Sonra Sevgi’nin koluna girip indi.
+`,
+        ),
+        W(
+          all(has('ded_randevu'), not(flag('tarik_sustu'))),
           `
 N: Merdivenlerin başında Tarık bekliyordu. Sevgi’nin koluna girdi, onu arabaya doğru götürdü. Vedat arkalarından baktı.
 T: Bir numara biliyorum. Bir randevu kaydı. Onları bir savcının masasına koymadım. Belki bir gün biri koyar. Belki hiç kimse.
 `,
         ),
-        O(`
+        W(
+          not(flag('tarik_sustu')),
+          `
 N: Tarık arabanın kapısını Sevgi için açtı. Vedat’a el salladı; Vedat el salladı. Araba yokuştan aşağı kaydı, yağmurun içinde kayboldu.
+`,
+        ),
+        O(`
 C#buro_gece: ARSLAN HUKUK · GECE
 N: Leyla odamın kapısında durdu. Elinde paltosu.
+`),
+        W(
+          flag('tarik_sustu'),
+          `
+leyla: Bir imzayı sahibinden ayırdın. İyi iş. Bir numarayı da kürsüde sahibine bağladın.
+leyla: Kürsüde gösterdin ama savcıya yazmadın; bir tutanak, bir suç duyurusu değildir.
+P: Hâkim dosyayı Başsavcılığa gönderdi.
+leyla: Sahte sureti gönderdi. Numarayı, borcu, mahsubu bir dilekçede yan yana yazan kimse yok. Kalabalık bir masada bir savcı onları kendiliğinden dizmez.
+P: Ben bir müvekkili savundum Leyla Hanım. Bir faili aramadım.
+leyla: Aramadın; buldun. Bulduğunu da yarı yolda bıraktın. Bunu da kendine söylemeyi öğreneceksin. Hiçbir gece tamamen kolay olmaz.
+`,
+        ),
+        W(
+          not(flag('tarik_sustu')),
+          `
 leyla: Bir imzayı sahibinden ayırdın. İyi iş. Ama kimin eline ait olduğunu bulamadın.
 P: Bulmam gerekmiyordu.
 leyla: Gerekmiyordu. Haklısın. Ceza davasında şüphe sanığındır. Ama bir ailede şüphe herkesindir Deniz. Bu ailede artık herkes herkesin elinden şüphelenecek.
 leyla: Kâğıtlarda bir numara gördün mü? Bir randevu kaydı? Bir tutanak? Gördüysen ve bir yere yazmadıysan, onu bir gün yeniden göreceksin. Uykunda.
 P: Ben bir müvekkili savundum Leyla Hanım. Bir faili aramadım.
 leyla: Doğru. Bunu da kendine söylemeyi öğreneceksin. Her gece biraz daha kolay olur. Hiçbir gece tamamen kolay olmaz.
+`,
+        ),
+        O(`
 N: Gitti. Kurşun harfler masamda duruyordu: Ş, E, T, A. Kâğıda basılınca ATEŞ.
 N: Pencereyi açtım. Yağmur dinmiş, sokak lambaları ıslak asfalta uzun sarı çizgiler bırakmıştı. Bir yerde bir köpek havladı, sonra sustu.
 N: Dosyayı kapadım ve dolaba kaldırdım. Etiketine kendi el yazımla “Ateş · Beraat” yazdım. Harflerim sağa yatıktı; elim titremiyordu.
-T: Bir imzayı sahibinden ayırdım. Kimin eline ait olduğunu bulamadım. Bu dosyada bir el hâlâ havada duruyor; bir kalem tutar gibi.
+`),
+        W(
+          flag('tarik_sustu'),
+          `T: Numarayı kürsüde söyledim; bir dilekçeye yazmadım. Bu dosyada bir el hâlâ havada duruyor; bir kalem tutar gibi.`,
+        ),
+        W(
+          not(flag('tarik_sustu')),
+          `T: Bir imzayı sahibinden ayırdım. Kimin eline ait olduğunu bulamadım. Bu dosyada bir el hâlâ havada duruyor; bir kalem tutar gibi.`,
+        ),
+        O(`
 N: Telefon titredi. Sevgi’den bir mesaj: “Vedat dükkânı açtı. Makineyi çalıştırdı. Bir düğün davetiyesi basıyor; isimleri kendisi diziyor.”
 N: Bir dakika sonra ikinci mesaj: “Tarık bugün gelmedi. Telefonu kapalı.”
 T: İki mesaj. Biri bir adamın hayatına döndüğünü söylüyor. Öbürü, bir başkasının hayatından bir kapının kapandığını. Kâğıtlar bunu yazmayacak; ama ben biliyorum.
@@ -324,7 +376,17 @@ T: Bir rapor bu dosyayı kurtardı; ben neredeyse batırıyordum. Kâğıtlar be
 `,
         ),
         O(`
-N: Sevgi kocasının koluna girdi. Koridorun ucunda Tarık bekliyordu; Doblo’nun anahtarı elinde. Sevgi bir an durdu, sonra yürüdü.
+N: Sevgi kocasının koluna girdi.
+`),
+        W(
+          flag('tarik_sustu'),
+          `N: Koridorun ucu boştu. Tarık duruşmadan sonra kimseye görünmemişti; Sevgi telefonuna bir kez baktı, sonra cebine koydu.`,
+        ),
+        W(
+          not(flag('tarik_sustu')),
+          `N: Koridorun ucunda Tarık bekliyordu; Doblo’nun anahtarı elinde. Sevgi bir an durdu, sonra yürüdü.`,
+        ),
+        O(`
 C#depo: ATEŞ MATBAASI · AKŞAM
 N: Vedat kepengi kaldırdı. Makineyi çalıştırmadı. Kurşun harf kasasının başında durdu; bir harf aldı, avucunda tarttı, geri koydu.
 vedat: Babam derdi ki: baskıya girmeden önce son bir prova alınır. Prova temizse basarsın. Benim provam bir kurulda.
@@ -338,10 +400,102 @@ N: Dosya Adli Tıp Kurumu Fizik İhtisas Kurulu’nda. Vedat Ateş hakkında adl
 `),
       ],
     }),
+    outcome('RESEN_RAPOR', {
+      class: 'OTHER',
+      priority: 6,
+      when: makulSuphe,
+      stamp: 'KARAR YOK',
+      stampTone: 'amber',
+      header: 'ARA KARAR',
+      sentence: 'Adli Tıp’a resmî imzalarla inceleme · duruşma ertelendi',
+      verdictText:
+        'Mahkemece, soruşturmada alınan grafoloji raporu ile tapu memurunun beyanı ve sanığın işlem saatine ilişkin deliller arasındaki çelişki karşısında imzanın aidiyeti hususunda hükme yeter açıklık bulunmadığından, sanığın noter, banka ve nüfus kayıtlarındaki resmî imzaları getirtilerek senet ve kapora makbuzundaki imzalar hakkında Adli Tıp Kurumu’ndan rapor alınmasına; sanık hakkındaki adli kontrol tedbirinin kaldırılmasına; duruşmanın raporun gelmesine kadar ertelenmesine karar verildi.',
+      reasoning: [
+        because(
+          'Soruşturmadaki grafoloji raporu imzanın sanığa ait olduğunu bildirmektedir; ancak bilirkişi raporu hâkimi bağlamaz ve dosyadaki diğer delillerle birlikte değerlendirilir (CMK 217).',
+        ),
+        because(
+          'Raporun mukayese malzemesi, kaynağı ve imza sahibi belirsiz özel belgelerden oluşmaktadır.',
+          has('ded_mukayese'),
+        ),
+        because(
+          'Tapu memuru, işlemi yapan kişinin imzayı sol eliyle attığını beyan etmiştir; sanık sağ elini kullanmaktadır.',
+          flag('contra_g3'),
+        ),
+        because(
+          'Kargo terminali kaydı sanığı imza saatinde işyerinin önünde göstermektedir; alıcı tanık bu kayıt karşısında beyanını açıklayamamıştır.',
+          flag('contra_e4'),
+        ),
+        because('Bağımsız kurye tanık, sanığın 11.19–11.37 arasında yanından ayrılmadığını beyan etmiştir.', flag('mazeret_tanik')),
+        because(
+          'Bu deliller raporla çelişmektedir; çelişki giderilmeden sanık aleyhine hüküm kurulamaz. Şüphe, araştırma imkânları tüketildiğinde sanık lehine sonuç doğurur.',
+        ),
+        because(
+          'Adli Tıp Kurumu ilk incelemede ek mukayese örneği gerektiğini bildirmiştir; noter ve banka kayıtlarındaki imzalar getirtilerek inceleme tamamlanacaktır.',
+          has('ev_rapor2_belirsiz'),
+        ),
+        because(
+          'Sanığın tartışmasız resmî imzalarıyla yapılacak bir inceleme çelişkiyi giderebilecek nitelikte olduğundan mahkemece re’sen rapor alınmasına karar verilmiştir (CMK 63, 67).',
+        ),
+      ],
+      legalBasis: 'CMK 63, 67, 217; CMK 223/2-e (şüphe ilkesi)',
+      xp: xp(0.6, { ethicsVar: 'ethics' }),
+      howToReach:
+        'Yeni bilirkişi talebini mahkeme senin yerine yaptı. Resmî imzalarla rapor iste, mukayesenin kirli olduğunu göster ve kürsüde halkaları birbirine bağla.',
+      epilogue: [
+        O(`
+hakim: Ara karar…
+N: “…Adli Tıp Kurumu’ndan rapor alınmasına… adli kontrol tedbirinin kaldırılmasına… ertelenmesine.” Vedat kelimeleri duydu; hangisinin kendisi için olduğunu bilemedi.
+N: Kâtip ara kararı yazdırdı. Savcı dosyasını kapadı, bana bir an baktı; sonra bir sonraki dosyanın kapağını açtı.
+C#adliye: ADLİYE KORİDORU · ÖĞLEDEN SONRA
+vedat: Bir rapor daha mı avukat hanım? Hâkim bana inanmadı mı?
+P: İnanmadığı şey rapordu Vedat Bey. Bir tapu memuru bir eli hatırladı, bir kayıt bir sabahı. Hâkim onları duydu; şimdi kendi gözüyle bir kâğıt görmek istiyor.
+vedat: Siz istemediniz mi o kâğıdı?
+T: İstememiştim. Resmî imzalarla bir inceleme. Hâkim, benim yazmadığım dilekçeyi kendisi yazdı.
+`),
+        W(
+          flag('cokus'),
+          `
+N: Savcı merdivenlerde yanımdan geçti, durmadan konuştu: “Tanıklarınız dosyayı ayakta tuttu avukat hanım. Kâğıtlarınız değil.”
+T: Haklıydı. Ben salonda düşerken iki tanık ayakta kalmıştı.
+`,
+        ),
+        W(
+          flag('closing_indirim'),
+          `T: Kapanışta indirim istemiştim. Hâkim dosyada benim inanmadığım bir şeyi gördü; benim kâğıtlarımda.`,
+        ),
+        W(
+          flag('tarik_sustu'),
+          `N: Tarık duruşmadan sonra kimseye görünmedi. Sevgi telefonuna iki kez baktı; ekran karanlık kaldı.`,
+        ),
+        W(
+          not(flag('tarik_sustu')),
+          `N: Koridorun ucunda Tarık, Sevgi’ye su getirdi. Sevgi bardağı aldı, içti. Vedat merdivenleri tek başına indi.`,
+        ),
+        O(`
+C#depo: ATEŞ MATBAASI · AKŞAM
+N: Vedat kepengi kaldırdı, ışığı yaktı; makinenin başına geçmedi. Duvardaki çerçeveye baktı: “Ateş Matbaası’nda her harf doğrudur.”
+vedat: Karakola gitmeyeceğim artık. Ama mahallede kimse ara karar okumaz avukat hanım. “Daha bitmedi” derler, geçerler.
+C#buro_gece: ARSLAN HUKUK · GECE
+leyla: Hâkim senin yerine bilirkişi istedi. Bunu bir iltifat sanma.
+P: Bir sol el. Bir sabah. Bir kayıt. Yetmedi mi?
+leyla: Halkalar dosyada; zincir değil. Araştırma yolu açıkken hâkim şüpheyle karar vermez. O yolu sen açmalıydın: resmî imzalar, Adli Tıp, gerekçeli bir dilekçe.
+T: Bir imza hâlâ kimseye ait değil. Rapor gelince yeniden kürsüye çıkacağım; bu kez kâğıtlarım sıralı.
+C: SON
+N: Dosya Adli Tıp Kurumu’nda. Vedat Ateş hakkında adli kontrol kaldırıldı. Hisar’daki ev hâlâ Erol Kılınç adına kayıtlı.
+`),
+      ],
+    }),
     outcome('INDIRIM', {
       class: 'REDUCED',
-      priority: 6,
-      when: all(not(flag('cokus')), not(has('ev_rapor2')), cmp(v('pers'), '>=', 3), finalAtLeast(T_INDIRIM)),
+      priority: 7,
+      when: all(
+        not(flag('cokus')),
+        not(has('ev_rapor2')),
+        not(makulSuphe),
+        cmp(v('pers'), '>=', 3),
+        finalAtLeast(T_INDIRIM),
+      ),
       stamp: 'İNDİRİM',
       stampTone: 'amber',
       header: 'TÜRK MİLLETİ ADINA',
@@ -356,8 +510,16 @@ N: Dosya Adli Tıp Kurumu Fizik İhtisas Kurulu’nda. Vedat Ateş hakkında adl
           has('ev_rapor2_belirsiz'),
         ),
         because(
-          'Tapu memurunun sol el beyanı ve mazerete ilişkin kayıtlar şüphe doğurmuş, ancak mahkemece yeterli görülmemiştir.',
-          any(flag('contra_g3'), has('ev_kargo')),
+          'Tapu memurunun beş ay sonra hatırladığı sol el beyanı, başka bir delille desteklenmediğinden tek başına grafoloji raporunun ispat gücünü sarsacak nitelikte görülmemiştir.',
+          flag('contra_g3'),
+        ),
+        because(
+          'Kargo terminali kaydı, teslimi kimin yaptığını değil terminale kimin dokunduğunu gösterir; tek başına sanığın imza saatinde başka yerde olduğunu ispatlamaz.',
+          all(has('ev_kargo'), not(flag('mazeret_tanik'))),
+        ),
+        because(
+          'Kurye tanığın beyanı, başka bir delille desteklenmediğinden tek başına raporla belirlenen imza aidiyetini ortadan kaldıracak nitelikte görülmemiştir.',
+          flag('mazeret_tanik'),
         ),
         because('Sanığın sabıkasızlığı ve duruşmadaki tutumu takdiri indirimde gözetilmiştir.'),
         because('Hayriye Ateş’in zararı giderilmediğinden hükmün açıklanması geri bırakılamamıştır.'),
@@ -365,7 +527,7 @@ N: Dosya Adli Tıp Kurumu Fizik İhtisas Kurulu’nda. Vedat Ateş hakkında adl
       legalBasis: 'TCK 204/1, 62/1, 51/1; CMK 231/6-c',
       xp: xp(0.85, { ethicsVar: 'ethics' }),
       howToReach:
-        'Beraat için imzanın sanığa ait olmadığını kanıtlayan bir rapor ya da tanığın sol el beyanı ile kirli mukayeseyi birlikte göstermelisin.',
+        'Beraat için imzanın sanığa ait olmadığını kanıtlayan bir rapor ya da sol el beyanının yanına bir mazeret koymalısın; tek bir halka raporu sarsmaz.',
       epilogue: [
         O(`
 hakim: Türk Milleti adına…
@@ -375,7 +537,12 @@ vedat: Ertelendi. İçeri girmeyeceğim. Ama sicilime “sahtekâr” yazdılar 
 vedat: Babam bu dükkânı açtığında bir kâğıt bastı, çerçeveletip duvara astı: “Ateş Matbaası’nda her harf doğrudur.” O kâğıdı indireceğim.
 P: İstinafa gideriz Vedat Bey. Kâğıtlar hâlâ konuşuyor.
 vedat: Gidelim. Gidelim de… Annemin evini kim geri getirecek? O da istinafta mı?
-N: Koridorun ucunda Tarık bir sandalyeye oturmuş, başını elleri arasına almıştı. Sevgi yanına gitti, bir şey söyledi. Tarık başını kaldırmadı.
+`),
+        W(
+          not(flag('tarik_sustu')),
+          `N: Koridorun ucunda Tarık bir sandalyeye oturmuş, başını elleri arasına almıştı. Sevgi yanına gitti, bir şey söyledi. Tarık başını kaldırmadı.`,
+        ),
+        O(`
 C#depo: ATEŞ MATBAASI · AKŞAM
 N: Vedat kepengi yarıya kadar indirdi. Duvardaki çerçeveyi aldı, tozunu sildi, bir çekmeceye koydu.
 vedat: Bir kâğıt doğru basılmaz bazen. Mürekkep kaçar. O zaman kâğıdı atarsın, yeniden basarsın. Hayatı yeniden basamazsın.
@@ -390,7 +557,7 @@ N: İstinaf dilekçesi on dört gün içinde verildi. Hisar’daki ev hâlâ Ero
     }),
     outcome('MAHKUMIYET', {
       class: 'CONVICTION',
-      priority: 7,
+      priority: 8,
       when: { all: [] },
       stamp: 'MAHKÛMİYET',
       stampTone: 'red',
@@ -427,7 +594,12 @@ C#adliye: ADLİYE KORİDORU · ÖĞLEDEN SONRA
 vedat: İstinaf. Biliyorum. Bir kâğıt daha. Bir imza daha. Sizin imzanız bu sefer.
 vedat: Avukat hanım, bir şey soracağım. O imza kimin? Bunu bilmeden içeri girersem, her gece düşüneceğim.
 T: Cevap veremedim. Bilmiyordum. Bilmediğimi bilmek, bu dosyada öğrendiğim tek şeydi.
-N: Koridorun ucunda Tarık, Sevgi’ye su getirdi. Sevgi bardağı aldı, içmedi. Tarık amcasının omzuna dokundu; Vedat dokunuşu fark etmedi.
+`),
+        W(
+          not(flag('tarik_sustu')),
+          `N: Koridorun ucunda Tarık, Sevgi’ye su getirdi. Sevgi bardağı aldı, içmedi. Tarık amcasının omzuna dokundu; Vedat dokunuşu fark etmedi.`,
+        ),
+        O(`
 C#depo: ATEŞ MATBAASI · GECE
 N: Vedat son kez dizgi makinesini çalıştırdı. Bir kasadan harfler aldı, tek tek dizdi: kendi adı. Ters.
 N: Kâğıda bastı. VEDAT ATEŞ. Kâğıda baktı. Sonra kâğıdı katladı, ceketinin iç cebine koydu; kimliğinin durduğu yere.

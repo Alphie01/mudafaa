@@ -214,7 +214,7 @@ N: Dilekçe uzuyor. İmleç hâlâ yanıp sönüyor.
 `),
   ],
   choices: [
-    option('DIL_BILIRKISI', 'Resmî mukayese imzalarıyla Adli Tıp’tan yeni imza incelemesi', {
+    option('DIL_BILIRKISI', 'Adli Tıp’tan resmî imzalarla yeni inceleme', {
       visibleWhen: has('clue_mukayese_ozel'),
       cost: slotCost,
       maxUses: 1,
@@ -261,7 +261,7 @@ T: Bir takvim notunu bir şirketin sunucusuna bağlamak. Belki boş döner. Belk
       category: 'USUL_BILGISI',
       next: '$stay',
     }),
-    option('DIL_TUTANAK', 'Mukayese belgelerinin asıl teslim tutanağı', {
+    option('DIL_TUTANAK', 'Mukayese için teslim edilen belgelerin asıl tutanağı', {
       visibleWhen: has('clue_tutanak_ad'),
       cost: slotCost,
       maxUses: 1,
@@ -275,7 +275,7 @@ T: Bilirkişiye giden kâğıtları kim seçti? Bu sorunun cevabı bir tutanağ�
       category: 'USUL_BILGISI',
       next: '$stay',
     }),
-    option('DIL_HTS', 'Nermin Kurt’un telefon kayıtları', {
+    option('DIL_HTS', 'Nermin Kurt’un şubat ayı HTS ve baz kayıtları', {
       cost: slotCost,
       maxUses: 1,
       score: { USUL_BILGISI: -40 },
@@ -284,7 +284,7 @@ T: Bilirkişiye giden kâğıtları kim seçti? Bu sorunun cevabı bir tutanağ�
       category: 'USUL_BILGISI',
       next: '$stay',
     }),
-    option('DIL_HAYRIYE', 'Hayriye Ateş’in tanık olarak dinlenmesi', {
+    option('DIL_HAYRIYE', 'Hayriye Ateş’in huzurevinde tanık olarak dinlenmesi', {
       cost: slotCost,
       maxUses: 1,
       score: { USUL_BILGISI: -40 },
@@ -293,7 +293,7 @@ T: Bilirkişiye giden kâğıtları kim seçti? Bu sorunun cevabı bir tutanağ�
       category: 'USUL_BILGISI',
       next: '$stay',
     }),
-    option('DIL_BANKA', 'Erol Kılınç’ın banka hesap hareketleri', {
+    option('DIL_BANKA', 'Erol Kılınç’ın banka hesap hareketleri ve satış bedelinin izi', {
       cost: slotCost,
       maxUses: 1,
       effects: [raise('dil_any')],
@@ -687,13 +687,12 @@ T: Bir börek, bir aile, bir kapı. Bu ailede herkes yardım etmek istiyor. Yard
     option('AK3_ANLAT', '“Otur Tarık. Anlatayım; belki dükkânda bir şey hatırlarsın.”', {
       score: { SAVUNMA_STRATEJISI: -80 },
       effects: [inc('ethics'), raise('tarik_sir')],
-      bad: 'Dosyanın ayrıntılarını müvekkilin izni olmadan üçüncü bir kişiye anlattın: sır saklama yükümlülüğünün ihlali (Av.K. 36). Üstelik o kişinin dosyadaki yerini bilmiyordun.',
+      bad: 'Dosyanın ayrıntılarını müvekkilin izni olmadan üçüncü bir kişiye anlattın: sır saklama yükümlülüğünün ihlali (Av.K. 36); dosya ayrıntıları aile içinde dolaşacak.',
       category: 'SAVUNMA_STRATEJISI',
       responses: B(`
-N: Anlattım. İmzayı, mürekkebi, raporu, irsaliyeleri. Tarık dinledi; çok iyi dinledi. Arada bir “hı” dedi, bir kere “vay” dedi.
-tarik: Demek mürekkebe bakıyorsunuz. Hiç aklıma gelmezdi. Siz çok iyi avukatsınız.
-N: Gitti. Börek soğudu. Ben tepsinin başında, ne kadar çok şey anlattığımı fark ederek oturdum.
-T: Bir avukatın en tehlikeli hâli, dinlendiğini sandığı andır.
+N: Anlattım. İmzayı, raporu, irsaliyeleri. Tarık başını salladı, börek tepsisini bıraktı, gitti.
+N: Börek soğudu. Ben tepsinin başında, ne kadar çok şey anlattığımı fark ederek oturdum.
+T: Bu dosya bir ailenin içinde. Anlattığım her şey, bu akşam o ailenin sofrasına gidecek; müvekkilime sormadan.
 `),
       next: 'INV_HUB',
     }),
@@ -767,7 +766,7 @@ T: İlk celse. Bir tanık, bir rapor, bir savcı. Ve benim sorularım; bir memur
         flag('hayriye_imza'),
         `T: Hayriye Hanım’ın kalemi tuttuğu an. “Ben imzamı kimseye vermem.” Yırttığım kâğıt hâlâ çöp kutusunda.`,
       ),
-      W(flag('tarik_sir'), `T: Bir tepsi börek. Her şeyi anlattım. Tarık iyi dinledi. Neden içim rahat değil?`),
+      W(flag('tarik_sir'), `T: Bir tepsi börek. Her şeyi anlattım. Müvekkilime sormadan.`),
       W(flag('nermin_baski'), `T: Nermin Hanım’ın eczanesinin kapısı. Yarın koridorda bana nasıl bakacak?`),
       W(cmp(v('aksam1'), '==', 'AD'), `T: Ad doğru, çizgi yalan. Leyla’nın cümlesi panonun ortasında asılı gibi.`),
       O(

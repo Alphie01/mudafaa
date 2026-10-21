@@ -65,7 +65,27 @@
       "id": "COKUS",
       "class": "CONVICTION",
       "priority": 2,
-      "when": { "all": [{ "flag": "cokus" }, { "not": { "hasEvidence": "ev_rapor2" } }] },
+      "when": {
+        "all": [
+          { "flag": "cokus" },
+          { "not": { "hasEvidence": "ev_rapor2" } },
+          {
+            "not": {
+              "cmp": [
+                {
+                  "add": [
+                    { "if": { "when": { "flag": "contra_g3" }, "then": 1, "else": 0 } },
+                    { "if": { "when": { "flag": "contra_e4" }, "then": 1, "else": 0 } },
+                    { "if": { "when": { "flag": "mazeret_tanik" }, "then": 1, "else": 0 } }
+                  ]
+                },
+                ">=",
+                2
+              ]
+            }
+          }
+        ]
+      },
       "stamp": "MAHKÛMİYET",
       "stampTone": "red",
       "header": "TÜRK MİLLETİ ADINA",
@@ -302,6 +322,10 @@
           "text": "Sanığın işlem saatinde işyerinde olduğuna ilişkin kayıt dosyaya girmiştir."
         },
         {
+          "when": { "not": { "hasEvidence": "ev_rapor2" } },
+          "text": "Tapu memurunun sol el beyanı ve mukayese malzemesinin belirsizliği karşısında yeni bir imza incelemesi, şüpheyi gidermeye elverişli görülmediğinden ayrıca rapor alınmasına gerek görülmemiştir."
+        },
+        {
           "text": "Sahte sureti kimin düzenlediği ve tapuda kimin bulunduğu kesin olarak belirlenememiştir; şüpheden sanık yararlanır."
         }
       ],
@@ -367,7 +391,20 @@
           ]
         },
         {
-          "when": { "hasEvidence": "ded_randevu" },
+          "when": { "flag": "tarik_sustu" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tarık duruşmadan sonra kimseye görünmedi. Arka kapıdan çıkmıştı; Doblo otoparkta değildi. Sevgi telefonunu iki kez aradı, açılmadı."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Vedat merdivenlerin başında bir an durdu, arkasına baktı. Kimseyi beklemiyordu; yine de baktı. Sonra Sevgi’nin koluna girip indi."
+            }
+          ]
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ded_randevu" }, { "not": { "flag": "tarik_sustu" } }] },
           "lines": [
             {
               "speaker": "narrator",
@@ -381,13 +418,46 @@
           ]
         },
         {
+          "when": { "not": { "flag": "tarik_sustu" } },
           "lines": [
             {
               "speaker": "narrator",
               "text": "Tarık arabanın kapısını Sevgi için açtı. Vedat’a el salladı; Vedat el salladı. Araba yokuştan aşağı kaydı, yağmurun içinde kayboldu."
-            },
+            }
+          ]
+        },
+        {
+          "lines": [
             { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "bg": "buro_gece", "style": "card" },
-            { "speaker": "narrator", "text": "Leyla odamın kapısında durdu. Elinde paltosu." },
+            { "speaker": "narrator", "text": "Leyla odamın kapısında durdu. Elinde paltosu." }
+          ]
+        },
+        {
+          "when": { "flag": "tarik_sustu" },
+          "lines": [
+            {
+              "speaker": "leyla",
+              "text": "Bir imzayı sahibinden ayırdın. İyi iş. Bir numarayı da kürsüde sahibine bağladın."
+            },
+            {
+              "speaker": "leyla",
+              "text": "Kürsüde gösterdin ama savcıya yazmadın; bir tutanak, bir suç duyurusu değildir."
+            },
+            { "speaker": "player", "text": "Hâkim dosyayı Başsavcılığa gönderdi." },
+            {
+              "speaker": "leyla",
+              "text": "Sahte sureti gönderdi. Numarayı, borcu, mahsubu bir dilekçede yan yana yazan kimse yok. Kalabalık bir masada bir savcı onları kendiliğinden dizmez."
+            },
+            { "speaker": "player", "text": "Ben bir müvekkili savundum Leyla Hanım. Bir faili aramadım." },
+            {
+              "speaker": "leyla",
+              "text": "Aramadın; buldun. Bulduğunu da yarı yolda bıraktın. Bunu da kendine söylemeyi öğreneceksin. Hiçbir gece tamamen kolay olmaz."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "tarik_sustu" } },
+          "lines": [
             {
               "speaker": "leyla",
               "text": "Bir imzayı sahibinden ayırdın. İyi iş. Ama kimin eline ait olduğunu bulamadın."
@@ -405,7 +475,11 @@
             {
               "speaker": "leyla",
               "text": "Doğru. Bunu da kendine söylemeyi öğreneceksin. Her gece biraz daha kolay olur. Hiçbir gece tamamen kolay olmaz."
-            },
+            }
+          ]
+        },
+        {
+          "lines": [
             {
               "speaker": "narrator",
               "text": "Gitti. Kurşun harfler masamda duruyordu: Ş, E, T, A. Kâğıda basılınca ATEŞ."
@@ -417,12 +491,31 @@
             {
               "speaker": "narrator",
               "text": "Dosyayı kapadım ve dolaba kaldırdım. Etiketine kendi el yazımla “Ateş · Beraat” yazdım. Harflerim sağa yatıktı; elim titremiyordu."
-            },
+            }
+          ]
+        },
+        {
+          "when": { "flag": "tarik_sustu" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Numarayı kürsüde söyledim; bir dilekçeye yazmadım. Bu dosyada bir el hâlâ havada duruyor; bir kalem tutar gibi.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "tarik_sustu" } },
+          "lines": [
             {
               "speaker": "player",
               "text": "Bir imzayı sahibinden ayırdım. Kimin eline ait olduğunu bulamadım. Bu dosyada bir el hâlâ havada duruyor; bir kalem tutar gibi.",
               "style": "thought"
-            },
+            }
+          ]
+        },
+        {
+          "lines": [
             {
               "speaker": "narrator",
               "text": "Telefon titredi. Sevgi’den bir mesaj: “Vedat dükkânı açtı. Makineyi çalıştırdı. Bir düğün davetiyesi basıyor; isimleri kendisi diziyor.”"
@@ -545,12 +638,27 @@
             }
           ]
         },
+        { "lines": [{ "speaker": "narrator", "text": "Sevgi kocasının koluna girdi." }] },
         {
+          "when": { "flag": "tarik_sustu" },
           "lines": [
             {
               "speaker": "narrator",
-              "text": "Sevgi kocasının koluna girdi. Koridorun ucunda Tarık bekliyordu; Doblo’nun anahtarı elinde. Sevgi bir an durdu, sonra yürüdü."
-            },
+              "text": "Koridorun ucu boştu. Tarık duruşmadan sonra kimseye görünmemişti; Sevgi telefonuna bir kez baktı, sonra cebine koydu."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "tarik_sustu" } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Koridorun ucunda Tarık bekliyordu; Doblo’nun anahtarı elinde. Sevgi bir an durdu, sonra yürüdü."
+            }
+          ]
+        },
+        {
+          "lines": [
             { "speaker": "narrator", "text": "ATEŞ MATBAASI · AKŞAM", "bg": "depo", "style": "card" },
             {
               "speaker": "narrator",
@@ -581,13 +689,190 @@
       ]
     },
     {
+      "id": "RESEN_RAPOR",
+      "class": "OTHER",
+      "priority": 6,
+      "when": {
+        "cmp": [
+          {
+            "add": [
+              { "if": { "when": { "flag": "contra_g3" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "flag": "contra_e4" }, "then": 1, "else": 0 } },
+              { "if": { "when": { "flag": "mazeret_tanik" }, "then": 1, "else": 0 } }
+            ]
+          },
+          ">=",
+          2
+        ]
+      },
+      "stamp": "KARAR YOK",
+      "stampTone": "amber",
+      "header": "ARA KARAR",
+      "sentence": "Adli Tıp’a resmî imzalarla inceleme · duruşma ertelendi",
+      "verdictText": "Mahkemece, soruşturmada alınan grafoloji raporu ile tapu memurunun beyanı ve sanığın işlem saatine ilişkin deliller arasındaki çelişki karşısında imzanın aidiyeti hususunda hükme yeter açıklık bulunmadığından, sanığın noter, banka ve nüfus kayıtlarındaki resmî imzaları getirtilerek senet ve kapora makbuzundaki imzalar hakkında Adli Tıp Kurumu’ndan rapor alınmasına; sanık hakkındaki adli kontrol tedbirinin kaldırılmasına; duruşmanın raporun gelmesine kadar ertelenmesine karar verildi.",
+      "reasoning": [
+        {
+          "text": "Soruşturmadaki grafoloji raporu imzanın sanığa ait olduğunu bildirmektedir; ancak bilirkişi raporu hâkimi bağlamaz ve dosyadaki diğer delillerle birlikte değerlendirilir (CMK 217)."
+        },
+        {
+          "when": { "hasEvidence": "ded_mukayese" },
+          "text": "Raporun mukayese malzemesi, kaynağı ve imza sahibi belirsiz özel belgelerden oluşmaktadır."
+        },
+        {
+          "when": { "flag": "contra_g3" },
+          "text": "Tapu memuru, işlemi yapan kişinin imzayı sol eliyle attığını beyan etmiştir; sanık sağ elini kullanmaktadır."
+        },
+        {
+          "when": { "flag": "contra_e4" },
+          "text": "Kargo terminali kaydı sanığı imza saatinde işyerinin önünde göstermektedir; alıcı tanık bu kayıt karşısında beyanını açıklayamamıştır."
+        },
+        {
+          "when": { "flag": "mazeret_tanik" },
+          "text": "Bağımsız kurye tanık, sanığın 11.19–11.37 arasında yanından ayrılmadığını beyan etmiştir."
+        },
+        {
+          "text": "Bu deliller raporla çelişmektedir; çelişki giderilmeden sanık aleyhine hüküm kurulamaz. Şüphe, araştırma imkânları tüketildiğinde sanık lehine sonuç doğurur."
+        },
+        {
+          "when": { "hasEvidence": "ev_rapor2_belirsiz" },
+          "text": "Adli Tıp Kurumu ilk incelemede ek mukayese örneği gerektiğini bildirmiştir; noter ve banka kayıtlarındaki imzalar getirtilerek inceleme tamamlanacaktır."
+        },
+        {
+          "text": "Sanığın tartışmasız resmî imzalarıyla yapılacak bir inceleme çelişkiyi giderebilecek nitelikte olduğundan mahkemece re’sen rapor alınmasına karar verilmiştir (CMK 63, 67)."
+        }
+      ],
+      "legalBasis": "CMK 63, 67, 217; CMK 223/2-e (şüphe ilkesi)",
+      "xp": {
+        "if": {
+          "when": { "cmp": [{ "var": "ethics" }, ">", 0] },
+          "then": { "div": [{ "mul": [{ "score": "final" }, 60] }, 2000] },
+          "else": { "div": [{ "mul": [{ "score": "final" }, 60] }, 1000] }
+        }
+      },
+      "howToReach": "Yeni bilirkişi talebini mahkeme senin yerine yaptı. Resmî imzalarla rapor iste, mukayesenin kirli olduğunu göster ve kürsüde halkaları birbirine bağla.",
+      "epilogue": [
+        {
+          "lines": [
+            { "speaker": "hakim", "text": "Ara karar…" },
+            {
+              "speaker": "narrator",
+              "text": "“…Adli Tıp Kurumu’ndan rapor alınmasına… adli kontrol tedbirinin kaldırılmasına… ertelenmesine.” Vedat kelimeleri duydu; hangisinin kendisi için olduğunu bilemedi."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Kâtip ara kararı yazdırdı. Savcı dosyasını kapadı, bana bir an baktı; sonra bir sonraki dosyanın kapağını açtı."
+            },
+            { "speaker": "narrator", "text": "ADLİYE KORİDORU · ÖĞLEDEN SONRA", "bg": "adliye", "style": "card" },
+            { "speaker": "vedat", "text": "Bir rapor daha mı avukat hanım? Hâkim bana inanmadı mı?" },
+            {
+              "speaker": "player",
+              "text": "İnanmadığı şey rapordu Vedat Bey. Bir tapu memuru bir eli hatırladı, bir kayıt bir sabahı. Hâkim onları duydu; şimdi kendi gözüyle bir kâğıt görmek istiyor."
+            },
+            { "speaker": "vedat", "text": "Siz istemediniz mi o kâğıdı?" },
+            {
+              "speaker": "player",
+              "text": "İstememiştim. Resmî imzalarla bir inceleme. Hâkim, benim yazmadığım dilekçeyi kendisi yazdı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "cokus" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Savcı merdivenlerde yanımdan geçti, durmadan konuştu: “Tanıklarınız dosyayı ayakta tuttu avukat hanım. Kâğıtlarınız değil.”"
+            },
+            {
+              "speaker": "player",
+              "text": "Haklıydı. Ben salonda düşerken iki tanık ayakta kalmıştı.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "closing_indirim" },
+          "lines": [
+            {
+              "speaker": "player",
+              "text": "Kapanışta indirim istemiştim. Hâkim dosyada benim inanmadığım bir şeyi gördü; benim kâğıtlarımda.",
+              "style": "thought"
+            }
+          ]
+        },
+        {
+          "when": { "flag": "tarik_sustu" },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Tarık duruşmadan sonra kimseye görünmedi. Sevgi telefonuna iki kez baktı; ekran karanlık kaldı."
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "tarik_sustu" } },
+          "lines": [
+            {
+              "speaker": "narrator",
+              "text": "Koridorun ucunda Tarık, Sevgi’ye su getirdi. Sevgi bardağı aldı, içti. Vedat merdivenleri tek başına indi."
+            }
+          ]
+        },
+        {
+          "lines": [
+            { "speaker": "narrator", "text": "ATEŞ MATBAASI · AKŞAM", "bg": "depo", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Vedat kepengi kaldırdı, ışığı yaktı; makinenin başına geçmedi. Duvardaki çerçeveye baktı: “Ateş Matbaası’nda her harf doğrudur.”"
+            },
+            {
+              "speaker": "vedat",
+              "text": "Karakola gitmeyeceğim artık. Ama mahallede kimse ara karar okumaz avukat hanım. “Daha bitmedi” derler, geçerler."
+            },
+            { "speaker": "narrator", "text": "ARSLAN HUKUK · GECE", "bg": "buro_gece", "style": "card" },
+            { "speaker": "leyla", "text": "Hâkim senin yerine bilirkişi istedi. Bunu bir iltifat sanma." },
+            { "speaker": "player", "text": "Bir sol el. Bir sabah. Bir kayıt. Yetmedi mi?" },
+            {
+              "speaker": "leyla",
+              "text": "Halkalar dosyada; zincir değil. Araştırma yolu açıkken hâkim şüpheyle karar vermez. O yolu sen açmalıydın: resmî imzalar, Adli Tıp, gerekçeli bir dilekçe."
+            },
+            {
+              "speaker": "player",
+              "text": "Bir imza hâlâ kimseye ait değil. Rapor gelince yeniden kürsüye çıkacağım; bu kez kâğıtlarım sıralı.",
+              "style": "thought"
+            },
+            { "speaker": "narrator", "text": "SON", "style": "card" },
+            {
+              "speaker": "narrator",
+              "text": "Dosya Adli Tıp Kurumu’nda. Vedat Ateş hakkında adli kontrol kaldırıldı. Hisar’daki ev hâlâ Erol Kılınç adına kayıtlı."
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "INDIRIM",
       "class": "REDUCED",
-      "priority": 6,
+      "priority": 7,
       "when": {
         "all": [
           { "not": { "flag": "cokus" } },
           { "not": { "hasEvidence": "ev_rapor2" } },
+          {
+            "not": {
+              "cmp": [
+                {
+                  "add": [
+                    { "if": { "when": { "flag": "contra_g3" }, "then": 1, "else": 0 } },
+                    { "if": { "when": { "flag": "contra_e4" }, "then": 1, "else": 0 } },
+                    { "if": { "when": { "flag": "mazeret_tanik" }, "then": 1, "else": 0 } }
+                  ]
+                },
+                ">=",
+                2
+              ]
+            }
+          },
           { "cmp": [{ "var": "pers" }, ">=", 3] },
           { "cmp": [{ "score": "final" }, ">=", 3000] }
         ]
@@ -606,8 +891,16 @@
           "text": "Adli Tıp Kurumu, mukayese imzası yetersiz olduğundan kesin kanaat bildirmemiştir; bu rapor ilk raporu çürütmemektedir."
         },
         {
-          "when": { "any": [{ "flag": "contra_g3" }, { "hasEvidence": "ev_kargo" }] },
-          "text": "Tapu memurunun sol el beyanı ve mazerete ilişkin kayıtlar şüphe doğurmuş, ancak mahkemece yeterli görülmemiştir."
+          "when": { "flag": "contra_g3" },
+          "text": "Tapu memurunun beş ay sonra hatırladığı sol el beyanı, başka bir delille desteklenmediğinden tek başına grafoloji raporunun ispat gücünü sarsacak nitelikte görülmemiştir."
+        },
+        {
+          "when": { "all": [{ "hasEvidence": "ev_kargo" }, { "not": { "flag": "mazeret_tanik" } }] },
+          "text": "Kargo terminali kaydı, teslimi kimin yaptığını değil terminale kimin dokunduğunu gösterir; tek başına sanığın imza saatinde başka yerde olduğunu ispatlamaz."
+        },
+        {
+          "when": { "flag": "mazeret_tanik" },
+          "text": "Kurye tanığın beyanı, başka bir delille desteklenmediğinden tek başına raporla belirlenen imza aidiyetini ortadan kaldıracak nitelikte görülmemiştir."
         },
         { "text": "Sanığın sabıkasızlığı ve duruşmadaki tutumu takdiri indirimde gözetilmiştir." },
         { "text": "Hayriye Ateş’in zararı giderilmediğinden hükmün açıklanması geri bırakılamamıştır." }
@@ -620,7 +913,7 @@
           "else": { "div": [{ "mul": [{ "score": "final" }, 85] }, 1000] }
         }
       },
-      "howToReach": "Beraat için imzanın sanığa ait olmadığını kanıtlayan bir rapor ya da tanığın sol el beyanı ile kirli mukayeseyi birlikte göstermelisin.",
+      "howToReach": "Beraat için imzanın sanığa ait olmadığını kanıtlayan bir rapor ya da sol el beyanının yanına bir mazeret koymalısın; tek bir halka raporu sarsmaz.",
       "epilogue": [
         {
           "lines": [
@@ -639,11 +932,20 @@
               "text": "Babam bu dükkânı açtığında bir kâğıt bastı, çerçeveletip duvara astı: “Ateş Matbaası’nda her harf doğrudur.” O kâğıdı indireceğim."
             },
             { "speaker": "player", "text": "İstinafa gideriz Vedat Bey. Kâğıtlar hâlâ konuşuyor." },
-            { "speaker": "vedat", "text": "Gidelim. Gidelim de… Annemin evini kim geri getirecek? O da istinafta mı?" },
+            { "speaker": "vedat", "text": "Gidelim. Gidelim de… Annemin evini kim geri getirecek? O da istinafta mı?" }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "tarik_sustu" } },
+          "lines": [
             {
               "speaker": "narrator",
               "text": "Koridorun ucunda Tarık bir sandalyeye oturmuş, başını elleri arasına almıştı. Sevgi yanına gitti, bir şey söyledi. Tarık başını kaldırmadı."
-            },
+            }
+          ]
+        },
+        {
+          "lines": [
             { "speaker": "narrator", "text": "ATEŞ MATBAASI · AKŞAM", "bg": "depo", "style": "card" },
             {
               "speaker": "narrator",
@@ -675,7 +977,7 @@
     {
       "id": "MAHKUMIYET",
       "class": "CONVICTION",
-      "priority": 7,
+      "priority": 8,
       "when": { "all": [] },
       "stamp": "MAHKÛMİYET",
       "stampTone": "red",
@@ -742,11 +1044,20 @@
               "speaker": "player",
               "text": "Cevap veremedim. Bilmiyordum. Bilmediğimi bilmek, bu dosyada öğrendiğim tek şeydi.",
               "style": "thought"
-            },
+            }
+          ]
+        },
+        {
+          "when": { "not": { "flag": "tarik_sustu" } },
+          "lines": [
             {
               "speaker": "narrator",
               "text": "Koridorun ucunda Tarık, Sevgi’ye su getirdi. Sevgi bardağı aldı, içmedi. Tarık amcasının omzuna dokundu; Vedat dokunuşu fark etmedi."
-            },
+            }
+          ]
+        },
+        {
+          "lines": [
             { "speaker": "narrator", "text": "ATEŞ MATBAASI · GECE", "bg": "depo", "style": "card" },
             {
               "speaker": "narrator",

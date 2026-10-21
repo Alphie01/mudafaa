@@ -798,6 +798,40 @@
           }
         },
         {
+          "id": "PS_E2_BELIRSIZ",
+          "kind": "PRESENT",
+          "match": { "statement": "E2", "evidence": ["ev_rapor2_belirsiz"] },
+          "responses": [
+            {
+              "lines": [
+                {
+                  "speaker": "erol",
+                  "text": "Kesin değil diyor avukat hanım. Ben de kesin bir şey demiyorum; adam önümde imzaladı, o kadar."
+                },
+                {
+                  "speaker": "player",
+                  "text": "“Bilinmiyor” diyen bir kâğıt, kimsenin elini göstermez. Bu salonda bir el göstermem gerekiyordu.",
+                  "style": "thought"
+                }
+              ]
+            }
+          ],
+          "effects": [
+            {
+              "type": "IF",
+              "when": { "not": { "flag": "press_e2b" } },
+              "then": [
+                { "type": "VAR", "var": "press_e2b", "op": "set", "value": true },
+                { "type": "SCORE", "category": "SORGULAMA", "amount": 50 }
+              ]
+            }
+          ],
+          "quality": {
+            "q": "NEUTRAL",
+            "feedback": "Kısmi: kesin olmayan rapor imzanın sanığa ait olduğunu söylemiyor; ama başkasını da göstermiyor."
+          }
+        },
+        {
           "id": "PS_E3",
           "kind": "PRESENT",
           "match": { "statement": "E3", "evidence": ["ded_borc"] },
@@ -811,7 +845,7 @@
                 },
                 {
                   "speaker": "player",
-                  "text": "Ve tanığın adının geçtiği bahis borcu mesajları. Tanık bey, bir milyon altı yüz binin ne kadarı nakit, ne kadarı mahsup?"
+                  "text": "Sanığın eşinin gördüğü, tanığın adının geçtiği bahis borcu mesajları da var; eş tanık olarak dinlenebilir. Tanık bey, bir milyon altı yüz binin ne kadarı nakit, ne kadarı mahsup?"
                 }
               ]
             }

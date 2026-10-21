@@ -24,7 +24,7 @@ alındı, fıkra numaraları bu metne göredir).
 | CMK 45/1-c, 46, 48 | C2_03C | Üçüncü derece dahil kan hısımı tanıklıktan çekinebilir; hatırlatma zorunlu; kendini veya yakınını suçlayan sorulara cevap vermeme. |
 | CMK 51 | C203C_B (yanlış seçenek) | Tanıklıktan çekinebilecek olanlar yeminden de çekinebilir; bu hak tanığındır, müdafiin talebi değildir. |
 | CMK 52, 201 | İtiraz gerekçeleri, C2_01 | Tanık bildiklerini anlatır; taraflar doğrudan soru sorar, tereddütte mahkeme karar verir. |
-| CMK 63, 67/5, 68 | DIL_BILIRKISI, C1_05, T_BILIRKISI, C2_04, UST_KURUL | Bilirkişi ataması; rapora karşı görüş ve yeni bilirkişi istemi; bilirkişinin dinlenmesi. |
+| CMK 63, 67/5, 68 | DIL_BILIRKISI, C1_05, T_BILIRKISI, C2_04, UST_KURUL, RESEN_RAPOR | Bilirkişi ataması; rapora karşı görüş ve yeni bilirkişi istemi; bilirkişinin dinlenmesi. |
 | CMK 67/3 | C105_B, C204B_B (yanlış seçenekler) | Bilirkişi uzmanlık dışı açıklama, hukuki nitelendirme ve değerlendirme yapamaz (6754 s. Kanunla değişik). Soruşturmadaki rapor yalnızca teknik bir tespit ("aynı elin ürünü") içerdiği için bu itiraz dayanaksızdır. |
 | CMK 147/1-e | C103_D | Susma hakkı. |
 | CMK 158 | ARA_SUC, TG_GIT | Suç duyurusu Cumhuriyet Başsavcılığına yapılır. |
@@ -110,6 +110,29 @@ alındı, fıkra numaraları bu metne göredir).
    gösterirse mahkeme raporu tek başına hükme esas almaz; delil serbestçe takdir edilir (CMK 217) ve şüpheden sanık
    yararlanır (CMK 223/2-e). Gerekçede Adli Tıp raporu satırı yalnızca rapor dosyadaysa görünür. Gerekçesiz talepte gelen
    belirsiz rapor ise ilk raporu çürütmez; mahkûmiyet gerekçesi bunu ayrıca yazar (MAHKUMIYET_BELIRSIZ).
+   Yorum notu: kirli mukayese gösterildikten sonra yeni rapor alınmadan beraat, "eksik inceleme" gerekçesiyle istinafta
+   bozulmaya açıktır; mahkemenin araştırma yükümlülüğü gereği (CMK 63 ve ceza muhakemesinin maddi gerçeği re'sen araştırma ilkesi) re'sen
+   rapor alması beklenebilir. Oyunda bu yol yalnızca kirli mukayese + sol el + güçlü savunma ile açılır ve gerekçeye
+   "yeni bir imza incelemesi şüpheyi gidermeye elverişli görülmediğinden ayrıca rapor alınmasına gerek görülmemiştir"
+   satırı eklenmiştir. Bilinçli bir takdir seçimidir.
+13. **Makul şüphe çekirdeği ve mahkûmiyet yasağı (RESEN_RAPOR).** Tapu memurunun sol el beyanı, kargo kaydının alıcı
+   tanığa sunulması ve bağımsız kuryenin açık uçlu tanıklığından ikisi dosyadayken mahkeme, şüpheyi kabul edip mahkûm
+   edemez (CMK 223/2-e; "şüpheden sanık yararlanır"). Mahkûmiyet ve indirim gerekçeleri bu yüzden tek halkalı durumlar
+   için yazılmıştır ve o halkanın neden tek başına raporu sarsmadığını açıklar; "şüphe doğurmuş ancak yeterli
+   görülmemiştir" gibi kendi içinde çelişen bir cümle yoktur. Çekirdek varken tam beraat koşulları (kirli mukayese,
+   ikna, eşik) tutmuyorsa mahkeme, şüphe ilkesini araştırma imkânları tükenmeden uygulamaz: sanığın tartışmasız resmî
+   imzalarıyla Adli Tıp raporu alınmasına re'sen karar verir, adli kontrolü kaldırır ve duruşmayı erteler (CMK 63, 67,
+   217; yerleşik uygulama: "toplanması gereken deliller toplanmadan hüküm kurulamaz"). Kesin Adli Tıp raporu zaten
+   dosyadaysa aynı mantıkla UST_KURUL yolu işler. Bu ara karar bir sonuç sınıfı olarak OTHER'dır; ne beraat ne mahkûmiyettir.
+14. **Açıkta duran belgeye bakmak (Erol'un masası).** Ara evrede Erol, Deniz'i kendi bürosuna davet eder ve odadan çıkar.
+   Deniz çekmece açmaz, kasa ya da dosya karıştırmaz; yalnızca masada açıkta duran takvimi görür ve fotoğraflar
+   (sahnedeki düşünce satırı bu sınırı söyler). Avukatın arama yetkisi yoktur; açıkta duranı görmek arama değildir, ama
+   başkasının özel alanında fotoğraf çekmek meslek ahlakı bakımından gri bir alandır (Av.K. 34 "mesleğin onuruna
+   yakışır davranış"). Oyun bunu sınırda bırakır: fotoğraf kürsüde bir soru dayanağı olarak kullanılır, delil
+   niteliğini mahkeme takdir eder (CMK 217) ve doğru yol, takvimin mahkemece celbini istemektir. Bahis mesajları ise
+   Deniz'in elinde değildir; Sevgi'nin gördüğü şeylerdir. Kürsüde (PS_E3) bu nedenle "sanığın eşinin gördüğü, tanığın
+   adının geçtiği bahis mesajları; eş tanık olarak dinlenebilir" denir; mesajlar bir belge gibi sunulmaz. Eşin tanıklıktan
+   çekinme hakkı vardır (CMK 45/1-b); tanıklığı kendi iradesine bağlıdır.
 
 ## 5. Hassas konu denetimi
 
@@ -120,6 +143,7 @@ aldırmak etik ihlal olarak cezalandırılır. Bahis borcu yalnızca bir arka pl
 
 - [x] Bütün madde atıfları güncel metinle karşılaştırıldı (tablo dolu).
 - [x] Kesin Adli Tıp raporu dosyadayken hiçbir sonuç raporla çelişmez; mahkûmiyet/indirim gerekçeleri koşullu (dosyadaki delile göre).
+- [x] Makul şüphe çekirdeği (sol el + mazeret halkalarından ikisi) dosyadayken mahkûmiyet/indirim/çöküş seçilemez (RESEN_RAPOR ya da UST_KURUL).
 - [x] Ceza hesapları alt/üst sınırlar içinde ve aritmetik doğru (2y → 1y8a; 3y → 2y6a).
 - [x] Mahkemeye hitap "Sayın Hâkim"; asliye ceza, tek hâkim.
 - [x] Hükümlerde istinaf (CMK 272, 273/1) ve tazminat bildirimi (CMK 231/3) var.

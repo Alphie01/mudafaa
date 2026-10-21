@@ -84,12 +84,20 @@ suret, mukayese; çeldiriciler. `ded_baski` kürsüye götürülürse cezalıdı
 | Öncelik | Kimlik | Sınıf | Koşul | Hüküm | XP |
 |---|---|---|---|---|---|
 | 1 | ETIK | OTHER | Emre'ye yalan söyletmek (etik_kirlik) | Azil, suç duyurusu | 0 |
-| 2 | COKUS | CONVICTION | duruşmada güvenilirlik 0 ve dosyada kesin Adli Tıp raporu yok | 2 yıl 6 ay | 0,3 |
+| 2 | COKUS | CONVICTION | duruşmada güvenilirlik 0, dosyada kesin Adli Tıp raporu yok ve makul şüphe çekirdeği yok | 2 yıl 6 ay | 0,3 |
 | 3 | BERAAT_B | ACQUITTAL 223/2-b | rapor2 + ek rapor + Tarık sustu + mazeret + ikna ≥ 8 + final ≥ 11 000 | beraat | 1,2 |
 | 4 | BERAAT_E | ACQUITTAL 223/2-e | kirli mukayese + (rapor2 ya da sol el çelişkisi) + bağımsız destek (sol el çelişkisi ya da mazeret) + ikna ≥ 6 + final ≥ 9 500 | beraat | 1,0 |
 | 5 | UST_KURUL | OTHER | dosyada kesin Adli Tıp raporu (rapor2) var, beraat koşulları tutmuyor | ara karar: çelişki için Fizik İhtisas Kurulu, adli kontrol kalkar | 0,7 |
-| 6 | INDIRIM | REDUCED | rapor2 yok + ikna ≥ 3 + final ≥ 3 000 | 1 yıl 8 ay, ertelendi | 0,85 |
-| 7 | MAHKUMIYET | CONVICTION | varsayılan (rapor2 burada olamaz: 5. sıra yakalar) | 2 yıl 6 ay | 0,6 |
+| 6 | RESEN_RAPOR | OTHER | makul şüphe çekirdeği (aşağıda), rapor2 yok, beraat koşulları tutmuyor | ara karar: mahkeme resmî imzalarla Adli Tıp raporu ister, adli kontrol kalkar | 0,6 |
+| 7 | INDIRIM | REDUCED | rapor2 yok + makul şüphe çekirdeği yok + ikna ≥ 3 + final ≥ 3 000 | 1 yıl 8 ay, ertelendi | 0,85 |
+| 8 | MAHKUMIYET | CONVICTION | varsayılan (rapor2 ve şüphe çekirdeği burada olamaz: 5. ve 6. sıra yakalar) | 2 yıl 6 ay | 0,6 |
+
+**Makul şüphe çekirdeği** (`makulSuphe`): `contra_g3` (tapu memurunun sol el beyanı), `contra_e4` (kargo kaydı Erol'a
+sunuldu), `mazeret_tanik` (kuryenin açık uçlu tanıklığı) bayraklarından en az ikisi. Bu çekirdek dosyadayken hiçbir sonuç
+mahkûmiyet ya da indirim kurmaz: tam beraat koşulları (BERAAT_B/E) tutmuyorsa mahkeme çelişkiyi araştırarak giderir
+(rapor2 varsa UST_KURUL, yoksa RESEN_RAPOR). Tek bir halka (yalnızca sol el ya da yalnızca kurye) indirim ve mahkûmiyette
+kalabilir; gerekçe o halkanın neden tek başına raporu sarsmadığını açıklar ("şüphe doğurmuş ama yeterli görülmemiş" gibi
+şüpheyi kabul edip mahkûm eden bir cümle yoktur).
 
 Kesin Adli Tıp raporu dosyadayken hiçbir sonuç mahkûmiyet ya da indirim kurmaz. Mahkûmiyet, indirim ve çöküş gerekçe
 satırları dosyadaki delile göre koşulludur (sol el beyanı, kargo kaydı, belirsiz rapor, salon teşhisine itiraz).
@@ -97,7 +105,9 @@ satırları dosyadaki delile göre koşulludur (sol el beyanı, kargo kaydı, be
 Eşik çubuğu: Mahkûmiyet 0 · İndirim 3 000 · Beraat 9 500 (`outcomes.ts` sabitleri). `scaleMax` 11 500 (gözlenen tavan
 12 060'ın ~%95'i). Yalnızca lehe hüküm isteyen esas savunma (`closing_indirim`) beraati kapatır. Her sonucun epilogu
 `OutcomeDef.epilogue` içindedir; BERAAT_B ve BERAAT_E epilogları bayraklara göre (Sevgi'nin itirafı, randevu numarası)
-ek bloklar taşır.
+ek bloklar taşır. Tarık'ın 2. celsede CMK 48'e sığınıp arka kapıdan çıktığı yollarda (`tarik_sustu`) BERAAT_E, UST_KURUL,
+RESEN_RAPOR, INDIRIM ve MAHKUMIYET epiloglarında Tarık görünmez; BERAAT_E'de Leyla, numarayı kürsüde gösterip savcılığa
+yazmadığı için Deniz'i eleştirir ("bir tutanak, bir suç duyurusu değildir").
 
 ## 7. Skor
 
@@ -112,13 +122,14 @@ yanlış −150 ve −1 güvenilirlik; itiraz +50/+100, dayanaksız −50; esas 
 |---|---|---|---|
 | TIPIK | BERAAT_E | 11 020 | Tam soruşturma, sol el çelişkisi, yeni rapor, kurye; suç duyurusu yok |
 | BERAAT_B | BERAAT_B | 12 060 | Tipik + emlak bürosu, borç çıkarımı, somut suç duyurusu, Tarık'ın susması |
-| INDIRIM | INDIRIM | 4 490 | Rapor ve irsaliye okunmuyor, bilirkişi istenmiyor; gece matbaada yüzleşme; terditli savunma |
+| INDIRIM | INDIRIM | 4 040 | Rapor ve irsaliye okunmuyor, bilirkişi istenmiyor; gece matbaada yüzleşme; 2. celsede kuryeye telkinli soru (C201_B), kargo kaydı Erol'a sunulmuyor → yalnızca sol el halkası; terditli savunma |
+| RESEN_RAPOR | RESEN_RAPOR | 4 490 | INDIRIM ile aynı soruşturma; ama kuryeye açık uçlu soru (C201_A) ve E4'te kargo kaydı → sol el + mazeret: mahkûmiyet kurulamaz, mahkeme re'sen Adli Tıp ister |
 | MAHKUMIYET | MAHKUMIYET | −100 | Kâğıtlara bakmayan soruşturma, etik hatalar, yalnızca lehe hüküm |
 | ETIK | ETIK | 7 695 | Ara evrede Emre'ye yalan söyletme → 2. celsede çöküş ve azil |
-| COKUS | COKUS | 6 765 | Bilirkişi istenmiyor (dilekçede ve kürsüde); Erol'a beş kez ilgisiz delil → güvenilirlik 0 |
+| COKUS | COKUS | 6 615 | Bilirkişi istenmiyor (dilekçede ve kürsüde); kuryeye telkinli soru; Erol'a beş kez ilgisiz delil → güvenilirlik 0 |
 | UST_KURUL | UST_KURUL | 7 935 | Tipik soruşturma ve gerekçeli rapor; ama 1. celsede sol el açılmıyor, 2. celsede hiçbir çelişki sunulmuyor, terditli savunma |
 | BERAAT_E_RAPORSUZ | BERAAT_E | 10 340 | Tipik soruşturma, bilirkişi hiç istenmiyor; 2. celsede kirli mukayese itirazı (C204B_A) + sol el + mazeret |
-| MAHKUMIYET_BELIRSIZ | MAHKUMIYET | 330 | Mahkûmiyet yolu, ama rapor eki okunup gerekçesiz bilirkişi isteniyor (C105_A2) → belirsiz Adli Tıp raporu (C204B_D) |
+| MAHKUMIYET_BELIRSIZ | MAHKUMIYET | 380 | Mahkûmiyet yolu, ama rapor eki okunup gerekçesiz bilirkişi isteniyor (C105_A2) → belirsiz Adli Tıp raporu (C204B_D; E2'de kısmi sunum) |
 
 ## 9. Erken çözüm denetimi
 
@@ -128,6 +139,13 @@ Sonuçlar (2026-10-21, son düzeltmelerden sonra; tek süreç, 9 dk bütçe): TI
 9 505), BERAAT_E_RAPORSUZ tohumundan **145** (BERAAT_E, 9 505), BERAAT_B tohumundan **155** (BERAAT_E, 9 505).
 Tipik yol 205 aksiyon: en kısa beraat **%70** (≥ %60 hedefi). Her kısa yol kirli mukayese çıkarımını, sol el
 çelişkisini ve mazereti hâlâ içerir. Eski kısa yollar kapandı:
+
+**İkinci inceleme sonrası (2026-10-21).** Makul şüphe çekirdeği eklendikten sonra yeniden ölçüldü (tek süreç; önce
+açgözlü eksiltme, sonra her adımda `enumerateActions` alternatifleriyle yer değiştirme + eksiltme, 6 dk bütçe):
+eksiltme TIPIK → 168, BERAAT_E_RAPORSUZ → 182, BERAAT_B → 154; yer değiştirme araması BERAAT_B'nin 154'ünden **145**
+aksiyona indi (BERAAT_E, 9 510; **%71**). Şüphe çekirdeği ilk denemede bir beraat sonucu (CMK 223/2-e, düşük XP) olarak
+yazılmıştı; arama ona 80 aksiyonda (%39) ulaştı. Bu yüzden çekirdek beraat değil, araştırma ara kararı (RESEN_RAPOR)
+üretir: mahkûmiyeti engeller ama tam beraat için hâlâ kirli mukayese, ikna ve eşik gerekir.
 
 - İlk gün duruşmaya gidip "yeni rapor" istemek (eski 51 aksiyonluk yol, dosyada kesin Adli Tıp raporuyla mahkûmiyet)
   artık mümkün değil: C105_A2/T_BILIRKISI rapor eki okunmadan görünmez; gerekçesiz talep yalnızca belirsiz rapor getirir.
@@ -146,25 +164,27 @@ düzeyinde bir arktır (Leyla'nın otuz yıl önceki davası), sonraki davalara 
 
 ## 10. Süre ve sözcük ölçümü
 
-`npm run case:duration -- sahte-imza` (2026-10-21, inceleme düzeltmelerinden sonra):
+`npm run case:duration -- sahte-imza` (2026-10-21, ikinci inceleme düzeltmelerinden sonra):
 
 ```
-  TIPIK         103.9 dk   15013 sözcük   205 aksiyon  BERAAT_E (11020)
-  BERAAT_B      104.3 dk   14988 sözcük   210 aksiyon  BERAAT_B (12060)
-  INDIRIM        81.6 dk   11809 sözcük   160 aksiyon  INDIRIM (4490)
-  MAHKUMIYET     67.8 dk    9524 sözcük   149 aksiyon  MAHKUMIYET (-100)
-  ETIK           85.4 dk   12166 sözcük   178 aksiyon  ETIK (7695)
-  COKUS          88.6 dk   12584 sözcük   187 aksiyon  COKUS (6765)
-  UST_KURUL      94.2 dk   13468 sözcük   194 aksiyon  UST_KURUL (7935)
-  BERAAT_E_RAPORSUZ  101.7 dk   14673 sözcük   202 aksiyon  BERAAT_E (10340)
-  MAHKUMIYET_BELIRSIZ   68.7 dk    9719 sözcük   147 aksiyon  MAHKUMIYET (330)
+  TIPIK         103.9 dk   15005 sözcük   205 aksiyon  BERAAT_E (11020)
+  BERAAT_B      104.4 dk   15014 sözcük   210 aksiyon  BERAAT_B (12060)
+  INDIRIM        81.4 dk   11796 sözcük   159 aksiyon  INDIRIM (4040)
+  RESEN_RAPOR    82.1 dk   11899 sözcük   160 aksiyon  RESEN_RAPOR (4490)
+  MAHKUMIYET     67.8 dk    9523 sözcük   149 aksiyon  MAHKUMIYET (-100)
+  ETIK           85.5 dk   12184 sözcük   178 aksiyon  ETIK (7695)
+  COKUS          88.6 dk   12575 sözcük   187 aksiyon  COKUS (6615)
+  UST_KURUL      94.3 dk   13477 sözcük   194 aksiyon  UST_KURUL (7935)
+  BERAAT_E_RAPORSUZ  101.8 dk   14688 sözcük   202 aksiyon  BERAAT_E (10340)
+  MAHKUMIYET_BELIRSIZ   69.0 dk    9747 sözcük   148 aksiyon  MAHKUMIYET (380)
   ==> TİPİK YOL (TIPIK): 103.9 dk  ✓ süre hedefte
-  ==> SÖZCÜK BÜTÇESİ: ✓ 15013 sözcük: hedefte (15–25 bin)
+  ==> SÖZCÜK BÜTÇESİ: ✓ 15005 sözcük: hedefte (15–25 bin)
 ```
 
 `npm run case:validate -- sahte-imza` (varsayılan bütçe, 2026-10-21): **PASSED**, 0 hata; kapsam node 115/115, seçenek
-239/239, kural 83/83, delil 49/49; 9/9 golden path. Kalan uyarılar: BFS durum bütçesi (derin durumlar yürüyüşle
-örneklendi) ve `ev_rapor2_belirsiz` için PRESENT kuralı olmaması (belirsiz rapor yalnızca C204B_D'de ve gerekçede kullanılır).
+239/239, kural 84/84, delil 49/49; 10/10 golden path; sekiz sonucun hepsi simülasyonda ulaşılır. Kalan uyarı: BFS durum
+bütçesi (derin durumlar yürüyüşle örneklendi). `ev_rapor2_belirsiz` artık E2'de kısmi bir sunum kuralına sahip
+(PS_E2_BELIRSIZ).
 
 ## 11. Toplam metin
 

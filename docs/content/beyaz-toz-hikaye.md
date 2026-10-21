@@ -57,6 +57,7 @@
 | baskan / uye | **Başkan Halil Özkan**, **Üye Hâkim Merve Tan** | Başkan sabırlı ve usulcü; Merve Tan'ın soruları kısa ve keskindir. | — | — |
 | mubasir | **Sabri Efendi** | Yorgun, tekdüze; her çağrıyı iki kez söyler. | — | — |
 | gardiyan | **İnfaz koruma memuru Hasan Çakır** | Az konuşur, insanı süzer. | "Bu çocuk her akşam sayıyor: kaç gün oldu temiz diye." | — |
+| uzman | **Doç. Dr. Aylin Korkmaz**, 52, Uludağ Üniversitesi, adli kimya. Ortak `bilirkisi` sprite'ı. | Kuru, kesin, ölçü birimiyle konuşur: "Ben poşet okurum, insan okumam." Hukuki sonuca dair tek kelime etmez. | — (savunmanın CMK 67/6 uyarınca başvurduğu uzman). Kendisine "müvekkilim koymadı diye yazın" denirse reddeder. | Tek sahnelik bir dürüstlük: benzerliği tespite çevirir, sınırını da söyler. |
 | selim | **Selim Usta**, 47, Paketçi Görükle durağının sorumlusu. | Esnaf dili, telaşlı, telefonu hiç susmayan biri; "abla" der. | Barış'ın çantasının astarını kendi diktiğini, Tolga'nın sık sık durağa uğradığını görmüştü. | Bilgi kaynağı; duruşmaya çağrılmaz. |
 | — | **Barış Demirel**, 27, motosikletli kurye. | Yalnızca bir telefon sesi (`narrator`, "BİR SES"); kendini tanıtınca `name: "BARIŞ"`. | Gerçek satıcı. Baskını görüp döndü, İzmir'e kaçtı. | Sahnede hiç görünmez; yakalanırsa epilogda bir kart. |
 
@@ -78,7 +79,7 @@
 | 07.15 | Barış motosikletiyle köşeye gelir, polis araçlarını görür, döner. Nesrin her sabahki gibi erkenden kalkmıştır, pencereden görür. | Nesrin; Paketçi GPS kaydı (07.16) |
 | 07.35 | Nesrin aramaya tanık olarak çağrılır; arka oda kapısı çoktan açılmıştır. Tutanağa "arama başında hazır" diye yazılır. | Nesrin; tutanakta imza saati |
 | 12 Kasım | Barış Paketçi'den "kendi isteğiyle" ayrılır; Kaan tutuklanır. | Paketçi kayıtları |
-| Aralık | Kriminal rapor: 46 paket net 39,8 g kokain; şekerlikteki 2 paket aynı poşet ve gramaj (0,85 g); terazide şüpheliyle uyuşmayan bir parmak izi; şekerlik kavanozunda Kaan'ın izi. Saç analizi: son üç ayda kullanım. İddianame: TCK 188/3, 188/4-a. | Kriminal rapor, saç analizi |
+| Aralık | Kriminal rapor: 46 paket net 39,8 g kokain; şekerlikteki 2 paket aynı tip poşette, yakın gramajda (0,85 g) — iki grup ayrıca karşılaştırılmamış, ekler (48 fotoğraf, baskı listesi, 2 kromatogram) yorumlanmamış; terazide şüpheliyle uyuşmayan bir parmak izi; şekerlik kavanozunda Kaan'ın izi. Saç analizi: son üç ayda kullanım. İddianame: TCK 188/3, 188/4-a. | Kriminal rapor (ekleri ara evrede uzman okur), saç analizi |
 | 14 Ocak | Defne Arslan Hukuk'a gelir. 1. celseye 12 gün var. | Bölüm 1 |
 
 ## 4. Yapı (bölümler ve node haritası)
@@ -190,7 +191,13 @@ ifadesi (kask, saat).
 - Savcının polise yönlendirici sorusu → itiraz (CMK 201/1).
 - **Tuncay'ın çapraz sorgusu doruktur:** kilit fotoğrafı karşısında "Kilit… evet. Keskiyle açtık." Kroki karşısında
   "Ev onun üstüneydi; oda da onundur sandık." Kişisel kanaat cümlesine itiraz.
-- Talepler (CMK 206/1) ve tutukluluk incelemesi: odanın kimin olduğu sarsıldıysa adli kontrolle tahliye.
+- Müdafiin soruları kayıt kurar: Kaan nerede uyuduğunu, kilidin kimde olduğunu (görüşmede konuşulduysa ayrıntısıyla),
+  şekerliği ne için kullandığını ve ehliyeti olmadığını kendi ağzından söyler. Görüş odasında öğrenilen bir olgu,
+  sorguda sorulmadıkça dosyaya girmez.
+- Şekerlik: Tuncay rafın arka oda kapısının dibinde olduğunu ve paketlerde iz olmadığını kabul eder; savcı “aynı tip
+  poşet her markette satılır” der. Benzerlik bir sorudur; cevabı ara evrede bir uzmanın gözündedir.
+- Talepler (CMK 206/1) ve tutukluluk incelemesi: odanın kimin olduğu sarsıldıysa adli kontrolle tahliye; terazideki
+  yabancı izin Demirel'le karşılaştırılması burada da istenebilir.
 
 ### Bölüm 4 · ARA (ARA_*), ~3.000
 - ARA_GIRIS: Tahliye edildiyse adliye merdiveninde Defne ile Kaan'ın sessiz sarılması; değilse ring aracının camı.
@@ -198,6 +205,10 @@ ifadesi (kask, saat).
   sık uğrardı", 12 Kasım sabahı gelen "abi ben bırakıyorum" mesajı.
 - ARA_GPS (belge): Paketçi kayıtları (istenmişse): 07.16 Ihlamur Sok. "teslimat iptal"; ayrılış 12 Kasım; İzmir adresi.
 - ARA_ZRAPOR (belge): Kahve Durağı Z raporu, kasa kapanışı 23.41 — Tolga'nın "23.00, Kaan sattı" anlatısının altı oyulur.
+- ARA_UZMAN (~450, Uludağ Üniversitesi) ve ARA_MUTALAA (belge, ikinci gün): Deniz kriminal raporun hiç açılmamış
+  eklerini Doç. Dr. Aylin Korkmaz'a götürür; ısı çizgisini, baskı numaralarını ve kromatogramları sorar (üçü birden;
+  “müvekkilim koymadı diye yazın” isteği reddedilir, CMK 67/3). Ertesi sabah dokuz sayfalık mütalaa: arka oda rulosunda
+  0417 ve 0418 eksik; şekerlikteki iki poşet tam o numaralar. Aynı makine, aynı tarif.
 - ARA_KAAN (~500): rıza. "Söyleyeceğim. Annemi ben arayacağım, sizden önce."
 - ARA_DEFNE (~500): **Etik tuzak.** "Barış'ın arkadaşı Okan, biraz para verirsek 'Barış bana itiraf etti' der." Doğru:
   reddetmek; Okan gerçekten bir şey biliyorsa savcılığa gitmeli. Yanlış: kabul (TELKİN sonu).
@@ -213,7 +224,8 @@ ifadesi (kask, saat).
 - Nesrin kürsüde gözlüğünü takar, defterini açar. Telkin edilmişse savcı: "Avukat hanım size Barış'ı sordu mu?"
 - **Tolga'nın çapraz sorgusu:** kask, saat, kin. Kırılma: "Barış'tı. Korktum. 'Beni söylersen…' dedi. Kaan'ı söyledim
   çünkü Kaan beni sokağa atmıştı." Salon uğuldar, başkan uyarır (`shake`).
-- Delil tartışması: kapsam dışı arama (CMK 119, 206/2-a, 217/2); şekerlikteki paketlerin aynı stoktan geldiği.
+- Delil tartışması: kapsam dışı arama (CMK 119, 206/2-a, 217/2; odanın kime kiralandığını Nesrin'in defteri kayda
+  geçirmiş olmalı); şekerlikteki paketlerin aynı stoktan geldiği (uzman mütalaası; uzman salonda dinlenir, CMK 68/3).
 - Mütalaa: delillere göre üç varyant (beraat + suç duyurusu / 191 ve ek savunma / 188 mahkûmiyet).
 - Esas savunma Deniz'in ağzından 3–5 satırlık konuşma; son söz Kaan'ın cümlesi.
 
@@ -269,4 +281,9 @@ Yazım sırasında tempo ve süre bütçesi için hikâyeye şu vuruşlar eklend
 - **Tipik yolun duygusal çizgisi:** 223/2-e beraatte muhbir kask ve saat çelişkisinde çöker ama satıcının adını vermez;
   şekerlik ikinci celsede delil tartışmasında aklanır. Adın söylendiği an (Tolga'nın kırılması) 223/2-b yolunun ve
   ara evrede kurye durağına gidenlerin ödülüdür.
-- **Eşikler:** 223/2-e puan eşiği taşımaz (delil zinciri kurulduysa beraat); 223/2-b 11.000 ister; erken çözüm denetimi için `docs/content/beyaz-toz.md` §12.
+- **Eşikler:** hiçbir sonuç puan ya da ikna eşiği taşımaz; hüküm duruşma kaydına bağlıdır. Erken çözümü delil
+  önkoşulları engeller (uzman mütalaası, sanığın sorgudaki beyanları, kira defteri, karşılaştırma talebi); denetim için
+  `docs/content/beyaz-toz.md` §12.
+- **ARA_UZMAN / ARA_MUTALAA** (2026-10-21 yeniden dengeleme): şekerliğin “aynı stok” tespiti birinci evrede değil, ara
+  evrede savunmanın aldığı bilimsel mütalaayla kurulur; ara evre böylece her beraatin ihtiyaç duyduğu bir bulgu üretir
+  (şekerlik ya da muhbirin dönüşü için Z raporu / Selim / iz karşılaştırması).

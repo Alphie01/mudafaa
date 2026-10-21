@@ -33,7 +33,7 @@ export const meta: CasePart = {
     summary:
       'Görükle’de bir öğrenci evine şafak baskını: kilitli arka odadan 46 paket kokain, bir terazi ve poşetler çıktı. Kira sözleşmesi Kaan Yıldız’ın adına. Kaan kullanıcı olduğunu, ama o odanın ev arkadaşı Barış’ın olduğunu söylüyor. Savcılığa göre Barış diye biri yok.',
     coverCharacter: 'kaan',
-    legalReview: { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-20' },
+    legalReview: { status: 'APPROVED', by: 'Claude (iç inceleme)', at: '2026-10-21' },
   },
   config: {
     startNode: 'PROLOG',

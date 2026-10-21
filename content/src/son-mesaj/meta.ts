@@ -11,7 +11,6 @@ import {
 } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 import { p1, p2 } from './shared.js';
-import { T_BERAAT, T_INDIRIM } from './thresholds.js';
 
 // 00-meta: künye, skor yapılandırması, yüklemler ve değişkenler.
 
@@ -77,11 +76,8 @@ export const meta: CasePart = {
       ],
       bonuses: [{ id: 'guven', label: 'Güvenilirlik bonusu ({{var.cred}})', value: { mul: [{ var: 'cred' }, 100] } }],
       scaleMax: 10000,
-      thresholdBar: thresholdBar([
-        ['Mahkûmiyet', 0, 'red'],
-        ['Kısmi', T_INDIRIM, 'amber'],
-        ['Beraat', T_BERAAT, 'green'],
-      ]),
+      // Hüküm skora bağlı değildir (sonuçlar tutanaktaki bulgulara bağlı); çubuk yalnızca savunma puanını gösterir.
+      thresholdBar: thresholdBar([['Savunma puanı', 0, 'amber']]),
       displayClampMin: 0,
     },
     objectionGrounds: [],
@@ -99,59 +95,8 @@ export const meta: CasePart = {
     { id: 'kart2', label: 'Tahtada en az 2 kart var', when: { cmp: [{ count: 'evidence', tag: 'kart' }, '>=', 2] } },
     {
       id: 'kaynak_suphesi',
-      label: 'Mesajların telefondan çıkmadığı gösterildi',
-      when: {
-        any: [{ flag: 'contra_s3' }, { all: [{ flag: 'bilirkisi_cihaz' }, { hasEvidence: 'ded_bagli' }] }],
-      },
-    },
-    {
-      id: 'ek_supheler',
-      label: 'Destekleyen şüpheler (en az 2)',
-      when: {
-        cmp: [
-          {
-            add: [
-              { if: { when: { any: [{ flag: 'ss_excluded' }, { flag: 'bilirkisi_ss' }] }, then: 1, else: 0 } },
-              {
-                if: {
-                  when: { any: [{ flag: 'contra_s2' }, { flag: 'contra_s4' }, { flag: 'bilirkisi_zincir' }] },
-                  then: 1,
-                  else: 0,
-                },
-              },
-              {
-                if: {
-                  when: {
-                    any: [
-                      { flag: 'hayri_saat' },
-                      { flag: 'fact_hayri_saat' },
-                      { flag: 'bilirkisi_kilit' },
-                      { flag: 'kilit_mahkemede' },
-                    ],
-                  },
-                  then: 1,
-                  else: 0,
-                },
-              },
-              { if: { when: { flag: 'pay_cevap' }, then: 1, else: 0 } },
-              { if: { when: { any: [{ flag: 'contra_s1' }, { flag: 'bilirkisi_el' }] }, then: 1, else: 0 } },
-            ],
-          },
-          '>=',
-          2,
-        ],
-      },
-    },
-    {
-      id: 'ozan_dayanak',
-      label: 'Eski ortak hakkında somut dayanak var: cihaz, zimmet ve hat',
-      when: {
-        all: [
-          { hasEvidence: 'ded_bagli' },
-          { any: [{ hasEvidence: 'ded_laptop_ozan' }, { hasEvidence: 'clue_envanter' }] },
-          { any: [{ hasEvidence: 'ev_isp' }, { hasEvidence: 'ded_ip_tekin' }] },
-        ],
-      },
+      label: 'Tutanakta: mesajların telefondan çıkmadığı (tanık ya da bilirkişi ağzından)',
+      when: { any: [{ flag: 'contra_s3' }, { flag: 'bilirkisi_cihaz' }] },
     },
     {
       id: 'bilirkisi_teyit',
@@ -159,22 +104,97 @@ export const meta: CasePart = {
       when: { any: [{ flag: 'bilirkisi_cihaz' }, { flag: 'bilirkisi_kilit' }] },
     },
     {
-      id: 'ara_ilerleme',
-      label: 'Arada en az üç iş tamamlandı',
+      id: 'alibi_kayit',
+      label: 'Tutanakta: 9 Kasım gecesi telefon kilitli, sanık acil serviste (bilirkişi, bağımsız saat ve hemşire)',
       when: {
-        cmp: [
+        all: [
+          { flag: 'bilirkisi_kilit' },
+          { flag: 'hayri_saat' },
+          { flag: 'gulay_teyit' },
+          { flag: 'onam_teyit' },
+          { flag: 'bant_teyit' },
+        ],
+      },
+    },
+    {
+      id: 'hat_kayit',
+      label:
+        'Tutanakta: tehdit oturumlarının hattı ve cihazı sanığın değil, tanığın (bilirkişi daraltması ya da el konulan dizüstü, tanığa sunulan sağlayıcı yanıtı)',
+      when: { all: [{ any: [{ flag: 'bilirkisi_hat' }, { flag: 'laptop_imaj' }] }, { flag: 'contra_o3' }] },
+    },
+    {
+      id: 'el_daraldi',
+      label:
+        'Tutanakta: cihaz 3’ü sanık dışında birinin kullandığı (hat, tanık, el konulan dizüstü ya da 9 Kasım mazereti)',
+      when: {
+        any: [
+          { flag: 'bilirkisi_hat' },
+          { flag: 'contra_o3' },
+          // El konulan dizüstü, ancak tanığın “her şeyi teslim ettim” anlatımı karşısında konuştuğunda eli gösterir.
+          { all: [{ flag: 'laptop_imaj' }, { flag: 'contra_o2' }] },
+          { ref: 'alibi_kayit' },
+        ],
+      },
+    },
+    {
+      id: 'beraat_kaydi',
+      label: 'Tutanak beraat gerektiriyor: kaynak, bilirkişi teyidi ve elin daraltılması',
+      when: {
+        all: [{ ref: 'kaynak_suphesi' }, { ref: 'bilirkisi_teyit' }, { ref: 'el_daraldi' }],
+      },
+    },
+    {
+      id: 'ozan_dayanak',
+      label: 'Eski ortak hakkında somut dayanak var: cihaz, zimmet ve hat',
+      when: {
+        all: [{ hasEvidence: 'ded_bagli' }, { hasEvidence: 'ded_laptop_ozan' }, { hasEvidence: 'ded_ip_tekin' }],
+      },
+    },
+    {
+      // Soruşturmada eylem puanı harcanacak iş kalmadı (gün kapatma ve duruşmaya geçişin kaçış koşulu).
+      id: 'inv_bos',
+      label: 'Soruşturmada yapılacak iş kalmadı',
+      when: {
+        all: [
+          { chosen: 'H_OFIS' },
+          { chosen: 'H_GORUS2' },
+          { chosen: 'H_HAYRI' },
+          { chosen: 'H_SINAN' },
+          { chosen: 'H_KUBRA' },
+          { chosen: 'H_OZAN' },
+          { chosen: 'H_TUTANAK' },
+          { chosen: 'H_IMAJ' },
+          { chosen: 'H_DIL' },
+          { any: [{ not: { flag: 'fact_hastane' } }, { chosen: 'H_HASTANE' }] },
+          { any: [{ not: { visited: 'INV_ARAMA_HASTANE' } }, { chosen: 'H_GULAY' }] },
+          { any: [{ not: { flag: 'fact_hesap_onay' } }, { flag: 'hesap_istendi' }] },
+          { any: [{ not: { hasEvidence: 'ev_hesap' } }, { chosen: 'H_HESAP' }] },
+          { any: [{ not: { flag: 'fact_onam_saat' } }, { chosen: 'H_HKAYIT' }] },
+        ],
+      },
+    },
+    {
+      // Arada eylem puanı harcanacak iş kalmadı.
+      id: 'ara_bos',
+      label: 'Arada yapılacak iş kalmadı',
+      when: {
+        all: [
+          { chosen: 'A_NURTEN' },
+          { chosen: 'A_EV' },
           {
-            add: [
-              { if: { when: { visited: 'ARA_DEMIRBAS' }, then: 1, else: 0 } },
-              { if: { when: { visited: 'ARA_ARAMA_EV' }, then: 1, else: 0 } },
-              { if: { when: { visited: 'ARA_VAKIF' }, then: 1, else: 0 } },
-              { if: { when: { visited: 'ARA_MELIS' }, then: 1, else: 0 } },
-              { if: { when: { visited: 'ARA_RAPOR' }, then: 1, else: 0 } },
-              { if: { when: { any: [{ flag: 'suc_duyurusu' }, { flag: 'suc_mechul' }] }, then: 1, else: 0 } },
+            any: [
+              { chosen: 'A_MELIS' },
+              { not: { any: [{ flag: 'fact_sinan_kapi' }, { flag: 'contra_s3' }] } },
+              { flag: 'melis_dogrudan' },
             ],
           },
-          '>=',
-          3,
+          { any: [{ chosen: 'A_HESAP' }, { not: { hasEvidence: 'ev_hesap' } }, { visited: 'INV_HESAP' }] },
+          {
+            any: [{ chosen: 'A_RAPOR' }, { not: { flag: 'bilirkisi_istendi' } }, { cmp: [{ var: 'ara_day' }, '<', 2] }],
+          },
+          { any: [{ chosen: 'A_HRESMI' }, { not: { flag: 'hastane_istendi' } }] },
+          { any: [{ chosen: 'A_VAKIF' }, { not: { any: [{ visited: 'INV_T_HAYRI' }, { flag: 'fact_vakif' }] } }] },
+          { any: [{ not: { hasEvidence: 'ded_bagli' } }, { flag: 'suc_duyurusu' }, { flag: 'suc_mechul' }] },
         ],
       },
     },
@@ -191,13 +211,14 @@ export const meta: CasePart = {
     meter('taps2', 'Büyüteç', 'counter', 6, 6, { lowAt: 1, resource: true }),
     meter('taps3', 'Büyüteç', 'counter', 6, 6, { lowAt: 1, resource: true }),
     meter('ex1', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 2, resource: true }),
-    meter('ex2', 'Deneme hakkı', 'counter', 8, 8, { lowAt: 2, resource: true }),
-    meter('ex3', 'Deneme hakkı', 'counter', 6, 6, { lowAt: 2, resource: true }),
-    meter('ex3b', 'Deneme hakkı', 'counter', 6, 6, { lowAt: 2, resource: true }),
+    meter('ex2', 'Deneme hakkı', 'counter', 10, 10, { lowAt: 2, resource: true }),
+    meter('ex3', 'Deneme hakkı', 'counter', 9, 9, { lowAt: 2, resource: true }),
+    meter('ex3b', 'Deneme hakkı', 'counter', 9, 9, { lowAt: 2, resource: true }),
     meter('ex4', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('ex5', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 2, resource: true }),
     meter('ex6', 'Deneme hakkı', 'counter', 5, 5, { lowAt: 2, resource: true }),
     meter('ex7', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
+    meter('ex8', 'Deneme hakkı', 'counter', 4, 4, { lowAt: 1, resource: true }),
     meter('slots', 'Talep hakkı', 'counter', 3, 3),
     meter('slots2', 'Talep hakkı', 'counter', 3, 3),
     meter('noktalar', 'Dayanak', 'counter', 3, 3),
@@ -208,6 +229,7 @@ export const meta: CasePart = {
     counter('legal_hits'),
     counter('ethics'),
     hiddenInt('leyla_gun', 0, 0, 9),
+    hiddenInt('sordu', 0, 0, 1),
     hiddenInt('leyla_ara', 0, 0, 9),
     hiddenEnum('aksam1', ['YOK', 'SUTUN', 'TUTANAK', 'HASTANE', 'HIC']),
     ...flags(
@@ -218,12 +240,13 @@ export const meta: CasePart = {
       'fact_rizasiz',
       'fact_sifre',
       'fact_pay_sert',
-      'fact_hesap_fikri',
       'fact_ece',
       'fact_gulay',
       'fact_hayri_saat',
       'fact_sinan_kapi',
       'fact_melis_sn',
+      'fact_ozan_laptop',
+      'fact_vakif',
       'hesap_istendi',
       'hastane_istendi',
       'bilirkisi_istendi',
@@ -261,6 +284,33 @@ export const meta: CasePart = {
       'bilirkisi_ss',
       'bilirkisi_zincir',
       'bilirkisi_el',
+      'bilirkisi_hat',
+      'gulay_teyit',
+      'bant_teyit',
+      'onam_teyit',
+      'bilirkisi_gece',
+      'hesap_sunuldu',
+      'gulay_hazir',
+      'fact_onam_saat',
+      'nb_emanet',
+      'nb_teslim',
+      'ek3_c5',
+      'ek3_c6',
+      'ek3_c7',
+      'ek3_c8',
+      'ip_6',
+      'ip_9',
+      'ip_12',
+      'ip_ev',
+      'aip_6',
+      'aip_9',
+      'aip_12',
+      'aip_ev',
+      'press_g2',
+      'press_b4',
+      'press_g3',
+      'gulay_istendi',
+      'fact_hesap_onay',
       'hayri_saat',
       'hayri_dinlendi',
       'press_o1',
@@ -280,6 +330,8 @@ export const meta: CasePart = {
       'supheden',
       'terditli',
       'iftira_savunma',
+      'pisman_savunma',
+      'dayanaksiz_isim',
       'cokus',
     ),
   ],

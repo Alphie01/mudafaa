@@ -1,4 +1,4 @@
-import { rect, sceneAsset, sceneDef, sceneObject } from '../../../tools/content/src/kit/index.js';
+import { rect, sceneAsset, sceneDef, sceneObject as baseObject, set } from '../../../tools/content/src/kit/index.js';
 import type { CasePart } from '../../../tools/content/src/kit/index.js';
 
 // 30-scenes: üç aranabilir sahne. Görseller scenes/<ad>.html'den `npm run case:scenes -- son-mesaj` ile üretilir.
@@ -23,6 +23,10 @@ export const OB_TABLET = rect(150, 172, 64, 40);
 export const OB_CIZIM = rect(160, 48, 72, 62);
 
 const miss = { score: { ARASTIRMA: -10 } } as const;
+
+/** Her nesne dokunuşu bu ziyaretin sayacını kaldırır (aramadan dokunmadan çıkılmaz; bkz. helpers.askFirst). */
+const sceneObject: typeof baseObject = (id, name, shapes, spec) =>
+  baseObject(id, name, shapes, { ...spec, effects: [...(spec.effects ?? []), set('sordu', 1)] });
 
 export const scenes: CasePart = {
   scenes: [
@@ -61,8 +65,9 @@ export const scenes: CasePart = {
           short: 'Han planı',
         }),
         sceneObject('ob_modem', 'Modem', OB_MODEM, {
-          score: { ARASTIRMA: 10 },
-          text: 'Ofisin modemi. Altındaki şifre etiketi tırnakla kazınmış. Kimse şifreyi etikete bakarak öğrenmesin diye. Ama şifre zaten herkesin dilinde.',
+          discovers: 'clue_ofis_hat',
+          score: { ARASTIRMA: 40 },
+          text: 'Ofisin modemi. Şifre etiketi tırnakla kazınmış, ama yanındaki sağlayıcı etiketi duruyor: “Aksoy Tekin Mimarlık · sabit adres 78.186.20.9”. Bir hattın da bir adresi vardır; bu, hanın adresi.',
           short: 'Ofis modemi',
         }),
       ],
@@ -78,7 +83,7 @@ export const scenes: CasePart = {
         sceneObject('ob_sarj', 'Hemşire masası', OB_SARJ, {
           discovers: 'clue_sarj',
           score: { ARASTIRMA: 60 },
-          text: 'Hemşire masasında altı ağızlı bir şarj istasyonu; her kabloda isim ve saat yazılı bir bant. Duvarda kural: “Emanet telefona isim ve saat yazılır.” İnsanlar unutur, bantlar unutmaz.',
+          text: 'Hemşire masasında altı ağızlı bir şarj istasyonu; her kabloda isim ve saat yazılı bir bant. Duvarda kural: “Emanet telefona isim ve saat yazılır; deftere işlenir.” İnsanlar unutur, bantlar unutmaz; defterler hiç.',
           short: 'Şarj istasyonu',
         }),
         sceneObject('ob_kamera', 'Koridor kamerası', OB_KAMERA, {
@@ -88,6 +93,7 @@ export const scenes: CasePart = {
           short: 'Kamera',
         }),
         sceneObject('ob_onam', 'Onam formları', OB_ONAM, {
+          discovers: 'clue_onam_pano',
           score: { ARASTIRMA: 20 },
           text: 'Duvarda boş onam formları. Her formun altında iki satır: “Tarih/saat” ve “Saati yazan sağlık personeli”. Burada saatler elle, imzayla yazılıyor.',
           short: 'Onam panosu',
@@ -118,8 +124,9 @@ export const scenes: CasePart = {
           short: 'Mart kolisi',
         }),
         sceneObject('ob_evmodem', 'Ev modemi', OB_EVMODEM, {
-          score: { ARASTIRMA: 20 },
-          text: 'Evin modemi. Yönetim ekranında hattın adresi: 176.88.12.4. Tarık’ın evi. Kasım gecelerinin adresi bu değildi; olsaydı savcı çoktan sorardı.',
+          discovers: 'clue_ev_hat',
+          score: { ARASTIRMA: 60 },
+          text: 'Evin modemi. Yönetim ekranında abone adı “T. Aksoy” ve hattın adresi: 176.88.12.4. Tarık’ın telefonu evde bu hattan bağlanır. Bir adresin sahibini sözleşme söyler, tahmin değil.',
           short: 'Ev modemi',
         }),
         sceneObject('ob_tablet', 'Eski tablet', OB_TABLET, {

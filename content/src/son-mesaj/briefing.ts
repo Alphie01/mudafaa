@@ -172,7 +172,7 @@ export const briefing: CasePart = {
           good: 'Doğru: TCK 107/2 (1–3 yıl hapis ve adli para; 43/1 ile zincirleme artırım) ve TCK 134/2 (2–5 yıl). Üst sınırlar 10 yılın altında olduğundan görevli mahkeme asliye ceza (5235 s. Kanun md. 11–12).',
           responses: B(`
             leyla: Doğru. Üç mesaj tek bir kararın parçasıysa zincirleme sayılır, ceza dörtte birden dörtte üçe kadar artar.
-            leyla: Ama asıl ağır olan ses kaydı. Tek başına iki yıldan başlıyor. Ertelemenin, geri bırakmanın sınırını aşıyor.
+            leyla: Ama asıl ağır olan ses kaydı. Alt sınırı iki yıl; ertelemenin ve geri bırakmanın tam sınırında. Üstüne çıkan her ay o kapıyı kapatır.
             > Masadaki sigara paketini çevirdi. Sigarayı bırakalı iki yıl oldu; paket hâlâ orada.
           `),
           next: 'BR_01B',

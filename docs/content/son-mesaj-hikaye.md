@@ -62,10 +62,10 @@
 | 3 Kasım 18.02 | Stajyer Kübra'nın kullandığı ofis tableti (cihaz 2) PUSULA'dan çıkış yapar; tablet sıfırlanır. |
 | 6 Kasım 02.09–02.13 | 07 numaralı dizüstü (cihaz 3) Tekin Yapı'nın internet hattından (IP 85.105.44.17) çevrimiçi olur. Tarık'ın hesabından Melis'e ilk mesaj: "Sn. Karaca, ihaleden çekilmeniz herkes için en iyisi olur... Saygılar." Taburcu belgesinin fotoğrafı ekte. Sohbet aynı cihazdan **arşivlenir**; Tarık'ın sohbet listesinde görünmez. Tarık evde uyuyordur. |
 | 9 Kasım 01.20 | Tarık, babası Necati Aksoy'u ritim bozukluğuyla Çekirge'deki devlet hastanesinin acil servisine getirir. |
-| 9 Kasım 01.40 | Tarık'ın telefonu hemşire masasındaki şarj istasyonunda, kilitli. Hemşire Gülay Tunç bandın üstüne "AKSOY 01.40" yazar. |
+| 9 Kasım 01.40 | Tarık'ın telefonu hemşire masasındaki şarj istasyonunda, kilitli. Hemşire Gülay Tunç bandın üstüne "AKSOY 01.40" yazar, nöbet defterine "telefon şarj istasyonunda emanet" diye işler. |
 | 9 Kasım 02.10 | Tarık, babasının girişim onam formunu imzalar; form saatlidir. |
 | 9 Kasım 02.12–02.14 | Cihaz 3 aynı IP'den çevrimiçi. Melis'e ikinci mesaj; Melis'in ses kaydı vakıf yönetim kurulu üyesi Hayri Sezer'e iletilir: "Hayri Bey, ortağım hakkında bilmeniz gerekenler." |
-| 9 Kasım 06.10 | Telefon şarjdan alınır; ilk kilit açılışı. |
+| 9 Kasım 06.05–06.10 | Nöbet defterine teslim yazılır (06.05); telefon şarjdan alınır, ilk kilit açılışı (06.10). |
 | 12 Kasım 02.17–02.21 | Cihaz 3 aynı IP'den. Üçüncü mesaj: "Son mesajım. Cuma'ya kadar dosyadan imzanızı çekin. Yoksa sesiniz herkesin telefonunda. Saygılar." |
 | 12 Kasım 09.00 | Melis, avukatı Av. Sinan Bulut ile Siber Suçlarla Mücadele Şube'ye şikâyette bulunur. |
 | 12 Kasım 14.30 | Polis Tarık'ı ofisinde ifadeye davet eder. Tarık telefonunu kendisi verir. |
@@ -90,7 +90,7 @@ olarak yargılanır. Ozan tehditleri Tarık'ın üslubuyla yazmaya çalışmaz b
 | **Av. Sinan Bulut** (katılan vekili) | 45. | Pürüzsüz, usulcü, "müvekkilem" der; her şeyi yazılı ister. | Müvekkilini korur; kendi etik çizgisi nettir. | Rakip, ama doğru delil karşısında kapı aralayan biri. |
 | **Ozan Tekin** (eski ortak, savcılık tanığı, **gerçek fail**) | 42, Tekin Yapı Danışmanlık. | Sıcak, gürültülü, herkese "üstat" der; çay ve simit ısmarlar; eski Bursa hanları üstüne bitmeyen hikâyeler. Konuşurken asla resmî değil; yazarken hep resmî: "Sn.", "Saygılar.", üç nokta. | 07 numaralı dizüstü onda. Tarık'ın şifresini o koydu. İhale. | Dost maskesi → köşeye sıkışma → CMK 48'e sığınma. |
 | **Hayri Sezer** | 67, vakıf yönetim kurulu üyesi. | Ağır, eski İstanbul Türkçesi; han ve kervansaray benzetmeleri; "evladım". | Ses kaydını üç saniye dinleyip kapattı; "Başkasının sesini dinlemem." Bildirim saati telefonunda duruyor: 02.14. | Yaşlı bir beyefendinin vicdanı; tanık kürsüsünde sade bir doğruluk. |
-| **Gülay Tunç** | 46, acil servis hemşiresi. | Yorgun, pratik, gece nöbetinin kara mizahı; lafı uzatmaz. | Telefonu şarja koyduğu için Tarık'ı azarlamıştı: "Masam priz değil." Bantta yazısı var. | Küçük ama kesin bir tanıklık. |
+| **Gülay Tunç** | 46, acil servis hemşiresi. | Yorgun, pratik, gece nöbetinin kara mizahı; lafı uzatmaz. | Telefonu şarja koyduğu için Tarık'ı azarlamıştı: "Masam priz değil." Bantta yazısı var. | Küçük ama kesin bir tanıklık; ikinci celsede savunma tanığı olarak kürsüye çıkar, savcının sorusuyla bir an tereddüt eder ve telefonun kendi kilit kaydıyla düzeltir. |
 | **Nurten Sarı** | 55, mali müşavir. | Rakamlarla konuşur; demirbaş numaralarını ezbere bilir; dedikodudan hoşlanır ama sınırı bilir. | Ozan'ın "bozuldu, attım" dediğini not etmişti. | Belgeyi veren. |
 | **Kom. Yrd. Hakan Demirci** | 35, Siber Şube. | Savunmacı, "usule uygun" nakaratı; teknik terimleri yanlış yerde kullanır. | Kararı beklemeden ekran görüntüsü aldı; tutanağa imza aldırmadı. | Kürsüde çatlayan bir kendinden eminlik. |
 | **Dr. Nazlı Uçar** | 44, adli bilişim bilirkişisi (mahkemece atanır). | Klinik, kesin; "Ekran görüntüsü delil değil, anekdottur." | — | Doğru soruyu soranın müttefiki, kimsenin avukatı değil. |
@@ -189,15 +189,18 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
   "Asıl liste N. Sarı'da" (Nurten'e giden iplik; imza eşleşmesi burada değil, ARA'da); ortaklık fotoğrafı (dikkat
   dağıtıcı); Pirinç Han planı (dikkat dağıtıcı). Masa on bir aydır boş (Mart'tan beri).
 - **INV_ARAMA_HASTANE** (sahne; Tarık "hastane" dediyse açılır): hemşire masasındaki şarj istasyonu, bantta "AKSOY 01.40";
-  koridor kamerası; onam formu panosu; otomat. Hemşire Gülay'la kısa konuşma (INV_T_GULAY).
+  koridor kamerası; onam formu panosu; otomat. Hemşire Gülay'la kısa konuşma (INV_T_GULAY, ancak sahne arandıktan sonra):
+  telefonun yeri (bant), onam formunun saatini kimin yazdığı (kayıtlar ancak bundan sonra istenebilir), "çağırırlarsa gelirim".
 - **INV_TUTANAK** (belge): imza hanesi boş; mühür hanesi "—"; ekran görüntülerinin saati (12 Kasım 15.44) ile hâkimlik
   kararının saati (13 Kasım 10.20). Karşılaştır aletiyle oyuncu kararsızlığı kendisi görür.
 - **INV_IMAJ** (belge; dosyanın en uzun anı): "son kilit açılış 12.11 15.52"; imaj tarihi 14.11; Ek-3 satırları. Büyüteç
   üslubu, karşılaştır gönderen cihaz numarasını açar. Bu an bir kırılmadır (`flash`): "Cihaz 0. Cihaz 0. Cihaz 3."
-- **INV_HESAP** (belge; "hesap verisini indir" seçimiyle ertesi gün gelir): cihaz 2 (ofis tableti, 3 Kasım'da çıkış) ve
+- **INV_HESAP** (belge; müvekkil "bağlı cihazlar" konusunda indirmeyi kabul ettikten sonra istenir, ertesi gün okunur;
+  Ek-3'te dört satır ve IP'de dört satır tek tek karşılaştırılmalı): cihaz 2 (ofis tableti, 3 Kasım'da çıkış) ve
   cihaz 3 (OFIS-LAPTOP-07, son etkin 12.11 02.21; IP 85.105.44.17), arşivleme olayı. İndirme Tarık'ın kendi hakkıdır;
   Deniz dosyayı noterde hash'le tespit ettirir (dijital delili savunma da korur).
-- **INV_HASTANE_KAYIT** (belge): epikriz ve onam formu; Tarık'ın imzası 02.10.
+- **INV_HASTANE_KAYIT** (belge; Gülay'dan sonra): epikriz ve onam formu; Tarık'ın imzası 02.10. Tahtada iki adım: kilit +
+  bant → "Kilitli, hemşire masasında"; bu kart + onam → "02.14'te Tarık acil serviste".
 - **INV_T_SINAN** (kafe): katılan vekiliyle konuşma. Doğru yol: görüşmeyi onun aracılığıyla istemek. Yanlış yollar:
   Melis'i doğrudan aramak (etik), "müvekkiliniz uydurdu" demek (iftira riski).
 - **INV_T_HAYRI** (vakıf ofisi): bildirim saati 02.14; "Başkasının sesini dinlemem evladım."
@@ -205,9 +208,9 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
   söyledikleri…" Tuzak: Deniz bağlı cihazlardan ya da 07'den söz ederse Ozan uyarılmış olur (`ozan_uyarildi`): ara
   evresinde dizüstü bulunamaz, bir puan kaybedilir. Cihaz sorusu ancak boş dok ya da bağlı cihaz kaydı bulunduktan sonra
   sorulabilir. Ayrılırken imzasız bir veda ("Hadi, kolay gelsin."): birinci evrede Ozan'ın ağzından "Saygılar" çıkmaz.
-- **INV_DIL** (talepler, 3 hak): bağımsız adli bilişim bilirkişisi ve imajın kopyası (CMK 134/5, 63, 67); IP abone sorgusu
-  (cihaz 3 ve IP bulunmuşsa); hastane kayıtları ve kamera; Hayri Sezer'in tanık olarak dinlenmesi; reddedilecek olanlar
-  (katılanın telefonunun incelenmesi; platformdan yurt dışı yazışma; keşif).
+- **INV_DIL** (talepler, 3 hak): bağımsız adli bilişim bilirkişisi ve imajın kopyası (cihaz 3 görülmüşse; CMK 134/5, 63,
+  67); hastane kayıtlarının resmî celbi; Hayri Sezer'in tanık olarak dinlenmesi (bildirim saatini öğrendiyse); ücretsiz ek:
+  noter tespitli hesap dökümü; reddedilecek olanlar (katılanın telefonunun incelenmesi; platformdan yurt dışı yazışma; keşif).
 - **INV_CIKARIM** (tahta, 0 EP): altı tarif + yanlış iz kartları (pay kavgası, "Melis yazdı" teorisi).
 - **INV_AKSAM1/2** (~300): Leyla ile kısa sahne; ikinci akşam Tarık'ın kızı Ece telefonda ("Babam yalan söylemez");
   Ozan ziyaret edildiyse masada yalnızca kartviziti kalır; Deniz onu çekmeceye koyar (imzalı mesaj yok; gizem korunur).
@@ -221,8 +224,9 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
 - **Ekran görüntüleri:** savcı okutur; itiraz (CMK 134/1, Anayasa 20/2, 38/6, CMK 206/2-a, 217/2).
 - **Kom. Yrd. Demirci** (S1–S5): rıza, "telefona dokunmadık", "mesajlar telefondan gönderildi", hash, kanaat. Doruk:
   Ek-3'teki cihaz sütunu sunulunca Demirci tabloya bakar ve susar: "O sütun… raporun ekinde."
-- **Talepler ve ara karar:** bilirkişi, IP sorgusu, hastane kayıtları, tanıklar; üç hafta erteleme. Adli kontrolün
-  kaldırılması talebi.
+- **Talepler ve ara karar:** bilirkişi, IP sorgusu (ancak 9 Kasım Demirci'ye sunulup tutanağa geçtikten ve hesap dökümü
+  dosyaya girdikten sonra: "O gece cihazın başında kim varsa, bu hattın ucundaydı"), hemşire Gülay Tunç (aynı kayıttan
+  sonra), hastane kayıtları, hesap dökümünün dosyaya alınması; üç hafta erteleme. Adli kontrolün kaldırılması talebi.
 
 ### Bölüm 4 · ARA (~3.000)
 - **ARA_GIRIS:** adliye merdivenleri, yağmur. Sinan yanına gelir: "Müvekkilem sizinle konuşmak istiyor. Benim bürom, benim
@@ -237,8 +241,11 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
   üstünde "Gerisi sende... Saygılar." notu); modem; eski tablet; Ece'nin çizimi.
 - **ARA_OZAN** (olay; ilk ara akşamı): Ozan büroya gelir, "yardım etmek" ister; sorular sorar ("Bilirkişi ne dedi
   üstat?"). Oyuncu bilgi vermezse güvende; verirse `ozan_uyarildi`.
-- **ARA_TARIK** (etik tuzak): Tarık, Ozan'ın e-postasına eski ortak şifresiyle girmeyi ya da 25 Ekim mesajlarını kendi
-  yedeğinden silmeyi önerir. Doğru yol: reddetmek ve savcılığa suç duyurusu. Yanlış yol: `karartma` → ETİK sonu.
+- **ARA_HRESMI** (belge): mahkemenin celbettiği hastane yazısı: onam formunun aslı gibi örneği, nöbet defteri (01.40
+  emanet, 06.05 teslim, paraf G.T.), kamera kaydının saklama süresi dolduğu. Bant atılır, defter kalır.
+- **ARA_TARIK** (etik tuzak; yalnızca dava güçlüyken: sütun ve 9 Kasım salonda, rapor okunmuş, suç duyurusu verilmiş):
+  Tarık, Ozan'ın e-postasına eski ortak şifresiyle girmeyi ya da 25 Ekim mesajlarını noter dökümünün kopyasından silmeyi
+  önerir. Kabul edilirse ikinci celsenin başında ortaya çıkar (hash uyuşmazlığı ya da büronun hattından giriş kaydı). Doğru yol: reddetmek ve savcılığa suç duyurusu. Yanlış yol: `karartma` → ETİK sonu.
 - **ARA_SUC** (suç duyurusu): hesabı ele geçiren kişi(ler) hakkında; Ozan'ın adı yalnızca demirbaş + IP/bağlı cihaz
   dayanağıyla yazılabilir. Savcılık Tekin Yapı'da arama yapar; Ozan uyarılmadıysa 07 numaralı dizüstü dolapta bulunur.
 - **ARA_RAPOR** (belge, 2. hafta; ~450): Dr. Uçar'ın raporu. Leyla: "Bilirkişi senin tanığın değil; mahkemenin gözü."
@@ -259,7 +266,12 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
   inceleme kopyada yapılsın" mı? Davanın hukuki ekseni bu kez savunmanın kendi elindeki delilde sınanır.
 - **Bilirkişi Dr. Uçar:** rapor; sorular (cihaz 3, kilit kayıtları, ekran görüntülerinin değeri). Bilirkişi istenmediyse
   yalnızca polis raporu okunur.
-- **Hayri Sezer:** 02.14 bildirimi; sade doğruluk.
+- **Hayri Sezer:** 02.14 bildirimi; sade doğruluk (soru ancak soruşturmada saat öğrenildiyse sorulabilir).
+- **Gülay Tunç (yeni, savunma tanığı):** bant ve nöbet defteri (G2), savcının sorusuyla doğan tereddüt: "ikiye doğru
+  telefona bir kez baktı galiba" (G3) → müdafi kilit kaydını gösterir, tanık "görmedim, sandım" diye düzeltir; onam
+  formunu kendi yazısı olarak tanır (G4). Telkin değil, açık duruşmada belgeyle karşılaştırma.
+- **Bilirkişi daraltması:** B1/B2 teyidi raporun Bulgu 1/2'si okunmadan alınamaz; "teknik olarak sanığın kendisi de
+  olabilir" (B4) cümlesi ancak sağlayıcı yanıtı + ev hattının belgesiyle üç gece için daraltılır.
 - **Ozan Tekin** (O1–O5): "pişman edeceğim" iddiası (kanaat/duyum); "her şeyi teslim ettim" (demirbaş); "PUSULA'yı yalnızca
   telefonda kullanırım" (IP); "Tarık'ın şifresini nereden bileyim" (yapışkan not, kurulum); "mesajlar Tarık'ın
   üslubu" (üslup). Kırılma: hâkim CMK 48'i hatırlatır; Ozan "Bu soruya cevap vermeyeceğim." Salon uğuldar (`shake`).
@@ -270,7 +282,8 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
   geçirtir; "vazgeçme sayılsın" demek ya da özür beklemek bedel öder.
 - **Savcının karşı delili:** 25 Ekim mesajları (saik). Doğru cevap: öfkeli ama tehdit içermeyen ticari tartışma;
   üslup farkı.
-- **Mütalaa** (iki varyant) ve cevap. **Dayanaklar** (3 seçim). **Esas savunma** 3–5 satırlık konuşma. **Son söz:** Tarık'ın
+- **Mütalaa** (dört varyant: beraat / 9 Kasım yönünden beraat, öbür iki gece için ceza / takdir + ceza / ceza) ve cevap.
+- **Karar arası:** Deniz tutanağı satır satır sayar (kaynak, 9 Kasım, el, usul, savunma); hüküm bu satırlara dayanır. **Dayanaklar** (3 seçim). **Esas savunma** 3–5 satırlık konuşma. **Son söz:** Tarık'ın
   seçilen cümlesi.
 
 ### Epiloglar (OutcomeDef.epilogue; her biri ~200–350)
@@ -279,8 +292,10 @@ T_COKUS  (güvenilirlik 0) → son söz → hüküm
   oturumları kapatır. Son satır: "Ekran karardı. Bu kez kimse yazmıyordu."
 - **BERAAT_E:** (suç duyurusu verilip dizüstü bulunduysa: "Kâğıtlar ismi söyledi; ben esas savunmada susmuştum" varyantı) Beraat, ama vakıf ihaleyi başka firmaya verdi; koridorda "Şüpheden yararlandı" fısıltısı. Tarık: "Kızıma ne
   diyeceğim? 'Kanıtlayamadılar' mı?" İç ses: "Bazen beraat bir kapıyı açar, ama ekran hâlâ yanar."
-- **KISMİ (İNDİRİM):** 134'ten beraat, 107'den HAGB. Tarık: "Yarım masumiyet." Melis koridorda bakmadan geçer.
+- **KISMİ (İNDİRİM):** 134'ten beraat, 107'den HAGB (beş yıl denetim). Tarık: "Yarım masumiyet." Melis koridorda bakmadan
+  geçer; merdivende Gülay ve Hayri; Leyla: "Bir gece kurtardın; çünkü o geceyi kâğıtla anlatan herkesi salona getirdin."
 - **MAHKÛMİYET:** Emanetten alınan telefon; arşivlenmiş sohbet hâlâ orada. İç ses: "Bir sütun. Bakmadım."
   Çöküşte: savcının "İyi bir avukat olacaksınız. Bugün değil." cümlesi.
-- **ETİK:** Leyla masaya meslek kuralları kitapçığını bırakır; Tarık'ın kurşun kalemi masada unutulmuştur.
+- **ETİK:** Leyla masaya meslek kuralları kitapçığını bırakır; Tarık'ın kurşun kalemi masada unutulmuştur; üç hafta sonra
+  baro disiplin kurulu.
 - Söz verildiyse ("Beraat ettiririz") olumsuz sonuçlarda bir satır daha.
